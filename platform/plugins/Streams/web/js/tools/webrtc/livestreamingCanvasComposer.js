@@ -160,6 +160,7 @@
                     }
         
                     function moveSceneUp(scene) {
+                        console.log('_scenes BEFORE',_scenes.map(function(o) { return o.title}))
                         let index;
                         for(let i in _scenes) {
                             if(scene == _scenes[i]) {
@@ -170,6 +171,7 @@
                         if(index != null) {
                             moveScene(index, index - 1);
                         }
+                        console.log('_scenes AFTER',_scenes.map(function(o) { return o.title}))
                     }
         
                     function moveSceneDown(scene) {

@@ -644,7 +644,6 @@
                         if (sceneItem.itemEl) {
                             console.log('selectScene make selected');
                             sceneItem.itemEl.selected = true;
-                            //_scenesDropDownEl.dispatchEvent(new Event('change'));
                         }
                         var switchScene = _activeScene != sceneItem;
                         _activeScene = sceneItem;
@@ -674,47 +673,78 @@
                         optionsColumn.update();
                     }
 
-                    function moveSceneUp() {
-                        console.log('moveUp');
-                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneUp(_activeScene.sceneInstance);
+                    function moveSceneUp(sceneId) {
+                        console.log('moveUp', sceneId);
+                        let sceneToMove;
+                        if(sceneId != null) {
+                            sceneToMove = _scenesList.filter(function (s) {
+                                return s.sceneInstance.id == sceneId ? true : false;
+                            })[0];
+                        } else {
+                            sceneToMove = _activeScene;
+                        }
+
+                        console.log('moveUp sceneToMove', sceneToMove);
+                        if(!sceneToMove) return;
+                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneUp(sceneToMove.sceneInstance);
 
                         sortScenesList();
                     }
 
-                    function moveSceneDown() {
+                    function moveSceneDown(sceneId) {
                         console.log('moveSceneDown');
-                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneDown(_activeScene.sceneInstance);
+                        let sceneToMove;
+                        if(sceneId != null) {
+                            sceneToMove = _scenesList.filter(function (s) {
+                                return s.sceneInstance.id == sceneId ? true : false;
+                            })[0];
+                        } else {
+                            sceneToMove = _activeScene;
+                        }
+
+                        if(!sceneToMove) return;
+                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneDown(sceneToMove.sceneInstance);
 
                         sortScenesList();
                     }
 
-                    function removeScene() {
-                        console.log('removeScene', _activeScene);
-                        if (_activeScene != null) {
-                            let sceneToRemove = _activeScene;
-                            let indexOfScreneToRemove;
-                            let sceneToSwitchTo;
-                            if (_scenesList.length > 1) {
-                                for (let s in _scenesList) {
-                                    if (_scenesList[s] == _activeScene) {
-                                        indexOfScreneToRemove = s;
-                                        break;
-                                    }
-                                }
+                    function removeScene(sceneId) {
+                        console.log('removeScene', sceneId, _activeScene);
+                        let sceneToRemove;
+                        if(sceneId != null) {
+                            sceneToRemove = _scenesList.filter(function (s) {
+                                return s.sceneInstance.id == sceneId ? true : false;
+                            })[0];
+                        } else {
+                            sceneToRemove = _activeScene;
+                        }
 
-                                if (_scenesList[indexOfScreneToRemove + 1] != null) {
-                                    selectScene(_scenesList[indexOfScreneToRemove + 1]);
-                                } else if (_scenesList[indexOfScreneToRemove - 1] != null) {
-                                    selectScene(_scenesList[indexOfScreneToRemove - 1]);
-                                }
+                        if(!sceneToRemove) return;
 
-                                tool.livestreamingCanvasComposerTool.canvasComposer.removeScene(sceneToRemove.sceneInstance);
-                                syncList();
-                            } else {
-                                //at least once scene should exist
+
+                        let indexOfScreneToRemove;
+                        let sceneToSwitchTo;
+                        if (_scenesList.length > 1) {
+                            for (let s in _scenesList) {
+                                if (_scenesList[s] == sceneToRemove) {
+                                    indexOfScreneToRemove = s;
+                                    break;
+                                }
                             }
 
-                        };
+                            if (_scenesList[indexOfScreneToRemove + 1] != null) {
+                                selectScene(_scenesList[indexOfScreneToRemove + 1]);
+                            } else if (_scenesList[indexOfScreneToRemove - 1] != null) {
+                                selectScene(_scenesList[indexOfScreneToRemove - 1]);
+                            }
+
+                            tool.livestreamingCanvasComposerTool.canvasComposer.removeScene(sceneToRemove.sceneInstance);
+                            syncList();
+                        } else {
+                            //at least once scene should exist
+                        }
+
+
                     }
 
                     function addSceneItemToList(item) {
@@ -936,106 +966,184 @@
                     function CustomSelect(element, options) {
                         var selectInstance = this;
                         this.originalSelect = element;
-                        this.customSelectEl = null;
+                        this.customSelectDropDownEl = null;
+                        this.customSelectListEl = null;
+                        this.customSelectedEl = null;
                         this.selectContainerEl = null;
                         this.closeButtonEl = null;
-                        this.customSelectListEl = null;
                         this.optionsList = [];
+                        this.selectedIndex = -1;
                         this.spaceForArrow = 0;
                         this.isShown = false;
 
-                        this.syncOptionsList = function () {
+                        this._syncOptionsList = function () {
                             let originalSelect = selectInstance.originalSelect;
                             let optionsNumber = originalSelect.options.length;
                             console.log('syncOptionsList optionsNumber', originalSelect.options);
+                            for(let e = selectInstance.optionsList.length - 1; e >= 0; e--) {
+                                let option = selectInstance.optionsList[i];
+                                let sourceIsRemoved = true;
+                                for (let h = 0; h < optionsNumber; h++) {
+                                    if(option.originalOptionEl == originalSelect.options[h]) {
+                                        sourceIsRemoved = false;
+                                        break;
+                                    }
+                                }
+                                if(option.customOptionEl != null && option.customOptionEl.parentElement != null) {
+                                    option.customOptionEl.parentElement.removeChild(option.customOptionEl);
+                                }
+                                if(sourceIsRemoved) {
+                                    selectInstance.optionsList.splice(e, 1);
+                                }
+                            }
+
                             for (let j = 0; j < optionsNumber; j++) {
-                                /*check if option already exists in custom select*/
                                 let optionAlreadyExists = false;
+                                let orderChanged = false;
                                 for(let l in selectInstance.optionsList) {
                                     if(selectInstance.optionsList[l].originalOptionEl == originalSelect.options[j]) {
-                                        optionAlreadyExists = true;
+                                        optionAlreadyExists = selectInstance.optionsList[l];
+                                        if(j != l) orderChanged = true;
                                     }
                                 }
                                 console.log('syncOptionsList optionAlreadyExists', optionAlreadyExists);
 
-                                if(optionAlreadyExists) continue;
-                                /*for each option in the original select element,
-                                create a new DIV that will act as an option item:*/
-                                let optionElement = document.createElement("DIV");
-                                optionElement.innerHTML = originalSelect.options[j].innerHTML;
-                                optionElement.dataset.selectValue = originalSelect.options[j].value;
-                                optionElement.addEventListener("click", selectOption);
-                                selectInstance.customSelectListEl.appendChild(optionElement);
-                                selectInstance.optionsList.push({
-                                    originalOptionEl: originalSelect.options[j],
-                                    customOptionEl: optionElement,
-                                    value: originalSelect.options[j].value
-                                });
+                                if(optionAlreadyExists != false && !orderChanged) {
+                                    continue;
+                                } else if (optionAlreadyExists != false && orderChanged) {
+                                    selectInstance.customSelectListEl.appendChild(optionAlreadyExists.customOptionEl);
+                                    for(let e = selectInstance.optionsList.length - 1; e >= 0; e--) {
+                                        if(selectInstance.optionsList[e] == optionAlreadyExists) {
+                                            selectInstance.optionsList.splice(j, 0, selectInstance.optionsList.splice(e, 1)[0]);
+                                            break;
+                                        }
+                                    }
+                                    
+                                } else {
+                                    let optionElementCon = document.createElement("DIV");
+                                    optionElementCon.className = 'live-editor-custom-select-option';
+                                    optionElementCon.dataset.selectValue = originalSelect.options[j].value;
+                                    optionElementCon.addEventListener("click", function() {
+                                        selectInstance.selectOption(e.target);
+                                    });
+                                    selectInstance.customSelectListEl.appendChild(optionElementCon);
+    
+                                    let optionElementText = document.createElement("DIV");
+                                    optionElementText.className = 'live-editor-custom-select-option-text';
+                                    optionElementText.innerHTML = originalSelect.options[j].innerHTML;
+                                    optionElementCon.appendChild(optionElementText);
+    
+                                    selectInstance.optionsList.push({
+                                        originalOptionEl: originalSelect.options[j],
+                                        customOptionEl: optionElementCon,
+                                        value: originalSelect.options[j].value
+                                    });
+                                }
                             }
                        
                             for (let i = 0; i < optionsNumber; i++) {
                                 if (originalSelect.options[i].selected == true) {
                                     for(let c in selectInstance.optionsList) {
                                         if (originalSelect.options[i].value == selectInstance.optionsList[c].value) {
-                                            selectOption.call(selectInstance.optionsList[c].customOptionEl);
+                                            selectInstance.selectOption(selectInstance.optionsList[c].customOptionEl);
                                         }
                                     }
                                     break;
                                 }
                             }
-
-                            function selectOption(e) {
-                                /*when an item is clicked, update the original select box,
-                                and the selected item:*/
-                                let originalSelect = selectInstance.originalSelect;
-                                let optionsNumber = originalSelect.options.length;
-                                for (let i = 0; i < optionsNumber; i++) {
-                                    if (originalSelect.options[i].value == this.dataset.selectValue) {
-                                        originalSelect.selectedIndex = i;
-                                        selectInstance.customSelectEl.innerHTML = this.innerHTML;
-                                        let currentlySelectedOptions = selectInstance.customSelectListEl.getElementsByClassName('live-editor-custom-select-same-as-selected');
-                                        let selectedOptionsNum = currentlySelectedOptions.length;
-                                        for (k = 0; k < selectedOptionsNum; k++) {
-                                            currentlySelectedOptions[k].classList.remove('live-editor-custom-select-same-as-selected');
-                                        }
-                                        if (!this.classList.contains('live-editor-custom-select-same-as-selected')) this.classList.add('live-editor-custom-select-same-as-selected');
-                                        break;
-                                    }
-                                }
-                                selectInstance.hide();
-                            }
+                            
                         };
+
+                        Object.defineProperty(this, "syncOptionsList", {
+                            set(customFunction) {
+                                this.customSyncOptionsList = customFunction;
+                            },
+                            get() {
+                                if (this.customSyncOptionsList) {
+                                    return function () {
+                                        let originalSelect = selectInstance.originalSelect;
+                                        let optionsNumber = originalSelect.options.length;
+                                        this.customSyncOptionsList();
+
+                                        for (let i = 0; i < optionsNumber; i++) {
+                                            if (originalSelect.options[i].selected == true && (selectInstance.selectedOption == null || selectInstance.selectedOption.originalOptionEl != originalSelect.options[i])) {
+                                                for(let c in selectInstance.optionsList) {
+                                                    if (originalSelect.options[i].value == selectInstance.optionsList[c].value) {
+                                                        selectInstance.selectOption(selectInstance.optionsList[c].customOptionEl);
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    return this._syncOptionsList;
+                                }
+                            }
+                          });
+
+                        this.selectOption = function (customOptionEl) {
+                            console.log('select selectoption')
+                            /*when an item is clicked, update the original select box,
+                            and the selected item:*/
+                            let originalSelect = selectInstance.originalSelect;
+                            let optionsNumber = originalSelect.options.length;
+                            for (let i = 0; i < optionsNumber; i++) {
+                                if (originalSelect.options[i].value == customOptionEl.dataset.selectValue) {
+                                    let optionInstance = null;
+                                    for(let c in selectInstance.optionsList) {
+                                        if (originalSelect.options[i].value == selectInstance.optionsList[c].value) {
+                                            optionInstance = selectInstance.optionsList[c];
+                                        }
+                                    }
+                                    originalSelect.selectedIndex = i;
+                                    selectInstance.selectedOption = optionInstance;
+                                    originalSelect.dispatchEvent(new Event('change'));
+                                    selectInstance.customSelectedEl.innerHTML = originalSelect.options[i].innerHTML;
+                                    let currentlySelectedOptions = selectInstance.customSelectListEl.getElementsByClassName('live-editor-custom-select-same-as-selected');
+                                    let selectedOptionsNum = currentlySelectedOptions.length;
+                                    for (k = 0; k < selectedOptionsNum; k++) {
+                                        currentlySelectedOptions[k].classList.remove('live-editor-custom-select-same-as-selected');
+                                    }
+                                    if (!customOptionEl.classList.contains('live-editor-custom-select-same-as-selected')) customOptionEl.classList.add('live-editor-custom-select-same-as-selected');
+                                    break;
+                                }
+                            }
+                            selectInstance.hide();
+                        }
                         this.hide = function (e) {
-                            if (e && (e.target.offsetParent != selectInstance.customSelectListEl || e.target == this.closeButtonEl) || e == null) {
-                                if (selectInstance.customSelectListEl.parentElement) selectInstance.customSelectListEl.parentElement.removeChild(selectInstance.customSelectListEl);
+                            console.log('hide1')
+                            if (e && (e.target.offsetParent != selectInstance.customSelectDropDownEl || e.target == this.closeButtonEl) || e == null) {
+                                console.log('hide2')
+                                if (selectInstance.customSelectDropDownEl.parentElement) selectInstance.customSelectDropDownEl.parentElement.removeChild(selectInstance.customSelectDropDownEl);
             
                                 togglePopupClassName('', false, false);
             
                                 window.removeEventListener('click', selectInstance.hide);
-                                selectInstance.customSelectEl.classList.remove("live-editor-custom-select-arrow-active");
+                                selectInstance.customSelectedEl.classList.remove("live-editor-custom-select-arrow-active");
                                 selectInstance.isShown = false;
                             }
                         }
             
                         this.show = function (e) {        
-                            selectInstance.customSelectListEl.style.top = '';
-                            selectInstance.customSelectListEl.style.left = '';
-                            selectInstance.customSelectListEl.style.maxHeight = '';
-                            selectInstance.customSelectListEl.style.maxWidth = '';
+                            selectInstance.customSelectDropDownEl.style.top = '';
+                            selectInstance.customSelectDropDownEl.style.left = '';
+                            selectInstance.customSelectDropDownEl.style.maxHeight = '';
+                            selectInstance.customSelectDropDownEl.style.maxWidth = '';
                             togglePopupClassName('', false, false);
                            
-                            let triggeringElementRect = selectInstance.customSelectEl.getBoundingClientRect();
+                            let triggeringElementRect = selectInstance.customSelectedEl.getBoundingClientRect();
             
-                            selectInstance.customSelectListEl.style.position = 'fixed';
-                            selectInstance.customSelectListEl.style.visibility = 'hidden';
-                            selectInstance.customSelectListEl.style.top = triggeringElementRect.y + triggeringElementRect.height + selectInstance.spaceForArrow + 'px';
-                            selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + (triggeringElementRect.width / 2)) + 'px';
-                            selectInstance.customSelectListEl.style.width = (triggeringElementRect.width) + 'px';
+                            selectInstance.customSelectDropDownEl.style.position = 'fixed';
+                            selectInstance.customSelectDropDownEl.style.visibility = 'hidden';
+                            selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + triggeringElementRect.height + selectInstance.spaceForArrow + 'px';
+                            selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + (triggeringElementRect.width / 2)) + 'px';
+                            selectInstance.customSelectDropDownEl.style.width = (triggeringElementRect.width) + 'px';
                             
-                            document.body.appendChild(selectInstance.customSelectListEl);
+                            document.body.appendChild(selectInstance.customSelectDropDownEl);
             
-                            let popupRect = selectInstance.customSelectListEl.getBoundingClientRect();
-                            selectInstance.customSelectListEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
+                            let popupRect = selectInstance.customSelectDropDownEl.getBoundingClientRect();
+                            selectInstance.customSelectDropDownEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
             
                             //if ther is no room below (bottom) of button, show dialog above if there is enough room
             
@@ -1059,32 +1167,32 @@
                                 //console.log('show 1');
                                 if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                     //console.log('show 1.1');
-                                    selectInstance.customSelectListEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
-                                    selectInstance.customSelectListEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-mid-below-position', false, false);
                                 } else if (roomToRightOfStartOfButton >= popupRect.width) {
                                     //console.log('show 1.2');
-                                    selectInstance.customSelectListEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-right-below-position', false, false);
                                 } else if (roomToLeftOfEndOfButton >= popupRect.width) {
                                     //console.log('show 1.3');
-                                    selectInstance.customSelectListEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width) - popupRect.width + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width) - popupRect.width + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-left-below-position', false, false);
                                 } else if (popupRect.width <= window.innerWidth) {
                                     //console.log('show 1.4');
-                                    selectInstance.customSelectListEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - roomToLeftOfButton) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - roomToLeftOfButton) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-winmid-below-position', false, false);
                                 } else {
                                     //console.log('show 1.5');
-                                    selectInstance.customSelectListEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + triggeringElementRect.height + spaceForArrow + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
             
                                     togglePopupClassName('live-editor-custom-select-fullwidth-below-position', true, false);
                                 }
@@ -1092,31 +1200,31 @@
                                 //console.log('show 2');
                                 if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                     //console.log('show 2.1');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
-                                    selectInstance.customSelectListEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
                                     togglePopupClassName('live-editor-custom-select-mid-above-position', false, false);
                                 } else if (roomToRightOfStartOfButton >= popupRect.width) {
                                     //console.log('show 2.2');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-right-above-position', false, false);
                                 } else if (roomToLeftOfEndOfButton >= popupRect.width) {
                                     //console.log('show 2.3');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width - popupRect.width) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width - popupRect.width) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-left-above-position', false, false);
                                 } else if (window.innerWidth >= popupRect.width) {
                                     //console.log('show 2.4');;
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - popupRect.width / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - popupRect.width / 2) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-winmid-above-position', false, false);
                                 } else {
                                     //console.log('show 2.5');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y - popupRect.height - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
             
                                     togglePopupClassName('live-editor-custom-select-fullwidth-above-position', true, false);
                                 }
@@ -1124,20 +1232,20 @@
                                 //console.log('show 3');
                                 if (roomToRightOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 3.1');
-                                    selectInstance.customSelectListEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-right-mid-position', false, false);
                                 } else if (roomToLeftOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 3.2');
-                                    selectInstance.customSelectListEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - popupRect.width - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - popupRect.width - spaceForArrow) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-left-mid-position', false, false);
                                 } else {
                                     //console.log('show 3.3');
-                                    selectInstance.customSelectListEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
             
                                     togglePopupClassName('live-editor-custom-select-fullwidth-mid-position', true, false);
                                 }
@@ -1145,20 +1253,20 @@
                                 //console.log('show 4');
                                 if (roomToRightOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 4.1');
-                                    selectInstance.customSelectListEl.style.top = triggeringElementRect.y + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = triggeringElementRect.y + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-right-belowtop-position', false, false);
                                 } else if (roomToLeftOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 4.2');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - popupRect.width - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - popupRect.width - spaceForArrow) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-left-belowtop-position', false, false);
                                 } else {
                                     //console.log('show 4.3');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y) + 'px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
             
                                     togglePopupClassName('live-editor-custom-select-fullwidth-belowtop-position', true, false);
                                 }
@@ -1166,20 +1274,20 @@
                                 //console.log('show 5');
                                 if (roomToRightOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 5.1');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-right-abovebottom-position', false, false);
                                 } else if (roomToLeftOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 5.2');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - popupRect.width - spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - popupRect.width - spaceForArrow) + 'px';
             
                                     togglePopupClassName('live-editor-custom-select-left-abovebottom-position', false, false);
                                 } else {
                                     //console.log('show 5.3');
-                                    selectInstance.customSelectListEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
             
                                     togglePopupClassName('live-editor-custom-select-fullwidth-abovebottom-position', false, false);
                                 }
@@ -1187,63 +1295,63 @@
                                 //console.log('show 6');
                                 if (roomToRightOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 6.1');
-                                    selectInstance.customSelectListEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
                                     togglePopupClassName('live-editor-custom-select-right-winmid-position', false, false);
             
                                 } else if (roomToLeftOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 6.2');
             
-                                    selectInstance.customSelectListEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - spaceForArrow - popupRect.width) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - spaceForArrow - popupRect.width) + 'px';
                                     togglePopupClassName('live-editor-custom-select-left-winmid-position', false, false);
                                 } else if(popupRect.width <= window.innerWidth) {
                                     //console.log('show 6.3');
             
-                                    selectInstance.customSelectListEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - roomToLeftOfButton) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - roomToLeftOfButton) + 'px';
                                     togglePopupClassName('live-editor-custom-select-winmid-winmid-position', false, false);
                                 } else {
                                     //console.log('show 6.4');
             
-                                    selectInstance.customSelectListEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
                                     togglePopupClassName('live-editor-custom-select-fullwidth-winmid-position', true, false);
                                 }
                             } else {
                                 //console.log('show 7');
                                 if (roomToRightOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 7.1');
-                                    selectInstance.customSelectListEl.style.top = '0px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = '0px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + spaceForArrow) + 'px';
                                     togglePopupClassName('live-editor-custom-select-right-fullheight-position', false, false);
             
                                 } else if (roomToLeftOfButton >= popupRect.width + spaceForArrow) {
                                     //console.log('show 7.2');
             
-                                    selectInstance.customSelectListEl.style.top = '0px';
-                                    selectInstance.customSelectListEl.style.left = (triggeringElementRect.x - spaceForArrow - popupRect.width) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = '0px';
+                                    selectInstance.customSelectDropDownEl.style.left = (triggeringElementRect.x - spaceForArrow - popupRect.width) + 'px';
                                     togglePopupClassName('live-editor-custom-select-left-fullheight-position', false, false);
                                 } else if(popupRect.width <= window.innerWidth) {
                                     //console.log('show 7.3');
             
-                                    selectInstance.customSelectListEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
-                                    selectInstance.customSelectListEl.style.left = (window.innerWidth / 2) - (popupRect.width / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                    selectInstance.customSelectDropDownEl.style.left = (window.innerWidth / 2) - (popupRect.width / 2) + 'px';
                                     togglePopupClassName('live-editor-custom-select-winmid-fullheight-position', false, true);
                                 } else {
                                     //console.log('show 7.4');
-                                    selectInstance.customSelectListEl.style.top = '0px';
-                                    selectInstance.customSelectListEl.style.left = '0px';
+                                    selectInstance.customSelectDropDownEl.style.top = '0px';
+                                    selectInstance.customSelectDropDownEl.style.left = '0px';
                                     togglePopupClassName('live-editor-custom-select-fullwidth-fullheight-position', true, true);
                                 }
                             }
             
-                            selectInstance.customSelectListEl.style.visibility = '';
+                            selectInstance.customSelectDropDownEl.style.visibility = '';
             
                             window.addEventListener('click', selectInstance.hide);
             
-                            if(!selectInstance.customSelectEl.classList.contains("live-editor-custom-select-arrow-active")) {
-                                selectInstance.customSelectEl.classList.add("live-editor-custom-select-arrow-active");
+                            if(!selectInstance.customSelectedEl.classList.contains("live-editor-custom-select-arrow-active")) {
+                                selectInstance.customSelectedEl.classList.add("live-editor-custom-select-arrow-active");
                             }
 
                             selectInstance.isShown = true;
@@ -1286,18 +1394,18 @@
                                 if (classes[i] == classNameToApply || (classes[i] == 'live-editor-custom-select-x-scroll' && addXScrollClass) || (classes[i] == 'live-editor-custom-select-y-scroll' && addYScrollClass)) {
                                     continue;
                                 }
-                                selectInstance.customSelectListEl.classList.remove(classes[i]);
+                                selectInstance.customSelectDropDownEl.classList.remove(classes[i]);
                             }
             
-                            if (classNameToApply && classNameToApply != '' && !selectInstance.customSelectListEl.classList.contains(classNameToApply)) {
-                                selectInstance.customSelectListEl.classList.add(classNameToApply);
+                            if (classNameToApply && classNameToApply != '' && !selectInstance.customSelectDropDownEl.classList.contains(classNameToApply)) {
+                                selectInstance.customSelectDropDownEl.classList.add(classNameToApply);
                             }
             
                             if (addXScrollClass) {
-                                selectInstance.customSelectListEl.classList.add('live-editor-custom-select-x-scroll');
+                                selectInstance.customSelectDropDownEl.classList.add('live-editor-custom-select-x-scroll');
                             }
                             if (addYScrollClass) {
-                                selectInstance.customSelectListEl.classList.add('live-editor-custom-select-y-scroll');
+                                selectInstance.customSelectDropDownEl.classList.add('live-editor-custom-select-y-scroll');
                             }
                         }
             
@@ -1311,14 +1419,21 @@
                         selectParentDiv.appendChild(selectInstance.originalSelect);
 
                         /*for each element, create a new DIV that will act as the selected item:*/
-                        let selectedOptionEl = selectInstance.customSelectEl = document.createElement("DIV");
+                        let selectedOptionEl = selectInstance.customSelectedEl = document.createElement("DIV");
                         selectedOptionEl.setAttribute("class", "live-editor-custom-select-selected");
                         selectedOptionEl.innerHTML = selectInstance.originalSelect.selectedIndex != -1 ? selectInstance.originalSelect.options[selectInstance.originalSelect.selectedIndex].innerHTML : '';
                         selectParentDiv.appendChild(selectedOptionEl);
 
                         /*for each element, create a new DIV that will contain the option list:*/
+                        let optionsListCon = selectInstance.customSelectDropDownEl = document.createElement("DIV");
+                        optionsListCon.setAttribute("class", "live-editor-custom-select-items-con");
                         let optionsListEl = selectInstance.customSelectListEl = document.createElement("DIV");
                         optionsListEl.setAttribute("class", "live-editor-custom-select-items");
+                        optionsListCon.appendChild(optionsListEl);
+                        let selectControlsEl = selectInstance.customSelectControlsEl = document.createElement("DIV");
+                        selectControlsEl.setAttribute("class", "live-editor-custom-select-controls");
+                        optionsListCon.appendChild(selectControlsEl);
+
 
                         selectInstance.syncOptionsList();
 
@@ -1334,7 +1449,7 @@
                             }
                         });
 
-                        const config = {attributes: true, childList: true,characterData:true, subtree:true};
+                        const config = {attributes: false, childList: true,characterData:false, subtree:true};
                         const callback = function(mutationList, observer) {
                             for (const mutation of mutationList) {
                                 if (mutation.type === 'childList') {
@@ -1374,17 +1489,7 @@
                         selectDropDown.className = 'live-editor-popup-scenes-select';
                         customSelectCon.appendChild(selectDropDown);
                         scenesColumnBody.appendChild(customSelectCon);
-
-                        var customSelect = new CustomSelect(selectDropDown);
-                        selectDropDown.addEventListener('change', function (e) {
-                            
-                        })
-
-
-                        var scenesColumnControl = document.createElement('DIV');
-                        scenesColumnControl.className = 'live-editor-popup-scenes-control';
-                        scenesColumnControl.style.position = 'relative';
-
+                        
                         var scenesColumnControlAddBtn = document.createElement('DIV');
                         scenesColumnControlAddBtn.className = 'live-editor-popup-scenes-control-btn live-editor-popup-scenes-control-btn-add';
                         if(!tool.state.managingScenes) scenesColumnControlAddBtn.classList.add('live-editor-inactive');
@@ -1394,33 +1499,110 @@
                             addNewScenePopup.showDialog(event);
                         });
 
-                        scenesColumnControl.appendChild(scenesColumnControlAddBtn);
-
-                        var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn live-editor-popup-scenes-control-btn-remove';
-                        if(!tool.state.managingScenes) scenesColumnControlBtn.classList.add('live-editor-inactive');
-                        scenesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
-                        scenesColumnControlBtn.addEventListener('click', function () {
-                            removeScene();
+                        selectDropDown.addEventListener('change', function (e) {
+                            console.log('chaaange',e.target.value)
+                            selectScene(e.target.value);
                         })
-                        scenesColumnControl.appendChild(scenesColumnControlBtn);
 
-                        var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn';
-                        scenesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
-                        scenesColumnControlBtn.addEventListener('click', function () {
-                            moveSceneUp();
-                        })
-                        scenesColumnControl.appendChild(scenesColumnControlBtn);
-                        var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn';
-                        scenesColumnControlBtn.innerHTML = _streamingIcons.moveDown;
-                        scenesColumnControlBtn.addEventListener('click', function () {
-                            moveSceneDown();
-                        })
-                        scenesColumnControl.appendChild(scenesColumnControlBtn);
+                        var customSelect = new CustomSelect(selectDropDown);
+                        customSelect.customSelectDropDownEl.classList.add('live-editor-popup-scenes-select-list');
+                        customSelect.customSelectControlsEl.appendChild(scenesColumnControlAddBtn);
+                        customSelect.syncOptionsList = function () {
+                            console.log('syncOptionsList START');
+                            /*try {
+                                var err = (new Error);
+                                console.log(err.stack);
+                            } catch (e) {
+            
+                            }*/
+                            let originalSelect = customSelect.originalSelect;
+                            let optionsNumber = originalSelect.options.length;
+                            for(let e = customSelect.optionsList.length - 1; e >= 0; e--) {
+                                let option = customSelect.optionsList[e];
+                                let sourceIsRemoved = true;
+                                for (let h = 0; h < optionsNumber; h++) {
+                                    if(option.originalOptionEl == originalSelect.options[h]) {
+                                        sourceIsRemoved = false;
+                                        break;
+                                    }
+                                }
+                                if(sourceIsRemoved) {
+                                    if (option.customOptionEl != null && option.customOptionEl.parentElement != null) {
+                                        option.customOptionEl.parentElement.removeChild(option.customOptionEl);
+                                    }
+                                    customSelect.optionsList.splice(e, 1);
+                                }
+                            }
 
-                        scenesColumnBody.appendChild(scenesColumnControl);
+                            for (let j = 0; j < optionsNumber; j++) {
+                                let optionAlreadyExists = false;
+                                for(let l in customSelect.optionsList) {
+                                    if(customSelect.optionsList[l].originalOptionEl == originalSelect.options[j]) {
+                                        optionAlreadyExists = customSelect.optionsList[l];
+                                    }
+                                }
+
+                                if(optionAlreadyExists != false) {
+                                    customSelect.customSelectListEl.appendChild(optionAlreadyExists.customOptionEl);
+                                    continue;
+                                } else if (optionAlreadyExists == false) {
+                                    let sceneId = originalSelect.options[j].value;
+                                    let optionElementCon = document.createElement("DIV");
+                                    optionElementCon.className = 'live-editor-custom-select-option';
+                                    optionElementCon.dataset.selectValue = originalSelect.options[j].value;
+                                    customSelect.customSelectListEl.appendChild(optionElementCon);
+    
+                                    optionElementCon.addEventListener("click", function(e) {
+                                        customSelect.selectOption(e.target);
+                                    });
+    
+                                    let optionElementText = document.createElement("DIV");
+                                    optionElementText.className = 'live-editor-custom-select-option-text';
+                                    optionElementText.innerHTML = originalSelect.options[j].innerHTML;
+                                    optionElementCon.appendChild(optionElementText);
+    
+                                    let optionElementControls = document.createElement("DIV");
+                                    optionElementControls.className = 'live-editor-custom-select-option-controls';
+                                    optionElementCon.appendChild(optionElementControls);
+                                    
+                                    var optionControlsRemoveBtn = document.createElement('DIV');
+                                    optionControlsRemoveBtn.className = 'live-editor-custom-select-option-controls-btn';
+                                    optionControlsRemoveBtn.innerHTML = _streamingIcons.removeItem;
+                                    optionControlsRemoveBtn.addEventListener('click', function (e) {
+                                        removeScene(sceneId);
+                                        e.stopPropagation();
+                                    })
+                                    optionElementControls.appendChild(optionControlsRemoveBtn);
+    
+                                    var optionControlsUpBtn = document.createElement('DIV');
+                                    optionControlsUpBtn.className = 'live-editor-custom-select-option-controls-btn live-editor-custom-select-btn-move';
+                                    optionControlsUpBtn.innerHTML = _streamingIcons.moveUp;
+                                    optionControlsUpBtn.addEventListener('click', function (e) {
+                                        moveSceneUp(sceneId);
+                                        e.stopPropagation();
+                                    })
+                                    optionElementControls.appendChild(optionControlsUpBtn);
+    
+                                    var optionControlsDownBtn = document.createElement('DIV');
+                                    optionControlsDownBtn.className = 'live-editor-custom-select-option-controls-btn live-editor-custom-select-btn-move';
+                                    optionControlsDownBtn.innerHTML = _streamingIcons.moveDown;
+                                    optionControlsDownBtn.addEventListener('click', function (e) {
+                                        moveSceneDown(sceneId);
+                                        e.stopPropagation();
+                                    })
+                                    optionElementControls.appendChild(optionControlsDownBtn);
+    
+                                    customSelect.optionsList.push({
+                                        originalOptionEl: originalSelect.options[j],
+                                        customOptionEl: optionElementCon,
+                                        value: originalSelect.options[j].value
+                                    });
+                                }
+                            }
+                            
+                        };
+                       
+
                         scenesColumn.appendChild(scenesColumnBody);
                         _scenesDropDownEl = selectDropDown;
                         return scenesColumn;
@@ -6733,7 +6915,7 @@
                     var dialogInner=document.createElement('DIV');
                     dialogInner.className = 'live-editor-dialog-inner';
                     var boxContent=document.createElement('DIV');
-                    boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
+                    boxContent.className = 'live-editor-dialog-body';
 
                     var streamingControls=document.createElement('DIV');
                     streamingControls.className = 'live-editor-popup-streaming-controls';
@@ -6892,7 +7074,7 @@
                     var dialogInner=document.createElement('DIV');
                     dialogInner.className = 'live-editor-dialog-inner';
                     var boxContent=document.createElement('DIV');
-                    boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
+                    boxContent.className = 'live-editor-dialog-body';
 
                     var previewBox = document.createElement('DIV');
                     previewBox.className = 'live-editor-popup-preview';
