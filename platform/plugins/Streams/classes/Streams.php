@@ -2377,6 +2377,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
 	 * @param {callable} [$options.filter] Optional function to call to filter the relations. It should return a filtered array of relations.
+	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just fetches the relations and related streams
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
@@ -2412,7 +2413,8 @@ abstract class Streams extends Base_Streams
 		$streams = array();
 		foreach($rows as $n => $row) {
 			if (!$row) continue;
-			if (!$row->testReadLevel('relations')) {
+			if (empty($options['skipAccess'])
+			and !$row->testReadLevel('relations')) {
 				throw new Users_Exception_NotAuthorized();
 			}
 			if (!$row->testReadLevel('participants')) {
