@@ -102,7 +102,7 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can vote for a relation message posted to the stream.
-	 * @property WRITE_LEVEL['vote']
+	 * @property $WRITE_LEVEL['vote']
 	 * @type integer
 	 * @default 13
 	 * @final
@@ -497,7 +497,7 @@ abstract class Streams extends Base_Streams
 			 * @param {string} name
 			 * @param {array} criteria
 			 * @param {string} fields
-			 * @param {array} options
+			 * @param {array} options also contains "duringInternal", may want to return early in that case
 			 */
 			Q::event("Streams/fetch/$type", $params, 'after', false, $streams);
 		}
@@ -881,7 +881,9 @@ abstract class Streams extends Base_Streams
 			// group the fetches by publisher and execute them in batches
 			foreach ($toFetch as $publisherId => $streamNames) {
 				$streamNames = array_unique($streamNames);
-				Streams::fetch($asUserId, $publisherId, $streamNames);
+				Streams::fetch($asUserId, $publisherId, $streamNames, '*', array(
+					'duringInternal' => 'calculateAccess'
+				));
 			}
 			// this will now use the cached results of the above calls to Streams::fetch
 			foreach ($streams4 as $s) {

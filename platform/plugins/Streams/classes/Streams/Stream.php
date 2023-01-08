@@ -1467,7 +1467,10 @@ class Streams_Stream extends Base_Streams_Stream
 				$this->get('asUserId', ''),
 				$publisherId,
 				$name,
-				'*'
+				'*',
+				array(
+					'duringInternal' => 'inheritAccess'
+				)
 			);
 			$s_readLevel = $stream->get('readLevel', 0);
 			$s_writeLevel = $stream->get('writeLevel', 0);
@@ -1480,20 +1483,20 @@ class Streams_Stream extends Base_Streams_Stream
 			// But once we obtain a level via a direct_source,
 			// we don't override it anymore.
 			$ips = $inherited_public_source;
-			if ($readLevel_source != $direct_source) {
-				$readLevel = max($readLevel, $s_readLevel);
+			if (!in_array($readLevel_source, $direct_sources)) {
+				$readLevel = ($s_readLevel_source === $direct_source) ? $s_readLevel : max($readLevel, $s_readLevel);
 				$readLevel_source = $s_readLevel_source + 
-					($s_readLevel_source > $ips) ? 0 : $ips;
+					(($s_readLevel_source > $ips) ? 0 : $ips);
 			}
-			if ($writeLevel_source != $direct_source) {
-				$writeLevel = max($writeLevel, $s_writeLevel);
+			if (!in_array($writeLevel_source, $direct_sources)) {
+				$writeLevel = ($s_writeLevel_source === $direct_source) ? $s_writeLevel : max($writeLevel, $s_writeLevel);
 				$writeLevel_source = $s_writeLevel_source + 
-					($s_writeLevel_source > $ips) ? 0 : $ips;
+					(($s_writeLevel_source > $ips) ? 0 : $ips);
 			}
-			if ($adminLevel_source != $direct_source) {
-				$adminLevel = max($adminLevel, $s_adminLevel);
+			if (!in_array($adminLevel_source, $direct_sources)) {
+				$adminLevel = ($s_adminLevel_source === $direct_source) ? $s_adminLevel : max($adminLevel, $s_adminLevel);
 				$adminLevel_source = $s_adminLevel_source + 
-					($s_adminLevel_source > $ips) ? 0 : $ips;
+				(($s_adminLevel_source > $ips) ? 0 : $ips);
 			}
 		}
 		

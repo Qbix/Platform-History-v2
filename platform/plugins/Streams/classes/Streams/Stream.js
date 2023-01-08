@@ -690,28 +690,22 @@ Sp.inheritAccess = function (callback) {
 			var s_readLevel_source = stream.get('readLevel_source', public_source);
 			if (direct_sources.indexOf(readLevel_source) < 0) {
 				readLevel = (s_readLevel_source === direct_source) ? s_readLevel : Math.max(readLevel, s_readLevel);
-				readLevel_source = 
-				(s_readLevel_source > inherited_public_source) 
-				? s_readLevel_source 
-				: s_readLevel_source + inherited_public_source;
+				readLevel_source = s_readLevel_source
+				+ (s_readLevel_source > inherited_public_source ? 0 : inherited_public_source);
 			}
 			var s_writeLevel = stream.get('writeLevel', 0);
 			var s_writeLevel_source = stream.get('writeLevel_source', public_source);
 			if (direct_sources.indexOf(writeLevel_source) < 0) {
 				writeLevel = (s_writeLevel_source === direct_source) ? s_writeLevel : Math.max(writeLevel, s_writeLevel);
-				writeLevel_source = 
-				(s_writeLevel_source > inherited_public_source) 
-				? s_writeLevel_source 
-				: s_writeLevel_source + inherited_public_source;
+				writeLevel_source = s_writeLevel_source
+				+ (s_writeLevel_source > inherited_public_source ? 0 : inherited_public_source);
 			}
 			var s_adminLevel = stream.get('adminLevel', 0);
 			var s_adminLevel_source = stream.get('adminLevel_source', public_source);
 			if (direct_sources.indexOf(adminLevel_source) < 0) {
 				adminLevel = (s_adminLevel_source === direct_source) ? s_adminLevel : Math.max(adminLevel, s_adminLevel);
-				adminLevel_source = 
-				(s_adminLevel_source > inherited_public_source) 
-				? s_adminLevel_source 
-				: s_adminLevel_source + inherited_public_source;
+				adminLevel_source = s_adminLevel_source
+				+ (s_adminLevel_source > inherited_public_source ? 0 : inherited_public_source);
 			}
 			p.fill(key)(null, true);
 		});
