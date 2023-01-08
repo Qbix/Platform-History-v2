@@ -2,7 +2,7 @@
 <?php
 
 define ('APP_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
-if (!file_exists(APP_DIR . '/local.sample/paths.php')
+if (!file_exists(APP_DIR . '/local/paths.php')
 and !file_exists(APP_DIR . '/local/paths.json')) {
 	if (!file_exists(APP_DIR . '/local.sample/paths.php')
 	and !file_exists(APP_DIR . '/local.sample/paths.json')) {
