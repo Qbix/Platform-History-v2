@@ -6,7 +6,7 @@
  * @class Streams/question/preview
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
- * @param {Boolean} [singleAnswer=true] Each user can answer only once.
+ * @param {Boolean} [multipleAnswers=false] Whether users can give more than one answer
  * @param {Q.Event} [options.onInvoke] occur onclick tool element
  */
 Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams_question_preview (options, preview) {
@@ -60,7 +60,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 },
 
 {
-	singleAnswer: true,
+	multipleAnswers: false,
 	onInvoke: new Q.Event()
 },
 
@@ -108,7 +108,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 				$(".Streams_preview_container", $toolElement).on(Q.Pointer.fastclick, function (event) {
 					// check if user already answer
-					if (state.singleAnswer) {
+					if (!state.multipleAnswers) {
 						var answered = false;
 						$(".Streams_preview_tool", relatedTool.element).each(function () {
 							var previewTool = Q.Tool.from(this, "Streams/preview");
