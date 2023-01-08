@@ -1118,7 +1118,7 @@ abstract class Streams extends Base_Streams
 			// 	$inheritAccess[] = $newInheritAccess;
 			// }
 			// $stream->inheritAccess = Q::json_encode($inheritAccess);
-			$stream->inheritAccess = array($relate['publisherId'], $relate['streamName']);
+			$stream->inheritAccess = Q::json_encode(array($relate['publisherId'], $relate['streamName']));
 		}
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
