@@ -686,7 +686,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $streams
 	 *  An array of streams, obtained for example by Streams::fetch
 	 * @param {boolean} [$recalculate=false]
-	 *  Pass true here to force recalculating access to streams for which access was already calculated
+	 *  Pass true here to force recalculating access to streams for which access was already calculated.
 	 * @param {string} [$actualPublisherId=null]
 	 *  For internal use only. Used by Streams::canCreateStreamType function.
 	 * @param {string} [$inheritAccess=true]
@@ -1110,14 +1110,15 @@ abstract class Streams extends Base_Streams
 				$relate['publisherId'],
 				$relate['streamName']
 			);
-			$inheritAccess = ($rs and $rs->inheritAccess)
-				? Q::json_decode($rs->inheritAccess)
-				: array();
-			$newInheritAccess = array($relate['publisherId'], $relate['streamName']);
-			if (!in_array($newInheritAccess, $inheritAccess)) {
-				$inheritAccess[] = $newInheritAccess;
-			}
-			$stream->inheritAccess = Q::json_encode($inheritAccess);
+			// $inheritAccess = ($rs and $rs->inheritAccess)
+			// 	? Q::json_decode($rs->inheritAccess)
+			// 	: array();
+			// $newInheritAccess = array($relate['publisherId'], $relate['streamName']);
+			// if (!in_array($newInheritAccess, $inheritAccess)) {
+			// 	$inheritAccess[] = $newInheritAccess;
+			// }
+			// $stream->inheritAccess = Q::json_encode($inheritAccess);
+			$stream->inheritAccess = array($relate['publisherId'], $relate['streamName']);
 		}
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
