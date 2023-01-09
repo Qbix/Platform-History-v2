@@ -12,7 +12,7 @@
 	 *   @param {boolean} [options.showDomainOnly=false] If true show domain:port if port != 80, else show full url
 	 *   @param {boolean} [options.showDescription=false] If true show site description below title instead url
 	 *   @param {object} [options.siteData] Site data
-	 *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
+	 *   @param {Q.Event} [options.onRefresh] Event occurs when tool element has rendered with content
 	 *   @param {string} [options.url] url for preview
 	 *   @param {Q.Event} [onLoad] called when styles and texts loaded
 	 */
@@ -112,7 +112,7 @@
 		siteData: {},
 		url: null,
 		onInvoke: new Q.Event(),
-		onRender: new Q.Event(),
+		onRefresh: new Q.Event(),
 		onError: new Q.Event(),
 		onLoad: new Q.Event()
 	},
@@ -205,7 +205,7 @@
 					}
 
 					Q.activate(tool.element, function () {
-						Q.handle(state.onRender, tool);
+						Q.handle(state.onRefresh, tool);
 					});
 
 					if (state.mode === 'title') {
@@ -335,7 +335,7 @@
 				$(tool.element).html(html);
 
 				Q.activate(tool.element, function () {
-					Q.handle(state.onRender, tool);
+					Q.handle(state.onRefresh, tool);
 				});
 			});
 		},

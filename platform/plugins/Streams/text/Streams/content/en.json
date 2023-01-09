@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "New Item"
     },
+    "avatar": {
+        "firstName": "first name",
+        "lastName": "last name",
+        "username": "username"
+    },
     "labels": {
         "Streams\/invited": "People I invited",
         "Streams\/invitedMe": "Who invited me",

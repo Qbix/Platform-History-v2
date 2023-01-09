@@ -180,23 +180,27 @@ Q.Tool.define("Streams/question", function(options) {
 			var $answers = $(".Streams_question_answers", tool.element);
 
 			Q.each(answers, function (i) {
-				if (this.type === "option") {
-					$("<label><input type='checkbox' value='" + i + "'> <span>" + this.content + "</span></label>").appendTo($answers);
-				} else if (this.type === "option.exclusive") {
-					$("<label><input type='radio' value='" + i + "'> <span>" + this.content + "</span></label>").appendTo($answers);
+				var id = tool.id + "_input_" + i;
+				if (this.type === "option" || this.type === "option.exclusive") {
+					$("<label class='Streams_question_answer_container' />")
+					.append(
+						$("<input />").attr({
+							value: i,
+							id: id,
+							type: (this.type === "option" ? "checkbox" : "radio")
+						}),
+						$("<span />").text(this.content)
+					).appendTo($answers);
 				} else if (this.type === "textarea") {
 					$("<textarea placeholder='" + (this.content || tool.text.FreeAnswer) + "'></textarea>").appendTo($answers);
 				}
 			});
 
 			// if radio checked, uncheck all checkboxes and radios
-			$("input[type=radio]", tool.element).on(Q.Pointer.fastclick, function () {
+			$("input[type=radio]", tool.element).on('change', function () {
 				$("input[type=radio]", tool.element).prop("checked", false);
 				$(this).prop("checked", true);
 			});
-
-			// if checkbox checked, uncheck all radios
-			$("input[type=checkbox]", tool.element).on(Q.Pointer.fastclick, function () {});
 
 			// submit question
 			$("button[name=submit]", tool.element).on(Q.Pointer.fastclick, function () {

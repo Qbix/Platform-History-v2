@@ -17,7 +17,7 @@
  *  @param {Q.Event} [options.onFinish] Call when save or upload action ended.
  *  @param {Q.Event} [options.onError] Call when error occur.
  *  @param {Q.Event} [options.onScroll] Call when pdf scrolled.
- *  @param {Q.Event} [options.onRender] Call when pdf rendered.
+ *  @param {Q.Event} [options.onRefresh] Call when pdf rendered.
  *  @param {Q.Event} [options.onEnded] Call when pdf scrolled to the end.
  *
  */
@@ -62,7 +62,7 @@ Q.Tool.define("Q/pdf", function (options) {
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
-	onRender: new Q.Event(function (numPages, element) {
+	onRefresh: new Q.Event(function (numPages, element) {
 		// remove preloader
 		this.$preloader && this.$preloader.remove();
 
@@ -110,7 +110,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		var state = this.state;
 		var $toolElement = $(tool.element);
 
-		// add preloader to cover up tool.element till pdf rendered (state.onRender)
+		// add preloader to cover up tool.element till pdf rendered (state.onRefresh)
 		if (!tool.$preloader) {
 			tool.$preloader = $("<div class='Q_pdf_preloader'><img src='" + Q.url("{{Q}}/img/throbbers/loading.gif") + "'></div>").appendTo(tool.element);
 		}
@@ -185,7 +185,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		if (pdf !== null && currPage <= pdf.numPages) {
 			pdf.getPage(currPage).then(tool.renderPage.bind(tool));
 		} else if (currPage >= pdf.numPages) {
-			Q.handle(state.onRender, tool, [pdf.numPages, tool.element]);
+			Q.handle(state.onRefresh, tool, [pdf.numPages, tool.element]);
 		}
 	},
 	/**

@@ -6,6 +6,7 @@ function Q_response_dashboard()
 	$slogan = "Powered by Qbix.";
 	$user = Users::loggedInUser(false, false);
 	$text = Q_Text::get("MyApp/content");
+	$isMobile = Q_Request::isMobile();
 
 	if ($user) {
 		$tabs = array('home' => $text['dashboard']["Home"]);
@@ -20,5 +21,5 @@ function Q_response_dashboard()
 		'home' => 'MyApp/home',
 		'about' => 'MyApp/about'
 	);
-	return Q::view("$app/dashboard.php", @compact('slogan', 'user', 'tabs', 'urls', 'text'));
+	return Q::view("$app/dashboard.php", @compact('slogan', 'user', 'tabs', 'urls', 'text', 'isMobile'));
 }

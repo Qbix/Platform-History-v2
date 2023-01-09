@@ -952,7 +952,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 			->orderBy('srt.weight', false)
 			->fetchDbRows();
 
-		return $rows[0];
+		return reset($rows);
 	}
 	/**
 	 * Get stream interests in one array with items having properties

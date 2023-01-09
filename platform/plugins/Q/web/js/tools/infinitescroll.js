@@ -58,7 +58,7 @@
 				return;
 			}
 
-			if (this.state.onRender) {
+			if (this.state.onRefresh) {
 				includedTools.push(this);
 				clearTimeout(pipeTimer);
 				pipeTimer = setTimeout(function () {
@@ -83,7 +83,7 @@
 						}, 1000);
 					});
 					Q.each(includedTools, function () {
-						this.state.onRender.add(pipe.fill(this.id), tool);
+						this.state.onRefresh.add(pipe.fill(this.id), tool);
 					});
 				}, 1000);
 			}

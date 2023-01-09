@@ -65,6 +65,9 @@
 		"type": "Streams/image",
 		"title": "Icon",
 		"icon": "Streams/image",
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0,
 		"userField": "icon",
 		"platforms": {
 			"facebook": "pic",
@@ -75,6 +78,9 @@
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
+		"readLevel": 20,
+		"writeLevel": 10,
+		"adminLevel": 20,
 		"userField": "username",
 		"platforms": {
 			"facebook": "username",
