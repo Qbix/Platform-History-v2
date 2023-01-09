@@ -9,6 +9,7 @@
 Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, preview) {
 	var tool = this;
 	tool.preview = preview;
+	var state = this.state;
 
 	// to set uploaded images sizes
 	tool.preview.state.imagepicker.save = "Assets/service";
@@ -27,6 +28,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
 					price: $("input[name=price]", dialog).val(),
+					currency: state.currency,
 					link: $("input[name=link]", dialog).val(),
 					payment: $("select[name=payment]", dialog).val(),
 					requiredParticipants: requiredParticipants
@@ -75,7 +77,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 	};
 
 	$(tool.element).on(Q.Pointer.fastclick, function () {
-		Q.handle(tool.state.onInvoke, tool);
+		Q.handle(state.onInvoke, tool);
 	});
 
 	Q.Text.get('Assets/content', function (err, text) {
@@ -92,6 +94,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 {
 	editable: true,
+	currency: 'credits',
 	onInvoke: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
@@ -120,10 +123,11 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		tool.stream = stream;
 		var ps = tool.preview.state;
 		var price = stream.getAttribute('price');
+		var currency = stream.getAttribute('currency');
 
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
-			price: price ? '($' + parseFloat(price).toFixed(2) + ')' : '',
+			price: price ? '(' + (currency ? '' : '$') + parseFloat(price).toFixed(2) + (currency ? ' ' + currency : '') +')' : '',
 		}, function (err, html) {
 			if (err) return;
 			Q.replace(tool.element, html);
@@ -175,6 +179,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 				title: stream.fields.title,
 				payment: stream.getAttribute('payment'),
 				price: stream.getAttribute('price'),
+				currency: stream.getAttribute('currency') || '$',
 				selectedParticipants: stream.getAttribute('requiredParticipants'),
 				link: stream.getAttribute('link'),
 				description: stream.fields.content
@@ -183,6 +188,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 	},
 	openDialog: function (saveCallback, closeCallback, fields) {
 		var tool = this;
+		var state = this.state;
 		var relatedParticipants = Q.extend({}, Q.getObject("Assets.service.relatedParticipants", Q));
 		var selectedParticipants = Q.getObject("selectedParticipants", fields);
 		if (selectedParticipants) {
@@ -196,6 +202,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			template: {
 				name: "Assets/service/composer",
 				fields: Q.extend({
+					currency: Q.getObject("currency", fields) || state.currency,
 					relatedParticipantsExists: !!Object.keys(relatedParticipants).length,
 					relatedParticipants: relatedParticipants,
 					text: tool.text
@@ -203,6 +210,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			},
 			className: "Assets_service_composer",
 			onActivate: function (dialog) {
+				$("input[name=price]", dialog).css("padding-left", $(".Assets_service_composer_currency", dialog).outerWidth() + 5);
 				$("input,textarea", dialog).plugin('Q/placeholders');
 
 				var $price = $("label[for=price]", dialog);
@@ -268,7 +276,7 @@ Q.Template.set('Assets/service/preview',
 	+ '<img class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents">'
 	+ '<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>'
-	+ '<span class="Assets_service_preview_price">{{price}}</span>'
+	+ '<span class="Assets_service_preview_price">{{price}} {{currency}}</span>'
 	+ '</div></div>'
 );
 
@@ -276,7 +284,7 @@ Q.Template.set("Assets/service/composer",
 `<form>
 		<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">
 		<select name="payment"><option value="free">{{text.services.Free}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>
-		<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>
+		<label for="price"><span class="Assets_service_composer_currency">{{currency}}</span><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>
 		{{#if relatedParticipantsExists}}
 			<label>{{text.services.NewServiceTemplate.SelectRequiredParticipants}}</label>
 			<span class="Assets_service_composer_requiredPaymentDesc">{{text.services.NewServiceTemplate.RequiredParticipantsDesc}}</span>	

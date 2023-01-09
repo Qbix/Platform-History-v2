@@ -110,7 +110,6 @@ abstract class Assets extends Base_Assets
 		$communityId = Users::communityId();
 		$chargeId = Q::ifset($options, "chargeId", null);
 		$className = 'Assets_Payments_' . ucfirst($payments);
-		$adapter = new $className($options);
 
 		/**
 		 * @event Assets/charge {before}
@@ -123,6 +122,7 @@ abstract class Assets extends Base_Assets
 		if ($chargeId) {
 			$customerId = Q::ifset($options, "customerId", null);
 		} else {
+			$adapter = new $className((array)$options);
 			$customerId = $adapter->charge($amount, $currency, $options);
 		}
 
