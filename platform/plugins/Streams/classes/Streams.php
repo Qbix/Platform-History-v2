@@ -2218,6 +2218,12 @@ abstract class Streams extends Base_Streams
 			$fromStreamName = reset($fromStreamName);
 		}
 
+		if (empty($options['skipAccess'])) {
+			if (!$category->testWriteLevel('relations')) {
+				throw new Users_Exception_NotAuthorized();
+			}
+		}
+
 		// Now, clean up the relation.
 		/**
 		 * @event Streams/unrelateTo/$streamType {before}
@@ -2601,7 +2607,8 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Check if category allow new relations
+	 * Check if the maximum number of relations of a given type has been exceeded,
+	 * if the "Streams/maxRelations" attribute has been set.
 	 * @method checkAvailableRelations
 	 * @param {string} $asUserId The id of the user on whose behalf the stream requested
 	 * @param {string} $publisherId The publisher of the stream
