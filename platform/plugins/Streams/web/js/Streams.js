@@ -31,6 +31,11 @@ Q.text.Streams = {
 		prompt: null, //"Fill our your basic information to complete your signup.",
 		title: "Basic Information"
 	},
+	avatar: {
+        firstName: "First Name",
+        lastName: "Last Name",
+        username: "username"
+    },
 	login: {
 		prompt: "Let friends recognize you:",
 		newUser: "or create a new account below",
@@ -616,8 +621,8 @@ Q.Tool.define({
 	"Streams/audioVisualization"	 : "{{Streams}}/js/tools/webrtc/audioVisualization.js",
 	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
 	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
-	"Streams/webrtc/preview/default" : "{{Streams}}/js/tools/webrtc/defaultWebrtcPreview.js",
-	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/callWebrtcPreview.js",
+	"Streams/webrtc/preview/default" : "{{Streams}}/js/tools/webrtc/preview/default.js",
+	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/preview/call.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/webrtc/streamingEditor"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
 	"Streams/webrtc/livestreamInstructions"  : "{{Streams}}/js/tools/webrtc/livestreamInstructions.js",

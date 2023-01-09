@@ -9,7 +9,7 @@
      * @param {Q.Event} [options.onWebRTCRoomCreated]
      * @param {Q.Event} [options.onWebrtcControlsCreated]
      * @param {Q.Event} [options.onWebRTCRoomEnded]
-     * @param {Q.Event} [options.onRender] called when tool element completely rendered
+     * @param {Q.Event} [options.onRefresh] called when tool element completely rendered
      */
     Q.Tool.define("Streams/webrtc/preview/call", ["Streams/webrtc/preview"], function _Streams_webrtc_preview (options, parentPreviewTool) {
             console.log('WebRTC call preview', parentPreviewTool);
@@ -76,7 +76,7 @@
             onWebRTCRoomCreated: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
-            onRender: new Q.Event(),
+            onRefresh: new Q.Event(),
             onRoomSwitch: new Q.Event()
         },
 
@@ -142,7 +142,7 @@
                             var jq = tool.$('img.Streams_preview_icon');
                             tool.preview.icon(jq[0], null);
 
-                            Q.handle(state.onRender, tool);
+                            Q.handle(state.onRefresh, tool);
                         });
                     },
                     state.templates.view

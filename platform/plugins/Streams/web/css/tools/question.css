@@ -71,6 +71,9 @@
     margin-bottom: 10px;
     text-align: left;
 }
+.Streams_dialog_answer .Streams_question_answers label span {
+    margin-left: 5px;
+}
 .Streams_dialog_answer .Streams_question_answers input[type=checkbox],
 .Streams_dialog_answer .Streams_question_answers input[type=radio] {
     -ms-transform: scale(2); /* IE */

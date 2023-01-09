@@ -15,7 +15,7 @@
 	 *   @param {Object} [options.pie] Any options to pass to the Q/pie tool -- see its options.
 	 *   @param {String} [options.url] If defined, Websites/scrape will requested and created preview tool with response data
 	 *   @param {Q.Event} [onLoad] called when styles and texts loaded
-	 *   @param {Q.Event} [onRender] called when tool rendered
+	 *   @param {Q.Event} [onRefresh] called when tool rendered
 	 */
 	Q.Tool.define("Streams/audio/preview", "Streams/preview", function _Streams_audio_preview(options, preview) {
 			var tool = this;
@@ -133,7 +133,7 @@
 			onLoad: new Q.Event(function () {
 				this.preview.state.onRefresh.add(this.refresh.bind(this), this);
 			}, "Streams/audio"),
-			onRender: new Q.Event()
+			onRefresh: new Q.Event()
 		},
 
 		{
@@ -209,7 +209,7 @@
 								$durationBox.html(this.formatRecordTime(this.state.duration));
 							}
 						}).activate(function () {
-							Q.handle(state.onRender, tool);
+							Q.handle(state.onRefresh, tool);
 						});
 					});
 				});

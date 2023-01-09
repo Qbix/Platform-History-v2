@@ -27,6 +27,10 @@ table { table-layout: fixed; }
 
 :root {
 	--dashboard-main-color: rgba(255, 255, 255, 1.0);
+	--chat-to-me-bg-color: #cccccc;
+	--chat-to-me-text-color: black;
+	--chat-from-me-bg-color: #2D2D72;
+	--chat-from-me-text-color: #fff;
 }
 
 /* The various slot containers */
@@ -86,7 +90,6 @@ table { table-layout: fixed; }
 	position: absolute;
 }
 
-#dashboard { display: flex; width: 100%; }
 .Q_layout_widebar #dashboard { display: flex; justify-content: space-between; }
 .Q_notMobile #dashboard { padding: 5px; }
 

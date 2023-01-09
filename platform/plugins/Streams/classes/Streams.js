@@ -152,7 +152,7 @@ Streams.READ_LEVEL = {
  * @final
  */
 /**
- * Can update properties of relations directly
+ * Can update properties of relations directly, and unrelate
  * @property WRITE_LEVEL.relations
  * @type integer
  * @default 25

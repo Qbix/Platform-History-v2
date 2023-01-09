@@ -91,7 +91,7 @@
                                 }
                             }();
                             Q.onLayout(tool.element).set(_adjustWidth, tool);
-                            Q.handle(state.onRender, tool);
+                            Q.handle(state.onRefresh, tool);
                         });
                     },
                     state.templates.view

@@ -6,7 +6,6 @@ var Q = require('../Q');
  * Define properties and methods needed to load and initialize platform classes and config
  * @class Bootstrap
  * @namespace Q
- * @static
  */
 var Bootstrap = {};
 

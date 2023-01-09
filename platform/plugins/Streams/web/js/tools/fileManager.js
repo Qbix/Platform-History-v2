@@ -372,7 +372,7 @@
                             var videoPreview = Q.Tool.from(fileItemInner, "Streams/video/preview");
                             videoPreview.preview.options.actions.position = 'tr';
                             videoPreview.preview.options.actions.size = '16';
-                            videoPreview.state.onRender.add(function () {
+                            videoPreview.state.onRefresh.add(function () {
                                 var icon = videoPreview.element.querySelector('.Streams_preview_icon');
                                 var iconCon = document.createElement('DIV');
                                 iconCon.className = 'Streams_fileManager_file_icon_con';
@@ -394,7 +394,7 @@
                             var audioPreview = Q.Tool.from(fileItemInner, "Streams/audio/preview");
                             audioPreview.preview.options.actions.position = 'tr';
                             audioPreview.preview.options.actions.size = '16';
-                            audioPreview.state.onRender.add(function () {
+                            audioPreview.state.onRefresh.add(function () {
                                 var durationElement = audioPreview.element.querySelector('.Streams_preview_audio_duration');
                                 durationElement.style.display = 'none';
                             })

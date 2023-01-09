@@ -2,19 +2,19 @@
 <?php
 
 define('DS', DIRECTORY_SEPARATOR);
-define ('DOCROOT_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
-define ('APP_DIR', DOCROOT_DIR.DS.'Q'.DS.'app');
+define ('APP_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
+define ('APP_WEB_DIR', realpath(dirname(dirname(APP_DIR))));
 $paths_filename = realpath(implode(DS, array(
-	APP_DIR, 'local', 'paths.json'
+	APP_DIR, 'local', 'paths.json.php'
 )));
 if (!file_exists($paths_filename)) {
-	if (!file_exists(APP_DIR . '/local.sample/paths.json')) {
+	if (!file_exists(APP_DIR . '/local.sample/paths.json.php')) {
 		die('[ERROR] Could not locate either local or local.sample folders. Please choose an intact template before running this script.' . PHP_EOL);
 	}
 	Q_configure_copy(APP_DIR.DS.'local.sample', APP_DIR.DS.'local');
 }
 
-define("CONFIGURE_ORIGINAL_APP_NAME", "MyApp");
+define("CONFIGURE_ORIGINAL_APP_NAME", "CoolApp");
 
 include dirname(__FILE__).'/../Q.inc.php';
 include Q_SCRIPTS_DIR.DS.'configure.php';

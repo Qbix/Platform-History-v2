@@ -4745,7 +4745,7 @@
 	}, 'Users');
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog, options) {
-		if (!options.apply) {
+		if (!options || !options.apply) {
 			return;
 		}
 		var $dialog = $(dialog);

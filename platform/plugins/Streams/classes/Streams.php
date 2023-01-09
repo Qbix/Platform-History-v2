@@ -102,7 +102,7 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can vote for a relation message posted to the stream.
-	 * @property WRITE_LEVEL['vote']
+	 * @property $WRITE_LEVEL['vote']
 	 * @type integer
 	 * @default 13
 	 * @final
@@ -129,7 +129,7 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can update properties of relations directly
+	 * Can update properties of relations directly, and unrelate
 	 * @property $WRITE_LEVEL['relations']
 	 * @type integer
 	 * @default 25
@@ -497,7 +497,7 @@ abstract class Streams extends Base_Streams
 			 * @param {string} name
 			 * @param {array} criteria
 			 * @param {string} fields
-			 * @param {array} options
+			 * @param {array} options also contains "duringInternal", may want to return early in that case
 			 */
 			Q::event("Streams/fetch/$type", $params, 'after', false, $streams);
 		}
@@ -686,7 +686,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $streams
 	 *  An array of streams, obtained for example by Streams::fetch
 	 * @param {boolean} [$recalculate=false]
-	 *  Pass true here to force recalculating access to streams for which access was already calculated
+	 *  Pass true here to force recalculating access to streams for which access was already calculated.
 	 * @param {string} [$actualPublisherId=null]
 	 *  For internal use only. Used by Streams::canCreateStreamType function.
 	 * @param {string} [$inheritAccess=true]
@@ -881,7 +881,9 @@ abstract class Streams extends Base_Streams
 			// group the fetches by publisher and execute them in batches
 			foreach ($toFetch as $publisherId => $streamNames) {
 				$streamNames = array_unique($streamNames);
-				Streams::fetch($asUserId, $publisherId, $streamNames);
+				Streams::fetch($asUserId, $publisherId, $streamNames, '*', array(
+					'duringInternal' => 'calculateAccess'
+				));
 			}
 			// this will now use the cached results of the above calls to Streams::fetch
 			foreach ($streams4 as $s) {
@@ -1108,14 +1110,17 @@ abstract class Streams extends Base_Streams
 				$relate['publisherId'],
 				$relate['streamName']
 			);
-			$inheritAccess = ($rs and $rs->inheritAccess)
-				? Q::json_decode($rs->inheritAccess)
-				: array();
-			$newInheritAccess = array($relate['publisherId'], $relate['streamName']);
-			if (!in_array($newInheritAccess, $inheritAccess)) {
-				$inheritAccess[] = $newInheritAccess;
-			}
-			$stream->inheritAccess = Q::json_encode($inheritAccess);
+			// $inheritAccess = ($rs and $rs->inheritAccess)
+			// 	? Q::json_decode($rs->inheritAccess)
+			// 	: array();
+			// $newInheritAccess = array($relate['publisherId'], $relate['streamName']);
+			// if (!in_array($newInheritAccess, $inheritAccess)) {
+			// 	$inheritAccess[] = $newInheritAccess;
+			// }
+			// $stream->inheritAccess = Q::json_encode($inheritAccess);
+			$stream->inheritAccess = Q::json_encode(array(
+				array($relate['publisherId'], $relate['streamName'])
+			));
 		}
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
@@ -2213,6 +2218,12 @@ abstract class Streams extends Base_Streams
 			$fromStreamName = reset($fromStreamName);
 		}
 
+		if (empty($options['skipAccess'])) {
+			if (!$category->testWriteLevel('relations')) {
+				throw new Users_Exception_NotAuthorized();
+			}
+		}
+
 		// Now, clean up the relation.
 		/**
 		 * @event Streams/unrelateTo/$streamType {before}
@@ -2377,6 +2388,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
 	 * @param {callable} [$options.filter] Optional function to call to filter the relations. It should return a filtered array of relations.
+	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just fetches the relations and related streams
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
@@ -2412,7 +2424,8 @@ abstract class Streams extends Base_Streams
 		$streams = array();
 		foreach($rows as $n => $row) {
 			if (!$row) continue;
-			if (!$row->testReadLevel('relations')) {
+			if (empty($options['skipAccess'])
+			and !$row->testReadLevel('relations')) {
 				throw new Users_Exception_NotAuthorized();
 			}
 			if (!$row->testReadLevel('participants')) {
@@ -2594,7 +2607,8 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Check if category allow new relations
+	 * Check if the maximum number of relations of a given type has been exceeded,
+	 * if the "Streams/maxRelations" attribute has been set.
 	 * @method checkAvailableRelations
 	 * @param {string} $asUserId The id of the user on whose behalf the stream requested
 	 * @param {string} $publisherId The publisher of the stream
@@ -4154,8 +4168,14 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
-		if (!$stream->beforeClose()) {
-			return null;
+		/**
+		 * @event Streams/close/$streamType {before}
+		 * @param {Streams_Stream} stream
+		 * @param {string} asUserId
+		 * @return {false} To cancel further processing
+		 */
+		if (Q::event("Streams/close/{$stream->type}", compact('stream'), 'before') === false) {
+			return false;
 		}
 
 		// Clean up relations from other streams to this category
@@ -4222,6 +4242,13 @@ abstract class Streams extends Base_Streams
 		} catch (Exception $e) {
 			throw $e;
 		}
+		/**
+		 * @event Streams/close/$streamType {after}
+		 * @param {Streams_Stream} stream
+		 * @param {string} asUserId
+		 * @return {false} To cancel further processing
+		 */
+		Q::event("Streams/close/{$stream->type}", compact('stream'), 'after');
 		return $result;
 	}
 

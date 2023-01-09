@@ -38,7 +38,7 @@ var Streams = Q.Streams;
  *         @param {String} [options.templates.contents.fields.tag="span"]
  * @param {Object} [options.inplaces] Additional fields to pass to the child Streams/inplace tools, if any
  *   @param {Q.Event} [options.onRefresh]  An event that occurs when the avatar is refreshed
- *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
+ *   @param {Q.Event} [options.onRefresh] Event occurs when tool element has rendered with content
  *   @param {Q.Event} [options.onUpdate]  An event that occurs when the icon is updated via this tool
  *   @param {Q.Event} [options.onImagepicker]  An event that occurs when the imagepicker is activated
  *   @param {Q.Event} [options.onMissing]  An event that occurs if the avatar info turns out to be missing
@@ -133,7 +133,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	onRefresh: new Q.Event(),
 	onUpdate: new Q.Event(),
 	onImagepicker: new Q.Event(),
-	onRender: new Q.Event(),
+	onRefresh: new Q.Event(),
 	onMissing: new Q.Event(function () {
 		this.element.style.display = 'none';
 	}, 'Users/avatar')
@@ -165,7 +165,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			var contents = state.contents ? params.contents[0] : '';
 			tool.element.innerHTML = icon + contents;
 			setTimeout(function () {
-				Q.handle(state.onRender, tool);
+				Q.handle(state.onRefresh, tool);
 			}, 0);
 			_present();
 		});
@@ -252,37 +252,41 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 	
 		function _present() {
-			Q.handle(state.onRefresh, tool, []);
-			if (!state.editable) return;
-			if (state.editable === true) {
-				state.editable = ['icon', 'name'];
-			}
-			if (state.editable.indexOf('name') >= 0) {
-				var zIndex = 5;
-				Q.each(['firstName', 'lastName', 'username'], function (k, vName) {
-					var f = tool.getElementsByClassName('Streams_'+vName)[0];
-					if (!f || f.getElementsByClassName('Streams_inplace_tool').length) {
-						return;
-					}
-					var opt = Q.extend({
-						publisherId: state.userId,
-						streamName: 'Streams/user/'+vName,
-						inplaceType: 'text',
-						inplace: {
-							bringToFront: f,
-							placeholder: 'Your '+vName.substr(0, vName.length-4)+' name',
-							staticHtml: f.innerHTML
+			Q.Text.get('Streams/content', function (err, text) {
+				Q.handle(state.onRefresh, tool, []);
+				if (!state.editable) return;
+				if (state.editable === true) {
+					state.editable = ['icon', 'name'];
+				}
+				if (state.editable.indexOf('name') >= 0) {
+					var zIndex = 5;
+					Q.each(['firstName', 'lastName', 'username'], function (k, vName) {
+						var f = tool.element.getElementsByClassName('Streams_'+vName)[0];
+						if (!f || f.getElementsByClassName('Streams_inplace_tool').length) {
+							return;
 						}
-					}, state.inplaces);
-					Q.Tool.setUpElement(
-						f, 'Streams/inplace', opt,
-						'Streams_inplace-'+vName, tool.prefix
-					);
-					f.style.zIndex = --zIndex;
-					Q.activate(f);
-				});
-			}
-			if (state.editable.indexOf('icon') >= 0 && Users.loggedInUser) {
+						var opt = Q.extend({
+							publisherId: state.userId,
+							streamName: 'Streams/user/'+vName,
+							inplaceType: 'text',
+							inplace: {
+								bringToFront: f,
+								placeholder: text.avatar[vName],
+								staticHtml: f.innerHTML,
+								capitalize: (vName === 'firstName' || vName === 'lastName')
+							}
+						}, state.inplaces);
+						Q.Tool.setUpElement(
+							f, 'Streams/inplace', opt,
+							'Streams_inplace-'+vName, tool.prefix
+						);
+						f.style.zIndex = --zIndex;
+						Q.activate(f);
+					});
+				}
+			});
+			if (state.editable && state.editable.indexOf('icon') >= 0
+			&& Users.loggedInUser) {
 				var $img = tool.$('.Users_avatar_icon').addClass('Streams_editable');
 				var saveSizeName = {};
 				Q.each(Users.icon.sizes, function (k, v) {
