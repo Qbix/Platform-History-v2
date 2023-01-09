@@ -56,6 +56,8 @@
                 var tool = this;
                 var webrtcSignalingLib = tool.state.webrtcSignalingLib;
                 webrtcSignalingLib.event.on('participantConnected', function (participant) {
+                    tool.log('controls: participantConnected');
+
                     setRealName(participant, function (name) {
                         tool.addItem(participant);
                     });
@@ -77,6 +79,12 @@
                 });
                 webrtcSignalingLib.event.on('micDisabled', function () {
                     tool.updateItem(webrtcSignalingLib.localParticipant());
+                });
+                webrtcSignalingLib.event.on('audioMuted', function (participant) {;
+                    tool.updateItem(participant);
+                });
+                webrtcSignalingLib.event.on('audioUnmuted', function (participant) {
+                    tool.updateItem(participant);
                 });
                 webrtcSignalingLib.event.on('liveStreamingStarted', function (e) {
                     tool.showLiveIndicator(e.participant, e.platform.content);
@@ -154,7 +162,7 @@
                 roomParticipants = tool.state.webrtcSignalingLib.roomParticipants();
                 for (var i in roomParticipants) {
                     if (roomParticipants[i].isLocal) continue;
-                    addItem(roomParticipants[i]);
+                    tool.addItem(roomParticipants[i]);
                 }
 
                 tool.element.appendChild(tool.participantListEl);
@@ -164,10 +172,10 @@
                 if (tool.participantListEl) tool.participantListEl.innerHTML = '';
                 tool.participantsList = [];
 
-                addItem(tool.state.webrtcSignalingLib.localParticipant());
+                tool.addItem(tool.state.webrtcSignalingLib.localParticipant());
                 for (var i in roomParticipants) {
                     if (roomParticipants[i].isLocal) continue;
-                    addItem(roomParticipants[i]);
+                    tool.addItem(roomParticipants[i]);
                 }
             },
             /**
@@ -184,30 +192,10 @@
                     this.videoBtnsEl = null;
                     this.liveStatusEl = null;
                     this.participant = null;
-                    this.isAudioMuted = null;
                     this.isVideoMuted = null;
                     this.screenSharingIsMuted = null;
                     this.manuallyToggled = false;
-                    this.audioToggledManually = false;
                     this.isActive = true;
-                    this.toggleAudio = function (manually) {
-                        var participant = this.participant;
-                        var enabledAudioTracks = participant.tracks.filter(function (t) {
-                            return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && !t.mediaStreamTrack.muted;
-                        }).length;
-                        //if(enabledAudioTracks == 0) return;
-                        if (this.participant.isLocal) {
-                            this.toggleLocalAudio();
-                            return;
-                        }
-                        if (this.isAudioMuted == false || this.isAudioMuted == null) {
-                            this.muteAudio();
-                            this.audioToggledManually = manually;
-                        } else {
-                            this.unmuteAudio();
-                            this.audioToggledManually = false;
-                        }
-                    };
                     this.toggleVideo = function () {
                         if (this.participant.isLocal) {
                             this.toggleLocalVideo();
@@ -276,20 +264,32 @@
                         this.screenSharingBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffScreenSharing", tool.text);
                         this.screenSharingIsMuted = false;
                     };
+                    this.toggleAudio = function (manually) {
+                        if (this.participant.isLocal) {
+                            this.toggleLocalAudio();
+                            return;
+                        }
+                        if (!this.participant.audioIsMuted) {
+                            this.muteAudio();
+                        } else {
+                            this.unmuteAudio();
+                        }
+                    };
                     this.muteAudio = function () {
-                        if (this.isAudioMuted == true) return;
                         this.participant.muteAudio();
-                        this.audioBtnEl.innerHTML = _participantsToolIcons.disabledSpeaker;
-                        this.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.text);
-                        this.isAudioMuted = true;
 
                     };
                     this.unmuteAudio = function () {
-                        if (this.isAudioMuted == false) return;
                         this.participant.unmuteAudio();
-                        this.audioBtnEl.innerHTML = _participantsToolIcons.loudSpeaker;
-                        this.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text);
-                        this.isAudioMuted = false;
+                    };
+                    this.toggleAudioIcon = function (audioIsActive) {
+                        if (audioIsActive === true) {
+                            this.audioBtnEl.innerHTML = _participantsToolIcons.loudSpeaker;
+                            this.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text);
+                        } else if (audioIsActive === false) {
+                            this.audioBtnEl.innerHTML = _participantsToolIcons.disabledSpeaker;
+                            this.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.text);
+                        }
                     };
                     this.remove = function () {
                         if (this.listElement.parentNode != null) this.listElement.parentNode.removeChild(this.listElement);
@@ -652,6 +652,12 @@
                             item.audioBtnEl.innerHTML = _controlsToolIcons.microphoneTransparent;
                             item.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text);
                         }
+                    } else {
+                        if (!participant.audioIsMuted) {
+                            item.toggleAudioIcon(true);
+                        } else {
+                            item.toggleAudioIcon(false);
+                        }
                     }
 
                     if (activeScreenSharingScreens == 0) {
@@ -701,10 +707,8 @@
                     if (listItem.participant.isLocal) {
                         if (tool.state.webrtcSignalingLib.localMediaControls.micIsEnabled()) {
                             listItem.audioBtnEl.innerHTML = _controlsToolIcons.microphoneTransparent;
-                            listItem.isAudioMuted = false;
                         } else {
                             listItem.audioBtnEl.innerHTML = _participantsToolIcons.locDisabledMic;
-                            listItem.isAudioMuted = true;
                         }
                         break;
                     }

@@ -1,6 +1,10 @@
 .live-editor-hidden {
     display: none !important;
 }
+.live-editor-inactive {
+    opacity: 0.5;
+    pointer-events: none;
+}
 .live-editor-dialog-bg {
     position: fixed;
     top: 0;
@@ -196,7 +200,6 @@
     -ms-user-select: none;
     user-select: none;
 }
-.live-editor-dialog-body .live-editor-popup-scenes,
 .live-editor-dialog-body .live-editor-popup-sources,
 .live-editor-dialog-body .live-editor-popup-options {
     display: flex;
@@ -204,13 +207,14 @@
     border: 1px solid #383838;
     background: #525252;
     position: relative;
-    margin-top: 15px;
+}
+.live-editor-dialog-body .live-editor-popup-scenes {
+    padding:10px;
 }
 .live-editor-dialog-body .live-editor-popup-scenes {
     margin-top: 0;
 }
 .live-editor-dialog-body .live-editor-popup-options {
-    width: 30%;
     border: 1px solid #383838;
 }
 .live-editor-dialog-body .live-editor-popup-options .live-editor-popup-options-dialog {
@@ -222,6 +226,26 @@
     display: flex;
     flex-direction: column;
     height: 100%; 
+}
+.live-editor-dialog-body .live-editor-popup-sources-layouts-con {
+    padding: 10px;
+}
+
+.live-editor-dialog-body .live-editor-custom-select-selected {
+    padding-left:45px;
+}
+.live-editor-dialog-body .live-editor-custom-select-selected:before {
+    content: ' ';
+    display: block;
+    background-image: url('data:image/svg+xml;utf8,<svg height="512" viewBox="0 0 32 32" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Layer_2" data-name="Layer 2"><path  fill="%23ffffff" d="m27 2h-22a3 3 0 0 0 -3 3v22a3 3 0 0 0 3 3h22a3 3 0 0 0 3-3v-22a3 3 0 0 0 -3-3zm1 3v6h-11v-7h10a1 1 0 0 1 1 1zm-23-1h10v15h-11v-14a1 1 0 0 1 1-1zm-1 23v-6h11v7h-10a1 1 0 0 1 -1-1zm23 1h-10v-15h11v14a1 1 0 0 1 -1 1z"/></g></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 25px;
+    width:25px;
+    height: 25px;
+    position: absolute;
+    top: 8px;
+    left: 10px;
 }
 
 .live-editor-popup-streaming-box .live-editor-popup-options-title-inner {
@@ -249,10 +273,8 @@
     flex-grow: 1;
     overflow-y: scroll;
 }
-.live-editor-popup-scenes-body, .live-editor-popup-sources-body, .live-editor-popup-options-body{
-    border-top: 1px solid #383838;
-    flex-grow: 1;
-    overflow-y: scroll;
+.live-editor-popup-scenes-body {
+    overflow: hidden;
 }
 .live-editor-popup-options-params-body {
     padding:10px;
@@ -538,13 +560,15 @@
 .live-editor-popup-sources-body {
     display: flex;
     flex-direction: column;
+    border-top: none;
+    overflow-y: auto;
 }
 .live-editor-popup-sources-body .live-editor-popup-sources-visual-body,
 .live-editor-popup-sources-body .live-editor-popup-sources-audio-body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-
+    position: relative;
     height:100%;
     padding-bottom:42px;
 }
@@ -884,7 +908,23 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
 /*end: custom select*/
-/*start: addittional specific css for custom select that renders scenes list*/
+/*start: additional specific css for custom select that renders scenes list*/
+.live-editor-popup-scenes .live-editor-custom-select-selected {
+    padding-left: 45px;
+}
+.live-editor-popup-scenes .live-editor-custom-select-selected::before{
+    content: ' ';
+    display: block;
+    background-image: url('data:image/svg+xml;utf8,<svg height="447.82947" viewBox="0 0 27.908226 27.989342" width="446.53162" version="1.1" id="svg283" sodipodi:docname="layer (1).svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs287" /> <sodipodi:namedview id="namedview285" pagecolor="%23ffffff" bordercolor="%23000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="%23d1d1d1" showgrid="false" inkscape:zoom="1.6601562" inkscape:cx="222.26824" inkscape:cy="224.07529" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg283" /> <g id="Layer_5" data-name="Layer 5" transform="translate(-2.0917734,-2.0106581)"> <path fill="%23ffffff" d="M 27,10 H 23 L 21.6,4.3 A 3,3 0 0 0 18,2.09 L 4.36,5.41 A 3,3 0 0 0 2.17,9 l 3.32,13.6 a 2.94,2.94 0 0 0 1.36,1.85 2.91,2.91 0 0 0 1.53,0.43 3,3 0 0 0 0.73,-0.09 L 10,24.57 V 27 a 3,3 0 0 0 3,3 h 14 a 3,3 0 0 0 3,-3 V 13 A 3,3 0 0 0 27,10 Z M 8.63,22.89 A 1,1 0 0 1 7.88,22.78 1,1 0 0 1 7.43,22.16 L 4.11,8.56 A 1,1 0 0 1 4.22,7.8 1,1 0 0 1 4.84,7.35 L 18.43,4 a 1,1 0 0 1 1.22,0.74 L 20.93,10 H 13 a 3,3 0 0 0 -3,3 v 9.55 z M 28,27 a 1,1 0 0 1 -1,1 H 13 A 1,1 0 0 1 12,27 V 13 a 1,1 0 0 1 1,-1 h 14 a 1,1 0 0 1 1,1 z" id="path280" /> </g> </svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 25px;
+    width:25px;
+    height: 25px;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option {
     display: flex;
     justify-content: space-between;
@@ -978,6 +1018,11 @@
 .live-editor-popup-sources-control .live-editor-popup-sources-control-btn {
     margin-right: 10px;
     cursor: pointer;
+}
+.live-editor-popup-scenes-control .live-editor-popup-scenes-control-btn svg,
+.live-editor-popup-sources-control .live-editor-popup-sources-control-btn svg{
+    width: 24px;
+    height: 24px;
 }
 .live-editor-popup-scenes-control .live-editor-popup-scenes-control-btn svg path,
 .live-editor-popup-sources-control .live-editor-popup-sources-control-btn svg path{
@@ -1593,3 +1638,184 @@
       background: #343434;
   }
   /*end: context menu*/
+
+  /*start:list of participants as sources*/
+  .live-editor-participants-list-title-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .live-editor-participants-list-title-con .live-editor-checkbox-slider {
+    width: 54px;
+    height: 28px;
+    margin-right: 5px;
+  }
+  .live-editor-participants-list-title-con .live-editor-checkbox-slider .live-editor-toggle-slider:before {
+    height: 22px;
+    width: 22px;
+    bottom: 3px;
+  }
+  .live-editor-participants-list-title-con .live-editor-checkbox-slider input:checked + .live-editor-toggle-slider {
+    background-color: #2a2a2a;
+  }
+  .live-editor-participants-list-title-con .live-editor-checkbox-slider  input:focus + .live-editor-toggle-slider {
+    box-shadow: 0 0 1px #2a2a2a;
+  }
+  .live-editor-participants-list-title {
+    padding: 10px;
+  }
+  .live-editor-participants-list {
+    border-top: 1px solid #454545;
+    border-bottom: 1px solid #454545;
+  }
+  .live-editor-participants-list .live-editor-participants-item-con {
+    display: block;
+    padding: 4px 10px;
+    border-top: 1px solid #454545;
+  }
+  .live-editor-participants-list .live-editor-participants-item-con:first-child {
+    border-top: none;
+  }
+  .live-editor-participants-list .live-editor-participants-item-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+  .live-editor-participants-list .live-editor-participants-item-avatar {
+    display: flex;
+  }
+  .live-editor-participants-list .live-editor-participants-item-avatar .live-editor-participants-item-avatar-tool img{
+    max-width: 40px;
+    max-height: 40px;
+    margin-right: 5px;
+    border: none;
+  }
+  .live-editor-participants-list .live-editor-participants-item-avatar .live-editor-participants-item-avatar-texttool {
+    display: flex;
+    align-items: center;
+  }
+  .live-editor-participants-list .live-editor-participants-item-controls {
+    display: flex;
+  }
+  .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-btn {
+    margin-left:10px;
+    display: flex;
+    align-items: center;
+  }
+  .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-btn:first-child {
+    margin-left:0;
+  }
+  .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon {
+    display: flex;
+    align-items: center;
+  }
+  .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon svg rect,
+  .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon svg path {
+    fill: #ffffff;
+  }
+  .live-editor-participants-list .live-editor-participants-item-sources {
+    display: block;
+    padding-left: 15px;
+    padding-top: 10px;
+  }
+  .live-editor-participants-list .live-editor-participants-item-sources:empty {
+    display: none;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-top: 1px solid #454545;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-desc {
+    display: flex;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-icon svg path{
+    fill:#ffffff;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-icon {
+    display: flex;
+    align-items: center;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-text {
+    margin-left:5px;
+    display: flex;
+    align-items: center;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg {
+    width: 30px;
+    height: 30px;
+  }
+  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg path{
+   fill: #ffffff;
+  }
+  /*end:list of participants as sources*/
+
+  /*start: checkbox slider/switcher*/
+  .live-editor-checkbox-slider {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .live-editor-checkbox-slider input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .live-editor-checkbox-slider .live-editor-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .live-editor-checkbox-slider .live-editor-toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .live-editor-checkbox-slider input:checked + .live-editor-toggle-slider {
+    background-color: #2196F3;
+  }
+  
+  .live-editor-checkbox-slider  input:focus + .live-editor-toggle-slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  .live-editor-checkbox-slider input:checked + .live-editor-toggle-slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .live-editor-checkbox-slider .live-editor-toggle-slider {
+    border-radius: 34px;
+  }
+  
+  .live-editor-checkbox-slider .live-editor-toggle-slider:before {
+    border-radius: 50%;
+  }
+  /*end: checkbox slider/switcher*/
