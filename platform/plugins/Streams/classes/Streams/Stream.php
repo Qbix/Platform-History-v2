@@ -682,20 +682,6 @@ class Streams_Stream extends Base_Streams_Stream
 		return $result;
 	}
 	
-	function beforeClose()
-	{
-		/**
-		 * @event Streams/close/$streamType {before}
-		 * @param {Streams_Stream} stream
-		 * @param {string} asUserId
-		 * @return {false} To cancel further processing
-		 */
-		if (Q::event("Streams/close/{$this->type}", array('stream' => $this), 'before') === false) {
-			return false;
-		}
-		return true;
-	}
-	
 	/**
 	 * Get the max size of a field in the stream or extended row
 	 * @param {string} $field The name of the field

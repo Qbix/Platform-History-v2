@@ -42,7 +42,7 @@
 			"Streams/message/Streams/changed": ["Streams/after/Streams_message_Streams_changed"],
 			"Streams/relateTo/Streams/chat": ["Streams/after/Streams_relateTo_Streams_chat"],
 			"Streams/relateTo/Streams/question": ["Streams/after/Streams_relateTo_Streams_question"],
-			"Streams/Stream/Streams/updateAvatars": ["Streams/after/Streams_updateAvatars"]
+			"Streams/updateAvatars": ["Streams/after/Streams_updateAvatars"]
 		},
 		"routes@start": {
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},

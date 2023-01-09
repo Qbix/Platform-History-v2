@@ -4161,8 +4161,14 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
-		if (!$stream->beforeClose()) {
-			return null;
+		/**
+		 * @event Streams/close/$streamType {before}
+		 * @param {Streams_Stream} stream
+		 * @param {string} asUserId
+		 * @return {false} To cancel further processing
+		 */
+		if (Q::event("Streams/close/{$stream->type}", compact('stream'), 'before') === false) {
+			return false;
 		}
 
 		// Clean up relations from other streams to this category
@@ -4229,6 +4235,13 @@ abstract class Streams extends Base_Streams
 		} catch (Exception $e) {
 			throw $e;
 		}
+		/**
+		 * @event Streams/close/$streamType {after}
+		 * @param {Streams_Stream} stream
+		 * @param {string} asUserId
+		 * @return {false} To cancel further processing
+		 */
+		Q::event("Streams/close/{$stream->type}", compact('stream'), 'after');
 		return $result;
 	}
 
