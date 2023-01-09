@@ -325,14 +325,8 @@ function _Streams_participants(options) {
 		}
 
 		// adjust Streams_participants_container on tool width changed
-		Q.onLayout(tool.element).set(function () {
-			var w = $te.width();
-			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
-			if (state.showSummary) {
-				w = w - tool.$summary.outerWidth(true);
-			}
+		Q.onLayout(tool.$pc[0]).set(function () {
 			if (state.showControls) {
-				w = w - tool.$controls.outerWidth(true);
 				var $pcw = tool.$pc.innerWidth();
 				var avatarsWidth = 0;
 				$(".Streams_participants_invite", tool.$pc).add(".Users_avatar_tool", tool.$avatars).each(function () {
@@ -349,8 +343,6 @@ function _Streams_participants(options) {
 				}
 				state.overflowed = overflowed;
 			}
-
-			tool.$pc.width(w - pm);
 		}, tool);
 	},
 	/**
@@ -390,6 +382,7 @@ function _Streams_participants(options) {
 
 		$element[prepend ? 'prependTo' : 'appendTo']($e).activate(function () {
 			tool.orderAvatars();
+			Q.layout(tool.$pc[0], true);
 		});
 	},
 	/**
@@ -403,6 +396,7 @@ function _Streams_participants(options) {
 		if ($element) {
 			Q.removeElement($element[0], true);
 			delete tool.$elements[userId];
+			Q.layout(tool.$pc[0], true);
 		}
 	},
 	/**

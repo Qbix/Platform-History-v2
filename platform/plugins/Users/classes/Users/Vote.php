@@ -22,6 +22,7 @@ class Users_Vote extends Base_Users_Vote
 	{
 		parent::setUp();
 	}
+
 	/**
 	 * Calculates total votes
 	 * @method beforeSave
@@ -204,6 +205,66 @@ class Users_Vote extends Base_Users_Vote
 			}
 		}
 	}
+
+	/**
+	 * Saves votes by a user
+	 * @static
+	 * @param {array} $ids an array of numbers or strings,
+	 * @return {array|false} Returns the array of Users_Vote objects saved,
+	 *   or false if user was not logged in
+	 */
+	static function vote(string $type, array $ids, $user = null)
+	{
+		if (!$user) {
+			$user = Users::loggedInUser(false, false);
+			if (!$user) {
+				return false;
+			}
+		}
+		$votes = array();
+		foreach ($ids as $id) {
+			if (!is_string($id) && !is_numeric($id)) {
+				continue;
+			}
+			$vote = new Users_Vote();
+			$vote->userId = $user->id;
+			$vote->forType = $type;
+			$vote->forId = (string)$id;
+			$vote->save();
+		}
+		return $votes;
+	}
+
+	/**
+	 * Removes votes the user previously saved
+	 * @static
+	 * @param {array} $ids an array of numbers or strings,
+	 *   typically derived from some attribute of the stream
+	 * @return {array|false} Returns the array of Users_Vote objects removed,
+	 *   or false if user was not logged in
+	 */
+	static function unvote(string $type, array $ids, $user = null)
+	{
+		if (!$user) {
+			$user = Users::loggedInUser(false, false);
+			if (!$user) {
+				return false;
+			}
+		}
+		$votes = array();
+		foreach ($ids as $id) {
+			if (!is_string($id) && !is_numeric($id)) {
+				continue;
+			}
+			$vote = new Users_Vote();
+			$vote->userId = $user->id;
+			$vote->forType = $type;
+			$vote->forId = (string)$id;
+			$vote->remove();
+		}
+		return $votes;
+	}
+
 
 	/* * * */
 	/**

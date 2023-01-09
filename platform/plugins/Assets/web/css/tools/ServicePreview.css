@@ -19,21 +19,20 @@
 .Assets_service_composer .Q_dialog_content select[multiple] {
 	height: 80px;
 }
-.Assets_service_composer .Q_dialog_content input[name=price] {
-	padding-left: 20px;
-}
 .Assets_service_composer .Q_dialog_content label[for=price] {
 	position: relative;
 }
-.Assets_service_composer .Q_dialog_content label[for=price]:after {
+.Assets_service_composer .Q_dialog_content label[for=price] .Assets_service_composer_currency {
 	display: block;
-	width: 20px;
-	height: 20px;
 	position: absolute;
-	content: '$';
-	left: 5px;
-	top: 10px;
-	line-height: 20px;
+	height: 40px;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	line-height: 40px;
+	padding: 0 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 .Assets_service_composer .Q_dialog_content textarea {
 	height: 80px;
