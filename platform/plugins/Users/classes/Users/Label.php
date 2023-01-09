@@ -262,7 +262,10 @@ class Users_Label extends Base_Users_Label
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
 		$result = array(
 			"manageIcon" => false,
-			"manageContacts" => Users::canManageContacts($userId, $communityId, Q::app()."/")
+			"manageContacts" => Users::canManageContacts($userId, $communityId, Q::app()."/"),
+			"add" => array(),
+			"remove" => array(),
+			"see" => array()
 		);
 		foreach ($userCommunityRoles as $role => $row) {
 			$result["roles"][] = $role;
