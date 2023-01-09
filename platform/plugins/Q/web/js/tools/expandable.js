@@ -126,20 +126,25 @@ Q.Tool.define('Q/expandable', function (options) {
 		Q.Animation.play(function (x, y) {
 			var $scrollable = (o.scrollContainer instanceof Element)
 				? $(o.scrollContainer) : tool.scrollable();
-			var offset = $scrollable
+			var offset = $scrollable.length
 				? $scrollable.offset()
 				: {left: 0, top: 0};
-			var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
+			var $element = o.scrollToElement
+				? $(o.scrollToElement)
+				: $h2;
 			var t1 = $element.offset().top - offset.top;
-			var spaceAbove;
 			var defaultSpaceAbove = $element.height() / 2;
 			var moreSpaceAbove = 0;
 			var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
-			var scrollableRect = $scrollable[0].getBoundingClientRect();
 			if ($ts.length && $ts.css('position') === 'fixed') {
 				moreSpaceAbove = $ts.outerHeight();
 			} else {
 				$('body').children().each(function () {
+					if (!$scrollable.length) {
+						return;
+					}
+
+					var scrollableRect = $scrollable[0].getBoundingClientRect();
 					var $this = $(this);
 					var fixedRect = this.getBoundingClientRect();
 					var midpoint = (scrollableRect.left + scrollableRect.right) / 2;
@@ -159,12 +164,12 @@ Q.Tool.define('Q/expandable', function (options) {
 			var spaceAbove = (state.spaceAbove == null)
 				? defaultSpaceAbove
 				: state.spaceAbove;
-			var isBody = $scrollable &&
+			var isBody = $scrollable.length &&
 				['BODY', 'HTML'].indexOf($scrollable[0].tagName.toUpperCase()) >= 0;
 			if (isBody) {
 				t1 -= Q.Pointer.scrollTop();
 			}
-			if ($scrollable) {
+			if ($scrollable.length) {
 				var t = $element.offset().top - offset.top;
 				if (isBody) {
 					t -= Q.Pointer.scrollTop();
