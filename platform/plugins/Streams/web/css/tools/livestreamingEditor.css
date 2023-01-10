@@ -60,7 +60,8 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-.live-editor-dialog-box.live-editor-dialog_advanced_streaming *{
+.live-editor-dialog-box.live-editor-dialog_advanced_streaming *,
+.live-editor-dialog-window *{
     user-drag: none;
     -webkit-user-drag: none;
     user-select: none;
@@ -166,14 +167,17 @@
 }
 
 /*Advanced live streaming popup*/
-.live-editor-dialog-body div::-webkit-scrollbar {
+.live-editor-dialog-body div::-webkit-scrollbar, 
+.live-editor-dialog-window div::-webkit-scrollbar {
     width:5px;
 }
-.live-editor-dialog-body div::-webkit-scrollbar-track {
+.live-editor-dialog-body div::-webkit-scrollbar-track,
+.live-editor-dialog-window div::-webkit-scrollbar-track {
     -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
     border-radius:5px;
 }
-.live-editor-dialog-body div::-webkit-scrollbar-thumb {
+.live-editor-dialog-body div::-webkit-scrollbar-thumb,
+.live-editor-dialog-window div::-webkit-scrollbar-thumb {
     border-radius:5px;
     -webkit-box-shadow: inset 0 0 6px #a7a7a7;
 }
@@ -269,9 +273,8 @@
     flex: 1;
 }
 .live-editor-popup-scenes-body, .live-editor-popup-sources-body, .live-editor-popup-options-body{
-    border-top: 1px solid #383838;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .live-editor-popup-scenes-body {
     overflow: hidden;
@@ -850,7 +853,41 @@
     border-bottom: 20px solid transparent;
     border-left: 20px solid white;
 }
-/*popup dialog: end*/
+/*end: popup dialog*/
+
+/*start: simple dialog*/
+.live-editor-dialog-window {
+    z-index: 99999999;
+    background-color: #424242;
+    border-radius: 10px 10px 0 0;
+    overflow-y: hidden;
+    color: #ffffff;
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 20%);
+}
+.live-editor-dialog-window.live-editor-dialog-window-y-scroll {
+    overflow-y: scroll;
+}
+.live-editor-dialog-window .live-editor-dialog-window-header {
+    margin: 0;
+    color: white;
+    font-size: 18px;
+    border-bottom: 1px solid #404040;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    background: #525252;
+    padding: 8px 10px;
+}
+.live-editor-dialog-window .live-editor-close-sign {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.live-editor-dialog-window .live-editor-dialog-window-body {
+    padding: 5px;
+}
+/*end: simple dialog*/
 
 /*start: custom select*/
 .live-editor-custom-select {

@@ -1127,6 +1127,7 @@
                     var _sourcesListEl = null;
                     var _visualSourcesEl = null;
                     var _visualSourcesListEl = null;
+                    var _sourceControlButtons = [];
                     let _addVisualSourceDropUpMenuEl = null;
                     var _audioSourcesListEl = null;
                     var _globalMicIconEl = null;
@@ -1374,7 +1375,7 @@
                             console.log('sourceInstance.sourceInstance', sourceInstance.sourceInstance.sourceType);
                             selectSource(sourceInstance);
 
-                            optionsColumn.update();
+                            //optionsColumn.update();
                         })
 
                         this.itemEl.addEventListener('contextmenu', function (e) {
@@ -1510,7 +1511,7 @@
                             console.log('sourceInstance.sourceInstance', sourceInstance.sourceInstance.sourceType);
                             selectSource(sourceInstance);
 
-                            optionsColumn.update();
+                            //optionsColumn.update();
                         })
                         itemElAudioActiveness.addEventListener('click', this.toggleAudio)
 
@@ -1565,9 +1566,7 @@
                         _allParticipantsListInstance.listItemEl = participantTitleCon;
 
                         participantTitleCon.addEventListener('click', function(){
-                            if(_allParticipantsListInstance.sourceInstance) {
-                                selectSource(_allParticipantsListInstance);
-                            }
+                            selectSource(_allParticipantsListInstance);
                         });
 
                         let participantTitle = document.createElement('DIV');
@@ -1633,20 +1632,22 @@
 
                         function lockOrUnlockParticipantsGroup() {
                             if(!_allParticipantsListInstance.sourceInstance || !_allParticipantsListInstance.sourceInstance.active) {
-                                if(!_participantsListEl.classList.contains('live-editor-inactive')) {
+                                /*if(!_participantsListEl.classList.contains('live-editor-inactive')) {
                                     _participantsListEl.classList.add('live-editor-inactive');
-                                }
+                                }*/
                                 if(!_layoutsListDropDownCon.classList.contains('live-editor-inactive')) {
                                     _layoutsListDropDownCon.classList.add('live-editor-inactive');
                                 }
                             } else {
-                                if(_participantsListEl.classList.contains('live-editor-inactive')) {
+                                /*if(_participantsListEl.classList.contains('live-editor-inactive')) {
                                     _participantsListEl.classList.remove('live-editor-inactive');
-                                }
+                                }*/
                                 if(_layoutsListDropDownCon.classList.contains('live-editor-inactive')) {
                                     _layoutsListDropDownCon.classList.remove('live-editor-inactive');
                                 }
                             }
+
+                            updateRemoteParticipantControlsButtonsState();
                         }
 
                         function declareEventsHandlers() {
@@ -1707,6 +1708,8 @@
                                 } else if(source.sourceType == 'group' && source.groupType == 'webrtc') {
                                     lockOrUnlockParticipantsGroup();
                                 }
+
+                                updateSourceControlPanelButtons();
                             })
 
                             _scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
@@ -1715,6 +1718,8 @@
                                 } else if(source.sourceType == 'group' && source.groupType == 'webrtc') {
                                     lockOrUnlockParticipantsGroup();
                                 }
+
+                                updateSourceControlPanelButtons();
                                 
                             })
 
@@ -1963,7 +1968,7 @@
                         }
 
 
-                        function updateParticipantItem(participant) {
+                        function updateParticipantItem(participantOrListItem) {
                             function AdditionalListItem(sourceInstance) {
                                 var _listItemContext = this;
                                 this.sourceInstance = sourceInstance;
@@ -1994,12 +1999,18 @@
                                 };
                             }
                             console.log('ParticipantsList: updateParticipantItem');
-                            var item = _participantsList.filter(function (listItem) {
-                                return listItem.participantInstance.sid == participant.sid;
-                            })[0];
+                            var item;
+                            if(participantOrListItem.constructor.name == 'ListItem') {
+                                item = participantOrListItem;
+                            } else {
+                                item = _participantsList.filter(function (listItem) {
+                                    return listItem.participantInstance.sid == participantOrListItem.sid;
+                                })[0];
+                            }
 
                             if(!item) return;
-
+                            
+                            var participant = item.participantInstance;
                             var webrtcSources = _scene.sceneInstance.webrtcSources;
 
                             //remove inactive source
@@ -2073,6 +2084,26 @@
                                     item.audioIconEl.innerHTML = _streamingIcons.participantsDisabledMic;
                                 }
                             }
+
+                            if(item.sourceInstance != null) {
+                                if(item.sourceInstance.active) {
+                                    item.switchVisibilityIcon(true);
+                                } else {
+                                    item.switchVisibilityIcon(false);
+                                }
+                            }
+
+                            if(!_allParticipantsListInstance.sourceInstance || !_allParticipantsListInstance.sourceInstance.active) {
+                                console.log('updateRemoteParticipantControlsButtonsState 1');
+                                if(!item.visibilityIconEl.classList.contains('live-editor-inactive')) {
+                                    item.visibilityIconEl.classList.add('live-editor-inactive');
+                                }
+                            } else {
+                                console.log('updateRemoteParticipantControlsButtonsState 2');
+                                if(item.visibilityIconEl.classList.contains('live-editor-inactive')) {
+                                    item.visibilityIconEl.classList.remove('live-editor-inactive');
+                                }
+                            }
                         }
 
                         function updateLocalControlsButtonsState() {
@@ -2119,7 +2150,14 @@
                                     listItemInstance.audioIconEl.innerHTML = _streamingIcons.participantsEnabledMic;
                                 }
                             }
+                        }
+
+                        function updateRemoteParticipantControlsButtonsState() {
+                            console.log('updateRemoteParticipantControlsButtonsState');
     
+                            for(let i in _participantsList) {
+                                updateParticipantItem(_participantsList[i]);
+                            }
                         }
 
                         function getListElement() {
@@ -2147,29 +2185,36 @@
                     if(_controlsTool != null && _webrtcSignalingLib != null) {
                         _webrtcSignalingLib.event.on('trackAdded', function (e) {
                             updateLocalControlsButtonsState();
-                            updateGlobalMicIcon();
                         });
                         _webrtcSignalingLib.event.on('cameraEnabled', function () {
                             updateLocalControlsButtonsState();
-                            updateGlobalMicIcon();
                         });
                         _webrtcSignalingLib.event.on('cameraDisabled', function () {
                             updateLocalControlsButtonsState();
-                            updateGlobalMicIcon();
                         });
                         _webrtcSignalingLib.event.on('cameraToggled', function () {
                             updateLocalControlsButtonsState();
-                            updateGlobalMicIcon();
                         });
                         _webrtcSignalingLib.event.on('micEnabled', function () {
                             updateLocalControlsButtonsState();
-                            updateGlobalMicIcon();
                         });
                         _webrtcSignalingLib.event.on('micDisabled', function () {
                             updateLocalControlsButtonsState();
-                            updateGlobalMicIcon();
                         });
                     }
+
+                    _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
+                        console.log('SCENE EVENT: SOURCE ADDED')
+                        //updateSourceControlPanelButtons(); 
+                    })
+                    _scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
+                        console.log('SCENE EVENT: SOURCE REMOVED')
+                        //updateSourceControlPanelButtons(); 
+                    })
+                    _scene.sceneInstance.eventDispatcher.on('sourceMoved', function (source) {
+                        console.log('SCENE EVENT: SOURCE MOVED')
+                        //updateSourceControlPanelButtons(); 
+                    })
 
                     function syncList() {
                         var sources = _scene.sceneInstance.sources;
@@ -2243,6 +2288,7 @@
                         }
 
                         sortList('visual');
+                        updateSourceControlPanelButtons(); 
                     }
 
                     function sortList(type) {
@@ -2707,6 +2753,7 @@
                     }
 
                     function selectSource(sourceItem) {
+                        console.log('selectSource START', sourceItem)
 
                         if(sourceItem.listType == 'allParticipants' || sourceItem.listType == 'mainParticipantVideo' || sourceItem.listType == 'additionalParticipantVideo') {
                             deselctAll();
@@ -2734,6 +2781,8 @@
                             }
                         }
 
+
+                        if(!_selectedSource.sourceInstance) return;
                         console.log('selectSource _selectedSource', _selectedSource)
 
                         var left = 0, top = 0;
@@ -2802,6 +2851,8 @@
 
                         }
 
+                        optionsColumn.update();
+                        updateSourceControlPanelButtons();
                     }
 
                     function moveForward() {
@@ -3076,6 +3127,10 @@
                         });
 
                         sourcesColumnControl.appendChild(sourcesColumnControlAddBtn);
+                        _sourceControlButtons.push({
+                            name: 'addSource',
+                            buttonEl: sourcesColumnControlAddBtn
+                        });
 
                         var sourcesColumnControlBtn = document.createElement('DIV');
                         sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn live-editor-popup-sources-control-btn-remove';
@@ -3085,6 +3140,12 @@
                             removeSource();
                         })
                         sourcesColumnControl.appendChild(sourcesColumnControlBtn);
+
+                        _sourceControlButtons.push({
+                            name: 'removeSource',
+                            buttonEl: sourcesColumnControlBtn
+                        });
+
                         var sourcesColumnControlBtn = document.createElement('DIV');
                         sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn';
                         sourcesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
@@ -3092,6 +3153,11 @@
                             moveForward();
                         })
                         sourcesColumnControl.appendChild(sourcesColumnControlBtn);
+                        _sourceControlButtons.push({
+                            name: 'moveForward',
+                            buttonEl: sourcesColumnControlBtn
+                        });
+                        
                         var sourcesColumnControlBtn = document.createElement('DIV');
                         sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn';
                         sourcesColumnControlBtn.innerHTML = _streamingIcons.moveDown;
@@ -3099,36 +3165,79 @@
                             moveBackward();
                         })
                         sourcesColumnControl.appendChild(sourcesColumnControlBtn);
+                        _sourceControlButtons.push({
+                            name: 'moveBackward',
+                            buttonEl: sourcesColumnControlBtn
+                        });
 
                         var sourcesColumnControlBtn = document.createElement('DIV');
                         sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn';
                         sourcesColumnControlBtn.innerHTML = _streamingIcons.settings;
                         sourcesColumnControlBtn.addEventListener('click', function () {
-                           
+                            let streamingControlsEl = document.querySelector('.live-editor-popup-streaming-controls');
+                            let settingsDialogEl = optionsColumn.getSettingsDialog();
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let title = "Source's settings";
+                            if(_selectedSource && _selectedSource.sourceInstance && _selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
+                                title = "Layout's settings";
+                            }
+                            let settingsDialog = new SimpleDialog({
+                                content: settingsDialogEl, 
+                                rectangleToShowIn: rectangleToShowIn,
+                                title: title
+                            });
                         })
-                        sourcesColumnControl.appendChild(sourcesColumnControlBtn);
 
-                        var micIconCon = document.createElement('DIV');
-                        micIconCon.className = 'live-editor-popup-sources-control-audio-btns';
-             
-                        var micIconControls = document.createElement('DIV');
-                        micIconControls.className = 'live-editor-popup-global-mic-controls';
-                        var micIcon = _globalMicIconEl = document.createElement('DIV');
-                        micIcon.className = 'live-editor-popup-mixer-volume-icon';
-                        micIcon.innerHTML = _streamingIcons.disabledMicrophone;
-                        micIconControls.appendChild(micIcon);
-                        micIconCon.appendChild(micIconControls);
-                        sourcesColumnControl.appendChild(micIconCon);
+                        sourcesColumnControl.appendChild(sourcesColumnControlBtn);
+                        
+                        _sourceControlButtons.push({
+                            name: 'sourceSettings',
+                            buttonEl: sourcesColumnControlBtn
+                        });
 
                         dialogBody.appendChild(dialogBodyInner)
                         dialogBody.appendChild(sourcesColumnControl)
 
-                        let audioSettingsPopup = new PopupDialog(micIcon, {
-                            content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
-                        })
-
-                        updateGlobalMicIcon();
+                        updateSourceControlPanelButtons();
                         return dialogBody;
+                    }
+
+                    function updateSourceControlPanelButtons() {
+                        console.log('updateSourceControlPanelButtons', _selectedSource);
+                        let selectedSourceInstance = _selectedSource ? _selectedSource.sourceInstance : null;
+                        let indexOfSelectedSource = _sourcesList.findIndex(function(x){
+                            return x == _selectedSource;
+                        });
+                        let numberOfSources = _sourcesList.length;
+                        console.log('updateSourceControlPanelButtons', indexOfSelectedSource);
+
+                        for (let i in _sourceControlButtons) {
+                            let condition = true;
+                            if(_sourceControlButtons[i].name == 'addSource') {
+
+                            } else if(_sourceControlButtons[i].name == 'removeSource') {
+                                condition = _selectedSource != null && _selectedSource.listType != 'allParticipants' && _selectedSource.listType != 'mainParticipantVideo';
+                            } else if(_sourceControlButtons[i].name == 'moveForward') {
+                                condition = _selectedSource != null 
+                                && _selectedSource.listType != 'allParticipants' && _selectedSource.listType != 'mainParticipantVideo' 
+                                && numberOfSources > 1 && indexOfSelectedSource != 0;
+                            } else if(_sourceControlButtons[i].name == 'moveBackward') {
+                                condition = _selectedSource != null 
+                                && _selectedSource.listType != 'allParticipants' && _selectedSource.listType != 'mainParticipantVideo' 
+                                && numberOfSources > 1 && indexOfSelectedSource != numberOfSources - 1;
+                            } else if(_sourceControlButtons[i].name == 'sourceSettings') {
+                                condition = _selectedSource != null && selectedSourceInstance;
+                            }
+
+                            if(!condition) {
+                                if(!_sourceControlButtons[i].buttonEl.classList.contains('live-editor-inactive')) {
+                                    _sourceControlButtons[i].buttonEl.classList.add('live-editor-inactive');
+                                }
+                            } else {
+                                _sourceControlButtons[i].buttonEl.classList.remove('live-editor-inactive');
+                            }
+
+                        }
                     }
 
                     function createLayoutListDropDown() {
@@ -3229,6 +3338,11 @@
                         };
 
                         return listContainer;
+                    }
+
+                    function getSelectedLayout() {
+                        if(!_layoutsListSelect) return 'tiledStreamingLayout';
+                        return _layoutsListSelect.value;
                     }
 
                     function selectLayout(layoutKey) {
@@ -3339,26 +3453,6 @@
                                 console.log('updateLocalControlsButtonsState a3');
                                 listItemInstance.microphoneBtnIcon.innerHTML = _controlsToolIcons.microphone;
                             }
-                        }
-                    }
-
-                    function updateGlobalMicIcon() {
-                        console.log('updateGlobalMicIcon', _globalMicIconEl);
-                        var localParticipant = _webrtcSignalingLib.localParticipant();
-                        var localMediaControls = _webrtcSignalingLib.localMediaControls;
-                        var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
-                            return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
-                        }).length;
-
-                        if (enabledAudioTracks == 0 && _webrtcSignalingLib.localParticipant().audioStream == null) {
-                            console.log('updateGlobalMicIcon a1');
-                            _globalMicIconEl.innerHTML = _streamingIcons.disabledMicrophone;
-                        } else if (!localMediaControls.micIsEnabled()) {
-                            console.log('updateGlobalMicIcon a2');
-                            _globalMicIconEl.innerHTML = _streamingIcons.disabledMicrophone;
-                        } else if (localMediaControls.micIsEnabled()) {
-                            console.log('updateGlobalMicIcon a3');
-                            _globalMicIconEl.innerHTML = _streamingIcons.enabledMicrophone;
                         }
                     }
 
@@ -4865,8 +4959,10 @@
                         update: update,
                         updateLocalControlsButtonsState: updateLocalControlsButtonsState,
                         getSelectedSource: getSelectedSource,
+                        getSelectedLayout: getSelectedLayout,
                         syncList: syncList,
                         loadList: loadList,
+                        getSourcesList: getSourcesList,
                         hideResizingElement: hideResizingElement,
                         moveForward: moveForward,
                         moveBackward: moveBackward,
@@ -4876,15 +4972,14 @@
                         addWatermark: addWatermark,
                         addBackground: addBackground,
                         addVideoSource: addVideoSource,
-                        getSelectedSource: getSelectedSource,
-                        getSourcesList: getSourcesList,
                         checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist
                     }
-
                 }
 
                 var optionsColumn = (function () {
                     var _activeView = null;
+                    var _optionsParentEl = document.createElement('DIV');
+                    _optionsParentEl.className = 'live-editor-options-dialog';
 
                     function hideActiveView() {
                         console.log('optionsColumn: hideActiveView', _activeView)
@@ -5209,124 +5304,14 @@
                     var canvasLayoutOptions = (function () {
                         let _selectedSource = null;
                         var _dialogEl = null;
-                        var _layoutTabs = null;
-                        var _activeTabName = null;
                         var _dialogBody = null;
-                        var _generatedLayoutsListDialogs = {};
                         var _generatedLayoutsParamsDialogs = {};
 
-                        function LayoutListItem(name) {
-                            var listInstance = this;
-                            this.active = true;
-                            this.title = name != null ? name : null;
-                            this.itemEl = null;
-                            this.key = null;
-                            this.handler = function () {
-
-                            }
-                            this.isActive = function() {
-
-                            };
-                            this.turnOn = function() {
-
-                            };
-                            this.turnOff = function() {
-
-                            };
-
-                            var itemEl = document.createElement('DIV');
-                            itemEl.className = 'live-editor-canvas-popup-list-item';
-                            var itemElText = document.createElement('DIV');
-                            itemElText.innerHTML = name ? name : '';
-                            itemElText.className = 'live-editor-canvas-popup-list-text';
-                            itemEl.appendChild(itemElText);
-                            this.itemEl = itemEl;
-                            this.itemEl.addEventListener('click', function () {
-                                selectLayout(listInstance)
-                            })
-                        }
-
-                        function selectLayout(layoutItem) {
-                            console.log('selectLayout', layoutItem)
-                            let layoutList;
-                            if(_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] != null) {
-                                layoutList = _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].layoutList;
-                            } else {
-                                return;
-                            }
-                            if(typeof layoutItem == 'string') {
-                                for(let i in layoutList) {
-                                    if(layoutList[i].key == layoutItem) {
-                                        layoutItem = layoutList[i];
-                                    }
-                                }
-                            }
-
-                            if(layoutItem.itemEl && !layoutItem.itemEl.classList.contains('live-editor-canvas-popup-list-item-active')) {
-                                (layoutItem.itemEl).classList.add('live-editor-canvas-popup-list-item-active');
-                            }
-
-                            _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].selectedLayout = layoutItem;
-                            for(let i in layoutList) {
-                                if(layoutList[i] == layoutItem) continue;
-                                console.log('selectLayout for --', layoutItem.itemEl, (layoutItem.itemEl).classList.contains('live-editor-canvas-popup-list-item-active'))
-
-                                if((layoutList[i].itemEl).classList.contains('live-editor-canvas-popup-list-item-active')) {
-                                    console.log('selectLayout remove');
-                                    (layoutList[i].itemEl).classList.remove('live-editor-canvas-popup-list-item-active');
-                                }
-                            }
-
-                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(_selectedSource.sourceInstance, layoutItem.key);
-                        }
-
-                        function createLayoutList() {
-                            if(_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] != null) {
-                                return _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].dialog;
-                            }
-                            var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'live-editor-popup-options-body-inner live-editor-popup-options-layouts-body';
-
-                            let layoutList = [];
-                            var tiledLayout = new LayoutListItem('Tiled');
-                            tiledLayout.key = 'tiledStreamingLayout';
-                            layoutList.push(tiledLayout);
-                            dialogBodyInner.appendChild(tiledLayout.itemEl);
-
-                            var fullScreenLayout = new LayoutListItem('Screen sharing');
-                            fullScreenLayout.key = 'screenSharing';
-                            layoutList.push(fullScreenLayout);
-                            dialogBodyInner.appendChild(fullScreenLayout.itemEl);
-
-                            var sideScreensharing = new LayoutListItem('Side screen sharing');
-                            sideScreensharing.key = 'sideScreenSharing';
-                            layoutList.push(sideScreensharing);
-                            dialogBodyInner.appendChild(sideScreensharing.itemEl);
-
-                            var audioOnlyLayout = new LayoutListItem('Audio only');
-                            audioOnlyLayout.key = 'audioOnly';
-                            layoutList.push(audioOnlyLayout);
-                            dialogBodyInner.appendChild(audioOnlyLayout.itemEl);
-
-                            var audioScreenLayout = new LayoutListItem('Audio only + screen sharing');
-                            audioScreenLayout.key = 'audioScreenSharing';
-                            layoutList.push(audioScreenLayout);
-                            dialogBodyInner.appendChild(audioScreenLayout.itemEl);
-
-
-                            _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] = {
-                                dialog: dialogBodyInner,
-                                layoutList: layoutList
-                            };
-
-                            return dialogBodyInner;
-                        }
-
+                        
                         function createParamsList() {
-                            let selectedLayout = 'tiledStreamingLayout';
-                            if(_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] != null && _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].selectedLayout != null) {
-                                selectedLayout = _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].selectedLayout.key;
-                            }
+                            let activeScene = scenesInterface.getActive();
+                            let selectedLayout = activeScene.sourcesInterface.getSelectedLayout();
+
                             console.log('createParamsList', selectedLayout)
                             if(_generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id] != null && _generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id][selectedLayout] != null) {
                                 return _generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id][selectedLayout];
@@ -5468,11 +5453,6 @@
                             return dialogBodyInner;
                         }
 
-                        function showLayoutList() {
-                            _dialogBody.innerHTML = '';
-                            _dialogBody.appendChild(createLayoutList());
-                        }
-
                         function showLayoutParams() {
                             console.log('showLayoutParams')
 
@@ -5484,17 +5464,9 @@
                             _selectedSource = source;
                             console.log('showDialog', _selectedSource.sourceInstance.id)
                             hideActiveView();
-                            if(_activeTabName == 'layouts' || _activeTabName == null) {
-                                showLayoutList();
-                            } else if(_activeTabName == 'params') {
-                                showLayoutParams();
-                            }
+                            showLayoutParams();
 
-                            if(!_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] || !_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].selectedLayout) {
-                                selectLayout(_selectedSource.sourceInstance.params.defaultLayout);
-                            }
-                           
-                            _optionsColumnEl.appendChild(_dialogEl);
+                            _optionsParentEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
@@ -5508,35 +5480,6 @@
                             }
                         }
 
-                        function tabHandler(e) {
-                            var tabEl = e.currentTarget;
-                            console.log('tabHandler tabEl', tabEl)
-
-                            var tabName = tabEl.dataset.tab;
-                            if(!tabName) return;
-                            if(tabName == 'layouts') {
-                                showLayoutList();
-                                _activeTabName = 'layouts';
-                            } else if(tabName == 'params') {
-                                showLayoutParams();
-                                _activeTabName = 'params';
-                            }
-
-                            for(let e in _layoutTabs.children) {
-                                if(typeof _layoutTabs.children[e] != 'object') continue;
-                                console.log('tabHandler', _layoutTabs.children[e])
-                                if(_layoutTabs.children[e] == tabEl) {
-                                    if(!_layoutTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                        _layoutTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
-                                    }
-                                    continue;
-                                }
-                                if(_layoutTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                    _layoutTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
-                                }
-                            }
-                        }
-
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'live-editor-popup-options-dialog';
@@ -5545,37 +5488,15 @@
                         var dialogTitleInner = _layoutTabs = document.createElement('DIV');
                         dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
-                        var layoutsTab = document.createElement('DIV');
-                        layoutsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
-                        layoutsTab.dataset.tab = 'layouts';
-                        var layoutsTabInner = document.createElement('DIV');
-                        layoutsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        layoutsTabInner.innerHTML = 'Layouts';
-                        layoutsTab.appendChild(layoutsTabInner);
-                        dialogTitleInner.appendChild(layoutsTab);
-                        var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'live-editor-popup-options-title-tab';
-                        paramsTab.dataset.tab = 'params';
-                        var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        paramsTabInner.innerHTML = 'Params';
-                        paramsTab.appendChild(paramsTabInner);
-                        dialogTitleInner.appendChild(paramsTab);
-                        dialogTitle.appendChild(dialogTitleInner);
-                        _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createLayoutList());
                         _dialogEl.appendChild(dialogBody);
 
-                        layoutsTab.addEventListener('click', tabHandler);
-                        paramsTab.addEventListener('click', tabHandler);
-
                         return {
                             hide: hideDialog,
                             show: showDialog,
-                            showLayoutList: showLayoutList,
                             showLayoutParams: showLayoutParams,
                         }
                     }())
@@ -5785,7 +5706,7 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogEl);
+                            _optionsParentEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
@@ -5797,56 +5718,14 @@
                             }
                         }
 
-                        function tabHandler(e) {
-                            var tabEl = e.currentTarget;
-                            console.log('tabHandler tabEl', tabEl)
-
-                            var tabName = tabEl.dataset.tab;
-                            if(!tabName) return;
-                            if(tabName == 'params') {
-                                showParams();
-                            }
-
-                            for(let e in _optionsTabs.children) {
-                                if(typeof _optionsTabs.children[e] != 'object') continue;
-                                console.log('tabHandler', _optionsTabs.children[e])
-                                if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
-                                    }
-                                    continue;
-                                }
-                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
-                                }
-                            }
-                        }
-
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'live-editor-popup-options-dialog';
-                        var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'live-editor-popup-options-title';
-                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
-
-                        var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
-                        paramsTab.dataset.tab = 'params';
-                        var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        paramsTabInner.innerHTML = 'Params';
-                        paramsTab.appendChild(paramsTabInner);
-                        dialogTitleInner.appendChild(paramsTab);
-                        dialogTitle.appendChild(dialogTitleInner);
-                        _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
-
-                        paramsTab.addEventListener('click', tabHandler);
 
                         return {
                             hide: hideDialog,
@@ -6027,7 +5906,7 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogEl);
+                            _optionsParentEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
@@ -6039,56 +5918,14 @@
                             }
                         }
 
-                        function tabHandler(e) {
-                            var tabEl = e.currentTarget;
-                            console.log('tabHandler tabEl', tabEl)
-
-                            var tabName = tabEl.dataset.tab;
-                            if(!tabName) return;
-                            if(tabName == 'params') {
-                                showParams();
-                            }
-
-                            for(let e in _optionsTabs.children) {
-                                if(typeof _optionsTabs.children[e] != 'object') continue;
-                                console.log('tabHandler', _optionsTabs.children[e])
-                                if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
-                                    }
-                                    continue;
-                                }
-                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
-                                }
-                            }
-                        }
-
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'live-editor-popup-options-dialog';
-                        var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'live-editor-popup-options-title';
-                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
-
-                        var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
-                        paramsTab.dataset.tab = 'params';
-                        var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        paramsTabInner.innerHTML = 'Params';
-                        paramsTab.appendChild(paramsTabInner);
-                        dialogTitleInner.appendChild(paramsTab);
-                        dialogTitle.appendChild(dialogTitleInner);
-                        _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
-
-                        paramsTab.addEventListener('click', tabHandler);
 
                         return {
                             hide: hideDialog,
@@ -6272,7 +6109,7 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogEl);
+                            _optionsParentEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
@@ -6284,56 +6121,15 @@
                             }
                         }
 
-                        function tabHandler(e) {
-                            var tabEl = e.currentTarget;
-                            console.log('tabHandler tabEl', tabEl)
-
-                            var tabName = tabEl.dataset.tab;
-                            if(!tabName) return;
-                            if(tabName == 'params') {
-                                showParams();
-                            }
-
-                            for(let e in _optionsTabs.children) {
-                                if(typeof _optionsTabs.children[e] != 'object') continue;
-                                console.log('tabHandler', _optionsTabs.children[e])
-                                if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
-                                    }
-                                    continue;
-                                }
-                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
-                                }
-                            }
-                        }
-
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'live-editor-popup-options-dialog';
-                        var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'live-editor-popup-options-title';
-                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
-
-                        var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
-                        paramsTab.dataset.tab = 'params';
-                        var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        paramsTabInner.innerHTML = 'Params';
-                        paramsTab.appendChild(paramsTabInner);
-                        dialogTitleInner.appendChild(paramsTab);
-                        dialogTitle.appendChild(dialogTitleInner);
-                        _dialogEl.appendChild(dialogTitle);
+            
                         var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
-
-                        paramsTab.addEventListener('click', tabHandler);
 
                         return {
                             hide: hideDialog,
@@ -6383,7 +6179,7 @@
                             console.log('audioSourceOptions: showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogEl);
+                            _optionsParentEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
@@ -6395,56 +6191,15 @@
                             }
                         }
 
-                        function tabHandler(e) {
-                            var tabEl = e.currentTarget;
-                            console.log('tabHandler tabEl', tabEl)
-
-                            var tabName = tabEl.dataset.tab;
-                            if(!tabName) return;
-                            if(tabName == 'params') {
-                                showParams();
-                            }
-
-                            for(let e in _optionsTabs.children) {
-                                if(typeof _optionsTabs.children[e] != 'object') continue;
-                                console.log('tabHandler', _optionsTabs.children[e])
-                                if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
-                                    }
-                                    continue;
-                                }
-                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
-                                }
-                            }
-                        }
-
                         console.log('audioSourceOptions pupup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'live-editor-popup-options-dialog';
-                        var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'live-editor-popup-options-title';
-                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
-
-                        var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
-                        paramsTab.dataset.tab = 'params';
-                        var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        paramsTabInner.innerHTML = 'Params';
-                        paramsTab.appendChild(paramsTabInner);
-                        dialogTitleInner.appendChild(paramsTab);
-                        dialogTitle.appendChild(dialogTitleInner);
-                        _dialogEl.appendChild(dialogTitle);
+                    
                         var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
-
-                        paramsTab.addEventListener('click', tabHandler);
 
                         return {
                             hide: hideDialog,
@@ -6493,7 +6248,7 @@
                             console.log('audioSourceOptions: showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogEl);
+                            _optionsParentEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
@@ -6505,56 +6260,15 @@
                             }
                         }
 
-                        function tabHandler(e) {
-                            var tabEl = e.currentTarget;
-                            console.log('tabHandler tabEl', tabEl)
-
-                            var tabName = tabEl.dataset.tab;
-                            if(!tabName) return;
-                            if(tabName == 'params') {
-                                showParams();
-                            }
-
-                            for(let e in _optionsTabs.children) {
-                                if(typeof _optionsTabs.children[e] != 'object') continue;
-                                console.log('tabHandler', _optionsTabs.children[e])
-                                if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
-                                    }
-                                    continue;
-                                }
-                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
-                                }
-                            }
-                        }
-
                         console.log('audioSourceOptions pupup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'live-editor-popup-options-dialog';
-                        var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'live-editor-popup-options-title';
-                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
-
-                        var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
-                        paramsTab.dataset.tab = 'params';
-                        var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
-                        paramsTabInner.innerHTML = 'Params';
-                        paramsTab.appendChild(paramsTabInner);
-                        dialogTitleInner.appendChild(paramsTab);
-                        dialogTitle.appendChild(dialogTitleInner);
-                        _dialogEl.appendChild(dialogTitle);
+                        
                         var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
-
-                        paramsTab.addEventListener('click', tabHandler);
 
                         return {
                             hide: hideDialog,
@@ -6577,27 +6291,46 @@
                                     break;
                                 }                                
                             }
+                            let activeSceneWebrtcSources = activeScene.sceneInstance.webrtcSources;
+                            for (let i in activeSceneWebrtcSources) {
+                                if (activeSceneWebrtcSources[i] == selectedSource.sourceInstance) {
+                                    sceneIsInactive = false;
+                                    break;
+                                }                                
+                            }
                             if(sceneIsInactive) {
                                 optionsColumn.hideActiveView();
+                                console.log('optionsColumn.update sceneIsInactive', selectedSource);
                                 return;
                             }
                         }
 
                         if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'group' && selectedSource.sourceInstance.groupType == 'webrtc') {
+                            console.log('optionsColumn.update 1');
                             optionsColumn.canvasLayoutOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
+                            console.log('optionsColumn.update 2');
                             optionsColumn.webrtcParticipantOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'image') {
+                            console.log('optionsColumn.update 3');
                             optionsColumn.imageSourceOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'video') {
+                            console.log('optionsColumn.update 4');
                             optionsColumn.videoSourceOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'audio' && selectedSource.sourceInstance.sourceType != 'webrtc') {
+                            console.log('optionsColumn.update 5');
                             optionsColumn.audioSourceOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.listType == 'audio' && selectedSource.sourceInstance.sourceType == 'webrtcaudio') {
+                            console.log('optionsColumn.update 6');
                             //optionsColumn.webrtcAudioSourceOptions.show(selectedSource);
                         } else {
+                            console.log('optionsColumn.update 7');
                             optionsColumn.hideActiveView();
                         }
+                    }
+
+                    function getSettingsDialog() {
+                        return _optionsParentEl;
                     }
 
                     return {
@@ -6608,7 +6341,8 @@
                         audioSourceOptions: audioSourceOptions,
                         webrtcAudioSourceOptions: webrtcAudioSourceOptions,
                         hideActiveView: hideActiveView,
-                        update: update
+                        update: update,
+                        getSettingsDialog: getSettingsDialog
                     }
                 }())
 
@@ -6689,6 +6423,228 @@
 
                 function updateWebrtcSignalingLibInstance(newWebrtcSignalingInstance) {
                     _webrtcSignalingLib = newWebrtcSignalingInstance;
+                }
+
+                function EventSystem() {
+
+                    var events = {};
+
+                    var CustomEvent = function (eventName) {
+
+                        this.eventName = eventName;
+                        this.callbacks = [];
+
+                        this.registerCallback = function (callback) {
+                            this.callbacks.push(callback);
+                        }
+
+                        this.unregisterCallback = function (callback) {
+                            const index = this.callbacks.indexOf(callback);
+                            if (index > -1) {
+                                this.callbacks.splice(index, 1);
+                            }
+                        }
+
+                        this.fire = function (data) {
+                            const callbacks = this.callbacks.slice(0);
+                            callbacks.forEach((callback) => {
+                                callback(data);
+                            });
+                        }
+                    }
+
+                    var dispatch = function (eventName, data) {
+                        const event = events[eventName];
+                        if (event) {
+                            event.fire(data);
+                        }
+                    }
+
+                    var on = function (eventName, callback) {
+                        let event = events[eventName];
+                        if (!event) {
+                            event = new CustomEvent(eventName);
+                            events[eventName] = event;
+                        }
+                        event.registerCallback(callback);
+                    }
+
+                    var off = function (eventName, callback) {
+                        const event = events[eventName];
+                        if (event && event.callbacks.indexOf(callback) > -1) {
+                            event.unregisterCallback(callback);
+                            if (event.callbacks.length === 0) {
+                                delete events[eventName];
+                            }
+                        }
+                    }
+
+                    var destroy = function () {
+                        events = {};
+                    }
+
+                    return {
+                        dispatch: dispatch,
+                        on: on,
+                        off: off,
+                        destroy: destroy
+                    }
+                }
+
+                function SimpleDialog(options) {
+                    var dialogInstance = this;
+                    this.content = options.content;
+                    this.rectangleToShowIn = options.rectangleToShowIn ? options.rectangleToShowIn : new DOMRect(0, 0, window.innerWidth, window.innerHeight);
+                    this.title = options.title;
+                    this.closeButtonEl = null;
+                    this.dialogEl = null;
+                    this.dialogBodyEl = null;
+                    this.hoverTimeout = null;
+                    this.hide = function (e) {
+                        if (e.target.offsetParent != dialogInstance.dialogEl || e.target == this.closeButtonEl) {
+                            if (dialogInstance.dialogEl.parentElement) dialogInstance.dialogEl.parentElement.removeChild(dialogInstance.dialogEl);
+                            togglePopupClassName('', false, false);
+                        }
+                        delete dialogInstance;
+                    }
+        
+                    this.show = function (e) {
+                        let rectangleToShowIn = dialogInstance.rectangleToShowIn;
+                        dialogInstance.dialogEl.style.top = '';
+                        dialogInstance.dialogEl.style.left = '';
+                        dialogInstance.dialogEl.style.maxHeight = '';
+                        dialogInstance.dialogEl.style.maxWidth = '';
+                        togglePopupClassName('', false, false);
+                        let existingPopupDialog = document.querySelector('.live-editor-dialog-window');
+                        if (existingPopupDialog && existingPopupDialog.parentElement) existingPopupDialog.parentElement.removeChild(existingPopupDialog);
+                
+                        dialogInstance.dialogEl.style.position = 'fixed';
+                        dialogInstance.dialogEl.style.visibility = 'hidden';
+
+                        dialogInstance.dialogEl.style.top = rectangleToShowIn.y + 'px';
+                        dialogInstance.dialogEl.style.left = rectangleToShowIn.x + 'px';
+                      
+                        if(dialogInstance.content instanceof Array) {
+                            for(let i in dialogInstance.content) {
+                                dialogInstance.dialogBodyEl.appendChild(dialogInstance.content[i])
+                            }
+                        } else {
+                            dialogInstance.dialogBodyEl.appendChild(dialogInstance.content)
+                        }
+                        
+                        document.body.appendChild(dialogInstance.dialogEl);
+        
+                        let dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+        
+                        let midXOfRectangleToShowIn = rectangleToShowIn.x + (rectangleToShowIn.width / 2);
+                        let midYOfRectangleToShowIn = rectangleToShowIn.y + (rectangleToShowIn.height / 2);
+
+                        if(dialogRect.width <= rectangleToShowIn.width) {
+                            dialogInstance.dialogEl.style.left = midXOfRectangleToShowIn - (dialogRect.width / 2) + 'px';
+                        } else {
+                            dialogInstance.dialogEl.style.left = '0px';
+                            dialogInstance.dialogEl.style.width = rectangleToShowIn.width + 'px';
+                        }
+                        
+                        dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+
+                        if(dialogRect.height <= rectangleToShowIn.height) {
+                            dialogInstance.dialogEl.style.top = midYOfRectangleToShowIn - (dialogRect.height / 2) + 'px';
+                        } else {
+                            dialogInstance.dialogEl.style.top = '0px';
+                            dialogInstance.dialogEl.style.height = rectangleToShowIn.height + 'px';
+                        }
+
+                        dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+
+                        if(dialogRect.height < rectangleToShowIn.height) {
+                            if(dialogRect.width < rectangleToShowIn.width) {
+                                togglePopupClassName('live-editor-dialog-window-mid-mid-position', false, false);
+                            } else {
+                                togglePopupClassName('live-editor-dialog-window-fullwidth-mid-position', false, false);
+                            }
+                        } else {
+                            if(dialogRect.width < rectangleToShowIn.width) {
+                                togglePopupClassName('live-editor-dialog-window-mid-fullheight-position', false, true);
+                            } else {
+                                togglePopupClassName('live-editor-dialog-window-fullwidth-fullheight-position', false, true);
+                            }
+                        }
+        
+                        dialogInstance.dialogEl.style.visibility = '';     
+                    }
+        
+                    function togglePopupClassName(classNameToApply, addXScrollClass, addYScrollClass) {
+                        let classes = [
+                            'live-editor-dialog-window-fullwidth-fullheight-position',
+                            'live-editor-dialog-window-fullwidth-mid-position',
+                            'live-editor-dialog-window-mid-mid-position',
+                            'live-editor-dialog-window-mid-fullheight-position',
+
+                        ];
+                        for (let i in classes) {
+                            if (classes[i] == classNameToApply || (classes[i] == 'live-editor-dialog-window-x-scroll' && addXScrollClass) || (classes[i] == 'live-editor-dialog-window-y-scroll' && addYScrollClass)) {
+                                continue;
+                            }
+                            dialogInstance.dialogEl.classList.remove(classes[i]);
+                        }
+        
+                        if (classNameToApply && classNameToApply != '' && !dialogInstance.dialogEl.classList.contains(classNameToApply)) {
+                            dialogInstance.dialogEl.classList.add(classNameToApply);
+                        }
+        
+                        if (addXScrollClass) {
+                            dialogInstance.dialogEl.classList.add('live-editor-dialog-window-x-scroll');
+                        }
+                        if (addYScrollClass) {
+                            dialogInstance.dialogEl.classList.add('live-editor-dialog-window-y-scroll');
+                        }
+                    }
+        
+                    this.dialogEl = document.createElement('DIV');
+                    this.dialogEl.className = 'live-editor-dialog-window';
+                    this.closeButtonEl = document.createElement('DIV');
+                    this.closeButtonEl.className = 'live-editor-close-sign';
+                    this.dialogEl.appendChild(this.closeButtonEl);
+
+                    var dialogTitle = document.createElement('DIV');
+                    dialogTitle.innerHTML = this.title;
+                    dialogTitle.className = 'live-editor-dialog-window-header';
+                    this.dialogEl.appendChild(dialogTitle);
+
+                    this.dialogBodyEl = document.createElement('DIV');
+                    this.dialogBodyEl.className = 'live-editor-dialog-window-body';
+                    this.dialogEl.appendChild(this.dialogBodyEl);
+
+                    this.closeButtonEl.addEventListener('click', function (e) {
+                        dialogInstance.hide(e);
+                    });
+
+                    this.show();
+
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            dialogInstance.dialogEl,
+                            "Q/resize",
+                            {
+                                move: true,
+                                elementPosition: 'fixed',
+                                activateOnElement: dialogTitle,
+                                keepInitialSize: true,
+                                resize: false,
+                                active: true,
+                                moveWithinArea: 'window',
+                            }
+                        ),
+                        {},
+                        function () {
+
+                        }
+                    );
+        
+                    /*this.element.addEventListener('click', function (e) {
+                        dialogInstance.show(e);
+                    });*/
                 }
 
                 function PopupDialog(element, options) {
@@ -7037,76 +6993,6 @@
                             pupupInstance.hoverTimeout = null;
                         }
                     }
-                }
-
-                function EventSystem() {
-
-                    var events = {};
-
-                    var CustomEvent = function (eventName) {
-
-                        this.eventName = eventName;
-                        this.callbacks = [];
-
-                        this.registerCallback = function (callback) {
-                            this.callbacks.push(callback);
-                        }
-
-                        this.unregisterCallback = function (callback) {
-                            const index = this.callbacks.indexOf(callback);
-                            if (index > -1) {
-                                this.callbacks.splice(index, 1);
-                            }
-                        }
-
-                        this.fire = function (data) {
-                            const callbacks = this.callbacks.slice(0);
-                            callbacks.forEach((callback) => {
-                                callback(data);
-                            });
-                        }
-                    }
-
-                    var dispatch = function (eventName, data) {
-                        const event = events[eventName];
-                        if (event) {
-                            event.fire(data);
-                        }
-                    }
-
-                    var on = function (eventName, callback) {
-                        let event = events[eventName];
-                        if (!event) {
-                            event = new CustomEvent(eventName);
-                            events[eventName] = event;
-                        }
-                        event.registerCallback(callback);
-                    }
-
-                    var off = function (eventName, callback) {
-                        const event = events[eventName];
-                        if (event && event.callbacks.indexOf(callback) > -1) {
-                            event.unregisterCallback(callback);
-                            if (event.callbacks.length === 0) {
-                                delete events[eventName];
-                            }
-                        }
-                    }
-
-                    var destroy = function () {
-                        events = {};
-                    }
-
-                    return {
-                        dispatch: dispatch,
-                        on: on,
-                        off: off,
-                        destroy: destroy
-                    }
-                }
-
-                function generateId() {
-                    return Date.now().toString(36) + Math.random().toString(36).replace(/\./g, "");
                 }
 
                 function CustomSelect(element, options) {
@@ -7622,6 +7508,10 @@
                             existingSelects[a].classList.remove('live-editor-custom-select-arrow-active');
                         }
                     }
+                }
+
+                function generateId() {
+                    return Date.now().toString(36) + Math.random().toString(36).replace(/\./g, "");
                 }
 
                 function createPopup() {

@@ -170,10 +170,12 @@
                         });
                     }
         
-                    var defaultScene = new Scene();
-                    defaultScene.title = 'Scene 1';
-                    _defaultScene = _activeScene = defaultScene;
-                    _scenes.push(defaultScene);
+                    for(let i = 1; i <= 10; i++) {
+                        let scene = new Scene();
+                        scene.title = 'Scene ' + i;
+                        if(i == 1) _defaultScene = _activeScene = scene;
+                        _scenes.push(scene); 
+                    }
         
         
                     function createScene(name) {
@@ -755,7 +757,7 @@
                         webrtcGroup.name = 'Participants';
                         webrtcGroup.groupType = 'webrtc';
                         webrtcGroup.layoutManager = new LayoutManager(webrtcGroup);
-                        defaultScene.webrtcSources.push(webrtcGroup);
+                        _defaultScene.webrtcSources.push(webrtcGroup);
         
                         var WebRTCStreamSource = function (participant) {
                             this.kind = null;
