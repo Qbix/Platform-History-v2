@@ -15,241 +15,33 @@
 Q.Tool.define("Streams/question", function(options) {
 	var tool = this;
 	var state = tool.state;
-	var mode = state.mode;
 
-	var pipeFields = ["style", "text"];
+	var streamName = state.stream ? state.stream.fields.name : state.streamName;
 
-	if (mode === "answerComposer") {
-		if (!state.publisherId) {
-			throw new Q.Error("Streams/question: missing publisherId");
-		}
-		if (!state.streamName) {
-			throw new Q.Error("Streams/question: missing stream name");
-		}
-
-		pipeFields.push("stream");
+	if (!state.creatable["Streams/question"].title) {
+		state.creatable["Streams/question"].title = tool.text.questions.NewQuestion;
 	}
 
-	var pipe = new Q.pipe(pipeFields, function () {
-		Q.handle(tool[mode], tool);
-	});
-
-	Q.addStylesheet('{{Streams}}/css/tools/question.css', { slotName: 'Streams' }, pipe.fill("style"));
-
-	Q.Text.get('Streams/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text.questions;
-
-		pipe.fill("text")();
-	});
-
-	if (mode === "answerComposer") {
-		Q.Streams.get(state.publisherId, state.streamName, function (err) {
-			var msg = Q.firstErrorMessage(err);
-			if (msg) {
-				return console.warn(msg);
-			}
-
-			tool.stream = this;
-			pipe.fill("stream")();
-		});
-	}
+	$(tool.element).tool("Streams/related", state, Q.normalize(streamName)).activate();
 },
 
 {
+	stream: null,
 	publisherId: null,
 	streamName: null,
-	mode: "questionComposer",
-	onSubmit: new Q.Event()
+	relationType: "Streams/questions",
+	realtime: false,
+	sortable: true,
+	isCategory: true,
+	creatable: {
+		"Streams/question": {
+			publisherId: Q.Users.communityId,
+			//title: tool.text.NewQuestion
+		}
+	}
 },
 
 {
-	questionComposer: function () {
-		var tool = this;
-		var state = this.state;
-
-		var _addAnswer = function () {
-			var $answers = $(".Streams_question_answers", tool.element);
-
-			if (!$answers.length) {
-				throw new Q.error("Streams/question: answers element not found");
-			}
-
-			Q.Template.render("Streams/question/snippet",{
-				text: tool.text
-			}, function (err, html) {
-				if (err) {
-					return;
-				}
-
-				var $answer = $(html).appendTo($answers);
-				var $select = $("select[name=type]", $answer);
-				var $input = $("input[name=value]", $answer);
-
-				$(".Streams_question_remove", $answer).on(Q.Pointer.fastclick, function () {
-					$answer.remove();
-				});
-
-				$select.on("change", function () {
-					var type = $select.val();
-
-					$answer.attr("data-type", type);
-
-					if (type === "textarea") {
-						$input.attr("placeholder", tool.text.Placeholder);
-					} else {
-						$input.removeAttr("placeholder");
-					}
-				}).trigger("change");
-			});
-		};
-
-		Q.Template.render("Streams/question/composer",{
-			text: tool.text
-		}, function (err, html) {
-			if (err) {
-				return;
-			}
-
-			Q.replace(tool.element, html);;
-
-			var $title = $("input[name=title]", tool.element);
-			var $content = $("textarea[name=content]", tool.element);
-			var $answers = $(".Streams_question_answers", tool.element);
-
-			// add answer composer
-			$(".Streams_question_add", tool.element).on(Q.Pointer.fastclick, _addAnswer);
-			_addAnswer();
-
-			// submit question
-			$("button[name=submit]", tool.element).on(Q.Pointer.fastclick, function () {
-				var title = $title.val();
-				var content = $content.val();
-
-				if (!title) {
-					return Q.alert(tool.text.ErrorTitle);
-				}
-
-				var answers = [];
-				$(".Streams_question_snippet", $answers).each(function () {
-					var $this = $(this);
-					var $content = $("input[name=value]", $this);
-					var content = $content.val();
-					var type = $("select[name=type]", $this).val();
-
-					if (type !== "textarea" && !content) {
-						return;
-					}
-
-					answers.push({
-						type: type,
-						content: content
-					});
-				});
-
-				if (Q.isEmpty(answers)) {
-					return Q.alert(tool.text.ErrorAnswers);
-				}
-
-				Q.handle(state.onSubmit, tool, [title, content, answers]);
-			});
-		});
-	},
-	answerComposer: function () {
-		var tool = this;
-		var state = this.state;
-		var stream = this.stream;
-
-		var answers = stream.getAttribute("answers");
-
-		Q.Template.render("Streams/answer/composer", {
-			title: stream.fields.title,
-			content: stream.fields.content,
-			text: tool.text
-		}, function (err, html) {
-			if (err) {
-				return;
-			}
-
-			Q.replace(tool.element, html);;
-
-			var $answers = $(".Streams_question_answers", tool.element);
-
-			Q.each(answers, function (i) {
-				var id = tool.id + "_input_" + i;
-				if (this.type === "option" || this.type === "option.exclusive") {
-					$("<label class='Streams_question_answer_container' />")
-					.append(
-						$("<input />").attr({
-							value: i,
-							id: id,
-							type: (this.type === "option" ? "checkbox" : "radio")
-						}),
-						$("<span />").text(this.content)
-					).appendTo($answers);
-				} else if (this.type === "textarea") {
-					$("<textarea placeholder='" + (this.content || tool.text.FreeAnswer) + "'></textarea>").appendTo($answers);
-				}
-			});
-
-			// if radio checked, uncheck all checkboxes and radios
-			$("input[type=radio]", tool.element).on('change', function () {
-				$("input[type=radio]", tool.element).prop("checked", false);
-				$(this).prop("checked", true);
-			});
-
-			// submit question
-			$("button[name=submit]", tool.element).on(Q.Pointer.fastclick, function () {
-				var answers = {
-					options: [],
-					textarea: $("textarea", $answers).val() || null
-				};
-
-				// collect options
-				$("input:checked", $answers).each(function () {
-					answers.options.push($("span", this.parentElement).text());
-				});
-
-				if (!answers.textarea && Q.isEmpty(answers.options)) {
-					return Q.alert(tool.text.ErrorAnswers);
-				}
-
-				Q.handle(state.onSubmit, tool, [answers]);
-			});
-		});
-	}
 });
-
-Q.Template.set('Streams/question/composer',
-'<input type="text" name="title" placeholder="{{text.TitlePlaceholder}}" />' +
-	'<textarea type="text" name="content" placeholder="{{text.ContentPlaceholder}}"></textarea>' +
-	'<h2 class="Streams_question_head">{{text.Answers}}</h2>' +
-	'<div class="Streams_question_answers"></div>' +
-	'<div class="Streams_question_add"><i class="Streams_question_add"></i> <span>{{text.AddAnotherAnswer}}</span></div>' +
-	'<button name="submit" type="button" class="Q_button">{{text.SaveQuestion}}</button>'
-);
-
-Q.Template.set('Streams/question/snippet',
-'<div class="Streams_question_snippet">' +
-	'	<select name="type">' +
-	'		<option value="option">{{text.answerOption}}</option>' +
-	'		<option value="option.exclusive">{{text.answerOptionExclusive}}</option>' +
-	'		<option value="textarea">{{text.answerTextarea}}</option>' +
-	'	</select>' +
-	'	<input name="value" />' +
-	'	<i class="Streams_question_remove"></i>' +
-	'</div>'
-);
-
-Q.Template.set('Streams/answer/composer',
-	'<h2 class="Streams_question_head">{{title}}</h2>' +
-	'<div class="Streams_question_content">{{content}}</div>' +
-	'<div class="Streams_question_answers"></div>' +
-	'<button name="submit" type="button" class="Q_button">{{text.SaveAnswer}}</button>'
-);
 
 })(Q, Q.$, window);
