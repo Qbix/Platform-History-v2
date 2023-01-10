@@ -11,12 +11,13 @@
  */
 Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams_question_preview (options, preview) {
 	var tool = this;
+	var $toolElement = $(tool.element);
 	var state = this.state;
 	tool.preview = preview;
 
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
-	preview.state.editable = ["icon"];
+	preview.state.editable = ["icon", "title"];
 	Q.Text.get('Streams/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
@@ -29,10 +30,28 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 	});
 
 	if (preview.state.streamName) {
-		$(tool.element).on(Q.Pointer.fastclick, function () {
+		$toolElement.on(Q.Pointer.fastclick, function () {
 			Q.handle(state.onInvoke, tool);
 		});
 	}
+
+	preview.state.onLoad.add(function () {
+		// add edit action
+		$toolElement.plugin('Q/actions', {
+			actions: {
+				edit: tool.edit.bind(tool),
+				delete: function () {
+					Q.confirm(tool.text.AreYouSure, function (result) {
+						if (!result) {
+							return;
+						}
+
+						tool.preview.delete();
+					});
+				}
+			}
+		});
+	}, tool);
 
 	if (tool.element.parentNode) {
 		// observe dom elements for mutation
@@ -72,62 +91,70 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 		var publisherId = stream.fields.publisherId;
 		var streamName = stream.fields.name;
 		var $toolElement = $(tool.element);
-		var userId = Q.Users.loggedInUserId();
 
 		// retain with stream
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
 		$toolElement.tool("Streams/default/preview").activate(function () {
-			var $previewContainer = $(".Streams_preview_container", tool.element);
+			var $previewContents = $(".Streams_preview_contents", tool.element);
 
-			if (!$previewContainer.length) {
-				return console.warn("Streams/question/preview: previewContainer not found");
+			var content = stream.fields.content;
+			if (content) {
+				$("<div class='Streams_question_description'>").appendTo($previewContents).html(content);
 			}
 
 			tool.$answersRelated = $("<div>").insertAfter($toolElement);
 			tool.$answersRelated.tool("Streams/related", {
 				publisherId: publisherId,
 				streamName: streamName,
-				relationType: "Streams/answer",
+				relationType: "Streams/answers",
 				isCategory: true,
-				realtime: true,
-				sortable: false,
-				beforeRenderPreview: function (tff) {
-					if (!stream.testWriteLevel("edit") && tff.publisherId !== userId) {
-						return false;
-					}
-				},
-				creatable: {
-					"Streams/answer": {
-						publisherId: userId,
-						title: tool.text.NewAnswer
-					}
-				}
+				realtime: false,
+				sortable: true
 			}).activate(function () {
-				var relatedTool = this;
-
 				$(".Streams_preview_container", $toolElement).on(Q.Pointer.fastclick, function (event) {
 					// check if user already answer
 					if (!state.multipleAnswers) {
 						var answered = false;
-						$(".Streams_preview_tool", relatedTool.element).each(function () {
-							var previewTool = Q.Tool.from(this, "Streams/preview");
-
-							if (previewTool.state.streamName && previewTool.state.publisherId === userId) {
-								answered = true;
-							}
-						});
-
 						if (answered) {
 							return Q.alert(tool.text.AlreadyAnswered);
 						}
 					}
-
-					var composerTool = Q.Tool.from($(".Streams_preview_composer", tool.$answersRelated), "Streams/preview");
-					composerTool.create(event);
 				});
 			});
+
+			tool.$answersRelated[0].forEachTool("Streams/answer/preview", function () {
+				this.state.onRefresh.add(function () {
+					$("input[type=radio],input[type=checkbox]", this.element).on('change', function () {
+						var $this = $(this);
+
+						if (!$this.prop("checked")) {
+							//$this.prop("checked", false);
+							//TODO: send request to leave user from answer stream
+							return;
+						}
+
+						$("input[type=radio],input[type=checkbox]", tool.$answersRelated).not($this).each(function () {
+							var $_this = $(this);
+
+							if (!$_this.prop("checked")) {
+								return;
+							}
+
+							if (!state.multipleAnswers || ($_this.prop("type") === "radio" && $this.prop("type") === "radio")) {
+								$_this.prop("checked", false).trigger("change");
+							}
+						});
+
+						//$this.prop("checked", true);
+						//TODO: send request to join user to answer stream
+					});
+				}, this);
+			}, tool);
 		});
+
+		// on create question call edit immediately
+		tool.preview.state.onNewStreamPreview.add(tool.edit.bind(tool), tool);
 	},
 
 	/**
@@ -138,33 +165,80 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 	composer: function (callback) {
 		var tool = this;
 
+		Q.prompt(null, function (value) {
+			if (!value) {
+				return;
+			}
+
+			Q.handle(callback, tool, [{
+				title: value
+			}]);
+		}, {
+			title: tool.text.NewQuestion
+		});
+	},
+	/**
+	 * Start edit dialog
+	 * @method edit
+	 */
+	edit: function () {
+		var tool = this;
+
 		Q.Dialogs.push({
-			title: tool.text.NewQuestion,
-			className: "Streams_dialog_newQuestion",
-			content: $("<div>").tool("Streams/question", {
-				mode: "questionComposer"
-			}),
+			title: tool.text.EditQuestion,
+			className: "Streams_dialog_editQuestion",
+			template: {
+				name: "Streams/question/composer"
+			},
 			onActivate: function (dialog) {
-				var questionTool = Q.Tool.from($(".Streams_question_tool", dialog), "Streams/question");
-
-				if (!questionTool) {
-					throw new Q.error("Streams/question/preview: question tool not found");
-				}
-
-				questionTool.state.onSubmit.set(function (title, content, answers) {
-					Q.Dialogs.pop();
-
-					Q.handle(callback, tool, [{
-						title: title,
-						content: content,
-						attributes: {
-							answers: answers
+				$(".Streams_question_title", dialog).tool("Streams/inplace", {
+					stream: tool.stream,
+					field: "title",
+					inplaceType: "text",
+					inplace: {
+						placeholder: tool.text.TitlePlaceholder,
+						selectOnEdit: false
+					}
+				}).activate();
+				$(".Streams_question_description", dialog).tool("Streams/inplace", {
+					stream: tool.stream,
+					field: "content",
+					inplaceType: "textarea",
+					inplace: {
+						placeholder: tool.text.ContentPlaceholder,
+						selectOnEdit: false
+					}
+				}).activate();
+				$(".Streams_question_answers", dialog).tool("Streams/related", {
+					stream: tool.stream,
+					relationType: "Streams/answers",
+					realtime: false,
+					sortable: true,
+					isCategory: true,
+					creatable: {
+						"Streams/answer": {
+							publisherId: tool.stream.fields.publisherId,
+							title: tool.text.NewPossibleAnswer
 						}
-					}]);
-				}, tool);
+					}
+				}).activate();
+			},
+			onClose: function () {
+				var answersRelated = Q.Tool.from(tool.$answersRelated, "Streams/related");
+				if (answersRelated) {
+					answersRelated.refresh();
+				}
 			}
 		});
 	}
 });
+
+Q.Template.set('Streams/question/composer',
+	`<div class="Streams_question_title"></div>
+	<div class="Streams_question_description"></div>
+	<h2 class="Streams_question_head">{{questions.Answers}}</h2>
+	<div class="Streams_question_answers"></div>`,
+	{text: ['Streams/content']}
+);
 
 })(Q, Q.$, window);

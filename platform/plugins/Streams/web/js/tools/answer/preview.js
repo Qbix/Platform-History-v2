@@ -13,7 +13,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 	var state = this.state;
 	tool.preview = preview;
 
-	preview.state.editable = false;
+	preview.state.editable = ["icon", "title"];
 
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
@@ -37,6 +37,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 
 {
 	titleMaxLength: 255,
+	onRefresh: new Q.Event(),
 	onInvoke: new Q.Event()
 },
 
@@ -46,31 +47,29 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		tool.stream = stream;
 		var publisherId = stream.fields.publisherId;
 		var streamName = stream.fields.name;
+		var type = stream.getAttribute("type");
+		var content = stream.fields.content;
 		var $toolElement = $(tool.element);
+		var $toolContent;
 
 		// retain with stream
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
-		$toolElement.tool("Streams/default/preview").activate(function () {
-			$(".Streams_preview_icon", this.element).replaceWith($("<div>").tool("Users/avatar", {
-				userId: publisherId,
-				short: true
-			}).activate());
-		});
+		if (type === "option" || type === "option.exclusive") {
+			$toolContent = $("<label class='Streams_question_answer_container' />")
+				.append(
+					$("<input />").attr({
+						type: (type === "option" ? "checkbox" : "radio")
+					}),
+					$("<span />").text(content)
+				).appendTo($toolElement);
+		} else if (type === "textarea") {
+			$toolContent = $("<textarea placeholder='" + (content || tool.text.FreeAnswer) + "'></textarea>").appendTo($toolElement);
+		}
 
-		$toolElement.on(Q.Pointer.fastclick, function () {
-			Q.Dialogs.push({
-				title: tool.text.AnswerDetails,
-				className: "Streams_dialog_answer",
-				template: {
-					name: "Streams/answer/view",
-					fields: {
-						options: stream.getAttribute("options") || [],
-						content: stream.fields.content
-					}
-				}
-			});
-		});
+		$toolElement.html($toolContent);
+
+		Q.handle(tool.state.onRefresh, tool);
 	},
 
 	/**
@@ -82,34 +81,36 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		var tool = this;
 		var previewState = tool.preview.state;
 
+		previewState.onCreate.set(function () {
+			Q.Dialogs.pop();
+		}, tool);
+
 		Q.Dialogs.push({
-			title: tool.text.AnswerQuestion,
-			className: "Streams_dialog_answer",
-			content: $("<div>").tool("Streams/question", {
-				mode: "answerComposer",
-				publisherId: previewState.related.publisherId,
-				streamName: previewState.related.streamName
-			}),
+			title: tool.text.NewAnswer,
+			className: "Streams_dialog_answer_composer",
+			template: {
+				name: "Streams/answer/composer"
+			},
 			onActivate: function (dialog) {
-				var questionTool = Q.Tool.from($(".Streams_question_tool", dialog), "Streams/question");
+				var $select = $("select[name=type]", dialog);
+				var $input = $("input[name=value]", dialog);
 
-				if (!questionTool) {
-					throw new Q.error("Streams/answer/preview: question tool not found");
-				}
+				$select.on("change", function () {
+					var type = $select.val();
 
-				questionTool.state.onSubmit.set(function (answers) {
-					Q.Dialogs.pop();
-
-					var title = "";
-					var content = "";
-
-					if (!Q.isEmpty(answers.options)) {
-						title = answers.options.join(". ");
+					if (type === "textarea") {
+						$input.attr("placeholder", tool.text.Placeholder);
+					} else {
+						$input.removeAttr("placeholder");
 					}
+				}).trigger("change");
 
-					if (answers.textarea) {
-						title = title || answers.textarea;
-						content = answers.textarea;
+				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
+					var title = $input.val();
+					var content = title;
+
+					if (!title) {
+						return Q.alert(tool.text.TitleRequired);
 					}
 
 					if (title.length > 255) {
@@ -120,21 +121,32 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 						title: title,
 						content: content,
 						attributes: {
-							options: answers.options
+							type: $select.val()
 						}
 					}]);
-				}, tool);
+					$(this).addClass("Q_working");
+				});
 			}
 		});
 	}
 });
 
+Q.Template.set('Streams/answer/composer',
+`<select name="type">
+			<option value="option">{{questions.answerOption}}</option>
+			<option value="option.exclusive">{{questions.answerOptionExclusive}}</option>
+			<option value="textarea">{{questions.answerTextarea}}</option>
+		</select>
+		<input name="value" />
+		<button name="save" type="button" class="Q_button">{{questions.Save}}</button>`,
+{text: ['Streams/content']}
+);
 Q.Template.set("Streams/answer/view",
-	'<ul>' +
-	'{{#each options}}' +
-		'<li>{{this}}</li>' +
-	'{{/each}}' +
-	'</ul>' +
-	'<div class="Streams_answer_content">{{content}}</div>'
+`<ul>
+	{{#each options}}
+		<li>{{this}}</li>
+	{{/each}}
+	</ul>
+	<div class="Streams_answer_content">{{content}}</div>`
 );
 })(Q, Q.$, window);

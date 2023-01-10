@@ -550,7 +550,9 @@
         "AnswerQuestion": "Answer Question",
         "SetYourAnswer": "Please answer the question",
         "NewQuestion": "New Question",
+        "EditQuestion": "Edit Question",
         "NewAnswer": "New Answer",
+        "NewPossibleAnswer": "New Possible Answer",
         "AnswerDetails": "Answer Details",
         "answerOption": "Option",
         "answerOptionExclusive": "Exclusive",
@@ -558,13 +560,14 @@
         "FreeAnswer": "Write your answer here",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
+        "Save": "Save",
+        "TitleRequired": "Title required!",
         "AlreadyAnswered": "Already answered",
         "TitlePlaceholder": "Type your question",
         "ContentPlaceholder": "Put any additional information here to help people answer",
         "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Placeholder": "Placeholder",
+        "AreYouSure": "Are you sure?"
     },
     "experience": {
         "NewExperience": "New Experience",

@@ -228,7 +228,7 @@
 /* </Streams_pdf_preview> */
 
 /* <Streams_question_preview> */
-.Streams_dialog_newQuestion .Q_dialog_content,
+.Streams_dialog_editQuestion .Q_dialog_content,
 .Streams_dialog_answer .Q_dialog_content {
 	padding: 10px;
 	min-width: 300px;
@@ -237,8 +237,31 @@
 .Streams_question_preview_tool {
 	cursor: pointer;
 }
+.Streams_question_preview_tool .Streams_preview_title,
+.Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool,
+.Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool .Q_inplace_tool_container {
+	width: 100%;
+}
+.Streams_question_preview_tool .Q_inplace_tool_static_container {
+	font-weight: bold;
+	font-size: 1.5em;
+	padding: 0;
+	overflow: hidden;
+	text-overflow: unset;
+}
+.Streams_question_preview_tool .Q_inplace_tool .Q_inplace_tool_static {
+	border-bottom: 1px solid #000;
+	width: 100%;
+	text-align: center;
+}
+.Streams_question_preview_tool .Streams_question_description {
+	text-align: center;
+}
+.Streams_question_preview_tool .Streams_preview_icon {
+	display: none;
+}
 .Streams_question_preview_tool + .Streams_related_tool {
-	margin-left: 40px;
+	margin-left: 20px;
 }
 .Streams_question_preview_tool + .Streams_related_tool:not(:last-of-type) {
 	margin-bottom: 20px;
@@ -249,9 +272,6 @@
 .Streams_question_preview_tool:not(:last-of-type),
 .Streams_answer_preview_tool:not(:last-of-type) {
 	margin-bottom: 5px;
-}
-.Streams_answer_preview_tool .Streams_preview_icon {
-	visibility: hidden;
 }
 .Streams_answer_preview_tool .Users_avatar_tool {
 	margin-right: 5px;
@@ -266,6 +286,53 @@
 	white-space: normal;
 	padding-right: 30px;
 
+}
+.Streams_question_preview_tool .Streams_question_answers {
+	margin-top: 10px;
+	overflow: hidden;
+}
+.Streams_dialog_editQuestion .Streams_inplace_tool,
+.Streams_dialog_editQuestion .Streams_inplace_tool .Q_inplace_tool_container,
+.Streams_dialog_editQuestion .Streams_inplace_tool .Q_inplace_tool_container .Q_inplace_tool_static_container {
+	width: 100%;
+	height: 40px;
+}
+
+.Streams_answer_preview_tool label {
+	display: block;
+	padding: 5px;
+	margin-bottom: 10px;
+	text-align: left;
+}
+.Streams_answer_preview_tool label span {
+	margin-left: 5px;
+}
+.Streams_answer_preview_tool input[type=checkbox],
+.Streams_answer_preview_tool input[type=radio] {
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	transform: scale(2);
+}
+.Streams_answer_preview_tool textarea {
+	width: 100%;
+}
+
+.Streams_dialog_answer_composer select,
+.Streams_dialog_answer_composer input {
+	height: 40px;
+}
+.Streams_dialog_answer_composer select,
+.Streams_dialog_answer_composer select option {
+	font-size: 110%;
+}
+.Streams_dialog_answer_composer .Q_dialog_content {
+	white-space: nowrap;
+	padding: 5px 5px 0 5px;
+}
+.Streams_dialog_answer_composer .Q_dialog_content > * {
+	vertical-align: middle;
 }
 /* </Streams_question_preview> */
 
