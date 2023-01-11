@@ -52,30 +52,6 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			}
 		});
 	}, tool);
-
-	if (tool.element.parentNode) {
-		// observe dom elements for mutation
-		tool.domObserver = new MutationObserver(function (mutations) {
-			mutations.forEach(function(mutation) {
-				if (mutation.type !== 'childList' || Q.isEmpty(mutation.removedNodes)) {
-					return;
-				}
-
-				mutation.removedNodes.forEach(function(removedElement) {
-					if (removedElement.id === tool.element.id) {
-						if (tool.$answersRelated && tool.$answersRelated.length) {
-							// remove answers related tool
-							Q.Tool.remove(tool.$answersRelated[0], true, true);
-						}
-
-						tool.domObserver.disconnect();
-					}
-				});
-			});
-		});
-		tool.domObserver.observe(tool.element.parentNode, {childList: true});
-	}
-
 },
 
 {
@@ -230,6 +206,15 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				}
 			}
 		});
+	},
+	Q: {
+		beforeRemove: function () {
+			var $answersRelated = this.$answersRelated;
+			if ($answersRelated && $answersRelated.length) {
+				// remove answers related tool
+				Q.Tool.remove($answersRelated[0], true, true);
+			}
+		}
 	}
 });
 
