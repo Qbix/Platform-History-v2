@@ -347,8 +347,7 @@
 				"defaults": {
 					"title": "Untitled question",
 					"icon": "Streams/question",
-					"readLevel": 20,
-					"writeLevel": 0
+					"readLevel": 20
 				}
 			},
 			"Streams/answer": {
@@ -356,6 +355,7 @@
 				"edit": true,
 				"defaults": {
 					"icon": "Streams/answer",
+					"readLevel": 20,
 					"writeLevel": 0
 				}
 			},
