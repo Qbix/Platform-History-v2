@@ -6,6 +6,7 @@
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
  * @param {integer} [options.titleMaxLength] max length of stream title
+ * @param {boolean} [options.participants=false] if tru show Streams/participants tool if enough permissions
  * @param {Q.Event} [options.onInvoke] occur onclick tool element
  */
 Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_answer_preview (options, preview) {
@@ -33,10 +34,13 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 			Q.handle(state.onInvoke, tool);
 		});
 	}
+
+	tool.Q.onStateChanged('participants').set(tool.setParticipants.bind(tool), tool);
 },
 
 {
 	titleMaxLength: 255,
+	participants: false,
 	onRefresh: new Q.Event(),
 	onInvoke: new Q.Event()
 },
@@ -49,29 +53,68 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		var streamName = stream.fields.name;
 		var type = stream.getAttribute("type");
 		var content = stream.fields.content;
-		var $toolElement = $(tool.element);
-		var $toolContent;
+		var participant = stream.participant || {};
+		var extra = participant.getExtra && participant.getExtra("content");
 
-		// retain with stream
+		$(tool.element).attr("data-type", type);
+
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
-		if (type === "option" || type === "option.exclusive") {
-			$toolContent = $("<label class='Streams_question_answer_container' />")
-				.append(
-					$("<input />").attr({
-						type: (type === "option" ? "checkbox" : "radio")
-					}),
-					$("<span />").text(content)
-				).appendTo($toolElement);
-		} else if (type === "textarea") {
-			$toolContent = $("<textarea placeholder='" + (content || tool.text.FreeAnswer) + "'></textarea>").appendTo($toolElement);
-		}
+		Q.Template.render("Streams/answer/view", {
+			type: type,
+			content: content,
+			checked: participant.state === "participating",
+			extra: extra
+		}, function (err, html) {
+			if (err) {
+				return;
+			}
 
-		$toolElement.html($toolContent);
+			tool.element.innerHTML = html;
 
-		Q.handle(tool.state.onRefresh, tool);
+			tool.setParticipants();
+
+			var $participants = $(".Streams_answer_participants", tool.element);
+			stream.onFieldChanged("participatingCount").set(function (modFields, field) {
+				if ($participants.hasClass("Streams_participants_tool")) {
+					return;
+				}
+
+				$participants.html(modFields[field] || "");
+			}, tool);
+
+			Q.handle(tool.state.onRefresh, tool);
+		});
 	},
+	/**
+	 * Set participants tool
+	 * @method setParticipants
+	 */
+	setParticipants: function () {
+		var tool = this;
+		var state = this.state;
+		var publisherId = tool.stream.fields.publisherId;
+		var streamName = tool.stream.fields.name;
+		var $participants = $(".Streams_answer_participants", tool.element);
 
+		$(tool.element).attr("data-participants", state.participants);
+		$participants.empty();
+
+		if (state.participants && tool.stream.testReadLevel("participants")) {
+			$participants.tool("Streams/participants", {
+				publisherId: publisherId,
+				streamName: streamName,
+				invite: false,
+				showSummary: true,
+				maxShow: 100,
+				showControls: true,
+				hideIfNoParticipants: true
+			}).activate();
+		} else {
+			Q.Tool.remove($participants[0], true, false);
+			$participants.html(tool.stream.fields.participatingCount || "");
+		}
+	},
 	/**
 	 * Start composer dialog
 	 * @method composer
@@ -142,11 +185,17 @@ Q.Template.set('Streams/answer/composer',
 {text: ['Streams/content']}
 );
 Q.Template.set("Streams/answer/view",
-`<ul>
-	{{#each options}}
-		<li>{{this}}</li>
-	{{/each}}
-	</ul>
-	<div class="Streams_answer_content">{{content}}</div>`
+`{{#ifEquals type "textarea"}}
+		<textarea placeholder="{{content}}">{{extra}}</textarea>
+		<button class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
+	{{/ifEquals}}
+	{{#ifEquals type "option"}}
+		<label class='Streams_question_answer_container'><input type="checkbox" {{#if checked}}checked="checked"{{/if}} value="{{content}}"><span>{{content}}</span></label>
+	{{/ifEquals}}
+	{{#ifEquals type "option.exclusive"}}
+		<label class='Streams_question_answer_container'><input type="radio" {{#if checked}}checked="checked"{{/if}} value="{{content}}"><span>{{content}}</span></label>
+	{{/ifEquals}}
+	<div class="Streams_answer_participants"></div>`,
+	{text: ['Streams/content']}
 );
 })(Q, Q.$, window);

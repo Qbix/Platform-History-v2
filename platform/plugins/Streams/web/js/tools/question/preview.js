@@ -76,7 +76,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 			var content = stream.fields.content;
 			if (content) {
-				$("<div class='Streams_question_description'>").appendTo($previewContents).html(content);
+				$("<div class='Streams_question_subtitle'>").appendTo($previewContents).html(content);
 			}
 
 			tool.$answersRelated = $("<div>").insertAfter($toolElement);
@@ -101,12 +101,29 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 			tool.$answersRelated[0].forEachTool("Streams/answer/preview", function () {
 				this.state.onRefresh.add(function () {
-					$("input[type=radio],input[type=checkbox]", this.element).on('change', function () {
+					var answerTool = this;
+					var reqOptions = {
+						publisherId: answerTool.stream.fields.publisherId,
+						streamName: answerTool.stream.fields.name,
+						type: answerTool.stream.getAttribute("type"),
+						multipleAnswers: state.multipleAnswers
+					};
+					$("input[type=radio],input[type=checkbox]", answerTool.element).on('change', function () {
 						var $this = $(this);
 
 						if (!$this.prop("checked")) {
-							//$this.prop("checked", false);
-							//TODO: send request to leave user from answer stream
+							Q.req('Streams/answer', [], function (err, response) {
+								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
+								if (msg) {
+									$this.prop("checked", true);
+									return Q.alert(msg);
+								}
+							}, {
+								method: 'put',
+								fields: Q.extend(reqOptions, {
+									content: ""
+								})
+							});
 							return;
 						}
 
@@ -122,8 +139,38 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							}
 						});
 
-						//$this.prop("checked", true);
-						//TODO: send request to join user to answer stream
+						Q.req('Streams/answer', [], function (err, response) {
+							var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
+							if (msg) {
+								$this.prop("checked", false);
+								return Q.alert(msg);
+							}
+						}, {
+							method: 'put',
+							fields: Q.extend(reqOptions, {
+								content: $this.val()
+							})
+						});
+					});
+
+					$("button[name=send]", answerTool.element).on(Q.Pointer.click, function () {
+						var $textarea = $("textarea", answerTool.element);
+						if (!$textarea.length) {
+							return console.warn("textarea not found");
+						}
+
+						Q.req('Streams/answer', [], function (err, response) {
+							var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
+							if (msg) {
+								$this.prop("checked", false);
+								return Q.alert(msg);
+							}
+						}, {
+							method: 'put',
+							fields: Q.extend(reqOptions, {
+								content: $textarea.val()
+							})
+						});
 					});
 				}, this);
 			}, tool);
@@ -176,7 +223,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						selectOnEdit: false
 					}
 				}).activate();
-				$(".Streams_question_description", dialog).tool("Streams/inplace", {
+				$(".Streams_question_subtitle", dialog).tool("Streams/inplace", {
 					stream: tool.stream,
 					field: "content",
 					inplaceType: "textarea",
@@ -220,7 +267,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 Q.Template.set('Streams/question/composer',
 	`<div class="Streams_question_title"></div>
-	<div class="Streams_question_description"></div>
+	<div class="Streams_question_subtitle"></div>
 	<h2 class="Streams_question_head">{{questions.Answers}}</h2>
 	<div class="Streams_question_answers"></div>`,
 	{text: ['Streams/content']}

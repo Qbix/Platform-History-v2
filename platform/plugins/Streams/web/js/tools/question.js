@@ -22,7 +22,7 @@ Q.Tool.define("Streams/question", function(options) {
 		state.creatable["Streams/question"].title = tool.text.questions.NewQuestion;
 	}
 
-	$(tool.element).tool("Streams/related", state, Q.normalize(streamName)).activate();
+	$(tool.element).tool("Streams/related", state).activate();
 },
 
 {

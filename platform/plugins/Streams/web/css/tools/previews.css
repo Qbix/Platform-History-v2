@@ -237,24 +237,28 @@
 .Streams_question_preview_tool {
 	cursor: pointer;
 }
+.Streams_answer_preview_tool {
+	white-space: nowrap;
+}
 .Streams_question_preview_tool .Streams_preview_title,
 .Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool,
 .Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool .Q_inplace_tool_container {
 	width: 100%;
 }
 .Streams_question_preview_tool .Q_inplace_tool_static_container {
-	font-weight: bold;
-	font-size: 1.5em;
 	padding: 0;
 	overflow: hidden;
 	text-overflow: unset;
 }
-.Streams_question_preview_tool .Q_inplace_tool .Q_inplace_tool_static {
+.Streams_question_preview_tool .Streams_preview_title {
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 1em;
 	border-bottom: 1px solid #000;
 	width: 100%;
 	text-align: center;
 }
-.Streams_question_preview_tool .Streams_question_description {
+.Streams_question_preview_tool .Streams_question_subtitle {
 	text-align: center;
 }
 .Streams_question_preview_tool .Streams_preview_icon {
@@ -300,13 +304,30 @@
 
 .Streams_answer_preview_tool label {
 	display: block;
-	padding: 5px;
-	margin-bottom: 10px;
+	padding: 5px 40px 5px 5px;
 	text-align: left;
 }
 .Streams_answer_preview_tool label span {
 	margin-left: 5px;
 }
+.Streams_answer_preview_tool[data-participants=false] .Streams_answer_participants {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 34px;
+	width: 34px;
+	text-align: center;
+	line-height: 34px;
+	border: 1px solid red;
+	border-radius: 50%;
+}
+.Streams_answer_preview_tool[data-participants=false] .Streams_answer_participants:empty {
+	display: none;
+}
+.Streams_answer_preview_tool[data-participants=false][data-type=textarea] textarea {
+	width: calc(100% - 110px);
+}
+
 .Streams_answer_preview_tool input[type=checkbox],
 .Streams_answer_preview_tool input[type=radio] {
 	-ms-transform: scale(2); /* IE */
@@ -316,7 +337,8 @@
 	transform: scale(2);
 }
 .Streams_answer_preview_tool textarea {
-	width: 100%;
+	width: calc(100% - 80px);
+	vertical-align: middle;
 }
 
 .Streams_dialog_answer_composer select,
