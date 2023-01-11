@@ -184,7 +184,6 @@
 .live-editor-dialog-body {
     display: flex;
     position: relative;
-    padding: 10px;
     height: calc(100% - 40px);
     background: #424242;
     color:white;
@@ -194,7 +193,7 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 40%;
-    padding-right: 10px;
+    padding-top:10px;
     background: #424242;
     cursor:default;
     -webkit-touch-callout: none;
@@ -204,7 +203,149 @@
     -ms-user-select: none;
     user-select: none;
 }
-.live-editor-dialog-body .live-editor-popup-sources,
+/*start: streaming to facebook/rtmp/p2p broadcast section*/
+.live-editor-popup-streaming-controls .live-editor-stream-to-section {
+    background: #525252;
+}
+.live-editor-popup-streaming-controls .live-editor-stream-to-section-inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon {
+    display: flex;
+    justify-content: center;
+}
+.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon svg {
+    width: 40px;
+    height: 40px;
+}
+.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon svg path{
+    fill: #ffffff;
+}
+.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.live-editor-stream-to-section-fb {
+    min-width: 370px;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings {
+    overflow: hidden;
+    position: relative;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings label {
+    border: 1px solid #e1e1e1;
+    justify-content: space-between;
+    border-radius: 2px;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+    padding-left: 0;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings label input[type="text"],
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings label input[type="password"]{
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    height: 40px;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings .live-editor-stream-to-section-fb-start {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0 30px 0;
+    margin-left: 10px;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings .live-editor-stream-to-section-fb-start select {
+    margin-right: 10px;
+    max-width: 30%;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings .live-editor-stream-to-section-fb-start button {
+    background-color: #FFFFFF;
+    border: 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #111827;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none #D1D5DB solid;
+    text-decoration-thickness: auto;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings .live-editor-stream-to-section-fb-start button:hover {
+  background-color: rgb(249,250,251);
+}
+
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings .live-editor-stream-to-section-fb-start button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings .live-editor-stream-to-section-fb-start button:focus-visible {
+  box-shadow: none;
+}
+
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-live .live-editor-stream-to-section-fb-url {
+    border: 1px solid #e1e1e1;
+    justify-content: space-between;
+    border-radius: 2px;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-live .live-editor-stream-to-section-fb-url input{
+    width: 80%;
+    border: none;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-live .live-editor-stream-to-section-fb-url .live-editor-stream-to-section-fb-copy-url-btn{
+    padding: 10px 16px 10px 16px;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-live .live-editor-stream-to-section-fb-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-live .live-editor-stream-to-section-fb-buttons .live-editor-stream-to-section-fb-embed,
+.live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-live .live-editor-stream-to-section-fb-buttons .live-editor-stream-to-section-fb-stop{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0 30px 0;
+    margin-left: 10px;
+}
+
+
+/*end: streaming to facebook/rtmp/p2p broadcast section*/
+
+.live-editor-dialog-body .live-editor-popup-sources {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #383838;
+    background: #525252;
+    position: relative;
+    margin: 10px;
+    margin-top: 0;
+    flex: 1;
+}
+
 .live-editor-dialog-body .live-editor-popup-options {
     display: flex;
     flex-direction: column;
@@ -214,9 +355,7 @@
 }
 .live-editor-dialog-body .live-editor-popup-scenes {
     padding:10px;
-}
-.live-editor-dialog-body .live-editor-popup-scenes {
-    margin-top: 0;
+    margin: 0 10px 0 10px;
 }
 .live-editor-dialog-body .live-editor-popup-options {
     border: 1px solid #383838;
@@ -271,6 +410,8 @@
 .live-editor-dialog-body .live-editor-popup-preview {
     background: #282828;
     flex: 1;
+    padding-top: 10px;
+    padding-right: 10px;
 }
 .live-editor-popup-scenes-body, .live-editor-popup-sources-body, .live-editor-popup-options-body{
     flex-grow: 1;
@@ -615,6 +756,9 @@
     border-top: 1px solid #454545;
 }
 
+.live-editor-popup-sources-item:first-child {
+    border-top: none;
+}
 .live-editor-popup-sources-item {
     display: flex;
     flex-direction: row;
@@ -876,7 +1020,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
     background: #525252;
-    padding: 8px 10px;
+    padding: 8px 40px 8px 10px;
 }
 .live-editor-dialog-window .live-editor-close-sign {
     cursor: pointer;
@@ -1737,6 +1881,7 @@
     margin-left:10px;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-btn:first-child {
     margin-left:0;
@@ -1753,45 +1898,49 @@
   .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon svg path {
     fill: #ffffff;
   }
-  .live-editor-participants-list .live-editor-participants-item-sources {
+    .live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources {
     display: block;
-    padding-left: 15px;
-    padding-top: 10px;
+    padding: 10px;
+    min-width: 280px;
   }
-  .live-editor-participants-list .live-editor-participants-item-sources:empty {
+  /*.live-editor-participants-list .live-editor-participants-item-sources:empty {
     display: none;
-  }
-  .live-editor-participants-list .live-editor-participants-list-source {
+  }*/
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source {
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
     border-top: 1px solid #454545;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-desc {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source:first-child {
+    border-top: none;
+  }
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-desc {
     display: flex;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-icon svg {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-icon svg {
     width: 25px;
     height: 25px;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-icon svg path{
-    fill:#ffffff;
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-icon svg path {
+    fill:#8c8c8c;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-icon {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-icon {
     display: flex;
     align-items: center;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-text {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-text {
     margin-left:5px;
     display: flex;
     align-items: center;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg {
     width: 30px;
     height: 30px;
   }
-  .live-editor-participants-list .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg path{
-   fill: #ffffff;
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg path,
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg rect {
+   fill: #8c8c8c;
   }
   /*end:list of participants as sources*/
 

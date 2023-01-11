@@ -21,9 +21,13 @@
         settings: '<svg version="1.1" id="svg111" xml:space="preserve" width="682.66669" height="682.66669" viewBox="0 0 682.66669 682.66669" sodipodi:docname="settings (1).svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview72" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="0.90839741" inkscape:cx="117.78986" inkscape:cy="346.76453" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="g117" /><defs id="defs115"><clipPath clipPathUnits="userSpaceOnUse" id="clipPath125"><path d="M 0,512 H 512 V 0 H 0 Z" id="path123" /></clipPath></defs><g id="g117" transform="matrix(1.3333333,0,0,-1.3333333,0,682.66667)"><path d="m -64.267578,-442.71875 c -25.853717,0 -47.132812,21.27966 -47.132812,47.13281 v 10.96094 c -11.11849,3.55446 -21.82534,8.00409 -32.04102,13.28906 l -7.7539,-7.75195 c -8.8401,-8.85183 -20.84682,-13.81641 -33.33789,-13.81641 -12.48681,0 -24.49375,4.96296 -33.33399,13.81641 -7.30802,7.30802 -15.40104,15.40204 -22.70898,22.70898 -8.84723,8.83905 -13.81055,20.84005 -13.81055,33.32618 0,12.49093 4.96494,24.49508 13.81055,33.33398 4.10462,4.10413 4.88381,4.88394 7.75976,7.75977 -5.28538,10.21593 -9.7363,20.9212 -13.29101,32.03906 h -10.95899 c -25.85371,0 -47.13281,21.28159 -47.13281,47.13476 v 32.13282 c 0,25.85317 21.2791,47.13281 47.13281,47.13281 h 10.95704 c 3.55486,11.11899 8.00732,21.82432 13.29296,32.041014 -2.87624,2.875997 -3.65643,3.656431 -7.76171,7.761719 -8.84474,8.83817 -13.8086,20.84253 -13.8086,33.332031 0,12.487977 4.96477,24.490664 13.81445,33.330079 7.31,7.309995 15.40581,15.4048021 22.7129,22.7128901 8.839,8.8476129 20.84096,13.8085939 33.32617,13.8085939 12.49224,0 24.49847,-4.964769 33.33789,-13.8144533 4.10133,-4.1013309 4.88019,-4.87994392 7.7539,-7.7539062 10.21597,5.285344 20.92288,9.7344764 32.04102,13.2890625 v 10.960937 c 0,25.853154 21.279659,47.132813 47.132812,47.132813 h 32.132812 C -6.2816124,69.28125 15,48.002154 15,22.148437 V 11.1875 C 26.118333,7.6328504 36.824883,3.1819523 47.041016,-2.1035156 c 2.87582,2.87631486 3.654527,3.6564808 7.759765,7.7617187 8.838794,8.8449339 20.843559,13.8085939 33.333985,13.8085939 12.487444,0 24.490074,-4.964182 33.330074,-13.8144533 7.30499,-7.3059798 15.39793,-15.3969269 22.70508,-22.7050777 l 0.008,-0.0078 c 8.84692,-8.839351 13.80664,-20.841111 13.80664,-33.324219 10e-6,-12.488328 -4.96171,-24.49318 -13.80859,-33.332031 l -0.006,-0.0078 -7.7539,-7.751953 c 5.28565,-10.216848 9.73769,-20.923258 13.29296,-32.042968 h 10.95704 c 25.85371,0 47.13476,-21.27964 47.13476,-47.13281 v -32.13282 c 0,-25.85317 -21.28105,-47.13476 -47.13476,-47.13476 h -10.95899 c -3.55494,-11.11802 -8.00597,-21.82343 -13.29101,-32.03906 2.87345,-2.87358 3.65267,-3.65317 7.7539,-7.75391 l 0.006,-0.006 c 8.84653,-8.83939 13.80859,-20.84515 13.80859,-33.33398 10e-6,-12.48353 -4.96112,-24.48479 -13.80859,-33.32422 l -0.006,-0.008 -22.70508,-22.70312 c -8.84068,-8.85242 -20.84381,-13.81641 -33.330074,-13.81641 -12.491609,0 -24.499897,4.96424 -33.339844,13.81446 -4.10133,4.10133 -4.880438,4.88019 -7.753906,7.7539 C 36.825339,-376.62091 26.118493,-381.07054 15,-384.625 v -10.96094 c 0,-25.85371 -21.2810489,-47.13281 -47.134766,-47.13281 z m 0,30 h 32.132812 c 9.638248,0 17.134766,7.49456 17.134766,17.13281 v 22.14844 a 15.0015,15.0015 0 0 0 11.2519531,14.52539 c 16.2963859,4.20475 31.6898509,10.66041 45.8320309,19.02344 a 15.0015,15.0015 0 0 0 18.242188,-2.30469 c 0,0 7.388934,-7.39089 15.6875,-15.68945 a 15.0015,15.0015 0 0 0 0.0059,-0.006 c 3.212042,-3.21577 7.55886,-5.01563 12.115235,-5.01563 4.541714,0 8.894208,1.80206 12.103514,5.01563 a 15.0015,15.0015 0 0 0 0.008,0.006 l 22.7168,22.71875 a 15.0015,15.0015 0 0 0 0.008,0.006 c 3.21416,3.20989 5.01367,7.56228 5.01368,12.10547 0,4.55637 -1.79986,8.90124 -5.01563,12.11328 a 15.0015,15.0015 0 0 0 -0.004,0.006 c -8.29979,8.29879 -15.6914,15.6914 -15.6914,15.6914 a 15.0015,15.0015 0 0 0 -2.30274,18.24024 c 8.36257,14.14048 14.81644,29.53405 19.02344,45.83203 a 15.0015,15.0015 0 0 0 14.52539,11.25 h 22.14649 c 9.63824,0 17.13476,7.49797 17.13476,17.13476 v 32.13282 c 0,9.63679 -7.49652,17.13281 -17.13476,17.13281 h -22.14649 a 15.0015,15.0015 0 0 0 -14.52539,11.25195 c -4.20697,16.29879 -10.66246,31.69002 -19.02539,45.832033 a 15.0015,15.0015 0 0 0 2.30469,18.242188 l 15.68945,15.689453 a 15.0015,15.0015 0 0 0 0.008,0.0059 c 3.21475,3.21048 5.01368,7.556907 5.01368,12.113281 0,4.543181 -1.79952,8.893622 -5.01368,12.103516 a 15.0015,15.0015 0 0 0 -0.008,0.0078 c -7.30897,7.309973 -15.40774,15.406737 -22.71875,22.718749 a 15.0015,15.0015 0 0 0 -0.006,0.0059 c -3.209986,3.213716 -7.562974,5.015625 -12.103514,5.015625 -4.555202,0 -8.902513,-1.799705 -12.115235,-5.015625 a 15.0015,15.0015 0 0 0 -0.0059,-0.0059 c -8.29814,-8.298139 -15.6875,-15.689453 -15.6875,-15.689453 a 15.0015,15.0015 0 0 0 -18.242188,-2.304687 c -14.141413,8.363499 -29.53459,14.819451 -45.8320309,19.02539 A 15.0015,15.0015 0 0 0 -15,0 v 22.148437 c 0,9.638248 -7.495954,17.132813 -17.134766,17.132813 h -32.132812 c -9.638811,0 -17.132813,-7.494001 -17.132813,-17.132813 V 0 a 15.0015,15.0015 0 0 0 -11.251953,-14.523438 c -16.297436,-4.205939 -31.688666,-10.661891 -45.830076,-19.02539 a 15.0015,15.0015 0 0 0 -18.24414,2.304687 c 0,0 -7.38894,7.390888 -15.6875,15.689453 a 15.0015,15.0015 0 0 0 -0.006,0.0059 c -3.21058,3.214303 -7.55955,5.015625 -12.11328,5.015625 -4.54201,0 -8.89705,-1.800986 -12.10547,-5.013672 a 15.0015,15.0015 0 0 0 -0.006,-0.0078 c -7.31101,-7.312012 -15.4102,-15.40824 -22.7207,-22.718749 a 15.0015,15.0015 0 0 0 -0.006,-0.0059 c -3.21431,-3.210573 -5.01563,-7.563462 -5.01563,-12.105469 0,-4.555201 1.80074,-8.902121 5.01563,-12.113281 a 15.0015,15.0015 0 0 0 0.006,-0.0059 c 8.29856,-8.298566 15.68945,-15.689453 15.68945,-15.689453 a 15.0015,15.0015 0 0 0 2.30664,-18.242188 c -8.3634,-14.141243 -14.81829,-29.532733 -19.02539,-45.832033 a 15.0015,15.0015 0 0 0 -14.52539,-11.25195 h -22.14649 c -9.63824,0 -17.13281,-7.49602 -17.13281,-17.13281 v -32.13282 c 0,-9.63679 7.49457,-17.13476 17.13281,-17.13476 h 22.14649 a 15.0015,15.0015 0 0 0 14.52539,-11.25 c 4.20713,-16.2985 10.6604,-31.69037 19.02344,-45.83008 a 15.0015,15.0015 0 0 0 -2.30274,-18.24414 c 0,0 -7.39203,-7.39108 -15.6914,-15.68945 a 15.0015,15.0015 0 0 0 -0.004,-0.004 c -3.21592,-3.21272 -5.01758,-7.56003 -5.01758,-12.11523 0,-4.54201 1.80132,-8.8949 5.01563,-12.10547 a 15.0015,15.0015 0 0 0 0.006,-0.006 c 7.31152,-7.31053 15.41071,-15.40876 22.7207,-22.71875 a 15.0015,15.0015 0 0 0 0.008,-0.008 c 3.20775,-3.21254 7.56034,-5.01368 12.10352,-5.01368 4.55491,0 8.90143,1.80147 12.11133,5.01563 a 15.0015,15.0015 0 0 0 0.008,0.006 l 15.6875,15.68945 a 15.0015,15.0015 0 0 0 18.24219,2.30469 c 14.14217,-8.36303 29.53564,-14.81869 45.832026,-19.02344 a 15.0015,15.0015 0 0 0 11.251953,-14.52539 v -22.14844 c 0,-9.63881 7.494565,-17.13281 17.132813,-17.13281 z" id="path250" transform="translate(304.2002,442.7187)" /><path d="m 0,-207.80078 c -61.323725,0 -111.40039,50.0777 -111.40039,111.400389 C -111.40039,-35.076854 -61.323537,15 0,15 61.323537,15 111.40039,-35.076854 111.40039,-96.400391 111.40039,-157.72308 61.323725,-207.80078 0,-207.80078 Z m 0,30 c 45.086169,0 81.400391,36.31518 81.400391,81.400389 C 81.400391,-51.314034 45.086357,-15 0,-15 c -45.086357,0 -81.400391,-36.314034 -81.400391,-81.400391 0,-45.085209 36.314222,-81.400389 81.400391,-81.400389 z" id="path245" transform="translate(256,352.3999)" /></g></svg>',
         participantsEnabledMic: '<svg width="118.11147mm" height="122.57976mm" viewBox="0 0 118.11147 122.57976" version="1.1" id="svg502" xml:space="preserve" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="live_source_enabled_mic.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview504" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" inkscape:zoom="0.757225" inkscape:cx="-214.59936" inkscape:cy="472.7789" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="layer2" /><defs id="defs499" /><g inkscape:groupmode="layer" id="layer2" inkscape:label="Layer 2" transform="translate(55.951838,57.634966)" style="display:inline"><g id="g867" transform="translate(0.81433722,0.29295158)" style="display:inline"><path d="m 1.569985,26.932927 c 6.4834386,0 12.031824,-2.308214 16.647996,-6.922582 4.6154,-4.614363 6.923358,-10.1655888 6.923358,-16.648512 V -34.35424 c 0,-6.482926 -2.306152,-12.031827 -6.923358,-16.648516 -4.616172,-4.615657 -10.1645574,-6.925162 -16.647996,-6.925162 -6.4826632,0 -12.031824,2.309505 -16.648256,6.925162 -4.616688,4.615913 -6.924646,10.16559 -6.924646,16.648516 V 3.361833 c 0,6.4826649 2.30899,12.034149 6.924646,16.648512 4.615659,4.614368 10.1655928,6.922582 16.648256,6.922582 z" id="path375-3" inkscape:label="path375" style="display:inline;stroke-width:0.258016" /><path d="m 42.599121,-9.3821164 c -0.9304,-0.9332526 -2.037824,-1.4000066 -3.314738,-1.4000066 -1.275637,0 -2.38046,0.466754 -3.314737,1.4000066 -0.932218,0.9329994 -1.398696,2.0378247 -1.398696,3.3142225 V 3.361833 c 0,9.085793 -3.229853,16.856991 -9.688005,23.314885 -6.4561,6.458152 -14.228329,9.687226 -23.3143799,9.687226 -9.0857916,0 -16.8572471,-3.229074 -23.3156581,-9.687226 -6.457636,-6.456087 -9.686197,-14.228833 -9.686197,-23.314885 v -9.4297269 c 0,-1.2763978 -0.46675,-2.3812357 -1.399481,-3.3142225 -0.933247,-0.9332526 -2.037041,-1.4000066 -3.314739,-1.4000066 -1.277696,0 -2.382782,0.466754 -3.315511,1.4000066 -0.933505,0.9329994 -1.399998,2.0378247 -1.399998,3.3142225 V 3.361833 c 0,10.853461 3.622551,20.295317 10.865591,28.324015 7.243295,8.028958 16.193628,12.632746 26.8512596,13.810591 v 9.7249 H -22.004334 c -1.276927,0 -2.381752,0.467259 -3.314739,1.400512 -0.933253,0.932471 -1.400006,2.037804 -1.400006,3.314737 0,1.274855 0.466753,2.382266 1.400006,3.314737 0.932979,0.932471 2.037825,1.400514 3.314739,1.400514 h 47.144511 c 1.276672,0 2.38304,-0.467789 3.314738,-1.400514 0.934288,-0.932217 1.401295,-2.03962 1.401295,-3.314737 0,-1.276673 -0.467007,-2.38201 -1.401295,-3.314737 -0.931436,-0.93325 -2.037804,-1.400512 -3.314738,-1.400512 H 6.2843339 v -9.7249 C 16.940156,44.318594 25.889716,39.714806 33.133787,31.685848 40.377856,23.65715 44.001441,14.215294 44.001441,3.361833 v -9.4297269 c 0,-1.2761442 -0.467788,-2.3802046 -1.40232,-3.3142225 z" id="path377" style="display:inline;stroke-width:0.258016" /></g></g></svg>',
         participantsDisabledMic: '<svg width="118.11147mm" height="122.57976mm" viewBox="0 0 118.11147 122.57976" version="1.1" id="svg502" xml:space="preserve" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="live_source_enabled_mic.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview504" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" inkscape:zoom="0.757225" inkscape:cx="-214.59936" inkscape:cy="472.7789" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="layer2" /><defs id="defs499" /><g inkscape:groupmode="layer" id="layer2" inkscape:label="Layer 2" transform="translate(55.951838,57.634966)" style="display:inline"><path id="path375-3" style="display:inline;stroke-width:0.258016" inkscape:label="path375" d="m 1.5697999,-57.927917 c -6.4826567,0 -12.0316519,2.309506 -16.6480799,6.925158 -4.616683,4.615909 -6.924641,10.165677 -6.924641,16.648597 v 0.701249 l 45.86335,44.857727 C 24.713393,8.7626975 25.141488,6.1487572 25.141488,3.3618817 V -34.354162 c 0,-6.48292 -2.306407,-12.031912 -6.923609,-16.648597 -4.616167,-4.615652 -10.164647,-6.925158 -16.6480791,-6.925158 z m 29.5217121,76.205167 6.976835,6.823873 c 3.953211,-6.47616 5.932971,-13.721954 5.932971,-21.7392413 v -9.4299154 c 0,-1.2761429 -0.46745,-2.3799926 -1.401981,-3.3140096 -0.930399,-0.9332517 -2.038131,-1.3999147 -3.315043,-1.3999147 -1.275636,0 -2.380251,0.466663 -3.314527,1.3999147 -0.932217,0.9329985 -1.398881,2.0376131 -1.398881,3.3140096 v 9.4299154 c 0,5.44377 -1.160781,10.4151563 -3.479374,14.9153683 z m 1.942,13.517005 -6.748425,-6.600114 c -0.449795,0.501306 -0.915557,0.996192 -1.401981,1.482597 -6.456094,6.458145 -14.228298,9.687264 -23.3143397,9.687264 -9.0857825,0 -16.8574853,-3.229119 -23.3158893,-9.687264 -6.45763,-6.456081 -9.686231,-14.228813 -9.686231,-23.3148563 v -9.4299154 c 0,-1.2763965 -0.466667,-2.3810237 -1.399397,-3.3140096 -0.933246,-0.9332517 -2.03683,-1.3999147 -3.314527,-1.3999147 -1.277694,0 -2.382832,0.466663 -3.31556,1.3999147 -0.933504,0.9329985 -1.400431,2.0376131 -1.400431,3.3140096 v 9.4299154 c 0,10.8534503 3.622971,20.2951623 10.866003,28.3238523 7.243288,8.02895 16.193454,12.632683 26.8510747,13.810527 v 9.724988 H -22.004472 c -1.276925,0 -2.38154,0.467179 -3.314526,1.400431 -0.933252,0.93247 -1.399915,2.038111 -1.399915,3.315043 0,1.274854 0.466663,2.382056 1.399915,3.314526 0.932978,0.93247 2.037614,1.400432 3.314526,1.400432 h 47.144409 c 1.276671,0 2.383346,-0.467708 3.315044,-1.400432 0.934287,-0.932216 1.401464,-2.03941 1.401464,-3.314526 0,-1.276672 -0.467177,-2.382317 -1.401464,-3.315043 -0.931436,-0.933249 -2.038111,-1.400431 -3.315044,-1.400431 H 6.2842408 V 45.496261 C 16.89133,44.323802 25.807046,39.755314 33.033512,31.794255 Z M 19.536145,18.592993 -22.002921,-22.035018 V 3.3618817 c 0,6.4826584 2.30899,12.0342373 6.924641,16.6485963 4.615655,4.614363 10.1654232,6.922575 16.6480799,6.922575 6.4834321,0 12.0319121,-2.308212 16.6480791,-6.922575 0.463034,-0.462929 0.901681,-0.935702 1.318266,-1.417485 z" transform="translate(0.81433625,0.29295133)" sodipodi:nodetypes="sssccssssccsscscssccccscsscscsssccscscsscscscccccssscc" /><rect id="rect454" width="8.3053827" height="161.62758" x="-4.4936342" y="-76.138618" ry="3.925405" transform="rotate(-45.635355)" /></g></svg>',
-        participantsEnabledCamera: '<svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 469.35991 437.31813" xml:space="preserve" sodipodi:docname="video-camera.svg" width="469.35989" height="437.31812" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs1011" /><sodipodi:namedview id="namedview1009" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.2480986" inkscape:cx="187.08458" inkscape:cy="189.88885" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path d="M 266.09589,95.187057 H 52.591893 c -28.16,0 -51.2000001,23.040003 -51.2000001,51.200003 v 172.544 c 0,28.16 23.0400001,51.2 51.2000001,51.2 H 266.09589 c 28.16,0 51.2,-23.04 51.2,-51.2 v -172.544 c 0,-28.672 -23.04,-51.200003 -51.2,-51.200003 z" id="path966" /><path d="m 431.47189,123.68345 c -3.072,0.512 -6.144,2.048 -8.704,3.584 l -79.872,46.08 v 118.784 l 80.384,46.08 c 14.848,8.704 33.28,3.584 41.984,-11.264 2.56,-4.608 4.096,-9.728 4.096,-15.36 v -158.208 c 0,-18.944 -17.92,-34.304 -37.888,-29.696 z" id="path972" /> </svg>',
-        participantsDisabledCamera: '<svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 467.96681 437.31813" xml:space="preserve" sodipodi:docname="video-camera.svg" width="467.9668" height="437.31812" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs1011" /><sodipodi:namedview id="namedview1009" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.2480986" inkscape:cx="174.26508" inkscape:cy="222.73881" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path id="path966" d="M 154.05859,95.187502 315.90234,253.48047 V 146.38672 c 0,-28.67197 -23.03925,-51.199218 -51.19922,-51.199218 z m 187.44531,183.332028 33.62696,32.88867 46.75586,26.80274 c 14.84798,8.70399 33.28038,3.58431 41.98437,-11.26367 2.56,-4.608 4.0957,-9.72739 4.09571,-15.35938 V 153.37891 c 0,-18.94398 -17.91874,-34.30331 -37.88672,-29.69532 -3.072,0.512 -6.14508,2.04799 -8.70508,3.58399 l -79.8711,46.08008 z M 315.90234,297.38672 109.16797,95.187502 H 51.199219 C 23.039247,95.187502 0,118.22675 0,146.38672 v 172.54492 c 0,28.15997 23.039247,51.19922 51.199219,51.19922 H 264.70312 c 28.15997,0 51.19922,-23.03925 51.19922,-51.19922 z" sodipodi:nodetypes="ccssccccccsccccccssssssc" /> <rect id="rect454" width="31.390423" height="610.87592" x="-9.9286299" y="13.175447" ry="14.836177" transform="rotate(-45.635355)" /></svg>',
-        participantsScreenSource: '<svg id="Capa_1" enable-background="new 0 0 512 512" height="462" viewBox="0 0 512 462" width="512" version="1.1" sodipodi:docname="monitor.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1614" /> <sodipodi:namedview id="namedview1612" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.1739077" inkscape:cx="291.33465" inkscape:cy="190.81568" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <g id="g1609" transform="translate(0,-25)"> <path d="M 482,25 H 30 C 13.46,25 0,38.46 0,55 v 298 c 0,16.54 13.46,30 30,30 h 452 c 16.54,0 30,-13.46 30,-30 V 55 C 512,38.46 498.54,25 482,25 Z" id="path1605" /> <path d="M 416,457 H 335 V 413 H 177 v 44 H 96 c -8.28,0 -15,6.72 -15,15 0,8.28 6.72,15 15,15 h 320 c 8.28,0 15,-6.72 15,-15 0,-8.28 -6.72,-15 -15,-15 z" id="path1607" /> </g> </svg>'
+        participantsEnabledCamera: '<svg version="1.1" x="0px" y="0px" viewBox="0 0 469.35991 437.31813" xml:space="preserve" sodipodi:docname="video-camera.svg" width="469.35989" height="437.31812" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs1011" /><sodipodi:namedview id="namedview1009" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.2480986" inkscape:cx="187.08458" inkscape:cy="189.88885" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path d="M 266.09589,95.187057 H 52.591893 c -28.16,0 -51.2000001,23.040003 -51.2000001,51.200003 v 172.544 c 0,28.16 23.0400001,51.2 51.2000001,51.2 H 266.09589 c 28.16,0 51.2,-23.04 51.2,-51.2 v -172.544 c 0,-28.672 -23.04,-51.200003 -51.2,-51.200003 z" id="path966" /><path d="m 431.47189,123.68345 c -3.072,0.512 -6.144,2.048 -8.704,3.584 l -79.872,46.08 v 118.784 l 80.384,46.08 c 14.848,8.704 33.28,3.584 41.984,-11.264 2.56,-4.608 4.096,-9.728 4.096,-15.36 v -158.208 c 0,-18.944 -17.92,-34.304 -37.888,-29.696 z" id="path972" /> </svg>',
+        participantsDisabledCamera: '<svg version="1.1" x="0px" y="0px" viewBox="0 0 467.96681 437.31813" xml:space="preserve" sodipodi:docname="video-camera.svg" width="467.9668" height="437.31812" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs1011" /><sodipodi:namedview id="namedview1009" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.2480986" inkscape:cx="174.26508" inkscape:cy="222.73881" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path id="path966" d="M 154.05859,95.187502 315.90234,253.48047 V 146.38672 c 0,-28.67197 -23.03925,-51.199218 -51.19922,-51.199218 z m 187.44531,183.332028 33.62696,32.88867 46.75586,26.80274 c 14.84798,8.70399 33.28038,3.58431 41.98437,-11.26367 2.56,-4.608 4.0957,-9.72739 4.09571,-15.35938 V 153.37891 c 0,-18.94398 -17.91874,-34.30331 -37.88672,-29.69532 -3.072,0.512 -6.14508,2.04799 -8.70508,3.58399 l -79.8711,46.08008 z M 315.90234,297.38672 109.16797,95.187502 H 51.199219 C 23.039247,95.187502 0,118.22675 0,146.38672 v 172.54492 c 0,28.15997 23.039247,51.19922 51.199219,51.19922 H 264.70312 c 28.15997,0 51.19922,-23.03925 51.19922,-51.19922 z" sodipodi:nodetypes="ccssccccccsccccccssssssc" /> <rect id="rect454" width="31.390423" height="610.87592" x="-9.9286299" y="13.175447" ry="14.836177" transform="rotate(-45.635355)" /></svg>',
+        participantsEnabledScreenSource: '<svg enable-background="new 0 0 512 512" height="509.78607" viewBox="0 0 532.02655 509.78607" width="532.02655" version="1.1" sodipodi:docname="monitor.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1614" /> <sodipodi:namedview id="namedview1612" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.1739077" inkscape:cx="145.66733" inkscape:cy="238.5196" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path d="M 502.02657,47.786073 H 50.026568 c -16.54,0 -30,13.46 -30,30 V 375.78607 c 0,16.54 13.46,30 30,30 H 502.02657 c 16.54,0 30,-13.46 30,-30 V 77.786073 c 0,-16.54 -13.46,-30 -30,-30 z" id="path1605" /> <path d="m 436.02657,479.78607 h -81 v -44 h -158 v 44 h -81 c -8.28,0 -15,6.72 -15,15 0,8.28 6.72,15 15,15 h 320 c 8.28,0 15,-6.72 15,-15 0,-8.28 -6.72,-15 -15,-15 z" id="path1607" /> </svg>',
+        participantsDisabledScreenSource: '<svg enable-background="new 0 0 512 512" height="509.78607" viewBox="0 0 532.02655 509.78607" width="532.02655" version="1.1" sodipodi:docname="monitor.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1614" /> <sodipodi:namedview id="namedview1612" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.1739077" inkscape:cx="145.66733" inkscape:cy="238.5196" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path id="path1605" d="m 119.30664,47.785156 366.0293,358.000004 h 16.6914 c 16.53999,0 30,-13.46002 30,-30 V 77.785156 c 0,-16.539983 -13.46001,-30 -30,-30 z M 435.63867,405.78516 69.609375,47.785156 H 50.027344 c -16.539984,0 -30,13.460017 -30,30 V 375.78516 c 0,16.53998 13.460016,30 30,30 z m -238.61133,30 v 44 h -81 c -8.27999,0 -15,6.72 -15,15 0,8.27999 6.72001,15 15,15 h 320 c 8.28,0 15,-6.72001 15,-15 0,-8.28 -6.72,-15 -15,-15 h -81 v -44 z" sodipodi:nodetypes="ccsssscccsssscccssssssccc" /> <rect id="rect454-3" width="34.749641" height="676.24829" x="-12.059921" y="13.492646" ry="16.423859" transform="rotate(-45.635355)" /> </svg>',
+        streamingToP2P: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-134.38083" inkscape:cy="37.458071" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 66.36101,58.907431 a 9.3882669,9.3882669 0 0 0 -7.379178,3.595707 L 37.867618,51.950726 a 9.2849965,9.2849965 0 0 0 0,-4.863123 L 58.981832,36.53519 c 5.407641,6.93793 16.767445,3.116905 16.767445,-5.79256 A 9.3882669,9.3882669 0 1 0 57.301332,33.174191 L 36.187118,43.726604 c -5.407641,-6.93793 -16.767444,-3.116906 -16.767444,5.792561 0,8.909465 11.359803,12.73049 16.767444,5.79256 l 21.114214,10.552412 a 9.3882669,9.3882669 0 0 0 9.059678,11.819828 c 12.45823,-0.516354 12.448841,-18.260179 0,-18.776534 z" id="path2718" style="stroke-width:0.938824" /></svg>',
+        streamingToFb: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-328.22635" inkscape:cy="-34.648716" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 59.655975,28.314112 h 5.792521 v -10.08866 c -0.999348,-0.137477 -4.436262,-0.446801 -8.438942,-0.446801 -8.351698,0 -14.072836,5.25319 -14.072836,14.90827 v 8.885742 h -9.216214 v 11.278362 h 9.216214 V 81.229349 H 54.236229 V 52.853667 h 8.843441 l 1.403847,-11.27836 H 54.233586 v -7.770066 c 0.0026,-3.25978 0.880378,-5.491129 5.422389,-5.491129 z" id="path3135" style="stroke-width:2.64378" /></svg>',
+        streamingToRtmp: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="2.1357213" inkscape:cx="-37.223958" inkscape:cy="34.18049" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="text3239" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <g aria-label="RT MP" id="text3239" style="font-size:37.3333px"><g id="g3306" transform="matrix(0.96058925,0,0,0.96058925,2.3472462,-2.613936)"><path d="M 44.827661,52.466881 38.155791,41.802827 H 30.153194 V 52.466881 H 26.671426 V 26.782007 h 12.085927 q 4.338538,0 6.690099,1.950519 2.369789,1.93229 2.369789,5.395829 0,2.861976 -1.677082,4.812496 -1.658852,1.950519 -4.593746,2.460935 l 7.291661,11.065095 z M 44.317244,34.164813 q 0,-2.242186 -1.531248,-3.408851 -1.51302,-1.184895 -4.374997,-1.184895 h -8.257805 v 9.479159 h 8.403639 q 2.752601,0 4.247392,-1.276041 1.513019,-1.29427 1.513019,-3.609372 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3293" /><path d="M 67.020354,29.625754 V 52.466881 H 63.556815 V 29.625754 h -8.822909 v -2.843747 h 21.109357 v 2.843747 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3295" /><path d="M 48.509949,81.730422 V 64.59502 q 0,-2.843747 0.164063,-5.468745 -0.893229,3.263018 -1.604166,5.104162 l -6.635411,17.499985 h -2.442706 l -6.726557,-17.499985 -1.020832,-3.098955 -0.601562,-2.005207 0.05469,2.023436 0.07292,3.445309 V 81.730422 H 26.671426 V 56.045548 h 4.575517 l 6.835932,17.809881 q 0.364583,1.07552 0.692707,2.315102 0.346354,1.221353 0.455729,1.768228 0.145833,-0.729166 0.601562,-2.205727 0.473958,-1.494791 0.63802,-1.877603 l 6.708328,-17.809881 h 4.466142 v 25.684874 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3297" /><path d="m 75.843263,63.774708 q 0,3.645831 -2.388019,5.796871 -2.369789,2.151039 -6.453119,2.151039 H 59.455256 V 81.730422 H 55.973488 V 56.045548 h 10.809887 q 4.320309,0 6.690098,2.023436 2.36979,2.023436 2.36979,5.705724 z m -3.499997,0.03646 q 0,-4.976559 -5.979162,-4.976559 h -6.908848 v 10.135409 h 7.054682 q 5.833328,0 5.833328,-5.15885 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3299" /></g></g></svg>'
     }
 
     var _controlsToolIcons = []; 
@@ -92,6 +96,7 @@
      */
     Q.Tool.define("Streams/webrtc/livestreaming", function(options) {
             var tool = this;
+            tool.text = Q.Text.collection[Q.Text.language]['Streams/content'];
             this.livestreamingEditor = null;
 
             /*if (!options.webRTClibraryInstance) {
@@ -133,437 +138,348 @@
                 var _fileManagerTool = null;
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
-                var _optionsColumnEl = null;
 
+                var streamingToSection = (function () {
 
-                var scenesInterfaceColumn = (function () {
-                    var _scenesEl = null;
-                    var _scenesList = [];
-                    var _activeScene = null;
+                    let streamingToFacebook = (function () {
+                        let _streamingToFbSection = null;
+                        let _privacySelect = null;
 
-                    var SceneListItem = function (sceneInstance) {
-                        var sceneListInstance = this;
-                        this._title = sceneInstance.title;
-                        this.itemEl = null;
-                        this.sceneInstance = sceneInstance;
-                        this.sourcesInterface = new SourcesInterface(this);
-                        this.remove = function () {
-                            var currentItem = this;
-                            if (this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
-                            for (var i in _scenesList) {
-                                if (_scenesList[i] == currentItem) {
-                                    _scenesList.splice(i, 1);
-                                    break;
+                        createSectionElement();
+
+                        function createSectionElement() {
+                            var streamingAndUploading = _streamingToFbSection = document.createElement('DIV');
+                            streamingAndUploading.className = 'live-editor-stream-to-section-fb'
+
+                            var fbStreamingStartSettings = document.createElement('DIV');
+                            fbStreamingStartSettings.className = 'live-editor-stream-to-section-fb-start-settings';
+                            streamingAndUploading.appendChild(fbStreamingStartSettings);
+
+                            var fbPreviousStreamings = document.createElement('DIV');
+                            fbPreviousStreamings.className = 'live-editor-stream-to-section-fb-previous';
+                            streamingAndUploading.appendChild(fbPreviousStreamings);
+
+                            var facebookLiveTtle = document.createElement('LABEL');
+                            facebookLiveTtle.className = 'live-editor-stream-to-section-fb-title';
+                            fbStreamingStartSettings.appendChild(facebookLiveTtle);
+                            var facebookLiveTtleInput = document.createElement('INPUT');
+                            facebookLiveTtleInput.type = 'text';
+                            facebookLiveTtleInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveTitle", tool.text);
+                            facebookLiveTtle.appendChild(facebookLiveTtleInput);
+
+                            var facebookLiveDesc = document.createElement('LABEL');
+                            facebookLiveDesc.className = 'live-editor-stream-to-section-fb-desc';
+                            fbStreamingStartSettings.appendChild(facebookLiveDesc);
+
+                            var facebookLiveDescInput = document.createElement('INPUT');
+                            facebookLiveDescInput.type = 'text';
+                            facebookLiveDescInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveDescription", tool.text);
+                            facebookLiveDesc.appendChild(facebookLiveDescInput);
+
+                            var startStreamingBtnCon = document.createElement('DIV');
+                            startStreamingBtnCon.className = 'live-editor-stream-to-section-fb-start';
+                            fbStreamingStartSettings.appendChild(startStreamingBtnCon);
+
+                            var privacySelect = _privacySelect = document.createElement('SELECT');
+                            startStreamingBtnCon.appendChild(privacySelect);
+
+                            var privacyBlock = document.createElement('OPTGROUP');
+                            privacyBlock.label = Q.getObject("webrtc.settingsPopup.publishOnTimeline", tool.text);
+                            privacySelect.appendChild(privacyBlock);
+
+                            var option1 = document.createElement('OPTION');
+                            option1.name = 'privacy';
+                            option1.value = 'EVERYONE';
+                            option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.text);
+                            option1.selected = true;
+                            privacyBlock.appendChild(option1);
+                            var option2 = document.createElement('OPTION');
+                            option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.text);
+                            option2.name = 'privacy';
+                            option2.value = 'ALL_FRIENDS';
+                            privacyBlock.appendChild(option2);
+                            var option3 = document.createElement('OPTION');
+                            option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.text);
+                            option3.name = 'privacy';
+                            option3.value = 'SELF';
+                            privacyBlock.appendChild(option3);
+                           
+                            var startStreamingBtn = document.createElement('BUTTON');
+                            startStreamingBtn.type = 'button';
+                            startStreamingBtn.className = 'Q_button';
+                            startStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStartLive", tool.text);
+                            startStreamingBtnCon.appendChild(startStreamingBtn);
+
+                            var fbStreamingLiveSection = document.createElement('DIV');
+                            fbStreamingLiveSection.style.display = 'none';
+                            fbStreamingLiveSection.className = 'live-editor-stream-to-section-fb-live';
+                            streamingAndUploading.appendChild(fbStreamingLiveSection);
+
+                            var facebookLiveEmbed = document.createElement('DIV');
+                            facebookLiveEmbed.className = "live-editor-stream-to-section-fb-url";
+                            fbStreamingLiveSection.appendChild(facebookLiveEmbed);
+
+                            var facebookLiveUrl = document.createElement('INPUT');
+                            facebookLiveUrl.type = 'text';
+                            facebookLiveEmbed.appendChild(facebookLiveUrl);
+
+                            var facebookLiveCopy = document.createElement('DIV');
+                            facebookLiveCopy.className = 'live-editor-stream-to-section-fb-copy-url-btn';
+                            facebookLiveEmbed.appendChild(facebookLiveCopy);
+
+                            var facebookLiveCopyLink = document.createElement('SPAN');
+                            facebookLiveCopyLink.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
+                            facebookLiveCopy.appendChild(facebookLiveCopyLink);
+
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'live-editor-stream-to-section-fb-buttons';
+                            fbStreamingLiveSection.appendChild(buttonsCon);
+
+                            var getIframeBtnCon = document.createElement('DIV');
+                            getIframeBtnCon.className = 'live-editor-stream-to-section-fb-embed';
+                            buttonsCon.appendChild(getIframeBtnCon);
+
+                            var getIframeBtn = document.createElement('BUTTON');
+                            getIframeBtn.type = 'button';
+                            getIframeBtn.className = 'Q_button';
+                            getIframeBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.text);
+                            getIframeBtnCon.appendChild(getIframeBtn);
+
+                            var stopStreamingBtnCon = document.createElement('DIV');
+                            stopStreamingBtnCon.className = 'live-editor-stream-to-section-fb-stop';
+                            buttonsCon.appendChild(stopStreamingBtnCon);
+
+                            var stopStreamingBtn = document.createElement('BUTTON');
+                            stopStreamingBtn.type = 'button';
+                            stopStreamingBtn.className = 'Q_button';
+                            stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.text);
+                            stopStreamingBtnCon.appendChild(stopStreamingBtn);
+
+                            startStreamingBtn.addEventListener('click', function () {
+                                if (!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
+
+                                var data = {};
+                                data.title = facebookLiveTtleInput.value;
+                                data.description = facebookLiveDescInput.value;
+                                data.privacy = privacySelect.value;
+                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
+                                    facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
+                                    fbStreamingStartSettings.style.display = 'none';
+                                    fbStreamingLiveSection.style.display = 'block';
+                                    if (fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
+                                    fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.text);
+                                    tool.livestreamingEditor.show();
+                                    if (tool.videoSettingsPopup != null) tool.videoSettingsPopup.hide();
+                                });
+                            })
+                            stopStreamingBtn.addEventListener('click', function () {
+                                if (!fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.add('Q_working');
+
+                                tool.fbLiveInterface.endLive(function (liveInfo) {
+
+                                    var urlInputCon = facebookLiveEmbed.cloneNode(true);
+                                    var urlInput = urlInputCon.querySelector('input');
+                                    urlInput.value = facebookLiveUrl.value;
+                                    urlInputCon.querySelector('.live-editor-stream-to-section-fb-copy_url_btn').addEventListener('click', function () {
+                                        var link = urlInput.value;
+                                        if (link.trim() != '') {
+                                            copyToClipboard(urlInput);
+                                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                                        }
+                                    })
+
+                                    var embedPopupBtn = document.createElement('DIV');
+                                    embedPopupBtn.className = 'live-editor-stream-to-section-fb-copy_embed_btn';
+                                    var embedPopupBtnText = document.createElement('SPAN');
+                                    embedPopupBtnText.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.text);
+                                    embedPopupBtn.addEventListener('click', function () {
+                                        tool.fbLiveInterface.getIframe(liveInfo['embed_html']);
+                                    })
+                                    embedPopupBtn.appendChild(embedPopupBtnText);
+                                    urlInputCon.appendChild(embedPopupBtn);
+                                    fbPreviousStreamings.appendChild(urlInputCon);
+
+                                    facebookLiveUrl.value = '';
+                                    fbStreamingStartSettings.style.display = 'block';
+                                    fbStreamingLiveSection.style.display = 'none';
+                                    if (fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.remove('Q_working');
+                                    fbLivetextLabel.innerHTML = 'Start Facebook Livestream';
+
+                                });
+                            })
+
+                            getIframeBtn.addEventListener('click', function () {
+                                tool.fbLiveInterface.getIframe();
+                            })
+
+                            facebookLiveCopy.addEventListener('click', function () {
+                                var link = facebookLiveUrl.value;
+                                if (link.trim() != '') {
+                                    copyToClipboard(facebookLiveUrl);
+                                    tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
                                 }
-                            }
-                        };
-                        this.isActive = function () {
-                            var scenes = tool.livestreamingCanvasComposerTool.canvasComposer.getScenes();
-                            for (let i in scenes) {
-                                if (scenes[i] == this.sceneInstance) {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        };
+                            })
 
-                        var itemEl = document.createElement('DIV');
-                        itemEl.className = 'live-editor-popup-scenes-item';
-                        this.itemEl = itemEl;
-                        this.itemEl.innerHTML = sceneInstance.title;
-
-                        itemEl.addEventListener('click', function (e) {
-                            selectScene(sceneListInstance);
-                        })
-
-                        sceneInstance.eventDispatcher.on('sourceAdded', function () {
-                            sceneListInstance.sourcesInterface.update();
-                        })
-
-                        sceneInstance.eventDispatcher.on('sourceRemoved', function () {
-                            sceneListInstance.sourcesInterface.update();
-                        })
-
-                        sceneInstance.eventDispatcher.on('sourceMoved', function () {
-                            sceneListInstance.sourcesInterface.update();
-                        })
-
-                    }
-                    Object.defineProperties(SceneListItem.prototype, {
-                        'title': {
-                            'set': function (val) {
-                                this._title = val;
-                                if (this.itemEl) this.itemEl.innerHTML = val;
-                            },
-                            'get': function (val) {
-                                return this._title;
-                            }
-                        }
-                    });
-
-                    function addNewScene(name) {
-                        console.log('addNewScene', name)
-                        tool.livestreamingCanvasComposerTool.canvasComposer.createScene(name);
-                        syncList();
-                    }
-
-                    function selectScene(sceneItem) {
-                        console.log('selectScene', sceneItem, sceneItem.itemEl);
-                        if (sceneItem.itemEl && !sceneItem.itemEl.classList.contains('live-editor-popup-scenes-item-active')) {
-                            console.log('selectScene add class');
-                            sceneItem.itemEl.classList.add('live-editor-popup-scenes-item-active');
-                        }
-                        var switchScene = _activeScene != sceneItem;
-                        _activeScene = sceneItem;
-                        let sources = _activeScene.sourcesInterface.getSourcesList();
-                        for(let s in sources) {
-                            if(sources[s].resizingElement != null && sources[s].resizingElement.parentElement) {
-                                sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
-                            }
-                        }
-                        tool.livestreamingCanvasComposerTool.canvasComposer.selectScene(_activeScene.sceneInstance);
-                        for (var i in _scenesList) {
-                            if (_scenesList[i] == sceneItem) continue;
-                            if (_scenesList[i].itemEl.classList.contains('live-editor-popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('live-editor-popup-scenes-item-active');
+                            return streamingAndUploading;
                         }
 
-                        if(_resizingElement) _resizingElement.style.display = 'none';
+                        function loadGroupsList() {
+                            var loggedInCallback = function () {
+                                var addGroupsList = function (groups) {
+                                    if (groups.length === 0) return;
+                                    var groupsBlock = document.createElement('OPTGROUP');
+                                    groupsBlock.label = Q.getObject("webrtc.settingsPopup.publishToGroup", tool.text)
 
-                        if (_sourcesColumnEl) {
-                            let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.live-editor-popup-sources-inner');
-                            if(sourceColAlreadyExists != null && sourceColAlreadyExists.parentElement) {
-                                sourceColAlreadyExists.parentElement.removeChild(sourceColAlreadyExists);
-                            }
-                            
-                            _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
-                        }
-                        _activeScene.sourcesInterface.update();
-                        optionsColumn.update();
-                    }
-
-                    function moveSceneUp() {
-                        console.log('moveUp');
-                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneUp(_activeScene.sceneInstance);
-
-                        sortScenesList();
-                    }
-
-                    function moveSceneDown() {
-                        console.log('moveSceneDown');
-                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneDown(_activeScene.sceneInstance);
-
-                        sortScenesList();
-                    }
-
-                    function removeScene() {
-                        console.log('removeScene', _activeScene);
-                        if (_activeScene != null) {
-                            let sceneToRemove = _activeScene;
-                            let indexOfScreneToRemove;
-                            let sceneToSwitchTo;
-                            if (_scenesList.length > 1) {
-                                for (let s in _scenesList) {
-                                    if (_scenesList[s] == _activeScene) {
-                                        indexOfScreneToRemove = s;
-                                        break;
+                                    for (let g in groups) {
+                                        var option = document.createElement('OPTION');
+                                        option.name = 'privacy';
+                                        option.value = groups[g].id;
+                                        option.innerHTML = groups[g].name;
+                                        groupsBlock.appendChild(option);
                                     }
+
+                                    _privacySelect.appendChild(groupsBlock);
+
                                 }
 
-                                if (_scenesList[indexOfScreneToRemove + 1] != null) {
-                                    selectScene(_scenesList[indexOfScreneToRemove + 1]);
-                                } else if (_scenesList[indexOfScreneToRemove - 1] != null) {
-                                    selectScene(_scenesList[indexOfScreneToRemove - 1]);
-                                }
+                                FB.api('/me/groups',
+                                    'GET',
+                                    function (response) {
+                                        if (!response || response.error) {
+                                            console.error(response);
+                                        } else {
+                                            addGroupsList(response.data);
+                                        }
+                                    })
 
-                                tool.livestreamingCanvasComposerTool.canvasComposer.removeScene(sceneToRemove.sceneInstance);
-                                syncList();
+                            }
+
+                            var notLoggedInCallback = function () {
+                                FB.login(function (response) {
+                                    if (response.authResponse) {
+                                        tool.fbAccessToken = response.authResponse.accessToken;
+                                        loggedInCallback(response.authResponse.accessToken);
+                                    }
+                                }, { auth_type: 'reauthorize', scope: 'email,public_profile,publish_to_groups,publish_video' });
+                            }
+
+                            var checkLoginStatus = function () {
+                                FB.getLoginStatus(function (response) {
+                                    if (response.status === 'connected') {
+                                        FB.api(
+                                            '/me/permissions',
+                                            'GET',
+                                            function (permissionsResponse) {
+                                                var permissions = permissionsResponse.data;
+                                                var hasPermissions = 0;
+                                                for (let p in permissions) {
+                                                    if (permissions[p].permission == 'publish_to_groups'
+                                                        || permissions[p].permission == 'publish_video') {
+                                                        hasPermissions++;
+                                                    }
+                                                }
+
+                                                if (hasPermissions == 2) {
+                                                    tool.fbAccessToken = response.authResponse.accessToken;
+                                                    loggedInCallback();
+                                                } else {
+                                                    notLoggedInCallback();
+                                                }
+                                            }
+                                        );
+
+                                    } else {
+                                        notLoggedInCallback();
+                                    }
+
+                                });
+                            }
+
+                            if (typeof FB == 'undefined') {
+                                Q.Users.init.facebook(function () {
+                                    checkLoginStatus();
+                                });
                             } else {
-                                //at least once scene should exist
-                            }
-
-                        };
-                    }
-
-                    function addSceneItemToList(item) {
-                        console.log('scenesInterface: addSceneItemToList', item, item.title)
-
-                        if (item == null || _scenesEl == null) return;
-                        _scenesList.push(item)
-                        _scenesEl.appendChild(item.itemEl);
-                    }
-
-                    function sortScenesList() {
-                        var listArr = _scenesList;
-                        var listEl = _scenesEl;
-                        var scenes = tool.livestreamingCanvasComposerTool.canvasComposer.getScenes();
-
-                        console.log('sortList: scenes', scenes, listArr);
-
-                        if (scenes.length !== listArr.length) {
-                            return;
-                        }
-                        listArr.sort((a, b) => {
-                            return scenes.findIndex(p => p === a.sceneInstance) - scenes.findIndex(p => p === b.sceneInstance);
-                        });
-
-                        console.log('sortList: listArr', listArr.map(el => { return el.itemEl.innerText }));
-                        console.log('sortList: NOT sortedElements', Array.from(listEl.childNodes).map(el => { return el.innerText }))
-
-                        listEl.innerHTML == '';
-                        for (let e = 0; e < listArr.length; e++) {
-                            listEl.appendChild(listArr[e].itemEl)
-                        }
-
-                    }
-
-                    function syncList() {
-
-                        console.log('scenes: syncList _scenesList', _scenesList.length);
-
-                        for (let i = _scenesList.length - 1; i >= 0; i--) {
-                            console.log('scenes: syncList _scenesList', _scenesList[i]);
-                            if (_scenesList[i] == null) continue;
-
-                            if (_scenesList[i].isActive() == false) {
-                                console.log('scenes: syncList remove', _scenesList[i]);
-
-                                _scenesList[i].remove();
-                                continue;
-                            }
-                        }
-
-                        var scenes = tool.livestreamingCanvasComposerTool.canvasComposer.getScenes();
-
-                        console.log('scenesInterface: all', scenes);
-
-                        for (let s in scenes) {
-                            console.log('CONTROLS ADD SCENES', scenes[s])
-                            console.log('CONTROLS ADD SOURCES', scenes[s].sources)
-                            let sceneAlreadyExists = false;
-                            for (let e in _scenesList) {
-                                if (_scenesList[e].sceneInstance == scenes[s]) sceneAlreadyExists = true;
-                            }
-                            if (sceneAlreadyExists) continue;
-                            console.log('scenesInterface: not exist')
-
-                            var item = new SceneListItem(scenes[s])
-                            addSceneItemToList(item);
-
-                            if (_activeScene == null && s == 0) {
-                                selectScene(item);
+                                checkLoginStatus();
                             }
 
                         }
-                        console.log('_scenesList', _scenesList)
-                    }
 
-                    window.sl = _scenesList;
-
-                    var addNewScenePopup = (function () {
-                        var _dialogEl = null;
-                        var _isHidden = true;
-
-                        console.log('addNewScenePopup')
-                        var dialog = document.createElement('DIV');
-                        dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-scene live-editor-hidden';
-                        _dialogEl = dialog;
-                        var close = document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = 'cover';
-
-                        var dialogTitle = document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add scene';
-                        dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
-
-                        var dialogInner = document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent = document.createElement('DIV');
-                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
-
-                        var sceneNameInputCon = document.createElement('DIV');
-                        sceneNameInputCon.className = 'live-editor-dialog-name-con';
-                        var sceneNameInputText = document.createElement('SPAN');
-                        sceneNameInputText.className = 'live-editor-dialog-name-text';
-                        sceneNameInputText.innerHTML = 'Please, enter name of scene';
-                        var sceneNameInput = document.createElement('INPUT');
-                        sceneNameInput.className = 'live-editor-dialog-name';
-                        sceneNameInput.type = 'text';
-                        sceneNameInput.placeholder = 'Enter name of scene';
-                        sceneNameInput.name = 'nameOfScene';
-
-                        var buttonsCon = document.createElement('DIV');
-                        buttonsCon.className = 'live-editor-dialog-buttons';
-                        var okButton = document.createElement('BUTTON');
-                        okButton.className = 'live-editor-dialog-ok-btn';
-                        okButton.innerHTML = 'OK';
-
-                        sceneNameInputCon.appendChild(sceneNameInputText);
-                        sceneNameInputCon.appendChild(sceneNameInput);
-                        boxContent.appendChild(sceneNameInputCon);
-                        buttonsCon.appendChild(okButton);
-                        boxContent.appendChild(buttonsCon);
-                        dialogInner.appendChild(dialogTitle);
-
-                        dialog.appendChild(close);
-                        dialogInner.appendChild(boxContent);
-                        dialog.appendChild(dialogInner);
-
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
-
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialog, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 3000)
-
-                        var dialogWidth = 400;
-                        dialog.style.width = dialogWidth + 'px';
-                        console.log('dialogWidth', dialogWidth);
-                        if (_isMobile) {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.bottom = '10px';
-                        } else {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.top = (window.innerHeight / 2 - 100) + 'px';
-                        }
-
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
-
-                        okButton.addEventListener('click', function () {
-                            if (sceneNameInput.value != '') {
-                                var val = sceneNameInput.value;
-                                addNewScene(val);
-                                hideDialog();
-                                sceneNameInput.value = '';
-                            }
-                        });
-
-                        function setDefaultSceneName() {
-                            sceneNameInput.value = 'Scene ' + parseInt(_scenesList.length + 1)
-                        }
-
-                        function showDialog(e) {
-                            sceneNameInput.value = '';
-                            if (_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.remove('live-editor-hidden');
-                                var _clientX = e.clientX;
-                                var _clientY = e.clientY;
-
-                                _isHidden = false;
-
-                                if (_isMobile) {
-                                    dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialog.style.top = '10px';
-                                } else {
-                                    dialog.style.left = (_clientX + 50) + 'px';
-                                    dialog.style.top = (_clientY - 200) + 'px';
-                                }
-                                setDefaultSceneName();
-                            }
-                        }
-
-                        function hideDialog() {
-                            if (!_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.add('live-editor-hidden');
-                                _isHidden = true;
-                            }
-                        }
-
-                        function toggle(e) {
-                            if (_isHidden) {
-                                showDialog(e);
-                            } else hideDialog(e);
+                        function getSection() {
+                            loadGroupsList();
+                            return _streamingToFbSection;
                         }
 
                         return {
-                            hideDialog: hideDialog,
-                            showDialog: showDialog,
-                            toggle: toggle
+                            getSection: getSection
                         }
                     }())
 
-                    function createScenesCol() {
-                        var scenesColumn = document.createElement('DIV');
-                        scenesColumn.className = 'live-editor-popup-scenes';
-                        var scenesColumnBody = document.createElement('DIV');
-                        scenesColumnBody.className = 'live-editor-popup-scenes-body';
-                        var scenesColumnBodyInner = document.createElement('DIV');
-                        scenesColumnBodyInner.className = 'live-editor-popup-scenes-body-inner';
-                        scenesColumnBody.appendChild(scenesColumnBodyInner);
+                    function createSection(){
+                        var sectionContainer = document.createElement('DIV');
+                        sectionContainer.className = 'live-editor-stream-to-section';
+                        var sectionInnerContainer = document.createElement('DIV');
+                        sectionInnerContainer.className = 'live-editor-stream-to-section-inner';
+                        sectionContainer.appendChild(sectionInnerContainer);
 
-                        var scenesColumnControl = document.createElement('DIV');
-                        scenesColumnControl.className = 'live-editor-popup-scenes-control';
+                        var peerToPeerStreamingBtn = document.createElement('DIV');
+                        peerToPeerStreamingBtn.className = 'live-editor-stream-to-section-btn live-editor-stream-to-section-p2p-btn';
+                        sectionInnerContainer.appendChild(peerToPeerStreamingBtn);
 
-                        var scenesColumnControlAddBtn = document.createElement('DIV');
-                        scenesColumnControlAddBtn.className = 'live-editor-popup-scenes-control-btn live-editor-popup-scenes-control-btn-add';
-                        if(!tool.state.managingScenes) scenesColumnControlAddBtn.classList.add('live-editor-inactive');
-                        scenesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
+                        var peerToPeerStreamingIcon = document.createElement('DIV');
+                        peerToPeerStreamingIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-p2p-icon';
+                        peerToPeerStreamingIcon.innerHTML = _streamingIcons.streamingToP2P;
+                        peerToPeerStreamingBtn.appendChild(peerToPeerStreamingIcon);
 
-                        scenesColumnControlAddBtn.addEventListener('click', function (event) {
-                            addNewScenePopup.showDialog(event);
+                        var peerToPeerStreamingCaption = document.createElement('DIV');
+                        peerToPeerStreamingCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-p2p-text';
+                        peerToPeerStreamingCaption.innerHTML = 'P2P<br>Broadcast';
+                        peerToPeerStreamingBtn.appendChild(peerToPeerStreamingCaption);
+
+                        var facebookLiveBtn = document.createElement('DIV');
+                        facebookLiveBtn.className = 'live-editor-stream-to-section-btn live-editor-stream-to-section-fb-btn';
+                        sectionInnerContainer.appendChild(facebookLiveBtn);
+
+                        var facebookLiveIcon = document.createElement('DIV');
+                        facebookLiveIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-fb-icon';
+                        facebookLiveIcon.innerHTML = _streamingIcons.streamingToFb;
+                        facebookLiveBtn.appendChild(facebookLiveIcon);
+
+                        var facebookLiveCaption = document.createElement('DIV');
+                        facebookLiveCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-fb-text';
+                        facebookLiveCaption.innerHTML = 'Facebook<br>Live';
+                        facebookLiveBtn.appendChild(facebookLiveCaption);
+
+                        var customStreamBtn = document.createElement('DIV');
+                        customStreamBtn.className = 'live-editor-stream-to-section-btn live-editor-stream-to-section-suctom-rtmp-btn';
+                        sectionInnerContainer.appendChild(customStreamBtn);
+
+                        var customStreamIcon = document.createElement('DIV');
+                        customStreamIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-rtmp-icon';
+                        customStreamIcon.innerHTML = _streamingIcons.streamingToRtmp;
+                        customStreamBtn.appendChild(customStreamIcon);
+
+                        var customStreamCaption = document.createElement('DIV');
+                        customStreamCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-fb-text';
+                        customStreamCaption.innerHTML = 'Custom<br>Stream';
+                        customStreamBtn.appendChild(customStreamCaption);
+
+
+                        facebookLiveBtn.addEventListener('click', function() {
+                            let streamingControlsEl = document.querySelector('.live-editor-popup-preview');
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let settingsDialog = new SimpleDialog({
+                                content: streamingToFacebook.getSection(), 
+                                rectangleToShowIn: rectangleToShowIn,
+                                title: 'Start Facebook Live'
+                            });
                         });
-
-                        scenesColumnControl.appendChild(scenesColumnControlAddBtn);
-
-                        var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn live-editor-popup-scenes-control-btn-remove';
-                        if(!tool.state.managingScenes) scenesColumnControlBtn.classList.add('live-editor-inactive');
-                        scenesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
-                        scenesColumnControlBtn.addEventListener('click', function () {
-                            removeScene();
-                        })
-                        scenesColumnControl.appendChild(scenesColumnControlBtn);
-
-                        var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn';
-                        scenesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
-                        scenesColumnControlBtn.addEventListener('click', function () {
-                            moveSceneUp();
-                        })
-                        scenesColumnControl.appendChild(scenesColumnControlBtn);
-                        var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn';
-                        scenesColumnControlBtn.innerHTML = _streamingIcons.moveDown;
-                        scenesColumnControlBtn.addEventListener('click', function () {
-                            moveSceneDown();
-                        })
-                        scenesColumnControl.appendChild(scenesColumnControlBtn);
-
-                        scenesColumnBody.appendChild(scenesColumnControl);
-                        scenesColumn.appendChild(scenesColumnBody);
-                        _scenesEl = scenesColumnBodyInner;
-                        return scenesColumn;
+                        return sectionContainer;
                     }
-
-                    function getActiveScene() {
-                        return _activeScene;
-                    }
-
 
                     return {
-                        createScenesCol: createScenesCol,
-                        syncList: syncList,
-                        getActive: getActiveScene
+                        createSection: createSection
                     }
-
                 }())
 
                 var scenesInterface = (function () {
@@ -1576,7 +1492,7 @@
 
                         let teleconferenceToggleCon = document.createElement('DIV');
                         teleconferenceToggleCon.className = 'live-editor-participants-list-toggle';
-                        participantTitleCon.appendChild(teleconferenceToggleCon);
+                        //participantTitleCon.appendChild(teleconferenceToggleCon);
 
                         let teleconferenceToggleLabel = document.createElement('LABEL');
                         teleconferenceToggleLabel.className = 'live-editor-checkbox-slider live-editor-participants-list-label';
@@ -1596,7 +1512,7 @@
                         _participantsListEl.className = 'live-editor-participants-list';
                         _participantsContainerEl.appendChild(_participantsListEl);
 
-                        lockOrUnlockParticipantsGroup();
+                        //lockOrUnlockParticipantsGroup();
 
                         teleconferenceToggleInput.addEventListener('change', function (event) {
                             event.stopPropagation();
@@ -1706,7 +1622,7 @@
                                 if(source.sourceType == 'webrtc') {
                                     updateParticipantItem(source.participant);
                                 } else if(source.sourceType == 'group' && source.groupType == 'webrtc') {
-                                    lockOrUnlockParticipantsGroup();
+                                    //lockOrUnlockParticipantsGroup();
                                 }
 
                                 updateSourceControlPanelButtons();
@@ -1716,7 +1632,7 @@
                                 if(source.sourceType == 'webrtc') {
                                     updateParticipantItem(source.participant);
                                 } else if(source.sourceType == 'group' && source.groupType == 'webrtc') {
-                                    lockOrUnlockParticipantsGroup();
+                                    //lockOrUnlockParticipantsGroup();
                                 }
 
                                 updateSourceControlPanelButtons();
@@ -1725,7 +1641,7 @@
 
                             _scene.sceneInstance.eventDispatcher.on('sourceShowed', function (source) {
                                 if(source.sourceType == 'group' && source.groupType == 'webrtc') {
-                                    lockOrUnlockParticipantsGroup();
+                                    //lockOrUnlockParticipantsGroup();
                                 }
                             })
     
@@ -1791,6 +1707,25 @@
                                             listItemInstance.show();
                                         }
                                         break;
+                                    }
+                                };
+                                this.toggleScreensharing = function() {
+                                    let screensharingSources = listItemInstance.participantSources.filter(function(s){
+                                        return s.sourceInstance.screenSharing ? true : false;
+                                    });
+
+                                    if(screensharingSources.length > 1) {
+                                        listItemInstance.screenIconEl.innerHTML = _streamingIcons.participantsEnabledScreenSource;
+                                        return;
+                                    } else if(screensharingSources.length == 1){
+                                        screensharingSources[0].toggleVisibility();
+
+                                        console.log('toggleScreensharing', screensharingSources[0].sourceInstance.active)
+                                        if(screensharingSources[0].sourceInstance.active) {
+                                            listItemInstance.screenIconEl.innerHTML = _streamingIcons.participantsEnabledScreenSource;
+                                        } else {
+                                            listItemInstance.screenIconEl.innerHTML = _streamingIcons.participantsDisabledScreenSource;
+                                        }
                                     }
                                 };
                                 this.toggleAudio = function () {                                    
@@ -1880,6 +1815,23 @@
                             participantItemControls.className = 'live-editor-participants-item-controls';
                             participantItemInnerCon.appendChild(participantItemControls);
 
+
+                            let audioBtnCon = document.createElement('DIV');
+                            audioBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-audio-btn';
+                            participantItemControls.appendChild(audioBtnCon);
+                            let audioBtnIcon = document.createElement('DIV');
+                            audioBtnIcon.className = 'live-editor-participants-item-icon live-editor-participants-item-audio-icon';
+                            audioBtnIcon.innerHTML = _streamingIcons.participantsDisabledMic;
+                            audioBtnCon.appendChild(audioBtnIcon);
+
+                            if (participantInstance.isLocal && !Q.info.useTouchEvents) {
+                                listItemInstance.audioSettingsPopup = new PopupDialog(audioBtnCon, {
+                                    content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
+                                })
+                            } else if (!participantInstance.isLocal) {
+                                audioBtnCon.addEventListener('click', listItemInstance.toggleAudio);
+                            }
+                            
                             if(participantInstance.isLocal) {
                                 let videoBtnCon = document.createElement('DIV');
                                 videoBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-camera-btn';
@@ -1897,56 +1849,50 @@
                                 }
                             }
                             
-                            let audioBtnCon = document.createElement('DIV');
-                            audioBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-audio-btn';
-                            participantItemControls.appendChild(audioBtnCon);
-                            let audioBtnIcon = document.createElement('DIV');
-                            audioBtnIcon.className = 'live-editor-participants-item-icon live-editor-participants-item-audio-icon';
-                            audioBtnIcon.innerHTML = _streamingIcons.participantsDisabledMic;
-                            audioBtnCon.appendChild(audioBtnIcon);
-
-                            if (participantInstance.isLocal && !Q.info.useTouchEvents) {
-                                listItemInstance.audioSettingsPopup = new PopupDialog(audioBtnCon, {
-                                    content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
-                                })
-                            } else if (!participantInstance.isLocal) {
-                                audioBtnCon.addEventListener('click', listItemInstance.toggleAudio);
-                            }
-                            
-                            /*let screenBtnCon = document.createElement('DIV');
+                            let screenBtnCon = document.createElement('DIV');
                             screenBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-screen-btn';
                             participantItemControls.appendChild(screenBtnCon);
                             let screenBtnIcon = document.createElement('DIV');
-                            screenBtnIcon.className = 'live-editor-participants-item-screen-icon';
-                            screenBtnCon.appendChild(screenBtnIcon);*/
+                            screenBtnIcon.className = 'live-editor-participants-item-icon live-editor-participants-item-screen-icon';
+                            screenBtnIcon.innerHTML = _streamingIcons.participantsEnabledScreenSource;
+                            screenBtnCon.appendChild(screenBtnIcon);
+                            let participantSourcesCon = document.createElement('DIV');
+                            participantSourcesCon.className = 'live-editor-participants-item-sources';
+                            //participantItemContainer.appendChild(participantSourcesCon);
+                            screenBtnIcon.addEventListener('click', listItemInstance.toggleScreensharing);
 
                             let visibilityBtnCon = document.createElement('DIV');
-                            visibilityBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-camera-btn';
+                            visibilityBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-visibility-btn';
                             participantItemControls.appendChild(visibilityBtnCon);
                             let visibilityBtnIcon = document.createElement('DIV');
-                            visibilityBtnIcon.className = 'live-editor-participants-item-icon live-editor-participants-item-camera-icon';
+                            visibilityBtnIcon.className = 'live-editor-participants-item-icon live-editor-participants-item-visibility-icon';
                             visibilityBtnIcon.innerHTML = _streamingIcons.visible;
                             visibilityBtnCon.appendChild(visibilityBtnIcon);
 
                             _participantsListEl.appendChild(participantItemContainer);
-
-                            let participantSourcesCon = document.createElement('DIV');
-                            participantSourcesCon.className = 'live-editor-participants-item-sources';
-                            participantItemContainer.appendChild(participantSourcesCon);
-
-                            
+                
                             listItemInstance.listItemEl = participantItemContainer;
                             listItemInstance.visibilityIconEl = visibilityBtnIcon;
                             listItemInstance.audioIconEl = audioBtnIcon;
                             listItemInstance.sourcesContainerEl = participantSourcesCon;
-                            //listItemInstance.screenIconEl = screenBtnIcon;
+                            listItemInstance.screenIconEl = screenBtnIcon;
                             if(participantInstance.isLocal) {
                                 _participantsList.unshift(listItemInstance);
                             } else {
                                 _participantsList.push(listItemInstance);
                             }
 
-                            visibilityBtnCon.addEventListener('click', listItemInstance.toggleVisibility);
+                            visibilityBtnCon.addEventListener('click', function(){
+                                let sourceInstance = _allParticipantsListInstance.sourceInstance;
+                                if(sourceInstance != null) {
+                                    console.log('visibilityBtnCon change 1.1');
+                                    listItemInstance.toggleVisibility();                                
+                                } else {
+                                    console.log('visibilityBtnCon change 1.2');
+                                    addTeleconferenceSource();
+                                    //listItemInstance.toggleVisibility();
+                                }
+                            });
 
                             participantItemContainer.addEventListener('click', function(){
                                 selectSource(listItemInstance);
@@ -2030,6 +1976,7 @@
                                 }
                             }
 
+                            let numberOfScreensharings = 0;
                             //add new source to sources list under participant
                             for (let i in webrtcSources) {
                                 if(webrtcSources[i].participant == participant && webrtcSources[i].screenSharing) {
@@ -2037,6 +1984,8 @@
                                         return source.sourceInstance == webrtcSources[i];
                                     })[0];
 
+                                    numberOfScreensharings++;
+                                    
                                     if(sourceExists) continue;
 
                                     let screensharingSourceCon = document.createElement('DIV');
@@ -2049,7 +1998,7 @@
 
                                     let sourceDescriptionIcon = document.createElement('DIV');
                                     sourceDescriptionIcon.className = 'live-editor-participants-list-source-icon';
-                                    sourceDescriptionIcon.innerHTML = _streamingIcons.participantsScreenSource;
+                                    sourceDescriptionIcon.innerHTML = _streamingIcons.participantsEnabledScreenSource;
                                     sourceDescription.appendChild(sourceDescriptionIcon);
 
                                     let sourceDescriptionText = document.createElement('DIV');
@@ -2077,6 +2026,16 @@
                                 }
                             }
 
+                            if(item.sourcesContainerEl.childNodes.length == 0) {
+                                let noScreensharingTextCon = document.createElement('DIV');
+                                noScreensharingTextCon.className = 'live-editor-participants-list-no-screensharing';
+                                noScreensharingTextCon.innerHTML = 'No screensharings';
+                                item.sourcesContainerEl.appendChild(noScreensharingTextCon);
+                            } else {
+                                let noScreensharingTextCon =  item.sourcesContainerEl.querySelector('.live-editor-participants-list-no-screensharing');
+                                if(noScreensharingTextCon && noScreensharingTextCon.parentElement) noScreensharingTextCon.parentElement.removeChild(noScreensharingTextCon);
+                            }
+
                             if(!item.participantInstance.isLocal) {
                                 if(!item.participantInstance.audioIsMuted) {
                                     item.audioIconEl.innerHTML = _streamingIcons.participantsEnabledMic;
@@ -2091,9 +2050,28 @@
                                 } else {
                                     item.switchVisibilityIcon(false);
                                 }
+                            } else {
+                                item.switchVisibilityIcon(false);
                             }
 
-                            if(!_allParticipantsListInstance.sourceInstance || !_allParticipantsListInstance.sourceInstance.active) {
+                            if(!item.screensharingsPopup) {
+                                console.log('make screensharingsPopup 2', numberOfScreensharings);
+                                if(numberOfScreensharings > 1) {
+                                    console.log('make screensharingsPopup 3');
+
+                                    item.screensharingsPopup = new PopupDialog(item.screenIconEl.parentElement, {
+                                        className: 'live-editor-participants-item-screen-btn-popup',
+                                        content: item.sourcesContainerEl
+                                    })
+                                }
+                            } else if(item.screensharingsPopup) {
+                                if(numberOfScreensharings < 2) {
+                                    item.screensharingsPopup.destroy();
+                                }
+                            }
+                            
+
+                            /*if(!_allParticipantsListInstance.sourceInstance || !_allParticipantsListInstance.sourceInstance.active) {
                                 console.log('updateRemoteParticipantControlsButtonsState 1');
                                 if(!item.visibilityIconEl.classList.contains('live-editor-inactive')) {
                                     item.visibilityIconEl.classList.add('live-editor-inactive');
@@ -2103,7 +2081,7 @@
                                 if(item.visibilityIconEl.classList.contains('live-editor-inactive')) {
                                     item.visibilityIconEl.classList.remove('live-editor-inactive');
                                 }
-                            }
+                            }*/
                         }
 
                         function updateLocalControlsButtonsState() {
@@ -2895,7 +2873,7 @@
                         var dropUp = _addVisualSourceDropUpMenuEl = document.createElement('DIV');
                         dropUp.className = 'live-editor-popup-sources-add-menu';
 
-                        var conferenceItem = document.createElement('DIV');
+                        /*var conferenceItem = document.createElement('DIV');
                         conferenceItem.className = 'live-editor-popup-sources-add-menu-item live-editor-popup-sources-add-conference';
                         conferenceItem.dataset.menuName = 'add-conference';
                         var conferenceItemIcon = document.createElement('DIV');
@@ -2908,7 +2886,7 @@
                         })
                         conferenceItem.appendChild(conferenceItemIcon);
                         conferenceItem.appendChild(conferenceItemIconText);
-                        dropUp.appendChild(conferenceItem);
+                        dropUp.appendChild(conferenceItem);*/
 
                         var cameraItem = document.createElement('DIV');
                         cameraItem.className = 'live-editor-popup-sources-add-menu-item live-editor-popup-sources-add-camera';
@@ -3175,8 +3153,8 @@
                         sourcesColumnControlBtn.innerHTML = _streamingIcons.settings;
                         sourcesColumnControlBtn.addEventListener('click', function () {
                             let streamingControlsEl = document.querySelector('.live-editor-popup-streaming-controls');
-                            let settingsDialogEl = optionsColumn.getSettingsDialog();
                             let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let settingsDialogEl = optionsColumn.getSettingsDialog();
                             let title = "Source's settings";
                             if(_selectedSource && _selectedSource.sourceInstance && _selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
                                 title = "Layout's settings";
@@ -6899,6 +6877,12 @@
         
         
                     }
+
+                    this.destroy = function() {
+                        this.element.removeEventListener('mouseenter', onElementMouseEnterListener);
+                        this.element.removeEventListener('mouseleave', onElementMouseLeaveListener);
+                        delete pupupInstance;
+                    }
         
                     function togglePopupClassName(classNameToApply, addXScrollClass, addYScrollClass) {
                         let classes = [
@@ -6954,6 +6938,9 @@
         
                     this.popupDialogEl = document.createElement('DIV');
                     this.popupDialogEl.className = 'live-editor-popup-dialog';
+                    if(options.className) {
+                        this.popupDialogEl.classList.add(options.className);
+                    }
                     this.closeButtonEl = document.createElement('DIV');
                     this.closeButtonEl.className = 'live-editor-close-sign';
                     this.popupDialogEl.appendChild(this.closeButtonEl);
@@ -6961,21 +6948,9 @@
                     this.closeButtonEl.addEventListener('click', function (e) {
                         pupupInstance.hide(e);
                     });
-                    this.element.addEventListener('mouseenter', function (e) {
-                        removeHoverTimerIfExists();
-                        pupupInstance.show(e);
-                    });
+                    this.element.addEventListener('mouseenter', onElementMouseEnterListener);
         
-                    this.element.addEventListener('mouseleave', function (e) {
-                        /*if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
-                            e.stopPropagation();
-                            e.preventDefault();
-                        }*/
-        
-                        pupupInstance.hoverTimeout = setTimeout(function () {
-                            pupupInstance.hide(e);
-                        }, 600)
-                    });
+                    this.element.addEventListener('mouseleave', onElementMouseLeaveListener);
         
                     this.popupDialogEl.addEventListener('mouseenter', function (e) {
                         removeHoverTimerIfExists();
@@ -6986,6 +6961,17 @@
                         }, 600)
         
                     });
+
+                    function onElementMouseEnterListener(e){
+                        removeHoverTimerIfExists();
+                        pupupInstance.show(e);
+                    }
+
+                    function onElementMouseLeaveListener(e){
+                        pupupInstance.hoverTimeout = setTimeout(function () {
+                            pupupInstance.hide(e);
+                        }, 600)
+                    }
         
                     function removeHoverTimerIfExists() {
                         if (pupupInstance.hoverTimeout != null) {
@@ -7531,21 +7517,20 @@
                     var streamingControls=document.createElement('DIV');
                     streamingControls.className = 'live-editor-popup-streaming-controls';
 
+                    var streamingToSectionEl = streamingToSection.createSection();
+
                     var scenesColumn = scenesInterface.createScenesCol();
 
                     var sourcesColumn = document.createElement('DIV');
                     sourcesColumn.className = 'live-editor-popup-sources';
                     _sourcesColumnEl = sourcesColumn;
 
-                    var optionsColumn = document.createElement('DIV');
-                    optionsColumn.className = 'live-editor-popup-options';
-                    _optionsColumnEl = optionsColumn;
-
                     //_audioMixerColumnEl = globalMicAudioInterface.createControlsButtons();
 
+                    streamingControls.appendChild(streamingToSectionEl);
                     streamingControls.appendChild(scenesColumn);
                     streamingControls.appendChild(sourcesColumn);
-                    streamingControls.appendChild(optionsColumn);
+                    //streamingControls.appendChild(optionsColumn);
                     //streamingControls.appendChild(_audioMixerColumnEl);
                     boxContent.appendChild(streamingControls);
                     
@@ -7726,18 +7711,8 @@
                     scrollerBtn.className = 'live-editor-popup-streaming-controls-scroller';
                     sourcesColumn.appendChild(scrollerBtn);
 
-                    var optionsColumn = document.createElement('DIV');
-                    optionsColumn.className = 'live-editor-popup-options';
-                    _optionsColumnEl = optionsColumn;
-
-                    var audioMixerColumn = document.createElement('DIV');
-                    audioMixerColumn.className = 'live-editor-popup-audio-mixer';
-                    _audioMixerColumnEl = optionsColumn;
-
                     //streamingControls.appendChild(scenesColumn);
                     streamingControls.appendChild(sourcesColumn);
-                    streamingControls.appendChild(optionsColumn);
-                    streamingControls.appendChild(audioMixerColumn);
 
                     var close=document.createElement('div');
                     close.className = 'live-editor-close-dialog-sign';
