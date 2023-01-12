@@ -145,7 +145,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 				$select.on("change", function () {
 					var type = $select.val();
 
-					if (type === "textarea") {
+					if (type === "text") {
 						$input.attr("placeholder", tool.text.Placeholder);
 					} else {
 						$input.removeAttr("placeholder");
@@ -182,15 +182,15 @@ Q.Template.set('Streams/answer/composer',
 `<select name="type">
 			<option value="option">{{questions.answerOption}}</option>
 			<option value="option.exclusive">{{questions.answerOptionExclusive}}</option>
-			<option value="textarea">{{questions.answerTextarea}}</option>
+			<option value="text">{{questions.answerText}}</option>
 		</select>
 		<input name="value" />
 		<button name="save" type="button" class="Q_button">{{questions.Save}}</button>`,
 {text: ['Streams/content']}
 );
 Q.Template.set("Streams/answer/view",
-`{{#ifEquals type "textarea"}}
-		<textarea placeholder="{{content}}">{{extra}}</textarea>
+`{{#ifEquals type "text"}}
+		<input placeholder="{{content}}" type="text" value="{{extra}}">
 		<button class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
 	{{/ifEquals}}
 	{{#ifEquals type "option"}}

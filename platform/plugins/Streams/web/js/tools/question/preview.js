@@ -85,6 +85,9 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				streamName: streamName,
 				relationType: "Streams/answers",
 				isCategory: true,
+				relatedOptions: {
+					ascending: true,
+				},
 				realtime: false,
 				sortable: true
 			}).activate(function () {
@@ -154,9 +157,9 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					});
 
 					$("button[name=send]", answerTool.element).on(Q.Pointer.click, function () {
-						var $textarea = $("textarea", answerTool.element);
-						if (!$textarea.length) {
-							return console.warn("textarea not found");
+						var $text = $("input[type=text]", answerTool.element);
+						if (!$text.length) {
+							return console.warn("text element not found");
 						}
 
 						Q.req('Streams/answer', [], function (err, response) {
@@ -168,7 +171,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						}, {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
-								content: $textarea.val()
+								content: $text.val()
 							})
 						});
 					});
@@ -238,6 +241,10 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					realtime: false,
 					sortable: true,
 					isCategory: true,
+					composerPosition: "last",
+					relatedOptions: {
+						ascending: true,
+					},
 					creatable: {
 						"Streams/answer": {
 							publisherId: tool.stream.fields.publisherId,

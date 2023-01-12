@@ -324,7 +324,7 @@
 	border: 1px solid red;
 	border-radius: 50%;
 }
-.Streams_answer_preview_tool[data-participants=true][data-type=textarea] textarea {
+.Streams_answer_preview_tool[data-participants=true][data-type=text] input[type=text] {
 	width: calc(100% - 110px);
 }
 
@@ -336,8 +336,9 @@
 	-o-transform: scale(2); /* Opera */
 	transform: scale(2);
 }
-.Streams_answer_preview_tool textarea {
+.Streams_answer_preview_tool input[type=text] {
 	width: calc(100% - 80px);
+	height: 37px;
 	vertical-align: middle;
 }
 

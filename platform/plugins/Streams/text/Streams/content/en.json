@@ -557,6 +557,7 @@
         "answerOption": "Option",
         "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
+        "answerText": "Text",
         "FreeAnswer": "Write your answer here",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",
