@@ -187,7 +187,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			}
 
 			Q.handle(callback, tool, [{
-				title: value
+				title: value,
+				dontSubscribe: true
 			}]);
 		}, {
 			title: tool.text.NewQuestion
