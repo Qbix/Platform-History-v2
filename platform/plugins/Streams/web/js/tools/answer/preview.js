@@ -40,7 +40,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 
 {
 	titleMaxLength: 255,
-	participants: false,
+	participants: true,
 	onRefresh: new Q.Event(),
 	onInvoke: new Q.Event()
 },
@@ -102,18 +102,32 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 			return;
 		}
 
-		$participants.empty();
-
 		if (tool.stream.testReadLevel("participants")) {
-			$participants.tool("Streams/participants", {
-				publisherId: publisherId,
-				streamName: streamName,
-				invite: false,
-				showSummary: true,
-				maxShow: 100,
-				showControls: true,
-				hideIfNoParticipants: true
-			}).activate();
+			var participantsTool = Q.Tool.from($participants[0], "Streams/participants");
+			if (!participantsTool) {
+				$participants.empty();
+				$participants.tool("Streams/participants", {
+					publisherId: publisherId,
+					streamName: streamName,
+					invite: false,
+					showSummary: true,
+					maxShow: 100,
+					showControls: true,
+					hideIfNoParticipants: true
+				}).activate(function () {
+					tool.element.forEachTool("Users/avatar", function () {
+						var avatarTool = this;
+						tool.stream.getParticipant(avatarTool.state.userId, function (err, participant) {
+							var msg = Q.firstErrorMessage(err);
+							if (msg) {
+								return console.warn(msg);
+							}
+
+							$(avatarTool.element).attr('data-touchlabel', participant.getExtra('content'));
+						});
+					});
+				});
+			}
 		} else {
 			Q.Tool.remove($participants[0], true, false);
 			$participants.html(tool.stream.fields.participatingCount || "");
