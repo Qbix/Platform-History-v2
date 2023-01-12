@@ -6,7 +6,6 @@
  * @class Streams/question/preview
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
- * @param {Boolean} [multipleAnswers=false] Whether users can give more than one answer
  * @param {Q.Event} [options.onInvoke] occur onclick tool element
  */
 Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams_question_preview (options, preview) {
@@ -55,7 +54,6 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 },
 
 {
-	multipleAnswers: false,
 	onInvoke: new Q.Event()
 },
 
@@ -90,17 +88,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				},
 				realtime: false,
 				sortable: true
-			}).activate(function () {
-				$(".Streams_preview_container", $toolElement).on(Q.Pointer.fastclick, function (event) {
-					// check if user already answer
-					if (!state.multipleAnswers) {
-						var answered = false;
-						if (answered) {
-							return Q.alert(tool.text.AlreadyAnswered);
-						}
-					}
-				});
-			});
+			}).activate();
 
 			tool.$answersRelated[0].forEachTool("Streams/answer/preview", function () {
 				this.state.onRefresh.add(function () {
@@ -108,20 +96,32 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					var reqOptions = {
 						publisherId: answerTool.stream.fields.publisherId,
 						streamName: answerTool.stream.fields.name,
-						type: answerTool.stream.getAttribute("type"),
-						multipleAnswers: state.multipleAnswers
+						type: answerTool.stream.getAttribute("type")
 					};
+					var _reqCallbackOptions = {};
+					var _reqCallback = function (err, response) {
+						var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
+						if (msg) {
+							if (["checkbox", "radio"].indexOf(_reqCallbackOptions.$this.prop("type")) > -1) {
+								_reqCallbackOptions.$this.prop("checked", true);
+							}
+							return Q.alert(msg);
+						}
+
+						answerTool.stream.refresh(function () {
+							answerTool.setParticipants();
+						}, {
+							messages: true,
+							unlessSocket: true
+						});
+					};
+
 					$("input[type=radio],input[type=checkbox]", answerTool.element).on('change', function () {
 						var $this = $(this);
+						_reqCallbackOptions.$this = $this;
 
 						if (!$this.prop("checked")) {
-							Q.req('Streams/answer', [], function (err, response) {
-								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
-								if (msg) {
-									$this.prop("checked", true);
-									return Q.alert(msg);
-								}
-							}, {
+							Q.req('Streams/answer', [], _reqCallback, {
 								method: 'put',
 								fields: Q.extend(reqOptions, {
 									content: ""
@@ -137,18 +137,12 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 								return;
 							}
 
-							if (!state.multipleAnswers || ($_this.prop("type") === "radio" && $this.prop("type") === "radio")) {
+							if ($_this.prop("type") === "radio" && $this.prop("type") === "radio") {
 								$_this.prop("checked", false).trigger("change");
 							}
 						});
 
-						Q.req('Streams/answer', [], function (err, response) {
-							var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
-							if (msg) {
-								$this.prop("checked", false);
-								return Q.alert(msg);
-							}
-						}, {
+						Q.req('Streams/answer', [], _reqCallback, {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $this.val()
@@ -162,13 +156,9 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							return console.warn("text element not found");
 						}
 
-						Q.req('Streams/answer', [], function (err, response) {
-							var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
-							if (msg) {
-								$this.prop("checked", false);
-								return Q.alert(msg);
-							}
-						}, {
+						_reqCallbackOptions.$this = $text;
+
+						Q.req('Streams/answer', [], _reqCallback, {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $text.val()

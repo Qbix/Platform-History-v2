@@ -324,6 +324,9 @@
 	border: 1px solid red;
 	border-radius: 50%;
 }
+.Streams_answer_preview_tool[data-participants=true] .Streams_answer_participants:empty {
+	display: none;
+}
 .Streams_answer_preview_tool[data-participants=true][data-type=text] input[type=text] {
 	width: calc(100% - 110px);
 }
