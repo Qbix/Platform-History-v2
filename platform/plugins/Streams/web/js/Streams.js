@@ -1943,16 +1943,17 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		// 	showInviteDialog();
 		// }
 
-		Q.req('Users/roles', ['canAdd'], function (err, response) {
-			var roles = Q.getObject('slots.canAdd', response);
-			if (!roles || !roles.length) {
+		Q.req('Users/roles', ['canAdd', 'canRemove', 'canSee'], function (err, response) {
+			var canAddRoles = Q.getObject('slots.canAdd', response);
+			var canRemoveRoles = Q.getObject('slots.canRemove', response);
+			if (Q.isEmpty(canAddRoles)) {
 				return showInviteDialog();
 			}
 			Q.Dialogs.push({
 				title: text.invite.roles.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.communityId,
-					filter: roles
+					filter: canAddRoles
 				}),
 				apply: true,
 				onActivate: function (dialog) {
@@ -1968,17 +1969,16 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								title: text.invite.roles.NotAuthorizedToGrantRole.title
 							})
 							return false;
-						} 
+						}
 
-						if(!wasSelected) {
-							if(o.addLabel == null) o.addLabel = [];
-						
-							o.addLabel.push(label);
-						} else {
+						o.addLabel = Array.isArray(o.addLabel) ? o.addLabel : [];
+						if(wasSelected) {
 							var index = o.addLabel.indexOf(label);
-							if(index != -1) {
+							if(index > -1) {
 								o.addLabel.splice(index, 1)
 							}
+						} else {
+							o.addLabel.push(label);
 						}
 					});
 				},
