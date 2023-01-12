@@ -102,17 +102,16 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					var _reqCallback = function (err, response) {
 						var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
 						if (msg) {
-							if (["checkbox", "radio"].indexOf(_reqCallbackOptions.$this.prop("type")) > -1) {
-								_reqCallbackOptions.$this.prop("checked", true);
-							}
 							return Q.alert(msg);
 						}
 
-						answerTool.stream.refresh(function () {
+						Q.Streams.get.force(answerTool.stream.fields.publisherId, answerTool.stream.fields.name, function (err) {
+							if (err) {
+								return;
+							}
+
+							answerTool.stream = this;
 							answerTool.setParticipants();
-						}, {
-							messages: true,
-							unlessSocket: true
 						});
 					};
 
