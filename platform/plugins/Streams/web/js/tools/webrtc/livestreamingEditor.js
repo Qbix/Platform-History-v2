@@ -140,12 +140,303 @@
                 var _sourcesColumnEl = null;
 
                 var streamingToSection = (function () {
+                    let _p2pBroadcastIconEl = null;
+                    let _facebookIconEl = null;
+                    let _customRtmpIconEl = null;
+
+                    tool.state.webrtcSignalingLib.event.on('liveStreamingStarted', function (e) {
+                        console.log('liveStreamingStarted', e.platform);
+                        if (e.platform && e.platform == 'facebook') {
+                            if (e.participant.isLocal) {
+                                console.log('liveStreamingStarted 2')
+                                showLiveIndicator('facebook');
+                            }
+                        } else {
+                            if (e.participant.isLocal) {
+                                showLiveIndicator('custom');
+                            }
+                        }
+                    });
+                    tool.state.webrtcSignalingLib.event.on('liveStreamingEnded', function (e) {
+                        if (e.platform && e.platform == 'facebook') {
+                            if (e.participant.isLocal) {
+                                hideLiveIndicator('facebook');
+                            }
+                        } else {
+                            if (e.participant.isLocal) {
+                                hideLiveIndicator('custom');
+                            }
+                        }
+                    });
+                  
+                    tool.state.webrtcSignalingLib.event.on('liveStreamingStopped', function () {
+
+                    });
+
 
                     let streamingToFacebook = (function () {
                         let _streamingToFbSection = null;
                         let _privacySelect = null;
 
-                        createSectionElement();
+                        let _liveId;
+                        let _liveInfo;
+                        let _accessToken;
+
+                        function goLiveDialog(callback) {
+                            var goLive = function () {
+                                FB.ui({
+                                    display: 'iframe',
+                                    method: 'live_broadcast',
+                                    phase: 'create'
+                                }, (createRes) => {
+
+                                    FB.ui({
+                                        display: 'iframe',
+                                        method: 'live_broadcast',
+                                        phase: 'publish',
+                                        broadcast_data: createRes
+                                    }, (publishRes) => {
+                                        if (publishRes == null || typeof publishRes == 'undefined') {
+                                            tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
+                                        }
+
+                                        _liveId = publishRes.id
+                                        var linkToStream = 'https://www.facebook.com/facebook/videos/' + publishRes.id;
+                                        if (callback != null) callback(linkToStream);
+                                    });
+
+                                    tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming([createRes.secure_stream_url], 'facebook');
+                                });
+                            }
+
+                            if (FB.getUserID()) {
+                                goLive();
+                            }
+                        }
+
+                        /**
+                         * Creates live streaming session via FB SDK for PHP
+                         * @method createLive
+                         * @param {Object} [data] title, description
+                         * @param {Object} [data.title] title when posting Live
+                         * @param {Object} [data.description] description when posting live
+                         * @param {Function} [callback] callback function that is triggered after live session created
+                         * @return {Object} RTMP urls for streaming
+                         */
+                        function createLive(data, callback) {
+                            Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
+                                var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                                if (msg) {
+                                    return Q.alert(msg);
+                                }
+
+                                _liveId = response.slots.fbLive.id
+                                if (callback != null) callback(response.slots.fbLive);
+
+                            }, {
+                                method: 'POST',
+                                fields: {
+                                    'accessToken': _accessToken,
+                                    'title': data.title,
+                                    'description': data.description,
+                                    'privacy': data.privacy,
+                                    'action': 'start'
+                                }
+                            });
+                        }
+
+                        /**
+                         * Ends live streaming session via FB SDK for PHP
+                         * @method deleteLive
+                         * @param {Function} [callback] callback function that is triggered after live session was ended
+                         */
+                        function endLive(callback) {
+                            Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
+                                var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                                if (msg) {
+                                    return Q.alert(msg);
+                                }
+
+                                tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
+                                if (callback != null) callback(_liveInfo);
+                            }, {
+                                method: 'post',
+                                fields: {
+                                    'accessToken': _accessToken,
+                                    'id': _liveId,
+                                    'action': 'end'
+                                }
+                            });
+                        }
+
+                        /**
+                         * Removes live streaming session via FB SDK for PHP
+                         * @method deleteLive
+                         * @param {Function} [callback] callback function that is triggered after live session was deleted
+                         */
+                        function deleteLive(callback) {
+                            Q.req("Streams/webrtc", ["fblive"], function (err, response) {
+                                var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                                if (msg) {
+                                    return Q.alert(msg);
+                                }
+
+                                if (callback != null) callback();
+                            }, {
+                                method: 'delete',
+                                fields: {
+                                    'accessToken': _accessToken,
+                                    'action': 'delete'
+                                }
+                            });
+                        }
+
+
+                        function facebookLiveDialog() {
+                            var tool = this;
+                            var fbLiveDialog = document.createElement('DIV');
+                            fbLiveDialog.className = 'live-editor-fblive_dialog_inner';
+                            var endStreamingBtn = document.createElement('BUTTON');
+                            endStreamingBtn.type = 'button';
+                            endStreamingBtn.className = 'Q_button';
+                            endStreamingBtn.innerHTML = "Stop streaming";
+                            endStreamingBtn.addEventListener('click', function () {
+                                tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
+                            })
+                            fbLiveDialog.appendChild(endStreamingBtn);
+                            Q.Dialogs.push({
+                                title: Q.text.Streams.webrtc.fbLive.dialogTitle,
+                                className: 'live-editor-fblive_dialog',
+                                content: fbLiveDialog,
+                                apply: true
+                            });
+                        }
+
+                        /**
+                         * 1) Checks FB login status; 2) gets RTMP url for streaming; 3) passes it to websocket streamer function
+                         * @method startFacebookLive
+                         */
+                        function startFacebookLive(data, callback) {
+
+                            var satrtLive = function () {
+                                if (tool.state.webrtcUserInterface.getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
+                                    goLiveDialog(callback);
+                                    return
+                                }
+                                var loggedInCallback = function () {
+                                    if (tool.livestreamingRtmpSenderTool.rtmpSender.isStreaming('facebook')) {
+                                        facebookLiveDialog();
+                                    } else {
+                                        createLive(data, function (response) {
+
+                                            tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming([response.secure_stream_url], 'facebook');
+                                            _liveInfo = response;
+                                            if (callback != null) callback(response);
+                                        });
+                                    }
+                                }
+
+                                var notLoggedInCallback = function () {
+                                    FB.login(function (response) {
+                                        if (response.authResponse) {
+                                            _accessToken = response.authResponse.accessToken;
+                                            loggedInCallback(response.authResponse.accessToken);
+                                        }
+                                    }, { auth_type: 'reauthorize', scope: 'email,public_profile,publish_video' });
+                                }
+
+                                FB.getLoginStatus(function (response) {
+                                    if (response.status === 'connected') {
+                                        FB.api(
+                                            '/me/permissions',
+                                            'GET',
+                                            function (permissionsResponse) {
+                                                var permissions = permissionsResponse.data;
+                                                for (let p in permissions) {
+                                                    if (permissions[p].permission == 'publish_video') {
+                                                        _accessToken = response.authResponse.accessToken;
+                                                        loggedInCallback();
+                                                        return;
+                                                    }
+                                                }
+
+                                                notLoggedInCallback();
+                                            }
+                                        );
+
+                                    } else {
+                                        notLoggedInCallback();
+                                    }
+
+                                });
+                            }
+
+                            if (tool.state.webrtcUserInterface.getOptions().liveStreaming.useRecordRTCLibrary) {
+                                Q.addScript([
+                                    "{{Streams}}/js/tools/webrtc/RecordRTC.js"
+                                ], function () {
+                                    satrtLive();
+                                });
+                            } else {
+                                satrtLive();
+                            }
+
+                        }
+
+                        /**
+                         * Show dialog with iframe code
+                         * @method startFacebookLive
+                         */
+                        function getIframe(iFrame) {
+                            var testFrame = '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F100004473155810%2Fvideos%2F1429100060582419%2F&width=0" width="0" height="0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>';
+
+                            var embedCode = iFrame != null ? iFrame : (_liveInfo ? _liveInfo['embed_html'] : testFrame);
+
+                            var dialog = document.createElement('DIV');
+                            dialog.className = 'live-editor-live-preview';
+
+                            var dialogInner = document.createElement('DIV');
+                            dialogInner.className = 'live-editor-dialog-inner';
+
+                            var iframeCodeCon = document.createElement('DIV');
+                            iframeCodeCon.className = 'live-editor-live_embed_code';
+                            var iframeCodeTitle = document.createElement('DIV');
+                            iframeCodeTitle.className = 'live-editor-live_embed_title';
+                            iframeCodeTitle.innerHTML = 'Embed Video';
+                            var iframeCode = document.createElement('TEXTAREA');
+                            iframeCode.innerText = embedCode;
+
+                            var copyBtn = document.createElement('BUTTON');
+                            copyBtn.type = 'button';
+                            copyBtn.className = 'Q_button';
+                            copyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
+
+                            var preview = document.createElement('DIV');
+                            preview.className = 'live-editor-embed-preview';
+                            preview.innerHTML = embedCode;
+
+                            iframeCodeCon.appendChild(iframeCodeTitle);
+                            iframeCodeCon.appendChild(iframeCode);
+                            iframeCodeCon.appendChild(copyBtn);
+                            preview.appendChild(iframeCodeCon);
+                            dialogInner.appendChild(preview);
+
+                            dialog.appendChild(dialogInner);
+
+                            iframeCode.addEventListener('click', function () {
+                                this.setSelectionRange(0, this.value.length);
+                            })
+
+                            copyBtn.addEventListener('click', function () {
+                                copyToClipboard(iframeCode);
+                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.codeCopiedToCb", tool.text));
+                            });
+
+                            return dialog;
+                        }
 
                         function createSectionElement() {
                             var streamingAndUploading = _streamingToFbSection = document.createElement('DIV');
@@ -262,38 +553,38 @@
                                 data.title = facebookLiveTtleInput.value;
                                 data.description = facebookLiveDescInput.value;
                                 data.privacy = privacySelect.value;
-                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
+                                startFacebookLive(data, function (liveInfo) {
                                     facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
                                     fbStreamingStartSettings.style.display = 'none';
                                     fbStreamingLiveSection.style.display = 'block';
                                     if (fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
-                                    fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.text);
-                                    tool.livestreamingEditor.show();
-                                    if (tool.videoSettingsPopup != null) tool.videoSettingsPopup.hide();
                                 });
                             })
                             stopStreamingBtn.addEventListener('click', function () {
                                 if (!fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.add('Q_working');
 
-                                tool.fbLiveInterface.endLive(function (liveInfo) {
+                                endLive(function (liveInfo) {
 
                                     var urlInputCon = facebookLiveEmbed.cloneNode(true);
                                     var urlInput = urlInputCon.querySelector('input');
                                     urlInput.value = facebookLiveUrl.value;
-                                    urlInputCon.querySelector('.live-editor-stream-to-section-fb-copy_url_btn').addEventListener('click', function () {
+                                    urlInputCon.querySelector('.live-editor-stream-to-section-fb-copy-url-btn').addEventListener('click', function () {
                                         var link = urlInput.value;
                                         if (link.trim() != '') {
                                             copyToClipboard(urlInput);
-                                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                                            tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
                                         }
                                     })
 
                                     var embedPopupBtn = document.createElement('DIV');
-                                    embedPopupBtn.className = 'live-editor-stream-to-section-fb-copy_embed_btn';
+                                    embedPopupBtn.className = 'live-editor-stream-to-section-fb-copy-embed-btn';
                                     var embedPopupBtnText = document.createElement('SPAN');
                                     embedPopupBtnText.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.text);
                                     embedPopupBtn.addEventListener('click', function () {
-                                        tool.fbLiveInterface.getIframe(liveInfo['embed_html']);
+                                        let settingsDialog = new SimpleDialog({
+                                            content: getIframe(liveInfo['embed_html']),
+                                            title: 'Embed'
+                                        });
                                     })
                                     embedPopupBtn.appendChild(embedPopupBtnText);
                                     urlInputCon.appendChild(embedPopupBtn);
@@ -303,13 +594,15 @@
                                     fbStreamingStartSettings.style.display = 'block';
                                     fbStreamingLiveSection.style.display = 'none';
                                     if (fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.remove('Q_working');
-                                    fbLivetextLabel.innerHTML = 'Start Facebook Livestream';
-
                                 });
                             })
 
                             getIframeBtn.addEventListener('click', function () {
-                                tool.fbLiveInterface.getIframe();
+                                let settingsDialog = new SimpleDialog({
+                                    content: getIframe(_liveInfo['embed_html']),
+                                    title: 'Embed'
+                                });
+                                getIframe();
                             })
 
                             facebookLiveCopy.addEventListener('click', function () {
@@ -410,10 +703,334 @@
                             return _streamingToFbSection;
                         }
 
+                        createSectionElement();
+
                         return {
                             getSection: getSection
                         }
                     }())
+
+                    let streamingToCustomRtmp = (function () {
+                        var _streamingToCustomRtmpSection = null;
+                        
+                        function createSectionElement() {
+                            var rtmpStreaming = _streamingToCustomRtmpSection = document.createElement('DIV');
+                            rtmpStreaming.className = 'live-editor-stream-to-section-rtmp'
+
+                            var rtmpStreamingSettings = document.createElement('DIV');
+                            rtmpStreamingSettings.className = 'live-editor-stream-to-section-rtmp-start-settings';
+                            rtmpStreaming.appendChild(rtmpStreamingSettings);
+
+                            var rtmpLiveItem = document.createElement('DIV');
+                            rtmpLiveItem.className = 'live-editor-stream-to-section-rtmp-rtmp-item';
+                            rtmpStreamingSettings.appendChild(rtmpLiveItem);
+
+                            var rtmpLiveURL = document.createElement('LABEL');
+                            rtmpLiveURL.className = 'live-editor-stream-to-section-rtmp-rtmp-url';
+                            rtmpLiveItem.appendChild(rtmpLiveURL);
+
+                            var rtmpLiveURLInput = document.createElement('INPUT');
+                            rtmpLiveURLInput.type = 'text';
+                            rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
+                            rtmpLiveURL.appendChild(rtmpLiveURLInput);
+
+                            var rtmpLiveStreamKey = document.createElement('LABEL');
+                            rtmpLiveStreamKey.className = 'live-editor-stream-to-section-rtmp-key';
+                            rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+
+                            var rtmpLiveStreamKeyInput = document.createElement('INPUT');
+                            rtmpLiveStreamKeyInput.type = 'password';
+                            rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+                            rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
+
+                            var startStreamingBtnCon = document.createElement('DIV');
+                            startStreamingBtnCon.className = 'live-editor-stream-to-section-rtmp-start';
+                            rtmpStreamingSettings.appendChild(startStreamingBtnCon);
+
+                            var addUrlBtn = document.createElement('BUTTON');
+                            addUrlBtn.type = 'button';
+                            addUrlBtn.className = 'Q_button live-editor-stream-to-section-rtmp-add-rtmp';
+                            addUrlBtn.innerHTML = 'Add RTMP';
+                            startStreamingBtnCon.appendChild(addUrlBtn);
+
+                            var startStreamingBtn = document.createElement('BUTTON');
+                            startStreamingBtn.type = 'button';
+                            startStreamingBtn.className = 'Q_button';
+                            startStreamingBtn.innerHTML = 'Go Live';
+                            startStreamingBtnCon.appendChild(startStreamingBtn);
+
+                            var instructionsCon = document.createElement('DIV');
+                            instructionsCon.className = 'live-editor-stream-to-section-rtmp-instructions';
+                            startStreamingBtnCon.appendChild(instructionsCon);
+
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    instructionsCon,
+                                    'Streams/webrtc/livestreamInstructions',
+                                    {}
+                                ),
+                                {},
+                                function () {
+
+                                }
+                            );
+
+                            var rtmpLiveSection = document.createElement('DIV');
+                            rtmpLiveSection.style.display = 'none';
+                            rtmpLiveSection.className = 'live-editor-stream-to-section-rtmp-live';
+                            rtmpStreaming.appendChild(rtmpLiveSection);
+
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'live-editor-stream-to-section-rtmp-buttons';
+                            rtmpLiveSection.appendChild(buttonsCon);
+
+                            var stopStreamingBtnCon = document.createElement('DIV');
+                            stopStreamingBtnCon.className = 'live-editor-stream-to-section-rtmp-stop';
+                            buttonsCon.appendChild(stopStreamingBtnCon);
+
+                            var stopStreamingBtn = document.createElement('BUTTON');
+                            stopStreamingBtn.type = 'button';
+                            stopStreamingBtn.className = 'Q_button';
+                            stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.text);
+                            stopStreamingBtnCon.appendChild(stopStreamingBtn);
+
+                            addUrlBtn.addEventListener('click', function (e) {
+                                var rtmpLiveItem = document.createElement('DIV');
+                                rtmpLiveItem.className = 'live-editor-stream-to-section-rtmp-rtmp-item';
+
+                                var rtmpLiveURL = document.createElement('LABEL');
+                                rtmpLiveURL.className = 'live-editor-stream-to-section-rtmp-rtmp-url';
+
+                                var rtmpLiveURLInput = document.createElement('INPUT');
+                                rtmpLiveURLInput.type = 'text';
+                                rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
+
+                                var rtmpLiveStreamKey = document.createElement('LABEL');
+                                rtmpLiveStreamKey.className = 'live-editor-stream-to-section-rtmp-key';
+                                var rtmpLiveStreamKeyInput = document.createElement('INPUT');
+                                rtmpLiveStreamKeyInput.type = 'password';
+                                rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+
+                                rtmpLiveURL.appendChild(rtmpLiveURLInput);
+                                rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
+                                rtmpLiveItem.appendChild(rtmpLiveURL);
+                                rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+
+                                rtmpStreamingSettings.insertBefore(rtmpLiveItem, rtmpStreamingSettings.lastChild);
+                            })
+
+                            startStreamingBtn.addEventListener('click', function (e) {
+                                if (typeof MediaRecorder == 'undefined') {
+                                    alert('MediaRecorder is not supported in your browser.')
+                                    return;
+                                }
+
+                                var rtmpUrls = Array.from(rtmpStreamingSettings.querySelectorAll('.live-editor-stream-to-section-rtmp-rtmp-item'));
+
+                                var rtmpUrlsArr = [];
+                                for (let i in rtmpUrls) {
+                                    var inputs = rtmpUrls[i].querySelectorAll('input');
+                                    var rtmpURL = inputs[0].value.trim();
+                                    var streamKey = inputs[1].value.trim();
+                                    var fullRtmpURL = rtmpURL;
+                                    if (streamKey != null && streamKey != '') {
+                                        fullRtmpURL = rtmpURL.endsWith('/') ? fullRtmpURL + streamKey : fullRtmpURL + '/' + streamKey;
+                                    }
+                                    rtmpUrlsArr.push(fullRtmpURL);
+                                }
+
+                                tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(rtmpUrlsArr, 'custom');
+
+                                rtmpStreamingSettings.style.display = 'none';
+                                rtmpLiveSection.style.display = 'block';
+                            })
+
+                            stopStreamingBtn.addEventListener('click', function () {
+                                tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('custom');
+                                rtmpStreamingSettings.style.display = 'block';
+                                rtmpLiveSection.style.display = 'none';
+                            })
+
+                            return rtmpStreaming;
+                        }
+
+                        createSectionElement();
+
+                        function getSection() {
+                            return _streamingToCustomRtmpSection;
+                        }
+                        
+                        return {
+                            getSection: getSection
+                        }
+                    }());
+
+                    let peerToPeerStreaming = (function() {
+                        var _peerToPeerStreamingSection = null;
+
+                        function createSectionElement() {
+                            var recordingCon = _peerToPeerStreamingSection = document.createElement('DIV');
+                            recordingCon.className = 'live-editor-stream-to-section-p2p'
+
+                            var recordingSettings = document.createElement('DIV');
+                            recordingSettings.className = 'live-editor-stream-to-section-p2p-start_settings';
+                            recordingCon.appendChild(recordingSettings);
+
+                            var startRecordingBtnCon = document.createElement('DIV');
+                            startRecordingBtnCon.className = 'live-editor-stream-to-section-p2p-start';
+                            recordingSettings.appendChild(startRecordingBtnCon);
+
+                            var startRecordingBtn = document.createElement('BUTTON');
+                            startRecordingBtn.type = 'button';
+                            startRecordingBtn.className = 'Q_button';
+                            startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", tool.text);
+                            startRecordingBtnCon.appendChild(startRecordingBtn);
+
+                            var activeRecordingSection = document.createElement('DIV');
+                            activeRecordingSection.style.display = 'none';
+                            activeRecordingSection.className = 'live-editor-stream-to-section-p2p-live';
+                            recordingCon.appendChild(activeRecordingSection);
+
+                            var linkCon = document.createElement('DIV');
+                            linkCon.className = 'live-editor-stream-to-section-p2p-link-con';
+                            activeRecordingSection.appendChild(linkCon);
+
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'live-editor-stream-to-section-p2p-buttons';
+                            activeRecordingSection.appendChild(buttonsCon);
+
+                            var stopRecordingBtnCon = document.createElement('DIV');
+                            stopRecordingBtnCon.className = 'live-editor-stream-to-section-p2p-stop';
+                            buttonsCon.appendChild(stopRecordingBtnCon);
+
+                            var stopRecordingBtn = document.createElement('BUTTON');
+                            stopRecordingBtn.type = 'button';
+                            stopRecordingBtn.className = 'Q_button';
+                            stopRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.stop", tool.text);
+                            stopRecordingBtnCon.appendChild(stopRecordingBtn);
+
+                            var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
+
+                            var linkInputCon = document.createElement('LABEL');
+                            linkInputCon.className = 'live-editor-stream-to-section-p2p-label';
+                            linkCon.appendChild(linkInputCon);
+                            var linkInput = document.createElement('INPUT');
+                            linkInput.disabled = true;
+                            linkInput.value = location.origin + '/broadcast?stream=' + roomId;
+                            linkInputCon.appendChild(linkInput);
+                            var linkCopyBtn = document.createElement('BUTTON');
+                            linkCopyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
+                            linkCon.appendChild(linkCopyBtn);
+
+                            linkCopyBtn.addEventListener('click', function () {
+                                copyToClipboard(linkInput);
+                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                            })
+
+                            var broadcastClient;
+                            startRecordingBtn.addEventListener('click', function () {
+                                if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+
+                                Q.addScript('{{Streams}}/js/tools/webrtc/broadcast.js', function () {
+                                    Q.req("Streams/webcast", ["room"], function (err, response) {
+                                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                                        if (msg) {
+                                            return Q.alert(msg);
+                                        }
+
+                                        // roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+                                        var turnCredentials = response.slots.room.turnCredentials;
+                                        var socketServer = response.slots.room.socketServer;
+
+                                        broadcastClient = window.WebRTCWebcastClient({
+                                            mode: 'node',
+                                            role: 'publisher',
+                                            nodeServer: socketServer,
+                                            roomName: roomId,
+                                            //turnCredentials: turnCredentials,
+                                        });
+                                        if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                        recordingSettings.style.display = 'none';
+                                        activeRecordingSection.style.display = 'block';
+                                        showLiveIndicator('p2p');
+
+                                        broadcastClient.init(function () {
+                                            tool.livestreamingCanvasComposerTool.canvasComposer.captureStream();
+                                            var stream = tool.livestreamingCanvasComposerTool.canvasComposer.getMediaStream();
+
+                                            if (stream != null) stream = stream.clone();
+
+                                            broadcastClient.mediaControls.publishStream(stream);
+                                            tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastStarted', roomId)
+
+                                        });
+
+                                        broadcastClient.event.on('disconnected', function () {
+                                            tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastEnded')
+                                        });
+
+                                        tool.broadcastClient = broadcastClient;
+                                    }, {
+                                        method: 'post',
+                                        fields: {
+                                            roomId: roomId,
+                                            publisherId: Q.Users.communityId,
+                                        }
+                                    });
+
+                                });
+
+                            })
+                            stopRecordingBtn.addEventListener('click', function () {
+                                if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+
+                                broadcastClient.disconnect();
+
+                                if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                activeRecordingSection.style.display = 'none';
+                                recordingSettings.style.display = 'block';
+                                hideLiveIndicator('p2p');
+                            })
+
+                            return recordingCon;
+                        }
+
+                        createSectionElement();
+
+                        function getSection() {
+                            return _peerToPeerStreamingSection;
+                        }
+
+                        return {
+                            getSection: getSection
+                        }
+                    }())
+
+                    function showLiveIndicator(platform){
+                        if(platform == 'facebook') {
+                            if(!_facebookIconEl.classList.contains('live-editor-stream-to-is-active')) {
+                                _facebookIconEl.classList.add('live-editor-stream-to-is-active');
+                            }
+                        } else if(platform == 'custom') {
+                            if(!_customRtmpIconEl.classList.contains('live-editor-stream-to-is-active')) {
+                                _customRtmpIconEl.classList.add('live-editor-stream-to-is-active');
+                            }
+                        } else if(platform == 'p2p') {
+                            if(!_p2pBroadcastIconEl.classList.contains('live-editor-stream-to-is-active')) {
+                                _p2pBroadcastIconEl.classList.add('live-editor-stream-to-is-active');
+                            }
+                        }
+                    }
+                    function hideLiveIndicator(platform){
+                        if(platform == 'facebook') {
+                            _facebookIconEl.classList.remove('live-editor-stream-to-is-active');
+                        } else if(platform == 'custom') {
+                            _customRtmpIconEl.classList.remove('live-editor-stream-to-is-active');
+                        } else if(platform == 'p2p') {
+                            _p2pBroadcastIconEl.classList.remove('live-editor-stream-to-is-active');
+                        }
+                    }
 
                     function createSection(){
                         var sectionContainer = document.createElement('DIV');
@@ -428,8 +1045,12 @@
 
                         var peerToPeerStreamingIcon = document.createElement('DIV');
                         peerToPeerStreamingIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-p2p-icon';
-                        peerToPeerStreamingIcon.innerHTML = _streamingIcons.streamingToP2P;
                         peerToPeerStreamingBtn.appendChild(peerToPeerStreamingIcon);
+
+                        var peerToPeerStreamingIconSvg = _p2pBroadcastIconEl = document.createElement('DIV');
+                        peerToPeerStreamingIconSvg.className = 'live-editor-stream-to-section-btn-icon-svg';
+                        peerToPeerStreamingIconSvg.innerHTML = _streamingIcons.streamingToP2P;
+                        peerToPeerStreamingIcon.appendChild(peerToPeerStreamingIconSvg);
 
                         var peerToPeerStreamingCaption = document.createElement('DIV');
                         peerToPeerStreamingCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-p2p-text';
@@ -442,8 +1063,12 @@
 
                         var facebookLiveIcon = document.createElement('DIV');
                         facebookLiveIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-fb-icon';
-                        facebookLiveIcon.innerHTML = _streamingIcons.streamingToFb;
                         facebookLiveBtn.appendChild(facebookLiveIcon);
+
+                        var facebookLiveIconSvg = _facebookIconEl = document.createElement('DIV');
+                        facebookLiveIconSvg.className = 'live-editor-stream-to-section-btn-icon-svg';
+                        facebookLiveIconSvg.innerHTML = _streamingIcons.streamingToFb;
+                        facebookLiveIcon.appendChild(facebookLiveIconSvg);
 
                         var facebookLiveCaption = document.createElement('DIV');
                         facebookLiveCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-fb-text';
@@ -456,8 +1081,12 @@
 
                         var customStreamIcon = document.createElement('DIV');
                         customStreamIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-rtmp-icon';
-                        customStreamIcon.innerHTML = _streamingIcons.streamingToRtmp;
                         customStreamBtn.appendChild(customStreamIcon);
+
+                        var customStreamIconSvg = _customRtmpIconEl = document.createElement('DIV');
+                        customStreamIconSvg.className = 'live-editor-stream-to-section-btn-icon-svg';
+                        customStreamIconSvg.innerHTML = _streamingIcons.streamingToRtmp;
+                        customStreamIcon.appendChild(customStreamIconSvg);
 
                         var customStreamCaption = document.createElement('DIV');
                         customStreamCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-fb-text';
@@ -465,13 +1094,35 @@
                         customStreamBtn.appendChild(customStreamCaption);
 
 
+                        peerToPeerStreamingBtn.addEventListener('click', function() {
+                            let streamingControlsEl = document.querySelector('.live-editor-popup-preview');
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let settingsDialog = new SimpleDialog({
+                                content: peerToPeerStreaming.getSection(), 
+                                rectangleToShowIn: rectangleToShowIn,
+                                title: 'Peer To Peer Broadcast',
+                                className: 'live-editor-modal-window'
+                            });
+                        });
+
                         facebookLiveBtn.addEventListener('click', function() {
                             let streamingControlsEl = document.querySelector('.live-editor-popup-preview');
                             let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
                             let settingsDialog = new SimpleDialog({
                                 content: streamingToFacebook.getSection(), 
                                 rectangleToShowIn: rectangleToShowIn,
-                                title: 'Start Facebook Live'
+                                title: 'Start Facebook Live',
+                                className: 'live-editor-modal-window'
+                            });
+                        });
+
+                        customStreamBtn.addEventListener('click', function() {
+                            let streamingControlsEl = document.querySelector('.live-editor-popup-preview');
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let settingsDialog = new SimpleDialog({
+                                content: streamingToCustomRtmp.getSection(), 
+                                rectangleToShowIn: rectangleToShowIn,
+                                title: 'Stream to custom RTMP'
                             });
                         });
                         return sectionContainer;
@@ -6488,13 +7139,15 @@
         
                     this.show = function (e) {
                         let rectangleToShowIn = dialogInstance.rectangleToShowIn;
+                        console.log('rectangleToShowIn', rectangleToShowIn)
                         dialogInstance.dialogEl.style.top = '';
                         dialogInstance.dialogEl.style.left = '';
                         dialogInstance.dialogEl.style.maxHeight = '';
                         dialogInstance.dialogEl.style.maxWidth = '';
                         togglePopupClassName('', false, false);
-                        let existingPopupDialog = document.querySelector('.live-editor-dialog-window');
-                        if (existingPopupDialog && existingPopupDialog.parentElement) existingPopupDialog.parentElement.removeChild(existingPopupDialog);
+
+                        //let existingPopupDialog = document.querySelector('.live-editor-dialog-window');
+                        //if (existingPopupDialog && existingPopupDialog.parentElement) existingPopupDialog.parentElement.removeChild(existingPopupDialog);
                 
                         dialogInstance.dialogEl.style.position = 'fixed';
                         dialogInstance.dialogEl.style.visibility = 'hidden';
@@ -6520,7 +7173,7 @@
                         if(dialogRect.width <= rectangleToShowIn.width) {
                             dialogInstance.dialogEl.style.left = midXOfRectangleToShowIn - (dialogRect.width / 2) + 'px';
                         } else {
-                            dialogInstance.dialogEl.style.left = '0px';
+                            dialogInstance.dialogEl.style.left = rectangleToShowIn.x + 'px';
                             dialogInstance.dialogEl.style.width = rectangleToShowIn.width + 'px';
                         }
                         
@@ -6529,7 +7182,7 @@
                         if(dialogRect.height <= rectangleToShowIn.height) {
                             dialogInstance.dialogEl.style.top = midYOfRectangleToShowIn - (dialogRect.height / 2) + 'px';
                         } else {
-                            dialogInstance.dialogEl.style.top = '0px';
+                            dialogInstance.dialogEl.style.top = rectangleToShowIn.y + 'px';
                             dialogInstance.dialogEl.style.height = rectangleToShowIn.height + 'px';
                         }
 

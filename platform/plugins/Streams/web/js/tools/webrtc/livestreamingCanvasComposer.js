@@ -2544,7 +2544,6 @@
                                 nameText.textHeight = fontSizeInfo.textSize.fontBoundingBoxAscent + fontSizeInfo.textSize.fontBoundingBoxDescent;
                             })
                             webrtcSource.eventDispatcher.on('rectChanged', function() {
-                                console.log('RECT CHANGEEEEEEED')
                                 var fontSizeInfo = getFontSizeinfo();
                                 nameText.font = fontSizeInfo.font;
                                 nameText.latestSize = fontSizeInfo.fontSize;
@@ -3904,9 +3903,9 @@
                         function stopAndRemove() {
                             log('videoComposer: stopAndRemove')
         
-                            if(_canvas != null) {
+                            /*if(_canvas != null) {
                                 if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
-                            }
+                            }*/
         
                             _isActive = false;
         
