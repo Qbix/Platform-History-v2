@@ -311,6 +311,9 @@
 	margin-left: 5px;
 }
 .Streams_answer_preview_tool[data-participants=false] .Streams_answer_participants {
+	display: none;
+}
+.Streams_answer_preview_tool[data-participants=true] .Streams_answer_participants:not(.Streams_participants_tool) {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -321,10 +324,7 @@
 	border: 1px solid red;
 	border-radius: 50%;
 }
-.Streams_answer_preview_tool[data-participants=false] .Streams_answer_participants:empty {
-	display: none;
-}
-.Streams_answer_preview_tool[data-participants=false][data-type=textarea] textarea {
+.Streams_answer_preview_tool[data-participants=true][data-type=textarea] textarea {
 	width: calc(100% - 110px);
 }
 

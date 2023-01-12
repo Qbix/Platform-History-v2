@@ -98,9 +98,13 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		var $participants = $(".Streams_answer_participants", tool.element);
 
 		$(tool.element).attr("data-participants", state.participants);
+		if (!state.participants) {
+			return;
+		}
+
 		$participants.empty();
 
-		if (state.participants && tool.stream.testReadLevel("participants")) {
+		if (tool.stream.testReadLevel("participants")) {
 			$participants.tool("Streams/participants", {
 				publisherId: publisherId,
 				streamName: streamName,
