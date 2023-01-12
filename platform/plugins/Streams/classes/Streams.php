@@ -2929,6 +2929,7 @@ abstract class Streams extends Base_Streams
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
 				$participant->extra = Q::json_encode($tree->getAll(), JSON_FORCE_OBJECT);
+				$participant->save();
 			}
 			$streamNamesUpdate[] = $sn;
 			$type = ($participant->state === 'participating') ? 'visit' : 'join';
