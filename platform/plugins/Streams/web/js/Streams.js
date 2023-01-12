@@ -891,7 +891,7 @@ var _Streams_batchFunction_options = {
  */
 Streams.create = function (fields, callback, related, options) {
 	var slotNames = ['stream'];
-	var options = options || {};
+	options = options || {};
 	fields = Q.copy(fields);
 	if (options.fields) {
 		Q.extend(fields, 10, options.fields);
@@ -4825,7 +4825,7 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 		if (Q.isPlainObject(userId)) {
 			callback && callback.call(this, err, participants || null);
 		} else {
-			var participant = Q.first(participants);;
+			var participant = Q.first(participants);
 			callback && callback.call(participant, err, participant || null);
 		}
 	});
