@@ -228,7 +228,7 @@
         
                             if(service != null && _streamingSocket[service] != null) {
                                 _streamingSocket[service].socket.disconnect();
-                                _streamingSocket[service] = null;
+                                delete _streamingSocket[service];
         
                             } else {
                                 for(let propName in _streamingSocket) {

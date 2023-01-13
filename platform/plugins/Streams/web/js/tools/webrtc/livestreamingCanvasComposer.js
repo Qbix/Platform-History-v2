@@ -1368,8 +1368,8 @@
                             }
                         }
         
-                        function updateWebRTCLayout(webrtcGroupSource, layoutName) {
-                            log('updateWebRTCCanvasLayout start', layoutName, webrtcGroupSource.currentLayout)
+                        function updateWebRTCLayout(webrtcGroupSource, layoutName, startAsEmpty) {
+                            log('updateWebRTCCanvasLayout start', layoutName, webrtcGroupSource.currentLayout, startAsEmpty)
         
                             var tracksToAdd = [];
                             var tracksToRemove = [];
@@ -1458,6 +1458,7 @@
                                                 canvasStream.mediaStream = vTracks[s].stream;
                                                 canvasStream.htmlVideoEl = vTracks[s].trackEl;
                                                 canvasStream.parentGroup = webrtcGroupSource;
+                                                canvasStream.active = startAsEmpty ? false : true;
                                                 if (vTracks[s].screensharing == true) {
                                                     log('updateWebRTCCanvasLayout addNewVideoCanvasStream: add screensharing track');
         
@@ -1472,6 +1473,7 @@
                                                         let audioCanvasStream = new WebRTCStreamSource(participants[v]);
                                                         audioCanvasStream.kind = 'audio';
                                                         audioCanvasStream.parentGroup = webrtcGroupSource;
+                                                        audioCanvasStream.active = startAsEmpty ? false : true;
                                                         tracksToAdd.push(audioCanvasStream);
                                                     }
                                                 
@@ -1494,6 +1496,7 @@
                                                 canvasStream.kind = 'audio';
                                                 canvasStream.parentGroup = webrtcGroupSource;
                                                 canvasStream.track = vTracks[s];
+                                                canvasStream.active = startAsEmpty ? false : true;
                                                 tracksToAdd.push(canvasStream);
                                             } /*else if(vTracks.length > 1) {
                                                 log('updateWebRTCCanvasLayout !trackCurrentlyRendered if2 ADD VIDEO RECT')
@@ -1632,6 +1635,7 @@
                                             let canvasStream = new WebRTCStreamSource(participants[v]);
                                             canvasStream.kind = 'audio';
                                             canvasStream.parentGroup = webrtcGroupSource;
+                                            canvasStream.active = startAsEmpty ? false : true;
                                             tracksToAdd.push(canvasStream);
                                         }
                                     }

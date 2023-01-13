@@ -963,11 +963,13 @@
 
                                             broadcastClient.mediaControls.publishStream(stream);
                                             tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastStarted', roomId)
-
+                                            tool.state.webrtcSignalingLib.event.dispatch('webcastStarted', {participant: tool.state.webrtcSignalingLib.localParticipant()});
                                         });
 
                                         broadcastClient.event.on('disconnected', function () {
                                             tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastEnded')
+                                            tool.state.webrtcSignalingLib.event.dispatch('webcastEnded', {participant: tool.state.webrtcSignalingLib.localParticipant()});
+
                                         });
 
                                         tool.broadcastClient = broadcastClient;
@@ -2541,7 +2543,7 @@
                                 } else {
                                     console.log('visibilityBtnCon change 1.2');
                                     addTeleconferenceSource();
-                                    //listItemInstance.toggleVisibility();
+                                    listItemInstance.toggleVisibility();
                                 }
                             });
 
@@ -3318,7 +3320,7 @@
                         });
 
                         //webrtcGroup.currentLayout = _layoutsListSelect.value;
-                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup, _layoutsListSelect.value);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup, _layoutsListSelect.value, true);
 
                     }
 
@@ -8510,7 +8512,8 @@
                             tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.stop();
                         }
                     }
-                    _controlsTool.show();
+                    //_controlsTool.show();
+                    document.documentElement.classList.remove('Streams_webrtc_live');
                 }
 
                 function showHorizontalRequired() {
@@ -8619,14 +8622,8 @@
 
                         scenesInterface.syncList();
                       
-                        if(Q.info.isMobile) {
-                            _controlsTool.hide();
-                        } else {
-                            var dialogRect = dialog.getBoundingClientRect();
-                            var controlsRect = _controlsTool.element.firstChild.getBoundingClientRect();
-                            if(dialogRect.bottom > controlsRect.top) {
-                                _controlsTool.hide();
-                            }
+                        if(!document.documentElement.classList.contains('Streams_webrtc_live')) {
+                            document.documentElement.classList.add('Streams_webrtc_live');
                         }
                     }
                 }
