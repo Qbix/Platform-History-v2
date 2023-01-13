@@ -15183,12 +15183,12 @@ Q.Camera = {
 			}
 		},
 		/**
-		 * Method - interface for QR code scan action. It decide which plugin or library to use
-		 * and handle callback (when QR code found) to mark participants as "checked".
+		 * Starts QR scanning interface, until the user stops it.
+		 * It may use the "instascan" library or the cordova plugin, depending on the environment.
 		 * @method QR
 		 * @static
-		 * @param {function} callback Executed when QR code found with text of this code in arguments
-		 * @param {object} options Object with options to replace default
+		 * @param {Function} callback Can be called multiple times. Executed when QR code found with text of this code in arguments
+		 * @param {Object} options Object with options to replace default
 		 */
 		QR: function (callback, options) {
 			options = Q.extend({}, this.options, options);
@@ -15197,6 +15197,72 @@ Q.Camera = {
 				return this.adapters.cordova(audio, callback, options);
 			}
 			this.adapters.instascan(audio, callback, options);
+		},
+		/**
+		 * Scan a series of QR codes that make up an animation,
+		 * aggregates the fields from these codes and calls the onResult callback.
+		 * The QR codes may contain URLs (with fields in querystring or hash)
+		 * or may contain JSON (with fields).
+		 * The fields in every individual QR code SHOULD contain 
+		 * "Q.index" and "Q.total" in order for the animated QR to be processed properly.
+		 * @method animatedQR
+		 * @static
+		 * @param {Function|Q.Event} onResult occurs when one complete QR was scanned
+		 * @param {Function|Q.Event} onEachQR occurs when each QR code was scanned, beginning with index=1
+		 */
+		animatedQR: function (onResult, onEachQR) {
+			var sawContent = {}, result = {}, started = false;
+			Q.Camera.Scan.QR(function (content) {
+				// exclude content we've already processed this time around
+				if (sawContent[content]) {
+					return;
+				}
+				sawContent[content] = true;
+
+				// gather fields from content
+				var fields = {};
+				if (content.isUrl()) {
+					var url = content;
+					var parts = url.split('#');
+					var hash = parts[1];
+					parts = parts[0].split('?');
+					var qs = parts[1];
+					var info = (qs ? qs + '&' : '') + (hash || '');
+					fields = Q.parseQueryString(info);
+				} else {
+					try {
+						fields = JSON.parse(content);
+					} catch (e) {
+						return; // it's some other format, skip it
+					}
+				}
+				
+				// get the index and total
+				var index = fields['Q.index'];
+				var total = fields['Q.total'];
+				delete fields['Q.index'];
+				delete fields['Q.total'];
+				if (index && index > 1 && !started) {
+					return; // wait for the first QR code before starting
+				}
+				started = true;
+
+				Q.handle(onEachQR, Q.Camera.Scan.animatedQR, [result, content]);
+		
+				// aggregate the fields in animated QR codes, until last QR code
+				if (!index || index === 1) {
+					result = fields;
+				} else {
+					Q.extend(result, fields);
+					if (index < total) {
+						// wait until the last one is scanned before processing request
+						return;
+					}
+				}
+
+				// time to report the result
+				return Q.handle(onResult, Q.Camera.Scan.animatedQR, [result]);
+			});
 		},
 		adapters: {
 			/**
