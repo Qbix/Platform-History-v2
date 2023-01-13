@@ -15185,12 +15185,12 @@ Q.Camera = {
 		/**
 		 * Method - interface for QR code scan action. It decide which plugin or library to use
 		 * and handle callback (when QR code found) to mark participants as "checked".
-		 * @method qr
+		 * @method QR
 		 * @static
 		 * @param {function} callback Executed when QR code found with text of this code in arguments
 		 * @param {object} options Object with options to replace default
 		 */
-		qr: function (callback, options) {
+		QR: function (callback, options) {
 			options = Q.extend({}, this.options, options);
 			var audio =  new Q.Audio(options.sound.src);
 			if (typeof QRScanner !== "undefined") {
