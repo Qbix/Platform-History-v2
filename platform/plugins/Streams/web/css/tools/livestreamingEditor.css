@@ -194,7 +194,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 40%;
+    width: 35%;
     padding-top:10px;
     background: #424242;
     cursor:default;
@@ -604,7 +604,7 @@
     height: 41px;
 }
 
-.live-editor-dialog-body .live-editor-popup-preview {
+.live-editor-dialog-body .live-editor-popup-preview-and-chat {
     background: #282828;
     flex: 1;
     padding-top: 10px;
@@ -919,7 +919,6 @@
 }
 
 .live-editor-dialog-body .live-editor-popup-preview-body {
-    height: 100%;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -1567,7 +1566,7 @@
     flex-direction: row;
     flex:1;
 }
-.live-editor-mobile-screen.live-editor-landscape-screen .live-editor-dialog-body .live-editor-popup-preview {
+.live-editor-mobile-screen.live-editor-landscape-screen .live-editor-dialog-body .live-editor-popup-preview-and-chat {
     width: 40%;
 }
 .live-editor-mobile-screen.live-editor-landscape-screen .live-editor-dialog-body .live-editor-popup-streaming-controls {
