@@ -4477,20 +4477,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	}
 	// If we are here, then socket is available
 	if (ordinal < 0) {
-		// Requested to wait for the latest messages
-		var participant;
-		if (o.unlessSocket) {
-			Streams.get.cache.each([publisherId, streamName], function (key, info) {
-				var p = Q.getObject("subject.participant", info);
-				if (p && p.state === 'participating') {
-					participant = p;
-					return false;
-				}
-			});
-		}
-		if (!participant) {
-			return _tryLoading();
-		}
+		return _tryLoading();
 	}
 	// Wait for messages to arrive via the socket,
 	// and if they don't all arrive, try loading them via an http request.
