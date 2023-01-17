@@ -39,4 +39,6 @@ function Streams_answer_put ($params) {
 		'type' => 'Streams/extra/changed',
 		'content' => $content
 	), true);
+
+	Q_Response::setSlot("participated", (bool)$content);
 }

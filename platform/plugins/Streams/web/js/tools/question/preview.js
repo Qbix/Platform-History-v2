@@ -6,6 +6,7 @@
  * @class Streams/question/preview
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
+ * @param {Boolean} [hideUntilAnswered=true] If true hide amount of users selected answer untill user select this answer.
  * @param {Q.Event} [options.onInvoke] occur onclick tool element
  */
 Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams_question_preview (options, preview) {
@@ -54,13 +55,13 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 },
 
 {
+	hideUntilAnswered: true,
 	onInvoke: new Q.Event()
 },
 
 {
 	refresh: function (stream) {
 		var tool = this;
-		var state = this.state;
 		tool.stream = stream;
 		var publisherId = stream.fields.publisherId;
 		var streamName = stream.fields.name;
@@ -78,6 +79,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			}
 
 			tool.$answersRelated = $("<div>").insertAfter($toolElement);
+			tool.$answersRelated.attr("data-hideUntilAnswered", tool.state.hideUntilAnswered);
 			tool.$answersRelated.tool("Streams/related", {
 				publisherId: publisherId,
 				streamName: streamName,
@@ -91,8 +93,9 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			}).activate();
 
 			tool.$answersRelated[0].forEachTool("Streams/answer/preview", function () {
+				var answerTool = this;
+
 				this.state.onRefresh.add(function () {
-					var answerTool = this;
 					var reqOptions = {
 						publisherId: answerTool.stream.fields.publisherId,
 						streamName: answerTool.stream.fields.name,
@@ -104,6 +107,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						if (msg) {
 							return Q.alert(msg);
 						}
+
+						$(answerTool.element).attr("data-participating", response.slots.participated);
 
 						Q.Streams.get.force(answerTool.stream.fields.publisherId, answerTool.stream.fields.name, function (err) {
 							if (err) {
@@ -120,7 +125,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						_reqCallbackOptions.$this = $this;
 
 						if (!$this.prop("checked")) {
-							Q.req('Streams/answer', [], _reqCallback, {
+							Q.req('Streams/answer', ["participated"], _reqCallback, {
 								method: 'put',
 								fields: Q.extend(reqOptions, {
 									content: ""
@@ -141,7 +146,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							}
 						});
 
-						Q.req('Streams/answer', [], _reqCallback, {
+						Q.req('Streams/answer', ["participated"], _reqCallback, {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $this.val()
@@ -157,7 +162,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 						_reqCallbackOptions.$this = $text;
 
-						Q.req('Streams/answer', [], _reqCallback, {
+						Q.req('Streams/answer', ["participated"], _reqCallback, {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $text.val()

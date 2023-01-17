@@ -55,8 +55,13 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		var content = stream.fields.content;
 		var participant = stream.participant || {};
 		var extra = participant.getExtra && participant.getExtra("content");
+		var participating = participant.state === "participating";
 
-		$(tool.element).attr("data-type", type);
+		$(tool.element)
+			.attr("data-type", type)
+			.attr("data-participating", participating);
+
+		participating
 
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
@@ -76,7 +81,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		Q.Template.render("Streams/answer/view", {
 			type: type,
 			content: content,
-			checked: participant.state === "participating",
+			checked: participating,
 			extra: extra
 		}, function (err, html) {
 			if (err) {

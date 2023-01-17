@@ -273,6 +273,12 @@
 .Streams_question_preview_tool + .Streams_related_tool .Streams_related_composer {
 	display: none;
 }
+.Streams_question_preview_tool + .Streams_related_tool[data-hideUntilAnswered=true] .Streams_answer_participants:not(.Streams_participants_tool) {
+	display: none;
+}
+.Streams_question_preview_tool + .Streams_related_tool[data-hideUntilAnswered=true] .Streams_answer_preview_tool[data-participating=true] .Streams_answer_participants:not(.Streams_participants_tool) {
+	display: block;
+}
 .Streams_question_preview_tool:not(:last-of-type),
 .Streams_answer_preview_tool:not(:last-of-type) {
 	margin-bottom: 5px;
