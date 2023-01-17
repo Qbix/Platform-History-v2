@@ -1174,7 +1174,6 @@ class Streams_Stream extends Base_Streams_Stream
 			'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess',
 			'closedTime'
 		);
-		$original = $this->fieldsOriginal;
 		$changes = $this->changedFields($fieldNames);
 		foreach ($changes as $k => $v) {
 			if (!in_array($k, $coreFields)) {
