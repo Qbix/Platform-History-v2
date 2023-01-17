@@ -123,7 +123,7 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can post messages relating other streams to this one
-	 * @property $WRITE_LEVEL['relate']
+	 * @property $WRITEx_LEVEL['relate']
 	 * @type integer
 	 * @default 23
 	 * @final
@@ -1791,7 +1791,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} $toStreamName
 	 *  The name of the category stream. Pass an array of strings to relate a single stream
 	 *  to multiple categories, but in that case make sure fromStreamName is a string.
-	 * @param {string} $type
+	 * @param {string|array|Db_Range} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
 	 *  The user who has published the related stream
@@ -2159,11 +2159,11 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} $toStreamName
 	 *  The name of the category stream. Pass an array of strings to relate a single stream
 	 *  to multiple categories, but in that case make sure fromStreamName is a string.
-	 * @param {string} $type
+	 * @param {string|array|Db_Range} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
 	 *  The user who has publishes the related stream
-	 * @param {string} $fromStreamName
+	 * @param {string|array} $fromStreamName
 	 *  The name of the related stream. Pass an array of strings to relate multiple streams
 	 *  to a single category, but in that case make sure toStreamName is a string.
 	 * @param {array} $options=array()
