@@ -7011,119 +7011,108 @@
 
                 var textChatsInterface = (function () {
 
-                    var chatBoxInner = document.createElement('DIV');
-                    chatBoxInner.className = 'live-editor-popup-chat-inner';
-
-                    var chatTabsCon = document.createElement('DIV');
-                    chatTabsCon.className = 'live-editor-popup-chat-tabs-con';
-                    chatBoxInner.appendChild(chatTabsCon);
-
-                    var chatTabs = document.createElement('DIV');
-                    chatTabs.className = 'live-editor-popup-chat-tabs';
-                    chatTabsCon.appendChild(chatTabs);
-
-                    var chatTabsTool = document.createElement('DIV');
-                    chatTabsTool.className = 'live-editor-popup-chat-tabs-tool';
-                    chatTabsCon.appendChild(chatTabsTool);
-
-                    /*Q.activate(
-                        Q.Tool.setUpElement(chatTabsTool, 'Q/tabs', {
-                            
-                        }),
-                        function () {
-                            tool.chatsTabsTool = this;
-                            
-                        }
-                    );*/
-
-                    /*Q.activate(
-                        Q.Tool.setUpElement(chatTabsTool, 'Streams/related', {
-                            templates: { view:{ name: 'Streams/calls/preview'} },
+                
+                    function createSection() {
+                        var chatBoxInner = document.createElement('DIV');
+                        chatBoxInner.className = 'live-editor-popup-chat-inner';
+    
+                        var chatTabsCon = document.createElement('DIV');
+                        chatTabsCon.className = 'live-editor-popup-chat-tabs-con';
+                        chatBoxInner.appendChild(chatTabsCon);
+    
+                        var chatTabs = document.createElement('DIV');
+                        chatTabs.className = 'live-editor-popup-chat-tabs';
+                        chatTabsCon.appendChild(chatTabs);
+    
+                        var chatTabsTool = document.createElement('DIV');
+                        chatTabsTool.className = 'live-editor-popup-chat-tabs-tool';
+                        chatTabs.appendChild(chatTabsTool);
+    
+                        /*Q.activate(
+                            Q.Tool.setUpElement(chatTabsTool, 'Q/tabs', {
+                                
+                            }),
+                            function () {
+                                tool.chatsTabsTool = this;
+                                
+                            }
+                        );*/
+    
+                        Q.activate(
+                            Q.Tool.setUpElement(chatTabsTool, 'Streams/related', {
+                                templates: { view:{ name: 'Streams/calls/preview'} },
+                                publisherId: tool.livestreamStream.fields.publisherId,
+                                streamName: tool.livestreamStream.fields.name,
+                                relationType: 'Streams/webrtc/livestream/chat',
+                                tag: 'div',
+                                isCategory: true,
+                                creatable: false,
+                                realtime: true,
+                                specificOptions: {
+                                    previewType: 'Streams/chat/preview'
+                                }
+                            }),
+                            {},
+                            function () {
+                                console.log('related', this)
+                                this.integrateWithTabs(this.element.querySelectorAll('.Streams_related_stream'))
+                            }
+                        );
+    
+                        /*var prevTool = $(chatTabsTool).tool("Streams/related", {
+                            templates: { view:{ name: 'Streams/chat/preview'} },
                             publisherId: tool.livestreamStream.fields.publisherId,
                             streamName: tool.livestreamStream.fields.name,
                             relationType: 'Streams/webrtc/livestream/chat',
-                            tag: 'div',
-                            isCategory: true,
-                            creatable: false,
+                            editable: false,
+                            closeable: true,
+                            sortable: false,
                             realtime: true,
-                            relatedOptions: {
-                                withParticipant: false,
-                                ascending: false
-                            },
                             specificOptions: {
-                                previewType: 'Streams/webrtc/preview/default'
-                            },
-                            previewOptions: {
-                                closeable: true,
-                                editable: false,
-                                expandable: {"expanded": false}
-                            },
-                            specificOptions: {
-                                previewType: 'Streams/webrtc/preview/call'
+                                previewType: 'Streams/chat/preview'
                             }
-                        }),
-                        {},
-                        function () {
-                            console.log('related', this)
-                            this.integrateWithTabs(this.element.querySelectorAll('.Streams_related_stream'))
-                        }
-                    );*/
+                        }).activate(function () {
+    
+                        })*/
+    
+                       
+    
+                        var chatBoxCon = document.createElement('DIV');
+                        chatBoxCon.className = 'live-editor-popup-chat-box';
+                        chatBoxInner.appendChild(chatBoxCon);
+    
+                        var chatToolContainer = document.createElement('DIV');
+                        chatToolContainer.className = 'live-editor-popup-chat-tool-con';
+                        chatBoxCon.appendChild(chatToolContainer);
+    
+                        var chatToolElement = document.createElement('DIV');
+                        chatToolElement.className = 'live-editor-popup-chat-tool-el';
+                        chatToolContainer.appendChild(chatToolElement);
+    
+                        Q.activate(
+                            chatToolElement.appendChild(
+                                Q.Tool.setUpElement(
+                                    "div", // or pass an existing element
+                                    "Streams/chat",
+                                    {
+                                        publisherId: tool.publicChatStream.fields.publisherId,
+                                        streamName: tool.publicChatStream.fields.name
+                                    }
+                                )
+                            ),
+                            {},
+                            function () {
+                                
+                                
+    
+                            }
+                        );
 
-                    var prevTool = $(chatTabsTool).tool("Streams/related", {
-                        templates: { view:{ name: 'Streams/chat/preview'} },
-                        publisherId: tool.livestreamStream.fields.publisherId,
-                        streamName: tool.livestreamStream.fields.name,
-                        relationType: 'Streams/webrtc/livestream/chat',
-                        editable: false,
-                        closeable: true,
-                        sortable: false,
-                        realtime: true,
-                        specificOptions: {
-                            previewType: 'Streams/chat/preview'
-                        }
-                    }).activate(function () {
-
-                    })
-
-                   
-
-                    var chatBoxCon = document.createElement('DIV');
-                    chatBoxCon.className = 'live-editor-popup-chat-box';
-                    chatBoxInner.appendChild(chatBoxCon);
-
-                    var chatToolContainer = document.createElement('DIV');
-                    chatToolContainer.className = 'live-editor-popup-chat-tool-con';
-                    chatBoxCon.appendChild(chatToolContainer);
-
-                    var chatToolElement = document.createElement('DIV');
-                    chatToolElement.className = 'live-editor-popup-chat-tool-el';
-                    chatToolContainer.appendChild(chatToolElement);
-
-                    Q.activate(
-                        chatToolElement.appendChild(
-                            Q.Tool.setUpElement(
-                                "div", // or pass an existing element
-                                "Streams/chat",
-                                {
-                                    publisherId: tool.publicChatStream.fields.publisherId,
-                                    streamName: tool.publicChatStream.fields.name
-                                }
-                            )
-                        ),
-                        {},
-                        function () {
-                            
-                            
-
-                        }
-                    );
-
-                    function getSection() {
                         return chatBoxInner;
                     }
 
                     return {
-                        getSection: getSection
+                        createSection: createSection
                     }
                 }());
 
@@ -8341,7 +8330,8 @@
                     chatBoxCon.className = 'live-editor-popup-chat-con';
                     previewBox.appendChild(chatBoxCon);
 
-                   let chatsInterface = textChatsInterface.getSection();
+
+                   let chatsInterface = textChatsInterface.createSection();
                    chatBoxCon.appendChild(chatsInterface);
 
                     Q.activate(

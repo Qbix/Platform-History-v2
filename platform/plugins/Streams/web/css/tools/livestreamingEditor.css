@@ -605,6 +605,8 @@
 }
 
 .live-editor-dialog-body .live-editor-popup-preview-and-chat {
+    display: flex;
+    flex-direction: column;
     background: #282828;
     flex: 1;
     padding-top: 10px;
@@ -942,6 +944,24 @@
     z-index: 999;
 }
 
+/*start: container for text chats (public and private*/
+.live-editor-popup-chat-con {
+    flex: 1;
+}
+.live-editor-popup-chat-inner {
+    display: flex;
+    height: 100%;
+}
+.live-editor-popup-chat-inner .live-editor-popup-chat-box{
+    flex: 1;
+    padding: 5px 0 0 10px;
+}
+.live-editor-popup-chat-inner .live-editor-popup-chat-tabs-con{
+    flex-basis: 30%;
+    padding: 10px 5px 5px 5px;
+    border-right: 1px solid #474747;
+}
+/*end: container for text chats (public and private*/
 
 
 .live-editor-popup-scenes-item,
