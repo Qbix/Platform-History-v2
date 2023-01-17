@@ -929,6 +929,36 @@ class Db_Row
 	}
 
 	/**
+	 * Calculates which fields changed since the row was
+	 * constructed or retrieved.
+	 * @method changedFields
+	 * @static
+	 * @param {array} [$fieldNames=null]
+	 *  The names of the fields to check for changes.
+	 *  By default, checks all the standard stream fields.
+	 * @return {array} array of $fieldname => $newValue pairs
+	 */
+	function changedFields($fieldNames = null)
+	{
+		$changes = array();
+		if (!isset($fieldNames)) {
+			$fieldNames = array_keys($this->fields);
+		}
+		foreach ($fieldNames as $f) {
+			if (!isset($this->fields[$f]) and !isset($original[$f])) {
+				continue;
+			}
+			$v = $this->fields[$f];
+			if (isset($original[$f])
+			and json_encode($original[$f]) === json_encode($v)) {
+				continue;
+			}
+			$changes[$f] = $v;
+		}
+		return $changes;
+	}
+
+	/**
 	 * Sets a column in the row
 	 * @method __set
 	 * @param {string} $name

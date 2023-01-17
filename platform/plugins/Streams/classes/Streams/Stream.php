@@ -1174,25 +1174,13 @@ class Streams_Stream extends Base_Streams_Stream
 			'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess',
 			'closedTime'
 		);
-		$nonCoreFields = array();
 		$original = $this->fieldsOriginal;
-		$changes = array();
-		foreach ($fieldNames as $f) {
-			if (!isset($this->$f) and !isset($original[$f])) continue;
-			$v = $this->$f;
-			if (isset($original[$f])
-			and json_encode($original[$f]) === json_encode($v)) {
-				continue;
+		$changes = $this->changedFields($fieldNames);
+		foreach ($changes as $k => $v) {
+			if (!in_array($k, $coreFields)) {
+				// report it, but with null value
+				$changes[$k] = null; // the actual value may be too big, etc.
 			}
-			if (in_array($f, $coreFields)) {
-				// record the changed value in the instructions
-				$changes[$f] = $v;
-			} else {
-				$nonCoreFields[] = $f;
-			}
-		}
-		foreach ($nonCoreFields as $f) {
-			$changes[$f] = null; // the value may be too big, etc.
 		}
 		unset($changes['updatedTime']);
 		if (!$changes and !$commit) {
