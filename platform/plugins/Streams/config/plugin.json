@@ -357,6 +357,11 @@
 					"icon": "Streams/answer",
 					"readLevel": 20,
 					"writeLevel": 0
+				},
+				"messages": {
+					"Streams/extra/changed": {
+						"post": true
+					}
 				}
 			},
 			"Streams/topic": {

@@ -34,4 +34,9 @@ function Streams_answer_put ($params) {
 		);
 		$stream->join($options);
 	}
+
+	$stream->post($user->id, array(
+		'type' => 'Streams/extra/changed',
+		'content' => $content
+	), true);
 }
