@@ -24,6 +24,9 @@ function Streams_answer_put ($params) {
 		'extra' => array()
 	);
 	if (empty($content)) {
+		$options["extra"] = array(
+			"content" => ''
+		);
 		$stream->leave($options);
 	} else {
 		$options["extra"] = array(
