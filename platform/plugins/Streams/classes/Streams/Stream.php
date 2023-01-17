@@ -608,7 +608,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		$stream->calculateAccess($asUserId);
-		// $stream->updateRelations($asUserId);
+		$stream->updateRelations($asUserId);
 		
 		if ($stream->inserted) {
 			// The stream was just saved
