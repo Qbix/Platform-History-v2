@@ -6,7 +6,6 @@
  * @class Streams/question/preview
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
- * @param {Boolean} [hideUntilAnswered=true] If true hide amount of users selected answer untill user select this answer.
  * @param {Q.Event} [options.onInvoke] occur onclick tool element
  */
 Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams_question_preview (options, preview) {
@@ -55,7 +54,6 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 },
 
 {
-	hideUntilAnswered: true,
 	onInvoke: new Q.Event()
 },
 
@@ -79,7 +77,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			}
 
 			tool.$answersRelated = $("<div>").insertAfter($toolElement);
-			tool.$answersRelated.attr("data-hideUntilAnswered", tool.state.hideUntilAnswered);
+			tool.$answersRelated.attr("data-hideUntilAnswered", tool.stream.getAttribute("hideUntilAnswered"));
 			tool.$answersRelated.tool("Streams/related", {
 				publisherId: publisherId,
 				streamName: streamName,
@@ -103,9 +101,13 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					};
 					var _reqCallbackOptions = {};
 					var _reqCallback = function (err, response) {
+						var $this = this;
 						var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
 						if (msg) {
-							return Q.alert(msg);
+							if (["option", "option.exclusive"].includes(answerTool.stream.getAttribute("type"))) {
+								$this.prop("checked", !$this.prop("checked"));
+							}
+							return msg !== "return" && Q.alert(msg);
 						}
 
 						$(answerTool.element).attr("data-participating", response.slots.participated);
@@ -125,7 +127,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						_reqCallbackOptions.$this = $this;
 
 						if (!$this.prop("checked")) {
-							Q.req('Streams/answer', ["participated"], _reqCallback, {
+							Q.req('Streams/answer', ["participated"], _reqCallback.bind($this), {
 								method: 'put',
 								fields: Q.extend(reqOptions, {
 									content: ""
@@ -146,7 +148,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							}
 						});
 
-						Q.req('Streams/answer', ["participated"], _reqCallback, {
+						Q.req('Streams/answer', ["participated"], _reqCallback.bind($this), {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $this.val()
@@ -162,7 +164,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 						_reqCallbackOptions.$this = $text;
 
-						Q.req('Streams/answer', ["participated"], _reqCallback, {
+						Q.req('Streams/answer', ["participated"], _reqCallback.bind($text), {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $text.val()
@@ -209,7 +211,11 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			title: tool.text.EditQuestion,
 			className: "Streams_dialog_editQuestion",
 			template: {
-				name: "Streams/question/composer"
+				name: "Streams/question/composer",
+				fields: {
+					hideUntilAnswered: tool.stream.getAttribute("hideUntilAnswered"),
+					cantChangeAnswers: tool.stream.getAttribute("cantChangeAnswers")
+				}
 			},
 			onActivate: function (dialog) {
 				$(".Streams_question_title", dialog).tool("Streams/inplace", {
@@ -247,6 +253,14 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						}
 					}
 				}).activate();
+				$("input[name=hideUntilAnswered]", dialog).on("change", function () {
+					tool.stream.setAttribute("hideUntilAnswered", $(this).prop("checked"));
+					tool.stream.save();
+				});
+				$("input[name=cantChangeAnswers]", dialog).on("change", function () {
+					tool.stream.setAttribute("cantChangeAnswers", $(this).prop("checked"));
+					tool.stream.save();
+				});
 			},
 			onClose: function () {
 				var answersRelated = Q.Tool.from(tool.$answersRelated, "Streams/related");
@@ -270,6 +284,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 Q.Template.set('Streams/question/composer',
 	`<div class="Streams_question_title"></div>
 	<div class="Streams_question_subtitle"></div>
+	<label><input type="checkbox" name="hideUntilAnswered" {{#if hideUntilAnswered}}checked="checked"{{/if}}> {{questions.HideUntilAnswered}}</label>
+	<label><input type="checkbox" name="cantChangeAnswers" {{#if cantChangeAnswers}}checked="checked"{{/if}}> {{questions.CantChangeAnswers}}</label>
 	<h2 class="Streams_question_head">{{questions.Answers}}</h2>
 	<div class="Streams_question_answers"></div>`,
 	{text: ['Streams/content']}

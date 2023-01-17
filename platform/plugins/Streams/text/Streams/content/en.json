@@ -558,6 +558,8 @@
         "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
         "answerText": "Text",
+        "HideUntilAnswered": "Hide until answered",
+        "CantChangeAnswers": "Can't change answers",
         "FreeAnswer": "Write your answer here",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",

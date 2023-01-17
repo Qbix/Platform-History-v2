@@ -8,15 +8,55 @@ function Streams_answer_put ($params) {
 
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
-	$stream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
-	if (!$stream) {
+	$answerStream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
+	if (!$answerStream) {
 		throw new Q_Exception_MissingRow(array(
 			'table'    => 'stream',
 			'criteria' => 'with that name'
 		));
 	}
-	if (!$stream->testWriteLevel("join")) {
+	if (!$answerStream->testWriteLevel("join")) {
 		throw new Users_Exception_NotAuthorized();
+	}
+
+	if ($answerStream->getAttribute("type") == "option.exclusive") {
+		$questionStream = Streams_RelatedTo::select()->where(array(
+			"fromPublisherId" => $publisherId,
+			"fromStreamName" => $streamName,
+			"type" => "Streams/answers"
+		))->fetchDbRow();
+		if (empty($questionStream)) {
+			throw new Exception("question stream not found");
+		}
+		$questionStream = Streams::fetchOne(null, $questionStream->toPublisherId, $questionStream->toStreamName, true);
+
+		if ($questionStream->getAttribute("cantChangeAnswers")) {
+			$relatedAnswers = Streams_RelatedTo::select()->where(array(
+				"toPublisherId" => $questionStream->publisherId,
+				"toStreamName" => $questionStream->name,
+				"type" => "Streams/answers",
+			))->fetchDbRows();
+			foreach ($relatedAnswers as $relatedAnswer) {
+				$relatedAnswer = Streams::fetchOne(null, $relatedAnswer->fromPublisherId, $relatedAnswer->fromStreamName, true);
+				if ($relatedAnswer->getAttribute("type") != "option.exclusive") {
+					continue;
+				}
+
+				$participated = Streams_Participant::select("count(*) as res")
+					->where(array(
+						"publisherId" => $relatedAnswer->publisherId,
+						"streamName" => $relatedAnswer->name,
+						"userId" => $user->id,
+						"state" => "participating"
+					))
+					->ignoreCache()
+					->execute()
+					->fetchAll(PDO::FETCH_ASSOC)[0]["res"];
+				if ($participated) {
+					throw new Exception(empty($content) ? "Answer can't be changed" : "return");
+				}
+			}
+		}
 	}
 
 	$options = array(
@@ -27,15 +67,15 @@ function Streams_answer_put ($params) {
 		$options["extra"] = array(
 			"content" => ''
 		);
-		$stream->leave($options);
+		$answerStream->leave($options);
 	} else {
 		$options["extra"] = array(
 			"content" => $content
 		);
-		$stream->join($options);
+		$answerStream->join($options);
 	}
 
-	$stream->post($user->id, array(
+	$answerStream->post($user->id, array(
 		'type' => 'Streams/extra/changed',
 		'content' => $content
 	), true);
