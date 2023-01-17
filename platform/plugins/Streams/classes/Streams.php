@@ -123,7 +123,7 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can post messages relating other streams to this one
-	 * @property $WRITEx_LEVEL['relate']
+	 * @property $WRITE_LEVEL['relate']
 	 * @type integer
 	 * @default 23
 	 * @final
