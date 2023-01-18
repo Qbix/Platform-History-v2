@@ -608,6 +608,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		$stream->calculateAccess($asUserId);
+		// $stream->updateRelations($asUserId);
 		
 		if ($stream->inserted) {
 			// The stream was just saved
@@ -801,24 +802,27 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * @method getAllAttributes
+	 * @param {boolean} $original whether to look in fieldsOriginal['attributes'] instead
 	 * @return {array} The array of all attributes set in the stream
 	 */
-	function getAllAttributes()
+	function getAllAttributes($original = false)
 	{
-		return empty($this->attributes) 
+		$arr = $original ? $this->fieldsOriginal : $this->fields;
+		return empty($arr['attributes']) 
 			? array()
-			: Q::json_decode($this->attributes, true);
+			: Q::json_decode($arr['attributes'], true);
 	}
 	
 	/**
 	 * @method getAttribute
 	 * @param {string} $attributeName The name of the attribute to get
 	 * @param {mixed} $default The value to return if the attribute is missing
+	 * @param {boolean} $original whether to look in fieldsOriginal['attributes'] instead
 	 * @return {mixed} The value of the attribute, or the default value, or null
 	 */
-	function getAttribute($attributeName, $default = null)
+	function getAttribute($attributeName, $default = null, $original = false)
 	{
-		$attr = $this->getAllAttributes();
+		$attr = $this->getAllAttributes($original);
 		return isset($attr[$attributeName]) ? $attr[$attributeName] : $default;
 	}
 	
@@ -1174,25 +1178,12 @@ class Streams_Stream extends Base_Streams_Stream
 			'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess',
 			'closedTime'
 		);
-		$nonCoreFields = array();
-		$original = $this->fieldsOriginal;
-		$changes = array();
-		foreach ($fieldNames as $f) {
-			if (!isset($this->$f) and !isset($original[$f])) continue;
-			$v = $this->$f;
-			if (isset($original[$f])
-			and json_encode($original[$f]) === json_encode($v)) {
-				continue;
+		$changes = $this->changedFields($fieldNames);
+		foreach ($changes as $k => $v) {
+			if (!in_array($k, $coreFields)) {
+				// report it, but with null value
+				$changes[$k] = null; // the actual value may be too big, etc.
 			}
-			if (in_array($f, $coreFields)) {
-				// record the changed value in the instructions
-				$changes[$f] = $v;
-			} else {
-				$nonCoreFields[] = $f;
-			}
-		}
-		foreach ($nonCoreFields as $f) {
-			$changes[$f] = null; // the value may be too big, etc.
 		}
 		unset($changes['updatedTime']);
 		if (!$changes and !$commit) {
@@ -1840,6 +1831,124 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		Streams::calculateAccess($asUserId, $this->publisherId, array($this), $recalculate, $actualPublisherId);
 		return $this;
+	}
+
+	/**
+	 * Updates relations after a stream was inserted or updated.
+	 * Checks the "updateRelations" config first, which haswhich is an array that can contain "to", "from" or both.
+	 * @return {array} Consists of ("to" => array(Streams_RelatedTo), "from" => array(Streams_RelatedFrom))
+	 */
+	function updateRelations($asUserId = null)
+	{
+		$didntTry = array("to" => array(), "from" => array());
+		$changes = $this->changedFields();
+		if (!$changes) {
+			return $didntTry;
+		}
+		$updateRelations = self::getConfigField($this->type, 'updateRelations', array());
+		if (!$updateRelations) {
+			return $didntTry;
+		}
+		$relationTypes = array();
+		$attributesChanged = $attributesAdded = array();
+		// foreach ($changes as $k => $v) {
+		// 	$relationTypes[] = "field/$k";
+		// }
+		if (!empty($changes['attributes'])) {
+			// see what attributes have changed
+			$orig = $this->getAllAttributes(true);
+			$attr = $this->getAttributes(false);
+			foreach ($orig as $k => $v) {
+				if (!isset($orig[$k]) and !isset($attr[$k])) {
+					continue;
+				}
+				if ((!isset($attr[$k]) && isset($v))
+				|| ($attr[$k] !== $v)) { // was removed or changed
+					$attributesChanged[] = $k;
+					$relationTypes[] = "attribute/$k";
+				}
+			}
+			foreach ($attr as $k => $v) {
+				if (!isset($orig[$k]) || $orig[$k] !== $v) {
+					$attributesAdded[$k] = $v; // new value
+				}
+			}
+		}
+		foreach ($updateRelations as $direction) {
+			$relationTypes = array_keys($this->fields);
+			if ($direction === 'from') {
+				$rfroms = Streams_RelatedFrom::select()->where(array(
+					'fromPublisherId' => array('', $this->publisherId),
+					'fromStreamName' => $this->type . '/',
+					'type' => $relationTypes
+				))->fetchDbRows(null, '', 'type');
+				$weight = time(); // is_numeric($attr[$k]) ? $attr[$k] : 1;
+				foreach ($attributesChanged as $ak => $av) {
+					if (empty($rfroms["attribute/$ak"])) {
+						continue; // nothing to remove
+					}
+					$rfrom = $rfroms["attribute/$ak"];
+					if (is_array($av)) {
+						$toRemove = array_diff($av, $attr[$ak]);
+						foreach ($toRemove as $r) {
+							$relationType = "attribute/$ak=" . json_encode($r);
+							// TODO: Streams::unrelate with corresponding relationTypes
+						}
+						Streams::unrelate(
+							$asUserId, 
+							$rfrom->fromPublisherId,
+							$rfrom->fromStreamName,
+							$relationType,
+							$this->publisherId, $this->name,
+							array('skipAccess' => true, 'weight' => $weight)
+						);
+					} else {
+						// handle regular scalar values
+						$toRemove = $av;
+						$relationType = "attribute/$ak=" . json_encode($av);
+						Streams::unrelate(
+							$asUserId, 
+							$rfrom->fromPublisherId,
+							$rfrom->fromStreamName,
+							$relationType,
+							$this->publisherId, $this->name,
+							array('skipAccess' => true, 'weight' => $weight)
+						);
+						// TODO: Streams::unrelate with corresponding relationTypes
+					}
+				}
+				foreach ($attributesAdded as $ak => $av) {
+					if (is_array($av)) {
+						$toAdd = array_diff($av, $orig[$ak]);
+						foreach ($toAdd as $a) {
+							$relationType = "attribute/$ak=" . json_encode($a);
+						}
+						// TODO: relate with corresponding relationTypes
+						Streams::relate(
+							$asUserId, 
+							$rfrom->fromPublisherId,
+							$rfrom->fromStreamName,
+							$relationType,
+							$this->publisherId, $this->name,
+							array('skipAccess' => true, 'weight' => $weight)
+						);
+					} else {
+						// handle regular scalar values
+						$toAdd = $av;
+						$relationType = "attribute/$ak=" . json_encode($av);
+						Streams::relate(
+							$asUserId, 
+							$rfrom->fromPublisherId,
+							$rfrom->fromStreamName,
+							$relationType,
+							$this->publisherId, $this->name,
+							array('skipAccess' => true, 'weight' => $weight)
+						);
+					}
+				}
+			}
+		}
+		return true;
 	}
 	
 	/**

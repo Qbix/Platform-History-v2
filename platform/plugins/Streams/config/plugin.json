@@ -248,6 +248,7 @@
 						"description": ["Streams/content", ["notifications", "Streams/relatedFrom/*"]]
 					}
 				},
+				"updateRelations": {},
 				"defaults": {
 					"type": "Streams/text",
 					"title": "Untitled",

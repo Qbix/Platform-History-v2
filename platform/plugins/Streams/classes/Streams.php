@@ -1791,7 +1791,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} $toStreamName
 	 *  The name of the category stream. Pass an array of strings to relate a single stream
 	 *  to multiple categories, but in that case make sure fromStreamName is a string.
-	 * @param {string} $type
+	 * @param {string|array|Db_Range} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
 	 *  The user who has published the related stream
@@ -2159,11 +2159,11 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} $toStreamName
 	 *  The name of the category stream. Pass an array of strings to relate a single stream
 	 *  to multiple categories, but in that case make sure fromStreamName is a string.
-	 * @param {string} $type
+	 * @param {string|array|Db_Range} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
 	 *  The user who has publishes the related stream
-	 * @param {string} $fromStreamName
+	 * @param {string|array} $fromStreamName
 	 *  The name of the related stream. Pass an array of strings to relate multiple streams
 	 *  to a single category, but in that case make sure toStreamName is a string.
 	 * @param {array} $options=array()
@@ -4696,8 +4696,8 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
-	 * containing additional querystring fields such as "userId", "expires"
-	 * and "sig" which is a signature truncated to have length specified in config
+	 * containing additional querystring fields such as "u" (userId), "e" (expires)
+	 * and "s" which is a signature truncated to have length specified in config
 	 * Streams/userInviteUrl/signature/length.
 	 * The "sig" may be missing if the Q/internal/secret config is empty.
 	 * @param {string} $userId The id of the user for whom to generate this url
