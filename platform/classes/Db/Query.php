@@ -48,6 +48,15 @@ interface Db_Query_Interface
 	function getSQL ($callback = null);
 
 	/**
+	 * Gets a clause from the query
+	 * @method getClause
+	 * @param {string} $clauseName
+	 * @param {boolean} [$withAfter=false]
+	 * @return {mixed} If $withAfter is true, returns array($clause, $after) otherwise just returns $clause
+	 */
+	function getClause($clauseName, $withAfter = false);
+
+	/**
 	 * Merges additional replacements over the default replacement array,
 	 * which is currently just
 	 * @example
@@ -275,11 +284,16 @@ interface Db_Query_Interface
 	 * @param {string} [$class_name='Db_Row'] The name of the class to instantiate and fill objects from.
 	 *  Must extend Db_Row.
 	 * @param {string} [$fields_prefix=''] This is the prefix, if any, to strip out when fetching the rows.
+	 * @param {string} [$by_field=null] A field name to index the array by.
+	 *  If the field's value is NULL in a given row, that row is just appended
+	 *  in the usual way to the array.
 	 * @return {array}
 	 */
 	function fetchDbRows(
 		$class_name = 'Db_Row', 
-		$fields_prefix = '');
+		$fields_prefix = '',
+		$by_field = null
+	);
 
 	/**
 	 * Adds an ON DUPLICATE KEY UPDATE clause to an INSERT statement.

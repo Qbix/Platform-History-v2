@@ -1,7 +1,7 @@
 <?php
 function Streams_after_Streams_updateAvatars ($params) {
-	$rows_that_show = $params["rows_that_show"];
-	$rows_that_hide = $params["rows_that_hide"];
+	$rows_that_show = Q::ifset($params, 'rows_that_show', array());
+	$rows_that_hide = Q::ifset($params, 'rows_that_hide', array());
 
 	$processed = array();
 	foreach (array_merge($rows_that_show, $rows_that_hide) as $avatar) {
