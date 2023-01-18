@@ -7092,7 +7092,7 @@
                         Q.activate(
                             chatToolElement.appendChild(
                                 Q.Tool.setUpElement(
-                                    "div", // or pass an existing element
+                                    "div",
                                     "Streams/chat",
                                     {
                                         publisherId: tool.publicChatStream.fields.publisherId,

@@ -41,13 +41,13 @@ function Streams_livestream_post($params = array())
 
 	if(is_null($livestreamStreamRelation) || empty($livestreamStreamRelation)) {
 		//if there is no livestream stream found, create it and relate it to webrtc stream of room
-		$livestreamStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/livestream', []);
+		$livestreamStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/livestream', ['writeLevel' => 23]);
 
 		$livestreamStream->relateTo((object)array(
 			"publisherId" => $publisherId,
 			"name" => $streamName
 		), "Streams/webrtc/livestream", $loggedInUserId, array(
-			"inheritAccess" => true,
+			"inheritAccess" => false,
 			"weight" => time()
 		));
 
@@ -77,7 +77,7 @@ function Streams_livestream_post($params = array())
 		}
 	}
 
-	if (is_null($livestreamStream) || is_null($publicChatStreamRelation)) {
+	if (is_null($livestreamStream) || is_null($publicChatStream)) {
 		throw new Q_Exception("Something went wrong when fetching livestream stream or public chat stream");
 	}
 

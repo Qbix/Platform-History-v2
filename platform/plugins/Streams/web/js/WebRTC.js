@@ -137,7 +137,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             hosts:[],
             defaultDesktopViewMode:null,
             defaultMobileViewMode:null,
-            writeLevel:30,
+            writeLevel:23,
             useRelatedTo: {
                 publisherId: null,
                 streamName: null

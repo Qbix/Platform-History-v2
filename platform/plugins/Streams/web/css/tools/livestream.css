@@ -1,0 +1,31 @@
+.streams-livestream-container {
+    padding: 10px;
+}
+
+
+.streams-livestream-chat-tabs-inner {
+    display: flex;
+    justify-content: center;
+}
+.streams-livestream-chat-tabs-tool {
+    display: flex;
+}
+.streams-livestream-chat-tabs-tool .streams-livestream-chat-tabs-tool-tab {
+    padding: 5px 20px;
+    margin: 0 5px 5px 0;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 2px rgb(0 0 0 / 20%);
+    color: #808080;
+    opacity: 0.8;
+    cursor: pointer;
+}
+.streams-livestream-chat-tabs-tool .streams-livestream-chat-tabs-tool-tab.streams-livestream-chat-tabs-tool-tab-active {
+    background: #fff;
+    color: #2b82d9;
+    opacity: 1;
+}
+.streams-livestream-chat-tabs-tool .streams-livestream-chat-tabs-tool-tab:hover {
+    background: #fff;
+    opacity: 1;
+}
