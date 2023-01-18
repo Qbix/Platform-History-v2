@@ -7010,8 +7010,132 @@
                 }());
 
                 var textChatsInterface = (function () {
+                    var _relatedTool = null;
+                    var _chatRooms = [];
+                    var _publicChatRoomStream = null;
+                    var _chatToolContainer = null;
+                    var _currentActiveChatRoom = null;
 
+                    function onStreamClickHandler(chatRoomData) {
+                        if(_currentActiveChatRoom && _currentActiveChatRoom.chatTool) {
+                            if(_currentActiveChatRoom.chatToolElement && _currentActiveChatRoom.chatToolElement.parentElement) {
+                                _currentActiveChatRoom.chatToolElement.parentElement.removeChild(_currentActiveChatRoom.chatToolElement);
+                                _currentActiveChatRoom.chatTool.seen(false);
+                            }
+                        }
+                        //_chatToolContainer.innerHTML = '';
+                        if(chatRoomData.chatToolElement != null) {
+                            _chatToolContainer.appendChild(chatRoomData.chatToolElement);
+                            _currentActiveChatRoom = chatRoomData;
+                            chatRoomData.chatTool.seen(true);
+                        } else {
+                            var chatToolElement = document.createElement('DIV');
+                            chatToolElement.className = 'live-editor-popup-chat-tool-el';
+                            _chatToolContainer.appendChild(chatToolElement);
+                            chatRoomData.chatToolElement = chatToolElement;
+                            
+                            Q.activate(
+                                chatToolElement.appendChild(
+                                    Q.Tool.setUpElement(
+                                        "div",
+                                        "Streams/chat",
+                                        {
+                                            publisherId: chatRoomData.publisherId,
+                                            streamName: chatRoomData.streamName
+                                        }
+                                    )
+                                ),
+                                {},
+                                function () {
+                                    chatRoomData.chatTool = this;
+                                    _currentActiveChatRoom = chatRoomData;
+                                    chatRoomData.chatTool.seen(true);
+                                    console.log('chatRoomData.chatTool', chatRoomData.chatTool);
+                                }
+                            );
+                        }
+                        
+
+                    }
                 
+                    function onRelatedToolUpdate(relatedStreams) {
+                        if(!_relatedTool) return;
+                        let previewRelatedItems = _relatedTool.element.querySelectorAll('.Streams_related_stream');
+                        let i, streamsElementsNum = previewRelatedItems.length;
+                        for(i = 0; i < streamsElementsNum; i++) {
+                            let roomExists = false;
+                            for(let r in _chatRooms) {
+                                if(previewRelatedItems[i] == _chatRooms[r].streamElement) {
+                                    roomExists = true;
+                                    break;
+                                }
+                            }
+                            if(roomExists) continue;
+
+                            let chatRoomData = {
+                                streamElement: previewRelatedItems[i],
+                                chatToolElement: null,
+                                chatTool: null,
+                                chatStream: null,
+                                isPublicChat: false,
+                                publisherId: previewRelatedItems[i].dataset.publisherid,
+                                streamName: previewRelatedItems[i].dataset.streamname
+                            };
+                            _chatRooms.push(chatRoomData);
+
+                            previewRelatedItems[i].addEventListener('click', function() {
+                                onStreamClickHandler(chatRoomData);
+                            });
+
+                            let unseenMsgCounter = document.createElement('DIV');
+                            unseenMsgCounter.className = 'live-editor-popup-chat-tool-msg-counter';
+                            previewRelatedItems[i].appendChild(unseenMsgCounter);
+                            Q.Streams.Message.Total.setUpElement(unseenMsgCounter, previewRelatedItems[i].dataset.publisherid, previewRelatedItems[i].dataset.streamname, 'Streams/chat/message', tool);
+
+                        }
+
+                        //remove closed rooms frol the list
+                        for(let e = _chatRooms.length - 1; e >= 0; e--) {
+                            let roomClosed = true;
+                            for(let s = 0; s < streamsElementsNum; s++) {
+                                if(_chatRooms[e].streamElement == previewRelatedItems[s]) {
+                                    roomClosed = false;
+                                    break;
+                                }
+                            }
+
+                            if(roomClosed) {
+                                if(_chatRooms[e].chatTool) {
+                                    _chatRooms[e].chatTool.remove();
+                                }
+                                if(_chatRooms[e].chatToolElement && _chatRooms[e].chatToolElement.parentElement) {
+                                    _chatRooms[e].chatToolElement.parentElement.removeChild(_chatRooms[e].chatToolElement);
+                                }
+                                _chatRooms.splice(e, 1);
+                            }
+                        }
+
+                        //find stream of public chat room
+                        for (var key in relatedStreams) {
+                            if (relatedStreams.hasOwnProperty(key)) {
+                                let publicAttr = relatedStreams[key].getAttribute('publicChat');
+                                if (!_publicChatRoomStream && publicAttr == true) {
+                                    _publicChatRoomStream = relatedStreams[key];
+                                }
+
+                                for(let r in _chatRooms) {
+                                    if(relatedStreams[key].fields.name == _chatRooms[r].streamName && !_chatRooms[r].chatStream) {
+                                        _chatRooms[r].chatStream = relatedStreams[key];
+                                        if(publicAttr == true) {
+                                            _chatRooms[r].isPublicChat = true; 
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }  
+                    }
+
                     function createSection() {
                         var chatBoxInner = document.createElement('DIV');
                         chatBoxInner.className = 'live-editor-popup-chat-inner';
@@ -7028,19 +7152,8 @@
                         chatTabsTool.className = 'live-editor-popup-chat-tabs-tool';
                         chatTabs.appendChild(chatTabsTool);
     
-                        /*Q.activate(
-                            Q.Tool.setUpElement(chatTabsTool, 'Q/tabs', {
-                                
-                            }),
-                            function () {
-                                tool.chatsTabsTool = this;
-                                
-                            }
-                        );*/
-    
                         Q.activate(
                             Q.Tool.setUpElement(chatTabsTool, 'Streams/related', {
-                                templates: { view:{ name: 'Streams/calls/preview'} },
                                 publisherId: tool.livestreamStream.fields.publisherId,
                                 streamName: tool.livestreamStream.fields.name,
                                 relationType: 'Streams/webrtc/livestream/chat',
@@ -7048,14 +7161,17 @@
                                 isCategory: true,
                                 creatable: false,
                                 realtime: true,
-                                specificOptions: {
-                                    previewType: 'Streams/chat/preview'
+                                onUpdate: function (e) {
+                                    console.log('onUpdate', e, this)
+                                    onRelatedToolUpdate(e.relatedStreams);
+                                },
+                                beforeRenderPreview: function (e) {
+                                    console.log('beforeRenderPreview', e, this)
                                 }
                             }),
                             {},
                             function () {
-                                console.log('related', this)
-                                this.integrateWithTabs(this.element.querySelectorAll('.Streams_related_stream'))
+                                _relatedTool = this;
                             }
                         );
     
@@ -7081,33 +7197,10 @@
                         chatBoxCon.className = 'live-editor-popup-chat-box';
                         chatBoxInner.appendChild(chatBoxCon);
     
-                        var chatToolContainer = document.createElement('DIV');
+                        var chatToolContainer = _chatToolContainer = document.createElement('DIV');
                         chatToolContainer.className = 'live-editor-popup-chat-tool-con';
                         chatBoxCon.appendChild(chatToolContainer);
     
-                        var chatToolElement = document.createElement('DIV');
-                        chatToolElement.className = 'live-editor-popup-chat-tool-el';
-                        chatToolContainer.appendChild(chatToolElement);
-    
-                        Q.activate(
-                            chatToolElement.appendChild(
-                                Q.Tool.setUpElement(
-                                    "div",
-                                    "Streams/chat",
-                                    {
-                                        publisherId: tool.publicChatStream.fields.publisherId,
-                                        streamName: tool.publicChatStream.fields.name
-                                    }
-                                )
-                            ),
-                            {},
-                            function () {
-                                
-                                
-    
-                            }
-                        );
-
                         return chatBoxInner;
                     }
 

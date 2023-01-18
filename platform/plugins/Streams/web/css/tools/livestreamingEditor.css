@@ -923,7 +923,7 @@
 .live-editor-dialog-body .live-editor-popup-preview-body {
     display: flex;
     justify-content: center;
-    overflow: hidden;
+    height: 54%;
 }
 .live-editor-dialog-body .live-editor-popup-preview-body-inner {
     display: inline-block;
@@ -933,9 +933,10 @@
 }
 .live-editor-dialog-body .live-editor-popup-preview-body-inner canvas{
     position: static;
-    width: 640px;
+    /*width: 640px;
     max-height: 100%;
-    max-width: 100%;
+    max-width: 100%;*/
+    max-height: 100%;
 }
 
 
@@ -946,7 +947,7 @@
 
 /*start: container for text chats (public and private*/
 .live-editor-popup-chat-con {
-    flex: 1;
+    height: 46%;
 }
 .live-editor-popup-chat-inner {
     display: flex;
@@ -956,10 +957,21 @@
     flex: 1;
     padding: 5px 0 0 10px;
 }
+.live-editor-popup-chat-inner .live-editor-popup-chat-tool-con {
+    height: 100%;
+}
+.live-editor-popup-chat-inner .live-editor-popup-chat-tool-con .live-editor-popup-chat-tool-el {
+    height: 100%;
+}
+.live-editor-popup-chat-inner .live-editor-popup-chat-tool-con .live-editor-popup-chat-tool-el .Streams_chat_tool {
+    overflow-y: auto;
+    height: 100%;
+}
 .live-editor-popup-chat-inner .live-editor-popup-chat-tabs-con{
-    flex-basis: 30%;
+    flex-basis: 35%;
     padding: 10px 5px 5px 5px;
     border-right: 1px solid #474747;
+    overflow-y: auto;
 }
 /*end: container for text chats (public and private*/
 

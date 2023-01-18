@@ -23,6 +23,9 @@
         var tool = this;
         
         tool.textChatContainerEl = null;
+        tool.relatedStreams = [];
+        tool.publicChatStream = null;
+        tool.privateChatStream = null;
 
         Q.addStylesheet('{{Streams}}/css/tools/livestream.css?ts=' + performance.now(), function () {
             Q.Streams.related(tool.state.publisherId, tool.state.streamName, "Streams/webrtc/livestream/chat", true, function (err) {
@@ -32,10 +35,14 @@
                 }
     
                 console.log('this.relatedStreams', this.relatedStreams)
-                tool.relatedStreams = [];
                 for (var key in this.relatedStreams) {
                     if (this.relatedStreams.hasOwnProperty(key)) {
                         tool.relatedStreams.push(this.relatedStreams[key]);
+                        if(this.relatedStreams[key].getAttribute('publicChat') == true) {
+                            tool.publicChatStream = this.relatedStreams[key];
+                        } else {
+                            tool.privateChatStream = this.relatedStreams[key];
+                        }
                     }
                 }
                 
@@ -154,8 +161,8 @@
                     if(!clickedTabObject) return;
 
                     if (clickedTabName == 'public') {
+                        tool.textChatContainerEl.innerHTML = '';
                         if(clickedTabObject.tabContent) {
-                            tool.textChatContainerEl.innerHTML = '';
                             tool.textChatContainerEl.appendChild(clickedTabObject.tabContent)
                         } else {
                             var livestreamChatToolEl = document.createElement('DIV');
@@ -168,8 +175,8 @@
                                     livestreamChatToolEl,
                                     "Streams/chat",
                                     {
-                                        publisherId: tool.relatedStreams[0].fields.publisherId,
-                                        streamName: tool.relatedStreams[0].fields.name
+                                        publisherId: tool.publicChatStream.fields.publisherId,
+                                        streamName: tool.publicChatStream.fields.name
                                     }
                                 )
                                 ,
@@ -178,31 +185,17 @@
                             );
                         }                        
                     } else if(clickedTabName == 'private') {
+                        tool.textChatContainerEl.innerHTML = '';
                         if(clickedTabObject.tabContent) {
-                            tool.textChatContainerEl.innerHTML = '';
                             tool.textChatContainerEl.appendChild(clickedTabObject.tabContent)
                         } else {
 
-                            Q.Streams.create({
-                                publisherId: Q.Users.loggedInUserId(),
-                                type: 'Streams/chat',
-                                title: 'Private chat in livestream',
-                                readLevel: 0,
-                                writeLevel: 0,
-                                adminLevel: 0
-                            }, function (err) {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-
-                                var stream = this;
-
+                            function activateChat(stream) {
                                 var livestreamChatToolEl = document.createElement('DIV');
                                 livestreamChatToolEl.className = 'streams-livestream-chat-tool-el';
                                 tool.textChatContainerEl.appendChild(livestreamChatToolEl)
                                 clickedTabObject.tabContent = livestreamChatToolEl;
-        
+
                                 Q.activate(
                                     Q.Tool.setUpElement(
                                         livestreamChatToolEl,
@@ -216,12 +209,36 @@
                                     {},
                                     function () {}
                                 );
-                                
-                            }, {
-                                publisherId: tool.state.publisherId,
-                                streamName: tool.state.streamName,
-                                type: 'Streams/webrtc/livestream/chat'
-                            });
+                            }
+
+                            if(tool.privateChatStream) {
+                                activateChat(tool.privateChatStream);
+                            } else {
+                                Q.Streams.create({
+                                    publisherId: Q.Users.loggedInUserId(),
+                                    type: 'Streams/chat',
+                                    title: Q.Users.loggedInUser.displayName ? Q.Users.loggedInUser.displayName : 'Private chat',
+                                    readLevel: 0,
+                                    writeLevel: 0,
+                                    adminLevel: 0
+                                }, function (err) {
+                                    if (err) {
+                                        console.error(err);
+                                        return;
+                                    }
+    
+                                    var stream = this;
+    
+                                    stream.relateTo('Streams/webrtc/livestream/chat', tool.state.publisherId, tool.state.streamName, function() {                
+                                        activateChat(stream);
+                                    })
+                                }/*, {
+                                    publisherId: tool.state.publisherId,
+                                    streamName: tool.state.streamName,
+                                    type: 'Streams/webrtc/livestream/chat'
+                                }*/);
+                            }
+                            
                             
                         }        
                     }

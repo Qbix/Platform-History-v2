@@ -45,7 +45,7 @@ function Streams_webrtc_post($params = array())
 	$content = Q::ifset($params, 'content', null);
 	$onlyPreJoinedParticipantsAllowed = Q::ifset($params, 'onlyParticipantsAllowed', false);
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
-    $writeLevel = Q::ifset($params, 'writeLevel', 10);
+    $writeLevel = Q::ifset($params, 'writeLevel', 23);
     $closeManually = Q::ifset($params, 'closeManually', null);
     $useRelatedTo = Q::ifset($params, 'useRelatedTo', null);
 
