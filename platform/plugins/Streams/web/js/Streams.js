@@ -4482,7 +4482,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		if (o.unlessSocket) {
 			Streams.get.cache.each([publisherId, streamName], function (key, info) {
 				var p = Q.getObject("subject.participant", info);
-				if (p && p.state === 'participating') {
+				if (p && p.state === 'participating'
+				&& info.subject.readLevel >= 40) {
 					participant = p;
 					return false;
 				}
