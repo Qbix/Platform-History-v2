@@ -891,7 +891,7 @@ var _Streams_batchFunction_options = {
  */
 Streams.create = function (fields, callback, related, options) {
 	var slotNames = ['stream'];
-	options = options || {};
+	var options = options || {};
 	fields = Q.copy(fields);
 	if (options.fields) {
 		Q.extend(fields, 10, options.fields);
@@ -4477,7 +4477,21 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	}
 	// If we are here, then socket is available
 	if (ordinal < 0) {
-		return _tryLoading();
+		// Requested to wait for the latest messages
+		var participant;
+		if (o.unlessSocket) {
+			Streams.get.cache.each([publisherId, streamName], function (key, info) {
+				var p = Q.getObject("subject.participant", info);
+				if (p && p.state === 'participating'
+				&& info.subject.readLevel >= 40) {
+					participant = p;
+					return false;
+				}
+			});
+		}
+		if (!participant) {
+			return _tryLoading();
+		}
 	}
 	// Wait for messages to arrive via the socket,
 	// and if they don't all arrive, try loading them via an http request.
@@ -4518,7 +4532,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
 
-		// check if stream cached and if not then retrieve and it for next time
+		// Check if stream cached and if not then retrieve it for next time.
+		// The batching mechanism will ensure it's constructed before any returned messages are processed.
 		if (!Streams.get.cache.get([publisherId, streamName])) {
 			Streams.get(publisherId, streamName);
 		}
@@ -4812,7 +4827,7 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 		if (Q.isPlainObject(userId)) {
 			callback && callback.call(this, err, participants || null);
 		} else {
-			var participant = Q.first(participants);
+			var participant = Q.first(participants);;
 			callback && callback.call(participant, err, participant || null);
 		}
 	});
