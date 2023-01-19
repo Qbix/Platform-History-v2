@@ -18,16 +18,8 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
-	Q.Text.get('Streams/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text.questions;
-		preview.state.onRefresh.add(tool.refresh.bind(tool));
-		preview.state.creatable.preprocess = tool.composer.bind(tool);
-	});
+	preview.state.onRefresh.add(tool.refresh.bind(tool));
+	preview.state.creatable.preprocess = tool.composer.bind(tool);
 
 	if (preview.state.streamName) {
 		$(tool.element).on(Q.Pointer.fastclick, function () {
@@ -60,8 +52,6 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		$(tool.element)
 			.attr("data-type", type)
 			.attr("data-participating", participating);
-
-		participating
 
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
@@ -165,7 +155,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		}, tool);
 
 		Q.Dialogs.push({
-			title: tool.text.NewAnswer,
+			title: tool.text.questions.NewAnswer,
 			className: "Streams_dialog_answer_composer",
 			template: {
 				name: "Streams/answer/composer"
@@ -178,7 +168,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 					var type = $select.val();
 
 					if (type === "text") {
-						$input.attr("placeholder", tool.text.Placeholder);
+						$input.attr("placeholder", tool.text.questions.Placeholder);
 					} else {
 						$input.removeAttr("placeholder");
 					}
@@ -189,7 +179,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 					var content = title;
 
 					if (!title) {
-						return Q.alert(tool.text.TitleRequired);
+						return Q.alert(tool.text.questions.TitleRequired);
 					}
 
 					if (title.length > 255) {

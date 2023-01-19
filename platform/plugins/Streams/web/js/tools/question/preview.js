@@ -112,14 +112,14 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 						$(answerTool.element).attr("data-participating", response.slots.participated);
 
-						Q.Streams.get.force(answerTool.stream.fields.publisherId, answerTool.stream.fields.name, function (err) {
+						answerTool.stream.refresh(function (err) {
 							if (err) {
 								return;
 							}
-
+							
 							answerTool.stream = this;
 							answerTool.setParticipants();
-						});
+						}, {messages: true, unlessSocket: true});
 					};
 
 					$("input[type=radio],input[type=checkbox]", answerTool.element).on('change', function () {
