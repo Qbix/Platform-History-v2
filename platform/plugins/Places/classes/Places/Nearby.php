@@ -147,7 +147,7 @@ class Places_Nearby
 	 *  of streams that were subscribed to.
 	 */
 	static function subscribe(
-		$publisherId = null,
+		$publisherId,
 		$latitude, 
 		$longitude, 
 		$meters,
