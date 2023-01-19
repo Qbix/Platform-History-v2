@@ -53,8 +53,6 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 			.attr("data-type", type)
 			.attr("data-participating", participating);
 
-		participating
-
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
 		// process message Streams/extra/changed
