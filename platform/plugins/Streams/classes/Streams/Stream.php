@@ -1994,11 +1994,15 @@ class Streams_Stream extends Base_Streams_Stream
 			$options['min'] = $min;
 			// if 'min' is not given, assume 'reverse' fetching, so $ascending is false
 			$ascending = false;
+		} else if ($options['min'] < $min) {
+			$options['min'] = $min;
 		}
 		if (!isset($options['max'])) {
 			$options['max'] = $max;
+		} else if ($options['max'] > $max) {
+			$options['max'] = $max;
 		} else if ($options['max'] < 0) {
-			// if 'max' is negative, substract value from existing maximum
+			// if 'max' is negative, subtract value from existing maximum
 			$options['max'] = $max + $options['max'] + 1;
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : 1000000;

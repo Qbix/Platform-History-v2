@@ -147,7 +147,7 @@ class Places_Nearby
 	 *  of streams that were subscribed to.
 	 */
 	static function subscribe(
-		$publisherId = null,
+		$publisherId,
 		$latitude, 
 		$longitude, 
 		$meters,
@@ -175,7 +175,7 @@ class Places_Nearby
 	 *  of streams that were subscribed to.
 	 */
 	static function join(
-		$publisherId = null,
+		$publisherId,
 		$latitude,
 		$longitude,
 		$meters,
@@ -204,7 +204,7 @@ class Places_Nearby
 	 *  of streams that were subscribed to.
 	 */
 	static function unsubscribe(
-		$publisherId = null,
+		$publisherId,
 		$latitude, 
 		$longitude, 
 		$meters,

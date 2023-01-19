@@ -70,8 +70,18 @@ function Streams_stream_response()
 		$limit = $_REQUEST['messages'];
 		$messages = false;
 		$type = isset($_REQUEST['messageType']) ? $_REQUEST['messageType'] : null; 
-		if ($stream->testReadLevel('messages')) {
-			$messages = Db::exportArray($stream->getMessages(@compact('type', 'max', 'limit')));
+		if ($stream->testReadLevel('participants')) {
+			$messages = $stream->getMessages(@compact('type', 'max', 'limit'));
+			if (!$stream->testReadLevel('messages')) {
+				$selectedMessages = array();
+				foreach ($messages as $ordinal => $message) {
+					if (in_array($message->type, array('Streams/joined', 'Streams/left'))) {
+						$selectedMessages[$ordinal] = $message;
+					}
+				}
+				$messages = $selectedMessages; // NOTE: it would skip most ordinals
+			}
+			$messages = Db::exportArray($messages);
 		}
 		Q_Response::setSlot('messages', $messages);
 	}
