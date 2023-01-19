@@ -4532,7 +4532,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
 
-		// check if stream cached and if not then retrieve and it for next time
+		// Check if stream cached and if not then retrieve it for next time.
+		// The batching mechanism will ensure it's constructed before any returned messages are processed.
 		if (!Streams.get.cache.get([publisherId, streamName])) {
 			Streams.get(publisherId, streamName);
 		}
