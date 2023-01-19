@@ -94,6 +94,25 @@
 		    			"0x38": "0x300d5f5a3227f75551bf050fb2debcf3a8034dd4",
 					"0x89": "0xb9216ebe3a42da670c484a064bb5a93d8122e421",
 					"0x13881": "0x6BbB0ccD3acCFE3CA4CBc799041b4FC9598859c7"
+				},
+				"Assets/templates": {
+					"R2": {
+						"NFT/factory": {
+							"all": "0x0201010079282290a2b0d2E4cbc2a688c029db63"
+						},
+						"NFT/sales/factory": {
+							"all": "0x020201008CefCC7bE7627cb6C767988F413B0Db1"
+						},
+						"Community/factory": {
+							"all": "0x010101004FBff8d5D5b860CA9bC6EcE40E18C0Aa"
+						},
+						"ReleaseManager/factory": {
+							"all": "0x00010100597b8c232656D76a319b6FF696Ed3293"
+						},
+						"ReleaseManager/contract": {
+							"all": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671"
+						}
+					}
 				}
 			}
 		}
