@@ -577,7 +577,7 @@ Sp.calculateAccess = function(asUserId, callback) {
 
 	Streams.Access.SELECT('*').where({
 		'publisherId': ['', this.fields.publisherId],
-		'streamName': [this.fields.type+"/", this.fields.type+"*"],	// generic stream
+		'streamName': this.fields.type+"*",	// generic stream
 		'ofUserId': ['', asUserId]				// and specific user
 	}).execute(p.fill('rows2'));
 
