@@ -57,15 +57,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 
 		// process message Streams/extra/changed
 		stream.onMessage('Streams/extra/changed').set(function (updatedStream, message) {
-			var participantsTool = Q.Tool.from($(".Streams_answer_participants", tool.element)[0], "Streams/participants");
-			if (!participantsTool) {
-				return;
-			}
-
-			var $avatar = participantsTool.avatarExists(message.byUserId);
-			if ($avatar instanceof jQuery && $avatar.length) {
-				$avatar.attr('data-touchlabel', message.content);
-			}
+			tool.updateContent(message.byUserId, message.content);
 		}, tool);
 
 		Q.Template.render("Streams/answer/view", {
@@ -198,6 +190,24 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 				});
 			}
 		});
+	},
+	/**
+	 * Update avatar element data-touchlabel attribute to the answer content
+	 * @method updateContent
+	 * @param {string} byUserId - user id avatar need to change
+	 * @param {string} content - answer content
+	 */
+	updateContent: function (byUserId, content) {
+		var tool = this;
+		var participantsTool = Q.Tool.from($(".Streams_answer_participants", tool.element)[0], "Streams/participants");
+		if (!participantsTool) {
+			return;
+		}
+
+		var $avatar = participantsTool.avatarExists(byUserId);
+		if ($avatar instanceof jQuery && $avatar.length) {
+			$avatar.attr('data-touchlabel', content);
+		}
 	}
 });
 

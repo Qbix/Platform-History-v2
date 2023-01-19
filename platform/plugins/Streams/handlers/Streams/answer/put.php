@@ -80,5 +80,5 @@ function Streams_answer_put ($params) {
 		'content' => $content
 	), true);
 
-	Q_Response::setSlot("participated", (bool)$content);
+	Q_Response::setSlot("content", $content);
 }

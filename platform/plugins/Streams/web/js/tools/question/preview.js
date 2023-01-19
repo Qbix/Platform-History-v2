@@ -110,7 +110,9 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							return msg !== "return" && Q.alert(msg);
 						}
 
-						$(answerTool.element).attr("data-participating", response.slots.participated);
+						$(answerTool.element).attr("data-participating", !!response.slots.content);
+
+						answerTool.updateContent(Q.Users.loggedInUserId(), response.slots.content);
 
 						answerTool.stream.refresh(function (err) {
 							if (err) {
@@ -127,7 +129,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						_reqCallbackOptions.$this = $this;
 
 						if (!$this.prop("checked")) {
-							Q.req('Streams/answer', ["participated"], _reqCallback.bind($this), {
+							Q.req('Streams/answer', ["content"], _reqCallback.bind($this), {
 								method: 'put',
 								fields: Q.extend(reqOptions, {
 									content: ""
@@ -148,7 +150,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							}
 						});
 
-						Q.req('Streams/answer', ["participated"], _reqCallback.bind($this), {
+						Q.req('Streams/answer', ["content"], _reqCallback.bind($this), {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $this.val()
@@ -164,7 +166,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 						_reqCallbackOptions.$this = $text;
 
-						Q.req('Streams/answer', ["participated"], _reqCallback.bind($text), {
+						Q.req('Streams/answer', ["content"], _reqCallback.bind($text), {
 							method: 'put',
 							fields: Q.extend(reqOptions, {
 								content: $text.val()
