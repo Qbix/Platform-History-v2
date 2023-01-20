@@ -4488,7 +4488,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		if (o.unlessSocket) {
 			Streams.get.cache.each([publisherId, streamName], function (key, info) {
 				var p = Q.getObject("subject.participant", info);
-				if (p && p.state === 'participating') {
+				if (p && p.state === 'participating'
+				&& info.subject.readLevel >= 40) {
 					participant = p;
 					return false;
 				}
@@ -4537,7 +4538,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
 
-		// check if stream cached and if not then retrieve and it for next time
+		// Check if stream cached and if not then retrieve it for next time.
+		// The batching mechanism will ensure it's constructed before any returned messages are processed.
 		if (!Streams.get.cache.get([publisherId, streamName])) {
 			Streams.get(publisherId, streamName);
 		}

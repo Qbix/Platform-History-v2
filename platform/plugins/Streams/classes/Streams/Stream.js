@@ -261,7 +261,8 @@ Sp.setUp = function () {
  * @param {string} type
  * @param {string} values
  * @param {string|integer} level
- * @param callback=null {function}
+ * @param {function} [callback=null]
+ *  Use this when streams can inherit access.
  *	Callback receives "error" and boolean as arguments - whether the access is granted.
  */
 function testLevel (subj, type, values, level, callback) {
@@ -1366,13 +1367,17 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 		}
 	}
 	// check access
+	var readLevel = (
+		message.fields.type === 'Streams/left' ||
+		message.fields.type === 'Streams/joined'
+	) ? 'participants' : 'messages';
 	if (this.get('asUserId') !== userId) {
 		this.calculateAccess(userId, function (err) {
 			if (err) return callback && callback(err);
-			this.testReadLevel(Streams.READ_LEVEL['messages'], _notify);
+			this.testReadLevel(Streams.READ_LEVEL[readLevel], _notify);
 		});
 	} else {
-		this.testReadLevel(Streams.READ_LEVEL['messages'], _notify);
+		this.testReadLevel(Streams.READ_LEVEL[readLevel], _notify);
 	}
 };
 
