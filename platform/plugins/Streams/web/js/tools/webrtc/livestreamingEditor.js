@@ -713,6 +713,7 @@
 
                     let streamingToCustomRtmp = (function () {
                         var _streamingToCustomRtmpSection = null;
+                        var _currentlyStreamingToUrls = [];
                         
                         function createSectionElement() {
                             var rtmpStreaming = _streamingToCustomRtmpSection = document.createElement('DIV');
@@ -733,6 +734,7 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
+                            rtmpLiveURLInput.name = 'rtmpUrl';
                             rtmpLiveURL.appendChild(rtmpLiveURLInput);
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
@@ -742,7 +744,18 @@
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+                            rtmpLiveStreamKeyInput.name = 'streamKey';
                             rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
+
+                            var linkToLiveCon = document.createElement('LABEL');
+                            linkToLiveCon.className = 'live-editor-stream-to-section-rtmp-live-link';
+                            rtmpLiveItem.appendChild(linkToLiveCon);
+
+                            var linkToLiveInput = document.createElement('INPUT');
+                            linkToLiveInput.type = 'text';
+                            linkToLiveInput.name = 'linkToLive';
+                            linkToLiveInput.placeholder = 'Link to livestream';
+                            linkToLiveCon.appendChild(linkToLiveInput);
 
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'live-editor-stream-to-section-rtmp-start';
@@ -801,21 +814,30 @@
 
                                 var rtmpLiveURL = document.createElement('LABEL');
                                 rtmpLiveURL.className = 'live-editor-stream-to-section-rtmp-rtmp-url';
+                                rtmpLiveItem.appendChild(rtmpLiveURL);
 
                                 var rtmpLiveURLInput = document.createElement('INPUT');
                                 rtmpLiveURLInput.type = 'text';
                                 rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
+                                rtmpLiveURL.appendChild(rtmpLiveURLInput);
 
                                 var rtmpLiveStreamKey = document.createElement('LABEL');
                                 rtmpLiveStreamKey.className = 'live-editor-stream-to-section-rtmp-key';
+                                rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+
                                 var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                                 rtmpLiveStreamKeyInput.type = 'password';
                                 rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
-
-                                rtmpLiveURL.appendChild(rtmpLiveURLInput);
                                 rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
-                                rtmpLiveItem.appendChild(rtmpLiveURL);
-                                rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+
+                                var linkToLiveCon = document.createElement('LABEL');
+                                linkToLiveCon.className = 'live-editor-stream-to-section-rtmp-live-link';
+                                rtmpLiveItem.appendChild(linkToLiveCon);
+
+                                var linkToLiveInput = document.createElement('INPUT');
+                                linkToLiveInput.type = 'text';
+                                linkToLiveInput.placeholder = 'Link to livestream';
+                                linkToLiveCon.appendChild(linkToLiveInput);
 
                                 rtmpStreamingSettings.insertBefore(rtmpLiveItem, rtmpStreamingSettings.lastChild);
                             })
@@ -828,22 +850,35 @@
 
                                 var rtmpUrls = Array.from(rtmpStreamingSettings.querySelectorAll('.live-editor-stream-to-section-rtmp-rtmp-item'));
 
+                                var rtmpUrlsData = [];
                                 var rtmpUrlsArr = [];
                                 for (let i in rtmpUrls) {
                                     var inputs = rtmpUrls[i].querySelectorAll('input');
                                     var rtmpURL = inputs[0].value.trim();
                                     var streamKey = inputs[1].value.trim();
+                                    var linkToLive = inputs[2].value.trim();
                                     var fullRtmpURL = rtmpURL;
                                     if (streamKey != null && streamKey != '') {
                                         fullRtmpURL = rtmpURL.endsWith('/') ? fullRtmpURL + streamKey : fullRtmpURL + '/' + streamKey;
                                     }
                                     rtmpUrlsArr.push(fullRtmpURL);
+                                    rtmpUrlsArr.push({
+                                        rtmpUrl: fullRtmpURL,
+                                        linkToLive: linkToLive.value
+                                    });
                                 }
 
-                                tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(rtmpUrlsArr, 'custom');
+                                tool.stream.post({
+                                    type: 'Streams/webrtc/forceDisconnect',
+                                    content: JSON.stringify({
+                                        userId:  tool.stream.fields.publisherId
+                                    }),
+                                }, function () {
+                                    tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(rtmpUrlsArr, 'custom');
 
-                                rtmpStreamingSettings.style.display = 'none';
-                                rtmpLiveSection.style.display = 'block';
+                                    rtmpStreamingSettings.style.display = 'none';
+                                    rtmpLiveSection.style.display = 'block';
+                                })                                
                             })
 
                             stopStreamingBtn.addEventListener('click', function () {
@@ -895,6 +930,22 @@
                             var linkCon = document.createElement('DIV');
                             linkCon.className = 'live-editor-stream-to-section-p2p-link-con';
                             activeRecordingSection.appendChild(linkCon);
+                            
+                            var linkInputCon = document.createElement('LABEL');
+                            linkInputCon.className = 'live-editor-stream-to-section-p2p-label';
+                            linkCon.appendChild(linkInputCon);
+                            var linkInput = document.createElement('INPUT');
+                            linkInput.disabled = true;
+                            linkInput.value = location.origin + '/broadcast?stream=' + roomId;
+                            linkInputCon.appendChild(linkInput);
+                            var linkCopyBtn = document.createElement('BUTTON');
+                            linkCopyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
+                            linkCon.appendChild(linkCopyBtn);
+
+                            linkCopyBtn.addEventListener('click', function () {
+                                copyToClipboard(linkInput);
+                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                            })
 
                             var buttonsCon = document.createElement('DIV');
                             buttonsCon.className = 'live-editor-stream-to-section-p2p-buttons';
@@ -911,22 +962,6 @@
                             stopRecordingBtnCon.appendChild(stopRecordingBtn);
 
                             var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
-
-                            var linkInputCon = document.createElement('LABEL');
-                            linkInputCon.className = 'live-editor-stream-to-section-p2p-label';
-                            linkCon.appendChild(linkInputCon);
-                            var linkInput = document.createElement('INPUT');
-                            linkInput.disabled = true;
-                            linkInput.value = location.origin + '/broadcast?stream=' + roomId;
-                            linkInputCon.appendChild(linkInput);
-                            var linkCopyBtn = document.createElement('BUTTON');
-                            linkCopyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
-                            linkCon.appendChild(linkCopyBtn);
-
-                            linkCopyBtn.addEventListener('click', function () {
-                                copyToClipboard(linkInput);
-                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
-                            })
 
                             var broadcastClient;
                             startRecordingBtn.addEventListener('click', function () {
@@ -3827,6 +3862,23 @@
                             buttonEl: sourcesColumnControlBtn
                         });
 
+                        var inviteBtnCon = document.createElement('DIV');
+                        inviteBtnCon.className = 'live-editor-popup-sources-control-btn-invite-con'
+                        var inviteBtn = document.createElement('DIV');
+                        inviteBtn.className = 'live-editor-popup-sources-control-btn live-editor-popup-sources-control-btn-invite';
+                        inviteBtn.innerHTML = 'Invite';
+                        inviteBtn.addEventListener('click', function () {
+                            invitePopup.show();
+                        })
+
+                        inviteBtnCon.appendChild(inviteBtn);
+                        sourcesColumnControl.appendChild(inviteBtnCon);
+                        
+                        _sourceControlButtons.push({
+                            name: 'invite',
+                            buttonEl: inviteBtn
+                        });
+
                         dialogBody.appendChild(dialogBodyInner)
                         dialogBody.appendChild(sourcesColumnControl)
 
@@ -5474,7 +5526,64 @@
                             hideDialog: hideDialog,
                             showDialog: showDialog,
                         }
-                    }())  
+                    }())
+
+                    var invitePopup = (function () {
+                        var _popupEl = null;
+                        var _popupDialog = null;
+
+                        function createPopup() {
+                            var popupContainer = _popupEl = document.createElement('DIV');
+                            popupContainer.className = 'live-editor-invite-popup';
+                            
+                            var linkCon = document.createElement('DIV');
+                            linkCon.className = 'live-editor-invite-popup-link-con';
+                            popupContainer.appendChild(linkCon);
+                            
+                            var linkInputCon = document.createElement('LABEL');
+                            linkInputCon.className = 'live-editor-invite-popup-label';
+                            linkCon.appendChild(linkInputCon);
+                            var linkInput = document.createElement('INPUT');
+                            linkInput.disabled = true;
+                            let livestreamId = (tool.livestreamStream.fields.name).replace('Streams/webrtc/livestream/', '');
+                            linkInput.value = location.origin + '/livestream/' + tool.livestreamStream.fields.publisherId + '/' + livestreamId;
+                            linkInputCon.appendChild(linkInput);
+                            var linkCopyBtn = document.createElement('BUTTON');
+                            linkCopyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
+                            linkCon.appendChild(linkCopyBtn);
+
+                            linkCopyBtn.addEventListener('click', function () {
+                                copyToClipboard(linkInput);
+                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                            })
+                            
+                        }
+
+                        function show() {
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
+                            }
+
+                            if(!_popupEl) {
+                                createPopup();
+                            }
+
+                            let streamingControlsEl = document.querySelector('.live-editor-dialog_advanced_streaming');
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            _popupDialog = new SimpleDialog({
+                                content: _popupEl, 
+                                rectangleToShowIn: rectangleToShowIn,
+                                title: 'Share livestream'
+                            });
+                        }
+
+                        return {
+                            show: show
+                        }
+                    }());
 
                     var contextMenu = function (type) {
                         let _type = type
@@ -7332,12 +7441,16 @@
                     this.dialogEl = null;
                     this.dialogBodyEl = null;
                     this.hoverTimeout = null;
+                    this.resizeObserver = null;
+                    this.active = false;
+                    this.isChangingPosition = {x: null, y: null};
                     this.hide = function (e) {
                         if (e.target.offsetParent != dialogInstance.dialogEl || e.target == this.closeButtonEl) {
                             if (dialogInstance.dialogEl.parentElement) dialogInstance.dialogEl.parentElement.removeChild(dialogInstance.dialogEl);
                             togglePopupClassName('', false, false);
                         }
-                        delete dialogInstance;
+                        dialogInstance.active = false;
+                        //delete this;
                     }
         
                     this.show = function (e) {
@@ -7368,44 +7481,10 @@
                         
                         document.body.appendChild(dialogInstance.dialogEl);
         
-                        let dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+                        updateDialogPostion();
         
-                        let midXOfRectangleToShowIn = rectangleToShowIn.x + (rectangleToShowIn.width / 2);
-                        let midYOfRectangleToShowIn = rectangleToShowIn.y + (rectangleToShowIn.height / 2);
-
-                        if(dialogRect.width <= rectangleToShowIn.width) {
-                            dialogInstance.dialogEl.style.left = midXOfRectangleToShowIn - (dialogRect.width / 2) + 'px';
-                        } else {
-                            dialogInstance.dialogEl.style.left = rectangleToShowIn.x + 'px';
-                            dialogInstance.dialogEl.style.width = rectangleToShowIn.width + 'px';
-                        }
-                        
-                        dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
-
-                        if(dialogRect.height <= rectangleToShowIn.height) {
-                            dialogInstance.dialogEl.style.top = midYOfRectangleToShowIn - (dialogRect.height / 2) + 'px';
-                        } else {
-                            dialogInstance.dialogEl.style.top = rectangleToShowIn.y + 'px';
-                            dialogInstance.dialogEl.style.height = rectangleToShowIn.height + 'px';
-                        }
-
-                        dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
-
-                        if(dialogRect.height < rectangleToShowIn.height) {
-                            if(dialogRect.width < rectangleToShowIn.width) {
-                                togglePopupClassName('live-editor-dialog-window-mid-mid-position', false, false);
-                            } else {
-                                togglePopupClassName('live-editor-dialog-window-fullwidth-mid-position', false, false);
-                            }
-                        } else {
-                            if(dialogRect.width < rectangleToShowIn.width) {
-                                togglePopupClassName('live-editor-dialog-window-mid-fullheight-position', false, true);
-                            } else {
-                                togglePopupClassName('live-editor-dialog-window-fullwidth-fullheight-position', false, true);
-                            }
-                        }
-        
-                        dialogInstance.dialogEl.style.visibility = '';     
+                        dialogInstance.dialogEl.style.visibility = '';  
+                        dialogInstance.active = true;
                     }
         
                     function togglePopupClassName(classNameToApply, addXScrollClass, addYScrollClass) {
@@ -7432,6 +7511,85 @@
                         }
                         if (addYScrollClass) {
                             dialogInstance.dialogEl.classList.add('live-editor-dialog-window-y-scroll');
+                        }
+                    }
+
+                    function updateDialogPostion(animate) {
+                        dialogInstance.isChangingPosition.y = true;
+                        let rectangleToShowIn = dialogInstance.rectangleToShowIn;
+                        let dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+        
+                        let midXOfRectangleToShowIn = rectangleToShowIn.x + (rectangleToShowIn.width / 2);
+                        let midYOfRectangleToShowIn = rectangleToShowIn.y + (rectangleToShowIn.height / 2);
+
+                        if(dialogRect.width <= rectangleToShowIn.width) {
+                            dialogInstance.dialogEl.style.left = midXOfRectangleToShowIn - (dialogRect.width / 2) + 'px';
+                        } else {
+                            dialogInstance.dialogEl.style.left = rectangleToShowIn.x + 'px';
+                            dialogInstance.dialogEl.style.width = rectangleToShowIn.width + 'px';
+                        }
+                        
+                        dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+                        if(dialogRect.height <= rectangleToShowIn.height) {
+                            if(!animate) {
+                                dialogInstance.dialogEl.style.top = midYOfRectangleToShowIn - (dialogRect.height / 2) + 'px';
+                            } else {
+                                requestAnimationFrame(function(timestamp){
+                                    let startTime = timestamp || new Date().getTime()
+                                    moveit(timestamp, dialogInstance.dialogEl, { x: null, y: midYOfRectangleToShowIn - (dialogRect.height / 2) }, {x: null, y: dialogRect.y}, 300, startTime, function () {
+                                        dialogInstance.isChangingPosition.y = false;
+                                    });
+                                })
+                            }
+                        } else {
+                            if(!animate) {
+                                dialogInstance.dialogEl.style.top = rectangleToShowIn.y + 'px';
+                            } else {
+                                requestAnimationFrame(function(timestamp){
+                                    let startTime = timestamp || new Date().getTime()
+                                    moveit(timestamp, dialogInstance.dialogEl, { x: null, y: rectangleToShowIn.y }, {x: null, y: dialogRect.y}, 300, startTime, function () {
+                                        dialogInstance.isChangingPosition.y = false;
+                                    });
+                                })
+                            }
+                            dialogInstance.dialogEl.style.height = rectangleToShowIn.height + 'px';
+                        }
+
+                        dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
+
+                        if(dialogRect.height < rectangleToShowIn.height) {
+                            if(dialogRect.width < rectangleToShowIn.width) {
+                                togglePopupClassName('live-editor-dialog-window-mid-mid-position', false, false);
+                            } else {
+                                togglePopupClassName('live-editor-dialog-window-fullwidth-mid-position', false, false);
+                            }
+                        } else {
+                            if(dialogRect.width < rectangleToShowIn.width) {
+                                togglePopupClassName('live-editor-dialog-window-mid-fullheight-position', false, true);
+                            } else {
+                                togglePopupClassName('live-editor-dialog-window-fullwidth-fullheight-position', false, true);
+                            }
+                        }
+
+                        if(!animate) dialogInstance.isChangingPosition.y = false;
+
+                        function moveit(timestamp, elementToMove, distXY, startXY, duration, starttime, onAnimationEnd){
+                            var timestamp = timestamp || new Date().getTime()
+                            var runtime = timestamp - starttime
+                            var progress = runtime / duration;
+                            progress = Math.min(progress, 1);
+
+                            if(distXY.y != null) elementToMove.style.top = (startXY.y + (distXY.y - startXY.y) * progress) + 'px';
+                            if(distXY.x != null) elementToMove.style.left = (startXY.x + (distXY.x - startXY.x) * progress) + 'px';
+                            if (runtime < duration){
+                                requestAnimationFrame(function(timestamp){
+                                    moveit(timestamp, elementToMove, distXY, startXY, duration, starttime, onAnimationEnd)
+                                })
+                            } else {
+                                if(distXY.y != null) elementToMove.style.top = distXY.y + 'px';
+                                if(distXY.x != null) elementToMove.style.left = distXY.x + 'px';
+                                if(onAnimationEnd) onAnimationEnd();
+                            }
                         }
                     }
         
@@ -7475,6 +7633,21 @@
 
                         }
                     );
+
+                    this.resizeObserver = new ResizeObserver(function (entries) {
+                        for (const entry of entries) {
+                            let width = entry.contentBoxSize && entry.contentBoxSize.length != 0 ? entry.contentBoxSize[0].inlineSize : entry.contentRect.width;
+                            let height = entry.contentBoxSize  && entry.contentBoxSize.length != 0 ? entry.contentBoxSize[0].blockSize : entry.contentRect.height;
+                            if(dialogInstance.isChangingPosition.x || dialogInstance.isChangingPosition.y) {
+                                continue;
+                            }
+
+                            updateDialogPostion(true);
+                        }
+                      
+                      });
+                      
+                      this.resizeObserver.observe(this.dialogEl);
         
                     /*this.element.addEventListener('click', function (e) {
                         dialogInstance.show(e);
@@ -7986,9 +8159,7 @@
                         selectInstance.hide();
                     }
                     this.hide = function (e) {
-                        console.log('hide1')
                         if (e && (e.target.offsetParent != selectInstance.customSelectDropDownEl || e.target == this.closeButtonEl) || e == null) {
-                            console.log('hide2')
                             if (selectInstance.customSelectDropDownEl.parentElement) selectInstance.customSelectDropDownEl.parentElement.removeChild(selectInstance.customSelectDropDownEl);
         
                             togglePopupClassName('', false, false);

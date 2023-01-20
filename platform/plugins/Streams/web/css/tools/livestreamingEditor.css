@@ -1257,7 +1257,7 @@
     cursor: pointer;
     position: absolute;
     right: 5px;
-    top: 5px;
+    top: 8px;
 }
 .live-editor-dialog-window .live-editor-dialog-window-body {
     padding: 5px;
@@ -1414,7 +1414,8 @@
 .live-editor-popup-scenes-control,
 .live-editor-popup-sources-control {
     display: flex;
-    padding: 10px 0 5px 10px;
+    align-items: center;
+    padding: 10px 0 10px 10px;
     border-top: 1px solid #424242;
     position: absolute;
     bottom: 0;
@@ -1430,6 +1431,18 @@
 .live-editor-popup-sources-control .live-editor-popup-sources-control-btn {
     margin-right: 10px;
     cursor: pointer;
+    height: 24px;
+}
+.live-editor-popup-sources-control .live-editor-popup-sources-control-btn-invite-con {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.live-editor-popup-sources-control .live-editor-popup-sources-control-btn-invite-con .live-editor-popup-sources-control-btn {
+    height: auto;
+    padding: 5px 10px;
+    border: 1px solid #ffffff;
 }
 .live-editor-popup-scenes-control .live-editor-popup-scenes-control-btn svg,
 .live-editor-popup-sources-control .live-editor-popup-sources-control-btn svg{
@@ -2002,6 +2015,35 @@
     flex-direction: column;
 }
 /*end: add camera/mic source popup*/
+
+/*start: invite popup dialog*/
+.live-editor-invite-popup {
+    min-width: 430px;
+    padding-bottom: 10px;
+}
+.live-editor-invite-popup .live-editor-invite-popup-link-con {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+}
+.live-editor-invite-popup .live-editor-invite-popup-label {
+    flex: 1;
+    border: 1px solid #e1e1e1;
+    justify-content: space-between;
+    border-radius: 2px;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-right: 5px;
+}
+.live-editor-invite-popup .live-editor-invite-popup-label input{
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    background-color: #ffffff;
+}
+/*end: invite popup dialog*/
 
 
 /*context menu*/
