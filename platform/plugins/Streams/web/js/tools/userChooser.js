@@ -46,7 +46,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		left: offset.left + 'px',
 		top: offset.top + tool.$input.outerHeight() + 'px',
 		width: tool.$input.outerWidth(),
-		'z-index': tool.getMaxZIndex() + 1,
+		'z-index': Q.zIndexTopmost() + 1,
 		background: 'white',
 		border: 'solid 1px #99a',
 		height: state.resultsHeight,
@@ -229,25 +229,6 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		if (this.$results) {
 			this.$results.remove();	
 		}
-	},
-	/**
-	 * Find max z-index among all parents recursively
-	 * @method getMaxZIndex
-	 */
-	getMaxZIndex: function () {
-		var zIndex = parseInt(this.element.computedStyle("z-index")) || 0;
-		var element = this.element;
-		var tmp = 0;
-
-		while(element.parentElement) {
-			tmp = parseInt(element.computedStyle("z-index")) || 0;
-			if (tmp > zIndex) {
-				zIndex = tmp;
-			}
-			element = element.parentElement;
-		}
-
-		return zIndex;
 	},
 	Q: {
 		beforeRemove: function () {
