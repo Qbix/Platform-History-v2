@@ -64,6 +64,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 		var publisherId = stream.fields.publisherId;
 		var streamName = stream.fields.name;
 		var $toolElement = $(tool.element);
+		var loggedInUserId = Q.Users.loggedInUserId();
 
 		// retain with stream
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
@@ -94,25 +95,36 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				var answerTool = this;
 
 				this.state.onRefresh.add(function () {
+					var answerType = answerTool.stream.getAttribute("type");
+					var answerPublisherId = answerTool.stream.fields.publisherId;
+					var answerStreamName = answerTool.stream.fields.name;
 					var reqOptions = {
-						publisherId: answerTool.stream.fields.publisherId,
-						streamName: answerTool.stream.fields.name,
-						type: answerTool.stream.getAttribute("type")
+						publisherId: answerPublisherId,
+						streamName: answerStreamName,
+						type: answerType
 					};
-					var _reqCallbackOptions = {};
 					var _reqCallback = function (err, response) {
 						var $this = this;
 						var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(response && response.errors);
 						if (msg) {
-							if (["option", "option.exclusive"].includes(answerTool.stream.getAttribute("type"))) {
+							if (["option", "option.exclusive"].includes(answerType)) {
 								$this.prop("checked", !$this.prop("checked"));
+							} else if (answerType === "text") {
+								Q.Streams.Participant.get(answerPublisherId, answerStreamName, loggedInUserId,function (err, participant) {
+									var msg = Q.firstErrorMessage(err);
+									if (msg) {
+										return console.warn(msg);
+									}
+
+									$this.val(participant.getExtra("content"));
+								});
 							}
 							return msg !== "return" && Q.alert(msg);
 						}
 
 						$(answerTool.element).attr("data-participating", !!response.slots.content);
 
-						answerTool.updateContent(Q.Users.loggedInUserId(), response.slots.content);
+						answerTool.updateContent(loggedInUserId, response.slots.content);
 
 						answerTool.stream.refresh(function (err) {
 							if (err) {
@@ -126,7 +138,6 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 					$("input[type=radio],input[type=checkbox]", answerTool.element).on('change', function () {
 						var $this = $(this);
-						_reqCallbackOptions.$this = $this;
 
 						if (!$this.prop("checked")) {
 							Q.req('Streams/answer', ["content"], _reqCallback.bind($this), {
@@ -163,8 +174,6 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						if (!$text.length) {
 							return console.warn("text element not found");
 						}
-
-						_reqCallbackOptions.$this = $text;
 
 						Q.req('Streams/answer', ["content"], _reqCallback.bind($text), {
 							method: 'put',

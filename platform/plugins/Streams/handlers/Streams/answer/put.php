@@ -19,18 +19,22 @@ function Streams_answer_put ($params) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	if ($answerStream->getAttribute("type") == "option.exclusive") {
-		$questionStream = Streams_RelatedTo::select()->where(array(
-			"fromPublisherId" => $publisherId,
-			"fromStreamName" => $streamName,
-			"type" => "Streams/answers"
-		))->fetchDbRow();
-		if (empty($questionStream)) {
-			throw new Exception("question stream not found");
-		}
-		$questionStream = Streams::fetchOne(null, $questionStream->toPublisherId, $questionStream->toStreamName, true);
-
-		if ($questionStream->getAttribute("cantChangeAnswers")) {
+	// check cantChangeAnswers option
+	$questionStream = Streams_RelatedTo::select()->where(array(
+		"fromPublisherId" => $publisherId,
+		"fromStreamName" => $streamName,
+		"type" => "Streams/answers"
+	))->fetchDbRow();
+	if (empty($questionStream)) {
+		throw new Exception("question stream not found");
+	}
+	$questionStream = Streams::fetchOne(null, $questionStream->toPublisherId, $questionStream->toStreamName, true);
+	if ($questionStream->getAttribute("cantChangeAnswers")) {
+		if ($answerStream->getAttribute("type") != "option.exclusive") {
+			if (empty($content)) {
+				throw new Exception(empty($content) ? "Answer can't be changed" : "return");
+			}
+		} else {
 			$relatedAnswers = Streams_RelatedTo::select()->where(array(
 				"toPublisherId" => $questionStream->publisherId,
 				"toStreamName" => $questionStream->name,
