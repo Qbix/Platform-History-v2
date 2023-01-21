@@ -1874,6 +1874,9 @@ class Streams_Stream extends Base_Streams_Stream
 				}
 			}
 		}
+		if ($updateRelations === true) {
+			$updateRelations = array('from');
+		}
 		foreach ($updateRelations as $direction) {
 			$relationTypes = array_keys($this->fields);
 			if ($direction === 'from') {
