@@ -2,7 +2,70 @@
     padding: 10px;
 }
 
+.streams-livestream-video-iframe-con {
+    display: flex;
+    justify-content: center;
+}
+.streams-livestream-video-iframe-con iframe{
+    border: none;
+}
+.streams-livestream-participants-con {
+    margin-top: 10px;
+}
 
+/*start: livestreaming video tabs*/
+.streams-livestream-video-tabs-con {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+.streams-livestream-video-tabs-inner {
+    display: flex;
+    justify-content: center;
+}
+.streams-livestream-video-tabs-tool {
+    display: flex;
+}
+.streams-livestream-video-tabs-tool .streams-livestream-video-tabs-tool-tab {
+    position: relative;
+    padding: 5px 20px;
+    margin: 0 5px 5px 0;
+    border-radius: 5px;
+    background: #f2f2f2;
+    box-shadow: 0 2px rgb(0 0 0 / 20%);
+    color: #808080;
+    opacity: 0.8;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.streams-livestream-video-tabs-tool .streams-livestream-video-tabs-tool-tab.streams-livestream-video-tabs-tool-tab-streaming::after {
+    display: block;
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    content: " ";
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: Q_working 1s ease-in-out infinite alternate;
+}
+.streams-livestream-video-tabs-tool .streams-livestream-video-tabs-tool-tab.streams-livestream-video-tabs-tool-tab-active {
+    background: #f2f2f2;
+    color: #2b82d9;
+    opacity: 1;
+}
+.streams-livestream-video-tabs-tool .streams-livestream-video-tabs-tool-tab:hover {
+    background: #dfdfdf;
+    opacity: 1;
+}
+/*end: livestreaming video tabs*/
+
+/*start: private/public chat tabs*/
+.streams-livestream-chat-tabs-con {
+    padding: 10px 5px;
+}
 .streams-livestream-chat-tabs-inner {
     display: flex;
     justify-content: center;
@@ -14,18 +77,19 @@
     padding: 5px 20px;
     margin: 0 5px 5px 0;
     border-radius: 5px;
-    background: #fff;
+    background: #f2f2f2;
     box-shadow: 0 2px rgb(0 0 0 / 20%);
     color: #808080;
     opacity: 0.8;
     cursor: pointer;
 }
 .streams-livestream-chat-tabs-tool .streams-livestream-chat-tabs-tool-tab.streams-livestream-chat-tabs-tool-tab-active {
-    background: #fff;
+    background: #f2f2f2;
     color: #2b82d9;
     opacity: 1;
 }
 .streams-livestream-chat-tabs-tool .streams-livestream-chat-tabs-tool-tab:hover {
-    background: #fff;
+    background: #dfdfdf;
     opacity: 1;
 }
+/*end: private/public chat tabs*/

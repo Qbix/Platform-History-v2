@@ -171,7 +171,15 @@
                     });
                   
                     tool.state.webrtcSignalingLib.event.on('liveStreamingStopped', function () {
-
+                        if (e.platform && e.platform == 'facebook') {
+                            if (e.participant.isLocal) {
+                                hideLiveIndicator('facebook');
+                            }
+                        } else {
+                            if (e.participant.isLocal) {
+                                hideLiveIndicator('custom');
+                            }
+                        }
                     });
 
 
@@ -850,7 +858,7 @@
 
                                 var rtmpUrls = Array.from(rtmpStreamingSettings.querySelectorAll('.live-editor-stream-to-section-rtmp-rtmp-item'));
 
-                                var rtmpUrlsData = [];
+                                var _currentlyStreamingToUrls = [];
                                 var rtmpUrlsArr = [];
                                 for (let i in rtmpUrls) {
                                     var inputs = rtmpUrls[i].querySelectorAll('input');
@@ -861,24 +869,42 @@
                                     if (streamKey != null && streamKey != '') {
                                         fullRtmpURL = rtmpURL.endsWith('/') ? fullRtmpURL + streamKey : fullRtmpURL + '/' + streamKey;
                                     }
-                                    rtmpUrlsArr.push(fullRtmpURL);
-                                    rtmpUrlsArr.push({
+                                    
+                                    let rtmpData = {
                                         rtmpUrl: fullRtmpURL,
-                                        linkToLive: linkToLive.value
-                                    });
+                                        linkToLive: linkToLive,
+                                        id: generateId()
+                                    }
+                                    rtmpUrlsArr.push(rtmpData);
+                                    _currentlyStreamingToUrls.push(rtmpData);
                                 }
 
-                                tool.stream.post({
-                                    type: 'Streams/webrtc/forceDisconnect',
-                                    content: JSON.stringify({
-                                        userId:  tool.stream.fields.publisherId
-                                    }),
-                                }, function () {
-                                    tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(rtmpUrlsArr, 'custom');
 
+                                tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(_currentlyStreamingToUrls, 'custom', tool.livestreamStream);
+                                rtmpStreamingSettings.style.display = 'none';
+                                rtmpLiveSection.style.display = 'block';
+
+                                /*console.log('_currentlyStreamingToUrls', _currentlyStreamingToUrls);
+                                for(let i in _currentlyStreamingToUrls) {
+                                    let livestreamData = _currentlyStreamingToUrls[i];
+                                    tool.livestreamStream.post({
+                                        type: 'Streams/livestream/live',
+                                        instructions: JSON.stringify(livestreamData),
+                                    }, function (e) {
+                                        console.log('post Streams/livestream/live', this, e)
+                                        console.log('post Streams/livestream/live', i, livestreamData)
+                                        if(parseInt(i) == _currentlyStreamingToUrls.length - 1) {
+                                            startSendingRtmp();
+                                        }
+                                    })
+                                }
+
+                                function startSendingRtmp() {
+                                    tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(rtmpUrlsArr, 'custom');
                                     rtmpStreamingSettings.style.display = 'none';
                                     rtmpLiveSection.style.display = 'block';
-                                })                                
+                                }*/                             
+                                                         
                             })
 
                             stopStreamingBtn.addEventListener('click', function () {
@@ -896,8 +922,14 @@
                             return _streamingToCustomRtmpSection;
                         }
                         
+                        function onStreamingEndedOrStoppedHandler() {
+                            rtmpStreamingSettings.style.display = 'block';
+                            rtmpLiveSection.style.display = 'none';
+                        }
+                        
                         return {
-                            getSection: getSection
+                            getSection: getSection,
+                            onStreamingEndedOrStoppedHandler: onStreamingEndedOrStoppedHandler
                         }
                     }());
 

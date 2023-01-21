@@ -48,7 +48,7 @@
         
                     var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
         
-                    function connect(rtmpUrls, platform, callback) {
+                    function connect(rtmpUrls, platform, livestreamStream, callback) {
                         if(typeof io == 'undefined') return;
                         log('startStreaming connect');
         
@@ -57,6 +57,7 @@
                         _streamingSocket[platform].socket = window.sSocket = io.connect(_options.nodeServer + '/webrtc', {
                             query: {
                                 rtmp: JSON.stringify(rtmpUrls),
+                                livestreamStream: JSON.stringify({ publisherId: livestreamStream.fields.publisherId, streamName: livestreamStream.fields.name }),
                                 localInfo: JSON.stringify(_localInfo),
                                 platform: platform
                             },
@@ -133,10 +134,10 @@
         
                     }
         
-                    function startStreaming(rtmpUrls, service) {
+                    function startStreaming(rtmpUrls, service, livestreamStream) {
                         log('startStreaming', rtmpUrls);
                         //creteEmptyVideo();
-                        connect(rtmpUrls, service, function () {
+                        connect(rtmpUrls, service, livestreamStream, function () {
                             log('startStreaming connected');
         
                             if(_veryFirstBlobs.length != 0 && _streamingSocket[service] != null) {
