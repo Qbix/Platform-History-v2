@@ -86,14 +86,15 @@ Q.Tool.define('Users/pile', function () {
 					return;
 				}
 				var l = tool.avatarElements.length;
-				for (var i=1; i<l; ++i) {
-					tool.avatarElements[(tool.cycleIndex + i) % l].style.zIndex = i;
-					this.removeClass('Users_pile_top');
-				}
 				var e = tool.avatarElements[tool.cycleIndex];
 				e.style.zIndex = l + 1;
 				if (tool.caption) {
 					tool.caption.style.zIndex = l + 2;
+				}
+				for (var i=1; i<l; ++i) {
+					e = tool.avatarElements[(tool.cycleIndex + i) % l];
+					e.style.zIndex = i;
+					this.removeClass('Users_pile_top');
 				}
 				e.addClass('Users_pile_top');
 				prevCycleIndex = tool.cycleIndex;
