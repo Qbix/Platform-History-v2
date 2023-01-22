@@ -217,13 +217,13 @@ Q.Template.set('Streams/answer/composer',
 			<option value="option.exclusive">{{questions.answerOptionExclusive}}</option>
 			<option value="text">{{questions.answerText}}</option>
 		</select>
-		<input name="value" />
+		<input name="value" enterkeyhint="send" />
 		<button name="save" type="button" class="Q_button">{{questions.Save}}</button>`,
 {text: ['Streams/content']}
 );
 Q.Template.set("Streams/answer/view",
 `{{#ifEquals type "text"}}
-		<input placeholder="{{content}}" type="text" value="{{extra}}">
+		<input placeholder="{{content}}" type="text" value="{{extra}}" enterkeyhint="send">
 		<button class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
 	{{/ifEquals}}
 	{{#ifEquals type "option"}}
