@@ -256,10 +256,10 @@
 	line-height: 1em;
 	border-bottom: 1px solid #000;
 	width: 100%;
-	text-align: left;
+	text-align: start;
 }
 .Streams_question_preview_tool .Streams_question_subtitle {
-	text-align: left;
+	text-align: start;
 }
 .Streams_question_preview_tool .Streams_preview_icon {
 	display: none;
