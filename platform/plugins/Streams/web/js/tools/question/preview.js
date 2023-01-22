@@ -169,7 +169,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						});
 					});
 
-					$("form", answerTool.element).on('submit' function () {
+					$("form", answerTool.element).on('submit', function () {
 						var $text = $("input[type=text]", answerTool.element);
 						if (!$text.length) {
 							console.warn("text element not found");
