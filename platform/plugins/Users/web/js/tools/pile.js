@@ -80,7 +80,6 @@ Q.Tool.define('Users/pile', function () {
 		if (state.cycle && state.cycle.interval) {
 			tool.cycleIndex = 0;
 			tool.element.addClass('Users_pile_cycling');
-			var prevCycleIndex = -1;
 			tool.cycleInterval = setInterval(function () {
 				if (!tool.avatarElements.length) {
 					return;
@@ -91,13 +90,12 @@ Q.Tool.define('Users/pile', function () {
 				if (tool.caption) {
 					tool.caption.style.zIndex = l + 2;
 				}
+				e.addClass('Users_pile_top');
 				for (var i=1; i<l; ++i) {
 					e = tool.avatarElements[(tool.cycleIndex + i) % l];
 					e.style.zIndex = i;
 					e.removeClass('Users_pile_top');
 				}
-				e.addClass('Users_pile_top');
-				prevCycleIndex = tool.cycleIndex;
 				tool.cycleIndex = (tool.cycleIndex + 1) % tool.avatarElements.length;
 			}, state.cycle.interval);
 		} else {
