@@ -2862,7 +2862,10 @@
 	Q.Tool.define({
 		"Users/avatar": "{{Users}}/js/tools/avatar.js",
 		"Users/list": "{{Users}}/js/tools/list.js",
-		"Users/pile": "{{Users}}/js/tools/pile.js",
+		"Users/pile": {
+			js: "{{Users}}/js/tools/pile.js",
+			css: "{{Users}}/css/tools/pile.css"
+		},
 		"Users/labels": "{{Users}}/js/tools/labels.js",
 		"Users/contacts": "{{Users}}/js/tools/contacts.js",
 		"Users/status": "{{Users}}/js/tools/status.js",
