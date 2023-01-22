@@ -16,6 +16,8 @@ var Users = Q.Users;
  * @param {Object} [options.avatar] any options for the avatar tools
  * @param {Number} [options.limit=3] the actual number of avatars to render
  * @param {Number} [options.rotate=20] maximum +/- degrees of "whimsical" random rotation
+ * @param {Object} [options.cycle={}] options to cycle through the pile
+ * @param {Number} [options.cycle.interval] how quickly to cycle through the pile, if at all
  * @param {Number|String} [options.caption] you can use this to e.g. display some number of users, or set to null to hide it
  */
 Q.Tool.define('Users/pile', function () {
@@ -34,6 +36,9 @@ Q.Tool.define('Users/pile', function () {
 	onLoaded: new Q.Event(),
 	clickable: false,
 	rotate: 10,
+	cycle: {
+		interval: 500
+	},
 	avatar: {
 		icon: 40
 	}
@@ -45,6 +50,7 @@ Q.Tool.define('Users/pile', function () {
 		var tool = this;
 		var state = tool.state;
 		var limit = state.limit;
+		tool.avatarElements = [];
 		Q.removeElement(tool.element.children || tool.element.childNodes);
 		Q.each(state.userIds, function (k, userId) {
 			if (--limit < 0) {
@@ -58,6 +64,7 @@ Q.Tool.define('Users/pile', function () {
 				element.style.transform = 'rotate(' + r + 'deg)';
 			}
 			tool.element.appendChild(element);
+			tool.avatarElements.push(element);
 		});
 		tool.caption = document.createElement('div');
 		tool.caption.addClass('Users_pile_caption');
@@ -67,6 +74,28 @@ Q.Tool.define('Users/pile', function () {
 			tool.caption.style.display = 'none';
 		}
 		Q.activate(tool.element);
+		if (tool.cycleInterval) {
+			clearInterval(tool.cycleInterval);
+		}
+		if (state.cycle && state.cycle.interval) {
+			tool.cycleIndex = 0;
+			tool.element.addClass('Users_pile_cycling');
+			tool.cycleInterval = setInterval(function () {
+				if (!tool.avatarElements.length) {
+					return;
+				}
+				Q.each(tool.avatarElements, function (i) {
+					this.style.zIndex = i;
+					this.removeClass('Users_pile_top');
+				});
+				var e = tool.avatarElements[tool.cycleIndex];
+				e.style.zIndex = tool.avatarElements.length + 1;
+				e.addClass('Users_pile_top');
+				tool.cycleIndex = (tool.cycleIndex + 1) % tool.avatarElements.length;
+			}, state.cycle.interval);
+		} else {
+			tool.element.removeClass('Users_pile_cycling');
+		}
 	}
 });
 
