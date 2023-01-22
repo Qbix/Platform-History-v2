@@ -489,41 +489,6 @@ a.Users_activation_resend:active {
 	background: rgb(128 128 128 / 20%);
 }
 
-.Users_pile_tool {
-    width: 40px;
-    height: 40px;
-	position: relative;
-	overflow: visible;
-}
-.Users_pile_caption {
-    position: absolute;
-    color: white;
-    z-index: 10;
-    text-align: right;
-    right: -10px;
-    top: -10px;
-    text-shadow: 2px 2px rgba(0,0,0,0.5);
-    background: rgba(80,80,80, 0.5);
-    padding: 2px 5px;
-    border-radius: 100px;
-}
-.Users_pile_tool .Users_avatar_tool {
-	position: absolute;
-	top: 0;
-	left: 0;
-	min-width: 40px;
-	min-height: 40px;
-}
-.Users_pile_tool .Users_avatar_tool img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 40px;
-	height: 40px;
-	border-radius: 2px;
-	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
-}
-
 .Users_getintouch_tool button {
 	background: transparent;
 	border: 1px solid #777;

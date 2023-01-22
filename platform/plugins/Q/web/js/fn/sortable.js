@@ -224,6 +224,11 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			}, state.lift.animate);
 		}
 		lifted = true;
+		$item.parents().each(function () {
+			$(this).on('scroll.Q_sortable', function () {
+				return false; // don't scroll parents while we are dragging
+			});
+		});
 		Q.handle(state.onLift, $this, [this, {
 			event: event,
 			$dragged: $dragged,
@@ -309,6 +314,10 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				params.target = params.$placeholder.next()[0];
 			}
 		}
+
+		$item.parents().each(function () {
+			$(this).off('scroll.Q_sortable');
+		});
 
 		lifted = false;
 		if (revert && $scrolling) {

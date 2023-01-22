@@ -69,6 +69,11 @@ body { margin: 0; }
 @keyframes Q_blink {
 	50% { border-color: #ff0000; }
 }
+@keyframes Q_fadeIn {
+	0% { visibility: hidden; }
+	0.001% { visibility: visible; opacity: 0; }
+	100% { visibility: visible; opacity: 1; }
+}
 
 /* Common Q classes */
 .Q_hide { display: none !important; }
@@ -129,6 +134,9 @@ body { margin: 0; }
 }
 .Q_pulsate {
 	animation: Q_pulsate 3s ease-in-out infinite alternate;
+}
+.Q_fadeIn {
+	animation: Q_fadeIn 300ms ease-in-out forwards;
 }
 
 .Q_clear{ clear: both; }
@@ -712,6 +720,19 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_errorFlash {
 	background-image: none !important;
 	animation: Q_errorFlash 2s ease-in-out;
+}
+
+@-webkit-keyframes Q_live {
+	0%   { background-color: rgba(150, 150, 150, 0); }
+	50% { background-color: rgba(150, 150, 150, 0.5); }
+}
+@keyframes Q_live {
+	0%   { background-color: rgba(150, 150, 150, 0); }
+	50% { background-color: rgba(150, 150, 150, 0.5); }
+}
+.Q_live {
+	background-image:none !important;
+	animation: Q_live 2s ease-in-out infinite;
 }
 
 #notices_slot {

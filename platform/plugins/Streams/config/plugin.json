@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.1.7",
+				"version": "1.1.8",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -248,7 +248,7 @@
 						"description": ["Streams/content", ["notifications", "Streams/relatedFrom/*"]]
 					}
 				},
-				"updateRelations": {},
+				"updateRelations": false,
 				"defaults": {
 					"type": "Streams/text",
 					"title": "Untitled",
@@ -348,15 +348,21 @@
 				"defaults": {
 					"title": "Untitled question",
 					"icon": "Streams/question",
-					"writeLevel": 23
+					"readLevel": 20
 				}
 			},
 			"Streams/answer": {
 				"create": true,
 				"edit": true,
 				"defaults": {
-					"title": "Untitled answer",
-					"icon": "Streams/answer"
+					"icon": "Streams/answer",
+					"readLevel": 20,
+					"writeLevel": 0
+				},
+				"messages": {
+					"Streams/extra/changed": {
+						"post": true
+					}
 				}
 			},
 			"Streams/topic": {

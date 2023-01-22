@@ -467,8 +467,8 @@ Sp.notifyObservers = function (event, userId, message) {
  *			&lt;ofUserId&gt;. Such record is considered in access calculation.</li>
  *	</ol>
  * @method calculateAccess
- * @param {string} $asUserId=''
- * @param callback=null {function}
+ * @param {string|function} asUserId
+ * @param {function} [callback]
  *	Callback receives "error" as argument
  */
 Sp.calculateAccess = function(asUserId, callback) {
@@ -476,9 +476,10 @@ Sp.calculateAccess = function(asUserId, callback) {
 		callback = asUserId;
 		asUserId = null;
 	}
-	if (!callback) return;
+	if (!callback) {
+		return;
+	}
 	var subj = this;
-
 	var public_source = Streams.ACCESS_SOURCES['public'];
 
 	this.set('asUserId', asUserId);
@@ -492,78 +493,77 @@ Sp.calculateAccess = function(asUserId, callback) {
 	this.set('permissions_source', public_source);
 
 	if (!asUserId) {
-		callback.call(subj); // No need to fetch further access info. Just return what we got.
-		return;
+		return callback.call(subj); // No need to fetch further access info. Just return what we got.
 	}
 
 	if (asUserId && asUserId === this.fields.publisherId) {
 		// The publisher should have full access to every one of their streams.
 		this.publishedByFetcher = true;
-		callback.call(subj);
-		return;
+		return callback.call(subj);
 	}
 
 	var p = new Q.Pipe(['rows1', 'rows2'], function (res) {
 		var err = res.rows1[0] || res.rows2[0];
-		if (err) return callback.call(subj, err);
+		if (err) {
+			return callback.call(subj, err);
+		}
 		var rows = res.rows1[1].concat(res.rows2[1]);
 		var labels = [];
 		for (var i=0; i<rows.length; i++) {
-			if (rows[i].fields.ofContactLabel) labels.push(rows[i].fields.ofContactLabel);
+			if (rows[i].fields.ofContactLabel) {
+				labels.push(rows[i].fields.ofContactLabel);
+			}
 		}
-		if (labels.length) {
-			Users.Contact.SELECT('*').where({
-				'userId': subj.fields.publisherId,
-				'contactUserId': asUserId
-			}).execute(function (err, q1) {
-				if (err) callback.call(subj, err);
-				else {
-					Users.Contact.SELECT('*').where({
-						'userId':  subj.fields.publisherId,
-						'label': labels
-					}).execute(function (err, q2) {
-						if (err) callback.call(subj, err);
-						else {
-							// NOTE: we load arrays into memory and hope they are not too large
-							var result = q1.concat(q2), row;
-							var contact_source = Streams.ACCESS_SOURCES['contact'];
-							for (var i=0; i<result.length; i++) {
-								for (var j=0; j<rows.length; j++) {
-									row = rows[j];
-									if (row.fields.ofContactLabel !== result[i].fields.label) continue;
-									var readLevel =  subj.get('readLevel', 0);
-									var writeLevel = subj.get('writeLevel', 0);
-									var adminLevel = subj.get('adminLevel', 0);
-									if (row.fields.readLevel >= 0 && row.fields.readLevel > readLevel) {
-										subj.set('readLevel', row.fields.readLevel);
-										subj.set('readLevel_source', contact_source);
-									}
-									if (row.fields.writeLevel >= 0 && row.fields.writeLevel > writeLevel) {
-										subj.set('writeLevel', row.fields.writeLevel);
-										subj.set('writeLevel_source', contact_source);
-									}
-									if (row.fields.adminLevel >= 0 && row.fields.adminLevel > adminLevel) {
-										subj.set('adminLevel', row.fields.adminLevel);
-										subj.set('adminLevel_source', contact_source);
-									}
-									var p1 = subj.get('permissions', []);
-									var p2 = row.getAllPermissions();
-									var p3 = [].concat(p1);
-									for (var k=0; k<p2.length; ++k) {
-										if (p3.indexOf(p2[k]) < 0) {
-											p3.push(p2[k]);
-										}
-									}
-									subj.set('permissions', p3);
-									subj.set('permissions_source', contact_source);
-								}
-							}
-							_perUserData(subj, rows, callback);
+		if (!labels.length) {
+			return _perUserData(subj, rows, callback);
+		}
+		Users.Contact.SELECT('*').where({
+			'userId':  subj.fields.publisherId,
+			'label': labels,
+			'contactUserId': asUserId
+		}).execute(function (err, result) {
+			if (err) {
+				return callback.call(subj, err);
+			}
+
+			// NOTE: we load arrays into memory and hope they are not too large
+			var row;
+			var contact_source = Streams.ACCESS_SOURCES['contact'];
+			for (var i=0; i<result.length; i++) {
+				for (var j=0; j<rows.length; j++) {
+					row = rows[j];
+					if (row.fields.ofContactLabel !== result[i].fields.label) {
+						continue;
+					}
+					var readLevel =  subj.get('readLevel', 0);
+					var writeLevel = subj.get('writeLevel', 0);
+					var adminLevel = subj.get('adminLevel', 0);
+					if (row.fields.readLevel >= 0 && row.fields.readLevel > readLevel) {
+						subj.set('readLevel', row.fields.readLevel);
+						subj.set('readLevel_source', contact_source);
+					}
+					if (row.fields.writeLevel >= 0 && row.fields.writeLevel > writeLevel) {
+						subj.set('writeLevel', row.fields.writeLevel);
+						subj.set('writeLevel_source', contact_source);
+					}
+					if (row.fields.adminLevel >= 0 && row.fields.adminLevel > adminLevel) {
+						subj.set('adminLevel', row.fields.adminLevel);
+						subj.set('adminLevel_source', contact_source);
+					}
+					var p1 = subj.get('permissions', []);
+					var p2 = row.getAllPermissions();
+					var p3 = [].concat(p1);
+					for (var k=0; k<p2.length; ++k) {
+						if (p3.indexOf(p2[k]) < 0) {
+							p3.push(p2[k]);
 						}
-					});
+					}
+					subj.set('permissions', p3);
+					subj.set('permissions_source', contact_source);
 				}
-			});
-		} else _perUserData(subj, rows, callback);
+			}
+			_perUserData(subj, rows, callback);
+		});
 	});
 
 	// Get the per-label access data
@@ -576,9 +576,9 @@ Sp.calculateAccess = function(asUserId, callback) {
 	}).execute(p.fill('rows1'));
 
 	Streams.Access.SELECT('*').where({
-		'publisherId': this.fields.publisherId,
-		'streamName': this.fields.type+"/",	// generic stream
-		'ofUserId': asUserId				// and specific user
+		'publisherId': ['', this.fields.publisherId],
+		'streamName': this.fields.type+"*",	// generic stream
+		'ofUserId': ['', asUserId]				// and specific user
 	}).execute(p.fill('rows2'));
 
 	function _perUserData(subj, rows, callback) {

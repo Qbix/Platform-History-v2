@@ -13954,7 +13954,7 @@ Q.prompt = function(message, callback, options) {
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
 			$('<div class="Q_buttons" />').append(
-				$('<input type="text" />').attr(attr), ' ',
+				$('<input type="text" enterkeyhint="go" />').attr(attr), ' ',
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
