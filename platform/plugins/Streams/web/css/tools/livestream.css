@@ -2,6 +2,11 @@
     padding: 10px;
 }
 
+/*start: video container*/
+.streams-livestream-video-inner {
+    display: flex;
+    justify-content: center;
+}
 .streams-livestream-video-iframe-con {
     display: flex;
     justify-content: center;
@@ -12,11 +17,53 @@
 .streams-livestream-participants-con {
     margin-top: 10px;
 }
+.streams-livestream-video-webcast-con {
+    width:560px;
+    height: 315px;
+}
+.streams-livestream-video-webcast-con .streams-livestream-video-webcast-stats {
+    position: absolute;
+    z-index: 9999999;
+    display: none;
+}
+.streams-livestream-video-webcast-con .streams-livestream-video-webcast-stats-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:10px;
+    padding-left: 10px;
+    min-height: 30px;
+    color: yellow;
+    background-color: black;
+}
+.streams-livestream-video-webcast-con .streams-livestream-video-webcast-stats-item.streams-livestream-video-webcast-stat-level .streams-livestream-video-webcast-stats-item-in {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.streams-livestream-video-webcast-con .streams-livestream-video-webcast-stats-item.streams-livestream-video-webcast-stat-local {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.streams-livestream-video-webcast-con .streams-livestream-video-webcast-stats-item.streams-livestream-video-webcast-stat-local .streams-livestream-video-webcast-stats-lp-id-color {
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+}
+.streams-livestream-video-webcast-con .streams-livestream-video-webcast-stats-item.streams-livestream-video-webcast-stat-follow .streams-livestream-video-webcast-stats-foll-col{
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+}
+/*end: video container*/
 
 /*start: livestreaming video tabs*/
 .streams-livestream-video-tabs-con {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow: hidden;
     padding: 5px;
 }
 .streams-livestream-video-tabs-inner {

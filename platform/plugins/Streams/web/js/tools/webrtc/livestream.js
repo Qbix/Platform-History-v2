@@ -50,7 +50,6 @@
                         return;
                     }
         
-                    console.log('this.relatedStreams', this.relatedStreams)
                     for (var key in this.relatedStreams) {
                         if (this.relatedStreams.hasOwnProperty(key)) {
                             tool.relatedStreams.push(this.relatedStreams[key]);
@@ -137,7 +136,6 @@
                 livestreamParticipantsTool.className = 'streams-livestream-participants-tool';
                 livestreamParticipantsCon.appendChild(livestreamParticipantsTool);
 
-                console.log('tool.publicChatStream', tool.publicChatStream.fields)
                 Q.activate(
                     Q.Tool.setUpElement(livestreamParticipantsTool, 'Streams/participants', {
                         publisherId: tool.publicChatStream.fields.publisherId,
@@ -201,7 +199,6 @@
             },
             syncLivestreamsList: function (messages) {
                 var tool = this;
-                console.log('syncLivestreamsList', messages);
                 let livestreamMessages = [];
                 for (let key in messages) {
                     if (messages.hasOwnProperty(key)) {
@@ -211,15 +208,12 @@
 
                 //group messages by livestream id in instructions
                 let livestreams = livestreamMessages.reduce(function(livestreams, item) {
-                    console.log('item', item);
                     let id = item.getInstruction('id');
                     const livestream = (livestreams[id] || []);
                     livestream.push(item);
                     livestreams[id] = livestream;
                     return livestreams;
                 }, {});
-
-                console.log('syncLivestreamsList livestreams', livestreams);
 
                 //if one group has 2 messages ("start" and "stop"), then livestream ended, otherwise - active
                 for (let key in livestreams) {
@@ -230,7 +224,6 @@
                         let livestreamingExists = null;
                         for(let a in tool.activeLivestreamings) {
                             let activeStreamData = tool.activeLivestreamings[a];
-                            console.log('syncLivestreamsList livestreams active', activeStreamData.id, instructions.id);
 
                             if(activeStreamData.id == instructions.id) {
                                 livestreamingExists = activeStreamData;
@@ -239,7 +232,6 @@
                         }
                         for(let n in tool.inactiveLivestreamings) {
                             let inactiveStreamData = tool.inactiveLivestreamings[n];
-                            console.log('syncLivestreamsList livestreams inactive', inactiveStreamData.id, instructions.id);
 
                             if(inactiveStreamData.id == instructions.id) {
                                 livestreamingExists = inactiveStreamData;
@@ -251,22 +243,19 @@
                         if(livestreamingExists != null) {
                             liveData = livestreamingExists;
                             livestreamingExists.messages = livestreamingExists.messages.concat(livestreams[key]);
-                            console.log('concat', livestreamingExists.messages, livestreams[key])
                         } else {
                             liveData = {
                                 id:instructions.id,
                                 linkToLive:instructions.linkToLive,
                                 platform:instructions.platform,
+                                roomId:instructions.roomId,
                                 messages:livestreams[key]
                             }
                         }
                         
                         if(liveData.messages.length == 1) {
-                            console.log('syncLivestreamsList add as active', liveData)
-
-                            tool.activeLivestreamings.push(liveData);
+                            tool.activeLivestreamings.unshift(liveData);
                         } else {
-                            console.log('syncLivestreamsList add as INactive', liveData)
                             tool.inactiveLivestreamings.push(liveData);
                             if(livestreamingExists) {
                                 for(let e = tool.activeLivestreamings.length - 1; e >= 0; e--) {
@@ -282,30 +271,114 @@
             },
             generateLivestreamVideo: function (livestreamData) {
                 var src, title;
-                if(livestreamData.platform == 'youtube') {
-                    let liveVideoId = livestreamData.linkToLive.split("/").pop();
-                    src = 'https://www.youtube.com/embed/' + liveVideoId;
-                    title = 'Youtube video player';
-                } else if(livestreamData.platform == 'twitch') {
-                    let twitchChannelName = livestreamData.linkToLive.split("/").pop();
-                    let parentDomain = location.origin.replace('https://', '');
-                    src = 'https://player.twitch.tv/?channel=' + twitchChannelName + '&parent=' + parentDomain;
-                    title = 'Twitch video player';
+                if(livestreamData.platform == 'youtube' || livestreamData.platform == 'twitch') {
+                    if(livestreamData.platform == 'youtube') {
+                        let liveVideoId = livestreamData.linkToLive.split("/").pop();
+                        src = 'https://www.youtube.com/embed/' + liveVideoId;
+                        title = 'Youtube video player';
+                    } else if(livestreamData.platform == 'twitch') {
+                        let twitchChannelName = livestreamData.linkToLive.split("/").pop();
+                        let parentDomain = location.origin.replace('https://', '');
+                        src = 'https://player.twitch.tv/?channel=' + twitchChannelName + '&parent=' + parentDomain;
+                        title = 'Twitch video player';
+                    }
+    
+                    let iframeContainer = document.createElement('DIV');
+                    iframeContainer.className = 'streams-livestream-video-iframe-con';
+                    let iframe = document.createElement('IFRAME');
+                    iframe.src = src;
+                    iframe.title = title;
+                    iframe.width = '560';
+                    iframe.height = '315';
+                    iframe.frameborder = 0;
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                    iframe.setAttribute('allowfullscreen', '');
+                    iframeContainer.appendChild(iframe);
+    
+                    return iframeContainer;
+                } else if(livestreamData.platform == 'Peer2Peer') {
+                    var broadcastCon = document.createElement('DIV');
+                    broadcastCon.className = 'streams-livestream-video-webcast-con';
+
+                    var statsDataCon = document.createElement('DIV');
+                    statsDataCon.className = 'streams-livestream-video-webcast-stats';
+                    broadcastCon.appendChild(statsDataCon);
+
+                    var levelCounterCon = document.createElement('DIV');
+                    levelCounterCon.className = 'streams-livestream-video-webcast-stats-item streams-livestream-video-webcast-stat-level';
+                    statsDataCon.appendChild(levelCounterCon);
+
+                    var levelCounter = document.createElement('DIV');
+                    levelCounter.className = 'streams-livestream-video-webcast-stats-item-in';
+                    levelCounterCon.appendChild(levelCounter);
+
+                    var localParticipantIdCon = document.createElement('DIV');
+                    localParticipantIdCon.className = 'streams-livestream-video-webcast-stats-item streams-livestream-video-webcast-stat-local';
+                    statsDataCon.appendChild(localParticipantIdCon);
+
+                    var localParticipantId = document.createElement('DIV');
+                    localParticipantId.className = 'streams-livestream-video-webcast-stats-lp-id-text';
+                    localParticipantIdCon.appendChild(localParticipantId);
+
+                    var localParticipantIdColor = document.createElement('DIV');
+                    localParticipantIdColor.className = 'streams-livestream-video-webcast-stats-lp-id-color';
+                    localParticipantIdCon.appendChild(localParticipantIdColor);
+
+                    var iFollowIdCon = document.createElement('DIV');
+                    iFollowIdCon.className = 'streams-livestream-video-webcast-stats-item streams-livestream-video-webcast-stat-follow';
+                    statsDataCon.appendChild(iFollowIdCon);
+
+                    var iFollowId = document.createElement('DIV');
+                    iFollowId.className = 'streams-livestream-video-webcast-stats-foll-id';
+                    iFollowIdCon.appendChild(iFollowId);
+
+                    var iFollowIdColor = document.createElement('DIV');
+                    iFollowIdColor.className = 'streams-livestream-video-webcast-stats-foll-col';
+                    iFollowIdCon.appendChild(iFollowIdColor);
+
+                    Q.addScript('{{Streams}}/js/tools/webrtc/broadcast.js', function () {
+                        Q.Streams.get(Q.Users.communityId, 'Streams/webcast/' + livestreamData.roomId, function (err, stream) {
+    
+                            if (!stream) return;
+    
+                            var socketServer = stream.getAttribute('nodeServer');
+    
+                            var broadcastClient = window.broadcastClient = window.WebRTCWebcastClient({
+                                mode: 'node',
+                                role: 'receiver',
+                                nodeServer: socketServer,
+                                roomName: livestreamData.roomId,
+                                //turnCredentials: turnCredentials,
+                            });
+    
+                            broadcastClient.init(function () {    
+                                var mediaElement = broadcastClient.mediaControls.getMediaElement();
+                                mediaElement.style.width = '100%';
+                                mediaElement.style.maxWidth = '100%';
+                                mediaElement.style.maxHeight = '100%';
+                                broadcastCon.appendChild(mediaElement);
+    
+                                localParticipantId.innerHTML = 'My ID: ' + (broadcastClient.localParticipant().sid).replace('/broadcast#', '');
+                            });
+    
+                            broadcastClient.event.on('trackAdded', onTrackAdded)
+                            broadcastClient.event.on('joinedCallback', function () {
+                                localParticipantIdColor.style.backgroundColor = broadcastClient.localParticipant().color;
+                            })
+    
+                            function onTrackAdded(track) {
+                                levelCounter.innerHTML = 'Webcast level: ' + track.participant.distanceToRoot;
+                                iFollowId.innerHTML = 'I follow: ' + track.participant.sid.replace('/broadcast#', '');
+                                iFollowIdColor.style.backgroundColor = track.participant.color;
+    
+                            }
+                        });
+                    });
+
+                    return broadcastCon;
+                    
                 }
-
-                let iframeContainer = document.createElement('DIV');
-                iframeContainer.className = 'streams-livestream-video-iframe-con';
-                let iframe = document.createElement('IFRAME');
-                iframe.src = src;
-                iframe.title = title;
-                iframe.width = '560';
-                iframe.height = '315';
-                iframe.frameborder = 0;
-                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-                iframe.setAttribute('allowfullscreen', '');
-                iframeContainer.appendChild(iframe);
-
-                return iframeContainer;
+                
             },
             videoTabsTool: {
                 tabs: [],
@@ -327,7 +400,12 @@
                         let livestreamVideoTabsItem = document.createElement('DIV');
                         livestreamVideoTabsItem.className = 'streams-livestream-video-tabs-tool-tab streams-livestream-video-tabs-tool-tab-streaming streams-livestream-video-tabs-tool-tab-' + livestreamData.platform;
                         livestreamVideoTabsItem.dataset.tabName = livestreamData.id;
-                        tool.videoContainerTabsEl.appendChild(livestreamVideoTabsItem);
+                        if(tool.videoContainerTabsEl.childElementCount != null) {
+                            tool.videoContainerTabsEl.insertBefore(livestreamVideoTabsItem, tool.videoContainerTabsEl.firstChild);
+                        } else {
+                            tool.videoContainerTabsEl.appendChild(livestreamVideoTabsItem);
+                        }
+
                         let livestreamVideoTabsItemTitle = document.createElement('DIV');
                         livestreamVideoTabsItemTitle.className = 'streams-livestream-video-tabs-tool-tab-title';
                         livestreamVideoTabsItemTitle.innerHTML = livestreamData.platform;
@@ -395,16 +473,10 @@
                 },
                 tabHandler: function(e) {
                     var tool = this;
-
-                    console.log('videoTabsTool: tabHandler', this, e);
                     var clickedTabName = e.currentTarget.dataset.tabName;
-                    console.log('videoTabsTool: tabHandler clickedTabName', clickedTabName);
-
                     var clickedTabObject = null;
                     for (let i in tool.videoTabsTool.tabs) {
                         let tab = tool.videoTabsTool.tabs[i];
-
-                        console.log('videoTabsTool: tabHandler for tab', tab);
                         if (tab.key != clickedTabName) {
                             tab.tabElement.classList.remove('streams-livestream-video-tabs-tool-tab-active')
                         }
@@ -415,7 +487,6 @@
                             clickedTabObject = tab;
                         }
                     }
-                    console.log('videoTabsTool: tabHandler clickedTabObject',clickedTabObject);
 
                     if(!clickedTabObject) return;
 
@@ -443,8 +514,6 @@
                 ],
                 tabHandler: function(e) {
                     var tool = this;
-
-                    console.log('tabHandler', this, e);
                     var clickedTabName = e.currentTarget.dataset.tabName;
                     var clickedTabObject = null;
                     for (let i in tool.chatTabsTool.tabs) {

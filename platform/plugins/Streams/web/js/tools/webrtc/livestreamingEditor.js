@@ -742,6 +742,7 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
+                            rtmpLiveURLInput.autocomplete = 'off';
                             rtmpLiveURLInput.name = 'rtmpUrl';
                             rtmpLiveURL.appendChild(rtmpLiveURLInput);
 
@@ -753,6 +754,7 @@
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
                             rtmpLiveStreamKeyInput.name = 'streamKey';
+                            rtmpLiveStreamKeyInput.autocomplete = 'off';
                             rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
 
                             var linkToLiveCon = document.createElement('LABEL');
@@ -763,6 +765,7 @@
                             linkToLiveInput.type = 'text';
                             linkToLiveInput.name = 'linkToLive';
                             linkToLiveInput.placeholder = 'Link to livestream';
+                            linkToLiveInput.autocomplete = 'off';
                             linkToLiveCon.appendChild(linkToLiveInput);
 
                             var startStreamingBtnCon = document.createElement('DIV');
@@ -827,6 +830,7 @@
                                 var rtmpLiveURLInput = document.createElement('INPUT');
                                 rtmpLiveURLInput.type = 'text';
                                 rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
+                                rtmpLiveURLInput.autocomplete = 'off';
                                 rtmpLiveURL.appendChild(rtmpLiveURLInput);
 
                                 var rtmpLiveStreamKey = document.createElement('LABEL');
@@ -836,6 +840,7 @@
                                 var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                                 rtmpLiveStreamKeyInput.type = 'password';
                                 rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+                                rtmpLiveStreamKeyInput.autocomplete = 'off';
                                 rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
 
                                 var linkToLiveCon = document.createElement('LABEL');
@@ -845,6 +850,7 @@
                                 var linkToLiveInput = document.createElement('INPUT');
                                 linkToLiveInput.type = 'text';
                                 linkToLiveInput.placeholder = 'Link to livestream';
+                                linkToLiveInput.autocomplete = 'off';
                                 linkToLiveCon.appendChild(linkToLiveInput);
 
                                 rtmpStreamingSettings.insertBefore(rtmpLiveItem, rtmpStreamingSettings.lastChild);
@@ -935,8 +941,11 @@
 
                     let peerToPeerStreaming = (function() {
                         var _peerToPeerStreamingSection = null;
+                        var _broadcastClient = null;
 
                         function createSectionElement() {
+                            var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
+
                             var recordingCon = _peerToPeerStreamingSection = document.createElement('DIV');
                             recordingCon.className = 'live-editor-stream-to-section-p2p'
 
@@ -993,9 +1002,7 @@
                             stopRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.stop", tool.text);
                             stopRecordingBtnCon.appendChild(stopRecordingBtn);
 
-                            var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
-
-                            var broadcastClient;
+                            
                             startRecordingBtn.addEventListener('click', function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
@@ -1011,11 +1018,16 @@
                                         var turnCredentials = response.slots.room.turnCredentials;
                                         var socketServer = response.slots.room.socketServer;
 
-                                        broadcastClient = window.WebRTCWebcastClient({
+                                        _broadcastClient = window.WebRTCWebcastClient({
                                             mode: 'node',
                                             role: 'publisher',
                                             nodeServer: socketServer,
                                             roomName: roomId,
+                                            livestreamStreamData: {
+                                                publisherId: tool.livestreamStream.fields.publisherId, 
+                                                streamName: tool.livestreamStream.fields.name, 
+                                                livestreamSessionId: generateId()
+                                            }
                                             //turnCredentials: turnCredentials,
                                         });
                                         if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
@@ -1023,24 +1035,23 @@
                                         activeRecordingSection.style.display = 'block';
                                         showLiveIndicator('p2p');
 
-                                        broadcastClient.init(function () {
+                                        _broadcastClient.init(function () {
                                             tool.livestreamingCanvasComposerTool.canvasComposer.captureStream();
                                             var stream = tool.livestreamingCanvasComposerTool.canvasComposer.getMediaStream();
 
                                             if (stream != null) stream = stream.clone();
 
-                                            broadcastClient.mediaControls.publishStream(stream);
+                                            _broadcastClient.mediaControls.publishStream(stream);
                                             tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastStarted', roomId)
                                             tool.state.webrtcSignalingLib.event.dispatch('webcastStarted', {participant: tool.state.webrtcSignalingLib.localParticipant()});
                                         });
 
-                                        broadcastClient.event.on('disconnected', function () {
+                                        _broadcastClient.event.on('disconnected', function () {
                                             tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastEnded')
                                             tool.state.webrtcSignalingLib.event.dispatch('webcastEnded', {participant: tool.state.webrtcSignalingLib.localParticipant()});
 
                                         });
 
-                                        tool.broadcastClient = broadcastClient;
                                     }, {
                                         method: 'post',
                                         fields: {
@@ -1055,7 +1066,7 @@
                             stopRecordingBtn.addEventListener('click', function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
-                                broadcastClient.disconnect();
+                                _broadcastClient.disconnect();
 
                                 if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
                                 activeRecordingSection.style.display = 'none';

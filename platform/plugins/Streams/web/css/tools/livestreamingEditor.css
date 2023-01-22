@@ -973,6 +973,13 @@
     border-right: 1px solid #474747;
     overflow-y: auto;
 }
+.live-editor-popup-chat-inner .live-editor-popup-chat-tabs-con .Streams_preview_tool{
+    outline: none;
+    background-color: rgb(255 255 255 / 17%);
+}
+.live-editor-popup-chat-inner .live-editor-popup-chat-tabs-con .Streams_preview_tool .Streams_preview_icon{
+    border: none;
+}
 /*end: container for text chats (public and private*/
 
 

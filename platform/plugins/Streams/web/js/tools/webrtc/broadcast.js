@@ -25,6 +25,7 @@ window.WebRTCWebcastClient = function (options){
         streams: null,
         disconnectTime: 3000,
         turnCredentials: null,
+        livestreamStreamData: null,
         debug: null,
     };
 
@@ -2498,7 +2499,9 @@ window.WebRTCWebcastClient = function (options){
                 room:options.roomName,
                 role: options.role,
                 isiOS: _isiOS,
-                info: _localInfo});
+                livestreamStreamData: options.livestreamStreamData,
+                info: _localInfo
+            });
         }
 
         return {
@@ -2705,7 +2708,7 @@ window.WebRTCWebcastClient = function (options){
             if(app.state == 'reconnecting') {
                 app.state = 'connected';
                 log('app.init: socket: RECONNECTED')
-                socket.emit('Streams/broadcast/joined', {sid:localParticipant.sid, room:options.roomName, isiOS: _isiOS, info: _localInfo});
+                socket.emit('Streams/broadcast/joined', {sid:localParticipant.sid, room:options.roomName, isiOS: _isiOS, info: _localInfo, livestreamStreamData: options.livestreamStreamData});
                 localParticipant.sid = socket.id;
                 return;
             }
