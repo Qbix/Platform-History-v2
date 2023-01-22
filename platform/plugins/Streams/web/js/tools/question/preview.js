@@ -169,10 +169,11 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						});
 					});
 
-					$("button[name=send]", answerTool.element).on(Q.Pointer.click, function () {
+					$("form", answerTool.element).on('submit' function () {
 						var $text = $("input[type=text]", answerTool.element);
 						if (!$text.length) {
-							return console.warn("text element not found");
+							console.warn("text element not found");
+							return false;
 						}
 
 						Q.req('Streams/answer', ["content"], _reqCallback.bind($text), {
@@ -181,6 +182,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 								content: $text.val()
 							})
 						});
+						return false;
 					});
 				}, this);
 			}, tool);

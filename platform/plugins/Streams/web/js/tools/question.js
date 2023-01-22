@@ -203,7 +203,7 @@ Q.Tool.define("Streams/question", function(options) {
 			});
 
 			// submit question
-			$("form", tool.element).on('submit', function () {
+			$("button[name=submit]", tool.element).on(Q.Pointer.fastclick, function () {
 				var answers = {
 					options: [],
 					textarea: $("textarea", $answers).val() || null
@@ -215,11 +215,10 @@ Q.Tool.define("Streams/question", function(options) {
 				});
 
 				if (!answers.textarea && Q.isEmpty(answers.options)) {
-					Q.alert(tool.text.ErrorAnswers);
-				} else {
-					Q.handle(state.onSubmit, tool, [answers]);
+					return Q.alert(tool.text.ErrorAnswers);
 				}
-				return false;
+
+				Q.handle(state.onSubmit, tool, [answers]);
 			});
 		});
 	}
