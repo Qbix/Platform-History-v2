@@ -94,7 +94,7 @@ Q.Tool.define('Users/pile', function () {
 				for (var i=1; i<l; ++i) {
 					e = tool.avatarElements[(tool.cycleIndex + i) % l];
 					e.style.zIndex = i;
-					this.removeClass('Users_pile_top');
+					e.removeClass('Users_pile_top');
 				}
 				e.addClass('Users_pile_top');
 				prevCycleIndex = tool.cycleIndex;
