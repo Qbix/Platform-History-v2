@@ -190,6 +190,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 						dontSubscribe: true
 					}]);
 					$(this).addClass("Q_working");
+					return false;
 				}
 			}
 		});
