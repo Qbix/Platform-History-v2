@@ -81,7 +81,7 @@ Q.Tool.define('Users/pile', function () {
 			tool.cycleIndex = 0;
 			tool.element.addClass('Users_pile_cycling');
 			tool.cycleInterval = setInterval(function () {
-				if (!tool.avatarElements.length) {
+				if (tool.avatarElements.length <= 1) {
 					return;
 				}
 				var l = tool.avatarElements.length;
