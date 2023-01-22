@@ -207,6 +207,8 @@ function _Streams_participants(options) {
 				return;
 			}
 			tool.stream = this;
+			Q.Streams.Stream.onRefresh(state.publisherId, state.streamName)
+			.set(tool.refresh.bind(tool), tool);
 			var i = 0, c = 0;
 			$te.removeClass('Streams_participants_loading');
 			Q.Tool.clear(tool.$avatars[0]);

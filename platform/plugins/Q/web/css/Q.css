@@ -69,6 +69,11 @@ body { margin: 0; }
 @keyframes Q_blink {
 	50% { border-color: #ff0000; }
 }
+@keyframes Q_fadeIn {
+	0% { visibility: hidden; }
+	0.001% { visibility: visible; opacity: 0; }
+	100% { visibility: visible; opacity: 1; }
+}
 
 /* Common Q classes */
 .Q_hide { display: none !important; }
@@ -129,6 +134,9 @@ body { margin: 0; }
 }
 .Q_pulsate {
 	animation: Q_pulsate 3s ease-in-out infinite alternate;
+}
+.Q_fadeIn {
+	animation: Q_fadeIn 300ms ease-in-out forwards;
 }
 
 .Q_clear{ clear: both; }
