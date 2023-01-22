@@ -90,6 +90,9 @@ Q.Tool.define('Users/pile', function () {
 				});
 				var e = tool.avatarElements[tool.cycleIndex];
 				e.style.zIndex = tool.avatarElements.length + 1;
+				if (tool.caption) {
+					tool.caption.style.zIndex = tool.avatarElements.length + 2;
+				}
 				e.addClass('Users_pile_top');
 				tool.cycleIndex = (tool.cycleIndex + 1) % tool.avatarElements.length;
 			}, state.cycle.interval);
