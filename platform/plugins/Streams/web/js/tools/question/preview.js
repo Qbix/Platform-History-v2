@@ -295,8 +295,10 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 Q.Template.set('Streams/question/composer',
 	`<div class="Streams_question_title"></div>
 	<div class="Streams_question_subtitle"></div>
-	<label><input type="checkbox" name="hideUntilAnswered" {{#if hideUntilAnswered}}checked="checked"{{/if}}> {{questions.HideUntilAnswered}}</label>
-	<label><input type="checkbox" name="cantChangeAnswers" {{#if cantChangeAnswers}}checked="checked"{{/if}}> {{questions.CantChangeAnswers}}</label>
+	<div class="Streams_question_attributes>
+		<label><input type="checkbox" name="hideUntilAnswered" {{#if hideUntilAnswered}}checked="checked"{{/if}}> {{questions.HideUntilAnswered}}</label>
+		<label><input type="checkbox" name="cantChangeAnswers" {{#if cantChangeAnswers}}checked="checked"{{/if}}> {{questions.CantChangeAnswers}}</label>
+	</div>
 	<h2 class="Streams_question_head">{{questions.Answers}}</h2>
 	<div class="Streams_question_answers"></div>`,
 	{text: ['Streams/content']}
