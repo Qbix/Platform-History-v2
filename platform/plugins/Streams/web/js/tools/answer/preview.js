@@ -155,6 +155,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 			onActivate: function (dialog) {
 				var $select = $("select[name=type]", dialog);
 				var $input = $("input[name=value]", dialog);
+				var $form = $('form', dialog);
 
 				$select.on("change", function () {
 					var type = $select.val();
@@ -166,7 +167,9 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 					}
 				}).trigger("change");
 
-				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
+				$form.on('submit', _save);
+
+				function _save() {
 					var title = $input.val();
 					var content = title;
 
@@ -187,7 +190,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 						dontSubscribe: true
 					}]);
 					$(this).addClass("Q_working");
-				});
+				}
 			}
 		});
 	},
@@ -212,19 +215,23 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 });
 
 Q.Template.set('Streams/answer/composer',
-`<select name="type">
+	`<form action="">
+		<select name="type">
 			<option value="option">{{questions.answerOption}}</option>
 			<option value="option.exclusive">{{questions.answerOptionExclusive}}</option>
 			<option value="text">{{questions.answerText}}</option>
 		</select>
 		<input name="value" enterkeyhint="send" />
-		<button name="save" type="button" class="Q_button">{{questions.Save}}</button>`,
-{text: ['Streams/content']}
+		<button type="submit" name="save" type="button" class="Q_button">{{questions.Save}}</button>
+	</form>`,
+	{text: ['Streams/content']}
 );
 Q.Template.set("Streams/answer/view",
-`{{#ifEquals type "text"}}
-		<input placeholder="{{content}}" type="text" value="{{extra}}" enterkeyhint="send">
-		<button class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
+	`{{#ifEquals type "text"}}
+		<form action="">
+			<input placeholder="{{content}}" type="text" value="{{extra}}" enterkeyhint="send">
+			<button type="submit" class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
+		</form>
 	{{/ifEquals}}
 	{{#ifEquals type "option"}}
 		<label class='Streams_question_answer_container'><input type="checkbox" {{#if checked}}checked="checked"{{/if}} value="{{content}}"><span>{{content}}</span></label>
