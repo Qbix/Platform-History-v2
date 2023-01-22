@@ -228,7 +228,7 @@
 /* </Streams_pdf_preview> */
 
 /* <Streams_question_preview> */
-.Streams_dialog_newQuestion .Q_dialog_content,
+.Streams_dialog_editQuestion .Q_dialog_content,
 .Streams_dialog_answer .Q_dialog_content {
 	padding: 10px;
 	min-width: 300px;
@@ -237,8 +237,35 @@
 .Streams_question_preview_tool {
 	cursor: pointer;
 }
+.Streams_answer_preview_tool {
+	white-space: nowrap;
+}
+.Streams_question_preview_tool .Streams_preview_title,
+.Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool,
+.Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool .Q_inplace_tool_container {
+	width: 100%;
+}
+.Streams_question_preview_tool .Q_inplace_tool_static_container {
+	padding: 0;
+	overflow: hidden;
+	text-overflow: unset;
+}
+.Streams_question_preview_tool .Streams_preview_title {
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 1em;
+	border-bottom: 1px solid #000;
+	width: 100%;
+	text-align: center;
+}
+.Streams_question_preview_tool .Streams_question_subtitle {
+	text-align: center;
+}
+.Streams_question_preview_tool .Streams_preview_icon {
+	display: none;
+}
 .Streams_question_preview_tool + .Streams_related_tool {
-	margin-left: 40px;
+	margin-left: 20px;
 }
 .Streams_question_preview_tool + .Streams_related_tool:not(:last-of-type) {
 	margin-bottom: 20px;
@@ -246,12 +273,15 @@
 .Streams_question_preview_tool + .Streams_related_tool .Streams_related_composer {
 	display: none;
 }
+.Streams_question_preview_tool + .Streams_related_tool[data-hideUntilAnswered=true] .Streams_answer_participants:not(.Streams_participants_tool) {
+	display: none;
+}
+.Streams_question_preview_tool + .Streams_related_tool[data-hideUntilAnswered=true] .Streams_answer_preview_tool[data-participating=true] .Streams_answer_participants:not(.Streams_participants_tool) {
+	display: block;
+}
 .Streams_question_preview_tool:not(:last-of-type),
 .Streams_answer_preview_tool:not(:last-of-type) {
 	margin-bottom: 5px;
-}
-.Streams_answer_preview_tool .Streams_preview_icon {
-	visibility: hidden;
 }
 .Streams_answer_preview_tool .Users_avatar_tool {
 	margin-right: 5px;
@@ -266,6 +296,79 @@
 	white-space: normal;
 	padding-right: 30px;
 
+}
+.Streams_question_preview_tool .Streams_question_answers {
+	margin-top: 10px;
+	overflow: hidden;
+}
+.Streams_dialog_editQuestion .Streams_inplace_tool,
+.Streams_dialog_editQuestion .Streams_inplace_tool .Q_inplace_tool_container,
+.Streams_dialog_editQuestion .Streams_inplace_tool .Q_inplace_tool_container .Q_inplace_tool_static_container {
+	width: 100%;
+	height: 40px;
+}
+.Streams_dialog_editQuestion label {
+	display: block;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.Streams_answer_preview_tool label {
+	display: block;
+	padding: 5px 40px 5px 5px;
+	text-align: left;
+}
+.Streams_answer_preview_tool label span {
+	margin-left: 5px;
+}
+.Streams_answer_preview_tool[data-participants=false] .Streams_answer_participants {
+	display: none;
+}
+.Streams_answer_preview_tool[data-participants=true] .Streams_answer_participants:not(.Streams_participants_tool) {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 34px;
+	width: 34px;
+	text-align: center;
+	line-height: 34px;
+	border: 1px solid red;
+	border-radius: 50%;
+}
+.Streams_answer_preview_tool[data-participants=true] .Streams_answer_participants:empty {
+	display: none;
+}
+.Streams_answer_preview_tool[data-participants=true][data-type=text] input[type=text] {
+	width: calc(100% - 110px);
+}
+.Streams_dialog_editQuestion input[type=checkbox],
+.Streams_answer_preview_tool input[type=checkbox],
+.Streams_answer_preview_tool input[type=radio] {
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	transform: scale(2);
+}
+.Streams_answer_preview_tool input[type=text] {
+	width: calc(100% - 80px);
+	height: 37px;
+	vertical-align: middle;
+}
+
+.Streams_dialog_answer_composer select,
+.Streams_dialog_answer_composer input {
+	height: 40px;
+}
+.Streams_dialog_answer_composer select,
+.Streams_dialog_answer_composer select option {
+	font-size: 110%;
+}
+.Streams_dialog_answer_composer .Q_dialog_content {
+	white-space: nowrap;
+	padding: 5px 5px 0 5px;
+}
+.Streams_dialog_answer_composer .Q_dialog_content > * {
+	vertical-align: middle;
 }
 /* </Streams_question_preview> */
 

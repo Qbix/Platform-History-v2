@@ -58,7 +58,7 @@ function _Streams_participants(options) {
 				tool.cssDisplay = $toolElement.css("display");
 				$toolElement.css("display", "none");
 			} else {
-				$toolElement.css("display", tool.cssDisplay || "block");
+				$toolElement.css("display", tool.cssDisplay && tool.cssDisplay!=="none" ? tool.cssDisplay : "block");
 			}
 		}
 	}, tool);
@@ -69,10 +69,15 @@ function _Streams_participants(options) {
 		tool.$elements[this.state.userId] = $(this.element);
 	});
 
+	// refresh tool in stream refresh
+	Q.Streams.Stream.onRefresh(state.publisherId, state.streamName).set(tool.refresh.bind(tool), tool);
+
 	tool.refresh();
 },
 
 {
+	publisherId: null,
+	streamName: null,
 	invite: {
 		userChooser: true,
 		appUrl: function () {
@@ -346,6 +351,8 @@ function _Streams_participants(options) {
 				state.overflowed = overflowed;
 			}
 		}, tool);
+
+		state.rendered = true;
 	},
 	/**
 	 * Check if avatar exists

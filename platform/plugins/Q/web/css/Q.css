@@ -722,6 +722,19 @@ html.Q_scanning body > .Q_scanning_code {
 	animation: Q_errorFlash 2s ease-in-out;
 }
 
+@-webkit-keyframes Q_live {
+	0%   { background-color: rgba(150, 150, 150, 0); }
+	50% { background-color: rgba(150, 150, 150, 0.5); }
+}
+@keyframes Q_live {
+	0%   { background-color: rgba(150, 150, 150, 0); }
+	50% { background-color: rgba(150, 150, 150, 0.5); }
+}
+.Q_live {
+	background-image:none !important;
+	animation: Q_live 2s ease-in-out infinite;
+}
+
 #notices_slot {
 	width: 100%;
 	z-index: 999999999;
