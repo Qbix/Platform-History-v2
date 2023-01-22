@@ -650,7 +650,7 @@
 		+ '  	</div>'
 		+ '  	<div class="Q_tabbing_item" data-content="link">'
 		+ '	   		<label>'
-		+ '				<input name="url" placeholder="{{text.setUrl}}" type="url">'
+		+ '				<input name="url" enterkeyhint="go" placeholder="{{text.setUrl}}" type="url">'
 		//+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
 		+ '			</label>'
 		+ '			<div class="Websites_webpage_composer_preview"></div>'
