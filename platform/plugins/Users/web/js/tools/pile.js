@@ -37,7 +37,7 @@ Q.Tool.define('Users/pile', function () {
 	clickable: false,
 	rotate: 10,
 	cycle: {
-		interval: 500
+		interval: 1000
 	},
 	avatar: {
 		icon: 40

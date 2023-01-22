@@ -851,10 +851,10 @@
 	margin: 5px auto 0;
 }
 
-.Streams_preview_tool .streams_chat_unseen.Streams_preview_nonzero {
+.Streams_preview_tool .Streams_chat_unseen.Streams_preview_nonzero {
 	display: block;
 }
-.Streams_preview_tool .streams_chat_unseen {
+.Streams_preview_tool .Streams_chat_unseen {
 	top: 50%;
 	transform: translateY(-50%);
 	right: 2px;
