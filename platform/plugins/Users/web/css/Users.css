@@ -658,6 +658,6 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	line-height: 40px;
 }
 
-.Users_pile_top {
+.Users_pile_top img {
 	animation: Q_fadeIn 300ms ease-in-out forwards;
 }
