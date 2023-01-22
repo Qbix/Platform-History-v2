@@ -301,6 +301,9 @@
 	margin-top: 10px;
 	overflow: hidden;
 }
+.Streams_question_attributes {
+    padding: 10px;
+}
 .Streams_dialog_editQuestion .Streams_inplace_tool,
 .Streams_dialog_editQuestion .Streams_inplace_tool .Q_inplace_tool_container,
 .Streams_dialog_editQuestion .Streams_inplace_tool .Q_inplace_tool_container .Q_inplace_tool_static_container {
