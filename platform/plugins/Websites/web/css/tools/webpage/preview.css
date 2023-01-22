@@ -14,13 +14,13 @@
 	cursor: pointer;
 }
 .Websites_webpage_preview_tool[data-mode=title] .Users_pile_tool,
-.Websites_webpage_preview_tool[data-mode=title] .streams_chat_unseen {
+.Websites_webpage_preview_tool[data-mode=title] .Streams_chat_unseen {
 	display: none;
 }
 .Websites_webpage_preview_tool.Streams_chat_preview_noParticipants {
 	display: none;
 }
-.Websites_webpage_preview_tool .streams_chat_unseen {
+.Websites_webpage_preview_tool .Streams_chat_unseen {
 	display: none;
 	position: absolute;
 	border-radius: 50%;
@@ -35,18 +35,6 @@
 	background-color: #cc5555;
 	top: 10px;
 	right: 10px;
-}
-.Websites_webpage_preview_tool .streams_chat_unseen.Streams_preview_nonzero {
-	display: block;
-}
-.Websites_webpage_preview_tool[data-participants] .streams_chat_unseen {
-	top: 23px;
-	right: 2px;
-	height: 25px;
-	min-width: 25px;
-	line-height: 25px;
-	font-size: 14px;
-	font-weight: normal;
 }
 .Websites_webpage_preview_tool .Users_pile_tool {
 	position: absolute;

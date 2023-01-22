@@ -59,7 +59,7 @@
 }
 .Streams_chat_tool .Websites_webpage_chat_preview .Streams_aspect_interests img,
 .Websites_webpage_chat_preview .Streams_aspect_interests[data-hide=true],
-.Streams_chat_tool .Websites_webpage_chat_preview .streams_chat_unseen,
+.Streams_chat_tool .Websites_webpage_chat_preview .Streams_chat_unseen,
 .Streams_chat_tool .Websites_webpage_chat_preview .streams_chat_participants,
 .Websites_webpage_chat .Websites_webpage_chat_preview .Streams_aspect_description {
 	display: none;

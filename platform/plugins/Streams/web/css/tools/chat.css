@@ -6,7 +6,7 @@
 	height: 55px;
 }
 .Streams_chat_preview_tool[data-mode=title] .Users_pile_tool,
-.Streams_chat_preview_tool[data-mode=title] .streams_chat_unseen {
+.Streams_chat_preview_tool[data-mode=title] .Streams_chat_unseen {
 	display: none;
 }
 
@@ -71,7 +71,7 @@
 .Streams_chat_preview_tool.Streams_chat_preview_noParticipants {
 	display: none;
 }
-.Streams_chat_preview_tool .streams_chat_unseen {
+.Streams_chat_preview_tool .Streams_chat_unseen {
 	display: none;
 	position: absolute;
 	border-radius: 50%;
@@ -87,7 +87,7 @@
 	top: 10px;
 	right: 10px;
 }
-.Streams_chat_preview_tool .streams_chat_unseen.Streams_preview_nonzero {
+.Streams_chat_preview_tool .Streams_chat_unseen.Streams_preview_nonzero {
 	display: block;
 }
 .Streams_chat_preview_tool .Users_pile_tool {
@@ -95,7 +95,7 @@
 	right: 10px;
 	top: 2px;
 }
-.Streams_chat_preview_tool[data-participants] .streams_chat_unseen {
+.Streams_chat_preview_tool[data-participants] .Streams_chat_unseen {
 	top: 23px;
 	right: 2px;
 	height: 25px;

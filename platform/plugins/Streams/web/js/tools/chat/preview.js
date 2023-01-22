@@ -72,7 +72,7 @@
 
 				// setup unseen element
 				Q.Streams.Message.Total.setUpElement(
-					$(".streams_chat_unseen", $te)[0],
+					$(".Streams_chat_unseen", $te)[0],
 					stream.fields.publisherId,
 					stream.fields.name,
 					'Streams/chat/message',
@@ -135,7 +135,7 @@
 		'		<div class="Streams_chat_preview_info Streams_aspect_interests">{{info}}</div>' +
 		'	</div>' +
 		'	<div class="streams_chat_participants"></div>' +
-		'	<div class="streams_chat_unseen"></div>' +
+		'	<div class="Streams_chat_unseen"></div>' +
 		'</div>'
 	);
 })(Q, Q.$, window);
