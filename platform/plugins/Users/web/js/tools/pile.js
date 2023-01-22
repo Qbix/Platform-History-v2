@@ -80,20 +80,23 @@ Q.Tool.define('Users/pile', function () {
 		if (state.cycle && state.cycle.interval) {
 			tool.cycleIndex = 0;
 			tool.element.addClass('Users_pile_cycling');
+			var prevCycleIndex = -1;
 			tool.cycleInterval = setInterval(function () {
 				if (!tool.avatarElements.length) {
 					return;
 				}
-				Q.each(tool.avatarElements, function (i) {
-					this.style.zIndex = i;
+				var l = tool.avatarElements.length;
+				for (var i=1; i<l; ++i) {
+					tool.avatarElements[(tool.cycleIndex + i) % l].style.zIndex = i;
 					this.removeClass('Users_pile_top');
-				});
+				}
 				var e = tool.avatarElements[tool.cycleIndex];
-				e.style.zIndex = tool.avatarElements.length + 1;
+				e.style.zIndex = l + 1;
 				if (tool.caption) {
-					tool.caption.style.zIndex = tool.avatarElements.length + 2;
+					tool.caption.style.zIndex = l + 2;
 				}
 				e.addClass('Users_pile_top');
+				prevCycleIndex = tool.cycleIndex;
 				tool.cycleIndex = (tool.cycleIndex + 1) % tool.avatarElements.length;
 			}, state.cycle.interval);
 		} else {
