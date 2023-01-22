@@ -857,11 +857,17 @@
 .Streams_preview_tool .Streams_chat_unseen {
 	top: 50%;
 	transform: translateY(-50%);
-	right: 2px;
-	height: 25px;
-	min-width: 25px;
-	line-height: 25px;
-	font-size: 14px;
-	font-weight: normal;
-	z-index: 99999;
+	display: none;
+	position: absolute;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	height: 30px;
+	min-width: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	background-color: #cc5555;
+	right: 10px;
 }

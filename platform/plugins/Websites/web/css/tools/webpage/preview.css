@@ -14,27 +14,11 @@
 	cursor: pointer;
 }
 .Websites_webpage_preview_tool[data-mode=title] .Users_pile_tool,
-.Websites_webpage_preview_tool[data-mode=title] .Streams_chat_unseen {
+.Websites_webpage_preview_tool[data-mode=title] .streams_chat_unseen {
 	display: none;
 }
 .Websites_webpage_preview_tool.Streams_chat_preview_noParticipants {
 	display: none;
-}
-.Websites_webpage_preview_tool .Streams_chat_unseen {
-	display: none;
-	position: absolute;
-	border-radius: 50%;
-	font-size: 16px;
-	color: #fff;
-	font-weight: bold;
-	text-align: center;
-	height: 30px;
-	min-width: 30px;
-	line-height: 30px;
-	vertical-align: middle;
-	background-color: #cc5555;
-	top: 10px;
-	right: 10px;
 }
 .Websites_webpage_preview_tool .Users_pile_tool {
 	position: absolute;
