@@ -6,6 +6,7 @@
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
  * @param {integer} [options.titleMaxLength] max length of stream title
+ * @param {boolean} [options.participants=false] if tru show Streams/participants tool if enough permissions
  * @param {Q.Event} [options.onInvoke] occur onclick tool element
  */
 Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_answer_preview (options, preview) {
@@ -13,30 +14,26 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 	var state = this.state;
 	tool.preview = preview;
 
-	preview.state.editable = false;
+	preview.state.editable = ["icon", "title"];
 
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
-	Q.Text.get('Streams/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text.questions;
-		preview.state.onRefresh.add(tool.refresh.bind(tool));
-		preview.state.creatable.preprocess = tool.composer.bind(tool);
-	});
+	preview.state.onRefresh.add(tool.refresh.bind(tool));
+	preview.state.creatable.preprocess = tool.composer.bind(tool);
 
 	if (preview.state.streamName) {
 		$(tool.element).on(Q.Pointer.fastclick, function () {
 			Q.handle(state.onInvoke, tool);
 		});
 	}
+
+	tool.Q.onStateChanged('participants').set(tool.setParticipants.bind(tool), tool);
 },
 
 {
 	titleMaxLength: 255,
+	participants: true,
+	onRefresh: new Q.Event(),
 	onInvoke: new Q.Event()
 },
 
@@ -46,33 +43,96 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		tool.stream = stream;
 		var publisherId = stream.fields.publisherId;
 		var streamName = stream.fields.name;
-		var $toolElement = $(tool.element);
+		var type = stream.getAttribute("type");
+		var content = stream.fields.content;
+		var participant = stream.participant || {};
+		var extra = participant.getExtra && participant.getExtra("content");
+		var participating = participant.state === "participating";
 
-		// retain with stream
+		$(tool.element)
+			.attr("data-type", type)
+			.attr("data-participating", participating);
+
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
-		$toolElement.tool("Streams/default/preview").activate(function () {
-			$(".Streams_preview_icon", this.element).replaceWith($("<div>").tool("Users/avatar", {
-				userId: publisherId,
-				short: true
-			}).activate());
-		});
+		// process message Streams/extra/changed
+		stream.onMessage('Streams/extra/changed').set(function (updatedStream, message) {
+			tool.updateContent(message.byUserId, message.content);
+		}, tool);
 
-		$toolElement.on(Q.Pointer.fastclick, function () {
-			Q.Dialogs.push({
-				title: tool.text.AnswerDetails,
-				className: "Streams_dialog_answer",
-				template: {
-					name: "Streams/answer/view",
-					fields: {
-						options: stream.getAttribute("options") || [],
-						content: stream.fields.content
-					}
+		Q.Template.render("Streams/answer/view", {
+			type: type,
+			content: content,
+			checked: participating,
+			extra: extra
+		}, function (err, html) {
+			if (err) {
+				return;
+			}
+
+			tool.element.innerHTML = html;
+
+			tool.setParticipants();
+
+			var $participants = $(".Streams_answer_participants", tool.element);
+			stream.onFieldChanged("participatingCount").set(function (modFields, field) {
+				if ($participants.hasClass("Streams_participants_tool")) {
+					return;
 				}
-			});
+
+				$participants.html(modFields[field] || "");
+			}, tool);
+
+			Q.handle(tool.state.onRefresh, tool);
 		});
 	},
+	/**
+	 * Set participants tool
+	 * @method setParticipants
+	 */
+	setParticipants: function () {
+		var tool = this;
+		var state = this.state;
+		var publisherId = tool.stream.fields.publisherId;
+		var streamName = tool.stream.fields.name;
+		var $participants = $(".Streams_answer_participants", tool.element);
 
+		$(tool.element).attr("data-participants", state.participants);
+		if (!state.participants) {
+			return;
+		}
+
+		if (tool.stream.testReadLevel("participants")) {
+			var participantsTool = Q.Tool.from($participants[0], "Streams/participants");
+			if (!participantsTool) {
+				$participants.empty();
+				$participants.tool("Streams/participants", {
+					publisherId: publisherId,
+					streamName: streamName,
+					invite: false,
+					showSummary: true,
+					maxShow: 100,
+					showControls: true,
+					hideIfNoParticipants: true
+				}).activate(function () {
+					tool.element.forEachTool("Users/avatar", function () {
+						var avatarTool = this;
+						tool.stream.getParticipant(avatarTool.state.userId, function (err, participant) {
+							var msg = Q.firstErrorMessage(err);
+							if (msg) {
+								return console.warn(msg);
+							}
+
+							$(avatarTool.element).attr('data-touchlabel', participant.getExtra('content'));
+						});
+					});
+				});
+			}
+		} else {
+			Q.Tool.remove($participants[0], true, false);
+			$participants.html(tool.stream.fields.participatingCount || "");
+		}
+	},
 	/**
 	 * Start composer dialog
 	 * @method composer
@@ -82,34 +142,36 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		var tool = this;
 		var previewState = tool.preview.state;
 
+		previewState.onCreate.set(function () {
+			Q.Dialogs.pop();
+		}, tool);
+
 		Q.Dialogs.push({
-			title: tool.text.AnswerQuestion,
-			className: "Streams_dialog_answer",
-			content: $("<div>").tool("Streams/question", {
-				mode: "answerComposer",
-				publisherId: previewState.related.publisherId,
-				streamName: previewState.related.streamName
-			}),
+			title: tool.text.questions.NewAnswer,
+			className: "Streams_dialog_answer_composer",
+			template: {
+				name: "Streams/answer/composer"
+			},
 			onActivate: function (dialog) {
-				var questionTool = Q.Tool.from($(".Streams_question_tool", dialog), "Streams/question");
+				var $select = $("select[name=type]", dialog);
+				var $input = $("input[name=value]", dialog);
 
-				if (!questionTool) {
-					throw new Q.error("Streams/answer/preview: question tool not found");
-				}
+				$select.on("change", function () {
+					var type = $select.val();
 
-				questionTool.state.onSubmit.set(function (answers) {
-					Q.Dialogs.pop();
-
-					var title = "";
-					var content = "";
-
-					if (!Q.isEmpty(answers.options)) {
-						title = answers.options.join(". ");
+					if (type === "text") {
+						$input.attr("placeholder", tool.text.questions.Placeholder);
+					} else {
+						$input.removeAttr("placeholder");
 					}
+				}).trigger("change");
 
-					if (answers.textarea) {
-						title = title || answers.textarea;
-						content = answers.textarea;
+				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
+					var title = $input.val();
+					var content = title;
+
+					if (!title) {
+						return Q.alert(tool.text.questions.TitleRequired);
 					}
 
 					if (title.length > 255) {
@@ -120,21 +182,57 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 						title: title,
 						content: content,
 						attributes: {
-							options: answers.options
-						}
+							type: $select.val()
+						},
+						dontSubscribe: true
 					}]);
-				}, tool);
+					$(this).addClass("Q_working");
+				});
 			}
 		});
+	},
+	/**
+	 * Update avatar element data-touchlabel attribute to the answer content
+	 * @method updateContent
+	 * @param {string} byUserId - user id avatar need to change
+	 * @param {string} content - answer content
+	 */
+	updateContent: function (byUserId, content) {
+		var tool = this;
+		var participantsTool = Q.Tool.from($(".Streams_answer_participants", tool.element)[0], "Streams/participants");
+		if (!participantsTool) {
+			return;
+		}
+
+		var $avatar = participantsTool.avatarExists(byUserId);
+		if ($avatar instanceof jQuery && $avatar.length) {
+			$avatar.attr('data-touchlabel', content);
+		}
 	}
 });
 
+Q.Template.set('Streams/answer/composer',
+`<select name="type">
+			<option value="option">{{questions.answerOption}}</option>
+			<option value="option.exclusive">{{questions.answerOptionExclusive}}</option>
+			<option value="text">{{questions.answerText}}</option>
+		</select>
+		<input name="value" />
+		<button name="save" type="button" class="Q_button">{{questions.Save}}</button>`,
+{text: ['Streams/content']}
+);
 Q.Template.set("Streams/answer/view",
-	'<ul>' +
-	'{{#each options}}' +
-		'<li>{{this}}</li>' +
-	'{{/each}}' +
-	'</ul>' +
-	'<div class="Streams_answer_content">{{content}}</div>'
+`{{#ifEquals type "text"}}
+		<input placeholder="{{content}}" type="text" value="{{extra}}">
+		<button class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
+	{{/ifEquals}}
+	{{#ifEquals type "option"}}
+		<label class='Streams_question_answer_container'><input type="checkbox" {{#if checked}}checked="checked"{{/if}} value="{{content}}"><span>{{content}}</span></label>
+	{{/ifEquals}}
+	{{#ifEquals type "option.exclusive"}}
+		<label class='Streams_question_answer_container'><input type="radio" {{#if checked}}checked="checked"{{/if}} value="{{content}}"><span>{{content}}</span></label>
+	{{/ifEquals}}
+	<div class="Streams_answer_participants"></div>`,
+	{text: ['Streams/content']}
 );
 })(Q, Q.$, window);
