@@ -458,7 +458,8 @@
         },
         "Streams\/question": {
             "displayType": "Question",
-            "description": "question stream"
+            "description": "question stream",
+            "newItem": "Add Question"
         },
         "Streams\/answer": {
             "displayType": "Answer",
