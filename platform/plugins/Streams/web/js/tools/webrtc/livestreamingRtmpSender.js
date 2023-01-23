@@ -217,7 +217,7 @@
                         goLive: function () {
                             log('goLiveDialog goLive');
                         },
-                        endStreaming: function (service) {
+                        endStreaming: function (service, stopCanvasDrawingAndMixing) {
                             log('endStreaming', service);
         
                             /*clearTimeout(_videoStream.timer);
@@ -225,7 +225,7 @@
                             var mergedBlob = new Blob(blobsToSend);
                             if(service && _streamingSocket[service] != null) _streamingSocket[service].socket.emit('Streams/webrtc/videoData', mergedBlob);*/
         
-                            _canvasComposer.stopRecorder();
+                            _canvasComposer.stopRecorder(stopCanvasDrawingAndMixing);
         
                             if(service != null && _streamingSocket[service] != null) {
                                 _streamingSocket[service].socket.disconnect();

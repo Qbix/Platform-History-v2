@@ -154,6 +154,7 @@ WebRTC.listen = function () {
             }
 
             function determinePlatformUserStreamingTo(urlString) {
+                if(!urlString || urlString.trim() == '') return;
                 if (urlString.indexOf('youtube.com') != -1 || urlString.indexOf('youtu.be') != -1) {
                     return 'youtube';
                 } else if (urlString.indexOf('twitch.tv') != -1) {

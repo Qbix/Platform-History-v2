@@ -127,13 +127,10 @@
                 var _webrtcUserInterface = this.state.webrtcUserInterface;
                 var desktopDialogEl = null;
                 var mobileHorizontaldialogEl = null;
-                var mobileVerticaldialogEl = null;
                 var activeDialog = null;
+                var isOpening = false; //if livestreaming editor in process of opening (e.g. when user has vertical orientation and is changing to horizontal)
                 var isHidden = true;
-                var dialogWidth = 996;
 
-                var _dialogEl = null;
-                var _previewEl = null;
                 var _resizingElement = null;
                 var _resizingElementTool = null;
                 var _fileManagerTool = null;
@@ -449,7 +446,7 @@
 
                         function createSectionElement() {
                             var streamingAndUploading = _streamingToFbSection = document.createElement('DIV');
-                            streamingAndUploading.className = 'live-editor-stream-to-section-fb'
+                            streamingAndUploading.className = 'live-editor-dialog-window-content live-editor-stream-to-section-fb'
 
                             var fbStreamingStartSettings = document.createElement('DIV');
                             fbStreamingStartSettings.className = 'live-editor-stream-to-section-fb-start-settings';
@@ -725,7 +722,7 @@
                         
                         function createSectionElement() {
                             var rtmpStreaming = _streamingToCustomRtmpSection = document.createElement('DIV');
-                            rtmpStreaming.className = 'live-editor-stream-to-section-rtmp'
+                            rtmpStreaming.className = 'live-editor-dialog-window-content live-editor-stream-to-section-rtmp'
 
                             var rtmpStreamingSettings = document.createElement('DIV');
                             rtmpStreamingSettings.className = 'live-editor-stream-to-section-rtmp-start-settings';
@@ -945,9 +942,10 @@
 
                         function createSectionElement() {
                             var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
+                            let livestreamId = (tool.livestreamStream.fields.name).replace('Streams/webrtc/livestream/', '');
 
                             var recordingCon = _peerToPeerStreamingSection = document.createElement('DIV');
-                            recordingCon.className = 'live-editor-stream-to-section-p2p'
+                            recordingCon.className = 'live-editor-dialog-window-content live-editor-stream-to-section-p2p'
 
                             var recordingSettings = document.createElement('DIV');
                             recordingSettings.className = 'live-editor-stream-to-section-p2p-start_settings';
@@ -977,7 +975,9 @@
                             linkCon.appendChild(linkInputCon);
                             var linkInput = document.createElement('INPUT');
                             linkInput.disabled = true;
-                            linkInput.value = location.origin + '/broadcast?stream=' + roomId;
+                            //linkInput.value = location.origin + '/broadcast?stream=' + roomId;
+                            linkInput.value = location.origin + '/livestream/' + tool.livestreamStream.fields.publisherId + '/' + livestreamId;
+
                             linkInputCon.appendChild(linkInput);
                             var linkCopyBtn = document.createElement('BUTTON');
                             linkCopyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
@@ -1479,91 +1479,36 @@
 
                     var addNewScenePopup = (function () {
                         var _dialogEl = null;
-                        var _isHidden = true;
+                        var _popupDialog = null;
 
                         console.log('addNewScenePopup')
-                        var dialog = document.createElement('DIV');
-                        dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-scene live-editor-hidden';
-                        _dialogEl = dialog;
-                        var close = document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = 'cover';
-
-                        var dialogTitle = document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add scene';
-                        dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
-
-                        var dialogInner = document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent = document.createElement('DIV');
-                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
+                       
+                        var boxContent = _dialogEl = document.createElement('DIV');
+                        boxContent.className = 'live-editor-dialog-window-content';
 
                         var sceneNameInputCon = document.createElement('DIV');
                         sceneNameInputCon.className = 'live-editor-dialog-name-con';
+                        boxContent.appendChild(sceneNameInputCon);
+                        
                         var sceneNameInputText = document.createElement('SPAN');
                         sceneNameInputText.className = 'live-editor-dialog-name-text';
                         sceneNameInputText.innerHTML = 'Please, enter name of scene';
+                        sceneNameInputCon.appendChild(sceneNameInputText);
+                        
                         var sceneNameInput = document.createElement('INPUT');
                         sceneNameInput.className = 'live-editor-dialog-name';
                         sceneNameInput.type = 'text';
                         sceneNameInput.placeholder = 'Enter name of scene';
                         sceneNameInput.name = 'nameOfScene';
+                        sceneNameInputCon.appendChild(sceneNameInput);
 
                         var buttonsCon = document.createElement('DIV');
                         buttonsCon.className = 'live-editor-dialog-buttons';
+                        boxContent.appendChild(buttonsCon);
                         var okButton = document.createElement('BUTTON');
                         okButton.className = 'live-editor-dialog-ok-btn';
                         okButton.innerHTML = 'OK';
-
-                        sceneNameInputCon.appendChild(sceneNameInputText);
-                        sceneNameInputCon.appendChild(sceneNameInput);
-                        boxContent.appendChild(sceneNameInputCon);
                         buttonsCon.appendChild(okButton);
-                        boxContent.appendChild(buttonsCon);
-                        dialogInner.appendChild(dialogTitle);
-
-                        dialog.appendChild(close);
-                        dialogInner.appendChild(boxContent);
-                        dialog.appendChild(dialogInner);
-
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
-
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialog, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 3000)
-
-                        var dialogWidth = 400;
-                        dialog.style.width = dialogWidth + 'px';
-                        console.log('dialogWidth', dialogWidth);
-                        if (_isMobile) {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.bottom = '10px';
-                        } else {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.top = (window.innerHeight / 2 - 100) + 'px';
-                        }
-
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
 
                         okButton.addEventListener('click', function () {
                             if (sceneNameInput.value != '') {
@@ -1580,41 +1525,28 @@
 
                         function showDialog(e) {
                             sceneNameInput.value = '';
-                            if (_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.remove('live-editor-hidden');
-                                var _clientX = e.clientX;
-                                var _clientY = e.clientY;
-
-                                _isHidden = false;
-
-                                if (_isMobile) {
-                                    dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialog.style.top = '10px';
-                                } else {
-                                    dialog.style.left = (_clientX + 50) + 'px';
-                                    dialog.style.top = (_clientY - 200) + 'px';
-                                }
-                                setDefaultSceneName();
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
                             }
+                            _popupDialog = new SimpleDialog({
+                                content: _dialogEl, 
+                                rectangleToShowIn: null,
+                                className: 'live-editor-dialog-box-add-new-s live-editor-popup-add-scene',
+                                title: 'Add new scene'
+                            });
+                            setDefaultSceneName();
                         }
 
                         function hideDialog() {
-                            if (!_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.add('live-editor-hidden');
-                                _isHidden = true;
-                            }
-                        }
-
-                        function toggle(e) {
-                            if (_isHidden) {
-                                showDialog(e);
-                            } else hideDialog(e);
+                            if(_popupDialog) _popupDialog.hide();
                         }
 
                         return {
                             hideDialog: hideDialog,
-                            showDialog: showDialog,
-                            toggle: toggle
+                            showDialog: showDialog
                         }
                     }())
 
@@ -1979,11 +1911,11 @@
                                 cameraBtnCon.appendChild(cameraBtnIcon);
                                 itemElControlLocalControls.appendChild(cameraBtnCon);
 
-                                if (!Q.info.useTouchEvents) {
+                                //if (!Q.info.useTouchEvents) {
                                     sourceInstance.videoSettingsPopup = new PopupDialog(cameraBtn, {
                                         content: _videoTool.videoinputListEl
                                     })
-                                }
+                                //}
 
                                 sourceInstance.cameraBtnIcon = cameraBtnIcon;
                             }
@@ -1999,11 +1931,11 @@
                             microphoneBtnCon.appendChild(microphoneBtn);
                             microphoneBtnCon.appendChild(microphoneBtnIcon);
                             itemElControlLocalControls.appendChild(microphoneBtnCon);
-                            if (!Q.info.useTouchEvents) {
+                            //if (!Q.info.useTouchEvents) {
                                 sourceInstance.audioSettingsPopup = new PopupDialog(microphoneBtn, {
                                     content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
                                 })
-                            }
+                            //}
                             sourceInstance.microphoneBtnIcon = microphoneBtnIcon;
                                             
                         }
@@ -2556,7 +2488,7 @@
                             audioBtnIcon.innerHTML = _streamingIcons.participantsDisabledMic;
                             audioBtnCon.appendChild(audioBtnIcon);
 
-                            if (participantInstance.isLocal && !Q.info.useTouchEvents) {
+                            if (participantInstance.isLocal /*&& !Q.info.useTouchEvents*/) {
                                 listItemInstance.audioSettingsPopup = new PopupDialog(audioBtnCon, {
                                     content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
                                 })
@@ -2574,16 +2506,16 @@
                                 videoBtnCon.appendChild(videoBtnIcon);
                                 listItemInstance.videoIconEl = videoBtnIcon;
 
-                                if (!Q.info.useTouchEvents) {
+                                //if (!Q.info.useTouchEvents) {
                                     listItemInstance.videoSettingsPopup = new PopupDialog(videoBtnCon, {
                                         content: _videoTool.videoinputListEl
                                     })
-                                }
+                                //}
                             }
                             
                             let screenBtnCon = document.createElement('DIV');
                             screenBtnCon.className = 'live-editor-participants-item-btn live-editor-participants-item-screen-btn';
-                            participantItemControls.appendChild(screenBtnCon);
+                            if(!(participantInstance.isLocal && Q.info.isMobile)) participantItemControls.appendChild(screenBtnCon);
                             let screenBtnIcon = document.createElement('DIV');
                             screenBtnIcon.className = 'live-editor-participants-item-icon live-editor-participants-item-screen-icon';
                             screenBtnIcon.innerHTML = _streamingIcons.participantsEnabledScreenSource;
@@ -3588,13 +3520,14 @@
                     function removeSource() {
                         if(_selectedSource != null) {
 
-                            if(_selectedSource.listType == 'visual' || _selectedSource.listType == 'allParticipants') {
-                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
-                            } else if(_selectedSource.listType == 'audio') {
-                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
+                            let sourceToRemove = _selectedSource;
+                            _selectedSource = null;
+                            if(sourceToRemove.listType == 'visual' || sourceToRemove.listType == 'allParticipants') {
+                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.removeSource(sourceToRemove.sourceInstance);
+                            } else if(sourceToRemove.listType == 'audio') {
+                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.removeSource(sourceToRemove.sourceInstance);
                             }
                             syncList();
-                            _selectedSource = null;
                         };
                         var activeScene = scenesInterface.getActive();
                         activeScene.sourcesInterface.hideResizingElement()
@@ -3885,6 +3818,8 @@
                         sourcesColumnControlBtn.innerHTML = _streamingIcons.settings;
                         sourcesColumnControlBtn.addEventListener('click', function () {
                             let streamingControlsEl = document.querySelector('.live-editor-popup-streaming-controls');
+                            let titleEl = document.querySelector('.live-editor-dialog-header');
+                            let titleElRect = titleEl.getBoundingClientRect();
                             let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
                             let settingsDialogEl = optionsColumn.getSettingsDialog();
                             let title = "Source's settings";
@@ -3893,7 +3828,7 @@
                             }
                             let settingsDialog = new SimpleDialog({
                                 content: settingsDialogEl, 
-                                rectangleToShowIn: rectangleToShowIn,
+                                rectangleToShowIn: new DOMRect(rectangleToShowIn.x, rectangleToShowIn.y - titleElRect.height, rectangleToShowIn.width, rectangleToShowIn.height + titleElRect.height),
                                 title: title
                             });
                         })
@@ -3930,7 +3865,7 @@
                     }
 
                     function updateSourceControlPanelButtons() {
-                        console.log('updateSourceControlPanelButtons', _selectedSource);
+                        console.log('updateSourceControlPanelButtons START', _selectedSource);
                         let selectedSourceInstance = _selectedSource ? _selectedSource.sourceInstance : null;
                         let indexOfSelectedSource = _sourcesList.findIndex(function(x){
                             return x == _selectedSource;
@@ -4189,27 +4124,24 @@
 
                     var addVideoPopup = (function () {
                         var _dialogEl = null;
-                        var _isHidden = true;
+                        var _popupDialog = null;
 
                         console.log('addVideoPopup')
-                        var dialog=document.createElement('DIV');
-                        dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-video live-editor-hidden';
-                        _dialogEl = dialog;
-                        var dialogTitle=document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add video';
-                        dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
+                
+                        var boxContent = _dialogEl = document.createElement('DIV');
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-video';
 
-                        var dialogInner=document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent=document.createElement('DIV');
-                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
-                        var boxContentText=document.createElement('DIV');
-                        boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
+                        var boxContentText = document.createElement('DIV');
+                        boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';  
+                        boxContent.appendChild(boxContentText);
+
                         var videoItemInput = document.createElement('INPUT');
                         videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
                         videoItemInput.type = 'file';
                         videoItemInput.name = 'fileVideoSource';
-                        videoItemInput.accept = 'video/mp4, video/*'
+                        videoItemInput.accept = 'video/mp4, video/*';
+                        boxContent.appendChild(videoItemInput);
+
                         videoItemInput.addEventListener('change', function (e) {
                             addVideoSource(e);
                             hideDialog();
@@ -4217,137 +4149,60 @@
 
                         var boxContentText2=document.createElement('DIV');
                         boxContentText2.innerHTML = 'OR';
+                        boxContent.appendChild(boxContentText2);
+
                         var imageItemLinkInput = document.createElement('INPUT');
                         imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
                         imageItemLinkInput.type = 'text';
                         imageItemLinkInput.placeholder = 'Enter the link';
                         imageItemLinkInput.name = 'fileImageLink';
-
-                        boxContent.appendChild(boxContentText);
-                        boxContent.appendChild(videoItemInput);
-                        boxContent.appendChild(boxContentText2);
                         boxContent.appendChild(imageItemLinkInput);
 
-                        var close=document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = 'cover';
-                        close.addEventListener('click', function() {
-                            if(imageItemLinkInput.value != '') {
-                                var val = imageItemLinkInput.value;
-                                addVideoSource(val);
-                                hideDialog();
-                                imageItemLinkInput.value = '';
-                            }
-                        });
-                        dialogInner.appendChild(dialogTitle);
-
-                        dialog.appendChild(close);
-                        dialogInner.appendChild(boxContent);
-                        dialog.appendChild(dialogInner);
-
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialog, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 3000)
-
-                        var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                        var dialogWidth = 400;
-                        dialog.style.width = dialogWidth + 'px';
-                        console.log('dialogWidth', dialogWidth);
-                        if(Q.info.isMobile) {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                        } else {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
-                        }
-
-
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
 
                         function showDialog(e) {
-                            videoItemInput.value = '';
-                            if(_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.remove('live-editor-hidden');
-                                var _clientX = e.clientX;
-                                var _clientY = e.clientY;
-
-                                _isHidden = false;
-
-                                var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                                if(Q.info.isMobile) {
-                                    dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialog.style.top = (controlsRect.height + 10) + 'px';
-                                } else {
-                                    dialog.style.left = (_clientX + 50) + 'px';
-                                    dialog.style.top = (_clientY - 200) + 'px';
-                                }
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
                             }
+                            videoItemInput.value = '';
+                            _popupDialog = new SimpleDialog({
+                                content: _dialogEl, 
+                                rectangleToShowIn: null,
+                                title: 'Add video source'
+                            });
                         }
 
                         function hideDialog() {
-                            if(!_dialogEl.classList.contains('live-editor-hidden')){
-                                _dialogEl.classList.add('live-editor-hidden');
-                                _isHidden = true;
-                            }
-                        }
-
-                        function toggle(e) {
-                            if(_isHidden) {
-                                showDialog(e);
-                            } else hideDialog(e);
+                            if(_popupDialog) _popupDialog.hide();
                         }
 
                         return {
                             hideDialog: hideDialog,
-                            showDialog: showDialog,
-                            toggle: toggle
+                            showDialog: showDialog
                         }
                     }())
 
                     var addImagePopup = (function () {
                         var _dialogEl = null;
-                        var _isHidden = true;
+                        var _popupDialog = null;
 
                         console.log('addImagePopup')
-                        var dialog=document.createElement('DIV');
-                        dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-image live-editor-hidden';
-                        _dialogEl = dialog;
-                        var dialogTitle=document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add image';
-                        dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
-
-                        var dialogInner=document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent=document.createElement('DIV');
-                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
-                        var boxContentText=document.createElement('DIV');
+                        
+                        var boxContent = _dialogEl = document.createElement('DIV');
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-image';
+                        var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
+                        boxContent.appendChild(boxContentText);
+
                         var imageItemInput = document.createElement('INPUT');
                         imageItemInput.className = 'live-editor-popup-sources-add-menu-file';
                         imageItemInput.type = 'file';
                         imageItemInput.name = 'fileImageSource';
                         imageItemInput.accept = 'image/png, image/jpeg'
+                        boxContent.appendChild(imageItemInput);
+
                         imageItemInput.addEventListener('change', function (e) {
                             addImageSource(e);
                             hideDialog();
@@ -4355,118 +4210,42 @@
 
                         var boxContentText2=document.createElement('DIV');
                         boxContentText2.innerHTML = 'OR';
+                        boxContent.appendChild(boxContentText2);
+
                         var imageItemLinkInput = document.createElement('INPUT');
                         imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
                         imageItemLinkInput.type = 'text';
                         imageItemLinkInput.placeholder = 'Enter the link';
                         imageItemLinkInput.name = 'fileImageLink';
-
-                        boxContent.appendChild(boxContentText);
-                        boxContent.appendChild(imageItemInput);
-                        boxContent.appendChild(boxContentText2);
                         boxContent.appendChild(imageItemLinkInput);
-
-                        var close=document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = 'cover';
-                        close.addEventListener('click', function() {
-                            if(imageItemLinkInput.value != '') {
-                                var val = imageItemLinkInput.value;
-                                addImageSource(val);
-                                hideDialog();
-                                imageItemLinkInput.value = '';
-                            }
-                        });
-                        dialogInner.appendChild(dialogTitle);
-
-                        dialog.appendChild(close);
-                        dialogInner.appendChild(boxContent);
-                        dialog.appendChild(dialogInner);
-
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialog, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 3000)
-
-                        var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                        var dialogWidth = 400;
-                        dialog.style.width = dialogWidth + 'px';
-                        console.log('dialogWidth', dialogWidth);
-                        if(Q.info.isMobile) {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                        } else {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
-                        }
-
-
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
 
                         function showDialog(e) {
                             imageItemInput.value = '';
-                            if(_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.remove('live-editor-hidden');
-                                var _clientX = e.clientX;
-                                var _clientY = e.clientY;
-
-                                _isHidden = false;
-
-                                var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                                if(Q.info.isMobile) {
-                                    dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialog.style.top = (controlsRect.height + 10) + 'px';
-                                } else {
-                                    dialog.style.left = (_clientX + 50) + 'px';
-                                    dialog.style.top = (_clientY - 200) + 'px';
-                                }
-
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
                             }
+                            _popupDialog = new SimpleDialog({
+                                content: _dialogEl, 
+                                rectangleToShowIn: null,
+                                title: 'Add image source'
+                            });
                         }
 
                         function hideDialog() {
-                            if(!_dialogEl.classList.contains('live-editor-hidden')){
-                                _dialogEl.classList.add('live-editor-hidden');
-                                _isHidden = true;
-                            }
-                        }
-
-                        function toggle(e) {
-                            if(_isHidden) {
-                                showDialog(e);
-                            } else hideDialog(e);
+                            if(_popupDialog) _popupDialog.hide();
                         }
 
                         return {
                             hideDialog: hideDialog,
-                            showDialog: showDialog,
-                            toggle: toggle
+                            showDialog: showDialog
                         }
                     }())
 
                     var addCameraPopup = (function () {
                         var state = {
-                            isHidden: true,
                             _mediaStream: null,
                             _source: null,
                             rawVideoInputDevices: [],
@@ -4490,6 +4269,7 @@
                             get source() { return this._source; },
                         }
                         var options = null;
+                        var _popupDialog = null;
                         var _dialogueEl = null;
                         var _devicesListEl = null;
                         var _cameraPreviewParentEl = null;
@@ -4654,21 +4434,20 @@
         
                         function showDialog(optns) {
                             options = optns;
-                            if (_dialogueEl.classList.contains('live-editor-hidden')) {
-                                _dialogueEl.classList.remove('live-editor-hidden');
-        
-                                state.isHidden = false;
-        
-                                if (_isMobile) {
-                                    //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    //dialogue.style.top = '10px';
-                                } else {
-                                    dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialogue.style.top = '20px';
-                                }
-        
-                                loadDialog();
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
                             }
+                            _popupDialog = new SimpleDialog({
+                                content: _dialogueEl, 
+                                rectangleToShowIn: null,
+                                className: 'live-editor-popup-add-media-input',
+                                title: 'Add camera source'
+                            });
+
+                            loadDialog();
                         }
         
                         function onErrorHandler(error) {
@@ -4680,178 +4459,135 @@
                             _noticesEl.innerHTML = notice;
                         }
         
-                        function hideDialog(okBtnClicked) {
-                            console.log('okBtnClicked', okBtnClicked)
-        
+                        function hideDialog(okBtnClicked) {        
                             if (!okBtnClicked && state.mediaStream != null && !options.source) {
-                                console.log('tracks', state.mediaStream)
         
                                 let tracks = state.mediaStream.getTracks();
-                                console.log('tracks2', tracks)
         
                                 for (let t in tracks) {
                                     tracks[t].stop();
                                 }
                             }
-                            if (!_dialogueEl.classList.contains('live-editor-hidden')) {
-                                _dialogueEl.classList.add('live-editor-hidden');
-                                state.isHidden = true;
-                            }
+                            
+                            if(_popupDialog) _popupDialog.hide();
+                            
                         }
-        
-                        var dialogue = document.createElement('DIV');
-                        dialogue.className = 'live-editor-dialog-box live-editor-popup-add-media-input live-editor-popup-add-camera-input live-editor-hidden';
-                        _dialogueEl = dialogue;
-                        var close = document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = '40px';
-
-                        var dialogTitle = document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add camera source';
-                        dialogTitle.className = 'live-editor-dialog-header';
-        
-                        var dialogInner = document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-content';
+                    
+                        var boxContent = _dialogueEl = document.createElement('DIV');
+                        boxContent.className = 'live-editor-dialog-window-content';
                         var cameraPreviewBox = document.createElement('DIV');
                         cameraPreviewBox.className = 'live-editor-dialog-camera-preview';
+                        boxContent.appendChild(cameraPreviewBox);
+
                         var cameraPreviewInner = _cameraPreviewParentEl = document.createElement('DIV');
                         cameraPreviewInner.className = 'live-editor-dialog-camera-preview-inner';
+                        cameraPreviewBox.appendChild(cameraPreviewInner);
+
                         var cameraPreviewNotices = _noticesEl = document.createElement('DIV');
                         cameraPreviewNotices.className = 'live-editor-dialog-notices';
-        
+                        cameraPreviewBox.appendChild(cameraPreviewNotices);
+
                         var addSourceControls = document.createElement('DIV');
                         addSourceControls.className = 'live-editor-dialog-add-source-controls';
+                        boxContent.appendChild(addSourceControls);
+
                         var addSourceControlsInner = document.createElement('DIV');
                         addSourceControlsInner.className = 'live-editor-dialog-add-source-controls-inner';
-                        dialogInner.appendChild(dialogTitle);
-                        dialogue.appendChild(close);
-        
-                        boxContent.appendChild(cameraPreviewBox);
-                        cameraPreviewBox.appendChild(cameraPreviewNotices);
-                        cameraPreviewBox.appendChild(cameraPreviewInner);
+                        addSourceControls.appendChild(addSourceControlsInner);
         
                         var videoInputDevicesCon = document.createElement('DIV');
                         videoInputDevicesCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-devices';
+                        addSourceControlsInner.appendChild(videoInputDevicesCon);
+
                         var addSourceControlsDevicesCaption = document.createElement('DIV');
                         addSourceControlsDevicesCaption.className = 'live-editor-dialog-add-source-controls-caption';
                         addSourceControlsDevicesCaption.innerHTML = 'Devices ';
+                        videoInputDevicesCon.appendChild(addSourceControlsDevicesCaption);
+
                         var addSourceControlsDevicesReload = document.createElement('DIV');
                         addSourceControlsDevicesReload.className = 'live-editor-dialog-add-source-controls-reload';
                         addSourceControlsDevicesReload.innerHTML = _streamingIcons.reload;
+                        addSourceControlsDevicesCaption.appendChild(addSourceControlsDevicesReload);
+
                         var videoInputDevicesListCon = document.createElement('DIV');
                         videoInputDevicesListCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-list-con';
+                        videoInputDevicesCon.appendChild(videoInputDevicesListCon);
+
                         var videoInputDevicesList = _devicesListEl = document.createElement('SELECT');
                         videoInputDevicesList.className = 'live-editor-dialog-add-source-devices-list';
-                        var loadDevicesListBtn = document.createElement('BUTTON');
-                        loadDevicesListBtn.innerHTML = 'Reload devices list';
-                        loadDevicesListBtn.className = 'live-editor-dialog-add-source-load-list live-editor-button';
-                        
-                        addSourceControlsDevicesCaption.appendChild(addSourceControlsDevicesReload);
-                        videoInputDevicesCon.appendChild(addSourceControlsDevicesCaption);
                         videoInputDevicesListCon.appendChild(videoInputDevicesList);
-                        //videoInputDevicesListCon.appendChild(loadDevicesListBtn);
-                        videoInputDevicesCon.appendChild(videoInputDevicesListCon);
-                        addSourceControlsInner.appendChild(videoInputDevicesCon);
         
                         var sourceNameCon = document.createElement('DIV');
                         sourceNameCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-name';
+                        addSourceControlsInner.appendChild(sourceNameCon);
+
                         var sourceNameCaption = document.createElement('DIV');
                         sourceNameCaption.className = 'live-editor-dialog-add-source-controls-caption';
                         sourceNameCaption.innerHTML = 'Name';
+                        sourceNameCon.appendChild(sourceNameCaption);
+
                         var sourceNameInputCon = document.createElement('DIV');
                         sourceNameInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-name-con';
+                        sourceNameCon.appendChild(sourceNameInputCon);
+                        
                         var sourceNameInput = _nameInputEl = document.createElement('INPUT');
                         sourceNameInput.className = 'live-editor-dialog-add-source-name-input';
                         sourceNameInput.type = 'text';
-        
-                        sourceNameCon.appendChild(sourceNameCaption);
-                        sourceNameCon.appendChild(sourceNameInputCon);
                         sourceNameInputCon.appendChild(sourceNameInput);
-                        addSourceControlsInner.appendChild(sourceNameCon);
         
                         var sourceTypeCon = document.createElement('DIV');
-                        sourceTypeCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-type';
+                        sourceTypeCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-type';  
+                        addSourceControlsInner.appendChild(sourceTypeCon);
+                        
                         var sourceTypeCaption = document.createElement('DIV');
                         sourceTypeCaption.className = 'live-editor-dialog-add-source-controls-caption';
                         sourceTypeCaption.innerHTML = '';
+                        sourceTypeCon.appendChild(sourceTypeCaption);
+                        
                         var sourceTypeInputCon = document.createElement('DIV');
                         sourceTypeInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-type-con';
+                        sourceTypeCon.appendChild(sourceTypeInputCon);
+                        
                         var separateSourceTypeLabel = document.createElement('LABEL');
                         separateSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
+                        sourceTypeInputCon.appendChild(separateSourceTypeLabel);
+                        
                         var separateSourceTypeInput = document.createElement('INPUT');
                         separateSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
                         separateSourceTypeInput.name = 'live-editor-video_input_type';
                         separateSourceTypeInput.type = 'radio';
                         separateSourceTypeInput.value = 'separate';
                         separateSourceTypeInput.checked = 'true';
+                        separateSourceTypeLabel.appendChild(separateSourceTypeInput);
+                        
                         var separateSourceTypeLabelText = document.createElement('SPAN');
                         separateSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                         separateSourceTypeLabelText.innerHTML = 'Visible only in livestream';
+                        separateSourceTypeLabel.appendChild(separateSourceTypeLabelText);
+                        
                         var webrtcSourceTypeLabel = document.createElement('LABEL');
                         webrtcSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
+                        sourceTypeInputCon.appendChild(webrtcSourceTypeLabel);
+                        
                         var webrtcSourceTypeInput = document.createElement('INPUT');
                         webrtcSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
                         webrtcSourceTypeInput.name = 'live-editor-video_input_type';
                         webrtcSourceTypeInput.type = 'radio';
                         webrtcSourceTypeInput.value = 'webrtc';
+                        webrtcSourceTypeLabel.appendChild(webrtcSourceTypeInput);
+                        
                         var webrtcSourceTypeLabelText = document.createElement('SPAN');
                         webrtcSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                         webrtcSourceTypeLabelText.innerHTML = 'Visible to chat and in a livestream';
-
-                        sourceTypeCon.appendChild(sourceTypeCaption);
-                        sourceTypeCon.appendChild(sourceTypeInputCon);
-                        sourceTypeInputCon.appendChild(separateSourceTypeLabel);
-                        separateSourceTypeLabel.appendChild(separateSourceTypeInput);
-                        separateSourceTypeLabel.appendChild(separateSourceTypeLabelText);
-                        sourceTypeInputCon.appendChild(webrtcSourceTypeLabel);
-                        webrtcSourceTypeLabel.appendChild(webrtcSourceTypeInput);
                         webrtcSourceTypeLabel.appendChild(webrtcSourceTypeLabelText);
-                        addSourceControlsInner.appendChild(sourceTypeCon);
         
                         var dialogButtonsCon = document.createElement('DIV');
                         dialogButtonsCon.className = 'live-editor-dialog-add-source-buttons-con';
+                        addSourceControls.appendChild(dialogButtonsCon);
                         var okButton = _okButtonEl = document.createElement('BUTTON');
                         okButton.innerHTML = 'OK';
                         okButton.className = 'live-editor-dialog-add-source-ok-btn live-editor-button live-editor-button-inactive';
                         dialogButtonsCon.appendChild(okButton);
-                        addSourceControls.appendChild(addSourceControlsInner);
-                        addSourceControls.appendChild(dialogButtonsCon);
-                        boxContent.appendChild(addSourceControls);
-                        dialogInner.appendChild(boxContent);
-                        dialogue.appendChild(dialogInner);
-        
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialogue);
-        
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialogue, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 500);
-        
-                        var dialogWidth = 800;
-                        if (!_isMobile) {
-                            dialogue.style.width = dialogWidth + 'px';
-                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialogue.style.top = (window.innerHeight / 2 - 100) + 'px';
-                        }
         
                         _devicesListEl.addEventListener('change', function (e) {
                             getVideoInputAfterSelectedOptions().then(function () {
@@ -4908,17 +4644,13 @@
                             hideDialog(true);
                         })
         
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
-        
                         return {
                             hideDialog: hideDialog,
                             showDialog: showDialog,
                         }
                     }())
 
-                    var addTeleconferencePopup = (function () {
+                    /*var addTeleconferencePopup = (function () {
                         var _dialogEl = null;
                         var _isHidden = true;
 
@@ -5040,31 +4772,27 @@
                             showDialog: showDialog,
                             toggle: toggle
                         }
-                    }())
+                    }())*/
 
                     var addAudioPopup = (function () {
+                        var _popupDialog = null;
                         var _dialogEl = null;
-                        var _isHidden = true;
 
-                        console.log('addVideoPopup')
-                        var dialog=document.createElement('DIV');
-                        dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-audio live-editor-hidden';
-                        _dialogEl = dialog;
-                        var dialogTitle=document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add audio';
-                        dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
-
-                        var dialogInner=document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent=document.createElement('DIV');
-                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
-                        var boxContentText=document.createElement('DIV');
+                        console.log('addAudioPopup')
+                        
+                        var boxContent = _dialogEl = document.createElement('DIV');
+                        boxContent.className = 'live-editor-dialog-window-content';
+                        var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
+                        boxContent.appendChild(boxContentText);
+                        
                         var videoItemInput = document.createElement('INPUT');
                         videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
                         videoItemInput.type = 'file';
                         videoItemInput.name = 'fileAudioSource';
                         videoItemInput.accept = 'audio/mp3, audio/*'
+                        boxContent.appendChild(videoItemInput);
+
                         videoItemInput.addEventListener('change', function (e) {
                             addAudioSource(e);
                             hideDialog();
@@ -5072,117 +4800,43 @@
 
                         var boxContentText2=document.createElement('DIV');
                         boxContentText2.innerHTML = 'OR';
+                        boxContent.appendChild(boxContentText2);
+                        
                         var imageItemLinkInput = document.createElement('INPUT');
                         imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
                         imageItemLinkInput.type = 'text';
                         imageItemLinkInput.placeholder = 'Enter the link';
                         imageItemLinkInput.name = 'fileImageLink';
-
-                        boxContent.appendChild(boxContentText);
-                        boxContent.appendChild(videoItemInput);
-                        boxContent.appendChild(boxContentText2);
                         boxContent.appendChild(imageItemLinkInput);
-
-                        var close=document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = 'cover';
-                        close.addEventListener('click', function() {
-                            /* if(imageItemLinkInput.value != '') {
-                                    var val = imageItemLinkInput.value;
-                                    addVideoSource(val);
-                                    hideDialog();
-                                    imageItemLinkInput.value = '';
-                                }*/
-                        });
-                        dialogInner.appendChild(dialogTitle);
-
-                        dialog.appendChild(close);
-                        dialogInner.appendChild(boxContent);
-                        dialog.appendChild(dialogInner);
-
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialog, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 3000)
-
-                        var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                        var dialogWidth = 400;
-                        dialog.style.width = dialogWidth + 'px';
-                        console.log('dialogWidth', dialogWidth);
-                        if(Q.info.isMobile) {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                        } else {
-                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
-                        }
-
-
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
 
                         function showDialog(e) {
                             videoItemInput.value = '';
-                            if(_dialogEl.classList.contains('live-editor-hidden')) {
-                                _dialogEl.classList.remove('live-editor-hidden');
-                                var _clientX = e.clientX;
-                                var _clientY = e.clientY;
-
-                                _isHidden = false;
-
-                                var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                                if(Q.info.isMobile) {
-                                    dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialog.style.top = (controlsRect.height + 10) + 'px';
-                                } else {
-                                    dialog.style.left = (_clientX + 50) + 'px';
-                                    dialog.style.top = (_clientY - 200) + 'px';
-                                }
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
                             }
+                            _popupDialog = new SimpleDialog({
+                                content: _dialogEl, 
+                                rectangleToShowIn: null,
+                                className: 'live-editor-popup-add-audio',
+                                title: 'Add audio source'
+                            });
                         }
 
                         function hideDialog() {
-                            if(!_dialogEl.classList.contains('live-editor-hidden')){
-                                _dialogEl.classList.add('live-editor-hidden');
-                                _isHidden = true;
-                            }
-                        }
-
-                        function toggle(e) {
-                            if(_isHidden) {
-                                showDialog(e);
-                            } else hideDialog(e);
+                            if(_popupDialog) _popupDialog.hide();
                         }
 
                         return {
                             hideDialog: hideDialog,
-                            showDialog: showDialog,
-                            toggle: toggle
+                            showDialog: showDialog
                         }
                     }())
 
                     var addMicrophoneAudioPopup = (function () {
                         var state = {
-                            isHidden: true,
                             _mediaStream: null,
                             _source: null,
                             rawAudioInputDevices: [],
@@ -5206,6 +4860,7 @@
                             get source() { return this._source; },
                         }
                         var options = null;
+                        var _popupDialog = null;
                         var _dialogueEl = null;
                         var _devicesListEl = null;
                         var _nameInputEl = null;
@@ -5226,6 +4881,7 @@
                         }
         
                         function updateDevicesList() {
+                            console.log('addMicrophoneAudioPopup: updateDevicesList');
                             for (let l in state.devicesList) {
                                 if (state.devicesList[l].optionEl && state.devicesList[l].optionEl.parentElement) {
                                     state.devicesList[l].optionEl.parentElement.removeChild(state.devicesList[l].optionEl);
@@ -5321,18 +4977,18 @@
                                 //load dialogue first time
                                 return navigator.mediaDevices.enumerateDevices()
                                     .then(function (devices) {
-                                        let videoInputDevices = 0;
+                                        let audioInputDevices = 0;
                                         devices.forEach(function (device) {
-                                            if (device.kind == 'videoinput') videoInputDevices++
+                                            if (device.kind == 'audioinput') audioInputDevices++
                                         });
-                                        if (videoInputDevices != 0) {
+                                        if (audioInputDevices != 0) {
                                             loadInputDevicesAndGetStream().then(function () {
                                                 updateDevicesList();
                                                 updateSelectedOption();
                                                 setDefaultSourceName();
                                             })
                                         } else {
-                                            showNotice('No video input devices detected');
+                                            showNotice('No audio input devices detected');
                                         }
                                     })
                                     .catch(onErrorHandler);
@@ -5342,196 +4998,153 @@
         
                         function showDialog(optns) {
                             options = optns;
-                            if (_dialogueEl.classList.contains('live-editor-hidden')) {
-                                _dialogueEl.classList.remove('live-editor-hidden');
-        
-                                state.isHidden = false;
-        
-                                if (!_isMobile) {
-                                    dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialogue.style.top = '20px';
-                                }
-        
-                                loadDialog();
+                            if(_popupDialog && !_popupDialog.active) {
+                                _popupDialog.show();
+                                return;
+                            } else if(_popupDialog) {
+                                return;
                             }
+                            _popupDialog = new SimpleDialog({
+                                content: _dialogueEl, 
+                                rectangleToShowIn: null,
+                                className: 'live-editor-popup-add-media-input live-editor-popup-add-audio-input',
+                                title: 'Add input audio source'
+                            });
+
+                            loadDialog();
                         }
         
                         function onErrorHandler(error) {
                             console.log(error);
-                            _noticesEl.innerHTML = error.message;
+                            //_noticesEl.innerHTML = error.message;
                         }
         
                         function showNotice(notice) {
-                            _noticesEl.innerHTML = notice;
+                            console.log('addMicrophoneAudioPopup', notice);
+                            //_noticesEl.innerHTML = notice;
                         }
         
                         function hideDialog(okBtnClicked) {
-                            console.log('okBtnClicked', okBtnClicked)
         
                             if (!okBtnClicked && state.mediaStream != null && !options.source) {
-                                console.log('tracks', state.mediaStream)
         
                                 let tracks = state.mediaStream.getTracks();
-                                console.log('tracks2', tracks)
         
                                 for (let t in tracks) {
                                     tracks[t].stop();
                                 }
                             }
-                            if (!_dialogueEl.classList.contains('live-editor-hidden')) {
-                                _dialogueEl.classList.add('live-editor-hidden');
-                                state.isHidden = true;
-                            }
+                            if(_popupDialog) _popupDialog.hide();
         
                             state.mediaStream = null;
                             state._source = null;
                             state.constraints = { audio: true, video: false};
                         }
-        
-                        var dialogue = document.createElement('DIV');
-                        dialogue.className = 'live-editor-dialog-box live-editor-popup-add-media-input live-editor-hidden';
-                        _dialogueEl = dialogue;
-                        var close = document.createElement('div');
-                        close.className = 'live-editor-close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = '40px';
-
-                        var dialogTitle = document.createElement('H3');
-                        dialogTitle.innerHTML = 'Add audio input source';
-                        dialogTitle.className = 'live-editor-dialog-header';
-        
-                        var dialogInner = document.createElement('DIV');
-                        dialogInner.className = 'live-editor-dialog-inner';
-                        var boxContent = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-content';
+                        
+                        var boxContent = _dialogueEl = document.createElement('DIV');
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-mic';
         
                         var addSourceControls = document.createElement('DIV');
                         addSourceControls.className = 'live-editor-dialog-add-source-controls';
+                        boxContent.appendChild(addSourceControls);
+                        
                         var addSourceControlsInner = document.createElement('DIV');
                         addSourceControlsInner.className = 'live-editor-dialog-add-source-controls-inner';
-                        dialogInner.appendChild(dialogTitle);
-                        dialogue.appendChild(close);
-    
+                        addSourceControls.appendChild(addSourceControlsInner);
+
                         var audioInputDevicesCon = document.createElement('DIV');
                         audioInputDevicesCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-devices';
+                        addSourceControlsInner.appendChild(audioInputDevicesCon);
+                        
                         var addSourceControlsDevicesCaption = document.createElement('DIV');
                         addSourceControlsDevicesCaption.className = 'live-editor-dialog-add-source-controls-caption';
                         addSourceControlsDevicesCaption.innerHTML = 'Devices ';
+                        audioInputDevicesCon.appendChild(addSourceControlsDevicesCaption);
+                        
                         var addSourceControlsDevicesReload = document.createElement('DIV');
                         addSourceControlsDevicesReload.className = 'live-editor-dialog-add-source-controls-reload';
                         addSourceControlsDevicesReload.innerHTML = _streamingIcons.reload;
+                        addSourceControlsDevicesCaption.appendChild(addSourceControlsDevicesReload);
+                        
                         var audioInputDevicesListCon = document.createElement('DIV');
                         audioInputDevicesListCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-list-con';
+                        audioInputDevicesCon.appendChild(audioInputDevicesListCon);
+                        
                         var audioInputDevicesList = _devicesListEl = document.createElement('SELECT');
                         audioInputDevicesList.className = 'live-editor-dialog-add-source-devices-list';
-                        var loadDevicesListBtn = document.createElement('BUTTON');
-                        loadDevicesListBtn.innerHTML = 'Reload devices list';
-                        loadDevicesListBtn.className = 'live-editor-dialog-add-source-load-list live-editor-button';
-                        
-                        addSourceControlsDevicesCaption.appendChild(addSourceControlsDevicesReload);
-                        audioInputDevicesCon.appendChild(addSourceControlsDevicesCaption);
                         audioInputDevicesListCon.appendChild(audioInputDevicesList);
-                        //audioInputDevicesListCon.appendChild(loadDevicesListBtn);
-                        audioInputDevicesCon.appendChild(audioInputDevicesListCon);
-                        addSourceControlsInner.appendChild(audioInputDevicesCon);
         
                         var sourceNameCon = document.createElement('DIV');
                         sourceNameCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-name';
+                        addSourceControlsInner.appendChild(sourceNameCon);
+                        
                         var sourceNameCaption = document.createElement('DIV');
                         sourceNameCaption.className = 'live-editor-dialog-add-source-controls-caption';
                         sourceNameCaption.innerHTML = 'Name';
+                        sourceNameCon.appendChild(sourceNameCaption);
+                        
                         var sourceNameInputCon = document.createElement('DIV');
                         sourceNameInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-name-con';
+                        sourceNameCon.appendChild(sourceNameInputCon);
+                        
                         var sourceNameInput = _nameInputEl = document.createElement('INPUT');
                         sourceNameInput.className = 'live-editor-dialog-add-source-name-input';
                         sourceNameInput.type = 'text';
-        
-                        sourceNameCon.appendChild(sourceNameCaption);
-                        sourceNameCon.appendChild(sourceNameInputCon);
                         sourceNameInputCon.appendChild(sourceNameInput);
-                        addSourceControlsInner.appendChild(sourceNameCon);
         
                         var sourceTypeCon = document.createElement('DIV');
                         sourceTypeCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-type';
+                        addSourceControlsInner.appendChild(sourceTypeCon);
                         var sourceTypeCaption = document.createElement('DIV');
                         sourceTypeCaption.className = 'live-editor-dialog-add-source-controls-caption';
                         sourceTypeCaption.innerHTML = '';
+                        sourceTypeCon.appendChild(sourceTypeCaption);
+                        
                         var sourceTypeInputCon = document.createElement('DIV');
                         sourceTypeInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-type-con';
+                        sourceTypeCon.appendChild(sourceTypeInputCon);
+                        
                         var separateSourceTypeLabel = document.createElement('LABEL');
                         separateSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
+                        sourceTypeInputCon.appendChild(separateSourceTypeLabel);
+                        
                         var separateSourceTypeInput = document.createElement('INPUT');
                         separateSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
                         separateSourceTypeInput.name = 'live-editor-audio_input_type';
                         separateSourceTypeInput.type = 'radio';
                         separateSourceTypeInput.value = 'separate';
                         separateSourceTypeInput.checked = 'true';
+                        separateSourceTypeLabel.appendChild(separateSourceTypeInput);
+                        
                         var separateSourceTypeLabelText = document.createElement('SPAN');
                         separateSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                         separateSourceTypeLabelText.innerHTML = 'Only livestream viewers will hear this source';
+                        separateSourceTypeLabel.appendChild(separateSourceTypeLabelText);
+                        
                         var webrtcSourceTypeLabel = document.createElement('LABEL');
                         webrtcSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
+                        sourceTypeInputCon.appendChild(webrtcSourceTypeLabel);
+                        
                         var webrtcSourceTypeInput = document.createElement('INPUT');
                         webrtcSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
                         webrtcSourceTypeInput.name = 'live-editor-audio_input_type';
                         webrtcSourceTypeInput.type = 'radio';
                         webrtcSourceTypeInput.value = 'webrtc';
+                        webrtcSourceTypeLabel.appendChild(webrtcSourceTypeInput);
+
                         var webrtcSourceTypeLabelText = document.createElement('SPAN');
                         webrtcSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                         webrtcSourceTypeLabelText.innerHTML = 'Evryone will hear this source';
-
-                        sourceTypeCon.appendChild(sourceTypeCaption);
-                        sourceTypeCon.appendChild(sourceTypeInputCon);
-                        sourceTypeInputCon.appendChild(separateSourceTypeLabel);
-                        separateSourceTypeLabel.appendChild(separateSourceTypeInput);
-                        separateSourceTypeLabel.appendChild(separateSourceTypeLabelText);
-                        sourceTypeInputCon.appendChild(webrtcSourceTypeLabel);
-                        webrtcSourceTypeLabel.appendChild(webrtcSourceTypeInput);
                         webrtcSourceTypeLabel.appendChild(webrtcSourceTypeLabelText);
-                        addSourceControlsInner.appendChild(sourceTypeCon);
         
                         var dialogButtonsCon = document.createElement('DIV');
                         dialogButtonsCon.className = 'live-editor-dialog-add-source-buttons-con';
+                        boxContent.appendChild(dialogButtonsCon);
                         var okButton = _okButtonEl = document.createElement('BUTTON');
                         okButton.innerHTML = 'OK';
                         okButton.className = 'live-editor-dialog-add-source-ok-btn live-editor-button live-editor-button-inactive';
                         dialogButtonsCon.appendChild(okButton);
-                        addSourceControls.appendChild(addSourceControlsInner);
-                        boxContent.appendChild(addSourceControls);
-                        boxContent.appendChild(dialogButtonsCon);
-                        dialogInner.appendChild(boxContent);
-                        dialogue.appendChild(dialogInner);
-        
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialogue);
-        
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialogue, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        activateOnElement: dialogTitle,
-                                        resize: false,
-                                        active: true,
-                                        moveWithinArea: 'window',
-                                    }
-                                ),
-                                {},
-                                function () {
 
-                                }
-                            );
-                        }, 500);
-        
-                        var dialogWidth = 800;
-                        dialogue.style.width = dialogWidth + 'px';
-                        if (!_isMobile) {
-                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialogue.style.top = (window.innerHeight / 2 - 100) + 'px';
-                        } 
-        
                         _devicesListEl.addEventListener('change', function (e) {
                             getAudioInputAfterSelectedOptions().then(function () {
 
@@ -5561,10 +5174,6 @@
                             hideDialog(true);
                         })
         
-                        close.addEventListener('click', function () {
-                            hideDialog();
-                        });
-        
                         return {
                             hideDialog: hideDialog,
                             showDialog: showDialog,
@@ -5577,7 +5186,7 @@
 
                         function createPopup() {
                             var popupContainer = _popupEl = document.createElement('DIV');
-                            popupContainer.className = 'live-editor-invite-popup';
+                            popupContainer.className = 'live-editor-dialog-window-content live-editor-invite-popup';
                             
                             var linkCon = document.createElement('DIV');
                             linkCon.className = 'live-editor-invite-popup-link-con';
@@ -7280,6 +6889,7 @@
                                         _chatRooms[r].chatStream = relatedStreams[key];
                                         if(publicAttr == true) {
                                             _chatRooms[r].isPublicChat = true; 
+                                            _chatRooms[r].streamElement.classList.add('live-editor-popup-chat-tool-public-room'); 
                                         }
                                         break;
                                     }
@@ -7476,6 +7086,7 @@
                 }
 
                 function SimpleDialog(options) {
+                    console.log('SimpleDialog', options);
                     var dialogInstance = this;
                     this.content = options.content;
                     this.rectangleToShowIn = options.rectangleToShowIn ? options.rectangleToShowIn : new DOMRect(0, 0, window.innerWidth, window.innerHeight);
@@ -7488,7 +7099,7 @@
                     this.active = false;
                     this.isChangingPosition = {x: null, y: null};
                     this.hide = function (e) {
-                        if (e.target.offsetParent != dialogInstance.dialogEl || e.target == this.closeButtonEl) {
+                        if (!e || (e && e.target.offsetParent != dialogInstance.dialogEl || e.target == this.closeButtonEl)) {
                             if (dialogInstance.dialogEl.parentElement) dialogInstance.dialogEl.parentElement.removeChild(dialogInstance.dialogEl);
                             togglePopupClassName('', false, false);
                         }
@@ -7638,6 +7249,9 @@
         
                     this.dialogEl = document.createElement('DIV');
                     this.dialogEl.className = 'live-editor-dialog-window';
+                    if(options.className != null) {
+                        this.dialogEl.classList.add(...options.className.split(' '));
+                    }
                     this.closeButtonEl = document.createElement('DIV');
                     this.closeButtonEl.className = 'live-editor-close-sign';
                     this.dialogEl.appendChild(this.closeButtonEl);
@@ -7704,17 +7318,26 @@
                     this.closeButtonEl = null;
                     this.popupDialogEl = null;
                     this.hoverTimeout = null;
+                    this.active = false;
                     this.hide = function (e) {
-                        if (e.target.offsetParent != pupupInstance.popupDialogEl || e.target == this.closeButtonEl) {
+                        console.log('PopupDialog: hide')
+
+                        if (e.target == this.closeButtonEl || !pupupInstance.popupDialogEl.contains(e.target)) {
                             if (pupupInstance.popupDialogEl.parentElement) pupupInstance.popupDialogEl.parentElement.removeChild(pupupInstance.popupDialogEl);
         
                             togglePopupClassName('', false, false);
-        
-                            window.removeEventListener('click', pupupInstance.hide);
+                            this.active = false;     
+
+                            if (!Q.info.useTouchEvents) {
+                                window.removeEventListener('click', pupupInstance.hide);
+                            } else {
+                                window.removeEventListener('touchend', pupupInstance.hide);
+                            }                   
                         }
                     }
         
                     this.show = function (e) {        
+                        console.log('popup dialog: show');
                         pupupInstance.popupDialogEl.style.top = '';
                         pupupInstance.popupDialogEl.style.left = '';
                         pupupInstance.popupDialogEl.style.maxHeight = '';
@@ -7739,7 +7362,8 @@
                         }
                         
                         document.body.appendChild(pupupInstance.popupDialogEl);
-        
+                        console.log('popup dialog: show 2');
+
                         let popupRect = pupupInstance.popupDialogEl.getBoundingClientRect();
                         pupupInstance.popupDialogEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
         
@@ -7761,7 +7385,7 @@
                         let midXOfTriggeringElement = triggeringElementRect.x + triggeringElementRect.width / 2;
         
                         if (roomBelowButton >= popupRect.height + 20) {
-                            //console.log('show 1');
+                            console.log('show 1');
                             if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                 //console.log('show 1.1');
                                 pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
@@ -7794,7 +7418,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-below-position', true, false);
                             }
                         } else if(roomAboveButton >= popupRect.height + 20) {
-                            //console.log('show 2');
+                            console.log('show 2');
                             if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                 //console.log('show 2.1');
                                 pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
@@ -7826,7 +7450,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-above-position', true, false);
                             }
                         } else if (Math.min(roomBelowMidOfButton, roomAboveMidOfButton) >= popupRect.height / 2) {
-                            //console.log('show 3');
+                            console.log('show 3');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 3.1');
                                 pupupInstance.popupDialogEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
@@ -7847,7 +7471,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-mid-position', true, false);
                             }
                         } else if (roomBelowStartOfButton >= popupRect.height) {
-                            //console.log('show 4');
+                            console.log('show 4');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 4.1');
                                 pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + 'px';
@@ -7868,7 +7492,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-belowtop-position', true, false);
                             }
                         } else if (roomAboveEndOfButton >= popupRect.height) {
-                            //console.log('show 5');
+                            console.log('show 5');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 5.1');
                                 pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
@@ -7889,7 +7513,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-abovebottom-position', false, false);
                             }
                         } else if(popupRect.height + 20 < window.innerHeight) {
-                            //console.log('show 6');
+                            console.log('show 6');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 6.1');
                                 pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
@@ -7916,7 +7540,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-winmid-position', true, false);
                             }
                         } else {
-                            //console.log('show 7');
+                            console.log('show 7');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 7.1');
                                 pupupInstance.popupDialogEl.style.top = '0px';
@@ -7942,12 +7566,19 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-fullheight-position', true, true);
                             }
                         }
-        
+                        console.log('show 7', pupupInstance.popupDialogEl);
+
                         pupupInstance.popupDialogEl.style.visibility = '';
         
-                        window.addEventListener('click', pupupInstance.hide);
-        
-        
+                        this.active = true;        
+
+                        setTimeout(function() {
+                            if(!Q.info.useTouchEvents) {
+                                window.addEventListener('click', pupupInstance.hide);        
+                            } else {
+                                window.addEventListener('touchend', pupupInstance.hide);        
+                            }
+                        }, 0);
                     }
 
                     this.destroy = function() {
@@ -8020,31 +7651,45 @@
                     this.closeButtonEl.addEventListener('click', function (e) {
                         pupupInstance.hide(e);
                     });
-                    this.element.addEventListener('mouseenter', onElementMouseEnterListener);
-        
-                    this.element.addEventListener('mouseleave', onElementMouseLeaveListener);
-        
-                    this.popupDialogEl.addEventListener('mouseenter', function (e) {
-                        removeHoverTimerIfExists();
-                    })
-                    this.popupDialogEl.addEventListener('mouseleave', function (e) {
-                        pupupInstance.hoverTimeout = setTimeout(function () {
-                            pupupInstance.hide(e);
-                        }, 600)
-        
-                    });
 
-                    function onElementMouseEnterListener(e){
+                    if(!Q.info.useTouchEvents) {
+                        this.element.addEventListener('mouseenter', onElementMouseEnterListener);
+
+                        this.element.addEventListener('mouseleave', onElementMouseLeaveListener);
+
+                        this.popupDialogEl.addEventListener('mouseenter', function (e) {
+                            removeHoverTimerIfExists();
+                        })
+                        this.popupDialogEl.addEventListener('mouseleave', function (e) {
+                            pupupInstance.hoverTimeout = setTimeout(function () {
+                                pupupInstance.hide(e);
+                            }, 600)
+
+                        });
+
+                       
+                    } else {
+                        this.element.addEventListener('touchend', function (e) {
+                            if(pupupInstance.active) {
+                                pupupInstance.hide(e);
+                            } else {
+                                pupupInstance.show(e);
+                            }
+                            
+                        });
+                    }   
+                    
+                    function onElementMouseEnterListener(e) {
                         removeHoverTimerIfExists();
                         pupupInstance.show(e);
                     }
 
-                    function onElementMouseLeaveListener(e){
+                    function onElementMouseLeaveListener(e) {
                         pupupInstance.hoverTimeout = setTimeout(function () {
                             pupupInstance.hide(e);
                         }, 600)
                     }
-        
+
                     function removeHoverTimerIfExists() {
                         if (pupupInstance.hoverTimeout != null) {
                             clearTimeout(pupupInstance.hoverTimeout);
@@ -8202,7 +7847,8 @@
                         selectInstance.hide();
                     }
                     this.hide = function (e) {
-                        if (e && (e.target.offsetParent != selectInstance.customSelectDropDownEl || e.target == this.closeButtonEl) || e == null) {
+                        console.log('CustomSelect: hide')
+                        if (e && (e.target == this.closeButtonEl || !selectInstance.customSelectDropDownEl.contains(e.target)) || e == null) {
                             if (selectInstance.customSelectDropDownEl.parentElement) selectInstance.customSelectDropDownEl.parentElement.removeChild(selectInstance.customSelectDropDownEl);
         
                             togglePopupClassName('', false, false);
@@ -8436,7 +8082,9 @@
         
                         selectInstance.customSelectDropDownEl.style.visibility = '';
         
-                        window.addEventListener('click', selectInstance.hide);
+                        setTimeout(function() {
+                            window.addEventListener('click', selectInstance.hide);
+                        }, 0);
         
                         if(!selectInstance.customSelectedEl.classList.contains("live-editor-custom-select-arrow-active")) {
                             selectInstance.customSelectedEl.classList.add("live-editor-custom-select-arrow-active");
@@ -8526,9 +8174,7 @@
                     selectInstance.syncOptionsList();
 
                     selectedOptionEl.addEventListener("click", function (e) {
-                        /*when the select box is clicked, close any other select boxes,
-                        and open/close the current select box:*/
-                        e.stopPropagation();
+                        //e.stopPropagation();
                         if(!selectInstance.isShown) {
                             closeAllSelect(this);
                             selectInstance.show();
@@ -8550,6 +8196,7 @@
                     observer.observe(selectInstance.originalSelect, config);
 
                     function closeAllSelect(elmnt) {
+                        return;
                         let existingSelectsLists = document.querySelectorAll('.live-editor-custom-select-items');
                         let existingOpenedSelectsNum = existingSelectsLists.length;
                         let i;
@@ -8573,8 +8220,7 @@
                 function createPopup() {
                     console.log('createPopup 00', scenesInterface)
                     var dialog=document.createElement('DIV');
-                    dialog.className = 'live-editor-dialog-box live-editor-dialog_advanced_streaming live-editor-hidden';
-                    _dialogEl = dialog;
+                    dialog.className = 'live-editor-dialog-box live-editor-dialog_advanced_streaming';
 
                     var close=document.createElement('div');
                     close.className = 'live-editor-close-dialog-sign';
@@ -8584,20 +8230,20 @@
                     close.style.animation = 'none';
                     dialog.appendChild(close);
 
-                    var dialogInner=document.createElement('DIV');
+                    var dialogInner = document.createElement('DIV');
                     dialogInner.className = 'live-editor-dialog-inner';
                     dialog.appendChild(dialogInner);
 
-                    var dialogTitle=document.createElement('H3');
+                    var dialogTitle = document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", _controlsTool.text);
                     dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
                     dialogInner.appendChild(dialogTitle);
 
-                    var boxContent=document.createElement('DIV');
+                    var boxContent = document.createElement('DIV');
                     boxContent.className = 'live-editor-dialog-body';
                     dialogInner.appendChild(boxContent);
 
-                    var streamingControls=document.createElement('DIV');
+                    var streamingControls = document.createElement('DIV');
                     streamingControls.className = 'live-editor-popup-streaming-controls';
 
                     var streamingToSectionEl = streamingToSection.createSection();
@@ -8666,7 +8312,6 @@
                         }
                     );
 
-                    _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                     Q.activate(
                         Q.Tool.setUpElement(
                             dialog,
@@ -8689,7 +8334,7 @@
 
                     Q.activate(
                         Q.Tool.setUpElement(
-                            _dialogEl,
+                            dialog,
                             "Streams/fileManager",
                             {
 
@@ -8697,7 +8342,143 @@
                         ),
                         {},
                         function (toolEl) {
-                            _fileManagerTool = Q.Tool.from(_dialogEl, "Streams/fileManager");
+                            _fileManagerTool = Q.Tool.from(dialog, "Streams/fileManager");
+                        }
+                    )
+                    
+                    close.addEventListener('click', function () {
+                        hide()
+                    });
+
+                    tool.advancedStreamingDialog = boxContent;
+
+                    return {
+                        dialogEl: dialog,
+                        previewBoxEl: previewBoxBodyInner
+                    }
+                }
+
+                function createPopupHorizontalMobile() {
+                    var dialog=document.createElement('DIV');
+                    dialog.className = 'live-editor-dialog-box live-editor-dialog_advanced_streaming';
+
+                    var close=document.createElement('div');
+                    close.className = 'live-editor-close-dialog-sign live-editor-close-sign';
+                    dialog.appendChild(close);
+
+                    var dialogInner = document.createElement('DIV');
+                    dialogInner.className = 'live-editor-dialog-inner';
+                    dialog.appendChild(dialogInner);
+
+                    var dialogTitle = document.createElement('H3');
+                    dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", _controlsTool.text);
+                    dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
+                    dialogInner.appendChild(dialogTitle);
+
+                    var boxContent = document.createElement('DIV');
+                    boxContent.className = 'live-editor-dialog-body';
+                    dialogInner.appendChild(boxContent);
+
+                    var streamingControls = document.createElement('DIV');
+                    streamingControls.className = 'live-editor-popup-streaming-controls';
+
+                    var scenesColumn = scenesInterface.createScenesCol();
+                    streamingControls.appendChild(scenesColumn);
+
+                    var sourcesColumn = document.createElement('DIV');
+                    sourcesColumn.className = 'live-editor-popup-sources';
+                    _sourcesColumnEl = sourcesColumn;
+                    streamingControls.appendChild(sourcesColumn);
+
+                    //_audioMixerColumnEl = globalMicAudioInterface.createControlsButtons();
+                    //streamingControls.appendChild(optionsColumn);
+                    //streamingControls.appendChild(_audioMixerColumnEl);
+
+                    boxContent.appendChild(streamingControls);
+                    
+                    var previewBox = document.createElement('DIV');
+                    previewBox.className = 'live-editor-popup-preview-and-chat';
+                    boxContent.appendChild(previewBox);
+
+                    var previewBoxBody = document.createElement('DIV');
+                    previewBoxBody.className = 'live-editor-popup-preview-body';
+                    previewBox.appendChild(previewBoxBody);
+
+                    var previewBoxBodyInner = document.createElement('DIV');
+                    previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
+                    previewBoxBody.appendChild(previewBoxBodyInner);
+
+                    var streamingToSectionEl = streamingToSection.createSection();
+                    previewBoxBody.appendChild(streamingToSectionEl);
+
+                    var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                    sourceResizingEl.className = 'live-editor-popup-preview-resizing';
+                    previewBoxBodyInner.appendChild(sourceResizingEl);
+
+                    var chatBoxCon = document.createElement('DIV');
+                    chatBoxCon.className = 'live-editor-popup-chat-con';
+                    previewBox.appendChild(chatBoxCon);
+
+
+                   let chatsInterface = textChatsInterface.createSection();
+                   chatBoxCon.appendChild(chatsInterface);
+
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            _resizingElement,
+                            "Q/resize",
+                            {
+                                move: true,
+                                resize: true,
+                                active: true,
+                                //elementPosition: 'fixed',
+                                showResizeHandles: true,
+                                moveWithinArea: 'parent',
+                                allowOverresizing: true,
+                                negativeMoving: true,
+                                onMoving: function () {
+
+                                }
+                            }
+                        ),
+                        {},
+                        function () {
+                            _resizingElementTool = this;
+                            _resizingElement.style.display = 'none';
+                        }
+                    );
+
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            dialog,
+                            "Q/resize",
+                            {
+                                move: true,
+                                elementPosition: 'fixed',
+                                activateOnElement: dialogTitle,
+                                keepInitialSize: true,
+                                resize: false,
+                                active: true,
+                                moveWithinArea: 'window',
+                            }
+                        ),
+                        {},
+                        function () {
+
+                        }
+                    );
+
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            dialog,
+                            "Streams/fileManager",
+                            {
+
+                            }
+                        ),
+                        {},
+                        function (toolEl) {
+                            _fileManagerTool = Q.Tool.from(dialog, "Streams/fileManager");
                         }
                     )
 
@@ -8727,214 +8508,45 @@
                     }
                 }
 
-                function createPopupHorizontalMobile() {
-                    console.log('createPopupHorizontalMobile 00', scenesInterface)
-                    var dialog=document.createElement('DIV');
-                    dialog.className = 'live-editor-dialog-box live-editor-dialog_advanced_streaming live-editor-hidden Q_orientHorizontally';
-                    _dialogEl = dialog;
-                    var dialogTitle=document.createElement('H3');
-                    dialogTitle.innerHTML = 'Livestream Manager';
-                    dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
-
-                    var dialogInner=document.createElement('DIV');
-                    dialogInner.className = 'live-editor-dialog-inner';
-                    var boxContent=document.createElement('DIV');
-                    boxContent.className = 'live-editor-dialog-body';
-
-                    var previewBox = document.createElement('DIV');
-                    previewBox.className = 'live-editor-popup-preview';
-                    var previewBoxBody = document.createElement('DIV');
-                    previewBoxBody.className = 'live-editor-popup-preview-body';
-                    var previewBoxBodyInner = document.createElement('DIV');
-                    previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
-                    var sourceResizingEl = _resizingElement = document.createElement('DIV');
-                    sourceResizingEl.className = 'live-editor-popup-preview-resizing';
-
-
-                    var previewButtons = document.createElement('DIV');
-                    previewButtons.className = 'live-editor-popup-preview-buttons';
-                    var startRecordingBtn = document.createElement('BUTTON');
-                    startRecordingBtn.type = 'button';
-                    startRecordingBtn.className = 'Q_button';
-                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", _controlsTool.text);
-
-                    previewButtons.appendChild(startRecordingBtn);
-
-                    previewBoxBodyInner.appendChild(sourceResizingEl);
-                    previewBoxBody.appendChild(previewBoxBodyInner);
-                    //previewBoxBody.appendChild(previewButtons);
-                    previewBox.appendChild(previewBoxBody);
-                    boxContent.appendChild(previewBox);
-
-
-                    var streamingControls=document.createElement('DIV');
-                    streamingControls.className = 'live-editor-popup-streaming-controls';
-
-                    var scenesColumn = scenesInterface.createScenesCol();
-
-                    var sourcesColumn = document.createElement('DIV');
-                    sourcesColumn.className = 'live-editor-popup-sources';
-                    _sourcesColumnEl = sourcesColumn;
-
-                    var scrollerBtn = document.createElement('DIV')
-                    scrollerBtn.className = 'live-editor-popup-streaming-controls-scroller';
-                    sourcesColumn.appendChild(scrollerBtn);
-
-                    //streamingControls.appendChild(scenesColumn);
-                    streamingControls.appendChild(sourcesColumn);
-
-                    var close=document.createElement('div');
-                    close.className = 'live-editor-close-dialog-sign';
-                    close.innerHTML = '';
-                    close.style.animation = 'none';
-
-
-                    boxContent.appendChild(streamingControls);
-                    dialogInner.appendChild(dialogTitle);
-                    dialogInner.appendChild(boxContent);
-
-                    dialog.appendChild(close);
-                    dialog.appendChild(dialogInner);
-
-
-                    startRecordingBtn.addEventListener('click', function () {
-                        if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
-
-                        _webrtcSignalingLib.mediaManager.localRecorder.startRecording(function (liveInfo) {
-                            if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                            recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", _controlsTool.text);
-                            recordingSettings.style.display = 'none';
-                            activeRecordingSection.style.display = 'block';
-                        });
-                    })
-                    /*stopRecordingBtn.addEventListener('click', function () {
-                            if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
-
-                            _webrtcSignalingLib.mediaManager.localRecorder.stopRecording(function () {
-                                if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", _controlsTool.text);
-                                activeRecordingSection.style.display = 'none';
-                                recordingSettings.style.display = 'block';
-                            });
-                        })*/
-
-                    scrollerBtn.addEventListener('click', function () {
-                        let leftPos = optionsColumn.offsetLeft;
-                        if(streamingControls.scrollLeft >= leftPos / 2) {
-                            streamingControls.scrollLeft = 0;
-                        } else {
-                            streamingControls.scrollLeft = leftPos;
-                        }
-                    })
-
-                    streamingControls.addEventListener('scroll', function () {
-                        if(streamingControls.scrollLeft >= optionsColumn.offsetLeft / 2) {
-                            if(!scrollerBtn.classList.contains('live-editor-popup-streaming-scroller-back')) {
-                                scrollerBtn.classList.add('live-editor-popup-streaming-scroller-back')
-                            }
-                        } else {
-                            scrollerBtn.classList.remove('live-editor-popup-streaming-scroller-back')
-                        }
-                    });
-
-                    Q.activate(
-                        Q.Tool.setUpElement(
-                            _resizingElement,
-                            "Q/resize",
-                            {
-                                move: true,
-                                resize: true,
-                                active: true,
-                                //elementPosition: 'fixed',
-                                showResizeHandles: true,
-                                moveWithinArea: 'parent',
-                                allowOverresizing: true,
-                                negativeMoving: true,
-                                onMoving: function () {
-
-                                }
-                            }
-                        ),
-                        {},
-                        function () {
-                            _resizingElementTool = this;
-                        }
-                    );
-
-                    _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
-                    setTimeout(function () {
-                        Q.activate(
-                            Q.Tool.setUpElement(
-                                dialog,
-                                "Q/resize",
-                                {
-                                    move: true,
-                                    elementPosition: 'fixed',
-                                    activateOnElement: dialogTitle,
-                                    resize: false,
-                                    active: true,
-                                    moveWithinArea: 'window',
-                                }
-                            ),
-                            {},
-                            function () {
-
-                            }
-                        );
-                    }, 3000)
-
-                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
-                    var dialogWidth = 996;
-                    dialog.style.width = dialogWidth + 'px';
-                    console.log('dialogWidth', dialogWidth);
-                    if(Q.info.isMobile) {
-                        //dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                        //dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                    } else {
-                        dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                        dialog.style.top = '100px';
-                    }
-
-
-
-                    close.addEventListener('click', function () {
-                        hide()
-                    });
-
-                    tool.advancedStreamingDialog = boxContent;
-
-                    return {
-                        dialogEl: dialog,
-                        previewBoxEl: previewBoxBodyInner
-                    }
-                }
-
                 function hide() {
                     if(activeDialog == null) return;
-                    if(!activeDialog.dialogEl.classList.contains('live-editor-hidden')){
-                        activeDialog.dialogEl.classList.add('live-editor-hidden');
-                        isHidden = true;
-                        var streamingCanvas = document.querySelector('.live-editor-video-stream-canvas');
-                        if(streamingCanvas != null) {
-                            streamingCanvas.style.position = 'absolute';
-                            streamingCanvas.style.top = '-999999999px';
-                            streamingCanvas.style.left = '0';
-                            document.body.appendChild(streamingCanvas);
-                        }
-
-                        if(! tool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
-                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.stop();
-                        }
+                    
+                    if(activeDialog.dialogEl && activeDialog.dialogEl.parentElement) {
+                        activeDialog.dialogEl.parentElement.removeChild(activeDialog.dialogEl);
                     }
-                    //_controlsTool.show();
+
+                    isHidden = true;
+                    var streamingCanvas = document.querySelector('.live-editor-video-stream-canvas');
+                    if (streamingCanvas != null) {
+                        streamingCanvas.style.position = 'absolute';
+                        streamingCanvas.style.top = '-999999999px';
+                        streamingCanvas.style.left = '0';
+                        document.body.appendChild(streamingCanvas);
+                    }
+
+                    if (!tool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
+                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.stop();
+                    }
+                    
                     document.documentElement.classList.remove('Streams_webrtc_live');
                 }
 
                 function showHorizontalRequired() {
+                    var existingHorizontalRequired = document.querySelector('.Q_webrtc_orientHorizontally');
+                    if(existingHorizontalRequired) return;
+                    
                     var horizontalRequiredCon = document.createElement('DIV')
                     horizontalRequiredCon.className = 'Q_webrtc_orientHorizontally Q_orientHorizontally Q_floatAboveDocument';
                     horizontalRequiredCon.style.zIndex = '9999999999999999999999999999999999999999';
                     document.body.appendChild(horizontalRequiredCon);
+                    horizontalRequiredCon.addEventListener('touchend', function () {
+                        window.removeEventListener('resize', verticalToHorizontalOrientationChange);
+                        if(typeof screen != 'undefined' && screen.orientation != null) {
+                            screen.orientation.removeEventListener("change", verticalToHorizontalOrientationChange);
+                        }
+                        isOpening = false;
+                        hideHorizontalRequired();
+                    });
                 }
 
                 function hideHorizontalRequired() {
@@ -8942,7 +8554,20 @@
                     if(horizontalRequiredCon && horizontalRequiredCon.parentNode != null) horizontalRequiredCon.parentNode.removeChild(horizontalRequiredCon) ;
                 }
 
-                function show() {
+                function verticalToHorizontalOrientationChange() {
+                    setTimeout(function() {
+                        show(true);
+                    }, 1600)
+                    hideHorizontalRequired();
+                    console.log('show vertical: remove handler')
+                    window.removeEventListener('resize', verticalToHorizontalOrientationChange);
+                    if(typeof screen != 'undefined' && screen.orientation != null) {
+                        screen.orientation.removeEventListener("change", verticalToHorizontalOrientationChange);
+                    }
+                }
+
+                function show(skipCheck) {
+                    if(!skipCheck && (activeDialog && activeDialog.dialogEl && document.body.contains(activeDialog.dialogEl) || isOpening)) return;
                     var dialog, previewBox;
                     if(Q.info.isMobile){
                         if(window.innerWidth > window.innerHeight) {
@@ -8954,32 +8579,36 @@
                             dialog = mobileHorizontaldialogEl.dialogEl;
                             previewBox = mobileHorizontaldialogEl.previewBoxEl;
                             activeDialog = mobileHorizontaldialogEl;
-                            function resizeHandler() {
+                            isOpening = false;
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                            function horizontalToVerticaOrientationChange() {
                                 setTimeout(function () {
-                                    if(!dialog.classList.contains('live-editor-hidden') && window.innerWidth < window.innerHeight) {
-                                        hide();
-                                        show();
+                                    console.log('show', activeDialog, activeDialog.dialogEl, document.body.contains(activeDialog.dialogEl))
+                                    console.log('show', activeDialog && activeDialog.dialogEl && document.body.contains(activeDialog.dialogEl))
+                                    if(activeDialog && activeDialog.dialogEl && document.body.contains(activeDialog.dialogEl) === true) {
+                                        console.log('show 3')
+
+                                        if(window.innerWidth < window.innerHeight) {
+                                            console.log('show 4')
+                                            hide();
+                                            show(true);
+                                        }
                                     }
                                 }, 1600)
-                                window.removeEventListener('resize', resizeHandler);
+                                window.removeEventListener('resize', horizontalToVerticaOrientationChange);
 
                             }
-                            window.addEventListener('resize', resizeHandler);
-
+                            window.addEventListener('resize', horizontalToVerticaOrientationChange);
 
                         } else {
                             console.log('show vertical')
 
+                            isOpening = true;
                             showHorizontalRequired();
 
-                            function resizeHandler() {
-                                setTimeout(show, 1600)
-                                hideHorizontalRequired();
-                                window.removeEventListener('resize', resizeHandler);
-                            }
-                            window.addEventListener('resize', resizeHandler);
+                            window.addEventListener('resize', verticalToHorizontalOrientationChange);
                             if(typeof screen != 'undefined' && screen.orientation != null) {
-                                screen.orientation.addEventListener("change", resizeHandler);
+                                screen.orientation.addEventListener("change", verticalToHorizontalOrientationChange);
                             }
                         }
 
@@ -8993,14 +8622,19 @@
                         previewBox = desktopDialogEl.previewBoxEl;
                         activeDialog = desktopDialogEl;
                         if(desktopDialogEl == null) return;
+                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+
+                        var dialogWidth = 996;
+                        dialog.style.width = dialogWidth + 'px';
+                        dialog.style.height = (dialogWidth / 1.4) + 'px';
+                        console.log('dialogWidth', dialogWidth);
                     }
 
 
 
-                    if(dialog && dialog.classList.contains('live-editor-hidden')) {
+                    if(dialog) {
                         tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.compositeVideosAndDraw();
 
-                        dialog.classList.remove('live-editor-hidden');
                         isHidden = false;
 
                         var controlsRect = _controlsTool.controlBar.getBoundingClientRect();

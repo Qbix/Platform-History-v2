@@ -2923,3 +2923,16 @@
       background: #343434;
   }
   /*end: context menu*/
+
+
+  .Streams_webrtc_dialog-box {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    position: relative;
+    max-width: 90%;
+    /*border-radius: 4px;*/
+    z-index: 999999;
+    /*overflow-y: scroll;*/
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+}

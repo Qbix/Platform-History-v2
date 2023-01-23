@@ -206,30 +206,30 @@
     user-select: none;
 }
 /*start: streaming to facebook/rtmp/p2p broadcast section*/
-.live-editor-popup-streaming-controls .live-editor-stream-to-section {
+.live-editor-stream-to-section {
     background: #525252;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section-inner {
+.live-editor-stream-to-section-inner {
     display: flex;
     justify-content: space-between;
     padding: 20px;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn {
+.live-editor-stream-to-section .live-editor-stream-to-section-btn {
     display: flex;
     flex-direction: column;
     cursor: pointer;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon {
+.live-editor-stream-to-section .live-editor-stream-to-section-btn-icon {
     display: flex;
     justify-content: center;
     position: relative;
     text-align: center;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon-svg {
+.live-editor-stream-to-section .live-editor-stream-to-section-btn-icon-svg {
     display: inline-block;
     position: relative;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon-svg.live-editor-stream-to-is-active::after {
+.live-editor-stream-to-section .live-editor-stream-to-section-btn-icon-svg.live-editor-stream-to-is-active::after {
     display: block;
     position: absolute;
     top:-5px;
@@ -246,14 +246,14 @@
     from { opacity: 0.75; }
     to { opacity: 0.25; }
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon svg {
+.live-editor-stream-to-section .live-editor-stream-to-section-btn-icon svg {
     width: 40px;
     height: 40px;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-icon svg path{
+.live-editor-stream-to-section .live-editor-stream-to-section-btn-icon svg path{
     fill: #ffffff;
 }
-.live-editor-popup-streaming-controls .live-editor-stream-to-section .live-editor-stream-to-section-btn-text {
+.live-editor-stream-to-section .live-editor-stream-to-section-btn-text {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -263,7 +263,6 @@
 
 .live-editor-stream-to-section-fb {
     min-width: 370px;
-    padding: 5px;
 }
 .live-editor-stream-to-section-fb .live-editor-stream-to-section-fb-start-settings {
     overflow: hidden;
@@ -481,10 +480,18 @@
     padding: 10px 0 30px 0;
     margin-left: 10px;
 }
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-live .live-editor-stream-to-section-rtmp-buttons {
+    display: flex;
+    justify-content: center;
+}
 
 
 .live-editor-stream-to-section-p2p {
     min-width: 400px;
+}
+.live-editor-stream-to-section-p2p .live-editor-stream-to-section-p2p-start_settings{
+    display: flex;
+    justify-content: center;
 }
 .live-editor-stream-to-section-p2p .live-editor-stream-to-section-p2p-link-con {
     margin-top: 10px;
@@ -607,6 +614,7 @@
 .live-editor-dialog-body .live-editor-popup-preview-and-chat {
     display: flex;
     flex-direction: column;
+    position: relative;
     background: #282828;
     flex: 1;
     padding-top: 10px;
@@ -948,6 +956,7 @@
 /*start: container for text chats (public and private*/
 .live-editor-popup-chat-con {
     height: 46%;
+    position: relative;
 }
 .live-editor-popup-chat-inner {
     display: flex;
@@ -1250,6 +1259,9 @@
     flex: 1;
 }
 .live-editor-dialog-window .live-editor-dialog-window-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
     margin: 0;
     color: white;
     font-size: 18px;
@@ -1264,10 +1276,13 @@
     cursor: pointer;
     position: absolute;
     right: 5px;
-    top: 8px;
+    top: 5px;
 }
 .live-editor-dialog-window .live-editor-dialog-window-body {
-    padding: 5px;
+    
+}
+.live-editor-dialog-window .live-editor-dialog-window-content {
+   padding: 10px; 
 }
 /*end: simple dialog*/
 
@@ -1304,6 +1319,13 @@
   .live-editor-custom-select-items-con {
     background-color: #2a2a2a;
     z-index: 999999999999;
+  }
+  .live-editor-custom-select-items-con.live-editor-custom-select-right-fullheight-position,
+  .live-editor-custom-select-items-con.live-editor-custom-select-left-fullheight-position,
+  .live-editor-custom-select-items-con.live-editor-custom-select-winmid-fullheight-position,
+  .live-editor-custom-select-items-con.live-editor-custom-select-fullwidth-fullheight-position {
+    max-height: 100%;
+    overflow-y: auto;
   }
   .live-editor-custom-select-items .live-editor-custom-select-option, .live-editor-custom-select-selected {
     color: #ffffff;
@@ -1733,16 +1755,6 @@
 
 }
 
-.live-editor-dialog-box.text-chat {
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    bottom: 0;
-    width: 285px;
-    height: 350px;
-    border-radius: 10px 10px 0 0;
-    pointer-events: auto;
-}
 .live-editor-dialog-box .live-editor-close-dialog-sign {
     position: absolute;
     color: black;
@@ -1792,9 +1804,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.live-editor-popup-add-image, .live-editor-popup-add-video, .live-editor-popup-add-tc, .live-editor-popup-add-audio {
-    border-radius: 0;
-}
 
 .live-editor-popup-add-tc label{
     margin-top:10px;
@@ -1807,21 +1816,13 @@
     -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
     color:#fff;
-    padding: 0;
-    margin: 0;
-    position: absolute;
     z-index: 99999999;
-    border-radius: 5px;
     height: 614px;
-}
-.live-editor-desktop-screen .live-editor-popup-add-media-input {
     max-width: 90%;
     max-height: 100%;
-    overflow: visible;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    border-radius: 5px;
+}
+.live-editor-popup-add-media-input.live-editor-popup-add-audio-input {
+    height: auto;
 }
 
 .live-editor-popup-add-media-input.live-editor-dialog-box .live-editor-dialog-inner {
@@ -1830,18 +1831,8 @@
     overflow: hidden;
     height: 100%;
 }
-.live-editor-desktop-screen .live-editor-popup-add-media-input.live-editor-dialog-box .live-editor-dialog-inner {
+.live-editor-popup-add-media-input.live-editor-dialog-box .live-editor-dialog-inner {
     max-height: 90vh;
-}
-.live-editor-popup-add-media-input.live-editor-dialog-box h3.live-editor-dialog-header {
-    margin: 0;
-    padding: 8px;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px 5px 0 0;
-    border-bottom: none;
-    background: #525252;
-    color: #ffffff;
 }
 .live-editor-popup-add-media-input .live-editor-dialog-content {
     flex: 1;
@@ -1896,8 +1887,9 @@
     flex: 1;
     flex-basis: 80%;
 }
-.live-editor-desktop-screen .live-editor-popup-add-media-input .live-editor-dialog-camera-preview, .live-editor-dialog-video-preview {
-    height: 350px;
+.live-editor-popup-add-media-input .live-editor-dialog-camera-preview, 
+.live-editor-dialog-video-preview {
+    min-height: 350px;
 }
 .live-editor-popup-add-media-input .live-editor-dialog-camera-preview-inner, .live-editor-dialog-video-preview-inner {
     position: absolute;
@@ -2260,3 +2252,167 @@
     border-radius: 50%;
   }
   /*end: checkbox slider/switcher*/
+
+  /*start: mobile version of livestream editor*/
+
+  .Q_mobile .live-editor-dialog-box {
+    font-size: 14px;
+  }
+  .Q_mobile .live-editor-dialog-box .live-editor-close-sign {
+    animation:none;
+    right: -6px;
+    top: -5px;
+    height: 50px;
+    width: 50px;
+    font-size: 14px;
+  }
+  .Q_mobile .live-editor-dialog-box.live-editor-dialog_advanced_streaming h3.live-editor-dialog-header {
+    border-radius: 0;
+  }
+  .Q_mobile .live-editor-dialog-box .live-editor-close-dialog-sign {
+    border-radius: 0;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls {
+    width: 40%;
+    /*overflow: hidden; but on iphone*/ 
+    margin-bottom: 10px;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-popup-sources{
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon svg{
+    width: 25px;
+    height: 25px;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-participants-list .live-editor-participants-item-avatar {
+    min-width: 0;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-participants-list .Users_avatar_name {
+    min-width: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-participants-list .Users_avatar_name .Streams_firstName,
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-participants-list .Users_avatar_name .Streams_lastName {
+    min-width: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    margin-left: 5px;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-popup-sources-control {
+    padding: 5px 5px 5px 5px;
+  }
+  .Q_mobile .live-editor-popup-streaming-controls .live-editor-popup-sources-control .live-editor-popup-sources-control-btn.live-editor-popup-sources-control-btn-invite{
+    margin-right: 0;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat {
+    padding-right:0;
+    padding-top:0;
+    width: 60%;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-preview-body{
+    display: flex;
+    position: relative;
+    width:100%;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-preview-body-inner {
+    /*float:left;*/
+    display: block;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-preview-body-inner canvas {
+    float:left;
+    position: relative;
+    max-width: 100%;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-stream-to-section {
+    background: none;
+    float: left;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-stream-to-section-inner {
+    flex-direction: column;
+    padding: 5px;
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 100%;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-stream-to-section .live-editor-stream-to-section-btn {
+    flex-direction: row;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-stream-to-section .live-editor-stream-to-section-btn-text {
+    text-align: left;
+    align-items: center;
+    margin-top: 0;
+    margin-left: 5px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-con {
+    width: 30%;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-tool .Streams_preview_tool {
+    height: auto;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-tool .Streams_preview_tool .Streams_preview_icon{
+    width: 32px;
+    height: auto;
+    margin-right: 0;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-tool .Streams_preview_tool .Q_actions_container {
+    height: 24px !important;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-tool .live-editor-popup-chat-tool-public-room .Q_actions_container {
+    display: none !important;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-tool .Streams_preview_tool .Q_actions_container .basic32_remove {
+    background-position: 0 -723px;
+    background-size: 24px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-tabs-tool .Streams_preview_tool .Streams_preview_title{
+    font-size: 14px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box {
+    width: 65%;
+    padding: 5px 0 0 5px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Streams_chat_item .Streams_chat_bubble {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Streams_chat_item .Streams_chat_bubble .Streams_chat_from_me .Streams_chat_tick {
+    margin-top: 3px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Q_placeholders_container {
+    min-height: 30px !important;
+    height: 30px !important;
+    margin: 0px auto 0px 35px !important;
+    width: calc(100% - 35px) !important;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Q_placeholders_container input[type=text] {
+    min-height: 30px !important;
+    height: 30px !important;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Q_placeholders_container input[type=text]::placeholder {
+    font-size: 14px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Streams_chat_submit,
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Streams_chat_call {
+    width: 26px !important;
+    height: 26px !important;
+    line-height: 26px !important;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Streams_chat_addons {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .Q_mobile .live-editor-popup-preview-and-chat .live-editor-popup-chat-box .Streams_chat_timestamp {
+    color: #6c6c6c !important;
+  }
+  /*end: mobile versiot of livestream editor*/

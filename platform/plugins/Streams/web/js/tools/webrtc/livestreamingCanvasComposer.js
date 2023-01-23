@@ -2060,7 +2060,8 @@
                         }
         
                         function drawVideosOnCanvas() {
-                            if(_isActive === false) return;
+                            if(!_isActive) return;
+
                             _inputCtx.clearRect(0, 0, _size.width, _size.height);
         
                             for(let i = _activeScene.backgroundSources.length - 1; i >= 0; i--) {
@@ -3052,8 +3053,6 @@
         
                         function compositeVideosAndDraw() {
                             log('compositeVideosAndDraw 0');
-        
-                            if (_isActive) return;
                             log('compositeVideosAndDraw');
                             if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
         
@@ -3904,17 +3903,12 @@
                         }
                         
         
-                        function stopAndRemove() {
-                            log('videoComposer: stopAndRemove')
-        
-                            /*if(_canvas != null) {
-                                if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
-                            }*/
+                        function stop() {
+                            log('videoComposer: stop')
         
                             _isActive = false;
         
                             _eventDispatcher.dispatch('drawingStop');
-        
                         }
         
                         function isActive() {
@@ -3927,7 +3921,7 @@
                             updateWebRTCLayout: updateWebRTCLayout,
                             compositeVideosAndDraw: compositeVideosAndDraw,
                             refreshEventListeners: refreshEventListeners,
-                            stop: stopAndRemove,
+                            stop: stop,
                             isActive: isActive,
                             addSource: addSource,
                             removeSource: removeSource,
@@ -4494,25 +4488,6 @@
                         return _canvasMediStream;
                     }
         
-                    function stopStreamCapture() {
-                        log('stopStreamCapture');
-        
-                        videoComposer.stop();
-        
-                        if(_canvasMediStream != null) {
-                            let tracks = _canvasMediStream.getTracks();
-                            for(let t in tracks) {
-                                tracks[t].stop()
-                            }
-                            _canvasMediStream = null;
-                        }
-        
-                        audioComposer.stop();
-                        
-                        _composerIsActive = false;
-        
-                    }
-        
                     function startRecorder(ondataavailable) {
                         if(ondataavailable != null){
                             addDataListener(ondataavailable);
@@ -4577,7 +4552,7 @@
                         
                     }
         
-                    function stopRecorder() {
+                    function stopRecorder(stopCanvasDrawingAndMixing) {
                         log('stopRecorder')
         
                         if(_mediaRecorder == null) return;
@@ -4614,9 +4589,23 @@
         
                             })*/
                         }
-                        /*videoComposer.stop();
-                        audioComposer.stop();*/
-                        stopStreamCapture();
+                        
+                        //if user ends call, stop all processes related to livestreaming
+                        if(stopCanvasDrawingAndMixing) {
+                            videoComposer.stop();
+                            audioComposer.stop();
+                        }
+
+                        if(_canvasMediStream != null) {
+                            let tracks = _canvasMediStream.getTracks();
+                            for(let t in tracks) {
+                                tracks[t].stop()
+                            }
+                            _canvasMediStream = null;
+                        }
+                        
+                        _composerIsActive = false;
+
                         _mediaRecorder = null;
                     }
         
@@ -4667,14 +4656,6 @@
                         }
         
                         URL.revokeObjectURL(hyperlink.href);
-                    }
-        
-                    function stopCanvasRendering() {
-                        videoComposer.stop();
-                    }
-        
-                    function stopAudioMixing() {
-                        audioComposer.stop();
                     }
         
                     function generateId() {
@@ -4768,7 +4749,6 @@
                         videoComposer: videoComposer,
                         audioComposer: audioComposer,
                         captureStream: captureStream,
-                        stopStreamCapture: stopStreamCapture,
                         getMediaStream: function() {
                             return _canvasMediStream;
                         },
@@ -4779,9 +4759,6 @@
                         },
                         canvas: function () {
                             return _canvas;
-                        },
-                        endStreaming: function () {
-                            stopRecorder();
                         },
                         startRecorder: startRecorder,
                         stopRecorder: stopRecorder,

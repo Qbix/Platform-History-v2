@@ -111,7 +111,7 @@
         this.WebRTCClass = null;
         this.controlBar = null;
         this.participantsListTool = null;
-        this.chatBox = this.chatDialog = null;
+        this.chatBox = null;
 
         $(this.element).addClass('Q_floatAboveDocument');
         if (!options.webRTClibraryInstance || !options.webrtcClass) {
@@ -168,7 +168,6 @@
                             tool.WebRTCClass.screenRendering.toggleLoudestScreenMode('allButMe');
                         }
                     });
-                    tool.initFbLiveInterface();
                     tool.initLivestreamingEditor();
                     tool.initMediaLimits();
     
@@ -599,11 +598,8 @@
                     if(!roomIsSwitching) {
                         console.log('end live streamings')
                         if(!roomIsSwitching && tool.livestreamingEditorTool && tool.livestreamingEditorTool.livestreamingRtmpSenderTool && tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
-                            tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming();
-                        }
-                        if(tool.livestreamingEditorTool && tool.livestreamingEditorTool.livestreamingCanvasComposerTool) {
-                            tool.livestreamingEditorTool.livestreamingCanvasComposerTool.canvasComposer.stopStreamCapture();         
-                        }               
+                            tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming(null, true);
+                        }            
                     }
                 });
 
@@ -1119,115 +1115,38 @@
             textChat: function () {
                 var tool = this;
                 function createPopup() {
-                    var dialog = document.createElement('DIV');
-                    dialog.className = 'Streams_webrtc_dialog-box text-chat Streams_webrtc_hidden';
-
-                    var dialogTitle = document.createElement('H3');
-                    dialogTitle.innerHTML = 'Conference chat';
-                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
-
-                    var dialogInner = document.createElement('DIV');
-                    dialogInner.className = 'Streams_webrtc_dialog-inner';
+                    
                     var chatBox = document.createElement('DIV');
                     chatBox.className = 'Streams_webrtc_popup-chat-box  Streams_webrtc_popup-box';
-
-
-                    var close = document.createElement('div');
-                    close.className = 'Streams_webrtc_close-dialog-sign';
-                    close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                    close.style.backgroundRepeat = 'no-repeat';
-                    close.style.backgroundSize = 'cover';
-
-                    dialogInner.appendChild(dialogTitle);
-                    dialogInner.appendChild(chatBox);
-
-                    dialog.appendChild(close);
-                    dialog.appendChild(dialogInner);
-
 
                     if (!Q.info.useTouchEvents) {
                         tool.textChatBtn.parentNode.appendChild(chatBox);
                     } else {
-                        tool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
-                        setTimeout(function () {
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    dialog, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        movable: true,
-                                        activateOnElement: dialogTitle,
-                                        resizeByWheel: false,
-                                        active: true
-                                    }
-                                ),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }, 3000)
+                        
                     }
 
-                    var controlsRect = tool.controlBar.getBoundingClientRect();
-                    if (Q.info.isMobile) {
-                        dialog.style.left = (window.innerWidth / 2) - (285 / 2) + 'px';
-                        dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                    } else {
-                        dialog.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
-                    }
-
-
-                    close.addEventListener('click', function () {
-                        tool.textChat.hide();
-                    });
-
-                    tool.chatDialog = chatBox;
                     tool.chatBox = chatBox;
 
                     tool.textChat = {
-                        chatDialog: dialog,
+                        qbixDialog: null,
                         chatBox: chatBox,
                         static: false,
                         isHidden: true,
-                        hide: function () {
-                            if (!this.chatDialog.classList.contains('Streams_webrtc_hidden')) {
-                                this.chatDialog.classList.add('Streams_webrtc_hidden');
-                                this.isHidden = true;
-                                this.static = false;
-                                if (this.chatTool != null) this.chatTool.seen(false);
-                            }
-                        },
                         show: function () {
-                            if (this.chatDialog.classList.contains('Streams_webrtc_hidden')) {
-                                this.chatDialog.classList.remove('Streams_webrtc_hidden');
-                                this.scrollToTheBottom();
-                                if (this.chatTool != null) this.chatTool.seen(true);
+                            this.qbixDialog = Q.Dialogs.push({
+                                title: 'Chat',
+                                content: this.chatBox
+                            });
 
-                                this.isHidden = false;
+                            this.scrollToTheBottom();
+                            if (this.chatTool != null) this.chatTool.seen(true);
 
-                                tool.newMessagesCounter.innerHTML = '0';
-                                var msgCounter = tool.newMessagesCounter.parentNode;
+                            this.isHidden = false;
 
-                                var controlsRect = tool.controlBar.getBoundingClientRect();
-                                if (Q.info.isMobile) {
-                                    dialog.style.left = (window.innerWidth / 2) - (285 / 2) + 'px';
-                                    dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                                } else {
-                                    var winWidth = window.innerWidth;
-                                    var availableSpace = winWidth - (controlsRect.left + controlsRect.width);
-                                    if (availableSpace >= (285 + 15)) {
-                                        dialog.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
-                                        dialog.style.bottom = 0;
+                            tool.newMessagesCounter.innerHTML = '0';
+                            var msgCounter = tool.newMessagesCounter.parentNode;
 
-                                    } else {
-                                        dialog.style.left = (winWidth / 2) - (285 / 2) + 'px';
-                                        dialog.style.bottom = (controlsRect.height + 10) + 'px';
-                                    }
-                                }
-
-                                if (!msgCounter.classList.contains('Streams_webrtc_hidden')) msgCounter.classList.add('Streams_webrtc_hidden');
-                            }
+                            if (!msgCounter.classList.contains('Streams_webrtc_hidden')) msgCounter.classList.add('Streams_webrtc_hidden');
                         },
                         toggle: function () {
                             if (this.isHidden) {
@@ -1272,7 +1191,7 @@
                             var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                             if (resizeTool && resizeTool.state.appliedRecently) return;
                             if (tool.textChat.chatTool == null) initChat();
-                            tool.textChat.toggle();
+                            tool.textChat.show();
                         });
 
                     } else {
@@ -1563,77 +1482,30 @@
             },
             showControlsDialog: function (dialogType) {
                 var tool = this;
-                var _dialogContetntEl = null;
+                var _dialogContetntEl, title;
                 if(dialogType == 'select-camera') {
                     _dialogContetntEl = tool.settingsPopupEl;
+                    title = 'Video Setttings';
                 } else if (dialogType == 'select-audio') {
+                    title = 'Audio Setttings';
                     _dialogContetntEl = tool.audioSettingsPopupEl;
-                } else if (dialogType == 'broadcast') {
-                    _dialogContetntEl = tool.broadcastPopupEl;
+                } else if (dialogType == 'text-chat') {
+                    title = 'chat';
+                    _dialogContetntEl = tool.audioSettingsPopupEl;
                 }
 
                 function show() {
-                    var bg = document.createElement('DIV');
-                    bg.className = 'Streams_webrtc_dialog-bg Streams_webrtc_' + dialogType + '-bg';
+                    let dialog = Q.Dialogs.push({
+						title: title,
+						content: _dialogContetntEl,
+						className: 'Streams_webrtc_dialog-con-' + dialogType,
+					});
 
-                    var dialogCon = document.createElement('DIV');
-                    dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-' + dialogType;
-                    dialogCon.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        //if(e.currentTarget == e.target) self.closeAllDialogs();
-                    });
-
-                    var dialog = document.createElement('DIV');
-                    dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-' + dialogType;
-
-                    var dialogTitle = document.createElement('H3');
-                    dialogTitle.innerHTML = Q.getObject("webrtc.settingsPopup.dialogTitle", tool.text);
-                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
-
-                    var dialogInner = document.createElement('DIV');
-                    dialogInner.className = 'Streams_webrtc_dialog-inner';
-
-
-                    var close = document.createElement('div');
-                    close.className = 'Streams_webrtc_close-dialog-sign';
-                    close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
-
-                    close.addEventListener('click', function () {
-                        if (bg.parentNode != null) bg.parentNode.removeChild(bg);
-                        if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
-                        tool.state.dialogIsOpened = false;
-
-                    });
-
-                    dialogInner.appendChild(dialogTitle);
-                    dialogInner.appendChild(_dialogContetntEl);
-
-                    dialog.appendChild(close);
-                    dialog.appendChild(dialogInner);
-                    dialogCon.appendChild(dialog)
-                    document.body.appendChild(dialogCon);
-                    document.body.appendChild(bg);
-
-
-                    var contentWidth = _dialogContetntEl.firstChild.scrollWidth;
-                    var contentHeight = _dialogContetntEl.scrollHeight;
-                    var windowWidth = window.innerWidth;
-                    var windowHeight = window.innerHeight;
-
-                    var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
-
-                    _dialogContetntEl.style.maxHeight = maxHeight + 'px';
-                    dialog.style.minWidth = contentWidth + 'px';
-
-                    tool.state.dialogIsOpened = true;
+                    console.log('showControlsDialog', dialog)
                 }
 
                 function hide() {
-                    let dialog = document.querySelector('.Streams_webrtc_dialog-con.Streams_webrtc_dialog-con-' + dialogType);
-                    let dialogBg = document.querySelector('.Streams_webrtc_dialog-bg.Streams_webrtc_' + dialogType + '-bg');
-                    if (dialog && dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
-                    if (dialogBg && dialogBg.parentNode != null) dialogBg.parentNode.removeChild(dialogBg);
-                    tool.state.dialogIsOpened = false;
+                 
                 }
 
                 return {
@@ -2669,315 +2541,6 @@
                         el.classList.remove('Streams_webrtc_hover');
                     }
                 })
-            },
-
-            initFbLiveInterface: function () {
-                var tool = this;
-
-                tool.fbLiveInterface = (function () {
-                    var _liveId;
-                    var _liveInfo;
-                    var _accessToken;
-
-                    function goLiveDialog(callback) {
-                        var goLive = function () {
-                            FB.ui({
-                                display: 'iframe',
-                                method: 'live_broadcast',
-                                phase: 'create'
-                            }, (createRes) => {
-
-                                FB.ui({
-                                    display: 'iframe',
-                                    method: 'live_broadcast',
-                                    phase: 'publish',
-                                    broadcast_data: createRes
-                                }, (publishRes) => {
-                                    if (publishRes == null || typeof publishRes == 'undefined') {
-                                        tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
-                                    }
-
-                                    _liveId = publishRes.id
-                                    var linkToStream = 'https://www.facebook.com/facebook/videos/' + publishRes.id;
-                                    if (callback != null) callback(linkToStream);
-                                });
-
-                                tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.startStreaming([createRes.secure_stream_url], 'facebook');
-                            });
-                        }
-
-                        if (FB.getUserID()) {
-                            goLive();
-                        }
-                    }
-
-                    /**
-                     * Creates live streaming session via FB SDK for PHP
-                     * @method createLive
-                     * @param {Object} [data] title, description
-                     * @param {Object} [data.title] title when posting Live
-                     * @param {Object} [data.description] description when posting live
-                     * @param {Function} [callback] callback function that is triggered after live session created
-                     * @return {Object} RTMP urls for streaming
-                     */
-                    function createLive(data, callback) {
-                        Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
-                            var msg = Q.firstErrorMessage(err, response && response.errors);
-
-                            if (msg) {
-                                return Q.alert(msg);
-                            }
-
-                            _liveId = response.slots.fbLive.id
-                            if (callback != null) callback(response.slots.fbLive);
-
-                        }, {
-                            method: 'POST',
-                            fields: {
-                                'accessToken': tool.fbAccessToken,
-                                'title': data.title,
-                                'description': data.description,
-                                'privacy': data.privacy,
-                                'action': 'start'
-                            }
-                        });
-                    }
-
-                    /**
-                     * Ends live streaming session via FB SDK for PHP
-                     * @method deleteLive
-                     * @param {Function} [callback] callback function that is triggered after live session was ended
-                     */
-                    function endLive(callback) {
-                        Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
-                            var msg = Q.firstErrorMessage(err, response && response.errors);
-
-                            if (msg) {
-                                return Q.alert(msg);
-                            }
-
-                            tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
-                            if (callback != null) callback(_liveInfo);
-                        }, {
-                            method: 'post',
-                            fields: {
-                                'accessToken': tool.fbAccessToken,
-                                'id': _liveId,
-                                'action': 'end'
-                            }
-                        });
-                    }
-
-                    /**
-                     * Removes live streaming session via FB SDK for PHP
-                     * @method deleteLive
-                     * @param {Function} [callback] callback function that is triggered after live session was deleted
-                     */
-                    function deleteLive(callback) {
-                        Q.req("Streams/webrtc", ["fblive"], function (err, response) {
-                            var msg = Q.firstErrorMessage(err, response && response.errors);
-
-                            if (msg) {
-                                return Q.alert(msg);
-                            }
-
-                            if (callback != null) callback();
-                        }, {
-                            method: 'delete',
-                            fields: {
-                                'accessToken': tool.fbAccessToken,
-                                'action': 'delete'
-                            }
-                        });
-                    }
-
-
-                    /**
-                     * 1) Checks FB login status; 2) gets RTMP url for streaming; 3) passes it to websocket streamer function
-                     * @method startFacebookLive
-                     */
-                    function startFacebookLive(data, callback) {
-
-
-                        var satrtLive = function () {
-                            if (tool.WebRTCClass.getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
-                                goLiveDialog(callback);
-                                return
-                            }
-                            var loggedInCallback = function () {
-                                if (tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.isStreaming('facebook')) {
-                                    tool.facebookLiveDialog();
-                                } else {
-                                    tool.fbLiveInterface.createLive(data, function (response) {
-
-                                        tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.startStreaming([response.secure_stream_url], 'facebook');
-                                        _liveInfo = response;
-                                        if (callback != null) callback(response);
-                                    });
-                                }
-                            }
-
-                            var notLoggedInCallback = function () {
-                                FB.login(function (response) {
-                                    if (response.authResponse) {
-                                        tool.fbAccessToken = response.authResponse.accessToken;
-                                        loggedInCallback(response.authResponse.accessToken);
-                                    }
-                                }, { auth_type: 'reauthorize', scope: 'email,public_profile,publish_video' });
-                            }
-
-                            FB.getLoginStatus(function (response) {
-                                if (response.status === 'connected') {
-                                    FB.api(
-                                        '/me/permissions',
-                                        'GET',
-                                        function (permissionsResponse) {
-                                            var permissions = permissionsResponse.data;
-                                            for (let p in permissions) {
-                                                if (permissions[p].permission == 'publish_video') {
-                                                    tool.fbAccessToken = response.authResponse.accessToken;
-                                                    loggedInCallback();
-                                                    return;
-                                                }
-                                            }
-
-                                            notLoggedInCallback();
-                                        }
-                                    );
-
-                                } else {
-                                    notLoggedInCallback();
-                                }
-
-                            });
-                        }
-
-                        if (tool.WebRTCClass.getOptions().liveStreaming.useRecordRTCLibrary) {
-                            Q.addScript([
-                                "{{Streams}}/js/tools/webrtc/RecordRTC.js"
-                            ], function () {
-                                satrtLive();
-                            });
-                        } else {
-                            satrtLive();
-                        }
-
-                    }
-
-                    /**
-                     * Show dialog with iframe code
-                     * @method startFacebookLive
-                     */
-                    function getIframe(iFrame) {
-                        var testFrame = '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F100004473155810%2Fvideos%2F1429100060582419%2F&width=0" width="0" height="0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>';
-
-                        var embedCode = iFrame != null ? iFrame : (_liveInfo ? _liveInfo['embed_html'] : testFrame);
-
-                        var bg = document.createElement('DIV');
-                        bg.className = 'Streams_webrtc_dialog-bg';
-
-                        var dialogCon = document.createElement('DIV');
-                        dialogCon.className = 'Streams_webrtc_dialog-con';
-                        dialogCon.addEventListener('click', function (e) {
-                            e.stopPropagation();
-                            //if(e.currentTarget == e.target) self.closeAllDialogs();
-                        });
-
-                        var dialogTitle = document.createElement('H3');
-                        dialogTitle.innerHTML = 'Embed';
-                        dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
-
-                        var close = document.createElement('div');
-                        close.className = 'Streams_webrtc_close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
-
-                        var dialog = document.createElement('DIV');
-                        dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_live-preview';
-
-                        var dialogInner = document.createElement('DIV');
-                        dialogInner.className = 'Streams_webrtc_dialog-inner';
-
-                        var iframeCodeCon = document.createElement('DIV');
-                        iframeCodeCon.className = 'Streams_webrtc_live_embed_code';
-                        var iframeCodeTitle = document.createElement('DIV');
-                        iframeCodeTitle.className = 'Streams_webrtc_live_embed_title';
-                        iframeCodeTitle.innerHTML = 'Embed Video';
-                        var iframeCode = document.createElement('TEXTAREA');
-                        iframeCode.innerText = embedCode;
-
-                        var copyBtn = document.createElement('BUTTON');
-                        copyBtn.type = 'button';
-                        copyBtn.className = 'Q_button';
-                        copyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.text);
-
-                        var preview = document.createElement('DIV');
-                        preview.className = 'Streams_webrtc-dialog-preview';
-                        preview.innerHTML = embedCode;
-
-                        dialogInner.appendChild(dialogTitle);
-                        iframeCodeCon.appendChild(iframeCodeTitle);
-                        iframeCodeCon.appendChild(iframeCode);
-                        iframeCodeCon.appendChild(copyBtn);
-                        preview.appendChild(iframeCodeCon);
-                        dialogInner.appendChild(preview);
-
-                        dialog.appendChild(close);
-                        dialog.appendChild(dialogInner);
-                        dialogCon.appendChild(dialog)
-                        document.body.appendChild(dialogCon);
-                        document.body.appendChild(bg);
-
-                        /*var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
-
-                        dialog.style.minWidth = tool.settingsPopupEl.firstChild.scrollWidth + 'px';*/
-                        tool.state.dialogIsOpened = true;
-
-
-                        iframeCode.addEventListener('click', function () {
-                            this.setSelectionRange(0, this.value.length);
-                        })
-
-                        copyBtn.addEventListener('click', function () {
-                            copyToClipboard(iframeCode);
-                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.codeCopiedToCb", tool.text));
-                        });
-
-                        close.addEventListener('click', function () {
-                            if (bg.parentNode != null) bg.parentNode.removeChild(bg);
-                            if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
-                            tool.state.dialogIsOpened = false;
-                        });
-                    }
-
-
-                    return {
-                        createLive: createLive,
-                        deleteLive: deleteLive,
-                        endLive: endLive,
-                        startFacebookLive: startFacebookLive,
-                        getIframe: getIframe
-                    }
-                }());
-            },
-
-            facebookLiveDialog: function () {
-                var tool = this;
-                var fbLiveDialog = document.createElement('DIV');
-                fbLiveDialog.className = 'Streams_webrtc_fblive_dialog_inner';
-                var endStreamingBtn = document.createElement('BUTTON');
-                endStreamingBtn.type = 'button';
-                endStreamingBtn.className = 'Q_button';
-                endStreamingBtn.innerHTML = "Stop streaming";
-                endStreamingBtn.addEventListener('click', function () {
-                    tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
-                })
-                fbLiveDialog.appendChild(endStreamingBtn);
-                Q.Dialogs.push({
-                    title: Q.text.Streams.webrtc.fbLive.dialogTitle,
-                    className: 'Streams_webrtc_fblive_dialog',
-                    content: fbLiveDialog,
-                    apply: true
-                });
             },
 
             initLivestreamingEditor: function () {
