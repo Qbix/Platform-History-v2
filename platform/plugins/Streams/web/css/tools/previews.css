@@ -370,7 +370,7 @@
 	white-space: nowrap;
 	padding: 5px 5px 0 5px;
 }
-.Streams_dialog_answer_composer .Q_dialog_content > * {
+.Streams_dialog_answer_composer .Q_dialog_content * {
 	vertical-align: middle;
 }
 /* </Streams_question_preview> */
