@@ -17,7 +17,7 @@
 
 	var paths_filename = app_dir + '/local/paths';
 	var paths, json, php;
-	if (fs.existsSync(paths_filename+'.json.php') {
+	if (fs.existsSync(paths_filename+'.json.php')) {
 		php = fs.readFileSync(paths_filename+'.json.php', 'utf8');
 		json = php.split("\n").slice(1, -1);
 		paths = {Q_DIR: JSON.parse(json).platform};
