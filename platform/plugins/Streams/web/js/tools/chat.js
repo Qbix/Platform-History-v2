@@ -173,7 +173,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
-	onRefresh: new Q.Event(),
 	onMessageRender: new Q.Event(),
 	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),

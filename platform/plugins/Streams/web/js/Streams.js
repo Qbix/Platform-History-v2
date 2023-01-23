@@ -639,6 +639,7 @@ Q.Tool.define({
 	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chat.js",
 	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
 	"Streams/video/chat" : "{{Streams}}/js/tools/video/chat.js",
+	"Streams/question/chat" : "{{Streams}}/js/tools/question/chat.js",
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
 	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chat.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
@@ -652,6 +653,7 @@ Q.Tool.define({
 Streams.Chat = {
 	extensions: [
 		'Streams/mentions/chat',
+		'Streams/question/chat',
 		'Streams/audio/chat',
 		'Streams/video/chat',
 		'Streams/pdf/chat',
