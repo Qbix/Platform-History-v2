@@ -207,6 +207,9 @@
 .Streams_chat_tool .Users_avatar_icon {
 	position: absolute;
 }
+.Streams_chat_tool .Streams_participants_tool .Users_avatar_icon {
+	position: unset;
+}
 .Streams_chat_avatar_icon {
 	float: left;
 }
