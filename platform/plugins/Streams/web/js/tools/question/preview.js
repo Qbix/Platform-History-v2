@@ -284,7 +284,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						return;
 					}
 
-					if (answersRelated.state.publisherId !== tool.state.publisherId || answersRelated.state.streamName !== tool.state.streamName) {
+					if (answersRelated.state.publisherId !== tool.preview.state.publisherId || answersRelated.state.streamName !== tool.preview.state.streamName) {
 						return;
 					}
 
