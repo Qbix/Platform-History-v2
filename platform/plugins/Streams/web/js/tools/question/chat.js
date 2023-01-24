@@ -40,12 +40,13 @@
 		}
 
 		// add contect menu item
-		var $element = tool.chatTool.addMenuItem({
+		tool.chatTool.addMenuItem({
 			title: title,
 			icon: "{{Streams}}/img/icons/Streams/question/40.png",
 			handler: function () {
 				Q.Dialogs.push({
 					title: title,
+					className: "Streams_question_dialog",
 					content: $("<div>").tool("Streams/question", {
 						publisherId: tool.chatTool.state.publisherId,
 						streamName: tool.chatTool.state.streamName
