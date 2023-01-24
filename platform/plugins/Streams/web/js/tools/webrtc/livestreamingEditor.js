@@ -6749,18 +6749,26 @@
                     });
 
                     let localAudioTracks = _webrtcSignalingLib.localParticipant().audioTracks(true);
-        
-                        if(localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
-                            console.log('localAudioTracks[0].stream', localAudioTracks[0].stream)
-                            _globalMicSource.addStream(localAudioTracks[0].stream);
-                        }
 
-                        _webrtcSignalingLib.event.on('trackAdded', function (e) {
-                            if(!e.participant.isLocal || e.track.kind != 'audio') return;
-                            _globalMicSource.addStream(e.track.stream);
-                        });
-                        
-                   
+                    if (localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
+                        console.log('localAudioTracks[0].stream', localAudioTracks[0].stream)
+                        _globalMicSource.addStream(localAudioTracks[0].stream);
+                    }
+
+                    _webrtcSignalingLib.event.on('trackAdded', function (e) {
+                        if (!e.participant.isLocal || e.track.kind != 'audio') return;
+                        _globalMicSource.addStream(e.track.stream);
+                    });
+
+
+                    tool.state.webrtcSignalingLib.event.on('micEnabled', function () {
+                        _globalMicSource.connect();
+                    });
+                    tool.state.webrtcSignalingLib.event.on('micDisabled', function () {
+                        _globalMicSource.disconnect();
+                    });
+
+
                     function createControlsButtons() {
                     
                     }
