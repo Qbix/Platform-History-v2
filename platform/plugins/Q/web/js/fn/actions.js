@@ -63,7 +63,8 @@ function _Q_actions(options) {
 		if (!state.container) {
 			var container = $('<div class="Q_actions_container" />').css({
 				'position': 'absolute',
-				'zIndex': state.zIndex
+				'zIndex': state.zIndex,
+				'white-space': 'nowrap'
 			});
 			var interval = null;
 			if (state.containerClass) {

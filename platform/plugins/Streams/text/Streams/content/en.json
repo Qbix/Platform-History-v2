@@ -124,6 +124,9 @@
             "chooseFromRegistered": "Choose from registered users",
             "inviteViaEmailOrSms": "Invite via email or SMS"
         },
+        "complete": {
+            "HasInvitedYou": "has invited you to:"
+        },
         "email": {
             "subject": "Hey, check this out",
             "PleaseVisitLink": "Please visit the following link:",

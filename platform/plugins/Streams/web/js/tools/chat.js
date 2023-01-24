@@ -577,7 +577,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						var stream = this;
 						var streamType = stream.fields.type;
 
-						if (streamType === 'Streams/webrtc') {
+						if (["Streams/webrtc", "Streams/question", "Streams/answer"].includes(streamType)) {
 							// Streams/webrtc/preview tool handle click event itself
 							return;
 						}

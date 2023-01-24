@@ -3807,7 +3807,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/subscribed', [slotName], function (err, data) {
+	Q.req('Streams/subscribe', [slotName], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
@@ -6266,7 +6266,7 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 		}
 		function _showDialog() {
-			var templateName = params.templateName || 'Streams/invited/complete';
+			var templateName = params.templateName || 'Streams/templates/invited/complete';
 			params.prompt = (params.prompt !== undefined)
 				? params.prompt
 				: Q.text.Streams.login.prompt;

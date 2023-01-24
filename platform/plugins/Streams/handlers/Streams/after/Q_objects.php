@@ -17,6 +17,8 @@ function Streams_after_Q_objects () {
 		$displayName = '';
 		$showDialog = true;
 	}
+
+	$text = Q_Text::get('Streams/content');
 	
 	$p = @compact('user', 'invite', 'displayName');
 	Q::event('Streams/inviteDialog', $p, 'before', false, $showDialog);
@@ -48,7 +50,7 @@ function Streams_after_Q_objects () {
 	$templateName = Streams_Stream::getConfigField(
 		$stream->type,
 		array('invited', 'dialog', 'templateName'),
-		'Streams/invited/complete'
+		'Streams/templates/invited/complete'
 	);
 
 	$params = array(
@@ -62,7 +64,11 @@ function Streams_after_Q_objects () {
 			'displayName' => $invitingUser->displayName(array(
 				'fullAccess' => true,
 				'show' => 'flu'
-			))
+			)),
+			'text' => Q::interpolate(
+				$text['invite']['complete']['HasInvitedYou'],
+				array('title' => $stream->title)
+			)
 		),
 		'templateName' => $templateName,
 		'stream' => $stream->exportArray(),

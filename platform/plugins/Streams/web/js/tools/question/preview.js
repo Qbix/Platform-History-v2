@@ -34,23 +34,20 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 		});
 	}
 
-	preview.state.onLoad.add(function () {
-		// add edit action
-		$toolElement.plugin('Q/actions', {
-			actions: {
-				edit: tool.edit.bind(tool),
-				delete: function () {
-					Q.confirm(tool.text.AreYouSure, function (result) {
-						if (!result) {
-							return;
-						}
-
-						tool.preview.delete();
-					});
-				}
+	preview.state.actions = {
+		actions: {
+			"edit": tool.edit.bind(tool),
+			"remove": function () {
+				Q.confirm(tool.text.AreYouSure, function (result) {
+					if (!result) {
+						return;
+					}
+	
+					tool.preview.delete();
+				});
 			}
-		});
-	}, tool);
+		}
+	};
 },
 
 {
@@ -276,10 +273,18 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				});
 			},
 			onClose: function () {
-				var answersRelated = Q.Tool.from(tool.$answersRelated, "Streams/related");
-				if (answersRelated) {
+				$(".Streams_related_tool").each(function () {
+					var answersRelated = Q.Tool.from(this, "Streams/related");
+					if (!answersRelated) {
+						return;
+					}
+
+					if (answersRelated.state.publisherId !== tool.preview.state.publisherId || answersRelated.state.streamName !== tool.preview.state.streamName) {
+						return;
+					}
+
 					answersRelated.refresh();
-				}
+				});
 			}
 		});
 	},
