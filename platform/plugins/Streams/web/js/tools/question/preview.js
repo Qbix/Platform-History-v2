@@ -34,22 +34,24 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 		});
 	}
 
-	preview.state.onLoad.add(function () {
+	preview.state.onLoad.set(function () {
 		// add edit action
-		$toolElement.plugin('Q/actions', {
-			actions: {
-				edit: tool.edit.bind(tool),
-				delete: function () {
-					Q.confirm(tool.text.AreYouSure, function (result) {
-						if (!result) {
-							return;
-						}
+		setTimeout(function () {
+			$toolElement.plugin('Q/actions', {
+				actions: {
+					edit: tool.edit.bind(tool),
+					delete: function () {
+						Q.confirm(tool.text.AreYouSure, function (result) {
+							if (!result) {
+								return;
+							}
 
-						tool.preview.delete();
-					});
+							tool.preview.delete();
+						});
+					}
 				}
-			}
-		});
+			});
+		}, 100);
 	}, tool);
 },
 
