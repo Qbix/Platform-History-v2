@@ -6770,6 +6770,7 @@
                     var _publicChatRoomStream = null;
                     var _chatToolContainer = null;
                     var _currentActiveChatRoom = null;
+                    var _chatEl = null;
 
                     function onStreamClickHandler(chatRoomData) {
                         if(_currentActiveChatRoom && _currentActiveChatRoom.chatTool) {
@@ -6893,7 +6894,8 @@
                     }
 
                     function createSection() {
-                        var chatBoxInner = document.createElement('DIV');
+                        if(_chatEl != null) return;
+                        var chatBoxInner = _chatEl = document.createElement('DIV');
                         chatBoxInner.className = 'live-editor-popup-chat-inner';
     
                         var chatTabsCon = document.createElement('DIV');
@@ -8559,6 +8561,7 @@
                             activeDialog = mobileHorizontaldialogEl;
                             isOpening = false;
                             _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                            if(tool.livestreamStream) tool.livestreamingEditor.textChatsInterface.createSection();
                             function horizontalToVerticaOrientationChange() {
                                 setTimeout(function () {
                                     console.log('show', activeDialog, activeDialog.dialogEl, document.body.contains(activeDialog.dialogEl))
@@ -8601,6 +8604,7 @@
                         activeDialog = desktopDialogEl;
                         if(desktopDialogEl == null) return;
                         _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                        if(tool.livestreamStream) tool.livestreamingEditor.textChatsInterface.createSection();
 
                         var dialogWidth = 996;
                         dialog.style.width = dialogWidth + 'px';
@@ -8671,10 +8675,11 @@
             getOrCreateLivestreamStream: function() {
                 var tool = this;
                 return new Promise(function (resolve, reject) {
-                    if (tool.livestreamStream != null && tool.publicChatStream != null) {
+                    if (tool.livestreamStream != null) {
                         resolve();
                     } else {
                         let webrtcStream = tool.state.webrtcUserInterface.roomStream();
+
                         Q.req("Streams/livestream", ["livestream"], function (err, response) {
                             var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -8719,46 +8724,65 @@
             },
             get: function () {
                 var tool = this;
+                let webrtcStream = tool.state.webrtcUserInterface.roomStream();
+
                 return new Promise(function(resolve, reject) {
                     if (tool.livestreamingEditor != null) {
                         resolve(tool.livestreamingEditor);
                     } else {
-                        Q.activate(
-                            Q.Tool.setUpElement(
-                                "div",
-                                "Streams/webrtc/livestreaming/canvasComposer",
-                                {
-                                    webrtcSignalingLib: tool.state.webrtcSignalingLib,
-                                    webrtcUserInterface: tool.state.webrtcUserInterface,
-                                }
-                            ),
-                            {},
-                            function (rtmpSenderTool, rtmpSenderTool2) {
-                                console.log('rtmpSenderTool', rtmpSenderTool, rtmpSenderTool2, this)
-
-                                tool.livestreamingCanvasComposerTool = this;
-
-                                Q.activate(
-                                    Q.Tool.setUpElement(
-                                        "div",
-                                        "Streams/webrtc/livestreaming/rtmpSender",
-                                        {
-                                            canvasComposerTool: tool.livestreamingCanvasComposerTool,
-                                            webrtcSignalingLib: tool.state.webrtcSignalingLib,
-                                            webrtcUserInterface: tool.state.webrtcUserInterface,
-                                        }
-                                    ),
-                                    {},
-                                    function () {
-                                        tool.livestreamingRtmpSenderTool = this;
-                                        Q.addStylesheet('{{Streams}}/css/tools/livestreamingEditor.css?ts=' + performance.now(), function () {
-                                            tool.livestreamingEditor = tool.create();
-                                            resolve(tool.livestreamingEditor);
-                                        });
-                                    }
-                                );
+                        Q.Streams.related(webrtcStream.fields.publisherId, webrtcStream.fields.name, "Streams/webrtc/livestream", true, function (err) {
+                            if (err) {
+                                console.error(err)
+                                return;
                             }
-                        );
+                            if(Object.keys(this.relatedStreams).length) {
+                                for (var key in this.relatedStreams) {
+                                    if (this.relatedStreams.hasOwnProperty(key)) {
+                                        tool.livestreamStream = this.relatedStreams[key];
+                                        break;
+                                    }
+                                }
+                            }
+
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    "div",
+                                    "Streams/webrtc/livestreaming/canvasComposer",
+                                    {
+                                        webrtcSignalingLib: tool.state.webrtcSignalingLib,
+                                        webrtcUserInterface: tool.state.webrtcUserInterface,
+                                    }
+                                ),
+                                {},
+                                function (rtmpSenderTool, rtmpSenderTool2) {
+                                    console.log('rtmpSenderTool', rtmpSenderTool, rtmpSenderTool2, this)
+    
+                                    tool.livestreamingCanvasComposerTool = this;
+    
+                                    Q.activate(
+                                        Q.Tool.setUpElement(
+                                            "div",
+                                            "Streams/webrtc/livestreaming/rtmpSender",
+                                            {
+                                                canvasComposerTool: tool.livestreamingCanvasComposerTool,
+                                                webrtcSignalingLib: tool.state.webrtcSignalingLib,
+                                                webrtcUserInterface: tool.state.webrtcUserInterface,
+                                            }
+                                        ),
+                                        {},
+                                        function () {
+                                            tool.livestreamingRtmpSenderTool = this;
+                                            Q.addStylesheet('{{Streams}}/css/tools/livestreamingEditor.css?ts=' + performance.now(), function () {
+                                                tool.livestreamingEditor = tool.create();
+                                                resolve(tool.livestreamingEditor);
+                                            });
+                                        }
+                                    );
+                                }
+                            );
+                        });
+
+                        
                     }
                   });
                 
