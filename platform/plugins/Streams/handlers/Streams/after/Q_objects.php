@@ -48,7 +48,7 @@ function Streams_after_Q_objects () {
 	$templateName = Streams_Stream::getConfigField(
 		$stream->type,
 		array('invited', 'dialog', 'templateName'),
-		'Streams/invited/complete'
+		'Streams/templates/invited/complete'
 	);
 
 	$params = array(

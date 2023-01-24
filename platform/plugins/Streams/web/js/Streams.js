@@ -6260,7 +6260,7 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 		}
 		function _showDialog() {
-			var templateName = params.templateName || 'Streams/invited/complete';
+			var templateName = params.templateName || 'Streams/templates/invited/complete';
 			params.prompt = (params.prompt !== undefined)
 				? params.prompt
 				: Q.text.Streams.login.prompt;
