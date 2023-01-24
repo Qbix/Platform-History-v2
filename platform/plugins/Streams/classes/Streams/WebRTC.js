@@ -81,76 +81,105 @@ WebRTC.listen = function () {
 
         if (  socket.handshake.query.rtmp != null ) {
             if(_debug) console.log('made sockets connection (LIVE STREAMING)', socket.id);
+            if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA', socket.handshake.query.livestreamStream);
             var usersInfo = JSON.parse(socket.handshake.query.localInfo);
-            var rtmpUrls = JSON.parse( socket.handshake.query.rtmp);
+            var rtmpUrlsData = JSON.parse( socket.handshake.query.rtmp);
+            var livestreamStreamData = JSON.parse(socket.handshake.query.livestreamStream);
             var platform = socket.handshake.query.platform;
             var isAndroid = usersInfo.platform == 'android' ? true : false
 
-            if(rtmpUrls.length == 0) return;
+            if(rtmpUrlsData.length == 0) return;
 
-            if(_debug) console.log('usersInfo', usersInfo);
-            var ffmpeg;
-            var m264BrowserSupport = false
-            for(let c in usersInfo.supportedVideoMimeTypes) {
-                let mimeType = usersInfo.supportedVideoMimeTypes[c];
-                if(mimeType.toLowerCase().indexOf('h264') != -1) {
-                    m264BrowserSupport = true;
-                    break;
+            let rtmpUrls = rtmpUrlsData.map(function (rtmpData) {
+                return rtmpData.rtmpUrl;
+            });
+
+            if(livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
+                postStartMessageAndBeginLivestreaming();
+            } else {
+                initFFMpegProcess();
+            }
+
+            function postStartMessageAndBeginLivestreaming () {
+                
+                Q.plugins.Streams.fetchOne(livestreamStreamData.publisherId, livestreamStreamData.publisherId, livestreamStreamData.streamName, function (err, stream) {
+                    if (err || !stream) {
+                        console.log('No livestream stream found with next publisherId and streamName', livestreamStreamData.publisherId, livestreamStreamData.streamName);
+                        return;
+                    }
+
+                    for (let i in rtmpUrlsData) {
+                        let rtmpUrlInfo = rtmpUrlsData[i];
+                        rtmpUrlInfo.platform = determinePlatformUserStreamingTo(rtmpUrlInfo.linkToLive || rtmpUrlInfo.rtmpUrl);
+                        delete rtmpUrlInfo.rtmpUrl;
+                        
+                        stream.post(livestreamStreamData.publisherId, {
+                            type: 'Streams/livestream/start',
+                            instructions: JSON.stringify(rtmpUrlInfo)
+                        }, function (err) {
+                            if (err) {
+                                console.log('Something went wrong when posting to stream with next publisherId and streamName', livestreamStreamData.publisherId, livestreamStreamData.streamName)
+                                return;
+                            }
+                            if (parseInt(i) == rtmpUrlsData.length - 1) {
+                                initFFMpegProcess();
+                            }
+                        });
+                    }
+                });
+            }
+
+            function postStopMessageAndStopLivestreaming () {
+                Q.plugins.Streams.fetchOne(livestreamStreamData.publisherId, livestreamStreamData.publisherId, livestreamStreamData.streamName, function (err, stream) {
+                    if (err || !stream) {
+                        console.log('No livestream stream found with next publisherId and streamName', livestreamStreamData.publisherId, livestreamStreamData.streamName);
+                        return;
+                    }
+
+                    for (let i in rtmpUrlsData) {
+                        let rtmpUrlInfo = rtmpUrlsData[i];
+                        rtmpUrlInfo.platform = determinePlatformUserStreamingTo(rtmpUrlInfo.linkToLive || rtmpUrlInfo.rtmpUrl);
+                        delete rtmpUrlInfo.rtmpUrl;
+                        stream.post(livestreamStreamData.publisherId, {
+                            type: 'Streams/livestream/stop',
+                            instructions: JSON.stringify(rtmpUrlInfo)
+                        }, function (err) {
+                            if (err) {
+                                console.log('Something went wrong when posting to stream with next publisherId and streamName', livestreamStreamData.publisherId, livestreamStreamData.streamName)
+                                return;
+                            }
+                        });
+                    }
+                });
+            }
+
+            function determinePlatformUserStreamingTo(urlString) {
+                if(!urlString || urlString.trim() == '') return;
+                if (urlString.indexOf('youtube.com') != -1 || urlString.indexOf('youtu.be') != -1) {
+                    return 'youtube';
+                } else if (urlString.indexOf('twitch.tv') != -1) {
+                    return 'twitch';
                 }
             }
-            var mp4IsSupported = usersInfo.supportedVideoMimeTypes.indexOf('video/mp4') != -1;
-            var encoder = !m264BrowserSupport && !mp4IsSupported ? 'libx264' : 'copy';
-            var format = mp4IsSupported ? 'mov,mp4,m4a,3gp,3g2,mj2' : 'webm'; //mov,mp4,m4a,3gp,3g2,mj2
-            if(_debug) console.log('m264BrowserSupport ' +  m264BrowserSupport);
-            if(_debug) console.log('mp4IsSupported ' +  mp4IsSupported, format, encoder);
-            if(_debug) console.log('usersInfo.supportedVideoMimeTypes ', usersInfo.supportedVideoMimeTypes);
-
-            if(rtmpUrls.length > 1) {
-                var outputEndpoints = '';
-                for(let u in rtmpUrls) {
-                    if(u == rtmpUrls.length - 1) {
-                        outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u];
-                    } else {
-                        outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
+            
+            function initFFMpegProcess() {
+                if(_debug) console.log('usersInfo', usersInfo);
+                var ffmpeg;
+                var m264BrowserSupport = false
+                for(let c in usersInfo.supportedVideoMimeTypes) {
+                    let mimeType = usersInfo.supportedVideoMimeTypes[c];
+                    if(mimeType.toLowerCase().indexOf('h264') != -1) {
+                        m264BrowserSupport = true;
+                        break;
                     }
                 }
-            }
-
-
-            function createFfmpegProcess() {
-                var params = ['-re'];
-                //var params = ['-r', '24'];
-                if(format != 'webm') {
-                    params.push('-f', format);
-                }
-
-                params.push('-i', '-');
-
-                if(encoder == 'copy') {
-                    params = params.concat([
-                        '-vcodec', 'copy',
-                    ]);
-                } else {
-                    params = params.concat([
-                        '-pix_fmt', 'yuv420p',
-                        '-vcodec', 'libx264',
-                        '-preset', 'slow',
-                        '-profile:v', 'high',
-                        '-b:v', '2M',
-                        '-bufsize', '512k',
-                        '-crf', '18',
-                        '-g', '30',
-                        '-bf', '2',
-                        '-movflags', '+faststart',
-                        '-max_interleave_delta', '20000000',
-                    ]);
-                }
-                params = params.concat([
-                    '-codec:a', 'aac',
-                    '-strict', '-2', '-ar', '44100',
-                    '-af', 'aresample=async=1',
-                ]);
-
+                var mp4IsSupported = usersInfo.supportedVideoMimeTypes.indexOf('video/mp4') != -1;
+                var encoder = !m264BrowserSupport && !mp4IsSupported ? 'libx264' : 'copy';
+                var format = mp4IsSupported ? 'mov,mp4,m4a,3gp,3g2,mj2' : 'webm'; //mov,mp4,m4a,3gp,3g2,mj2
+                if(_debug) console.log('m264BrowserSupport ' +  m264BrowserSupport);
+                if(_debug) console.log('mp4IsSupported ' +  mp4IsSupported, format, encoder);
+                if(_debug) console.log('usersInfo.supportedVideoMimeTypes ', usersInfo.supportedVideoMimeTypes);
+    
                 if(rtmpUrls.length > 1) {
                     var outputEndpoints = '';
                     for(let u in rtmpUrls) {
@@ -160,80 +189,134 @@ WebRTC.listen = function () {
                             outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
                         }
                     }
-                    params = params.concat([
-                        '-map', '0',
-                        '-f', 'tee', outputEndpoints
-                    ]);
-                } else {
-                    params = params.concat([
-                        '-flvflags', 'no_duration_filesize',
-                        '-r', '24',
-                        '-f', 'flv', rtmpUrls[0]
-                    ]);
                 }
-
-                console.log('ffmpeg params ', params)
-                ffmpeg = child_process.spawn('ffmpeg', params);
-
-                /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
-  -pix_fmt yuv420p -profile:v baseline -s 426x240 -bufsize 6000k \
-  -vb 400k -maxrate 1500k -deinterlace -vcodec libx264           \
-  -preset veryfast -g 30 -r 30 -f flv                            \
-  -flvflags no_duration_filesize                                 \
-  "rtmp://live-api.facebook.com:80/rtmp/my_key"*/
-
-                // If FFmpeg stops for any reason, close the WebSocket connection.
-                ffmpeg.on('close', (code, signal) => {
-                    console.log(socket.id + ' FFmpeg child process closed, code ' + code + ', signal ' + signal);
-                    if (code !== 0) {
-                        socket.emit('Streams/webrtc/liveStreamingStopped', {platform: platform, rtmpUrl: rtmpUrls});
+    
+    
+                function createFfmpegProcess() {
+                    var params = ['-re'];
+                    //var params = ['-r', '24'];
+                    if(format != 'webm') {
+                        params.push('-f', format);
                     }
+    
+                    params.push('-i', '-');
+    
+                    if(encoder == 'copy') {
+                        params = params.concat([
+                            '-vcodec', 'copy',
+                        ]);
+                    } else {
+                        params = params.concat([
+                            '-pix_fmt', 'yuv420p',
+                            '-vcodec', 'libx264',
+                            '-preset', 'slow',
+                            '-profile:v', 'high',
+                            '-b:v', '2M',
+                            '-bufsize', '512k',
+                            '-crf', '18',
+                            '-g', '30',
+                            '-bf', '2',
+                            '-movflags', '+faststart',
+                            '-max_interleave_delta', '20000000',
+                        ]);
+                    }
+                    params = params.concat([
+                        '-codec:a', 'aac',
+                        '-strict', '-2', '-ar', '44100',
+                        '-af', 'aresample=async=1',
+                    ]);
+    
+                    if(rtmpUrls.length > 1) {
+                        var outputEndpoints = '';
+                        for(let u in rtmpUrls) {
+                            if(u == rtmpUrls.length - 1) {
+                                outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u];
+                            } else {
+                                outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
+                            }
+                        }
+                        params = params.concat([
+                            '-map', '0',
+                            '-f', 'tee', outputEndpoints
+                        ]);
+                    } else {
+                        params = params.concat([
+                            '-flvflags', 'no_duration_filesize',
+                            '-r', '24',
+                            '-f', 'flv', rtmpUrls[0]
+                        ]);
+                    }
+    
+                    console.log('ffmpeg params ', params)
+                    ffmpeg = child_process.spawn('ffmpeg', params);
+    
+                    /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
+      -pix_fmt yuv420p -profile:v baseline -s 426x240 -bufsize 6000k \
+      -vb 400k -maxrate 1500k -deinterlace -vcodec libx264           \
+      -preset veryfast -g 30 -r 30 -f flv                            \
+      -flvflags no_duration_filesize                                 \
+      "rtmp://live-api.facebook.com:80/rtmp/my_key"*/
+    
+                    // If FFmpeg stops for any reason, close the WebSocket connection.
+                    ffmpeg.on('close', (code, signal) => {
+                        console.log(socket.id + ' FFmpeg child process closed, code ' + code + ', signal ' + signal);
+                        if (code !== 0) {
+                            socket.emit('Streams/webrtc/liveStreamingStopped', {platform: platform, rtmpUrl: rtmpUrls});
+                        }
 
-                    //ffmpeg = null;
-                });
-                // Handle STDIN pipe errors by logging to the console.
-                // These errors most commonly occur when FFmpeg closes and there is still
-                // data to write.  If left unhandled, the server will crash.
-                ffmpeg.stdin.on('error', (e) => {
-                    console.log(socket.id + ' FFmpeg STDIN Error', e);
-                });
-
-                // FFmpeg outputs all of its messages to STDERR.  Let's log them to the console.
-                ffmpeg.stderr.on('data', (data) => {
-                    console.log(socket.id + ' FFmpeg STDERR:', data.toString());
-                });
-
-                // If the client disconnects, stop FFmpeg.
-                socket.on('disconnect', function() {
-                    console.log(socket.id + ' FFmpeg USER DISCONNECTED', ffmpeg.killed);
-
-                    ffmpeg.kill('SIGINT');
+                        if(livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
+                            postStopMessageAndStopLivestreaming();
+                        }
+    
+                        //ffmpeg = null;
+                    });
+                    // Handle STDIN pipe errors by logging to the console.
+                    // These errors most commonly occur when FFmpeg closes and there is still
+                    // data to write.  If left unhandled, the server will crash.
+                    ffmpeg.stdin.on('error', (e) => {
+                        console.log(socket.id + ' FFmpeg STDIN Error', e);
+                    });
+    
+                    // FFmpeg outputs all of its messages to STDERR.  Let's log them to the console.
+                    ffmpeg.stderr.on('data', (data) => {
+                        console.log(socket.id + ' FFmpeg STDERR:', data.toString());
+                    });
+    
+                    // If the client disconnects, stop FFmpeg.
+                    socket.on('disconnect', function() {
+                        console.log(socket.id + ' FFmpeg USER DISCONNECTED', ffmpeg.killed);
+    
+                        ffmpeg.kill('SIGINT');
+                        setTimeout(function() {
+                            if(!ffmpeg.killed && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
+                                postStopMessageAndStopLivestreaming();
+                            }
+                        }, 1000)
+                    });
+                }
+                createFfmpegProcess();
+    
+                _streamingData.on('data', function (data) {
+                    if(ffmpeg != null) {
+                        //console.log(socket.id + 'VIDEO DATA',);
+    
+                        ffmpeg.stdin.write(data);
+                    } else {
+                        createFfmpegProcess();
+                    }
+                })
+                // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
+                socket.on('Streams/webrtc/videoData', function(data, callback) {
+                    console.log(socket.id + ' VIDEODATA');
+                    _streamingData.push(data);
+                    if(callback) callback();
+                    return;
+                    for(let d in data) {
+                        _streamingData.push(data[d]);
+                    }
+                    //socket.broadcast.emit('video', data);
                 });
             }
-            createFfmpegProcess();
-
-            _streamingData.on('data', function (data) {
-                if(ffmpeg != null) {
-                    //console.log(socket.id + 'VIDEO DATA',);
-
-                    ffmpeg.stdin.write(data);
-                } else {
-                    createFfmpegProcess();
-                }
-            })
-            // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
-            socket.on('Streams/webrtc/videoData', function(data, callback) {
-                console.log(socket.id + ' VIDEODATA');
-                _streamingData.push(data);
-                if(callback) callback();
-                return;
-                for(let d in data) {
-                    _streamingData.push(data[d]);
-                }
-                //socket.broadcast.emit('video', data);
-            });
-
-
 
             return;
         }

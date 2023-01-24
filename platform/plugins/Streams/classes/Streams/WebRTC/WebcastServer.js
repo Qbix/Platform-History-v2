@@ -1,4 +1,6 @@
 function WebcastServer(config) {
+    const Q = require('Q');
+    const Streams = Q.require('Streams');
     const https = require('https');
     const express = require('express');
     const app = express();
@@ -227,8 +229,11 @@ function WebcastServer(config) {
             console.log('Got message: joined ', identity, socket.id);
             socket.role = identity.role;
             socket.info = identity.info;
+            socket.livestreamStreamData = identity.livestreamStreamData;
             socket.roomId = roomId = identity.room;
             socket.roomStartTime = identity.roomStartTime;
+
+            
 
             if (socket.broadcastParticipant == null) {
                 var currentParticipant = localParticipant = new Broadcast.Participant(socket.id)
@@ -298,13 +303,35 @@ function WebcastServer(config) {
 
             if (localParticipant.role == 'publisher') {
                 console.log('PUBLISHER CONNECTING ...', localParticipant.id);
-
-                findReceiver(localParticipant);
+                if(socket.livestreamStreamData != null) {
+                    console.log('Streams/livestream/start', socket.livestreamStreamData)
+                    //post Streams/livestream/start message to livestream stream
+                    Streams.Message.post({
+                        type: 'Streams/livestream/start',
+                        publisherId: socket.livestreamStreamData.publisherId,
+                        streamName: socket.livestreamStreamData.streamName,
+                        byUserId: socket.livestreamStreamData.publisherId,
+                        instructions: JSON.stringify({ 
+                            id: socket.livestreamStreamData.livestreamSessionId,
+                            platform: 'Peer2Peer',
+                            roomId: socket.roomId,
+                         })
+                    }, function (err) {
+                        if (err) {
+                            console.log('Something went wrong when posting to stream with next publisherId and streamName', socket.livestreamStream.publisherId, socket.livestreamStream.streamName)
+                            return;
+                        }
+    
+                        findReceiver(localParticipant);
+                    });
+                } else {
+                    findReceiver(localParticipant);
+                }
+               
 
             } else if (localParticipant.role == 'receiver') {
                 findDonor(localParticipant);
-            }
-
+            }   
         });
 
         function findReceiver(donorParticipant) {
@@ -525,15 +552,29 @@ function WebcastServer(config) {
                         for(let b in watchers) {
                             findDonor(watchers[b]);
                         }
-                    }
-
-
-
-                    for (let r in localParticipant.receivers) {
-                        localParticipant.receivers[r].socketInstance.join('broadcast-demo3');
-                    }
+                    }                    
                 }
 
+                if(socket.livestreamStreamData != null) {
+                    //post Streams/livestream/stop message to livestream stream
+                    Streams.Message.post({
+                        type: 'Streams/livestream/stop',
+                        publisherId: socket.livestreamStreamData.publisherId,
+                        streamName: socket.livestreamStreamData.streamName,
+                        byUserId: socket.livestreamStreamData.publisherId,
+                        instructions: JSON.stringify({ 
+                            id: socket.livestreamStreamData.livestreamSessionId,
+                            platform: 'p2p',
+                            roomId: socket.roomId,
+                         })
+                    }, function (err) {
+                        if (err) {
+                            console.log('Something went wrong when posting to stream with next publisherId and streamName', socket.livestreamStream.publisherId, socket.livestreamStream.streamName)
+                            return;
+                        }
+    
+                    });
+                }
                 console.log('ROOMS AFTER', socket.adapter.rooms);
             }
 
