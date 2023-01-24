@@ -591,7 +591,7 @@
     width:25px;
     height: 25px;
     position: absolute;
-    top: 8px;
+    top: 6px;
     left: 10px;
 }
 
@@ -945,6 +945,7 @@
     max-height: 100%;
     max-width: 100%;*/
     max-height: 100%;
+    max-width: 100%;
 }
 
 
@@ -1100,9 +1101,7 @@
 .live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-fullheight-position {
     white-space: normal;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-mid-below-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-winmid-below-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-below-position::after {
+.live-editor-popup-dialog.live-editor-popup-dialog-mid-below-position::after{
     content: "";
     position: absolute;
     top: 0;
@@ -1144,9 +1143,7 @@
     border-right: 20px solid transparent;
     border-bottom: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-mid-above-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-winmid-above-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-above-position::after{
+.live-editor-popup-dialog.live-editor-popup-dialog-mid-above-position::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -1174,9 +1171,7 @@
     border-right: 20px solid transparent;
     border-top: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-right-mid-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-right-winmid-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-right-fullheight-position::after {
+.live-editor-popup-dialog.live-editor-popup-dialog-right-mid-position::after {
     content: "";
     position: absolute;
     top: calc(50% - (40px / 2));
@@ -1186,9 +1181,7 @@
     border-bottom: 20px solid transparent;
     border-right: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-left-mid-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-left-winmid-position::after,
-.live-editor-popup-dialog.live-editor-popup-dialog-left-fullheight-position {
+.live-editor-popup-dialog.live-editor-popup-dialog-left-mid-position::after {
     content: "";
     position: absolute;
     top: calc(50% - (40px / 2));
@@ -1363,7 +1356,7 @@
     width:25px;
     height: 25px;
     position: absolute;
-    top: 8px;
+    top: 6px;
     left: 10px;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option {

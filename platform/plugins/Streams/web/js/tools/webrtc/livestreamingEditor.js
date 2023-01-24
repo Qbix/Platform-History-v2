@@ -1070,7 +1070,7 @@
 
                                 if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
                                 activeRecordingSection.style.display = 'none';
-                                recordingSettings.style.display = 'block';
+                                recordingSettings.style.display = '';
                                 hideLiveIndicator('p2p');
                             })
 
