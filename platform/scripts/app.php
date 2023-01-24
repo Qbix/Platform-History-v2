@@ -206,7 +206,7 @@ echo "Q Platform installer for $app app".PHP_EOL;
 
 $uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
-	$web_uploads_path = APP_ROOT_DIR.DS.'Q'.DS.'uploads';
+	$web_uploads_path = APP_WEB_DIR.DS.'Q'.DS.'uploads';
 	if (!file_exists($web_uploads_path)
 	and !is_link($web_uploads_path)) {
 		Q_Utils::symlink($uploads_dir, $web_uploads_path);
@@ -215,14 +215,14 @@ if (is_dir($uploads_dir)) {
 
 $text_dir = APP_TEXT_DIR;
 if (is_dir($text_dir)) {
-	$web_text_path = APP_ROOT_DIR.DS.'Q'.DS.'text';
+	$web_text_path = APP_WEB_DIR.DS.'Q'.DS.'text';
 	if (!file_exists($web_text_path)
 	and !is_link($web_text_path)) {
 		Q_Utils::symlink($text_dir, $web_text_path);
 	}
 }
 
-$web_views_path = APP_ROOT_DIR.DS.'Q'.DS.'views';
+$web_views_path = APP_WEB_DIR.DS.'Q'.DS.'views';
 if (!file_exists($web_views_path)) {
 	mkdir($web_views_path, 0755, true);
 }
