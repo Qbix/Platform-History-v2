@@ -3801,7 +3801,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/subscribed', [slotName], function (err, data) {
+	Q.req('Streams/subscribe', [slotName], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
