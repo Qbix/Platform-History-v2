@@ -406,8 +406,8 @@ return [["varbinary","255","",false],false,"PRI",null];
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_value
- * @param {integer} value
- * @return {integer} The value
+ * @param {number} value
+ * @return {number} The value
  * @throws {Error} If 'value' is not number
  */
 Base.prototype.beforeSet_value = function (value) {
@@ -430,8 +430,8 @@ return [["decimal","14,4","",false],false,"","0.0000"];
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_weight
- * @param {integer} value
- * @return {integer} The value
+ * @param {number} value
+ * @return {number} The value
  * @throws {Error} If 'value' is not number
  */
 Base.prototype.beforeSet_weight = function (value) {
