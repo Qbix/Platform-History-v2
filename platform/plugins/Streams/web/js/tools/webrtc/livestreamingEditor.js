@@ -138,6 +138,7 @@
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
 
+                var livestreamingConfigs = _webrtcSignalingLib.getOptions().liveStreaming || {};
                 var streamingToSection = (function () {
                     let _p2pBroadcastIconEl = null;
                     let _facebookIconEl = null;
@@ -329,7 +330,7 @@
                         function startFacebookLive(data, callback) {
 
                             var satrtLive = function () {
-                                if (tool.state.webrtcUserInterface.getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
+                                if (livestreamingConfigs.startFbLiveViaGoLiveDialog) {
                                     goLiveDialog(callback);
                                     return
                                 }
@@ -381,7 +382,7 @@
                                 });
                             }
 
-                            if (tool.state.webrtcUserInterface.getOptions().liveStreaming.useRecordRTCLibrary) {
+                            if (livestreamingConfigs.useRecordRTCLibrary) {
                                 Q.addScript([
                                     "{{Streams}}/js/tools/webrtc/RecordRTC.js"
                                 ], function () {
@@ -1854,8 +1855,8 @@
                             }
                         };
                         this.params = {
-                            _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopVideo,
-                            _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
+                            _loop: livestreamingConfigs.loopVideo,
+                            _localOutput:livestreamingConfigs.localOutput,
 
                             set loop(value) {this._loop = value;},
                             set localOutput(value) {this._localOutput = value;},
@@ -2044,8 +2045,8 @@
                             }
                         };
                         this.params = {
-                            _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopAudio,
-                            _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
+                            _loop: livestreamingConfigs.loopAudio,
+                            _localOutput:livestreamingConfigs.localOutput,
 
                             set loop(value) {this._loop = value;},
                             set localOutput(value) {this._localOutput = value;},
@@ -2063,8 +2064,6 @@
                         var itemElAudioActiveness = document.createElement('DIV');
                         itemElAudioActiveness.className = 'live-editor-popup-sources-item-visibility';
                         itemElAudioActiveness.innerHTML = _streamingIcons.liveOn;
-                        let sourceType = this._sourceInstance.sourceType;
-                        console.log('AAAAAAAA', sourceType)
                         itemElControl.appendChild(itemElAudioActiveness);
                         
                         itemEl.appendChild(itemElText);
