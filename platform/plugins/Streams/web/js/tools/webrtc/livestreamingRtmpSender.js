@@ -197,7 +197,6 @@
                     }
         
                     function log(text) {
-                        if(!_options.debug.liveStreaming) return;
                         var args = Array.prototype.slice.call(arguments);
                         var params = [];
 

@@ -5702,7 +5702,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             function log(text) {
-                if(!_debug.layouts) return;
                 var args = Array.prototype.slice.call(arguments);
                 appLog.apply(null, args);
             }

@@ -138,6 +138,7 @@
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
 
+                var livestreamingConfigs = _webrtcSignalingLib.getOptions().liveStreaming || {};
                 var streamingToSection = (function () {
                     let _p2pBroadcastIconEl = null;
                     let _facebookIconEl = null;
@@ -329,7 +330,7 @@
                         function startFacebookLive(data, callback) {
 
                             var satrtLive = function () {
-                                if (tool.state.webrtcUserInterface.getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
+                                if (livestreamingConfigs.startFbLiveViaGoLiveDialog) {
                                     goLiveDialog(callback);
                                     return
                                 }
@@ -381,7 +382,7 @@
                                 });
                             }
 
-                            if (tool.state.webrtcUserInterface.getOptions().liveStreaming.useRecordRTCLibrary) {
+                            if (livestreamingConfigs.useRecordRTCLibrary) {
                                 Q.addScript([
                                     "{{Streams}}/js/tools/webrtc/RecordRTC.js"
                                 ], function () {
@@ -1854,8 +1855,8 @@
                             }
                         };
                         this.params = {
-                            _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopVideo,
-                            _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
+                            _loop: livestreamingConfigs.loopVideo,
+                            _localOutput:livestreamingConfigs.localOutput,
 
                             set loop(value) {this._loop = value;},
                             set localOutput(value) {this._localOutput = value;},
@@ -2044,8 +2045,8 @@
                             }
                         };
                         this.params = {
-                            _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopAudio,
-                            _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
+                            _loop: livestreamingConfigs.loopAudio,
+                            _localOutput:livestreamingConfigs.localOutput,
 
                             set loop(value) {this._loop = value;},
                             set localOutput(value) {this._localOutput = value;},
@@ -2063,8 +2064,6 @@
                         var itemElAudioActiveness = document.createElement('DIV');
                         itemElAudioActiveness.className = 'live-editor-popup-sources-item-visibility';
                         itemElAudioActiveness.innerHTML = _streamingIcons.liveOn;
-                        let sourceType = this._sourceInstance.sourceType;
-                        console.log('AAAAAAAA', sourceType)
                         itemElControl.appendChild(itemElAudioActiveness);
                         
                         itemEl.appendChild(itemElText);
@@ -2507,7 +2506,6 @@
                             screenBtnCon.appendChild(screenBtnIcon);
                             let participantSourcesCon = document.createElement('DIV');
                             participantSourcesCon.className = 'live-editor-participants-item-sources';
-                            //participantItemContainer.appendChild(participantSourcesCon);
                             screenBtnIcon.addEventListener('click', listItemInstance.toggleScreensharing);
 
                             let visibilityBtnCon = document.createElement('DIV');
@@ -2547,6 +2545,12 @@
                                 selectSource(listItemInstance);
                             });
 
+                            if (participantInstance.isLocal) {
+                                listItemInstance.screensharingsPopup = new PopupDialog(listItemInstance.screenIconEl.parentElement, {
+                                    className: 'live-editor-participants-item-screen-btn-popup',
+                                    content: [listItemInstance.sourcesContainerEl, _videoTool.videoinputListEl]
+                                })
+                            }
                             updateParticipantItem(participantInstance);
                         }
 
@@ -2675,24 +2679,6 @@
                                 }
                             }
 
-                            if(item.sourcesContainerEl.childNodes.length == 0) {
-                                let noScreensharingTextCon = document.createElement('DIV');
-                                noScreensharingTextCon.className = 'live-editor-participants-list-no-screensharing';
-                                noScreensharingTextCon.innerHTML = 'No screensharings';
-                                item.sourcesContainerEl.appendChild(noScreensharingTextCon);
-                            } else {
-                                let noScreensharingTextCon =  item.sourcesContainerEl.querySelector('.live-editor-participants-list-no-screensharing');
-                                if(noScreensharingTextCon && noScreensharingTextCon.parentElement) noScreensharingTextCon.parentElement.removeChild(noScreensharingTextCon);
-                            }
-
-                            if(!item.participantInstance.isLocal) {
-                                if(!item.participantInstance.audioIsMuted) {
-                                    item.audioIconEl.innerHTML = _streamingIcons.participantsEnabledMic;
-                                } else {
-                                    item.audioIconEl.innerHTML = _streamingIcons.participantsDisabledMic;
-                                }
-                            }
-
                             if(item.sourceInstance != null) {
                                 if(item.sourceInstance.active) {
                                     item.switchVisibilityIcon(true);
@@ -2703,34 +2689,42 @@
                                 item.switchVisibilityIcon(false);
                             }
 
-                            if(!item.screensharingsPopup) {
-                                console.log('make screensharingsPopup 2', numberOfScreensharings);
-                                if(numberOfScreensharings > 1) {
-                                    console.log('make screensharingsPopup 3');
+                            if(!item.participantInstance.isLocal) {
+                                if (!item.screensharingsPopup) {
+                                    console.log('make screensharingsPopup 2', numberOfScreensharings);
+                                    if (numberOfScreensharings > 1) {
+                                        console.log('make screensharingsPopup 3');
 
-                                    item.screensharingsPopup = new PopupDialog(item.screenIconEl.parentElement, {
-                                        className: 'live-editor-participants-item-screen-btn-popup',
-                                        content: item.sourcesContainerEl
-                                    })
+                                        item.screensharingsPopup = new PopupDialog(item.screenIconEl.parentElement, {
+                                            className: 'live-editor-participants-item-screen-btn-popup',
+                                            content: item.sourcesContainerEl
+                                        })
+                                    }
+                                } else if (item.screensharingsPopup) {
+                                    if (numberOfScreensharings < 2) {
+                                        item.screensharingsPopup.destroy();
+                                    }
                                 }
-                            } else if(item.screensharingsPopup) {
-                                if(numberOfScreensharings < 2) {
-                                    item.screensharingsPopup.destroy();
+
+                                if(item.sourcesContainerEl.childNodes.length == 0) {
+                                    item.screenIconEl.parentElement.style.display = 'none';
+                                    /*let noScreensharingTextCon = document.createElement('DIV');
+                                    noScreensharingTextCon.className = 'live-editor-participants-list-no-screensharing';
+                                    noScreensharingTextCon.innerHTML = 'No screensharings';
+                                    item.sourcesContainerEl.appendChild(noScreensharingTextCon);*/
+                                } else {
+                                    item.screenIconEl.parentElement.style.display = '';
+                                    /*let noScreensharingTextCon =  item.sourcesContainerEl.querySelector('.live-editor-participants-list-no-screensharing');
+                                    if(noScreensharingTextCon && noScreensharingTextCon.parentElement) noScreensharingTextCon.parentElement.removeChild(noScreensharingTextCon);*/
+                                }
+
+                                if(!item.participantInstance.audioIsMuted) {
+                                    item.audioIconEl.innerHTML = _streamingIcons.participantsEnabledMic;
+                                } else {
+                                    item.audioIconEl.innerHTML = _streamingIcons.participantsDisabledMic;
                                 }
                             }
                             
-
-                            /*if(!_allParticipantsListInstance.sourceInstance || !_allParticipantsListInstance.sourceInstance.active) {
-                                console.log('updateRemoteParticipantControlsButtonsState 1');
-                                if(!item.visibilityIconEl.classList.contains('live-editor-inactive')) {
-                                    item.visibilityIconEl.classList.add('live-editor-inactive');
-                                }
-                            } else {
-                                console.log('updateRemoteParticipantControlsButtonsState 2');
-                                if(item.visibilityIconEl.classList.contains('live-editor-inactive')) {
-                                    item.visibilityIconEl.classList.remove('live-editor-inactive');
-                                }
-                            }*/
                         }
 
                         function updateLocalControlsButtonsState() {
@@ -7302,7 +7296,7 @@
                     this.hide = function (e) {
                         console.log('PopupDialog: hide')
 
-                        if (e.target == this.closeButtonEl || !pupupInstance.popupDialogEl.contains(e.target)) {
+                        if (!e || (e && (e.target == this.closeButtonEl || !pupupInstance.popupDialogEl.contains(e.target)))) {
                             if (pupupInstance.popupDialogEl.parentElement) pupupInstance.popupDialogEl.parentElement.removeChild(pupupInstance.popupDialogEl);
         
                             togglePopupClassName('', false, false);
@@ -7642,11 +7636,10 @@
                         })
                         this.popupDialogEl.addEventListener('mouseleave', function (e) {
                             pupupInstance.hoverTimeout = setTimeout(function () {
-                                pupupInstance.hide(e);
+                                pupupInstance.hide();
                             }, 600)
 
                         });
-
                        
                     } else {
                         this.element.addEventListener('touchend', function (e) {
