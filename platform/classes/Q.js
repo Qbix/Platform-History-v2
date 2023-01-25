@@ -3688,8 +3688,45 @@ if (!Array.prototype.indexOf) {
 }
 
 /**
+ * @class Q
+ */
+
+/**
+ * Starts rendering a throbber in the command line console
+ * @method startThrobber
+ * @return {Function} a function to call to stop the throbber
+ */
+Q.startThrobber = function () {
+	var characters = [
+		10251, 10265, 10297,
+		10296, 10300, 10292,
+		10278, 10279, 10247,
+		10255
+	].map(function (c) { 
+		return String.fromCharCode(c);
+	});
+	const cursorEsc = {
+		hide: '\u001B[?25l',
+		show: '\u001B[?25h',
+	};
+	stdout.write(cursorEsc.hide);
+
+	let i = 0;
+	const timer = setInterval(function () {
+		stdout.write("\r" + characters[i++]);
+		i = i >= characters.length ? 0 : i;
+	}, 150);
+
+	return function () {
+		clearInterval(timer);
+		stdout.write("\r");
+		stdout.write(cursorEsc.show);
+	}
+};
+
+/**
  * This function is useful for debugging, e.g. calling it in breakpoint conditions
- * @method stackTrack
+ * @method stackTrace
  * @static
  */
 Q.stackTrace = function() {

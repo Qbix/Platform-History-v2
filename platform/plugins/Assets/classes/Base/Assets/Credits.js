@@ -29,7 +29,7 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.toPublisherId] defaults to null
  * @param {String|Buffer} [fields.toStreamName] defaults to null
  * @param {String} [fields.reason] defaults to ""
- * @param {Integer} [fields.credits] defaults to 0
+ * @param {Number} [fields.credits] defaults to 0
  * @param {String} [fields.attributes] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
@@ -90,7 +90,7 @@ Q.mixin(Base, Row);
  */
 /**
  * @property credits
- * @type Integer
+ * @type Number
  * @default 0
  * 
  */
@@ -628,29 +628,18 @@ return [["varchar","255","",false],false,"MUL",null];
 };
 
 /**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * Method is called before setting the field to verify if value is a number
  * @method beforeSet_credits
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ * @param {number} value
+ * @return {number} The value
+ * @throws {Error} If 'value' is not number
  */
 Base.prototype.beforeSet_credits = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".credits");
-		if (value < -32768 || value > 32767)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".credits");
+		if (isNaN(value))
+			throw new Error('Non-number value being assigned to '+this.table()+".credits");
 		return value;
-};
-
-/**
- * Returns the maximum integer that can be assigned to the credits field
- * @return {integer}
- */
-Base.prototype.maxSize_credits = function () {
-
-		return 32767;
 };
 
 	/**
@@ -659,7 +648,7 @@ Base.prototype.maxSize_credits = function () {
 	 */
 Base.column_credits = function () {
 
-return [["smallint","6","",false],false,"MUL",null];
+return [["decimal","10,4","",false],false,"MUL",null];
 };
 
 /**

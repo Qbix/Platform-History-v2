@@ -24,7 +24,7 @@
  * @param {string} [$fields.toPublisherId] defaults to null
  * @param {string} [$fields.toStreamName] defaults to null
  * @param {string} [$fields.reason] defaults to ""
- * @param {integer} [$fields.credits] defaults to 0
+ * @param {float} [$fields.credits] defaults to 0
  * @param {string} [$fields.attributes] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
@@ -81,7 +81,7 @@ abstract class Base_Assets_Credits extends Db_Row
 	 */
 	/**
 	 * @property $credits
-	 * @type integer
+	 * @type float
 	 * @default 0
 	 * 
 	 */
@@ -768,38 +768,16 @@ return array (
 );			
 	}
 
-	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_credits
-	 * @param {integer} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
-	 */
 	function beforeSet_credits($value)
 	{
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
 			return array('credits', $value);
 		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".credits");
-		$value = intval($value);
-		if ($value < -32768 or $value > 32767) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".credits");
-		}
+		if (!is_numeric($value))
+			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".credits");
+		$value = floatval($value);
 		return array('credits', $value);			
-	}
-
-	/**
-	 * @method maxSize_credits
-	 * Returns the maximum integer that can be assigned to the credits field
-	 * @return {integer}
-	 */
-	function maxSize_credits()
-	{
-
-		return 32767;			
 	}
 
 	/**
@@ -812,8 +790,8 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'smallint',
-    1 => '6',
+    0 => 'decimal',
+    1 => '10,4',
     2 => '',
     3 => false,
   ),

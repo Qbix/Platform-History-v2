@@ -684,8 +684,8 @@ return [["varchar","8191","",false],false,"",null];
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_weight
- * @param {integer} value
- * @return {integer} The value
+ * @param {number} value
+ * @return {number} The value
  * @throws {Error} If 'value' is not number
  */
 Base.prototype.beforeSet_weight = function (value) {
