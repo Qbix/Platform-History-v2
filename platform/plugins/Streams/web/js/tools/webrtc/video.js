@@ -119,7 +119,7 @@
 
                 var turnOnCameraItem = document.createElement('DIV');
                 turnOnCameraItem.dataset.deviceId = 'auto';
-                turnOnCameraItem.className = 'webrtc-video-settings_popup_item';
+                turnOnCameraItem.className = 'webrtc-video-settings_popup_item webrtc-video-settings_popup_camera_item';
                 var textLabelCon = document.createElement('SPAN');
                 textLabelCon.className = 'webrtc-video-settings_popup_item_text';
                 var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.webCamera", tool.text));
@@ -342,7 +342,7 @@
                 }
 
                 var turnOffradioBtnItem = document.createElement('DIV');
-                turnOffradioBtnItem.className = 'webrtc-video-settings_popup_item webrtc-video-turn_video_off';
+                turnOffradioBtnItem.className = 'webrtc-video-settings_popup_item webrtc-video-settings_popup_camera_item webrtc-video-turn_video_off';
                 turnOffradioBtnItem.dataset.deviceId = 'off';
                 var textLabelCon = document.createElement('SPAN');
                 textLabelCon.className = 'webrtc-video-settings_popup_item_text webrtc-video-turn_video_off_text';
@@ -399,7 +399,7 @@
 
                 tool.state.webrtcSignalingLib.localMediaControls.videoInputDevices().forEach(function (mediaDevice) {
                     var radioBtnItem = document.createElement('DIV');
-                    radioBtnItem.className = 'webrtc-video-settings_popup_item';
+                    radioBtnItem.className = 'webrtc-video-settings_popup_item webrtc-video-settings_popup_camera_item';
                     radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
 
                     var textLabelCon = document.createElement('SPAN');

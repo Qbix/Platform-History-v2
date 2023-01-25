@@ -726,11 +726,9 @@
                                 get height() {return this._height;}
                             };
                             this.params = {
-                                showLabelWithNames: _options.liveStreaming.showLabelWithNames,
-                                showLayoutBorders: _options.liveStreaming.showLayoutBorders,
-                                tiledLayoutMargins: _options.liveStreaming.tiledLayoutMargins,
-                                audioLayoutBgColor: _options.liveStreaming.audioLayoutBgColor,
-                                defaultLayout: _options.liveStreaming.defaultLayout || 'tiledStreamingLayout',
+                                tiledLayoutMargins: _options.liveStreaming && _options.liveStreaming.tiledLayoutMargins ? _options.liveStreaming.tiledLayoutMargins : 100,
+                                audioLayoutBgColor: _options.liveStreaming && _options.liveStreaming.audioLayoutBgColor ? _options.liveStreaming.audioLayoutBgColor : "rgba(255, 255, 255, 0)",
+                                defaultLayout: _options.liveStreaming && _options.liveStreaming.defaultLayout ? _options.liveStreaming.defaultLayout : 'tiledStreamingLayout',
                             };
                             this.getChildSources = function(type, active) {
                                 console.log('getChildSources', type)
@@ -901,7 +899,7 @@
         
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
-                                video.loop = _options.liveStreaming.loopVideo;
+                                video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
@@ -979,7 +977,7 @@
                                 console.log('addSource video')
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
-                                video.loop = _options.liveStreaming.loopVideo;
+                                video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
@@ -1006,7 +1004,7 @@
                                 var video = document.createElement('VIDEO');
                                 video.muted = true;
                                 video.style.display = 'none';
-                                video.loop = _options.liveStreaming.loopVideo;
+                                video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
@@ -3262,7 +3260,8 @@
                                     function simpleGrid(count, size, perRow, rowsNum) {
                                         console.log('simpleGrid', size, count);
                                         var rects = [];
-                                        var spaceBetween = parseInt(_options.liveStreaming.tiledLayoutMargins);
+                                        var layoutMargins = _options.liveStreaming && _options.liveStreaming.tiledLayoutMargins ? _options.liveStreaming.tiledLayoutMargins : 10;
+                                        var spaceBetween = parseInt(layoutMargins);
                                         console.log('simpleGrid spaceBetween', spaceBetween);
 
                                         var rectHeight;
@@ -4236,7 +4235,7 @@
                             } else if(newSource.sourceType == 'audio') {
                                 var audio = document.createElement('audio');
                                 audio.muted = false;
-                                audio.loop = _options.liveStreaming.loopAudio;
+                                audio.loop = _options.liveStreaming && _options.liveStreaming.loopAudio ? _options.liveStreaming.loopAudio : true;
                                 audio.src = newSource.url;
                 
                                 document.body.appendChild(audio);
@@ -4255,7 +4254,7 @@
                                 gainNode.connect(analyserNode);
                                 analyserNode.connect(_dest);
                 
-                                if (_options.liveStreaming.localOutput) analyserNode.connect(audioContext.destination);
+                                if (_options.liveStreaming && _options.liveStreaming.localOutput) analyserNode.connect(audioContext.destination);
                                 audioSource.sourceNode = sourceNode;
                                 audioSource.gainNode = gainNode;
                                 audioSource.analyserNode = analyserNode;
@@ -4274,7 +4273,9 @@
                                 analyserNode.fftSize = 512;
                                 gainNode.connect(analyserNode);
                                 analyserNode.connect(_dest);
-                                if (_options.liveStreaming.localOutput && newSource.sourceType != 'videoInput') analyserNode.connect(audioContext.destination);
+                                if (_options.liveStreaming && _options.liveStreaming.localOutput && newSource.sourceType != 'videoInput') {
+                                    analyserNode.connect(audioContext.destination);
+                                }
                                 newSource.audioSourceNode = source;
                                 newSource.gainNode = gainNode;
                                 newSource.analyserNode = analyserNode;
@@ -4394,7 +4395,7 @@
         
                             if(_canvasMediStream) _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
         
-                            if(_options.liveStreaming.sounds) {
+                            if(_options.liveStreaming && _options.liveStreaming.sounds) {
                                 _webrtcSignalingLib.event.on('participantConnected', function (e) {
                                     if (_canvasMediStream == null || _dest == null) return;
         
@@ -4515,7 +4516,7 @@
                         }
                         log('captureStream codecs', codecs);
         
-                        if(_options.liveStreaming.useRecordRTCLibrary) {
+                        if(_options.liveStreaming && _options.liveStreaming.useRecordRTCLibrary) {
                             log('captureStream if1');
         
         
@@ -4556,7 +4557,7 @@
                         log('stopRecorder')
         
                         if(_mediaRecorder == null) return;
-                        if(_options.liveStreaming.useRecordRTCLibrary) {
+                        if(_options.liveStreaming && _options.liveStreaming.useRecordRTCLibrary) {
                             log('stopRecorder: RecordRTC')
         
                             _mediaRecorder.stopRecording(function () {
@@ -4729,7 +4730,6 @@
                     }
         
                     function log(text) {
-                        if(!_options.debug.liveStreaming) return;
                         var args = Array.prototype.slice.call(arguments);
                         var params = [];
 

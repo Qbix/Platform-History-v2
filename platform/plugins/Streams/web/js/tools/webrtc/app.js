@@ -1249,7 +1249,7 @@ window.WebRTCRoomClient = function app(options){
          * @param {Object} [participant.url] instance of Participant
          */
         function attachTrack(track, participant) {
-            log('attachTrack ' + track.kind);
+            log('attachTrack START:' + track.kind);
             try {
                 var err = (new Error);
                 console.log(err.stack);
@@ -1335,7 +1335,24 @@ window.WebRTCRoomClient = function app(options){
                     }
                 }
             }
+            log('attachTrack: track attached: ', track);
+            log('attachTrack: track attached: ' + track.mediaStreamTrack.id + ' stream:' + track.stream.id);
+            log('attachTrack: REPORT ');
 
+            /*if (participant.RTCPeerConnection) {
+                participant.RTCPeerConnection.getStats(null).then((stats) => {
+                    stats.forEach((report) => {
+                        console.log(`%c=====Report: ${report.type}=====`, 'background:red; color:white');
+
+                        Object.keys(report).forEach((statName) => {
+                            if (statName !== "id" && statName !== "timestamp" && statName !== "type") {
+                                console.log(`${statName}: ${report[statName]}\n`);
+                            }
+                        });
+                    });
+                });
+
+            }*/
             app.event.dispatch('trackAdded', {participant:participant, track: track});
 
         }
@@ -3520,9 +3537,11 @@ window.WebRTCRoomClient = function app(options){
                             return t.screensharing == true && t.mediaStreamTrack.enabled == true && t.mediaStreamTrack.readyState == 'live' ? true : false
                         })
 
+                        
                         if(screensharingTracks.length != 0) {
                             app.signalingDispatcher.sendDataTrackMessage("screensharingStarted", {trackId:screensharingTracks[0].mediaStreamTrack.id});
                         }
+                        console.log('sendInitialData', screensharingTracks.length)
 
                         dataChannel.removeEventListener('open', sendInitialData);
                         app.event.dispatch('dataChannelOpened', {dataChannel:dataChannel, participant:participant});
@@ -4674,28 +4693,33 @@ window.WebRTCRoomClient = function app(options){
                         deviceToSwitch = videoInputDevices[i+1];
                     } else deviceToSwitch = videoInputDevices[0];
                     break;
-                }
-
-                if(deviceToSwitch == null) videoInputDevices[0];
+                }                
             };
 
+            if(deviceToSwitch == null) videoInputDevices[0];
 
             var constraints
             if(camera != null && camera.deviceId != null && camera.deviceId != '') {
+                log('toggleCameras: 1');
                 constraints = {deviceId: {exact: camera.deviceId}};
                 if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) {
                     constraints = {deviceId: camera.deviceId}
                 }
             } else if(camera != null && camera.groupId != null && camera.groupId != '') {
+                log('toggleCameras: 2');
                 constraints = {groupId: {exact: camera.groupId}};
                 if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) {
                     constraints = {groupId: camera.groupId}
                 }
             } else if(deviceToSwitch != null && deviceToSwitch.deviceId != null && deviceToSwitch.deviceId != '') {
+                log('toggleCameras: 3');
                 constraints = {groupId: {exact: deviceToSwitch.groupId}};
                 if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) {
                     constraints = {groupId: deviceToSwitch.groupId}
                 }
+            } else {
+                log('toggleCameras: 4');
+                constraints = true;
             }
 
             //TODO: make offers queue as this code makes offer twice - after disableVideo and after enableVideo
@@ -5291,7 +5315,7 @@ window.WebRTCRoomClient = function app(options){
                                     for (let i = localParticipant.tracks.length - 1; i >= 0; i--) {
                                         if (localParticipant.tracks[i].mediaStreamTrack.id == oldTrackid) {
                                             log('replaceTrack: track replaced: stop and remove replaced track');
-                                            ocalParticipant.tracks[i].mediaStreamTrack.stop();
+                                            localParticipant.tracks[i].mediaStreamTrack.stop();
                                             localParticipant.tracks.splice(i, 1);
                                         }
                                     }

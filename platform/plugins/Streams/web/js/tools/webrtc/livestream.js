@@ -195,6 +195,8 @@
                 tool.element.appendChild(toolContainer);
 
                 if(publicTab) publicTab.click();
+                if(tool.videoContainerTabsEl.firstChild) tool.videoContainerTabsEl.firstChild.click();
+
             
             },
             syncLivestreamsList: function (messages) {
