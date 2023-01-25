@@ -1236,6 +1236,16 @@
 }
 /*end: popup dialog*/
 
+.live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources {
+    border-bottom: 1px dashed #ccc;
+}
+.live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-choose-device {
+    padding: 10px;
+}
+.live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-settings_popup_camera_item {
+    display: none;
+}
+
 /*start: simple dialog*/
 .live-editor-dialog-window {
     z-index: 99999999;
@@ -2138,19 +2148,19 @@
   .live-editor-participants-list .live-editor-participants-item-controls .live-editor-participants-item-icon svg path {
     fill: #ffffff;
   }
-    .live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources {
     display: block;
     padding: 10px;
     min-width: 280px;
   }
-  /*.live-editor-participants-list .live-editor-participants-item-sources:empty {
+  .live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources:empty {
     display: none;
-  }*/
+  }
   .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source {
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
-    border-top: 1px solid #454545;
+    border-top: 1px solid #d7d7d7;
   }
   .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source:first-child {
     border-top: none;

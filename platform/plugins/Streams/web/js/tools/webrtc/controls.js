@@ -581,12 +581,6 @@
                 }, tool);
 
                 tool.WebRTCLib.event.on('screensharingStarted', function (e) {
-                    var participant = e.participant;
-
-                    for (var i in participant.screens) {
-                        if (!participant.screens.screensharing) continue;
-
-                    }
 
                 });
                 tool.WebRTCLib.event.on('screensharingFailed', function (e) {

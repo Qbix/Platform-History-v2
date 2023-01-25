@@ -1249,7 +1249,7 @@ window.WebRTCRoomClient = function app(options){
          * @param {Object} [participant.url] instance of Participant
          */
         function attachTrack(track, participant) {
-            log('attachTrack ' + track.kind);
+            log('attachTrack START:' + track.kind);
             try {
                 var err = (new Error);
                 console.log(err.stack);
@@ -1335,7 +1335,24 @@ window.WebRTCRoomClient = function app(options){
                     }
                 }
             }
+            log('attachTrack: track attached: ', track);
+            log('attachTrack: track attached: ' + track.mediaStreamTrack.id + ' stream:' + track.stream.id);
+            log('attachTrack: REPORT ');
 
+            /*if (participant.RTCPeerConnection) {
+                participant.RTCPeerConnection.getStats(null).then((stats) => {
+                    stats.forEach((report) => {
+                        console.log(`%c=====Report: ${report.type}=====`, 'background:red; color:white');
+
+                        Object.keys(report).forEach((statName) => {
+                            if (statName !== "id" && statName !== "timestamp" && statName !== "type") {
+                                console.log(`${statName}: ${report[statName]}\n`);
+                            }
+                        });
+                    });
+                });
+
+            }*/
             app.event.dispatch('trackAdded', {participant:participant, track: track});
 
         }
@@ -3520,9 +3537,11 @@ window.WebRTCRoomClient = function app(options){
                             return t.screensharing == true && t.mediaStreamTrack.enabled == true && t.mediaStreamTrack.readyState == 'live' ? true : false
                         })
 
+                        
                         if(screensharingTracks.length != 0) {
                             app.signalingDispatcher.sendDataTrackMessage("screensharingStarted", {trackId:screensharingTracks[0].mediaStreamTrack.id});
                         }
+                        console.log('sendInitialData', screensharingTracks.length)
 
                         dataChannel.removeEventListener('open', sendInitialData);
                         app.event.dispatch('dataChannelOpened', {dataChannel:dataChannel, participant:participant});
