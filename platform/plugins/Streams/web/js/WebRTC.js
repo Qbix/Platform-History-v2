@@ -137,7 +137,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             hosts:[],
             defaultDesktopViewMode:null,
             defaultMobileViewMode:null,
-            writeLevel:10,
+            writeLevel:23,
             useRelatedTo: {
                 publisherId: null,
                 streamName: null
@@ -820,6 +820,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             var activeScreensType;
             var viewMode;
             var prevViewMode;
+            var loudestMode;
+            var loudestModeInterval;
             var roomScreens = [];
             var layoutEvents = new EventSystem();
 
@@ -837,8 +839,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 } else if(e.viewMode == 'minimized') {
                     updateScreensButtons();
                     resetAudioVisualization();
+                    disableLoudesScreenMode();
                     if(_controlsTool != null) {
-                        _controlsTool.participantsPopup().disableLoudesScreenMode();
                         _controlsTool.updateViewModeBtns();
                     }
                     unlockScreenResizingAndDragging();
@@ -1957,7 +1959,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     Q.Pointer.activateTouchlabels(document.body);
 
-                    _controlsTool.participantsPopup().showScreen(screen);
+                    if(_controlsTool && _controlsTool.participantsListTool) _controlsTool.participantsListTool.showScreen(screen);
 
                     if(Q.info.isMobile){
                         renderMaximizedScreensGridMobile(screen);
@@ -2052,8 +2054,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(videoResizeTool.state.appliedRecently) return;
                 }
 
-
-                if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
+                disableLoudesScreenMode();
 
                 if(activeScreen && !activeScreen.screenEl.contains(e.target) && (viewMode == 'maximized' || viewMode == 'maximizedMobile')) {
                     log('toggleViewModeByScreenClick 1')
@@ -2946,6 +2947,38 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 viewMode = 'squaresGrid';
                 layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+            }
+
+
+            function maximizeLoudestScreen(mode) {
+                WebRTCconference.mediaManager.getLoudestScreen(mode, function (loudestScreen) {
+                    if (Q.info.isMobile)
+                        renderMaximizedScreensGridMobile(loudestScreen, 0);
+                    else renderMaximizedScreensGrid(loudestScreen, 0);
+                });
+            }
+            function toggleLoudestScreenMode(mode) {
+                loudestMode = mode;
+                if (mode != 'disabled') maximizeLoudestScreen(mode);
+                if (loudestModeInterval != null) {
+                    clearInterval(loudestModeInterval);
+                    loudestModeInterval = null;
+                }
+
+                if (mode == 'disabled') {
+                    return;
+                }
+
+                loudestModeInterval = setInterval(function () {
+                    maximizeLoudestScreen(mode);
+                }, 1000);
+
+            }
+            function disableLoudesScreenMode() {
+                if (loudestModeInterval != null) {
+                    clearInterval(loudestModeInterval);
+                    loudestModeInterval = null;
+                }
             }
 
             /**
@@ -5494,7 +5527,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     screen: screen,
                     participant: screen.participant
                 });*/
-                if(_controlsTool) _controlsTool.participantsPopup().update(screen.participant);
+                if(_controlsTool && _controlsTool.participantsListTool) _controlsTool.participantsListTool.updateItem(screen.participant);
                 updateLayout();
 
             }
@@ -5513,7 +5546,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     screen: screen,
                     participant: screen.participant
                 });*/
-                if(_controlsTool) _controlsTool.participantsPopup().update(screen.participant);
+                if(_controlsTool && _controlsTool.participantsListTool) _controlsTool.participantsListTool.updateItem(screen.participant);
 
                 updateLayout();
             }
@@ -5710,6 +5743,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 renderFullScreenLayout:renderFullScreenLayout,
                 renderAudioScreensGrid:renderAudioScreensGrid,
                 renderSquaresGridMobile:renderSquaresGridMobile,
+                toggleLoudestScreenMode:toggleLoudestScreenMode,
+                disableLoudesScreenMode:disableLoudesScreenMode,
                 showLoader:showLoader,
                 hideLoader:hideLoader
             };
@@ -5994,6 +6029,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             WebRTCconference.event.on('screensharingStarting', function (e) {
                 log('screen sharing is being started', e)
 
+                screensRendering.toggleLoudestScreenMode('disabled');
                 screensRendering.onScreensharingStarting(e);
                 screensRendering.showLoader('screensharingStarting', {participant: e.participant});
             });
@@ -6936,6 +6972,123 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     debug: _debug,
                                     onCreate: function () {
                                         Q.handle(_options.onWebrtcControlsCreated, this);
+                                    },
+                                    onChildToolsLoaded: function () {
+                                        var moveWithinArea = 'window';
+                                        let _controlsTool = this;
+                                        let _controls = this.element;
+                                        var elementsToIgnore = [
+                                            _controlsTool.videoInputsTool.videoinputListEl,
+                                            _controlsTool.audioTool.audioOutputListEl,
+                                            _controlsTool.audioTool.audioinputListEl,
+                                            _controlsTool.participantsListTool.participantListEl,
+                                            _controlsTool.textChat.chatBox
+                                            ];
+
+                                        Q.activate(
+                                            Q.Tool.setUpElement(
+                                                _controls.firstChild, // or pass an existing element
+                                                "Q/resize",
+                                                {
+                                                    move: true,
+                                                    resize: false,
+                                                    active: true,
+                                                    ignoreOnElements: elementsToIgnore,
+                                                    elementPosition: 'fixed',
+                                                    snapToSidesOnly: true,
+                                                    moveWithinArea: moveWithinArea, //window/parent/DOMRect
+                                                    onMovingStart: function () {
+                                                        _controls.classList.add('isMoving');
+                                                    },
+                                                    onMovingStop: function () {
+                                                        _controls.classList.remove('isMoving');
+                                                    },
+                                                    onMoved: function () {
+                                                        screensRendering.updateLayout();
+                                                    }
+                                                }
+                                            ),
+                                            {},
+                                            function () {
+                                                log('initWithNodeServer: initConference: activated controls', this);
+                                                
+                                                var columnsTools = Q.Tool.byName('Q/columns');
+                                                var dashboard = document.getElementById('dashboard_slot');
+                                                var columnsTool = columnsTools[Object.keys(columnsTools)[0]];
+                                                var updateArearectangle = function () {
+                    
+                                                    var moveWithinArea;
+                                                    if(Object.keys(columnsTools).length == 0 && dashboard) {
+                                                        var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
+                    
+                                                        var windowWidth =  window.innerWidth;
+                                                        var windowHeight =  window.innerHeight;
+                                                        var dashboardHeight =  dashboard.offsetHeight;
+                    
+                                                        if(dashboardPos == 'bottom') {
+                                                            moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
+                                                        } else if(dashboardPos == 'top') {
+                                                            moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
+                                                        }
+                                                    } else {
+                    
+                                                        var currentColumn = columnsTool.state.$currentColumn.get()[0];
+                                                        moveWithinArea = currentColumn.getBoundingClientRect();
+                                                    }
+                    
+                                                    return moveWithinArea;
+                                                }
+                    
+                                                if(Q.info.isMobile) {
+                                                    moveWithinArea = updateArearectangle();
+                                                }
+                    
+                                                var resizeTool = this;
+                                                if (columnsTool && Q.info.isMobile) {
+                                                    columnsTool.state.onActivate.add(function () {
+                                                        var moveWithinArea = updateArearectangle();
+                                                        resizeTool.setContainerRect(moveWithinArea);
+                                                        screensRendering.updateLayout();
+                                                    });
+                                                    columnsTool.state.onClose.add(function () {
+                                                        var moveWithinArea = updateArearectangle();
+                                                        resizeTool.setContainerRect(moveWithinArea);
+                                                        screensRendering.updateLayout();
+                                                    });
+
+                                                }
+
+                                                if (typeof screen != 'undefined' && screen.orientation != null) {
+                                                    screen.orientation.addEventListener("change", function () {
+                                                        setTimeout(function () {
+                                                            var moveWithinArea = updateArearectangle();
+                                                            resizeTool.setContainerRect(moveWithinArea);
+                                                            screensRendering.updateLayout();
+                                                        }, 1000);
+                                                    });
+                                                }
+
+                                                window.addEventListener("resize", function () {
+                                                    setTimeout(function () {
+                                                        var moveWithinArea = updateArearectangle();
+                                                        resizeTool.setContainerRect(moveWithinArea);
+                                                        screensRendering.updateLayout();
+                                                    }, 1000);
+                                                });
+
+                                                if (_options.controlsPosition == 'top') {
+                                                    this.snapTo('top');
+                                                } else if (_options.controlsPosition == 'bottom') {
+                                                    this.snapTo('bottom');
+                                                } else if (_options.controlsPosition == 'left') {
+                                                    this.snapTo('left');
+                                                } else if (_options.controlsPosition == 'right') {
+                                                    this.snapTo('right');
+                                                } else {
+                                                    this.snapTo('bottom');
+                                                }
+                                            }
+                                        );
                                     }
                                 }
 
@@ -6964,118 +7117,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             _controlsTool = this;
                             screensRendering.updateLayout();
-
-                            var moveWithinArea = 'window';
-                            var columnsTools = Q.Tool.byName('Q/columns');
-                            var dashboard = document.getElementById('dashboard_slot');
-                            var columnsTool = columnsTools[Object.keys(columnsTools)[0]];
-                            var updateArearectangle = function () {
-
-                                var moveWithinArea;
-                                if(Object.keys(columnsTools).length == 0 && dashboard) {
-                                    var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
-
-                                    var windowWidth =  window.innerWidth;
-                                    var windowHeight =  window.innerHeight;
-                                    var dashboardHeight =  dashboard.offsetHeight;
-
-                                    if(dashboardPos == 'bottom') {
-                                        moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
-                                    } else if(dashboardPos == 'top') {
-                                        moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
-                                    }
-                                } else {
-
-                                    var currentColumn = columnsTool.state.$currentColumn.get()[0];
-                                    moveWithinArea = currentColumn.getBoundingClientRect();
-                                }
-
-                                return moveWithinArea;
                             }
-
-                            if(Q.info.isMobile) {
-                                moveWithinArea = updateArearectangle();
-                            }
-
-                            log('initWithNodeServer: initConference: activate controls: moveWithinArea', moveWithinArea);
-
-
-                            var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox];
-                            if( _controlsTool.participantListEl && _controlsTool.participantListEl.parentNode) elementsToIgnore.push(_controlsTool.participantListEl.parentNode)
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    _controls.firstChild, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        resize: false,
-                                        active: true,
-                                        ignoreOnElements: elementsToIgnore,
-                                        elementPosition: 'fixed',
-                                        snapToSidesOnly: true,
-                                        moveWithinArea: moveWithinArea, //window/parent/DOMRect
-                                        onMovingStart: function () {
-                                            _controls.classList.add('isMoving');
-                                        },
-                                        onMovingStop: function () {
-                                            _controls.classList.remove('isMoving');
-                                        },
-                                        onMoved: function () {
-                                            screensRendering.updateLayout();
-                                        }
-                                    }
-                                ),
-                                {},
-                                function () {
-                                    log('initWithNodeServer: initConference: activated controls', this);
-
-                                    var resizeTool = this;
-                                    if(columnsTool && Q.info.isMobile) {
-                                        columnsTool.state.onActivate.add(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        });
-                                        columnsTool.state.onClose.add(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        });
-
-                                    }
-
-                                    if(typeof screen != 'undefined' && screen.orientation != null) {
-                                        screen.orientation.addEventListener("change", function () {
-                                            setTimeout(function () {
-                                                var moveWithinArea = updateArearectangle();
-                                                resizeTool.setContainerRect(moveWithinArea);
-                                                screensRendering.updateLayout();
-                                            }, 1000);
-                                        });
-                                    }
-
-                                    window.addEventListener("resize", function() {
-                                        setTimeout(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        }, 1000);
-                                    });
-
-                                    if(_options.controlsPosition == 'top') {
-                                        this.snapTo('top');
-                                    } else if(_options.controlsPosition == 'bottom') {
-                                        this.snapTo('bottom');
-                                    } else if(_options.controlsPosition == 'left') {
-                                        this.snapTo('left');
-                                    } else if(_options.controlsPosition == 'right') {
-                                        this.snapTo('right');
-                                    } else {
-                                        this.snapTo('bottom');
-                                    }
-                                }
-                            );
-                        }
                     );
                 });
                 /*WebRTCconference.event.on('joined', function () {
@@ -7188,7 +7230,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             function onTextLoad() {
                 log('start: load time ' + (performance.now() - _debugTimer.loadStart));
-                log('start: onTextLoad');
+                log('start: onTextLoad: _options', _options);
 
                 var ua = navigator.userAgent;
                 var startWith = _options.startWith || {};
@@ -7368,8 +7410,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 
-                if(_options.roomId == null && _options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) {
-                    console.error('Property is missing: publisherId || roomId || streamName || publisherId || roomPublisherId || useRelatedTo', _options.roomId == null, _options.roomPublisherId == null, _options.useRelatedTo, _options.useRelatedTo.publisherId == null, _options.useRelatedTo.streamName == null);
+                if(_options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) {
+                    console.error('Property is missing: publisherId || streamName || publisherId || roomPublisherId || useRelatedTo', _options.roomId == null, _options.roomPublisherId == null, _options.useRelatedTo, _options.useRelatedTo.publisherId == null, _options.useRelatedTo.streamName == null);
                     return;
                 }
 
@@ -7711,8 +7753,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
             if(_controls != null) {
                 var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
-                controlsTool.participantsPopup().disableLoudesScreenMode();
-                controlsTool.participantsPopup().disableCheckActiveMediaTracks();
+                screensRendering.disableLoudesScreenMode();
                 if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
                 Q.Tool.remove(controlsTool);
             }
@@ -7774,6 +7815,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             screenRendering: screensRendering,
             loader: connectionState,
             notice: notice,
+            appDebug: appDebug,
+            determineBrowser: determineBrowser,
             events: _events
         }
 
@@ -7897,7 +7940,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
      * @param {String} [options.relationType='Streams/webrtc']
      * @param {HTMLElement} [options.element=document.body] Parent DOM element where video screens will be rendered
      * @param {String} [options.tool=true] Tool to relate Q.events to. By default true used - which means page.
-     * @param {String} [options.useExisting=true] If false, don't request related stream to use, but create new.
      * @param {String} [options.resumeClosed=true]  If false, close stream completely (unrelate) when last participant
      * left, and create new stream next time instead resume.
      * @param {Function} [options.onWebrtcControlsCreated] Callback called when Webrtc Controls Created
@@ -7910,7 +7952,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             mode: 'node',
             tool: true,
             relationType: "Streams/webrtc",
-            useExisting: true,
             resumeClosed: true
         }, options);
 
@@ -7920,7 +7961,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             audioOnlyMode: options.audioOnlyMode,
             element: options.element,
             roomId: options.roomId,
-            roomPublisherId: options.roomPublisherId,
+            roomPublisherId: options.roomPublisherId || options.publisherId,
             defaultDesktopViewMode: options.defaultDesktopViewMode,
             defaultMobileViewMode: options.defaultDesktopViewMode,
             writeLevel: options.writeLevel,
@@ -7928,11 +7969,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             closeManually: options.closeManually,
             description: options.description,
             onlyParticipantsAllowed: options.onlyParticipantsAllowed,
-            useRelatedTo: {
+            /*useRelatedTo: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,
                 relationType: 'Streams/webrtc'
-            },
+            },*/
             relate: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,

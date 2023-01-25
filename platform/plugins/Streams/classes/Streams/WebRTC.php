@@ -132,7 +132,9 @@ abstract class Streams_WebRTC
             $roomId = explode('/', $roomId)[2];
         }
 
-        $existingRoomStream = self::fetchStream($publisherId, $roomId, $resumeClosed);
+        if(!empty($roomId)) {
+            $existingRoomStream = self::fetchStream($publisherId, $roomId, $resumeClosed);
+        }
 
         if(!is_null($existingRoomStream)) {
             return $existingRoomStream;
