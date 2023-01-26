@@ -3099,6 +3099,7 @@
                     }
 
                     function addImageSource(e) {
+                        console.log('addImageSource');
                         if(typeof e == 'string') {
                             var pathhInfo = e.split('/');
                             var title = pathhInfo[pathhInfo.length - 1];
@@ -7359,7 +7360,7 @@
                         let midXOfTriggeringElement = triggeringElementRect.x + triggeringElementRect.width / 2;
         
                         if (roomBelowButton >= popupRect.height + 20) {
-                            console.log('show 1');
+                            //console.log('show 1');
                             if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                 //console.log('show 1.1');
                                 pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
@@ -7392,7 +7393,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-below-position', true, false);
                             }
                         } else if(roomAboveButton >= popupRect.height + 20) {
-                            console.log('show 2');
+                            //console.log('show 2');
                             if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                 //console.log('show 2.1');
                                 pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
@@ -7424,7 +7425,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-above-position', true, false);
                             }
                         } else if (Math.min(roomBelowMidOfButton, roomAboveMidOfButton) >= popupRect.height / 2) {
-                            console.log('show 3');
+                            //console.log('show 3');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 3.1');
                                 pupupInstance.popupDialogEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
@@ -7445,7 +7446,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-mid-position', true, false);
                             }
                         } else if (roomBelowStartOfButton >= popupRect.height) {
-                            console.log('show 4');
+                            //console.log('show 4');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 4.1');
                                 pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + 'px';
@@ -7466,7 +7467,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-belowtop-position', true, false);
                             }
                         } else if (roomAboveEndOfButton >= popupRect.height) {
-                            console.log('show 5');
+                            //console.log('show 5');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 5.1');
                                 pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
@@ -7487,7 +7488,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-abovebottom-position', false, false);
                             }
                         } else if(popupRect.height + 20 < window.innerHeight) {
-                            console.log('show 6');
+                            //console.log('show 6');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 6.1');
                                 pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
@@ -7514,7 +7515,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-winmid-position', true, false);
                             }
                         } else {
-                            console.log('show 7');
+                            //console.log('show 7');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 7.1');
                                 pupupInstance.popupDialogEl.style.top = '0px';
@@ -7540,7 +7541,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-fullheight-position', true, true);
                             }
                         }
-                        console.log('show 7', pupupInstance.popupDialogEl);
+                        //console.log('show 7', pupupInstance.popupDialogEl);
 
                         pupupInstance.popupDialogEl.style.visibility = '';
         

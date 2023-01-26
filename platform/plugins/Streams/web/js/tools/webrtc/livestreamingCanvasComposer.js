@@ -75,7 +75,7 @@
                         this.eventDispatcher.on('sourceMoved', updateVisualSourcesOrdering)
 
                         function updateVisualSourcesOrdering() {
-                            console.log('updateVisualSourcesOrdering START');
+                            console.log('updateVisualSourcesOrdering START', sceneInstance.sources);
                             let visualSources = sceneInstance.sources.filter(function (s) {
                                 if(s.sourceType == 'webrtc' || s.sourceType == 'video' || s.sourceType == 'videoInput' || s.sourceType == 'image') {
                                     return true;
@@ -1092,6 +1092,7 @@
         
                         function moveSource(old_index, new_index) {
                             console.log('moveSource', old_index, new_index);
+                            
                             if (new_index < 0) {
                                 new_index = 0;
                             }
@@ -1981,7 +1982,9 @@
                                             let webrtcGroupIndex = getWebrtcGroupIndex(webrtcGroupSource);
                                             log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares webrtcGroupIndex', webrtcGroupIndex.index)
         
-                                            moveSource(index, webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum);
+                                            //moveSource(index, webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum);
+                                            _activeScene.webrtcSources.splice(webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum, 0, _activeScene.webrtcSources.splice(index, 1)[0]);
+
                                         }
         
         
