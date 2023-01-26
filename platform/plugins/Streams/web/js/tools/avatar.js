@@ -130,7 +130,6 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	inplaces: {},
 	cacheBust: null,
 	cacheBustOnUpdate: 1000,
-	onRefresh: new Q.Event(),
 	onUpdate: new Q.Event(),
 	onImagepicker: new Q.Event(),
 	onRefresh: new Q.Event(),
