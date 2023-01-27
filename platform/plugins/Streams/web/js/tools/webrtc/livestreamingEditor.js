@@ -4373,14 +4373,12 @@
                         });
         
                         desktopDialogEl.previewBoxParent.addEventListener('click', function (e) {
-                            console.log(e.target, e.currentTarget)
-                            console.log('_hoveringElementTool.hoveredOverRect', _hoveringElementTool.hoveredOverRect)
                             if (_hoveringElementTool.hoveredOverRect != null) {
                                 //if (_resizingElementTool.state.appliedRecently) return;
                                 let i = 0, len = _sourcesList.length;
                                 while (i <= len) {
                                     let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
-                                    let sourceInstance = i != len ? _sourcesList[i] : allParticipantsGroupInstance;
+                                    let sourceInstance = i != len ? _sourcesList[i].sourceInstance : allParticipantsGroupInstance;
                                     if (sourceListItem.listType == 'audio') {
                                         i++;
                                         continue;
@@ -4394,7 +4392,7 @@
                                 }
         
                             } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
-                                console.log('DESELECT')
+                                //console.log('DESELECT')
         
                                 let i = 0, len = _sourcesList.length;
                                 while (i < len) {
