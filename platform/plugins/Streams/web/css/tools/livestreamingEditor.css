@@ -938,6 +938,7 @@
     position: relative;
     height: 100%;
     line-height: 0;
+    overflow: hidden;
 }
 .live-editor-dialog-body .live-editor-popup-preview-body-inner canvas{
     position: static;
@@ -947,7 +948,16 @@
     max-height: 100%;
     max-width: 100%;
 }
-
+.live-editor-dialog-body .live-editor-canvas-preview-resizing{
+    position:absolute;
+    z-index: 1000;
+    display: none;
+}
+.live-editor-dialog-body .live-editor-canvas-preview-hovering{
+    position:absolute;
+    z-index: 999;
+    pointer-events: none;
+}
 
 .live-editor-dialog-body .live-editor-popup-preview-resizing{
     position:absolute;

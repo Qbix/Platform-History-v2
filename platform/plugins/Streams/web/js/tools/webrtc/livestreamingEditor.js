@@ -132,8 +132,10 @@
                 var isHidden = true;
 
                 var _chatBoxContainer = null;
-                var _resizingElement = null;
-                var _resizingElementTool = null;
+                //var _resizingElement = null;
+                //var _resizingElementTool = null;
+                var _hoveringElement = null;
+                var _hoveringElementTool = { hoveredOverRect: null };
                 var _fileManagerTool = null;
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
@@ -1300,7 +1302,7 @@
                             //if (_scenesList[i].itemEl.classList.contains('live-editor-popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('live-editor-popup-scenes-item-active');
                         }
 
-                        if(_resizingElement) _resizingElement.style.display = 'none';
+                        //if(_resizingElement) _resizingElement.style.display = 'none';
 
                         if (_sourcesColumnEl) {
                             let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.live-editor-popup-sources-inner');
@@ -1310,6 +1312,9 @@
 
                             _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
                         }
+
+                        _activeScene.sourcesInterface.initHoveringTool();
+
                         _activeScene.sourcesInterface.update();
                         optionsColumn.update();
                     }
@@ -2120,6 +2125,33 @@
                               },
                             
                         };
+                        var sourceResizingEl = _allParticipantsListInstance.resizingElement = document.createElement('DIV');
+                        sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
+                        desktopDialogEl.previewBoxEl.appendChild(sourceResizingEl);
+
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                sourceResizingEl,
+                                "Q/resize",
+                                {
+                                    move: true,
+                                    resize: true,
+                                    active: true,
+                                    //elementPosition: 'fixed',
+                                    showResizeHandles: true,
+                                    moveWithinArea: 'parent',
+                                    allowOverresizing: true,
+                                    negativeMoving: true,
+                                    onMoving: function () {
+
+                                    }
+                                }
+                            ),
+                            {},
+                            function () {
+                                _allParticipantsListInstance.resizingElementTool = this;
+                            }
+                        );
 
                         _participantsContainerEl = document.createElement('DIV');
                         _participantsContainerEl.className = 'live-editor-participants-list-con';
@@ -2551,6 +2583,28 @@
                                     content: [listItemInstance.sourcesContainerEl, _videoTool.videoinputListEl]
                                 })
                             }
+
+                            var sourceResizingEl = listItemInstance.resizingElement = document.createElement('DIV');
+                            sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
+                            desktopDialogEl.previewBoxEl.appendChild(sourceResizingEl);
+                            
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    sourceResizingEl,
+                                    "Q/resize",
+                                    {
+                                        move: false,
+                                        resize: false,
+                                        active: true,
+                                        showResizeHandles: false,
+                                    }
+                                ),
+                                {},
+                                function () {
+                                    listItemInstance.resizingElementTool = this;
+                                }
+                            );
+
                             updateParticipantItem(participantInstance);
                         }
 
@@ -2794,11 +2848,17 @@
                             return _allParticipantsListInstance.sourceInstance;
                         }
 
+                        function getWebrtcGroupListItem() {
+                            console.log('ParticipantsList: getWebrtcGroupListItem');
+                            return _allParticipantsListInstance;
+                        }
+
                         return {
                             refreshList: refreshList,
                             getListElement: getListElement,
                             getListContainer: getListContainer,
-                            getWebrtcGroupInstance: getWebrtcGroupInstance
+                            getWebrtcGroupInstance: getWebrtcGroupInstance,
+                            getWebrtcGroupListItem: getWebrtcGroupListItem
                         }
                     }
 
@@ -2894,6 +2954,35 @@
                                     } else if (sources[s].active === false) {
                                         listItem.switchVisibilityIcon(false);
                                     }
+
+                                    var sourceResizingEl = listItem.resizingElement = document.createElement('DIV');
+                                    sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
+                                    desktopDialogEl.previewBoxEl.appendChild(sourceResizingEl);
+        
+                                    Q.activate(
+                                        Q.Tool.setUpElement(
+                                            sourceResizingEl,
+                                            "Q/resize",
+                                            {
+                                                move: true,
+                                                resize: true,
+                                                active: true,
+                                                //elementPosition: 'fixed',
+                                                showResizeHandles: true,
+                                                moveWithinArea: 'parent',
+                                                allowOverresizing: true,
+                                                negativeMoving: true,
+                                                onMoving: function () {
+                
+                                                }
+                                            }
+                                        ),
+                                        {},
+                                        function () {
+                                            listItem.resizingElementTool = this;
+                                        }
+                                    );
+                                    
                                     addItem(listItem);
                                 } else if ((sources[s].sourceType == 'group' && sources[s].groupType == 'webrtcaudio') || sources[s].sourceType == 'webrtcaudio' || sources[s].sourceType == 'audio' || sources[s].sourceType == 'audioInput') {
                                     var listItem = new AudioListItem(sources[s]);
@@ -3401,6 +3490,11 @@
                                     currentlySelectedEls[i].classList.remove('live-editor-popup-sources-item-active');
                                 }  
                             }
+                            let resizingEls = desktopDialogEl.previewBoxParent.querySelectorAll('.live-editor-canvas-preview-resizing');
+                            let a, resizingElsNum = resizingEls.length;
+                            for(a = 0; a < resizingElsNum; a++) {
+                                resizingEls[a].style.display = '';
+                            }
                         }
 
 
@@ -3418,57 +3512,142 @@
                         var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
                         var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
                         console.log('selectSource timesbigger', prmtr1, prmtr2, timesBigger)
-                        if(_resizingElementTool != null) {
-                            _resizingElementTool.state.onMoving.removeAllHandlers();
-                            _resizingElementTool.state.onResizing.removeAllHandlers();
+                        if (sourceItem.resizingElementTool != null) {
+                            sourceItem.resizingElementTool.events.removeAllHandlers('moving');
+                            sourceItem.resizingElementTool.events.removeAllHandlers('resizing');
                         }
                         if(_selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
-                            var webrtcLayoutRect = _selectedSource.sourceInstance.rect;
+                            var groupRect = _selectedSource.sourceInstance.rect;
                             console.log('selectSource if1')
 
-                            showResizingElement();
-                            _resizingElement.style.width = webrtcLayoutRect.width / timesBigger + 'px';
-                            _resizingElement.style.height = webrtcLayoutRect.height / timesBigger+ 'px';
-                            _resizingElement.style.top = top + webrtcLayoutRect.y / timesBigger + 'px';
-                            _resizingElement.style.left = left + webrtcLayoutRect.x / timesBigger + 'px';
-                            _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
-                            _resizingElementTool.state.onMoving.set(function (x, y) {
-                                _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
-                                _selectedSource.sourceInstance.rect.y = (y - top)  * timesBigger;
+                            sourceItem.resizingElement.style.display = 'block';
+                            sourceItem.resizingElement.style.width = groupRect.width / timesBigger + 'px';
+                            sourceItem.resizingElement.style.height = groupRect.height / timesBigger + 'px';
+                            sourceItem.resizingElement.style.top = top + groupRect.y / timesBigger + 'px';
+                            sourceItem.resizingElement.style.left = left + groupRect.x / timesBigger + 'px';
+                            sourceItem.resizingElement.style.border = '1px solid red';
+
+                            sourceItem.resizingElementTool.state.keepRatioBasedOnElement = {
+                                width: groupRect.width,
+                                height: groupRect.height
+                            };
+
+                            sourceItem.resizingElementTool.events.on('moving', function (e) {
+                                console.log('mooving')
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
                             });
-                            _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
-                                let currentRect = _selectedSource.sourceInstance.rect;
-                                _selectedSource.sourceInstance.rect.width = width != null ? width * timesBigger : currentRect.width;
-                                _selectedSource.sourceInstance.rect.height = height != null ? height * timesBigger : currentRect.height;
-                                _selectedSource.sourceInstance.rect.x = x != null ? (x - left) * timesBigger : currentRect.x;
-                                _selectedSource.sourceInstance.rect.y = y != null ? (y - top) * timesBigger : currentRect.y;
+
+                            sourceItem.resizingElementTool.events.on('resizing', function (e) {
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                if (e.width != null) {
+                                    _selectedSource.sourceInstance.rect.width = e.width * timesBigger;
+                                }
+                                if (e.height != null) {
+                                    _selectedSource.sourceInstance.rect.height = e.height * timesBigger;
+                                }
+                                if (e.x != null) {
+                                    _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                }
+                                if (e.y != null) {
+                                    _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
+                                }
+
+                                if (_hoveringElementTool.hoveredOverRect != null) {
+                                    _hoveringElement.style.boxShadow = 'none';
+                                    _hoveringElementTool.hoveredOverRect = null;
+                                }
                             });
                         } else if(_selectedSource.sourceInstance.sourceType == 'webrtc') {  
-                            hideResizingElement();
+                            console.log('SELECT WEBRTC', sourceItem)
+                            var sourceRect = _selectedSource.sourceInstance.rect;
+                            console.log('SELECT WEBRTC sourceRect', sourceRect)
+
+                            let scaledWidth = sourceRect.width / timesBigger;
+                            let scaledHeight = sourceRect.height / timesBigger;
+                            let scaledTop = top + sourceRect.y / timesBigger;
+                            let scaledLeft = left + sourceRect.x / timesBigger;
+
+                            console.log('SELECT WEBRTC size', scaledWidth, scaledHeight, scaledTop, scaledLeft)
+                            sourceItem.resizingElement.style.display = 'block';
+                            sourceItem.resizingElement.style.width = scaledWidth + 'px';
+                            sourceItem.resizingElement.style.height = scaledHeight + 'px';
+                            sourceItem.resizingElement.style.top = scaledTop + 'px';
+                            sourceItem.resizingElement.style.left = scaledLeft + 'px';
+                            sourceItem.resizingElement.style.border = '1px solid red';
+                            sourceItem.resizingElement.style.boxSizing = 'border-box';
+                            //hideResizingElement();
                         } else if(_selectedSource.sourceInstance.sourceType == 'image' || _selectedSource.sourceInstance.sourceType == 'video' || _selectedSource.sourceInstance.sourceType == 'videoInput') {
                             console.log('selectSource if2')
-                            showResizingElement();
+                            //showResizingElement();
                             var sourceRect = _selectedSource.sourceInstance.rect;
                             console.log('selectSource sourceRect', sourceRect)
                             console.log('selectSource sourceRect 1', sourceRect.width,  sourceRect.height,  sourceRect.x,  sourceRect.y)
+                            
+                            if (_selectedSource.sourceInstance.sourceType == 'image' && !sourceItem.resizingElementTool.state.keepRatioBasedOnElement) {
+                                sourceItem.resizingElementTool.state.keepRatioBasedOnElement = {
+                                    width: _selectedSource.sourceInstance.imageInstance.naturalWidth,
+                                    height: _selectedSource.sourceInstance.imageInstance.naturalHeight
+                                };
+                            } else if (_selectedSource.sourceInstance.sourceType == 'video' && !sourceItem.resizingElementTool.state.keepRatioBasedOnElement) {
+                                sourceItem.resizingElementTool.state.keepRatioBasedOnElement = {
+                                    width: _selectedSource.sourceInstance.videoInstance.videoWidth,
+                                    height: _selectedSource.sourceInstance.videoInstance.videoHeight
+                                };
+                            }
 
-                            _resizingElement.style.width = sourceRect._width / timesBigger + 'px';
-                            _resizingElement.style.height = sourceRect._height / timesBigger+ 'px';
-                            _resizingElement.style.top = top + sourceRect._y / timesBigger + 'px';
-                            _resizingElement.style.left = left + sourceRect._x / timesBigger + 'px';
-                            _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
+                            let scaledWidth = sourceRect._width / timesBigger;
+                            let scaledHeight = sourceRect._height / timesBigger;
+                            let scaledTop = top + sourceRect._y / timesBigger;
+                            let scaledLeft = left + sourceRect._x / timesBigger;
+                            sourceItem.resizingElement.style.display = 'block';
+                            sourceItem.resizingElement.style.width = scaledWidth + 'px';
+                            sourceItem.resizingElement.style.height = scaledHeight + 'px';
+                            sourceItem.resizingElement.style.top = scaledTop + 'px';
+                            sourceItem.resizingElement.style.left = scaledLeft + 'px';
+                            sourceItem.resizingElement.style.border = '1px solid red';
+                            sourceItem.resizingElement.style.boxSizing = 'border-box';
 
-
-                            _resizingElementTool.state.onMoving.set(function (x, y) {
-                                _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
-                                _selectedSource.sourceInstance.rect.y = (y - top)  * timesBigger;
+                            sourceItem.resizingElementTool.events.on('moving', function (e) {
+                                console.log('mooving')
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
                             });
 
-                            _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
-                                if(width != null) _selectedSource.sourceInstance.rect.width = width * timesBigger;
-                                if(height != null) _selectedSource.sourceInstance.rect.height = height * timesBigger;
-                                if(x != null) _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
-                                if(y != null) _selectedSource.sourceInstance.rect.y = (y - top) * timesBigger;
+                            sourceItem.resizingElementTool.events.on('resizing', function (e) {
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                if (e.width != null) {
+                                    _selectedSource.sourceInstance.rect.width = e.width * timesBigger;
+                                }
+                                if (e.height != null) {
+                                    _selectedSource.sourceInstance.rect.height = e.height * timesBigger;              
+                                }
+                                if (e.x != null) {
+                                    _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                }
+                                if (e.y != null) {
+                                    _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
+                                }
+
+                                _selectedSource.sourceInstance.rect.currentWidth = e.originalWidth / _selectedSource.sourceInstance.rect._width;
+                                //_selectedSource.sourceInstance.rect.currentHeight = _selectedSource.sourceInstance.rect._height;
+
+
+                                if (_hoveringElementTool.hoveredOverRect != null) {
+                                    _hoveringElement.style.boxShadow = 'none';
+                                    _hoveringElementTool.hoveredOverRect = null;
+                                }
+
+                            });
+        
+                            sourceItem.resizingElementTool.events.on('resized', function (e) {
+                             
                             });
 
                         }
@@ -4100,6 +4279,140 @@
 
                     function getSelectedSource() {
                         return _selectedSource;
+                    }
+
+                    function initHoveringTool() {
+                        var left = 0, top = 0;
+                        console.log('desktopDialogEl', desktopDialogEl);
+                        var allParticipantsListItem = _participantsList.getWebrtcGroupListItem();
+                        var allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
+                        var previewBoxRect = desktopDialogEl.previewBoxEl.getBoundingClientRect();
+                        var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
+                        var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
+                        var realcanvasSize = _streamingCanvas.getBoundingClientRect();
+                        var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
+                        var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
+                        desktopDialogEl.previewBoxParent.addEventListener('mousemove', function (e) {
+                            let x = e.clientX - previewBoxRect.x;
+                            let y = e.clientY - previewBoxRect.y;
+        
+                            let isResizingOrMoving = false;
+                            let res = '';
+                            for (let s in _sourcesList) {
+                                if(_sourcesList[s].listType == 'audio') continue;
+                                if (_sourcesList[s].resizingElementTool.state.isResizing || _sourcesList[s].resizingElementTool.state.isMoving || _sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                    isResizingOrMoving = true;
+                                    if (_sourcesList[s].resizingElementTool.state.isResizing) {
+                                        res += '1'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.isMoving) {
+                                        res += '2'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                        res += '3'
+                                    }
+                                }
+                            }
+        
+                            if (isResizingOrMoving) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                _hoveringElementTool.hoveredOverRect = null;
+                                return;
+                            }
+        
+                            let selectedSourceRect = null;
+                            let preselected = false;
+                            let i = 0, len = _sourcesList.length;
+                            while (i <= len) {
+                                let sourceItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+
+                                if(sourceItem.listType == 'audio') {
+                                    i++;
+                                    continue;
+                                }
+                                let rect = i != len ? _sourcesList[i].sourceInstance.rect : allParticipantsGroupInstance.rect;
+                                let rectLeft = rect._x / timesBigger;
+                                let rectRight = (rect._x + rect._width) / timesBigger;
+                                let rectTop = rect._y / timesBigger;
+                                let rectBottom = (rect._y + rect._height) / timesBigger;
+                                let rectWidth = rect._width / timesBigger;
+                                let rectHeight = rect._height / timesBigger;
+        
+                                if (x >= rectLeft && x <= rectRight
+                                    && y >= rectTop && y <= rectBottom) {
+                                    if (sourceItem == _selectedSource) {
+                                        selectedSourceRect = rect;
+                                        i++;
+                                        continue;
+                                    }
+                                    if (selectedSourceRect != null && rect._width * rect._height > selectedSourceRect._width * selectedSourceRect._height) {
+                                        i++;
+                                        continue;
+                                    }
+                                    _hoveringElementTool.hoveredOverRect = rect;
+                                    _hoveringElement.style.width = rectWidth + 'px';
+                                    _hoveringElement.style.height = rectHeight + 'px';
+                                    _hoveringElement.style.top = rectTop + 'px';
+                                    _hoveringElement.style.left = rectLeft + 'px';
+                                    _hoveringElement.style.boxShadow = 'inset 0px 0px 0px 1px skyblue';
+                                    preselected = true;
+                                    break;
+                                }
+                                i++;
+                            }
+        
+                            if (!preselected) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                _hoveringElementTool.hoveredOverRect = null;
+                            }
+                        });
+        
+                        desktopDialogEl.previewBoxParent.addEventListener('mouseleave', function (e) {
+                            _hoveringElement.style.boxShadow = 'none';
+                            _hoveringElementTool.hoveredOverRect = null;
+                        });
+        
+                        desktopDialogEl.previewBoxParent.addEventListener('click', function (e) {
+                            console.log(e.target, e.currentTarget)
+                            console.log('_hoveringElementTool.hoveredOverRect', _hoveringElementTool.hoveredOverRect)
+                            if (_hoveringElementTool.hoveredOverRect != null) {
+                                //if (_resizingElementTool.state.appliedRecently) return;
+                                let i = 0, len = _sourcesList.length;
+                                while (i <= len) {
+                                    let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+                                    let sourceInstance = i != len ? _sourcesList[i] : allParticipantsGroupInstance;
+                                    if (sourceListItem.listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (sourceInstance.rect == _hoveringElementTool.hoveredOverRect) {
+                                        selectSource(sourceListItem);
+                                        _hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+        
+                            } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
+                                console.log('DESELECT')
+        
+                                let i = 0, len = _sourcesList.length;
+                                while (i < len) {
+                                    if(_sourcesList[i].listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (_sourcesList[i].resizingElement == e.target) {
+                                        selectSource(_sourcesList[i]);
+                                        //_hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+                            }
+        
+        
+                        });
                     }
 
                     var addVideoPopup = (function () {
@@ -5330,6 +5643,7 @@
 
                     return {
                         createSourcesCol: createSourcesCol,
+                        initHoveringTool: initHoveringTool,
                         update: update,
                         updateLocalControlsButtonsState: updateLocalControlsButtonsState,
                         getSelectedSource: getSelectedSource,
@@ -8249,9 +8563,13 @@
                     previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
                     previewBoxBody.appendChild(previewBoxBodyInner);
 
-                    var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                    var sourceHoveringEl = _hoveringElement = document.createElement('DIV');
+                    sourceHoveringEl.className = 'live-editor-canvas-preview-hovering';
+                    previewBoxBodyInner.appendChild(sourceHoveringEl);
+
+                    /*var sourceResizingEl = _resizingElement = document.createElement('DIV');
                     sourceResizingEl.className = 'live-editor-popup-preview-resizing';
-                    previewBoxBodyInner.appendChild(sourceResizingEl);
+                    previewBoxBodyInner.appendChild(sourceResizingEl);*/
 
                     var chatBoxCon = _chatBoxContainer = document.createElement('DIV');
                     chatBoxCon.className = 'live-editor-popup-chat-con';
@@ -8261,7 +8579,7 @@
                    //let chatsInterface = textChatsInterface.createSection();
                    //chatBoxCon.appendChild(chatsInterface);
 
-                    Q.activate(
+                    /*Q.activate(
                         Q.Tool.setUpElement(
                             _resizingElement,
                             "Q/resize",
@@ -8284,7 +8602,7 @@
                             _resizingElementTool = this;
                             _resizingElement.style.display = 'none';
                         }
-                    );
+                    );*/
 
                     Q.activate(
                         Q.Tool.setUpElement(
@@ -8328,7 +8646,8 @@
 
                     return {
                         dialogEl: dialog,
-                        previewBoxEl: previewBoxBodyInner
+                        previewBoxEl: previewBoxBodyInner,
+                        previewBoxParent: previewBoxBody
                     }
                 }
 
@@ -8385,9 +8704,9 @@
                     var streamingToSectionEl = streamingToSection.createSection();
                     previewBoxBody.appendChild(streamingToSectionEl);
 
-                    var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                    /*var sourceResizingEl = _resizingElement = document.createElement('DIV');
                     sourceResizingEl.className = 'live-editor-popup-preview-resizing';
-                    previewBoxBodyInner.appendChild(sourceResizingEl);
+                    previewBoxBodyInner.appendChild(sourceResizingEl);*/
 
                     var chatBoxCon = _chatBoxContainer = document.createElement('DIV');
                     chatBoxCon.className = 'live-editor-popup-chat-con';
@@ -8397,7 +8716,7 @@
                    //let chatsInterface = textChatsInterface.createSection();
                    //chatBoxCon.appendChild(chatsInterface);
 
-                    Q.activate(
+                    /*Q.activate(
                         Q.Tool.setUpElement(
                             _resizingElement,
                             "Q/resize",
@@ -8420,7 +8739,7 @@
                             _resizingElementTool = this;
                             _resizingElement.style.display = 'none';
                         }
-                    );
+                    );*/
 
                     Q.activate(
                         Q.Tool.setUpElement(

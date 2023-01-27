@@ -2044,15 +2044,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     return obj.screenEl.contains(e.target) || obj.screenEl == e.target;
                 })[0];
 
+                console.log('tappedScreen', tappedScreen);
                 if(tappedScreen == null) return;
                 var resizeTool = Q.Tool.from(tappedScreen.screenEl, "Q/resize");
-                var videoResizeTool = Q.Tool.from(tappedScreen.videoScreen.videoCon, "Q/resize");
+                //var videoResizeTool = Q.Tool.from(tappedScreen.videoScreen.videoCon, "Q/resize");
                 if(resizeTool != null) {
                     if(resizeTool.state.appliedRecently) return;
                 }
-                if(videoResizeTool != null) {
+                /*if(videoResizeTool != null) {
                     if(videoResizeTool.state.appliedRecently) return;
-                }
+                }*/
 
                 disableLoudesScreenMode();
 
@@ -2774,8 +2775,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              */
             function renderMaximizedScreensGrid(screenToMaximize, duration) {
                 if(typeof duration == 'undefined') duration = 500;
-                log('renderMaximizedScreensGrid', screenToMaximize)
-                log('renderMaximizedScreensGrid activeScreen', activeScreen)
+                //log('renderMaximizedScreensGrid', screenToMaximize)
+                //log('renderMaximizedScreensGrid activeScreen', activeScreen)
                 //TODO: check if "(screenToMaximize != null && screenToMaximize == activeScreen)" impacts updating layout
                 if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen && !(viewMode == 'screenSharing' || viewMode == 'fullScreen'))) return;
 
@@ -2783,13 +2784,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(screenToMaximize != null && screenToMaximize.isActive) activeScreen = screenToMaximize;
                 if(screenToMaximize == null && (activeScreen == null || activeScreen.isLocal) /*&& roomScreens.length == 2*/) {
-                    log('renderMaximizedScreensGrid if1')
+                    //log('renderMaximizedScreensGrid if1')
 
                     var screensToTakeInc = roomScreens.filter(function (s) {
                         return (!s.isLocal ? true : false);
                     });
                     if(screensToTakeInc.length != 0) {
-                        log('renderMaximizedScreensGrid if1.1')
+                        //log('renderMaximizedScreensGrid if1.1')
 
                         activeScreen = screensToTakeInc.reduce(function (prev, current) {
                             return (prev.participant.connectedTime > current.participant.connectedTime) ? prev : current;
@@ -2799,7 +2800,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
-                log('renderMaximizedScreensGrid activeScreen', activeScreen)
+                //log('renderMaximizedScreensGrid activeScreen', activeScreen)
 
                 if(!_layoutTool.getLayoutGenerator('maximizedScreensGrid')) _layoutTool.setLayoutGenerator('maximizedScreensGrid', function (container, count) {
                     return customLayouts.minimizedOrMaximizedScreenGrid(_roomsMedia, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
