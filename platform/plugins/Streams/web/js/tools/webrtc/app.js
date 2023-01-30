@@ -3044,7 +3044,7 @@ window.WebRTCRoomClient = function app(options){
 
             });
             socket.on('Streams/webrtc/cameraDisabled', function (message){
-                log('got cameraDisabled', message, localParticipant.sid);
+                console.log('got cameraDisabled', message, localParticipant.sid);
                 var participant = roomParticipants.filter(function (roomParticipant) {
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
