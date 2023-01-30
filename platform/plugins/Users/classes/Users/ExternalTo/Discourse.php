@@ -14,12 +14,12 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 {
 	protected static $apiKey = null;
 	protected static $apiHost = null;
-	protected static $userName = null;
+	protected static $apiUsername = null;
 
 	protected static function _contract () {
 		self::$apiKey = Q_Config::get("Discourse", "API", "key", null);
 		self::$apiHost = Q_Config::get("Discourse", "API", "host", null);
-		self::$userName = Q_Config::get("Discourse", "API", "apiUsername", null);
+		self::$apiUsername = Q_Config::get("Discourse", "API", "username", null);
 	}
     public static function createForumUser ($name, $email, $password, $platformId) {
 		    self::_contract();
@@ -41,7 +41,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
         $headers = array(
             "Api-Key: ".self::$apiKey,
-            "Api-Username: ".self::$userName
+            "Api-Username: ".self::$apiUsername
         );
 
         $result = Q_Utils::post($url, $fields, null,null, $headers);
@@ -80,7 +80,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
             $data = array(
                 'api_key' => self::$apiKey,
-                'api_username' => self::$userName
+                'api_username' => self::$apiUsername
             );
 
             // deactivate user
@@ -156,7 +156,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         // don't save api key to logs
         $headers = array(
             "Api-Key: ".self::$apiKey,
-            "Api-Username: ".self::$userName,
+            "Api-Username: ".self::$apiUsername,
             "Content-Type: multipart/form-data"
         );
 
