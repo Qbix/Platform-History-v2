@@ -47,8 +47,8 @@ if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h
 	die($help);
 
 // get all CLI options
-$longopts = array('abc');
-$options = getopt('ab', $longopts, $restIndex);
+$longopts = array('update-passphrases');
+$options = getopt('u', $longopts, $restIndex);
 $restArgs = array_slice($argv, $restIndex);
 
 $platform = Q::ifset($restArgs, 0, 'discourse');
@@ -98,6 +98,11 @@ foreach ($userInfos as $email => $userInfo) {
 	$user = Users_User::from('email', $email, null);
 	if ($user) {
 		echo "User for email $email exists with ID $user->id" . PHP_EOL;
+		if (isset($options['u']) or isset($options['update-passphrases'])) {
+			$user->salt = $userInfo [ $columnsFlipped['salt'] ];
+			$user->passphraseHash = $userInfo [ $columnsFlipped['password_hash'] ];
+			$user->save();
+		}
 	} else {
 		$nameIndex = $columnsFlipped['name'];
 		$user = Streams::register(

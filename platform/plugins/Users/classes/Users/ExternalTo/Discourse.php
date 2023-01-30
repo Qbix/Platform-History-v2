@@ -14,12 +14,12 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 {
 	protected static $apiKey = null;
 	protected static $apiHost = null;
-	protected static $userName = null;
+	protected static $apiUsername = null;
 
 	protected static function _contract () {
 		self::$apiKey = Q_Config::get("Discourse", "API", "key", null);
 		self::$apiHost = Q_Config::get("Discourse", "API", "host", null);
-		self::$userName = Q_Config::get("Discourse", "API", "apiUsername", null);
+		self::$apiUsername = Q_Config::get("Discourse", "API", "username", null);
 	}
     public static function createForumUser ($name, $email, $password, $platformId) {
 		    self::_contract();
@@ -35,13 +35,13 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             'active' => true,
             'approved' => true
         );
-        Q::log("Request to ".$url, "discourse");
+        // Q::log("Request to ".$url, "discourse");
         $f = $fields; $f['password'] = '***';
-        Q::log(print_r($f, true), "discourse");
+        // Q::log(print_r($f, true), "discourse");
 
         $headers = array(
             "Api-Key: ".self::$apiKey,
-            "Api-Username: ".self::$userName
+            "Api-Username: ".self::$apiUsername
         );
 
         $result = Q_Utils::post($url, $fields, null,null, $headers);
@@ -50,8 +50,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $success = Q::ifset($result, 'success', false);
         $userId = Q::ifset($result, 'user_id', null);
 
-        Q::log('RESULT', 'discourse');
-        Q::log($result, 'discourse');
+        // Q::log('RESULT', 'discourse');
+        // Q::log($result, 'discourse');
 
         // errors handle
         if (!$success) {
@@ -70,7 +70,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
                 self::createForumUser($name, $email, $password, $platformId);
             }
 
-            return Q::log($result, "discourse");
+            // Q::log($result, "discourse");
+            return true;
         }
         // if user registered, try to deactivate and activate
         // this trick need to approve email (https://meta.discourse.org/t/api-to-create-a-user-without-sending-out-activation-email/23432/9)
@@ -80,7 +81,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
             $data = array(
                 'api_key' => self::$apiKey,
-                'api_username' => self::$userName
+                'api_username' => self::$apiUsername
             );
 
             // deactivate user
@@ -89,8 +90,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             // activate user
             Q_Utils::put($activateUrl, $data);
 
-            Q::log("DATA", 'discourse');
-            Q::log($data, 'discourse');
+            // Q::log("DATA", 'discourse');
+            // Q::log($data, 'discourse');
         }
 
         if($userId && $name) {
@@ -104,7 +105,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             self::updateForumUserAvatar();
         }
 
-        Q::log($result, "discourse");
+        // Q::log($result, "discourse");
     }
 
     public static function updateForumUserAvatar() {
@@ -150,13 +151,13 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             'files[]' => $cfile,
             'synchronous' => true
         );
-        Q::log("Request to ".$uploadsUrl, "discourse");
-        Q::log(print_r($fields, true), "discourse");
+        // Q::log("Request to ".$uploadsUrl, "discourse");
+        // Q::log(print_r($fields, true), "discourse");
 
         // don't save api key to logs
         $headers = array(
             "Api-Key: ".self::$apiKey,
-            "Api-Username: ".self::$userName,
+            "Api-Username: ".self::$apiUsername,
             "Content-Type: multipart/form-data"
         );
 
@@ -169,8 +170,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $response = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($response);
-        Q::log('RESULT', 'discourse');
-        Q::log(print_r($result, true), 'discourse');
+        // Q::log('RESULT', 'discourse');
+        // Q::log(print_r($result, true), 'discourse');
 
         $uploadId = Q::ifset($result, 'id', null);
 
@@ -184,5 +185,19 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
             Q_Utils::put($updateAvatarUrl, $data, null, null, $headers);
         }
+    }
+
+    function logout($userId) {
+        self::_contract();
+        Q_Utils::post(self::$apiHost . "/admin/users/$userId/log_out", array(), null, array(
+            'Content-Type' => 'multipart/form-data',
+            'Api-Key' => self::$apiKey,
+            'Api-Username' => self::$apiUsername
+        ));
+    }
+
+    function fetchXids(array $roleIds, array $options = array())
+    {
+        return array();
     }
 }
