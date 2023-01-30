@@ -15,6 +15,7 @@ function Streams_invite_response_accountStatus() {
 		throw new Users_Exception_NoSuchUser();
 	}
 	if ($user->passphraseHash or $user->getAllXids()) {
+		// there is a reliable way to reconnect with this account
 		return "complete";
 	}
 }
