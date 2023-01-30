@@ -10,14 +10,14 @@
  * @class Users_ExternalFrom_Facebook
  * @extends Users_ExternalFrom
  */
-class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_ExternalFrom_Interface
+class Users_ExternalFrom_Discourse extends Users_ExternalFrom implements Users_ExternalFrom_Interface
 {
 	/**
-	 * Gets an Users_ExternalFrom_Facebook object constructed from request and/or cookies.
+	 * Gets an Users_ExternalFrom_Discourse object constructed from request and/or cookies.
 	 * It is your job to populate it with a user id and save it.
 	 * @method authenticate
 	 * @static
-	 * @param {string} [$appId=Q::app()] Can either be an interal appId or a Facebook appId.
+	 * @param {string} [$appId=Q::app()] Can either be an interal appId or a Discourse appId.
 	 * @param {boolean} [$setCookie=true] Whether to set dcsr_$appId cookie with the payload
 	 * @return {Users_ExternalFrom_Discourse|null}
 	 *  May return null if no such user is authenticated.
@@ -63,16 +63,17 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 			return null;
 		}
 		$icon = array();
-		foreach ($sizes as $size) {
-			$parts = explode('x', $size);
-			$width = Q::ifset($parts, 0, '');
-			$height = Q::ifset($parts, 1, '');
-			$width = $width ? $width : $height;
-			$height = $height ? $height : $width;
-			$icon[$size.$suffix] = "https://graph.facebook.com/"
-				. $this->xid
-				. "/picture?width=$width&height=$width";
-		}
+		// foreach ($sizes as $size) {
+		// 	$parts = explode('x', $size);
+		// 	$width = Q::ifset($parts, 0, '');
+		// 	$height = Q::ifset($parts, 1, '');
+		// 	$width = $width ? $width : $height;
+		// 	$height = $height ? $height : $width;
+		// 	$icon[$size.$suffix] = "https://graph.facebook.com/"
+		// 		. $this->xid
+		// 		. "/picture?width=$width&height=$width";
+		// }
+		// TODO: IMPLEMENT THIS
 		return $icon;
 	}
 
@@ -84,17 +85,12 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 	function import($fieldNames)
 	{
 		if (!is_array($fieldNames)) {
-			$fieldNames = Q_Config::get('Users', 'import', 'facebook', null);
+			$fieldNames = Q_Config::get('Users', 'import', 'discourse', null);
 		}
 		if (!$fieldNames) {
 			return array();
 		}
-		$xid = $this->xid;
-		$response = $this->facebook->get("/$xid?fields=".implode(',', $fieldNames));
-		$userNode = $response->getGraphUser();
-		Users::$cache['platformUserData'] = array(
-			'facebook' => $userNode->uncastItems()
-		);
-		return $userNode->uncastItems();
+		// TODO: IMPLEMENT THIS
+		return array();
 	}
 }
