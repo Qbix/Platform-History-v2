@@ -101,6 +101,7 @@ foreach ($userInfos as $email => $userInfo) {
 		if (isset($options['u']) or isset($options['update-passphrases'])) {
 			$user->salt = $userInfo [ $columnsFlipped['salt'] ];
 			$user->passphraseHash = $userInfo [ $columnsFlipped['password_hash'] ];
+			$user->save();
 		}
 	} else {
 		$nameIndex = $columnsFlipped['name'];
