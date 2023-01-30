@@ -2162,7 +2162,7 @@ abstract class Users extends Base_Users
 		return $publicKey;
 	}
 
-	static function responseData()
+	static function responseData($options = array())
 	{
 		$user = Q::ifset(Users::$cache, 'user', null);
 		$emailAddress = Q::ifset(Users::$cache, 'emailAddress', null);
@@ -2188,8 +2188,10 @@ abstract class Users extends Base_Users
 		}
 		$interposeActivateDialog = Q_Config::get('Users', 'register', 'interposeActivateDialog', false);
 		if ($interposeActivateDialog and $fields) {
-			$results['activateLink'] = Q_Uri::url("Users/activate?")
-			. '?' . http_build_query($fields);
+			$results['activateLink'] = Q::ifset(
+				Users::$cache, 'Users/activate link', 
+				Q_Uri::url("Users/activate?") . '?' . http_build_query($fields)
+			);
 		}
 		return $results;
 	}

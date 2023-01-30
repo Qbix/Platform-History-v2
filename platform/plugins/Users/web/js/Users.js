@@ -856,9 +856,9 @@
 	 *  @param {Function} [options.onCancel] event that occurs when login or authentication "using" a platform was canceled.
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess, onCancel, or onRequireComplete
 	 *  @param {String} [options.successUrl] If the default onSuccess implementation is used, the browser is redirected here. Defaults to Q.uris[Q.info.app+'/home']
-	 *  @param  {String} [options.accountStatusUrl] if passed, this URL is hit to determine if the account is complete
+	 *  @param  {String} [options.accountStatusURL] if passed, this URL is hit to determine if the account is complete
 	 *  @param {Function} [options.onRequireComplete] function to call if the user logged in but account is incomplete.
-	 *  It is passed the user information as well as the response from hitting accountStatusUrl
+	 *  It is passed the user information as well as the response from hitting accountStatusURL
 	 *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
 	 *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
 	 *  @param {Boolean} [options.unlessLoggedIn] if true, this only proceeds with the login flow if the user isn't already logged in. Can be combined with tryQuietly option.
@@ -1006,11 +1006,11 @@
 				_activationComplete();
 			}
 			function _activationComplete() {
-				if (!o.accountStatusUrl) {
+				if (!o.accountStatusURL) {
 					_onComplete(user, Q.copy(priv));
 					return;
 				}
-				Q.request(o.accountStatusUrl, 'accountStatus', function (err, response2) {
+				Q.request(o.accountStatusURL, 'accountStatus', function (err, response2) {
 					var fem = Q.firstErrorMessage(err, response2);
 					if (fem) {
 						return alert(fem);
@@ -2983,7 +2983,7 @@
 			onRequireComplete: new Q.Event(),
 			onboardingUrl: null,
 			successUrl: null,
-			accountStatusUrl: null,
+			accountStatusURL: null,
 			tryQuietly: false,
 			using: 'native', // can also be a platform name like 'facebook'
 			scope: ['email'], // the permissions to ask for
