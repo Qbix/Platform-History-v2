@@ -187,6 +187,15 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         }
     }
 
+    function logout($userId) {
+        self::_contract();
+        Q_Utils::post(self::$apiHost . "/admin/users/$userId/log_out", array(), null, array(
+            'Content-Type' => 'multipart/form-data',
+            'Api-Key' => self::$apiKey,
+            'Api-Username' => self::$apiUsername
+        ));
+    }
+
     function fetchXids(array $roleIds, array $options = array())
     {
         return array();
