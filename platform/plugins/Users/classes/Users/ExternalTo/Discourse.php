@@ -35,9 +35,9 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             'active' => true,
             'approved' => true
         );
-        Q::log("Request to ".$url, "discourse");
+        // Q::log("Request to ".$url, "discourse");
         $f = $fields; $f['password'] = '***';
-        Q::log(print_r($f, true), "discourse");
+        // Q::log(print_r($f, true), "discourse");
 
         $headers = array(
             "Api-Key: ".self::$apiKey,
@@ -50,8 +50,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $success = Q::ifset($result, 'success', false);
         $userId = Q::ifset($result, 'user_id', null);
 
-        Q::log('RESULT', 'discourse');
-        Q::log($result, 'discourse');
+        // Q::log('RESULT', 'discourse');
+        // Q::log($result, 'discourse');
 
         // errors handle
         if (!$success) {
@@ -70,7 +70,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
                 self::createForumUser($name, $email, $password, $platformId);
             }
 
-            return Q::log($result, "discourse");
+            // Q::log($result, "discourse");
+            return true;
         }
         // if user registered, try to deactivate and activate
         // this trick need to approve email (https://meta.discourse.org/t/api-to-create-a-user-without-sending-out-activation-email/23432/9)
@@ -89,8 +90,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             // activate user
             Q_Utils::put($activateUrl, $data);
 
-            Q::log("DATA", 'discourse');
-            Q::log($data, 'discourse');
+            // Q::log("DATA", 'discourse');
+            // Q::log($data, 'discourse');
         }
 
         if($userId && $name) {
@@ -104,7 +105,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             self::updateForumUserAvatar();
         }
 
-        Q::log($result, "discourse");
+        // Q::log($result, "discourse");
     }
 
     public static function updateForumUserAvatar() {
@@ -150,8 +151,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             'files[]' => $cfile,
             'synchronous' => true
         );
-        Q::log("Request to ".$uploadsUrl, "discourse");
-        Q::log(print_r($fields, true), "discourse");
+        // Q::log("Request to ".$uploadsUrl, "discourse");
+        // Q::log(print_r($fields, true), "discourse");
 
         // don't save api key to logs
         $headers = array(
@@ -169,8 +170,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $response = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($response);
-        Q::log('RESULT', 'discourse');
-        Q::log(print_r($result, true), 'discourse');
+        // Q::log('RESULT', 'discourse');
+        // Q::log(print_r($result, true), 'discourse');
 
         $uploadId = Q::ifset($result, 'id', null);
 
