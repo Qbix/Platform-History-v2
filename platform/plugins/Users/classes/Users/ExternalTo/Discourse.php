@@ -185,4 +185,9 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             Q_Utils::put($updateAvatarUrl, $data, null, null, $headers);
         }
     }
+
+    function fetchXids(array $roleIds, array $options = array())
+    {
+        return array();
+    }
 }
