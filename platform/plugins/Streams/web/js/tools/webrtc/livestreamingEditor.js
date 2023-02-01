@@ -2038,9 +2038,9 @@
                         };
                         this.switchAudioActivenessIcon = function (activeness) {
                             if(activeness === true) {
-                                this.audioActivnessEl.innerHTML = _streamingIcons.liveOn;
+                                this.audioActivnessEl.innerHTML = _streamingIcons.enabledSpeaker;
                             } else if (activeness === false) {
-                                this.audioActivnessEl.innerHTML = _streamingIcons.liveOff;
+                                this.audioActivnessEl.innerHTML = _streamingIcons.disabledSpeaker;
                             }
                         };
                         this.toggleAudio = function() {
@@ -3875,6 +3875,8 @@
                                     addVideoSource(link);
                                 } else if(stream.fields.type == 'Streams/image') {
                                     addImageSource(link);
+                                } else if(stream.fields.type == 'Streams/audio') {
+                                    addAudioSource(link);
                                 } else {
                                     alert('Wrong type of file')
                                 }
@@ -4429,14 +4431,14 @@
                         console.log('addVideoPopup')
                 
                         var boxContent = _dialogEl = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-video';
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-file';
 
                         var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';  
                         boxContent.appendChild(boxContentText);
 
                         var videoItemInput = document.createElement('INPUT');
-                        videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
+                        videoItemInput.className = 'live-editor-dialog-window-add-file-file';
                         videoItemInput.type = 'file';
                         videoItemInput.name = 'fileVideoSource';
                         videoItemInput.accept = 'video/mp4, video/*';
@@ -4451,22 +4453,36 @@
                         boxContentText2.innerHTML = 'OR';
                         boxContent.appendChild(boxContentText2);
 
-                        var imageItemLinkInput = document.createElement('INPUT');
-                        imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
-                        imageItemLinkInput.type = 'text';
-                        imageItemLinkInput.placeholder = 'Enter the link';
-                        imageItemLinkInput.name = 'fileImageLink';
-                        boxContent.appendChild(imageItemLinkInput);
+                        var linkInput = document.createElement('INPUT');
+                        linkInput.className = 'live-editor-dialog-window-add-file-link';
+                        linkInput.type = 'text';
+                        linkInput.placeholder = 'Enter the link';
+                        linkInput.name = 'fileImageLink';
+                        boxContent.appendChild(linkInput);
 
+                        var dialogButtonsCon = document.createElement('DIV');
+                        dialogButtonsCon.className = 'live-editor-dialog-window-add-file-buttons';
+                        boxContent.appendChild(dialogButtonsCon);
+
+                        var dialogOkButton = document.createElement('BUTTON');
+                        dialogOkButton.className = 'live-editor-dialog-window-add-file-ok';
+                        dialogOkButton.innerHTML = 'OK';
+                        dialogButtonsCon.appendChild(dialogOkButton);
+
+                        dialogOkButton.addEventListener('click', function (e) {
+                            addVideoSource(linkInput.value);
+                            hideDialog();
+                        })
 
                         function showDialog(e) {
+                            videoItemInput.value = '';
+                            linkInput.value = '';
                             if(_popupDialog && !_popupDialog.active) {
                                 _popupDialog.show();
                                 return;
                             } else if(_popupDialog) {
                                 return;
                             }
-                            videoItemInput.value = '';
                             _popupDialog = new SimpleDialog({
                                 content: _dialogEl, 
                                 rectangleToShowIn: null,
@@ -4491,13 +4507,13 @@
                         console.log('addImagePopup')
                         
                         var boxContent = _dialogEl = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-image';
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-file';
                         var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                         boxContent.appendChild(boxContentText);
 
                         var imageItemInput = document.createElement('INPUT');
-                        imageItemInput.className = 'live-editor-popup-sources-add-menu-file';
+                        imageItemInput.className = 'live-editor-dialog-window-add-file-file';
                         imageItemInput.type = 'file';
                         imageItemInput.name = 'fileImageSource';
                         imageItemInput.accept = 'image/png, image/jpeg'
@@ -4513,14 +4529,29 @@
                         boxContent.appendChild(boxContentText2);
 
                         var imageItemLinkInput = document.createElement('INPUT');
-                        imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
+                        imageItemLinkInput.className = 'live-editor-dialog-window-add-file-link';
                         imageItemLinkInput.type = 'text';
                         imageItemLinkInput.placeholder = 'Enter the link';
                         imageItemLinkInput.name = 'fileImageLink';
                         boxContent.appendChild(imageItemLinkInput);
 
+                        var dialogButtonsCon = document.createElement('DIV');
+                        dialogButtonsCon.className = 'live-editor-dialog-window-add-file-buttons';
+                        boxContent.appendChild(dialogButtonsCon);
+
+                        var dialogOkButton = document.createElement('BUTTON');
+                        dialogOkButton.className = 'live-editor-dialog-window-add-file-ok';
+                        dialogOkButton.innerHTML = 'OK';
+                        dialogButtonsCon.appendChild(dialogOkButton);
+
+                        dialogOkButton.addEventListener('click', function (e) {
+                            addImageSource(imageItemLinkInput.value);
+                            hideDialog();
+                        })
+
                         function showDialog(e) {
                             imageItemInput.value = '';
+                            imageItemLinkInput.value = '';
                             if(_popupDialog && !_popupDialog.active) {
                                 _popupDialog.show();
                                 return;
@@ -5081,13 +5112,13 @@
                         console.log('addAudioPopup')
                         
                         var boxContent = _dialogEl = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-window-content';
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-file';
                         var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                         boxContent.appendChild(boxContentText);
                         
                         var videoItemInput = document.createElement('INPUT');
-                        videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
+                        videoItemInput.className = 'live-editor-dialog-window-add-file-file';
                         videoItemInput.type = 'file';
                         videoItemInput.name = 'fileAudioSource';
                         videoItemInput.accept = 'audio/mp3, audio/*'
@@ -5102,15 +5133,30 @@
                         boxContentText2.innerHTML = 'OR';
                         boxContent.appendChild(boxContentText2);
                         
-                        var imageItemLinkInput = document.createElement('INPUT');
-                        imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
-                        imageItemLinkInput.type = 'text';
-                        imageItemLinkInput.placeholder = 'Enter the link';
-                        imageItemLinkInput.name = 'fileImageLink';
-                        boxContent.appendChild(imageItemLinkInput);
+                        var linkInput = document.createElement('INPUT');
+                        linkInput.className = 'live-editor-dialog-window-add-file-file';
+                        linkInput.type = 'text';
+                        linkInput.placeholder = 'Enter the link';
+                        linkInput.name = 'fileImageLink';
+                        boxContent.appendChild(linkInput);
+
+                        var dialogButtonsCon = document.createElement('DIV');
+                        dialogButtonsCon.className = 'live-editor-dialog-window-add-file-buttons';
+                        boxContent.appendChild(dialogButtonsCon);
+
+                        var dialogOkButton = document.createElement('BUTTON');
+                        dialogOkButton.className = 'live-editor-dialog-window-add-file-ok';
+                        dialogOkButton.innerHTML = 'OK';
+                        dialogButtonsCon.appendChild(dialogOkButton);
+
+                        dialogOkButton.addEventListener('click', function (e) {
+                            addAudioSource(linkInput.value);
+                            hideDialog();
+                        })
 
                         function showDialog(e) {
                             videoItemInput.value = '';
+                            linkInput.value = '';
                             if(_popupDialog && !_popupDialog.active) {
                                 _popupDialog.show();
                                 return;
