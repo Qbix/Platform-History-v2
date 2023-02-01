@@ -780,7 +780,7 @@ window.WebRTCRoomClient = function app(options){
              * @param {Object} [visualization] object that contains info about visualization (e.g. SVG elements)
              */
             function updatVisualizationWidth(participant, visualization) {
-                log('audiovis: audioVisualization: updatVisualizationWidth');
+                //log('audiovis: audioVisualization: updatVisualizationWidth');
                 if((visualization == null || visualization.svg == null) || visualization.type == 'circles' || (visualization.updateSizeOnlyOnce && visualization.updated)) return;
 
                 var element = visualization.element;
@@ -1337,19 +1337,23 @@ window.WebRTCRoomClient = function app(options){
             }
             log('attachTrack: track attached: ', track);
             log('attachTrack: track attached: ' + track.mediaStreamTrack.id + ' stream:' + track.stream.id);
-            log('attachTrack: REPORT ');
+            log('attachTrack: REPORT START');
 
             /*if (participant.RTCPeerConnection) {
                 participant.RTCPeerConnection.getStats(null).then((stats) => {
                     stats.forEach((report) => {
-                        console.log(`%c=====Report: ${report.type}=====`, 'background:red; color:white');
+                        //console.log(`%c=====Report: ${report.type}=====`, 'background:red; color:white');
+                        log(`=====Report: ${report.type}=====`);
 
                         Object.keys(report).forEach((statName) => {
                             if (statName !== "id" && statName !== "timestamp" && statName !== "type") {
-                                console.log(`${statName}: ${report[statName]}\n`);
+                                log(`${statName}: ${report[statName]}\n`);
                             }
                         });
                     });
+                }).catch(function(e) {
+                    log('attachTrack: REPORT ERROR');
+                    console.error(e);
                 });
 
             }*/
@@ -3040,7 +3044,7 @@ window.WebRTCRoomClient = function app(options){
 
             });
             socket.on('Streams/webrtc/cameraDisabled', function (message){
-                log('got cameraDisabled', message, localParticipant.sid);
+                console.log('got cameraDisabled', message, localParticipant.sid);
                 var participant = roomParticipants.filter(function (roomParticipant) {
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
