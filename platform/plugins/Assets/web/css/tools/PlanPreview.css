@@ -78,3 +78,6 @@
 	border-top: 1px solid silver;
 	margin-top: 10px;
 }
+.Assets_plan_preview_tool .Assets_plan_preview_description:empty {
+	display: none;
+}
