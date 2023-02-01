@@ -23,10 +23,8 @@
      * @param {Object} options
      */
     Q.Tool.define("Streams/fileManager", function(options) {
-        console.log('Streams/fileManager options', options)
         var tool = this;
         tool.state = Q.extend({}, this.state, options);
-        console.log('Streams/fileManager options', tool.state)
 
         Q.addStylesheet('{{Streams}}/css/tools/fileManager.css?ts=' + performance.now(), function () {
             tool.create();
@@ -102,7 +100,6 @@
                 fileManagerExplorerCon.appendChild(fileManagerExplorerInner);
                 fileManagerInner.appendChild(fileManagerExplorerCon);
 
-                console.log('tool.state.openInDialog', tool.state.openInDialog)
                 if(!tool.state.openInDialog) tool.element.appendChild(fileManagerCon);
 
                 fileManagerControlsCloseDialog.addEventListener('click', function () {
@@ -111,14 +108,11 @@
 
                 fileManagerControlsBackCon.addEventListener('click', function () {
                     var inderToSwitch = tool.state.history.currentIndex - 1;
-                    console.log('BACK inderToSwitch', inderToSwitch, tool.state.history.streams[inderToSwitch])
                     var prevDirStream = tool.state.history.streams[inderToSwitch];
                     if(!prevDirStream) return;
                     tool.state.history.currentIndex = inderToSwitch;
                     tool.state.currentDirStreamName = prevDirStream;
                     tool.refresh();
-                    console.log('BACK inderToSwitch AFTER', tool.state.history.currentIndex, tool.state.currentDirStreamName)
-
                 })
 
                 fileManagerControlsForwardCon.addEventListener('click', function () {
@@ -128,9 +122,6 @@
                     tool.state.history.currentIndex = inderToSwitch;
                     tool.state.currentDirStreamName = prevDirStream;
                     tool.refresh();
-
-                    console.log('tool.state.history.currentIndex', tool.state.history.currentIndex)
-
                 })
 
                 tool.explorerEl = fileManagerExplorerInner;
@@ -158,40 +149,47 @@
                 });
 
                 function contextualToolLoadHandler() {
-                    tool.imagePreviewElement = $("<div>").css("display", "none").appendTo(tool.element).tool("Streams/preview", {
-                        publisherId: userId,
-                        related: {
-                            publisherId: userId,
-                            streamName: tool.state.currentDirStreamName,
-                            type: "Streams/image"
-                        },
-                        onRefresh: function () {
-                            tool.refresh();
-                        },
-                        onLoad: function () {
-                            tool.refresh();
-                        },
-                        creatable: {skipComposer: true}
-                    }).tool("Streams/image/preview", {
-                        updateTitle: true,
-                        sendOriginal: true
-                    }).activate(function () {
-                        var _handler = function () {
-                            $(".Q_imagepicker", tool.imagePreviewElement).plugin('Q/imagepicker', 'click');
-                        };
+                    
 
-                        if (tool.menuItem) {
-                            return tool.menuItem.data("handler", _handler);
+                    tool.addMenuItem({
+                        title: 'Add image',
+                        icon: '{{Streams}}/img/icons/Streams/image/40.png',
+                        className: "Streams_fileManager_add_image",
+                        handler: function () {
+                            if(tool.imagePreviewElement) {
+                                Q.Tool.remove(tool.imagePreviewElement[0], true, true);
+                                tool.imagePreviewElement = null;
+                            }
+                            Q.activate(
+                                $("<div>").css("display", "none").appendTo(tool.element).tool("Streams/preview", {
+                                    publisherId: userId,
+                                    related: {
+                                        publisherId: userId,
+                                        streamName: tool.state.currentDirStreamName,
+                                        type: "Streams/image"
+                                    },
+                                    onRefresh: function () {
+                                        tool.refresh();
+                                    },
+                                    onLoad: function () {
+                                        tool.refresh();
+                                    },
+                                    creatable: { skipComposer: true }
+                                }).tool("Streams/image/preview", {
+                                    updateTitle: true,
+                                    sendOriginal: true,
+                                    dontSetSize: true
+                                }),
+                                {},
+                                function () {
+                                    tool.imagePreviewElement = $(this.element);
+                                    setTimeout(function () {
+                                        $(".Q_imagepicker", tool.imagePreviewElement).plugin('Q/imagepicker', 'click');
+                                    }, 0);
+                                }
+                            )
                         }
-
-                        tool.addMenuItem({
-                            title: 'Add image',
-                            icon: '{{Streams}}/img/icons/Streams/image/40.png',
-                            className: "Streams_fileManager_add_image",
-                            handler: _handler
-                        });
                     });
-
 
                     tool.addMenuItem({
                         title: 'Add video',
@@ -202,8 +200,6 @@
                                 publisherId: userId
                             }).tool("Streams/video/preview").activate(function () {
                                 var videoPreviewTool = this;
-
-                                console.log('videoPreviewTool', videoPreviewTool);
 
                                 var videoPreview = Q.Tool.from(videoPreviewTool.element, "Streams/video/preview");
                                 videoPreview.state.onLoad.add(function () {
@@ -239,10 +235,10 @@
                             $("<div>").tool("Streams/preview", {
                                 publisherId: userId
                             }).tool("Streams/audio/preview").activate(function () {
-                                var audioPreview = Q.Tool.from(this.element, "Streams/audio/preview");
+                                let audioPreview = Q.Tool.from(this.element, "Streams/audio/preview");
 
                                 audioPreview.composer(function (params) {
-                                    var fields = Q.extend({
+                                    let fields = Q.extend({
                                         publisherId: userId,
                                         type: "Streams/audio"
                                     }, 10, params);
@@ -321,7 +317,6 @@
                         return Q.alert(msg);
                     }
 
-                    console.log('fileManager: refresh: response', response.slots.list)
                     tool.loadFilesList(response.slots.list);
                 }, {
                     method: 'get',
@@ -355,15 +350,12 @@
                     }
 
                     //var attributes = JSON.parse(fileStream['attributes']);
-                    //console.log('loadFilesList for', attributes);
                     if(fileStream.fields.type == 'Streams/video') {
                         $(fileItemInner).tool("Streams/preview", {
                             publisherId: fileStream.fields.publisherId,
                             streamName: fileStream.fields.name,
                             type: "Streams/video"
                         }).tool("Streams/video/preview").activate(function () {
-                            console.log('Streams/video/preview this.element', this);
-
                             var streamsPreview = Q.Tool.from(fileItemInner, "Streams/preview");
                             streamsPreview.state.onClose.add(function () {
                                 removeItem();
@@ -423,7 +415,6 @@
                             type: "Streams/image"
                         }).tool("Streams/category/preview").activate(function () {
                             var categoryPreview = Q.Tool.from(fileItemInner, "Streams/category/preview");
-                            console.log('categoryPreview', categoryPreview)
                             categoryPreview.state.templates.edit.name = 'Streams/fileManager/category/preview/edit';
                             categoryPreview.preview.options.actions.position = 'tr';
                             categoryPreview.preview.options.actions.size = '16';
@@ -434,18 +425,15 @@
 
                     fileItem.addEventListener('click', function (e) {
                         if(fileStream.fields.type == 'Streams/category') {
-                            tool.state.currentDirStreamName = fileStream['name'];
-                           // tool.state.history.streams.push(fileStream['name']);
+                            tool.state.currentDirStreamName = fileStream.fields.name;
+                           // tool.state.history.streams.push(fileStream.fields.name);
                             var elementsToRemove = tool.state.history.streams.length - tool.state.history.currentIndex - 1;
-                            console.log('open folder BEFORE', tool.state.history.currentIndex, elementsToRemove, tool.state.history.streams.length)
-                            tool.state.history.streams.splice(tool.state.history.currentIndex + 1, elementsToRemove, fileStream['name']);
+                            tool.state.history.streams.splice(tool.state.history.currentIndex + 1, elementsToRemove, fileStream.fields.name);
                             tool.state.history.currentIndex = tool.state.history.streams.length - 1;
-
-                            console.log('open folder AFTER', tool.state.history.currentIndex, tool.state.history.streams.length)
-                            console.log('open folder AFTER streams', tool.state.history.streams)
-
-
                             tool.refresh();
+
+                            e.preventDefault();
+                            return;
                         }
                         Q.handle(tool.state.onSelect, tool, [fileStream]);
                         e.preventDefault();
@@ -454,7 +442,6 @@
             },
             showDialog: function () {
                 var tool = this;
-                console.log('tool.fileManagerEl', Q.Dialogs)
                 var dialogCon = tool.fileManagerDialog = document.createElement('DIV');
                 dialogCon.className = 'Streams_fileManager_dialog_con';
                 var dialogInner = document.createElement('DIV');

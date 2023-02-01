@@ -3688,7 +3688,7 @@
                             syncList();
                         };
                         var activeScene = scenesInterface.getActive();
-                        activeScene.sourcesInterface.hideResizingElement()
+                        //activeScene.sourcesInterface.hideResizingElement()
                         optionsColumn.update();
                     }
 
@@ -3864,12 +3864,17 @@
 
                             _fileManagerTool.state.onSelect.set(function (stream) {
                                 console.log('Streams/fileManager onSelect', stream)
-                                if(stream.fields.attributes == '') {
+                                if(stream.fields.attributes == '' && stream.fields.icon == '') {
                                     console.error('Q.file.url is missing')
                                     return;
                                 }
-                                var attributes = JSON.parse(stream.fields.attributes);
-                                var link = Q.url(attributes['Q.file.url']);
+                                var link;
+                                if(attributes) {
+                                    var attributes = JSON.parse(stream.fields.attributes);
+                                    link = Q.url(attributes['Q.file.url']);
+                                } else {
+                                    link = Q.url(stream.fields.icon) + '/original.png';
+                                }
                                 console.log('Streams/fileManager attributes', link)
                                 if(stream.fields.type == 'Streams/video') {
                                     addVideoSource(link);
