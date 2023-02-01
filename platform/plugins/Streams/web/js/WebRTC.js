@@ -895,12 +895,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return trackObj.kind == 'video';
                     });
                 }
-                this.hasLiveTracks = function (kind) {
+                this.hasLiveTracks = function (kind, shouldBeUnmuted, shouldBeEnabled) {
+                    var shouldBeLive = true; 
                     var hasLiveTracks = false;
                     for(let t in this.tracks) {
                         let track = this.tracks[t];
                         if(kind && kind != this.tracks[t].kind) continue;
-                        if(track.mediaStreamTrack.muted == false && track.mediaStreamTrack.readyState != 'ended') {
+                        let live = shouldBeLive ? track.mediaStreamTrack.readyState != 'ended' : true;
+                        let unmuted = shouldBeUnmuted ? track.mediaStreamTrack.muted == false : true;
+                        let enabled = shouldBeEnabled ? track.mediaStreamTrack.enabled == true : true;
+                        if(live && unmuted && enabled) {
                             hasLiveTracks = true;
                             break;
                         }
@@ -973,7 +977,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     this.screenEl.appendChild(this.videoScreen.screenEl);
                 };
                 this.fillAudioScreenWithAvatarOrVideo = function () {
-                    if(this.videoTrack && this.hasLiveTracks('video')) {
+                    if(this.videoTrack && this.hasLiveTracks('video', true)) {
                         this.audioScreen.avatarImgCon.innerHTML = '';
                         this.audioScreen.avatarImgCon.appendChild(this.videoTrack);
                     } else if (this.audioScreen.avatarImg != null){
@@ -983,7 +987,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
                 this.fillVideoScreenWithAvatarOrVideo = function () {
                     console.log('fillVideoScreenWithAvatarOrVideo');
-                    if(this.videoTrack && this.hasLiveTracks('video')) {
+                    if(this.videoTrack && this.hasLiveTracks('video', true)) {
                         console.log('fillVideoScreenWithAvatarOrVideo if1');
 
                         this.videoScreen.videoCon.innerHTML = '';
@@ -1621,19 +1625,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     track.parentScreen = screenToAttach;
                     screenToAttach.videoTrack = track.trackEl;
                 } else if(track.kind == 'video') {
-                    log('videoTrackIsAdding: regular video');
+                    log('videoTrackIsAdding: regular video', participant.isLocal);
 
                     for(var s in participant.screens) {
-                        let activeTracks = participant.screens[s].tracks.filter(function(t){
-                            return t.kind == 'video' && t.mediaStreamTrack.enabled == true && t.mediaStreamTrack.readyState == 'live' && t.mediaStreamTrack.muted == false ? true : false
-                        })
-                        log('videoTrackIsAdding: regular video', activeTracks);
-
+                        console.log('videoTrackIsAdding for', participant.screens[s].hasLiveTracks('video'))
                         if(!participant.screens[s].screensharing && !participant.screens[s].hasLiveTracks('video')) {
                             screenToAttach = participant.screens[s];
                             break;
                         }
                     }
+                    log('videoTrackIsAdding: screenToAttach', screenToAttach);
 
 
                     if(!screenToAttach) {

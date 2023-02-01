@@ -900,6 +900,7 @@
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
                                 video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
+                                video.setAttribute("playsinline","");
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })

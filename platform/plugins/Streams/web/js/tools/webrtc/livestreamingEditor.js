@@ -2128,7 +2128,7 @@
                         };
                         var sourceResizingEl = _allParticipantsListInstance.resizingElement = document.createElement('DIV');
                         sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
-                        desktopDialogEl.previewBoxEl.appendChild(sourceResizingEl);
+                        activeDialog.previewBoxEl.appendChild(sourceResizingEl);
 
                         Q.activate(
                             Q.Tool.setUpElement(
@@ -2587,7 +2587,7 @@
 
                             var sourceResizingEl = listItemInstance.resizingElement = document.createElement('DIV');
                             sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
-                            desktopDialogEl.previewBoxEl.appendChild(sourceResizingEl);
+                            activeDialog.previewBoxEl.appendChild(sourceResizingEl);
                             
                             Q.activate(
                                 Q.Tool.setUpElement(
@@ -2958,7 +2958,7 @@
 
                                     var sourceResizingEl = listItem.resizingElement = document.createElement('DIV');
                                     sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
-                                    desktopDialogEl.previewBoxEl.appendChild(sourceResizingEl);
+                                    activeDialog.previewBoxEl.appendChild(sourceResizingEl);
         
                                     Q.activate(
                                         Q.Tool.setUpElement(
@@ -3491,7 +3491,7 @@
                                     currentlySelectedEls[i].classList.remove('live-editor-popup-sources-item-active');
                                 }  
                             }
-                            let resizingEls = desktopDialogEl.previewBoxParent.querySelectorAll('.live-editor-canvas-preview-resizing');
+                            let resizingEls = activeDialog.previewBoxParent.querySelectorAll('.live-editor-canvas-preview-resizing');
                             let a, resizingElsNum = resizingEls.length;
                             for(a = 0; a < resizingElsNum; a++) {
                                 resizingEls[a].style.display = '';
@@ -4294,16 +4294,16 @@
 
                     function initHoveringTool() {
                         var left = 0, top = 0;
-                        console.log('desktopDialogEl', desktopDialogEl);
+                        console.log('initHoveringTool activeDialog', activeDialog);
                         var allParticipantsListItem = _participantsList.getWebrtcGroupListItem();
                         var allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
-                        var previewBoxRect = desktopDialogEl.previewBoxEl.getBoundingClientRect();
+                        var previewBoxRect = activeDialog.previewBoxEl.getBoundingClientRect();
                         var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
                         var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
                         var realcanvasSize = _streamingCanvas.getBoundingClientRect();
                         var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
                         var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
-                        desktopDialogEl.previewBoxParent.addEventListener('mousemove', function (e) {
+                        activeDialog.previewBoxParent.addEventListener('mousemove', function (e) {
                             let x = e.clientX - previewBoxRect.x;
                             let y = e.clientY - previewBoxRect.y;
         
@@ -4378,12 +4378,12 @@
                             }
                         });
         
-                        desktopDialogEl.previewBoxParent.addEventListener('mouseleave', function (e) {
+                        activeDialog.previewBoxParent.addEventListener('mouseleave', function (e) {
                             _hoveringElement.style.boxShadow = 'none';
                             _hoveringElementTool.hoveredOverRect = null;
                         });
         
-                        desktopDialogEl.previewBoxParent.addEventListener('click', function (e) {
+                        activeDialog.previewBoxParent.addEventListener('click', function (e) {
                             if (_hoveringElementTool.hoveredOverRect != null) {
                                 //if (_resizingElementTool.state.appliedRecently) return;
                                 let i = 0, len = _sourcesList.length;
@@ -8708,6 +8708,10 @@
                     previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
                     previewBoxBody.appendChild(previewBoxBodyInner);
 
+                    var sourceHoveringEl = _hoveringElement = document.createElement('DIV');
+                    sourceHoveringEl.className = 'live-editor-canvas-preview-hovering';
+                    previewBoxBodyInner.appendChild(sourceHoveringEl);
+
                     var streamingToSectionEl = streamingToSection.createSection();
                     previewBoxBody.appendChild(streamingToSectionEl);
 
@@ -8804,7 +8808,8 @@
 
                     return {
                         dialogEl: dialog,
-                        previewBoxEl: previewBoxBodyInner
+                        previewBoxEl: previewBoxBodyInner,
+                        previewBoxParent: previewBoxBody
                     }
                 }
 
