@@ -78,18 +78,16 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}, this);
 	}
 	if (!state.editable || state.editable.indexOf('name') < 0) {
-		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/firstName', 'content')
-		.set(handleChange, this);
-		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/lastName', 'content')
-		.set(handleChange, this);
-		if (state.withGender) {
-			Streams.Stream.onFieldChanged(state.userId, 'Streams/user/gender', 'content')
-				.set(handleChange, this);
-		}
-	}
-	function handleChange(fields, field) {
-		Streams.Avatar.get.forget(state.userId);
-		tool.refresh();
+		Q.each(["firstName", "lastName", "username", "gender"], function (i, val) {
+			if (val === "gender" && !state.withGender) {
+				return;
+			}
+
+			Streams.Stream.onFieldChanged(state.userId, 'Streams/user/' + val, 'content').set(function (fields, field) {
+				Streams.Avatar.get.forget(state.userId);
+				tool.refresh();
+			}, tool);
+		});
 	}
 },
 
