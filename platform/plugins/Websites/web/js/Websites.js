@@ -139,7 +139,7 @@ Q.onInit.set(function () {
 
  Q.Text.addFor(
 	['Q.Tool.define', 'Q.Template.set'],
-	'Wesites/', ["Websites/content"]
+	'Websites/', ["Websites/content"]
 );
 Q.Tool.define({
 	"Websites/metadata": "{{Websites}}/js/tools/metadata.js",
