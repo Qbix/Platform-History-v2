@@ -3534,7 +3534,6 @@
                             };
 
                             sourceItem.resizingElementTool.events.on('moving', function (e) {
-                                console.log('mooving')
                                 let leftPos = (e.x - left);
                                 let topPos = (e.y - top);
                                 _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
@@ -3613,7 +3612,6 @@
                             sourceItem.resizingElement.style.boxSizing = 'border-box';
 
                             sourceItem.resizingElementTool.events.on('moving', function (e) {
-                                console.log('mooving')
                                 let leftPos = (e.x - left);
                                 let topPos = (e.y - top);
                                 _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;

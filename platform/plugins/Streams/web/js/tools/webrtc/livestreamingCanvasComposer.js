@@ -978,6 +978,7 @@
                                 console.log('addSource video')
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
+                                video.setAttribute("playsinline","");
                                 video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
@@ -1004,6 +1005,7 @@
         
                                 var video = document.createElement('VIDEO');
                                 video.muted = true;
+                                video.setAttribute("playsinline","");
                                 video.style.display = 'none';
                                 video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
@@ -1017,7 +1019,6 @@
         
                                 video.muted = true;
                                 video.autoplay = true;
-                                video.playsInline = true;
                                 /*var playPromise = video.play();
                                 if (playPromise !== undefined) {
                                     playPromise.then(function() {
