@@ -1829,7 +1829,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$actualPublisherId = null, 
 		$inheritAccess = true)
 	{
-		Streams::calculateAccess($asUserId, $this->publisherId, array($this), $recalculate, $actualPublisherId);
+		Streams::calculateAccess($asUserId, $this->publisherId, array($this), $recalculate, $actualPublisherId, $inheritAccess);
 		return $this;
 	}
 
@@ -1875,78 +1875,72 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 		}
 		foreach ($updateRelations as $direction) {
-			$relationTypes = array_keys($this->fields);
-			if ($direction === 'from') {
-				$rfroms = Streams_RelatedFrom::select()->where(array(
-					'fromPublisherId' => array('', $this->publisherId),
-					'fromStreamName' => $this->type . '/',
-					'type' => $relationTypes
-				))->fetchDbRows(null, '', 'type');
-				$weight = time(); // is_numeric($attr[$k]) ? $attr[$k] : 1;
-				foreach ($attributesChanged as $ak => $av) {
-					if (empty($rfroms["attribute/$ak"])) {
-						continue; // nothing to remove
-					}
-					$rfrom = $rfroms["attribute/$ak"];
-					if (is_array($av)) {
-						$toRemove = array_diff($av, $attr[$ak]);
-						foreach ($toRemove as $r) {
-							$relationType = "attribute/$ak=" . json_encode($r);
-							// TODO: Streams::unrelate with corresponding relationTypes
-						}
-						Streams::unrelate(
-							$asUserId, 
-							$rfrom->fromPublisherId,
-							$rfrom->fromStreamName,
-							$relationType,
-							$this->publisherId, $this->name,
-							array('skipAccess' => true, 'weight' => $weight)
-						);
-					} else {
-						// handle regular scalar values
-						$toRemove = $av;
-						$relationType = "attribute/$ak=" . json_encode($av);
-						Streams::unrelate(
-							$asUserId, 
-							$rfrom->fromPublisherId,
-							$rfrom->fromStreamName,
-							$relationType,
-							$this->publisherId, $this->name,
-							array('skipAccess' => true, 'weight' => $weight)
-						);
-						// TODO: Streams::unrelate with corresponding relationTypes
-					}
+			if ($direction !== 'from') {
+				continue;
+			}
+			$relationTypes = array_merge($relationTypes, array_keys($this->fields));
+			$rfroms = Streams_RelatedFrom::select()->where(array(
+				'fromPublisherId' => array('', $this->publisherId),
+				'fromStreamName' => $this->type . '/',
+				'type' => $relationTypes
+			))->fetchDbRows(null, '', 'type');
+			$weight = time(); // is_numeric($attr[$k]) ? $attr[$k] : 1;
+			$removeRelationTypes = array();
+			foreach ($attributesChanged as $ak => $av) {
+				if (is_numeric($av)) {
+					// this form for numbers makes lexicographical comparisons agree with numeric ones
+					$av = sprintf("%+015.2f", $av);
 				}
-				foreach ($attributesAdded as $ak => $av) {
-					if (is_array($av)) {
-						$toAdd = array_diff($av, $orig[$ak]);
-						foreach ($toAdd as $a) {
-							$relationType = "attribute/$ak=" . json_encode($a);
-						}
-						// TODO: relate with corresponding relationTypes
-						Streams::relate(
-							$asUserId, 
-							$rfrom->fromPublisherId,
-							$rfrom->fromStreamName,
-							$relationType,
-							$this->publisherId, $this->name,
-							array('skipAccess' => true, 'weight' => $weight)
-						);
-					} else {
-						// handle regular scalar values
-						$toAdd = $av;
-						$relationType = "attribute/$ak=" . json_encode($av);
-						Streams::relate(
-							$asUserId, 
-							$rfrom->fromPublisherId,
-							$rfrom->fromStreamName,
-							$relationType,
-							$this->publisherId, $this->name,
-							array('skipAccess' => true, 'weight' => $weight)
-						);
+				if (empty($rfroms["attribute/$ak"])) {
+					continue; // nothing to remove
+				}
+				$rfrom = $rfroms["attribute/$ak"];
+				if (is_array($av)) {
+					$toRemove = array_diff($av, $attr[$ak]);
+					foreach ($toRemove as $r) {
+						$removeRelationTypes[] = "attribute/$ak=" . json_encode($r);
 					}
+				} else {
+					// handle regular scalar values
+					$removeRelationTypes[] = "attribute/$ak=" . json_encode($av);
 				}
 			}
+			$addRelationTypes = array();
+			foreach ($attributesAdded as $ak => $av) {
+				if (is_array($av)) {
+					$toAdd = array_diff($av, $orig[$ak]);
+					foreach ($toAdd as $a) {
+						if (is_numeric($a)) {
+							// this form for numbers makes lexicographical comparisons agree with numeric ones
+							$av = sprintf("%+015.2f", $av);
+						}
+						$addRelationTypes[] = "attribute/$ak=" . json_encode($a);
+					}
+				} else {
+					// handle regular scalar values
+					if (is_numeric($av)) {
+						// this form for numbers makes lexicographical comparisons agree with numeric ones
+						$av = sprintf("%+015.2f", $av);
+					}
+					$addRelationTypes[] = "attribute/$ak=" . json_encode($av);
+				}
+			}
+			Streams::unrelate(
+				$asUserId, 
+				$rfrom->fromPublisherId,
+				$rfrom->fromStreamName,
+				$removeRelationTypes,
+				$this->publisherId, $this->name,
+				array('skipAccess' => true, 'adjustWeights' => true)
+			);
+			Streams::relate(
+				$asUserId, 
+				$rfrom->fromPublisherId,
+				$rfrom->fromStreamName,
+				$addRelationTypes,
+				$this->publisherId, $this->name,
+				array('skipAccess' => true, 'weight' => $weight)
+			);
 		}
 		return true;
 	}
