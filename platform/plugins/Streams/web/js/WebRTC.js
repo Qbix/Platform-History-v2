@@ -895,12 +895,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return trackObj.kind == 'video';
                     });
                 }
-                this.hasLiveTracks = function (kind) {
+                this.hasLiveTracks = function (kind, shouldBeUnmuted, shouldBeEnabled) {
+                    var shouldBeLive = true; 
                     var hasLiveTracks = false;
                     for(let t in this.tracks) {
                         let track = this.tracks[t];
                         if(kind && kind != this.tracks[t].kind) continue;
-                        if(track.mediaStreamTrack.muted == false && track.mediaStreamTrack.readyState != 'ended') {
+                        let live = shouldBeLive ? track.mediaStreamTrack.readyState != 'ended' : true;
+                        let unmuted = shouldBeUnmuted ? track.mediaStreamTrack.muted == false : true;
+                        let enabled = shouldBeEnabled ? track.mediaStreamTrack.enabled == true : true;
+                        if(live && unmuted && enabled) {
                             hasLiveTracks = true;
                             break;
                         }
@@ -973,7 +977,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     this.screenEl.appendChild(this.videoScreen.screenEl);
                 };
                 this.fillAudioScreenWithAvatarOrVideo = function () {
-                    if(this.videoTrack && this.hasLiveTracks('video')) {
+                    if(this.videoTrack && this.hasLiveTracks('video', true)) {
                         this.audioScreen.avatarImgCon.innerHTML = '';
                         this.audioScreen.avatarImgCon.appendChild(this.videoTrack);
                     } else if (this.audioScreen.avatarImg != null){
@@ -983,7 +987,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
                 this.fillVideoScreenWithAvatarOrVideo = function () {
                     console.log('fillVideoScreenWithAvatarOrVideo');
-                    if(this.videoTrack && this.hasLiveTracks('video')) {
+                    if(this.videoTrack && this.hasLiveTracks('video', true)) {
                         console.log('fillVideoScreenWithAvatarOrVideo if1');
 
                         this.videoScreen.videoCon.innerHTML = '';
@@ -1609,6 +1613,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         screenToAttach = participant.screens.filter(function (scrn) {
                             return scrn.screensharing == true && !scrn.hasLiveTracks('video');
                         })[0];
+
+                        //if remote user connects to room after screensharingStarting event (and skips this event, which prepares screen for screensharing)
+                        if(!screenToAttach) {
+                            screenToAttach = participant.screens.filter(function (scrn) {
+                                return !scrn.hasLiveTracks('video');
+                            })[0];
+                        }
                     } else {
                         screenToAttach = participant.screens.filter(function (scrn) {
                             return !scrn.hasLiveTracks('video');
@@ -1621,19 +1632,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     track.parentScreen = screenToAttach;
                     screenToAttach.videoTrack = track.trackEl;
                 } else if(track.kind == 'video') {
-                    log('videoTrackIsAdding: regular video');
+                    log('videoTrackIsAdding: regular video', participant.isLocal);
 
                     for(var s in participant.screens) {
-                        let activeTracks = participant.screens[s].tracks.filter(function(t){
-                            return t.kind == 'video' && t.mediaStreamTrack.enabled == true && t.mediaStreamTrack.readyState == 'live' && t.mediaStreamTrack.muted == false ? true : false
-                        })
-                        log('videoTrackIsAdding: regular video', activeTracks);
-
+                        console.log('videoTrackIsAdding for', participant.screens[s].hasLiveTracks('video'))
                         if(!participant.screens[s].screensharing && !participant.screens[s].hasLiveTracks('video')) {
                             screenToAttach = participant.screens[s];
                             break;
                         }
                     }
+                    log('videoTrackIsAdding: screenToAttach', screenToAttach);
 
 
                     if(!screenToAttach) {
@@ -1892,7 +1900,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(usefulData.screen != null) {
                     screen = usefulData.screen;
                 } else {
-                    //if(loaderName == 'screensharingStarting') {
                     screen = participant.screens.filter(function (scrn) {
                         return (scrn.screensharing == true && !scrn.hasLiveTracks('video'));
                     })[0];
@@ -1903,9 +1910,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             return !scrn.screensharing;
                         })[0];
                     }
-                    /* } else {
-                        screen = participant.screens[0];
-                    }*/
                 }
 
                 log('showLoader', screen,  participant.screens.length)
@@ -6015,12 +6019,63 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 screensRendering.onVideoTrackLoaded(e.track);
             });
 
-            WebRTCconference.event.on('screensharingStarting', function (e) {
+            WebRTCconference.event.on('remoteScreensharingStarting', function (e) {
                 log('screen sharing is being started', e)
 
                 screensRendering.toggleLoudestScreenMode('disabled');
                 screensRendering.onScreensharingStarting(e);
                 screensRendering.showLoader('screensharingStarting', {participant: e.participant});
+            });
+
+            WebRTCconference.event.on('remoteScreensharingStarted', function (e) {
+                log('screen sharing is started', e)
+
+                var handleScreensharring = function() {
+                    let tracks = e.participant.tracks;
+                    let screensharingTrack;
+                    for (let i in tracks) {
+                        if(!tracks[i].stream) continue;    
+                        if(tracks[i].stream.id == e.content.streamId) {
+                            screensharingTrack = tracks[i];
+                        }
+                    }
+    
+                    if(!screensharingTrack) {
+                        return false;
+                    }
+
+                    let currentViewMode = screensRendering.getActiveViewMode();
+                    let currentViewModeIsRight = false;
+                    if(Q.info.isMobile) {
+                        if(currentViewMode == 'maximizedMobile') currentViewModeIsRight = true
+                    } else {
+                        if(currentViewMode == 'fullScreen' || currentViewMode == 'screenSharing') currentViewModeIsRight = true
+                    }
+                    if(screensharingTrack.parentScreen && screensharingTrack.parentScreen.screensharing && currentViewModeIsRight) {
+                        return true
+                    };
+    
+                    if(Q.info.isMobile){
+                        screensRendering.renderMaximizedScreensGridMobile(screensharingTrack.parentScreen);
+                    } else {
+                        screensRendering.renderFullScreenLayout(screensharingTrack.parentScreen);
+                    }
+                    screensRendering.updateLayout();
+
+                    return true;
+                }
+
+                var checkIfScreensharingTrackAdded = function () {
+                    setTimeout(function () {
+                        if (!handleScreensharring()) {
+                            checkIfScreensharingTrackAdded();
+                        }
+                    }, 500);
+                }
+
+                if(!handleScreensharring()) {
+                    checkIfScreensharingTrackAdded();
+                }                
             });
 
             WebRTCconference.event.on('afterCamerasToggle', function (e) {
@@ -6031,27 +6086,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
             WebRTCconference.event.on('screensharingStarted', function (e) {
                 log('screen sharing started', e)
-                /*if(screensRendering.getActiveViewMode() != 'screenSharing') {
-                    var screensharingTrack;
-				    if(e.content && e.content.trackId != null) {
-                        screensharingTrack = e.participant.videoTracks().filter(function (t) {
-                            return t.mediaStreamTrack.id == e.content.trackId ? true : false;
-                        })[0];
-                    } else {
-				        var videoTracks =e.participant.videoTracks();
-                        if(videoTracks.length != 0) screensharingTrack = videoTracks.reduce(function(prev, current) {
-                            return ((prev.trackEl.videoWidth * prev.trackEl.videoHeight) > (current.trackEl.videoWidth * current.trackEl.videoHeight)) ? prev : current;
-                        })
-                    }
-
-                    if(screensharingTrack) {
-                        screensharingTrack.screensharing = true;
-                        screensRendering.renderFullScree../.nLayout(screensharingTrack.parentScreen);
-                    }
-                }*/
-                //screensRendering.hideLoader('screensharingStarting', data.participant);
+                
             });
-            WebRTCconference.event.on('screensharingFailed', function (e) {
+            WebRTCconference.event.on('remoteScreensharingFailed', function (e) {
                 log('screen sharing failed')
                 screensRendering.hideLoader('screensharingFailed', {participant: e.participant});
             });

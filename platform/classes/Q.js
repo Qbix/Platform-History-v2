@@ -2573,7 +2573,7 @@ Q.view = function _Q_view(viewName, params, options) {
 	params.language = options.language;
 
 	var textParams = Q.Text.params(parts, {'language': options.language});
-	params = Q.extend({}, 10, textParams, 10,  params);
+	params = Q.extend({}, textParams, params);
 	return Q.Handlebars.render(viewPath, params);
 
 };

@@ -543,6 +543,13 @@
 				"defaults": {
 					"title": "Community Greeting"
 				}
+			},
+			"Streams/webrtc/livestream": {
+				"defaults": {
+					"title": "Livestream"
+				},
+				"edit": ["title"],
+				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
 			}
 		},
 		"categorize": {

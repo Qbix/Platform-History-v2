@@ -1218,20 +1218,21 @@
                     }
             
                     function startResizingByPinch(e) {
-                        _elementPosition = _elementToResize.style.position;
+                        _elementPosition = _elementToResize.style.position || elementComputedStyle.position;
                         var elementRect = _elementToResize.getBoundingClientRect();
-            
+
                         if (_elementPosition == 'fixed') {
                             _centerPosition = elementRect.left + elementRect.width / 2;
-                        } else if (_elementPosition == 'absolute') {
+                        } else /*if (_elementPosition == 'absolute')*/ {
                             _centerPosition = _elementToResize.offsetLeft + elementRect.width / 2;
                         }
             
                         if (_elementPosition == 'fixed') {
                             _centerPositionFromTop = elementRect.top + elementRect.height / 2;
-                        } else if (_elementPosition == 'absolute') {
+                        } else /*if (_elementPosition == 'absolute')*/ {
                             _centerPositionFromTop = _elementToResize.offsetTop + elementRect.height / 2;
                         }
+
                         _currentActiveTouches = e.touches.length;
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
                         window.addEventListener('touchend', stopResizingByPinch);
@@ -1321,13 +1322,15 @@
                             elementHeight = parseInt(elementWidth / ratio);
                         }
             
-                        if (elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
+                        if (elementHeight > window.innerHeight || elementWidth >= window.innerWidth) {
                             return;
                         }
             
+                        let leftPos = _centerPosition - (elementWidth / 2);
+                        let topPos = _centerPositionFromTop - (elementHeight / 2);
                         if (_elementPosition == 'fixed' || _elementPosition == 'absolute') {
-                            _elementToResize.style.left = _centerPosition - (elementWidth / 2) + 'px';
-                            _elementToResize.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
+                            _elementToResize.style.left = leftPos + 'px';
+                            _elementToResize.style.top = topPos + 'px';
                         }
             
                         _elementToResize.style.width = elementWidth + 'px';
@@ -1340,6 +1343,8 @@
                         prevPosOfTouch1.y = touch1.clientY;
                         prevPosOfTouch2.x = touch2.clientX;
                         prevPosOfTouch2.y = touch2.clientY;
+
+                        tool.events.dispatch('resizing', { width: elementWidth, height: elementHeight, x: leftPos, y: topPos, originalWidth: originalWidth });
             
                     }
             
