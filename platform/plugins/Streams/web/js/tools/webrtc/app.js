@@ -2275,7 +2275,7 @@ window.WebRTCRoomClient = function app(options){
         }
 
         function startShareScreen(successCallback, failureCallback) {
-            app.signalingDispatcher.sendDataTrackMessage("screensharingStarting");
+            app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStarting");
 
             if(_isMobile && typeof cordova != 'undefined') {
                 cordova.plugins.sharescreen.startScreenShare(function(e){
@@ -2297,19 +2297,19 @@ window.WebRTCRoomClient = function app(options){
                     trackToAttach.isLocal = true;
                     trackToAttach.screensharing = true;
 
-                    app.signalingDispatcher.sendDataTrackMessage("trackIsBeingAdded", {kind: 'video', streamId:trackToAttach.stream.id, screensharing:true});
+                    app.signalingDispatcher.sendDataTrackMessage("screensharingTrackIsBeingAdded", {kind: 'video', streamId:trackToAttach.stream.id, screensharing:true});
 
                     app.mediaManager.attachTrack(trackToAttach, localParticipant);
 
                     //app.localMediaControls.enableVideo();
                     if(successCallback != null) successCallback();
                     app.event.dispatch('screensharingStarted', {participant: localParticipant, track: trackToAttach});
-                    app.signalingDispatcher.sendDataTrackMessage("screensharingStarted");
+                    app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStarted", {streamId:trackToAttach.stream.id});
 
                 }, function(error){
                     alert(error.message)
                     console.error(error.name + ': ' + error.message);
-                    app.signalingDispatcher.sendDataTrackMessage("screensharingFailed");
+                    app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingFailed");
 
                     if(failureCallback != null) failureCallback(error);
                 });
@@ -2328,18 +2328,18 @@ window.WebRTCRoomClient = function app(options){
                     trackToAttach.isLocal = true;
                     trackToAttach.screensharing = true;
 
-                    app.signalingDispatcher.sendDataTrackMessage("trackIsBeingAdded", {kind: 'video', streamId:trackToAttach.stream.id, screensharing:true});
+                    app.signalingDispatcher.sendDataTrackMessage("screensharingTrackIsBeingAdded", {kind: 'video', streamId:trackToAttach.stream.id, screensharing:true});
 
                     app.mediaManager.attachTrack(trackToAttach, localParticipant);
 
                     app.localMediaControls.enableVideo();
                     if(successCallback != null) successCallback();
                     app.event.dispatch('screensharingStarted', {participant: localParticipant, track: trackToAttach});
-                    app.signalingDispatcher.sendDataTrackMessage("screensharingStarted");
+                    app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStarted", {streamId:trackToAttach.stream.id});
 
                 }).catch(function(error) {
                     console.error(error.name + ': ' + error.message);
-                    app.signalingDispatcher.sendDataTrackMessage("screensharingFailed");
+                    app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingFailed");
 
                     if(failureCallback != null) failureCallback(error);
                 });
@@ -2492,13 +2492,13 @@ window.WebRTCRoomClient = function app(options){
          */
         function processDataTrackMessage(data, participant) {
             data = JSON.parse(data);
-            if(data.type == 'screensharingStarting' || /*data.type == 'screensharingStarted' ||*/ data.type == 'screensharingFailed' || data.type == 'afterCamerasToggle') {
+            if(data.type == 'remoteScreensharingStarting' || data.type == 'remoteScreensharingStarted' || data.type == 'remoteScreensharingFailed' || data.type == 'afterCamerasToggle') {
                 log('processDataTrackMessage', data.type)
                 app.event.dispatch(data.type, {content:data.content != null ? data.content : null, participant: participant});
-            } else if(data.type == 'trackIsBeingAdded') {
+            } else if(data.type == 'screensharingTrackIsBeingAdded') {
                 log('processDataTrackMessage', data.type)
                 var screenSharingTrackHandler = function(e) {
-                    log('trackIsBeingAdded screenSharingTrackHandler', e.track, data)
+                    log('screensharingTrackIsBeingAdded screenSharingTrackHandler', e.track, data)
                     if(e.participant != participant) return;
                     e.track.screensharing = true;
 
@@ -2506,22 +2506,22 @@ window.WebRTCRoomClient = function app(options){
                         app.screenSharing.stopShareScreen();
                     }
 
-                    app.event.dispatch('screensharingStarted', {content:data.content != null ? data.content : null, participant: participant});
+                    //app.event.dispatch('remoteScreensharingStarted', {content: {streamId:data.content != null ? data.content.streamId : null}, track:e.track, participant: participant});
 
                     app.event.off('trackSubscribed', screenSharingTrackHandler);
                 }
 
                 var screenSharingFailingHandler = function(e) {
-                    log('trackIsBeingAdded screenSharingFailingHandler')
+                    log('screensharingTrackIsBeingAdded screenSharingFailingHandler')
                     if(e.participant != participant) return;
                     app.event.off('trackSubscribed', screenSharingTrackHandler);
-                    app.event.off('screensharingFailed', screenSharingFailingHandler);
+                    app.event.off('remoteScreensharingFailed', screenSharingFailingHandler);
 
                 }
 
                 if(data.content.screensharing) {
                     app.event.on('trackSubscribed', screenSharingTrackHandler);
-                    app.event.on('screensharingFailed', screenSharingFailingHandler);
+                    app.event.on('remoteScreensharingFailed', screenSharingFailingHandler);
                 }
 
             } else if(data.type == 'liveStreamingStarted') {
@@ -3543,7 +3543,8 @@ window.WebRTCRoomClient = function app(options){
 
                         
                         if(screensharingTracks.length != 0) {
-                            app.signalingDispatcher.sendDataTrackMessage("screensharingStarted", {trackId:screensharingTracks[0].mediaStreamTrack.id});
+                            let streamid = screensharingTracks[0].stream != null ? screensharingTracks[0].stream.id : null;
+                            app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStarted", {streamId: streamid});
                         }
                         console.log('sendInitialData', screensharingTracks.length)
 

@@ -415,7 +415,7 @@
                 tool.WebRTCLib.event.on('currentAudioinputDeviceChanged', function () {
 
                 });
-                tool.WebRTCLib.event.on('screensharingStarting', function (e) {
+                tool.WebRTCLib.event.on('remoteScreensharingStarting', function (e) {
 
                 });
                 tool.WebRTCLib.event.on('videoTrackLoaded', function (e) {
@@ -583,7 +583,7 @@
                 tool.WebRTCLib.event.on('screensharingStarted', function (e) {
 
                 });
-                tool.WebRTCLib.event.on('screensharingFailed', function (e) {
+                tool.WebRTCLib.event.on('remoteScreensharingFailed', function (e) {
 
                 });
 
