@@ -1991,11 +1991,9 @@
 						setTimeout(function () {
 							Users.hint('Users.login', $('#Users_login_go'));
 						}, 500);
-					} else {
+					} else if (Q.info.isMobile) {
 						setTimeout(function () {
-							if (document.activeElement !== $input[0]) {
-								Users.hint('Users.login', $input[0]);
-							}
+							Users.hint('Users.login', $input[0]);
 						}, 500);
 					}
 				}, 0);
