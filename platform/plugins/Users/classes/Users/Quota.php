@@ -178,6 +178,31 @@ class Users_Quota extends Base_Users_Quota
 		}
 		return true;
 	}
+
+	/**
+	 * Call this method to add quotas dynamically, on top of the config.
+	 * It is typically called after getting rows from the database,
+	 * in order to make use of the quotas mechanism,
+	 * followed by calls to either
+	 * Q_Users_Quota::check(userId, resourceId) or quota->used(units).
+	 * @method add
+	 * @static
+	 * @param {string} $name The name of the quota.
+	 *   This is typically the type of thing being restricted.
+	 * @param {integer} $duration The duration, in seconds, to set info for.
+	 *   You can use constants like Users_Daystamp::secPerDay and Users_Daystamp::secPerWeek.
+	 *   Note that months and years have variable length, so if you want an exact duration,
+	 *   you may want to use time() - strtotime("1 month ago") or time() - strotime("2020-01-01")
+	 * @param {array} $info An array of privilege => units pairs,
+	 *  where privilege is the a contact label or ID of a subscription plan, etc.
+	 *  and units is an integer indicating how many units can be used during that duration.
+	 *  The array must one pair where privilege = "" and the units are for the general public
+	 *  with no special privileges.
+	 */
+	static function add($name, $duration, $info)
+	{
+		Q_Config::set('Users', 'quotas', $name, $duration, $info);
+	}
 	
 	function transactionKey()
 	{

@@ -135,6 +135,13 @@ class Q_Daystamp
      * @property msPerDay
      * @static
      */
-    public const secPerDay = 8.64e4;
+    public const secPerDay = 86400;
+
+    /**
+     * Number of seconds in a week
+     * @property msPerWeek
+     * @static
+     */
+    public const secPerWeek = 604800;
 
 }
