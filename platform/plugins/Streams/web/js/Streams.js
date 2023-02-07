@@ -1926,7 +1926,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			var canAddRoles = Q.getObject('slots.canAdd', response);
 			var canRemoveRoles = Q.getObject('slots.canRemove', response);
 			if (Q.isEmpty(canAddRoles)) {
-				return _showInviteDialog();
+				return _continueAfterRoles();
 			}
 			Q.Dialogs.push({
 				title: text.invite.roles.title,
