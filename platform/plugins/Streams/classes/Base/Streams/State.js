@@ -24,7 +24,7 @@ var Row = Q.require('Db/Row');
  * @param {String} [fields.hash] defaults to ""
  * @param {String} [fields.algorithm] defaults to "sha256"
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
- * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  * @param {String|Buffer} [fields.extra] defaults to ""
  * @param {String|Buffer} [fields.URI] defaults to ""
  */
@@ -44,7 +44,7 @@ Q.mixin(Base, Row);
  * @property algorithm
  * @type String
  * @default "sha256"
- * the HMAC uses a secret key not storeed in this table
+ * the HMAC versions should use a secret key not storeed in this table
  */
 /**
  * @property insertedTime
@@ -55,7 +55,7 @@ Q.mixin(Base, Row);
 /**
  * @property updatedTime
  * @type String|Db.Expression
- * @default "0000-00-00 00:00:00"
+ * @default null
  * 
  */
 /**
@@ -380,6 +380,7 @@ return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-s
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
@@ -395,7 +396,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],true,"",null];
 };
 
 /**

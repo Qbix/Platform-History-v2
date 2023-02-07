@@ -2,11 +2,11 @@
 	
 var Users = Q.Users;
 
-Q.setObject({
-	'Q.text.Users.labels.addToPhonebook': 'Add to My Phone Contacts',
-	'Q.text.Users.labels.addLabel': 'New Label',
-	'Q.text.Users.labels.prompt': 'Give it a name'
-});
+Q.text.Users.labels = Q.extend({
+	addToPhonebook: 'Add To My Phone Contacts',
+	addLabel: 'New Relationship',
+	prompt: 'Give it a name'
+}, Q.text.Users.labels);
 
 /**
  * Users Labels
@@ -94,6 +94,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				icon: Q.url("{{Users}}/img/icons/labels/all/40.png")
 			};
 		}
+		var selectedLabels = [];
+		tool.$('li.Q_selected').each(function () {
+			selectedLabels.push($(this).attr('data-label'));
+		});
 		Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
@@ -104,7 +108,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                 addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
-				Q.replace(tool.element, html);;
+				Q.replace(tool.element, html);
+				tool.$('li').each(function () {
+					if (selectedLabels.indexOf($(this).attr('data-label')) >= 0) {
+						$(this).addClass('Q_selected');
+					}
+				});
 				Q.handle(state.onRefresh, tool, []);
 			});
 			if (state.userId && state.contactUserId) {

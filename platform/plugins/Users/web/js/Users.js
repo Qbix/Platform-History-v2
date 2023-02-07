@@ -123,6 +123,12 @@
 
 		authorize: {
 			mustAgree: "First you must agree to the terms."
+		},
+
+		labels: {
+			addToPhonebook: "Add To My Phone Contacts",
+			addLabel: "New Relationship",
+			"prompt": "Give it a name"
 		}
 
 	};

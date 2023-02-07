@@ -1656,8 +1656,8 @@ Streams.release = function (key) {
  * @param {string} [options.platform] platform for which xids are passed
  * @param {String} [options.xid] xid or arary of xids to invite
  * @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
- * @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
- * @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ * @param {String|Array|true} [options.addLabel] label or an array of labels for adding publisher's contacts, or pass true to show a selector dialog
+ * @param {String|Array|true} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts, or pass true to show a selector dialog
  * @param {String} [options.readLevel] the read level to grant those who are invited
  * @param {String} [options.writeLevel] the write level to grant those who are invited
  * @param {String} [options.adminLevel] the admin level to grant those who are invited
@@ -1767,7 +1767,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             Q.handle(callback, null, [err, rsd]);
         }, {
             method: 'post',
-            fields: o,
+            fields: o, 
             baseUrl: baseUrl
         });
         if (o.photo) {
@@ -1909,7 +1909,102 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         return _request();
     }
     Q.Text.get('Streams/content', function (err, text) {
-		var showInviteDialog = function() {
+
+		if (o.addLabel !== true) {
+			return _continueAfterRoles();
+		}
+
+		// Commented out because now we check the server every time
+		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
+		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
+		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// if (!canHandleRoles.length) {
+		// 	_showInviteDialog();
+		// }
+
+		Q.req('Users/roles', ['canAdd', 'canRemove', 'canSee'], function (err, response) {
+			var canAddRoles = Q.getObject('slots.canAdd', response);
+			var canRemoveRoles = Q.getObject('slots.canRemove', response);
+			if (Q.isEmpty(canAddRoles)) {
+				return _showInviteDialog();
+			}
+			Q.Dialogs.push({
+				title: text.invite.roles.title,
+				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+					userId: Q.Users.communityId,
+					filter: canAddRoles
+				}),
+				className: 'Streams_invite_labels_dialog',
+				apply: true,
+				onClose: _continueAfterRoles,
+				onActivate: function (dialog) {
+					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+						return;
+					}
+					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+						if (!wasSelected && !canAddRoles.includes(label)) {
+							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
+								title: text.invite.roles.NotAuthorizedToGrantRole.title
+							})
+							return false;
+						}
+						if (wasSelected && !canRemoveRoles.includes(label)) {
+							Q.alert(text.invite.roles.NotAuthorizedToRemovetRole.alert, {
+								title: text.invite.roles.NotAuthorizedToRemoveRole.title
+							})
+							return false;
+						}
+
+						o.addLabel = Array.isArray(o.addLabel) ? o.addLabel : [];
+						if(wasSelected) {
+							var index = o.addLabel.indexOf(label);
+							if(index > -1) {
+								o.addLabel.splice(index, 1)
+							}
+						} else {
+							o.addLabel.push(label);
+						}
+					});
+				}
+			});
+		});
+
+		function _continueAfterRoles() {
+			if (o.addMyLabel !== true) {
+				return _showInviteDialog();
+			}
+			Q.Dialogs.push({
+				title: text.invite.labels.title,
+				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+					userId: Q.Users.loggedInUserId(),
+					filter: 'Users/',
+					canAdd: 'New Relationship Type'
+				}),
+				className: 'Streams_invite_labels_dialog',
+				apply: true,
+				onClose: _showInviteDialog,
+				onActivate: function (dialog) {
+					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+						return;
+					}
+					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+						o.addMyLabel = Array.isArray(o.addMyLabel) ? o.addMyLabel : [];
+						if(wasSelected) {
+							var index = o.addMyLabel.indexOf(label);
+							if(index > -1) {
+								o.addMyLabel.splice(index, 1)
+							}
+						} else {
+							o.addMyLabel.push(label);
+						}
+					});
+				}
+			});
+		}
+
+		function _showInviteDialog() {
 			var options = {
 				title: o.title,
 				identifierTypes: o.identifierTypes,
@@ -1934,62 +2029,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}, options);
 		}
 
-		if(o.addLabel) {
-			return showInviteDialog();
-		}
-
-		// Commented out because now we check the server every time
-		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
-		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
-		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
-		// if (!canHandleRoles.length) {
-		// 	showInviteDialog();
-		// }
-
-		Q.req('Users/roles', ['canAdd', 'canRemove', 'canSee'], function (err, response) {
-			var canAddRoles = Q.getObject('slots.canAdd', response);
-			var canRemoveRoles = Q.getObject('slots.canRemove', response);
-			if (Q.isEmpty(canAddRoles)) {
-				return showInviteDialog();
-			}
-			Q.Dialogs.push({
-				title: text.invite.roles.title,
-				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
-					userId: Q.Users.communityId,
-					filter: canAddRoles
-				}),
-				apply: true,
-				onActivate: function (dialog) {
-					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
-
-					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
-						return;
-					}
-
-					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						if ((wasSelected && !canRemoveRoles.includes(label)) || (!wasSelected && !canAddRoles.includes(label))) {
-							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
-								title: text.invite.roles.NotAuthorizedToGrantRole.title
-							})
-							return false;
-						}
-
-						o.addLabel = Array.isArray(o.addLabel) ? o.addLabel : [];
-						if(wasSelected) {
-							var index = o.addLabel.indexOf(label);
-							if(index > -1) {
-								o.addLabel.splice(index, 1)
-							}
-						} else {
-							o.addLabel.push(label);
-						}
-					});
-				},
-				onClose: function () {
-					showInviteDialog();
-				}
-			});
-		});
 
     });
     return null;
