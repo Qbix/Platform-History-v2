@@ -2,11 +2,11 @@
 	
 var Users = Q.Users;
 
-Q.setObject({
-	'Q.text.Users.labels.addToPhonebook': 'Add to My Phone Contacts',
-	'Q.text.Users.labels.addLabel': 'New Label',
-	'Q.text.Users.labels.prompt': 'Give it a name'
-});
+Q.text.Users.labels = Q.extend({
+	addToPhonebook: 'Add To My Phone Contacts',
+	addLabel: 'New Relationship',
+	prompt: 'Give it a name'
+}, Q.text.Users.labels);
 
 /**
  * Users Labels
