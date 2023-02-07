@@ -11,10 +11,12 @@ function Assets_after_Streams_inviteAccept($params)
 		return; // only get credit for inviting new users
 	}
 
-	$credits = Q_Config::expect('Assets', 'credits', 'grant', 'newUserAcceptedYourInvite');
-	Assets_Credits::grant($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
-		'publisherId' => $stream->publisherId,
-		'streamName' => $stream->name,
-		'invitedUserName' => $invitedUser->displayName()
-	));
+	$credits = Q_Config::get('Assets', 'credits', 'grant', 'Users/newUserAcceptedYourInvite', 0);
+	if ($credits > 0) {
+		Assets_Credits::grant($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
+			'publisherId' => $stream->publisherId,
+			'streamName' => $stream->name,
+			'invitedUserName' => $invitedUser->displayName()
+		));
+	}
 }

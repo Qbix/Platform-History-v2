@@ -243,16 +243,13 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
 	 * @param {string} [$more.streamName] The name of the stream representing the purchase
 	 * @param {string} [$more.fromUserId=Q::app()] Consider passing Users::communityId() here instead
-	 * @throws
+	 * @return {boolean} Whether the grant occurred
 	 */
 	static function grant($amount, $reason, $userId = null, $more = array())
 	{
 		$amount = (int)$amount;
 		if ($amount <= 0) {
-			throw new Q_Exception_WrongType(array(
-				'field' => 'amount',
-				'type' => 'integer'
-			));
+			return false;
 		}
 
 		$more['amount'] = $amount;
@@ -305,6 +302,7 @@ class Assets_Credits extends Base_Assets_Credits
 		if ($reason == 'BoughtCredits') {
 			self::payBonus($amount, $userId);
 		}
+		return true;
 	}
 	
 	/**
