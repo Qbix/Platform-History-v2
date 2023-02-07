@@ -265,18 +265,19 @@ class Streams_Invite extends Base_Streams_Invite
 
 		// if labels exist add contact
 		$extra = Q::json_decode($this->extra ?: '{}', true);
-		$labels = Q::ifset($extra, "label", null);
-		if ($labels) {
-			if (!is_array($labels)) {
-				$labels = array($labels);
-			}
-			$can = Users_Label::can($stream->publisherId, $this->invitingUserId);
-			if ($can["manageContacts"]) {
-				foreach ($labels as $label) {
-					Users_Contact::addContact(
-						$stream->publisherId, $label, $userId,
-						null, $this->invitingUserId, true
-					);
+		foreach (array('addLabel', 'addMyLabel') as $f) {
+			if ($labels = Q::ifset($extra, $f, null)) {
+				if (!is_array($labels)) {
+					$labels = array($labels);
+				}
+				$can = Users_Label::can($stream->publisherId, $this->invitingUserId);
+				if ($can["manageContacts"]) {
+					foreach ($labels as $label) {
+						Users_Contact::addContact(
+							$stream->publisherId, $label, $userId,
+							null, $this->invitingUserId, true
+						);
+					}
 				}
 			}
 		}
