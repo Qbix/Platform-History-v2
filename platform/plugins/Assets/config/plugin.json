@@ -243,7 +243,7 @@
 			},
 			"grant": {
 				"Users/insertUser": 0,
-				"acceptedInvite": 10,
+				"Users/newUserAcceptedYourInvite": 10,
 				"invitedUserEntered": {
 					"Streams/user/firstName": 1,
 					"Streams/user/lastName": 1,
