@@ -13039,6 +13039,10 @@ Q.Visual = Q.Pointer = {
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
+			Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
+				div.removeClass('Q_touchlabel_show');
+				Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
+			}, false, true);
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
@@ -13077,9 +13081,6 @@ Q.Visual = Q.Pointer = {
 				return;
 			}
 			// if we are here, nothing matched
-			div.removeClass('Q_touchlabel_show');
-		}, false, true);
-		Q.addEventListener(document.body, 'touchend mouseup', function () {
 			div.removeClass('Q_touchlabel_show');
 		}, false, true);
 	},
