@@ -1989,11 +1989,11 @@
 					} else if (registeredIdentifier) {
 						$input.val(registeredIdentifier).trigger('change').eq(0).plugin('Q/clickfocus');
 						setTimeout(function () {
-							Q.Pointer.hint('Users.login', $('#Users_login_go'));
+							Q.Pointer.hint($('#Users_login_go'));
 						}, 500);
 					} else if (Q.info.isTouchscreen) {
 						setTimeout(function () {
-							Q.Pointer.hint('Users.login', $input[0]);
+							Q.Pointer.hint($input[0]);
 						}, 500);
 					}
 				}, 0);
