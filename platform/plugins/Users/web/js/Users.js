@@ -866,6 +866,7 @@
 	 *  @param {Function} [options.onRequireComplete] function to call if the user logged in but account is incomplete.
 	 *  It is passed the user information as well as the response from hitting accountStatusURL
 	 *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
+	 *  @param {Boolean} [options.skipHint] pass true here to skip calling Users.Pointer.hint when login dialog appears without textbox focus
 	 *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
 	 *  @param {Boolean} [options.unlessLoggedIn] if true, this only proceeds with the login flow if the user isn't already logged in. Can be combined with tryQuietly option.
 	 *  @param {Array} [options.scope=['email'] permissions to request from the authentication platform
@@ -1979,15 +1980,23 @@
 				var $input = $('input[type!=hidden]', this)
 				$(this).plugin('Q/placeholders');
 				if (Q.info.platform === 'ios') {
-					$input.eq(0).plugin('Q/clickfocus');	
+					$input.eq(0).plugin('Q/clickfocus');
 				}
 				setTimeout(function () {
 					var registeredIdentifier = localStorage.getItem(_register_localStorageKey) || '';
-					$input.val(registeredIdentifier).trigger('change');
 					if (options.identifier) {
 						$input.val(options.identifier).trigger('change');
-					} else {
+					} else if (registeredIdentifier) {
 						$input.val(registeredIdentifier).trigger('change').eq(0).plugin('Q/clickfocus');
+						setTimeout(function () {
+							Users.hint('Users.login', $('#Users_login_go'));
+						}, 500);
+					} else {
+						setTimeout(function () {
+							if (document.activeElement !== $input[0]) {
+								Users.hint('Users.login', $input[0]);
+							}
+						}, 500);
 					}
 				}, 0);
 			},
