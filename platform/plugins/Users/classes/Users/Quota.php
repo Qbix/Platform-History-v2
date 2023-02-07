@@ -42,6 +42,7 @@ class Users_Quota extends Base_Users_Quota
 	 * @param {array} [$privileges=array()] any strings naming privileges the user has with respect to the resourceId that might increase the max of the quota
 	 * @param {boolean} [$begin=true] whether to begin a database transaction, in which case you must call $quota->used($used) to commit the transaction.
 	 * @return {Users_Quota|array} if no quotas were exceeded, this object is returned and you can call ->used($units) on it later. But if some quotas were exceeded, the function returns the array of corresponding durations, sorted by smallest first. So use is_array() with the return value to find out if any quotas were exceeded.
+	 * @throws Users_Exception_Quota if any of the quotas were exceeded and throwIfQuota = true
 	 */
 	static function check(
 		$userId, 
