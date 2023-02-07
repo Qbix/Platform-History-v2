@@ -75,7 +75,7 @@
                         this.eventDispatcher.on('sourceMoved', updateVisualSourcesOrdering)
 
                         function updateVisualSourcesOrdering() {
-                            console.log('updateVisualSourcesOrdering START');
+                            console.log('updateVisualSourcesOrdering START', sceneInstance.sources);
                             let visualSources = sceneInstance.sources.filter(function (s) {
                                 if(s.sourceType == 'webrtc' || s.sourceType == 'video' || s.sourceType == 'videoInput' || s.sourceType == 'image') {
                                     return true;
@@ -900,6 +900,7 @@
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
                                 video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
+                                video.setAttribute("playsinline","");
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
@@ -977,6 +978,7 @@
                                 console.log('addSource video')
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
+                                video.setAttribute("playsinline","");
                                 video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
@@ -1003,6 +1005,7 @@
         
                                 var video = document.createElement('VIDEO');
                                 video.muted = true;
+                                video.setAttribute("playsinline","");
                                 video.style.display = 'none';
                                 video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
@@ -1016,7 +1019,6 @@
         
                                 video.muted = true;
                                 video.autoplay = true;
-                                video.playsInline = true;
                                 /*var playPromise = video.play();
                                 if (playPromise !== undefined) {
                                     playPromise.then(function() {
@@ -1092,6 +1094,7 @@
         
                         function moveSource(old_index, new_index) {
                             console.log('moveSource', old_index, new_index);
+                            
                             if (new_index < 0) {
                                 new_index = 0;
                             }
@@ -1981,7 +1984,9 @@
                                             let webrtcGroupIndex = getWebrtcGroupIndex(webrtcGroupSource);
                                             log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares webrtcGroupIndex', webrtcGroupIndex.index)
         
-                                            moveSource(index, webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum);
+                                            //moveSource(index, webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum);
+                                            _activeScene.webrtcSources.splice(webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum, 0, _activeScene.webrtcSources.splice(index, 1)[0]);
+
                                         }
         
         

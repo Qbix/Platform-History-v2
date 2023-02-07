@@ -203,7 +203,7 @@ function _Streams_participants(options) {
 			if (fem) {
 				return console.warn("Streams/participants: " + fem);
 			}
-			if (!$(tool.element).closest('body').length) {
+			if (!$te.closest('body').length) {
 				return;
 			}
 			tool.stream = this;
@@ -291,7 +291,7 @@ function _Streams_participants(options) {
 							if (err) return;
 							var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
 							var filter = '.Streams_inviteTrigger';
-							$(tool.element).on(Q.Pointer.fastclick, filter, function () {
+							$element.on(Q.Pointer.fastclick, filter, function () {
 								var options = Q.extend({
 									identifier: si.identifier
 								}, si);
@@ -307,9 +307,9 @@ function _Streams_participants(options) {
 							}).on(Q.Pointer.click, filter, function () {
 								return false;
 							}).on(Q.Pointer.start.eventName, filter, function () {
-								$(tool.element).addClass('Q_discouragePointerEvents');
+								$te.addClass('Q_discouragePointerEvents');
 								function _pointerEndHandler() {
-									$(tool.element).removeClass('Q_discouragePointerEvents');
+									$te.removeClass('Q_discouragePointerEvents');
 									$(window).off(Q.Pointer.end, _pointerEndHandler);
 								}
 								$(window).on(Q.Pointer.end, _pointerEndHandler);

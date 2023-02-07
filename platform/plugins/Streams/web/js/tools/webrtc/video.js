@@ -94,7 +94,7 @@
                 webrtcSignalingLib.event.on('deviceListUpdated', function () {
                     tool.loadCamerasList();
                 });
-                webrtcSignalingLib.event.on('screensharingStarting', function (e) {
+                webrtcSignalingLib.event.on('remoteScreensharingStarting', function (e) {
 
                 });
                 webrtcSignalingLib.event.on('screensharingStarted', function (e) {
@@ -107,7 +107,7 @@
                         tool.updateCamerasList({eventName: 'screensharingStopped'});
                     }
                 });
-                webrtcSignalingLib.event.on('screensharingFailed', function (e) {
+                webrtcSignalingLib.event.on('remoteScreensharingFailed', function (e) {
 
                 });
             },

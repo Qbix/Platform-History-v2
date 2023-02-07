@@ -27,7 +27,8 @@
         participantsDisabledScreenSource: '<svg enable-background="new 0 0 512 512" height="509.78607" viewBox="0 0 532.02655 509.78607" width="532.02655" version="1.1" sodipodi:docname="monitor.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1614" /> <sodipodi:namedview id="namedview1612" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.1739077" inkscape:cx="145.66733" inkscape:cy="238.5196" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path id="path1605" d="m 119.30664,47.785156 366.0293,358.000004 h 16.6914 c 16.53999,0 30,-13.46002 30,-30 V 77.785156 c 0,-16.539983 -13.46001,-30 -30,-30 z M 435.63867,405.78516 69.609375,47.785156 H 50.027344 c -16.539984,0 -30,13.460017 -30,30 V 375.78516 c 0,16.53998 13.460016,30 30,30 z m -238.61133,30 v 44 h -81 c -8.27999,0 -15,6.72 -15,15 0,8.27999 6.72001,15 15,15 h 320 c 8.28,0 15,-6.72001 15,-15 0,-8.28 -6.72,-15 -15,-15 h -81 v -44 z" sodipodi:nodetypes="ccsssscccsssscccssssssccc" /> <rect id="rect454-3" width="34.749641" height="676.24829" x="-12.059921" y="13.492646" ry="16.423859" transform="rotate(-45.635355)" /> </svg>',
         streamingToP2P: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-134.38083" inkscape:cy="37.458071" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 66.36101,58.907431 a 9.3882669,9.3882669 0 0 0 -7.379178,3.595707 L 37.867618,51.950726 a 9.2849965,9.2849965 0 0 0 0,-4.863123 L 58.981832,36.53519 c 5.407641,6.93793 16.767445,3.116905 16.767445,-5.79256 A 9.3882669,9.3882669 0 1 0 57.301332,33.174191 L 36.187118,43.726604 c -5.407641,-6.93793 -16.767444,-3.116906 -16.767444,5.792561 0,8.909465 11.359803,12.73049 16.767444,5.79256 l 21.114214,10.552412 a 9.3882669,9.3882669 0 0 0 9.059678,11.819828 c 12.45823,-0.516354 12.448841,-18.260179 0,-18.776534 z" id="path2718" style="stroke-width:0.938824" /></svg>',
         streamingToFb: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-328.22635" inkscape:cy="-34.648716" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 59.655975,28.314112 h 5.792521 v -10.08866 c -0.999348,-0.137477 -4.436262,-0.446801 -8.438942,-0.446801 -8.351698,0 -14.072836,5.25319 -14.072836,14.90827 v 8.885742 h -9.216214 v 11.278362 h 9.216214 V 81.229349 H 54.236229 V 52.853667 h 8.843441 l 1.403847,-11.27836 H 54.233586 v -7.770066 c 0.0026,-3.25978 0.880378,-5.491129 5.422389,-5.491129 z" id="path3135" style="stroke-width:2.64378" /></svg>',
-        streamingToRtmp: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="2.1357213" inkscape:cx="-37.223958" inkscape:cy="34.18049" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="text3239" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <g aria-label="RT MP" id="text3239" style="font-size:37.3333px"><g id="g3306" transform="matrix(0.96058925,0,0,0.96058925,2.3472462,-2.613936)"><path d="M 44.827661,52.466881 38.155791,41.802827 H 30.153194 V 52.466881 H 26.671426 V 26.782007 h 12.085927 q 4.338538,0 6.690099,1.950519 2.369789,1.93229 2.369789,5.395829 0,2.861976 -1.677082,4.812496 -1.658852,1.950519 -4.593746,2.460935 l 7.291661,11.065095 z M 44.317244,34.164813 q 0,-2.242186 -1.531248,-3.408851 -1.51302,-1.184895 -4.374997,-1.184895 h -8.257805 v 9.479159 h 8.403639 q 2.752601,0 4.247392,-1.276041 1.513019,-1.29427 1.513019,-3.609372 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3293" /><path d="M 67.020354,29.625754 V 52.466881 H 63.556815 V 29.625754 h -8.822909 v -2.843747 h 21.109357 v 2.843747 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3295" /><path d="M 48.509949,81.730422 V 64.59502 q 0,-2.843747 0.164063,-5.468745 -0.893229,3.263018 -1.604166,5.104162 l -6.635411,17.499985 h -2.442706 l -6.726557,-17.499985 -1.020832,-3.098955 -0.601562,-2.005207 0.05469,2.023436 0.07292,3.445309 V 81.730422 H 26.671426 V 56.045548 h 4.575517 l 6.835932,17.809881 q 0.364583,1.07552 0.692707,2.315102 0.346354,1.221353 0.455729,1.768228 0.145833,-0.729166 0.601562,-2.205727 0.473958,-1.494791 0.63802,-1.877603 l 6.708328,-17.809881 h 4.466142 v 25.684874 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3297" /><path d="m 75.843263,63.774708 q 0,3.645831 -2.388019,5.796871 -2.369789,2.151039 -6.453119,2.151039 H 59.455256 V 81.730422 H 55.973488 V 56.045548 h 10.809887 q 4.320309,0 6.690098,2.023436 2.36979,2.023436 2.36979,5.705724 z m -3.499997,0.03646 q 0,-4.976559 -5.979162,-4.976559 h -6.908848 v 10.135409 h 7.054682 q 5.833328,0 5.833328,-5.15885 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3299" /></g></g></svg>'
+        streamingToRtmp: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="2.1357213" inkscape:cx="-37.223958" inkscape:cy="34.18049" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="text3239" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <g aria-label="RT MP" id="text3239" style="font-size:37.3333px"><g id="g3306" transform="matrix(0.96058925,0,0,0.96058925,2.3472462,-2.613936)"><path d="M 44.827661,52.466881 38.155791,41.802827 H 30.153194 V 52.466881 H 26.671426 V 26.782007 h 12.085927 q 4.338538,0 6.690099,1.950519 2.369789,1.93229 2.369789,5.395829 0,2.861976 -1.677082,4.812496 -1.658852,1.950519 -4.593746,2.460935 l 7.291661,11.065095 z M 44.317244,34.164813 q 0,-2.242186 -1.531248,-3.408851 -1.51302,-1.184895 -4.374997,-1.184895 h -8.257805 v 9.479159 h 8.403639 q 2.752601,0 4.247392,-1.276041 1.513019,-1.29427 1.513019,-3.609372 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3293" /><path d="M 67.020354,29.625754 V 52.466881 H 63.556815 V 29.625754 h -8.822909 v -2.843747 h 21.109357 v 2.843747 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3295" /><path d="M 48.509949,81.730422 V 64.59502 q 0,-2.843747 0.164063,-5.468745 -0.893229,3.263018 -1.604166,5.104162 l -6.635411,17.499985 h -2.442706 l -6.726557,-17.499985 -1.020832,-3.098955 -0.601562,-2.005207 0.05469,2.023436 0.07292,3.445309 V 81.730422 H 26.671426 V 56.045548 h 4.575517 l 6.835932,17.809881 q 0.364583,1.07552 0.692707,2.315102 0.346354,1.221353 0.455729,1.768228 0.145833,-0.729166 0.601562,-2.205727 0.473958,-1.494791 0.63802,-1.877603 l 6.708328,-17.809881 h 4.466142 v 25.684874 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3297" /><path d="m 75.843263,63.774708 q 0,3.645831 -2.388019,5.796871 -2.369789,2.151039 -6.453119,2.151039 H 59.455256 V 81.730422 H 55.973488 V 56.045548 h 10.809887 q 4.320309,0 6.690098,2.023436 2.36979,2.023436 2.36979,5.705724 z m -3.499997,0.03646 q 0,-4.976559 -5.979162,-4.976559 h -6.908848 v 10.135409 h 7.054682 q 5.833328,0 5.833328,-5.15885 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3299" /></g></g></svg>',
+        plusIcon: '<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m467 211h-166v-166c0-24.853-20.147-45-45-45s-45 20.147-45 45v166h-166c-24.853 0-45 20.147-45 45s20.147 45 45 45h166v166c0 24.853 20.147 45 45 45s45-20.147 45-45v-166h166c24.853 0 45-20.147 45-45s-20.147-45-45-45z"/></g></svg>'
     }
 
     var _controlsToolIcons = []; 
@@ -132,8 +133,10 @@
                 var isHidden = true;
 
                 var _chatBoxContainer = null;
-                var _resizingElement = null;
-                var _resizingElementTool = null;
+                //var _resizingElement = null;
+                //var _resizingElementTool = null;
+                var _hoveringElement = null;
+                var _hoveringElementTool = { hoveredOverRect: null };
                 var _fileManagerTool = null;
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
@@ -1300,7 +1303,7 @@
                             //if (_scenesList[i].itemEl.classList.contains('live-editor-popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('live-editor-popup-scenes-item-active');
                         }
 
-                        if(_resizingElement) _resizingElement.style.display = 'none';
+                        //if(_resizingElement) _resizingElement.style.display = 'none';
 
                         if (_sourcesColumnEl) {
                             let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.live-editor-popup-sources-inner');
@@ -1310,6 +1313,9 @@
 
                             _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
                         }
+
+                        _activeScene.sourcesInterface.initHoveringTool();
+
                         _activeScene.sourcesInterface.update();
                         optionsColumn.update();
                     }
@@ -2032,9 +2038,9 @@
                         };
                         this.switchAudioActivenessIcon = function (activeness) {
                             if(activeness === true) {
-                                this.audioActivnessEl.innerHTML = _streamingIcons.liveOn;
+                                this.audioActivnessEl.innerHTML = _streamingIcons.enabledSpeaker;
                             } else if (activeness === false) {
-                                this.audioActivnessEl.innerHTML = _streamingIcons.liveOff;
+                                this.audioActivnessEl.innerHTML = _streamingIcons.disabledSpeaker;
                             }
                         };
                         this.toggleAudio = function() {
@@ -2120,6 +2126,33 @@
                               },
                             
                         };
+                        var sourceResizingEl = _allParticipantsListInstance.resizingElement = document.createElement('DIV');
+                        sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
+                        activeDialog.previewBoxEl.appendChild(sourceResizingEl);
+
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                sourceResizingEl,
+                                "Q/resize",
+                                {
+                                    move: true,
+                                    resize: true,
+                                    active: true,
+                                    //elementPosition: 'fixed',
+                                    showResizeHandles: true,
+                                    moveWithinArea: 'parent',
+                                    allowOverresizing: true,
+                                    negativeMoving: true,
+                                    onMoving: function () {
+
+                                    }
+                                }
+                            ),
+                            {},
+                            function () {
+                                _allParticipantsListInstance.resizingElementTool = this;
+                            }
+                        );
 
                         _participantsContainerEl = document.createElement('DIV');
                         _participantsContainerEl.className = 'live-editor-participants-list-con';
@@ -2551,6 +2584,28 @@
                                     content: [listItemInstance.sourcesContainerEl, _videoTool.videoinputListEl]
                                 })
                             }
+
+                            var sourceResizingEl = listItemInstance.resizingElement = document.createElement('DIV');
+                            sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
+                            activeDialog.previewBoxEl.appendChild(sourceResizingEl);
+                            
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    sourceResizingEl,
+                                    "Q/resize",
+                                    {
+                                        move: false,
+                                        resize: false,
+                                        active: true,
+                                        showResizeHandles: false,
+                                    }
+                                ),
+                                {},
+                                function () {
+                                    listItemInstance.resizingElementTool = this;
+                                }
+                            );
+
                             updateParticipantItem(participantInstance);
                         }
 
@@ -2794,11 +2849,17 @@
                             return _allParticipantsListInstance.sourceInstance;
                         }
 
+                        function getWebrtcGroupListItem() {
+                            console.log('ParticipantsList: getWebrtcGroupListItem');
+                            return _allParticipantsListInstance;
+                        }
+
                         return {
                             refreshList: refreshList,
                             getListElement: getListElement,
                             getListContainer: getListContainer,
-                            getWebrtcGroupInstance: getWebrtcGroupInstance
+                            getWebrtcGroupInstance: getWebrtcGroupInstance,
+                            getWebrtcGroupListItem: getWebrtcGroupListItem
                         }
                     }
 
@@ -2894,6 +2955,35 @@
                                     } else if (sources[s].active === false) {
                                         listItem.switchVisibilityIcon(false);
                                     }
+
+                                    var sourceResizingEl = listItem.resizingElement = document.createElement('DIV');
+                                    sourceResizingEl.className = 'live-editor-canvas-preview-resizing';
+                                    activeDialog.previewBoxEl.appendChild(sourceResizingEl);
+        
+                                    Q.activate(
+                                        Q.Tool.setUpElement(
+                                            sourceResizingEl,
+                                            "Q/resize",
+                                            {
+                                                move: true,
+                                                resize: true,
+                                                active: true,
+                                                //elementPosition: 'fixed',
+                                                showResizeHandles: true,
+                                                moveWithinArea: 'parent',
+                                                allowOverresizing: true,
+                                                negativeMoving: true,
+                                                onMoving: function () {
+                
+                                                }
+                                            }
+                                        ),
+                                        {},
+                                        function () {
+                                            listItem.resizingElementTool = this;
+                                        }
+                                    );
+                                    
                                     addItem(listItem);
                                 } else if ((sources[s].sourceType == 'group' && sources[s].groupType == 'webrtcaudio') || sources[s].sourceType == 'webrtcaudio' || sources[s].sourceType == 'audio' || sources[s].sourceType == 'audioInput') {
                                     var listItem = new AudioListItem(sources[s]);
@@ -3099,6 +3189,7 @@
                     }
 
                     function addImageSource(e) {
+                        console.log('addImageSource');
                         if(typeof e == 'string') {
                             var pathhInfo = e.split('/');
                             var title = pathhInfo[pathhInfo.length - 1];
@@ -3400,6 +3491,11 @@
                                     currentlySelectedEls[i].classList.remove('live-editor-popup-sources-item-active');
                                 }  
                             }
+                            let resizingEls = activeDialog.previewBoxParent.querySelectorAll('.live-editor-canvas-preview-resizing');
+                            let a, resizingElsNum = resizingEls.length;
+                            for(a = 0; a < resizingElsNum; a++) {
+                                resizingEls[a].style.display = '';
+                            }
                         }
 
 
@@ -3417,57 +3513,140 @@
                         var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
                         var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
                         console.log('selectSource timesbigger', prmtr1, prmtr2, timesBigger)
-                        if(_resizingElementTool != null) {
-                            _resizingElementTool.state.onMoving.removeAllHandlers();
-                            _resizingElementTool.state.onResizing.removeAllHandlers();
+                        if (sourceItem.resizingElementTool != null) {
+                            sourceItem.resizingElementTool.events.removeAllHandlers('moving');
+                            sourceItem.resizingElementTool.events.removeAllHandlers('resizing');
                         }
                         if(_selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
-                            var webrtcLayoutRect = _selectedSource.sourceInstance.rect;
+                            var groupRect = _selectedSource.sourceInstance.rect;
                             console.log('selectSource if1')
 
-                            showResizingElement();
-                            _resizingElement.style.width = webrtcLayoutRect.width / timesBigger + 'px';
-                            _resizingElement.style.height = webrtcLayoutRect.height / timesBigger+ 'px';
-                            _resizingElement.style.top = top + webrtcLayoutRect.y / timesBigger + 'px';
-                            _resizingElement.style.left = left + webrtcLayoutRect.x / timesBigger + 'px';
-                            _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
-                            _resizingElementTool.state.onMoving.set(function (x, y) {
-                                _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
-                                _selectedSource.sourceInstance.rect.y = (y - top)  * timesBigger;
+                            sourceItem.resizingElement.style.display = 'block';
+                            sourceItem.resizingElement.style.width = groupRect.width / timesBigger + 'px';
+                            sourceItem.resizingElement.style.height = groupRect.height / timesBigger + 'px';
+                            sourceItem.resizingElement.style.top = top + groupRect.y / timesBigger + 'px';
+                            sourceItem.resizingElement.style.left = left + groupRect.x / timesBigger + 'px';
+                            sourceItem.resizingElement.style.border = '1px solid red';
+
+                            sourceItem.resizingElementTool.state.keepRatioBasedOnElement = {
+                                width: groupRect.width,
+                                height: groupRect.height
+                            };
+
+                            sourceItem.resizingElementTool.events.on('moving', function (e) {
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
                             });
-                            _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
-                                let currentRect = _selectedSource.sourceInstance.rect;
-                                _selectedSource.sourceInstance.rect.width = width != null ? width * timesBigger : currentRect.width;
-                                _selectedSource.sourceInstance.rect.height = height != null ? height * timesBigger : currentRect.height;
-                                _selectedSource.sourceInstance.rect.x = x != null ? (x - left) * timesBigger : currentRect.x;
-                                _selectedSource.sourceInstance.rect.y = y != null ? (y - top) * timesBigger : currentRect.y;
+
+                            sourceItem.resizingElementTool.events.on('resizing', function (e) {
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                if (e.width != null) {
+                                    _selectedSource.sourceInstance.rect.width = e.width * timesBigger;
+                                }
+                                if (e.height != null) {
+                                    _selectedSource.sourceInstance.rect.height = e.height * timesBigger;
+                                }
+                                if (e.x != null) {
+                                    _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                }
+                                if (e.y != null) {
+                                    _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
+                                }
+
+                                if (_hoveringElementTool.hoveredOverRect != null) {
+                                    _hoveringElement.style.boxShadow = 'none';
+                                    _hoveringElementTool.hoveredOverRect = null;
+                                }
                             });
                         } else if(_selectedSource.sourceInstance.sourceType == 'webrtc') {  
-                            hideResizingElement();
+                            console.log('SELECT WEBRTC', sourceItem)
+                            var sourceRect = _selectedSource.sourceInstance.rect;
+                            console.log('SELECT WEBRTC sourceRect', sourceRect)
+
+                            let scaledWidth = sourceRect.width / timesBigger;
+                            let scaledHeight = sourceRect.height / timesBigger;
+                            let scaledTop = top + sourceRect.y / timesBigger;
+                            let scaledLeft = left + sourceRect.x / timesBigger;
+
+                            console.log('SELECT WEBRTC size', scaledWidth, scaledHeight, scaledTop, scaledLeft)
+                            sourceItem.resizingElement.style.display = 'block';
+                            sourceItem.resizingElement.style.width = scaledWidth + 'px';
+                            sourceItem.resizingElement.style.height = scaledHeight + 'px';
+                            sourceItem.resizingElement.style.top = scaledTop + 'px';
+                            sourceItem.resizingElement.style.left = scaledLeft + 'px';
+                            sourceItem.resizingElement.style.border = '1px solid red';
+                            sourceItem.resizingElement.style.boxSizing = 'border-box';
+                            //hideResizingElement();
                         } else if(_selectedSource.sourceInstance.sourceType == 'image' || _selectedSource.sourceInstance.sourceType == 'video' || _selectedSource.sourceInstance.sourceType == 'videoInput') {
                             console.log('selectSource if2')
-                            showResizingElement();
+                            //showResizingElement();
                             var sourceRect = _selectedSource.sourceInstance.rect;
                             console.log('selectSource sourceRect', sourceRect)
                             console.log('selectSource sourceRect 1', sourceRect.width,  sourceRect.height,  sourceRect.x,  sourceRect.y)
+                            
+                            if (_selectedSource.sourceInstance.sourceType == 'image' && !sourceItem.resizingElementTool.state.keepRatioBasedOnElement) {
+                                sourceItem.resizingElementTool.state.keepRatioBasedOnElement = {
+                                    width: _selectedSource.sourceInstance.imageInstance.naturalWidth,
+                                    height: _selectedSource.sourceInstance.imageInstance.naturalHeight
+                                };
+                            } else if (_selectedSource.sourceInstance.sourceType == 'video' && !sourceItem.resizingElementTool.state.keepRatioBasedOnElement) {
+                                sourceItem.resizingElementTool.state.keepRatioBasedOnElement = {
+                                    width: _selectedSource.sourceInstance.videoInstance.videoWidth,
+                                    height: _selectedSource.sourceInstance.videoInstance.videoHeight
+                                };
+                            }
 
-                            _resizingElement.style.width = sourceRect._width / timesBigger + 'px';
-                            _resizingElement.style.height = sourceRect._height / timesBigger+ 'px';
-                            _resizingElement.style.top = top + sourceRect._y / timesBigger + 'px';
-                            _resizingElement.style.left = left + sourceRect._x / timesBigger + 'px';
-                            _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
+                            let scaledWidth = sourceRect._width / timesBigger;
+                            let scaledHeight = sourceRect._height / timesBigger;
+                            let scaledTop = top + sourceRect._y / timesBigger;
+                            let scaledLeft = left + sourceRect._x / timesBigger;
+                            sourceItem.resizingElement.style.display = 'block';
+                            sourceItem.resizingElement.style.width = scaledWidth + 'px';
+                            sourceItem.resizingElement.style.height = scaledHeight + 'px';
+                            sourceItem.resizingElement.style.top = scaledTop + 'px';
+                            sourceItem.resizingElement.style.left = scaledLeft + 'px';
+                            sourceItem.resizingElement.style.border = '1px solid red';
+                            sourceItem.resizingElement.style.boxSizing = 'border-box';
 
-
-                            _resizingElementTool.state.onMoving.set(function (x, y) {
-                                _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
-                                _selectedSource.sourceInstance.rect.y = (y - top)  * timesBigger;
+                            sourceItem.resizingElementTool.events.on('moving', function (e) {
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
                             });
 
-                            _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
-                                if(width != null) _selectedSource.sourceInstance.rect.width = width * timesBigger;
-                                if(height != null) _selectedSource.sourceInstance.rect.height = height * timesBigger;
-                                if(x != null) _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
-                                if(y != null) _selectedSource.sourceInstance.rect.y = (y - top) * timesBigger;
+                            sourceItem.resizingElementTool.events.on('resizing', function (e) {
+                                let leftPos = (e.x - left);
+                                let topPos = (e.y - top);
+                                if (e.width != null) {
+                                    _selectedSource.sourceInstance.rect.width = e.width * timesBigger;
+                                }
+                                if (e.height != null) {
+                                    _selectedSource.sourceInstance.rect.height = e.height * timesBigger;              
+                                }
+                                if (e.x != null) {
+                                    _selectedSource.sourceInstance.rect.x = leftPos * timesBigger;
+                                }
+                                if (e.y != null) {
+                                    _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
+                                }
+
+                                _selectedSource.sourceInstance.rect.currentWidth = e.originalWidth / _selectedSource.sourceInstance.rect._width;
+                                //_selectedSource.sourceInstance.rect.currentHeight = _selectedSource.sourceInstance.rect._height;
+
+
+                                if (_hoveringElementTool.hoveredOverRect != null) {
+                                    _hoveringElement.style.boxShadow = 'none';
+                                    _hoveringElementTool.hoveredOverRect = null;
+                                }
+
+                            });
+        
+                            sourceItem.resizingElementTool.events.on('resized', function (e) {
+                             
                             });
 
                         }
@@ -3509,7 +3688,7 @@
                             syncList();
                         };
                         var activeScene = scenesInterface.getActive();
-                        activeScene.sourcesInterface.hideResizingElement()
+                        //activeScene.sourcesInterface.hideResizingElement()
                         optionsColumn.update();
                     }
 
@@ -3685,17 +3864,24 @@
 
                             _fileManagerTool.state.onSelect.set(function (stream) {
                                 console.log('Streams/fileManager onSelect', stream)
-                                if(stream.fields.attributes == '') {
+                                if(stream.fields.attributes == '' && stream.fields.icon == '') {
                                     console.error('Q.file.url is missing')
                                     return;
                                 }
-                                var attributes = JSON.parse(stream.fields.attributes);
-                                var link = Q.url(attributes['Q.file.url']);
+                                var link;
+                                if(attributes) {
+                                    var attributes = JSON.parse(stream.fields.attributes);
+                                    link = Q.url(attributes['Q.file.url']);
+                                } else {
+                                    link = Q.url(stream.fields.icon) + '/original.png';
+                                }
                                 console.log('Streams/fileManager attributes', link)
                                 if(stream.fields.type == 'Streams/video') {
                                     addVideoSource(link);
                                 } else if(stream.fields.type == 'Streams/image') {
                                     addImageSource(link);
+                                } else if(stream.fields.type == 'Streams/audio') {
+                                    addAudioSource(link);
                                 } else {
                                     alert('Wrong type of file')
                                 }
@@ -3730,11 +3916,13 @@
                         dialogBody.className = 'live-editor-popup-sources-visual-body';
                         var dialogBodyInner = document.createElement('DIV');
                         dialogBodyInner.className = 'live-editor-popup-sources-body-inner';
+                        dialogBody.appendChild(dialogBodyInner)
                         _visualSourcesEl = dialogBody;
                         _visualSourcesListEl = dialogBodyInner;
 
                         var sourcesColumnControl = document.createElement('DIV');
                         sourcesColumnControl.className = 'live-editor-popup-sources-control';
+                        dialogBody.appendChild(sourcesColumnControl)
 
                         var dropUpMenu = createAddSourceMenu();
 
@@ -3821,23 +4009,31 @@
 
                         var inviteBtnCon = document.createElement('DIV');
                         inviteBtnCon.className = 'live-editor-popup-sources-control-btn-invite-con'
+                        sourcesColumnControl.appendChild(inviteBtnCon);
+
                         var inviteBtn = document.createElement('DIV');
                         inviteBtn.className = 'live-editor-popup-sources-control-btn live-editor-popup-sources-control-btn-invite';
-                        inviteBtn.innerHTML = 'Invite';
-                        inviteBtn.addEventListener('click', function () {
-                            invitePopup.show();
-                        })
-
                         inviteBtnCon.appendChild(inviteBtn);
-                        sourcesColumnControl.appendChild(inviteBtnCon);
+                        var inviteBtnIcon = document.createElement('DIV');
+                        inviteBtnIcon.className = 'live-editor-popup-sources-control-btn-icon';
+                        inviteBtnIcon.innerHTML = _streamingIcons.plusIcon;
+                        inviteBtn.appendChild(inviteBtnIcon);
+                        var inviteBtnText = document.createElement('DIV');
+                        inviteBtnText.className = 'live-editor-popup-sources-control-btn-text';
+                        inviteBtnText.innerHTML = 'Invite';
+                        inviteBtn.appendChild(inviteBtnText);
+                        
+                        inviteBtn.addEventListener('click', function () {
+                            //invitePopup.show();
+                            if(tool.livestreamStream) {
+                                Q.Streams.invite(tool.livestreamStream.fields.publisherId, tool.livestreamStream.fields.name);
+                            }
+                        })
                         
                         _sourceControlButtons.push({
                             name: 'invite',
                             buttonEl: inviteBtn
                         });
-
-                        dialogBody.appendChild(dialogBodyInner)
-                        dialogBody.appendChild(sourcesColumnControl)
 
                         updateSourceControlPanelButtons();
                         return dialogBody;
@@ -4101,6 +4297,138 @@
                         return _selectedSource;
                     }
 
+                    function initHoveringTool() {
+                        var left = 0, top = 0;
+                        console.log('initHoveringTool activeDialog', activeDialog);
+                        var allParticipantsListItem = _participantsList.getWebrtcGroupListItem();
+                        var allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
+                        var previewBoxRect = activeDialog.previewBoxEl.getBoundingClientRect();
+                        var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
+                        var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
+                        var realcanvasSize = _streamingCanvas.getBoundingClientRect();
+                        var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
+                        var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
+                        activeDialog.previewBoxParent.addEventListener('mousemove', function (e) {
+                            let x = e.clientX - previewBoxRect.x;
+                            let y = e.clientY - previewBoxRect.y;
+        
+                            let isResizingOrMoving = false;
+                            let res = '';
+                            for (let s in _sourcesList) {
+                                if(_sourcesList[s].listType == 'audio') continue;
+                                if (_sourcesList[s].resizingElementTool.state.isResizing || _sourcesList[s].resizingElementTool.state.isMoving || _sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                    isResizingOrMoving = true;
+                                    if (_sourcesList[s].resizingElementTool.state.isResizing) {
+                                        res += '1'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.isMoving) {
+                                        res += '2'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                        res += '3'
+                                    }
+                                }
+                            }
+        
+                            if (isResizingOrMoving) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                _hoveringElementTool.hoveredOverRect = null;
+                                return;
+                            }
+        
+                            let selectedSourceRect = null;
+                            let preselected = false;
+                            let i = 0, len = _sourcesList.length;
+                            while (i <= len) {
+                                let sourceItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+
+                                if(sourceItem.listType == 'audio') {
+                                    i++;
+                                    continue;
+                                }
+                                let rect = i != len ? _sourcesList[i].sourceInstance.rect : allParticipantsGroupInstance.rect;
+                                let rectLeft = rect._x / timesBigger;
+                                let rectRight = (rect._x + rect._width) / timesBigger;
+                                let rectTop = rect._y / timesBigger;
+                                let rectBottom = (rect._y + rect._height) / timesBigger;
+                                let rectWidth = rect._width / timesBigger;
+                                let rectHeight = rect._height / timesBigger;
+        
+                                if (x >= rectLeft && x <= rectRight
+                                    && y >= rectTop && y <= rectBottom) {
+                                    if (sourceItem == _selectedSource) {
+                                        selectedSourceRect = rect;
+                                        i++;
+                                        continue;
+                                    }
+                                    if (selectedSourceRect != null && rect._width * rect._height > selectedSourceRect._width * selectedSourceRect._height) {
+                                        i++;
+                                        continue;
+                                    }
+                                    _hoveringElementTool.hoveredOverRect = rect;
+                                    _hoveringElement.style.width = rectWidth + 'px';
+                                    _hoveringElement.style.height = rectHeight + 'px';
+                                    _hoveringElement.style.top = rectTop + 'px';
+                                    _hoveringElement.style.left = rectLeft + 'px';
+                                    _hoveringElement.style.boxShadow = 'inset 0px 0px 0px 1px skyblue';
+                                    preselected = true;
+                                    break;
+                                }
+                                i++;
+                            }
+        
+                            if (!preselected) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                _hoveringElementTool.hoveredOverRect = null;
+                            }
+                        });
+        
+                        activeDialog.previewBoxParent.addEventListener('mouseleave', function (e) {
+                            _hoveringElement.style.boxShadow = 'none';
+                            _hoveringElementTool.hoveredOverRect = null;
+                        });
+        
+                        activeDialog.previewBoxParent.addEventListener('click', function (e) {
+                            if (_hoveringElementTool.hoveredOverRect != null) {
+                                //if (_resizingElementTool.state.appliedRecently) return;
+                                let i = 0, len = _sourcesList.length;
+                                while (i <= len) {
+                                    let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+                                    let sourceInstance = i != len ? _sourcesList[i].sourceInstance : allParticipantsGroupInstance;
+                                    if (sourceListItem.listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (sourceInstance.rect == _hoveringElementTool.hoveredOverRect) {
+                                        selectSource(sourceListItem);
+                                        _hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+        
+                            } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
+                                //console.log('DESELECT')
+        
+                                let i = 0, len = _sourcesList.length;
+                                while (i < len) {
+                                    if(_sourcesList[i].listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (_sourcesList[i].resizingElement == e.target) {
+                                        selectSource(_sourcesList[i]);
+                                        //_hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+                            }
+        
+        
+                        });
+                    }
+
                     var addVideoPopup = (function () {
                         var _dialogEl = null;
                         var _popupDialog = null;
@@ -4108,14 +4436,14 @@
                         console.log('addVideoPopup')
                 
                         var boxContent = _dialogEl = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-video';
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-file';
 
                         var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';  
                         boxContent.appendChild(boxContentText);
 
                         var videoItemInput = document.createElement('INPUT');
-                        videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
+                        videoItemInput.className = 'live-editor-dialog-window-add-file-file';
                         videoItemInput.type = 'file';
                         videoItemInput.name = 'fileVideoSource';
                         videoItemInput.accept = 'video/mp4, video/*';
@@ -4130,22 +4458,36 @@
                         boxContentText2.innerHTML = 'OR';
                         boxContent.appendChild(boxContentText2);
 
-                        var imageItemLinkInput = document.createElement('INPUT');
-                        imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
-                        imageItemLinkInput.type = 'text';
-                        imageItemLinkInput.placeholder = 'Enter the link';
-                        imageItemLinkInput.name = 'fileImageLink';
-                        boxContent.appendChild(imageItemLinkInput);
+                        var linkInput = document.createElement('INPUT');
+                        linkInput.className = 'live-editor-dialog-window-add-file-link';
+                        linkInput.type = 'text';
+                        linkInput.placeholder = 'Enter the link';
+                        linkInput.name = 'fileImageLink';
+                        boxContent.appendChild(linkInput);
 
+                        var dialogButtonsCon = document.createElement('DIV');
+                        dialogButtonsCon.className = 'live-editor-dialog-window-add-file-buttons';
+                        boxContent.appendChild(dialogButtonsCon);
+
+                        var dialogOkButton = document.createElement('BUTTON');
+                        dialogOkButton.className = 'live-editor-dialog-window-add-file-ok';
+                        dialogOkButton.innerHTML = 'OK';
+                        dialogButtonsCon.appendChild(dialogOkButton);
+
+                        dialogOkButton.addEventListener('click', function (e) {
+                            addVideoSource(linkInput.value);
+                            hideDialog();
+                        })
 
                         function showDialog(e) {
+                            videoItemInput.value = '';
+                            linkInput.value = '';
                             if(_popupDialog && !_popupDialog.active) {
                                 _popupDialog.show();
                                 return;
                             } else if(_popupDialog) {
                                 return;
                             }
-                            videoItemInput.value = '';
                             _popupDialog = new SimpleDialog({
                                 content: _dialogEl, 
                                 rectangleToShowIn: null,
@@ -4170,13 +4512,13 @@
                         console.log('addImagePopup')
                         
                         var boxContent = _dialogEl = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-image';
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-file';
                         var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                         boxContent.appendChild(boxContentText);
 
                         var imageItemInput = document.createElement('INPUT');
-                        imageItemInput.className = 'live-editor-popup-sources-add-menu-file';
+                        imageItemInput.className = 'live-editor-dialog-window-add-file-file';
                         imageItemInput.type = 'file';
                         imageItemInput.name = 'fileImageSource';
                         imageItemInput.accept = 'image/png, image/jpeg'
@@ -4192,14 +4534,29 @@
                         boxContent.appendChild(boxContentText2);
 
                         var imageItemLinkInput = document.createElement('INPUT');
-                        imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
+                        imageItemLinkInput.className = 'live-editor-dialog-window-add-file-link';
                         imageItemLinkInput.type = 'text';
                         imageItemLinkInput.placeholder = 'Enter the link';
                         imageItemLinkInput.name = 'fileImageLink';
                         boxContent.appendChild(imageItemLinkInput);
 
+                        var dialogButtonsCon = document.createElement('DIV');
+                        dialogButtonsCon.className = 'live-editor-dialog-window-add-file-buttons';
+                        boxContent.appendChild(dialogButtonsCon);
+
+                        var dialogOkButton = document.createElement('BUTTON');
+                        dialogOkButton.className = 'live-editor-dialog-window-add-file-ok';
+                        dialogOkButton.innerHTML = 'OK';
+                        dialogButtonsCon.appendChild(dialogOkButton);
+
+                        dialogOkButton.addEventListener('click', function (e) {
+                            addImageSource(imageItemLinkInput.value);
+                            hideDialog();
+                        })
+
                         function showDialog(e) {
                             imageItemInput.value = '';
+                            imageItemLinkInput.value = '';
                             if(_popupDialog && !_popupDialog.active) {
                                 _popupDialog.show();
                                 return;
@@ -4760,13 +5117,13 @@
                         console.log('addAudioPopup')
                         
                         var boxContent = _dialogEl = document.createElement('DIV');
-                        boxContent.className = 'live-editor-dialog-window-content';
+                        boxContent.className = 'live-editor-dialog-window-content live-editor-dialog-window-add-file';
                         var boxContentText = document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                         boxContent.appendChild(boxContentText);
                         
                         var videoItemInput = document.createElement('INPUT');
-                        videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
+                        videoItemInput.className = 'live-editor-dialog-window-add-file-file';
                         videoItemInput.type = 'file';
                         videoItemInput.name = 'fileAudioSource';
                         videoItemInput.accept = 'audio/mp3, audio/*'
@@ -4781,15 +5138,30 @@
                         boxContentText2.innerHTML = 'OR';
                         boxContent.appendChild(boxContentText2);
                         
-                        var imageItemLinkInput = document.createElement('INPUT');
-                        imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
-                        imageItemLinkInput.type = 'text';
-                        imageItemLinkInput.placeholder = 'Enter the link';
-                        imageItemLinkInput.name = 'fileImageLink';
-                        boxContent.appendChild(imageItemLinkInput);
+                        var linkInput = document.createElement('INPUT');
+                        linkInput.className = 'live-editor-dialog-window-add-file-file';
+                        linkInput.type = 'text';
+                        linkInput.placeholder = 'Enter the link';
+                        linkInput.name = 'fileImageLink';
+                        boxContent.appendChild(linkInput);
+
+                        var dialogButtonsCon = document.createElement('DIV');
+                        dialogButtonsCon.className = 'live-editor-dialog-window-add-file-buttons';
+                        boxContent.appendChild(dialogButtonsCon);
+
+                        var dialogOkButton = document.createElement('BUTTON');
+                        dialogOkButton.className = 'live-editor-dialog-window-add-file-ok';
+                        dialogOkButton.innerHTML = 'OK';
+                        dialogButtonsCon.appendChild(dialogOkButton);
+
+                        dialogOkButton.addEventListener('click', function (e) {
+                            addAudioSource(linkInput.value);
+                            hideDialog();
+                        })
 
                         function showDialog(e) {
                             videoItemInput.value = '';
+                            linkInput.value = '';
                             if(_popupDialog && !_popupDialog.active) {
                                 _popupDialog.show();
                                 return;
@@ -5329,6 +5701,7 @@
 
                     return {
                         createSourcesCol: createSourcesCol,
+                        initHoveringTool: initHoveringTool,
                         update: update,
                         updateLocalControlsButtonsState: updateLocalControlsButtonsState,
                         getSelectedSource: getSelectedSource,
@@ -6840,8 +7213,7 @@
                             let unseenMsgCounter = document.createElement('DIV');
                             unseenMsgCounter.className = 'live-editor-popup-chat-tool-msg-counter';
                             previewRelatedItems[i].appendChild(unseenMsgCounter);
-                            Q.Streams.Message.Total.setUpElement(unseenMsgCounter, previewRelatedItems[i].dataset.publisherid, previewRelatedItems[i].dataset.streamname, 'Streams/chat/message', tool);
-
+                            Q.Streams.Message.Total.setUpElement(unseenMsgCounter, previewRelatedItems[i].dataset.publisherid, previewRelatedItems[i].dataset.streamname, 'Streams/chat/message', tool);                 
                         }
 
                         //remove closed rooms frol the list
@@ -6879,12 +7251,15 @@
                                         if(publicAttr == true) {
                                             _chatRooms[r].isPublicChat = true; 
                                             _chatRooms[r].streamElement.classList.add('live-editor-popup-chat-tool-public-room'); 
+                                            if(!_currentActiveChatRoom) {
+                                                _chatRooms[r].streamElement.click();
+                                            }
                                         }
                                         break;
                                     }
                                 }
                             }
-                        }  
+                        }
                     }
 
                     function createSection() {
@@ -7294,8 +7669,6 @@
                     this.hoverTimeout = null;
                     this.active = false;
                     this.hide = function (e) {
-                        console.log('PopupDialog: hide')
-
                         if (!e || (e && (e.target == this.closeButtonEl || !pupupInstance.popupDialogEl.contains(e.target)))) {
                             if (pupupInstance.popupDialogEl.parentElement) pupupInstance.popupDialogEl.parentElement.removeChild(pupupInstance.popupDialogEl);
         
@@ -7311,7 +7684,6 @@
                     }
         
                     this.show = function (e) {        
-                        console.log('popup dialog: show');
                         pupupInstance.popupDialogEl.style.top = '';
                         pupupInstance.popupDialogEl.style.left = '';
                         pupupInstance.popupDialogEl.style.maxHeight = '';
@@ -7336,7 +7708,6 @@
                         }
                         
                         document.body.appendChild(pupupInstance.popupDialogEl);
-                        console.log('popup dialog: show 2');
 
                         let popupRect = pupupInstance.popupDialogEl.getBoundingClientRect();
                         pupupInstance.popupDialogEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
@@ -7359,7 +7730,7 @@
                         let midXOfTriggeringElement = triggeringElementRect.x + triggeringElementRect.width / 2;
         
                         if (roomBelowButton >= popupRect.height + 20) {
-                            console.log('show 1');
+                            //console.log('show 1');
                             if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                 //console.log('show 1.1');
                                 pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
@@ -7392,7 +7763,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-below-position', true, false);
                             }
                         } else if(roomAboveButton >= popupRect.height + 20) {
-                            console.log('show 2');
+                            //console.log('show 2');
                             if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
                                 //console.log('show 2.1');
                                 pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
@@ -7424,7 +7795,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-above-position', true, false);
                             }
                         } else if (Math.min(roomBelowMidOfButton, roomAboveMidOfButton) >= popupRect.height / 2) {
-                            console.log('show 3');
+                            //console.log('show 3');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 3.1');
                                 pupupInstance.popupDialogEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
@@ -7445,7 +7816,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-mid-position', true, false);
                             }
                         } else if (roomBelowStartOfButton >= popupRect.height) {
-                            console.log('show 4');
+                            //console.log('show 4');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 4.1');
                                 pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + 'px';
@@ -7466,7 +7837,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-belowtop-position', true, false);
                             }
                         } else if (roomAboveEndOfButton >= popupRect.height) {
-                            console.log('show 5');
+                            //console.log('show 5');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 5.1');
                                 pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
@@ -7487,7 +7858,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-abovebottom-position', false, false);
                             }
                         } else if(popupRect.height + 20 < window.innerHeight) {
-                            console.log('show 6');
+                            //console.log('show 6');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 6.1');
                                 pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
@@ -7514,7 +7885,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-winmid-position', true, false);
                             }
                         } else {
-                            console.log('show 7');
+                            //console.log('show 7');
                             if (roomToRightOfButton >= popupRect.width + 20) {
                                 //console.log('show 7.1');
                                 pupupInstance.popupDialogEl.style.top = '0px';
@@ -7540,7 +7911,7 @@
                                 togglePopupClassName('live-editor-popup-dialog-fullwidth-fullheight-position', true, true);
                             }
                         }
-                        console.log('show 7', pupupInstance.popupDialogEl);
+                        //console.log('show 7', pupupInstance.popupDialogEl);
 
                         pupupInstance.popupDialogEl.style.visibility = '';
         
@@ -8248,9 +8619,13 @@
                     previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
                     previewBoxBody.appendChild(previewBoxBodyInner);
 
-                    var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                    var sourceHoveringEl = _hoveringElement = document.createElement('DIV');
+                    sourceHoveringEl.className = 'live-editor-canvas-preview-hovering';
+                    previewBoxBodyInner.appendChild(sourceHoveringEl);
+
+                    /*var sourceResizingEl = _resizingElement = document.createElement('DIV');
                     sourceResizingEl.className = 'live-editor-popup-preview-resizing';
-                    previewBoxBodyInner.appendChild(sourceResizingEl);
+                    previewBoxBodyInner.appendChild(sourceResizingEl);*/
 
                     var chatBoxCon = _chatBoxContainer = document.createElement('DIV');
                     chatBoxCon.className = 'live-editor-popup-chat-con';
@@ -8260,7 +8635,7 @@
                    //let chatsInterface = textChatsInterface.createSection();
                    //chatBoxCon.appendChild(chatsInterface);
 
-                    Q.activate(
+                    /*Q.activate(
                         Q.Tool.setUpElement(
                             _resizingElement,
                             "Q/resize",
@@ -8283,7 +8658,7 @@
                             _resizingElementTool = this;
                             _resizingElement.style.display = 'none';
                         }
-                    );
+                    );*/
 
                     Q.activate(
                         Q.Tool.setUpElement(
@@ -8327,7 +8702,8 @@
 
                     return {
                         dialogEl: dialog,
-                        previewBoxEl: previewBoxBodyInner
+                        previewBoxEl: previewBoxBodyInner,
+                        previewBoxParent: previewBoxBody
                     }
                 }
 
@@ -8381,12 +8757,16 @@
                     previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
                     previewBoxBody.appendChild(previewBoxBodyInner);
 
+                    var sourceHoveringEl = _hoveringElement = document.createElement('DIV');
+                    sourceHoveringEl.className = 'live-editor-canvas-preview-hovering';
+                    previewBoxBodyInner.appendChild(sourceHoveringEl);
+
                     var streamingToSectionEl = streamingToSection.createSection();
                     previewBoxBody.appendChild(streamingToSectionEl);
 
-                    var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                    /*var sourceResizingEl = _resizingElement = document.createElement('DIV');
                     sourceResizingEl.className = 'live-editor-popup-preview-resizing';
-                    previewBoxBodyInner.appendChild(sourceResizingEl);
+                    previewBoxBodyInner.appendChild(sourceResizingEl);*/
 
                     var chatBoxCon = _chatBoxContainer = document.createElement('DIV');
                     chatBoxCon.className = 'live-editor-popup-chat-con';
@@ -8396,7 +8776,7 @@
                    //let chatsInterface = textChatsInterface.createSection();
                    //chatBoxCon.appendChild(chatsInterface);
 
-                    Q.activate(
+                    /*Q.activate(
                         Q.Tool.setUpElement(
                             _resizingElement,
                             "Q/resize",
@@ -8419,7 +8799,7 @@
                             _resizingElementTool = this;
                             _resizingElement.style.display = 'none';
                         }
-                    );
+                    );*/
 
                     Q.activate(
                         Q.Tool.setUpElement(
@@ -8477,7 +8857,8 @@
 
                     return {
                         dialogEl: dialog,
-                        previewBoxEl: previewBoxBodyInner
+                        previewBoxEl: previewBoxBodyInner,
+                        previewBoxParent: previewBoxBody
                     }
                 }
 
@@ -8648,6 +9029,10 @@
                         if(!document.documentElement.classList.contains('Streams_webrtc_live')) {
                             document.documentElement.classList.add('Streams_webrtc_live');
                         }
+                    }
+
+                    if(!tool.livestreamStream) {
+                        tool.getOrCreateLivestreamStream();
                     }
                 }
 
