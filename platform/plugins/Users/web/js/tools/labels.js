@@ -94,6 +94,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				icon: Q.url("{{Users}}/img/icons/labels/all/40.png")
 			};
 		}
+		var selectedLabels = [];
+		tool.$('li.Q_selected').each(function () {
+			selectedLabels.push($(this).attr('data-label'));
+		});
 		Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
@@ -104,7 +108,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                 addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
-				Q.replace(tool.element, html);;
+				Q.replace(tool.element, html);
+				tool.$('li').each(function () {
+					if (selectedLabels.indexOf($(this).attr('data-label')) >= 0) {
+						$(this).addClass('Q_selected');
+					}
+				});
 				Q.handle(state.onRefresh, tool, []);
 			});
 			if (state.userId && state.contactUserId) {

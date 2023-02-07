@@ -1759,7 +1759,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             Q.handle(callback, null, [err, rsd]);
         }, {
             method: 'post',
-            fields: o,
+            fields: o, 
             baseUrl: baseUrl
         });
         if (o.photo) {
@@ -1926,6 +1926,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					userId: Q.Users.communityId,
 					filter: canAddRoles
 				}),
+				className: 'Streams_invite_labels_dialog',
 				apply: true,
 				onClose: _continueAfterRoles,
 				onActivate: function (dialog) {
@@ -1972,6 +1973,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					filter: 'Users/',
 					canAdd: 'New Relationship Type'
 				}),
+				className: 'Streams_invite_labels_dialog',
 				apply: true,
 				onClose: _showInviteDialog,
 				onActivate: function (dialog) {
@@ -1980,9 +1982,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						return;
 					}
 					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						o.addMyLabel = Array.isArray(o.addMyLabel) ? o.addLabel : [];
+						o.addMyLabel = Array.isArray(o.addMyLabel) ? o.addMyLabel : [];
 						if(wasSelected) {
-							var index = o.addLabel.indexOf(label);
+							var index = o.addMyLabel.indexOf(label);
 							if(index > -1) {
 								o.addMyLabel.splice(index, 1)
 							}
