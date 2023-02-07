@@ -1910,9 +1910,14 @@ Streams.invite = function (publisherId, streamName, options, callback) {
     }
     Q.Text.get('Streams/content', function (err, text) {
 
-		if (o.addLabel !== true) {
+		var addLabel = o.addLabel;
+		if (!Q.isArrayLike(o.addLabel)) {
+			o.addLabel = [];
+		}
+		if (addLabel !== true) {
 			return _continueAfterRoles();
 		}
+
 
 		// Commented out because now we check the server every time
 		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
@@ -1956,7 +1961,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							return false;
 						}
 
-						o.addLabel = Array.isArray(o.addLabel) ? o.addLabel : [];
 						if(wasSelected) {
 							var index = o.addLabel.indexOf(label);
 							if(index > -1) {
@@ -1971,7 +1975,11 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		});
 
 		function _continueAfterRoles() {
-			if (o.addMyLabel !== true) {
+			var addMyLabel = o.addMyLabel;
+			if (!Q.isArrayLike(o.addMyLabel)) {
+				o.addMyLabel = [];
+			}
+			if (addMyLabel !== true) {
 				return _showInviteDialog();
 			}
 			Q.Dialogs.push({
@@ -1990,7 +1998,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						return;
 					}
 					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						o.addMyLabel = Array.isArray(o.addMyLabel) ? o.addMyLabel : [];
 						if(wasSelected) {
 							var index = o.addMyLabel.indexOf(label);
 							if(index > -1) {
