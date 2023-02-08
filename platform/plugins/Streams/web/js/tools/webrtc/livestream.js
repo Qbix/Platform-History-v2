@@ -589,7 +589,7 @@
                             } else {
                                 Q.Streams.create({
                                     publisherId: Q.Users.loggedInUserId(),
-                                    type: 'Streams/chat',
+                                    type: 'Streams/webrtc/chat',
                                     title: Q.Users.loggedInUser.displayName ? Q.Users.loggedInUser.displayName : 'Private chat',
                                     readLevel: 0,
                                     writeLevel: 0,
