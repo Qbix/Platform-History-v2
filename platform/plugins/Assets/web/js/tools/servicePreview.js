@@ -95,6 +95,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 {
 	editable: true,
 	currency: 'credits',
+	onRefresh: new Q.Event(),
 	onInvoke: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
@@ -131,8 +132,8 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		}, function (err, html) {
 			if (err) return;
 			Q.replace(tool.element, html);
-
 			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0]);
+			Q.handle(tool.state.onRefresh, tool);
 		});
 
 		Q.Streams.Stream.onFieldChanged(ps.publisherId, ps.streamName)
