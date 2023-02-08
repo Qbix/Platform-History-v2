@@ -1995,6 +1995,8 @@
 						setTimeout(function () {
 							Q.Pointer.hint($input[0]);
 						}, 500);
+					} else {
+						$input.plugin('Q/clickfocus');
 					}
 				}, 0);
 			},
