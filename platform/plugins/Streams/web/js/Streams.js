@@ -632,6 +632,8 @@ Q.Tool.define({
 	"Streams/webrtc/livestreaming/canvasComposer"  : "{{Streams}}/js/tools/webrtc/livestreamingCanvasComposer.js",
 	"Streams/webrtc/livestreamInstructions"  : "{{Streams}}/js/tools/webrtc/livestreamInstructions.js",
 	"Streams/webrtc/livestream"  : "{{Streams}}/js/tools/webrtc/livestream.js",
+	"Streams/webrtc/callCenter/manager"  : "{{Streams}}/js/tools/webrtc/callCenter/manager.js",
+	"Streams/webrtc/callCenter/client"  : "{{Streams}}/js/tools/webrtc/callCenter/client.js",
 	"Streams/fileManager"  : "{{Streams}}/js/tools/fileManager.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",

@@ -141,7 +141,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             useRelatedTo: {
                 publisherId: null,
                 streamName: null
-            }
+            },
+            relate: {}
         };
 
         overrideDefaultOptions(options);

@@ -533,7 +533,7 @@
 					"title": "Teleconference",
 					"icon": "Streams/webrtc"
 				},
-				"edit": ["title"],
+				"edit": ["title", "content"],
 				"messages": {
 					"Streams/webrtc/joined": {}
 				}
@@ -550,6 +550,10 @@
 				},
 				"edit": ["title"],
 				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
+			},
+			"Streams/webrtc/callCenter/endpoint": {
+				"create": true, 
+				"edit": true
 			}
 		},
 		"categorize": {
