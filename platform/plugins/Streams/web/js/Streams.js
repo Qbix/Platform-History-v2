@@ -3123,7 +3123,7 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
 
 /**
  * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
- * @event onMessage
+ * @event onEphemeral
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
@@ -3518,7 +3518,7 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
  * Send some payload which is not saved as a message in the stream's history,
  * but is broadcast to everyone curently connected by a socket and participating
  * or observing the stream.
- * This can be used for read receipts, "typing..." indicators, cursor movements and more.
+ * This can be used for "typing..." indicators, cursor movements and more.
  *
  * @method ephemeral
  * @param {Object} payload the payload to send, should have at least "type" specified
@@ -3526,7 +3526,7 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
  * @param {Function} [callback] receives (err, result) as parameters
  */
 Sp.ephemeral = function _Stream_ephemeral (payload, dontNotifyObservers, callback) {
-	return Stream.neglect(this.fields.publisherId, this.fields.name, payload, dontNotifyObservers, callback);
+	return Stream.ephemeral(this.fields.publisherId, this.fields.name, payload, dontNotifyObservers, callback);
 };
 
 
