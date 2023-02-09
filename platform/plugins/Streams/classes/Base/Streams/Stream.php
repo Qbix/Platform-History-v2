@@ -102,7 +102,7 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 10
-	 * 0=self, 10=join, 13=vote, 15=suggest, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+	 * 0=self, 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
 	 */
 	/**
 	 * @property $adminLevel

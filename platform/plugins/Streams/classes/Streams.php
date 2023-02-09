@@ -108,10 +108,17 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can post messages, but manager must approve
+	 * Can suggest actions, but manager must approve
 	 * @property $WRITE_LEVEL['suggest']
 	 * @type integer
 	 * @default 15
+	 * @final
+	 */
+	/**
+	 * Can contribute to the stream (e.g. "join the stage")
+	 * @property $WRITE_LEVEL['contribute']
+	 * @type integer
+	 * @default 18
 	 * @final
 	 */
 	/**

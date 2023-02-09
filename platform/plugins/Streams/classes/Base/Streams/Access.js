@@ -91,7 +91,7 @@ Q.mixin(Base, Row);
  * @property writeLevel
  * @type Integer
  * @default 0
- * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+ * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 18=contribute, 18=contribute, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
  */
 /**
  * @property adminLevel
