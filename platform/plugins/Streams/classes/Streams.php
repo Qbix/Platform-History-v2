@@ -109,7 +109,7 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can post messages, but manager must approve
-	 * @property $WRITE_LEVEL['postPending']
+	 * @property $WRITE_LEVEL['suggest']
 	 * @type integer
 	 * @default 15
 	 * @final
@@ -175,7 +175,7 @@ abstract class Streams extends Base_Streams
 		'none' => 0,
 		'join' => 10,
 		'vote' => 13,
-		'postPending' => 18,
+		'suggest' => 18,
 		'post' => 20,
 		'relate' => 23,
 		'relations' => 25,

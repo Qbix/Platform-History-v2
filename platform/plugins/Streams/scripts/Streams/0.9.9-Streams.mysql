@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS {{prefix}}request (
   streamName varbinary(255) NOT NULL COMMENT 'local to shard of publisherId',
   userId varbinary(31) NOT NULL COMMENT 'id of user who is requesting access to the stream',
   readLevel int(11) DEFAULT NULL COMMENT '0=none, 10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
-  writeLevel int(11) DEFAULT NULL COMMENT '0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
+  writeLevel int(11) DEFAULT NULL COMMENT '0=none, 10=join, 13=vote, 15=suggest, 20=post, 23=relate',
   adminLevel int(11) DEFAULT NULL COMMENT '0=none, 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
   permissions varchar(255) DEFAULT NULL COMMENT 'JSON array of permission names',
   state enum('pending','granted','rejected','forwarded','expired') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'the state of the request',

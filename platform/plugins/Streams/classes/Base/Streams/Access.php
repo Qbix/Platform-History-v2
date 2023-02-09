@@ -82,7 +82,7 @@ abstract class Base_Streams_Access extends Db_Row
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 0
-	 * <0=ignored, 0='none', 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+	 * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
 	 */
 	/**
 	 * @property $adminLevel
