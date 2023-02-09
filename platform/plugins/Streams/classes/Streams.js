@@ -132,7 +132,7 @@ Streams.READ_LEVEL = {
  */
 /**
  * Can post messages, but manager must approve
- * @property WRITE_LEVEL.postPending
+ * @property WRITE_LEVEL.suggest
  * @type integer
  * @default 15
  * @final
@@ -198,7 +198,7 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':         13,		// can vote for a relation message posted to the stream
-	'postPending':	18,		// can post messages which require manager's approval
+	'suggest':	18,		// can post messages which require manager's approval
 	'post':			20,		// can post messages which take effect immediately
 	'relate':       23,		// can relate other streams to this one
 	'relations':    25,		// can update properties of relations directly
@@ -471,7 +471,7 @@ Streams.listen = function (options, servers) {
 							message: 'too many observers already'
 						});
 					}
-					clients[client.id] = client;
+					Streams.observers[publisherId][streamName][client.id] = client;
 					Q.setObject(
 						[client.id, publisherId, streamName], true, Streams.observing
 					);

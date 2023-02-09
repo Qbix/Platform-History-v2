@@ -91,7 +91,14 @@
             "NotAuthorizedToGrantRole": {
                 "title": "Sorry",
                 "alert": "You're not authorized to grant this role"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Sorry",
+                "alert": "You're not authorized to remove this role"
             }
+        },
+        "labels": {
+            "title": "Add Relationships to Invited Users?"
         },
         "dialog": {
             "chooseFromContacts": "Choose from your Contacts",

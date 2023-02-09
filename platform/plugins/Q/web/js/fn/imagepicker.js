@@ -300,6 +300,21 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			var ms = state.maxStretch || 1;
 			if (requiredSize.width > imageSize.width * ms
 			 || requiredSize.height > imageSize.height * ms) {
+				var diff = 0;
+				if (requiredSize.width - 1 < imageSize.width * ms) {
+					var dw = requiredSize.width / ms - requiredSize.width;
+					imageSize.width += dw;
+					if ('left' in imageSize) {
+						imageSize.left -= dw / 2;
+					}
+				}
+				if (requiredSize.height - 1 < imageSize.height * ms) {
+					var dh = requiredSize.height / ms - requiredSize.height;
+					imageSize.height += dh;
+					if ('top' in imageSize) {
+						imageSize.top -= dh / 2;
+					}
+				}
 				var result = Q.handle(
 					[state.onTooSmall, state.onFinish], state,
 					[requiredSize, imageSize]

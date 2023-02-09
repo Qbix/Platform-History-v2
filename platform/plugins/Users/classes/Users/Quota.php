@@ -42,6 +42,7 @@ class Users_Quota extends Base_Users_Quota
 	 * @param {array} [$privileges=array()] any strings naming privileges the user has with respect to the resourceId that might increase the max of the quota
 	 * @param {boolean} [$begin=true] whether to begin a database transaction, in which case you must call $quota->used($used) to commit the transaction.
 	 * @return {Users_Quota|array} if no quotas were exceeded, this object is returned and you can call ->used($units) on it later. But if some quotas were exceeded, the function returns the array of corresponding durations, sorted by smallest first. So use is_array() with the return value to find out if any quotas were exceeded.
+	 * @throws Users_Exception_Quota if any of the quotas were exceeded and throwIfQuota = true
 	 */
 	static function check(
 		$userId, 
@@ -177,6 +178,31 @@ class Users_Quota extends Base_Users_Quota
 				->execute(false, $shards);
 		}
 		return true;
+	}
+
+	/**
+	 * Call this method to add quotas dynamically, on top of the config.
+	 * It is typically called after getting rows from the database,
+	 * in order to make use of the quotas mechanism,
+	 * followed by calls to either
+	 * Q_Users_Quota::check(userId, resourceId) or quota->used(units).
+	 * @method add
+	 * @static
+	 * @param {string} $name The name of the quota.
+	 *   This is typically the type of thing being restricted.
+	 * @param {integer} $duration The duration, in seconds, to set info for.
+	 *   You can use constants like Users_Daystamp::secPerDay and Users_Daystamp::secPerWeek.
+	 *   Note that months and years have variable length, so if you want an exact duration,
+	 *   you may want to use time() - strtotime("1 month ago") or time() - strotime("2020-01-01")
+	 * @param {array} $info An array of privilege => units pairs,
+	 *  where privilege is the a contact label or ID of a subscription plan, etc.
+	 *  and units is an integer indicating how many units can be used during that duration.
+	 *  The array must one pair where privilege = "" and the units are for the general public
+	 *  with no special privileges.
+	 */
+	static function add($name, $duration, $info)
+	{
+		Q_Config::set('Users', 'quotas', $name, $duration, $info);
 	}
 	
 	function transactionKey()

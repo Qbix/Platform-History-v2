@@ -19,7 +19,7 @@
  * @param {string} [$fields.hash] defaults to ""
  * @param {string} [$fields.algorithm] defaults to "sha256"
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.extra] defaults to ""
  * @param {string} [$fields.URI] defaults to ""
  */
@@ -35,7 +35,7 @@ abstract class Base_Streams_State extends Db_Row
 	 * @property $algorithm
 	 * @type string
 	 * @default "sha256"
-	 * the HMAC uses a secret key not storeed in this table
+	 * the HMAC versions should use a secret key not storeed in this table
 	 */
 	/**
 	 * @property $insertedTime
@@ -46,7 +46,7 @@ abstract class Base_Streams_State extends Db_Row
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
-	 * @default "0000-00-00 00:00:00"
+	 * @default null
 	 * 
 	 */
 	/**
@@ -435,6 +435,9 @@ return array (
 	 */
 	function beforeSet_updatedTime($value)
 	{
+		if (!isset($value)) {
+			return array('updatedTime', $value);
+		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
@@ -467,9 +470,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '0000-00-00 00:00:00',
+  3 => NULL,
 );			
 	}
 

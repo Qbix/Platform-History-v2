@@ -263,10 +263,9 @@ class Streams_Invite extends Base_Streams_Invite
 			));
 		}
 
-		// if labels exist add contact
+		// add roles
 		$extra = Q::json_decode($this->extra ?: '{}', true);
-		$labels = Q::ifset($extra, "label", null);
-		if ($labels) {
+		if ($labels = Q::ifset($extra, 'addLabel', null)) {
 			if (!is_array($labels)) {
 				$labels = array($labels);
 			}
@@ -275,6 +274,21 @@ class Streams_Invite extends Base_Streams_Invite
 				foreach ($labels as $label) {
 					Users_Contact::addContact(
 						$stream->publisherId, $label, $userId,
+						null, $this->invitingUserId, true
+					);
+				}
+			}
+		}
+		// add relationships
+		if ($labels = Q::ifset($extra, 'addMyLabel', null)) {
+			if (!is_array($labels)) {
+				$labels = array($labels);
+			}
+			$can = Users_Label::can($stream->publisherId, $this->invitingUserId);
+			if ($can["manageContacts"]) {
+				foreach ($labels as $label) {
+					Users_Contact::addContact(
+						$this->invitingUserId, $label, $userId,
 						null, $this->invitingUserId, true
 					);
 				}

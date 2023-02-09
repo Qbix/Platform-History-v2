@@ -836,6 +836,10 @@
 	display: block;
 }
 
+.Streams_invite_labels_dialog .Q_dialog_title {
+	padding: 0 30px;
+}
+
 /*setIdentifier dialog: set access toggle (private|public)*/
 
 #Users_setIdentifier_dialog .Users_setIdentifier_access {

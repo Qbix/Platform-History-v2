@@ -291,7 +291,7 @@ function _Streams_participants(options) {
 							if (err) return;
 							var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
 							var filter = '.Streams_inviteTrigger';
-							$element.on(Q.Pointer.fastclick, filter, function () {
+							$te.on(Q.Pointer.fastclick, filter, function () {
 								var options = Q.extend({
 									identifier: si.identifier
 								}, si);

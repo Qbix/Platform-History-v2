@@ -1997,7 +1997,7 @@ EOT;
 						: ($field_null ? null : '');
 					$isExpression = (
 						$default === 'CURRENT_TIMESTAMP'
-						or strpos($default, '(') !== false
+						or ($default && strpos($default, '(') !== false)
 					);
 					$defaults[] = $isExpression
 						? 'new Db_Expression(' . json_encode($default) . ')'

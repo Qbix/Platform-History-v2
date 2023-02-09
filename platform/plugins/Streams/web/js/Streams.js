@@ -160,7 +160,7 @@ Streams.READ_LEVEL = {
  */
 /**
  * Can post messages, but manager must approve
- * @property WRITE_LEVEL.postPending
+ * @property WRITE_LEVEL.suggest
  * @type integer
  * @default 15
  * @final
@@ -226,7 +226,7 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':		 13,		// can vote for a relation message posted to the stream
-	'postPending':	18,		// can post messages which require manager's approval
+	'suggest':	18,		// can post messages which require manager's approval
 	'post':			20,		// can post messages which take effect immediately
 	'relate':	   23,		// can relate other streams to this one
 	'relations':	25,		// can update properties of relations directly
@@ -1658,8 +1658,8 @@ Streams.release = function (key) {
  * @param {string} [options.platform] platform for which xids are passed
  * @param {String} [options.xid] xid or arary of xids to invite
  * @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
- * @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
- * @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ * @param {String|Array|true} [options.addLabel] label or an array of labels for adding publisher's contacts, or pass true to show a selector dialog
+ * @param {String|Array|true} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts, or pass true to show a selector dialog
  * @param {String} [options.readLevel] the read level to grant those who are invited
  * @param {String} [options.writeLevel] the write level to grant those who are invited
  * @param {String} [options.adminLevel] the admin level to grant those who are invited
@@ -1769,7 +1769,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             Q.handle(callback, null, [err, rsd]);
         }, {
             method: 'post',
-            fields: o,
+            fields: o, 
             baseUrl: baseUrl
         });
         if (o.photo) {
@@ -1911,7 +1911,109 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         return _request();
     }
     Q.Text.get('Streams/content', function (err, text) {
-		var showInviteDialog = function() {
+
+		var addLabel = o.addLabel;
+		if (!Q.isArrayLike(o.addLabel)) {
+			o.addLabel = [];
+		}
+		if (addLabel !== true) {
+			return _continueAfterRoles();
+		}
+
+
+		// Commented out because now we check the server every time
+		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
+		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
+		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// if (!canHandleRoles.length) {
+		// 	_showInviteDialog();
+		// }
+
+		Q.req('Users/roles', ['canAdd', 'canRemove', 'canSee'], function (err, response) {
+			var canAddRoles = Q.getObject('slots.canAdd', response);
+			var canRemoveRoles = Q.getObject('slots.canRemove', response);
+			if (Q.isEmpty(canAddRoles)) {
+				return _continueAfterRoles();
+			}
+			Q.Dialogs.push({
+				title: text.invite.roles.title,
+				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+					userId: Q.Users.communityId,
+					filter: canAddRoles
+				}),
+				className: 'Streams_invite_labels_dialog',
+				apply: true,
+				onClose: _continueAfterRoles,
+				onActivate: function (dialog) {
+					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+						return;
+					}
+					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+						if (!wasSelected && !canAddRoles.includes(label)) {
+							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
+								title: text.invite.roles.NotAuthorizedToGrantRole.title
+							})
+							return false;
+						}
+						if (wasSelected && !canRemoveRoles.includes(label)) {
+							Q.alert(text.invite.roles.NotAuthorizedToRemovetRole.alert, {
+								title: text.invite.roles.NotAuthorizedToRemoveRole.title
+							})
+							return false;
+						}
+
+						if(wasSelected) {
+							var index = o.addLabel.indexOf(label);
+							if(index > -1) {
+								o.addLabel.splice(index, 1)
+							}
+						} else {
+							o.addLabel.push(label);
+						}
+					});
+				}
+			});
+		});
+
+		function _continueAfterRoles() {
+			var addMyLabel = o.addMyLabel;
+			if (!Q.isArrayLike(o.addMyLabel)) {
+				o.addMyLabel = [];
+			}
+			if (addMyLabel !== true) {
+				return _showInviteDialog();
+			}
+			Q.Dialogs.push({
+				title: text.invite.labels.title,
+				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+					userId: Q.Users.loggedInUserId(),
+					filter: 'Users/',
+					canAdd: 'New Relationship Type'
+				}),
+				className: 'Streams_invite_labels_dialog',
+				apply: true,
+				onClose: _showInviteDialog,
+				onActivate: function (dialog) {
+					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+						return;
+					}
+					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+						if(wasSelected) {
+							var index = o.addMyLabel.indexOf(label);
+							if(index > -1) {
+								o.addMyLabel.splice(index, 1)
+							}
+						} else {
+							o.addMyLabel.push(label);
+						}
+					});
+				}
+			});
+		}
+
+		function _showInviteDialog() {
 			var options = {
 				title: o.title,
 				identifierTypes: o.identifierTypes,
@@ -1936,62 +2038,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}, options);
 		}
 
-		if(o.addLabel) {
-			return showInviteDialog();
-		}
-
-		// Commented out because now we check the server every time
-		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
-		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
-		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
-		// if (!canHandleRoles.length) {
-		// 	showInviteDialog();
-		// }
-
-		Q.req('Users/roles', ['canAdd', 'canRemove', 'canSee'], function (err, response) {
-			var canAddRoles = Q.getObject('slots.canAdd', response);
-			var canRemoveRoles = Q.getObject('slots.canRemove', response);
-			if (Q.isEmpty(canAddRoles)) {
-				return showInviteDialog();
-			}
-			Q.Dialogs.push({
-				title: text.invite.roles.title,
-				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
-					userId: Q.Users.communityId,
-					filter: canAddRoles
-				}),
-				apply: true,
-				onActivate: function (dialog) {
-					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
-
-					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
-						return;
-					}
-
-					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						if ((wasSelected && !canRemoveRoles.includes(label)) || (!wasSelected && !canAddRoles.includes(label))) {
-							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
-								title: text.invite.roles.NotAuthorizedToGrantRole.title
-							})
-							return false;
-						}
-
-						o.addLabel = Array.isArray(o.addLabel) ? o.addLabel : [];
-						if(wasSelected) {
-							var index = o.addLabel.indexOf(label);
-							if(index > -1) {
-								o.addLabel.splice(index, 1)
-							}
-						} else {
-							o.addLabel.push(label);
-						}
-					});
-				},
-				onClose: function () {
-					showInviteDialog();
-				}
-			});
-		});
 
     });
     return null;
@@ -3079,7 +3125,7 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
 
 /**
  * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
- * @event onMessage
+ * @event onEphemeral
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
@@ -3474,7 +3520,7 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
  * Send some payload which is not saved as a message in the stream's history,
  * but is broadcast to everyone curently connected by a socket and participating
  * or observing the stream.
- * This can be used for read receipts, "typing..." indicators, cursor movements and more.
+ * This can be used for "typing..." indicators, cursor movements and more.
  *
  * @method ephemeral
  * @param {Object} payload the payload to send, should have at least "type" specified
@@ -3482,7 +3528,7 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
  * @param {Function} [callback] receives (err, result) as parameters
  */
 Sp.ephemeral = function _Stream_ephemeral (payload, dontNotifyObservers, callback) {
-	return Stream.neglect(this.fields.publisherId, this.fields.name, payload, dontNotifyObservers, callback);
+	return Stream.ephemeral(this.fields.publisherId, this.fields.name, payload, dontNotifyObservers, callback);
 };
 
 

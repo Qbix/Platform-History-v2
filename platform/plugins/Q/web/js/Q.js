@@ -10851,7 +10851,8 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			}
 			// the partials, helpers and text should have already been processed
 			if (params.text[1]) {
-				fields = Q.extend(fields, 10, params.text[1]);
+				// fields should replace any text collisions, to avoid problems
+				fields = Q.extend({}, params.text[1], fields);
 			}
 			var tbaOld = Q.Tool.beingActivated;
 			var pbaOld = Q.Page.beingActivated;
@@ -13038,6 +13039,10 @@ Q.Visual = Q.Pointer = {
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
+			Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
+				div.removeClass('Q_touchlabel_show');
+				Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
+			}, false, true);
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
@@ -13076,9 +13081,6 @@ Q.Visual = Q.Pointer = {
 				return;
 			}
 			// if we are here, nothing matched
-			div.removeClass('Q_touchlabel_show');
-		}, false, true);
-		Q.addEventListener(document.body, 'touchend mouseup', function () {
 			div.removeClass('Q_touchlabel_show');
 		}, false, true);
 	},

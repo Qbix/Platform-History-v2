@@ -152,5 +152,10 @@
     "web3": {
         "WrongMethod": "Wrong contract method {{methodName}}",
         "ChangeWallet": "Change Wallet"
+    },
+    "labels": {
+        "addToPhonebook": "Add To My Phone Contacts",
+        "addLabel": "New Relationship",
+        "prompt": "Give it a name"
     }
 }

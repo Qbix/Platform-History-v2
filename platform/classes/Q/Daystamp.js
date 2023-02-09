@@ -168,7 +168,19 @@ Object.defineProperty(Q.Daystamp, 'epoch', {
  * @static
  */
 Object.defineProperty(Q.Daystamp, 'msPerDay', {
-	value: 8.64e7,
+	value: 86400000,
+	configurable: false,
+	writable: false,
+	enumerable: true
+});
+
+/**
+ * Number of milliseconds in a week
+ * @property msPerWeek
+ * @static
+ */
+Object.defineProperty(Q.Daystamp, 'msPerWeek', {
+	value: 604800000,
 	configurable: false,
 	writable: false,
 	enumerable: true

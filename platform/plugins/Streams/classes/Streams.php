@@ -108,10 +108,17 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can post messages, but manager must approve
-	 * @property $WRITE_LEVEL['postPending']
+	 * Can suggest actions, but manager must approve
+	 * @property $WRITE_LEVEL['suggest']
 	 * @type integer
 	 * @default 15
+	 * @final
+	 */
+	/**
+	 * Can contribute to the stream (e.g. "join the stage")
+	 * @property $WRITE_LEVEL['contribute']
+	 * @type integer
+	 * @default 18
 	 * @final
 	 */
 	/**
@@ -175,7 +182,7 @@ abstract class Streams extends Base_Streams
 		'none' => 0,
 		'join' => 10,
 		'vote' => 13,
-		'postPending' => 18,
+		'suggest' => 18,
 		'post' => 20,
 		'relate' => 23,
 		'relations' => 25,
@@ -3870,17 +3877,17 @@ abstract class Streams extends Base_Streams
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
 
-		if ($label = Q::ifset($options, 'addLabel', null)) {
+		if ($addLabel = Q::ifset($options, 'addLabel', null)) {
 			if (is_string($label)) {
-				$label = explode("\t", $label);
+				$addLabel = explode("\t", $addLabel);
 			}
-			Users_Label::addLabel($label, $publisherId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2, true);
 		}
-		if ($myLabel = Q::ifset($options, 'addMyLabel', null)) {
-			if (is_string($myLabel)) {
-				$myLabel = explode("\t", $myLabel);
+		if ($addMyLabel = Q::ifset($options, 'addMyLabel', null)) {
+			if (is_string($addMyLabel)) {
+				$addMyLabel = explode("\t", $addMyLabel);
 			}
-			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2, true);
 		}
 
 		$asUserDisplayName = Streams::displayName($asUser);
@@ -3984,16 +3991,11 @@ abstract class Streams extends Base_Streams
 			$invite->writeLevel = $writeLevel;
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
-			if ($label) {
-				if (Q::isAssociative($label)) {
-					$label = json_encode($label);
-				} elseif (is_array($label)) {
-					$label = json_encode(array("label" => $label));
-				} else {
-					$label = @compact("label");
-				}
-
-				$invite->extra = $label;
+			if (!empty($addLabel)) {
+				$invite->setExtra('addLabel', $addLabel);
+			}
+			if (!empty($addMyLabel)) {
+				$invite->setExtra('addMyLabel', $addMyLabel);
 			}
 			$invite->save();
 			$return['invite'] = $invite->exportArray();
