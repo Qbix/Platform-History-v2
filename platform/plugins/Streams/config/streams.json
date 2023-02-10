@@ -9,7 +9,7 @@
 	},
 	"Streams/participating": {
 		"type": "Streams/participating",
-		"title": "Messages about joining/leaving streams",
+		"title": "Participating",
 		"icon": "",
 		"readLevel": 0,
 		"writeLevel": 0,
