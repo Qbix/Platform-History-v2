@@ -310,8 +310,8 @@ Users.Socket = {
 					return;
 				}
 				var userId = capability.userId;
-				Users.fetch(userId, function (err) {
-					var user = this;
+				Users.fetch(userId, function (err, results) {
+					var user = results[0];
 					if (!user) {
 						client.disconnect(); // force disconnect
 						return;

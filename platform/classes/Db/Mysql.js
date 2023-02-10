@@ -110,7 +110,19 @@ function Db_Mysql(connName, dsn) {
 					return connection._original_query.apply(connection, arguments);
 				};
 			}
-			connection.on('error', function _Db_Mysql_onConnectionError(err, mq) {
+			dbm.on('error', _Db_Mysql_onConnectionError);
+			connection.on('error', _Db_Mysql_onConnectionError);
+			var mt = require('moment-timezone');
+			var timezone = Q.Config.expect(['Q', 'defaultTimezone']);
+			var offset = mt.tz.zone(timezone);
+			offset = typeof offset.utcOffset === 'function' ? offset.utcOffset(Date.now()) : offset.offset(Date.now());
+		    var dt = new Date(
+				Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
+		    ).toTimeString();
+		    var tz = (offset < 0 ? '-' : '+') + dt.substr(0,2) + ':' + dt.substr(3,2);
+			connection.query('SET NAMES UTF8; SET time_zone = "'+tz+'"');
+
+			function _Db_Mysql_onConnectionError(err, mq) {
 				if (err.code === "PROTOCOL_CONNECTION_LOST" && !dontReconnect) {
 					connection = mysqlConnection(
 						info.host,
@@ -137,20 +149,11 @@ function Db_Mysql(connName, dsn) {
 					});
 				}
 				if (!Q.Config.expect(['Db', 'survive', 'mysql'])) {
-					console.log("Db: MySQL error, see files/Q/logs/mysql_node.log");
+					console.log("Db: MySQL error, see files/Q/logs/sql_node-....log");
 					process.exit();
 					// our app will survive mysql errors, and continue operating
 				}
-			});
-			var mt = require('moment-timezone');
-			var timezone = Q.Config.expect(['Q', 'defaultTimezone']);
-			var offset = mt.tz.zone(timezone);
-			offset = typeof offset.utcOffset === 'function' ? offset.utcOffset(Date.now()) : offset.offset(Date.now());
-		    var dt = new Date(
-				Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
-		    ).toTimeString();
-		    var tz = (offset < 0 ? '-' : '+') + dt.substr(0,2) + ':' + dt.substr(3,2);
-			connection.query('SET NAMES UTF8; SET time_zone = "'+tz+'"');
+			}
 		}
 		
 		info = this.info(shardName, modifications);
