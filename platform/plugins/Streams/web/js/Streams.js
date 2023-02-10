@@ -6740,14 +6740,16 @@ function _updateMessageCache(msg) {
 			if (extra && extra.messages) {
 				this.remove(k);
 			}
-		});
+		}
+	);
 	Message.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var args = JSON.parse(k), ordinal = args[2];
 			if (ordinal && ordinal.max && ordinal.max < 0) {
 				this.remove(k);
 			}
-		});
+		}
+	);
 }
 
 function _updateRelatedTotalsCache(msg, instructions, which, change) {
@@ -6764,7 +6766,8 @@ function _updateRelatedTotalsCache(msg, instructions, which, change) {
 			if (stream[f] && stream[f][instructions.type]) {
 				stream[f][instructions.type] += change;
 			}
-		});
+		}
+	);
 }
 
 function _updateMessageTotalsCache(msg) {
@@ -6780,7 +6783,8 @@ function _updateMessageTotalsCache(msg) {
 			if (stream.messageTotals && stream.messageTotals[msg.type]) {
 				++stream.messageTotals[msg.type];
 			}
-		});
+		}
+	);
 	MTotal.get.cache.each([msg.publisherId, msg.streamName, msg.type],
 		function (k, v) {
 			var args = JSON.parse(k);
@@ -6792,7 +6796,8 @@ function _updateMessageTotalsCache(msg) {
 			}
 		}, {
 			throwIfNoIndex: false
-		});
+		}
+	);
 }
 
 function _updateParticipantCache(msg, newState, prevState, usingCached) {

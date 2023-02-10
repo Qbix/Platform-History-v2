@@ -12,8 +12,8 @@
         "username": "username"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
+        "Streams/invited": "People I invited",
+        "Streams/invitedMe": "Who invited me",
         "DoYouAgree": "Do you agree?",
         "Yes": "Yes",
         "No": "No"
@@ -60,25 +60,25 @@
         "ManageEmailSubscriptions": "manage your email subscriptions",
         "IfUnsubscribe": "If you want to unsubscribe",
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} joined",
-        "Streams\/left": "{{&call 'avatar.displayName'}} left",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "Streams/joined": "{{&call 'avatar.displayName'}} joined",
+        "Streams/left": "{{&call 'avatar.displayName'}} left",
+        "Streams/chat/message": "💬 {{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams/changed": "Changes in {{stream.fields.title}}",
+        "Streams/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams/chat/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams/chat/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams/closed": "{{stream.fields.title}} has been closed",
+        "Streams/task/progress": "Progress made on {{stream.fields.title}}",
+        "Streams/task/complete": "Task completed: {{stream.fields.title}}",
+        "Streams/task/error": "Error during: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Incoming Message",
+        "Streams/relatedTo/Streams/call": "New Call Started in {{toTitle}}",
+        "Streams/relatedTo/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams/relatedFrom/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams/call": "{{displayName}} started a real-time call"
     },
     "invite": {
         "command": "Invite",
@@ -152,7 +152,7 @@
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "commented on",
@@ -210,7 +210,7 @@
             "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
         },
         "preparing": {
-            "dialogTitle": "Turn camera or mic on\/off before you join",
+            "dialogTitle": "Turn camera or mic on/off before you join",
             "micIsOff": "Mic is off",
             "micIsOn": "Mic is on",
             "cameraIsOff": "Camera is off",
@@ -282,7 +282,7 @@
             "screenSharing": "Screen Sharing",
             "shareAnotherScreen": "Share another screen",
             "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffVideo": "Turn off camera/screen sharing",
             "turnOffAudioInput": "Mute microphone",
             "turnOffScreenSharing": "Turn off screen sharing",
             "cameraIsTurnedOff": "Camera is turned off",
@@ -349,135 +349,135 @@
         }
     },
     "types": {
-        "Streams\/invited": {
+        "Streams/invited": {
             "displayType": "Invited",
             "description": "Inbox for invitations"
         },
-        "Streams\/resource": {
+        "Streams/resource": {
             "displayType": "Resource",
             "description": "stream for managing access to a resource and posting messages about updates"
         },
-        "Streams\/task": {
+        "Streams/task": {
             "description": "for receiving updates about progress on a certain task",
             "displayType": "Task"
         },
-        "Streams\/tasks": {
+        "Streams/tasks": {
             "description": "category for tasks",
             "displayType": "Tasks"
         },
-        "Streams\/experience": {
+        "Streams/experience": {
             "description": "a common experience for members of a community",
             "displayType": "Common experience for members of a community"
         },
-        "Streams\/greeting": {
+        "Streams/greeting": {
             "description": "greeting with which a user can introduce themselves",
             "displayType": "Greeting"
         },
-        "Streams\/number": {
+        "Streams/number": {
             "displayType": "Number",
             "description": "mathematical number"
         },
-        "Streams\/date": {
+        "Streams/date": {
             "displayType": "Date",
             "description": "date"
         },
-        "Streams\/text": {
+        "Streams/text": {
             "displayType": "Text",
             "description": "body of text"
         },
-        "Streams\/text\/small": {
+        "Streams/text/small": {
             "displayType": "Text",
             "description": "small body of text"
         },
-        "Streams\/text\/medium": {
+        "Streams/text/medium": {
             "displayType": "Text",
             "description": "medium body of text"
         },
-        "Streams\/text\/emailAddress": {
+        "Streams/text/emailAddress": {
             "displayType": "Email Address",
             "description": "email address"
         },
-        "Streams\/text\/phoneNumber": {
+        "Streams/text/phoneNumber": {
             "displayType": "Phone Number",
             "description": "phone number"
         },
-        "Streams\/text\/url": {
+        "Streams/text/url": {
             "displayType": "URL",
             "description": "link on the web"
         },
-        "Streams\/image": {
+        "Streams/image": {
             "displayType": "Image",
             "description": "visual image",
             "newItem": "Add Image"
         },
-        "Streams\/images": {
+        "Streams/images": {
             "displayType": "Image Gallery",
             "description": "gallery of images"
         },
-        "Streams\/album": {
+        "Streams/album": {
             "displayType": "Album",
             "description": "an album to which various media is related"
         },
-        "Streams\/file": {
+        "Streams/file": {
             "displayType": "File",
             "description": "uploaded file",
             "newItem": "Add File"
         },
-        "Streams\/audio": {
+        "Streams/audio": {
             "displayType": "Audio Clip",
             "description": "audio clip",
             "newItem": "Add Audio"
         },
-        "Streams\/video": {
+        "Streams/video": {
             "displayType": "Video Clip",
             "description": "video clip",
             "newItem": "Add Video"
         },
-        "Streams\/pdf": {
+        "Streams/pdf": {
             "displayType": "PDF document",
             "description": "PDF document",
             "newItem": "Add PDF"
         },
-        "Streams\/live": {
+        "Streams/live": {
             "displayType": "Livestream",
             "description": "live audio or video"
         },
-        "Streams\/category": {
+        "Streams/category": {
             "displayType": "Category",
             "description": "a category to which other streams can be related"
         },
-        "Streams\/participating": {
+        "Streams/participating": {
             "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "description": "streams are related/unrelated to this when a user joins/leaves"
         },
-        "Streams\/interest": {
+        "Streams/interest": {
             "displayType": "Interest",
             "description": "represents a user's interest in a certain topic"
         },
-        "Streams\/incoming": {
+        "Streams/incoming": {
             "displayType": "Incoming",
             "description": "destination for messages sent by other users"
         },
-        "Streams\/chat": {
+        "Streams/chat": {
             "displayType": "Conversation",
             "description": "a conversation between users, with history"
         },
-        "Streams\/webrtc": {
+        "Streams/webrtc": {
             "displayType": "Teleconference",
-            "description": "an online video\/audio conference"
+            "description": "an online video/audio conference"
         },
-        "Streams\/question": {
+        "Streams/question": {
             "displayType": "Question",
             "description": "question stream",
             "newItem": "Add Question"
         },
-        "Streams\/answer": {
+        "Streams/answer": {
             "displayType": "Answer",
             "description": "answer stream"
         },
-        "Streams\/calls": {
+        "Streams/calls": {
             "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
+            "description": "category for Streams/webrtc",
             "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
