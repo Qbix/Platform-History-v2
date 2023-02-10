@@ -2365,7 +2365,7 @@ class Streams_Stream extends Base_Streams_Stream
 			if (!empty($options['plural'])) {
 				$displayType = Q::ifset($text, 'relations', $relationType, 'displayTypePlural', $displayType);
 			}
-			if (!$displayType) {
+			if ($displayType) {
 				return $displayType;
 			}
 		}
