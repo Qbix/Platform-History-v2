@@ -359,7 +359,7 @@
 	margin-top: 10px;
 }
 
-.Streams_login_appear table {
+.Streams_login_explanation {
 	width: 100%;
 }
 
@@ -385,7 +385,7 @@
 	pointer-events: none;
 }
 
-.Streams_login_appear {
+.Streams_login_explanation {
 	padding: 5px;
 }
 

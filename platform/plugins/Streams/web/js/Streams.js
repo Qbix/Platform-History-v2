@@ -47,9 +47,12 @@ Q.text.Streams = {
 			fullName: 50
 		}
 	},
-	complete: {
-		// this is just a fallback, see Streams/types/*/invite/dialog config
-		prompt: "Let friends recognize you:"
+	invite: {
+		complete: {
+			// this is just a fallback, see Streams/types/*/invite/dialog config
+			prompt: "Let friends recognize you:",
+			accept: "Accept Invite"
+		}
 	},
 	chat: {
 		noMessages: ""
@@ -5601,7 +5604,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	var register_form = $('<form method="post" class="Users_register_form" />')
 		.attr('action', Q.action("Streams/register"))
 		.attr('data-form-type', 'register')
-		.append($('<div class="Streams_login_appear" />'));
+		.append($('<div class="Streams_login_explanation" />'));
 
 	var $b = $('<button />', {
 		"type": "submit",
@@ -6303,111 +6306,121 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_showedComplete = true;
-		if (Q.Users.loggedInUserId()) {
-			_showDialog();
-		} else {
-			params.loggedInFirst = true;
-			Q.Users.login({
-				onSuccess: {'Users': _showDialog}
+		var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
+		Stream.construct(params.stream, function () {
+			Q.extend(params, {
+				stream: this,
+				communityId: params.communityId || Q.Users.communityId,
+				communityName: params.communityName || Q.Users.communityName,
+				button: Q.getObject('Q.text.Streams.invite.complete.accept')
+				     || Q.getObject('Q.text.Users.login.registerButton'),
+				prompt: (params.prompt !== undefined)
+					? params.prompt
+					: Q.getObject('Q.text.Streams.invite.complete.prompt')
 			});
-		}
+			Q.Template.render(explanationTemplateName, params, function (err, html) {
+				params.explanation = html;
+				if (Q.Users.loggedInUserId()) {
+					_showDialog();
+				} else {
+					params.loggedInFirst = true;
+					Q.Users.login({
+						onSuccess: {'Users': _showDialog},
+						noClose: true,
+						explanation: html
+					});
+				}
+			});
+		}, true);
 		function _showDialog() {
 			var templateName = params.templateName || 'Streams/templates/invited/complete';
-			params.prompt = (params.prompt !== undefined)
-				? params.prompt
-				: Q.text.Streams.login.prompt;
-			Stream.construct(params.stream, function () {
-				params.stream = this;
-				params.communityId = params.communityId || Q.Users.communityId;
-				params.communityName = params.communityName || Q.Users.communityName;
-				Q.Template.render(templateName, params,
-					function(err, html) {
-						var dialog = $(html);
-						var interval;
-						Q.Dialogs.push({
-							dialog: dialog,
-							className: 'Streams_completeInvited_dialog',
-							mask: true,
-							noClose: true,
-							closeOnEsc: false,
-							beforeClose: function () {
-								if (interval) {
-									clearInterval(interval);
-								}
-							},
-							onActivate: {'Streams.completeInvited': function _Streams_completeInvited() {
-									Streams.onInvitedDialog.handle.call(Streams, [dialog]);
-									var l = Q.text.Users.login;
-									dialog.find('#Streams_login_fullname')
-										.attr('maxlength', l.maxlengths.fullName)
-										.attr('placeholder', l.placeholders.fullName)
-										.plugin('Q/placeholders');
-									if (!Q.info.isTouchscreen) {
-										var $input = $('input', dialog).eq(0);
+			Q.Template.render(templateName, params,
+				function(err, html) {
+					var dialog = $(html);
+					var interval;
+					Q.Dialogs.push({
+						dialog: dialog,
+						className: 'Streams_completeInvited_dialog',
+						mask: true,
+						noClose: true,
+						closeOnEsc: false,
+						beforeClose: function () {
+							if (interval) {
+								clearInterval(interval);
+							}
+						},
+						onActivate: {'Streams.completeInvited': function _Streams_completeInvited() {
+								Streams.onInvitedDialog.handle.call(Streams, [dialog]);
+								var l = Q.text.Users.login;
+								dialog.find('#Streams_login_fullname')
+									.attr('maxlength', l.maxlengths.fullName)
+									.attr('placeholder', l.placeholders.fullName)
+									.plugin('Q/placeholders');
+								if (!Q.info.isTouchscreen) {
+									var $input = $('input', dialog).eq(0);
+									$input.plugin('Q/clickfocus');
+									interval = setInterval(function () {
+										if ($input.val() || $input[0] === document.activeElement) {
+											return clearInterval(interval);
+										}
 										$input.plugin('Q/clickfocus');
-										interval = setInterval(function () {
-											if ($input.val() || $input[0] === document.activeElement) {
-												return clearInterval(interval);
-											}
-											$input.plugin('Q/clickfocus');
-										}, 100);
-									}
-									var $complete_form = dialog.find('form')
-										.plugin('Q/validator')
-										.submit(function(e) {
-											e.preventDefault();
-											var baseUrl = Q.baseUrl({
-												publisherId: Q.plugins.Users.loggedInUser.id,
-												streamName: "Streams/user/firstName"
-											});
-											var url = 'Streams/basic?' + $(this).serialize();
-											Q.req(url, ['data'], function _Streams_basic(err, data) {
-												var msg = Q.firstErrorMessage(err, data);
-												if (data && data.errors) {
-													$complete_form.plugin('validator', 'invalidate',
-														Q.ajaxErrors(data.errors, ['fullName'])
-													);
-													$('input', $complete_form).eq(0)
-														.plugin('Q/clickfocus');
-													return;
-												} else if (msg) {
-													return alert(msg);
-												}
-												$complete_form.plugin('Q/validator', 'reset');
-												dialog.data('Q/dialog').close();
-												var params = {
-													evenIfNotRetained: true,
-													unlessSocket: true
-												};
-												var p = new Q.Pipe(['first', 'last'], function (params) {
-													Q.handle(Streams.onInviteComplete, data,
-														[ params.first[0], params.last[0] ]
-													);
-												});
-												Stream.refresh(Users.loggedInUser.id,
-													'Streams/user/firstName', p.fill('first'), params
+									}, 100);
+								}
+								var $complete_form = dialog.find('form')
+									.plugin('Q/validator')
+									.submit(function(e) {
+										e.preventDefault();
+										var baseUrl = Q.baseUrl({
+											publisherId: Q.plugins.Users.loggedInUser.id,
+											streamName: "Streams/user/firstName"
+										});
+										var url = 'Streams/basic?' + $(this).serialize();
+										Q.req(url, ['data'], function _Streams_basic(err, data) {
+											var msg = Q.firstErrorMessage(err, data);
+											if (data && data.errors) {
+												$complete_form.plugin('validator', 'invalidate',
+													Q.ajaxErrors(data.errors, ['fullName'])
 												);
-												Stream.refresh(Users.loggedInUser.id,
-													'Streams/user/lastName', p.fill('last'), params
-												);
-											}, {method: "post", quietly: true, baseUrl: baseUrl});
-										}).on('submit keydown', Q.debounce(function (e) {
-											if (e.type === 'keydown'
-												&& (e.keyCode || e.which) !== 13) {
+												$('input', $complete_form).eq(0)
+													.plugin('Q/clickfocus');
 												return;
+											} else if (msg) {
+												return alert(msg);
 											}
-											var val = dialog.find('#Streams_login_fullname').val();
-											Streams.onInvitedUserAction.handle.call(
-												[val, dialog]
+											$complete_form.plugin('Q/validator', 'reset');
+											dialog.data('Q/dialog').close();
+											var params = {
+												evenIfNotRetained: true,
+												unlessSocket: true
+											};
+											var p = new Q.Pipe(['first', 'last'], function (params) {
+												Q.handle(Streams.onInviteComplete, data,
+													[ params.first[0], params.last[0] ]
+												);
+											});
+											Stream.refresh(Users.loggedInUser.id,
+												'Streams/user/firstName', p.fill('first'), params
 											);
-										}, 0));
-									$('button', $complete_form).on('touchstart', function () {
-										$(this).submit();
-									});
-								}}
-						});
+											Stream.refresh(Users.loggedInUser.id,
+												'Streams/user/lastName', p.fill('last'), params
+											);
+										}, {method: "post", quietly: true, baseUrl: baseUrl});
+									}).on('submit keydown', Q.debounce(function (e) {
+										if (e.type === 'keydown'
+											&& (e.keyCode || e.which) !== 13) {
+											return;
+										}
+										var val = dialog.find('#Streams_login_fullname').val();
+										Streams.onInvitedUserAction.handle.call(
+											[val, dialog]
+										);
+									}, 0));
+								$('button', $complete_form).on('touchstart', function () {
+									$(this).submit();
+								});
+							}}
 					});
-			}, true);
+				});
 		}
 	}, "Streams.invited");
 

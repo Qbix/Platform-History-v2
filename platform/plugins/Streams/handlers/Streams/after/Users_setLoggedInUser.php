@@ -24,15 +24,15 @@ function Streams_after_Users_setLoggedInUser($params)
 		}
 	}
 
-	// if this the first time the user has ever logged in...
-	if ($user->sessionCount != 1) {
-		return;
+	// if this the first time the user has ever logged in,
+	// subscribe to main community announcements
+	if ($user->sessionCount <= 1) {
+		$communityId = Users::communityId();
+		$stream = Streams_Stream::fetch($user->id, $communityId, 'Streams/experience/main');
+		if ($stream and !$stream->subscription($user->id)) {
+			$stream->subscribe();
+		}
 	}
 	
-	// subscribe to main community announcements
-	$communityId = Users::communityId();
-	$stream = Streams_Stream::fetch($user->id, $communityId, 'Streams/experience/main');
-	if ($stream and !$stream->subscription($user->id)) {
-		$stream->subscribe();
-	}
+
 }

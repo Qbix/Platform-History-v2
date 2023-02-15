@@ -865,6 +865,7 @@
 	 *  @param  {String} [options.accountStatusURL] if passed, this URL is hit to determine if the account is complete
 	 *  @param {Function} [options.onRequireComplete] function to call if the user logged in but account is incomplete.
 	 *  It is passed the user information as well as the response from hitting accountStatusURL
+	 *  @param {String|Element} [options.explanation] Explanation to prepend to the dialog, inside a container with class Users_login_explanation
 	 *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
 	 *  @param {Boolean} [options.skipHint] pass true here to skip calling Users.Pointer.hint when login dialog appears without textbox focus
 	 *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
@@ -1568,13 +1569,13 @@
 		}
 
 		function setupResendForm(verified) {
-			var explanation = verified
+			var reason = verified
 				? $('<p id="Users_login_noPassphrase"></p>').html(Q.text.Users.login.noPassphrase)
 				: $('<p id="Users_login_notVerified"></p>').html(Q.text.Users.login.notVerified);
 			var identifier_form = $('<form method="post" />')
 				.attr('action', Q.action("Users/resend"))
 				.attr('data-form-type', 'resend')
-				.append(explanation)
+				.append(reason)
 				.append($('<div class="Q_buttons"></div>').append(
 					$('<button id="Users_login_resend" class="Q_button Users_login_start Q_main_button" />')
 						.html(Q.text.Users.login.resendButton)
@@ -1619,7 +1620,6 @@
 			var $register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
 				.attr('data-form-type', 'register')
-				//.append($('<div class="Users_login_appear" />'))
 				.append($formContent)
 				.append($('<input type="hidden" name="identifier" />').val(identifier))
 				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
@@ -1830,9 +1830,7 @@
 			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
 			.val(options.identifierType)
 		).append($a)
-		.append(
-			$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
-		).submit(function (event) {
+		.submit(function (event) {
 			$('#Users_login_identifier').attr('name', 'identifier');
 			if (!$(this).is(':visible')) {
 				event.preventDefault();
@@ -1961,10 +1959,13 @@
 			step1_form.plugin('Q/validator', 'reset', this);
 		});
 		
+		var $explanation = options.explanation
+			? $('<div class="Users_login_explanation" />').append(options.explanation)
+			: null;
 
 		login_setupDialog.dialog = Q.Dialogs.push({
 			title: Q.text.Users.login.title,
-			content: $('<div />').append(step1_div, step2_div),
+			content: $('<div />').append($explanation, step1_div, step2_div),
 			elementId: 'Users_login_dialog',
 			className: 'Users_login_dialog Q_scrollToBottom ' + options.className,
 			fullscreen: !!options.fullscreen,
