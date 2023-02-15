@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}} ನಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} ಗೆ {{relationDisplayType}} ನಂತೆ ಸೇರಿಸಲಾಗಿದೆ",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ನಿಮ್ಮನ್ನು ಪ್ರಸ್ತಾಪಿಸಿದ್ದಾರೆ",
-        "Streams\/call": "{{displayName}} ನೈಜ-ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ"
+        "Streams\/call": "{{displayName}} ನೈಜ-ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} ಸೇರಿದ್ದಾರೆ",
+        "Streams\/left": "{{&call 'avatar.displayName'}} ಉಳಿದಿದೆ"
     },
     "invite": {
         "command": "ಆಹ್ವಾನಿಸಿ",
@@ -116,7 +118,24 @@
             "text": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಲಾಗಿದೆ. {{ClickOrTap}} ಸ್ವೀಕರಿಸಲು ಮತ್ತು ಸೇರಲು ಇಲ್ಲಿದೆ."
         },
         "Invite": "ಆಹ್ವಾನಿಸಿ",
-        "Share": "ಹಂಚಿಕೊಳ್ಳಿ"
+        "Share": "ಹಂಚಿಕೊಳ್ಳಿ",
+        "roles": {
+            "title": "ಆಹ್ವಾನಿತ ಬಳಕೆದಾರರಿಗೆ ಪಾತ್ರಗಳನ್ನು ನೀಡುವುದೇ?",
+            "NotAuthorizedToGrantRole": {
+                "title": "ಕ್ಷಮಿಸಿ",
+                "alert": "ಈ ಪಾತ್ರವನ್ನು ನೀಡಲು ನಿಮಗೆ ಅಧಿಕಾರವಿಲ್ಲ"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "ಕ್ಷಮಿಸಿ",
+                "alert": "ಈ ಪಾತ್ರವನ್ನು ತೆಗೆದುಹಾಕಲು ನಿಮಗೆ ಅಧಿಕಾರವಿಲ್ಲ"
+            }
+        },
+        "labels": {
+            "title": "ನಿಮ್ಮ ಸಂಬಂಧ ಏನು?"
+        },
+        "complete": {
+            "HasInvitedYou": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "ಟೆಲಿಕಾನ್ಫರೆನ್ಸ್ ಮುಗಿದಿದೆ"
         },
         "requestSpeakDialog": {
-            "msg": "ಸಭೆಯಲ್ಲಿ ಪ್ರಸ್ತುತ {{count}} ಜನರು ಮಾತನಾಡುತ್ತಿದ್ದಾರೆ. ಮಾತು ಮುಗಿಸಲು {{seconds}} ಸೆಕೆಂಡುಗಳನ್ನು ಅನುಮತಿಸಿದ ನಂತರ ನೀವು ಅವುಗಳಲ್ಲಿ ಒಂದನ್ನು ಬದಲಾಯಿಸಲು ಬಯಸುವಿರಾ?"
+            "msg": "ಸಭೆಯಲ್ಲಿ ಪ್ರಸ್ತುತ {{count}} ಜನರು ಮಾತನಾಡುತ್ತಿದ್ದಾರೆ. ಮಾತು ಮುಗಿಸಲು {{seconds}} ಸೆಕೆಂಡುಗಳನ್ನು ಅನುಮತಿಸಿದ ನಂತರ ನೀವು ಅವುಗಳಲ್ಲಿ ಒಂದನ್ನು ಬದಲಾಯಿಸಲು ಬಯಸುವಿರಾ?",
+            "dialogTitle": "ಮಾತನಾಡಲು ವಿನಂತಿ"
+        },
+        "fbLive": {
+            "dialogTitle": "ಫೇಸ್‌ಬುಕ್ ಲೈವ್ ಸ್ಟ್ರೀಮಿಂಗ್ ಪ್ರಾರಂಭವಾಗಿದೆ"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "ಪ್ರಸಾರವನ್ನು ನಿರ್ವಹಿಸಿ"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "ಪ್ರಶ್ನೆ",
-            "description": "ಪ್ರಶ್ನೆ ಸ್ಟ್ರೀಮ್"
+            "description": "ಪ್ರಶ್ನೆ ಸ್ಟ್ರೀಮ್",
+            "newItem": "ಪ್ರಶ್ನೆಯನ್ನು ಸೇರಿಸಿ"
         },
         "Streams\/answer": {
             "displayType": "ಉತ್ತರ",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ",
         "ContentPlaceholder": "ಜನರು ಉತ್ತರಿಸಲು ಸಹಾಯ ಮಾಡಲು ಯಾವುದೇ ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಹಾಕಿ",
         "ErrorTitle": "ಪ್ರಶ್ನೆ ಅಗತ್ಯವಿದೆ",
-        "Placeholder": "ಪ್ಲೇಸ್‌ಹೋಲ್ಡರ್"
+        "Placeholder": "ಪ್ಲೇಸ್‌ಹೋಲ್ಡರ್",
+        "EditQuestion": "ಪ್ರಶ್ನೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+        "NewPossibleAnswer": "ಹೊಸ ಸಂಭವನೀಯ ಉತ್ತರ",
+        "answerText": "ಪಠ್ಯ",
+        "HideUntilAnswered": "ಉತ್ತರಿಸುವವರೆಗೆ ಮರೆಮಾಡಿ",
+        "CantChangeAnswers": "ಉತ್ತರಗಳನ್ನು ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+        "Save": "ಉಳಿಸಿ",
+        "Send": "ಕಳುಹಿಸು",
+        "TitleRequired": "ಶೀರ್ಷಿಕೆ ಅಗತ್ಯವಿದೆ!",
+        "AreYouSure": "ನೀವು ಖಚಿತವಾಗಿರುವಿರಾ?"
     },
     "experience": {
         "NewExperience": "ಹೊಸ ಅನುಭವ",
@@ -560,5 +596,18 @@
         "configurationSaved": "ಸಂರಚನೆಯನ್ನು ಉಳಿಸಲಾಗಿದೆ",
         "error": "ಏನೋ ತಪ್ಪಾಗಿದೆ",
         "privacySettings": "ಗೌಪ್ಯತಾ ಸೆಟ್ಟಿಂಗ್ಗಳು"
+    },
+    "avatar": {
+        "firstName": "ಮೊದಲ ಹೆಸರು",
+        "lastName": "ಕೊನೆಯ ಹೆಸರು",
+        "username": "ಬಳಕೆದಾರ ಹೆಸರು"
+    },
+    "login": {
+        "prompt": "ಸ್ನೇಹಿತರು ನಿಮ್ಮನ್ನು ಗುರುತಿಸಲಿ:",
+        "newUser": "ಅಥವಾ ಕೆಳಗೆ ಹೊಸ ಖಾತೆಯನ್ನು ರಚಿಸಿ",
+        "picTooltip": "ನೀವು ಈ ಚಿತ್ರವನ್ನು ನಂತರ ಬದಲಾಯಿಸಬಹುದು",
+        "placeholder": {
+            "fullName": "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ"
+        }
     }
 }

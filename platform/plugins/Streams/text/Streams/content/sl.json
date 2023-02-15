@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} v {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano v {{toTitle}} kot {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} vas je omenil v komentarju",
-        "Streams\/call": "{{displayName}} je začel klic v realnem času"
+        "Streams\/call": "{{displayName}} je začel klic v realnem času",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} se je pridružil",
+        "Streams\/left": "{{&call 'avatar.displayName'}} levo"
     },
     "invite": {
         "command": "Povabi",
@@ -116,7 +118,24 @@
             "text": "Povabljeni ste. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
         },
         "Invite": "Povabi",
-        "Share": "Deliti"
+        "Share": "Deliti",
+        "roles": {
+            "title": "Želite dodeliti vloge povabljenim uporabnikom?",
+            "NotAuthorizedToGrantRole": {
+                "title": "oprosti",
+                "alert": "Niste pooblaščeni za dodelitev te vloge"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "oprosti",
+                "alert": "Niste pooblaščeni za odstranitev te vloge"
+            }
+        },
+        "labels": {
+            "title": "Kakšen je vaš odnos?"
+        },
+        "complete": {
+            "HasInvitedYou": "vas je povabil na:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telekonferenca je končana"
         },
         "requestSpeakDialog": {
-            "msg": "Trenutno na sestanku govori {{count}} oseb. Ali želite zamenjati enega od njih, potem ko jim dovolite {{seconds}} sekund, da nehajo govoriti?"
+            "msg": "Trenutno na sestanku govori {{count}} oseb. Ali želite zamenjati enega od njih, potem ko jim dovolite {{seconds}} sekund, da nehajo govoriti?",
+            "dialogTitle": "Zahteva za govor"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook prenos v živo se je začel"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Upravljanje oddajanja"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "vprašanje",
-            "description": "tok vprašanj"
+            "description": "tok vprašanj",
+            "newItem": "Dodaj vprašanje"
         },
         "Streams\/answer": {
             "displayType": "Odgovori",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Vnesite svoje vprašanje",
         "ContentPlaceholder": "Tukaj vnesite vse dodatne informacije, da bodo ljudje lažje odgovorili",
         "ErrorTitle": "Zahtevano vprašanje",
-        "Placeholder": "Rezervirano mesto"
+        "Placeholder": "Rezervirano mesto",
+        "EditQuestion": "Uredi vprašanje",
+        "NewPossibleAnswer": "Nov možen odgovor",
+        "answerText": "Besedilo",
+        "HideUntilAnswered": "Skrij do odgovora",
+        "CantChangeAnswers": "Odgovorov ni mogoče spremeniti",
+        "Save": "Shrani",
+        "Send": "Pošlji",
+        "TitleRequired": "Zahtevan naslov!",
+        "AreYouSure": "Ali si prepričan?"
     },
     "experience": {
         "NewExperience": "Nova izkušnja",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfiguracija shranjena",
         "error": "Nekaj je šlo narobe",
         "privacySettings": "Nastavitve zasebnosti"
+    },
+    "avatar": {
+        "firstName": "ime",
+        "lastName": "priimek",
+        "username": "uporabniško ime"
+    },
+    "login": {
+        "prompt": "Naj vas prijatelji prepoznajo:",
+        "newUser": "ali ustvarite nov račun spodaj",
+        "picTooltip": "To sliko lahko pozneje spremenite",
+        "placeholder": {
+            "fullName": "Vnesite vaše polno ime"
+        }
     }
 }

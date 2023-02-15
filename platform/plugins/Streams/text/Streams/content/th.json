@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{toTitle}}",
         "Streams\/relatedFrom\/*": "เพิ่มใน {{toTitle}} เป็น {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} พูดถึงคุณในความคิดเห็น",
-        "Streams\/call": "{{displayName}} เริ่มการโทรแบบเรียลไทม์"
+        "Streams\/call": "{{displayName}} เริ่มการโทรแบบเรียลไทม์",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} เข้าร่วม",
+        "Streams\/left": "เหลืออีก {{&call 'avatar.displayName'}}"
     },
     "invite": {
         "command": "เชิญชวน",
@@ -116,7 +118,24 @@
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
         },
         "Invite": "เชิญชวน",
-        "Share": "แบ่งปัน"
+        "Share": "แบ่งปัน",
+        "roles": {
+            "title": "มอบบทบาทให้กับผู้ใช้ที่ได้รับเชิญ?",
+            "NotAuthorizedToGrantRole": {
+                "title": "ขอโทษ",
+                "alert": "คุณไม่ได้รับอนุญาตให้อนุญาตบทบาทนี้"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "ขอโทษ",
+                "alert": "คุณไม่ได้รับอนุญาตให้ลบบทบาทนี้"
+            }
+        },
+        "labels": {
+            "title": "ความสัมพันธ์ของคุณคืออะไร?"
+        },
+        "complete": {
+            "HasInvitedYou": "ได้เชิญคุณไปที่:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "สิ้นสุดการประชุมทางไกล"
         },
         "requestSpeakDialog": {
-            "msg": "ขณะนี้มี {{count}} คนกำลังพูดอยู่ในที่ประชุม คุณต้องการแทนที่อันใดอันหนึ่งหลังจากที่ปล่อยให้พวกเขาพูดจบ {{seconds}} วินาทีหรือไม่?"
+            "msg": "ขณะนี้มี {{count}} คนกำลังพูดอยู่ในที่ประชุม คุณต้องการแทนที่อันใดอันหนึ่งหลังจากที่ปล่อยให้พวกเขาพูดจบ {{seconds}} วินาทีหรือไม่?",
+            "dialogTitle": "ขอให้พูด"
+        },
+        "fbLive": {
+            "dialogTitle": "เริ่มสตรีมสดบน Facebook แล้ว"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "จัดการการออกอากาศ"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "คำถาม",
-            "description": "สตรีมคำถาม"
+            "description": "สตรีมคำถาม",
+            "newItem": "เพิ่มคำถาม"
         },
         "Streams\/answer": {
             "displayType": "ตอบ",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "พิมพ์คำถามของคุณ",
         "ContentPlaceholder": "ใส่ข้อมูลเพิ่มเติมที่นี่เพื่อช่วยให้ผู้คนตอบ",
         "ErrorTitle": "มีคำถาม",
-        "Placeholder": "ตัวยึด"
+        "Placeholder": "ตัวยึด",
+        "EditQuestion": "แก้ไขคำถาม",
+        "NewPossibleAnswer": "ใหม่ คำตอบที่เป็นไปได้",
+        "answerText": "ข้อความ",
+        "HideUntilAnswered": "ซ่อนจนกว่าจะได้รับคำตอบ",
+        "CantChangeAnswers": "ไม่สามารถเปลี่ยนคำตอบได้",
+        "Save": "บันทึก",
+        "Send": "ส่ง",
+        "TitleRequired": "ต้องระบุชื่อเรื่อง!",
+        "AreYouSure": "คุณแน่ใจไหม?"
     },
     "experience": {
         "NewExperience": "ประสบการณ์ใหม่",
@@ -560,5 +596,18 @@
         "configurationSaved": "บันทึกการกำหนดค่าแล้ว",
         "error": "บางอย่างผิดพลาด",
         "privacySettings": "การตั้งค่าความเป็นส่วนตัว"
+    },
+    "avatar": {
+        "firstName": "ชื่อจริง",
+        "lastName": "นามสกุล",
+        "username": "ชื่อผู้ใช้"
+    },
+    "login": {
+        "prompt": "ให้เพื่อนรู้จักคุณ:",
+        "newUser": "หรือสร้างบัญชีใหม่ด้านล่าง",
+        "picTooltip": "คุณสามารถเปลี่ยนรูปภาพนี้ได้ในภายหลัง",
+        "placeholder": {
+            "fullName": "ใส่ชื่อเต็มของคุณ"
+        }
     }
 }

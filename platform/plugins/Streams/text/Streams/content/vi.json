@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} mới trong {{toTitle}}",
         "Streams\/relatedFrom\/*": "Đã thêm vào {{toTitle}} với tên {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} đã đề cập đến bạn trong một nhận xét",
-        "Streams\/call": "{{displayName}} đã bắt đầu cuộc gọi trong thời gian thực"
+        "Streams\/call": "{{displayName}} đã bắt đầu cuộc gọi trong thời gian thực",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} đã tham gia",
+        "Streams\/left": "{{&call 'avatar.displayName'}} còn lại"
     },
     "invite": {
         "command": "Mời",
@@ -116,7 +118,24 @@
             "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
         },
         "Invite": "Mời",
-        "Share": "Đăng lại"
+        "Share": "Đăng lại",
+        "roles": {
+            "title": "Cấp vai trò cho người dùng được mời?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Lấy làm tiếc",
+                "alert": "Bạn không được phép cấp vai trò này"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Lấy làm tiếc",
+                "alert": "Bạn không được phép xóa vai trò này"
+            }
+        },
+        "labels": {
+            "title": "Mối quan hệ của bạn là gì?"
+        },
+        "complete": {
+            "HasInvitedYou": "đã mời bạn:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Hội nghị từ xa đã kết thúc"
         },
         "requestSpeakDialog": {
-            "msg": "Hiện có {{count}} người đang phát biểu trong cuộc họp. Bạn có muốn thay thế một trong số họ sau khi cho phép họ nói xong {{seconds}} giây không?"
+            "msg": "Hiện có {{count}} người đang phát biểu trong cuộc họp. Bạn có muốn thay thế một trong số họ sau khi cho phép họ nói xong {{seconds}} giây không?",
+            "dialogTitle": "Yêu cầu nói"
+        },
+        "fbLive": {
+            "dialogTitle": "Phát trực tiếp trên Facebook đã bắt đầu"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Quản lý phát sóng"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Câu hỏi",
-            "description": "dòng câu hỏi"
+            "description": "dòng câu hỏi",
+            "newItem": "Thêm câu hỏi"
         },
         "Streams\/answer": {
             "displayType": "Câu trả lời",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Nhập câu hỏi của bạn",
         "ContentPlaceholder": "Đặt bất kỳ thông tin bổ sung nào ở đây để giúp mọi người trả lời",
         "ErrorTitle": "Câu hỏi yêu cầu",
-        "Placeholder": "Trình giữ chỗ"
+        "Placeholder": "Trình giữ chỗ",
+        "EditQuestion": "Chỉnh sửa câu hỏi",
+        "NewPossibleAnswer": "Câu trả lời khả thi mới",
+        "answerText": "Chữ",
+        "HideUntilAnswered": "Ẩn cho đến khi trả lời",
+        "CantChangeAnswers": "Không thể thay đổi câu trả lời",
+        "Save": "Cứu",
+        "Send": "Gửi",
+        "TitleRequired": "Tiêu đề yêu cầu!",
+        "AreYouSure": "Bạn có chắc không?"
     },
     "experience": {
         "NewExperience": "Kinh nghiệm mới",
@@ -560,5 +596,18 @@
         "configurationSaved": "Đã lưu cấu hình",
         "error": "Đã xảy ra sự cố",
         "privacySettings": "Những thiết lập riêng tư"
+    },
+    "avatar": {
+        "firstName": "họ",
+        "lastName": "họ",
+        "username": "tên tài khoản"
+    },
+    "login": {
+        "prompt": "Hãy để bạn bè nhận ra bạn:",
+        "newUser": "hoặc tạo tài khoản mới bên dưới",
+        "picTooltip": "Bạn có thể thay đổi hình ảnh này sau",
+        "placeholder": {
+            "fullName": "Nhập tên đầy đủ của bạn"
+        }
     }
 }

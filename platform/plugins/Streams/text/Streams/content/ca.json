@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} a {{toTitle}}",
         "Streams\/relatedFrom\/*": "S&#39;ha afegit a {{toTitle}} com a {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} t&#39;ha mencionat en un comentari",
-        "Streams\/call": "{{displayName}} va iniciar una trucada en temps real"
+        "Streams\/call": "{{displayName}} va iniciar una trucada en temps real",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} s&#39;ha unit",
+        "Streams\/left": "{{&call 'avatar.displayName'}} va sortir"
     },
     "invite": {
         "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Ara pots enganxar aquest enllaç en algun lloc per convidar persones",
         "command": "Convidar",
         "Invite": "Convidar",
-        "Share": "Compartir"
+        "Share": "Compartir",
+        "roles": {
+            "title": "Concedir rols als usuaris convidats?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Ho sento",
+                "alert": "No esteu autoritzat per concedir aquesta funció"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Ho sento",
+                "alert": "No esteu autoritzat per eliminar aquesta funció"
+            }
+        },
+        "labels": {
+            "title": "Quina és la teva relació?"
+        },
+        "complete": {
+            "HasInvitedYou": "t&#39;ha convidat a:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Configuració de transmissió"
         },
         "requestSpeakDialog": {
-            "msg": "Actualment hi ha {{count}} persones que parlen a la reunió. Vols substituir-ne un després de deixar-los {{seconds}} segons per acabar de parlar?"
+            "msg": "Actualment hi ha {{count}} persones que parlen a la reunió. Vols substituir-ne un després de deixar-los {{seconds}} segons per acabar de parlar?",
+            "dialogTitle": "Sol·licitud de Parla"
+        },
+        "fbLive": {
+            "dialogTitle": "Va començar la transmissió en directe de Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Gestiona la difusió"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Pregunta",
-            "description": "corrent de preguntes"
+            "description": "corrent de preguntes",
+            "newItem": "Afegeix una pregunta"
         },
         "Streams\/answer": {
             "displayType": "Respon",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Escriviu la vostra pregunta",
         "ContentPlaceholder": "Posa aquí qualsevol informació addicional per ajudar la gent a respondre",
         "ErrorTitle": "Pregunta necessària",
-        "Placeholder": "Posseïdor del lloc"
+        "Placeholder": "Posseïdor del lloc",
+        "EditQuestion": "Edita la pregunta",
+        "NewPossibleAnswer": "Nova possible resposta",
+        "answerText": "Text",
+        "HideUntilAnswered": "Amaga fins que respongui",
+        "CantChangeAnswers": "No es poden canviar les respostes",
+        "Save": "Desa",
+        "Send": "Enviar",
+        "TitleRequired": "Títol obligatori!",
+        "AreYouSure": "Estàs segur?"
     },
     "experience": {
         "NewExperience": "Nova experiència",
@@ -566,5 +602,18 @@
         "configurationSaved": "S&#39;ha desat la configuració",
         "error": "Alguna cosa ha anat malament",
         "privacySettings": "Configuració de privacitat"
+    },
+    "avatar": {
+        "firstName": "nom",
+        "lastName": "cognom",
+        "username": "nom d&#39;usuari"
+    },
+    "login": {
+        "prompt": "Deixa que els teus amics et reconeguin:",
+        "newUser": "o crea un compte nou a continuació",
+        "picTooltip": "Podeu canviar aquesta imatge més endavant",
+        "placeholder": {
+            "fullName": "Introdueix el teu nom complet"
+        }
     }
 }

@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Новае {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Дададзена ў {{toTitle}} як {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} згадаў вас у каментарыі",
-        "Streams\/call": "{{displayName}} пачаў званок у рэжыме рэальнага часу"
+        "Streams\/call": "{{displayName}} пачаў званок у рэжыме рэальнага часу",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} далучыўся",
+        "Streams\/left": "{{&call 'avatar.displayName'}} засталося"
     },
     "invite": {
         "messageContent": "{{displayName}} запрасіў вас на {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Цяпер вы можаце ўставіць гэтую спасылку куды-небудзь, каб запрасіць людзей",
         "command": "Запрасіць",
         "Invite": "Запрасіць",
-        "Share": "падзяліцца"
+        "Share": "падзяліцца",
+        "roles": {
+            "title": "Даць ролі запрошаным карыстальнікам?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Прабачце",
+                "alert": "Вы не маеце права даць гэтую ролю"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Прабачце",
+                "alert": "Вы не ўпаўнаважаны выдаляць гэту ролю"
+            }
+        },
+        "labels": {
+            "title": "Якія ў вас адносіны?"
+        },
+        "complete": {
+            "HasInvitedYou": "запрасіў вас:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Налады струменевай перадачы"
         },
         "requestSpeakDialog": {
-            "msg": "Зараз на сустрэчы выступае {{count}} чалавек. Вы хочаце замяніць аднаго з іх пасля таго, як яны скончаць гаварыць на {{seconds}} секунд?"
+            "msg": "Зараз на сустрэчы выступае {{count}} чалавек. Вы хочаце замяніць аднаго з іх пасля таго, як яны скончаць гаварыць на {{seconds}} секунд?",
+            "dialogTitle": "Запыт на выступленне"
+        },
+        "fbLive": {
+            "dialogTitle": "Пачалася жывая трансляцыя ў Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Кіраванне трансляцыяй"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Пытанне",
-            "description": "паток пытанняў"
+            "description": "паток пытанняў",
+            "newItem": "Дадаць пытанне"
         },
         "Streams\/answer": {
             "displayType": "Адкажыце",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Увядзіце сваё пытанне",
         "ContentPlaceholder": "Змяшчайце тут любую дадатковую інфармацыю, каб дапамагчы людзям адказаць",
         "ErrorTitle": "Патрабуецца пытанне",
-        "Placeholder": "Запаўняльнік"
+        "Placeholder": "Запаўняльнік",
+        "EditQuestion": "Рэдагаваць пытанне",
+        "NewPossibleAnswer": "Новы магчымы адказ",
+        "answerText": "Тэкст",
+        "HideUntilAnswered": "Хавацца, пакуль не адкажуць",
+        "CantChangeAnswers": "Немагчыма змяніць адказы",
+        "Save": "Захаваць",
+        "Send": "Адправіць",
+        "TitleRequired": "Патрабуецца назва!",
+        "AreYouSure": "Вы ўпэўнены?"
     },
     "experience": {
         "NewExperience": "Новы досвед",
@@ -566,5 +602,18 @@
         "configurationSaved": "Канфігурацыя захавана",
         "error": "Нешта пайшло не так",
         "privacySettings": "Налады прыватнасці"
+    },
+    "avatar": {
+        "firstName": "імя",
+        "lastName": "прозвішча",
+        "username": "імя карыстальніка"
+    },
+    "login": {
+        "prompt": "Няхай сябры пазнаюць вас:",
+        "newUser": "або стварыць новы ўліковы запіс ніжэй",
+        "picTooltip": "Вы можаце змяніць гэты малюнак пазней",
+        "placeholder": {
+            "fullName": "Увядзіце сваё поўнае імя"
+        }
     }
 }

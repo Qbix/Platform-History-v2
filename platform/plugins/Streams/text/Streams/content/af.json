@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "By {{toTitle}} gevoeg as {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} het jou in &#39;n opmerking genoem",
-        "Streams\/call": "{{displayName}} het &#39;n intydse oproep begin"
+        "Streams\/call": "{{displayName}} het &#39;n intydse oproep begin",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} het aangesluit",
+        "Streams\/left": "{{&call 'avatar.displayName'}} oor"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Jy kan nou hierdie skakel iewers plak om mense uit te nooi",
         "command": "Nooi",
         "Invite": "Nooi",
-        "Share": "Deel"
+        "Share": "Deel",
+        "roles": {
+            "title": "Verleen rolle aan genooide gebruikers?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Jammer",
+                "alert": "Jy is nie gemagtig om hierdie rol toe te staan nie"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Jammer",
+                "alert": "Jy is nie gemagtig om hierdie rol te verwyder nie"
+            }
+        },
+        "labels": {
+            "title": "Wat is jou verhouding?"
+        },
+        "complete": {
+            "HasInvitedYou": "het jou genooi om:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Stroominstellings"
         },
         "requestSpeakDialog": {
-            "msg": "Daar is tans {{count}} mense wat in die vergadering praat. Wil jy een van hulle vervang nadat jy hulle {{seconds}} sekondes toegelaat het om klaar te praat?"
+            "msg": "Daar is tans {{count}} mense wat in die vergadering praat. Wil jy een van hulle vervang nadat jy hulle {{seconds}} sekondes toegelaat het om klaar te praat?",
+            "dialogTitle": "Versoek om te praat"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook regstreekse streaming het begin"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Bestuur uitsending"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Vraag",
-            "description": "vraestroom"
+            "description": "vraestroom",
+            "newItem": "Voeg vraag by"
         },
         "Streams\/answer": {
             "displayType": "Antwoord",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Tik jou vraag",
         "ContentPlaceholder": "Plaas enige bykomende inligting hier om mense te help antwoord",
         "ErrorTitle": "Vraag vereis",
-        "Placeholder": "Plekhouer"
+        "Placeholder": "Plekhouer",
+        "EditQuestion": "Redigeer Vraag",
+        "NewPossibleAnswer": "Nuwe moontlike antwoord",
+        "answerText": "Teks",
+        "HideUntilAnswered": "Steek weg totdat dit beantwoord word",
+        "CantChangeAnswers": "Kan nie antwoorde verander nie",
+        "Save": "Stoor",
+        "Send": "Stuur",
+        "TitleRequired": "Titel vereis!",
+        "AreYouSure": "Is jy seker?"
     },
     "experience": {
         "NewExperience": "Nuwe ervaring",
@@ -566,5 +602,18 @@
         "configurationSaved": "Opstelling gestoor",
         "error": "Iets het verkeerd geloop",
         "privacySettings": "Privaatheid instellings"
+    },
+    "avatar": {
+        "firstName": "eerste naam",
+        "lastName": "van",
+        "username": "gebruikernaam"
+    },
+    "login": {
+        "prompt": "Laat vriende jou herken:",
+        "newUser": "of skep &#39;n nuwe rekening hieronder",
+        "picTooltip": "Jy kan hierdie prentjie later verander",
+        "placeholder": {
+            "fullName": "Vul u volle naam in"
+        }
     }
 }

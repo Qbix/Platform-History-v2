@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}}의 새로운 {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}}에 {{relationDisplayType}}(으)로 추가됨",
         "Streams\/mention": "{{&call 'avatar.displayName'}}이(가) 댓글에서 나를 멘션했습니다.",
-        "Streams\/call": "{{displayName}} 실시간 통화를 시작했습니다."
+        "Streams\/call": "{{displayName}} 실시간 통화를 시작했습니다.",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} 가입",
+        "Streams\/left": "{{&call 'avatar.displayName'}} 남음"
     },
     "invite": {
         "command": "초대",
@@ -116,7 +118,24 @@
             "text": "당신은 초대되었습니다. {{ClickOrTap}} 여기에서 수락하고 가입하세요."
         },
         "Invite": "초대",
-        "Share": "공유하다"
+        "Share": "공유하다",
+        "roles": {
+            "title": "초대된 사용자에게 역할을 부여하시겠습니까?",
+            "NotAuthorizedToGrantRole": {
+                "title": "죄송합니다",
+                "alert": "이 역할을 부여할 권한이 없습니다."
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "죄송합니다",
+                "alert": "이 역할을 제거할 권한이 없습니다."
+            }
+        },
+        "labels": {
+            "title": "당신의 관계는 무엇입니까?"
+        },
+        "complete": {
+            "HasInvitedYou": "님이 귀하를 초대했습니다:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "원격 회의 종료"
         },
         "requestSpeakDialog": {
-            "msg": "현재 {{count}}명이 회의에서 말하고 있습니다. {{seconds}}초 동안 말을 마친 후 그 중 하나를 교체하시겠습니까?"
+            "msg": "현재 {{count}}명이 회의에서 말하고 있습니다. {{seconds}}초 동안 말을 마친 후 그 중 하나를 교체하시겠습니까?",
+            "dialogTitle": "발언 요청"
+        },
+        "fbLive": {
+            "dialogTitle": "페이스북 라이브 스트리밍 시작"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "방송 관리"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "의문",
-            "description": "질문 스트림"
+            "description": "질문 스트림",
+            "newItem": "질문 추가"
         },
         "Streams\/answer": {
             "displayType": "대답",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "질문을 입력하세요",
         "ContentPlaceholder": "사람들이 답변하는 데 도움이 되도록 여기에 추가 정보를 입력하세요.",
         "ErrorTitle": "질문 필수",
-        "Placeholder": "자리 표시자"
+        "Placeholder": "자리 표시자",
+        "EditQuestion": "질문 편집",
+        "NewPossibleAnswer": "새로운 가능한 답변",
+        "answerText": "텍스트",
+        "HideUntilAnswered": "대답할 때까지 숨기기",
+        "CantChangeAnswers": "답변을 변경할 수 없습니다.",
+        "Save": "구하다",
+        "Send": "보내다",
+        "TitleRequired": "제목 필수!",
+        "AreYouSure": "확실합니까?"
     },
     "experience": {
         "NewExperience": "새로운 경험",
@@ -560,5 +596,18 @@
         "configurationSaved": "구성 저장됨",
         "error": "문제가 발생했습니다.",
         "privacySettings": "개인 정보 설정"
+    },
+    "avatar": {
+        "firstName": "이름",
+        "lastName": "성",
+        "username": "사용자 이름"
+    },
+    "login": {
+        "prompt": "친구들이 당신을 알아보도록 하세요:",
+        "newUser": "또는 아래에서 새 계정을 만드십시오.",
+        "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
+        "placeholder": {
+            "fullName": "당신의 성명을 입력하십시오"
+        }
     }
 }

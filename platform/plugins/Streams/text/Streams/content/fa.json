@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "جدید {{relationDisplayType}} در {{toTitle}}",
         "Streams\/relatedFrom\/*": "اضافه شده به {{toTitle}} به عنوان {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} از شما در یک نظر نام برد",
-        "Streams\/call": "{{displayName}} یک تماس هم‌زمان را شروع کرد"
+        "Streams\/call": "{{displayName}} یک تماس هم‌زمان را شروع کرد",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} ملحق شد",
+        "Streams\/left": "{{&call 'avatar.displayName'}} باقی مانده است"
     },
     "invite": {
         "command": "دعوت",
@@ -116,7 +118,24 @@
             "text": "شما دعوت شده اید. {{ClickOrTap}} اینجا را بپذیرید و بپیوندید."
         },
         "Invite": "دعوت",
-        "Share": "اشتراک گذاری"
+        "Share": "اشتراک گذاری",
+        "roles": {
+            "title": "اعطای نقش به کاربران دعوت شده؟",
+            "NotAuthorizedToGrantRole": {
+                "title": "متاسف",
+                "alert": "شما مجاز به اعطای این نقش نیستید"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "متاسف",
+                "alert": "شما مجاز به حذف این نقش نیستید"
+            }
+        },
+        "labels": {
+            "title": "رابطه شما چیست؟"
+        },
+        "complete": {
+            "HasInvitedYou": "شما را دعوت کرده است:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "کنفرانس تلفنی پایان یافت"
         },
         "requestSpeakDialog": {
-            "msg": "در حال حاضر {{count}} نفر در جلسه صحبت می کنند. آیا می خواهید یکی از آنها را پس از اینکه {{seconds}} ثانیه اجازه دادید صحبت خود را تمام کنند، جایگزین کنید؟"
+            "msg": "در حال حاضر {{count}} نفر در جلسه صحبت می کنند. آیا می خواهید یکی از آنها را پس از اینکه {{seconds}} ثانیه اجازه دادید صحبت خود را تمام کنند، جایگزین کنید؟",
+            "dialogTitle": "درخواست صحبت کردن"
+        },
+        "fbLive": {
+            "dialogTitle": "پخش زنده فیسبوک آغاز شد"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "مدیریت پخش"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "سوال",
-            "description": "جریان سوال"
+            "description": "جریان سوال",
+            "newItem": "اضافه کردن سوال"
         },
         "Streams\/answer": {
             "displayType": "پاسخ",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "سوال خود را تایپ کنید",
         "ContentPlaceholder": "هر گونه اطلاعات اضافی را در اینجا قرار دهید تا به افراد کمک کند پاسخ دهند",
         "ErrorTitle": "سوال مورد نیاز",
-        "Placeholder": "مکان نگهدار"
+        "Placeholder": "مکان نگهدار",
+        "EditQuestion": "ویرایش سوال",
+        "NewPossibleAnswer": "پاسخ احتمالی جدید",
+        "answerText": "متن",
+        "HideUntilAnswered": "پنهان کنید تا زمانی که پاسخ داده شود",
+        "CantChangeAnswers": "نمی توان پاسخ ها را تغییر داد",
+        "Save": "صرفه جویی",
+        "Send": "ارسال",
+        "TitleRequired": "عنوان لازم است!",
+        "AreYouSure": "مطمئنی؟"
     },
     "experience": {
         "NewExperience": "تجربه جدید",
@@ -560,5 +596,18 @@
         "configurationSaved": "پیکربندی ذخیره شد",
         "error": "مشکلی پیش آمد",
         "privacySettings": "تنظیمات حریم خصوصی"
+    },
+    "avatar": {
+        "firstName": "نام کوچک",
+        "lastName": "نام خانوادگی",
+        "username": "نام کاربری"
+    },
+    "login": {
+        "prompt": "اجازه دهید دوستان شما را بشناسند:",
+        "newUser": "یا یک حساب کاربری جدید در زیر ایجاد کنید",
+        "picTooltip": "بعدا می توانید این عکس را تغییر دهید",
+        "placeholder": {
+            "fullName": "نام کامل خود را وارد کنید"
+        }
     }
 }

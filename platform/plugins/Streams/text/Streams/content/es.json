@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Nuevo {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agregado a {{toTitle}} como {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} te mencionó en un comentario",
-        "Streams\/call": "{{displayName}} inició una llamada en tiempo real"
+        "Streams\/call": "{{displayName}} inició una llamada en tiempo real",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} se unió",
+        "Streams\/left": "Quedan {{&call 'avatar.displayName'}}"
     },
     "invite": {
         "command": "Invitación",
@@ -116,7 +118,24 @@
             "text": "Has sido invitado. {{ClickOrTap}} aquí para aceptar y unirse."
         },
         "Invite": "Invitar",
-        "Share": "Cuota"
+        "Share": "Cuota",
+        "roles": {
+            "title": "¿Otorgar funciones a los usuarios invitados?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Lo siento",
+                "alert": "No tienes autorización para otorgar esta función."
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Lo siento",
+                "alert": "No tienes autorización para eliminar esta función."
+            }
+        },
+        "labels": {
+            "title": "¿Cual es tu relacion?"
+        },
+        "complete": {
+            "HasInvitedYou": "te ha invitado a:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Teleconferencia finalizada"
         },
         "requestSpeakDialog": {
-            "msg": "Actualmente hay {{count}} personas hablando en la reunión. ¿Quieres reemplazar a uno de ellos después de permitirles {{seconds}} segundos para terminar de hablar?"
+            "msg": "Actualmente hay {{count}} personas hablando en la reunión. ¿Quieres reemplazar a uno de ellos después de permitirles {{seconds}} segundos para terminar de hablar?",
+            "dialogTitle": "Solicitud para hablar"
+        },
+        "fbLive": {
+            "dialogTitle": "Comenzó la transmisión en vivo de Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Administrar transmisión"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Pregunta",
-            "description": "flujo de preguntas"
+            "description": "flujo de preguntas",
+            "newItem": "Agregar pregunta"
         },
         "Streams\/answer": {
             "displayType": "Respuesta",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Escriba su pregunta",
         "ContentPlaceholder": "Ponga cualquier información adicional aquí para ayudar a las personas a responder",
         "ErrorTitle": "Pregunta requerida",
-        "Placeholder": "Marcador de posición"
+        "Placeholder": "Marcador de posición",
+        "EditQuestion": "Editar pregunta",
+        "NewPossibleAnswer": "Nueva respuesta posible",
+        "answerText": "Texto",
+        "HideUntilAnswered": "Ocultar hasta que responda",
+        "CantChangeAnswers": "No puedo cambiar las respuestas",
+        "Save": "Ahorrar",
+        "Send": "Enviar",
+        "TitleRequired": "¡Título requerido!",
+        "AreYouSure": "¿Está seguro?"
     },
     "experience": {
         "NewExperience": "Nueva experiencia",
@@ -560,5 +596,18 @@
         "configurationSaved": "Configuración guardada",
         "error": "Algo salió mal",
         "privacySettings": "La configuración de privacidad"
+    },
+    "avatar": {
+        "firstName": "nombre de pila",
+        "lastName": "apellido",
+        "username": "nombre de usuario"
+    },
+    "login": {
+        "prompt": "Deja que tus amigos te reconozcan:",
+        "newUser": "o cree una nueva cuenta a continuación",
+        "picTooltip": "Puedes cambiar esta imagen más tarde.",
+        "placeholder": {
+            "fullName": "Ingresa tu nombre completo"
+        }
     }
 }

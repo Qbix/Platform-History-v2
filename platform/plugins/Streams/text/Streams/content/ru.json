@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Новый {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Добавлено в {{toTitle}} как {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} упомянул вас в комментарии",
-        "Streams\/call": "{{displayName}} начал вызов в реальном времени"
+        "Streams\/call": "{{displayName}} начал вызов в реальном времени",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} присоединился",
+        "Streams\/left": "{{&call 'avatar.displayName'}} осталось"
     },
     "invite": {
         "command": "Приглашать",
@@ -116,7 +118,24 @@
             "text": "Вы были приглашены. {{ClickOrTap}} здесь, чтобы принять и присоединиться."
         },
         "Invite": "Приглашать",
-        "Share": "Делиться"
+        "Share": "Делиться",
+        "roles": {
+            "title": "Предоставить роли приглашенным пользователям?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Извини",
+                "alert": "У вас нет прав для предоставления этой роли"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Извини",
+                "alert": "У вас нет прав для удаления этой роли"
+            }
+        },
+        "labels": {
+            "title": "Каковы ваши отношения?"
+        },
+        "complete": {
+            "HasInvitedYou": "пригласил вас:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Телеконференция завершена"
         },
         "requestSpeakDialog": {
-            "msg": "В настоящее время на собрании выступает {{count}} человек. Вы хотите заменить одного из них после того, как они {{seconds}} секунд закончат говорить?"
+            "msg": "В настоящее время на собрании выступает {{count}} человек. Вы хотите заменить одного из них после того, как они {{seconds}} секунд закончат говорить?",
+            "dialogTitle": "Запрос на выступление"
+        },
+        "fbLive": {
+            "dialogTitle": "Началась прямая трансляция в Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Управление трансляцией"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Вопрос",
-            "description": "поток вопросов"
+            "description": "поток вопросов",
+            "newItem": "Добавить вопрос"
         },
         "Streams\/answer": {
             "displayType": "Отвечать",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Введите свой вопрос",
         "ContentPlaceholder": "Поместите здесь любую дополнительную информацию, чтобы помочь людям ответить",
         "ErrorTitle": "Требуется вопрос",
-        "Placeholder": "Заполнитель"
+        "Placeholder": "Заполнитель",
+        "EditQuestion": "Изменить вопрос",
+        "NewPossibleAnswer": "Новый возможный ответ",
+        "answerText": "Текст",
+        "HideUntilAnswered": "Скрыть до ответа",
+        "CantChangeAnswers": "Не могу изменить ответы",
+        "Save": "Сохранять",
+        "Send": "Отправлять",
+        "TitleRequired": "Требуется титул!",
+        "AreYouSure": "Вы уверены?"
     },
     "experience": {
         "NewExperience": "Новый опыт",
@@ -560,5 +596,18 @@
         "configurationSaved": "Конфигурация сохранена",
         "error": "Что-то пошло не так",
         "privacySettings": "Настройки конфиденциальности"
+    },
+    "avatar": {
+        "firstName": "имя",
+        "lastName": "фамилия",
+        "username": "имя пользователя"
+    },
+    "login": {
+        "prompt": "Пусть друзья узнают вас:",
+        "newUser": "или создайте новую учетную запись ниже",
+        "picTooltip": "Вы можете изменить это изображение позже",
+        "placeholder": {
+            "fullName": "Введите свое полное имя"
+        }
     }
 }

@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "E re {{relationDisplayType}} në {{toTitle}}",
         "Streams\/relatedFrom\/*": "Shtuar në {{toTitle}} si {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ju përmendi në një koment",
-        "Streams\/call": "{{displayName}} filloi një telefonatë në kohë reale"
+        "Streams\/call": "{{displayName}} filloi një telefonatë në kohë reale",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} u bashkua",
+        "Streams\/left": "{{&call 'avatar.displayName'}} majtas"
     },
     "invite": {
         "messageContent": "{{displayName}} ju ftoi në {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Tani mund ta ngjitësh këtë lidhje diku për të ftuar njerëzit",
         "command": "Fto",
         "Invite": "Fto",
-        "Share": "Shpërndaje"
+        "Share": "Shpërndaje",
+        "roles": {
+            "title": "T&#39;u jepen role përdoruesve të ftuar?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Na vjen keq",
+                "alert": "Nuk je i autorizuar ta japësh këtë rol"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Na vjen keq",
+                "alert": "Nuk je i autorizuar ta heqësh këtë rol"
+            }
+        },
+        "labels": {
+            "title": "Cila është marrëdhënia juaj?"
+        },
+        "complete": {
+            "HasInvitedYou": "ju ka ftuar në:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Cilësimet e transmetimit"
         },
         "requestSpeakDialog": {
-            "msg": "Aktualisht janë {{count}} persona që flasin në takim. Dëshiron të zëvendësosh njërën prej tyre pasi t&#39;i lejosh {{seconds}} sekonda të mbarojnë së foluri?"
+            "msg": "Aktualisht janë {{count}} persona që flasin në takim. Dëshiron të zëvendësosh njërën prej tyre pasi t&#39;i lejosh {{seconds}} sekonda të mbarojnë së foluri?",
+            "dialogTitle": "Kërkesë për të folur"
+        },
+        "fbLive": {
+            "dialogTitle": "Transmetimi i drejtpërdrejtë në Facebook filloi"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Menaxho transmetimin"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Pyetje",
-            "description": "rrymë pyetjesh"
+            "description": "rrymë pyetjesh",
+            "newItem": "Shto pyetje"
         },
         "Streams\/answer": {
             "displayType": "Përgjigju",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Shkruani pyetjen tuaj",
         "ContentPlaceholder": "Vendos çdo informacion shtesë këtu për t&#39;i ndihmuar njerëzit të përgjigjen",
         "ErrorTitle": "Kërkohet pyetje",
-        "Placeholder": "Vendmbajtësi"
+        "Placeholder": "Vendmbajtësi",
+        "EditQuestion": "Redakto pyetjen",
+        "NewPossibleAnswer": "Përgjigje e re e mundshme",
+        "answerText": "Teksti",
+        "HideUntilAnswered": "Fshihu derisa të përgjigjet",
+        "CantChangeAnswers": "Nuk mund të ndryshohen përgjigjet",
+        "Save": "Ruaj",
+        "Send": "Dërgo",
+        "TitleRequired": "Kërkohet titulli!",
+        "AreYouSure": "A je i sigurt?"
     },
     "experience": {
         "NewExperience": "Përvojë e re",
@@ -566,5 +602,18 @@
         "configurationSaved": "Konfigurimi u ruajt",
         "error": "Dicka shkoi keq",
         "privacySettings": "Kushtet e Privatësisë"
+    },
+    "avatar": {
+        "firstName": "Emri",
+        "lastName": "mbiemri",
+        "username": "emri i përdoruesit"
+    },
+    "login": {
+        "prompt": "Lërini miqtë t&#39;ju njohin:",
+        "newUser": "ose krijoni një llogari të re më poshtë",
+        "picTooltip": "Ju mund ta ndryshoni këtë foto më vonë",
+        "placeholder": {
+            "fullName": "vendos emrin tënd të plotë"
+        }
     }
 }

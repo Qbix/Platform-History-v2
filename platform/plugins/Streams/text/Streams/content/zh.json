@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}} 中的新 {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "作为 {{relationDisplayType}} 添加到 {{toTitle}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} 在评论中提到了您",
-        "Streams\/call": "{{displayName}} 开始实时通话"
+        "Streams\/call": "{{displayName}} 开始实时通话",
+        "Streams\/joined": "{{&call 'avatar.displayName'}}加入",
+        "Streams\/left": "{{&call 'avatar.displayName'}} 离开"
     },
     "invite": {
         "messageContent": "{{displayName}}邀请您参加{{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "您现在可以将此链接粘贴到某处以邀请他人",
         "command": "邀请",
         "Invite": "邀请",
-        "Share": "分享"
+        "Share": "分享",
+        "roles": {
+            "title": "向受邀用户授予角色？",
+            "NotAuthorizedToGrantRole": {
+                "title": "对不起",
+                "alert": "您无权授予此角色"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "对不起",
+                "alert": "您无权删除此角色"
+            }
+        },
+        "labels": {
+            "title": "你是什么关系？"
+        },
+        "complete": {
+            "HasInvitedYou": "已邀请您："
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "流媒体设置"
         },
         "requestSpeakDialog": {
-            "msg": "目前有 {{count}} 人在会议中发言。您想在他们 {{seconds}} 秒说完话后替换其中一个吗？"
+            "msg": "目前有 {{count}} 人在会议中发言。您想在他们 {{seconds}} 秒说完话后替换其中一个吗？",
+            "dialogTitle": "请求发言"
+        },
+        "fbLive": {
+            "dialogTitle": "脸书直播开始"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "管理广播"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "问题",
-            "description": "问题流"
+            "description": "问题流",
+            "newItem": "添加问题"
         },
         "Streams\/answer": {
             "displayType": "回答",
@@ -539,7 +566,16 @@
         "TitlePlaceholder": "输入您的问题",
         "ContentPlaceholder": "在此处放置任何其他信息以帮助人们回答",
         "ErrorTitle": "需要提问",
-        "Placeholder": "占位符"
+        "Placeholder": "占位符",
+        "EditQuestion": "编辑问题",
+        "NewPossibleAnswer": "新的可能答案",
+        "answerText": "文本",
+        "HideUntilAnswered": "隐藏直到回答",
+        "CantChangeAnswers": "无法更改答案",
+        "Save": "节省",
+        "Send": "发送",
+        "TitleRequired": "标题必填！",
+        "AreYouSure": "你确定吗？"
     },
     "experience": {
         "NewExperience": "新体验",
@@ -567,5 +603,18 @@
         "configurationSaved": "配置已保存",
         "error": "出问题了",
         "privacySettings": "隐私设置"
+    },
+    "avatar": {
+        "firstName": "名",
+        "lastName": "姓",
+        "username": "用户名"
+    },
+    "login": {
+        "prompt": "让朋友认出你：",
+        "newUser": "或在下面创建一个新帐户",
+        "picTooltip": "您可以稍后更改此图片",
+        "placeholder": {
+            "fullName": "输入您的全名"
+        }
     }
 }

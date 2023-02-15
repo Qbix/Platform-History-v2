@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}} içinde yeni {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}}&#39;a {{relationDisplayType}} olarak eklendi",
         "Streams\/mention": "{{&call 'avatar.displayName'}} bir yorumda sizden bahsetti",
-        "Streams\/call": "{{displayName}} gerçek zamanlı bir arama başlattı"
+        "Streams\/call": "{{displayName}} gerçek zamanlı bir arama başlattı",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} katıldı",
+        "Streams\/left": "{{&call 'avatar.displayName'}} kaldı"
     },
     "invite": {
         "command": "Davet et",
@@ -116,7 +118,24 @@
             "text": "Davet edildiniz. {{ClickOrTap}} kabul etmek ve katılmak için buraya."
         },
         "Invite": "Davet etmek",
-        "Share": "Paylaşmak"
+        "Share": "Paylaşmak",
+        "roles": {
+            "title": "Davetli Kullanıcılara Roller Verilsin mi?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Üzgünüm",
+                "alert": "Bu rolü verme yetkiniz yok"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Üzgünüm",
+                "alert": "Bu rolü kaldırma yetkiniz yok"
+            }
+        },
+        "labels": {
+            "title": "İlişki durumun nedir?"
+        },
+        "complete": {
+            "HasInvitedYou": "sizi şuna davet etti:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "telekonferans sona erdi"
         },
         "requestSpeakDialog": {
-            "msg": "Şu anda toplantıda konuşan {{count}} kişi var. Konuşmasını bitirmeleri için {{seconds}} saniye bekledikten sonra bunlardan birini değiştirmek istiyor musunuz?"
+            "msg": "Şu anda toplantıda konuşan {{count}} kişi var. Konuşmasını bitirmeleri için {{seconds}} saniye bekledikten sonra bunlardan birini değiştirmek istiyor musunuz?",
+            "dialogTitle": "Konuşma İsteği"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook canlı yayın başladı"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Yayını Yönet"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Soru",
-            "description": "soru akışı"
+            "description": "soru akışı",
+            "newItem": "Soru Ekle"
         },
         "Streams\/answer": {
             "displayType": "Yanıt vermek",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Sorunuzu yazın",
         "ContentPlaceholder": "İnsanların yanıtlamasına yardımcı olmak için ek bilgileri buraya koyun",
         "ErrorTitle": "Soru gerekli",
-        "Placeholder": "Yer tutucu"
+        "Placeholder": "Yer tutucu",
+        "EditQuestion": "Soruyu Düzenle",
+        "NewPossibleAnswer": "Yeni Olası Cevap",
+        "answerText": "Metin",
+        "HideUntilAnswered": "Cevaplanana kadar gizle",
+        "CantChangeAnswers": "cevaplar değiştirilemiyor",
+        "Save": "Kaydetmek",
+        "Send": "Göndermek",
+        "TitleRequired": "Başlık gerekli!",
+        "AreYouSure": "Emin misin?"
     },
     "experience": {
         "NewExperience": "Yeni deneyim",
@@ -560,5 +596,18 @@
         "configurationSaved": "Yapılandırma kaydedildi",
         "error": "Bir şeyler yanlış gitti",
         "privacySettings": "Gizlilik ayarları"
+    },
+    "avatar": {
+        "firstName": "ilk adı",
+        "lastName": "soy isim",
+        "username": "Kullanıcı adı"
+    },
+    "login": {
+        "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
+        "newUser": "veya aşağıdan yeni bir hesap oluşturun",
+        "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz.",
+        "placeholder": {
+            "fullName": "Ad ve soyadınızı girin"
+        }
     }
 }

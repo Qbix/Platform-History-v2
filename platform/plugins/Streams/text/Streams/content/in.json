@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} di {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahkan ke {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut Anda dalam komentar",
-        "Streams\/call": "{{displayName}} memanggil Anda"
+        "Streams\/call": "{{displayName}} memanggil Anda",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} bergabung",
+        "Streams\/left": "{{&call 'avatar.displayName'}} tersisa"
     },
     "invite": {
         "messageContent": "{{displayName}} mengundang Anda ke {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang",
         "command": "Undang",
         "Invite": "Mengundang",
-        "Share": "Membagikan"
+        "Share": "Membagikan",
+        "roles": {
+            "title": "Berikan Peran kepada Pengguna yang Diundang?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Maaf",
+                "alert": "Anda tidak berwenang untuk memberikan peran ini"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Maaf",
+                "alert": "Anda tidak berwenang menghapus peran ini"
+            }
+        },
+        "labels": {
+            "title": "Apa Hubungan Anda?"
+        },
+        "complete": {
+            "HasInvitedYou": "telah mengundang Anda untuk:"
+        }
     },
     "followup": {
         "mobile": {
@@ -283,7 +302,14 @@
             "title": "Pengaturan Streaming"
         },
         "requestSpeakDialog": {
-            "msg": "Saat ini ada {{count}} orang yang berbicara dalam rapat. Apakah Anda ingin mengganti salah satu dari mereka setelah mengizinkan mereka {{seconds}} detik untuk selesai berbicara?"
+            "msg": "Saat ini ada {{count}} orang yang berbicara dalam rapat. Apakah Anda ingin mengganti salah satu dari mereka setelah mengizinkan mereka {{seconds}} detik untuk selesai berbicara?",
+            "dialogTitle": "Permintaan untuk Berbicara"
+        },
+        "fbLive": {
+            "dialogTitle": "Streaming langsung Facebook dimulai"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Kelola Siaran"
         }
     },
     "types": {
@@ -406,7 +432,8 @@
         },
         "Streams\/question": {
             "displayType": "Pertanyaan",
-            "description": "aliran pertanyaan"
+            "description": "aliran pertanyaan",
+            "newItem": "Tambahkan Pertanyaan"
         },
         "Streams\/answer": {
             "displayType": "Menjawab",
@@ -535,7 +562,16 @@
         "TitlePlaceholder": "Ketikkan pertanyaan Anda",
         "ContentPlaceholder": "Letakkan informasi tambahan di sini untuk membantu orang menjawab",
         "ErrorTitle": "Pertanyaan diperlukan",
-        "Placeholder": "Tempat penampung"
+        "Placeholder": "Tempat penampung",
+        "EditQuestion": "Sunting Pertanyaan",
+        "NewPossibleAnswer": "Kemungkinan Jawaban Baru",
+        "answerText": "Teks",
+        "HideUntilAnswered": "Sembunyikan sampai dijawab",
+        "CantChangeAnswers": "Tidak dapat mengubah jawaban",
+        "Save": "Menyimpan",
+        "Send": "Mengirim",
+        "TitleRequired": "Judul diperlukan!",
+        "AreYouSure": "Apa kamu yakin?"
     },
     "experience": {
         "NewExperience": "Pengalaman baru",
@@ -563,5 +599,18 @@
         "configurationSaved": "Konfigurasi disimpan",
         "error": "Ada yang salah",
         "privacySettings": "Pengaturan Privasi"
+    },
+    "avatar": {
+        "firstName": "nama depan",
+        "lastName": "nama keluarga",
+        "username": "nama belakang"
+    },
+    "login": {
+        "prompt": "Biarkan teman mengenali Anda:",
+        "newUser": "atau buat akun baru di bawah ini",
+        "picTooltip": "Anda dapat mengubah gambar ini nanti",
+        "placeholder": {
+            "fullName": "Masukkan nama lengkapmu"
+        }
     }
 }

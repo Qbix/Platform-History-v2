@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "ახალი {{relationDisplayType}} {{toTitle}}-ში",
         "Streams\/relatedFrom\/*": "დამატებულია {{toTitle}}-ში, როგორც {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} მოგახსენეთ კომენტარში",
-        "Streams\/call": "{{displayName}} დაიწყო რეალურ დროში ზარი"
+        "Streams\/call": "{{displayName}} დაიწყო რეალურ დროში ზარი",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} შეუერთდა",
+        "Streams\/left": "{{&call 'avatar.displayName'}} დარჩა"
     },
     "invite": {
         "command": "მოიწვიე",
@@ -116,7 +118,24 @@
             "text": "თქვენ მოწვეული ხართ. {{ClickOrTap}} აქ მისაღებად და გასაწევრიანებლად."
         },
         "Invite": "მოიწვიე",
-        "Share": "გააზიარეთ"
+        "Share": "გააზიარეთ",
+        "roles": {
+            "title": "მიანიჭოთ როლები მოწვეულ მომხმარებლებს?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Ბოდიში",
+                "alert": "თქვენ არ ხართ უფლებამოსილი, მიანიჭოთ ეს როლი"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Ბოდიში",
+                "alert": "თქვენ არ ხართ უფლებამოსილი, წაშალოთ ეს როლი"
+            }
+        },
+        "labels": {
+            "title": "როგორია თქვენი ურთიერთობა?"
+        },
+        "complete": {
+            "HasInvitedYou": "მოგიწვიათ:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "ტელეკონფერენცია დასრულდა"
         },
         "requestSpeakDialog": {
-            "msg": "ამჟამად შეხვედრაზე საუბრობს {{count}} ადამიანი. გსურთ შეცვალოთ ერთი მათგანი საუბრის დასრულების შემდეგ {{seconds}} წამში?"
+            "msg": "ამჟამად შეხვედრაზე საუბრობს {{count}} ადამიანი. გსურთ შეცვალოთ ერთი მათგანი საუბრის დასრულების შემდეგ {{seconds}} წამში?",
+            "dialogTitle": "საუბრის მოთხოვნა"
+        },
+        "fbLive": {
+            "dialogTitle": "ფეისბუქის პირდაპირი ტრანსლაცია დაიწყო"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "მაუწყებლობის მართვა"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Კითხვა",
-            "description": "კითხვების ნაკადი"
+            "description": "კითხვების ნაკადი",
+            "newItem": "დაამატეთ შეკითხვა"
         },
         "Streams\/answer": {
             "displayType": "უპასუხე",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "ჩაწერეთ თქვენი შეკითხვა",
         "ContentPlaceholder": "განათავსეთ ნებისმიერი დამატებითი ინფორმაცია აქ, რათა დაეხმაროთ ხალხს პასუხის გაცემაში",
         "ErrorTitle": "კითხვაა საჭირო",
-        "Placeholder": "ადგილის მფლობელი"
+        "Placeholder": "ადგილის მფლობელი",
+        "EditQuestion": "შეკითხვის რედაქტირება",
+        "NewPossibleAnswer": "ახალი შესაძლო პასუხი",
+        "answerText": "ტექსტი",
+        "HideUntilAnswered": "დამალეთ პასუხის გაცემამდე",
+        "CantChangeAnswers": "პასუხებს ვერ ცვლი",
+        "Save": "Გადარჩენა",
+        "Send": "გაგზავნა",
+        "TitleRequired": "სათაურია საჭირო!",
+        "AreYouSure": "Დარწმუნებული ხარ?"
     },
     "experience": {
         "NewExperience": "Ახალი გამოცდილება",
@@ -560,5 +596,18 @@
         "configurationSaved": "კონფიგურაცია შენახულია",
         "error": "Რაღაც არასწორად წავიდა",
         "privacySettings": "Კონფიდენციალურობის პარამეტრები"
+    },
+    "avatar": {
+        "firstName": "სახელი",
+        "lastName": "გვარი",
+        "username": "მომხმარებლის სახელი"
+    },
+    "login": {
+        "prompt": "მიეცით საშუალება მეგობრებს გაგიცნონ:",
+        "newUser": "ან შექმენით ახალი ანგარიში ქვემოთ",
+        "picTooltip": "თქვენ შეგიძლიათ შეცვალოთ ეს სურათი მოგვიანებით",
+        "placeholder": {
+            "fullName": "შეიყვანეთ თქვენი სრული სახელი"
+        }
     }
 }

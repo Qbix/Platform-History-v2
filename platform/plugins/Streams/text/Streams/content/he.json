@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} חדש ב- {{toTitle}}",
         "Streams\/relatedFrom\/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} אזכרו אותך בתגובה",
-        "Streams\/call": "{{displayName}} מתקשר אליך"
+        "Streams\/call": "{{displayName}} מתקשר אליך",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} הצטרף",
+        "Streams\/left": "{{&call 'avatar.displayName'}} נותרו"
     },
     "invite": {
         "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "כעת תוכלו להדביק את הקישור הזה במקום כלשהו כדי להזמין אנשים",
         "command": "להזמין",
         "Invite": "להזמין",
-        "Share": "לַחֲלוֹק"
+        "Share": "לַחֲלוֹק",
+        "roles": {
+            "title": "להעניק תפקידים למשתמשים מוזמנים?",
+            "NotAuthorizedToGrantRole": {
+                "title": "מצטער",
+                "alert": "אינך מורשה להעניק תפקיד זה"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "מצטער",
+                "alert": "אינך מורשה להסיר את התפקיד הזה"
+            }
+        },
+        "labels": {
+            "title": "מה הקשר שלך?"
+        },
+        "complete": {
+            "HasInvitedYou": "הזמין אותך ל:"
+        }
     },
     "followup": {
         "mobile": {
@@ -283,7 +302,14 @@
             "title": "הגדרות סטרימינג"
         },
         "requestSpeakDialog": {
-            "msg": "יש כרגע {{count}} אנשים מדברים בפגישה. האם אתה רוצה להחליף אחד מהם לאחר שתאפשר להם {{seconds}} שניות לסיים את הדיבור?"
+            "msg": "יש כרגע {{count}} אנשים מדברים בפגישה. האם אתה רוצה להחליף אחד מהם לאחר שתאפשר להם {{seconds}} שניות לסיים את הדיבור?",
+            "dialogTitle": "בקשה לדבר"
+        },
+        "fbLive": {
+            "dialogTitle": "הסטרימינג בשידור חי בפייסבוק התחיל"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "ניהול שידור"
         }
     },
     "types": {
@@ -406,7 +432,8 @@
         },
         "Streams\/question": {
             "displayType": "שְׁאֵלָה",
-            "description": "זרם השאלה"
+            "description": "זרם השאלה",
+            "newItem": "הוסף שאלה"
         },
         "Streams\/answer": {
             "displayType": "תשובה",
@@ -535,7 +562,16 @@
         "TitlePlaceholder": "הקלד את השאלה שלך",
         "ContentPlaceholder": "הכנס כאן מידע נוסף כדי לעזור לאנשים לענות",
         "ErrorTitle": "שאלה נדרשת",
-        "Placeholder": "מציין מקום"
+        "Placeholder": "מציין מקום",
+        "EditQuestion": "ערוך שאלה",
+        "NewPossibleAnswer": "תשובה אפשרית חדשה",
+        "answerText": "טֶקסט",
+        "HideUntilAnswered": "הסתר עד שתענה",
+        "CantChangeAnswers": "לא יכול לשנות תשובות",
+        "Save": "להציל",
+        "Send": "לִשְׁלוֹחַ",
+        "TitleRequired": "חובה כותרת!",
+        "AreYouSure": "האם אתה בטוח?"
     },
     "experience": {
         "NewExperience": "חוויה חדשה",
@@ -563,5 +599,18 @@
         "configurationSaved": "התצורה נשמרה",
         "error": "משהו השתבש",
         "privacySettings": "הגדרות פרטיות"
+    },
+    "avatar": {
+        "firstName": "שם פרטי",
+        "lastName": "שם משפחה",
+        "username": "שם משתמש"
+    },
+    "login": {
+        "prompt": "תן לחברים לזהות אותך:",
+        "newUser": "או צור חשבון חדש למטה",
+        "picTooltip": "אתה יכול לשנות תמונה זו מאוחר יותר",
+        "placeholder": {
+            "fullName": "הכנס את שמך המלא"
+        }
     }
 }

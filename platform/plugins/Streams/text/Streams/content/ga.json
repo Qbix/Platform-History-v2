@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} nua in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
         "Streams\/mention": "Luaigh {{&call 'avatar.displayName'}} tú i nóta tráchta",
-        "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama"
+        "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama",
+        "Streams\/joined": "Chuaigh {{&call 'avatar.displayName'}} isteach",
+        "Streams\/left": "{{&call 'avatar.displayName'}} fágtha"
     },
     "invite": {
         "command": "cuireadh",
@@ -116,7 +118,24 @@
             "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh leis agus páirt a ghlacadh ann."
         },
         "Invite": "cuireadh",
-        "Share": "Comhroinn"
+        "Share": "Comhroinn",
+        "roles": {
+            "title": "Deonaigh Róil d&#39;Úsáideoirí ar Cuireadh Cuireadh orthu?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Tá brón orm",
+                "alert": "Níl cead agat an ról seo a dheonú"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Tá brón orm",
+                "alert": "Níl cead agat an ról seo a bhaint"
+            }
+        },
+        "labels": {
+            "title": "Cad é do Gaol?"
+        },
+        "complete": {
+            "HasInvitedYou": "thug sé cuireadh duit:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Tháinig deireadh le teileachomhdháil"
         },
         "requestSpeakDialog": {
-            "msg": "Tá {{count}} duine ag labhairt sa chruinniú faoi láthair. Ar mhaith leat ceann amháin acu a chur ina ionad tar éis {{seconds}} soicind a cheadú dóibh críochnú ag labhairt?"
+            "msg": "Tá {{count}} duine ag labhairt sa chruinniú faoi láthair. Ar mhaith leat ceann amháin acu a chur ina ionad tar éis {{seconds}} soicind a cheadú dóibh críochnú ag labhairt?",
+            "dialogTitle": "Iarratas ar Labhairt"
+        },
+        "fbLive": {
+            "dialogTitle": "Cuireadh tús le sruthú beo Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Bainistigh Craoladh"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Ceist",
-            "description": "sruth ceiste"
+            "description": "sruth ceiste",
+            "newItem": "Cuir Ceist leis"
         },
         "Streams\/answer": {
             "displayType": "Freagra",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Clóscríobh do cheist",
         "ContentPlaceholder": "Cuir aon eolas breise anseo chun cabhrú le daoine freagra a thabhairt",
         "ErrorTitle": "Ceist ag teastáil",
-        "Placeholder": "Áitsealbhóir"
+        "Placeholder": "Áitsealbhóir",
+        "EditQuestion": "Cuir Ceist in Eagar",
+        "NewPossibleAnswer": "Freagra Féideartha Nua",
+        "answerText": "Téacs",
+        "HideUntilAnswered": "Folaigh go dtí go bhfreagraítear é",
+        "CantChangeAnswers": "Ní féidir freagraí a athrú",
+        "Save": "Sábháil",
+        "Send": "Seol",
+        "TitleRequired": "Teideal ag teastáil!",
+        "AreYouSure": "An bhfuil tú cinnte?"
     },
     "experience": {
         "NewExperience": "Taithí Nua",
@@ -560,5 +596,18 @@
         "configurationSaved": "Sábháladh an chumraíocht",
         "error": "Chuaigh rud eigin mícheart",
         "privacySettings": "Socruithe Príobháideachta"
+    },
+    "avatar": {
+        "firstName": "ainm",
+        "lastName": "sloinne",
+        "username": "ainm úsáideora"
+    },
+    "login": {
+        "prompt": "Lig do chairde tú a aithint:",
+        "newUser": "nó cruthaigh cuntas nua thíos",
+        "picTooltip": "Is féidir leat an pictiúr seo a athrú níos déanaí",
+        "placeholder": {
+            "fullName": "Cuir isteach d&#39;ainm iomlán"
+        }
     }
 }

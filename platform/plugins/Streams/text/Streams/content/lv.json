@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} valodā {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pievienots {{toTitle}} kā {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} pieminēja jūs komentārā",
-        "Streams\/call": "{{displayName}} sāka reāllaika zvanu"
+        "Streams\/call": "{{displayName}} sāka reāllaika zvanu",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} pievienojās",
+        "Streams\/left": "{{&call 'avatar.displayName'}} palicis"
     },
     "invite": {
         "command": "Uzaicināt",
@@ -116,7 +118,24 @@
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
         },
         "Invite": "Uzaicināt",
-        "Share": "Dalīties"
+        "Share": "Dalīties",
+        "roles": {
+            "title": "Vai piešķirt lomas uzaicinātajiem lietotājiem?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Atvainojiet",
+                "alert": "Jūs neesat pilnvarots piešķirt šo lomu"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Atvainojiet",
+                "alert": "Jums nav tiesību noņemt šo lomu"
+            }
+        },
+        "labels": {
+            "title": "Kādas ir jūsu attiecības?"
+        },
+        "complete": {
+            "HasInvitedYou": "uzaicināja jūs uz:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telekonference beidzās"
         },
         "requestSpeakDialog": {
-            "msg": "Pašlaik sapulcē runā {{count}} personas. Vai vēlaties aizstāt vienu no tiem pēc tam, kad būsiet atļāvis {{seconds}} sekundes beigt runāt?"
+            "msg": "Pašlaik sapulcē runā {{count}} personas. Vai vēlaties aizstāt vienu no tiem pēc tam, kad būsiet atļāvis {{seconds}} sekundes beigt runāt?",
+            "dialogTitle": "Lūgums runāt"
+        },
+        "fbLive": {
+            "dialogTitle": "Sākta Facebook tiešraide"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Pārvaldīt apraidi"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Jautājums",
-            "description": "jautājumu straume"
+            "description": "jautājumu straume",
+            "newItem": "Pievienot jautājumu"
         },
         "Streams\/answer": {
             "displayType": "Atbilde",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Ierakstiet savu jautājumu",
         "ContentPlaceholder": "Ievietojiet šeit jebkādu papildu informāciju, lai palīdzētu cilvēkiem atbildēt",
         "ErrorTitle": "Nepieciešams jautājums",
-        "Placeholder": "Vietturis"
+        "Placeholder": "Vietturis",
+        "EditQuestion": "Rediģēt jautājumu",
+        "NewPossibleAnswer": "Jauna iespējamā atbilde",
+        "answerText": "Teksts",
+        "HideUntilAnswered": "Slēpt līdz atbildei",
+        "CantChangeAnswers": "Nevar mainīt atbildes",
+        "Save": "Saglabāt",
+        "Send": "Sūtīt",
+        "TitleRequired": "Nepieciešams nosaukums!",
+        "AreYouSure": "Vai tu esi pārliecināts?"
     },
     "experience": {
         "NewExperience": "Jauna pieredze",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfigurācija saglabāta",
         "error": "Kaut kas nogāja greizi",
         "privacySettings": "Privātuma iestatījumi"
+    },
+    "avatar": {
+        "firstName": "vārds",
+        "lastName": "uzvārds",
+        "username": "lietotājvārds"
+    },
+    "login": {
+        "prompt": "Ļaujiet draugiem jūs atpazīt:",
+        "newUser": "vai izveidojiet jaunu kontu tālāk",
+        "picTooltip": "Vēlāk varat mainīt šo attēlu",
+        "placeholder": {
+            "fullName": "Ievadiet savu pilno vārdu"
+        }
     }
 }

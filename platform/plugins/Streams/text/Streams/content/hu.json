@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Új {{relationDisplayType}} itt: {{toTitle}}",
         "Streams\/relatedFrom\/*": "Hozzáadva a következőhöz: {{toTitle}} mint {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} megemlített egy megjegyzésben",
-        "Streams\/call": "{{displayName}} valós idejű hívást indított"
+        "Streams\/call": "{{displayName}} valós idejű hívást indított",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} csatlakozott",
+        "Streams\/left": "{{&call 'avatar.displayName'}} maradt"
     },
     "invite": {
         "command": "Meghívás",
@@ -116,7 +118,24 @@
             "text": "Meghívták. {{ClickOrTap}} itt az elfogadáshoz és a csatlakozáshoz."
         },
         "Invite": "Meghívás",
-        "Share": "Részvény"
+        "Share": "Részvény",
+        "roles": {
+            "title": "Szerepeket biztosít a meghívott felhasználóknak?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Sajnálom",
+                "alert": "Nincs jogosultsága ennek a szerepkörnek a megadására"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Sajnálom",
+                "alert": "Nincs jogosultsága ennek a szerepkörnek a eltávolítására"
+            }
+        },
+        "labels": {
+            "title": "Milyen a kapcsolatod?"
+        },
+        "complete": {
+            "HasInvitedYou": "meghívott téged a következőkre:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "A telekonferencia véget ért"
         },
         "requestSpeakDialog": {
-            "msg": "Jelenleg {{count}} személy beszél a megbeszélésen. Le szeretné cserélni az egyiket, miután {{seconds}} másodpercet hagyott a beszéd befejezésére?"
+            "msg": "Jelenleg {{count}} személy beszél a megbeszélésen. Le szeretné cserélni az egyiket, miután {{seconds}} másodpercet hagyott a beszéd befejezésére?",
+            "dialogTitle": "Beszédkérés"
+        },
+        "fbLive": {
+            "dialogTitle": "Elindult a Facebook élő közvetítés"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Adás kezelése"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Kérdés",
-            "description": "kérdésfolyam"
+            "description": "kérdésfolyam",
+            "newItem": "Kérdés hozzáadása"
         },
         "Streams\/answer": {
             "displayType": "Válasz",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Írja be kérdését",
         "ContentPlaceholder": "Írjon ide minden további információt, hogy segítsen az embereknek válaszolni",
         "ErrorTitle": "Kérdés kötelező",
-        "Placeholder": "Helykitöltő"
+        "Placeholder": "Helykitöltő",
+        "EditQuestion": "Kérdés szerkesztése",
+        "NewPossibleAnswer": "Új lehetséges válasz",
+        "answerText": "Szöveg",
+        "HideUntilAnswered": "Rejtse el a válaszig",
+        "CantChangeAnswers": "A válaszokat nem lehet megváltoztatni",
+        "Save": "Megment",
+        "Send": "Küld",
+        "TitleRequired": "Cím kötelező!",
+        "AreYouSure": "biztos vagy ebben?"
     },
     "experience": {
         "NewExperience": "Új tapasztalat",
@@ -560,5 +596,18 @@
         "configurationSaved": "A konfiguráció mentve",
         "error": "Valami elromlott",
         "privacySettings": "Adatvédelmi beállítások"
+    },
+    "avatar": {
+        "firstName": "keresztnév",
+        "lastName": "vezetéknév",
+        "username": "felhasználónév"
+    },
+    "login": {
+        "prompt": "Hagyd, hogy barátaid felismerjenek:",
+        "newUser": "vagy hozzon létre egy új fiókot alább",
+        "picTooltip": "Ezt a képet később megváltoztathatja",
+        "placeholder": {
+            "fullName": "Add meg a teljes neved"
+        }
     }
 }

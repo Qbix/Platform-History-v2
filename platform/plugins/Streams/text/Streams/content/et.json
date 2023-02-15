@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Uus {{relationDisplayType}} keeles {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lisatud kausta {{toTitle}} kui {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mainis teid kommentaaris",
-        "Streams\/call": "{{displayName}} alustas reaalajas kõnet"
+        "Streams\/call": "{{displayName}} alustas reaalajas kõnet",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} liitus",
+        "Streams\/left": "{{&call 'avatar.displayName'}} jäänud"
     },
     "invite": {
         "command": "Kutsu",
@@ -116,7 +118,24 @@
             "text": "Sind on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
         },
         "Invite": "Kutsu",
-        "Share": "Jaga"
+        "Share": "Jaga",
+        "roles": {
+            "title": "Kas anda kutsutud kasutajatele rolle?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Vabandust",
+                "alert": "Teil pole õigust seda rolli anda"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Vabandust",
+                "alert": "Teil pole õigust seda rolli eemaldada"
+            }
+        },
+        "labels": {
+            "title": "Mis on teie suhe?"
+        },
+        "complete": {
+            "HasInvitedYou": "on kutsunud teid:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telekonverents lõppes"
         },
         "requestSpeakDialog": {
-            "msg": "Praegu räägib koosolekul {{count}} inimest. Kas soovite ühe neist asendada pärast seda, kui olete lubanud neil {{seconds}} sekundit kõne lõpetada?"
+            "msg": "Praegu räägib koosolekul {{count}} inimest. Kas soovite ühe neist asendada pärast seda, kui olete lubanud neil {{seconds}} sekundit kõne lõpetada?",
+            "dialogTitle": "Rääkimise taotlus"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebooki otseülekanne algas"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Saate haldamine"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "küsimus",
-            "description": "küsimuste voog"
+            "description": "küsimuste voog",
+            "newItem": "Lisa küsimus"
         },
         "Streams\/answer": {
             "displayType": "Vastus",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Sisestage oma küsimus",
         "ContentPlaceholder": "Pange siia lisateavet, et aidata inimestel vastata",
         "ErrorTitle": "Vajalik küsimus",
-        "Placeholder": "Kohatäide"
+        "Placeholder": "Kohatäide",
+        "EditQuestion": "Muuda küsimust",
+        "NewPossibleAnswer": "Uus võimalik vastus",
+        "answerText": "Tekst",
+        "HideUntilAnswered": "Peida, kuni vastatakse",
+        "CantChangeAnswers": "Vastuseid ei saa muuta",
+        "Save": "Salvesta",
+        "Send": "Saada",
+        "TitleRequired": "Pealkiri nõutav!",
+        "AreYouSure": "Oled sa kindel?"
     },
     "experience": {
         "NewExperience": "Uus kogemus",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfiguratsioon salvestatud",
         "error": "Midagi läks valesti",
         "privacySettings": "Privaatsusseaded"
+    },
+    "avatar": {
+        "firstName": "eesnimi",
+        "lastName": "perekonnanimi",
+        "username": "kasutajanimi"
+    },
+    "login": {
+        "prompt": "Laske sõpradel teid ära tunda:",
+        "newUser": "või looge allpool uus konto",
+        "picTooltip": "Saate seda pilti hiljem muuta",
+        "placeholder": {
+            "fullName": "Sisestage oma täisnimi"
+        }
     }
 }

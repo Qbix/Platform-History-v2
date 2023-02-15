@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Nouveau {{relationDisplayType}} dans {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ajouté à {{toTitle}} en tant que {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} vous a mentionné dans un commentaire",
-        "Streams\/call": "{{displayName}} a démarré un appel en temps réel"
+        "Streams\/call": "{{displayName}} a démarré un appel en temps réel",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} a rejoint",
+        "Streams\/left": "{{&call 'avatar.displayName'}} restant"
     },
     "invite": {
         "command": "Inviter",
@@ -116,7 +118,24 @@
             "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
         },
         "Invite": "Inviter",
-        "Share": "Partager"
+        "Share": "Partager",
+        "roles": {
+            "title": "Accorder des rôles aux utilisateurs invités ?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Désolé",
+                "alert": "Vous n&#39;êtes pas autorisé à accorder ce rôle"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Désolé",
+                "alert": "Vous n&#39;êtes pas autorisé à supprimer ce rôle"
+            }
+        },
+        "labels": {
+            "title": "Quelle est votre relation?"
+        },
+        "complete": {
+            "HasInvitedYou": "vous a invité à :"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Téléconférence terminée"
         },
         "requestSpeakDialog": {
-            "msg": "Il y a actuellement {{count}} personnes qui parlent dans la réunion. Voulez-vous remplacer l&#39;un d&#39;entre eux après lui avoir accordé {{seconds}} secondes pour finir de parler ?"
+            "msg": "Il y a actuellement {{count}} personnes qui parlent dans la réunion. Voulez-vous remplacer l&#39;un d&#39;entre eux après lui avoir accordé {{seconds}} secondes pour finir de parler ?",
+            "dialogTitle": "Demander à parler"
+        },
+        "fbLive": {
+            "dialogTitle": "La diffusion en direct sur Facebook a commencé"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Gérer la diffusion"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Question",
-            "description": "flux de questions"
+            "description": "flux de questions",
+            "newItem": "Ajouter une question"
         },
         "Streams\/answer": {
             "displayType": "Réponse",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Tapez votre question",
         "ContentPlaceholder": "Mettez toute information supplémentaire ici pour aider les gens à répondre",
         "ErrorTitle": "Question requise",
-        "Placeholder": "Espace réservé"
+        "Placeholder": "Espace réservé",
+        "EditQuestion": "Modifier la question",
+        "NewPossibleAnswer": "Nouvelle réponse possible",
+        "answerText": "Texte",
+        "HideUntilAnswered": "Masquer jusqu&#39;à réponse",
+        "CantChangeAnswers": "Impossible de modifier les réponses",
+        "Save": "Sauvegarder",
+        "Send": "Envoyer",
+        "TitleRequired": "Titre requis !",
+        "AreYouSure": "Es-tu sûr?"
     },
     "experience": {
         "NewExperience": "Nouvelle expérience",
@@ -560,5 +596,18 @@
         "configurationSaved": "Configuration enregistrée",
         "error": "Quelque chose s&#39;est mal passé",
         "privacySettings": "Paramètres de confidentialité"
+    },
+    "avatar": {
+        "firstName": "prénom",
+        "lastName": "nom de famille",
+        "username": "nom d&#39;utilisateur"
+    },
+    "login": {
+        "prompt": "Laissez vos amis vous reconnaître :",
+        "newUser": "ou créez un nouveau compte ci-dessous",
+        "picTooltip": "Vous pouvez changer cette image plus tard",
+        "placeholder": {
+            "fullName": "Entrez votre nom complet"
+        }
     }
 }

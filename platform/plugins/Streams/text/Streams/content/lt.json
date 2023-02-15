@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Naujas {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} paminėjo jus komentare",
-        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku"
+        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} prisijungė",
+        "Streams\/left": "{{&call 'avatar.displayName'}} liko"
     },
     "invite": {
         "command": "Pakviesti",
@@ -116,7 +118,24 @@
             "text": "Jus pakvietė. {{ClickOrTap}} čia, kad priimtumėte ir prisijungtumėte."
         },
         "Invite": "Pakviesti",
-        "Share": "Dalintis"
+        "Share": "Dalintis",
+        "roles": {
+            "title": "Suteikti vaidmenis pakviestiems vartotojams?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Atsiprašau",
+                "alert": "Jūs neturite teisės suteikti šio vaidmens"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Atsiprašau",
+                "alert": "Jūs neturite teisės pašalinti šio vaidmens"
+            }
+        },
+        "labels": {
+            "title": "Kokie yra jūsų santykiai?"
+        },
+        "complete": {
+            "HasInvitedYou": "pakvietė jus į:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telekonferencija baigėsi"
         },
         "requestSpeakDialog": {
-            "msg": "Šiuo metu susitikime kalba {{count}} žmonės. Ar norite pakeisti vieną iš jų po to, kai leisite jiems {{seconds}} sek. baigti kalbėti?"
+            "msg": "Šiuo metu susitikime kalba {{count}} žmonės. Ar norite pakeisti vieną iš jų po to, kai leisite jiems {{seconds}} sek. baigti kalbėti?",
+            "dialogTitle": "Prašymas kalbėti"
+        },
+        "fbLive": {
+            "dialogTitle": "„Facebook“ prasidėjo tiesioginė transliacija"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Valdykite transliaciją"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Klausimas",
-            "description": "klausimų srautas"
+            "description": "klausimų srautas",
+            "newItem": "Pridėti klausimą"
         },
         "Streams\/answer": {
             "displayType": "Atsakymas",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Įveskite savo klausimą",
         "ContentPlaceholder": "Čia pateikite bet kokią papildomą informaciją, kad padėtumėte žmonėms atsakyti",
         "ErrorTitle": "Reikalingas klausimas",
-        "Placeholder": "Vietos rezervuaras"
+        "Placeholder": "Vietos rezervuaras",
+        "EditQuestion": "Redaguoti klausimą",
+        "NewPossibleAnswer": "Naujas galimas atsakymas",
+        "answerText": "Tekstas",
+        "HideUntilAnswered": "Slėpti, kol bus atsakyta",
+        "CantChangeAnswers": "Negalima pakeisti atsakymų",
+        "Save": "Sutaupyti",
+        "Send": "Siųsti",
+        "TitleRequired": "Reikalingas pavadinimas!",
+        "AreYouSure": "Ar tu tuo tikras?"
     },
     "experience": {
         "NewExperience": "Nauja Patirtis",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfigūracija išsaugota",
         "error": "Kažkas nutiko",
         "privacySettings": "Privatumo nustatymai"
+    },
+    "avatar": {
+        "firstName": "Pirmas vardas",
+        "lastName": "pavardė",
+        "username": "Vartotojo vardas"
+    },
+    "login": {
+        "prompt": "Leisk draugams tave atpažinti:",
+        "newUser": "arba toliau sukurkite naują paskyrą",
+        "picTooltip": "Vėliau galėsite pakeisti šią nuotrauką",
+        "placeholder": {
+            "fullName": "Įveskite savo vardą ir pavardę"
+        }
     }
 }
