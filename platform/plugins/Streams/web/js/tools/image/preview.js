@@ -12,7 +12,7 @@
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
  *   @uses Q inplace
  *   @param {Boolean} [options.showTitle=true] Whether to display the title of the image stream
- *   @param {Boolean} [options.defineTitle=false] If true allow to set stream title
+ *   @param {Boolean|String} [options.defineTitle=false] If true, asks user to set the image stream's title. Or set to the default title.
  *   @param {Boolean} [options.updateTitle=false] Whether to update the title to reflect the file name
  *   of an image
  *   @param {Boolean} [options.sendOriginal=false] If true send to server original image source tool.
@@ -181,6 +181,10 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 			preprocess: function (callback) {
 				if (ps.creatable && ps.creatable.preprocess) {
 					Q.handle(ps.creatable.preprocess, this, [_proceed, tool]);
+				} else if (typeof state.defineTitle === 'string') {
+					_proceed({
+						title: state.defineTitle
+					});
 				} else if (state.defineTitle) {
 					Q.Dialogs.push({
 						className: 'Q_dialog_stream_title',

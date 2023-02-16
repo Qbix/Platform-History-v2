@@ -92,7 +92,7 @@
 					}*/
 				}
 			}).tool("Streams/image/preview", {
-				defineTitle: true,
+				defineTitle: '',
 				sendOriginal: true
 			}).activate(function () {
 				var _handler = function () {
