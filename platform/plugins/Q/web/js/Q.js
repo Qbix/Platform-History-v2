@@ -2804,6 +2804,19 @@ Q.Event.jQueryForTool = {};
 Q.Event.jQueryForPage = [];
 
 /**
+ * Define an event on a target, and give it a type
+ * @param {Object} target 
+ * @param {String} name 
+ * @return Q.Event
+ */
+Q.Event.define = function (target, type) {
+	var event = new Q.Event();
+	target[type] = event;
+	event.type = type;
+	return event;
+};
+
+/**
  * Returns a Q.Event that will fire given an DOM object and an event name
  * @static
  * @method from
@@ -3018,6 +3031,7 @@ Evp.copy = function _Q_Event_prototype_copy() {
 		result.handlers[this.keys[i]] = this.handlers[this.keys[i]];
 		result.keys.push(this.keys[i]);
 	}
+	result.type = this.type;
 	return result;
 };
 
@@ -4540,6 +4554,12 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		ctor.stateKeys = stateKeys;
 		if (typeof ctor !== 'function') {
 			throw new Q.Error("Q.Tool.define requires ctor to be a string or a function");
+		}
+		for (var k in ctor.options) {
+			var v = ctor.options[k];
+			if (Q.typeOf(v) === 'Q.Event') {
+				v.type = k;
+			}
 		}
 		Q.extend(ctor.prototype, 10, methods);
 		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
