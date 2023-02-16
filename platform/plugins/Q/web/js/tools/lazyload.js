@@ -72,8 +72,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					}
 				});
 				if (found) {
-					tool.prepare(element, true);
-					tool.observe(this);
+					tool.observe(tool.prepare(element, true));
 				}
 				// this might trigger loading of images, if they are visible
 				originalSet.call(this, originalGet.call(element));
