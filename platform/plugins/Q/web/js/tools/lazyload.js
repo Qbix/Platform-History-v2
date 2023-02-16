@@ -77,7 +77,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				// this might trigger loading of images, if they are visible
 				Q.each(element.childNodes, function () {
 					while (element.childNodes.length > 0) {
-						this.appendChild(this.childNodes[0]);
+						this.appendChild(element.childNodes[0]);
 					}
 				});
 				// originalSet.call(this, originalGet.call(element));
