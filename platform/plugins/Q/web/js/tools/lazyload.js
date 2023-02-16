@@ -72,14 +72,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 					}
 				});
 				if (found) {
-					tool.observe(tool.prepare(element, true));
+					// prepare all images 
+					tool.prepare(element, true);
 				}
-				// this might trigger loading of images, if they are visible
-				originalSet.call(element, '');
-				while (element.childNodes.length > 0) {
-					this.appendChild(element.childNodes[0]);
-				}
-				// originalSet.call(this, originalGet.call(element));
+				originalSet.call(this, originalGet.call(element));
+				tool.observe(tool.prepare(this, true));
 				return html;
 			},
 			get: originalGet
