@@ -73,11 +73,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 				});
 				if (found) {
 					tool.prepare(element, true);
-					originalSet.call(this, originalGet.call(element));
 					tool.observe(this);
-				} else {
-					originalSet.call(this, originalGet.call(element));
 				}
+				// this might trigger loading of images, if they are visible
+				originalSet.call(this, originalGet.call(element));
 				return html;
 			},
 			get: originalGet
