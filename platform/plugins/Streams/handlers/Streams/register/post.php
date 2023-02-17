@@ -39,7 +39,8 @@ function Streams_register_post()
 		@compact('activation')
 	);
 
-	if (Q_Config::get('Users', 'register', 'loginEvenBeforeActivate', false)) {
+	if (Q_Config::get('Users', 'register', 'loginEvenBeforeActivate', false)
+	or !$user->shouldInterposeActivateDialog()) {
 		Users::setLoggedInUser($user);
 	}
 	

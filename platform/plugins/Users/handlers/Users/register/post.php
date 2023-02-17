@@ -37,7 +37,10 @@ function Users_register_post()
 		true,
 		@compact('activation')
 	);
-	Users::setLoggedInUser($user);
+	if (Q_Config::get('Users', 'register', 'loginEvenBeforeActivate', false)
+	or !$user->shouldInterposeActivateDialog()) {
+		Users::setLoggedInUser($user);
+	}
 	
 	// this also logs the user in
 	Users::$cache['user'] = $user;

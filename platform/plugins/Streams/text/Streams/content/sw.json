@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Mpya {{relationDisplayType}} katika {{toTitle}}",
         "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} alikutaja kwenye maoni",
-        "Streams\/call": "{{displayName}} alianzisha simu ya moja kwa moja"
+        "Streams\/call": "{{displayName}} alianzisha simu ya moja kwa moja",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} alijiunga",
+        "Streams\/left": "{{&call 'avatar.displayName'}} imesalia"
     },
     "invite": {
         "command": "Alika",
@@ -116,7 +118,24 @@
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
         },
         "Invite": "Alika",
-        "Share": "Shiriki"
+        "Share": "Shiriki",
+        "roles": {
+            "title": "Ungependa Kutoa Majukumu kwa Watumiaji Walioalikwa?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Pole",
+                "alert": "Huna idhini ya kutoa jukumu hili"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Pole",
+                "alert": "Hujaidhinishwa kuondoa jukumu hili"
+            }
+        },
+        "labels": {
+            "title": "Uhusiano wako ni upi?"
+        },
+        "complete": {
+            "HasInvitedYou": "amekualika kwa:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Teleconference imekamilika"
         },
         "requestSpeakDialog": {
-            "msg": "Kwa sasa kuna watu {{count}} wanaozungumza kwenye mkutano. Je, ungependa kubadilisha mojawapo baada ya kuwaruhusu sekunde {100}} kumaliza kuzungumza?"
+            "msg": "Kwa sasa kuna watu {{count}} wanaozungumza kwenye mkutano. Je, ungependa kubadilisha mojawapo baada ya kuwaruhusu sekunde {100}} kumaliza kuzungumza?",
+            "dialogTitle": "Ombi la Kuzungumza"
+        },
+        "fbLive": {
+            "dialogTitle": "Utiririshaji wa moja kwa moja wa Facebook umeanza"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Dhibiti Matangazo"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Swali",
-            "description": "mkondo wa maswali"
+            "description": "mkondo wa maswali",
+            "newItem": "Ongeza Swali"
         },
         "Streams\/answer": {
             "displayType": "Jibu",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Andika swali lako",
         "ContentPlaceholder": "Weka maelezo yoyote ya ziada hapa ili kuwasaidia watu kujibu",
         "ErrorTitle": "Swali linahitajika",
-        "Placeholder": "Kishika nafasi"
+        "Placeholder": "Kishika nafasi",
+        "EditQuestion": "Hariri Swali",
+        "NewPossibleAnswer": "Jibu Jipya Linalowezekana",
+        "answerText": "Maandishi",
+        "HideUntilAnswered": "Ficha hadi ujibu",
+        "CantChangeAnswers": "Haiwezi kubadilisha majibu",
+        "Save": "Hifadhi",
+        "Send": "Tuma",
+        "TitleRequired": "Kichwa kinahitajika!",
+        "AreYouSure": "Una uhakika?"
     },
     "experience": {
         "NewExperience": "Uzoefu Mpya",
@@ -560,5 +596,18 @@
         "configurationSaved": "Usanidi umehifadhiwa",
         "error": "Hitilafu fulani imetokea",
         "privacySettings": "Mipangilio ya Faragha"
+    },
+    "avatar": {
+        "firstName": "jina la kwanza",
+        "lastName": "jina la familia",
+        "username": "jina la mtumiaji"
+    },
+    "login": {
+        "prompt": "Waruhusu marafiki wakutambue:",
+        "newUser": "au fungua akaunti mpya hapa chini",
+        "picTooltip": "Unaweza kubadilisha picha hii baadaye",
+        "placeholder": {
+            "fullName": "Ingiza jina lako kamili"
+        }
     }
 }

@@ -1737,7 +1737,7 @@ class Db_Row
 	 *  or set it to an array to override specific fields with your own Db_Expressions
 	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
 	 *  Use this only if you started a transaction before. 
-	 * @param {boolean} [$evenIfNotModified=false] If no fields changed, don't execute any query (but still possibly commit)
+	 * @param {boolean} [$evenIfNotModified=false] If false and no fields changed, don't execute any query (but still possibly commit)
 	 * @return {boolean|Db_Query} If successful, returns the Db_Query that was executed.
 	 *  Otherwise, returns false.
 	 */

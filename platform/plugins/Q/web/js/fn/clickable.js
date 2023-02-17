@@ -505,7 +505,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		renderingInterval: 100,
 		waitingPeriod: 0,
 		waitingInterval: 100,
-		renderingDelay: 500 // wait for animations to complete
+		renderingDelay: 1000 // wait for animations to complete
 	},
 	selectable: false,
 	allowCallout: false,

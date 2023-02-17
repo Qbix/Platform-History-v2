@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Nýtt {{relationDisplayType}} í {{toTitle}}",
         "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} minntist á þig í athugasemd",
-        "Streams\/call": "{{displayName}} hóf símtal í rauntíma"
+        "Streams\/call": "{{displayName}} hóf símtal í rauntíma",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} tengdist",
+        "Streams\/left": "{{&call 'avatar.displayName'}} eftir"
     },
     "invite": {
         "command": "Bjóða",
@@ -116,7 +118,24 @@
             "text": "Þér hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
         },
         "Invite": "Bjóða",
-        "Share": "Deila"
+        "Share": "Deila",
+        "roles": {
+            "title": "Veita boðuðum notendum hlutverk?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Því miður",
+                "alert": "Þú hefur ekki heimild til að veita þetta hlutverk"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Því miður",
+                "alert": "Þú hefur ekki heimild til að fjarlægja þetta hlutverk"
+            }
+        },
+        "labels": {
+            "title": "Hvert er sambandið þitt?"
+        },
+        "complete": {
+            "HasInvitedYou": "hefur boðið þér að:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Símafundi lokið"
         },
         "requestSpeakDialog": {
-            "msg": "Eins og er eru {{count}} aðilar að tala á fundinum. Viltu skipta út einum þeirra eftir að hafa leyft þeim {{seconds}} sekúndur að klára að tala?"
+            "msg": "Eins og er eru {{count}} aðilar að tala á fundinum. Viltu skipta út einum þeirra eftir að hafa leyft þeim {{seconds}} sekúndur að klára að tala?",
+            "dialogTitle": "Beiðni um að tala"
+        },
+        "fbLive": {
+            "dialogTitle": "Bein útsending á Facebook hófst"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Stjórna útsendingu"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Spurning",
-            "description": "spurningastraumur"
+            "description": "spurningastraumur",
+            "newItem": "Bæta við spurningu"
         },
         "Streams\/answer": {
             "displayType": "Svaraðu",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Sláðu inn spurninguna þína",
         "ContentPlaceholder": "Settu allar viðbótarupplýsingar hér til að hjálpa fólki að svara",
         "ErrorTitle": "Spurning nauðsynleg",
-        "Placeholder": "Staðfestir"
+        "Placeholder": "Staðfestir",
+        "EditQuestion": "Breyta spurningu",
+        "NewPossibleAnswer": "Nýtt mögulegt svar",
+        "answerText": "Texti",
+        "HideUntilAnswered": "Fela þar til svarað er",
+        "CantChangeAnswers": "Get ekki breytt svörum",
+        "Save": "Vista",
+        "Send": "Senda",
+        "TitleRequired": "Titill áskilinn!",
+        "AreYouSure": "Ertu viss?"
     },
     "experience": {
         "NewExperience": "Ný upplifun",
@@ -560,5 +596,18 @@
         "configurationSaved": "Stilling vistuð",
         "error": "Eitthvað fór úrskeiðis",
         "privacySettings": "Öryggisstillingar"
+    },
+    "avatar": {
+        "firstName": "fyrsta nafn",
+        "lastName": "eftirnafn",
+        "username": "notendanafn"
+    },
+    "login": {
+        "prompt": "Láttu vini þekkja þig:",
+        "newUser": "eða stofnaðu nýjan reikning hér að neðan",
+        "picTooltip": "Þú getur breytt þessari mynd síðar",
+        "placeholder": {
+            "fullName": "Skrifaðu fullt nafn"
+        }
     }
 }

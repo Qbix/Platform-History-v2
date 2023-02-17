@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "Engadido a {{toTitle}} como {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mencionoute nun comentario",
-        "Streams\/call": "{{displayName}} iniciou unha chamada en tempo real"
+        "Streams\/call": "{{displayName}} iniciou unha chamada en tempo real",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} uniuse",
+        "Streams\/left": "{{&call 'avatar.displayName'}} deixou"
     },
     "invite": {
         "command": "Invitar",
@@ -116,7 +118,24 @@
             "text": "Estás convidado. {{ClickOrTap}} aquí para aceptar e unirse."
         },
         "Invite": "Invitar",
-        "Share": "Compartir"
+        "Share": "Compartir",
+        "roles": {
+            "title": "Conceder roles aos usuarios invitados?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Sentímolo",
+                "alert": "Non tes autorización para conceder esta función"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Sentímolo",
+                "alert": "Non tes autorización para eliminar esta función"
+            }
+        },
+        "labels": {
+            "title": "Cal é a túa relación?"
+        },
+        "complete": {
+            "HasInvitedYou": "invitoute a:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Rematou a teleconferencia"
         },
         "requestSpeakDialog": {
-            "msg": "Actualmente hai {{count}} persoas que falan na reunión. Queres substituír un deles despois de permitirlles {{seconds}} segundos para rematar de falar?"
+            "msg": "Actualmente hai {{count}} persoas que falan na reunión. Queres substituír un deles despois de permitirlles {{seconds}} segundos para rematar de falar?",
+            "dialogTitle": "Solicitude de falar"
+        },
+        "fbLive": {
+            "dialogTitle": "Comezou a transmisión en directo de Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Xestionar a emisión"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Pregunta",
-            "description": "fluxo de preguntas"
+            "description": "fluxo de preguntas",
+            "newItem": "Engadir pregunta"
         },
         "Streams\/answer": {
             "displayType": "Resposta",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Escribe a túa pregunta",
         "ContentPlaceholder": "Pon aquí calquera información adicional para que a xente responda",
         "ErrorTitle": "Pregunta necesaria",
-        "Placeholder": "Marcador de posición"
+        "Placeholder": "Marcador de posición",
+        "EditQuestion": "Editar pregunta",
+        "NewPossibleAnswer": "Nova posible resposta",
+        "answerText": "Texto",
+        "HideUntilAnswered": "Ocultar ata responder",
+        "CantChangeAnswers": "Non se poden cambiar as respostas",
+        "Save": "Gardar",
+        "Send": "Enviar",
+        "TitleRequired": "Título obrigatorio!",
+        "AreYouSure": "Estás seguro?"
     },
     "experience": {
         "NewExperience": "Nova experiencia",
@@ -560,5 +596,18 @@
         "configurationSaved": "Configuración gardada",
         "error": "Algo saíu mal",
         "privacySettings": "Configuración de privacidade"
+    },
+    "avatar": {
+        "firstName": "nome",
+        "lastName": "Apelido",
+        "username": "nome de usuario"
+    },
+    "login": {
+        "prompt": "Deixa que os amigos te recoñezan:",
+        "newUser": "ou crea unha nova conta a continuación",
+        "picTooltip": "Podes cambiar esta imaxe máis tarde",
+        "placeholder": {
+            "fullName": "Introduce o teu nome completo"
+        }
     }
 }

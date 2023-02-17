@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} newydd yn {{toTitle}}",
         "Streams\/relatedFrom\/*": "Wedi&#39;i ychwanegu at {{toTitle}} fel {{relationDisplayType}}",
         "Streams\/mention": "Soniodd {{&call 'avatar.displayName'}} amdanoch chi mewn sylw",
-        "Streams\/call": "Dechreuodd {{displayName}} alwad amser real"
+        "Streams\/call": "Dechreuodd {{displayName}} alwad amser real",
+        "Streams\/joined": "Ymunodd {{&call 'avatar.displayName'}}",
+        "Streams\/left": "Mae {{&call 'avatar.displayName'}} wedi gadael"
     },
     "invite": {
         "command": "Gwahodd",
@@ -116,7 +118,24 @@
             "text": "Rydych chi wedi cael gwahoddiad. {{ClickOrTap}} yma i dderbyn ac ymuno."
         },
         "Invite": "Gwahodd",
-        "Share": "Rhannu"
+        "Share": "Rhannu",
+        "roles": {
+            "title": "Rolau Grant i Ddefnyddwyr a Wahoddwyd?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Mae&#39;n ddrwg gennyf",
+                "alert": "Nid ydych wedi&#39;ch awdurdodi i ganiatáu&#39;r rôl hon"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Mae&#39;n ddrwg gennyf",
+                "alert": "Nid ydych wedi&#39;ch awdurdodi i ddileu&#39;r rôl hon"
+            }
+        },
+        "labels": {
+            "title": "Beth yw eich Perthynas?"
+        },
+        "complete": {
+            "HasInvitedYou": "wedi eich gwahodd i:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Daeth telegynhadledd i ben"
         },
         "requestSpeakDialog": {
-            "msg": "Ar hyn o bryd mae {{count}} o bobl yn siarad yn y cyfarfod. Ydych chi am ddisodli un ohonyn nhw ar ôl caniatáu {{seconds}} eiliad iddyn nhw orffen siarad?"
+            "msg": "Ar hyn o bryd mae {{count}} o bobl yn siarad yn y cyfarfod. Ydych chi am ddisodli un ohonyn nhw ar ôl caniatáu {{seconds}} eiliad iddyn nhw orffen siarad?",
+            "dialogTitle": "Cais i Siarad"
+        },
+        "fbLive": {
+            "dialogTitle": "Dechreuodd ffrydio byw Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Rheoli Darllediad"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Cwestiwn",
-            "description": "ffrwd cwestiwn"
+            "description": "ffrwd cwestiwn",
+            "newItem": "Ychwanegu Cwestiwn"
         },
         "Streams\/answer": {
             "displayType": "Ateb",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Teipiwch eich cwestiwn",
         "ContentPlaceholder": "Rhowch unrhyw wybodaeth ychwanegol yma i helpu pobl i ateb",
         "ErrorTitle": "Angen cwestiwn",
-        "Placeholder": "Dalfan"
+        "Placeholder": "Dalfan",
+        "EditQuestion": "Golygu Cwestiwn",
+        "NewPossibleAnswer": "Ateb Newydd Posibl",
+        "answerText": "Testun",
+        "HideUntilAnswered": "Cuddio nes ateb",
+        "CantChangeAnswers": "Methu newid atebion",
+        "Save": "Arbed",
+        "Send": "Anfon",
+        "TitleRequired": "Angen teitl!",
+        "AreYouSure": "Wyt ti&#39;n siwr?"
     },
     "experience": {
         "NewExperience": "Profiad Newydd",
@@ -560,5 +596,18 @@
         "configurationSaved": "Cyfluniad wedi&#39;i gadw",
         "error": "Aeth rhywbeth o&#39;i le",
         "privacySettings": "Gosodiadau Preifatrwydd"
+    },
+    "avatar": {
+        "firstName": "enw cyntaf",
+        "lastName": "enw olaf",
+        "username": "enw defnyddiwr"
+    },
+    "login": {
+        "prompt": "Gadewch i ffrindiau eich adnabod:",
+        "newUser": "neu greu cyfrif newydd isod",
+        "picTooltip": "Gallwch newid y llun hwn yn ddiweddarach",
+        "placeholder": {
+            "fullName": "Rhowch eich enw llawn"
+        }
     }
 }

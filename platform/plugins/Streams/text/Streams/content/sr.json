@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додато у {{toTitle}} као {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} вас је поменуо у коментару",
-        "Streams\/call": "{{displayName}} је започео позив у реалном времену"
+        "Streams\/call": "{{displayName}} је започео позив у реалном времену",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} се придружио",
+        "Streams\/left": "{{&call 'avatar.displayName'}} лево"
     },
     "invite": {
         "command": "Позови",
@@ -116,7 +118,24 @@
             "text": "Позвани сте. {{ClickOrTap}} овде да прихватите и придружите се."
         },
         "Invite": "Позови",
-        "Share": "Објави"
+        "Share": "Објави",
+        "roles": {
+            "title": "Доделити улоге позваним корисницима?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Извињавам се",
+                "alert": "Нисте овлашћени да доделите ову улогу"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Извињавам се",
+                "alert": "Нисте овлашћени да уклоните ову улогу"
+            }
+        },
+        "labels": {
+            "title": "Каква је твоја веза?"
+        },
+        "complete": {
+            "HasInvitedYou": "вас је позвао да:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Телеконференција је завршена"
         },
         "requestSpeakDialog": {
-            "msg": "На састанку тренутно говори {{count}} људи. Да ли желите да замените једног од њих након што им дозволите {{seconds}} секунди да заврше са говором?"
+            "msg": "На састанку тренутно говори {{count}} људи. Да ли желите да замените једног од њих након што им дозволите {{seconds}} секунди да заврше са говором?",
+            "dialogTitle": "Захтев за говор"
+        },
+        "fbLive": {
+            "dialogTitle": "Фацебоок ливе стреаминг је почео"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Управљајте емитовањем"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Питање",
-            "description": "ток питања"
+            "description": "ток питања",
+            "newItem": "Додај питање"
         },
         "Streams\/answer": {
             "displayType": "Одговор",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Унесите своје питање",
         "ContentPlaceholder": "Ставите све додатне информације овде да бисте помогли људима да одговоре",
         "ErrorTitle": "Питање је обавезно",
-        "Placeholder": "Чувар места"
+        "Placeholder": "Чувар места",
+        "EditQuestion": "Уреди питање",
+        "NewPossibleAnswer": "Нови могући одговор",
+        "answerText": "Текст",
+        "HideUntilAnswered": "Сакриј док се не одговори",
+        "CantChangeAnswers": "Не могу променити одговоре",
+        "Save": "сачувати",
+        "Send": "Пошаљи",
+        "TitleRequired": "Наслов је обавезан!",
+        "AreYouSure": "Јеси ли сигуран?"
     },
     "experience": {
         "NewExperience": "Ново искуство",
@@ -560,5 +596,18 @@
         "configurationSaved": "Конфигурација је сачувана",
         "error": "Нешто је кренуло наопако",
         "privacySettings": "Подешавања приватности"
+    },
+    "avatar": {
+        "firstName": "име",
+        "lastName": "презиме",
+        "username": "корисничко име"
+    },
+    "login": {
+        "prompt": "Нека вас пријатељи препознају:",
+        "newUser": "или направите нови налог у наставку",
+        "picTooltip": "Ову слику можете променити касније",
+        "placeholder": {
+            "fullName": "Унесите ваше пуно име"
+        }
     }
 }

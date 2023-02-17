@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Baharu {{relationDisplayType}} dalam {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut anda dalam ulasan",
-        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata"
+        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} menyertai",
+        "Streams\/left": "{{&call 'avatar.displayName'}} kiri"
     },
     "invite": {
         "command": "Jemput",
@@ -116,7 +118,24 @@
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
         },
         "Invite": "Jemput",
-        "Share": "Kongsi"
+        "Share": "Kongsi",
+        "roles": {
+            "title": "Berikan Peranan kepada Pengguna Jemputan?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Maaf",
+                "alert": "Anda tidak dibenarkan untuk memberikan peranan ini"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Maaf",
+                "alert": "Anda tidak dibenarkan mengalih keluar peranan ini"
+            }
+        },
+        "labels": {
+            "title": "Apakah Hubungan anda?"
+        },
+        "complete": {
+            "HasInvitedYou": "telah menjemput anda untuk:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telesidang tamat"
         },
         "requestSpeakDialog": {
-            "msg": "Pada masa ini terdapat {{count}} orang bercakap dalam mesyuarat. Adakah anda mahu menggantikan salah satu daripadanya selepas membenarkan mereka {{seconds}} saat untuk selesai bercakap?"
+            "msg": "Pada masa ini terdapat {{count}} orang bercakap dalam mesyuarat. Adakah anda mahu menggantikan salah satu daripadanya selepas membenarkan mereka {{seconds}} saat untuk selesai bercakap?",
+            "dialogTitle": "Minta Bercakap"
+        },
+        "fbLive": {
+            "dialogTitle": "Penstriman langsung Facebook bermula"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Uruskan Siaran"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "soalan",
-            "description": "aliran soalan"
+            "description": "aliran soalan",
+            "newItem": "Tambah Soalan"
         },
         "Streams\/answer": {
             "displayType": "Jawab",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Taip soalan anda",
         "ContentPlaceholder": "Letakkan sebarang maklumat tambahan di sini untuk membantu orang ramai menjawab",
         "ErrorTitle": "Soalan diperlukan",
-        "Placeholder": "Pemegang tempat"
+        "Placeholder": "Pemegang tempat",
+        "EditQuestion": "Edit Soalan",
+        "NewPossibleAnswer": "Jawapan Baru yang Mungkin",
+        "answerText": "Teks",
+        "HideUntilAnswered": "Sembunyi sehingga dijawab",
+        "CantChangeAnswers": "Tidak boleh menukar jawapan",
+        "Save": "Jimat",
+        "Send": "Hantar",
+        "TitleRequired": "Tajuk diperlukan!",
+        "AreYouSure": "Adakah anda pasti?"
     },
     "experience": {
         "NewExperience": "Pengalaman baru",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfigurasi disimpan",
         "error": "Sesuatu telah berlaku",
         "privacySettings": "Tetapan privasi"
+    },
+    "avatar": {
+        "firstName": "nama pertama",
+        "lastName": "nama terakhir",
+        "username": "nama pengguna"
+    },
+    "login": {
+        "prompt": "Biarkan rakan mengenali anda:",
+        "newUser": "atau buat akaun baharu di bawah",
+        "picTooltip": "Anda boleh menukar gambar ini kemudian",
+        "placeholder": {
+            "fullName": "Masukkan nama penuh anda"
+        }
     }
 }

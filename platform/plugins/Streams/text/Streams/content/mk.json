@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} во {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додадено во {{toTitle}} како {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ве спомна во коментар",
-        "Streams\/call": "{{displayName}} започна повик во реално време"
+        "Streams\/call": "{{displayName}} започна повик во реално време",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} се придружи",
+        "Streams\/left": "{{&call 'avatar.displayName'}} лево"
     },
     "invite": {
         "command": "Покани",
@@ -116,7 +118,24 @@
             "text": "Вие сте поканети. {{ClickOrTap}} тука за прифаќање и придружување."
         },
         "Invite": "Покани",
-        "Share": "Споделете"
+        "Share": "Споделете",
+        "roles": {
+            "title": "Да се доделат улоги на поканети корисници?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Извинете",
+                "alert": "Не сте овластени да ја доделите оваа улога"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Извинете",
+                "alert": "Не сте овластени да ја отстраните оваа улога"
+            }
+        },
+        "labels": {
+            "title": "Каква е вашата врска?"
+        },
+        "complete": {
+            "HasInvitedYou": "Ве покани да:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Телеконференцијата заврши"
         },
         "requestSpeakDialog": {
-            "msg": "Во моментов има {{count}} луѓе кои зборуваат на состанокот. Дали сакате да замените еден од нив откако ќе им дозволите {{seconds}} секунди да завршат со зборувањето?"
+            "msg": "Во моментов има {{count}} луѓе кои зборуваат на состанокот. Дали сакате да замените еден од нив откако ќе им дозволите {{seconds}} секунди да завршат со зборувањето?",
+            "dialogTitle": "Барање да се зборува"
+        },
+        "fbLive": {
+            "dialogTitle": "Започна преносот во живо на Фејсбук"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Управувајте со емитувањето"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Прашање",
-            "description": "тек на прашања"
+            "description": "тек на прашања",
+            "newItem": "Додадете прашање"
         },
         "Streams\/answer": {
             "displayType": "Одговори",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Напишете го вашето прашање",
         "ContentPlaceholder": "Ставете ги сите дополнителни информации овде за да им помогнете на луѓето да одговорат",
         "ErrorTitle": "Потребно е прашање",
-        "Placeholder": "Местоносител"
+        "Placeholder": "Местоносител",
+        "EditQuestion": "Уреди прашање",
+        "NewPossibleAnswer": "Нов можен одговор",
+        "answerText": "Текст",
+        "HideUntilAnswered": "Скриј додека не се одговори",
+        "CantChangeAnswers": "Не може да се променат одговорите",
+        "Save": "Зачувај",
+        "Send": "Испрати",
+        "TitleRequired": "Потребна е титула!",
+        "AreYouSure": "Дали си сигурен?"
     },
     "experience": {
         "NewExperience": "Ново искуство",
@@ -560,5 +596,18 @@
         "configurationSaved": "Конфигурацијата е зачувана",
         "error": "Нешто тргна наопаку",
         "privacySettings": "Поставки за приватност"
+    },
+    "avatar": {
+        "firstName": "име",
+        "lastName": "презиме",
+        "username": "корисничко име"
+    },
+    "login": {
+        "prompt": "Дозволете пријателите да ве препознаат:",
+        "newUser": "или креирајте нова сметка подолу",
+        "picTooltip": "Можете да ја промените оваа слика подоцна",
+        "placeholder": {
+            "fullName": "Внесете го вашето полно име"
+        }
     }
 }

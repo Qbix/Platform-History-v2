@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Новий {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додано до {{toTitle}} як {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} згадав вас у коментарі",
-        "Streams\/call": "{{displayName}} розпочав дзвінок у режимі реального часу"
+        "Streams\/call": "{{displayName}} розпочав дзвінок у режимі реального часу",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} приєднався",
+        "Streams\/left": "{{&call 'avatar.displayName'}} залишилося"
     },
     "invite": {
         "command": "Запросити",
@@ -116,7 +118,24 @@
             "text": "Вас запросили. {{ClickOrTap}} тут, щоб прийняти та приєднатися."
         },
         "Invite": "запросити",
-        "Share": "Поділіться"
+        "Share": "Поділіться",
+        "roles": {
+            "title": "Надати ролі запрошеним користувачам?",
+            "NotAuthorizedToGrantRole": {
+                "title": "вибач",
+                "alert": "Ви не вповноважені надавати цю роль"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "вибач",
+                "alert": "Ви не маєте права видалити цю роль"
+            }
+        },
+        "labels": {
+            "title": "Які у вас стосунки?"
+        },
+        "complete": {
+            "HasInvitedYou": "запросив вас:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Телеконференція завершена"
         },
         "requestSpeakDialog": {
-            "msg": "Зараз на зустрічі виступає {{count}} осіб. Ви бажаєте замінити одного з них після {{seconds}} секунд, щоб вони закінчили говорити?"
+            "msg": "Зараз на зустрічі виступає {{count}} осіб. Ви бажаєте замінити одного з них після {{seconds}} секунд, щоб вони закінчили говорити?",
+            "dialogTitle": "Запит на виступ"
+        },
+        "fbLive": {
+            "dialogTitle": "Почалася пряма трансляція у Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Керувати трансляцією"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Питання",
-            "description": "потік запитань"
+            "description": "потік запитань",
+            "newItem": "Додати запитання"
         },
         "Streams\/answer": {
             "displayType": "Відповідь",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Введіть своє запитання",
         "ContentPlaceholder": "Додайте будь-яку додаткову інформацію тут, щоб допомогти людям відповісти",
         "ErrorTitle": "Потрібне запитання",
-        "Placeholder": "Заповнювач"
+        "Placeholder": "Заповнювач",
+        "EditQuestion": "Редагувати питання",
+        "NewPossibleAnswer": "Нова можлива відповідь",
+        "answerText": "текст",
+        "HideUntilAnswered": "Ховайте, поки не відповісте",
+        "CantChangeAnswers": "Неможливо змінити відповіді",
+        "Save": "зберегти",
+        "Send": "Надіслати",
+        "TitleRequired": "Потрібна назва!",
+        "AreYouSure": "Ти впевнений?"
     },
     "experience": {
         "NewExperience": "Новий досвід",
@@ -560,5 +596,18 @@
         "configurationSaved": "Конфігурацію збережено",
         "error": "Щось пішло не так",
         "privacySettings": "Параметри конфіденційності"
+    },
+    "avatar": {
+        "firstName": "ім&#39;я",
+        "lastName": "прізвище",
+        "username": "ім&#39;я користувача"
+    },
+    "login": {
+        "prompt": "Нехай друзі впізнають вас:",
+        "newUser": "або створіть новий обліковий запис нижче",
+        "picTooltip": "Ви можете змінити це зображення пізніше",
+        "placeholder": {
+            "fullName": "Введіть Ваше повне ім&#39;я"
+        }
     }
 }

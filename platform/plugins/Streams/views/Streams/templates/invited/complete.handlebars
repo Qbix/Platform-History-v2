@@ -3,32 +3,17 @@
 		<h2 class="Users_dialog_title Q_dialog_title">Welcome to {{communityName}}</h2>
 	</div>
 	<div class="Q_dialog_slot Q_dialog_content Q_big_prompt">
+		<div class="Streams_login_explanation">
+			{{explanation}}
+		</div>
 		<form method="post" action="{{action}}" data-form-type="complete">
-			<div class="Streams_login_appear"></div>
-			<table>
-				{{#if invitingUser}}
-					<tr class="Streams_complete_invitingUser">
-						<td><img src="{{invitingUser.icon}}/50.png" title="{{invitingUser.displayName}} icon"></td>
-						<td><div>{{invitingUser.displayName}}</div><div>{{invitingUser.text}}</div></td>
-					</tr>
+			{{#if nameIsMissing}}
+				{{#if prompt}}
+					<label for="Streams_login_fullname">{{prompt}}</label>
+					<br>
 				{{/if}}
-					<tr class="Streams_complete_stream">
-						<td><img src="{{stream.fields.icon}}/50.png" title="{{stream.fields.title}}"></td>
-						<td><div>{{stream.fields.title}}</div></td>
-					</tr>
-				{{#if nameIsMissing}}
-					<tr class="Users_register_form">
-						<td class="Streams_login_picture"><img src="{{invitingUser.icon}}/50.png"></td>
-						<td class="Streams_login_fullname_block">
-							{{#if prompt}}
-								<label for="Streams_login_fullname">{{prompt}}</label>
-								<br>
-							{{/if}}
-							<input id="Streams_login_fullname" name="fullName" type="text" class="text" />
-						</td>
-					</tr>
-				{{/if}}
-			</table>
+				<input id="Streams_login_fullname" name="fullName" type="text" class="text" />
+			{{/if}}
 			<input type="hidden" name="token" value="{{token}}"/>
 			<input type="hidden" name="Q.method" value="get"/>
 			<div class="Streams_login_get_started">

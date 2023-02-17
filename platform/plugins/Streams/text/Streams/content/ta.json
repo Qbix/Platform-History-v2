@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}} இல் புதிய {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} இல் {{relationDisplayType}} ஆக சேர்க்கப்பட்டது",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ஒரு கருத்தில் உங்களைக் குறிப்பிட்டுள்ளார்",
-        "Streams\/call": "{{displayName}} நிகழ்நேர அழைப்பைத் தொடங்கினார்"
+        "Streams\/call": "{{displayName}} நிகழ்நேர அழைப்பைத் தொடங்கினார்",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} சேர்ந்தார்",
+        "Streams\/left": "{{&call 'avatar.displayName'}} வெளியேறியது"
     },
     "invite": {
         "command": "அழைக்கவும்",
@@ -116,7 +118,24 @@
             "text": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள். {{ClickOrTap}} ஏற்கவும் சேரவும் இங்கே."
         },
         "Invite": "அழைக்கவும்",
-        "Share": "பகிர்"
+        "Share": "பகிர்",
+        "roles": {
+            "title": "அழைக்கப்பட்ட பயனர்களுக்கு பாத்திரங்களை வழங்கவா?",
+            "NotAuthorizedToGrantRole": {
+                "title": "மன்னிக்கவும்",
+                "alert": "இந்தப் பாத்திரத்தை வழங்க உங்களுக்கு அங்கீகாரம் இல்லை"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "மன்னிக்கவும்",
+                "alert": "இந்தப் பாத்திரத்தை அகற்ற உங்களுக்கு அங்கீகாரம் இல்லை"
+            }
+        },
+        "labels": {
+            "title": "உங்கள் உறவு என்ன?"
+        },
+        "complete": {
+            "HasInvitedYou": "உங்களை அழைத்துள்ளார்:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "டெலிகான்பரன்ஸ் முடிந்தது"
         },
         "requestSpeakDialog": {
-            "msg": "மீட்டிங்கில் தற்போது {{count}} பேர் பேசுகிறார்கள். அவர்கள் பேசி முடிக்க {{seconds}} வினாடிகள் அனுமதித்த பிறகு அவற்றில் ஒன்றை மாற்ற விரும்புகிறீர்களா?"
+            "msg": "மீட்டிங்கில் தற்போது {{count}} பேர் பேசுகிறார்கள். அவர்கள் பேசி முடிக்க {{seconds}} வினாடிகள் அனுமதித்த பிறகு அவற்றில் ஒன்றை மாற்ற விரும்புகிறீர்களா?",
+            "dialogTitle": "பேச கோரிக்கை"
+        },
+        "fbLive": {
+            "dialogTitle": "பேஸ்புக் லைவ் ஸ்ட்ரீமிங் தொடங்கியது"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "ஒளிபரப்பை நிர்வகிக்கவும்"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "கேள்வி",
-            "description": "கேள்வி ஓட்டம்"
+            "description": "கேள்வி ஓட்டம்",
+            "newItem": "கேள்வியைச் சேர்க்கவும்"
         },
         "Streams\/answer": {
             "displayType": "பதில்",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "உங்கள் கேள்வியை உள்ளிடவும்",
         "ContentPlaceholder": "மக்கள் பதிலளிக்க உதவுவதற்கு ஏதேனும் கூடுதல் தகவலை இங்கே வைக்கவும்",
         "ErrorTitle": "கேள்வி தேவை",
-        "Placeholder": "ப்ளாஸ்ஹோல்டர்"
+        "Placeholder": "ப்ளாஸ்ஹோல்டர்",
+        "EditQuestion": "கேள்வியைத் திருத்தவும்",
+        "NewPossibleAnswer": "புதிய சாத்தியமான பதில்",
+        "answerText": "உரை",
+        "HideUntilAnswered": "பதில் வரும் வரை மறை",
+        "CantChangeAnswers": "பதில்களை மாற்ற முடியாது",
+        "Save": "சேமிக்கவும்",
+        "Send": "அனுப்பு",
+        "TitleRequired": "தலைப்பு தேவை!",
+        "AreYouSure": "நீ சொல்வது உறுதியா?"
     },
     "experience": {
         "NewExperience": "புதிய அனுபவம்",
@@ -560,5 +596,18 @@
         "configurationSaved": "உள்ளமைவு சேமிக்கப்பட்டது",
         "error": "ஏதோ தவறு நடைபெற்றிருக்கிறது",
         "privacySettings": "தனியுரிமை அமைப்புகள்"
+    },
+    "avatar": {
+        "firstName": "முதல் பெயர்",
+        "lastName": "கடைசி பெயர்",
+        "username": "பயனர் பெயர்"
+    },
+    "login": {
+        "prompt": "நண்பர்கள் உங்களை அடையாளம் காணட்டும்:",
+        "newUser": "அல்லது கீழே ஒரு புதிய கணக்கை உருவாக்கவும்",
+        "picTooltip": "இந்த படத்தை நீங்கள் பின்னர் மாற்றலாம்",
+        "placeholder": {
+            "fullName": "உங்கள் முழுப் பெயரை உள்ளிடவும்"
+        }
     }
 }

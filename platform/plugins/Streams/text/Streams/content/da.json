@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Nyt {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Tilføjet til {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nævnte dig i en kommentar",
-        "Streams\/call": "{{displayName}} startede et opkald i realtid"
+        "Streams\/call": "{{displayName}} startede et opkald i realtid",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} deltog",
+        "Streams\/left": "{{&call 'avatar.displayName'}} tilbage"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterede dig til {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Du kan nu indsætte dette link et sted for at invitere folk",
         "command": "Invitere",
         "Invite": "Invitere",
-        "Share": "Del"
+        "Share": "Del",
+        "roles": {
+            "title": "Tildele roller til inviterede brugere?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Undskyld",
+                "alert": "Du er ikke autoriseret til at tildele denne rolle"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Undskyld",
+                "alert": "Du er ikke autoriseret til at fjerne denne rolle"
+            }
+        },
+        "labels": {
+            "title": "Hvad er dit forhold?"
+        },
+        "complete": {
+            "HasInvitedYou": "har inviteret dig til:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Indstillinger for streaming"
         },
         "requestSpeakDialog": {
-            "msg": "Der er i øjeblikket {{count}} personer, der taler i mødet. Vil du erstatte en af dem, efter du har givet dem {{seconds}} sekunder til at tale færdig?"
+            "msg": "Der er i øjeblikket {{count}} personer, der taler i mødet. Vil du erstatte en af dem, efter du har givet dem {{seconds}} sekunder til at tale færdig?",
+            "dialogTitle": "Anmodning om at tale"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook livestreaming startede"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Administrer udsendelse"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Spørgsmål",
-            "description": "spørgsmålsstrøm"
+            "description": "spørgsmålsstrøm",
+            "newItem": "Tilføj spørgsmål"
         },
         "Streams\/answer": {
             "displayType": "Svar",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Indtast dit spørgsmål",
         "ContentPlaceholder": "Læg yderligere oplysninger her for at hjælpe folk med at svare",
         "ErrorTitle": "Spørgsmål påkrævet",
-        "Placeholder": "Pladsholder"
+        "Placeholder": "Pladsholder",
+        "EditQuestion": "Rediger spørgsmål",
+        "NewPossibleAnswer": "Nyt muligt svar",
+        "answerText": "Tekst",
+        "HideUntilAnswered": "Skjul indtil svaret",
+        "CantChangeAnswers": "Kan ikke ændre svar",
+        "Save": "Gemme",
+        "Send": "Sende",
+        "TitleRequired": "Titel påkrævet!",
+        "AreYouSure": "Er du sikker?"
     },
     "experience": {
         "NewExperience": "Ny oplevelse",
@@ -566,5 +602,18 @@
         "configurationSaved": "Konfiguration gemt",
         "error": "Noget gik galt",
         "privacySettings": "Privatindstillinger"
+    },
+    "avatar": {
+        "firstName": "fornavn",
+        "lastName": "efternavn",
+        "username": "brugernavn"
+    },
+    "login": {
+        "prompt": "Lad venner genkende dig:",
+        "newUser": "eller opret en ny konto nedenfor",
+        "picTooltip": "Du kan ændre dette billede senere",
+        "placeholder": {
+            "fullName": "Skriv dit fulde navn"
+        }
     }
 }

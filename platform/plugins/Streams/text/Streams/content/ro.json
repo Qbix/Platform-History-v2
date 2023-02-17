@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} în {{toTitle}}",
         "Streams\/relatedFrom\/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} te-a menționat într-un comentariu",
-        "Streams\/call": "{{displayName}} a început un apel în timp real"
+        "Streams\/call": "{{displayName}} a început un apel în timp real",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} s-a alăturat",
+        "Streams\/left": "{{&call 'avatar.displayName'}} a plecat"
     },
     "invite": {
         "command": "A invita",
@@ -116,7 +118,24 @@
             "text": "Ai fost invitat. {{ClickOrTap}} aici pentru a accepta și a vă alătura."
         },
         "Invite": "A invita",
-        "Share": "Acțiune"
+        "Share": "Acțiune",
+        "roles": {
+            "title": "Acordați roluri utilizatorilor invitați?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Îmi pare rău",
+                "alert": "Nu sunteți autorizat să acordați acest rol"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Îmi pare rău",
+                "alert": "Nu sunteți autorizat să eliminați acest rol"
+            }
+        },
+        "labels": {
+            "title": "Care este relația ta?"
+        },
+        "complete": {
+            "HasInvitedYou": "v-a invitat la:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Teleconferința s-a încheiat"
         },
         "requestSpeakDialog": {
-            "msg": "În prezent, sunt {{count}} persoane care vorbesc în întâlnire. Doriți să înlocuiți unul dintre ele după ce le-ați lăsat {{seconds}} secunde pentru a termina de vorbit?"
+            "msg": "În prezent, sunt {{count}} persoane care vorbesc în întâlnire. Doriți să înlocuiți unul dintre ele după ce le-ați lăsat {{seconds}} secunde pentru a termina de vorbit?",
+            "dialogTitle": "Cerere de a vorbi"
+        },
+        "fbLive": {
+            "dialogTitle": "A început fluxul live pe Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Gestionați difuzarea"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Întrebare",
-            "description": "flux de întrebări"
+            "description": "flux de întrebări",
+            "newItem": "Adăugați o întrebare"
         },
         "Streams\/answer": {
             "displayType": "Răspuns",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Introduceți întrebarea dvs",
         "ContentPlaceholder": "Pune orice informații suplimentare aici pentru a ajuta oamenii să răspundă",
         "ErrorTitle": "Întrebare necesară",
-        "Placeholder": "Substituent"
+        "Placeholder": "Substituent",
+        "EditQuestion": "Editați întrebarea",
+        "NewPossibleAnswer": "Răspuns posibil nou",
+        "answerText": "Text",
+        "HideUntilAnswered": "Ascunde până la răspuns",
+        "CantChangeAnswers": "Nu pot schimba răspunsurile",
+        "Save": "Salvați",
+        "Send": "Trimite",
+        "TitleRequired": "Titlul necesar!",
+        "AreYouSure": "Esti sigur?"
     },
     "experience": {
         "NewExperience": "Experienta noua",
@@ -560,5 +596,18 @@
         "configurationSaved": "Configurație salvată",
         "error": "Ceva n-a mers bine",
         "privacySettings": "Setările de confidențialitate"
+    },
+    "avatar": {
+        "firstName": "Nume",
+        "lastName": "nume",
+        "username": "nume de utilizator"
+    },
+    "login": {
+        "prompt": "Lasă prietenii să te recunoască:",
+        "newUser": "sau creați un cont nou mai jos",
+        "picTooltip": "Puteți schimba această imagine mai târziu",
+        "placeholder": {
+            "fullName": "Introduceți numele dvs. complet"
+        }
     }
 }

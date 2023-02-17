@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Ġdid {{relationDisplayType}} fi {{toTitle}}",
         "Streams\/relatedFrom\/*": "Miżjud ma&#39; {{toTitle}} bħala {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} semmejtek f&#39;kumment",
-        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali"
+        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} ingħaqad",
+        "Streams\/left": "{{&call 'avatar.displayName'}} telaq"
     },
     "invite": {
         "command": "Stieden",
@@ -116,7 +118,24 @@
             "text": "Ġejt mistieden. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
         },
         "Invite": "Stieden",
-        "Share": "Aqsam"
+        "Share": "Aqsam",
+        "roles": {
+            "title": "Għoti Rwoli lill-Utenti Mistiedna?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Jiddispjacini",
+                "alert": "M&#39;intix awtorizzat li tagħti dan ir-rwol"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Jiddispjacini",
+                "alert": "M&#39;intix awtorizzat li tneħħi dan ir-rwol"
+            }
+        },
+        "labels": {
+            "title": "X&#39;inhi r-Relazzjoni tiegħek?"
+        },
+        "complete": {
+            "HasInvitedYou": "stiedenek biex:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telekonferenza ntemmet"
         },
         "requestSpeakDialog": {
-            "msg": "Bħalissa hemm {{count}} nies jitkellmu fil-laqgħa. Trid tissostitwixxi waħda minnhom wara li tħallihom {{seconds}} sekondi biex jispiċċaw jitkellmu?"
+            "msg": "Bħalissa hemm {{count}} nies jitkellmu fil-laqgħa. Trid tissostitwixxi waħda minnhom wara li tħallihom {{seconds}} sekondi biex jispiċċaw jitkellmu?",
+            "dialogTitle": "Talba biex Tkellem"
+        },
+        "fbLive": {
+            "dialogTitle": "Beda l-live streaming fuq Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Immaniġġja Broadcast"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Mistoqsija",
-            "description": "fluss tal-mistoqsijiet"
+            "description": "fluss tal-mistoqsijiet",
+            "newItem": "Żid Mistoqsija"
         },
         "Streams\/answer": {
             "displayType": "Tweġiba",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Ittajpja l-mistoqsija tiegħek",
         "ContentPlaceholder": "Poġġi kwalunkwe informazzjoni addizzjonali hawn biex tgħin lin-nies iwieġbu",
         "ErrorTitle": "Mistoqsija meħtieġa",
-        "Placeholder": "Placeholder"
+        "Placeholder": "Placeholder",
+        "EditQuestion": "Edit Mistoqsija",
+        "NewPossibleAnswer": "Tweġiba Possibbli Ġdida",
+        "answerText": "Test",
+        "HideUntilAnswered": "Aħbi sakemm tirrispondi",
+        "CantChangeAnswers": "Ma tistax tbiddel it-tweġibiet",
+        "Save": "Ħlief",
+        "Send": "Ibgħat",
+        "TitleRequired": "Titlu meħtieġ!",
+        "AreYouSure": "Żgur?"
     },
     "experience": {
         "NewExperience": "Esperjenza Ġdida",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfigurazzjoni salvata",
         "error": "Xi ħaġa marret ħażin",
         "privacySettings": "Settings tal-Privatezza"
+    },
+    "avatar": {
+        "firstName": "isem",
+        "lastName": "kunjom",
+        "username": "username"
+    },
+    "login": {
+        "prompt": "Ħalli lill-ħbieb jagħrfuk:",
+        "newUser": "jew oħloq kont ġdid hawn taħt",
+        "picTooltip": "Tista&#39; tibdel din l-istampa aktar tard",
+        "placeholder": {
+            "fullName": "Daħħal l-isem sħiħ tiegħek"
+        }
     }
 }

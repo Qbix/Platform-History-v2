@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}}の新しい{{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}}に{{relationDisplayType}}として追加",
         "Streams\/mention": "{{&call 'avatar.displayName'}}がコメントであなたに言及しました",
-        "Streams\/call": "{{displayName}}がリアルタイム通話を開始しました"
+        "Streams\/call": "{{displayName}}がリアルタイム通話を開始しました",
+        "Streams\/joined": "{{&call 'avatar.displayName'}}が参加",
+        "Streams\/left": "{{&call 'avatar.displayName'}}左"
     },
     "invite": {
         "command": "招待",
@@ -116,7 +118,24 @@
             "text": "あなたは招待されました。 {{ClickOrTap}}ここで受け入れて参加します。"
         },
         "Invite": "招待",
-        "Share": "シェア"
+        "Share": "シェア",
+        "roles": {
+            "title": "招待されたユーザーにロールを付与しますか?",
+            "NotAuthorizedToGrantRole": {
+                "title": "ごめん",
+                "alert": "この役割を付与する権限がありません"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "ごめん",
+                "alert": "この役割を削除する権限がありません"
+            }
+        },
+        "labels": {
+            "title": "あなたの関係は何ですか？"
+        },
+        "complete": {
+            "HasInvitedYou": "さんがあなたを招待しました:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "電話会議終了"
         },
         "requestSpeakDialog": {
-            "msg": "現在{{count}}人が会議で発言しています。 {{seconds}} 秒間話し終えたら、そのうちの 1 つを置き換えますか?"
+            "msg": "現在{{count}}人が会議で発言しています。 {{seconds}} 秒間話し終えたら、そのうちの 1 つを置き換えますか?",
+            "dialogTitle": "発言のリクエスト"
+        },
+        "fbLive": {
+            "dialogTitle": "フェイスブックライブ配信開始"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "ブロードキャストの管理"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "質問",
-            "description": "質問ストリーム"
+            "description": "質問ストリーム",
+            "newItem": "質問を追加"
         },
         "Streams\/answer": {
             "displayType": "答え",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "質問を入力してください",
         "ContentPlaceholder": "人々が答えるのを助けるためにここに追加情報を入れてください",
         "ErrorTitle": "質問が必要です",
-        "Placeholder": "プレースホルダー"
+        "Placeholder": "プレースホルダー",
+        "EditQuestion": "質問を編集",
+        "NewPossibleAnswer": "新しい可能な答え",
+        "answerText": "文章",
+        "HideUntilAnswered": "回答があるまで非表示",
+        "CantChangeAnswers": "回答を変更できません",
+        "Save": "保存",
+        "Send": "送信",
+        "TitleRequired": "タイトル必須！",
+        "AreYouSure": "本気ですか？"
     },
     "experience": {
         "NewExperience": "新しい経験",
@@ -560,5 +596,18 @@
         "configurationSaved": "設定を保存しました",
         "error": "エラーが発生しました",
         "privacySettings": "プライバシー設定"
+    },
+    "avatar": {
+        "firstName": "ファーストネーム",
+        "lastName": "苗字",
+        "username": "ユーザー名"
+    },
+    "login": {
+        "prompt": "友達にあなたを認識してもらいましょう:",
+        "newUser": "または、以下で新しいアカウントを作成してください",
+        "picTooltip": "この画像は後で変更できます",
+        "placeholder": {
+            "fullName": "フルネームを入れて下さい"
+        }
     }
 }

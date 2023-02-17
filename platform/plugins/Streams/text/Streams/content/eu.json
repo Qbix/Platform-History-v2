@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} berria {{toTitle}}-n",
         "Streams\/relatedFrom\/*": "{{toTitle}}-n {{relationDisplayType}} gisa gehitu da",
         "Streams\/mention": "{{&call 'avatar.displayName'}}-k iruzkin batean aipatu zaitu",
-        "Streams\/call": "{{displayName}}-k denbora errealeko dei bat hasi zuen"
+        "Streams\/call": "{{displayName}}-k denbora errealeko dei bat hasi zuen",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} sartu da",
+        "Streams\/left": "{{&call 'avatar.displayName'}} utzi"
     },
     "invite": {
         "messageContent": "{{displayName}}-k {{inviteUrl}} gonbidatu zaitu",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Orain esteka hau nonbait itsats dezakezu jendea gonbidatzeko",
         "command": "Gonbidatu",
         "Invite": "Gonbidatu",
-        "Share": "Partekatu"
+        "Share": "Partekatu",
+        "roles": {
+            "title": "Gonbidatutako erabiltzaileei rolak eman?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Barkatu",
+                "alert": "Ez duzu baimenik eginkizun hau emateko"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Barkatu",
+                "alert": "Ez duzu baimenik eginkizun hau kentzeko"
+            }
+        },
+        "labels": {
+            "title": "Zein da zure Harremana?"
+        },
+        "complete": {
+            "HasInvitedYou": "honetara gonbidatu zaitu:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Streaming ezarpenak"
         },
         "requestSpeakDialog": {
-            "msg": "Une honetan {{count}} pertsona daude bileran hitz egiten. Horietako bat ordezkatu nahi duzu hitz egiten amaitzeko {{seconds}} segundo utzi ondoren?"
+            "msg": "Une honetan {{count}} pertsona daude bileran hitz egiten. Horietako bat ordezkatu nahi duzu hitz egiten amaitzeko {{seconds}} segundo utzi ondoren?",
+            "dialogTitle": "Hitz egiteko eskaera"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook zuzeneko erreprodukzioa hasi zen"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Kudeatu Igorpena"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Galdera",
-            "description": "galdera-jarioa"
+            "description": "galdera-jarioa",
+            "newItem": "Gehitu galdera"
         },
         "Streams\/answer": {
             "displayType": "Erantzun",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Idatzi zure galdera",
         "ContentPlaceholder": "Jarri hemen informazio gehigarria jendeari erantzuten laguntzeko",
         "ErrorTitle": "Galdera behar da",
-        "Placeholder": "Leku-marka"
+        "Placeholder": "Leku-marka",
+        "EditQuestion": "Editatu galdera",
+        "NewPossibleAnswer": "Erantzun posible berria",
+        "answerText": "Testua",
+        "HideUntilAnswered": "Ezkutatu erantzun arte",
+        "CantChangeAnswers": "Ezin dira erantzunak aldatu",
+        "Save": "Gorde",
+        "Send": "Bidali",
+        "TitleRequired": "Izenburua beharrezkoa!",
+        "AreYouSure": "Ziur zaude?"
     },
     "experience": {
         "NewExperience": "Esperientzia Berria",
@@ -566,5 +602,18 @@
         "configurationSaved": "Konfigurazioa gorde da",
         "error": "Zerbait gaizki joan da",
         "privacySettings": "Pribatutasun ezarpenak"
+    },
+    "avatar": {
+        "firstName": "izena",
+        "lastName": "abizena",
+        "username": "erabiltzaile-izena"
+    },
+    "login": {
+        "prompt": "Utzi lagunei ezagutarazten:",
+        "newUser": "edo sortu kontu berri bat behean",
+        "picTooltip": "Irudi hau geroago alda dezakezu",
+        "placeholder": {
+            "fullName": "Sartu zure izen-abizenak"
+        }
     }
 }

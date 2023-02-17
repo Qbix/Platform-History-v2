@@ -52,6 +52,11 @@ function Users_activate_post()
 			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
 		));
 	}
+
+	if ($user) {
+		Q_Response::setSlot('user', $user->exportArray());
+	}
+	Q_Response::setSlot('form', '');
 	
 	Users::$cache['passphrase_set'] = true;
 	Users::$cache['success'] = true;

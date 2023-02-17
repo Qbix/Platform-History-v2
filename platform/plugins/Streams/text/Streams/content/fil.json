@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}",
         "Streams\/mention": "Binanggit ka ng {{&call 'avatar.displayName'}} sa isang puna",
-        "Streams\/call": "Tinatawag ka ng {{displayName}}"
+        "Streams\/call": "Tinatawag ka ng {{displayName}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} sumali",
+        "Streams\/left": "{{&call 'avatar.displayName'}} umalis"
     },
     "invite": {
         "messageContent": "Inimbitahan ka ni {{displayName}} na {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Maaari mo na ngayong i-paste ang link na ito sa isang lugar upang anyayahan ang mga tao",
         "command": "Mag-anyaya",
         "Invite": "Mag-anyaya",
-        "Share": "Ibahagi"
+        "Share": "Ibahagi",
+        "roles": {
+            "title": "Magbigay ng Mga Tungkulin sa Mga Inimbitahang User?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Paumanhin",
+                "alert": "Wala kang pahintulot na ibigay ang tungkuling ito"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Paumanhin",
+                "alert": "Wala kang pahintulot na alisin ang tungkuling ito"
+            }
+        },
+        "labels": {
+            "title": "Ano ang Relasyon mo?"
+        },
+        "complete": {
+            "HasInvitedYou": "ay nag-imbita sa iyo sa:"
+        }
     },
     "followup": {
         "mobile": {
@@ -283,7 +302,14 @@
             "title": "Mga Setting ng Streaming"
         },
         "requestSpeakDialog": {
-            "msg": "Kasalukuyang {{count}} ang mga taong nagsasalita sa pulong. Gusto mo bang palitan ang isa sa mga ito pagkatapos payagan silang {{seconds}} (na) segundo na matapos magsalita?"
+            "msg": "Kasalukuyang {{count}} ang mga taong nagsasalita sa pulong. Gusto mo bang palitan ang isa sa mga ito pagkatapos payagan silang {{seconds}} (na) segundo na matapos magsalita?",
+            "dialogTitle": "Kahilingan na Magsalita"
+        },
+        "fbLive": {
+            "dialogTitle": "Nagsimula ang live streaming sa Facebook"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Pamahalaan ang Broadcast"
         }
     },
     "types": {
@@ -406,7 +432,8 @@
         },
         "Streams\/question": {
             "displayType": "Tanong",
-            "description": "tanong na stream"
+            "description": "tanong na stream",
+            "newItem": "Magdagdag ng Tanong"
         },
         "Streams\/answer": {
             "displayType": "Sagot",
@@ -535,7 +562,16 @@
         "TitlePlaceholder": "I-type ang iyong katanungan",
         "ContentPlaceholder": "Maglagay ng anumang karagdagang impormasyon dito upang matulungan ang mga tao na sagutin",
         "ErrorTitle": "Kailangan ng tanong",
-        "Placeholder": "Placeholder"
+        "Placeholder": "Placeholder",
+        "EditQuestion": "I-edit ang Tanong",
+        "NewPossibleAnswer": "Bagong Posibleng Sagot",
+        "answerText": "Text",
+        "HideUntilAnswered": "Itago hanggang sa masagot",
+        "CantChangeAnswers": "Hindi mababago ang mga sagot",
+        "Save": "I-save",
+        "Send": "Ipadala",
+        "TitleRequired": "Kinakailangan ang pamagat!",
+        "AreYouSure": "Sigurado ka ba?"
     },
     "experience": {
         "NewExperience": "Bagong karanasan",
@@ -563,5 +599,18 @@
         "configurationSaved": "Na-save ang configuration",
         "error": "Nagkaproblema",
         "privacySettings": "Settings para sa pagsasa-pribado"
+    },
+    "avatar": {
+        "firstName": "pangalan",
+        "lastName": "huling pangalan",
+        "username": "username"
+    },
+    "login": {
+        "prompt": "Hayaang makilala ka ng mga kaibigan:",
+        "newUser": "o gumawa ng bagong account sa ibaba",
+        "picTooltip": "Maaari mong baguhin ang larawang ito sa ibang pagkakataon",
+        "placeholder": {
+            "fullName": "Ilagay ang iyong buong pangalan"
+        }
     }
 }

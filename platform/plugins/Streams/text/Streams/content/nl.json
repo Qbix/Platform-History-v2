@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Nieuw {{relationDisplayType}} binnen {{toTitle}}",
         "Streams\/relatedFrom\/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} heeft je genoemd in een opmerking",
-        "Streams\/call": "{{displayName}} heeft een realtime gesprek gestart"
+        "Streams\/call": "{{displayName}} heeft een realtime gesprek gestart",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} is lid geworden",
+        "Streams\/left": "{{&call 'avatar.displayName'}} over"
     },
     "invite": {
         "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Je kunt deze link nu ergens plakken om mensen uit te nodigen",
         "command": "Uitnodiging",
         "Invite": "Nodig uit",
-        "Share": "Deel"
+        "Share": "Deel",
+        "roles": {
+            "title": "Rollen toekennen aan uitgenodigde gebruikers?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Sorry",
+                "alert": "U bent niet bevoegd om deze rol toe te kennen"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Sorry",
+                "alert": "U bent niet gemachtigd om deze rol te verwijderen"
+            }
+        },
+        "labels": {
+            "title": "Wat is je relatie?"
+        },
+        "complete": {
+            "HasInvitedYou": "heeft u uitgenodigd voor:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Streaminginstellingen"
         },
         "requestSpeakDialog": {
-            "msg": "Er zijn momenteel {{count}} mensen aan het woord in de vergadering. Wil je een van hen vervangen nadat je ze {{seconds}} seconden de tijd hebt gegeven om uit te spreken?"
+            "msg": "Er zijn momenteel {{count}} mensen aan het woord in de vergadering. Wil je een van hen vervangen nadat je ze {{seconds}} seconden de tijd hebt gegeven om uit te spreken?",
+            "dialogTitle": "Verzoek om te spreken"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook-livestreaming is gestart"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Uitzending beheren"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Ondervragen",
-            "description": "vragenstroom"
+            "description": "vragenstroom",
+            "newItem": "Vraag toevoegen"
         },
         "Streams\/answer": {
             "displayType": "Antwoord",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Typ uw vraag",
         "ContentPlaceholder": "Plaats hier eventuele aanvullende informatie om mensen te helpen antwoorden",
         "ErrorTitle": "Vraag vereist",
-        "Placeholder": "Tijdelijke aanduiding"
+        "Placeholder": "Tijdelijke aanduiding",
+        "EditQuestion": "Vraag bewerken",
+        "NewPossibleAnswer": "Nieuw mogelijk antwoord",
+        "answerText": "Tekst",
+        "HideUntilAnswered": "Verbergen totdat beantwoord",
+        "CantChangeAnswers": "Antwoorden kunnen niet worden gewijzigd",
+        "Save": "Redden",
+        "Send": "Versturen",
+        "TitleRequired": "Titel vereist!",
+        "AreYouSure": "Weet je het zeker?"
     },
     "experience": {
         "NewExperience": "Nieuwe ervaring",
@@ -566,5 +602,18 @@
         "configurationSaved": "Configuratie opgeslagen",
         "error": "Er is iets fout gegaan",
         "privacySettings": "Privacy instellingen"
+    },
+    "avatar": {
+        "firstName": "Voornaam",
+        "lastName": "achternaam",
+        "username": "gebruikersnaam"
+    },
+    "login": {
+        "prompt": "Laat vrienden je herkennen:",
+        "newUser": "of maak hieronder een nieuw account aan",
+        "picTooltip": "U kunt deze afbeelding later wijzigen",
+        "placeholder": {
+            "fullName": "Vul uw volledige naam in"
+        }
     }
 }

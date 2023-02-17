@@ -73,15 +73,7 @@ function Q_response($params)
 	// What to do if this is an AJAX request
 	if ($isAjax) {
 		$to_encode = array();
-		if (Q_Response::$redirected) {
-			// We already called Q_Response::redirect
-			$to_encode['redirect']['url'] = Q_Uri::url(Q_Response::$redirected);
-			try {
-				$to_encode['redirect']['uri'] = Q_Uri::from(Q_Response::$redirected)->toArray();
-			} catch (Exception $e) {
-				// couldn't get internal URI
-			}
-		} else if (is_array($slotNames)) {
+		if (is_array($slotNames)) {
 			foreach ($slotNames as $slotName) {
 				Q_Response::fillSlot($slotName, 'default',
 					Q::ifset($idPrefixes, $slotName, null)
@@ -94,15 +86,7 @@ function Q_response($params)
 					Q::ifset($idPrefixes, $slotName, null)
 				);
 			}
-			if (Q_Response::$redirected) {
-				// While rendering the slots we called Q_Redirect
-				$to_encode['redirect']['url'] = Q_Uri::url(Q_Response::$redirected);
-				try {
-					$to_encode['redirect']['uri'] = Q_Uri::from(Q_Response::$redirected)->toArray();
-				} catch (Exception $e) {
-					// couldn't get internal URI
-				}
-			} else if (Q_Request::shouldLoadExtras()) {
+			if (Q_Request::shouldLoadExtras()) {
 				Q_Response::processResponseExtras('after');
 				Q_Response::processSessionExtras('after');
 				$to_encode['slots'] = Q_Response::slots(true);
@@ -142,6 +126,15 @@ function Q_response($params)
 					$temp = Q_Response::metasArray($slotName);
 					if ($temp) $to_encode['metas'][$slotName] = $temp;
 				}
+			}
+		}
+		if (Q_Response::$redirected) {
+			// We already called Q_Response::redirect
+			$to_encode['redirect']['url'] = Q_Uri::url(Q_Response::$redirected);
+			try {
+				$to_encode['redirect']['uri'] = Q_Uri::from(Q_Response::$redirected)->toArray();
+			} catch (Exception $e) {
+				// couldn't get internal URI
 			}
 		}
 		$to_encode['timestamp'] = microtime(true);

@@ -19,13 +19,13 @@
         "No": "No"
     },
     "login": {
-		"prompt": "Let friends recognize you:",
-		"newUser": "or create a new account below",
-		"picTooltip": "You can change this picture later",
-		"placeholder": {
-			"fullName": "Enter your full name"
-		}
-	},
+        "prompt": "Let friends recognize you:",
+        "newUser": "or create a new account below",
+        "picTooltip": "You can change this picture later",
+        "placeholder": {
+            "fullName": "Enter your full name"
+        }
+    },
     "interests": {
         "Filter": "Search interests",
         "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
@@ -98,7 +98,7 @@
             }
         },
         "labels": {
-            "title": "Add Relationships to Invited Users?"
+            "title": "What is your Relationship?"
         },
         "dialog": {
             "chooseFromContacts": "Choose from your Contacts",
@@ -132,7 +132,9 @@
             "inviteViaEmailOrSms": "Invite via email or SMS"
         },
         "complete": {
-            "HasInvitedYou": "has invited you to:"
+            "HasInvitedYou": "has invited you to:",
+            "prompt": "Let friends recognize you:",
+			"accept": "Accept Invite"
         },
         "email": {
             "subject": "Hey, check this out",

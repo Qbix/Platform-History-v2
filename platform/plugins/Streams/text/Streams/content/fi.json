@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Uusi {{relationDisplayType}} kohteessa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mainitsi sinut kommentissa",
-        "Streams\/call": "{{displayName}} aloitti reaaliaikaisen puhelun"
+        "Streams\/call": "{{displayName}} aloitti reaaliaikaisen puhelun",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} liittyi",
+        "Streams\/left": "{{&call 'avatar.displayName'}} jäljellä"
     },
     "invite": {
         "command": "Kutsu",
@@ -116,7 +118,24 @@
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyäksesi ja liittyäksesi."
         },
         "Invite": "Kutsu",
-        "Share": "Jaa"
+        "Share": "Jaa",
+        "roles": {
+            "title": "Myönnetäänkö kutsutuille käyttäjille rooleja?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Anteeksi",
+                "alert": "Sinulla ei ole oikeutta myöntää tätä roolia"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Anteeksi",
+                "alert": "Sinulla ei ole oikeutta poistaa tätä roolia"
+            }
+        },
+        "labels": {
+            "title": "Mikä on suhteesi?"
+        },
+        "complete": {
+            "HasInvitedYou": "on kutsunut sinut:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Puhelinkonferenssi päättyi"
         },
         "requestSpeakDialog": {
-            "msg": "Tällä hetkellä kokouksessa puhuu {{count}} henkilöä. Haluatko korvata yhden niistä, kun olet antanut heille {{seconds}} sekuntia puhua loppuun?"
+            "msg": "Tällä hetkellä kokouksessa puhuu {{count}} henkilöä. Haluatko korvata yhden niistä, kun olet antanut heille {{seconds}} sekuntia puhua loppuun?",
+            "dialogTitle": "Pyydä puhua"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebookin live-lähetys alkoi"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Hallinnoi lähetystä"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Kysymys",
-            "description": "kysymysvirta"
+            "description": "kysymysvirta",
+            "newItem": "Lisää kysymys"
         },
         "Streams\/answer": {
             "displayType": "Vastaus",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Kirjoita kysymyksesi",
         "ContentPlaceholder": "Laita tähän lisätietoa auttaaksesi ihmisiä vastaamaan",
         "ErrorTitle": "Kysymys vaaditaan",
-        "Placeholder": "Paikanpitäjä"
+        "Placeholder": "Paikanpitäjä",
+        "EditQuestion": "Muokkaa kysymystä",
+        "NewPossibleAnswer": "Uusi mahdollinen vastaus",
+        "answerText": "Teksti",
+        "HideUntilAnswered": "Piilota, kunnes saat vastauksen",
+        "CantChangeAnswers": "Vastauksia ei voi muuttaa",
+        "Save": "Tallentaa",
+        "Send": "Lähettää",
+        "TitleRequired": "Otsikko vaaditaan!",
+        "AreYouSure": "Oletko varma?"
     },
     "experience": {
         "NewExperience": "Uusi kokemus",
@@ -560,5 +596,18 @@
         "configurationSaved": "Kokoonpano tallennettu",
         "error": "Jotain meni pieleen",
         "privacySettings": "Tietosuoja-asetukset"
+    },
+    "avatar": {
+        "firstName": "etunimi",
+        "lastName": "sukunimi",
+        "username": "käyttäjätunnus"
+    },
+    "login": {
+        "prompt": "Anna ystävien tunnistaa sinut:",
+        "newUser": "tai luo uusi tili alla",
+        "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin",
+        "placeholder": {
+            "fullName": "Kirjoita koko nimesi"
+        }
     }
 }

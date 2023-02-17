@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}} માં નવું {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} માં {{relationDisplayType}} તરીકે ઉમેર્યું",
         "Streams\/mention": "{{&call 'avatar.displayName'}} એ ટિપ્પણીમાં તમારો ઉલ્લેખ કર્યો છે",
-        "Streams\/call": "{{displayName}} એ રીઅલ-ટાઇમ કૉલ શરૂ કર્યો"
+        "Streams\/call": "{{displayName}} એ રીઅલ-ટાઇમ કૉલ શરૂ કર્યો",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} જોડાયા",
+        "Streams\/left": "{{&call 'avatar.displayName'}} બાકી"
     },
     "invite": {
         "command": "આમંત્રિત",
@@ -116,7 +118,24 @@
             "text": "તમને આમંત્રણ આપવામાં આવ્યું છે. સ્વીકારવા અને જોડાવા માટે અહીં {{ClickOrTap}}."
         },
         "Invite": "આમંત્રિત",
-        "Share": "શેર કરો"
+        "Share": "શેર કરો",
+        "roles": {
+            "title": "આમંત્રિત વપરાશકર્તાઓને ભૂમિકાઓ આપો?",
+            "NotAuthorizedToGrantRole": {
+                "title": "માફ કરશો",
+                "alert": "તમે આ ભૂમિકા આપવા માટે અધિકૃત નથી"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "માફ કરશો",
+                "alert": "તમે આ ભૂમિકા દૂર કરવા માટે અધિકૃત નથી"
+            }
+        },
+        "labels": {
+            "title": "તમારો સંબંધ શું છે?"
+        },
+        "complete": {
+            "HasInvitedYou": "તમને આ માટે આમંત્રિત કર્યા છે:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "ટેલીકોન્ફરન્સ સમાપ્ત થઈ"
         },
         "requestSpeakDialog": {
-            "msg": "મીટિંગમાં હાલમાં {{count}} લોકો બોલી રહ્યાં છે. શું તમે તેમને {{seconds}} સેકન્ડ બોલવાનું સમાપ્ત કર્યા પછી તેમાંથી એકને બદલવા માંગો છો?"
+            "msg": "મીટિંગમાં હાલમાં {{count}} લોકો બોલી રહ્યાં છે. શું તમે તેમને {{seconds}} સેકન્ડ બોલવાનું સમાપ્ત કર્યા પછી તેમાંથી એકને બદલવા માંગો છો?",
+            "dialogTitle": "બોલવા વિનંતી"
+        },
+        "fbLive": {
+            "dialogTitle": "ફેસબુક લાઇવ સ્ટ્રીમિંગ શરૂ થયું"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "બ્રોડકાસ્ટ મેનેજ કરો"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "પ્રશ્ન",
-            "description": "પ્રશ્ન પ્રવાહ"
+            "description": "પ્રશ્ન પ્રવાહ",
+            "newItem": "પ્રશ્ન ઉમેરો"
         },
         "Streams\/answer": {
             "displayType": "જવાબ આપો",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "તમારો પ્રશ્ન લખો",
         "ContentPlaceholder": "લોકોને જવાબ આપવામાં મદદ કરવા માટે કોઈપણ વધારાની માહિતી અહીં મૂકો",
         "ErrorTitle": "પ્રશ્ન જરૂરી છે",
-        "Placeholder": "પ્લેસહોલ્ડર"
+        "Placeholder": "પ્લેસહોલ્ડર",
+        "EditQuestion": "પ્રશ્ન સંપાદિત કરો",
+        "NewPossibleAnswer": "નવો સંભવિત જવાબ",
+        "answerText": "ટેક્સ્ટ",
+        "HideUntilAnswered": "જવાબ ન મળે ત્યાં સુધી છુપાવો",
+        "CantChangeAnswers": "જવાબો બદલી શકતા નથી",
+        "Save": "સાચવો",
+        "Send": "મોકલો",
+        "TitleRequired": "શીર્ષક આવશ્યક છે!",
+        "AreYouSure": "શું તમને ખાતરી છે?"
     },
     "experience": {
         "NewExperience": "નવો અનુભવ",
@@ -560,5 +596,18 @@
         "configurationSaved": "રૂપરેખાંકન સાચવ્યું",
         "error": "કંઈક ખોટું થયું",
         "privacySettings": "ગોપનીયતા સેટિંગ્સ"
+    },
+    "avatar": {
+        "firstName": "પ્રથમ નામ",
+        "lastName": "છેલ્લું નામ",
+        "username": "વપરાશકર્તા નામ"
+    },
+    "login": {
+        "prompt": "મિત્રોને તમને ઓળખવા દો:",
+        "newUser": "અથવા નીચે એક નવું એકાઉન્ટ બનાવો",
+        "picTooltip": "તમે આ ચિત્રને પછીથી બદલી શકો છો",
+        "placeholder": {
+            "fullName": "તમારું પૂરું નામ લખો"
+        }
     }
 }

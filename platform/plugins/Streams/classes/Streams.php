@@ -2011,11 +2011,7 @@ abstract class Streams extends Base_Streams
 			$toTitle = $category->title;
 			$toType = $category->type;
 			$toDisplayType = Streams_Stream::displayType($toType);
-			$parts = explode('/', $type);
-			$relationDisplayType = end($parts);
-			if (substr(end($parts), -1) === 's') {
-				$relationDisplayType = substr($relationDisplayType, 0, -1);
-			}
+			$relationDisplayType = Streams_Stream::relationDisplayType($type);
 			$categoryName = explode('/', $category->name);
 			$streamName = explode('/', $stream->name);
 
@@ -2064,7 +2060,7 @@ abstract class Streams extends Base_Streams
 			// so posting this message may require internet communication.
 			$instructions = @compact(
 				'fromPublisherId', 'type', 'weight', 'displayType',
-				'fromUrl', 'toUrl', 'toTitle',
+				'fromUrl', 'toUrl', 'toTitle', 'relationDisplayType',
 				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
 			);
 			$instructions['url'] = $instructions['fromUrl'];
@@ -2091,7 +2087,7 @@ abstract class Streams extends Base_Streams
 			// so posting this message may require internet communication.
 			$instructions = @compact(
 				'toPublisherId', 'type', 'weight', 'displayType',
-				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
+				'fromUrl', 'toUrl', 'fromUri', 'toUri', 'relationDisplayType',
 				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'content', 'description'
 			);
 			$instructions['url'] = $instructions['toUrl'];

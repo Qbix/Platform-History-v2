@@ -2318,11 +2318,12 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Returns the type name to display from a stream type
 	 * @method displayType
+	 * @static
+	 * @param {string} $streamType
 	 * @param {array} [$options=array()]
 	 * @param {string} [$options.language=null] Override language
 	 * @param {string} [$options.locale=null] Override locale
 	 * @param {string} [$options.plural=false] Whether to display plural, when available
-	 * @static
 	 * @return {string}
 	 */
 	static function displayType($streamType, $options = array())
@@ -2336,6 +2337,44 @@ class Streams_Stream extends Base_Streams_Stream
 			$displayType = Q::ifset($text, 'types', $streamType, 'displayTypePlural', $displayType);
 		}
 		return $displayType ? $displayType : $default;
+	}
+
+	/**
+	 * Returns the type name to display from a stream type
+	 * @method relationDisplayType
+	 * @static
+	 * @param {string} $relationType
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.language=null] Override language
+	 * @param {string} [$options.locale=null] Override locale
+	 * @param {string} [$options.plural=false] Whether to display plural, when available
+	 * @param {string} [$options.text] The name of the text file to load
+	 * @return {string}
+	 */
+	static function relationDisplayType($relationType, $options = array())
+	{
+		$parts = explode('/', $relationType);
+		$name = Q::ifset($options, 'text', null);
+		if (!$name and count($parts) > 1) {
+			$module = reset($parts);
+			$name = "$module/content";
+		}
+		if ($name) {
+			$text = Q_Text::get($name, $options);
+			$displayType = Q::ifset($text, 'relations', $relationType, 'displayType', null);
+			if (!empty($options['plural'])) {
+				$displayType = Q::ifset($text, 'relations', $relationType, 'displayTypePlural', $displayType);
+			}
+			if ($displayType) {
+				return $displayType;
+			}
+		}
+		$parts = explode('/', $relationType);
+		$displayType = end($parts);
+		if (empty($options['plural']) and substr(end($parts), -1) === 's') {
+			$displayType = substr($displayType, 0, -1);
+		}
+		return $displayType;
 	}
 	
 	/**

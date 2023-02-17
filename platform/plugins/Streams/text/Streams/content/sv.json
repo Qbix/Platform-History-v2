@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "Nytt {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lades till i {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
-        "Streams\/call": "{{displayName}} startade ett samtal i realtid"
+        "Streams\/call": "{{displayName}} startade ett samtal i realtid",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} gick med",
+        "Streams\/left": "{{&call 'avatar.displayName'}} kvar"
     },
     "invite": {
         "command": "Inbjudan",
@@ -116,7 +118,24 @@
             "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
         },
         "Invite": "Inbjudan",
-        "Share": "Dela med sig"
+        "Share": "Dela med sig",
+        "roles": {
+            "title": "Bevilja roller till inbjudna användare?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Förlåt",
+                "alert": "Du är inte behörig att bevilja den här rollen"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Förlåt",
+                "alert": "Du är inte behörig att ta bort den här rollen"
+            }
+        },
+        "labels": {
+            "title": "Vad är ditt förhållande?"
+        },
+        "complete": {
+            "HasInvitedYou": "har bjudit in dig till:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "Telefonkonferensen avslutades"
         },
         "requestSpeakDialog": {
-            "msg": "Det är för närvarande {{count}} personer som talar i mötet. Vill du byta ut en av dem efter att ha tillåtit dem {{seconds}} sekunder att prata klart?"
+            "msg": "Det är för närvarande {{count}} personer som talar i mötet. Vill du byta ut en av dem efter att ha tillåtit dem {{seconds}} sekunder att prata klart?",
+            "dialogTitle": "Begäran om att tala"
+        },
+        "fbLive": {
+            "dialogTitle": "Livestreaming på Facebook startade"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Hantera sändningar"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "Fråga",
-            "description": "frågeström"
+            "description": "frågeström",
+            "newItem": "Lägg till fråga"
         },
         "Streams\/answer": {
             "displayType": "Svar",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "Skriv din fråga",
         "ContentPlaceholder": "Lägg in ytterligare information här för att hjälpa andra att svara",
         "ErrorTitle": "Fråga krävs",
-        "Placeholder": "Platshållare"
+        "Placeholder": "Platshållare",
+        "EditQuestion": "Redigera fråga",
+        "NewPossibleAnswer": "Nytt möjligt svar",
+        "answerText": "Text",
+        "HideUntilAnswered": "Göm tills du svarar",
+        "CantChangeAnswers": "Kan inte ändra svar",
+        "Save": "Spara",
+        "Send": "Skicka",
+        "TitleRequired": "Titel krävs!",
+        "AreYouSure": "Är du säker?"
     },
     "experience": {
         "NewExperience": "Ny upplevelse",
@@ -560,5 +596,18 @@
         "configurationSaved": "Konfigurationen har sparats",
         "error": "Något gick fel",
         "privacySettings": "Sekretessinställningar"
+    },
+    "avatar": {
+        "firstName": "förnamn",
+        "lastName": "efternamn",
+        "username": "Användarnamn"
+    },
+    "login": {
+        "prompt": "Låt vänner känna igen dig:",
+        "newUser": "eller skapa ett nytt konto nedan",
+        "picTooltip": "Du kan ändra den här bilden senare",
+        "placeholder": {
+            "fullName": "Ange ditt fullständiga namn"
+        }
     }
 }

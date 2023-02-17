@@ -353,13 +353,17 @@
 .Streams_complete_stream td:first-child {
 	width: 1%;
 }
+.Streams_complete_stream img {
+	border-radius: 5px;
+	margin: 5px;
+}
 
 .Streams_login_get_started {
 	text-align: center;
 	margin-top: 10px;
 }
 
-.Streams_login_appear table {
+.Streams_login_explanation {
 	width: 100%;
 }
 
@@ -385,7 +389,7 @@
 	pointer-events: none;
 }
 
-.Streams_login_appear {
+.Streams_login_explanation {
 	padding: 5px;
 }
 

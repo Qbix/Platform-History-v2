@@ -72,12 +72,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 					}
 				});
 				if (found) {
-					html = originalGet.call(element);
+					// prepare all images 
+					tool.prepare(element, true);
 				}
-				originalSet.call(this, html);
-				if (found) {
-					tool.observe(tool.prepare(this, true));
-				}
+				originalSet.call(this, originalGet.call(element));
+				tool.observe(tool.prepare(this, true));
 				return html;
 			},
 			get: originalGet

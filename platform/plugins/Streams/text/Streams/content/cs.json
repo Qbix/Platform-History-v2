@@ -61,7 +61,9 @@
         "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} v {{toTitle}}",
         "Streams\/relatedFrom\/*": "Přidáno do {{toTitle}} jako {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} se o vás zmínil v komentáři",
-        "Streams\/call": "{{displayName}} zahájil(a) hovor v reálném čase"
+        "Streams\/call": "{{displayName}} zahájil(a) hovor v reálném čase",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} se připojil(a).",
+        "Streams\/left": "Zbývá {{&call 'avatar.displayName'}}"
     },
     "invite": {
         "messageContent": "{{displayName}} vás pozval(a) do {{100}}",
@@ -114,7 +116,24 @@
         "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi",
         "command": "Pozvat",
         "Invite": "Pozvat",
-        "Share": "Podíl"
+        "Share": "Podíl",
+        "roles": {
+            "title": "Udělit role pozvaným uživatelům?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Promiňte",
+                "alert": "Nemáte oprávnění udělit tuto roli"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Promiňte",
+                "alert": "K odebrání této role nemáte oprávnění"
+            }
+        },
+        "labels": {
+            "title": "Jaký je váš vztah?"
+        },
+        "complete": {
+            "HasInvitedYou": "vás pozval na:"
+        }
     },
     "followup": {
         "mobile": {
@@ -286,7 +305,14 @@
             "title": "Nastavení streamování"
         },
         "requestSpeakDialog": {
-            "msg": "Na schůzce aktuálně mluví {{count}} lidí. Chcete jednoho z nich nahradit poté, co mu necháte {{seconds}} sekund domluvit?"
+            "msg": "Na schůzce aktuálně mluví {{count}} lidí. Chcete jednoho z nich nahradit poté, co mu necháte {{seconds}} sekund domluvit?",
+            "dialogTitle": "Žádost o mluvení"
+        },
+        "fbLive": {
+            "dialogTitle": "Začalo živé vysílání na Facebooku"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Spravovat vysílání"
         }
     },
     "types": {
@@ -409,7 +435,8 @@
         },
         "Streams\/question": {
             "displayType": "Otázka",
-            "description": "stream otázek"
+            "description": "stream otázek",
+            "newItem": "Přidat otázku"
         },
         "Streams\/answer": {
             "displayType": "Odpovědět",
@@ -538,7 +565,16 @@
         "TitlePlaceholder": "Napište svou otázku",
         "ContentPlaceholder": "Sem zadejte jakékoli další informace, které lidem pomohou odpovědět",
         "ErrorTitle": "Vyžaduje se otázka",
-        "Placeholder": "Zástupný symbol"
+        "Placeholder": "Zástupný symbol",
+        "EditQuestion": "Upravit otázku",
+        "NewPossibleAnswer": "Nová možná odpověď",
+        "answerText": "Text",
+        "HideUntilAnswered": "Skrýt, dokud neodpoví",
+        "CantChangeAnswers": "Odpovědi nelze změnit",
+        "Save": "Uložit",
+        "Send": "Poslat",
+        "TitleRequired": "Titul je povinný!",
+        "AreYouSure": "Jsi si jistá?"
     },
     "experience": {
         "NewExperience": "Nový zážitek",
@@ -566,5 +602,18 @@
         "configurationSaved": "Konfigurace uložena",
         "error": "Něco se pokazilo",
         "privacySettings": "Nastavení ochrany osobních údajů"
+    },
+    "avatar": {
+        "firstName": "jméno",
+        "lastName": "příjmení",
+        "username": "uživatelské jméno"
+    },
+    "login": {
+        "prompt": "Umožněte přátelům, aby vás poznali:",
+        "newUser": "nebo si níže vytvořte nový účet",
+        "picTooltip": "Tento obrázek můžete později změnit",
+        "placeholder": {
+            "fullName": "Zadejte své celé jméno"
+        }
     }
 }

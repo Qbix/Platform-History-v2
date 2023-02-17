@@ -63,7 +63,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}}లో కొత్త {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}}కి {{relationDisplayType}}గా జోడించబడింది",
         "Streams\/mention": "{{&call 'avatar.displayName'}} మిమ్మల్ని వ్యాఖ్యలో పేర్కొన్నారు",
-        "Streams\/call": "{{displayName}} నిజ-సమయ కాల్‌ని ప్రారంభించారు"
+        "Streams\/call": "{{displayName}} నిజ-సమయ కాల్‌ని ప్రారంభించారు",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} చేరారు",
+        "Streams\/left": "{{&call 'avatar.displayName'}} మిగిలి ఉంది"
     },
     "invite": {
         "command": "ఆహ్వానించండి",
@@ -116,7 +118,24 @@
             "text": "మీరు ఆహ్వానించబడ్డారు. అంగీకరించడానికి మరియు చేరడానికి {{ClickOrTap}} ఇక్కడ ఉంది."
         },
         "Invite": "ఆహ్వానించండి",
-        "Share": "షేర్ చేయండి"
+        "Share": "షేర్ చేయండి",
+        "roles": {
+            "title": "ఆహ్వానించబడిన వినియోగదారులకు పాత్రలను మంజూరు చేయాలా?",
+            "NotAuthorizedToGrantRole": {
+                "title": "క్షమించండి",
+                "alert": "ఈ పాత్రను మంజూరు చేయడానికి మీకు అధికారం లేదు"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "క్షమించండి",
+                "alert": "ఈ పాత్రను తీసివేయడానికి మీకు అధికారం లేదు"
+            }
+        },
+        "labels": {
+            "title": "మీ సంబంధం ఏమిటి?"
+        },
+        "complete": {
+            "HasInvitedYou": "మిమ్మల్ని దీనికి ఆహ్వానించారు:"
+        }
     },
     "messages": {
         "html": {
@@ -303,7 +322,14 @@
             "MeetingEnded": "టెలికాన్ఫరెన్స్ ముగిసింది"
         },
         "requestSpeakDialog": {
-            "msg": "మీటింగ్‌లో ప్రస్తుతం {{count}} మంది వ్యక్తులు మాట్లాడుతున్నారు. మాట్లాడటం ముగించడానికి {{seconds}} సెకన్లు అనుమతించిన తర్వాత మీరు వాటిలో ఒకదాన్ని భర్తీ చేయాలనుకుంటున్నారా?"
+            "msg": "మీటింగ్‌లో ప్రస్తుతం {{count}} మంది వ్యక్తులు మాట్లాడుతున్నారు. మాట్లాడటం ముగించడానికి {{seconds}} సెకన్లు అనుమతించిన తర్వాత మీరు వాటిలో ఒకదాన్ని భర్తీ చేయాలనుకుంటున్నారా?",
+            "dialogTitle": "మాట్లాడటానికి అభ్యర్థన"
+        },
+        "fbLive": {
+            "dialogTitle": "ఫేస్‌బుక్ లైవ్ స్ట్రీమింగ్ ప్రారంభమైంది"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "ప్రసారాన్ని నిర్వహించండి"
         }
     },
     "types": {
@@ -426,7 +452,8 @@
         },
         "Streams\/question": {
             "displayType": "ప్రశ్న",
-            "description": "ప్రశ్న ప్రవాహం"
+            "description": "ప్రశ్న ప్రవాహం",
+            "newItem": "ప్రశ్నను జోడించండి"
         },
         "Streams\/answer": {
             "displayType": "సమాధానం",
@@ -532,7 +559,16 @@
         "TitlePlaceholder": "మీ ప్రశ్నను టైప్ చేయండి",
         "ContentPlaceholder": "వ్యక్తులు సమాధానమివ్వడంలో సహాయపడటానికి ఏదైనా అదనపు సమాచారాన్ని ఇక్కడ ఉంచండి",
         "ErrorTitle": "ప్రశ్న అవసరం",
-        "Placeholder": "ప్లేస్‌హోల్డర్"
+        "Placeholder": "ప్లేస్‌హోల్డర్",
+        "EditQuestion": "ప్రశ్నను సవరించండి",
+        "NewPossibleAnswer": "కొత్త సాధ్యం సమాధానం",
+        "answerText": "వచనం",
+        "HideUntilAnswered": "సమాధానం వచ్చే వరకు దాచండి",
+        "CantChangeAnswers": "సమాధానాలను మార్చలేరు",
+        "Save": "సేవ్ చేయండి",
+        "Send": "పంపండి",
+        "TitleRequired": "టైటిల్ కావాలి!",
+        "AreYouSure": "మీరు చెప్పేది నిజమా?"
     },
     "experience": {
         "NewExperience": "కొత్త అనుభవం",
@@ -560,5 +596,18 @@
         "configurationSaved": "కాన్ఫిగరేషన్ సేవ్ చేయబడింది",
         "error": "ఏదో తప్పు జరిగింది",
         "privacySettings": "గోప్యతా సెట్టింగ్‌లు"
+    },
+    "avatar": {
+        "firstName": "మొదటి పేరు",
+        "lastName": "చివరి పేరు",
+        "username": "వినియోగదారు పేరు"
+    },
+    "login": {
+        "prompt": "స్నేహితులు మిమ్మల్ని గుర్తించనివ్వండి:",
+        "newUser": "లేదా దిగువన కొత్త ఖాతాను సృష్టించండి",
+        "picTooltip": "మీరు ఈ చిత్రాన్ని తర్వాత మార్చవచ్చు",
+        "placeholder": {
+            "fullName": "మీ పూర్తి పేరును నమోదు చేయండి"
+        }
     }
 }

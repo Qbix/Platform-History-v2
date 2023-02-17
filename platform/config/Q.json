@@ -223,7 +223,7 @@
 			"querySeparator": "-------- NEXT QUERY STARTS HERE --------"
 		},
 		"survive": {
-			"mysql": false
+			"mysql": true
 		}
 	}
 }

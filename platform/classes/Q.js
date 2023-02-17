@@ -2565,7 +2565,7 @@ Q.view = function _Q_view(viewName, params, options) {
 	var viewPath = parts.join(Q.DS);
 	var fields = Q.Config.get(['Q', 'views', 'fields'], null);
 	if (fields && typeof fields === 'object') {
-		params = Q.extend(fields, params);
+		params = Q.extend(fields, true, 10, params);
 	}
 
 	// set options
@@ -2573,7 +2573,7 @@ Q.view = function _Q_view(viewName, params, options) {
 	params.language = options.language;
 
 	var textParams = Q.Text.params(parts, {'language': options.language});
-	params = Q.extend({}, 50, textParams, 50, params);
+	params = Q.extend({}, 10, textParams, true, 10, params);
 	return Q.Handlebars.render(viewPath, params);
 
 };

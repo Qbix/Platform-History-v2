@@ -2804,6 +2804,19 @@ Q.Event.jQueryForTool = {};
 Q.Event.jQueryForPage = [];
 
 /**
+ * Define an event on a target, and give it a type
+ * @param {Object} target 
+ * @param {String} name 
+ * @return Q.Event
+ */
+Q.Event.define = function (target, type) {
+	var event = new Q.Event();
+	target[type] = event;
+	event.type = type;
+	return event;
+};
+
+/**
  * Returns a Q.Event that will fire given an DOM object and an event name
  * @static
  * @method from
@@ -3018,6 +3031,7 @@ Evp.copy = function _Q_Event_prototype_copy() {
 		result.handlers[this.keys[i]] = this.handlers[this.keys[i]];
 		result.keys.push(this.keys[i]);
 	}
+	result.type = this.type;
 	return result;
 };
 
@@ -4540,6 +4554,12 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		ctor.stateKeys = stateKeys;
 		if (typeof ctor !== 'function') {
 			throw new Q.Error("Q.Tool.define requires ctor to be a string or a function");
+		}
+		for (var k in ctor.options) {
+			var v = ctor.options[k];
+			if (Q.typeOf(v) === 'Q.Event') {
+				v.type = k;
+			}
 		}
 		Q.extend(ctor.prototype, 10, methods);
 		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
@@ -8052,7 +8072,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {boolean} [options.duplicate=true] you can set it to false in order not to fetch the same url again
  * @param {boolean} [options.quiet=true] this option is just passed to your onLoadStart/onLoadEnd handlers in case they want to respect it.
  * @param {boolean} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
- * @param {Function} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
+ * @param {Function|null} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function. Set to null to block redirecting.
  * @param {boolean} [options.timeout=5000] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {Array} [options.beforeRequest] array of handlers to call before the request, they receive url, slotNames, options, callback and must call the callback passing (possibly altered) url, slotNames, options
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
@@ -8119,13 +8139,14 @@ Q.request = function (url, slotNames, callback, options) {
 					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}
-			var redirected = false;
+			var ret = callback && callback.call(this, err, response);
+			Q.handle(o.onProcessed, this, [err, response]);
+			if (ret === false) {
+				return; // don't redirect
+			}
 			if (response && response.redirect && response.redirect.url) {
 				Q.handle(o.onRedirect, Q, [response.redirect.url]);
-				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, response);
-			Q.handle(o.onProcessed, this, [err, response]);
 		};
 
 		function _onStart () {
@@ -9763,8 +9784,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		_loadUrlObject != loadingUrlObject) {
 			var sn1 = loadingUrlObject.options && loadingUrlObject.options.slotNames || [];
 			var sn2 = _loadUrlObject.options && _loadUrlObject.options.slotNames || [];
+			sn1 = typeof sn1 === 'string' ? sn1 : sn1.join(',');
+			sn2 = typeof sn2 === 'string' ? sn2 : sn2.join(',')
 			e = 'request to ' + loadingUrlObject.url
-				+ ' (' + sn1.join(',') + ') '
+				+ ' (' + sn1 + ') '
 				+ ' was initiated after ' 
 				+ ' current one to ' + _loadUrlObject.url
 				+ ' (' + sn2.join(',') + ')';
