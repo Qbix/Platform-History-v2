@@ -229,7 +229,7 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':		 13,		// can vote for a relation message posted to the stream
-	'suggest':	18,		// can post messages which require manager's approval
+	'contribute':	18,		// can post messages which require manager's approval
 	'post':			20,		// can post messages which take effect immediately
 	'relate':	   23,		// can relate other streams to this one
 	'relations':	25,		// can update properties of relations directly
@@ -1915,7 +1915,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 
 		var addLabel = o.addLabel;
 		if (!Q.isArrayLike(o.addLabel)) {
-			o.addLabel = [];
+			o.addLabel = [o.addLabel];
 		}
 		if (addLabel !== true) {
 			return _continueAfterRoles();
@@ -1972,7 +1972,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						} else {
 							o.addLabel.push(label);
 						}
-					});
+					}, labelsTool);
 				}
 			});
 		});
@@ -2009,7 +2009,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						} else {
 							o.addMyLabel.push(label);
 						}
-					});
+					}, labelsTool);
 				}
 			});
 		}
@@ -5583,7 +5583,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			lastName = priv.registerInfo.lastName;
 		}
 		if (priv.registerInfo.pic) {
-			src40 = src50 = src = src80 = priv.registerInfo.pic;
+			src = priv.registerInfo.pic;
 		}
 	}
 	var $formContent = $('<div class="Streams_login_fullname_block" />');
