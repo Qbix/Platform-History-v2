@@ -9886,6 +9886,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					Q.Event.jQueryForPage = [];
 				}
 
+				// this is where we fill all the slots
+				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
+				domElements = handler(response, url, o);
+
 				if (!o.ignoreHistory) {
 					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
@@ -9933,10 +9937,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 						});
 					});
 				}
-			
-				// this is where we fill all the slots
-				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
-				domElements = handler(response, url, o);
 			
 				if (!o.ignorePage && Q.info && Q.info.uri) {
 					Q.Page.onLoad(moduleSlashAction).occurred = false;
