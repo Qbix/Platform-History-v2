@@ -62,7 +62,7 @@
 		"web": {
 			"requireValidNonce": {
 				"include": ["Users"],
-				"exclude": ["Users/login", "Users/authenticate"]
+				"exclude": ["Users/login", "Users/authenticate", "Users/activate"]
 			}
 		},
 		"socket": {
@@ -221,7 +221,7 @@
 				"search": [], /* can be ["facebook", "google"] */
 				"leaveDefault": false
 			},
-			"interposeActivateDialog": true,
+			"interposeActivateDialog": "mobile",
 			"loginEvenBeforeActivate": false,
 			"delaySMS": 30000
 		},

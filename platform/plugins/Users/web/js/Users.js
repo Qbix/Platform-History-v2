@@ -1009,11 +1009,14 @@
 				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			}
 			if (priv.activateLink) {
-				Users.Dialogs.activate(priv.activateLink, _activationComplete);
+				Users.Dialogs.activate(priv.activateLink, {
+					onSuccess: _activationComplete
+				});
 			} else {
 				_activationComplete();
 			}
-			function _activationComplete() {
+			function _activationComplete(data) {
+				user = Q.getObject('slots.user', data) || user;
 				if (!o.accountStatusURL) {
 					_onComplete(user, Q.copy(priv));
 					return;
@@ -1636,17 +1639,23 @@
 					$this.removeData('cancelSubmit');
 					$b.addClass('Q_working')[0].disabled = true;
 					document.activeElement.blur();
-					if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
-						$this.data('cancelSubmit', true);
-						setTimeout(function () {
-							if (confirm(Q.text.Users.login.confirmTerms)) {
-								$('#Users_agree').attr('checked', 'checked');
-								$('#Users_agree')[0].checked = true;
+					if (!$('#Users_agree').length || $('#Users_agree').is(':checked')) {
+						$this.submit();
+						return false;
+					}
+					setTimeout(function () {
+						Q.confirm(Q.text.Users.login.confirmTerms, function (result) {
+							if (result) {
+								$usersAgree.attr('checked', 'checked');
+								$usersAgree[0].checked = true;
 								$b.addClass('Q_working')[0].disabled = true;
 								$this.submit();
+							} else {
+								$b.removeClass('Q_working')[0].disabled = false;
 							}
-						}, 300);
-					}
+						});
+					}, 300);
+					$this.data('cancelSubmit', true);
 					return false;
 				}, 1000, false, false));
 
@@ -2985,11 +2994,6 @@
 						if (options.onboardingUrl) {
 							nextUrl = options.onboardingUrl;
 						}
-						if (Q.info.isTouchscreen && user.signedUpWith === 'mobile') {
-							nextUrl = Q.url(
-								user.activateLink + '?afterActivate=' + encodeURIComponent(nextUrl)
-							);
-						}
 					}
 					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
 					Q.handle(url);
@@ -3759,19 +3763,24 @@
 			});
 		},
 		activate: function (activateLink, options) {
+			if (!activateLink) {
+				return false;
+			}
 			Q.Dialogs.push(Q.extend(options, {
 				url: activateLink,
 				className: 'Users_activate_dialog',
 				onActivate: {"Users.Dialogs.activate": function () {
 					var dialog = this;
-					Q.Tool.byId('Q_form-Users_activate')
-					.state.onResponse.set(function (err, data, redirected) {
-						var fem = Q.firstErrorMessage(err, data, redirected);
+					var form = Q.Tool.byId('Q_form-Users_activate');
+					form.state.loader.options.onRedirect = null;
+					form.state.onResponse.set(function (err, data) {
+						var fem = Q.firstErrorMessage(err, data);
 						if (fem) {
 							alert(fem);
 						} else {
 							priv.login_connected = true;
 							Q.Dialogs.close(dialog);
+							Q.handle(options && options.onSuccess, Users, [data]);
 						}
 						return false; // we handled it
 					});

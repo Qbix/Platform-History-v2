@@ -1207,6 +1207,19 @@ class Users_User extends Base_Users_User
 	{
 		$this->xids = '{}';
 	}
+
+	function shouldInterposeActivateDialog() {
+		$interposeActivateDialog = Q_Config::get('Users', 'register', 'interposeActivateDialog', false);
+		if ($interposeActivateDialog) {
+			if ($interposeActivateDialog === true ||
+			 ($interposeActivateDialog === 'mobile' && (
+				Q_Request::isTouchscreen() &&
+				$this->signedUpWith === 'mobile'
+			))) {
+				return true;
+			}
+		}
+	}
 	
 	/**
 	 * get user id

@@ -2186,12 +2186,12 @@ abstract class Users extends Base_Users
 		if ($loggedInUser = Users::loggedInUser(false, false)) {
 			$results['user'] = $loggedInUser->exportArray();
 		}
-		$interposeActivateDialog = Q_Config::get('Users', 'register', 'interposeActivateDialog', false);
-		if ($interposeActivateDialog and $fields) {
-			$results['activateLink'] = Q::ifset(
-				Users::$cache, 'Users/activate link', 
-				Q_Uri::url("Users/activate?") . '?' . http_build_query($fields)
-			);
+		if ($user->shouldInterposeActivateDialog() and $fields) {
+			if (!empty($options['setPassword'])) {
+				$fields['p'] = 1;
+			}
+			$results['activateLink'] = Q_Uri::url("Users/activate?")
+					. '?' . http_build_query($fields);
 		}
 		return $results;
 	}

@@ -843,7 +843,7 @@ class Q
 	 *    Pass true to retain the tool when HTML is being replaced in the future,
 	 *    so it's not replaced by any incoming rendered tools unless they have replace=true
 	 * @param {boolean} [$extra.replace]
-	 *    Pass true to tell Q.js to replace any previously rendered tool tool
+	 *    Pass true to tell Q.js to replace any previously rendered tool
 	 *    even if it was marked to be retained.
 	 * @param {boolean} [$extra.lazyload]
 	 *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is

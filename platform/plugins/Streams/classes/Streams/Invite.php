@@ -123,10 +123,6 @@ class Streams_Invite extends Base_Streams_Invite
 	 */
 	function accept($options = array())
 	{
-		if ($this->state == 'accepted') {
-			return false;
-		}
-
 		if (!isset($options['access'])) {
 			$options['access'] = true;
 		}
@@ -137,23 +133,27 @@ class Streams_Invite extends Base_Streams_Invite
 		$invited->token = $this->token;
 		$invited->userId = $userId;
 		if ($this->userId) {
+			if ($this->state == 'accepted') {
+				return false; // already exists
+			}
 			$invited->state = 'accepted';
 			$invited->save(true);
-		} else {
-			if (!$invited->retrieve() or $invited->state !== 'accepted') {
-				$quotaName = "Streams/invite";
-				$roles = Users::roles($this->publisherId, null, null, $userId);
-				$quota = Users_Quota::check("", $this->token, $quotaName, true, 1, $roles);
+		} else if (!$invited->retrieve() or $invited->state !== 'accepted') {
+			$quotaName = "Streams/invite";
+			$roles = Users::roles($this->publisherId, null, null, $userId);
+			$quota = Users_Quota::check("", $this->token, $quotaName, true, 1, $roles);
 
-				$invited2 = new Streams_Invited();
-				$invited2->token = $invited->token;
-				$invited2->userId = $invited->userId;
-				$invited2->state = 'accepted';
-				$invited2->expireTime = $this->expireTime;
-				$invited2->save();
-
-				$quota->used(1);
+			$invited2 = new Streams_Invited();
+			$invited2->token = $invited->token;
+			$invited2->userId = $invited->userId;
+			if ($invited->retrieve()) {
+				return false; // already exists
 			}
+			$invited2->state = 'accepted';
+			$invited2->expireTime = $this->expireTime;
+			$invited2->save();
+
+			$quota->used(1);
 		}
 
 		/**
@@ -166,9 +166,9 @@ class Streams_Invite extends Base_Streams_Invite
 			return false;
 		}
 
-		$this->userId = $userId;
+		// $this->userId = $userId;
 		$this->state = 'accepted';
-		if (!$this->save()) {
+		if (!$this->save() and $this->userId) {
 			return false;
 		}
 		

@@ -23,6 +23,7 @@
  *      @param {String} [options.loader.params] Url Encoded /Serialised form data as URL parameters
  *      @param {String} [options.loader.slots] Slot Names
  *      @param {Function} [options.loader.callback] Callback function after request
+ *      @param {Function} [options.loader.options] Options for the request
  *
 */
 Q.Tool.define('Q/form', function(options) {
@@ -38,14 +39,14 @@ Q.Tool.define('Q/form', function(options) {
 	onSuccess: new Q.Event(),
 	slotsToRequest: 'form',
 	contentElements: {},
-	loader: function (url, method, form, slots, callback) {
+	loader: function (url, method, form, slots, callback, options) {
 		if (method.toUpperCase() === 'GET') {
-			Q.request(params, url, slots, callback);
+			Q.request(params, url, slots, callback, options);
 		} else {
-			Q.request(url, slots, callback, {
+			Q.request(url, slots, callback, Q.extend(options, {
 				method: method,
 				formdata: new FormData(form)
-			});
+			}));
 		}
 	}
 },
@@ -77,7 +78,7 @@ Q.Tool.define('Q/form', function(options) {
 		if (!$form.length) return;
 		if ($form.data('Q/form tool')) return;
 		$form.on('submit.Q_form', function(event) {
-			function onResponse(err, data, redirected) {
+			function onResponse(err, data, wasJSONP) {
 				$form.removeClass('Q_working').removeAttr('disabled');
 				document.activeElement = tool.activeElement;
 				if (false === Q.handle(state.onResponse, tool, arguments)) {
@@ -146,7 +147,7 @@ Q.Tool.define('Q/form', function(options) {
 				state.ignoreCache = false;
 				state.loader.forget(action, method, $form.serialize(), state.slotsToRequest);
 			}
-			state.loader(action, method, $form[0], state.slotsToRequest, onResponse);
+			state.loader(action, method, $form[0], state.slotsToRequest, onResponse, state.loader.options);
 		});
 		$('input', $form).add('select', $form).on('input', function () {
 			if ($form.state('Q/validator')) {

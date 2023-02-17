@@ -353,6 +353,10 @@
 .Streams_complete_stream td:first-child {
 	width: 1%;
 }
+.Streams_complete_stream img {
+	border-radius: 5px;
+	margin: 5px;
+}
 
 .Streams_login_get_started {
 	text-align: center;
