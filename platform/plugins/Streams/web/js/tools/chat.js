@@ -760,6 +760,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		$toolElement.attr('data-webrtc', 'loading');
 
 		Q.Streams.WebRTC.start({
+			roomPublisherId: Q.Users.loggedInUserId(),
 			publisherId: state.publisherId,
 			streamName: state.streamName,
 			closeManually: true,
