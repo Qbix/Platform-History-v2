@@ -173,6 +173,8 @@
                 tool.participantsList = [];
 
                 tool.addItem(tool.state.webrtcSignalingLib.localParticipant());
+                roomParticipants = tool.state.webrtcSignalingLib.roomParticipants();
+                
                 for (var i in roomParticipants) {
                     if (roomParticipants[i].isLocal) continue;
                     tool.addItem(roomParticipants[i]);

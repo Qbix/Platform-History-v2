@@ -21,6 +21,8 @@
     Q.Tool.define("Streams/webrtc/callCenter/client", function (options) {
         var tool = this;
         
+        tool.myWaitingRoomStream = null;
+        tool.currentActiveWebRTCRoom = null;
     },
 
         {
@@ -35,19 +37,33 @@
             },
             declareStreamEventHandlers: function() {
                 var tool = this;
-                tool.livestreamStream.onMessage("Streams/livestream/start").set(function (stream, message) {
-                    tool.syncLivestreamsList([message]);
-                    tool.videoTabsTool.syncVideoTabsList.apply(tool);
+                tool.myWaitingRoomStream.onMessage("Streams/webrtc/accepted").set(function (stream, message) {
+                    tool.onAcceptedHandler(message);
                 }, tool);
-                tool.livestreamStream.onMessage("Streams/livestream/stop").set(function (stream, message) {
-                    tool.syncLivestreamsList([message]);
-                    tool.videoTabsTool.syncVideoTabsList.apply(tool);
+                tool.myWaitingRoomStream.onMessage("Streams/webrtc/endCall").set(function (stream, message) {
+                    tool.onCallEndedHandler(message);
                 }, tool);
+
+            },
+            getCallCenterEndpointStream: function () {
+                var tool = this;
+                return new Promise(function (resolve, reject) {
+                    Q.Streams.get(tool.state.publisherId, tool.state.streamName, function (err, stream) {
+                        if (!stream) {
+                            console.error('Error while getting call center stream');
+                            reject('Error while getting call center stream');
+                            return;
+                        }
+
+                        resolve(stream);
+                    });
+                });
             },
             requestCall: function () {
                 var tool = this;
+                
                 Q.prompt(null, function(topic) {
-                    tool.currentWebRTCRoom = Q.Streams.WebRTC({
+                    tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
                         roomPublisherId: Q.Users.loggedInUserId(),
                         element: document.body,
                         relate: {
@@ -57,18 +73,82 @@
                         },
                         startWith: { video: false, audio: true },
                         onWebRTCRoomCreated: function () {
-                            let webrtcStream = tool.currentWebRTCRoom.roomStream();
-                            webrtcStream.pendingFields.content = topic;
-                            webrtcStream.save();
+                            tool.myWaitingRoomStream = tool.currentActiveWebRTCRoom.roomStream();
+                            tool.myWaitingRoomStream.pendingFields.content = topic;
+                            tool.myWaitingRoomStream.save();
+                            tool.declareStreamEventHandlers();
                         }
                     });
 
-                    tool.currentWebRTCRoom.start();
+                    tool.currentActiveWebRTCRoom.start();
                 }, {
-                    title: 'Enter call topic'
+                    title: 'What is this call about'
                 })
                 
-            }         
+            },
+            onAcceptedHandler: function () {
+                var tool = this;
+                if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
+                    tool.currentActiveWebRTCRoom.switchTo(tool.state.publisherId, tool.state.streamName.split('/').pop(), {resumeClosed: true}).then(function () {
+
+                    });
+                } else {
+                    tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
+                        roomId: tool.state.publisherId,
+                        roomPublisherId: tool.state.streamName.split('/').pop(),
+                        element: document.body,
+                        startWith: { video: false, audio: true }
+                    });
+
+                    tool.currentActiveWebRTCRoom.start();
+                }
+            },
+            onCallEndedHandler: function (message) {
+                var tool = this;
+                if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
+                    var message = JSON.parse(message.content);
+                    var signalingLib = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                    var localParticipant = signalingLib.localParticipant();
+    
+                    var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
+    
+                    if(message.userId == userId) {
+                        if(message.immediate === true) {
+                            if(signalingLib.initNegotiationState == 'ended') tool.currentActiveWebRTCRoom.notice.show(message.msg);
+                            tool.currentActiveWebRTCRoom.stop();
+                        } else {
+                            if(signalingLib.initNegotiationState == 'ended') tool.currentActiveWebRTCRoom.notice.show(message.msg);
+    
+                            setTimeout(function () {
+                                tool.currentActiveWebRTCRoom.stop();
+                            }, 5000);
+                        }
+                    }
+                }
+            }  ,
+            onCallDeclinedHandler: function (message) {
+                var tool = this;
+                if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
+                    var message = JSON.parse(message.content);
+                    var signalingLib = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                    var localParticipant = signalingLib.localParticipant();
+    
+                    var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
+    
+                    if(message.userId == userId) {
+                        if(message.immediate === true) {
+                            if(signalingLib.initNegotiationState == 'ended') tool.currentActiveWebRTCRoom.notice.show(message.msg);
+                            tool.currentActiveWebRTCRoom.stop();
+                        } else {
+                            if(signalingLib.initNegotiationState == 'ended') tool.currentActiveWebRTCRoom.notice.show(message.msg);
+    
+                            setTimeout(function () {
+                                tool.currentActiveWebRTCRoom.stop();
+                            }, 5000);
+                        }
+                    }
+                }
+            }    
         }
 
     );

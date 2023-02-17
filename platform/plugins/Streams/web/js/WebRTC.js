@@ -5763,6 +5763,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             });
 
+            stream.onMessage("Streams/closed").set(function (stream, message) {
+
+            });
+
             stream.onMessage("Streams/webrtc/forceDisconnect").set(function (stream, message) {
                 log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
                 if(!isActive()) return;
@@ -5774,24 +5778,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(message.userId == userId) {
                     if(message.immediate === true) {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnectingImmediately);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnectingImmediately);
                         stop();
                     } else {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnecting);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnecting);
 
                         setTimeout(function () {
                             stop();
                         }, 5000);
                     }
-
-                    /*Q.Streams.unrelate(
-                        state.publisherId,
-                        state.streamName,
-
-                        state.relationType,
-                        this.stream.fields.publisherId,
-                        this.stream.fields.name
-                    );*/
                 } else {
                     for(let p in roomParticipants) {
                         if(roomParticipants[p].isLocal) continue;
