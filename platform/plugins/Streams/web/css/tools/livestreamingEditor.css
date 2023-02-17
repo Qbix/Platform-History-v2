@@ -1256,8 +1256,9 @@
 .live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-choose-device {
     padding: 10px;
 }
+.live-editor-popup-dialog.live-editor-participants-item-camera-btn-popup .webrtc-video-settings_popup_screen_item ,
 .live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-settings_popup_camera_item {
-    display: none;
+    display: none !important;
 }
 
 /*start: simple dialog*/

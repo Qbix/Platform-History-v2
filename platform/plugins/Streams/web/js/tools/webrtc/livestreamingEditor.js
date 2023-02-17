@@ -1905,6 +1905,7 @@
 
                                 //if (!Q.info.useTouchEvents) {
                                     sourceInstance.videoSettingsPopup = new PopupDialog(cameraBtn, {
+                                        className: 'live-editor-participants-item-camera-btn-popup',
                                         content: _videoTool.videoinputListEl
                                     })
                                 //}
@@ -2525,6 +2526,7 @@
 
                                 //if (!Q.info.useTouchEvents) {
                                     listItemInstance.videoSettingsPopup = new PopupDialog(videoBtnCon, {
+                                        className: 'live-editor-participants-item-camera-btn-popup',
                                         content: _videoTool.videoinputListEl
                                     })
                                 //}
