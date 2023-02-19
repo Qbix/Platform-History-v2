@@ -224,7 +224,10 @@
 					// retain contents of existing slots
 					if (state.retain === true
 					|| (state.retain && state.retain[fromTabName])) {
-						var retained = tool.retained[fromTabName] || {};
+						if (tool.retained[fromTabName] === undefined) {
+							tool.retained[fromTabName] = {};
+						}
+						var retained = tool.retained[fromTabName];
 						if (url !== fromUrl) {
 							Q.extend(retained, {
 								url: fromUrl,
@@ -262,9 +265,8 @@
 				}
 				
 				function loader(urlToLoad, slotNames, callback, options) {
-					if (!(state.retain === true
-					|| (state.retain && tool.retained[name]))
-					|| !Q.getObject([name, 'url'], tool.retained)) {
+					var url = Q.getObject([name, 'url'], tool.retained);
+					if (!(state.retain === true || (state.retain && state.retain[name])) || !url) {
 						// use default loader
 						var _loader = loaderOptions.loader || state.loader 
 							|| Q.loadUrl.options.loader || Q.request;
