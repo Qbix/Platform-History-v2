@@ -14,4 +14,4 @@ class Users_Exception_Quota extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Users_Exception_Quota', 'You have exceeded the {{title}} quota', 429);
+Q_Exception::add('Users_Exception_Quota', 'Rate exceeded for {{title}}. Maybe try again later.', 429);
