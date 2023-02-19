@@ -9799,11 +9799,11 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			_reject && _reject(e);
 			return Q.handle(onError, this, [e]);
 		}
-		if (Q.isEmpty(response)) {
-			e = "Response is empty";
-			_reject && _reject(e);
-			return Q.handle(onError, this, [e, response]);
-		}
+		// if (Q.isEmpty(response)) {
+		// 	e = "Response is empty";
+		// 	_reject && _reject(e);
+		// 	return Q.handle(onError, this, [e, response]);
+		// }
 		if (!Q.isEmpty(response.errors)) {
 			response.errors[0].message
 			_reject && _reject(e);

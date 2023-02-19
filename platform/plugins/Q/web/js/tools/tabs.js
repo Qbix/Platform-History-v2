@@ -272,8 +272,13 @@
 					}
 					
 					var request = new Q.Request(urlToLoad, slotNames, callback, options);
-					var retained = tool.retained[name];
-					if (retained.response.slots) {
+					var retained = tool.retained[name] || {};
+					if (!retained.response) {
+						// NOTE: this will skip any additional stylesheets and javascripts
+						// that might appear in a real response to a server request
+						retained.response = {};
+					}
+					if (retained.response && retained.response.slots) {
 						for (var slotName in retained.slots) {
 							// the slots are going to be filled in a different way
 							retained.response.slots[slotName] = '';
@@ -287,9 +292,11 @@
 					if (state.retain === true || (state.retain && state.retain[name])) {
 						// load retained url and slots back into new tab
 						var retained = tool.retained[name];
-						tool.retained[name] = {
-							response: response
-						}; // reset it so if we switch to this tab right away again, it will reload
+						if (!Q.isEmpty(response)) {
+							tool.retained[name] = {
+								response: response
+							}; // reset it so if we switch to this tab right away again, it will reload
+						}
 						if (retained && retained.stored
 						&& (!loaderOptions || !loaderOptions.reload)) {
 							history.replaceState(retained.url, retained.title);
