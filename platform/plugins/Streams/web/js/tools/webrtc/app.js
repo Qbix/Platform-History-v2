@@ -517,6 +517,7 @@ window.WebRTCRoomClient = function app(options){
         this.sid = null;
         this.kind = null;
         this.type = null;
+        this.paused = true;
         this.parentScreen = null;
         this.trackEl = null;
         this.mediaStreamTrack = null;
@@ -529,7 +530,6 @@ window.WebRTCRoomClient = function app(options){
                 this.parentScreen.tracks = this.parentScreen.tracks.filter(function (obj) {
                     return obj != null;
                 })
-                //if(this.kind == 'video') this.parentScreen.videoTrack = null;
             }
 
             var index = this.participant.tracks.map(function(e) { return e.mediaStreamTrack.id; }).indexOf(this.mediaStreamTrack.id);
@@ -540,6 +540,16 @@ window.WebRTCRoomClient = function app(options){
 
             //if(this.trackEl.parentNode != null) this.trackEl.parentNode.removeChild(this.trackEl);
         };
+        this.play = function () {
+            if(this.trackEl && this.trackEl.paused && this.paused) {
+                this.trackEl.play().then((e) => {
+                    console.log('Track: play func success')
+                }).catch((e) => {
+                    console.error(e)
+                    console.log('Track: play func error')
+                });
+            }
+        }
     }
 
     /*This function was a part of standalone app; currently is not used */
@@ -1276,12 +1286,13 @@ window.WebRTCRoomClient = function app(options){
                 log('attachTrack: video');
                 var trackEl = createTrackElement(track, participant);
                 track.trackEl = trackEl;
-                track.trackEl.play().then((e) => {
+                track.play();
+                /*track.trackEl.play().then((e) => {
                     console.log('attachTrack: video play func success')
                 }).catch((e) => {
                     console.error(e)
                     console.log('attachTrack: video play func error')
-                });
+                });*/
 
                 app.event.dispatch('videoTrackIsBeingAdded', {track: track, participant: participant});
             } else if(track.kind == 'audio') {
@@ -1503,8 +1514,6 @@ window.WebRTCRoomClient = function app(options){
             remoteStreamEl.oncanplay = function (e) {
                 log('createTrackElement: oncanplay ' + track.kind, remoteStreamEl);
 
-                //if(!participant.isLocal) remoteStreamEl.play();
-
                 if(track.kind == 'audio') {
                     log('createTrackElement: dispatch audioTrackLoaded');
 
@@ -1517,6 +1526,17 @@ window.WebRTCRoomClient = function app(options){
 
             }
             remoteStreamEl.addEventListener('play', function (e) {
+                track.paused = false;
+                let time = performance.timeOrigin + performance.now();
+                app.event.dispatch('audioTrackPlay', {
+                    time: time,
+                    participant: participant,
+                    trackEl: e.target,
+                    track:track
+                });
+            })
+            remoteStreamEl.addEventListener('pause', function (e) {
+                track.paused = true;
                 let time = performance.timeOrigin + performance.now();
                 app.event.dispatch('audioTrackPlay', {
                     time: time,

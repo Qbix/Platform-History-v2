@@ -141,7 +141,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             useRelatedTo: {
                 publisherId: null,
                 streamName: null
-            }
+            },
+            relate: {}
         };
 
         overrideDefaultOptions(options);
@@ -952,15 +953,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         this.hide();
                     } else {*/
                         for(let t in videoTracks) {
-                            if(videoTracks[t].trackEl) {
-                                videoTracks[t].trackEl.play().then((e) => {
-                                    console.log('switchToVideoScreen: videoTracks play func success')
-                                }).catch((e) => {
-                                    console.error(e)
-                                    console.log('switchToVideoScreen: videoTracks play func error')
-
-                                });
-                            }
+                            videoTracks[t].play();
                         }
                     //}
                     this.removeAudioVisualization('audio');
@@ -971,15 +964,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         this.audioScreen.screenEl.parentNode.removeChild(this.audioScreen.screenEl);
                     }
 
-                    if(this.videoTrack) this.videoScreen.videoCon.appendChild(this.videoTrack);
+                    if(this.videoTrackEl) this.videoScreen.videoCon.appendChild(this.videoTrackEl);
 
                     this.fillVideoScreenWithAvatarOrVideo();
                     this.screenEl.appendChild(this.videoScreen.screenEl);
                 };
                 this.fillAudioScreenWithAvatarOrVideo = function () {
-                    if(this.videoTrack && this.hasLiveTracks('video', true)) {
+                    if(this.videoTrackEl && this.hasLiveTracks('video', true)) {
                         this.audioScreen.avatarImgCon.innerHTML = '';
-                        this.audioScreen.avatarImgCon.appendChild(this.videoTrack);
+                        this.audioScreen.avatarImgCon.appendChild(this.videoTrackEl);
                     } else if (this.audioScreen.avatarImg != null){
                         this.audioScreen.avatarImgCon.innerHTML = '';
                         this.audioScreen.avatarImgCon.appendChild(this.audioScreen.avatarImg);
@@ -987,11 +980,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
                 this.fillVideoScreenWithAvatarOrVideo = function () {
                     console.log('fillVideoScreenWithAvatarOrVideo');
-                    if(this.videoTrack && this.hasLiveTracks('video', true)) {
+                    if(this.videoTrackEl && this.hasLiveTracks('video', true)) {
                         console.log('fillVideoScreenWithAvatarOrVideo if1');
 
                         this.videoScreen.videoCon.innerHTML = '';
-                        this.videoScreen.videoCon.appendChild(this.videoTrack);
+                        this.videoScreen.videoCon.appendChild(this.videoTrackEl);
                     } else if (this.audioScreen.avatarImg != null){
                         console.log('fillVideoScreenWithAvatarOrVideo if2');
                         this.videoScreen.videoCon.innerHTML = '';
@@ -1171,15 +1164,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 function doPlayTracks() {
                     var i, screen;
                     for (i = 0; screen = roomScreens[i]; i++) {
-                        if(screen.videoTrack != null && screen.isActive) {
-                            screen.videoTrack.play().then((e) => {
-                                console.log('updateLayout: videoTracks play func success')
-                            }).catch((e) => {
-                                console.error(e)
-                                console.log('updateLayout: videoTracks play func error')
-
-                            });
-
+                        if(screen.videoTrack && screen.isActive) {
+                            screen.videoTrack.play();
                         }
                     }
                 }
@@ -1572,7 +1558,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         trackParentScreen = createRoomScreen(participant);
                     }
 
-                    trackParentScreen.videoTrack = track.trackEl;
+                    trackParentScreen.videoTrack = track;
+                    trackParentScreen.videoTrackEl = track.trackEl;
                     trackParentScreen.videoScreen.videoCon.appendChild(track.trackEl);
 
                     if(trackParentScreen.activeScreenType == 'audio') {
@@ -1630,7 +1617,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         screenToAttach = createRoomScreen(participant);
                     }
                     track.parentScreen = screenToAttach;
-                    screenToAttach.videoTrack = track.trackEl;
+                    screenToAttach.videoTrack = track;
+                    screenToAttach.videoTrackEl = track.trackEl;
                 } else if(track.kind == 'video') {
                     log('videoTrackIsAdding: regular video', participant.isLocal);
 
@@ -1649,10 +1637,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                     track.parentScreen = screenToAttach;
-                    if(screenToAttach.videoTrack != null) {
-                        if(screenToAttach.videoTrack.parentNode) screenToAttach.videoTrack.parentNode.removeChild(screenToAttach.videoTrack)
+                    if(screenToAttach.videoTrackEl != null) {
+                        if(screenToAttach.videoTrackEl.parentNode) screenToAttach.videoTrackEl.parentNode.removeChild(screenToAttach.videoTrackEl)
                     }
-                    screenToAttach.videoTrack = track.trackEl;
+                    screenToAttach.videoTrack = track;
+                    screenToAttach.videoTrackEl = track.trackEl;
 
                 }
 
@@ -1685,7 +1674,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     active: true,
                                     showShadow: false,
                                     moveWithinArea: 'window',
-                                    keepRatioBasedOnElement: participantScreen.videoTrack != null ? participantScreen.videoTrack : null ,
+                                    keepRatioBasedOnElement: participantScreen.videoTrackEl != null ? participantScreen.videoTrackEl : null ,
                                     onMoved: function () {
                                         if(!Q.info.isMobile) screensRendering.renderManualScreensGrid();
                                     },
@@ -2364,7 +2353,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         /*if(!_roomsMedia.contains(screen.screenEl)) {
-							if(screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0) screen.videoTrack.style.display = 'none';
+							if(screen.videoTrackEl != null && screen.videoTrackEl.videoWidth == 0 && screen.videoTrackEl.videoHeight == 0) screen.videoTrackEl.style.display = 'none';
 						}*/
 
                         if(!Q.info.isMobile) {
@@ -2533,7 +2522,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         /*if(!_roomsMedia.contains(screen.screenEl)) {
-                            if(screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0) screen.videoTrack.style.display = 'none';
+                            if(screen.videoTrackEl != null && screen.videoTrackEl.videoWidth == 0 && screen.videoTrackEl.videoHeight == 0) screen.videoTrackEl.style.display = 'none';
                         }*/
 
                         elements.push(screen.screenEl);
@@ -3031,8 +3020,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     for (i = 0; i < count; i++) {
                         var screen = roomScreens[i];
                         var screenElRect = screen.screenEl.getBoundingClientRect();
-                        var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
-                        var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+                        var videoWidth = screen.videoTrackEl != null && screen.videoTrackEl.videoWidth != 0 ? screen.videoTrackEl.videoWidth : 0
+                        var videoHeight = (screen.videoTrackEl != null && screen.videoTrackEl.videoHeight != 0 ? screen.videoTrackEl.videoHeight : 0);
 
                         //if video element has width and height, rect's proportions will be based on the size of video
                         var newRectSize = null;
@@ -3203,8 +3192,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             for (i = i+1; i < count; i++) {
                                 var screen = roomScreens[i];
 
-                                var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
-                                var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+                                var videoWidth = screen.videoTrackEl != null && screen.videoTrackEl.videoWidth != 0 ? screen.videoTrackEl.videoWidth : 0
+                                var videoHeight = (screen.videoTrackEl != null && screen.videoTrackEl.videoHeight != 0 ? screen.videoTrackEl.videoHeight : 0);
 
                                 //if video element has width and height, rect's proportions will be based on the size of video
                                 var newRectSize = null;
@@ -3312,8 +3301,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 let prevRow = rectsRows[rectsRows.length - 1];
                                 var screenElRect = screen.screenEl.getBoundingClientRect();
-                                var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
-                                var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+                                var videoWidth = screen.videoTrackEl != null && screen.videoTrackEl.videoWidth != 0 ? screen.videoTrackEl.videoWidth : 0
+                                var videoHeight = (screen.videoTrackEl != null && screen.videoTrackEl.videoHeight != 0 ? screen.videoTrackEl.videoHeight : 0);
 
                                 //if video element has width and height, rect's proportions will be based on the size of video
                                 var newRectSize = null;
@@ -3627,8 +3616,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
                         }
 
-                        var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
-                        var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+                        var videoWidth = screen.videoTrackEl != null && screen.videoTrackEl.videoWidth != 0 ? screen.videoTrackEl.videoWidth : 0
+                        var videoHeight = (screen.videoTrackEl != null && screen.videoTrackEl.videoHeight != 0 ? screen.videoTrackEl.videoHeight : 0);
 
 
                         if(!screenExists) {
@@ -3813,8 +3802,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
                             baseHeight = parentHeight - (maxY + spaceBetween) - 50;
                         }
-                        var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480;
-                        var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
+                        var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrackEl != null && activeScreen.videoTrackEl.videoWidth != 0 ? activeScreen.videoTrackEl.videoWidth : 480;
+                        var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrackEl != null && activeScreen.videoTrackEl.videoHeight != 0 ? activeScreen.videoTrackEl.videoHeight : 270;
 
                         var mainScreenSize = getElementSizeKeepingRatio({
                             width: videoWidth,
@@ -5615,13 +5604,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(track.trackEl) {
                     fitScreenToVideo(track.trackEl, track.parentScreen);
-                    track.trackEl.play().then((e) => {
-                        log('videoTrackLoaded: trackEl play func success')
-                    }).catch((e) => {
-                        console.error(e)
-                        log('videoTrackLoaded: trackEl play func error')
-
-                    });
+                    track.play();
                 }
             }
 
@@ -5762,6 +5745,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             });
 
+            stream.onMessage("Streams/closed").set(function (stream, message) {
+
+            });
+
             stream.onMessage("Streams/webrtc/forceDisconnect").set(function (stream, message) {
                 log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
                 if(!isActive()) return;
@@ -5773,24 +5760,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(message.userId == userId) {
                     if(message.immediate === true) {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnectingImmediately);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnectingImmediately);
                         stop();
                     } else {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnecting);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnecting);
 
                         setTimeout(function () {
                             stop();
                         }, 5000);
                     }
-
-                    /*Q.Streams.unrelate(
-                        state.publisherId,
-                        state.streamName,
-
-                        state.relationType,
-                        this.stream.fields.publisherId,
-                        this.stream.fields.name
-                    );*/
                 } else {
                     for(let p in roomParticipants) {
                         if(roomParticipants[p].isLocal) continue;

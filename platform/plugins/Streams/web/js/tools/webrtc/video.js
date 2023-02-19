@@ -179,7 +179,7 @@
 
                 var screenSharingRadioItem = document.createElement('DIV');
                 screenSharingRadioItem.dataset.deviceId = 'screen';
-                screenSharingRadioItem.className = 'webrtc-video-settings_popup_item';
+                screenSharingRadioItem.className = 'webrtc-video-settings_popup_item webrtc-video-settings_popup_screen_item';
                 var textLabelCon = document.createElement('SPAN');
                 textLabelCon.className = 'webrtc-video-settings_popup_item_text';
                 var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.screenSharing", tool.text));
@@ -231,7 +231,7 @@
                 });
 
                 var anotherScreenSharingRadioItem = document.createElement('DIV');
-                anotherScreenSharingRadioItem.className = 'webrtc-video-hidden webrtc-video-settings_popup_item webrtc-video-video_anotherScreen';
+                anotherScreenSharingRadioItem.className = 'webrtc-video-hidden webrtc-video-settings_popup_item webrtc-video-settings_popup_screen_item webrtc-video-video_anotherScreen';
                 anotherScreenSharingRadioItem.dataset.deviceId = 'anotherScreen';
                 var textLabelCon = document.createElement('SPAN');
                 textLabelCon.className = 'webrtc-video-settings_popup_item_text';
@@ -278,7 +278,7 @@
                 });
 
                 var turnScreenSharingOff = document.createElement('DIV');
-                turnScreenSharingOff.className = 'webrtc-video-hidden webrtc-video-settings_popup_item webrtc-video-turn_off_screensharing';
+                turnScreenSharingOff.className = 'webrtc-video-hidden webrtc-video-settings_popup_item webrtc-video-settings_popup_screen_item webrtc-video-turn_off_screensharing';
                 turnScreenSharingOff.dataset.deviceId = 'turnScreenSharingOff';
                 var textLabelCon = document.createElement('SPAN');
                 textLabelCon.className = 'webrtc-video-settings_popup_item_text';
@@ -301,7 +301,7 @@
 
                 var mobileScreenSharingRadioItem = document.createElement('DIV');
                 mobileScreenSharingRadioItem.dataset.deviceId = 'screen';
-                mobileScreenSharingRadioItem.className = 'webrtc-video-settings_popup_item';
+                mobileScreenSharingRadioItem.className = 'webrtc-video-settings_popup_item webrtc-video-settings_popup_screen_item';
                 var textLabelCon = document.createElement('SPAN');
                 textLabelCon.className = 'webrtc-video-settings_popup_item_text';
                 var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.screenSharing", tool.text));
