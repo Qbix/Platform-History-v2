@@ -228,12 +228,13 @@ Streams.READ_LEVEL = {
 Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
-	'vote':		 13,		// can vote for a relation message posted to the stream
-	'contribute':	18,		// can post messages which require manager's approval
+	'vote':		    13,		// can vote for a relation message posted to the stream
+	'suggest':      15,     // can post messages which require manager's approval
+	'contribute':	18,		// can contribute to the stream (e.g. "join the stage")
 	'post':			20,		// can post messages which take effect immediately
-	'relate':	   23,		// can relate other streams to this one
+	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update properties of relations directly
-	'suggest':	  28,		// can suggest edits of stream
+	'suggest':	    28,		// can suggest edits of stream
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream
