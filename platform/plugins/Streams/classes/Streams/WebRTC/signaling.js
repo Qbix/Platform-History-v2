@@ -1,7 +1,6 @@
 const Q = require('Q');
 module.exports = function(socket,io) {
-    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], {});
-    var _debug = _debug.signalling;
+    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
     var WebRTC =  Q.plugins.Streams.WebRTC;
     var nspName = '/webrtc';
     var webrtcNamespace = io.of(nspName);
@@ -160,7 +159,7 @@ module.exports = function(socket,io) {
                 stream.leave({userId:socket.userPlatformId}, function () {
                     if(_debug) console.log('DISCONNECT: LEAVE STREAM');
                 });
-                if ([false, "false"].includes(stream.getAttribute('resumeClosed')) && (stream.getAttribute('closeManually') == null || [false, "false"].includes(stream.getAttribute('closeManually')))) {
+                if ((stream.getAttribute('resumeClosed') == null || [false, "false"].includes(stream.getAttribute('resumeClosed'))) && (stream.getAttribute('closeManually') == null || [false, "false"].includes(stream.getAttribute('closeManually')))) {
                     if(_debug) console.log('DISCONNECT: Q.plugins.Streams.fetchOne: CLOSE');
 
                     Q.plugins.Streams.close(socket.userPlatformId, roomPublisherId, streamName);

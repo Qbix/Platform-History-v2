@@ -1,0 +1,91 @@
+.streams-callcenter-m-button-hidden {
+    display: none !important;
+}
+
+.streams-callcenter-m-container {
+    padding: 5px;
+    background-color: rgba(255, 255, 255, .1);
+    margin-bottom: 10px;
+}
+
+.streams-callcenter-m-controls-con {
+    padding: 10px 0 10px 0;
+}
+.streams-callcenter-m-controls-con .streams-callcenter-m-controls-open-webrtc {
+    padding: 10px 0 10px 0;
+    width: 100%;
+    cursor: pointer;
+}
+.streams-callcenter-m-controls-con .streams-callcenter-m-controls-open-webrtc:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.streams-callcenter-m-calls-item {
+    position: relative;
+    padding: 5px;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, .2);
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-title {
+    padding: 5px 5px 10px 5px
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-date {
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-topic {
+    position: relative;
+    max-width: 75%;
+    padding: 7px 15px;
+    margin-bottom: 2px;
+    border-radius: 3px 20px 20px 3px;
+    border-top-left-radius: 20px;
+    background: #f1f1f1;
+    color: #555;
+    margin-right: auto;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-inner {
+    display: flex;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons {
+    display: flex;
+    padding: 5px 5px 5px 0;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons .streams-callcenter-m-calls-item-buttons-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 10px 7px 10px;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    color:white;
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons .streams-callcenter-m-calls-item-buttons-btn:first-child {
+    margin-left: 0;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons .streams-callcenter-m-calls-item-buttons-btn:hover {
+    filter: brightness(0.85);
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons-btn.streams-callcenter-m-calls-item-buttons-approve {
+    background: #ffc107;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons-btn.streams-callcenter-m-calls-item-buttons-accept {
+    background: #37c837;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons-btn.streams-callcenter-m-calls-item-buttons-interview {
+    background: #007bff;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons-btn.streams-callcenter-m-calls-item-buttons-decline {
+    background: #f93b2f;
+}
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons-btn.streams-callcenter-m-calls-item-buttons-hold {
+    background: #555555;
+}

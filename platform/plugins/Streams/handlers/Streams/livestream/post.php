@@ -54,7 +54,7 @@ function Streams_livestream_post($params = array())
 		));
 
 		//create stream for public chat room and relate it to livestream stream
-		$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/chat', ['title' => 'Public']);
+		$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/chat', ['title' => 'Public']);
 		$publicChatStream->setAttribute('publicChat', true);
 		$publicChatStream->changed();
 
@@ -81,7 +81,7 @@ function Streams_livestream_post($params = array())
 			$publicChatStream = Streams_Stream::fetch($loggedInUserId, $publicChatStreamRelation->fromPublisherId, $publicChatStreamRelation->fromStreamName);
 		} else {
 			//create stream for public chat room and relate it to livestream stream
-			$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/chat', ['title' => 'Public']);
+			$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/chat', ['title' => 'Public']);
 			$publicChatStream->setAttribute('publicChat', true);
 			$publicChatStream->changed();
 
