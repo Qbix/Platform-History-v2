@@ -187,7 +187,6 @@ abstract class Streams extends Base_Streams
 		'post' => 20,
 		'relate' => 23,
 		'relations' => 25,
-		'suggest' => 28,
 		'edit' => 30,
 		'closePending' => 35,
 		'close' => 40,
