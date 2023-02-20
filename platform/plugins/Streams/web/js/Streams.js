@@ -234,7 +234,6 @@ Streams.WRITE_LEVEL = {
 	'post':			20,		// can post messages which take effect immediately
 	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update properties of relations directly
-	'suggest':	    28,		// can suggest edits of stream
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream
