@@ -9790,7 +9790,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				+ ' (' + sn1 + ') '
 				+ ' was initiated after ' 
 				+ ' current one to ' + _loadUrlObject.url
-				+ ' (' + sn2.join(',') + ')';
+				+ ' (' + sn2 + ')';
 			_reject && _reject(e);
 			return; // a newer request was sent
 		}
