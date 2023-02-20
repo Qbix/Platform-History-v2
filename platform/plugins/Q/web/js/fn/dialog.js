@@ -101,6 +101,7 @@ Q.Tool.jQuery('Q/overlay',
 			if (e.keyCode === 27 && !o.noClose && o.closeOnEsc
 				&& $this.is(":visible") && (!topDialog || $this[0] === topDialog)) {
 				$this.data('Q/overlay').close(e);
+				$(document).off('keydown.Q_dialog', closeThisOverlayOnEsc)
 			}
 		}
 
@@ -204,7 +205,7 @@ Q.Tool.jQuery('Q/overlay',
 						$this.addClass('Q_overlay_open');
 					}, 0);
 					if (!data.options.noClose && data.options.closeOnEsc) {
-						$(document).on('keydown', closeThisOverlayOnEsc);
+						$(document).on('keydown.Q_dialog', closeThisOverlayOnEsc);
 					}
 					Q.handle(data.options.onLoad, $this, [$this]);
 				}
@@ -501,7 +502,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			}
 
 			if (o.closeOnEsc) {
-				$(document).on('keydown', function(e) {
+				$(document).on('keydown.Q_dialog', function(e) {
 					if (e.which === 27) {
 						dialogData.close(e);
 					}
