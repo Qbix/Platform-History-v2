@@ -68,7 +68,11 @@
 			state.selectedIds = [];
 		}, tool);
 
-		$(document).keyup(function (e) {
+		$(document).off('keyup.Streams_mentions_chat')
+		.on('keyup.Streams_mentions_chat', function (e) {
+			if (!tool.state.input) {
+				return;
+			}
 			if (e.keyCode === 13 || e.keyCode === 27) {
 				tool.close();
 			}
