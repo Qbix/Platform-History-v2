@@ -48,6 +48,8 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 	var $scrolling = null, ost = null, osl = null;
 
 	state.draggable = state.draggable || '*';
+	$this.off([Q.Pointer.start, '.Q_sortable']);
+	$this.off([Q.Pointer.end, '.Q_sortable']);
 	$this.on([Q.Pointer.start, '.Q_sortable'], state.draggable, liftHandler);
 	$this.on([Q.Pointer.end, '.Q_sortable'], state.draggable, function () {
 		if (tLift) clearTimeout(tLift);
@@ -57,6 +59,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 	});
 
 	$('*', $this).css('-webkit-touch-callout', 'none');
+	$this.off('dragstart.Q_sortable');
 	$this.on('dragstart.Q_sortable', state.draggable, function () {
 		if (state.draggable === '*' && this.parentNode !== $this[0]) {
 			return;
@@ -96,19 +99,27 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				complete(true);
 			}
 		}
-		$(document).on('keydown.Q_sortable', function (e) {
+		$(document)
+		.off('keydown.Q_sortable')
+		.on('keydown.Q_sortable', function (e) {
 			if (lifted && e.keyCode == 27) { // escape key
 				complete(true, true);
 				return false;
 			}
-		}).on([Q.Pointer.cancel, 'Q_sortable'], leaveHandler)
+		})
+		.off([Q.Pointer.cancel, 'Q_sortable'])
+		.off([Q.Pointer.leave, 'Q_sortable'])
+		.on([Q.Pointer.cancel, 'Q_sortable'], leaveHandler)
 		.on([Q.Pointer.leave, 'Q_sortable'], leaveHandler);
 		moveHandler.xStart = mx = Q.Pointer.getX(event);
 		moveHandler.yStart = my = Q.Pointer.getY(event);
 		var element = this;
 		var sl = [], st = [];
 		$body.data(dataLifted, $(this));
-		$item.on(Q.Pointer.move, moveHandler);
+		$item.off(Q.Pointer.move, moveHandler)
+		.on(Q.Pointer.move, moveHandler);
+		Q.removeEventListener(body, [Q.Pointer.end, Q.Pointer.cancel], dropHandler);
+		Q.removeEventListener(body, Q.Pointer.move, dropHandler);
 		Q.addEventListener(body, [Q.Pointer.end, Q.Pointer.cancel], dropHandler, false, true);
 		Q.addEventListener(body, Q.Pointer.move, moveHandler, false, true);
 		$item.parents().each(function () {
@@ -225,7 +236,8 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		}
 		lifted = true;
 		$item.parents().each(function () {
-			$(this).on('scroll.Q_sortable', function () {
+			$(this).off('scroll.Q_sortable')
+			.on('scroll.Q_sortable', function () {
 				return false; // don't scroll parents while we are dragging
 			});
 		});
