@@ -1916,11 +1916,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
     Q.Text.get('Streams/content', function (err, text) {
 
 		var addLabel = o.addLabel;
-		if (!Q.isArrayLike(o.addLabel)
-		&& o.addLabel !== true) {
-			o.addLabel = [o.addLabel];
-		}
 		if (addLabel !== true) {
+			if (!Q.isArrayLike(o.addLabel)) {
+				o.addLabel = [o.addLabel];
+			}
 			return _continueAfterRoles();
 		}
 
@@ -1982,11 +1981,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 
 		function _continueAfterRoles() {
 			var addMyLabel = o.addMyLabel;
-			if (!Q.isArrayLike(o.addMyLabel)
-			&& o.addMyLabel !== true) {
-				o.addMyLabel = [];
-			}
 			if (addMyLabel !== true) {
+				if (!Q.isArrayLike(o.addMyLabel)) {
+					o.addMyLabel = [o.addMyLabel];
+				}
 				return _showInviteDialog();
 			}
 			Q.Dialogs.push({
@@ -3616,8 +3614,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *   @param {string} [options.platform] platform for which xids are passed
  *   @param {String} [options.xid] xid or arary of xids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
- *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
- *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ *   @param {String|Array|true} [options.addLabel] label or an array of labels for adding publisher's contacts, or pass true to show a selector dialog
+ *   @param {String|Array|true} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts, or pass true to show a selector dialog
  *   @param {String} [options.readLevel] the read level to grant those who are invited
  *   @param {String} [options.writeLevel] the write level to grant those who are invited
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
