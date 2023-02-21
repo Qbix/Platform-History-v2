@@ -1916,7 +1916,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
     Q.Text.get('Streams/content', function (err, text) {
 
 		var addLabel = o.addLabel;
-		if (!Q.isArrayLike(o.addLabel)) {
+		if (!Q.isArrayLike(o.addLabel)
+		&& o.addLabel !== true) {
 			o.addLabel = [o.addLabel];
 		}
 		if (addLabel !== true) {
@@ -1981,7 +1982,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 
 		function _continueAfterRoles() {
 			var addMyLabel = o.addMyLabel;
-			if (!Q.isArrayLike(o.addMyLabel)) {
+			if (!Q.isArrayLike(o.addMyLabel)
+			&& o.addMyLabel !== true) {
 				o.addMyLabel = [];
 			}
 			if (addMyLabel !== true) {
