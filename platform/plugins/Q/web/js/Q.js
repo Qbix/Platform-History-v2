@@ -4447,7 +4447,7 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
 		}
 		for (var i=tn.length-1; i>=0; --i) {
 			if (typeof filter === 'string') {
-				if (tn[i] !== 'filter') {
+				if (tn[i] !== filter) {
 					continue;
 				}
 			} else if (typeof filter === 'function') {
