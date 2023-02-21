@@ -4447,7 +4447,7 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
 		}
 		for (var i=tn.length-1; i>=0; --i) {
 			if (typeof filter === 'string') {
-				if (tn[i] !== 'filter') {
+				if (tn[i] !== filter) {
 					continue;
 				}
 			} else if (typeof filter === 'function') {
@@ -9790,7 +9790,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				+ ' (' + sn1 + ') '
 				+ ' was initiated after ' 
 				+ ' current one to ' + _loadUrlObject.url
-				+ ' (' + sn2.join(',') + ')';
+				+ ' (' + sn2 + ')';
 			_reject && _reject(e);
 			return; // a newer request was sent
 		}
@@ -9799,11 +9799,11 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			_reject && _reject(e);
 			return Q.handle(onError, this, [e]);
 		}
-		if (Q.isEmpty(response)) {
-			e = "Response is empty";
-			_reject && _reject(e);
-			return Q.handle(onError, this, [e, response]);
-		}
+		// if (Q.isEmpty(response)) {
+		// 	e = "Response is empty";
+		// 	_reject && _reject(e);
+		// 	return Q.handle(onError, this, [e, response]);
+		// }
 		if (!Q.isEmpty(response.errors)) {
 			response.errors[0].message
 			_reject && _reject(e);
@@ -9886,6 +9886,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					Q.Event.jQueryForPage = [];
 				}
 
+				// this is where we fill all the slots
+				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
+				domElements = handler(response, url, o);
+
 				if (!o.ignoreHistory) {
 					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
@@ -9933,10 +9937,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 						});
 					});
 				}
-			
-				// this is where we fill all the slots
-				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
-				domElements = handler(response, url, o);
 			
 				if (!o.ignorePage && Q.info && Q.info.uri) {
 					Q.Page.onLoad(moduleSlashAction).occurred = false;
@@ -12348,8 +12348,9 @@ Q.Visual = Q.Pointer = {
 			}
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
-			if (!(elem instanceof Element)){
-				return;
+			if (!(elem instanceof Element)
+			|| !Q.Pointer.started) {
+				return; // the click may have been caused e.g. by Chrome on a button during form submit
 			}
 			if (Q.Pointer.canceledClick
 			|| !this.contains(Q.Pointer.started || null)

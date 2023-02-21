@@ -228,12 +228,12 @@ Streams.READ_LEVEL = {
 Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
-	'vote':		 13,		// can vote for a relation message posted to the stream
-	'suggest':	18,		// can post messages which require manager's approval
+	'vote':		    13,		// can vote for a relation message posted to the stream
+	'suggest':      15,     // can post messages which require manager's approval
+	'contribute':	18,		// can contribute to the stream (e.g. "join the stage")
 	'post':			20,		// can post messages which take effect immediately
-	'relate':	   23,		// can relate other streams to this one
+	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update properties of relations directly
-	'suggest':	  28,		// can suggest edits of stream
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream
@@ -1916,13 +1916,13 @@ Streams.invite = function (publisherId, streamName, options, callback) {
     Q.Text.get('Streams/content', function (err, text) {
 
 		var addLabel = o.addLabel;
-		if (!Q.isArrayLike(o.addLabel)) {
-			o.addLabel = [];
-		}
 		if (addLabel !== true) {
+			if (!Q.isArrayLike(o.addLabel)) {
+				o.addLabel = [o.addLabel];
+			}
 			return _continueAfterRoles();
 		}
-
+		o.addLabel = [];
 
 		// Commented out because now we check the server every time
 		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
@@ -1974,19 +1974,20 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						} else {
 							o.addLabel.push(label);
 						}
-					});
+					}, labelsTool);
 				}
 			});
 		});
 
 		function _continueAfterRoles() {
 			var addMyLabel = o.addMyLabel;
-			if (!Q.isArrayLike(o.addMyLabel)) {
-				o.addMyLabel = [];
-			}
 			if (addMyLabel !== true) {
+				if (!Q.isArrayLike(o.addMyLabel)) {
+					o.addMyLabel = [o.addMyLabel];
+				}
 				return _showInviteDialog();
 			}
+			o.addMyLabel = [];
 			Q.Dialogs.push({
 				title: text.invite.labels.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
@@ -2011,7 +2012,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						} else {
 							o.addMyLabel.push(label);
 						}
-					});
+					}, labelsTool);
 				}
 			});
 		}
@@ -3614,8 +3615,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *   @param {string} [options.platform] platform for which xids are passed
  *   @param {String} [options.xid] xid or arary of xids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
- *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
- *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ *   @param {String|Array|true} [options.addLabel] label or an array of labels for adding publisher's contacts, or pass true to show a selector dialog
+ *   @param {String|Array|true} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts, or pass true to show a selector dialog
  *   @param {String} [options.readLevel] the read level to grant those who are invited
  *   @param {String} [options.writeLevel] the write level to grant those who are invited
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
@@ -5585,7 +5586,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			lastName = priv.registerInfo.lastName;
 		}
 		if (priv.registerInfo.pic) {
-			src40 = src50 = src = src80 = priv.registerInfo.pic;
+			src = priv.registerInfo.pic;
 		}
 	}
 	var $formContent = $('<div class="Streams_login_fullname_block" />');

@@ -32,28 +32,29 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 		$toolElement.on(Q.Pointer.fastclick, function () {
 			Q.handle(state.onInvoke, tool);
 		});
+
+		Q.Streams.get(preview.state.publisherId, preview.state.streamName, function () {
+			if (!this.testWriteLevel('edit')) {
+				return;
+			}
+			preview.state.actions = {
+				actions: {
+					"edit": tool.edit.bind(tool),
+					"remove": function () {
+						Q.confirm(tool.text.AreYouSure, function (result) {
+							if (!result) {
+								return;
+							}
+
+							tool.preview.delete();
+						});
+					}
+				}
+			};
+			preview.actions();
+		});
 	}
 
-	Q.Streams.get(preview.state.publisherId, preview.state.streamName, function () {
-		if (!this.testWriteLevel('edit')) {
-			return;
-		}
-		preview.state.actions = {
-			actions: {
-				"edit": tool.edit.bind(tool),
-				"remove": function () {
-					Q.confirm(tool.text.AreYouSure, function (result) {
-						if (!result) {
-							return;
-						}
-		
-						tool.preview.delete();
-					});
-				}
-			}
-		};
-		preview.actions();
-	});
 },
 
 {

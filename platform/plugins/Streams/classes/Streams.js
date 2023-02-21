@@ -138,6 +138,13 @@ Streams.READ_LEVEL = {
  * @final
  */
 /**
+ * Can contribute to the stream (e.g. "join the stage")
+ * @property WRITE_LEVEL.contribute
+ * @type integer
+ * @default 18
+ * @final
+ */
+/**
  * Can post messages which appear immediately
  * @property WRITE_LEVEL.messages
  * @type integer
@@ -156,13 +163,6 @@ Streams.READ_LEVEL = {
  * @property WRITE_LEVEL.relations
  * @type integer
  * @default 25
- * @final
- */
-/**
- * Can post messages requesting edits of stream
- * @property WRITE_LEVEL.suggest
- * @type integer
- * @default 28
  * @final
  */
 /**
@@ -198,11 +198,11 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':         13,		// can vote for a relation message posted to the stream
-	'suggest':	18,		// can post messages which require manager's approval
+	'suggest':	    15,		// can post messages which require manager's approval
+	'contribute':   18,		// can contribute to the stream (e.g. "join the stage")
 	'post':			20,		// can post messages which take effect immediately
 	'relate':       23,		// can relate other streams to this one
 	'relations':    25,		// can update properties of relations directly
-	'suggest':      28,		// can suggest edits of stream
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream

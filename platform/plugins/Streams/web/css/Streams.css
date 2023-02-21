@@ -346,14 +346,10 @@
 	vertical-align: middle;
 }
 
-.Streams_complete_invitingUser td:first-child {
+.Streams_login_explanation td:first-child {
 	width: 1%;
 }
-
-.Streams_complete_stream td:first-child {
-	width: 1%;
-}
-.Streams_complete_stream img {
+.Streams_login_explanation td:first-child img {
 	border-radius: 5px;
 	margin: 5px;
 }
