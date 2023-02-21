@@ -1922,7 +1922,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 			return _continueAfterRoles();
 		}
-
+		o.addLabel = [];
 
 		// Commented out because now we check the server every time
 		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
@@ -1987,6 +1987,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				}
 				return _showInviteDialog();
 			}
+			o.addMyLabel = [];
 			Q.Dialogs.push({
 				title: text.invite.labels.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
