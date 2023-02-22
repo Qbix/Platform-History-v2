@@ -560,7 +560,7 @@ function Streams_request_handler (req, res, next) {
 		return next();
 	}
 	var participant, msg, posted, streams, k;
-	var userIds, invitingUserId, username, appUrl, label, alwaysSend;
+	var userIds, invitingUserId, username, appUrl, label, addLabel, addMyLabel, alwaysSend;
 	var readLevel, writeLevel, adminLevel, permissions, displayName, expireTime, logKey;
 	var clientId = parsed["Q.clientId"];
 	var stream = parsed.stream
@@ -679,6 +679,8 @@ function Streams_request_handler (req, res, next) {
 				permissions = parsed.permissions || null;
 				displayName = parsed.displayName || '';
 				label = parsed.label || '';
+				addLabel = parsed.addLabel || [];
+				addMyLabel = parsed.addMylabel || [];
 				alwaysSend = parsed.alwaysSend || false;
 				expireTime = parsed.expireTime ? new Date(parsed.expireTime*1000) : null;
 			} catch (e) {
@@ -754,6 +756,12 @@ function Streams_request_handler (req, res, next) {
 				var extra = {};
 				if (label) {
 					extra.label = label;
+				}
+				if (addLabel) {
+					extra.addLabel = addLabel;
+				}
+				if (addMyLabel) {
+					extra.addMyLabel = addMyLabel;
 				}
 				(new Streams.Invite({
 					"userId": userId,

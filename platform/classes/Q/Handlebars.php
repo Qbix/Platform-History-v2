@@ -165,7 +165,7 @@ class Q_Handlebars {
 				$o = array_merge($o, $fields["id:$id2"]);
 			}
 		}
-		if ($o['class']) {
+		if (!empty($o['class'])) {
 			$classes = $o['class'];
 			unset($o['class']);
 		}

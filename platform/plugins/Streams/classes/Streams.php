@@ -3787,6 +3787,7 @@ abstract class Streams extends Base_Streams
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes2);
 		}
 		// merge labels if any
+		$label = null;
 		if (isset($who['label'])) {
 			$label = $who['label'];
 			if (is_string($label)) {
@@ -3888,17 +3889,19 @@ abstract class Streams extends Base_Streams
 
 		$asUserDisplayName = Streams::displayName($asUser);
 		
+		$displayName = Q::ifset($options, 'name', null);
+		$icon = Q::ifset($options, 'icon', null);
+
 		foreach ($raw_userIds as $userId) {
 			Users_Contact::addContact($asUserId, "Streams/invited", $userId, null, false, true);
 			Users_Contact::addContact($asUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false, true);
-			if ($myLabel) {
-				$myLabel2 = Q::isAssociative($myLabel) ? array_keys($myLabel) : $myLabel;
-				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
+			if ($addMyLabel) {
+				$myLabels = Q::isAssociative($addMyLabel) ? array_keys($addMyLabel) : $addMyLabel;
+				Users_Contact::addContact($asUserId, $myLabels, $userId, null, $asUserId2, true);
 			}
 
-			$displayName = Q::ifset($options, 'name', null);
 			if ($displayName) {
 				try {
 					Q::event("Streams/basic/post", array(
@@ -3907,15 +3910,16 @@ abstract class Streams extends Base_Streams
 					));
 				} catch (Exception $e) {}
 			}
-			$icon = Q::ifset($options, 'icon', null);
 			if ($icon) {
-				Q::event('Q/image/post', array(
-					'data' => $icon,
-					'path' => "Q/uploads/Users",
-					'subpath' => Q_Utils::splitId($userId, 3, '/')."/icon/".time(),
-					'save' => "Users/icon",
-					'skipAccess' => true
-				));
+				try {
+					Q::event('Q/image/post', array(
+						'data' => $icon,
+						'path' => "Q/uploads/Users",
+						'subpath' => Q_Utils::splitId($userId, 3, '/')."/icon/".time(),
+						'save' => "Users/icon",
+						'skipAccess' => true
+					));
+				} catch (Exception $e) {}
 			}
 		}
 
@@ -3929,8 +3933,9 @@ abstract class Streams extends Base_Streams
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
 			"label" => $label,
+			"addLabel" => $addLabel,
+			"addMyLabel" => $addMyLabel, 
 			"alwaysSend" => $alwaysSend,
-			"myLabel" => $myLabel, 
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
 			"adminLevel" => $adminLevel,
