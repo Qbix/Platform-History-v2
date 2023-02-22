@@ -19,8 +19,7 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  */
 function Streams_webrtc_post($params = array())
 {
-
-    $socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);
+    $socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', '');
     $socketServerHost = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', $socketServerHost), '/');
     $socketServerPort = Q_Config::get('Streams', 'webrtc', 'socketServerPort', null);
     if(!empty($socketServerHost) && !empty($socketServerPort)){
