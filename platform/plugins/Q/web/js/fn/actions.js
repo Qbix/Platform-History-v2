@@ -52,10 +52,6 @@ function _Q_actions(options) {
 	remove: function () {
 		var $this = $(this);
 		var state = $this.state('Q/actions');
-		var tool = Q.getObject('Q.tools.q_actions', $this[0]);
-		if (tool) {
-			tool.remove();
-		}
 		state.container.remove();
 		$this.off('mouseenter.Q_actions mouseleave.Q_actions');
 	},
