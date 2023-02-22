@@ -6305,6 +6305,18 @@
 
                             dialogBodyInner.appendChild(displayVideoCon);
 
+                            var showFlippedCon = document.createElement('DIV');
+                            var showFlipped = document.createElement('INPUT');
+                            showFlipped.type = 'checkbox';
+                            showFlipped.id = 'showFlipped';
+                            showFlipped.name = 'showFlipped';
+                            showFlipped.checked = _selectedSource.sourceInstance.params.flip ? true : false;
+                            var showFlippedLabel = document.createElement('Label');
+                            showFlippedLabel.appendChild(showFlipped);
+                            showFlippedLabel.appendChild(document.createTextNode("Flip"));
+                            showFlippedCon.appendChild(showFlippedLabel);
+                            dialogBodyInner.appendChild(showFlippedCon);
+
                             var showNameCon = document.createElement('DIV');
                             var showName = document.createElement('INPUT');
                             showName.type = 'checkbox';
@@ -6315,17 +6327,7 @@
                             showNameLabel.appendChild(showName);
                             showNameLabel.appendChild(document.createTextNode("Show participants' name"));
                             showNameCon.appendChild(showNameLabel);
-
-                            var showBorderCon = document.createElement('DIV');
-                            var showBorder = document.createElement('INPUT');
-                            showBorder.type = 'checkbox';
-                            showBorder.id = 'showBorder';
-                            showBorder.name = 'showBorder';
-                            showBorder.checked = false;
-                            var ShowBorderLabel = document.createElement('Label');
-                            ShowBorderLabel.appendChild(showBorder);
-                            ShowBorderLabel.appendChild(document.createTextNode("Show borders"));
-                            showBorderCon.appendChild(ShowBorderLabel);
+                            dialogBodyInner.appendChild(showNameCon);
 
                             var descNameCon = document.createElement('DIV');
                             descNameCon.className = 'live-editor-popup-options-params-webrtc-desc-name';
@@ -6338,6 +6340,18 @@
                             nameInput.value = _selectedSource.sourceInstance.participant.username;
                             descNameCon.appendChild(nameInput);
 
+                            var showBorderCon = document.createElement('DIV');
+                            var showBorder = document.createElement('INPUT');
+                            showBorder.type = 'checkbox';
+                            showBorder.id = 'showBorder';
+                            showBorder.name = 'showBorder';
+                            showBorder.checked = false;
+                            var ShowBorderLabel = document.createElement('Label');
+                            ShowBorderLabel.appendChild(showBorder);
+                            ShowBorderLabel.appendChild(document.createTextNode("Show borders"));
+                            showBorderCon.appendChild(ShowBorderLabel);
+                            dialogBodyInner.appendChild(showBorderCon);
+
                             var descCaptionCon = document.createElement('DIV');
                             descCaptionCon.className = 'live-editor-popup-options-params-webrtc-desc-caption';
                             descriptionInner.appendChild(descCaptionCon);
@@ -6348,6 +6362,7 @@
                             captionInput.type = 'text';
                             captionInput.value = _selectedSource.sourceInstance.caption;
                             descCaptionCon.appendChild(captionInput);
+                            dialogBodyInner.appendChild(descriptionCon);
 
                             var bgColorCon = document.createElement('DIV');
                             bgColorCon.className = 'live-editor-popup-options-params-captionbg'
@@ -6362,6 +6377,7 @@
                             bgColorCon.appendChild(document.createTextNode("Caption background color: "));
                             bgColorCon.appendChild(bgColorInput);
                             bgColorCon.appendChild(removeBg);
+                            dialogBodyInner.appendChild(bgColorCon);
 
                             var fontColorCon = document.createElement('DIV');
                             fontColorCon.className = 'live-editor-popup-options-params-font-color'
@@ -6376,11 +6392,6 @@
                             fontColorCon.appendChild(document.createTextNode("Caption font color: "));
                             fontColorCon.appendChild(fontColorInput);
                             fontColorCon.appendChild(removeColor);
-
-                            dialogBodyInner.appendChild(showNameCon);
-                            dialogBodyInner.appendChild(showBorderCon);
-                            dialogBodyInner.appendChild(descriptionCon);
-                            dialogBodyInner.appendChild(bgColorCon);
                             dialogBodyInner.appendChild(fontColorCon);
 
                             _layoutParamsEl = dialogBodyInner;
@@ -6392,6 +6403,14 @@
 
                             coverFit.addEventListener('click', displayVideoHandler);
                             containFit.addEventListener('click', displayVideoHandler);
+
+                            showFlipped.addEventListener('change', function () {
+                                if( showFlipped.checked) {
+                                    _selectedSource.sourceInstance.params.flip = true;
+                                } else {
+                                    _selectedSource.sourceInstance.params.flip = false;
+                                }
+                            })
 
                             showName.addEventListener('change', function () {
                                 if( showName.checked) {

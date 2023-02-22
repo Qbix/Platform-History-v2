@@ -541,7 +541,8 @@ window.WebRTCRoomClient = function app(options){
             //if(this.trackEl.parentNode != null) this.trackEl.parentNode.removeChild(this.trackEl);
         };
         this.play = function () {
-            if(this.trackEl && this.trackEl.paused && this.paused) {
+            log('Track: play: track is in document', document.contains(this.trackEl));
+            if(this.trackEl && this.trackEl.paused && this.paused /*&& document.contains(this.trackEl)*/) {
                 this.trackEl.play().then((e) => {
                     console.log('Track: play func success')
                 }).catch((e) => {
