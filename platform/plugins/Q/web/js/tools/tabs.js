@@ -272,7 +272,21 @@
 							|| Q.loadUrl.options.loader || Q.request;
 						return _loader.apply(this, arguments);
 					}
-					
+
+					var retainedFrom = tool.retained[fromTabName];
+					// TODO: analyze what metas, stylesheets and scriptLines to restore later
+					// Q.each(slots, function (i, slotName) {
+					// 	var metas = document.querySelectorAll('meta[data-slot="' + slotName + '"');
+					// 	var stylesheets = document.querySelectorAll('link[data-slot="' + meta + '"');
+					// });
+					retainedFrom.response = Q.extend(
+						{},
+						retainedFrom.response,
+						{
+							uri: Q.info.uri
+						}
+					);
+
 					var request = new Q.Request(urlToLoad, slotNames, callback, options);
 					var retained = tool.retained[name] || {};
 					if (!retained.response) {
@@ -301,6 +315,9 @@
 						}
 						if (retained && retained.stored
 						&& (!loaderOptions || !loaderOptions.reload)) {
+							if (retained.uri) {
+								Q.info.uri = retained.uri;
+							}
 							history.replaceState(retained.url, retained.title);
 							var elements = [];
 							Q.each(retained.stored, function (slotName) {
