@@ -265,14 +265,6 @@
 				}
 				
 				function loader(urlToLoad, slotNames, callback, options) {
-					var url = Q.getObject([name, 'url'], tool.retained);
-					if (!(state.retain === true || (state.retain && state.retain[name])) || !url) {
-						// use default loader
-						var _loader = loaderOptions.loader || state.loader 
-							|| Q.loadUrl.options.loader || Q.request;
-						return _loader.apply(this, arguments);
-					}
-
 					var retainedFrom = tool.retained[fromTabName];
 					// TODO: analyze what metas, stylesheets and scriptLines to restore later
 					// Q.each(slots, function (i, slotName) {
@@ -282,6 +274,14 @@
 					retainedFrom.uri = {
 						uri: Q.info.uri
 					};
+
+					var url = Q.getObject([name, 'url'], tool.retained);
+					if (!(state.retain === true || (state.retain && state.retain[name])) || !url) {
+						// use default loader
+						var _loader = loaderOptions.loader || state.loader 
+							|| Q.loadUrl.options.loader || Q.request;
+						return _loader.apply(this, arguments);
+					}
 
 					var request = new Q.Request(urlToLoad, slotNames, callback, options);
 					var retained = tool.retained[name] || {};
