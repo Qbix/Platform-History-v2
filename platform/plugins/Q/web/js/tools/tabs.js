@@ -279,13 +279,9 @@
 					// 	var metas = document.querySelectorAll('meta[data-slot="' + slotName + '"');
 					// 	var stylesheets = document.querySelectorAll('link[data-slot="' + meta + '"');
 					// });
-					retainedFrom.response = Q.extend(
-						{},
-						retainedFrom.response,
-						{
-							uri: Q.info.uri
-						}
-					);
+					retainedFrom.uri = {
+						uri: Q.info.uri
+					};
 
 					var request = new Q.Request(urlToLoad, slotNames, callback, options);
 					var retained = tool.retained[name] || {};
