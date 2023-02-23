@@ -271,9 +271,11 @@
 					// 	var metas = document.querySelectorAll('meta[data-slot="' + slotName + '"');
 					// 	var stylesheets = document.querySelectorAll('link[data-slot="' + meta + '"');
 					// });
-					retainedFrom.uri = {
-						uri: Q.info.uri
-					};
+					retainedFrom = Q.extend({}, retainedFrom,
+						{
+							uri: Q.info.uri
+						}
+					);
 
 					var url = Q.getObject([name, 'url'], tool.retained);
 					if (!(state.retain === true || (state.retain && state.retain[name])) || !url) {
