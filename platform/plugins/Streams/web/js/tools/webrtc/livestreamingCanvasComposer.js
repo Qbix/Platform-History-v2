@@ -773,7 +773,8 @@
                             this.params = {
                                 captionBgColor: '#26A553',
                                 captionFontColor: '#FFFFFF',
-                                displayVideo: 'cover'
+                                displayVideo: 'cover',
+                                flip: participant.isLocal ? true : false
                             };
                         }
                         WebRTCStreamSource.prototype = new Source();
@@ -1465,6 +1466,7 @@
         
                                                     canvasStream.screenSharing = true;
                                                     canvasStream.name = canvasStream.name + ' (screen)';
+                                                    canvasStream.params.flip = false;
                                                     log('updateWebRTCCanvasLayout currentlyRendered', currentlyRenderedAudioTracks.length, currentlyRenderedVideoTracks.length)
         
                                                     
@@ -1556,7 +1558,10 @@
                                                     if(trackCurrentlyRendered.track) {
                                                         if(!trackCurrentlyRendered.mediaStream) trackCurrentlyRendered.mediaStream = trackCurrentlyRendered.track.stream;
                                                         if(!trackCurrentlyRendered.htmlVideoEl) trackCurrentlyRendered.htmlVideoEl = trackCurrentlyRendered.track.trackEl;
-                                                        if(trackCurrentlyRendered.track.screensharing) trackCurrentlyRendered.screenSharing = true;
+                                                        if(trackCurrentlyRendered.track.screensharing) {
+                                                            trackCurrentlyRendered.screenSharing = true;
+                                                            trackCurrentlyRendered.params.flip = false;
+                                                        }
                                                     }
                                                    
                                                 }
@@ -1726,7 +1731,10 @@
                                             currentWebRTCSources[r].track = currentWebRTCSources[m].track;
                                             currentWebRTCSources[r].mediaStream = currentWebRTCSources[m].track.stream;
                                             currentWebRTCSources[r].htmlVideoEl = currentWebRTCSources[m].track.trackEl;
-                                            if (currentWebRTCSources[r].track.screensharing == true) currentWebRTCSources[m].screenSharing = true;
+                                            if (currentWebRTCSources[r].track.screensharing == true) {
+                                                currentWebRTCSources[m].screenSharing = true;
+                                                currentWebRTCSources[m].params.flip = false;
+                                            }
         
                                         }
                                         log('updateWebRTCCanvasLayout prevRoom: REMOVE TRACK')
@@ -2276,7 +2284,7 @@
                             } else {
                                 return;
                             }
-        
+
                             // get the top left position of the image
         
                             _inputCtx.drawImage(videoOrImg,
@@ -2330,13 +2338,25 @@
                                 }
                                 /* if size is smaller than rect widthToGet = data.rect.width / scale;
                                 heightToGet = data.rect.height / scale;*/
-        
-        
-                                _inputCtx.drawImage( localVideo,
-                                    x, y,
-                                    widthToGet, heightToGet,
-                                    data.rect.x, data.rect.y,
-                                    data.rect.width, data.rect.height);
+                                let rectX = data.rect.x;
+                                if (data.params.flip) {
+                                    _inputCtx.save();
+                                    _inputCtx.translate(data.rect.width, 0);
+                                    _inputCtx.scale(-1, 1);
+                                    rectX = Math.sign(rectX) == 1 ? -Math.abs(rectX) : Math.abs(rectX);
+                                    draw();
+                                    _inputCtx.restore();
+                                } else {
+                                    draw();
+                                }
+
+                                function draw() {
+                                    _inputCtx.drawImage( localVideo,
+                                        x, y,
+                                        widthToGet, heightToGet,
+                                        rectX, data.rect.y,
+                                        data.rect.width, data.rect.height);
+                                }
                             } else {
                                 _inputCtx.fillStyle = "#000000";
                                 _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
@@ -2352,11 +2372,26 @@
                                 var centerShift_x = data.rect.x + freeWidthPx;
                                 var centerShift_y = data.rect.y + freeHeightPx;
         
-                                _inputCtx.drawImage( localVideo,
-                                    0, 0,
-                                    currentWidth, currentHeight,
-                                    centerShift_x, centerShift_y,
-                                    currentWidth * ratio, currentHeight * ratio);
+                                let rectX = centerShift_x;
+                                let rectWidth = currentWidth * ratio;
+                                if (data.params.flip) {
+                                    _inputCtx.save();
+                                    _inputCtx.translate(rectWidth, 0);
+                                    _inputCtx.scale(-1, 1);
+                                    rectX = Math.sign(rectX) == 1 ? -Math.abs(rectX) : Math.abs(rectX);
+                                    draw();
+                                    _inputCtx.restore();
+                                } else {
+                                    draw();
+                                }
+
+                                function draw() {
+                                    _inputCtx.drawImage( localVideo,
+                                        0, 0,
+                                        currentWidth, currentHeight,
+                                        rectX, centerShift_y,
+                                        rectWidth, currentHeight * ratio);
+                                }
                             }
         
         

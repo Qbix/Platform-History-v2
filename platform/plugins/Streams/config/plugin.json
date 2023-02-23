@@ -533,7 +533,7 @@
 					"title": "Teleconference",
 					"icon": "Streams/webrtc"
 				},
-				"edit": ["title", "content"],
+				"edit": ["title", "content", "attributes"],
 				"messages": {
 					"Streams/webrtc/joined": {}
 				}
