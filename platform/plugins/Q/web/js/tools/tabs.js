@@ -267,12 +267,31 @@
 				function loader(urlToLoad, slotNames, callback, options) {
 					var retainedFrom = tool.retained[fromTabName];
 					// TODO: analyze what metas, stylesheets and scriptLines to restore later
-					// Q.each(slots, function (i, slotName) {
-					// 	var metas = document.querySelectorAll('meta[data-slot="' + slotName + '"');
-					// 	var stylesheets = document.querySelectorAll('link[data-slot="' + meta + '"');
-					// });
-					tool.retained[fromTabName] = Q.extend({}, retainedFrom, {
-						uri: Q.info.uri
+					var response = {};
+					Q.each(slots, function (i, slotName) {
+						var selectors = {
+							metas: 'meta[data-slot="{{slotName}}"]',
+							stylesheets: 'link[data-slot="{{slotName}}"]'
+						};
+						for (var type in selectors) {
+							response[type] = response[type] || {};
+							response[type][slotName] = response[type][slotName] || [];
+							var selector = selectors[type].interpolate({
+								slotName: slotName
+							});
+							var elements = document.querySelectorAll(selector);
+							Q.each(elements, function (i, element) {
+								var info = {};
+								Q.each(element.getAttributeNames(), function (i, name) {
+									info[name] = element.getAttribute(name);
+								});
+								response[type][slotName].push(info);
+							});
+						}
+					});
+					tool.retained[fromTabName] = Q.extend({}, retainedFrom, 2, {
+						uri: Q.info.uri,
+						response: response
 					});
 
 					var url = Q.getObject([name, 'url'], tool.retained);
