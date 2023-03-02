@@ -290,7 +290,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 					saveSizeName[k] = v;
 				});
 				Streams.retainWith(tool).get(
-					Users.loggedInUser.id,
+					state.userId,
 					'Streams/user/icon',
 					function (err) {
 						var stream = this;

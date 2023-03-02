@@ -265,6 +265,35 @@
 				}
 				
 				function loader(urlToLoad, slotNames, callback, options) {
+					var retainedFrom = tool.retained[fromTabName];
+					// TODO: analyze what metas, stylesheets and scriptLines to restore later
+					var response = {};
+					Q.each(slots, function (i, slotName) {
+						var selectors = {
+							metas: 'meta[data-slot="{{slotName}}"]',
+							stylesheets: 'link[data-slot="{{slotName}}"]'
+						};
+						for (var type in selectors) {
+							response[type] = response[type] || {};
+							response[type][slotName] = response[type][slotName] || [];
+							var selector = selectors[type].interpolate({
+								slotName: slotName
+							});
+							var elements = document.querySelectorAll(selector);
+							Q.each(elements, function (i, element) {
+								var info = {};
+								Q.each(element.getAttributeNames(), function (i, name) {
+									info[name] = element.getAttribute(name);
+								});
+								response[type][slotName].push(info);
+							});
+						}
+					});
+					tool.retained[fromTabName] = Q.extend({}, retainedFrom, 2, {
+						uri: Q.info.uri,
+						response: response
+					});
+
 					var url = Q.getObject([name, 'url'], tool.retained);
 					if (!(state.retain === true || (state.retain && state.retain[name])) || !url) {
 						// use default loader
@@ -272,7 +301,7 @@
 							|| Q.loadUrl.options.loader || Q.request;
 						return _loader.apply(this, arguments);
 					}
-					
+
 					var request = new Q.Request(urlToLoad, slotNames, callback, options);
 					var retained = tool.retained[name] || {};
 					if (!retained.response) {
@@ -301,6 +330,9 @@
 						}
 						if (retained && retained.stored
 						&& (!loaderOptions || !loaderOptions.reload)) {
+							if (retained.uri) {
+								Q.info.uri = retained.uri;
+							}
 							history.replaceState(retained.url, retained.title);
 							var elements = [];
 							Q.each(retained.stored, function (slotName) {

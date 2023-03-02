@@ -4122,6 +4122,7 @@
 	};
 	
 	var Web3 = Users.Web3 = {
+		zeroAddress: '0x0000000000000000000000000000000000000000',
 		chains: {},
 		provider: null,
 		web3Modal: null,

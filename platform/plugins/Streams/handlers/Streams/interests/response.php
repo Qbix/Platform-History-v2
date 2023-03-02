@@ -22,11 +22,11 @@ function Streams_interests_response()
 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'ordering', '$communityId'], $o_json);\n";
 	$info = array();
 	foreach ($interests as $k => &$v) {
-		if ($v['@info']) {
+		if (!empty($v['@info'])) {
 			$info[$k] = $v['@info'];
 			unset($v['@info']);
 		}
-		if ($v['#']) { // for backward compatibility
+		if (!empty($v['#'])) { // for backward compatibility
 			$info[$k] = $v['#'];
 			unset($v['#']);
 		}

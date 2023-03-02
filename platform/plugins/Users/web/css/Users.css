@@ -550,6 +550,10 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	display: inline-block;
 }
 
+.Q_mobile .Q_tabs-Communities_tab .Q_tabs_title .Users_status_tool .Users_avatar_name {
+	display: none;
+}
+
 #Users_login_step1,
 #Users_login_step2 {
 	padding: 0;

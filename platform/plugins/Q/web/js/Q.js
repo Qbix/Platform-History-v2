@@ -12056,10 +12056,13 @@ function _touchScrollingHandler(event) {
 		var hiddenWidth = p.scrollWidth - Math.min(
 			p.offsetWidth, Q.Visual.windowWidth()
 		);
-		var q = (p.tagName === 'HTML')
-			? document.body
-			: p;
-		var hiddenHeight = q.scrollHeight - Math.min(
+		var sh = p.scrollHeight;
+		var st = p.scrollTop;
+		if (p.tagName === HTML) {
+			sh = Math.max(sh, document.body.scrollHeight);
+			st = Math.max(st, document.body.scrollTop);
+		}
+		var hiddenHeight = sh - Math.min(
 			p.offsetHeight, Q.Visual.windowHeight()
 		);
 		var s = (['hidden', 'visible'].indexOf(overflow) < 0);

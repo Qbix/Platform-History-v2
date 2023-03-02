@@ -18,7 +18,7 @@ function Users_status_tool($options)
 	if ($user = Users::loggedInUser(false, false)) {
 		$avatar = array(
 			'icon' => '80',
-			'contents' => !Q_Request::isMobile(),
+			'contents' => true,
 			'short' => true,
 			'userId' => $user->id
 		);

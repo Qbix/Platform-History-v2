@@ -15,7 +15,7 @@ var Users = Q.Users;
  *   @param {Q.Event} [options.onInvoke] When the tool is clicked
  *	 @param {String} [options.avatar] Options for the user avatar
  *	 @param {String} [options.avatar.icon=80] The default size of the avatar icon
- *	 @param {String} [options.avatar.contents=!Q.info.isMobile] Whether to show the name
+ *	 @param {String} [options.avatar.contents=true] Whether to show the name
  *	 @param {String} [options.avatar.short=true] Whether the name shown should be short
  *   @param {String} [options.clickable=falser] Whether to apply Q/clickable effect
  */
@@ -28,7 +28,7 @@ Q.Tool.define("Users/status", function(options) {
 {
 	avatar: {
 		icon: 80,
-		contents: !Q.info.isMobile,
+		contents: true,
 		short: true
 	},
 	clickable: false,
