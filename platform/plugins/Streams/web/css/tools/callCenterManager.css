@@ -60,7 +60,7 @@
     padding: 7px 10px 7px 10px;
     border: none;
     border-radius: 4px;
-    margin-left: 10px;
+    margin-right: 10px;
     color:white;
     font-size: 16px;
     cursor: pointer;
@@ -68,8 +68,8 @@
     transition: all 0.3s ease;
 }
 
-.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons .streams-callcenter-m-calls-item-buttons-btn:first-child {
-    margin-left: 0;
+.streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons .streams-callcenter-m-calls-item-buttons-btn:last-child {
+    margin-right: 0;
 }
 .streams-callcenter-m-calls-item .streams-callcenter-m-calls-item-buttons .streams-callcenter-m-calls-item-buttons-btn:hover {
     filter: brightness(0.85);

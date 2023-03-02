@@ -89,8 +89,13 @@
             onAcceptedHandler: function () {
                 var tool = this;
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
-                    tool.currentActiveWebRTCRoom.switchTo(tool.state.publisherId, tool.state.streamName.split('/').pop(), {resumeClosed: true}).then(function () {
+                    tool.myWaitingRoomStream.setAttribute('closeManually', true);
+                    tool.myWaitingRoomStream.save({
+                        onSave: function () {
+                            tool.currentActiveWebRTCRoom.switchTo(tool.state.publisherId, tool.state.streamName.split('/').pop(), { resumeClosed: true }).then(function () {
 
+                            });
+                        }
                     });
                 } else {
                     tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
