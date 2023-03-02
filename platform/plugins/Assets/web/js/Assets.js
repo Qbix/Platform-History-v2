@@ -893,7 +893,7 @@
 				 */
 				getTokens: function(chainId) {
 					var temp = {}, results = {};
-					var zero = Q.Users.Web3.zero;
+					var zero = Q.Users.Web3.zeroAddress;
 					Q.each(Assets.currencies.tokens, function (address) {
 						var token = this[chainId];
 						if (!token) {
