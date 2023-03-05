@@ -542,7 +542,7 @@ window.WebRTCRoomClient = function app(options){
         };
         this.play = function () {
             log('Track: play: track is in document', document.contains(this.trackEl));
-            if(this.trackEl && this.trackEl.paused && this.paused /*&& document.contains(this.trackEl)*/) {
+            if(this.trackEl && this.trackEl.paused && this.paused && document.contains(this.trackEl)) {
                 this.trackEl.play().then((e) => {
                     console.log('Track: play func success')
                 }).catch((e) => {
@@ -6490,6 +6490,7 @@ window.WebRTCRoomClient = function app(options){
                 localParticipant.identity = options.username;
                 localParticipant.isLocal = true;
                 localParticipant.online = true;
+                localParticipant.connectedTime = Date.now();
                 roomParticipants.push(localParticipant);
             } else if(oldLocalParticipant != null) {
                 log('initWithNodeJs: switchRoom');

@@ -25,6 +25,7 @@
         participantsDisabledCamera: '<svg version="1.1" x="0px" y="0px" viewBox="0 0 467.96681 437.31813" xml:space="preserve" sodipodi:docname="video-camera.svg" width="467.9668" height="437.31812" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs1011" /><sodipodi:namedview id="namedview1009" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.2480986" inkscape:cx="174.26508" inkscape:cy="222.73881" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path id="path966" d="M 154.05859,95.187502 315.90234,253.48047 V 146.38672 c 0,-28.67197 -23.03925,-51.199218 -51.19922,-51.199218 z m 187.44531,183.332028 33.62696,32.88867 46.75586,26.80274 c 14.84798,8.70399 33.28038,3.58431 41.98437,-11.26367 2.56,-4.608 4.0957,-9.72739 4.09571,-15.35938 V 153.37891 c 0,-18.94398 -17.91874,-34.30331 -37.88672,-29.69532 -3.072,0.512 -6.14508,2.04799 -8.70508,3.58399 l -79.8711,46.08008 z M 315.90234,297.38672 109.16797,95.187502 H 51.199219 C 23.039247,95.187502 0,118.22675 0,146.38672 v 172.54492 c 0,28.15997 23.039247,51.19922 51.199219,51.19922 H 264.70312 c 28.15997,0 51.19922,-23.03925 51.19922,-51.19922 z" sodipodi:nodetypes="ccssccccccsccccccssssssc" /> <rect id="rect454" width="31.390423" height="610.87592" x="-9.9286299" y="13.175447" ry="14.836177" transform="rotate(-45.635355)" /></svg>',
         participantsEnabledScreenSource: '<svg enable-background="new 0 0 512 512" height="509.78607" viewBox="0 0 532.02655 509.78607" width="532.02655" version="1.1" sodipodi:docname="monitor.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1614" /> <sodipodi:namedview id="namedview1612" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.1739077" inkscape:cx="145.66733" inkscape:cy="238.5196" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path d="M 502.02657,47.786073 H 50.026568 c -16.54,0 -30,13.46 -30,30 V 375.78607 c 0,16.54 13.46,30 30,30 H 502.02657 c 16.54,0 30,-13.46 30,-30 V 77.786073 c 0,-16.54 -13.46,-30 -30,-30 z" id="path1605" /> <path d="m 436.02657,479.78607 h -81 v -44 h -158 v 44 h -81 c -8.28,0 -15,6.72 -15,15 0,8.28 6.72,15 15,15 h 320 c 8.28,0 15,-6.72 15,-15 0,-8.28 -6.72,-15 -15,-15 z" id="path1607" /> </svg>',
         participantsDisabledScreenSource: '<svg enable-background="new 0 0 512 512" height="509.78607" viewBox="0 0 532.02655 509.78607" width="532.02655" version="1.1" sodipodi:docname="monitor.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1614" /> <sodipodi:namedview id="namedview1612" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.1739077" inkscape:cx="145.66733" inkscape:cy="238.5196" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Capa_1" /> <path id="path1605" d="m 119.30664,47.785156 366.0293,358.000004 h 16.6914 c 16.53999,0 30,-13.46002 30,-30 V 77.785156 c 0,-16.539983 -13.46001,-30 -30,-30 z M 435.63867,405.78516 69.609375,47.785156 H 50.027344 c -16.539984,0 -30,13.460017 -30,30 V 375.78516 c 0,16.53998 13.460016,30 30,30 z m -238.61133,30 v 44 h -81 c -8.27999,0 -15,6.72 -15,15 0,8.27999 6.72001,15 15,15 h 320 c 8.28,0 15,-6.72001 15,-15 0,-8.28 -6.72,-15 -15,-15 h -81 v -44 z" sodipodi:nodetypes="ccsssscccsssscccssssssccc" /> <rect id="rect454-3" width="34.749641" height="676.24829" x="-12.059921" y="13.492646" ry="16.423859" transform="rotate(-45.635355)" /> </svg>',
+        recordingIcon: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" id="path48" style="fill-opacity:1" /> <g id="g168" transform="matrix(0.13297643,0,0,0.13297643,15.542535,15.462035)"> <circle cx="93.833" cy="256" r="93.833" id="circle160" /> <path d="m 388.8,208.992 c 8.284,0 15,-6.716 15,-15 0,-8.284 -6.716,-15 -15,-15 h -32.133 c -8.284,0 -15,6.716 -15,15 v 120 c 0,8.284 6.716,15 15,15 H 388.8 c 8.284,0 15,-6.716 15,-15 0,-8.284 -6.716,-15 -15,-15 h -17.133 v -30 H 388.8 c 8.284,0 15,-6.716 15,-15 0,-8.284 -6.716,-15 -15,-15 h -17.133 v -30 z" id="path162" /> <path d="m 497,303.008 c -18.307,0 -33.2,-14.894 -33.2,-33.2 v -27.616 c 0,-18.307 14.894,-33.2 33.2,-33.2 8.284,0 15,-6.716 15,-15 0,-8.284 -6.716,-15 -15,-15 -34.849,0 -63.2,28.352 -63.2,63.2 v 27.616 c 0,34.849 28.352,63.2 63.2,63.2 8.284,0 15,-6.716 15,-15 0,-8.284 -6.716,-15 -15,-15 z" id="path164" /> <path d="m 252.688,178.992 h -20.021 c -8.284,0 -15,6.716 -15,15 v 120 c 0,8.284 6.716,15 15,15 8.284,0 15,-6.716 15,-15 v -27.144 l 33.908,37.243 c 2.96,3.251 7.021,4.901 11.096,4.901 3.604,0 7.22,-1.291 10.095,-3.908 6.126,-5.577 6.57,-15.064 0.993,-21.19 l -23.6,-25.921 c 4.006,-2.236 7.745,-4.968 11.118,-8.179 10.416,-9.892 16.391,-23.657 16.391,-37.768 v -0.019 c -0.001,-29.233 -24.665,-53.015 -54.98,-53.015 z m -5.021,30 h 5.021 c 13.773,0 24.979,10.324 24.979,23.015 v 0.019 c 0,6.01 -2.503,11.696 -7.063,16.026 -4.678,4.453 -11.216,7.007 -17.938,7.007 h -5 v -46.067 z" id="path166" /> </g></svg>',
         streamingToP2P: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-134.38083" inkscape:cy="37.458071" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 66.36101,58.907431 a 9.3882669,9.3882669 0 0 0 -7.379178,3.595707 L 37.867618,51.950726 a 9.2849965,9.2849965 0 0 0 0,-4.863123 L 58.981832,36.53519 c 5.407641,6.93793 16.767445,3.116905 16.767445,-5.79256 A 9.3882669,9.3882669 0 1 0 57.301332,33.174191 L 36.187118,43.726604 c -5.407641,-6.93793 -16.767444,-3.116906 -16.767444,5.792561 0,8.909465 11.359803,12.73049 16.767444,5.79256 l 21.114214,10.552412 a 9.3882669,9.3882669 0 0 0 9.059678,11.819828 c 12.45823,-0.516354 12.448841,-18.260179 0,-18.776534 z" id="path2718" style="stroke-width:0.938824" /></svg>',
         streamingToFb: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-328.22635" inkscape:cy="-34.648716" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 59.655975,28.314112 h 5.792521 v -10.08866 c -0.999348,-0.137477 -4.436262,-0.446801 -8.438942,-0.446801 -8.351698,0 -14.072836,5.25319 -14.072836,14.90827 v 8.885742 h -9.216214 v 11.278362 h 9.216214 V 81.229349 H 54.236229 V 52.853667 h 8.843441 l 1.403847,-11.27836 H 54.233586 v -7.770066 c 0.0026,-3.25978 0.880378,-5.491129 5.422389,-5.491129 z" id="path3135" style="stroke-width:2.64378" /></svg>',
         streamingToRtmp: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="2.1357213" inkscape:cx="-37.223958" inkscape:cy="34.18049" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="text3239" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <g aria-label="RT MP" id="text3239" style="font-size:37.3333px"><g id="g3306" transform="matrix(0.96058925,0,0,0.96058925,2.3472462,-2.613936)"><path d="M 44.827661,52.466881 38.155791,41.802827 H 30.153194 V 52.466881 H 26.671426 V 26.782007 h 12.085927 q 4.338538,0 6.690099,1.950519 2.369789,1.93229 2.369789,5.395829 0,2.861976 -1.677082,4.812496 -1.658852,1.950519 -4.593746,2.460935 l 7.291661,11.065095 z M 44.317244,34.164813 q 0,-2.242186 -1.531248,-3.408851 -1.51302,-1.184895 -4.374997,-1.184895 h -8.257805 v 9.479159 h 8.403639 q 2.752601,0 4.247392,-1.276041 1.513019,-1.29427 1.513019,-3.609372 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3293" /><path d="M 67.020354,29.625754 V 52.466881 H 63.556815 V 29.625754 h -8.822909 v -2.843747 h 21.109357 v 2.843747 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3295" /><path d="M 48.509949,81.730422 V 64.59502 q 0,-2.843747 0.164063,-5.468745 -0.893229,3.263018 -1.604166,5.104162 l -6.635411,17.499985 h -2.442706 l -6.726557,-17.499985 -1.020832,-3.098955 -0.601562,-2.005207 0.05469,2.023436 0.07292,3.445309 V 81.730422 H 26.671426 V 56.045548 h 4.575517 l 6.835932,17.809881 q 0.364583,1.07552 0.692707,2.315102 0.346354,1.221353 0.455729,1.768228 0.145833,-0.729166 0.601562,-2.205727 0.473958,-1.494791 0.63802,-1.877603 l 6.708328,-17.809881 h 4.466142 v 25.684874 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3297" /><path d="m 75.843263,63.774708 q 0,3.645831 -2.388019,5.796871 -2.369789,2.151039 -6.453119,2.151039 H 59.455256 V 81.730422 H 55.973488 V 56.045548 h 10.809887 q 4.320309,0 6.690098,2.023436 2.36979,2.023436 2.36979,5.705724 z m -3.499997,0.03646 q 0,-4.976559 -5.979162,-4.976559 h -6.908848 v 10.135409 h 7.054682 q 5.833328,0 5.833328,-5.15885 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3299" /></g></g></svg>',
@@ -143,6 +144,7 @@
 
                 var livestreamingConfigs = _webrtcSignalingLib.getOptions().liveStreaming || {};
                 var streamingToSection = (function () {
+                    let _recordingIconEl = null;
                     let _p2pBroadcastIconEl = null;
                     let _facebookIconEl = null;
                     let _customRtmpIconEl = null;
@@ -172,15 +174,15 @@
                         }
                     });
                   
-                    tool.state.webrtcSignalingLib.event.on('liveStreamingStopped', function () {
+                    tool.state.webrtcSignalingLib.event.on('liveStreamingStopped', function (e) {
                         if (e.platform && e.platform == 'facebook') {
-                            if (e.participant.isLocal) {
+                            //if (e.participant.isLocal) {
                                 hideLiveIndicator('facebook');
-                            }
+                            //}
                         } else {
-                            if (e.participant.isLocal) {
+                            //if (e.participant.isLocal) {
                                 hideLiveIndicator('custom');
-                            }
+                            //}
                         }
                     });
 
@@ -342,8 +344,14 @@
                                         facebookLiveDialog();
                                     } else {
                                         createLive(data, function (response) {
-
-                                            tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming([response.secure_stream_url], 'facebook');
+                                            console.log('startFacebookLive', data, response)
+                                            let iframeUrl = encodeURIComponent('https://www.facebook.com'+ response.permalink_url)
+                                            let rtmpData = {
+                                                rtmpUrl: response.secure_stream_url,
+                                                linkToLive: `https://www.facebook.com/plugins/video.php?width=0&href=${iframeUrl}`,
+                                                id: generateId()
+                                            }
+                                            tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming([rtmpData], 'facebook');
                                             _liveInfo = response;
                                             if (callback != null) callback(response);
                                         });
@@ -920,6 +928,81 @@
                         }
                     }());
 
+                    let serverRecording = (function() {
+                        var _serverRecordingSection = null;
+
+                        function createSectionElement() {
+                            var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
+
+                            var recordingCon = _serverRecordingSection = document.createElement('DIV');
+                            recordingCon.className = 'live-editor-dialog-window-content live-editor-stream-to-section-rec'
+
+                            var recordingSettings = document.createElement('DIV');
+                            recordingSettings.className = 'live-editor-stream-to-section-rec-start_settings';
+                            recordingCon.appendChild(recordingSettings);
+
+                            var startRecordingBtnCon = document.createElement('DIV');
+                            startRecordingBtnCon.className = 'live-editor-stream-to-section-rec-start';
+                            recordingSettings.appendChild(startRecordingBtnCon);
+
+                            var startRecordingBtn = document.createElement('BUTTON');
+                            startRecordingBtn.type = 'button';
+                            startRecordingBtn.className = 'Q_button';
+                            startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", tool.text);
+                            startRecordingBtnCon.appendChild(startRecordingBtn);
+
+                            var activeRecordingSection = document.createElement('DIV');
+                            activeRecordingSection.style.display = 'none';
+                            activeRecordingSection.className = 'live-editor-stream-to-section-rec-live';
+                            recordingCon.appendChild(activeRecordingSection);
+
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'live-editor-stream-to-section-rec-buttons';
+                            activeRecordingSection.appendChild(buttonsCon);
+
+                            var stopRecordingBtnCon = document.createElement('DIV');
+                            stopRecordingBtnCon.className = 'live-editor-stream-to-section-rec-stop';
+                            buttonsCon.appendChild(stopRecordingBtnCon);
+
+                            var stopRecordingBtn = document.createElement('BUTTON');
+                            stopRecordingBtn.type = 'button';
+                            stopRecordingBtn.className = 'Q_button';
+                            stopRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.stop", tool.text);
+                            stopRecordingBtnCon.appendChild(stopRecordingBtn);
+
+                            startRecordingBtn.addEventListener('click', function () {
+                                if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+                                tool.livestreamingRtmpSenderTool.rtmpSender.startRecordingOnServer();
+
+                                if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                recordingSettings.style.display = 'none';
+                                activeRecordingSection.style.display = 'block';
+                                showLiveIndicator('rec');
+                            })
+                            stopRecordingBtn.addEventListener('click', function () {
+                                if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+                                tool.livestreamingRtmpSenderTool.rtmpSender.stopRecordingOnSever();
+
+                                if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                activeRecordingSection.style.display = 'none';
+                                recordingSettings.style.display = '';
+                                hideLiveIndicator('rec');
+                            })
+
+                            return recordingCon;
+                        }
+
+                        createSectionElement();
+
+                        function getSection() {
+                            return _serverRecordingSection;
+                        }
+
+                        return {
+                            getSection: getSection
+                        }
+                    }())
+
                     let peerToPeerStreaming = (function() {
                         var _peerToPeerStreamingSection = null;
                         var _broadcastClient = null;
@@ -1090,6 +1173,10 @@
                             if(!_p2pBroadcastIconEl.classList.contains('live-editor-stream-to-is-active')) {
                                 _p2pBroadcastIconEl.classList.add('live-editor-stream-to-is-active');
                             }
+                        } else if(platform == 'rec') {
+                            if(!_recordingIconEl.classList.contains('live-editor-stream-to-is-active')) {
+                                _recordingIconEl.classList.add('live-editor-stream-to-is-active');
+                            }
                         }
                     }
                     function hideLiveIndicator(platform){
@@ -1099,6 +1186,8 @@
                             _customRtmpIconEl.classList.remove('live-editor-stream-to-is-active');
                         } else if(platform == 'p2p') {
                             _p2pBroadcastIconEl.classList.remove('live-editor-stream-to-is-active');
+                        } else if(platform == 'rec') {
+                            _recordingIconEl.classList.remove('live-editor-stream-to-is-active');
                         }
                     }
 
@@ -1108,6 +1197,24 @@
                         var sectionInnerContainer = document.createElement('DIV');
                         sectionInnerContainer.className = 'live-editor-stream-to-section-inner';
                         sectionContainer.appendChild(sectionInnerContainer);
+
+                        var recordingBtn = document.createElement('DIV');
+                        recordingBtn.className = 'live-editor-stream-to-section-btn live-editor-stream-to-section-rec-btn';
+                        sectionInnerContainer.appendChild(recordingBtn);
+
+                        var recordingIcon = document.createElement('DIV');
+                        recordingIcon.className = 'live-editor-stream-to-section-btn-icon live-editor-stream-to-section-rec-icon';
+                        recordingBtn.appendChild(recordingIcon);
+
+                        var recordingIconSvg = _recordingIconEl = document.createElement('DIV');
+                        recordingIconSvg.className = 'live-editor-stream-to-section-btn-icon-svg';
+                        recordingIconSvg.innerHTML = _streamingIcons.recordingIcon;
+                        recordingIcon.appendChild(recordingIconSvg);
+
+                        var recordingCaption = document.createElement('DIV');
+                        recordingCaption.className = 'live-editor-stream-to-section-btn-text live-editor-stream-to-section-p2p-text';
+                        recordingCaption.innerHTML = 'Record';
+                        recordingBtn.appendChild(recordingCaption);
 
                         var peerToPeerStreamingBtn = document.createElement('DIV');
                         peerToPeerStreamingBtn.className = 'live-editor-stream-to-section-btn live-editor-stream-to-section-p2p-btn';
@@ -1163,6 +1270,17 @@
                         customStreamCaption.innerHTML = 'Custom<br>Stream';
                         customStreamBtn.appendChild(customStreamCaption);
 
+
+                        recordingBtn.addEventListener('click', function() {
+                            let streamingControlsEl = document.querySelector('.live-editor-popup-preview');
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let settingsDialog = new SimpleDialog({
+                                content: serverRecording.getSection(), 
+                                rectangleToShowIn: rectangleToShowIn,
+                                title: 'Record',
+                                className: 'live-editor-modal-window'
+                            });
+                        });
 
                         peerToPeerStreamingBtn.addEventListener('click', function() {
                             let streamingControlsEl = document.querySelector('.live-editor-popup-preview');
