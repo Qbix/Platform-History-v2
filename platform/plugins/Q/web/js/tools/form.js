@@ -99,8 +99,8 @@ Q.Tool.define('Q/form', function(options) {
 					}
 					return;
 				}
-				if (!state.ignoreRedirects && redirected) {
-					return Q.handle(redirected);
+				if (!state.ignoreRedirects && wasJSONP) {
+					return Q.handle(wasJSONP);
 				}
 				if (data.slots) {
 					var slots = Object.keys(data.slots);

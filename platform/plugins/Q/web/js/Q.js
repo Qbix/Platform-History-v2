@@ -9644,13 +9644,13 @@ Q.replace = function _Q_replace(container, source, options) {
 	
 	Q.beforeReplace.handle(container, source, options, newOptions, retainedTools);
 	
-	var c; while (c = container.lastChild) {
+	var c;
+	while (c = container.lastChild) {
 		Q.removeElement(c, true);
 	} // Clear the container
 	
 	// Move the actual nodes from the source to existing container
-	var c;
-	while (c = source.childNodes[0]) {
+	while (c = Q.getObject(["childNodes", 0], source)) {
 		container.appendChild(c);
 	}
 	
