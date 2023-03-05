@@ -12,7 +12,7 @@
  *   @param {Q.Event} [options.onSubmit] This event triggers On form submit
  *   @param {Q.Event} [options.onResponse] This event triggers after getting some response from from url request
  *   @param {Q.Event} [options.onSuccess] This event triggers if response returned with 200 success code , and if there are no HTTP errors in response headers
- *   @param {Boolean} [options.ignoreRedirects] Pass true to not follow redirects returned from the server, and call onResponse / onSuccess instead
+ *   @param {Boolean} [options.ignoreRedirects] Pass true to not follow redirects returned from the server, and only call onResponse / onSuccess
  *   @param {String} [options.slotsToRequest='form'] Slot names for Q.request
  *   @param {Object} [options.contentElements] An Object of {slotName: Element} pairs to replace their content.
  *     Otherwise, by default, after a response with no errors, we replace the content in the tool's container element,
@@ -99,9 +99,6 @@ Q.Tool.define('Q/form', function(options) {
 					}
 					return;
 				}
-				if (!state.ignoreRedirects && wasJSONP) {
-					return Q.handle(wasJSONP);
-				}
 				if (data.slots) {
 					var slots = Object.keys(data.slots);
 					var pipe = new Q.pipe(slots, function () {
@@ -126,6 +123,9 @@ Q.Tool.define('Q/form', function(options) {
 							eval(data.scriptLines[slot]);
 						}
 					}
+				}
+				if (state.ignoreRedirects) {
+					return false;
 				}
 			};
 			event.preventDefault();
