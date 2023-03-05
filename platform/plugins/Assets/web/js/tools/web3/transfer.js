@@ -38,7 +38,7 @@
                 pipe.fill("avatar")();
             });
 
-            Q.addStylesheet(["{{Assets}}/css/tools/Web3Pay.css"], pipe.fill("styles"));
+            Q.addStylesheet(["{{Assets}}/css/tools/web3transfer.css"], pipe.fill("styles"));
             Q.Text.get('Assets/content', function (err, text) {
                 var msg = Q.firstErrorMessage(err);
                 if (msg) {
