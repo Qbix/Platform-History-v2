@@ -12061,7 +12061,7 @@ function _touchScrollingHandler(event) {
 		);
 		var sh = p.scrollHeight;
 		var st = p.scrollTop;
-		if (p.tagName === HTML) {
+		if (p.tagName === 'HTML') {
 			sh = Math.max(sh, document.body.scrollHeight);
 			st = Math.max(st, document.body.scrollTop);
 		}
