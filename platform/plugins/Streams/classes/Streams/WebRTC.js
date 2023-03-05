@@ -75,18 +75,37 @@ WebRTC.listen = function () {
     webrtcNamespace.on('connection', function(socket) {
         if(_debug) console.log('made sockets connection', socket.id);
         var _streamingData = new PassThrough();
+        var ffmpeg;
         var _localRecordDir = null;
         var _localMediaStream = null;
         var _chunksNum = 0;
 
-        if (  socket.handshake.query.rtmp != null ) {
+        if ( socket.handshake.query.rtmp ||  socket.handshake.query.recording ) {
             if(_debug) console.log('made sockets connection (LIVE STREAMING)', socket.id);
-            if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA', socket.handshake.query.livestreamStream);
             var usersInfo = JSON.parse(socket.handshake.query.localInfo);
-            var rtmpUrlsData = JSON.parse( socket.handshake.query.rtmp);
+            var rtmpUrlsData = socket.handshake.query.rtmp ? JSON.parse( socket.handshake.query.rtmp) : [];
+            if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA1', socket.handshake.query.rtmp );
+            if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA2', rtmpUrlsData);
+            if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA3', socket.handshake.query.recording);
             var livestreamStreamData = JSON.parse(socket.handshake.query.livestreamStream);
             var platform = socket.handshake.query.platform;
             var isAndroid = usersInfo.platform == 'android' ? true : false
+
+            if(socket.handshake.query.recording) {
+                let userId = socket.handshake.query.userId;
+                let userConnectedTime = socket.handshake.query.userConnectedTime;
+                let roomStartTime = socket.handshake.query.roomStartTime;
+                let roomId = socket.handshake.query.roomId;
+
+                var localRecordDir = appDir + 'files/' + appName + '/uploads/Streams/recordings/' + roomId + '/' + roomStartTime + '/' + userId + '/' + userConnectedTime;
+                if (!fs.existsSync(localRecordDir)) {
+                    var oldmask = process.umask(0);
+                    fs.mkdirSync(localRecordDir, { recursive: true, mode: '0777' });
+                    process.umask(oldmask);
+                }
+                let filePath = localRecordDir + '/' + +Date.now() + '.mp4';
+                rtmpUrlsData.push({ rtmpUrl: filePath });
+            }
 
             if(rtmpUrlsData.length == 0) return;
 
@@ -94,7 +113,7 @@ WebRTC.listen = function () {
                 return rtmpData.rtmpUrl;
             });
 
-            if(livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
+            if(livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                 postStartMessageAndBeginLivestreaming();
             } else {
                 initFFMpegProcess();
@@ -164,7 +183,6 @@ WebRTC.listen = function () {
             
             function initFFMpegProcess() {
                 if(_debug) console.log('usersInfo', usersInfo);
-                var ffmpeg;
                 var m264BrowserSupport = false
                 for(let c in usersInfo.supportedVideoMimeTypes) {
                     let mimeType = usersInfo.supportedVideoMimeTypes[c];
@@ -193,6 +211,10 @@ WebRTC.listen = function () {
     
     
                 function createFfmpegProcess() {
+                    if(!_streamingData) {
+                        console.log('createFfmpegProcess create PassThrough')
+                        _streamingData = new PassThrough();
+                    }
                     var params = ['-re'];
                     //var params = ['-r', '24'];
                     if(format != 'webm') {
@@ -203,6 +225,7 @@ WebRTC.listen = function () {
     
                     if(encoder == 'copy') {
                         params = params.concat([
+                            '-pix_fmt', 'yuv420p',
                             '-vcodec', 'copy',
                         ]);
                     } else {
@@ -223,7 +246,7 @@ WebRTC.listen = function () {
                     params = params.concat([
                         '-codec:a', 'aac',
                         '-strict', '-2', '-ar', '44100',
-                        '-af', 'aresample=async=1',
+                        '-af', 'aresample=async=1'
                     ]);
     
                     if(rtmpUrls.length > 1) {
@@ -264,10 +287,13 @@ WebRTC.listen = function () {
                             socket.emit('Streams/webrtc/liveStreamingStopped', {platform: platform, rtmpUrl: rtmpUrls});
                         }
 
-                        if(livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
+                        if(livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                             postStopMessageAndStopLivestreaming();
                         }
-    
+                        console.log('End _streamingData');
+
+                        if(_streamingData) _streamingData.end();
+                        _streamingData = null;
                         //ffmpeg = null;
                     });
                     // Handle STDIN pipe errors by logging to the console.
@@ -288,17 +314,21 @@ WebRTC.listen = function () {
     
                         ffmpeg.kill('SIGINT');
                         setTimeout(function() {
-                            if(!ffmpeg.killed && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
+                            if(!ffmpeg.killed && livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                                 postStopMessageAndStopLivestreaming();
                             }
+                            ffmpeg = null;
                         }, 1000)
                     });
                 }
                 createFfmpegProcess();
     
                 _streamingData.on('data', function (data) {
+                    console.log(socket.id + 'VIDEO DATA0', data);
+
                     if(ffmpeg != null) {
-                        //console.log(socket.id + 'VIDEO DATA',);
+
+                        console.log(socket.id + 'VIDEO DATA1');
     
                         ffmpeg.stdin.write(data);
                     } else {
@@ -307,7 +337,12 @@ WebRTC.listen = function () {
                 })
                 // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
                 socket.on('Streams/webrtc/videoData', function(data, callback) {
-                    console.log(socket.id + ' VIDEODATA');
+                    //console.log(socket.id + ' VIDEODATA', data);
+                    if(!_streamingData) {
+                        console.log('createFfmpegProcess create PassThrough')
+                        _streamingData = new PassThrough();
+                    }
+
                     _streamingData.push(data);
                     if(callback) callback();
                     return;

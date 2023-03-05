@@ -51,15 +51,20 @@
                     function connect(rtmpUrls, platform, livestreamStream, callback) {
                         if(typeof io == 'undefined') return;
                         log('startStreaming connect');
-        
                         var secure = _options.nodeServer.indexOf('https://') == 0;
                         _streamingSocket[platform] = {}
+                        console.log('_webrtcSignalingLib.localParticipant().connectedTime', _webrtcSignalingLib.localParticipant())
                         _streamingSocket[platform].socket = window.sSocket = io.connect(_options.nodeServer + '/webrtc', {
                             query: {
-                                rtmp: JSON.stringify(rtmpUrls),
-                                livestreamStream: JSON.stringify({ publisherId: livestreamStream.fields.publisherId, streamName: livestreamStream.fields.name }),
+                                rtmp: rtmpUrls.length != 0 ? JSON.stringify(rtmpUrls) : '',
+                                recording: platform == 'rec' ? true : '',
+                                livestreamStream: livestreamStream ? JSON.stringify({ publisherId: livestreamStream.fields.publisherId, streamName: livestreamStream.fields.name }) : null,
                                 localInfo: JSON.stringify(_localInfo),
-                                platform: platform
+                                platform: platform,
+                                roomId: _webrtcUserInterface.roomStream() ? _webrtcUserInterface.roomStream().fields.name.split('/')[2] : 'undefined',
+                                roomStartTime: _webrtcUserInterface.roomStream() ? _webrtcUserInterface.roomStream().getAttribute('startTime') : 'undefined',
+                                userId: _webrtcSignalingLib.localParticipant().identity.split('\t')[0],
+                                userConnectedTime: _webrtcSignalingLib.localParticipant().connectedTime
                             },
                             transports: ['websocket'],
                             'force new connection': true,
@@ -178,6 +183,7 @@
                                         _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blobToSend);
                                     }*/
                                 }
+        
                             });
         
                             /*var timer = function() {
@@ -194,6 +200,45 @@
                             _webrtcSignalingLib.event.dispatch('liveStreamingStarted', {participant:_webrtcSignalingLib.localParticipant(), platform:service});
                             _webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("liveStreamingStarted", service);
                         });
+                    }
+        
+                    function startRecordingOnServer() {
+                        log('startRecordingOnServer');
+                        connect([], 'rec', null, function () {
+                            log('startRecordingOnServer connected');
+
+                            _canvasComposer.startRecorder(function (blob) {
+                                if(_streamingSocket['rec'] == null) return;
+                                _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', blob);
+                            });
+                                    
+                            _webrtcSignalingLib.event.dispatch('recordingOnSeverStarted', {participant:_webrtcSignalingLib.localParticipant()});
+                            _webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("recordingOnSeverStarted");
+                        });
+                    }
+        
+                    function stopRecordingOnSever(stopCanvasDrawingAndMixing) {
+                        log('stopRecordingOnSever');
+    
+                        let activeStreamingsOrrRecordings = 0;
+                        for(let propName in _streamingSocket) {
+                            if(propName == 'rec') continue;
+                            if(_streamingSocket[propName] != null && _streamingSocket[propName].socket.connected) {
+                                activeStreamingsOrrRecordings++;
+                            }
+                        }
+                        
+                        if(activeStreamingsOrrRecordings == 0) _canvasComposer.stopRecorder(stopCanvasDrawingAndMixing);
+    
+                        if(_streamingSocket['rec'] != null) {
+                            _streamingSocket['rec'].socket.disconnect();
+                            delete _streamingSocket['rec'];
+    
+                        }
+
+                        _webrtcSignalingLib.event.dispatch('recordingOnSeverEnded', {participant:_webrtcSignalingLib.localParticipant()});
+                        _webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("recordingOnSeverEnded");
+    
                     }
         
                     function log(text) {
@@ -219,11 +264,6 @@
                         endStreaming: function (service, stopCanvasDrawingAndMixing) {
                             log('endStreaming', service);
         
-                            /*clearTimeout(_videoStream.timer);
-                            let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
-                            var mergedBlob = new Blob(blobsToSend);
-                            if(service && _streamingSocket[service] != null) _streamingSocket[service].socket.emit('Streams/webrtc/videoData', mergedBlob);*/
-        
                             _canvasComposer.stopRecorder(stopCanvasDrawingAndMixing);
         
                             if(service != null && _streamingSocket[service] != null) {
@@ -239,6 +279,11 @@
                                 }
                             }
                             _veryFirstBlobs = [];
+
+                            _videoStream.blobs = [];
+                            _videoStream.allBlobs = [];
+                            
+                            _videoStream.size = 0;
         
                             _webrtcSignalingLib.event.dispatch('liveStreamingEnded', {participant:_webrtcSignalingLib.localParticipant(), platform:service});
                             _webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("liveStreamingEnded", service);
@@ -258,6 +303,8 @@
                             return false;
                         },
                         startStreaming: startStreaming,
+                        startRecordingOnServer: startRecordingOnServer,
+                        stopRecordingOnSever: stopRecordingOnSever,
                         videoStream:function () {
                             return _videoStream;
                         },
