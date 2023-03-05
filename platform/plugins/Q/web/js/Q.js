@@ -9588,7 +9588,7 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
  *  Optional. A hash of options, including:
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace, even if they have "data-q-retain" attributes.
  * @param {boolean} [options.animation] To animate the transition, pass an object here with optional "duration", "ease" and "callback" properties.
- * @return {HTMLElement}
+ * @return {HTMLElement|false}
  *  Returns the container element if successful
  */
 Q.replace = function _Q_replace(container, source, options) {
@@ -9613,6 +9613,9 @@ Q.replace = function _Q_replace(container, source, options) {
 				typeof e === 'string' ? document.getElementById(e) : e
 			);
 		});
+	}
+	if (!source.childNodes) {
+		return false;
 	}
 	
 	var retainedTools = {};
@@ -9650,7 +9653,7 @@ Q.replace = function _Q_replace(container, source, options) {
 	} // Clear the container
 	
 	// Move the actual nodes from the source to existing container
-	while (c = Q.getObject(["childNodes", 0], source)) {
+	while (c = source.childNodes[0]) {
 		container.appendChild(c);
 	}
 	

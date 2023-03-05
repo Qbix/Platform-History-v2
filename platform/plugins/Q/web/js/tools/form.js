@@ -99,7 +99,23 @@ Q.Tool.define('Q/form', function(options) {
 					}
 					return;
 				}
-				if (data.slots) {
+				var redirectUrl = Q.getObject('redirect.url', data);
+				if (redirectUrl) {
+					// handle one redirect (if it redirects again, give up)
+					Q.request(redirectUrl, state.slotsToRequest, function (err, data2) {
+						var msg;
+						if (msg = Q.firstErrorMessage(err)) {
+							return alert(msg);
+						}
+						_handleResult(data2);
+					});
+				} else {
+					_handleResult(data);
+				}
+				function _handleResult(data) {
+					if (!data.slots) {
+						return;
+					}
 					var slots = Object.keys(data.slots);
 					var pipe = new Q.pipe(slots, function () {
 						Q.handle(state.onSuccess, tool, arguments);
@@ -117,16 +133,16 @@ Q.Tool.define('Q/form', function(options) {
 						}
 						if (data.slots[slot] != null) {
 							var replaced = Q.replace(e[0], data.slots[slot]);
-							Q.activate(replaced, pipe.fill(slot));
+							if (replaced) {
+								Q.activate(replaced, pipe.fill(slot));
+							}
 						}
 						if (data.scriptLines && data.scriptLines[slot]) {
 							eval(data.scriptLines[slot]);
 						}
 					}
 				}
-				if (state.ignoreRedirects) {
-					return false;
-				}
+				return false; // prevent Q.request from calling Q.handle() on redirects
 			};
 			event.preventDefault();
 			tool.activeElement = document.activeElement;
