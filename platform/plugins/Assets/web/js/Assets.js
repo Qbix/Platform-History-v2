@@ -1502,8 +1502,11 @@
 		    css: "{{Assets}}/css/tools/NFT/locked.css"
 		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
-		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js"
-
+		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js",
+		"Assets/web3/balance": {
+			js: "{{Assets}}/js/tools/web3/balance.js",
+			css: "{{Assets}}/css/tools/web3/balance.css"
+		}
 	});
     
 	Q.onInit.add(function () {
