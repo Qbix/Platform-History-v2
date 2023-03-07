@@ -9165,9 +9165,7 @@
 
                         scenesInterface.syncList();
                       
-                        if(!document.documentElement.classList.contains('Streams_webrtc_live')) {
-                            document.documentElement.classList.add('Streams_webrtc_live');
-                        }
+                        document.documentElement.classList.add('Streams_webrtc_live');
                     }
 
                     if(!tool.livestreamStream) {

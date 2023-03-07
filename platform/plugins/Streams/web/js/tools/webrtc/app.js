@@ -5090,10 +5090,6 @@ window.WebRTCRoomClient = function app(options){
 
             };
 
-            var setFrontCameraDevice = function() {
-
-            }
-
             var requestCameraStream = function () {
                 if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) {
                     cordova.plugins.iosrtc.getUserMedia({
