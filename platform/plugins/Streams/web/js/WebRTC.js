@@ -1750,7 +1750,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 var frontCameraDevice = WebRTCconference.localMediaControls.frontCameraDevice();
                 var currentCameraDevice = WebRTCconference.localMediaControls.currentCameraDevice();
-                if(!screen.screensharing && (currentCameraDevice == frontCameraDevice || Q.info.isTouchscreen == false)) {
+                if(!screen.screensharing && (Q.info.isMobile && ((screen.videoTrack && screen.videoTrack.frontCamera) || currentCameraDevice == frontCameraDevice)) || !Q.info.isMobile) {
                     if(screen.videoScreen.videoCon != null && !screen.videoScreen.videoCon.classList.contains('Streams_webrtc_chat-flipped-video')) screen.videoScreen.videoCon.classList.add('Streams_webrtc_chat-flipped-video');
                     if(screen.screenEl.classList.contains('Streams_webrtc_chat-active-screen-sharing')) screen.screenEl.classList.remove('Streams_webrtc_chat-active-screen-sharing');
                 } else if(screen.videoScreen.videoCon) {

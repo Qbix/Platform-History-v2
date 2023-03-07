@@ -4471,6 +4471,7 @@ window.WebRTCRoomClient = function app(options){
         var currentAudioInputDevice;
         var currentAudioOutputDevice;
         var frontCameraDevice;
+        var frontCameraDeviceName;
 
         function loadDevicesList(mediaDevicesList, reload) {
             log('loadDevicesList');
@@ -4499,6 +4500,7 @@ window.WebRTCRoomClient = function app(options){
                 }
                 updateCurrentVideoInputDevice();
                 updateCurrentAudioInputDevice();
+                detectFrontCameraDevice();
                 app.event.dispatch('deviceListUpdated');
 
             } else if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
@@ -4559,6 +4561,19 @@ window.WebRTCRoomClient = function app(options){
                     }
                 }
             }
+        }
+
+        function detectFrontCameraDevice() {
+            if(!frontCameraDeviceName) return;
+
+            for(let i in videoInputDevices) {
+                if(videoInputDevices[i].label == frontCameraDeviceName) {
+                    frontCameraDevice = videoInputDevices[i];
+                    break;
+                }
+            }
+
+
         }
 
         function getVideoDevices() {
@@ -5058,6 +5073,9 @@ window.WebRTCRoomClient = function app(options){
                 trackToAttach.kind = localVideoTrack.kind;
                 trackToAttach.isLocal = true;
                 trackToAttach.stream = videoStream;
+                if(_isMobile) {
+                    trackToAttach.frontCamera = true;
+                }
 
 
                 app.mediaManager.attachTrack(trackToAttach, localParticipant);
@@ -5071,6 +5089,10 @@ window.WebRTCRoomClient = function app(options){
                 if (callback != null) callback();
 
             };
+
+            var setFrontCameraDevice = function() {
+
+            }
 
             var requestCameraStream = function () {
                 if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) {
