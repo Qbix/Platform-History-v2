@@ -2998,8 +2998,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
                     var parentWidth = containerRect.width;
                     var parentHeight = containerRect.height;
-                    var defaultRectWidth = containerRect.width < 256 ? containerRect.width : 256;
-                    var defaultRectHeight = containerRect.height < 192 ? containerRect.height : 192;
+                    var defaultRectWidth = containerRect.width < 555 ? containerRect.width : 555;
+                    var defaultRectHeight = containerRect.height < 416 ? containerRect.height : 416;
                     var maxLongestSide =  Math.min(defaultRectWidth, defaultRectHeight);
                     var defaultDOMRect = getElementSizeKeepingRatio({
                         width: defaultRectWidth,
