@@ -26,13 +26,28 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		return console.warn("xid not found");
 	}
 
+	if (Q.isEmpty(state.chainId)) {
+		return console.warn("chain not found");
+	}
+	
+	if (!state.communityCoinAddress) {
+		return console.warn("CommunityCoin contract not found");
+	}
+
+	if (!state.abiPath) {
+		return console.warn("abiPath not found");
+	}
+
 	tool.refresh();
 },
 
 { // default options here
-	chainId: null,
+	chainId: Q.getObject("NFT.defaultChain.chainId", Assets),
 	contractAddress: null,
-	xid: Q.Users.Web3.getLoggedInUserXid()
+	interval: 10, // in seconds
+	xid: Q.Users.Web3.getLoggedInUserXid(),
+	communityCoinAddress: Q.getObject("NFT.defaultChain.contracts.CommunityCoin.instance", Assets),
+	abiPath: "Assets/templates/R3/CommunityCoin/contract"
 },
 
 { // methods go here
@@ -40,13 +55,32 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var tool = this;
 		var state = tool.state;
 
-		Q.handle(NFT.balanceOf, tool, [state.xid, state.chainId, function (err, tokensAmount) {
+		state.intervalId = setInterval(function x () {
+			tool.balanceOf(function (tokensAmount, tokenName) {
+				tool.element.innerHTML = tokensAmount + " " + tokenName;
+			});
+			return x;
+		}(), state.interval*1000);
+	},
+	balanceOf: function (callback) {
+		var tool = this;
+		var state = this.state;
+
+		Q.handle(NFT.balanceOf, tool, [state.xid, state.chainId, function (err, tokensAmount, tokenName, contract) {
 			if (err) {
-				return;
+				return console.warn(err);
 			}
 
-			debugger;
+			Q.handle(callback, null, [tokensAmount, tokenName]);
+		}, {
+			contractAddress: state.communityCoinAddress,
+			abiPath: state.abiPath
 		}]);
+	},
+	Q: {
+		beforeRemove: function () {
+			this.state.intervalId && clearInterval(this.state.intervalId);
+		}
 	}
 });
 
