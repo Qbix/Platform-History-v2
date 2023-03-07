@@ -390,6 +390,27 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 };
 
 /**
+ * Send some payload which is not saved as a message in the stream's history,
+ * but is broadcast to everyone curently connected by a socket and participating
+ * or observing the stream.
+ * This can be used for read receipts, "typing..." indicators, cursor movements and more.
+ *
+ * @method ephemeral
+ * @param {Object} payload the payload to send. It must have "type" set at least.
+ * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
+ * @param {Function} [callback] receives (err, result) as parameters
+ */
+Sp.ephemeral = function _Stream_ephemeral (
+	payload, dontNotifyObservers, callback
+) {
+	payload.publisherId = publisherId;
+	payload.streamName = streamName;
+	this.notifyParticipants(
+		'Streams/ephemeral', byUserId, payload, dontNotifyObservers, callback
+	);
+};
+
+/**
  * Sends a message to all participants of a stream.
  * Also sends it to observers unless dontNotifyObservers is true.
  * @method notifyParticipants
