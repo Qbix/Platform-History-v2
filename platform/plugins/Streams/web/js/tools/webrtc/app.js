@@ -234,7 +234,7 @@ window.WebRTCRoomClient = function app(options){
         this.videoTracks = function (activeTracksOnly) {
             if(activeTracksOnly) {
                 return this.tracks.filter(function (trackObj) {
-                    return trackObj.kind == 'video' && !(trackObj.mediaStreamTrack.muted == true || trackObj.mediaStreamTrack.enabled == false || trackObj.mediaStreamTrack.readyState == 'ended');
+                    return trackObj.kind == 'video' && !(/*trackObj.mediaStreamTrack.muted == true || */trackObj.mediaStreamTrack.enabled == false || trackObj.mediaStreamTrack.readyState == 'ended');
                 });
             }
 
@@ -1590,12 +1590,7 @@ window.WebRTCRoomClient = function app(options){
 
             track.mediaStreamTrack.addEventListener('unmute', function(e){
                 log('mediaStreamTrack unmuted 0', track);
-                try {
-                    var err = (new Error);
-                    console.log(err.stack);
-                } catch (e) {
-
-                }
+                track.play();
                 app.event.dispatch('trackUnmuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -4515,28 +4510,41 @@ window.WebRTCRoomClient = function app(options){
             log('frontCameraDevice', frontCameraDevice);
         }
 
-        function updateCurrentVideoInputDevice() {
+        function updateCurrentVideoInputDevice(cameraDevice) {
             log('updateCurrentVideoInputDevice START');
-            for (let i in videoInputDevices) {
-                let device = videoInputDevices[i];
-                for (let x in localParticipant.tracks) {
-                    var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-
-                    log('updateCurrentVideoInputDevice: video: mediaStreamTrack', mediaStreamTrack);
-                    log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.enabled == true, typeof mediaStreamTrack.getSettings != 'undefined', mediaStreamTrack.getSettings().deviceId == device.deviceId, mediaStreamTrack.getSettings().label == device.label);
-                    log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.getSettings().deviceId, device.deviceId);
-                    if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
-                        if (mediaStreamTrack.enabled == true && mediaStreamTrack.readyState != 'ended'
-                            && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
-                                log('updateCurrentVideoInputDevice: video:currentCameraDevice', currentCameraDevice, device, currentCameraDevice == device);
-
-                            if(currentCameraDevice != device) {
-                                currentCameraDevice = device;
-                                app.event.dispatch('currentVideoinputDeviceChanged');
+            let cameraDeviceIsActive = false;
+            if(!cameraDevice) {
+                for (let i in videoInputDevices) {
+                    let device = videoInputDevices[i];
+                    for (let x in localParticipant.tracks) {
+                        var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+    
+                        log('updateCurrentVideoInputDevice: video: mediaStreamTrack', mediaStreamTrack);
+                        log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.enabled == true, typeof mediaStreamTrack.getSettings != 'undefined', mediaStreamTrack.getSettings().deviceId == device.deviceId, mediaStreamTrack.getSettings().label == device.label);
+                        log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.getSettings().deviceId, device.deviceId);
+                        if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
+                            if (mediaStreamTrack.enabled == true && mediaStreamTrack.readyState != 'ended'
+                                && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
+                                    log('updateCurrentVideoInputDevice: video:currentCameraDevice', currentCameraDevice, device, currentCameraDevice == device);
+    
+                                cameraDeviceIsActive = true;
+                                if(currentCameraDevice != device) {
+                                    currentCameraDevice = device;
+                                    app.event.dispatch('currentVideoinputDeviceChanged');
+                                }
                             }
                         }
                     }
                 }
+            } else {
+                currentCameraDevice = cameraDevice;
+                cameraDeviceIsActive = true;
+            }
+
+            log('updateCurrentVideoInputDevice: cameraDeviceIsActive', cameraDeviceIsActive);
+
+            if(!cameraDeviceIsActive) {
+                currentCameraDevice = null;
             }
         }
 
@@ -4802,14 +4810,18 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 if(camera != null && camera.deviceId != null && camera.deviceId != '') {
-                    currentCameraDevice = videoInputDevices.filter(function (d) {
+                    let currentCamera = videoInputDevices.filter(function (d) {
                         return d.deviceId == camera.deviceId;
                     })[0];
+                    updateCurrentVideoInputDevice(currentCamera);
                 } else if(camera != null && camera.groupId != null && camera.groupId != '') {
-                    currentCameraDevice = videoInputDevices.filter(function (d) {
+                    let currentCamera = videoInputDevices.filter(function (d) {
                         return d.groupId == camera.groupId;
                     })[0];
-                } else currentCameraDevice = deviceToSwitch;
+                    updateCurrentVideoInputDevice(currentCamera);
+                } else {
+                    updateCurrentVideoInputDevice(deviceToSwitch);
+                }
             }
 
             function requestCameraStream(localCallback) {
@@ -5581,7 +5593,8 @@ window.WebRTCRoomClient = function app(options){
             } else {
                 cameraIsDisabled = true;
             }
-            currentCameraDevice = null;
+            //currentCameraDevice = null;
+            updateCurrentVideoInputDevice();
             app.signalingDispatcher.sendDataTrackMessage('online', {cameraIsEnabled: false});
 
             localParticipant.localMediaControlsState.camera = false;
