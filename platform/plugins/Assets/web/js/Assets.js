@@ -1159,26 +1159,14 @@
 							Q.handle(callback, null, [err]);
 						}
 
-						var pipe = new Q.pipe(["tokenName", "tokenAmount"], function (params) {
-							var tokenName = params.tokenName[0];
-							var tokenAmount = params.tokenAmount[0];
+						Promise.all([contract.balanceOf(address), contract.name()]).then(function ([tokenAmount, tokenName]) {
 							if (Q.getObject("_isBigNumber", tokenAmount)) {
-								tokenAmount = parseInt((tokenAmount._hex || 0), 16)/1e18;
+								tokenAmount = ethers.utils.formatUnits(tokenAmount);
 							}
 
 							Q.handle(callback, null, [null, tokenAmount, tokenName, contract]);
-						});
-
-						contract.balanceOf(address).then(function (tokenAmount) {
-							pipe.fill("tokenAmount")(tokenAmount);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
-						});
-
-						contract.name().then(function (tokenName) {
-							pipe.fill("tokenName")(tokenName);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
+						}).catch(function (e) {
+							Q.handle(callback, null, [e]);
 						});
 					});
 				},
@@ -1390,6 +1378,63 @@
 			 */
 			seriesIdFromTokenId(tokenId) {
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
+			}
+		},
+		Currency: {
+			Web3: {
+				/**
+				 * Get NFT contract instance
+				 * @method getContract
+				 * @param {Object} chainId
+				 * @param {object} [options]
+				 * @param {string} [options.contractAddress] - if defined override default chain contract address
+				 * @param {string} [options.abiPath] - if defined override default abi path
+				 * @param {function} [callback]
+				 * @return {Q.Promise} instead of callback
+				 */
+				getContract: function (chainId, options, callback) {
+					var address = Q.getObject("contractAddress", options) || chainId.contract;
+					var abiPath = Q.getObject("abiPath", options);
+
+					return Q.Users.Web3.getContract(abiPath, {
+						chainId: chainId,
+						contractAddress: address,
+						readOnly: !!Q.getObject("readOnly", options)
+					}, function (err, contract) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
+						}
+
+						Q.handle(callback, null, [null, contract]);
+					});
+				},
+				/**
+				 * Get amount of tokens by wallet and chain
+				 * @method balanceOf
+				 * @param {String} userId - if null logged in user Id used
+				 * @param {String} chainId
+				 * @param {function} callback
+				 * @param {object} [options] - some options pass to getContract method
+				 * @param {string} [options.tokenAddress] - filter tokens with this contract address
+				 */
+				balanceOf: function (userId, chainId, callback, options) {
+					var tokenAddress = Q.getObject("tokenAddress", options);
+
+					Q.req("Assets/currencies", "cryptoBalance", function (err, response) {
+						if (err) {
+							return;
+						}
+
+						var balance = response.slots.cryptoBalance;
+						Q.handle(callback, null, [null, balance]);
+					}, {
+						fields: {
+							userId: userId || Q.Users.loggedInUserId(),
+							chainId: chainId,
+							tokenAddress: tokenAddress
+						}
+					});
+				}
 			}
 		},
 		Web3: {
