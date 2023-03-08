@@ -5,7 +5,7 @@
  */
 
 var Assets = Q.Assets;
-var NFT = Assets.NFT.Web3;
+var Web3 = Assets.Currency.Web3;
 
 /**
  * Show balance of tokens by chain and token
@@ -22,15 +22,15 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		return console.warn("user not logged in");
 	}
 
-	if (Q.isEmpty(state.xid)) {
-		return console.warn("xid not found");
+	if (Q.isEmpty(state.userId)) {
+		return console.warn("userId not found");
 	}
 
 	if (Q.isEmpty(state.chainId)) {
 		return console.warn("chain not found");
 	}
 	
-	if (!state.communityCoinAddress) {
+	if (!state.tokenAddress) {
 		return console.warn("CommunityCoin contract not found");
 	}
 
@@ -42,11 +42,11 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 },
 
 { // default options here
-	chainId: Q.getObject("NFT.defaultChain.chainId", Assets),
+	userId: Q.Users.loggedInUserId(),
+	chainId: Q.getObject("Web3.defaultChain.chainId", Assets),
 	contractAddress: null,
 	interval: 10, // in seconds
-	xid: Q.Users.Web3.getLoggedInUserXid(),
-	communityCoinAddress: Q.getObject("NFT.defaultChain.contracts.CommunityCoin.instance", Assets),
+	tokenAddress: Q.getObject("Web3.defaultChain.contracts.CommunityCoin.instance", Assets),
 	abiPath: "Assets/templates/R3/CommunityCoin/contract"
 },
 
@@ -55,26 +55,28 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var tool = this;
 		var state = tool.state;
 
-		state.intervalId = setInterval(function x () {
-			tool.balanceOf(function (tokensAmount, tokenName) {
-				tool.element.innerHTML = tokensAmount + " " + tokenName;
+		//state.intervalId = setInterval(function x () {
+			tool.element.innerHTML = "";
+			tool.balanceOf(function (tokenAmount, tokenName) {
+				tool.element.innerHTML += '<div>' + tokenAmount + ' ' + tokenName + '</div>';
 			});
-			return x;
-		}(), state.interval*1000);
+		/*	return x;
+		}(), state.interval*1000);*/
 	},
 	balanceOf: function (callback) {
 		var tool = this;
 		var state = this.state;
 
-		Q.handle(NFT.balanceOf, tool, [state.xid, state.chainId, function (err, tokensAmount, tokenName, contract) {
+		Q.handle(Web3.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
 			if (err) {
 				return console.warn(err);
 			}
 
-			Q.handle(callback, null, [tokensAmount, tokenName]);
+			Q.each(balance, function (i, item) {
+				Q.handle(callback, null, [ethers.utils.formatUnits(item.balance), item.name]);
+			});
 		}, {
-			contractAddress: state.communityCoinAddress,
-			abiPath: state.abiPath
+			tokenAddress: state.tokenAddress
 		}]);
 	},
 	Q: {
