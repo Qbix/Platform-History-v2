@@ -6,6 +6,8 @@
  */
 "use strict";
 
+const { ethers } = require("ethers");
+
 /* jshint -W014 */
 (function (Q, $) {
 
@@ -4386,7 +4388,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		 * Execute method on contract
 		 * @method execute
@@ -4404,7 +4406,7 @@
 		 * @param {function} callback receives (err, result) with result from the ethers.js contract method
 		 * @return {Promise} to be used instead of callback
 		 */
-		execute: Q.promisify(function (contractABIName, contractAddress, methodName, params, callback) {
+		execute: function (contractABIName, contractAddress, methodName, params, callback) {
 			Web3.getContract(
 				contractABIName, 
 				contractAddress, 
@@ -4431,7 +4433,8 @@
 					});
 				}
 			);
-		}),
+		},
+		
 		/**
 		 * Get currently selected wallet address asynchronously
 		 * @method getWalletAddress
@@ -4448,6 +4451,7 @@
 				});
 			});
 		},
+
 		/**
 		 * Get currently selected chain id asynchronously
 		 * @method getChainId
@@ -4465,7 +4469,6 @@
 				});
 			});
 		}),
-
 
 		/**
 		 * Synchronously get the currently selected address on current provider
@@ -4580,6 +4583,65 @@
 		}),
 
 		/**
+		 * withChain May switch to the chain if it's not selected yet
+		 * @static
+		 * @param {String} chainId You can pass null here to just use the current chain
+		 * @param {Function} callback Takes provider, needSigner
+		 */
+		withChain: function _withChain(chainId, callback) {
+			if (window.ethereum) {
+				if (!chainId || parseInt(ethereum.chainId) === parseInt(chainId)) {
+					return callback(ethereum, true);
+				}
+			}
+			Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+				if (!chainId || parseInt(provider.chainId) === parseInt(chainId)) {
+					callback(provider, true);
+				} else {
+					var chain = Web3.chains[chainId];
+					Web3.switchChain(chain, function (err) {
+						if (Q.firstErrorMessage(err)) {
+							return Q.handle(callback, null, [err]);
+						}
+						callback(provider, true);
+					});
+				}
+			});
+		},
+
+		/**
+		 * Transfer some native coin to a recipient,
+		 * or issue some other transaction by specifying options.
+		 * See https://docs.ethers.org/v5/api/providers/types/#providers-TransactionRequest
+		 * @param {String} recipient address of type "0x..."
+		 * @param {String} chainId the ID of the chain (may need to switch to it)
+		 * @param {Number} amount the amount of native coin to send, with decimal portion
+		 * @param {Object} options see TransactionRequest of ethers.js
+		 * @param {String} options.chainId Pass a chain ID here to switch to it, if necessary
+		 * @param {String} options.gasPrice One of multiple options you can do
+		 */
+		transaction: function _transaction(recipient, amount, options) {
+			Web3.withChain(options && options.chainId, _continue);
+			function _continue(provider) {
+				try {
+					var signer, contract;
+					signer = new ethers.providers.Web3Provider(provider).getSigner();
+					signer.sendTransaction(Q.extend({}, options, {
+						to: recipient,
+						value: ethers.utils.parseEther(amount)
+					})).then(function (transaction) {
+						Q.handle(callback, transaction, [null, transaction]);
+					});
+				} catch (err) {
+					Q.handle(callback, null, [err]);
+				};
+			}
+		},
+
+		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
 		 * @method getContract
 		 * @static
@@ -4625,29 +4687,7 @@
 							return _continue(Web3.getBatchProvider(chainId), false);
 						}
 					}
-					if (window.ethereum
-					&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
-						'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
-					]))) {
-						_continue(ethereum, true);
-					} else {
-						Web3.connect(function (err, provider) {
-							if (err) {
-								return Q.handle(callback, null, [err]);
-							}
-							if (!chainId || provider.chainId === chainId) {
-								_continue(provider, true);
-							} else {
-								var chain = Web3.chains[chainId];
-								Web3.switchChain(chain, function (err) {
-									if (Q.firstErrorMessage(err)) {
-										return Q.handle(callback, null, [err]);
-									}
-									_continue(provider, true);
-								});
-							}
-						});
-					}
+					Web3.withChain(chainId, _continue);
 					function _continue(provider, needSigner) {
 						try {
 							var signer, contract;
