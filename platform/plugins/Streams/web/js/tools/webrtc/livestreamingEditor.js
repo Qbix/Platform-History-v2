@@ -9061,6 +9061,7 @@
 
                 function show(skipCheck) {
                     if(!skipCheck && (activeDialog && activeDialog.dialogEl && document.body.contains(activeDialog.dialogEl) || isOpening)) return;
+                    var dialogWidth = 996;
                     var dialog, previewBox;
                     if(Q.info.isMobile){
                         if(window.innerWidth > window.innerHeight) {
@@ -9073,7 +9074,8 @@
                             previewBox = mobileHorizontaldialogEl.previewBoxEl;
                             activeDialog = mobileHorizontaldialogEl;
                             isOpening = false;
-                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                            //_webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                            document.body.appendChild(dialog);
                             if(tool.livestreamStream) tool.livestreamingEditor.textChatsInterface.createSection();
                             function horizontalToVerticaOrientationChange() {
                                 setTimeout(function () {
@@ -9116,16 +9118,16 @@
                         previewBox = desktopDialogEl.previewBoxEl;
                         activeDialog = desktopDialogEl;
                         if(desktopDialogEl == null) return;
-                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                        //_webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
+                        document.body.appendChild(dialog);
                         if(tool.livestreamStream) tool.livestreamingEditor.textChatsInterface.createSection();
 
-                        var dialogWidth = 996;
                         dialog.style.width = dialogWidth + 'px';
                         dialog.style.height = (dialogWidth / 1.4) + 'px';
                         console.log('dialogWidth', dialogWidth);
                     }
 
-
+                    var dialogRect = Q.info.isMobile ? mobileHorizontaldialogEl.dialogEl.getBoundingClientRect() : desktopDialogEl.dialogEl.getBoundingClientRect();
 
                     if(dialog) {
                         tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.compositeVideosAndDraw();
@@ -9145,12 +9147,21 @@
                             //dialog.style.bottom = (controlsRect.height + 10) + 'px';
                         } else {
                             var winWidth = window.innerWidth;
-                            if(winWidth > dialogWidth) {
+                            var winHeight= window.innerHeight;
+                            if(winWidth >= dialogWidth) {
                                 dialog.style.left = (winWidth / 2) - (dialogWidth / 2) + 'px';
                             } else {
-                                let left = (winWidth / 100 * 2) / 2;
-                                dialog.style.left = left + 'px';
+                                dialog.style.left = '0px';
+                                dialog.style.width = "100%";
                             }
+
+                            if(winHeight >= dialogRect.height) {
+                                dialog.style.top = (winHeight / 2) - (dialogRect.height / 2) + 'px';
+                            } else {
+                                dialog.style.top = '0px';
+                                dialog.style.height = "100%";
+                            }
+
                             //dialog.style.bottom = (controlsRect.height + 10) + 'px';
 
                         }

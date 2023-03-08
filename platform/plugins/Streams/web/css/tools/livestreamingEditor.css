@@ -42,6 +42,7 @@
     padding: 0;
 }
 .live-editor-dialog-box.live-editor-dialog_advanced_streaming {
+    position: fixed;
     padding: 0;
     margin: 0;
     width:700px;
