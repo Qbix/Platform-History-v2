@@ -6,8 +6,6 @@
  */
 "use strict";
 
-const { ethers } = require("ethers");
-
 /* jshint -W014 */
 (function (Q, $) {
 
