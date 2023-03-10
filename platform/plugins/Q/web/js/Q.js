@@ -13780,7 +13780,7 @@ Q.Dialogs = {
 	 * Closes a specific dialog and removes it from top of internal dialog stack.
 	 * @static
      * @method close
-	 * @param {Boolean|Number} dialog You can pass an element here, or index in the dialog stack
+	 * @param {Element|Number} dialog You can pass an element here, or index in the dialog stack
 	 * @return {HTMLElement|null} The HTML element of the dialog that was just closed, or null if not found.
 	 */
 	close: function(dialog) {
@@ -13788,15 +13788,13 @@ Q.Dialogs = {
 		if (Q.isInteger(dialog)) {
 			index = dialog;
 			dialog = this.dialogs[index];
-		} else {
-			if (dialog instanceof Element) {
-				Q.each(dialogs, function (i) {
-					if (this === dialog) {
-						index = i;
-						return false;
-					}
-				});
-			}
+		} else if (dialog instanceof Element) {
+			Q.each(this.dialogs, function (i, d) {
+				if (d[0] === dialog) {
+					index = i;
+					return false;
+				}
+			});
 		}
 		if (index >= 0) {
 			this.dialogs.splice(index, 1);
