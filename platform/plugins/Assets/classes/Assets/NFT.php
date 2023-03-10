@@ -205,6 +205,7 @@ class Assets_NFT
 			$default = ($i == $defaultAppId);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
+			$contracts = Q::ifset($chain, "contracts", null);
 			$factory = Q_Config::get('Assets', 'NFT', 'web3', 'factory', 'all');
 			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
@@ -219,7 +220,7 @@ class Assets_NFT
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
 			$blockExplorerUrls = array($blockExplorerUrl);
-			$temp = compact("name", "chainId", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrls", "abiUrl");
+			$temp = compact("name", "chainId", "contracts", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrls", "abiUrl");
 
 			foreach ($currencies as $currency) {
 				if (Q::ifset($currency, $chainId, null) == "0x0000000000000000000000000000000000000000") {
