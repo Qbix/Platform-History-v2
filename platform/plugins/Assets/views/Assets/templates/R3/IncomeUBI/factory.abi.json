@@ -3,37 +3,32 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_implementation",
+                "name": "incomeContractImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationState",
+                "name": "incomeContractUBIImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationView",
+                "name": "incomeContractUBILinearImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_costManager",
+                "name": "costManager",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_releaseManager",
+                "name": "releaseManager",
                 "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
-    },
-    {
-        "inputs": [],
-        "name": "InstanceCreatedFailed",
-        "type": "error"
     },
     {
         "inputs": [
@@ -136,7 +131,7 @@
     },
     {
         "inputs": [],
-        "name": "implementation",
+        "name": "incomeContractImplementation",
         "outputs": [
             {
                 "internalType": "address",
@@ -149,7 +144,7 @@
     },
     {
         "inputs": [],
-        "name": "implementationState",
+        "name": "incomeContractUBIImplementation",
         "outputs": [
             {
                 "internalType": "address",
@@ -162,7 +157,7 @@
     },
     {
         "inputs": [],
-        "name": "implementationView",
+        "name": "incomeContractUBILinearImplementation",
         "outputs": [
             {
                 "internalType": "address",
@@ -222,18 +217,81 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "hook",
+                "name": "token",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "address",
+                "name": "community",
+                "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "uint8",
+                "name": "ubiRole",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ubiQuantity",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ubiPeriod",
+                "type": "uint256"
+            }
+        ],
+        "name": "produce",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "community",
+                "type": "address"
+            },
+            {
+                "internalType": "uint8",
+                "name": "role",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint8",
+                "name": "ubiRole",
+                "type": "uint8"
+            }
+        ],
+        "name": "produce",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
             }
         ],
         "name": "produce",
@@ -256,22 +314,101 @@
             },
             {
                 "internalType": "address",
-                "name": "hook",
+                "name": "token",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "address",
+                "name": "community",
+                "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "uint8",
+                "name": "role",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint8",
+                "name": "ubiRole",
+                "type": "uint8"
             }
         ],
         "name": "produceDeterministic",
-        "outputs": [],
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "salt",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "community",
+                "type": "address"
+            },
+            {
+                "internalType": "uint8",
+                "name": "ubiRole",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ubiQuantity",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ubiPeriod",
+                "type": "uint256"
+            }
+        ],
+        "name": "produceDeterministic",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "salt",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            }
+        ],
+        "name": "produceDeterministic",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     },

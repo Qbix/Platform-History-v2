@@ -8,16 +8,6 @@
             },
             {
                 "internalType": "address",
-                "name": "_implementationState",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_implementationView",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
                 "name": "_costManager",
                 "type": "address"
             },
@@ -32,7 +22,7 @@
     },
     {
         "inputs": [],
-        "name": "InstanceCreatedFailed",
+        "name": "OnlyInstances",
         "type": "error"
     },
     {
@@ -44,6 +34,17 @@
             }
         ],
         "name": "ReleaseManagerInvalid",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "controller",
+                "type": "address"
+            }
+        ],
+        "name": "UnauthorizedContract",
         "type": "error"
     },
     {
@@ -135,6 +136,40 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "targetToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "doCharge",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "returnSuccess",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "implementation",
         "outputs": [
@@ -148,45 +183,19 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "implementationState",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementationView",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "address",
                 "name": "",
-                "type": "uint256"
+                "type": "address"
             }
         ],
         "name": "instances",
         "outputs": [
             {
-                "internalType": "address",
+                "internalType": "bool",
                 "name": "",
-                "type": "address"
+                "type": "bool"
             }
         ],
         "stateMutability": "view",
@@ -221,19 +230,49 @@
     {
         "inputs": [
             {
+                "internalType": "uint32",
+                "name": "interval",
+                "type": "uint32"
+            },
+            {
+                "internalType": "uint16",
+                "name": "intervalsMax",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint16",
+                "name": "intervalsMin",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint8",
+                "name": "retries",
+                "type": "uint8"
+            },
+            {
                 "internalType": "address",
-                "name": "hook",
+                "name": "token",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "address",
+                "name": "controller",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "hook",
+                "type": "address"
             }
         ],
         "name": "produce",
@@ -255,23 +294,59 @@
                 "type": "bytes32"
             },
             {
+                "internalType": "uint32",
+                "name": "interval",
+                "type": "uint32"
+            },
+            {
+                "internalType": "uint16",
+                "name": "intervalsMax",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint16",
+                "name": "intervalsMin",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint8",
+                "name": "retries",
+                "type": "uint8"
+            },
+            {
                 "internalType": "address",
-                "name": "hook",
+                "name": "token",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "address",
+                "name": "controller",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "hook",
+                "type": "address"
             }
         ],
         "name": "produceDeterministic",
-        "outputs": [],
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     },

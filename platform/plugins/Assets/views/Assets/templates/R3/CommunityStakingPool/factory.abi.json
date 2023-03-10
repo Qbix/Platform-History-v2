@@ -1,0 +1,450 @@
+[
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint8",
+                "name": "version",
+                "type": "uint8"
+            }
+        ],
+        "name": "Initialized",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "erc20",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "instancesCount",
+                "type": "uint256"
+            }
+        ],
+        "name": "InstanceCreated",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "_instanceInfos",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "tokenErc20",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64",
+                "name": "duration",
+                "type": "uint64"
+            },
+            {
+                "internalType": "bool",
+                "name": "exists",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint64",
+                "name": "bonusTokenFraction",
+                "type": "uint64"
+            },
+            {
+                "internalType": "address",
+                "name": "popularToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64",
+                "name": "rewardsRateFraction",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "numerator",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "denominator",
+                "type": "uint64"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "creator",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "getInstance",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenErc20",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64",
+                "name": "duration",
+                "type": "uint64"
+            }
+        ],
+        "name": "getInstanceInfo",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "tokenErc20",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "duration",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "exists",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "bonusTokenFraction",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "popularToken",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "rewardsRateFraction",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "numerator",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "denominator",
+                        "type": "uint64"
+                    }
+                ],
+                "internalType": "struct ICommunityStakingPoolFactory.InstanceInfo",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+            }
+        ],
+        "name": "getInstanceInfoByPoolAddress",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "tokenErc20",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "duration",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "exists",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "bonusTokenFraction",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "popularToken",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "rewardsRateFraction",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "numerator",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "denominator",
+                        "type": "uint64"
+                    }
+                ],
+                "internalType": "struct ICommunityStakingPoolFactory.InstanceInfo",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getInstancesInfo",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "tokenErc20",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "duration",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "exists",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "bonusTokenFraction",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "popularToken",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "rewardsRateFraction",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "numerator",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "denominator",
+                        "type": "uint64"
+                    }
+                ],
+                "internalType": "struct ICommunityStakingPoolFactory.InstanceInfo[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "implementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "impl",
+                "type": "address"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "instances",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "instances_",
+                "type": "address[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "instancesByIndex",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance_",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "instancesCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenErc20",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64",
+                "name": "duration",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "bonusTokenFraction",
+                "type": "uint64"
+            },
+            {
+                "internalType": "address",
+                "name": "popularToken",
+                "type": "address"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "account",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct IStructs.StructAddrUint256[]",
+                "name": "donations",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "rewardsRateFraction",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "numerator",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "denominator",
+                "type": "uint64"
+            }
+        ],
+        "name": "produce",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

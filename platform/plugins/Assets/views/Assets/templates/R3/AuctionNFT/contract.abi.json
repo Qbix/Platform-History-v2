@@ -1,0 +1,500 @@
+[
+    {
+        "inputs": [],
+        "name": "AlreadyClaimed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "AuctionNotCanceled",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "AuctionNotFinished",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "AuctionWasCanceled",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "BidTooSmall",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotBidAboveCurrentPrice",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotWithdrawDuringClaimPeriod",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ChargeFailed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "MaximumBidsAmountExceeded",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NFTAlreadyClaimed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NFTNotFound",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotCancelable",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotWinning",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OutsideOfIntercoinEcosystem",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SubscribeFailed",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "bidder",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "AlreadyWinning",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "bidder",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint32",
+                "name": "numBids",
+                "type": "uint32"
+            }
+        ],
+        "name": "Bid",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint8",
+                "name": "version",
+                "type": "uint8"
+            }
+        ],
+        "name": "Initialized",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "bidder",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "RefundedBid",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "bidder",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "SpentBid",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "NFTclaim",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            }
+        ],
+        "name": "NFTtransfer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "bid",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "bids",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "bidder",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "cancel",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "costManager",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "deployer",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "cancelable",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint64",
+                "name": "startTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint64",
+                "name": "claimPeriod",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256",
+                "name": "startingPrice",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint128",
+                        "name": "amount",
+                        "type": "uint128"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "numBids",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "canBidAboveIncrease",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IAuctionBase.Increase",
+                "name": "increase",
+                "type": "tuple"
+            },
+            {
+                "internalType": "uint32",
+                "name": "maxWinners",
+                "type": "uint32"
+            },
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "tokenStates_",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "address",
+                "name": "costManager",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "producedBy",
+                "type": "address"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "maxWinners",
+        "outputs": [
+            {
+                "internalType": "uint32",
+                "name": "",
+                "type": "uint32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "nftContract",
+        "outputs": [
+            {
+                "internalType": "contract ERC721Upgradeable",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "costManager_",
+                "type": "address"
+            }
+        ],
+        "name": "overrideCostManager",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "winning",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "bidder",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct IAuctionBase.BidStruct[]",
+                "name": "result",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "winningSmallestIndex",
+        "outputs": [
+            {
+                "internalType": "uint32",
+                "name": "",
+                "type": "uint32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            }
+        ],
+        "name": "withdraw",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

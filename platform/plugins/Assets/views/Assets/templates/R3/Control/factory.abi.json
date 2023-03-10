@@ -3,37 +3,22 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_implementation",
+                "name": "controlContractImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationState",
+                "name": "costManager",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationView",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_costManager",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_releaseManager",
+                "name": "releaseManager",
                 "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
-    },
-    {
-        "inputs": [],
-        "name": "InstanceCreatedFailed",
-        "type": "error"
     },
     {
         "inputs": [
@@ -123,46 +108,20 @@
     },
     {
         "inputs": [],
+        "name": "controlContractImplementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "costManager",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementation",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementationState",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementationView",
         "outputs": [
             {
                 "internalType": "address",
@@ -222,18 +181,30 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "hook",
+                "name": "communityAddr",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "components": [
+                    {
+                        "internalType": "uint8",
+                        "name": "invokeRole",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "endorseRole",
+                        "type": "uint8"
+                    }
+                ],
+                "internalType": "struct IControlContract.GroupRolesSetting[]",
+                "name": "groupRoles",
+                "type": "tuple[]"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "uint16",
+                "name": "minimumDelay",
+                "type": "uint16"
             }
         ],
         "name": "produce",
@@ -244,34 +215,6 @@
                 "type": "address"
             }
         ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "salt",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "address",
-                "name": "hook",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
-            }
-        ],
-        "name": "produceDeterministic",
-        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },

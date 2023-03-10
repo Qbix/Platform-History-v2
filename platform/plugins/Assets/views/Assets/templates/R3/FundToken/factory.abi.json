@@ -3,37 +3,32 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_implementation",
+                "name": "fundContractImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationState",
+                "name": "fundContractTokenImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationView",
+                "name": "fundContractAggregatorImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_costManager",
+                "name": "costManager",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_releaseManager",
+                "name": "releaseManager",
                 "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
-    },
-    {
-        "inputs": [],
-        "name": "InstanceCreatedFailed",
-        "type": "error"
     },
     {
         "inputs": [
@@ -136,7 +131,7 @@
     },
     {
         "inputs": [],
-        "name": "implementation",
+        "name": "fundContractAggregatorImplementation",
         "outputs": [
             {
                 "internalType": "address",
@@ -149,7 +144,7 @@
     },
     {
         "inputs": [],
-        "name": "implementationState",
+        "name": "fundContractImplementation",
         "outputs": [
             {
                 "internalType": "address",
@@ -162,7 +157,7 @@
     },
     {
         "inputs": [],
-        "name": "implementationView",
+        "name": "fundContractTokenImplementation",
         "outputs": [
             {
                 "internalType": "address",
@@ -222,25 +217,72 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "hook",
+                "name": "_sellingToken",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "uint64[]",
+                "name": "_timestamps",
+                "type": "uint64[]"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "uint256[]",
+                "name": "_prices",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "_endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_thresholds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_bonuses",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "enum IFundStructs.EnumWithdraw",
+                "name": "_ownerCanWithdraw",
+                "type": "uint8"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "contractAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "method",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "role",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "useWhitelist",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IWhitelist.WhitelistStruct",
+                "name": "_whitelistData",
+                "type": "tuple"
             }
         ],
         "name": "produce",
         "outputs": [
             {
                 "internalType": "address",
-                "name": "instance",
+                "name": "",
                 "type": "address"
             }
         ],
@@ -250,28 +292,167 @@
     {
         "inputs": [
             {
-                "internalType": "bytes32",
-                "name": "salt",
-                "type": "bytes32"
-            },
-            {
                 "internalType": "address",
-                "name": "hook",
+                "name": "_sellingToken",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "address",
+                "name": "_token0",
+                "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "address",
+                "name": "_token1",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "_timestamps",
+                "type": "uint64[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_prices",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "_endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_thresholds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_bonuses",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "enum IFundStructs.EnumWithdraw",
+                "name": "_ownerCanWithdraw",
+                "type": "uint8"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "contractAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "method",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "role",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "useWhitelist",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IWhitelist.WhitelistStruct",
+                "name": "_whitelistData",
+                "type": "tuple"
             }
         ],
-        "name": "produceDeterministic",
-        "outputs": [],
+        "name": "produceAggregator",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_payToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_sellingToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "_timestamps",
+                "type": "uint64[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_prices",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "_endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_thresholds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_bonuses",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "enum IFundStructs.EnumWithdraw",
+                "name": "_ownerCanWithdraw",
+                "type": "uint8"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "contractAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "method",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "role",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "useWhitelist",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IWhitelist.WhitelistStruct",
+                "name": "_whitelistData",
+                "type": "tuple"
+            }
+        ],
+        "name": "produceToken",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     },

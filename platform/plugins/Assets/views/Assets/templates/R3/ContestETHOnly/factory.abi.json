@@ -3,37 +3,27 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_implementation",
+                "name": "contestImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationState",
+                "name": "contestETHOnlyImpl",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_implementationView",
+                "name": "costManager",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_costManager",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_releaseManager",
+                "name": "releaseManager",
                 "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
-    },
-    {
-        "inputs": [],
-        "name": "InstanceCreatedFailed",
-        "type": "error"
     },
     {
         "inputs": [
@@ -123,46 +113,33 @@
     },
     {
         "inputs": [],
+        "name": "contestETHOnlyImplementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "contestImplementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "costManager",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementation",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementationState",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementationView",
         "outputs": [
             {
                 "internalType": "address",
@@ -222,18 +199,43 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "hook",
+                "name": "token_address",
                 "type": "address"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "stagesCount",
+                "type": "uint256"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "uint256[]",
+                "name": "stagesMinAmount",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "contestPeriodInSeconds",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "votePeriodInSeconds",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "revokePeriodInSeconds",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "percentForWinners",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "address[]",
+                "name": "judges",
+                "type": "address[]"
             }
         ],
         "name": "produce",
@@ -250,28 +252,49 @@
     {
         "inputs": [
             {
-                "internalType": "bytes32",
-                "name": "salt",
-                "type": "bytes32"
+                "internalType": "uint256",
+                "name": "stagesCount",
+                "type": "uint256"
             },
             {
-                "internalType": "address",
-                "name": "hook",
-                "type": "address"
+                "internalType": "uint256[]",
+                "name": "stagesMinAmount",
+                "type": "uint256[]"
             },
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "contestPeriodInSeconds",
+                "type": "uint256"
             },
             {
-                "internalType": "string",
-                "name": "symbol",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "votePeriodInSeconds",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "revokePeriodInSeconds",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "percentForWinners",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "address[]",
+                "name": "judges",
+                "type": "address[]"
             }
         ],
-        "name": "produceDeterministic",
-        "outputs": [],
+        "name": "produceETHOnly",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     },
