@@ -971,14 +971,14 @@
 
                 var cameraBtnCon = document.createElement('DIV');
                 cameraBtnCon.className = 'Streams_webrtc_camera-control';
-                controlBarCon.appendChild(cameraBtnCon);
+                if(!tool.WebRTCClass.getOptions().audioOnlyMode) controlBarCon.appendChild(cameraBtnCon);
                 var cameraBtn = document.createElement('DIV');
                 cameraBtn.className = 'Streams_webrtc_camera-control-btn';
                 cameraBtnCon.appendChild(cameraBtn);
                 var cameraBtnIcon = document.createElement('DIV');
                 cameraBtnIcon.className = 'Streams_webrtc_camera-control-icon';
-                cameraBtnIcon.innerHTML = tool.WebRTCClass.getOptions().audioOnlyMode ? icons.moreOptions : icons.disabledCamera;
-                cameraBtnCon.appendChild(cameraBtnIcon);
+                cameraBtnIcon.innerHTML = icons.disabledCamera;
+               cameraBtnCon.appendChild(cameraBtnIcon);
                 var countdownBadge = document.createElement('DIV');
                 countdownBadge.className = 'Streams_webrtc_camera-countdown';
                 cameraBtnCon.appendChild(countdownBadge);
@@ -1366,10 +1366,7 @@
                     return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                 }).length;
 
-                if (tool.WebRTCClass.getOptions().audioOnlyMode) {
-                    tool.log('controls: updateControlBar 0')
-                    tool.cameraBtnIcon.innerHTML = icons.moreOptions;
-                } else if (enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
+                if (enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
                     tool.log('controls: updateControlBar 1')
 
                     tool.cameraBtnIcon.innerHTML = icons.disabledCamera;

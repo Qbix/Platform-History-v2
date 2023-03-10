@@ -1740,21 +1740,21 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @param {Object} [screen] Local screen to update.
              */
             function updateLocalScreenClasses(screen) {
-
                 if(screen.screensharing == true) {
-                    if(!screen.screenEl.classList.contains('Streams_webrtc_chat-active-screen-sharing')) screen.screenEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
-                    if(!screen.screenEl.classList.contains('Streams_webrtc_chat-local-screen-sharing')) screen.screenEl.classList.add('Streams_webrtc_chat-local-screen-sharing');
-                    if(screen.videoScreen.videoCon.classList.contains('Streams_webrtc_chat-flipped-video')) screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
+                    screen.screenEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
+                    screen.screenEl.classList.add('Streams_webrtc_chat-local-screen-sharing');
+                    screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
                 }
-
 
                 var frontCameraDevice = WebRTCconference.localMediaControls.frontCameraDevice();
                 var currentCameraDevice = WebRTCconference.localMediaControls.currentCameraDevice();
-                if(!screen.screensharing && (currentCameraDevice == frontCameraDevice || Q.info.isTouchscreen == false)) {
-                    if(screen.videoScreen.videoCon != null && !screen.videoScreen.videoCon.classList.contains('Streams_webrtc_chat-flipped-video')) screen.videoScreen.videoCon.classList.add('Streams_webrtc_chat-flipped-video');
-                    if(screen.screenEl.classList.contains('Streams_webrtc_chat-active-screen-sharing')) screen.screenEl.classList.remove('Streams_webrtc_chat-active-screen-sharing');
+                if(!screen.screensharing && (Q.info.isMobile && ((screen.videoTrack && screen.videoTrack.frontCamera) || currentCameraDevice == frontCameraDevice)) || (!Q.info.isMobile && !screen.screensharing)) {
+                    if(screen.videoScreen.videoCon != null) {
+                        screen.videoScreen.videoCon.classList.add('Streams_webrtc_chat-flipped-video');
+                    }
+                    screen.screenEl.classList.remove('Streams_webrtc_chat-active-screen-sharing');
                 } else if(screen.videoScreen.videoCon) {
-                    if(screen.videoScreen.videoCon.classList.contains('Streams_webrtc_chat-flipped-video')) screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
+                    screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
                 }
             }
 
@@ -2993,13 +2993,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  * @method regularScreensGrid
                  * @param {Object} [container] HTML parent element participants' screens.
                  * @return {Array} List of DOMRects that will be passed to Q.layout.
-                 */
+                 */ 
                 regularScreensGrid: function (container) {
                     var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
                     var parentWidth = containerRect.width;
                     var parentHeight = containerRect.height;
-                    var defaultRectWidth = containerRect.width < 256 ? containerRect.width : 256;
-                    var defaultRectHeight = containerRect.height < 192 ? containerRect.height : 192;
+                    var defaultRectWidth = containerRect.width < 555 ? containerRect.width : 555;
+                    var defaultRectHeight = containerRect.height < 416 ? containerRect.height : 416;
                     var maxLongestSide =  Math.min(defaultRectWidth, defaultRectHeight);
                     var defaultDOMRect = getElementSizeKeepingRatio({
                         width: defaultRectWidth,
@@ -5558,7 +5558,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             function onVideoMute(track, participant) {
-                log('mediaStreamTrack mute', track);
+                log('onVideoMute: START', track);
 
                 if(track.parentScreen == null || track.kind != 'video') return;
 
@@ -5567,17 +5567,29 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     return;
                 } 
 
-                log('mediaStreamTrack screens', participant.screens.length);
+                log('onVideoMute: screens.length',  participant.screens.length);
 
                 if(participant.screens.length == 1) {
-                    track.parentScreen.fillVideoScreenWithAvatarOrVideo();
+                    log('onVideoMute: 1');
+
+                    if(!track.parentScreen.hasLiveTracks('video')) {
+                        log('onVideoMute: 1.2');
+                        track.parentScreen.fillVideoScreenWithAvatarOrVideo();
+                        if(track.parentScreen.screensharing) {
+                            log('onVideoMute: 1.3');
+                            track.parentScreen.screensharing = false;
+                        }
+                    }
                 } else if(!track.parentScreen.hasLiveTracks('video')) {
+                    log('onVideoMute: 2');
                     removeScreenFromCommonList(track.parentScreen, true);
+                    if(track.parentScreen.screensharing) {
+                        log('onVideoMute: 2.1');
+                        track.parentScreen.screensharing = false;
+                    }
                 }
 
-                if(track.parentScreen.screensharing) {
-                    track.parentScreen.screensharing = false;
-                }
+                
             }
 
             function onVideoUnMute(track) {

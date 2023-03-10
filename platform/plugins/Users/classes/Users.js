@@ -227,6 +227,7 @@ Users.appInfo = function (platform, appId)
 
 function Users_request_handler(req, res, next) {
 	var parsed = req.body;
+	console.log('parsed', parsed);
     if (!parsed || !parsed['Q/method']) {
 		return next();
 	}
@@ -239,6 +240,7 @@ function Users_request_handler(req, res, next) {
 			if (userId && sessionId) {
 				var clients = Users.clients[userId];
 				for (var cid in clients) {
+					console.log('Users/logout', clients[cid].sessionId);
 					if (clients[cid].sessionId === sessionId) {
 						clients[cid].disconnect();
 					}
@@ -268,6 +270,48 @@ function Users_request_handler(req, res, next) {
 				setTimeout(_send, parsed.delay);
 			} else {
 				_send();
+			}
+			break;
+		case 'Users/addEventListener':
+			if (userId && sessionId) {
+				var clients = Users.clients[userId];
+				console.log('clients num', Object.keys(clients), sessionId)
+
+				var parseCookie = function (str) {
+					return str.split(';')
+						.map(function (v) { return v.split('=') })
+						.reduce(function (acc, v) {
+							acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+							return acc;
+						}, {});
+				}
+				var client = null;
+				for (var cid in clients) {
+					var cookie = clients[cid].handshake.headers.cookie ? parseCookie(clients[cid].handshake.headers.cookie) : null;
+					if(!cookie) continue;
+
+					if (cookie.Q_sessionId === sessionId) {
+						client = clients[cid];
+						break;
+					}
+				}
+
+				if(!client) {
+					return;
+				}
+
+				var eventName = parsed.eventName;
+				var handlerToExecute = parsed.handlerToExecute;
+				var data = parsed.data;
+				if(!eventName || !handlerToExecute) {
+					return
+				}
+
+				client.on(eventName, function(){
+					Q.Utils.queryExternal(handlerToExecute, data, function(response) {
+						
+					});
+				});
 			}
 			break;
 		default:
