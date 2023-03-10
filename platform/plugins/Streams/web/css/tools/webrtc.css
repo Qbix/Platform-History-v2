@@ -18,7 +18,7 @@
     justify-content: center;
     flex-direction: column;
 }
-.Streams_webrtc_live .Streams_webrtc_chat-participant,
+/*.Streams_webrtc_live .Streams_webrtc_chat-participant,*/
 .Streams_webrtc_live .Streams_webrtc_controls_tool {
     display: none !important;
 }

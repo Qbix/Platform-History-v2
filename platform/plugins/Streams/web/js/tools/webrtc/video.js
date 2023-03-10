@@ -476,8 +476,9 @@
                 tool.log('controls: updateCamerasList');
                 let cameraIsActive = false;
                 tool.cameraListButtons.forEach(function (cameraItem) {
-
-                    if (tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice() != null && tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice().deviceId == cameraItem.deviceId) {
+                    let currentCameraDevice = tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice();
+                    tool.log('controls: updateCamerasList: currentCameraDevice', currentCameraDevice);
+                    if (currentCameraDevice != null && currentCameraDevice.deviceId == cameraItem.deviceId) {
                         tool.log('controls: updateCamerasList: tool.toggleRadioButton (active)', cameraItem);
                         tool.toggleRadioButton(cameraItem);
                         cameraIsActive = true
