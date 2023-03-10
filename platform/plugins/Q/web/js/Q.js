@@ -12061,9 +12061,11 @@ function _touchScrollingHandler(event) {
 		);
 		var sh = p.scrollHeight;
 		var st = p.scrollTop;
+		var sl = p.scrollLeft;
 		if (p.tagName === 'HTML') {
 			sh = Math.max(sh, document.body.scrollHeight);
 			st = Math.max(st, document.body.scrollTop);
+			sl = Math.max(sl, document.body.scrollLeft);
 		}
 		var hiddenHeight = sh - Math.min(
 			p.offsetHeight, Q.Visual.windowHeight()
@@ -12076,8 +12078,8 @@ function _touchScrollingHandler(event) {
 			&& (Q.Visual.movement.positions.length == 1)
 			&& (pos = Q.Pointer.movement.positions[0])) {
 				var sy = Q.Pointer.getY(event) - Q.Visual.scrollTop();
-				if ((sy > pos.y && q.scrollTop == 0)
-				|| (sy < pos.y && q.scrollTop >= hiddenHeight)) {
+				if ((sy > pos.y && st == 0)
+				|| (sy < pos.y && st >= hiddenHeight)) {
 					continue;
 				}
 			}
@@ -12090,8 +12092,8 @@ function _touchScrollingHandler(event) {
 			&& (Q.Pointer.movement.positions.length == 1)
 			&& (pos = Q.Pointer.movement.positions[0])) {
 				var sx = Q.Pointer.getX(event) - Q.Visual.scrollLeft();
-				if ((sx > pos.x && q.scrollLeft == 0)
-				|| (sx < pos.x && q.scrollLeft >= hiddenWidth)) {
+				if ((sx > pos.x && sl == 0)
+				|| (sx < pos.x && sl >= hiddenWidth)) {
 					continue;
 				}
 			}
