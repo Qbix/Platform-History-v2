@@ -30,24 +30,14 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		return console.warn("chain not found");
 	}
 	
-	if (!state.tokenAddress) {
-		return console.warn("CommunityCoin contract not found");
-	}
-
-	if (!state.abiPath) {
-		return console.warn("abiPath not found");
-	}
-
 	tool.refresh();
 },
 
 { // default options here
 	userId: Q.Users.loggedInUserId(),
-	chainId: Q.getObject("Web3.defaultChain.chainId", Assets),
-	contractAddress: null,
-	interval: 10, // in seconds
-	tokenAddress: Q.getObject("Web3.defaultChain.contracts.CommunityCoin.instance", Assets),
-	abiPath: "Assets/templates/R3/CommunityCoin/contract"
+	chainId: null,
+	tokenAddresses: null,
+	template: "Assets/web3/balance/select"
 },
 
 { // methods go here
@@ -55,13 +45,18 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var tool = this;
 		var state = tool.state;
 
-		//state.intervalId = setInterval(function x () {
-			tool.element.innerHTML = "";
-			tool.balanceOf(function (tokenAmount, tokenName) {
-				tool.element.innerHTML += '<div>' + tokenAmount + ' ' + tokenName + '</div>';
+		tool.element.innerHTML = "";
+		tool.balanceOf(function (results) {
+			Q.Template.render(state.template, {
+				results: results
+			}, function (err, html) {
+				if (err) {
+					return;
+				}
+
+				Q.replace(tool.element, html);
 			});
-		/*	return x;
-		}(), state.interval*1000);*/
+		});
 	},
 	balanceOf: function (callback) {
 		var tool = this;
@@ -72,12 +67,31 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				return console.warn(err);
 			}
 
+			var results = [];
 			Q.each(balance, function (i, item) {
-				Q.handle(callback, null, [ethers.utils.formatUnits(item.balance), item.name]);
+				var amount = parseFloat(ethers.utils.formatUnits(item.balance)).toFixed(12);
+
+				results.push({
+					tokenAmount: parseFloat(amount),
+					tokenName: item.name
+				});
 			});
+
+			Q.handle(callback, null, [results]);
 		}, {
-			tokenAddress: state.tokenAddress
+			tokenAddresses: state.tokenAddresses
 		}]);
+	},
+	getValue: function () {
+		var $selectedOption = $("select[name=tokens]", this.element).find(":selected");
+		if (!$selectedOption.length) {
+			return null;
+		}
+
+		return {
+			amount: $selectedOption.attr("data-amount"),
+			name: $selectedOption.attr("data-name")
+		};
 	},
 	Q: {
 		beforeRemove: function () {
@@ -85,5 +99,19 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		}
 	}
 });
+
+Q.Template.set('Assets/web3/balance/list',
+`{{#each results}}
+	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}">{{this.tokenAmount}} {{this.tokenName}}</div>
+{{/each}}`
+);
+
+Q.Template.set('Assets/web3/balance/select',
+`<select name="tokens" data-count="{{results.length}}">
+	{{#each results}}
+		<option data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}">{{this.tokenAmount}} {{this.tokenName}}</option>
+	{{/each}}
+</select>`
+);
 
 })(window, Q, jQuery);
