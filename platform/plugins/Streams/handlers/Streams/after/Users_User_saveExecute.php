@@ -169,6 +169,12 @@ function Streams_after_Users_User_saveExecute($params)
 			ksort($sizes);
 			$s['attributes']['sizes'] = $sizes;
 			$s['attributes']['icon'] = $user->icon;
+		} elseif ($name === 'Streams/user/xid/web3') {
+			$json = null;
+			try {
+				$json = json_decode($user->xids, true);
+			} catch (Exception $e) {}
+			$s['content'] = Q::ifset($json, "web3_all", null);
 		}
 		if (isset($values[$name])) {
 			$s['content'] = $values[$name];
@@ -255,9 +261,9 @@ function Streams_after_Users_User_saveExecute($params)
 				->execute();
 		}
 
+		$names = Q_Config::get('Streams', 'onUpdate', 'Users_User', array());
 		foreach ($modifiedFields as $field => $value) {
-			$name = Q_Config::get('Streams', 'onUpdate', 'Users_User', $field, null);
-			if (!$name) {
+			if (!in_array($field, $names)) {
 				continue;
 			}
 
@@ -266,21 +272,42 @@ function Streams_after_Users_User_saveExecute($params)
 				continue;
 			}
 
-			$stream = isset(Streams::$beingSaved[$field])
-				? Streams::$beingSaved[$field]
-				: Streams_Stream::fetch($user->id, $user->id, $name);
-			if (!$stream) { // it should probably already be in the db
-				continue;
+			if (is_array($name)) {
+				foreach ($name as $xidName) {
+					$stream = Streams_Stream::fetch($user->id, $user->id, $xidName);
+					if (!$stream) {
+						continue;
+					}
+
+					$json = null;
+					try {
+						$json = json_decode($value, true);
+					} catch (Exception $e) {}
+
+					if ($xidName == "Streams/user/xid/web3") {
+						$stream->content = Q::ifset($json, "web3_all", null);
+					}
+				}
+			} else {
+				$stream = isset(Streams::$beingSaved[$field])
+					? Streams::$beingSaved[$field]
+					: Streams_Stream::fetch($user->id, $user->id, $name);
+				if (!$stream) { // it should probably already be in the db
+					continue;
+				}
+
+				$stream->content = $value;
+
+				if ($stream->type === 'Streams/image') {
+					$stream->icon = $value;
+				}
+				if ($name === "Streams/user/icon") {
+					$sizes = Q_Image::getSizes('Users/icon');
+					ksort($sizes);
+					$stream->setAttribute('sizes', $sizes);
+				}
 			}
-			$stream->content = $value;
-			if ($stream->type === 'Streams/image') {
-				$stream->icon = $value;
-			}
-			if ($name === "Streams/user/icon") {
-                $sizes = Q_Image::getSizes('Users/icon');
-				ksort($sizes);
-                $stream->setAttribute('sizes', $sizes);
-			}
+
 			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}
 	}
