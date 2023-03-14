@@ -62,6 +62,9 @@
         tool.stopScreenSharingBtn = null;
         tool.turnOffCameraBtn = null;
 
+        tool.webrtcUserInterface = options.webrtcUserInterface();
+        tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+
         Q.addStylesheet('{{Streams}}/css/tools/video.css?ts=' + performance.now(), function () {
           
         });
@@ -74,21 +77,23 @@
         {
             onRefresh: new Q.Event(),
             controlsTool: null,
-            webrtcSignalingLib: null,
             webrtcUserInterface: null
         },
 
         {
             declareEventsHandlers: function () {
                 var tool = this;
-                var webrtcSignalingLib = tool.state.webrtcSignalingLib;
+                var webrtcSignalingLib = tool.webrtcSignalingLib;
+
+                webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                    tool.webrtcSignalingLib = e.newWebrtcSignalingLibInstance;
+                    tool.declareEventsHandlers();
+                });
                 
                 webrtcSignalingLib.event.on('cameraDisabled', function () {
-                    console.log('declareEventsHandlers', tool)
                     tool.updateCamerasList();
                 });
                 webrtcSignalingLib.event.on('currentVideoinputDeviceChanged', function () {
-                    console.log('declareEventsHandlers', tool)
                     tool.updateCamerasList();
                 });
                 webrtcSignalingLib.event.on('deviceListUpdated', function () {
@@ -138,8 +143,8 @@
                         var turnCameraOn = function () {
                             tool.toggleRadioButton(tool.turnOnCameraBtn);
 
-                            tool.state.webrtcSignalingLib.localMediaControls.requestCamera(function () {
-                                var currentCamera = tool.state.webrtcSignalingLib.localMediaControls.frontCameraDevice();
+                            tool.webrtcSignalingLib.localMediaControls.requestCamera(function () {
+                                var currentCamera = tool.webrtcSignalingLib.localMediaControls.frontCameraDevice();
                                 if (currentCamera != null) {
                                     var btnToSwitchOn = tool.cameraListButtons.filter(function (cameraBtn) {
                                         return cameraBtn.deviceId == currentCamera.deviceId;
@@ -155,7 +160,7 @@
                                 }
                                 tool.state.controlsTool.updateControlBar();
                             }, function () {
-                                var participant = tool.state.webrtcSignalingLib.localParticipant();
+                                var participant = tool.webrtcSignalingLib.localParticipant();
                                 var enabledVideoTracks = participant.tracks.filter(function (t) {
                                     return t.screensharing;
                                 })[0];
@@ -167,8 +172,8 @@
                             });
                         }
 
-                        if (tool.state.webrtcUserInterface.getOptions().limits && (tool.state.webrtcUserInterface.getOptions().limits.video || tool.state.webrtcUserInterface.getOptions().limits.audio)) {
-                            tool.state.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function (result) {
+                        if (tool.webrtcUserInterface.getOptions().limits && (tool.webrtcUserInterface.getOptions().limits.video || tool.webrtcUserInterface.getOptions().limits.audio)) {
+                            tool.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function (result) {
                                 turnCameraOn();
                             });
                         } else {
@@ -199,7 +204,7 @@
                         if (!screenSharingRadioItem.classList.contains('Q_working')) screenSharingRadioItem.classList.add('Q_working');
 
                         var turnScreensharingOn = function () {
-                            tool.state.webrtcSignalingLib.screenSharing.startShareScreen(function () {
+                            tool.webrtcSignalingLib.screenSharing.startShareScreen(function () {
                                 if (screenSharingRadioItem.classList.contains('Q_working')) screenSharingRadioItem.classList.remove('Q_working');
                                 Q.Dialogs.pop();
                                 tool.toggleRadioButton(btnInstance);
@@ -208,7 +213,7 @@
                             }, function () {
                                 if (screenSharingRadioItem.classList.contains('Q_working')) screenSharingRadioItem.classList.remove('Q_working');
 
-                                var currentCameraDevice = tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice();
+                                var currentCameraDevice = tool.webrtcSignalingLib.localMediaControls.currentCameraDevice();
                                 if (currentCameraDevice != null) {
                                     var btnToSwitchOn = tool.cameraListButtons.filter(function (cameraBtn) {
                                         return cameraBtn.deviceId == currentCameraDevice.deviceId;
@@ -220,8 +225,8 @@
                             });
                         }
 
-                        if (tool.state.webrtcUserInterface.getOptions().limits && (tool.state.webrtcUserInterface.getOptions().limits.video || tool.state.webrtcUserInterface.getOptions().limits.audio)) {
-                            tool.state.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function (result) {
+                        if (tool.webrtcUserInterface.getOptions().limits && (tool.webrtcUserInterface.getOptions().limits.video || tool.webrtcUserInterface.getOptions().limits.audio)) {
+                            tool.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function (result) {
                                 turnScreensharingOn();
                             });
                         } else {
@@ -248,13 +253,13 @@
                     type: 'shareAnotherScreen',
                     handler: function () {
                         var turnScreensharingOn = function () {
-                            tool.state.webrtcSignalingLib.screenSharing.startShareScreen(function () {
+                            tool.webrtcSignalingLib.screenSharing.startShareScreen(function () {
                                 Q.Dialogs.pop();
                                 tool.toggleRadioButton(tool.startScreenSharingBtn);
                                 tool.state.controlsTool.closeAllDialogs();
                                 tool.state.controlsTool.updateControlBar();
                             }, function () {
-                                var currentCameraDevice = tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice();
+                                var currentCameraDevice = tool.webrtcSignalingLib.localMediaControls.currentCameraDevice();
                                 if (currentCameraDevice != null) {
                                     var btnToSwitchOn = tool.cameraListButtons.filter(function (cameraBtn) {
                                         return cameraBtn.deviceId == currentCameraDevice.deviceId;
@@ -267,8 +272,8 @@
 
                         }
 
-                        if (tool.state.webrtcUserInterface.getOptions().limits && (tool.state.webrtcUserInterface.getOptions().limits.video || tool.state.webrtcUserInterface.getOptions().limits.audio)) {
-                            tool.state.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function (result) {
+                        if (tool.webrtcUserInterface.getOptions().limits && (tool.webrtcUserInterface.getOptions().limits.video || tool.webrtcUserInterface.getOptions().limits.audio)) {
+                            tool.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function (result) {
                                 turnScreensharingOn();
                             });
                         } else {
@@ -295,7 +300,7 @@
                     type: 'turnScreenSharingOff',
                     handler: function () {
                         tool.toggleRadioButton(tool.stopScreenSharingBtn);
-                        tool.state.webrtcSignalingLib.screenSharing.stopShareScreen();
+                        tool.webrtcSignalingLib.screenSharing.stopShareScreen();
                     }
                 });
 
@@ -318,13 +323,13 @@
                     type: 'mobileScreen',
                     handler: function (e) {
                         var btnInstance = this;
-                        tool.state.webrtcSignalingLib.screenSharing.startShareScreen(function () {
+                        tool.webrtcSignalingLib.screenSharing.startShareScreen(function () {
                             Q.Dialogs.pop();
                             tool.toggleRadioButton(btnInstance);
                             tool.state.controlsTool.closeAllDialogs();
                             tool.state.controlsTool.updateControlBar();
                         }, function () {
-                            var currentCameraDevice = tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice();
+                            var currentCameraDevice = tool.webrtcSignalingLib.localMediaControls.currentCameraDevice();
                             if (currentCameraDevice != null) {
                                 var btnToSwitchOn = tool.cameraListButtons.filter(function (cameraBtn) {
                                     return cameraBtn.deviceId == currentCameraDevice.deviceId;
@@ -337,7 +342,7 @@
                     }
                 });
 
-                if (tool.state.webrtcSignalingLib.screenSharing.isActive()) {
+                if (tool.webrtcSignalingLib.screenSharing.isActive()) {
                     tool.toggleRadioButton(tool.startScreenSharingBtn);
                 }
 
@@ -360,21 +365,21 @@
                     type: 'off',
                     handler: function (e) {
                         tool.toggleRadioButton(tool.turnOffCameraBtn);
-                        tool.state.webrtcSignalingLib.localMediaControls.disableVideo();
+                        tool.webrtcSignalingLib.localMediaControls.disableVideo();
                         Q.Dialogs.pop();
                         tool.state.controlsTool.closeAllDialogs();
                         tool.state.controlsTool.updateControlBar();
                     }
                 });            
 
-                if (!tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice()) {
+                if (!tool.webrtcSignalingLib.localMediaControls.currentCameraDevice()) {
                     tool.toggleRadioButton(tool.turnOffCameraBtn);
                 }
 
                 videoinputList.appendChild(turnOnCameraItem);
                 if (!Q.info.useTouchEvents) videoinputList.appendChild(screenSharingRadioItem);
                 if (!Q.info.useTouchEvents) videoinputList.appendChild(anotherScreenSharingRadioItem);
-                if (tool.state.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen && !Q.info.useTouchEvents) videoinputList.appendChild(turnScreenSharingOff);
+                if (tool.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen && !Q.info.useTouchEvents) videoinputList.appendChild(turnScreenSharingOff);
                 if ((Q.info.useTouchEvents) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
                 videoinputList.appendChild(turnOffradioBtnItem);
 
@@ -391,13 +396,13 @@
             loadCamerasList: function () {
                 var tool = this;
                 tool.log('contros: loadCamerasList')
-                if (tool.state.webrtcUserInterface.getOptions().audioOnlyMode) return;
+                if (tool.webrtcUserInterface.getOptions().audioOnlyMode) return;
                 //location.reload();
                 var count = 1;
 
                 tool.clearCameraList();
 
-                tool.state.webrtcSignalingLib.localMediaControls.videoInputDevices().forEach(function (mediaDevice) {
+                tool.webrtcSignalingLib.localMediaControls.videoInputDevices().forEach(function (mediaDevice) {
                     var radioBtnItem = document.createElement('DIV');
                     radioBtnItem.className = 'webrtc-video-settings_popup_item webrtc-video-settings_popup_camera_item';
                     radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
@@ -424,13 +429,13 @@
                             tool.state.controlsTool.closeAllDialogs();
 
                             var toggle = function () {
-                                tool.state.webrtcSignalingLib.localMediaControls.toggleCameras({ deviceId: mediaDevice.deviceId, groupId: mediaDevice.groupId }, function () {
+                                tool.webrtcSignalingLib.localMediaControls.toggleCameras({ deviceId: mediaDevice.deviceId, groupId: mediaDevice.groupId }, function () {
                                     if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
 
-                                    var localScreens = tool.state.webrtcSignalingLib.localParticipant().screens;
+                                    var localScreens = tool.webrtcSignalingLib.localParticipant().screens;
                                     var i, screen;
                                     for (i = 0; screen = localScreens[i]; i++) {
-                                        tool.state.webrtcUserInterface.screenRendering.updateLocalScreenClasses(screen);
+                                        tool.webrtcUserInterface.screenRendering.updateLocalScreenClasses(screen);
                                     }
                                     tool.log('controls: tool.toggleRadioButton', cameraItem)
                                     tool.toggleRadioButton(cameraItem);
@@ -440,13 +445,13 @@
                                     if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
                                     if (_isiOSCordova) tool.showIosPermissionsInstructions('Camera');
                                     if (e.name == 'NotAllowedDueLimit') {
-                                        tool.state.webrtcUserInterface.notice.show(tool.text.webrtc.notices.allowedVideoLimit.interpolate({ limit: e.limit }));
+                                        tool.webrtcUserInterface.notice.show(tool.text.webrtc.notices.allowedVideoLimit.interpolate({ limit: e.limit }));
                                     }
                                 })
                             }
 
-                            if (tool.state.webrtcUserInterface.getOptions().limits && (tool.state.webrtcUserInterface.getOptions().limits.video || tool.state.webrtcUserInterface.getOptions().limits.audio)) {
-                                tool.state.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function () {
+                            if (tool.webrtcUserInterface.getOptions().limits && (tool.webrtcUserInterface.getOptions().limits.video || tool.webrtcUserInterface.getOptions().limits.audio)) {
+                                tool.webrtcSignalingLib.localMediaControls.canITurnCameraOn().then(function () {
                                     tool.turnOnCamera();
                                 });
                             } else {
@@ -459,7 +464,7 @@
 
                     tool.cameraListButtons.push(cameraItem);
 
-                    if (tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice() != null && tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice().deviceId == mediaDevice.deviceId) {
+                    if (tool.webrtcSignalingLib.localMediaControls.currentCameraDevice() != null && tool.webrtcSignalingLib.localMediaControls.currentCameraDevice().deviceId == mediaDevice.deviceId) {
                         tool.toggleRadioButton(cameraItem);
                     }
 
@@ -476,7 +481,7 @@
                 tool.log('controls: updateCamerasList');
                 let cameraIsActive = false;
                 tool.cameraListButtons.forEach(function (cameraItem) {
-                    let currentCameraDevice = tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice();
+                    let currentCameraDevice = tool.webrtcSignalingLib.localMediaControls.currentCameraDevice();
                     tool.log('controls: updateCamerasList: currentCameraDevice', currentCameraDevice);
                     if (currentCameraDevice != null && currentCameraDevice.deviceId == cameraItem.deviceId) {
                         tool.log('controls: updateCamerasList: tool.toggleRadioButton (active)', cameraItem);
@@ -491,7 +496,7 @@
                 }
 
                 if(e && (e.eventName == 'screensharingStarted' || e.eventName == 'screensharingStopped')) {
-                    if (tool.state.webrtcSignalingLib.screenSharing.isActive()) {
+                    if (tool.webrtcSignalingLib.screenSharing.isActive()) {
                         tool.toggleRadioButton(tool.startScreenSharingBtn);
                     } else {
                         tool.toggleRadioButton(tool.stopScreenSharingBtn);
@@ -517,7 +522,7 @@
                
                 if (buttonObj.type == 'camera') {
                     deselectCameraButtons();
-                    if (!tool.state.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
+                    if (!tool.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
                         tool.startScreenSharingBtn.switchToRegularState();
                         tool.turnOffCameraBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffVideo", tool.text);
                     } else {
@@ -525,7 +530,7 @@
                     }
                     tool.turnOffCameraBtn.switchToRegularState();
                 } else if (buttonObj.type == 'screen') {
-                    if (!tool.state.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
+                    if (!tool.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
                         deselectCameraButtons();
                         tool.turnOffCameraBtn.switchToRegularState();
                     } else {
@@ -534,7 +539,7 @@
                     }
 
                 } else if (buttonObj.type == 'mobileScreen') {
-                    if (!tool.state.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
+                    if (!tool.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
                         deselectCameraButtons();
                         tool.turnOffCameraBtn.switchToRegularState();
                     } else {
@@ -547,7 +552,7 @@
                     tool.stopScreenSharingBtn.hide();
                 } else if (buttonObj.type == 'off') {
                     deselectCameraButtons();
-                    if (!tool.state.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
+                    if (!tool.webrtcUserInterface.getOptions().showScreenSharingInSeparateScreen) {
                         tool.startScreenSharingBtn.switchToRegularState();
                         tool.startAnotherScreenSharingBtn.hide();
                         tool.stopScreenSharingBtn.hide();
@@ -561,8 +566,8 @@
             },
             turnOnCamera: function () {
                 var tool = this;
-                tool.state.webrtcSignalingLib.localMediaControls.requestCamera(function () {
-                    var currentCamera = tool.state.webrtcSignalingLib.localMediaControls.frontCameraDevice();
+                tool.webrtcSignalingLib.localMediaControls.requestCamera(function () {
+                    var currentCamera = tool.webrtcSignalingLib.localMediaControls.frontCameraDevice();
                     if (currentCamera != null) {
                         var btnToSwitchOn = tool.cameraListButtons.filter(function (cameraBtn) {
                             return cameraBtn.deviceId == currentCamera.deviceId;
@@ -578,7 +583,7 @@
                     }
                     tool.state.controlsTool.updateControlBar();
                 }, function (e) {
-                    var participant = tool.state.webrtcSignalingLib.localParticipant();
+                    var participant = tool.webrtcSignalingLib.localParticipant();
                     var enabledVideoTracks = participant.tracks.filter(function (t) {
                         return t.screensharing;
                     })[0];
@@ -620,7 +625,7 @@
                     console.log.apply(console, params);
                 }
 
-                if (tool.state.webrtcSignalingLib) tool.state.webrtcSignalingLib.event.dispatch('log', params);
+                if (tool.webrtcSignalingLib) tool.webrtcSignalingLib.event.dispatch('log', params);
             }
         }
 

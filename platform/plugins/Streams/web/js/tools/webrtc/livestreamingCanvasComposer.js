@@ -21,27 +21,37 @@
      *  Hash of possible options
      */
     Q.Tool.define("Streams/webrtc/livestreaming/canvasComposer", function(options) {
+            var tool = this;
             this.advancedLiveStreamingBox = null;
 
-            if (!this.state.webrtcSignalingLib ) {
-                throw "webrtcSignalingLib is required";
+            console.log('canvasComposer', options)
+            if (!options.webrtcUserInterface) {
+                throw "webrtcUserInterface is required";
             }
+
+            tool.webrtcUserInterface = options.webrtcUserInterface();
+            tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
 
             this.create();
         },
 
         {
-            webrtcSignalingLib: null,
             webrtcUserInterface: null,
         },
 
         {
+            updateWebrtcSignalingLibInstance: function (newWebrtcSignalingLib) {
+                var tool = this;
+                if(tool.webrtcSignalingLib != newWebrtcSignalingLib) {
+                    tool.webrtcSignalingLib = newWebrtcSignalingLib;
+                }
+            },
             create: function() {
                 var tool = this;
                 tool.canvasComposer = (function () {
-                    var _webrtcSignalingLib = tool.state.webrtcSignalingLib;
-                    var _webrtcUserInterface = tool.state.webrtcUserInterface;
-                    var _options = tool.state.webrtcSignalingLib.getOptions();
+                    var getOptions = function () {
+                        return tool.webrtcSignalingLib.getOptions()
+                    }                    
                     var _composerIsActive = false;
                     var _canvas = null;
                     var _canvasMediStream = null;
@@ -49,7 +59,6 @@
                     var _videoTrackIsMuted = false;
                     var _dataListeners = [];
                     var _eventDispatcher = new EventSystem();
-                    var _localInfo = _webrtcSignalingLib.getLocalInfo();
         
                     var _scenes = [];
                     var _activeScene = null;
@@ -726,9 +735,9 @@
                                 get height() {return this._height;}
                             };
                             this.params = {
-                                tiledLayoutMargins: _options.liveStreaming && _options.liveStreaming.tiledLayoutMargins ? _options.liveStreaming.tiledLayoutMargins : 100,
-                                audioLayoutBgColor: _options.liveStreaming && _options.liveStreaming.audioLayoutBgColor ? _options.liveStreaming.audioLayoutBgColor : "rgba(255, 255, 255, 0)",
-                                defaultLayout: _options.liveStreaming && _options.liveStreaming.defaultLayout ? _options.liveStreaming.defaultLayout : 'tiledStreamingLayout',
+                                tiledLayoutMargins: getOptions().liveStreaming && getOptions().liveStreaming.tiledLayoutMargins ? getOptions().liveStreaming.tiledLayoutMargins : 100,
+                                audioLayoutBgColor: getOptions().liveStreaming && getOptions().liveStreaming.audioLayoutBgColor ? getOptions().liveStreaming.audioLayoutBgColor : "rgba(255, 255, 255, 0)",
+                                defaultLayout: getOptions().liveStreaming && getOptions().liveStreaming.defaultLayout ? getOptions().liveStreaming.defaultLayout : 'tiledStreamingLayout',
                             };
                             this.getChildSources = function(type, active) {
                                 console.log('getChildSources', type)
@@ -900,7 +909,7 @@
         
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
-                                video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
+                                video.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopVideo ? getOptions().liveStreaming.loopVideo : true;
                                 video.setAttribute("playsinline","");
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
@@ -980,7 +989,7 @@
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
                                 video.setAttribute("playsinline","");
-                                video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
+                                video.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopVideo ? getOptions().liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
@@ -1008,7 +1017,7 @@
                                 video.muted = true;
                                 video.setAttribute("playsinline","");
                                 video.style.display = 'none';
-                                video.loop = _options.liveStreaming && _options.liveStreaming.loopVideo ? _options.liveStreaming.loopVideo : true;
+                                video.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopVideo ? getOptions().liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
@@ -1377,7 +1386,7 @@
                             var tracksToRemove = [];
                             
                             var currentWebRTCSources = webrtcGroupSource.getChildSources('webrtc');
-                            var participants = _webrtcSignalingLib.roomParticipants(true);
+                            var participants = tool.webrtcSignalingLib.roomParticipants(true);
                             log('updateWebRTCCanvasLayout participants',  participants)
                             log('updateWebRTCCanvasLayout currentWebRTCSources',  currentWebRTCSources)
         
@@ -1416,7 +1425,7 @@
                                 });
                                 log('updateWebRTCCanvasLayout vTracks', vTracks)
         
-                                let audioIsEnabled = participants[v].isLocal ? _webrtcSignalingLib.localMediaControls.micIsEnabled() : participants[v].audioIsMuted != true;
+                                let audioIsEnabled = participants[v].isLocal ? tool.webrtcSignalingLib.localMediaControls.micIsEnabled() : participants[v].audioIsMuted != true;
         
                                 log('updateWebRTCCanvasLayout audioIsEnabled', audioIsEnabled)
         
@@ -1702,7 +1711,7 @@
         
                             }
                             log('updateWebRTCCanvasLayout result', tracksToAdd, tracksToRemove)
-                            log('updateWebRTCCanvasLayout room name', _options.roomName)
+                            log('updateWebRTCCanvasLayout room name', getOptions().roomName)
         
                             for(let r = currentWebRTCSources.length - 1; r >= 0 ; r--){
                                 let onlineInCurrentRoom = false;
@@ -2216,9 +2225,52 @@
                                 }
                             }
         
-                            requestAnimationFrame(function() {
-                                drawVideosOnCanvas();
-                            });
+                            //requestAnimationFrame(function() {
+                            //    drawVideosOnCanvas();
+                            //});
+                        }
+
+
+                        /*
+                            An alternative timing loop, based on AudioContext's clock
+                        
+                            @arg callback : a callback function 
+                                with the audioContext's currentTime passed as unique argument
+                            @arg frequency : float in ms;
+                            @returns : a stop function
+                        
+                        */
+                        function audioTimerLoop(callback, frequency) {
+
+                            var freq = frequency / 1000;      // AudioContext time parameters are in seconds
+                            var aCtx = new AudioContext();
+                            // Chrome needs our oscillator node to be attached to the destination
+                            // So we create a silent Gain Node
+                            var silence = aCtx.createGain();
+                            silence.gain.value = 0;
+                            silence.connect(aCtx.destination);
+
+                            onOSCend();
+
+                            var stopped = false;       // A flag to know when we'll stop the loop
+                            function onOSCend() {
+                                var osc = aCtx.createOscillator();
+                                osc.onended = onOSCend; // so we can loop
+                                osc.connect(silence);
+                                osc.start(0); // start it now
+                                osc.stop(aCtx.currentTime + freq); // stop it next frame
+                                callback(aCtx.currentTime); // one frame is done
+                                if (stopped) {  // user broke the loop
+                                    osc.onended = function () {
+                                        aCtx.close(); // clear the audioContext
+                                        return;
+                                    };
+                                }
+                            };
+                            // return a function to stop our loop
+                            return function () {
+                                stopped = true;
+                            };
                         }
         
                         function drawImage(imageSource) {
@@ -3096,40 +3148,54 @@
         
                             updateActiveWebRTCLayouts();
                             _isActive = true;
-                            drawVideosOnCanvas();
-                            refreshEventListeners(_webrtcSignalingLib);
+                            //drawVideosOnCanvas();
+                            //audioTimerLoop(drawVideosOnCanvas, 1000 / 60)
+
+                            var canvasRenderInterval = window.setWorkerInterval(function () {
+                                drawVideosOnCanvas();
+
+                                //console.log('compositeVideosAndDraw', tool.webrtcSignalingLib.state)
+                                if(tool.webrtcSignalingLib.state == 'disconnected') {
+                                    window.clearWorkerInterval(canvasRenderInterval);
+                                }
+                            }, 16);
+                            refreshEventListeners();
                         }
         
-                        function refreshEventListeners(webrtcRoomSignalingInstance) {
-                            _webrtcSignalingLib = webrtcRoomSignalingInstance;
+                        function refreshEventListeners() {
+                            var webrtcSignalingLib = tool.webrtcSignalingLib;
                             var updateCanvas = function() {
                                 if(_isActive == true) {
                                     updateActiveWebRTCLayouts();
                                 }
                             }
-                            window.updateCanvas = updateCanvas;
-                            webrtcRoomSignalingInstance.event.on('initNegotiationEnded', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('videoTrackLoaded', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('audioTrackLoaded', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('participantDisconnected', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('trackMuted', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('trackUnmuted', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('screenHidden', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('screenShown', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('audioMuted', updateCanvas);
-                            webrtcRoomSignalingInstance.event.on('audioUnmuted', updateCanvas);
+
+                            webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                                tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                                refreshEventListeners();
+                            });
+                            webrtcSignalingLib.event.on('initNegotiationEnded', updateCanvas);
+                            webrtcSignalingLib.event.on('videoTrackLoaded', updateCanvas);
+                            webrtcSignalingLib.event.on('audioTrackLoaded', updateCanvas);
+                            webrtcSignalingLib.event.on('participantDisconnected', updateCanvas);
+                            webrtcSignalingLib.event.on('trackMuted', updateCanvas);
+                            webrtcSignalingLib.event.on('trackUnmuted', updateCanvas);
+                            webrtcSignalingLib.event.on('screenHidden', updateCanvas);
+                            webrtcSignalingLib.event.on('screenShown', updateCanvas);
+                            webrtcSignalingLib.event.on('audioMuted', updateCanvas);
+                            webrtcSignalingLib.event.on('audioUnmuted', updateCanvas);
         
                             _eventDispatcher.on('drawingStop', function () {
-                                webrtcRoomSignalingInstance.event.off('initNegotiationEnded', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('videoTrackLoaded', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('audioTrackLoaded', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('participantDisconnected', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('trackMuted', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('trackUnmuted', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('screenHidden', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('screenShown', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('audioMuted', updateCanvas);
-                                webrtcRoomSignalingInstance.event.off('audioUnmuted', updateCanvas);
+                                webrtcSignalingLib.event.off('initNegotiationEnded', updateCanvas);
+                                webrtcSignalingLib.event.off('videoTrackLoaded', updateCanvas);
+                                webrtcSignalingLib.event.off('audioTrackLoaded', updateCanvas);
+                                webrtcSignalingLib.event.off('participantDisconnected', updateCanvas);
+                                webrtcSignalingLib.event.off('trackMuted', updateCanvas);
+                                webrtcSignalingLib.event.off('trackUnmuted', updateCanvas);
+                                webrtcSignalingLib.event.off('screenHidden', updateCanvas);
+                                webrtcSignalingLib.event.off('screenShown', updateCanvas);
+                                webrtcSignalingLib.event.off('audioMuted', updateCanvas);
+                                webrtcSignalingLib.event.off('audioUnmuted', updateCanvas);
                             });
                         }
         
@@ -3300,7 +3366,7 @@
                                     function simpleGrid(count, size, perRow, rowsNum) {
                                         console.log('simpleGrid', size, count);
                                         var rects = [];
-                                        var layoutMargins = _options.liveStreaming && _options.liveStreaming.tiledLayoutMargins ? _options.liveStreaming.tiledLayoutMargins : 10;
+                                        var layoutMargins = getOptions().liveStreaming && getOptions().liveStreaming.tiledLayoutMargins ? getOptions().liveStreaming.tiledLayoutMargins : 10;
                                         var spaceBetween = parseInt(layoutMargins);
                                         console.log('simpleGrid spaceBetween', spaceBetween);
 
@@ -4241,7 +4307,7 @@
                         }
         
                         function addSource(newSource) {
-                            log('addSource audio', newSource, _options.liveStreaming)
+                            log('addSource audio', newSource, getOptions().liveStreaming)
                             
                             if (audioContext == null) {
                                 audioComposer.mix();
@@ -4275,7 +4341,7 @@
                             } else if(newSource.sourceType == 'audio') {
                                 var audio = document.createElement('audio');
                                 audio.muted = false;
-                                audio.loop = _options.liveStreaming && _options.liveStreaming.loopAudio ? _options.liveStreaming.loopAudio : true;
+                                audio.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopAudio ? getOptions().liveStreaming.loopAudio : true;
                                 audio.src = newSource.url;
                 
                                 document.body.appendChild(audio);
@@ -4294,7 +4360,7 @@
                                 gainNode.connect(analyserNode);
                                 analyserNode.connect(_dest);
                 
-                                if (_options.liveStreaming && _options.liveStreaming.localOutput) analyserNode.connect(audioContext.destination);
+                                if (getOptions().liveStreaming && getOptions().liveStreaming.localOutput) analyserNode.connect(audioContext.destination);
                                 audioSource.sourceNode = sourceNode;
                                 audioSource.gainNode = gainNode;
                                 audioSource.analyserNode = analyserNode;
@@ -4313,7 +4379,7 @@
                                 analyserNode.fftSize = 512;
                                 gainNode.connect(analyserNode);
                                 analyserNode.connect(_dest);
-                                if (_options.liveStreaming && _options.liveStreaming.localOutput && newSource.sourceType != 'videoInput') {
+                                if (getOptions().liveStreaming && getOptions().liveStreaming.localOutput && newSource.sourceType != 'videoInput') {
                                     analyserNode.connect(audioContext.destination);
                                 }
                                 newSource.audioSourceNode = source;
@@ -4435,27 +4501,37 @@
         
                             if(_canvasMediStream) _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
         
-                            if(_options.liveStreaming && _options.liveStreaming.sounds) {
-                                _webrtcSignalingLib.event.on('participantConnected', function (e) {
-                                    if (_canvasMediStream == null || _dest == null) return;
-        
-                                    var connectedAudio = new Audio(_options.sounds.participantConnected)
-                                    var audioSource = audioContext.createMediaElementSource(connectedAudio);
-                                    audioSource.connect(_dest);
-                                    connectedaudioContext.play();
-                                    //audioSource.disconnect(_dest);
-                                })
-        
-                                _webrtcSignalingLib.event.on('participantDisconnected', function (e) {
-                                    if (_canvasMediStream == null || _dest == null) return;
-                                    var disconnectedAudio = new Audio(_options.sounds.participantDisconnected)
-                                    var audioSource = audioContext
-                                        .createMediaElementSource(disconnectedAudio);
-                                    audioSource.connect(_dest);
-                                    disconnectedAudio.play();
-                                    //audioSource.disconnect(_dest);
-                                })
+                            function declareOrRefreshEventHandlers() {
+                                var webrtcSignalingLib = tool.webrtcSignalingLib;
+                                webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                                    tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                                    declareOrRefreshEventHandlers();
+                                });
+
+                                if(getOptions().liveStreaming && getOptions().liveStreaming.sounds) {
+                                    webrtcSignalingLib.event.on('participantConnected', function (e) {
+                                        if (_canvasMediStream == null || _dest == null) return;
+            
+                                        var connectedAudio = new Audio(getOptions().sounds.participantConnected)
+                                        var audioSource = audioContext.createMediaElementSource(connectedAudio);
+                                        audioSource.connect(_dest);
+                                        connectedaudioContext.play();
+                                        //audioSource.disconnect(_dest);
+                                    })
+            
+                                    webrtcSignalingLib.event.on('participantDisconnected', function (e) {
+                                        if (_canvasMediStream == null || _dest == null) return;
+                                        var disconnectedAudio = new Audio(getOptions().sounds.participantDisconnected)
+                                        var audioSource = audioContext
+                                            .createMediaElementSource(disconnectedAudio);
+                                        audioSource.connect(_dest);
+                                        disconnectedAudio.play();
+                                        //audioSource.disconnect(_dest);
+                                    })
+                                }
                             }
+
+                            declareOrRefreshEventHandlers();
                         }
         
                         function stop() {
@@ -4541,10 +4617,11 @@
                             captureStream();
                         }
         
-                        var isChrome = _localInfo.browserName && _localInfo.browserName.toLowerCase() == 'chrome';
+                        var localInfo = tool.webrtcSignalingLib.getLocalInfo();
+                        var isChrome = localInfo.browserName && localInfo.browserName.toLowerCase() == 'chrome';
         
                         var codecs = 'video/webm;codecs=vp8';
-                        log('captureStream isChrome',_localInfo, isChrome, !_isMobile);
+                        log('captureStream isChrome',localInfo, isChrome, !_isMobile);
         
                         //alert('mp4 ' + (MediaRecorder.isTypeSupported('video/mp4;codecs="vp8"')));
                         if (MediaRecorder.isTypeSupported('video/mp4')) {
@@ -4556,7 +4633,7 @@
                         }
                         log('captureStream codecs', codecs);
         
-                        if(_options.liveStreaming && _options.liveStreaming.useRecordRTCLibrary) {
+                        if(getOptions().liveStreaming && getOptions().liveStreaming.useRecordRTCLibrary) {
                             log('captureStream if1');
         
         
@@ -4597,7 +4674,7 @@
                         log('stopRecorder')
         
                         if(_mediaRecorder == null) return;
-                        if(_options.liveStreaming && _options.liveStreaming.useRecordRTCLibrary) {
+                        if(getOptions().liveStreaming && getOptions().liveStreaming.useRecordRTCLibrary) {
                             log('stopRecorder: RecordRTC')
         
                             _mediaRecorder.stopRecording(function () {
@@ -4648,6 +4725,47 @@
                         _composerIsActive = false;
 
                         _mediaRecorder = null;
+                    }
+
+                    /*
+                    An alternative timing loop, based on AudioContext's clock
+
+                    @arg callback : a callback function 
+                    with the audioContext's currentTime passed as unique argument
+                    @arg frequency : float in ms;
+                    @returns : a stop function
+
+                    */
+                    function audioTimerLoop(callback, frequency) {
+                        var freq = frequency / 1000;      // AudioContext time parameters are in seconds
+                        var aCtx = new AudioContext();
+                        // Chrome needs our oscillator node to be attached to the destination
+                        // So we create a silent Gain Node
+                        var silence = aCtx.createGain();
+                        silence.gain.value = 0;
+                        silence.connect(aCtx.destination);
+
+                        onOSCend();
+
+                        var stopped = false;       // A flag to know when we'll stop the loop
+                        function onOSCend() {
+                            var osc = aCtx.createOscillator();
+                            osc.onended = onOSCend; // so we can loop
+                            osc.connect(silence);
+                            osc.start(0); // start it now
+                            osc.stop(aCtx.currentTime + freq); // stop it next frame
+                            callback(aCtx.currentTime); // one frame is done
+                            if (stopped || tool.webrtcSignalingLib.state === 'disconnected') {  // user broke the loop
+                                osc.onended = function () {
+                                    aCtx.close(); // clear the audioContext
+                                    return;
+                                };
+                            }
+                        };
+                        // return a function to stop our loop
+                        return function () {
+                            stopped = true;
+                        };
                     }
         
                     function saveToFile(file, fileName) {
@@ -4782,7 +4900,7 @@
                             params = params.concat(args);
                             console.log.apply(console, params);
                         }
-                        _webrtcUserInterface.appDebug.logInfo(params);
+                        tool.webrtcUserInterface.appDebug.logInfo(params);
                     }
         
                     return {
@@ -4834,7 +4952,6 @@
             },
             refresh: function() {
                 var tool = this;
-                tool.canvasComposer.videoComposer.refreshEventListeners(tool.state.webrtcSignalingLib);
             }
         }
 

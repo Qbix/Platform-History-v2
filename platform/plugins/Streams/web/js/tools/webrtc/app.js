@@ -321,6 +321,7 @@ window.WebRTCRoomClient = function app(options){
             svg: null,
             context: null,
             script: null,
+            average: 0.0,
             instant: 0.0,
             slow: 0.0,
             clip: 0.0,
@@ -639,21 +640,30 @@ window.WebRTCRoomClient = function app(options){
                         var average = 0;
                         for(let i = 0; i < freqData.length; i++) {
                             average += freqData[i]
-                        }
+                        } 
                         average = average / freqData.length;
                         return average;
                     }
 
+                    //to update audio metric data audioTimerLoop is used as there are cases when we need this data while tab is in background
+                    //requestAnimationFrame is not fired in background
+                    function updateAudioInfoData() {
+                        var freqData = new Uint8Array(participant.soundMeter.analyser.frequencyBinCount);
+                        participant.soundMeter.analyser.getByteFrequencyData(freqData);
+                        participant.soundMeter.average = getAverage(freqData);                        
+                    }
+
+                    participant.soundMeter.stopUpdatingTimer = audioTimerLoop(function () {
+                        updateAudioInfoData(participant);
+                    }, 1000 / 60)
+
+                    //here requestAnimationFrame is used as we don't need animate SVG elements when tab is in background
                     function render(participant) {
                         participant.soundMeter.visualizationAnimation = requestAnimationFrame(function () {
                             render(participant)
                         });
 
-                        var freqData = new Uint8Array(participant.soundMeter.analyser.frequencyBinCount);
-                        participant.soundMeter.analyser.getByteFrequencyData(freqData);
-                        var average = participant.soundMeter.average = getAverage(freqData);
-
-
+                        var average = participant.soundMeter.average;
                         for (let key in participant.soundMeter.visualizations) {
                             if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
                                 var visualization = participant.soundMeter.visualizations[key];
@@ -6777,6 +6787,7 @@ window.WebRTCRoomClient = function app(options){
             }
         }
 
+        app.st = 'disconnected';
         if(socket != null) socket.disconnect();
         app.event.dispatch('disconnected');
         app.event.destroy();
@@ -6856,6 +6867,48 @@ window.WebRTCRoomClient = function app(options){
         }
     }
 
+    /*
+    An alternative timing loop, based on AudioContext's clock
+
+    @arg callback : a callback function 
+        with the audioContext's currentTime passed as unique argument
+    @arg frequency : float in ms;
+    @returns : a stop function
+
+    */
+    function audioTimerLoop(callback, frequency) {
+
+        var freq = frequency / 1000;      // AudioContext time parameters are in seconds
+        var aCtx = new AudioContext();
+        // Chrome needs our oscillator node to be attached to the destination
+        // So we create a silent Gain Node
+        var silence = aCtx.createGain();
+        silence.gain.value = 0;
+        silence.connect(aCtx.destination);
+
+        onOSCend();
+
+        var stopped = false;       // A flag to know when we'll stop the loop
+        function onOSCend() {
+            var osc = aCtx.createOscillator();
+            osc.onended = onOSCend; // so we can loop
+            osc.connect(silence);
+            osc.start(0); // start it now
+            osc.stop(aCtx.currentTime + freq); // stop it next frame
+            callback(aCtx.currentTime); // one frame is done
+            if (stopped || app.state === 'disconnected') {  // user broke the loop
+                osc.onended = function () {
+                    aCtx.close(); // clear the audioContext
+                    return;
+                };
+            }
+        };
+        // return a function to stop our loop
+        return function () {
+            stopped = true;
+        };
+    }
+
     function determineBrowser(ua) {
         var ua= navigator.userAgent, tem,
             M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
@@ -6870,7 +6923,7 @@ window.WebRTCRoomClient = function app(options){
         M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
         if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
         return M;
-    }
+    }    
 
     function log(text) {
         if(options.debug === false) return;
