@@ -37,7 +37,8 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	userId: Q.Users.loggedInUserId(),
 	chainId: null,
 	tokenAddresses: null,
-	template: "Assets/web3/balance/select"
+	template: "Assets/web3/balance/select",
+	onRefresh: new Q.Event()
 },
 
 { // methods go here
@@ -55,6 +56,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				}
 
 				Q.replace(tool.element, html);
+				Q.handle(state.onRefresh, tool);
 			});
 		});
 	},
@@ -73,7 +75,8 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 
 				results.push({
 					tokenAmount: parseFloat(amount),
-					tokenName: item.name
+					tokenName: item.name,
+					tokenAddress: item.token_address
 				});
 			});
 
@@ -89,8 +92,9 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		}
 
 		return {
-			amount: $selectedOption.attr("data-amount"),
-			name: $selectedOption.attr("data-name")
+			tokenAmount: $selectedOption.attr("data-amount"),
+			tokenName: $selectedOption.attr("data-name"),
+			tokenAddress: $selectedOption.attr("data-address")
 		};
 	},
 	Q: {
@@ -102,14 +106,14 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 
 Q.Template.set('Assets/web3/balance/list',
 `{{#each results}}
-	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}">{{this.tokenAmount}} {{this.tokenName}}</div>
+	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenAmount}} {{this.tokenName}}</div>
 {{/each}}`
 );
 
 Q.Template.set('Assets/web3/balance/select',
 `<select name="tokens" data-count="{{results.length}}">
 	{{#each results}}
-		<option data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}">{{this.tokenAmount}} {{this.tokenName}}</option>
+		<option data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenAmount}} {{this.tokenName}}</option>
 	{{/each}}
 </select>`
 );
