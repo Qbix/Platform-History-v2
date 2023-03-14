@@ -1933,11 +1933,9 @@
         
                                 var startRect = new DOMRect(0, 0, 0, 0);
                                 tracksToAdd[a].rect = startRect;
-        
-                                requestAnimationFrame(function(timestamp){
-                                    let starttime = timestamp || new Date().getTime()
-                                    moveit(timestamp, tracksToAdd[a].rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add', tracksToAdd[a]);
-                                })
+
+                                let starttime = performance.now();
+                                moveit(starttime, tracksToAdd[a].rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add', tracksToAdd[a]);
         
                                 addSource(tracksToAdd[a]);
         
@@ -1951,12 +1949,10 @@
         
                                 let rectToUpdate = new DOMRect(streamsToUpdate[r].rect.x, streamsToUpdate[r].rect.y, streamsToUpdate[r].rect.width, streamsToUpdate[r].rect.height);
                                 streamsToUpdate[r].rect = rectToUpdate;
-        
-                                requestAnimationFrame(function(timestamp){
-                                    let starttime = timestamp || new Date().getTime()
-                                    moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up', streamsToUpdate[r]);
-                                })
-        
+                                
+                                let starttime = performance.now();
+                                moveit(starttime, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up', streamsToUpdate[r]);
+                                
                                 c++;
                             }
         
@@ -1972,15 +1968,13 @@
                                     if(index == -1) {
                                         var startRect = new DOMRect(0, 0, 0, 0);
                                         videoTracksOfUserWhoShares[a].rect = startRect;
-                                        requestAnimationFrame(function (timestamp) {
-                                            let starttime = timestamp || new Date().getTime()
-                                            moveit(timestamp, videoTracksOfUserWhoShares[a].rect, rect, {
-                                                y: startRect.y,
-                                                x: startRect.x,
-                                                width: startRect.width,
-                                                height: startRect.height
-                                            }, 300, starttime, 'add', videoTracksOfUserWhoShares[a]);
-                                        })
+                                        let starttime = performance.now();
+                                        moveit(starttime, videoTracksOfUserWhoShares[a].rect, rect, {
+                                            y: startRect.y,
+                                            x: startRect.x,
+                                            width: startRect.width,
+                                            height: startRect.height
+                                        }, 300, starttime, 'add', videoTracksOfUserWhoShares[a]);
         
                                         log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares for screenSharingIsNew', videoTracksOfUserWhoShares[a])
         
@@ -1990,11 +1984,9 @@
                                         let rectToUpdate = new DOMRect(videoTracksOfUserWhoShares[a].rect.x, videoTracksOfUserWhoShares[a].rect.y, videoTracksOfUserWhoShares[a].rect.width, videoTracksOfUserWhoShares[a].rect.height);
                                         videoTracksOfUserWhoShares[a].rect = rectToUpdate;
         
-                                        requestAnimationFrame(function(timestamp){
-                                            let starttime = timestamp || new Date().getTime()
-                                            moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up', videoTracksOfUserWhoShares[a]);
-                                        })
-        
+                                        let starttime = performance.now();
+                                        moveit(starttime, rectToUpdate, rect, { y: rectToUpdate.y, x: rectToUpdate.x, width: rectToUpdate.width, height: rectToUpdate.height }, 300, starttime, 'up', videoTracksOfUserWhoShares[a]);
+
                                         log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares for !screenSharingIsNew index', index)
         
                                         if(a === 0) {
@@ -2020,26 +2012,27 @@
                         }
         
                         function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a, streamData){
-                            var timestamp = timestamp || new Date().getTime()
-                            var runtime = timestamp - starttime
-                            var progress = runtime / duration;
-                            progress = Math.min(progress, 1);
-        
-                            rectToUpdate.y = startPositionRect.y + (distRect.y - startPositionRect.y) * progress;
-                            rectToUpdate.x = startPositionRect.x + (distRect.x - startPositionRect.x) * progress;
-                            rectToUpdate.width = startPositionRect.width + (distRect.width - startPositionRect.width) * progress;
-                            rectToUpdate.height = startPositionRect.height + (distRect.height - startPositionRect.height) * progress;
-                            if (runtime < duration){
-                                requestAnimationFrame(function(timestamp){
-                                    moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a, streamData)
-                                })
-                            } else {
-                                rectToUpdate.y = distRect.y;
-                                rectToUpdate.x = distRect.x;
-                                rectToUpdate.width = distRect.width;
-                                rectToUpdate.height = distRect.height;
-                            }
-                            if(streamData.eventDispatcher != null) streamData.eventDispatcher.dispatch('rectChanged')
+                            var moveInterval = window.setWorkerInterval(function () {
+                                var timestamp = performance.now();
+                                var runtime = timestamp - starttime
+                                var progress = runtime / duration;
+                                progress = Math.min(progress, 1);
+
+                                rectToUpdate.y = startPositionRect.y + (distRect.y - startPositionRect.y) * progress;
+                                rectToUpdate.x = startPositionRect.x + (distRect.x - startPositionRect.x) * progress;
+                                rectToUpdate.width = startPositionRect.width + (distRect.width - startPositionRect.width) * progress;
+                                rectToUpdate.height = startPositionRect.height + (distRect.height - startPositionRect.height) * progress;
+
+                                if (runtime >= duration) {
+                                    rectToUpdate.y = distRect.y;
+                                    rectToUpdate.x = distRect.x;
+                                    rectToUpdate.width = distRect.width;
+                                    rectToUpdate.height = distRect.height;
+                                    clearWorkerInterval(moveInterval);
+                                }
+
+                                if (streamData.eventDispatcher != null) streamData.eventDispatcher.dispatch('rectChanged')
+                            }, 16);
                         }
         
                         function getEase(currentProgress, start, distance, steps) {
@@ -2993,6 +2986,8 @@
         
                         function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
                             var analyser = data.participant.soundMeter.analyser;
+                            //console.log('data.participant', analyser == null, data.participant.localMediaControlsState.mic == false)
+
                             if(analyser == null || data.participant.localMediaControlsState.mic == false) return;
                             /*var bufferLength = analyser.frequencyBinCount;
                             var dataArray = new Uint8Array(bufferLength);

@@ -653,9 +653,14 @@ window.WebRTCRoomClient = function app(options){
                         participant.soundMeter.average = getAverage(freqData);                        
                     }
 
-                    participant.soundMeter.stopUpdatingTimer = audioTimerLoop(function () {
+                    participant.soundMeter.updateAudioDataInterval = window.setWorkerInterval(function () {
                         updateAudioInfoData(participant);
-                    }, 1000 / 60)
+
+                        //console.log('updateAudioInfoData', participant.sid)
+                        /*if(app.state == 'disconnected') {
+                            window.clearWorkerInterval(participant.soundMeter.updateAudioDataInterval);
+                        }*/
+                    }, 16);
 
                     //here requestAnimationFrame is used as we don't need animate SVG elements when tab is in background
                     function render(participant) {
@@ -1236,16 +1241,25 @@ window.WebRTCRoomClient = function app(options){
                 removeCommonVisualization();
                 for(let p = roomParticipants.length - 1; p >= 0; p--){
                     if(roomParticipants[p] == localParticipant) {
-                        if(!isRoomSwitch && roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
-
-                        if(!isRoomSwitch && roomParticipants[p].soundMeter.visualizationAnimation) {
-                            cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                        if(!isRoomSwitch) {
+                            if(roomParticipants[p].soundMeter.source != null) {
+                                roomParticipants[p].soundMeter.source.disconnect();
+                            }
+                            if (roomParticipants[p].soundMeter.visualizationAnimation) {
+                                cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                            }
+                            if (roomParticipants[p].soundMeter.updateAudioDataInterval) {
+                                window.clearWorkerInterval(roomParticipants[p].soundMeter.updateAudioDataInterval);
+                            }
                         }
                     } else {
                         if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
                         if(roomParticipants[p].soundMeter.visualizationAnimation) {
                             cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                        }
+                        if (roomParticipants[p].soundMeter.updateAudioDataInterval) {
+                            window.clearWorkerInterval(roomParticipants[p].soundMeter.updateAudioDataInterval);
                         }
                     }
 
@@ -2567,8 +2581,14 @@ window.WebRTCRoomClient = function app(options){
             } else if(data.type == 'online') {
                 //log('processDataTrackMessage online')
 
-                if(data.content.micIsEnabled != null) participant.remoteMicIsEnabled = data.content.micIsEnabled;
-                if(data.content.cameraIsEnabled != null) participant.remoteCameraIsEnabled = data.content.cameraIsEnabled;
+                if(data.content.micIsEnabled != null) {
+                    participant.remoteMicIsEnabled = data.content.micIsEnabled;
+                    participant.localMediaControlsState.mic = data.content.micIsEnabled;
+                }
+                if(data.content.cameraIsEnabled != null) {
+                    participant.remoteCameraIsEnabled = data.content.cameraIsEnabled;
+                    participant.localMediaControlsState.camera = data.content.micIsEnabled;
+                }
                 if(participant.online == false)	{
                     participant.online = true;
                     if(performance.now() - participant.latestOnlineTime < 5000) {
@@ -2691,10 +2711,16 @@ window.WebRTCRoomClient = function app(options){
             if(participant.online == false) return;
 
             //participant.remove();
+            if(participant.soundMeter.updateAudioDataInterval) {
+                window.clearWorkerInterval(participant.soundMeter.updateAudioDataInterval);
+            }
+
             if(participant.soundMeter.visualizationAnimation) {
                 cancelAnimationFrame(participant.soundMeter.visualizationAnimation);
             }
-            if(participant.soundMeter.source != null) participant.soundMeter.source.disconnect();
+            if(participant.soundMeter.source != null) {
+                participant.soundMeter.source.disconnect();
+            }
 
 
             participant.online = false;
@@ -6756,10 +6782,6 @@ window.WebRTCRoomClient = function app(options){
 
     app.disconnect = function (switchRoom) {
         console.log('app.disconnect', switchRoom)
-        if(app.checkOnlineStatusInterval != null) {
-            clearInterval(app.checkOnlineStatusInterval);
-            app.checkOnlineStatusInterval = null;
-        }
         if(app.sendOnlineStatusInterval != null) {
             clearInterval(app.sendOnlineStatusInterval);
             app.sendOnlineStatusInterval = null;
@@ -6787,7 +6809,6 @@ window.WebRTCRoomClient = function app(options){
             }
         }
 
-        app.st = 'disconnected';
         if(socket != null) socket.disconnect();
         app.event.dispatch('disconnected');
         app.event.destroy();
