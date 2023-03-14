@@ -175,7 +175,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				});
 				break;
 			case 'select':
-				if (state.editable && (stream && stream.testWriteLevel('suggest'))) {
+				if (state.editable && (stream && stream.testWriteLevel('edit'))) {
 					if (!ipo.options) {
 						throw new Q.Error("Streams/inplace tool: inplace.options must be provided");
 					}
@@ -193,7 +193,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				throw new Q.Error("Streams/inplace tool: inplaceType must be 'textarea', 'text' or 'select'");
 		}
 
-		if (state.editable === false || !(stream && stream.testWriteLevel('suggest'))) {
+		if (state.editable === false || !(stream && stream.testWriteLevel('edit'))) {
 			var span = document.createElement('span');
 			span.setAttribute('class', 'Q_inplace_tool_container');
 			var div = document.createElement('div');
