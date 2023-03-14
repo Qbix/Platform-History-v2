@@ -52,7 +52,7 @@
 			directions: 'Create an account, or log in.',
 			directionsNoRegister: 'Log in if you have an account.',
 			explanation: null,
-			goButton: "&#11157",
+			goButton: "&#10132",
 			passphrase: 'Enter your pass phrase:',
 			loginButton: "Get Started",
 			registerButton: "Get Started",
