@@ -227,7 +227,6 @@ Users.appInfo = function (platform, appId)
 
 function Users_request_handler(req, res, next) {
 	var parsed = req.body;
-	console.log('parsed', parsed);
     if (!parsed || !parsed['Q/method']) {
 		return next();
 	}
@@ -240,7 +239,6 @@ function Users_request_handler(req, res, next) {
 			if (userId && sessionId) {
 				var clients = Users.clients[userId];
 				for (var cid in clients) {
-					console.log('Users/logout', clients[cid].sessionId);
 					if (clients[cid].sessionId === sessionId) {
 						clients[cid].disconnect();
 					}
@@ -275,7 +273,6 @@ function Users_request_handler(req, res, next) {
 		case 'Users/addEventListener':
 			if (userId && sessionId) {
 				var clients = Users.clients[userId];
-				console.log('clients num', Object.keys(clients), sessionId)
 
 				var parseCookie = function (str) {
 					return str.split(';')
