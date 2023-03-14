@@ -1091,15 +1091,21 @@
 				 * @param {object} [options]
 				 * @param {string} [options.contractAddress] - if defined override default chain contract address
 				 * @param {string} [options.abiPath] - if defined override default abi path
+				 * @param {function} [callback]
 				 * @return {Q.Promise} instead of callback
 				 */
-				getContract: function (chainId, options) {
+				getContract: function (chainId, options, callback) {
 					var address = Q.getObject("contractAddress", options) || chainId.contract;
 					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
 					return Q.Users.Web3.getContract(abiPath, {
 						chainId: chainId,
-						address: address
-					}).then(function (err, contract) {
+						contractAddress: address,
+						readOnly: !!Q.getObject("readOnly", options)
+					}, function (err, contract) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
+						}
+
 						var events = {
 							TokenRemovedFromSale: "onTokenRemovedFromSale",
 							TokenPutOnSale: "onTokenAddedToSale",
@@ -1118,7 +1124,8 @@
 								}
 							});
 						});
-						return contract;
+
+						Q.handle(callback, null, [null, contract]);
 					});
 				},
 				/**
@@ -1144,17 +1151,22 @@
 				 * @param {String} address
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} [options] - some options pass to getContract method
 				 */
-				balanceOf: function (address, chain, callback) {
-					Assets.NFT.Web3.getContract(chain, function (err, contract) {
+				balanceOf: function (address, chain, callback, options) {
+					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
 
-						contract.balanceOf(address).then(function (tokensAmount) {
-							Q.handle(callback, null, [null, tokensAmount]);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
+						Promise.all([contract.balanceOf(address), contract.name()]).then(function ([tokenAmount, tokenName]) {
+							if (Q.getObject("_isBigNumber", tokenAmount)) {
+								tokenAmount = ethers.utils.formatUnits(tokenAmount);
+							}
+
+							Q.handle(callback, null, [null, tokenAmount, tokenName, contract]);
+						}).catch(function (e) {
+							Q.handle(callback, null, [e]);
 						});
 					});
 				},
@@ -1165,9 +1177,10 @@
 				 * @param {String} tokenId NFT tokenId
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} options
 				 */
-				getAuthor: function (tokenId, chain, callback) {
-					Assets.NFT.Web3.getContract(chain, function (err, contract) {
+				getAuthor: function (tokenId, chain, callback, options) {
+					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1186,9 +1199,10 @@
 				 * @param {String} tokenId NFT tokenId
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} options
 				 */
-				getOwner: function (tokenId, chain, callback) {
-					Assets.NFT.Web3.getContract(chain, function (err, contract) {
+				getOwner: function (tokenId, chain, callback, options) {
+					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}),function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1207,9 +1221,10 @@
 				 * @param {String} tokenId NFT tokenId
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} options
 				 */
-				commissionInfo: function (tokenId, chain, callback) {
-					Assets.NFT.Web3.getContract(chain, function (err, contract) {
+				commissionInfo: function (tokenId, chain, callback, options) {
+					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1228,9 +1243,10 @@
 				 * @param {String} tokenId NFT tokenId
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} options
 				 */
-				saleInfo: function (tokenId, chain, callback) {
-					Assets.NFT.Web3.getContract(chain, function (err, contract) {
+				saleInfo: function (tokenId, chain, callback, options) {
+					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1351,11 +1367,7 @@
 				 */
 				isSuccessfulTransaction: function (receipt) {
 					var status = Q.getObject("status", receipt);
-					if (status === '0x1' || status === 1) {
-						return true;
-					}
-
-					return false;
+					return status === '0x1' || status === 1;
 				}
 			},
 
@@ -1366,6 +1378,63 @@
 			 */
 			seriesIdFromTokenId(tokenId) {
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
+			}
+		},
+		Currency: {
+			Web3: {
+				/**
+				 * Get NFT contract instance
+				 * @method getContract
+				 * @param {Object} chainId
+				 * @param {object} [options]
+				 * @param {string} [options.contractAddress] - if defined override default chain contract address
+				 * @param {string} [options.abiPath] - if defined override default abi path
+				 * @param {function} [callback]
+				 * @return {Q.Promise} instead of callback
+				 */
+				getContract: function (chainId, options, callback) {
+					var address = Q.getObject("contractAddress", options) || chainId.contract;
+					var abiPath = Q.getObject("abiPath", options);
+
+					return Q.Users.Web3.getContract(abiPath, {
+						chainId: chainId,
+						contractAddress: address,
+						readOnly: !!Q.getObject("readOnly", options)
+					}, function (err, contract) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
+						}
+
+						Q.handle(callback, null, [null, contract]);
+					});
+				},
+				/**
+				 * Get amount of tokens by wallet and chain
+				 * @method balanceOf
+				 * @param {String} userId - if null logged in user Id used
+				 * @param {String} chainId
+				 * @param {function} callback
+				 * @param {object} [options] - some options pass to getContract method
+				 * @param {string} [options.tokenAddress] - filter tokens with this contract address
+				 */
+				balanceOf: function (userId, chainId, callback, options) {
+					var tokenAddress = Q.getObject("tokenAddress", options);
+
+					Q.req("Assets/currencies", "cryptoBalance", function (err, response) {
+						if (err) {
+							return;
+						}
+
+						var balance = response.slots.cryptoBalance;
+						Q.handle(callback, null, [null, balance]);
+					}, {
+						fields: {
+							userId: userId || Q.Users.loggedInUserId(),
+							chainId: chainId,
+							tokenAddress: tokenAddress
+						}
+					});
+				}
 			}
 		},
 		Web3: {
@@ -1502,8 +1571,11 @@
 		    css: "{{Assets}}/css/tools/NFT/locked.css"
 		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
-		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js"
-
+		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js",
+		"Assets/web3/balance": {
+			js: "{{Assets}}/js/tools/web3/balance.js",
+			css: "{{Assets}}/css/tools/web3/balance.css"
+		}
 	});
     
 	Q.onInit.add(function () {

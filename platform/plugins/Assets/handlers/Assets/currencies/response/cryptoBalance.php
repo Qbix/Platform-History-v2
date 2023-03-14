@@ -1,8 +1,11 @@
 <?php
+require_once Q_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+
 function Assets_currencies_response_cryptoBalance($params) {
 	$req = array_merge($_REQUEST, $params);
-	Q_Valid::requireFields(array("userId"), $req, true);
-
+	Q_Valid::requireFields(array("userId", "chainId"), $req, true);
+	$chainId = $req["chainId"];
+	$tokenAddress = $req["tokenAddress"];
 	$user = Users::fetch($req["userId"], true);
 	$loggedInUser = Users::loggedInUser(true);
 
@@ -12,45 +15,29 @@ function Assets_currencies_response_cryptoBalance($params) {
 		throw new Exception("This user denied access to his wallet");
 	}
 
-	$address = $loggedInUser->getXid("web3_all");
-	if (empty($address)) {
+	$walletAddress = $loggedInUser->getXid("web3_all");
+	if (empty($walletAddress)) {
 		throw new Exception("You have no wallet registered");
 	}
 
-	$address = "0x32Be343B94f860124dC4fEe278FDCBD38C102D88";
-	$apiKey = Q_Config::expect("Assets", "ethplorer", "apiKey");
-	$apiEndPoint = Q::interpolate(Q_Config::expect("Assets", "ethplorer", "endPoint"), compact("address", "apiKey"));
+	$apiKey = Q_Config::expect("Assets", "moralis", "apiKey");
+	$apiEndPoint = Q::interpolate(Q_Config::expect("Assets", "moralis", "balanceEndPoint"), compact("walletAddress", "chainId"));
+	if ($tokenAddress) {
+		$apiEndPoint .= '&token_addresses='.$tokenAddress;
+	}
+	$client = new \GuzzleHttp\Client();
+	$response = $client->request('GET', $apiEndPoint, array(
+		'headers' => array (
+			'Accept' => 'application/json',
+			'X-API-Key' => $apiKey
+		)
+	));
 
-	$res = array();
-	$data = Q::json_decode(Q_Utils::get($apiEndPoint), true);
-	$eth = Q::ifset($data, "ETH", null);
-	if ($eth && $eth["balance"]) {
-		$res["ETH"] = array(
-			"address" => "0x0000000000000000000000000000000000000000",
-			"name" => "Ethereum",
-			"symbol" => "ETH",
-			"decimals" => 18,
-			"balance" => $eth["balance"]
-		);
-	}
-	$tokens = Q::ifset($data, "tokens", array());
-	foreach ($tokens as $token) {
-		$tokenInfo = Q::ifset($token, "tokenInfo", array());
-		if (empty($token["balance"]) || empty($tokenInfo["symbol"])) {
-			continue;
-		}
-		$res[$tokenInfo["symbol"]] = array(
-			"address" => $tokenInfo["address"],
-			"name" => $tokenInfo["name"],
-			"symbol" => $tokenInfo["symbol"],
-			"decimals" => $tokenInfo["decimals"],
-			"balance" => $token["balance"]
-		);
-	}
+	$res = $response->getBody()->getContents();
 
 	if (empty($res)) {
 		throw new Exception("You have no tokens");
 	}
 
-	return $res;
+	return json_decode($res);
 }

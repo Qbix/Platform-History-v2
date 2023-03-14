@@ -243,12 +243,12 @@ function _request(method, uri, data /* '' */, query /* null */, user_agent /* Mo
 		url = uri[0];
 		if (!!uri[1]) ip = uri[1];
 	} else url = uri;
-	var parts = parse_url(url);
+	var parts = new URL(url);
 	var host = parts.host;
 	if (!ip) ip = host;
-	var request_uri = parts.path;
+	var request_uri = parts.pathname;
 	var port = parts.port ? ":"+parts.port : '';
-	var server = parts.scheme+"://"+ip+port+request_uri;
+	var server = parts.protocol+"://"+ip+port+request_uri;
 
 	if (!header) header = {
 		'user-agent': user_agent,

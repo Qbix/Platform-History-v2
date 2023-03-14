@@ -12061,9 +12061,11 @@ function _touchScrollingHandler(event) {
 		);
 		var sh = p.scrollHeight;
 		var st = p.scrollTop;
+		var sl = p.scrollLeft;
 		if (p.tagName === 'HTML') {
 			sh = Math.max(sh, document.body.scrollHeight);
 			st = Math.max(st, document.body.scrollTop);
+			sl = Math.max(sl, document.body.scrollLeft);
 		}
 		var hiddenHeight = sh - Math.min(
 			p.offsetHeight, Q.Visual.windowHeight()
@@ -12076,8 +12078,8 @@ function _touchScrollingHandler(event) {
 			&& (Q.Visual.movement.positions.length == 1)
 			&& (pos = Q.Pointer.movement.positions[0])) {
 				var sy = Q.Pointer.getY(event) - Q.Visual.scrollTop();
-				if ((sy > pos.y && q.scrollTop == 0)
-				|| (sy < pos.y && q.scrollTop >= hiddenHeight)) {
+				if ((sy > pos.y && st == 0)
+				|| (sy < pos.y && st >= hiddenHeight)) {
 					continue;
 				}
 			}
@@ -12090,8 +12092,8 @@ function _touchScrollingHandler(event) {
 			&& (Q.Pointer.movement.positions.length == 1)
 			&& (pos = Q.Pointer.movement.positions[0])) {
 				var sx = Q.Pointer.getX(event) - Q.Visual.scrollLeft();
-				if ((sx > pos.x && q.scrollLeft == 0)
-				|| (sx < pos.x && q.scrollLeft >= hiddenWidth)) {
+				if ((sx > pos.x && sl == 0)
+				|| (sx < pos.x && sl >= hiddenWidth)) {
 					continue;
 				}
 			}
@@ -13778,7 +13780,7 @@ Q.Dialogs = {
 	 * Closes a specific dialog and removes it from top of internal dialog stack.
 	 * @static
      * @method close
-	 * @param {Boolean|Number} dialog You can pass an element here, or index in the dialog stack
+	 * @param {Element|Number} dialog You can pass an element here, or index in the dialog stack
 	 * @return {HTMLElement|null} The HTML element of the dialog that was just closed, or null if not found.
 	 */
 	close: function(dialog) {
@@ -13786,15 +13788,13 @@ Q.Dialogs = {
 		if (Q.isInteger(dialog)) {
 			index = dialog;
 			dialog = this.dialogs[index];
-		} else {
-			if (dialog instanceof Element) {
-				Q.each(dialogs, function (i) {
-					if (this === dialog) {
-						index = i;
-						return false;
-					}
-				});
-			}
+		} else if (dialog instanceof Element) {
+			Q.each(this.dialogs, function (i, d) {
+				if (d[0] === dialog) {
+					index = i;
+					return false;
+				}
+			});
 		}
 		if (index >= 0) {
 			this.dialogs.splice(index, 1);
