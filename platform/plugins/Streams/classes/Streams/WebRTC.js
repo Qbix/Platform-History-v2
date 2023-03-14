@@ -100,7 +100,7 @@ WebRTC.listen = function () {
                 var localRecordDir = appDir + 'files/' + appName + '/uploads/Streams/recordings/' + roomId + '/' + roomStartTime + '/' + userId + '/' + userConnectedTime;
                 if (!fs.existsSync(localRecordDir)) {
                     var oldmask = process.umask(0);
-                    fs.mkdirSync(localRecordDir, { recursive: true, mode: '0777' });
+                    mkdirp(localRecordDir);
                     process.umask(oldmask);
                 }
                 let filePath = localRecordDir + '/' + +Date.now() + '.mp4';
@@ -117,6 +117,13 @@ WebRTC.listen = function () {
                 postStartMessageAndBeginLivestreaming();
             } else {
                 initFFMpegProcess();
+            }
+
+            function mkdirp(dir) {
+                if (fs.existsSync(dir)) { return true }
+                const dirname = path.dirname(dir)
+                mkdirp(dirname);
+                fs.mkdirSync(dir);
             }
 
             function postStartMessageAndBeginLivestreaming () {
