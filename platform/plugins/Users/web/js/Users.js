@@ -1941,7 +1941,8 @@
 							if (!result) {
 								_onCancel();
 							} else {
-								_authenticate('web3');
+								// do nothing, since we already executed this:
+								// _authenticate('web3');
 							}
 						});
 						return false;
@@ -4278,7 +4279,7 @@
 			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			var _prevMetaTitle = $('meta[name="title"]').attr('content');
-			$('meta[name="title"').attr('content', Users.communityName);
+			$('meta[name="title"]').attr('content', Users.communityName);
 			var _prevOGTitle = $('meta[property="og:title"]').attr('content');
 			$('meta[property="og:title"]').attr('content', Users.communityName);
 			Web3.connect(function (err, provider) {
