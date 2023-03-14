@@ -2134,9 +2134,8 @@
 		step1_form.empty().append(
 			$identifierInput, $identifierTypeInput, $button
 		).submit(function (event) {
-			var $identifier = $('#Users_setIdentifier_identifier')
-			var h = $identifier.outerHeight() - 5;
-			$identifier.css({
+			var h = $identifierInput.outerHeight() - 5;
+			$identifierInput.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
 				'background-repeat': 'no-repeat',
 				'background-position': 'right center',
@@ -4380,10 +4379,10 @@
 					document.title = _prevDocumentTitle;
 				}
 				if (_prevMetaTitle) {
-					$('meta[name="title"').attr('content', _prevMetaTitle)
+					$('meta[name="title"]').attr('content', _prevMetaTitle)
 				}
 				if (_prevOGTitle) {
-					$('meta[property="og:title"').attr('content', _prevOGTitle)
+					$('meta[property="og:title"]').attr('content', _prevOGTitle)
 				}
 			}
 		},
