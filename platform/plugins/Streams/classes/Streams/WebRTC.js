@@ -80,7 +80,7 @@ WebRTC.listen = function () {
         var _localMediaStream = null;
         var _chunksNum = 0;
 
-        if ( socket.handshake.query.rtmp ||  socket.handshake.query.recording ) {
+        if ( socket.handshake.query.rtmp || socket.handshake.query.recording ) {
             if(_debug) console.log('made sockets connection (LIVE STREAMING)', socket.id);
             var usersInfo = JSON.parse(socket.handshake.query.localInfo);
             var rtmpUrlsData = socket.handshake.query.rtmp ? JSON.parse( socket.handshake.query.rtmp) : [];
@@ -270,11 +270,19 @@ WebRTC.listen = function () {
                             '-f', 'tee', outputEndpoints
                         ]);
                     } else {
-                        params = params.concat([
-                            '-flvflags', 'no_duration_filesize',
-                            '-r', '24',
-                            '-f', 'flv', rtmpUrls[0]
-                        ]);
+                        if(socket.handshake.query.recording) {
+                            params = params.concat([
+                                '-r', '24',
+                                '-f', 'mp4', rtmpUrls[0]
+                            ]);
+                        } else {
+                            params = params.concat([
+                                '-flvflags', 'no_duration_filesize',
+                                '-r', '24',
+                                '-f', 'flv', rtmpUrls[0]
+                            ]);
+                        }
+                        
                     }
     
                     console.log('ffmpeg params ', params)
