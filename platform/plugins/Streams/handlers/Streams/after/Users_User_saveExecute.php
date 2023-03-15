@@ -128,7 +128,6 @@ function Streams_after_Users_User_saveExecute($params)
 		}
 	}
 	
-	$jo = array();
 	$so = array();
 	$streamsToJoin = array();
 	$streamsToSubscribe = array();
@@ -263,7 +262,7 @@ function Streams_after_Users_User_saveExecute($params)
 
 		$names = Q_Config::get('Streams', 'onUpdate', 'Users_User', array());
 		foreach ($modifiedFields as $field => $value) {
-			if (!in_array($field, $names)) {
+			if (!in_array($field, $names) && !Q::ifset($names, $field, null)) {
 				continue;
 			}
 
@@ -272,9 +271,10 @@ function Streams_after_Users_User_saveExecute($params)
 				continue;
 			}
 
+			$name = $names[$field];
 			if (is_array($name)) {
-				foreach ($name as $xidName) {
-					$stream = Streams_Stream::fetch($user->id, $user->id, $xidName);
+				foreach ($name as $streamName) {
+					$stream = Streams_Stream::fetch($user->id, $user->id, $streamName);
 					if (!$stream) {
 						continue;
 					}
@@ -284,7 +284,7 @@ function Streams_after_Users_User_saveExecute($params)
 						$json = json_decode($value, true);
 					} catch (Exception $e) {}
 
-					if ($xidName == "Streams/user/xid/web3") {
+					if ($streamName == "Streams/user/xid/web3") {
 						$stream->content = Q::ifset($json, "web3_all", null);
 					}
 				}
