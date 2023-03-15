@@ -10,7 +10,7 @@
 <p>
 	<?php echo Q::text($charged['HasBeenCharged'], array(
 		$user->displayName(), $displayAmount, $description, $publisher->displayName()
-	)) ?>>
+	)) ?>
 </p>
 
 <p>
