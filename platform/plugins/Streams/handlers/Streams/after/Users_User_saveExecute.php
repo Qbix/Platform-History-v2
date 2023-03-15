@@ -287,6 +287,8 @@ function Streams_after_Users_User_saveExecute($params)
 					if ($streamName == "Streams/user/xid/web3") {
 						$stream->content = Q::ifset($json, "web3_all", null);
 					}
+
+					Streams::$beingSavedQuery = $stream->changed($user->id);
 				}
 			} else {
 				$stream = isset(Streams::$beingSaved[$field])
@@ -306,9 +308,8 @@ function Streams_after_Users_User_saveExecute($params)
 					ksort($sizes);
 					$stream->setAttribute('sizes', $sizes);
 				}
+				Streams::$beingSavedQuery = $stream->changed($user->id);
 			}
-
-			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}
 	}
 
