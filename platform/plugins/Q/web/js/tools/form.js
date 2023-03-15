@@ -41,7 +41,7 @@ Q.Tool.define('Q/form', function(options) {
 	contentElements: {},
 	loader: function (url, method, form, slots, callback, options) {
 		if (method.toUpperCase() === 'GET') {
-			Q.request(params, url, slots, callback, options);
+			Q.request(url, slots, callback, options);
 		} else {
 			Q.request(url, slots, callback, Q.extend(options, {
 				method: method,
