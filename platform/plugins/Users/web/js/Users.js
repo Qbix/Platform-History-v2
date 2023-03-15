@@ -506,9 +506,7 @@
 				fields['Q.Users.facebook.authResponse'] = ar;
 			} else if (platform === 'web3') {
 				Q.extend(fields, Web3.authResponse);
-				if (Q.getObject(options, "updateXid")) {
-					fields.updateXid = options.updateXid;
-				}
+				fields.updateXid = !!Q.getObject("updateXid", options);
 			}
 			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
 		}
@@ -2125,6 +2123,8 @@
 			.on(Q.Pointer.fastclick, function () {
 				Q.Users.Web3.login(null, function (user) {
 					setIdentifier_callback(null, user);
+				}, null, {
+					updateXid: true
 				});
 				return false;
 			})
@@ -4274,7 +4274,7 @@
 			});
 		},
 
-		login: function (signedCallback, authenticatedCallback, cancelCallback) {
+		login: function (signedCallback, authenticatedCallback, cancelCallback, options) {
 			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			var _prevMetaTitle = $('meta[name="title"]').attr('content');
@@ -4366,7 +4366,7 @@
 							priv.login_onConnect && priv.login_onConnect(user);
 						}, function () {
 							priv.login_onCancel && priv.login_onCancel();
-						}, {"prompt": false});
+						}, Q.extend({"prompt": false}, options));
 					}
 				}).catch(_cancel);
 			});
