@@ -14,8 +14,6 @@
 .Streams_invite_modern_dialog_buttons svg {
 	height: 55px;
 	width: auto;
-	fill: black;
-	fill: var(--html-color);
 }
 .Streams_invite_option {
 	flex-grow: 1;
