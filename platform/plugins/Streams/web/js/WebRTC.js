@@ -148,7 +148,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         overrideDefaultOptions(options);
 
         var publicAppInterface;
-        var WebRTCconference;
+        var webrtcSignalingLib;
 
         var _roomStartTime = null;
         var _controls = null;
@@ -368,7 +368,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     var startTimeDate = roomItem.dataset.startTimeDate;
                     var existingList = roomItem.querySelector('UL')
                     var participantsListEl = existingList != null ? existingList : document.createElement('UL');
-                    var localParticipant = WebRTCconference.localParticipant();
+                    var localParticipant = webrtcSignalingLib.localParticipant();
 
                     participantsListEl.className = 'Streams_webrtc_debug_participant_list';
                     loadParticipantList(roomName, startTimeDate, function (participantsList) {
@@ -397,7 +397,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 function checkIfUserOnline(userId, connectionTime) {
-                    var participants = WebRTCconference.roomParticipants();
+                    var participants = webrtcSignalingLib.roomParticipants();
                     for (var i in participants) {
                         if(participants[i].identity == userId + '\t' + connectionTime) return true;
                     }
@@ -829,7 +829,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             layoutEvents.on('layoutRendered', function (e) {
 
                 if(e.viewMode == 'audio') {
-                    WebRTCconference.mediaManager.audioVisualization.buildCommonVisualization({
+                    webrtcSignalingLib.mediaManager.audioVisualization.buildCommonVisualization({
                         name: 'common',
                         type: 'bars',
                         element: _roomsMedia
@@ -845,25 +845,25 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _controlsTool.updateViewModeBtns();
                     }
                     unlockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
+                    webrtcSignalingLib.mediaManager.audioVisualization.removeCommonVisualization();
                 } else if(e.viewMode == 'screenSharing' || e.viewMode == 'fullScreen') {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons()
                     resetAudioVisualization();
                     lockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
+                    webrtcSignalingLib.mediaManager.audioVisualization.removeCommonVisualization();
                 } else if(e.viewMode == 'squaresGrid') {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons()
                     resetAudioVisualization();
                     lockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
+                    webrtcSignalingLib.mediaManager.audioVisualization.removeCommonVisualization();
                 } else {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons();
                     resetAudioVisualization();
                     unlockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
+                    webrtcSignalingLib.mediaManager.audioVisualization.removeCommonVisualization();
                 }
             })
 
@@ -1074,7 +1074,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(!presentInScreensList) roomScreens.push(screen);
                     log('screen.show: after ', roomScreens.length);
 
-                    WebRTCconference.event.dispatch('screenShown', screen);
+                    webrtcSignalingLib.event.dispatch('screenShown', screen);
 
                     if(screen.activeScreenType == 'video') {
                         this.showAudioVisualization('video');
@@ -1088,7 +1088,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(screen.activeScreenType == 'audio') {
                         if(screen.audioScreen.avatarCon != null && screen.participant.soundMeter.visualizations['participantScreenAudio'] == null) {
 
-                            WebRTCconference.mediaManager.audioVisualization.build({
+                            webrtcSignalingLib.mediaManager.audioVisualization.build({
                                 name: 'participantScreenAudio',
                                 type: 'circles',
                                 participant: screen.participant,
@@ -1097,7 +1097,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                     } else if (screen.activeScreenType == 'video') {
                         if(screen.videoScreen.soundEl != null && screen.participant.soundMeter.visualizations['participantScreenVideo'] == null) {
-                            WebRTCconference.mediaManager.audioVisualization.build({
+                            webrtcSignalingLib.mediaManager.audioVisualization.build({
                                 name: 'participantScreenVideo',
                                 participant: screen.participant,
                                 element: screen.videoScreen.soundEl
@@ -1149,12 +1149,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @method updateLayout
              */
             function updateLayout() {
-                if(WebRTCconference == null) return;
+                if(webrtcSignalingLib == null) return;
                 log('updateLayout, current mode is ', viewMode);
 
                 log('updateLayout, roomScreens', roomScreens.length);
 
-                var roomParticipants = WebRTCconference.roomParticipants();
+                var roomParticipants = webrtcSignalingLib.roomParticipants();
                 var i, participantScreen;
                 for(i = 0; participantScreen = roomScreens[i]; i++) {
                     if(participantScreen.isLocal) updateLocalScreenClasses(participantScreen);
@@ -1251,7 +1251,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             /**
              * Create participant's screen element that contains participant's video and is rendered one the page
              * @method createRoomScreen
-             * @param {Object} [screen] screen object generated by WebRTCconference (WebRTC library)
+             * @param {Object} [screen] screen object generated by webrtcSignalingLib (WebRTC library)
              * @return {HTMLElement}
              */
             function createRoomScreen(participant) {
@@ -1321,7 +1321,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             /**
              * Create participant's screen element that contains participant's video and is rendered one the page
              * @method createRoomScreen
-             * @param {Object} [screen] screen object generated by WebRTCconference (WebRTC library)
+             * @param {Object} [screen] screen object generated by webrtcSignalingLib (WebRTC library)
              * @return {HTMLElement}
              */
             function createVideoScreen(screen) {
@@ -1378,7 +1378,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 ro.observe(screen.videoScreen.videoCon)
 
                 if(screen.participant.soundMeter.visualizations['participantScreenVideo'] == null) {
-                    WebRTCconference.mediaManager.audioVisualization.build({
+                    webrtcSignalingLib.mediaManager.audioVisualization.build({
                         name: 'participantScreenVideo',
                         participant: screen.participant,
                         element: participantVoice
@@ -1438,7 +1438,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             /**
              * Create participant's screen element that contains participant's video and is rendered one the page
              * @method createRoomScreen
-             * @param {Object} [screen] screen object generated by WebRTCconference (WebRTC library)
+             * @param {Object} [screen] screen object generated by webrtcSignalingLib (WebRTC library)
              * @return {HTMLElement}
              */
             function createAudioScreen(screen) {
@@ -1461,7 +1461,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var userId = screen.participant.identity != null ? screen.participant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 
                 if(screen.participant.soundMeter.visualizations['participantScreenAudio'] == null) {
-                    WebRTCconference.mediaManager.audioVisualization.build({
+                    webrtcSignalingLib.mediaManager.audioVisualization.build({
                         name: 'participantScreenAudio',
                         participant: screen.participant,
                         type: 'circles',
@@ -1512,7 +1512,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                 /*if(screen.participant.soundMeter.visualizations['participantScreen'] == null) {
-                    WebRTCconference.mediaManager.audioVisualization.build({
+                    webrtcSignalingLib.mediaManager.audioVisualization.build({
                         name: 'participantScreen',
                         participant: screen.participant,
                         element: participantVoice
@@ -1746,8 +1746,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
                 }
 
-                var frontCameraDevice = WebRTCconference.localMediaControls.frontCameraDevice();
-                var currentCameraDevice = WebRTCconference.localMediaControls.currentCameraDevice();
+                var frontCameraDevice = webrtcSignalingLib.localMediaControls.frontCameraDevice();
+                var currentCameraDevice = webrtcSignalingLib.localMediaControls.currentCameraDevice();
                 if(!screen.screensharing && (Q.info.isMobile && ((screen.videoTrack && screen.videoTrack.frontCamera) || currentCameraDevice == frontCameraDevice)) || (!Q.info.isMobile && !screen.screensharing)) {
                     if(screen.videoScreen.videoCon != null) {
                         screen.videoScreen.videoCon.classList.add('Streams_webrtc_chat-flipped-video');
@@ -1835,7 +1835,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @method resetAudioVisualization
              */
             function resetAudioVisualization() {
-                var participants = WebRTCconference.roomParticipants();
+                var participants = webrtcSignalingLib.roomParticipants();
                 for (var i in participants) {
                     if(participants[i].soundMeter.visualizations.participantScreenVideo != null) participants[i].soundMeter.visualizations.participantScreenVideo.reset();
                 }
@@ -2175,7 +2175,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function switchScreenType(modeToSwitchTo) {
                 log('switchScreenType', modeToSwitchTo, roomScreens.length)
                 //if(modeToSwitchTo == activeScreensType) return;
-                var participants = WebRTCconference.roomParticipants();
+                var participants = webrtcSignalingLib.roomParticipants();
                 if(modeToSwitchTo == 'video') {
                     for(let p in participants) {
                         let pScreens = participants[p].screens;
@@ -2953,7 +2953,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
             function maximizeLoudestScreen(mode) {
-                WebRTCconference.mediaManager.getLoudestScreen(mode, function (loudestScreen) {
+                webrtcSignalingLib.mediaManager.getLoudestScreen(mode, function (loudestScreen) {
                     if (Q.info.isMobile)
                         renderMaximizedScreensGridMobile(loudestScreen, 0);
                     else renderMaximizedScreensGrid(loudestScreen, 0);
@@ -5765,17 +5765,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
                 if(!isActive()) return;
                 var message = JSON.parse(message.content);
-                var roomParticipants = WebRTCconference.roomParticipants();
-                var localParticipant = WebRTCconference.localParticipant();
+                var roomParticipants = webrtcSignalingLib.roomParticipants();
+                var localParticipant = webrtcSignalingLib.localParticipant();
 
                 var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
 
                 if(message.userId == userId) {
                     if(message.immediate === true) {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnectingImmediately);
+                        if(webrtcSignalingLib.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnectingImmediately);
                         stop();
                     } else {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnecting);
+                        if(webrtcSignalingLib.initNegotiationState == 'ended') notice.show(message.msg || text().webrtc.notices.forceDisconnecting);
 
                         setTimeout(function () {
                             stop();
@@ -5798,7 +5798,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * Bind events that are triggered by WebRTC library (app.js)
          * @method bindConferenceEvents
          */
-        function bindConferenceEvents(WebRTCconference) {
+        function bindConferenceEvents(webrtcSignalingLib) {
             function setRealName(participant, callback) {
                 var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
@@ -5872,11 +5872,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
             }
 
-            WebRTCconference.event.on('log', function (params) {
+            webrtcSignalingLib.event.on('log', function (params) {
                 appDebug.logInfo(params, true);
             });
 
-            WebRTCconference.event.on('joined', function (participant) {
+            webrtcSignalingLib.event.on('joined', function (participant) {
                 if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
                 if(participant.sid == 'recording') return;
                 setRealName(participant);
@@ -5885,17 +5885,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 screensRendering.onParticipantConnected(participant);
             });
 
-            WebRTCconference.event.on('participantConnected', function (participant) {
+            webrtcSignalingLib.event.on('participantConnected', function (participant) {
                 log('user joined',  participant);
                 if(participant.sid == 'recording') return;
                 setRealName(participant, function(name){
-                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.joining.interpolate({userName: name.firstName}));
+                    if(webrtcSignalingLib.initNegotiationState == 'ended') notice.show(text().webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
                 setUserAvatar(participant);
                 setUserGreeting(participant);
                 screensRendering.onParticipantConnected(participant);
 
-                if(WebRTCconference.initNegotiationState == 'ended') {
+                if(webrtcSignalingLib.initNegotiationState == 'ended') {
                     log('play joined music');
 
                     if(Q.Audio.collection[_options.sounds.participantConnected]) {
@@ -5913,7 +5913,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 //screensRendering.updateLayout();
             });
-            WebRTCconference.event.on('participantDisconnected', function (participant) {
+            webrtcSignalingLib.event.on('participantDisconnected', function (participant) {
                 log('user disconnected',  participant);
                 try {
                     var err = (new Error);
@@ -5951,27 +5951,27 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 screensRendering.updateLayout();
             });
-            WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
+            webrtcSignalingLib.event.on('localParticipantDisconnected', function (participant) {
                 log('you left the room')
                 notice.show(Q.getObject("webrtc.notices.youLeftRoom", text()));
                 screensRendering.updateLayout();
             });
-            WebRTCconference.event.on('participantRemoved', function (participant) {
+            webrtcSignalingLib.event.on('participantRemoved', function (participant) {
                 log('you left the room')
                 //screensRendering.removeParticipantsScreens();
                 screensRendering.onParticipantDisconnected(participant);
             });
 
 
-            WebRTCconference.event.on('screenAdded', function (participant) {
+            webrtcSignalingLib.event.on('screenAdded', function (participant) {
                 log('screen added', participant)
                 screensRendering.updateLayout();
             });
-            WebRTCconference.event.on('screenRemoved', function (participant) {
+            webrtcSignalingLib.event.on('screenRemoved', function (participant) {
                 log('screen removed', participant)
                 screensRendering.updateLayout();
             });
-            WebRTCconference.event.on('trackAdded', function (e) {
+            webrtcSignalingLib.event.on('trackAdded', function (e) {
                 log('track added', e)
                 screensRendering.newTrackAdded(e.track, e.participant);
                 //screensRendering.updateLayout();
@@ -5980,7 +5980,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //screensRendering.newTrackAdded(e.track);
             });
 
-            WebRTCconference.event.on('trackMuted', function (e) {
+            webrtcSignalingLib.event.on('trackMuted', function (e) {
                 log('track muted', e)
                 if(e.track.kind == 'video') {
                     screensRendering.showLoader('videoMuted', {screen: e.screen, participant: e.screen.participant});
@@ -5990,7 +5990,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             });
 
-            WebRTCconference.event.on('trackUnmuted', function (e) {
+            webrtcSignalingLib.event.on('trackUnmuted', function (e) {
                 log('track unmuted', e)
                 if(e.track.kind == 'video') {
                     screensRendering.hideLoader('videoUnmuted', {screen: e.screen, participant: e.screen.participant});
@@ -5998,18 +5998,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
             });
 
-            WebRTCconference.event.on('videoTrackIsBeingAdded', function (e) {
+            webrtcSignalingLib.event.on('videoTrackIsBeingAdded', function (e) {
                 log('video track is being added', e)
                 screensRendering.videoTrackIsAdding(e.track, e.participant);
                 screensRendering.updateLayout();
             });
 
-            WebRTCconference.event.on('videoTrackLoaded', function (e) {
+            webrtcSignalingLib.event.on('videoTrackLoaded', function (e) {
                 log('video track loaded', e)
                 screensRendering.onVideoTrackLoaded(e.track);
             });
 
-            WebRTCconference.event.on('remoteScreensharingStarting', function (e) {
+            webrtcSignalingLib.event.on('remoteScreensharingStarting', function (e) {
                 log('screen sharing is being started', e)
 
                 screensRendering.toggleLoudestScreenMode('disabled');
@@ -6017,7 +6017,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 screensRendering.showLoader('screensharingStarting', {participant: e.participant});
             });
 
-            WebRTCconference.event.on('remoteScreensharingStarted', function (e) {
+            webrtcSignalingLib.event.on('remoteScreensharingStarted', function (e) {
                 log('screen sharing is started', e)
 
                 var handleScreensharring = function() {
@@ -6068,24 +6068,24 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }                
             });
 
-            WebRTCconference.event.on('afterCamerasToggle', function (e) {
+            webrtcSignalingLib.event.on('afterCamerasToggle', function (e) {
                 screensRendering.hideLoader('afterCamerasToggle', {participant: e.participant});
             });
-            WebRTCconference.event.on('beforeCamerasToggle', function (e) {
+            webrtcSignalingLib.event.on('beforeCamerasToggle', function (e) {
                 screensRendering.showLoader('beforeCamerasToggle', {participant: e.participant});
             });
-            WebRTCconference.event.on('screensharingStarted', function (e) {
+            webrtcSignalingLib.event.on('screensharingStarted', function (e) {
                 log('screen sharing started', e)
                 
             });
-            WebRTCconference.event.on('remoteScreensharingFailed', function (e) {
+            webrtcSignalingLib.event.on('remoteScreensharingFailed', function (e) {
                 log('screen sharing failed')
                 screensRendering.hideLoader('screensharingFailed', {participant: e.participant});
             });
-            WebRTCconference.event.on('screensharingStopped', function (e) {
+            webrtcSignalingLib.event.on('screensharingStopped', function (e) {
                 //screensharingStopped is local only event that is fired when localParticipant stops sharing screen
                 log('screen sharing stopped')
-                let usersScreens = WebRTCconference.localParticipant().screens;
+                let usersScreens = webrtcSignalingLib.localParticipant().screens;
                 for(let s in usersScreens) {
                     if(usersScreens[s].screensharing && usersScreens.length > 1) {
                         usersScreens[s].remove();
@@ -6093,27 +6093,27 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
                 screensRendering.updateLayout();
             });
-            WebRTCconference.event.on('cameraRequested', function (e) {
+            webrtcSignalingLib.event.on('cameraRequested', function (e) {
                 log('somebody requested camera')
 
 
             });
 
-            WebRTCconference.event.on('someonesCameraEnabled', function (e) {
+            webrtcSignalingLib.event.on('someonesCameraEnabled', function (e) {
                 screensRendering.onSomeonesCameraEnabled(e.participant);
             })
-            WebRTCconference.event.on('someonesMicEnabled', function (e) {
+            webrtcSignalingLib.event.on('someonesMicEnabled', function (e) {
                 screensRendering.onSomeonesMicEnabled(e.participant);
             })
 
-            WebRTCconference.event.on('someonesCameraDisabled', function (e) {
+            webrtcSignalingLib.event.on('someonesCameraDisabled', function (e) {
                 screensRendering.onSomeonesCameraDisabled(e.participant);
             })
-            WebRTCconference.event.on('someonesMicDisabled', function (e) {
+            webrtcSignalingLib.event.on('someonesMicDisabled', function (e) {
                 screensRendering.onSomeonesMicDisabled(e.participant);
             })
 
-            WebRTCconference.event.on('connected', function () {
+            webrtcSignalingLib.event.on('connected', function () {
                 log('Connected to server')
                 connectionState.updateStatus('Connected');
                 connectionState.show();
@@ -6123,16 +6123,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 }, 1000);
             });
-            WebRTCconference.event.on('connectError', function () {
+            webrtcSignalingLib.event.on('connectError', function () {
                 log('Server connection failed')
                 connectionState.show();
                 //connectionState.updateStatus('reconnecting', 'Server connection failed: ');
             });
-            WebRTCconference.event.on('reconnectError', function () {
+            webrtcSignalingLib.event.on('reconnectError', function () {
                 log('Server reconnection failed')
                 connectionState.updateStatus('reconnection failed', 'Server connection failed: ');
             });
-            WebRTCconference.event.on('reconnectAttempt', function (n) {
+            webrtcSignalingLib.event.on('reconnectAttempt', function (n) {
                 log('Server reconnection attempt ' + n)
                 connectionState.updateStatus('reconnection attempt ' + n, 'Server connection failed: ');
             });
@@ -6145,7 +6145,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             window.addEventListener("resize", updateLayoutOnResize);
 
-            WebRTCconference.event.on('disconnected', function () {
+            webrtcSignalingLib.event.on('disconnected', function () {
                 window.removeEventListener('resize', updateLayoutOnResize);
             });
 
@@ -6918,7 +6918,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 fields: {
                     streamName: _roomStream.fields.name,
                     publisherId: _options.roomPublisherId,
-                    participantSid: WebRTCconference.localParticipant().sid
+                    participantSid: webrtcSignalingLib.localParticipant().sid
                 }
             })
         }
@@ -6944,7 +6944,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('initWithNodeServer: initConference: roomStartTime = ' + roomStartTime)
                 log('initWithNodeServer: initConference: _roomStream = ', _roomStream)
 
-                WebRTCconference = new WebRTCRoomClient({
+                webrtcSignalingLib = new WebRTCRoomClient({
                     mode:'node',
                     useAsLibrary: true,
                     socket: Q.Socket,
@@ -6968,10 +6968,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     useCordovaPlugins: _options.useCordovaPlugins
                 });
 
-                bindConferenceEvents(WebRTCconference);
+                bindConferenceEvents(webrtcSignalingLib);
                 log('initWithNodeServer: initConference: start init');
 
-                WebRTCconference.init(function (app) {
+                webrtcSignalingLib.init(function (app) {
                     log('initWithNodeServer: initConference: inited');
                     updateParticipantData();
                     connectionState.hide();
@@ -6985,8 +6985,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 "div", // or pass an existing element
                                 "Streams/webrtc/controls",
                                 {
-                                    webRTClibraryInstance: WebRTCconference,
-                                    webrtcClass: publicAppInterface,
+                                    webrtcRoomInstance: function () {
+                                        return publicAppInterface;
+                                    },
                                     debug: _debug,
                                     onCreate: function () {
                                         Q.handle(_options.onWebrtcControlsCreated, this);
@@ -7114,19 +7115,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         ),
                         {},
                         function () {
-                            log('initWithNodeServer: initConference: activate controls', WebRTCconference.initNegotiationState );
+                            log('initWithNodeServer: initConference: activate controls', webrtcSignalingLib.initNegotiationState );
 
                             //get info about active camera/mic slot requests
-                            if(WebRTCconference.initNegotiationState == 'ended') {
+                            if(webrtcSignalingLib.initNegotiationState == 'ended') {
                                 log('initWithNodeServer: initConference: fi1');
 
-                                WebRTCconference.socketConnection().emit('Streams/webrtc/controlsLoaded')
+                                webrtcSignalingLib.socketConnection().emit('Streams/webrtc/controlsLoaded')
                             } else {
                                 log('initWithNodeServer: initConference: fi2');
-                                WebRTCconference.event.on('initNegotiationEnded', function () {
+                                webrtcSignalingLib.event.on('initNegotiationEnded', function () {
                                     log('initWithNodeServer: initConference: initNegotiationEnded');
 
-                                    WebRTCconference.socketConnection().emit('Streams/webrtc/controlsLoaded')
+                                    webrtcSignalingLib.socketConnection().emit('Streams/webrtc/controlsLoaded')
                                 })
                             }
 
@@ -7138,9 +7139,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
                     );
                 });
-                /*WebRTCconference.event.on('joined', function () {
+                /*webrtcSignalingLib.event.on('joined', function () {
                     navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
-                        WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
+                        webrtcSignalingLib.localMediaControls.loadDevicesList(mediaDevices);
                     }).catch(function (e) {
                         console.error('ERROR: cannot get device info: ' + e.message);
                     });
@@ -7167,6 +7168,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('initWithNodeServer: add app.js');
                 Q.addScript([
                     "{{Streams}}/js/tools/webrtc/app.js?time=" + Date.now(),
+                    "{{Streams}}/js/tools/webrtc/HackTimer.js",
                     "{{Streams}}/js/tools/webrtc/RecordRTC.js",
                 ], function () {
                     initConference();
@@ -7201,7 +7203,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             if(typeof ResizeObserver == 'undefined') return;
             _resizeObserver = new ResizeObserver(entries => {
                 screensRendering.updateLayout();
-                if(WebRTCconference) WebRTCconference.mediaManager.audioVisualization.updateCommonVisualizationWidth();
+                if(webrtcSignalingLib) webrtcSignalingLib.mediaManager.audioVisualization.updateCommonVisualizationWidth();
 
             });
 
@@ -7617,7 +7619,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         function switchTo(publisherId, streamName, options) {
             log('switch WebRTC conference room', publisherId, streamName);
-            log('switch WebRTCconference', WebRTCconference);
+            log('switch webrtcSignalingLib', webrtcSignalingLib);
 
             log('switchTo: _options.beforeSwitch', _options.beforeSwitch)
 
@@ -7672,21 +7674,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     Q.Streams.WebRTCRooms = [];
                                 }
 
-                                log('switchTo: createOrJoinRoomStream: WebRTCconference', WebRTCconference)
-                                WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
+                                log('switchTo: createOrJoinRoomStream: webrtcSignalingLib', webrtcSignalingLib)
+                                webrtcSignalingLib.mediaManager.audioVisualization.removeCommonVisualization();
 
                                 bindStreamsEvents(_roomStream);
-                                WebRTCconference.switchTo(publisherId, roomIdToJoin).then(function (newRoomClientInstance) {
+                                webrtcSignalingLib.switchTo(publisherId, roomIdToJoin).then(function (newRoomClientInstance) {
                                     log('switchTo: createOrJoinRoomStream: newRoomClientInstance', newRoomClientInstance)
                                     bindConferenceEvents(newRoomClientInstance);
 
                                     newRoomClientInstance.event.on('initNegotiationEnded', function () {
                                         log('switchTo: createOrJoinRoomStream: initNegotiationEnded')
-                                        WebRTCconference = newRoomClientInstance;
+                                        webrtcSignalingLib = newRoomClientInstance;
 
                                         updateParticipantData();
-                                        _controlsTool.state.webRTClibraryInstance = WebRTCconference;
-                                        _controlsTool.refresh();
 
                                         screensRendering.updateLayout();
 
@@ -7748,20 +7748,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {function} callback executed when all actions done.
          */
         function stop(callback) {
-            log('WebRTC.stop', WebRTCconference);
+            log('WebRTC.stop', webrtcSignalingLib);
 
             if (!isActive() || _roomStream == null) {
                 return Q.handle(callback);
             }
 
-            if(WebRTCconference && WebRTCconference.localParticipant() != null) WebRTCconference.localParticipant().online = false;
+            if(webrtcSignalingLib && webrtcSignalingLib.localParticipant() != null) webrtcSignalingLib.localParticipant().online = false;
 
             if(appDebug.sendReportsInterbal != null) {
                 appDebug.sendReportToServer();
                 clearTimeout(appDebug.sendReportsInterbal);
             }
             _roomStream.leave();
-            if(WebRTCconference) WebRTCconference.disconnect();
+            if(webrtcSignalingLib) webrtcSignalingLib.disconnect();
 
             if(Q.Socket.getAll()['/webrtc']) {
                 Q.Socket.getAll()['/webrtc'] = null;
@@ -7780,7 +7780,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             Q.Tool.remove(_layoutTool);
             window.removeEventListener('beforeunload', publicAppInterface.stop);
             unsetResizeObserver();
-            WebRTCconference = null;
+            webrtcSignalingLib = null;
             Q.handle(_options.onWebRTCRoomEnded, publicAppInterface);
 
             Q.Page.onActivate('').remove('Streams.WebRTC');
@@ -7792,7 +7792,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         }
 
         function currentConferenceLibInstance() {
-            return WebRTCconference;
+            return webrtcSignalingLib;
         }
 
         function controls() {
@@ -7812,7 +7812,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         }
 
         function isActive() {
-            return WebRTCconference != null && WebRTCconference.state != 'disconnected' ? true : false;
+            return webrtcSignalingLib != null && webrtcSignalingLib.state != 'disconnected' ? true : false;
         }
 
         function text() {

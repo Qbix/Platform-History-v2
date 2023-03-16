@@ -50,7 +50,7 @@ class Q_Plugin
 	/**
 	 * Get or set extra column from [plugin_name]_Q_plugin or [app_name]_Q_app tables
 	 * Also check whether this column exist, and create if not.
-	 * @method handleExtra
+	 * @method extra
 	 * @static
 	 * @param {string} $name The name of application or plugin
 	 * @param {string} $type One of 'app' or 'plugin'
@@ -68,13 +68,12 @@ class Q_Plugin
 			throw new Exception("Could not get info for database connection '$conn_name'. Check " . APP_LOCAL_DIR . "/app.json");
 		}
 
-		$tempname = $conn_name . '_' . time();
+		$tempname = $conn_name . '_' . uniqid();
 		Db::setConnection($tempname, $dbconf);
 
 		// Try connecting
 		try {
 			$db = Db::connect($tempname);
-			$prefix = $dbconf['prefix'];
 		} catch (Exception $e) {
 			throw new Exception("Could not connect to DB connection '$conn_name': " . $e->getMessage(), $e->getCode(), $e);
 		}

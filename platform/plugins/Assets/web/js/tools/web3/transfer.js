@@ -1,164 +1,84 @@
 (function (window, Q, $, undefined) {
 
-    /**
-     * @module Assets
-     */
+/**
+ * @module Assets
+ */
 
-    /**
-     * Allows a user to transfer tokens and credits to someone else
-     * @class Assets/web3/transfer
-     * @constructor
-     * @param {Object} options Override various options for this tool
-     * @param {String} options.userId - id of user to whom the tokens should be sent
-     * @param {String} options.wallet - wallet address of user to whom the tokens should be sent
-     */
+/**
+ * Allows a user to transfer tokens to someone else
+ * @class Assets/web3/transfer
+ * @constructor
+ * @param {Object} options Override various options for this tool
+ * @param {String} options.recipientUserId - id of user to whom the tokens should be sent
+ */
 
-    Q.Tool.define("Assets/web3/transfer", function (options) {
+Q.Tool.define("Assets/web3/transfer", function (options) {
+        var tool = this;
+        var state = this.state;
+
+        if (!Q.Users.loggedInUserId()) {
+            throw new Q.Exception("You are not logged in");
+        }
+        if (Q.isEmpty(state.tokenInfo)) {
+            throw new Q.Exception("token info not found");
+        }
+
+        tool[state.action]();
+
+        /*var pipe = new Q.pipe(["avatar"], tool[state.action].bind(tool));
+        Q.Streams.Avatar.get(state.recipientUserId, function (err, avatar) {
+            if (err) {
+                return
+            }
+
+            state.displayName = avatar.displayName({short: true});
+            pipe.fill("avatar")();
+        });*/
+    },
+
+    { // default options here
+        action: "send",
+        recipientAddress: "0x206F557a3a49460619d52725Fb00b42937623fE7",
+        tokenInfo: null,
+    },
+
+    { // methods go here
+        refresh: function () {
             var tool = this;
             var state = this.state;
-            var $toolElement = $(tool.element);
 
-            if (!state.userId) {
-                throw new Q.Exception("User id required");
-            }
-            if (!Q.Users.loggedInUserId()) {
-                throw new Q.Exception("You are not logged in");
-            }
+        },
+        send: function () {
+            var tool = this;
+            var state = this.state;
 
-            $toolElement.addClass("Q_working");
-            var pipe = new Q.pipe(["avatar", "styles", "text"], function () {
-                $toolElement.removeClass("Q_working");
-            });
-            Q.Streams.Avatar.get(state.userId, function (err, avatar) {
+            Q.Template.render("Assets/web3/transfer/send", {
+                tokenInfo: state.tokenInfo
+            }, function (err, html) {
                 if (err) {
-                    return
+                    return;
                 }
 
-                state.displayName = avatar.displayName({short: true});
-                pipe.fill("avatar")();
-            });
+                Q.replace(tool.element, html);
 
-            Q.addStylesheet(["{{Assets}}/css/tools/web3transfer.css"], pipe.fill("styles"));
-            Q.Text.get('Assets/content', function (err, text) {
-                var msg = Q.firstErrorMessage(err);
-                if (msg) {
-                    return console.warn("Assets/text: " + msg);
-                }
-
-                tool.texts = text;
-                pipe.fill("text")();
-            });
-
-            tool.refresh();
-        },
-
-        { // default options here
-            userId: null,
-            wallet: null
-        },
-
-        { // methods go here
-            refresh: function () {
-                var tool = this;
-                var state = this.state;
-                var _calculateWidth = function (text, css) {
-                    var $span = $("<span>").css(css).html(text).hide().appendTo(document.body);
-                    var width = $span.width();
-                    $span.remove();
-                    return width;
-                };
-                var _formatBalance = function (number) {
-                    var zeros = String(number).match(/0+$/g);
-                    if (number > 100000 && zeros) {
-                        number = String(number/Math.pow(10, zeros[0].length)) + "e+" + zeros[0].length;
-                    }
-                    return number;
-                };
-
-                Q.Template.render("Assets/web3/transfer/tokens", {}, function (err, html) {
-                    if (err) {
-                        return;
+                var $amount = $("input[name=amount]", tool.element);
+                $("button[name=send]", tool.element).on(Q.Pointer.fastclick, function () {
+                    var amount = parseFloat($amount.val());
+                    if (!amount || amount > state.tokenInfo.tokenAmount) {
+                        return Q.alert(tool.text.errors.AmountInvalid);
                     }
 
-                    Q.replace(tool.element, html);;
-                    $("button[name=transferTokens]", tool.element)
-                    .plugin("Q/clickable")
-                    .on(Q.Pointer.fastclick, function () {
-                        Q.Dialogs.push({
-                            title: tool.texts.payment.PayTo.interpolate({displayName: state.displayName}),
-                            className: "Assets_web3_transfer_transferTokens",
-                            onActivate: function (dialog) {
-                                dialog.attr("data-loaded", false);
-                                var $content = $(".Q_dialog_content", this);
 
-                                Q.req("Assets/currencies", "tokenBalance", function (err, response) {
-                                    dialog.attr("data-loaded", true);
-                                    var msg = Q.firstErrorMessage(err, response && response.errors);
-                                    if (msg) {
-                                        dialog.addClass("Q_error");
-                                        return $content.html(msg);
-                                    }
-
-                                    var tokenBalance = response.slots.tokenBalance;
-                                    var $select = $("<select name='currency'></select>");
-                                    $select.append($("<option>").html(tool.texts.payment.ChooseCurrency));
-                                    $content.html($select);
-                                    var sWidth = $select.width() - 10;
-                                    var sCss = {
-                                        "font-size": $select.css("font-size"),
-                                        "font-family": $select.css("font-family")
-                                    };
-                                    var spaceWidth = Math.ceil(_calculateWidth("&nbsp;", sCss));
-                                    Q.each(tokenBalance, function (i, item) {
-                                        var formattedSymbol = item.symbol;
-                                        if (formattedSymbol.length > 13) {
-                                            formattedSymbol = formattedSymbol.substring(0, 10) + "...";
-                                        }
-                                        var formattedSymbolWidth = Math.ceil(_calculateWidth(formattedSymbol, sCss));
-
-                                        var formattedBalance = _formatBalance(item.balance);
-
-                                        var formattedBalanceWidth = Math.ceil(_calculateWidth(String(formattedBalance), sCss));
-
-                                        var spaceAmount = (sWidth - (formattedSymbolWidth + formattedBalanceWidth))/spaceWidth;
-                                        spaceAmount = spaceAmount > 0 ? spaceAmount : 1;
-
-                                        $select.append($("<option value='" + item.symbol + "'>").html(formattedSymbol + "&nbsp;".repeat(spaceAmount) + formattedBalance));
-                                    });
-                                    $select.on("change", function () {
-                                        Q.Template.render("Assets/web3/transfer/send", {
-                                            text: tool.texts.payment.YouCanSendUpTo.interpolate({
-                                                amount: _formatBalance(tokenBalance[$select.val()].balance),
-                                                symbol: $select.val()
-                                            })
-                                        }, function (err, html) {
-                                            if (err) {
-                                                return;
-                                            }
-
-                                            $content.html(html);
-                                        });
-                                    });
-                                }, {
-                                    fields: {
-                                        userId: Q.Users.loggedInUserId()
-                                    }
-                                });
-                            }
-                        });
-                    });
                 });
-            }
-        });
+            });
 
-    Q.Template.set("Assets/web3/transfer/tokens",
-        `<button class="Q_button" name="transferTokens">{{payment.Pay}}</button>`,
-        {text: ['Assets/content']}
-    );
-    Q.Template.set("Assets/web3/transfer/send",
-        `<div class="Assets_web3_transfer_send">{{text}}</div>
-        <input name="amount" type="number" placeholder="{{payment.EnterAmount}}" />
-        <button class="Q_button" name="send">{{payment.Send}}</button>`,
-        {text: ['Assets/content']}
-    );
+        }
+    });
+
+Q.Template.set("Assets/web3/transfer/send",
+    `<div class="Assets_web3_transfer_send">{{tokenInfo.tokenAmount}} {{tokenInfo.tokenName}}</div>
+    <input name="amount" placeholder="{{payment.EnterAmount}}" />
+    <button class="Q_button" name="send">{{payment.Send}}</button>`,
+    {text: ['Assets/content']}
+);
 })(window, Q, jQuery);

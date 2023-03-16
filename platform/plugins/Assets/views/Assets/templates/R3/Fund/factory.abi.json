@@ -1,0 +1,518 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "fundContractImpl",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "fundContractTokenImpl",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "fundContractAggregatorImpl",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "costManager",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "releaseManager",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+            }
+        ],
+        "name": "ReleaseManagerInvalid",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "instancesCount",
+                "type": "uint256"
+            }
+        ],
+        "name": "InstanceCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "name": "RenouncedOverrideCostManagerForInstance",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "name": "canOverrideCostManager",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "costManager",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "fundContractAggregatorImplementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "fundContractImplementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "fundContractTokenImplementation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "instances",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "instancesCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_sellingToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "_timestamps",
+                "type": "uint64[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_prices",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "_endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_thresholds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_bonuses",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "enum IFundStructs.EnumWithdraw",
+                "name": "_ownerCanWithdraw",
+                "type": "uint8"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "contractAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "method",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "role",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "useWhitelist",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IWhitelist.WhitelistStruct",
+                "name": "_whitelistData",
+                "type": "tuple"
+            }
+        ],
+        "name": "produce",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_sellingToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_token0",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_token1",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "_timestamps",
+                "type": "uint64[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_prices",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "_endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_thresholds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_bonuses",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "enum IFundStructs.EnumWithdraw",
+                "name": "_ownerCanWithdraw",
+                "type": "uint8"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "contractAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "method",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "role",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "useWhitelist",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IWhitelist.WhitelistStruct",
+                "name": "_whitelistData",
+                "type": "tuple"
+            }
+        ],
+        "name": "produceAggregator",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_payToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_sellingToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint64[]",
+                "name": "_timestamps",
+                "type": "uint64[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_prices",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint64",
+                "name": "_endTime",
+                "type": "uint64"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_thresholds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_bonuses",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "enum IFundStructs.EnumWithdraw",
+                "name": "_ownerCanWithdraw",
+                "type": "uint8"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "contractAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "method",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "role",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "useWhitelist",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct IWhitelist.WhitelistStruct",
+                "name": "_whitelistData",
+                "type": "tuple"
+            }
+        ],
+        "name": "produceToken",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "releaseManager",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "name": "renounceOverrideCostManager",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "costManager_",
+                "type": "address"
+            }
+        ],
+        "name": "setCostManager",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
