@@ -12353,7 +12353,7 @@ Q.Visual = Q.Pointer = {
 	fastclick: function _Q_fastclick (params) {
 		// Note: As of late 2015 most mobile browsers - notably Chrome and Safari
 		// no longer have a 300ms touch delay, so fastclick offers no benefit on newer browsers, and risks introducing bugs into your application. Consider carefully whether you really need to use it.
-		return _Q_click(params);
+		return Q.Pointer.click(params);
 	},
 	/**
 	 * Like click event but works on touchscreens even if the viewport moves 
