@@ -99,12 +99,12 @@
     Q.Tool.define("Streams/webrtc/livestreaming", function(options) {
             var tool = this;
             tool.text = Q.Text.collection[Q.Text.language]['Streams/content'];
+
             this.livestreamingEditor = null;
             this.livestreamStream = null;
 
-            /*if (!options.webRTClibraryInstance) {
-                throw "Video room should be created";
-            }*/
+            tool.webrtcUserInterface = options.webrtcUserInterface();
+            tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
 
             _controlsToolIcons = tool.state.controlsTool.getIcons();
 
@@ -112,21 +112,41 @@
             tool.livestreamingEditor = null;
             tool.livestreamingCanvasComposerTool = null;
             tool.livestreamingRtmpSenderTool = null;
+
+            tool.declareOrRefreshEventHandlers();
         },
 
         {
+            webrtcUserInterface: null,
             managingScenes: true,
             managingVisualSources: true,
             managingAudioSources: true
         },
 
         {
+            declareOrRefreshEventHandlers: function () {
+                var tool = this;
+                var webrtcSignalingLib = tool.webrtcSignalingLib;
+
+                webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                    tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                    tool.declareOrRefreshEventHandlers();
+                });
+            },
+            updateWebrtcSignalingLibInstance: function (newWebrtcSignalingLib) {
+                var tool = this;
+                if(tool.webrtcSignalingLib != newWebrtcSignalingLib) {
+                    tool.webrtcSignalingLib = newWebrtcSignalingLib;
+                }
+            },
             create: function() {
                 if(this.livestreamingEditor != null) return this.livestreamingEditor;
                 var tool = this;
-                var _controlsTool = this.state.controlsTool;
-                var _webrtcSignalingLib = this.state.webrtcSignalingLib;
-                var _webrtcUserInterface = this.state.webrtcUserInterface;
+                var getOptions = function () {
+                     return tool.webrtcSignalingLib.getOptions() || {};
+                }
+                var _controlsTool = tool.state.controlsTool;
+                var _webrtcUserInterface = tool.webrtcUserInterface;
                 var desktopDialogEl = null;
                 var mobileHorizontaldialogEl = null;
                 var activeDialog = null;
@@ -142,50 +162,59 @@
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
 
-                var livestreamingConfigs = _webrtcSignalingLib.getOptions().liveStreaming || {};
                 var streamingToSection = (function () {
                     let _recordingIconEl = null;
                     let _p2pBroadcastIconEl = null;
                     let _facebookIconEl = null;
                     let _customRtmpIconEl = null;
 
-                    tool.state.webrtcSignalingLib.event.on('liveStreamingStarted', function (e) {
-                        console.log('liveStreamingStarted', e.platform);
-                        if (e.platform && e.platform == 'facebook') {
-                            if (e.participant.isLocal) {
-                                console.log('liveStreamingStarted 2')
-                                showLiveIndicator('facebook');
-                            }
-                        } else {
-                            if (e.participant.isLocal) {
-                                showLiveIndicator('custom');
-                            }
-                        }
-                    });
-                    tool.state.webrtcSignalingLib.event.on('liveStreamingEnded', function (e) {
-                        if (e.platform && e.platform == 'facebook') {
-                            if (e.participant.isLocal) {
-                                hideLiveIndicator('facebook');
-                            }
-                        } else {
-                            if (e.participant.isLocal) {
-                                hideLiveIndicator('custom');
-                            }
-                        }
-                    });
-                  
-                    tool.state.webrtcSignalingLib.event.on('liveStreamingStopped', function (e) {
-                        if (e.platform && e.platform == 'facebook') {
-                            //if (e.participant.isLocal) {
-                                hideLiveIndicator('facebook');
-                            //}
-                        } else {
-                            //if (e.participant.isLocal) {
-                                hideLiveIndicator('custom');
-                            //}
-                        }
-                    });
+                    function declareOrRefreshEventHandlers () {
+                        var webrtcSignalingLib = tool.webrtcSignalingLib;
 
+                        webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                            tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                            declareOrRefreshEventHandlers();
+                        });
+
+                        webrtcSignalingLib.event.on('liveStreamingStarted', function (e) {
+                            console.log('liveStreamingStarted', e.platform);
+                            if (e.platform && e.platform == 'facebook') {
+                                if (e.participant.isLocal) {
+                                    console.log('liveStreamingStarted 2')
+                                    showLiveIndicator('facebook');
+                                }
+                            } else {
+                                if (e.participant.isLocal) {
+                                    showLiveIndicator('custom');
+                                }
+                            }
+                        });
+                        webrtcSignalingLib.event.on('liveStreamingEnded', function (e) {
+                            if (e.platform && e.platform == 'facebook') {
+                                if (e.participant.isLocal) {
+                                    hideLiveIndicator('facebook');
+                                }
+                            } else {
+                                if (e.participant.isLocal) {
+                                    hideLiveIndicator('custom');
+                                }
+                            }
+                        });
+                      
+                        webrtcSignalingLib.event.on('liveStreamingStopped', function (e) {
+                            if (e.platform && e.platform == 'facebook') {
+                                //if (e.participant.isLocal) {
+                                    hideLiveIndicator('facebook');
+                                //}
+                            } else {
+                                //if (e.participant.isLocal) {
+                                    hideLiveIndicator('custom');
+                                //}
+                            }
+                        });    
+                    }
+
+                    declareOrRefreshEventHandlers();
 
                     let streamingToFacebook = (function () {
                         let _streamingToFbSection = null;
@@ -335,7 +364,7 @@
                         function startFacebookLive(data, callback) {
 
                             var satrtLive = function () {
-                                if (livestreamingConfigs.startFbLiveViaGoLiveDialog) {
+                                if (getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
                                     goLiveDialog(callback);
                                     return
                                 }
@@ -393,7 +422,7 @@
                                 });
                             }
 
-                            if (livestreamingConfigs.useRecordRTCLibrary) {
+                            if (getOptions().liveStreaming.useRecordRTCLibrary) {
                                 Q.addScript([
                                     "{{Streams}}/js/tools/webrtc/RecordRTC.js"
                                 ], function () {
@@ -451,7 +480,7 @@
 
                             copyBtn.addEventListener('click', function () {
                                 copyToClipboard(iframeCode);
-                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.codeCopiedToCb", tool.text));
+                                tool.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.codeCopiedToCb", tool.text));
                             });
 
                             return dialog;
@@ -591,7 +620,7 @@
                                         var link = urlInput.value;
                                         if (link.trim() != '') {
                                             copyToClipboard(urlInput);
-                                            tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                                            tool.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
                                         }
                                     })
 
@@ -628,7 +657,7 @@
                                 var link = facebookLiveUrl.value;
                                 if (link.trim() != '') {
                                     copyToClipboard(facebookLiveUrl);
-                                    tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                                    tool.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
                                 }
                             })
 
@@ -932,7 +961,7 @@
                         var _serverRecordingSection = null;
 
                         function createSectionElement() {
-                            var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
+                            var roomId = 'broadcast-' + tool.webrtcUserInterface.getOptions().roomId + '-' + (tool.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
 
                             var recordingCon = _serverRecordingSection = document.createElement('DIV');
                             recordingCon.className = 'live-editor-dialog-window-content live-editor-stream-to-section-rec'
@@ -1014,7 +1043,7 @@
                         }
 
                         function createSectionElement() {
-                            var roomId = 'broadcast-' + tool.state.webrtcUserInterface.getOptions().roomId + '-' + (tool.state.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
+                            var roomId = 'broadcast-' + tool.webrtcUserInterface.getOptions().roomId + '-' + (tool.webrtcSignalingLib.localParticipant().sid).replace('/webrtc#', '');
 
                             var recordingCon = _peerToPeerStreamingSection = document.createElement('DIV');
                             recordingCon.className = 'live-editor-dialog-window-content live-editor-stream-to-section-p2p'
@@ -1057,7 +1086,7 @@
 
                             linkCopyBtn.addEventListener('click', function () {
                                 copyToClipboard(linkInput);
-                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                                tool.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
                             })
 
                             var buttonsCon = document.createElement('DIV');
@@ -1114,13 +1143,13 @@
                                                 if (stream != null) stream = stream.clone();
 
                                                 _broadcastClient.mediaControls.publishStream(stream);
-                                                tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastStarted', roomId)
-                                                tool.state.webrtcSignalingLib.event.dispatch('webcastStarted', { participant: tool.state.webrtcSignalingLib.localParticipant() });
+                                                tool.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastStarted', roomId)
+                                                tool.webrtcSignalingLib.event.dispatch('webcastStarted', { participant: tool.webrtcSignalingLib.localParticipant() });
                                             });
 
                                             _broadcastClient.event.on('disconnected', function () {
-                                                tool.state.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastEnded')
-                                                tool.state.webrtcSignalingLib.event.dispatch('webcastEnded', { participant: tool.state.webrtcSignalingLib.localParticipant() });
+                                                tool.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage('webcastEnded')
+                                                tool.webrtcSignalingLib.event.dispatch('webcastEnded', { participant: tool.webrtcSignalingLib.localParticipant() });
 
                                             });
 
@@ -1833,7 +1862,6 @@
                                 "Streams/webrtc/video",
                                 {
                                     controlsTool: tool.state.controlsTool,
-                                    webrtcSignalingLib: tool.state.webrtcSignalingLib,
                                     webrtcUserInterface: tool.state.webrtcUserInterface
                                 }
                             ),
@@ -1855,7 +1883,6 @@
                                 "Streams/webrtc/audio",
                                 {
                                     controlsTool: tool.state.controlsTool,
-                                    webrtcSignalingLib: tool.state.webrtcSignalingLib,
                                     webrtcUserInterface: tool.state.webrtcUserInterface
                                 }
                             ),
@@ -1944,7 +1971,7 @@
 
                             sourceInstance.sourceInstance.audioSource.active = true;
                             if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
-                                _webrtcSignalingLib.localMediaControls.enableAudio();
+                                tool.webrtcSignalingLib.localMediaControls.enableAudio();
                             } else {
                                 tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, false);
                                 this.switchAudioActivenessIcon(true);
@@ -1956,7 +1983,7 @@
                             console.log('mute')
                             sourceInstance.sourceInstance.audioSource.active = true;
                             if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
-                                _webrtcSignalingLib.localMediaControls.disableAudio();
+                                tool.webrtcSignalingLib.localMediaControls.disableAudio();
                             } else {
                                 tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSource(this._sourceInstance, false);
                                 this.switchAudioActivenessIcon(false);
@@ -1979,8 +2006,8 @@
                             }
                         };
                         this.params = {
-                            _loop: livestreamingConfigs.loopVideo,
-                            _localOutput:livestreamingConfigs.localOutput,
+                            _loop: getOptions().liveStreaming.loopVideo,
+                            _localOutput:getOptions().liveStreaming.localOutput,
 
                             set loop(value) {this._loop = value;},
                             set localOutput(value) {this._localOutput = value;},
@@ -2134,7 +2161,7 @@
                             this._sourceInstance.active = true;
                             if(this._sourceInstance.sourceType == 'webrtcaudio' && this._sourceInstance.participant.isLocal) {
                                 console.log('mute turn mic on')
-                                _webrtcSignalingLib.localMediaControls.enableAudio();
+                                tool.webrtcSignalingLib.localMediaControls.enableAudio();
                             } else {
                                 tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
                                 this.switchAudioActivenessIcon(true);
@@ -2147,7 +2174,7 @@
                             this._sourceInstance.active = false;
                             if(this._sourceInstance.sourceType == 'webrtcaudio' && this._sourceInstance.participant.isLocal) {
                                 console.log('mute turn mic off')
-                                _webrtcSignalingLib.localMediaControls.disableAudio();
+                                tool.webrtcSignalingLib.localMediaControls.disableAudio();
                             } else {
                                 tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
                                 this.switchAudioActivenessIcon(false);
@@ -2170,8 +2197,8 @@
                             }
                         };
                         this.params = {
-                            _loop: livestreamingConfigs.loopAudio,
-                            _localOutput:livestreamingConfigs.localOutput,
+                            _loop: getOptions().liveStreaming.loopAudio,
+                            _localOutput: getOptions().liveStreaming.localOutput,
 
                             set loop(value) {this._loop = value;},
                             set localOutput(value) {this._localOutput = value;},
@@ -2342,7 +2369,7 @@
                            
                           })
 
-                        declareEventsHandlers();
+                        declareOrRefreshEventHandlers();
                         refreshList();
                         updateLocalControlsButtonsState();
 
@@ -2366,8 +2393,14 @@
                             updateRemoteParticipantControlsButtonsState();
                         }
 
-                        function declareEventsHandlers() {
-                            var webrtcSignalingLib = tool.state.webrtcSignalingLib;
+                        function declareOrRefreshEventHandlers() {
+                            var webrtcSignalingLib = tool.webrtcSignalingLib;
+
+                            webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                                tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                                declareOrRefreshEventHandlers();
+                            });
+
                             webrtcSignalingLib.event.on('participantConnected', function (participant) {
                                 console.log('ParticipantsList: participantConnected');
                                 addParticipantItem(participant);
@@ -2452,8 +2485,8 @@
                             if (_participantsListEl) _participantsListEl.innerHTML = '';
                             _participantsList = [];
             
-                            let roomParticipants = tool.state.webrtcSignalingLib.roomParticipants()
-                            addParticipantItem(tool.state.webrtcSignalingLib.localParticipant());
+                            let roomParticipants = tool.webrtcSignalingLib.roomParticipants()
+                            addParticipantItem(tool.webrtcSignalingLib.localParticipant());
                             for (var i in roomParticipants) {
                                 if (roomParticipants[i].isLocal) continue;
                                 addParticipantItem(roomParticipants[i]);
@@ -2910,8 +2943,8 @@
                                 if(!_participantsList[i].videoIconEl || !_participantsList[i].audioIconEl) continue;
 
                                 let listItemInstance = _participantsList[i];
-                                var localParticipant = _webrtcSignalingLib.localParticipant();
-                                var localMediaControls = _webrtcSignalingLib.localMediaControls;
+                                var localParticipant = tool.webrtcSignalingLib.localParticipant();
+                                var localMediaControls = tool.webrtcSignalingLib.localMediaControls;
     
                                 var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
                                     return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
@@ -2920,7 +2953,7 @@
                                 if (_webrtcUserInterface.getOptions().audioOnlyMode) {
                                     console.log('updateLocalControlsButtonsState v1');
                                     listItemInstance.videoIconEl.innerHTML = _streamingIcons.participantsDisabledCamera;
-                                } else if (enabledVideoTracks == 0 && _webrtcSignalingLib.localParticipant().videoStream == null) {
+                                } else if (enabledVideoTracks == 0 && tool.webrtcSignalingLib.localParticipant().videoStream == null) {
                                     console.log('updateLocalControlsButtonsState v2');
                                     listItemInstance.videoIconEl.innerHTML = _streamingIcons.participantsDisabledCamera;
                                 } else if (!localMediaControls.cameraIsEnabled()) {
@@ -2935,7 +2968,7 @@
                                     return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                                 }).length;
     
-                                if (enabledAudioTracks == 0 && _webrtcSignalingLib.localParticipant().audioStream == null) {
+                                if (enabledAudioTracks == 0 && tool.webrtcSignalingLib.localParticipant().audioStream == null) {
                                     console.log('updateLocalControlsButtonsState a1');
                                     listItemInstance.audioIconEl.innerHTML = _streamingIcons.participantsDisabledMic;
                                 } else if (!localMediaControls.micIsEnabled()) {
@@ -2984,26 +3017,37 @@
                     }
 
                     //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
-                    if(_controlsTool != null && _webrtcSignalingLib != null) {
-                        _webrtcSignalingLib.event.on('trackAdded', function (e) {
-                            updateLocalControlsButtonsState();
+                    function declareOrRefreshEventHandlers() {
+                        var webrtcSignalingLib = tool.webrtcSignalingLib;
+                        
+                        webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                            tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                            declareOrRefreshEventHandlers();
                         });
-                        _webrtcSignalingLib.event.on('cameraEnabled', function () {
-                            updateLocalControlsButtonsState();
-                        });
-                        _webrtcSignalingLib.event.on('cameraDisabled', function () {
-                            updateLocalControlsButtonsState();
-                        });
-                        _webrtcSignalingLib.event.on('cameraToggled', function () {
-                            updateLocalControlsButtonsState();
-                        });
-                        _webrtcSignalingLib.event.on('micEnabled', function () {
-                            updateLocalControlsButtonsState();
-                        });
-                        _webrtcSignalingLib.event.on('micDisabled', function () {
-                            updateLocalControlsButtonsState();
-                        });
+
+                        if(_controlsTool != null && webrtcSignalingLib != null) {
+                            webrtcSignalingLib.event.on('trackAdded', function (e) {
+                                updateLocalControlsButtonsState();
+                            });
+                            webrtcSignalingLib.event.on('cameraEnabled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                            webrtcSignalingLib.event.on('cameraDisabled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                            webrtcSignalingLib.event.on('cameraToggled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                            webrtcSignalingLib.event.on('micEnabled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                            webrtcSignalingLib.event.on('micDisabled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                        }
                     }
+
+                    declareOrRefreshEventHandlers();
 
                     _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
                         console.log('SCENE EVENT: SOURCE ADDED')
@@ -3861,7 +3905,7 @@
                                         for (let t in videoTracks) {
                                             videoTracks[t].stop();
                                         }
-                                        _webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
+                                        tool.webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
                                     }
                                     
                                 },
@@ -3954,7 +3998,7 @@
                                         for (let t in audioTracks) {
                                             audioTracks[t].stop();
                                         }
-                                        _webrtcSignalingLib.localMediaControls.toggleAudioInputs({deviceId:e.deviceId});
+                                        tool.webrtcSignalingLib.localMediaControls.toggleAudioInputs({deviceId:e.deviceId});
                                     }
                                     
                                 },
@@ -4375,8 +4419,8 @@
                             if (_sourcesList[i]._sourceInstance.sourceType != 'webrtc' || !_sourcesList[i]._sourceInstance.participant.isLocal) continue;
                             if(!_sourcesList[i].cameraBtnIcon || !_sourcesList[i].microphoneBtnIcon) continue;
                             let listItemInstance = _sourcesList[i];
-                            var localParticipant = _webrtcSignalingLib.localParticipant();
-                            var localMediaControls = _webrtcSignalingLib.localMediaControls;
+                            var localParticipant = tool.webrtcSignalingLib.localParticipant();
+                            var localMediaControls = tool.webrtcSignalingLib.localMediaControls;
 
                             var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
                                 return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
@@ -4385,7 +4429,7 @@
                             if (_webrtcUserInterface.getOptions().audioOnlyMode) {
                                 console.log('updateLocalControlsButtonsState v1');
                                 listItemInstance.cameraBtnIcon.innerHTML = _controlsToolIcons.moreOptions;
-                            } else if (enabledVideoTracks == 0 && _webrtcSignalingLib.localParticipant().videoStream == null) {
+                            } else if (enabledVideoTracks == 0 && tool.webrtcSignalingLib.localParticipant().videoStream == null) {
                                 console.log('updateLocalControlsButtonsState v2');
                                 listItemInstance.cameraBtnIcon.innerHTML = _controlsToolIcons.disabledCamera;
                             } else if (!localMediaControls.cameraIsEnabled()) {
@@ -4400,7 +4444,7 @@
                                 return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                             }).length;
 
-                            if (enabledAudioTracks == 0 && _webrtcSignalingLib.localParticipant().audioStream == null) {
+                            if (enabledAudioTracks == 0 && tool.webrtcSignalingLib.localParticipant().audioStream == null) {
                                 console.log('updateLocalControlsButtonsState a1');
                                 listItemInstance.microphoneBtnIcon.innerHTML = _controlsToolIcons.disabledMicrophone;
                             } else if (!localMediaControls.micIsEnabled()) {
@@ -5677,7 +5721,7 @@
 
                             linkCopyBtn.addEventListener('click', function () {
                                 copyToClipboard(linkInput);
-                                tool.state.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
+                                tool.webrtcUserInterface.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.text));
                             })
                             
                         }
@@ -5747,7 +5791,7 @@
                                                         videoTracks[t].stop();
                                                     }
                                                     activeScene.sourcesInterface.removeSource();
-                                                    _webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
+                                                    tool.webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
                                                 }
 
                                                 
@@ -7240,26 +7284,35 @@
                         title: 'Microphone'
                     });
 
-                    let localAudioTracks = _webrtcSignalingLib.localParticipant().audioTracks(true);
+                    let localAudioTracks = tool.webrtcSignalingLib.localParticipant().audioTracks(true);
 
                     if (localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
                         console.log('localAudioTracks[0].stream', localAudioTracks[0].stream)
                         _globalMicSource.addStream(localAudioTracks[0].stream);
                     }
 
-                    _webrtcSignalingLib.event.on('trackAdded', function (e) {
-                        if (!e.participant.isLocal || e.track.kind != 'audio') return;
-                        _globalMicSource.addStream(e.track.stream);
-                    });
 
+                    function declareOrRefreshEventHandlers() {
+                        var webrtcSignalingLib = tool.webrtcSignalingLib;
+                        webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                            tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
+                            declareOrRefreshEventHandlers();
+                        });
 
-                    tool.state.webrtcSignalingLib.event.on('micEnabled', function () {
-                        _globalMicSource.connect();
-                    });
-                    tool.state.webrtcSignalingLib.event.on('micDisabled', function () {
-                        _globalMicSource.disconnect();
-                    });
+                        webrtcSignalingLib.event.on('trackAdded', function (e) {
+                            if (!e.participant.isLocal || e.track.kind != 'audio') return;
+                            _globalMicSource.addStream(e.track.stream);
+                        });
+    
+                        webrtcSignalingLib.event.on('micEnabled', function () {
+                            _globalMicSource.connect();
+                        });
+                        webrtcSignalingLib.event.on('micDisabled', function () {
+                            _globalMicSource.disconnect();
+                        });
+                    }
 
+                    declareOrRefreshEventHandlers();
 
                     function createControlsButtons() {
                     
@@ -7501,10 +7554,6 @@
                             dropUpMenu.style.top = (openDropUpBtnRect.top - dropUpRect.height) + 'px';
                         }
                     }
-                }
-
-                function updateWebrtcSignalingLibInstance(newWebrtcSignalingInstance) {
-                    _webrtcSignalingLib = newWebrtcSignalingInstance;
                 }
 
                 function EventSystem() {
@@ -9185,7 +9234,6 @@
                 }
 
                 return {
-                    updateWebrtcSignalingLibInstance: updateWebrtcSignalingLibInstance,
                     hide: hide,
                     show: show,
                     toggle: function () {
@@ -9204,7 +9252,7 @@
                     if (tool.livestreamStream != null) {
                         resolve();
                     } else {
-                        let webrtcStream = tool.state.webrtcUserInterface.roomStream();
+                        let webrtcStream = tool.webrtcUserInterface.roomStream();
 
                         Q.req("Streams/livestream", ["livestream"], function (err, response) {
                             var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -9250,7 +9298,7 @@
             },
             get: function () {
                 var tool = this;
-                let webrtcStream = tool.state.webrtcUserInterface.roomStream();
+                let webrtcStream = tool.webrtcUserInterface.roomStream();
 
                 return new Promise(function(resolve, reject) {
                     if (tool.livestreamingEditor != null) {
@@ -9275,7 +9323,6 @@
                                     "div",
                                     "Streams/webrtc/livestreaming/canvasComposer",
                                     {
-                                        webrtcSignalingLib: tool.state.webrtcSignalingLib,
                                         webrtcUserInterface: tool.state.webrtcUserInterface,
                                     }
                                 ),
@@ -9291,7 +9338,6 @@
                                             "Streams/webrtc/livestreaming/rtmpSender",
                                             {
                                                 canvasComposerTool: tool.livestreamingCanvasComposerTool,
-                                                webrtcSignalingLib: tool.state.webrtcSignalingLib,
                                                 webrtcUserInterface: tool.state.webrtcUserInterface,
                                             }
                                         ),
@@ -9315,13 +9361,6 @@
             },
             refresh: function() {
                 var tool = this;
-                tool.livestreamingEditor.updateWebrtcSignalingLibInstance(tool.state.webrtcSignalingLib);
-
-                tool.livestreamingCanvasComposerTool.state.webrtcSignalingLib = tool.state.webrtcSignalingLib;
-                tool.livestreamingCanvasComposerTool.refresh();
-
-                tool.livestreamingRtmpSenderTool.state.webrtcSignalingLib = tool.state.webrtcSignalingLib;
-                tool.livestreamingRtmpSenderTool.refresh();
             }
         }
 

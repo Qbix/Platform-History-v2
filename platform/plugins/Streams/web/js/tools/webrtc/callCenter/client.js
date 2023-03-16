@@ -63,7 +63,38 @@
                 var tool = this;
                 
                 Q.prompt(null, function(topic) {
-                    tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
+
+                    Q.req("Streams/callCenter", ["room"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+                        console.log('requestCall: created waiting room', response.slots.room);
+
+                        Q.Streams.get(response.slots.room.stream.fields.publisherId, response.slots.room.stream.fields.name, function (err, stream) {
+                            console.log('requestCall: created waiting room: stream', stream);
+
+                            tool.myWaitingRoomStream = stream;
+                            tool.declareStreamEventHandlers();
+                
+                        });
+
+                    }, {
+                        method: 'post',
+                        fields: {
+                            publisherId: Q.Users.loggedInUserId(),
+                            description: topic,
+                            relate: {
+                                publisherId: tool.state.publisherId,
+                                streamName: tool.state.streamName,
+                                relationType: 'Streams/webrtc/callCenter/call'
+                            }
+                        }
+                    });
+
+
+                    /*tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
                         roomPublisherId: Q.Users.loggedInUserId(),
                         element: document.body,
                         relate: {
@@ -80,7 +111,7 @@
                         }
                     });
 
-                    tool.currentActiveWebRTCRoom.start();
+                    tool.currentActiveWebRTCRoom.start();*/
                 }, {
                     title: 'What is this call about'
                 })
@@ -129,6 +160,9 @@
                             }, 5000);
                         }
                     }
+                } else {
+                    var message = JSON.parse(message.content);
+                    Q.alert(message.msg);
                 }
             }  ,
             onCallDeclinedHandler: function (message) {
