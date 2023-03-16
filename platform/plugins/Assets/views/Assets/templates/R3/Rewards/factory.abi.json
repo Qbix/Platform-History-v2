@@ -1,0 +1,170 @@
+[
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "instancesCount",
+                "type": "uint256"
+            }
+        ],
+        "name": "InstanceCreated",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "instances",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "instancesCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "token",
+                        "type": "address"
+                    },
+                    {
+                        "components": [
+                            {
+                                "internalType": "uint64",
+                                "name": "timestamp",
+                                "type": "uint64"
+                            },
+                            {
+                                "internalType": "uint64",
+                                "name": "multiplier",
+                                "type": "uint64"
+                            }
+                        ],
+                        "internalType": "struct Reward.Multipliers[]",
+                        "name": "multipliers",
+                        "type": "tuple[]"
+                    }
+                ],
+                "internalType": "struct Reward.ImpactSettings",
+                "name": "impactSettings",
+                "type": "tuple"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "token",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "currency",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "seriesId",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "price",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct Reward.NFTSettings",
+                "name": "nftSettings",
+                "type": "tuple"
+            },
+            {
+                "components": [
+                    {
+                        "components": [
+                            {
+                                "internalType": "string",
+                                "name": "rolename",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "growcap",
+                                "type": "uint256"
+                            }
+                        ],
+                        "internalType": "struct Reward.CommunityRoles[]",
+                        "name": "roles",
+                        "type": "tuple[]"
+                    },
+                    {
+                        "internalType": "contract Community",
+                        "name": "addr",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct Reward.CommunitySettings",
+                "name": "communitySettings",
+                "type": "tuple"
+            }
+        ],
+        "name": "produce",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "instance",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "rewardContractImplementation",
+        "outputs": [
+            {
+                "internalType": "contract Reward",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
