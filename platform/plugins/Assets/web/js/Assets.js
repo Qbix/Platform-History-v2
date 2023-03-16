@@ -1418,20 +1418,18 @@
 				 * @param {string} [options.tokenAddress] - filter tokens with this contract address
 				 */
 				balanceOf: function (userId, chainId, callback, options) {
-					var tokenAddress = Q.getObject("tokenAddress", options);
-
-					Q.req("Assets/currencies", "cryptoBalance", function (err, response) {
+					Q.req("Assets/balances", "balance", function (err, response) {
 						if (err) {
 							return;
 						}
 
-						var balance = response.slots.cryptoBalance;
+						var balance = response.slots.balance;
 						Q.handle(callback, null, [null, balance]);
 					}, {
 						fields: {
 							userId: userId || Q.Users.loggedInUserId(),
 							chainId: chainId,
-							tokenAddress: tokenAddress
+							tokenAddresses: Q.getObject("tokenAddresses", options)
 						}
 					});
 				}
@@ -1571,7 +1569,10 @@
 		    css: "{{Assets}}/css/tools/NFT/locked.css"
 		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
-		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js",
+		"Assets/web3/transfer": {
+			js: "{{Assets}}/js/tools/web3/transfer.js",
+			css: "{{Assets}}/css/tools/web3/transfer.css"
+		},
 		"Assets/web3/balance": {
 			js: "{{Assets}}/js/tools/web3/balance.js",
 			css: "{{Assets}}/css/tools/web3/balance.css"

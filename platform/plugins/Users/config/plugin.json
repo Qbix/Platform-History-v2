@@ -386,7 +386,7 @@
 					"blockExplorerUrl": "https://mumbai.polygonscan.com/",
 					"abiUrl": "https://api-testnet.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
 					"currency": {
-						"name": "Polygon",
+						"name": "MATIC",
 						"symbol": "MATIC",
 						"decimals": 18
 					}
