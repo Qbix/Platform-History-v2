@@ -232,6 +232,7 @@ function Users_request_handler(req, res, next) {
 	}
 	var userId = parsed.userId;
 	var sessionId = parsed.sessionId;
+	var socketId = parsed.socketId;
     switch (parsed['Q/method']) {
 		case 'Users/device':
 			break;
@@ -271,7 +272,7 @@ function Users_request_handler(req, res, next) {
 			}
 			break;
 		case 'Users/addEventListener':
-			if (userId && sessionId) {
+			if (userId && socketId) {
 				var clients = Users.clients[userId];
 
 				var parseCookie = function (str) {
@@ -282,12 +283,12 @@ function Users_request_handler(req, res, next) {
 							return acc;
 						}, {});
 				}
+
 				var client = null;
 				for (var cid in clients) {
-					var cookie = clients[cid].handshake.headers.cookie ? parseCookie(clients[cid].handshake.headers.cookie) : null;
-					if(!cookie) continue;
+					if(!clients[cid].id) continue;
 
-					if (cookie.Q_sessionId === sessionId) {
+					if (clients[cid].id === socketId) {
 						client = clients[cid];
 						break;
 					}
@@ -305,8 +306,12 @@ function Users_request_handler(req, res, next) {
 				}
 
 				client.on(eventName, function(){
-					Q.Utils.queryExternal(handlerToExecute, data, function(response) {
-						
+					var headers = {
+						'user-agent':'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9',
+						'cookie':client.handshake.headers.cookie
+					};
+					Q.Utils.queryExternal(handlerToExecute, data, null, headers, function(err, response) {
+
 					});
 				});
 			}

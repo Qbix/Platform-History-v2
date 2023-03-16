@@ -61,6 +61,19 @@
             },
             requestCall: function () {
                 var tool = this;
+                var socketConns = Q.Users.Socket.get();
+                if(!socketConns || Object.keys(socketConns).length == 0 || socketConns[Object.keys(socketConns)[0]] == null) {
+                    Q.Socket.onConnect('Users').add(function() {
+                        console.log('onSession: no socket connection yet');
+                        tool.requestCall();
+                    })
+                    return;   
+                }
+                //console.log('Object.keys(socketConns)', Object.keys(socketConns).length, Object.keys(socketConns)[0])
+                if(Object.keys(socketConns).length == 0) {
+                    Q.alert('To continue you should be connected to the socket server.');
+                    return;
+                }                
                 
                 Q.prompt(null, function(topic) {
 
@@ -85,6 +98,7 @@
                         fields: {
                             publisherId: Q.Users.loggedInUserId(),
                             description: topic,
+                            socketId: socketConns[Object.keys(socketConns)[0]].socket.id,
                             relate: {
                                 publisherId: tool.state.publisherId,
                                 streamName: tool.state.streamName,
