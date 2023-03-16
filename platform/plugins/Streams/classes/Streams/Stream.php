@@ -213,7 +213,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * otherwise create it in the database and then return it.
 	 * May throw Users_Exception_NotAuthorized if stream doesn't exist
 	 * and asUserId is not authorized to create this stream.
-	 * @method fetchOneOrCreate
+	 * @method fetchOrCreate
 	 * @static
 	 * @param {string} $asUserId used for fetchOne and create functions
 	 * @param {string} $publisherId used for fetchOne and create functions
@@ -233,7 +233,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @return {Streams_Stream|null} Returns the created stream, if any
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
-	static function fetchOneOrCreate(
+	static function fetchOrCreate(
 		$asUserId,
 		$publisherId,
 		$name,
