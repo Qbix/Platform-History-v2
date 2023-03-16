@@ -389,7 +389,7 @@
 		},
 		"onInsert": {
 			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/contests"],
-			"person": ["Assets/user/NFTs", "Assets/NFT/contracts", "Assets/NFT/series"]
+			"person": []
 		}
 	},
 	"Assets": {

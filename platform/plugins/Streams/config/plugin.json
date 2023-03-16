@@ -633,6 +633,7 @@
 				"Streams/user/lastName",
 				"Streams/user/emailAddress",
 				"Streams/user/mobileNumber",
+				"Streams/user/xid/web3",
 				"Streams/user/interests",
 				"Streams/image/album"
 			],
@@ -645,9 +646,8 @@
 				"username": "Streams/user/username",
 				"icon": "Streams/user/icon",
 				"emailAddress": "Streams/user/emailAddress",
-				"emailAddressPending": "Streams/user/emailAddress",
 				"mobileNumber": "Streams/user/mobileNumber",
-				"mobileNumberPending": "Streams/user/mobileNumber"
+				"xids": ["Streams/user/xid/web3"]
 			}
 		}, 
 		"rules": {
