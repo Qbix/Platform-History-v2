@@ -13071,10 +13071,12 @@ Q.Visual = Q.Pointer = {
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
-			Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
-				div.removeClass('Q_touchlabel_show');
-				Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
-			}, false, true);
+			if (e.type == 'touchstart') {
+				Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
+					div.removeClass('Q_touchlabel_show');
+					Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
+				}, false, true);
+			}
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
