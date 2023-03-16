@@ -12334,6 +12334,12 @@ Q.Visual = Q.Pointer = {
 			if (Q.Pointer.canceledClick) {
 				return Q.Pointer.preventDefault(e);
 			}
+			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
+			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
+			if (!(elem instanceof Element)
+			|| !Q.Pointer.started) {
+				return; // the click may have been caused e.g. by Chrome on a button during form submit
+			}
 			return params.original.apply(this, arguments);
 		};
 	},
@@ -12345,28 +12351,9 @@ Q.Visual = Q.Pointer = {
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'click';
-		return function _Q_fastclick_on_wrapper (e) {
-			var oe = e.originalEvent || e;
-			if (oe.type === 'touchend') {
-				if (oe.touches && oe.touches.length) {
-					return; // still some touches happening
-				}
-				Q.Pointer.touches = oe.touches;
-			}
-			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
-			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
-			if (!(elem instanceof Element)
-			|| !Q.Pointer.started) {
-				return; // the click may have been caused e.g. by Chrome on a button during form submit
-			}
-			if (Q.Pointer.canceledClick
-			|| !this.contains(Q.Pointer.started || null)
-			|| !this.contains(elem)) {
-				return Q.Pointer.preventDefault(e);
-			}
-			return params.original.apply(this, arguments);
-		};
+		// Note: As of late 2015 most mobile browsers - notably Chrome and Safari
+		// no longer have a 300ms touch delay, so fastclick offers no benefit on newer browsers, and risks introducing bugs into your application. Consider carefully whether you really need to use it.
+		return _Q_click(params);
 	},
 	/**
 	 * Like click event but works on touchscreens even if the viewport moves 
