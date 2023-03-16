@@ -85,8 +85,8 @@ Q.Tool.define('Q/form', function(options) {
 					return false; // onResponse took care of it with some other behavior
 				}
 				// default behavior
-				var msg;
-				if (msg = Q.firstErrorMessage(err)) {
+				var msg = Q.firstErrorMessage(err);
+				if (msg) {
 					return alert(msg);
 				}
 				$('div.Q_form_undermessagebubble', $te).empty();
@@ -99,23 +99,7 @@ Q.Tool.define('Q/form', function(options) {
 					}
 					return;
 				}
-				var redirectUrl = Q.getObject('redirect.url', data);
-				if (redirectUrl) {
-					// handle one redirect (if it redirects again, give up)
-					Q.request(redirectUrl, state.slotsToRequest, function (err, data2) {
-						var msg;
-						if (msg = Q.firstErrorMessage(err)) {
-							return alert(msg);
-						}
-						_handleResult(data2);
-					});
-				} else {
-					_handleResult(data);
-				}
-				function _handleResult(data) {
-					if (!data.slots) {
-						return;
-					}
+				if (data.slots) {
 					var slots = Object.keys(data.slots);
 					var pipe = new Q.pipe(slots, function () {
 						Q.handle(state.onSuccess, tool, arguments);
@@ -123,27 +107,27 @@ Q.Tool.define('Q/form', function(options) {
 					for (var slot in data.slots) {
 						var e;
 						switch (typeof state.contentElements[slot]) {
-						case 'HTMLElement':
-						case 'jQuery':
-							e = $(state.contentElements[slot]); break;
-						case 'string':
-							e = $(state.contentElements[slot], form); break;
-						default:
-							e = $(tool.element);
+							case 'HTMLElement':
+							case 'jQuery':
+								e = $(state.contentElements[slot]); break;
+							case 'string':
+								e = $(state.contentElements[slot], form); break;
+							default:
+								e = $(tool.element);
 						}
 						if (data.slots[slot] != null) {
 							var replaced = Q.replace(e[0], data.slots[slot]);
-							if (replaced) {
-								Q.activate(replaced, pipe.fill(slot));
-							}
+							Q.activate(replaced, pipe.fill(slot));
 						}
 						if (data.scriptLines && data.scriptLines[slot]) {
 							eval(data.scriptLines[slot]);
 						}
 					}
 				}
-				return false; // prevent Q.request from calling Q.handle() on redirects
-			};
+				if (state.ignoreRedirects) {
+					return false;
+				}
+			}
 			event.preventDefault();
 			tool.activeElement = document.activeElement;
 			$form.addClass('Q_working').attr('disabled', 'disabled');
@@ -159,7 +143,7 @@ Q.Tool.define('Q/form', function(options) {
 			var input = $('input[name="Q.method"]', $form);
 			var method = (input.val() || $form.attr('method') || 'post').toUpperCase();
 			if (state.ignoreCache
-			&& typeof state.loader.forget === "function") {
+				&& typeof state.loader.forget === "function") {
 				state.ignoreCache = false;
 				state.loader.forget(action, method, $form.serialize(), state.slotsToRequest);
 			}
