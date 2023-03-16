@@ -207,6 +207,69 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		return reset($streams);
 	}
+
+	/**
+	 * Fetch and return a stream if it is already in the database,
+	 * otherwise create it in the database and then return it.
+	 * May throw Users_Exception_NotAuthorized if stream doesn't exist
+	 * and asUserId is not authorized to create this stream.
+	 * @method fetchOneOrCreate
+	 * @static
+	 * @param {string} $asUserId used for fetchOne and create functions
+	 * @param {string} $publisherId used for fetchOne and create functions
+	 * @param {string} $name used for fetchOne and create functions
+	 * @param {array} [$options] to pass to fetchOne. Also the following options to be used with stream creation:
+	 * @param {boolean|array} [$options.subscribe] pass true to autosubscribe 
+	 *   to the stream right after creating it. You can also pass an array of options 
+	 *   that will be passed to the subscribe function.
+	 * @param {array} [$options.fields] to pass to create function,
+	 *   if you want to set some fields besides "name"
+	 * @param {array} [$options.relate] to pass to create function,
+	 *   if you want to relate the newly created stream to a category
+	 * @param {array} [$options.type] to pass to create function,
+	 *   not required if the stream is described in Streams::userStreams (streams.json files)
+	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
+	 *   such as "created" => boolean
+	 * @return {Streams_Stream|null} Returns the created stream, if any
+	 * @throws {Users_Exception_NotAuthorized}
+	 */
+	static function fetchOneOrCreate(
+		$asUserId,
+		$publisherId,
+		$name,
+		$options = array(),
+		&$results = array())
+	{
+		$stream = Streams::fetchOne($asUserId, $publisherId, $name, '*', $options, $results);
+		$results['created'] = false;
+		if ($stream) {
+			return $stream;
+		}
+		$fields = Q::ifset($options, 'fields', array());
+		$fields['name'] = $name;
+		$stream = Streams::create($asUserId, 
+			$publisherId, 
+			Q::ifset($options, 'type', null),
+			$fields, 
+			Q::ifset($options, 'relate', null),
+			$relateResults
+		);
+		if (!$stream) {
+			return null;
+		}
+		if (is_array($results)) {
+			$results['related'] = $relateResults;
+		}
+		if (!empty($options['subscribe'])) {
+			$so = is_array($options['subscribe'])
+				? $options['subscribe']
+				: array('skipAccess' => true);
+			$so['userId'] = $asUserId;
+			$results['participant'] = $stream->subscribe($so);
+		}
+		$results['created'] = true;
+		return $stream;
+	}
 	
 	/**
 	 * Whether stream was published by fetcher
