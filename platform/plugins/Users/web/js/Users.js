@@ -1510,7 +1510,7 @@
 			var passphrase_hashed_input = $('<input type="hidden" name="passphrase_hashed" id="hashed-password" />');
 			var $b = $('<a class="Q_button Users_login_start Q_main_button" />')
 				.html(Q.text.Users.login.loginButton)
-				.on(Q.Pointer.start, function () {
+				.on(Q.Pointer.click, function () {
 					Users.submitClosestForm.apply(this, arguments);
 					return false;
 				});
