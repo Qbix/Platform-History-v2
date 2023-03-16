@@ -29,10 +29,7 @@ class Assets_NFT
 			));
 		}
 
-		$stream = Streams_Stream::fetch($publisherId, $publisherId, self::$categoryStreamName);
-		if (!$stream) {
-			$stream = Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
-		}
+		$stream = Streams::fetchOneOrCreate($publisherId, $publisherId, self::$categoryStreamName, array("type" => 'Streams/category'));
 
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
 			$stream->setAttribute('Assets/NFT/minted/total', 0);
