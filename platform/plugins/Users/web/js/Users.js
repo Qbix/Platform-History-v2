@@ -506,9 +506,7 @@
 				fields['Q.Users.facebook.authResponse'] = ar;
 			} else if (platform === 'web3') {
 				Q.extend(fields, Web3.authResponse);
-				if (Q.getObject(options, "updateXid")) {
-					fields.updateXid = options.updateXid;
-				}
+				fields.updateXid = !!Q.getObject("updateXid", options);
 			}
 			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
 		}
@@ -1512,7 +1510,7 @@
 			var passphrase_hashed_input = $('<input type="hidden" name="passphrase_hashed" id="hashed-password" />');
 			var $b = $('<a class="Q_button Users_login_start Q_main_button" />')
 				.html(Q.text.Users.login.loginButton)
-				.on(Q.Pointer.start, function () {
+				.on(Q.Pointer.click, function () {
 					Users.submitClosestForm.apply(this, arguments);
 					return false;
 				});
@@ -1941,7 +1939,8 @@
 							if (!result) {
 								_onCancel();
 							} else {
-								_authenticate('web3');
+								// do nothing, since we already executed this:
+								// _authenticate('web3');
 							}
 						});
 						return false;
@@ -2124,6 +2123,8 @@
 			.on(Q.Pointer.fastclick, function () {
 				Q.Users.Web3.login(null, function (user) {
 					setIdentifier_callback(null, user);
+				}, null, {
+					updateXid: true
 				});
 				return false;
 			})
@@ -2133,9 +2134,8 @@
 		step1_form.empty().append(
 			$identifierInput, $identifierTypeInput, $button
 		).submit(function (event) {
-			var $identifier = $('#Users_setIdentifier_identifier')
-			var h = $identifier.outerHeight() - 5;
-			$identifier.css({
+			var h = $identifierInput.outerHeight() - 5;
+			$identifierInput.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
 				'background-repeat': 'no-repeat',
 				'background-position': 'right center',
@@ -4274,11 +4274,11 @@
 			});
 		},
 
-		login: function (signedCallback, authenticatedCallback, cancelCallback) {
+		login: function (signedCallback, authenticatedCallback, cancelCallback, options) {
 			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			var _prevMetaTitle = $('meta[name="title"]').attr('content');
-			$('meta[name="title"').attr('content', Users.communityName);
+			$('meta[name="title"]').attr('content', Users.communityName);
 			var _prevOGTitle = $('meta[property="og:title"]').attr('content');
 			$('meta[property="og:title"]').attr('content', Users.communityName);
 			Web3.connect(function (err, provider) {
@@ -4366,7 +4366,7 @@
 							priv.login_onConnect && priv.login_onConnect(user);
 						}, function () {
 							priv.login_onCancel && priv.login_onCancel();
-						}, {"prompt": false});
+						}, Q.extend({"prompt": false}, options));
 					}
 				}).catch(_cancel);
 			});
@@ -4379,10 +4379,10 @@
 					document.title = _prevDocumentTitle;
 				}
 				if (_prevMetaTitle) {
-					$('meta[name="title"').attr('content', _prevMetaTitle)
+					$('meta[name="title"]').attr('content', _prevMetaTitle)
 				}
 				if (_prevOGTitle) {
-					$('meta[property="og:title"').attr('content', _prevOGTitle)
+					$('meta[property="og:title"]').attr('content', _prevOGTitle)
 				}
 			}
 		},

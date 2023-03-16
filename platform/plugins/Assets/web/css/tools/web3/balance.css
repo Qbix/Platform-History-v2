@@ -1,1 +1,20 @@
-body {background: red}
+.Assets_web3_balance_tool,
+.Assets_web3_balance_tool select,
+.Assets_web3_balance_tool select option {
+    text-align: center;
+    font-size: 25px;
+}
+.Assets_web3_balance_tool select,
+.Assets_web3_balance_tool select option {
+    text-align: left;
+}
+.Assets_web3_balance_tool select[data-count="1"],
+.Assets_web3_balance_tool select[data-count="1"] option {
+    text-align: left;
+}
+.Assets_web3_balance_tool select[data-count="1"] {
+    border: none;
+    pointer-events:none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
