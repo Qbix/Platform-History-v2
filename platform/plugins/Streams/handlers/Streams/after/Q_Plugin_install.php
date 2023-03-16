@@ -71,7 +71,6 @@ function Streams_after_Q_Plugin_install($params)
 	// if new streams installed
 	if (count($streamsToInstall)) {
 		// save installed streams to table [plugin_name]_q_plugin extra field
-	    $key = "Streams/User/onInsert";
 	    $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
 	    $extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
 	    $extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsToInstall)));
