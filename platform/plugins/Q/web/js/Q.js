@@ -7401,6 +7401,10 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		return;
 	}
+	var eventNames = eventName.split(' ');
+	if (eventName.length > 1) {
+		eventName = eventNames;
+	}
 	function _Q_addEventListener_wrapper(e) {
 		Q.handle(eventHandler, element, [e]);
 	}
@@ -7519,7 +7523,11 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * @static
  * @method removeEventListener
  * @param {HTMLElement} element
- * @param {String} eventName
+ * @param {String|Array|Object|Function} eventName
+ *  A space-delimited string of event names, or an array of event names.
+ *  You can also pass an object of { eventName: eventHandler } pairs, in which csae
+ *  the next parameter would be useCapture.
+ *  You can also pass functions such as Q.Pointer.start here.
  * @param {Function} eventHandler
  * @param {boolean} useCapture
  * return {boolean} Should normally return true, unless listener could not be found or removed
@@ -7527,6 +7535,10 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
 	if (Q.isEmpty(element)) {
 		return false;
+	}
+	var eventNames = eventName.split(' ');
+	if (eventName.length > 1) {
+		eventName = eventNames;
 	}
 
 	useCapture = useCapture || false;
@@ -11964,7 +11976,7 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 var detected = Q.Browser.detect();
 var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
 var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
-var hasNoMouse = root.matchMedia ? !!root.matchMedia('(any-hover: none)').matches : null;
+var hasNoMouse = root.matchMedia ? !!root.matchMedia('(any-hover: none)') : null;
 var useTouchEvents = isTouchscreen && (hasNoMouse === true);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 	|| (useTouchEvents && !navigator.userAgent.match(/mobi/i));
@@ -12334,12 +12346,6 @@ Q.Visual = Q.Pointer = {
 			if (Q.Pointer.canceledClick) {
 				return Q.Pointer.preventDefault(e);
 			}
-			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
-			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
-			if (!(elem instanceof Element)
-			|| !Q.Pointer.started) {
-				return; // the click may have been caused e.g. by Chrome on a button during form submit
-			}
 			return params.original.apply(this, arguments);
 		};
 	},
@@ -12351,9 +12357,28 @@ Q.Visual = Q.Pointer = {
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
-		// Note: As of late 2015 most mobile browsers - notably Chrome and Safari
-		// no longer have a 300ms touch delay, so fastclick offers no benefit on newer browsers, and risks introducing bugs into your application. Consider carefully whether you really need to use it.
-		return Q.Pointer.click(params);
+		params.eventName = 'touchend mouseup';
+		return function _Q_fastclick_on_wrapper (e) {
+			var oe = e.originalEvent || e;
+			if (oe.type === 'touchend') {
+				if (oe.touches && oe.touches.length) {
+					return; // still some touches happening
+				}
+				Q.Pointer.touches = oe.touches;
+			}
+			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
+			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
+			if (!(elem instanceof Element)
+			|| !Q.Pointer.started) {
+				return; // the click may have been caused e.g. by Chrome on a button during form submit
+			}
+			if (Q.Pointer.canceledClick
+			|| !this.contains(Q.Pointer.started || null)
+			|| !this.contains(elem)) {
+				return Q.Pointer.preventDefault(e);
+			}
+			return params.original.apply(this, arguments);
+		};
 	},
 	/**
 	 * Like click event but works on touchscreens even if the viewport moves 
