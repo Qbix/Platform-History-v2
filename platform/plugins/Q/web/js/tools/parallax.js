@@ -47,6 +47,8 @@
 		}
 		++s['Q/parallax'];
 
+		Q.setObject("Q.Pointer.preventRubberBand.suspend", true);
+
 		if (state.style) {
 			tool.element.setAttribute('style', state.style);
 		}
