@@ -12243,7 +12243,7 @@ Q.Visual = Q.Pointer = {
 	 * @method start
 	 */
 	start: function _Q_Pointer_start(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
+		params.eventName = 'touchstart mousedown';
 		return function (e) {
 			Q.Pointer.movedTooMuchForClickLastTime = false;
 			if (Q.Visual.recentlyScrolled) {
@@ -12263,7 +12263,7 @@ Q.Visual = Q.Pointer = {
 	 * @method end
 	 */
 	end: function _Q_Pointer_end(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'mouseup';
+		params.eventName = 'touchend mouseup';
 		return params.original;
 	},
 	/**
@@ -12272,7 +12272,7 @@ Q.Visual = Q.Pointer = {
 	 * @method move
 	 */
 	move: function _Q_Pointer_move(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchmove' : 'mousemove';
+		params.eventName = 'touchmove mousemove';
 		return params.original;
 	},
 	/**
@@ -12281,7 +12281,7 @@ Q.Visual = Q.Pointer = {
 	 * @method enter
 	 */
 	enter: function _Q_Pointer_enter(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchenter' : 'mouseenter';
+		params.eventName = 'touchenter mouseenter';
 		return params.original;
 	},
 	/**
@@ -12290,7 +12290,7 @@ Q.Visual = Q.Pointer = {
 	 * @method leave
 	 */
 	leave: function _Q_Pointer_leave(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchleave' : 'mouseleave';
+		params.eventName = 'touchleave mouseleave';
 		return params.original;
 	},
 	/**
@@ -12299,7 +12299,7 @@ Q.Visual = Q.Pointer = {
 	 * @method cancel
 	 */
 	cancel: function _Q_Pointer_cancel(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
+		params.eventName = 'touchcancel mousecancel'; // mousecancel can be a custom event
 		return params.original;
 	},
 	/**
