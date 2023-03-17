@@ -7401,9 +7401,11 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		return;
 	}
-	var eventNames = eventName.split(' ');
-	if (eventNames.length > 1) {
-		eventName = eventNames;
+	if (typeof eventName === 'string') {
+		var eventNames = eventName.split(' ');
+		if (eventNames.length > 1) {
+			eventName = eventNames;
+		}
 	}
 	function _Q_addEventListener_wrapper(e) {
 		Q.handle(eventHandler, element, [e]);
@@ -7536,9 +7538,11 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 	if (Q.isEmpty(element)) {
 		return false;
 	}
-	var eventNames = eventName.split(' ');
-	if (eventNames.length > 1) {
-		eventName = eventNames;
+	if (typeof eventName === 'string') {
+		var eventNames = eventName.split(' ');
+		if (eventNames.length > 1) {
+			eventName = eventNames;
+		}
 	}
 
 	useCapture = useCapture || false;
