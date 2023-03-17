@@ -7402,7 +7402,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		return;
 	}
 	var eventNames = eventName.split(' ');
-	if (eventName.length > 1) {
+	if (eventNames.length > 1) {
 		eventName = eventNames;
 	}
 	function _Q_addEventListener_wrapper(e) {
@@ -7537,7 +7537,7 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		return false;
 	}
 	var eventNames = eventName.split(' ');
-	if (eventName.length > 1) {
+	if (eventNames.length > 1) {
 		eventName = eventNames;
 	}
 
