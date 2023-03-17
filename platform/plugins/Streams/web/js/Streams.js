@@ -1018,7 +1018,7 @@ Streams.Dialogs = {
 	 * @param {String} streamName the stream's name
 	 * @param {Object} options Some options to pass to the dialog
 	 */
-	subscription: function(publisherId, streamName, caoptionsloplback) {
+	subscription: function(publisherId, streamName, options) {
 		_toolInDialog('Streams/subscription', {
 			publisherId: publisherId,
 			streamName : streamName
