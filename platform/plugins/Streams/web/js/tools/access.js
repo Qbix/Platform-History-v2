@@ -35,14 +35,9 @@ Q.Tool.define("Streams/access", function(options) {
 		}
 
 		if (typeof value !== 'undefined') {
-			$select.find('option').removeAttr('selected');
-			$select.attr(
-				'selectedIndex',
-				$select.find('option[value='+value+']').attr('selected', 'selected').index()
-			);
-			$select.attr('name', 'cloned');
-
-			$select.change(function () {
+			$select.val(value);
+			$select.prop('name', 'cloned');
+			$select.on("change", function () {
 				var fields = {
 					publisherId: state.stream.fields.publisherId,
 					streamName: state.stream.fields.name
