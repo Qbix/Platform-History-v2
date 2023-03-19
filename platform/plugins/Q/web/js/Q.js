@@ -7401,24 +7401,12 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		return;
 	}
-	if (typeof eventName === 'string') {
-		var eventNames = eventName.split(' ');
-		if (eventNames.length > 1) {
-			eventName = eventNames;
-		}
-	}
 	function _Q_addEventListener_wrapper(e) {
 		Q.handle(eventHandler, element, [e]);
 	}
 	var handler = (eventHandler.typename === "Q.Event"
 		? (eventHandler.eventListener = _Q_addEventListener_wrapper)
 		: eventHandler);
-	if (typeof eventName === 'string') {
-		var split = eventName.trim().split(' ');
-		if (split.length > 1) {
-			eventName = split;
-		}
-	}
 	if (Q.isPlainObject(useCapture)) {
 		// Test via a getter in the options object to see if the passive property is accessed
 		if (_supportsPassive === undefined) {
@@ -7452,6 +7440,12 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		return;
 	}
 
+	if (typeof eventName === 'string') {
+		var split = eventName.trim().split(' ');
+		if (split.length > 1) {
+			eventName = split;
+		}
+	}
 	if (Q.isArrayLike(eventName)) {
 		for (var i=0, l=eventName.length; i<l; ++i) {
 			Q.addEventListener(element, eventName[i], eventHandler, useCapture, hookStopPropagation);
@@ -7537,12 +7531,6 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
 	if (Q.isEmpty(element)) {
 		return false;
-	}
-	if (typeof eventName === 'string') {
-		var eventNames = eventName.split(' ');
-		if (eventNames.length > 1) {
-			eventName = eventNames;
-		}
 	}
 
 	useCapture = useCapture || false;
