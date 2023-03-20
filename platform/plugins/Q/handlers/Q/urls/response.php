@@ -2,6 +2,8 @@
 	
 function Q_urls_response()
 {
-	echo '{}';
+	if (Q_Request::isAjax() !== 'json') {
+		echo '{}';
+	}
 	return false;
 }

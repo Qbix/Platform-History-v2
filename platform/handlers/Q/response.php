@@ -54,7 +54,7 @@ function Q_response($params)
 
 	$action = $uri->action;
 	if (Q::canHandle("$module/$action/response")) {
-		if (false === Q::event("$module/$action/response", $_REQUEST) and !$isAjax) {
+		if (false === Q::event("$module/$action/response", $_REQUEST) and $isAjax !== 'json') {
 			return;
 		}
 	}
