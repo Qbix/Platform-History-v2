@@ -3224,6 +3224,7 @@
 		Users.hinted = [];
 		Q.Session.clear();
 		Web3.authResponse = null;
+		Web3.getContract.cache.clear();
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
 	}, 'Users');
@@ -4291,6 +4292,7 @@
 				// Subscribe to accounts change
 				provider.on("accountsChanged", function (accounts) {
 					console.log('provider.accountsChanged', accounts);
+					Web3.getContract.cache.clear();
 				});
 
 				// Subscribe to chainId change
