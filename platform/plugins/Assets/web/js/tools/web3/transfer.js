@@ -10,6 +10,7 @@
  * @constructor
  * @param {Object} options Override various options for this tool
  * @param {String} options.recipientUserId - id of user to whom the tokens should be sent
+ * @param {Q.Event} options.onSubmitted - when signed transaction is submitted to the mempool to be mined
  */
 
 Q.Tool.define("Assets/web3/transfer", function (options) {
@@ -39,7 +40,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
     { // default options here
         action: "send",
         tokenInfo: null,
-        chainId: Q.getObject("Web3.defaultChain.chainId", Q.Assets)
+        chainId: Q.getObject("Web3.defaultChain.chainId", Q.Assets),
+        onSubmitted: new Q.Event()
     },
 
     { // methods go here
@@ -122,7 +124,9 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     var parsedAmount = ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals);
 
                     if (state.tokenInfo.tokenAddress == Q.Users.Web3.zeroAddress){
-                        Q.Users.Web3.transaction(walletSelected, amount, {
+                        Q.Users.Web3.transaction(walletSelected, amount, function (err, transaction) {
+                            Q.handle(state.onSubmitted, tool, [err, transaction]);
+                        }, {
                             chainId: state.chainId
                         });
                         return;
