@@ -3825,8 +3825,9 @@
 		 * @method connect
 		 * @param {String} nodeUrl The url of the socket.io node to connect to
 		 * @param {Function} callback When a connection is made, receives the socket object
+		 * @return {Promise} to be used instead of callback
 		 */
-		connect: function _Users_Socket_connect(nodeUrl, callback) {
+		connect: Q.promisify(function _Users_Socket_connect(nodeUrl, callback) {
 			var qs = Q.Socket.get('Users', nodeUrl);
 			if (qs && qs.socket &&
 			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
@@ -3839,7 +3840,7 @@
 					callback && callback(socket, ns, url);
 				});
 			}
-		},
+		}),
 
 		/**
 		 * Returns a socket, if it was already connected, or returns undefined
@@ -4241,8 +4242,9 @@
 		 * Connect web3 wallet session
 		 * @method connect
 		 * @param {Function} callback
+		 * @return {Promise} to be used instead of callback
 		 */
-		connect: function (callback) {
+		connect: Q.promisify(function (callback) {
 			if (Web3.provider) {
 				return Q.handle(callback, null, [null, Web3.provider]);
 			}
@@ -4273,7 +4275,7 @@
 					});
 				}
 			});
-		},
+		}),
 
 		login: function (signedCallback, authenticatedCallback, cancelCallback, options) {
 			var _prevDocumentTitle = document.title;
@@ -4439,9 +4441,10 @@
 		 * Get currently selected wallet address asynchronously
 		 * @method getWalletAddress
 		 * @param {function} callback receives (err, address)
+	     * @return {Promise} to be used instead of callback
 		 */
-		getWalletAddress: function (callback) {
-			Web3.connect(function (err, provider) {
+		getWalletAddress: Q.promisify(function (callback) {
+			return Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
@@ -4450,7 +4453,7 @@
 					return Q.handle(callback, null, [null, accounts[0]]);
 				});
 			});
-		},
+		}),
 
 		/**
 		 * Get currently selected chain id asynchronously
@@ -4627,8 +4630,9 @@
 					var signer, contract;
 					signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
+						from: Q.Users.Web3.getLoggedInUserXid(),
 						to: recipient,
-						value: ethers.utils.parseEther(amount)
+						value: ethers.utils.parseEther(String(amount))
 					})).then(function (transaction) {
 						Q.handle(callback, transaction, [null, transaction]);
 					});
