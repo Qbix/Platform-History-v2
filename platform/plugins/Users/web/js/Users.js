@@ -4615,11 +4615,12 @@
 		 * @param {String} recipient address of type "0x..."
 		 * @param {String} chainId the ID of the chain (may need to switch to it)
 		 * @param {Number} amount the amount of native coin to send, with decimal portion
+		 * @param {Function} callback can receive (err, transaction)
 		 * @param {Object} options see TransactionRequest of ethers.js
 		 * @param {String} options.chainId Pass a chain ID here to switch to it, if necessary
 		 * @param {String} options.gasPrice One of multiple options you can do
 		 */
-		transaction: function _transaction(recipient, amount, options) {
+		transaction: function _transaction(recipient, amount, callback, options) {
 			Web3.withChain(options && options.chainId, _continue);
 			function _continue(provider) {
 				try {
