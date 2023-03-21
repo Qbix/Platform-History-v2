@@ -80,7 +80,7 @@ WebRTC.listen = function () {
         var _localMediaStream = null;
         var _chunksNum = 0;
 
-        if ( socket.handshake.query.rtmp ||  socket.handshake.query.recording ) {
+        if ( socket.handshake.query.rtmp || socket.handshake.query.recording ) {
             if(_debug) console.log('made sockets connection (LIVE STREAMING)', socket.id);
             var usersInfo = JSON.parse(socket.handshake.query.localInfo);
             var rtmpUrlsData = socket.handshake.query.rtmp ? JSON.parse( socket.handshake.query.rtmp) : [];
@@ -100,7 +100,7 @@ WebRTC.listen = function () {
                 var localRecordDir = appDir + 'files/' + appName + '/uploads/Streams/recordings/' + roomId + '/' + roomStartTime + '/' + userId + '/' + userConnectedTime;
                 if (!fs.existsSync(localRecordDir)) {
                     var oldmask = process.umask(0);
-                    fs.mkdirSync(localRecordDir, { recursive: true, mode: '0777' });
+                    mkdirp(localRecordDir);
                     process.umask(oldmask);
                 }
                 let filePath = localRecordDir + '/' + +Date.now() + '.mp4';
@@ -117,6 +117,13 @@ WebRTC.listen = function () {
                 postStartMessageAndBeginLivestreaming();
             } else {
                 initFFMpegProcess();
+            }
+
+            function mkdirp(dir) {
+                if (fs.existsSync(dir)) { return true }
+                const dirname = path.dirname(dir)
+                mkdirp(dirname);
+                fs.mkdirSync(dir);
             }
 
             function postStartMessageAndBeginLivestreaming () {
@@ -263,11 +270,19 @@ WebRTC.listen = function () {
                             '-f', 'tee', outputEndpoints
                         ]);
                     } else {
-                        params = params.concat([
-                            '-flvflags', 'no_duration_filesize',
-                            '-r', '24',
-                            '-f', 'flv', rtmpUrls[0]
-                        ]);
+                        if(socket.handshake.query.recording) {
+                            params = params.concat([
+                                '-r', '24',
+                                '-f', 'mp4', rtmpUrls[0]
+                            ]);
+                        } else {
+                            params = params.concat([
+                                '-flvflags', 'no_duration_filesize',
+                                '-r', '24',
+                                '-f', 'flv', rtmpUrls[0]
+                            ]);
+                        }
+                        
                     }
     
                     console.log('ffmpeg params ', params)

@@ -7407,12 +7407,6 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 	var handler = (eventHandler.typename === "Q.Event"
 		? (eventHandler.eventListener = _Q_addEventListener_wrapper)
 		: eventHandler);
-	if (typeof eventName === 'string') {
-		var split = eventName.trim().split(' ');
-		if (split.length > 1) {
-			eventName = split;
-		}
-	}
 	if (Q.isPlainObject(useCapture)) {
 		// Test via a getter in the options object to see if the passive property is accessed
 		if (_supportsPassive === undefined) {
@@ -7446,6 +7440,12 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		return;
 	}
 
+	if (typeof eventName === 'string') {
+		var split = eventName.trim().split(' ');
+		if (split.length > 1) {
+			eventName = split;
+		}
+	}
 	if (Q.isArrayLike(eventName)) {
 		for (var i=0, l=eventName.length; i<l; ++i) {
 			Q.addEventListener(element, eventName[i], eventHandler, useCapture, hookStopPropagation);
@@ -7519,7 +7519,11 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * @static
  * @method removeEventListener
  * @param {HTMLElement} element
- * @param {String} eventName
+ * @param {String|Array|Object|Function} eventName
+ *  A space-delimited string of event names, or an array of event names.
+ *  You can also pass an object of { eventName: eventHandler } pairs, in which csae
+ *  the next parameter would be useCapture.
+ *  You can also pass functions such as Q.Pointer.start here.
  * @param {Function} eventHandler
  * @param {boolean} useCapture
  * return {boolean} Should normally return true, unless listener could not be found or removed
@@ -8691,7 +8695,7 @@ Q.updateUrls = function(callback) {
 				// we couldn't find a diff, so let's reload the latest.json
 				Q.request('Q/urls/urls/latest.json', function (err, result) {
 					_update(result);
-				});
+				}, { extend: false, cacheBust: 1000 });
 				console.warn("Q.updateUrls couldn't load or parse " + url);
 				return Q.handle(callback, null, []);
 			} else {
@@ -12227,7 +12231,7 @@ Q.Visual = Q.Pointer = {
 	 * @method start
 	 */
 	start: function _Q_Pointer_start(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
+		params.eventName = 'touchstart mousedown';
 		return function (e) {
 			Q.Pointer.movedTooMuchForClickLastTime = false;
 			if (Q.Visual.recentlyScrolled) {
@@ -12247,7 +12251,7 @@ Q.Visual = Q.Pointer = {
 	 * @method end
 	 */
 	end: function _Q_Pointer_end(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'mouseup';
+		params.eventName = 'touchend mouseup';
 		return params.original;
 	},
 	/**
@@ -12256,7 +12260,7 @@ Q.Visual = Q.Pointer = {
 	 * @method move
 	 */
 	move: function _Q_Pointer_move(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchmove' : 'mousemove';
+		params.eventName = 'touchmove mousemove';
 		return params.original;
 	},
 	/**
@@ -12265,7 +12269,7 @@ Q.Visual = Q.Pointer = {
 	 * @method enter
 	 */
 	enter: function _Q_Pointer_enter(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchenter' : 'mouseenter';
+		params.eventName = 'touchenter mouseenter';
 		return params.original;
 	},
 	/**
@@ -12274,7 +12278,7 @@ Q.Visual = Q.Pointer = {
 	 * @method leave
 	 */
 	leave: function _Q_Pointer_leave(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchleave' : 'mouseleave';
+		params.eventName = 'touchleave mouseleave';
 		return params.original;
 	},
 	/**
@@ -12283,7 +12287,7 @@ Q.Visual = Q.Pointer = {
 	 * @method cancel
 	 */
 	cancel: function _Q_Pointer_cancel(params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
+		params.eventName = 'touchcancel mousecancel'; // mousecancel can be a custom event
 		return params.original;
 	},
 	/**
@@ -12345,7 +12349,7 @@ Q.Visual = Q.Pointer = {
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
-		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'click';
+		params.eventName = 'touchend mouseup';
 		return function _Q_fastclick_on_wrapper (e) {
 			var oe = e.originalEvent || e;
 			if (oe.type === 'touchend') {
@@ -13071,10 +13075,12 @@ Q.Visual = Q.Pointer = {
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
-			Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
-				div.removeClass('Q_touchlabel_show');
-				Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
-			}, false, true);
+			if (e.type == 'touchstart') {
+				Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
+					div.removeClass('Q_touchlabel_show');
+					Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
+				}, false, true);
+			}
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
@@ -13780,7 +13786,7 @@ Q.Dialogs = {
 	 * Closes a specific dialog and removes it from top of internal dialog stack.
 	 * @static
      * @method close
-	 * @param {Element|Number} dialog You can pass an element here, or index in the dialog stack
+	 * @param {Number|Element|jQuery} dialog You can pass an element here, or index in the dialog stack
 	 * @return {HTMLElement|null} The HTML element of the dialog that was just closed, or null if not found.
 	 */
 	close: function(dialog) {
@@ -13788,7 +13794,11 @@ Q.Dialogs = {
 		if (Q.isInteger(dialog)) {
 			index = dialog;
 			dialog = this.dialogs[index];
-		} else if (dialog instanceof Element) {
+		}
+		if (dialog instanceof jQuery) {
+			dialog = dialog[0];
+		}
+		if (dialog instanceof Element) {
 			Q.each(this.dialogs, function (i, d) {
 				if (d[0] === dialog) {
 					index = i;

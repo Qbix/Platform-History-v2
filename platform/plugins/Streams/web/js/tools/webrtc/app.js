@@ -321,6 +321,7 @@ window.WebRTCRoomClient = function app(options){
             svg: null,
             context: null,
             script: null,
+            average: 0.0,
             instant: 0.0,
             slow: 0.0,
             clip: 0.0,
@@ -639,21 +640,35 @@ window.WebRTCRoomClient = function app(options){
                         var average = 0;
                         for(let i = 0; i < freqData.length; i++) {
                             average += freqData[i]
-                        }
+                        } 
                         average = average / freqData.length;
                         return average;
                     }
 
+                    //to update audio metric data audioTimerLoop is used as there are cases when we need this data while tab is in background
+                    //requestAnimationFrame is not fired in background
+                    function updateAudioInfoData() {
+                        var freqData = new Uint8Array(participant.soundMeter.analyser.frequencyBinCount);
+                        participant.soundMeter.analyser.getByteFrequencyData(freqData);
+                        participant.soundMeter.average = getAverage(freqData);                        
+                    }
+
+                    participant.soundMeter.updateAudioDataInterval = window.setWorkerInterval(function () {
+                        updateAudioInfoData(participant);
+
+                        //console.log('updateAudioInfoData', participant.sid)
+                        /*if(app.state == 'disconnected') {
+                            window.clearWorkerInterval(participant.soundMeter.updateAudioDataInterval);
+                        }*/
+                    }, 16);
+
+                    //here requestAnimationFrame is used as we don't need animate SVG elements when tab is in background
                     function render(participant) {
                         participant.soundMeter.visualizationAnimation = requestAnimationFrame(function () {
                             render(participant)
                         });
 
-                        var freqData = new Uint8Array(participant.soundMeter.analyser.frequencyBinCount);
-                        participant.soundMeter.analyser.getByteFrequencyData(freqData);
-                        var average = participant.soundMeter.average = getAverage(freqData);
-
-
+                        var average = participant.soundMeter.average;
                         for (let key in participant.soundMeter.visualizations) {
                             if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
                                 var visualization = participant.soundMeter.visualizations[key];
@@ -1226,16 +1241,25 @@ window.WebRTCRoomClient = function app(options){
                 removeCommonVisualization();
                 for(let p = roomParticipants.length - 1; p >= 0; p--){
                     if(roomParticipants[p] == localParticipant) {
-                        if(!isRoomSwitch && roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
-
-                        if(!isRoomSwitch && roomParticipants[p].soundMeter.visualizationAnimation) {
-                            cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                        if(!isRoomSwitch) {
+                            if(roomParticipants[p].soundMeter.source != null) {
+                                roomParticipants[p].soundMeter.source.disconnect();
+                            }
+                            if (roomParticipants[p].soundMeter.visualizationAnimation) {
+                                cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                            }
+                            if (roomParticipants[p].soundMeter.updateAudioDataInterval) {
+                                window.clearWorkerInterval(roomParticipants[p].soundMeter.updateAudioDataInterval);
+                            }
                         }
                     } else {
                         if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
                         if(roomParticipants[p].soundMeter.visualizationAnimation) {
                             cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                        }
+                        if (roomParticipants[p].soundMeter.updateAudioDataInterval) {
+                            window.clearWorkerInterval(roomParticipants[p].soundMeter.updateAudioDataInterval);
                         }
                     }
 
@@ -2557,8 +2581,14 @@ window.WebRTCRoomClient = function app(options){
             } else if(data.type == 'online') {
                 //log('processDataTrackMessage online')
 
-                if(data.content.micIsEnabled != null) participant.remoteMicIsEnabled = data.content.micIsEnabled;
-                if(data.content.cameraIsEnabled != null) participant.remoteCameraIsEnabled = data.content.cameraIsEnabled;
+                if(data.content.micIsEnabled != null) {
+                    participant.remoteMicIsEnabled = data.content.micIsEnabled;
+                    participant.localMediaControlsState.mic = data.content.micIsEnabled;
+                }
+                if(data.content.cameraIsEnabled != null) {
+                    participant.remoteCameraIsEnabled = data.content.cameraIsEnabled;
+                    participant.localMediaControlsState.camera = data.content.micIsEnabled;
+                }
                 if(participant.online == false)	{
                     participant.online = true;
                     if(performance.now() - participant.latestOnlineTime < 5000) {
@@ -2681,10 +2711,16 @@ window.WebRTCRoomClient = function app(options){
             if(participant.online == false) return;
 
             //participant.remove();
+            if(participant.soundMeter.updateAudioDataInterval) {
+                window.clearWorkerInterval(participant.soundMeter.updateAudioDataInterval);
+            }
+
             if(participant.soundMeter.visualizationAnimation) {
                 cancelAnimationFrame(participant.soundMeter.visualizationAnimation);
             }
-            if(participant.soundMeter.source != null) participant.soundMeter.source.disconnect();
+            if(participant.soundMeter.source != null) {
+                participant.soundMeter.source.disconnect();
+            }
 
 
             participant.online = false;
@@ -6746,10 +6782,6 @@ window.WebRTCRoomClient = function app(options){
 
     app.disconnect = function (switchRoom) {
         console.log('app.disconnect', switchRoom)
-        if(app.checkOnlineStatusInterval != null) {
-            clearInterval(app.checkOnlineStatusInterval);
-            app.checkOnlineStatusInterval = null;
-        }
         if(app.sendOnlineStatusInterval != null) {
             clearInterval(app.sendOnlineStatusInterval);
             app.sendOnlineStatusInterval = null;
@@ -6856,6 +6888,48 @@ window.WebRTCRoomClient = function app(options){
         }
     }
 
+    /*
+    An alternative timing loop, based on AudioContext's clock
+
+    @arg callback : a callback function 
+        with the audioContext's currentTime passed as unique argument
+    @arg frequency : float in ms;
+    @returns : a stop function
+
+    */
+    function audioTimerLoop(callback, frequency) {
+
+        var freq = frequency / 1000;      // AudioContext time parameters are in seconds
+        var aCtx = new AudioContext();
+        // Chrome needs our oscillator node to be attached to the destination
+        // So we create a silent Gain Node
+        var silence = aCtx.createGain();
+        silence.gain.value = 0;
+        silence.connect(aCtx.destination);
+
+        onOSCend();
+
+        var stopped = false;       // A flag to know when we'll stop the loop
+        function onOSCend() {
+            var osc = aCtx.createOscillator();
+            osc.onended = onOSCend; // so we can loop
+            osc.connect(silence);
+            osc.start(0); // start it now
+            osc.stop(aCtx.currentTime + freq); // stop it next frame
+            callback(aCtx.currentTime); // one frame is done
+            if (stopped || app.state === 'disconnected') {  // user broke the loop
+                osc.onended = function () {
+                    aCtx.close(); // clear the audioContext
+                    return;
+                };
+            }
+        };
+        // return a function to stop our loop
+        return function () {
+            stopped = true;
+        };
+    }
+
     function determineBrowser(ua) {
         var ua= navigator.userAgent, tem,
             M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
@@ -6870,7 +6944,7 @@ window.WebRTCRoomClient = function app(options){
         M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
         if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
         return M;
-    }
+    }    
 
     function log(text) {
         if(options.debug === false) return;

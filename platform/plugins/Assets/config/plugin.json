@@ -112,6 +112,148 @@
 						"ReleaseManager/contract": {
 							"all": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671"
 						}
+					},
+					"R3": {
+						"Auction": {
+							"factory": {
+								"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+							},
+						},
+						"AuctionCommunity": {
+							"factory": {
+								"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+							},
+						},
+						"AuctionNFT": {
+							"factory": {
+								"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+						},
+						},
+						"AuctionSubscription": {
+							"factory": {
+								"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+								"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+							},
+						},
+						"ClaimManager": {
+							"factory": {
+								"all": "<put address here>",
+								"0x89": "<put address here>",
+								"0x13881": "<put address here>"
+							},
+						},
+						"Community": {
+							"factory": {
+								"0x38": "0x010101004FBff8d5D5b860CA9bC6EcE40E18C0Aa",
+								"0x89": "0x010101004FBff8d5D5b860CA9bC6EcE40E18C0Aa",
+								"0x13881": "0x9A0C889120c8ED9AE6afC9040531dA57fB971922"
+							},
+						},
+						"CommunityCoin": {
+							"factory": {
+								"0x38": "0x03010100a373cDEEaF08cebA6130e21d191d9962",
+								"0x89": "0x03010100a373cDEEaF08cebA6130e21d191d9962",
+								"0x13881": "0x1207394326FEF47066E35d6C267445a3F7511ECC"
+							},
+						},
+						"Contest": {
+							"factory": {
+								"all": "0x07010100806783309eD30F1E1F157F239a010545",
+								"0x89": "0x07010100806783309eD30F1E1F157F239a010545",
+								"0x13881": "0x25c850F82A54c83776Aaaf8a1AB4EE244939BC99"
+							},
+						},
+						"ContestETHOnly": {
+							"factory": {
+								"all": "0x07010100806783309eD30F1E1F157F239a010545",
+								"0x89": "0x07010100806783309eD30F1E1F157F239a010545",
+								"0x13881": "0x25c850F82A54c83776Aaaf8a1AB4EE244939BC99"
+							},
+						},
+						"Control": {
+							"factory": {
+								"all": "0x11010100A4CEb22C0a9E035CB650CebAc290c3B3",
+								"0x89": "0x11010100A4CEb22C0a9E035CB650CebAc290c3B3",
+								"0x13881": "0x97b0bcdC4677bC2db7c93786E7BE6420193848A2"
+							},
+						},
+						"Escrow": {
+							"factory": {
+								"all": "0x10010100E97280E4ef42EFb0834402F9f2d4c1b5",
+								"0x89": "0x10010100E97280E4ef42EFb0834402F9f2d4c1b5",
+								"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
+							},
+						},
+						"Fund": {
+							"factory": {
+								"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+								"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+								"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+							},
+						},
+						"FundAggregator": {
+							"factory": {
+								"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+								"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+								"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+							},
+						},
+						"FundToken": {
+							"factory": {
+								"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+								"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+								"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+							},
+						},
+						"Income": {
+							"factory": {
+								"all": "<put address here>",
+								"0x89": "<put address here>",
+								"0x13881": "<put address here>"
+							},
+						},
+						"IncomeUBI": {
+							"factory": {
+								"all": "<put address here>",
+								"0x89": "<put address here>",
+								"0x13881": "<put address here>"
+							},
+						},
+						"IncomeUBILinear": {
+							"factory": {
+								"all": "<put address here>",
+								"0x89": "<put address here>",
+								"0x13881": "<put address here>"
+							},
+						},
+						"Rewards": {
+							"factory": {
+								"all": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
+								"0x89": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
+								"0x13881": "0x8BDa578c81589aB58c757F3b395b58b45a51197B"
+							},
+						},
+						"Subscription": {
+							"factory": {
+								"all": "0x040101003eFD667D30429214223C31c319113E4F",
+								"0x89": "0x040101003eFD667D30429214223C31c319113E4F",
+								"0x13881": "0x7b0650C06010f8b9cC9e58a7E3D6C60bCb7A4517"
+							},
+						},
+						"Voting": {
+							"factory": {
+								"all": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
+								"0x89": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
+								"0x13881": "0xd0b63cdB328F313060c2d022603Edde429f5AdeD"
+							}
+						}
 					}
 				}
 			}
@@ -247,7 +389,7 @@
 		},
 		"onInsert": {
 			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/contests"],
-			"person": ["Assets/user/NFTs", "Assets/NFT/contracts", "Assets/NFT/series"]
+			"person": []
 		}
 	},
 	"Assets": {

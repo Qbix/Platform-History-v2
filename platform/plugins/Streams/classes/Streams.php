@@ -628,35 +628,7 @@ abstract class Streams extends Base_Streams
 		$options = array(),
 		&$results = array())
 	{
-		$stream = Streams::fetchOne($asUserId, $publisherId, $name, '*', $options, $results);
-		$results['created'] = false;
-		if ($stream) {
-			return $stream;
-		}
-		$fields = Q::ifset($options, 'fields', array());
-		$fields['name'] = $name;
-		$stream = Streams::create($asUserId, 
-			$publisherId, 
-			Q::ifset($options, 'type', null),
-			$fields, 
-			Q::ifset($options, 'relate', null),
-			$relateResults
-		);
-		if (!$stream) {
-			return null;
-		}
-		if (is_array($results)) {
-			$results['related'] = $relateResults;
-		}
-		if (!empty($options['subscribe'])) {
-			$so = is_array($options['subscribe'])
-				? $options['subscribe']
-				: array('skipAccess' => true);
-			$so['userId'] = $asUserId;
-			$results['participant'] = $stream->subscribe($so);
-		}
-		$results['created'] = true;
-		return $stream;
+		return Streams_Stream::fetchOrCreate($asUserId, $publisherId, $name, $options, $results);
 	}
 
 	/**

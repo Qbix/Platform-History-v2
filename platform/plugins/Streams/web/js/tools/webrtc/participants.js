@@ -35,6 +35,9 @@
         tool.participantListEl = null;
         tool.participantsList = [];
 
+        tool.webrtcUserInterface = options.webrtcUserInterface();
+        tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+
         tool.createList();
         tool.declareEventsHandlers();
 
@@ -43,7 +46,6 @@
         {
             onRefresh: new Q.Event(),
             controlsTool: null,
-            webrtcSignalingLib: null,
             webrtcUserInterface: null
         },
 
@@ -54,7 +56,13 @@
             },
             declareEventsHandlers: function() {
                 var tool = this;
-                var webrtcSignalingLib = tool.state.webrtcSignalingLib;
+                var webrtcSignalingLib = tool.webrtcSignalingLib;
+
+                webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
+                    tool.webrtcSignalingLib = e.newWebrtcSignalingLibInstance;
+                    tool.declareEventsHandlers();
+                });
+
                 webrtcSignalingLib.event.on('participantConnected', function (participant) {
                     tool.log('controls: participantConnected');
 
@@ -153,13 +161,13 @@
             createList: function () {
                 var tool = this;
 
-                var localParticipant = tool.state.webrtcSignalingLib.localParticipant();
-                var roomParticipants = tool.state.webrtcSignalingLib.roomParticipants();
+                var localParticipant = tool.webrtcSignalingLib.localParticipant();
+                var roomParticipants = tool.webrtcSignalingLib.roomParticipants();
 
                 tool.participantListEl = document.createElement('UL');
                 tool.participantListEl.className = 'Streams_webrtc_participants-list';
                 tool.addItem(localParticipant);
-                roomParticipants = tool.state.webrtcSignalingLib.roomParticipants();
+                roomParticipants = tool.webrtcSignalingLib.roomParticipants();
                 for (var i in roomParticipants) {
                     if (roomParticipants[i].isLocal) continue;
                     tool.addItem(roomParticipants[i]);
@@ -172,8 +180,8 @@
                 if (tool.participantListEl) tool.participantListEl.innerHTML = '';
                 tool.participantsList = [];
 
-                tool.addItem(tool.state.webrtcSignalingLib.localParticipant());
-                roomParticipants = tool.state.webrtcSignalingLib.roomParticipants();
+                tool.addItem(tool.webrtcSignalingLib.localParticipant());
+                roomParticipants = tool.webrtcSignalingLib.roomParticipants();
                 
                 for (var i in roomParticipants) {
                     if (roomParticipants[i].isLocal) continue;
@@ -186,7 +194,7 @@
             */
             addItem: function (roomParticipant) {
                 var tool = this;
-                var localParticipant = tool.state.webrtcSignalingLib.localParticipant();
+                var localParticipant = tool.webrtcSignalingLib.localParticipant();
                 function ListItem() {
                     this.listElement = null;
                     this.audioBtnEl = null;
@@ -211,12 +219,12 @@
                         var i, listItem;
                         for (i = 0; listItem = tool.participantsList[i]; i++) {
                             if (listItem.participant.isLocal) {
-                                if (tool.state.webrtcSignalingLib.localMediaControls.cameraIsEnabled()) {
+                                if (tool.webrtcSignalingLib.localMediaControls.cameraIsEnabled()) {
                                     listItem.cameraBtnEl.innerHTML = _participantsToolIcons.disabledCamera;
-                                    tool.state.webrtcSignalingLib.localMediaControls.disableVideo();
+                                    tool.webrtcSignalingLib.localMediaControls.disableVideo();
                                 } else {
                                     listItem.cameraBtnEl.innerHTML = _controlsToolIcons.cameraTransparent;
-                                    tool.state.webrtcSignalingLib.localMediaControls.enableVideo();
+                                    tool.webrtcSignalingLib.localMediaControls.enableVideo();
                                 }
                                 tool.state.controlsTool.updateControlBar();
                                 break;
@@ -231,12 +239,12 @@
                                     return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                                 }).length;
 
-                                if (tool.state.webrtcSignalingLib.localMediaControls.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)) {
+                                if (tool.webrtcSignalingLib.localMediaControls.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)) {
                                     listItem.audioBtnEl.innerHTML = _participantsToolIcons.locDisabledMic;
-                                    tool.state.webrtcSignalingLib.localMediaControls.disableAudio();
+                                    tool.webrtcSignalingLib.localMediaControls.disableAudio();
                                 } else {
                                     listItem.audioBtnEl.innerHTML = _controlsToolIcons.microphoneTransparent;
-                                    tool.state.webrtcSignalingLib.localMediaControls.enableAudio();
+                                    tool.webrtcSignalingLib.localMediaControls.enableAudio();
                                 }
                                 tool.state.controlsTool.updateControlBar();
 
@@ -328,7 +336,7 @@
                             this.muteVideo();
                         }
 
-                        tool.state.webrtcUserInterface.screenRendering.updateLayout();
+                        tool.webrtcUserInterface.screenRendering.updateLayout();
 
                     };
                     this.toggleScreenSharingScreen = function () {
@@ -353,7 +361,7 @@
                             this.muteScreenSharingVideo();
                         }
 
-                        tool.state.webrtcUserInterface.screenRendering.updateLayout();
+                        tool.webrtcUserInterface.screenRendering.updateLayout();
 
                     };
                     this.removePartcicipantScreens = function (screen) {
@@ -515,8 +523,8 @@
 
                 var muteAudioBtn = document.createElement('DIV');
                 muteAudioBtn.className = 'Streams_webrtc_mute-audio-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
-                muteAudioBtn.dataset.touchlabel = isLocal ? (tool.state.webrtcSignalingLib.localMediaControls.micIsEnabled() ? Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text) : Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.text)) : Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text);
-                muteAudioBtn.innerHTML = isLocal ? (tool.state.webrtcSignalingLib.localMediaControls.micIsEnabled() ? _controlsToolIcons.microphoneTransparent : _participantsToolIcons.locDisabledMic) : _participantsToolIcons.loudSpeaker;
+                muteAudioBtn.dataset.touchlabel = isLocal ? (tool.webrtcSignalingLib.localMediaControls.micIsEnabled() ? Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text) : Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.text)) : Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text);
+                muteAudioBtn.innerHTML = isLocal ? (tool.webrtcSignalingLib.localMediaControls.micIsEnabled() ? _controlsToolIcons.microphoneTransparent : _participantsToolIcons.locDisabledMic) : _participantsToolIcons.loudSpeaker;
                 var participantIdentity = document.createElement('DIV');
                 participantIdentity.className = 'Streams_webrtc_participants-identity';
                 var participantIdentityIcon = document.createElement('DIV');
@@ -559,7 +567,7 @@
                 var audioVisualization = document.createElement('DIV')
                 audioVisualization.className = 'Streams_webrtc_popup-visualization';
 
-                tool.state.webrtcSignalingLib.mediaManager.audioVisualization.build({
+                tool.webrtcSignalingLib.mediaManager.audioVisualization.build({
                     name: 'participantsPopup',
                     participant: roomParticipant,
                     element: audioVisualization,
@@ -569,7 +577,7 @@
                 participantItem.appendChild(tracksControlBtns);
                 muteVideo.appendChild(muteCameraBtn);
                 muteVideo.appendChild(muteScreenSharingBtn);
-                if (!tool.state.webrtcUserInterface.getOptions().audioOnlyMode) tracksControlBtns.appendChild(muteVideo);
+                if (!tool.webrtcUserInterface.getOptions().audioOnlyMode) tracksControlBtns.appendChild(muteVideo);
                 tracksControlBtns.appendChild(muteAudioBtn);
                 participantItem.appendChild(tracksControlBtns);
                 participantIdentity.appendChild(audioVisualization);
@@ -647,7 +655,7 @@
 
                     if (participant.isLocal) {
 
-                        if (!tool.state.webrtcSignalingLib.localMediaControls.micIsEnabled()) {
+                        if (!tool.webrtcSignalingLib.localMediaControls.micIsEnabled()) {
                             item.audioBtnEl.innerHTML = _participantsToolIcons.locDisabledMic;
                             item.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.text);
                         } else {
@@ -685,7 +693,7 @@
                 var i, listItem;
                 for (i = 0; listItem = tool.participantsList[i]; i++) {
                     if (listItem.participant.isLocal) {
-                        if (tool.state.webrtcSignalingLib.localMediaControls.cameraIsEnabled()) {
+                        if (tool.webrtcSignalingLib.localMediaControls.cameraIsEnabled()) {
                             listItem.cameraBtnEl.innerHTML = _controlsToolIcons.cameraTransparent;
                             listItem.isVideoMuted = false;
                         } else {
@@ -707,7 +715,7 @@
                 var i, listItem;
                 for (i = 0; listItem = tool.participantsList[i]; i++) {
                     if (listItem.participant.isLocal) {
-                        if (tool.state.webrtcSignalingLib.localMediaControls.micIsEnabled()) {
+                        if (tool.webrtcSignalingLib.localMediaControls.micIsEnabled()) {
                             listItem.audioBtnEl.innerHTML = _controlsToolIcons.microphoneTransparent;
                         } else {
                             listItem.audioBtnEl.innerHTML = _participantsToolIcons.locDisabledMic;
@@ -786,7 +794,7 @@
                     console.log.apply(console, params);
                 }
 
-                if (tool.state.webrtcSignalingLib) tool.state.webrtcSignalingLib.event.dispatch('log', params);
+                if (tool.webrtcSignalingLib) tool.webrtcSignalingLib.event.dispatch('log', params);
             }
         }
 
