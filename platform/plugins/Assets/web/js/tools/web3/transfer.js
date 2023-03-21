@@ -119,7 +119,16 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         return Q.alert(tool.text.errors.WalletInvalid);
                     }
 
-                    Q.Users.Web3.getContract("Assets/templates/R3/CommunityCoin/contract", {
+                    var parsedAmount = ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals);
+
+                    if (state.tokenInfo.tokenAddress == '0x0000000000000000000000000000000000000000'){
+                        Q.Users.Web3.transaction(walletSelected, parsedAmount, {
+                            chainId: state.chainId
+                        });
+                        return;
+                    }
+
+                    Q.Users.Web3.getContract("Assets/templates/ERC20", {
                         chainId: state.chainId,
                         contractAddress: state.tokenInfo.tokenAddress,
                         readOnly: false
@@ -144,7 +153,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             contract.off(_assets_web3_transfer_listener);
                         });
 
-                        contract.transfer(walletSelected, ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals)).then(function (info) {
+                        contract.transfer(walletSelected, parsedAmount).then(function (info) {
 
                         }, function (err) {
                             $this.removeClass("Q_working");
