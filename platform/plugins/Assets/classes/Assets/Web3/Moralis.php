@@ -67,7 +67,7 @@ class Assets_Web3_Moralis {
 					"name" => $nativeCurrencyInfo["name"],
 					"symbol" => $nativeCurrencyInfo["symbol"],
 					"decimals" => 18,
-					"token" => "0x0000000000000000000000000000000000000000"
+					"token_address" => "0x0000000000000000000000000000000000000000"
 
 				), $response));
 			}

@@ -12,7 +12,12 @@
 		"NeedMetaMaskConnected": "Need MetaMask connected to work with application",
 		"UserNotLoggedInMetaMask": "User is not logged in to MetaMask",
 		"CurrencyNotFound": "Currency not found",
-		"WrongChain": "This NFT created under \"{{chain}}\". Please use this chain."
+		"WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+		"NoRecipientSelected": "No recipient selected",
+		"NotEnoughPermissionsWallet": "Not enough permissions to read wallet of this user",
+		"ThisUserHaveNoWallet": "This user have no wallet assigned",
+		"TheWalletOfThisUserInvalid": "The wallet of this user invalid",
+		"WalletInvalid": "Wallet address invalid"
 	},
 	"admin": {
 		"Title": "Assets administrative",
@@ -242,7 +247,9 @@
 		"AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
 	},
 	"transfer": {
-
+		"SelectRecipient": "Select recipient",
+		"TransactionSuccess": "Transaction Success",
+		"OrTypeWalletAddress": "OR type recipient wallet address"
 	},
 	"NFT": {
 		"Title": "Title",

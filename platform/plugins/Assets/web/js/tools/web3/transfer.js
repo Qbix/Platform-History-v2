@@ -38,8 +38,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
     { // default options here
         action: "send",
-        recipientAddress: "0x206F557a3a49460619d52725Fb00b42937623fE7",
         tokenInfo: null,
+        chainId: Q.getObject("Web3.defaultChain.chainId", Q.Assets)
     },
 
     { // methods go here
@@ -61,14 +61,95 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                 Q.replace(tool.element, html);
 
+                var userSelected = null;
+                $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
+                    var userChooser = this;
+                    this.state.onChoose.set(function (userId, avatar) {
+                        Q.Streams.get(userId, "Streams/user/xid/web3", function (err) {
+                            if (err) {
+                                return;
+                            }
+
+                            if (!this.testReadLevel("content")) {
+                                return Q.alert(tool.text.errors.NotEnoughPermissionsWallet);
+                            }
+
+                            var wallet = this.fields.content;
+                            if (Q.isEmpty(wallet)) {
+                                return Q.alert(tool.text.errors.ThisUserHaveNoWallet);
+                            } else if (!ethers.utils.isAddress(wallet)) {
+                                return Q.alert(tool.text.errors.TheWalletOfThisUserInvalid);
+                            }
+
+                            userSelected = null;
+                            $(".Users_avatar_tool", userChooser.element).each(function () {
+                                Q.Tool.remove(this, true, true);
+                            });
+
+                            $("<div>").appendTo(userChooser.element).tool("Users/avatar", {
+                                userId: userId,
+                                icon: 50,
+                                contents: true,
+                                editable: false
+                            }).activate();
+
+                            userSelected = {
+                                userId: userId,
+                                avatar: avatar,
+                                wallet: this.fields.content
+                            };
+                        });
+                    }, tool);
+                });
+
                 var $amount = $("input[name=amount]", tool.element);
                 $("button[name=send]", tool.element).on(Q.Pointer.fastclick, function () {
+                    var $this = $(this);
                     var amount = parseFloat($amount.val());
                     if (!amount || amount > state.tokenInfo.tokenAmount) {
                         return Q.alert(tool.text.errors.AmountInvalid);
                     }
 
+                    var walletSelected = $("input[name=wallet]", tool.element).val() || Q.getObject("wallet", userSelected);
 
+                    if (Q.isEmpty(walletSelected)) {
+                        return Q.alert(tool.text.errors.NoRecipientSelected);
+                    }
+                    if (!ethers.utils.isAddress(walletSelected)) {
+                        return Q.alert(tool.text.errors.WalletInvalid);
+                    }
+
+                    Q.Users.Web3.getContract("Assets/templates/R3/CommunityCoin/contract", {
+                        chainId: state.chainId,
+                        contractAddress: state.tokenInfo.tokenAddress,
+                        readOnly: false
+                    }, function (err, contract) {
+                        if (err) {
+                            return;
+                        }
+
+                        $this.addClass("Q_working");
+
+                        contract.on("Transfer", function _assets_web3_transfer_listener (from, to, value) {
+                            if (!($this instanceof jQuery)) {
+                                return;
+                            }
+
+                            if (walletSelected.toLowerCase() !== to.toLowerCase()) {
+                                return;
+                            }
+
+                            Q.Dialogs.pop();
+                            Q.alert(tool.text.transfer.TransactionSuccess);
+                            contract.off(_assets_web3_transfer_listener);
+                        });
+
+                        contract.transfer(walletSelected, ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals)).then(function (info) {
+
+                        }, function (err) {
+                            $this.removeClass("Q_working");
+                        });
+                    });
                 });
             });
 
@@ -76,7 +157,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
     });
 
 Q.Template.set("Assets/web3/transfer/send",
-    `<div class="Assets_web3_transfer_send">{{tokenInfo.tokenAmount}} {{tokenInfo.tokenName}}</div>
+    `<div class="Assets_transfer_userChooser"><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{transfer.SelectRecipient}}" autocomplete="off"></div>
+    <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
     <input name="amount" placeholder="{{payment.EnterAmount}}" />
     <button class="Q_button" name="send">{{payment.Send}}</button>`,
     {text: ['Assets/content']}
