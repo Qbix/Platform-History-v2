@@ -4587,15 +4587,11 @@
 		 * @param {Function} callback Takes provider, needSigner
 		 */
 		withChain: function _withChain(chainId, callback) {
-			if (window.ethereum) {
-				if (!chainId || parseInt(ethereum.chainId) === parseInt(chainId)) {
-					return callback(ethereum, true);
-				}
-			}
 			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
+
 				if (!chainId || parseInt(provider.chainId) === parseInt(chainId)) {
 					callback(provider, true);
 				} else {
@@ -4699,7 +4695,7 @@
 							Q.handle(callback, contract, [null, contract]);
 						} catch (err) {
 							Q.handle(callback, null, [err]);
-						};
+						}
 					}
 				});
 			});
