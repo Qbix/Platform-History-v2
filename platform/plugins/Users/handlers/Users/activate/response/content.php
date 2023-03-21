@@ -42,6 +42,7 @@ function Users_activate_response_content()
 	
 	$view = Q_Config::get('Users', 'activateView', 'Users/content/activate.php');
 	$t = $email ? 'e' : 'm';
+	$autocompleteType = $email ? 'email' : 'phone';
 	$identifier = $email ? $emailAddress : $mobileNumber;
 
 	// Generate 10 passphrase suggestions
@@ -126,6 +127,6 @@ function Users_activate_response_content()
 
 	return Q::view($view, @compact(
 		'identifier', 'type', 'user', 'code', 'afterActivate',
-		'suggestions', 'verb_ue', 'noun_ue', 't', 'app', 'home', 'complete', 'salt_json'
+		'suggestions', 'verb_ue', 'noun_ue', 't', 'autocompleteType', 'app', 'home', 'complete', 'salt_json'
 	));
 }
