@@ -121,7 +121,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                     var parsedAmount = ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals);
 
-                    if (state.tokenInfo.tokenAddress == '0x0000000000000000000000000000000000000000'){
+                    if (state.tokenInfo.tokenAddress == Q.Users.Web3.zeroAddress){
                         Q.Users.Web3.transaction(walletSelected, amount, {
                             chainId: state.chainId
                         });
