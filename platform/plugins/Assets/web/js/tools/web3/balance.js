@@ -69,55 +69,57 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 			return parseFloat(parseFloat(ethers.utils.formatUnits(amount)).toFixed(12));
 		};
 
-		Q.handle(Web3.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
-			if (err) {
-				return console.warn(err);
-			}
-
-			var results = [];
-			Q.each(balance, function (i, item) {
-				var amount = _parseAmount(item.balance);
-
-				if (parseInt(item.token_address) > 0) {
-					// listen transfer event
-					Q.Users.Web3.getContract("Assets/templates/R3/CommunityCoin/contract", {
-						chainId: state.chainId,
-						contractAddress: item.token_address,
-						readOnly: true
-					}, function (err, contract) {
-						if (err) {
-							return;
-						}
-
-						contract.on("Transfer", function _assets_web3_balance_listener (from, to, value) {
-							if (![from.toLowerCase(), to.toLowerCase()].includes(tool.loggedInUserXid.toLowerCase())) {
+		Q.Users.init.web3(function () { // to load ethers.js
+			Q.handle(Web3.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
+				if (err) {
+					return console.warn(err);
+				}
+	
+				var results = [];
+				Q.each(balance, function (i, item) {
+					var amount = _parseAmount(item.balance);
+	
+					if (parseInt(item.token_address) > 0) {
+						// listen transfer event
+						Q.Users.Web3.getContract("Assets/templates/R3/CommunityCoin/contract", {
+							chainId: state.chainId,
+							contractAddress: item.token_address,
+							readOnly: true
+						}, function (err, contract) {
+							if (err) {
 								return;
 							}
-
-							contract.balanceOf(tool.loggedInUserXid).then(function (balance) {
-								balance = _parseAmount(balance);
-								$("*[data-address='" + item.token_address + "']", tool.element)
-									.attr("data-amount", balance)
-									.text(balance + " " + item.name)
-							}, function (err) {
-
+	
+							contract.on("Transfer", function _assets_web3_balance_listener (from, to, value) {
+								if (![from.toLowerCase(), to.toLowerCase()].includes(tool.loggedInUserXid.toLowerCase())) {
+									return;
+								}
+	
+								contract.balanceOf(tool.loggedInUserXid).then(function (balance) {
+									balance = _parseAmount(balance);
+									$("*[data-address='" + item.token_address + "']", tool.element)
+										.attr("data-amount", balance)
+										.text(balance + " " + item.name)
+								}, function (err) {
+	
+								});
 							});
 						});
+					}
+	
+					results.push({
+						tokenAmount: amount,
+						tokenName: item.name,
+						tokenAddress: item.token_address,
+						decimals: item.decimals
 					});
-				}
-
-				results.push({
-					tokenAmount: amount,
-					tokenName: item.name,
-					tokenAddress: item.token_address,
-					decimals: item.decimals
 				});
-			});
-
-			Q.handle(callback, null, [results]);
-		}, {
-			tokenAddresses: state.tokenAddresses
-		}]);
+	
+				Q.handle(callback, null, [results]);
+			}, {
+				tokenAddresses: state.tokenAddresses
+			}]);
+		});
 	},
 	getValue: function () {
 		var $selectedOption = $("select[name=tokens]", this.element).find(":selected");
