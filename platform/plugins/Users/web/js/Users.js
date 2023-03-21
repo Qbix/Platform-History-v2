@@ -4254,11 +4254,13 @@
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
 					return ethereum.request({ method: 'eth_requestAccounts' })
-					.then(function (accounts) {
+					.then(function () {
+						_subscribeToEvents(ethereum);
 						Web3.provider = ethereum;
 						return Q.handle(callback, null, [null, Web3.provider]);
 					}).catch(function (e) {
-						Q.handle(callback, null, [e]);
+						Q.handle(callback, null, [ex]);
+						throw new Error(ex);
 					});
 				} else {
 					// TODO: have direct deeplinks into wallet browsers
@@ -4267,6 +4269,7 @@
 					web3Modal.clearCachedProvider();
 					web3Modal.resetState();
 					web3Modal.connect().then(function (provider) {
+						_subscribeToEvents(provider);
 						Web3.provider = provider;
 						Q.handle(callback, null, [null, provider]);
 					}).catch(function (ex) {
@@ -4274,6 +4277,8 @@
 						throw new Error(ex);
 					});
 				}
+
+
 			});
 		}),
 
@@ -4800,19 +4805,25 @@
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
-
-		if (window.ethereum) {
-			window.ethereum.on("accountsChanged", function (accounts) {
-				Q.handle(Web3.onAccountsChanged, this, [accounts]);
-			});
-			window.ethereum.on("chainChanged", function (chainId) {
-				Q.handle(Web3.onChainChanged, this, [chainId]);
-			});
-			window.ethereum.on("connect", function (info) {
-				Q.handle(Web3.onConnect, this, [info]);
-			});
-		}
+		_subscribeToEvents(window.ethereum);
 	}, 'Users');
+
+	function _subscribeToEvents(provider) {
+		if (!provider || !provider.on
+		|| provider.subscribedToEvents) {
+			return;
+		}
+		provider.on("accountsChanged", function (accounts) {
+			Q.handle(Web3.onAccountsChanged, this, [accounts]);
+		});
+		provider.on("chainChanged", function (chainId) {
+			Q.handle(Web3.onChainChanged, this, [chainId]);
+		});
+		provider.on("connect", function (info) {
+			Q.handle(Web3.onConnect, this, [info]);
+		});
+		provider.subscribedToEvents = true;
+	}
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog, options) {
 		if (!options || !options.apply) {
