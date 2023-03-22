@@ -260,7 +260,7 @@ WebRTC.listen = function () {
                         var outputEndpoints = '';
                         for(let u in rtmpUrls) {
                             if(u == rtmpUrls.length - 1) {
-                                outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + ' > /dev/null 2>&1';
+                                outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u];
                             } else {
                                 outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
                             }
