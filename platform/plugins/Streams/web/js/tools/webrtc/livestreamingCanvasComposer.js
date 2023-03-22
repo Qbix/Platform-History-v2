@@ -2223,49 +2223,6 @@
                             //});
                         }
 
-
-                        /*
-                            An alternative timing loop, based on AudioContext's clock
-                        
-                            @arg callback : a callback function 
-                                with the audioContext's currentTime passed as unique argument
-                            @arg frequency : float in ms;
-                            @returns : a stop function
-                        
-                        */
-                        function audioTimerLoop(callback, frequency) {
-
-                            var freq = frequency / 1000;      // AudioContext time parameters are in seconds
-                            var aCtx = new AudioContext();
-                            // Chrome needs our oscillator node to be attached to the destination
-                            // So we create a silent Gain Node
-                            var silence = aCtx.createGain();
-                            silence.gain.value = 0;
-                            silence.connect(aCtx.destination);
-
-                            onOSCend();
-
-                            var stopped = false;       // A flag to know when we'll stop the loop
-                            function onOSCend() {
-                                var osc = aCtx.createOscillator();
-                                osc.onended = onOSCend; // so we can loop
-                                osc.connect(silence);
-                                osc.start(0); // start it now
-                                osc.stop(aCtx.currentTime + freq); // stop it next frame
-                                callback(aCtx.currentTime); // one frame is done
-                                if (stopped) {  // user broke the loop
-                                    osc.onended = function () {
-                                        aCtx.close(); // clear the audioContext
-                                        return;
-                                    };
-                                }
-                            };
-                            // return a function to stop our loop
-                            return function () {
-                                stopped = true;
-                            };
-                        }
-        
                         function drawImage(imageSource) {
                             var imageInstanse = imageSource.imageInstance;
                             var width = imageInstanse.width;
@@ -4464,37 +4421,20 @@
         
                         function mix() {
                             console.log('audioComposer: mix');
-                            if (audioContext == null) audioContext = new AudioContext();
-                            if (_dest == null) _dest = audioContext.createMediaStreamDestination();
-        
-        
-                            /* let silence = () => {
-                                 let ctx = new AudioContext(), oscillator = ctx.createOscillator();
-                                 let dst = oscillator.connect(ctx.createMediaStreamDestination());
-                                 oscillator.start();
-                                 return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
-                             }*/
-        
-                            /*var silentTrack = silence();
-                            var silentStream = new MediaStream();
-                            silentStream.addTrack(silentTrack);
-                            let source = audioContext.createMediaStreamSource(silentStream);
-                            source.connect(_dest);*/
-                            //_canvasMediStream.addTrack(silentTrack);
-        
-                            var noise = {
-                                volume: 0.05, // 0 - 1
-                                fadeIn: 2.5, // time in seconds
-                                fadeOut: 1.3, // time in seconds
+                            if (audioContext == null) {
+                                console.log('audioComposer: create AudioContext');
+                                audioContext = new AudioContext();
                             }
-        
-                            //var noiseGainNode = Noise.getGainNode(noise);
-                            //noiseGainNode.connect(_dest);
-                            //window.noiseGainNode = noiseGainNode;
-                            //_canvasMediStream.addTrack(noiseTrack);
-                            //_canvasMediStream.addTrack(localParticipant.audioTracks()[0].mediaStreamTrack);
-        
-                            if(_canvasMediStream) _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
+                            if (_dest == null) {
+                                console.log('audioComposer: createMediaStreamDestination');
+                                _dest = audioContext.createMediaStreamDestination();
+                            }
+
+                            /*if(_canvasMediStream) {
+                                console.log('audioComposer: addTrack');
+
+                                _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
+                            }*/
         
                             function declareOrRefreshEventHandlers() {
                                 var webrtcSignalingLib = tool.webrtcSignalingLib;
@@ -4539,9 +4479,21 @@
                             _dest = null;
                         }
         
+                        function suspend() {
+                            if(_dest != null) {
+                                _dest.disconnect();
+                                _dest = null;
+                            }
+                            if(audioContext != null) {
+                                audioContext.close();
+                                audioContext = null;
+                            }
+                        }
+        
                         return {
                             mix: mix,
                             stop: stop,
+                            suspend: suspend,
                             getDestination: function () {
                                 return _dest;
                             },
@@ -4577,13 +4529,15 @@
                     }
         
                     function captureStream() {
-                        log('captureStream');
+                        log('captureStream', _canvasMediStream);
         
-                        videoComposer.compositeVideosAndDraw();
+                        if(!videoComposer.isActive()) {
+                            videoComposer.compositeVideosAndDraw();
+                        }
         
                         _canvasMediStream = _canvas.captureStream(30); // 30 FPS
         
-                        var vTrack = _canvasMediStream.getVideoTracks()[0];
+                        /*var vTrack = _canvasMediStream.getVideoTracks()[0];
         
                         vTrack.addEventListener('mute', function(e){
                             _videoTrackIsMuted = true;
@@ -4592,8 +4546,14 @@
                         vTrack.addEventListener('unmute', function(e){
                             _videoTrackIsMuted = false;
                             log('captureStream: TRACK UNMUTED');
-                        });
+                        });*/
                         audioComposer.mix();
+                        let destinationNode = audioComposer.getDestination();
+                        if(destinationNode && destinationNode.stream.getTracks().length != 0) {
+                            log('captureStream addAudioTrack');
+                            _canvasMediStream.addTrack(destinationNode.stream.getTracks()[0]);
+                        }
+
         
                         _composerIsActive = true;
         
@@ -4605,6 +4565,7 @@
                             addDataListener(ondataavailable);
                         }
                         if(_mediaRecorder != null){
+                            console.error('Recorder already exists.')
                             return;
                         }
         
@@ -4640,7 +4601,7 @@
                             });
                             _mediaRecorder.startRecording();
                         } else {
-                            log('captureStream if1 else');
+                            log('captureStream if1 else', _canvasMediStream);
         
         
                             _mediaRecorder = new MediaRecorder(_canvasMediStream, {
@@ -4705,62 +4666,30 @@
                         
                         //if user ends call, stop all processes related to livestreaming
                         if(stopCanvasDrawingAndMixing) {
+                            log('stopRecorder: stopCanvasDrawingAndMixing')
                             videoComposer.stop();
                             audioComposer.stop();
                         }
 
+                        //bug: if to call canvas.captureStream() then stop all tracks in that stream and then call canvas.captureStream again - it will load CPU much.
                         if(_canvasMediStream != null) {
+                            log('stopRecorder: stop tracks')
                             let tracks = _canvasMediStream.getTracks();
                             for(let t in tracks) {
+                                if(tracks[t].kind == 'audio') {
+                                    continue;
+                                }
                                 tracks[t].stop()
                             }
                             _canvasMediStream = null;
                         }
+                        //audioComposer.suspend();
                         
                         _composerIsActive = false;
 
                         _mediaRecorder = null;
-                    }
-
-                    /*
-                    An alternative timing loop, based on AudioContext's clock
-
-                    @arg callback : a callback function 
-                    with the audioContext's currentTime passed as unique argument
-                    @arg frequency : float in ms;
-                    @returns : a stop function
-
-                    */
-                    function audioTimerLoop(callback, frequency) {
-                        var freq = frequency / 1000;      // AudioContext time parameters are in seconds
-                        var aCtx = new AudioContext();
-                        // Chrome needs our oscillator node to be attached to the destination
-                        // So we create a silent Gain Node
-                        var silence = aCtx.createGain();
-                        silence.gain.value = 0;
-                        silence.connect(aCtx.destination);
-
-                        onOSCend();
-
-                        var stopped = false;       // A flag to know when we'll stop the loop
-                        function onOSCend() {
-                            var osc = aCtx.createOscillator();
-                            osc.onended = onOSCend; // so we can loop
-                            osc.connect(silence);
-                            osc.start(0); // start it now
-                            osc.stop(aCtx.currentTime + freq); // stop it next frame
-                            callback(aCtx.currentTime); // one frame is done
-                            if (stopped || tool.webrtcSignalingLib.state === 'disconnected') {  // user broke the loop
-                                osc.onended = function () {
-                                    aCtx.close(); // clear the audioContext
-                                    return;
-                                };
-                            }
-                        };
-                        // return a function to stop our loop
-                        return function () {
-                            stopped = true;
-                        };
+                        
+                        _dataListeners = [];
                     }
         
                     function saveToFile(file, fileName) {
