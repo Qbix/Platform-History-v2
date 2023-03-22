@@ -41,6 +41,7 @@ function Streams_callCenter_post($params = array())
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
 	$socketId = Q::ifset($params, 'socketId', null);
+	$operatorSocketId = Q::ifset($params, 'operatorSocketId', null);
 	$callDescription = Q::ifset($params, 'description', null);
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
@@ -49,19 +50,257 @@ function Streams_callCenter_post($params = array())
     $writeLevel = Q::ifset($params, 'writeLevel', 23);
     $closeManually = Q::ifset($params, 'closeManually', null);
     $useRelatedTo = Q::ifset($params, 'useRelatedTo', null);
+    $cmd = Q::ifset($params, 'cmd', null);
+
+    if (!$loggedInUser) {
+        throw new Exception('You are not logged in');
+    }
 
     if(Q_Request::slotName('data')) {
-        //this is request that was sent by node.js when some event was fired (client.on('disconnect'), for example)
-        $webrtcStream = Streams_Stream::fetch(null, $publisherId, $streamName);
+        if($cmd == 'closeStream') {
+            //this is request that was sent by node.js when some event was fired (client.on('disconnect'), for example)
+            $webrtcStream = Streams_Stream::fetch(null, $publisherId, $streamName);
+    
+            if(!is_null($webrtcStream)) {
+                //return Q_Response::setSlot('data', ['publisherId' => $publisherId, 'streamName' => get_class_methods($webrtcStream)]);
+                $webrtcStream->close($publisherId);
+                $webrtcStream->changed();
+                $webrtcStream->save();
+            }
+    
+            return Q_Response::setSlot('data', ['cmd'=> $cmd, 'publisherId' => $publisherId, 'streamName' => $streamName]);
+        } else if($cmd == 'closeIfOffline') {
+            $userIsOnline = Q::ifset($params, 'userIsOnline', false);
+            $webrtcStream = Streams_Stream::fetch(null, $publisherId, $streamName);
+    
+            $streamWasClosed = false;
+            if($userIsOnline === false || $userIsOnline === 'false' || $userIsOnline === 0 || $userIsOnline === '0') {
+                $webrtcStream->close($publisherId);
+                $webrtcStream->changed();
+                $webrtcStream->save();
+                $streamWasClosed = true;
+            }
+    
+            return Q_Response::setSlot('data', ['cmd'=> $cmd, 'streamWasClosed' =>  $streamWasClosed, 'userIsOnline' => $userIsOnline, 'publisherId' => $publisherId, 'streamName' => $streamName]);
+        }
+    } else  if(Q_Request::slotName('makeCallCenterFromStream')) {
+        // makeCallCenterFromStream means giving access to this stream for Users/hosts
 
-        if(!is_null($webrtcStream)) {
-            //return Q_Response::setSlot('data', ['publisherId' => $publisherId, 'streamName' => get_class_methods($webrtcStream)]);
-            $webrtcStream->close($publisherId);
-            $webrtcStream->changed();
-            $webrtcStream->save();
+        $access = new Streams_Access();
+        $access->publisherId = $publisherId;
+        $access->streamName = $streamName;
+        $access->ofContactLabel = 'Users/hosts';
+        if (!$access->retrieve()) {
+            $access->readLevel = Streams::$READ_LEVEL['max'];
+            $access->writeLevel = Streams::$WRITE_LEVEL['max'];
+            $access->adminLevel = Streams::$ADMIN_LEVEL['invite'];
+            $access->save();
+        }
+    
+        Q_Response::setSlot("makeCallCenterFromStream", 'done');
+    } else if(Q_Request::slotName('closeIfOffline')) {
+        if ($loggedInUser) {
+            Q_Utils::sendToNode(array(
+                "Q/method" => "Users/checkIfOnline",
+                "socketId" => $socketId,
+                "operatorSocketId" => $operatorSocketId,
+                "operatorUserId" => $loggedInUserId,
+                "userId" => $loggedInUserId,
+                "handlerToExecute" => 'Streams/callCenter',
+                "data" => [
+                    "cmd" => 'closeIfOffline',
+                    "publisherId" => $publisherId,
+                    "streamName" => $streamName
+                ],
+            ));
+        }
+    
+        Q_Response::setSlot("closeIfOffline", 'done');
+    } else if(Q_Request::slotName('acceptHandler')) {
+        $waitingRoom = Q::ifset($params, 'waitingRoom', null);
+        $liveShowRoom = Q::ifset($params, 'liveShowRoom', null);
+        $callStatus = Q::ifset($params, 'callStatus', 'none');
+
+        if(!$waitingRoom || !$liveShowRoom) {
+            throw new Exception('waitingRoom and liveShowRoom are required');
         }
 
-        return Q_Response::setSlot('data', ['publisherId' => $publisherId, 'streamName' => $streamName]);
+        $waitingRoomStream = Streams::fetchOne($loggedInUserId, $waitingRoom['publisherId'], $waitingRoom['streamName']);
+        $liveShowRoomStream = Streams::fetchOne($loggedInUserId, $liveShowRoom['publisherId'], $liveShowRoom['streamName']);
+
+        if(!$waitingRoomStream || !$liveShowRoomStream) {
+            throw new Exception('Streams not found');
+        }
+
+        $status = $waitingRoomStream->getAttribute('status');
+
+        //print_r($status);
+        //print_r('---');
+        //print_r($callStatus);die;
+        if($status != $callStatus) {
+            throw new Exception('Another manager is interviewing or already accepted this call');
+        }
+
+        $access = new Streams_Access();
+        $access->publisherId = $liveShowRoom['publisherId'];
+        $access->streamName = $liveShowRoom['streamName'];
+        $access->ofUserId = $waitingRoom['publisherId'];
+        if (!$access->retrieve()) {
+            $access->readLevel = Streams::$READ_LEVEL['max'];
+            $access->writeLevel = Streams::$WRITE_LEVEL['relate'];
+            $access->adminLevel = Streams::$ADMIN_LEVEL['invite'];
+            $access->save();
+        }
+    
+        $waitingRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/accepted',
+            'instructions' => [
+                'msg' => 'Your call request was accepted'
+            ]
+        ));
+
+        $waitingRoomStream->setAttribute('status', 'accepted');
+        $waitingRoomStream->changed();
+        $waitingRoomStream->save();
+
+        $liveShowRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/accepted',
+            'instructions' => [
+                'waitingRoom' => $waitingRoom,
+                'byUserId' => $loggedInUserId
+            ]
+        ));
+
+        Q_Response::setSlot("acceptHandler", 'request sent');
+    } else if(Q_Request::slotName('endOrDeclineCallHandler')) {
+        $waitingRoom = Q::ifset($params, 'waitingRoom', null);
+        $liveShowRoom = Q::ifset($params, 'liveShowRoom', null);
+        $action = Q::ifset($params, 'action', null);
+        $callStatus = Q::ifset($params, 'callStatus', 'none');
+
+        if(!$waitingRoom || !$liveShowRoom || !$action) {
+            throw new Exception('$waitingRoom, $liveShowRoom and $action are required');
+        }
+
+        $waitingRoomStream = Streams::fetchOne($loggedInUserId, $waitingRoom['publisherId'], $waitingRoom['streamName']);
+        $liveShowRoomStream = Streams::fetchOne($loggedInUserId, $liveShowRoom['publisherId'], $liveShowRoom['streamName']);
+
+        if(!$waitingRoomStream || !$liveShowRoomStream) {
+            throw new Exception('Streams not found');
+        }
+
+        $status = $waitingRoomStream->getAttribute('status');
+
+        if($status != $callStatus) {
+            throw new Exception('Another manager already accepted, declined or ended this call');
+        }
+
+        $access = new Streams_Access();
+        $access->publisherId = $liveShowRoom['publisherId'];
+        $access->streamName = $liveShowRoom['streamName'];
+        $access->ofUserId = $waitingRoom['publisherId'];
+        if ($access->retrieve()) {
+            $access->remove();
+        }
+
+        $instructions = [
+            'immediate' => true, 
+            'userId' => $waitingRoom['publisherId']
+        ];
+        $messageType = 'Streams/webrtc/callEnded';
+        if($action == 'endCall') {
+            $messageType = 'Streams/webrtc/callEnded';
+            $instructions['msg'] = 'Call ended';
+        } else if($action == 'declineCall') {
+            $messageType = 'Streams/webrtc/callDeclined';
+            $instructions['msg'] = 'Your call request was declined';
+        }
+    
+        $waitingRoomStream->post($publisherId, array(
+            'type' => $messageType,
+            'instructions' => $instructions
+        ));
+
+        $waitingRoomStream->setAttribute('status', $action == 'endCall' ? 'ended' : 'declined');
+        $waitingRoomStream->changed();
+        $waitingRoomStream->save();
+
+        $liveShowRoomStream->post($publisherId, array(
+            'type' => $messageType,
+            'instructions' => [
+                'waitingRoom' => $waitingRoom,
+                'byUserId' => $loggedInUserId
+            ]
+        ));
+
+        $waitingRoomStream->close($waitingRoom['publisherId']);
+
+        Q_Response::setSlot("endOrDeclineCallHandler", 'done');
+    } else if (Q_Request::slotName('interviewHandler')) {
+        $waitingRoom = Q::ifset($params, 'waitingRoom', null);
+        $liveShowRoom = Q::ifset($params, 'liveShowRoom', null);
+        $callStatus = Q::ifset($params, 'callStatus', 'none');
+
+        if(!$waitingRoom || !$liveShowRoom) {
+            throw new Exception('$waitingRoom, $liveShowRoom and $action are required');
+        }
+
+        $waitingRoomStream = Streams::fetchOne($loggedInUserId, $waitingRoom['publisherId'], $waitingRoom['streamName']);
+        $liveShowRoomStream = Streams::fetchOne($loggedInUserId, $liveShowRoom['publisherId'], $liveShowRoom['streamName']);
+
+        if(!$waitingRoomStream || !$liveShowRoomStream) {
+            throw new Exception('Streams not found');
+        }
+
+        $status = $waitingRoomStream->getAttribute('status');
+
+        if($status != $callStatus) {
+            throw new Exception('Another manager already changed status of this call');
+        }
+
+        $waitingRoomStream->setAttribute('status', 'interview');
+        $waitingRoomStream->changed();
+        $waitingRoomStream->save();
+
+        $liveShowRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/interview',
+            'instructions' => [
+                'waitingRoom' => $waitingRoom,
+                'byUserId' => $loggedInUserId
+            ]
+        ));
+        Q_Response::setSlot("interviewHandler", 'done');
+    } else if (Q_Request::slotName('markApprovedHandler')) {
+        $waitingRoom = Q::ifset($params, 'waitingRoom', null);
+        $liveShowRoom = Q::ifset($params, 'liveShowRoom', null);
+        $isApproved = Q::ifset($params, 'isApproved', null);
+        $isApproved = $isApproved == 'true' ? true : false;
+
+        //var_dump($isApproved);die;
+        if(!$waitingRoom || !$liveShowRoom || $isApproved === null) {
+            throw new Exception('$waitingRoom, $liveShowRoom and $action are required');
+        }
+
+        $waitingRoomStream = Streams::fetchOne($loggedInUserId, $waitingRoom['publisherId'], $waitingRoom['streamName']);
+        $liveShowRoomStream = Streams::fetchOne($loggedInUserId, $liveShowRoom['publisherId'], $liveShowRoom['streamName']);
+
+        if(!$waitingRoomStream || !$liveShowRoomStream) {
+            throw new Exception('Streams not found');
+        }
+
+        $waitingRoomStream->setAttribute('isApproved', $isApproved);
+        $waitingRoomStream->changed();
+        $waitingRoomStream->save();
+
+        $liveShowRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/approved',
+            'instructions' => [
+                'waitingRoom' => $waitingRoom,
+                'byUserId' => $loggedInUserId,
+                'isApproved' => $isApproved
+            ]
+        ));
+        Q_Response::setSlot("markApprovedHandler", 'done');
     } else {
         if (!$socketId) {
             throw new Exception('To continue you should be connected to the socket server.');
@@ -168,6 +407,10 @@ function Streams_callCenter_post($params = array())
             $response['stream']->content = $callDescription;
         }
     
+        if($socketId !== null) {
+            $response['stream']->setAttribute("socketId", $socketId);
+        }
+
         if($response['stream']->getAttribute("onlyParticipantsAllowed") == false || $response['stream']->testWriteLevel('edit')) {
             $response['stream']->join();
         } else {
@@ -177,6 +420,8 @@ function Streams_callCenter_post($params = array())
             }
         }
     
+        $response['stream']->setAttribute('status', 'created');
+
         $response['stream']->changed();
         $response['stream']->save();
     

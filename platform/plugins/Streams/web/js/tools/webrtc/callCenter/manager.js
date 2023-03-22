@@ -33,8 +33,8 @@
         tool.loadStyles().then(function() {
             return tool.getCallCenterEndpointStream();
         }).then(function(stream) {
-            console.log('levels', stream.testReadLevel('relations'), stream.testWriteLevel('join'), stream.testAdminLevel('invite'))
-            if(!stream.testReadLevel('relations') || !stream.testWriteLevel('max') || !stream.testAdminLevel('invite')) {
+            console.log('levels', stream, stream.testReadLevel('relations'), stream.testWriteLevel('relate'), stream.testAdminLevel('invite'))
+            if(!stream.testReadLevel('relations') || !stream.testWriteLevel('relate') || !stream.testAdminLevel('invite')) {
                 return Q.alert('You are now allowed to create call center on this stream');
             }
 
@@ -42,7 +42,7 @@
             tool.callCenterMode = stream.fields.type == 'Streams/webrtc' ? 'liveShow' : 'regular';
             console.log('callCenterStream', tool.callCenterStream);
             tool.callCenterStream.observe();
-            //tool.declareStreamEventHandlers();
+            tool.declareStreamEventHandlers();
             tool.buildInterface();
         });
     },
@@ -50,6 +50,7 @@
         {
             publisherId: null,
             streamName: null,
+            operatorSocketId: null,
             onRefresh: new Q.Event()
         },
 
@@ -59,14 +60,65 @@
             },
             declareStreamEventHandlers: function() {
                 var tool = this;
-                tool.callCenterStream.onMessage("Streams/livestream/start").set(function (stream, message) {
-                    //tool.syncLivestreamsList([message]);
-                    //tool.videoTabsTool.syncVideoTabsList.apply(tool);
+                tool.callCenterStream.onMessage("Streams/webrtc/accepted").set(function (stream, message) {
+                    console.log('Streams/webrtc/accepted', message)
+                    var instructions = JSON.parse(message.instructions);
+                    var callDataObject = getCallDataObject(instructions.waitingRoom.streamName);
+                    if(!callDataObject) return;
+                    callDataObject.statusInfo.status = 'accepted';
+                    callDataObject.statusInfo.byUserId = instructions.byUserId;
+                    tool.updateCallButtons(callDataObject);
                 }, tool);
-                tool.callCenterStream.onMessage("Streams/livestream/stop").set(function (stream, message) {
-                    //tool.syncLivestreamsList([message]);
-                    //tool.videoTabsTool.syncVideoTabsList.apply(tool);
+                tool.callCenterStream.onMessage("Streams/webrtc/callEnded").set(function (stream, message) {
+                    console.log('Streams/webrtc/callEnded', message)
+                    var instructions = JSON.parse(message.instructions);
+                    var callDataObject = getCallDataObject(instructions.waitingRoom.streamName);
+                    if(!callDataObject) return;
+                    callDataObject.statusInfo.status = 'ended';
+                    callDataObject.statusInfo.byUserId = instructions.byUserId;
+                    tool.updateCallButtons(callDataObject);
                 }, tool);
+                
+                tool.callCenterStream.onMessage("Streams/webrtc/callDeclined").set(function (stream, message) {
+                    console.log('Streams/webrtc/callDeclined', message)
+                    var instructions = JSON.parse(message.instructions);
+                    var callDataObject = getCallDataObject(instructions.waitingRoom.streamName);
+                    if(!callDataObject) return;
+                    callDataObject.statusInfo.status = 'declined';
+                    callDataObject.statusInfo.byUserId = instructions.byUserId;
+                    tool.updateCallButtons(callDataObject);
+                }, tool);
+                
+                tool.callCenterStream.onMessage("Streams/webrtc/interview").set(function (stream, message) {
+                    console.log('Streams/webrtc/interview', message)
+                    var instructions = JSON.parse(message.instructions);
+                    var callDataObject = getCallDataObject(instructions.waitingRoom.streamName);
+                    if(!callDataObject) return;
+                    callDataObject.statusInfo.status = 'interview';
+                    callDataObject.statusInfo.byUserId = instructions.byUserId;
+                    tool.updateCallButtons(callDataObject);
+                }, tool);
+                
+                tool.callCenterStream.onMessage("Streams/webrtc/approved").set(function (stream, message) {
+                    console.log('Streams/webrtc/approved', message)
+                    var instructions = JSON.parse(message.instructions);
+                    var callDataObject = getCallDataObject(instructions.waitingRoom.streamName);
+                    if(!callDataObject) return;
+                    callDataObject.statusInfo.isApproved = instructions.isApproved;
+                    console.log('Streams/webrtc/approved isApproved', callDataObject.statusInfo.isApproved)
+
+                    callDataObject.statusInfo.isApprovedByUserId = instructions.byUserId;
+                    tool.updateCallButtons(callDataObject);
+                }, tool);
+
+                function getCallDataObject(streamNameOfCall) {
+                    for (let c in tool.callsList) {
+                        if(streamNameOfCall == tool.callsList[c].webrtcStream.fields.name) {
+                            return tool.callsList[c];
+                        }
+                    }
+                    return null;
+                }
             },
             loadStyles: function () {
                 return new Promise(function(resolve, reject){
@@ -78,15 +130,29 @@
             getCallCenterEndpointStream: function () {
                 var tool = this;
                 return new Promise(function (resolve, reject) {
-                    Q.Streams.get(tool.state.publisherId, tool.state.streamName, function (err, stream) {
-                        if (!stream) {
-                            console.error('Error while getting call center stream');
-                            reject('Error while getting call center stream');
-                            return;
-                        }
+                    Q.req("Streams/callCenter", ["makeCallCenterFromStream"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
 
-                        resolve(stream);
+                        if (msg) {
+                            reject('Error while making call center from a stream');
+                        }
+                        Q.Streams.get(tool.state.publisherId, tool.state.streamName, function (err, stream) {
+                            if (!stream) {
+                                console.error('Error while getting call center stream');
+                                reject('Error while getting call center stream');
+                                return;
+                            }
+    
+                            resolve(stream);
+                        });
+                    }, {
+                        method: 'post',
+                        fields: {
+                            publisherId: tool.state.publisherId,
+                            streamName: tool.state.streamName
+                        }
                     });
+                    
                 });
             },
             initColumnsTool: function (container) {
@@ -107,6 +173,28 @@
             },
             buildInterface: function () {
                 var tool = this;
+                var socketConns = Q.Users.Socket.get();
+                if (!socketConns || Object.keys(socketConns).length == 0 || socketConns[Object.keys(socketConns)[0]] == null || !socketConns[Object.keys(socketConns)[0]].socket.id) {
+                    console.log('buildInterface no socket',socketConns)
+
+                    Q.Socket.onConnect('Users').add(function () {
+                        console.log('onSession: no socket connection yet');
+                        tool.buildInterface()
+                    })
+                    return;
+                }
+
+                if (Object.keys(socketConns).length == 0) {
+                    Q.alert('To continue you should be connected to the socket server.');
+                    return;
+                }  
+
+                console.log('tool.state.operatorSocketId socketConns',socketConns)
+                console.log('tool.state.operatorSocketId socketConns2',socketConns[Object.keys(socketConns)[0]])
+
+                tool.state.operatorSocketId = socketConns[Object.keys(socketConns)[0]].socket.id;
+                console.log('tool.state.operatorSocketId', tool.state.operatorSocketId)
+
                 var toolContainer = document.createElement('DIV');
                 toolContainer.className = 'streams-callcenter-m-container';
 
@@ -157,6 +245,10 @@
                             console.log('onUpdate', e, this)
                             tool.relatedStreams = e.relatedStreams;
                             tool.reloadCallsList();
+                            if(!tool.callsListLoaded) {
+                                tool.callsListLoaded = true;
+                                tool.onCallsListFirstLoadHandler()
+                            }
                         },
                         beforeRenderPreview: function (e) {
                             console.log('beforeRenderPreview', e, this)
@@ -204,13 +296,19 @@
                         continue;
                     }
 
-                    
+                    var status = stream.getAttribute('status');
+                    console.log('reloadCallsList: status', status);
+
+                    var isApproved = stream.getAttribute('isApproved');
                     let callDataObject = {
                         title: stream.fields.title,
                         topic: stream.fields.content,
                         webrtcStream: stream,
                         timestamp: convertDateToTimestamp(stream.fields.insertedTime),
-                        status: 'created'
+                        statusInfo: {
+                            status: status ? status : 'created',
+                            isApproved: isApproved == true || isApproved == 'true' ? true : false
+                        }
                     }
 
                     createCallItemElement(callDataObject);
@@ -222,7 +320,6 @@
                     tool.callsList.sort(function(x, y){
                         return y.timestamp - x.timestamp;
                     })
-                   
 
                     tool.handleStreamEvents(stream, callDataObject);
                 }
@@ -241,7 +338,7 @@
                             callIsClosed = false;
                         }
                     }
-                    if(callIsClosed && tool.callsList[i].status != 'accepted') {
+                    if(callIsClosed) {
                         console.log('reloadCallsList: callsList for remove', i)
                         if(tool.callsList[i].callElement && tool.callsList[i].callElement.parentElement != null) {
                             tool.callsList[i].callElement.parentElement.removeChild(tool.callsList[i].callElement);
@@ -400,6 +497,11 @@
                         declineButton.innerHTML = 'End Call';
                         callButtons.appendChild(declineButton);
     
+                        markApprovedButton.addEventListener('click', function () {
+                            tool.onMarkApprovedHandler(callDataObject);
+                            tool.updateCallButtons(callDataObject);
+                        });
+    
                         acceptButton.addEventListener('click', function () {
                             tool.onAcceptHandler(callDataObject);
                             tool.updateCallButtons(callDataObject);
@@ -459,21 +561,45 @@
                     return timestamp;
                 }
             },
+            onCallsListFirstLoadHandler: function () {
+                var tool = this;
+                //check whether some calls are already inactive after callCenterManager loaded for the first time
+                for(let i in tool.callsList) {
+                    let callDataObject = tool.callsList[i];
+                    Q.req("Streams/callCenter", ["closeIfOffline"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+                        console.log('requestCall: closeIfOffline', response.slots.closeIfOffline);
+
+                    }, {
+                        method: 'post',
+                        fields: {
+                            publisherId: callDataObject.webrtcStream.fields.publisherId,
+                            streamName: callDataObject.webrtcStream.fields.name,
+                            socketId: callDataObject.webrtcStream.getAttribute('socketId'),
+                            operatorSocketId: tool.state.operatorSocketId
+                        }
+                    });
+                }
+            },
             updateCallButtons: function (callDataObject) {
                 var tool = this;
-                console.log('updateCallButtons', callDataObject.status);
+                console.log('updateCallButtons', callDataObject.statusInfo);
                 if(tool.callCenterMode == 'regular') {
-                    if(callDataObject.status == 'created') {
+                    if(callDataObject.statusInfo.status == 'created') {
                         hideButton(callDataObject.holdButtonEl);
                         showButton(callDataObject.interviewButtonEl);
                         showButton(callDataObject.declineButtonEl); 
-                    } else if(callDataObject.status == 'accepted') {
+                    } else if(callDataObject.statusInfo.status == 'accepted') {
                         showButton(callDataObject.holdButtonEl);
                         showButton(callDataObject.declineButtonEl); 
                         hideButton(callDataObject.interviewButtonEl);
                     }
                 } else if(tool.callCenterMode == 'liveShow') {
-                    if(callDataObject.status == 'created' || callDataObject.status == 'hold') {
+                    if(callDataObject.statusInfo.status == 'created' || callDataObject.statusInfo.status == 'hold') {
                         console.log('updateCallButtons 1');
                         hideButton(callDataObject.holdButtonEl);
                         showButton(callDataObject.markApprovedButtonEl);
@@ -481,7 +607,7 @@
                         showButton(callDataObject.interviewButtonEl);
                         showButton(callDataObject.declineButtonEl);
                         callDataObject.declineButtonEl.innerHTML = 'Decline';
-                    } else if(callDataObject.status == 'interview') {
+                    } else if(callDataObject.statusInfo.status == 'interview' && (callDataObject.statusInfo.byUserId == Q.Users.loggedInUserId() || callDataObject.statusInfo.byUserId == null)) {
                         console.log('updateCallButtons 2');
                         hideButton(callDataObject.interviewButtonEl);
                         showButton(callDataObject.holdButtonEl);
@@ -489,7 +615,7 @@
                         showButton(callDataObject.markApprovedButtonEl);
                         showButton(callDataObject.acceptButtonEl);
                         callDataObject.declineButtonEl.innerHTML = 'Decline';
-                    } else if(callDataObject.status == 'accepted') {
+                    } else if(callDataObject.statusInfo.status == 'accepted') {
                         console.log('updateCallButtons 3');
                         showButton(callDataObject.declineButtonEl);
                         hideButton(callDataObject.holdButtonEl);
@@ -497,6 +623,14 @@
                         hideButton(callDataObject.acceptButtonEl);
                         hideButton(callDataObject.interviewButtonEl);
                         callDataObject.declineButtonEl.innerHTML = 'Remove From Live';
+                    }
+                    
+                    if(callDataObject.statusInfo.isApproved) {
+                        console.log('updateCallButtons 4');
+                        callDataObject.markApprovedButtonEl.innerHTML = 'Approved!';
+                    } else if (!callDataObject.statusInfo.isApproved) {
+                        console.log('updateCallButtons 5');
+                        callDataObject.markApprovedButtonEl.innerHTML = 'Mark Approved';
                     }
                 }
 
@@ -518,6 +652,7 @@
                     tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
                         roomId: tool.callCenterStream.fields.name.split('/').pop(),
                         roomPublisherId: tool.callCenterStream.fields.publisherId,
+                        resumeClosed: true,
                         element: document.body,
                         startWith: { video: false, audio: true }
                     });
@@ -535,12 +670,10 @@
             joinUsersWaitingRooom: function (callDataObject) {
                 var tool = this;
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
-                    callDataObject.status = 'interview';
                     tool.currentActiveWebRTCRoom.switchTo(callDataObject.webrtcStream.fields.publisherId, callDataObject.webrtcStream.fields.name.split('/').pop(), {}).then(function () {
                         
                     });
                 } else {
-                    callDataObject.status = 'interview';
                     tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
                         roomId: callDataObject.webrtcStream.fields.name,
                         roomPublisherId: callDataObject.webrtcStream.fields.publisherId,
@@ -551,16 +684,38 @@
                     tool.currentActiveWebRTCRoom.start();
                 }
             },
+            onMarkApprovedHandler: function (callDataObject) {
+                var tool = this;
+                if(tool.callCenterMode != 'liveShow') return;
+                console.log('onMarkApprovedHandler', callDataObject.statusInfo.isApproved)
+                var approveStatusToSet = callDataObject.statusInfo.isApproved ? false : true;
+                Q.req("Streams/callCenter", ["markApprovedHandler"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                    if (msg) {
+                        return Q.alert(msg);
+                    }
+
+                    callDataObject.statusInfo.isApproved = approveStatusToSet;
+                }, {
+                    method: 'post',
+                    fields: {
+                        isApproved: approveStatusToSet,
+                        waitingRoom: {publisherId: callDataObject.webrtcStream.fields.publisherId, streamName: callDataObject.webrtcStream.fields.name},
+                        liveShowRoom: {publisherId: tool.state.publisherId, streamName: tool.state.streamName},
+                    }
+                });
+            },
             onHoldHandler: function (callDataObject) {
                 var tool = this;
                 if(tool.callCenterMode == 'regular') {
 
                 } else if(tool.callCenterMode == 'liveShow') {
                     if(tool.iAmConnectedToCallCenterRoom && tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
-                        callDataObject.status = 'hold';
+                        callDataObject.statusInfo.status = 'hold';
                         tool.switchBackToLiveShowRoom();
                     } else if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
-                        callDataObject.status = 'hold';
+                        callDataObject.statusInfo.status = 'hold';
                         tool.currentActiveWebRTCRoom.stop();
                     }
                 }
@@ -570,60 +725,64 @@
                 if(tool.callCenterMode == 'regular') {
                     tool.joinUsersWaitingRooom(callDataObject);
                 } else if(tool.callCenterMode == 'liveShow') {
-                    tool.joinUsersWaitingRooom(callDataObject);
+                    Q.req("Streams/callCenter", ["interviewHandler"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+    
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+    
+                        callDataObject.statusInfo.status = 'interview';
+                        tool.joinUsersWaitingRooom(callDataObject);
+                    }, {
+                        method: 'post',
+                        fields: {
+                            callStatus: callDataObject.statusInfo.status,
+                            waitingRoom: {publisherId: callDataObject.webrtcStream.fields.publisherId, streamName: callDataObject.webrtcStream.fields.name},
+                            liveShowRoom: {publisherId: tool.state.publisherId, streamName: tool.state.streamName},
+                        }
+                    });
                 }
                 
             },
             onAcceptHandler: function (callDataObject) {
                 var tool = this;
                 if(tool.callCenterMode != 'liveShow') return;
-                
-                //onAcceptHandler can be firen only in "liveShow", this handler moves user from his waiting room to liveShow webrtc room
-                //so firstly, we need to give him max readLevel access, secondly - post message to his waiting room with streams info that he will use for
-                //joining our webrtc room
-                console.log('onAcceptHandler', callDataObject.status);
-                let prevStatus = callDataObject.status;
-                callDataObject.status = 'accepted';
-                var fields = {
-                    publisherId: tool.state.publisherId,
-                    streamName: tool.state.streamName,
-                    readLevel: 40,
-                    writeLevel: 10,
-                    ofUserId: callDataObject.webrtcStream.fields.publisherId
-                };
-                Q.req('Streams/access', ['data'], function (err, response) {
-                    var msg;
-                    if (msg = Q.firstErrorMessage(err, response && response.errors)) {
-                        alert(msg);
+                console.log('onAcceptHandler', callDataObject.statusInfo.status)
+                //onAcceptHandler can be fired only in "liveShow", this handler moves user from his waiting room to liveShow webrtc room
+                //so firstly, we need to give him max readLevel access, secondly - post message to his waiting room allowing user to join
+                let prevStatus = callDataObject.statusInfo.status;
+                callDataObject.statusInfo.status = 'accepted';
+                Q.req("Streams/callCenter", ["acceptHandler"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                    if (msg) {
+                        return Q.alert(msg);
                     }
-                    tool.callCenterStream.refresh();
 
-                    callDataObject.webrtcStream.post({
-                        type: 'Streams/webrtc/accepted',
-                        content: JSON.stringify({
-                            msg: 'Your call request was accepted'
-                        }),
-                    }, function () {
-                        if((prevStatus == 'interview' || prevStatus == 'hold')&& tool.iAmConnectedToCallCenterRoom) {
-                            tool.switchBackToLiveShowRoom();
-                        } else if(tool.currentActiveWebRTCRoom) {
-                            tool.currentActiveWebRTCRoom.stop();
-                        }       
-                    })
-
+                    console.log('onAcceptHandler', response, prevStatus, tool.iAmConnectedToCallCenterRoom);
+                    if ((prevStatus == 'interview' || prevStatus == 'hold') && tool.iAmConnectedToCallCenterRoom) {
+                        tool.switchBackToLiveShowRoom();
+                    } else if (tool.currentActiveWebRTCRoom && !tool.iAmConnectedToCallCenterRoom) {
+                        tool.currentActiveWebRTCRoom.stop();
+                    }    
                 }, {
-                    method: 'put',
-                    fields: fields
+                    method: 'post',
+                    fields: {
+                        callStatus: prevStatus,
+                        waitingRoom: {publisherId: callDataObject.webrtcStream.fields.publisherId, streamName: callDataObject.webrtcStream.fields.name},
+                        liveShowRoom: {publisherId: tool.state.publisherId, streamName: tool.state.streamName},
+                    }
                 });
             },
             onDeclineHandler: function (callDataObject) {
                 var tool = this;
-                console.log('onDeclineHandler', callDataObject.status);
-                var content;
+                console.log('onDeclineHandler', callDataObject.statusInfo.status);
+                var content, action;
                
-                if(callDataObject.status == 'interview' || callDataObject.status == 'accepted') {
+                if(callDataObject.statusInfo.status == 'interview' || callDataObject.statusInfo.status == 'accepted') {
                     console.log('onDeclineHandler 1');
-
+                    action = 'endCall';
                     content = JSON.stringify({
                         immediate: true,
                         userId: callDataObject.webrtcStream.fields.publisherId,
@@ -631,24 +790,33 @@
                     })
                 } else {
                     console.log('onDeclineHandler 2');
+                    action = 'declineCall';
                     content = JSON.stringify({
                         immediate: true,
                         userId: callDataObject.webrtcStream.fields.publisherId,
                         msg: 'Your call request was declined'
                     })
                 }
-                callDataObject.status = 'ended';
-                callDataObject.webrtcStream.post({
-                    type: 'Streams/webrtc/endCall',
-                    content: content,
-                }, function() {
-                    callDataObject.webrtcStream.close(function (err) {
-                        if (err) {
-                            return console.error(err);
-                        }
-                        tool.reloadCallsList();
-                    });
-                })
+                var prevStatus = callDataObject.statusInfo.status;
+                callDataObject.statusInfo.status = 'ended';
+
+                Q.req("Streams/callCenter", ["endOrDeclineCallHandler"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                    if (msg) {
+                        return Q.alert(msg);
+                    }
+
+                    tool.reloadCallsList();   
+                }, {
+                    method: 'post',
+                    fields: {
+                        callStatus: prevStatus,
+                        action: action,
+                        waitingRoom: {publisherId: callDataObject.webrtcStream.fields.publisherId, streamName: callDataObject.webrtcStream.fields.name},
+                        liveShowRoom: {publisherId: tool.state.publisherId, streamName: tool.state.streamName},
+                    }
+                });
             }            
         }
 
