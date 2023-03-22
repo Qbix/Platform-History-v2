@@ -46,5 +46,5 @@ function Users_resend_post()
 		$existing->resendActivationMessage();
 	}
 	Users::$cache['user'] = $user;
-	Q_Response::setSlot('activateLink', Users::$cache['Users/activate link']);
+	// Q_Response::setSlot('activateLink', Users::$cache['Users/activate link']);
 }

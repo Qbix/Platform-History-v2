@@ -762,6 +762,9 @@ Q.Tool.define("Q/audio", function (options) {
 	 * @method customPlayer
 	 */
 	customPlayer: function () {
+		var tool = this;
+		var state = this.state;
+
 		Q.Template.render("Q/audio/general", {
 			duration: tool.formatRecordTime(tool.getDuration(), "short")
 		}, function (err, html) {
@@ -787,10 +790,12 @@ Q.Tool.define("Q/audio", function (options) {
 
 				if (state === "pause") {
 					$play.attr("data-state", "play");
-					//tool.play();
+					tool.audio.pause();
+					//tool.pause();
 				} else {
 					$play.attr("data-state", "pause");
-					//tool.pause();
+					tool.audio.play();
+					//tool.play();
 				}
 			});
 

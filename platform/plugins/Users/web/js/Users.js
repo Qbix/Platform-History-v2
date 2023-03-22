@@ -3224,6 +3224,7 @@
 		Users.hinted = [];
 		Q.Session.clear();
 		Web3.authResponse = null;
+		Web3.getContract.cache.clear();
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
 	}, 'Users');
@@ -3824,8 +3825,9 @@
 		 * @method connect
 		 * @param {String} nodeUrl The url of the socket.io node to connect to
 		 * @param {Function} callback When a connection is made, receives the socket object
+		 * @return {Promise} to be used instead of callback
 		 */
-		connect: function _Users_Socket_connect(nodeUrl, callback) {
+		connect: Q.promisify(function _Users_Socket_connect(nodeUrl, callback) {
 			var qs = Q.Socket.get('Users', nodeUrl);
 			if (qs && qs.socket &&
 			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
@@ -3838,7 +3840,7 @@
 					callback && callback(socket, ns, url);
 				});
 			}
-		},
+		}),
 
 		/**
 		 * Returns a socket, if it was already connected, or returns undefined
@@ -4240,8 +4242,9 @@
 		 * Connect web3 wallet session
 		 * @method connect
 		 * @param {Function} callback
+		 * @return {Promise} to be used instead of callback
 		 */
-		connect: function (callback) {
+		connect: Q.promisify(function (callback) {
 			if (Web3.provider) {
 				return Q.handle(callback, null, [null, Web3.provider]);
 			}
@@ -4251,11 +4254,13 @@
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
 					return ethereum.request({ method: 'eth_requestAccounts' })
-					.then(function (accounts) {
+					.then(function () {
+						_subscribeToEvents(ethereum);
 						Web3.provider = ethereum;
 						return Q.handle(callback, null, [null, Web3.provider]);
 					}).catch(function (e) {
-						Q.handle(callback, null, [e]);
+						Q.handle(callback, null, [ex]);
+						throw new Error(ex);
 					});
 				} else {
 					// TODO: have direct deeplinks into wallet browsers
@@ -4264,6 +4269,7 @@
 					web3Modal.clearCachedProvider();
 					web3Modal.resetState();
 					web3Modal.connect().then(function (provider) {
+						_subscribeToEvents(provider);
 						Web3.provider = provider;
 						Q.handle(callback, null, [null, provider]);
 					}).catch(function (ex) {
@@ -4271,8 +4277,10 @@
 						throw new Error(ex);
 					});
 				}
+
+
 			});
-		},
+		}),
 
 		login: function (signedCallback, authenticatedCallback, cancelCallback, options) {
 			var _prevDocumentTitle = document.title;
@@ -4291,6 +4299,7 @@
 				// Subscribe to accounts change
 				provider.on("accountsChanged", function (accounts) {
 					console.log('provider.accountsChanged', accounts);
+					Web3.getContract.cache.clear();
 				});
 
 				// Subscribe to chainId change
@@ -4437,9 +4446,10 @@
 		 * Get currently selected wallet address asynchronously
 		 * @method getWalletAddress
 		 * @param {function} callback receives (err, address)
+	     * @return {Promise} to be used instead of callback
 		 */
-		getWalletAddress: function (callback) {
-			Web3.connect(function (err, provider) {
+		getWalletAddress: Q.promisify(function (callback) {
+			return Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
@@ -4448,7 +4458,7 @@
 					return Q.handle(callback, null, [null, accounts[0]]);
 				});
 			});
-		},
+		}),
 
 		/**
 		 * Get currently selected chain id asynchronously
@@ -4587,15 +4597,11 @@
 		 * @param {Function} callback Takes provider, needSigner
 		 */
 		withChain: function _withChain(chainId, callback) {
-			if (window.ethereum) {
-				if (!chainId || parseInt(ethereum.chainId) === parseInt(chainId)) {
-					return callback(ethereum, true);
-				}
-			}
 			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
+
 				if (!chainId || parseInt(provider.chainId) === parseInt(chainId)) {
 					callback(provider, true);
 				} else {
@@ -4617,19 +4623,21 @@
 		 * @param {String} recipient address of type "0x..."
 		 * @param {String} chainId the ID of the chain (may need to switch to it)
 		 * @param {Number} amount the amount of native coin to send, with decimal portion
+		 * @param {Function} callback can receive (err, transaction)
 		 * @param {Object} options see TransactionRequest of ethers.js
 		 * @param {String} options.chainId Pass a chain ID here to switch to it, if necessary
 		 * @param {String} options.gasPrice One of multiple options you can do
 		 */
-		transaction: function _transaction(recipient, amount, options) {
+		transaction: function _transaction(recipient, amount, callback, options) {
 			Web3.withChain(options && options.chainId, _continue);
 			function _continue(provider) {
 				try {
 					var signer, contract;
 					signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
+						from: Q.Users.Web3.getLoggedInUserXid(),
 						to: recipient,
-						value: ethers.utils.parseEther(amount)
+						value: ethers.utils.parseEther(String(amount))
 					})).then(function (transaction) {
 						Q.handle(callback, transaction, [null, transaction]);
 					});
@@ -4699,7 +4707,7 @@
 							Q.handle(callback, contract, [null, contract]);
 						} catch (err) {
 							Q.handle(callback, null, [err]);
-						};
+						}
 					}
 				});
 			});
@@ -4797,19 +4805,25 @@
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
-
-		if (window.ethereum) {
-			window.ethereum.on("accountsChanged", function (accounts) {
-				Q.handle(Web3.onAccountsChanged, this, [accounts]);
-			});
-			window.ethereum.on("chainChanged", function (chainId) {
-				Q.handle(Web3.onChainChanged, this, [chainId]);
-			});
-			window.ethereum.on("connect", function (info) {
-				Q.handle(Web3.onConnect, this, [info]);
-			});
-		}
+		_subscribeToEvents(window.ethereum);
 	}, 'Users');
+
+	function _subscribeToEvents(provider) {
+		if (!provider || !provider.on
+		|| provider.subscribedToEvents) {
+			return;
+		}
+		provider.on("accountsChanged", function (accounts) {
+			Q.handle(Web3.onAccountsChanged, this, [accounts]);
+		});
+		provider.on("chainChanged", function (chainId) {
+			Q.handle(Web3.onChainChanged, this, [chainId]);
+		});
+		provider.on("connect", function (info) {
+			Q.handle(Web3.onConnect, this, [info]);
+		});
+		provider.subscribedToEvents = true;
+	}
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog, options) {
 		if (!options || !options.apply) {

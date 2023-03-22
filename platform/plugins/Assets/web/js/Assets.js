@@ -1383,32 +1383,6 @@
 		Currency: {
 			Web3: {
 				/**
-				 * Get NFT contract instance
-				 * @method getContract
-				 * @param {Object} chainId
-				 * @param {object} [options]
-				 * @param {string} [options.contractAddress] - if defined override default chain contract address
-				 * @param {string} [options.abiPath] - if defined override default abi path
-				 * @param {function} [callback]
-				 * @return {Q.Promise} instead of callback
-				 */
-				getContract: function (chainId, options, callback) {
-					var address = Q.getObject("contractAddress", options) || chainId.contract;
-					var abiPath = Q.getObject("abiPath", options);
-
-					return Q.Users.Web3.getContract(abiPath, {
-						chainId: chainId,
-						contractAddress: address,
-						readOnly: !!Q.getObject("readOnly", options)
-					}, function (err, contract) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-
-						Q.handle(callback, null, [null, contract]);
-					});
-				},
-				/**
 				 * Get amount of tokens by wallet and chain
 				 * @method balanceOf
 				 * @param {String} userId - if null logged in user Id used
