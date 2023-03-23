@@ -122,9 +122,9 @@
                                     _veryFirstBlobs.push(blob);
                                     _streamingSocket[service].firstBlobSent = true;
                                 }
-                                if(_streamingSocket[service].firstBlobSent) {        
+                                //if(_streamingSocket[service].firstBlobSent) {        
                                     _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blob);
-                                }
+                                //}
         
                             });
                             

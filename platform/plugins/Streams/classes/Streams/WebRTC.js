@@ -205,7 +205,7 @@ WebRTC.listen = function () {
                 if(_debug) console.log('mp4IsSupported ' +  mp4IsSupported, format, encoder);
                 if(_debug) console.log('usersInfo.supportedVideoMimeTypes ', usersInfo.supportedVideoMimeTypes);
     
-                if(rtmpUrls.length > 1) {
+                /*if(rtmpUrls.length > 1) {
                     var outputEndpoints = '';
                     for(let u in rtmpUrls) {
                         if(u == rtmpUrls.length - 1) {
@@ -214,7 +214,7 @@ WebRTC.listen = function () {
                             outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
                         }
                     }
-                }
+                }*/
     
     
                 function createFfmpegProcess() {
@@ -286,7 +286,7 @@ WebRTC.listen = function () {
                     }
     
                     console.log('ffmpeg params ', params)
-                    ffmpeg = child_process.spawn('ffmpeg', params);
+                    ffmpeg = child_process.spawn('ffmpeg', params, {detached: true});
     
                     /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
       -pix_fmt yuv420p -profile:v baseline -s 426x240 -bufsize 6000k \
@@ -305,7 +305,7 @@ WebRTC.listen = function () {
                         if(livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                             postStopMessageAndStopLivestreaming();
                         }
-                        console.log('End _streamingData');
+                        //console.log('End _streamingData');
 
                         if(_streamingData) _streamingData.end();
                         _streamingData = null;
@@ -328,6 +328,7 @@ WebRTC.listen = function () {
                         console.log(socket.id + ' FFmpeg USER DISCONNECTED', ffmpeg.killed);
     
                         ffmpeg.kill('SIGINT');
+                        ffmpeg.stdin.write('q');
                         setTimeout(function() {
                             if(!ffmpeg.killed && livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                                 postStopMessageAndStopLivestreaming();
@@ -339,11 +340,11 @@ WebRTC.listen = function () {
                 createFfmpegProcess();
     
                 _streamingData.on('data', function (data) {
-                    console.log(socket.id + 'VIDEO DATA0', data);
+                    //console.log(socket.id + 'VIDEO DATA0', data);
 
                     if(ffmpeg != null) {
 
-                        console.log(socket.id + 'VIDEO DATA1');
+                        //console.log(socket.id + 'VIDEO DATA1');
     
                         ffmpeg.stdin.write(data);
                     } else {
@@ -354,7 +355,7 @@ WebRTC.listen = function () {
                 socket.on('Streams/webrtc/videoData', function(data, callback) {
                     //console.log(socket.id + ' VIDEODATA', data);
                     if(!_streamingData) {
-                        console.log('createFfmpegProcess create PassThrough')
+                        //console.log('createFfmpegProcess create PassThrough')
                         _streamingData = new PassThrough();
                     }
 

@@ -40,7 +40,10 @@
                 tool.myWaitingRoomStream.onMessage("Streams/webrtc/accepted").set(function (stream, message) {
                     tool.onAcceptedHandler(message);
                 }, tool);
-                tool.myWaitingRoomStream.onMessage("Streams/webrtc/endCall").set(function (stream, message) {
+                tool.myWaitingRoomStream.onMessage("Streams/webrtc/callEnded").set(function (stream, message) {
+                    tool.onCallEndedHandler(message);
+                }, tool);
+                tool.myWaitingRoomStream.onMessage("Streams/webrtc/callDeclined").set(function (stream, message) {
                     tool.onCallEndedHandler(message);
                 }, tool);
 
@@ -61,6 +64,19 @@
             },
             requestCall: function () {
                 var tool = this;
+                var socketConns = Q.Users.Socket.get();
+                if(!socketConns || Object.keys(socketConns).length == 0 || socketConns[Object.keys(socketConns)[0]] == null || !socketConns[Object.keys(socketConns)[0]].socket.id) {
+                    Q.Socket.onConnect('Users').add(function() {
+                        console.log('onSession: no socket connection yet');
+                        tool.requestCall();
+                    })
+                    return;   
+                }
+                //console.log('Object.keys(socketConns)', Object.keys(socketConns).length, Object.keys(socketConns)[0])
+                if(Object.keys(socketConns).length == 0) {
+                    Q.alert('To continue you should be connected to the socket server.');
+                    return;
+                }                
                 
                 Q.prompt(null, function(topic) {
 
@@ -85,6 +101,7 @@
                         fields: {
                             publisherId: Q.Users.loggedInUserId(),
                             description: topic,
+                            socketId: socketConns[Object.keys(socketConns)[0]].socket.id,
                             relate: {
                                 publisherId: tool.state.publisherId,
                                 streamName: tool.state.streamName,
@@ -130,8 +147,8 @@
                     });
                 } else {
                     tool.currentActiveWebRTCRoom = Q.Streams.WebRTC({
-                        roomId: tool.state.publisherId,
-                        roomPublisherId: tool.state.streamName.split('/').pop(),
+                        roomId: tool.state.streamName.split('/').pop(),
+                        roomPublisherId: tool.state.publisherId,
                         element: document.body,
                         startWith: { video: false, audio: true }
                     });
@@ -142,7 +159,7 @@
             onCallEndedHandler: function (message) {
                 var tool = this;
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
-                    var message = JSON.parse(message.content);
+                    var message = JSON.parse(message.instructions);
                     var signalingLib = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
                     var localParticipant = signalingLib.localParticipant();
     

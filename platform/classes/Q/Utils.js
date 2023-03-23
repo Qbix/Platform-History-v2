@@ -248,7 +248,7 @@ function _request(method, uri, data /* '' */, query /* null */, user_agent /* Mo
 	if (!ip) ip = host;
 	var request_uri = parts.pathname;
 	var port = parts.port ? ":"+parts.port : '';
-	var server = parts.protocol+"://"+ip+port+request_uri;
+	var server = parts.protocol+"//"+ip+port+request_uri;
 
 	if (!header) header = {
 		'user-agent': user_agent,
@@ -312,7 +312,7 @@ Utils.get = function (url, data, user_agent, header, callback) {
  * @param {string|array} [url=null] and url to query. Default to 'Q/web/appRootUrl' config value
  * @param {function} [callback=null] Callback receives error and result string as arguments
  */
-Utils.queryExternal = function(handler, data /* {} */, url /* null */, callback)
+Utils.queryExternal = function(handler, data /* {} */, url /* null */, headers /* null */, callback)
 {
 	var that = this;
 	if (typeof data === "function") {
@@ -322,6 +322,9 @@ Utils.queryExternal = function(handler, data /* {} */, url /* null */, callback)
 	} else if (typeof url === "function") {
 		callback = url;
 		url = null;
+	} else if (typeof headers === "function") {
+		callback = headers;
+		headers = null;
 	}
 
 	if (!callback || typeof callback !== "function") return;
@@ -346,7 +349,7 @@ Utils.queryExternal = function(handler, data /* {} */, url /* null */, callback)
 		servers = url+tail;
 	}
 
-	Utils.post(servers, data, query, function (err, res) {
+	Utils.post(servers, data, query, null, headers, function (err, res) {
 		var d;
 		if (err) callback.call(that, err);
 		else {

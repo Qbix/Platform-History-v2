@@ -232,6 +232,7 @@ function Users_request_handler(req, res, next) {
 	}
 	var userId = parsed.userId;
 	var sessionId = parsed.sessionId;
+	var socketId = parsed.socketId;
     switch (parsed['Q/method']) {
 		case 'Users/device':
 			break;
@@ -271,23 +272,14 @@ function Users_request_handler(req, res, next) {
 			}
 			break;
 		case 'Users/addEventListener':
-			if (userId && sessionId) {
+			if (userId && socketId) {
 				var clients = Users.clients[userId];
 
-				var parseCookie = function (str) {
-					return str.split(';')
-						.map(function (v) { return v.split('=') })
-						.reduce(function (acc, v) {
-							acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
-							return acc;
-						}, {});
-				}
 				var client = null;
 				for (var cid in clients) {
-					var cookie = clients[cid].handshake.headers.cookie ? parseCookie(clients[cid].handshake.headers.cookie) : null;
-					if(!cookie) continue;
+					if(!clients[cid].id) continue;
 
-					if (cookie.Q_sessionId === sessionId) {
+					if (clients[cid].id === socketId) {
 						client = clients[cid];
 						break;
 					}
@@ -305,10 +297,66 @@ function Users_request_handler(req, res, next) {
 				}
 
 				client.on(eventName, function(){
-					Q.Utils.queryExternal(handlerToExecute, data, function(response) {
-						
+					var headers = {
+						'user-agent':'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9',
+						'cookie':client.handshake.headers.cookie
+					};
+					Q.Utils.queryExternal(handlerToExecute, data, null, headers, function(err, response) {
 					});
 				});
+			}
+			break;
+		case 'Users/checkIfOnline':
+
+			var operatorUserId = parsed.operatorUserId;
+			var operatorSocketId = parsed.operatorSocketId;
+			if (userId && socketId && operatorUserId && operatorSocketId) {			
+				function getClientIfOnline() {
+					var clients = Users.clients[userId];
+
+					for (var cid in clients) {
+						if (!clients[cid].id) continue;
+						if (clients[cid].id === socketId) {
+							return clients[cid];
+						}
+					}
+					return null;
+				}
+
+				function getOperatorClient() {
+					var clients = Users.clients[operatorUserId];
+
+					for (var cid in clients) {
+						if (!clients[cid].id) continue;
+
+						if (clients[cid].id === operatorSocketId) {
+							return clients[cid];
+						}
+					}
+					return null;
+				}
+
+				var eventName = parsed.eventName;
+				var handlerToExecute = parsed.handlerToExecute;
+				var data = parsed.data;
+
+				if(!handlerToExecute) {
+					return
+				}
+
+				var client = getClientIfOnline();
+				data.userIsOnline = client != null ? 'true' : 'false';
+
+				var operatorClient = getOperatorClient();
+
+				var headers = {
+					'user-agent':'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9',
+					'cookie':operatorClient.handshake.headers.cookie
+				};
+
+				Q.Utils.queryExternal(handlerToExecute, data, null, headers, function(err, response) {
+				});
+				
 			}
 			break;
 		default:
