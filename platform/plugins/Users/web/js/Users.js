@@ -4627,11 +4627,14 @@
 		 * @param {Object} options see TransactionRequest of ethers.js
 		 * @param {String} options.chainId Pass a chain ID here to switch to it, if necessary
 		 * @param {String} options.gasPrice One of multiple options you can do
+		 * @param {String} [options.wait=0] How many blocks to wait, if > 0 then promise might fail transaction failure
+		 * @return {Promise} to be used instead of callback
 		 */
-		transaction: function _transaction(recipient, amount, callback, options) {
-			Web3.withChain(options && options.chainId, function (provider) {
+		transaction: Q.promisify(function _transaction(recipient, amount, callback, options) {
+			options = options || {};
+			Web3.withChain(options.chainId, function (provider) {
 				try {
-					var signer, contract;
+					var signer;
 					signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
 						from: Q.Users.Web3.getLoggedInUserXid(),
@@ -4639,10 +4642,14 @@
 						value: ethers.utils.parseEther(String(amount))
 					})).then(function (transactionRequest) {
 						if (!Q.getObject("wait", transactionRequest)) {
-							Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
+							return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
 						}
 
-						transactionRequest.wait(1).then(function (transactionReceipt) {
+						if (!options.wait) {
+							return Q.handle(callback, null, [null, transactionRequest]);
+						}
+
+						transactionRequest.wait(options.wait).then(function (transactionReceipt) {
 							if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
 								return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
 							}
@@ -4656,7 +4663,7 @@
 					Q.handle(callback, null, [err]);
 				}
 			});
-		},
+		}),
 
 		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
