@@ -7529,7 +7529,7 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * return {boolean} Should normally return true, unless listener could not be found or removed
  */
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
-	if (Q.isEmpty(element)) {
+	if (Q.isEmpty(element) || Q.isEmpty(eventHandler)) {
 		return false;
 	}
 
@@ -7551,9 +7551,6 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 			Q.removeEventListener(element, eventName[i], eventHandler, useCapture);
 		}
 		return;
-	}
-	if (!eventHandler) {
-		return false;
 	}
 	if (typeof eventName === 'function') {
 		var params = {
