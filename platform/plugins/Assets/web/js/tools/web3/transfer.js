@@ -63,6 +63,10 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                 Q.replace(tool.element, html);
 
+                var _transactionSuccess = function () {
+                    Q.Dialogs.pop();
+                    Q.alert(tool.text.transfer.TransactionSuccess);
+                };
                 var userSelected = null;
                 $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
                     var userChooser = this;
@@ -121,11 +125,19 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         return Q.alert(tool.text.errors.WalletInvalid);
                     }
 
+                    $this.addClass("Q_working");
+
                     var parsedAmount = ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals);
 
-                    if (state.tokenInfo.tokenAddress == Q.Users.Web3.zeroAddress){
-                        Q.Users.Web3.transaction(walletSelected, amount, function (err, transaction) {
-                            Q.handle(state.onSubmitted, tool, [err, transaction]);
+                    if (parseInt(state.tokenInfo.tokenAddress) === 0){
+                        Q.Users.Web3.transaction(walletSelected, amount, function (err, transactionRequest, transactionReceipt) {
+                            Q.handle(state.onSubmitted, tool, [err, transactionRequest, transactionReceipt]);
+
+                            if (err) {
+                                return $this.removeClass("Q_working");
+                            }
+
+                            _transactionSuccess();
                         }, {
                             chainId: state.chainId
                         });
@@ -138,27 +150,20 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         readOnly: false
                     }, function (err, contract) {
                         if (err) {
-                            return;
+                            return $this.removeClass("Q_working");
                         }
 
-                        $this.addClass("Q_working");
-
                         contract.on("Transfer", function _assets_web3_transfer_listener (from, to, value) {
-                            if (!($this instanceof jQuery)) {
-                                return;
-                            }
-
                             if (walletSelected.toLowerCase() !== to.toLowerCase()) {
                                 return;
                             }
 
-                            Q.Dialogs.pop();
-                            Q.alert(tool.text.transfer.TransactionSuccess);
+                            _transactionSuccess();
                             contract.off(_assets_web3_transfer_listener);
                         });
 
                         contract.transfer(walletSelected, parsedAmount).then(function (info) {
-
+                            Q.handle(state.onSubmitted, tool, [nul, info]);
                         }, function (err) {
                             $this.removeClass("Q_working");
                         });

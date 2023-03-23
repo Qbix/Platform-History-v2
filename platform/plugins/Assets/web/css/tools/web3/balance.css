@@ -2,7 +2,12 @@
 .Assets_web3_balance_tool select,
 .Assets_web3_balance_tool select option {
     text-align: center;
-    font-size: 25px;
+    font-size: 16px;
+}
+.Assets_web3_balance_tool select {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
 }
 .Assets_web3_balance_tool select,
 .Assets_web3_balance_tool select option {

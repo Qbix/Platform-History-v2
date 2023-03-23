@@ -4629,8 +4629,7 @@
 		 * @param {String} options.gasPrice One of multiple options you can do
 		 */
 		transaction: function _transaction(recipient, amount, callback, options) {
-			Web3.withChain(options && options.chainId, _continue);
-			function _continue(provider) {
+			Web3.withChain(options && options.chainId, function (provider) {
 				try {
 					var signer, contract;
 					signer = new ethers.providers.Web3Provider(provider).getSigner();
@@ -4638,13 +4637,25 @@
 						from: Q.Users.Web3.getLoggedInUserXid(),
 						to: recipient,
 						value: ethers.utils.parseEther(String(amount))
-					})).then(function (transaction) {
-						Q.handle(callback, transaction, [null, transaction]);
+					})).then(function (transactionRequest) {
+						if (!Q.getObject("wait", transactionRequest)) {
+							Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
+						}
+
+						transactionRequest.wait(1).then(function (transactionReceipt) {
+							if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
+								return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
+							}
+
+							Q.handle(callback, null, ["Transaction failed", transactionRequest, transactionReceipt]);
+						}, function (err) {
+							Q.handle(callback, null, [err, transactionRequest]);
+						});
 					});
 				} catch (err) {
 					Q.handle(callback, null, [err]);
-				};
-			}
+				}
+			});
 		},
 
 		/**
