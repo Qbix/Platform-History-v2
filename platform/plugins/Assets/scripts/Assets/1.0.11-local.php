@@ -1,6 +1,6 @@
 <?php
 	
-function Assets_1_0_11_Assets()
+function Assets_1_0_11_local()
 {
 	// create templates dir
 	$from = ASSETS_PLUGIN_VIEWS_DIR.DS.'Assets'.DS.'templates';
@@ -14,4 +14,4 @@ function Assets_1_0_11_Assets()
 	}
 }
 
-Assets_1_0_11_Assets();
+Assets_1_0_11_local();

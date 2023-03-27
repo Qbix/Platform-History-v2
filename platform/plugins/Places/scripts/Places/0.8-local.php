@@ -1,6 +1,6 @@
 <?php
 
-function Places_0_8_Streams_mysql()
+function Places_0_8_local()
 {
 	// symlink the icons folder
 	Q_Utils::symlink(
@@ -10,4 +10,4 @@ function Places_0_8_Streams_mysql()
 	);
 }
 
-Places_0_8_Streams_mysql();
+Places_0_8_local();

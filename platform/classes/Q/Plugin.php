@@ -383,7 +383,7 @@ class Q_Plugin
 				if (count($parts) < 2) continue;
 				list($sqlver, $tail) = $parts;
 				if ($tail !== "$conn_name.$dbms"
-					and $tail !== "$conn_name.$dbms.php") {
+				and $tail !== "$conn_name.$dbms.php") {
 					continue; // not schema file or php script
 				}
 
