@@ -63,13 +63,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                 Q.replace(tool.element, html);
 
+                var $userSelected = $(".Assets_transfer_userSelected", tool.element);
                 var _transactionSuccess = function () {
                     Q.Dialogs.pop();
                     Q.alert(tool.text.transfer.TransactionSuccess);
                 };
                 var userSelected = null;
                 $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
-                    var userChooser = this;
                     this.state.onChoose.set(function (userId, avatar) {
                         Q.Streams.get(userId, "Streams/user/xid/web3", function (err) {
                             if (err) {
@@ -88,11 +88,11 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             }
 
                             userSelected = null;
-                            $(".Users_avatar_tool", userChooser.element).each(function () {
+                            $(".Users_avatar_tool", $userSelected).each(function () {
                                 Q.Tool.remove(this, true, true);
                             });
 
-                            $("<div>").appendTo(userChooser.element).tool("Users/avatar", {
+                            $("<div>").appendTo($userSelected).tool("Users/avatar", {
                                 userId: userId,
                                 icon: 50,
                                 contents: true,
@@ -105,6 +105,17 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                                 wallet: this.fields.content
                             };
                         });
+                    }, tool);
+                });
+
+                $(".Assets_transfer_usersList", tool.element).tool("Streams/people", {
+                    avatar: {
+                        short: true,
+                        icon: '50'
+                    }
+                }).activate(function () {
+                    this.state.onChoose.set(function () {
+                        //TODO: when Streams/people tool ready, move onChoose event handler here from above
                     }, tool);
                 });
 
@@ -129,7 +140,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                     var parsedAmount = ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals);
 
-                    if (parseInt(state.tokenInfo.tokenAddress) === 0){
+                    if (parseInt(state.tokenInfo.tokenAddress) === 0) {
                         Q.Users.Web3.transaction(walletSelected, amount, function (err, transactionRequest, transactionReceipt) {
                             Q.handle(state.onSubmitted, tool, [err, transactionRequest, transactionReceipt]);
 
@@ -139,6 +150,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                             _transactionSuccess();
                         }, {
+                            wait: 1,
                             chainId: state.chainId
                         });
                         return;
@@ -176,6 +188,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
 Q.Template.set("Assets/web3/transfer/send",
     `<div class="Assets_transfer_userChooser"><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{transfer.SelectRecipient}}" autocomplete="off"></div>
+    <div class="Assets_transfer_usersList"></div>
+    <div class="Assets_transfer_userSelected"></div>
     <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
     <input name="amount" placeholder="{{payment.EnterAmount}}" />
     <button class="Q_button" name="send">{{payment.Send}}</button>`,
