@@ -38,7 +38,10 @@ function Assets_NFTcontests_response_column () {
 	$column = Q::view('Assets/column/NFTcontests.php', @compact("loggedInUserId", "communityId"));
 
 	$url = Q_Uri::url("Assets/NFTcontests");
-	$columnsStyle = Q_Config::get('Communities', 'layout', 'columns', 'style', 'classic');
+	$columnsStyle = Q_Config::get(
+		'Q', 'response', 'layout', 'columns', 'style',
+        Q_Config::get('Communities', 'layout', 'column', 'style', 'classic')
+	);
 
 	$controls = null;
 	/*(if ($columnsStyle == 'classic') {
