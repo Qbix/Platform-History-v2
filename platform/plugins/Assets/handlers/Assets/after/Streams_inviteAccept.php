@@ -4,10 +4,11 @@ function Assets_after_Streams_inviteAccept($params)
 {
 	// Make earning for invited user
 	$invite = $params['invite'];
-	$invitedUser = Users::fetch($invite->userId);
+	$invitedUserId = $params['userId'];
+	$invitedUser = Users::fetch($invitedUserId);
 	$stream = $params['stream'];
 
-	if (!$invitedUser || $invitedUser->sessionCount > 1) {
+	if (!$invitedUser || $invitedUser->sessionCount > 0) {
 		return; // only get credit for inviting new users
 	}
 

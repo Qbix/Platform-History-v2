@@ -273,14 +273,14 @@
 	 * Check if an icon is custom or whether it's been automatically generated
 	 * @method isCustomIcon
 	 * @static
-	 * @param {String} id
+	 * @param {String} icon
 	 * @return {boolean}
 	 */
 	Users.isCustomIcon = function (icon) {
 		if (!icon) {
 			return false;
 		}
-		return (icon.indexOf('imported') >= 0
+		return !!(icon.indexOf('imported') >= 0
 		|| icon.match(/\/icon\/[0-9]+/));
 	};
 
