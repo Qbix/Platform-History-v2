@@ -1,0 +1,6 @@
+.Streams_people_tool .Streams_people_usersList {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: normal;
+}
