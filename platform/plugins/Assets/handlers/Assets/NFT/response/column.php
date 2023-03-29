@@ -78,8 +78,7 @@ function Assets_NFT_response_column (&$params, &$result) {
 	));
 
 	$columnsStyle = Q_Config::get(
-		'Q', 'response', 'layout', 'columns', 'style',
-        Q_Config::get('Communities', 'layout', 'column', 'style', 'classic')
+		'Q', 'response', 'layout', 'columns', 'style', 'classic'
 	);
 
 	$controls = null;

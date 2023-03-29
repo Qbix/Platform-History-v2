@@ -4,8 +4,7 @@ function Assets_subscription_response_column (&$params, &$result) {
 	$communityId = Users::communityId();
 
 	$columnsStyle = Q_Config::get(
-		'Q', 'response', 'layout', 'columns', 'style',
-        Q_Config::get('Communities', 'layout', 'column', 'style', 'classic')
+		'Q', 'response', 'layout', 'columns', 'style', 'classic'
 	);
 	$controls = null;
 	/*(if ($columnsStyle == 'classic') {

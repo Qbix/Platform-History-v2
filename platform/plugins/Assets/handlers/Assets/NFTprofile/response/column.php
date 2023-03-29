@@ -93,8 +93,7 @@ function Assets_NFTprofile_response_column (&$params, &$result) {
 
 	$url = Q_Uri::url("Assets/NFTprofile");
 	$columnsStyle = Q_Config::get(
-		'Q', 'response', 'layout', 'columns', 'style',
-        Q_Config::get('Communities', 'layout', 'column', 'style', 'classic')
+		'Q', 'response', 'layout', 'columns', 'style', 'classic'
 	);
 
 	$controls = null;
