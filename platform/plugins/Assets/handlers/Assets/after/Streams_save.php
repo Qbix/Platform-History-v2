@@ -110,12 +110,18 @@ function Assets_grant_credits_for_invited_users ($params) {
 		return;
 	}
 
-	$inviteRow = Streams_Invite::select('StreamsInvite.invitingUserId', 'StreamsInvite')
-		->join(Streams_Invited::table().' StreamsInvited', array(
-			'StreamsInvite.token' => 'StreamsInvited.token'
-		))->where(array(
-			'StreamsInvited.userId' => $stream->publisherId
-		))->fetchDbRow();
+	$token = Q::ifset($_SESSION, 'Streams', 'invite', 'token', null);
+	if ($token) {
+		$inviteRow = Streams_Invite::fromToken($token);
+	} else {
+		$inviteRow = Streams_Invite::select('StreamsInvite.invitingUserId', 'StreamsInvite')
+			->join(Streams_Invited::table().' StreamsInvited', array(
+				'StreamsInvite.token' => 'StreamsInvited.token'
+			))->where(array(
+				'StreamsInvited.userId' => $stream->publisherId
+			))->fetchDbRow();
+	}
+
 	if (!$inviteRow || Users::isCommunityId($inviteRow->invitingUserId)) {
 		return;
 	}
