@@ -77,7 +77,9 @@ function Assets_NFT_response_column (&$params, &$result) {
 		"movie", "image", "src", "isAdmin", "assetsNFTAttributes"
 	));
 
-	$columnsStyle = Q_Config::get('Communities', 'layout', 'columns', 'style', 'classic');
+	$columnsStyle = Q_Config::get(
+		'Q', 'response', 'layout', 'columns', 'style', 'classic'
+	);
 
 	$controls = null;
 	/*(if ($columnsStyle == 'classic') {
