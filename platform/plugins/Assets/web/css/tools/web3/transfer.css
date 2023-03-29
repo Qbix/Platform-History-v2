@@ -33,3 +33,9 @@
 .Assets_web3_transfer_tool .Assets_transfer_userChooser.Streams_userChooser_tool > .Users_avatar_tool {
     display: block;
 }
+.Assets_web3_transfer_tool .Assets_transfer_usersList {
+    height: 250px;
+}
+.Assets_web3_transfer_tool .Assets_transfer_usersList .Users_avatar_tool {
+    margin: 10px;
+}

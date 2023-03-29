@@ -15,7 +15,7 @@
 		"WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
 		"NoRecipientSelected": "No recipient selected",
 		"NotEnoughPermissionsWallet": "Not enough permissions to read wallet of this user",
-		"ThisUserHaveNoWallet": "This user have no wallet assigned",
+		"ThisUserHaveNoWallet": "This user has no wallet assigned",
 		"TheWalletOfThisUserInvalid": "The wallet of this user invalid",
 		"WalletInvalid": "Wallet address invalid"
 	},
