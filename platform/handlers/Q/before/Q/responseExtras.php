@@ -103,7 +103,7 @@ function Q_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.info.isMobile', Q_Request::isMobile());
 	Q_Response::setScriptData('Q.info.isTablet', Q_Request::isTablet());
 
-	Q_Response::setScriptData('Q.info.layout', Q_Config::get('Q', 'response', 'layout'));
+	Q_Response::setScriptData('Q.info.layout', Q_Config::get('Q', 'response', 'layout', array()));
 	
 	$textLoadBeforeInit = Q_Config::get('Q', 'text', 'loadBeforeInit', array());
 	Q_Response::setScriptData('Q.Text.loadBeforeInit', $textLoadBeforeInit);
