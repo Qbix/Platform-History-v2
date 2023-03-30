@@ -3,7 +3,9 @@ function Assets_subscription_response_column (&$params, &$result) {
 	$texts = Q_Text::get('Assets/content');
 	$communityId = Users::communityId();
 
-	$columnsStyle = Q_Config::get('Communities', 'layout', 'columns', 'style', 'classic');
+	$columnsStyle = Q_Config::get(
+		'Q', 'response', 'layout', 'columns', 'style', 'classic'
+	);
 	$controls = null;
 	/*(if ($columnsStyle == 'classic') {
 		$showControls = Q_Config::get('Assets', 'billing', 'controls', true);

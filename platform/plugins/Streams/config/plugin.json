@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.1.8",
+				"version": "1.1.8.1",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -554,6 +554,9 @@
 			"Streams/webrtc/callCenter/endpoint": {
 				"create": true, 
 				"edit": true
+			},
+			"Streams/user/profile": {
+				"url": "{{baseUrl}}/profile/{{publisherId}}"
 			}
 		},
 		"categorize": {
@@ -705,6 +708,15 @@
 		"chat": {
 			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Streams/webrtc", "Streams/question"],
 			"delay": 20 /* delay between chat messages in seconds */
+		},
+		"people": {
+			"import": false,
+			"userIds": {
+				"customIconsFirst": true,
+				"includeFutureUsers": false,
+				"limit": 100
+			},
+			"randomAngles": false
 		}
 	}
 }

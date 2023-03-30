@@ -58,6 +58,11 @@
 			"Assets/startSubscription.php": {"html": true}
 		},
 		"images": {
+			"Assets/product": {
+				"sizes": ["40", "50", "80", "200", "400", "400x", "x400", "x100", "500x"],
+				"defaultSize": "400",
+				"maxStretch": 2
+			},
 			"Assets/service": {
 				"sizes": ["40", "50", "80", "200", "400", "400x", "x400", "x100", "500x"],
 				"defaultSize": "400",
@@ -304,12 +309,12 @@
 				}
 			},
 			"Assets/product": {
-				"create": false, 
-				"edit": false,
+				"create": true, 
+				"edit": true,
 				"defaults": {
 					"title": "Product",
-					"readLevel": 0,
-					"writeLevel": 0,
+					"readLevel": 40,
+					"writeLevel": 23,
 					"adminLevel": 0
 				}
 			},

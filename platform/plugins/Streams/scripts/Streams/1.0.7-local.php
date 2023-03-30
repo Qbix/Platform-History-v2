@@ -1,6 +1,6 @@
 <?php
 	
-function Streams_0_1_7_Streams()
+function Streams_0_1_7_local()
 {
 	$from = STREAMS_PLUGIN_VIEWS_DIR.DS.'Streams'.DS.'templates';
 	$dir = APP_WEB_DIR.DS.'Q'.DS.'views'.DS.'Streams';
@@ -20,4 +20,4 @@ function Streams_0_1_7_Streams()
 	);*/
 }
 
-Streams_0_1_7_Streams();
+Streams_0_1_7_local();

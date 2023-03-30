@@ -126,7 +126,8 @@ class Streams_Invite extends Base_Streams_Invite
 		if (!isset($options['access'])) {
 			$options['access'] = true;
 		}
-		
+
+		$saved = false;
 		$userId = $this->userId ? $this->userId : Users::loggedInUser(true)->id;
 		
 		$invited = new Streams_Invited();
@@ -138,6 +139,7 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 			$invited->state = 'accepted';
 			$invited->save(true);
+			$saved = true;
 		} else if (!$invited->retrieve() or $invited->state !== 'accepted') {
 			$quotaName = "Streams/invite";
 			$roles = Users::roles($this->publisherId, null, null, $userId);
@@ -154,6 +156,11 @@ class Streams_Invite extends Base_Streams_Invite
 			$invited2->save();
 
 			$quota->used(1);
+			$saved = true;
+		}
+
+		if (!$saved) {
+			return false;
 		}
 
 		/**
@@ -162,7 +169,7 @@ class Streams_Invite extends Base_Streams_Invite
 		 * @param {Users_User} user
 		 */
 		$invite = $this;
-		if (Q::event("Streams/invite/accept", @compact('invite'), 'before') === false) {
+		if (Q::event("Streams/invite/accept", @compact('invite', 'userId'), 'before') === false) {
 			return false;
 		}
 
@@ -171,7 +178,7 @@ class Streams_Invite extends Base_Streams_Invite
 		if (!$this->save() and $this->userId) {
 			return false;
 		}
-		
+
 		$stream = Streams_Stream::fetch(
 			$this->userId, $this->publisherId, $this->streamName, true
 		);
@@ -295,16 +302,21 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 		}
 
+		Users_Contact::addContact($this->invitingUserId, "Streams/invited", $userId, null, false, true);
+		Users_Contact::addContact($this->invitingUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
+		Users_Contact::addContact($userId, "Streams/invitedMe", $this->invitingUserId, null, false, true);
+		Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $this->invitingUserId, null, false, true);
+
 		/**
 		 * @event Streams/invite {after}
 		 * @param {Streams_Invite} stream
 		 * @param {Users_User} user
 		 */
-		Q::event("Streams/invite/accept", @compact('invite', 'stream'), 'after');
+		Q::event("Streams/invite/accept", @compact('invite', 'stream', 'userId'), 'after');
 
 		return true;
 	}
-	
+
 	/**
 	 * Retrieves invite
 	 * @method getInvite

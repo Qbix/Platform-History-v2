@@ -273,14 +273,14 @@
 	 * Check if an icon is custom or whether it's been automatically generated
 	 * @method isCustomIcon
 	 * @static
-	 * @param {String} id
+	 * @param {String} icon
 	 * @return {boolean}
 	 */
 	Users.isCustomIcon = function (icon) {
 		if (!icon) {
 			return false;
 		}
-		return (icon.indexOf('imported') >= 0
+		return !!(icon.indexOf('imported') >= 0
 		|| icon.match(/\/icon\/[0-9]+/));
 	};
 
@@ -4627,25 +4627,43 @@
 		 * @param {Object} options see TransactionRequest of ethers.js
 		 * @param {String} options.chainId Pass a chain ID here to switch to it, if necessary
 		 * @param {String} options.gasPrice One of multiple options you can do
+		 * @param {String} [options.wait=0] How many blocks to wait, if > 0 then promise might fail transaction failure
+		 * @return {Promise} to be used instead of callback
 		 */
-		transaction: function _transaction(recipient, amount, callback, options) {
-			Web3.withChain(options && options.chainId, _continue);
-			function _continue(provider) {
+		transaction: Q.promisify(function _transaction(recipient, amount, callback, options) {
+			options = options || {};
+			Web3.withChain(options.chainId, function (provider) {
 				try {
-					var signer, contract;
+					var signer;
 					signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
 						from: Q.Users.Web3.getLoggedInUserXid(),
 						to: recipient,
 						value: ethers.utils.parseEther(String(amount))
-					})).then(function (transaction) {
-						Q.handle(callback, transaction, [null, transaction]);
+					})).then(function (transactionRequest) {
+						if (!Q.getObject("wait", transactionRequest)) {
+							return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
+						}
+
+						if (!options.wait) {
+							return Q.handle(callback, null, [null, transactionRequest]);
+						}
+
+						transactionRequest.wait(options.wait).then(function (transactionReceipt) {
+							if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
+								return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
+							}
+
+							Q.handle(callback, null, ["Transaction failed", transactionRequest, transactionReceipt]);
+						}, function (err) {
+							Q.handle(callback, null, [err, transactionRequest]);
+						});
 					});
 				} catch (err) {
 					Q.handle(callback, null, [err]);
-				};
-			}
-		},
+				}
+			});
+		}),
 
 		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.

@@ -13,7 +13,6 @@ var Web3 = Assets.Currency.Web3;
  * @constructor
  * @param {Object} options Override various options for this tool
  */
-
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
 	var state = this.state;
@@ -136,7 +135,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	},
 	Q: {
 		beforeRemove: function () {
-			this.state.intervalId && clearInterval(this.state.intervalId);
+
 		}
 	}
 });

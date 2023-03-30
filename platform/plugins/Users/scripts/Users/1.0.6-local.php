@@ -1,6 +1,6 @@
 <?php
 	
-function Users_1_0_6_Users()
+function Users_1_0_6_local()
 {
 	// create templates dir
 	$from = USERS_PLUGIN_VIEWS_DIR.DS.'Users'.DS.'templates';
@@ -14,4 +14,4 @@ function Users_1_0_6_Users()
 	}
 }
 
-Users_1_0_6_Users();
+Users_1_0_6_local();

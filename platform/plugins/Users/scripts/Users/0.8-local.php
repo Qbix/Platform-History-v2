@@ -1,6 +1,6 @@
 <?php
 	
-function Users_0_8_mysql()
+function Users_0_8_local()
 {
 	// symlink the icons folder
 	Q_Utils::symlink(
@@ -10,4 +10,4 @@ function Users_0_8_mysql()
 	);
 }
 
-Users_0_8_mysql();
+Users_0_8_local();

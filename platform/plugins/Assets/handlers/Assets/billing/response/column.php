@@ -11,7 +11,7 @@ function Assets_billing_response_column (&$params, &$result) {
 
 	$column = Q::view('Assets/column/billing.php', @compact("texts", "user", "creditsStream", "creditsMinimum", "creditsAdd"));
 
-	$columnsStyle = Q_Config::get('Communities', 'layout', 'columns', 'style', 'classic');
+	$columnsStyle = Q_Config::get('Q', 'response', 'layout', 'columns', 'style', 'classic');
 
 	$controls = null;
 	/*(if ($columnsStyle == 'classic') {

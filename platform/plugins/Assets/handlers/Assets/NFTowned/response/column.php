@@ -10,7 +10,9 @@ function Assets_NFTowned_response_column () {
 	$title = "NFT owned";
 
 	$url = Q_Uri::url("Assets/NFTowned");
-	$columnsStyle = Q_Config::get('Communities', 'layout', 'columns', 'style', 'classic');
+	$columnsStyle = Q_Config::get(
+		'Q', 'response', 'layout', 'columns', 'style', 'classic'
+	);
 
 	$controls = null;
 	/*(if ($columnsStyle == 'classic') {

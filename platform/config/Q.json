@@ -57,7 +57,16 @@
 		"response": {
 			"isBuffered": true,
 			"layout": {
-				"sidebar": false
+				"sidebar": false,
+				"dashboard": {
+					"mobile": "icons", /* can be 'contextual', 'icons', 'hamburger' */
+					"position": "bottom", /* can be 'top', 'bottom' */
+					"withTitles": true
+				},
+				"columns": {
+					"style": "classic", /* can be 'classic' and 'facebook'*/
+					"focusAfterActivate": true
+				}
 			}
 		},
 		"node" : {
