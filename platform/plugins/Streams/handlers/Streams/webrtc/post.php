@@ -184,7 +184,11 @@ function Streams_webrtc_post($params = array())
 	}
 
 	if($response['stream']->getAttribute("onlyParticipantsAllowed") == false || $response['stream']->testWriteLevel('edit')) {
-        $response['stream']->join();
+        $meAsParticipant = $response['stream']->participant();
+        if (!$meAsParticipant || $meAsParticipant->fields['state'] != 'participating') {
+            $response['stream']->join();
+        }
+        
     } else {
         $meAsParticipant = $response['stream']->participant();
         if (!$meAsParticipant || $meAsParticipant->fields['state'] != 'participating') {

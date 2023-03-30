@@ -785,9 +785,25 @@
                             rtmpLiveURLInput.name = 'rtmpUrl';
                             rtmpLiveURL.appendChild(rtmpLiveURLInput);
 
+                            
+
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'live-editor-stream-to-section-rtmp-key';
                             rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+
+                            var fakeInput = document.createElement('INPUT');
+                            fakeInput.style.height = '0';
+                            fakeInput.style.width = '1px';
+                            fakeInput.style.padding = '0';
+                            fakeInput.style.border = '0';
+                            fakeInput.style.position = 'absolute';
+                            fakeInput.style.left = '0';
+                            fakeInput.style.top = '0';
+                            fakeInput.tabindex = '-1';
+                            fakeInput.type = 'text';
+                            fakeInput.autocomplete = 'off';
+                            fakeInput.name = 'fakeInput';
+                            rtmpLiveStreamKey.appendChild(fakeInput);
 
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
