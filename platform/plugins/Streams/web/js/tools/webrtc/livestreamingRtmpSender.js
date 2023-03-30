@@ -106,25 +106,31 @@
                         connect(rtmpUrls, service, livestreamStream, function () {
                             log('startStreaming connected');
         
-                            if(_veryFirstBlobs.length != 0 && _streamingSocket[service] != null) {
-                                for(let i in _veryFirstBlobs) {
-                                    _streamingSocket[service].socket.emit('Streams/webrtc/videoData', _veryFirstBlobs[i], function() {
-                                    });
-                                    if(i == _veryFirstBlobs.length - 1) {
-                                        _streamingSocket[service].firstBlobSent = true;
+                            function sendVeryFirstBlobs() {
+                                if(_veryFirstBlobs.length != 0 && _streamingSocket[service] != null) {
+                                    for(let i in _veryFirstBlobs) {
+                                        _streamingSocket[service].socket.emit('Streams/webrtc/videoData', _veryFirstBlobs[i]);
+                                        if(i == _veryFirstBlobs.length - 1) {
+                                            _streamingSocket[service].firstBlobSent = true;
+                                        }
                                     }
                                 }
                             }
         
                             _canvasComposer.startRecorder(function (blob) {
                                 if(_streamingSocket[service] == null) return;
-                                if(_veryFirstBlobs.length < 10) {
+
+                                if(!_streamingSocket[service].firstBlobSent && _veryFirstBlobs.length != 0) {
+                                    sendVeryFirstBlobs();
+                                }    
+
+                                if(_veryFirstBlobs.length < 1) {
                                     _veryFirstBlobs.push(blob);
-                                    _streamingSocket[service].firstBlobSent = true;
-                                }
-                                //if(_streamingSocket[service].firstBlobSent) {        
+                                }   
+
+                                if(_streamingSocket[service].firstBlobSent) {       
                                     _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blob);
-                                //}
+                                }
         
                             });
                             
@@ -138,9 +144,28 @@
                         connect([], 'rec', null, function () {
                             log('startRecordingOnServer connected');
 
+                            function sendVeryFirstBlobs() {
+                                if(_veryFirstBlobs.length != 0 && _streamingSocket['rec'] != null) {
+                                    for(let i in _veryFirstBlobs) {
+                                        _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', _veryFirstBlobs[i]);
+                                        if(i == _veryFirstBlobs.length - 1) {
+                                            _streamingSocket['rec'].firstBlobSent = true;
+                                        }
+                                    }
+                                }
+                            }
+
                             _canvasComposer.startRecorder(function (blob) {
-                                if(_streamingSocket['rec'] == null) return;
-                                _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', blob);
+                                if (_streamingSocket['rec'] == null) return;
+                                if (!_streamingSocket['rec'].firstBlobSent && _veryFirstBlobs.length != 0) {
+                                    sendVeryFirstBlobs();
+                                }
+                                if (_veryFirstBlobs.length < 1) {
+                                    _veryFirstBlobs.push(blob);
+                                }
+                                if (_streamingSocket['rec'].firstBlobSent) {
+                                    _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', blob);
+                                }
                             });
                                     
                             tool.webrtcSignalingLib.event.dispatch('recordingOnSeverStarted', {participant:tool.webrtcSignalingLib.localParticipant()});
