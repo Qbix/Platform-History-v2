@@ -1,0 +1,26 @@
+.Users_people_tool {
+    height: 100%;
+}
+.Users_people_tool .Users_people_usersList {
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: normal;
+}
+.Users_people_tool .Users_people_header {
+    transition: top 200ms ease 0s, bottom 200ms ease 0s;
+    font-weight: 400;
+    overflow: hidden;
+    background: var(--column-title-bg-color);
+    color: var(--column-title-color);
+    font-size: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 40px;
+    padding: 5px 5px 5px 10px;
+    box-sizing: border-box;
+    margin: 0;
+    user-select: none;
+    position: relative;
+    box-shadow: 0 2px 20px 5px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.1);
+}

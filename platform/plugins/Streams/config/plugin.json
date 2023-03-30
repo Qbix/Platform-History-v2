@@ -708,15 +708,6 @@
 		"chat": {
 			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Streams/webrtc", "Streams/question"],
 			"delay": 20 /* delay between chat messages in seconds */
-		},
-		"people": {
-			"import": false,
-			"userIds": {
-				"customIconsFirst": true,
-				"includeFutureUsers": false,
-				"limit": 100
-			},
-			"randomAngles": false
 		}
 	}
 }
