@@ -122,7 +122,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 			))->fetchDbRow();
 	}
 
-	if (!$inviteRow || Users::isCommunityId($inviteRow->invitingUserId)) {
+	if (!$inviteRow || Users::isCommunityId($inviteRow->invitingUserId) || $stream->publisherId == $inviteRow->invitingUserId) {
 		return;
 	}
 
