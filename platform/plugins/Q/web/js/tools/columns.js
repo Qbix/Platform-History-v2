@@ -649,8 +649,8 @@ Q.Tool.define("Q/columns", function(options) {
 			
 			if (expandTop || expandBottom) {
 				var $parents = $(tool.element).parents();
-				$parents.not('body,html').addClass('Q_columns_containsExpanded');
-				$parents.siblings().not('body,html').addClass('Q_columns_siblingContainsExpanded');
+				$parents.addClass('Q_columns_containsExpanded');
+				$parents.not('body,html').siblings().addClass('Q_columns_siblingContainsExpanded');
 			}
 
 			document.documentElement.setAttribute('data-q-columns-depth', state.columns.length);
