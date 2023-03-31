@@ -126,7 +126,8 @@ class Streams_Invite extends Base_Streams_Invite
 		if (!isset($options['access'])) {
 			$options['access'] = true;
 		}
-		
+
+		$saved = false;
 		$userId = $this->userId ? $this->userId : Users::loggedInUser(true)->id;
 		
 		$invited = new Streams_Invited();
@@ -138,6 +139,7 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 			$invited->state = 'accepted';
 			$invited->save(true);
+			$saved = true;
 		} else if (!$invited->retrieve() or $invited->state !== 'accepted') {
 			$quotaName = "Streams/invite";
 			$roles = Users::roles($this->publisherId, null, null, $userId);
@@ -154,6 +156,11 @@ class Streams_Invite extends Base_Streams_Invite
 			$invited2->save();
 
 			$quota->used(1);
+			$saved = true;
+		}
+
+		if (!$saved) {
+			return false;
 		}
 
 		/**
