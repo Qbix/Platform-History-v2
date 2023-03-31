@@ -134,7 +134,11 @@
             "title": "आपका रिश्ता क्या है?"
         },
         "complete": {
-            "HasInvitedYou": "आपको इसके लिए आमंत्रित किया है:"
+            "HasInvitedYou": "आपको इसके लिए आमंत्रित किया है:",
+            "WelcomeToCommunity": "{{communityName}} में आपका स्वागत है",
+            "HasInvitedYouToTheirProfile": "आपको कनेक्ट करने के लिए आमंत्रित किया है।",
+            "prompt": "मित्रों को आपको पहचानने दें:",
+            "accept": "निमंत्रण स्वीकार करें"
         }
     },
     "messages": {

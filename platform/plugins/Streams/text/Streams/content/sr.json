@@ -134,7 +134,11 @@
             "title": "Каква је твоја веза?"
         },
         "complete": {
-            "HasInvitedYou": "вас је позвао да:"
+            "HasInvitedYou": "вас је позвао да:",
+            "WelcomeToCommunity": "Добро дошли у {{communityName}}",
+            "HasInvitedYouToTheirProfile": "вас је позвао да се повежете.",
+            "prompt": "Нека вас пријатељи препознају:",
+            "accept": "Прихвати позив"
         }
     },
     "messages": {

@@ -134,7 +134,11 @@
             "title": "Kokie yra jūsų santykiai?"
         },
         "complete": {
-            "HasInvitedYou": "pakvietė jus į:"
+            "HasInvitedYou": "pakvietė jus į:",
+            "WelcomeToCommunity": "Sveiki atvykę į {{communityName}}",
+            "HasInvitedYouToTheirProfile": "pakvietė jus prisijungti.",
+            "prompt": "Leisk draugams tave atpažinti:",
+            "accept": "Priimti kvietimą"
         }
     },
     "messages": {

@@ -134,7 +134,11 @@
             "title": "Cal é a túa relación?"
         },
         "complete": {
-            "HasInvitedYou": "invitoute a:"
+            "HasInvitedYou": "invitoute a:",
+            "WelcomeToCommunity": "Benvido a {{communityName}}",
+            "HasInvitedYouToTheirProfile": "invitoute a conectarse.",
+            "prompt": "Deixa que os amigos te recoñezan:",
+            "accept": "Aceptar a invitación"
         }
     },
     "messages": {

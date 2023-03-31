@@ -134,7 +134,11 @@
             "title": "Які у вас стосунки?"
         },
         "complete": {
-            "HasInvitedYou": "запросив вас:"
+            "HasInvitedYou": "запросив вас:",
+            "WelcomeToCommunity": "Ласкаво просимо до {{communityName}}",
+            "HasInvitedYouToTheirProfile": "запросив вас підключитися.",
+            "prompt": "Нехай друзі впізнають вас:",
+            "accept": "Прийняти запрошення"
         }
     },
     "messages": {

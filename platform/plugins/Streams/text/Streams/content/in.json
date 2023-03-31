@@ -132,7 +132,11 @@
             "title": "Apa Hubungan Anda?"
         },
         "complete": {
-            "HasInvitedYou": "telah mengundang Anda untuk:"
+            "HasInvitedYou": "telah mengundang Anda untuk:",
+            "WelcomeToCommunity": "Selamat datang di {{communityName}}",
+            "HasInvitedYouToTheirProfile": "telah mengundang Anda untuk terhubung.",
+            "prompt": "Biarkan teman mengenali Anda:",
+            "accept": "Terima Undangan"
         }
     },
     "followup": {

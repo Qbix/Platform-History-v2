@@ -134,7 +134,11 @@
             "title": "Cad é do Gaol?"
         },
         "complete": {
-            "HasInvitedYou": "thug sé cuireadh duit:"
+            "HasInvitedYou": "thug sé cuireadh duit:",
+            "WelcomeToCommunity": "Fáilte go {{communityName}}",
+            "HasInvitedYouToTheirProfile": "thug cuireadh duit ceangal a dhéanamh.",
+            "prompt": "Lig do chairde tú a aithint:",
+            "accept": "Glac le Cuireadh"
         }
     },
     "messages": {

@@ -132,7 +132,11 @@
             "title": "Cila është marrëdhënia juaj?"
         },
         "complete": {
-            "HasInvitedYou": "ju ka ftuar në:"
+            "HasInvitedYou": "ju ka ftuar në:",
+            "WelcomeToCommunity": "Mirë se vini në {{communityName}}",
+            "HasInvitedYouToTheirProfile": "ju ka ftuar të lidheni.",
+            "prompt": "Lërini miqtë t&#39;ju njohin:",
+            "accept": "Prano Ftesën"
         }
     },
     "followup": {

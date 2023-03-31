@@ -132,7 +132,11 @@
             "title": "Quina és la teva relació?"
         },
         "complete": {
-            "HasInvitedYou": "t&#39;ha convidat a:"
+            "HasInvitedYou": "t&#39;ha convidat a:",
+            "WelcomeToCommunity": "Benvingut a {{communityName}}",
+            "HasInvitedYouToTheirProfile": "t&#39;ha convidat a connectar-te.",
+            "prompt": "Deixa que els teus amics et reconeguin:",
+            "accept": "Accepta la invitació"
         }
     },
     "followup": {

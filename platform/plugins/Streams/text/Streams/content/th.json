@@ -134,7 +134,11 @@
             "title": "ความสัมพันธ์ของคุณคืออะไร?"
         },
         "complete": {
-            "HasInvitedYou": "ได้เชิญคุณไปที่:"
+            "HasInvitedYou": "ได้เชิญคุณไปที่:",
+            "WelcomeToCommunity": "ยินดีต้อนรับสู่ {{communityName}}",
+            "HasInvitedYouToTheirProfile": "ได้เชิญคุณให้เชื่อมต่อ",
+            "prompt": "ให้เพื่อนรู้จักคุณ:",
+            "accept": "ตอบรับคำเชิญ"
         }
     },
     "messages": {

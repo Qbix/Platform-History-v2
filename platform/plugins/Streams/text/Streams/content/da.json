@@ -132,7 +132,11 @@
             "title": "Hvad er dit forhold?"
         },
         "complete": {
-            "HasInvitedYou": "har inviteret dig til:"
+            "HasInvitedYou": "har inviteret dig til:",
+            "WelcomeToCommunity": "Velkommen til {{communityName}}",
+            "HasInvitedYouToTheirProfile": "har inviteret dig til at oprette forbindelse.",
+            "prompt": "Lad venner genkende dig:",
+            "accept": "Accepter invitation"
         }
     },
     "followup": {

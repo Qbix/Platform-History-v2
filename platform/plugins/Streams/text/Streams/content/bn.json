@@ -132,7 +132,11 @@
             "title": "আপনার সম্পর্ক কি?"
         },
         "complete": {
-            "HasInvitedYou": "আপনাকে আমন্ত্রণ জানিয়েছে:"
+            "HasInvitedYou": "আপনাকে আমন্ত্রণ জানিয়েছে:",
+            "WelcomeToCommunity": "স্বাগতম {{communityName}}",
+            "HasInvitedYouToTheirProfile": "আপনাকে সংযোগ করার জন্য আমন্ত্রণ জানিয়েছে।",
+            "prompt": "বন্ধুদের আপনাকে চিনতে দিন:",
+            "accept": "আমন্ত্রণ গ্রহণ"
         }
     },
     "followup": {

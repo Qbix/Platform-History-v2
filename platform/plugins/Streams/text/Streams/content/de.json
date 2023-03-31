@@ -134,7 +134,11 @@
             "title": "Was ist deine Beziehung?"
         },
         "complete": {
-            "HasInvitedYou": "hat Sie eingeladen:"
+            "HasInvitedYou": "hat Sie eingeladen:",
+            "WelcomeToCommunity": "Willkommen bei {{communityName}}",
+            "HasInvitedYouToTheirProfile": "hat Sie eingeladen, sich zu verbinden.",
+            "prompt": "Lassen Sie sich von Freunden erkennen:",
+            "accept": "Einladung annehmen"
         }
     },
     "messages": {

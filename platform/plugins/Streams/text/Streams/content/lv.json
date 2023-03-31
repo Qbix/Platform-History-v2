@@ -134,7 +134,11 @@
             "title": "Kādas ir jūsu attiecības?"
         },
         "complete": {
-            "HasInvitedYou": "uzaicināja jūs uz:"
+            "HasInvitedYou": "uzaicināja jūs uz:",
+            "WelcomeToCommunity": "Laipni lūdzam {{communityName}}",
+            "HasInvitedYouToTheirProfile": "uzaicināja jūs izveidot savienojumu.",
+            "prompt": "Ļaujiet draugiem jūs atpazīt:",
+            "accept": "Pieņemt uzaicinājumu"
         }
     },
     "messages": {

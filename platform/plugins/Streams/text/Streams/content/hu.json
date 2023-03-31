@@ -134,7 +134,11 @@
             "title": "Milyen a kapcsolatod?"
         },
         "complete": {
-            "HasInvitedYou": "meghívott téged a következőkre:"
+            "HasInvitedYou": "meghívott téged a következőkre:",
+            "WelcomeToCommunity": "Üdvözöljük itt: {{communityName}}",
+            "HasInvitedYouToTheirProfile": "meghívta Önt, hogy csatlakozzon.",
+            "prompt": "Hagyd, hogy barátaid felismerjenek:",
+            "accept": "Meghívás elfogadása"
         }
     },
     "messages": {

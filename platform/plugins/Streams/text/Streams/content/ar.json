@@ -132,7 +132,11 @@
             "title": "ما هي علاقتك؟"
         },
         "complete": {
-            "HasInvitedYou": "قام بدعوتك إلى:"
+            "HasInvitedYou": "قام بدعوتك إلى:",
+            "WelcomeToCommunity": "مرحبًا بك في {{communityName}}",
+            "HasInvitedYouToTheirProfile": "دعاك للاتصال.",
+            "prompt": "دع الأصدقاء يتعرفون عليك:",
+            "accept": "قبول دعوة"
         }
     },
     "followup": {

@@ -134,7 +134,11 @@
             "title": "Mối quan hệ của bạn là gì?"
         },
         "complete": {
-            "HasInvitedYou": "đã mời bạn:"
+            "HasInvitedYou": "đã mời bạn:",
+            "WelcomeToCommunity": "Chào mừng bạn đến với {{communityName}}",
+            "HasInvitedYouToTheirProfile": "đã mời bạn kết nối.",
+            "prompt": "Hãy để bạn bè nhận ra bạn:",
+            "accept": "Chấp nhận lời mời"
         }
     },
     "messages": {

@@ -134,7 +134,11 @@
             "title": "ನಿಮ್ಮ ಸಂಬಂಧ ಏನು?"
         },
         "complete": {
-            "HasInvitedYou": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ:"
+            "HasInvitedYou": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ:",
+            "WelcomeToCommunity": "{{communityName}} ಗೆ ಸುಸ್ವಾಗತ",
+            "HasInvitedYouToTheirProfile": "ಸಂಪರ್ಕಿಸಲು ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ.",
+            "prompt": "ಸ್ನೇಹಿತರು ನಿಮ್ಮನ್ನು ಗುರುತಿಸಲಿ:",
+            "accept": "ಆಹ್ವಾನವನ್ನು ಸ್ವೀಕರಿಸಿ"
         }
     },
     "messages": {

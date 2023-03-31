@@ -132,7 +132,11 @@
             "title": "Ano ang Relasyon mo?"
         },
         "complete": {
-            "HasInvitedYou": "ay nag-imbita sa iyo sa:"
+            "HasInvitedYou": "ay nag-imbita sa iyo sa:",
+            "WelcomeToCommunity": "Maligayang pagdating sa {{communityName}}",
+            "HasInvitedYouToTheirProfile": "ay inimbitahan kang kumonekta.",
+            "prompt": "Hayaang makilala ka ng mga kaibigan:",
+            "accept": "Tanggapin ang Imbitasyon"
         }
     },
     "followup": {

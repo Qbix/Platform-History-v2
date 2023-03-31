@@ -134,7 +134,11 @@
             "title": "Ποια είναι η σχέση σας;"
         },
         "complete": {
-            "HasInvitedYou": "σας προσκάλεσε να:"
+            "HasInvitedYou": "σας προσκάλεσε να:",
+            "WelcomeToCommunity": "Καλώς ήρθατε στο {{communityName}}",
+            "HasInvitedYouToTheirProfile": "σας προσκάλεσε να συνδεθείτε.",
+            "prompt": "Αφήστε τους φίλους σας να σας αναγνωρίσουν:",
+            "accept": "Αποδοχή πρόσκλησης"
         }
     },
     "messages": {

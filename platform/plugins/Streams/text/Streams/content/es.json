@@ -134,7 +134,11 @@
             "title": "¿Cual es tu relacion?"
         },
         "complete": {
-            "HasInvitedYou": "te ha invitado a:"
+            "HasInvitedYou": "te ha invitado a:",
+            "WelcomeToCommunity": "Bienvenido a {{communityName}}",
+            "HasInvitedYouToTheirProfile": "te ha invitado a conectarte.",
+            "prompt": "Deja que tus amigos te reconozcan:",
+            "accept": "Aceptar invitación"
         }
     },
     "messages": {

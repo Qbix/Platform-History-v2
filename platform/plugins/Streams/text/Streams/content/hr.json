@@ -132,7 +132,11 @@
             "title": "Kakav je vaš odnos?"
         },
         "complete": {
-            "HasInvitedYou": "vas je pozvao na:"
+            "HasInvitedYou": "vas je pozvao na:",
+            "WelcomeToCommunity": "Dobro došli u {{communityName}}",
+            "HasInvitedYouToTheirProfile": "vas je pozvao da se povežete.",
+            "prompt": "Neka vas prijatelji prepoznaju:",
+            "accept": "Prihvatite poziv"
         }
     },
     "followup": {

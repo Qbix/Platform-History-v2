@@ -134,7 +134,11 @@
             "title": "Hvert er sambandið þitt?"
         },
         "complete": {
-            "HasInvitedYou": "hefur boðið þér að:"
+            "HasInvitedYou": "hefur boðið þér að:",
+            "WelcomeToCommunity": "Velkomin(n) til {{communityName}}",
+            "HasInvitedYouToTheirProfile": "hefur boðið þér að tengjast.",
+            "prompt": "Láttu vini þekkja þig:",
+            "accept": "Samþykkja boð"
         }
     },
     "messages": {

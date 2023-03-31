@@ -134,7 +134,11 @@
             "title": "당신의 관계는 무엇입니까?"
         },
         "complete": {
-            "HasInvitedYou": "님이 귀하를 초대했습니다:"
+            "HasInvitedYou": "님이 귀하를 초대했습니다:",
+            "WelcomeToCommunity": "{{communityName}}에 오신 것을 환영합니다",
+            "HasInvitedYouToTheirProfile": "연결하도록 초대했습니다.",
+            "prompt": "친구들이 당신을 알아보도록 하세요:",
+            "accept": "초대를 수락하다"
         }
     },
     "messages": {

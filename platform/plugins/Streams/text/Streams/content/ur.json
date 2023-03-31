@@ -134,7 +134,11 @@
             "title": "آپ کا رشتہ کیا ہے؟"
         },
         "complete": {
-            "HasInvitedYou": "آپ کو مدعو کیا ہے:"
+            "HasInvitedYou": "آپ کو مدعو کیا ہے:",
+            "WelcomeToCommunity": "{{communityName}} میں خوش آمدید",
+            "HasInvitedYouToTheirProfile": "آپ کو رابطہ قائم کرنے کی دعوت دی ہے۔",
+            "prompt": "دوستوں کو آپ کو پہچاننے دیں:",
+            "accept": "دعوت قبول کریں۔"
         }
     },
     "messages": {

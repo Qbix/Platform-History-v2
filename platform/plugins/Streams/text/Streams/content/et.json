@@ -134,7 +134,11 @@
             "title": "Mis on teie suhe?"
         },
         "complete": {
-            "HasInvitedYou": "on kutsunud teid:"
+            "HasInvitedYou": "on kutsunud teid:",
+            "WelcomeToCommunity": "Tere tulemast {{communityName}}",
+            "HasInvitedYouToTheirProfile": "kutsus teid ühendust võtma.",
+            "prompt": "Laske sõpradel teid ära tunda:",
+            "accept": "Nõustu kutsega"
         }
     },
     "messages": {

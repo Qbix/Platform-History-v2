@@ -134,7 +134,11 @@
             "title": "X&#39;inhi r-Relazzjoni tiegħek?"
         },
         "complete": {
-            "HasInvitedYou": "stiedenek biex:"
+            "HasInvitedYou": "stiedenek biex:",
+            "WelcomeToCommunity": "Merħba għal {{communityName}}",
+            "HasInvitedYouToTheirProfile": "stiedenek biex tikkonnettja.",
+            "prompt": "Ħalli lill-ħbieb jagħrfuk:",
+            "accept": "Aċċetta Stieden"
         }
     },
     "messages": {

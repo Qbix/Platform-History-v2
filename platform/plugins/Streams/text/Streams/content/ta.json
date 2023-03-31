@@ -134,7 +134,11 @@
             "title": "உங்கள் உறவு என்ன?"
         },
         "complete": {
-            "HasInvitedYou": "உங்களை அழைத்துள்ளார்:"
+            "HasInvitedYou": "உங்களை அழைத்துள்ளார்:",
+            "WelcomeToCommunity": "{{communityName}}க்கு வரவேற்கிறோம்",
+            "HasInvitedYouToTheirProfile": "உங்களை இணைக்க அழைத்துள்ளார்.",
+            "prompt": "நண்பர்கள் உங்களை அடையாளம் காணட்டும்:",
+            "accept": "அழைப்பை ஏற்கவும்"
         }
     },
     "messages": {

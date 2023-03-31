@@ -136,7 +136,7 @@
             "HasInvitedYou": "has invited you to:",
             "HasInvitedYouToTheirProfile": "has invited you to connect.",
             "prompt": "Let friends recognize you:",
-			"accept": "Accept Invite"
+            "accept": "Accept Invite"
         },
         "email": {
             "subject": "Hey, check this out",

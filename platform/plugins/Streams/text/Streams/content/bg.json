@@ -132,7 +132,11 @@
             "title": "Каква е вашата връзка?"
         },
         "complete": {
-            "HasInvitedYou": "Ви покани на:"
+            "HasInvitedYou": "Ви покани на:",
+            "WelcomeToCommunity": "Добре дошли в {{communityName}}",
+            "HasInvitedYouToTheirProfile": "ви покани да се свържете.",
+            "prompt": "Нека приятелите ви разпознаят:",
+            "accept": "Приеми поканата"
         }
     },
     "followup": {

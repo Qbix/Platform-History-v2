@@ -132,7 +132,11 @@
             "title": "你是什么关系？"
         },
         "complete": {
-            "HasInvitedYou": "已邀请您："
+            "HasInvitedYou": "已邀请您：",
+            "WelcomeToCommunity": "欢迎来到{{communityName}}",
+            "HasInvitedYouToTheirProfile": "已邀请您连接。",
+            "prompt": "让朋友认出你：",
+            "accept": "接受邀请"
         }
     },
     "followup": {

@@ -134,7 +134,11 @@
             "title": "رابطه شما چیست؟"
         },
         "complete": {
-            "HasInvitedYou": "شما را دعوت کرده است:"
+            "HasInvitedYou": "شما را دعوت کرده است:",
+            "WelcomeToCommunity": "به {{communityName}} خوش آمدید",
+            "HasInvitedYouToTheirProfile": "شما را دعوت به اتصال کرده است.",
+            "prompt": "اجازه دهید دوستان شما را بشناسند:",
+            "accept": "پذیرش دعوت"
         }
     },
     "messages": {

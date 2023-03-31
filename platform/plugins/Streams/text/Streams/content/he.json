@@ -132,7 +132,11 @@
             "title": "מה הקשר שלך?"
         },
         "complete": {
-            "HasInvitedYou": "הזמין אותך ל:"
+            "HasInvitedYou": "הזמין אותך ל:",
+            "WelcomeToCommunity": "ברוכים הבאים אל {{communityName}}",
+            "HasInvitedYouToTheirProfile": "הזמין אותך להתחבר.",
+            "prompt": "תן לחברים לזהות אותך:",
+            "accept": "קבל הזמנה"
         }
     },
     "followup": {

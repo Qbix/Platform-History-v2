@@ -132,7 +132,11 @@
             "title": "Wat is jou verhouding?"
         },
         "complete": {
-            "HasInvitedYou": "het jou genooi om:"
+            "HasInvitedYou": "het jou genooi om:",
+            "WelcomeToCommunity": "Welkom by {{communityName}}",
+            "HasInvitedYouToTheirProfile": "het jou genooi om aan te sluit.",
+            "prompt": "Laat vriende jou herken:",
+            "accept": "Aanvaar uitnodiging"
         }
     },
     "followup": {

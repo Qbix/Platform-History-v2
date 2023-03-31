@@ -134,7 +134,11 @@
             "title": "Каковы ваши отношения?"
         },
         "complete": {
-            "HasInvitedYou": "пригласил вас:"
+            "HasInvitedYou": "пригласил вас:",
+            "WelcomeToCommunity": "Добро пожаловать в {{communityName}}",
+            "HasInvitedYouToTheirProfile": "пригласил вас на связь.",
+            "prompt": "Пусть друзья узнают вас:",
+            "accept": "Принять приглашение"
         }
     },
     "messages": {

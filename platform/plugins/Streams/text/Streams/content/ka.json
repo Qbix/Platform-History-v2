@@ -134,7 +134,11 @@
             "title": "როგორია თქვენი ურთიერთობა?"
         },
         "complete": {
-            "HasInvitedYou": "მოგიწვიათ:"
+            "HasInvitedYou": "მოგიწვიათ:",
+            "WelcomeToCommunity": "კეთილი იყოს თქვენი მობრძანება {{communityName}}-ში",
+            "HasInvitedYouToTheirProfile": "მოგიწვიათ დასაკავშირებლად.",
+            "prompt": "მიეცით საშუალება მეგობრებს გაგიცნონ:",
+            "accept": "მიიღეთ მოწვევა"
         }
     },
     "messages": {

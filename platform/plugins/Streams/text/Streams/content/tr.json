@@ -134,7 +134,11 @@
             "title": "İlişki durumun nedir?"
         },
         "complete": {
-            "HasInvitedYou": "sizi şuna davet etti:"
+            "HasInvitedYou": "sizi şuna davet etti:",
+            "WelcomeToCommunity": "{{communityName}} hoş geldiniz",
+            "HasInvitedYouToTheirProfile": "sizi bağlanmaya davet etti.",
+            "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
+            "accept": "Daveti Kabul Et"
         }
     },
     "messages": {

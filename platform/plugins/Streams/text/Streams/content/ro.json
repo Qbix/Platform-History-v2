@@ -134,7 +134,11 @@
             "title": "Care este relația ta?"
         },
         "complete": {
-            "HasInvitedYou": "v-a invitat la:"
+            "HasInvitedYou": "v-a invitat la:",
+            "WelcomeToCommunity": "Bun venit la {{communityName}}",
+            "HasInvitedYouToTheirProfile": "v-a invitat să vă conectați.",
+            "prompt": "Lasă prietenii să te recunoască:",
+            "accept": "Acceptă invitația"
         }
     },
     "messages": {

@@ -132,7 +132,11 @@
             "title": "Zein da zure Harremana?"
         },
         "complete": {
-            "HasInvitedYou": "honetara gonbidatu zaitu:"
+            "HasInvitedYou": "honetara gonbidatu zaitu:",
+            "WelcomeToCommunity": "Ongi etorri {{communityName}}-ra",
+            "HasInvitedYouToTheirProfile": "konektatzera gonbidatu zaitu.",
+            "prompt": "Utzi lagunei ezagutarazten:",
+            "accept": "Onartu Gonbidapena"
         }
     },
     "followup": {

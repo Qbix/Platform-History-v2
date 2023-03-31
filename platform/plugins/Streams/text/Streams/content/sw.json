@@ -134,7 +134,11 @@
             "title": "Uhusiano wako ni upi?"
         },
         "complete": {
-            "HasInvitedYou": "amekualika kwa:"
+            "HasInvitedYou": "amekualika kwa:",
+            "WelcomeToCommunity": "Karibu kwenye {{communityName}}",
+            "HasInvitedYouToTheirProfile": "amekualika kuunganishwa.",
+            "prompt": "Waruhusu marafiki wakutambue:",
+            "accept": "Kubali Mwaliko"
         }
     },
     "messages": {

@@ -132,7 +132,11 @@
             "title": "Jaký je váš vztah?"
         },
         "complete": {
-            "HasInvitedYou": "vás pozval na:"
+            "HasInvitedYou": "vás pozval na:",
+            "WelcomeToCommunity": "Vítejte v {{communityName}}",
+            "HasInvitedYouToTheirProfile": "vás pozval k připojení.",
+            "prompt": "Umožněte přátelům, aby vás poznali:",
+            "accept": "Přijměte pozvání"
         }
     },
     "followup": {

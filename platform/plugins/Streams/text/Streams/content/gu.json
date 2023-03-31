@@ -134,7 +134,11 @@
             "title": "તમારો સંબંધ શું છે?"
         },
         "complete": {
-            "HasInvitedYou": "તમને આ માટે આમંત્રિત કર્યા છે:"
+            "HasInvitedYou": "તમને આ માટે આમંત્રિત કર્યા છે:",
+            "WelcomeToCommunity": "{{communityName}} માં આપનું સ્વાગત છે",
+            "HasInvitedYouToTheirProfile": "તમને કનેક્ટ થવા માટે આમંત્રિત કર્યા છે.",
+            "prompt": "મિત્રોને તમને ઓળખવા દો:",
+            "accept": "આમંત્રણ સ્વીકારો"
         }
     },
     "messages": {

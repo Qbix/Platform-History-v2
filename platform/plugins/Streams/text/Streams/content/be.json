@@ -132,7 +132,11 @@
             "title": "Якія ў вас адносіны?"
         },
         "complete": {
-            "HasInvitedYou": "запрасіў вас:"
+            "HasInvitedYou": "запрасіў вас:",
+            "WelcomeToCommunity": "Вітаем у {{communityName}}",
+            "HasInvitedYouToTheirProfile": "запрасіў вас далучыцца.",
+            "prompt": "Хай сябры пазнаюць вас:",
+            "accept": "Прыняць запрашэнне"
         }
     },
     "followup": {

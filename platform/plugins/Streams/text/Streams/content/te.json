@@ -134,7 +134,11 @@
             "title": "మీ సంబంధం ఏమిటి?"
         },
         "complete": {
-            "HasInvitedYou": "మిమ్మల్ని దీనికి ఆహ్వానించారు:"
+            "HasInvitedYou": "మిమ్మల్ని దీనికి ఆహ్వానించారు:",
+            "WelcomeToCommunity": "{{communityName}}కి స్వాగతం",
+            "HasInvitedYouToTheirProfile": "కనెక్ట్ అవ్వమని మిమ్మల్ని ఆహ్వానించింది.",
+            "prompt": "స్నేహితులు మిమ్మల్ని గుర్తించనివ్వండి:",
+            "accept": "ఆహ్వానాన్ని ఆమోదించండి"
         }
     },
     "messages": {

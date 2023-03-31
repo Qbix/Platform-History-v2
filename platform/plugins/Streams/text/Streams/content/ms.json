@@ -134,7 +134,11 @@
             "title": "Apakah Hubungan anda?"
         },
         "complete": {
-            "HasInvitedYou": "telah menjemput anda untuk:"
+            "HasInvitedYou": "telah menjemput anda untuk:",
+            "WelcomeToCommunity": "Selamat datang ke {{communityName}}",
+            "HasInvitedYouToTheirProfile": "telah menjemput anda untuk berhubung.",
+            "prompt": "Biarkan rakan mengenali anda:",
+            "accept": "Terima Jemputan"
         }
     },
     "messages": {

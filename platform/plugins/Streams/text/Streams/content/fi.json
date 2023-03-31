@@ -134,7 +134,11 @@
             "title": "Mikä on suhteesi?"
         },
         "complete": {
-            "HasInvitedYou": "on kutsunut sinut:"
+            "HasInvitedYou": "on kutsunut sinut:",
+            "WelcomeToCommunity": "Tervetuloa {{communityName}}",
+            "HasInvitedYouToTheirProfile": "on kutsunut sinut muodostamaan yhteyden.",
+            "prompt": "Anna ystävien tunnistaa sinut:",
+            "accept": "Hyväksy kutsu"
         }
     },
     "messages": {

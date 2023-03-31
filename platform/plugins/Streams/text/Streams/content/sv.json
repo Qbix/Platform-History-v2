@@ -134,7 +134,11 @@
             "title": "Vad är ditt förhållande?"
         },
         "complete": {
-            "HasInvitedYou": "har bjudit in dig till:"
+            "HasInvitedYou": "har bjudit in dig till:",
+            "WelcomeToCommunity": "Välkommen till {{communityName}}",
+            "HasInvitedYouToTheirProfile": "har bjudit in dig att ansluta.",
+            "prompt": "Låt vänner känna igen dig:",
+            "accept": "Acceptera inbjudan"
         }
     },
     "messages": {

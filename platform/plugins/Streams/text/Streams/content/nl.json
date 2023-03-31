@@ -132,7 +132,11 @@
             "title": "Wat is je relatie?"
         },
         "complete": {
-            "HasInvitedYou": "heeft u uitgenodigd voor:"
+            "HasInvitedYou": "heeft u uitgenodigd voor:",
+            "WelcomeToCommunity": "Welkom bij {{communityName}}",
+            "HasInvitedYouToTheirProfile": "heeft je uitgenodigd om verbinding te maken.",
+            "prompt": "Laat vrienden je herkennen:",
+            "accept": "Uitnodiging accepteren"
         }
     },
     "followup": {

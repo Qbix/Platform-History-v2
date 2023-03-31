@@ -134,7 +134,11 @@
             "title": "Beth yw eich Perthynas?"
         },
         "complete": {
-            "HasInvitedYou": "wedi eich gwahodd i:"
+            "HasInvitedYou": "wedi eich gwahodd i:",
+            "WelcomeToCommunity": "Croeso i {{communityName}}",
+            "HasInvitedYouToTheirProfile": "wedi eich gwahodd i gysylltu.",
+            "prompt": "Gadewch i ffrindiau eich adnabod:",
+            "accept": "Derbyn Gwahoddiad"
         }
     },
     "messages": {
