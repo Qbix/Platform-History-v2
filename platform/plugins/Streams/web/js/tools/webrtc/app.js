@@ -1591,13 +1591,6 @@ window.WebRTCRoomClient = function app(options){
 
             track.mediaStreamTrack.addEventListener('mute', function(e){
                 log('mediaStreamTrack muted', track);
-                try {
-                    var err = (new Error);
-                    console.log(err.stack);
-                } catch (e) {
-
-                }
-
                 log('mediaStreamTrack muted 2', track.mediaStreamTrack.enabled, track.mediaStreamTrack.readyState, track.mediaStreamTrack.muted);
                 if(participant.RTCPeerConnection){
                     var receivers = participant.RTCPeerConnection.getReceivers();

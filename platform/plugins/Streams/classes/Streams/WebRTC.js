@@ -234,6 +234,7 @@ WebRTC.listen = function () {
                         params = params.concat([
                             '-pix_fmt', 'yuv420p',
                             '-vcodec', 'copy',
+                            '-flvflags', '+faststart+resend_headers+add_keyframe_index+ignidx',
                         ]);
                     } else {
                         params = params.concat([

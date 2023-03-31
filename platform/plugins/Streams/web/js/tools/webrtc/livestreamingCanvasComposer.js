@@ -1381,7 +1381,12 @@
         
                         function updateWebRTCLayout(webrtcGroupSource, layoutName, startAsEmpty) {
                             log('updateWebRTCCanvasLayout start', layoutName, webrtcGroupSource.currentLayout, startAsEmpty)
-        
+                            try {
+                                var err = (new Error);
+                                log(err.stack);
+                            } catch (e) {
+            
+                            }
                             var tracksToAdd = [];
                             var tracksToRemove = [];
                             
@@ -3127,27 +3132,15 @@
                                 refreshEventListeners();
                             });
                             webrtcSignalingLib.event.on('initNegotiationEnded', updateCanvas);
-                            webrtcSignalingLib.event.on('videoTrackLoaded', updateCanvas);
-                            webrtcSignalingLib.event.on('audioTrackLoaded', updateCanvas);
                             webrtcSignalingLib.event.on('participantDisconnected', updateCanvas);
                             webrtcSignalingLib.event.on('trackMuted', updateCanvas);
                             webrtcSignalingLib.event.on('trackUnmuted', updateCanvas);
-                            webrtcSignalingLib.event.on('screenHidden', updateCanvas);
-                            webrtcSignalingLib.event.on('screenShown', updateCanvas);
-                            webrtcSignalingLib.event.on('audioMuted', updateCanvas);
-                            webrtcSignalingLib.event.on('audioUnmuted', updateCanvas);
         
                             _eventDispatcher.on('drawingStop', function () {
                                 webrtcSignalingLib.event.off('initNegotiationEnded', updateCanvas);
-                                webrtcSignalingLib.event.off('videoTrackLoaded', updateCanvas);
-                                webrtcSignalingLib.event.off('audioTrackLoaded', updateCanvas);
                                 webrtcSignalingLib.event.off('participantDisconnected', updateCanvas);
                                 webrtcSignalingLib.event.off('trackMuted', updateCanvas);
                                 webrtcSignalingLib.event.off('trackUnmuted', updateCanvas);
-                                webrtcSignalingLib.event.off('screenHidden', updateCanvas);
-                                webrtcSignalingLib.event.off('screenShown', updateCanvas);
-                                webrtcSignalingLib.event.off('audioMuted', updateCanvas);
-                                webrtcSignalingLib.event.off('audioUnmuted', updateCanvas);
                             });
                         }
         
