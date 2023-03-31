@@ -134,6 +134,7 @@
         "complete": {
             "WelcomeToCommunity": "Welcome to {{communityName}}",
             "HasInvitedYou": "has invited you to:",
+            "HasInvitedYouToTheirProfile": "has invited you to connect.",
             "prompt": "Let friends recognize you:",
 			"accept": "Accept Invite"
         },
