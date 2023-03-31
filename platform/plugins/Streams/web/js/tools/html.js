@@ -62,24 +62,7 @@ Q.Tool.define("Streams/html", function (options) {
 			return;
 		}
 		if (state.editor === 'auto') {
-			state.editor = 'froala';
-			state.froala = state.froala || {};
-			if (Q.info.isTouchscreen) {
-				state.froala.toolbarInline = false;
-				state.froala.toolbarSticky = true;
-			}
-		}
-		if (state.editor === 'froala') {
-			Q.extend(state.froala.imageUploadParams, {
-				'publisherId': state.publisherId,
-				'Q.Streams.related.publisherId': state.publisherId,
-				'Q.Streams.related.streamName': state.streamName,
-				'Q.Streams.related.type': 'images',
-				'Q.nonce': Q.nonce
-			});
-			state.froala.key = state.froala.key || Q.Streams.froala.key;
-			state.froala.toolbarStickyOffset = _getTopOffset();
-			state.froala.placeholderText = (state.froala.placeholderText || state.placeholder).replace(/(<br>)/g, "\n");
+			state.editor = 'ckeditor';
 		}
 		switch (state.editor && state.editor.toLowerCase()) {
 		case 'basic':
@@ -93,6 +76,21 @@ Q.Tool.define("Streams/html", function (options) {
 			});
 			break;
 		case 'froala':
+			state.froala = state.froala || {};
+			if (Q.info.isTouchscreen) {
+				state.froala.toolbarInline = false;
+				state.froala.toolbarSticky = true;
+			}
+			Q.extend(state.froala.imageUploadParams, {
+				'publisherId': state.publisherId,
+				'Q.Streams.related.publisherId': state.publisherId,
+				'Q.Streams.related.streamName': state.streamName,
+				'Q.Streams.related.type': 'images',
+				'Q.nonce': Q.nonce
+			});
+			state.froala.key = state.froala.key || Q.Streams.froala.key;
+			state.froala.toolbarStickyOffset = _getTopOffset();
+			state.froala.placeholderText = (state.froala.placeholderText || state.placeholder).replace(/(<br>)/g, "\n");
 		default:
 			Q.addStylesheet([
 				"{{Q}}/font-awesome/css/font-awesome.min.css",
