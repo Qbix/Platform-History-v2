@@ -132,6 +132,7 @@
             "inviteViaEmailOrSms": "Invite via email or SMS"
         },
         "complete": {
+            "WelcomeToCommunity": "Welcome to {{communityName}}",
             "HasInvitedYou": "has invited you to:",
             "prompt": "Let friends recognize you:",
 			"accept": "Accept Invite"
