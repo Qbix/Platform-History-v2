@@ -19,7 +19,6 @@
  * @param {Boolean} [debug] if true, logs will be showed in console
  * @param {Object} [liveStreaming] option for live sctreaming
  * @param {Boolean} [liveStreaming.startFbLiveViaGoLiveDialog=false] whether to start Facebook Live Video via "Go Live Dialog" (JS SDK); if false - live will be started via PHP SDK
- * @param {Boolean} [liveStreaming.useRecordRTCLibrary] whether to RecordRTC.js library while capturing compounded video from canvas
  * @param {Number} [liveStreaming.timeSlice] time in ms - video will be send in chunks once per <timeSlice>
  * @param {Number} [liveStreaming.chunkSize] size in bytes (if timeSlice not specified) - size of chunk to send on server
  * @return {Object} instance of WebRTC chat
@@ -48,6 +47,8 @@ window.WebRTCRoomClient = function app(options){
         socket: null
     };
 
+    log = options.logger || log;
+
     if(typeof options === 'object') {
         var mergedOptions = {};
         for (let key in defaultOptions) {
@@ -58,7 +59,7 @@ window.WebRTCRoomClient = function app(options){
         options = mergedOptions;
     }
 
-    console.log('options 0', options);
+    log('options 0', options);
 
     app.getOptions = function () {
         return options;
@@ -134,12 +135,12 @@ window.WebRTCRoomClient = function app(options){
                 delete turn['url'];
             }
         }
-        console.log('pc_config', pc_config)
+        log('pc_config', pc_config)
     } else {
         var testPeerConnection = new RTCPeerConnection(pc_config);
     }
 
-    console.log('pc_config', pc_config);
+    log('pc_config', pc_config);
     if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
         _isMobile = true;
         if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
@@ -545,10 +546,10 @@ window.WebRTCRoomClient = function app(options){
             log('Track: play: track is in document', document.contains(this.trackEl));
             if(this.trackEl && this.trackEl.paused && this.paused && document.contains(this.trackEl)) {
                 this.trackEl.play().then((e) => {
-                    console.log('Track: play func success')
+                    log('Track: play func success')
                 }).catch((e) => {
                     console.error(e)
-                    console.log('Track: play func error')
+                    log('Track: play func error')
                 });
             }
         }
@@ -655,11 +656,6 @@ window.WebRTCRoomClient = function app(options){
 
                     participant.soundMeter.updateAudioDataInterval = window.setWorkerInterval(function () {
                         updateAudioInfoData(participant);
-
-                        //console.log('updateAudioInfoData', participant.sid)
-                        /*if(app.state == 'disconnected') {
-                            window.clearWorkerInterval(participant.soundMeter.updateAudioDataInterval);
-                        }*/
                     }, 16);
 
                     //here requestAnimationFrame is used as we don't need animate SVG elements when tab is in background
@@ -1287,7 +1283,7 @@ window.WebRTCRoomClient = function app(options){
             log('attachTrack START:' + track.kind);
             try {
                 var err = (new Error);
-                console.log(err.stack);
+                log(err.stack);
             } catch (e) {
 
             }
@@ -1313,10 +1309,10 @@ window.WebRTCRoomClient = function app(options){
                 track.trackEl = trackEl;
                 track.play();
                 /*track.trackEl.play().then((e) => {
-                    console.log('attachTrack: video play func success')
+                    log('attachTrack: video play func success')
                 }).catch((e) => {
                     console.error(e)
-                    console.log('attachTrack: video play func error')
+                    log('attachTrack: video play func error')
                 });*/
 
                 app.event.dispatch('videoTrackIsBeingAdded', {track: track, participant: participant});
@@ -1378,7 +1374,7 @@ window.WebRTCRoomClient = function app(options){
             /*if (participant.RTCPeerConnection) {
                 participant.RTCPeerConnection.getStats(null).then((stats) => {
                     stats.forEach((report) => {
-                        //console.log(`%c=====Report: ${report.type}=====`, 'background:red; color:white');
+                        //log(`%c=====Report: ${report.type}=====`, 'background:red; color:white');
                         log(`=====Report: ${report.type}=====`);
 
                         Object.keys(report).forEach((statName) => {
@@ -1509,7 +1505,7 @@ window.WebRTCRoomClient = function app(options){
                 if(speaker != null && typeof remoteStreamEl.sinkId !== 'undefined') {
                     remoteStreamEl.setSinkId(speaker.deviceId)
                         .then(() => {
-                            console.log(`createTrackElement: Success, audio output device attached: ${speaker.deviceId}`);
+                            log(`createTrackElement: Success, audio output device attached: ${speaker.deviceId}`);
                         })
                         .catch(error => {
                             let errorMessage = error;
@@ -2220,7 +2216,7 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 function save(object, f){
-                    console.log('save', object);
+                    log('save', object);
                     if(object.blob instanceof Blob) {
                         object.blob.arrayBuffer().then(function (buffer) {
                             object.blob = buffer;
@@ -2824,7 +2820,7 @@ window.WebRTCRoomClient = function app(options){
                         statsOutput.push(reportItem);
 
                     });
-                    console.log(statsOutput);
+                    log(statsOutput);
                 })
 
             }
@@ -2872,7 +2868,7 @@ window.WebRTCRoomClient = function app(options){
             });
 
             socket.on('Streams/webrtc/roomParticipants', function (socketParticipants) {
-                console.log('roomParticipants', socketParticipants);
+                log('roomParticipants', socketParticipants);
 
                 app.event.dispatch('roomParticipants', socketParticipants);
                 var negotiationEnded = 0;
@@ -3089,7 +3085,7 @@ window.WebRTCRoomClient = function app(options){
 
             });
             socket.on('Streams/webrtc/cameraDisabled', function (message){
-                console.log('got cameraDisabled', message, localParticipant.sid);
+                log('got cameraDisabled', message, localParticipant.sid);
                 var participant = roomParticipants.filter(function (roomParticipant) {
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
@@ -3131,7 +3127,7 @@ window.WebRTCRoomClient = function app(options){
 
             });
             socket.on('Streams/webrtc/recording', function (message){
-                console.log('Streams/webrtc/recording', message);
+                log('Streams/webrtc/recording', message);
                 var offer = {
                     type:'offer',
                     sdp: message.connection.localDescription.sdp,
@@ -3147,7 +3143,7 @@ window.WebRTCRoomClient = function app(options){
             var _outputCtx;
             socket.on('Streams/webrtc/serverVideo', function (message){
                 return;
-                console.log('Streams/webrtc/recording', message);
+                log('Streams/webrtc/recording', message);
 
                 function createCanvas() {
                     var videoCanvas = document.createElement("CANVAS");
@@ -3325,7 +3321,7 @@ window.WebRTCRoomClient = function app(options){
                             //In the case when renegotiationneeded was triggered right after initial offer was created
                             //this cancels initial offer before signalingState will be changed to have-local-offer
                             /*if(participant.hasNewOffersInQueue !== false && hasPriority == null) {
-								console.log('createOffer: offer created: offer was canceled by new one');
+								log('createOffer: offer created: offer was canceled by new one');
 								return;
 							}*/
 
@@ -3591,7 +3587,7 @@ window.WebRTCRoomClient = function app(options){
                             let streamid = screensharingTracks[0].stream != null ? screensharingTracks[0].stream.id : null;
                             app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStarted", {streamId: streamid});
                         }
-                        console.log('sendInitialData', screensharingTracks.length)
+                        log('sendInitialData', screensharingTracks.length)
 
                         dataChannel.removeEventListener('open', sendInitialData);
                         app.event.dispatch('dataChannelOpened', {dataChannel:dataChannel, participant:participant});
@@ -3768,16 +3764,16 @@ window.WebRTCRoomClient = function app(options){
 
         //for testing only
         function removeNotRelayCandidates(sdp) {
-            //console.log('removeNotRelayCandidates sdp', sdp);
+            //log('removeNotRelayCandidates sdp', sdp);
             var sdpLines = (sdp).split("\n");
-            //console.log('removeNotRelayCandidates sdpLines', sdpLines);
+            //log('removeNotRelayCandidates sdpLines', sdpLines);
             for (let i = sdpLines.length - 1; i >= 0; i--) {
                 let line = sdpLines[i];
                 if(line.startsWith('a=candidate') && line.indexOf('relay') == -1) {
                     sdpLines.splice(i, 1);
                 }
             }
-            //console.log('removeNotRelayCandidates sdpLines2', sdpLines);
+            //log('removeNotRelayCandidates sdpLines2', sdpLines);
 
             sdp = sdpLines.filter(function(l) {
                 return l != null;
@@ -4028,7 +4024,7 @@ window.WebRTCRoomClient = function app(options){
                 log('offerReceived: publishLocalVideo: cameraIsEnabled = ' + (app.localMediaControls.cameraIsEnabled()));
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -4350,7 +4346,7 @@ window.WebRTCRoomClient = function app(options){
                 roomPublisher: options.roomPublisher,
                 isiOS: _isiOS,
                 info: _localInfo}, function (data) {
-                console.log('Streams/webrtc/joined CB', data)
+                log('Streams/webrtc/joined CB', data)
             });
 
             if(options.limits && (options.limits.video || options.limits.audio)) {
@@ -4419,7 +4415,7 @@ window.WebRTCRoomClient = function app(options){
             } else {
                 for (let s in streams) {
                     if(streams[s] == null) continue;
-                    console.log('streams[s]', s, streams, streams[s])
+                    log('streams[s]', s, streams, streams[s])
                     var localTracks = streams[s].getTracks();
 
                     for (let i in localTracks) {
@@ -4455,13 +4451,6 @@ window.WebRTCRoomClient = function app(options){
                     app.localMediaControls.enableAudio();
                 }
                 app.localMediaControls.loadDevicesList();
-            }
-
-
-            function log(text) {
-                if(!options.debug.signaling) return;
-                var args = Array.prototype.slice.call(arguments);
-                appLog.apply(null, args);
             }
         }
 
@@ -4897,7 +4886,7 @@ window.WebRTCRoomClient = function app(options){
 
             /*if(options.limits && options.limits.video != null) {
                 canITurnCameraOn().then(function(result) {
-                    console.log('canITurnCameraOn', result);
+                    log('canITurnCameraOn', result);
                     if(result.answer == true) {
                         requestCameraStream(function() {
 
@@ -5059,7 +5048,7 @@ window.WebRTCRoomClient = function app(options){
 
             /*if(options.limits && options.limits.audio != null) {
                 canITurnMicOn().then(function(result) {
-                    console.log('canITurnMicOn', result);
+                    log('canITurnMicOn', result);
                     if(result.answer == true) {
                         requestMicStream();
                     } else {
@@ -5086,7 +5075,7 @@ window.WebRTCRoomClient = function app(options){
                     }
                     audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
                         .then(() => {
-                            console.log(`Success, audio output device attached: ${outputDevice.deviceId}`);
+                            log(`Success, audio output device attached: ${outputDevice.deviceId}`);
                         })
                         .catch(error => {
                             let errorMessage = error;
@@ -5801,12 +5790,6 @@ window.WebRTCRoomClient = function app(options){
                 micIsEnabled: false
             }
             app.signalingDispatcher.sendDataTrackMessage('online', info);
-        }
-
-        function log(text) {
-            if(!options.debug.controls) return;
-            var args = Array.prototype.slice.call(arguments);
-            appLog.apply(null, args);
         }
 
         return {
@@ -6588,18 +6571,18 @@ window.WebRTCRoomClient = function app(options){
                     socket.on('connect_error', function(e) {
                         log('initWithNodeJs: connect_error');
                         app.event.dispatch('connectError');
-                        console.log('Connection failed');
+                        log('Connection failed');
                         console.error(e);
                     });
 
                     socket.on('reconnect_failed', function(e) {
                         log('initWithNodeJs: reconnect_failed');
-                        console.log(e)
+                        log(e)
                         app.event.dispatch('reconnectError');
                     });
                     socket.on('reconnect_attempt', function(e) {
                         log('initWithNodeJs: reconnect_attempt');
-                        console.log('reconnect_attempt', e)
+                        log('reconnect_attempt', e)
                         app.state = 'reconnecting';
                         app.event.dispatch('reconnectAttempt', e);
                     });
@@ -6632,18 +6615,18 @@ window.WebRTCRoomClient = function app(options){
                 socket.on('connect_error', function(e) {
                     log('initWithNodeJs: connect_error');
                     app.event.dispatch('connectError');
-                    console.log('Connection failed');
+                    log('Connection failed');
                     console.error(e);
                 });
 
                 socket.on('reconnect_failed', function(e) {
                     log('initWithNodeJs: reconnect_failed');
-                    console.log(e)
+                    log(e)
                     app.event.dispatch('reconnectError');
                 });
                 socket.on('reconnect_attempt', function(e) {
                     log('initWithNodeJs: reconnect_attempt');
-                    console.log('reconnect_attempt', e)
+                    log('reconnect_attempt', e)
                     app.state = 'reconnecting';
                     app.event.dispatch('reconnectAttempt', e);
                 });
@@ -6774,7 +6757,7 @@ window.WebRTCRoomClient = function app(options){
     }
 
     app.disconnect = function (switchRoom) {
-        console.log('app.disconnect', switchRoom)
+        log('app.disconnect', switchRoom)
         if(app.sendOnlineStatusInterval != null) {
             clearInterval(app.sendOnlineStatusInterval);
             app.sendOnlineStatusInterval = null;
@@ -6881,48 +6864,6 @@ window.WebRTCRoomClient = function app(options){
         }
     }
 
-    /*
-    An alternative timing loop, based on AudioContext's clock
-
-    @arg callback : a callback function 
-        with the audioContext's currentTime passed as unique argument
-    @arg frequency : float in ms;
-    @returns : a stop function
-
-    */
-    function audioTimerLoop(callback, frequency) {
-
-        var freq = frequency / 1000;      // AudioContext time parameters are in seconds
-        var aCtx = new AudioContext();
-        // Chrome needs our oscillator node to be attached to the destination
-        // So we create a silent Gain Node
-        var silence = aCtx.createGain();
-        silence.gain.value = 0;
-        silence.connect(aCtx.destination);
-
-        onOSCend();
-
-        var stopped = false;       // A flag to know when we'll stop the loop
-        function onOSCend() {
-            var osc = aCtx.createOscillator();
-            osc.onended = onOSCend; // so we can loop
-            osc.connect(silence);
-            osc.start(0); // start it now
-            osc.stop(aCtx.currentTime + freq); // stop it next frame
-            callback(aCtx.currentTime); // one frame is done
-            if (stopped || app.state === 'disconnected') {  // user broke the loop
-                osc.onended = function () {
-                    aCtx.close(); // clear the audioContext
-                    return;
-                };
-            }
-        };
-        // return a function to stop our loop
-        return function () {
-            stopped = true;
-        };
-    }
-
     function determineBrowser(ua) {
         var ua= navigator.userAgent, tem,
             M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
@@ -6954,14 +6895,6 @@ window.WebRTCRoomClient = function app(options){
             params = params.concat(args);
             console.log.apply(console, params);
         }
-
-        app.event.dispatch('log', params);
-
-    }
-
-    function appLog(){
-        var args = Array.prototype.slice.call(arguments);
-        log.apply(null, args);
     }
 
     return app;

@@ -117,7 +117,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             },
             liveStreaming: {
                 startFbLiveViaGoLiveDialog: false,
-                useRecordRTCLibrary: true,
                 /*timeSlice: 6000,*/
                 sounds:true,
                 audioLayoutBgColor: '#000',
@@ -473,7 +472,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     logResultArr.push(logArray[k]);
                                 }
                             }
-                            //console.log('logArray', logArray.join(', '))
 
                             logContent.innerText = logResultArr.join(', ');
                         } else {
@@ -481,7 +479,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         }
 
-                        //console.log('log.log',log.type, log.log);
                         logItem.appendChild(logItemType);
                         logItem.appendChild(logContent);
                         _debugOutput.appendChild(logItem);
@@ -600,7 +597,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
 
-            function logInfo(args, isWebRTCLog) {
+            function logInfo(args, fileName) {
                 try {
                     var i, argument;
                     var consoleArr = [];
@@ -619,14 +616,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                     var logObj = {
-                        'type': isWebRTCLog == null ? "WebRTC.js" : "app.js",
+                        'type': fileName,
                         'log':consoleArr
                     };
                     _infoLog.push(logObj);
 
                 } catch (e) {
                     var logObj = {
-                        'type': isWebRTCLog == null ? "WebRTC.js" : "app.js",
+                        'type': fileName,
                         'log':args
                     };
                     _infoLog.push(logObj);
@@ -665,15 +662,42 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 });
             }
 
+            function createLogMethod(fileName) {
+                return function () {
+                    if(_debug === false) return;
+                    var args = arguments
+                    setTimeout(function () {
+                        args = Array.prototype.slice.call(args);
+                        var params = [];
+            
+                        if (window.performance) {
+                            var now = (window.performance.now() / 1000).toFixed(3);
+                            params.push(now + ": " + fileName + ': ' + args.splice(0, 1));
+                            params = params.concat(args);
+                            console.log.apply(console, params);
+                        } else {
+                            params = params.concat(args);
+                            console.log.apply(console, params);
+                        }
+                        logInfo(params, fileName);
+                    }, 0);
+                }
+            }
+
             return {
                 logInfo: logInfo,
                 logError: logError,
                 getInfoLog: getInfoLog,
                 sendReportToServer: sendReportToServer,
+                createLogMethod: createLogMethod,
                 debugWidget: function() {return debugWidget;},
                 isiOSwebView: function() {return _isiOSWebView;}
             }
         }());
+
+        Q.Streams.WebRTCdebugger = appDebug;
+
+        log = appDebug.createLogMethod('WebRTC.js')
 
         /**
          * Show snipped with particular message
@@ -979,14 +1003,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 }
                 this.fillVideoScreenWithAvatarOrVideo = function () {
-                    console.log('fillVideoScreenWithAvatarOrVideo');
+                    log('fillVideoScreenWithAvatarOrVideo');
                     if(this.videoTrackEl && this.hasLiveTracks('video', true)) {
-                        console.log('fillVideoScreenWithAvatarOrVideo if1');
+                        log('fillVideoScreenWithAvatarOrVideo if1');
 
                         this.videoScreen.videoCon.innerHTML = '';
                         this.videoScreen.videoCon.appendChild(this.videoTrackEl);
                     } else if (this.audioScreen.avatarImg != null){
-                        console.log('fillVideoScreenWithAvatarOrVideo if2');
+                        log('fillVideoScreenWithAvatarOrVideo if2');
                         this.videoScreen.videoCon.innerHTML = '';
                         let avatarContainer = document.createElement('DIV');
                         avatarContainer.className = 'Streams_webrtc_chat-participant-inavatar';
@@ -1258,7 +1282,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('createRoomScreen', participant, participant.isLocal);
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -1623,7 +1647,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     log('videoTrackIsAdding: regular video', participant.isLocal);
 
                     for(var s in participant.screens) {
-                        console.log('videoTrackIsAdding for', participant.screens[s].hasLiveTracks('video'))
+                        log('videoTrackIsAdding for', participant.screens[s].hasLiveTracks('video'))
                         if(!participant.screens[s].screensharing && !participant.screens[s].hasLiveTracks('video')) {
                             screenToAttach = participant.screens[s];
                             break;
@@ -2045,7 +2069,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     return obj.screenEl.contains(e.target) || obj.screenEl == e.target;
                 })[0];
 
-                console.log('tappedScreen', tappedScreen);
+                log('tappedScreen', tappedScreen);
                 if(tappedScreen == null) return;
                 var resizeTool = Q.Tool.from(tappedScreen.screenEl, "Q/resize");
                 //var videoResizeTool = Q.Tool.from(tappedScreen.videoScreen.videoCon, "Q/resize");
@@ -4658,7 +4682,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     if(maxRightY) rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
 
                                     /*if(minY < elementToWrap.top - containerRect.top) {
-                                        console.log('addAndUpdate createNewRows craeteRowsOnControlsSides if 123');
+                                        log('addAndUpdate createNewRows craeteRowsOnControlsSides if 123');
 
                                         numOfRowsAlongWrapEl = 0;
                                         rectsToTheTopOnLeft = 0;
@@ -5520,7 +5544,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('addScreenToCommonList');
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -5538,7 +5562,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('removeScreenFromCommonList')
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -5917,7 +5941,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('user disconnected',  participant);
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -6965,7 +6989,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
                     turnCredentials: turnCredentials,
                     debug: _debug,
-                    useCordovaPlugins: _options.useCordovaPlugins
+                    useCordovaPlugins: _options.useCordovaPlugins,
+                    logger: appDebug.createLogMethod('app.js')
                 });
 
                 bindConferenceEvents(webrtcSignalingLib);

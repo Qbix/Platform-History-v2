@@ -11,6 +11,11 @@
     if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
     if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
+    function log(){}
+    if(Q.Streams.WebRTCdebugger) {
+        log = Q.Streams.WebRTCdebugger.createLogMethod('RtmpSender.js')
+    }
+
     /**
      * Streams/webrtc/livestreaming/rtmpSender tool.
      * 
@@ -72,7 +77,7 @@
                         var _options = tool.webrtcSignalingLib.getOptions();
                         var secure = _options.nodeServer.indexOf('https://') == 0;
                         _streamingSocket[platform] = {}
-                        console.log('tool.webrtcSignalingLib.localParticipant().connectedTime', tool.webrtcSignalingLib.localParticipant())
+                        log('tool.webrtcSignalingLib.localParticipant().connectedTime', tool.webrtcSignalingLib.localParticipant())
 
                         var _localInfo = tool.webrtcSignalingLib.getLocalInfo();
                         _streamingSocket[platform].socket = window.sSocket = io.connect(_options.nodeServer + '/webrtc', {
@@ -96,22 +101,22 @@
                             reconnectionAttempts: 100
                         });
                         _streamingSocket[platform].socket.on('connect', function () {
-                            console.log('sender connect:')
+                            log('sender connect:')
                             _streamingSocket[platform].connected = true;
                             if(callback != null) callback();
                         });
                         _streamingSocket[platform].socket.on('error', function (e) {
-                            console.log('sender error0:', e)
+                            log('sender error0:', e)
                         });
                         _streamingSocket[platform].socket.on('connect_error', function (e) {
                             _streamingSocket[platform].connected = false;
                             _streamingSocket[platform].firstBlobSent = false;
-                            console.log('sender error1:', e)
+                            log('sender error1:', e)
                         });
                         _streamingSocket[platform].socket.on('reconnect_error', function (e) {
                             _streamingSocket[platform].connected = false;
                             _streamingSocket[platform].firstBlobSent = false;
-                            console.log('sender error3:', e)
+                            log('sender error3:', e)
                         });
                         _streamingSocket[platform].socket.on('Streams/webrtc/liveStreamingStopped', function (e) {
                             _streamingSocket[platform].socket.disconnect();
@@ -136,26 +141,68 @@
                                 }
                             }
         
-                            _canvasComposer.startRecorder(function (blob) {
+                            _streamingSocket[service].mediaRecorder = _canvasComposer.createRecorder(function (blob) {
                                 if(_streamingSocket[service] == null) return;
-
-                                if(!_streamingSocket[service].firstBlobSent && _veryFirstBlobs.length > 9) {
+                                log('dataavailable');
+                                /*if(!_streamingSocket[service].firstBlobSent && _veryFirstBlobs.length > 9) {
                                     sendVeryFirstBlobs();
                                 }    
 
                                 if(_veryFirstBlobs.length <= 9) {
                                     _veryFirstBlobs.push(blob);
-                                }   
+                                }*/   
 
-                                if(_streamingSocket[service].firstBlobSent) {       
+                                //if(_streamingSocket[service].firstBlobSent) {       
                                     _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blob);
-                                }
+                                //}
         
                             });
                             
                             tool.webrtcSignalingLib.event.dispatch('liveStreamingStarted', {participant:tool.webrtcSignalingLib.localParticipant(), platform:service});
                             tool.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("liveStreamingStarted", service);
                         });
+                    }
+
+                    function endStreaming(service, stopCanvasDrawingAndMixing) {
+                        log('endStreaming', service);
+    
+                        if(_streamingSocket[service].mediaRecorder) {
+                            _streamingSocket[service].mediaRecorder.stop();
+                        }
+
+                        let activeStreamingsOrrRecordings = 0;
+                        for (let propName in _streamingSocket) {
+                            if (service && propName == service) continue;
+                            if (_streamingSocket[propName] != null && _streamingSocket[propName].socket.connected) {
+                                activeStreamingsOrrRecordings++;
+                            }
+                        }
+
+                        if (activeStreamingsOrrRecordings == 0) {
+                            _canvasComposer.stopCaptureCanvas(stopCanvasDrawingAndMixing);
+                            _veryFirstBlobs = [];
+                        }
+    
+                        if(service != null && _streamingSocket[service] != null) {
+                            _streamingSocket[service].socket.disconnect();
+                            delete _streamingSocket[service];
+    
+                        } else {
+                            for(let propName in _streamingSocket) {
+                                if(_streamingSocket[propName] != null && _streamingSocket[propName].socket.connected) {
+                                    _streamingSocket[propName].socket.disconnect();
+                                    _streamingSocket[propName] = null;
+                                }
+                            }
+                        }
+
+                        _videoStream.blobs = [];
+                        _videoStream.allBlobs = [];
+                        _videoStream.size = 0;
+    
+                        tool.webrtcSignalingLib.event.dispatch('liveStreamingEnded', {participant:tool.webrtcSignalingLib.localParticipant(), platform:service});
+                        tool.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("liveStreamingEnded", service);
+    
                     }
         
                     function startRecordingOnServer() {
@@ -166,7 +213,7 @@
                             function sendVeryFirstBlobs() {
                                 if(_veryFirstBlobs.length != 0 && _streamingSocket['rec'] != null) {
                                     for(let i in _veryFirstBlobs) {
-                                        console.log('sendVeryFirstBlobs')
+                                        log('sendVeryFirstBlobs')
                                         _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', _veryFirstBlobs[i]);
                                         if(i == _veryFirstBlobs.length - 1) {
                                             _streamingSocket['rec'].firstBlobSent = true;
@@ -175,7 +222,7 @@
                                 }
                             }
 
-                            _canvasComposer.startRecorder(function (blob) {
+                            _streamingSocket['rec'].mediaRecorder = _canvasComposer.createRecorder(function (blob) {
                                 if (_streamingSocket['rec'] == null) return;
 
                                 if(!_streamingSocket['rec'].connected) {
@@ -183,13 +230,13 @@
                                     return;
                                 }
 
-                                console.log('dataavailable', _streamingSocket['rec'].socket.connected)
-                                if (!_streamingSocket['rec'].firstBlobSent && _veryFirstBlobs.length > 9) {
-                                    //sendVeryFirstBlobs();
+                                log('dataavailable', _streamingSocket['rec'].socket.connected)
+                                /*if (!_streamingSocket['rec'].firstBlobSent && _veryFirstBlobs.length > 9) {
+                                    sendVeryFirstBlobs();
                                 }
                                 if (_veryFirstBlobs.length <= 9) {
                                     _veryFirstBlobs.push(blob);
-                                }
+                                }*/
                                 //if (_streamingSocket['rec'].firstBlobSent) {
                                     _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', blob);
                                 //}
@@ -203,6 +250,10 @@
                     function stopRecordingOnSever(stopCanvasDrawingAndMixing) {
                         log('stopRecordingOnSever');
     
+                        if(_streamingSocket['rec'].mediaRecorder) {
+                            _streamingSocket['rec'].mediaRecorder.stop();
+                        }
+
                         let activeStreamingsOrrRecordings = 0;
                         for(let propName in _streamingSocket) {
                             if(propName == 'rec') continue;
@@ -212,7 +263,7 @@
                         }
                         
                         if(activeStreamingsOrrRecordings == 0) {
-                            _canvasComposer.stopRecorder(stopCanvasDrawingAndMixing);
+                            _canvasComposer.stopCaptureCanvas(stopCanvasDrawingAndMixing);
                             _veryFirstBlobs = [];
                         }
     
@@ -227,65 +278,9 @@
     
                     }
         
-                    function log(text) {
-                        var args = Array.prototype.slice.call(arguments);
-                        var params = [];
-
-                        if (window.performance) {
-                            var now = (window.performance.now() / 1000).toFixed(3);
-                            params.push(now + ": " + args.splice(0, 1));
-                            params = params.concat(args);
-                            console.log.apply(console, params);
-                        } else {
-                            params = params.concat(args);
-                            console.log.apply(console, params);
-                        }
-                        _webrtcUserInterface.appDebug.logInfo(params);
-                    }
-        
                     return {
                         goLive: function () {
                             log('goLiveDialog goLive');
-                        },
-                        endStreaming: function (service, stopCanvasDrawingAndMixing) {
-                            log('endStreaming', service);
-        
-
-                            let activeStreamingsOrrRecordings = 0;
-                            for (let propName in _streamingSocket) {
-                                if (service && propName == service) continue;
-                                if (_streamingSocket[propName] != null && _streamingSocket[propName].socket.connected) {
-                                    activeStreamingsOrrRecordings++;
-                                }
-                            }
-
-                            if (activeStreamingsOrrRecordings == 0) {
-                                _canvasComposer.stopRecorder(stopCanvasDrawingAndMixing);
-                                _veryFirstBlobs = [];
-                            }
-
-                            _canvasComposer.stopRecorder(stopCanvasDrawingAndMixing);
-        
-                            if(service != null && _streamingSocket[service] != null) {
-                                _streamingSocket[service].socket.disconnect();
-                                delete _streamingSocket[service];
-        
-                            } else {
-                                for(let propName in _streamingSocket) {
-                                    if(_streamingSocket[propName] != null && _streamingSocket[propName].socket.connected) {
-                                        _streamingSocket[propName].socket.disconnect();
-                                        _streamingSocket[propName] = null;
-                                    }
-                                }
-                            }
-
-                            _videoStream.blobs = [];
-                            _videoStream.allBlobs = [];
-                            _videoStream.size = 0;
-        
-                            tool.webrtcSignalingLib.event.dispatch('liveStreamingEnded', {participant:tool.webrtcSignalingLib.localParticipant(), platform:service});
-                            tool.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("liveStreamingEnded", service);
-        
                         },
                         isStreaming: function (platform) {
                             if(!platform){
@@ -301,6 +296,7 @@
                             return false;
                         },
                         startStreaming: startStreaming,
+                        endStreaming: endStreaming,
                         startRecordingOnServer: startRecordingOnServer,
                         stopRecordingOnSever: stopRecordingOnSever,
                         videoStream:function () {

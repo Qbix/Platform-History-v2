@@ -11,6 +11,11 @@
     if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
     if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
+    function log(){}
+    if(Q.Streams.WebRTCdebugger) {
+        log = Q.Streams.WebRTCdebugger.createLogMethod('CanvasComposer.js')
+    }
+
     /**
      * Streams/webrtc/control tool.
      * Users can chat with each other via WebRTC using Twilio or raw streams
@@ -24,7 +29,7 @@
             var tool = this;
             this.advancedLiveStreamingBox = null;
 
-            console.log('canvasComposer', options)
+            log('canvasComposer', options)
             if (!options.webrtcUserInterface) {
                 throw "webrtcUserInterface is required";
             }
@@ -56,6 +61,7 @@
                     var _canvas = null;
                     var _canvasMediStream = null;
                     var _mediaRecorder = null;
+                    var _mediaRecorders = [];
                     var _videoTrackIsMuted = false;
                     var _dataListeners = [];
                     var _eventDispatcher = new EventSystem();
@@ -84,7 +90,7 @@
                         this.eventDispatcher.on('sourceMoved', updateVisualSourcesOrdering)
 
                         function updateVisualSourcesOrdering() {
-                            console.log('updateVisualSourcesOrdering START', sceneInstance.sources);
+                            log('updateVisualSourcesOrdering START', sceneInstance.sources);
                             let visualSources = sceneInstance.sources.filter(function (s) {
                                 if(s.sourceType == 'webrtc' || s.sourceType == 'video' || s.sourceType == 'videoInput' || s.sourceType == 'image') {
                                     return true;
@@ -93,7 +99,7 @@
                                 }
                             });
 
-                            console.log('updateVisualSourcesOrdering: visualSources', visualSources);
+                            log('updateVisualSourcesOrdering: visualSources', visualSources);
 
                             //remove sources from rendering that are not in the list (but still are rendered) 
                             for(let i = sceneInstance.visualSources.length - 1; i >= 0; i--) {
@@ -116,7 +122,7 @@
                                 let source = visualSources[s];
                                 let sourceIsRenderedAtIndex = false;
                                 for (let i in sceneInstance.visualSources) {
-                                    console.log('updateVisualSourcesOrdering: for: for', source == sceneInstance.visualSources[i]);
+                                    log('updateVisualSourcesOrdering: for: for', source == sceneInstance.visualSources[i]);
 
                                     if(source == sceneInstance.visualSources[i]) {
                                         sourceIsRenderedAtIndex = i;
@@ -124,7 +130,7 @@
                                     }
                                 }
 
-                                console.log('updateVisualSourcesOrdering: for', sourceIsRenderedAtIndex);
+                                log('updateVisualSourcesOrdering: for', sourceIsRenderedAtIndex);
                                 if(sourceIsRenderedAtIndex === false) {
                                     sceneInstance.visualSources.push(source);
                                 } else {
@@ -134,9 +140,9 @@
                         }
 
                         this.eventDispatcher.on('sourceRemoved', function (removedSource) {
-                            console.log('sourceRemoved', removedSource)
+                            log('sourceRemoved', removedSource)
                             function removeChildSources(parentSources) {
-                                console.log('removeChildSources', parentSources)
+                                log('removeChildSources', parentSources)
         
                                 var nextToRemove = [];
                                 for(let c in parentSources) {
@@ -161,8 +167,8 @@
 
                                     let i = scene.additionalSources.length;
                                     while (i--) {
-                                        console.log('removeChildSources while', parentSources)
-                                        console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+                                        log('removeChildSources while', parentSources)
+                                        log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
 
                                         if (scene.additionalSources[i].baseSource == parentSource) {
                                             nextToRemove.push(scene.additionalSources[i]);
@@ -188,7 +194,7 @@
         
         
                     function createScene(name) {
-                        console.log('canvasComposer: createScene');
+                        log('canvasComposer: createScene');
                         var newScene = new Scene();
                         newScene.id = generateId();
                         newScene.title = name;
@@ -196,25 +202,25 @@
                     }
         
                     function removeScene(sceneInstance) {
-                        console.log('canvasComposer: removeScene', sceneInstance);
+                        log('canvasComposer: removeScene', sceneInstance);
                         for (let s in _scenes) {
                             if (_scenes[s] == sceneInstance) {
                                 _scenes.splice(s, 1)
                                 break;
                             }
                         }
-                        console.log('canvasComposer: removeScene: scenes.sources', sceneInstance.sources.length);
+                        log('canvasComposer: removeScene: scenes.sources', sceneInstance.sources.length);
         
                         for (let r in sceneInstance.sources) {
                             videoComposer.removeSource(sceneInstance.sources[r], sceneInstance, true);
                         }
-                        console.log('canvasComposer: removeScene: scenes.sources 2', sceneInstance.sources.length);
+                        log('canvasComposer: removeScene: scenes.sources 2', sceneInstance.sources.length);
 
-                        console.log('canvasComposer: removeScene: scenes.webrtcSources before', sceneInstance.webrtcSources.length);
+                        log('canvasComposer: removeScene: scenes.webrtcSources before', sceneInstance.webrtcSources.length);
                         for (let r in sceneInstance.webrtcSources) {
                             videoComposer.removeSource(sceneInstance.webrtcSources[r], sceneInstance, true);
                         }
-                        console.log('canvasComposer: removeScene: scenes.webrtcSources after', sceneInstance.webrtcSources.length);
+                        log('canvasComposer: removeScene: scenes.webrtcSources after', sceneInstance.webrtcSources.length);
         
                     }
         
@@ -223,7 +229,7 @@
                     }
         
                     function moveSceneUp(scene) {
-                        console.log('_scenes BEFORE',_scenes.map(function(o) { return o.title}))
+                        log('_scenes BEFORE',_scenes.map(function(o) { return o.title}))
                         let index;
                         for(let i in _scenes) {
                             if(scene == _scenes[i]) {
@@ -234,7 +240,7 @@
                         if(index != null) {
                             moveScene(index, index - 1);
                         }
-                        console.log('_scenes AFTER',_scenes.map(function(o) { return o.title}))
+                        log('_scenes AFTER',_scenes.map(function(o) { return o.title}))
                     }
         
                     function moveSceneDown(scene) {
@@ -251,7 +257,7 @@
                     }
         
                     function moveScene(old_index, new_index) {
-                        console.log('moveScene', old_index, new_index);
+                        log('moveScene', old_index, new_index);
                         if (new_index < 0) {
                             new_index = 0;
                         }
@@ -266,7 +272,7 @@
         
                     function selectScene(sceneInstance) {
                         //TODO: pause remote video
-                        console.log('selectScene', sceneInstance);
+                        log('selectScene', sceneInstance);
         
                         let sceneExists = false;
                         for(let s in _scenes) {
@@ -356,7 +362,7 @@
                         }
         
                         function setWebrtcLayoutRect(width, height, x, y){
-                            console.log('setWebrtcLayoutRect', width, height, x, y);
+                            log('setWebrtcLayoutRect', width, height, x, y);
                             if(width === null || height === null || x === null || y === null) return;
                             if(width != null) _webrtcLayoutRect.width = parseFloat(width);
                             if(height != null) _webrtcLayoutRect.height = parseFloat(height);
@@ -604,7 +610,7 @@
                             this.isScreensharing = false;
                 
                             this.update = function (e) {
-                                console.log('VideoInputSource update', e);
+                                log('VideoInputSource update', e);
                                 
                                 if (instance.mediaStream != null && e.stream && e.stream != instance.mediaStream) {
                                     let tracks = instance.mediaStream.getTracks();
@@ -740,11 +746,11 @@
                                 defaultLayout: getOptions().liveStreaming && getOptions().liveStreaming.defaultLayout ? getOptions().liveStreaming.defaultLayout : 'tiledStreamingLayout',
                             };
                             this.getChildSources = function(type, active) {
-                                console.log('getChildSources', type)
+                                log('getChildSources', type)
             
                                 if(groupInstance.groupType == 'webrtc') {
-                                    console.log('getChildSources _activeScene', _activeScene)
-                                    console.log('getChildSources _activeScene.webrtcSources', _activeScene.webrtcSources)
+                                    log('getChildSources _activeScene', _activeScene)
+                                    log('getChildSources _activeScene.webrtcSources', _activeScene.webrtcSources)
                                     if(active == null) {
                                         return _activeScene.webrtcSources.filter(function (source) {
                                             return source.sourceType == type && source.parentGroup != null && source.parentGroup == groupInstance;
@@ -789,9 +795,9 @@
                         WebRTCStreamSource.prototype = new Source();
         
                         _eventDispatcher.on('sourceRemoved', function (removedSource) {
-                            console.log('sourceRemoved', removedSource)
+                            log('sourceRemoved', removedSource)
                             function removeChildSources(parentSources) {
-                                console.log('removeChildSources', parentSources)
+                                log('removeChildSources', parentSources)
         
                                 var nextToRemove = [];
                                 for(let c in parentSources) {
@@ -821,8 +827,8 @@
                                         let scene = _scenes[s];
                                         let i = scene.additionalSources.length;
                                         while (i--) {
-                                            console.log('removeChildSources while', parentSources)
-                                            console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+                                            log('removeChildSources while', parentSources)
+                                            log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
         
                                             if (scene.additionalSources[i].baseSource == parentSource) {
                                                 nextToRemove.push(scene.additionalSources[i]);
@@ -856,7 +862,7 @@
                         }
         
                         function addSource(newSource, successCallback, failureCallback) {
-                            console.log('addSource: start', newSource)
+                            log('addSource: start', newSource)
                             if( newSource instanceof RectObjectSource || newSource instanceof StrokeRectObjectSource || newSource instanceof TextObjectSource) {
                                 addAdditionalSource(newSource);
                                 return;
@@ -878,7 +884,7 @@
                                 
                                 return webrtcGroup;
                             } else if(newSource.sourceType == 'webrtc') {
-                                console.log('addSource webrtc')
+                                log('addSource webrtc')
                                 let webrtcGroup = getWebrtcGroupIndex(newSource.parentGroup);
                                 let insertAfterIndex = webrtcGroup.index + 1 + webrtcGroup.childItemsNum;
                                
@@ -893,7 +899,7 @@
                                 return;
         
                             } else if(newSource.sourceType == 'image') {
-                                console.log('addSource image')
+                                log('addSource image')
         
                                 var imageSource = new ImageSource();
                                 imageSource.imageInstance = newSource.imageInstance;
@@ -904,7 +910,7 @@
         
                                 return imageSource;
                             } else if(newSource.sourceType == 'videoInput') {
-                                console.log('addSource videoInput')
+                                log('addSource videoInput')
                                 let stream = newSource.mediaStreamInstance;
         
                                 var video = document.createElement('VIDEO');
@@ -912,7 +918,7 @@
                                 video.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopVideo ? getOptions().liveStreaming.loopVideo : true;
                                 video.setAttribute("playsinline","");
                                 video.addEventListener('loadedmetadata', event => {
-                                    console.log(video.videoWidth, video.videoHeight)
+                                    log(video.videoWidth, video.videoHeight)
                                 })
                                 video.style.position = 'absolute';
                                 video.style.top = '-999999999px';
@@ -941,7 +947,7 @@
         
                                 return videoInputSource;
                             } else if(newSource.sourceType == 'imageBackground') {
-                                console.log('addSource image')
+                                log('addSource image')
         
                                 var imageSource = new ImageSource();
                                 imageSource.imageInstance = newSource.imageInstance;
@@ -952,7 +958,7 @@
         
                                 return imageSource;
                             } else if(newSource.sourceType == 'imageOverlay') {
-                                console.log('addSource image')
+                                log('addSource image')
         
                                 var imageSource = new ImageSource();
                                 imageSource.imageInstance = newSource.imageInstance;
@@ -985,13 +991,13 @@
         
                                 return imageSource;
                             } else if(newSource.sourceType == 'video') {
-                                console.log('addSource video')
+                                log('addSource video')
                                 var video = document.createElement('VIDEO');
                                 video.muted = false;
                                 video.setAttribute("playsinline","");
                                 video.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopVideo ? getOptions().liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
-                                    console.log(video.videoWidth, video.videoHeight)
+                                    log(video.videoWidth, video.videoHeight)
                                 })
                                 video.src = newSource.url;
                                 var videoSource = new VideoSource();
@@ -1011,7 +1017,7 @@
         
                                 return videoSource;
                             } else if(newSource.sourceType == 'videoBackground') {
-                                console.log('addSource video')
+                                log('addSource video')
         
                                 var video = document.createElement('VIDEO');
                                 video.muted = true;
@@ -1019,7 +1025,7 @@
                                 video.style.display = 'none';
                                 video.loop = getOptions().liveStreaming && getOptions().liveStreaming.loopVideo ? getOptions().liveStreaming.loopVideo : true;
                                 video.addEventListener('loadedmetadata', event => {
-                                    console.log(video.videoWidth, video.videoHeight)
+                                    log(video.videoWidth, video.videoHeight)
                                 })
                                 video.src = newSource.url;
                                 var videoSource = new VideoSource();
@@ -1103,7 +1109,7 @@
                         }
         
                         function moveSource(old_index, new_index) {
-                            console.log('moveSource', old_index, new_index);
+                            log('moveSource', old_index, new_index);
                             
                             if (new_index < 0) {
                                 new_index = 0;
@@ -1118,7 +1124,7 @@
                         }
         
                         function moveSourceBackward(source) {
-                            console.log('moveSourceBackward');
+                            log('moveSourceBackward');
                             if(source.sourceType == 'group') {
                                 var childItems = 0;
                                 for(let i in _activeScene.sources) {
@@ -1126,11 +1132,11 @@
                                         childItems++;
                                     }
                                 }
-                                console.log('moveSourceBackward childItems', childItems);
+                                log('moveSourceBackward childItems', childItems);
         
                                 for(let i in _activeScene.sources) {
                                     if(_activeScene.sources[i] == source) {
-                                        console.log('moveForward ==', i);
+                                        log('moveForward ==', i);
         
                                         _activeScene.sources.splice(i + 1, 0, ...(_activeScene.sources.splice(i, childItems + 1)) );
                                         _activeScene.eventDispatcher.dispatch('sourceMoved');
@@ -1138,14 +1144,14 @@
                                         break;
                                     }
                                 }
-                                console.log('moveSourceBackward  _activeScene.sources',  _activeScene.sources);
+                                log('moveSourceBackward  _activeScene.sources',  _activeScene.sources);
         
                                 return;
                             }
                             for(let i in _activeScene.sources) {
                                 if(_activeScene.sources[i] == source) {
-                                    console.log('moveForward ==', i);
-                                    console.log('moveSourceBackward for', _activeScene.sources[i], source);
+                                    log('moveForward ==', i);
+                                    log('moveSourceBackward for', _activeScene.sources[i], source);
                                     let indexToInsert = parseInt(i) + 1;
                                     let childItems = 0;
                                     if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[i].parentGroup != _activeScene.sources[indexToInsert].parentGroup) {
@@ -1168,7 +1174,7 @@
                         }
         
                         function moveSourceForward(source) {
-                            console.log('moveSourceForward', source);
+                            log('moveSourceForward', source);
                             if(source.sourceType == 'group') {
                                 var childItems = 0;
                                 for(let i in _activeScene.sources) {
@@ -1176,11 +1182,11 @@
                                         childItems++;
                                     }
                                 }
-                                console.log('moveSourceForward childItems', childItems);
+                                log('moveSourceForward childItems', childItems);
         
                                 for(let i in _activeScene.sources) {
                                     if(_activeScene.sources[i] == source) {
-                                        console.log('moveForward ==', i);
+                                        log('moveForward ==', i);
         
                                         _activeScene.sources.splice(i - (childItems + 1), 0, ...(_activeScene.sources.splice(i, childItems + 1)) );
                                         _activeScene.eventDispatcher.dispatch('sourceMoved');
@@ -1188,19 +1194,19 @@
                                         break;
                                     }
                                 }
-                                console.log('moveSourceForward  _activeScene.sources',  _activeScene.sources);
+                                log('moveSourceForward  _activeScene.sources',  _activeScene.sources);
         
                                 return;
                             }
         
                             for(let i in _activeScene.sources) {
-                                console.log('moveSourceForward i', i);
-                                console.log('moveSourceForward for', _activeScene.sources[i], source);
+                                log('moveSourceForward i', i);
+                                log('moveSourceForward for', _activeScene.sources[i], source);
         
                                 if(_activeScene.sources[i] == source) {
                                     let indexToInsert = parseInt(i) - 1;
                                     let childItems = 0;
-                                    console.log('moveSourceForward for parentGroup', _activeScene.sources[i].parentGroup);
+                                    log('moveSourceForward for parentGroup', _activeScene.sources[i].parentGroup);
         
                                     if(_activeScene.sources[i].parentGroup == null && _activeScene.sources[indexToInsert] && _activeScene.sources[indexToInsert].parentGroup != null) {
                                         for(let i in _activeScene.sources) {
@@ -1208,12 +1214,12 @@
                                                 childItems++;
                                             }
                                         }
-                                        console.log('moveSourceForward for 1');
+                                        log('moveSourceForward for 1');
         
                                     } else if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[indexToInsert] && _activeScene.sources[i].parentGroup == _activeScene.sources[indexToInsert]) {
                                         return;
                                     }
-                                    console.log('moveSourceForward for childItems', childItems);
+                                    log('moveSourceForward for childItems', childItems);
         
                                     moveSource(i, indexToInsert - childItems);
                                     break;
@@ -1222,7 +1228,7 @@
                         }
         
                         function showSource(source, excludeFromLayout) {
-                            console.log('showSource', source);
+                            log('showSource', source);
                             if(source.sourceType == 'group' && source.groupType != 'webrtc') {
                                 for(let i in _activeScene.sources) {
                                     if(_activeScene.sources[i].parentGroup == source) {
@@ -1279,8 +1285,8 @@
                                         let scene = _scenes[s];
                                         let i = scene.additionalSources.length;
                                         while (i--) {
-                                            console.log('removeChildSources while', parentSources)
-                                            console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+                                            log('removeChildSources while', parentSources)
+                                            log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
         
                                             if (scene.additionalSources[i].baseSource == parentSource) {
                                                 nextToShow.push(scene.additionalSources[i]);
@@ -1300,7 +1306,7 @@
                         }
         
                         function hideSource(source) {
-                            console.log('hideSource', source);
+                            log('hideSource', source);
                             if(source.sourceType == 'group' && source.groupType != 'webrtc') {
                                 for(let i in _activeScene.sources) {
                                     if(_activeScene.sources[i].parentGroup == source) {
@@ -1322,7 +1328,7 @@
                             }
         
                             function hideChildAdditionalSources(parentSources) {
-                                console.log('removeChildSources', parentSources)
+                                log('removeChildSources', parentSources)
         
                                 var nextToHide = [];
                                 for(let c in parentSources) {
@@ -1353,8 +1359,8 @@
                                         let scene = _scenes[s];
                                         let i = scene.additionalSources.length;
                                         while (i--) {
-                                            console.log('removeChildSources while', parentSources)
-                                            console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+                                            log('removeChildSources while', parentSources)
+                                            log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
         
                                             if (scene.additionalSources[i].baseSource == parentSource) {
                                                 nextToHide.push(scene.additionalSources[i]);
@@ -1805,27 +1811,27 @@
                             var currentActiveWebRTCSources = webrtcGroupSource.getChildSources('webrtc', true);
                             var layoutRects, streamsNum = (currentActiveWebRTCSources.concat(tracksToAdd).length);
                             if(layoutName != null && layoutName != 'audioOnly') {
-                                console.log('updateWebRTCCanvasLayout layout', layoutName, streamsNum);
+                                log('updateWebRTCCanvasLayout layout', layoutName, streamsNum);
         
                                 layoutRects = webrtcGroupSource.layoutManager.layoutGenerator(layoutName, streamsNum);
                                 webrtcGroupSource.currentLayout = layoutName;
         
                             } else {
                                 if(webrtcGroupSource.currentLayout != null) {
-                                    console.log('updateWebRTCCanvasLayout layout currentLayout', webrtcGroupSource.currentLayout);
+                                    log('updateWebRTCCanvasLayout layout currentLayout', webrtcGroupSource.currentLayout);
         
                                     layoutRects = webrtcGroupSource.layoutManager.layoutGenerator(webrtcGroupSource.currentLayout, streamsNum);
                                 } else {
                                     if(renderScreenSharingLayout) {
-                                        console.log('updateWebRTCCanvasLayout layout renderScreenSharingLayout');
+                                        log('updateWebRTCCanvasLayout layout renderScreenSharingLayout');
         
                                         layoutRects = webrtcGroupSource.layoutManager.layoutGenerator('screenSharing', streamsNum);
                                         webrtcGroupSource.currentLayout = 'screenSharing';
                                     } else {
-                                        console.log('updateWebRTCCanvasLayout layout tiledStreamingLayout');
+                                        log('updateWebRTCCanvasLayout layout tiledStreamingLayout');
         
                                         layoutRects = webrtcGroupSource.layoutManager.layoutGenerator(webrtcGroupSource.params.defaultLayout, streamsNum);
-                                        console.log('updateWebRTCCanvasLayout layout tiledStreamingLayout after', layoutRects);
+                                        log('updateWebRTCCanvasLayout layout tiledStreamingLayout after', layoutRects);
         
                                         webrtcGroupSource.currentLayout = webrtcGroupSource.params.defaultLayout;
                                     }
@@ -1833,7 +1839,7 @@
                                 }
                             }
         
-                            console.log('updateWebRTCCanvasLayout layoutRects', layoutRects);
+                            log('updateWebRTCCanvasLayout layoutRects', layoutRects);
 
                             log('updateWebRTCCanvasLayout streamsNum', streamsNum)
         
@@ -2064,7 +2070,7 @@
         
                         function getWidth(params) {
                             let distance = params.widthTo - params.widthFrom;
-                            //console.log('width', params.widthTo)
+                            //log('width', params.widthTo)
                             let steps = params.frames;
                             let currentProgress = params.frame;
                             return getEase(currentProgress, params.widthFrom, distance, steps, 3);
@@ -2310,8 +2316,8 @@
         
                             /*if(data.widthLog != null && data.heightLog != null) {
                                 if(data.widthLog !=currentWidth || data.heightLog != currentHeight) {
-                                    console.log('dimensions changed width: ' + data.widthLog + ' -> ' + currentWidth);
-                                    console.log('dimensions changed height: ' + data.heightLog + ' -> ' + currentHeight);
+                                    log('dimensions changed width: ' + data.widthLog + ' -> ' + currentWidth);
+                                    log('dimensions changed height: ' + data.heightLog + ' -> ' + currentHeight);
                                 }
                             }*/
         
@@ -2329,17 +2335,17 @@
         
                                 widthToGet =  data.rect.width / scale;
                                 heightToGet = currentHeight;
-                                //console.log('draw', widthToGet / heightToGet, data.rect.width / data.rect.height)
+                                //log('draw', widthToGet / heightToGet, data.rect.width / data.rect.height)
         
                                 if((widthToGet / heightToGet).toFixed(2) != (data.rect.width / data.rect.height).toFixed(2)) {
-                                    //console.log('draw if1')
+                                    //log('draw if1')
                                     widthToGet = currentWidth;
                                     heightToGet = data.rect.height / scale;
         
                                     x = 0;
                                     y = ((currentHeight / 2) - (heightToGet / 2));
                                 } else {
-                                    //console.log('draw if2')
+                                    //log('draw if2')
                                     x = ((currentWidth / 2) - (widthToGet / 2));
                                     y = 0;
                                 }
@@ -2423,7 +2429,7 @@
         
                             //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
         
-                            if(window.debug7) console.log('data.rect.x', data.rect.x)
+                            if(window.debug7) log('data.rect.x', data.rect.x)
                             _inputCtx.fillStyle = data.parentGroup.params.audioLayoutBgColor;
                             _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
         
@@ -2558,7 +2564,7 @@
                                     fitTextFont();
                                 }
                                 font = _inputCtx.font;
-                                console.log('getFontSizeinfo', font)
+                                log('getFontSizeinfo', font)
                                 _inputCtx.restore();
         
                                 return {
@@ -2573,7 +2579,7 @@
                             var font = fontSizeInfo.font;
                             var nameTextSize = fontSizeInfo.textSize;
         
-                            console.log('nameTextSize.font', font)
+                            log('nameTextSize.font', font)
         
                             var nameText = new TextObjectSource({
                                 baseSource: nameLabel,
@@ -2600,7 +2606,7 @@
                                 nameText.textHeight = fontSizeInfo.textSize.fontBoundingBoxAscent + fontSizeInfo.textSize.fontBoundingBoxDescent;
                             });
                             
-                            console.log('font', nameText.font)
+                            log('font', nameText.font)
                             Object.defineProperties(nameText, {
                                 'xFrom': {
                                     'get': function() {
@@ -2637,7 +2643,7 @@
                                         //layout should be updated as some changes were applied
                                         this.latestSize = size;
                                         _inputCtx.font = size + "px Arial";
-                                        console.log('updating.....')
+                                        log('updating.....')
                                         let nameTextSize = _inputCtx.measureText(webrtcSource.name);
                                         this.textHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
         
@@ -2662,7 +2668,7 @@
                             var captionTextSize = _inputCtx.measureText(webrtcSource.caption);
                             var captionTextWidth = captionTextSize.width;
                             var captionTextHeight =  captionTextSize.fontBoundingBoxAscent + captionTextSize.fontBoundingBoxDescent;
-                            console.log('nameTextHeight', captionTextHeight)
+                            log('nameTextHeight', captionTextHeight)
                            
                             var captionText = new TextObjectSource({
                                 baseSource: nameLabel,
@@ -2707,7 +2713,7 @@
                                         //layout should be updated as some changes were applied
                                         this.latestSize = size;
                                         _inputCtx.font = size + "px Arial";
-                                        console.log('updating.....')
+                                        log('updating.....')
                                         let nameTextSize = _inputCtx.measureText(webrtcSource.caption);
                                         this.textHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
         
@@ -2948,7 +2954,7 @@
         
                         function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
                             var analyser = data.participant.soundMeter.analyser;
-                            //console.log('data.participant', analyser == null, data.participant.localMediaControlsState.mic == false)
+                            //log('data.participant', analyser == null, data.participant.localMediaControlsState.mic == false)
 
                             if(analyser == null || data.participant.localMediaControlsState.mic == false) return;
                             /*var bufferLength = analyser.frequencyBinCount;
@@ -3111,7 +3117,7 @@
                             var canvasRenderInterval = window.setWorkerInterval(function () {
                                 drawVideosOnCanvas();
 
-                                //console.log('compositeVideosAndDraw', tool.webrtcSignalingLib.state)
+                                //log('compositeVideosAndDraw', tool.webrtcSignalingLib.state)
                                 if(tool.webrtcSignalingLib.state == 'disconnected') {
                                     window.clearWorkerInterval(canvasRenderInterval);
                                 }
@@ -3178,18 +3184,18 @@
                                 }
 
                                 function tiledStreamingLayout(container, count) {
-                                    console.log('tiledStreamingLayout', count, _layoutManagerContext.currentRects.length)
+                                    log('tiledStreamingLayout', count, _layoutManagerContext.currentRects.length)
                                     var containerRect = container;
                                     _layoutManagerContext.currentGenerator = 'tiledStreamingLayout';
 
                                     if (_layoutManagerContext.currentRects.length == 0) {
-                                        console.log('tiledStreamingLayout 0')
+                                        log('tiledStreamingLayout 0')
 
                                         _layoutManagerContext.currentRects = build(container, count);
                                     } else {
 
                                         if (count > _layoutManagerContext.currentRects.length) {
-                                            console.log('tiledStreamingLayout 1')
+                                            log('tiledStreamingLayout 1')
 
                                             _layoutManagerContext.basicGridRects = build(container, count);
                                             //var availableRects = addAndUpdate(container, count);
@@ -3201,13 +3207,13 @@
                                             _layoutManagerContext.currentRects = updatedRects.concat(last);
 
                                         } else if (count < _layoutManagerContext.currentRects.length) {
-                                            console.log('tiledStreamingLayout 2')
+                                            log('tiledStreamingLayout 2')
 
                                             _layoutManagerContext.basicGridRects = build(container, count);
                                             _layoutManagerContext.currentRects = updateRealToBasicGrid();
                                             //_layoutManagerContext.currentRects = removeAndUpdate();
                                         } else {
-                                            console.log('tiledStreamingLayout 3')
+                                            log('tiledStreamingLayout 3')
 
                                             _layoutManagerContext.basicGridRects = build(container, count);
                                             _layoutManagerContext.currentRects = updateRealToBasicGrid();
@@ -3217,7 +3223,7 @@
                                     return _layoutManagerContext.currentRects;
 
                                     function build() {
-                                        console.log('build')
+                                        log('build')
                                         var size = container;
 
 
@@ -3239,7 +3245,7 @@
                                     }
 
                                     function updateRealToBasicGrid() {
-                                        console.log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
+                                        log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
 
                                         var actualLayoutRects = [];
                                         for (let i in _activeScene.webrtcSources) {
@@ -3250,7 +3256,7 @@
                                             });
                                         }
                                         var actualLayoutRectsClone = [...actualLayoutRects];
-                                        console.log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
+                                        log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
 
                                         // for(let r = _layoutManagerContext.basicGridRects.length - 1; r >= 0 ; r--){ryb
                                         for (let r in _layoutManagerContext.basicGridRects) {
@@ -3258,10 +3264,10 @@
 
                                             let closestIndex = closest(rect, actualLayoutRectsClone);
 
-                                            console.log('updateRealToBasicGrid closestIndex', r, closestIndex);
-                                            console.log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                                            log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                                            log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
                                             if (actualLayoutRects[closestIndex]) {
-                                                console.log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
+                                                log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
                                             }
 
                                             if (closestIndex == null) continue;
@@ -3302,18 +3308,18 @@
                                     }
 
                                     function getElementSizeKeepingRatio(initSize, baseSize) {
-                                        console.log('getElementSizeKeepingRatio', baseSize.width, initSize.width, baseSize.height, initSize.height)
+                                        log('getElementSizeKeepingRatio', baseSize.width, initSize.width, baseSize.height, initSize.height)
                                         var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
 
                                         return { width: Math.floor(initSize.width * ratio), height: Math.floor(initSize.height * ratio) };
                                     }
 
                                     function simpleGrid(count, size, perRow, rowsNum) {
-                                        console.log('simpleGrid', size, count);
+                                        log('simpleGrid', size, count);
                                         var rects = [];
                                         var layoutMargins = getOptions().liveStreaming && getOptions().liveStreaming.tiledLayoutMargins ? getOptions().liveStreaming.tiledLayoutMargins : 10;
                                         var spaceBetween = parseInt(layoutMargins);
-                                        console.log('simpleGrid spaceBetween', spaceBetween);
+                                        log('simpleGrid spaceBetween', spaceBetween);
 
                                         var rectHeight;
                                         var rectWidth = (size.parentWidth / perRow) - (spaceBetween * (perRow - 1));
@@ -3330,13 +3336,13 @@
                                         rectWidth = newRectSize.width;
                                         rectHeight = newRectSize.height;
                                         rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
-                                        console.log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
+                                        log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
 
                                         var isNextNewLast = false;
                                         var rowItemCounter = 1;
                                         var i;
                                         for (i = 1; i <= count; i++) {
-                                            console.log('simpleGrid for', currentRow, rowsNum);
+                                            log('simpleGrid for', currentRow, rowsNum);
 
                                             var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(size.x, size.y, 0, 0);
                                             var currentRow = isNextNewLast ? rowsNum : Math.ceil(i / perRow);
@@ -3360,11 +3366,11 @@
                                             } else rowItemCounter++;
                                         }
 
-                                        console.log('simpleGrid rects', rects);
+                                        log('simpleGrid rects', rects);
 
                                         //return rects;
                                         let rcts = centralizeRects(rects);
-                                        console.log('simpleGrid centralizeRects', rcts);
+                                        log('simpleGrid centralizeRects', rcts);
 
                                         return rcts;
                                     }
@@ -3400,7 +3406,7 @@
                                         var maxY = Math.max.apply(Math, rects.map(function (r) { return r.y + r.height; }));
 
                                         var sortedRows = getRectsRows(rects);
-                                        console.log('centralizeRects sortedRows', sortedRows)
+                                        log('centralizeRects sortedRows', sortedRows)
 
                                         var alignedRects = []
                                         for (let r in sortedRows) {
@@ -3408,10 +3414,10 @@
                                             var rowMinX = Math.min.apply(Math, row.map(function (r) { return r.x; }));
                                             var rowMaxX = Math.max.apply(Math, row.map(function (r) { return r.x + r.width; }));
                                             var rowTotalWidth = rowMaxX - rowMinX;
-                                            console.log('centralizeRects rowTotalWidth', rowMinX, rowMaxX, rowTotalWidth)
-                                            console.log('centralizeRects centerX', centerX)
+                                            log('centralizeRects rowTotalWidth', rowMinX, rowMaxX, rowTotalWidth)
+                                            log('centralizeRects centerX', centerX)
                                             var newXPosition = centerX - (rowTotalWidth / 2);
-                                            console.log('centralizeRects newXPosition', newXPosition)
+                                            log('centralizeRects newXPosition', newXPosition)
 
                                             var moveAllRectsOn = newXPosition - rowMinX;
 
@@ -3433,7 +3439,7 @@
                                 }
 
                                 function screenSharingLayout(count, size, maximized) {
-                                    console.log('screenSharingLayout START')
+                                    log('screenSharingLayout START')
                                     _layoutManagerContext.currentGenerator = 'screenSharingLayout';
                                     var rects = [];
 
@@ -3534,7 +3540,7 @@
 
                                 function audioScreenSharingLayout(count, size, maximized) {
                                     var initCount = count;
-                                    console.log('audioScreenSharingLayout START', count)
+                                    log('audioScreenSharingLayout START', count)
                                     _layoutManagerContext.currentGenerator = 'audioScreenSharingLayout';
                                     var rects = [];
 
@@ -3628,7 +3634,7 @@
                                 }
 
                                 function sideScreenSharingLayout(count, size) {
-                                    console.log('sideScreenSharingLayout START', count, _layoutManagerContext.currentRects.length)
+                                    log('sideScreenSharingLayout START', count, _layoutManagerContext.currentRects.length)
                                     var spaceBetween = 22;
 
                                     if (_layoutManagerContext.currentGenerator != 'sideScreenSharingLayout') {
@@ -3638,13 +3644,13 @@
 
                                     if (_layoutManagerContext.currentRects.length == 0) {
 
-                                        console.log('sideScreenSharingLayout if0')
+                                        log('sideScreenSharingLayout if0')
                                         _layoutManagerContext.currentRects = build();
                                     } else {
 
-                                        console.log('sideScreenSharingLayout if1.0')
+                                        log('sideScreenSharingLayout if1.0')
                                         if (count > _layoutManagerContext.currentRects.length) {
-                                            console.log('sideScreenSharingLayout if1.2')
+                                            log('sideScreenSharingLayout if1.2')
 
                                             _layoutManagerContext.basicGridRects = build();
                                             let numOfEls = _layoutManagerContext.basicGridRects.length - _layoutManagerContext.currentRects.length;
@@ -3654,11 +3660,11 @@
                                             _layoutManagerContext.currentRects = updatedRects.concat(last);
 
                                         } else if (count < _layoutManagerContext.currentRects.length) {
-                                            console.log('sideScreenSharingLayout if')
+                                            log('sideScreenSharingLayout if')
                                             _layoutManagerContext.basicGridRects = build();
                                             _layoutManagerContext.currentRects = updateRealToBasicGrid();
                                         } else {
-                                            console.log('sideScreenSharingLayout 3')
+                                            log('sideScreenSharingLayout 3')
 
                                             _layoutManagerContext.basicGridRects = build();
                                             _layoutManagerContext.currentRects = updateRealToBasicGrid();
@@ -3669,7 +3675,7 @@
 
                                     function build() {
 
-                                        console.log('build')
+                                        log('build')
                                         let innerContainerWidth = size.parentWidth - spaceBetween * 2;
                                         let innerContainerHeight = innerContainerWidth / 16 * 8;
 
@@ -3694,7 +3700,7 @@
                                             rects = simpleGrid(count - 1, sideSize, 3, null, true);
                                         }
 
-                                        console.log('innerContainerHeight', innerContainerHeight, size.parentHeight - (spaceBetween * 2))
+                                        log('innerContainerHeight', innerContainerHeight, size.parentHeight - (spaceBetween * 2))
 
                                         if (innerContainerHeight > size.parentHeight - (spaceBetween * 2)) innerContainerHeight = size.parentHeight - (spaceBetween * 2);
 
@@ -3704,7 +3710,7 @@
                                         } else {
                                             var minX = Math.min.apply(Math, rects.map(function (rect) { return rect.x; }));
                                             var maxX = Math.max.apply(Math, rects.map(function (rect) { return rect.x + rect.width; }));
-                                            console.log('maxX', rects, maxX)
+                                            log('maxX', rects, maxX)
                                             var mainScreen = new DOMRect(maxX + spaceBetween, size.y + spaceBetween, innerContainerWidth - (maxX - size.x), innerContainerHeight);
                                             rects.unshift(mainScreen);
                                         }
@@ -3714,7 +3720,7 @@
                                     }
 
                                     function updateRealToBasicGrid() {
-                                        console.log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
+                                        log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
                                         var actualLayoutRects = [];
                                         for (let i in _activeScene.webrtcSources) {
                                             if (_activeScene.webrtcSources[i].sourceType != 'webrtc') continue;
@@ -3724,7 +3730,7 @@
                                             });
                                         }
                                         var actualLayoutRectsClone = [...actualLayoutRects];
-                                        console.log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
+                                        log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
 
                                         // for(let r = _layoutManagerContext.basicGridRects.length - 1; r >= 0 ; r--){ryb
                                         for (let r in _layoutManagerContext.basicGridRects) {
@@ -3732,10 +3738,10 @@
 
                                             let closestIndex = closest(rect, actualLayoutRectsClone);
 
-                                            console.log('updateRealToBasicGrid closestIndex', r, closestIndex);
-                                            console.log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                                            log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                                            log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
                                             if (actualLayoutRects[closestIndex]) {
-                                                console.log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
+                                                log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
                                             }
 
                                             if (closestIndex == null) continue;
@@ -3776,31 +3782,31 @@
                                     }
 
                                     function simpleGrid(count, size, perRow, rowsNum, asSquares) {
-                                        console.log('simpleGrid', perRow, rowsNum);
-                                        console.log('simpleGrid container size', size.parentWidth, size.parentHeight);
+                                        log('simpleGrid', perRow, rowsNum);
+                                        log('simpleGrid container size', size.parentWidth, size.parentHeight);
                                         var rects = [];
                                         var spaceBetween = 22;
                                         var rectHeight;
                                         var rectWidth = (size.parentWidth / perRow) - (spaceBetween * (perRow));
 
-                                        //console.log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
+                                        //log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
                                         // if(((rectWidth * perRow) / size.parentWidth) * 100 > 24 ) rectWidth = size.parentWidth / 100 * 24;
 
                                         if (rowsNum == null) {
-                                            console.log('simpleGrid if1');
+                                            log('simpleGrid if1');
 
                                             let primaryRectHeight = size.parentHeight / Math.ceil(count / perRow)
                                             rowsNum = Math.floor(size.parentHeight / (primaryRectHeight));
                                             if (rowsNum == 0) rowsNum = 1;
-                                            console.log('simpleGrid if1 primaryRectHeight', primaryRectHeight, rowsNum);
+                                            log('simpleGrid if1 primaryRectHeight', primaryRectHeight, rowsNum);
                                             rectHeight = (size.parentHeight - (spaceBetween * rowsNum) - spaceBetween) / rowsNum;
                                         } else {
-                                            console.log('simpleGrid if2');
+                                            log('simpleGrid if2');
                                             rectHeight = (size.parentHeight - (spaceBetween * rowsNum) - spaceBetween) / rowsNum;
                                         }
-                                        console.log('simpleGrid rect size0', rectWidth, rectHeight);
+                                        log('simpleGrid rect size0', rectWidth, rectHeight);
 
-                                        console.log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
+                                        log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
                                         let rectSize = Math.min(rectWidth, rectHeight);
                                         //if(((rectSize * perRow) / size.parentWidth) * 100 > 40 ) rectSize = (size.parentWidth / 100 * 40) / perRow;
 
@@ -3814,16 +3820,16 @@
                                             rectHeight = newRectSize.height;
                                         }
 
-                                        console.log('simpleGrid rect size1', rectWidth, rectHeight);
+                                        log('simpleGrid rect size1', rectWidth, rectHeight);
 
                                         if (rowsNum == null) rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
-                                        console.log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
+                                        log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
 
                                         var isNextNewLast = false;
                                         var rowItemCounter = 1;
                                         var i;
                                         for (i = 1; i <= count; i++) {
-                                            console.log('simpleGrid for', currentRow, rowsNum);
+                                            log('simpleGrid for', currentRow, rowsNum);
 
                                             var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(size.x, size.y, 0, 0);
                                             var currentRow = isNextNewLast ? rowsNum : Math.ceil(i / perRow);
@@ -3848,7 +3854,7 @@
                                         }
 
 
-                                        console.log('simpleGrid rects', rects);
+                                        log('simpleGrid rects', rects);
 
 
 
@@ -3887,7 +3893,7 @@
                                         var maxY = Math.max.apply(Math, rects.map(function (r) { return r.y + r.height; }));
 
                                         var sortedRows = getRectsRows(rects);
-                                        console.log('centralizeRects sortedRows', sortedRows)
+                                        log('centralizeRects sortedRows', sortedRows)
 
                                         var alignedRects = []
                                         for (let r in sortedRows) {
@@ -3895,10 +3901,10 @@
                                             var rowMinX = Math.min.apply(Math, row.map(function (r) { return r.x; }));
                                             var rowMaxX = Math.max.apply(Math, row.map(function (r) { return r.x + r.width; }));
                                             var rowTotalWidth = rowMaxX - rowMinX;
-                                            console.log('centralizeRects rowTotalWidth', rowMinX, rowMaxX, rowTotalWidth)
-                                            console.log('centralizeRects centerX', centerX)
+                                            log('centralizeRects rowTotalWidth', rowMinX, rowMaxX, rowTotalWidth)
+                                            log('centralizeRects centerX', centerX)
                                             var newXPosition = centerX - (rowTotalWidth / 2);
-                                            console.log('centralizeRects newXPosition', newXPosition)
+                                            log('centralizeRects newXPosition', newXPosition)
 
                                             var moveAllRectsOn = newXPosition - rowMinX;
 
@@ -3926,7 +3932,7 @@
                                         var maxY = Math.max.apply(Math, rects.map(function (r) { return r.y + r.height; }));
 
                                         var sortedRows = getRectsRows(rects);
-                                        console.log('centralizeRects sortedRows', sortedRows)
+                                        log('centralizeRects sortedRows', sortedRows)
 
                                         var totalHeight = maxY - minY;
 
@@ -3940,7 +3946,7 @@
                                     }
 
                                     function getElementSizeKeepingRatio(initSize, baseSize) {
-                                        console.log('getElementSizeKeepingRatio', baseSize.width, initSize.width, baseSize.height, initSize.height)
+                                        log('getElementSizeKeepingRatio', baseSize.width, initSize.width, baseSize.height, initSize.height)
                                         var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
 
                                         return { width: Math.floor(initSize.width * ratio), height: Math.floor(initSize.height * ratio) };
@@ -4172,9 +4178,9 @@
                             this.streams = [];
                             this.addStream = function (mediaStream) {
                                 if (audioContext == null) audioComposer.mix();
-                                console.log('AudioInputSource 1');
+                                log('AudioInputSource 1');
                                 if(this.gainNode == null && this.analyserNode == null) {
-                                    console.log('AudioInputSource 2');
+                                    log('AudioInputSource 2');
                                     this.gainNode = audioContext.createGain();;
                                     this.analyserNode = audioContext.createAnalyser();
                                     this.analyserNode.fftSize = 512;
@@ -4182,8 +4188,8 @@
                                     this.analyserNode.connect(_dest);
                                 }
                                 
-                                console.log('AudioInputSource 3', this.gainNode);
-                                console.log('AudioInputSource 3.1', this.analyserNode);
+                                log('AudioInputSource 3', this.gainNode);
+                                log('AudioInputSource 3.1', this.analyserNode);
         
                                 const source = audioContext.createMediaStreamSource(mediaStream);
                                 source.connect(this.gainNode);
@@ -4196,12 +4202,12 @@
                                 if (this.eventDispatcher != null) this.eventDispatcher.dispatch('streamAdded', streamInfo);
                             };
                             this.connect = function () {
-                                console.log('AudioInputSource connect');
+                                log('AudioInputSource connect');
         
                                 this.analyserNode.connect(_dest);
                             };
                             this.disconnect = function () {
-                                console.log('AudioInputSource disconnect');
+                                log('AudioInputSource disconnect');
         
                                 this.analyserNode.disconnect(_dest);
                             };
@@ -4364,7 +4370,7 @@
                         }
         
                         function muteSource(source, localOutput) {
-                            console.log('muteSource', source, localOutput);
+                            log('muteSource', source, localOutput);
                             //source.mediaStreamTrack.enabled = false;
                             if(source.sourceType == 'webrtcaudio' && source.participant.isLocal) {
                                
@@ -4374,7 +4380,7 @@
                                     source.mediaStreamTrack.enabled = false;
                                 }
                             } else if(source.sourceType == 'audio' || source.sourceType == 'audioInput' || source.sourceType == 'video') {
-                                console.log('muteSource: audio || video', source, localOutput);
+                                log('muteSource: audio || video', source, localOutput);
         
                                 source.analyserNode.disconnect(_dest);
                                 if(localOutput) muteSourceLocally(source);
@@ -4413,18 +4419,18 @@
                         }
         
                         function mix() {
-                            console.log('audioComposer: mix');
+                            log('audioComposer: mix');
                             if (audioContext == null) {
-                                console.log('audioComposer: create AudioContext');
+                                log('audioComposer: create AudioContext');
                                 audioContext = new AudioContext();
                             }
                             if (_dest == null) {
-                                console.log('audioComposer: createMediaStreamDestination');
+                                log('audioComposer: createMediaStreamDestination');
                                 _dest = audioContext.createMediaStreamDestination();
                             }
 
                             /*if(_canvasMediStream) {
-                                console.log('audioComposer: addTrack');
+                                log('audioComposer: addTrack');
 
                                 _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
                             }*/
@@ -4553,14 +4559,7 @@
                         return _canvasMediStream;
                     }
         
-                    function startRecorder(ondataavailable) {
-                        if(ondataavailable != null){
-                            addDataListener(ondataavailable);
-                        }
-                        if(_mediaRecorder != null){
-                            console.error('Recorder already exists.')
-                            return;
-                        }
+                    function createRecorder(ondataavailable) {
         
                         if(_canvasMediStream == null) {
                             captureStream();
@@ -4582,80 +4581,33 @@
                         }
                         log('captureStream codecs', codecs);
         
-                        if(getOptions().liveStreaming && getOptions().liveStreaming.useRecordRTCLibrary) {
-                            log('captureStream if1');
-        
-        
-                            _mediaRecorder = RecordRTC(_canvasMediStream, {
-                                recorderType:MediaStreamRecorder,
-                                mimeType: codecs,
-                                timeSlice: 1000,
-                                ondataavailable:trigerDataListeners
-                            });
-                            _mediaRecorder.startRecording();
-                        } else {
-                            log('captureStream if1 else', _canvasMediStream);
-        
-        
-                            _mediaRecorder = new MediaRecorder(_canvasMediStream, {
-                                //mimeType: 'video/webm',
-                                mimeType: codecs,
-                                /*audioBitsPerSecond : 128000,*/
-                                videoBitsPerSecond : 3 * 1024 * 1024
-                            });
-        
-                            _mediaRecorder.onerror = function(e) {
-                                console.error(e);
-                            }
-        
-                            _mediaRecorder.addEventListener('dataavailable', function(e) {
-                                //log('dataavailable', e.data.size);
-                                trigerDataListeners(e.data);
-                            });
-        
-                            _mediaRecorder.start(1000); // Start recording, and dump data every second
+
+                        log('captureStream if1 else', _canvasMediStream);
+
+
+                        var mediaRecorder = new MediaRecorder(_canvasMediStream, {
+                            //mimeType: 'video/webm',
+                            mimeType: codecs,
+                            /*audioBitsPerSecond : 128000,*/
+                            videoBitsPerSecond: 3 * 1024 * 1024
+                        });
+
+                        mediaRecorder.onerror = function (e) {
+                            console.error(e);
                         }
-        
-                        
+
+                        mediaRecorder.addEventListener('dataavailable', function (e) {
+                            //log('dataavailable', e.data.size);
+                            ondataavailable(e.data);
+                        });
+
+                        mediaRecorder.start(1000); // Start recording, and dump data every second
+
+                        return mediaRecorder;
                     }
         
-                    function stopRecorder(stopCanvasDrawingAndMixing) {
-                        log('stopRecorder')
-        
-                        if(_mediaRecorder == null) return;
-                        if(getOptions().liveStreaming && getOptions().liveStreaming.useRecordRTCLibrary) {
-                            log('stopRecorder: RecordRTC')
-        
-                            _mediaRecorder.stopRecording(function () {
-                                /*document.querySelector('.Streams_webrtc_recording').addEventListener('click', function () {
-        
-                                    var fileName = 'test.webm';
-                                    var file = new File([_mediaRecorder.getBlob()], fileName, {
-                                        type: 'video/webm;codecs=h264'
-                                    });
-                                    invokeSaveAsDialog(file, fileName);
-        
-        
-                                })*/
-                            });
-                        } else {
-                            log('stopRecorder: native')
-        
-                            _mediaRecorder.stop();
-                            /*document.querySelector('.Streams_webrtc_recording').addEventListener('click', function () {
-        
-        
-                                var blobToSave = new Blob(fbLive.videoStream().allBlobs);
-        
-                                var fileName = 'test.webm';
-                                var file = new File([blobToSave], fileName, {
-                                    type: 'video/webm;codecs=h264'
-                                });
-                                saveToFile(file, fileName);
-        
-        
-                            })*/
-                        }
+                    function stopCaptureCanvas(stopCanvasDrawingAndMixing) {
+                        log('stopRecorder')                        
                         
                         //if user ends call, stop all processes related to livestreaming
                         if(stopCanvasDrawingAndMixing) {
@@ -4664,7 +4616,6 @@
                             audioComposer.stop();
                         }
 
-                        //bug: if to call canvas.captureStream() then stop all tracks in that stream and then call canvas.captureStream again - it will load CPU much.
                         if(_canvasMediStream != null) {
                             log('stopRecorder: stop tracks')
                             let tracks = _canvasMediStream.getTracks();
@@ -4676,13 +4627,9 @@
                             }
                             _canvasMediStream = null;
                         }
-                        //audioComposer.suspend();
                         
                         _composerIsActive = false;
 
-                        _mediaRecorder = null;
-                        
-                        _dataListeners = [];
                     }
         
                     function saveToFile(file, fileName) {
@@ -4804,22 +4751,6 @@
                         }
                     }
         
-                    function log(text) {
-                        var args = Array.prototype.slice.call(arguments);
-                        var params = [];
-
-                        if (window.performance) {
-                            var now = (window.performance.now() / 1000).toFixed(3);
-                            params.push(now + ": " + args.splice(0, 1));
-                            params = params.concat(args);
-                            console.log.apply(console, params);
-                        } else {
-                            params = params.concat(args);
-                            console.log.apply(console, params);
-                        }
-                        tool.webrtcUserInterface.appDebug.logInfo(params);
-                    }
-        
                     return {
                         videoComposer: videoComposer,
                         audioComposer: audioComposer,
@@ -4835,8 +4766,8 @@
                         canvas: function () {
                             return _canvas;
                         },
-                        startRecorder: startRecorder,
-                        stopRecorder: stopRecorder,
+                        createRecorder: createRecorder,
+                        stopCaptureCanvas: stopCaptureCanvas,
                         isActive: function () {
                             return _composerIsActive;
                             //if(_mediaRecorder != null) return true;
