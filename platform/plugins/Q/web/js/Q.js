@@ -12347,9 +12347,17 @@ Q.Visual = Q.Pointer = {
 	 */
 	fastclick: function _Q_fastclick (params) {
 		params.eventName = 'touchend mouseup';
+		var _ignoreFastclick = false;
 		return function _Q_fastclick_on_wrapper (e) {
 			var oe = e.originalEvent || e;
+			if (_ignoreFastclick) {
+				return; // one of touchend, mouseup happened just now
+			}
 			if (oe.type === 'touchend') {
+				_ignoreFastclick = true;
+				setTimeout(function () {
+					_ignoreFastclick = true;
+				}, 100);
 				if (oe.touches && oe.touches.length) {
 					return; // still some touches happening
 				}
