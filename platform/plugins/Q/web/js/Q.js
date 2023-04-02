@@ -12228,7 +12228,7 @@ Q.Visual = Q.Pointer = {
 	 * @method start
 	 */
 	start: function _Q_Pointer_start(params) {
-		params.eventName = 'touchstart mousedown';
+		params.eventName =  Q.Pointer.start.eventName;
 		return function (e) {
 			Q.Pointer.movedTooMuchForClickLastTime = false;
 			if (Q.Visual.recentlyScrolled) {
@@ -12248,7 +12248,7 @@ Q.Visual = Q.Pointer = {
 	 * @method end
 	 */
 	end: function _Q_Pointer_end(params) {
-		params.eventName = 'touchend mouseup';
+		params.eventName = Q.Pointer.end.eventName;
 		return params.original;
 	},
 	/**
@@ -12257,7 +12257,7 @@ Q.Visual = Q.Pointer = {
 	 * @method move
 	 */
 	move: function _Q_Pointer_move(params) {
-		params.eventName = 'touchmove mousemove';
+		params.eventName = Q.Pointer.move.eventName;
 		return params.original;
 	},
 	/**
@@ -12266,7 +12266,7 @@ Q.Visual = Q.Pointer = {
 	 * @method enter
 	 */
 	enter: function _Q_Pointer_enter(params) {
-		params.eventName = 'touchenter mouseenter';
+		params.eventName = Q.Pointer.enter.eventName;
 		return params.original;
 	},
 	/**
@@ -12275,7 +12275,7 @@ Q.Visual = Q.Pointer = {
 	 * @method leave
 	 */
 	leave: function _Q_Pointer_leave(params) {
-		params.eventName = 'touchleave mouseleave';
+		params.eventName = Q.Pointer.leave.eventName;
 		return params.original;
 	},
 	/**
@@ -12346,18 +12346,10 @@ Q.Visual = Q.Pointer = {
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
-		params.eventName = 'touchend mouseup';
-		var _ignoreFastclick = false;
+		params.eventName =  Q.Pointer.end.eventName;
 		return function _Q_fastclick_on_wrapper (e) {
 			var oe = e.originalEvent || e;
-			if (_ignoreFastclick) {
-				return; // one of touchend, mouseup happened just now
-			}
 			if (oe.type === 'touchend') {
-				_ignoreFastclick = true;
-				setTimeout(function () {
-					_ignoreFastclick = true;
-				}, 100);
 				if (oe.touches && oe.touches.length) {
 					return; // still some touches happening
 				}
@@ -13363,6 +13355,8 @@ Q.Pointer.start.eventName = _useTouchEvents ? 'touchstart' : 'mousedown';
 Q.Pointer.move.eventName = _useTouchEvents ? 'touchmove' : 'mousemove';
 Q.Pointer.end.eventName = _useTouchEvents ? 'touchend' : 'mouseup';
 Q.Pointer.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'mousecancel';
+Q.Pointer.enter.eventName = _useTouchEvents ? 'touchenter' : 'mouseenter';
+Q.Pointer.leave.eventName = _useTouchEvents ? 'touchleave' : 'mouseleave';
 
 Q.Pointer.which.NONE = 0;
 Q.Pointer.which.LEFT = 1;
