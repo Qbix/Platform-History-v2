@@ -32,6 +32,7 @@
 			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
+			"assetsIcons": { "module": "Assets", "action": "icons" },
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
 			"Assets/subscription": {"module": "Assets", "action": "subscription"},
 			"Q/plugins/Assets/:action": {"module": "Assets"}
