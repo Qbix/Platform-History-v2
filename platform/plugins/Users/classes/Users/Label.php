@@ -372,7 +372,7 @@ class Users_Label extends Base_Users_Label
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
-	 * @param {string} [$userId=null] The id of the user whose contact labels should be fetched
+	 * @param {string|array} [$userId=null] The id of the user whose contact labels should be fetched. Can be an array of userIds.
 	 * @param {string|array|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some array or db expression, to get only a particular subset of labels.
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
@@ -431,16 +431,15 @@ class Users_Label extends Base_Users_Label
 				->fetchDbRows(null, null, 'label');
 			$labels = array_merge($labels, $labelsPrefixed);
 		}
-		if (empty($options['checkContacts'])) {
-			return $labels;
-		}
-		$contacts = array();
-		foreach ($contact_array as $contact) {
-			$contacts[$contact->label] = $contact->label;
-		}
-		foreach ($labels as $label) {
-			if (!isset($contacts[$label->label])) {
-				unset($labels[$label->label]);
+		if (!empty($options['checkContacts'])) {
+			$contacts = array();
+			foreach ($contact_array as $contact) {
+				$contacts[$contact->label] = $contact->label;
+			}
+			foreach ($labels as $label) {
+				if (!isset($contacts[$label->label])) {
+					unset($labels[$label->label]);
+				}
 			}
 		}
 		return $labels;

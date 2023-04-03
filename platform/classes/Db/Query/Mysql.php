@@ -1130,12 +1130,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Adds to the WHERE clause, like this:   "... AND (x OR y OR z)",
 	 * where x, y and z are the arguments to this function.
 	 * @method andWhere
-	 * @param {Db_Expression|string} $criteria An associative array of expression => value pairs.
+	 * @param {array|Db_Expression|string} $criteria An associative array of expression => value pairs.
 	 * The values are automatically escaped using the database server, or turned into PDO placeholders
 	 * for prepared statements
 	 * They can also be arrays, in which case they are placed into an expression of the form "key IN ('val1', 'val2')"
 	 * Or, this could be a Db_Expression object.
-	 * @param {Db_Expression|string} [$or_criteria=null]
+	 * @param {array|Db_Expression|string} [$or_criteria=null]
 	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If WHERE clause does not belong to context
 	 * @chainable
@@ -1198,11 +1198,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Adds to the WHERE clause, like this:   "... OR (x AND y AND z)",
 	 * where x, y and z are the arguments to this function.
 	 * @method orWhere
-	 * @param {Db_Expression|string} $criteria An associative array of expression => value pairs.
+	 * @param {array|Db_Expression|string} $criteria An associative array of expression => value pairs.
 	 * The values are automatically escaped using the database server, or turned into PDO placeholders for prepared statements
 	 * They can also be arrays, in which case they are placed into an expression of the form key IN ('val1', 'val2')
 	 * Or, this could be a Db_Expression object.
-	 * @param {Db_Expression|string} [$and_criteria=null]
+	 * @param {array|Db_Expressio|string} [$and_criteria=null]
 	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If WHERE clause does not belong to context
 	 * @chainable
@@ -1759,7 +1759,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Calculates criteria
 	 * @method criteria_internal
 	 * @private
-	 * @param {Db_Expression|array} $criteria
+	 * @param {Db_Expression|array|string} $criteria
 	 * @param {array} [&$fillCriteria=null]
 	 * @return {string}
 	 */
@@ -1809,7 +1809,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					}
 					if (!empty($list)) {
 						$lhs = '(' . implode(',', $columns) . ')';
-						$rhs = "(\n" . implode(",\n", $list) . "\n)";
+						$rhs = "(\n" . implode(',', $list) . "\n)";
 						$criteria_list[] = "$lhs IN $rhs";
 					} else {
 						$criteria_list[] = "FALSE";
