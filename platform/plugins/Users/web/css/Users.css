@@ -484,6 +484,12 @@ a.Users_activation_resend:active {
 	cursor: pointer;
 }
 
+.Users_labels_communityRoles ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+}
+
 .Users_labels_communityRoles .Users_labels_label {
 	display: inline-block;
 	width: 33%;
@@ -495,7 +501,7 @@ a.Users_activation_resend:active {
 .Users_labels_communityRoles .Users_labels_icon {
 	display: inline-block;
 	width: 80%;
-	height: 80%;
+	height: auto;
 }
 .Users_labels_communityRoles .Users_labels_title {
 	display: block;
