@@ -169,11 +169,6 @@ Q.Tool.define("Streams/interests", function (options) {
 								otherInterests[normalized] = interests[normalized];
 							}
 						}
-						if (totalInterests.length < parseInt(Q.getObject("interests.minInterests", Streams) || 0)) {
-							$(".Streams_interests_filter", tool.element).hide();
-						} else {
-							$(".Streams_interests_filter", tool.element).show();
-						}
 						if (!Q.isEmpty(otherInterests)) {
 							for (normalized in otherInterests ) {
 								var interestTitle = otherInterests[normalized];
