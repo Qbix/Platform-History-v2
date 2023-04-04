@@ -406,7 +406,10 @@
 		},
 		"credits": {
 			"spend": {
-				"Communities/create": 20
+				"Communities/create": 20,
+				"chat": {
+					"private": 10
+				}
 			},
 			"grant": {
 				"Users/insertUser": 0,
