@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "He aha o hiahia?",
-        "CanAdd": "Ki te kore tonu e kitea e koe te mea e rapu ana koe, ka taea e koe te taapiri i tetahi hiahia hou ki raro:",
+        "CanGrant": "Ki te kore tonu e kitea e koe te mea e rapu ana koe, ka taea e koe te taapiri i tetahi hiahia hou ki raro:",
         "TrySynonyms": "Kaore koe e kite? Whakamātauria ētahi kupu taurite.",
         "AddUnderCategory": "Tāpirihia ki raro i te kāwai...",
         "Other": "Ētahi atu",

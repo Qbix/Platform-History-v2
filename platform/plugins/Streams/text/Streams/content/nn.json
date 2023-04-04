@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Hva er dine interesser?",
-        "CanAdd": "Hvis du fortsatt ikke finner det du leter etter, kan du legge til en ny interesse nedenfor:",
+        "CanGrant": "Hvis du fortsatt ikke finner det du leter etter, kan du legge til en ny interesse nedenfor:",
         "TrySynonyms": "Ser du ikke? Prøv noen synonymer.",
         "AddUnderCategory": "Legg til under kategori ...",
         "Other": "Annen",

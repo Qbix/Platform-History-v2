@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Kokie tavo pomėgiai?",
-        "CanAdd": "Jei vis tiek nerandate to, ko ieškote, toliau galite pridėti naują pomėgį:",
+        "CanGrant": "Jei vis tiek nerandate to, ko ieškote, toliau galite pridėti naują pomėgį:",
         "TrySynonyms": "Nematai? Išbandykite keletą sinonimų.",
         "AddUnderCategory": "Pridėti pagal kategoriją...",
         "Other": "Kita",

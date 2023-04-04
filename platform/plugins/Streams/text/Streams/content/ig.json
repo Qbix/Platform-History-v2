@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Gịnị bụ mmasị gị?",
-        "CanAdd": "Ọ bụrụ na ịgaghị ahụ ihe ị na-achọ, ị nwere ike itinye mmasị ọhụrụ n&#39;okpuru:",
+        "CanGrant": "Ọ bụrụ na ịgaghị ahụ ihe ị na-achọ, ị nwere ike itinye mmasị ọhụrụ n&#39;okpuru:",
         "TrySynonyms": "Ahụghị ya? Gbalịa ụfọdụ okwu.",
         "AddUnderCategory": "Tinye n&#39;okpuru otu...",
         "Other": "Ndị ọzọ",

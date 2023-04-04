@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Sở thích của bạn là gì?",
-        "CanAdd": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
+        "CanGrant": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
         "TrySynonyms": "Bạn không thấy nó? Hãy thử một số từ đồng nghĩa.",
         "AddUnderCategory": "Thêm dưới danh mục ...",
         "Other": "Khác",

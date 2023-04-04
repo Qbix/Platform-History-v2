@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Jaké máš zájmy?",
-        "CanAdd": "Pokud stále nemůžete najít, co hledáte, můžete níže přidat nový zájem:",
+        "CanGrant": "Pokud stále nemůžete najít, co hledáte, můžete níže přidat nový zájem:",
         "TrySynonyms": "nevidíš to? Zkuste nějaká synonyma.",
         "AddUnderCategory": "Přidat do kategorie...",
         "Other": "jiný",

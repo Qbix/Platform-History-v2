@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Naon kapentingan anjeun?",
-        "CanAdd": "Upami anjeun masih teu tiasa mendakan naon anu anjeun milarian, anjeun tiasa nambihan minat énggal di handap:",
+        "CanGrant": "Upami anjeun masih teu tiasa mendakan naon anu anjeun milarian, anjeun tiasa nambihan minat énggal di handap:",
         "TrySynonyms": "Teu ningali? Coba sababaraha sinonim.",
         "AddUnderCategory": "Tambahkeun dina kategori ...",
         "Other": "Lain",

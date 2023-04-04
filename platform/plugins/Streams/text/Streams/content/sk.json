@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Aké máš záujmy?",
-        "CanAdd": "Ak stále nemôžete nájsť to, čo hľadáte, nižšie môžete pridať nový záujem:",
+        "CanGrant": "Ak stále nemôžete nájsť to, čo hľadáte, nižšie môžete pridať nový záujem:",
         "TrySynonyms": "Nevidíš to? Skúste nejaké synonymá.",
         "AddUnderCategory": "Pridať do kategórie...",
         "Other": "Iné",

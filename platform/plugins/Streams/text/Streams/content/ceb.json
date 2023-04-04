@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Unsa ang imong mga interes?",
-        "CanAdd": "Kung dili pa nimo makit-an ang imong gipangita, mahimo nimong idugang ang usa ka bag-ong interes sa ubos:",
+        "CanGrant": "Kung dili pa nimo makit-an ang imong gipangita, mahimo nimong idugang ang usa ka bag-ong interes sa ubos:",
         "TrySynonyms": "Wala ka makakita niini? Sulayi ang pipila ka mga synonyms.",
         "AddUnderCategory": "Idugang ubos sa kategorya...",
         "Other": "Ang uban",

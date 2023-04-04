@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Care sunt interesele dumneavoastră?",
-        "CanAdd": "Dacă tot nu găsiți ceea ce căutați, puteți adăuga un nou interes mai jos:",
+        "CanGrant": "Dacă tot nu găsiți ceea ce căutați, puteți adăuga un nou interes mai jos:",
         "TrySynonyms": "Nu-l vezi? Încercați câteva sinonime.",
         "AddUnderCategory": "Adăugați în categoria...",
         "Other": "Alte",

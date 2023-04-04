@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Millised on teie huvid?",
-        "CanAdd": "Kui te ikka ei leia seda, mida otsite, saate allpool lisada uue huvi:",
+        "CanGrant": "Kui te ikka ei leia seda, mida otsite, saate allpool lisada uue huvi:",
         "TrySynonyms": "Kas te ei näe seda? Proovige sünonüüme.",
         "AddUnderCategory": "Lisa kategooria alla...",
         "Other": "muud",

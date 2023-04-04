@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Wat zijn uw interesses?",
-        "CanAdd": "Als je nog steeds niet kunt vinden wat je zoekt, kun je hieronder een nieuwe interesse toevoegen:",
+        "CanGrant": "Als je nog steeds niet kunt vinden wat je zoekt, kun je hieronder een nieuwe interesse toevoegen:",
         "TrySynonyms": "Zie je het niet? Probeer enkele synoniemen.",
         "AddUnderCategory": "Toevoegen onder categorie...",
         "Other": "Ander",

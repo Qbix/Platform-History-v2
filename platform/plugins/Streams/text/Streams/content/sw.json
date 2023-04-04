@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Una maslahi gani?",
-        "CanAdd": "Ikiwa bado huwezi kupata unachotafuta, unaweza kuongeza jambo jipya linalokuvutia hapa chini:",
+        "CanGrant": "Ikiwa bado huwezi kupata unachotafuta, unaweza kuongeza jambo jipya linalokuvutia hapa chini:",
         "TrySynonyms": "Je! huoni? Jaribu baadhi ya visawe.",
         "AddUnderCategory": "Ongeza chini ya kategoria...",
         "Other": "Nyingine",

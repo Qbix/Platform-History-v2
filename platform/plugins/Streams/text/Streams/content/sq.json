@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Cilat janë interesat tuaja?",
-        "CanAdd": "Nëse ende nuk mund të gjeni atë që po kërkoni, mund të shtoni një interes të ri më poshtë:",
+        "CanGrant": "Nëse ende nuk mund të gjeni atë që po kërkoni, mund të shtoni një interes të ri më poshtë:",
         "TrySynonyms": "Nuk e sheh? Provoni disa sinonime.",
         "AddUnderCategory": "Shto nën kategorinë...",
         "Other": "Të tjera",

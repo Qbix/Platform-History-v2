@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Kādas ir tavas intereses?",
-        "CanAdd": "Ja joprojām nevarat atrast to, ko meklējat, tālāk varat pievienot jaunu interesi:",
+        "CanGrant": "Ja joprojām nevarat atrast to, ko meklējat, tālāk varat pievienot jaunu interesi:",
         "TrySynonyms": "Vai neredzat to? Izmēģiniet dažus sinonīmus.",
         "AddUnderCategory": "Pievienot zem kategorijas...",
         "Other": "Cits",

@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Mistä olet kiinnostunut?",
-        "CanAdd": "Jos et vieläkään löydä etsimääsi, voit lisätä uuden kiinnostuksen kohteen alle:",
+        "CanGrant": "Jos et vieläkään löydä etsimääsi, voit lisätä uuden kiinnostuksen kohteen alle:",
         "TrySynonyms": "Etkö näe sitä? Kokeile joitain synonyymejä.",
         "AddUnderCategory": "Lisää kategoriaan...",
         "Other": "Muut",

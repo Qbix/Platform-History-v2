@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Apakah minat anda?",
-        "CanAdd": "Jika anda masih tidak menemui perkara yang anda cari, anda boleh menambah minat baharu di bawah:",
+        "CanGrant": "Jika anda masih tidak menemui perkara yang anda cari, anda boleh menambah minat baharu di bawah:",
         "TrySynonyms": "Tidak nampak? Cuba beberapa sinonim.",
         "AddUnderCategory": "Tambah di bawah kategori...",
         "Other": "Lain-lain",

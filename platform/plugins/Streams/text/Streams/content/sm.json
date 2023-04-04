@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "O a mea e te fiafia i ai?",
-        "CanAdd": "Afai e te le&#39;i mauaina lava le mea o lo&#39;o e su&#39;eina, e mafai ona e fa&#39;aopoopoina se fiafiaga fou i lalo:",
+        "CanGrant": "Afai e te le&#39;i mauaina lava le mea o lo&#39;o e su&#39;eina, e mafai ona e fa&#39;aopoopoina se fiafiaga fou i lalo:",
         "TrySynonyms": "Le vaai i ai? Taumafai nisi o upu tutusa.",
         "AddUnderCategory": "Fa&#39;aopoopo i lalo o vaega...",
         "Other": "isi",

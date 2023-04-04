@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Zokonda zanu ndi zotani?",
-        "CanAdd": "Ngati simukupezabe zomwe mukuyang&#39;ana, mutha kuwonjezera chidwi chatsopano pansipa:",
+        "CanGrant": "Ngati simukupezabe zomwe mukuyang&#39;ana, mutha kuwonjezera chidwi chatsopano pansipa:",
         "TrySynonyms": "Simukuziwona? Yesani mawu ofanana ndi mawu.",
         "AddUnderCategory": "Onjezani pansi pa gulu...",
         "Other": "Zina",

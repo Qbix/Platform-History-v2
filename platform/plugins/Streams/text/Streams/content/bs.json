@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Koji su vaši interesi?",
-        "CanAdd": "Ako i dalje ne možete pronaći ono što tražite, možete dodati novo interesovanje ispod:",
+        "CanGrant": "Ako i dalje ne možete pronaći ono što tražite, možete dodati novo interesovanje ispod:",
         "TrySynonyms": "Ne vidite? Pokušajte s nekim sinonimima.",
         "AddUnderCategory": "Dodaj pod kategoriju...",
         "Other": "Ostalo",

@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Kaj te zanima?",
-        "CanAdd": "Če še vedno ne najdete tistega, kar iščete, lahko spodaj dodate novo zanimanje:",
+        "CanGrant": "Če še vedno ne najdete tistega, kar iščete, lahko spodaj dodate novo zanimanje:",
         "TrySynonyms": "Ne vidite? Poskusite nekaj sinonimov.",
         "AddUnderCategory": "Dodaj pod kategorijo ...",
         "Other": "Drugo",

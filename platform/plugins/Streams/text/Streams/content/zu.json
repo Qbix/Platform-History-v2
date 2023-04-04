@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Yiziphi izithakazelo zakho?",
-        "CanAdd": "Uma namanje ungakutholi okufunayo, ungangeza intshisekelo entsha ngezansi:",
+        "CanGrant": "Uma namanje ungakutholi okufunayo, ungangeza intshisekelo entsha ngezansi:",
         "TrySynonyms": "Awuyiboni? Zama amagama afanayo.",
         "AddUnderCategory": "Engeza ngaphansi kwesigaba...",
         "Other": "Okunye",

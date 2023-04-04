@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "He aha kāu makemake?",
-        "CanAdd": "Inā ʻaʻole hiki iā ʻoe ke loaʻa ka mea āu e ʻimi nei, hiki iā ʻoe ke hoʻohui i kahi hoihoi hou ma lalo:",
+        "CanGrant": "Inā ʻaʻole hiki iā ʻoe ke loaʻa ka mea āu e ʻimi nei, hiki iā ʻoe ke hoʻohui i kahi hoihoi hou ma lalo:",
         "TrySynonyms": "ʻAʻole ʻike ʻoe? E ho&#39;āʻo i kekahi mau huaʻōlelo like.",
         "AddUnderCategory": "Hoʻohui ma lalo o ka waeʻano...",
         "Other": "&#39;ē aʻe",

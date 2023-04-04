@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "İlgi alanların nelerdir?",
-        "CanAdd": "Hala aradığınızı bulamıyorsanız, aşağıya yeni bir ilgi alanı ekleyebilirsiniz:",
+        "CanGrant": "Hala aradığınızı bulamıyorsanız, aşağıya yeni bir ilgi alanı ekleyebilirsiniz:",
         "TrySynonyms": "görmüyor musun? Bazı eş anlamlıları deneyin.",
         "AddUnderCategory": "Kategori altına ekle...",
         "Other": "Diğer",

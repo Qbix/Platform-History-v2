@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Kini awọn anfani rẹ?",
-        "CanAdd": "Ti o ko ba tun rii ohun ti o n wa, o le ṣafikun iwulo tuntun ni isalẹ:",
+        "CanGrant": "Ti o ko ba tun rii ohun ti o n wa, o le ṣafikun iwulo tuntun ni isalẹ:",
         "TrySynonyms": "Ko ri? Gbiyanju diẹ ninu awọn itumọ ọrọ-ọrọ.",
         "AddUnderCategory": "Fi kun labẹ ẹka...",
         "Other": "Omiiran",

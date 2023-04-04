@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Vad är dina intressen?",
-        "CanAdd": "Om du fortfarande inte hittar det du letar efter kan du lägga till ett nytt intresse nedan:",
+        "CanGrant": "Om du fortfarande inte hittar det du letar efter kan du lägga till ett nytt intresse nedan:",
         "TrySynonyms": "Ser du det inte? Prova några synonymer.",
         "AddUnderCategory": "Lägg till under kategori...",
         "Other": "Övrig",

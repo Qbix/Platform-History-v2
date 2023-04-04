@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Ano ang iyong mga interes?",
-        "CanAdd": "Kung hindi mo pa rin mahanap ang iyong hinahanap, maaari kang magdagdag ng bagong interes sa ibaba:",
+        "CanGrant": "Kung hindi mo pa rin mahanap ang iyong hinahanap, maaari kang magdagdag ng bagong interes sa ibaba:",
         "TrySynonyms": "Hindi mo ba nakikita ito? Subukan ang ilang mga kasingkahulugan.",
         "AddUnderCategory": "Idagdag sa ilalim ng kategorya ...",
         "Other": "Iba pa",

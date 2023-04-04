@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Quali sono i tuoi interessi?",
-        "CanAdd": "Se ancora non riesci a trovare quello che stai cercando, puoi aggiungere un nuovo interesse qui sotto:",
+        "CanGrant": "Se ancora non riesci a trovare quello che stai cercando, puoi aggiungere un nuovo interesse qui sotto:",
         "TrySynonyms": "Non lo vedi? Prova con alcuni sinonimi.",
         "AddUnderCategory": "Aggiungi sotto categoria...",
         "Other": "Altro",

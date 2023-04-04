@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Quins són els teus interessos?",
-        "CanAdd": "Si encara no trobeu el que busqueu, podeu afegir un nou interès a continuació:",
+        "CanGrant": "Si encara no trobeu el que busqueu, podeu afegir un nou interès a continuació:",
         "TrySynonyms": "No ho veus? Proveu alguns sinònims.",
         "AddUnderCategory": "Afegeix a la categoria...",
         "Other": "Altres",

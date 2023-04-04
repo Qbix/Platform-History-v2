@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Zeintzuk dira zure interesak?",
-        "CanAdd": "Oraindik ez baduzu aurkitzen bilatzen ari zarena, behean interes berri bat gehi dezakezu:",
+        "CanGrant": "Oraindik ez baduzu aurkitzen bilatzen ari zarena, behean interes berri bat gehi dezakezu:",
         "TrySynonyms": "Ez al duzu ikusten? Saiatu sinonimo batzuk.",
         "AddUnderCategory": "Gehitu kategorian...",
         "Other": "Bestela",

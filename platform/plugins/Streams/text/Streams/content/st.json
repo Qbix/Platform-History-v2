@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "U thahasella eng?",
-        "CanAdd": "Haeba u ntse u sa fumane seo u se batlang, u ka kenya thahasello e ncha ka tlase:",
+        "CanGrant": "Haeba u ntse u sa fumane seo u se batlang, u ka kenya thahasello e ncha ka tlase:",
         "TrySynonyms": "Ha u e bone? Leka mantsoe a tšoanang.",
         "AddUnderCategory": "Kenya tlasa sehlopha...",
         "Other": "Tse ding",

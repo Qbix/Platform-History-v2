@@ -20,7 +20,7 @@ var Interests = Streams.Interests;
  *  @param {Array} [options.ordering=[]] To override what interest categories to show and in what order
  *  @param {String|null} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
  *  @param {String} [options.trySynonyms] You can override the "try synonyms" text using this option
- *  @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new interest, or a string to override the title of the command.
+ *  @param {Boolean|String} [options.canGrant=false] Pass true here to allow the user to add a new interest, or a string to override the title of the command.
  *  @param {String|Object} [options.all] To show "all interests" option, pass here its title or object with "title" and "icon" properties.
  *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cacheBust=1000*60*60*24] How often to reload the list of major community interests
@@ -33,8 +33,8 @@ Q.Tool.define("Streams/interests", function (options) {
 	Q.Text.get('Streams/content', function (err, text) {
 		var state = tool.state;
 		tool.text = text;
-		if (state.canAdd === true) {
-			state.canAdd = text.interests.CanAdd;
+		if (state.canGrant === true) {
+			state.canGrant = text.interests.CanGrant;
 		}
 
 		tool.refresh();
@@ -48,7 +48,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	cacheBust: 1000*60*60*24,
 	ordering: null,
 	all: false,
-	canAdd: false,
+	canGrant: false,
 	filter: undefined,
 	trySynonyms: null,
 	onReady: new Q.Event(),
@@ -239,7 +239,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						.append($unlisted1)
 						.appendTo(tool.container)
 						.hide();
-					if (state.canAdd) {
+					if (state.canGrant) {
 						$unlistedTitle = $('<span id="Streams_new_interest_title" />')
 							.addClass('Streams_new_interest_title');
 						var $select = $('<select class="Streams_new_interest_categories" />')
@@ -285,7 +285,7 @@ Q.Tool.define("Streams/interests", function (options) {
 									});
 							});
 						var $unlisted2 = $("<div class='Streams_interest_unlisted2' />")
-							.text(state.canAdd);
+							.text(state.canGrant);
 						var Unlisted = tool.text.interests.Unlisted;
 						$unlisted.append(
 							$unlisted2,

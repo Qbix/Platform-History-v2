@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Sizning qiziqishlaringiz qanday?",
-        "CanAdd": "Agar siz hali ham qidirayotgan narsangizni topa olmasangiz, quyida yangi qiziqish qo&#39;shishingiz mumkin:",
+        "CanGrant": "Agar siz hali ham qidirayotgan narsangizni topa olmasangiz, quyida yangi qiziqish qo&#39;shishingiz mumkin:",
         "TrySynonyms": "Ko&#39;rmayapsizmi? Sinonimlarni sinab ko&#39;ring.",
         "AddUnderCategory": "Turkum ostida qo&#39;shish...",
         "Other": "Boshqa",

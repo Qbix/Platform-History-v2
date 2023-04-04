@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Wat sinn Är Interessen?",
-        "CanAdd": "Wann Dir nach ëmmer net fannt wat Dir sicht, kënnt Dir en neien Interessi hei drënner derbäi:",
+        "CanGrant": "Wann Dir nach ëmmer net fannt wat Dir sicht, kënnt Dir en neien Interessi hei drënner derbäi:",
         "TrySynonyms": "Gesinn et net? Probéiert e puer Synonyme.",
         "AddUnderCategory": "Füügt ënnert Kategorie ...",
         "Other": "Aner",

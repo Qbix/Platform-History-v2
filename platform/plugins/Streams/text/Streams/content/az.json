@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Sizin maraqlarınız nələrdir?",
-        "CanAdd": "Əgər hələ də axtardığınızı tapa bilmirsinizsə, aşağıya yeni maraq əlavə edə bilərsiniz:",
+        "CanGrant": "Əgər hələ də axtardığınızı tapa bilmirsinizsə, aşağıya yeni maraq əlavə edə bilərsiniz:",
         "TrySynonyms": "Görmürsən? Bəzi sinonimləri sınayın.",
         "AddUnderCategory": "Kateqoriyaya əlavə edin...",
         "Other": "Digər",

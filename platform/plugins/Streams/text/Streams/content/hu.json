@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Mik érdekelnek?",
-        "CanAdd": "Ha még mindig nem találja, amit keres, az alábbiakban hozzáadhat egy új érdeklődési kört:",
+        "CanGrant": "Ha még mindig nem találja, amit keres, az alábbiakban hozzáadhat egy új érdeklődési kört:",
         "TrySynonyms": "Nem látod? Próbáljon ki néhány szinonimát.",
         "AddUnderCategory": "Hozzáadás a kategória alatt...",
         "Other": "Egyéb",

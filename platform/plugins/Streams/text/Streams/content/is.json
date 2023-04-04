@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Hver eru áhugamál þín?",
-        "CanAdd": "Ef þú finnur enn ekki það sem þú ert að leita að geturðu bætt við nýju áhugamáli hér að neðan:",
+        "CanGrant": "Ef þú finnur enn ekki það sem þú ert að leita að geturðu bætt við nýju áhugamáli hér að neðan:",
         "TrySynonyms": "Sérðu það ekki? Prófaðu nokkur samheiti.",
         "AddUnderCategory": "Bæta við undir flokk...",
         "Other": "Annað",

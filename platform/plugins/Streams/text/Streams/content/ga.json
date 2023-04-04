@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Cad iad na leasanna atá agat?",
-        "CanAdd": "Mura bhfuil tú in ann an rud atá uait a fháil go fóill, is féidir leat suim nua a chur leis thíos:",
+        "CanGrant": "Mura bhfuil tú in ann an rud atá uait a fháil go fóill, is féidir leat suim nua a chur leis thíos:",
         "TrySynonyms": "Ná féach air? Bain triail as roinnt comhchiallaigh.",
         "AddUnderCategory": "Cuir faoin gcatagóir...",
         "Other": "Eile",
