@@ -107,7 +107,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				labels: labels,
 				all: all,
 				canGrant: Q.Users.loggedInUser && state.canGrant,
-				canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
+				canGrantIcon: Q.url('{{Q}}/img/actions/add.png'),
 				phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
                 addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
@@ -234,7 +234,7 @@ Q.Template.set('Users/labels', ''
 + '{{/each}}'
 + '{{#if canGrant}}'
 + '<li class="Users_labels_action Users_labels_add">'
-+   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
++   '<img class="Users_labels_icon" src="{{canGrantIcon}}">'
 +   '<div class="Users_labels_title">{{canGrant}}</div>'
 + '</li>'
 + '{{/if}}'
