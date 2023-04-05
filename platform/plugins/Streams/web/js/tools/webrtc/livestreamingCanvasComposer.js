@@ -50,7 +50,7 @@
                 var tool = this;
                 tool.canvasComposer = (function () {
                     var getOptions = function () {
-                        return tool.webrtcSignalingLib.getOptions()
+                        return tool.webrtcSignalingLib && tool.webrtcSignalingLib.getOptions()
                     }                    
                     var _composerIsActive = false;
                     var _canvas = null;
