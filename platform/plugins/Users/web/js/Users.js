@@ -4632,10 +4632,13 @@
 		 */
 		transaction: Q.promisify(function _transaction(recipient, amount, callback, options) {
 			options = options || {};
+			var wait = Q.getObject("wait", options);
+			if (!isNaN(wait)) {
+				delete options.wait;
+			}
 			Web3.withChain(options.chainId, function (provider) {
 				try {
-					var signer;
-					signer = new ethers.providers.Web3Provider(provider).getSigner();
+					var signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
 						from: Q.Users.Web3.getLoggedInUserXid(),
 						to: recipient,
@@ -4645,11 +4648,11 @@
 							return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
 						}
 
-						if (!options.wait) {
+						if (!wait) {
 							return Q.handle(callback, null, [null, transactionRequest]);
 						}
 
-						transactionRequest.wait(options.wait).then(function (transactionReceipt) {
+						transactionRequest.wait(wait).then(function (transactionReceipt) {
 							if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
 								return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
 							}
