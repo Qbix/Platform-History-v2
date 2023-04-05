@@ -417,7 +417,7 @@ Q.Tool.define("Streams/interests", function (options) {
 											showElements.push($expandable[0]);
 											showElements.push($h3[0]);
 											!$expandable.is(":visible") && $expandable.show();
-											!$h3.is("visible") && $h3.show();
+											!$h3.is(":visible") && $h3.show();
 											$expandable[0].Q("Q/expandable").expand({
 												autoCollapseSiblings: false,
 												scrollContainer: false

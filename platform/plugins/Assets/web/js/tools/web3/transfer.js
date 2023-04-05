@@ -20,9 +20,6 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
         if (!Q.Users.loggedInUserId()) {
             throw new Q.Exception("You are not logged in");
         }
-        if (Q.isEmpty(state.tokenInfo)) {
-            throw new Q.Exception("token info not found");
-        }
 
         tool[state.action]();
 
@@ -39,8 +36,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
     { // default options here
         action: "send",
+        recipientUserId: null,
         tokenInfo: null,
-        chainId: Q.getObject("Web3.defaultChain.chainId", Q.Assets),
         onSubmitted: new Q.Event()
     },
 
@@ -55,6 +52,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
             var state = this.state;
 
             Q.Template.render("Assets/web3/transfer/send", {
+                recipientUserId: state.recipientUserId,
                 tokenInfo: state.tokenInfo
             }, function (err, html) {
                 if (err) {
@@ -63,65 +61,81 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                 Q.replace(tool.element, html);
 
+                var userSelected = null;
+                var $send = $("button[name=send]", tool.element);
                 var $userSelected = $(".Assets_transfer_userSelected", tool.element);
                 var _transactionSuccess = function () {
                     Q.Dialogs.pop();
                     Q.alert(tool.text.transfer.TransactionSuccess);
                 };
-                var userSelected = null;
-                $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
-                    this.state.onChoose.set(function (userId, avatar) {
-                        Q.Streams.get(userId, "Streams/user/xid/web3", function (err) {
-                            if (err) {
-                                return;
-                            }
+                var _getSelectedUser = function (userId) {
+                    Q.Streams.get(userId, "Streams/user/xid/web3", function (err) {
+                        if (err) {
+                            return;
+                        }
 
-                            if (!this.testReadLevel("content")) {
-                                return Q.alert(tool.text.errors.NotEnoughPermissionsWallet);
-                            }
+                        if (!this.testReadLevel("content")) {
+                            return Q.alert(tool.text.errors.NotEnoughPermissionsWallet);
+                        }
 
-                            var wallet = this.fields.content;
-                            if (Q.isEmpty(wallet)) {
-                                return Q.alert(tool.text.errors.ThisUserHaveNoWallet);
-                            } else if (!ethers.utils.isAddress(wallet)) {
-                                return Q.alert(tool.text.errors.TheWalletOfThisUserInvalid);
-                            }
+                        var wallet = this.fields.content;
+                        if (Q.isEmpty(wallet)) {
+                            return Q.alert(tool.text.errors.ThisUserHaveNoWallet);
+                        } else if (!ethers.utils.isAddress(wallet)) {
+                            return Q.alert(tool.text.errors.TheWalletOfThisUserInvalid);
+                        }
 
-                            userSelected = null;
-                            $(".Users_avatar_tool", $userSelected).each(function () {
-                                Q.Tool.remove(this, true, true);
-                            });
-
-                            $("<div>").appendTo($userSelected).tool("Users/avatar", {
-                                userId: userId,
-                                icon: 50,
-                                contents: true,
-                                editable: false
-                            }).activate();
-
-                            userSelected = {
-                                userId: userId,
-                                avatar: avatar,
-                                wallet: this.fields.content
-                            };
+                        userSelected = null;
+                        $(".Users_avatar_tool", $userSelected).each(function () {
+                            Q.Tool.remove(this, true, true);
                         });
-                    }, tool);
-                });
 
-                $(".Assets_transfer_usersList", tool.element).tool("Streams/people", {
-                    avatar: {
-                        short: true,
-                        icon: '50'
-                    }
-                }).activate(function () {
-                    this.state.onChoose.set(function () {
-                        //TODO: when Streams/people tool ready, move onChoose event handler here from above
-                    }, tool);
-                });
+                        $("<div>").appendTo($userSelected).tool("Users/avatar", {
+                            userId: userId,
+                            icon: 50,
+                            contents: true,
+                            editable: false
+                        }).activate();
 
+                        userSelected = {
+                            userId: userId,
+                            wallet: this.fields.content
+                        };
+
+                        $send.removeClass("Q_disabled");
+                    });
+                };
+
+                if (Q.isEmpty(state.recipientUserId)) {
+                    $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
+                        this.state.onChoose.set(function (userId, avatar) {
+                            _getSelectedUser(userId);
+                        }, tool);
+                    });
+
+                    /*$(".Assets_transfer_usersList", tool.element).tool("Streams/people", {
+                        avatar: {
+                            short: true,
+                            icon: '50'
+                        }
+                    }).activate(function () {
+                        this.state.onChoose.set(function () {
+                            //TODO: when Streams/people tool ready, move onChoose event handler here from above
+                        }, tool);
+                    });*/
+                } else {
+                    _getSelectedUser(state.recipientUserId);
+                }
+
+                if (!state.tokenInfo) {
+                    $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance").activate();
+                }
                 var $amount = $("input[name=amount]", tool.element);
-                $("button[name=send]", tool.element).on(Q.Pointer.fastclick, function () {
+                $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
+                    if (Q.isEmpty(state.tokenInfo)) {
+                        state.tokenInfo = Q.Tool.from($(".Assets_web3_balance", tool.element), "Assets/web/balance").getValue();
+                    }
                     var amount = parseFloat($amount.val());
                     if (!amount || amount > state.tokenInfo.tokenAmount) {
                         return Q.alert(tool.text.errors.AmountInvalid);
@@ -151,13 +165,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             _transactionSuccess();
                         }, {
                             wait: 1,
-                            chainId: state.chainId
+                            chainId: state.tokenInfo.chainId
                         });
                         return;
                     }
 
                     Q.Users.Web3.getContract("Assets/templates/ERC20", {
-                        chainId: state.chainId,
+                        chainId: state.tokenInfo.chainId,
                         contractAddress: state.tokenInfo.tokenAddress,
                         readOnly: false
                     }, function (err, contract) {
@@ -175,7 +189,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         });
 
                         contract.transfer(walletSelected, parsedAmount).then(function (info) {
-                            Q.handle(state.onSubmitted, tool, [nul, info]);
+                            Q.handle(state.onSubmitted, tool, [null, info]);
                         }, function (err) {
                             $this.removeClass("Q_working");
                         });
@@ -187,12 +201,19 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
     });
 
 Q.Template.set("Assets/web3/transfer/send",
-    `<div class="Assets_transfer_userChooser"><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{transfer.SelectRecipient}}" autocomplete="off"></div>
-    <div class="Assets_transfer_usersList"></div>
+`{{#if recipientUserId}}{{else}}
+        <div class="Assets_transfer_userChooser"><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{transfer.SelectRecipient}}" autocomplete="off"></div>
+        <div class="Assets_transfer_usersList"></div>
+    {{/if}}
+    {{#if tokenInfo}}{{else}}
+        <div class="Assets_transfer_balance"></div>
+    {{/if}}
     <div class="Assets_transfer_userSelected"></div>
-    <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
+    {{#if recipientUserId}}{{else}}
+        <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
+    {{/if}}
     <input name="amount" placeholder="{{payment.EnterAmount}}" />
-    <button class="Q_button" name="send">{{payment.Send}}</button>`,
+    <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>`,
     {text: ['Assets/content']}
 );
 })(window, Q, jQuery);

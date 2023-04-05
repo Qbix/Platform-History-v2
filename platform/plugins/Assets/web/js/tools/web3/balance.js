@@ -27,10 +27,6 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		return console.warn("userId not found");
 	}
 
-	if (Q.isEmpty(state.chainId)) {
-		return console.warn("chain not found");
-	}
-	
 	tool.refresh();
 },
 
@@ -48,17 +44,21 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var state = tool.state;
 
 		tool.element.innerHTML = "";
-		tool.balanceOf(function (results) {
-			Q.Template.render(state.template, {
-				results: results
-			}, function (err, html) {
-				if (err) {
-					return;
-				}
+		Q.Template.render("Assets/web3/balance", {
+			chainId: state.chainId,
+			chains: Assets.Web3.chains
+		}, function (err, html) {
+			Q.replace(tool.element, html);
 
-				Q.replace(tool.element, html);
-				Q.handle(state.onRefresh, tool);
-			});
+			if (state.chainId) {
+				tool.balanceOf();
+			} else {
+				$("select[name=chains]", tool.element).on("change", function () {
+					state.chainId = $(this).val();
+					$("select[name=tokens]", tool.element).addClass("Q_disabled");
+					tool.balanceOf();
+				}).trigger("change");
+			}
 		});
 	},
 	balanceOf: function (callback) {
@@ -113,8 +113,18 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 						decimals: item.decimals
 					});
 				});
-	
-				Q.handle(callback, null, [results]);
+
+				Q.Template.render(state.template, {
+					results: results
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+
+					Q.replace($(".Assets_web3_balance_select", tool.element)[0], html);
+					Q.handle(state.onRefresh, tool);
+				});
+
 			}, {
 				tokenAddresses: state.tokenAddresses
 			}]);
@@ -127,6 +137,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		}
 
 		return {
+			chainId: this.state.chainId,
 			tokenAmount: $selectedOption.attr("data-amount"),
 			tokenName: $selectedOption.attr("data-name"),
 			tokenAddress: $selectedOption.attr("data-address"),
@@ -140,18 +151,24 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	}
 });
 
+Q.Template.set('Assets/web3/balance',
+`{{#if chainId}}{{else}}<select name="chains">
+	{{#each chains}}
+		<option value="{{this.chainId}}">{{this.name}}</option>
+	{{/each}}
+</select>{{/if}}
+<div class="Assets_web3_balance_select"></div>`);
+
 Q.Template.set('Assets/web3/balance/list',
 `{{#each results}}
 	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenAmount}} {{this.tokenName}}</div>
-{{/each}}`
-);
+{{/each}}`);
 
 Q.Template.set('Assets/web3/balance/select',
 `<select name="tokens" data-count="{{results.length}}">
 	{{#each results}}
 		<option data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}" data-decimals="{{this.decimals}}">{{this.tokenAmount}} {{this.tokenName}}</option>
 	{{/each}}
-</select>`
-);
+</select>`);
 
 })(window, Q, jQuery);
