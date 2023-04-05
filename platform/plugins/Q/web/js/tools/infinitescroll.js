@@ -66,7 +66,7 @@
 					var pipeArray = includedTools.map(function (currTool) {
 						return currTool.id;
 					});
-					var pipe = new Q.Pipe(pipeArray, function () {
+					var pipe = new Q.Pipe(pipeArray, 1, function () {
 						var waitToolVisible = setInterval(function () {
 							// it means that tool element invisible
 							if (tool.element.clientHeight === 0) {
@@ -74,7 +74,7 @@
 							}
 
 							// check if tool element scrollable
-							if (tool.element.clientHeight > tool.element.scrollHeight) {
+							if (tool.element.clientHeight >= tool.element.scrollHeight) {
 								Q.handle(tool.state.onInvoke, tool, [0]);
 								pipeTimer = null;
 							}

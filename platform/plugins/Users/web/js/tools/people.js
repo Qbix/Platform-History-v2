@@ -1,17 +1,16 @@
 (function (window, Q, $, undefined) {
 
 /**
- * @module Streams
+ * @module Users
  */
 
 /**
  * Render people list with filters and Streams/userChooser
- * @class Streams/people
+ * @class Users/people
  * @constructor
  * @param {Object} options Override various options for this tool
  */
-
-Q.Tool.define("Streams/people", function (options) {
+Q.Tool.define("Users/people", function (options) {
         var tool = this;
         var state = this.state;
 
@@ -32,7 +31,7 @@ Q.Tool.define("Streams/people", function (options) {
             var tool = this;
             var state = this.state;
 
-            Q.Template.render("Streams/people", {
+            Q.Template.render("Users/people", {
 
             }, function (err, html) {
                 if (err) {
@@ -41,10 +40,13 @@ Q.Tool.define("Streams/people", function (options) {
 
                 Q.replace(tool.element, html);
 
-                $(".Streams_people_usersList", tool.element).tool("Users/list", {
+                $(".Users_people_usersList", tool.element).tool("Users/list", {
                     avatar: state.avatar
                 }).tool('Q/infinitescroll', {
-                    onInvoke: function () {
+
+                }).activate(function () {
+                    var infinitescrollTool = Q.Tool.from(this.element, 'Q/infinitescroll');
+                    infinitescrollTool.state.onInvoke.set(function () {
                         var usersListTool = Q.Tool.from(this.element, "Users/list");
                         var infiniteTool = Q.Tool.from(this.element, "Q/infinitescroll");
                         var offset = $(">.Users_avatar_tool:visible", infiniteTool.element).length;
@@ -57,7 +59,7 @@ Q.Tool.define("Streams/people", function (options) {
                         infiniteTool.setLoading(true);
                         infiniteTool.state.offset = offset;
 
-                        Q.req('Streams/people', 'load', function (err, data) {
+                        Q.req('Users/people', 'load', function (err, data) {
                             infiniteTool.setLoading(false);
                             err = Q.firstErrorMessage(err, data);
                             if (err) {
@@ -68,7 +70,7 @@ Q.Tool.define("Streams/people", function (options) {
                                 usersListTool.state.userIds = [];
                             }
 
-                            usersListTool.state.userIds = usersListTool.state.userIds.concat(data.slots.load);
+                            usersListTool.state.userIds = data.slots.load;
                             usersListTool.loadMore();
                         }, {
                             fields: {
@@ -76,16 +78,18 @@ Q.Tool.define("Streams/people", function (options) {
                                 offset: offset
                             }
                         });
-                    }
-                }).activate(function () {
-                    $(this.element).trigger("scroll");
+                    }, tool);
+
+                    Q.handle(infinitescrollTool.state.onInvoke, infinitescrollTool);
                 });
             });
         }
     });
 
-Q.Template.set("Streams/people",
-    `<div class="Streams_people_usersList"></div>`,
-    {text: ['Streams/content']}
+Q.Template.set("Users/people",
+`<div class="Users_people_header">{{people.People}}</div>
+<div class="Users_people_usersList"></div>
+<div class="Users_people_footer"></div>`,
+    {text: ['Users/content']}
 );
 })(window, Q, jQuery);

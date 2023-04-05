@@ -2198,6 +2198,164 @@ abstract class Users extends Base_Users
 	}
 
 	/**
+	 * Get a bunch of user ids in a given community,
+	 * starting with contacts of the logged-in user (if any).
+	 * Useful for passing to the Users/list tool, to render
+	 * a list of users in a community.
+	 * @method userIds
+	 * @param {array} [$options=array()]
+	 * @param {integer} [$options.limit=100] The maximum number to return
+	 * @param {integer} [$options.offset=0] The offfset
+	 * @param {string} [$options.communityId=null] The community from which to get stream participants, defaults to main community
+	 * @param {string} [$options.experienceId='main'] Can be used to override the name of the experience
+	 * @param {Users_User|false} [$options.userId=Users::loggedInUser()->id] The user, if any, whose contacts to get
+	 * @param {boolean} [$options.includeUser=false] Whether to include the specified user in the list
+	 * @param {boolean} [$options.includeCommunities=false] Whether to include community users
+	 * @param {boolean} [$options.includeReverseContacts=false] Whether to show users who have you in their contacts already
+	 * @param {boolean} [$options.includeFutureUsers=false] Whether to include users who have not yet signed in even once, but who have a custom icon at least
+	 * @param {boolean} [$options.customIconsFirst=false] Whether to sort the non-contact users in a way to have the ones with custom photos be listed first.
+	 */
+	static function userIds($options = array())
+	{
+		$options = Q::take($options, array(
+			'limit' => 100,
+			'offset' => 0,
+			'communityId' => null,
+			'experienceId' => 'main',
+			'userId' => null,
+			'includeUser' => false,
+			'includeCommunities' => false,
+			'includeReverseContacts' => false,
+			'includeFutureUsers' => false,
+			'customIconsFirst' => false,
+			'customIconsOnly' => false
+		));
+		if (isset($options['limit'])) {
+			$maxLimit = Q_Config::get('Users', 'people', 'userIds', 'maxLimit', 1000);
+			$options['limit'] = min($options['limit'], $maxLimit);
+		}
+
+		$user = Users::loggedInUser();
+		if (!isset($options['userId'])) {
+			$options['userId'] = $user ? $user->id : '';
+		}
+		if (!isset($options['communityId'])) {
+			$options['communityId'] = Users::currentCommunityId(true);
+		}
+		$criteria = array(
+			'p.publisherId' => $options['communityId'],
+			'p.streamName' => "Streams/experience/".$options['experienceId'],
+			'p.state' => 'participating'
+		);
+		if ($options['userId']) {
+			$rows = Users_Contact::select('u.id, u.sessionCount, u.icon', 'c')
+				->join(Streams_Participant::table(true, 'p'), array(
+					'c.userId' => 'p.userId'
+				))->join(Users_User::table(true, 'u'), array(
+					'c.contactUserId' => 'u.id'
+				))->where(array('c.userId' => $options['userId']))
+				->andWhere($criteria)
+				// ->groupBy('u.id')
+				->orderBy('c.label', false)
+				->orderBy('u.sessionCount', false)
+				->limit($options['limit'], $options['offset'])
+				->fetchDbRows(null, '', 'id');
+			if ($options['includeReverseContacts']) {
+				$rows2 = Users_Contact::select('u.id, u.sessionCount, u.icon', 'c')
+					->join(Streams_Participant::table(true, 'p'), array(
+						'c.contactUserId' => 'p.userId'
+					))->join(Users_User::table(true, 'u'), array(
+						'c.userId' => 'u.id'
+					))->where(array('c.contactUserId' => $options['userId']))
+					->andWhere($criteria)
+					// ->groupBy('u.id')
+					->orderBy('c.label', false)
+					->orderBy('u.sessionCount', false)
+					->limit($options['limit'])
+					->fetchDbRows(null, '', 'id');
+				$rows = array_merge($rows, $rows2);
+			}
+		} else {
+			$rows = array();
+		}
+		$contactsCount = count($rows);
+		$m = 2;
+		$o = 0;
+		// try finding more up to 10 times
+		for ($i=0; $i<10; ++$i) {
+			if (!empty($options['customIconsOnly'])) {
+				$temp = array();
+				foreach ($rows as $uid => $row) {
+					if (Users::isCustomIcon($row->icon)) {
+						$temp[$uid] = $row;
+					}
+				}
+				$rows = $temp;
+			} elseif (!empty($options['customIconsFirst'])) {
+				// sort array with custom icons first
+				$temp = array();
+				foreach ($rows as $uid => $row) {
+					if (Users::isCustomIcon($row->icon)) {
+						$temp[$uid] = $row;
+					}
+				}
+				foreach ($rows as $uid => $row) {
+					if (empty($temp[$uid])) {
+						$temp[$uid] = $row;
+					}
+				}
+				$rows = $temp;
+			}
+
+			// filter futureUsers and Community users and current user
+			$includeFutureUsers = !empty($options['includeFutureUsers']);
+			$includeCommunities = !empty($options['includeCommunities']);
+			$temp = array();
+			foreach ($rows as $uid => $row) {
+				if ($row->sessionCount == 0
+					&& (!$includeFutureUsers && !Users::isCustomIcon($row->icon))) {
+					continue;
+				}
+				if ((!$includeCommunities && Users::isCommunityId($uid))) {
+					continue;
+				}
+				if (empty($options['includeUser']) and $user and $uid === $options['userId']) {
+					continue;
+				}
+				$temp[$uid] = $row;
+			}
+			$b = count($rows);
+			$rows = $temp;
+			$c = count($rows);
+			if ($c) {
+				$m = ceil($b/$c); // try to guess how many might be filtered in the next pass
+			}
+			if ($c >= $options['limit']) {
+				break; // we got enough results to return
+			}
+			// get multiple times as many rows, since some may be removed
+			$rows3 = Streams_Participant::select('u.id, u.sessionCount, u.icon', 'p')
+				->join(Users_User::table(true, 'u'), array(
+					'p.userId' => 'u.id'
+				))->where($criteria)
+				->orderBy('u.sessionCount', false)
+				->orderBy('p.insertedTime', false)
+				->groupBy('u.id')
+				->limit(
+					$options['limit'] * $m - $contactsCount,
+					$o + max(0, $options['offset'] - $contactsCount)
+				)->fetchDbRows(null, '', 'id');
+			if (empty($rows3)) {
+				continue; // no more userIds are coming by
+			}
+			$o += count($rows3);
+			$rows = array_merge($rows, $rows3);
+		}
+		$result = array_slice(array_keys($rows), 0, $options['limit']);
+		return $result;
+	}
+
+	/**
 	 * @property $loggedOut
 	 * @type boolean
 	 */

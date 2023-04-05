@@ -2897,7 +2897,11 @@
 		"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
 		"Users/getintouch": "{{Users}}/js/tools/getintouch.js",
 		"Users/sessions": "{{Users}}/js/tools/sessions.js",
-		"Users/language": "{{Users}}/js/tools/language.js"
+		"Users/language": "{{Users}}/js/tools/language.js",
+		"Users/people": {
+			js: "{{Users}}/js/tools/people.js",
+			css: "{{Users}}/css/tools/people.css"
+		}
 	});
 
 	Q.beforeInit.add(function _Users_beforeInit() {
