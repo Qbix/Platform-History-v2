@@ -204,7 +204,7 @@
 	text-align: center;
 	width: 100%;
 }
-.Streams_chat_tool .Users_avatar_tool {
+.Streams_chat_tool .Streams_chat_item > .Users_avatar_tool {
 	position: absolute;
 	cursor: pointer;
 }
