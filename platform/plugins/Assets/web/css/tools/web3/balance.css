@@ -7,7 +7,7 @@
 .Assets_web3_balance_tool select {
     display: block;
     margin: 0 auto;
-    width: 300px;
+    width: 100%;
 }
 .Assets_web3_balance_tool select,
 .Assets_web3_balance_tool select option {
