@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Ki sa ki enterè ou?",
-        "CanAdd": "Si ou toujou pa ka jwenn sa w ap chèche a, ou ka ajoute yon nouvo enterè anba a:",
+        "CanGrant": "Si ou toujou pa ka jwenn sa w ap chèche a, ou ka ajoute yon nouvo enterè anba a:",
         "TrySynonyms": "pa wè li? Eseye kèk sinonim.",
         "AddUnderCategory": "Ajoute anba kategori...",
         "Other": "Lòt",

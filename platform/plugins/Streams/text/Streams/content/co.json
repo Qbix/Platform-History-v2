@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Chì sò i vostri interessi ?",
-        "CanAdd": "Se ùn pudete ancu truvà ciò chì cercate, pudete aghjunghje un novu interessu quì sottu:",
+        "CanGrant": "Se ùn pudete ancu truvà ciò chì cercate, pudete aghjunghje un novu interessu quì sottu:",
         "TrySynonyms": "Ùn vede micca? Pruvate alcuni sinonimi.",
         "AddUnderCategory": "Aghjunghjite sottu a categuria...",
         "Other": "Altru",

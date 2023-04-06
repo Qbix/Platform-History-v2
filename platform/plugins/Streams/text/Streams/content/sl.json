@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Kaj te zanima?",
-        "CanAdd": "Če še vedno ne najdete tistega, kar iščete, lahko spodaj dodate novo zanimanje:",
+        "CanGrant": "Če še vedno ne najdete tistega, kar iščete, lahko spodaj dodate novo zanimanje:",
         "TrySynonyms": "Ne vidite? Poskusite nekaj sinonimov.",
         "AddUnderCategory": "Dodaj pod kategorijo ...",
         "Other": "Drugo",
@@ -134,7 +134,11 @@
             "title": "Kakšen je vaš odnos?"
         },
         "complete": {
-            "HasInvitedYou": "vas je povabil na:"
+            "HasInvitedYou": "vas je povabil na:",
+            "WelcomeToCommunity": "Dobrodošli v {{communityName}}",
+            "HasInvitedYouToTheirProfile": "vas je povabil k povezovanju.",
+            "prompt": "Naj vas prijatelji prepoznajo:",
+            "accept": "Sprejmi povabilo"
         }
     },
     "messages": {

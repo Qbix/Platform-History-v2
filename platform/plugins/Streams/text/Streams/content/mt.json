@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "X&#39;inhuma l-interessi tiegħek?",
-        "CanAdd": "Jekk għadek ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
+        "CanGrant": "Jekk għadek ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
         "TrySynonyms": "Tarahx? Ipprova xi sinonimi.",
         "AddUnderCategory": "Żid taħt il-kategorija...",
         "Other": "Oħrajn",
@@ -134,7 +134,11 @@
             "title": "X&#39;inhi r-Relazzjoni tiegħek?"
         },
         "complete": {
-            "HasInvitedYou": "stiedenek biex:"
+            "HasInvitedYou": "stiedenek biex:",
+            "WelcomeToCommunity": "Merħba għal {{communityName}}",
+            "HasInvitedYouToTheirProfile": "stiedenek biex tikkonnettja.",
+            "prompt": "Ħalli lill-ħbieb jagħrfuk:",
+            "accept": "Aċċetta Stieden"
         }
     },
     "messages": {

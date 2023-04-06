@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Aké máš záujmy?",
-        "CanAdd": "Ak stále nemôžete nájsť to, čo hľadáte, nižšie môžete pridať nový záujem:",
+        "CanGrant": "Ak stále nemôžete nájsť to, čo hľadáte, nižšie môžete pridať nový záujem:",
         "TrySynonyms": "Nevidíš to? Skúste nejaké synonymá.",
         "AddUnderCategory": "Pridať do kategórie...",
         "Other": "Iné",
@@ -134,7 +134,11 @@
             "title": "Aký je váš vzťah?"
         },
         "complete": {
-            "HasInvitedYou": "vás pozval na:"
+            "HasInvitedYou": "vás pozval na:",
+            "WelcomeToCommunity": "Vitajte v {{communityName}}",
+            "HasInvitedYouToTheirProfile": "vás pozval na pripojenie.",
+            "prompt": "Umožnite priateľom, aby vás spoznali:",
+            "accept": "Prijmite pozvanie"
         }
     },
     "messages": {

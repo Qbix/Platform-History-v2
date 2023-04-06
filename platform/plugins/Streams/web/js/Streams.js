@@ -658,11 +658,7 @@ Q.Tool.define({
 	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
 	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
 	"Streams/calls": "{{Streams}}/js/tools/calls.js",
-	"Streams/calls/call": "{{Streams}}/js/tools/call.js",
-	"Streams/people": {
-		js: "{{Streams}}/js/tools/people.js",
-		css: "{{Streams}}/css/tools/people.css"
-	}
+	"Streams/calls/call": "{{Streams}}/js/tools/call.js"
 });
 
 Streams.Chat = {
@@ -1929,24 +1925,24 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		o.addLabel = [];
 
 		// Commented out because now we check the server every time
-		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
-		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
-		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// var canGrantRoles = Q.getObject('Q.plugins.Users.Label.canGrant') || [];
+		// var canRevokeRoles = Q.getObject('Q.plugins.Users.Label.canRevoke') || [];
+		// var canHandleRoles = Array.from(new Set(canGrantRoles.concat(canRevokeRoles))); // get unique array from merged arrays
 		// if (!canHandleRoles.length) {
 		// 	_showInviteDialog();
 		// }
 
-		Q.req('Users/roles', ['canAdd', 'canRemove', 'canSee'], function (err, response) {
-			var canAddRoles = Q.getObject('slots.canAdd', response);
-			var canRemoveRoles = Q.getObject('slots.canRemove', response);
-			if (Q.isEmpty(canAddRoles)) {
+		Q.req('Users/roles', ['canGrant', 'canRevoke', 'canSee'], function (err, response) {
+			var canGrantRoles = Q.getObject('slots.canGrant', response);
+			var canRevokeRoles = Q.getObject('slots.canRevoke', response);
+			if (Q.isEmpty(canGrantRoles)) {
 				return _continueAfterRoles();
 			}
 			Q.Dialogs.push({
 				title: text.invite.roles.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.communityId,
-					filter: canAddRoles
+					filter: canGrantRoles
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,
@@ -1957,13 +1953,13 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						return;
 					}
 					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						if (!wasSelected && !canAddRoles.includes(label)) {
+						if (!wasSelected && !canGrantRoles.includes(label)) {
 							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
 								title: text.invite.roles.NotAuthorizedToGrantRole.title
 							})
 							return false;
 						}
-						if (wasSelected && !canRemoveRoles.includes(label)) {
+						if (wasSelected && !canRevokeRoles.includes(label)) {
 							Q.alert(text.invite.roles.NotAuthorizedToRemovetRole.alert, {
 								title: text.invite.roles.NotAuthorizedToRemoveRole.title
 							})
@@ -1997,7 +1993,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.loggedInUserId(),
 					filter: 'Users/',
-					canAdd: 'New Relationship Type'
+					canGrant: 'New Relationship Type'
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,

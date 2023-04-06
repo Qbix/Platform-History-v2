@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Inona no mahaliana anao?",
-        "CanAdd": "Raha mbola tsy hitanao izay tadiavinao dia azonao atao ny manampy tombontsoa vaovao eto ambany:",
+        "CanGrant": "Raha mbola tsy hitanao izay tadiavinao dia azonao atao ny manampy tombontsoa vaovao eto ambany:",
         "TrySynonyms": "Tsy hitanao ve? Andramo ny mitovy hevitra.",
         "AddUnderCategory": "Ampio eo ambanin&#39;ny sokajy...",
         "Other": "Hafa",

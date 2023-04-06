@@ -266,36 +266,36 @@
 				"Users/owners": {
 					"title": "Owner",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
-					"canAdd": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
-					"canRemove": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
+					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
+					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"]
 				},
 				"Users/admins": {
 					"title": "Admin",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
-					"canAdd": ["Users/members", "Users/guests", "Users/testers"],
-					"canRemove": ["Users/members", "Users/guests", "Users/testers"],
+					"canGrant": ["Users/members", "Users/guests", "Users/testers"],
+					"canRevoke": ["Users/members", "Users/guests", "Users/testers"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"]
 				},
 				"Users/members": {
 					"title": "Member",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
-					"canAdd": ["Users/guests"],
-					"canRemove": [],
+					"canGrant": ["Users/guests"],
+					"canRevoke": [],
 					"canSee": ["Users/members", "Users/guests"]
 				},
 				"Users/guests": {
 					"title": "Guest",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/guests",
-					"canAdd": [],
-					"canRemove": [],
+					"canGrant": [],
+					"canRevoke": [],
 					"canSee": []
 				},
 				"Users/testers": {
 					"title": "Tester",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/testers",
-					"canAdd": [],
-					"canRemove": [],
+					"canGrant": [],
+					"canRevoke": [],
 					"canSee": []
 				}
 			},
@@ -392,6 +392,15 @@
 					}
 				}
 			}
+		},
+		"people": {
+			"import": false,
+			"userIds": {
+				"customIconsFirst": true,
+				"includeFutureUsers": false,
+				"limit": 100
+			},
+			"randomAngles": false
 		}
 	}
 }

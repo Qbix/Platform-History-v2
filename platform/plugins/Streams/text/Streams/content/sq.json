@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Cilat janë interesat tuaja?",
-        "CanAdd": "Nëse ende nuk mund të gjeni atë që po kërkoni, mund të shtoni një interes të ri më poshtë:",
+        "CanGrant": "Nëse ende nuk mund të gjeni atë që po kërkoni, mund të shtoni një interes të ri më poshtë:",
         "TrySynonyms": "Nuk e sheh? Provoni disa sinonime.",
         "AddUnderCategory": "Shto nën kategorinë...",
         "Other": "Të tjera",
@@ -132,7 +132,11 @@
             "title": "Cila është marrëdhënia juaj?"
         },
         "complete": {
-            "HasInvitedYou": "ju ka ftuar në:"
+            "HasInvitedYou": "ju ka ftuar në:",
+            "WelcomeToCommunity": "Mirë se vini në {{communityName}}",
+            "HasInvitedYouToTheirProfile": "ju ka ftuar të lidheni.",
+            "prompt": "Lërini miqtë t&#39;ju njohin:",
+            "accept": "Prano Ftesën"
         }
     },
     "followup": {

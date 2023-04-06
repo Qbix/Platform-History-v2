@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "İlgi alanların nelerdir?",
-        "CanAdd": "Hala aradığınızı bulamıyorsanız, aşağıya yeni bir ilgi alanı ekleyebilirsiniz:",
+        "CanGrant": "Hala aradığınızı bulamıyorsanız, aşağıya yeni bir ilgi alanı ekleyebilirsiniz:",
         "TrySynonyms": "görmüyor musun? Bazı eş anlamlıları deneyin.",
         "AddUnderCategory": "Kategori altına ekle...",
         "Other": "Diğer",
@@ -134,7 +134,11 @@
             "title": "İlişki durumun nedir?"
         },
         "complete": {
-            "HasInvitedYou": "sizi şuna davet etti:"
+            "HasInvitedYou": "sizi şuna davet etti:",
+            "WelcomeToCommunity": "{{communityName}} hoş geldiniz",
+            "HasInvitedYouToTheirProfile": "sizi bağlanmaya davet etti.",
+            "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
+            "accept": "Daveti Kabul Et"
         }
     },
     "messages": {

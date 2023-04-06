@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Sizin maraqlarınız nələrdir?",
-        "CanAdd": "Əgər hələ də axtardığınızı tapa bilmirsinizsə, aşağıya yeni maraq əlavə edə bilərsiniz:",
+        "CanGrant": "Əgər hələ də axtardığınızı tapa bilmirsinizsə, aşağıya yeni maraq əlavə edə bilərsiniz:",
         "TrySynonyms": "Görmürsən? Bəzi sinonimləri sınayın.",
         "AddUnderCategory": "Kateqoriyaya əlavə edin...",
         "Other": "Digər",
@@ -132,7 +132,11 @@
             "title": "Münasibətiniz necədir?"
         },
         "complete": {
-            "HasInvitedYou": "sizi dəvət etdi:"
+            "HasInvitedYou": "sizi dəvət etdi:",
+            "WelcomeToCommunity": "{{communityName}}-a xoş gəlmisiniz",
+            "HasInvitedYouToTheirProfile": "qoşulmağa dəvət etdi.",
+            "prompt": "Dostlar sizi tanısın:",
+            "accept": "Dəvəti qəbul edin"
         }
     },
     "followup": {

@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Kokie tavo pomėgiai?",
-        "CanAdd": "Jei vis tiek nerandate to, ko ieškote, toliau galite pridėti naują pomėgį:",
+        "CanGrant": "Jei vis tiek nerandate to, ko ieškote, toliau galite pridėti naują pomėgį:",
         "TrySynonyms": "Nematai? Išbandykite keletą sinonimų.",
         "AddUnderCategory": "Pridėti pagal kategoriją...",
         "Other": "Kita",
@@ -134,7 +134,11 @@
             "title": "Kokie yra jūsų santykiai?"
         },
         "complete": {
-            "HasInvitedYou": "pakvietė jus į:"
+            "HasInvitedYou": "pakvietė jus į:",
+            "WelcomeToCommunity": "Sveiki atvykę į {{communityName}}",
+            "HasInvitedYouToTheirProfile": "pakvietė jus prisijungti.",
+            "prompt": "Leisk draugams tave atpažinti:",
+            "accept": "Priimti kvietimą"
         }
     },
     "messages": {

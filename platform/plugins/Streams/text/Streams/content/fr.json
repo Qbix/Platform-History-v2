@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Quels sont vos intérêts?",
-        "CanAdd": "Si vous ne trouvez toujours pas ce que vous cherchez, vous pouvez ajouter un nouvel intérêt ci-dessous :",
+        "CanGrant": "Si vous ne trouvez toujours pas ce que vous cherchez, vous pouvez ajouter un nouvel intérêt ci-dessous :",
         "TrySynonyms": "Vous ne le voyez pas ? Essayez quelques synonymes.",
         "AddUnderCategory": "Ajouter sous catégorie...",
         "Other": "Autre",
@@ -134,7 +134,11 @@
             "title": "Quelle est votre relation?"
         },
         "complete": {
-            "HasInvitedYou": "vous a invité à :"
+            "HasInvitedYou": "vous a invité à :",
+            "WelcomeToCommunity": "Bienvenue à {{communityName}}",
+            "HasInvitedYouToTheirProfile": "vous a invité à vous connecter.",
+            "prompt": "Laissez vos amis vous reconnaître :",
+            "accept": "Accepter l&#39;invitation"
         }
     },
     "messages": {

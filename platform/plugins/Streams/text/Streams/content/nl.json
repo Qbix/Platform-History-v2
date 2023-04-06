@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Wat zijn uw interesses?",
-        "CanAdd": "Als je nog steeds niet kunt vinden wat je zoekt, kun je hieronder een nieuwe interesse toevoegen:",
+        "CanGrant": "Als je nog steeds niet kunt vinden wat je zoekt, kun je hieronder een nieuwe interesse toevoegen:",
         "TrySynonyms": "Zie je het niet? Probeer enkele synoniemen.",
         "AddUnderCategory": "Toevoegen onder categorie...",
         "Other": "Ander",
@@ -132,7 +132,11 @@
             "title": "Wat is je relatie?"
         },
         "complete": {
-            "HasInvitedYou": "heeft u uitgenodigd voor:"
+            "HasInvitedYou": "heeft u uitgenodigd voor:",
+            "WelcomeToCommunity": "Welkom bij {{communityName}}",
+            "HasInvitedYouToTheirProfile": "heeft je uitgenodigd om verbinding te maken.",
+            "prompt": "Laat vrienden je herkennen:",
+            "accept": "Uitnodiging accepteren"
         }
     },
     "followup": {

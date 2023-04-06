@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Hvad er dine interesser?",
-        "CanAdd": "Hvis du stadig ikke kan finde det, du leder efter, kan du tilføje en ny interesse nedenfor:",
+        "CanGrant": "Hvis du stadig ikke kan finde det, du leder efter, kan du tilføje en ny interesse nedenfor:",
         "TrySynonyms": "Kan du ikke se det? Prøv nogle synonymer.",
         "AddUnderCategory": "Tilføj under kategori...",
         "Other": "Andet",
@@ -132,7 +132,11 @@
             "title": "Hvad er dit forhold?"
         },
         "complete": {
-            "HasInvitedYou": "har inviteret dig til:"
+            "HasInvitedYou": "har inviteret dig til:",
+            "WelcomeToCommunity": "Velkommen til {{communityName}}",
+            "HasInvitedYouToTheirProfile": "har inviteret dig til at oprette forbindelse.",
+            "prompt": "Lad venner genkende dig:",
+            "accept": "Accepter invitation"
         }
     },
     "followup": {

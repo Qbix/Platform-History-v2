@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "니가 관심 있는게 뭐니?",
-        "CanAdd": "여전히 원하는 것을 찾을 수 없다면 아래에서 새로운 관심분야를 추가할 수 있습니다.",
+        "CanGrant": "여전히 원하는 것을 찾을 수 없다면 아래에서 새로운 관심분야를 추가할 수 있습니다.",
         "TrySynonyms": "안 보여? 몇 가지 동의어를 시도하십시오.",
         "AddUnderCategory": "카테고리 아래에 추가...",
         "Other": "다른",
@@ -134,7 +134,11 @@
             "title": "당신의 관계는 무엇입니까?"
         },
         "complete": {
-            "HasInvitedYou": "님이 귀하를 초대했습니다:"
+            "HasInvitedYou": "님이 귀하를 초대했습니다:",
+            "WelcomeToCommunity": "{{communityName}}에 오신 것을 환영합니다",
+            "HasInvitedYouToTheirProfile": "연결하도록 초대했습니다.",
+            "prompt": "친구들이 당신을 알아보도록 하세요:",
+            "accept": "초대를 수락하다"
         }
     },
     "messages": {

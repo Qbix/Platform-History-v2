@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Berjewendiyên we çi ne?",
-        "CanAdd": "Heke hûn hîn jî nikanin tiştê ku hûn lê digerin bibînin, hûn dikarin berjewendiyek nû li jêr zêde bikin:",
+        "CanGrant": "Heke hûn hîn jî nikanin tiştê ku hûn lê digerin bibînin, hûn dikarin berjewendiyek nû li jêr zêde bikin:",
         "TrySynonyms": "Ma nabîne? Hin hevwateyan biceribînin.",
         "AddUnderCategory": "Di binê kategoriyê de zêde bikin...",
         "Other": "Yên din",

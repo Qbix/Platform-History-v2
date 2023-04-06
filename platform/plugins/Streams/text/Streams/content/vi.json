@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Sở thích của bạn là gì?",
-        "CanAdd": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
+        "CanGrant": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
         "TrySynonyms": "Bạn không thấy nó? Hãy thử một số từ đồng nghĩa.",
         "AddUnderCategory": "Thêm dưới danh mục ...",
         "Other": "Khác",
@@ -134,7 +134,11 @@
             "title": "Mối quan hệ của bạn là gì?"
         },
         "complete": {
-            "HasInvitedYou": "đã mời bạn:"
+            "HasInvitedYou": "đã mời bạn:",
+            "WelcomeToCommunity": "Chào mừng bạn đến với {{communityName}}",
+            "HasInvitedYouToTheirProfile": "đã mời bạn kết nối.",
+            "prompt": "Hãy để bạn bè nhận ra bạn:",
+            "accept": "Chấp nhận lời mời"
         }
     },
     "messages": {

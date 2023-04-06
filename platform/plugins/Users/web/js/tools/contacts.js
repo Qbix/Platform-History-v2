@@ -38,7 +38,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 {
 	prefix: 'Users/',
 	communityId: null,
-	canAdd: true,
+	canGrant: true,
 	followup: true,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event(),
@@ -68,9 +68,9 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 			Q.Template.render("Users/contacts", {
 				labels: labels,
 				all: all,
-				canAdd: state.canAdd,
-				canAddText: tool.text.inviteUser,
-				canAddIcon: Q.url('{{Q}}/img/actions/add.png')
+				canGrant: state.canGrant,
+				canGrantText: tool.text.inviteUser,
+				canGrantIcon: Q.url('{{Q}}/img/actions/add.png')
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
 				Q.replace(tool.element, html);;
@@ -134,9 +134,9 @@ Q.Template.set('Users/contacts', ''
 +   '<div class="Users_labels_title">{{this.title}}</div>'
 + '</li>'
 + '{{/each}}'
-+ '{{#if canAdd}}'
++ '{{#if canGrant}}'
 + '<li class="Users_labels_action Users_labels_add Q/clickable">'
-+   '<button class="Q_button">{{canAddText}}</button>'
++   '<button class="Q_button">{{canGrantText}}</button>'
 + '</li>'
 + '{{/if}}'
 + '<ul>');

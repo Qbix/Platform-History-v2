@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Una maslahi gani?",
-        "CanAdd": "Ikiwa bado huwezi kupata unachotafuta, unaweza kuongeza jambo jipya linalokuvutia hapa chini:",
+        "CanGrant": "Ikiwa bado huwezi kupata unachotafuta, unaweza kuongeza jambo jipya linalokuvutia hapa chini:",
         "TrySynonyms": "Je! huoni? Jaribu baadhi ya visawe.",
         "AddUnderCategory": "Ongeza chini ya kategoria...",
         "Other": "Nyingine",
@@ -134,7 +134,11 @@
             "title": "Uhusiano wako ni upi?"
         },
         "complete": {
-            "HasInvitedYou": "amekualika kwa:"
+            "HasInvitedYou": "amekualika kwa:",
+            "WelcomeToCommunity": "Karibu kwenye {{communityName}}",
+            "HasInvitedYouToTheirProfile": "amekualika kuunganishwa.",
+            "prompt": "Waruhusu marafiki wakutambue:",
+            "accept": "Kubali Mwaliko"
         }
     },
     "messages": {

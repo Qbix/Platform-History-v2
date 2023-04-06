@@ -53,6 +53,11 @@ function Streams_after_Q_objects () {
 		'Streams/templates/invited/complete'
 	);
 
+	$invitedToProfile = ($stream->name === 'Streams/user/profile');
+	$textKey = $invitedToProfile
+		? 'HasInvitedYouToProfile'
+		: 'HasInvitedYou';
+
 	$params = array(
 		'displayName' => $displayName,
 		'nameIsMissing' => $nameIsMissing,
@@ -66,10 +71,11 @@ function Streams_after_Q_objects () {
 				'show' => 'flu'
 			)),
 			'text' => Q::interpolate(
-				$text['invite']['complete']['HasInvitedYou'],
+				$text['invite']['complete'][$textKey],
 				array('title' => $stream->title)
 			)
 		),
+		'showStreamPreview' => !$invitedToProfile,
 		'templateName' => $templateName,
 		'stream' => $stream->exportArray(),
 		'relations' => !empty($relations) ? Db::exportArray($relations) : array(),

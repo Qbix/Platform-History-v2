@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Dè na h-ùidhean a th’ agad?",
-        "CanAdd": "Mura h-urrainn dhut na tha thu a’ sireadh a lorg fhathast, faodaidh tu ùidh ùr a chuir ris gu h-ìosal:",
+        "CanGrant": "Mura h-urrainn dhut na tha thu a’ sireadh a lorg fhathast, faodaidh tu ùidh ùr a chuir ris gu h-ìosal:",
         "TrySynonyms": "Nach eil thu ga fhaicinn? Feuch cuid de cho-fhaclan.",
         "AddUnderCategory": "Cuir ris fon roinn...",
         "Other": "Eile",

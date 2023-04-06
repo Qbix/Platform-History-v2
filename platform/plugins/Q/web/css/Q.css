@@ -1,6 +1,6 @@
-html { min-height: -moz-available; min-height: -webkit-fill-available; min-height: fill-available; }
+html { height: 100%; height: -moz-available; height: -webkit-fill-available; height: fill-available; }
 table { border-spacing:0; border-collapse:collapse; }
-body { margin: 0; }
+body { min-height: 100vh; margin: 0; }
 
 /* Animations */
 @keyframes Q_rotateplane {
@@ -857,7 +857,7 @@ html.Q_scanning body > .Q_scanning_code {
 	transition: all 300ms linear;
 }
 
-.Q_columns_containsExpanded {
+html body .Q_columns_containsExpanded {
 	overflow: visible !important;
 	z-index: 100 !important;
 }

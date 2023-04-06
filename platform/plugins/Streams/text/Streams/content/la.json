@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Quid interest tua?",
-        "CanAdd": "Si adhuc invenire non potes quod petebas, novam rem infra addere potes:",
+        "CanGrant": "Si adhuc invenire non potes quod petebas, novam rem infra addere potes:",
         "TrySynonyms": "Non vides? Conare nonnulla synonyma.",
         "AddUnderCategory": "Adde sub categoria...",
         "Other": "Other",

@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Waa maxay danahaagu?",
-        "CanAdd": "Haddii aadan weli helin waxaad raadineyso, waxaad ku dari kartaa xiiso cusub xagga hoose:",
+        "CanGrant": "Haddii aadan weli helin waxaad raadineyso, waxaad ku dari kartaa xiiso cusub xagga hoose:",
         "TrySynonyms": "Ma arkaysid? Isku day qaar la mid ah.",
         "AddUnderCategory": "Kudar qaybta hoosteeda...",
         "Other": "Mid kale",

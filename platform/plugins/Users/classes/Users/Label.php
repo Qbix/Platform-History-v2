@@ -210,13 +210,13 @@ class Users_Label extends Base_Users_Label
 
 	/**
 	 * Whether $label_1 can add $label_2
-	 * @method canAddLabel
+	 * @method canGrantLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
 	 * @throws Exception
 	 * @return {bool}
 	 */
-	static function canAddLabel($label_1, $label_2)
+	static function canGrantLabel($label_1, $label_2)
 	{
 		$roles = Q_Config::expect("Users", "communities", "roles");
 		$keyRoles = array_keys($roles);
@@ -230,10 +230,10 @@ class Users_Label extends Base_Users_Label
 			$label_2 = array($label_2);
 		}
 
-		$rolesCanAdd = Q::ifset($roles, $label_1, "canAdd", array());
+		$rolesCanGrant = Q::ifset($roles, $label_1, "canGrant", array());
 
 		foreach ($label_2 as $label) {
-			if (!in_array($label, $rolesCanAdd)) {
+			if (!in_array($label, $rolesCanGrant)) {
 				return false;
 			}
 		}
@@ -270,10 +270,10 @@ class Users_Label extends Base_Users_Label
 		foreach ($userCommunityRoles as $role => $row) {
 			$result["roles"][] = $role;
 			foreach ($communityRoles as $label) {
-				if (Users_Label::canAddLabel($role, $label)) {
+				if (Users_Label::canGrantLabel($role, $label)) {
 					$result["add"][] = $label;
 				}
-				if (Users_Label::canRemoveLabel($role, $label)) {
+				if (Users_Label::canRevokeLabel($role, $label)) {
 					$result["remove"][] = $label;
 				}
 				if (Users_Label::canSeeLabel($role, $label)) {
@@ -294,13 +294,13 @@ class Users_Label extends Base_Users_Label
 
 	/**
 	 * Whether $label_1 can remove $label_2
-	 * @method canRemoveLabel
+	 * @method canRevokeLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
 	 * @throws Exception
 	 * @return {bool}
 	 */
-	static function canRemoveLabel($label_1, $label_2)
+	static function canRevokeLabel($label_1, $label_2)
 	{
 		$roles = Q_Config::expect("Users", "communities", "roles");
 		$keyRoles = array_keys($roles);
@@ -314,10 +314,10 @@ class Users_Label extends Base_Users_Label
 			$label_2 = array($label_2);
 		}
 
-		$rolesCanRemove = Q::ifset($roles, $label_1, "canRemove", array());
+		$rolesCanRevoke = Q::ifset($roles, $label_1, "canRevoke", array());
 
 		foreach ($label_2 as $label) {
-			if (!in_array($label, $rolesCanRemove)) {
+			if (!in_array($label, $rolesCanRevoke)) {
 				return false;
 			}
 		}
@@ -372,7 +372,7 @@ class Users_Label extends Base_Users_Label
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
-	 * @param {string} [$userId=null] The id of the user whose contact labels should be fetched
+	 * @param {string|array} [$userId=null] The id of the user whose contact labels should be fetched. Can be an array of userIds.
 	 * @param {string|array|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some array or db expression, to get only a particular subset of labels.
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
@@ -431,16 +431,15 @@ class Users_Label extends Base_Users_Label
 				->fetchDbRows(null, null, 'label');
 			$labels = array_merge($labels, $labelsPrefixed);
 		}
-		if (empty($options['checkContacts'])) {
-			return $labels;
-		}
-		$contacts = array();
-		foreach ($contact_array as $contact) {
-			$contacts[$contact->label] = $contact->label;
-		}
-		foreach ($labels as $label) {
-			if (!isset($contacts[$label->label])) {
-				unset($labels[$label->label]);
+		if (!empty($options['checkContacts'])) {
+			$contacts = array();
+			foreach ($contact_array as $contact) {
+				$contacts[$contact->label] = $contact->label;
+			}
+			foreach ($labels as $label) {
+				if (!isset($contacts[$label->label])) {
+					unset($labels[$label->label]);
+				}
 			}
 		}
 		return $labels;

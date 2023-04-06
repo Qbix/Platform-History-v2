@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Ndezvipi zvaunofarira?",
-        "CanAdd": "Kana uchiri kutadza kuwana zvauri kutsvaga, unogona kuwedzera kufarira pazasi:",
+        "CanGrant": "Kana uchiri kutadza kuwana zvauri kutsvaga, unogona kuwedzera kufarira pazasi:",
         "TrySynonyms": "Hausi kuzviona here? Edza mamwe mazwi anoreva zvakafanana.",
         "AddUnderCategory": "Wedzera pasi pechikamu...",
         "Other": "Zvimwe",

@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Yintoni onomdla kuyo?",
-        "CanAdd": "Ukuba awukayifumani into oyikhangelayo, unokongeza umdla omtsha ngezantsi:",
+        "CanGrant": "Ukuba awukayifumani into oyikhangelayo, unokongeza umdla omtsha ngezantsi:",
         "TrySynonyms": "Awuyiboni? Zama izithethantonye.",
         "AddUnderCategory": "Yongeza phantsi koluhlu...",
         "Other": "Okunye",

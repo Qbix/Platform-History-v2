@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Mistä olet kiinnostunut?",
-        "CanAdd": "Jos et vieläkään löydä etsimääsi, voit lisätä uuden kiinnostuksen kohteen alle:",
+        "CanGrant": "Jos et vieläkään löydä etsimääsi, voit lisätä uuden kiinnostuksen kohteen alle:",
         "TrySynonyms": "Etkö näe sitä? Kokeile joitain synonyymejä.",
         "AddUnderCategory": "Lisää kategoriaan...",
         "Other": "Muut",
@@ -134,7 +134,11 @@
             "title": "Mikä on suhteesi?"
         },
         "complete": {
-            "HasInvitedYou": "on kutsunut sinut:"
+            "HasInvitedYou": "on kutsunut sinut:",
+            "WelcomeToCommunity": "Tervetuloa {{communityName}}",
+            "HasInvitedYouToTheirProfile": "on kutsunut sinut muodostamaan yhteyden.",
+            "prompt": "Anna ystävien tunnistaa sinut:",
+            "accept": "Hyväksy kutsu"
         }
     },
     "messages": {

@@ -483,6 +483,32 @@ a.Users_activation_resend:active {
 .Q_dialog_slot .Users_contacts_tool .Users_labels_label {
 	cursor: pointer;
 }
+
+.Users_labels_communityRoles ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+}
+
+.Users_labels_communityRoles .Users_labels_label {
+	display: inline-block;
+	width: 33%;
+	margin-top: 0;
+	padding-top: 10px;
+	vertical-align: top;
+	text-align: center;
+}
+.Users_labels_communityRoles .Users_labels_icon {
+	display: inline-block;
+	width: 80%;
+	height: auto;
+}
+.Users_labels_communityRoles .Users_labels_title {
+	display: block;
+	white-space: normal;
+	text-align: center;
+}
+
 .Users_labels_add_phonebook {
 	box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
     border-radius: 5px;

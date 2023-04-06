@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Kio estas viaj interesoj?",
-        "CanAdd": "Se vi ankoraŭ ne povas trovi tion, kion vi serĉas, vi povas aldoni novan intereson sube:",
+        "CanGrant": "Se vi ankoraŭ ne povas trovi tion, kion vi serĉas, vi povas aldoni novan intereson sube:",
         "TrySynonyms": "Ĉu vi ne vidas ĝin? Provu kelkajn sinonimojn.",
         "AddUnderCategory": "Aldoni sub kategorio...",
         "Other": "Alia",

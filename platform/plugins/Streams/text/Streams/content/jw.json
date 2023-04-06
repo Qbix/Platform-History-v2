@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Apa kapentingan sampeyan?",
-        "CanAdd": "Yen sampeyan isih ora bisa nemokake apa sing sampeyan goleki, sampeyan bisa nambah kapentingan anyar ing ngisor iki:",
+        "CanGrant": "Yen sampeyan isih ora bisa nemokake apa sing sampeyan goleki, sampeyan bisa nambah kapentingan anyar ing ngisor iki:",
         "TrySynonyms": "ora weruh? Coba sawetara sinonim.",
         "AddUnderCategory": "Tambah ing kategori ...",
         "Other": "Liyane",

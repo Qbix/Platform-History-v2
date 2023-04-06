@@ -9,7 +9,7 @@ function Users_roles_response()
 	$roles = Users::roles($communityId);
 	Q_Response::setSlot('roles', array_keys($roles));
 	$config = Q_Config::get('Users', 'communities', 'roles', array());
-	foreach (array('canAdd', 'canRemove', 'canSee') as $can) {
+	foreach (array('canGrant', 'canRevoke', 'canSee') as $can) {
 		$results = array();
 		foreach ($roles as $r => $contact) {
 			if ($info = Q::ifset($config, $r, null)) {

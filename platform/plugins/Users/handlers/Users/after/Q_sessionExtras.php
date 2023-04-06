@@ -13,7 +13,7 @@ function Users_after_Q_sessionExtras() {
 		Q_Response::setScriptData('Q.plugins.Users.roles.'.$label, $role->exportArray());
 	}
 	$config = Q_Config::get('Users', 'communities', 'roles', array());
-	foreach (array('canAdd', 'canRemove', 'canSee') as $can) {
+	foreach (array('canGrant', 'canRevoke', 'canSee') as $can) {
 		$results = array();
 		foreach ($roles as $r => $contact) {
 			if ($info = Q::ifset($config, $r, null)) {

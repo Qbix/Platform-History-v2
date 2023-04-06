@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Hver eru áhugamál þín?",
-        "CanAdd": "Ef þú finnur enn ekki það sem þú ert að leita að geturðu bætt við nýju áhugamáli hér að neðan:",
+        "CanGrant": "Ef þú finnur enn ekki það sem þú ert að leita að geturðu bætt við nýju áhugamáli hér að neðan:",
         "TrySynonyms": "Sérðu það ekki? Prófaðu nokkur samheiti.",
         "AddUnderCategory": "Bæta við undir flokk...",
         "Other": "Annað",
@@ -134,7 +134,11 @@
             "title": "Hvert er sambandið þitt?"
         },
         "complete": {
-            "HasInvitedYou": "hefur boðið þér að:"
+            "HasInvitedYou": "hefur boðið þér að:",
+            "WelcomeToCommunity": "Velkomin(n) til {{communityName}}",
+            "HasInvitedYouToTheirProfile": "hefur boðið þér að tengjast.",
+            "prompt": "Láttu vini þekkja þig:",
+            "accept": "Samþykkja boð"
         }
     },
     "messages": {

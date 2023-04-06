@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Czym się interesujesz?",
-        "CanAdd": "Jeśli nadal nie możesz znaleźć tego, czego szukasz, możesz dodać nowe zainteresowanie poniżej:",
+        "CanGrant": "Jeśli nadal nie możesz znaleźć tego, czego szukasz, możesz dodać nowe zainteresowanie poniżej:",
         "TrySynonyms": "Nie widzisz tego? Wypróbuj kilka synonimów.",
         "AddUnderCategory": "Dodaj w kategorii...",
         "Other": "Inny",
@@ -134,7 +134,11 @@
             "title": "Jaki jest Twój związek?"
         },
         "complete": {
-            "HasInvitedYou": "zaprosił Cię do:"
+            "HasInvitedYou": "zaprosił Cię do:",
+            "WelcomeToCommunity": "Witamy w {{communityName}}",
+            "HasInvitedYouToTheirProfile": "zaprosił Cię do połączenia.",
+            "prompt": "Pozwól znajomym Cię rozpoznać:",
+            "accept": "Zaakceptuj zaproszenie"
         }
     },
     "messages": {

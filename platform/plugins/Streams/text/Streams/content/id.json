@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Apa saja minat kamu?",
-        "CanAdd": "Jika Anda masih tidak dapat menemukan apa yang Anda cari, Anda dapat menambahkan minat baru di bawah ini:",
+        "CanGrant": "Jika Anda masih tidak dapat menemukan apa yang Anda cari, Anda dapat menambahkan minat baru di bawah ini:",
         "TrySynonyms": "Tidak melihatnya? Coba beberapa sinonim.",
         "AddUnderCategory": "Tambahkan di bawah kategori...",
         "Other": "Lainnya",

@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Wat binne dyn ynteresses?",
-        "CanAdd": "As jo noch net kinne fine wat jo sykje, kinne jo hjirûnder in nij ynteresse tafoegje:",
+        "CanGrant": "As jo noch net kinne fine wat jo sykje, kinne jo hjirûnder in nij ynteresse tafoegje:",
         "TrySynonyms": "Sjochst it net? Besykje wat synonimen.",
         "AddUnderCategory": "Taheakje ûnder kategory...",
         "Other": "Oar",

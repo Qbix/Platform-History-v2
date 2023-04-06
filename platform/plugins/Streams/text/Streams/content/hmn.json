@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Koj nyiam dab tsi?",
-        "CanAdd": "Yog tias koj tseem nrhiav tsis tau qhov koj tab tom nrhiav, koj tuaj yeem ntxiv qhov kev txaus siab tshiab hauv qab no:",
+        "CanGrant": "Yog tias koj tseem nrhiav tsis tau qhov koj tab tom nrhiav, koj tuaj yeem ntxiv qhov kev txaus siab tshiab hauv qab no:",
         "TrySynonyms": "Tsis pom nws? Sim qee cov ntsiab lus.",
         "AddUnderCategory": "Ntxiv hauv qeb ...",
         "Other": "Lwm yam",

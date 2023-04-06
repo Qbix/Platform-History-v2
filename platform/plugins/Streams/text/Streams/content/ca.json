@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Quins són els teus interessos?",
-        "CanAdd": "Si encara no trobeu el que busqueu, podeu afegir un nou interès a continuació:",
+        "CanGrant": "Si encara no trobeu el que busqueu, podeu afegir un nou interès a continuació:",
         "TrySynonyms": "No ho veus? Proveu alguns sinònims.",
         "AddUnderCategory": "Afegeix a la categoria...",
         "Other": "Altres",
@@ -132,7 +132,11 @@
             "title": "Quina és la teva relació?"
         },
         "complete": {
-            "HasInvitedYou": "t&#39;ha convidat a:"
+            "HasInvitedYou": "t&#39;ha convidat a:",
+            "WelcomeToCommunity": "Benvingut a {{communityName}}",
+            "HasInvitedYouToTheirProfile": "t&#39;ha convidat a connectar-te.",
+            "prompt": "Deixa que els teus amics et reconeguin:",
+            "accept": "Accepta la invitació"
         }
     },
     "followup": {

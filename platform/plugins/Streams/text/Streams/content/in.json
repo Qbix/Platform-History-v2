@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Apa saja minat kamu?",
-        "CanAdd": "Jika Anda masih tidak dapat menemukan yang Anda cari, Anda dapat menambahkan minat baru di bawah:",
+        "CanGrant": "Jika Anda masih tidak dapat menemukan yang Anda cari, Anda dapat menambahkan minat baru di bawah:",
         "TrySynonyms": "Tidak melihatnya? Coba beberapa sinonim.",
         "AddUnderCategory": "Tambahkan dalam kategori ...",
         "Other": "Lain",
@@ -132,7 +132,11 @@
             "title": "Apa Hubungan Anda?"
         },
         "complete": {
-            "HasInvitedYou": "telah mengundang Anda untuk:"
+            "HasInvitedYou": "telah mengundang Anda untuk:",
+            "WelcomeToCommunity": "Selamat datang di {{communityName}}",
+            "HasInvitedYouToTheirProfile": "telah mengundang Anda untuk terhubung.",
+            "prompt": "Biarkan teman mengenali Anda:",
+            "accept": "Terima Undangan"
         }
     },
     "followup": {

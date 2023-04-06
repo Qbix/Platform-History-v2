@@ -14,7 +14,7 @@
     },
     "interests": {
         "Filter": "Menene sha&#39;awar ku?",
-        "CanAdd": "Idan har yanzu ba za ku iya samun abin da kuke nema ba, kuna iya ƙara sabon sha&#39;awa a ƙasa:",
+        "CanGrant": "Idan har yanzu ba za ku iya samun abin da kuke nema ba, kuna iya ƙara sabon sha&#39;awa a ƙasa:",
         "TrySynonyms": "Ba gani ba? Gwada wasu ma&#39;ana.",
         "AddUnderCategory": "Ƙara ƙarƙashin rukuni...",
         "Other": "Sauran",

@@ -15,7 +15,7 @@
     },
     "interests": {
         "Filter": "Cales son os teus intereses?",
-        "CanAdd": "Se aínda non atopas o que buscas, podes engadir un novo interese a continuación:",
+        "CanGrant": "Se aínda non atopas o que buscas, podes engadir un novo interese a continuación:",
         "TrySynonyms": "Non o ves? Proba algúns sinónimos.",
         "AddUnderCategory": "Engadir na categoría...",
         "Other": "Outra",
@@ -134,7 +134,11 @@
             "title": "Cal é a túa relación?"
         },
         "complete": {
-            "HasInvitedYou": "invitoute a:"
+            "HasInvitedYou": "invitoute a:",
+            "WelcomeToCommunity": "Benvido a {{communityName}}",
+            "HasInvitedYouToTheirProfile": "invitoute a conectarse.",
+            "prompt": "Deixa que os amigos te recoñezan:",
+            "accept": "Aceptar a invitación"
         }
     },
     "messages": {

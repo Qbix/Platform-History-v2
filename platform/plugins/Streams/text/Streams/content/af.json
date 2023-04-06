@@ -12,7 +12,7 @@
     },
     "interests": {
         "Filter": "Waarin stel jy belang?",
-        "CanAdd": "As jy steeds nie kan kry waarna jy soek nie, kan jy &#39;n nuwe belangstelling hieronder byvoeg:",
+        "CanGrant": "As jy steeds nie kan kry waarna jy soek nie, kan jy &#39;n nuwe belangstelling hieronder byvoeg:",
         "TrySynonyms": "Sien dit nie? Probeer &#39;n paar sinonieme.",
         "AddUnderCategory": "Voeg by onder kategorie...",
         "Other": "Ander",
@@ -132,7 +132,11 @@
             "title": "Wat is jou verhouding?"
         },
         "complete": {
-            "HasInvitedYou": "het jou genooi om:"
+            "HasInvitedYou": "het jou genooi om:",
+            "WelcomeToCommunity": "Welkom by {{communityName}}",
+            "HasInvitedYouToTheirProfile": "het jou genooi om aan te sluit.",
+            "prompt": "Laat vriende jou herken:",
+            "accept": "Aanvaar uitnodiging"
         }
     },
     "followup": {
