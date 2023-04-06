@@ -572,12 +572,12 @@
                 var audioVisualization = document.createElement('DIV')
                 audioVisualization.className = 'Streams_webrtc_popup-visualization';
 
-                tool.webrtcSignalingLib.mediaManager.audioVisualization.build({
+                /*tool.webrtcSignalingLib.mediaManager.audioVisualization.build({
                     name: 'participantsPopup',
                     participant: roomParticipant,
                     element: audioVisualization,
                     updateSizeOnlyOnce: true
-                });
+                });*/
 
                 participantItem.appendChild(tracksControlBtns);
                 muteVideo.appendChild(muteCameraBtn);

@@ -266,7 +266,8 @@ window.WebRTCRoomClient = function app(options){
             for(let i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
-                track.trackEl.muted = true;
+                //track.trackEl.muted = true;
+                track.mediaStreamTrack.enabled = false;
             }
             this.audioIsMuted = true;
             app.event.dispatch('audioMuted', this);
@@ -277,7 +278,8 @@ window.WebRTCRoomClient = function app(options){
             for(let i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
-                track.trackEl.muted = false;
+                //track.trackEl.muted = false;
+                track.mediaStreamTrack.enabled = true;
             }
             this.audioIsMuted = false;
             app.event.dispatch('audioUnmuted', this);
@@ -660,7 +662,7 @@ window.WebRTCRoomClient = function app(options){
 
                     //here requestAnimationFrame is used as we don't need animate SVG elements when tab is in background
                     function render(participant) {
-                        participant.soundMeter.visualizationAnimation = requestAnimationFrame(function () {
+                        participant.soundMeter.visualizationAnimation = requestAnimationFrame(function (timestamp) {
                             render(participant)
                         });
 
@@ -787,7 +789,7 @@ window.WebRTCRoomClient = function app(options){
                         }
                     }
 
-                    render(participant);
+                    //render(participant);
                 }
 
                 startRender(participant);
@@ -1481,7 +1483,7 @@ window.WebRTCRoomClient = function app(options){
                 }
                 track.stream = stream;
             }
-
+            remoteStreamEl.controls = false;
             if(!participant.isLocal && track.kind == 'video') {
                 remoteStreamEl.muted = true;
                 remoteStreamEl.autoplay = true;
@@ -1540,6 +1542,7 @@ window.WebRTCRoomClient = function app(options){
 
                     app.event.dispatch('audioTrackLoaded', {
                         screen: track.parentScreen,
+                        participant: participant,
                         trackEl: e.target,
                         track:track
                     });
@@ -1564,6 +1567,16 @@ window.WebRTCRoomClient = function app(options){
                     participant: participant,
                     trackEl: e.target,
                     track:track
+                });
+            })
+            remoteStreamEl.addEventListener('ended', function (e) {
+                log('createTrackElement: media ended');
+                track.mediaStreamTrack.stop();
+                app.event.dispatch('trackMuted', {
+                    screen: track.parentScreen,
+                    trackEl: e.target,
+                    track:track,
+                    participant:participant
                 });
             })
             remoteStreamEl.onloadedmetadata = function () {
@@ -2394,6 +2407,7 @@ window.WebRTCRoomClient = function app(options){
                 if(screenSharingTracks.length != 0) {
                     socket.emit('Streams/webrtc/cameraDisabled');
                     app.event.dispatch('screensharingStopped', {participant: localParticipant});
+                    app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStopped");
                 }
             } if(!_isMobile) {
                 var screenSharingTracks = localParticipant.tracks.filter(function (trackObj) {
@@ -2405,6 +2419,7 @@ window.WebRTCRoomClient = function app(options){
                 if(screenSharingTracks.length != 0) {
                     socket.emit('Streams/webrtc/cameraDisabled');
                     app.event.dispatch('screensharingStopped', {participant: localParticipant});
+                    app.signalingDispatcher.sendDataTrackMessage("remoteScreensharingStopped");
                 }
             }
 
@@ -6821,7 +6836,7 @@ window.WebRTCRoomClient = function app(options){
             this.fire = function(data) {
                 const callbacks = this.callbacks.slice(0);
                 callbacks.forEach((callback) => {
-                    callback(data);
+                    callback(data, eventName);
                 });
             }
         }

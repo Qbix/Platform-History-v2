@@ -853,11 +853,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             layoutEvents.on('layoutRendered', function (e) {
 
                 if(e.viewMode == 'audio') {
-                    webrtcSignalingLib.mediaManager.audioVisualization.buildCommonVisualization({
+                    /*.mediaManager.audioVisualization.buildCommonVisualization({
                         name: 'common',
                         type: 'bars',
                         element: _roomsMedia
-                    });
+                    });*/
 
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     lockScreenResizingAndDragging();
@@ -927,9 +927,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         let track = this.tracks[t];
                         if(kind && kind != this.tracks[t].kind) continue;
                         let live = shouldBeLive ? track.mediaStreamTrack.readyState != 'ended' : true;
+                        let streamIsActive = track.stream ? track.stream.active == true : false;
                         let unmuted = shouldBeUnmuted ? track.mediaStreamTrack.muted == false : true;
                         let enabled = shouldBeEnabled ? track.mediaStreamTrack.enabled == true : true;
-                        if(live && unmuted && enabled) {
+                        if(live && streamIsActive/* && unmuted && enabled*/) {
                             hasLiveTracks = true;
                             break;
                         }
@@ -956,7 +957,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     this.show();
                     this.activeScreenType = 'audio';
                     this.removeAudioVisualization('video');
-                    this.showAudioVisualization('audio');
+                    //this.showAudioVisualization('audio');
                     //this.screenEl.innerHTML = '';
                     if(this.videoScreen.screenEl && this.videoScreen.screenEl.parentNode != null) {
                         this.videoScreen.screenEl.parentNode.removeChild(this.videoScreen.screenEl);
@@ -981,7 +982,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                     //}
                     this.removeAudioVisualization('audio');
-                    this.showAudioVisualization('video');
+                    //this.showAudioVisualization('video');
 
                     //this.screenEl.innerHTML = '';
                     if(this.audioScreen.screenEl && this.audioScreen.screenEl.parentNode != null) {
@@ -1101,9 +1102,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     webrtcSignalingLib.event.dispatch('screenShown', screen);
 
                     if(screen.activeScreenType == 'video') {
-                        this.showAudioVisualization('video');
+                        //this.showAudioVisualization('video');
                     } else {
-                        this.showAudioVisualization('audio');
+                        //this.showAudioVisualization('audio');
                     }
 
                 }
@@ -5581,7 +5582,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 updateLayout();
             }
 
-            function onVideoMute(track, participant) {
+            function onVideoMute(track, participant, counter) {
                 log('onVideoMute: START', track);
 
                 if(track.parentScreen == null || track.kind != 'video') return;
@@ -5592,27 +5593,38 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 } 
 
                 log('onVideoMute: screens.length',  participant.screens.length);
+                let actionDone = false;
+                if(participant.screens.length == 1 && !track.parentScreen.hasLiveTracks('video')) {
+                    log('onVideoMute: 1', track.stream.active, track.parentScreen.hasLiveTracks('video'), track.parentScreen.tracks);
 
-                if(participant.screens.length == 1) {
-                    log('onVideoMute: 1');
-
-                    if(!track.parentScreen.hasLiveTracks('video')) {
-                        log('onVideoMute: 1.2');
-                        track.parentScreen.fillVideoScreenWithAvatarOrVideo();
-                        if(track.parentScreen.screensharing) {
-                            log('onVideoMute: 1.3');
-                            track.parentScreen.screensharing = false;
-                        }
+                    track.parentScreen.fillVideoScreenWithAvatarOrVideo();
+                    if (track.parentScreen.screensharing) {
+                        log('onVideoMute: 1.3');
+                        track.parentScreen.screensharing = false;
                     }
-                } else if(!track.parentScreen.hasLiveTracks('video')) {
+                    actionDone = true;
+                } else if(participant.screens.length > 1 && !track.parentScreen.hasLiveTracks('video')) {
                     log('onVideoMute: 2');
                     removeScreenFromCommonList(track.parentScreen, true);
                     if(track.parentScreen.screensharing) {
                         log('onVideoMute: 2.1');
                         track.parentScreen.screensharing = false;
                     }
+                    actionDone = true;
                 }
 
+                //for now Chrome (maybe other) do not change MediaStream's status to inactive right after track was stopped by remote side
+                //so we need to check whether track is active after some time
+                if(counter == null) {
+                    counter = 0;
+                }
+                if(!actionDone && counter <= 5) {
+                    log('onVideoMute: timer');
+
+                    setTimeout(function(){
+                        onVideoMute(track, participant, counter + 1)                    
+                    }, 1000);
+                }
                 
             }
 

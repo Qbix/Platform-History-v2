@@ -1854,6 +1854,8 @@
                     var _selectedLayout = null;
                     var _layoutsListDropDownCon = null;
                     var _layoutsListSelect = null;
+                    var _layoutsListCustomSelect = null;
+                    var _autoSwitchToScreensharingLayoutAndBack = false;
                     var _participantsList = null;
                     var _sceneSourcesColumnEl = null;
                     var _sourcesListEl = null;
@@ -2574,7 +2576,8 @@
                                         }
                                     }
                                 };
-                                this.toggleAudio = function () {                                    
+                                this.toggleAudio = function () {         
+                                    console.log('toggleAudio', listItemInstance.participantInstance.audioIsMuted)                           
                                     if (!listItemInstance.participantInstance.audioIsMuted) {
                                         listItemInstance.muteAudio();
                                     } else {
@@ -3063,12 +3066,28 @@
                     declareOrRefreshEventHandlers();
 
                     _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
-                        log('SCENE EVENT: SOURCE ADDED')
-                        //updateSourceControlPanelButtons(); 
+                        log('SCENE EVENT: SOURCE ADDED', source)
+                        if(source.screenSharing) {
+                            _layoutsListCustomSelect.value = 'sideScreenSharing';
+                            _autoSwitchToScreensharingLayoutAndBack = true;
+                        }
                     })
                     _scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
-                        log('SCENE EVENT: SOURCE REMOVED')
-                        //updateSourceControlPanelButtons(); 
+                        log('SCENE EVENT: SOURCE REMOVED', source)
+                        let webrtcGroup = source.parentGroup;
+                        let allWebrtcSources = webrtcGroup.getChildSources('webrtc');
+
+                        let anotherScreensharingExists = false;
+                        for (let i in allWebrtcSources) {
+                            if(allWebrtcSources[i].screenSharing) {
+                                anotherScreensharingExists = true;
+                                break;
+                            }
+                        }
+
+                        if(!anotherScreensharingExists && _autoSwitchToScreensharingLayoutAndBack) {
+                            _layoutsListCustomSelect.value = webrtcGroup.prevLayout;
+                        }
                     })
                     _scene.sceneInstance.eventDispatcher.on('sourceMoved', function (source) {
                         log('SCENE EVENT: SOURCE MOVED')
@@ -4264,6 +4283,7 @@
                         listSelect.addEventListener('change', function (e) {
                             if(!_participantsList) return;
                             selectLayout(e.target.value);
+                            _autoSwitchToScreensharingLayoutAndBack = false;
                         });
 
                         var tiledLayout = document.createElement('OPTION');
@@ -4291,7 +4311,7 @@
                         audioScreenLayout.innerHTML = 'Audio only + screen sharing';
                         listSelect.appendChild(audioScreenLayout);
 
-                        var customSelect = new CustomSelect(listSelect);
+                        var customSelect = _layoutsListCustomSelect = new CustomSelect(listSelect);
                         customSelect.customSelectDropDownEl.classList.add('live-editor-popup-layouts-list');
                         customSelect.syncOptionsList = function () {
                             log('syncOptionsList START');
@@ -4360,7 +4380,7 @@
                     }
 
                     function selectLayout(layoutKey) {
-                        log('selectLayout', layoutKey)
+                        log('selectLayout START', layoutKey)
                         let teleconferenceSource = _participantsList.getWebrtcGroupInstance();
                         if(!teleconferenceSource) {
                             console.warn('No webrtc group (teleconference) source found')
@@ -4369,7 +4389,7 @@
                        
                         _selectedLayout = layoutKey;
 
-                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(teleconferenceSource, layoutKey);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(teleconferenceSource, layoutKey, null);
                     }
 
                     function getSourcesList() {
@@ -6249,6 +6269,7 @@
                                 marginsInput.type = 'number';
                                 marginsInput.id = 'layoutMargins';
                                 marginsInput.name = 'layoutMargins';
+                                marginsInput.min = 0;
                                 marginsInput.value = _selectedSource.sourceInstance.params.tiledLayoutMargins;
                                 var marginsInputLabel = document.createElement('Label');
                                 marginsInputLabel.appendChild(document.createTextNode("Layout margins:"));
@@ -8252,9 +8273,27 @@
                     this.selectContainerEl = null;
                     this.closeButtonEl = null;
                     this.optionsList = [];
-                    this.selectedIndex = -1;
+                    //this.selectedIndex = -1;
+                    this._value = null;
                     this.spaceForArrow = 0;
                     this.isShown = false;
+
+                    Object.defineProperties(this, {
+                        'value': {
+                            'set': function(val) {
+                                for (let i in this.optionsList) {
+                                    if(this.optionsList[i].value == val) {
+                                        this.optionsList[i].customOptionEl.click();
+                                        this._value = val;
+                                        break;
+                                    }
+                                }
+                            },
+                            'get': function() {
+                                return this._value;
+                            }
+                        }
+                    });
 
                     this._syncOptionsList = function () {
                         let originalSelect = selectInstance.originalSelect;

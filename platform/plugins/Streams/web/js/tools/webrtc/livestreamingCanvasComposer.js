@@ -82,6 +82,7 @@
                         this.additionalSources = []; //for titles
                         this.overlaySources = []; //for watermarks
                         this.backgroundSources = []; //for backgrounds
+                        this.webrtcAudioSources = [];
                         this.audioSources = [];
                         this.videoAudioSources = [];
                         this.eventDispatcher = new EventSystem();
@@ -330,7 +331,7 @@
                         var _size = {width:1280, height: 720};
                         var _inputCtx = null;
                         var _isActive = null;
-        
+
                         function createCanvas() {
                             var videoCanvas = document.createElement("CANVAS");
                             videoCanvas.className = "live-editor-video-stream-canvas";
@@ -343,7 +344,7 @@
                             videoCanvas.width = _size.width;
                             videoCanvas.height = _size.height;
         
-                            _inputCtx = videoCanvas.getContext('2d');
+                            _inputCtx = videoCanvas.getContext('2d', { alpha: false, desynchronized: true });
         
                             _canvas = videoCanvas;
         
@@ -699,6 +700,10 @@
                             this.sourceType = 'group';
                             this.layoutName = null;
                             this.layoutManager = null; 
+                            this._currentLayout = null; 
+                            this.prevLayout = null; 
+                            this.pendingLayoutUpdate = null; 
+                            this.layoutUpdateQueue = []; 
                             this.size = {width:_size.width, height:_size.height};
                             this.rect = {
                                 _width:1280, 
@@ -741,7 +746,7 @@
                                 get height() {return this._height;}
                             };
                             this.params = {
-                                tiledLayoutMargins: getOptions().liveStreaming && getOptions().liveStreaming.tiledLayoutMargins ? getOptions().liveStreaming.tiledLayoutMargins : 100,
+                                tiledLayoutMargins: getOptions().liveStreaming && getOptions().liveStreaming.tiledLayoutMargins ? getOptions().liveStreaming.tiledLayoutMargins : 0,
                                 audioLayoutBgColor: getOptions().liveStreaming && getOptions().liveStreaming.audioLayoutBgColor ? getOptions().liveStreaming.audioLayoutBgColor : "rgba(255, 255, 255, 0)",
                                 defaultLayout: getOptions().liveStreaming && getOptions().liveStreaming.defaultLayout ? getOptions().liveStreaming.defaultLayout : 'tiledStreamingLayout',
                             };
@@ -766,6 +771,21 @@
                             this.eventDispatcher = new EventSystem();
                         }
                         GroupSource.prototype = new Source();
+
+                        Object.defineProperties(GroupSource.prototype, {
+                            'currentLayout': {
+                                'set': function(val) {
+                                    if(this.prevLayout != this._currentLayout) {
+                                        this.prevLayout = this._currentLayout;
+                                    }
+                                    this._currentLayout = val;
+                                },
+                                'get': function() {
+                                    return this._currentLayout;
+                                }
+                            }
+                        });
+
                         var webrtcGroup = new GroupSource()
                         webrtcGroup.name = 'Participants';
                         webrtcGroup.groupType = 'webrtc';
@@ -1376,11 +1396,13 @@
                             hideChildAdditionalSources([source])
                         }
         
-                        function updateActiveWebRTCLayouts() {
+                        function updateActiveWebRTCLayouts(layoutName) {
                             log('updateActiveWebRTCLayouts start')
+            
                             for(let i in _activeScene.webrtcSources) {
                                 if(_activeScene.webrtcSources[i].sourceType == 'group' && _activeScene.webrtcSources[i].groupType == 'webrtc') {
-                                    updateWebRTCLayout(_activeScene.webrtcSources[i]);
+                                    let layoutToRender = layoutName != 'previous' ? layoutName : _activeScene.webrtcSources[i].prevLayout;
+                                    updateWebRTCLayout(_activeScene.webrtcSources[i], layoutToRender);
                                 }
                             }
                         }
@@ -1393,6 +1415,12 @@
                             } catch (e) {
             
                             }
+                            if(webrtcGroupSource.pendingLayoutUpdate) {
+                                log('updateWebRTCCanvasLayout: pendingLayoutUpdate: cancel')
+                                webrtcGroupSource.layoutUpdateQueue.push({args: Array.prototype.slice.call(arguments)});
+                                return;
+                            }
+                            webrtcGroupSource.pendingLayoutUpdate = true;
                             var tracksToAdd = [];
                             var tracksToRemove = [];
                             
@@ -2017,9 +2045,13 @@
                             }
         
                             log('updateWebRTCCanvasLayout result streams', _activeScene.webrtcSources)
-        
-        
-        
+                            webrtcGroupSource.pendingLayoutUpdate = false;
+
+                            if(webrtcGroupSource.layoutUpdateQueue.length != 0) {
+                                let queueItem = webrtcGroupSource.layoutUpdateQueue.splice(0, 1)[0];
+                                updateWebRTCLayout.apply(null, queueItem.args)
+                                return;
+                            }
                         }
         
                         function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a, streamData){
@@ -3127,7 +3159,8 @@
         
                         function refreshEventListeners() {
                             var webrtcSignalingLib = tool.webrtcSignalingLib;
-                            var updateCanvas = function() {
+                            var updateCanvas = function(data, eventName) {
+                                log('updateCanvas: event', eventName);
                                 if(_isActive == true) {
                                     updateActiveWebRTCLayouts();
                                 }
@@ -3138,15 +3171,35 @@
                                 refreshEventListeners();
                             });
                             webrtcSignalingLib.event.on('initNegotiationEnded', updateCanvas);
+                            webrtcSignalingLib.event.on('videoTrackLoaded', updateCanvas);
+                            webrtcSignalingLib.event.on('audioTrackLoaded', updateCanvas);
                             webrtcSignalingLib.event.on('participantDisconnected', updateCanvas);
                             webrtcSignalingLib.event.on('trackMuted', updateCanvas);
                             webrtcSignalingLib.event.on('trackUnmuted', updateCanvas);
+                            webrtcSignalingLib.event.on('screenHidden', updateCanvas);
+                            webrtcSignalingLib.event.on('screenShown', updateCanvas);
+                            webrtcSignalingLib.event.on('audioMuted', updateCanvas);
+                            webrtcSignalingLib.event.on('audioUnmuted', updateCanvas);
+                            //webrtcSignalingLib.event.on('screensharingStarted', switchToSideScreensharing);
+                            //webrtcSignalingLib.event.on('remoteScreensharingStarted', switchToSideScreensharing);
+                            //webrtcSignalingLib.event.on('screensharingStopped', switchBackFromSideScreensharing);
+                            //webrtcSignalingLib.event.on('remoteScreensharingStopped', switchBackFromSideScreensharing);
         
                             _eventDispatcher.on('drawingStop', function () {
                                 webrtcSignalingLib.event.off('initNegotiationEnded', updateCanvas);
+                                webrtcSignalingLib.event.off('videoTrackLoaded', updateCanvas);
+                                webrtcSignalingLib.event.off('audioTrackLoaded', updateCanvas);
                                 webrtcSignalingLib.event.off('participantDisconnected', updateCanvas);
                                 webrtcSignalingLib.event.off('trackMuted', updateCanvas);
                                 webrtcSignalingLib.event.off('trackUnmuted', updateCanvas);
+                                webrtcSignalingLib.event.off('screenHidden', updateCanvas);
+                                webrtcSignalingLib.event.off('screenShown', updateCanvas);
+                                webrtcSignalingLib.event.off('audioMuted', updateCanvas);
+                                webrtcSignalingLib.event.off('audioUnmuted', updateCanvas);
+                                //webrtcSignalingLib.event.off('screensharingStarted', switchToSideScreensharing);
+                                //webrtcSignalingLib.event.off('remoteScreensharingStarted', switchToSideScreensharing);
+                                //webrtcSignalingLib.event.off('screensharingStopped', switchBackFromSideScreensharing);
+                                //webrtcSignalingLib.event.off('remoteScreensharingStopped', switchBackFromSideScreensharing);
                             });
                         }
         
@@ -3317,7 +3370,7 @@
                                     function simpleGrid(count, size, perRow, rowsNum) {
                                         log('simpleGrid', size, count);
                                         var rects = [];
-                                        var layoutMargins = getOptions().liveStreaming && getOptions().liveStreaming.tiledLayoutMargins ? getOptions().liveStreaming.tiledLayoutMargins : 10;
+                                        var layoutMargins = _webrtcGroupSource.params.tiledLayoutMargins != null ? _webrtcGroupSource.params.tiledLayoutMargins : 0;
                                         var spaceBetween = parseInt(layoutMargins);
                                         log('simpleGrid spaceBetween', spaceBetween);
 
@@ -3328,13 +3381,18 @@
                                         } else {
                                             rectHeight = size.parentHeight / rowsNum - (spaceBetween * (perRow - 1));
                                         }
-                                        var newRectSize = getElementSizeKeepingRatio({
+
+                                        console.log('simpleGrid: rectHeight', rectWidth, rectHeight);
+
+                                        /*var newRectSize = getElementSizeKeepingRatio({
                                             width: 1280,
                                             height: 720
                                         }, { width: rectWidth, height: rectHeight })
 
+                                        console.log('simpleGrid: newRectSize', newRectSize);
+
                                         rectWidth = newRectSize.width;
-                                        rectHeight = newRectSize.height;
+                                        rectHeight = newRectSize.height;*/
                                         rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
                                         log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
 
@@ -4000,129 +4058,6 @@
                         var audioContext = null;
                         var _dest = null;
         
-                        /*var Noise = (function () {
-                            "use strict";
-                            var supportsES6 = function() {
-                                try {
-                                    new Function("(a = 0) => a");
-                                    return true;
-                                }
-                                catch (err) {
-                                    return false;
-                                }
-                            }();
-        
-                            if (!supportsES6) {return;}
-        
-                            let fadeOutTimer;
-        
-                            // https://noisehack.com/generate-noise-web-audio-api/
-                            function createNoise(track) {
-        
-                                const bufferSize = 2 * audioContext.sampleRate;
-                                const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-                                const output = noiseBuffer.getChannelData(0);
-        
-                                for (let i = 0; i < bufferSize; i++) {
-                                    output[i] = Math.random() * 2 - 1;
-                                }
-        
-                                track.audioSource.buffer = noiseBuffer;
-                            }
-        
-                            function stopNoise(track) {
-                                if (track.audioSource) {
-                                    clearTimeout(fadeOutTimer);
-                                    track.audioSource.stop();
-                                }
-                            }
-        
-                            function fadeNoise(track) {
-        
-                                if (track.fadeOut) {
-                                    track.fadeOut = (track.fadeOut >= 0) ? track.fadeOut : 0.5;
-                                } else {
-                                    track.fadeOut = 0.5;
-                                }
-        
-                                if (track.canFade) {
-        
-                                    track.gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + track.fadeOut);
-        
-                                    track.canFade = false;
-        
-                                    fadeOutTimer = setTimeout(() => {
-                                        stopNoise(track);
-                                    }, track.fadeOut * 1000);
-        
-                                } else {
-                                    stopNoise(track);
-                                }
-        
-                            }
-        
-                            function buildTrack(track) {
-                                track.audioSource = audioContext.createBufferSource();
-                                track.gainNode = audioContext.createGain();
-                                track.audioSource.connect(track.gainNode);
-                                //track.gainNode.connect(audioContext.destination);
-                                track.canFade = true; // used to prevent fadeOut firing twice
-                            }
-        
-                            function setGain(track) {
-        
-                                track.volume = (track.volume >= 0) ? track.volume : 0.5;
-        
-                                if (track.fadeIn) {
-                                    track.fadeIn = (track.fadeIn >= 0) ? track.fadeIn : 0.5;
-                                } else {
-                                    track.fadeIn = 0.5;
-                                }
-        
-                                track.gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-        
-                                track.gainNode.gain.linearRampToValueAtTime(track.volume / 4, audioContext.currentTime + track.fadeIn / 2);
-        
-                                track.gainNode.gain.linearRampToValueAtTime(track.volume, audioContext.currentTime + track.fadeIn);
-        
-                            }
-        
-                            function getNoiseTrack(track) {
-        
-                                stopNoise(track);
-                                buildTrack(track);
-                                createNoise(track);
-                                setGain(track);
-                                track.audioSource.loop = true;
-                                let dst = track.gainNode.connect(audioContext.createMediaStreamDestination());
-                                track.audioSource.start();
-                                log('noise mediastreamtrack', dst.stream.getAudioTracks());
-                                return dst.stream.getAudioTracks()[0];
-                            }
-        
-                            function getGainNode(track) {
-        
-                                stopNoise(track);
-                                buildTrack(track);
-                                createNoise(track);
-                                setGain(track);
-                                track.audioSource.loop = true;
-                                track.audioSource.start();
-                                return track.gainNode;
-                            }
-        
-                            // Expose functions:
-                            return {
-                                getNoiseTrack : getNoiseTrack,
-                                getGainNode : getGainNode,
-                                stop : stopNoise,
-                                fade : fadeNoise
-                            }
-        
-                        }());
-        
-                        window.Noise = Noise;*/
-        
                         var AudioSource = function () {
                             this.active = true;
                             this._name = null;
@@ -4163,10 +4098,52 @@
                             this.avatar = participant.avatar ? participant.avatar.image : null;
                             this.track = null;
                             this.mediaStream = null;
+                            this.mediaStreamTrack = null;
                             this.htmlVideoEl = null;
                             this.screenSharing = false;
                             this.sourceType = 'webrtcaudio';
                             this.gainNode = null;
+                            this.average = 0;
+                            this.averageHistory = new Array(500);
+                            this.detectSound = function () {
+                                let soundDetected = false;
+                                let webrtcSourceInstance = this;
+                                if(!webrtcSourceInstance.analyserNode) {
+                                    console.error('webrtcSourceInstance.analyserNode is undefined');
+                                    return;
+                                }
+
+                                webrtcSourceInstance.averageHistory.fill(undefined);
+                                Object.seal(webrtcSourceInstance.averageHistory);
+                                var bufferLength = webrtcSourceInstance.analyserNode.frequencyBinCount;
+                                var domainData = new Uint8Array(bufferLength);
+                                var currentHistoryIndex = 0;
+
+                                function detect() {
+                                    webrtcSourceInstance.analyserNode.getByteFrequencyData(domainData);
+
+                                    let average = getAverage(domainData);
+                                    webrtcSourceInstance.average = average;
+                                    webrtcSourceInstance.averageHistory[currentHistoryIndex] = average;
+                                    currentHistoryIndex = currentHistoryIndex == 500 ? 0 : currentHistoryIndex + 1;
+                                    if(webrtcSourceInstance.mediaStreamTrack.readyState == 'live' && tool.webrtcSignalingLib.state != 'disconnected') {
+                                        window.requestAnimationFrame(detect);
+                                    } 
+                                }
+
+                                window.requestAnimationFrame(detect);
+
+                                function getAverage(freqData) {
+                                    var average = 0;
+                                    for(let i = 0; i < freqData.length; i++) {
+                                        average += freqData[i]
+                                    } 
+                                    average = average / freqData.length;
+                                    return average;
+                                }
+
+                                
+                            }
                             this.eventDispatcher = new EventSystem();
                         }
                         WebRTCAudioSource.prototype = new AudioSource();
@@ -4266,18 +4243,67 @@
         
                             if(newSource.sourceType == 'webrtcaudio') {
                                 let participant = newSource.participant;
+                                log('addSource audio: if1')
+
+                                for (let i =  _activeScene.webrtcAudioSources.length - 1; i >= 0; i--) {
+                                    let source =  _activeScene.webrtcAudioSources[i];
+                                    if (source.participant == participant) {
+                                        if(source.mediaStreamTrack.readyState == 'live') {
+                                            return source;
+                                        } else {
+                                            _activeScene.webrtcAudioSources.splice(i, 1);
+                                        }
+                                    }
+                                }
+
                                 let audioTracks = participant.audioTracks();
+                                log('addSource audio: audioTracks', audioTracks.length)
+
                                 if(audioTracks.length == 0) return;
+
+                                log('addSource audio: if1.1')
                                 var newAudio = new WebRTCAudioSource(participant);
                                 newAudio.track = audioTracks[0];
                                 newAudio.mediaStream = audioTracks[0].stream;//.clone();
                                 newAudio.mediaStreamTrack = newAudio.mediaStream.getAudioTracks()[0];
+                                newAudio.participant = participant;
 
                                 if(!newSource.participant.isLocal) {
-                                    let newStream = audioContext.createMediaStreamSource(newAudio.mediaStream);
-                                    newStream.connect(_dest)
+                                    log('addSource audio: webrtc', audioContext.state, audioContext)
+
+                                    if(this.gainNode == null && this.analyserNode == null) {
+                                        log('addSource audio: webrtc: gainNode, analyserNode');
+                                        newAudio.gainNode = audioContext.createGain();
+                                        newAudio.analyserNode = audioContext.createAnalyser();
+                                        newAudio.analyserNode.minDecibels = -45;
+                                        newAudio.analyserNode.fftSize = 1024;
+                                        newAudio.gainNode.connect(newAudio.analyserNode);
+                                        newAudio.analyserNode.connect(_dest);
+                                    }
+            
+                                    const source = audioContext.createMediaStreamSource(newAudio.mediaStream);
+                                    source.connect(newAudio.gainNode);
+
+                                    newAudio.detectSound();
+                                    let soundCheck = function () {
+                                        var getAverage = function (array) {
+                                            return array.reduce((a, b) => a + b) / array.length
+                                        }
+                                        let history = newAudio.averageHistory;
+                                        log('webrtc audio status: participant', participant.username);
+                                        log('webrtc audio status: average', getAverage(history));
+                                        log('webrtc audio status: trackInfo', newAudio.mediaStreamTrack.muted, newAudio.mediaStreamTrack.enabled);
+            
+                                        if(newAudio.mediaStreamTrack.readyState == 'live' && tool.webrtcSignalingLib.state != 'disconnected') {
+                                            setTimeout(soundCheck, 5000);
+                                        } 
+                                    }
+                                    setTimeout(soundCheck, 5000);
+
+                                    //let newStream = audioContext.createMediaStreamSource(newAudio.mediaStream);
+                                    //newStream.connect(_dest)
                                 }
-                                
+                                _activeScene.webrtcAudioSources.splice(0, 0, newAudio)
                                 return newAudio;
                             }  else if(newSource.sourceType == 'audioInput') {
         
@@ -4437,9 +4463,37 @@
         
                             function declareOrRefreshEventHandlers() {
                                 var webrtcSignalingLib = tool.webrtcSignalingLib;
+
+                                function updateAudioSources(e, eventName) {
+                                    log('audioComposer: updateAudioSources', e, eventName);
+                                    if(!e.participant) return;
+                                    let participantsAudioSourse = addSource({
+                                        sourceType: 'webrtcaudio',
+                                        participant: e.participant
+                                    });
+
+                                    for(let i in _activeScene.sources) {
+                                        if(_activeScene.sources[i].participant == e.participant && !_activeScene.sources[i].screenSharing) {
+                                            _activeScene.sources[i].audioSource = participantsAudioSourse;
+                                            break;
+                                        }
+                                    }
+
+                                }
+
                                 webrtcSignalingLib.event.on('beforeSwitchRoom', function (e) {
                                     tool.updateWebrtcSignalingLibInstance(e.newWebrtcSignalingLibInstance);
                                     declareOrRefreshEventHandlers();
+                                });
+
+                                webrtcSignalingLib.event.on('audioTrackLoaded', updateAudioSources);
+                                webrtcSignalingLib.event.on('audioMuted', updateAudioSources);
+                                webrtcSignalingLib.event.on('audioUnmuted', updateAudioSources);
+
+                                _eventDispatcher.on('drawingStop', function () {
+                                    webrtcSignalingLib.event.off('audioTrackLoaded', updateAudioSources);
+                                    webrtcSignalingLib.event.off('audioMuted', updateAudioSources);
+                                    webrtcSignalingLib.event.off('audioUnmuted', updateAudioSources);
                                 });
 
                                 if(getOptions().liveStreaming && getOptions().liveStreaming.sounds) {
@@ -4599,6 +4653,25 @@
                         mediaRecorder.addEventListener('dataavailable', function (e) {
                             //log('dataavailable', e.data.size);
                             ondataavailable(e.data);
+                        });
+
+                        mediaRecorder.addEventListener('error', function (e) {
+                            log('mediaRecorder: error', e);
+                        });
+                        mediaRecorder.addEventListener('pause', function (e) {
+                            log('mediaRecorder: pause', e);
+                        });
+                        mediaRecorder.addEventListener('resume', function (e) {
+                            log('mediaRecorder: resume', e);
+                        });
+                        mediaRecorder.addEventListener('start', function (e) {
+                            log('mediaRecorder: start', e);
+                        });
+                        mediaRecorder.addEventListener('stop', function (e) {
+                            log('mediaRecorder: stop', e);
+                        });
+                        mediaRecorder.addEventListener('warning', function (e) {
+                            log('mediaRecorder: warning', e);
                         });
 
                         mediaRecorder.start(1000); // Start recording, and dump data every second

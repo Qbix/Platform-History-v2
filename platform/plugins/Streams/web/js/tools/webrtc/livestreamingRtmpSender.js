@@ -143,7 +143,7 @@
         
                             _streamingSocket[service].mediaRecorder = _canvasComposer.createRecorder(function (blob) {
                                 if(_streamingSocket[service] == null) return;
-                                log('dataavailable');
+                                //log('dataavailable');
                                 /*if(!_streamingSocket[service].firstBlobSent && _veryFirstBlobs.length > 9) {
                                     sendVeryFirstBlobs();
                                 }    
@@ -223,14 +223,17 @@
                             }
 
                             _streamingSocket['rec'].mediaRecorder = _canvasComposer.createRecorder(function (blob) {
+                                //log('dataavailable 1')
+
                                 if (_streamingSocket['rec'] == null) return;
+                                //log('dataavailable 2')
 
                                 if(!_streamingSocket['rec'].connected) {
                                     _offlineBlobs.push(blob);
                                     return;
                                 }
+                                //log('dataavailable 3')
 
-                                log('dataavailable', _streamingSocket['rec'].socket.connected)
                                 /*if (!_streamingSocket['rec'].firstBlobSent && _veryFirstBlobs.length > 9) {
                                     sendVeryFirstBlobs();
                                 }
@@ -241,6 +244,9 @@
                                     _streamingSocket['rec'].socket.emit('Streams/webrtc/videoData', blob);
                                 //}
                             });
+
+                            log('startRecordingOnServer connected: mediaRecorder', _streamingSocket['rec'].mediaRecorder);
+
                                     
                             tool.webrtcSignalingLib.event.dispatch('recordingOnSeverStarted', {participant:tool.webrtcSignalingLib.localParticipant()});
                             tool.webrtcSignalingLib.signalingDispatcher.sendDataTrackMessage("recordingOnSeverStarted");
