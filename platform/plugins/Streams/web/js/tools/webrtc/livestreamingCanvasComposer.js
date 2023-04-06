@@ -4057,6 +4057,7 @@
                     var audioComposer = (function(){
                         var audioContext = null;
                         var _dest = null;
+                        var _stopSilenceLoop = null;
         
                         var AudioSource = function () {
                             this.active = true;
@@ -4443,6 +4444,38 @@
                                 source.analyserNode.connect(audioContext.destination);
                             }
                         }
+
+                        function audioSilenceLoop(frequency) {
+
+                            var freq = frequency / 1000;      // AudioContext time parameters are in seconds
+                            // Chrome needs our oscillator node to be attached to the destination
+                            // So we create a silent Gain Node
+                            var silence = audioContext.createGain();
+                            silence.gain.value = 0;
+                            silence.connect(_dest);
+
+                            onOSCend();
+
+                            var stopped = false;       // A flag to know when we'll stop the loop
+                            function onOSCend() {
+                                var osc = audioContext.createOscillator();
+                                osc.onended = onOSCend; // so we can loop
+                                osc.connect(silence);
+                                osc.start(0); // start it now
+                                osc.stop(audioContext.currentTime + freq); // stop it next frame
+                                //callback(audioContext.currentTime); // one frame is done
+                                if (stopped) {  // user broke the loop
+                                    osc.onended = function () {
+                                        audioContext.close(); // clear the audioContext
+                                        return;
+                                    };
+                                }
+                            };
+                            // return a function to stop our loop
+                            return function () {
+                                stopped = true;
+                            };
+                        }
         
                         function mix() {
                             log('audioComposer: mix');
@@ -4454,6 +4487,8 @@
                                 log('audioComposer: createMediaStreamDestination');
                                 _dest = audioContext.createMediaStreamDestination();
                             }
+
+                            _stopSilenceLoop = audioSilenceLoop(1000 / 60);
 
                             /*if(_canvasMediStream) {
                                 log('audioComposer: addTrack');
@@ -4523,6 +4558,8 @@
                         }
         
                         function stop() {
+                            if(_stopSilenceLoop) _stopSilenceLoop();
+                            
                             for (let s in _activeScene.audioSources) {
                                 if(_activeScene.audioSources[s].mediaStreamTrack) {
                                     _activeScene.audioSources[s].mediaStreamTrack.stop();
