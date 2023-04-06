@@ -106,7 +106,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             showScreenSharingInSeparateScreen: true,
             minimizeOnPageSwitching: true,
             leaveOtherActiveRooms: true,
-            onlyOneScreenSharingAllowed: false,
+            onlyOneScreenSharingAllowed: true,
             disconnectBtnInParticipants: false,
             controlsPosition: 'auto',
             margins:null,
@@ -1755,7 +1755,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 var resizeTool = Q.Tool.from(screen.screenEl, "Q/resize");
                 if(resizeTool != null) {
-                    resizeTool.state.keepRatioBasedOnElement = videoEl;
+                    //resizeTool.state.keepRatioBasedOnElement = videoEl;
                 }
             }
 

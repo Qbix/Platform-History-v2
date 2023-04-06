@@ -30,6 +30,7 @@
             snapToSidesOnly: false,
             moveWithinArea: 'parent',
             negativeMoving: false,
+            minimalSize: 100,
             allowOverresizing: false,
             resizeByWheel: true,
             ignoreOnElements: [],
@@ -658,6 +659,13 @@
             
                         return { width: width, height: height };
                     }
+
+                    function sizeIsCorrect(width, height) {
+                        if((width && width < tool.state.minimalSize) || (height && height < tool.state.minimalSize)){
+                            return false;
+                        }
+                        return true;
+                    }
             
                     function startResizing(e) {
                         //if (e.clientX >= docRect.right - (docStyles.paddingRight ? docStyles.paddingRight : '0').replace('px', '')) return;
@@ -701,6 +709,10 @@
                                 let preLeftPos = originalX - (width - originalWidth);
                                 let leftPos = preLeftPos < originalX + originalWidth ? preLeftPos : originalX + originalWidth;
             
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
+
                                 _elementToResize.style.width = width + 'px'
                                 _elementToResize.style.left = leftPos + 'px'
             
@@ -740,6 +752,10 @@
                                 let newSize = keepRatio(width, height, resizeBasedOn);
                                 width = newSize.width;
                                 height = newSize.height;
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.width = width + 'px'
             
@@ -776,6 +792,9 @@
                                 let newSize = keepRatio(width, height, resizeBasedOn);
                                 width = newSize.width;
                                 height = newSize.height;
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.width = width + 'px';
                                 _elementToResize.style.height = height + 'px';
@@ -799,6 +818,10 @@
                                 let newSize = _handlePosition == 'middleright' ? keepRatio(width, height, 'width') : keepRatio(width, height, 'height');
                                 width = newSize.width;
                                 height = newSize.height;
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.width = width + 'px';
                                 _elementToResize.style.height = height + 'px';
@@ -827,6 +850,10 @@
             
                                 let preLeftPos = originalX - (width - originalWidth);
                                 let leftPos = preLeftPos < originalX + originalWidth ? preLeftPos : originalX + originalWidth;
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.width = width + 'px'
                                 _elementToResize.style.left = leftPos + 'px'
@@ -869,6 +896,10 @@
                                 let newSize = keepRatio(width, height, resizeBasedOn);
                                 width = newSize.width;
                                 height = newSize.height;
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.height = height + 'px';
                                 let preLeftPos = originalX - (width - originalWidth);
@@ -898,6 +929,10 @@
                                 let newSize = keepRatio(width, height);
                                 width = newSize.width;
                                 height = newSize.height;
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.height = height + 'px';
                                 let preLeftPos = originalX - (width - originalWidth);
@@ -975,6 +1010,11 @@
                                     tool.state.leftCrop = 0;
                                     return
                                 }
+
+                                if(!sizeIsCorrect(width, null)){
+                                    return;
+                                }
+
                                 _elementToResize.style.width = width + 'px'
                                 _elementToResize.style.left = leftPos + 'px'
             
@@ -1004,6 +1044,10 @@
             
                                 let preTopPos = originalY - (height - originalHeight);
                                 let topPos = preTopPos < originalY + originalHeight ? preTopPos : originalY + originalHeight;
+
+                                if(!sizeIsCorrect(null, height)){
+                                    return;
+                                }
             
                                 _elementToResize.style.height = height + 'px'
                                 _elementToResize.style.top = topPos + 'px'
@@ -1028,6 +1072,10 @@
             
                                 if (containerRect.right - elementRect.right < 10 && containerRect.right - e.clientX < 10 && containerRect.right - e.clientX > -10) {
                                     height = elementRect.height + (containerRect.right - elementRect.right)
+                                }
+
+                                if(!sizeIsCorrect(null, height)){
+                                    return;
                                 }
             
                                 _elementToResize.style.height = height + 'px';
@@ -1054,6 +1102,10 @@
                                 if (containerRect.right - elementRect.right < 10 && containerRect.right - e.clientX < 10 && containerRect.right - e.clientX > -10) {
                                     width = elementRect.width + (containerRect.right - elementRect.right);
                                     height = elementRect.height + (containerRect.right - elementRect.right)
+                                }
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
                                 }
             
                                 _elementToResize.style.width = width + 'px';
@@ -1086,6 +1138,10 @@
                                 if (containerRect.right - elementRect.right < 10 && containerRect.right - e.clientX < 10 && containerRect.right - e.clientX > -10) {
                                     width = elementRect.width + (containerRect.right - elementRect.right);
                                     height = elementRect.height + (containerRect.right - elementRect.right)
+                                }
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
                                 }
             
                                 _elementToResize.style.width = width + 'px'
@@ -1131,6 +1187,10 @@
                                 let preLeftPos = originalX - (width - originalWidth);
                                 let leftPos = preLeftPos < originalX + originalWidth ? preLeftPos : originalX + originalWidth;
             
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
+                                }
+
                                 _elementToResize.style.width = width + 'px'
                                 _elementToResize.style.left = leftPos + 'px'
             
@@ -1168,6 +1228,10 @@
                                 if (snapToLeft) {
                                     width = elementRect.width + (elementRect.x - containerRect.x);
                                     height = elementRect.height + (elementRect.x - containerRect.x);
+                                }
+
+                                if(!sizeIsCorrect(width, height)){
+                                    return;
                                 }
             
                                 _elementToResize.style.height = height + 'px';
@@ -1332,6 +1396,10 @@
                             _elementToResize.style.left = leftPos + 'px';
                             _elementToResize.style.top = topPos + 'px';
                         }
+
+                        if(!sizeIsCorrect(width, height)){
+                            return;
+                        }
             
                         _elementToResize.style.width = elementWidth + 'px';
                         _elementToResize.style.height = elementHeight + 'px';
@@ -1426,6 +1494,13 @@
                             } else {
                                 elementHeight = elementWidth / ratio;
                             }
+                        }
+
+                        if(!sizeIsCorrect(elementWidth, elementHeight)){
+                            _elementToResize.style.width = oldWidth + 'px';
+                            _elementToResize.style.height = oldHeight + 'px';
+                            _elementToResize.style.transform = '';
+                            return;
                         }
 
                         _elementToResize.style.width = elementWidth + 'px';
