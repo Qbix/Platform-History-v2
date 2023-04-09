@@ -40,6 +40,11 @@
     if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
     if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
+    function log(){}
+    if(Q.Streams.WebRTCdebugger) {
+        log = Q.Streams.WebRTCdebugger.createLogMethod('video.js')
+    }
+
     /**
      * Streams/webrtc/control tool.
      * Users can chat with each other via WebRTC using Twilio or raw streams
@@ -395,7 +400,7 @@
             },
             loadCamerasList: function () {
                 var tool = this;
-                tool.log('contros: loadCamerasList')
+                log('contros: loadCamerasList')
                 if (tool.webrtcUserInterface.getOptions().audioOnlyMode) return;
                 //location.reload();
                 var count = 1;
@@ -437,7 +442,7 @@
                                     for (i = 0; screen = localScreens[i]; i++) {
                                         tool.webrtcUserInterface.screenRendering.updateLocalScreenClasses(screen);
                                     }
-                                    tool.log('controls: tool.toggleRadioButton', cameraItem)
+                                    log('controls: tool.toggleRadioButton', cameraItem)
                                     tool.toggleRadioButton(cameraItem);
 
                                     tool.state.controlsTool.updateControlBar();
@@ -478,20 +483,20 @@
             },
             updateCamerasList: function (e) {
                 var tool = this;
-                tool.log('controls: updateCamerasList');
+                log('controls: updateCamerasList');
                 let cameraIsActive = false;
                 tool.cameraListButtons.forEach(function (cameraItem) {
                     let currentCameraDevice = tool.webrtcSignalingLib.localMediaControls.currentCameraDevice();
-                    tool.log('controls: updateCamerasList: currentCameraDevice', currentCameraDevice);
+                    log('controls: updateCamerasList: currentCameraDevice', currentCameraDevice);
                     if (currentCameraDevice != null && currentCameraDevice.deviceId == cameraItem.deviceId) {
-                        tool.log('controls: updateCamerasList: tool.toggleRadioButton (active)', cameraItem);
+                        log('controls: updateCamerasList: tool.toggleRadioButton (active)', cameraItem);
                         tool.toggleRadioButton(cameraItem);
                         cameraIsActive = true
                     }
 
                 });
                 if (!cameraIsActive) {
-                    tool.log('controls: updateCamerasList: make active tool.turnOffCameraBtn');
+                    log('controls: updateCamerasList: make active tool.turnOffCameraBtn');
                     tool.toggleRadioButton(tool.turnOffCameraBtn);
                 }
 
@@ -518,7 +523,7 @@
                     }
                 }
 
-                tool.log('controls: tool.toggleRadioButton', buttonObj);
+                log('controls: tool.toggleRadioButton', buttonObj);
                
                 if (buttonObj.type == 'camera') {
                     deselectCameraButtons();
@@ -607,25 +612,6 @@
             },
             refresh: function () {
                 var tool = this;
-            },
-            log: function log(text) {
-                var tool = this;
-                //if (!tool.state.debug.controls) return;
-                var args = Array.prototype.slice.call(arguments);
-                var params = [];
-
-                if (window.performance) {
-                    var now = (window.performance.now() / 1000).toFixed(3);
-                    params.push(now + ": " + args.splice(0, 1));
-                    params = params.concat(args);
-                    console.log.apply(console, params);
-                } else {
-                    params.push(text);
-                    params = params.concat(args);
-                    console.log.apply(console, params);
-                }
-
-                if (tool.webrtcSignalingLib) tool.webrtcSignalingLib.event.dispatch('log', params);
             }
         }
 

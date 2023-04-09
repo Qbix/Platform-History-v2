@@ -103,9 +103,9 @@ function Streams_callCenter_post($params = array())
             Q_Utils::sendToNode(array(
                 "Q/method" => "Users/checkIfOnline",
                 "socketId" => $socketId,
+                "userId" => $publisherId,
                 "operatorSocketId" => $operatorSocketId,
                 "operatorUserId" => $loggedInUserId,
-                "userId" => $loggedInUserId,
                 "handlerToExecute" => 'Streams/callCenter',
                 "data" => [
                     "cmd" => 'closeIfOffline',
@@ -258,6 +258,11 @@ function Streams_callCenter_post($params = array())
             throw new Exception('Another manager already changed status of this call');
         }
 
+        $waitingRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/interview',
+            'instructions' => ['msg' => 'Operator started interview with you']
+        ));
+
         $waitingRoomStream->setAttribute('status', 'interview');
         $waitingRoomStream->changed();
         $waitingRoomStream->save();
@@ -277,7 +282,7 @@ function Streams_callCenter_post($params = array())
         $isApproved = $isApproved == 'true' ? true : false;
 
         //var_dump($isApproved);die;
-        if(!$waitingRoom || !$liveShowRoom || $isApproved === null) {
+        if(!$waitingRoom || !$liveShowRoom) {
             throw new Exception('$waitingRoom, $liveShowRoom and $action are required');
         }
 
@@ -301,6 +306,45 @@ function Streams_callCenter_post($params = array())
             ]
         ));
         Q_Response::setSlot("markApprovedHandler", 'done');
+    } else if (Q_Request::slotName('holdHandler')) {
+        $waitingRoom = Q::ifset($params, 'waitingRoom', null);
+        $liveShowRoom = Q::ifset($params, 'liveShowRoom', null);
+        $onHold = Q::ifset($params, 'onHold', null);
+        $onHold = $onHold == 'true' ? true : false;
+
+        if(!$waitingRoom || !$liveShowRoom) {
+            throw new Exception('$waitingRoom, $liveShowRoom and $action are required');
+        }
+
+        $waitingRoomStream = Streams::fetchOne($loggedInUserId, $waitingRoom['publisherId'], $waitingRoom['streamName']);
+        $liveShowRoomStream = Streams::fetchOne($loggedInUserId, $liveShowRoom['publisherId'], $liveShowRoom['streamName']);
+
+        if(!$waitingRoomStream || !$liveShowRoomStream) {
+            throw new Exception('Streams not found');
+        }
+
+        $waitingRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/hold',
+            'instructions' => [
+                'msg' => 'Your call was put on hold...',
+                'userId' => $waitingRoom['publisherId']
+            ]
+        ));
+
+        $waitingRoomStream->setAttribute('onHold', $onHold);
+        $waitingRoomStream->setAttribute('status', 'created');
+        $waitingRoomStream->changed();
+        $waitingRoomStream->save();
+
+        $liveShowRoomStream->post($publisherId, array(
+            'type' => 'Streams/webrtc/hold',
+            'instructions' => [
+                'waitingRoom' => $waitingRoom,
+                'byUserId' => $loggedInUserId,
+                'onHold' => $onHold
+            ]
+        ));
+        Q_Response::setSlot("holdHandler", 'done');
     } else {
         if (!$socketId) {
             throw new Exception('To continue you should be connected to the socket server.');
