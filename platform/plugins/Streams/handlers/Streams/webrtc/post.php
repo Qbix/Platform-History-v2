@@ -46,7 +46,6 @@ function Streams_webrtc_post($params = array())
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
     $writeLevel = Q::ifset($params, 'writeLevel', 23);
     $closeManually = Q::ifset($params, 'closeManually', null);
-    $useRelatedTo = Q::ifset($params, 'useRelatedTo', null);
 
     if(Q_Request::slotName('recording')) {
         $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
@@ -107,9 +106,9 @@ function Streams_webrtc_post($params = array())
     );
 
     $webrtcStream = null;
-    if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {
+    if(!empty($relate) && !empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
 
-        $webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], $useRelatedTo["relationType"], $resumeClosed);
+        $webrtcStream = $webrtc->getRoomStreamRelatedTo($relate["publisherId"], $relate["streamName"], $relate["relationType"], $resumeClosed);
 
         if(is_null($webrtcStream)) {
             $webrtcStream = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);

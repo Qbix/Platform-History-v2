@@ -185,7 +185,7 @@
 						title: (Q.getObject(['fields', 'title'], interestStream) || '').replace('Websites:',''),
 						icon: iconSmall,
 					},
-					src: webpageStream.iconUrl('50'),
+					src: iconBig,
 					url: state.url,
 					text: tool.text.webpage
 				}, function (err, html) {

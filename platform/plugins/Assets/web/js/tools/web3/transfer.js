@@ -134,7 +134,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
                     if (Q.isEmpty(state.tokenInfo)) {
-                        state.tokenInfo = Q.Tool.from($(".Assets_web3_balance", tool.element), "Assets/web/balance").getValue();
+                        state.tokenInfo = Q.Tool.from($(".Assets_web3_balance_tool", tool.element)[0], "Assets/web3/balance").getValue();
                     }
                     var amount = parseFloat($amount.val());
                     if (!amount || amount > state.tokenInfo.tokenAmount) {
