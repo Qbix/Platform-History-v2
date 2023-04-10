@@ -40,6 +40,11 @@
     if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
     if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
+    function log(){}
+    if(Q.Streams.WebRTCdebugger) {
+        log = Q.Streams.WebRTCdebugger.createLogMethod('audio.js')
+    }
+
     /**
      * Streams/webrtc/control tool.
      * Users can chat with each other via WebRTC using Twilio or raw streams
@@ -192,10 +197,10 @@
                 var count = 1;
 
                 tool.clearAudioInputList();
-                tool.log('controls: audio current device', tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice());
+                log('controls: audio current device', tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice());
 
                 tool.webrtcSignalingLib.localMediaControls.audioInputDevices().forEach(function (mediaDevice) {
-                    tool.log('controls: loadAudioInputList', mediaDevice);
+                    log('controls: loadAudioInputList', mediaDevice);
                     var radioBtnItem = document.createElement('DIV');
                     radioBtnItem.className = 'webrtc-audio-settings_popup_item';
                     radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
@@ -281,9 +286,9 @@
             },
             updateAudioInputList: function () {
                 var tool = this;
-                tool.log('controls: updateAudioInputList START', tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice());
+                log('controls: updateAudioInputList START', tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice());
                 let audioInputIsActive = false;
-                tool.log('controls: updateAudioInputList: current ai device', tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice());
+                log('controls: updateAudioInputList: current ai device', tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice());
 
                 tool.audioInputListButtons.forEach(function (audioInputItem) {
                     if (tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice() != null && tool.webrtcSignalingLib.localMediaControls.currentAudioInputDevice().deviceId == audioInputItem.deviceId) {
@@ -293,7 +298,7 @@
 
                 });
                 if (!audioInputIsActive) {
-                    tool.log('controls: updateAudioInputList: tool.turnOffAudioInputBtn');
+                    log('controls: updateAudioInputList: tool.turnOffAudioInputBtn');
                     tool.toggleAudioInputRadioButton(tool.turnOffAudioInputBtn);
                 }
 
@@ -353,7 +358,7 @@
             },
             loadAudioOutputList: function () {
                 var tool = this;
-                tool.log('controls: loadAudioOutputList');
+                log('controls: loadAudioOutputList');
                 tool.audioOutputListEl.innerHTML = '';
                 if (!tool.checkIfSetSinkIdIsSupported()) {
                     var alertNoticeCon = document.createElement('DIV');
@@ -368,7 +373,7 @@
                 tool.clearAudioOutputList();
 
                 tool.webrtcSignalingLib.localMediaControls.audioOutputDevices().forEach(function (mediaDevice) {
-                    tool.log('controls: loadAudioOutputList', mediaDevice);
+                    log('controls: loadAudioOutputList', mediaDevice);
                     var radioBtnItem = document.createElement('DIV');
                     radioBtnItem.className = 'webrtc-audio-settings_popup_item';
                     radioBtnItem.dataset.deviceId = mediaDevice.deviceId;

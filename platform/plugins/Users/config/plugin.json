@@ -392,6 +392,15 @@
 					}
 				}
 			}
+		},
+		"people": {
+			"import": false,
+			"userIds": {
+				"customIconsFirst": true,
+				"includeFutureUsers": false,
+				"limit": 100
+			},
+			"randomAngles": false
 		}
 	}
 }

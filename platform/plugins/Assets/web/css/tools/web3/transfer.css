@@ -36,6 +36,16 @@
 .Assets_web3_transfer_tool .Assets_transfer_usersList {
     height: 250px;
 }
+.Assets_web3_transfer_tool .Assets_transfer_usersList:empty {
+    display: none;
+}
 .Assets_web3_transfer_tool .Assets_transfer_usersList .Users_avatar_tool {
     margin: 10px;
+}
+.Assets_web3_transfer_tool .Assets_web3_balance_tool,
+.Assets_web3_transfer_tool .Assets_transfer_userSelected {
+    margin-bottom: 10px;
+}
+.Assets_web3_transfer_tool .Assets_transfer_userSelected:empty {
+    display: none;
 }

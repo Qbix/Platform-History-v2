@@ -157,5 +157,8 @@
         "addToPhonebook": "Add To My Phone Contacts",
         "addLabel": "New Relationship",
         "prompt": "Give it a name"
+    },
+    "people": {
+        "People": "People"
     }
 }

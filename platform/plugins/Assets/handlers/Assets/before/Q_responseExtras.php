@@ -24,6 +24,7 @@ function Assets_before_Q_responseExtras() {
 
 	Q_Response::setScriptData('Q.plugins.Assets.service.relatedParticipants', Q_Config::get('Assets', 'service', 'relatedParticipants', null));
 	Q_Response::setScriptData('Q.plugins.Assets.credits.bonus', Q_Config::get('Assets', 'credits', 'bonus', null));
+	Q_Response::setScriptData('Q.plugins.Assets.credits.spend.chat.private', Q_Config::get('Assets', 'credits', 'spend', 'chat', 'private', null));
 
 	if (!empty($_GET['browsertab']) && $_GET['browsertab'] == 'yes') {
 		Q::event('Assets/browsertab/response/content');

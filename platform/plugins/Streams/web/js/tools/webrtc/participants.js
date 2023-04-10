@@ -19,6 +19,11 @@
     if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
     if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
+    function log(){}
+    if(Q.Streams.WebRTCdebugger) {
+        log = Q.Streams.WebRTCdebugger.createLogMethod('participants.js')
+    }
+
     /**
      * Streams/webrtc/control tool.
      * Users can chat with each other via WebRTC using Twilio or raw streams
@@ -64,7 +69,7 @@
                 });
 
                 webrtcSignalingLib.event.on('participantConnected', function (participant) {
-                    tool.log('controls: participantConnected');
+                    log('controls: participantConnected');
 
                     setRealName(participant, function (name) {
                         tool.addItem(participant);
@@ -411,7 +416,7 @@
                     };
                     this.showMediaRequestIcon = function (type, waitingTime) {
                         var participantListItem = this;
-                        tool.log('controls: showMediaRequestIcon');
+                        log('controls: showMediaRequestIcon');
                         if (type == 'camera') {
                             let cameraRequestCon = document.createElement('DIV');
                             cameraRequestCon.className = 'Streams_webrtc_camera_request_con';
@@ -488,7 +493,7 @@
 
                     };
                     this.hideMediaRequestIcon = function (type) {
-                        tool.log('controls: hideMediaRequestIcon', type);
+                        log('controls: hideMediaRequestIcon', type);
                         let camIcon = this.mediaRequestStatusEl.querySelector('.Streams_webrtc_camera_request_con');
                         let micIcon = this.mediaRequestStatusEl.querySelector('.Streams_webrtc_mic_request_con');
                         if (type == 'camera') {
@@ -504,7 +509,7 @@
                         }
                     };
                 }
-                tool.log('controls: addItem');
+                log('controls: addItem');
                 var isLocal = roomParticipant.isLocal;
                 var participantItem = document.createElement('LI');
                 var tracksControlBtns = document.createElement('DIV');
@@ -567,12 +572,12 @@
                 var audioVisualization = document.createElement('DIV')
                 audioVisualization.className = 'Streams_webrtc_popup-visualization';
 
-                tool.webrtcSignalingLib.mediaManager.audioVisualization.build({
+                /*tool.webrtcSignalingLib.mediaManager.audioVisualization.build({
                     name: 'participantsPopup',
                     participant: roomParticipant,
                     element: audioVisualization,
                     updateSizeOnlyOnce: true
-                });
+                });*/
 
                 participantItem.appendChild(tracksControlBtns);
                 muteVideo.appendChild(muteCameraBtn);
@@ -744,7 +749,7 @@
             },
             hideLiveIndicator: function (participant, platform) {
                 var tool = this;
-                tool.log('controls: hideLiveIndicator');
+                log('controls: hideLiveIndicator');
 
                 for (let i in tool.participantsList) {
                     let item = tool.participantsList[i];
@@ -757,7 +762,7 @@
             showMediaRequestIndicator: function (e, type) {
                 var tool = this;
                 let participant = e.participant;
-                tool.log('controls: showMediaRequestIndicator', participant);
+                log('controls: showMediaRequestIndicator', participant);
                 for (let i in tool.participantsList) {
                     let item = tool.participantsList[i];
                     if (participant != item.participant) continue;
@@ -768,7 +773,7 @@
             hideMediaRequestIndicator: function (e, type) {
                 var tool = this;
                 let participant = e.participant;
-                tool.log('controls: hideMediaRequestIndicator', participant);
+                log('controls: hideMediaRequestIndicator', participant);
                 for (let i in tool.participantsList) {
                     let item = tool.participantsList[i];
                     if (participant != item.participant) continue;

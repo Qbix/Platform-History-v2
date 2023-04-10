@@ -479,6 +479,10 @@ class Assets_Credits extends Base_Assets_Credits
 		unset($more['toPublisherId']);
 		unset($more['toStreamName']);
 
+		if ($toUserId) {
+			$more['toUserName'] = Streams::displayName($toUserId);
+		}
+
 		if ($toPublisherId && $toStreamName) {
 			$more['toStreamTitle'] = Streams_Stream::fetch($toPublisherId, $toPublisherId, $toStreamName)->title;
 			$more['toUserName'] = Streams::displayName($toPublisherId);

@@ -86,10 +86,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {Array} [_options.hosts] List of ids of room's hosts
          * @param {String} [_options.defaultDesktopViewMode] Default view mode (layout) for rendering participants' screens on desktop (regular | audio | maximized | minimized | tiled | manual | fullScreen | screenSharing)
          * @param {String} [_options.defaultMobileViewMode] Default view mode (layout) for rendering participants' screens on mobile (tiledMobile | sideBySideMobile | maximizedMobile | minimizedMobile | audio | squaresGrid)
-         * @param {Object} [_options.useRelatedTo] Use already related (to already existing stream) stream as main roomStream
-         * @param {String} [_options.useRelatedTo.publisherId] publisherId of a stream to which potential roomStream is related
-         * @param {String} [_options.useRelatedTo.streamName] streamName of a stream to which potential roomStream is related
-         * @param {Object} [_options.relate] Relate roomStream to another stream when roomStream is created.
+         * @param {Object} [_options.relate] Relate roomStream to another stream when roomStream is created. Use already related (to already existing stream) stream as main roomStream
          * @param {String} [_options.relate.publisherId] publisherId of a stream to which roomStream will be related.
          * @param {String} [_options.relate.streamName] streamName of a stream to which roomStream will be related.
          */
@@ -106,7 +103,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             showScreenSharingInSeparateScreen: true,
             minimizeOnPageSwitching: true,
             leaveOtherActiveRooms: true,
-            onlyOneScreenSharingAllowed: false,
+            onlyOneScreenSharingAllowed: true,
             disconnectBtnInParticipants: false,
             controlsPosition: 'auto',
             margins:null,
@@ -117,7 +114,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             },
             liveStreaming: {
                 startFbLiveViaGoLiveDialog: false,
-                useRecordRTCLibrary: true,
                 /*timeSlice: 6000,*/
                 sounds:true,
                 audioLayoutBgColor: '#000',
@@ -138,10 +134,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             defaultDesktopViewMode:null,
             defaultMobileViewMode:null,
             writeLevel:23,
-            useRelatedTo: {
-                publisherId: null,
-                streamName: null
-            },
             relate: {}
         };
 
@@ -473,7 +465,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     logResultArr.push(logArray[k]);
                                 }
                             }
-                            //console.log('logArray', logArray.join(', '))
 
                             logContent.innerText = logResultArr.join(', ');
                         } else {
@@ -481,7 +472,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         }
 
-                        //console.log('log.log',log.type, log.log);
                         logItem.appendChild(logItemType);
                         logItem.appendChild(logContent);
                         _debugOutput.appendChild(logItem);
@@ -534,7 +524,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         roomId = _options.roomId;
                     }
 
-                    if(_options.roomId == null && _options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) return;
+                    if(_options.roomId == null && _options.roomPublisherId == null && _options.relate && _options.relate.publisherId == null && _options.relate.streamName == null) return;
                     Q.req("Streams/webrtc", ["log"], function (err, response) {
                         var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -600,7 +590,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
 
-            function logInfo(args, isWebRTCLog) {
+            function logInfo(args, fileName) {
                 try {
                     var i, argument;
                     var consoleArr = [];
@@ -619,14 +609,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                     var logObj = {
-                        'type': isWebRTCLog == null ? "WebRTC.js" : "app.js",
+                        'type': fileName,
                         'log':consoleArr
                     };
                     _infoLog.push(logObj);
 
                 } catch (e) {
                     var logObj = {
-                        'type': isWebRTCLog == null ? "WebRTC.js" : "app.js",
+                        'type': fileName,
                         'log':args
                     };
                     _infoLog.push(logObj);
@@ -665,15 +655,42 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 });
             }
 
+            function createLogMethod(fileName) {
+                return function () {
+                    if(_debug === false) return;
+                    var args = arguments
+                    setTimeout(function () {
+                        args = Array.prototype.slice.call(args);
+                        var params = [];
+            
+                        if (window.performance) {
+                            var now = (window.performance.now() / 1000).toFixed(3);
+                            params.push(now + ": " + fileName + ': ' + args.splice(0, 1));
+                            params = params.concat(args);
+                            console.log.apply(console, params);
+                        } else {
+                            params = params.concat(args);
+                            console.log.apply(console, params);
+                        }
+                        logInfo(params, fileName);
+                    }, 0);
+                }
+            }
+
             return {
                 logInfo: logInfo,
                 logError: logError,
                 getInfoLog: getInfoLog,
                 sendReportToServer: sendReportToServer,
+                createLogMethod: createLogMethod,
                 debugWidget: function() {return debugWidget;},
                 isiOSwebView: function() {return _isiOSWebView;}
             }
         }());
+
+        Q.Streams.WebRTCdebugger = appDebug;
+
+        log = appDebug.createLogMethod('WebRTC.js')
 
         /**
          * Show snipped with particular message
@@ -829,11 +846,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             layoutEvents.on('layoutRendered', function (e) {
 
                 if(e.viewMode == 'audio') {
-                    webrtcSignalingLib.mediaManager.audioVisualization.buildCommonVisualization({
+                    /*.mediaManager.audioVisualization.buildCommonVisualization({
                         name: 'common',
                         type: 'bars',
                         element: _roomsMedia
-                    });
+                    });*/
 
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     lockScreenResizingAndDragging();
@@ -903,9 +920,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         let track = this.tracks[t];
                         if(kind && kind != this.tracks[t].kind) continue;
                         let live = shouldBeLive ? track.mediaStreamTrack.readyState != 'ended' : true;
+                        let streamIsActive = track.stream ? track.stream.active == true : false;
                         let unmuted = shouldBeUnmuted ? track.mediaStreamTrack.muted == false : true;
                         let enabled = shouldBeEnabled ? track.mediaStreamTrack.enabled == true : true;
-                        if(live && unmuted && enabled) {
+                        if(live && streamIsActive/* && unmuted && enabled*/) {
                             hasLiveTracks = true;
                             break;
                         }
@@ -932,7 +950,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     this.show();
                     this.activeScreenType = 'audio';
                     this.removeAudioVisualization('video');
-                    this.showAudioVisualization('audio');
+                    //this.showAudioVisualization('audio');
                     //this.screenEl.innerHTML = '';
                     if(this.videoScreen.screenEl && this.videoScreen.screenEl.parentNode != null) {
                         this.videoScreen.screenEl.parentNode.removeChild(this.videoScreen.screenEl);
@@ -957,7 +975,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                     //}
                     this.removeAudioVisualization('audio');
-                    this.showAudioVisualization('video');
+                    //this.showAudioVisualization('video');
 
                     //this.screenEl.innerHTML = '';
                     if(this.audioScreen.screenEl && this.audioScreen.screenEl.parentNode != null) {
@@ -979,14 +997,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 }
                 this.fillVideoScreenWithAvatarOrVideo = function () {
-                    console.log('fillVideoScreenWithAvatarOrVideo');
+                    log('fillVideoScreenWithAvatarOrVideo');
                     if(this.videoTrackEl && this.hasLiveTracks('video', true)) {
-                        console.log('fillVideoScreenWithAvatarOrVideo if1');
+                        log('fillVideoScreenWithAvatarOrVideo if1');
 
                         this.videoScreen.videoCon.innerHTML = '';
                         this.videoScreen.videoCon.appendChild(this.videoTrackEl);
                     } else if (this.audioScreen.avatarImg != null){
-                        console.log('fillVideoScreenWithAvatarOrVideo if2');
+                        log('fillVideoScreenWithAvatarOrVideo if2');
                         this.videoScreen.videoCon.innerHTML = '';
                         let avatarContainer = document.createElement('DIV');
                         avatarContainer.className = 'Streams_webrtc_chat-participant-inavatar';
@@ -1077,9 +1095,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     webrtcSignalingLib.event.dispatch('screenShown', screen);
 
                     if(screen.activeScreenType == 'video') {
-                        this.showAudioVisualization('video');
+                        //this.showAudioVisualization('video');
                     } else {
-                        this.showAudioVisualization('audio');
+                        //this.showAudioVisualization('audio');
                     }
 
                 }
@@ -1258,7 +1276,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('createRoomScreen', participant, participant.isLocal);
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -1623,7 +1641,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     log('videoTrackIsAdding: regular video', participant.isLocal);
 
                     for(var s in participant.screens) {
-                        console.log('videoTrackIsAdding for', participant.screens[s].hasLiveTracks('video'))
+                        log('videoTrackIsAdding for', participant.screens[s].hasLiveTracks('video'))
                         if(!participant.screens[s].screensharing && !participant.screens[s].hasLiveTracks('video')) {
                             screenToAttach = participant.screens[s];
                             break;
@@ -1730,7 +1748,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 var resizeTool = Q.Tool.from(screen.screenEl, "Q/resize");
                 if(resizeTool != null) {
-                    resizeTool.state.keepRatioBasedOnElement = videoEl;
+                    //resizeTool.state.keepRatioBasedOnElement = videoEl;
                 }
             }
 
@@ -2045,7 +2063,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     return obj.screenEl.contains(e.target) || obj.screenEl == e.target;
                 })[0];
 
-                console.log('tappedScreen', tappedScreen);
+                log('tappedScreen', tappedScreen);
                 if(tappedScreen == null) return;
                 var resizeTool = Q.Tool.from(tappedScreen.screenEl, "Q/resize");
                 //var videoResizeTool = Q.Tool.from(tappedScreen.videoScreen.videoCon, "Q/resize");
@@ -4658,7 +4676,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     if(maxRightY) rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
 
                                     /*if(minY < elementToWrap.top - containerRect.top) {
-                                        console.log('addAndUpdate createNewRows craeteRowsOnControlsSides if 123');
+                                        log('addAndUpdate createNewRows craeteRowsOnControlsSides if 123');
 
                                         numOfRowsAlongWrapEl = 0;
                                         rectsToTheTopOnLeft = 0;
@@ -5520,7 +5538,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('addScreenToCommonList');
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -5538,7 +5556,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('removeScreenFromCommonList')
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -5557,7 +5575,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 updateLayout();
             }
 
-            function onVideoMute(track, participant) {
+            function onVideoMute(track, participant, counter) {
                 log('onVideoMute: START', track);
 
                 if(track.parentScreen == null || track.kind != 'video') return;
@@ -5568,27 +5586,38 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 } 
 
                 log('onVideoMute: screens.length',  participant.screens.length);
+                let actionDone = false;
+                if(participant.screens.length == 1 && !track.parentScreen.hasLiveTracks('video')) {
+                    log('onVideoMute: 1', track.stream.active, track.parentScreen.hasLiveTracks('video'), track.parentScreen.tracks);
 
-                if(participant.screens.length == 1) {
-                    log('onVideoMute: 1');
-
-                    if(!track.parentScreen.hasLiveTracks('video')) {
-                        log('onVideoMute: 1.2');
-                        track.parentScreen.fillVideoScreenWithAvatarOrVideo();
-                        if(track.parentScreen.screensharing) {
-                            log('onVideoMute: 1.3');
-                            track.parentScreen.screensharing = false;
-                        }
+                    track.parentScreen.fillVideoScreenWithAvatarOrVideo();
+                    if (track.parentScreen.screensharing) {
+                        log('onVideoMute: 1.3');
+                        track.parentScreen.screensharing = false;
                     }
-                } else if(!track.parentScreen.hasLiveTracks('video')) {
+                    actionDone = true;
+                } else if(participant.screens.length > 1 && !track.parentScreen.hasLiveTracks('video')) {
                     log('onVideoMute: 2');
                     removeScreenFromCommonList(track.parentScreen, true);
                     if(track.parentScreen.screensharing) {
                         log('onVideoMute: 2.1');
                         track.parentScreen.screensharing = false;
                     }
+                    actionDone = true;
                 }
 
+                //for now Chrome (maybe other) do not change MediaStream's status to inactive right after track was stopped by remote side
+                //so we need to check whether track is active after some time
+                if(counter == null) {
+                    counter = 0;
+                }
+                if(!actionDone && counter <= 5) {
+                    log('onVideoMute: timer');
+
+                    setTimeout(function(){
+                        onVideoMute(track, participant, counter + 1)                    
+                    }, 1000);
+                }
                 
             }
 
@@ -5917,7 +5946,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('user disconnected',  participant);
                 try {
                     var err = (new Error);
-                    console.log(err.stack);
+                    log(err.stack);
                 } catch (e) {
 
                 }
@@ -6965,7 +6994,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
                     turnCredentials: turnCredentials,
                     debug: _debug,
-                    useCordovaPlugins: _options.useCordovaPlugins
+                    useCordovaPlugins: _options.useCordovaPlugins,
+                    logger: appDebug.createLogMethod('app.js')
                 });
 
                 bindConferenceEvents(webrtcSignalingLib);
@@ -7422,16 +7452,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             closeManually: _options.closeManually,
                             onlyParticipantsAllowed: _options.onlyParticipantsAllowed,
                             writeLevel: _options.writeLevel,
-                            relate: _options.relate,
-                            useRelatedTo: _options.useRelatedTo
+                            relate: _options.relate
                         }
                     });
                 }
 
 
 
-                if(_options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) {
-                    console.error('Property is missing: publisherId || streamName || publisherId || roomPublisherId || useRelatedTo', _options.roomId == null, _options.roomPublisherId == null, _options.useRelatedTo, _options.useRelatedTo.publisherId == null, _options.useRelatedTo.streamName == null);
+                if(_options.roomPublisherId == null && _options.relate && _options.relate.publisherId == null && _options.relate.streamName == null) {
+                    console.error('Property is missing: publisherId || streamName || publisherId || roomPublisherId || relate', _options.roomId == null, _options.roomPublisherId == null, _options.relate, _options.relate.publisherId == null, _options.relate.streamName == null);
                     return;
                 }
 
@@ -7987,11 +8016,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             closeManually: options.closeManually,
             description: options.description,
             onlyParticipantsAllowed: options.onlyParticipantsAllowed,
-            /*useRelatedTo: {
-                publisherId: options.publisherId,
-                streamName: options.streamName,
-                relationType: 'Streams/webrtc'
-            },*/
             relate: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,
