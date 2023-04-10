@@ -55,7 +55,7 @@ function Streams_after_Q_objects () {
 
 	$invitedToProfile = ($stream->name === 'Streams/user/profile');
 	$textKey = $invitedToProfile
-		? 'HasInvitedYouToProfile'
+		? 'HasInvitedYouToTheirProfile'
 		: 'HasInvitedYou';
 
 	$params = array(
