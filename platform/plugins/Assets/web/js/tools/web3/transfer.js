@@ -212,8 +212,10 @@ Q.Template.set("Assets/web3/transfer/send",
     {{#if recipientUserId}}{{else}}
         <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
     {{/if}}
-    <input name="amount" placeholder="{{payment.EnterAmount}}" />
-    <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>`,
+    <div style="white-space: nowrap">
+        <input name="amount" placeholder="{{payment.EnterAmount}}" />
+        <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>
+    </div>`,
     {text: ['Assets/content']}
 );
 })(window, Q, jQuery);
