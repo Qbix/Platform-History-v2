@@ -1809,7 +1809,6 @@
 			type: type
 		}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
 		.attr('placeholder', placeholder)
-		.attr('autocomplete', 'username')
 		.focus(hideForm2);
 
 		if (type === 'email') {
