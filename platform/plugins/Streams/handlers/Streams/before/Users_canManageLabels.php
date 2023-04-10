@@ -8,7 +8,7 @@ function Streams_before_Users_canManageLabels($params, &$result)
 	$readOnly = $params['readOnly'];
 	$throwIfNotAuthorized = $params['throwIfNotAuthorized'];
 	if ($asUserId === $userId) {
-		if ($readOnly or substr($label, 0, 6) === 'Users/') {
+		if (!$label || $readOnly || substr($label, 0, 6) === 'Users/') {
 			$result = true;
 			return;
 		}
@@ -17,11 +17,11 @@ function Streams_before_Users_canManageLabels($params, &$result)
 	if (!$stream or !$stream->testReadLevel('content')) {
 		return;
 	}
-	if ($readOnly) {
+	if (!$label || $readOnly) {
 		$result = true;
 		return;
 	}
-	if ($label and $stream->testWriteLevel('edit')) {
+	if ($stream->testWriteLevel('edit')) {
 		$prefixes = $stream->getAttribute('prefixes', null);
 		if (!isset($prefixes)) {
 			$result = true;
