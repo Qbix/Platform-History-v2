@@ -9538,7 +9538,7 @@ Q.activate = function _Q_activate(elem, options, callback, internal) {
 		canceled: false,
 		activating: activating
 	};
-	Q.extend(shared, internal);
+	Q.extend(shared, 3, internal);
 	if (typeof options === 'function') {
 		callback = options;
 		options = undefined;
