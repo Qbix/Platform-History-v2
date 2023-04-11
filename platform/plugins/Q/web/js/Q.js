@@ -9046,7 +9046,7 @@ Q.exports = function () {
  * @param {Function} callback Always called asynchronously
  */
 Q.require = function (src, callback) {
-	src = Q.url(src);
+	src = Q.url(src).split('?')[0];
 	if (_exports[src]) {
 		setTimeout(function () {
 			Q.handle(callback, Q, _exports[src]);
