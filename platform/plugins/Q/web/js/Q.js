@@ -3643,7 +3643,7 @@ Pp.fill = function _Q_pipe_fill(field, ignore) {
 		pipe.params[field] = Array.prototype.slice.call(arguments);
 		pipe.subjects[field] = this;
 		pipe.run(field);
-		if (pipe.internal && pipe.Animationinternal.progress) {
+		if (pipe.internal && pipe.internal.progress) {
 			pipe.internal.progress(this, field);
 		}
 	};
