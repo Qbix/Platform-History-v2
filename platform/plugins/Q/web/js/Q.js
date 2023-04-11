@@ -9055,7 +9055,7 @@ Q.require = function (src, callback) {
 		Q.addScript(src, function _Q_require_callback(err) {
 			var srcWithoutQuerystring = src.split('?')[0];
 			var param = _exports[src]
-				|| _exports[src.split('?')[0]]
+				|| _exports[srcWithoutQuerystring]
 				|| [];
 			Q.handle(callback, Q, param);
 		});
