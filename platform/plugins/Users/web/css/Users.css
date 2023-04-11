@@ -428,17 +428,18 @@ a.Users_activation_resend:active {
 .Users_login_dialog { display: none; }
 .Users_login_dialog.Q_overlay { display: block; }
 
-.Users_list_tool { text-align: center; }
-.Users_list_tool .Users_avatar_tool { 
-	width: 30%;
-	max-width: 80px; 
-	margin-left: 1%; margin-right: 1%;
+.Users_list_tool {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	row-gap: 20px;
+	column-gap: 20px;
 }
-.Users_list_tool .Users_avatar_icon {
-	width: 100%; height: auto;
-	max-width: 80px; max-height: 80px;
+.Q_mobile .Users_list_tool {
+	row-gap: 10px;
+	column-gap: 10px;
 }
-.Users_list_tool .Users_avatar_name { 
+.Users_list_tool .Users_avatar_name {
 	display: block;
 	text-align: center;
 	overflow: hidden;
