@@ -11846,13 +11846,13 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 *  It receives (elem, options, tools) as arguments, and the last tool to be
 	 *  activated as "this".
 	 */
-	$.fn.activate = function _jQuery_fn_activate(options, callback) {
+	$.fn.activate = function _jQuery_fn_activate(options, callback, internal) {
 		if (!this.length) {
 			Q.handle(callback, null, options, []);
 			return this;
 		}
 		return this.each(function _jQuery_fn_activate_each(index, element) {
-			Q.activate(element, options, callback);
+			Q.activate(element, options, callback, internal);
 		});
 	};
 	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;
