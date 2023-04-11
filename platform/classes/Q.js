@@ -445,7 +445,7 @@ Q.Pipe.prototype.fill = function _Q_pipe_fill(field, ignore) {
 		pipe.subjects[field] = this;
 		pipe.run(field);
 		if (pipe.internal && pipe.internal.progress) {
-			pipe.internal.progress(pipe);
+			pipe.internal.progress(pipe, field);
 		}
 	};
 };

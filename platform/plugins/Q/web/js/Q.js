@@ -3644,7 +3644,7 @@ Pp.fill = function _Q_pipe_fill(field, ignore) {
 		pipe.subjects[field] = this;
 		pipe.run(field);
 		if (pipe.internal && pipe.internal.progress) {
-			pipe.internal.progress(this, field);
+			pipe.internal.progress(pipe, field);
 		}
 	};
 };
