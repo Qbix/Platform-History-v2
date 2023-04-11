@@ -3507,7 +3507,7 @@ Q.beforeReplace = new Q.Event();
  * @constructor
  * @see {Pipe.prototype.add} for more info on the parameters
  */
-Q.Pipe = function _Q_Pipe(requires, maxTimes, callback) {
+Q.Pipe = function _Q_Pipe(requires, maxTimes, callback, internal) {
 	if (this === Q) {
 		throw new Q.Error("Q.Pipe: omitted keyword new");
 	}
@@ -3517,6 +3517,10 @@ Q.Pipe = function _Q_Pipe(requires, maxTimes, callback) {
 	this.ignore = {};
 	this.finished = false;
 	this.add.apply(this, arguments);
+	this.internal = internal;
+	if (internal && internal.progress) {
+		internal.progress(this);
+	}
 };
 
 var Pp = Q.Pipe.prototype;
@@ -3639,6 +3643,9 @@ Pp.fill = function _Q_pipe_fill(field, ignore) {
 		pipe.params[field] = Array.prototype.slice.call(arguments);
 		pipe.subjects[field] = this;
 		pipe.run(field);
+		if (pipe.internal && pipe.Animationinternal.progress) {
+			pipe.internal.progress(this, field);
+		}
 	};
 };
 
