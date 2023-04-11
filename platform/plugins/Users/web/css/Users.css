@@ -432,6 +432,7 @@ a.Users_activation_resend:active {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	align-content: baseline;
 	row-gap: 20px;
 	column-gap: 20px;
 }
