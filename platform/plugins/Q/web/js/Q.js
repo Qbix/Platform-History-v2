@@ -8991,6 +8991,7 @@ Q.findScript = function (src) {
 /**
  * Gets information about the currently running script.
  * Only works when called synchronously when the script loads.
+ * Returns script src without "?querystring"
  * @method currentScript
  * @static
  * @param {Number} [stackLevels=0] If called within a function
@@ -9012,7 +9013,8 @@ Q.currentScript = function (stackLevels) {
 	}
 	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*?)):/);
 	return {
-		src: parts[1],
+		src: parts[1].split('?')[0],
+		srcWithQuerystring: parts[1],
 		path: parts[2],
 		file: parts[3]
 	};
