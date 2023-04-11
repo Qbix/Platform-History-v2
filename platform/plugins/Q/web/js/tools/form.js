@@ -119,7 +119,7 @@ Q.Tool.define('Q/form', function(options) {
 						data.slots = {form: state.defaultSuccessHTML};
 					}
 					var slots = Object.keys(data.slots);
-					var pipe = new Q.pipe(slots, function () {
+					var pipe = new Q.Pipe(slots, function () {
 						Q.handle(state.onSuccess, tool, [data]);
 					});
 					for (var slot in data.slots) {

@@ -69,7 +69,7 @@ function (options, preview) {
 					}
 				});
 			
-				var p = new Q.pipe(['creative'], function () {
+				var p = new Q.Pipe(['creative'], function () {
 					Q.handle(callback, tool);
 				});
 			

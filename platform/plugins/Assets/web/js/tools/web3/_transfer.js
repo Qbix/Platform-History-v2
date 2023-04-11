@@ -26,7 +26,7 @@
             }
 
             $toolElement.addClass("Q_working");
-            var pipe = new Q.pipe(["avatar", "styles", "text"], function () {
+            var pipe = new Q.Pipe(["avatar", "styles", "text"], function () {
                 $toolElement.removeClass("Q_working");
             });
             Q.Streams.Avatar.get(state.userId, function (err, avatar) {

@@ -134,7 +134,7 @@ Q.Tool.define("Places/location", function (options) {
 		});
 	}
 
-	var pipe = new Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
+	var pipe = new Q.Pipe(['styles', 'texts'], tool.refresh.bind(tool));
 	Q.addStylesheet('{{Places}}/css/location.css', pipe.fill('styles'));
 	Q.Text.get('Places/content', function (err, text) {
 		tool.text = text;

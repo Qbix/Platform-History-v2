@@ -1110,7 +1110,7 @@ Streams.Dialogs = {
 								inviteParams.identifier = obj[obj.prefix];
 							}
 
-							var pipe = new Q.pipe(Object.keys(obj), function (params) {
+							var pipe = new Q.Pipe(Object.keys(obj), function (params) {
 								Q.handle(callback, Streams, [inviteParams]);
 							});
 

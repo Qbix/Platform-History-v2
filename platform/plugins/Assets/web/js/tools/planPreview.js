@@ -10,7 +10,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 	var tool = this;
 	tool.preview = preview;
 
-	var pipe = new Q.pipe(["style", "text", "stream"], function () {
+	var pipe = new Q.Pipe(["style", "text", "stream"], function () {
 		preview.state.onRefresh.add(tool.refresh.bind(tool));
 	});
 

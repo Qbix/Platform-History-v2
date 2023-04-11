@@ -22,7 +22,7 @@
             var state = this.state;
             console.log('center: Streams/calls', state);
 
-            var pipe = new Q.pipe(["style", "text", "stream"], function () {
+            var pipe = new Q.Pipe(["style", "text", "stream"], function () {
                 //if user is host, init main room and show settings button (gear)
                 if (tool.stream.testWriteLevel("edit")) {
                     state.isAdmin = true;

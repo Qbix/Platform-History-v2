@@ -31,7 +31,7 @@
             return console.warn("user id required!");
         }
 
-        var pipe = new Q.pipe(["stylesheet", "text"], function (params) {
+        var pipe = new Q.Pipe(["stylesheet", "text"], function (params) {
             tool.text = params.text[1];
             tool.refresh();
         });

@@ -35,7 +35,7 @@
 Q.Tool.define('Q/timestamp', function () {
 	var tool = this;
 
-	var pipe = new Q.pipe(['phpjs', 'text'], function () {
+	var pipe = new Q.Pipe(['phpjs', 'text'], function () {
 		tool.refresh();
 	});
 

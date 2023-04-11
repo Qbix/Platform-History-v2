@@ -23,7 +23,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
         tool[state.action]();
 
-        /*var pipe = new Q.pipe(["avatar"], tool[state.action].bind(tool));
+        /*var pipe = new Q.Pipe(["avatar"], tool[state.action].bind(tool));
         Q.Streams.Avatar.get(state.recipientUserId, function (err, avatar) {
             if (err) {
                 return

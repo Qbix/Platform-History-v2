@@ -201,7 +201,7 @@
             }
 
             var pipeList = ["metadata", "author", "owner", "commissionInfo", "saleInfo", "authorUserId", "ownerUserId"];
-            var pipe = new Q.pipe(pipeList, function (params, subjects) {
+            var pipe = new Q.Pipe(pipeList, function (params, subjects) {
                 // collect errors
                 var errors = [];
                 Q.each(pipeList, function (index, value) {

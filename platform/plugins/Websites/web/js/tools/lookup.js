@@ -24,7 +24,7 @@
 			throw new Q.Error("Websites/lookup tool: missing platforms");
 		}
 
-		var pipe = new Q.pipe(["styles", "texts"], function () {
+		var pipe = new Q.Pipe(["styles", "texts"], function () {
 			tool.refresh();
 		});
 

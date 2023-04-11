@@ -636,7 +636,7 @@
 						}
 					},
 					onActivate: function ($dialog) {
-						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
+						var pipeDialog = new Q.Pipe(["currencySymbol", "paymentIntent"], function (params) {
 							var currencySymbol = params.currencySymbol[0];
 							var clientSecret = params.paymentIntent[0];
 							var amount = parseInt(options.amount);
@@ -644,7 +644,7 @@
 
 							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + amount.toFixed(2));
 
-							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
+							var pipeElements = new Q.Pipe(['paymentRequest', 'payment'], function (params) {
 								$dialog.removeClass("Assets_stripe_payment_loading");
 							});
 
