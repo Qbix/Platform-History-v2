@@ -9046,17 +9046,18 @@ Q.exports = function () {
  * @param {Function} callback Always called asynchronously
  */
 Q.require = function (src, callback) {
-	src = Q.url(src).split('?')[0];
+	src = Q.url(src);
 	if (_exports[src]) {
 		setTimeout(function () {
 			Q.handle(callback, Q, _exports[src]);
 		}, 0);
 	} else {
 		Q.addScript(src, function _Q_require_callback(err) {
-			if (!(src in _exports)) {
-				_exports[src] = [];
-			}
-			Q.handle(callback, Q, _exports[src]);
+			var srcWithoutQuerystring = src.split('?')[0];
+			var param = _exports[src]
+				|| _exports[src.split('?')[0]]
+				|| [];
+			Q.handle(callback, Q, param);
 		});
 	}
 };
