@@ -3640,12 +3640,12 @@ Pp.fill = function _Q_pipe_fill(field, ignore) {
 	var pipe = this;
 
 	return function _Q_pipe_fill() {
-		pipe.params[field] = Array.prototype.slice.call(arguments);
-		pipe.subjects[field] = this;
-		pipe.run(field);
 		if (pipe.internal && pipe.internal.progress) {
 			pipe.internal.progress(pipe, field);
 		}
+		pipe.params[field] = Array.prototype.slice.call(arguments);
+		pipe.subjects[field] = this;
+		pipe.run(field);
 	};
 };
 
