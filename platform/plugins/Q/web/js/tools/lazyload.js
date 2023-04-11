@@ -193,7 +193,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 									element.style.removeProperty('height');
 								}
 							}, 1000);
-						}, {}, true);
+						}, {}, {lazyload: true});
 					}
 					clearTimeout(element.Q_lazyload_timeout);
 					delete element.Q_lazyload_timeout;
