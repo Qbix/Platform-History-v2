@@ -28,7 +28,7 @@ var Row = Q.require('Db/Row');
  * @param {String} [fields.description] defaults to ""
  * @param {String} [fields.attributes] defaults to ""
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
- * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -81,7 +81,7 @@ Q.mixin(Base, Row);
 /**
  * @property updatedTime
  * @type String|Db.Expression
- * @default "0000-00-00 00:00:00"
+ * @default null
  * 
  */
 
@@ -564,6 +564,7 @@ return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
@@ -579,7 +580,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","1023","",false],true,"",null];
 };
 
 /**
