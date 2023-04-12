@@ -397,8 +397,6 @@ a.Users_activation_resend:active {
 	vertical-align: middle;
 }
 #Users_setIdentifier_dialog .Users_identifier_web3 {
-	border: none;
-	font-size: 0.85em;
 	text-align: center;
 	cursor: pointer;
 	font-style: normal;
@@ -492,6 +490,7 @@ a.Users_activation_resend:active {
 	align-items: stretch;
 }
 
+.Users_labels_communityRoles .Users_labels_action,
 .Users_labels_communityRoles .Users_labels_label {
 	display: inline-block;
 	width: 33%;

@@ -51,13 +51,13 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	};
 
 	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
-		var $this = $(this), ret;
+		var $this = $(this);
 		var label = $this.attr('data-label');
 		var wasSelected = $this.hasClass('Q_selected');
 		var title = $this.text();
 		if (false === Q.handle(state.onClick, tool, [this, label, title, wasSelected])) {
 			return;
-		};
+		}
 		if (wasSelected) {
 			$this.removeClass('Q_selected');
 			if (state.contactUserId) {
