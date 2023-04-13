@@ -10,7 +10,7 @@
  * @method GET/labels
  * @param {array} [$params] Parameters that can come from the request
  *   @param {string|array} [$params.userIds] The users whose labels to fetch. Can be a comma-separated string
- *   @param {string|array} [$params.labels] Optionally filter by specific labels, or label prefixes ending in "/". Can be a comma-separated string
+ *   @param {string|array} [$params.filter] Optionally filter by specific labels, or label prefixes ending in "/". Can be a comma-separated string
  * @return {array} An array of Users_Label objects.
  */
 function Users_label_response_labels($params = array())
@@ -25,25 +25,24 @@ function Users_label_response_labels($params = array())
 	if (is_string($userIds)) {
 		$userIds = explode(",", $userIds);
 	}
-	if (isset($req['labels'])) {
-		$labels = $req['labels'];
+	$filter = null;
+	if (isset($req['filter'])) {
+		$filter = $req['filter'];
 	} else if (isset($req['label'])) {
-		$labels = array($req['label']);
-	} else {
-		$labels = null;
+		$filter = array($req['label']);
 	}
 	$rows = array();
 	if (isset($req['batch'])) {
-		// expects batch format, i.e. $userIds and $labels arrays
+		// expects batch format, i.e. $userIds and $filter arrays
 		foreach ($userIds as $i => $userId) {
 			$row = new Users_Label();
 			$row->userId = $userId;
-			$row->label = $labels[$i];
+			$row->label = $filter[$i];
 			$rows[] = $row->retrieve() ? $row : null;
 		}
 	} else {
 		foreach ($userIds as $i => $userId) {
-			$rows = array_merge($rows, Users_Label::fetch($userId, $labels));
+			$rows = array_merge($rows, Users_Label::fetch($userId, $filter));
 		}
 	}
 	return Q_Response::setSlot('labels', Db::exportArray($rows));
