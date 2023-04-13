@@ -1,0 +1,38 @@
+.Users_contacts_tool ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+.Users_contacts_tool .Users_labels_label {
+    width: 120px;
+    height: 140px;
+    text-align: center;
+}
+.Q_mobile .Users_contacts_tool .Users_labels_label {
+    width: 30%;
+}
+.Users_contacts_tool .Users_labels_title {
+    display: block;
+    font-weight: bold;
+}
+.Q_dialog_slot .Users_contacts_tool .Users_labels_label {
+    cursor: pointer;
+}
+.Users_contacts_tool button {
+    display: block;
+    margin: 0 auto 20px;
+    width: 200px;
+}
+.Users_contacts_tool .Users_labels_label:hover {
+    text-shadow: 0 0 2px black;
+    box-shadow: 0 0 4px black;
+}
+.Users_contacts_tool .Users_labels_icon {
+    margin: 10px 0;
+    border-radius: 10px;
+}
