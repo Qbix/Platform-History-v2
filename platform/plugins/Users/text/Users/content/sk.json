@@ -112,7 +112,8 @@
                 "title": "Prebieha presmerovanie do Peňaženky",
                 "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
             }
-        }
+        },
+        "connectPlatforms": "alebo sa pripojte pomocou:"
     },
     "setIdentifier": {
         "title": "Pridajte spôsob prihlásenia",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Skopírované! Teraz ho môžete prilepiť kdekoľvek."
+    },
+    "platforms": {
+        "wallet": "Peňaženka",
+        "broadcast": "Vysielanie"
+    },
+    "labels": {
+        "addToPhonebook": "Pridať do kontaktov v mojom telefóne",
+        "addLabel": "Nový vzťah",
+        "prompt": "Daj tomu meno"
+    },
+    "people": {
+        "People": "Ľudia"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Robot na zapojenie fóra. Získajte svoj vlastný na https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

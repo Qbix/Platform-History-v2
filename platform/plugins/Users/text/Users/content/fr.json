@@ -112,7 +112,8 @@
                 "title": "Redirection vers Wallet",
                 "content": "Une fois que vous fermez cette boîte de dialogue, vous serez redirigé vers votre portefeuille. Après vous être connecté, revenez à cette page."
             }
-        }
+        },
+        "connectPlatforms": "ou connectez-vous en utilisant :"
     },
     "setIdentifier": {
         "title": "Ajouter un moyen de se connecter",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Copié ! Maintenant, vous pouvez le coller n&#39;importe où."
+    },
+    "platforms": {
+        "wallet": "Portefeuille",
+        "broadcast": "Diffuser"
+    },
+    "labels": {
+        "addToPhonebook": "Ajouter à mes contacts téléphoniques",
+        "addLabel": "Nouvelle relation",
+        "prompt": "Donne lui un nom"
+    },
+    "people": {
+        "People": "Personnes"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot d&#39;engagement du forum. Obtenez le vôtre sur https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

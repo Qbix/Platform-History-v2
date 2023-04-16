@@ -101,7 +101,8 @@
                 "title": "Omleiden naar Wallet",
                 "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Ga na het inloggen terug naar deze pagina."
             }
-        }
+        },
+        "connectPlatforms": "of maak verbinding via:"
     },
     "setIdentifier": {
         "title": "Voeg een manier toe om in te loggen",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Gekopieerd! Nu kun je het overal plakken."
+    },
+    "platforms": {
+        "wallet": "Portemonnee",
+        "broadcast": "Uitzending"
+    },
+    "labels": {
+        "addToPhonebook": "Toevoegen aan Mijn telefooncontacten",
+        "addLabel": "Nieuwe relatie",
+        "prompt": "Geef het een naam"
+    },
+    "people": {
+        "People": "Mensen"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forumbetrokkenheidsbot. Koop uw eigen op https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -112,7 +112,8 @@
                 "title": "Redirixindo a Wallet",
                 "content": "Unha vez que peches este diálogo, dirixirase á túa carteira. Despois de iniciar sesión, volve a esta páxina."
             }
-        }
+        },
+        "connectPlatforms": "ou conectar usando:"
     },
     "setIdentifier": {
         "title": "Engade un xeito de iniciar sesión",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Copiado! Agora podes pegalo en calquera lugar."
+    },
+    "platforms": {
+        "wallet": "Carteira",
+        "broadcast": "Emisión"
+    },
+    "labels": {
+        "addToPhonebook": "Engadir aos meus contactos do teléfono",
+        "addLabel": "Nova Relación",
+        "prompt": "Ponlle un nome"
+    },
+    "people": {
+        "People": "Persoas"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot de participación do foro. Obtén o teu en https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

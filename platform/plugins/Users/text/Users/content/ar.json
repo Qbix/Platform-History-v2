@@ -101,7 +101,8 @@
                 "title": "إعادة التوجيه إلى Wallet",
                 "content": "بمجرد إغلاق مربع الحوار هذا ، سيتم نقلك إلى محفظتك. بعد تسجيل الدخول ، عد إلى هذه الصفحة."
             }
-        }
+        },
+        "connectPlatforms": "أو الاتصال باستخدام:"
     },
     "setIdentifier": {
         "title": "أضف طريقة لتسجيل الدخول",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "نسخ! الآن يمكنك لصقه في أي مكان."
+    },
+    "platforms": {
+        "wallet": "محفظة",
+        "broadcast": "إذاعة"
+    },
+    "labels": {
+        "addToPhonebook": "إضافة إلى جهات اتصال هاتفي",
+        "addLabel": "علاقة جديدة",
+        "prompt": "أعطه إسما"
+    },
+    "people": {
+        "People": "الناس"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "منتدى المشاركة بوت. احصل على الخاص بك على https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

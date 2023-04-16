@@ -112,7 +112,8 @@
                 "title": "Umleitung zu Wallet",
                 "content": "Sobald Sie diesen Dialog schließen, werden Sie zu Ihrer Brieftasche weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
             }
-        }
+        },
+        "connectPlatforms": "oder verbinden Sie sich mit:"
     },
     "setIdentifier": {
         "title": "Fügen Sie eine Möglichkeit hinzu, sich anzumelden",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopiert! Jetzt können Sie es überall einfügen."
+    },
+    "platforms": {
+        "wallet": "Geldbörse",
+        "broadcast": "Übertragen"
+    },
+    "labels": {
+        "addToPhonebook": "Zu meinen Telefonkontakten hinzufügen",
+        "addLabel": "Neue Beziehung",
+        "prompt": "Gib ihm einen Namen"
+    },
+    "people": {
+        "People": "Menschen"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forum-Engagement-Bot. Holen Sie sich Ihre eigene unter https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -112,7 +112,8 @@
                 "title": "Wallet پر ری ڈائریکٹ کیا جا رہا ہے۔",
                 "content": "اس ڈائیلاگ کو بند کرنے کے بعد، آپ کو آپ کے بٹوے پر لے جایا جائے گا۔ سائن ان کرنے کے بعد، اس صفحہ پر واپس جائیں۔"
             }
-        }
+        },
+        "connectPlatforms": "یا استعمال کرتے ہوئے جڑیں:"
     },
     "setIdentifier": {
         "title": "لاگ ان کرنے کا طریقہ شامل کریں۔",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "کاپی کیا گیا! اب آپ اسے کہیں بھی چسپاں کر سکتے ہیں۔"
+    },
+    "platforms": {
+        "wallet": "پرس",
+        "broadcast": "براڈ کاسٹ"
+    },
+    "labels": {
+        "addToPhonebook": "میرے فون رابطوں میں شامل کریں۔",
+        "addLabel": "نیا رشتہ",
+        "prompt": "اسے ایک نام دیں۔"
+    },
+    "people": {
+        "People": "لوگ"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "فورم کی منگنی بوٹ۔ https:\/\/engageusers.ai پر اپنا حاصل کریں۔",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

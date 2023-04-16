@@ -101,7 +101,8 @@
                 "title": "Přesměrování do Peněženky",
                 "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
             }
-        }
+        },
+        "connectPlatforms": "nebo se připojte pomocí:"
     },
     "setIdentifier": {
         "title": "Přidejte způsob přihlášení",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Zkopírováno! Nyní jej můžete vložit kamkoli."
+    },
+    "platforms": {
+        "wallet": "Peněženka",
+        "broadcast": "Přenos"
+    },
+    "labels": {
+        "addToPhonebook": "Přidat do kontaktů v mém telefonu",
+        "addLabel": "Nový vztah",
+        "prompt": "Dejte tomu jméno"
+    },
+    "people": {
+        "People": "Lidé"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Robot pro zapojení do fóra. Získejte svůj vlastní na https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

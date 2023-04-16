@@ -101,7 +101,8 @@
                 "title": "重定向到钱包",
                 "content": "关闭此对话框后，您将被带到您的钱包。登录后，返回此页面。"
             }
-        }
+        },
+        "connectPlatforms": "或使用以下方式连接："
     },
     "setIdentifier": {
         "title": "添加登录方式",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "已复制！现在您可以将其粘贴到任何地方。"
+    },
+    "platforms": {
+        "wallet": "钱包",
+        "broadcast": "播送"
+    },
+    "labels": {
+        "addToPhonebook": "添加到我的电话联系人",
+        "addLabel": "新关系",
+        "prompt": "给它起个名字"
+    },
+    "people": {
+        "People": "人们"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "论坛参与机器人。在 https:\/\/engageusers.ai 获取你自己的",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

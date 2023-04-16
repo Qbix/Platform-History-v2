@@ -112,7 +112,8 @@
                 "title": "Uudelleenohjataan Walletiin",
                 "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Kun olet kirjautunut sisään, palaa tälle sivulle."
             }
-        }
+        },
+        "connectPlatforms": "tai yhdistä käyttämällä:"
     },
     "setIdentifier": {
         "title": "Lisää sisäänkirjautumistapa",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopioitu! Nyt voit liittää sen mihin tahansa."
+    },
+    "platforms": {
+        "wallet": "Lompakko",
+        "broadcast": "Lähettää"
+    },
+    "labels": {
+        "addToPhonebook": "Lisää puhelimeen yhteystietoihin",
+        "addLabel": "Uusi suhde",
+        "prompt": "Anna sille nimi"
+    },
+    "people": {
+        "People": "Ihmiset"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Foorumin sitoutumisbotti. Hanki omasi osoitteessa https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

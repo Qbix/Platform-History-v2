@@ -101,7 +101,8 @@
                 "title": "Nagre-redirect sa Wallet",
                 "content": "Sa sandaling isara mo ang dialog na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa page na ito."
             }
-        }
+        },
+        "connectPlatforms": "o kumonekta gamit ang:"
     },
     "setIdentifier": {
         "title": "Magdagdag ng isang paraan upang mag-log in",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kinopya! Ngayon ay maaari mo na itong i-paste kahit saan."
+    },
+    "platforms": {
+        "wallet": "Wallet",
+        "broadcast": "I-broadcast"
+    },
+    "labels": {
+        "addToPhonebook": "Idagdag sa Aking Mga Contact sa Telepono",
+        "addLabel": "Bagong Relasyon",
+        "prompt": "Bigyan ito ng pangalan"
+    },
+    "people": {
+        "People": "Mga tao"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot ng pakikipag-ugnayan sa forum. Kunin ang sarili mo sa https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

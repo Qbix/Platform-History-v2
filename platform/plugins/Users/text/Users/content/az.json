@@ -101,7 +101,8 @@
                 "title": "Pulqabıya yönləndirilir",
                 "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
             }
-        }
+        },
+        "connectPlatforms": "və ya istifadə edərək qoşulun:"
     },
     "setIdentifier": {
         "title": "Daxil olmaq üçün bir yol əlavə edin",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopyalandı! İndi onu istənilən yerə yapışdıra bilərsiniz."
+    },
+    "platforms": {
+        "wallet": "Pul kisəsi",
+        "broadcast": "Yayım"
+    },
+    "labels": {
+        "addToPhonebook": "Telefon Əlaqələrimə əlavə et",
+        "addLabel": "Yeni Münasibət",
+        "prompt": "Bir ad verin"
+    },
+    "people": {
+        "People": "Xalq"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forum nişan botu. Https:\/\/engageusers.ai saytından özünüz edin",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

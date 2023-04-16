@@ -101,7 +101,8 @@
                 "title": "Herlei tans na Wallet",
                 "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
             }
-        }
+        },
+        "connectPlatforms": "of verbind met behulp van:"
     },
     "setIdentifier": {
         "title": "Voeg &#39;n manier by om aan te meld",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Gekopieer! Nou kan jy dit enige plek plak."
+    },
+    "platforms": {
+        "wallet": "Beursie",
+        "broadcast": "Uitsaai"
+    },
+    "labels": {
+        "addToPhonebook": "Voeg by my foon kontakte",
+        "addLabel": "Nuwe Verhouding",
+        "prompt": "Gee dit &#39;n naam"
+    },
+    "people": {
+        "People": "Mense"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forum betrokkenheid bot. Kry jou eie by https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

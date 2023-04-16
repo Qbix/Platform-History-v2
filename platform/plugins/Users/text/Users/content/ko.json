@@ -112,7 +112,8 @@
                 "title": "지갑으로 리디렉션",
                 "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
             }
-        }
+        },
+        "connectPlatforms": "또는 다음을 사용하여 연결합니다."
     },
     "setIdentifier": {
         "title": "로그인 방법 추가",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "복사했습니다! 이제 아무 곳에나 붙여넣을 수 있습니다."
+    },
+    "platforms": {
+        "wallet": "지갑",
+        "broadcast": "방송"
+    },
+    "labels": {
+        "addToPhonebook": "내 전화 연락처에 추가",
+        "addLabel": "새로운 관계",
+        "prompt": "이름을 지어주세요"
+    },
+    "people": {
+        "People": "사람들"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "포럼 참여 봇. https:\/\/engageusers.ai에서 나만의 것을 얻으십시오.",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

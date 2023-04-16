@@ -112,7 +112,8 @@
                 "title": "Omdirigerar till Wallet",
                 "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
             }
-        }
+        },
+        "connectPlatforms": "eller anslut med:"
     },
     "setIdentifier": {
         "title": "Lägg till ett sätt att logga in",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopierade! Nu kan du klistra in den var som helst."
+    },
+    "platforms": {
+        "wallet": "Plånbok",
+        "broadcast": "Utsända"
+    },
+    "labels": {
+        "addToPhonebook": "Lägg till i mina telefonkontakter",
+        "addLabel": "Nytt förhållande",
+        "prompt": "Ge det ett namn"
+    },
+    "people": {
+        "People": "människor"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forum engagemang bot. Skaffa din egen på https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

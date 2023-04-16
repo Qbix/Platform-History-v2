@@ -164,8 +164,8 @@
     "external": {
         "defaults": {
             "title": "",
-            "bio": "Forum engagement bot. Get your own at https://engageusers.ai",
-            "website": "https://engageusers.ai"
+            "bio": "Forum engagement bot. Get your own at https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
         }
     }
 }

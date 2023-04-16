@@ -112,7 +112,8 @@
                 "title": "Atreorú chuig Sparán",
                 "content": "Nuair a dhúnann tú an dialóg seo, tógfar chuig do sparán thú. Tar éis duit síniú isteach, fill ar an leathanach seo."
             }
-        }
+        },
+        "connectPlatforms": "nó ceangail ag baint úsáide as:"
     },
     "setIdentifier": {
         "title": "Cuir bealach le logáil isteach",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Cóipeáladh! Anois is féidir leat é a ghreamú in áit ar bith."
+    },
+    "platforms": {
+        "wallet": "Sparán",
+        "broadcast": "Craoladh"
+    },
+    "labels": {
+        "addToPhonebook": "Cuir le Mo Theagmhálaithe Fón",
+        "addLabel": "Gaol Nua",
+        "prompt": "Tabhair ainm air"
+    },
+    "people": {
+        "People": "Daoine"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot rannpháirtíocht fóram. Faigh do chuid féin ag https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

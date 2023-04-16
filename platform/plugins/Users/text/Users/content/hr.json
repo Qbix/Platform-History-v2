@@ -101,7 +101,8 @@
                 "title": "Preusmjeravanje na Novčanik",
                 "content": "Nakon što zatvorite ovaj dijaloški okvir, bit ćete preusmjereni u svoj novčanik. Nakon što se prijavite, vratite se na ovu stranicu."
             }
-        }
+        },
+        "connectPlatforms": "ili se povežite koristeći:"
     },
     "setIdentifier": {
         "title": "Dodajte način prijave",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopirano! Sada ga možete zalijepiti bilo gdje."
+    },
+    "platforms": {
+        "wallet": "Novčanik",
+        "broadcast": "Emitiranje"
+    },
+    "labels": {
+        "addToPhonebook": "Dodaj u kontakte mog telefona",
+        "addLabel": "Nova veza",
+        "prompt": "Daj mu ime"
+    },
+    "people": {
+        "People": "narod"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forumski angažirani bot. Nabavite svoj na https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

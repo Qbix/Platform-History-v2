@@ -112,7 +112,8 @@
                 "title": "Átirányítás a Walletba",
                 "content": "A párbeszédpanel bezárása után a pénztárcájához kerül. Bejelentkezés után térjen vissza erre az oldalra."
             }
-        }
+        },
+        "connectPlatforms": "vagy csatlakoztassa a következőt:"
     },
     "setIdentifier": {
         "title": "Adjon meg egy bejelentkezési módot",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Másolva! Most már bárhová beillesztheti."
+    },
+    "platforms": {
+        "wallet": "Pénztárca",
+        "broadcast": "Adás"
+    },
+    "labels": {
+        "addToPhonebook": "Hozzáadás a telefonhoz névjegyekhez",
+        "addLabel": "Új kapcsolat",
+        "prompt": "Adj neki nevet"
+    },
+    "people": {
+        "People": "Emberek"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Fórum eljegyzési bot. Szerezze be a sajátját a https:\/\/engageusers.ai oldalon",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }
