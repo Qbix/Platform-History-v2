@@ -51,11 +51,12 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             "Api-Username: ".$this->apiUsername
         );
 
-        // Q_Utils::put($this->apiHost."/u/$username.json", array(
-        //     'title' => 'Forum Engagement Bot',
-        //     'bio_raw' => 'Powered by https://engageusers.ai',
-        //     'website' => 'https://engageusers.ai'
-        // ), null, null, $headers);
+        $text = Q_Text::get('Users/content');
+        Q_Utils::put($this->apiHost."/u/$username.json", array(
+            'title' => Q::ifset($text, 'external', 'defaults', 'title', ''),
+            'bio_raw' => Q::ifset($text, 'external', 'defaults', 'bio', ''),
+            'website' => Q::ifset($text, 'external', 'defaults', 'website', 'https://engageusers.ai')
+        ), null, null, $headers);
 
         $response = Q_Utils::get($this->apiHost."/u/$username.json", null, null, $headers);
         $result = json_decode($response);
