@@ -28,6 +28,8 @@ var Row = Q.require('Db/Row');
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
  * @param {String} [fields.fromAddress] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String|Buffer} [fields.extra] defaults to ""
  * @param {String} [fields.result] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
@@ -77,6 +79,18 @@ Q.mixin(Base, Row);
 /**
  * @property fromAddress
  * @type String
+ * @default ""
+ * 
+ */
+/**
+ * @property userId
+ * @type String|Buffer
+ * @default ""
+ * 
+ */
+/**
+ * @property extra
+ * @type String|Buffer
  * @default ""
  * 
  */
@@ -314,6 +328,8 @@ Base.fieldNames = function () {
 		"methodName",
 		"params",
 		"fromAddress",
+		"userId",
+		"extra",
 		"result",
 		"insertedTime",
 		"updatedTime"
@@ -454,7 +470,7 @@ Base.prototype.maxSize_contract = function () {
 	 */
 Base.column_contract = function () {
 
-return [["varchar","42","",false],false,"",null];
+return [["varchar","42","",false],false,"",""];
 };
 
 /**
@@ -574,6 +590,80 @@ return [["varchar","100","",false],false,"",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
+ * @method beforeSet_userId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_userId = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_userId = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_userId = function () {
+
+return [["varbinary","31","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_extra
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_extra = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".extra");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".extra");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the extra field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_extra = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for extra column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_extra = function () {
+
+return [["varbinary","1023","",false],true,"",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_result
  * @param {string} value
  * @return {string} The value
@@ -629,7 +719,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","100","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -655,7 +745,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","100","",false],true,"",null];
+return [["timestamp","1023","",false],true,"",null];
 };
 
 /**

@@ -46,7 +46,8 @@
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
-			"e/:emailAddress": { "module": "Users", "action": "activate" }
+			"e/:emailAddress": { "module": "Users", "action": "activate" },
+			"Users/contractMetadata/:communityId.json": { "module": "Users", "action": "contractMetadata" }
 		},
 		"session": {
 			"db": {
@@ -302,6 +303,36 @@
 			"admins": ["Users/owners", "Users/admins"]
 		},
 		"web3": {
+			"contracts": {
+				"R1": {
+					"Community": {
+						"factory": {
+							"0x38": "0x010101004FBff8d5D5b860CA9bC6EcE40E18C0Aa",
+							"0x89": "0x010101004FBff8d5D5b860CA9bC6EcE40E18C0Aa",
+							"0x13881": "0xd90FfD18849F117AB53fB62744fac023ADF9BDD7"
+						}
+					},
+					"ReleaseManager": {
+						"factory": {
+							"0x38": "0x00010100597b8c232656D76a319b6FF696Ed3293",
+							"0x89": "0x00010100597b8c232656D76a319b6FF696Ed3293",
+							"0x13881": "0xc0037d875762b980704A136D5f82671e22fda3E0"
+						},
+						"contract": {
+							"0x38": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671",
+							"0x89": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671",
+							"0x13881": "0x7d86f9a019e80a8a928bfc3bf65f993955bb0152"
+						}
+					},
+					"Voting": {
+						"factory": {
+							"all": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
+							"0x89": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
+							"0x13881": "0xd0b63cdB328F313060c2d022603Edde429f5AdeD"
+						}
+					}
+				}
+			},
 			"chains": {
 				"0x1": {
 					"name": "Ethereum Mainnet",
