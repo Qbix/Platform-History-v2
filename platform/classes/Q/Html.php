@@ -611,15 +611,19 @@ class Q_Html
 		$dontLazyload = Q::ifset($attributes, 'dontLazyload', null);
 		unset($attributes['dontLazyload']);
 		if ($lazyload and !$dontLazyload
-		and !self::$environmentWithoutJavascript
 		and !empty($tag_params['src'])) {
-			$src = Q_Html::themedUrl($tag_params['src']);
-			$tag_params['data-lazyload-src'] = $src;
-			$tag_params['src'] = self::themedUrl(
-				!empty($lazyload['loadingSrc'])
-					? $lazyload['loadingSrc']
-					: "{{Q}}/img/throbbers/transparent.gif"
-			);
+			if (!self::$environmentWithoutJavascript
+			and !self::$lazyloadWithoutJavascript) {
+				$src = Q_Html::themedUrl($tag_params['src']);
+				$tag_params['data-lazyload-src'] = $src;
+				$tag_params['src'] = self::themedUrl(
+					!empty($lazyload['loadingSrc'])
+						? $lazyload['loadingSrc']
+						: "{{Q}}/img/throbbers/transparent.gif"
+				);
+			} else {
+				$tag_params['loading'] = 'lazy';
+			}
 		}
 		return self::tag('img', $tag_params);
 	}
@@ -1555,6 +1559,16 @@ class Q_Html
 			$text_truncated .= substr($text, -$last_word_len);
 		return $text_truncated;
 	}
+
+	/**
+	 * Set to true to use native HTML for lazyloading images instead of JS.
+	 * Works in most modern browsers.
+	 * @property $lazyloadWithoutJavascript
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $lazyloadWithoutJavascript = false;
 
 	/**
 	 * Set to true temporarily in order to avoid features
