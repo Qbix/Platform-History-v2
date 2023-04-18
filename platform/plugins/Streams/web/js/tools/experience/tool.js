@@ -20,7 +20,7 @@ Q.Tool.define("Streams/experience", function (options) {
 	var tool = this;
 	var state = tool.state;
 
-	var pipe = new Q.pipe(["style", "text", "stream"], function () {
+	var pipe = new Q.Pipe(["style", "text", "stream"], function () {
 		tool.refresh();
 	});
 

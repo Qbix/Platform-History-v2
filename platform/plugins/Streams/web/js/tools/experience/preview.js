@@ -35,7 +35,7 @@ Q.Tool.define("Streams/topic/preview", "Streams/preview", function (options, pre
 
 	preview.state.onRefresh.add(this.refresh.bind(this));
 
-	var pipe = new Q.pipe(["style", "text"], function () {
+	var pipe = new Q.Pipe(["style", "text"], function () {
 
 	});
 

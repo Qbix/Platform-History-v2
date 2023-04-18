@@ -112,7 +112,8 @@
                 "title": "ウォレットへのリダイレクト",
                 "content": "このダイアログを閉じると、ウォレットが表示されます。サインインしたら、このページに戻ります。"
             }
-        }
+        },
+        "connectPlatforms": "または次を使用して接続します。"
     },
     "setIdentifier": {
         "title": "ログインする方法を追加する",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "コピーしました！これで、どこにでも貼り付けることができます。"
+    },
+    "platforms": {
+        "wallet": "財布",
+        "broadcast": "ブロードキャスト"
+    },
+    "labels": {
+        "addToPhonebook": "電話の連絡先に追加",
+        "addLabel": "新しい関係",
+        "prompt": "名前を付けてください"
+    },
+    "people": {
+        "People": "人々"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "フォーラム エンゲージメント ボット。 https:\/\/engageusers.ai で独自のものを入手してください",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

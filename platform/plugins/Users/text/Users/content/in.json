@@ -101,7 +101,8 @@
                 "title": "Mengarahkan ke Wallet",
                 "content": "Setelah Anda menutup dialog ini, Anda akan dibawa ke dompet Anda. Setelah Anda masuk, kembali ke halaman ini."
             }
-        }
+        },
+        "connectPlatforms": "atau terhubung menggunakan:"
     },
     "setIdentifier": {
         "title": "Tambahkan cara untuk masuk",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Disalin! Sekarang Anda dapat menempelkannya di mana saja."
+    },
+    "platforms": {
+        "wallet": "Dompet",
+        "broadcast": "Siaran"
+    },
+    "labels": {
+        "addToPhonebook": "Tambahkan Ke Kontak Telepon Saya",
+        "addLabel": "Hubungan baru",
+        "prompt": "Beri nama"
+    },
+    "people": {
+        "People": "Rakyat"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot keterlibatan forum. Dapatkan sendiri di https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

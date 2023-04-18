@@ -89,10 +89,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {Array} [_options.hosts] List of ids of room's hosts
          * @param {String} [_options.defaultDesktopViewMode] Default view mode (layout) for rendering participants' screens on desktop (regular | audio | maximized | minimized | tiled | manual | fullScreen | screenSharing)
          * @param {String} [_options.defaultMobileViewMode] Default view mode (layout) for rendering participants' screens on mobile (tiledMobile | sideBySideMobile | maximizedMobile | minimizedMobile | audio | squaresGrid)
-         * @param {Object} [_options.useRelatedTo] Use already related (to already existing stream) stream as main roomStream
-         * @param {String} [_options.useRelatedTo.publisherId] publisherId of a stream to which potential roomStream is related
-         * @param {String} [_options.useRelatedTo.streamName] streamName of a stream to which potential roomStream is related
-         * @param {Object} [_options.relate] Relate roomStream to another stream when roomStream is created.
+         * @param {Object} [_options.relate] Relate roomStream to another stream when roomStream is created. Use already related (to already existing stream) stream as main roomStream
          * @param {String} [_options.relate.publisherId] publisherId of a stream to which roomStream will be related.
          * @param {String} [_options.relate.streamName] streamName of a stream to which roomStream will be related.
          */
@@ -140,10 +137,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             defaultDesktopViewMode:null,
             defaultMobileViewMode:null,
             writeLevel:23,
-            useRelatedTo: {
-                publisherId: null,
-                streamName: null
-            },
             relate: {}
         };
 
@@ -535,7 +528,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         roomId = _options.roomId;
                     }
 
-                    if(_options.roomId == null && _options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) return;
+                    if(_options.roomId == null && _options.roomPublisherId == null && _options.relate && _options.relate.publisherId == null && _options.relate.streamName == null) return;
                     Q.req("Streams/webrtc", ["log"], function (err, response) {
                         var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -7520,16 +7513,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             closeManually: _options.closeManually,
                             onlyParticipantsAllowed: _options.onlyParticipantsAllowed,
                             writeLevel: _options.writeLevel,
-                            relate: _options.relate,
-                            useRelatedTo: _options.useRelatedTo
+                            relate: _options.relate
                         }
                     });
                 }
-
-                /*if(_options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) {
-                    console.error('Property is missing: publisherId || streamName || publisherId || roomPublisherId || useRelatedTo', _options.roomId == null, _options.roomPublisherId == null, _options.useRelatedTo, _options.useRelatedTo.publisherId == null, _options.useRelatedTo.streamName == null);
-                    return;
-                }*/
 
                 if(Q.info.isMobile || Q.info.isTablet) {
                     log('start: onTextLoad: connect from mobile/tablet browser');
@@ -8075,11 +8062,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             closeManually: options.closeManually,
             description: options.description,
             onlyParticipantsAllowed: options.onlyParticipantsAllowed,
-            /*useRelatedTo: {
-                publisherId: options.publisherId,
-                streamName: options.streamName,
-                relationType: 'Streams/webrtc'
-            },*/
             relate: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,

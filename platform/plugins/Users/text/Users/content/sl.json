@@ -112,7 +112,8 @@
                 "title": "Preusmerjanje v denarnico",
                 "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v svojo denarnico. Ko se prijavite, se vrnite na to stran."
             }
-        }
+        },
+        "connectPlatforms": "ali se povežite z:"
     },
     "setIdentifier": {
         "title": "Dodajte način za prijavo",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopirano! Zdaj ga lahko prilepite kamor koli."
+    },
+    "platforms": {
+        "wallet": "Denarnica",
+        "broadcast": "Oddaja"
+    },
+    "labels": {
+        "addToPhonebook": "Dodaj v moje stike v telefonu",
+        "addLabel": "Novo razmerje",
+        "prompt": "Daj mu ime"
+    },
+    "people": {
+        "People": "Ljudje"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot za sodelovanje na forumu. Zagotovite si svojega na https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

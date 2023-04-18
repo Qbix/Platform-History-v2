@@ -23,7 +23,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
         tool[state.action]();
 
-        /*var pipe = new Q.pipe(["avatar"], tool[state.action].bind(tool));
+        /*var pipe = new Q.Pipe(["avatar"], tool[state.action].bind(tool));
         Q.Streams.Avatar.get(state.recipientUserId, function (err, avatar) {
             if (err) {
                 return
@@ -134,7 +134,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
                     if (Q.isEmpty(state.tokenInfo)) {
-                        state.tokenInfo = Q.Tool.from($(".Assets_web3_balance", tool.element), "Assets/web/balance").getValue();
+                        state.tokenInfo = Q.Tool.from($(".Assets_web3_balance_tool", tool.element)[0], "Assets/web3/balance").getValue();
                     }
                     var amount = parseFloat($amount.val());
                     if (!amount || amount > state.tokenInfo.tokenAmount) {
@@ -212,8 +212,10 @@ Q.Template.set("Assets/web3/transfer/send",
     {{#if recipientUserId}}{{else}}
         <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
     {{/if}}
-    <input name="amount" placeholder="{{payment.EnterAmount}}" />
-    <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>`,
+    <div style="white-space: nowrap">
+        <input name="amount" placeholder="{{payment.EnterAmount}}" />
+        <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>
+    </div>`,
     {text: ['Assets/content']}
 );
 })(window, Q, jQuery);

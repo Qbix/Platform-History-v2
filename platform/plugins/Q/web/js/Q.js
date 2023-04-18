@@ -3507,7 +3507,7 @@ Q.beforeReplace = new Q.Event();
  * @constructor
  * @see {Pipe.prototype.add} for more info on the parameters
  */
-Q.Pipe = function _Q_Pipe(requires, maxTimes, callback) {
+Q.Pipe = function _Q_Pipe(requires, maxTimes, callback, internal) {
 	if (this === Q) {
 		throw new Q.Error("Q.Pipe: omitted keyword new");
 	}
@@ -3517,6 +3517,10 @@ Q.Pipe = function _Q_Pipe(requires, maxTimes, callback) {
 	this.ignore = {};
 	this.finished = false;
 	this.add.apply(this, arguments);
+	this.internal = internal;
+	if (internal && internal.progress) {
+		internal.progress(this);
+	}
 };
 
 var Pp = Q.Pipe.prototype;
@@ -3636,6 +3640,9 @@ Pp.fill = function _Q_pipe_fill(field, ignore) {
 	var pipe = this;
 
 	return function _Q_pipe_fill() {
+		if (pipe.internal && pipe.internal.progress) {
+			pipe.internal.progress(pipe, field);
+		}
 		pipe.params[field] = Array.prototype.slice.call(arguments);
 		pipe.subjects[field] = this;
 		pipe.run(field);
@@ -8984,6 +8991,7 @@ Q.findScript = function (src) {
 /**
  * Gets information about the currently running script.
  * Only works when called synchronously when the script loads.
+ * Returns script src without "?querystring"
  * @method currentScript
  * @static
  * @param {Number} [stackLevels=0] If called within a function
@@ -9005,7 +9013,8 @@ Q.currentScript = function (stackLevels) {
 	}
 	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*?)):/);
 	return {
-		src: parts[1],
+		src: parts[1].split('?')[0],
+		srcWithQuerystring: parts[1],
 		path: parts[2],
 		file: parts[3]
 	};
@@ -9044,10 +9053,11 @@ Q.require = function (src, callback) {
 		}, 0);
 	} else {
 		Q.addScript(src, function _Q_require_callback(err) {
-			if (!(src in _exports)) {
-				_exports[src] = [];
-			}
-			Q.handle(callback, Q, _exports[src]);
+			var srcWithoutQuerystring = src.split('?')[0];
+			var param = _exports[src]
+				|| _exports[srcWithoutQuerystring]
+				|| [];
+			Q.handle(callback, Q, param);
 		});
 	}
 };
@@ -9499,10 +9509,12 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
  *  constructors have run.
  *  It receives (elem, tools, options) as arguments, and the last tool to be
  *  activated as "this".
- * @param {Boolean} activateLazyLoad for internal use, used by Q/lazyload tool
+ * @param {Object} [internal] stuff for internal use
+ * @param {Boolean} [internal.lazyload] used by Q/lazyload tool
+ * @param {Function} [internal.progress] function to cal with incremental progress, to debug Q.activate()
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
-Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
+Q.activate = function _Q_activate(elem, options, callback, internal) {
 	
 	if (!elem) {
 		return;
@@ -9527,14 +9539,15 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 		waitingForTools: [],
 		pipe: Q.pipe(),
 		canceled: false,
-		activating: activating,
-		activateLazyLoad: activateLazyLoad
+		activating: activating
 	};
+	Q.extend(shared, 3, internal);
 	if (typeof options === 'function') {
 		callback = options;
 		options = undefined;
 	}
 	Q.find(elem, true, _activateTools, _initTools, options, shared);
+	internal && internal.progress && internal.progress(shared);
 	shared.pipe.add(shared.waitingForTools, 1, _activated)
 		.run();
 		
@@ -9557,6 +9570,7 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 	
 	function _activated() {
 		var tool = shared.firstTool || shared.tool;
+		shared.internal && shared.internal.progress && shared.internal.progress(shared);
 		if (!Q.isEmpty(shared.tools) && !tool) {
 			throw new Q.Error("Q.activate: tool " + shared.firstToolId + " not found.");
 		}
@@ -10382,7 +10396,7 @@ var _constructors = {};
  *  A shared object we can use to pass info around while activating tools
  */
 function _activateTools(toolElement, options, shared) {
-	if (!shared.activateLazyLoad &&
+	if (!shared.lazyload &&
 	(toolElement instanceof Element)) {
 		var attr = toolElement.getAttribute('data-q-lazyload');
 		if (attr === 'waiting' || attr === 'removed') {
@@ -10494,6 +10508,7 @@ function _activateTools(toolElement, options, shared) {
 					shared.firstTool = tool;
 				}
 				shared.pipe.fill(uniqueToolId)();
+				shared.internal && shared.internal.progress && shared.internal.progress(shared);
 			}
 			if (!tool) {
 				return;
@@ -10516,7 +10531,7 @@ _activateTools.alreadyActivated = {};
  */
 function _initTools(toolElement, options, shared) {
 	
-	if (!shared.activateLazyLoad &&
+	if (!shared.lazyload &&
 	(toolElement instanceof Element)) {
 		var attr = toolElement.getAttribute('data-q-lazyload');
 		if (attr === 'waiting' || attr === 'removed') {
@@ -11834,13 +11849,13 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 *  It receives (elem, options, tools) as arguments, and the last tool to be
 	 *  activated as "this".
 	 */
-	$.fn.activate = function _jQuery_fn_activate(options, callback) {
+	$.fn.activate = function _jQuery_fn_activate(options, callback, internal) {
 		if (!this.length) {
 			Q.handle(callback, null, options, []);
 			return this;
 		}
 		return this.each(function _jQuery_fn_activate_each(index, element) {
-			Q.activate(element, options, callback);
+			Q.activate(element, options, callback, internal);
 		});
 	};
 	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;

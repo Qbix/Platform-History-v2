@@ -112,7 +112,8 @@
                 "title": "Ailgyfeirio i Wallet",
                 "content": "Unwaith y byddwch chi&#39;n cau&#39;r deialog hwn, byddwch chi&#39;n cael eich tywys i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
             }
-        }
+        },
+        "connectPlatforms": "neu gysylltu gan ddefnyddio:"
     },
     "setIdentifier": {
         "title": "Ychwanegu ffordd i fewngofnodi",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Wedi&#39;i gopïo! Nawr gallwch chi ei gludo yn unrhyw le."
+    },
+    "platforms": {
+        "wallet": "Waled",
+        "broadcast": "Darllediad"
+    },
+    "labels": {
+        "addToPhonebook": "Ychwanegu at Fy Nghysylltiadau Ffôn",
+        "addLabel": "Perthynas Newydd",
+        "prompt": "Rhowch enw iddo"
+    },
+    "people": {
+        "People": "Pobl"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot ymgysylltu Fforwm. Mynnwch un eich hun yn https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

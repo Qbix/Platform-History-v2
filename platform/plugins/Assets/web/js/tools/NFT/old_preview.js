@@ -113,7 +113,7 @@
 
             $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
 
-            var pipe = new Q.pipe(pipeList, function (params, subjects) {
+            var pipe = new Q.Pipe(pipeList, function (params, subjects) {
                 // collect errors
                 var errors = [];
                 Q.each(pipeList, function (index, value) {

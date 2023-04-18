@@ -80,7 +80,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	
 					if (parseInt(item.token_address) > 0) {
 						// listen transfer event
-						Q.Users.Web3.getContract("Assets/templates/R3/CommunityCoin/contract", {
+						Q.Users.Web3.getContract("Assets/templates/R1/CommunityCoin/contract", {
 							chainId: state.chainId,
 							contractAddress: item.token_address,
 							readOnly: true

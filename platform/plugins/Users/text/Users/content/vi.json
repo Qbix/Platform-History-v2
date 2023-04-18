@@ -112,7 +112,8 @@
                 "title": "Chuyển hướng đến Wallet",
                 "content": "Sau khi đóng hộp thoại này, bạn sẽ được chuyển đến ví của mình. Sau khi bạn đăng nhập, hãy quay lại trang này."
             }
-        }
+        },
+        "connectPlatforms": "hoặc kết nối bằng cách sử dụng:"
     },
     "setIdentifier": {
         "title": "Thêm một cách để đăng nhập",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Đã sao chép! Bây giờ bạn có thể dán nó ở bất cứ đâu."
+    },
+    "platforms": {
+        "wallet": "Cái ví",
+        "broadcast": "Phát tin"
+    },
+    "labels": {
+        "addToPhonebook": "Thêm vào danh bạ điện thoại của tôi",
+        "addLabel": "Mối quan hệ mơi",
+        "prompt": "Đặt cho nó một cái tên"
+    },
+    "people": {
+        "People": "Mọi người"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot tham gia diễn đàn. Nhận của riêng bạn tại https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

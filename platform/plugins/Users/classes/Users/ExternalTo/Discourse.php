@@ -12,152 +12,129 @@
  */
 class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_ExternalTo_Interface
 {
-	protected static $apiKey = null;
-	protected static $apiHost = null;
-	protected static $apiUsername = null;
+	protected $apiKey = null;
+	protected $apiHost = null;
+	protected $apiUsername = null;
 
-	protected static function _contract () {
-		self::$apiKey = Q_Config::get("Discourse", "API", "key", null);
-		self::$apiHost = Q_Config::get("Discourse", "API", "host", null);
-		self::$apiUsername = Q_Config::get("Discourse", "API", "username", null);
+	protected function _loadConfig () {
+        list($appId, $appInfo) = Users::appInfo($this->platform, $this->appId);
+		$this->apiKey = $appInfo['keys']['users'];
+		$this->apiHost = $appInfo['url'];
+		$this->apiUsername = 'system';
 	}
-    public static function createForumUser ($name, $email, $password, $platformId) {
-		    self::_contract();
 
-        // don't save api key to logs
-        $url = sprintf("%s/users", self::$apiHost);
+    public function create()
+    {
+        $this->_loadConfig();
+        $user = Users::fetch($this->userId, true);
 
+        // SECURITY: don't save api key to any request logs!
+        $url = sprintf("%s/users", $this->apiHost);
+        $defaultEmailAddress = Q::interpolate(
+            Q_Config::get('Users', 'bots', 'defaults', 'email', ''),
+            array('random' => Q_Utils::randomHexString(8))
+        );
+        $displayName = $user->displayName();
+        $email = isset($user->emailAddress) ? $user->emailAddress : $defaultEmailAddress;
+        $password = Q_Utils::randomHexString(16);
+        $username = (!empty($user->username) ? $user->username : Q_Utils::normalize($displayName));
         $fields = array(
-            'name' => $name,
+            'name' => $displayName,
             'email' => $email,
             'password' => $password,
-            'username' => Q_Utils::normalize($name),
+            'username' => $username,
             'active' => true,
             'approved' => true
         );
-        // Q::log("Request to ".$url, "discourse");
-        $f = $fields; $f['password'] = '***';
-        // Q::log(print_r($f, true), "discourse");
-
         $headers = array(
-            "Api-Key: ".self::$apiKey,
-            "Api-Username: ".self::$apiUsername
+            "Api-Key: ".$this->apiKey,
+            "Api-Username: ".$this->apiUsername
         );
 
-        $result = Q_Utils::post($url, $fields, null,null, $headers);
+        $text = Q_Text::get('Users/content');
+        Q_Utils::put($this->apiHost."/u/$username.json", array(
+            'title' => Q::ifset($text, 'external', 'defaults', 'title', ''),
+            'bio_raw' => Q::ifset($text, 'external', 'defaults', 'bio', ''),
+            'website' => Q::ifset($text, 'external', 'defaults', 'website', 'https://engageusers.ai')
+        ), null, null, $headers);
 
-        $result = json_decode($result);
-        $success = Q::ifset($result, 'success', false);
-        $userId = Q::ifset($result, 'user_id', null);
-
-        // Q::log('RESULT', 'discourse');
-        // Q::log($result, 'discourse');
-
-        // errors handle
-        if (!$success) {
-            $errorMessage = strtolower(Q::ifset($result, 'message', null));
-
-            if (Q::startsWith(strtolower($errorMessage), 'username must be unique')) {
-                // trying to unique username
-                $parts = explode("_", $name);
-                if (count($parts) > 1 && is_numeric(end($parts))) {
-                    $parts[count($parts)-1] += 1;
-                    $name = implode("_", $parts);
-                } else {
-                    $name .= rand()%100;
-                }
-
-                self::createForumUser($name, $email, $password, $platformId);
-            }
-
-            // Q::log($result, "discourse");
-            return true;
+        $response = Q_Utils::get($this->apiHost."/u/$username.json", null, null, $headers);
+        $result = json_decode($response);
+        if (Q::ifset($result, 'error_type', null) !== 'not_found') {
+            $user_id = Q::ifset($result, 'user', 'id', null);
+        } else {
+            $response = Q_Utils::post($url, $fields, null,null, $headers);
+            $result = json_decode($response);
+            $user_id = Q::ifset($result, 'user_id', null);
+            // // try up to 10 times with different usernames
+            // for ($i = 0; !$success && $i < 10; ++$i) {
+            //     $errorMessage = strtolower(Q::ifset($result, 'message', ''));
+            //     if (Q::startsWith(strtolower($errorMessage), 'username must be unique')) {
+            //         $parts = explode("_", $username);
+            //         if (count($parts) > 1 && is_numeric(end($parts))) {
+            //             $parts[count($parts)-1] += 1;
+            //             $fields['username'] = implode("_", $parts);
+            //         } else {
+            //             $fields['username'] .= '_' . rand()%1000;
+            //         }
+            //     }
+            //     $response = Q_Utils::post($url, $fields, null,null, $headers);
+            //     $result = json_decode($response);
+            //     $success = Q::ifset($result, 'success', false);
+            //     $user_id = Q::ifset($result, 'user_id', null);
+            // }
         }
-        // if user registered, try to deactivate and activate
-        // this trick need to approve email (https://meta.discourse.org/t/api-to-create-a-user-without-sending-out-activation-email/23432/9)
-        if ($userId) {
-            $deactivateUrl = sprintf("%s/admin/users/%s/deactivate.json", self::$apiHost, $userId);
-            $activateUrl = sprintf("%s/admin/users/%s/activate.json", self::$apiHost ,$userId);
+        
+        $url = sprintf("%s/admin/users/%d/trust_level", $this->apiHost, $user_id);
+        $response = Q_Utils::put($url, array(
+            'level' => 3
+        ), null,null, $headers);
 
-            $data = array(
-                'api_key' => self::$apiKey,
-                'api_username' => self::$apiUsername
-            );
+        $this->setExtra('user_id', $user_id);
+        $this->setExtra('username', $fields['username']);
+        $this->save(true);
 
-            // deactivate user
-            Q_Utils::put($deactivateUrl, $data);
-
-            // activate user
-            Q_Utils::put($activateUrl, $data);
-
-            // Q::log("DATA", 'discourse');
-            // Q::log($data, 'discourse');
-        }
-
-        if($userId && $name) {
-            $stream = Streams::create($platformId, $platformId, 'Streams/users', array(
-                'name' => 'Streams/user/discourse'
-            ));
-            $stream->setAttribute("username", $name);
-            $stream->setAttribute("userId", $userId);
-            $stream->save();
-
-            self::updateForumUserAvatar();
-        }
-
-        // Q::log($result, "discourse");
+        $this->updateAvatar();
     }
 
-    public static function updateForumUserAvatar() {
-		    self::_contract();
+    function updateAvatar()
+    {
+        self::_loadConfig();
+        $user_id = $this->getExtra('user_id');
+        $username = $this->getExtra('username');
+        Q_Valid::requireFields(
+            array('user_id', 'username'),
+            compact('user_id', 'username'), 
+            true
+        );
 
-        $qbixUserId = Users::loggedInUser(true)->id;
-        $stream = Streams_Stream::fetch($qbixUserId, $qbixUserId, 'Streams/user/discourse');
-
-        if(!$stream) {
-            return;
-        }
-
-        $discourseUserId = $stream->getAttribute("userId");
-        $discourseUsername = $stream->getAttribute("username");
-
-        if(empty($discourseUserId) || empty($discourseUsername)) {
-            return;
-        }
-
-        $usersAvatar = new Streams_Avatar();
-        $usersAvatar->toUserId = '';
-        $usersAvatar->publisherId = $qbixUserId;
-        $usersAvatar->retrieve();
-        $avatarUrl = Q_Uri::interpolateUrl($usersAvatar->fields['icon']) . '/400.png';
+        $user = Users::fetch($this->userId, true);
+        $avatarUrl = $user->iconUrl('400.png');
         $baseUrl = Q_Request::baseUrl();
         $app = Q::app();
         $head = APP_FILES_DIR.DS.$app.DS.'uploads';
         $tail = str_replace($baseUrl . '/Q/uploads/', DS, $avatarUrl);
-        $imagePath = $head . $tail;
-        if (!file_exists($imagePath)) {
-            Q::log("File doesn't exist: ".$imagePath, "discourse");
-            return;
+        $filename = $head . $tail;
+        if (!file_exists($filename)) {
+            throw new Q_Exception_MissingFile(compact('filename'));
         }
 
-        $imageInfo = getimagesize($imagePath);
-        $cfile = curl_file_create($imagePath, $imageInfo['mime'], basename($imagePath));
+        $imageInfo = getimagesize($filename);
+        $cfile = curl_file_create($filename, $imageInfo['mime'], basename($filename));
 
-        $uploadsUrl = sprintf("%s/uploads.json", self::$apiHost);
+        $uploadsUrl = sprintf("%s/uploads.json", $this->apiHost);
 
         $fields = array(
             'type' => 'avatar',
-            'user_id' => $discourseUserId,
+            'user_id' => $user_id,
             'files[]' => $cfile,
             'synchronous' => true
         );
-        // Q::log("Request to ".$uploadsUrl, "discourse");
-        // Q::log(print_r($fields, true), "discourse");
 
-        // don't save api key to logs
+        // SECURITY: don't save api key to any request logs
         $headers = array(
-            "Api-Key: ".self::$apiKey,
-            "Api-Username: ".self::$apiUsername,
+            "Api-Key: ".$this->apiKey,
+            "Api-Username: ".$this->apiUsername,
             "Content-Type: multipart/form-data"
         );
 
@@ -176,23 +153,25 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $uploadId = Q::ifset($result, 'id', null);
 
         if($uploadId) {
-            $updateAvatarUrl = sprintf("%s/u/%s/preferences/avatar/pick.json", self::$apiHost, $discourseUsername);
+            $updateAvatarUrl = sprintf("%s/u/%s/preferences/avatar/pick.json", $this->apiHost, $username);
 
             $data = array(
                 'upload_id' => $uploadId,
                 'type' => 'uploaded'
             );
 
-            Q_Utils::put($updateAvatarUrl, $data, null, null, $headers);
+            array_pop($headers);
+            // $headers[2] = 'Content-Type: application/json';
+            $response = Q_Utils::put($updateAvatarUrl, $data, null, null, $headers);
         }
     }
 
     function logout($userId) {
-        self::_contract();
-        Q_Utils::post(self::$apiHost . "/admin/users/$userId/log_out", array(), null, array(
+        self::_loadConfig();
+        Q_Utils::post($this->apiHost . "/admin/users/$userId/log_out", array(), null, array(
             'Content-Type' => 'multipart/form-data',
-            'Api-Key' => self::$apiKey,
-            'Api-Username' => self::$apiUsername
+            'Api-Key' => $this->apiKey,
+            'Api-Username' => $this->apiUsername
         ));
     }
 

@@ -112,7 +112,8 @@
                 "title": "Redirigir a Wallet",
                 "content": "Una vez que cierre este cuadro de diálogo, será llevado a su billetera. Después de iniciar sesión, regrese a esta página."
             }
-        }
+        },
+        "connectPlatforms": "o conectarse usando:"
     },
     "setIdentifier": {
         "title": "Agregar una forma de iniciar sesión",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "¡Copiado! Ahora puedes pegarlo en cualquier lugar."
+    },
+    "platforms": {
+        "wallet": "Billetera",
+        "broadcast": "Transmisión"
+    },
+    "labels": {
+        "addToPhonebook": "Agregar a los contactos de mi teléfono",
+        "addLabel": "Nueva relación",
+        "prompt": "Dale un nombre"
+    },
+    "people": {
+        "People": "Gente"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot de participación en el foro. Consigue el tuyo en https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -2005,7 +2005,7 @@ abstract class Users extends Base_Users
 	 * @param {string|false} $asUserId The user who would be doing the managing.
 	 *   If it equals false or Q::app() then the function always returns true.
 	 * @param {string} $userId The user whose contact labels they are
-	 * @param {string} $label The label that will be managed
+	 * @param {string} $label The label to be managed. Pass empty string to test whether at least some labels can be managed.
 	 * @param {boolean} $throwIfNotAuthorized Throw an exception if not authorized
 	 * @param {boolean} $readOnly Whether we just want to know if the user can view the labels
 	 * @return {boolean} Whether this label is allowed to be managed

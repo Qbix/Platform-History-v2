@@ -112,7 +112,8 @@
                 "title": "Redirecionando para a carteira",
                 "content": "Depois de fechar esta caixa de diálogo, você será levado para sua carteira. Depois de fazer login, retorne a esta página."
             }
-        }
+        },
+        "connectPlatforms": "ou conecte usando:"
     },
     "setIdentifier": {
         "title": "Adicionar uma maneira de fazer login",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Copiado! Agora você pode colá-lo em qualquer lugar."
+    },
+    "platforms": {
+        "wallet": "Carteira",
+        "broadcast": "Transmissão"
+    },
+    "labels": {
+        "addToPhonebook": "Adicionar aos contatos do meu telefone",
+        "addLabel": "Novo relacionamento",
+        "prompt": "Dê um nome"
+    },
+    "people": {
+        "People": "Pessoas"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot de engajamento do fórum. Obtenha o seu em https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

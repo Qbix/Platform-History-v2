@@ -315,7 +315,7 @@ Q.inherit = function _Q_inherit(Base, Constructor) {
  * @constructor
  * @see {Q.Pipe.prototype.add} for more info on the parameters
  */
-Q.Pipe = function _Q_Pipe(requires, maxTimes, callback) {
+Q.Pipe = function _Q_Pipe(requires, maxTimes, callback, internal) {
 	if (this === Q) {
 		throw new Q.Error("Q.Pipe: omitted keyword new");
 	}
@@ -325,6 +325,9 @@ Q.Pipe = function _Q_Pipe(requires, maxTimes, callback) {
 	this.ignore = {};
 	this.finished = false;
 	this.add.apply(this, arguments);
+	if (internal && internal.progress) {
+		internal.progress(this);
+	}
 };
 
 /**
@@ -438,6 +441,9 @@ Q.Pipe.prototype.fill = function _Q_pipe_fill(field, ignore) {
 	var pipe = this;
 
 	return function _Q_pipe_fill() {
+		if (pipe.internal && pipe.internal.progress) {
+			pipe.internal.progress(pipe, field);
+		}
 		pipe.params[field] = Array.prototype.slice.call(arguments);
 		pipe.subjects[field] = this;
 		pipe.run(field);

@@ -87,7 +87,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		tool.refresh();
 	}, tool);
 
-	var pipe = new Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
+	var pipe = new Q.Pipe(['styles', 'texts'], tool.refresh.bind(tool));
 
 	// render the tool
 	Q.addStylesheet("{{Streams}}/css/tools/related.css", pipe.fill('styles'));

@@ -112,7 +112,8 @@
                 "title": "Peradresuojama į Piniginę",
                 "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
             }
-        }
+        },
+        "connectPlatforms": "arba prisijunkite naudodami:"
     },
     "setIdentifier": {
         "title": "Pridėkite prisijungimo būdą",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Nukopijuota! Dabar galite jį įklijuoti bet kur."
+    },
+    "platforms": {
+        "wallet": "Piniginė",
+        "broadcast": "Transliacija"
+    },
+    "labels": {
+        "addToPhonebook": "Pridėti prie mano telefono kontaktų",
+        "addLabel": "Nauji santykiai",
+        "prompt": "Duok jam pavadinimą"
+    },
+    "people": {
+        "People": "Žmonės"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forumo įtraukimo botas. Gaukite savo adresu https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

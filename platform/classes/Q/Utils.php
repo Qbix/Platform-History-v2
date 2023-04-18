@@ -1062,10 +1062,9 @@ class Q_Utils
 		$headers = array("Host: ".$host);
 
 		if (is_array($data)) {
-			$data = http_build_query($data, '', '&');
-		}
-		if (!is_string($data)) {
-			$data = '';
+			$dataContent = http_build_query($data, '', '&');
+		} else {
+			$dataContent = is_string($data) ? $data : '';
 		}
 		
 		if (!isset($header) or is_array($header)) {
@@ -1079,21 +1078,23 @@ class Q_Utils
 				} else {
 					$found = false;
 					foreach ($header as $h) {
-						if (Q::startsWith($h, 'Content-type:')) {
+						if (Q::startsWith($h, 'Content-Type:')) {
 							$found = true;
 						}
 					}
 					if (!$found) {
-						$headers[] = "Content-type: application/x-www-form-urlencoded";
+						$headers[] = "Content-Type: application/x-www-form-urlencoded";
+					} else if ($h === 'Content-Type: application/json') {
+						$dataContent = json_encode($data);
 					}
 					$found = false;
 					foreach ($header as $h) {
-						if (Q::startsWith($h, 'Content-length:')) {
+						if (Q::startsWith($h, 'Content-Length:')) {
 							$found = true;
 						}
 					}
 					if (!$found) {
-						$headers[] = "Content-length: " . strlen($data);
+						$headers[] = "Content-Length: " . strlen($dataContent);
 					}
 				}
 			}
@@ -1130,7 +1131,7 @@ class Q_Utils
 				case 'POST':
 					curl_setopt_array($ch, array(
 						CURLOPT_URL => $url,
-						CURLOPT_POSTFIELDS => $data,
+						CURLOPT_POSTFIELDS => $dataContent,
 						CURLOPT_POST => true
 					));
 					break;
@@ -1141,7 +1142,7 @@ class Q_Utils
 				case 'PUT':
 					curl_setopt_array($ch, array(
 						CURLOPT_URL => $url,
-						CURLOPT_POSTFIELDS => $data,
+						CURLOPT_POSTFIELDS => $dataContent,
 						CURLOPT_CUSTOMREQUEST => 'PUT'
 					));
 					break;
@@ -1175,7 +1176,7 @@ class Q_Utils
 				'http' => array(
 					'method' => $method,
 					'header' => $header,
-					'content' => $data,
+					'content' => $dataContent,
 					'max_redirects' => 10,
 					'timeout' => isset($timeout) ? $timeout : Q_UTILS_CONNECTION_TIMEOUT
 				)

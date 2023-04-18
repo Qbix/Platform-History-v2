@@ -49,7 +49,6 @@ function Streams_webrtc_post($params = array())
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
     $writeLevel = Q::ifset($params, 'writeLevel', 23);
     $closeManually = Q::ifset($params, 'closeManually', null);
-    $useRelatedTo = Q::ifset($params, 'useRelatedTo', null);
 
     if(Q_Request::slotName('data')) {
         //this is requests which were sent by node.js when some event was fired (client.on('disconnect'), for example)
@@ -312,10 +311,13 @@ function Streams_webrtc_post($params = array())
             return Q_Response::setSlot("room", $response);  
             
         }      
-    } else if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {
+    } /*else if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {*/
+        /*$webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], null, null, $useRelatedTo["relationType"], $resumeClosed);*/
 
-        $webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], null, null, $useRelatedTo["relationType"], $resumeClosed);
+    else if(!empty($relate) && !empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
 
+        $webrtcStream = $webrtc->getRoomStreamRelatedTo($relate["publisherId"], $relate["streamName"], null, null, $relate["relationType"], $resumeClosed);
+    
         if(is_null($webrtcStream)) {
             $webrtcStream = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
         }

@@ -9,7 +9,7 @@ Q.Tool.define("Assets/plan", function(options) {
 	var tool = this;
 	var state = this.state;
 
-	var pipe = new Q.pipe(["style", "script", "text", "stream"], tool.refresh.bind(tool));
+	var pipe = new Q.Pipe(["style", "script", "text", "stream"], tool.refresh.bind(tool));
 
 	Q.addStylesheet('{{Assets}}/css/tools/Plan.css', { slotName: 'Assets' }, pipe.fill("style"));
 	Q.addScript('{{Q}}/js/datejs/date.js', pipe.fill("script"));

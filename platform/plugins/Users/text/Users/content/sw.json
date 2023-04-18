@@ -112,7 +112,8 @@
                 "title": "Inaelekeza kwenye Wallet",
                 "content": "Mara tu ukifunga kidirisha hiki, utachukuliwa hadi kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
             }
-        }
+        },
+        "connectPlatforms": "au unganisha kwa kutumia:"
     },
     "setIdentifier": {
         "title": "Ongeza njia ya kuingia",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Imenakiliwa! Sasa unaweza kuibandika popote."
+    },
+    "platforms": {
+        "wallet": "Mkoba",
+        "broadcast": "Tangaza"
+    },
+    "labels": {
+        "addToPhonebook": "Ongeza Kwenye Anwani Zangu za Simu",
+        "addLabel": "Uhusiano Mpya",
+        "prompt": "Ipe jina"
+    },
+    "people": {
+        "People": "Watu"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Boti ya ushiriki wa jukwaa. Jipatie yako katika https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

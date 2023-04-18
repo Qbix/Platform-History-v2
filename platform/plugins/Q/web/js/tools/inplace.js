@@ -109,7 +109,7 @@ Q.Tool.define("Q/inplace", function (options) {
 		name: 'Q/inplace/tool'
 	},
 	timing: {
-		waitingInterval: 100,
+		waitingInterval: 500,
 	},
 	onLoad: new Q.Event(),
 	beforeSave: new Q.Event(),

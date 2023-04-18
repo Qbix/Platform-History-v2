@@ -101,7 +101,8 @@
                 "title": "מפנה מחדש לארנק",
                 "content": "לאחר שתסגור את הדו-שיח הזה, תועבר לארנק שלך. לאחר הכניסה, חזור לדף זה."
             }
-        }
+        },
+        "connectPlatforms": "או התחבר באמצעות:"
     },
     "setIdentifier": {
         "title": "הוסף דרך להתחברות",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "מוּעֲתָק! עכשיו אתה יכול להדביק אותו בכל מקום."
+    },
+    "platforms": {
+        "wallet": "ארנק",
+        "broadcast": "מִשׁדָר"
+    },
+    "labels": {
+        "addToPhonebook": "הוסף לטלפון שלי אנשי קשר",
+        "addLabel": "מערכת יחסים חדשה",
+        "prompt": "תן לזה שם"
+    },
+    "people": {
+        "People": "אֲנָשִׁים"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "בוט מעורבות בפורום. קבל משלך בכתובת https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -112,7 +112,8 @@
                 "title": "در حال تغییر مسیر به کیف پول",
                 "content": "پس از بستن این گفتگو، به کیف پول خود منتقل خواهید شد. پس از ورود به سیستم، به این صفحه بازگردید."
             }
-        }
+        },
+        "connectPlatforms": "یا با استفاده از:"
     },
     "setIdentifier": {
         "title": "راهی برای ورود به سیستم اضافه کنید",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "کپی شده! اکنون می توانید آن را در هر جایی بچسبانید."
+    },
+    "platforms": {
+        "wallet": "کیف پول",
+        "broadcast": "پخش"
+    },
+    "labels": {
+        "addToPhonebook": "افزودن به مخاطبین تلفن من",
+        "addLabel": "رابطه جدید",
+        "prompt": "اسمش را بگذار"
+    },
+    "people": {
+        "People": "مردم"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "ربات تعامل انجمن. خود را در https:\/\/engageusers.ai دریافت کنید",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

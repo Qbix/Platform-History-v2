@@ -510,7 +510,7 @@ class Q_Bootstrap
 			));
 		}
 		foreach ($publicKeys as $i => $pk) {
-			if (in_array($pk, $pks)) {
+			if (!in_array($pk, $pks)) {
 				throw new Q_Exception_BadValue(array(
 					'internal' => $pk,
 					'problem' => 'not among whitelisted public keys'
@@ -527,7 +527,7 @@ class Q_Bootstrap
 		// you're only providing source code that was stored
 		// by a secure process, such as downloading from a
 		// specific trusted https website.
-		return include($source); // execute this PHP code in this context
+		return eval($source); // execute this PHP code in this context
 	}
 
 	/**

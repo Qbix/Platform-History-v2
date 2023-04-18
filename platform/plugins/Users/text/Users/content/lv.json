@@ -112,7 +112,8 @@
                 "title": "Notiek novirzīšana uz maku",
                 "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
             }
-        }
+        },
+        "connectPlatforms": "vai izveidojiet savienojumu, izmantojot:"
     },
     "setIdentifier": {
         "title": "Pievienojiet veidu, kā pieteikties",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopēts! Tagad varat to ielīmēt jebkurā vietā."
+    },
+    "platforms": {
+        "wallet": "Maks",
+        "broadcast": "Raidījums"
+    },
+    "labels": {
+        "addToPhonebook": "Pievienot mana tālruņa kontaktpersonām",
+        "addLabel": "Jaunas attiecības",
+        "prompt": "Piešķiriet tai nosaukumu"
+    },
+    "people": {
+        "People": "Cilvēki"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Foruma iesaistīšanās robots. Iegūstiet savu vietnē https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

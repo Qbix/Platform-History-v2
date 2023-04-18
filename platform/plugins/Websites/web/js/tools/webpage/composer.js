@@ -111,6 +111,8 @@
 						return false;
 					}
 
+					state.url = url;
+
 					// start url parsing
 					var val = $message.val();
 					$url.addClass('Q_disabled');
@@ -153,9 +155,6 @@
 							url: url
 						}, Date.now()).activate(function () {
 							$startButton.removeClass('Q_disabled');
-
-							// save url in state to use later
-							state.url = url;
 						});
 
 						Q.handle(state.onScrape, tool);

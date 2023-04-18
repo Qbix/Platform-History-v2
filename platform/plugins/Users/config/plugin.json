@@ -401,6 +401,11 @@
 				"limit": 100
 			},
 			"randomAngles": false
+		},
+		"bots": {
+			"defaults": {
+				"email": "bot+{{random}}@engageusers.ai"
+			}
 		}
 	}
 }

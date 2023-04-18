@@ -101,7 +101,8 @@
                 "title": "Po ridrejtohet te Portofoli",
                 "content": "Pasi të mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të identifikoheni, kthehuni në këtë faqe."
             }
-        }
+        },
+        "connectPlatforms": "ose lidheni duke përdorur:"
     },
     "setIdentifier": {
         "title": "Shtoni një mënyrë për t&#39;u identifikuar",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "E kopjuar! Tani mund ta ngjitni kudo."
+    },
+    "platforms": {
+        "wallet": "Portofoli",
+        "broadcast": "Transmetimi"
+    },
+    "labels": {
+        "addToPhonebook": "Shto te kontaktet e telefonit tim",
+        "addLabel": "Marrëdhënie e re",
+        "prompt": "Jepini një emër"
+    },
+    "people": {
+        "People": "Njerëzit"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot i angazhimit në forum. Merrni tuajën në https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -101,7 +101,8 @@
                 "title": "Wallet-era birbideratzen",
                 "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
             }
-        }
+        },
+        "connectPlatforms": "edo konektatu erabiliz:"
     },
     "setIdentifier": {
         "title": "Gehitu saioa hasteko modu bat",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopiatu! Orain edonon itsats dezakezu."
+    },
+    "platforms": {
+        "wallet": "Diru-zorroa",
+        "broadcast": "Emisioa"
+    },
+    "labels": {
+        "addToPhonebook": "Gehitu Nire telefonoko kontaktuetara",
+        "addLabel": "Harreman Berria",
+        "prompt": "Eman izena"
+    },
+    "people": {
+        "People": "Jendea"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Foroan parte hartzeko bot. Eskuratu zurea https:\/\/engageusers.ai helbidean",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

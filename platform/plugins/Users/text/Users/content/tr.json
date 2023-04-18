@@ -112,7 +112,8 @@
                 "title": "Cüzdan&#39;a Yönlendirme",
                 "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
             }
-        }
+        },
+        "connectPlatforms": "veya şunu kullanarak bağlanın:"
     },
     "setIdentifier": {
         "title": "Giriş yapmak için bir yol ekleyin",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "Kopyalandı! Artık herhangi bir yere yapıştırabilirsiniz."
+    },
+    "platforms": {
+        "wallet": "Cüzdan",
+        "broadcast": "Yayın"
+    },
+    "labels": {
+        "addToPhonebook": "Telefon Kişilerime Ekle",
+        "addLabel": "Yeni ilişki",
+        "prompt": "Bir isim ver"
+    },
+    "people": {
+        "People": "İnsanlar"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Forum katılım botu. https:\/\/engageusers.ai adresinde kendinizinkini edinin",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -112,7 +112,8 @@
                 "title": "Mengubah hala ke Wallet",
                 "content": "Sebaik sahaja anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
             }
-        }
+        },
+        "connectPlatforms": "atau sambung menggunakan:"
     },
     "setIdentifier": {
         "title": "Tambah cara untuk log masuk",
@@ -154,5 +155,24 @@
     },
     "clipboard": {
         "Copied": "disalin! Kini anda boleh menampalnya di mana-mana sahaja."
+    },
+    "platforms": {
+        "wallet": "Dompet",
+        "broadcast": "Siarkan"
+    },
+    "labels": {
+        "addToPhonebook": "Tambahkan Pada Kenalan Telefon Saya",
+        "addLabel": "Hubungan Baru",
+        "prompt": "Beri nama"
+    },
+    "people": {
+        "People": "Orang ramai"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "Bot penglibatan forum. Dapatkan sendiri di https:\/\/engageusers.ai",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }
