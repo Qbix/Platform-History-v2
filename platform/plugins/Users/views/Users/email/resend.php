@@ -1,3 +1,7 @@
+<div style="text-align: center">
+	<?php echo Q_Html::img('img/icon/200.png') ?>
+</div>
+
 <h1>
 	Thanks for signing up with <?php echo $communityName ?>,
 	<?php echo $user->username ?>

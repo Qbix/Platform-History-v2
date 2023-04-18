@@ -1,3 +1,7 @@
+<div style="text-align: center">
+	<?php echo Q_Html::img('img/icon/200.png') ?>
+</div>
+
 <p>
 	<?php echo Q::text($activation['Thanks'], array($communityName)) ?>
 </p>
