@@ -144,15 +144,6 @@ class Users_Email extends Base_Users_Email
 					$transport = null;
 				}
 			}
-			
-			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
-				$logMessage = "Sent message to $emailAddress:\n$subject\n$body";
-				if (!isset($transport)) {
-					Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
-					$logMessage = "Would have $logMessage";
-				}
-				Q::log($logMessage, $key);
-			}
 
 			if ($transport) {
 				$email = new Zend_Mail();
@@ -194,6 +185,15 @@ class Users_Email extends Base_Users_Email
 				} catch (Exception $e) {
 					throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
 				}
+			}
+
+			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
+				$logMessage = "Sent message to $emailAddress:\n$subject\n$body";
+				if (!isset($transport)) {
+					Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
+					$logMessage = "Would have $logMessage";
+				}
+				Q::log($logMessage, $key);
 			}
 		}
 		
