@@ -235,7 +235,7 @@ class Users_Email extends Base_Users_Email
 			$user = new Users_User();
 			$user->id = $this->userId;
 			if (!$user->retrieve()) {
-				throw new Q_Exception_NotVerified(array(
+				throw new Users_Exception_NotVerified(array(
 					'type' => 'email address'
 				), 'emailAddress');
 			}
