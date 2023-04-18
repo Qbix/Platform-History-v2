@@ -40,6 +40,7 @@ class Users_Email extends Base_Users_Email
 	 * @param {string} [$options.language] Preferred language to be used for the view
 	 * @param {array} [$options.html="Q/layout/email.php"] Preferred view file to use for HTML layout. Pass true to send HTML without a layout. Pass false for no HTML.
 	 * @param {array} [$options.title] Optionally set a different title for an HTML email, otherwise subject is used.
+	 * @param {array} [$options.head] Optionally any other text to insert into the HTML head, such as <style> tags etc.
 	 * @throws Q_Exception_WrongType
 	 * @return {bool} True if success or throw exception
 	 */
@@ -159,7 +160,8 @@ class Users_Email extends Base_Users_Email
 				} else {
 					if (is_string($options['html'])){
 						$title = Q::interpolate(Q::ifset($options, 'title', $subject));
-						$body = Q::view($options['html'], compact('body', 'title'));
+						$head = Q::ifset($options, 'head', null);
+						$body = Q::view($options['html'], compact('body', 'title', 'head'));
 					}
 					$email->setBodyHtml($body);
 				}
