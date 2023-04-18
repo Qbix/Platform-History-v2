@@ -175,6 +175,9 @@
 			"timeout": 5,
 			"contact": true
 		},
+		"email": {
+			"head": "<style> a { font-weight: bold; } </style>"
+		},
 		"mobile": {
 			"gateways": {
 				"at&t": "txt.att.net",

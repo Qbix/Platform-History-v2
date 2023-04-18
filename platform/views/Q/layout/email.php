@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="x-apple-disable-message-reformatting">
 <title><?php echo Q_Html::text($title) ?></title>
-<?php if (isset($head)) echo $head ?>
+<?php if (isset($head)) echo $head ?> 
 </head>
 <body style="margin:0;padding:0;min-width:100%;background-color:#ffffff;">
     <?php echo $body ?>

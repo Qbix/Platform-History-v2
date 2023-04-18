@@ -79,7 +79,15 @@ class Users_Email extends Base_Users_Email
 		
 		$app = Q::app();
 		$subject = Q_Handlebars::renderSource($subject, $fields);
-		$body = Q::view($view, $fields, array('language' => $options['language']));
+		$prevValue = Q_Html::$environmentWithoutJavascript;
+		Q_Html::$environmentWithoutJavascript = true;
+		try {
+			$body = Q::view($view, $fields, array('language' => $options['language']));
+			Q_Html::$environmentWithoutJavascript = $prevValue;
+		} catch (Exception $e) {
+			Q_Html::$environmentWithoutJavascript = $prevValue;
+			throw $e;
+		}
 
 		$from = Q::ifset($options, 'from', Q_Config::get('Users', 'email', 'from', null));
 		if (!isset($from)) {
@@ -160,7 +168,7 @@ class Users_Email extends Base_Users_Email
 				} else {
 					if (is_string($options['html'])){
 						$title = Q::interpolate(Q::ifset($options, 'title', $subject));
-						$head = Q::ifset($options, 'head', null);
+						$head = Q::ifset($options, 'head', Q_Config::get('Users', 'email', 'head', ''));
 						$body = Q::view($options['html'], compact('body', 'title', 'head'));
 					}
 					$email->setBodyHtml($body);
