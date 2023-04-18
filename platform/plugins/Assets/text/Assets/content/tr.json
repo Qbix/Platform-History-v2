@@ -27,7 +27,12 @@
         "PaymentProcessing.": "ödemeniz işleniyor",
         "FailTryAgain": "Ödemeniz başarılı olmadı, lütfen tekrar deneyin",
         "SomethingWrong": "Bir şeyler yanlış gitti",
-        "PaymentStatus": "Ödeme durumu"
+        "PaymentStatus": "Ödeme durumu",
+        "PayTo": "{{displayName}} ödeyin",
+        "ChooseCurrency": "Bir para birimi seçin",
+        "YouCanSendUpTo": "En fazla {{amount}} {{symbol}} gönderebilirsiniz",
+        "Send": "Göndermek",
+        "EnterAmount": "miktarı girin"
     },
     "credits": {
         "InviteAcceptedBy": "Davet {{invitedUserName}} tarafından kabul edildi",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kredi",
             "BonusCredits": "{{amount}} kredi"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} dolu {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} doldurmak için",
+        "CreatePrivateChat": "{{toUserName}} ile özel sohbet için"
     },
     "history": {
         "Date": "Tarih",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} kredi kazanıldı",
         "Places_user_location": "{{amount}} kredi kazanıldı",
         "Streams_greeting": "{{amount}} kredi kazanıldı",
-        "YouHaveCreditsToStart": "{{amount}} kredi kazanıldı"
+        "YouHaveCreditsToStart": "{{amount}} kredi kazanıldı",
+        "User": "kullanıcı"
     },
     "subscriptions": {
         "infoTitle": "Ödeme Bilgilerini Ayarla",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ek bilgi bağlantısı ayarla",
             "DescriptionPlaceholder": "Servis açıklaması",
             "SaveService": "Hizmeti Kaydet",
-            "SelectRequiredParticipants": "Gerekli Katılımcılar"
+            "SelectRequiredParticipants": "Gerekli Katılımcılar",
+            "RequiredParticipantsDesc": "Lütfen bu hizmeti kullanması gereken ilgili katılımcıları seçin (örneğin, &quot;Köpek gösterisi&quot; için evcil hayvanlar veya &quot;Çocuk tatili&quot; için çocuklar vb.). Hizmet ücretli ise, kullanıcının ilgili her katılımcı için ayrıca ödeme yapması gerekecektir."
         },
         "ManageServiceTemplates": "Hizmet Şablonlarını Yönetin",
         "ManageServices": "Hizmetleri Yönet",
@@ -387,6 +397,132 @@
             "Description": "Kullanıcı detayları",
             "aboutPlaceholder": "Biyografiyi Düzenle",
             "SureLogOut": "Oturumu kapatmak istediğinizden emin misiniz?"
+        },
+        "Add": "Eklemek",
+        "Remove": "Kaldırmak",
+        "NoNFTyet": "Henüz NFT yok",
+        "Claim": "İddia",
+        "ClaimNFT": "NFT&#39;yi talep et",
+        "Unlocking": "kilit açma",
+        "Unlock": "Kilidini aç",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT Sözleşmesi",
+                        "seriesId": "dizi kimliği",
+                        "owner": "Mal sahibi",
+                        "currency": "para birimi",
+                        "price": "Fiyat",
+                        "beneficiary": "yararlanıcı",
+                        "autoindex": "otomatik dizin",
+                        "duration": "Süre",
+                        "rateInterval": "Oran aralığı",
+                        "rateAmount": "Oran miktarı"
+                    },
+                    "small": {
+                        "NFTContract": "NFT Sözleşmesi",
+                        "seriesId": "jetonlar bu seride basılacak",
+                        "owner": "örneğin sahibi, aksi takdirde gönderici olur",
+                        "currency": "Sıfırsa, satın alınan jetonlar için para birimi - yerel madeni paralar için",
+                        "price": "Fiyat",
+                        "beneficiary": "Jeton satmanın lehtarı, aksi takdirde gönderici olacaktır.",
+                        "autoindex": "otomatik dizin",
+                        "duration": "Bastıktan sonra kilitleyin. Sıfır, hemen alın demektir.",
+                        "rateInterval": "özel satın alma için kova aralığı",
+                        "rateAmount": "özel satın alma için kova miktarı"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(isteğe bağlı)",
+                    "number": "sayı",
+                    "address": "adres",
+                    "fraction": "kesir",
+                    "integer": "tamsayı",
+                    "seconds": "saniye",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Üretmek",
+                "viewInstancesList": "Listeyi Yenile"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Seri Kimliği",
+                        "account": "Hesap",
+                        "amount": "Miktar"
+                    },
+                    "small": {
+                        "seriesId": "yeni belirteç, bu kimliğe sahip seriye ait olacak",
+                        "account": "yeni oluşturulan NFT&#39;nin sahibi. ayarlanmamışsa - mevcut cüzdanı kullanır",
+                        "amount": "miktar NFT to mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(isteğe bağlı)",
+                    "seriesId": "İD",
+                    "account": "hesap",
+                    "amount": "miktar",
+                    "integer": "tamsayı"
+                },
+                "btn": {
+                    "Purchase": "Satın almak",
+                    "SpecialPurchase": "özel satın alma"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adres"
+                    },
+                    "small": {
+                        "account": "Adres"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Geçersiz adres"
+                },
+                "placeholders": {
+                    "account": "Adres"
+                },
+                "addToWhitelist": "Beyaz Listeye Ekle",
+                "removeFromWhitelist": "Beyaz Listeden Çıkar"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Belirteç Kimliği",
+                    "custodian": "Sorumlu",
+                    "recipient": "alıcı"
+                },
+                "small": {
+                    "tokenId": "belirteç kimliği kilitlemek veya kilidini açmak için gerekenler",
+                    "custodian": "kilidini açabilecek adres",
+                    "recipient": "belirteçleri alacak adres"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Geçersiz belirteç kimliği",
+                "invalidCustodian": "Geçersiz Vasi",
+                "invalidRecipient": "Geçersiz Alıcı"
+            },
+            "placeholders": {
+                "optional": "(isteğe bağlı)",
+                "tokenId": "İD",
+                "custodian": "adres"
+            },
+            "Lock": "Kilit",
+            "Unlock": "Kilidini aç",
+            "Locked": "Kilitli",
+            "CustodianAddress": "veli adresi",
+            "TokenWasClaimed": "&quot;{{title}}&quot; belirteci talep edildi",
+            "TokenWasLocked": "&quot;{{title}}&quot; belirteci kilitlendi",
+            "TokenWasUnlocked": "&quot;{{title}}&quot; jetonunun kilidi açıldı"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Uygulama ile çalışmak için bağlı MetaMask&#39;e ihtiyacınız var",
         "UserNotLoggedInMetaMask": "Kullanıcı MetaMask&#39;te oturum açmadı",
         "CurrencyNotFound": "Para birimi bulunamadı",
-        "WrongChain": "Bu NFT, &quot;{{chain}}&quot; altında oluşturuldu. Lütfen bu zinciri kullanın."
+        "WrongChain": "Bu NFT, &quot;{{chain}}&quot; altında oluşturuldu. Lütfen bu zinciri kullanın.",
+        "AmountInvalid": "Tutar geçersiz!",
+        "NoRecipientSelected": "Alıcı seçilmedi",
+        "NotEnoughPermissionsWallet": "Bu kullanıcının cüzdanını okumak için yeterli izin yok",
+        "ThisUserHaveNoWallet": "Bu kullanıcıya atanmış bir cüzdan yok",
+        "TheWalletOfThisUserInvalid": "Bu kullanıcının cüzdanı geçersiz",
+        "WalletInvalid": "Cüzdan adresi geçersiz"
     },
     "admin": {
         "Title": "Varlık yönetimi",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Minimum kredi negatif olamaz",
             "CreditsToAddNegative": "Eklenecek krediler negatif olamaz"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "alıcı seç",
+        "TransactionSuccess": "İşlem Başarısı",
+        "OrTypeWalletAddress": "VEYA alıcının cüzdan adresini yazın"
+    },
+    "currencies": {
+        "choose": "Bir para birimi seçin"
     }
 }

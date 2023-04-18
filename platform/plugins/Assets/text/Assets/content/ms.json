@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Pembayaran anda sedang diproses",
         "FailTryAgain": "Pembayaran anda tidak berjaya, sila cuba lagi",
         "SomethingWrong": "Sesuatu telah berlaku",
-        "PaymentStatus": "Status bayaran"
+        "PaymentStatus": "Status bayaran",
+        "PayTo": "Bayar {{displayName}}",
+        "ChooseCurrency": "Pilih mata wang",
+        "YouCanSendUpTo": "Anda boleh menghantar sehingga {{amount}} {{symbol}}",
+        "Send": "Hantar",
+        "EnterAmount": "masukkan jumlah"
     },
     "credits": {
         "InviteAcceptedBy": "Jemputan diterima oleh {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kredit",
             "BonusCredits": "{{amount}} kredit"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} diisi {{FilledStreamTitle}}",
+        "ForFillingStream": "Untuk mengisi {{FilledStreamTitle}}",
+        "CreatePrivateChat": "untuk sembang peribadi dengan {{toUserName}}"
     },
     "history": {
         "Date": "Tarikh",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Memperoleh {{amount}} kredit",
         "Places_user_location": "Memperoleh {{amount}} kredit",
         "Streams_greeting": "Memperoleh {{amount}} kredit",
-        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit"
+        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit",
+        "User": "pengguna"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Maklumat Pembayaran",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "tetapkan pautan maklumat tambahan",
             "DescriptionPlaceholder": "Penerangan perkhidmatan",
             "SaveService": "Simpan Perkhidmatan",
-            "SelectRequiredParticipants": "Peserta Diperlukan"
+            "SelectRequiredParticipants": "Peserta Diperlukan",
+            "RequiredParticipantsDesc": "Sila pilih peserta berkaitan yang diperlukan untuk menggunakan perkhidmatan ini (contohnya haiwan peliharaan untuk &quot;Pertunjukan anjing&quot;, atau kanak-kanak untuk &quot;Percutian kanak-kanak&quot; dll). Jika perkhidmatan dibayar, pengguna perlu membayar juga untuk setiap peserta yang berkaitan."
         },
         "ManageServiceTemplates": "Urus Templat Perkhidmatan",
         "ManageServices": "Urus Perkhidmatan",
@@ -387,6 +397,132 @@
             "Description": "Butiran pengguna",
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Adakah anda pasti mahu log keluar?"
+        },
+        "Add": "Tambah",
+        "Remove": "Alih keluar",
+        "NoNFTyet": "Belum ada NFT",
+        "Claim": "Tuntutan",
+        "ClaimNFT": "Tuntut NFT",
+        "Unlocking": "Membuka kunci",
+        "Unlock": "Buka kunci",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "id siri",
+                        "owner": "Pemilik",
+                        "currency": "Mata wang",
+                        "price": "harga",
+                        "beneficiary": "benefisiari",
+                        "autoindex": "Autoindex",
+                        "duration": "Tempoh",
+                        "rateInterval": "Selang kadar",
+                        "rateAmount": "Jumlah kadar"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "token akan dicetak dalam siri ini",
+                        "owner": "pemilik contoh, jika tidak akan menjadi penghantar",
+                        "currency": "Mata wang untuk token yang dibeli, jika sifar - untuk syiling asli",
+                        "price": "harga",
+                        "beneficiary": "Benefisiari menjual token, jika tidak akan menjadi penghantar",
+                        "autoindex": "Autoindex",
+                        "duration": "Kunci selepas mencetak. Zero bermakna dapatkannya dengan segera.",
+                        "rateInterval": "selang baldi untuk pembelian khas",
+                        "rateAmount": "jumlah baldi untuk pembelian khas"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(pilihan)",
+                    "number": "nombor",
+                    "address": "alamat",
+                    "fraction": "pecahan",
+                    "integer": "integer",
+                    "seconds": "detik",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Menghasilkan",
+                "viewInstancesList": "Muat semula Senarai"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID siri",
+                        "account": "Akaun",
+                        "amount": "Jumlah"
+                    },
+                    "small": {
+                        "seriesId": "token baharu akan tergolong dalam siri dengan ID sedemikian",
+                        "account": "pemilik NFT yang baru dibuat. jika tidak ditetapkan - akan menggunakan dompet semasa",
+                        "amount": "jumlah NFT kepada pudina"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(pilihan)",
+                    "seriesId": "ID",
+                    "account": "akaun",
+                    "amount": "jumlah",
+                    "integer": "integer"
+                },
+                "btn": {
+                    "Purchase": "Belian",
+                    "SpecialPurchase": "Pembelian khas"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Alamat"
+                    },
+                    "small": {
+                        "account": "Alamat"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Alamat tidak sah"
+                },
+                "placeholders": {
+                    "account": "Alamat"
+                },
+                "addToWhitelist": "Tambahkan Pada Senarai Putih",
+                "removeFromWhitelist": "Alih Keluar Dari Senarai Putih"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID Token",
+                    "custodian": "Penjaga",
+                    "recipient": "Penerima"
+                },
+                "small": {
+                    "tokenId": "id token apa yang perlu dikunci atau dibuka",
+                    "custodian": "alamat yang boleh dibuka kuncinya",
+                    "recipient": "alamat yang akan menerima token"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "tokenId tidak sah",
+                "invalidCustodian": "Penjaga tidak sah",
+                "invalidRecipient": "Penerima Tidak Sah"
+            },
+            "placeholders": {
+                "optional": "(pilihan)",
+                "tokenId": "ID",
+                "custodian": "alamat"
+            },
+            "Lock": "Kunci",
+            "Unlock": "Buka kunci",
+            "Locked": "Terkunci",
+            "CustodianAddress": "Alamat penjaga",
+            "TokenWasClaimed": "Token &quot;{{title}}&quot; telah dituntut",
+            "TokenWasLocked": "Token &quot;{{title}}&quot; telah dikunci",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; telah dibuka kuncinya"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Perlu MetaMask disambungkan untuk berfungsi dengan aplikasi",
         "UserNotLoggedInMetaMask": "Pengguna tidak log masuk ke MetaMask",
         "CurrencyNotFound": "Mata wang tidak ditemui",
-        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Sila gunakan rantai ini."
+        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Sila gunakan rantai ini.",
+        "AmountInvalid": "Jumlah tidak sah!",
+        "NoRecipientSelected": "Tiada penerima dipilih",
+        "NotEnoughPermissionsWallet": "Tidak cukup kebenaran untuk membaca dompet pengguna ini",
+        "ThisUserHaveNoWallet": "Pengguna ini tidak mempunyai dompet yang diberikan",
+        "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak sah",
+        "WalletInvalid": "Alamat dompet tidak sah"
     },
     "admin": {
         "Title": "Pentadbiran aset",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Minimum kredit tidak boleh negatif",
             "CreditsToAddNegative": "Kredit untuk ditambahkan tidak boleh negatif"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Pilih penerima",
+        "TransactionSuccess": "Kejayaan Transaksi",
+        "OrTypeWalletAddress": "ATAU taip alamat dompet penerima"
+    },
+    "currencies": {
+        "choose": "Pilih mata wang"
     }
 }

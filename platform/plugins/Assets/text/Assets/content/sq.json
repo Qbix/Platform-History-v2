@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Pagesa juaj po përpunohet",
         "FailTryAgain": "Pagesa juaj nuk ishte e suksesshme, ju lutemi provoni përsëri",
         "SomethingWrong": "Dicka shkoi keq",
-        "PaymentStatus": "Statusi i pagesës"
+        "PaymentStatus": "Statusi i pagesës",
+        "PayTo": "paguaj {{displayName}}",
+        "ChooseCurrency": "Zgjidhni një monedhë",
+        "YouCanSendUpTo": "Mund të dërgoni deri në {{amount}} {{symbol}}",
+        "Send": "Dërgo",
+        "EnterAmount": "shkruani shumën"
     },
     "credits": {
         "InviteAcceptedBy": "Ftesa u pranua nga {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} futi mbiemrin",
         "Streams_user_icon": "{{invitedUserName}} ikonën e futur",
         "Places_user_location": "{{invitedUserName}} futur vendndodhjen",
-        "Streams_greeting": "{{invitedUserName}} hyri në përshëndetje"
+        "Streams_greeting": "{{invitedUserName}} hyri në përshëndetje",
+        "InvitedUserFilledStream": "{{invitedUserName}} e mbushur {{FilledStreamTitle}}",
+        "ForFillingStream": "Për mbushjen e {{FilledStreamTitle}}",
+        "CreatePrivateChat": "për bisedë private me {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Fitoi {{amount}} kredite",
         "Streams_user_icon": "Fitoi {{amount}} kredite",
         "Places_user_location": "Fitoi {{amount}} kredite",
-        "Streams_greeting": "Fitoi {{amount}} kredite"
+        "Streams_greeting": "Fitoi {{amount}} kredite",
+        "User": "Përdoruesi"
     },
     "subscriptions": {
         "infoTitle": "Vendosni informacionin e pagesës",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "vendosni lidhjen e informacionit shtesë",
             "DescriptionPlaceholder": "Përshkrimi i shërbimit",
             "SaveService": "Ruaj shërbimin",
-            "SelectRequiredParticipants": "Pjesëmarrësit e kërkuar"
+            "SelectRequiredParticipants": "Pjesëmarrësit e kërkuar",
+            "RequiredParticipantsDesc": "Ju lutemi zgjidhni pjesëmarrësit e lidhur me të cilët kërkohet të përdorin këtë shërbim (për shembull kafshët shtëpiake për &quot;Dog show&quot;, ose fëmijët për &quot;Pushimet e fëmijëve&quot; etj). Nëse shërbimi paguhet, përdoruesi do të duhet të paguajë gjithashtu për secilin pjesëmarrës të lidhur."
         },
         "ManageServiceTemplates": "Menaxho modelet e shërbimit",
         "ManageServices": "Menaxho Shërbimet",
@@ -388,6 +398,132 @@
             "Description": "Detajet e përdoruesit",
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Jeni i sigurt që dëshironi të dilni?"
+        },
+        "Add": "Shtoni",
+        "Remove": "Hiq",
+        "NoNFTyet": "Nuk ka ende NFT",
+        "Claim": "Kerkese",
+        "ClaimNFT": "Pretendoni NFT",
+        "Unlocking": "Zhbllokimi",
+        "Unlock": "Hap",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Kontrata NFTC",
+                        "seriesId": "Id i serisë",
+                        "owner": "Pronari",
+                        "currency": "Monedha",
+                        "price": "Çmimi",
+                        "beneficiary": "Përfituesi",
+                        "autoindex": "Autoindeks",
+                        "duration": "Kohëzgjatja",
+                        "rateInterval": "Intervali i normës",
+                        "rateAmount": "Vlerësoni shumën"
+                    },
+                    "small": {
+                        "NFTContract": "Kontrata NFTC",
+                        "seriesId": "argumentet do të prehen në këtë seri",
+                        "owner": "pronari i shembullit, përndryshe do të jetë dërguesi",
+                        "currency": "Monedha për argumentet e blera, nëse është zero - për monedhat vendase",
+                        "price": "Çmimi",
+                        "beneficiary": "Përfituesi i shitjes së tokeneve, përndryshe do të jetë dërguesi",
+                        "autoindex": "Autoindeks",
+                        "duration": "Mbyllni pas prerjes. Zero do të thotë ta merrni menjëherë.",
+                        "rateInterval": "intervali i kovës për blerje speciale",
+                        "rateAmount": "shuma e kovës për blerje speciale"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsionale)",
+                    "number": "numri",
+                    "address": "adresë",
+                    "fraction": "fraksioni",
+                    "integer": "numër i plotë",
+                    "seconds": "sekonda",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Prodhoni",
+                "viewInstancesList": "Rifresko listën"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID e serisë",
+                        "account": "Llogaria",
+                        "amount": "Shuma"
+                    },
+                    "small": {
+                        "seriesId": "token i ri do t&#39;i përkasë në seri me një ID të tillë",
+                        "account": "pronar i NFT-së së sapokrijuar. nëse nuk është caktuar - do të përdorë portofolin aktual",
+                        "amount": "sasia NFT në nenexhik"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsionale)",
+                    "seriesId": "id",
+                    "account": "llogari",
+                    "amount": "shuma",
+                    "integer": "numër i plotë"
+                },
+                "btn": {
+                    "Purchase": "Blerje",
+                    "SpecialPurchase": "Blerje speciale"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresë"
+                    },
+                    "small": {
+                        "account": "Adresë"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Adresa e pavlefshme"
+                },
+                "placeholders": {
+                    "account": "Adresë"
+                },
+                "addToWhitelist": "Shto në listën e bardhë",
+                "removeFromWhitelist": "Hiq nga lista e bardhë"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID-ja e shenjës",
+                    "custodian": "Kujdestari",
+                    "recipient": "Marrësi"
+                },
+                "small": {
+                    "tokenId": "identifikimi i shenjës se çfarë duhet të kyçet ose zhbllokohet",
+                    "custodian": "adresa që mund të jetë në gjendje të zhbllokohet",
+                    "recipient": "adresa që do të marrë argumentet"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TokenId i pavlefshëm",
+                "invalidCustodian": "Kujdestar i pavlefshëm",
+                "invalidRecipient": "Marrës i pavlefshëm"
+            },
+            "placeholders": {
+                "optional": "(opsionale)",
+                "tokenId": "id",
+                "custodian": "adresë"
+            },
+            "Lock": "Kyç",
+            "Unlock": "Hap",
+            "Locked": "I bllokuar",
+            "CustodianAddress": "Adresa e kujdestarit",
+            "TokenWasClaimed": "Shenja &quot;{{title}}&quot; u pretendua",
+            "TokenWasLocked": "Token &quot;{{title}}&quot; u kyç",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; u shkyç"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Duhet MetaMask i lidhur për të punuar me aplikacionin",
         "UserNotLoggedInMetaMask": "Përdoruesi nuk është i identifikuar në MetaMask",
         "CurrencyNotFound": "Valuta nuk u gjet",
-        "WrongChain": "Ky NFT u krijua nën &quot;{{chain}}&quot;. Ju lutemi përdorni këtë zinxhir."
+        "WrongChain": "Ky NFT u krijua nën &quot;{{chain}}&quot;. Ju lutemi përdorni këtë zinxhir.",
+        "AmountInvalid": "Shuma e pavlefshme!",
+        "NoRecipientSelected": "Asnjë marrës i zgjedhur",
+        "NotEnoughPermissionsWallet": "Nuk ka leje të mjaftueshme për të lexuar portofolin e këtij përdoruesi",
+        "ThisUserHaveNoWallet": "Ky përdorues nuk ka një portofol të caktuar",
+        "TheWalletOfThisUserInvalid": "Portofoli i këtij përdoruesi është i pavlefshëm",
+        "WalletInvalid": "Adresa e portofolit është e pavlefshme"
     },
     "admin": {
         "Title": "Asetet administrative",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Minimumi i kredive nuk mund të jetë negativ",
             "CreditsToAddNegative": "Kreditet për të shtuar nuk mund të jenë negative"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Zgjidhni marrësin",
+        "TransactionSuccess": "Suksesi i transaksionit",
+        "OrTypeWalletAddress": "OSE shkruani adresën e portofolit të marrësit"
+    },
+    "currencies": {
+        "choose": "Zgjidhni një monedhë"
     }
 }

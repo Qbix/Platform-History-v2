@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Din betaling behandles",
         "FailTryAgain": "Din betaling lykkedes ikke. Prøv venligst igen",
         "SomethingWrong": "Noget gik galt",
-        "PaymentStatus": "Betalingsstatus"
+        "PaymentStatus": "Betalingsstatus",
+        "PayTo": "Betal {{displayName}}",
+        "ChooseCurrency": "Vælg en valuta",
+        "YouCanSendUpTo": "Du kan sende op til {{amount}} {{symbol}}",
+        "Send": "Sende",
+        "EnterAmount": "indtast beløb"
     },
     "credits": {
         "InviteAcceptedBy": "Invitation accepteret af {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} indtastede efternavn",
         "Streams_user_icon": "{{invitedUserName}} indtastet ikon",
         "Places_user_location": "{{invitedUserName}} indtastede placering",
-        "Streams_greeting": "{{invitedUserName}} skrev en hilsen"
+        "Streams_greeting": "{{invitedUserName}} skrev en hilsen",
+        "InvitedUserFilledStream": "{{invitedUserName}} udfyldt {{FilledStreamTitle}}",
+        "ForFillingStream": "Til udfyldning {{FilledStreamTitle}}",
+        "CreatePrivateChat": "til privat chat med {{toUserName}}"
     },
     "history": {
         "Date": "Dato",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Optjente {{amount}} kreditter",
         "Streams_user_icon": "Optjente {{amount}} kreditter",
         "Places_user_location": "Optjente {{amount}} kreditter",
-        "Streams_greeting": "Optjente {{amount}} kreditter"
+        "Streams_greeting": "Optjente {{amount}} kreditter",
+        "User": "Bruger"
     },
     "subscriptions": {
         "infoTitle": "Indstil betalingsoplysninger",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "sæt yderligere infolink",
             "DescriptionPlaceholder": "Servicebeskrivelse",
             "SaveService": "Gem tjeneste",
-            "SelectRequiredParticipants": "Nødvendige deltagere"
+            "SelectRequiredParticipants": "Nødvendige deltagere",
+            "RequiredParticipantsDesc": "Vælg venligst relaterede deltagere, som er påkrævet for at bruge denne service (f.eks. kæledyr til &quot;Hundeudstilling&quot;, eller børn til &quot;børnenes ferie&quot; osv.). Hvis tjenesten er betalt, skal brugeren også betale for hver relaterede deltager."
         },
         "ManageServiceTemplates": "Administrer tjenesteskabeloner",
         "ManageServices": "Administrer tjenester",
@@ -388,6 +398,132 @@
             "Description": "Brugeroplysninger",
             "aboutPlaceholder": "Rediger bio",
             "SureLogOut": "Er du sikker på, at du vil logge ud?"
+        },
+        "Add": "Tilføje",
+        "Remove": "Fjerne",
+        "NoNFTyet": "Ingen NFT&#39;er endnu",
+        "Claim": "Påstand",
+        "ClaimNFT": "Gør krav på NFT",
+        "Unlocking": "Låser op",
+        "Unlock": "Lås op",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT-kontrakt",
+                        "seriesId": "serie id",
+                        "owner": "Ejer",
+                        "currency": "Valuta",
+                        "price": "Pris",
+                        "beneficiary": "Modtager",
+                        "autoindex": "Autoindeks",
+                        "duration": "Varighed",
+                        "rateInterval": "Rate interval",
+                        "rateAmount": "Satsbeløb"
+                    },
+                    "small": {
+                        "NFTContract": "NFT-kontrakt",
+                        "seriesId": "poletter vil blive præget i denne serie",
+                        "owner": "ejer af instans, ellers vil være afsender",
+                        "currency": "Valuta for købte tokens, hvis nul - for indfødte mønter",
+                        "price": "Pris",
+                        "beneficiary": "Modtager af at sælge tokens, ellers vil være afsender",
+                        "autoindex": "Autoindeks",
+                        "duration": "Lås efter prægning. Nul betyder at få det med det samme.",
+                        "rateInterval": "spandinterval ved specialkøb",
+                        "rateAmount": "spandbeløb ved specialkøb"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(valgfri)",
+                    "number": "nummer",
+                    "address": "adresse",
+                    "fraction": "brøkdel",
+                    "integer": "heltal",
+                    "seconds": "sekunder",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Fremstille",
+                "viewInstancesList": "Opdater liste"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Serie ID",
+                        "account": "Konto",
+                        "amount": "Beløb"
+                    },
+                    "small": {
+                        "seriesId": "nyt token vil høre til i serie med et sådant ID",
+                        "account": "ejer af nyoprettet NFT. hvis ikke indstillet - vil bruge den nuværende tegnebog",
+                        "amount": "mængde NFT til mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(valgfri)",
+                    "seriesId": "id",
+                    "account": "konto",
+                    "amount": "beløb",
+                    "integer": "heltal"
+                },
+                "btn": {
+                    "Purchase": "Køb",
+                    "SpecialPurchase": "Særligt køb"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresse"
+                    },
+                    "small": {
+                        "account": "Adresse"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Ugyldig adresse"
+                },
+                "placeholders": {
+                    "account": "Adresse"
+                },
+                "addToWhitelist": "Føj til hvidliste",
+                "removeFromWhitelist": "Fjern fra hvidliste"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token-id",
+                    "custodian": "Formynder",
+                    "recipient": "Modtager"
+                },
+                "small": {
+                    "tokenId": "token-id, hvad der skal låses eller låses op",
+                    "custodian": "adresse, der kan låses op",
+                    "recipient": "adresse, der vil modtage tokens"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Ugyldigt token-id",
+                "invalidCustodian": "Ugyldig Depot",
+                "invalidRecipient": "Ugyldig modtager"
+            },
+            "placeholders": {
+                "optional": "(valgfri)",
+                "tokenId": "id",
+                "custodian": "adresse"
+            },
+            "Lock": "Låse",
+            "Unlock": "Lås op",
+            "Locked": "Låst",
+            "CustodianAddress": "Depotadresse",
+            "TokenWasClaimed": "Tokenet &quot;{{title}}&quot; blev gjort krav på",
+            "TokenWasLocked": "Tokenet &quot;{{title}}&quot; blev låst",
+            "TokenWasUnlocked": "Tokenet &quot;{{title}}&quot; blev låst op"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Behøver MetaMask forbundet for at arbejde med applikationen",
         "UserNotLoggedInMetaMask": "Brugeren er ikke logget ind på MetaMask",
         "CurrencyNotFound": "Valuta ikke fundet",
-        "WrongChain": "Denne NFT oprettet under &quot;{{chain}}&quot;. Brug venligst denne kæde."
+        "WrongChain": "Denne NFT oprettet under &quot;{{chain}}&quot;. Brug venligst denne kæde.",
+        "AmountInvalid": "Beløb ugyldigt!",
+        "NoRecipientSelected": "Der er ikke valgt nogen modtager",
+        "NotEnoughPermissionsWallet": "Ikke nok tilladelser til at læse denne brugers tegnebog",
+        "ThisUserHaveNoWallet": "Denne bruger har ingen tegnebog tildelt",
+        "TheWalletOfThisUserInvalid": "Denne brugers tegnebog er ugyldig",
+        "WalletInvalid": "Wallet-adressen er ugyldig"
     },
     "admin": {
         "Title": "Administrative aktiver",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Kredittminimum kan ikke være negativt",
             "CreditsToAddNegative": "Krediteringer, der skal tilføjes, kan ikke være negative"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Vælg modtager",
+        "TransactionSuccess": "Transaktionssucces",
+        "OrTypeWalletAddress": "ELLER indtast modtagerens tegnebogsadresse"
+    },
+    "currencies": {
+        "choose": "Vælg en valuta"
     }
 }

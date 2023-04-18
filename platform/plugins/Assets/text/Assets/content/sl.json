@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Vaše plačilo je v obdelavi",
         "FailTryAgain": "Vaše plačilo ni bilo uspešno, poskusite znova",
         "SomethingWrong": "Nekaj je šlo narobe",
-        "PaymentStatus": "Stanje plačila"
+        "PaymentStatus": "Stanje plačila",
+        "PayTo": "Plačaj {{displayName}}",
+        "ChooseCurrency": "Izberite valuto",
+        "YouCanSendUpTo": "Pošljete lahko do {{amount}} {{symbol}}",
+        "Send": "Pošlji",
+        "EnterAmount": "vnesite znesek"
     },
     "credits": {
         "InviteAcceptedBy": "Povabilo je sprejel {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kreditov",
             "BonusCredits": "{{amount}} kreditov"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} napolnjeno {{FilledStreamTitle}}",
+        "ForFillingStream": "Za polnjenje {{FilledStreamTitle}}",
+        "CreatePrivateChat": "za zasebni klepet z {{toUserName}}"
     },
     "history": {
         "Date": "Datum",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Prisluženih {{amount}} kreditov",
         "Places_user_location": "Prisluženih {{amount}} kreditov",
         "Streams_greeting": "Prisluženih {{amount}} kreditov",
-        "YouHaveCreditsToStart": "Prisluženih {{amount}} kreditov"
+        "YouHaveCreditsToStart": "Prisluženih {{amount}} kreditov",
+        "User": "Uporabnik"
     },
     "subscriptions": {
         "infoTitle": "Nastavite podatke o plačilu",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "nastavite povezavo za dodatne informacije",
             "DescriptionPlaceholder": "Opis storitve",
             "SaveService": "Shrani storitev",
-            "SelectRequiredParticipants": "Zahtevani udeleženci"
+            "SelectRequiredParticipants": "Zahtevani udeleženci",
+            "RequiredParticipantsDesc": "Prosimo izberite povezane udeležence, ki so potrebni za uporabo te storitve (na primer hišne ljubljenčke za &quot;Psje razstave&quot; ali otroke za &quot;Otroške počitnice&quot; itd.). Če je storitev plačljiva, bo moral uporabnik plačati tudi za vsakega povezanega udeleženca."
         },
         "ManageServiceTemplates": "Upravljajte predloge storitev",
         "ManageServices": "Upravljanje storitev",
@@ -387,6 +397,132 @@
             "Description": "Podrobnosti o uporabniku",
             "aboutPlaceholder": "Uredi življenjepis",
             "SureLogOut": "Ste prepričani, da se želite odjaviti?"
+        },
+        "Add": "Dodaj",
+        "Remove": "Odstrani",
+        "NoNFTyet": "NFT še ni",
+        "Claim": "Zahtevek",
+        "ClaimNFT": "Zahtevaj NFT",
+        "Unlocking": "Odklepanje",
+        "Unlock": "Odkleni",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTPogodba",
+                        "seriesId": "serija Id",
+                        "owner": "Lastnik",
+                        "currency": "Valuta",
+                        "price": "Cena",
+                        "beneficiary": "Upravičenec",
+                        "autoindex": "Samodejno indeksiranje",
+                        "duration": "Trajanje",
+                        "rateInterval": "Interval stopnje",
+                        "rateAmount": "Stopnja zneska"
+                    },
+                    "small": {
+                        "NFTContract": "NFTPogodba",
+                        "seriesId": "žetoni bodo kovani v tej seriji",
+                        "owner": "lastnik primerka, sicer bo pošiljatelj",
+                        "currency": "Valuta za kupljene žetone, če je nič - za domače kovance",
+                        "price": "Cena",
+                        "beneficiary": "Prejemnik prodaje žetonov, sicer bo pošiljatelj",
+                        "autoindex": "Samodejno indeksiranje",
+                        "duration": "Ključavnica po kovanju. Nič pomeni, da ga dobite takoj.",
+                        "rateInterval": "interval žlice za poseben nakup",
+                        "rateAmount": "večja količina za poseben nakup"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(neobvezno)",
+                    "number": "število",
+                    "address": "naslov",
+                    "fraction": "ulomek",
+                    "integer": "celo število",
+                    "seconds": "sekund",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Proizvajaj",
+                "viewInstancesList": "Osveži seznam"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID serije",
+                        "account": "račun",
+                        "amount": "Znesek"
+                    },
+                    "small": {
+                        "seriesId": "nov žeton bo pripadal seriji s tem ID-jem",
+                        "account": "lastnik na novo ustvarjenega NFT. če ni nastavljeno - bo uporabil trenutno denarnico",
+                        "amount": "znesek NFT za kovanje"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(neobvezno)",
+                    "seriesId": "id",
+                    "account": "račun",
+                    "amount": "znesek",
+                    "integer": "celo število"
+                },
+                "btn": {
+                    "Purchase": "Nakup",
+                    "SpecialPurchase": "Poseben nakup"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Naslov"
+                    },
+                    "small": {
+                        "account": "Naslov"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Neveljaven naslov"
+                },
+                "placeholders": {
+                    "account": "Naslov"
+                },
+                "addToWhitelist": "Dodaj na seznam dovoljenih",
+                "removeFromWhitelist": "Odstrani s seznama dovoljenih"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID žetona",
+                    "custodian": "Skrbnik",
+                    "recipient": "Prejemnik"
+                },
+                "small": {
+                    "tokenId": "ID žetona, kaj je treba zakleniti ali odkleniti",
+                    "custodian": "naslov, ki ga je mogoče odkleniti",
+                    "recipient": "naslov, ki bo prejel žetone"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Neveljaven tokenId",
+                "invalidCustodian": "Neveljaven skrbnik",
+                "invalidRecipient": "Neveljaven prejemnik"
+            },
+            "placeholders": {
+                "optional": "(neobvezno)",
+                "tokenId": "id",
+                "custodian": "naslov"
+            },
+            "Lock": "Zaklepanje",
+            "Unlock": "Odkleni",
+            "Locked": "Zaklenjeno",
+            "CustodianAddress": "Naslov skrbnika",
+            "TokenWasClaimed": "Zahtevan je bil žeton &quot;{{title}}&quot;.",
+            "TokenWasLocked": "Žeton &quot;{{title}}&quot; je bil zaklenjen",
+            "TokenWasUnlocked": "Žeton &quot;{{title}}&quot; je bil odklenjen"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Za delo z aplikacijo potrebujete povezavo MetaMask",
         "UserNotLoggedInMetaMask": "Uporabnik ni prijavljen v MetaMask",
         "CurrencyNotFound": "Valuta ni najdena",
-        "WrongChain": "Ta NFT ustvarjen pod »{{chain}}«. Prosim, uporabite to verigo."
+        "WrongChain": "Ta NFT ustvarjen pod »{{chain}}«. Prosim, uporabite to verigo.",
+        "AmountInvalid": "Znesek je neveljaven!",
+        "NoRecipientSelected": "Izbran ni noben prejemnik",
+        "NotEnoughPermissionsWallet": "Ni dovolj dovoljenj za branje denarnice tega uporabnika",
+        "ThisUserHaveNoWallet": "Ta uporabnik nima dodeljene denarnice",
+        "TheWalletOfThisUserInvalid": "Denarnica tega uporabnika je neveljavna",
+        "WalletInvalid": "Naslov denarnice ni veljaven"
     },
     "admin": {
         "Title": "Sredstva upravna",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Najmanjše število kreditov ne sme biti negativno",
             "CreditsToAddNegative": "Krediti za dodajanje ne smejo biti negativni"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Izberite prejemnika",
+        "TransactionSuccess": "Transakcija je uspela",
+        "OrTypeWalletAddress": "ALI vnesite naslov denarnice prejemnika"
+    },
+    "currencies": {
+        "choose": "Izberite valuto"
     }
 }

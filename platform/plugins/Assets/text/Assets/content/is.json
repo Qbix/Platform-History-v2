@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Greiðsla þín er í vinnslu",
         "FailTryAgain": "Greiðslan þín tókst ekki, vinsamlegast reyndu aftur",
         "SomethingWrong": "Eitthvað fór úrskeiðis",
-        "PaymentStatus": "Greiðslustaða"
+        "PaymentStatus": "Greiðslustaða",
+        "PayTo": "Borgaðu {{displayName}}",
+        "ChooseCurrency": "Veldu gjaldmiðil",
+        "YouCanSendUpTo": "Þú getur sent allt að {{amount}} {{symbol}}",
+        "Send": "Senda",
+        "EnterAmount": "sláðu inn upphæð"
     },
     "credits": {
         "InviteAcceptedBy": "Boð samþykkt af {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} einingar",
             "BonusCredits": "{{amount}} einingar"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} fyllt út {{FilledStreamTitle}}",
+        "ForFillingStream": "Til að fylla {{FilledStreamTitle}}",
+        "CreatePrivateChat": "fyrir einkaspjall við {{toUserName}}"
     },
     "history": {
         "Date": "Dagsetning",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Fékk {{amount}} inneign",
         "Places_user_location": "Fékk {{amount}} inneign",
         "Streams_greeting": "Fékk {{amount}} inneign",
-        "YouHaveCreditsToStart": "Fékk {{amount}} inneign"
+        "YouHaveCreditsToStart": "Fékk {{amount}} inneign",
+        "User": "Notandi"
     },
     "subscriptions": {
         "infoTitle": "Stilltu greiðsluupplýsingar",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "stilltu viðbótarupplýsingahlekk",
             "DescriptionPlaceholder": "Þjónustulýsing",
             "SaveService": "Vista þjónustu",
-            "SelectRequiredParticipants": "Nauðsynlegir þátttakendur"
+            "SelectRequiredParticipants": "Nauðsynlegir þátttakendur",
+            "RequiredParticipantsDesc": "Vinsamlegast veldu tengda þátttakendur sem eru nauðsynlegir til að nota þessa þjónustu (til dæmis gæludýr fyrir &quot;Hundasýningu&quot;, eða börn fyrir &quot;frí fyrir börn&quot; o.s.frv.). Ef þjónusta er greidd þarf notandi einnig að greiða fyrir hvern tengdan þátttakanda."
         },
         "ManageServiceTemplates": "Stjórna þjónustusniðmátum",
         "ManageServices": "Stjórna þjónustu",
@@ -387,6 +397,132 @@
             "Description": "Upplýsingar um notanda",
             "aboutPlaceholder": "Breyta ævisögu",
             "SureLogOut": "Ertu viss um að þú viljir skrá þig út?"
+        },
+        "Add": "Bæta við",
+        "Remove": "Fjarlægja",
+        "NoNFTyet": "Engar NFTs ennþá",
+        "Claim": "Krafa",
+        "ClaimNFT": "Krefjast NFT",
+        "Unlocking": "Aflæsing",
+        "Unlock": "Opnaðu",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT samningur",
+                        "seriesId": "röð auðkenni",
+                        "owner": "Eigandi",
+                        "currency": "Gjaldmiðill",
+                        "price": "Verð",
+                        "beneficiary": "Styrkþegi",
+                        "autoindex": "Autoindex",
+                        "duration": "Lengd",
+                        "rateInterval": "Gengisbil",
+                        "rateAmount": "Gjaldupphæð"
+                    },
+                    "small": {
+                        "NFTContract": "NFT samningur",
+                        "seriesId": "tákn verða slegin í þessari röð",
+                        "owner": "eigandi dæmis, annars verður sendandi",
+                        "currency": "Gjaldmiðill fyrir keypta tákn, ef núll - fyrir innfædda mynt",
+                        "price": "Verð",
+                        "beneficiary": "Styrkþegi sölu tákna, annars verður sendandi",
+                        "autoindex": "Autoindex",
+                        "duration": "Læsing eftir myntun. Núll þýðir að fá það strax.",
+                        "rateInterval": "fötubil fyrir sérstök kaup",
+                        "rateAmount": "fötuupphæð fyrir sérstök kaup"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(valfrjálst)",
+                    "number": "númer",
+                    "address": "heimilisfang",
+                    "fraction": "brot",
+                    "integer": "heiltala",
+                    "seconds": "sekúndur",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Framleiða",
+                "viewInstancesList": "Endurnýja lista"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Auðkenni röð",
+                        "account": "Reikningur",
+                        "amount": "Magn"
+                    },
+                    "small": {
+                        "seriesId": "nýtt tákn mun tilheyra í röð með slíku auðkenni",
+                        "account": "eigandi nýstofnaðs NFT. ef ekki stillt - mun nota núverandi veski",
+                        "amount": "magn NFT til myntu"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(valfrjálst)",
+                    "seriesId": "kt",
+                    "account": "reikning",
+                    "amount": "magn",
+                    "integer": "heiltala"
+                },
+                "btn": {
+                    "Purchase": "Kaup",
+                    "SpecialPurchase": "Sérstök kaup"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Heimilisfang"
+                    },
+                    "small": {
+                        "account": "Heimilisfang"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Ógilt heimilisfang"
+                },
+                "placeholders": {
+                    "account": "Heimilisfang"
+                },
+                "addToWhitelist": "Bæta við hvítalista",
+                "removeFromWhitelist": "Fjarlægja af hvítalista"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Auðkenni tákns",
+                    "custodian": "Forráðamaður",
+                    "recipient": "Viðtakandi"
+                },
+                "small": {
+                    "tokenId": "auðkenni sem þarf að læsa eða opna",
+                    "custodian": "heimilisfang sem hægt er að opna",
+                    "recipient": "heimilisfang sem mun taka við táknunum"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Ógilt auðkenni",
+                "invalidCustodian": "Ógildur vörsluaðili",
+                "invalidRecipient": "Ógildur viðtakandi"
+            },
+            "placeholders": {
+                "optional": "(valfrjálst)",
+                "tokenId": "kt",
+                "custodian": "heimilisfang"
+            },
+            "Lock": "Læsa",
+            "Unlock": "Opnaðu",
+            "Locked": "Læst",
+            "CustodianAddress": "Heimilisfang vörsluaðila",
+            "TokenWasClaimed": "Táknið „{{title}}“ var gert tilkall til",
+            "TokenWasLocked": "Táknið „{{title}}“ var læst",
+            "TokenWasUnlocked": "Táknið „{{title}}“ var aflæst"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Þarftu MetaMask tengdan til að vinna með forriti",
         "UserNotLoggedInMetaMask": "Notandi er ekki skráður inn á MetaMask",
         "CurrencyNotFound": "Gjaldmiðill fannst ekki",
-        "WrongChain": "Þetta NFT búið til undir „{{chain}}“. Vinsamlegast notaðu þessa keðju."
+        "WrongChain": "Þetta NFT búið til undir „{{chain}}“. Vinsamlegast notaðu þessa keðju.",
+        "AmountInvalid": "Upphæð ógild!",
+        "NoRecipientSelected": "Enginn viðtakandi valinn",
+        "NotEnoughPermissionsWallet": "Ekki nægar heimildir til að lesa veski þessa notanda",
+        "ThisUserHaveNoWallet": "Þessi notandi hefur ekkert veski úthlutað",
+        "TheWalletOfThisUserInvalid": "Veski þessa notanda ógilt",
+        "WalletInvalid": "Veski heimilisfang ógilt"
     },
     "admin": {
         "Title": "Umsýslu eigna",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Lágmark inneignar getur ekki verið neikvætt",
             "CreditsToAddNegative": "Inneign til að bæta við getur ekki verið neikvæð"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Veldu viðtakanda",
+        "TransactionSuccess": "Viðskiptaárangur",
+        "OrTypeWalletAddress": "EÐA sláðu inn veskis heimilisfang viðtakanda"
+    },
+    "currencies": {
+        "choose": "Veldu gjaldmiðil"
     }
 }

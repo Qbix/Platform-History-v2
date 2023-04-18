@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Vaša platba sa spracováva",
         "FailTryAgain": "Vaša platba nebola úspešná, skúste to znova",
         "SomethingWrong": "Niečo sa pokazilo",
-        "PaymentStatus": "Stav platby"
+        "PaymentStatus": "Stav platby",
+        "PayTo": "Zaplatiť {{displayName}}",
+        "ChooseCurrency": "Vyberte menu",
+        "YouCanSendUpTo": "Môžete odoslať až {{amount}} {{symbol}}",
+        "Send": "Odoslať",
+        "EnterAmount": "zadajte sumu"
     },
     "credits": {
         "InviteAcceptedBy": "Pozvanie prijal {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kreditov",
             "BonusCredits": "{{amount}} kreditov"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} vyplnené {{FilledStreamTitle}}",
+        "ForFillingStream": "Na vyplnenie {{FilledStreamTitle}}",
+        "CreatePrivateChat": "pre súkromný rozhovor s {{toUserName}}"
     },
     "history": {
         "Date": "Dátum",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Získali ste {{amount}} kreditov",
         "Places_user_location": "Získali ste {{amount}} kreditov",
         "Streams_greeting": "Získali ste {{amount}} kreditov",
-        "YouHaveCreditsToStart": "Získali ste {{amount}} kreditov"
+        "YouHaveCreditsToStart": "Získali ste {{amount}} kreditov",
+        "User": "Používateľ"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informácie o platbe",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "nastaviť odkaz na ďalšie informácie",
             "DescriptionPlaceholder": "Popis služby",
             "SaveService": "Uložiť službu",
-            "SelectRequiredParticipants": "Povinní účastníci"
+            "SelectRequiredParticipants": "Povinní účastníci",
+            "RequiredParticipantsDesc": "Prosím, vyberte súvisiacich účastníkov, ktorí sú povinní využívať túto službu (napríklad domáce zvieratá na &quot;Dogs show&quot; alebo deti na &quot;Detské prázdniny&quot; atď.). Ak je služba platená, používateľ bude musieť zaplatiť aj za každého súvisiaceho účastníka."
         },
         "ManageServiceTemplates": "Spravujte šablóny služieb",
         "ManageServices": "Spravovať služby",
@@ -387,6 +397,132 @@
             "Description": "Podrobnosti o používateľovi",
             "aboutPlaceholder": "Upraviť životopis",
             "SureLogOut": "Naozaj sa chcete odhlásiť?"
+        },
+        "Add": "Pridať",
+        "Remove": "Odstrániť",
+        "NoNFTyet": "Zatiaľ žiadne NFT",
+        "Claim": "Nárokovať",
+        "ClaimNFT": "Nárokujte si NFT",
+        "Unlocking": "Odblokovanie",
+        "Unlock": "Odomknúť",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "séria Id",
+                        "owner": "Vlastník",
+                        "currency": "Сmena",
+                        "price": "cena",
+                        "beneficiary": "Príjemca",
+                        "autoindex": "Autoindex",
+                        "duration": "Trvanie",
+                        "rateInterval": "Interval sadzby",
+                        "rateAmount": "Výška sadzby"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "žetóny sa budú raziť v tejto sérii",
+                        "owner": "vlastník inštancie, inak bude odosielateľ",
+                        "currency": "Mena pre zakúpené tokeny, ak je nula - pre natívne mince",
+                        "price": "cena",
+                        "beneficiary": "Príjemca predaja tokenov, inak bude odosielateľ",
+                        "autoindex": "Autoindex",
+                        "duration": "Zámok po razení. Nula znamená dostať to okamžite.",
+                        "rateInterval": "interval vedra pre špeciálny nákup",
+                        "rateAmount": "množstvo vedra na špeciálny nákup"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(voliteľné)",
+                    "number": "číslo",
+                    "address": "adresu",
+                    "fraction": "zlomok",
+                    "integer": "celé číslo",
+                    "seconds": "sekúnd",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produkovať",
+                "viewInstancesList": "Obnoviť zoznam"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID série",
+                        "account": "účtu",
+                        "amount": "Suma"
+                    },
+                    "small": {
+                        "seriesId": "nový token bude patriť do série s takýmto ID",
+                        "account": "vlastník novovytvorenej NFT. ak nie je nastavené - použije aktuálnu peňaženku",
+                        "amount": "množstvo NFT do mincovne"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(voliteľné)",
+                    "seriesId": "id",
+                    "account": "účtu",
+                    "amount": "čiastka",
+                    "integer": "celé číslo"
+                },
+                "btn": {
+                    "Purchase": "Nákup",
+                    "SpecialPurchase": "Špeciálny nákup"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresa"
+                    },
+                    "small": {
+                        "account": "Adresa"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Neplatná adresa"
+                },
+                "placeholders": {
+                    "account": "Adresa"
+                },
+                "addToWhitelist": "Pridať do bielej listiny",
+                "removeFromWhitelist": "Odstrániť z bielej listiny"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Identifikátor tokenu",
+                    "custodian": "Kustód",
+                    "recipient": "Príjemca"
+                },
+                "small": {
+                    "tokenId": "token id, čo je potrebné zamknúť alebo odomknúť",
+                    "custodian": "adresu, ktorú je možné odomknúť",
+                    "recipient": "adresu, na ktorú budú tokeny prijímané"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Neplatné ID tokenu",
+                "invalidCustodian": "Neplatný správca",
+                "invalidRecipient": "Neplatný príjemca"
+            },
+            "placeholders": {
+                "optional": "(voliteľné)",
+                "tokenId": "id",
+                "custodian": "adresu"
+            },
+            "Lock": "Zámok",
+            "Unlock": "Odomknúť",
+            "Locked": "Zamknuté",
+            "CustodianAddress": "Adresa správcu",
+            "TokenWasClaimed": "Token „{{title}}“ bol nárokovaný",
+            "TokenWasLocked": "Token „{{title}}“ bol uzamknutý",
+            "TokenWasUnlocked": "Token „{{title}}“ bol odomknutý"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Na prácu s aplikáciou potrebujete pripojenú MetaMask",
         "UserNotLoggedInMetaMask": "Používateľ nie je prihlásený do MetaMask",
         "CurrencyNotFound": "Mena sa nenašla",
-        "WrongChain": "Tento NFT bol vytvorený pod „{{chain}}“. Prosím, použite túto reťaz."
+        "WrongChain": "Tento NFT bol vytvorený pod „{{chain}}“. Prosím, použite túto reťaz.",
+        "AmountInvalid": "Neplatná suma!",
+        "NoRecipientSelected": "Nie je vybratý žiadny príjemca",
+        "NotEnoughPermissionsWallet": "Nemáte dostatočné povolenia na čítanie peňaženky tohto používateľa",
+        "ThisUserHaveNoWallet": "Tento používateľ nemá priradenú žiadnu peňaženku",
+        "TheWalletOfThisUserInvalid": "Peňaženka tohto používateľa je neplatná",
+        "WalletInvalid": "Adresa peňaženky je neplatná"
     },
     "admin": {
         "Title": "Správa majetku",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Minimálny počet kreditov nemôže byť záporný",
             "CreditsToAddNegative": "Kredity na pridanie nemôžu byť záporné"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Vyberte príjemcu",
+        "TransactionSuccess": "Úspech transakcie",
+        "OrTypeWalletAddress": "ALEBO zadajte adresu peňaženky príjemcu"
+    },
+    "currencies": {
+        "choose": "Vyberte menu"
     }
 }

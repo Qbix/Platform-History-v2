@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Jūsų mokėjimas apdorojamas",
         "FailTryAgain": "Mokėjimas nepavyko, bandykite dar kartą",
         "SomethingWrong": "Kažkas nutiko",
-        "PaymentStatus": "Mokėjimo būsena"
+        "PaymentStatus": "Mokėjimo būsena",
+        "PayTo": "Mokėti {{displayName}}",
+        "ChooseCurrency": "Pasirinkite valiutą",
+        "YouCanSendUpTo": "Galite siųsti iki {{amount}} {{symbol}}",
+        "Send": "Siųsti",
+        "EnterAmount": "įveskite sumą"
     },
     "credits": {
         "InviteAcceptedBy": "Kvietimą priėmė {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kreditų",
             "BonusCredits": "{{amount}} kreditų"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} užpildyta {{FilledStreamTitle}}",
+        "ForFillingStream": "Užpildymui {{FilledStreamTitle}}",
+        "CreatePrivateChat": "privačiam pokalbiui su {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Uždirbo {{amount}} kreditą",
         "Places_user_location": "Uždirbo {{amount}} kreditą",
         "Streams_greeting": "Uždirbo {{amount}} kreditą",
-        "YouHaveCreditsToStart": "Uždirbo {{amount}} kreditą"
+        "YouHaveCreditsToStart": "Uždirbo {{amount}} kreditą",
+        "User": "Vartotojas"
     },
     "subscriptions": {
         "infoTitle": "Nustatykite mokėjimo informaciją",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "nustatyti papildomos informacijos nuorodą",
             "DescriptionPlaceholder": "Aptarnavimo Aprašymas",
             "SaveService": "Išsaugoti paslaugą",
-            "SelectRequiredParticipants": "Reikalingi dalyviai"
+            "SelectRequiredParticipants": "Reikalingi dalyviai",
+            "RequiredParticipantsDesc": "Prašome pasirinkti susijusius dalyvius, kurių reikia norint naudotis šia paslauga (pvz., augintiniai „Šunų parodoje“, vaikai – „Vaikų atostogos“ ir pan.). Jei paslauga mokama, vartotojas turės mokėti ir už kiekvieną susijusį dalyvį."
         },
         "ManageServiceTemplates": "Tvarkykite paslaugų šablonus",
         "ManageServices": "Tvarkyti paslaugas",
@@ -387,6 +397,132 @@
             "Description": "Vartotojo informacija",
             "aboutPlaceholder": "Redaguoti biografiją",
             "SureLogOut": "Ar tikrai norite atsijungti?"
+        },
+        "Add": "Papildyti",
+        "Remove": "Pašalinti",
+        "NoNFTyet": "Dar nėra NFT",
+        "Claim": "Reikalauti",
+        "ClaimNFT": "Reikalauti NFT",
+        "Unlocking": "Atrakinimas",
+        "Unlock": "Atrakinti",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "serijos ID",
+                        "owner": "Savininkas",
+                        "currency": "valiuta",
+                        "price": "Kaina",
+                        "beneficiary": "Naudos gavėjas",
+                        "autoindex": "Autoindex",
+                        "duration": "Trukmė",
+                        "rateInterval": "Kurso intervalas",
+                        "rateAmount": "Įvertinkite sumą"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "šioje serijoje bus nukaldinti žetonai",
+                        "owner": "egzemplioriaus savininkas, kitu atveju bus siuntėjas",
+                        "currency": "Valiuta už įsigytus žetonus, jei nulis – už vietines monetas",
+                        "price": "Kaina",
+                        "beneficiary": "Žetonų pardavimo gavėjas, kitu atveju bus siuntėjas",
+                        "autoindex": "Autoindex",
+                        "duration": "Užrakinti po kaldinimo. Nulis reiškia, kad gaukite jį nedelsiant.",
+                        "rateInterval": "kibiro intervalas specialiam pirkimui",
+                        "rateAmount": "kibiro suma specialiems pirkiniams"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(neprivaloma)",
+                    "number": "numerį",
+                    "address": "adresu",
+                    "fraction": "trupmena",
+                    "integer": "sveikasis skaičius",
+                    "seconds": "sekundžių",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Gaminti",
+                "viewInstancesList": "Atnaujinti sąrašą"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Serijos ID",
+                        "account": "sąskaita",
+                        "amount": "Suma"
+                    },
+                    "small": {
+                        "seriesId": "naujas prieigos raktas priklausys serijai su tokiu ID",
+                        "account": "naujai sukurto NFT savininkas. jei nenustatyta – bus naudojama dabartinė piniginė",
+                        "amount": "suma NFT iki mėtų"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(neprivaloma)",
+                    "seriesId": "id",
+                    "account": "sąskaitą",
+                    "amount": "suma",
+                    "integer": "sveikasis skaičius"
+                },
+                "btn": {
+                    "Purchase": "Pirkimas",
+                    "SpecialPurchase": "Specialus pirkinys"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresas"
+                    },
+                    "small": {
+                        "account": "Adresas"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Neteisingas adresas"
+                },
+                "placeholders": {
+                    "account": "Adresas"
+                },
+                "addToWhitelist": "Pridėti į baltąjį sąrašą",
+                "removeFromWhitelist": "Pašalinti iš baltojo sąrašo"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Žetono ID",
+                    "custodian": "Saugotojas",
+                    "recipient": "Gavėjas"
+                },
+                "small": {
+                    "tokenId": "žetono ID, kurį reikia užrakinti arba atrakinti",
+                    "custodian": "adresą, kurį galima atrakinti",
+                    "recipient": "adresas, kuriuo gausite žetonus"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Neteisingas tokenId",
+                "invalidCustodian": "Neteisingas saugotojas",
+                "invalidRecipient": "Neteisingas gavėjas"
+            },
+            "placeholders": {
+                "optional": "(neprivaloma)",
+                "tokenId": "id",
+                "custodian": "adresu"
+            },
+            "Lock": "Užraktas",
+            "Unlock": "Atrakinti",
+            "Locked": "Užrakinta",
+            "CustodianAddress": "Saugotojo adresas",
+            "TokenWasClaimed": "Žetonas „{{title}}“ buvo pareikštas",
+            "TokenWasLocked": "Ženklas „{{title}}“ buvo užrakintas",
+            "TokenWasUnlocked": "Ženklas „{{title}}“ buvo atrakintas"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Norint dirbti su programa, reikia prijungti „MetaMask“.",
         "UserNotLoggedInMetaMask": "Vartotojas neprisijungęs prie MetaMask",
         "CurrencyNotFound": "Valiuta nerasta",
-        "WrongChain": "Šis NFT sukurtas naudojant „{{chain}}“. Prašome naudoti šią grandinę."
+        "WrongChain": "Šis NFT sukurtas naudojant „{{chain}}“. Prašome naudoti šią grandinę.",
+        "AmountInvalid": "Neteisinga suma!",
+        "NoRecipientSelected": "Nepasirinktas joks gavėjas",
+        "NotEnoughPermissionsWallet": "Nepakanka leidimų skaityti šio naudotojo piniginę",
+        "ThisUserHaveNoWallet": "Šiam vartotojui nepriskirta piniginė",
+        "TheWalletOfThisUserInvalid": "Šio naudotojo piniginė negalioja",
+        "WalletInvalid": "Netinkamas piniginės adresas"
     },
     "admin": {
         "Title": "Turtas administracinis",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Kreditų minimumas negali būti neigiamas",
             "CreditsToAddNegative": "Pridedami kreditai negali būti neigiami"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Pasirinkite gavėją",
+        "TransactionSuccess": "Sandorio sėkmė",
+        "OrTypeWalletAddress": "ARBA įveskite gavėjo piniginės adresą"
+    },
+    "currencies": {
+        "choose": "Pasirinkite valiutą"
     }
 }

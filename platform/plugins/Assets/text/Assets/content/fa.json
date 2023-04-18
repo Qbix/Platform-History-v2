@@ -27,7 +27,12 @@
         "PaymentProcessing.": "پرداخت شما در حال پردازش است",
         "FailTryAgain": "پرداخت شما با موفقیت انجام نشد، لطفا دوباره امتحان کنید",
         "SomethingWrong": "مشکلی پیش آمد",
-        "PaymentStatus": "وضعیت پرداخت"
+        "PaymentStatus": "وضعیت پرداخت",
+        "PayTo": "پرداخت {{displayName}}",
+        "ChooseCurrency": "یک ارز را انتخاب کنید",
+        "YouCanSendUpTo": "می توانید تا {{amount}} {{symbol}} ارسال کنید",
+        "Send": "ارسال",
+        "EnterAmount": "مقدار را وارد کنید"
     },
     "credits": {
         "InviteAcceptedBy": "دعوت توسط {{invitedUserName}} پذیرفته شد",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} اعتبار",
             "BonusCredits": "{{amount}} اعتبار"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} پر شد {{FilledStreamTitle}}",
+        "ForFillingStream": "برای پر کردن {{FilledStreamTitle}}",
+        "CreatePrivateChat": "برای چت خصوصی با {{toUserName}}"
     },
     "history": {
         "Date": "تاریخ",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} اعتبار کسب کرد",
         "Places_user_location": "{{amount}} اعتبار کسب کرد",
         "Streams_greeting": "{{amount}} اعتبار کسب کرد",
-        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد"
+        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد",
+        "User": "کاربر"
     },
     "subscriptions": {
         "infoTitle": "تنظیم اطلاعات پرداخت",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "تنظیم لینک اطلاعات اضافی",
             "DescriptionPlaceholder": "شرح خدمات",
             "SaveService": "ذخیره سرویس",
-            "SelectRequiredParticipants": "شرکت کنندگان مورد نیاز"
+            "SelectRequiredParticipants": "شرکت کنندگان مورد نیاز",
+            "RequiredParticipantsDesc": "لطفاً شرکت کنندگان مرتبطی را که برای استفاده از این سرویس مورد نیاز هستند انتخاب کنید (به عنوان مثال حیوانات خانگی برای &quot;نمایش سگ ها&quot; یا کودکان برای &quot;تعطیلات کودکان&quot; و غیره). در صورت پرداخت هزینه، کاربر باید برای هر شرکت کننده مرتبط نیز هزینه پرداخت کند."
         },
         "ManageServiceTemplates": "مدیریت الگوهای خدمات",
         "ManageServices": "مدیریت خدمات",
@@ -387,6 +397,132 @@
             "Description": "جزئیات کاربر",
             "aboutPlaceholder": "ویرایش بیو",
             "SureLogOut": "آیا برای خارج شدن مطمئن هستید؟"
+        },
+        "Add": "اضافه کردن",
+        "Remove": "برداشتن",
+        "NoNFTyet": "هنوز NFT وجود ندارد",
+        "Claim": "مطالبه",
+        "ClaimNFT": "ادعای NFT",
+        "Unlocking": "باز کردن قفل",
+        "Unlock": "باز کردن قفل",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "قرارداد NFTC",
+                        "seriesId": "شناسه سری",
+                        "owner": "مالک",
+                        "currency": "ارز",
+                        "price": "قیمت",
+                        "beneficiary": "ذینفع",
+                        "autoindex": "ایندکس خودکار",
+                        "duration": "مدت زمان",
+                        "rateInterval": "فاصله نرخ",
+                        "rateAmount": "میزان را تعیین کنید"
+                    },
+                    "small": {
+                        "NFTContract": "قرارداد NFTC",
+                        "seriesId": "توکن ها در این سری ضرب خواهند شد",
+                        "owner": "صاحب نمونه، در غیر این صورت فرستنده خواهد بود",
+                        "currency": "ارز برای توکن های خریداری شده، در صورت صفر - برای سکه های بومی",
+                        "price": "قیمت",
+                        "beneficiary": "ذینفع فروش توکن در غیر این صورت فرستنده خواهد بود",
+                        "autoindex": "ایندکس خودکار",
+                        "duration": "بعد از ضرب قفل کنید. صفر یعنی بلافاصله آن را دریافت کنید.",
+                        "rateInterval": "فاصله سطل برای خرید ویژه",
+                        "rateAmount": "مقدار سطل برای خرید ویژه"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(اختیاری)",
+                    "number": "عدد",
+                    "address": "نشانی",
+                    "fraction": "کسر",
+                    "integer": "عدد صحیح",
+                    "seconds": "ثانیه",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "تولید کردن",
+                "viewInstancesList": "فهرست بازخوانی"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "شناسه سری",
+                        "account": "حساب",
+                        "amount": "میزان"
+                    },
+                    "small": {
+                        "seriesId": "توکن جدید به سری هایی با چنین شناسه ای تعلق دارد",
+                        "account": "صاحب NFT تازه ایجاد شده اگر تنظیم نشود - از کیف پول فعلی استفاده می کند",
+                        "amount": "مقدار NFT به نعناع"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(اختیاری)",
+                    "seriesId": "شناسه",
+                    "account": "حساب",
+                    "amount": "میزان",
+                    "integer": "عدد صحیح"
+                },
+                "btn": {
+                    "Purchase": "خرید",
+                    "SpecialPurchase": "خرید ویژه"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "نشانی"
+                    },
+                    "small": {
+                        "account": "نشانی"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "آدرس نامعتبر"
+                },
+                "placeholders": {
+                    "account": "نشانی"
+                },
+                "addToWhitelist": "به لیست سفید اضافه کنید",
+                "removeFromWhitelist": "حذف از لیست سفید"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "شناسه رمز",
+                    "custodian": "نگهبان",
+                    "recipient": "گیرنده"
+                },
+                "small": {
+                    "tokenId": "شناسه رمز آنچه باید قفل یا باز شود",
+                    "custodian": "آدرسی که می تواند قفل را باز کند",
+                    "recipient": "آدرسی که توکن ها را دریافت می کند"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "شناسه توکن نامعتبر است",
+                "invalidCustodian": "متولی نامعتبر",
+                "invalidRecipient": "گیرنده نامعتبر"
+            },
+            "placeholders": {
+                "optional": "(اختیاری)",
+                "tokenId": "شناسه",
+                "custodian": "نشانی"
+            },
+            "Lock": "قفل کردن",
+            "Unlock": "باز کردن قفل",
+            "Locked": "قفل شده است",
+            "CustodianAddress": "آدرس حافظ",
+            "TokenWasClaimed": "نشانه &quot;{{title}}&quot; ادعا شد",
+            "TokenWasLocked": "رمز &quot;{{title}}&quot; قفل شد",
+            "TokenWasUnlocked": "رمز &quot;{{title}}&quot; باز شد"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "برای کار با برنامه به MetaMask متصل است",
         "UserNotLoggedInMetaMask": "کاربر به MetaMask وارد نشده است",
         "CurrencyNotFound": "ارز پیدا نشد",
-        "WrongChain": "این NFT تحت &quot;{{chain}}&quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید"
+        "WrongChain": "این NFT تحت &quot;{{chain}}&quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید",
+        "AmountInvalid": "مبلغ نامعتبر است!",
+        "NoRecipientSelected": "هیچ گیرنده ای انتخاب نشده است",
+        "NotEnoughPermissionsWallet": "مجوزهای کافی برای خواندن کیف پول این کاربر وجود ندارد",
+        "ThisUserHaveNoWallet": "این کاربر هیچ کیف پولی اختصاص ندارد",
+        "TheWalletOfThisUserInvalid": "کیف پول این کاربر نامعتبر است",
+        "WalletInvalid": "آدرس کیف پول نامعتبر است"
     },
     "admin": {
         "Title": "اداری دارایی ها",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "حداقل اعتبار نمی تواند منفی باشد",
             "CreditsToAddNegative": "اعتبار برای افزودن نمی تواند منفی باشد"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "گیرنده را انتخاب کنید",
+        "TransactionSuccess": "موفقیت در معامله",
+        "OrTypeWalletAddress": "یا آدرس کیف پول گیرنده را تایپ کنید"
+    },
+    "currencies": {
+        "choose": "یک ارز را انتخاب کنید"
     }
 }

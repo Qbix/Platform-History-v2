@@ -27,7 +27,12 @@
         "PaymentProcessing.": "آپ کی ادائیگی پر کارروائی ہو رہی ہے۔",
         "FailTryAgain": "آپ کی ادائیگی کامیاب نہیں ہوئی، براہ کرم دوبارہ کوشش کریں۔",
         "SomethingWrong": "کچھ غلط ہو گیا",
-        "PaymentStatus": "ادائیگی کی حیثیت"
+        "PaymentStatus": "ادائیگی کی حیثیت",
+        "PayTo": "ادائیگی {{displayName}}",
+        "ChooseCurrency": "ایک کرنسی کا انتخاب کریں۔",
+        "YouCanSendUpTo": "آپ {{amount}} {{symbol}} تک بھیج سکتے ہیں",
+        "Send": "بھیجیں",
+        "EnterAmount": "رقم درج کریں"
     },
     "credits": {
         "InviteAcceptedBy": "دعوت قبول کی گئی بذریعہ {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} کریڈٹس",
             "BonusCredits": "{{amount}} کریڈٹس"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} بھرا ہوا {{FilledStreamTitle}}",
+        "ForFillingStream": "بھرنے کے لیے {{FilledStreamTitle}}",
+        "CreatePrivateChat": "{{toUserName}} کے ساتھ نجی بات چیت کے لیے"
     },
     "history": {
         "Date": "تاریخ",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "حاصل کردہ {{999} کریڈٹس",
         "Places_user_location": "حاصل کردہ {{999} کریڈٹس",
         "Streams_greeting": "حاصل کردہ {{999} کریڈٹس",
-        "YouHaveCreditsToStart": "حاصل کردہ {{999} کریڈٹس"
+        "YouHaveCreditsToStart": "حاصل کردہ {{999} کریڈٹس",
+        "User": "صارف"
     },
     "subscriptions": {
         "infoTitle": "ادائیگی کی معلومات سیٹ کریں۔",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "اضافی معلومات کا لنک سیٹ کریں۔",
             "DescriptionPlaceholder": "سروس کی تفصیل",
             "SaveService": "خدمت کو محفوظ کریں۔",
-            "SelectRequiredParticipants": "مطلوبہ شرکاء"
+            "SelectRequiredParticipants": "مطلوبہ شرکاء",
+            "RequiredParticipantsDesc": "براہ کرم متعلقہ شرکاء کو منتخب کریں جو اس سروس کو استعمال کرنے کے لیے درکار ہیں (مثال کے طور پر &quot;ڈاگز شو&quot; کے لیے پالتو جانور، یا &quot;بچوں کی چھٹی&quot; کے لیے بچے وغیرہ)۔ اگر سروس کی ادائیگی کی جاتی ہے، تو صارف کو ہر متعلقہ شرکاء کے لیے بھی ادائیگی کرنے کی ضرورت ہوگی۔"
         },
         "ManageServiceTemplates": "سروس ٹیمپلیٹس کا نظم کریں۔",
         "ManageServices": "خدمات کا نظم کریں۔",
@@ -387,6 +397,132 @@
             "Description": "صارف کی تفصیلات",
             "aboutPlaceholder": "بائیو میں ترمیم کریں۔",
             "SureLogOut": "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟"
+        },
+        "Add": "شامل کریں۔",
+        "Remove": "دور",
+        "NoNFTyet": "ابھی تک کوئی NFTs نہیں ہیں۔",
+        "Claim": "دعویٰ",
+        "ClaimNFT": "NFT کا دعوی کریں۔",
+        "Unlocking": "کھولنا",
+        "Unlock": "غیر مقفل کریں۔",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC معاہدہ",
+                        "seriesId": "سیریز کی شناخت",
+                        "owner": "مالک",
+                        "currency": "کرنسی",
+                        "price": "قیمت",
+                        "beneficiary": "فائدہ اٹھانے والا",
+                        "autoindex": "آٹو انڈیکس",
+                        "duration": "دورانیہ",
+                        "rateInterval": "شرح وقفہ",
+                        "rateAmount": "شرح کی رقم"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC معاہدہ",
+                        "seriesId": "ٹوکن اس سیریز میں بنائے جائیں گے۔",
+                        "owner": "مثال کا مالک، بصورت دیگر بھیجنے والا ہوگا۔",
+                        "currency": "خریدے گئے ٹوکنز کے لیے کرنسی، اگر صفر ہو تو - مقامی سکوں کے لیے",
+                        "price": "قیمت",
+                        "beneficiary": "ٹوکن فروخت کرنے کا فائدہ اٹھانے والا، بصورت دیگر بھیجنے والا ہوگا۔",
+                        "autoindex": "آٹو انڈیکس",
+                        "duration": "ٹکسال کے بعد تالا لگا دیں۔ صفر کا مطلب ہے اسے فوراً حاصل کریں۔",
+                        "rateInterval": "خصوصی خریداری کے لیے بالٹی وقفہ",
+                        "rateAmount": "خصوصی خریداری کے لیے بالٹی کی رقم"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(اختیاری)",
+                    "number": "نمبر",
+                    "address": "پتہ",
+                    "fraction": "حصہ",
+                    "integer": "عدد",
+                    "seconds": "سیکنڈ",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "پیدا کرنا",
+                "viewInstancesList": "فہرست کو تازہ کریں۔"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "سیریز ID",
+                        "account": "کھاتہ",
+                        "amount": "رقم"
+                    },
+                    "small": {
+                        "seriesId": "نیا ٹوکن اس طرح کی ID کے ساتھ سیریز میں ہوگا۔",
+                        "account": "نئے بنائے گئے NFT کا مالک۔ اگر سیٹ نہیں ہے تو - موجودہ پرس استعمال کرے گا۔",
+                        "amount": "NFT کی رقم منٹ تک"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(اختیاری)",
+                    "seriesId": "آئی ڈی",
+                    "account": "کھاتہ",
+                    "amount": "رقم",
+                    "integer": "عدد"
+                },
+                "btn": {
+                    "Purchase": "خریداری",
+                    "SpecialPurchase": "خصوصی خریداری"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "پتہ"
+                    },
+                    "small": {
+                        "account": "پتہ"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "غلط پتہ"
+                },
+                "placeholders": {
+                    "account": "پتہ"
+                },
+                "addToWhitelist": "وائٹ لسٹ میں شامل کریں۔",
+                "removeFromWhitelist": "وائٹ لسٹ سے ہٹا دیں۔"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ٹوکن آئی ڈی",
+                    "custodian": "نگران",
+                    "recipient": "وصول کنندہ"
+                },
+                "small": {
+                    "tokenId": "ٹوکن آئی ڈی جس کو لاک یا انلاک کرنے کی ضرورت ہے۔",
+                    "custodian": "پتہ جو انلاک کرنے کے قابل ہو۔",
+                    "recipient": "پتہ جو ٹوکن وصول کرے گا۔"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "غلط ٹوکن آئی ڈی",
+                "invalidCustodian": "غلط کسٹوڈین",
+                "invalidRecipient": "غلط وصول کنندہ"
+            },
+            "placeholders": {
+                "optional": "(اختیاری)",
+                "tokenId": "آئی ڈی",
+                "custodian": "پتہ"
+            },
+            "Lock": "تالا",
+            "Unlock": "غیر مقفل کریں۔",
+            "Locked": "مقفل",
+            "CustodianAddress": "متولی کا پتہ",
+            "TokenWasClaimed": "ٹوکن &quot;{{title}}&quot; کا دعوی کیا گیا تھا۔",
+            "TokenWasLocked": "ٹوکن &quot;{{title}}&quot; مقفل تھا۔",
+            "TokenWasUnlocked": "ٹوکن &quot;{{title}}&quot; کو غیر مقفل کر دیا گیا تھا۔"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "ایپلیکیشن کے ساتھ کام کرنے کے لیے میٹا ماسک کی ضرورت ہے۔",
         "UserNotLoggedInMetaMask": "صارف MetaMask میں لاگ ان نہیں ہے۔",
         "CurrencyNotFound": "کرنسی نہیں ملی",
-        "WrongChain": "یہ NFT &quot;{{chain}}&quot; کے تحت بنایا گیا ہے۔ براہ کرم یہ سلسلہ استعمال کریں۔"
+        "WrongChain": "یہ NFT &quot;{{chain}}&quot; کے تحت بنایا گیا ہے۔ براہ کرم یہ سلسلہ استعمال کریں۔",
+        "AmountInvalid": "رقم غلط!",
+        "NoRecipientSelected": "کوئی وصول کنندہ منتخب نہیں کیا گیا۔",
+        "NotEnoughPermissionsWallet": "اس صارف کے بٹوے کو پڑھنے کے لیے کافی اجازتیں نہیں ہیں۔",
+        "ThisUserHaveNoWallet": "اس صارف کو کوئی والیٹ تفویض نہیں کیا گیا ہے۔",
+        "TheWalletOfThisUserInvalid": "اس صارف کا پرس غلط ہے۔",
+        "WalletInvalid": "والیٹ کا پتہ غلط ہے۔"
     },
     "admin": {
         "Title": "انتظامی اثاثے۔",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "کریڈٹ کم از کم منفی نہیں ہو سکتا",
             "CreditsToAddNegative": "شامل کرنے کے لیے کریڈٹ منفی نہیں ہو سکتے"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "وصول کنندہ کو منتخب کریں۔",
+        "TransactionSuccess": "لین دین کی کامیابی",
+        "OrTypeWalletAddress": "یا وصول کنندہ والیٹ کا پتہ ٹائپ کریں۔"
+    },
+    "currencies": {
+        "choose": "ایک کرنسی کا انتخاب کریں۔"
     }
 }

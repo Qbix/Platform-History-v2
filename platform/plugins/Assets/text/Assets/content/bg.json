@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Вашето плащане се обработва",
         "FailTryAgain": "Вашето плащане не беше успешно, моля опитайте отново",
         "SomethingWrong": "Нещо се обърка",
-        "PaymentStatus": "Статус на плащането"
+        "PaymentStatus": "Статус на плащането",
+        "PayTo": "Платете {{displayName}}",
+        "ChooseCurrency": "Изберете валута",
+        "YouCanSendUpTo": "Можете да изпратите до {{amount}} {{symbol}}",
+        "Send": "Изпратете",
+        "EnterAmount": "въведи сума"
     },
     "credits": {
         "InviteAcceptedBy": "Поканата е приета от {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} въведе фамилно име",
         "Streams_user_icon": "{{invitedUserName}} въведена икона",
         "Places_user_location": "{{invitedUserName}} въведе местоположение",
-        "Streams_greeting": "{{invitedUserName}} въведе поздрав"
+        "Streams_greeting": "{{invitedUserName}} въведе поздрав",
+        "InvitedUserFilledStream": "{{invitedUserName}} запълнено {{FilledStreamTitle}}",
+        "ForFillingStream": "За пълнене {{FilledStreamTitle}}",
+        "CreatePrivateChat": "за личен чат с {{toUserName}}"
     },
     "history": {
         "Date": "Дата",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Спечелени {{amount}} кредити",
         "Streams_user_icon": "Спечелени {{amount}} кредити",
         "Places_user_location": "Спечелени {{amount}} кредити",
-        "Streams_greeting": "Спечелени {{amount}} кредити"
+        "Streams_greeting": "Спечелени {{amount}} кредити",
+        "User": "Потребител"
     },
     "subscriptions": {
         "infoTitle": "Задайте информация за плащане",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "задайте връзка за допълнителна информация",
             "DescriptionPlaceholder": "Описание на услугата",
             "SaveService": "Запазване на услугата",
-            "SelectRequiredParticipants": "Задължителни участници"
+            "SelectRequiredParticipants": "Задължителни участници",
+            "RequiredParticipantsDesc": "Моля, изберете свързани участници, които са необходими за използване на тази услуга (например домашни любимци за „Кучешка изложба“ или деца за „Детски празник“ и т.н.). Ако услугата е платена, потребителят ще трябва да плати и за всеки свързан участник."
         },
         "ManageServiceTemplates": "Управление на шаблони за услуги",
         "ManageServices": "Управление на услугите",
@@ -388,6 +398,132 @@
             "Description": "Данни за потребителя",
             "aboutPlaceholder": "Редактиране на биография",
             "SureLogOut": "Сигурни ли сте, че искате да излезете?"
+        },
+        "Add": "Добавете",
+        "Remove": "Премахване",
+        "NoNFTyet": "Все още няма NFT",
+        "Claim": "Иск",
+        "ClaimNFT": "Заявете NFT",
+        "Unlocking": "Отключване",
+        "Unlock": "Отключи",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTДоговор",
+                        "seriesId": "серия Id",
+                        "owner": "Собственик",
+                        "currency": "Валута",
+                        "price": "Цена",
+                        "beneficiary": "Бенефициент",
+                        "autoindex": "Автоиндекс",
+                        "duration": "Продължителност",
+                        "rateInterval": "Скоростен интервал",
+                        "rateAmount": "Размер на ставка"
+                    },
+                    "small": {
+                        "NFTContract": "NFTДоговор",
+                        "seriesId": "жетони ще бъдат сечени в тази серия",
+                        "owner": "собственик на екземпляра, в противен случай ще бъде подател",
+                        "currency": "Валута за закупени токени, ако е нула - за нативни монети",
+                        "price": "Цена",
+                        "beneficiary": "Бенефициент на продажба на токени, в противен случай ще бъде подател",
+                        "autoindex": "Автоиндекс",
+                        "duration": "Заключване след сечене. Нула означава да го получите веднага.",
+                        "rateInterval": "интервал на кофа за специална покупка",
+                        "rateAmount": "кофа сума за специална покупка"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(по избор)",
+                    "number": "номер",
+                    "address": "адрес",
+                    "fraction": "фракция",
+                    "integer": "цяло число",
+                    "seconds": "секунди",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Продукция",
+                "viewInstancesList": "Опресняване на списъка"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID на серия",
+                        "account": "Сметка",
+                        "amount": "Количество"
+                    },
+                    "small": {
+                        "seriesId": "нов токен ще принадлежи към серия с такъв идентификатор",
+                        "account": "собственик на новосъздадени NFT. ако не е зададено - ще използва текущия портфейл",
+                        "amount": "количество NFT за отсичане"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(по избор)",
+                    "seriesId": "документ за самоличност",
+                    "account": "сметка",
+                    "amount": "количество",
+                    "integer": "цяло число"
+                },
+                "btn": {
+                    "Purchase": "Покупка",
+                    "SpecialPurchase": "Специална покупка"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Адрес"
+                    },
+                    "small": {
+                        "account": "Адрес"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Невалиден адрес"
+                },
+                "placeholders": {
+                    "account": "Адрес"
+                },
+                "addToWhitelist": "Добавяне към белия списък",
+                "removeFromWhitelist": "Премахване от белия списък"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID на токена",
+                    "custodian": "Попечител",
+                    "recipient": "Получател"
+                },
+                "small": {
+                    "tokenId": "токен идентификатор какво трябва да заключите или отключите",
+                    "custodian": "адрес, който може да бъде в състояние да отключи",
+                    "recipient": "адрес, който ще получи токените"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Невалиден идентификатор на токена",
+                "invalidCustodian": "Невалиден попечител",
+                "invalidRecipient": "Невалиден получател"
+            },
+            "placeholders": {
+                "optional": "(по избор)",
+                "tokenId": "документ за самоличност",
+                "custodian": "адрес"
+            },
+            "Lock": "Ключалка",
+            "Unlock": "Отключи",
+            "Locked": "Заключено",
+            "CustodianAddress": "Адрес на попечителя",
+            "TokenWasClaimed": "Токенът „{{title}}“ бе поискан",
+            "TokenWasLocked": "Токенът „{{title}}“ беше заключен",
+            "TokenWasUnlocked": "Токенът „{{title}}“ беше отключен"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Нуждаете се от свързана MetaMask, за да работите с приложението",
         "UserNotLoggedInMetaMask": "Потребителят не е влязъл в MetaMask",
         "CurrencyNotFound": "Валутата не е намерена",
-        "WrongChain": "Този NFT е създаден под „{{chain}}“. Моля, използвайте тази верига."
+        "WrongChain": "Този NFT е създаден под „{{chain}}“. Моля, използвайте тази верига.",
+        "AmountInvalid": "Невалидна сума!",
+        "NoRecipientSelected": "Няма избран получател",
+        "NotEnoughPermissionsWallet": "Няма достатъчно разрешения за четене на портфейла на този потребител",
+        "ThisUserHaveNoWallet": "Този потребител няма присвоен портфейл",
+        "TheWalletOfThisUserInvalid": "Портфейлът на този потребител е невалиден",
+        "WalletInvalid": "Адресът на портфейла е невалиден"
     },
     "admin": {
         "Title": "Административни активи",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Минимумът на кредитите не може да бъде отрицателен",
             "CreditsToAddNegative": "Кредитите за добавяне не могат да бъдат отрицателни"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Изберете получател",
+        "TransactionSuccess": "Успех на транзакцията",
+        "OrTypeWalletAddress": "ИЛИ въведете адреса на портфейла на получателя"
+    },
+    "currencies": {
+        "choose": "Изберете валута"
     }
 }

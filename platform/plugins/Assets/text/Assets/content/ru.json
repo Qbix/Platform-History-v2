@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Ваш платеж обрабатывается",
         "FailTryAgain": "Ваш платеж не прошел успешно, попробуйте еще раз",
         "SomethingWrong": "Что-то пошло не так",
-        "PaymentStatus": "Статус платежа"
+        "PaymentStatus": "Статус платежа",
+        "PayTo": "Оплатить {{displayName}}",
+        "ChooseCurrency": "Выберите валюту",
+        "YouCanSendUpTo": "Вы можете отправить до {{amount}} {{symbol}}",
+        "Send": "Отправлять",
+        "EnterAmount": "введите сумму"
     },
     "credits": {
         "InviteAcceptedBy": "Приглашение принято {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} кредитов",
             "BonusCredits": "{{amount}} кредитов"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} заполнено {{FilledStreamTitle}}",
+        "ForFillingStream": "Для заполнения {{FilledStreamTitle}}",
+        "CreatePrivateChat": "для приватного чата с {{toUserName}}"
     },
     "history": {
         "Date": "Дата",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Заработано {{amount}} кредитов",
         "Places_user_location": "Заработано {{amount}} кредитов",
         "Streams_greeting": "Заработано {{amount}} кредитов",
-        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов"
+        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов",
+        "User": "Пользователь"
     },
     "subscriptions": {
         "infoTitle": "Установить платежную информацию",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "установить ссылку на дополнительную информацию",
             "DescriptionPlaceholder": "Описание услуг",
             "SaveService": "Сохранить сервис",
-            "SelectRequiredParticipants": "Требуемые участники"
+            "SelectRequiredParticipants": "Требуемые участники",
+            "RequiredParticipantsDesc": "Пожалуйста, выберите связанных участников, которые необходимы для использования этой услуги (например, домашние животные для «Выставки собак», или дети для «Детского праздника» и т. д.). Если услуга платная, пользователю нужно будет платить также за каждого связанного участника."
         },
         "ManageServiceTemplates": "Управление шаблонами услуг",
         "ManageServices": "Управление службами",
@@ -387,6 +397,132 @@
             "Description": "Данные пользователя",
             "aboutPlaceholder": "Изменить биографию",
             "SureLogOut": "Вы действительно хотите выйти?"
+        },
+        "Add": "Добавлять",
+        "Remove": "Удалять",
+        "NoNFTyet": "NFT еще нет",
+        "Claim": "Требовать",
+        "ClaimNFT": "Претензия NFT",
+        "Unlocking": "Разблокировка",
+        "Unlock": "Разблокировать",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTКонтракт",
+                        "seriesId": "идентификатор серии",
+                        "owner": "Владелец",
+                        "currency": "Валюта",
+                        "price": "Цена",
+                        "beneficiary": "Бенефициар",
+                        "autoindex": "Автоиндекс",
+                        "duration": "Продолжительность",
+                        "rateInterval": "Интервал скорости",
+                        "rateAmount": "Сумма ставки"
+                    },
+                    "small": {
+                        "NFTContract": "NFTКонтракт",
+                        "seriesId": "токенов будет выпущено в этой серии",
+                        "owner": "владелец экземпляра, иначе будет отправителем",
+                        "currency": "Валюта для купленных токенов, если ноль - для нативных монет",
+                        "price": "Цена",
+                        "beneficiary": "Бенефициар продажи токенов, в противном случае будет отправителем",
+                        "autoindex": "Автоиндекс",
+                        "duration": "Блокировка после минтинга. Ноль означает получить его немедленно.",
+                        "rateInterval": "интервал ведра для специальной покупки",
+                        "rateAmount": "сумма ведра для специальной покупки"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(необязательный)",
+                    "number": "число",
+                    "address": "адрес",
+                    "fraction": "доля",
+                    "integer": "целое число",
+                    "seconds": "секунды",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Производить",
+                "viewInstancesList": "Обновить список"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Идентификатор серии",
+                        "account": "Счет",
+                        "amount": "Количество"
+                    },
+                    "small": {
+                        "seriesId": "новый токен будет принадлежать серии с таким ID",
+                        "account": "владелец недавно созданного NFT. если не установлено - будет использовать текущий кошелек",
+                        "amount": "количество NFT в монетном дворе"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(необязательный)",
+                    "seriesId": "идентификатор",
+                    "account": "счет",
+                    "amount": "количество",
+                    "integer": "целое число"
+                },
+                "btn": {
+                    "Purchase": "Покупка",
+                    "SpecialPurchase": "Специальная покупка"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Адрес"
+                    },
+                    "small": {
+                        "account": "Адрес"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Неверный адрес"
+                },
+                "placeholders": {
+                    "account": "Адрес"
+                },
+                "addToWhitelist": "Добавить в белый список",
+                "removeFromWhitelist": "Удалить из белого списка"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Идентификатор токена",
+                    "custodian": "Хранитель",
+                    "recipient": "Получатель"
+                },
+                "small": {
+                    "tokenId": "идентификатор токена, что нужно заблокировать или разблокировать",
+                    "custodian": "адрес, который можно разблокировать",
+                    "recipient": "адрес, который будет получать токены"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Недопустимый идентификатор токена",
+                "invalidCustodian": "Недействительный хранитель",
+                "invalidRecipient": "Неверный получатель"
+            },
+            "placeholders": {
+                "optional": "(необязательный)",
+                "tokenId": "идентификатор",
+                "custodian": "адрес"
+            },
+            "Lock": "Замок",
+            "Unlock": "Разблокировать",
+            "Locked": "Заблокировано",
+            "CustodianAddress": "Адрес хранителя",
+            "TokenWasClaimed": "Токен &quot;{{title}}&quot; заявлен",
+            "TokenWasLocked": "Токен &quot;{{title}}&quot; заблокирован",
+            "TokenWasUnlocked": "Токен &quot;{{title}}&quot; разблокирован"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Требуется подключение MetaMask для работы с приложением",
         "UserNotLoggedInMetaMask": "Пользователь не авторизовался в MetaMask",
         "CurrencyNotFound": "Валюта не найдена",
-        "WrongChain": "Этот NFT создан под &quot;{{chain}}&quot;. Пожалуйста, используйте эту цепочку."
+        "WrongChain": "Этот NFT создан под &quot;{{chain}}&quot;. Пожалуйста, используйте эту цепочку.",
+        "AmountInvalid": "Сумма недействительна!",
+        "NoRecipientSelected": "Получатель не выбран",
+        "NotEnoughPermissionsWallet": "Недостаточно прав для чтения кошелька этого пользователя",
+        "ThisUserHaveNoWallet": "Этому пользователю не назначен кошелек",
+        "TheWalletOfThisUserInvalid": "Кошелек этого пользователя недействителен",
+        "WalletInvalid": "Неверный адрес кошелька"
     },
     "admin": {
         "Title": "Активы административные",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Минимум кредитов не может быть отрицательным",
             "CreditsToAddNegative": "Кредиты для добавления не могут быть отрицательными"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Выберите получателя",
+        "TransactionSuccess": "Успешная транзакция",
+        "OrTypeWalletAddress": "ИЛИ введите адрес кошелька получателя"
+    },
+    "currencies": {
+        "choose": "Выберите валюту"
     }
 }

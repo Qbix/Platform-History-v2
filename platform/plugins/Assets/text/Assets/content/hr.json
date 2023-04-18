@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Vaša uplata je u obradi",
         "FailTryAgain": "Vaše plaćanje nije uspjelo, pokušajte ponovno",
         "SomethingWrong": "Nešto je pošlo po zlu",
-        "PaymentStatus": "Status plaćanja"
+        "PaymentStatus": "Status plaćanja",
+        "PayTo": "Platite {{displayName}}",
+        "ChooseCurrency": "Odaberite valutu",
+        "YouCanSendUpTo": "Možete poslati do {{amount}} {{symbol}}",
+        "Send": "Poslati",
+        "EnterAmount": "unesite iznos"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} prihvatio pozivnicu",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} je unio prezime",
         "Streams_user_icon": "{{invitedUserName}} unesena ikona",
         "Places_user_location": "{{invitedUserName}} je unio lokaciju",
-        "Streams_greeting": "{{invitedUserName}} je unio pozdrav"
+        "Streams_greeting": "{{invitedUserName}} je unio pozdrav",
+        "InvitedUserFilledStream": "{{invitedUserName}} ispunjeno {{FilledStreamTitle}}",
+        "ForFillingStream": "Za punjenje {{FilledStreamTitle}}",
+        "CreatePrivateChat": "za privatni razgovor s {{toUserName}}"
     },
     "history": {
         "Date": "Datum",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Zaradio {{amount}} kredita",
         "Streams_user_icon": "Zaradio {{amount}} kredita",
         "Places_user_location": "Zaradio {{amount}} kredita",
-        "Streams_greeting": "Zaradio {{amount}} kredita"
+        "Streams_greeting": "Zaradio {{amount}} kredita",
+        "User": "Korisnik"
     },
     "subscriptions": {
         "infoTitle": "Postavite podatke o plaćanju",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "postavite vezu za dodatne informacije",
             "DescriptionPlaceholder": "Opis usluge",
             "SaveService": "Spremi uslugu",
-            "SelectRequiredParticipants": "Obavezni sudionici"
+            "SelectRequiredParticipants": "Obavezni sudionici",
+            "RequiredParticipantsDesc": "Odaberite povezane sudionike koji su potrebni za korištenje ove usluge (na primjer kućni ljubimci za &quot;Izložbu pasa&quot;, ili djecu za &quot;Dječje praznike&quot; itd.). Ako se usluga plaća, korisnik će morati platiti i za svakog povezanog sudionika."
         },
         "ManageServiceTemplates": "Upravljajte predlošcima usluga",
         "ManageServices": "Upravljajte uslugama",
@@ -388,6 +398,132 @@
             "Description": "Podaci o korisniku",
             "aboutPlaceholder": "Uredi biografiju",
             "SureLogOut": "Jeste li sigurni da se želite odjaviti?"
+        },
+        "Add": "Dodati",
+        "Remove": "Ukloniti",
+        "NoNFTyet": "Još nema NFT-ova",
+        "Claim": "Zahtjev",
+        "ClaimNFT": "Zatražite NFT",
+        "Unlocking": "Otključavanje",
+        "Unlock": "Otključati",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT Ugovor",
+                        "seriesId": "serija Id",
+                        "owner": "Vlasnik",
+                        "currency": "Valuta",
+                        "price": "Cijena",
+                        "beneficiary": "Korisnik",
+                        "autoindex": "Autoindex",
+                        "duration": "Trajanje",
+                        "rateInterval": "Interval stope",
+                        "rateAmount": "Iznos stope"
+                    },
+                    "small": {
+                        "NFTContract": "NFT Ugovor",
+                        "seriesId": "žetoni će se kovati u ovoj seriji",
+                        "owner": "vlasnik instance, inače će biti pošiljatelj",
+                        "currency": "Valuta za kupljene tokene, ako je nula - za izvorne kovanice",
+                        "price": "Cijena",
+                        "beneficiary": "Korisnik prodaje tokene, inače će biti pošiljatelj",
+                        "autoindex": "Autoindex",
+                        "duration": "Brava nakon kovanja. Nula znači dobiti odmah.",
+                        "rateInterval": "interval kante za posebnu kupnju",
+                        "rateAmount": "veliki iznos za posebnu kupnju"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(neobavezno)",
+                    "number": "broj",
+                    "address": "adresa",
+                    "fraction": "frakcija",
+                    "integer": "cijeli broj",
+                    "seconds": "sekundi",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Proizvoditi",
+                "viewInstancesList": "Osvježi popis"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID serije",
+                        "account": "Račun",
+                        "amount": "Iznos"
+                    },
+                    "small": {
+                        "seriesId": "novi token pripadat će nizu s takvim ID-om",
+                        "account": "vlasnik novostvorenog NFT-a. ako nije postavljeno - koristit će trenutni novčanik",
+                        "amount": "iznos NFT za kovanje"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(neobavezno)",
+                    "seriesId": "iskaznica",
+                    "account": "račun",
+                    "amount": "iznos",
+                    "integer": "cijeli broj"
+                },
+                "btn": {
+                    "Purchase": "Kupiti",
+                    "SpecialPurchase": "Posebna kupnja"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresa"
+                    },
+                    "small": {
+                        "account": "Adresa"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Nevažeća adresa"
+                },
+                "placeholders": {
+                    "account": "Adresa"
+                },
+                "addToWhitelist": "Dodaj na popis dopuštenih",
+                "removeFromWhitelist": "Ukloni s popisa dopuštenih"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID tokena",
+                    "custodian": "Skrbnik",
+                    "recipient": "Primatelj"
+                },
+                "small": {
+                    "tokenId": "token id što treba zaključati ili otključati",
+                    "custodian": "adresa koja se može otključati",
+                    "recipient": "adresu koja će primati tokene"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Nevažeći tokenId",
+                "invalidCustodian": "Nevažeći skrbnik",
+                "invalidRecipient": "Nevažeći primatelj"
+            },
+            "placeholders": {
+                "optional": "(neobavezno)",
+                "tokenId": "iskaznica",
+                "custodian": "adresa"
+            },
+            "Lock": "brava",
+            "Unlock": "Otključati",
+            "Locked": "Zaključan",
+            "CustodianAddress": "Adresa skrbnika",
+            "TokenWasClaimed": "Zatražen je token &quot;{{title}}&quot;.",
+            "TokenWasLocked": "Token &quot;{{title}}&quot; je zaključan",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; je otključan"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Za rad s aplikacijom potreban je MetaMask povezan",
         "UserNotLoggedInMetaMask": "Korisnik nije prijavljen na MetaMask",
         "CurrencyNotFound": "Valuta nije pronađena",
-        "WrongChain": "Ovaj NFT stvoren pod &quot;{{chain}}&quot;. Molimo koristite ovaj lanac."
+        "WrongChain": "Ovaj NFT stvoren pod &quot;{{chain}}&quot;. Molimo koristite ovaj lanac.",
+        "AmountInvalid": "Iznos nije valjan!",
+        "NoRecipientSelected": "Nema odabranog primatelja",
+        "NotEnoughPermissionsWallet": "Nema dovoljno dozvola za čitanje novčanika ovog korisnika",
+        "ThisUserHaveNoWallet": "Ovaj korisnik nema dodijeljen novčanik",
+        "TheWalletOfThisUserInvalid": "Novčanik ovog korisnika nije valjan",
+        "WalletInvalid": "Adresa novčanika nije važeća"
     },
     "admin": {
         "Title": "Sredstva administrativna",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Minimalni krediti ne mogu biti negativni",
             "CreditsToAddNegative": "Krediti za dodavanje ne mogu biti negativni"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Odaberite primatelja",
+        "TransactionSuccess": "Uspjeh transakcije",
+        "OrTypeWalletAddress": "ILI upišite adresu novčanika primatelja"
+    },
+    "currencies": {
+        "choose": "Odaberite valutu"
     }
 }

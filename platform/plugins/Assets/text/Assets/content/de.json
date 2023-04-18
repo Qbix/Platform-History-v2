@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Ihre Zahlung wird verarbeitet",
         "FailTryAgain": "Ihre Zahlung war nicht erfolgreich, bitte versuchen Sie es erneut",
         "SomethingWrong": "Etwas ist schief gelaufen",
-        "PaymentStatus": "Zahlungsstatus"
+        "PaymentStatus": "Zahlungsstatus",
+        "PayTo": "Zahle {{displayName}}",
+        "ChooseCurrency": "Wählen Sie eine Währung",
+        "YouCanSendUpTo": "Sie können bis zu {{amount}} {{symbol}} senden",
+        "Send": "Schicken",
+        "EnterAmount": "Menge eingeben"
     },
     "credits": {
         "InviteAcceptedBy": "Einladung angenommen von {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} Guthaben",
             "BonusCredits": "{{amount}} Guthaben"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} gefüllt {{FilledStreamTitle}}",
+        "ForFillingStream": "Zum Füllen {{FilledStreamTitle}}",
+        "CreatePrivateChat": "für privaten Chat mit {{toUserName}}"
     },
     "history": {
         "Date": "Datum",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} Credits verdient",
         "Places_user_location": "{{amount}} Credits verdient",
         "Streams_greeting": "{{amount}} Credits verdient",
-        "YouHaveCreditsToStart": "{{amount}} Credits verdient"
+        "YouHaveCreditsToStart": "{{amount}} Credits verdient",
+        "User": "Benutzer"
     },
     "subscriptions": {
         "infoTitle": "Zahlungsinformationen festlegen",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "Zusatzinfolink setzen",
             "DescriptionPlaceholder": "Leistungsbeschreibung",
             "SaveService": "Dienst speichern",
-            "SelectRequiredParticipants": "Erforderliche Teilnehmer"
+            "SelectRequiredParticipants": "Erforderliche Teilnehmer",
+            "RequiredParticipantsDesc": "Bitte wählen Sie entsprechende Teilnehmer aus, die für die Nutzung dieses Dienstes erforderlich sind (z. B. Haustiere für &quot;Hundeshow&quot; oder Kinder für &quot;Kinderferien&quot; usw.). Wenn der Dienst bezahlt wird, muss der Benutzer auch für jeden zugehörigen Teilnehmer bezahlen."
         },
         "ManageServiceTemplates": "Dienstvorlagen verwalten",
         "ManageServices": "Dienste verwalten",
@@ -387,6 +397,132 @@
             "Description": "Nutzerdetails",
             "aboutPlaceholder": "Bio bearbeiten",
             "SureLogOut": "Möchten Sie sich wirklich abmelden?"
+        },
+        "Add": "Hinzufügen",
+        "Remove": "Entfernen",
+        "NoNFTyet": "Noch keine NFTs",
+        "Claim": "Beanspruchen",
+        "ClaimNFT": "NFT beanspruchen",
+        "Unlocking": "Entsperren",
+        "Unlock": "Freischalten",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTVertrag",
+                        "seriesId": "Serien-ID",
+                        "owner": "Eigentümer",
+                        "currency": "Währung",
+                        "price": "Preis",
+                        "beneficiary": "Begünstigter",
+                        "autoindex": "Autoindex",
+                        "duration": "Dauer",
+                        "rateInterval": "Intervall bewerten",
+                        "rateAmount": "Betrag bewerten"
+                    },
+                    "small": {
+                        "NFTContract": "NFTVertrag",
+                        "seriesId": "Token werden in dieser Serie geprägt",
+                        "owner": "Eigentümer der Instanz, sonst Absender",
+                        "currency": "Währung für gekaufte Token, wenn Null - für native Coins",
+                        "price": "Preis",
+                        "beneficiary": "Begünstigter des Verkaufs von Token, ansonsten Absender",
+                        "autoindex": "Autoindex",
+                        "duration": "Sperren Sie nach dem Prägen. Null bedeutet, es sofort zu bekommen.",
+                        "rateInterval": "Bucket-Intervall für Sonderkauf",
+                        "rateAmount": "Bucket-Betrag für Sonderkauf"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(Optional)",
+                    "number": "Nummer",
+                    "address": "Adresse",
+                    "fraction": "Fraktion",
+                    "integer": "ganze Zahl",
+                    "seconds": "Sekunden",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produzieren",
+                "viewInstancesList": "Liste aktualisieren"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Serien-ID",
+                        "account": "Konto",
+                        "amount": "Menge"
+                    },
+                    "small": {
+                        "seriesId": "neue Token werden in Reihe mit einer solchen ID gehören",
+                        "account": "Eigentümer der neu geschaffenen NFT. wenn nicht gesetzt - wird die aktuelle Brieftasche verwendet",
+                        "amount": "Betrag NFT zu Minze"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(Optional)",
+                    "seriesId": "Ausweis",
+                    "account": "Konto",
+                    "amount": "Menge",
+                    "integer": "ganze Zahl"
+                },
+                "btn": {
+                    "Purchase": "Kaufen",
+                    "SpecialPurchase": "Sonderkauf"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresse"
+                    },
+                    "small": {
+                        "account": "Adresse"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Ungültige Adresse"
+                },
+                "placeholders": {
+                    "account": "Adresse"
+                },
+                "addToWhitelist": "Zur Whitelist hinzufügen",
+                "removeFromWhitelist": "Von Whitelist entfernen"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token-ID",
+                    "custodian": "Verwahrer",
+                    "recipient": "Empfänger"
+                },
+                "small": {
+                    "tokenId": "Token-ID, was gesperrt oder entsperrt werden muss",
+                    "custodian": "Adresse, die entsperrt werden kann",
+                    "recipient": "Adresse, die die Token erhalten wird"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Ungültige Token-ID",
+                "invalidCustodian": "Ungültiger Depotbank",
+                "invalidRecipient": "Ungültiger Empfänger"
+            },
+            "placeholders": {
+                "optional": "(Optional)",
+                "tokenId": "Ausweis",
+                "custodian": "Adresse"
+            },
+            "Lock": "Sperren",
+            "Unlock": "Freischalten",
+            "Locked": "Gesperrt",
+            "CustodianAddress": "Depotadresse",
+            "TokenWasClaimed": "Token &quot;{{title}}&quot; wurde beansprucht",
+            "TokenWasLocked": "Token &quot;{{title}}&quot; wurde gesperrt",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; wurde entsperrt"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Benötigen Sie eine MetaMask-Verbindung, um mit der Anwendung zu arbeiten",
         "UserNotLoggedInMetaMask": "Der Benutzer ist nicht bei MetaMask angemeldet",
         "CurrencyNotFound": "Währung nicht gefunden",
-        "WrongChain": "Diese NFT wurde unter &quot;{{chain}}&quot; erstellt. Bitte verwenden Sie diese Kette."
+        "WrongChain": "Diese NFT wurde unter &quot;{{chain}}&quot; erstellt. Bitte verwenden Sie diese Kette.",
+        "AmountInvalid": "Betrag ungültig!",
+        "NoRecipientSelected": "Kein Empfänger ausgewählt",
+        "NotEnoughPermissionsWallet": "Nicht genügend Berechtigungen zum Lesen der Brieftasche dieses Benutzers",
+        "ThisUserHaveNoWallet": "Diesem Benutzer ist kein Wallet zugewiesen",
+        "TheWalletOfThisUserInvalid": "Die Brieftasche dieses Benutzers ist ungültig",
+        "WalletInvalid": "Wallet-Adresse ungültig"
     },
     "admin": {
         "Title": "Vermögen administrativ",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Das Credit-Minimum darf nicht negativ sein",
             "CreditsToAddNegative": "Hinzuzufügende Credits dürfen nicht negativ sein"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Empfänger auswählen",
+        "TransactionSuccess": "Transaktionserfolg",
+        "OrTypeWalletAddress": "ODER geben Sie die Wallet-Adresse des Empfängers ein"
+    },
+    "currencies": {
+        "choose": "Wählen Sie eine Währung"
     }
 }

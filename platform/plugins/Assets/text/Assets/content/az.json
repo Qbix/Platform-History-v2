@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Ödənişiniz emal olunur",
         "FailTryAgain": "Ödənişiniz uğursuz oldu, yenidən cəhd edin",
         "SomethingWrong": "Nəsə xəta baş verdi",
-        "PaymentStatus": "Ödəniş statusu"
+        "PaymentStatus": "Ödəniş statusu",
+        "PayTo": "Ödəniş {{displayName}}",
+        "ChooseCurrency": "Valyuta seçin",
+        "YouCanSendUpTo": "Siz {{amount}} {{symbol}} qədər göndərə bilərsiniz",
+        "Send": "Göndər",
+        "EnterAmount": "məbləği daxil edin"
     },
     "credits": {
         "InviteAcceptedBy": "Dəvət {{invitedUserName}} tərəfindən qəbul edildi",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} soyadını daxil etdi",
         "Streams_user_icon": "{{invitedUserName}} ikona daxil edildi",
         "Places_user_location": "{{invitedUserName}} yeri daxil etdi",
-        "Streams_greeting": "{{invitedUserName}} salamlama daxil oldu"
+        "Streams_greeting": "{{invitedUserName}} salamlama daxil oldu",
+        "InvitedUserFilledStream": "{{invitedUserName}} dolu {{FilledStreamTitle}}",
+        "ForFillingStream": "Doldurmaq üçün {{FilledStreamTitle}}",
+        "CreatePrivateChat": "{{toUserName}} ilə şəxsi söhbət üçün"
     },
     "history": {
         "Date": "Tarix",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "{{amount}} kredit qazandı",
         "Streams_user_icon": "{{amount}} kredit qazandı",
         "Places_user_location": "{{amount}} kredit qazandı",
-        "Streams_greeting": "{{amount}} kredit qazandı"
+        "Streams_greeting": "{{amount}} kredit qazandı",
+        "User": "İstifadəçi"
     },
     "subscriptions": {
         "infoTitle": "Ödəniş məlumatını təyin edin",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "əlavə məlumat linki təyin edin",
             "DescriptionPlaceholder": "Xidmət təsviri",
             "SaveService": "Xidməti Saxla",
-            "SelectRequiredParticipants": "Tələb olunan İştirakçılar"
+            "SelectRequiredParticipants": "Tələb olunan İştirakçılar",
+            "RequiredParticipantsDesc": "Bu xidmətdən istifadə etmək üçün tələb olunan əlaqəli iştirakçıları seçin (məsələn, &quot;İtlər şousu&quot; üçün ev heyvanları və ya &quot;Uşaq bayramı&quot; üçün uşaqlar və s.). Xidmət ödənişlidirsə, istifadəçi hər bir əlaqəli iştirakçı üçün də ödəniş etməlidir."
         },
         "ManageServiceTemplates": "Xidmət Şablonlarını idarə edin",
         "ManageServices": "Xidmətləri idarə edin",
@@ -388,6 +398,132 @@
             "Description": "İstifadəçi təfərrüatları",
             "aboutPlaceholder": "Bio-nu redaktə et",
             "SureLogOut": "Çıxmaq istədiyinizə əminsiniz?"
+        },
+        "Add": "əlavə et",
+        "Remove": "Sil",
+        "NoNFTyet": "Hələ NFT yoxdur",
+        "Claim": "iddia",
+        "ClaimNFT": "NFT iddiası",
+        "Unlocking": "Kilidi açılır",
+        "Unlock": "Kilidi aç",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTMüqavilə",
+                        "seriesId": "seriya id",
+                        "owner": "Sahibi",
+                        "currency": "Valyuta",
+                        "price": "Qiymət",
+                        "beneficiary": "Benefisiar",
+                        "autoindex": "Avtoindeks",
+                        "duration": "Müddət",
+                        "rateInterval": "Faiz intervalı",
+                        "rateAmount": "Tarif məbləği"
+                    },
+                    "small": {
+                        "NFTContract": "NFTMüqavilə",
+                        "seriesId": "tokenlər bu seriyada zərb olunacaq",
+                        "owner": "nümunənin sahibi, əks halda göndərən olacaq",
+                        "currency": "Alınmış tokenlər üçün valyuta, sıfır olduqda - yerli sikkələr üçün",
+                        "price": "Qiymət",
+                        "beneficiary": "Tokenlərin satışının benefisiarı, əks halda göndərən olacaq",
+                        "autoindex": "Avtoindeks",
+                        "duration": "Zərbdən sonra kilidləyin. Sıfır dərhal əldə etmək deməkdir.",
+                        "rateInterval": "xüsusi alış üçün bucket interval",
+                        "rateAmount": "xüsusi alış üçün kova məbləği"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(isteğe bağlı)",
+                    "number": "nömrə",
+                    "address": "ünvanı",
+                    "fraction": "kəsir",
+                    "integer": "tam",
+                    "seconds": "saniyə",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "istehsal",
+                "viewInstancesList": "Siyahını yeniləyin"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Seriya ID",
+                        "account": "Hesab",
+                        "amount": "Məbləğ"
+                    },
+                    "small": {
+                        "seriesId": "yeni token belə ID ilə seriyaya aid olacaq",
+                        "account": "yeni yaradılmış NFT-nin sahibi. təyin edilmədikdə - cari pul kisəsindən istifadə edəcək",
+                        "amount": "nanə üçün NFT məbləği"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(isteğe bağlı)",
+                    "seriesId": "id",
+                    "account": "hesab",
+                    "amount": "məbləğ",
+                    "integer": "tam"
+                },
+                "btn": {
+                    "Purchase": "Alış",
+                    "SpecialPurchase": "Xüsusi alış"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Ünvan"
+                    },
+                    "small": {
+                        "account": "Ünvan"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Yanlış Ünvan"
+                },
+                "placeholders": {
+                    "account": "Ünvan"
+                },
+                "addToWhitelist": "Ağ Siyahıya əlavə et",
+                "removeFromWhitelist": "Ağ Siyahıdan Sil"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token ID",
+                    "custodian": "Qəyyum",
+                    "recipient": "alıcı"
+                },
+                "small": {
+                    "tokenId": "token id nə kilidləmək və ya açmaq lazımdır",
+                    "custodian": "kilidini aça bilən ünvan",
+                    "recipient": "tokenləri alacaq ünvan"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Etibarsız tokenId",
+                "invalidCustodian": "Etibarsız Qəyyum",
+                "invalidRecipient": "Yanlış Alıcı"
+            },
+            "placeholders": {
+                "optional": "(isteğe bağlı)",
+                "tokenId": "id",
+                "custodian": "ünvanı"
+            },
+            "Lock": "Bağlamaq",
+            "Unlock": "Kilidi aç",
+            "Locked": "Bağlanıb",
+            "CustodianAddress": "Qəyyum ünvanı",
+            "TokenWasClaimed": "Token &quot;{{title}}&quot; iddia edildi",
+            "TokenWasLocked": "&quot;{{title}}&quot; nişanı kilidləndi",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; kilidi açıldı"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Tətbiqlə işləmək üçün MetaMask qoşulmalıdır",
         "UserNotLoggedInMetaMask": "İstifadəçi MetaMask-a daxil deyil",
         "CurrencyNotFound": "Valyuta tapılmadı",
-        "WrongChain": "Bu NFT &quot;{{chain}}&quot; altında yaradılmışdır. Zəhmət olmasa bu zəncirdən istifadə edin."
+        "WrongChain": "Bu NFT &quot;{{chain}}&quot; altında yaradılmışdır. Zəhmət olmasa bu zəncirdən istifadə edin.",
+        "AmountInvalid": "Məbləğ etibarsızdır!",
+        "NoRecipientSelected": "Heç bir alıcı seçilməyib",
+        "NotEnoughPermissionsWallet": "Bu istifadəçinin pul kisəsini oxumaq üçün kifayət qədər icazə yoxdur",
+        "ThisUserHaveNoWallet": "Bu istifadəçiyə pul kisəsi təyin edilməyib",
+        "TheWalletOfThisUserInvalid": "Bu istifadəçinin pul kisəsi etibarsızdır",
+        "WalletInvalid": "Pulqabı ünvanı yanlışdır"
     },
     "admin": {
         "Title": "İnzibati aktivlər",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Kredit minimumu mənfi ola bilməz",
             "CreditsToAddNegative": "Əlavə ediləcək kreditlər mənfi ola bilməz"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Alıcı seçin",
+        "TransactionSuccess": "Tranzaksiya Uğurlu",
+        "OrTypeWalletAddress": "VEYA alıcı pul kisəsinin ünvanını yazın"
+    },
+    "currencies": {
+        "choose": "Valyuta seçin"
     }
 }

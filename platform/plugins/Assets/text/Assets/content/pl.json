@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Twoja płatność jest przetwarzana",
         "FailTryAgain": "Twoja płatność nie powiodła się, spróbuj ponownie",
         "SomethingWrong": "Coś poszło nie tak",
-        "PaymentStatus": "Status płatności"
+        "PaymentStatus": "Status płatności",
+        "PayTo": "zapłać {{displayName}}",
+        "ChooseCurrency": "Wybierz walutę",
+        "YouCanSendUpTo": "Możesz wysłać do {{amount}} {{symbol}}",
+        "Send": "Wysłać",
+        "EnterAmount": "Wprowadź ilość"
     },
     "credits": {
         "InviteAcceptedBy": "Zaproszenie zaakceptowane do {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kredytów",
             "BonusCredits": "{{amount}} kredytów"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} wypełniony {{FilledStreamTitle}}",
+        "ForFillingStream": "Do napełniania {{FilledStreamTitle}}",
+        "CreatePrivateChat": "na prywatny czat z {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Zdobyto {{amount}} kredytów",
         "Places_user_location": "Zdobyto {{amount}} kredytów",
         "Streams_greeting": "Zdobyto {{amount}} kredytów",
-        "YouHaveCreditsToStart": "Zdobyto {{amount}} kredytów"
+        "YouHaveCreditsToStart": "Zdobyto {{amount}} kredytów",
+        "User": "Użytkownik"
     },
     "subscriptions": {
         "infoTitle": "Ustaw informacje o płatności",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ustaw link do dodatkowych informacji",
             "DescriptionPlaceholder": "Opis usługi",
             "SaveService": "Zapisz usługę",
-            "SelectRequiredParticipants": "Wymagani uczestnicy"
+            "SelectRequiredParticipants": "Wymagani uczestnicy",
+            "RequiredParticipantsDesc": "Proszę wybrać powiązanych uczestników, którzy są zobowiązani do korzystania z tej usługi (na przykład zwierzęta domowe na &quot;Wystawę psów&quot; lub dzieci na &quot;Święto dla dzieci&quot; itp.). Jeśli usługa jest płatna, użytkownik będzie musiał zapłacić również za każdego powiązanego uczestnika."
         },
         "ManageServiceTemplates": "Zarządzaj szablonami usług",
         "ManageServices": "Zarządzaj usługami",
@@ -387,6 +397,132 @@
             "Description": "Dane użytkownika",
             "aboutPlaceholder": "Edytuj biografię",
             "SureLogOut": "Czy na pewno chcesz się wylogować?"
+        },
+        "Add": "Dodać",
+        "Remove": "Usunąć",
+        "NoNFTyet": "Nie ma jeszcze NFT",
+        "Claim": "Prawo",
+        "ClaimNFT": "Zgłoś NFT",
+        "Unlocking": "Odblokowywanie",
+        "Unlock": "Odblokować",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Umowa NFT",
+                        "seriesId": "identyfikator serii",
+                        "owner": "Właściciel",
+                        "currency": "waluta",
+                        "price": "Cena",
+                        "beneficiary": "Beneficjant",
+                        "autoindex": "Autoindeks",
+                        "duration": "Czas trwania",
+                        "rateInterval": "Interwał stawki",
+                        "rateAmount": "Kwota stawki"
+                    },
+                    "small": {
+                        "NFTContract": "Umowa NFT",
+                        "seriesId": "żetonów zostanie wybitych w tej serii",
+                        "owner": "właściciel instancji, w przeciwnym razie będzie nadawcą",
+                        "currency": "Waluta dla zakupionych tokenów, jeśli zero - dla rodzimych monet",
+                        "price": "Cena",
+                        "beneficiary": "Beneficjent sprzedaży tokenów, w przeciwnym razie będzie nadawcą",
+                        "autoindex": "Autoindeks",
+                        "duration": "Zamek po wybiciu. Zero oznacza natychmiastową dostawę.",
+                        "rateInterval": "odstęp między łyżkami do specjalnego zakupu",
+                        "rateAmount": "kwota wiadra na specjalny zakup"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcjonalny)",
+                    "number": "numer",
+                    "address": "adres",
+                    "fraction": "frakcja",
+                    "integer": "liczba całkowita",
+                    "seconds": "sekundy",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produkować",
+                "viewInstancesList": "Odśwież listę"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Identyfikator serii",
+                        "account": "Konto",
+                        "amount": "Kwota"
+                    },
+                    "small": {
+                        "seriesId": "nowy token będzie należeć do serii o takim identyfikatorze",
+                        "account": "właściciel nowo utworzonego NFT. jeśli nie ustawione - użyje bieżącego portfela",
+                        "amount": "ilość NFT do mennicy"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcjonalny)",
+                    "seriesId": "ID",
+                    "account": "konto",
+                    "amount": "kwota",
+                    "integer": "liczba całkowita"
+                },
+                "btn": {
+                    "Purchase": "Zakup",
+                    "SpecialPurchase": "Specjalny zakup"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adres"
+                    },
+                    "small": {
+                        "account": "Adres"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Błędny adres"
+                },
+                "placeholders": {
+                    "account": "Adres"
+                },
+                "addToWhitelist": "Dodaj do białej listy",
+                "removeFromWhitelist": "Usuń z białej listy"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Identyfikator tokena",
+                    "custodian": "Kustosz",
+                    "recipient": "Odbiorca"
+                },
+                "small": {
+                    "tokenId": "identyfikator tokena, co należy zablokować lub odblokować",
+                    "custodian": "adres, który można odblokować",
+                    "recipient": "adres, na który zostaną wysłane tokeny"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Nieprawidłowy identyfikator tokena",
+                "invalidCustodian": "Nieprawidłowy opiekun",
+                "invalidRecipient": "Nieprawidłowy odbiorca"
+            },
+            "placeholders": {
+                "optional": "(opcjonalny)",
+                "tokenId": "ID",
+                "custodian": "adres"
+            },
+            "Lock": "Zamek",
+            "Unlock": "Odblokować",
+            "Locked": "Zablokowany",
+            "CustodianAddress": "Adres opiekuna",
+            "TokenWasClaimed": "Zajęto token „{{title}}”.",
+            "TokenWasLocked": "Token „{{title}}” został zablokowany",
+            "TokenWasUnlocked": "Token „{{title}}” został odblokowany"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Potrzebujesz MetaMask podłączonej do pracy z aplikacją",
         "UserNotLoggedInMetaMask": "Użytkownik nie jest zalogowany do MetaMask",
         "CurrencyNotFound": "Nie znaleziono waluty",
-        "WrongChain": "Ten NFT został utworzony w ramach „{{chain}}”. Użyj tego łańcucha."
+        "WrongChain": "Ten NFT został utworzony w ramach „{{chain}}”. Użyj tego łańcucha.",
+        "AmountInvalid": "Kwota nieprawidłowa!",
+        "NoRecipientSelected": "Nie wybrano odbiorcy",
+        "NotEnoughPermissionsWallet": "Niewystarczające uprawnienia do odczytu portfela tego użytkownika",
+        "ThisUserHaveNoWallet": "Ten użytkownik nie ma przypisanego portfela",
+        "TheWalletOfThisUserInvalid": "Portfel tego użytkownika jest nieprawidłowy",
+        "WalletInvalid": "Adres portfela jest nieprawidłowy"
     },
     "admin": {
         "Title": "Aktywa administracyjne",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Minimalna liczba kredytów nie może być ujemna",
             "CreditsToAddNegative": "Kredyty do dodania nie mogą być ujemne"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Wybierz odbiorcę",
+        "TransactionSuccess": "Sukces transakcji",
+        "OrTypeWalletAddress": "LUB wpisz adres portfela odbiorcy"
+    },
+    "currencies": {
+        "choose": "Wybierz walutę"
     }
 }

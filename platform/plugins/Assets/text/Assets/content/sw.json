@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Malipo yako yanachakatwa",
         "FailTryAgain": "Malipo yako hayakufanikiwa, tafadhali jaribu tena",
         "SomethingWrong": "Hitilafu fulani imetokea",
-        "PaymentStatus": "Hali ya malipo"
+        "PaymentStatus": "Hali ya malipo",
+        "PayTo": "Lipa {{displayName}}",
+        "ChooseCurrency": "Chagua sarafu",
+        "YouCanSendUpTo": "Unaweza kutuma hadi {{amount}} {{symbol}}",
+        "Send": "Tuma",
+        "EnterAmount": "ingiza kiasi"
     },
     "credits": {
         "InviteAcceptedBy": "Mwaliko umekubaliwa na {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} mikopo",
             "BonusCredits": "{{amount}} mikopo"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} imejaa {{FilledStreamTitle}}",
+        "ForFillingStream": "Kwa kujaza {{FilledStreamTitle}}",
+        "CreatePrivateChat": "kwa gumzo la faragha na {{toUserName}}"
     },
     "history": {
         "Date": "Tarehe",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Umejipatia {{amount}} salio",
         "Places_user_location": "Umejipatia {{amount}} mikopo",
         "Streams_greeting": "Umejipatia {{amount}} salio",
-        "YouHaveCreditsToStart": "Umejipatia {{amount}} salio"
+        "YouHaveCreditsToStart": "Umejipatia {{amount}} salio",
+        "User": "Mtumiaji"
     },
     "subscriptions": {
         "infoTitle": "Weka Taarifa ya Malipo",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "weka kiungo cha maelezo ya ziada",
             "DescriptionPlaceholder": "Maelezo ya huduma",
             "SaveService": "Hifadhi Huduma",
-            "SelectRequiredParticipants": "Washiriki Wanaohitajika"
+            "SelectRequiredParticipants": "Washiriki Wanaohitajika",
+            "RequiredParticipantsDesc": "Tafadhali chagua washiriki wanaohusiana wanaohitajika kutumia huduma hii (kwa mfano wanyama vipenzi kwa &quot;Onyesho la Mbwa&quot;, au watoto kwa &quot;likizo ya Watoto&quot; nk). Ikiwa huduma italipwa, mtumiaji atahitaji pia kulipa kwa kila washiriki husika."
         },
         "ManageServiceTemplates": "Dhibiti Violezo vya Huduma",
         "ManageServices": "Dhibiti Huduma",
@@ -387,6 +397,132 @@
             "Description": "Maelezo ya mtumiaji",
             "aboutPlaceholder": "Hariri Wasifu",
             "SureLogOut": "Je, una uhakika unataka kutoka?"
+        },
+        "Add": "Ongeza",
+        "Remove": "Ondoa",
+        "NoNFTyet": "Bado hakuna NFTs",
+        "Claim": "Dai",
+        "ClaimNFT": "Dai NFT",
+        "Unlocking": "Kufungua",
+        "Unlock": "Fungua",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "kitambulisho cha mfululizo",
+                        "owner": "Mmiliki",
+                        "currency": "Fedha",
+                        "price": "Bei",
+                        "beneficiary": "Anayefaidika",
+                        "autoindex": "Autoindex",
+                        "duration": "Muda",
+                        "rateInterval": "Kiwango cha muda",
+                        "rateAmount": "Kiwango cha kiasi"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "ishara zitatengenezwa katika mfululizo huu",
+                        "owner": "mmiliki wa mfano, vinginevyo atakuwa mtumaji",
+                        "currency": "Fedha kwa ishara zilizonunuliwa, ikiwa sifuri - kwa sarafu za asili",
+                        "price": "Bei",
+                        "beneficiary": "Mnufaika wa kuuza ishara, vinginevyo atakuwa mtumaji",
+                        "autoindex": "Autoindex",
+                        "duration": "Funga baada ya kuchimba. Sifuri inamaanisha kuipata mara moja.",
+                        "rateInterval": "muda wa ndoo kwa ununuzi maalum",
+                        "rateAmount": "kiasi cha ndoo kwa ununuzi maalum"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(si lazima)",
+                    "number": "nambari",
+                    "address": "anwani",
+                    "fraction": "sehemu",
+                    "integer": "nambari kamili",
+                    "seconds": "sekunde",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Kuzalisha",
+                "viewInstancesList": "Onyesha upya Orodha"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Kitambulisho cha mfululizo",
+                        "account": "Akaunti",
+                        "amount": "Kiasi"
+                    },
+                    "small": {
+                        "seriesId": "ishara mpya itakuwa katika mfululizo na kitambulisho kama hicho",
+                        "account": "mmiliki wa NFT mpya iliyoundwa. ikiwa haijawekwa - itatumia mkoba wa sasa",
+                        "amount": "kiasi cha NFT kwa mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(si lazima)",
+                    "seriesId": "kitambulisho",
+                    "account": "akaunti",
+                    "amount": "kiasi",
+                    "integer": "nambari kamili"
+                },
+                "btn": {
+                    "Purchase": "Nunua",
+                    "SpecialPurchase": "Ununuzi maalum"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Anwani"
+                    },
+                    "small": {
+                        "account": "Anwani"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Anwani Batili"
+                },
+                "placeholders": {
+                    "account": "Anwani"
+                },
+                "addToWhitelist": "Ongeza kwenye Orodha iliyoidhinishwa",
+                "removeFromWhitelist": "Ondoa kwenye Orodha iliyoidhinishwa"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Kitambulisho cha ishara",
+                    "custodian": "Mlinzi",
+                    "recipient": "Mpokeaji"
+                },
+                "small": {
+                    "tokenId": "kitambulisho cha ishara ni nini kinachohitajika kufunga au kufungua",
+                    "custodian": "anwani ambayo inaweza kufungua",
+                    "recipient": "anwani ambayo itapokea ishara"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Kitambulisho cha ishara si sahihi",
+                "invalidCustodian": "Mlinzi batili",
+                "invalidRecipient": "Mpokeaji Batili"
+            },
+            "placeholders": {
+                "optional": "(si lazima)",
+                "tokenId": "kitambulisho",
+                "custodian": "anwani"
+            },
+            "Lock": "Funga",
+            "Unlock": "Fungua",
+            "Locked": "Imefungwa",
+            "CustodianAddress": "Anwani ya mlinzi",
+            "TokenWasClaimed": "Tokeni &quot;{999}}&quot; ilidaiwa",
+            "TokenWasLocked": "Tokeni &quot;{999}}&quot; ilikuwa imefungwa",
+            "TokenWasUnlocked": "Tokeni &quot;{999}}&quot; ilifunguliwa"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Inahitaji MetaMask iliyounganishwa kufanya kazi na programu",
         "UserNotLoggedInMetaMask": "Mtumiaji hajaingia kwenye MetaMask",
         "CurrencyNotFound": "Sarafu haijapatikana",
-        "WrongChain": "NFT hii iliundwa chini ya &quot;{{chain}}&quot;. Tafadhali tumia mnyororo huu."
+        "WrongChain": "NFT hii iliundwa chini ya &quot;{{chain}}&quot;. Tafadhali tumia mnyororo huu.",
+        "AmountInvalid": "Kiasi ni batili!",
+        "NoRecipientSelected": "Hakuna mpokeaji aliyechaguliwa",
+        "NotEnoughPermissionsWallet": "Hakuna ruhusa za kutosha kusoma pochi ya mtumiaji huyu",
+        "ThisUserHaveNoWallet": "Mtumiaji huyu hajakabidhiwa pochi",
+        "TheWalletOfThisUserInvalid": "Pochi ya mtumiaji huyu ni batili",
+        "WalletInvalid": "Anwani ya Wallet si sahihi"
     },
     "admin": {
         "Title": "Utawala wa mali",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Kima cha chini cha mikopo hakiwezi kuwa hasi",
             "CreditsToAddNegative": "Salio la kuongeza haliwezi kuwa hasi"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Chagua mpokeaji",
+        "TransactionSuccess": "Mafanikio ya Muamala",
+        "OrTypeWalletAddress": "AU andika anwani ya pochi ya mpokeaji"
+    },
+    "currencies": {
+        "choose": "Chagua sarafu"
     }
 }

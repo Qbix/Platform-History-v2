@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Pembayaran Anda sedang diproses",
         "FailTryAgain": "Pembayaran Anda tidak berhasil, silakan coba lagi",
         "SomethingWrong": "Ada yang salah",
-        "PaymentStatus": "Status pembayaran"
+        "PaymentStatus": "Status pembayaran",
+        "PayTo": "Bayar {{displayName}}",
+        "ChooseCurrency": "Pilih mata uang",
+        "YouCanSendUpTo": "Anda dapat mengirim hingga {{amount}} {{symbol}}",
+        "Send": "Mengirim",
+        "EnterAmount": "masukan jumlah"
     },
     "credits": {
         "InviteAcceptedBy": "Undangan diterima oleh {{1}}",
@@ -52,7 +57,10 @@
         "Streams_greeting": "{{invitedUserName}} memasukkan salam",
         "CreatePaidStream": "untuk membuat {{toStreamName}}",
         "BonusCredits": "Bonus {{amount}} kredit",
-        "BuyBonus": "Membeli {{amount}} kredit sekaligus, akan menghasilkan {{bonus}} bonus kredit."
+        "BuyBonus": "Membeli {{amount}} kredit sekaligus, akan menghasilkan {{bonus}} bonus kredit.",
+        "InvitedUserFilledStream": "{{invitedUserName}} diisi {{FilledStreamTitle}}",
+        "ForFillingStream": "Untuk mengisi {{FilledStreamTitle}}",
+        "CreatePrivateChat": "untuk obrolan pribadi dengan {{toUserName}}"
     },
     "history": {
         "Date": "Tanggal",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Memperoleh {{amount}} kredit",
         "Streams_user_icon": "Memperoleh {{amount}} kredit",
         "Places_user_location": "Memperoleh {{amount}} kredit",
-        "Streams_greeting": "Memperoleh {{amount}} kredit"
+        "Streams_greeting": "Memperoleh {{amount}} kredit",
+        "User": "Pengguna"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Informasi Pembayaran",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "atur tautan info tambahan",
             "DescriptionPlaceholder": "Deskripsi layanan",
             "SaveService": "Simpan Layanan",
-            "SelectRequiredParticipants": "Wajib Peserta"
+            "SelectRequiredParticipants": "Wajib Peserta",
+            "RequiredParticipantsDesc": "Silakan pilih peserta terkait yang diperlukan untuk menggunakan layanan ini (misalnya hewan peliharaan untuk &quot;Pertunjukan anjing&quot;, atau anak-anak untuk &quot;Liburan anak-anak&quot;, dll). Jika layanan berbayar, pengguna juga harus membayar untuk setiap peserta terkait."
         },
         "ManageServiceTemplates": "Kelola Template Layanan",
         "ManageServices": "Kelola Layanan",
@@ -220,7 +230,13 @@
         "NeedMetaMaskConnected": "Perlu MetaMask terhubung untuk bekerja dengan aplikasi",
         "UserNotLoggedInMetaMask": "Pengguna tidak masuk ke MetaMask",
         "CurrencyNotFound": "Mata uang tidak ditemukan",
-        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Silakan gunakan rantai ini."
+        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Silakan gunakan rantai ini.",
+        "AmountInvalid": "Jumlah tidak valid!",
+        "NoRecipientSelected": "Tidak ada penerima yang dipilih",
+        "NotEnoughPermissionsWallet": "Izin tidak cukup untuk membaca dompet pengguna ini",
+        "ThisUserHaveNoWallet": "Pengguna ini tidak memiliki dompet yang ditetapkan",
+        "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak valid",
+        "WalletInvalid": "Alamat dompet tidak valid"
     },
     "admin": {
         "Title": "Administrasi aset",
@@ -415,6 +431,140 @@
             "Description": "Detail pengguna",
             "aboutPlaceholder": "Sunting Bio",
             "SureLogOut": "Apakah Anda yakin ingin keluar?"
+        },
+        "Add": "Menambahkan",
+        "Remove": "Menghapus",
+        "NoNFTyet": "Belum ada NFT",
+        "Claim": "Mengeklaim",
+        "ClaimNFT": "Klaim NFT",
+        "Unlocking": "Membuka kunci",
+        "Unlock": "Membuka kunci",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Kontrak NFT",
+                        "seriesId": "seri Id",
+                        "owner": "Pemilik",
+                        "currency": "Mata uang",
+                        "price": "Harga",
+                        "beneficiary": "Penerima",
+                        "autoindex": "Indeks otomatis",
+                        "duration": "Durasi",
+                        "rateInterval": "Interval tarif",
+                        "rateAmount": "Jumlah tarif"
+                    },
+                    "small": {
+                        "NFTContract": "Kontrak NFT",
+                        "seriesId": "token akan dicetak dalam seri ini",
+                        "owner": "pemilik instance, jika tidak akan menjadi pengirim",
+                        "currency": "Mata uang untuk token yang dibeli, jika nol - untuk koin asli",
+                        "price": "Harga",
+                        "beneficiary": "Penerima penjualan token, jika tidak akan menjadi pengirim",
+                        "autoindex": "Indeks otomatis",
+                        "duration": "Kunci setelah pencetakan. Nol berarti dapatkan segera.",
+                        "rateInterval": "interval ember untuk pembelian khusus",
+                        "rateAmount": "jumlah ember untuk pembelian khusus"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsional)",
+                    "number": "nomor",
+                    "address": "alamat",
+                    "fraction": "pecahan",
+                    "integer": "bilangan bulat",
+                    "seconds": "detik",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Menghasilkan",
+                "viewInstancesList": "Segarkan Daftar"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID seri",
+                        "account": "Akun",
+                        "amount": "Jumlah"
+                    },
+                    "small": {
+                        "seriesId": "token baru akan menjadi seri dengan ID tersebut",
+                        "account": "pemilik NFT yang baru dibuat. jika tidak disetel - akan menggunakan dompet saat ini",
+                        "amount": "jumlah NFT ke mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsional)",
+                    "seriesId": "pengenal",
+                    "account": "akun",
+                    "amount": "jumlah",
+                    "integer": "bilangan bulat"
+                },
+                "btn": {
+                    "Purchase": "Pembelian",
+                    "SpecialPurchase": "Pembelian khusus"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Alamat"
+                    },
+                    "small": {
+                        "account": "Alamat"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Alamat tidak valid"
+                },
+                "placeholders": {
+                    "account": "Alamat"
+                },
+                "addToWhitelist": "Tambahkan Ke Daftar Putih",
+                "removeFromWhitelist": "Hapus Dari Daftar Putih"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Tanda pengenal",
+                    "custodian": "Pemelihara",
+                    "recipient": "Penerima"
+                },
+                "small": {
+                    "tokenId": "token id apa yang perlu dikunci atau dibuka",
+                    "custodian": "alamat yang dapat dibuka kuncinya",
+                    "recipient": "alamat yang akan menerima token"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "tokenId tidak valid",
+                "invalidCustodian": "Kustodian Tidak Valid",
+                "invalidRecipient": "Penerima Tidak Valid"
+            },
+            "placeholders": {
+                "optional": "(opsional)",
+                "tokenId": "pengenal",
+                "custodian": "alamat"
+            },
+            "Lock": "Kunci",
+            "Unlock": "Membuka kunci",
+            "Locked": "Terkunci",
+            "CustodianAddress": "Alamat kustodian",
+            "TokenWasClaimed": "Token &quot;{{title}}&quot; diklaim",
+            "TokenWasLocked": "Token &quot;{{title}}&quot; dikunci",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; tidak terkunci"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Pilih penerima",
+        "TransactionSuccess": "Sukses Transaksi",
+        "OrTypeWalletAddress": "ATAU ketik alamat dompet penerima"
+    },
+    "currencies": {
+        "choose": "Pilih mata uang"
     }
 }

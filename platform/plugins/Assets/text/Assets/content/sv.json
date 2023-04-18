@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Din betalning behandlas",
         "FailTryAgain": "Din betalning misslyckades, försök igen",
         "SomethingWrong": "Något gick fel",
-        "PaymentStatus": "Betalningsstatus"
+        "PaymentStatus": "Betalningsstatus",
+        "PayTo": "Betala {{displayName}}",
+        "ChooseCurrency": "Välj en valuta",
+        "YouCanSendUpTo": "Du kan skicka upp till {{amount}} {{symbol}}",
+        "Send": "Skicka",
+        "EnterAmount": "ange belopp"
     },
     "credits": {
         "InviteAcceptedBy": "Inbjudan accepteras av {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} krediter",
             "BonusCredits": "{{amount}} krediter"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} fyllde {{FilledStreamTitle}}",
+        "ForFillingStream": "För att fylla {{FilledStreamTitle}}",
+        "CreatePrivateChat": "för privat chatt med {{toUserName}}"
     },
     "history": {
         "Date": "Datum",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Fick {{amount}} krediter",
         "Places_user_location": "Fick {{amount}} krediter",
         "Streams_greeting": "Fick {{amount}} krediter",
-        "YouHaveCreditsToStart": "Fick {{amount}} krediter"
+        "YouHaveCreditsToStart": "Fick {{amount}} krediter",
+        "User": "Användare"
     },
     "subscriptions": {
         "infoTitle": "Ställ in betalningsinformation",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ställ in ytterligare informationslänk",
             "DescriptionPlaceholder": "Service beskrivning",
             "SaveService": "Spara tjänst",
-            "SelectRequiredParticipants": "Obligatoriska deltagare"
+            "SelectRequiredParticipants": "Obligatoriska deltagare",
+            "RequiredParticipantsDesc": "Vänligen välj relaterade deltagare som krävs för att använda denna tjänst (till exempel husdjur för &quot;Hundshow&quot;, eller barn för &quot;Barns semester&quot; etc). Om tjänsten är betald måste användaren också betala för varje relaterade deltagare."
         },
         "ManageServiceTemplates": "Hantera servicemallar",
         "ManageServices": "Hantera tjänster",
@@ -387,6 +397,132 @@
             "Description": "Användarinformation",
             "aboutPlaceholder": "Redigera bio",
             "SureLogOut": "Är du säker på att du vill logga ut?"
+        },
+        "Add": "Lägg till",
+        "Remove": "Avlägsna",
+        "NoNFTyet": "Inga NFTs än",
+        "Claim": "Krav",
+        "ClaimNFT": "Gör anspråk på NFT",
+        "Unlocking": "Låser upp",
+        "Unlock": "Låsa upp",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT-kontrakt",
+                        "seriesId": "serie-id",
+                        "owner": "Ägare",
+                        "currency": "Valuta",
+                        "price": "Pris",
+                        "beneficiary": "Förmånstagare",
+                        "autoindex": "Autoindex",
+                        "duration": "Varaktighet",
+                        "rateInterval": "Betygsintervall",
+                        "rateAmount": "Prisbelopp"
+                    },
+                    "small": {
+                        "NFTContract": "NFT-kontrakt",
+                        "seriesId": "tokens kommer att präglas i den här serien",
+                        "owner": "ägare av instans, annars kommer att vara avsändare",
+                        "currency": "Valuta för köpta tokens, om noll - för inhemska mynt",
+                        "price": "Pris",
+                        "beneficiary": "Mottagare av att sälja tokens, annars kommer att vara avsändare",
+                        "autoindex": "Autoindex",
+                        "duration": "Lås efter prägling. Noll betyder att få det omedelbart.",
+                        "rateInterval": "hinkintervall för specialköp",
+                        "rateAmount": "hinkbelopp för specialköp"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(frivillig)",
+                    "number": "siffra",
+                    "address": "adress",
+                    "fraction": "fraktion",
+                    "integer": "heltal",
+                    "seconds": "sekunder",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Producera",
+                "viewInstancesList": "Uppdatera listan"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Serie-ID",
+                        "account": "konto",
+                        "amount": "Belopp"
+                    },
+                    "small": {
+                        "seriesId": "ny token kommer att höra i serie med ett sådant ID",
+                        "account": "ägare till nyskapad NFT. om inte inställt - kommer att använda nuvarande plånbok",
+                        "amount": "mängd NFT till mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(frivillig)",
+                    "seriesId": "id",
+                    "account": "konto",
+                    "amount": "belopp",
+                    "integer": "heltal"
+                },
+                "btn": {
+                    "Purchase": "Inköp",
+                    "SpecialPurchase": "Specialköp"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adress"
+                    },
+                    "small": {
+                        "account": "Adress"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Ogiltig adress"
+                },
+                "placeholders": {
+                    "account": "Adress"
+                },
+                "addToWhitelist": "Lägg till på vitlista",
+                "removeFromWhitelist": "Ta bort från vitlista"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token-ID",
+                    "custodian": "Väktare",
+                    "recipient": "Mottagare"
+                },
+                "small": {
+                    "tokenId": "token-id vad som behöver låsas eller låsas upp",
+                    "custodian": "adress som kan låsas upp",
+                    "recipient": "adress som kommer att ta emot tokens"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Ogiltigt tokenId",
+                "invalidCustodian": "Ogiltig Vårdnadshavare",
+                "invalidRecipient": "Ogiltig mottagare"
+            },
+            "placeholders": {
+                "optional": "(frivillig)",
+                "tokenId": "id",
+                "custodian": "adress"
+            },
+            "Lock": "Låsa",
+            "Unlock": "Låsa upp",
+            "Locked": "Låst",
+            "CustodianAddress": "Vårdnadshavarens adress",
+            "TokenWasClaimed": "Token &quot;{{title}}&quot; gjordes anspråk på",
+            "TokenWasLocked": "Token &quot;{{title}}&quot; var låst",
+            "TokenWasUnlocked": "Token &quot;{{title}}&quot; låstes upp"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Behöver MetaMask ansluten för att arbeta med applikation",
         "UserNotLoggedInMetaMask": "Användaren är inte inloggad på MetaMask",
         "CurrencyNotFound": "Valutan hittades inte",
-        "WrongChain": "Denna NFT skapades under &quot;{{chain}}&quot;. Använd denna kedja."
+        "WrongChain": "Denna NFT skapades under &quot;{{chain}}&quot;. Använd denna kedja.",
+        "AmountInvalid": "Ogiltigt belopp!",
+        "NoRecipientSelected": "Ingen mottagare har valts",
+        "NotEnoughPermissionsWallet": "Inte tillräckliga behörigheter för att läsa plånbok för denna användare",
+        "ThisUserHaveNoWallet": "Den här användaren har ingen plånbok tilldelad",
+        "TheWalletOfThisUserInvalid": "Den här användarens plånbok är ogiltig",
+        "WalletInvalid": "Ogiltig plånboksadress"
     },
     "admin": {
         "Title": "Tillgångar administrativa",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Minsta poäng får inte vara negativ",
             "CreditsToAddNegative": "Krediter att lägga till får inte vara negativa"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Välj mottagare",
+        "TransactionSuccess": "Transaktionen lyckades",
+        "OrTypeWalletAddress": "ELLER skriv mottagarens plånboksadress"
+    },
+    "currencies": {
+        "choose": "Välj en valuta"
     }
 }

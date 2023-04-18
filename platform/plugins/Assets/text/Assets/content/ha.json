@@ -1,17 +1,17 @@
 {
     "browsertab": {
-        "html": "{999}",
+        "html": "{{button}}",
         "button": "Matsa don biya"
     },
     "notifications": {
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: Ana sarrafa caji don {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Na gode don biyan ku zuwa {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{999}} an yi rajista zuwa {{plan.title}}",
+        "SubscribedTo": "{{call 'user.displayName'}} an yi rajista zuwa {{plan.title}}",
         "YouSubscribedTo": "An yi muku rajista zuwa {{plan.title}}"
     },
     "charge": {
         "Subject": "Kuna samun biyan kuɗi na {{displayAmount}} daga {{call 'publisher.displayName'}} ta &quot;{1001}}&quot;",
-        "HasBeenCharged": "Hey, wannan kawai don sanar da ku an caje {1000} akan {{3}} ta {{4}}"
+        "HasBeenCharged": "Hey, wannan kawai don sanar da ku an caje {{2}} akan {{3}} ta {{4}}"
     },
     "charged": {
         "Subject": "Na gode da biyan ku na &quot;{{description}}&quot;",

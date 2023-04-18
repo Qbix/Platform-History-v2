@@ -4,7 +4,7 @@
         "button": "Appuyez pour payer"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : débit traité pour {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: débit traité pour {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Merci pour votre paiement à {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abonné à {{plan.title}}",
         "YouSubscribedTo": "Vous avez été abonné à {{plan.title}}",
@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Votre paiement est en cours de traitement",
         "FailTryAgain": "Votre paiement n&#39;a pas abouti, veuillez réessayer",
         "SomethingWrong": "Quelque chose s&#39;est mal passé",
-        "PaymentStatus": "Statut de paiement"
+        "PaymentStatus": "Statut de paiement",
+        "PayTo": "Payer {{displayName}}",
+        "ChooseCurrency": "Choisissez une devise",
+        "YouCanSendUpTo": "Vous pouvez envoyer jusqu&#39;à {{amount}} {{symbol}}",
+        "Send": "Envoyer",
+        "EnterAmount": "entrer le montant"
     },
     "credits": {
         "InviteAcceptedBy": "Invitation acceptée par {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} crédits",
             "BonusCredits": "{{amount}} crédits"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} rempli {{FilledStreamTitle}}",
+        "ForFillingStream": "Pour remplir {{FilledStreamTitle}}",
+        "CreatePrivateChat": "pour un chat privé avec {{toUserName}}"
     },
     "history": {
         "Date": "Date",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} crédits gagnés",
         "Places_user_location": "{{amount}} crédits gagnés",
         "Streams_greeting": "{{amount}} crédits gagnés",
-        "YouHaveCreditsToStart": "{{amount}} crédits gagnés"
+        "YouHaveCreditsToStart": "{{amount}} crédits gagnés",
+        "User": "Utilisateur"
     },
     "subscriptions": {
         "infoTitle": "Définir les informations de paiement",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "définir un lien d&#39;informations supplémentaires",
             "DescriptionPlaceholder": "Description du service",
             "SaveService": "Enregistrer le service",
-            "SelectRequiredParticipants": "Participants requis"
+            "SelectRequiredParticipants": "Participants requis",
+            "RequiredParticipantsDesc": "Veuillez sélectionner les participants associés qui sont nécessaires pour utiliser ce service (par exemple, les animaux de compagnie pour &quot;Exposition de chiens&quot;, ou les enfants pour &quot;Vacances pour enfants&quot;, etc.). Si le service est payant, l&#39;utilisateur devra également payer pour chaque participant concerné."
         },
         "ManageServiceTemplates": "Gérer les modèles de service",
         "ManageServices": "Gérer les services",
@@ -387,6 +397,132 @@
             "Description": "Détails de l&#39;utilisateur",
             "aboutPlaceholder": "Modifier la biographie",
             "SureLogOut": "Êtes-vous sûr de vouloir vous déconnecter?"
+        },
+        "Add": "Ajouter",
+        "Remove": "Retirer",
+        "NoNFTyet": "Pas encore de NFT",
+        "Claim": "Réclamation",
+        "ClaimNFT": "Réclamer NFT",
+        "Unlocking": "Déverrouillage",
+        "Unlock": "Ouvrir",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContrat",
+                        "seriesId": "identifiant de la série",
+                        "owner": "Propriétaire",
+                        "currency": "Monnaie",
+                        "price": "Prix",
+                        "beneficiary": "Bénéficiaire",
+                        "autoindex": "Indexation automatique",
+                        "duration": "Durée",
+                        "rateInterval": "Intervalle de taux",
+                        "rateAmount": "Montant du tarif"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContrat",
+                        "seriesId": "les jetons seront frappés dans cette série",
+                        "owner": "propriétaire de l&#39;instance, sinon sera l&#39;expéditeur",
+                        "currency": "Devise pour les jetons achetés, si zéro - pour les pièces natives",
+                        "price": "Prix",
+                        "beneficiary": "Bénéficiaire de la vente de jetons, sinon sera l&#39;expéditeur",
+                        "autoindex": "Indexation automatique",
+                        "duration": "Serrure après frappe. Zéro signifie l&#39;obtenir immédiatement.",
+                        "rateInterval": "intervalle de seau pour achat spécial",
+                        "rateAmount": "montant du panier pour un achat spécial"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(facultatif)",
+                    "number": "nombre",
+                    "address": "adresse",
+                    "fraction": "fraction",
+                    "integer": "entier",
+                    "seconds": "secondes",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produire",
+                "viewInstancesList": "Rafraîchir la liste"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Identifiant de la série",
+                        "account": "Compte",
+                        "amount": "Montant"
+                    },
+                    "small": {
+                        "seriesId": "le nouveau jeton appartiendra à la série avec un tel ID",
+                        "account": "propriétaire de NFT nouvellement créé. si non défini - utilisera le portefeuille actuel",
+                        "amount": "montant NFT en monnaie"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(facultatif)",
+                    "seriesId": "identifiant",
+                    "account": "compte",
+                    "amount": "montant",
+                    "integer": "entier"
+                },
+                "btn": {
+                    "Purchase": "Achat",
+                    "SpecialPurchase": "Achat spécial"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresse"
+                    },
+                    "small": {
+                        "account": "Adresse"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Adresse invalide"
+                },
+                "placeholders": {
+                    "account": "Adresse"
+                },
+                "addToWhitelist": "Ajouter à la liste blanche",
+                "removeFromWhitelist": "Supprimer de la liste blanche"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID de jeton",
+                    "custodian": "Gardien",
+                    "recipient": "Destinataire"
+                },
+                "small": {
+                    "tokenId": "ID de jeton ce qu&#39;il faut verrouiller ou déverrouiller",
+                    "custodian": "adresse qui peut être en mesure de déverrouiller",
+                    "recipient": "adresse qui recevra les jetons"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "ID de jeton non valide",
+                "invalidCustodian": "Dépositaire invalide",
+                "invalidRecipient": "Récipient invalide"
+            },
+            "placeholders": {
+                "optional": "(facultatif)",
+                "tokenId": "identifiant",
+                "custodian": "adresse"
+            },
+            "Lock": "Serrure",
+            "Unlock": "Ouvrir",
+            "Locked": "Fermé à clé",
+            "CustodianAddress": "Adresse du dépositaire",
+            "TokenWasClaimed": "Le jeton &quot;{{title}}&quot; a été réclamé",
+            "TokenWasLocked": "Le jeton &quot;{{title}}&quot; était verrouillé",
+            "TokenWasUnlocked": "Le jeton &quot;{{title}}&quot; a été déverrouillé"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Besoin de MetaMask connecté pour travailler avec l&#39;application",
         "UserNotLoggedInMetaMask": "L&#39;utilisateur n&#39;est pas connecté à MetaMask",
         "CurrencyNotFound": "Devise introuvable",
-        "WrongChain": "Ce NFT créé sous &quot;{{chain}}&quot;. Veuillez utiliser cette chaîne."
+        "WrongChain": "Ce NFT créé sous &quot;{{chain}}&quot;. Veuillez utiliser cette chaîne.",
+        "AmountInvalid": "Montant invalide !",
+        "NoRecipientSelected": "Aucun destinataire sélectionné",
+        "NotEnoughPermissionsWallet": "Autorisations insuffisantes pour lire le portefeuille de cet utilisateur",
+        "ThisUserHaveNoWallet": "Cet utilisateur n&#39;a pas de portefeuille attribué",
+        "TheWalletOfThisUserInvalid": "Le portefeuille de cet utilisateur n&#39;est pas valide",
+        "WalletInvalid": "Adresse de portefeuille invalide"
     },
     "admin": {
         "Title": "Actifs administratifs",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Le minimum de crédits ne peut pas être négatif",
             "CreditsToAddNegative": "Les crédits à ajouter ne peuvent pas être négatifs"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Sélectionnez le destinataire",
+        "TransactionSuccess": "Succès de la transaction",
+        "OrTypeWalletAddress": "OU tapez l&#39;adresse du portefeuille du destinataire"
+    },
+    "currencies": {
+        "choose": "Choisissez une devise"
     }
 }

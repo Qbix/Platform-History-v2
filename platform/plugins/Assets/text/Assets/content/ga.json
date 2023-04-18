@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Tá d&#39;íocaíocht á próiseáil",
         "FailTryAgain": "Níor éirigh le d&#39;íocaíocht, bain triail eile as",
         "SomethingWrong": "Chuaigh rud eigin mícheart",
-        "PaymentStatus": "Stádas íocaíochta"
+        "PaymentStatus": "Stádas íocaíochta",
+        "PayTo": "Íoc {{displayName}}",
+        "ChooseCurrency": "Roghnaigh airgeadra",
+        "YouCanSendUpTo": "Is féidir leat suas le {{amount}} {{symbol}} a sheoladh",
+        "Send": "Seol",
+        "EnterAmount": "cuir isteach méid"
     },
     "credits": {
         "InviteAcceptedBy": "Ghlac {{invitedUserName}} le cuireadh",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} chreidmheas",
             "BonusCredits": "{{amount}} chreidmheas"
-        }
+        },
+        "InvitedUserFilledStream": "Líonadh {{invitedUserName}} {{FilledStreamTitle}}",
+        "ForFillingStream": "Chun {{FilledStreamTitle}} a líonadh",
+        "CreatePrivateChat": "le haghaidh comhrá príobháideach le {{toUserName}}"
     },
     "history": {
         "Date": "Dáta",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} creidmheas tuillte",
         "Places_user_location": "{{amount}} creidmheas tuillte",
         "Streams_greeting": "{{amount}} creidmheas tuillte",
-        "YouHaveCreditsToStart": "{{amount}} creidmheas tuillte"
+        "YouHaveCreditsToStart": "{{amount}} creidmheas tuillte",
+        "User": "Úsáideoir"
     },
     "subscriptions": {
         "infoTitle": "Socraigh Faisnéis Íocaíochta",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "socraigh nasc faisnéise breise",
             "DescriptionPlaceholder": "Cur síos ar an tseirbhís",
             "SaveService": "Sábháil Seirbhís",
-            "SelectRequiredParticipants": "Rannpháirtithe Riachtanach"
+            "SelectRequiredParticipants": "Rannpháirtithe Riachtanach",
+            "RequiredParticipantsDesc": "Roghnaigh le do thoil na rannpháirtithe gaolmhara atá ag teastáil chun an tseirbhís seo a úsáid (mar shampla peataí le haghaidh &quot;Seó Madraí&quot;, nó leanaí le haghaidh &quot;Saoire Leanaí&quot; srl). Má íoctar seirbhís, beidh ar an úsáideoir íoc as gach rannpháirtí gaolmhar freisin."
         },
         "ManageServiceTemplates": "Bainistigh Teimpléid Seirbhíse",
         "ManageServices": "Bainistigh Seirbhísí",
@@ -387,6 +397,132 @@
             "Description": "Sonraí úsáideora",
             "aboutPlaceholder": "Cuir Bitheolaíocht in Eagar",
             "SureLogOut": "An bhfuil tú cinnte gur mhaith leat logáil amach?"
+        },
+        "Add": "Cuir",
+        "Remove": "Bain",
+        "NoNFTyet": "Níl aon NFTanna fós",
+        "Claim": "Éileamh",
+        "ClaimNFT": "Éileamh NFT",
+        "Unlocking": "Ag díghlasáil",
+        "Unlock": "Díghlasáil",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Conradh NFT",
+                        "seriesId": "sraith ID",
+                        "owner": "Úinéir",
+                        "currency": "airgeadra",
+                        "price": "Praghas",
+                        "beneficiary": "Tairbhí",
+                        "autoindex": "Autoindex",
+                        "duration": "Fad",
+                        "rateInterval": "Eatramh ráta",
+                        "rateAmount": "Méid an ráta"
+                    },
+                    "small": {
+                        "NFTContract": "Conradh NFT",
+                        "seriesId": "déanfar comharthaí a bhreacadh sa tsraith seo",
+                        "owner": "úinéir mar shampla, ar shlí eile beidh seoltóir",
+                        "currency": "Airgeadra le haghaidh comharthaí ceannaithe, más nialas é - le haghaidh boinn dhúchasacha",
+                        "price": "Praghas",
+                        "beneficiary": "Is é an seoltóir a bheidh ina thairbhí as éarlaisí a dhíol",
+                        "autoindex": "Autoindex",
+                        "duration": "Glasáil tar éis miontáil. Ciallaíonn nialais é a fháil láithreach.",
+                        "rateInterval": "eatramh buicéad le haghaidh ceannach speisialta",
+                        "rateAmount": "méid buicéad le ceannach speisialta"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(roghnach)",
+                    "number": "uimhir",
+                    "address": "seoladh",
+                    "fraction": "codán",
+                    "integer": "slánuimhir",
+                    "seconds": "soicind",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Tháirgeadh",
+                "viewInstancesList": "Liosta Athnuaigh"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID sraith",
+                        "account": "Cuntas",
+                        "amount": "Méid"
+                    },
+                    "small": {
+                        "seriesId": "bainfidh an comhartha nua leis an tsraith le haitheantas dá leithéid",
+                        "account": "úinéir NFT nuachruthaithe. más rud é nach bhfuil socraithe - bain úsáid as sparán reatha",
+                        "amount": "méid NFT go miontas"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(roghnach)",
+                    "seriesId": "id",
+                    "account": "cuntas",
+                    "amount": "méid",
+                    "integer": "slánuimhir"
+                },
+                "btn": {
+                    "Purchase": "Ceannach",
+                    "SpecialPurchase": "Ceannach speisialta"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Seoladh"
+                    },
+                    "small": {
+                        "account": "Seoladh"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Seoladh Neamhbhailí"
+                },
+                "placeholders": {
+                    "account": "Seoladh"
+                },
+                "addToWhitelist": "Cuir Leis an Liosta Bán",
+                "removeFromWhitelist": "Bain Ó Liosta Bán"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Aitheantas Comhartha",
+                    "custodian": "caomhnóir",
+                    "recipient": "Faighteoir"
+                },
+                "small": {
+                    "tokenId": "id comhartha cad is gá a ghlasáil nó a dhíghlasáil",
+                    "custodian": "seoladh is féidir a dhíghlasáil",
+                    "recipient": "seoladh a gheobhaidh na comharthaí"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Id comhartha neamhbhailí",
+                "invalidCustodian": "Coimeádaí Neamhbhailí",
+                "invalidRecipient": "Faighteoir Neamhbhailí"
+            },
+            "placeholders": {
+                "optional": "(roghnach)",
+                "tokenId": "id",
+                "custodian": "seoladh"
+            },
+            "Lock": "Glasáil",
+            "Unlock": "Díghlasáil",
+            "Locked": "Faoi ghlas",
+            "CustodianAddress": "Seoladh coimeádaí",
+            "TokenWasClaimed": "Éilíodh comhartha &quot;{{title}}&quot;.",
+            "TokenWasLocked": "Glasáladh comhartha &quot;{{title}}&quot;.",
+            "TokenWasUnlocked": "Díghlasáladh an comhartha &quot;{{title}}&quot;."
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "An riachtanas is gá MetaMask ceangailte a bheith ag obair leis an bhfeidhmchlár",
         "UserNotLoggedInMetaMask": "Níl an t-úsáideoir logáilte isteach i MetaMask",
         "CurrencyNotFound": "Airgeadra gan aimsiú",
-        "WrongChain": "Cruthaíodh an NFT seo faoi &quot;{{chain}}&quot;. Bain úsáid as an slabhra seo le do thoil."
+        "WrongChain": "Cruthaíodh an NFT seo faoi &quot;{{chain}}&quot;. Bain úsáid as an slabhra seo le do thoil.",
+        "AmountInvalid": "Méid neamhbhailí!",
+        "NoRecipientSelected": "Níor roghnaíodh aon fhaighteoir",
+        "NotEnoughPermissionsWallet": "Níl go leor ceadanna chun sparán an úsáideora seo a léamh",
+        "ThisUserHaveNoWallet": "Níl aon sparán sannta don úsáideoir seo",
+        "TheWalletOfThisUserInvalid": "Tá sparán an úsáideora seo neamhbhailí",
+        "WalletInvalid": "Seoladh sparán neamhbhailí"
     },
     "admin": {
         "Title": "Sócmhainní riaracháin",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Ní féidir íosmhéid creidmheasanna a bheith diúltach",
             "CreditsToAddNegative": "Ní féidir le creidmheasanna le cur leis a bheith diúltach"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Roghnaigh faighteoir",
+        "TransactionSuccess": "Rath Idirbheart",
+        "OrTypeWalletAddress": "NÓ cineál seoladh sparán an fhaighteora"
+    },
+    "currencies": {
+        "choose": "Roghnaigh airgeadra"
     }
 }

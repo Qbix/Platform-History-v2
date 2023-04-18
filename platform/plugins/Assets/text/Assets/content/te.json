@@ -27,7 +27,12 @@
         "PaymentProcessing.": "మీ చెల్లింపు ప్రాసెస్ చేయబడుతోంది",
         "FailTryAgain": "మీ చెల్లింపు విజయవంతం కాలేదు, దయచేసి మళ్లీ ప్రయత్నించండి",
         "SomethingWrong": "ఏదో తప్పు జరిగింది",
-        "PaymentStatus": "చెల్లింపు స్థితి"
+        "PaymentStatus": "చెల్లింపు స్థితి",
+        "PayTo": "{{displayName}} చెల్లించండి",
+        "ChooseCurrency": "కరెన్సీని ఎంచుకోండి",
+        "YouCanSendUpTo": "మీరు {{amount}} {{symbol}} వరకు పంపవచ్చు",
+        "Send": "పంపండి",
+        "EnterAmount": "మొత్తాన్ని నమోదు చేయండి"
     },
     "credits": {
         "InviteAcceptedBy": "ఆహ్వానం {{invitedUserName}} ద్వారా ఆమోదించబడింది",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} క్రెడిట్‌లు",
             "BonusCredits": "{{amount}} క్రెడిట్‌లు"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} నిండిన {{FilledStreamTitle}}",
+        "ForFillingStream": "పూరించడానికి {{FilledStreamTitle}}",
+        "CreatePrivateChat": "{{toUserName}}తో ప్రైవేట్ చాట్ కోసం"
     },
     "history": {
         "Date": "తేదీ",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} క్రెడిట్‌లను పొందారు",
         "Places_user_location": "{{amount}} క్రెడిట్‌లను పొందారు",
         "Streams_greeting": "{{amount}} క్రెడిట్‌లను పొందారు",
-        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను పొందారు"
+        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "User": "వినియోగదారు"
     },
     "subscriptions": {
         "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "అదనపు సమాచార లింక్‌ని సెట్ చేయండి",
             "DescriptionPlaceholder": "సేవ వివరణ",
             "SaveService": "సేవను సేవ్ చేయండి",
-            "SelectRequiredParticipants": "అవసరమైన పాల్గొనేవారు"
+            "SelectRequiredParticipants": "అవసరమైన పాల్గొనేవారు",
+            "RequiredParticipantsDesc": "దయచేసి ఈ సేవను ఉపయోగించడానికి అవసరమైన సంబంధిత పాల్గొనేవారిని ఎంచుకోండి (ఉదాహరణకు &quot;డాగ్స్ షో&quot; కోసం పెంపుడు జంతువులు లేదా &quot;పిల్లల సెలవుదినం&quot; కోసం పిల్లలు మొదలైనవి). సేవ చెల్లించినట్లయితే, ప్రతి సంబంధిత పాల్గొనేవారికి కూడా వినియోగదారు చెల్లించవలసి ఉంటుంది."
         },
         "ManageServiceTemplates": "సేవా టెంప్లేట్‌లను నిర్వహించండి",
         "ManageServices": "సేవలను నిర్వహించండి",
@@ -387,6 +397,132 @@
             "Description": "వినియోగదారు వివరాలు",
             "aboutPlaceholder": "బయోని సవరించండి",
             "SureLogOut": "మీరు ఖచ్చితంగా లాగ్ అవుట్ చేయాలనుకుంటున్నారా?"
+        },
+        "Add": "జోడించు",
+        "Remove": "తొలగించు",
+        "NoNFTyet": "ఇంకా NFTలు లేవు",
+        "Claim": "దావా వేయండి",
+        "ClaimNFT": "NFTని క్లెయిమ్ చేయండి",
+        "Unlocking": "అన్‌లాక్ చేస్తోంది",
+        "Unlock": "అన్‌లాక్ చేయండి",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC కాంట్రాక్ట్",
+                        "seriesId": "సిరీస్ Id",
+                        "owner": "యజమాని",
+                        "currency": "కరెన్సీ",
+                        "price": "ధర",
+                        "beneficiary": "లబ్ధిదారుడు",
+                        "autoindex": "ఆటోఇండెక్స్",
+                        "duration": "వ్యవధి",
+                        "rateInterval": "రేటు విరామం",
+                        "rateAmount": "రేటు మొత్తం"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC కాంట్రాక్ట్",
+                        "seriesId": "ఈ సిరీస్‌లో టోకెన్‌లు ముద్రించబడతాయి",
+                        "owner": "ఉదాహరణ యజమాని, లేకపోతే పంపినవారు అవుతారు",
+                        "currency": "కొనుగోలు చేసిన టోకెన్ల కోసం కరెన్సీ, సున్నా అయితే - స్థానిక నాణేల కోసం",
+                        "price": "ధర",
+                        "beneficiary": "టోకెన్లను విక్రయించే లబ్ధిదారుడు, లేకుంటే పంపినవారు అవుతారు",
+                        "autoindex": "ఆటోఇండెక్స్",
+                        "duration": "మింటింగ్ తర్వాత లాక్ చేయండి. జీరో అంటే వెంటనే పొందండి.",
+                        "rateInterval": "ప్రత్యేక కొనుగోలు కోసం బకెట్ విరామం",
+                        "rateAmount": "ప్రత్యేక కొనుగోలు కోసం బకెట్ మొత్తం"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ఐచ్ఛికం)",
+                    "number": "సంఖ్య",
+                    "address": "చిరునామా",
+                    "fraction": "భిన్నం",
+                    "integer": "పూర్ణ సంఖ్య",
+                    "seconds": "సెకన్లు",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ఉత్పత్తి",
+                "viewInstancesList": "జాబితాను రిఫ్రెష్ చేయండి"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "సిరీస్ ID",
+                        "account": "ఖాతా",
+                        "amount": "మొత్తం"
+                    },
+                    "small": {
+                        "seriesId": "కొత్త టోకెన్ అటువంటి IDతో సిరీస్‌లో ఉంటుంది",
+                        "account": "కొత్తగా సృష్టించబడిన NFT యజమాని. సెట్ చేయకపోతే - ప్రస్తుత వాలెట్‌ని ఉపయోగిస్తుంది",
+                        "amount": "మింట్ నుండి NFT మొత్తం"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ఐచ్ఛికం)",
+                    "seriesId": "id",
+                    "account": "ఖాతా",
+                    "amount": "మొత్తం",
+                    "integer": "పూర్ణ సంఖ్య"
+                },
+                "btn": {
+                    "Purchase": "కొనుగోలు",
+                    "SpecialPurchase": "ప్రత్యేక కొనుగోలు"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "చిరునామా"
+                    },
+                    "small": {
+                        "account": "చిరునామా"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "చెల్లని చిరునామా"
+                },
+                "placeholders": {
+                    "account": "చిరునామా"
+                },
+                "addToWhitelist": "వైట్‌లిస్ట్‌కు జోడించండి",
+                "removeFromWhitelist": "వైట్‌లిస్ట్ నుండి తీసివేయండి"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "టోకెన్ ID",
+                    "custodian": "సంరక్షకుడు",
+                    "recipient": "గ్రహీత"
+                },
+                "small": {
+                    "tokenId": "లాక్ లేదా అన్‌లాక్ చేయాల్సిన టోకెన్ ఐడి",
+                    "custodian": "అన్‌లాక్ చేయగల చిరునామా",
+                    "recipient": "టోకెన్‌లను స్వీకరించే చిరునామా"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "చెల్లని టోకెన్ ఐడి",
+                "invalidCustodian": "చెల్లని సంరక్షకుడు",
+                "invalidRecipient": "చెల్లని స్వీకర్త"
+            },
+            "placeholders": {
+                "optional": "(ఐచ్ఛికం)",
+                "tokenId": "id",
+                "custodian": "చిరునామా"
+            },
+            "Lock": "తాళం వేయండి",
+            "Unlock": "అన్‌లాక్ చేయండి",
+            "Locked": "లాక్ చేయబడింది",
+            "CustodianAddress": "సంరక్షక చిరునామా",
+            "TokenWasClaimed": "టోకెన్ &quot;{{title}}&quot; దావా వేయబడింది",
+            "TokenWasLocked": "&quot;{{title}}&quot; టోకెన్ లాక్ చేయబడింది",
+            "TokenWasUnlocked": "&quot;{{title}}&quot; టోకెన్ అన్‌లాక్ చేయబడింది"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "అప్లికేషన్‌తో పని చేయడానికి MetaMask కనెక్ట్ కావాలి",
         "UserNotLoggedInMetaMask": "వినియోగదారు MetaMaskకి లాగిన్ చేయబడలేదు",
         "CurrencyNotFound": "కరెన్సీ దొరకలేదు",
-        "WrongChain": "ఈ NFT &quot;{{chain}}&quot; కింద సృష్టించబడింది. దయచేసి ఈ గొలుసును ఉపయోగించండి."
+        "WrongChain": "ఈ NFT &quot;{{chain}}&quot; కింద సృష్టించబడింది. దయచేసి ఈ గొలుసును ఉపయోగించండి.",
+        "AmountInvalid": "అమౌంట్ చెల్లదు!",
+        "NoRecipientSelected": "గ్రహీత ఎవరూ ఎంపిక చేయబడలేదు",
+        "NotEnoughPermissionsWallet": "ఈ వినియోగదారు వాలెట్‌ని చదవడానికి తగినన్ని అనుమతులు లేవు",
+        "ThisUserHaveNoWallet": "ఈ వినియోగదారుకు వాలెట్ కేటాయించబడలేదు",
+        "TheWalletOfThisUserInvalid": "ఈ వినియోగదారు యొక్క వాలెట్ చెల్లదు",
+        "WalletInvalid": "వాలెట్ చిరునామా చెల్లదు"
     },
     "admin": {
         "Title": "ఆస్తులు అడ్మినిస్ట్రేటివ్",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "క్రెడిట్‌లు కనిష్టంగా ప్రతికూలంగా ఉండకూడదు",
             "CreditsToAddNegative": "జోడించాల్సిన క్రెడిట్‌లు ప్రతికూలంగా ఉండకూడదు"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "గ్రహీతను ఎంచుకోండి",
+        "TransactionSuccess": "లావాదేవీ విజయం",
+        "OrTypeWalletAddress": "లేదా గ్రహీత వాలెట్ చిరునామాను టైప్ చేయండి"
+    },
+    "currencies": {
+        "choose": "కరెన్సీని ఎంచుకోండి"
     }
 }

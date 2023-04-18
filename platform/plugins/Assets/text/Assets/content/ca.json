@@ -19,7 +19,12 @@
         "PaymentProcessing.": "El teu pagament s&#39;està processant",
         "FailTryAgain": "El vostre pagament no s&#39;ha realitzat correctament, torneu-ho a provar",
         "SomethingWrong": "Alguna cosa ha anat malament",
-        "PaymentStatus": "Estat de pagament"
+        "PaymentStatus": "Estat de pagament",
+        "PayTo": "Pagar {{displayName}}",
+        "ChooseCurrency": "Trieu una moneda",
+        "YouCanSendUpTo": "Podeu enviar fins a {{amount}} {{symbol}}",
+        "Send": "Enviar",
+        "EnterAmount": "introduïu la quantitat"
     },
     "credits": {
         "InviteAcceptedBy": "Invitació acceptada per {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} ha introduït el cognom",
         "Streams_user_icon": "{{invitedUserName}} icona introduïda",
         "Places_user_location": "{{invitedUserName}} ha introduït la ubicació",
-        "Streams_greeting": "{{invitedUserName}} ha introduït la salutació"
+        "Streams_greeting": "{{invitedUserName}} ha introduït la salutació",
+        "InvitedUserFilledStream": "{{invitedUserName}} omplert {{FilledStreamTitle}}",
+        "ForFillingStream": "Per omplir {{FilledStreamTitle}}",
+        "CreatePrivateChat": "per xat privat amb {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "{{amount}} crèdits obtinguts",
         "Streams_user_icon": "{{amount}} crèdits obtinguts",
         "Places_user_location": "{{amount}} crèdits obtinguts",
-        "Streams_greeting": "{{amount}} crèdits obtinguts"
+        "Streams_greeting": "{{amount}} crèdits obtinguts",
+        "User": "Usuari"
     },
     "subscriptions": {
         "infoTitle": "Estableix la informació de pagament",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "establiu un enllaç d&#39;informació addicional",
             "DescriptionPlaceholder": "Descripció del servei",
             "SaveService": "Servei d&#39;estalvi",
-            "SelectRequiredParticipants": "Participants obligatoris"
+            "SelectRequiredParticipants": "Participants obligatoris",
+            "RequiredParticipantsDesc": "Si us plau, seleccioneu els participants relacionats que són necessaris per utilitzar aquest servei (per exemple, mascotes per a &quot;Exhibició de gossos&quot;, o nens per a &quot;Vacances infantils&quot;, etc.). Si el servei és de pagament, l&#39;usuari haurà de pagar també per cada participant relacionat."
         },
         "ManageServiceTemplates": "Gestionar plantilles de servei",
         "ManageServices": "Gestionar Serveis",
@@ -388,6 +398,132 @@
             "Description": "Dades de l&#39;usuari",
             "aboutPlaceholder": "Edita la biografia",
             "SureLogOut": "Esteu segur que voleu tancar la sessió?"
+        },
+        "Add": "Afegeix",
+        "Remove": "Eliminar",
+        "NoNFTyet": "Encara no hi ha NFT",
+        "Claim": "Reclamació",
+        "ClaimNFT": "Reclama NFT",
+        "Unlocking": "Desbloqueig",
+        "Unlock": "Descobrir",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Contracte NFT",
+                        "seriesId": "Sèrie Id",
+                        "owner": "Propietari",
+                        "currency": "Moneda",
+                        "price": "Preu",
+                        "beneficiary": "Beneficiari",
+                        "autoindex": "Autoindex",
+                        "duration": "Durada",
+                        "rateInterval": "Interval de taxa",
+                        "rateAmount": "Import de la tarifa"
+                    },
+                    "small": {
+                        "NFTContract": "Contracte NFT",
+                        "seriesId": "s&#39;encunyaran fitxes en aquesta sèrie",
+                        "owner": "propietari de la instància, en cas contrari serà el remitent",
+                        "currency": "Moneda per a fitxes comprades, si és zero, per a monedes natives",
+                        "price": "Preu",
+                        "beneficiary": "Beneficiari de la venda de fitxes, en cas contrari serà el remitent",
+                        "autoindex": "Autoindex",
+                        "duration": "Tancament després de l&#39;encunyació. Zero vol dir aconseguir-ho immediatament.",
+                        "rateInterval": "interval de cub per a compra especial",
+                        "rateAmount": "quantitat de cub per a una compra especial"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcional)",
+                    "number": "nombre",
+                    "address": "adreça",
+                    "fraction": "fracció",
+                    "integer": "enter",
+                    "seconds": "segons",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produir",
+                "viewInstancesList": "Actualitza la llista"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Identificació de la sèrie",
+                        "account": "Compte",
+                        "amount": "Import"
+                    },
+                    "small": {
+                        "seriesId": "el nou testimoni pertanyirà a la sèrie amb aquest identificador",
+                        "account": "propietari de NFT de nova creació. si no s&#39;estableix, utilitzarà la cartera actual",
+                        "amount": "quantitat de NFT a menta"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcional)",
+                    "seriesId": "id",
+                    "account": "compte",
+                    "amount": "quantitat",
+                    "integer": "enter"
+                },
+                "btn": {
+                    "Purchase": "Compra",
+                    "SpecialPurchase": "Compra especial"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "adreça"
+                    },
+                    "small": {
+                        "account": "adreça"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Adreça no vàlida"
+                },
+                "placeholders": {
+                    "account": "adreça"
+                },
+                "addToWhitelist": "Afegeix a la llista blanca",
+                "removeFromWhitelist": "Elimina de la llista blanca"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Identificador del testimoni",
+                    "custodian": "Custodi",
+                    "recipient": "Destinatari"
+                },
+                "small": {
+                    "tokenId": "identificador del testimoni què cal bloquejar o desbloquejar",
+                    "custodian": "adreça que es pot desbloquejar",
+                    "recipient": "adreça que rebrà les fitxes"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TokenId no vàlid",
+                "invalidCustodian": "Custodi no vàlid",
+                "invalidRecipient": "Destinatari no vàlid"
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tokenId": "id",
+                "custodian": "adreça"
+            },
+            "Lock": "Bloqueig",
+            "Unlock": "Descobrir",
+            "Locked": "Tancat",
+            "CustodianAddress": "Adreça del custodi",
+            "TokenWasClaimed": "S&#39;ha reclamat el testimoni &quot;{{title}}&quot;.",
+            "TokenWasLocked": "El testimoni &quot;{{title}}&quot; s&#39;ha bloquejat",
+            "TokenWasUnlocked": "S&#39;ha desbloquejat el testimoni &quot;{{title}}&quot;."
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Necessites MetaMask connectat per treballar amb l&#39;aplicació",
         "UserNotLoggedInMetaMask": "L&#39;usuari no ha iniciat sessió a MetaMask",
         "CurrencyNotFound": "No s&#39;ha trobat la moneda",
-        "WrongChain": "Aquesta NFT creada sota &quot;{{chain}}&quot;. Si us plau, utilitzeu aquesta cadena."
+        "WrongChain": "Aquesta NFT creada sota &quot;{{chain}}&quot;. Si us plau, utilitzeu aquesta cadena.",
+        "AmountInvalid": "Import no vàlid!",
+        "NoRecipientSelected": "No s&#39;ha seleccionat cap destinatari",
+        "NotEnoughPermissionsWallet": "No hi ha prou permisos per llegir la cartera d&#39;aquest usuari",
+        "ThisUserHaveNoWallet": "Aquest usuari no té assignada cap cartera",
+        "TheWalletOfThisUserInvalid": "La cartera d&#39;aquest usuari no és vàlida",
+        "WalletInvalid": "L&#39;adreça de la cartera no és vàlida"
     },
     "admin": {
         "Title": "Administratiu patrimonial",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Els crèdits mínims no poden ser negatius",
             "CreditsToAddNegative": "Els crèdits per afegir no poden ser negatius"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Seleccioneu el destinatari",
+        "TransactionSuccess": "Èxit de la transacció",
+        "OrTypeWalletAddress": "O escriviu l&#39;adreça de la cartera del destinatari"
+    },
+    "currencies": {
+        "choose": "Trieu una moneda"
     }
 }

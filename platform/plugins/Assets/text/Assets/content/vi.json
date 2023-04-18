@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Thanh toán của bạn đang được xử lý",
         "FailTryAgain": "Thanh toán của bạn không thành công, vui lòng thử lại",
         "SomethingWrong": "Đã xảy ra sự cố",
-        "PaymentStatus": "Tình trạng thanh toán"
+        "PaymentStatus": "Tình trạng thanh toán",
+        "PayTo": "Thanh toán {{displayName}}",
+        "ChooseCurrency": "Chọn một loại tiền tệ",
+        "YouCanSendUpTo": "Bạn có thể gửi tới {{amount}} {{symbol}}",
+        "Send": "Gửi",
+        "EnterAmount": "nhập số tiền"
     },
     "credits": {
         "InviteAcceptedBy": "Lời mời được chấp nhận bởi {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} tín dụng",
             "BonusCredits": "{{amount}} tín dụng"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} đã điền {{FilledStreamTitle}}",
+        "ForFillingStream": "Để điền {{FilledStreamTitle}}",
+        "CreatePrivateChat": "để trò chuyện riêng với {{toUserName}}"
     },
     "history": {
         "Date": "Ngày",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Đã kiếm được {{amount}} tín dụng",
         "Places_user_location": "Đã kiếm được {{amount}} tín dụng",
         "Streams_greeting": "Đã kiếm được {{amount}} tín dụng",
-        "YouHaveCreditsToStart": "Đã kiếm được {{amount}} tín dụng"
+        "YouHaveCreditsToStart": "Đã kiếm được {{amount}} tín dụng",
+        "User": "Người dùng"
     },
     "subscriptions": {
         "infoTitle": "Đặt thông tin thanh toán",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "đặt liên kết thông tin bổ sung",
             "DescriptionPlaceholder": "Dịch vụ Mô tả",
             "SaveService": "Lưu dịch vụ",
-            "SelectRequiredParticipants": "Người tham gia bắt buộc"
+            "SelectRequiredParticipants": "Người tham gia bắt buộc",
+            "RequiredParticipantsDesc": "Vui lòng chọn những người tham gia có liên quan được yêu cầu sử dụng dịch vụ này (ví dụ: thú cưng cho &quot;Buổi trình diễn chó&quot; hoặc trẻ em cho &quot;Ngày lễ của trẻ em&quot;, v.v.). Nếu dịch vụ được trả tiền, người dùng cũng sẽ phải trả tiền cho từng người tham gia có liên quan."
         },
         "ManageServiceTemplates": "Quản lý Mẫu dịch vụ",
         "ManageServices": "Quản lý dịch vụ",
@@ -387,6 +397,132 @@
             "Description": "Chi tiết người dùng",
             "aboutPlaceholder": "Chỉnh sửa tiểu sử",
             "SureLogOut": "Bạn có chắc chắn bạn muốn thoát?"
+        },
+        "Add": "Thêm vào",
+        "Remove": "Di dời",
+        "NoNFTyet": "Chưa có NFT nào",
+        "Claim": "Khẳng định",
+        "ClaimNFT": "Yêu cầu NFT",
+        "Unlocking": "Mở khóa",
+        "Unlock": "mở khóa",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Hợp đồng NFT",
+                        "seriesId": "mã sê-ri",
+                        "owner": "Người sở hữu",
+                        "currency": "tiền tệ",
+                        "price": "Giá",
+                        "beneficiary": "người thụ hưởng",
+                        "autoindex": "lập chỉ mục tự động",
+                        "duration": "Khoảng thời gian",
+                        "rateInterval": "khoảng tỷ lệ",
+                        "rateAmount": "Tỷ lệ số tiền"
+                    },
+                    "small": {
+                        "NFTContract": "Hợp đồng NFT",
+                        "seriesId": "mã thông báo sẽ được đúc trong chuỗi này",
+                        "owner": "chủ sở hữu của ví dụ, nếu không sẽ là người gửi",
+                        "currency": "Đơn vị tiền tệ cho mã thông báo đã mua, nếu bằng 0 - đối với tiền bản địa",
+                        "price": "Giá",
+                        "beneficiary": "Người thụ hưởng việc bán mã thông báo, nếu không sẽ là người gửi",
+                        "autoindex": "lập chỉ mục tự động",
+                        "duration": "Khóa sau khi đúc. Không có nghĩa là có được nó ngay lập tức.",
+                        "rateInterval": "khoảng thời gian xô để mua đặc biệt",
+                        "rateAmount": "số lượng thùng để mua đặc biệt"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(không bắt buộc)",
+                    "number": "con số",
+                    "address": "Địa chỉ",
+                    "fraction": "phân số",
+                    "integer": "số nguyên",
+                    "seconds": "giây",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Sản xuất",
+                "viewInstancesList": "Làm mới danh sách"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Mã sê-ri",
+                        "account": "Tài khoản",
+                        "amount": "Số lượng"
+                    },
+                    "small": {
+                        "seriesId": "mã thông báo mới sẽ thuộc chuỗi có ID như vậy",
+                        "account": "chủ sở hữu của NFT mới được tạo. nếu không được đặt - sẽ sử dụng ví hiện tại",
+                        "amount": "số lượng NFT để đúc"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(không bắt buộc)",
+                    "seriesId": "nhận dạng",
+                    "account": "tài khoản",
+                    "amount": "số lượng",
+                    "integer": "số nguyên"
+                },
+                "btn": {
+                    "Purchase": "Mua",
+                    "SpecialPurchase": "mua hàng đặc biệt"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Địa chỉ"
+                    },
+                    "small": {
+                        "account": "Địa chỉ"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Địa chỉ không hợp lệ"
+                },
+                "placeholders": {
+                    "account": "Địa chỉ"
+                },
+                "addToWhitelist": "Thêm vào danh sách trắng",
+                "removeFromWhitelist": "Xóa khỏi danh sách trắng"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID mã thông báo",
+                    "custodian": "giám hộ",
+                    "recipient": "Người nhận"
+                },
+                "small": {
+                    "tokenId": "id mã thông báo cần khóa hoặc mở khóa",
+                    "custodian": "địa chỉ có thể mở khóa",
+                    "recipient": "địa chỉ sẽ nhận mã thông báo"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Id mã thông báo không hợp lệ",
+                "invalidCustodian": "Người giám hộ không hợp lệ",
+                "invalidRecipient": "Người nhận không hợp lệ"
+            },
+            "placeholders": {
+                "optional": "(không bắt buộc)",
+                "tokenId": "nhận dạng",
+                "custodian": "Địa chỉ"
+            },
+            "Lock": "Khóa",
+            "Unlock": "mở khóa",
+            "Locked": "Đã khóa",
+            "CustodianAddress": "địa chỉ người giám hộ",
+            "TokenWasClaimed": "Mã thông báo &quot;{{title}}&quot; đã được yêu cầu",
+            "TokenWasLocked": "Mã thông báo &quot;{{title}}&quot; đã bị khóa",
+            "TokenWasUnlocked": "Mã thông báo &quot;{{title}}&quot; đã được mở khóa"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Cần kết nối MetaMask để làm việc với ứng dụng",
         "UserNotLoggedInMetaMask": "Người dùng chưa đăng nhập vào MetaMask",
         "CurrencyNotFound": "Không tìm thấy đơn vị tiền tệ",
-        "WrongChain": "NFT này được tạo trong &quot;{{chain}}&quot;. Hãy sử dụng chuỗi này."
+        "WrongChain": "NFT này được tạo trong &quot;{{chain}}&quot;. Hãy sử dụng chuỗi này.",
+        "AmountInvalid": "Số tiền không hợp lệ!",
+        "NoRecipientSelected": "Không có người nhận nào được chọn",
+        "NotEnoughPermissionsWallet": "Không đủ quyền để đọc ví của người dùng này",
+        "ThisUserHaveNoWallet": "Người dùng này không có ví được chỉ định",
+        "TheWalletOfThisUserInvalid": "Ví của người dùng này không hợp lệ",
+        "WalletInvalid": "Địa chỉ ví không hợp lệ"
     },
     "admin": {
         "Title": "Quản trị nội dung",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Tín dụng tối thiểu không được âm",
             "CreditsToAddNegative": "Tín dụng để thêm không được âm"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Chọn người nhận",
+        "TransactionSuccess": "Giao dịch thành công",
+        "OrTypeWalletAddress": "HOẶC nhập địa chỉ ví của người nhận"
+    },
+    "currencies": {
+        "choose": "Chọn một loại tiền tệ"
     }
 }
