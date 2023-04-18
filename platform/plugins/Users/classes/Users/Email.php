@@ -34,11 +34,12 @@ class Users_Email extends Base_Users_Email
 	 * @param {array} $fields=array()
 	 *  The fields referenced in the subject and/or view
 	 * @param {array} [$options=array()] Array of options. Can include:
-	 * @param {array} [$options.html=false] Whether to send as HTML email.
 	 * @param {array} [$options.name] A human-readable name in addition to the address to send to.
 	 * @param {array} [$options.from] An array of (emailAddress, humanReadableName)
 	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.language] Preferred language to be used for the view
+	 * @param {array} [$options.html="Q/layout/email.php"] Preferred view file to use for HTML layout. Pass true to send HTML without a layout. Pass false for no HTML.
+	 * @param {array} [$options.title] Optionally set a different title for an HTML email, otherwise subject is used.
 	 * @throws Q_Exception_WrongType
 	 * @return {bool} True if success or throw exception
 	 */
@@ -57,7 +58,7 @@ class Users_Email extends Base_Users_Email
 		}
 		
 		if (!isset($options['html'])) {
-			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', true);
+			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', 'Q/layout/email.php');
 		}
 
 		// set language if didn't defined yet
@@ -165,6 +166,10 @@ class Users_Email extends Base_Users_Email
 				if (empty($options['html'])) {
 					$email->setBodyText($body);
 				} else {
+					if (is_string($options['html'])){
+						$title = Q::interpolate(Q::ifset($options, 'title', $subject));
+						$body = Q::view($options['html'], compact('body', 'title'));
+					}
 					$email->setBodyHtml($body);
 				}
 				/**
