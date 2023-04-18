@@ -35,7 +35,7 @@
             }
 
             tool.webrtcUserInterface = options.webrtcUserInterface();
-            tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+            tool.webrtcSignalingLib = tool.webrtcUserInterface.getWebrtcSignalingLib();
 
             this.create();
         },
@@ -4299,7 +4299,7 @@
                                             setTimeout(soundCheck, 5000);
                                         } 
                                     }
-                                    setTimeout(soundCheck, 5000);
+                                    //setTimeout(soundCheck, 5000);
 
                                     //let newStream = audioContext.createMediaStreamSource(newAudio.mediaStream);
                                     //newStream.connect(_dest)

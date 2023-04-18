@@ -43,7 +43,8 @@
         rtmpLive: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="105px" height="105px" viewBox="-0.429 -0.991 105 105" enable-background="new -0.429 -0.991 105 105" xml:space="preserve"> <defs> </defs> <circle fill="none" stroke="#050505" stroke-width="4" stroke-miterlimit="10" cx="52" cy="52" r="50"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M16.775,65.664V39.441h8.844c1.777,0,3.129,0.236,4.054,0.706 c0.925,0.472,1.665,1.304,2.217,2.496c0.553,1.192,0.831,2.511,0.831,3.954c0,1.858-0.459,3.428-1.375,4.703 c-0.917,1.275-2.332,2.088-4.245,2.434c0.697,0.441,1.229,0.877,1.591,1.304c0.772,0.933,1.502,2.094,2.191,3.487l3.47,7.139h-3.32 l-2.64-5.456c-0.77-1.573-1.406-2.778-1.904-3.612c-0.5-0.835-0.946-1.418-1.342-1.753c-0.394-0.334-0.795-0.568-1.204-0.697 c-0.299-0.085-0.789-0.125-1.47-0.125h-3.061v11.644H16.775z M19.415,51.014h5.673c1.207,0,2.15-0.164,2.831-0.492 c0.68-0.327,1.197-0.852,1.551-1.574c0.354-0.72,0.53-1.505,0.53-2.351c0-1.241-0.342-2.261-1.027-3.06 c-0.686-0.798-1.768-1.198-3.245-1.198h-6.313V51.014z"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M41.428,65.664V42.536h-6.572v-3.095h15.81v3.095h-6.599 v23.127H41.428z"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M53.294,65.664V39.441h3.972l4.722,18.566 c0.436,1.73,0.753,3.023,0.953,3.883c0.226-0.953,0.58-2.355,1.062-4.204l4.775-18.245h3.551v26.222h-2.543V43.716l-5.798,21.948 h-2.38l-5.769-22.323v22.323H53.294z"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M76.587,65.664V39.441h7.524c1.323,0,2.336,0.084,3.034,0.25 c0.98,0.215,1.8,0.625,2.462,1.226s1.195,1.446,1.599,2.531c0.403,1.085,0.606,2.278,0.606,3.578c0,2.229-0.539,4.117-1.619,5.662 s-3.03,2.316-5.851,2.316h-5.117v10.66H76.587z M79.226,51.908h5.157c1.706,0,2.916-0.417,3.632-1.252 c0.717-0.834,1.074-2.009,1.074-3.523c0-1.097-0.209-2.036-0.632-2.817c-0.421-0.781-0.977-1.298-1.665-1.548 c-0.444-0.154-1.267-0.232-2.464-0.232h-5.103V51.908z"/></svg>',
         dragIconOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
         dragIconOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
-        recordingIcon: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.5 -0.501 101 101" enable-background="new -0.5 -0.501 101 101"    xml:space="preserve">  <defs>  </defs>  <g>   <path fill="#8C8C8C" d="M50,4c25.365,0,46,20.636,46,46c0,25.363-20.636,45.998-46,45.998C24.635,95.998,4,75.363,4,50    C4,24.636,24.635,4,50,4 M50,0C22.431,0,0,22.43,0,50s22.429,49.998,50,49.998c27.57,0,50-22.428,50-49.998    C100,22.431,77.569,0,50,0L50,0z"/>  </g>  <circle fill="#8C8C8C" cx="50" cy="50" r="25.833"/>  </svg>'
+        recordingIcon: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.5 -0.501 101 101" enable-background="new -0.5 -0.501 101 101"    xml:space="preserve">  <defs>  </defs>  <g>   <path fill="#8C8C8C" d="M50,4c25.365,0,46,20.636,46,46c0,25.363-20.636,45.998-46,45.998C24.635,95.998,4,75.363,4,50    C4,24.636,24.635,4,50,4 M50,0C22.431,0,0,22.43,0,50s22.429,49.998,50,49.998c27.57,0,50-22.428,50-49.998    C100,22.431,77.569,0,50,0L50,0z"/>  </g>  <circle fill="#8C8C8C" cx="50" cy="50" r="25.833"/>  </svg>',
+        plusIcon: '<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m467 211h-166v-166c0-24.853-20.147-45-45-45s-45 20.147-45 45v166h-166c-24.853 0-45 20.147-45 45s20.147 45 45 45h166v166c0 24.853 20.147 45 45 45s45-20.147 45-45v-166h166c24.853 0 45-20.147 45-45s-20.147-45-45-45z"/></g></svg>'
     }
 
     var ua = navigator.userAgent;
@@ -118,14 +119,21 @@
         this.controlBar = null;
         this.participantsListTool = null;
         this.chatBox = null;
+        this.audioTool = null;
+        this.videoInputsTool = null;
+        this.participantsListTool = null;
 
         $(this.element).addClass('Q_floatAboveDocument');
         if (!options.webrtcRoomInstance) {
             throw "Video room should be created";
         }
+        log('Streams/webrtc/controls options', options)
+
         
         this.webrtcRoomInstance = options.webrtcRoomInstance();
-        this.webrtcSignalingLib = tool.webrtcRoomInstance.currentConferenceLibInstance();
+
+        log('Streams/webrtc/controls webrtcRoomInstance', this.webrtcRoomInstance)
+        this.webrtcSignalingLib = tool.webrtcRoomInstance.getWebrtcSignalingLib();
 
         log('webrtcRoomInstance', this.webrtcRoomInstance, this.webrtcSignalingLib)
 
@@ -255,6 +263,9 @@
                     tool.webrtcRoomInstance.screenRendering.toggleLoudestScreenMode('allButMe');
                 }
                 tool.bindRTCEvents();
+            },
+            remove: function () {
+
             },
             updateChildToolLoadingProgress: function (toolName) {
                 log('updateChildToolLoadingProgress', toolName)
@@ -984,7 +995,7 @@
                 var cameraBtnIcon = document.createElement('DIV');
                 cameraBtnIcon.className = 'Streams_webrtc_camera-control-icon';
                 cameraBtnIcon.innerHTML = icons.disabledCamera;
-               cameraBtnCon.appendChild(cameraBtnIcon);
+                cameraBtnCon.appendChild(cameraBtnIcon);
                 var countdownBadge = document.createElement('DIV');
                 countdownBadge.className = 'Streams_webrtc_camera-countdown';
                 cameraBtnCon.appendChild(countdownBadge);
@@ -2015,7 +2026,7 @@
                                 participantsPopupEl.appendChild(topBtns);
                             }
 
-                            participantsPopupEl.appendChild(tool.participantsListTool.participantListEl)
+                            participantsPopupEl.appendChild(tool.participantsListTool.element)
 
                             if (!Q.info.useTouchEvents) {
                                 tool.usersBtn.parentNode.appendChild(participantsPopupEl);
@@ -2057,6 +2068,7 @@
                             } else {
                                 tool.usersBtn.addEventListener('mouseenter', function (e) {
                                     tool.hideAllPopups();
+
                                     if (tool.hoverTimeout.participantsPopup != null) {
                                         clearTimeout(tool.hoverTimeout.participantsPopup);
                                         tool.hoverTimeout.participantsPopup = null;
@@ -2069,10 +2081,14 @@
 
                                     tool.usersBtn.parentNode.classList.add('Streams_webrtc_hover');
                                 });
-                                tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {
+                                tool.usersBtn.addEventListener('mouseleave', function (e) {
+                                    if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                    }
                                     tool.hoverTimeout.participantsPopup = setTimeout(function () {
                                         tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                    }, 400)
+                                    }, 600)
                                 });
 
                                 participantsPopupEl.addEventListener('mouseenter', function (e) {
@@ -2083,9 +2099,9 @@
                                     }
                                 })
                                 participantsPopupEl.addEventListener('mouseleave', function (e) {
-                                    setTimeout(function () {
+                                    tool.hoverTimeout.participantsPopup = setTimeout(function () {
                                         tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                    }, 400)
+                                    }, 600)
 
                                 });
 

@@ -64,7 +64,13 @@ abstract class Streams_WebRTC
     static function fetchStream($publisherId, $roomId, $resumeClosed) {
         if (!empty($roomId)) {
             $streamName = "Streams/webrtc/$roomId";
-            $stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
+            $stream = Streams_Stream::fetch(Users::loggedInUser(true)->id, $publisherId, $streamName);
+            if (!$stream) {
+                return null;
+            }
+            if (!$stream->testReadLevel("max")) {
+                throw new Exception("Access denied");
+            }
             if (($stream && $resumeClosed) || ($stream && empty($stream->closedTime))) {
 
                 if($resumeClosed) {

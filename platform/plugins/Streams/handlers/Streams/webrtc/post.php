@@ -38,6 +38,9 @@ function Streams_webrtc_post($params = array())
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
+	$inviteToken = Q::ifset($params, 'inviteToken', null);
+	$invitingUserId = Q::ifset($params, 'invitingUserId', null);
+	$socketId = Q::ifset($params, 'socketId', null);
 	$callDescription = Q::ifset($params, 'description', null);
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
@@ -48,7 +51,163 @@ function Streams_webrtc_post($params = array())
     $closeManually = Q::ifset($params, 'closeManually', null);
     $useRelatedTo = Q::ifset($params, 'useRelatedTo', null);
 
-    if(Q_Request::slotName('recording')) {
+    if(Q_Request::slotName('data')) {
+        //this is requests which were sent by node.js when some event was fired (client.on('disconnect'), for example)
+
+        $cmd = Q::ifset($params, 'cmd', null);
+        $streamName = Q::ifset($params, 'streamName', null);
+        $publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
+        $hostSocketId = Q::ifset($params, 'hostSocketId', null);
+
+        if($cmd == 'closeStream') {
+            //this slot is used to close stream when user closes browser tab and disconnect socket event is fired
+            $streamToClose = Streams_Stream::fetch(null, $publisherId, $streamName);
+    
+            if(!is_null($streamToClose)) {
+                $streamToClose->setAttribute('status', 'closed');
+                //$streamToClose->close($publisherId);
+                $streamToClose->save();
+                $streamToClose->changed();
+            }
+    
+            return Q_Response::setSlot('data', ['cmd'=> $cmd, 'publisherId' => $publisherId, 'streamName' => $streamName]);
+        } else if($cmd == 'closeIfOffline') {
+            //this slot is used to close inactive stream when a host loades list of waiting rooms (we should close waiting rooms of users thar are inactive)
+
+            $userIsOnline = Q::ifset($params, 'userIsOnline', false);
+            $webrtcStream = Streams_Stream::fetch(null, $publisherId, $streamName);
+    
+            $streamWasClosed = false;
+            if($userIsOnline === false || $userIsOnline === 'false' || $userIsOnline === 0 || $userIsOnline === '0') {
+                //$webrtcStream->close($publisherId);
+                $webrtcStream->setAttribute('status', 'closed');
+                $webrtcStream->save();
+                $webrtcStream->changed();
+                $streamWasClosed = true;
+            }
+    
+            return Q_Response::setSlot('data', ['cmd'=> $cmd, 'streamWasClosed' =>  $streamWasClosed, 'userIsOnline' => $userIsOnline, 'publisherId' => $publisherId, 'streamName' => $streamName]);
+        }
+    } else if(Q_Request::slotName('closeIfOffline')) {
+        if (!$loggedInUserId) {
+            throw new Exception('You are not authorized to do this action');
+        }
+        $streamName = Q::ifset($params, 'streamName', null);
+        $publisherId = Q::ifset($params, 'publisherId', null);
+        $hostSocketId = Q::ifset($params, 'hostSocketId', null);
+        $usersSocketId = Q::ifset($params, 'socketId', null);
+        if(!$usersSocketId) {
+            $streamToClose = Streams_Stream::fetch(null, $publisherId, $streamName);
+    
+            if(!is_null($streamToClose)) {
+                $streamToClose->setAttribute('status', 'closed');
+                //$streamToClose->close($publisherId);
+                $streamToClose->save();
+                $streamToClose->changed();
+            }
+            return Q_Response::setSlot("closeIfOffline", 'done');
+        }
+        if(!$streamName || !$publisherId || !$hostSocketId) {
+            throw new Exception('streamName, publisherId, hostSocketId are required');
+        }
+        Q_Utils::sendToNode(array(
+            "Q/method" => "Users/checkIfOnline",
+            "socketId" => $usersSocketId,
+            "userId" => $publisherId,
+            "operatorSocketId" => $hostSocketId,
+            "operatorUserId" => $loggedInUserId,
+            "handlerToExecute" => 'Streams/webrtc',
+            "data" => [
+                "cmd" => 'closeIfOffline',
+                "publisherId" => $publisherId,
+                "streamName" => $streamName
+            ],
+        ));
+        
+        return Q_Response::setSlot("closeIfOffline", 'done');
+    } else if(Q_Request::slotName('admitUserToRoom')) {
+        $streamName = Q::ifset($params, 'streamName', null);
+        $publisherId = Q::ifset($params, 'publisherId', null);
+        $waitingRoomStreamName = Q::ifset($params, 'waitingRoomStreamName', null);
+        $userIdToAdmit = Q::ifset($params, 'userIdToAdmit', null);
+
+        $webrtcStream = Streams_Stream::fetch($loggedInUserId, $publisherId, $streamName);
+        if(!$webrtcStream->testAdminLevel('manage')) {
+            throw new Exception('Your are not authorized to do this action');
+        }
+
+        $access = new Streams_Access();
+        $access->publisherId = $publisherId;
+        $access->streamName = $streamName;
+        $access->ofUserId = $userIdToAdmit;
+        $access->retrieve();
+        $access->readLevel = Streams::$READ_LEVEL['max'];
+        $access->save();
+
+        $waitingRoomStream = Streams_Stream::fetch($userIdToAdmit, $userIdToAdmit, $waitingRoomStreamName);
+
+        //print_r($waitingRoomStream);die;
+        if (!is_null($waitingRoomStream)) {
+            $waitingRoomStream->setAttribute('status', 'accepted');    
+            //$waitingRoomStream->close($userIdToAdmit);
+            $waitingRoomStream->save();
+            $waitingRoomStream->changed();
+
+            $waitingRoomStream->post($userIdToAdmit, array(
+                'type' => 'Streams/webrtc/admit',
+                'instructions' => ['msg' => 'You will be joined to the room now']
+            ));
+        }
+    
+        return Q_Response::setSlot("admitUserToRoom", 'done');
+    } else if(Q_Request::slotName('cancelAccessToRoom')) {
+        $streamName = Q::ifset($params, 'streamName', null);
+        $publisherId = Q::ifset($params, 'publisherId', null);
+        $userId = Q::ifset($params, 'userId', null);
+
+        $webrtcStream = Streams_Stream::fetch($loggedInUserId, $publisherId, $streamName);
+        if(!$webrtcStream->testAdminLevel('manage')) {
+            throw new Exception('Your are not authorized to do this action');
+        }
+
+        $access = new Streams_Access();
+        $access->publisherId = $publisherId;
+        $access->streamName = $streamName;
+        $access->ofUserId = $userId;
+        $access->retrieve();
+        $access->readLevel = Streams::$READ_LEVEL['none'];
+        $access->save();
+    
+        return Q_Response::setSlot("cancelAccessToRoom", 'done');
+    } else if(Q_Request::slotName('closeWaitingRoom')) {
+        $streamName = Q::ifset($params, 'streamName', null);
+        $publisherId = Q::ifset($params, 'publisherId', null);
+        $waitingRoomStreamName = Q::ifset($params, 'waitingRoomStreamName', null);
+        $waitingRoomUserId = Q::ifset($params, 'waitingRoomUserId', null);
+
+        $webrtcStream = Streams_Stream::fetch($loggedInUserId, $publisherId, $streamName);
+        if(!$webrtcStream->testAdminLevel('manage')) {
+            throw new Exception('Your are not authorized to do this action');
+        }
+
+        $waitingRoomStream = Streams_Stream::fetch($waitingRoomUserId, $waitingRoomUserId, $waitingRoomStreamName);
+
+        if (!is_null($waitingRoomStream)) {
+            $waitingRoomStream->setAttribute('status', 'closed');    
+            //$waitingRoomStream->close($userIdToAdmit);
+
+            $waitingRoomStream->save();
+            $waitingRoomStream->changed();
+            
+            $waitingRoomStream->post($waitingRoomUserId, array(
+                'type' => 'Streams/webrtc/close',
+                'instructions' => ['msg' => 'Your waiting room was closed.']
+            ));
+        }
+    
+        return Q_Response::setSlot("closeWaitingRoom", 'done');
+    } else if(Q_Request::slotName('recording')) {
+        //this slot is not used for now; it is supposed to merge separate audio recordings of webrtc conference into one file
         $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
         $luid = Users::loggedInUser(true)->id;
         $app = Q::app();
@@ -65,24 +224,6 @@ function Streams_webrtc_post($params = array())
         Q_Response::setSlot("recording", $task);
 
         //Streams_WebRTC::mergeRecordings($publisherId, $roomId);
-        return;
-    } else if(Q_Request::slotName('progress')) {
-        $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
-        $luid = Users::loggedInUser(true)->id;
-        $app = Q::app();
-
-        $taskStream = Streams_Stream::fetch($luid, $communityId, $taskStreamName, true);
-        $progress = '30';
-        $taskStream->setAttribute('progress', $progress);
-        $taskStream->save();
-        $taskStream->post($luid, array(
-            'type' => 'Streams/task/progress',
-            'instructions' => @compact('progress'),
-        ), true);
-
-
-        Q_Response::setSlot("progress", $taskStream);
-
         return;
     }
 
@@ -107,9 +248,73 @@ function Streams_webrtc_post($params = array())
     );
 
     $webrtcStream = null;
-    if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {
+    if(!is_null($inviteToken) && !is_null($invitingUserId)){
 
-        $webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], $useRelatedTo["relationType"], $resumeClosed);
+        $webrtcStream = $webrtc->getRoomStreamByInviteToken($inviteToken, $resumeClosed);
+        if (!$webrtcStream) {
+            throw new Exception("Room does not exist");
+        };
+        if ($webrtcStream->testReadLevel("max")) {
+            if ($resumeClosed) {
+                $webrtcStream->closedTime = null;
+                $webrtcStream->changed();
+    
+                $endTime = $webrtcStream->getAttribute('endTime');
+                $startTime = $webrtcStream->getAttribute('startTime');
+                if ($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
+                    $startTime = round(microtime(true) * 1000);
+                    $webrtcStream->setAttribute('startTime', $startTime);
+                    $webrtcStream->clearAttribute('endTime');
+                    $webrtcStream->save();
+                }
+            }
+        } else {
+            $waitingRoomStream = $webrtc->getRoomStreamRelatedTo($webrtcStream->fields["publisherId"], $webrtcStream->fields["name"], $loggedInUserId, null, 'Streams/webrtc/waitingRoom', true);
+
+            //print_r($waitingRoomStream);die;
+            if(is_null($waitingRoomStream)) {
+                $waitingRoomStream = $webrtc->createWaitingRoomStream();
+                $newStream = true;
+            }
+            
+            $waitingRoomStream->setAttribute('socketId', $socketId);
+            $waitingRoomStream->setAttribute('status', 'waiting');
+            $waitingRoomStream->save();
+            $waitingRoomStream->join(['subscribed' => true]);
+            $waitingRoomStream->subscribe(['userId' => $webrtcStream->fields['publisherId']]);
+            if ($newStream) {
+                $waitingRoomStream->relateTo((object)array(
+                    "publisherId" => $webrtcStream->fields["publisherId"],
+                    "name" => $webrtcStream->fields["name"]
+                ), 'Streams/webrtc/waitingRoom', $webrtcStream->fields["publisherId"], array(
+                    "inheritAccess" => true,
+                    "weight" => time()
+                ));
+            } else {
+                $waitingRoomStream->changed();
+            }
+            $response['waitingRoomStream'] = $waitingRoomStream;
+
+            //if user closes tab with waiting room, we should close waiting room stream
+            Q_Utils::sendToNode(array(
+                "Q/method" => "Users/addEventListener",
+                "socketId" => $socketId,
+                "userId" => $loggedInUserId,
+                "eventName" => 'disconnect',
+                "handlerToExecute" => 'Streams/webrtc',
+                "data" => [
+                    "cmd" => 'closeStream',
+                    "publisherId" => $waitingRoomStream->fields['publisherId'],
+                    "streamName" => $waitingRoomStream->fields['name']
+                ],
+            ));
+
+            return Q_Response::setSlot("room", $response);  
+            
+        }      
+    } else if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {
+
+        $webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], null, null, $useRelatedTo["relationType"], $resumeClosed);
 
         if(is_null($webrtcStream)) {
             $webrtcStream = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
