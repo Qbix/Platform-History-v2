@@ -4317,8 +4317,9 @@ abstract class Streams extends Base_Streams
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
 	 * @param {array|string|true} [$icon=array()] By default, the user icon would be "default".
-	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
+	 *  But you can pass here an array of basename => filename or basename => url pairs, or a gravatar url to
 	 *  download the various sizes from gravatar. 
+	 *  You can pass a closure or a string here, referring to a function to call for the icon, such as "b" or "A::b" or an anonymous function () { }
 	 *  If $identifier['app']['platform'] is specified, and $icon array is empty, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 *  Finally, you can pass true to generate an icon instead of using the default icon.

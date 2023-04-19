@@ -16,7 +16,7 @@ function Users_1_0_12_rename_Users_Identify()
             continue;
         }
         list($platform, $app) = $parts2;
-        list($appId, $appInfo) = Users::appInfo($platform, $appId);
+        list($appId, $appInfo) = Users::appInfo($platform, $app);
         if (isset($appInfo['appIdForAuth'])) {
             $parts1[0] = $platform . '_' . $appInfo['appIdForAuth'];
         }
@@ -29,7 +29,9 @@ function Users_1_0_12_rename_Users_Identify()
             $row->remove();
         }
 	}
-	echo PHP_EOL;
+    if (count($rows)) {
+        echo PHP_EOL;
+    }
 }
 
 function Users_1_0_12_rename_Users_External($from)
@@ -56,7 +58,9 @@ function Users_1_0_12_rename_Users_External($from)
             }
         }
 	}
-	echo PHP_EOL;
+    if (count($rows)) {
+        echo PHP_EOL;
+    }
 }
 
 Users_1_0_12_rename_Users_Identify();
