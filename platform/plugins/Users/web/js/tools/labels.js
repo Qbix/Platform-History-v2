@@ -22,6 +22,7 @@ Q.text.Users.labels = Q.extend({
  *   @param {String} [options.userId=Q.Users.loggedInUserId()] You can set the user id whose labels are being edited, instead of the logged-in user
  *   @param {String|Array} [options.filter="Users/"] Pass any prefix here, to filter labels by this prefix
  *   	Alternatively pass an array of label names here, to filter by.
+ *   @param {Array} [exclude] - array of labels needed to exclude from result
  *   @param {String} [options.contactUserId] Pass a user id here to var the tool add/remove contacts with the various labels, between userId and contactUserId
  *   @param {Boolean|String} [options.canGrant=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
@@ -51,13 +52,13 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	};
 
 	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
-		var $this = $(this), ret;
+		var $this = $(this);
 		var label = $this.attr('data-label');
 		var wasSelected = $this.hasClass('Q_selected');
 		var title = $this.text();
 		if (false === Q.handle(state.onClick, tool, [this, label, title, wasSelected])) {
 			return;
-		};
+		}
 		if (wasSelected) {
 			$this.removeClass('Q_selected');
 			if (state.contactUserId) {
@@ -75,9 +76,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 {
 	userId: null,
 	filter: 'Users/',
+	exclude: null,
 	contactUserId: null,
 	canGrant: false,
-	addToPhonebook: true,
+	addToPhonebook: Q.info.isMobile,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
 },
@@ -103,6 +105,11 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			selectedLabels.push($(this).attr('data-label'));
 		});
 		Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
+			// exclude labels if state.exclude not empty
+			Q.each(state.exclude, function (i, label) {
+				delete(labels[label]);
+			})
+
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
@@ -155,21 +162,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 						maxLength: 63
 					});
 				});
-				setTimeout(function () {
-					// add clickable after the sizing has been done
-					$add.plugin('Q/clickable');
-				}, 0);
 			}
 			if (state.addToPhonebook) {
 				var $addToPhonebook = tool.$('.Users_labels_add_phonebook')
 				.on(Q.Pointer.fastclick, function () {
 					location.href = Q.url("{{baseUrl}}/Users/" + state.contactUserId + ".vcf");
 				});
-
-				setTimeout(function () {
-					// add clickable after the sizing has been done
-                    $addToPhonebook.plugin('Q/clickable');
-				}, 0);
 			}
 
             var elems = $('.Users_labels_title');
@@ -208,9 +206,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             })
 		});
 	}
-}
-
-);
+});
 
 Q.Template.set('Users/labels', ''
 + '<ul>'

@@ -560,7 +560,7 @@
                         }, {
                             fields: {
                                 userId: Q.Users.loggedInUserId(),
-                                labels: 'Users/'
+                                filter: 'Users/'
                             },
                             method: 'post'
                         });
@@ -1030,7 +1030,7 @@
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
                     console.log('joinUsersWaitingRooom switchTo');
                     tool.currentActiveWebRTCRoom.switchTo(callDataObject.webrtcStream.fields.publisherId, callDataObject.webrtcStream.fields.name.split('/').pop(), {}).then(function () {
-                        let signalingLibInstance = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                        let signalingLibInstance = tool.currentActiveWebRTCRoom.getWebrtcSignalingLib();
                         if(onDisconnect) {
                             signalingLibInstance.event.on('disconnected', function () {
                                 onDisconnect(callDataObject);
@@ -1045,7 +1045,7 @@
                         element: document.body,
                         startWith: { video: false, audio: true },
                         onWebRTCRoomCreated: function () {
-                            let signalingLibInstance = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                            let signalingLibInstance = tool.currentActiveWebRTCRoom.getWebrtcSignalingLib();
                             if(onDisconnect) {
                                 signalingLibInstance.event.on('disconnected', function () {
                                     onDisconnect(callDataObject);

@@ -40,16 +40,58 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
         return $webrtcStream;
     }
 
-    function getRoomStreamRelatedTo($publisherId, $streamName, $type, $resumeClosed) {
-        if (empty($publisherId)) {
+    function createWaitingRoomStream() {
+        $userId = Users::loggedInUser(true)->id;
+        $fields = array(
+            'title' => Streams::displayName($userId) . " waiting room"
+        );
+
+        $fields['readLevel'] = 0;
+        $fields['writeLevel'] = 0;
+        $fields['adminLevel'] = 0;
+
+        $stream = Streams::create($userId, $userId, 'Streams/webrtc', $fields);
+        if($stream) {
+            $stream->setAttribute('isWaitingRoom', true);
+            $stream->save();
+            return $stream;
+        } else {
+            throw new Exception("Something went wrong when creating waiting room");
+        }
+    }
+
+    function getRoomStreamByInviteToken($inviteToken, $resumeClosed)
+    {
+        $invite = Streams_Invite::fromToken($inviteToken, true);
+       
+        if ($invite) {
+            $stream = Streams_Stream::fetch(Users::loggedInUser(true)->id, $invite->publisherId, $invite->streamName, true);
+    
+            return $stream;
+        } else {
+            throw new Exception("Such invite token doesn't exist");
+        }
+    }
+
+    function getRoomStreamRelatedTo($toPublisherId, $toStreamName, $fromPublisherId, $fromStreamName, $type, $resumeClosed) {
+        if (empty($toPublisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
 
-        $lastRelated = Streams_RelatedTo::select()->where(array(
-            "toPublisherId" => $publisherId,
-            "toStreamName" => $streamName,
+        $fields = array(
+            "toPublisherId" => $toPublisherId,
+            "toStreamName" => $toStreamName,
             "type" => $type
-        ))->orderBy("weight", false)->limit(1)->fetchDbRow();
+        );
+
+        if(!is_null($fromPublisherId)) {
+            $fields['fromPublisherId'] = $fromPublisherId;
+        }
+        if(!is_null($fromStreamName)) {
+            $fields['fromStreamName'] = $fromStreamName;
+        }
+        
+        $lastRelated = Streams_RelatedTo::select()->where($fields)->orderBy("weight", false)->limit(1)->fetchDbRow();
 
         if ($lastRelated) {
             $webrtcStream = Streams_Stream::fetch(null, $lastRelated->fields['fromPublisherId'], $lastRelated->fields['fromStreamName']);

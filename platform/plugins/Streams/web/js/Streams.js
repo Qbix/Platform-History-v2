@@ -628,6 +628,7 @@ Q.Tool.define({
 	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/preview/call.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/webrtc/participants"  : "{{Streams}}/js/tools/webrtc/participants.js",
+	"Streams/webrtc/waitingRoomList"  : "{{Streams}}/js/tools/webrtc/waitingRoomList.js",
 	"Streams/webrtc/video"  : "{{Streams}}/js/tools/webrtc/video.js",
 	"Streams/webrtc/audio"  : "{{Streams}}/js/tools/webrtc/audio.js",
 	"Streams/webrtc/livestreaming"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
@@ -637,6 +638,7 @@ Q.Tool.define({
 	"Streams/webrtc/livestream"  : "{{Streams}}/js/tools/webrtc/livestream.js",
 	"Streams/webrtc/callCenter/manager"  : "{{Streams}}/js/tools/webrtc/callCenter/manager.js",
 	"Streams/webrtc/callCenter/client"  : "{{Streams}}/js/tools/webrtc/callCenter/client.js",
+	"Streams/webrtc/popupDialog"  : "{{Streams}}/js/tools/webrtc/popupDialog.js",
 	"Streams/fileManager"  : "{{Streams}}/js/tools/fileManager.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
@@ -1992,8 +1994,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				title: text.invite.labels.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.loggedInUserId(),
-					filter: 'Users/',
-					canGrant: 'New Relationship Type'
+					filter: 'Users/'
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,

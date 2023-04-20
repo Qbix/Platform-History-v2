@@ -41,10 +41,13 @@
         tool.participantsList = [];
 
         tool.webrtcUserInterface = options.webrtcUserInterface();
-        tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+        tool.webrtcSignalingLib = tool.webrtcUserInterface.getWebrtcSignalingLib();
+        tool.roomStream = tool.webrtcUserInterface.roomStream();
 
-        tool.createList();
-        tool.declareEventsHandlers();
+        tool.loadStyles().then(function ()  {
+            tool.createList();
+            tool.declareEventsHandlers();
+        })
 
     },
 
@@ -55,6 +58,13 @@
         },
 
         {
+            loadStyles: function () {
+                return new Promise(function (resolve, reject) {
+                    Q.addStylesheet('{{Streams}}/css/tools/webrtcParticipants.css?ts=' + Date.now(), function () {
+                        resolve();
+                    });
+                });
+            },
             refresh: function () {
                 var tool = this;
                 tool.refreshList();
@@ -169,8 +179,26 @@
                 var localParticipant = tool.webrtcSignalingLib.localParticipant();
                 var roomParticipants = tool.webrtcSignalingLib.roomParticipants();
 
+                if (tool.roomStream.testAdminLevel('manage')) {
+                    var waitingRoomsListCon = document.createElement('DIV');
+                    waitingRoomsListCon.className = 'Streams_webrtc_waiting-participants-list';
+                    console.log('tool.element', tool.element)
+                    tool.element.appendChild(waitingRoomsListCon);
+
+                    Q.activate(
+                        Q.Tool.setUpElement(waitingRoomsListCon, 'Streams/webrtc/waitingRoomList', {
+                            webrtcUserInterface: tool.state.webrtcUserInterface,
+                        }),
+                        {},
+                        function () {
+
+                        }
+                    );
+                }
+
                 tool.participantListEl = document.createElement('UL');
                 tool.participantListEl.className = 'Streams_webrtc_participants-list';
+                tool.element.appendChild(tool.participantListEl);
                 tool.addItem(localParticipant);
                 roomParticipants = tool.webrtcSignalingLib.roomParticipants();
                 for (var i in roomParticipants) {
@@ -178,7 +206,28 @@
                     tool.addItem(roomParticipants[i]);
                 }
 
-                tool.element.appendChild(tool.participantListEl);
+                
+                var inviteBtnCon = document.createElement('DIV');
+                inviteBtnCon.className = 'Streams_webrtc_participants-invite-con';
+                tool.element.appendChild(inviteBtnCon);
+
+                var inviteBtn = document.createElement('DIV');
+                inviteBtn.className = 'Streams_webrtc_participants-invite-btn';
+                inviteBtnCon.appendChild(inviteBtn);
+                var inviteBtnIcon = document.createElement('DIV');
+                inviteBtnIcon.className = 'Streams_webrtc_participants-invite-icon';
+                inviteBtnIcon.innerHTML = _controlsToolIcons.plusIcon;
+                inviteBtn.appendChild(inviteBtnIcon);
+                var inviteBtnText = document.createElement('DIV');
+                inviteBtnText.className = 'Streams_webrtc_participants-invite-text';
+                inviteBtnText.innerHTML = 'Invite';
+                inviteBtn.appendChild(inviteBtnText);
+
+                inviteBtn.addEventListener('click', function () {
+                    Q.Streams.invite(tool.roomStream.fields.publisherId, tool.roomStream.fields.name, {
+                        appUrl: Q.url("meeting"),
+                    });
+                });
             },
             refreshList: function () {
                 var tool = this;
@@ -512,27 +561,40 @@
                 log('controls: addItem');
                 var isLocal = roomParticipant.isLocal;
                 var participantItem = document.createElement('LI');
+                tool.participantListEl.appendChild(participantItem);
+                
                 var tracksControlBtns = document.createElement('DIV');
                 tracksControlBtns.className = 'Streams_webrtc_tracks-control';
+                participantItem.appendChild(tracksControlBtns);
+
                 var muteVideo = document.createElement('DIV');
                 muteVideo.className = 'Streams_webrtc_mute-video-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
+                if (!tool.webrtcUserInterface.getOptions().audioOnlyMode) tracksControlBtns.appendChild(muteVideo);
+
                 var muteCameraBtn = document.createElement('DIV');
                 muteCameraBtn.className = 'Streams_webrtc_mute-camera-btn';
                 muteCameraBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffCamera", tool.text);
                 muteCameraBtn.innerHTML = _controlsToolIcons.cameraTransparent;
+                muteVideo.appendChild(muteCameraBtn);
 
                 var muteScreenSharingBtn = document.createElement('DIV');
                 muteScreenSharingBtn.className = 'Streams_webrtc_mute-screensharing-btn';
                 muteScreenSharingBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffScreenSharing", tool.text);
                 muteScreenSharingBtn.innerHTML = _participantsToolIcons.disabledScreen;
+                muteVideo.appendChild(muteScreenSharingBtn);
 
                 var muteAudioBtn = document.createElement('DIV');
                 muteAudioBtn.className = 'Streams_webrtc_mute-audio-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
                 muteAudioBtn.dataset.touchlabel = isLocal ? (tool.webrtcSignalingLib.localMediaControls.micIsEnabled() ? Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text) : Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.text)) : Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.text);
                 muteAudioBtn.innerHTML = isLocal ? (tool.webrtcSignalingLib.localMediaControls.micIsEnabled() ? _controlsToolIcons.microphoneTransparent : _participantsToolIcons.locDisabledMic) : _participantsToolIcons.loudSpeaker;
+                tracksControlBtns.appendChild(muteAudioBtn);
+
                 var participantIdentity = document.createElement('DIV');
                 participantIdentity.className = 'Streams_webrtc_participants-identity';
+                participantItem.appendChild(participantIdentity);
+
                 var participantIdentityIcon = document.createElement('DIV');
+                participantIdentity.appendChild(participantIdentityIcon);
                 var userId = roomParticipant.identity != null ? roomParticipant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
                 Q.activate(
                     Q.Tool.setUpElement(
@@ -548,15 +610,17 @@
                 //participantIdentityText.innerHTML = isLocal ? roomParticipant.identity + ' <span style="font-weight: normal;font-style: italic;">(me)</span>' : roomParticipant.identity;
                 var liveStatus = document.createElement('DIV');
                 liveStatus.className = 'Streams_webrtc_participants-live-status';
+                participantIdentity.appendChild(liveStatus);
                 if (roomParticipant.fbLiveStreamingActive) liveStatus.classList.add('isRecording');
 
                 //container for icons when some user requests camera/mic
                 var requestStatus = document.createElement('DIV');
                 requestStatus.className = 'Streams_webrtc_participants-requests-status';
-
+                participantIdentity.appendChild(requestStatus);
                 //liveStatus.innerHTML = _controlsToolIcons.facebookLive;
 
                 var participantIdentityText = document.createElement('DIV');
+                participantIdentity.appendChild(participantIdentityText);
                 //fullName.innerHTML = roomParticipant.userName;
                 Q.activate(
                     Q.Tool.setUpElement(
@@ -571,6 +635,15 @@
 
                 var audioVisualization = document.createElement('DIV')
                 audioVisualization.className = 'Streams_webrtc_popup-visualization';
+                participantIdentity.appendChild(audioVisualization);
+
+                if (tool.roomStream.testAdminLevel('max') && !roomParticipant.isLocal) {
+                    var participantsMenu = document.createElement('DIV');
+                    participantsMenu.className = 'Streams_webrtc_participants-menu';
+                    participantsMenu.innerHTML = _controlsToolIcons.dots;
+                    participantsMenu.dataset.touchlabel = 'More';
+                    participantItem.appendChild(participantsMenu);
+                }
 
                 /*tool.webrtcSignalingLib.mediaManager.audioVisualization.build({
                     name: 'participantsPopup',
@@ -578,21 +651,6 @@
                     element: audioVisualization,
                     updateSizeOnlyOnce: true
                 });*/
-
-                participantItem.appendChild(tracksControlBtns);
-                muteVideo.appendChild(muteCameraBtn);
-                muteVideo.appendChild(muteScreenSharingBtn);
-                if (!tool.webrtcUserInterface.getOptions().audioOnlyMode) tracksControlBtns.appendChild(muteVideo);
-                tracksControlBtns.appendChild(muteAudioBtn);
-                participantItem.appendChild(tracksControlBtns);
-                participantIdentity.appendChild(audioVisualization);
-                participantIdentity.appendChild(participantIdentityIcon);
-                participantIdentity.appendChild(liveStatus);
-                participantIdentity.appendChild(requestStatus);
-                participantIdentity.appendChild(participantIdentityText);
-                participantItem.appendChild(participantIdentity);
-
-                tool.participantListEl.appendChild(participantItem);
 
                 var listItem = new ListItem();
                 listItem.participant = roomParticipant;
@@ -614,6 +672,64 @@
                 muteScreenSharingBtn.addEventListener('click', function (e) {
                     listItem.toggleScreenSharingScreen();
                 });
+
+                if(participantsMenu) {
+                    let optionsMenu = createMoreOptionsPopup();
+
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            participantsMenu,
+                            "Streams/webrtc/popupDialog",
+                            {
+                                content: optionsMenu,
+                                className: 'participants-popup-more-options',
+                                triggerOn: 'click'
+                            }
+                        ),
+                        {},
+                        function () {
+                            listItem.moreOptionsPopup = this;
+                        }
+                    );    
+                }
+                
+                function createMoreOptionsPopup() {
+                    var optionsMenuCon = document.createElement('DIV');
+                    optionsMenuCon.className = 'Streams_webrtc_participants-options';
+                    var optionsMenuInner = document.createElement('UL');
+                    optionsMenuInner.className = 'Streams_webrtc_participants-options-inner';
+                    optionsMenuCon.append(optionsMenuInner);
+
+                    var moveToWaitingRoom = document.createElement('LI');
+                    moveToWaitingRoom.className = 'Streams_webrtc_participants-options-waiting';
+                    moveToWaitingRoom.innerHTML = 'Put in waiting room';
+                    optionsMenuCon.append(moveToWaitingRoom);
+
+                    moveToWaitingRoom.addEventListener('click', function () {
+                        var userId = roomParticipant.identity != null ? roomParticipant.identity.split('\t')[0] : null;
+
+                        Q.req("Streams/webrtc", ["cancelAccessToRoom"], function (err, response) {
+                            var msg = Q.firstErrorMessage(err, response && response.errors);
+        
+                            if (msg) {
+                                return Q.alert(msg);
+                            }
+                            var socket = tool.webrtcSignalingLib.socketConnection();
+                            socket.emit('Streams/webrtc/putInWaitingRoom', { userId: userId })
+                        }, {
+                            method: 'post',
+                            fields: {
+                                publisherId: tool.roomStream.fields.publisherId,
+                                streamName: tool.roomStream.fields.name,
+                                userId: userId
+                            }
+                        });
+
+                        listItem.moreOptionsPopup.hide();
+                    });
+                    
+                    return optionsMenuCon;
+                }
 
             },
             /**

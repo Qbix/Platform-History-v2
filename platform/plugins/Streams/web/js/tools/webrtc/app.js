@@ -2714,6 +2714,10 @@ window.WebRTCRoomClient = function app(options){
             log("participantDisconnected: is online - " + participant.online);
             if(participant.online == false) return;
 
+            for(let i in participant.tracks) {
+                participant.tracks[i].mediaStreamTrack.stop();
+            }
+
             //participant.remove();
             if(participant.soundMeter.updateAudioDataInterval) {
                 window.clearWorkerInterval(participant.soundMeter.updateAudioDataInterval);
@@ -2925,12 +2929,15 @@ window.WebRTCRoomClient = function app(options){
 
                 log('participantDisconnected', existingParticipant);
 
-                if(existingParticipant != null) {
+                if(existingParticipant != null && existingParticipant != localParticipant) {
                     if(existingParticipant.RTCPeerConnection != null) existingParticipant.RTCPeerConnection.close();
                     participantDisconnected(existingParticipant);
                 }
             });
 
+            socket.on('Streams/webrtc/leave', function (){
+                app.event.dispatch('forceLeave');
+            });
 
             socket.on('Streams/webrtc/signalling', function (message){
                 log('signalling message: ' + message.type)
@@ -4349,6 +4356,7 @@ window.WebRTCRoomClient = function app(options){
             log('socketRoomJoined', streams);
             app.state = 'connected';
 
+            log('socketRoomJoined: app', app);
             app.signalingDispatcher.socketEventManager();
             sendOnlineStatus();
             checkOnlineStatus();
@@ -5845,7 +5853,7 @@ window.WebRTCRoomClient = function app(options){
     }())
 
     var initOrConnectWithNodeJs = function (callback) {
-        log('initOrConnectWithNodeJs');
+        log('initOrConnectWithNodeJs', localParticipant);
         if(options.useCordovaPlugins && Q.info.isCordova && _isiOS) {
             initOrConnectWithNodeJsiOSCordova(callback);
             return;
@@ -6541,8 +6549,9 @@ window.WebRTCRoomClient = function app(options){
 
             //enableiOSDebug();
             log('initWithNodeJs: socket: connected: ' + socket.connected + ',  app.state: ' +  app.state);
-            log('initWithNodeJs: socket: localParticipant', localParticipant);
+            log('initWithNodeJs: socket: localParticipant', localParticipant, oldLocalParticipant);
             if(localParticipant == null && oldLocalParticipant == null) {
+                log('initWithNodeJs: socket: if1');
                 localParticipant = new Participant();
                 localParticipant.sid = socket.id;
                 localParticipant.identity = options.username;
@@ -6783,9 +6792,9 @@ window.WebRTCRoomClient = function app(options){
 
         app.mediaManager.audioVisualization.stopAllVisualizations(switchRoom);
 
-        for(let t in localParticipant.notForUsingTracks) {
+        /*for(let t in localParticipant.notForUsingTracks) {
             localParticipant.notForUsingTracks[t].stop();
-        }
+        }*/
 
         for(let p = roomParticipants.length - 1; p >= 0; p--){
 

@@ -15,6 +15,7 @@ var Users = Q.Users;
  * @param {Object} [options] options for the tool
  *   @param {String} options.communityId Id of community where to need to invite user
  *   @param {String} [options.prefix="Users/"] Pass any prefix here, to filter labels by this prefix
+ *  @param {Array} [options.exclude] - exclude these labels
  *  @param {Q.Event} [options.followup=true] this option for Streams.invite
  *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
  *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Is passed (element, label, title, wasSelected). Handlers may return false to cancel the default behavior of toggling the label.
@@ -28,15 +29,12 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 		throw new Q.Exception('communityId not defined');
 	}
 
-	Q.Text.get('Users/content', function (err, text) {
-		tool.text = text.usersContacts;
-
-		tool.refresh();
-	});
+	tool.refresh();
 },
 
 {
 	prefix: 'Users/',
+	exclude: null,
 	communityId: null,
 	canGrant: true,
 	followup: true,
@@ -54,26 +52,22 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 		var tool = this;
 		var state = this.state;
 		tool.element.addClass('Q_loading');
-		var all = state.all;
-		if (typeof all === 'string') {
-			all = {
-				title: all,
-				icon: Q.url("{{Users}}/img/icons/labels/all/40.png")
-			};
-		}
-
 		var selectedLabel = null;
 
 		Q.Users.getLabels(state.communityId, state.prefix, function (err, labels) {
+			// exclude labels if state.exclude not empty
+			Q.each(state.exclude, function (i, label) {
+				delete(labels[label]);
+			})
+
 			Q.Template.render("Users/contacts", {
 				labels: labels,
-				all: all,
 				canGrant: state.canGrant,
-				canGrantText: tool.text.inviteUser,
+				canGrantText: tool.text.usersContacts.inviteUser,
 				canGrantIcon: Q.url('{{Q}}/img/actions/add.png')
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
-				Q.replace(tool.element, html);;
+				Q.replace(tool.element, html);
 				var labelTitle = null;
 
 				$('.Users_labels_label', tool.element).on(Q.Pointer.fastclick, function () {
@@ -88,9 +82,9 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
 				});
 
-				$('.Users_labels_add button', tool.element).on(Q.Pointer.fastclick, function () {
+				$('button', tool.element).plugin("Q/clickable").on(Q.Pointer.fastclick, function () {
 					if(!selectedLabel) {
-						return Q.alert(tool.text.selectLabel);
+						return Q.alert(tool.text.usersContacts.selectLabel);
 					}
 
 					Q.Dialogs.pop();
@@ -100,7 +94,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 						followup: state.followup,
 						alwaysSend: true,
 						userChooser: true,
-						title: tool.text.inviteRole.interpolate({role: labelTitle})
+						title: tool.text.usersContacts.inviteRole.interpolate({role: labelTitle})
 					}, function (err, info) {
 						var msg = Q.firstErrorMessage(err);
 						if (msg) {
@@ -120,25 +114,17 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 
 );
 
-Q.Template.set('Users/contacts', ''
-+ '<ul>'
-+ '{{#if all}}'
-+ '<li class="Users_labels_label" data-label="*">'
-+   '<img class="Users_labels_icon" src="{{all.icon}}" alt="all">'
-+   '<div class="Users_labels_title">{{all.title}}</div>'
-+ '</li>'
-+ '{{/if}}'
-+ '{{#each labels}}'
-+ '<li class="Users_labels_label" data-label="{{this.label}}">'
-+   '<img class="Users_labels_icon" src="{{call "iconUrl"}}" alt="label icon">'
-+   '<div class="Users_labels_title">{{this.title}}</div>'
-+ '</li>'
-+ '{{/each}}'
-+ '{{#if canGrant}}'
-+ '<li class="Users_labels_action Users_labels_add Q/clickable">'
-+   '<button class="Q_button">{{canGrantText}}</button>'
-+ '</li>'
-+ '{{/if}}'
-+ '<ul>');
+Q.Template.set('Users/contacts',
+`<ul>
+	{{#each labels}}
+		<li class="Users_labels_label" data-label="{{this.label}}">
+			<img class="Users_labels_icon" src="{{call "iconUrl" 80}}" alt="label icon">
+			<div class="Users_labels_title">{{this.title}}</div>
+		</li>
+	{{/each}}
+</ul>
+{{#if canGrant}}
+	<button class="Q_button">{{canGrantText}}</button>
+{{/if}}`);
 
 })(Q, Q.$, window);
