@@ -560,7 +560,7 @@
                         }, {
                             fields: {
                                 userId: Q.Users.loggedInUserId(),
-                                labels: 'Users/'
+                                filter: 'Users/'
                             },
                             method: 'post'
                         });
