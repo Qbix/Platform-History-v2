@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Η πληρωμή σας είναι υπό επεξεργασία",
         "FailTryAgain": "Η πληρωμή σας δεν ήταν επιτυχής, δοκιμάστε ξανά",
         "SomethingWrong": "Κάτι πήγε στραβά",
-        "PaymentStatus": "Κατάσταση πληρωμής"
+        "PaymentStatus": "Κατάσταση πληρωμής",
+        "PayTo": "Πληρώστε {{displayName}}",
+        "ChooseCurrency": "Επιλέξτε ένα νόμισμα",
+        "YouCanSendUpTo": "Μπορείτε να στείλετε έως {{amount}} {{symbol}}",
+        "Send": "Στείλετε",
+        "EnterAmount": "Εισάγετε το ποσό"
     },
     "credits": {
         "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} πιστώσεις",
             "BonusCredits": "{{amount}} πιστώσεις"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} γεμάτο {{FilledStreamTitle}}",
+        "ForFillingStream": "Για πλήρωση {{FilledStreamTitle}}",
+        "CreatePrivateChat": "για ιδιωτική συνομιλία με {{toUserName}}"
     },
     "history": {
         "Date": "Ημερομηνία",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Κέρδισε {{amount}} πιστώσεις",
         "Places_user_location": "Κέρδισε {{amount}} πιστώσεις",
         "Streams_greeting": "Κέρδισε {{amount}} πιστώσεις",
-        "YouHaveCreditsToStart": "Κέρδισε {{amount}} πιστώσεις"
+        "YouHaveCreditsToStart": "Κέρδισε {{amount}} πιστώσεις",
+        "User": "Χρήστης"
     },
     "subscriptions": {
         "infoTitle": "Ορισμός πληροφοριών πληρωμής",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ορίστε τον σύνδεσμο πρόσθετων πληροφοριών",
             "DescriptionPlaceholder": "Περιγραφή υπηρεσίας",
             "SaveService": "Αποθήκευση υπηρεσίας",
-            "SelectRequiredParticipants": "Απαιτούμενοι Συμμετέχοντες"
+            "SelectRequiredParticipants": "Απαιτούμενοι Συμμετέχοντες",
+            "RequiredParticipantsDesc": "Παρακαλούμε επιλέξτε τους σχετικούς συμμετέχοντες που απαιτούνται για τη χρήση αυτής της υπηρεσίας (για παράδειγμα κατοικίδια για &quot;Συλίσια παράσταση&quot; ή παιδιά για &quot;Παιδικές διακοπές&quot; κ.λπ.). Εάν η υπηρεσία πληρώνεται, ο χρήστης θα πρέπει να πληρώσει επίσης για κάθε συνδεδεμένο συμμετέχοντα."
         },
         "ManageServiceTemplates": "Διαχείριση προτύπων υπηρεσιών",
         "ManageServices": "Διαχείριση Υπηρεσιών",
@@ -387,6 +397,132 @@
             "Description": "Στοιχεία χρήστη",
             "aboutPlaceholder": "Επεξεργασία βιογραφικού",
             "SureLogOut": "Είστε βέβαιοι ότι θέλετε να αποσυνδεθείτε;"
+        },
+        "Add": "Προσθήκη",
+        "Remove": "Αφαιρώ",
+        "NoNFTyet": "Δεν υπάρχουν ακόμη NFT",
+        "Claim": "Απαίτηση",
+        "ClaimNFT": "Αξίωση NFT",
+        "Unlocking": "Ξεκλείδωμα",
+        "Unlock": "Ξεκλείδωμα",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Σύμβαση NFTC",
+                        "seriesId": "σειρά ID",
+                        "owner": "Ιδιοκτήτης",
+                        "currency": "Νόμισμα",
+                        "price": "Τιμή",
+                        "beneficiary": "Δικαιούχος",
+                        "autoindex": "Αυτόματος ευρετήριο",
+                        "duration": "Διάρκεια",
+                        "rateInterval": "Χρονικό διάστημα",
+                        "rateAmount": "Βαθμολογήστε το ποσό"
+                    },
+                    "small": {
+                        "NFTContract": "Σύμβαση NFTC",
+                        "seriesId": "μάρκες θα κόβονται σε αυτή τη σειρά",
+                        "owner": "κάτοχος του παραδείγματος, διαφορετικά θα γίνει αποστολέας",
+                        "currency": "Νόμισμα για αγορασμένα μάρκες, εάν είναι μηδέν - για εγγενή νομίσματα",
+                        "price": "Τιμή",
+                        "beneficiary": "Δικαιούχος πώλησης μάρκες, διαφορετικά θα είναι ο αποστολέας",
+                        "autoindex": "Αυτόματος ευρετήριο",
+                        "duration": "Κλείδωμα μετά την κοπή. Μηδέν σημαίνει να το αποκτήσεις αμέσως.",
+                        "rateInterval": "διάστημα κάδου για ειδική αγορά",
+                        "rateAmount": "ποσό κουβά για ειδική αγορά"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(προαιρετικός)",
+                    "number": "αριθμός",
+                    "address": "διεύθυνση",
+                    "fraction": "κλάσμα",
+                    "integer": "ακέραιος αριθμός",
+                    "seconds": "δευτερόλεπτα",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Παράγω",
+                "viewInstancesList": "Ανανέωση λίστας"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Αναγνωριστικό σειράς",
+                        "account": "λογαριασμός",
+                        "amount": "Ποσό"
+                    },
+                    "small": {
+                        "seriesId": "το νέο διακριτικό θα ανήκει σε σειρά με τέτοιο αναγνωριστικό",
+                        "account": "ιδιοκτήτης του νεοσύστατου NFT. εάν δεν έχει οριστεί - θα χρησιμοποιήσει το τρέχον πορτοφόλι",
+                        "amount": "ποσότητα NFT σε μέντα"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(προαιρετικός)",
+                    "seriesId": "ταυτότητα",
+                    "account": "λογαριασμός",
+                    "amount": "ποσό",
+                    "integer": "ακέραιος αριθμός"
+                },
+                "btn": {
+                    "Purchase": "Αγορά",
+                    "SpecialPurchase": "Ειδική αγορά"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Διεύθυνση"
+                    },
+                    "small": {
+                        "account": "Διεύθυνση"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Μη έγκυρη διεύθυνση"
+                },
+                "placeholders": {
+                    "account": "Διεύθυνση"
+                },
+                "addToWhitelist": "Προσθήκη στη λίστα επιτρεπόμενων",
+                "removeFromWhitelist": "Αφαίρεση από τη λίστα επιτρεπόμενων"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token ID",
+                    "custodian": "Φύλακας",
+                    "recipient": "Παραλήπτης"
+                },
+                "small": {
+                    "tokenId": "αναγνωριστικό διακριτικού τι πρέπει να κλειδώσετε ή να ξεκλειδώσετε",
+                    "custodian": "διεύθυνση που μπορεί να ξεκλειδώσει",
+                    "recipient": "διεύθυνση που θα λάβει τα διακριτικά"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Μη έγκυρο αναγνωριστικό διακριτικού",
+                "invalidCustodian": "Μη έγκυρος θεματοφύλακας",
+                "invalidRecipient": "Μη έγκυρος παραλήπτης"
+            },
+            "placeholders": {
+                "optional": "(προαιρετικός)",
+                "tokenId": "ταυτότητα",
+                "custodian": "διεύθυνση"
+            },
+            "Lock": "Κλειδαριά",
+            "Unlock": "Ξεκλείδωμα",
+            "Locked": "Κλειδωμένο",
+            "CustodianAddress": "Διεύθυνση θεματοφύλακα",
+            "TokenWasClaimed": "Το διακριτικό &quot;{{title}}&quot; διεκδικήθηκε",
+            "TokenWasLocked": "Το διακριτικό &quot;{{title}}&quot; κλειδώθηκε",
+            "TokenWasUnlocked": "Το διακριτικό &quot;{{title}}&quot; ξεκλειδώθηκε"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Χρειάζεστε MetaMask συνδεδεμένο για να εργαστείτε με την εφαρμογή",
         "UserNotLoggedInMetaMask": "Ο χρήστης δεν είναι συνδεδεμένος στο MetaMask",
         "CurrencyNotFound": "Το νόμισμα δεν βρέθηκε",
-        "WrongChain": "Αυτό το NFT δημιουργήθηκε στο &quot;{{chain}}&quot;. Χρησιμοποιήστε αυτήν την αλυσίδα."
+        "WrongChain": "Αυτό το NFT δημιουργήθηκε στο &quot;{{chain}}&quot;. Χρησιμοποιήστε αυτήν την αλυσίδα.",
+        "AmountInvalid": "Μη έγκυρο ποσό!",
+        "NoRecipientSelected": "Δεν έχει επιλεγεί παραλήπτης",
+        "NotEnoughPermissionsWallet": "Δεν υπάρχουν αρκετά δικαιώματα για την ανάγνωση του πορτοφολιού αυτού του χρήστη",
+        "ThisUserHaveNoWallet": "Σε αυτόν τον χρήστη δεν έχει εκχωρηθεί πορτοφόλι",
+        "TheWalletOfThisUserInvalid": "Το πορτοφόλι αυτού του χρήστη δεν είναι έγκυρο",
+        "WalletInvalid": "Μη έγκυρη διεύθυνση πορτοφολιού"
     },
     "admin": {
         "Title": "Περιουσιακά στοιχεία διοικητικά",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Οι ελάχιστες πιστώσεις δεν μπορούν να είναι αρνητικές",
             "CreditsToAddNegative": "Οι πιστώσεις προς προσθήκη δεν μπορούν να είναι αρνητικές"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Επιλέξτε παραλήπτη",
+        "TransactionSuccess": "Επιτυχία συναλλαγής",
+        "OrTypeWalletAddress": "Ή πληκτρολογήστε διεύθυνση πορτοφολιού παραλήπτη"
+    },
+    "currencies": {
+        "choose": "Επιλέξτε ένα νόμισμα"
     }
 }

@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Maksuasi käsitellään",
         "FailTryAgain": "Maksusi ei onnistunut, yritä uudelleen",
         "SomethingWrong": "Jotain meni pieleen",
-        "PaymentStatus": "Maksun tilanne"
+        "PaymentStatus": "Maksun tilanne",
+        "PayTo": "Maksa {{displayName}}",
+        "ChooseCurrency": "Valitse valuutta",
+        "YouCanSendUpTo": "Voit lähettää enintään {{amount}} {{symbol}}",
+        "Send": "Lähettää",
+        "EnterAmount": "Syötä summa"
     },
     "credits": {
         "InviteAcceptedBy": "Kutsun hyväksyi {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} luottoa",
             "BonusCredits": "{{amount}} luottoa"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} täynnä {{FilledStreamTitle}}",
+        "ForFillingStream": "Täyttämiseen {{FilledStreamTitle}}",
+        "CreatePrivateChat": "yksityiseen keskusteluun henkilön {{toUserName}} kanssa"
     },
     "history": {
         "Date": "Päivämäärä",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Ansaittu {{amount}} krediittiä",
         "Places_user_location": "Ansaittu {{amount}} krediittiä",
         "Streams_greeting": "Ansaittu {{amount}} krediittiä",
-        "YouHaveCreditsToStart": "Ansaittu {{amount}} krediittiä"
+        "YouHaveCreditsToStart": "Ansaittu {{amount}} krediittiä",
+        "User": "Käyttäjä"
     },
     "subscriptions": {
         "infoTitle": "Aseta maksutiedot",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "aseta lisätietolinkki",
             "DescriptionPlaceholder": "Palvelun kuvaus",
             "SaveService": "Tallenna palvelu",
-            "SelectRequiredParticipants": "Pakolliset osallistujat"
+            "SelectRequiredParticipants": "Pakolliset osallistujat",
+            "RequiredParticipantsDesc": "Valitse asiaan liittyvät osallistujat, jotka tarvitaan tämän palvelun käyttöön (esimerkiksi lemmikit &quot;Koiranäyttelyyn&quot; tai lapset &quot;Lasten lomalle&quot; jne.). Jos palvelu on maksullinen, käyttäjän tulee maksaa myös jokaisesta asiaan liittyvästä osallistujasta."
         },
         "ManageServiceTemplates": "Hallinnoi palvelumalleja",
         "ManageServices": "Hallinnoi palveluita",
@@ -387,6 +397,132 @@
             "Description": "Käyttäjätiedot",
             "aboutPlaceholder": "Muokkaa Bioa",
             "SureLogOut": "Haluatko varmasti kirjautua ulos?"
+        },
+        "Add": "Lisätä",
+        "Remove": "Poista",
+        "NoNFTyet": "Ei vielä NFT:tä",
+        "Claim": "Väite",
+        "ClaimNFT": "Lunasta NFT",
+        "Unlocking": "Avataan",
+        "Unlock": "Avata",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT-sopimus",
+                        "seriesId": "sarjan tunnus",
+                        "owner": "Omistaja",
+                        "currency": "Valuutta",
+                        "price": "Hinta",
+                        "beneficiary": "Edunsaaja",
+                        "autoindex": "Automaattinen indeksi",
+                        "duration": "Kesto",
+                        "rateInterval": "Hintaväli",
+                        "rateAmount": "Arvioi summa"
+                    },
+                    "small": {
+                        "NFTContract": "NFT-sopimus",
+                        "seriesId": "rahakkeita lyödään tässä sarjassa",
+                        "owner": "esimerkin omistaja, muuten lähettäjä",
+                        "currency": "Ostettujen rahakkeiden valuutta, jos nolla - alkuperäisten kolikoiden valuutta",
+                        "price": "Hinta",
+                        "beneficiary": "Tokenien myynnin edunsaaja, muuten lähettäjä",
+                        "autoindex": "Automaattinen indeksi",
+                        "duration": "Lukko lyönnin jälkeen. Nolla tarkoittaa, että hanki se heti.",
+                        "rateInterval": "kauhaväli erikoisostoa varten",
+                        "rateAmount": "ämpärimäärä erikoisostoa varten"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(valinnainen)",
+                    "number": "määrä",
+                    "address": "osoite",
+                    "fraction": "murto-osa",
+                    "integer": "kokonaisluku",
+                    "seconds": "sekuntia",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Tuottaa",
+                "viewInstancesList": "Päivitä lista"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Sarjan tunnus",
+                        "account": "Tili",
+                        "amount": "Määrä"
+                    },
+                    "small": {
+                        "seriesId": "uusi tunnus kuuluu sarjaan tällaisen tunnuksen kanssa",
+                        "account": "vasta perustetun NFT:n omistaja. jos ei asetettu - käyttää nykyistä lompakkoa",
+                        "amount": "määrä NFT:tä minttuun"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(valinnainen)",
+                    "seriesId": "id",
+                    "account": "tili",
+                    "amount": "määrä",
+                    "integer": "kokonaisluku"
+                },
+                "btn": {
+                    "Purchase": "Ostaa",
+                    "SpecialPurchase": "Erikoisostos"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Osoite"
+                    },
+                    "small": {
+                        "account": "Osoite"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Väärä osoite"
+                },
+                "placeholders": {
+                    "account": "Osoite"
+                },
+                "addToWhitelist": "Lisää valkoiselle listalle",
+                "removeFromWhitelist": "Poista sallittujen listalta"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token ID",
+                    "custodian": "Säilyttäjä",
+                    "recipient": "Vastaanottaja"
+                },
+                "small": {
+                    "tokenId": "tunnus, joka on lukittava tai avattava",
+                    "custodian": "osoite, jonka lukitus voidaan avata",
+                    "recipient": "osoite, joka vastaanottaa tunnukset"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Virheellinen tokenId",
+                "invalidCustodian": "Virheellinen säilyttäjä",
+                "invalidRecipient": "Virheellinen vastaanottaja"
+            },
+            "placeholders": {
+                "optional": "(valinnainen)",
+                "tokenId": "id",
+                "custodian": "osoite"
+            },
+            "Lock": "Lukko",
+            "Unlock": "Avata",
+            "Locked": "Lukittu",
+            "CustodianAddress": "Säilyttäjän osoite",
+            "TokenWasClaimed": "Tunnus &quot;{{title}}&quot; on lunastettu",
+            "TokenWasLocked": "Tunnus &quot;{{title}}&quot; lukittiin",
+            "TokenWasUnlocked": "Tunnus &quot;{{title}}&quot; avattiin"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Tarvitset MetaMaskiin yhdistetyn työskentelyn sovelluksen kanssa",
         "UserNotLoggedInMetaMask": "Käyttäjä ei ole kirjautunut MetaMaskiin",
         "CurrencyNotFound": "Valuuttaa ei löydy",
-        "WrongChain": "Tämä NFT luotiin nimellä &quot;{{chain}}&quot;. Käytä tätä ketjua."
+        "WrongChain": "Tämä NFT luotiin nimellä &quot;{{chain}}&quot;. Käytä tätä ketjua.",
+        "AmountInvalid": "Summa virheellinen!",
+        "NoRecipientSelected": "Vastaanottajaa ei ole valittu",
+        "NotEnoughPermissionsWallet": "Ei tarpeeksi oikeuksia tämän käyttäjän lompakon lukemiseen",
+        "ThisUserHaveNoWallet": "Tälle käyttäjälle ei ole määritetty lompakkoa",
+        "TheWalletOfThisUserInvalid": "Tämän käyttäjän lompakko on virheellinen",
+        "WalletInvalid": "Lompakon osoite on virheellinen"
     },
     "admin": {
         "Title": "Omaisuuden hallinto",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Krediittien vähimmäismäärä ei voi olla negatiivinen",
             "CreditsToAddNegative": "Lisättävät krediitit eivät voi olla negatiivisia"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Valitse vastaanottaja",
+        "TransactionSuccess": "Kaupan onnistuminen",
+        "OrTypeWalletAddress": "TAI kirjoita vastaanottajan lompakon osoite"
+    },
+    "currencies": {
+        "choose": "Valitse valuutta"
     }
 }

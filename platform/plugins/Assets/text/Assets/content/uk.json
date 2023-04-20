@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Ваш платіж обробляється",
         "FailTryAgain": "Ваш платіж не був успішним, спробуйте ще раз",
         "SomethingWrong": "Щось пішло не так",
-        "PaymentStatus": "Статус платежу"
+        "PaymentStatus": "Статус платежу",
+        "PayTo": "Сплатити {{displayName}}",
+        "ChooseCurrency": "Виберіть валюту",
+        "YouCanSendUpTo": "Ви можете надіслати до {{amount}} {{symbol}}",
+        "Send": "Надіслати",
+        "EnterAmount": "введіть суму"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} прийняв запрошення",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} кредитів",
             "BonusCredits": "{{amount}} кредитів"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} заповнено {{FilledStreamTitle}}",
+        "ForFillingStream": "Для наповнення {{FilledStreamTitle}}",
+        "CreatePrivateChat": "для приватного чату з {{toUserName}}"
     },
     "history": {
         "Date": "Дата",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Отримано {{amount}} кредитів",
         "Places_user_location": "Отримано {{amount}} кредитів",
         "Streams_greeting": "Отримано {{amount}} кредитів",
-        "YouHaveCreditsToStart": "Отримано {{amount}} кредитів"
+        "YouHaveCreditsToStart": "Отримано {{amount}} кредитів",
+        "User": "Користувач"
     },
     "subscriptions": {
         "infoTitle": "Встановити платіжну інформацію",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "встановити посилання на додаткову інформацію",
             "DescriptionPlaceholder": "Опис послуги",
             "SaveService": "Сервіс збереження",
-            "SelectRequiredParticipants": "Необхідні учасники"
+            "SelectRequiredParticipants": "Необхідні учасники",
+            "RequiredParticipantsDesc": "Будь ласка, виберіть пов’язаних учасників, які потрібні для користування цією послугою (наприклад, домашніх тварин для «Виставки собак», або дітей для «Дитячого свята» тощо). Якщо послуга є платною, користувачеві потрібно буде заплатити також за кожного пов’язаного учасника."
         },
         "ManageServiceTemplates": "Керування шаблонами служб",
         "ManageServices": "Керуйте службами",
@@ -387,6 +397,132 @@
             "Description": "Інформація про користувача",
             "aboutPlaceholder": "Редагувати біографію",
             "SureLogOut": "Ви впевнені, що бажаєте вийти?"
+        },
+        "Add": "додати",
+        "Remove": "видалити",
+        "NoNFTyet": "NFT ще немає",
+        "Claim": "Претензія",
+        "ClaimNFT": "Вимагайте NFT",
+        "Unlocking": "Розблокування",
+        "Unlock": "Розблокувати",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Контракт NFT",
+                        "seriesId": "серія Id",
+                        "owner": "Власник",
+                        "currency": "Валюта",
+                        "price": "Ціна",
+                        "beneficiary": "Бенефіціар",
+                        "autoindex": "Автоіндекс",
+                        "duration": "Тривалість",
+                        "rateInterval": "Інтервал курсу",
+                        "rateAmount": "Розмір ставки"
+                    },
+                    "small": {
+                        "NFTContract": "Контракт NFT",
+                        "seriesId": "жетони будуть карбуватися в цій серії",
+                        "owner": "власник екземпляра, інакше буде відправником",
+                        "currency": "Валюта для куплених токенів, якщо нуль - для нативних монет",
+                        "price": "Ціна",
+                        "beneficiary": "Бенефіціар продажу токенів, інакше буде відправником",
+                        "autoindex": "Автоіндекс",
+                        "duration": "Замок після карбування. Нуль означає отримати його негайно.",
+                        "rateInterval": "інтервал відра для спеціальної покупки",
+                        "rateAmount": "сума відра для спеціальної покупки"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(необов&#39;язково)",
+                    "number": "номер",
+                    "address": "адресу",
+                    "fraction": "дріб",
+                    "integer": "ціле число",
+                    "seconds": "секунд",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Виробляти",
+                "viewInstancesList": "Оновити список"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID серії",
+                        "account": "Обліковий запис",
+                        "amount": "Сума"
+                    },
+                    "small": {
+                        "seriesId": "новий маркер належатиме до серії з таким ідентифікатором",
+                        "account": "власник новоствореного NFT. якщо не встановлено - використовуватиме поточний гаманець",
+                        "amount": "кількість NFT для карбування"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(необов&#39;язково)",
+                    "seriesId": "id",
+                    "account": "рахунок",
+                    "amount": "сума",
+                    "integer": "ціле число"
+                },
+                "btn": {
+                    "Purchase": "Купівля",
+                    "SpecialPurchase": "Спеціальна покупка"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Адреса"
+                    },
+                    "small": {
+                        "account": "Адреса"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Недійсна адреса"
+                },
+                "placeholders": {
+                    "account": "Адреса"
+                },
+                "addToWhitelist": "Додати до білого списку",
+                "removeFromWhitelist": "Видалити з білого списку"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Ідентифікатор маркера",
+                    "custodian": "Зберігач",
+                    "recipient": "одержувач"
+                },
+                "small": {
+                    "tokenId": "ідентифікатор токена, що потрібно заблокувати або розблокувати",
+                    "custodian": "адресу, яку можна розблокувати",
+                    "recipient": "адресу, на яку будуть надходити токени"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Недійсний ідентифікатор маркера",
+                "invalidCustodian": "Недійсний зберігач",
+                "invalidRecipient": "Недійсний отримувач"
+            },
+            "placeholders": {
+                "optional": "(необов&#39;язково)",
+                "tokenId": "id",
+                "custodian": "адресу"
+            },
+            "Lock": "Замок",
+            "Unlock": "Розблокувати",
+            "Locked": "Заблоковано",
+            "CustodianAddress": "Адреса зберігача",
+            "TokenWasClaimed": "Маркер &quot;{{title}}&quot; був заявлений",
+            "TokenWasLocked": "Маркер &quot;{{title}}&quot; заблоковано",
+            "TokenWasUnlocked": "Маркер &quot;{{title}}&quot; розблоковано"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Для роботи з програмою потрібно підключити MetaMask",
         "UserNotLoggedInMetaMask": "Користувач не ввійшов у систему MetaMask",
         "CurrencyNotFound": "Валюта не знайдена",
-        "WrongChain": "Цей NFT створено під назвою &quot;{{chain}}&quot;. Будь ласка, використовуйте цей ланцюжок."
+        "WrongChain": "Цей NFT створено під назвою &quot;{{chain}}&quot;. Будь ласка, використовуйте цей ланцюжок.",
+        "AmountInvalid": "Сума недійсна!",
+        "NoRecipientSelected": "Не вибрано одержувача",
+        "NotEnoughPermissionsWallet": "Недостатньо прав для читання гаманця цього користувача",
+        "ThisUserHaveNoWallet": "Цьому користувачеві не призначено гаманця",
+        "TheWalletOfThisUserInvalid": "Гаманець цього користувача недійсний",
+        "WalletInvalid": "Недійсна адреса гаманця"
     },
     "admin": {
         "Title": "Активи адміністративні",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Мінімальна кількість кредитів не може бути від’ємною",
             "CreditsToAddNegative": "Кредити для додавання не можуть бути від’ємними"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Виберіть одержувача",
+        "TransactionSuccess": "Успіх транзакції",
+        "OrTypeWalletAddress": "АБО введіть адресу гаманця одержувача"
+    },
+    "currencies": {
+        "choose": "Виберіть валюту"
     }
 }

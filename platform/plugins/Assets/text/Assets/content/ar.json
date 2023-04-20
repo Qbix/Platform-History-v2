@@ -19,7 +19,12 @@
         "PaymentProcessing.": "دفعتك قيد المعالجة",
         "FailTryAgain": "لم تكن عملية الدفع الخاصة بك ناجحة ، يرجى المحاولة مرة أخرى",
         "SomethingWrong": "هناك خطأ ما",
-        "PaymentStatus": "حالة السداد"
+        "PaymentStatus": "حالة السداد",
+        "PayTo": "دفع {{displayName}}",
+        "ChooseCurrency": "اختر عملة",
+        "YouCanSendUpTo": "يمكنك إرسال ما يصل إلى {{amount}} {{symbol}}",
+        "Send": "يرسل",
+        "EnterAmount": "أدخل المبلغ"
     },
     "credits": {
         "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "أدخل {{invitedUserName}} الاسم الأخير",
         "Streams_user_icon": "تم إدخال {{invitedUserName}}",
         "Places_user_location": "دخل {{invitedUserName}} إلى الموقع",
-        "Streams_greeting": "{{invitedUserName}} تم إدخال التحية"
+        "Streams_greeting": "{{invitedUserName}} تم إدخال التحية",
+        "InvitedUserFilledStream": "{{invitedUserName}} تم ملء {{FilledStreamTitle}}",
+        "ForFillingStream": "لملء {{FilledStreamTitle}}",
+        "CreatePrivateChat": "للدردشة الخاصة مع {{toUserName}}"
     },
     "history": {
         "Date": "تاريخ",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "حصلت على {{amount}} ائتمانات",
         "Streams_user_icon": "حصلت على {{amount}} ائتمانات",
         "Places_user_location": "حصلت على {{amount}} ائتمانات",
-        "Streams_greeting": "حصلت على {{amount}} ائتمانات"
+        "Streams_greeting": "حصلت على {{amount}} ائتمانات",
+        "User": "مستخدم"
     },
     "subscriptions": {
         "infoTitle": "تعيين معلومات الدفع",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "تعيين ارتباط معلومات إضافية",
             "DescriptionPlaceholder": "وصف الخدمة",
             "SaveService": "حفظ الخدمة",
-            "SelectRequiredParticipants": "المشاركون المطلوبون"
+            "SelectRequiredParticipants": "المشاركون المطلوبون",
+            "RequiredParticipantsDesc": "يرجى تحديد المشاركين ذوي الصلة المطلوبين لاستخدام هذه الخدمة (على سبيل المثال الحيوانات الأليفة في &quot;عرض الكلاب&quot; أو الأطفال في &quot;عطلة الأطفال&quot; وما إلى ذلك). إذا تم دفع الخدمة ، سيحتاج المستخدم إلى الدفع أيضًا لكل مشارك ذي صلة."
         },
         "ManageServiceTemplates": "إدارة قوالب الخدمة",
         "ManageServices": "إدارة الخدمات",
@@ -388,6 +398,132 @@
             "Description": "بيانات المستخدم",
             "aboutPlaceholder": "تحرير السيرة الذاتية",
             "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+        },
+        "Add": "يضيف",
+        "Remove": "يزيل",
+        "NoNFTyet": "لا توجد NFTs حتى الآن",
+        "Claim": "مطالبة",
+        "ClaimNFT": "مطالبة NFT",
+        "Unlocking": "فتح",
+        "Unlock": "الغاء القفل",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC تعاقد",
+                        "seriesId": "معرف السلسلة",
+                        "owner": "مالك",
+                        "currency": "العملة",
+                        "price": "سعر",
+                        "beneficiary": "المستفيد",
+                        "autoindex": "الفهرسة التلقائية",
+                        "duration": "مدة",
+                        "rateInterval": "الفاصل الزمني",
+                        "rateAmount": "معدل المبلغ"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC تعاقد",
+                        "seriesId": "سيتم سك النقود في هذه السلسلة",
+                        "owner": "مالك المثال ، وإلا فسيكون المرسل",
+                        "currency": "عملة الرموز المميزة المشتراة ، إذا كانت صفرًا - للعملات الأصلية",
+                        "price": "سعر",
+                        "beneficiary": "المستفيد من بيع التوكنات وإلا سيكون المرسل",
+                        "autoindex": "الفهرسة التلقائية",
+                        "duration": "قفل بعد سك العملة. الصفر يعني الحصول عليه على الفور.",
+                        "rateInterval": "فترة دلو للشراء الخاص",
+                        "rateAmount": "مبلغ دلو لشراء خاص"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(خياري)",
+                    "number": "رقم",
+                    "address": "عنوان",
+                    "fraction": "جزء",
+                    "integer": "عدد صحيح",
+                    "seconds": "ثواني",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ينتج",
+                "viewInstancesList": "تحديث القائمة"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "معرف السلسلة",
+                        "account": "حساب",
+                        "amount": "كمية"
+                    },
+                    "small": {
+                        "seriesId": "سوف ينتمي الرمز المميز الجديد في سلسلة مع هذا المعرف",
+                        "account": "مالك NFT المنشأ حديثًا. إذا لم يتم تعيينها - ستستخدم المحفظة الحالية",
+                        "amount": "كمية NFT للنعناع"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(خياري)",
+                    "seriesId": "بطاقة تعريف",
+                    "account": "حساب",
+                    "amount": "كمية",
+                    "integer": "عدد صحيح"
+                },
+                "btn": {
+                    "Purchase": "شراء",
+                    "SpecialPurchase": "شراء خاص"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "عنوان"
+                    },
+                    "small": {
+                        "account": "عنوان"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "عنوان خاطئ"
+                },
+                "placeholders": {
+                    "account": "عنوان"
+                },
+                "addToWhitelist": "إضافة إلى القائمة البيضاء",
+                "removeFromWhitelist": "إزالة من القائمة البيضاء"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "معرف الرمز",
+                    "custodian": "وصي",
+                    "recipient": "متلقي"
+                },
+                "small": {
+                    "tokenId": "معرف الرمز الذي يجب قفله أو إلغاء قفله",
+                    "custodian": "عنوان يمكن فتحه",
+                    "recipient": "العنوان الذي سيتلقى الرموز المميزة"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "tokenId غير صالح",
+                "invalidCustodian": "وصي غير صالح",
+                "invalidRecipient": "مستلم غير صالح"
+            },
+            "placeholders": {
+                "optional": "(خياري)",
+                "tokenId": "بطاقة تعريف",
+                "custodian": "عنوان"
+            },
+            "Lock": "قفل",
+            "Unlock": "الغاء القفل",
+            "Locked": "مقفل",
+            "CustodianAddress": "عنوان الوصي",
+            "TokenWasClaimed": "تمت المطالبة بالرمز &quot;{{title}}&quot;",
+            "TokenWasLocked": "تم قفل الرمز &quot;{{title}}&quot;",
+            "TokenWasUnlocked": "تم إلغاء قفل الرمز &quot;{{title}}&quot;"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "تحتاج إلى توصيل MetaMask للعمل مع التطبيق",
         "UserNotLoggedInMetaMask": "لم يقم المستخدم بتسجيل الدخول إلى MetaMask",
         "CurrencyNotFound": "العملة غير موجودة",
-        "WrongChain": "تم إنشاء NFT هذا تحت عنوان &quot;{{chain}}&quot;. الرجاء استخدام هذه السلسلة."
+        "WrongChain": "تم إنشاء NFT هذا تحت عنوان &quot;{{chain}}&quot;. الرجاء استخدام هذه السلسلة.",
+        "AmountInvalid": "المبلغ غير صالح!",
+        "NoRecipientSelected": "لم يتم تحديد مستلم",
+        "NotEnoughPermissionsWallet": "لا توجد أذونات كافية لقراءة محفظة هذا المستخدم",
+        "ThisUserHaveNoWallet": "لم يتم تخصيص محفظة لهذا المستخدم",
+        "TheWalletOfThisUserInvalid": "محفظة هذا المستخدم غير صالحة",
+        "WalletInvalid": "عنوان المحفظة غير صالح"
     },
     "admin": {
         "Title": "الأصول الإدارية",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "لا يمكن أن يكون الحد الأدنى للاعتمادات سالبًا",
             "CreditsToAddNegative": "لا يمكن أن تكون الائتمانات المراد إضافتها سالبة"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "حدد المستلم",
+        "TransactionSuccess": "نجاح الصفقة",
+        "OrTypeWalletAddress": "أو اكتب عنوان محفظة المستلم"
+    },
+    "currencies": {
+        "choose": "اختر عملة"
     }
 }

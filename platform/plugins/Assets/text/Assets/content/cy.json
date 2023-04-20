@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Mae eich taliad yn cael ei brosesu",
         "FailTryAgain": "Nid oedd eich taliad yn llwyddiannus, ceisiwch eto",
         "SomethingWrong": "Aeth rhywbeth o&#39;i le",
-        "PaymentStatus": "Statws talu"
+        "PaymentStatus": "Statws talu",
+        "PayTo": "Talu {{displayName}}",
+        "ChooseCurrency": "Dewiswch arian cyfred",
+        "YouCanSendUpTo": "Gallwch anfon hyd at {{amount}} {{symbol}}",
+        "Send": "Anfon",
+        "EnterAmount": "nodwch y swm"
     },
     "credits": {
         "InviteAcceptedBy": "Gwahoddiad wedi&#39;i dderbyn gan {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} credyd",
             "BonusCredits": "{{amount}} credyd"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} wedi llenwi {{FilledStreamTitle}}",
+        "ForFillingStream": "Ar gyfer llenwi {{FilledStreamTitle}}",
+        "CreatePrivateChat": "am sgwrs breifat gyda {{toUserName}}"
     },
     "history": {
         "Date": "Dyddiad",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Wedi ennill {{amount}} credyd",
         "Places_user_location": "Wedi ennill {{amount}} credyd",
         "Streams_greeting": "Wedi ennill {{amount}} credyd",
-        "YouHaveCreditsToStart": "Wedi ennill {{amount}} credyd"
+        "YouHaveCreditsToStart": "Wedi ennill {{amount}} credyd",
+        "User": "Defnyddiwr"
     },
     "subscriptions": {
         "infoTitle": "Gosod Gwybodaeth Taliad",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "gosod dolen gwybodaeth ychwanegol",
             "DescriptionPlaceholder": "Disgrifiad o&#39;r gwasanaeth",
             "SaveService": "Arbed Gwasanaeth",
-            "SelectRequiredParticipants": "Cyfranogwyr Gofynnol"
+            "SelectRequiredParticipants": "Cyfranogwyr Gofynnol",
+            "RequiredParticipantsDesc": "Dewiswch gyfranogwyr cysylltiedig sydd eu hangen i ddefnyddio&#39;r gwasanaeth hwn (er enghraifft anifeiliaid anwes ar gyfer &quot;Sioe cŵn&quot;, neu blant ar gyfer &quot;gwyliau plant&quot; ac ati). Os telir gwasanaeth, bydd angen i&#39;r defnyddiwr dalu hefyd am bob cyfranogwr cysylltiedig."
         },
         "ManageServiceTemplates": "Rheoli Templedi Gwasanaeth",
         "ManageServices": "Rheoli Gwasanaethau",
@@ -387,6 +397,132 @@
             "Description": "Manylion defnyddiwr",
             "aboutPlaceholder": "Golygu Bio",
             "SureLogOut": "Ydych chi&#39;n siŵr eich bod am allgofnodi?"
+        },
+        "Add": "Ychwanegu",
+        "Remove": "Dileu",
+        "NoNFTyet": "Dim NFTs eto",
+        "Claim": "Hawliad",
+        "ClaimNFT": "Hawlio NFT",
+        "Unlocking": "Datgloi",
+        "Unlock": "Datgloi",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Contract NFFT",
+                        "seriesId": "cyfres ID",
+                        "owner": "Perchennog",
+                        "currency": "sur",
+                        "price": "Pris",
+                        "beneficiary": "Buddiolwr",
+                        "autoindex": "Autoindex",
+                        "duration": "Hyd",
+                        "rateInterval": "Cyfwng cyfradd",
+                        "rateAmount": "Cyfradd swm"
+                    },
+                    "small": {
+                        "NFTContract": "Contract NFFT",
+                        "seriesId": "bydd tocynnau yn cael eu bathu yn y gyfres hon",
+                        "owner": "perchennog er enghraifft, fel arall bydd yn anfonwr",
+                        "currency": "Arian cyfred ar gyfer tocynnau a brynwyd, os yn sero - ar gyfer darnau arian brodorol",
+                        "price": "Pris",
+                        "beneficiary": "Bydd buddiolwr gwerthu tocynnau, fel arall yn anfonwr",
+                        "autoindex": "Autoindex",
+                        "duration": "Cloi ar ôl mintio. Mae sero yn golygu ei gael ar unwaith.",
+                        "rateInterval": "egwyl bwced ar gyfer pryniant arbennig",
+                        "rateAmount": "swm bwced ar gyfer pryniant arbennig"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(dewisol)",
+                    "number": "rhif",
+                    "address": "cyfeiriad",
+                    "fraction": "ffracsiwn",
+                    "integer": "cyfanrif",
+                    "seconds": "eiliadau",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Cynnyrch",
+                "viewInstancesList": "Rhestr Adnewyddu"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID y gyfres",
+                        "account": "Cyfrif",
+                        "amount": "Swm"
+                    },
+                    "small": {
+                        "seriesId": "bydd tocyn newydd yn perthyn mewn cyfres gyda ID o&#39;r fath",
+                        "account": "perchennog NFT sydd newydd ei greu. os na chaiff ei osod - bydd yn defnyddio waled gyfredol",
+                        "amount": "swm NFT i mintys"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(dewisol)",
+                    "seriesId": "id",
+                    "account": "cyfrif",
+                    "amount": "swm",
+                    "integer": "cyfanrif"
+                },
+                "btn": {
+                    "Purchase": "Prynu",
+                    "SpecialPurchase": "Pryniant arbennig"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Cyfeiriad"
+                    },
+                    "small": {
+                        "account": "Cyfeiriad"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Cyfeiriad Annilys"
+                },
+                "placeholders": {
+                    "account": "Cyfeiriad"
+                },
+                "addToWhitelist": "Ychwanegu at y Rhestr Wen",
+                "removeFromWhitelist": "Dileu O&#39;r Rhestr Wen"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID tocyn",
+                    "custodian": "Ceidwad",
+                    "recipient": "Derbynnydd"
+                },
+                "small": {
+                    "tokenId": "id tocyn beth sydd angen ei gloi neu ddatgloi",
+                    "custodian": "cyfeiriad y gellir ei ddatgloi",
+                    "recipient": "cyfeiriad a fydd yn derbyn y tocynnau"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TocynId annilys",
+                "invalidCustodian": "Ceidwad Annilys",
+                "invalidRecipient": "Derbynnydd Annilys"
+            },
+            "placeholders": {
+                "optional": "(dewisol)",
+                "tokenId": "id",
+                "custodian": "cyfeiriad"
+            },
+            "Lock": "Cloi",
+            "Unlock": "Datgloi",
+            "Locked": "Wedi&#39;i gloi",
+            "CustodianAddress": "Anerchiad ceidwad",
+            "TokenWasClaimed": "Hawliwyd tocyn &quot;{{title}}&quot;.",
+            "TokenWasLocked": "Cafodd y tocyn &quot;{{title}}&quot; ei gloi",
+            "TokenWasUnlocked": "Cafodd y tocyn &quot;{{title}}&quot; ei ddatgloi"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Angen MetaMask wedi&#39;i gysylltu i weithio gyda&#39;r cymhwysiad",
         "UserNotLoggedInMetaMask": "Nid yw&#39;r defnyddiwr wedi mewngofnodi i MetaMask",
         "CurrencyNotFound": "Arian heb ei ganfod",
-        "WrongChain": "Creodd yr NFT hwn o dan &quot;{{chain}}&quot;. Defnyddiwch y gadwyn hon."
+        "WrongChain": "Creodd yr NFT hwn o dan &quot;{{chain}}&quot;. Defnyddiwch y gadwyn hon.",
+        "AmountInvalid": "Swm annilys!",
+        "NoRecipientSelected": "Dim derbynnydd wedi&#39;i ddewis",
+        "NotEnoughPermissionsWallet": "Dim digon o ganiatadau i ddarllen waled y defnyddiwr hwn",
+        "ThisUserHaveNoWallet": "Nid oes gan y defnyddiwr hwn waled wedi&#39;i neilltuo",
+        "TheWalletOfThisUserInvalid": "Mae waled y defnyddiwr hwn yn annilys",
+        "WalletInvalid": "Cyfeiriad waled yn annilys"
     },
     "admin": {
         "Title": "Gweinyddol asedau",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Ni all isafswm credydau fod yn negyddol",
             "CreditsToAddNegative": "Ni all credydau i&#39;w hychwanegu fod yn negyddol"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Dewiswch dderbynnydd",
+        "TransactionSuccess": "Llwyddiant Trafodiad",
+        "OrTypeWalletAddress": "NEU teipiwch gyfeiriad waled derbynnydd"
+    },
+    "currencies": {
+        "choose": "Dewiswch arian cyfred"
     }
 }

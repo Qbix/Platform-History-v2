@@ -34,11 +34,13 @@ class Users_Email extends Base_Users_Email
 	 * @param {array} $fields=array()
 	 *  The fields referenced in the subject and/or view
 	 * @param {array} [$options=array()] Array of options. Can include:
-	 * @param {array} [$options.html=false] Whether to send as HTML email.
 	 * @param {array} [$options.name] A human-readable name in addition to the address to send to.
 	 * @param {array} [$options.from] An array of (emailAddress, humanReadableName)
 	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.language] Preferred language to be used for the view
+	 * @param {array} [$options.html="Q/layout/email.php"] Preferred view file to use for HTML layout. Pass true to send HTML without a layout. Pass false for no HTML.
+	 * @param {array} [$options.title] Optionally set a different title for an HTML email, otherwise subject is used.
+	 * @param {array} [$options.head] Optionally any other text to insert into the HTML head, such as <style> tags etc.
 	 * @throws Q_Exception_WrongType
 	 * @return {bool} True if success or throw exception
 	 */
@@ -57,7 +59,7 @@ class Users_Email extends Base_Users_Email
 		}
 		
 		if (!isset($options['html'])) {
-			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', true);
+			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', 'Q/layout/email.php');
 		}
 
 		// set language if didn't defined yet
@@ -77,7 +79,15 @@ class Users_Email extends Base_Users_Email
 		
 		$app = Q::app();
 		$subject = Q_Handlebars::renderSource($subject, $fields);
-		$body = Q::view($view, $fields, array('language' => $options['language']));
+		$prevValue = Q_Html::$environmentWithoutJavascript;
+		Q_Html::$environmentWithoutJavascript = true;
+		try {
+			$body = Q::view($view, $fields, array('language' => $options['language']));
+			Q_Html::$environmentWithoutJavascript = $prevValue;
+		} catch (Exception $e) {
+			Q_Html::$environmentWithoutJavascript = $prevValue;
+			throw $e;
+		}
 
 		$from = Q::ifset($options, 'from', Q_Config::get('Users', 'email', 'from', null));
 		if (!isset($from)) {
@@ -143,15 +153,6 @@ class Users_Email extends Base_Users_Email
 					$transport = null;
 				}
 			}
-			
-			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
-				$logMessage = "Sent message to $emailAddress:\n$subject\n$body";
-				if (!isset($transport)) {
-					Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
-					$logMessage = "Would have $logMessage";
-				}
-				Q::log($logMessage, $key);
-			}
 
 			if ($transport) {
 				$email = new Zend_Mail();
@@ -165,6 +166,11 @@ class Users_Email extends Base_Users_Email
 				if (empty($options['html'])) {
 					$email->setBodyText($body);
 				} else {
+					if (is_string($options['html'])){
+						$title = Q::interpolate(Q::ifset($options, 'title', $subject));
+						$head = Q::ifset($options, 'head', Q_Config::get('Users', 'email', 'head', ''));
+						$body = Q::view($options['html'], compact('body', 'title', 'head'));
+					}
 					$email->setBodyHtml($body);
 				}
 				/**
@@ -189,6 +195,15 @@ class Users_Email extends Base_Users_Email
 				} catch (Exception $e) {
 					throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
 				}
+			}
+
+			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
+				$logMessage = "Sent message to $emailAddress:\n$subject\n$body";
+				if (!isset($transport)) {
+					Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
+					$logMessage = "Would have $logMessage";
+				}
+				Q::log($logMessage, $key);
 			}
 		}
 		
@@ -230,7 +245,7 @@ class Users_Email extends Base_Users_Email
 			$user = new Users_User();
 			$user->id = $this->userId;
 			if (!$user->retrieve()) {
-				throw new Q_Exception_NotVerified(array(
+				throw new Users_Exception_NotVerified(array(
 					'type' => 'email address'
 				), 'emailAddress');
 			}

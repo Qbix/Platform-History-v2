@@ -563,9 +563,6 @@ class Users_User extends Base_Users_User
 		array $options = array(),
 		&$email = null)
 	{
-		if (!isset($options['html'])) {
-			$options['html'] = true;
-		}
 		if (!Q_Valid::email($emailAddress, $normalized)) {
 			throw new Q_Exception_WrongValue(array(
 				'field' => 'Email', 

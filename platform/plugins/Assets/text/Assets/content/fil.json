@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Pinoproseso ang iyong bayad",
         "FailTryAgain": "Hindi matagumpay ang iyong pagbabayad, pakisubukang muli",
         "SomethingWrong": "Nagkaproblema",
-        "PaymentStatus": "Katayuan ng pagbabayad"
+        "PaymentStatus": "Katayuan ng pagbabayad",
+        "PayTo": "Magbayad {{displayName}}",
+        "ChooseCurrency": "Pumili ng pera",
+        "YouCanSendUpTo": "Maaari kang magpadala ng hanggang {{amount}} {{symbol}}",
+        "Send": "Ipadala",
+        "EnterAmount": "ipasok ang halaga"
     },
     "credits": {
         "InviteAcceptedBy": "Imbitasyon na tinanggap ng {{1}}",
@@ -52,7 +57,10 @@
         "Streams_greeting": "{{invitedUserName}} nagpasok ng pagbati",
         "CreatePaidStream": "para sa paglikha ng {{toStreamName}}",
         "BonusCredits": "Mga kredito ng bonus {{amount}}.",
-        "BuyBonus": "Ang pagbili ng {{amount}} na credit nang sabay-sabay, ay hahantong sa {{bonus}} credits bonus."
+        "BuyBonus": "Ang pagbili ng {{amount}} na credit nang sabay-sabay, ay hahantong sa {{bonus}} credits bonus.",
+        "InvitedUserFilledStream": "{{invitedUserName}} napuno {{FilledStreamTitle}}",
+        "ForFillingStream": "Para sa pagpuno {{FilledStreamTitle}}",
+        "CreatePrivateChat": "para sa pribadong pakikipag-chat kay {{toUserName}}"
     },
     "history": {
         "Date": "Petsa",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Nakakuha ng {{amount}} na mga kredito",
         "Streams_user_icon": "Nakakuha ng {{amount}} na mga kredito",
         "Places_user_location": "Nakakuha ng {{amount}} na mga kredito",
-        "Streams_greeting": "Nakakuha ng {{amount}} na mga kredito"
+        "Streams_greeting": "Nakakuha ng {{amount}} na mga kredito",
+        "User": "Gumagamit"
     },
     "subscriptions": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "itakda ang karagdagang link sa impormasyon",
             "DescriptionPlaceholder": "Paglalarawan ng serbisyo",
             "SaveService": "I-save ang Serbisyo",
-            "SelectRequiredParticipants": "Mga Kinakailangang Kalahok"
+            "SelectRequiredParticipants": "Mga Kinakailangang Kalahok",
+            "RequiredParticipantsDesc": "Mangyaring pumili ng mga kaugnay na kalahok na kinakailangang gamitin ang serbisyong ito (halimbawa, mga alagang hayop para sa &quot;Palabas ng mga aso&quot;, o mga bata para sa &quot;Pista ng mga bata&quot; atbp). Kung ang serbisyo ay binayaran, ang user ay kailangang magbayad din para sa bawat kaugnay na kalahok."
         },
         "ManageServiceTemplates": "Pamahalaan ang Mga template ng Serbisyo",
         "ManageServices": "Pamahalaan ang mga Serbisyo",
@@ -220,7 +230,13 @@
         "NeedMetaMaskConnected": "Kailangan ng MetaMask konektado upang gumana sa application",
         "UserNotLoggedInMetaMask": "Ang user ay hindi naka-log in sa MetaMask",
         "CurrencyNotFound": "Hindi nahanap ang currency",
-        "WrongChain": "Nilikha ang NFT na ito sa ilalim ng &quot;{{chain}}&quot;. Mangyaring gamitin ang chain na ito."
+        "WrongChain": "Nilikha ang NFT na ito sa ilalim ng &quot;{{chain}}&quot;. Mangyaring gamitin ang chain na ito.",
+        "AmountInvalid": "Hindi wasto ang halaga!",
+        "NoRecipientSelected": "Walang napiling tatanggap",
+        "NotEnoughPermissionsWallet": "Walang sapat na pahintulot na basahin ang wallet ng user na ito",
+        "ThisUserHaveNoWallet": "Walang nakatalagang wallet ang user na ito",
+        "TheWalletOfThisUserInvalid": "Di-wasto ang wallet ng user na ito",
+        "WalletInvalid": "Di-wasto ang address ng pitaka"
     },
     "admin": {
         "Title": "Administratibo ng mga asset",
@@ -415,6 +431,140 @@
             "Description": "Mga detalye ng user",
             "aboutPlaceholder": "I-edit ang Bio",
             "SureLogOut": "Sigurado ka bang gusto mong mag-log out?"
+        },
+        "Add": "Idagdag",
+        "Remove": "Alisin",
+        "NoNFTyet": "Wala pang NFT",
+        "Claim": "Claim",
+        "ClaimNFT": "I-claim ang NFT",
+        "Unlocking": "Pag-unlock",
+        "Unlock": "I-unlock",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "series Id",
+                        "owner": "May-ari",
+                        "currency": "Сurrency",
+                        "price": "Presyo",
+                        "beneficiary": "benepisyaryo",
+                        "autoindex": "Autoindex",
+                        "duration": "Tagal",
+                        "rateInterval": "Interval ng rate",
+                        "rateAmount": "Halaga ng rate"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "gagawa ng mga token sa seryeng ito",
+                        "owner": "may-ari ng instance, kung hindi ay magiging sender",
+                        "currency": "Currency para sa mga biniling token, kung zero - para sa mga native na barya",
+                        "price": "Presyo",
+                        "beneficiary": "Ang benepisyaryo ng pagbebenta ng mga token, kung hindi ay magiging sender",
+                        "autoindex": "Autoindex",
+                        "duration": "I-lock pagkatapos ng minting. Ang ibig sabihin ng Zero ay makuha agad.",
+                        "rateInterval": "bucket interval para sa espesyal na pagbili",
+                        "rateAmount": "halaga ng bucket para sa espesyal na pagbili"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsyonal)",
+                    "number": "numero",
+                    "address": "address",
+                    "fraction": "maliit na bahagi",
+                    "integer": "integer",
+                    "seconds": "segundo",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Gumawa",
+                "viewInstancesList": "I-refresh ang Listahan"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Series ID",
+                        "account": "Account",
+                        "amount": "Halaga"
+                    },
+                    "small": {
+                        "seriesId": "bagong token ay mapabilang sa serye na may ganoong ID",
+                        "account": "may-ari ng bagong likhang NFT. kung hindi nakatakda - gagamit ng kasalukuyang wallet",
+                        "amount": "halaga ng NFT sa mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsyonal)",
+                    "seriesId": "id",
+                    "account": "account",
+                    "amount": "halaga",
+                    "integer": "integer"
+                },
+                "btn": {
+                    "Purchase": "Bumili",
+                    "SpecialPurchase": "Espesyal na pagbili"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Address"
+                    },
+                    "small": {
+                        "account": "Address"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Di-wastong address"
+                },
+                "placeholders": {
+                    "account": "Address"
+                },
+                "addToWhitelist": "Idagdag Sa Whitelist",
+                "removeFromWhitelist": "Alisin Mula sa Whitelist"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token ID",
+                    "custodian": "Tagapangalaga",
+                    "recipient": "tatanggap"
+                },
+                "small": {
+                    "tokenId": "token id kung ano ang kailangang i-lock o i-unlock",
+                    "custodian": "address na maaaring ma-unlock",
+                    "recipient": "address na tatanggap ng mga token"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Di-wastong tokenId",
+                "invalidCustodian": "Di-wastong Tagapag-alaga",
+                "invalidRecipient": "Maling tagatanggap"
+            },
+            "placeholders": {
+                "optional": "(opsyonal)",
+                "tokenId": "id",
+                "custodian": "address"
+            },
+            "Lock": "Lock",
+            "Unlock": "I-unlock",
+            "Locked": "Naka-lock",
+            "CustodianAddress": "Address ng tagapag-alaga",
+            "TokenWasClaimed": "Ang token na &quot;{{title}}&quot; ay na-claim",
+            "TokenWasLocked": "Ang token na &quot;{{title}}&quot; ay naka-lock",
+            "TokenWasUnlocked": "Ang token na &quot;{{title}}&quot; ay na-unlock"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Pumili ng tatanggap",
+        "TransactionSuccess": "Tagumpay ng Transaksyon",
+        "OrTypeWalletAddress": "O i-type ang address ng wallet ng tatanggap"
+    },
+    "currencies": {
+        "choose": "Pumili ng pera"
     }
 }

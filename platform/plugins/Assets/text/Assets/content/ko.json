@@ -27,7 +27,12 @@
         "PaymentProcessing.": "결제가 처리 중입니다",
         "FailTryAgain": "결제에 실패했습니다. 다시 시도해 주세요.",
         "SomethingWrong": "문제가 발생했습니다.",
-        "PaymentStatus": "지불 상태"
+        "PaymentStatus": "지불 상태",
+        "PayTo": "{{displayName}} 지불",
+        "ChooseCurrency": "통화를 선택하세요",
+        "YouCanSendUpTo": "최대 {{amount}} {{symbol}}까지 보낼 수 있습니다.",
+        "Send": "보내다",
+        "EnterAmount": "금액을 입력하세요"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}}님이 초대를 수락했습니다.",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} 크레딧",
             "BonusCredits": "{{amount}} 크레딧"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} 채워진 {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} 채우기",
+        "CreatePrivateChat": "{{toUserName}}님과의 비공개 채팅"
     },
     "history": {
         "Date": "날짜",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} 크레딧 획득",
         "Places_user_location": "{{amount}} 크레딧 획득",
         "Streams_greeting": "{{amount}} 크레딧 획득",
-        "YouHaveCreditsToStart": "{{amount}} 크레딧 획득"
+        "YouHaveCreditsToStart": "{{amount}} 크레딧 획득",
+        "User": "사용자"
     },
     "subscriptions": {
         "infoTitle": "결제 정보 설정",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "추가 정보 링크 설정",
             "DescriptionPlaceholder": "서비스 설명",
             "SaveService": "서비스 저장",
-            "SelectRequiredParticipants": "필수 참가자"
+            "SelectRequiredParticipants": "필수 참가자",
+            "RequiredParticipantsDesc": "이 서비스를 이용하기 위해 필요한 관련 참여자를 선택하세요. 서비스가 유료인 경우 사용자는 각 관련 참여자에 대해서도 비용을 지불해야 합니다."
         },
         "ManageServiceTemplates": "서비스 템플릿 관리",
         "ManageServices": "서비스 관리",
@@ -387,6 +397,132 @@
             "Description": "사용자 세부정보",
             "aboutPlaceholder": "약력 수정",
             "SureLogOut": "로그아웃하시겠습니까?"
+        },
+        "Add": "추가하다",
+        "Remove": "제거하다",
+        "NoNFTyet": "아직 NFT 없음",
+        "Claim": "주장하다",
+        "ClaimNFT": "NFT 청구",
+        "Unlocking": "잠금 해제",
+        "Unlock": "터놓다",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT 계약",
+                        "seriesId": "시리즈 ID",
+                        "owner": "소유자",
+                        "currency": "통화",
+                        "price": "가격",
+                        "beneficiary": "수익자",
+                        "autoindex": "오토인덱스",
+                        "duration": "지속",
+                        "rateInterval": "비율 간격",
+                        "rateAmount": "요금 금액"
+                    },
+                    "small": {
+                        "NFTContract": "NFT계약",
+                        "seriesId": "이 시리즈에서 토큰이 발행됩니다.",
+                        "owner": "인스턴스의 소유자, 그렇지 않으면 보낸 사람이 됩니다.",
+                        "currency": "구매한 토큰의 통화(0인 경우) - 네이티브 코인",
+                        "price": "가격",
+                        "beneficiary": "토큰 판매 수혜자, 그렇지 않으면 발신인",
+                        "autoindex": "오토인덱스",
+                        "duration": "발행 후 잠급니다. 0은 즉시 가져오는 것을 의미합니다.",
+                        "rateInterval": "특별 구매를 위한 버킷 간격",
+                        "rateAmount": "특별 구매 버킷 금액"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(선택 과목)",
+                    "number": "숫자",
+                    "address": "주소",
+                    "fraction": "분수",
+                    "integer": "정수",
+                    "seconds": "초",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "생산하다",
+                "viewInstancesList": "새로 고침 목록"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "시리즈 ID",
+                        "account": "계정",
+                        "amount": "양"
+                    },
+                    "small": {
+                        "seriesId": "새 토큰은 해당 ID와 시리즈에 속합니다.",
+                        "account": "새로 생성된 NFT의 소유자. 설정하지 않으면 - 현재 지갑을 사용합니다.",
+                        "amount": "민트에 NFT 금액"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(선택 과목)",
+                    "seriesId": "ID",
+                    "account": "계정",
+                    "amount": "양",
+                    "integer": "정수"
+                },
+                "btn": {
+                    "Purchase": "구입",
+                    "SpecialPurchase": "특별 구매"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "주소"
+                    },
+                    "small": {
+                        "account": "주소"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "잘못된 주소"
+                },
+                "placeholders": {
+                    "account": "주소"
+                },
+                "addToWhitelist": "화이트리스트에 추가",
+                "removeFromWhitelist": "화이트리스트에서 제거"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "토큰 ID",
+                    "custodian": "후견인",
+                    "recipient": "받는 사람"
+                },
+                "small": {
+                    "tokenId": "잠금 또는 잠금 해제에 필요한 토큰 ID",
+                    "custodian": "잠금 해제할 수 있는 주소",
+                    "recipient": "토큰을 받을 주소"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "잘못된 토큰 ID",
+                "invalidCustodian": "잘못된 관리인",
+                "invalidRecipient": "잘못된 수신자"
+            },
+            "placeholders": {
+                "optional": "(선택 과목)",
+                "tokenId": "ID",
+                "custodian": "주소"
+            },
+            "Lock": "잠그다",
+            "Unlock": "터놓다",
+            "Locked": "잠김",
+            "CustodianAddress": "관리인 주소",
+            "TokenWasClaimed": "토큰 &quot;{{title}}&quot;이(가) 청구되었습니다.",
+            "TokenWasLocked": "토큰 &quot;{{title}}&quot;이(가) 잠겼습니다.",
+            "TokenWasUnlocked": "토큰 &quot;{{title}}&quot;이(가) 잠금 해제되었습니다"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "응용 프로그램과 함께 작동하려면 MetaMask가 연결되어 있어야 합니다.",
         "UserNotLoggedInMetaMask": "사용자가 MetaMask에 로그인하지 않았습니다.",
         "CurrencyNotFound": "통화를 찾을 수 없음",
-        "WrongChain": "이 NFT는 &quot;{{chain}}&quot; 아래에 생성되었습니다. 이 체인을 사용하십시오."
+        "WrongChain": "이 NFT는 &quot;{{chain}}&quot; 아래에 생성되었습니다. 이 체인을 사용하십시오.",
+        "AmountInvalid": "금액이 잘못되었습니다!",
+        "NoRecipientSelected": "수신자를 선택하지 않았습니다.",
+        "NotEnoughPermissionsWallet": "이 사용자의 지갑을 읽을 수 있는 권한이 없습니다.",
+        "ThisUserHaveNoWallet": "이 사용자에게는 할당된 지갑이 없습니다.",
+        "TheWalletOfThisUserInvalid": "이 사용자의 지갑이 유효하지 않습니다",
+        "WalletInvalid": "지갑 주소가 잘못되었습니다."
     },
     "admin": {
         "Title": "자산 관리",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "최소 크레딧은 음수일 수 없습니다.",
             "CreditsToAddNegative": "추가할 크레딧은 음수일 수 없습니다."
         }
+    },
+    "transfer": {
+        "SelectRecipient": "수신자 선택",
+        "TransactionSuccess": "거래 성공",
+        "OrTypeWalletAddress": "또는 받는 사람의 지갑 주소를 입력하세요."
+    },
+    "currencies": {
+        "choose": "통화를 선택하세요"
     }
 }

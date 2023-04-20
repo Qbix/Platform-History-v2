@@ -27,7 +27,12 @@
         "PaymentProcessing.": "ನಿಮ್ಮ ಪಾವತಿಯನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ",
         "FailTryAgain": "ನಿಮ್ಮ ಪಾವತಿ ಯಶಸ್ವಿಯಾಗಲಿಲ್ಲ, ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
         "SomethingWrong": "ಏನೋ ತಪ್ಪಾಗಿದೆ",
-        "PaymentStatus": "ಪಾವತಿ ಸ್ಥಿತಿ"
+        "PaymentStatus": "ಪಾವತಿ ಸ್ಥಿತಿ",
+        "PayTo": "ಪಾವತಿಸಿ {{displayName}}",
+        "ChooseCurrency": "ಕರೆನ್ಸಿ ಆಯ್ಕೆಮಾಡಿ",
+        "YouCanSendUpTo": "ನೀವು {{amount}} {{symbol}} ವರೆಗೆ ಕಳುಹಿಸಬಹುದು",
+        "Send": "ಕಳುಹಿಸು",
+        "EnterAmount": "ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ"
     },
     "credits": {
         "InviteAcceptedBy": "ಆಹ್ವಾನವನ್ನು {{invitedUserName}} ಸ್ವೀಕರಿಸಿದ್ದಾರೆ",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು",
             "BonusCredits": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} ತುಂಬಿದ {{FilledStreamTitle}}",
+        "ForFillingStream": "ಭರ್ತಿ ಮಾಡಲು {{FilledStreamTitle}}",
+        "CreatePrivateChat": "{{toUserName}} ಜೊತೆಗೆ ಖಾಸಗಿ ಚಾಟ್‌ಗಾಗಿ"
     },
     "history": {
         "Date": "ದಿನಾಂಕ",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಲಾಗಿದೆ",
         "Places_user_location": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಲಾಗಿದೆ",
         "Streams_greeting": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಲಾಗಿದೆ",
-        "YouHaveCreditsToStart": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಲಾಗಿದೆ"
+        "YouHaveCreditsToStart": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಲಾಗಿದೆ",
+        "User": "ಬಳಕೆದಾರ"
     },
     "subscriptions": {
         "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಲಿಂಕ್ ಅನ್ನು ಹೊಂದಿಸಿ",
             "DescriptionPlaceholder": "ಸೇವೆಯ ವಿವರಣೆ",
             "SaveService": "ಸೇವೆಯನ್ನು ಉಳಿಸಿ",
-            "SelectRequiredParticipants": "ಅಗತ್ಯವಿರುವ ಭಾಗವಹಿಸುವವರು"
+            "SelectRequiredParticipants": "ಅಗತ್ಯವಿರುವ ಭಾಗವಹಿಸುವವರು",
+            "RequiredParticipantsDesc": "ದಯವಿಟ್ಟು ಈ ಸೇವೆಯನ್ನು ಬಳಸಲು ಅಗತ್ಯವಿರುವ ಸಂಬಂಧಿತ ಭಾಗವಹಿಸುವವರನ್ನು ಆಯ್ಕೆಮಾಡಿ (ಉದಾಹರಣೆಗೆ &quot;ನಾಯಿಗಳ ಪ್ರದರ್ಶನ&quot; ಗಾಗಿ ಸಾಕುಪ್ರಾಣಿಗಳು, ಅಥವಾ &quot;ಮಕ್ಕಳ ರಜಾದಿನ&quot; ಇತ್ಯಾದಿಗಾಗಿ ಮಕ್ಕಳು). ಸೇವೆಯನ್ನು ಪಾವತಿಸಿದರೆ, ಪ್ರತಿ ಸಂಬಂಧಿತ ಭಾಗವಹಿಸುವವರಿಗೆ ಬಳಕೆದಾರರು ಪಾವತಿಸಬೇಕಾಗುತ್ತದೆ."
         },
         "ManageServiceTemplates": "ಸೇವಾ ಟೆಂಪ್ಲೇಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
         "ManageServices": "ಸೇವೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
@@ -387,6 +397,132 @@
             "Description": "ಬಳಕೆದಾರರ ವಿವರಗಳು",
             "aboutPlaceholder": "ಬಯೋ ಸಂಪಾದಿಸಿ",
             "SureLogOut": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
+        },
+        "Add": "ಸೇರಿಸಿ",
+        "Remove": "ತೆಗೆದುಹಾಕಿ",
+        "NoNFTyet": "ಇನ್ನೂ ಯಾವುದೇ NFT ಗಳಿಲ್ಲ",
+        "Claim": "ಹಕ್ಕು",
+        "ClaimNFT": "NFT ಕ್ಲೈಮ್ ಮಾಡಿ",
+        "Unlocking": "ಅನ್ಲಾಕ್ ಮಾಡಲಾಗುತ್ತಿದೆ",
+        "Unlock": "ಅನ್ಲಾಕ್ ಮಾಡಿ",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC ಕಾಂಟ್ರಾಕ್ಟ್",
+                        "seriesId": "ಸರಣಿ ಐಡಿ",
+                        "owner": "ಮಾಲೀಕ",
+                        "currency": "ಕರೆನ್ಸಿ",
+                        "price": "ಬೆಲೆ",
+                        "beneficiary": "ಫಲಾನುಭವಿ",
+                        "autoindex": "ಆಟೋಇಂಡೆಕ್ಸ್",
+                        "duration": "ಅವಧಿ",
+                        "rateInterval": "ದರ ಮಧ್ಯಂತರ",
+                        "rateAmount": "ದರದ ಮೊತ್ತ"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC ಕಾಂಟ್ರಾಕ್ಟ್",
+                        "seriesId": "ಈ ಸರಣಿಯಲ್ಲಿ ಟೋಕನ್‌ಗಳನ್ನು ಮುದ್ರಿಸಲಾಗುತ್ತದೆ",
+                        "owner": "ಉದಾಹರಣೆಗೆ ಮಾಲೀಕರು, ಇಲ್ಲದಿದ್ದರೆ ಕಳುಹಿಸುವವರು",
+                        "currency": "ಖರೀದಿಸಿದ ಟೋಕನ್‌ಗಳಿಗೆ ಕರೆನ್ಸಿ, ಶೂನ್ಯವಾಗಿದ್ದರೆ - ಸ್ಥಳೀಯ ನಾಣ್ಯಗಳಿಗೆ",
+                        "price": "ಬೆಲೆ",
+                        "beneficiary": "ಟೋಕನ್‌ಗಳನ್ನು ಮಾರಾಟ ಮಾಡುವ ಫಲಾನುಭವಿ, ಇಲ್ಲದಿದ್ದರೆ ಕಳುಹಿಸುವವರು",
+                        "autoindex": "ಆಟೋಇಂಡೆಕ್ಸ್",
+                        "duration": "ಟಂಕಿಸಿದ ನಂತರ ಲಾಕ್ ಮಾಡಿ. ಸೊನ್ನೆ ಎಂದರೆ ತಕ್ಷಣ ಸಿಗುತ್ತದೆ.",
+                        "rateInterval": "ವಿಶೇಷ ಖರೀದಿಗಾಗಿ ಬಕೆಟ್ ಮಧ್ಯಂತರ",
+                        "rateAmount": "ವಿಶೇಷ ಖರೀದಿಗಾಗಿ ಬಕೆಟ್ ಮೊತ್ತ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ಐಚ್ಛಿಕ)",
+                    "number": "ಸಂಖ್ಯೆ",
+                    "address": "ವಿಳಾಸ",
+                    "fraction": "ಭಿನ್ನರಾಶಿ",
+                    "integer": "ಪೂರ್ಣಾಂಕ",
+                    "seconds": "ಸೆಕೆಂಡುಗಳು",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ಉತ್ಪಾದಿಸು",
+                "viewInstancesList": "ಪಟ್ಟಿಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ಸರಣಿ ID",
+                        "account": "ಖಾತೆ",
+                        "amount": "ಮೊತ್ತ"
+                    },
+                    "small": {
+                        "seriesId": "ಹೊಸ ಟೋಕನ್ ಅಂತಹ ಐಡಿಯೊಂದಿಗೆ ಸರಣಿಯಲ್ಲಿ ಸೇರಿರುತ್ತದೆ",
+                        "account": "ಹೊಸದಾಗಿ ರಚಿಸಲಾದ NFT ಮಾಲೀಕರು. ಹೊಂದಿಸದಿದ್ದರೆ - ಪ್ರಸ್ತುತ ವ್ಯಾಲೆಟ್ ಅನ್ನು ಬಳಸುತ್ತದೆ",
+                        "amount": "ಮಿಂಟ್ ಗೆ NFT ಮೊತ್ತ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ಐಚ್ಛಿಕ)",
+                    "seriesId": "ಐಡಿ",
+                    "account": "ಖಾತೆ",
+                    "amount": "ಮೊತ್ತ",
+                    "integer": "ಪೂರ್ಣಾಂಕ"
+                },
+                "btn": {
+                    "Purchase": "ಖರೀದಿ",
+                    "SpecialPurchase": "ವಿಶೇಷ ಖರೀದಿ"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "ವಿಳಾಸ"
+                    },
+                    "small": {
+                        "account": "ವಿಳಾಸ"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "ಅಮಾನ್ಯವಾದ ವಿಳಾಸ"
+                },
+                "placeholders": {
+                    "account": "ವಿಳಾಸ"
+                },
+                "addToWhitelist": "ಶ್ವೇತಪಟ್ಟಿಗೆ ಸೇರಿಸಿ",
+                "removeFromWhitelist": "ಶ್ವೇತಪಟ್ಟಿಯಿಂದ ತೆಗೆದುಹಾಕಿ"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ಟೋಕನ್ ಐಡಿ",
+                    "custodian": "ಕಸ್ಟೋಡಿಯನ್",
+                    "recipient": "ಸ್ವೀಕರಿಸುವವರು"
+                },
+                "small": {
+                    "tokenId": "ಟೋಕನ್ ಐಡಿ ಏನು ಲಾಕ್ ಅಥವಾ ಅನ್ಲಾಕ್ ಮಾಡಬೇಕು",
+                    "custodian": "ಅನ್ಲಾಕ್ ಮಾಡಬಹುದಾದ ವಿಳಾಸ",
+                    "recipient": "ಟೋಕನ್‌ಗಳನ್ನು ಸ್ವೀಕರಿಸುವ ವಿಳಾಸ"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "ಅಮಾನ್ಯ ಟೋಕನ್ ಐಡಿ",
+                "invalidCustodian": "ಅಮಾನ್ಯ ಕಸ್ಟೋಡಿಯನ್",
+                "invalidRecipient": "ಅಮಾನ್ಯ ಸ್ವೀಕರಿಸುವವರು"
+            },
+            "placeholders": {
+                "optional": "(ಐಚ್ಛಿಕ)",
+                "tokenId": "ಐಡಿ",
+                "custodian": "ವಿಳಾಸ"
+            },
+            "Lock": "ಲಾಕ್ ಮಾಡಿ",
+            "Unlock": "ಅನ್ಲಾಕ್ ಮಾಡಿ",
+            "Locked": "ಲಾಕ್ ಮಾಡಲಾಗಿದೆ",
+            "CustodianAddress": "ಸಂರಕ್ಷಕ ವಿಳಾಸ",
+            "TokenWasClaimed": "ಟೋಕನ್ &quot;{{title}}&quot; ಅನ್ನು ಕ್ಲೈಮ್ ಮಾಡಲಾಗಿದೆ",
+            "TokenWasLocked": "&quot;{{title}}&quot; ಟೋಕನ್ ಅನ್ನು ಲಾಕ್ ಮಾಡಲಾಗಿದೆ",
+            "TokenWasUnlocked": "ಟೋಕನ್ &quot;{{title}}&quot; ಅನ್‌ಲಾಕ್ ಮಾಡಲಾಗಿದೆ"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "ಅಪ್ಲಿಕೇಶನ್‌ನೊಂದಿಗೆ ಕೆಲಸ ಮಾಡಲು ಮೆಟಾಮಾಸ್ಕ್ ಸಂಪರ್ಕದ ಅಗತ್ಯವಿದೆ",
         "UserNotLoggedInMetaMask": "ಬಳಕೆದಾರರು ಮೆಟಾಮಾಸ್ಕ್‌ಗೆ ಲಾಗ್ ಇನ್ ಆಗಿಲ್ಲ",
         "CurrencyNotFound": "ಕರೆನ್ಸಿ ಕಂಡುಬಂದಿಲ್ಲ",
-        "WrongChain": "ಈ NFT ಅನ್ನು &quot;{{chain}}&quot; ಅಡಿಯಲ್ಲಿ ರಚಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಈ ಸರಪಳಿಯನ್ನು ಬಳಸಿ."
+        "WrongChain": "ಈ NFT ಅನ್ನು &quot;{{chain}}&quot; ಅಡಿಯಲ್ಲಿ ರಚಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಈ ಸರಪಳಿಯನ್ನು ಬಳಸಿ.",
+        "AmountInvalid": "ಮೊತ್ತವು ಅಮಾನ್ಯವಾಗಿದೆ!",
+        "NoRecipientSelected": "ಯಾವುದೇ ಸ್ವೀಕರಿಸುವವರನ್ನು ಆಯ್ಕೆ ಮಾಡಲಾಗಿಲ್ಲ",
+        "NotEnoughPermissionsWallet": "ಈ ಬಳಕೆದಾರರ ವ್ಯಾಲೆಟ್ ಅನ್ನು ಓದಲು ಸಾಕಷ್ಟು ಅನುಮತಿಗಳಿಲ್ಲ",
+        "ThisUserHaveNoWallet": "ಈ ಬಳಕೆದಾರರಿಗೆ ಯಾವುದೇ ವ್ಯಾಲೆಟ್ ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
+        "TheWalletOfThisUserInvalid": "ಈ ಬಳಕೆದಾರರ ವಾಲೆಟ್ ಅಮಾನ್ಯವಾಗಿದೆ",
+        "WalletInvalid": "ವಾಲೆಟ್ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ"
     },
     "admin": {
         "Title": "ಸ್ವತ್ತುಗಳು ಆಡಳಿತಾತ್ಮಕ",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "ಕನಿಷ್ಠ ಕ್ರೆಡಿಟ್‌ಗಳು ಋಣಾತ್ಮಕವಾಗಿರಬಾರದು",
             "CreditsToAddNegative": "ಸೇರಿಸಲು ಕ್ರೆಡಿಟ್‌ಗಳು ಋಣಾತ್ಮಕವಾಗಿರಬಾರದು"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "ಸ್ವೀಕರಿಸುವವರನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+        "TransactionSuccess": "ವಹಿವಾಟು ಯಶಸ್ಸು",
+        "OrTypeWalletAddress": "ಅಥವಾ ಸ್ವೀಕರಿಸುವವರ ವ್ಯಾಲೆಟ್ ವಿಳಾಸವನ್ನು ಟೈಪ್ ಮಾಡಿ"
+    },
+    "currencies": {
+        "choose": "ಕರೆನ್ಸಿ ಆಯ್ಕೆಮಾಡಿ"
     }
 }

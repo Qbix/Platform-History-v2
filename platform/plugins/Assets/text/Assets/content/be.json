@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Ваш плацеж апрацоўваецца",
         "FailTryAgain": "Ваш плацёж не прайшоў, паспрабуйце яшчэ раз",
         "SomethingWrong": "Нешта пайшло не так",
-        "PaymentStatus": "Статус аплаты"
+        "PaymentStatus": "Статус аплаты",
+        "PayTo": "Аплаціць {{displayName}}",
+        "ChooseCurrency": "Выберыце валюту",
+        "YouCanSendUpTo": "Вы можаце адправіць да {{amount}} {{symbol}}",
+        "Send": "Адправіць",
+        "EnterAmount": "увядзіце суму"
     },
     "credits": {
         "InviteAcceptedBy": "Запрашэнне прынята {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} увёў прозвішча",
         "Streams_user_icon": "{{invitedUserName}} уведзены значок",
         "Places_user_location": "{{invitedUserName}} увёў месцазнаходжанне",
-        "Streams_greeting": "{{invitedUserName}} увёў прывітанне"
+        "Streams_greeting": "{{invitedUserName}} увёў прывітанне",
+        "InvitedUserFilledStream": "{{invitedUserName}} запоўнена {{FilledStreamTitle}}",
+        "ForFillingStream": "Для напаўнення {{FilledStreamTitle}}",
+        "CreatePrivateChat": "для прыватнага чата з {{toUserName}}"
     },
     "history": {
         "Date": "Дата",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Атрымана {{amount}} крэдытаў",
         "Streams_user_icon": "Атрымана {{amount}} крэдытаў",
         "Places_user_location": "Атрымана {{amount}} крэдытаў",
-        "Streams_greeting": "Атрымана {{amount}} крэдытаў"
+        "Streams_greeting": "Атрымана {{amount}} крэдытаў",
+        "User": "Карыстальнік"
     },
     "subscriptions": {
         "infoTitle": "Усталюйце інфармацыю аб аплаце",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ўсталяваць спасылку на дадатковую інфармацыю",
             "DescriptionPlaceholder": "Апісанне паслугі",
             "SaveService": "Сэрвіс захавання",
-            "SelectRequiredParticipants": "Абавязковыя ўдзельнікі"
+            "SelectRequiredParticipants": "Абавязковыя ўдзельнікі",
+            "RequiredParticipantsDesc": "Калі ласка, абярыце звязаных удзельнікаў, якія неабходныя для выкарыстання гэтай паслугі (напрыклад, хатніх жывёл для &quot;Выставы сабак&quot;, або дзяцей для &quot;Дзіцячага свята&quot; і г.д.). Калі паслуга платная, карыстальнік павінен будзе плаціць таксама за кожнага звязанага ўдзельніка."
         },
         "ManageServiceTemplates": "Кіраванне шаблонамі сэрвісаў",
         "ManageServices": "Кіраванне паслугамі",
@@ -388,6 +398,132 @@
             "Description": "Падрабязнасці карыстальніка",
             "aboutPlaceholder": "Рэдагаваць біяграфію",
             "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?"
+        },
+        "Add": "Дадаць",
+        "Remove": "Выдаліць",
+        "NoNFTyet": "Пакуль няма NFT",
+        "Claim": "Прэтэнзія",
+        "ClaimNFT": "Патрабаваць NFT",
+        "Unlocking": "Разблакіроўка",
+        "Unlock": "Разблакіраваць",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Кантракт NFT",
+                        "seriesId": "серыя Id",
+                        "owner": "Уладальнік",
+                        "currency": "Валюта",
+                        "price": "Кошт",
+                        "beneficiary": "Бенефіцыяр",
+                        "autoindex": "Аўтаіндэкс",
+                        "duration": "Працягласць",
+                        "rateInterval": "Інтэрвал ставак",
+                        "rateAmount": "Сума стаўкі"
+                    },
+                    "small": {
+                        "NFTContract": "Кантракт NFT",
+                        "seriesId": "жэтоны будуць чаканіцца ў гэтай серыі",
+                        "owner": "уладальнік асобніка, інакш будзе адпраўшчык",
+                        "currency": "Валюта за набытыя токены, калі нуль - за натыўныя манеты",
+                        "price": "Кошт",
+                        "beneficiary": "Бенефіцыяр продажу токенаў, інакш будзе адпраўнік",
+                        "autoindex": "Аўтаіндэкс",
+                        "duration": "Замак пасля чаканкі. Нуль азначае атрымаць яго неадкладна.",
+                        "rateInterval": "інтэрвал вядра для спецыяльнай пакупкі",
+                        "rateAmount": "вядро колькасць для спецыяльнай пакупкі"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(неабавязкова)",
+                    "number": "лік",
+                    "address": "адрас",
+                    "fraction": "доля",
+                    "integer": "цэлы лік",
+                    "seconds": "секунд",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Прадукцыя",
+                "viewInstancesList": "Абнавіць спіс"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Ідэнтыфікатар серыі",
+                        "account": "Рахунак",
+                        "amount": "Сума"
+                    },
+                    "small": {
+                        "seriesId": "новы токен будзе належаць да серыі з такім ідэнтыфікатарам",
+                        "account": "уладальнік толькі што створанага NFT. калі не ўстаноўлена - будзе выкарыстоўвацца бягучы кашалёк",
+                        "amount": "колькасць NFT для чаканкі"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(неабавязкова)",
+                    "seriesId": "ідэнтыфікатар",
+                    "account": "рахунак",
+                    "amount": "колькасць",
+                    "integer": "цэлы лік"
+                },
+                "btn": {
+                    "Purchase": "Купля",
+                    "SpecialPurchase": "Спецыяльная купля"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Адрас"
+                    },
+                    "small": {
+                        "account": "Адрас"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Няправільны адрас"
+                },
+                "placeholders": {
+                    "account": "Адрас"
+                },
+                "addToWhitelist": "Дадаць у белы спіс",
+                "removeFromWhitelist": "Выдаліць з белага спісу"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Ідэнтыфікатар токена",
+                    "custodian": "Захавальнік",
+                    "recipient": "Атрымальнік"
+                },
+                "small": {
+                    "tokenId": "ідэнтыфікатар токена, які трэба заблакіраваць або разблакіраваць",
+                    "custodian": "адрас, які можна разблакіраваць",
+                    "recipient": "адрас, які будзе атрымліваць токены"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Няправільны TokenId",
+                "invalidCustodian": "Несапраўдны захавальнік",
+                "invalidRecipient": "Няправільны атрымальнік"
+            },
+            "placeholders": {
+                "optional": "(неабавязкова)",
+                "tokenId": "ідэнтыфікатар",
+                "custodian": "адрас"
+            },
+            "Lock": "Замак",
+            "Unlock": "Разблакіраваць",
+            "Locked": "Зачынены",
+            "CustodianAddress": "Адрас захавальніка",
+            "TokenWasClaimed": "Маркер &quot;{{title}}&quot; быў запатрабаваны",
+            "TokenWasLocked": "Маркер &quot;{{title}}&quot; быў заблакаваны",
+            "TokenWasUnlocked": "Токен &quot;{{title}}&quot; быў разблакіраваны"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Для працы з дадаткам неабходна падключыць MetaMask",
         "UserNotLoggedInMetaMask": "Карыстальнік не ўвайшоў у MetaMask",
         "CurrencyNotFound": "Валюта не знойдзена",
-        "WrongChain": "Гэты NFT створаны пад &quot;{{chain}}&quot;. Калі ласка, выкарыстоўвайце гэты ланцужок."
+        "WrongChain": "Гэты NFT створаны пад &quot;{{chain}}&quot;. Калі ласка, выкарыстоўвайце гэты ланцужок.",
+        "AmountInvalid": "Сума несапраўдная!",
+        "NoRecipientSelected": "Атрымальнік не выбраны",
+        "NotEnoughPermissionsWallet": "Недастаткова правоў для чытання кашалька гэтага карыстальніка",
+        "ThisUserHaveNoWallet": "Гэтаму карыстальніку не прызначаны кашалёк",
+        "TheWalletOfThisUserInvalid": "Кашалёк гэтага карыстальніка несапраўдны",
+        "WalletInvalid": "Несапраўдны адрас кашалька"
     },
     "admin": {
         "Title": "Актывы адміністрацыйныя",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Мінімум крэдытаў не можа быць адмоўным",
             "CreditsToAddNegative": "Крэдыты для дадання не могуць быць адмоўнымі"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Выберыце атрымальніка",
+        "TransactionSuccess": "Поспех транзакцыі",
+        "OrTypeWalletAddress": "АБО ўвядзіце адрас кашалька атрымальніка"
+    },
+    "currencies": {
+        "choose": "Выберыце валюту"
     }
 }

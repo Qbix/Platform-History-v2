@@ -343,7 +343,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
-			// if forcePayment true, try to change funds for credits
+			// if forcePayment true, try to charge more funds for credits
 			if (Q::ifset($more, "forcePayment", false)) {
 				try {
 					Assets::charge($payments, Assets_Credits::convert($amount, "credits", "USD"));

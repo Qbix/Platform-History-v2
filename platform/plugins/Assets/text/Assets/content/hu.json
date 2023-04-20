@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Befizetése feldolgozás alatt áll",
         "FailTryAgain": "A fizetés sikertelen volt, kérjük, próbálja újra",
         "SomethingWrong": "Valami elromlott",
-        "PaymentStatus": "Fizetési állapot"
+        "PaymentStatus": "Fizetési állapot",
+        "PayTo": "Fizetés {{displayName}}",
+        "ChooseCurrency": "Válasszon pénznemet",
+        "YouCanSendUpTo": "Legfeljebb {{amount}} {{symbol}}",
+        "Send": "Küld",
+        "EnterAmount": "adja meg az összeget"
     },
     "credits": {
         "InviteAcceptedBy": "A meghívást elfogadta: {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kredit",
             "BonusCredits": "{{amount}} kredit"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} kitöltve {{FilledStreamTitle}}",
+        "ForFillingStream": "A kitöltéshez {{FilledStreamTitle}}",
+        "CreatePrivateChat": "privát csevegéshez {{toUserName}}"
     },
     "history": {
         "Date": "Dátum",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Szerzett {{amount}} kreditet",
         "Places_user_location": "{{amount}} kreditet szerzett",
         "Streams_greeting": "{{amount}} kreditet szerzett",
-        "YouHaveCreditsToStart": "{{amount}} kreditet szerzett"
+        "YouHaveCreditsToStart": "{{amount}} kreditet szerzett",
+        "User": "Felhasználó"
     },
     "subscriptions": {
         "infoTitle": "Állítsa be a fizetési információkat",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "további információs link beállítása",
             "DescriptionPlaceholder": "Szolgáltatás leírása",
             "SaveService": "Szolgáltatás mentése",
-            "SelectRequiredParticipants": "Szükséges résztvevők"
+            "SelectRequiredParticipants": "Szükséges résztvevők",
+            "RequiredParticipantsDesc": "Kérjük, válassza ki azokat a kapcsolódó résztvevőket, akikre szükség van a szolgáltatás használatához (például háziállatok a &quot;Kutyakiállításhoz&quot;, vagy gyermekek a &quot;Gyermekünnephez&quot; stb.). Fizetős szolgáltatás esetén a felhasználónak minden kapcsolódó résztvevőért is fizetnie kell."
         },
         "ManageServiceTemplates": "Szolgáltatássablonok kezelése",
         "ManageServices": "Szolgáltatások kezelése",
@@ -387,6 +397,132 @@
             "Description": "Felhasználói adatok",
             "aboutPlaceholder": "Életrajz szerkesztése",
             "SureLogOut": "Biztos, hogy ki akar jelentkezni?"
+        },
+        "Add": "Hozzáadás",
+        "Remove": "Távolítsa el",
+        "NoNFTyet": "Még nincsenek NFT-k",
+        "Claim": "Követelés",
+        "ClaimNFT": "NFT igénylése",
+        "Unlocking": "Feloldás",
+        "Unlock": "Kinyit",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "sorozat Id",
+                        "owner": "Tulajdonos",
+                        "currency": "valuta",
+                        "price": "Ár",
+                        "beneficiary": "Kedvezményezett",
+                        "autoindex": "Autoindex",
+                        "duration": "Időtartam",
+                        "rateInterval": "Rate intervallum",
+                        "rateAmount": "Rate összeg"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "zsetonokat vernek ebben a sorozatban",
+                        "owner": "példány tulajdonosa, ellenkező esetben a feladó lesz",
+                        "currency": "A vásárolt tokenek pénzneme, ha nulla - a natív érmékre",
+                        "price": "Ár",
+                        "beneficiary": "A tokenek értékesítésének kedvezményezettje, ellenkező esetben a feladó lesz",
+                        "autoindex": "Autoindex",
+                        "duration": "Verés után zár. A nulla azt jelenti, hogy azonnal szerezze be.",
+                        "rateInterval": "vödör intervallum speciális vásárláshoz",
+                        "rateAmount": "vödör összeg speciális vásárláshoz"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(választható)",
+                    "number": "szám",
+                    "address": "cím",
+                    "fraction": "töredék",
+                    "integer": "egész szám",
+                    "seconds": "másodpercig",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Gyárt",
+                "viewInstancesList": "Lista frissítése"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Sorozatazonosító",
+                        "account": "fiók",
+                        "amount": "Összeg"
+                    },
+                    "small": {
+                        "seriesId": "az új token ilyen azonosítójú sorozatba fog tartozni",
+                        "account": "az újonnan létrehozott NFT tulajdonosa. ha nincs beállítva - az aktuális pénztárcát használja",
+                        "amount": "összeg NFT a menta"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(választható)",
+                    "seriesId": "id",
+                    "account": "fiókot",
+                    "amount": "összeg",
+                    "integer": "egész szám"
+                },
+                "btn": {
+                    "Purchase": "Vásárlás",
+                    "SpecialPurchase": "Különleges vásárlás"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Cím"
+                    },
+                    "small": {
+                        "account": "Cím"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Helytelen cím"
+                },
+                "placeholders": {
+                    "account": "Cím"
+                },
+                "addToWhitelist": "Hozzáadás az engedélyezőlistához",
+                "removeFromWhitelist": "Eltávolítás az engedélyezési listáról"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token azonosító",
+                    "custodian": "Gondnok",
+                    "recipient": "Befogadó"
+                },
+                "small": {
+                    "tokenId": "token azonosító, amit zárni vagy feloldani kell",
+                    "custodian": "cím, amely feloldható",
+                    "recipient": "cím, amelyre a tokeneket kapják"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Érvénytelen tokenId",
+                "invalidCustodian": "Érvénytelen letétkezelő",
+                "invalidRecipient": "Érvénytelen címzett"
+            },
+            "placeholders": {
+                "optional": "(választható)",
+                "tokenId": "id",
+                "custodian": "cím"
+            },
+            "Lock": "Zár",
+            "Unlock": "Kinyit",
+            "Locked": "Zárt",
+            "CustodianAddress": "A letétkezelő címe",
+            "TokenWasClaimed": "A(z) „{{title}}” tokent igényelték",
+            "TokenWasLocked": "A(z) „{{title}}” token zárolva volt",
+            "TokenWasUnlocked": "A(z) &quot;{{title}}&quot; token feloldva"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Az alkalmazás használatához csatlakoztatva kell lennie a MetaMask-nak",
         "UserNotLoggedInMetaMask": "A felhasználó nincs bejelentkezve a MetaMask-ba",
         "CurrencyNotFound": "A pénznem nem található",
-        "WrongChain": "Ez az NFT „{{chain}}” alatt jött létre. Kérjük, használja ezt a láncot."
+        "WrongChain": "Ez az NFT „{{chain}}” alatt jött létre. Kérjük, használja ezt a láncot.",
+        "AmountInvalid": "Az összeg érvénytelen!",
+        "NoRecipientSelected": "Nincs kiválasztott címzett",
+        "NotEnoughPermissionsWallet": "Nincs elegendő engedély a felhasználó pénztárcájának olvasásához",
+        "ThisUserHaveNoWallet": "Ehhez a felhasználóhoz nincs hozzárendelve pénztárca",
+        "TheWalletOfThisUserInvalid": "A felhasználó pénztárcája érvénytelen",
+        "WalletInvalid": "A Wallet-cím érvénytelen"
     },
     "admin": {
         "Title": "Vagyonkezelés",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "A kreditek minimuma nem lehet negatív",
             "CreditsToAddNegative": "A hozzáadandó jóváírások nem lehetnek negatívak"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Válassza ki a címzettet",
+        "TransactionSuccess": "A tranzakció sikere",
+        "OrTypeWalletAddress": "VAGY írja be a címzett pénztárca címét"
+    },
+    "currencies": {
+        "choose": "Válasszon pénznemet"
     }
 }

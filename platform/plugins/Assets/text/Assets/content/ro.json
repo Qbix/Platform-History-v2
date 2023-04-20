@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Plata dvs. este în curs de procesare",
         "FailTryAgain": "Plata dvs. nu a avut succes, vă rugăm să încercați din nou",
         "SomethingWrong": "Ceva n-a mers bine",
-        "PaymentStatus": "Starea plății"
+        "PaymentStatus": "Starea plății",
+        "PayTo": "Plătiți {{displayName}}",
+        "ChooseCurrency": "Alegeți o monedă",
+        "YouCanSendUpTo": "Puteți trimite până la {{amount}} {{symbol}}",
+        "Send": "Trimite",
+        "EnterAmount": "introduceți suma"
     },
     "credits": {
         "InviteAcceptedBy": "Invitație acceptată de {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} credite",
             "BonusCredits": "{{amount}} credite"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} completat {{FilledStreamTitle}}",
+        "ForFillingStream": "Pentru umplere {{FilledStreamTitle}}",
+        "CreatePrivateChat": "pentru chat privat cu {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Ați câștigat {{amount}} credite",
         "Places_user_location": "Ați câștigat {{amount}} credite",
         "Streams_greeting": "Ați câștigat {{amount}} credite",
-        "YouHaveCreditsToStart": "Ați câștigat {{amount}} credite"
+        "YouHaveCreditsToStart": "Ați câștigat {{amount}} credite",
+        "User": "Utilizator"
     },
     "subscriptions": {
         "infoTitle": "Setați informațiile de plată",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "setați linkul de informații suplimentare",
             "DescriptionPlaceholder": "Descrierea serviciului",
             "SaveService": "Salvare serviciu",
-            "SelectRequiredParticipants": "Participanți obligatorii"
+            "SelectRequiredParticipants": "Participanți obligatorii",
+            "RequiredParticipantsDesc": "Vă rugăm să selectați participanții înrudiți care trebuie să utilizeze acest serviciu (de exemplu, animale de companie pentru „Expoziție pentru câini”, sau copii pentru „Vărbătoarea copiilor” etc.). Dacă serviciul este plătit, utilizatorul va trebui să plătească și pentru fiecare participant înrudit."
         },
         "ManageServiceTemplates": "Gestionați șabloanele de servicii",
         "ManageServices": "Gestionați Serviciile",
@@ -387,6 +397,132 @@
             "Description": "Detalii utilizator",
             "aboutPlaceholder": "Editează biografia",
             "SureLogOut": "Sunteți sigur că doriți să vă deconectați?"
+        },
+        "Add": "Adăuga",
+        "Remove": "Elimina",
+        "NoNFTyet": "Nu există încă NFT",
+        "Claim": "Revendicare",
+        "ClaimNFT": "Revendicați NFT",
+        "Unlocking": "Deblocare",
+        "Unlock": "Deblocați",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "seria Id",
+                        "owner": "Proprietar",
+                        "currency": "Moneda",
+                        "price": "Preț",
+                        "beneficiary": "Beneficiar",
+                        "autoindex": "Autoindex",
+                        "duration": "Durată",
+                        "rateInterval": "Intervalul ratei",
+                        "rateAmount": "Suma ratei"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "jetoanele vor fi bătute în această serie",
+                        "owner": "proprietarul de exemplu, altfel va fi expeditorul",
+                        "currency": "Moneda pentru jetoanele achiziționate, dacă zero - pentru monedele native",
+                        "price": "Preț",
+                        "beneficiary": "Beneficiar al vânzării de jetoane, în caz contrar va fi expeditor",
+                        "autoindex": "Autoindex",
+                        "duration": "Blocare după batere. Zero înseamnă să-l primești imediat.",
+                        "rateInterval": "interval de găleată pentru achiziție specială",
+                        "rateAmount": "suma de găleată pentru achiziție specială"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(optional)",
+                    "number": "număr",
+                    "address": "abordare",
+                    "fraction": "fracțiune",
+                    "integer": "întreg",
+                    "seconds": "secunde",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Legume şi fructe",
+                "viewInstancesList": "Actualizează lista"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID-ul seriei",
+                        "account": "Cont",
+                        "amount": "Cantitate"
+                    },
+                    "small": {
+                        "seriesId": "noul jeton va aparține în serie cu un astfel de ID",
+                        "account": "proprietarul NFT nou creat. dacă nu este setat - va folosi portofelul actual",
+                        "amount": "suma NFT la monet"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(optional)",
+                    "seriesId": "id",
+                    "account": "cont",
+                    "amount": "Cantitate",
+                    "integer": "întreg"
+                },
+                "btn": {
+                    "Purchase": "Cumpărare",
+                    "SpecialPurchase": "Achizitie speciala"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Abordare"
+                    },
+                    "small": {
+                        "account": "Abordare"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Adresă invalidă"
+                },
+                "placeholders": {
+                    "account": "Abordare"
+                },
+                "addToWhitelist": "Adăugați la lista albă",
+                "removeFromWhitelist": "Eliminați din lista albă"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID-ul simbolului",
+                    "custodian": "Custode",
+                    "recipient": "Destinatar"
+                },
+                "small": {
+                    "tokenId": "token id ce trebuie să blocați sau să deblocați",
+                    "custodian": "adresa care poate fi deblocată",
+                    "recipient": "adresa care va primi jetoanele"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TokenId nevalid",
+                "invalidCustodian": "Custode invalid",
+                "invalidRecipient": "Destinatar nevalid"
+            },
+            "placeholders": {
+                "optional": "(optional)",
+                "tokenId": "id",
+                "custodian": "abordare"
+            },
+            "Lock": "Lacăt",
+            "Unlock": "Deblocați",
+            "Locked": "Blocat",
+            "CustodianAddress": "Adresa custodei",
+            "TokenWasClaimed": "Indicativul „{{title}}” a fost revendicat",
+            "TokenWasLocked": "Indicativul „{{title}}” a fost blocat",
+            "TokenWasUnlocked": "Indicativul „{{title}}” a fost deblocat"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Trebuie conectat MetaMask pentru a funcționa cu aplicația",
         "UserNotLoggedInMetaMask": "Utilizatorul nu este autentificat la MetaMask",
         "CurrencyNotFound": "Moneda nu a fost găsită",
-        "WrongChain": "Acest NFT creat sub „{{chain}}”. Vă rugăm să utilizați acest lanț."
+        "WrongChain": "Acest NFT creat sub „{{chain}}”. Vă rugăm să utilizați acest lanț.",
+        "AmountInvalid": "Suma nevalidă!",
+        "NoRecipientSelected": "Niciun destinatar selectat",
+        "NotEnoughPermissionsWallet": "Nu există suficiente permisiuni pentru a citi portofelul acestui utilizator",
+        "ThisUserHaveNoWallet": "Acest utilizator nu are niciun portofel alocat",
+        "TheWalletOfThisUserInvalid": "Portofelul acestui utilizator este invalid",
+        "WalletInvalid": "Adresa portofel nevalidă"
     },
     "admin": {
         "Title": "Active administrative",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Creditele minime nu pot fi negative",
             "CreditsToAddNegative": "Creditele de adăugat nu pot fi negative"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Selectați destinatarul",
+        "TransactionSuccess": "Tranzacție de succes",
+        "OrTypeWalletAddress": "SAU introduceți adresa portofelului destinatarului"
+    },
+    "currencies": {
+        "choose": "Alegeți o monedă"
     }
 }

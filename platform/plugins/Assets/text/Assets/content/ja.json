@@ -27,7 +27,12 @@
         "PaymentProcessing.": "お支払いを処理しています",
         "FailTryAgain": "お支払いに失敗しました。もう一度お試しください",
         "SomethingWrong": "エラーが発生しました",
-        "PaymentStatus": "支払い状況"
+        "PaymentStatus": "支払い状況",
+        "PayTo": "{{displayName}}を支払う",
+        "ChooseCurrency": "通貨を選択",
+        "YouCanSendUpTo": "{{amount}} {{symbol}}まで送信できます",
+        "Send": "送信",
+        "EnterAmount": "金額を入力します"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}}によって受け入れられた招待",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}}クレジット",
             "BonusCredits": "{{amount}}クレジット"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} 埋められた {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}}を満たすために",
+        "CreatePrivateChat": "{{toUserName}}とのプライベートチャット用"
     },
     "history": {
         "Date": "日にち",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}}クレジットを獲得",
         "Places_user_location": "{{amount}}クレジットを獲得",
         "Streams_greeting": "{{amount}}クレジットを獲得",
-        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得"
+        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得",
+        "User": "ユーザー"
     },
     "subscriptions": {
         "infoTitle": "支払い情報を設定する",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "追加情報リンクを設定する",
             "DescriptionPlaceholder": "サービスの説明",
             "SaveService": "サービスを保存",
-            "SelectRequiredParticipants": "必要な参加者"
+            "SelectRequiredParticipants": "必要な参加者",
+            "RequiredParticipantsDesc": "このサービスを利用するために必要な関連する参加者を選択してください（たとえば、「ドッグショー」の場合はペット、「子供の休日」の場合は子供など）。サービスが有料の場合、ユーザーは関連する各参加者に対しても支払う必要があります。"
         },
         "ManageServiceTemplates": "サービステンプレートの管理",
         "ManageServices": "サービスの管理",
@@ -387,6 +397,132 @@
             "Description": "ユーザーの詳細",
             "aboutPlaceholder": "略歴を編集",
             "SureLogOut": "ログアウトしてもよろしいですか？"
+        },
+        "Add": "追加",
+        "Remove": "削除",
+        "NoNFTyet": "NFT はまだありません",
+        "Claim": "請求",
+        "ClaimNFT": "NFTの請求",
+        "Unlocking": "ロック解除",
+        "Unlock": "ロック解除",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTコントラクト",
+                        "seriesId": "シリーズID",
+                        "owner": "オーナー",
+                        "currency": "通貨",
+                        "price": "価格",
+                        "beneficiary": "受益者",
+                        "autoindex": "オートインデックス",
+                        "duration": "間隔",
+                        "rateInterval": "レート間隔",
+                        "rateAmount": "レート金額"
+                    },
+                    "small": {
+                        "NFTContract": "NFTコントラクト",
+                        "seriesId": "トークンはこのシリーズで鋳造されます",
+                        "owner": "インスタンスの所有者、それ以外の場合は送信者",
+                        "currency": "ゼロの場合、購入したトークンの通貨 - ネイティブ コインの場合",
+                        "price": "価格",
+                        "beneficiary": "トークン販売の受益者、それ以外は送信者",
+                        "autoindex": "オートインデックス",
+                        "duration": "鋳造後にロックします。ゼロはすぐに取得することを意味します。",
+                        "rateInterval": "特別購入のバケット間隔",
+                        "rateAmount": "特別購入のバケツ金額"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(オプション)",
+                    "number": "番号",
+                    "address": "住所",
+                    "fraction": "分数",
+                    "integer": "整数",
+                    "seconds": "秒",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "生産",
+                "viewInstancesList": "リストを更新"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "シリーズID",
+                        "account": "アカウント",
+                        "amount": "額"
+                    },
+                    "small": {
+                        "seriesId": "新しいトークンは、そのような ID と連続して属します",
+                        "account": "新しく作成された NFT の所有者。設定されていない場合 - 現在のウォレットを使用します",
+                        "amount": "NFTからミントまでの量"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(オプション)",
+                    "seriesId": "ID",
+                    "account": "アカウント",
+                    "amount": "額",
+                    "integer": "整数"
+                },
+                "btn": {
+                    "Purchase": "購入",
+                    "SpecialPurchase": "特別購入"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "住所"
+                    },
+                    "small": {
+                        "account": "住所"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "無効なアドレス"
+                },
+                "placeholders": {
+                    "account": "住所"
+                },
+                "addToWhitelist": "ホワイトリストに追加",
+                "removeFromWhitelist": "ホワイトリストから削除"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "トークンID",
+                    "custodian": "カストディアン",
+                    "recipient": "受信者"
+                },
+                "small": {
+                    "tokenId": "ロックまたはロック解除する必要があるトークン ID",
+                    "custodian": "ロック解除できるアドレス",
+                    "recipient": "トークンを受け取るアドレス"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "トークン ID が無効です",
+                "invalidCustodian": "無効なカストディアン",
+                "invalidRecipient": "受信者が無効です"
+            },
+            "placeholders": {
+                "optional": "(オプション)",
+                "tokenId": "ID",
+                "custodian": "住所"
+            },
+            "Lock": "ロック",
+            "Unlock": "ロック解除",
+            "Locked": "ロックされた",
+            "CustodianAddress": "保管者住所",
+            "TokenWasClaimed": "トークン「{{title}}」が要求されました",
+            "TokenWasLocked": "トークン「{{title}}」がロックされました",
+            "TokenWasUnlocked": "トークン「{{title}}」のロックが解除されました"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "アプリケーションで動作するには MetaMask が接続されている必要があります",
         "UserNotLoggedInMetaMask": "ユーザーは MetaMask にログインしていません",
         "CurrencyNotFound": "通貨が見つかりません",
-        "WrongChain": "このNFTは「{{chain}}」の下に作成されました。このチェーンをご利用ください。"
+        "WrongChain": "このNFTは「{{chain}}」の下に作成されました。このチェーンをご利用ください。",
+        "AmountInvalid": "金額が無効です。",
+        "NoRecipientSelected": "受信者が選択されていません",
+        "NotEnoughPermissionsWallet": "このユーザーのウォレットを読み取るための十分な権限がありません",
+        "ThisUserHaveNoWallet": "このユーザーにはウォレットが割り当てられていません",
+        "TheWalletOfThisUserInvalid": "このユーザーのウォレットは無効です",
+        "WalletInvalid": "ウォレットのアドレスが無効です"
     },
     "admin": {
         "Title": "資産管理",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "クレジットの最小値を負にすることはできません",
             "CreditsToAddNegative": "追加するクレジットを負にすることはできません"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "受信者を選択",
+        "TransactionSuccess": "取引成功",
+        "OrTypeWalletAddress": "OR 受信者のウォレットアドレスを入力"
+    },
+    "currencies": {
+        "choose": "通貨を選択"
     }
 }

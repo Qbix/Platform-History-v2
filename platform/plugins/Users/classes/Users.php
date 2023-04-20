@@ -1037,8 +1037,9 @@ abstract class Users extends Base_Users
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
 	 * @param {array|string|true} [$icon=array()] By default, the user icon would be "default".
-	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
+	 *  But you can pass here an array of basename => filename or basename => url pairs, or a gravatar url to
 	 *  download the various sizes from gravatar. 
+	 *  You can pass a closure or a string here, referring to a function to call for the icon, such as "b" or "A::b" or an anonymous function () { }
 	 *  If $identifier['app']['platform'] is specified, and $icon array is empty, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 *  Finally, you can pass true to generate an icon instead of using the default icon.
@@ -1176,14 +1177,19 @@ abstract class Users extends Base_Users
 			Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)
 		);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
-		$usersRegisterIcon = Q::ifset($_SESSION, 'Users', 'register', 'icon', null);
-		if (!is_array($icon) and $usersRegisterIcon) {
-			$icon = $usersRegisterIcon;
-			unset($_SESSION['Users']['register']['icon']);
+		if (is_array($icon)) {
 			$user->set('skipIconSearch', $icon);
-		}
-		if (is_array($icon) or is_string($icon)) {
+		} else if ((is_string($icon) or is_object($icon))
+		and is_callable($icon)) {
+			$icon = call_user_func_array($icon, func_get_args());
 			$user->set('skipIconSearch', $icon);
+		} else {
+			$usersRegisterIcon = Q::ifset($_SESSION, 'Users', 'register', 'icon', null);
+			if ($usersRegisterIcon) {
+				$icon = $usersRegisterIcon;
+				unset($_SESSION['Users']['register']['icon']);
+				$user->set('skipIconSearch', $icon);
+			}
 		}
 
 		Users::$cache['user'] = $user;
@@ -1270,11 +1276,19 @@ abstract class Users extends Base_Users
 		} else {
 			// Import the user's icon and save it
 			if (is_string($icon)) {
-				// download it from a URL, try to append gravatar-like querystrings for size hints
-				$iconString = $icon;
-				$icon = array();
-				foreach ($sizes as $size) {
-					$icon["$size.png"] = Q_Uri::fixUrl("$iconString?s=$size");
+				if (Q_Valid::url($icon)) {
+					// download it from a URL, try to append gravatar-like querystrings for size hints
+					$iconString = $icon;
+					$icon = array();
+					foreach ($sizes as $size) {
+						$icon["$size.png"] = Q_Uri::fixUrl("$iconString?s=$size");
+					}
+				} else if (file_exists($icon)) {
+					$iconString = $icon;
+					$icon = array();
+					foreach ($sizes as $size) {
+						$icon["$size.png"] = $iconString;
+					}
 				}
 			} else if ($icon === true) {				
 				// locally generated icons
@@ -1515,37 +1529,38 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * Imports an icon and sets $user->icon to the url.
+	 * Imports an icon and sets $user->icon to the new icon's url.
 	 * @method importIcon
 	 * @static
 	 * @param {Users_User|object} $obj An object on which this function will set ->icon field.
-	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
+	 * @param {array} [$sources=array()] Array of $basename => $filename (of an existing file)
+	 *   or $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Set this unless $obj is a Users_User, in which case it will
 	 *   defaults to APP/files/APP/uploads/Users/USERID/icon/imported
 	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
 	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
-	static function importIcon($obj, $urls = array(), $directory = null, $cookies = null)
+	static function importIcon($obj, $sources = array(), $directory = null, $cookies = null)
 	{
 		$app = Q::app();
 		if (empty($directory) and !empty($obj->id)) {
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
 				.DS.Q_Utils::splitId($obj->id).DS.'icon'.DS.'imported';
 		}
-		if (empty($urls)) {
+		if (empty($sources)) {
 			return $directory;
 		}
 		Q_Utils::canWriteToPath($directory, null, true);
 		$largestWidth = 0;
 		$largestHeight = 0;
-		$largestUrl = null;
+		$largestSource = null;
 		$largestCookie = null;
 		$largestImage = null;
 		$o = array();
 		// get image with largest width and height at the same time
-		foreach ($urls as $basename => $url) {
-			if (!is_string($url)) continue;
+		foreach ($sources as $basename => $source) {
+			if (!is_string($source)) continue;
 			$filename = $directory.DS.$basename;
 			$info = pathinfo($filename);
 			$parts = explode('x', $info['filename']);
@@ -1561,18 +1576,18 @@ abstract class Users extends Base_Users
 			and $largestHeight < (int)$height) {
 				$largestWidth = (int)$width;
 				$largestHeight = (int)$height;
-				$largestUrl = $url;
+				$largestSource = $source;
 				$largestCookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
 				$o = $largestCookie ? array("cookie: $largestCookie") : array();
 			}
 		}
-		if ($largestUrl) {
-			if (Q_Valid::url($largestUrl)) {
-				$data = Q_Utils::get($largestUrl, null, true, $o);
+		if ($largestSource) {
+			if (Q_Valid::url($largestSource)) {
+				$data = Q_Utils::get($largestSource, null, true, $o);
 			} else {
-				$data = file_get_contents($largestUrl);
+				$data = file_get_contents($largestSource);
 			}
-			if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+			if (pathinfo($source, PATHINFO_EXTENSION) == 'ico') {
 				require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
 				$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
 				$largestImage = $icoFileService->extractIcon($data, 32, 32);
@@ -1585,21 +1600,21 @@ abstract class Users extends Base_Users
 				$sh = imagesy($largestImage);
 			}
 		}
-		foreach ($urls as $basename => $url) {
+		foreach ($sources as $basename => $source) {
 			$filename = $directory.DS.$basename;
-			if (is_string($url)) { // url is where we download the file from
+			if (is_string($source)) { // where we get the file
 				$info = pathinfo($filename);
 				if ($largestImage) {
 					$source = $largestImage;
 				} else {
 					$cookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
 					$o = $cookie ? array("cookie: $largestCookie") : array();
-					if (Q_Valid::url($url)) {
-						$data = Q_Utils::get($url, null, true, $o);
+					if (Q_Valid::url($source)) {
+						$data = Q_Utils::get($source, null, true, $o);
 					} else {
-						$data = file_get_contents($url);
+						$data = file_get_contents($source);
 					}
-					if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+					if (pathinfo($source, PATHINFO_EXTENSION) == 'ico') {
 						require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
 						$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
 						$source = $icoFileService->extractIcon($data, 32, 32);
@@ -1652,10 +1667,10 @@ abstract class Users extends Base_Users
 						break;
 				}
 				call_user_func($func, $image, $directory.DS.$info['filename'].'.png');
-			} else { // url is an array with "size" and "hash" for avatar generator
+			} else { // source is an array with "size" and "hash" for avatar generator
 				$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 				$gravatar = Q_Config::get('Users', 'login', 'gravatar', false);
-				$data = Q_Image::avatar($url['hash'], $url['size'], $type, $gravatar);
+				$data = Q_Image::avatar($source['hash'], $source['size'], $type, $gravatar);
 				if ($gravatar) {
 					file_put_contents($filename, $data); // downloaded				
 				} else {

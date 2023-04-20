@@ -590,7 +590,8 @@ class Q_Html
 	 * @param {string} $src The source of the image. Will be subjected to theming before being rendered.
 	 * @param {string} [$alt='image'] The alternative text to display in place of the image.
 	 * @param {array} [$attributes=array()] An array of additional attributes to render. Consists of name => value pairs.
-	 *     Can also contain "cacheBust" => milliseconds, to use Q_Uri::cacheBust on the src.
+	 * @param {array} [$attributes.cacheBust] Optionally pass milliseconds, to use Q_Uri::cacheBust on the src.
+	 * @param {array} [$attributes.dontLazyload] Optionally pass true, to skip doing any potential lazyload
 	 * @return {string} The generated markup
 	 */
 	static function img (
@@ -607,14 +608,22 @@ class Q_Html
 		}
 		$tag_params = array_merge(@compact('src', 'alt'), $attributes);
 		$lazyload = Q_Config::get('Q', 'images', 'lazyload', array());
-		if ($lazyload and !empty($tag_params['src'])) {
-			$src = Q_Html::themedUrl($tag_params['src']);
-			$tag_params['data-lazyload-src'] = $src;
-			$tag_params['src'] = self::themedUrl(
-				!empty($lazyload['loadingSrc'])
-					? $lazyload['loadingSrc']
-					: "{{Q}}/img/throbbers/transparent.gif"
-			);
+		$dontLazyload = Q::ifset($attributes, 'dontLazyload', null);
+		unset($attributes['dontLazyload']);
+		if ($lazyload and !$dontLazyload
+		and !empty($tag_params['src'])) {
+			if (!self::$environmentWithoutJavascript
+			and !self::$lazyloadWithoutJavascript) {
+				$src = Q_Html::themedUrl($tag_params['src']);
+				$tag_params['data-lazyload-src'] = $src;
+				$tag_params['src'] = self::themedUrl(
+					!empty($lazyload['loadingSrc'])
+						? $lazyload['loadingSrc']
+						: "{{Q}}/img/throbbers/transparent.gif"
+				);
+			} else {
+				$tag_params['loading'] = 'lazy';
+			}
 		}
 		return self::tag('img', $tag_params);
 	}
@@ -1550,6 +1559,26 @@ class Q_Html
 			$text_truncated .= substr($text, -$last_word_len);
 		return $text_truncated;
 	}
+
+	/**
+	 * Set to true to use native HTML for lazyloading images instead of JS.
+	 * Works in most modern browsers.
+	 * @property $lazyloadWithoutJavascript
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $lazyloadWithoutJavascript = false;
+
+	/**
+	 * Set to true temporarily in order to avoid features
+	 * such as lazyloading
+	 * @property $environmentWithoutJavascript
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $environmentWithoutJavascript = false;
 		
 	/**
 	 * The theme url to be used in various methods of this class.

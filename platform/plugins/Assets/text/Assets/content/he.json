@@ -19,7 +19,12 @@
         "PaymentProcessing.": "התשלום שלך בעיבוד",
         "FailTryAgain": "התשלום שלך לא הצליח, אנא נסה שוב",
         "SomethingWrong": "משהו השתבש",
-        "PaymentStatus": "מצב תשלום"
+        "PaymentStatus": "מצב תשלום",
+        "PayTo": "שלם {{displayName}}",
+        "ChooseCurrency": "בחר מטבע",
+        "YouCanSendUpTo": "ניתן לשלוח עד {{amount}} {{symbol}}",
+        "Send": "לִשְׁלוֹחַ",
+        "EnterAmount": "הכנס סכום"
     },
     "credits": {
         "InviteAcceptedBy": "הזמן את ההזמנה על ידי {{1}}",
@@ -52,7 +57,10 @@
         "Streams_greeting": "{{invitedUserName}} הזין ברכה",
         "CreatePaidStream": "ליצירת {{toStreamName}}",
         "BonusCredits": "בונוס {{amount}} זיכויים",
-        "BuyBonus": "קנייה של {{amount}} זיכויים בבת אחת, תוביל לבונוס של {{bonus}} זיכויים."
+        "BuyBonus": "קנייה של {{amount}} זיכויים בבת אחת, תוביל לבונוס של {{bonus}} זיכויים.",
+        "InvitedUserFilledStream": "{{invitedUserName}} מילא {{FilledStreamTitle}}",
+        "ForFillingStream": "למילוי {{FilledStreamTitle}}",
+        "CreatePrivateChat": "לצ&#39;אט פרטי עם {{toUserName}}"
     },
     "history": {
         "Date": "תאריך",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "הרווח {{amount}} זיכויים",
         "Streams_user_icon": "הרווח {{amount}} זיכויים",
         "Places_user_location": "הרווח {{amount}} זיכויים",
-        "Streams_greeting": "הרווח {{amount}} זיכויים"
+        "Streams_greeting": "הרווח {{amount}} זיכויים",
+        "User": "מִשׁתַמֵשׁ"
     },
     "subscriptions": {
         "infoTitle": "הגדר פרטי תשלום",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "הגדר קישור מידע נוסף",
             "DescriptionPlaceholder": "תיאור השירות",
             "SaveService": "שמור שירות",
-            "SelectRequiredParticipants": "משתתפים נדרשים"
+            "SelectRequiredParticipants": "משתתפים נדרשים",
+            "RequiredParticipantsDesc": "אנא בחר משתתפים קשורים אשר נדרשים להשתמש בשירות זה (לדוגמה חיות מחמד עבור &quot;מופע כלבים&quot;, או ילדים עבור &quot;חופשת ילדים&quot; וכו&#39;). אם השירות בתשלום, המשתמש יצטרך לשלם גם עבור כל משתתף קשור."
         },
         "ManageServiceTemplates": "נהל תבניות שירות",
         "ManageServices": "ניהול שירותים",
@@ -220,7 +230,13 @@
         "NeedMetaMaskConnected": "צריך MetaMask מחובר כדי לעבוד עם אפליקציה",
         "UserNotLoggedInMetaMask": "המשתמש אינו מחובר ל- MetaMask",
         "CurrencyNotFound": "המטבע לא נמצא",
-        "WrongChain": "NFT זה נוצר תחת &quot;{{chain}}&quot;. אנא השתמש בשרשרת זו."
+        "WrongChain": "NFT זה נוצר תחת &quot;{{chain}}&quot;. אנא השתמש בשרשרת זו.",
+        "AmountInvalid": "סכום לא חוקי!",
+        "NoRecipientSelected": "לא נבחר נמען",
+        "NotEnoughPermissionsWallet": "אין מספיק הרשאות לקרוא את הארנק של המשתמש הזה",
+        "ThisUserHaveNoWallet": "למשתמש זה לא הוקצה ארנק",
+        "TheWalletOfThisUserInvalid": "הארנק של משתמש זה לא חוקי",
+        "WalletInvalid": "כתובת הארנק לא חוקית"
     },
     "admin": {
         "Title": "ניהול נכסים",
@@ -415,6 +431,140 @@
             "Description": "פרטי המשתמש",
             "aboutPlaceholder": "ערוך ביוגרפיה",
             "SureLogOut": "האם אתה בטוח שאתה רוצה להתנתק?"
+        },
+        "Add": "לְהוֹסִיף",
+        "Remove": "לְהַסִיר",
+        "NoNFTyet": "עדיין אין NFTs",
+        "Claim": "תְבִיעָה",
+        "ClaimNFT": "טען NFT",
+        "Unlocking": "נעילה",
+        "Unlock": "לבטל נעילה",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "חוזה NFT",
+                        "seriesId": "מזהה סדרה",
+                        "owner": "בעלים",
+                        "currency": "מטבע",
+                        "price": "מחיר",
+                        "beneficiary": "מוּטָב",
+                        "autoindex": "אינדקס אוטומטי",
+                        "duration": "מֶשֶׁך",
+                        "rateInterval": "מרווח שיעור",
+                        "rateAmount": "סכום תעריף"
+                    },
+                    "small": {
+                        "NFTContract": "חוזה NFT",
+                        "seriesId": "אסימונים יוטבעו בסדרה זו",
+                        "owner": "הבעלים של הדוגמה, אחרת יהיה השולח",
+                        "currency": "מטבע עבור אסימונים שנרכשו, אם אפס - עבור מטבעות מקומיים",
+                        "price": "מחיר",
+                        "beneficiary": "מוטב מכירת אסימונים, אחרת יהיה השולח",
+                        "autoindex": "אינדקס אוטומטי",
+                        "duration": "נעילה לאחר ההטבעה. אפס אומר לקבל את זה מיד.",
+                        "rateInterval": "מרווח דלי לרכישה מיוחדת",
+                        "rateAmount": "כמות דלי לרכישה מיוחדת"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(אופציונאלי)",
+                    "number": "מספר",
+                    "address": "כתובת",
+                    "fraction": "שבריר",
+                    "integer": "מספר שלם",
+                    "seconds": "שניות",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ליצר",
+                "viewInstancesList": "רשימת רענון"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "מזהה סדרה",
+                        "account": "חֶשְׁבּוֹן",
+                        "amount": "כמות"
+                    },
+                    "small": {
+                        "seriesId": "אסימון חדש יהיה שייך לסדרה עם מזהה כזה",
+                        "account": "הבעלים של NFT שזה עתה נוצר. אם לא מוגדר - ישתמש בארנק הנוכחי",
+                        "amount": "כמות NFT למנטה"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(אופציונאלי)",
+                    "seriesId": "תְעוּדַת זֶהוּת",
+                    "account": "חֶשְׁבּוֹן",
+                    "amount": "כמות",
+                    "integer": "מספר שלם"
+                },
+                "btn": {
+                    "Purchase": "לִרְכּוֹשׁ",
+                    "SpecialPurchase": "רכישה מיוחדת"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "כתובת"
+                    },
+                    "small": {
+                        "account": "כתובת"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "כתובת לא חוקית"
+                },
+                "placeholders": {
+                    "account": "כתובת"
+                },
+                "addToWhitelist": "הוסף לרשימת ההיתרים",
+                "removeFromWhitelist": "הסר מהרשימה הלבנה"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "מזהה אסימון",
+                    "custodian": "אַפּוֹטרוֹפּוֹס",
+                    "recipient": "מקבל"
+                },
+                "small": {
+                    "tokenId": "מזהה אסימון מה צריך לנעול או לפתוח",
+                    "custodian": "כתובת שיכולה להיות מסוגלת לבטל את הנעילה",
+                    "recipient": "כתובת שתקבל את האסימונים"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "מזהה אסימון לא חוקי",
+                "invalidCustodian": "אפוטרופוס לא חוקי",
+                "invalidRecipient": "נמען לא חוקי"
+            },
+            "placeholders": {
+                "optional": "(אופציונאלי)",
+                "tokenId": "תְעוּדַת זֶהוּת",
+                "custodian": "כתובת"
+            },
+            "Lock": "לנעול",
+            "Unlock": "לבטל נעילה",
+            "Locked": "נָעוּל",
+            "CustodianAddress": "כתובת האפוטרופוס",
+            "TokenWasClaimed": "האסימון &quot;{{title}}&quot; נתבע",
+            "TokenWasLocked": "האסימון &quot;{{title}}&quot; ננעל",
+            "TokenWasUnlocked": "האסימון &quot;{{title}}&quot; בוטל"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "בחר נמען",
+        "TransactionSuccess": "הצלחת העסקה",
+        "OrTypeWalletAddress": "או הקלד את כתובת ארנק הנמען"
+    },
+    "currencies": {
+        "choose": "בחר מטבע"
     }
 }

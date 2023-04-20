@@ -27,7 +27,12 @@
         "PaymentProcessing.": "თქვენი გადახდა მუშავდება",
         "FailTryAgain": "თქვენი გადახდა არ განხორციელდა, გთხოვთ, სცადოთ ხელახლა",
         "SomethingWrong": "Რაღაც არასწორად წავიდა",
-        "PaymentStatus": "გადახდის სტატუსი"
+        "PaymentStatus": "გადახდის სტატუსი",
+        "PayTo": "გადახდა {{displayName}}",
+        "ChooseCurrency": "აირჩიეთ ვალუტა",
+        "YouCanSendUpTo": "შეგიძლიათ გაგზავნოთ მაქსიმუმ {{amount}} {{symbol}}",
+        "Send": "გაგზავნა",
+        "EnterAmount": "შეიტანეთ თანხა"
     },
     "credits": {
         "InviteAcceptedBy": "მოწვევა მიღებულია {{invitedUserName}}-ის მიერ",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} კრედიტი",
             "BonusCredits": "{{amount}} კრედიტი"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} შევსებული {{FilledStreamTitle}}",
+        "ForFillingStream": "შესავსებად {{FilledStreamTitle}}",
+        "CreatePrivateChat": "პირადი ჩატისთვის {{toUserName}}"
     },
     "history": {
         "Date": "თარიღი",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "მოიპოვა {{amount}} კრედიტი",
         "Places_user_location": "მოიპოვა {{amount}} კრედიტი",
         "Streams_greeting": "მოიპოვა {{amount}} კრედიტი",
-        "YouHaveCreditsToStart": "მოიპოვა {{amount}} კრედიტი"
+        "YouHaveCreditsToStart": "მოიპოვა {{amount}} კრედიტი",
+        "User": "მომხმარებელი"
     },
     "subscriptions": {
         "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "დააყენეთ დამატებითი ინფორმაციის ბმული",
             "DescriptionPlaceholder": "სერვისის აღწერა",
             "SaveService": "სერვისის შენახვა",
-            "SelectRequiredParticipants": "აუცილებელი მონაწილეები"
+            "SelectRequiredParticipants": "აუცილებელი მონაწილეები",
+            "RequiredParticipantsDesc": "გთხოვთ, აირჩიოთ დაკავშირებული მონაწილეები, რომლებსაც ესაჭიროებათ ამ სერვისით სარგებლობა (მაგალითად, შინაური ცხოველები &quot;ძაღლების ჩვენებისთვის&quot;, ან ბავშვები &quot;ბავშვთა დღესასწაულისთვის&quot; და ა.შ.). თუ მომსახურება ფასიანია, მომხმარებელს მოუწევს გადაიხადოს ასევე თითოეული დაკავშირებული მონაწილესთვის."
         },
         "ManageServiceTemplates": "სერვისის შაბლონების მართვა",
         "ManageServices": "სერვისების მართვა",
@@ -387,6 +397,132 @@
             "Description": "მომხმარებლის დეტალები",
             "aboutPlaceholder": "ბიო რედაქტირება",
             "SureLogOut": "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?"
+        },
+        "Add": "დამატება",
+        "Remove": "ამოღება",
+        "NoNFTyet": "NFT ჯერ არ არის",
+        "Claim": "Მოთხოვნა",
+        "ClaimNFT": "მოითხოვეთ NFT",
+        "Unlocking": "განბლოკვა",
+        "Unlock": "განბლოკვა",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTCკონტრაქტი",
+                        "seriesId": "სერია Id",
+                        "owner": "მფლობელი",
+                        "currency": "ვალუტა",
+                        "price": "ფასი",
+                        "beneficiary": "ბენეფიციარი",
+                        "autoindex": "ავტოინდექსი",
+                        "duration": "ხანგრძლივობა",
+                        "rateInterval": "შეფასების ინტერვალი",
+                        "rateAmount": "შეაფასეთ თანხა"
+                    },
+                    "small": {
+                        "NFTContract": "NFTCკონტრაქტი",
+                        "seriesId": "ჟეტონები დაიჭრება ამ სერიაში",
+                        "owner": "ინსტანციის მფლობელი, წინააღმდეგ შემთხვევაში იქნება გამომგზავნი",
+                        "currency": "ვალუტა შეძენილი ტოკენებისთვის, თუ ნულოვანია - მშობლიური მონეტებისთვის",
+                        "price": "ფასი",
+                        "beneficiary": "ტოკენების გაყიდვის ბენეფიციარი, წინააღმდეგ შემთხვევაში იქნება გამგზავნი",
+                        "autoindex": "ავტოინდექსი",
+                        "duration": "ჩაკეტვა მოჭრის შემდეგ. ნულოვანი ნიშნავს დაუყოვნებლივ მიღებას.",
+                        "rateInterval": "bucket ინტერვალი სპეციალური შესყიდვისთვის",
+                        "rateAmount": "ვედრო თანხა სპეციალური შესყიდვისთვის"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(სურვილისამებრ)",
+                    "number": "ნომერი",
+                    "address": "მისამართი",
+                    "fraction": "წილადი",
+                    "integer": "მთელი რიცხვი",
+                    "seconds": "წამი",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "აწარმოე",
+                "viewInstancesList": "Განახლებული სია"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "სერიის ID",
+                        "account": "ანგარიში",
+                        "amount": "თანხა"
+                    },
+                    "small": {
+                        "seriesId": "ახალი ჟეტონი მიეკუთვნება სერიებს ასეთი ID-ით",
+                        "account": "ახლად შექმნილი NFT-ის მფლობელი. თუ არ არის დაყენებული - გამოიყენებს მიმდინარე საფულეს",
+                        "amount": "თანხა NFT პიტნამდე"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(სურვილისამებრ)",
+                    "seriesId": "id",
+                    "account": "ანგარიში",
+                    "amount": "თანხა",
+                    "integer": "მთელი რიცხვი"
+                },
+                "btn": {
+                    "Purchase": "Შესყიდვა",
+                    "SpecialPurchase": "სპეციალური შენაძენი"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "მისამართი"
+                    },
+                    "small": {
+                        "account": "მისამართი"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "არასწორი მისამართი"
+                },
+                "placeholders": {
+                    "account": "მისამართი"
+                },
+                "addToWhitelist": "თეთრ სიაში დამატება",
+                "removeFromWhitelist": "ამოღება თეთრი სიიდან"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ჟეტონის ID",
+                    "custodian": "მეურვე",
+                    "recipient": "მიმღები"
+                },
+                "small": {
+                    "tokenId": "ტოკენის ID, რისი ჩაკეტვა ან განბლოკვა გჭირდებათ",
+                    "custodian": "მისამართი, რომლის განბლოკვაც შესაძლებელია",
+                    "recipient": "მისამართი, რომელიც მიიღებს ტოკენებს"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "არასწორი tokenId",
+                "invalidCustodian": "არასწორი მეურვე",
+                "invalidRecipient": "არასწორი მიმღები"
+            },
+            "placeholders": {
+                "optional": "(სურვილისამებრ)",
+                "tokenId": "id",
+                "custodian": "მისამართი"
+            },
+            "Lock": "ჩაკეტვა",
+            "Unlock": "განბლოკვა",
+            "Locked": "ჩაკეტილი",
+            "CustodianAddress": "მეურვის მისამართი",
+            "TokenWasClaimed": "ჟეტონი „{{title}}“ მოითხოვა",
+            "TokenWasLocked": "ჟეტონი „{{title}}“ დაბლოკილია",
+            "TokenWasUnlocked": "ჟეტონი „{{title}}“ განბლოკილია"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "საჭიროა MetaMask დაკავშირებული აპლიკაციასთან მუშაობასთან",
         "UserNotLoggedInMetaMask": "მომხმარებელი არ არის შესული MetaMask-ში",
         "CurrencyNotFound": "ვალუტა ვერ მოიძებნა",
-        "WrongChain": "ეს NFT შექმნილია „{{chain}}“-ში. გთხოვთ გამოიყენოთ ეს ჯაჭვი."
+        "WrongChain": "ეს NFT შექმნილია „{{chain}}“-ში. გთხოვთ გამოიყენოთ ეს ჯაჭვი.",
+        "AmountInvalid": "თანხა არასწორია!",
+        "NoRecipientSelected": "მიმღები არ არის არჩეული",
+        "NotEnoughPermissionsWallet": "არ არის საკმარისი ნებართვები ამ მომხმარებლის საფულის წასაკითხად",
+        "ThisUserHaveNoWallet": "ამ მომხმარებელს არ აქვს მინიჭებული საფულე",
+        "TheWalletOfThisUserInvalid": "ამ მომხმარებლის საფულე არასწორია",
+        "WalletInvalid": "საფულის მისამართი არასწორია"
     },
     "admin": {
         "Title": "აქტივების ადმინისტრაციული",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "კრედიტების მინიმალური რაოდენობა არ შეიძლება იყოს უარყოფითი",
             "CreditsToAddNegative": "დასამატებელი კრედიტები არ შეიძლება იყოს უარყოფითი"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "აირჩიეთ მიმღები",
+        "TransactionSuccess": "გარიგების წარმატება",
+        "OrTypeWalletAddress": "ან აკრიფეთ მიმღების საფულის მისამართი"
+    },
+    "currencies": {
+        "choose": "აირჩიეთ ვალუტა"
     }
 }

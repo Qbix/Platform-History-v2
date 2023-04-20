@@ -19,7 +19,12 @@
         "PaymentProcessing.": "আপনার পেমেন্ট প্রক্রিয়া করা হচ্ছে",
         "FailTryAgain": "আপনার পেমেন্ট সফল হয়নি, আবার চেষ্টা করুন",
         "SomethingWrong": "কিছু ভুল হয়েছে",
-        "PaymentStatus": "লেনদেনের অবস্থা"
+        "PaymentStatus": "লেনদেনের অবস্থা",
+        "PayTo": "পরিশোধ করুন {{displayName}}",
+        "ChooseCurrency": "একটি মুদ্রা চয়ন করুন",
+        "YouCanSendUpTo": "আপনি {{amount}} {{symbol}} পর্যন্ত পাঠাতে পারেন",
+        "Send": "পাঠান",
+        "EnterAmount": "পরিমান লিখুন"
     },
     "credits": {
         "InviteAcceptedBy": "আমন্ত্রণ গৃহীত হয়েছে {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} পদবি প্রবেশ করান",
         "Streams_user_icon": "{{invitedUserName}} আইকন প্রবেশ করান",
         "Places_user_location": "{{invitedUserName}} অবস্থান প্রবেশ করান",
-        "Streams_greeting": "{{invitedUserName}} শুভেচ্ছা প্রবেশ করান৷"
+        "Streams_greeting": "{{invitedUserName}} শুভেচ্ছা প্রবেশ করান৷",
+        "InvitedUserFilledStream": "{{invitedUserName}} ভর্তি {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} পূরণের জন্য",
+        "CreatePrivateChat": "{{toUserName}} এর সাথে ব্যক্তিগত চ্যাটের জন্য"
     },
     "history": {
         "Date": "তারিখ",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "অর্জন করেছে {{amount}} ক্রেডিট",
         "Streams_user_icon": "অর্জন করেছে {{amount}} ক্রেডিট",
         "Places_user_location": "অর্জন করেছে {{amount}} ক্রেডিট",
-        "Streams_greeting": "অর্জন করেছে {{amount}} ক্রেডিট"
+        "Streams_greeting": "অর্জন করেছে {{amount}} ক্রেডিট",
+        "User": "ব্যবহারকারী"
     },
     "subscriptions": {
         "infoTitle": "পেমেন্ট তথ্য সেট করুন",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "অতিরিক্ত তথ্য লিঙ্ক সেট করুন",
             "DescriptionPlaceholder": "সেবা বর্ণনা",
             "SaveService": "সেভ সার্ভিস",
-            "SelectRequiredParticipants": "প্রয়োজনীয় অংশগ্রহণকারীদের"
+            "SelectRequiredParticipants": "প্রয়োজনীয় অংশগ্রহণকারীদের",
+            "RequiredParticipantsDesc": "অনুগ্রহ করে সংশ্লিষ্ট অংশগ্রহণকারীদের নির্বাচন করুন যা এই পরিষেবাটি ব্যবহার করতে হবে (উদাহরণস্বরূপ &quot;কুকুরের প্রদর্শনীতে পোষা প্রাণী&quot;, বা &quot;শিশুদের ছুটির দিন&quot; ইত্যাদির জন্য শিশু)। পরিষেবা প্রদান করা হলে, ব্যবহারকারীকে প্রতিটি সংশ্লিষ্ট অংশগ্রহণকারীদের জন্যও অর্থ প্রদান করতে হবে।"
         },
         "ManageServiceTemplates": "পরিষেবা টেমপ্লেট পরিচালনা করুন",
         "ManageServices": "পরিষেবাগুলি পরিচালনা করুন",
@@ -388,6 +398,132 @@
             "Description": "ব্যবহারকারীর বৃত্যান্ত",
             "aboutPlaceholder": "বায়ো সম্পাদনা করুন",
             "SureLogOut": "আপনি লগ আউট করতে চান?"
+        },
+        "Add": "যোগ করুন",
+        "Remove": "অপসারণ",
+        "NoNFTyet": "এখনও কোন NFTs",
+        "Claim": "দাবি",
+        "ClaimNFT": "NFT দাবি করুন",
+        "Unlocking": "আনলকিং",
+        "Unlock": "আনলক করুন",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC চুক্তি",
+                        "seriesId": "সিরিজ আইডি",
+                        "owner": "মালিক",
+                        "currency": "মুদ্রা",
+                        "price": "দাম",
+                        "beneficiary": "মৃত ব্যক্তির সম্পত্তির উত্তরাধিকারী",
+                        "autoindex": "অটোইনডেক্স",
+                        "duration": "সময়কাল",
+                        "rateInterval": "হারের ব্যবধান",
+                        "rateAmount": "হার পরিমাণ"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC চুক্তি",
+                        "seriesId": "টোকেন এই সিরিজে minted করা হবে",
+                        "owner": "উদাহরণ মালিক, অন্যথায় প্রেরক হবে",
+                        "currency": "কেনা টোকেনের জন্য মুদ্রা, যদি শূন্য হয় - দেশীয় কয়েনের জন্য",
+                        "price": "দাম",
+                        "beneficiary": "টোকেন বিক্রির সুবিধাভোগী, অন্যথায় প্রেরক হবেন",
+                        "autoindex": "অটোইনডেক্স",
+                        "duration": "minting পরে লক. জিরো মানে অবিলম্বে পেয়ে যান।",
+                        "rateInterval": "বিশেষ ক্রয়ের জন্য বালতি ব্যবধান",
+                        "rateAmount": "বিশেষ ক্রয়ের জন্য বালতি পরিমাণ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ঐচ্ছিক)",
+                    "number": "সংখ্যা",
+                    "address": "ঠিকানা",
+                    "fraction": "ভগ্নাংশ",
+                    "integer": "পূর্ণসংখ্যা",
+                    "seconds": "সেকেন্ড",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "উৎপাদন করা",
+                "viewInstancesList": "তালিকা পুনরুজ্জীবিত করা"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "সিরিজ আইডি",
+                        "account": "হিসাব",
+                        "amount": "পরিমাণ"
+                    },
+                    "small": {
+                        "seriesId": "নতুন টোকেন এই ধরনের আইডি সহ সিরিজের অন্তর্গত হবে",
+                        "account": "সদ্য তৈরি NFT এর মালিক। সেট না থাকলে - বর্তমান ওয়ালেট ব্যবহার করবে",
+                        "amount": "পুদিনা থেকে NFT পরিমাণ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ঐচ্ছিক)",
+                    "seriesId": "আইডি",
+                    "account": "অ্যাকাউন্ট",
+                    "amount": "পরিমাণ",
+                    "integer": "পূর্ণসংখ্যা"
+                },
+                "btn": {
+                    "Purchase": "ক্রয়",
+                    "SpecialPurchase": "বিশেষ ক্রয়"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "ঠিকানা"
+                    },
+                    "small": {
+                        "account": "ঠিকানা"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "ভুল ঠিকানা"
+                },
+                "placeholders": {
+                    "account": "ঠিকানা"
+                },
+                "addToWhitelist": "হোয়াইটলিস্টে যোগ করুন",
+                "removeFromWhitelist": "হোয়াইটলিস্ট থেকে সরান"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "টোকেন আইডি",
+                    "custodian": "কাস্টডিয়ান",
+                    "recipient": "প্রাপক"
+                },
+                "small": {
+                    "tokenId": "টোকেন আইডি কি লক বা আনলক করতে হবে",
+                    "custodian": "ঠিকানা যা আনলক করতে সক্ষম হতে পারে",
+                    "recipient": "ঠিকানা যা টোকেন গ্রহণ করবে"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "অবৈধ টোকেনআইডি",
+                "invalidCustodian": "অবৈধ অভিভাবক",
+                "invalidRecipient": "অবৈধ প্রাপক"
+            },
+            "placeholders": {
+                "optional": "(ঐচ্ছিক)",
+                "tokenId": "আইডি",
+                "custodian": "ঠিকানা"
+            },
+            "Lock": "তালা",
+            "Unlock": "আনলক করুন",
+            "Locked": "তালাবদ্ধ",
+            "CustodianAddress": "অভিভাবক ঠিকানা",
+            "TokenWasClaimed": "টোকেন &quot;{{title}}&quot; দাবি করা হয়েছে৷",
+            "TokenWasLocked": "টোকেন &quot;{{title}}&quot; লক করা হয়েছে৷",
+            "TokenWasUnlocked": "টোকেন &quot;{{title}}&quot; আনলক করা হয়েছে৷"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "অ্যাপ্লিকেশনের সাথে কাজ করার জন্য মেটামাস্ক সংযুক্ত করা দরকার",
         "UserNotLoggedInMetaMask": "ব্যবহারকারী মেটামাস্কে লগ ইন করেননি",
         "CurrencyNotFound": "মুদ্রা পাওয়া যায়নি",
-        "WrongChain": "এই NFT &quot;{{chain}}&quot; এর অধীনে তৈরি করা হয়েছে। এই চেইন ব্যবহার করুন."
+        "WrongChain": "এই NFT &quot;{{chain}}&quot; এর অধীনে তৈরি করা হয়েছে। এই চেইন ব্যবহার করুন.",
+        "AmountInvalid": "পরিমাণ অবৈধ!",
+        "NoRecipientSelected": "কোনো প্রাপক নির্বাচন করা হয়নি",
+        "NotEnoughPermissionsWallet": "এই ব্যবহারকারীর ওয়ালেট পড়ার জন্য পর্যাপ্ত অনুমতি নেই৷",
+        "ThisUserHaveNoWallet": "এই ব্যবহারকারীর কোন ওয়ালেট বরাদ্দ নেই",
+        "TheWalletOfThisUserInvalid": "এই ব্যবহারকারীর ওয়ালেট অবৈধ৷",
+        "WalletInvalid": "ওয়ালেট ঠিকানা অবৈধ৷"
     },
     "admin": {
         "Title": "সম্পদ প্রশাসনিক",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "সর্বনিম্ন ক্রেডিট নেতিবাচক হতে পারে না",
             "CreditsToAddNegative": "যোগ করার জন্য ক্রেডিট নেতিবাচক হতে পারে না"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "প্রাপক নির্বাচন করুন",
+        "TransactionSuccess": "লেনদেন সফল",
+        "OrTypeWalletAddress": "অথবা প্রাপকের ওয়ালেট ঠিকানা টাইপ করুন"
+    },
+    "currencies": {
+        "choose": "একটি মুদ্রা চয়ন করুন"
     }
 }

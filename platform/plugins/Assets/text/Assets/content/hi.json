@@ -27,7 +27,12 @@
         "PaymentProcessing.": "आपका भुगतान संसाधित हो रहा है",
         "FailTryAgain": "आपका भुगतान सफल नहीं हुआ, कृपया पुनः प्रयास करें",
         "SomethingWrong": "कुछ गलत हो गया",
-        "PaymentStatus": "भुगतान की स्थिति"
+        "PaymentStatus": "भुगतान की स्थिति",
+        "PayTo": "भुगतान {{displayName}}",
+        "ChooseCurrency": "एक मुद्रा चुनें",
+        "YouCanSendUpTo": "आप {{amount}} {{symbol}} तक भेज सकते हैं",
+        "Send": "भेजना",
+        "EnterAmount": "राशि डालें"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} ने आमंत्रण स्वीकार किया",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} क्रेडिट",
             "BonusCredits": "{{amount}} क्रेडिट"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} भरा हुआ {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} भरने के लिए",
+        "CreatePrivateChat": "{{toUserName}} के साथ निजी चैट के लिए"
     },
     "history": {
         "Date": "दिनांक",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "अर्जित {{amount}} क्रेडिट",
         "Places_user_location": "अर्जित {{amount}} क्रेडिट",
         "Streams_greeting": "अर्जित {{amount}} क्रेडिट",
-        "YouHaveCreditsToStart": "अर्जित {{amount}} क्रेडिट"
+        "YouHaveCreditsToStart": "अर्जित {{amount}} क्रेडिट",
+        "User": "उपयोगकर्ता"
     },
     "subscriptions": {
         "infoTitle": "भुगतान जानकारी सेट करें",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "अतिरिक्त जानकारी लिंक सेट करें",
             "DescriptionPlaceholder": "सेवा विवरण",
             "SaveService": "सेवा सहेजें",
-            "SelectRequiredParticipants": "आवश्यक प्रतिभागी"
+            "SelectRequiredParticipants": "आवश्यक प्रतिभागी",
+            "RequiredParticipantsDesc": "कृपया संबंधित प्रतिभागियों का चयन करें जो इस सेवा का उपयोग करने के लिए आवश्यक हैं (उदाहरण के लिए &quot;डॉग शो&quot; के लिए पालतू जानवर, या &quot;बच्चों की छुट्टी&quot; आदि के लिए बच्चे)। यदि सेवा का भुगतान किया जाता है, तो उपयोगकर्ता को प्रत्येक संबंधित प्रतिभागियों के लिए भी भुगतान करना होगा।"
         },
         "ManageServiceTemplates": "सेवा टेम्पलेट प्रबंधित करें",
         "ManageServices": "सेवाएं प्रबंधित करें",
@@ -387,6 +397,132 @@
             "Description": "उपयोगकर्ता की जानकारी",
             "aboutPlaceholder": "जैव संपादित करें",
             "SureLogOut": "क्या आप लॉग आउट करना चाहते हैं?"
+        },
+        "Add": "जोड़ना",
+        "Remove": "निकालना",
+        "NoNFTyet": "अभी तक कोई एनएफटी नहीं",
+        "Claim": "दावा",
+        "ClaimNFT": "दावा एनएफटी",
+        "Unlocking": "अनलॉक",
+        "Unlock": "अनलॉक",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "एनएफटीअनुबंध",
+                        "seriesId": "श्रृंखला आईडी",
+                        "owner": "मालिक",
+                        "currency": "मुद्रा",
+                        "price": "कीमत",
+                        "beneficiary": "लाभार्थी",
+                        "autoindex": "ऑटोइंडेक्स",
+                        "duration": "अवधि",
+                        "rateInterval": "दर अंतराल",
+                        "rateAmount": "दर राशि"
+                    },
+                    "small": {
+                        "NFTContract": "एनएफटीअनुबंध",
+                        "seriesId": "इस श्रृंखला में टोकन बनाए जाएंगे",
+                        "owner": "उदाहरण का स्वामी, अन्यथा प्रेषक होगा",
+                        "currency": "खरीदे गए टोकन के लिए मुद्रा, यदि शून्य - देशी सिक्कों के लिए",
+                        "price": "कीमत",
+                        "beneficiary": "टोकन बेचने का लाभार्थी, अन्यथा प्रेषक होगा",
+                        "autoindex": "ऑटोइंडेक्स",
+                        "duration": "मिंटिंग के बाद लॉक करें. शून्य का अर्थ है तुरंत प्राप्त करें।",
+                        "rateInterval": "विशेष खरीद के लिए बाल्टी अंतराल",
+                        "rateAmount": "विशेष खरीद के लिए बकेट राशि"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(वैकल्पिक)",
+                    "number": "संख्या",
+                    "address": "पता",
+                    "fraction": "अंश",
+                    "integer": "पूर्णांक",
+                    "seconds": "सेकंड",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "उत्पाद",
+                "viewInstancesList": "सूची रीफ़्रेश करें"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "सीरीज आईडी",
+                        "account": "खाता",
+                        "amount": "मात्रा"
+                    },
+                    "small": {
+                        "seriesId": "नया टोकन ऐसी आईडी के साथ श्रृंखला में होगा",
+                        "account": "नव निर्मित एनएफटी के मालिक। यदि सेट नहीं है - वर्तमान वॉलेट का उपयोग करेगा",
+                        "amount": "टकसाल के लिए राशि एनएफटी"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(वैकल्पिक)",
+                    "seriesId": "पहचान",
+                    "account": "खाता",
+                    "amount": "मात्रा",
+                    "integer": "पूर्णांक"
+                },
+                "btn": {
+                    "Purchase": "खरीदना",
+                    "SpecialPurchase": "विशेष खरीद"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "पता"
+                    },
+                    "small": {
+                        "account": "पता"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "अमान्य पता"
+                },
+                "placeholders": {
+                    "account": "पता"
+                },
+                "addToWhitelist": "श्वेतसूची में जोड़ें",
+                "removeFromWhitelist": "श्वेतसूची से निकालें"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "टोकन आईडी",
+                    "custodian": "संरक्षक",
+                    "recipient": "प्राप्तकर्ता"
+                },
+                "small": {
+                    "tokenId": "टोकन आईडी जिसे लॉक या अनलॉक करने की आवश्यकता है",
+                    "custodian": "पता जो अनलॉक करने में सक्षम हो सकता है",
+                    "recipient": "पता जो टोकन प्राप्त करेगा"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "अमान्य टोकन आईडी",
+                "invalidCustodian": "अमान्य अभिरक्षक",
+                "invalidRecipient": "अवैध प्राप्तकर्ता"
+            },
+            "placeholders": {
+                "optional": "(वैकल्पिक)",
+                "tokenId": "पहचान",
+                "custodian": "पता"
+            },
+            "Lock": "ताला",
+            "Unlock": "अनलॉक",
+            "Locked": "बंद",
+            "CustodianAddress": "संरक्षक पता",
+            "TokenWasClaimed": "टोकन &quot;{{title}}&quot; का दावा किया गया था",
+            "TokenWasLocked": "टोकन &quot;{{title}}&quot; लॉक था",
+            "TokenWasUnlocked": "टोकन &quot;{{title}}&quot; अनलॉक किया गया था"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "एप्लिकेशन के साथ काम करने के लिए जुड़े मेटामास्क की आवश्यकता है",
         "UserNotLoggedInMetaMask": "उपयोगकर्ता मेटामास्क में लॉग इन नहीं है",
         "CurrencyNotFound": "मुद्रा नहीं मिली",
-        "WrongChain": "यह एनएफटी &quot;{{chain}}&quot; के तहत बनाया गया है। कृपया इस श्रृंखला का उपयोग करें।"
+        "WrongChain": "यह एनएफटी &quot;{{chain}}&quot; के तहत बनाया गया है। कृपया इस श्रृंखला का उपयोग करें।",
+        "AmountInvalid": "राशि अमान्य!",
+        "NoRecipientSelected": "कोई प्राप्तकर्ता नहीं चुना गया",
+        "NotEnoughPermissionsWallet": "इस उपयोगकर्ता के बटुए को पढ़ने के लिए पर्याप्त अनुमतियां नहीं हैं",
+        "ThisUserHaveNoWallet": "इस उपयोगकर्ता को कोई वॉलेट असाइन नहीं किया गया है",
+        "TheWalletOfThisUserInvalid": "इस उपयोगकर्ता का बटुआ अमान्य है",
+        "WalletInvalid": "बटुआ पता अमान्य"
     },
     "admin": {
         "Title": "संपत्ति प्रशासनिक",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "न्यूनतम क्रेडिट ऋणात्मक नहीं हो सकता",
             "CreditsToAddNegative": "जोड़ने के लिए क्रेडिट नकारात्मक नहीं हो सकते"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "प्राप्तकर्ता का चयन करें",
+        "TransactionSuccess": "लेन-देन की सफलता",
+        "OrTypeWalletAddress": "या प्राप्तकर्ता वॉलेट पता टाइप करें"
+    },
+    "currencies": {
+        "choose": "एक मुद्रा चुनें"
     }
 }

@@ -19,7 +19,12 @@
         "PaymentProcessing.": "您的付款正在处理中",
         "FailTryAgain": "您的付款未成功，请重试",
         "SomethingWrong": "出问题了",
-        "PaymentStatus": "支付状态"
+        "PaymentStatus": "支付状态",
+        "PayTo": "支付 {{displayName}}",
+        "ChooseCurrency": "选择货币",
+        "YouCanSendUpTo": "您最多可以发送 {{amount}} {{symbol}}",
+        "Send": "发送",
+        "EnterAmount": "输入金额"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} 接受邀请",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} 输入姓氏",
         "Streams_user_icon": "{{invitedUserName}} 输入图标",
         "Places_user_location": "{{invitedUserName}} 输入位置",
-        "Streams_greeting": "{{invitedUserName}} 输入问候语"
+        "Streams_greeting": "{{invitedUserName}} 输入问候语",
+        "InvitedUserFilledStream": "{{invitedUserName}} 填充 {{FilledStreamTitle}}",
+        "ForFillingStream": "用于填充 {{FilledStreamTitle}}",
+        "CreatePrivateChat": "与{{toUserName}}私聊"
     },
     "history": {
         "Date": "日期",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "获得 {{amount}} 积分",
         "Streams_user_icon": "获得 {{amount}} 积分",
         "Places_user_location": "获得 {{amount}} 积分",
-        "Streams_greeting": "获得 {{amount}} 积分"
+        "Streams_greeting": "获得 {{amount}} 积分",
+        "User": "用户"
     },
     "subscriptions": {
         "infoTitle": "设置付款信息",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "设置附加信息链接",
             "DescriptionPlaceholder": "服务说明",
             "SaveService": "保存服务",
-            "SelectRequiredParticipants": "所需参与者"
+            "SelectRequiredParticipants": "所需参与者",
+            "RequiredParticipantsDesc": "请选择需要使用此服务的相关参与者（例如“狗展”的宠物，或“儿童假期”的儿童等）。如果服务是付费的，则用户还需要为每个相关参与者付费。"
         },
         "ManageServiceTemplates": "管理服务模板",
         "ManageServices": "管理服务",
@@ -388,6 +398,132 @@
             "Description": "用户详情",
             "aboutPlaceholder": "编辑简历",
             "SureLogOut": "您确定要退出吗？"
+        },
+        "Add": "添加",
+        "Remove": "消除",
+        "NoNFTyet": "还没有 NFT",
+        "Claim": "宣称",
+        "ClaimNFT": "认领 NFT",
+        "Unlocking": "解锁",
+        "Unlock": "开锁",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT合约",
+                        "seriesId": "系列编号",
+                        "owner": "所有者",
+                        "currency": "货币",
+                        "price": "价格",
+                        "beneficiary": "受益人",
+                        "autoindex": "自动索引",
+                        "duration": "期间",
+                        "rateInterval": "速率间隔",
+                        "rateAmount": "费率金额"
+                    },
+                    "small": {
+                        "NFTContract": "NFT合约",
+                        "seriesId": "代币将在这个系列中铸造",
+                        "owner": "实例的所有者，否则将是发件人",
+                        "currency": "购买代币的货币，如果为零 - 对于原生硬币",
+                        "price": "价格",
+                        "beneficiary": "出售代币的受益人，否则将是发件人",
+                        "autoindex": "自动索引",
+                        "duration": "铸造后锁定。零意味着立即得到它。",
+                        "rateInterval": "特购桶间隔",
+                        "rateAmount": "特购桶金额"
+                    }
+                },
+                "placeholders": {
+                    "optional": "（选修的）",
+                    "number": "数字",
+                    "address": "地址",
+                    "fraction": "分数",
+                    "integer": "整数",
+                    "seconds": "秒",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "生产",
+                "viewInstancesList": "刷新列表"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "系列编号",
+                        "account": "帐户",
+                        "amount": "数量"
+                    },
+                    "small": {
+                        "seriesId": "新代币将属于具有此类 ID 的系列",
+                        "account": "新创建的 NFT 的所有者。如果未设置 - 将使用当前钱包",
+                        "amount": "铸币数量 NFT"
+                    }
+                },
+                "placeholders": {
+                    "optional": "（选修的）",
+                    "seriesId": "ID",
+                    "account": "帐户",
+                    "amount": "数量",
+                    "integer": "整数"
+                },
+                "btn": {
+                    "Purchase": "购买",
+                    "SpecialPurchase": "特价采购"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "地址"
+                    },
+                    "small": {
+                        "account": "地址"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "无效地址"
+                },
+                "placeholders": {
+                    "account": "地址"
+                },
+                "addToWhitelist": "添加到白名单",
+                "removeFromWhitelist": "从白名单中删除"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "代币编号",
+                    "custodian": "保管人",
+                    "recipient": "接受者"
+                },
+                "small": {
+                    "tokenId": "token id 什么需要加锁或解锁",
+                    "custodian": "可以解锁的地址",
+                    "recipient": "将接收令牌的地址"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "无效的 tokenId",
+                "invalidCustodian": "保管人无效",
+                "invalidRecipient": "收件人无效"
+            },
+            "placeholders": {
+                "optional": "（选修的）",
+                "tokenId": "ID",
+                "custodian": "地址"
+            },
+            "Lock": "锁",
+            "Unlock": "开锁",
+            "Locked": "锁定",
+            "CustodianAddress": "托管地址",
+            "TokenWasClaimed": "令牌“{{title}}”已被认领",
+            "TokenWasLocked": "令牌“{{title}}”已被锁定",
+            "TokenWasUnlocked": "令牌“{{title}}”已解锁"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "需要连接 MetaMask 才能使用应用程序",
         "UserNotLoggedInMetaMask": "用户未登录 MetaMask",
         "CurrencyNotFound": "未找到货币",
-        "WrongChain": "此 NFT 在“{{chain}}”下创建。请使用此链。"
+        "WrongChain": "此 NFT 在“{{chain}}”下创建。请使用此链。",
+        "AmountInvalid": "金额无效！",
+        "NoRecipientSelected": "未选择收件人",
+        "NotEnoughPermissionsWallet": "没有足够的权限读取该用户的钱包",
+        "ThisUserHaveNoWallet": "该用户没有分配钱包",
+        "TheWalletOfThisUserInvalid": "该用户钱包无效",
+        "WalletInvalid": "钱包地址无效"
     },
     "admin": {
         "Title": "资产管理",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Credits minimum 不能为负数",
             "CreditsToAddNegative": "要添加的积分不能为负数"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "选择收件人",
+        "TransactionSuccess": "交易成功",
+        "OrTypeWalletAddress": "或输入收件人钱包地址"
+    },
+    "currencies": {
+        "choose": "选择货币"
     }
 }

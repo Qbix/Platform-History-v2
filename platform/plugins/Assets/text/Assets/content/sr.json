@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Ваша уплата се обрађује",
         "FailTryAgain": "Ваша уплата није успела, покушајте поново",
         "SomethingWrong": "Нешто је кренуло наопако",
-        "PaymentStatus": "Статус плаћање"
+        "PaymentStatus": "Статус плаћање",
+        "PayTo": "Плати {{displayName}}",
+        "ChooseCurrency": "Изаберите валуту",
+        "YouCanSendUpTo": "Можете послати до {{amount}} {{symbol}}",
+        "Send": "Пошаљи",
+        "EnterAmount": "унети износ"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} прихватио позив",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} кредита",
             "BonusCredits": "{{amount}} кредита"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} попуњено {{FilledStreamTitle}}",
+        "ForFillingStream": "За пуњење {{FilledStreamTitle}}",
+        "CreatePrivateChat": "за приватно ћаскање са {{toUserName}}"
     },
     "history": {
         "Date": "Датум",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Зарадио {{amount}} кредита",
         "Places_user_location": "Зарадио {{amount}} кредита",
         "Streams_greeting": "Зарадио {{amount}} кредита",
-        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита"
+        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита",
+        "User": "Корисник"
     },
     "subscriptions": {
         "infoTitle": "Подесите информације о плаћању",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "поставите везу за додатне информације",
             "DescriptionPlaceholder": "Опис услуге",
             "SaveService": "Саве Сервице",
-            "SelectRequiredParticipants": "Обавезни учесници"
+            "SelectRequiredParticipants": "Обавезни учесници",
+            "RequiredParticipantsDesc": "Молимо изаберите повезане учеснике који су обавезни да користе ову услугу (на пример кућни љубимци за „Изложбу паса“, или деца за „Дечји празник“ итд.). Ако је услуга плаћена, корисник ће морати да плати и за сваког повезаног учесника."
         },
         "ManageServiceTemplates": "Управљајте предлошцима услуга",
         "ManageServices": "Управљајте услугама",
@@ -387,6 +397,132 @@
             "Description": "Подаци о кориснику",
             "aboutPlaceholder": "Уреди биографију",
             "SureLogOut": "Да ли сте сигурни да желите да се одјавите?"
+        },
+        "Add": "Додати",
+        "Remove": "Уклони",
+        "NoNFTyet": "Још нема НФТ-а",
+        "Claim": "Потраживање",
+        "ClaimNFT": "Захтевај НФТ",
+        "Unlocking": "Откључавање",
+        "Unlock": "Откључај",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "НФТЦонтрацт",
+                        "seriesId": "серија Ид",
+                        "owner": "Власник",
+                        "currency": "Цурренци",
+                        "price": "Цена",
+                        "beneficiary": "корисник",
+                        "autoindex": "Аутоиндек",
+                        "duration": "Трајање",
+                        "rateInterval": "Интервал стопе",
+                        "rateAmount": "Стопа износ"
+                    },
+                    "small": {
+                        "NFTContract": "НФТЦонтрацт",
+                        "seriesId": "жетони ће бити ковани у овој серији",
+                        "owner": "власник инстанце, иначе ће бити пошиљалац",
+                        "currency": "Валута за купљене токене, ако је нула - за изворне новчиће",
+                        "price": "Цена",
+                        "beneficiary": "Корисник продаје токена, иначе ће бити пошиљалац",
+                        "autoindex": "Аутоиндек",
+                        "duration": "Закључавање после ковања. Нула значи одмах добити.",
+                        "rateInterval": "интервал кашике за посебну куповину",
+                        "rateAmount": "износ канте за посебну куповину"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(опционо)",
+                    "number": "број",
+                    "address": "адреса",
+                    "fraction": "фракција",
+                    "integer": "цео број",
+                    "seconds": "секунди",
+                    "uint256": "уинт256",
+                    "uint192": "уинт192",
+                    "uint64": "уинт64",
+                    "uint32": "уинт32",
+                    "uint16": "уинт16"
+                },
+                "produce": "Производити",
+                "viewInstancesList": "Освежи листу"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ИД серије",
+                        "account": "Рачун",
+                        "amount": "Износ"
+                    },
+                    "small": {
+                        "seriesId": "нови токен ће припадати у серију са таквим ИД-ом",
+                        "account": "власник новоствореног НФТ-а. ако није подешен - користиће тренутни новчаник",
+                        "amount": "износ НФТ за исковати"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(опционо)",
+                    "seriesId": "ид",
+                    "account": "рачун",
+                    "amount": "износ",
+                    "integer": "цео број"
+                },
+                "btn": {
+                    "Purchase": "Куповина",
+                    "SpecialPurchase": "Специјална куповина"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Адреса"
+                    },
+                    "small": {
+                        "account": "Адреса"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Погрешна адреса"
+                },
+                "placeholders": {
+                    "account": "Адреса"
+                },
+                "addToWhitelist": "Додај на белу листу",
+                "removeFromWhitelist": "Уклони са беле листе"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ИД токена",
+                    "custodian": "Цустодиан",
+                    "recipient": "Прималац"
+                },
+                "small": {
+                    "tokenId": "ИД токена шта треба закључати или откључати",
+                    "custodian": "адресу која се може откључати",
+                    "recipient": "адресу која ће примити токене"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Неважећи токенИд",
+                "invalidCustodian": "Неважећи чувар",
+                "invalidRecipient": "Неважећи прималац"
+            },
+            "placeholders": {
+                "optional": "(опционо)",
+                "tokenId": "ид",
+                "custodian": "адреса"
+            },
+            "Lock": "закључати",
+            "Unlock": "Откључај",
+            "Locked": "Закључано",
+            "CustodianAddress": "Адреса чувара",
+            "TokenWasClaimed": "Токен „{{title}}“ је затражен",
+            "TokenWasLocked": "Токен „{{title}}“ је закључан",
+            "TokenWasUnlocked": "Токен „{{title}}“ је откључан"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Потребан је МетаМаск повезан за рад са апликацијом",
         "UserNotLoggedInMetaMask": "Корисник није пријављен на МетаМаск",
         "CurrencyNotFound": "Валута није пронађена",
-        "WrongChain": "Овај НФТ је креиран под „{{chain}}“. Молимо користите овај ланац."
+        "WrongChain": "Овај НФТ је креиран под „{{chain}}“. Молимо користите овај ланац.",
+        "AmountInvalid": "Износ је неважећи!",
+        "NoRecipientSelected": "Није изабран прималац",
+        "NotEnoughPermissionsWallet": "Нема довољно дозвола за читање новчаника овог корисника",
+        "ThisUserHaveNoWallet": "Овом кориснику није додељен новчаник",
+        "TheWalletOfThisUserInvalid": "Новчаник овог корисника је неважећи",
+        "WalletInvalid": "Адреса новчаника је неважећа"
     },
     "admin": {
         "Title": "Средства административна",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Минимум кредита не може бити негативан",
             "CreditsToAddNegative": "Кредити за додавање не могу бити негативни"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Изаберите примаоца",
+        "TransactionSuccess": "Трансацтион Суццесс",
+        "OrTypeWalletAddress": "ИЛИ унесите адресу новчаника примаоца"
+    },
+    "currencies": {
+        "choose": "Изаберите валуту"
     }
 }

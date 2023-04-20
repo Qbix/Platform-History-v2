@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Vaše platba se zpracovává",
         "FailTryAgain": "Vaše platba nebyla úspěšná, zkuste to prosím znovu",
         "SomethingWrong": "Něco se pokazilo",
-        "PaymentStatus": "Status platby"
+        "PaymentStatus": "Status platby",
+        "PayTo": "Zaplatit {{displayName}}",
+        "ChooseCurrency": "Vyberte měnu",
+        "YouCanSendUpTo": "Můžete odeslat až {{amount}} {{symbol}}",
+        "Send": "Poslat",
+        "EnterAmount": "vložit sumu"
     },
     "credits": {
         "InviteAcceptedBy": "Pozvánku přijal {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} zadal příjmení",
         "Streams_user_icon": "{{invitedUserName}} zadaná ikona",
         "Places_user_location": "{{invitedUserName}} zadané umístění",
-        "Streams_greeting": "{{invitedUserName}} zadal pozdrav"
+        "Streams_greeting": "{{invitedUserName}} zadal pozdrav",
+        "InvitedUserFilledStream": "{{invitedUserName}} vyplněno {{FilledStreamTitle}}",
+        "ForFillingStream": "Pro vyplnění {{FilledStreamTitle}}",
+        "CreatePrivateChat": "pro soukromý chat s {{toUserName}}"
     },
     "history": {
         "Date": "datum",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Získali jste {{amount}} kreditů",
         "Streams_user_icon": "Získali jste {{amount}} kreditů",
         "Places_user_location": "Získali jste {{amount}} kreditů",
-        "Streams_greeting": "Získali jste {{amount}} kreditů"
+        "Streams_greeting": "Získali jste {{amount}} kreditů",
+        "User": "Uživatel"
     },
     "subscriptions": {
         "infoTitle": "Nastavte platební údaje",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "nastavit odkaz na další informace",
             "DescriptionPlaceholder": "Popis služby",
             "SaveService": "Uložit službu",
-            "SelectRequiredParticipants": "Povinní účastníci"
+            "SelectRequiredParticipants": "Povinní účastníci",
+            "RequiredParticipantsDesc": "Vyberte prosím příbuzné účastníky, kteří jsou povinni tuto službu využívat (například domácí mazlíčci pro &quot;Výstavu psů&quot; nebo děti pro &quot;Dětské prázdniny&quot; atd.). Pokud je služba placená, uživatel bude muset zaplatit také za každého souvisejícího účastníka."
         },
         "ManageServiceTemplates": "Správa šablon služeb",
         "ManageServices": "Správa služeb",
@@ -388,6 +398,132 @@
             "Description": "Podrobnosti o uživateli",
             "aboutPlaceholder": "Upravit Bio",
             "SureLogOut": "Opravdu se chcete odhlásit?"
+        },
+        "Add": "Přidat",
+        "Remove": "Odstranit",
+        "NoNFTyet": "Zatím žádné NFT",
+        "Claim": "Nárok",
+        "ClaimNFT": "Nárokovat NFT",
+        "Unlocking": "Odemykání",
+        "Unlock": "Odemknout",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "série Id",
+                        "owner": "Majitel",
+                        "currency": "Měna",
+                        "price": "Cena",
+                        "beneficiary": "Příjemce",
+                        "autoindex": "Autoindex",
+                        "duration": "Doba trvání",
+                        "rateInterval": "Interval sazby",
+                        "rateAmount": "Výše sazby"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "žetony budou raženy v této sérii",
+                        "owner": "vlastník instance, jinak bude odesílatel",
+                        "currency": "Měna pro zakoupené tokeny, pokud je nula - pro nativní mince",
+                        "price": "Cena",
+                        "beneficiary": "Příjemce prodeje tokenů, jinak bude odesílatel",
+                        "autoindex": "Autoindex",
+                        "duration": "Zámek po ražbě. Nula znamená získat okamžitě.",
+                        "rateInterval": "interval kbelíku pro speciální nákup",
+                        "rateAmount": "množství kbelíku pro speciální nákup"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(volitelný)",
+                    "number": "číslo",
+                    "address": "adresa",
+                    "fraction": "zlomek",
+                    "integer": "celé číslo",
+                    "seconds": "sekundy",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Vyrobit",
+                "viewInstancesList": "Obnovit seznam"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID řady",
+                        "account": "Účet",
+                        "amount": "Množství"
+                    },
+                    "small": {
+                        "seriesId": "nový token bude patřit do série s takovým ID",
+                        "account": "vlastník nově vytvořené NFT. pokud není nastaveno - použije aktuální peněženku",
+                        "amount": "množství NFT k mincovně"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(volitelný)",
+                    "seriesId": "id",
+                    "account": "účet",
+                    "amount": "množství",
+                    "integer": "celé číslo"
+                },
+                "btn": {
+                    "Purchase": "Nákup",
+                    "SpecialPurchase": "Speciální nákup"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adresa"
+                    },
+                    "small": {
+                        "account": "Adresa"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Neplatná adresa"
+                },
+                "placeholders": {
+                    "account": "Adresa"
+                },
+                "addToWhitelist": "Přidat do seznamu povolených",
+                "removeFromWhitelist": "Odebrat z bílé listiny"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID tokenu",
+                    "custodian": "Kustod",
+                    "recipient": "Příjemce"
+                },
+                "small": {
+                    "tokenId": "token id, co je třeba zamknout nebo odemknout",
+                    "custodian": "adresu, kterou lze odemknout",
+                    "recipient": "adresu, na kterou budou tokeny přijímány"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Neplatné ID tokenu",
+                "invalidCustodian": "Neplatný správce",
+                "invalidRecipient": "Neplatný příjemce"
+            },
+            "placeholders": {
+                "optional": "(volitelný)",
+                "tokenId": "id",
+                "custodian": "adresa"
+            },
+            "Lock": "Zámek",
+            "Unlock": "Odemknout",
+            "Locked": "Zamčeno",
+            "CustodianAddress": "Adresa správce",
+            "TokenWasClaimed": "Token „{{title}}“ byl nárokován",
+            "TokenWasLocked": "Token „{{title}}“ byl uzamčen",
+            "TokenWasUnlocked": "Token „{{title}}“ byl odemčen"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Pro práci s aplikací potřebujete připojenou MetaMask",
         "UserNotLoggedInMetaMask": "Uživatel není přihlášen do MetaMask",
         "CurrencyNotFound": "Měna nenalezena",
-        "WrongChain": "Tento NFT vytvořen pod „{{chain}}“. Použijte prosím tento řetěz."
+        "WrongChain": "Tento NFT vytvořen pod „{{chain}}“. Použijte prosím tento řetěz.",
+        "AmountInvalid": "Částka je neplatná!",
+        "NoRecipientSelected": "Není vybrán žádný příjemce",
+        "NotEnoughPermissionsWallet": "Nemáte dostatečná oprávnění ke čtení peněženky tohoto uživatele",
+        "ThisUserHaveNoWallet": "Tento uživatel nemá přiřazenou žádnou peněženku",
+        "TheWalletOfThisUserInvalid": "Peněženka tohoto uživatele je neplatná",
+        "WalletInvalid": "Adresa peněženky je neplatná"
     },
     "admin": {
         "Title": "Správa majetku",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Minimální počet kreditů nesmí být záporný",
             "CreditsToAddNegative": "Kredity k přidání nesmí být záporné"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Vyberte příjemce",
+        "TransactionSuccess": "Úspěch transakce",
+        "OrTypeWalletAddress": "NEBO zadejte adresu peněženky příjemce"
+    },
+    "currencies": {
+        "choose": "Vyberte měnu"
     }
 }

@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Il-ħlas tiegħek qed jipproċessa",
         "FailTryAgain": "Il-ħlas tiegħek ma rnexxiex, jekk jogħġbok erġa&#39; pprova",
         "SomethingWrong": "Xi ħaġa marret ħażin",
-        "PaymentStatus": "Status tal-ħlas"
+        "PaymentStatus": "Status tal-ħlas",
+        "PayTo": "Ħlas {{displayName}}",
+        "ChooseCurrency": "Agħżel munita",
+        "YouCanSendUpTo": "Tista&#39; tibgħat sa {{amount}} {{symbol}}",
+        "Send": "Ibgħat",
+        "EnterAmount": "daħħal l-ammont"
     },
     "credits": {
         "InviteAcceptedBy": "Stedina aċċettata minn {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} krediti",
             "BonusCredits": "{{amount}} krediti"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} mimlija {{FilledStreamTitle}}",
+        "ForFillingStream": "Għall-mili {{FilledStreamTitle}}",
+        "CreatePrivateChat": "għal chat privat ma&#39; {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Kiseb {{amount}} krediti",
         "Places_user_location": "Kiseb {{amount}} krediti",
         "Streams_greeting": "Kiseb {{amount}} krediti",
-        "YouHaveCreditsToStart": "Kiseb {{amount}} krediti"
+        "YouHaveCreditsToStart": "Kiseb {{amount}} krediti",
+        "User": "Utent"
     },
     "subscriptions": {
         "infoTitle": "Issettja l-Informazzjoni dwar il-Ħlas",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "issettja link ta&#39; informazzjoni addizzjonali",
             "DescriptionPlaceholder": "Deskrizzjoni tas-servizz",
             "SaveService": "Ħlief Servizz",
-            "SelectRequiredParticipants": "Parteċipanti Meħtieġa"
+            "SelectRequiredParticipants": "Parteċipanti Meħtieġa",
+            "RequiredParticipantsDesc": "Jekk jogħġbok agħżel parteċipanti relatati li huma meħtieġa biex jużaw dan is-servizz (per eżempju annimali domestiċi għal &quot;Wirja tal-klieb&quot;, jew tfal għal &quot;Btala tat-tfal&quot; eċċ). Jekk is-servizz jitħallas, l-utent ikollu jħallas ukoll għal kull parteċipant relatat."
         },
         "ManageServiceTemplates": "Immaniġġja l-Mudelli tas-Servizz",
         "ManageServices": "Immaniġġja s-Servizzi",
@@ -387,6 +397,132 @@
             "Description": "Dettalji tal-utent",
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Int żgur li trid toħroġ?"
+        },
+        "Add": "Żid",
+        "Remove": "Neħħi",
+        "NoNFTyet": "Għadu l-ebda NFTs",
+        "Claim": "Talba",
+        "ClaimNFT": "Talba NFT",
+        "Unlocking": "Jinfetaħ",
+        "Unlock": "Nisfruttaw",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Kuntratt NFT",
+                        "seriesId": "serje Id",
+                        "owner": "Sid",
+                        "currency": "Valuta",
+                        "price": "Prezz",
+                        "beneficiary": "Benefiċjarju",
+                        "autoindex": "Awtoindiċi",
+                        "duration": "Tul ta&#39; żmien",
+                        "rateInterval": "Intervall tar-rata",
+                        "rateAmount": "Ammont tar-rata"
+                    },
+                    "small": {
+                        "NFTContract": "Kuntratt NFT",
+                        "seriesId": "f&#39;din is-serje se jinħadmu tokens",
+                        "owner": "proprjetarju tal-eżempju, inkella se jkun il-mittent",
+                        "currency": "Munita għal tokens mixtrija, jekk żero - għal muniti indiġeni",
+                        "price": "Prezz",
+                        "beneficiary": "Benefiċjarju tal-bejgħ ta &#39;tokens, inkella se jkun il-mittent",
+                        "autoindex": "Awtoindiċi",
+                        "duration": "Lock wara t-tgħaqqid. Żero ifisser ġġibu immedjatament.",
+                        "rateInterval": "intervall tal-barmil għal xiri speċjali",
+                        "rateAmount": "ammont tal-barmil għal xiri speċjali"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(mhux obbligatorju)",
+                    "number": "numru",
+                    "address": "indirizz",
+                    "fraction": "frazzjoni",
+                    "integer": "numru sħiħ",
+                    "seconds": "sekondi",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Ipproduċi",
+                "viewInstancesList": "Aġġorna l-Lista"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Serje ID",
+                        "account": "Kont",
+                        "amount": "Ammont"
+                    },
+                    "small": {
+                        "seriesId": "token ġdid se jappartjeni f&#39;serje ma &#39;tali ID",
+                        "account": "sid ta &#39;NFT maħluqa ġdida. jekk mhux issettjat - se tuża kartiera kurrenti",
+                        "amount": "ammont NFT għal mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(mhux obbligatorju)",
+                    "seriesId": "id",
+                    "account": "kont",
+                    "amount": "ammont",
+                    "integer": "numru sħiħ"
+                },
+                "btn": {
+                    "Purchase": "Xiri",
+                    "SpecialPurchase": "Xiri speċjali"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Indirizz"
+                    },
+                    "small": {
+                        "account": "Indirizz"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Indirizz Invalidu"
+                },
+                "placeholders": {
+                    "account": "Indirizz"
+                },
+                "addToWhitelist": "Żid Mal-Whitelist",
+                "removeFromWhitelist": "Neħħi mil-Whitelist"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token ID",
+                    "custodian": "Kustodju",
+                    "recipient": "Riċevitur"
+                },
+                "small": {
+                    "tokenId": "token id dak li jeħtieġ li jissakkar jew jinfetaħ",
+                    "custodian": "indirizz li jista &#39;jkun kapaċi jinfetaħ",
+                    "recipient": "indirizz li se jirċievi t-tokens"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TokenId invalidu",
+                "invalidCustodian": "Kustodju Invalidu",
+                "invalidRecipient": "Riċevitur Invalidu"
+            },
+            "placeholders": {
+                "optional": "(mhux obbligatorju)",
+                "tokenId": "id",
+                "custodian": "indirizz"
+            },
+            "Lock": "Lock",
+            "Unlock": "Nisfruttaw",
+            "Locked": "Imsakkar",
+            "CustodianAddress": "Indirizz tal-kustodju",
+            "TokenWasClaimed": "Ġie mitlub it-token &quot;{{title}}&quot;.",
+            "TokenWasLocked": "It-token &quot;{{title}}&quot; kien imsakkar",
+            "TokenWasUnlocked": "It-token &quot;{{title}}&quot; ġie żblokkat"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Ħtieġa MetaMask konness biex taħdem ma &#39;applikazzjoni",
         "UserNotLoggedInMetaMask": "L-utent mhux illoggjat fil-MetaMask",
         "CurrencyNotFound": "Munita ma nstabitx",
-        "WrongChain": "Dan l-NFT maħluq taħt &quot;{{chain}}&quot;. Jekk jogħġbok uża din il-katina."
+        "WrongChain": "Dan l-NFT maħluq taħt &quot;{{chain}}&quot;. Jekk jogħġbok uża din il-katina.",
+        "AmountInvalid": "Ammont mhux validu!",
+        "NoRecipientSelected": "Ebda riċevitur magħżul",
+        "NotEnoughPermissionsWallet": "Mhux biżżejjed permessi biex taqra l-kartiera ta&#39; dan l-utent",
+        "ThisUserHaveNoWallet": "Dan l-utent m&#39;għandux kartiera assenjat",
+        "TheWalletOfThisUserInvalid": "Il-kartiera ta&#39; dan l-utent invalida",
+        "WalletInvalid": "Indirizz tal-kartiera mhux validu"
     },
     "admin": {
         "Title": "Assi amministrattivi",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Krediti minimi ma jistgħux ikunu negattivi",
             "CreditsToAddNegative": "Krediti li żżid ma jistgħux ikunu negattivi"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Agħżel ir-riċevitur",
+        "TransactionSuccess": "Suċċess tat-Tranżazzjoni",
+        "OrTypeWalletAddress": "JEW ittajpja l-indirizz tal-kartiera tar-riċevitur"
+    },
+    "currencies": {
+        "choose": "Agħżel munita"
     }
 }

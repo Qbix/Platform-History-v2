@@ -27,7 +27,12 @@
         "PaymentProcessing.": "O teu pago estase procesando",
         "FailTryAgain": "O teu pago non se realizou correctamente, téntao de novo",
         "SomethingWrong": "Algo saíu mal",
-        "PaymentStatus": "Estado do pago"
+        "PaymentStatus": "Estado do pago",
+        "PayTo": "Pagar {{displayName}}",
+        "ChooseCurrency": "Escolle unha moeda",
+        "YouCanSendUpTo": "Podes enviar ata {{amount}} {{symbol}}",
+        "Send": "Enviar",
+        "EnterAmount": "introducir cantidade"
     },
     "credits": {
         "InviteAcceptedBy": "Invitación aceptada por {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} créditos",
             "BonusCredits": "{{amount}} créditos"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} cuberto {{FilledStreamTitle}}",
+        "ForFillingStream": "Para encher {{FilledStreamTitle}}",
+        "CreatePrivateChat": "para chat privado con {{toUserName}}"
     },
     "history": {
         "Date": "Data",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Obtivo {{amount}} créditos",
         "Places_user_location": "Obtivo {{amount}} créditos",
         "Streams_greeting": "Obtivo {{amount}} créditos",
-        "YouHaveCreditsToStart": "Obtivo {{amount}} créditos"
+        "YouHaveCreditsToStart": "Obtivo {{amount}} créditos",
+        "User": "Usuario"
     },
     "subscriptions": {
         "infoTitle": "Establecer información de pago",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "establecer unha ligazón de información adicional",
             "DescriptionPlaceholder": "Descrición do servizo",
             "SaveService": "Gardar Servizo",
-            "SelectRequiredParticipants": "Participantes necesarios"
+            "SelectRequiredParticipants": "Participantes necesarios",
+            "RequiredParticipantsDesc": "Seleccione os participantes relacionados que son necesarios para usar este servizo (por exemplo, mascotas para &quot;Exposición de cans&quot;, ou nenos para &quot;Vacacións para nenos&quot;, etc.). Se o servizo é de pago, o usuario terá que pagar tamén por cada participante relacionado."
         },
         "ManageServiceTemplates": "Xestionar modelos de servizos",
         "ManageServices": "Xestionar Servizos",
@@ -387,6 +397,132 @@
             "Description": "Datos do usuario",
             "aboutPlaceholder": "Editar biografía",
             "SureLogOut": "Estás seguro de que queres pechar a sesión?"
+        },
+        "Add": "Engadir",
+        "Remove": "Quitar",
+        "NoNFTyet": "Aínda non hai NFT",
+        "Claim": "Reclamación",
+        "ClaimNFT": "Reclama NFT",
+        "Unlocking": "Desbloqueo",
+        "Unlock": "Desbloquear",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "serie Id",
+                        "owner": "Propietario",
+                        "currency": "Moeda",
+                        "price": "Prezo",
+                        "beneficiary": "Beneficiario",
+                        "autoindex": "Autoíndice",
+                        "duration": "Duración",
+                        "rateInterval": "Intervalo de taxas",
+                        "rateAmount": "Importe da taxa"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "fichas serán acuñadas nesta serie",
+                        "owner": "propietario da instancia, se non será o remitente",
+                        "currency": "Moeda para fichas compradas, se cero - para moedas nativas",
+                        "price": "Prezo",
+                        "beneficiary": "Beneficiario da venda de tokens, en caso contrario será o remitente",
+                        "autoindex": "Autoíndice",
+                        "duration": "Bloqueo despois da acuñación. Cero significa obtelo inmediatamente.",
+                        "rateInterval": "intervalo de balde para compra especial",
+                        "rateAmount": "importe do cubo para a compra especial"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcional)",
+                    "number": "número",
+                    "address": "enderezo",
+                    "fraction": "fracción",
+                    "integer": "enteiro",
+                    "seconds": "segundos",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Producir",
+                "viewInstancesList": "Lista de actualización"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID de serie",
+                        "account": "Conta",
+                        "amount": "Cantidade"
+                    },
+                    "small": {
+                        "seriesId": "o novo token pertencerá á serie con tal ID",
+                        "account": "propietario de NFT de nova creación. se non está definido, usará a carteira actual",
+                        "amount": "cantidade de NFT para mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcional)",
+                    "seriesId": "id",
+                    "account": "conta",
+                    "amount": "cantidade",
+                    "integer": "enteiro"
+                },
+                "btn": {
+                    "Purchase": "Compra",
+                    "SpecialPurchase": "Compra especial"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Enderezo"
+                    },
+                    "small": {
+                        "account": "Enderezo"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Enderezo non válido"
+                },
+                "placeholders": {
+                    "account": "Enderezo"
+                },
+                "addToWhitelist": "Engadir á lista branca",
+                "removeFromWhitelist": "Eliminar da lista branca"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID do token",
+                    "custodian": "Custodia",
+                    "recipient": "Recipiente"
+                },
+                "small": {
+                    "tokenId": "identificador do token que hai que bloquear ou desbloquear",
+                    "custodian": "enderezo que se pode desbloquear",
+                    "recipient": "enderezo que recibirá as fichas"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TokenId non válido",
+                "invalidCustodian": "Custodio non válido",
+                "invalidRecipient": "Destinatario non válido"
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tokenId": "id",
+                "custodian": "enderezo"
+            },
+            "Lock": "Botarlle o ferrollo",
+            "Unlock": "Desbloquear",
+            "Locked": "Pechado",
+            "CustodianAddress": "Enderezo do custodio",
+            "TokenWasClaimed": "Reclamouse o token &quot;{{title}}&quot;.",
+            "TokenWasLocked": "Bloqueouse o token &quot;{{title}}&quot;.",
+            "TokenWasUnlocked": "Desbloqueouse o token &quot;{{title}}&quot;."
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Necesitas MetaMask conectado para funcionar coa aplicación",
         "UserNotLoggedInMetaMask": "O usuario non iniciou sesión en MetaMask",
         "CurrencyNotFound": "Non se atopou a moeda",
-        "WrongChain": "Esta NFT creouse baixo &quot;{{chain}}&quot;. Use esta cadea."
+        "WrongChain": "Esta NFT creouse baixo &quot;{{chain}}&quot;. Use esta cadea.",
+        "AmountInvalid": "Cantidade non válida!",
+        "NoRecipientSelected": "Non se seleccionou ningún destinatario",
+        "NotEnoughPermissionsWallet": "Non hai permisos suficientes para ler a carteira deste usuario",
+        "ThisUserHaveNoWallet": "Este usuario non ten ningunha carteira asignada",
+        "TheWalletOfThisUserInvalid": "A carteira deste usuario non é válida",
+        "WalletInvalid": "O enderezo da carteira non é válido"
     },
     "admin": {
         "Title": "Administrativo de activos",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "Os créditos mínimos non poden ser negativos",
             "CreditsToAddNegative": "Os créditos para engadir non poden ser negativos"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Seleccione o destinatario",
+        "TransactionSuccess": "Éxito da transacción",
+        "OrTypeWalletAddress": "OU escriba o enderezo da carteira do destinatario"
+    },
+    "currencies": {
+        "choose": "Escolle unha moeda"
     }
 }

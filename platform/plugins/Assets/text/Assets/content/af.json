@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Jou betaling word tans verwerk",
         "FailTryAgain": "Jou betaling was nie suksesvol nie, probeer asseblief weer",
         "SomethingWrong": "Iets het verkeerd geloop",
-        "PaymentStatus": "Betalingstatus"
+        "PaymentStatus": "Betalingstatus",
+        "PayTo": "Betaal {{displayName}}",
+        "ChooseCurrency": "Kies &#39;n geldeenheid",
+        "YouCanSendUpTo": "Jy kan tot {{amount}} {{symbol}} stuur",
+        "Send": "Stuur",
+        "EnterAmount": "voer bedrag in"
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging aanvaar deur {{invitedUserName}}",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}} het van ingevoer",
         "Streams_user_icon": "{{invitedUserName}} ingevoer ikoon",
         "Places_user_location": "{{invitedUserName}} het ligging ingevoer",
-        "Streams_greeting": "{{invitedUserName}} het groete ingeskryf"
+        "Streams_greeting": "{{invitedUserName}} het groete ingeskryf",
+        "InvitedUserFilledStream": "{{invitedUserName}} gevul {{FilledStreamTitle}}",
+        "ForFillingStream": "Om te vul {{FilledStreamTitle}}",
+        "CreatePrivateChat": "vir private klets met {{toUserName}}"
     },
     "history": {
         "Date": "Datum",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "Verdien {{amount}} krediete",
         "Streams_user_icon": "Verdien {{amount}} krediete",
         "Places_user_location": "Verdien {{amount}} krediete",
-        "Streams_greeting": "Verdien {{amount}} krediete"
+        "Streams_greeting": "Verdien {{amount}} krediete",
+        "User": "Gebruiker"
     },
     "subscriptions": {
         "infoTitle": "Stel betalingsinligting",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "stel addisionele inligtingskakel in",
             "DescriptionPlaceholder": "Diensbeskrywing",
             "SaveService": "Stoor diens",
-            "SelectRequiredParticipants": "Vereiste deelnemers"
+            "SelectRequiredParticipants": "Vereiste deelnemers",
+            "RequiredParticipantsDesc": "Kies asseblief verwante deelnemers wat nodig is om hierdie diens te gebruik (byvoorbeeld troeteldiere vir &quot;Hondeskou&quot;, of kinders vir &quot;Kindervakansie&quot; ens.). As diens betaal word, sal gebruiker ook vir elke verwante deelnemers moet betaal."
         },
         "ManageServiceTemplates": "Bestuur dienssjablone",
         "ManageServices": "Bestuur dienste",
@@ -388,6 +398,132 @@
             "Description": "Gebruiker besonderhede",
             "aboutPlaceholder": "Wysig Bio",
             "SureLogOut": "Is jy seker jy wil afmeld?"
+        },
+        "Add": "Voeg by",
+        "Remove": "Verwyder",
+        "NoNFTyet": "Nog geen NFT&#39;s nie",
+        "Claim": "Eis",
+        "ClaimNFT": "Eis NFT",
+        "Unlocking": "Ontsluit",
+        "Unlock": "Ontsluit",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT-kontrak",
+                        "seriesId": "reeks Id",
+                        "owner": "Eienaar",
+                        "currency": "Geldeenheid",
+                        "price": "Prys",
+                        "beneficiary": "Begunstigde",
+                        "autoindex": "Outo-indeks",
+                        "duration": "Duur",
+                        "rateInterval": "Koers interval",
+                        "rateAmount": "Tarief bedrag"
+                    },
+                    "small": {
+                        "NFTContract": "NFT-kontrak",
+                        "seriesId": "tokens sal in hierdie reeks gemunt word",
+                        "owner": "eienaar van byvoorbeeld, anders sal sender wees",
+                        "currency": "Geldeenheid vir gekoopte tokens, indien nul - vir inheemse munte",
+                        "price": "Prys",
+                        "beneficiary": "Begunstigde van die verkoop van tekens, anders sal die sender wees",
+                        "autoindex": "Outo-indeks",
+                        "duration": "Slot na slaan. Nul beteken kry dit dadelik.",
+                        "rateInterval": "emmer interval vir spesiale aankoop",
+                        "rateAmount": "emmer bedrag vir spesiale aankoop"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsioneel)",
+                    "number": "nommer",
+                    "address": "adres",
+                    "fraction": "breuk",
+                    "integer": "heelgetal",
+                    "seconds": "sekondes",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produseer",
+                "viewInstancesList": "Herlaai lys"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Reeks ID",
+                        "account": "Rekening",
+                        "amount": "Bedrag"
+                    },
+                    "small": {
+                        "seriesId": "nuwe teken sal in serie met so &#39;n ID hoort",
+                        "account": "eienaar van nuutgeskepte NFT. indien nie gestel nie - sal huidige beursie gebruik",
+                        "amount": "bedrag NFT te munt"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opsioneel)",
+                    "seriesId": "id",
+                    "account": "rekening",
+                    "amount": "bedrag",
+                    "integer": "heelgetal"
+                },
+                "btn": {
+                    "Purchase": "Aankoop",
+                    "SpecialPurchase": "Spesiale aankoop"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Adres"
+                    },
+                    "small": {
+                        "account": "Adres"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Ongeldige adres"
+                },
+                "placeholders": {
+                    "account": "Adres"
+                },
+                "addToWhitelist": "Voeg by witlys",
+                "removeFromWhitelist": "Verwyder van witlys"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token ID",
+                    "custodian": "Bewaarder",
+                    "recipient": "Ontvanger"
+                },
+                "small": {
+                    "tokenId": "token id wat nodig is om te sluit of te ontsluit",
+                    "custodian": "adres wat kan ontsluit",
+                    "recipient": "adres wat die tokens sal ontvang"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "Ongeldige tokenId",
+                "invalidCustodian": "Ongeldige bewaarder",
+                "invalidRecipient": "Ongeldige ontvanger"
+            },
+            "placeholders": {
+                "optional": "(opsioneel)",
+                "tokenId": "id",
+                "custodian": "adres"
+            },
+            "Lock": "Sluit",
+            "Unlock": "Ontsluit",
+            "Locked": "Gesluit",
+            "CustodianAddress": "Bewaarder adres",
+            "TokenWasClaimed": "Teken &quot;{{title}}&quot; is opgeëis",
+            "TokenWasLocked": "Teken &quot;{{title}}&quot; is gesluit",
+            "TokenWasUnlocked": "Teken &quot;{{title}}&quot; is ontsluit"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "Benodig MetaMask gekoppel om met toepassing te werk",
         "UserNotLoggedInMetaMask": "Gebruiker is nie by MetaMask aangemeld nie",
         "CurrencyNotFound": "Geldeenheid nie gevind nie",
-        "WrongChain": "Hierdie NFT geskep onder &quot;{{chain}}&quot;. Gebruik asseblief hierdie ketting."
+        "WrongChain": "Hierdie NFT geskep onder &quot;{{chain}}&quot;. Gebruik asseblief hierdie ketting.",
+        "AmountInvalid": "Bedrag ongeldig!",
+        "NoRecipientSelected": "Geen ontvanger gekies nie",
+        "NotEnoughPermissionsWallet": "Nie genoeg toestemmings om beursie van hierdie gebruiker te lees nie",
+        "ThisUserHaveNoWallet": "Hierdie gebruiker het geen beursie toegewys nie",
+        "TheWalletOfThisUserInvalid": "Die beursie van hierdie gebruiker is ongeldig",
+        "WalletInvalid": "Wallet-adres ongeldig"
     },
     "admin": {
         "Title": "Bates administratief",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Krediete minimum kan nie negatief wees nie",
             "CreditsToAddNegative": "Krediete om by te voeg, kan nie negatief wees nie"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Kies ontvanger",
+        "TransactionSuccess": "Transaksiesukses",
+        "OrTypeWalletAddress": "OF tik die adres van die ontvanger se beursie in"
+    },
+    "currencies": {
+        "choose": "Kies &#39;n geldeenheid"
     }
 }

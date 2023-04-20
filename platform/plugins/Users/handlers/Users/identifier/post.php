@@ -29,7 +29,7 @@ function Users_identifier_post()
 			'Users', 'transactional', 'identifier', 'body', 'Users/email/addEmail.php'
 		);
 		$user->addEmail(
-			$identifier, $subject, $view, array(), array('html' => true)
+			$identifier, $subject, $view, array()
 		);
 	} else if ($type === 'mobile') {
 		$view = Q_Config::get(

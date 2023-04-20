@@ -27,7 +27,12 @@
         "PaymentProcessing.": "તમારી ચુકવણીની પ્રક્રિયા થઈ રહી છે",
         "FailTryAgain": "તમારી ચુકવણી સફળ થઈ ન હતી, કૃપા કરીને ફરી પ્રયાસ કરો",
         "SomethingWrong": "કંઈક ખોટું થયું",
-        "PaymentStatus": "ચુકવણી સ્થિતિ"
+        "PaymentStatus": "ચુકવણી સ્થિતિ",
+        "PayTo": "{{displayName}} ચૂકવો",
+        "ChooseCurrency": "ચલણ પસંદ કરો",
+        "YouCanSendUpTo": "તમે {{amount}} {{symbol}} સુધી મોકલી શકો છો",
+        "Send": "મોકલો",
+        "EnterAmount": "રકમ દાખલ કરો"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} દ્વારા આમંત્રણ સ્વીકારવામાં આવ્યું",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} ક્રેડિટ",
             "BonusCredits": "{{amount}} ક્રેડિટ"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} ભરેલ {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} ભરવા માટે",
+        "CreatePrivateChat": "{{toUserName}} સાથે ખાનગી ચેટ માટે"
     },
     "history": {
         "Date": "તારીખ",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} ક્રેડિટ મેળવી",
         "Places_user_location": "{{amount}} ક્રેડિટ મેળવી",
         "Streams_greeting": "{{amount}} ક્રેડિટ મેળવી",
-        "YouHaveCreditsToStart": "{{amount}} ક્રેડિટ મેળવી"
+        "YouHaveCreditsToStart": "{{amount}} ક્રેડિટ મેળવી",
+        "User": "વપરાશકર્તા"
     },
     "subscriptions": {
         "infoTitle": "ચુકવણી માહિતી સેટ કરો",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "વધારાની માહિતી લિંક સેટ કરો",
             "DescriptionPlaceholder": "સેવા વર્ણન",
             "SaveService": "સેવા સાચવો",
-            "SelectRequiredParticipants": "જરૂરી સહભાગીઓ"
+            "SelectRequiredParticipants": "જરૂરી સહભાગીઓ",
+            "RequiredParticipantsDesc": "કૃપા કરીને સંબંધિત સહભાગીઓને પસંદ કરો કે જેઓ આ સેવાનો ઉપયોગ કરવા માટે જરૂરી છે (ઉદાહરણ તરીકે &quot;ડોગ્સ શો માટે પાલતુ&quot; અથવા &quot;બાળકોની રજા&quot; માટે બાળકો વગેરે). જો સેવા ચૂકવવામાં આવે છે, તો વપરાશકર્તાએ દરેક સંબંધિત સહભાગીઓ માટે પણ ચૂકવણી કરવાની જરૂર પડશે."
         },
         "ManageServiceTemplates": "સેવા નમૂનાઓનું સંચાલન કરો",
         "ManageServices": "સેવાઓનું સંચાલન કરો",
@@ -387,6 +397,132 @@
             "Description": "વપરાશકર્તા વિગતો",
             "aboutPlaceholder": "બાયો સંપાદિત કરો",
             "SureLogOut": "શું તમે ખરેખર લૉગ આઉટ કરવા માંગો છો?"
+        },
+        "Add": "ઉમેરો",
+        "Remove": "દૂર કરો",
+        "NoNFTyet": "હજુ સુધી કોઈ NFTs નથી",
+        "Claim": "દાવો કરો",
+        "ClaimNFT": "NFT નો દાવો કરો",
+        "Unlocking": "અનલોકીંગ",
+        "Unlock": "અનલોક કરો",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC કરાર",
+                        "seriesId": "શ્રેણી ID",
+                        "owner": "માલિક",
+                        "currency": "ચલણ",
+                        "price": "કિંમત",
+                        "beneficiary": "લાભાર્થી",
+                        "autoindex": "ઓટોઇન્ડેક્સ",
+                        "duration": "અવધિ",
+                        "rateInterval": "દર અંતરાલ",
+                        "rateAmount": "દર રકમ"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC કરાર",
+                        "seriesId": "ટોકન્સ આ શ્રેણીમાં ટંકશાળ કરવામાં આવશે",
+                        "owner": "ઉદાહરણનો માલિક, અન્યથા પ્રેષક હશે",
+                        "currency": "ખરીદેલ ટોકન્સ માટે ચલણ, જો શૂન્ય હોય તો - મૂળ સિક્કાઓ માટે",
+                        "price": "કિંમત",
+                        "beneficiary": "ટોકન્સ વેચવાનો લાભાર્થી, અન્યથા મોકલનાર હશે",
+                        "autoindex": "ઓટોઇન્ડેક્સ",
+                        "duration": "ટંકશાળ કર્યા પછી તાળું. શૂન્ય એટલે તરત જ મેળવો.",
+                        "rateInterval": "ખાસ ખરીદી માટે બકેટ અંતરાલ",
+                        "rateAmount": "ખાસ ખરીદી માટે ડોલની રકમ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(વૈકલ્પિક)",
+                    "number": "સંખ્યા",
+                    "address": "સરનામું",
+                    "fraction": "અપૂર્ણાંક",
+                    "integer": "પૂર્ણાંક",
+                    "seconds": "સેકન્ડ",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ઉત્પાદન",
+                "viewInstancesList": "યાદી તાજી કરો"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "શ્રેણી ID",
+                        "account": "એકાઉન્ટ",
+                        "amount": "રકમ"
+                    },
+                    "small": {
+                        "seriesId": "નવા ટોકન આવા ID સાથે શ્રેણીમાં રહેશે",
+                        "account": "નવા બનાવેલ NFT ના માલિક. જો સેટ ન કર્યું હોય તો - વર્તમાન વૉલેટનો ઉપયોગ કરશે",
+                        "amount": "NFT થી ટંકશાળની રકમ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(વૈકલ્પિક)",
+                    "seriesId": "આઈડી",
+                    "account": "એકાઉન્ટ",
+                    "amount": "રકમ",
+                    "integer": "પૂર્ણાંક"
+                },
+                "btn": {
+                    "Purchase": "ખરીદી",
+                    "SpecialPurchase": "ખાસ ખરીદી"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "સરનામું"
+                    },
+                    "small": {
+                        "account": "સરનામું"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "અમાન્ય સરનામું"
+                },
+                "placeholders": {
+                    "account": "સરનામું"
+                },
+                "addToWhitelist": "વ્હાઇટલિસ્ટમાં ઉમેરો",
+                "removeFromWhitelist": "વ્હાઇટલિસ્ટમાંથી દૂર કરો"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ટોકન ID",
+                    "custodian": "કસ્ટોડિયન",
+                    "recipient": "પ્રાપ્તકર્તા"
+                },
+                "small": {
+                    "tokenId": "ટોકન આઈડી જેને લોક અથવા અનલોક કરવાની જરૂર છે",
+                    "custodian": "સરનામું જે અનલૉક કરવામાં સક્ષમ હોઈ શકે છે",
+                    "recipient": "સરનામું જે ટોકન્સ પ્રાપ્ત કરશે"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "અમાન્ય tokenId",
+                "invalidCustodian": "અમાન્ય કસ્ટોડિયન",
+                "invalidRecipient": "અમાન્ય પ્રાપ્તકર્તા"
+            },
+            "placeholders": {
+                "optional": "(વૈકલ્પિક)",
+                "tokenId": "આઈડી",
+                "custodian": "સરનામું"
+            },
+            "Lock": "તાળું",
+            "Unlock": "અનલોક કરો",
+            "Locked": "તાળું મારેલું",
+            "CustodianAddress": "કસ્ટોડિયન સરનામું",
+            "TokenWasClaimed": "&quot;{{title}}&quot; ટોકનનો દાવો કરવામાં આવ્યો હતો",
+            "TokenWasLocked": "ટોકન &quot;{{title}}&quot; લૉક હતું",
+            "TokenWasUnlocked": "ટોકન &quot;{{title}}&quot; અનલૉક કરવામાં આવ્યું હતું"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "એપ્લિકેશન સાથે કામ કરવા માટે મેટામાસ્કને કનેક્ટ કરવાની જરૂર છે",
         "UserNotLoggedInMetaMask": "વપરાશકર્તા મેટામાસ્કમાં લૉગ ઇન નથી",
         "CurrencyNotFound": "ચલણ મળ્યું નથી",
-        "WrongChain": "આ NFT &quot;{{chain}}&quot; હેઠળ બનાવેલ છે. કૃપા કરીને આ સાંકળનો ઉપયોગ કરો."
+        "WrongChain": "આ NFT &quot;{{chain}}&quot; હેઠળ બનાવેલ છે. કૃપા કરીને આ સાંકળનો ઉપયોગ કરો.",
+        "AmountInvalid": "રકમ અમાન્ય!",
+        "NoRecipientSelected": "કોઈ પ્રાપ્તકર્તા પસંદ કરેલ નથી",
+        "NotEnoughPermissionsWallet": "આ વપરાશકર્તાનું વૉલેટ વાંચવા માટે પૂરતી પરવાનગીઓ નથી",
+        "ThisUserHaveNoWallet": "આ વપરાશકર્તાને કોઈ વૉલેટ અસાઇન કરેલ નથી",
+        "TheWalletOfThisUserInvalid": "આ વપરાશકર્તાનું વૉલેટ અમાન્ય છે",
+        "WalletInvalid": "વૉલેટ સરનામું અમાન્ય"
     },
     "admin": {
         "Title": "અસ્કયામતો વહીવટી",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "ન્યૂનતમ ક્રેડિટ નકારાત્મક હોઈ શકતી નથી",
             "CreditsToAddNegative": "ઉમેરવા માટેની ક્રેડિટ નકારાત્મક હોઈ શકતી નથી"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "પ્રાપ્તકર્તા પસંદ કરો",
+        "TransactionSuccess": "વ્યવહારમાં સફળતા",
+        "OrTypeWalletAddress": "અથવા પ્રાપ્તકર્તા વૉલેટ સરનામું લખો"
+    },
+    "currencies": {
+        "choose": "ચલણ પસંદ કરો"
     }
 }

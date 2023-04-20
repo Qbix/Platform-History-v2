@@ -27,7 +27,12 @@
         "PaymentProcessing.": "Seu pagamento está sendo processado",
         "FailTryAgain": "Seu pagamento não foi bem-sucedido, tente novamente",
         "SomethingWrong": "Algo deu errado",
-        "PaymentStatus": "Status do pagamento"
+        "PaymentStatus": "Status do pagamento",
+        "PayTo": "Pagar {{displayName}}",
+        "ChooseCurrency": "Escolha uma moeda",
+        "YouCanSendUpTo": "Você pode enviar até {{amount}} {{symbol}}",
+        "Send": "Enviar",
+        "EnterAmount": "insira o valor"
     },
     "credits": {
         "InviteAcceptedBy": "Convite aceito por {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} créditos",
             "BonusCredits": "{{amount}} créditos"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} preenchido {{FilledStreamTitle}}",
+        "ForFillingStream": "Para preencher {{FilledStreamTitle}}",
+        "CreatePrivateChat": "para bate-papo privado com {{toUserName}}"
     },
     "history": {
         "Date": "Encontro",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "Ganhou {{amount}} créditos",
         "Places_user_location": "Ganhou {{amount}} créditos",
         "Streams_greeting": "Ganhou {{amount}} créditos",
-        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos"
+        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos",
+        "User": "Do utilizador"
     },
     "subscriptions": {
         "infoTitle": "Definir informações de pagamento",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "definir link de informações adicionais",
             "DescriptionPlaceholder": "Descrição do Serviço",
             "SaveService": "Salvar serviço",
-            "SelectRequiredParticipants": "Participantes obrigatórios"
+            "SelectRequiredParticipants": "Participantes obrigatórios",
+            "RequiredParticipantsDesc": "Selecione os participantes relacionados que são necessários para usar este serviço (por exemplo, animais de estimação para &quot;Exposição de cães&quot; ou crianças para &quot;Férias infantis&quot; etc.). Se o serviço for pago, o usuário precisará pagar também por cada participante relacionado."
         },
         "ManageServiceTemplates": "Gerenciar modelos de serviço",
         "ManageServices": "Gerenciar serviços",
@@ -387,6 +397,132 @@
             "Description": "Detalhes do usuario",
             "aboutPlaceholder": "Editar biografia",
             "SureLogOut": "Tem certeza que deseja sair?"
+        },
+        "Add": "Adicionar",
+        "Remove": "Remover",
+        "NoNFTyet": "Ainda não há NFTs",
+        "Claim": "Alegar",
+        "ClaimNFT": "Reivindicar NFT",
+        "Unlocking": "desbloqueio",
+        "Unlock": "desbloquear",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "Contrato NFT",
+                        "seriesId": "ID da série",
+                        "owner": "Proprietário",
+                        "currency": "moeda",
+                        "price": "Preço",
+                        "beneficiary": "Beneficiário",
+                        "autoindex": "Índice automático",
+                        "duration": "Duração",
+                        "rateInterval": "Intervalo de taxa",
+                        "rateAmount": "Valor da taxa"
+                    },
+                    "small": {
+                        "NFTContract": "Contrato NFT",
+                        "seriesId": "tokens serão cunhados nesta série",
+                        "owner": "proprietário da instância, caso contrário, será o remetente",
+                        "currency": "Moeda para tokens comprados, se zero - para moedas nativas",
+                        "price": "Preço",
+                        "beneficiary": "Beneficiário da venda de tokens, caso contrário, será o remetente",
+                        "autoindex": "Índice automático",
+                        "duration": "Bloqueie após a cunhagem. Zero significa obtê-lo imediatamente.",
+                        "rateInterval": "intervalo de balde para compra especial",
+                        "rateAmount": "quantidade de balde para compra especial"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcional)",
+                    "number": "número",
+                    "address": "endereço",
+                    "fraction": "fração",
+                    "integer": "inteiro",
+                    "seconds": "segundos",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Produzir",
+                "viewInstancesList": "Atualizar lista"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ID da série",
+                        "account": "Conta",
+                        "amount": "Quantia"
+                    },
+                    "small": {
+                        "seriesId": "o novo token pertencerá à série com tal ID",
+                        "account": "proprietário do NFT recém-criado. se não for definido - usará a carteira atual",
+                        "amount": "quantidade NFT para cunhar"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(opcional)",
+                    "seriesId": "eu ia",
+                    "account": "conta",
+                    "amount": "quantia",
+                    "integer": "inteiro"
+                },
+                "btn": {
+                    "Purchase": "Comprar",
+                    "SpecialPurchase": "compra especial"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Endereço"
+                    },
+                    "small": {
+                        "account": "Endereço"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Endereço inválido"
+                },
+                "placeholders": {
+                    "account": "Endereço"
+                },
+                "addToWhitelist": "Adicionar à lista de permissões",
+                "removeFromWhitelist": "Remover da lista branca"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ID do token",
+                    "custodian": "Custodiante",
+                    "recipient": "Destinatário"
+                },
+                "small": {
+                    "tokenId": "id do token o que precisa bloquear ou desbloquear",
+                    "custodian": "endereço que pode ser capaz de desbloquear",
+                    "recipient": "endereço que receberá os tokens"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "ID de token inválido",
+                "invalidCustodian": "Depositário inválido",
+                "invalidRecipient": "Recipiente inválido"
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tokenId": "eu ia",
+                "custodian": "endereço"
+            },
+            "Lock": "Trancar",
+            "Unlock": "desbloquear",
+            "Locked": "bloqueado",
+            "CustodianAddress": "Endereço do depositário",
+            "TokenWasClaimed": "O token &quot;{{title}}&quot; foi reivindicado",
+            "TokenWasLocked": "O token &quot;{{title}}&quot; foi bloqueado",
+            "TokenWasUnlocked": "O token &quot;{{title}}&quot; foi desbloqueado"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "Precisa do MetaMask conectado para trabalhar com o aplicativo",
         "UserNotLoggedInMetaMask": "O usuário não está logado no MetaMask",
         "CurrencyNotFound": "Moeda não encontrada",
-        "WrongChain": "Esta NFT foi criada em &quot;{{chain}}&quot;. Por favor, use esta corrente."
+        "WrongChain": "Esta NFT foi criada em &quot;{{chain}}&quot;. Por favor, use esta corrente.",
+        "AmountInvalid": "Valor inválido!",
+        "NoRecipientSelected": "Nenhum destinatário selecionado",
+        "NotEnoughPermissionsWallet": "Não há permissões suficientes para ler a carteira deste usuário",
+        "ThisUserHaveNoWallet": "Este usuário não tem carteira atribuída",
+        "TheWalletOfThisUserInvalid": "A carteira deste usuário é inválida",
+        "WalletInvalid": "Endereço da carteira inválido"
     },
     "admin": {
         "Title": "Ativos administrativos",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "O mínimo de créditos não pode ser negativo",
             "CreditsToAddNegative": "Os créditos a serem adicionados não podem ser negativos"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Selecione o destinatário",
+        "TransactionSuccess": "Sucesso da Transação",
+        "OrTypeWalletAddress": "OU digite o endereço da carteira do destinatário"
+    },
+    "currencies": {
+        "choose": "Escolha uma moeda"
     }
 }

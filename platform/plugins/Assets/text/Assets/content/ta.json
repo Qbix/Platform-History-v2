@@ -27,7 +27,12 @@
         "PaymentProcessing.": "உங்கள் கட்டணம் செயலாக்கப்படுகிறது",
         "FailTryAgain": "உங்கள் பணம் செலுத்த முடியவில்லை, மீண்டும் முயற்சிக்கவும்",
         "SomethingWrong": "ஏதோ தவறு நடைபெற்றிருக்கிறது",
-        "PaymentStatus": "கட்டண நிலை"
+        "PaymentStatus": "கட்டண நிலை",
+        "PayTo": "செலுத்து {{displayName}}",
+        "ChooseCurrency": "நாணயத்தைத் தேர்ந்தெடுக்கவும்",
+        "YouCanSendUpTo": "நீங்கள் {{amount}} {{symbol}} வரை அனுப்பலாம்",
+        "Send": "அனுப்பு",
+        "EnterAmount": "தொகையை உள்ளிடவும்"
     },
     "credits": {
         "InviteAcceptedBy": "அழைப்பை {{invitedUserName}} ஏற்றுக்கொண்டார்",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} வரவுகள்",
             "BonusCredits": "{{amount}} வரவுகள்"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} நிரப்பப்பட்டது {{FilledStreamTitle}}",
+        "ForFillingStream": "நிரப்புவதற்கு {{FilledStreamTitle}}",
+        "CreatePrivateChat": "{{toUserName}} உடன் தனிப்பட்ட அரட்டைக்கு"
     },
     "history": {
         "Date": "தேதி",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
         "Places_user_location": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
         "Streams_greeting": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
-        "YouHaveCreditsToStart": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது"
+        "YouHaveCreditsToStart": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "User": "பயனர்"
     },
     "subscriptions": {
         "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "கூடுதல் தகவல் இணைப்பை அமைக்கவும்",
             "DescriptionPlaceholder": "சேவை விளக்கம்",
             "SaveService": "சேவையைச் சேமிக்கவும்",
-            "SelectRequiredParticipants": "தேவையான பங்கேற்பாளர்கள்"
+            "SelectRequiredParticipants": "தேவையான பங்கேற்பாளர்கள்",
+            "RequiredParticipantsDesc": "இந்தச் சேவையைப் பயன்படுத்தத் தேவைப்படும் தொடர்புடைய பங்கேற்பாளர்களைத் தேர்ந்தெடுக்கவும் (உதாரணமாக &quot;நாய்கள் நிகழ்ச்சி&quot;க்கான செல்லப்பிராணிகள், அல்லது &quot;குழந்தைகளுக்கான விடுமுறை&quot; போன்றவை). சேவை செலுத்தப்பட்டால், தொடர்புடைய ஒவ்வொரு பங்கேற்பாளருக்கும் பயனர் பணம் செலுத்த வேண்டும்."
         },
         "ManageServiceTemplates": "சேவை டெம்ப்ளேட்களை நிர்வகிக்கவும்",
         "ManageServices": "சேவைகளை நிர்வகிக்கவும்",
@@ -387,6 +397,132 @@
             "Description": "பயனர் விவரங்கள்",
             "aboutPlaceholder": "பயோவை திருத்து",
             "SureLogOut": "நிச்சயமாக வெளியேற விரும்புகிறீர்களா?"
+        },
+        "Add": "கூட்டு",
+        "Remove": "அகற்று",
+        "NoNFTyet": "இதுவரை NFTகள் இல்லை",
+        "Claim": "உரிமைகோரவும்",
+        "ClaimNFT": "NFT ஐக் கோரவும்",
+        "Unlocking": "திறத்தல்",
+        "Unlock": "திறக்கவும்",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTC ஒப்பந்தம்",
+                        "seriesId": "தொடர் ஐடி",
+                        "owner": "உரிமையாளர்",
+                        "currency": "நாணயம்",
+                        "price": "விலை",
+                        "beneficiary": "பயனாளி",
+                        "autoindex": "ஆட்டோஇன்டெக்ஸ்",
+                        "duration": "கால அளவு",
+                        "rateInterval": "விகித இடைவெளி",
+                        "rateAmount": "விகிதம் தொகை"
+                    },
+                    "small": {
+                        "NFTContract": "NFTC ஒப்பந்தம்",
+                        "seriesId": "இந்த தொடரில் டோக்கன்கள் அச்சிடப்படும்",
+                        "owner": "உதாரணத்தின் உரிமையாளர், இல்லையெனில் அனுப்புபவராக இருப்பார்",
+                        "currency": "வாங்கிய டோக்கன்களுக்கான நாணயம், பூஜ்ஜியமாக இருந்தால் - சொந்த நாணயங்களுக்கு",
+                        "price": "விலை",
+                        "beneficiary": "டோக்கன்களை விற்பதன் பயனாளி, இல்லையெனில் அனுப்புபவராக இருப்பார்",
+                        "autoindex": "ஆட்டோஇன்டெக்ஸ்",
+                        "duration": "மின்னலுக்குப் பிறகு பூட்டு. பூஜ்ஜியம் என்றால் உடனே கிடைக்கும்.",
+                        "rateInterval": "சிறப்பு வாங்குவதற்கான வாளி இடைவெளி",
+                        "rateAmount": "சிறப்பு வாங்குவதற்கான வாளி தொகை"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(விரும்பினால்)",
+                    "number": "எண்",
+                    "address": "முகவரி",
+                    "fraction": "பின்னம்",
+                    "integer": "முழு",
+                    "seconds": "வினாடிகள்",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "உற்பத்தி செய்",
+                "viewInstancesList": "பட்டியலைப் புதுப்பிக்கவும்"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "தொடர் ஐடி",
+                        "account": "கணக்கு",
+                        "amount": "தொகை"
+                    },
+                    "small": {
+                        "seriesId": "புதிய டோக்கன் அத்தகைய ஐடியுடன் தொடரில் இருக்கும்",
+                        "account": "புதிதாக உருவாக்கப்பட்ட NFT இன் உரிமையாளர். அமைக்கப்படவில்லை என்றால் - தற்போதைய பணப்பையைப் பயன்படுத்தும்",
+                        "amount": "NFT முதல் புதினா அளவு"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(விரும்பினால்)",
+                    "seriesId": "ஐடி",
+                    "account": "கணக்கு",
+                    "amount": "தொகை",
+                    "integer": "முழு"
+                },
+                "btn": {
+                    "Purchase": "கொள்முதல்",
+                    "SpecialPurchase": "சிறப்பு கொள்முதல்"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "முகவரி"
+                    },
+                    "small": {
+                        "account": "முகவரி"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "தவறான முகவரி"
+                },
+                "placeholders": {
+                    "account": "முகவரி"
+                },
+                "addToWhitelist": "ஏற்புப்பட்டியலில் சேர்க்கவும்",
+                "removeFromWhitelist": "ஏற்புப் பட்டியலில் இருந்து நீக்கு"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "டோக்கன் ஐடி",
+                    "custodian": "காவலாளி",
+                    "recipient": "பெறுபவர்"
+                },
+                "small": {
+                    "tokenId": "டோக்கன் ஐடி என்ன பூட்ட வேண்டும் அல்லது திறக்க வேண்டும்",
+                    "custodian": "திறக்கக்கூடிய முகவரி",
+                    "recipient": "டோக்கன்களைப் பெறும் முகவரி"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "தவறான டோக்கன் ஐடி",
+                "invalidCustodian": "தவறான பாதுகாவலர்",
+                "invalidRecipient": "தவறான பெறுநர்"
+            },
+            "placeholders": {
+                "optional": "(விரும்பினால்)",
+                "tokenId": "ஐடி",
+                "custodian": "முகவரி"
+            },
+            "Lock": "பூட்டு",
+            "Unlock": "திறக்கவும்",
+            "Locked": "பூட்டப்பட்டது",
+            "CustodianAddress": "பாதுகாவலர் முகவரி",
+            "TokenWasClaimed": "&quot;{{title}}&quot; டோக்கன் கோரப்பட்டது",
+            "TokenWasLocked": "&quot;{{title}}&quot; டோக்கன் பூட்டப்பட்டது",
+            "TokenWasUnlocked": "&quot;{{title}}&quot; டோக்கன் திறக்கப்பட்டது"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "பயன்பாட்டுடன் வேலை செய்ய MetaMask இணைக்கப்பட வேண்டும்",
         "UserNotLoggedInMetaMask": "பயனர் MetaMask இல் உள்நுழையவில்லை",
         "CurrencyNotFound": "நாணயம் கிடைக்கவில்லை",
-        "WrongChain": "இந்த NFT &quot;{{chain}}&quot; இன் கீழ் உருவாக்கப்பட்டது. தயவுசெய்து இந்த சங்கிலியைப் பயன்படுத்தவும்."
+        "WrongChain": "இந்த NFT &quot;{{chain}}&quot; இன் கீழ் உருவாக்கப்பட்டது. தயவுசெய்து இந்த சங்கிலியைப் பயன்படுத்தவும்.",
+        "AmountInvalid": "செல்லாத தொகை!",
+        "NoRecipientSelected": "பெறுநர் தேர்ந்தெடுக்கப்படவில்லை",
+        "NotEnoughPermissionsWallet": "இந்தப் பயனரின் வாலட்டைப் படிக்க போதுமான அனுமதிகள் இல்லை",
+        "ThisUserHaveNoWallet": "இந்தப் பயனருக்கு வாலட் எதுவும் ஒதுக்கப்படவில்லை",
+        "TheWalletOfThisUserInvalid": "இந்தப் பயனரின் பணப்பை தவறானது",
+        "WalletInvalid": "வாலட் முகவரி தவறானது"
     },
     "admin": {
         "Title": "சொத்துக்கள் நிர்வாக",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "குறைந்தபட்ச வரவுகள் எதிர்மறையாக இருக்கக்கூடாது",
             "CreditsToAddNegative": "சேர்க்க வேண்டிய கிரெடிட்கள் எதிர்மறையாக இருக்கக்கூடாது"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "பெறுநரைத் தேர்ந்தெடுக்கவும்",
+        "TransactionSuccess": "பரிவர்த்தனை வெற்றி",
+        "OrTypeWalletAddress": "அல்லது பெறுநரின் பணப்பை முகவரியை உள்ளிடவும்"
+    },
+    "currencies": {
+        "choose": "நாணயத்தைத் தேர்ந்தெடுக்கவும்"
     }
 }

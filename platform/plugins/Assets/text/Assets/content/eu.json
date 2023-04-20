@@ -19,7 +19,12 @@
         "PaymentProcessing.": "Ordainketa prozesatzen ari da",
         "FailTryAgain": "Ordainketa ez da arrakasta izan. Saiatu berriro",
         "SomethingWrong": "Zerbait gaizki joan da",
-        "PaymentStatus": "Ordainketa egoera"
+        "PaymentStatus": "Ordainketa egoera",
+        "PayTo": "Ordaindu {{displayName}}",
+        "ChooseCurrency": "Aukeratu moneta bat",
+        "YouCanSendUpTo": "Gehienez {{amount}} {{symbol}} bidal ditzakezu",
+        "Send": "Bidali",
+        "EnterAmount": "sartu zenbatekoa"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}}-k onartu du gonbidapena",
@@ -52,7 +57,10 @@
         "Streams_user_lastname": "{{invitedUserName}}-k abizena idatzi du",
         "Streams_user_icon": "{{invitedUserName}} sartu da ikonoa",
         "Places_user_location": "{{invitedUserName}} kokapena sartu du",
-        "Streams_greeting": "{{invitedUserName}} agurra sartu da"
+        "Streams_greeting": "{{invitedUserName}} agurra sartu da",
+        "InvitedUserFilledStream": "{{invitedUserName}} beteta {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} betetzeko",
+        "CreatePrivateChat": "{{toUserName}}-rekin txateatzeko"
     },
     "history": {
         "Date": "Data",
@@ -88,7 +96,8 @@
         "Streams_user_lastname": "{{amount}} kreditu lortu dituzu",
         "Streams_user_icon": "{{amount}} kreditu irabazi ditu",
         "Places_user_location": "{{amount}} kreditu irabazi ditu",
-        "Streams_greeting": "{{amount}} kreditu lortu dituzu"
+        "Streams_greeting": "{{amount}} kreditu lortu dituzu",
+        "User": "Erabiltzailea"
     },
     "subscriptions": {
         "infoTitle": "Ezarri ordainketa-informazioa",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ezarri informazio gehigarria esteka",
             "DescriptionPlaceholder": "Zerbitzuaren deskribapena",
             "SaveService": "Gorde Zerbitzua",
-            "SelectRequiredParticipants": "Beharrezko partaideak"
+            "SelectRequiredParticipants": "Beharrezko partaideak",
+            "RequiredParticipantsDesc": "Mesedez, hautatu zerbitzu hau erabiltzeko beharrezkoak diren erlazionatutako parte-hartzaileak (adibidez, maskotak &quot;Txakurren erakustaldirako&quot;, edo haurrak &quot;Haurren oporretarako&quot;, etab). Zerbitzua ordaintzen bada, erabiltzaileak erlazionatutako parte-hartzaile bakoitzeko ere ordaindu beharko du."
         },
         "ManageServiceTemplates": "Kudeatu Zerbitzu Txantiloiak",
         "ManageServices": "Zerbitzuak kudeatu",
@@ -388,6 +398,132 @@
             "Description": "Erabiltzailearen datuak",
             "aboutPlaceholder": "Editatu biografia",
             "SureLogOut": "Ziur saioa amaitu nahi duzula?"
+        },
+        "Add": "Gehitu",
+        "Remove": "Kendu",
+        "NoNFTyet": "Oraindik ez dago NFTrik",
+        "Claim": "Erreklamazioa",
+        "ClaimNFT": "Erreklamatu NFT",
+        "Unlocking": "Desblokeatzea",
+        "Unlock": "Desblokeatu",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTKontratua",
+                        "seriesId": "seriearen id",
+                        "owner": "Jabea",
+                        "currency": "Txanda",
+                        "price": "Prezioa",
+                        "beneficiary": "Onuraduna",
+                        "autoindex": "Autoindex",
+                        "duration": "Iraupena",
+                        "rateInterval": "Tasa tartea",
+                        "rateAmount": "Tasaren zenbatekoa"
+                    },
+                    "small": {
+                        "NFTContract": "NFTKontratua",
+                        "seriesId": "serie honetan tokenak sortuko dira",
+                        "owner": "instantziaren jabea, bestela igorlea izango da",
+                        "currency": "Erositako tokenen txanpona, zero bada, bertako txanponetarako",
+                        "price": "Prezioa",
+                        "beneficiary": "Tokenak saltzeko onuraduna, bestela igorlea izango da",
+                        "autoindex": "Autoindex",
+                        "duration": "Blokeatu egin ondoren. Zero esan nahi du berehala lortzea.",
+                        "rateInterval": "erosketa berezirako kubo tartea",
+                        "rateAmount": "erosketa berezirako kuboaren zenbatekoa"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(aukerakoa)",
+                    "number": "zenbakia",
+                    "address": "helbidea",
+                    "fraction": "zatikia",
+                    "integer": "osokoa",
+                    "seconds": "segundoak",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "Ekoiztu",
+                "viewInstancesList": "Freskatu zerrenda"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Seriearen IDa",
+                        "account": "Kontua",
+                        "amount": "Zenbatekoa"
+                    },
+                    "small": {
+                        "seriesId": "token berria seriean sartuko da ID horrekin",
+                        "account": "sortu berri den NFTren jabea. ezartzen ez bada - uneko diru-zorroa erabiliko du",
+                        "amount": "zenbatekoa NFT mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(aukerakoa)",
+                    "seriesId": "id",
+                    "account": "kontua",
+                    "amount": "zenbatekoa",
+                    "integer": "osokoa"
+                },
+                "btn": {
+                    "Purchase": "Erosketa",
+                    "SpecialPurchase": "Erosketa berezia"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "Helbidea"
+                    },
+                    "small": {
+                        "account": "Helbidea"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Helbide baliogabea"
+                },
+                "placeholders": {
+                    "account": "Helbidea"
+                },
+                "addToWhitelist": "Gehitu zerrenda zurira",
+                "removeFromWhitelist": "Kendu zerrenda zuritik"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "Token IDa",
+                    "custodian": "Zaintza",
+                    "recipient": "Hartzailea"
+                },
+                "small": {
+                    "tokenId": "token id zer blokeatu edo desblokeatu behar den",
+                    "custodian": "desblokeatzeko gai izan daitekeen helbidea",
+                    "recipient": "tokenak jasoko dituen helbidea"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "TokenId baliogabea",
+                "invalidCustodian": "Zaintza baliogabea",
+                "invalidRecipient": "Hartzaile baliogabea"
+            },
+            "placeholders": {
+                "optional": "(aukerakoa)",
+                "tokenId": "id",
+                "custodian": "helbidea"
+            },
+            "Lock": "Blokea",
+            "Unlock": "Desblokeatu",
+            "Locked": "Blokeatua",
+            "CustodianAddress": "Zaindariaren helbidea",
+            "TokenWasClaimed": "&quot;{{title}}&quot; tokena erreklamatu da",
+            "TokenWasLocked": "&quot;{{title}}&quot; tokena blokeatu da",
+            "TokenWasUnlocked": "&quot;{{title}}&quot; tokena desblokeatu da"
         }
     },
     "errors": {
@@ -402,7 +538,13 @@
         "NeedMetaMaskConnected": "MetaMask konektatuta behar da aplikazioarekin lan egiteko",
         "UserNotLoggedInMetaMask": "Erabiltzailea ez dago MetaMask-en saioa hasita",
         "CurrencyNotFound": "Ez da moneta aurkitu",
-        "WrongChain": "NFT hau &quot;{{chain}}&quot; azpian sortu da. Mesedez, erabili kate hau."
+        "WrongChain": "NFT hau &quot;{{chain}}&quot; azpian sortu da. Mesedez, erabili kate hau.",
+        "AmountInvalid": "Zenbatekoa baliogabea!",
+        "NoRecipientSelected": "Ez da hartzailerik hautatu",
+        "NotEnoughPermissionsWallet": "Ez dago nahikoa baimen erabiltzailearen zorroa irakurtzeko",
+        "ThisUserHaveNoWallet": "Erabiltzaile honek ez du diru-zorrorik esleitu",
+        "TheWalletOfThisUserInvalid": "Erabiltzaile honen zorroa baliogabea",
+        "WalletInvalid": "Diru-zorroaren helbidea baliogabea"
     },
     "admin": {
         "Title": "Ondasunen administrazioa",
@@ -418,5 +560,13 @@
             "CreditsMinimumNegative": "Gutxieneko kredituak ezin dira negatiboak izan",
             "CreditsToAddNegative": "Gehitzeko kredituak ezin dira negatiboak izan"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "Hautatu hartzailea",
+        "TransactionSuccess": "Transakzio arrakastatsua",
+        "OrTypeWalletAddress": "EDO idatzi hartzailearen zorroaren helbidea"
+    },
+    "currencies": {
+        "choose": "Aukeratu moneta bat"
     }
 }

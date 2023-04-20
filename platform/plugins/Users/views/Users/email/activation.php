@@ -1,6 +1,10 @@
+<div style="text-align: center">
+	<?php echo Q_Html::img('img/icon/200.png') ?> 
+</div>
+
 <h1>
-	<?php echo Q::text($activation['Thanks'], array($communityName)) ?>,
-	<?php echo $user->username ?>
+	<?php echo Q::text($activation['Thanks'], array($communityName)) ?>, 
+	<?php echo $user->username ?> 
 </h1>
 
 <h2>
@@ -15,12 +19,12 @@
 
 <p>
 	We should remember to put a link so you can set a password and activate your account,
-	<?php echo Q_Html::a($link, 'like this') ?>
+	<?php echo Q_Html::a($link, 'like this') ?> 
 </p>
 
 <p style="margin-top: 100px;">
 	And somewhere on the bottom, you'll probably want to place a link to:
-	<?php echo Q_Html::a($unsubscribe, 'unsubscribe') ?>
+	<?php echo Q_Html::a($unsubscribe, 'unsubscribe') ?> 
 </p>
 
 <script type="application/ld+json">

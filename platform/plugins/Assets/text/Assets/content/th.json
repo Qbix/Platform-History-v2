@@ -27,7 +27,12 @@
         "PaymentProcessing.": "กำลังดำเนินการชำระเงินของคุณ",
         "FailTryAgain": "การชำระเงินของคุณไม่สำเร็จ โปรดลองอีกครั้ง",
         "SomethingWrong": "บางอย่างผิดพลาด",
-        "PaymentStatus": "สถานะการชำระเงิน"
+        "PaymentStatus": "สถานะการชำระเงิน",
+        "PayTo": "จ่าย {{displayName}}",
+        "ChooseCurrency": "เลือกสกุลเงิน",
+        "YouCanSendUpTo": "คุณสามารถส่งได้ถึง {{amount}} {{symbol}}",
+        "Send": "ส่ง",
+        "EnterAmount": "ใส่จำนวนเงิน"
     },
     "credits": {
         "InviteAcceptedBy": "ตอบรับคำเชิญโดย {{invitedUserName}}",
@@ -60,7 +65,10 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} หน่วยกิต",
             "BonusCredits": "{{amount}} หน่วยกิต"
-        }
+        },
+        "InvitedUserFilledStream": "{{invitedUserName}} เติม {{FilledStreamTitle}}",
+        "ForFillingStream": "สำหรับกรอก {{FilledStreamTitle}}",
+        "CreatePrivateChat": "สำหรับแชทส่วนตัวกับ {{toUserName}}"
     },
     "history": {
         "Date": "วันที่",
@@ -96,7 +104,8 @@
         "Streams_user_icon": "ได้รับ {{amount}} เครดิต",
         "Places_user_location": "ได้รับ {{amount}} เครดิต",
         "Streams_greeting": "ได้รับ {{amount}} เครดิต",
-        "YouHaveCreditsToStart": "ได้รับ {{amount}} เครดิต"
+        "YouHaveCreditsToStart": "ได้รับ {{amount}} เครดิต",
+        "User": "ผู้ใช้"
     },
     "subscriptions": {
         "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
@@ -194,7 +203,8 @@
             "LinkPlaceholder": "ตั้งค่าลิงค์ข้อมูลเพิ่มเติม",
             "DescriptionPlaceholder": "รายละเอียดการบริการ",
             "SaveService": "บันทึกบริการ",
-            "SelectRequiredParticipants": "ผู้เข้าร่วมที่ต้องการ"
+            "SelectRequiredParticipants": "ผู้เข้าร่วมที่ต้องการ",
+            "RequiredParticipantsDesc": "โปรดเลือกผู้เข้าร่วมที่เกี่ยวข้องซึ่งจำเป็นต้องใช้บริการนี้ (เช่น สัตว์เลี้ยงสำหรับ &quot;การแสดงสุนัข&quot; หรือเด็กสำหรับ &quot;วันหยุดสำหรับเด็ก&quot; เป็นต้น) หากมีการชำระค่าบริการ ผู้ใช้จะต้องชำระเงินสำหรับผู้เข้าร่วมที่เกี่ยวข้องแต่ละคนด้วย"
         },
         "ManageServiceTemplates": "จัดการเทมเพลตบริการ",
         "ManageServices": "จัดการบริการ",
@@ -387,6 +397,132 @@
             "Description": "รายละเอียดผู้ใช้",
             "aboutPlaceholder": "แก้ไขชีวประวัติ",
             "SureLogOut": "คุณแน่ใจว่าคุณต้องการที่จะออกจากระบบ?"
+        },
+        "Add": "เพิ่ม",
+        "Remove": "ลบ",
+        "NoNFTyet": "ยังไม่มี NFT",
+        "Claim": "เรียกร้อง",
+        "ClaimNFT": "อ้างสิทธิ์ NFT",
+        "Unlocking": "กำลังปลดล็อก",
+        "Unlock": "ปลดล็อค",
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "สัญญา NFT",
+                        "seriesId": "รหัสชุด",
+                        "owner": "เจ้าของ",
+                        "currency": "สกุลเงิน",
+                        "price": "ราคา",
+                        "beneficiary": "ผู้รับผลประโยชน์",
+                        "autoindex": "ดัชนีอัตโนมัติ",
+                        "duration": "ระยะเวลา",
+                        "rateInterval": "ช่วงอัตรา",
+                        "rateAmount": "อัตราจำนวนเงิน"
+                    },
+                    "small": {
+                        "NFTContract": "สัญญา NFT",
+                        "seriesId": "โทเค็นจะถูกสร้างขึ้นในชุดนี้",
+                        "owner": "เจ้าของอินสแตนซ์ มิฉะนั้น จะเป็นผู้ส่ง",
+                        "currency": "สกุลเงินสำหรับโทเค็นที่ซื้อ หากเป็นศูนย์ - สำหรับเหรียญเนทีฟ",
+                        "price": "ราคา",
+                        "beneficiary": "ผู้รับประโยชน์จากการขายโทเค็น มิฉะนั้นจะเป็นผู้ส่ง",
+                        "autoindex": "ดัชนีอัตโนมัติ",
+                        "duration": "ล็อคหลังจากสร้างเหรียญ ศูนย์หมายถึงรับทันที",
+                        "rateInterval": "ช่วงฝากข้อมูลสำหรับการซื้อพิเศษ",
+                        "rateAmount": "จำนวนถังสำหรับการซื้อพิเศษ"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ไม่จำเป็น)",
+                    "number": "ตัวเลข",
+                    "address": "ที่อยู่",
+                    "fraction": "เศษส่วน",
+                    "integer": "จำนวนเต็ม",
+                    "seconds": "วินาที",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ผลิต",
+                "viewInstancesList": "รีเฟรชรายการ"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "รหัสชุด",
+                        "account": "บัญชี",
+                        "amount": "จำนวน"
+                    },
+                    "small": {
+                        "seriesId": "โทเค็นใหม่จะอยู่ในซีรีส์ที่มี ID ดังกล่าว",
+                        "account": "เจ้าของ NFT ที่สร้างขึ้นใหม่ หากไม่ได้ตั้งค่า - จะใช้กระเป๋าเงินปัจจุบัน",
+                        "amount": "จำนวน NFT เป็นเหรียญกษาปณ์"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(ไม่จำเป็น)",
+                    "seriesId": "รหัส",
+                    "account": "บัญชี",
+                    "amount": "จำนวน",
+                    "integer": "จำนวนเต็ม"
+                },
+                "btn": {
+                    "Purchase": "ซื้อ",
+                    "SpecialPurchase": "ซื้อพิเศษ"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "ที่อยู่"
+                    },
+                    "small": {
+                        "account": "ที่อยู่"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "ที่อยู่ที่ไม่ถูกต้อง"
+                },
+                "placeholders": {
+                    "account": "ที่อยู่"
+                },
+                "addToWhitelist": "เพิ่มในรายการที่อนุญาตพิเศษ",
+                "removeFromWhitelist": "ลบออกจากไวท์ลิสต์"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "รหัสโทเค็น",
+                    "custodian": "ผู้ดูแล",
+                    "recipient": "ผู้รับ"
+                },
+                "small": {
+                    "tokenId": "รหัสโทเค็นสิ่งที่ต้องล็อคหรือปลดล็อค",
+                    "custodian": "ที่อยู่ที่สามารถปลดล็อคได้",
+                    "recipient": "ที่อยู่ที่จะได้รับโทเค็น"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "รหัสโทเค็นไม่ถูกต้อง",
+                "invalidCustodian": "ผู้ดูแลไม่ถูกต้อง",
+                "invalidRecipient": "ผู้รับไม่ถูกต้อง"
+            },
+            "placeholders": {
+                "optional": "(ไม่จำเป็น)",
+                "tokenId": "รหัส",
+                "custodian": "ที่อยู่"
+            },
+            "Lock": "ล็อค",
+            "Unlock": "ปลดล็อค",
+            "Locked": "ล็อค",
+            "CustodianAddress": "ที่อยู่ผู้ดูแล",
+            "TokenWasClaimed": "อ้างสิทธิ์โทเค็น &quot;{{title}}&quot; แล้ว",
+            "TokenWasLocked": "โทเค็น &quot;{{title}}&quot; ถูกล็อค",
+            "TokenWasUnlocked": "ปลดล็อกโทเค็น &quot;{{title}}&quot; แล้ว"
         }
     },
     "errors": {
@@ -401,7 +537,13 @@
         "NeedMetaMaskConnected": "ต้องการ MetaMask ที่เชื่อมต่อกับแอพพลิเคชั่น",
         "UserNotLoggedInMetaMask": "ผู้ใช้ไม่ได้เข้าสู่ระบบ MetaMask",
         "CurrencyNotFound": "ไม่พบสกุลเงิน",
-        "WrongChain": "NFT นี้สร้างขึ้นภายใต้ &quot;{{chain}}&quot; โปรดใช้โซ่นี้"
+        "WrongChain": "NFT นี้สร้างขึ้นภายใต้ &quot;{{chain}}&quot; โปรดใช้โซ่นี้",
+        "AmountInvalid": "จำนวนเงินไม่ถูกต้อง!",
+        "NoRecipientSelected": "ไม่ได้เลือกผู้รับ",
+        "NotEnoughPermissionsWallet": "สิทธิ์ไม่เพียงพอที่จะอ่านกระเป๋าเงินของผู้ใช้รายนี้",
+        "ThisUserHaveNoWallet": "ผู้ใช้รายนี้ไม่ได้กำหนดกระเป๋าเงิน",
+        "TheWalletOfThisUserInvalid": "กระเป๋าเงินของผู้ใช้รายนี้ไม่ถูกต้อง",
+        "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง"
     },
     "admin": {
         "Title": "การบริหารสินทรัพย์",
@@ -417,5 +559,13 @@
             "CreditsMinimumNegative": "เครดิตขั้นต่ำไม่สามารถติดลบได้",
             "CreditsToAddNegative": "เครดิตที่จะเพิ่มไม่สามารถติดลบได้"
         }
+    },
+    "transfer": {
+        "SelectRecipient": "เลือกผู้รับ",
+        "TransactionSuccess": "ความสำเร็จของการทำธุรกรรม",
+        "OrTypeWalletAddress": "หรือพิมพ์ที่อยู่กระเป๋าสตางค์ของผู้รับ"
+    },
+    "currencies": {
+        "choose": "เลือกสกุลเงิน"
     }
 }
