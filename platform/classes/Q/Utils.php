@@ -1066,6 +1066,18 @@ class Q_Utils
 		} else {
 			$dataContent = is_string($data) ? $data : '';
 		}
+
+		if (is_array($header)) {
+			// try to guard against some injections
+			foreach ($header as $h) {
+				if  (preg_match("/[^._ :;.,\/\"'?!(){}[\]@<>=\-+*#$&`|~\\^%a-zA-Z0-9]/", $h)) {
+					throw new Q_Exception_WrongType(array(
+						'field' => 'header',
+						'type' => 'valid HTTP header'
+					));
+				}
+			}
+		}
 		
 		if (!isset($header) or is_array($header)) {
 			$headers[] = "User-Agent: $user_agent";
@@ -1080,6 +1092,7 @@ class Q_Utils
 					foreach ($header as $h) {
 						if (Q::startsWith($h, 'Content-Type:')) {
 							$found = true;
+							break;
 						}
 					}
 					if (!$found) {
