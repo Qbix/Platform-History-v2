@@ -778,6 +778,7 @@
                             rtmpLiveItem.appendChild(rtmpLiveURL);
 
                             var rtmpLiveURLInput = document.createElement('INPUT');
+                            rtmpLiveURLInput.className = 'live-editor-stream-to-section-rtmp-rtmp-url-inp';
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder = 'Paste RTMP URL here';
                             rtmpLiveURLInput.autocomplete = 'off';
@@ -791,7 +792,7 @@
                             rtmpLiveItem.appendChild(rtmpLiveStreamKey);
 
                             var fakeInput = document.createElement('INPUT');
-                            fakeInput.style.height = '0';
+                            fakeInput.style.height = '1px';
                             fakeInput.style.width = '1px';
                             fakeInput.style.padding = '0';
                             fakeInput.style.border = '0';
@@ -799,12 +800,13 @@
                             fakeInput.style.left = '0';
                             fakeInput.style.top = '0';
                             fakeInput.tabindex = '-1';
-                            fakeInput.type = 'text';
+                            fakeInput.type = 'password';
                             fakeInput.autocomplete = 'off';
                             fakeInput.name = 'fakeInput';
                             rtmpLiveStreamKey.appendChild(fakeInput);
 
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
+                            rtmpLiveStreamKeyInput.className = 'live-editor-stream-to-section-rtmp-inp';
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
                             rtmpLiveStreamKeyInput.name = 'streamKey';
@@ -816,6 +818,7 @@
                             rtmpLiveItem.appendChild(linkToLiveCon);
 
                             var linkToLiveInput = document.createElement('INPUT');
+                            linkToLiveInput.className = 'live-editor-stream-to-section-rtmp-live-link-inp';
                             linkToLiveInput.type = 'text';
                             linkToLiveInput.name = 'linkToLive';
                             linkToLiveInput.placeholder = 'Link to livestream';
@@ -921,9 +924,10 @@
                                 var _currentlyStreamingToUrls = [];
                                 var rtmpUrlsArr = [];
                                 for (let i in rtmpUrls) {
-                                    var inputs = rtmpUrls[i].querySelectorAll('input');
+                                    var inputs = rtmpUrls[i].querySelectorAll('input:not(input[name="fakeInput"])');
                                     var rtmpURL = inputs[0].value.trim();
                                     var streamKey = inputs[1].value.trim();
+                                    log('streamKey input', streamKey, inputs[1])
                                     var linkToLive = inputs[2].value.trim();
                                     var fullRtmpURL = rtmpURL;
                                     if (streamKey != null && streamKey != '') {
@@ -938,6 +942,7 @@
                                     rtmpUrlsArr.push(rtmpData);
                                     _currentlyStreamingToUrls.push(rtmpData);
                                 }
+                                log('_currentlyStreamingToUrls', _currentlyStreamingToUrls, rtmpUrlsArr);
 
                                 tool.getOrCreateLivestreamStream().then(function() {
                                     tool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(_currentlyStreamingToUrls, 'custom', tool.livestreamStream);
@@ -2529,22 +2534,6 @@
 
                         _participantsContainerEl = document.createElement('DIV');
                         _participantsContainerEl.className = 'live-editor-participants-list-con';
-                        if (tool.roomStream.testAdminLevel('manage')) {
-                        
-                            let waitingRooms = document.createElement('DIV');
-                            waitingRooms.className = 'live-editor-participants-waiting';
-                            _participantsContainerEl.appendChild(waitingRooms);
-
-                            Q.activate(
-                                Q.Tool.setUpElement(waitingRooms, 'Streams/webrtc/waitingRoomList', {
-                                    webrtcUserInterface: tool.state.webrtcUserInterface,
-                                }),
-                                {},
-                                function () {
-
-                                }
-                            );
-                        }
 
                         let participantTitleCon = _allParticipantsItemEl = document.createElement('DIV');
                         participantTitleCon.className = 'live-editor-participants-list-title-con';
@@ -2582,6 +2571,23 @@
                         _participantsListEl = document.createElement('DIV');
                         _participantsListEl.className = 'live-editor-participants-list';
                         _participantsContainerEl.appendChild(_participantsListEl);
+
+                        if (tool.roomStream.testAdminLevel('manage')) {
+                        
+                            let waitingRooms = document.createElement('DIV');
+                            waitingRooms.className = 'live-editor-participants-waiting';
+                            _participantsContainerEl.appendChild(waitingRooms);
+
+                            Q.activate(
+                                Q.Tool.setUpElement(waitingRooms, 'Streams/webrtc/waitingRoomList', {
+                                    webrtcUserInterface: tool.state.webrtcUserInterface,
+                                }),
+                                {},
+                                function () {
+
+                                }
+                            );
+                        }
 
                         //lockOrUnlockParticipantsGroup();
 
