@@ -302,6 +302,7 @@
                          * @param {Function} [callback] callback function that is triggered after live session was ended
                          */
                         function endLive(callback) {
+                            tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
                             Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
                                 var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -309,7 +310,6 @@
                                     return Q.alert(msg);
                                 }
 
-                                tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
                                 if (callback != null) callback(_liveInfo);
                             }, {
                                 method: 'post',

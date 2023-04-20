@@ -137,7 +137,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             defaultDesktopViewMode:null,
             defaultMobileViewMode:null,
             writeLevel:23,
-            relate: {}
+            relate: {},
+            useRelatedTo: {}
         };
 
         overrideDefaultOptions(options);
@@ -7513,6 +7514,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             closeManually: _options.closeManually,
                             onlyParticipantsAllowed: _options.onlyParticipantsAllowed,
                             writeLevel: _options.writeLevel,
+                            useRelatedTo: _options.useRelatedTo,
                             relate: _options.relate
                         }
                     });
