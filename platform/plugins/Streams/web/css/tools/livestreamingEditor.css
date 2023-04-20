@@ -1101,7 +1101,7 @@
 }
 
 /*start: popup dialog*/
-.live-editor-popup-dialog {
+.webrtc-popup-dialog {
     background: #ffffff;
     z-index: 999999999999999999999999999999;
     white-space: nowrap;
@@ -1117,39 +1117,39 @@
     height: 30px;
     filter: drop-shadow(0px 4px 8px rgb(0 0 0 / 0.4));
 }
-.live-editor-popup-dialog .live-editor-close-sign {
+.webrtc-popup-dialog .live-editor-close-sign {
     display: none;
     cursor: pointer;
     position: absolute;
     right: 5px;
     top: 5px;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-mid-position .live-editor-close-sign,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-belowtop-position .live-editor-close-sign,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-abovebottom-position .live-editor-close-sign,
-.live-editor-popup-dialog.live-editor-popup-dialog-winmid-winmid-position .live-editor-close-sign,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-winmid-position .live-editor-close-sign,
-.live-editor-popup-dialog.live-editor-popup-dialog-winmid-fullheight-position .live-editor-close-sign,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-fullheight-position .live-editor-close-sign {
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-mid-position .live-editor-close-sign,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-belowtop-position .live-editor-close-sign,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-abovebottom-position .live-editor-close-sign,
+.webrtc-popup-dialog.webrtc-popup-dialog-winmid-winmid-position .live-editor-close-sign,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-winmid-position .live-editor-close-sign,
+.webrtc-popup-dialog.webrtc-popup-dialog-winmid-fullheight-position .live-editor-close-sign,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-fullheight-position .live-editor-close-sign {
     display: block;
 }
-.live-editor-popup-dialog .live-editor-close-sign:before {
+.webrtc-popup-dialog .live-editor-close-sign:before {
     width:20px;
     height: 20px;
 }
-.live-editor-popup-dialog-y-scroll {
+.webrtc-popup-dialog-y-scroll {
     overflow-y: auto;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-below-position,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-above-position,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-mid-position,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-belowtop-position,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-abovebottom-position,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-winmid-position,
-.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-fullheight-position {
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-below-position,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-above-position,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-mid-position,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-belowtop-position,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-abovebottom-position,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-winmid-position,
+.webrtc-popup-dialog.webrtc-popup-dialog-fullwidth-fullheight-position {
     white-space: normal;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-mid-below-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-mid-below-position::after{
     content: "";
     position: absolute;
     top: 0;
@@ -1163,7 +1163,7 @@
     border-right: 20px solid transparent;
     border-bottom: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-right-below-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-right-below-position::after{
     content: "";
     position: absolute;
     top: 0;
@@ -1177,7 +1177,7 @@
     border-right: 20px solid transparent;
     border-bottom: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-left-below-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-left-below-position::after{
     content: "";
     position: absolute;
     top: 0;
@@ -1191,7 +1191,7 @@
     border-right: 20px solid transparent;
     border-bottom: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-mid-above-position::after {
+.webrtc-popup-dialog.webrtc-popup-dialog-mid-above-position::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -1201,7 +1201,7 @@
     border-right: 20px solid transparent;
     border-top: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-right-above-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-right-above-position::after{
     content: "";
     position: absolute;
     top: 100%;
@@ -1210,7 +1210,7 @@
     border-right: 20px solid transparent;
     border-top: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-left-above-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-left-above-position::after{
     content: "";
     position: absolute;
     top: 100%;
@@ -1219,7 +1219,7 @@
     border-right: 20px solid transparent;
     border-top: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-right-mid-position::after {
+.webrtc-popup-dialog.webrtc-popup-dialog-right-mid-position::after {
     content: "";
     position: absolute;
     top: calc(50% - (40px / 2));
@@ -1229,7 +1229,7 @@
     border-bottom: 20px solid transparent;
     border-right: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-left-mid-position::after {
+.webrtc-popup-dialog.webrtc-popup-dialog-left-mid-position::after {
     content: "";
     position: absolute;
     top: calc(50% - (40px / 2));
@@ -1240,7 +1240,7 @@
     border-bottom: 20px solid transparent;
     border-left: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-right-belowtop-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-right-belowtop-position::after{
     content: "";
     position: absolute;
     top: 0;
@@ -1250,7 +1250,7 @@
     border-bottom: 20px solid transparent;
     border-right: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-left-belowtop-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-left-belowtop-position::after{
     content: "";
     position: absolute;
     top: 0;
@@ -1261,7 +1261,7 @@
     border-bottom: 20px solid transparent;
     border-left: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-right-abovebottom-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-right-abovebottom-position::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -1271,7 +1271,7 @@
     border-bottom: 20px solid transparent;
     border-right: 20px solid white;
 }
-.live-editor-popup-dialog.live-editor-popup-dialog-left-abovebottom-position::after{
+.webrtc-popup-dialog.webrtc-popup-dialog-left-abovebottom-position::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -1284,14 +1284,14 @@
 }
 /*end: popup dialog*/
 
-.live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources {
+.webrtc-popup-dialog.live-editor-participants-item-screen-btn-popup .live-editor-participants-item-sources {
     border-bottom: 1px dashed #ccc;
 }
-.live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-choose-device {
+.webrtc-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-choose-device {
     padding: 10px;
 }
-.live-editor-popup-dialog.live-editor-participants-item-camera-btn-popup .webrtc-video-settings_popup_screen_item ,
-.live-editor-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-settings_popup_camera_item {
+.webrtc-popup-dialog.live-editor-participants-item-camera-btn-popup .webrtc-video-settings_popup_screen_item ,
+.webrtc-popup-dialog.live-editor-participants-item-screen-btn-popup .webrtc-video-settings_popup_camera_item {
     display: none !important;
 }
 
@@ -1448,12 +1448,12 @@
     justify-content: space-between;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option-controls {
-    display: flex;
+    display: none;
     opacity: 0;
     transition: opacity 0.1s linear;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option:hover .live-editor-custom-select-option-controls {
-    display: flex;
+    display: none;
     opacity: 1;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option-controls-btn {
@@ -1471,7 +1471,7 @@
     fill: #fff;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-controls {
-    display: flex;
+    display: none;
     padding: 5px 5px 0 5px;
     justify-content: center;
 }
@@ -1548,6 +1548,7 @@
 .live-editor-popup-sources-control .live-editor-popup-sources-control-btn-invite-con .live-editor-popup-sources-control-btn {
     height: auto;
     padding: 5px 10px;
+    min-height: 34px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1559,6 +1560,16 @@
     align-items: center;
     margin-right: 5px;
     width: 19px;
+}
+.live-editor-popup-sources-control .live-editor-popup-sources-control-btn-invite-con .live-editor-popup-sources-control-btn-share {
+    background: none;
+    padding: 5px;
+}
+.live-editor-popup-sources-control .live-editor-popup-sources-control-btn-invite-con .live-editor-popup-sources-control-btn-share .live-editor-popup-sources-control-btn-icon {
+    margin-right: 0;
+}
+.live-editor-popup-sources-control .live-editor-popup-sources-control-btn-invite-con svg path{
+    stroke:#ffffff !important;
 }
 .live-editor-popup-scenes-control .live-editor-popup-scenes-control-btn svg,
 .live-editor-popup-sources-control .live-editor-popup-sources-control-btn svg{
@@ -2268,6 +2279,40 @@
   .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg path,
   .live-editor-participants-item-screen-btn-popup .live-editor-participants-list-source .live-editor-participants-list-source-visibility svg rect {
    fill: #8c8c8c;
+  }
+  .live-editor-participants-waiting .Streams_webrtc_participants-waiting-list button {
+    padding: 8px 0.8em;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 8px 0.8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+  }
+  .live-editor-participants-waiting .Streams_webrtc_participants-waiting-list button.webrtc-waiting-item-buttons-remove {
+    background-color: #777777;
+    color: white;
+    /*border: 1px solid #d4d4d4;*/
+    margin-left: 5px;
+  }
+  .live-editor-participants-waiting .Streams_webrtc_participants-waiting-list button.webrtc-waiting-item-buttons-admit {
+    background-color: #1e7f4b;
   }
   /*end:list of participants as sources*/
 

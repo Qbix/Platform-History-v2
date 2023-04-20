@@ -113,6 +113,45 @@ module.exports = function(socket,io) {
         socket.to(nspName + '#' + message.targetSid).emit('Streams/webrtc/signalling', message);
     });
 
+    socket.on('Streams/webrtc/putInWaitingRoom', function(message) {
+        if(_debug) console.log('putInWaitingRoom', message);
+        if(message.userId == null || socket.userPlatformId == null) {
+            return;
+        }
+        var userId = message.userId;
+        var streamName = 'Streams/webrtc/' + roomId;
+        Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
+            if(_debug) console.log('PUT IN WAITING ROOM: fetchOne');
+
+            if(err || !stream) {
+                return;
+            }
+
+            if(!stream.testAdminLevel('manage')) {
+                console.log('No permissions to do action');
+                return;
+            }
+
+            stream.leave({ userId: message.userId }, function () {
+                if (_debug) console.log('PUT IN WAITING ROOM: LEAVE STREAM');
+
+                var users = io.of('/webrtc').connected;
+
+                for (let i in users) {
+                    if (users[i].userPlatformId == userId) {
+                        console.log('PUT IN WAITING ROOM: disconnect');
+                        socket.to(nspName + '#' + users[i].client.id).emit('Streams/webrtc/leave');
+                        socket.broadcast.to(roomId).emit('Streams/webrtc/participantDisconnected', socket.client.id);
+                        socket.emit('Streams/webrtc/participantDisconnected', socket.client.id);
+                        users[i].disconnect();
+                    }
+                }
+            });
+
+
+        });
+    });
+
     const getMethods = (obj) => {
         let properties = new Set()
         let currentObj = obj
@@ -121,6 +160,7 @@ module.exports = function(socket,io) {
         } while ((currentObj = Object.getPrototypeOf(currentObj)))
         return [...properties.keys()].filter(item => typeof obj[item] === 'function')
     }
+    
 
     //console.log('Q.plugins.Streams', getMethods(Q.plugins.Streams));
     socket.on('disconnect', function() {

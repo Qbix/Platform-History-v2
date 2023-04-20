@@ -35,7 +35,7 @@
             }
 
             tool.webrtcUserInterface = options.webrtcUserInterface();
-            tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+            tool.webrtcSignalingLib = tool.webrtcUserInterface.getWebrtcSignalingLib();
 
             this.create();
         },
@@ -186,22 +186,22 @@
                         });
                     }
         
-                    for(let i = 1; i <= 10; i++) {
-                        let scene = new Scene();
-                        scene.title = 'Scene ' + i;
-                        if(i == 1) _defaultScene = _activeScene = scene;
-                        _scenes.push(scene); 
-                    }
-        
-        
                     function createScene(name) {
                         log('canvasComposer: createScene');
                         var newScene = new Scene();
                         newScene.id = generateId();
                         newScene.title = name;
                         _scenes.push(newScene);
+
+                        _eventDispatcher.dispatch('sceneCreated', newScene);
+                        return newScene;
                     }
         
+                    for(let i = 1; i <= 10; i++) {
+                        let scene = createScene('Scene ' + i);
+                        if(i == 1) _defaultScene = _activeScene = scene;
+                    }
+
                     function removeScene(sceneInstance) {
                         log('canvasComposer: removeScene', sceneInstance);
                         for (let s in _scenes) {
@@ -3382,7 +3382,7 @@
                                             rectHeight = size.parentHeight / rowsNum - (spaceBetween * (perRow - 1));
                                         }
 
-                                        console.log('simpleGrid: rectHeight', rectWidth, rectHeight);
+                                        //console.log('simpleGrid: rectHeight', rectWidth, rectHeight);
 
                                         /*var newRectSize = getElementSizeKeepingRatio({
                                             width: 1280,
@@ -4299,7 +4299,7 @@
                                             setTimeout(soundCheck, 5000);
                                         } 
                                     }
-                                    setTimeout(soundCheck, 5000);
+                                    //setTimeout(soundCheck, 5000);
 
                                     //let newStream = audioContext.createMediaStreamSource(newAudio.mediaStream);
                                     //newStream.connect(_dest)

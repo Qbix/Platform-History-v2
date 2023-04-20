@@ -274,7 +274,6 @@ function Users_request_handler(req, res, next) {
 		case 'Users/addEventListener':
 			if (userId && socketId) {
 				var clients = Users.clients[userId];
-
 				var client = null;
 				for (var cid in clients) {
 					if(!clients[cid].id) continue;

@@ -163,7 +163,7 @@
                 var tool = this;
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
                     var message = JSON.parse(message.instructions);
-                    var signalingLib = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                    var signalingLib = tool.currentActiveWebRTCRoom.getWebrtcSignalingLib();
                     var localParticipant = signalingLib.localParticipant();
     
                     var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
@@ -189,7 +189,7 @@
                 var tool = this;
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
                     var message = JSON.parse(message.content);
-                    var signalingLib = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                    var signalingLib = tool.currentActiveWebRTCRoom.getWebrtcSignalingLib();
                     var localParticipant = signalingLib.localParticipant();
     
                     var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
@@ -234,7 +234,7 @@
                 var tool = this;
                 if(tool.currentActiveWebRTCRoom && tool.currentActiveWebRTCRoom.isActive()) {
                     var message = JSON.parse(message.instructions);
-                    var signalingLib = tool.currentActiveWebRTCRoom.currentConferenceLibInstance();
+                    var signalingLib = tool.currentActiveWebRTCRoom.getWebrtcSignalingLib();
                     var localParticipant = signalingLib.localParticipant();
     
                     var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;

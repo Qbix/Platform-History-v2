@@ -29,7 +29,8 @@
         streamingToP2P: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-134.38083" inkscape:cy="37.458071" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 66.36101,58.907431 a 9.3882669,9.3882669 0 0 0 -7.379178,3.595707 L 37.867618,51.950726 a 9.2849965,9.2849965 0 0 0 0,-4.863123 L 58.981832,36.53519 c 5.407641,6.93793 16.767445,3.116905 16.767445,-5.79256 A 9.3882669,9.3882669 0 1 0 57.301332,33.174191 L 36.187118,43.726604 c -5.407641,-6.93793 -16.767444,-3.116906 -16.767444,5.792561 0,8.909465 11.359803,12.73049 16.767444,5.79256 l 21.114214,10.552412 a 9.3882669,9.3882669 0 0 0 9.059678,11.819828 c 12.45823,-0.516354 12.448841,-18.260179 0,-18.776534 z" id="path2718" style="stroke-width:0.938824" /></svg>',
         streamingToFb: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.0678607" inkscape:cx="-328.22635" inkscape:cy="-34.648716" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg56" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <path d="m 59.655975,28.314112 h 5.792521 v -10.08866 c -0.999348,-0.137477 -4.436262,-0.446801 -8.438942,-0.446801 -8.351698,0 -14.072836,5.25319 -14.072836,14.90827 v 8.885742 h -9.216214 v 11.278362 h 9.216214 V 81.229349 H 54.236229 V 52.853667 h 8.843441 l 1.403847,-11.27836 H 54.233586 v -7.770066 c 0.0026,-3.25978 0.880378,-5.491129 5.422389,-5.491129 z" id="path3135" style="stroke-width:2.64378" /></svg>',
         streamingToRtmp: '<svg version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg56" sodipodi:docname="circle.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs60" /><sodipodi:namedview id="namedview58" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="2.1357213" inkscape:cx="-37.223958" inkscape:cy="34.18049" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="text3239" /> <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749 c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203 c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203 z" /> <g aria-label="RT MP" id="text3239" style="font-size:37.3333px"><g id="g3306" transform="matrix(0.96058925,0,0,0.96058925,2.3472462,-2.613936)"><path d="M 44.827661,52.466881 38.155791,41.802827 H 30.153194 V 52.466881 H 26.671426 V 26.782007 h 12.085927 q 4.338538,0 6.690099,1.950519 2.369789,1.93229 2.369789,5.395829 0,2.861976 -1.677082,4.812496 -1.658852,1.950519 -4.593746,2.460935 l 7.291661,11.065095 z M 44.317244,34.164813 q 0,-2.242186 -1.531248,-3.408851 -1.51302,-1.184895 -4.374997,-1.184895 h -8.257805 v 9.479159 h 8.403639 q 2.752601,0 4.247392,-1.276041 1.513019,-1.29427 1.513019,-3.609372 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3293" /><path d="M 67.020354,29.625754 V 52.466881 H 63.556815 V 29.625754 h -8.822909 v -2.843747 h 21.109357 v 2.843747 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3295" /><path d="M 48.509949,81.730422 V 64.59502 q 0,-2.843747 0.164063,-5.468745 -0.893229,3.263018 -1.604166,5.104162 l -6.635411,17.499985 h -2.442706 l -6.726557,-17.499985 -1.020832,-3.098955 -0.601562,-2.005207 0.05469,2.023436 0.07292,3.445309 V 81.730422 H 26.671426 V 56.045548 h 4.575517 l 6.835932,17.809881 q 0.364583,1.07552 0.692707,2.315102 0.346354,1.221353 0.455729,1.768228 0.145833,-0.729166 0.601562,-2.205727 0.473958,-1.494791 0.63802,-1.877603 l 6.708328,-17.809881 h 4.466142 v 25.684874 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3297" /><path d="m 75.843263,63.774708 q 0,3.645831 -2.388019,5.796871 -2.369789,2.151039 -6.453119,2.151039 H 59.455256 V 81.730422 H 55.973488 V 56.045548 h 10.809887 q 4.320309,0 6.690098,2.023436 2.36979,2.023436 2.36979,5.705724 z m -3.499997,0.03646 q 0,-4.976559 -5.979162,-4.976559 h -6.908848 v 10.135409 h 7.054682 q 5.833328,0 5.833328,-5.15885 z" style="font-family:Arial;-inkscape-font-specification:Arial" id="path3299" /></g></g></svg>',
-        plusIcon: '<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m467 211h-166v-166c0-24.853-20.147-45-45-45s-45 20.147-45 45v166h-166c-24.853 0-45 20.147-45 45s20.147 45 45 45h166v166c0 24.853 20.147 45 45 45s45-20.147 45-45v-166h166c24.853 0 45-20.147 45-45s-20.147-45-45-45z"/></g></svg>'
+        plusIcon: '<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m467 211h-166v-166c0-24.853-20.147-45-45-45s-45 20.147-45 45v166h-166c-24.853 0-45 20.147-45 45s20.147 45 45 45h166v166c0 24.853 20.147 45 45 45s45-20.147 45-45v-166h166c24.853 0 45-20.147 45-45s-20.147-45-45-45z"/></g></svg>',
+        shareIcon: '<svg version="1.1" id="svg285" xml:space="preserve" width="682.66669" height="682.66669" viewBox="0 0 682.66669 682.66669" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs289"><clipPath clipPathUnits="userSpaceOnUse" id="clipPath299"><path d="M 0,512 H 512 V 0 H 0 Z" id="path297" /></clipPath></defs><g id="g291" transform="matrix(1.3333333,0,0,-1.3333333,0,682.66667)"><g id="g293"><g id="g295" clip-path="url(#clipPath299)"><g id="g301" transform="translate(239.9331,239.9331)"><path d="M 0,0 257.067,257.067" style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" id="path303" /></g><g id="g305" transform="translate(239.9331,239.9331)"><path d="m 0,0 c 0,0 -144.396,41.256 -201.802,57.658 -13.692,3.912 -23.131,16.425 -23.131,30.666 v 0.008 c 0,14.325 9.396,26.954 23.118,31.07 96.083,28.825 458.882,137.665 458.882,137.665 0,0 -108.84,-362.799 -137.665,-458.882 -4.116,-13.722 -16.745,-23.118 -31.07,-23.118 h -0.008 c -14.241,0 -26.754,9.439 -30.666,23.131 C 41.256,-144.396 0,0 0,0 Z" style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" id="path307" /></g></g></g></g></svg>'
     }
 
     var _controlsToolIcons = []; 
@@ -109,7 +110,8 @@
             this.livestreamStream = null;
 
             tool.webrtcUserInterface = options.webrtcUserInterface();
-            tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+            tool.webrtcSignalingLib = tool.webrtcUserInterface.getWebrtcSignalingLib();
+            tool.roomStream = tool.webrtcUserInterface.roomStream();
 
             _controlsToolIcons = tool.state.controlsTool.getIcons();
 
@@ -162,7 +164,7 @@
                 //var _resizingElement = null;
                 //var _resizingElementTool = null;
                 var _hoveringElement = null;
-                var _hoveringElementTool = { hoveredOverRect: null };
+                var _hoveringElementToolInstance;
                 var _fileManagerTool = null;
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
@@ -299,6 +301,7 @@
                          * @param {Function} [callback] callback function that is triggered after live session was ended
                          */
                         function endLive(callback) {
+                            tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
                             Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
                                 var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -306,7 +309,6 @@
                                     return Q.alert(msg);
                                 }
 
-                                tool.livestreamingRtmpSenderTool.rtmpSender.endStreaming('facebook');
                                 if (callback != null) callback(_liveInfo);
                             }, {
                                 method: 'post',
@@ -1367,6 +1369,7 @@
                     var _scenesDropDownEl = null;
                     var _scenesList = [];
                     var _activeScene = null;
+                    var _eventDispatcher = new EventSystem();
 
                     var SceneListItem = function (sceneInstance) {
                         var sceneListInstance = this;
@@ -1450,20 +1453,22 @@
                             sceneItem.itemEl.selected = true;
                         }
                         var switchScene = _activeScene != sceneItem;
+                        var prevScene = _activeScene;
                         _activeScene = sceneItem;
-                        let sources = _activeScene.sourcesInterface.getSourcesList();
-                        for(let s in sources) {
-                            if(sources[s].resizingElement != null && sources[s].resizingElement.parentElement) {
-                                sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
+                        if(prevScene && switchScene) {
+                            let sources = prevScene.sourcesInterface.getSourcesList();
+                            for(let s in sources) {
+                                if(sources[s].resizingElement != null && sources[s].resizingElement.parentElement) {
+                                    sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
+                                }
+                            }
+
+                            let allParticipantsListItem = prevScene.sourcesInterface.getWebrtcGroupListItem();
+                            if(allParticipantsListItem && allParticipantsListItem.resizingElement.parentElement) {
+                                allParticipantsListItem.resizingElement.parentElement.removeChild(allParticipantsListItem.resizingElement);
                             }
                         }
                         tool.livestreamingCanvasComposerTool.canvasComposer.selectScene(_activeScene.sceneInstance);
-                        for (var i in _scenesList) {
-                            if (_scenesList[i] == sceneItem) continue;
-                            //if (_scenesList[i].itemEl.classList.contains('live-editor-popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('live-editor-popup-scenes-item-active');
-                        }
-
-                        //if(_resizingElement) _resizingElement.style.display = 'none';
 
                         if (_sourcesColumnEl) {
                             let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.live-editor-popup-sources-inner');
@@ -1474,10 +1479,27 @@
                             _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
                         }
 
-                        _activeScene.sourcesInterface.initHoveringTool();
+                        //_activeScene.sourcesInterface.initHoveringTool();
+                        let sources = _activeScene.sourcesInterface.getSourcesList();
+                        for (let s in sources) {
+                            if (sources[s].resizingElement != null) {
+                                activeDialog.previewBoxEl.appendChild(sources[s].resizingElement);
+                            }
+                        }
+
+                        let allParticipantsListItem = _activeScene.sourcesInterface.getWebrtcGroupListItem();
+                        if (allParticipantsListItem && allParticipantsListItem.resizingElement) {
+                            activeDialog.previewBoxEl.appendChild(allParticipantsListItem.resizingElement);
+                        }
+
+                        let webrtcGroup = _activeScene.sourcesInterface.getWebrtcGroupListItem()
+                        if(webrtcGroup.sourceInstance) {
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup.sourceInstance);
+                        }
 
                         _activeScene.sourcesInterface.update();
                         optionsColumn.update();
+                        _eventDispatcher.dispatch('sceneSelected', _activeScene);
                     }
 
                     function moveSceneUp(sceneId) {
@@ -1622,9 +1644,197 @@
                             if (_activeScene == null && s == 0) {
                                 selectScene(item);
                             }
+                            log('_eventDispatcher', _eventDispatcher)
+                            _eventDispatcher.dispatch('newSceneAdded', item);
 
                         }
                         log('_scenesList', _scenesList)
+                    }
+
+
+                    function initHoveringTool() {
+                        if(_hoveringElementToolInstance) {
+                            return;
+                        }
+                        log('initHoveringTool');
+
+                        var hoveredOverRect;
+                        var _sourcesList, _selectedSource, allParticipantsListItem, allParticipantsGroupInstance, previewBoxRect, timesBigger;
+
+                        function onSceneChangeHandler() {
+                            if(!_activeScene) {
+                                return;
+                            }
+                            _selectedSource = _activeScene.sourcesInterface.getSelectedSource();
+                            _sourcesList = _activeScene.sourcesInterface.getSourcesList();
+                            allParticipantsListItem = _activeScene.sourcesInterface.getWebrtcGroupListItem();
+                            allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
+
+                            previewBoxRect = activeDialog.previewBoxEl.getBoundingClientRect();
+                            var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
+                            var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
+                            var realcanvasSize = _streamingCanvas.getBoundingClientRect();
+                            var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
+                            timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
+                        }
+                        onSceneChangeHandler();
+
+                        function handleScenesEvents (scene) {
+                            scene.sourcesInterface.on('sourceSelected', function (source) {
+                                log('sourceSelected', source, scene.sourcesInterface.getSelectedSource())
+                                _selectedSource = source;
+                                onSceneChangeHandler();
+                            })
+
+                            scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
+                                onSceneChangeHandler();
+                            })
+    
+                            scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
+                                onSceneChangeHandler();
+                            })
+                        }
+
+                        _eventDispatcher.on('sceneSelected', onSceneChangeHandler);
+                        log('track newSceneAdded')
+
+                        for (let s in _scenesList) {
+                            handleScenesEvents(_scenesList[s]);
+                        }
+                        _eventDispatcher.on('newSceneAdded', function (scene) {
+                            handleScenesEvents(scene);
+                        });
+
+                        activeDialog.previewBoxParent.addEventListener('mousemove', function (e) {
+                            if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
+                                return;
+                            }
+                            let x = e.clientX - previewBoxRect.x;
+                            let y = e.clientY - previewBoxRect.y;
+        
+                            let isResizingOrMoving = false;
+                            let res = '';
+                            for (let s in _sourcesList) {
+                                if(_sourcesList[s].listType == 'audio') continue;
+                                if (_sourcesList[s].resizingElementTool.state.isResizing || _sourcesList[s].resizingElementTool.state.isMoving || _sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                    isResizingOrMoving = true;
+                                    if (_sourcesList[s].resizingElementTool.state.isResizing) {
+                                        res += '1'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.isMoving) {
+                                        res += '2'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                        res += '3'
+                                    }
+                                }
+                            }
+                            if(allParticipantsListItem.resizingElementTool.state.isResizing || allParticipantsListItem.resizingElementTool.state.isMoving || allParticipantsListItem.resizingElementTool.state.appliedRecently) {
+                                isResizingOrMoving = true;
+                            }
+                            if (isResizingOrMoving) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                hoveredOverRect = null;
+                                return;
+                            }
+        
+                            let selectedSourceRect = null;
+                            let preselected = false;
+                            let i = 0, len = _sourcesList.length;
+                            while (i <= len) {
+                                let sourceItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+
+                                if(sourceItem.listType == 'audio') {
+                                    i++;
+                                    continue;
+                                }
+                                let rect = i != len ? _sourcesList[i].sourceInstance.rect : allParticipantsGroupInstance.rect;
+                                let rectLeft = rect._x / timesBigger;
+                                let rectRight = (rect._x + rect._width) / timesBigger;
+                                let rectTop = rect._y / timesBigger;
+                                let rectBottom = (rect._y + rect._height) / timesBigger;
+                                let rectWidth = rect._width / timesBigger;
+                                let rectHeight = rect._height / timesBigger;
+        
+                                if (x >= rectLeft && x <= rectRight
+                                    && y >= rectTop && y <= rectBottom) {
+                                    if (sourceItem == _selectedSource) {
+                                        selectedSourceRect = rect;
+                                        i++;
+                                        continue;
+                                    }
+                                    if (selectedSourceRect != null && rect._width * rect._height > selectedSourceRect._width * selectedSourceRect._height) {
+                                        i++;
+                                        continue;
+                                    }
+                                    hoveredOverRect = rect;
+                                    _hoveringElement.style.width = rectWidth + 'px';
+                                    _hoveringElement.style.height = rectHeight + 'px';
+                                    _hoveringElement.style.top = rectTop + 'px';
+                                    _hoveringElement.style.left = rectLeft + 'px';
+                                    _hoveringElement.style.boxShadow = 'inset 0px 0px 0px 1px skyblue';
+                                    preselected = true;
+                                    break;
+                                }
+                                i++;
+                            }
+
+                            if (!preselected) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                hoveredOverRect = null;
+                            }
+                        });
+        
+                        activeDialog.previewBoxParent.addEventListener('mouseleave', function (e) {
+                            if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
+                                return;
+                            }
+                            _hoveringElement.style.boxShadow = 'none';
+                            hoveredOverRect = null;
+                        });
+        
+                        activeDialog.previewBoxParent.addEventListener('click', function (e) {
+                            if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
+                                return;
+                            }
+                            if (hoveredOverRect != null) {
+                                //if (_resizingElementTool.state.appliedRecently) return;
+                                let i = 0, len = _sourcesList.length;
+                                while (i <= len) {
+                                    let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+                                    let sourceInstance = i != len ? _sourcesList[i].sourceInstance : allParticipantsGroupInstance;
+                                    if (sourceListItem.listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (sourceInstance.rect == hoveredOverRect) {
+                                        _activeScene.sourcesInterface.selectSource(sourceListItem);
+                                        _hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+        
+                            } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
+                                //log('DESELECT')
+        
+                                let i = 0, len = _sourcesList.length;
+                                while (i < len) {
+                                    if(_sourcesList[i].listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (_sourcesList[i].resizingElement == e.target) {
+                                        _activeScene.sourcesInterface.selectSource(_sourcesList[i]);
+                                        //_hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+                            }
+        
+        
+                        });
                     }
 
                     window.sl = _scenesList;
@@ -1840,7 +2050,8 @@
                     return {
                         createScenesCol: createScenesCol,
                         syncList: syncList,
-                        getActive: getActiveScene
+                        getActive: getActiveScene,
+                        initHoveringTool: initHoveringTool
                     }
 
                 }())
@@ -1865,6 +2076,7 @@
                     let _addVisualSourceDropUpMenuEl = null;
                     var _audioSourcesListEl = null;
                     var _globalMicIconEl = null;
+                    var _eventDispatcher = new EventSystem();
 
                     var _videoTool = null;
                     var _audioTool = null;
@@ -2317,6 +2529,23 @@
 
                         _participantsContainerEl = document.createElement('DIV');
                         _participantsContainerEl.className = 'live-editor-participants-list-con';
+                        if (tool.roomStream.testAdminLevel('manage')) {
+                        
+                            let waitingRooms = document.createElement('DIV');
+                            waitingRooms.className = 'live-editor-participants-waiting';
+                            _participantsContainerEl.appendChild(waitingRooms);
+
+                            Q.activate(
+                                Q.Tool.setUpElement(waitingRooms, 'Streams/webrtc/waitingRoomList', {
+                                    webrtcUserInterface: tool.state.webrtcUserInterface,
+                                }),
+                                {},
+                                function () {
+
+                                }
+                            );
+                        }
+
                         let participantTitleCon = _allParticipantsItemEl = document.createElement('DIV');
                         participantTitleCon.className = 'live-editor-participants-list-title-con';
                         _participantsContainerEl.appendChild(participantTitleCon);
@@ -2577,7 +2806,6 @@
                                     }
                                 };
                                 this.toggleAudio = function () {         
-                                    console.log('toggleAudio', listItemInstance.participantInstance.audioIsMuted)                           
                                     if (!listItemInstance.participantInstance.audioIsMuted) {
                                         listItemInstance.muteAudio();
                                     } else {
@@ -2674,9 +2902,23 @@
                             audioBtnCon.appendChild(audioBtnIcon);
 
                             if (participantInstance.isLocal /*&& !Q.info.useTouchEvents*/) {
-                                listItemInstance.audioSettingsPopup = new PopupDialog(audioBtnCon, {
+                                /*listItemInstance.audioSettingsPopup = new PopupDialog(audioBtnCon, {
                                     content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
-                                })
+                                })*/
+
+                                Q.activate(
+                                    Q.Tool.setUpElement(
+                                        audioBtnCon,
+                                        "Streams/webrtc/popupDialog",
+                                        {
+                                            content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
+                                        }
+                                    ),
+                                    {},
+                                    function () {
+                                        listItemInstance.audioSettingsPopup = this;
+                                    }
+                                );
                             } else if (!participantInstance.isLocal) {
                                 audioBtnCon.addEventListener('click', listItemInstance.toggleAudio);
                             }
@@ -2692,10 +2934,25 @@
                                 listItemInstance.videoIconEl = videoBtnIcon;
 
                                 //if (!Q.info.useTouchEvents) {
-                                    listItemInstance.videoSettingsPopup = new PopupDialog(videoBtnCon, {
+                                    /*listItemInstance.videoSettingsPopup = new PopupDialog(videoBtnCon, {
                                         className: 'live-editor-participants-item-camera-btn-popup',
                                         content: _videoTool.videoinputListEl
-                                    })
+                                    })*/
+
+                                    Q.activate(
+                                        Q.Tool.setUpElement(
+                                            videoBtnCon,
+                                            "Streams/webrtc/popupDialog",
+                                            {
+                                                content: _videoTool.videoinputListEl,
+                                                className: 'live-editor-participants-item-camera-btn-popup'
+                                            }
+                                        ),
+                                        {},
+                                        function () {
+                                            listItemInstance.videoSettingsPopup = this;
+                                        }
+                                    );
                                 //}
                             }
                             
@@ -2748,10 +3005,25 @@
                             });
 
                             if (participantInstance.isLocal) {
-                                listItemInstance.screensharingsPopup = new PopupDialog(listItemInstance.screenIconEl.parentElement, {
+                                /*listItemInstance.screensharingsPopup = new PopupDialog(listItemInstance.screenIconEl.parentElement, {
                                     className: 'live-editor-participants-item-screen-btn-popup',
                                     content: [listItemInstance.sourcesContainerEl, _videoTool.videoinputListEl]
-                                })
+                                })*/
+
+                                Q.activate(
+                                    Q.Tool.setUpElement(
+                                        listItemInstance.screenIconEl.parentElement,
+                                        "Streams/webrtc/popupDialog",
+                                        {
+                                            content: [listItemInstance.sourcesContainerEl, _videoTool.videoinputListEl],
+                                            className: 'live-editor-participants-item-screen-btn-popup'
+                                        }
+                                    ),
+                                    {},
+                                    function () {
+                                        listItemInstance.screensharingsPopup = this;
+                                    }
+                                );
                             }
 
                             var sourceResizingEl = listItemInstance.resizingElement = document.createElement('DIV');
@@ -2904,12 +3176,17 @@
                             }
 
                             if(item.sourceInstance != null) {
+                                log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 1');
                                 if(item.sourceInstance.active) {
+                                    log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 1.1');
                                     item.switchVisibilityIcon(true);
                                 } else {
+                                    log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 1.2');
                                     item.switchVisibilityIcon(false);
                                 }
                             } else {
+                                log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 2');
+
                                 item.switchVisibilityIcon(false);
                             }
 
@@ -2919,10 +3196,24 @@
                                     if (numberOfScreensharings > 1) {
                                         log('make screensharingsPopup 3');
 
-                                        item.screensharingsPopup = new PopupDialog(item.screenIconEl.parentElement, {
+                                        /*item.screensharingsPopup = new PopupDialog(item.screenIconEl.parentElement, {
                                             className: 'live-editor-participants-item-screen-btn-popup',
                                             content: item.sourcesContainerEl
-                                        })
+                                        })*/
+                                        Q.activate(
+                                            Q.Tool.setUpElement(
+                                                item.screenIconEl.parentElement,
+                                                "Streams/webrtc/popupDialog",
+                                                {
+                                                    className: 'live-editor-participants-item-screen-btn-popup',
+                                                    content: item.sourcesContainerEl
+                                                }
+                                            ),
+                                            {},
+                                            function () {
+                                                item.screensharingsPopup = this;
+                                            }
+                                        );
                                     }
                                 } else if (item.screensharingsPopup) {
                                     if (numberOfScreensharings < 2) {
@@ -3028,7 +3319,8 @@
                             getListElement: getListElement,
                             getListContainer: getListContainer,
                             getWebrtcGroupInstance: getWebrtcGroupInstance,
-                            getWebrtcGroupListItem: getWebrtcGroupListItem
+                            getWebrtcGroupListItem: getWebrtcGroupListItem,
+                            addTeleconferenceSource: addTeleconferenceSource
                         }
                     }
 
@@ -3067,13 +3359,18 @@
 
                     _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
                         log('SCENE EVENT: SOURCE ADDED', source)
-                        if(source.screenSharing) {
-                            _layoutsListCustomSelect.value = 'sideScreenSharing';
+                        let activeScene = scenesInterface.getActive();
+                        if(_scene == activeScene && source.screenSharing) {
+                            log('SCENE EVENT: CHANGE LAYOUT', source)
+                            _layoutsListCustomSelect.value = _selectedLayout = 'sideScreenSharing';
                             _autoSwitchToScreensharingLayoutAndBack = true;
                         }
                     })
                     _scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
                         log('SCENE EVENT: SOURCE REMOVED', source)
+                        if(source.sourceType != 'webrtc') {
+                            return;
+                        }
                         let webrtcGroup = source.parentGroup;
                         let allWebrtcSources = webrtcGroup.getChildSources('webrtc');
 
@@ -3591,13 +3888,14 @@
                     }
 
                     function addTeleconferenceSource(name) {
+                        log('addTeleconferenceSource START');
                         var webrtcGroup = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                             sourceType: 'webrtcGroup',
                             title: name ? name : 'Participants'
                         });
 
                         //webrtcGroup.currentLayout = _layoutsListSelect.value;
-                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup, _layoutsListSelect.value, true);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup, _layoutsListSelect.value, null);
 
                     }
 
@@ -3694,7 +3992,7 @@
                             }
                         }
 
-
+                        _eventDispatcher.dispatch('sourceSelected', _selectedSource);
                         if(!_selectedSource.sourceInstance) return;
                         log('selectSource _selectedSource', _selectedSource)
 
@@ -3750,11 +4048,6 @@
                                 }
                                 if (e.y != null) {
                                     _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
-                                }
-
-                                if (_hoveringElementTool.hoveredOverRect != null) {
-                                    _hoveringElement.style.boxShadow = 'none';
-                                    _hoveringElementTool.hoveredOverRect = null;
                                 }
                             });
                         } else if(_selectedSource.sourceInstance.sourceType == 'webrtc') {  
@@ -3832,12 +4125,6 @@
 
                                 _selectedSource.sourceInstance.rect.currentWidth = e.originalWidth / _selectedSource.sourceInstance.rect._width;
                                 //_selectedSource.sourceInstance.rect.currentHeight = _selectedSource.sourceInstance.rect._height;
-
-
-                                if (_hoveringElementTool.hoveredOverRect != null) {
-                                    _hoveringElement.style.boxShadow = 'none';
-                                    _hoveringElementTool.hoveredOverRect = null;
-                                }
 
                             });
         
@@ -4221,14 +4508,33 @@
                         
                         inviteBtn.addEventListener('click', function () {
                             //invitePopup.show();
-                            if(tool.livestreamStream) {
-                                Q.Streams.invite(tool.livestreamStream.fields.publisherId, tool.livestreamStream.fields.name);
-                            }
+                            Q.Streams.invite(tool.roomStream.fields.publisherId, tool.roomStream.fields.name, {
+                                appUrl: Q.url("meeting"),
+                                title: 'Invite to Teleconference'
+                            });
                         })
-                        
+
                         _sourceControlButtons.push({
                             name: 'invite',
                             buttonEl: inviteBtn
+                        });
+
+                        var shareBtn = document.createElement('DIV');
+                        shareBtn.className = 'live-editor-popup-sources-control-btn live-editor-popup-sources-control-btn-share';
+                        inviteBtnCon.appendChild(shareBtn);
+                        var shareBtnIcon = document.createElement('DIV');
+                        shareBtnIcon.className = 'live-editor-popup-sources-control-btn-icon';
+                        shareBtnIcon.innerHTML = _streamingIcons.shareIcon;
+                        shareBtn.appendChild(shareBtnIcon);
+                        
+                        shareBtn.addEventListener('click', function () {
+                            if(tool.livestreamStream) {
+                                Q.Streams.invite(tool.livestreamStream.fields.publisherId, tool.livestreamStream.fields.name, { title: 'Share Livestream' });
+                            }
+                        })
+                        _sourceControlButtons.push({
+                            name: 'invite',
+                            buttonEl: shareBtn
                         });
 
                         updateSourceControlPanelButtons();
@@ -4396,6 +4702,10 @@
                         return _sourcesList;
                     }
 
+                    function getWebrtcGroupListItem() {
+                        return _participantsList.getWebrtcGroupListItem();
+                    }
+
                     function showVisualSources() {
                         _sourcesListEl.innerHTML = '';
                         _sourcesListEl.appendChild(createSourcesList());
@@ -4403,6 +4713,7 @@
                     }
 
                     function createSourcesCol() {
+                        log('createSourcesCol');
                         if(_sceneSourcesColumnEl != null) return _sceneSourcesColumnEl;
                         
                         var sourcesColumnInner = document.createElement('DIV');
@@ -4421,6 +4732,9 @@
                         _participantsList = new ParticipantsList();
                         _sourcesListEl.appendChild(_participantsList.getListContainer());
                         _sourcesListEl.appendChild(createSourcesList());
+                        if(!_participantsList.getWebrtcGroupInstance()) {
+                            _participantsList.addTeleconferenceSource();
+                        }
 
                         _sceneSourcesColumnEl = sourcesColumnInner;
                         return sourcesColumnInner;
@@ -4492,138 +4806,6 @@
 
                     function getSelectedSource() {
                         return _selectedSource;
-                    }
-
-                    function initHoveringTool() {
-                        var left = 0, top = 0;
-                        log('initHoveringTool activeDialog', activeDialog);
-                        var allParticipantsListItem = _participantsList.getWebrtcGroupListItem();
-                        var allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
-                        var previewBoxRect = activeDialog.previewBoxEl.getBoundingClientRect();
-                        var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
-                        var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
-                        var realcanvasSize = _streamingCanvas.getBoundingClientRect();
-                        var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
-                        var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
-                        activeDialog.previewBoxParent.addEventListener('mousemove', function (e) {
-                            let x = e.clientX - previewBoxRect.x;
-                            let y = e.clientY - previewBoxRect.y;
-        
-                            let isResizingOrMoving = false;
-                            let res = '';
-                            for (let s in _sourcesList) {
-                                if(_sourcesList[s].listType == 'audio') continue;
-                                if (_sourcesList[s].resizingElementTool.state.isResizing || _sourcesList[s].resizingElementTool.state.isMoving || _sourcesList[s].resizingElementTool.state.appliedRecently) {
-                                    isResizingOrMoving = true;
-                                    if (_sourcesList[s].resizingElementTool.state.isResizing) {
-                                        res += '1'
-                                    }
-                                    if (_sourcesList[s].resizingElementTool.state.isMoving) {
-                                        res += '2'
-                                    }
-                                    if (_sourcesList[s].resizingElementTool.state.appliedRecently) {
-                                        res += '3'
-                                    }
-                                }
-                            }
-        
-                            if (isResizingOrMoving) {
-                                _hoveringElement.style.boxShadow = 'none';
-                                _hoveringElementTool.hoveredOverRect = null;
-                                return;
-                            }
-        
-                            let selectedSourceRect = null;
-                            let preselected = false;
-                            let i = 0, len = _sourcesList.length;
-                            while (i <= len) {
-                                let sourceItem = i != len ? _sourcesList[i] : allParticipantsListItem;
-
-                                if(sourceItem.listType == 'audio') {
-                                    i++;
-                                    continue;
-                                }
-                                let rect = i != len ? _sourcesList[i].sourceInstance.rect : allParticipantsGroupInstance.rect;
-                                let rectLeft = rect._x / timesBigger;
-                                let rectRight = (rect._x + rect._width) / timesBigger;
-                                let rectTop = rect._y / timesBigger;
-                                let rectBottom = (rect._y + rect._height) / timesBigger;
-                                let rectWidth = rect._width / timesBigger;
-                                let rectHeight = rect._height / timesBigger;
-        
-                                if (x >= rectLeft && x <= rectRight
-                                    && y >= rectTop && y <= rectBottom) {
-                                    if (sourceItem == _selectedSource) {
-                                        selectedSourceRect = rect;
-                                        i++;
-                                        continue;
-                                    }
-                                    if (selectedSourceRect != null && rect._width * rect._height > selectedSourceRect._width * selectedSourceRect._height) {
-                                        i++;
-                                        continue;
-                                    }
-                                    _hoveringElementTool.hoveredOverRect = rect;
-                                    _hoveringElement.style.width = rectWidth + 'px';
-                                    _hoveringElement.style.height = rectHeight + 'px';
-                                    _hoveringElement.style.top = rectTop + 'px';
-                                    _hoveringElement.style.left = rectLeft + 'px';
-                                    _hoveringElement.style.boxShadow = 'inset 0px 0px 0px 1px skyblue';
-                                    preselected = true;
-                                    break;
-                                }
-                                i++;
-                            }
-        
-                            if (!preselected) {
-                                _hoveringElement.style.boxShadow = 'none';
-                                _hoveringElementTool.hoveredOverRect = null;
-                            }
-                        });
-        
-                        activeDialog.previewBoxParent.addEventListener('mouseleave', function (e) {
-                            _hoveringElement.style.boxShadow = 'none';
-                            _hoveringElementTool.hoveredOverRect = null;
-                        });
-        
-                        activeDialog.previewBoxParent.addEventListener('click', function (e) {
-                            if (_hoveringElementTool.hoveredOverRect != null) {
-                                //if (_resizingElementTool.state.appliedRecently) return;
-                                let i = 0, len = _sourcesList.length;
-                                while (i <= len) {
-                                    let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
-                                    let sourceInstance = i != len ? _sourcesList[i].sourceInstance : allParticipantsGroupInstance;
-                                    if (sourceListItem.listType == 'audio') {
-                                        i++;
-                                        continue;
-                                    }
-                                    if (sourceInstance.rect == _hoveringElementTool.hoveredOverRect) {
-                                        selectSource(sourceListItem);
-                                        _hoveringElement.style.boxShadow = 'none';
-                                        break;
-                                    }
-                                    i++;
-                                }
-        
-                            } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
-                                //log('DESELECT')
-        
-                                let i = 0, len = _sourcesList.length;
-                                while (i < len) {
-                                    if(_sourcesList[i].listType == 'audio') {
-                                        i++;
-                                        continue;
-                                    }
-                                    if (_sourcesList[i].resizingElement == e.target) {
-                                        selectSource(_sourcesList[i]);
-                                        //_hoveringElement.style.boxShadow = 'none';
-                                        break;
-                                    }
-                                    i++;
-                                }
-                            }
-        
-        
-                        });
                     }
 
                     var addVideoPopup = (function () {
@@ -5896,11 +6078,15 @@
                         }
                     }
 
+                    function on(eventName, handlerFunction) {
+                        _eventDispatcher.on(eventName, handlerFunction);
+                    }
+
                     return {
                         createSourcesCol: createSourcesCol,
-                        initHoveringTool: initHoveringTool,
                         update: update,
                         updateLocalControlsButtonsState: updateLocalControlsButtonsState,
+                        selectSource: selectSource,
                         getSelectedSource: getSelectedSource,
                         getSelectedLayout: getSelectedLayout,
                         syncList: syncList,
@@ -5915,7 +6101,9 @@
                         addWatermark: addWatermark,
                         addBackground: addBackground,
                         addVideoSource: addVideoSource,
-                        checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist
+                        checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist,
+                        getWebrtcGroupListItem: getWebrtcGroupListItem,
+                        on: on
                     }
                 }
 
@@ -7512,8 +7700,10 @@
                                 relationType: 'Streams/webrtc/livestream/chat',
                                 tag: 'div',
                                 isCategory: true,
-                                creatable: false,
                                 realtime: true,
+                                previewOptions: {
+                                    closeable: false
+                                },
                                 onUpdate: function (e) {
                                     log('onUpdate', e, this)
                                     onRelatedToolUpdate(e.relatedStreams);
@@ -8861,7 +9051,7 @@
 
                     var sourceHoveringEl = _hoveringElement = document.createElement('DIV');
                     sourceHoveringEl.className = 'live-editor-canvas-preview-hovering';
-                    previewBoxBodyInner.appendChild(sourceHoveringEl);
+                    previewBoxBodyInner.appendChild(sourceHoveringEl);                    
 
                     /*var sourceResizingEl = _resizingElement = document.createElement('DIV');
                     sourceResizingEl.className = 'live-editor-popup-preview-resizing';
@@ -9276,6 +9466,10 @@
                         }
 
                         scenesInterface.syncList();
+
+                        if(!_hoveringElementToolInstance) {
+                            _hoveringElementToolInstance = scenesInterface.initHoveringTool();
+                        }
                       
                         document.documentElement.classList.add('Streams_webrtc_live');
                     }

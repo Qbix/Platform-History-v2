@@ -65,7 +65,7 @@
         tool.turnOffAudioInputBtn = null;
 
         tool.webrtcUserInterface = options.webrtcUserInterface();
-        tool.webrtcSignalingLib = tool.webrtcUserInterface.currentConferenceLibInstance();
+        tool.webrtcSignalingLib = tool.webrtcUserInterface.getWebrtcSignalingLib();
 
         Q.addStylesheet('{{Streams}}/css/tools/audio.css?ts=' + performance.now(), function () {
           

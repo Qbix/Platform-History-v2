@@ -19,7 +19,8 @@
 			"Users/canManageContacts": ["Streams/before/Users_canManageContacts"],
 			"Users/canManageLabels": ["Streams/before/Users_canManageLabels"],
 			"Users/User/displayName": ["Streams/before/Users_User_displayName"],
-			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"]
+			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"],
+			"Streams/close/Streams/webrtc/waitingRoom": ["Streams/before/Streams_close_Streams_webrtc_waitingRoom"]
 		},
 		"handlersAfterEvent": {
 			"Q/Plugin/install": ["Streams/after/Q_Plugin_install"],
@@ -528,6 +529,12 @@
 					"icon": "Streams/chat"
 				}
 			},
+			"Streams/greeting": {
+				"edit": true,
+				"defaults": {
+					"title": "Community Greeting"
+				}
+			},
 			"Streams/webrtc": {
 				"defaults": {
 					"title": "Teleconference",
@@ -538,17 +545,21 @@
 					"Streams/webrtc/joined": {}
 				}
 			},
-			"Streams/greeting": {
-				"edit": true,
-				"defaults": {
-					"title": "Community Greeting"
-				}
-			},
 			"Streams/webrtc/livestream": {
 				"defaults": {
-					"title": "Livestream"
+					"title": "Livestream",
+					"icon": "Streams/webrtc/livestream"
 				},
 				"edit": ["title"],
+				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
+			},
+			"Streams/webrtc/chat": {
+				"defaults": {
+					"title": "Chat",
+					"icon": "Streams/chat"
+				},
+				"edit": ["title"],
+				"create": true,
 				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
 			},
 			"Streams/webrtc/callCenter/endpoint": {
