@@ -164,7 +164,6 @@
                 //var _resizingElement = null;
                 //var _resizingElementTool = null;
                 var _hoveringElement = null;
-                var _hoveringElementTool = { hoveredOverRect: null };
                 var _hoveringElementToolInstance;
                 var _fileManagerTool = null;
                 var _streamingCanvas = null;
@@ -1657,7 +1656,9 @@
                         if(_hoveringElementToolInstance) {
                             return;
                         }
-                        log('initHoveringTool activeDialog', activeDialog);
+                        log('initHoveringTool');
+
+                        var hoveredOverRect;
                         var _sourcesList, _selectedSource, allParticipantsListItem, allParticipantsGroupInstance, previewBoxRect, timesBigger;
 
                         function onSceneChangeHandler() {
@@ -1733,7 +1734,7 @@
                             }
                             if (isResizingOrMoving) {
                                 _hoveringElement.style.boxShadow = 'none';
-                                _hoveringElementTool.hoveredOverRect = null;
+                                hoveredOverRect = null;
                                 return;
                             }
         
@@ -1766,7 +1767,7 @@
                                         i++;
                                         continue;
                                     }
-                                    _hoveringElementTool.hoveredOverRect = rect;
+                                    hoveredOverRect = rect;
                                     _hoveringElement.style.width = rectWidth + 'px';
                                     _hoveringElement.style.height = rectHeight + 'px';
                                     _hoveringElement.style.top = rectTop + 'px';
@@ -1780,7 +1781,7 @@
 
                             if (!preselected) {
                                 _hoveringElement.style.boxShadow = 'none';
-                                _hoveringElementTool.hoveredOverRect = null;
+                                hoveredOverRect = null;
                             }
                         });
         
@@ -1789,14 +1790,14 @@
                                 return;
                             }
                             _hoveringElement.style.boxShadow = 'none';
-                            _hoveringElementTool.hoveredOverRect = null;
+                            hoveredOverRect = null;
                         });
         
                         activeDialog.previewBoxParent.addEventListener('click', function (e) {
                             if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
                                 return;
                             }
-                            if (_hoveringElementTool.hoveredOverRect != null) {
+                            if (hoveredOverRect != null) {
                                 //if (_resizingElementTool.state.appliedRecently) return;
                                 let i = 0, len = _sourcesList.length;
                                 while (i <= len) {
@@ -1806,7 +1807,7 @@
                                         i++;
                                         continue;
                                     }
-                                    if (sourceInstance.rect == _hoveringElementTool.hoveredOverRect) {
+                                    if (sourceInstance.rect == hoveredOverRect) {
                                         _activeScene.sourcesInterface.selectSource(sourceListItem);
                                         _hoveringElement.style.boxShadow = 'none';
                                         break;
@@ -4048,11 +4049,6 @@
                                 if (e.y != null) {
                                     _selectedSource.sourceInstance.rect.y = topPos * timesBigger;
                                 }
-
-                                if (_hoveringElementTool.hoveredOverRect != null) {
-                                    _hoveringElement.style.boxShadow = 'none';
-                                    _hoveringElementTool.hoveredOverRect = null;
-                                }
                             });
                         } else if(_selectedSource.sourceInstance.sourceType == 'webrtc') {  
                             log('SELECT WEBRTC', sourceItem)
@@ -4129,12 +4125,6 @@
 
                                 _selectedSource.sourceInstance.rect.currentWidth = e.originalWidth / _selectedSource.sourceInstance.rect._width;
                                 //_selectedSource.sourceInstance.rect.currentHeight = _selectedSource.sourceInstance.rect._height;
-
-
-                                if (_hoveringElementTool.hoveredOverRect != null) {
-                                    _hoveringElement.style.boxShadow = 'none';
-                                    _hoveringElementTool.hoveredOverRect = null;
-                                }
 
                             });
         
