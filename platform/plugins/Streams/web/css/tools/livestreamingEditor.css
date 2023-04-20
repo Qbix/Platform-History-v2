@@ -1448,12 +1448,12 @@
     justify-content: space-between;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option-controls {
-    display: flex;
+    display: none;
     opacity: 0;
     transition: opacity 0.1s linear;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option:hover .live-editor-custom-select-option-controls {
-    display: flex;
+    display: none;
     opacity: 1;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-option-controls-btn {
@@ -1471,7 +1471,7 @@
     fill: #fff;
 }
 .live-editor-popup-scenes-select-list .live-editor-custom-select-controls {
-    display: flex;
+    display: none;
     padding: 5px 5px 0 5px;
     justify-content: center;
 }

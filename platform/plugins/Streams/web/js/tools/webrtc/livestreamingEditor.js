@@ -165,6 +165,7 @@
                 //var _resizingElementTool = null;
                 var _hoveringElement = null;
                 var _hoveringElementTool = { hoveredOverRect: null };
+                var _hoveringElementToolInstance;
                 var _fileManagerTool = null;
                 var _streamingCanvas = null;
                 var _sourcesColumnEl = null;
@@ -1369,6 +1370,7 @@
                     var _scenesDropDownEl = null;
                     var _scenesList = [];
                     var _activeScene = null;
+                    var _eventDispatcher = new EventSystem();
 
                     var SceneListItem = function (sceneInstance) {
                         var sceneListInstance = this;
@@ -1452,20 +1454,22 @@
                             sceneItem.itemEl.selected = true;
                         }
                         var switchScene = _activeScene != sceneItem;
+                        var prevScene = _activeScene;
                         _activeScene = sceneItem;
-                        let sources = _activeScene.sourcesInterface.getSourcesList();
-                        for(let s in sources) {
-                            if(sources[s].resizingElement != null && sources[s].resizingElement.parentElement) {
-                                sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
+                        if(prevScene && switchScene) {
+                            let sources = prevScene.sourcesInterface.getSourcesList();
+                            for(let s in sources) {
+                                if(sources[s].resizingElement != null && sources[s].resizingElement.parentElement) {
+                                    sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
+                                }
+                            }
+
+                            let allParticipantsListItem = prevScene.sourcesInterface.getWebrtcGroupListItem();
+                            if(allParticipantsListItem && allParticipantsListItem.resizingElement.parentElement) {
+                                allParticipantsListItem.resizingElement.parentElement.removeChild(allParticipantsListItem.resizingElement);
                             }
                         }
                         tool.livestreamingCanvasComposerTool.canvasComposer.selectScene(_activeScene.sceneInstance);
-                        for (var i in _scenesList) {
-                            if (_scenesList[i] == sceneItem) continue;
-                            //if (_scenesList[i].itemEl.classList.contains('live-editor-popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('live-editor-popup-scenes-item-active');
-                        }
-
-                        //if(_resizingElement) _resizingElement.style.display = 'none';
 
                         if (_sourcesColumnEl) {
                             let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.live-editor-popup-sources-inner');
@@ -1476,10 +1480,27 @@
                             _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
                         }
 
-                        _activeScene.sourcesInterface.initHoveringTool();
+                        //_activeScene.sourcesInterface.initHoveringTool();
+                        let sources = _activeScene.sourcesInterface.getSourcesList();
+                        for (let s in sources) {
+                            if (sources[s].resizingElement != null) {
+                                activeDialog.previewBoxEl.appendChild(sources[s].resizingElement);
+                            }
+                        }
+
+                        let allParticipantsListItem = _activeScene.sourcesInterface.getWebrtcGroupListItem();
+                        if (allParticipantsListItem && allParticipantsListItem.resizingElement) {
+                            activeDialog.previewBoxEl.appendChild(allParticipantsListItem.resizingElement);
+                        }
+
+                        let webrtcGroup = _activeScene.sourcesInterface.getWebrtcGroupListItem()
+                        if(webrtcGroup.sourceInstance) {
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup.sourceInstance);
+                        }
 
                         _activeScene.sourcesInterface.update();
                         optionsColumn.update();
+                        _eventDispatcher.dispatch('sceneSelected', _activeScene);
                     }
 
                     function moveSceneUp(sceneId) {
@@ -1624,9 +1645,195 @@
                             if (_activeScene == null && s == 0) {
                                 selectScene(item);
                             }
+                            log('_eventDispatcher', _eventDispatcher)
+                            _eventDispatcher.dispatch('newSceneAdded', item);
 
                         }
                         log('_scenesList', _scenesList)
+                    }
+
+
+                    function initHoveringTool() {
+                        if(_hoveringElementToolInstance) {
+                            return;
+                        }
+                        log('initHoveringTool activeDialog', activeDialog);
+                        var _sourcesList, _selectedSource, allParticipantsListItem, allParticipantsGroupInstance, previewBoxRect, timesBigger;
+
+                        function onSceneChangeHandler() {
+                            if(!_activeScene) {
+                                return;
+                            }
+                            _selectedSource = _activeScene.sourcesInterface.getSelectedSource();
+                            _sourcesList = _activeScene.sourcesInterface.getSourcesList();
+                            allParticipantsListItem = _activeScene.sourcesInterface.getWebrtcGroupListItem();
+                            allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
+
+                            previewBoxRect = activeDialog.previewBoxEl.getBoundingClientRect();
+                            var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
+                            var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
+                            var realcanvasSize = _streamingCanvas.getBoundingClientRect();
+                            var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
+                            timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
+                        }
+                        onSceneChangeHandler();
+
+                        function handleScenesEvents (scene) {
+                            scene.sourcesInterface.on('sourceSelected', function (source) {
+                                log('sourceSelected', source, scene.sourcesInterface.getSelectedSource())
+                                _selectedSource = source;
+                                onSceneChangeHandler();
+                            })
+
+                            scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
+                                onSceneChangeHandler();
+                            })
+    
+                            scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
+                                onSceneChangeHandler();
+                            })
+                        }
+
+                        _eventDispatcher.on('sceneSelected', onSceneChangeHandler);
+                        log('track newSceneAdded')
+
+                        for (let s in _scenesList) {
+                            handleScenesEvents(_scenesList[s]);
+                        }
+                        _eventDispatcher.on('newSceneAdded', function (scene) {
+                            handleScenesEvents(scene);
+                        });
+
+                        activeDialog.previewBoxParent.addEventListener('mousemove', function (e) {
+                            if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
+                                return;
+                            }
+                            let x = e.clientX - previewBoxRect.x;
+                            let y = e.clientY - previewBoxRect.y;
+        
+                            let isResizingOrMoving = false;
+                            let res = '';
+                            for (let s in _sourcesList) {
+                                if(_sourcesList[s].listType == 'audio') continue;
+                                if (_sourcesList[s].resizingElementTool.state.isResizing || _sourcesList[s].resizingElementTool.state.isMoving || _sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                    isResizingOrMoving = true;
+                                    if (_sourcesList[s].resizingElementTool.state.isResizing) {
+                                        res += '1'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.isMoving) {
+                                        res += '2'
+                                    }
+                                    if (_sourcesList[s].resizingElementTool.state.appliedRecently) {
+                                        res += '3'
+                                    }
+                                }
+                            }
+                            if(allParticipantsListItem.resizingElementTool.state.isResizing || allParticipantsListItem.resizingElementTool.state.isMoving || allParticipantsListItem.resizingElementTool.state.appliedRecently) {
+                                isResizingOrMoving = true;
+                            }
+                            if (isResizingOrMoving) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                _hoveringElementTool.hoveredOverRect = null;
+                                return;
+                            }
+        
+                            let selectedSourceRect = null;
+                            let preselected = false;
+                            let i = 0, len = _sourcesList.length;
+                            while (i <= len) {
+                                let sourceItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+
+                                if(sourceItem.listType == 'audio') {
+                                    i++;
+                                    continue;
+                                }
+                                let rect = i != len ? _sourcesList[i].sourceInstance.rect : allParticipantsGroupInstance.rect;
+                                let rectLeft = rect._x / timesBigger;
+                                let rectRight = (rect._x + rect._width) / timesBigger;
+                                let rectTop = rect._y / timesBigger;
+                                let rectBottom = (rect._y + rect._height) / timesBigger;
+                                let rectWidth = rect._width / timesBigger;
+                                let rectHeight = rect._height / timesBigger;
+        
+                                if (x >= rectLeft && x <= rectRight
+                                    && y >= rectTop && y <= rectBottom) {
+                                    if (sourceItem == _selectedSource) {
+                                        selectedSourceRect = rect;
+                                        i++;
+                                        continue;
+                                    }
+                                    if (selectedSourceRect != null && rect._width * rect._height > selectedSourceRect._width * selectedSourceRect._height) {
+                                        i++;
+                                        continue;
+                                    }
+                                    _hoveringElementTool.hoveredOverRect = rect;
+                                    _hoveringElement.style.width = rectWidth + 'px';
+                                    _hoveringElement.style.height = rectHeight + 'px';
+                                    _hoveringElement.style.top = rectTop + 'px';
+                                    _hoveringElement.style.left = rectLeft + 'px';
+                                    _hoveringElement.style.boxShadow = 'inset 0px 0px 0px 1px skyblue';
+                                    preselected = true;
+                                    break;
+                                }
+                                i++;
+                            }
+
+                            if (!preselected) {
+                                _hoveringElement.style.boxShadow = 'none';
+                                _hoveringElementTool.hoveredOverRect = null;
+                            }
+                        });
+        
+                        activeDialog.previewBoxParent.addEventListener('mouseleave', function (e) {
+                            if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
+                                return;
+                            }
+                            _hoveringElement.style.boxShadow = 'none';
+                            _hoveringElementTool.hoveredOverRect = null;
+                        });
+        
+                        activeDialog.previewBoxParent.addEventListener('click', function (e) {
+                            if(allParticipantsGroupInstance == null && _sourcesList.length == 0) {
+                                return;
+                            }
+                            if (_hoveringElementTool.hoveredOverRect != null) {
+                                //if (_resizingElementTool.state.appliedRecently) return;
+                                let i = 0, len = _sourcesList.length;
+                                while (i <= len) {
+                                    let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
+                                    let sourceInstance = i != len ? _sourcesList[i].sourceInstance : allParticipantsGroupInstance;
+                                    if (sourceListItem.listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (sourceInstance.rect == _hoveringElementTool.hoveredOverRect) {
+                                        _activeScene.sourcesInterface.selectSource(sourceListItem);
+                                        _hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+        
+                            } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
+                                //log('DESELECT')
+        
+                                let i = 0, len = _sourcesList.length;
+                                while (i < len) {
+                                    if(_sourcesList[i].listType == 'audio') {
+                                        i++;
+                                        continue;
+                                    }
+                                    if (_sourcesList[i].resizingElement == e.target) {
+                                        _activeScene.sourcesInterface.selectSource(_sourcesList[i]);
+                                        //_hoveringElement.style.boxShadow = 'none';
+                                        break;
+                                    }
+                                    i++;
+                                }
+                            }
+        
+        
+                        });
                     }
 
                     window.sl = _scenesList;
@@ -1842,7 +2049,8 @@
                     return {
                         createScenesCol: createScenesCol,
                         syncList: syncList,
-                        getActive: getActiveScene
+                        getActive: getActiveScene,
+                        initHoveringTool: initHoveringTool
                     }
 
                 }())
@@ -1867,6 +2075,7 @@
                     let _addVisualSourceDropUpMenuEl = null;
                     var _audioSourcesListEl = null;
                     var _globalMicIconEl = null;
+                    var _eventDispatcher = new EventSystem();
 
                     var _videoTool = null;
                     var _audioTool = null;
@@ -2596,7 +2805,6 @@
                                     }
                                 };
                                 this.toggleAudio = function () {         
-                                    console.log('toggleAudio', listItemInstance.participantInstance.audioIsMuted)                           
                                     if (!listItemInstance.participantInstance.audioIsMuted) {
                                         listItemInstance.muteAudio();
                                     } else {
@@ -2967,12 +3175,17 @@
                             }
 
                             if(item.sourceInstance != null) {
+                                log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 1');
                                 if(item.sourceInstance.active) {
+                                    log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 1.1');
                                     item.switchVisibilityIcon(true);
                                 } else {
+                                    log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 1.2');
                                     item.switchVisibilityIcon(false);
                                 }
                             } else {
+                                log('ParticipantsList: updateParticipantItem: switchVisibilityIcon 2');
+
                                 item.switchVisibilityIcon(false);
                             }
 
@@ -3105,7 +3318,8 @@
                             getListElement: getListElement,
                             getListContainer: getListContainer,
                             getWebrtcGroupInstance: getWebrtcGroupInstance,
-                            getWebrtcGroupListItem: getWebrtcGroupListItem
+                            getWebrtcGroupListItem: getWebrtcGroupListItem,
+                            addTeleconferenceSource: addTeleconferenceSource
                         }
                     }
 
@@ -3144,13 +3358,18 @@
 
                     _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
                         log('SCENE EVENT: SOURCE ADDED', source)
-                        if(source.screenSharing) {
-                            _layoutsListCustomSelect.value = 'sideScreenSharing';
+                        let activeScene = scenesInterface.getActive();
+                        if(_scene == activeScene && source.screenSharing) {
+                            log('SCENE EVENT: CHANGE LAYOUT', source)
+                            _layoutsListCustomSelect.value = _selectedLayout = 'sideScreenSharing';
                             _autoSwitchToScreensharingLayoutAndBack = true;
                         }
                     })
                     _scene.sceneInstance.eventDispatcher.on('sourceRemoved', function (source) {
                         log('SCENE EVENT: SOURCE REMOVED', source)
+                        if(source.sourceType != 'webrtc') {
+                            return;
+                        }
                         let webrtcGroup = source.parentGroup;
                         let allWebrtcSources = webrtcGroup.getChildSources('webrtc');
 
@@ -3668,13 +3887,14 @@
                     }
 
                     function addTeleconferenceSource(name) {
+                        log('addTeleconferenceSource START');
                         var webrtcGroup = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                             sourceType: 'webrtcGroup',
                             title: name ? name : 'Participants'
                         });
 
                         //webrtcGroup.currentLayout = _layoutsListSelect.value;
-                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup, _layoutsListSelect.value, true);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup, _layoutsListSelect.value, null);
 
                     }
 
@@ -3771,7 +3991,7 @@
                             }
                         }
 
-
+                        _eventDispatcher.dispatch('sourceSelected', _selectedSource);
                         if(!_selectedSource.sourceInstance) return;
                         log('selectSource _selectedSource', _selectedSource)
 
@@ -4492,6 +4712,10 @@
                         return _sourcesList;
                     }
 
+                    function getWebrtcGroupListItem() {
+                        return _participantsList.getWebrtcGroupListItem();
+                    }
+
                     function showVisualSources() {
                         _sourcesListEl.innerHTML = '';
                         _sourcesListEl.appendChild(createSourcesList());
@@ -4499,6 +4723,7 @@
                     }
 
                     function createSourcesCol() {
+                        log('createSourcesCol');
                         if(_sceneSourcesColumnEl != null) return _sceneSourcesColumnEl;
                         
                         var sourcesColumnInner = document.createElement('DIV');
@@ -4517,6 +4742,9 @@
                         _participantsList = new ParticipantsList();
                         _sourcesListEl.appendChild(_participantsList.getListContainer());
                         _sourcesListEl.appendChild(createSourcesList());
+                        if(!_participantsList.getWebrtcGroupInstance()) {
+                            _participantsList.addTeleconferenceSource();
+                        }
 
                         _sceneSourcesColumnEl = sourcesColumnInner;
                         return sourcesColumnInner;
@@ -4588,138 +4816,6 @@
 
                     function getSelectedSource() {
                         return _selectedSource;
-                    }
-
-                    function initHoveringTool() {
-                        var left = 0, top = 0;
-                        log('initHoveringTool activeDialog', activeDialog);
-                        var allParticipantsListItem = _participantsList.getWebrtcGroupListItem();
-                        var allParticipantsGroupInstance = allParticipantsListItem.sourceInstance;
-                        var previewBoxRect = activeDialog.previewBoxEl.getBoundingClientRect();
-                        var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
-                        var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
-                        var realcanvasSize = _streamingCanvas.getBoundingClientRect();
-                        var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
-                        var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
-                        activeDialog.previewBoxParent.addEventListener('mousemove', function (e) {
-                            let x = e.clientX - previewBoxRect.x;
-                            let y = e.clientY - previewBoxRect.y;
-        
-                            let isResizingOrMoving = false;
-                            let res = '';
-                            for (let s in _sourcesList) {
-                                if(_sourcesList[s].listType == 'audio') continue;
-                                if (_sourcesList[s].resizingElementTool.state.isResizing || _sourcesList[s].resizingElementTool.state.isMoving || _sourcesList[s].resizingElementTool.state.appliedRecently) {
-                                    isResizingOrMoving = true;
-                                    if (_sourcesList[s].resizingElementTool.state.isResizing) {
-                                        res += '1'
-                                    }
-                                    if (_sourcesList[s].resizingElementTool.state.isMoving) {
-                                        res += '2'
-                                    }
-                                    if (_sourcesList[s].resizingElementTool.state.appliedRecently) {
-                                        res += '3'
-                                    }
-                                }
-                            }
-        
-                            if (isResizingOrMoving) {
-                                _hoveringElement.style.boxShadow = 'none';
-                                _hoveringElementTool.hoveredOverRect = null;
-                                return;
-                            }
-        
-                            let selectedSourceRect = null;
-                            let preselected = false;
-                            let i = 0, len = _sourcesList.length;
-                            while (i <= len) {
-                                let sourceItem = i != len ? _sourcesList[i] : allParticipantsListItem;
-
-                                if(sourceItem.listType == 'audio') {
-                                    i++;
-                                    continue;
-                                }
-                                let rect = i != len ? _sourcesList[i].sourceInstance.rect : allParticipantsGroupInstance.rect;
-                                let rectLeft = rect._x / timesBigger;
-                                let rectRight = (rect._x + rect._width) / timesBigger;
-                                let rectTop = rect._y / timesBigger;
-                                let rectBottom = (rect._y + rect._height) / timesBigger;
-                                let rectWidth = rect._width / timesBigger;
-                                let rectHeight = rect._height / timesBigger;
-        
-                                if (x >= rectLeft && x <= rectRight
-                                    && y >= rectTop && y <= rectBottom) {
-                                    if (sourceItem == _selectedSource) {
-                                        selectedSourceRect = rect;
-                                        i++;
-                                        continue;
-                                    }
-                                    if (selectedSourceRect != null && rect._width * rect._height > selectedSourceRect._width * selectedSourceRect._height) {
-                                        i++;
-                                        continue;
-                                    }
-                                    _hoveringElementTool.hoveredOverRect = rect;
-                                    _hoveringElement.style.width = rectWidth + 'px';
-                                    _hoveringElement.style.height = rectHeight + 'px';
-                                    _hoveringElement.style.top = rectTop + 'px';
-                                    _hoveringElement.style.left = rectLeft + 'px';
-                                    _hoveringElement.style.boxShadow = 'inset 0px 0px 0px 1px skyblue';
-                                    preselected = true;
-                                    break;
-                                }
-                                i++;
-                            }
-        
-                            if (!preselected) {
-                                _hoveringElement.style.boxShadow = 'none';
-                                _hoveringElementTool.hoveredOverRect = null;
-                            }
-                        });
-        
-                        activeDialog.previewBoxParent.addEventListener('mouseleave', function (e) {
-                            _hoveringElement.style.boxShadow = 'none';
-                            _hoveringElementTool.hoveredOverRect = null;
-                        });
-        
-                        activeDialog.previewBoxParent.addEventListener('click', function (e) {
-                            if (_hoveringElementTool.hoveredOverRect != null) {
-                                //if (_resizingElementTool.state.appliedRecently) return;
-                                let i = 0, len = _sourcesList.length;
-                                while (i <= len) {
-                                    let sourceListItem = i != len ? _sourcesList[i] : allParticipantsListItem;
-                                    let sourceInstance = i != len ? _sourcesList[i].sourceInstance : allParticipantsGroupInstance;
-                                    if (sourceListItem.listType == 'audio') {
-                                        i++;
-                                        continue;
-                                    }
-                                    if (sourceInstance.rect == _hoveringElementTool.hoveredOverRect) {
-                                        selectSource(sourceListItem);
-                                        _hoveringElement.style.boxShadow = 'none';
-                                        break;
-                                    }
-                                    i++;
-                                }
-        
-                            } else if (e.target && e.target.classList.contains('le-canvas-preview-resizing')) {
-                                //log('DESELECT')
-        
-                                let i = 0, len = _sourcesList.length;
-                                while (i < len) {
-                                    if(_sourcesList[i].listType == 'audio') {
-                                        i++;
-                                        continue;
-                                    }
-                                    if (_sourcesList[i].resizingElement == e.target) {
-                                        selectSource(_sourcesList[i]);
-                                        //_hoveringElement.style.boxShadow = 'none';
-                                        break;
-                                    }
-                                    i++;
-                                }
-                            }
-        
-        
-                        });
                     }
 
                     var addVideoPopup = (function () {
@@ -5992,11 +6088,15 @@
                         }
                     }
 
+                    function on(eventName, handlerFunction) {
+                        _eventDispatcher.on(eventName, handlerFunction);
+                    }
+
                     return {
                         createSourcesCol: createSourcesCol,
-                        initHoveringTool: initHoveringTool,
                         update: update,
                         updateLocalControlsButtonsState: updateLocalControlsButtonsState,
+                        selectSource: selectSource,
                         getSelectedSource: getSelectedSource,
                         getSelectedLayout: getSelectedLayout,
                         syncList: syncList,
@@ -6011,7 +6111,9 @@
                         addWatermark: addWatermark,
                         addBackground: addBackground,
                         addVideoSource: addVideoSource,
-                        checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist
+                        checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist,
+                        getWebrtcGroupListItem: getWebrtcGroupListItem,
+                        on: on
                     }
                 }
 
@@ -7608,8 +7710,10 @@
                                 relationType: 'Streams/webrtc/livestream/chat',
                                 tag: 'div',
                                 isCategory: true,
-                                creatable: false,
                                 realtime: true,
+                                previewOptions: {
+                                    closeable: false
+                                },
                                 onUpdate: function (e) {
                                     log('onUpdate', e, this)
                                     onRelatedToolUpdate(e.relatedStreams);
@@ -8957,7 +9061,7 @@
 
                     var sourceHoveringEl = _hoveringElement = document.createElement('DIV');
                     sourceHoveringEl.className = 'live-editor-canvas-preview-hovering';
-                    previewBoxBodyInner.appendChild(sourceHoveringEl);
+                    previewBoxBodyInner.appendChild(sourceHoveringEl);                    
 
                     /*var sourceResizingEl = _resizingElement = document.createElement('DIV');
                     sourceResizingEl.className = 'live-editor-popup-preview-resizing';
@@ -9372,6 +9476,10 @@
                         }
 
                         scenesInterface.syncList();
+
+                        if(!_hoveringElementToolInstance) {
+                            _hoveringElementToolInstance = scenesInterface.initHoveringTool();
+                        }
                       
                         document.documentElement.classList.add('Streams_webrtc_live');
                     }
