@@ -1994,7 +1994,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				title: text.invite.labels.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.loggedInUserId(),
-					filter: 'Users/'
+					filter: 'Users/',
+					canGrant: true
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,
