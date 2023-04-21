@@ -226,6 +226,7 @@
                     let streamingToFacebook = (function () {
                         let _streamingToFbSection = null;
                         let _privacySelect = null;
+                        let _groupListLoaded = null;
 
                         let _liveId;
                         let _liveInfo;
@@ -342,7 +343,6 @@
                                 }
                             });
                         }
-
 
                         function facebookLiveDialog() {
                             var tool = this;
@@ -746,7 +746,10 @@
                         }
 
                         function getSection() {
-                            loadGroupsList();
+                            if(!_groupListLoaded) {
+                                loadGroupsList();
+                                _groupListLoaded = true;
+                            }
                             return _streamingToFbSection;
                         }
 
@@ -2038,8 +2041,11 @@
                                     });
                                 }
                             }
-                            
                         };
+
+                        _eventDispatcher.on('sceneSelected', function (scene) {
+                            customSelect.value = scene.sceneInstance.id;
+                        });
                        
 
                         scenesColumn.appendChild(scenesColumnBody);
@@ -2050,6 +2056,25 @@
                     function getActiveScene() {
                         return _activeScene;
                     }
+
+                    function defineShortcuts() {
+                        window.addEventListener('keyup', function (e) {
+                            if ( this !== e.target && 
+                                ( /textarea|select/i.test( e.target.nodeName ) ||
+                                  e.target.type === "text") ) {
+                                return;
+                            }
+
+                            if(['1', '2', '3', '4', '5', '6', '7', '8', '9'].indexOf(e.key) != -1) {
+                                let sceneToActivate = _scenesList[parseInt(e.key) - 1];
+                                if(sceneToActivate) {
+                                    selectScene(sceneToActivate);
+                                }
+
+                            }
+                        });
+                    }
+                    defineShortcuts();
 
 
                     return {
@@ -2567,6 +2592,28 @@
                         let teleconferenceToggleBtn = document.createElement('SPAN');
                         teleconferenceToggleBtn.className = 'live-editor-toggle-slider live-editor-participants-list-toggle-btn';
                         teleconferenceToggleLabel.appendChild(teleconferenceToggleBtn);
+                        
+                        var settingsBtn = document.createElement('DIV');
+                        settingsBtn.className = 'live-editor-participants-list-config';
+                        settingsBtn.innerHTML = _streamingIcons.settings;
+                        settingsBtn.addEventListener('click', function () {
+                            let streamingControlsEl = document.querySelector('.live-editor-popup-streaming-controls');
+                            let titleEl = document.querySelector('.live-editor-dialog-header');
+                            let titleElRect = titleEl.getBoundingClientRect();
+                            let rectangleToShowIn = streamingControlsEl ? streamingControlsEl.getBoundingClientRect() : null;
+                            let settingsDialogEl = optionsColumn.getSettingsDialog();
+                            let title = "Source's settings";
+                            if(_selectedSource && _selectedSource.sourceInstance && _selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
+                                title = "Layout's settings";
+                            }
+                            let settingsDialog = new SimpleDialog({
+                                content: settingsDialogEl, 
+                                rectangleToShowIn: new DOMRect(rectangleToShowIn.x, rectangleToShowIn.y - titleElRect.height, rectangleToShowIn.width, rectangleToShowIn.height + titleElRect.height),
+                                title: title
+                            });
+                        })
+
+                        participantTitleCon.appendChild(settingsBtn);
 
                         _participantsListEl = document.createElement('DIV');
                         _participantsListEl.className = 'live-editor-participants-list';
@@ -2701,7 +2748,6 @@
                             });
 
                             _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
-                                log('aaaaaaaaaa', source)
                                 if(source.sourceType == 'webrtc') {
                                     updateParticipantItem(source.participant);
                                 } else if(source.sourceType == 'group' && source.groupType == 'webrtc') {
@@ -3366,7 +3412,7 @@
                     _scene.sceneInstance.eventDispatcher.on('sourceAdded', function (source) {
                         log('SCENE EVENT: SOURCE ADDED', source)
                         let activeScene = scenesInterface.getActive();
-                        if(_scene == activeScene && source.screenSharing) {
+                        if(_scene == activeScene && source.screenSharing && source.isNewSourceOnCanvas) {
                             log('SCENE EVENT: CHANGE LAYOUT', source)
                             _layoutsListCustomSelect.value = _selectedLayout = 'sideScreenSharing';
                             _autoSwitchToScreensharingLayoutAndBack = true;
@@ -4516,7 +4562,9 @@
                             //invitePopup.show();
                             Q.Streams.invite(tool.roomStream.fields.publisherId, tool.roomStream.fields.name, {
                                 appUrl: Q.url("meeting"),
-                                title: 'Invite to Teleconference'
+                                title: 'Invite to Teleconference',
+                                addLabel: null,
+                                addMyLabel: null
                             });
                         })
 
@@ -4700,6 +4748,8 @@
                         }
                        
                         _selectedLayout = layoutKey;
+
+                        console.log('selectLayout', layoutKey)
 
                         tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(teleconferenceSource, layoutKey, null);
                     }
@@ -6472,7 +6522,7 @@
                                 dialogBodyInner.appendChild(marginsCon);
 
                                 marginsInput.addEventListener('input', function () {
-                                    _selectedSource.sourceInstance.params.tiledLayoutMargins = marginsInput.value;
+                                    _selectedSource.sourceInstance.params.tiledLayoutMargins = marginsInput.value != '' ? marginsInput.value : 0;
                                     updateWebrtcRect();
                                 })
                             }
@@ -7864,6 +7914,7 @@
                     this.hoverTimeout = null;
                     this.resizeObserver = null;
                     this.active = false;
+                    this.time = performance.now();
                     this.isChangingPosition = {x: null, y: null};
                     this.hide = function (e) {
                         if (!e || (e && e.target.offsetParent != dialogInstance.dialogEl || e.target == this.closeButtonEl)) {
@@ -7891,6 +7942,7 @@
 
                         dialogInstance.dialogEl.style.top = rectangleToShowIn.y + 'px';
                         dialogInstance.dialogEl.style.left = rectangleToShowIn.x + 'px';
+                        dialogInstance.dialogEl.dataset.time = dialogInstance.time;
                       
                         if(dialogInstance.content instanceof Array) {
                             for(let i in dialogInstance.content) {
@@ -8011,7 +8063,8 @@
                                 if(distXY.x != null) elementToMove.style.left = distXY.x + 'px';
                                 if(onAnimationEnd) onAnimationEnd();
                             }
-                        }
+                        }        
+                        
                     }
         
                     this.dialogEl = document.createElement('DIV');
@@ -8057,6 +8110,25 @@
 
                         }
                     );
+
+                    window.addEventListener('keyup', function (e) {
+                        if ( this !== e.target && 
+                            ( /textarea|select/i.test( e.target.nodeName ) ||
+                              e.target.type === "text") ) {
+                            return;
+                        }
+
+                        let existingPopupDialogs = document.querySelectorAll('.live-editor-dialog-window');
+                        if(existingPopupDialogs.length != 0) {
+                            let existingPopupDialogsArr = Array.prototype.slice.call(existingPopupDialogs, 0);
+                            existingPopupDialogsArr.sort(function (a, b) {
+                                return parseInt(b.dataset.time) - parseInt(a.dataset.time);
+                            });
+                            if(dialogInstance.dialogEl == existingPopupDialogsArr[0]) {
+                                dialogInstance.hide();
+                            }
+                        }             
+                    });
 
                     this.resizeObserver = new ResizeObserver(function (entries) {
                         for (const entry of entries) {

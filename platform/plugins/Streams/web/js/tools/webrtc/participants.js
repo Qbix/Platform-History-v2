@@ -226,6 +226,9 @@
                 inviteBtn.addEventListener('click', function () {
                     Q.Streams.invite(tool.roomStream.fields.publisherId, tool.roomStream.fields.name, {
                         appUrl: Q.url("meeting"),
+                        title: 'Invite to Teleconference',
+                        addLabel: null,
+                        addMyLabel: null
                     });
                 });
             },

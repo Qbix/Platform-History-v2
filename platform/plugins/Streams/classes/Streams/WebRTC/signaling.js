@@ -6,15 +6,17 @@ module.exports = function(socket,io) {
     var webrtcNamespace = io.of(nspName);
     var roomPublisherId;
     var roomId;
+    var socketRoom;
     socket.on('Streams/webrtc/joined', function (identity, cb) {
         if(_debug) console.log('Got message: joined ', identity, nspName + '#' + socket.client.id);
         socket.username = identity.username;
         socket.userPlatformId = identity.username.split('\t')[0];
         socket.startTime = identity.username.split('\t')[1];
         socket.info = identity.info;
-        socket.roomId = roomId = identity.room;
         socket.roomStartTime = identity.roomStartTime;
         socket.roomPublisherId = roomPublisherId = identity.roomPublisher;
+        socket.roomId = roomId = identity.room;
+        socket.socketRoom = socketRoom = identity.roomPublisher + '_' + identity.room;
 
         function onParticipantValidation() {
             if(_debug) console.log('rooms: ', socket.adapter.rooms);
@@ -27,24 +29,24 @@ module.exports = function(socket,io) {
                 }
             }
 
-            socket.join(roomId, function () {
+            socket.join(socketRoom, function () {
                 if(_debug) console.log(nspName + '#' + socket.client.id + ' now in rooms: ', socket.rooms);
-                io.of('/webrtc').in(roomId).clients(function (error, clients) {
+                io.of('/webrtc').in(socketRoom).clients(function (error, clients) {
                     if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
                 });
             })
 
-            if(_debug) console.log('Participant joined to room', roomId);
+            if(_debug) console.log('Participant joined to room', socketRoom);
 
             //console.log('Streams/webrtc/participantConnected', socket)
-            socket.broadcast.to(roomId).emit('Streams/webrtc/participantConnected', {
+            socket.broadcast.to(socketRoom).emit('Streams/webrtc/participantConnected', {
                 username:identity.username,
                 sid:socket.client.id,
                 info:identity.info,
                 fromSid:identity.sid
             });
 
-            io.of('/webrtc').in(roomId).clients(function (error, clients) {
+            io.of('/webrtc').in(socketRoom).clients(function (error, clients) {
                 if(_debug) console.log(clients);
                 var participantsList = [];
                 for (var i in clients) {
@@ -141,7 +143,7 @@ module.exports = function(socket,io) {
                     if (users[i].userPlatformId == userId) {
                         console.log('PUT IN WAITING ROOM: disconnect');
                         socket.to(nspName + '#' + users[i].client.id).emit('Streams/webrtc/leave');
-                        socket.broadcast.to(roomId).emit('Streams/webrtc/participantDisconnected', socket.client.id);
+                        socket.broadcast.to(socketRoom).emit('Streams/webrtc/participantDisconnected', socket.client.id);
                         socket.emit('Streams/webrtc/participantDisconnected', socket.client.id);
                         users[i].disconnect();
                     }
@@ -164,9 +166,9 @@ module.exports = function(socket,io) {
 
     //console.log('Q.plugins.Streams', getMethods(Q.plugins.Streams));
     socket.on('disconnect', function() {
-        if(!roomId) return;
+        if(!socketRoom) return;
         if(_debug) console.log('DISCONNECT', nspName + '#' + socket.client.id, socket.userPlatformId, 'Streams/webrtc/' + roomId);
-        io.of('/webrtc').in(roomId).clients(function (error, clients) {
+        io.of('/webrtc').in(socketRoom).clients(function (error, clients) {
             if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
 
             var streamName = 'Streams/webrtc/' + roomId;
@@ -207,6 +209,6 @@ module.exports = function(socket,io) {
             });
         });
 
-        socket.broadcast.to(roomId).emit('Streams/webrtc/participantDisconnected', socket.client.id);
+        socket.broadcast.to(socketRoom).emit('Streams/webrtc/participantDisconnected', socket.client.id);
     });
 };
