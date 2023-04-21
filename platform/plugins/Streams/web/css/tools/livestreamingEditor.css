@@ -936,7 +936,7 @@
 
 .live-editor-popup-scenes-body-inner, .live-editor-popup-sources-body-inner,
 .live-editor-popup-scenes-body-inner, .live-editor-popup-options-body-inner {
-    padding-top: 10px;
+    padding-top: 0;
     padding-bottom: 52px;
 }
 .live-editor-popup-options-body-inner input[type="checkbox"]{
@@ -1054,6 +1054,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid #7a7a7a;
+    border-top: none;
 }
 .live-editor-popup-sources-item-text,
 .live-editor-canvas-popup-list-text {
@@ -1302,7 +1304,7 @@
     border-radius: 10px 10px 0 0;
     overflow-y: hidden;
     color: #ffffff;
-    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 20%);
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.45);
     display: flex;
     flex-direction: column;
 }
@@ -2159,6 +2161,9 @@
   /*end: context menu*/
 
   /*start:list of participants as sources*/
+  .live-editor-participants-list-con {
+    border: 1px solid #7a7a7a;
+  }
   .live-editor-participants-list-title-con {
     display: flex;
     justify-content: space-between;
@@ -2183,6 +2188,22 @@
   .live-editor-participants-list-title {
     padding: 10px;
   }
+  .live-editor-participants-list-title-con .live-editor-participants-list-config {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right:5px;
+    cursor: pointer;
+  }
+  .live-editor-participants-list-title-con .live-editor-participants-list-config svg{
+    max-width: 25px;
+    max-height: 25px;
+  }
+  .live-editor-participants-list-title-con .live-editor-participants-list-config svg path{
+    fill: white;
+  }
+
+  
   .live-editor-participants-list {
     border-top: 1px solid #454545;
     border-bottom: 1px solid #454545;

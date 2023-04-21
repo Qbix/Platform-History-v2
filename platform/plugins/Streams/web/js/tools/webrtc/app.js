@@ -1626,13 +1626,16 @@ window.WebRTCRoomClient = function app(options){
             });
 
             track.mediaStreamTrack.addEventListener('ended', function(e){
-                log('mediaStreamTrack ended', track);
+                log('mediaStreamTrack ended', e, track);
                 app.event.dispatch('trackMuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
                     track:track,
                     participant:participant
                 });
+                if (e instanceof Event) {
+                    app.localMediaControls.disableVideo([track]);
+                }
             });
             
             return remoteStreamEl;
@@ -4872,7 +4875,7 @@ window.WebRTCRoomClient = function app(options){
                     if (localParticipant.tracks[i].kind == 'audio' || (options.showScreenSharingInSeparateScreen && localParticipant.tracks[i].screensharing)) continue;
                     if(localParticipant.tracks[i].mediaStreamTrack.readyState == 'ended' || localParticipant.tracks[i].mediaStreamTrack.enabled == false) continue;
                     localParticipant.tracks[i].mediaStreamTrack.stop();
-                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new Event("ended"));
+                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
 
                 }
 
@@ -5001,7 +5004,7 @@ window.WebRTCRoomClient = function app(options){
 
                     log('toggleAudioInputs: stop prev tracks', localParticipant.tracks[i].mediaStreamTrack)
                     localParticipant.tracks[i].mediaStreamTrack.stop();
-                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new Event("ended"));
+                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
 
                     localParticipant.tracks.splice(i, 1);
                 }
@@ -5514,15 +5517,16 @@ window.WebRTCRoomClient = function app(options){
 
                 for (let i = localParticipant.tracks.length - 1; i >= 0; i--) {
                     if(localParticipant.tracks[i].kind != 'video' || (options.showScreenSharingInSeparateScreen && localParticipant.tracks[i].screensharing == true)) continue;
+                    log('disableVideoTracks: all: stop');
                     localParticipant.tracks[i].mediaStreamTrack.stop();
-                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new Event("ended"));
+                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
                 }
             } else  {
                 log('disableVideoTracks: tracksToDisable', tracksToDisable);
 
                 for (let i = 0; i < tracksToDisable.length; i++) {
                     tracksToDisable[i].mediaStreamTrack.stop();
-                    tracksToDisable[i].mediaStreamTrack.dispatchEvent(new Event("ended"));
+                    tracksToDisable[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
                 }
             }
 
