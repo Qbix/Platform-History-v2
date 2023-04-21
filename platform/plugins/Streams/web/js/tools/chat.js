@@ -765,6 +765,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			streamName: state.streamName,
 			closeManually: true,
 			tool: tool,
+			useRelatedTo: true,
 			onWebrtcControlsCreated: function () {
 				$toolElement.attr('data-webrtc', true);
 			},

@@ -45,10 +45,11 @@ function Streams_webrtc_post($params = array())
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
 	$content = Q::ifset($params, 'content', null);
-	$onlyPreJoinedParticipantsAllowed = Q::ifset($params, 'onlyParticipantsAllowed', false);
+	$onlyPreJoinedParticipantsAllowed = filter_var(Q::ifset($params, 'onlyParticipantsAllowed', false), FILTER_VALIDATE_BOOLEAN);
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
     $writeLevel = Q::ifset($params, 'writeLevel', 23);
     $closeManually = Q::ifset($params, 'closeManually', null);
+	$useRelatedTo = filter_var(Q::ifset($params, 'useRelatedTo', false), FILTER_VALIDATE_BOOLEAN);
 
     if(Q_Request::slotName('data')) {
         //this is requests which were sent by node.js when some event was fired (client.on('disconnect'), for example)
@@ -73,11 +74,11 @@ function Streams_webrtc_post($params = array())
         } else if($cmd == 'closeIfOffline') {
             //this slot is used to close inactive stream when a host loades list of waiting rooms (we should close waiting rooms of users thar are inactive)
 
-            $userIsOnline = Q::ifset($params, 'userIsOnline', false);
+            $userIsOnline = filter_var(Q::ifset($params, 'userIsOnline', false), FILTER_VALIDATE_BOOLEAN);
             $webrtcStream = Streams_Stream::fetch(null, $publisherId, $streamName);
     
             $streamWasClosed = false;
-            if($userIsOnline === false || $userIsOnline === 'false' || $userIsOnline === 0 || $userIsOnline === '0') {
+            if($userIsOnline === false) {
                 //$webrtcStream->close($publisherId);
                 $webrtcStream->setAttribute('status', 'closed');
                 $webrtcStream->save();
@@ -311,11 +312,7 @@ function Streams_webrtc_post($params = array())
             return Q_Response::setSlot("room", $response);  
             
         }      
-    } /*else if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {*/
-        /*$webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], null, null, $useRelatedTo["relationType"], $resumeClosed);*/
-
-    else if(!empty($relate) && !empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
-
+    } else if($useRelatedTo && !empty($relate)) {
         $webrtcStream = $webrtc->getRoomStreamRelatedTo($relate["publisherId"], $relate["streamName"], null, null, $relate["relationType"], $resumeClosed);
     
         if(is_null($webrtcStream)) {
