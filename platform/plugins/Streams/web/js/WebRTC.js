@@ -92,6 +92,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {Object} [_options.relate] Relate roomStream to another stream when roomStream is created. Use already related (to already existing stream) stream as main roomStream
          * @param {String} [_options.relate.publisherId] publisherId of a stream to which roomStream will be related.
          * @param {String} [_options.relate.streamName] streamName of a stream to which roomStream will be related.
+         * @param {Boolean} [_options.useRelatedTo] if true, instead of create new stream use last related webrtc stream (_options.relate should be filled)
          */
         var _options = {
             startWith: {
@@ -138,7 +139,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             defaultMobileViewMode:null,
             writeLevel:23,
             relate: {},
-            useRelatedTo: {}
+            useRelatedTo: false
         };
 
         overrideDefaultOptions(options);
@@ -8063,6 +8064,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             resumeClosed: options.resumeClosed,
             closeManually: options.closeManually,
             description: options.description,
+            useRelatedTo: !!options.useRelatedTo,
             onlyParticipantsAllowed: options.onlyParticipantsAllowed,
             relate: {
                 publisherId: options.publisherId,
