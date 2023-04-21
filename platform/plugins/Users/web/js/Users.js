@@ -1230,7 +1230,7 @@
 		basename = (String(basename).indexOf('.') >= 0) ? basename : basename + '.png';
 		var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
 		return src.isUrl() || icon.substr(0, 2) === '{{'
-			? src
+			? Q.url(src)
 			: Q.url('{{Users}}/img/icons/' + src);
 	};
 
