@@ -249,7 +249,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$fields['name'] = $name;
 		$stream = Streams::create($asUserId, 
 			$publisherId, 
-			Q::ifset($options, 'type', Q::ifset($options, 'fields', 'type'), null),
+			Q::ifset($options, 'type', Q::ifset($options, 'fields', 'type', null)),
 			$fields, 
 			Q::ifset($options, 'relate', null),
 			$relateResults
