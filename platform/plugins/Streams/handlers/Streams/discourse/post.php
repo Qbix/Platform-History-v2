@@ -69,23 +69,23 @@ function Streams_discourse_post()
         'disagree + authority' => "What follows is HTML of a post. Write a single paragraph mildly disagreeing with it (without saying 'mildly disagree'), and naming other important authorities on the subject who also disagree, who haven't been mentioned yet, and summarizing their points. Avoid overly formal language and structure, speak plainly and to the point.\n$languageClause\nThe post:\n" . $input
     );
 
-    // $messages = array(
-    //     'system' => 'You are a forum member commenting.',
-    //     'user' => $instructions[$attitude]
-    // );
-    // $completions = $LLM->chatCompletions($messages);
-    // $choices = Q::ifset($completions, 'choices', array());
-    // foreach ($choices as $choice) {
-    //     $content = $choice['message']['content'];
-    //     break;
-    // }
+    $messages = array(
+        'system' => 'You are a forum member commenting.',
+        'user' => $instructions[$attitude]
+    );
+    $completions = $LLM->chatCompletions($messages);
+    $choices = Q::ifset($completions, 'choices', array());
+    foreach ($choices as $choice) {
+        $content = $choice['message']['content'];
+        break;
+    }
 
-    // // post to the forum
-    // $result = $uxt->postOnTopic($ret['id'], $content);
-    // $postIndex = Q::ifset($result, 'post_number', null);
-    // if (isset($postIndex)) {
-    //     --$postIndex;
-    // }
+    // post to the forum
+    $result = $uxt->postOnTopic($ret['id'], $content);
+    $postIndex = Q::ifset($result, 'post_number', null);
+    if (isset($postIndex)) {
+        --$postIndex;
+    }
 
     // save the result
     $appId = Q::app();
