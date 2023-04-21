@@ -7,4 +7,6 @@
 .Users_web3_community_tool .fieldErrorBox {
 	border:1px solid #f00;
 }
-
+.Users_web3_community_tool span.error {
+	color: #f00;
+}

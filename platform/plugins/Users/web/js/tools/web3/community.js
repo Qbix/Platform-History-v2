@@ -28,6 +28,8 @@ if (Q.isEmpty(Q["isAddress"])) {
 
 var Users = Q.Users;
 
+
+
 /**
  * Users Tools
  * @module Users-tools
@@ -85,7 +87,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 		}, (err, html) => {
 		    
 		    Q.replace(tool.element, html);
-		    
+			
 		    $("button[name=produce]", $toolElement).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
 				var $this = $(this);
 
@@ -114,10 +116,11 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				var validated = true;
 				if (Q.isEmpty(userParams.hook) || !Q.isAddress(userParams.hook)) {
 					validated = false;
-					Q.Notices.add({
-						content: '<b>Hook</b> invalid',
-						timeout: 5
-					});
+//					Q.Notices.add({
+//						content: '<b>Hook</b> invalid',
+//						timeout: 5
+//					});
+					$("<span/>").addClass('error').html('<b>Hook</b> invalid').insertBefore($fields.hook);
 					$fields.hook.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
 					$fields.hook.removeClass('Q_error').removeClass('fieldErrorBox');
@@ -125,10 +128,11 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				
 				if (Q.isEmpty(userParams.name)) {
 					validated = false;
-					Q.Notices.add({
-						content: '<b>Name</b> invalid',
-						timeout: 5
-					});
+//					Q.Notices.add({
+//						content: '<b>Name</b> invalid',
+//						timeout: 500
+//					});
+					$("<span/>").addClass('error').html('<b>Name</b> invalid').insertBefore($fields.name);
 					$fields.name.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
 					$fields.name.removeClass('Q_error').removeClass('fieldErrorBox');
@@ -136,23 +140,28 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				
 				if (Q.isEmpty(userParams.symbol)) {
 					validated = false;
-					Q.Notices.add({
-						content: '<b>Symbol</b> invalid',
-						timeout: 5
-					});
+//					Q.Notices.add({
+//						content: '<b>Symbol</b> invalid',
+//						timeout: 500
+//					});
+					$("<span/>").addClass('error').html('<b>Symbol</b> invalid').insertBefore($fields.symbol);
 					$fields.symbol.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
 					$fields.symbol.removeClass('Q_error').removeClass('fieldErrorBox');
 				}
 				if (Q.isEmpty(userParams.contractURI)) {
 					validated = false;
-					Q.Notices.add({
-						content: '<b>contractURI</b> invalid',
-						timeout: 5
-					});
+					
+//					Q.Notices.add({
+//						content: '<b>contractURI</b> invalid',
+//						timeout: 5000
+//					});
+					$("<span/>").addClass('error').html('<b>contractURI</b> invalid').insertBefore($fields.contractURI);
+
 					$fields.contractURI.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
 					$fields.contractURI.removeClass('Q_error').removeClass('fieldErrorBox');
+					$fields.contractURI.find('.error');
 				}
 
 				if (validated) {
