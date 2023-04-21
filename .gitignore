@@ -7,6 +7,7 @@
 docs/
 /*
 !platform
+platform/.vscode/
 platform/.idea/
 platform/local/*
 platform/files/Q/Browscap/*

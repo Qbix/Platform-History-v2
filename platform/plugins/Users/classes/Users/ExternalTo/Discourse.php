@@ -13,23 +13,88 @@
 class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_ExternalTo_Interface
 {
 	protected $apiKey = null;
-	protected $apiHost = null;
-	protected $apiUsername = null;
+	protected $baseUrl = null;
+    protected $apiUsername = null;
 
 	protected function _loadConfig () {
-        list($appId, $appInfo) = Users::appInfo($this->platform, $this->appId);
-		$this->apiKey = $appInfo['keys']['users'];
-		$this->apiHost = $appInfo['url'];
+        // list($appId, $appInfo) = Users::appInfo($this->platform, $this->appId);
+        if ($apiKey = $this->getExtra('apiKey')) {
+            $this->apiKey = $apiKey;
+        }
+        if ($baseUrl = $this->getExtra('baseUrl')) {
+            $this->baseUrl = $baseUrl;
+        }
 		$this->apiUsername = 'system';
+        if (empty($this->apiKey)) {
+            list($appId, $appInfo) = Users::appInfo($this->platform, $this->appId);
+            if (empty($appInfo)) {
+                throw new Q_Exception_MissingConfig(array(
+                    'fieldpath' => 'Users/apps/'.$this->platform.'/'.$this->appId.'/keys/users'
+                ));
+            }
+            $this->apiKey = $appInfo['keys']['users'];
+            $this->baseUrl = $appInfo['baseUrl'];
+        }
 	}
 
+    /**
+     * @method getTopic
+     * @param {string} $source Can be the URL of a topic, or a topic ID
+     * @return {array}
+     */
+    public function getTopic($source)
+    {
+        $this->_loadConfig();
+        $url = Q_Valid::url($source) ? $source : $this->baseUrl."t/$source.json";
+        if (substr($url, -5) !== '.json') {
+            $url .= '.json';
+        }
+        $headers = array(
+            "Api-Key: ".$this->apiKey,
+            "Api-Username: ".$this->getExtra('username', 'system')
+        );
+        $json = Q_Utils::get($url, null, null, $headers);
+        return json_decode($json, true);
+    }
+
+    /**
+     * @method postOnTopic
+     * @param {string} $topicId If you don't have it, call getTopic() and then fetch "id"
+     * @param {string} $content The raw content that the person would have typed (in markdown)
+     * @return {array}
+     */
+    public function postOnTopic($topicId, $content)
+    {
+        $this->_loadConfig();
+        $url = $this->baseUrl."/posts.json";
+        $username = $this->getExtra('username');
+        if (!$username) {
+            throw new Q_Exception_MissingObject(array('name' => 'username'));
+        }
+        $headers = array(
+            "Api-Key: ".$this->apiKey,
+            "Api-Username: ".$username
+        );
+        $data = array(
+            'topic_id' => $topicId,
+            'raw' => $content
+        );
+        return Q_Utils::post($url, $data, null, null, $headers);
+    }
+
+    /**
+     * Creates or updates a user in the Discourse forum
+     * corresponding to this Users_ExternalTo row
+     * @method create
+     * @return {array}
+     */
     public function create()
     {
         $this->_loadConfig();
         $user = Users::fetch($this->userId, true);
 
         // SECURITY: don't save api key to any request logs!
-        $url = sprintf("%s/users", $this->apiHost);
+        $url = sprintf("%s/users", $this->baseUrl);
         $defaultEmailAddress = Q::interpolate(
             Q_Config::get('Users', 'bots', 'defaults', 'email', ''),
             array('random' => Q_Utils::randomHexString(8))
@@ -48,24 +113,21 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         );
         $headers = array(
             "Api-Key: ".$this->apiKey,
-            "Api-Username: ".$this->apiUsername
+            "Api-Username: system"
         );
 
-        $text = Q_Text::get('Users/content');
-        Q_Utils::put($this->apiHost."/u/$username.json", array(
-            'title' => Q::ifset($text, 'external', 'defaults', 'title', ''),
-            'bio_raw' => Q::ifset($text, 'external', 'defaults', 'bio', ''),
-            'website' => Q::ifset($text, 'external', 'defaults', 'website', 'https://engageusers.ai')
-        ), null, null, $headers);
-
-        $response = Q_Utils::get($this->apiHost."/u/$username.json", null, null, $headers);
+        $response = Q_Utils::get($this->baseUrl."/u/$username.json", null, null, $headers);
         $result = json_decode($response);
         if (Q::ifset($result, 'error_type', null) !== 'not_found') {
             $user_id = Q::ifset($result, 'user', 'id', null);
+            $registered = false;
         } else {
             $response = Q_Utils::post($url, $fields, null,null, $headers);
             $result = json_decode($response);
             $user_id = Q::ifset($result, 'user_id', null);
+            if ($result) {
+                $registered = true;
+            }
             // // try up to 10 times with different usernames
             // for ($i = 0; !$success && $i < 10; ++$i) {
             //     $errorMessage = strtolower(Q::ifset($result, 'message', ''));
@@ -84,17 +146,27 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             //     $user_id = Q::ifset($result, 'user_id', null);
             // }
         }
+
+        $text = Q_Text::get('Users/content');
+        Q_Utils::put($this->baseUrl."/u/$username.json", array(
+            'title' => Q::ifset($text, 'external', 'defaults', 'title', ''),
+            'bio_raw' => Q::ifset($text, 'external', 'defaults', 'bio', ''),
+            'website' => Q::ifset($text, 'external', 'defaults', 'website', 'https://engageusers.ai')
+        ), null, null, $headers);
         
-        $url = sprintf("%s/admin/users/%d/trust_level", $this->apiHost, $user_id);
+        $url = sprintf("%s/admin/users/%d/trust_level", $this->baseUrl, $user_id);
         $response = Q_Utils::put($url, array(
             'level' => 3
         ), null,null, $headers);
 
         $this->setExtra('user_id', $user_id);
         $this->setExtra('username', $fields['username']);
+        $this->clearExtra('apiKey'); // shouldn't save it in the database
         $this->save(true);
 
-        $this->updateAvatar();
+        if ($registered) {
+            $this->updateAvatar();
+        }
     }
 
     function updateAvatar()
@@ -122,7 +194,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $imageInfo = getimagesize($filename);
         $cfile = curl_file_create($filename, $imageInfo['mime'], basename($filename));
 
-        $uploadsUrl = sprintf("%s/uploads.json", $this->apiHost);
+        $uploadsUrl = sprintf("%s/uploads.json", $this->baseUrl);
 
         $fields = array(
             'type' => 'avatar',
@@ -134,7 +206,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         // SECURITY: don't save api key to any request logs
         $headers = array(
             "Api-Key: ".$this->apiKey,
-            "Api-Username: ".$this->apiUsername,
+            "Api-Username: ".$username,
             "Content-Type: multipart/form-data"
         );
 
@@ -153,7 +225,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $uploadId = Q::ifset($result, 'id', null);
 
         if($uploadId) {
-            $updateAvatarUrl = sprintf("%s/u/%s/preferences/avatar/pick.json", $this->apiHost, $username);
+            $updateAvatarUrl = sprintf("%s/u/%s/preferences/avatar/pick.json", $this->baseUrl, $username);
 
             $data = array(
                 'upload_id' => $uploadId,
@@ -168,10 +240,10 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
     function logout($userId) {
         self::_loadConfig();
-        Q_Utils::post($this->apiHost . "/admin/users/$userId/log_out", array(), null, array(
+        Q_Utils::post($this->baseUrl . "/admin/users/$userId/log_out", array(), null, array(
             'Content-Type' => 'multipart/form-data',
             'Api-Key' => $this->apiKey,
-            'Api-Username' => $this->apiUsername
+            'Api-Username' => 'system'
         ));
     }
 
