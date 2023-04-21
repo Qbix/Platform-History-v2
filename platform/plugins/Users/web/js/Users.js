@@ -2475,7 +2475,7 @@
 		}, {
 			fields: {
 				userId: userId,
-				labels: filter
+				filter: filter
 			},
 			method: 'post'
 		});
@@ -2890,8 +2890,14 @@
 			js: "{{Users}}/js/tools/pile.js",
 			css: "{{Users}}/css/tools/pile.css"
 		},
-		"Users/labels": "{{Users}}/js/tools/labels.js",
-		"Users/contacts": "{{Users}}/js/tools/contacts.js",
+		"Users/labels": {
+			js: "{{Users}}/js/tools/labels.js",
+			css: "{{Users}}/css/tools/labels.css"
+		},
+		"Users/contacts": {
+			js: "{{Users}}/js/tools/contacts.js",
+			css: "{{Users}}/css/tools/contacts.css"
+		},
 		"Users/status": "{{Users}}/js/tools/status.js",
 		"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
 		"Users/getintouch": "{{Users}}/js/tools/getintouch.js",

@@ -397,8 +397,6 @@ a.Users_activation_resend:active {
 	vertical-align: middle;
 }
 #Users_setIdentifier_dialog .Users_identifier_web3 {
-	border: none;
-	font-size: 0.85em;
 	text-align: center;
 	cursor: pointer;
 	font-style: normal;
@@ -458,65 +456,6 @@ a.Users_activation_resend:active {
 	vertical-align: middle;
 }
 
-.Users_labels_tool ul,
-.Users_contacts_tool ul { list-style-type: none; padding: 0; }
-.Users_labels_tool li,
-.Users_contacts_tool li { list-style-type: none; padding: 0 10px; margin: 0 0 2px 0; border-radius: 5px; }
-.Users_labels_icon { width: 40px; height: 40px; }
-.Q_dialog_content .Users_labels_icon { display: inline-block; }
-.Users_labels_action { white-space: nowrap; }
-.Users_labels_active .Users_labels_label,
-.Users_labels_active .Users_labels_action.Users_labels_add,
-.Users_labels_action button { margin-top: 10px; width: 100%; }
-.Users_labels_tool .Users_labels_title,
-.Users_contacts_tool .Users_labels_title {
-	display: inline-block;
-	vertical-align: middle;
-	padding: 10px;
-	font-weight: bold;
-}
-.Users_labels_tool .Users_labels_label,
-.Users_contacts_tool .Users_labels_label,
-.Users_labels_tool .Users_labels_add,
-.Users_contacts_tool .Users_labels_add {
-	white-space: nowrap;
-}
-.Q_dialog_slot .Users_labels_tool .Users_labels_label,
-.Q_dialog_slot .Users_contacts_tool .Users_labels_label {
-	cursor: pointer;
-}
-
-.Users_labels_communityRoles ul {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: stretch;
-}
-
-.Users_labels_communityRoles .Users_labels_label {
-	display: inline-block;
-	width: 33%;
-	margin-top: 0;
-	padding-top: 10px;
-	vertical-align: top;
-	text-align: center;
-}
-.Users_labels_communityRoles .Users_labels_icon {
-	display: inline-block;
-	width: 80%;
-	height: auto;
-}
-.Users_labels_communityRoles .Users_labels_title {
-	display: block;
-	white-space: normal;
-	text-align: center;
-}
-
-.Users_labels_add_phonebook {
-	box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
-    border-radius: 5px;
-	background: rgb(128 128 128 / 20%);
-}
-
 .Users_getintouch_tool button {
 	background: transparent;
 	border: 1px solid #777;
@@ -559,9 +498,6 @@ button.Users_getintouch_call {
 	background: #2839c4;
 	color: white;
 }
-
-.Users_labels_icon { vertical-align: middle; }
-
 
 html.Users_loggedOut .Users_whenLoggedIn,
 html.Users_loggedIn .Users_whenLoggedOut {

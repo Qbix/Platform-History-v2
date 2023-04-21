@@ -1,0 +1,56 @@
+.Users_labels_tool .Users_labels_title,
+.Users_labels_tool .Users_labels_label,
+.Users_labels_tool .Users_labels_add {
+    white-space: nowrap;
+}
+.Users_labels_action { white-space: nowrap; }
+.Users_labels_active .Users_labels_label,
+.Users_labels_active .Users_labels_action.Users_labels_add,
+.Users_labels_action button { margin-top: 10px; width: 100%; }
+.Users_labels_tool ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+.Users_labels_tool .Users_labels_action,
+.Users_labels_tool .Users_labels_label {
+    display: inline-block;
+    margin-top: 0;
+    vertical-align: top;
+    width: 120px;
+    height: 144px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0;
+}
+.Q_mobile .Users_labels_tool .Users_labels_label,
+.Q_mobile .Users_labels_tool .Users_labels_action {
+    width: 30%;
+}
+.Users_labels_tool .Users_labels_icon {
+    display: inline-block;
+    width: 80px;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+.Users_labels_tool .Users_labels_title {
+    display: block;
+    white-space: normal;
+    text-align: center;
+    padding: 0;
+}
+.Users_labels_add_phonebook {
+    box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
+    border-radius: 5px;
+    background: rgb(128 128 128 / 20%);
+}
+.Users_labels_tool .Users_labels_label:hover {
+    text-shadow: 0 0 2px black;
+    box-shadow: 0 0 4px black;
+}
