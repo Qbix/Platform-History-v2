@@ -2,7 +2,8 @@
 
 function Users_discourse_post($params)
 {
-    if (!Users::roles(null, array('Users/owners', 'Users/admins'))) {
+    $authorized = Q_Config::get('Users', 'discourse', 'requireAuthorizedRole');
+    if ($authorized && !Users::roles(null, $authorized)) {
         throw new Users_Exception_NotAuthorized();
     }
     $r = array_merge($_REQUEST, $params);

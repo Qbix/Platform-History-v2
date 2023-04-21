@@ -2,7 +2,8 @@
 
 function Streams_discourse_post()
 {
-    if (!Users::roles(null, array('Users/owners', 'Users/admins'))) {
+    $authorized = Q_Config::get('Users', 'discourse', 'requireAuthorizedRole');
+    if ($authorized && !Users::roles(null, $authorized)) {
         throw new Users_Exception_NotAuthorized();
     }
     Q_Request::requireFields(array('userId', 'apiKey', 'topicUrl', 'attitude'), true);
