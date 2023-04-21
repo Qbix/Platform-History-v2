@@ -23,7 +23,8 @@ function Users_before_Q_objects(&$params)
 	
 	if ($user = Users::loggedInUser(false, false)
 	and $user->preferredLanguage
-	and Q_Config::get('Users', 'login', 'setLanguage', true)) {
+	and Q_Config::get('Users', 'login', 'setLanguage', true)
+	and !Q_Request::special('language')) {
 		Q_Text::setLanguage($user->preferredLanguage);
 	}
 
