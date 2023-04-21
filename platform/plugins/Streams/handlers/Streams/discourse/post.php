@@ -2,7 +2,7 @@
 
 function Streams_discourse_post()
 {
-    $authorized = Q_Config::get('Users', 'discourse', 'requireAuthorizedRole');
+    $authorized = Q_Config::get('Users', 'discourse', 'requireAuthorizedRole', false);
     if ($authorized && !Users::roles(null, $authorized)) {
         throw new Users_Exception_NotAuthorized();
     }
@@ -30,10 +30,10 @@ function Streams_discourse_post()
     $tail = $matches[3];
     if (preg_match('/(.*)\/(.*)\/(.*)/', $tail, $matches)) {
         $topicId = $matches[1];
-        $postIndex = intval($matches[3]) - 1;
+        $replyToPostIndex = intval($matches[3]) - 1;
     } else {
         $topicId = $tail;
-        $postIndex = 0;
+        $replyToPostIndex = 0;
     }
 
     // create a user if one isn't already there
@@ -47,7 +47,8 @@ function Streams_discourse_post()
     )))->retrieve();
     $uxt->setExtra(compact('baseUrl', 'apiKey'));
     $ret = $uxt->getTopic($topicUrl);
-    $input = substr($ret['post_stream']['posts'][$postIndex]['cooked'], 0, 1000);
+    $input = substr($ret['post_stream']['posts'][$replyToPostIndex]['cooked'], 0, 1000);
+    $topicTitle = $ret['title'];
 
     $languageClause = $languageName
         ? "Speak using $languageName language"
@@ -57,7 +58,7 @@ function Streams_discourse_post()
     // (currently 10x cheaper than gpt-3)
     $LLM = new Streams_LLM_OpenAI();
     $instructions = array(
-        'agree + actionable' => "What follows is HTML of a post. Write one or two paragraphs expressing agreement with the post, without explicitly saying you agree. Add interesting insights or ideas that can accomplish what is being discussed. The post: " . "\n" . $input,
+        'agree + actionable' => "What follows is HTML of a post. Write one or two paragraphs expressing agreement with the post, without explicitly saying the words 'I agree'. Add interesting insights or ideas that can accomplish what is being discussed. The post: " . "\n" . $input,
         'agree + emotive' => "What follows is HTML of a post. Write one paragraph expressing agreement with the post. Be enthusiastic and express emotion about the subject.\n$languageClause\nThe post:\n" . $input,
         'agree + expand' => "What follows is HTML of a post. Write one sentence expressing general agreement (avoiding saying 'I agree'), but then two paragraphs discusing a much larger and more important vision everyone should consider.\n$languageClause\nThe post:\n" . $input,
         'agree + changeSubject' => "What follows is HTML of a post. Write one sentence expressing general agreement (avoiding saying 'I agree'), but then two paragraphs discusing a related but different issue, and explain why it is more important. The post:\n" . $input,
@@ -79,7 +80,32 @@ function Streams_discourse_post()
     }
 
     // post to the forum
-    $uxt->postOnTopic($ret['id'], $content);
+    $result = $uxt->postOnTopic($ret['id'], $content);
+    $postIndex = Q::ifset($result, 'post_number', null);
+    if (isset($postIndex)) {
+        --$postIndex;
+    }
+
+    $postIndex = 1;
+
+    // save the result
+    $appId = Q::app();
+    $communityId = Users::communityId();
+    $categoryName = 'Streams/external/posts';
+    Streams_Stream::fetchOrCreate($communityId, $communityId, $categoryName, array(
+        'type' => 'Streams/category'
+    ));
+    Streams::create($communityId, $communityId, 'Streams/external/post', array(
+        'title' => "By $username on $topicTitle",
+        'content' => substr($content, 0, 2000),
+        'attributes' => compact('topicUrl', 'topicTitle', 'topicId', 'replyToPostIndex', 'postIndex', 'username', 'userId')
+    ), array(
+        'publisherId' => $communityId,
+        'streamName' => $categoryName,
+        'type' => 'Streams/external/posts',
+        'weight' => time()
+    ));
+
     $username = $uxt->getExtra('username');
     Q_Response::setSlot('data', compact('username', 'content'));
 }

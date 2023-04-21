@@ -31,11 +31,11 @@ function Streams_before_Q_responseExtras()
 	// collect url for all stream types and return to client
 	$types = Q_Config::get("Streams", "types", array());
 	$typeUrls = array();
-	foreach ($types as $type => $content) {
-		if (!isset($content['url'])) {
+	foreach ($types as $type => $data) {
+		if (!isset($data['url'])) {
 			continue;
 		}
-		$typeUrls[$type] = $content['url'];
+		$typeUrls[$type] = $data['url'];
 	}
 	Q_Response::setScriptData('Q.plugins.Streams.urls', $typeUrls);
 

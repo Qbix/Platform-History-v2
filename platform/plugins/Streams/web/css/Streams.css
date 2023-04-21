@@ -506,6 +506,10 @@
 
 .Streams_related_tool .Q_tabs_overflow .Q_inplace_tool_editbuttons { display: none !important; list-style-type: none; padding: 0; }
 
+.Streams_related_tool .Streams_preview_tool {
+	cursor: pointer;
+}
+
 .Streams_interests_filter_input {
 	width: 100%;
 	box-sizing: border-box;

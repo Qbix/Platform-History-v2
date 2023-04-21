@@ -2,7 +2,7 @@
 
 function Users_discourse_post($params)
 {
-    $authorized = Q_Config::get('Users', 'discourse', 'requireAuthorizedRole');
+    $authorized = Q_Config::get('Users', 'discourse', 'requireAuthorizedRole', false);
     if ($authorized && !Users::roles(null, $authorized)) {
         throw new Users_Exception_NotAuthorized();
     }

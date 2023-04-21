@@ -1431,6 +1431,10 @@ Sp.post = function (asUserId, fields, callback) {
 
 /**
  * Returns the canonical url of the stream, if any
+ * This function can use the Streams.Stream object's fields.
+ * You can use strings in the config "url" parameter, that follow Handlebars usage,
+ * and use double-curly-braces to enclose expressions like baseUrl, name, and attributes.foo.bar
+ * See more at https://handlebarsjs.com/guide/expressions.html#basic-usage
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
@@ -1441,13 +1445,16 @@ Sp.url = function (messageOrdinal, baseUrl)
 	if (!url) {
 		return null;
 	}
-	var urlString = Q.Handlebars.renderSource(url, {
-		publisherId: this.fields.publisherId,
-		streamName: this.fields.name.split('/'),
-		name: this.fields.name,
-		nameNormalized: Q.normalize(this.fields.name),
-		baseUrl: baseUrl || Q.Request.baseUrl()
-	});
+	var urlString = Q.Handlebars.renderSource(url, Q.extend(
+		{},
+		this.fields, 
+		this.getAllAttributes(),
+		{
+			streamName: this.fields.name.split('/'),
+			nameNormalized: Q.normalize(this.fields.name),
+			baseUrl: baseUrl || Q.Request.baseUrl()
+		}
+	));
 	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
 	return Q.url(urlString + qs);

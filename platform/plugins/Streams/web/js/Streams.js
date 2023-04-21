@@ -2535,6 +2535,9 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 
 /**
  * Returns the canonical url of the stream, if any
+ * You can use strings in the config "url" parameter, that follow Handlebars usage,
+ * and use double-curly-braces to enclose expressions like baseUrl, name, and attributes.foo.bar
+ * See more at https://handlebarsjs.com/guide/expressions.html#basic-usage
  * @method url
  * @static
  * @param {String} publisherId
@@ -2544,7 +2547,7 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
-Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseUrl) {
+Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseUrl, fields) {
 	if (streamType == null) {
 		streamType = streamName.split('/').slice(0, -1).join('/');
 	}
@@ -2556,13 +2559,13 @@ Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseU
 	}
 	var urlString = '';
 	Q.Template.set(url, url);
-	Q.Template.render(url, {
+	Q.Template.render(url, Q.extend({
 		publisherId: publisherId,
 		streamName: streamName.split('/'),
 		name: streamName,
 		nameNormalized: Q.normalize(streamName),
 		baseUrl: baseUrl || Q.baseUrl()
-	}, function (err, html) {
+	}, fields), function (err, html) {
 		if (err) return;
 		urlString = html;
 	});
@@ -2973,7 +2976,11 @@ Sp.removePermission = function (permission) {
 	pf.permissions = JSON.stringify(permissions);
 };
 /**
- * Returns the canonical url of the stream, if any
+ * Returns the canonical url of the stream, if any.
+ * Unlike Streams.url(), this function can use the Streams.Stream object's fields.
+ * You can use strings in the config "url" parameter, that follow Handlebars usage,
+ * and use double-curly-braces to enclose expressions like baseUrl, name, and attributes.foo.bar
+ * See more at https://handlebarsjs.com/guide/expressions.html#basic-usage
  * @method url
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
@@ -2982,7 +2989,8 @@ Sp.removePermission = function (permission) {
 Sp.url = function (messageOrdinal, baseUrl) {
 	return Streams.Stream.url(
 		this.fields.publisherId, this.fields.name,
-		this.fields.type, messageOrdinal, baseUrl
+		this.fields.type, messageOrdinal, baseUrl,
+		Q.extend({}, this, {attributes: this.getAllAttributes()})
 	);
 };
 /**

@@ -223,7 +223,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 *   to the stream right after creating it. You can also pass an array of options 
 	 *   that will be passed to the subscribe function.
 	 * @param {array} [$options.fields] to pass to create function,
-	 *   if you want to set some fields besides "name"
+	 *   if you want to set some fields besides "name".
 	 * @param {array} [$options.relate] to pass to create function,
 	 *   if you want to relate the newly created stream to a category
 	 * @param {array} [$options.type] to pass to create function,
@@ -249,7 +249,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$fields['name'] = $name;
 		$stream = Streams::create($asUserId, 
 			$publisherId, 
-			Q::ifset($options, 'type', null),
+			Q::ifset($options, 'type', Q::ifset($options, 'fields', 'type'), null),
 			$fields, 
 			Q::ifset($options, 'relate', null),
 			$relateResults
@@ -2266,7 +2266,10 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Returns the canonical url of the stream, if any
+	 * Returns the canonical url of the stream, if any.
+	 * You can use strings in the config "url" parameter, that follow Handlebars usage,
+	 * and use double-curly-braces to enclose expressions like baseUrl, name, and attributes.foo.bar
+	 * See more at https://handlebarsjs.com/guide/expressions.html#basic-usage
 	 * @param {integer} [$messageOrdinal] pass this to link to the message in the stream, e.g. to highlight it
 	 * @param {string} [$baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
 	 * @return {string|null|false}
@@ -2283,13 +2286,18 @@ class Streams_Stream extends Base_Streams_Stream
 			Q::log("Streams_Stream->url(): The URL string doesn't match some fields in the stream name: $url");
 			return null;
 		}
-		$urlString = Q_Handlebars::renderSource($url, array(
-			'publisherId' => $this->publisherId,
-			'streamName' => $streamNameParts,
-			'name' => $this->name,
-			'nameNormalized' => Q_Utils::normalize($this->name),
-			'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
-		));
+		$fields = array_merge(
+			$this->fields, 
+			array(
+				'attributes' => $this->getAllAttributes()
+			),
+			array(
+				'streamName' => $streamNameParts,
+				'nameNormalized' => Q_Utils::normalize($this->name),
+				'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
+			)
+		);
+		$urlString = Q_Handlebars::renderSource($url, $fields);
 		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
 		return Q_Uri::url($urlString . $qs);
 	}

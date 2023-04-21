@@ -568,6 +568,13 @@
 			},
 			"Streams/user/profile": {
 				"url": "{{baseUrl}}/profile/{{publisherId}}"
+			},
+			"Streams/external/post": {
+				"defaults": {
+					"title": "External Post",
+					"icon": "Streams/external/post"
+				},
+				"url": "{{attributes.topicUrl}}"
 			}
 		},
 		"categorize": {

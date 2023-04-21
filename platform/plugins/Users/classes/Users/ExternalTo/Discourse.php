@@ -61,9 +61,12 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
      * @method postOnTopic
      * @param {string} $topicId If you don't have it, call getTopic() and then fetch "id"
      * @param {string} $content The raw content that the person would have typed (in markdown)
+     * @param {array} $options
+     * @param {integer} $options['reply_to_post_number'] optionally pass the index of the post replying to.
+     *    But see https://meta.discourse.org/t/sets-reply-to-when-creating-a-message-through-the-api/80903/4
      * @return {array}
      */
-    public function postOnTopic($topicId, $content)
+    public function postOnTopic($topicId, $content, $options = array())
     {
         $this->_loadConfig();
         $url = $this->baseUrl."/posts.json";
@@ -79,7 +82,11 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
             'topic_id' => $topicId,
             'raw' => $content
         );
-        return Q_Utils::post($url, $data, null, null, $headers);
+        if (isset($options['reply_to_post_number'])) {
+            $data['reply_to_post_number'] = $options['reply_to_post_number'];
+        }
+        $json = Q_Utils::post($url, $data, null, null, $headers);
+        return json_decode($json, true);
     }
 
     /**
