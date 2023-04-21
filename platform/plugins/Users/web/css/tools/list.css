@@ -1,0 +1,36 @@
+.Users_list_tool {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: baseline;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+.Q_mobile .Users_list_tool {
+    row-gap: 10px;
+    column-gap: 10px;
+}
+.Users_list_tool .Users_avatar_name {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.Users_list_tool.Users_list_40 .Users_avatar_tool {
+    max-width: 40px;
+}
+.Users_list_tool.Users_list_50 .Users_avatar_tool {
+    max-width: 50px;
+}
+.Users_list_tool.Users_list_80 .Users_avatar_tool {
+    max-width: 80px;
+}
+.Users_list_tool.Users_list_200 .Users_avatar_tool {
+    max-width: 200px;
+}
+.Users_list_tool.Users_list_400 .Users_avatar_tool {
+    max-width: 400px;
+}
+.Users_list_tool .Users_avatar_name {
+    text-overflow: ellipsis;
+}

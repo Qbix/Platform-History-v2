@@ -2885,7 +2885,10 @@
 	);
 	Q.Tool.define({
 		"Users/avatar": "{{Users}}/js/tools/avatar.js",
-		"Users/list": "{{Users}}/js/tools/list.js",
+		"Users/list": {
+			js: "{{Users}}/js/tools/list.js",
+			css: "{{Users}}/css/tools/list.css"
+		},
 		"Users/pile": {
 			js: "{{Users}}/js/tools/pile.js",
 			css: "{{Users}}/css/tools/pile.css"
