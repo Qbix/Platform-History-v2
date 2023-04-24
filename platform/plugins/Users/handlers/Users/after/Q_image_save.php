@@ -71,7 +71,7 @@ function Users_after_Q_image_save($params, &$return)
 
         // whether logged user assigned as one of $labelsCanManage to $anotherUser
 		$permitted = (bool)Users::roles($anotherUserId, $labelsCanManage, array(), $user->id);
-		if (!$permitted && $userIdentity->state == "future") {
+		if (!$permitted) {
 			$permitted = (bool)Users::roles($anotherUserId, array("Streams/invitedMe"), array(), $user->id);
 		}
 

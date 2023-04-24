@@ -20,7 +20,7 @@ Q.Tool.define('Q/paging', function (options) {
 
 	var tool = this;
 	var state = this.state;
-	if (!tool.state.total) {
+	if (!('total' in tool.state)) {
 		throw new Q.Error("options.total is required");
 	}
 

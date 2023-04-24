@@ -359,7 +359,7 @@ Streams.iconUrl = function(icon, basename) {
 	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
 	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
-		? src
+		? Q.url(src)
 		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
@@ -1866,9 +1866,19 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 correctLevel : QRCode.CorrectLevel.H
                             });
                             var _setPhoto = function (message) {
+                            	var invitingUserId = Q.getObject("byUserId", message);
+                            	var title = Q.getObject(['invite', 'dialog', 'photo'], text);
+                            	if (invitingUserId) {
+									title = Q.getObject(['invite', 'dialog', 'photoOf'], text).interpolate({"name": message.getInstruction("displayName")});
+								}
+                            	var subpath = loggedUserId.splitId() + '/invited/' + rsd.invite.token;
+								if (invitingUserId) {
+									subpath = invitingUserId.splitId() + '/icon/' + Math.floor(Date.now()/1000);
+								}
+
                             	Q.Dialogs.pop();
 								Q.Dialogs.push({
-									title: Q.getObject(['invite', 'dialog', 'photo'], text),
+									title: title,
 									apply: true,
 									className: "Dialog_invite_photo_camera",
 									content:
@@ -1887,13 +1897,26 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										var o = {
 											path: 'Q/uploads/Users',
 											save: 'Users/icon',
-											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
+											subpath: subpath,
 											saveSizeName: saveSizeName,
 											onFinish: function () {
 												Q.Dialogs.pop();
 											}
 										};
 										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
+
+										if (invitingUserId) {
+											rss.onMessage('User/icon/filled').set(function (stream, msg) {
+												if (
+													message.getInstruction('token') !== Q.getObject("invite.token", rsd)
+													|| invitingUserId !== msg.getInstruction('userId')
+												) {
+													return;
+												}
+
+												Q.Dialogs.close(dialog);
+											}, 'User_icon_filled_' + invitingUserId);
+										}
 									}
 								});
 							};
@@ -1903,7 +1926,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 									return;
 								}
 
-								_setPhoto();
+								_setPhoto(message);
 							}, 'Streams_invite_QR_content');
                         });
                     }
@@ -1994,7 +2017,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				title: text.invite.labels.title,
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.loggedInUserId(),
-					filter: 'Users/'
+					filter: 'Users/',
+					canGrant: true
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,
@@ -2535,6 +2559,9 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 
 /**
  * Returns the canonical url of the stream, if any
+ * You can use strings in the config "url" parameter, that follow Handlebars usage,
+ * and use double-curly-braces to enclose expressions like baseUrl, name, and attributes.foo.bar
+ * See more at https://handlebarsjs.com/guide/expressions.html#basic-usage
  * @method url
  * @static
  * @param {String} publisherId
@@ -2544,7 +2571,7 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
-Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseUrl) {
+Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseUrl, fields) {
 	if (streamType == null) {
 		streamType = streamName.split('/').slice(0, -1).join('/');
 	}
@@ -2556,13 +2583,13 @@ Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseU
 	}
 	var urlString = '';
 	Q.Template.set(url, url);
-	Q.Template.render(url, {
+	Q.Template.render(url, Q.extend({
 		publisherId: publisherId,
 		streamName: streamName.split('/'),
 		name: streamName,
 		nameNormalized: Q.normalize(streamName),
 		baseUrl: baseUrl || Q.baseUrl()
-	}, function (err, html) {
+	}, fields), function (err, html) {
 		if (err) return;
 		urlString = html;
 	});
@@ -2973,7 +3000,11 @@ Sp.removePermission = function (permission) {
 	pf.permissions = JSON.stringify(permissions);
 };
 /**
- * Returns the canonical url of the stream, if any
+ * Returns the canonical url of the stream, if any.
+ * Unlike Streams.url(), this function can use the Streams.Stream object's fields.
+ * You can use strings in the config "url" parameter, that follow Handlebars usage,
+ * and use double-curly-braces to enclose expressions like baseUrl, name, and attributes.foo.bar
+ * See more at https://handlebarsjs.com/guide/expressions.html#basic-usage
  * @method url
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
@@ -2982,7 +3013,8 @@ Sp.removePermission = function (permission) {
 Sp.url = function (messageOrdinal, baseUrl) {
 	return Streams.Stream.url(
 		this.fields.publisherId, this.fields.name,
-		this.fields.type, messageOrdinal, baseUrl
+		this.fields.type, messageOrdinal, baseUrl,
+		Q.extend({}, this, {attributes: this.getAllAttributes()})
 	);
 };
 /**

@@ -426,25 +426,6 @@ a.Users_activation_resend:active {
 .Users_login_dialog { display: none; }
 .Users_login_dialog.Q_overlay { display: block; }
 
-.Users_list_tool {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-content: baseline;
-	row-gap: 20px;
-	column-gap: 20px;
-}
-.Q_mobile .Users_list_tool {
-	row-gap: 10px;
-	column-gap: 10px;
-}
-.Users_list_tool .Users_avatar_name {
-	display: block;
-	text-align: center;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
 .Users_avatar_tool {
 	vertical-align: top;
 	white-space: nowrap;

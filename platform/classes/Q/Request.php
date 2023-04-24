@@ -1051,7 +1051,8 @@ class Q_Request
 			return $ret;
 		}
 		$available = Q_Config::get('Q', 'web', 'languages', array('en' => 1));
-		if ($language = Q_Request::special('language', null)) {
+		if ($language = Q_Request::special('language', null)
+		and !empty($available[$language])) {
 			$parts1 = explode(',', $language);
 			$parts2 = explode('-', array_shift($parts1));
 			return array(array_merge($parts2, $parts1));

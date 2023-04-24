@@ -54,7 +54,17 @@ function _Streams_default_preview(options, preview) {
 			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
 	},
-	onInvoke: new Q.Event(),
+	onInvoke: new Q.Event(function () {
+		var ps = this.preview.state;
+		Q.Streams.get(ps.publisherId, ps.streamName, function (err, stream) {
+			if (stream) {
+				var url = url = stream.url();
+				if (url) {
+					Q.handle(url);
+				}
+			}
+		});
+	}, 'Streams/default/preview'),
 	onRefresh: new Q.Event()
 },
 
