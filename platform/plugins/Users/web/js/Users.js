@@ -281,7 +281,8 @@
 			return false;
 		}
 		return !!(icon.indexOf('imported') >= 0
-		|| icon.match(/\/icon\/[0-9]+/));
+		|| icon.match(/\/icon\/[0-9]+/))
+		|| icon.indexOf('invited') >= 0;
 	};
 
 	/**
