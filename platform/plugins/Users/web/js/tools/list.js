@@ -29,6 +29,10 @@ Q.Tool.define('Users/list', function () {
 	}
 	var lastScrollTop = 0;
 	var $te = $(tool.element);
+	var avatarIconSize = parseInt(Q.getObject("avatar.icon", state));
+	if (avatarIconSize) {
+		$te.addClass('Users_list_' + avatarIconSize);
+	}
 	$te.addClass('Q_overflow').on('scroll', function () {
 		var scrollTop = $te.scrollTop();
 		if (scrollTop === lastScrollTop) {
