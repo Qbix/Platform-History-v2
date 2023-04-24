@@ -5657,6 +5657,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function onScreensharingStarting(e) {
                 log('onScreensharingStarting', e)
                 let videoTracks = e.participant.videoTracks(true);
+                console.log('onScreensharingStarting: videoTracks', videoTracks)
                 if(videoTracks.length != 0) {
                     log('onScreensharingStarting 1')
                     var screenForScreensharing = createRoomScreen(e.participant);

@@ -235,7 +235,7 @@ window.WebRTCRoomClient = function app(options){
         this.videoTracks = function (activeTracksOnly) {
             if(activeTracksOnly) {
                 return this.tracks.filter(function (trackObj) {
-                    return trackObj.kind == 'video' && !(/*trackObj.mediaStreamTrack.muted == true || */trackObj.mediaStreamTrack.enabled == false || trackObj.mediaStreamTrack.readyState == 'ended');
+                    return trackObj.kind == 'video' && !(/*trackObj.mediaStreamTrack.muted == true || */trackObj.mediaStreamTrack.enabled == false || trackObj.mediaStreamTrack.readyState == 'ended' || trackObj.stream.active == false);
                 });
             }
 
@@ -1633,7 +1633,8 @@ window.WebRTCRoomClient = function app(options){
                     track:track,
                     participant:participant
                 });
-                if (e instanceof Event) {
+                if (e.constructor.name == 'Event') {
+                    log('mediaStreamTrack ended: disable', e, track);
                     app.localMediaControls.disableVideo([track]);
                 }
             });
@@ -2936,6 +2937,10 @@ window.WebRTCRoomClient = function app(options){
                     if(existingParticipant.RTCPeerConnection != null) existingParticipant.RTCPeerConnection.close();
                     participantDisconnected(existingParticipant);
                 }
+            });
+
+            socket.on('disconnect', function (sid){
+                log('local participant disconnected');
             });
 
             socket.on('Streams/webrtc/leave', function (){
@@ -5518,15 +5523,19 @@ window.WebRTCRoomClient = function app(options){
                 for (let i = localParticipant.tracks.length - 1; i >= 0; i--) {
                     if(localParticipant.tracks[i].kind != 'video' || (options.showScreenSharingInSeparateScreen && localParticipant.tracks[i].screensharing == true)) continue;
                     log('disableVideoTracks: all: stop');
-                    localParticipant.tracks[i].mediaStreamTrack.stop();
-                    localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
+                    if (localParticipant.tracks[i].mediaStreamTrack.readyState != 'ended') {
+                        localParticipant.tracks[i].mediaStreamTrack.stop();
+                        localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
+                    }
                 }
             } else  {
                 log('disableVideoTracks: tracksToDisable', tracksToDisable);
 
                 for (let i = 0; i < tracksToDisable.length; i++) {
-                    tracksToDisable[i].mediaStreamTrack.stop();
-                    tracksToDisable[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
+                    if (tracksToDisable[i].mediaStreamTrack.readyState != 'ended') {
+                        tracksToDisable[i].mediaStreamTrack.stop();
+                        tracksToDisable[i].mediaStreamTrack.dispatchEvent(new CustomEvent("ended"));
+                    }
                 }
             }
 

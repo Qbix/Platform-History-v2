@@ -332,6 +332,7 @@
                         var _size = {width:1280, height: 720};
                         var _inputCtx = null;
                         var _isActive = null;
+                        var _canvasRenderInterval = null;
 
                         function createCanvas() {
                             var videoCanvas = document.createElement("CANVAS");
@@ -2623,7 +2624,6 @@
                                     fitTextFont();
                                 }
                                 font = _inputCtx.font;
-                                log('getFontSizeinfo', font)
                                 _inputCtx.restore();
         
                                 return {
@@ -3166,6 +3166,8 @@
                         function compositeVideosAndDraw() {
                             log('compositeVideosAndDraw 0');
                             log('compositeVideosAndDraw');
+                            if(_isActive) return;
+                            
                             if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
         
                             updateActiveWebRTCLayouts();
@@ -3173,14 +3175,17 @@
                             //drawVideosOnCanvas();
                             //audioTimerLoop(drawVideosOnCanvas, 1000 / 60)
 
-                            var canvasRenderInterval = window.setWorkerInterval(function () {
-                                drawVideosOnCanvas();
-
-                                //log('compositeVideosAndDraw', tool.webrtcSignalingLib.state)
-                                if(tool.webrtcSignalingLib.state == 'disconnected') {
-                                    window.clearWorkerInterval(canvasRenderInterval);
-                                }
-                            }, 16);
+                            if(!_canvasRenderInterval) {
+                                _canvasRenderInterval = window.setWorkerInterval(function () {
+                                    drawVideosOnCanvas();
+    
+                                    //log('compositeVideosAndDraw', tool.webrtcSignalingLib.state)
+                                    if(tool.webrtcSignalingLib.state == 'disconnected') {
+                                        window.clearWorkerInterval(canvasRenderInterval);
+                                        _canvasRenderInterval = null;
+                                    }
+                                }, 16);
+                            }
                             refreshEventListeners();
                         }
         
@@ -3325,7 +3330,7 @@
                                     }
 
                                     function updateRealToBasicGrid() {
-                                        log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
+                                        //log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
 
                                         var actualLayoutRects = [];
                                         for (let i in _activeScene.webrtcSources) {
@@ -3336,7 +3341,7 @@
                                             });
                                         }
                                         var actualLayoutRectsClone = [...actualLayoutRects];
-                                        log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
+                                        //log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
 
                                         // for(let r = _layoutManagerContext.basicGridRects.length - 1; r >= 0 ; r--){ryb
                                         for (let r in _layoutManagerContext.basicGridRects) {
@@ -3344,10 +3349,10 @@
 
                                             let closestIndex = closest(rect, actualLayoutRectsClone);
 
-                                            log('updateRealToBasicGrid closestIndex', r, closestIndex);
-                                            log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                                            //log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                                            //log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
                                             if (actualLayoutRects[closestIndex]) {
-                                                log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
+                                                //log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
                                             }
 
                                             if (closestIndex == null) continue;
@@ -3395,11 +3400,11 @@
                                     }
 
                                     function simpleGrid(count, size, perRow, rowsNum) {
-                                        log('simpleGrid', size, count);
+                                        //log('simpleGrid', size, count);
                                         var rects = [];
                                         var layoutMargins = _webrtcGroupSource.params.tiledLayoutMargins != null ? _webrtcGroupSource.params.tiledLayoutMargins : 0;
                                         var spaceBetween = parseInt(layoutMargins);
-                                        log('simpleGrid spaceBetween', spaceBetween);
+                                        //log('simpleGrid spaceBetween', spaceBetween);
 
                                         var rectHeight;
                                         var rectWidth = (size.parentWidth / perRow) - (spaceBetween * (perRow - 1));
@@ -3421,13 +3426,13 @@
                                         rectWidth = newRectSize.width;
                                         rectHeight = newRectSize.height;*/
                                         rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
-                                        log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
+                                        //log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
 
                                         var isNextNewLast = false;
                                         var rowItemCounter = 1;
                                         var i;
                                         for (i = 1; i <= count; i++) {
-                                            log('simpleGrid for', currentRow, rowsNum);
+                                            //log('simpleGrid for', currentRow, rowsNum);
 
                                             var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(size.x, size.y, 0, 0);
                                             var currentRow = isNextNewLast ? rowsNum : Math.ceil(i / perRow);
@@ -3451,11 +3456,11 @@
                                             } else rowItemCounter++;
                                         }
 
-                                        log('simpleGrid rects', rects);
+                                        //log('simpleGrid rects', rects);
 
                                         //return rects;
                                         let rcts = centralizeRects(rects);
-                                        log('simpleGrid centralizeRects', rcts);
+                                        //log('simpleGrid centralizeRects', rcts);
 
                                         return rcts;
                                     }
@@ -3805,7 +3810,7 @@
                                     }
 
                                     function updateRealToBasicGrid() {
-                                        log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
+                                        //log('updateRealToBasicGrid START', _activeScene.webrtcSources.length, _layoutManagerContext.basicGridRects.length)
                                         var actualLayoutRects = [];
                                         for (let i in _activeScene.webrtcSources) {
                                             if (_activeScene.webrtcSources[i].sourceType != 'webrtc') continue;
@@ -3815,7 +3820,7 @@
                                             });
                                         }
                                         var actualLayoutRectsClone = [...actualLayoutRects];
-                                        log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
+                                        //log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
 
                                         // for(let r = _layoutManagerContext.basicGridRects.length - 1; r >= 0 ; r--){ryb
                                         for (let r in _layoutManagerContext.basicGridRects) {
@@ -3823,10 +3828,10 @@
 
                                             let closestIndex = closest(rect, actualLayoutRectsClone);
 
-                                            log('updateRealToBasicGrid closestIndex', r, closestIndex);
-                                            log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                                            //log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                                            //log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
                                             if (actualLayoutRects[closestIndex]) {
-                                                log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
+                                                //log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
                                             }
 
                                             if (closestIndex == null) continue;
@@ -3867,8 +3872,8 @@
                                     }
 
                                     function simpleGrid(count, size, perRow, rowsNum, asSquares) {
-                                        log('simpleGrid', perRow, rowsNum);
-                                        log('simpleGrid container size', size.parentWidth, size.parentHeight);
+                                        //log('simpleGrid', perRow, rowsNum);
+                                        //log('simpleGrid container size', size.parentWidth, size.parentHeight);
                                         var rects = [];
                                         var spaceBetween = 22;
                                         var rectHeight;
@@ -3878,7 +3883,7 @@
                                         // if(((rectWidth * perRow) / size.parentWidth) * 100 > 24 ) rectWidth = size.parentWidth / 100 * 24;
 
                                         if (rowsNum == null) {
-                                            log('simpleGrid if1');
+                                            //log('simpleGrid if1');
 
                                             let primaryRectHeight = size.parentHeight / Math.ceil(count / perRow)
                                             rowsNum = Math.floor(size.parentHeight / (primaryRectHeight));
@@ -3889,9 +3894,9 @@
                                             log('simpleGrid if2');
                                             rectHeight = (size.parentHeight - (spaceBetween * rowsNum) - spaceBetween) / rowsNum;
                                         }
-                                        log('simpleGrid rect size0', rectWidth, rectHeight);
+                                        //log('simpleGrid rect size0', rectWidth, rectHeight);
 
-                                        log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
+                                        //log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
                                         let rectSize = Math.min(rectWidth, rectHeight);
                                         //if(((rectSize * perRow) / size.parentWidth) * 100 > 40 ) rectSize = (size.parentWidth / 100 * 40) / perRow;
 
@@ -3905,16 +3910,16 @@
                                             rectHeight = newRectSize.height;
                                         }
 
-                                        log('simpleGrid rect size1', rectWidth, rectHeight);
+                                        //log('simpleGrid rect size1', rectWidth, rectHeight);
 
                                         if (rowsNum == null) rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
-                                        log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
+                                        //log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
 
                                         var isNextNewLast = false;
                                         var rowItemCounter = 1;
                                         var i;
                                         for (i = 1; i <= count; i++) {
-                                            log('simpleGrid for', currentRow, rowsNum);
+                                            //log('simpleGrid for', currentRow, rowsNum);
 
                                             var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(size.x, size.y, 0, 0);
                                             var currentRow = isNextNewLast ? rowsNum : Math.ceil(i / perRow);
@@ -3939,7 +3944,7 @@
                                         }
 
 
-                                        log('simpleGrid rects', rects);
+                                        //log('simpleGrid rects', rects);
 
 
 
