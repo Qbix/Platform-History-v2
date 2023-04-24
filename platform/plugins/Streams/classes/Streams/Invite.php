@@ -182,14 +182,17 @@ class Streams_Invite extends Base_Streams_Invite
 		$stream = Streams_Stream::fetch(
 			$this->userId, $this->publisherId, $this->streamName, true
 		);
-		
+
+		$instructions = Q::take($this->fields, array(
+			'token', 'userId', 'invitingUserId', 'appUrl',
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+			'ofUserId', 'ofContactLabel'
+		));
+		$instructions['displayName'] = Users::fetch($userId, true)->displayName();
+
 		$stream->post($userId, array(
 			'type' => 'Streams/invite/accept',
-			'instructions' => Q::take($this->fields, array(
-				'token', 'userId', 'invitingUserId', 'appUrl',
-				'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-				'ofUserId', 'ofContactLabel'
-			))
+			'instructions' => $instructions
 		), true);
 		
 		if (!empty($options['access'])) {

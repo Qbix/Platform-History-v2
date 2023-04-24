@@ -281,7 +281,8 @@
 			return false;
 		}
 		return !!(icon.indexOf('imported') >= 0
-		|| icon.match(/\/icon\/[0-9]+/));
+		|| icon.match(/\/icon\/[0-9]+/))
+		|| icon.indexOf('invited') >= 0;
 	};
 
 	/**
@@ -1230,7 +1231,7 @@
 		basename = (String(basename).indexOf('.') >= 0) ? basename : basename + '.png';
 		var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
 		return src.isUrl() || icon.substr(0, 2) === '{{'
-			? src
+			? Q.url(src)
 			: Q.url('{{Users}}/img/icons/' + src);
 	};
 
