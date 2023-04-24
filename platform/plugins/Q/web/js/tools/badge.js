@@ -78,11 +78,20 @@
 			tool.refresh();
 		});
 
-		$te.on('DOMNodeRemoved', function(e) {
-			if (Q.instanceOf(e.target, Element) && e.target.classList.contains("Q_badge")) {
-				setTimeout(tool.refresh.bind(tool), 0);
-			}
-		});
+		// observe tool childs removed
+		(new MutationObserver(function (mutations) {
+			mutations.forEach(function(mutation) {
+				if (mutation.type !== 'childList' || Q.isEmpty(mutation.removedNodes)) {
+					return;
+				}
+
+				mutation.removedNodes.forEach(function(removedElement) {
+					if (Q.instanceOf(removedElement, Element) && removedElement.classList.contains("Q_badge")) {
+						setTimeout(tool.refresh.bind(tool), 500);
+					}
+				});
+			});
+		})).observe(tool.element, { attributes: true, childList: true, characterData: true });
 	},
 	{
 		tl: null,
@@ -106,7 +115,7 @@
 				// if empty corner - remove this badge
 				if (Q.typeOf(badgeStyle) !== "object") {
 					if ($badgeElement instanceof jQuery) {
-						$badgeElement.remove();
+						$badgeElement.removeClass('Q_badge').remove();
 					}
 
 					return;
@@ -200,6 +209,10 @@
 
 				// if badge element don't exist - create one
 				if (!($badgeElement instanceof jQuery) || !$badgeElement.is(":visible")) {
+					if ($badgeElement instanceof jQuery && !$badgeElement.is(":visible")) {
+						$badgeElement.removeClass('Q_badge').remove();
+					}
+
 					$badgeElement = $("<div class='Q_badge'>").appendTo($te);
 
 					if (Q.typeOf(badgeStyle.onClick) === 'function') {
