@@ -242,11 +242,11 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Get information as to which community roles a user can add, remove or see.
+	 * Get information as to which community roles a user can grant, revoke or see.
 	 * @method can
 	 * @param {string} $communityId The community for which we are checking labels
 	 * @param {string} [$userId=null] The user whose access we are checking. Defaults to logged-in user.
-	 * @return array Contains "add", "remove", "see", "roles", "manageIcon" arrays of labels
+	 * @return array Contains "grant", "revoke", "see", "roles", "manageIcon" arrays of labels
 	 */
 	static function can($communityId, $userId = null)
 	{
@@ -263,8 +263,8 @@ class Users_Label extends Base_Users_Label
 		$result = array(
 			"manageIcon" => false,
 			"manageContacts" => Users::canManageContacts($userId, $communityId, Q::app()."/"),
-			"add" => array(),
-			"remove" => array(),
+			"grant" => array(),
+			"revoke" => array(),
 			"see" => array()
 		);
 		foreach ($userCommunityRoles as $role => $row) {
