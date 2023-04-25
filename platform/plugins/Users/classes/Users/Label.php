@@ -271,10 +271,10 @@ class Users_Label extends Base_Users_Label
 			$result["roles"][] = $role;
 			foreach ($communityRoles as $label) {
 				if (Users_Label::canGrantLabel($role, $label)) {
-					$result["add"][] = $label;
+					$result["grant"][] = $label;
 				}
 				if (Users_Label::canRevokeLabel($role, $label)) {
-					$result["remove"][] = $label;
+					$result["revoke"][] = $label;
 				}
 				if (Users_Label::canSeeLabel($role, $label)) {
 					$result["see"][] = $label;
