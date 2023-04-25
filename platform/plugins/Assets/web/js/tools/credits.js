@@ -87,7 +87,7 @@ Q.Tool.define("Assets/credits", function (options) {
 					size: Q.info.isMobile ? '50px' : '60px',
 					left: Q.info.isMobile ? "45%" : '140px',
 					top: Q.info.isMobile ? "-30px" : "-2px",
-					className: "User_avatar_credits",
+					className: "Users_avatar_credits",
 					content: this.getAttribute("amount")
 				}
 			}).activate(function () {
