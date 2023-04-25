@@ -66,7 +66,7 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Add a contact label
+	 * Add a label / role
 	 * @method {boolean} addLabel
 	 * @static
 	 * @param {string|array} $label A label or array of ($label => $title)
@@ -143,7 +143,7 @@ class Users_Label extends Base_Users_Label
 	}
 	
 	/**
-	 * Update labels
+	 * Update labels / roles
 	 * @method updateLabel
 	 * @static
 	 * @param {string} $label
@@ -185,7 +185,7 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Remove label
+	 * Remove a label / role
 	 * @method removeLabel
 	 * @static
 	 * @param {string} $label
@@ -209,7 +209,7 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Whether $label_1 can add $label_2
+	 * Whether $label_1 can grant $label_2
 	 * @method canGrantLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
@@ -293,7 +293,7 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Whether $label_1 can remove $label_2
+	 * Whether $label_1 can revoke $label_2
 	 * @method canRevokeLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
