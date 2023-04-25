@@ -13779,8 +13779,14 @@ Q.Dialogs = {
 		if (dontTriggerClose === undefined) {
 			dontTriggerClose = false;
 		}
-		
-		var $dialog = this.dialogs.pop();
+
+		var $dialog = this.dialogs[this.dialogs.length - 1];
+		if (Q.Dialogs.dontPop) {
+			Q.Dialogs.dontPop = false;
+		} else {
+			$dialog = this.dialogs.pop();
+		}
+
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].removeClass('Q_hide');
 		}
@@ -13822,6 +13828,7 @@ Q.Dialogs = {
 		}
 		if (index >= 0) {
 			this.dialogs.splice(index, 1);
+			Q.Dialogs.dontPop = true;
 			$(dialog).plugin('Q/dialog', 'close');
 			return dialog;
 		}
