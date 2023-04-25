@@ -242,57 +242,6 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Get information as to which community roles a user can grant, revoke or see.
-	 * @method can
-	 * @param {string} $communityId The community for which we are checking labels
-	 * @param {string} [$userId=null] The user whose access we are checking. Defaults to logged-in user.
-	 * @return array Contains "grant", "revoke", "see", "roles", "manageIcon" arrays of labels
-	 */
-	static function can($communityId, $userId = null)
-	{
-		if (!$userId) {
-			$user = Users::loggedInUser();
-			if (!$user) {
-				return array();
-			}
-			$userId = $user->id;
-		}
-		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
-		$communityRoles = self::ofCommunities();
-		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
-		$result = array(
-			"manageIcon" => false,
-			"manageContacts" => Users::canManageContacts($userId, $communityId, Q::app()."/"),
-			"grant" => array(),
-			"revoke" => array(),
-			"see" => array()
-		);
-		foreach ($userCommunityRoles as $role => $row) {
-			$result["roles"][] = $role;
-			foreach ($communityRoles as $label) {
-				if (Users_Label::canGrantLabel($role, $label)) {
-					$result["grant"][] = $label;
-				}
-				if (Users_Label::canRevokeLabel($role, $label)) {
-					$result["revoke"][] = $label;
-				}
-				if (Users_Label::canSeeLabel($role, $label)) {
-					$result["see"][] = $label;
-				}
-			}
-
-			if (in_array($role, $labelsCanManageIcon)) {
-				$result["manageIcon"] = true;
-			}
-		}
-
-		// collect from other sources
-		Q::event("Users/Label/can", @compact('userId', 'communityId', 'userCommunityRoles', 'communityRoles'), 'after', false, $result);
-
-		return $result;
-	}
-
-	/**
 	 * Whether $label_1 can revoke $label_2
 	 * @method canRevokeLabel
 	 * @param {string} $label_1 - Label which request permission for action
@@ -356,6 +305,58 @@ class Users_Label extends Base_Users_Label
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Get information as to which community roles a user can grant, revoke or see.
+	 * @method can
+	 * @param {string} $communityId The community for which we are checking labels
+	 * @param {string} [$userId=null] The user whose access we are checking. Defaults to logged-in user.
+	 * @return array Contains "grant", "revoke", "see", "roles", "manageIcon" arrays of labels
+	 */
+	static function can($communityId, $userId = null)
+	{
+		if (!$userId) {
+			$user = Users::loggedInUser();
+			if (!$user) {
+				return array();
+			}
+			$userId = $user->id;
+		}
+		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
+		$communityRoles = self::ofCommunities();
+		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
+		$result = array(
+			"manageIcon" => false,
+			"manageContacts" => Users::canManageContacts($userId, $communityId, Q::app()."/"),
+			"grant" => array(),
+			"revoke" => array(),
+			"see" => array()
+		);
+		foreach ($userCommunityRoles as $role => $row) {
+			$result["roles"][] = $role;
+			foreach ($communityRoles as $label) {
+				if (Users_Label::canGrantLabel($role, $label)) {
+					$result["grant"][] = $label;
+				}
+				if (Users_Label::canRevokeLabel($role, $label)) {
+					$result["revoke"][] = $label;
+				}
+				if (Users_Label::canSeeLabel($role, $label)) {
+					$result["see"][] = $label;
+				}
+			}
+
+			if (in_array($role, $labelsCanManageIcon)) {
+				$result["manageIcon"] = true;
+			}
+		}
+
+		// collect from other sources
+		Q::event("Users/Label/can", @compact('userId', 'communityId', 'userCommunityRoles', 'communityRoles'), 'after', false, $result);
+
+		return $result;
 	}
 
 	/**
