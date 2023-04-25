@@ -1050,6 +1050,7 @@ abstract class Users extends Base_Users
 	 * @param {boolean} [$options.leaveDefault=null] Set to true or false, to override what's in the config
 	 * @param {string} [$options.passphraseHash] Set a custom passphrase hash, such as with hash_pbkdf2, but be careful where it comes from, as it could let someone impersonate this user
 	 * @param {string} [$options.salt] Set a custom passphrase salt, such as from other platforms, but be careful where it comes from, as it could let someone impersonate this user
+	 * @param {string} [$options.idPrefix] Set a prefix for the user ID, such as "bot-"
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -1204,7 +1205,8 @@ abstract class Users extends Base_Users
 		}
 		
 		// Insert a new user into the database, or simply modify an existing (adopted) user
-		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
+		$idPrefix = Q::ifset($options, 'idPrefix', '');
+		$user->id = $idPrefix . Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
 			'filter' => array('Users_User', 'idFilter')
 		));
 		$user->username = $username;
@@ -2368,6 +2370,14 @@ abstract class Users extends Base_Users
 		}
 		$result = array_slice(array_keys($rows), 0, $options['limit']);
 		return $result;
+	}
+
+	function updateUserIds(array $modifications)
+	{
+		// TODO: implement
+		foreach ($modifications as $from => $to) {
+			Q::event('Users/updateUserIds', $modifications);
+		}
 	}
 
 	/**
