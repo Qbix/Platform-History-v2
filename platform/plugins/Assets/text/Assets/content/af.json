@@ -1,14 +1,46 @@
 {
+    "errors": {
+        "Error": "Fout",
+        "WalletAbsent": "Die beursie nie gekoppel nie.",
+        "Rendering": "Daar was foute tydens die lewering van <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Prys vereis!",
+        "NameRequired": "Naam vereis!",
+        "PriceInvalid": "Prys ongeldig!",
+        "AmountInvalid": "Bedrag ongeldig!",
+        "TransactionFailed": "Transaksie het misluk",
+        "ChainNotSupported": "Die geselekteerde ketting word nie ondersteun nie. Ondersteunde ketting: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Benodig MetaMask gekoppel om met toepassing te werk",
+        "UserNotLoggedInMetaMask": "Gebruiker is nie by MetaMask aangemeld nie",
+        "CurrencyNotFound": "Geldeenheid nie gevind nie",
+        "WrongChain": "Hierdie NFT geskep onder &quot; {{chain}} &quot;. Gebruik asseblief hierdie ketting.",
+        "NoRecipientSelected": "Geen ontvanger gekies nie",
+        "NotEnoughPermissionsWallet": "Nie genoeg toestemmings om beursie van hierdie gebruiker te lees nie",
+        "ThisUserHaveNoWallet": "Hierdie gebruiker het geen beursie toegewys nie",
+        "TheWalletOfThisUserInvalid": "Die beursie van hierdie gebruiker is ongeldig",
+        "WalletInvalid": "Wallet-adres ongeldig"
+    },
+    "admin": {
+        "Title": "Bates administratief",
+        "SubscriptionTitle": "Intekenplanne"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Tik om te betaal"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: heffing verwerk vir {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : heffing verwerk vir {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Dankie vir jou betaling aan {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} het ingeteken op {{plan.title}}",
         "YouSubscribedTo": "Jy is ingeteken op {{plan.title}}",
         "Assets\/credits\/alert": "Jy het &#39;n waarskuwing wat verband hou met jou rekening"
+    },
+    "charge": {
+        "Subject": "Jy kry betaling van {{displayAmount}} vanaf {{call 'publisher.displayName'}} deur &quot; {{description}} &quot;",
+        "HasBeenCharged": "Haai, dit is net om jou te laat weet {{1}} is {{2}} vir {{3}} deur {{4}} gehef"
+    },
+    "charged": {
+        "Subject": "Dankie vir jou betaling vir &quot; {{description}} &quot;",
+        "HavePaid": "Hey {{1}} , hierdie is net &#39;n vinnige bevestiging dat jy suksesvol {{2}} tot {{3}} vir {{4}} betaal het"
     },
     "payment": {
         "AboutOrder": "Inligting oor bestelling",
@@ -28,82 +60,77 @@
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging aanvaar deur {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} gevul {{FilledStreamTitle}}",
+        "ForFillingStream": "Om {{FilledStreamTitle}} in te vul",
         "YouHaveCreditsToStart": "Jy het {{amount}} krediete om te begin",
-        "PaymentFor": "Betaling vir &quot;{{1}}&quot;",
-        "PaymentTo": "Betaling aan {{1}}",
-        "PaymentToUser": "Betaling aan {{toUserName}}",
-        "JoinedPaidStream": "vir bespreking in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "vir die skep van gemeenskap &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "as besprekingterugbetaling in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "PaymentFor": "Betaling vir &quot; {{1}} &quot;",
+        "PaymentTo": "Betaling na {{1}}",
+        "PaymentToUser": "Betaling na {{toUserName}}",
+        "CreatePrivateChat": "vir privaat gesels met {{toUserName}}",
+        "CreatePaidStream": "vir die skep van {{toStreamName}}",
+        "JoinedPaidStream": "vir bespreking in &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "vir die skep van gemeenskap &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "as besprekingterugbetaling in &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "Het {{amount}} krediete gekoop",
+        "BonusCredits": "Bonus {{amount}} krediete",
         "BuyAmountCredits": "Koop {{amount}} krediete",
+        "WatchClip": "Verdien {{amount}} krediete vir die kyk {{fromStreamTitle}}",
         "MissingCredits": "Ontbrekende krediete",
         "YouMissingCredits": "Jy benodig &#39;n bykomende {{amount}} krediete om voort te gaan.",
         "BuyCredits": "Koop krediete",
+        "BuyBonus": "Om {{amount}} krediete gelyktydig te koop, sal lei tot {{bonus}} krediete bonus.",
         "Buy": "Koop",
+        "PurchaseCredits": "Koop Krediete",
         "Credits": "Krediete",
         "ErrorInvalidAmount": "Bedrag ongeldig",
         "ErrorInvalidCurrency": "Ongelukkig ondersteun ons nog nie geldeenheid {{currency}} nie",
-        "WatchClip": "Het {{amount}} krediete verdien om {{fromStreamTitle}} te kyk",
-        "PurchaseCredits": "Koop krediete",
         "forMessages": {
             "BoughtCredits": "{{amount}} krediete",
             "BonusCredits": "{{amount}} krediete"
-        },
-        "CreatePaidStream": "vir die skep van {{toStreamName}}",
-        "BonusCredits": "Bonus {{amount}} krediete",
-        "BuyBonus": "Om {{amount}} krediete gelyktydig te koop, sal lei tot {{bonus}} krediete bonus.",
-        "Streams_user_firstname": "{{invitedUserName}} het voornaam ingevoer",
-        "Streams_user_lastname": "{{invitedUserName}} het van ingevoer",
-        "Streams_user_icon": "{{invitedUserName}} ingevoer ikoon",
-        "Places_user_location": "{{invitedUserName}} het ligging ingevoer",
-        "Streams_greeting": "{{invitedUserName}} het groete ingeskryf",
-        "InvitedUserFilledStream": "{{invitedUserName}} gevul {{FilledStreamTitle}}",
-        "ForFillingStream": "Om te vul {{FilledStreamTitle}}",
-        "CreatePrivateChat": "vir private klets met {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Datum",
         "Amount": "Bedrag",
         "Description": "Beskrywing",
         "Client": "Kliënt",
+        "User": "Gebruiker",
         "To": "aan",
         "From": "van",
-        "HistoryEmpty": "Jy het nog geen data nie",
         "SeeHistory": "Sien betalingsgeskiedenis vir {{1}}",
+        "HistoryEmpty": "Jy het nog geen data nie",
         "PaymentFor": "Het {{amount}} krediete gestuur",
         "PaymentTo": "Het {{amount}} krediete gestuur",
         "PaymentToUser": "Het {{amount}} krediete gestuur",
+        "CreatePaidStream": "Het {{amount}} krediete bestee",
+        "WatchClip": {
+            "+": "Verdien {{amount}} krediete",
+            "-": "Het {{amount}} krediete bestee"
+        },
         "JoinedPaidStream": {
             "+": "Verdien {{amount}} krediete",
-            "-": "Het {{amount}} krediete spandeer"
+            "-": "Het {{amount}} krediete bestee"
         },
         "LeftPaidStream": {
             "+": "Het {{amount}} krediete ontvang",
             "-": "Het {{amount}} krediete gestuur"
         },
-        "CreatedCommunity": "Het {{amount}} krediete spandeer",
-        "BoughtCredits": "Het {{amount}} krediete gekoop",
+        "CreatedCommunity": "Het {{amount}} krediete bestee",
+        "BoughtCredits": "{{amount}} krediete gekoop",
+        "BonusCredits": "Het bonus {{amount}} krediete",
         "InviteAcceptedBy": "Verdien {{amount}} krediete",
-        "YouHaveCreditsToStart": "Verdien {{amount}} krediete",
-        "CreatePaidStream": "Het {{amount}} krediete spandeer",
-        "WatchClip": {
-            "+": "Verdien {{amount}} krediete",
-            "-": "Het {{amount}} krediete spandeer"
-        },
-        "BonusCredits": "Het bonuskrediete van {{amount}} gekry",
         "Streams_user_firstname": "Verdien {{amount}} krediete",
         "Streams_user_lastname": "Verdien {{amount}} krediete",
         "Streams_user_icon": "Verdien {{amount}} krediete",
         "Places_user_location": "Verdien {{amount}} krediete",
         "Streams_greeting": "Verdien {{amount}} krediete",
-        "User": "Gebruiker"
+        "YouHaveCreditsToStart": "Verdien {{amount}} krediete"
     },
     "subscriptions": {
         "infoTitle": "Stel betalingsinligting",
         "confirm": {
             "title": "Begin intekening",
-            "message": "Wil jy inteken op {{title}}?",
+            "message": "Begin &#39;n herhalende intekening op &quot; {{title}} &quot;?",
             "ok": "OK",
             "cancel": "Kanselleer"
         },
@@ -123,7 +150,7 @@
         "Period": "Tydperk",
         "Price": "Prys",
         "AreYouSureUnsubscribe": "Is jy seker jy wil hierdie plan uitteken?",
-        "YouUnsubscribedFromPlan": "Jy het by plan &quot;{{planTitle}}&quot; uitgeteken. Jy sal nie hef nie, maar jou intekening sal voortduur tot {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Jy het van plan &quot; {{planTitle}} &quot; uitgeteken. Jy sal nie hef nie, maar jou intekening sal voortduur tot {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "plan titel",
             "PricePlaceholder": "prys",
@@ -134,13 +161,13 @@
     },
     "payments": {
         "infoTitle": "Stel betalingsinligting",
+        "BuyAmountCredits": "Koop {{amount}} krediete",
         "confirm": {
             "title": "Maak n betaling",
-            "message": "Stem jy in om {{symbol}}{{amount}} te betaal?",
+            "message": "Stem jy in om {{symbol}} {{amount}} te betaal?",
             "ok": "OK",
             "cancel": "Kanselleer"
-        },
-        "BuyAmountCredits": "Koop {{amount}} krediete"
+        }
     },
     "types": {
         "Assets\/credits": {
@@ -168,32 +195,35 @@
         "Assets\/credits\/earned": {
             "content": "Verdien {{amount}} krediete"
         },
-        "Assets\/credits\/spent": {
-            "content": "Het {{amount}} krediete spandeer"
-        },
-        "Assets\/credits\/sent": {
-            "content": "Het {{amount}} krediete aan {{toUserName}} gestuur"
-        },
-        "Assets\/credits\/received": {
-            "content": "Het {{amount}} krediete van {{fromUserName}} ontvang"
-        },
         "Assets\/credits\/bought": {
             "content": "Het {{amount}} krediete gekoop"
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} krediete"
         },
+        "Assets\/credits\/spent": {
+            "content": "Het {{amount}} krediete bestee"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Het {{amount}} krediete na {{toUserName}} gestuur"
+        },
+        "Assets\/credits\/received": {
+            "content": "Het {{amount}} krediete van {{fromUserName}} ontvang"
+        },
         "Assets\/credits\/alert": {
-            "content": "Jy het min krediete op jou rekening. Besoek asseblief <a href='{{link}}'>hierdie skakel<\/a> om meer krediete te koop."
+            "content": "Jy het min krediete op jou rekening. Besoek asseblief <a href='<i translate='no'>999 &#39;&gt;hierdie skakel<\/a> om meer krediete te koop."
         }
     },
-    "charge": {
-        "Subject": "Jy kry betaling van {{displayAmount}} vanaf {{call 'publisher.displayName'}} deur &quot;{{description}}&quot;",
-        "HasBeenCharged": "Haai, dit is net om jou te laat weet {{1}} is gehef {{2}} vir {{3}} deur {{4}}"
-    },
-    "charged": {
-        "Subject": "Dankie vir jou betaling vir &quot;{{description}}&quot;",
-        "HavePaid": "Haai {{1}}, hierdie is net &#39;n vinnige bevestiging dat jy suksesvol {{2}} aan {{3}} betaal het vir {{4}}"
+    "billing": {
+        "Title": "Batefakturering",
+        "CreditsMinimum": "Minimum krediete",
+        "CreditsToAdd": "Krediete om by te voeg",
+        "Save": "Stoor",
+        "ThisLink": "hierdie skakel",
+        "errors": {
+            "CreditsMinimumNegative": "Krediete minimum kan nie negatief wees nie",
+            "CreditsToAddNegative": "Krediete om by te voeg, kan nie negatief wees nie"
+        }
     },
     "services": {
         "NewServiceTemplate": {
@@ -203,25 +233,42 @@
             "LinkPlaceholder": "stel addisionele inligtingskakel in",
             "DescriptionPlaceholder": "Diensbeskrywing",
             "SaveService": "Stoor diens",
-            "SelectRequiredParticipants": "Vereiste deelnemers",
+            "SelectRequiredParticipants": "Vereiste verwante deelnemers",
             "RequiredParticipantsDesc": "Kies asseblief verwante deelnemers wat nodig is om hierdie diens te gebruik (byvoorbeeld troeteldiere vir &quot;Hondeskou&quot;, of kinders vir &quot;Kindervakansie&quot; ens.). As diens betaal word, sal gebruiker ook vir elke verwante deelnemers moet betaal."
+        },
+        "EditServiceTemplate": {
+            "Title": "Wysig diens"
         },
         "ManageServiceTemplates": "Bestuur dienssjablone",
         "ManageServices": "Bestuur dienste",
-        "FreeEvent": "Gratis geleentheid",
+        "Free": "Vry",
         "OptionalContribution": "Opsionele bydrae",
         "RequiredPayment": "Vereiste betaling",
         "AreYouSureDelete": "Is jy seker jy wil hierdie diens uitvee?",
-        "AmountServicesRelated": "Daar is {{amount}} beskikbaarheid wat met hierdie diens verband hou. Hulle sal ook verwyder word.",
-        "Free": "Vry",
-        "EditServiceTemplate": {
-            "Title": "Wysig diens"
-        }
+        "AmountServicesRelated": "Daar is {{amount}} beskikbaarheid wat met hierdie diens verband hou. Hulle sal ook verwyder word."
+    },
+    "transfer": {
+        "SelectRecipient": "Kies ontvanger",
+        "TransactionSuccess": "Transaksiesukses",
+        "OrTypeWalletAddress": "OF tik die adres van die ontvanger se beursie in"
     },
     "NFT": {
-        "Title": "Inligting oor {{title}} NFT",
-        "Description": "Gedetailleerde inligting oor NFT",
-        "FixedBid": "Koop nou",
+        "Title": "Titel",
+        "Name": "Naam",
+        "EnterName": "Voer naam in",
+        "EnterAuthorWallet": "Voer skrywersbeursie in",
+        "InformationAboutTitle": "Inligting oor {{title}} NFT",
+        "Description": "Beskrywing",
+        "DetailedInformationAboutNFT": "Gedetailleerde inligting oor NFT",
+        "PresaleStarts": "Voorverkoop begin 23 Des",
+        "OwnerUserNotFound": "Eienaar van hierdie NFT is nie in ons aansoek geregistreer nie.",
+        "BuyNow": "Koop nou",
+        "Buy": "Koop",
+        "Add": "Voeg by",
+        "Remove": "Verwyder",
+        "NoNFTyet": "Nog geen NFT&#39;s nie",
+        "Conversation": "Gesprek",
+        "Create": "Skep",
         "CurrentBid": "huidige aanbod",
         "StartingIn": "Begin in",
         "EndingIn": "Eindig in",
@@ -235,7 +282,10 @@
         "StartingDate": "Begindatum",
         "BidsBelowThisAmount": "Biedings onder hierdie bedrag sal nie toegelaat word nie",
         "MinimumBid": "Minimum bod",
+        "Author": "Skrywer",
         "Price": "Prys",
+        "Commission": "Kommissie",
+        "EnterCommission": "Voer kommissie in",
         "Owner": "Eienaar",
         "SelectCategory": "Kies kategorie",
         "Day": "Dag",
@@ -251,20 +301,28 @@
         "Bids": "Bied",
         "History": "Geskiedenis",
         "LoremIpsum": "Lorem Ipsum is bloot &#39;n skynteks van die druk- en setwerkbedryf.",
-        "PutOnSale": "Te koop gestel",
+        "PutOnSale": "Sit te koop",
         "PutOffSale": "Onttrek uit verkoop",
         "Transfer": "Oordrag",
+        "Actions": "Aksies",
+        "Claim": "Eis",
+        "ClaimNFT": "Eis NFT",
+        "Unlocking": "Ontsluit",
+        "Unlock": "Ontsluit",
         "Update": "Opdateer",
         "UpdateToken": "Dateer teken op",
+        "UpdateNFT": "Dateer NFT op",
         "CreateToken": "Skep Token",
         "PlaceBid": "Plaas bod",
         "SoldOut": "Verkoop",
+        "NotOnSale": "Nie te koop nie",
         "NftName": "NFT naam",
         "DescribeYourNFT": "Beskryf asseblief jou NFT",
         "NftPicture": "Foto om NFT voor te stel",
         "NftMovie": "Fliek om NFT voor te stel",
         "UploadMovie": "Laai fliek op",
         "MovieSource": "Film Bron",
+        "MovieURL": "Fliek URL",
         "UploadFile": "Laai &#39;n lêer op",
         "PutOnMarketplace": "Plaas op markplek",
         "InstantPurchase": "Voer prys in om gebruikers toe te laat om jou NFT onmiddellik te koop",
@@ -272,60 +330,9 @@
         "TimedAuction": "Tydige veiling",
         "OpenForBids": "Oop vir bod",
         "PriceOnePiece": "Voer prys vir een stuk in",
+        "EnterPrice": "Voer prys in",
         "EnterMinimumBid": "Voer minimum bod in",
         "SelectChain": "Kies ketting",
-        "WrongChain": "Hierdie NFT geskep onder &quot;{{chain}}&quot;. Gebruik asseblief hierdie ketting.",
-        "import": {
-            "importNFT": "Die invoer van NFT&#39;s",
-            "fileNotFound": "Jammer, CSV-lêer nie gevind nie.",
-            "fileEmpty": "Jammer, CSV-lêer is leeg.",
-            "userIdNotFound": "gebruiker bestaan maar ID leeg",
-            "errorLine": "reël {{1}}",
-            "fieldNotFound": "Vereiste veld &quot;{{1}}&quot; nie gevind nie",
-            "taskStreamInvalid": "taakstroom ongeldig",
-            "instructionsEmpty": "taakstroominstruksies leeg",
-            "complete": "Voltooi",
-            "activateUsers": "aktiveringsboodskap aan gebruikers stuur?",
-            "importProgress": "Vordering",
-            "importOptions": "Opsies",
-            "sampleCSV": "Laai voorbeeld CSV af",
-            "fileLabel": "Laai sigblad op:",
-            "errorsTitle": "Foute het voorgekom",
-            "importAttributes": "Voer NFT-kenmerke in",
-            "displayTypeEmpty": "Vertoontipe vir &quot;{{1}}&quot; nie gevind nie"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Filter volgens NFT-versamelings",
-                "ShowNFTCollection": "Wys NFT-versameling in ...",
-                "AllCollections": "Alle versamelings"
-            },
-            "ByUser": {
-                "AllAuthors": "Alle Skrywers",
-                "AllUsers": "Almal",
-                "FilterByAuthors": "Filter volgens skrywers"
-            }
-        },
-        "Back": "Terug na versameling",
-        "Name": "Naam",
-        "EnterName": "Voer naam in",
-        "EnterAuthorWallet": "Voer skrywersbeursie in",
-        "InformationAboutTitle": "Inligting oor {{title}} NFT",
-        "DetailedInformationAboutNFT": "Gedetailleerde inligting oor NFT",
-        "PresaleStarts": "Voorverkoop begin 23 Des",
-        "OwnerUserNotFound": "Eienaar van hierdie NFT is nie in ons aansoek geregistreer nie.",
-        "BuyNow": "Koop nou",
-        "Buy": "Koop",
-        "Conversation": "Gesprek",
-        "Create": "Skep",
-        "Author": "Skrywer",
-        "Commission": "Kommissie",
-        "EnterCommission": "Voer kommissie in",
-        "Actions": "Aksies",
-        "UpdateNFT": "Dateer NFT op",
-        "NotOnSale": "Nie te koop nie",
-        "MovieURL": "Fliek URL",
-        "EnterPrice": "Voer prys in",
         "Currency": "Geldeenheid",
         "AreYouSureDeleteImage": "Is jy seker jy wil prent verwyder?",
         "AreYouSureDeleteVideo": "Is jy seker jy wil video verwyder?",
@@ -341,7 +348,7 @@
             "Address": "Adres",
             "CoverImage": "Omslagprent",
             "UploadCoverImage": "Laai omslagprent op",
-            "CommissionAddressInvalid": "Kommissieadres ongeldig",
+            "CommissionAddressInvalid": "Kommissie-adres ongeldig",
             "OnSale": "te koop",
             "OffSale": "uitverkoping",
             "CreateSeries": "Skep reeks",
@@ -366,7 +373,7 @@
             "CurrentBaseURL": "Huidige basis-URL",
             "ContractAddressAbsent": "Kontrakadres afwesig",
             "FactoryAddressAbsent": "Fabrieksadres afwesig",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Titel vereis",
             "SymbolRequired": "Simbool word vereis",
             "TypeContractName": "kontrak naam",
@@ -376,6 +383,38 @@
             "Title": "Wedstryde",
             "NewContest": "Nuwe kompetisie"
         },
+        "import": {
+            "importNFT": "Die invoer van NFT&#39;s",
+            "importAttributes": "Voer NFT-kenmerke in",
+            "fileNotFound": "Jammer, CSV-lêer nie gevind nie.",
+            "fileEmpty": "Jammer, CSV-lêer is leeg.",
+            "userIdNotFound": "gebruiker bestaan maar ID leeg",
+            "errorLine": "lyn {{1}}",
+            "fieldNotFound": "Vereiste veld &quot; {{1}} &quot; nie gevind nie",
+            "displayTypeEmpty": "Vertoontipe vir &quot; {{1}} &quot; nie gevind nie",
+            "taskStreamInvalid": "taakstroom ongeldig",
+            "instructionsEmpty": "taakstroominstruksies leeg",
+            "complete": "Voltooi",
+            "activateUsers": "aktiveringsboodskap aan gebruikers stuur?",
+            "importProgress": "Vordering",
+            "importOptions": "Opsies",
+            "sampleCSV": "Laai voorbeeld CSV af",
+            "fileLabel": "Laai sigblad op:",
+            "errorsTitle": "Foute het voorgekom"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter volgens NFT-versamelings",
+                "ShowNFTCollection": "Wys NFT-versameling in ...",
+                "AllCollections": "Alle versamelings"
+            },
+            "ByUser": {
+                "AllAuthors": "Alle Skrywers",
+                "AllUsers": "Almal",
+                "FilterByAuthors": "Filter volgens skrywers"
+            }
+        },
+        "Back": "Terug na versameling",
         "attributes": {
             "Title": "Bestuur eienskappe",
             "Attributes": "Eienskappe",
@@ -399,13 +438,6 @@
             "aboutPlaceholder": "Wysig Bio",
             "SureLogOut": "Is jy seker jy wil afmeld?"
         },
-        "Add": "Voeg by",
-        "Remove": "Verwyder",
-        "NoNFTyet": "Nog geen NFT&#39;s nie",
-        "Claim": "Eis",
-        "ClaimNFT": "Eis NFT",
-        "Unlocking": "Ontsluit",
-        "Unlock": "Ontsluit",
         "sales": {
             "factory": {
                 "form": {
@@ -502,7 +534,7 @@
                     "recipient": "Ontvanger"
                 },
                 "small": {
-                    "tokenId": "token id wat nodig is om te sluit of te ontsluit",
+                    "tokenId": "token-ID wat nodig is om te sluit of te ontsluit",
                     "custodian": "adres wat kan ontsluit",
                     "recipient": "adres wat die tokens sal ontvang"
                 }
@@ -521,50 +553,10 @@
             "Unlock": "Ontsluit",
             "Locked": "Gesluit",
             "CustodianAddress": "Bewaarder adres",
-            "TokenWasClaimed": "Teken &quot;{{title}}&quot; is opgeëis",
-            "TokenWasLocked": "Teken &quot;{{title}}&quot; is gesluit",
-            "TokenWasUnlocked": "Teken &quot;{{title}}&quot; is ontsluit"
+            "TokenWasClaimed": "Teken &quot; {{title}} &quot; is geëis",
+            "TokenWasLocked": "Teken &quot; {{title}} &quot; was gesluit",
+            "TokenWasUnlocked": "Teken &quot; {{title}} &quot; is ontsluit"
         }
-    },
-    "errors": {
-        "Error": "Fout",
-        "WalletAbsent": "Die beursie nie gekoppel nie.",
-        "Rendering": "Daar was foute tydens die lewering van <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Prys vereis!",
-        "NameRequired": "Naam vereis!",
-        "PriceInvalid": "Prys ongeldig!",
-        "TransactionFailed": "Transaksie het misluk",
-        "ChainNotSupported": "Die geselekteerde ketting word nie ondersteun nie. Ondersteunde ketting: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Benodig MetaMask gekoppel om met toepassing te werk",
-        "UserNotLoggedInMetaMask": "Gebruiker is nie by MetaMask aangemeld nie",
-        "CurrencyNotFound": "Geldeenheid nie gevind nie",
-        "WrongChain": "Hierdie NFT geskep onder &quot;{{chain}}&quot;. Gebruik asseblief hierdie ketting.",
-        "AmountInvalid": "Bedrag ongeldig!",
-        "NoRecipientSelected": "Geen ontvanger gekies nie",
-        "NotEnoughPermissionsWallet": "Nie genoeg toestemmings om beursie van hierdie gebruiker te lees nie",
-        "ThisUserHaveNoWallet": "Hierdie gebruiker het geen beursie toegewys nie",
-        "TheWalletOfThisUserInvalid": "Die beursie van hierdie gebruiker is ongeldig",
-        "WalletInvalid": "Wallet-adres ongeldig"
-    },
-    "admin": {
-        "Title": "Bates administratief",
-        "SubscriptionTitle": "Intekenplanne"
-    },
-    "billing": {
-        "Title": "Batefakturering",
-        "CreditsMinimum": "Minimum krediete",
-        "CreditsToAdd": "Krediete om by te voeg",
-        "Save": "Stoor",
-        "ThisLink": "hierdie skakel",
-        "errors": {
-            "CreditsMinimumNegative": "Krediete minimum kan nie negatief wees nie",
-            "CreditsToAddNegative": "Krediete om by te voeg, kan nie negatief wees nie"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Kies ontvanger",
-        "TransactionSuccess": "Transaksiesukses",
-        "OrTypeWalletAddress": "OF tik die adres van die ontvanger se beursie in"
     },
     "currencies": {
         "choose": "Kies &#39;n geldeenheid"

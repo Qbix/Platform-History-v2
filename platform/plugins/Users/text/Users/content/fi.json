@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Joku"
+    },
+    "identifier": {
+        "types": {
+            "email": "Sähköposti",
+            "mobile": "mobiili",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopioitu! Nyt voit liittää sen mihin tahansa."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Päivittäin",
@@ -15,13 +28,13 @@
         "LogOut": "kirjautua ulos"
     },
     "activate": {
+        "OneTimeCode": "Syötä saamasi koodi:",
         "SetAsPrimary": "Aseta {{1}} ensisijaiseksi {{2}}",
         "ChoosePassPhrase": "Valitse <strong>salasana<\/strong> , jolla kirjaudut sisään.<br> Yksinkertainen lause, joka koostuu muutamasta sanasta, jonka muistat helposti.",
         "ChoosePassPhraseSeeSuggestions": "Valitse hyvä <strong>tunnuslause<\/strong> tilisi suojaamiseksi. Katso ehdotuksista joitain ideoita.",
         "LogOutAndTryAgain": "Kirjaudu ulos ja yritä uudelleen",
         "IfYouFeel": "Jos sinusta tuntuu, että jokin meni pieleen, voit",
         "SetIdentifierButtonTitle": "aloittaa alusta",
-        "OneTimeCode": "Syötä saamasi koodi:",
         "ActivateMyAccount": "Aktivoi Oma tili"
     },
     "session": {
@@ -30,7 +43,7 @@
     "authorize": {
         "GetStarted": "Aloittaa",
         "Authorize": "Valtuuta",
-        "TermsLabel": "Olen lukenut ja samaa mieltä<br> kohteeseen {{link}}",
+        "TermsLabel": "Olen lukenut ja samaa mieltä<br> numeroon {{link}}",
         "TermsTitle": "Ehdot",
         "mustAgree": "Ensin sinun on hyväksyttävä ehdot."
     },
@@ -60,7 +73,7 @@
             "EmptyContacts": "Yhteystietoja ei löydy..."
         },
         "select": {
-            "title": "Valitse yhteyshenkilö {{displayName}}"
+            "title": "Valitse yhteystieto numerosta {{displayName}}"
         }
     },
     "usersContacts": {
@@ -70,11 +83,15 @@
         "inviteRole": "Kutsu {{role}}"
     },
     "invalidLanguageSelected": "Virheellinen kieli valittu",
+    "platforms": {
+        "wallet": "Lompakko",
+        "broadcast": "Lähettää"
+    },
     "login": {
         "title": "Tervetuloa",
         "directions": "Luo tili tai kirjaudu sisään.",
         "directionsNoRegister": "Kirjaudu sisään, jos sinulla on tili.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Kirjoita salasanasi:",
         "loginButton": "Aloittaa",
         "registerButton": "Aloittaa",
@@ -88,6 +105,7 @@
         "emailExists": "Yrititkö rekisteröityä tällä sähköpostilla aiemmin? Jos näin on, tarkista postilaatikkosi aktivoidaksesi tilisi. <a href='#resend' class='Q_button Users_activation_resend'>Napsauta lähettääksesi viestin uudelleen<\/a>",
         "mobileExists": "Yrititkö rekisteröityä tällä matkapuhelinnumerolla aiemmin? Jos näin on, tarkista tekstiviestisi aktivoidaksesi tilisi. <a href='#resend' class='Q_button Users_activation_resend'>Napsauta lähettääksesi viestin uudelleen<\/a>",
         "usingOther": "tai voit",
+        "connectPlatforms": "tai yhdistä käyttämällä:",
         "prompt": "Valitse käyttäjänimi:",
         "newUser": "tai luo uusi tili alla",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Hyväksytkö käyttöehdot?",
         "facebookNoEmail": "Facebook-tililtäsi puuttuu vahvistettu sähköpostiosoite. Kirjaudu sisään alkuperäisellä tavalla.",
         "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin",
-        "wallet": {
-            "payload": "Kirjaudu sisään {{host}} aikaan {{timestamp}}",
-            "alert": {
-                "title": "Uudelleenohjataan Walletiin",
-                "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Palaa tälle sivulle kirjautumisen jälkeen."
-            }
-        },
         "web3": {
             "payload": "Kirjaudu sisään {{host}} aikaan {{timestamp}}",
             "alert": {
                 "title": "Uudelleenohjataan Walletiin",
                 "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Kun olet kirjautunut sisään, palaa tälle sivulle."
             }
-        },
-        "connectPlatforms": "tai yhdistä käyttämällä:"
+        }
     },
     "setIdentifier": {
         "title": "Lisää sisäänkirjautumistapa",
@@ -126,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Tili",
-        "areUsing": "Käytät {{platform}} nimellä",
-        "noLongerUsing": "Et ole enää yhteydessä verkkotunnukseen {{platform}} as",
+        "title": "{{Platform}} tili",
+        "areUsing": "Käytät {{platform}} as",
+        "noLongerUsing": "Et ole enää yhteydessä numeroon {{platform}} as",
         "doAuth": "Kirjaudu sisään tällä tilillä",
         "doSwitch": "Vaihda tälle tilille"
     },
@@ -139,26 +149,9 @@
         "Guest": "Vieras",
         "Host": "Isäntä"
     },
-    "avatar": {
-        "Someone": "Joku"
-    },
     "web3": {
         "WrongMethod": "Väärä sopimustapa {{methodName}}",
         "ChangeWallet": "Vaihda lompakko"
-    },
-    "identifier": {
-        "types": {
-            "email": "Sähköposti",
-            "mobile": "mobiili",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopioitu! Nyt voit liittää sen mihin tahansa."
-    },
-    "platforms": {
-        "wallet": "Lompakko",
-        "broadcast": "Lähettää"
     },
     "labels": {
         "addToPhonebook": "Lisää puhelimeen yhteystietoihin",

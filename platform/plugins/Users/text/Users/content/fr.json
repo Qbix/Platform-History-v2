@@ -1,7 +1,20 @@
 {
+    "avatar": {
+        "Someone": "Quelqu&#39;un"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobile",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copié ! Maintenant, vous pouvez le coller n&#39;importe où."
+    },
     "analytics": {
         "Title": "Analytique",
-        "Daily": "du quotidien",
+        "Daily": "Quotidien",
         "Weekly": "Hebdomadaire",
         "Monthly": "Mensuel",
         "Application": "Application",
@@ -15,13 +28,13 @@
         "LogOut": "Se déconnecter"
     },
     "activate": {
+        "OneTimeCode": "Entrez le code que vous avez reçu :",
         "SetAsPrimary": "Définir {{1}} comme mon {{2}} principal",
         "ChoosePassPhrase": "Choisissez une <strong>phrase de passe<\/strong> avec laquelle vous connecter.<br> Une phrase simple composée de quelques mots dont vous vous souviendrez facilement.",
         "ChoosePassPhraseSeeSuggestions": "Choisissez une bonne <strong>phrase de passe<\/strong> pour protéger votre compte. Voir les suggestions pour quelques idées.",
         "LogOutAndTryAgain": "Déconnectez-vous et réessayez",
         "IfYouFeel": "Si vous sentez que quelque chose s&#39;est mal passé, vous pouvez",
         "SetIdentifierButtonTitle": "recommencer",
-        "OneTimeCode": "Entrez le code que vous avez reçu :",
         "ActivateMyAccount": "Activer mon compte"
     },
     "session": {
@@ -31,20 +44,20 @@
         "GetStarted": "Commencer",
         "Authorize": "Autoriser",
         "TermsLabel": "J&#39;ai lu et accepté<br> au {{link}}",
-        "TermsTitle": "termes",
+        "TermsTitle": "Conditions",
         "mustAgree": "Vous devez d&#39;abord accepter les conditions."
     },
     "register": {
         "TermsLabel": "J&#39;accepte le {{link}}",
-        "TermsTitle": "termes"
+        "TermsTitle": "Conditions"
     },
     "notifications": {
         "title": "Autorisation",
         "prompt": "Voulez-vous activer les notifications ? Vous recevrez des mises à jour en temps réel sur les choses qui vous intéressent.",
         "yes": "Oui",
         "no": "Non",
-        "WelcomePleaseVerifyEmail": "Bienvenue! Veuillez vérifier votre adresse e-mail.",
-        "WelcomeVerifyEmail": "Bienvenue! Vérifiez votre adresse e-mail.",
+        "WelcomePleaseVerifyEmail": "Accueillir! Veuillez vérifier votre adresse e-mail.",
+        "WelcomeVerifyEmail": "Accueillir! Vérifiez votre adresse e-mail.",
         "ForgetPass": "Hey, avez-vous oublié votre mot de passe ?",
         "PassphraseSaved": "Votre phrase de passe a été enregistrée.",
         "IdentifierActivated": "Votre {{type}} a été activé.",
@@ -60,7 +73,7 @@
             "EmptyContacts": "Contacts introuvables..."
         },
         "select": {
-            "title": "Sélectionnez le contact de {{displayName}}"
+            "title": "Sélectionnez le contact du {{displayName}}"
         }
     },
     "usersContacts": {
@@ -70,11 +83,15 @@
         "inviteRole": "Inviter {{role}}"
     },
     "invalidLanguageSelected": "Langue sélectionnée incorrecte",
+    "platforms": {
+        "wallet": "Portefeuille",
+        "broadcast": "Diffuser"
+    },
     "login": {
-        "title": "Bienvenue",
+        "title": "Accueillir",
         "directions": "Créez un compte ou connectez-vous.",
         "directionsNoRegister": "Connectez-vous si vous avez un compte.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Saisissez votre phrase de passe :",
         "loginButton": "Commencer",
         "registerButton": "Commencer",
@@ -88,6 +105,7 @@
         "emailExists": "Avez-vous déjà essayé de vous inscrire avec cet e-mail ? Si c&#39;est le cas, vérifiez votre boîte de réception pour activer votre compte. <a href='#resend' class='Q_button Users_activation_resend'>Cliquez pour renvoyer le message<\/a>",
         "mobileExists": "Avez-vous déjà essayé de vous inscrire avec ce numéro de mobile ? Si c&#39;est le cas, vérifiez vos SMS pour activer votre compte. <a href='#resend' class='Q_button Users_activation_resend'>Cliquez pour renvoyer le message<\/a>",
         "usingOther": "ou tu peux",
+        "connectPlatforms": "ou connectez-vous en utilisant :",
         "prompt": "Choisissez un nom d&#39;utilisateur:",
         "newUser": "ou créez un nouveau compte ci-dessous",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Accepter les conditions d&#39;utilisation ?",
         "facebookNoEmail": "Il manque une adresse e-mail confirmée à votre compte Facebook. Connectez-vous simplement de manière native.",
         "picTooltip": "Vous pouvez changer cette image plus tard",
-        "wallet": {
-            "payload": "Connectez-vous à {{host}} à l&#39;heure {{timestamp}}",
-            "alert": {
-                "title": "Redirection vers Wallet",
-                "content": "Une fois que vous fermez cette boîte de dialogue, vous serez redirigé vers votre portefeuille. Après vous être connecté, revenez à cette page."
-            }
-        },
         "web3": {
-            "payload": "Connectez-vous à {{host}} à l&#39;heure {{timestamp}}",
+            "payload": "Connectez-vous au {{host}} à l&#39;heure {{timestamp}}",
             "alert": {
                 "title": "Redirection vers Wallet",
                 "content": "Une fois que vous fermez cette boîte de dialogue, vous serez redirigé vers votre portefeuille. Après vous être connecté, revenez à cette page."
             }
-        },
-        "connectPlatforms": "ou connectez-vous en utilisant :"
+        }
     },
     "setIdentifier": {
         "title": "Ajouter un moyen de se connecter",
@@ -122,13 +132,13 @@
             "identifier": "entrez votre numéro de portable ou votre e-mail",
             "mobile": "Entrez votre numéro de mobile",
             "email": "Entrez votre adresse email",
-            "username": "Nom d&#39;utilisateur"
+            "username": "nom d&#39;utilisateur"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Compte",
+        "title": "Compte {{Platform}}",
         "areUsing": "Vous utilisez {{platform}} comme",
-        "noLongerUsing": "Vous n&#39;êtes plus connecté à {{platform}} en tant que",
+        "noLongerUsing": "Vous n&#39;êtes plus connecté au {{platform}} car",
         "doAuth": "Connectez-vous avec ce compte",
         "doSwitch": "Passer à ce compte"
     },
@@ -139,26 +149,9 @@
         "Guest": "Invité",
         "Host": "Héberger"
     },
-    "avatar": {
-        "Someone": "Quelqu&#39;un"
-    },
     "web3": {
         "WrongMethod": "Mauvaise méthode de contrat {{methodName}}",
         "ChangeWallet": "Changer de portefeuille"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mail",
-            "mobile": "Mobile",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Copié ! Maintenant, vous pouvez le coller n&#39;importe où."
-    },
-    "platforms": {
-        "wallet": "Portefeuille",
-        "broadcast": "Diffuser"
     },
     "labels": {
         "addToPhonebook": "Ajouter à mes contacts téléphoniques",

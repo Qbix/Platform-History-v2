@@ -1,150 +1,6 @@
 {
-    "actions": {
-        "LogIn": "mag log in",
-        "LogOut": "mag-log out"
-    },
-    "activate": {
-        "SetAsPrimary": "Itakda ang {{1}} bilang aking pangunahing {{2}}",
-        "ChoosePassPhrase": "Pumili ng <strong>pass phrase<\/strong> upang mag-log in gamit. <br> Ang isang simpleng parirala na binubuo ng ilang mga salita na madali mong matandaan.",
-        "ChoosePassPhraseSeeSuggestions": "Pumili ng isang mahusay na <strong>pass phrase<\/strong> upang protektahan ang iyong account. Tingnan ang mga mungkahi para sa ilang mga ideya.",
-        "LogOutAndTryAgain": "Mag-log Out at Subukan muli",
-        "IfYouFeel": "Kung sa tingin mo may nangyaring mali, maaari mo",
-        "SetIdentifierButtonTitle": "magsimula",
-        "OneTimeCode": "Ilagay ang code na iyong natanggap:",
-        "ActivateMyAccount": "I-activate ang Aking Account"
-    },
-    "session": {
-        "GetStarted": "Magsimula"
-    },
-    "authorize": {
-        "GetStarted": "Magsimula",
-        "Authorize": "Pahintulutan",
-        "TermsLabel": "Nabasa at sumasang-ayon ako <br> sa {{link}}",
-        "TermsTitle": "Mga Tuntunin",
-        "mustAgree": "Una kailangan mong sumang-ayon sa mga term."
-    },
-    "register": {
-        "TermsLabel": "Tinatanggap ko ang {{link}}",
-        "TermsTitle": "Mga Tuntunin"
-    },
-    "notifications": {
-        "title": "Pahintulot",
-        "prompt": "Gusto mo bang paganahin ang mga notification? Makakatanggap ka ng mga update sa real-time tungkol sa mga bagay na mahalaga sa iyo.",
-        "yes": "Oo",
-        "no": "Hindi",
-        "WelcomePleaseVerifyEmail": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
-        "WelcomeVerifyEmail": "Maligayang pagdating! I-verify ang iyong email address.",
-        "ForgetPass": "Hey, nakalimutan mo ba ang iyong passphrase?",
-        "PassphraseSaved": "Ang iyong pass parirala ay nai-save na.",
-        "IdentifierActivated": "Ang iyong {{type}} ay na-aktibo.",
-        "CompletedActivation": "Nakumpleto mo na ang activation ng gumagamit.",
-        "CompletedActivationLogIn": "Nakumpleto mo na ang activation ng gumagamit. Subukan ang pag-log in ngayon."
-    },
-    "usersContacts": {
-        "selectLabel": "Mangyaring piliin ang label.",
-        "inviteUser": "Anyayahan ang Gumagamit",
-        "selectRole": "Piliin ang Papel",
-        "inviteRole": "Imbitahan ang {{role}}"
-    },
-    "invalidLanguageSelected": "Napili ang di-wastong wika",
-    "contacts": {
-        "dialog": {
-            "title": "Pumili ng contact",
-            "SearchByName": "Paghahanap ayon sa pangalan",
-            "CreateAccount": "+ Bagong Makipag-ugnay",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create hindi nahanap",
-            "EmptyContacts": "Hindi matatagpuan ang mga contact ..."
-        },
-        "select": {
-            "title": "Piliin ang contact ng {{displayName}}"
-        }
-    },
-    "login": {
-        "title": "Maligayang pagdating",
-        "directions": "Lumikha ng isang account, o mag-log in.",
-        "directionsNoRegister": "Mag-log in kung mayroon kang isang account.",
-        "goButton": "⮕",
-        "passphrase": "Ipasok ang iyong pariralang pass:",
-        "loginButton": "Magsimula",
-        "registerButton": "Magsimula",
-        "resendButton": "Magpadala ng Mensahe ng Pag-activate",
-        "forgot": "Nakalimutan mo?",
-        "resendConfirm": "Nais mo bang magpadala ng isang mensahe upang mai-reset ang iyong passphrase?",
-        "resendSuccess": "Suriin para sa isang mensahe upang mai-reset ang iyong passphrase",
-        "resendClose": "Isara",
-        "noPassphrase": "Bago ka makapag-log in, dapat kang magtakda ng isang parirala sa pamamagitan ng pag-click sa link sa iyong mensahe ng pag-activate.",
-        "notVerified": "Dapat mong ipadala ang iyong sarili ng isang mensahe ng pag-activate upang mag-log in.",
-        "emailExists": "Sinubukan mo bang magparehistro sa email na ito bago? Kung gayon, suriin ang iyong inbox upang maisaaktibo ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>Mag-click upang ipadala ang mensahe<\/a>",
-        "mobileExists": "Sinubukan mo bang magparehistro sa numero ng mobile na ito bago? Kung gayon, suriin ang iyong SMS upang maisaaktibo ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>Mag-click upang ipadala ang mensahe<\/a>",
-        "usingOther": "o kaya mo",
-        "prompt": "Pumili ng isang username:",
-        "newUser": "o lumikha ng isang bagong account sa ibaba",
-        "placeholders": {
-            "identifier": "iyong mobile # o email",
-            "mobile": "ipasok ang iyong mobile #",
-            "email": "ilagay ang iyong email address",
-            "username": "username"
-        },
-        "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
-        "facebookNoEmail": "Kulang ang iyong facebook account ng isang nakumpirma na email address. Mag-log in lamang sa katutubong paraan.",
-        "picTooltip": "Maaari mong baguhin ang larawang ito mamaya",
-        "wallet": {
-            "payload": "Mag-log in sa {{host}} sa oras na {{timestamp}}",
-            "alert": {
-                "title": "Pag-redirect sa Wallet",
-                "content": "Kapag naisara mo na ang dayalogo na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa pahinang ito."
-            }
-        },
-        "web3": {
-            "payload": "Mag-log in sa {{host}} sa oras {{timestamp}}",
-            "alert": {
-                "title": "Nagre-redirect sa Wallet",
-                "content": "Sa sandaling isara mo ang dialog na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa page na ito."
-            }
-        },
-        "connectPlatforms": "o kumonekta gamit ang:"
-    },
-    "setIdentifier": {
-        "title": "Magdagdag ng isang paraan upang mag-log in",
-        "sendMessage": "Magpadala ng Mensahe ng Pag-activate",
-        "placeholders": {
-            "identifier": "ipasok ang iyong mobile # o email",
-            "mobile": "ipasok ang iyong mobile number",
-            "email": "ilagay ang iyong email address",
-            "username": "username"
-        }
-    },
-    "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "Gumagamit ka ng {{platform}} bilang",
-        "noLongerUsing": "Hindi ka na nakakonekta sa {{platform}} bilang",
-        "doAuth": "Mag-log in gamit ang account na ito",
-        "doSwitch": "Lumipat sa account na ito"
-    },
-    "roles": {
-        "Owner": "May-ari",
-        "Admin": "Admin",
-        "Member": "Miyembro",
-        "Guest": "Bisita",
-        "Host": "Host"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Araw-araw",
-        "Weekly": "Lingguhan",
-        "Monthly": "Buwanang",
-        "Application": "Paglalapat",
-        "Pages": "Mga pahina",
-        "Services": "Mga serbisyo",
-        "Faq": "Faq",
-        "WeekDays": "Mga Araw ng Linggo"
-    },
     "avatar": {
         "Someone": "isang tao"
-    },
-    "web3": {
-        "WrongMethod": "Maling paraan ng kontrata {{methodName}}",
-        "ChangeWallet": "Baguhin ang Wallet"
     },
     "identifier": {
         "types": {
@@ -156,9 +12,146 @@
     "clipboard": {
         "Copied": "Kinopya! Ngayon ay maaari mo na itong i-paste kahit saan."
     },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Araw-araw",
+        "Weekly": "Linggu-linggo",
+        "Monthly": "Buwan-buwan",
+        "Application": "Aplikasyon",
+        "Pages": "Mga pahina",
+        "Services": "Mga serbisyo",
+        "Faq": "Faq",
+        "WeekDays": "Mga Araw ng Linggo"
+    },
+    "actions": {
+        "LogIn": "mag log in",
+        "LogOut": "mag log out"
+    },
+    "activate": {
+        "OneTimeCode": "Ilagay ang code na iyong natanggap:",
+        "SetAsPrimary": "Itakda {{1}} bilang aking pangunahing {{2}}",
+        "ChoosePassPhrase": "Pumili ng <strong>pass phrase<\/strong> upang mag-log in.<br> Isang simpleng parirala na binubuo ng ilang salita na madali mong maaalala.",
+        "ChoosePassPhraseSeeSuggestions": "Pumili ng magandang <strong>pass phrase<\/strong> para protektahan ang iyong account. Tingnan ang mga mungkahi para sa ilang ideya.",
+        "LogOutAndTryAgain": "Mag-log Out at Subukang Muli",
+        "IfYouFeel": "Kung sa tingin mo ay may nangyaring mali, magagawa mo",
+        "SetIdentifierButtonTitle": "magsimula muli",
+        "ActivateMyAccount": "I-activate ang Aking Account"
+    },
+    "session": {
+        "GetStarted": "Magsimula"
+    },
+    "authorize": {
+        "GetStarted": "Magsimula",
+        "Authorize": "Pahintulutan",
+        "TermsLabel": "Nabasa ko at sumasang-ayon ako<br> sa {{link}}",
+        "TermsTitle": "Mga tuntunin",
+        "mustAgree": "Una kailangan mong sumang-ayon sa mga tuntunin."
+    },
+    "register": {
+        "TermsLabel": "Tinatanggap ko ang {{link}}",
+        "TermsTitle": "Mga tuntunin"
+    },
+    "notifications": {
+        "title": "Pahintulot",
+        "prompt": "Gusto mo bang paganahin ang mga notification? Makakatanggap ka ng mga real-time na update tungkol sa mga bagay na mahalaga sa iyo.",
+        "yes": "Oo",
+        "no": "Hindi",
+        "WelcomePleaseVerifyEmail": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
+        "WelcomeVerifyEmail": "Maligayang pagdating! I-verify ang iyong email address.",
+        "ForgetPass": "Uy, nakalimutan mo ba ang iyong passphrase?",
+        "PassphraseSaved": "Na-save na ang iyong pass phrase.",
+        "IdentifierActivated": "Ang iyong {{type}} ay na-activate na.",
+        "CompletedActivation": "Nakumpleto mo na ang pag-activate ng user.",
+        "CompletedActivationLogIn": "Nakumpleto mo na ang pag-activate ng user. Subukang mag-log in ngayon."
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Pumili ng contact",
+            "CreateAccount": "+ Bagong Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Maghanap ayon sa pangalan",
+            "EmptyContacts": "Hindi nahanap ang mga contact..."
+        },
+        "select": {
+            "title": "Pumili ng contact ng {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Mangyaring pumili ng label.",
+        "inviteUser": "Mag-imbita ng mga User",
+        "selectRole": "Piliin ang Tungkulin",
+        "inviteRole": "Imbitahan ang {{role}}"
+    },
+    "invalidLanguageSelected": "Di-wastong wika ang napili",
     "platforms": {
         "wallet": "Wallet",
         "broadcast": "I-broadcast"
+    },
+    "login": {
+        "title": "Maligayang pagdating",
+        "directions": "Gumawa ng account, o mag-log in.",
+        "directionsNoRegister": "Mag-log in kung mayroon kang account.",
+        "goButton": "➔",
+        "passphrase": "Ilagay ang iyong pass phrase:",
+        "loginButton": "Magsimula",
+        "registerButton": "Magsimula",
+        "resendButton": "Magpadala ng Mensahe sa Pag-activate",
+        "forgot": "Nakalimutan na?",
+        "resendConfirm": "Gusto mo bang magpadala ng mensahe para i-reset ang iyong passphrase?",
+        "resendSuccess": "Tingnan kung may mensahe upang i-reset ang iyong passphrase",
+        "resendClose": "Isara",
+        "noPassphrase": "Bago ka makapag-log in, dapat kang magtakda ng pass phrase sa pamamagitan ng pag-click sa link sa iyong activation message.",
+        "notVerified": "Dapat kang magpadala sa iyong sarili ng isang activation message upang makapag-log in.",
+        "emailExists": "Sinubukan mo bang magrehistro sa email na ito dati? Kung gayon, suriin ang iyong inbox upang i-activate ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>I-click upang muling ipadala ang mensahe<\/a>",
+        "mobileExists": "Nasubukan mo na bang magrehistro sa mobile number na ito dati? Kung gayon, suriin ang iyong SMS upang i-activate ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>I-click upang muling ipadala ang mensahe<\/a>",
+        "usingOther": "o kaya mo",
+        "connectPlatforms": "o kumonekta gamit ang:",
+        "prompt": "Pumili ng username:",
+        "newUser": "o gumawa ng bagong account sa ibaba",
+        "placeholders": {
+            "identifier": "iyong mobile # o email",
+            "mobile": "ilagay ang iyong mobile #",
+            "email": "ilagay ang iyong email address",
+            "username": "gumamit lamang ng mga titik at numero"
+        },
+        "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
+        "facebookNoEmail": "Walang kumpirmadong email address ang iyong facebook account. Mag-log in sa katutubong paraan.",
+        "picTooltip": "Maaari mong baguhin ang larawang ito sa ibang pagkakataon",
+        "web3": {
+            "payload": "Mag-log in sa {{host}} sa oras na {{timestamp}}",
+            "alert": {
+                "title": "Nagre-redirect sa Wallet",
+                "content": "Sa sandaling isara mo ang dialog na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa page na ito."
+            }
+        }
+    },
+    "setIdentifier": {
+        "title": "Magdagdag ng paraan para mag-log in",
+        "sendMessage": "Magpadala ng Mensahe sa Pag-activate",
+        "placeholders": {
+            "identifier": "ilagay ang iyong mobile # o email",
+            "mobile": "ilagay ang iyong mobile number",
+            "email": "ilagay ang iyong email address",
+            "username": "username"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Account",
+        "areUsing": "Gumagamit ka {{platform}} bilang",
+        "noLongerUsing": "Hindi ka na konektado sa {{platform}} bilang",
+        "doAuth": "Mag-log in gamit ang account na ito",
+        "doSwitch": "Lumipat sa account na ito"
+    },
+    "roles": {
+        "Owner": "May-ari",
+        "Admin": "Admin",
+        "Member": "Miyembro",
+        "Guest": "Bisita",
+        "Host": "Host"
+    },
+    "web3": {
+        "WrongMethod": "Maling paraan ng kontrata {{methodName}}",
+        "ChangeWallet": "Baguhin ang Wallet"
     },
     "labels": {
         "addToPhonebook": "Idagdag sa Aking Mga Contact sa Telepono",

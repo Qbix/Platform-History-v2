@@ -43,7 +43,7 @@
             "displayType": "કલમ"
         },
         "Websites\/slide": {
-            "description": "પ્રસ્તુતિની સ્લાઇડમાં HTML, ઑડિઓ વગેરેનો સમાવેશ થઈ શકે છે.",
+            "description": "પ્રસ્તુતિની સ્લાઇડમાં HTML, ઓડિયો વગેરેનો સમાવેશ થઈ શકે છે.",
             "displayType": "સ્લાઇડ"
         },
         "Websites\/presentation": {

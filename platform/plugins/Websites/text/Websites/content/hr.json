@@ -23,18 +23,18 @@
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "pretraživati",
             "WriteToStartConversation": "Napišite svoje misli kako biste započeli razgovor",
-            "StartConversation": "Započni razgovor",
+            "StartConversation": "Započnite razgovor",
             "GotoConversation": "Idite na Razgovor",
             "reset": "Resetiraj",
             "edit": "Uredi",
             "link": "Veza",
             "setUrl": "Postavite URL",
             "save": "Uštedjeti",
-            "setClip": "Izrezani isječak",
+            "setClip": "Izrežite isječak",
             "invalidURL": "Neispravan URL"
         },
         "FileTooLarge": "Datoteka je prevelika za predmemoriju. Maksimalna veličina datoteke {{size}}",
-        "InvalidPDF": "Datoteka nije valjani PDF",
+        "InvalidPDF": "Datoteka nije važeći PDF",
         "StartTypingTitleOrKeywords": "Počnite upisivati naslov ili ključne riječi..."
     },
     "types": {
@@ -43,11 +43,11 @@
             "displayType": "Članak"
         },
         "Websites\/slide": {
-            "description": "Slajd u prezentaciji, može uključivati HTML, audio itd.",
-            "displayType": "Slajd"
+            "description": "Slajd u prezentaciji, može sadržavati HTML, audio itd.",
+            "displayType": "slajd"
         },
         "Websites\/presentation": {
-            "description": "Prezentacija koja se sastoji od raznih slajdova",
+            "description": "Prezentacija koja se sastoji od različitih slajdova",
             "displayType": "Prezentacija"
         },
         "Websites\/advert\/unit": {
@@ -59,15 +59,15 @@
             "displayType": "Postavljanje oglasa"
         },
         "Websites\/advert\/creative": {
-            "description": "Sadržaj za reklamu",
-            "displayType": "Oglasna kreativa"
+            "description": "Sadržaj za oglas",
+            "displayType": "Oglasni oglas"
         },
         "Websites\/advert\/campaign": {
             "description": "Reklamna kampanja",
             "displayType": "Oglasna kampanja"
         },
         "Websites\/webpage": {
-            "description": "Predstavlja web-mjesto čiji su metapodaci očišćeni",
+            "description": "Predstavlja web mjesto čiji su metapodaci skrapirani",
             "displayType": "Web stranica"
         }
     }

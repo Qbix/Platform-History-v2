@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Naujas daiktas"
     },
+    "avatar": {
+        "firstName": "Pirmas vardas",
+        "lastName": "pavardė",
+        "username": "Vartotojo vardas"
+    },
     "labels": {
         "Streams\/invited": "Žmonės, kuriuos pakviečiau",
         "Streams\/invitedMe": "Kas mane pakvietė",
@@ -13,8 +18,16 @@
         "Yes": "Taip",
         "No": "Nr"
     },
+    "login": {
+        "prompt": "Leisk draugams tave atpažinti:",
+        "newUser": "arba toliau sukurkite naują paskyrą",
+        "picTooltip": "Vėliau galėsite pakeisti šią nuotrauką",
+        "placeholder": {
+            "fullName": "Įveskite savo vardą ir pavardę"
+        }
+    },
     "interests": {
-        "Filter": "Kokie tavo pomėgiai?",
+        "Filter": "Paieškos pomėgiai",
         "CanGrant": "Jei vis tiek nerandate to, ko ieškote, toliau galite pridėti naują pomėgį:",
         "TrySynonyms": "Nematai? Išbandykite keletą sinonimų.",
         "AddUnderCategory": "Pridėti pagal kategoriją...",
@@ -22,7 +35,7 @@
         "Unlisted": "Neįtraukta į sąrašą"
     },
     "chat": {
-        "flaggedForAdminReview": "Laiškas pažymėtas administratoriaus peržiūrai. Bakstelėkite dar kartą, kad panaikintumėte vėliavėlę.",
+        "flaggedForAdminReview": "Laiškas buvo pažymėtas administratoriaus peržiūrai. Bakstelėkite dar kartą, kad panaikintumėte vėliavėlę.",
         "noOneSaid": "Niekas nieko nesakė",
         "closeChatButton": "Uždaryti pokalbį",
         "closeChatConfirmTitle": "Uždaryti šį pokalbį?",
@@ -33,92 +46,50 @@
         "closeChatConfirmNo": "Nr",
         "earlierComments": "ankstesni komentarai",
         "startedConversation": "pradėjo pokalbį",
-        "RealTimeCall": "Skambutis realiuoju laiku",
-        "SearchByName": "Ieškokite pagal pavadinimą",
+        "RealTimeCall": "Skambutis realiu laiku",
+        "JoinWebRTC": "Telekonferencija",
+        "SearchByName": "Ieškoti pagal pavadinimą",
         "Notifications": {
             "Visit": "{{displayName}} lankosi pokalbyje",
             "Join": "{{displayName}} prisijungė prie pokalbio",
             "Leave": "{{displayName}} išėjo iš pokalbio",
-            "RelatedTo": "{{displayName}} pradėjo {{stream.displayType}}"
+            "RelatedTo": "{{displayName}} pradėjo nuo {{stream.displayType}}"
         },
-        "JoinWebRTC": "Telekonferencija"
+        "placeholders": {
+            "Public": "Pridėti komentarą",
+            "Private": "Rašyk asmeninę žinutę"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "tvarkyti savo el. pašto prenumeratas",
         "IfUnsubscribe": "Jei norite atsisakyti prenumeratos",
-        "*": "Siųsti pranešimą {{& message.fields.type}} adresu {{& stream.fields.title}}",
+        "*": "Žinutė {{& message.fields.type}} iki {{& stream.fields.title}}",
+        "Streams\/joined": "Prisijungė {{&call 'avatar.displayName'}}",
+        "Streams\/left": "Liko {{&call 'avatar.displayName'}}",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} pasakė: {{& message.content}}",
-        "Streams\/changed": "Pakeitimai {{stream.fields.title}}",
+        "Streams\/changed": "Pakeitimai {{stream.fields.title}} m",
         "Streams\/invite": "Buvote pakviesti į {{& stream.fields.title}}",
-        "Streams\/announcement": "Skelbimas {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} pakeitė prieigą prie {{& stream.fields.title}}",
+        "Streams\/announcement": "Skelbimas {{& stream.fields.title}} m",
+        "Streams\/access": "{{&call 'avatar.displayName'}} pakeitė prieigą {{& stream.fields.title}}",
         "Streams\/chat\/edit": "Pokalbio pranešimas redaguotas {{& stream.fields.title}}",
         "Streams\/chat\/remove": "Pokalbio pranešimas pašalintas {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} buvo uždarytas",
         "Streams\/task\/progress": "Pažanga padaryta {{stream.fields.title}}",
         "Streams\/task\/complete": "Užduotis atlikta: {{stream.fields.title}}",
         "Streams\/task\/error": "Klaida per: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: gaunamas pranešimas",
-        "Streams\/relatedTo\/Streams\/call": "Naujas skambutis pradėtas {{toTitle}}",
-        "Streams\/relatedTo\/*": "Naujas {{relationDisplayType}} {{toTitle}}",
+        "Streams\/incoming\/*": "{{app}} : gaunamas pranešimas",
+        "Streams\/relatedTo\/Streams\/call": "Naujas skambutis prasidėjo {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nauji {{relationDisplayType}} iš {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} paminėjo jus komentare",
-        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} prisijungė",
-        "Streams\/left": "{{&call 'avatar.displayName'}} liko"
+        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku"
     },
     "invite": {
         "command": "Pakviesti",
-        "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
-        "youCanNowPaste": "Dabar galite kur nors įklijuoti šią nuorodą ir pakviesti žmones",
-        "dialog": {
-            "chooseFromContacts": "Pasirinkite iš savo kontaktų",
-            "chooseAgainFromContacts": "Iš Kontaktų pasirinkite dar kartą",
-            "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus",
-            "selectFromContacts": "Pasirinkite Iš kontaktų",
-            "userChooserPlaceholder": "Ieškokite pagal pavadinimą",
-            "photo": "Nufotografuoti",
-            "photoInstruction": "Jei asmuo, nuskaitęs jūsų QR kodą, yra priešais jus, nufotografuokite jį",
-            "to": "Kam: {{Stream Title}}",
-            "go": "Eik",
-            "title": "Pakviesti",
-            "placeholder": "Mobiliojo telefono numeris arba elektroninio pašto adresas",
-            "orInvite": "Arba pakvieskite žmones naudodami:",
-            "copyLink": "{{ClickOrTap}}, kad nukopijuotumėte kvietimo nuorodą",
-            "shareOrCopyLink": "{{ClickOrTap}}, jei norite bendrinti arba nukopijuoti kvietimo nuorodą",
-            "QR": "{{ClickOrTap}}, kad sugeneruotumėte QR kodą",
-            "QRtitle": "Nuskaitykite šį QR kodą",
-            "QRscanned": "Jie nuskaitė!",
-            "scannedQR": "{{ClickOrTap}}, jei kodas buvo nuskaitytas",
-            "byEmail": "El. paštas",
-            "byText": "Tekstas",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "title2": "Pakvieskite žmones",
-            "chooseMethod": "Pasirinkite metodą:",
-            "selectContacts": "Pasirinkite Kontaktai",
-            "scanQRCode": "Nuskaityti QR kodą",
-            "shareLink": "Bendrinkite nuorodą",
-            "chooseFromRegistered": "Pasirinkite iš registruotų vartotojų",
-            "inviteViaEmailOrSms": "Pakviesti el. paštu arba SMS"
-        },
-        "email": {
-            "subject": "Ei, patikrink tai",
-            "PleaseVisitLink": "Apsilankykite šioje nuorodoje:",
-            "InvitingYou": "Kviečiu jus į {{title}}",
-            "HasInvitedYou": "{{displayName}} pakvietė jus į {{title}}",
-            "HasMentionedYou": "{{displayName}} paminėjo jus „{{title}}“",
-            "YOUAREINVITED": "ESATE KVIEČIAMI!",
-            "AcceptInvite": "Priimti kvietimą"
-        },
-        "sms": {
-            "content": "Buvote pakviesti į {{title}}. Palieskite {{url}}"
-        },
-        "notice": {
-            "text": "Jus pakvietė. {{ClickOrTap}} čia, kad priimtumėte ir prisijungtumėte."
-        },
         "Invite": "Pakviesti",
         "Share": "Dalintis",
+        "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
+        "youCanNowPaste": "Dabar galite įklijuoti šią nuorodą kur nors, kad pakviestumėte žmonių",
         "roles": {
             "title": "Suteikti vaidmenis pakviestiems vartotojams?",
             "NotAuthorizedToGrantRole": {
@@ -133,26 +104,73 @@
         "labels": {
             "title": "Kokie yra jūsų santykiai?"
         },
+        "dialog": {
+            "chooseFromContacts": "Pasirinkite iš savo kontaktų",
+            "chooseAgainFromContacts": "Iš Kontaktų pasirinkite dar kartą",
+            "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus",
+            "selectFromContacts": "Pasirinkite Iš kontaktų",
+            "userChooserPlaceholder": "Ieškoti pagal pavadinimą",
+            "photo": "Nufotografuoti",
+            "photoOf": "Nufotografuokite {{name}}",
+            "photoInstruction": "Jei asmuo, nuskaitęs jūsų QR kodą, yra priešais jus, nufotografuokite jį",
+            "to": "Kam: {{Stream Title}}",
+            "go": "Eik",
+            "title": "Pakviesti",
+            "placeholder": "Mobiliojo telefono numeris arba elektroninio pašto adresas",
+            "orInvite": "Arba pakvieskite žmones naudodami:",
+            "copyLink": "{{ClickOrTap}} norėdami nukopijuoti kvietimo nuorodą",
+            "shareOrCopyLink": "{{ClickOrTap}} norėdami bendrinti arba nukopijuoti kvietimo nuorodą",
+            "QR": "{{ClickOrTap}} , kad sugeneruotumėte QR kodą",
+            "QRtitle": "Nuskaitykite šį QR kodą",
+            "QRscanned": "Jie nuskaitė!",
+            "scannedQR": "{{ClickOrTap}} , jei kodas buvo nuskaitytas",
+            "byEmail": "El. paštas",
+            "byText": "Tekstas",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "title2": "Pakvieskite žmones",
+            "chooseMethod": "Pasirinkite metodą:",
+            "selectContacts": "Pasirinkite Kontaktai",
+            "scanQRCode": "Nuskaityti QR kodą",
+            "shareLink": "Bendrinkite nuorodą",
+            "chooseFromRegistered": "Pasirinkite iš registruotų vartotojų",
+            "inviteViaEmailOrSms": "Pakviesti el. paštu arba SMS"
+        },
         "complete": {
-            "HasInvitedYou": "pakvietė jus į:",
             "WelcomeToCommunity": "Sveiki atvykę į {{communityName}}",
+            "HasInvitedYou": "pakvietė jus į:",
             "HasInvitedYouToTheirProfile": "pakvietė jus prisijungti.",
             "prompt": "Leisk draugams tave atpažinti:",
             "accept": "Priimti kvietimą"
+        },
+        "email": {
+            "subject": "Ei, patikrink tai",
+            "PleaseVisitLink": "Apsilankykite šioje nuorodoje:",
+            "InvitingYou": "Kviečiu jus į {{title}}",
+            "HasInvitedYou": "{{displayName}} pakvietė jus į {{title}}",
+            "HasMentionedYou": "{{displayName}} paminėjo jus „ {{title}} “",
+            "YOUAREINVITED": "ESATE KVIEČIAMI!",
+            "AcceptInvite": "Priimti kvietimą"
+        },
+        "sms": {
+            "content": "Buvote pakviesti į {{title}} . Palieskite {{url}}"
+        },
+        "notice": {
+            "text": "Jus pakvietė. {{ClickOrTap}} čia priimti ir prisijungti."
         }
     },
     "messages": {
         "html": {
-            "posted": "paskelbė <em>{{message.fields.type}}<\/em> pranešimą {{stream.fields.title}}"
+            "posted": "paskelbė <em>{{message.fields.type}}<\/em> žinutę į {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "pakomentavo",
             "startedCallIn": "pradėjo skambinti",
             "in": "in",
-            "body": "{{& url}}: {{& message.fields.content}}",
+            "body": "{{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "buvo išsiųstas į",
-                "byAvatar": "pateikė {{avatar.displayName}}"
+                "byAvatar": "iki {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "turi naują {{instructions.fromDisplayType}}",
@@ -162,18 +180,21 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Kvietimai siunčiami iš mūsų numerio, kurio jūsų draugai dar neatpažįsta. Siųskite trumpą teksto pranešimą, kad sužinotumėte, kad kvietimą atsiuntėte jūs, ir paprašykite spustelėti nuorodą.",
+            "alert": "Kvietimai siunčiami iš mūsų numerio, kurio jūsų draugai dar neatpažįsta. Siųskite trumpą tekstą, kad sužinotumėte, kad kvietimą atsiuntėte jūs, ir paprašykite spustelėti nuorodą.",
             "confirm": "Kvietimai siunčiami iš mūsų numerio, kurio jūsų draugai dar neatpažįsta. Ar norėtumėte greitai išsiųsti jiems pranešimą, kad pakvietimas gautas iš jūsų, ir paprašyti spustelėti nuorodą.",
             "check": "Sveiki, ką tik išsiunčiau jums pakvietimą į {{app}} programą. Patikrinkite savo SMS ir spustelėkite nuorodą!",
             "CheckYourMobile": "Patikrinkite SMS ir vykdykite instrukcijas!"
         },
         "email": {
-            "alert": "Iš mūsų domeno siunčiami kvietimai, kurių jūsų draugai dar neatpažįsta. Siųskite trumpą teksto pranešimą, kad sužinotumėte, kad kvietimą atsiuntėte jūs, ir paprašykite spustelėti nuorodą.",
+            "alert": "Iš mūsų domeno siunčiami kvietimai, kurių jūsų draugai dar neatpažįsta. Siųskite trumpą tekstą, kad sužinotumėte, kad kvietimą atsiuntėte jūs, ir paprašykite spustelėti nuorodą.",
             "confirm": "Iš mūsų domeno siunčiami kvietimai, kurių jūsų draugai dar neatpažįsta. Ar norėtumėte greitai išsiųsti jiems pranešimą, kad pakvietimas gautas iš jūsų, ir paprašyti spustelėti nuorodą.",
             "subject": "Ar gavote pakvietimą?",
             "body": "Sveiki, ką tik išsiunčiau jums pakvietimą į {{app}} programą. Patikrinkite savo el. paštą ir spustelėkite ten esančią nuorodą!",
             "CheckYourEmail": "Patikrinkite el. paštą ir vykdykite instrukcijas!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Privatumo nustatymai"
     },
     "participating": {
         "Title": "Pavadinimas",
@@ -185,7 +206,7 @@
         "AreYouSureRemoveParticipant": "Ar tikrai norite pašalinti šį dalyvį?",
         "RemoveParticipant": "Pašalinti dalyvį",
         "Identifiers": "Identifikatoriai",
-        "Devices": "Prietaisų",
+        "Devices": "Prietaisai",
         "Streams": "Srautai"
     },
     "webrtc": {
@@ -198,31 +219,31 @@
             "cameraAndMicrophoneBtn": "Įjungti kamerą ir mikrofoną"
         },
         "preparing": {
+            "dialogTitle": "Prieš prisijungdami įjunkite \/ išjunkite fotoaparatą arba mikrofoną",
             "micIsOff": "Mikrofonas išjungtas",
             "micIsOn": "Mikrofonas įjungtas",
             "cameraIsOff": "Kamera išjungta",
             "cameraIsOn": "Kamera įjungta",
             "screenSharingIsOn": "Ekrano bendrinimas įjungtas",
             "screenSharingIsOff": "Bendrinti ekraną",
-            "joinNow": "Prisijunkite prie skambučio",
-            "dialogTitle": "Prieš prisijungdami įjunkite \/ išjunkite fotoaparatą arba mikrofoną"
+            "joinNow": "Prisijunkite prie skambučio"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcijos",
             "permissionDenied": "Leidimas {{kind}} atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
-            "point1": "Eikite į „Nustatymai“ -&gt; „Išplėstiniai“ -&gt; „Privatumas ir sauga“ -&gt; „Svetainės nustatymai“ -&gt; „Kamera“ arba „Svetainės nustatymai“ -&gt; „Mikrofonas“",
-            "point2": "Pašalinti {{hostname}} iš „Blokuoti“ sąrašo"
+            "point1": "Eikite į &quot;Nustatymai&quot; -&gt; &quot;Išplėstiniai&quot; -&gt; &quot;Privatumas ir sauga&quot; -&gt; &quot;Svetainės nustatymai&quot; -&gt; &quot;Kamera&quot; arba &quot;Svetainės nustatymai&quot; -&gt; &quot;Mikrofonas&quot;",
+            "point2": "Pašalinkite {{hostname}} iš „Blokuoti“ sąrašo"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instrukcijos",
-            "permissionDenied": "Leidimas {{kind}} atmestas. Įkelkite šį puslapį iš naujo ir patvirtinkite prieigą prie {{kind}}, kad galėtumėte prisijungti prie konferencijos."
+            "permissionDenied": "Leidimas {{kind}} atmestas. Įkelkite šį puslapį iš naujo ir patvirtinkite prieigą prie {{kind}} , kad galėtumėte prisijungti prie konferencijos."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instrukcijos",
             "permissionDenied": "Leidimas {{kind}} atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
             "point1": "Eikite į „Android“ nustatymus",
             "point2": "Atidarykite „Programos ir pranešimai“",
-            "point3": "Raskite „{{communityName}}“ ir atidarykite jį",
+            "point3": "Raskite „ {{communityName}} “ ir atidarykite jį",
             "point4": "Bakstelėkite Leidimai",
             "point5": "Įgalinti {{kind}}"
         },
@@ -232,7 +253,10 @@
             "point1": "Eikite į „iOS“ nustatymus",
             "point2": "Atidarykite „Privatumas“",
             "point3": "Raskite {{kind}} ir atidarykite",
-            "point4": "Raskite „{{communityName}}“ ir įgalinkite"
+            "point4": "Raskite „ {{communityName}} “ ir įjunkite"
+        },
+        "fbLive": {
+            "dialogTitle": "Prasidėjo tiesioginė „Facebook“ transliacija"
         },
         "notices": {
             "youJoinedRoom": "Jūs prisijungėte prie kambario",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
             "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
             "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje.",
-            "allowedVideoLimit": "Šioje patalpoje leidžiamas tik {{limit}} vaizdo įrašas",
-            "allowedAudioLimit": "Šioje patalpoje leidžiama naudoti tik {{limit}} mikrofoną"
+            "allowedVideoLimit": "Šiame kambaryje leidžiama rodyti tik {{limit}} vaizdo įrašus",
+            "allowedAudioLimit": "Šiame kambaryje leidžiami tik {{limit}} mikrofonai"
         },
         "settingsPopup": {
             "dialogTitle": "Vaizdo įrašo nustatymai",
@@ -289,17 +313,20 @@
             "fbStartLive": "Tiesiogiai",
             "fbStopLive": "Baigti tiesioginę transliaciją",
             "streamingSettings": "Nustatymai",
+            "manageStream": "Tvarkyti tiesioginę transliaciją",
             "fbEmbedCode": "Įterpti",
             "copy": "Kopijuoti",
             "streamToRTMP": "Perduokite srautu į tinkintą RTMP",
             "startBroadcasting": "Pradėkite transliuoti",
-            "broadcastingInProgress": "Transliacija vyksta",
-            "manageStream": "Tvarkyti tiesioginę transliaciją"
+            "broadcastingInProgress": "Transliacija vyksta"
         },
         "audioSettings": {
             "dialogTitle": "Garso nustatymai",
             "speakers": "Garsiakalbiai",
             "microphone": "Mikrofonas"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Valdykite transliaciją"
         },
         "participantsPopup": {
             "dialogTitle": "Dalyvio nustatymai",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Rodyti ekrano bendrinimą"
         },
         "streamingSettings": {
-            "title": "Srautinio perdavimo nustatymai"
+            "title": "Tiesiogiai"
         },
         "preview": {
             "Meeting": "Telekonferencija",
             "MeetingEnded": "Telekonferencija baigėsi"
         },
         "requestSpeakDialog": {
-            "msg": "Šiuo metu susitikime kalba {{count}} žmonės. Ar norite pakeisti vieną iš jų po to, kai leisite jiems {{seconds}} sek. baigti kalbėti?",
-            "dialogTitle": "Prašymas kalbėti"
-        },
-        "fbLive": {
-            "dialogTitle": "„Facebook“ prasidėjo tiesioginė transliacija"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Valdykite transliaciją"
+            "dialogTitle": "Prašymas kalbėti",
+            "msg": "Šiuo metu posėdyje kalba {{count}} žmonės. Ar norite pakeisti vieną iš jų, suteikę jiems {{seconds}} sekundžių, kad baigtų kalbėti?"
         }
     },
     "types": {
@@ -396,7 +417,7 @@
         "Streams\/image": {
             "displayType": "Vaizdas",
             "description": "vizualinis vaizdas",
-            "newItem": "Pridėti paveikslėlį"
+            "newItem": "Pridėti vaizdą"
         },
         "Streams\/images": {
             "displayType": "Vaizdų galerija",
@@ -451,8 +472,8 @@
             "description": "pokalbis tarp vartotojų su istorija"
         },
         "Streams\/webrtc": {
-            "displayType": "Tiesioginis skambutis",
-            "description": "vaizdo \/ garso skambutis realiuoju laiku"
+            "displayType": "Telekonferencija",
+            "description": "internetinė vaizdo \/ garso konferencija"
         },
         "Streams\/question": {
             "displayType": "Klausimas",
@@ -549,34 +570,32 @@
         "AnswerQuestion": "Atsakymas į klausimą",
         "SetYourAnswer": "Prašau atsakyti į klausimą",
         "NewQuestion": "Naujas Klausimas",
+        "EditQuestion": "Redaguoti klausimą",
         "NewAnswer": "Naujas atsakymas",
+        "NewPossibleAnswer": "Naujas galimas atsakymas",
         "AnswerDetails": "Išsami informacija apie atsakymą",
         "answerOption": "Parinktis",
         "answerOptionExclusive": "Išskirtinis",
-        "answerTextarea": "Teksto sritis",
+        "answerTextarea": "Textarea",
+        "answerText": "Tekstas",
+        "HideUntilAnswered": "Slėpti, kol bus atsakyta",
+        "CantChangeAnswers": "Negalima pakeisti atsakymų",
         "FreeAnswer": "Parašykite savo atsakymą čia",
         "SaveQuestion": "Išsaugoti klausimą",
         "SaveAnswer": "Išsaugoti atsakymą",
-        "AddAnotherAnswer": "Pridėkite kitą atsakymą",
-        "ErrorAnswers": "Pridėkite nors vieną atsakymą",
+        "Save": "Sutaupyti",
+        "Send": "Siųsti",
+        "TitleRequired": "Reikalingas pavadinimas!",
         "AlreadyAnswered": "Jau atsakyta",
         "TitlePlaceholder": "Įveskite savo klausimą",
         "ContentPlaceholder": "Čia pateikite bet kokią papildomą informaciją, kad padėtumėte žmonėms atsakyti",
         "ErrorTitle": "Reikalingas klausimas",
         "Placeholder": "Vietos rezervuaras",
-        "EditQuestion": "Redaguoti klausimą",
-        "NewPossibleAnswer": "Naujas galimas atsakymas",
-        "answerText": "Tekstas",
-        "HideUntilAnswered": "Slėpti, kol bus atsakyta",
-        "CantChangeAnswers": "Negalima pakeisti atsakymų",
-        "Save": "Sutaupyti",
-        "Send": "Siųsti",
-        "TitleRequired": "Reikalingas pavadinimas!",
         "AreYouSure": "Ar tu tuo tikras?"
     },
     "experience": {
-        "NewExperience": "Nauja Patirtis",
-        "DefineTitle": "Apibrėžkite pavadinimą",
+        "NewExperience": "Nauja patirtis",
+        "DefineTitle": "Prašome apibrėžti pavadinimą",
         "Create": "Sukurti"
     },
     "calls": {
@@ -593,25 +612,5 @@
         "endCall": "Baigti skambutį",
         "interview": "Interviu",
         "markApproved": "Pažymėti patvirtintą"
-    },
-    "identifier": {
-        "private": "Privatus",
-        "public": "Viešas",
-        "configurationSaved": "Konfigūracija išsaugota",
-        "error": "Kažkas nutiko",
-        "privacySettings": "Privatumo nustatymai"
-    },
-    "avatar": {
-        "firstName": "Pirmas vardas",
-        "lastName": "pavardė",
-        "username": "Vartotojo vardas"
-    },
-    "login": {
-        "prompt": "Leisk draugams tave atpažinti:",
-        "newUser": "arba toliau sukurkite naują paskyrą",
-        "picTooltip": "Vėliau galėsite pakeisti šią nuotrauką",
-        "placeholder": {
-            "fullName": "Įveskite savo vardą ir pavardę"
-        }
     }
 }

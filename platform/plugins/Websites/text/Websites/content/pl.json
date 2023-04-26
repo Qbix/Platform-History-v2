@@ -5,7 +5,7 @@
                 "link": "Link do promocji",
                 "startDate": "Data rozpoczęcia",
                 "startTime": "Czas rozpoczęcia",
-                "endDate": "Data zakonczenia",
+                "endDate": "Data końcowa",
                 "endTime": "Koniec czasu",
                 "budget": "Budżet"
             },
@@ -13,7 +13,7 @@
                 "Title": "Filtruj według zainteresowań",
                 "FilterInterests": "Zacznij wpisywać zainteresowanie..."
             },
-            "Interest": "Zainteresowanie",
+            "Interest": "Odsetki",
             "Location": "Lokalizacja"
         }
     },
@@ -21,16 +21,16 @@
         "composer": {
             "Go": "Iść",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Przeglądaj",
+            "BrowseTheWeb": "Przeglądać",
             "WriteToStartConversation": "Napisz swoje przemyślenia, aby rozpocząć rozmowę",
             "StartConversation": "Rozpocznij rozmowę",
-            "GotoConversation": "Przejdź do rozmowy",
+            "GotoConversation": "Przejdź do Rozmowa",
             "reset": "Resetowanie",
             "edit": "Edytować",
             "link": "Połączyć",
             "setUrl": "Ustaw adres URL",
-            "save": "Zapisać",
-            "setClip": "Wytnij klip",
+            "save": "Ratować",
+            "setClip": "Wycięty klip",
             "invalidURL": "nieprawidłowy URL"
         },
         "FileTooLarge": "Plik jest za duży do buforowania. Maksymalny rozmiar pliku {{size}}",
@@ -43,8 +43,8 @@
             "displayType": "Artykuł"
         },
         "Websites\/slide": {
-            "description": "Slajd w prezentacji może zawierać kod HTML, audio itp.",
-            "displayType": "Ślizgać się"
+            "description": "Slajd w prezentacji może zawierać kod HTML, dźwięk itp.",
+            "displayType": "Slajd"
         },
         "Websites\/presentation": {
             "description": "Prezentacja składająca się z różnych slajdów",
@@ -59,8 +59,8 @@
             "displayType": "Umieszczenie reklamy"
         },
         "Websites\/advert\/creative": {
-            "description": "Treść do reklamy",
-            "displayType": "Reklama kreatywna"
+            "description": "Treść reklamy",
+            "displayType": "Kreacja reklamowa"
         },
         "Websites\/advert\/campaign": {
             "description": "Kampania reklamowa",

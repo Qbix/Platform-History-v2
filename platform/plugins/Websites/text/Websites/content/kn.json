@@ -43,7 +43,7 @@
             "displayType": "ಲೇಖನ"
         },
         "Websites\/slide": {
-            "description": "ಪ್ರಸ್ತುತಿಯಲ್ಲಿನ ಸ್ಲೈಡ್, HTML, ಆಡಿಯೋ ಇತ್ಯಾದಿಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ.",
+            "description": "ಪ್ರಸ್ತುತಿಯಲ್ಲಿನ ಸ್ಲೈಡ್, HTML, ಆಡಿಯೋ ಇತ್ಯಾದಿಗಳನ್ನು ಒಳಗೊಂಡಿರಬಹುದು.",
             "displayType": "ಸ್ಲೈಡ್"
         },
         "Websites\/presentation": {

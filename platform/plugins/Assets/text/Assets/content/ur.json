@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "خرابی",
+        "WalletAbsent": "پرس منسلک نہیں ہے۔",
+        "Rendering": "<span class='url'>{{1}}<\/span> رینڈر کرتے وقت غلطیاں تھیں۔",
+        "PriceRequired": "قیمت درکار ہے!",
+        "NameRequired": "نام درکار ہے!",
+        "PriceInvalid": "قیمت غلط ہے!",
+        "AmountInvalid": "رقم غلط!",
+        "TransactionFailed": "لین دین ناکام ہو گیا۔",
+        "ChainNotSupported": "منتخب کردہ سلسلہ تعاون یافتہ نہیں ہے۔ تائید شدہ سلسلہ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "ایپلیکیشن کے ساتھ کام کرنے کے لیے میٹا ماسک کی ضرورت ہے۔",
+        "UserNotLoggedInMetaMask": "صارف MetaMask میں لاگ ان نہیں ہے۔",
+        "CurrencyNotFound": "کرنسی نہیں ملی",
+        "WrongChain": "یہ NFT &quot; {{chain}} &quot; کے تحت بنایا گیا ہے۔ براہ کرم یہ سلسلہ استعمال کریں۔",
+        "NoRecipientSelected": "کوئی وصول کنندہ منتخب نہیں کیا گیا۔",
+        "NotEnoughPermissionsWallet": "اس صارف کے بٹوے کو پڑھنے کے لیے کافی اجازتیں نہیں ہیں۔",
+        "ThisUserHaveNoWallet": "اس صارف کو کوئی والیٹ تفویض نہیں کیا گیا ہے۔",
+        "TheWalletOfThisUserInvalid": "اس صارف کا پرس غلط ہے۔",
+        "WalletInvalid": "والیٹ کا پتہ غلط ہے۔"
+    },
+    "admin": {
+        "Title": "انتظامی اثاثے۔",
+        "SubscriptionTitle": "سبسکرپشن پلانز"
+    },
     "browsertab": {
         "html": "{{button}}",
-        "button": "ادائیگی کرنے کے لیے تھپتھپائیں۔"
+        "button": "ادائیگی کے لیے تھپتھپائیں۔"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} کے لیے چارج پر کارروائی کی گئی",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} کو آپ کی ادائیگی کا شکریہ",
-        "SubscribedTo": "{{call 'user.displayName'}} نے {{plan.title}} کو سبسکرائب کیا",
-        "YouSubscribedTo": "آپ کو {{plan.title}} میں سبسکرائب کیا گیا ہے",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : {{call 'user.displayName'}} کے لیے چارج کیا گیا۔",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} پر آپ کی ادائیگی کا شکریہ",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} کو سبسکرائب کیا۔",
+        "YouSubscribedTo": "آپ {{plan.title}} کو سبسکرائب کر چکے ہیں۔",
         "Assets\/credits\/alert": "آپ کے پاس اپنے اکاؤنٹ سے متعلق الرٹ ہے۔"
     },
     "charge": {
-        "Subject": "آپ کو &quot;{1001}}&quot; کے ذریعے {{call 'publisher.displayName'}} سے {{displayAmount}} کی ادائیگی ملتی ہے",
-        "HasBeenCharged": "ارے، یہ صرف آپ کو بتانے کے لیے ہے کہ {{4}} کے ذریعے {{3}} کا {{2}} چارج کیا گیا ہے۔"
+        "Subject": "آپ کو &quot; {{description}} &quot; تک {{call 'publisher.displayName'}} سے {{displayAmount}} کی ادائیگی ملتی ہے۔",
+        "HasBeenCharged": "ارے، یہ صرف آپ کو بتانے کے لیے ہے {{1}} {{4}} تک {{3}} کے لیے {{2}} چارج کیا گیا ہے۔"
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; کے لیے آپ کی ادائیگی کا شکریہ",
-        "HavePaid": "ارے {{1}}، یہ صرف ایک فوری تصدیق ہے کہ آپ نے {{4}} کے لیے {{3}} کو کامیابی سے ادائیگی کر دی ہے۔"
+        "Subject": "&quot; {{description}} &quot; کے لیے آپ کی ادائیگی کا شکریہ",
+        "HavePaid": "ارے {{1}} ، یہ صرف ایک فوری تصدیق ہے کہ آپ نے {{4}} کے لیے {{2}} سے {{3}} تک کامیابی سے ادائیگی کر دی ہے۔"
     },
     "payment": {
         "AboutOrder": "آرڈر کے بارے میں معلومات",
@@ -28,31 +52,29 @@
         "FailTryAgain": "آپ کی ادائیگی کامیاب نہیں ہوئی، براہ کرم دوبارہ کوشش کریں۔",
         "SomethingWrong": "کچھ غلط ہو گیا",
         "PaymentStatus": "ادائیگی کی حیثیت",
-        "PayTo": "ادائیگی {{displayName}}",
+        "PayTo": "{{displayName}} ادا کریں۔",
         "ChooseCurrency": "ایک کرنسی کا انتخاب کریں۔",
-        "YouCanSendUpTo": "آپ {{amount}} {{symbol}} تک بھیج سکتے ہیں",
+        "YouCanSendUpTo": "آپ {{amount}} {{symbol}} تک بھیج سکتے ہیں۔",
         "Send": "بھیجیں",
         "EnterAmount": "رقم درج کریں"
     },
     "credits": {
-        "InviteAcceptedBy": "دعوت قبول کی گئی بذریعہ {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} نے پہلا نام درج کیا۔",
-        "Streams_user_lastname": "{{invitedUserName}} نے آخری نام درج کیا۔",
-        "Streams_user_icon": "{{invitedUserName}} درج کردہ آئیکن",
-        "Places_user_location": "{{invitedUserName}} نے مقام درج کیا۔",
-        "Streams_greeting": "{{invitedUserName}} نے سلام داخل کیا۔",
-        "YouHaveCreditsToStart": "شروع کرنے کے لیے آپ کے پاس {{amount}} کریڈٹ ہیں۔",
-        "PaymentFor": "&quot;{{1}}&quot; کے لیے ادائیگی",
-        "PaymentTo": "{{1}} کو ادائیگی",
-        "PaymentToUser": "{{toUserName}} کو ادائیگی",
-        "CreatePaidStream": "بنانے کے لیے {{toStreamName}}",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot; میں ریزرویشن کے لیے",
-        "CreatedCommunity": "کمیونٹی &quot;{{communityId}}&quot; بنانے کے لیے",
-        "LeftPaidStream": "بطور ریزرویشن ریفنڈ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; میں",
+        "InviteAcceptedBy": "دعوت {{invitedUserName}} کے ذریعے قبول کی گئی۔",
+        "InvitedUserFilledStream": "{{invitedUserName}} بھرے {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} بھرنے کے لیے",
+        "YouHaveCreditsToStart": "شروع کرنے کے لیے آپ کے پاس {{amount}} کریڈٹس ہیں۔",
+        "PaymentFor": "&quot; {{1}} &quot; کے لیے ادائیگی",
+        "PaymentTo": "{{1}} پر ادائیگی کریں۔",
+        "PaymentToUser": "{{toUserName}} پر ادائیگی کریں۔",
+        "CreatePrivateChat": "{{toUserName}} کے ساتھ نجی بات چیت کے لیے",
+        "CreatePaidStream": "{{toStreamName}} بنانے کے لیے",
+        "JoinedPaidStream": "&quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName = &#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot; میں ریزرویشن کے لیے",
+        "CreatedCommunity": "کمیونٹی بنانے کے لیے &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "بطور ریزرویشن ریفنڈ &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot; میں",
         "BoughtCredits": "{{amount}} کریڈٹ خریدے۔",
         "BonusCredits": "بونس {{amount}} کریڈٹس",
         "BuyAmountCredits": "{{amount}} کریڈٹ خریدیں۔",
-        "WatchClip": "{{fromStreamTitle}} دیکھنے کے لیے {{amount}} کریڈٹ حاصل کیے",
+        "WatchClip": "{{fromStreamTitle}} دیکھنے کے لیے {{amount}} کریڈٹس حاصل کیے ہیں۔",
         "MissingCredits": "لاپتہ کریڈٹس",
         "YouMissingCredits": "آگے بڑھنے کے لیے آپ کو اضافی {{amount}} کریڈٹ درکار ہیں۔",
         "BuyCredits": "کریڈٹ خریدیں۔",
@@ -63,55 +85,52 @@
         "ErrorInvalidAmount": "رقم غلط ہے۔",
         "ErrorInvalidCurrency": "بدقسمتی سے ہم ابھی تک کرنسی {{currency}} کو سپورٹ نہیں کرتے ہیں۔",
         "forMessages": {
-            "BoughtCredits": "{{amount}} کریڈٹس",
-            "BonusCredits": "{{amount}} کریڈٹس"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} بھرا ہوا {{FilledStreamTitle}}",
-        "ForFillingStream": "بھرنے کے لیے {{FilledStreamTitle}}",
-        "CreatePrivateChat": "{{toUserName}} کے ساتھ نجی بات چیت کے لیے"
+            "BoughtCredits": "{{amount}} کریڈٹ",
+            "BonusCredits": "{{amount}} کریڈٹ"
+        }
     },
     "history": {
         "Date": "تاریخ",
         "Amount": "رقم",
         "Description": "تفصیل",
         "Client": "کلائنٹ",
+        "User": "صارف",
         "To": "کو",
         "From": "سے",
-        "SeeHistory": "{{1}} کے لیے ادائیگی کی سرگزشت دیکھیں",
+        "SeeHistory": "{{1}} کے لیے ادائیگی کی تاریخ دیکھیں",
         "HistoryEmpty": "آپ کے پاس ابھی تک کوئی ڈیٹا نہیں ہے۔",
-        "PaymentFor": "{{amount}} کریڈٹ بھیجے گئے۔",
-        "PaymentTo": "{{amount}} کریڈٹ بھیجے گئے۔",
-        "PaymentToUser": "{{amount}} کریڈٹ بھیجے گئے۔",
-        "CreatePaidStream": "{{amount}} کریڈٹس خرچ ہوئے۔",
+        "PaymentFor": "{{amount}} کریڈٹ بھیجے۔",
+        "PaymentTo": "{{amount}} کریڈٹ بھیجے۔",
+        "PaymentToUser": "{{amount}} کریڈٹ بھیجے۔",
+        "CreatePaidStream": "{{amount}} کریڈٹ خرچ ہوئے۔",
         "WatchClip": {
-            "+": "حاصل کردہ {{999} کریڈٹس",
-            "-": "{{amount}} کریڈٹس خرچ ہوئے۔"
+            "+": "{{amount}} کریڈٹس حاصل کئے",
+            "-": "{{amount}} کریڈٹ خرچ ہوئے۔"
         },
         "JoinedPaidStream": {
-            "+": "حاصل کردہ {{999} کریڈٹس",
-            "-": "{{amount}} کریڈٹس خرچ ہوئے۔"
+            "+": "{{amount}} کریڈٹس حاصل کئے",
+            "-": "{{amount}} کریڈٹ خرچ ہوئے۔"
         },
         "LeftPaidStream": {
-            "+": "موصول ہوئے {{999} کریڈٹس",
-            "-": "{{amount}} کریڈٹ بھیجے گئے۔"
+            "+": "{{amount}} کریڈٹ موصول ہوئے۔",
+            "-": "{{amount}} کریڈٹ بھیجے۔"
         },
-        "CreatedCommunity": "{{amount}} کریڈٹس خرچ ہوئے۔",
+        "CreatedCommunity": "{{amount}} کریڈٹ خرچ ہوئے۔",
         "BoughtCredits": "{{amount}} کریڈٹ خریدے۔",
         "BonusCredits": "بونس {{amount}} کریڈٹس ملے",
-        "InviteAcceptedBy": "حاصل کردہ {{999} کریڈٹس",
-        "Streams_user_firstname": "حاصل کردہ {{999} کریڈٹس",
-        "Streams_user_lastname": "حاصل کردہ {{999} کریڈٹس",
-        "Streams_user_icon": "حاصل کردہ {{999} کریڈٹس",
-        "Places_user_location": "حاصل کردہ {{999} کریڈٹس",
-        "Streams_greeting": "حاصل کردہ {{999} کریڈٹس",
-        "YouHaveCreditsToStart": "حاصل کردہ {{999} کریڈٹس",
-        "User": "صارف"
+        "InviteAcceptedBy": "{{amount}} کریڈٹس حاصل کئے",
+        "Streams_user_firstname": "{{amount}} کریڈٹس حاصل کئے",
+        "Streams_user_lastname": "{{amount}} کریڈٹس حاصل کئے",
+        "Streams_user_icon": "{{amount}} کریڈٹس حاصل کئے",
+        "Places_user_location": "{{amount}} کریڈٹس حاصل کئے",
+        "Streams_greeting": "{{amount}} کریڈٹس حاصل کئے",
+        "YouHaveCreditsToStart": "{{amount}} کریڈٹس حاصل کئے"
     },
     "subscriptions": {
         "infoTitle": "ادائیگی کی معلومات سیٹ کریں۔",
         "confirm": {
             "title": "سبسکرپشن شروع کریں۔",
-            "message": "کیا آپ {{title}} کو سبسکرائب کرنا چاہیں گے؟",
+            "message": "&quot; {{title}} &quot; کی بار بار رکنیت شروع کریں؟",
             "ok": "ٹھیک ہے",
             "cancel": "منسوخ کریں۔"
         },
@@ -131,7 +150,7 @@
         "Period": "مدت",
         "Price": "قیمت",
         "AreYouSureUnsubscribe": "کیا آپ واقعی اس پلان کو اَن سبسکرائب کرنا چاہتے ہیں؟",
-        "YouUnsubscribedFromPlan": "آپ نے پلان &quot;{{planTitle}}&quot; سے ان سبسکرائب کر دیا ہے۔ آپ سے چارج نہیں لیا جائے گا، لیکن آپ کی رکنیت {{endsIn}} تک جاری رہے گی۔",
+        "YouUnsubscribedFromPlan": "آپ نے پلان &quot; {{planTitle}} &quot; سے ان سبسکرائب کر دیا ہے۔ آپ سے چارج نہیں لیا جائے گا، لیکن آپ کی رکنیت {{endsIn}} تک جاری رہے گی۔",
         "plan": {
             "TitlePlaceholder": "منصوبہ کا عنوان",
             "PricePlaceholder": "قیمت",
@@ -145,7 +164,7 @@
         "BuyAmountCredits": "{{amount}} کریڈٹ خریدیں۔",
         "confirm": {
             "title": "رقم ادا کریں",
-            "message": "کیا آپ {{symbol}}{{amount}} کی ادائیگی سے اتفاق کرتے ہیں؟",
+            "message": "کیا آپ {{symbol}} {{amount}} ادا کرنے سے اتفاق کرتے ہیں؟",
             "ok": "ٹھیک ہے",
             "cancel": "منسوخ کریں۔"
         }
@@ -169,12 +188,12 @@
         },
         "Assets\/service": {
             "displayType": "سروس",
-            "description": "سروس کی پیشکش کی جا رہی ہے"
+            "description": "سروس پیش کی جا رہی ہے"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "حاصل کردہ {{999} کریڈٹس"
+            "content": "{{amount}} کریڈٹس حاصل کئے"
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} کریڈٹ خریدے۔"
@@ -183,16 +202,27 @@
             "content": "بونس {{amount}} کریڈٹس"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} کریڈٹس خرچ ہوئے۔"
+            "content": "{{amount}} کریڈٹ خرچ ہوئے۔"
         },
         "Assets\/credits\/sent": {
-            "content": "{{toUserName}} کو {{amount}} کریڈٹ بھیجے گئے"
+            "content": "{{toUserName}} پر {{amount}} کریڈٹ بھیجے۔"
         },
         "Assets\/credits\/received": {
-            "content": "{{fromUserName}} سے {{999} کریڈٹس موصول ہوئے"
+            "content": "{{fromUserName}} سے {{amount}} کریڈٹ موصول ہوئے۔"
         },
         "Assets\/credits\/alert": {
-            "content": "آپ کے اکاؤنٹ میں بہت کم کریڈٹ ہیں۔ مزید کریڈٹ خریدنے کے لیے براہ کرم <a href='{{link}}'>اس لنک<\/a> پر جائیں۔"
+            "content": "آپ کے اکاؤنٹ میں بہت کم کریڈٹ ہیں۔ مزید کریڈٹ خریدنے کے لیے براہ کرم <a href='<i translate='no'>999&#39;&gt;اس لنک<\/a> پر جائیں۔"
+        }
+    },
+    "billing": {
+        "Title": "اثاثوں کی بلنگ",
+        "CreditsMinimum": "کم سے کم کریڈٹس",
+        "CreditsToAdd": "شامل کرنے کے لیے کریڈٹس",
+        "Save": "محفوظ کریں۔",
+        "ThisLink": "یہ لنک",
+        "errors": {
+            "CreditsMinimumNegative": "کریڈٹ کم از کم منفی نہیں ہو سکتا",
+            "CreditsToAddNegative": "شامل کرنے کے لیے کریڈٹ منفی نہیں ہو سکتے"
         }
     },
     "services": {
@@ -203,8 +233,11 @@
             "LinkPlaceholder": "اضافی معلومات کا لنک سیٹ کریں۔",
             "DescriptionPlaceholder": "سروس کی تفصیل",
             "SaveService": "خدمت کو محفوظ کریں۔",
-            "SelectRequiredParticipants": "مطلوبہ شرکاء",
+            "SelectRequiredParticipants": "متعلقہ شرکاء کی ضرورت ہے۔",
             "RequiredParticipantsDesc": "براہ کرم متعلقہ شرکاء کو منتخب کریں جو اس سروس کو استعمال کرنے کے لیے درکار ہیں (مثال کے طور پر &quot;ڈاگز شو&quot; کے لیے پالتو جانور، یا &quot;بچوں کی چھٹی&quot; کے لیے بچے وغیرہ)۔ اگر سروس کی ادائیگی کی جاتی ہے، تو صارف کو ہر متعلقہ شرکاء کے لیے بھی ادائیگی کرنے کی ضرورت ہوگی۔"
+        },
+        "EditServiceTemplate": {
+            "Title": "سروس میں ترمیم کریں۔"
         },
         "ManageServiceTemplates": "سروس ٹیمپلیٹس کا نظم کریں۔",
         "ManageServices": "خدمات کا نظم کریں۔",
@@ -212,15 +245,30 @@
         "OptionalContribution": "اختیاری شراکت",
         "RequiredPayment": "مطلوبہ ادائیگی",
         "AreYouSureDelete": "کیا آپ واقعی اس سروس کو حذف کرنا چاہتے ہیں؟",
-        "AmountServicesRelated": "اس سروس سے متعلق {{amount}} دستیابیاں ہیں۔ وہ بھی ہٹا دیے جائیں گے۔",
-        "EditServiceTemplate": {
-            "Title": "سروس میں ترمیم کریں۔"
-        }
+        "AmountServicesRelated": "اس سروس سے متعلق {{amount}} دستیابیاں ہیں۔ وہ بھی ہٹا دیے جائیں گے۔"
+    },
+    "transfer": {
+        "SelectRecipient": "وصول کنندہ کو منتخب کریں۔",
+        "TransactionSuccess": "لین دین کی کامیابی",
+        "OrTypeWalletAddress": "یا وصول کنندہ والیٹ کا پتہ ٹائپ کریں۔"
     },
     "NFT": {
-        "Title": "{{title}} NFT کے بارے میں معلومات",
-        "Description": "NFT کے بارے میں تفصیلی معلومات",
-        "FixedBid": "ابھی خریدیں",
+        "Title": "عنوان",
+        "Name": "نام",
+        "EnterName": "نام درج کریں",
+        "EnterAuthorWallet": "مصنف کا پرس درج کریں۔",
+        "InformationAboutTitle": "{{title}} NFT کے بارے میں معلومات",
+        "Description": "تفصیل",
+        "DetailedInformationAboutNFT": "NFT کے بارے میں تفصیلی معلومات",
+        "PresaleStarts": "پری سیل 23 دسمبر سے شروع ہو رہی ہے۔",
+        "OwnerUserNotFound": "اس NFT کا مالک ہماری درخواست میں رجسٹرڈ نہیں ہے۔",
+        "BuyNow": "ابھی خریدئے",
+        "Buy": "خریدنے",
+        "Add": "شامل کریں۔",
+        "Remove": "دور",
+        "NoNFTyet": "ابھی تک کوئی NFTs نہیں ہیں۔",
+        "Conversation": "بات چیت",
+        "Create": "بنانا",
         "CurrentBid": "موجودہ بولی",
         "StartingIn": "میں شروع ہو رہا ہے۔",
         "EndingIn": "میں ختم ہو رہا ہے۔",
@@ -234,7 +282,10 @@
         "StartingDate": "شروع کرنے کی تاریخ",
         "BidsBelowThisAmount": "اس رقم سے کم بولیوں کی اجازت نہیں ہوگی۔",
         "MinimumBid": "کم سے کم بولی",
+        "Author": "مصنف",
         "Price": "قیمت",
+        "Commission": "کمیشن",
+        "EnterCommission": "کمیشن درج کریں۔",
         "Owner": "مالک",
         "SelectCategory": "زمرہ منتخب کریں۔",
         "Day": "دن",
@@ -242,7 +293,7 @@
         "Hour": "گھنٹہ",
         "Hours": "گھنٹے",
         "Minute": "منٹ",
-        "Minutes": "منٹ",
+        "Minutes": "منٹس",
         "Second": "دوسرا",
         "Seconds": "سیکنڈز",
         "SalesCreator": "فروخت کی رقم خالق کے پاس جائے گی۔",
@@ -251,80 +302,37 @@
         "History": "تاریخ",
         "LoremIpsum": "Lorem Ipsum پرنٹنگ اور ٹائپ سیٹنگ انڈسٹری کا محض ڈمی ٹیکسٹ ہے۔",
         "PutOnSale": "فروخت پر رکھو",
-        "PutOffSale": "فروخت سے دستبردار ہونا",
+        "PutOffSale": "فروخت سے دستبرداری",
         "Transfer": "منتقلی",
+        "Actions": "اعمال",
+        "Claim": "دعویٰ",
+        "ClaimNFT": "NFT کا دعوی کریں۔",
+        "Unlocking": "کھولنا",
+        "Unlock": "غیر مقفل کریں۔",
         "Update": "اپ ڈیٹ",
         "UpdateToken": "ٹوکن کو اپ ڈیٹ کریں۔",
+        "UpdateNFT": "NFT کو اپ ڈیٹ کریں۔",
         "CreateToken": "ٹوکن بنائیں",
         "PlaceBid": "جگہ کی بولی",
         "SoldOut": "فروخت",
+        "NotOnSale": "فروخت پر نہیں",
         "NftName": "NFT کا نام",
         "DescribeYourNFT": "براہ کرم اپنے NFT کی وضاحت کریں۔",
         "NftPicture": "NFT کی نمائندگی کرنے والی تصویر",
         "NftMovie": "NFT کی نمائندگی کرنے والی فلم",
         "UploadMovie": "فلم اپ لوڈ کریں۔",
         "MovieSource": "مووی ماخذ",
-        "UploadFile": "فائل اپ لوڈ کریں۔",
+        "MovieURL": "مووی یو آر ایل",
+        "UploadFile": "ایک فائل اپ لوڈ کریں۔",
         "PutOnMarketplace": "بازار میں لگائیں۔",
         "InstantPurchase": "صارفین کو فوری طور پر آپ کا NFT خریدنے کی اجازت دینے کے لیے قیمت درج کریں۔",
         "FixedPrice": "مقررہ قیمت",
         "TimedAuction": "مقررہ نیلامی",
-        "OpenForBids": "بولیوں کے لیے کھولیں۔",
+        "OpenForBids": "بولی کے لیے کھولیں۔",
         "PriceOnePiece": "ایک ٹکڑے کی قیمت درج کریں۔",
+        "EnterPrice": "قیمت درج کریں۔",
         "EnterMinimumBid": "کم از کم بولی درج کریں۔",
         "SelectChain": "سلسلہ منتخب کریں۔",
-        "WrongChain": "یہ NFT &quot;{{chain}}&quot; کے تحت بنایا گیا ہے۔ براہ کرم اس سلسلہ کو استعمال کریں۔",
-        "import": {
-            "importNFT": "NFT کی درآمد",
-            "fileNotFound": "معذرت، CSV فائل نہیں ملی۔",
-            "fileEmpty": "معذرت، CSV فائل خالی ہے۔",
-            "userIdNotFound": "صارف موجود ہے لیکن آئی ڈی خالی ہے۔",
-            "errorLine": "لائن {{1}}",
-            "fieldNotFound": "مطلوبہ فیلڈ &quot;{{1}}&quot; نہیں ملا",
-            "taskStreamInvalid": "کام کا سلسلہ غلط ہے۔",
-            "instructionsEmpty": "ٹاسک اسٹریم کی ہدایات خالی ہیں۔",
-            "complete": "مکمل",
-            "activateUsers": "صارفین کو ایکٹیویشن پیغام بھیجیں؟",
-            "importProgress": "پیش رفت",
-            "importOptions": "اختیارات",
-            "sampleCSV": "نمونہ CSV ڈاؤن لوڈ کریں۔",
-            "fileLabel": "سپریڈ شیٹ اپ لوڈ کریں:",
-            "errorsTitle": "غلطیاں ہوئیں",
-            "importAttributes": "NFT اوصاف درآمد کریں۔",
-            "displayTypeEmpty": "&quot;{{1}}&quot; کے لیے ڈسپلے کی قسم نہیں ملی"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "NFT کلیکشنز کے لحاظ سے فلٹر کریں۔",
-                "ShowNFTCollection": "NFT مجموعہ اس میں دکھائیں...",
-                "AllCollections": "تمام مجموعے۔"
-            },
-            "ByUser": {
-                "AllAuthors": "تمام مصنفین",
-                "AllUsers": "ہر کوئی",
-                "FilterByAuthors": "مصنفین کے لحاظ سے فلٹر کریں۔"
-            }
-        },
-        "Back": "واپس مجموعہ پر",
-        "Name": "نام",
-        "EnterName": "نام درج کریں",
-        "EnterAuthorWallet": "مصنف کا پرس درج کریں۔",
-        "InformationAboutTitle": "{{title}} NFT کے بارے میں معلومات",
-        "DetailedInformationAboutNFT": "NFT کے بارے میں تفصیلی معلومات",
-        "PresaleStarts": "پری سیل 23 دسمبر سے شروع ہوگا۔",
-        "OwnerUserNotFound": "اس NFT کا مالک ہماری درخواست میں رجسٹرڈ نہیں ہے۔",
-        "BuyNow": "ابھی خریدیں",
-        "Buy": "خریدنے",
-        "Conversation": "بات چیت",
-        "Create": "بنانا",
-        "Author": "مصنف",
-        "Commission": "کمیشن",
-        "EnterCommission": "کمیشن درج کریں۔",
-        "Actions": "اعمال",
-        "UpdateNFT": "NFT کو اپ ڈیٹ کریں۔",
-        "NotOnSale": "فروخت پر نہیں",
-        "MovieURL": "مووی یو آر ایل",
-        "EnterPrice": "قیمت درج کریں۔",
         "Currency": "کرنسی",
         "AreYouSureDeleteImage": "کیا آپ واقعی تصویر ہٹانا چاہتے ہیں؟",
         "AreYouSureDeleteVideo": "کیا آپ واقعی ویڈیو ہٹانا چاہتے ہیں؟",
@@ -355,8 +363,8 @@
         "contract": {
             "CreateContract": "معاہدہ بنائیں",
             "SelectContract": "معاہدہ منتخب کریں۔",
-            "CreateContractFor": "{{userName}} کے لیے معاہدہ بنائیں",
-            "ContractFor": "معاہدہ برائے {{userName}}",
+            "CreateContractFor": "{{userName}} کے لئے معاہدہ بنائیں",
+            "ContractFor": "{{userName}} کا معاہدہ",
             "UpdateContract": "معاہدہ اپ ڈیٹ کریں۔",
             "TransferOwnership": "ملکیت منتقل کریں۔",
             "SetBaseURI": "بیس URI سیٹ کریں۔",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "موجودہ بیس یو آر ایل",
             "ContractAddressAbsent": "معاہدہ کا پتہ غائب",
             "FactoryAddressAbsent": "فیکٹری کا پتہ غائب ہے۔",
-            "ContractName": "{{contractName}} - {{contractSymbol}} {{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "عنوان درکار ہے۔",
             "SymbolRequired": "علامت درکار ہے۔",
             "TypeContractName": "معاہدہ کا نام",
@@ -375,6 +383,38 @@
             "Title": "مقابلے",
             "NewContest": "نیا مقابلہ"
         },
+        "import": {
+            "importNFT": "NFT کی درآمد",
+            "importAttributes": "NFT اوصاف درآمد کریں۔",
+            "fileNotFound": "معذرت، CSV فائل نہیں ملی۔",
+            "fileEmpty": "معذرت، CSV فائل خالی ہے۔",
+            "userIdNotFound": "صارف موجود ہے لیکن آئی ڈی خالی ہے۔",
+            "errorLine": "لائن {{1}}",
+            "fieldNotFound": "مطلوبہ فیلڈ &quot; {{1}} &quot; نہیں ملا",
+            "displayTypeEmpty": "&quot; {{1}} &quot; کے لیے ڈسپلے کی قسم نہیں ملی",
+            "taskStreamInvalid": "کام کا سلسلہ غلط ہے۔",
+            "instructionsEmpty": "ٹاسک اسٹریم کی ہدایات خالی ہیں۔",
+            "complete": "مکمل",
+            "activateUsers": "صارفین کو ایکٹیویشن پیغام بھیجیں؟",
+            "importProgress": "پیش رفت",
+            "importOptions": "اختیارات",
+            "sampleCSV": "نمونہ CSV ڈاؤن لوڈ کریں۔",
+            "fileLabel": "سپریڈ شیٹ اپ لوڈ کریں:",
+            "errorsTitle": "غلطیاں ہوئیں"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "NFT کلیکشنز کے لحاظ سے فلٹر کریں۔",
+                "ShowNFTCollection": "NFT مجموعہ اس میں دکھائیں...",
+                "AllCollections": "تمام مجموعے۔"
+            },
+            "ByUser": {
+                "AllAuthors": "تمام مصنفین",
+                "AllUsers": "ہر کوئی",
+                "FilterByAuthors": "مصنفین کے لحاظ سے فلٹر کریں۔"
+            }
+        },
+        "Back": "مجموعہ پر واپس جائیں۔",
         "attributes": {
             "Title": "صفات کا نظم کریں۔",
             "Attributes": "صفات",
@@ -393,18 +433,11 @@
         },
         "profile": {
             "LogOut": "لاگ آوٹ",
-            "Title": "پروفائل برائے {{userName}}",
+            "Title": "{{userName}} کے لیے پروفائل",
             "Description": "صارف کی تفصیلات",
             "aboutPlaceholder": "بائیو میں ترمیم کریں۔",
             "SureLogOut": "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟"
         },
-        "Add": "شامل کریں۔",
-        "Remove": "دور",
-        "NoNFTyet": "ابھی تک کوئی NFTs نہیں ہیں۔",
-        "Claim": "دعویٰ",
-        "ClaimNFT": "NFT کا دعوی کریں۔",
-        "Unlocking": "کھولنا",
-        "Unlock": "غیر مقفل کریں۔",
         "sales": {
             "factory": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "غیر مقفل کریں۔",
             "Locked": "مقفل",
             "CustodianAddress": "متولی کا پتہ",
-            "TokenWasClaimed": "ٹوکن &quot;{{title}}&quot; کا دعوی کیا گیا تھا۔",
-            "TokenWasLocked": "ٹوکن &quot;{{title}}&quot; مقفل تھا۔",
-            "TokenWasUnlocked": "ٹوکن &quot;{{title}}&quot; کو غیر مقفل کر دیا گیا تھا۔"
+            "TokenWasClaimed": "ٹوکن &quot; {{title}} &quot; کا دعوی کیا گیا تھا۔",
+            "TokenWasLocked": "ٹوکن &quot; {{title}} &quot; مقفل تھا۔",
+            "TokenWasUnlocked": "ٹوکن &quot; {{title}} &quot; غیر مقفل تھا۔"
         }
-    },
-    "errors": {
-        "Error": "خرابی",
-        "WalletAbsent": "پرس منسلک نہیں ہے۔",
-        "Rendering": "رینڈرنگ کے دوران غلطیاں تھیں <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "قیمت درکار ہے!",
-        "NameRequired": "نام درکار ہے!",
-        "PriceInvalid": "قیمت غلط ہے!",
-        "TransactionFailed": "لین دین ناکام ہو گیا۔",
-        "ChainNotSupported": "منتخب کردہ سلسلہ تعاون یافتہ نہیں ہے۔ تعاون یافتہ سلسلہ: {{supportedChain}}",
-        "NeedMetaMaskConnected": "ایپلیکیشن کے ساتھ کام کرنے کے لیے میٹا ماسک کی ضرورت ہے۔",
-        "UserNotLoggedInMetaMask": "صارف MetaMask میں لاگ ان نہیں ہے۔",
-        "CurrencyNotFound": "کرنسی نہیں ملی",
-        "WrongChain": "یہ NFT &quot;{{chain}}&quot; کے تحت بنایا گیا ہے۔ براہ کرم یہ سلسلہ استعمال کریں۔",
-        "AmountInvalid": "رقم غلط!",
-        "NoRecipientSelected": "کوئی وصول کنندہ منتخب نہیں کیا گیا۔",
-        "NotEnoughPermissionsWallet": "اس صارف کے بٹوے کو پڑھنے کے لیے کافی اجازتیں نہیں ہیں۔",
-        "ThisUserHaveNoWallet": "اس صارف کو کوئی والیٹ تفویض نہیں کیا گیا ہے۔",
-        "TheWalletOfThisUserInvalid": "اس صارف کا پرس غلط ہے۔",
-        "WalletInvalid": "والیٹ کا پتہ غلط ہے۔"
-    },
-    "admin": {
-        "Title": "انتظامی اثاثے۔",
-        "SubscriptionTitle": "سبسکرپشن پلانز"
-    },
-    "billing": {
-        "Title": "اثاثوں کی بلنگ",
-        "CreditsMinimum": "کم سے کم کریڈٹس",
-        "CreditsToAdd": "شامل کرنے کے لیے کریڈٹس",
-        "Save": "محفوظ کریں۔",
-        "ThisLink": "یہ لنک",
-        "errors": {
-            "CreditsMinimumNegative": "کریڈٹ کم از کم منفی نہیں ہو سکتا",
-            "CreditsToAddNegative": "شامل کرنے کے لیے کریڈٹ منفی نہیں ہو سکتے"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "وصول کنندہ کو منتخب کریں۔",
-        "TransactionSuccess": "لین دین کی کامیابی",
-        "OrTypeWalletAddress": "یا وصول کنندہ والیٹ کا پتہ ٹائپ کریں۔"
     },
     "currencies": {
         "choose": "ایک کرنسی کا انتخاب کریں۔"

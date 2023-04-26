@@ -1,30 +1,30 @@
 {
-    "LatLng": "({{1}} vĩ độ, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lat)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "trong {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "trong vòng {{1}}"
     },
     "units": {
-        "meter": "Mét",
+        "meter": "mét",
         "meters": "mét",
         "kilometer": "km",
-        "kilometers": "kiometers",
+        "kilometers": "km",
         "km": "km",
         "mile": "dặm",
         "miles": "dặm",
         "mi": "mi",
-        "foot": "Bàn Chân",
+        "foot": "chân",
         "feet": "bàn chân",
         "inches": "inch"
     },
     "location": {
-        "interested": "Tôi quan tâm đến những thứ diễn ra trong {{select}} của",
+        "interested": "Tôi quan tâm đến những thứ diễn ra trong vòng {{select}}",
         "update": "Cập nhật vị trí của tôi",
         "set": "Đặt vị trí của tôi",
-        "prompt": "{{ClickOrTap}} ở đây để<br> đặt của bạn<br> địa điểm",
+        "prompt": "{{ClickOrTap}} vào đây<br> thiết lập của bạn<br> vị trí",
         "myCurrentLocation": "Vị trí hiện tại của tôi",
         "enterAddress": "Nhập một địa chỉ",
-        "enterPostcode": "Vui lòng nhập mã bưu điện \/ mã zip của bạn",
+        "enterPostcode": "Vui lòng nhập mã bưu điện \/ zipcode của bạn",
         "create": {
             "action": "Thêm vị trí",
             "title": "Vị trí mới",
@@ -32,13 +32,13 @@
         },
         "confirm": {
             "title": "Lưu vị trí này?",
-            "message": "Bạn có dự định sử dụng lại vị trí này trong tương lai không?",
+            "message": "Bạn có kế hoạch sử dụng lại vị trí này trong tương lai không?",
             "ok": "Đúng",
-            "cancel": "Không"
+            "cancel": "KHÔNG"
         },
         "add": {
-            "title": "Đặt tên cho vị trí này",
-            "placeholder": "Nhà riêng, Cơ quan, v.v.",
+            "title": "Đặt tên cho địa điểm này",
+            "placeholder": "Nhà, Cơ quan, v.v.",
             "ok": "Cứu"
         },
         "dialog": {
@@ -46,42 +46,42 @@
         }
     },
     "areas": {
-        "filterPlaceholder": "Có khu vực nào bên trong vị trí này không?",
-        "newArea": "Khu vực mới",
+        "filterPlaceholder": "Bất kỳ khu vực bên trong vị trí này?",
+        "newArea": "khu vực mới",
         "promptTitle": "Nhập tên cho khu vực:",
         "absent": "Vui lòng đặt khu vực",
         "error": "Lỗi",
         "exist": "Khu vực đã tồn tại",
         "addNewArea": "Thêm khu vực mới",
-        "add": "cộng"
+        "add": "Thêm vào"
     },
     "types": {
         "Places\/locations": {
             "description": "một bộ sưu tập các địa điểm",
-            "displayType": "Địa điểm"
+            "displayType": "Vị trí"
         },
         "Places\/location": {
             "description": "Đại diện cho một tòa nhà, địa điểm, con tàu, công viên, v.v.",
-            "displayType": "Địa điểm"
+            "displayType": "Vị trí"
         },
         "Places\/area": {
-            "description": "Đại diện cho một khu vực trong một vị trí, chẳng hạn như một căn phòng hoặc dãy phòng",
-            "displayType": "Diện tích"
+            "description": "Đại diện cho một khu vực trong một vị trí, chẳng hạn như phòng hoặc dãy phòng",
+            "displayType": "Khu vực"
         },
         "Places\/floor": {
-            "description": "Đại diện cho một tầng trong một tòa nhà hoặc con tàu",
+            "description": "Đại diện cho một tầng trong tòa nhà hoặc con tàu",
             "displayType": "Sàn nhà"
         },
         "Places\/column": {
-            "description": "Đại diện cho một cột trong một tòa nhà hoặc con tàu",
+            "description": "Đại diện cho một cột trong tòa nhà hoặc con tàu",
             "displayType": "Cột"
         },
         "Places\/nearby": {
-            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của một thùng rác địa lý",
+            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash",
             "displayType": "Những nơi gần đó"
         },
         "Places\/interest": {
-            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của một thùng rác địa lý, phù hợp với sở thích",
+            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash, phù hợp với sở thích",
             "displayType": "Địa điểm quan tâm"
         }
     }

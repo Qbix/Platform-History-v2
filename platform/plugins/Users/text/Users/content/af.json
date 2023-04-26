@@ -1,17 +1,41 @@
 {
+    "avatar": {
+        "Someone": "Iemand"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-pos",
+            "mobile": "Selfoon",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Gekopieer! Nou kan jy dit enige plek plak."
+    },
+    "analytics": {
+        "Title": "Ontleding",
+        "Daily": "Daagliks",
+        "Weekly": "Weekliks",
+        "Monthly": "Maandeliks",
+        "Application": "Toepassing",
+        "Pages": "Bladsye",
+        "Services": "Dienste",
+        "Faq": "Gereelde vrae",
+        "WeekDays": "Weekdae"
+    },
     "actions": {
         "LogIn": "teken aan",
         "LogOut": "teken uit"
     },
     "activate": {
+        "OneTimeCode": "Voer die kode in wat jy ontvang het:",
         "SetAsPrimary": "Stel {{1}} as my primêre {{2}}",
-        "ChoosePassPhrase": "Kies &#39;n wagwoordfrase <strong>om<\/strong> mee aan te meld.<br> &#39;n Eenvoudige frase wat uit &#39;n paar woorde bestaan wat jy maklik sal onthou.",
+        "ChoosePassPhrase": "Kies &#39;n <strong>wagwoordfrase<\/strong> om mee aan te meld.<br> &#39;n Eenvoudige frase wat uit &#39;n paar woorde bestaan wat jy maklik sal onthou.",
         "ChoosePassPhraseSeeSuggestions": "Kies &#39;n goeie <strong>wagwoordfrase<\/strong> om jou rekening te beskerm. Sien die voorstelle vir &#39;n paar idees.",
         "LogOutAndTryAgain": "Meld af en probeer weer",
         "IfYouFeel": "As jy voel iets het verkeerd geloop, kan jy",
         "SetIdentifierButtonTitle": "oorbegin",
-        "OneTimeCode": "Voer die kode in wat jy ontvang het:",
-        "ActivateMyAccount": "Aktiveer my rekening"
+        "ActivateMyAccount": "Aktiveer My rekening"
     },
     "session": {
         "GetStarted": "Begin"
@@ -40,6 +64,18 @@
         "CompletedActivation": "Jy het gebruikeraktivering voltooi.",
         "CompletedActivationLogIn": "Jy het gebruikeraktivering voltooi. Probeer nou om aan te meld."
     },
+    "contacts": {
+        "dialog": {
+            "title": "Kies kontak",
+            "CreateAccount": "+ Nuwe kontak",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nie gevind nie",
+            "SearchByName": "Soek op naam",
+            "EmptyContacts": "Kontakte nie gevind nie..."
+        },
+        "select": {
+            "title": "Kies kontak van {{displayName}}"
+        }
+    },
     "usersContacts": {
         "selectLabel": "Kies asseblief etiket.",
         "inviteUser": "Nooi gebruikers",
@@ -47,23 +83,15 @@
         "inviteRole": "Nooi {{role}}"
     },
     "invalidLanguageSelected": "Ongeldige taal gekies",
-    "contacts": {
-        "dialog": {
-            "title": "Kies kontak",
-            "SearchByName": "Soek op naam",
-            "CreateAccount": "+ Nuwe kontak",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nie gevind nie",
-            "EmptyContacts": "Kontakte nie gevind nie..."
-        },
-        "select": {
-            "title": "Kies kontak van {{displayName}}"
-        }
+    "platforms": {
+        "wallet": "Beursie",
+        "broadcast": "Uitsaai"
     },
     "login": {
         "title": "Welkom",
         "directions": "Skep &#39;n rekening, of meld aan.",
         "directionsNoRegister": "Meld aan as jy &#39;n rekening het.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Voer jou wagwoordfrase in:",
         "loginButton": "Begin",
         "registerButton": "Begin",
@@ -75,8 +103,9 @@
         "noPassphrase": "Voordat jy kan aanmeld, moet jy &#39;n wagwoordfrase stel deur op die skakel in jou aktiveringsboodskap te klik.",
         "notVerified": "Jy moet vir jouself &#39;n aktiveringsboodskap stuur om aan te meld.",
         "emailExists": "Het jy al voorheen met hierdie e-pos probeer registreer? Indien wel, gaan jou inkassie na om jou rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
-        "mobileExists": "Het jy al voorheen met hierdie selfoonnommer probeer registreer? Indien wel, gaan jou SMS na om jou rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
+        "mobileExists": "Het jy voorheen met hierdie selfoonnommer probeer registreer? Indien wel, gaan jou SMS na om jou rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
         "usingOther": "of jy kan",
+        "connectPlatforms": "of verbind met behulp van:",
         "prompt": "Kies &#39;n gebruikers naam:",
         "newUser": "of skep &#39;n nuwe rekening hieronder",
         "placeholders": {
@@ -88,21 +117,13 @@
         "confirmTerms": "Aanvaar die diensbepalings?",
         "facebookNoEmail": "Jou Facebook-rekening ontbreek &#39;n bevestigde e-posadres. Meld eenvoudig aan op die inheemse manier.",
         "picTooltip": "Jy kan hierdie prentjie later verander",
-        "wallet": {
-            "payload": "Meld aan by {{host}} op tyd {{timestamp}}",
-            "alert": {
-                "title": "Herlei tans na Wallet",
-                "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
-            }
-        },
         "web3": {
-            "payload": "Meld aan by {{host}} op tyd {{timestamp}}",
+            "payload": "Meld by {{host}} aan by tyd {{timestamp}}",
             "alert": {
                 "title": "Herlei tans na Wallet",
                 "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
             }
-        },
-        "connectPlatforms": "of verbind met behulp van:"
+        }
     },
     "setIdentifier": {
         "title": "Voeg &#39;n manier by om aan te meld",
@@ -115,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Rekening",
+        "title": "{{Platform}} rekening",
         "areUsing": "Jy gebruik {{platform}} as",
-        "noLongerUsing": "Jy is nie meer gekoppel aan {{platform}} as nie",
+        "noLongerUsing": "Jy is nie meer aan {{platform}} as gekoppel nie",
         "doAuth": "Meld aan met hierdie rekening",
         "doSwitch": "Skakel oor na hierdie rekening"
     },
@@ -128,37 +149,9 @@
         "Guest": "Gas",
         "Host": "Gasheer"
     },
-    "analytics": {
-        "Title": "Ontleding",
-        "Daily": "Daagliks",
-        "Weekly": "Weekliks",
-        "Monthly": "Maandeliks",
-        "Application": "Toepassing",
-        "Pages": "Bladsye",
-        "Services": "Dienste",
-        "Faq": "Gereelde vrae",
-        "WeekDays": "Weekdae"
-    },
-    "avatar": {
-        "Someone": "Iemand"
-    },
     "web3": {
-        "WrongMethod": "Verkeerde kontrakmetode {{methodName}}",
+        "WrongMethod": "Verkeerde kontrak metode {{methodName}}",
         "ChangeWallet": "Verander beursie"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-pos",
-            "mobile": "Selfoon",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Gekopieer! Nou kan jy dit enige plek plak."
-    },
-    "platforms": {
-        "wallet": "Beursie",
-        "broadcast": "Uitsaai"
     },
     "labels": {
         "addToPhonebook": "Voeg by my foon kontakte",

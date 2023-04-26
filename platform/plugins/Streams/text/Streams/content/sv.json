@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Nytt föremål"
     },
+    "avatar": {
+        "firstName": "förnamn",
+        "lastName": "efternamn",
+        "username": "Användarnamn"
+    },
     "labels": {
         "Streams\/invited": "Människor jag bjudit in",
         "Streams\/invitedMe": "Vem bjöd in mig",
@@ -13,8 +18,16 @@
         "Yes": "Ja",
         "No": "Nej"
     },
+    "login": {
+        "prompt": "Låt vänner känna igen dig:",
+        "newUser": "eller skapa ett nytt konto nedan",
+        "picTooltip": "Du kan ändra den här bilden senare",
+        "placeholder": {
+            "fullName": "Ange ditt fullständiga namn"
+        }
+    },
     "interests": {
-        "Filter": "Vad är dina intressen?",
+        "Filter": "Sökintressen",
         "CanGrant": "Om du fortfarande inte hittar det du letar efter kan du lägga till ett nytt intresse nedan:",
         "TrySynonyms": "Ser du det inte? Prova några synonymer.",
         "AddUnderCategory": "Lägg till under kategori...",
@@ -34,43 +47,63 @@
         "earlierComments": "tidigare kommentarer",
         "startedConversation": "startade en konversation",
         "RealTimeCall": "Realtidssamtal",
+        "JoinWebRTC": "Telefonkonferens",
         "SearchByName": "Sök på namn",
         "Notifications": {
             "Visit": "{{displayName}} besöker chatten",
             "Join": "{{displayName}} gick med i chatten",
             "Leave": "{{displayName}} lämnade chatten",
-            "RelatedTo": "{{displayName}} startade en {{stream.displayType}}"
+            "RelatedTo": "{{displayName}} började en {{stream.displayType}}"
         },
-        "JoinWebRTC": "Telefonkonferens"
+        "placeholders": {
+            "Public": "Lägg till en kommentar",
+            "Private": "Skriv ett privat meddelande"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "hantera dina e-postprenumerationer",
         "IfUnsubscribe": "Om du vill avsluta prenumerationen",
         "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} anslöt sig",
+        "Streams\/left": "{{&call 'avatar.displayName'}} kvar",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sa: {{& message.content}}",
         "Streams\/changed": "Ändringar i {{stream.fields.title}}",
         "Streams\/invite": "Du blev inbjuden till {{& stream.fields.title}}",
         "Streams\/announcement": "Tillkännagivande i {{& stream.fields.title}}",
         "Streams\/access": "{{&call 'avatar.displayName'}} ändrade åtkomst i {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chattmeddelande redigerat i {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chattmeddelande togs bort i {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chattmeddelande redigerat {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chattmeddelandet togs bort {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} har stängts",
-        "Streams\/task\/progress": "Framsteg gjordes den {{stream.fields.title}}",
-        "Streams\/task\/complete": "Uppgift slutförd: {{stream.fields.title}}",
+        "Streams\/task\/progress": "Framsteg gjordes på {{stream.fields.title}}",
+        "Streams\/task\/complete": "Uppgift genomförd: {{stream.fields.title}}",
         "Streams\/task\/error": "Fel under: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Inkommande meddelande",
+        "Streams\/incoming\/*": "{{app}} : Inkommande meddelande",
         "Streams\/relatedTo\/Streams\/call": "Nytt samtal startade {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nytt {{relationDisplayType}} i {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Lades till i {{toTitle}} som {{relationDisplayType}}",
+        "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} i {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lades till {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
-        "Streams\/call": "{{displayName}} startade ett samtal i realtid",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} gick med",
-        "Streams\/left": "{{&call 'avatar.displayName'}} kvar"
+        "Streams\/call": "{{displayName}} startade ett realtidssamtal"
     },
     "invite": {
-        "command": "Inbjudan",
+        "command": "Bjuda",
+        "Invite": "Bjuda",
+        "Share": "Dela med sig",
         "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
         "youCanNowPaste": "Du kan nu klistra in den här länken någonstans för att bjuda in personer",
+        "roles": {
+            "title": "Bevilja roller till inbjudna användare?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Förlåt",
+                "alert": "Du är inte behörig att bevilja den här rollen"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Förlåt",
+                "alert": "Du är inte behörig att ta bort den här rollen"
+            }
+        },
+        "labels": {
+            "title": "Vad är ditt förhållande?"
+        },
         "dialog": {
             "chooseFromContacts": "Välj bland dina kontakter",
             "chooseAgainFromContacts": "Välj igen från Kontakter",
@@ -78,10 +111,11 @@
             "selectFromContacts": "Välj Från kontakter",
             "userChooserPlaceholder": "Sök på namn",
             "photo": "Ta ett foto",
+            "photoOf": "Ta ett foto av {{name}}",
             "photoInstruction": "Om personen som skannade din QR-kod är framför dig, ta ett foto på dem",
             "to": "Till: {{Stream Title}}",
             "go": "Gå",
-            "title": "Inbjudan",
+            "title": "Bjuda",
             "placeholder": "Mobilnummer eller e-postadress",
             "orInvite": "Eller bjud in personer genom att använda:",
             "copyLink": "{{ClickOrTap}} för att kopiera inbjudningslänken",
@@ -102,61 +136,45 @@
             "chooseFromRegistered": "Välj bland registrerade användare",
             "inviteViaEmailOrSms": "Bjud in via e-post eller SMS"
         },
+        "complete": {
+            "WelcomeToCommunity": "Välkommen till {{communityName}}",
+            "HasInvitedYou": "har bjudit in dig till:",
+            "HasInvitedYouToTheirProfile": "har bjudit in dig att ansluta.",
+            "prompt": "Låt vänner känna igen dig:",
+            "accept": "Acceptera inbjudan"
+        },
         "email": {
             "subject": "Hej, kolla in det här",
             "PleaseVisitLink": "Besök gärna följande länk:",
             "InvitingYou": "Jag bjuder in dig till {{title}}",
             "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}",
-            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;",
+            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot; {{title}} &quot;",
             "YOUAREINVITED": "DU ÄR INBJUDEN!",
             "AcceptInvite": "Acceptera inbjudan"
         },
         "sms": {
-            "content": "Du har blivit inbjuden till {{title}}. Tryck på {{url}}"
+            "content": "Du har blivit inbjuden till {{title}} . Vänligen tryck på {{url}}"
         },
         "notice": {
             "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
-        },
-        "Invite": "Inbjudan",
-        "Share": "Dela med sig",
-        "roles": {
-            "title": "Bevilja roller till inbjudna användare?",
-            "NotAuthorizedToGrantRole": {
-                "title": "Förlåt",
-                "alert": "Du är inte behörig att bevilja den här rollen"
-            },
-            "NotAuthorizedToRemoveRole": {
-                "title": "Förlåt",
-                "alert": "Du är inte behörig att ta bort den här rollen"
-            }
-        },
-        "labels": {
-            "title": "Vad är ditt förhållande?"
-        },
-        "complete": {
-            "HasInvitedYou": "har bjudit in dig till:",
-            "WelcomeToCommunity": "Välkommen till {{communityName}}",
-            "HasInvitedYouToTheirProfile": "har bjudit in dig att ansluta.",
-            "prompt": "Låt vänner känna igen dig:",
-            "accept": "Acceptera inbjudan"
         }
     },
     "messages": {
         "html": {
-            "posted": "skickade ett <em>{{message.fields.type}}<\/em> meddelande till {{stream.fields.title}}"
+            "posted": "skrev ett <em>{{message.fields.type}}<\/em> -meddelande till {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "kommenterade",
             "startedCallIn": "startade ett samtal",
             "in": "i",
-            "body": "i {{& url}}: {{& message.fields.content}}",
+            "body": "i {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "har postats till",
-                "byAvatar": "av {{avatar.displayName}}"
+                "byAvatar": "med {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "har en ny {{instructions.fromDisplayType}}",
-                "byAvatar": "lagt till av {{avatar.displayName}}"
+                "byAvatar": "tillagd av {{avatar.displayName}}"
             }
         }
     },
@@ -164,16 +182,19 @@
         "mobile": {
             "alert": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig, och be dem klicka på länken.",
             "confirm": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Vill du följa upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem klicka på länken.",
-            "check": "Hej, jag skickade precis en inbjudan till {{app}}-appen. Kontrollera ditt sms och klicka på länken!",
+            "check": "Hej, jag har precis skickat en inbjudan till {{app}} -appen. Kontrollera ditt sms och klicka på länken!",
             "CheckYourMobile": "Kontrollera SMS och följ instruktionerna!"
         },
         "email": {
             "alert": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig, och be dem klicka på länken.",
             "confirm": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Vill du följa upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem klicka på länken.",
             "subject": "Fick du en inbjudan?",
-            "body": "Hej, jag skickade precis en inbjudan till {{app}}-appen. Kontrollera din e-post och klicka på länken där!",
+            "body": "Hej, jag har precis skickat en inbjudan till {{app}} -appen. Kontrollera din e-post och klicka på länken där!",
             "CheckYourEmail": "Kontrollera din e-post och följ instruktionerna!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Sekretessinställningar"
     },
     "participating": {
         "Title": "Titel",
@@ -198,31 +219,31 @@
             "cameraAndMicrophoneBtn": "Aktivera kamera och mikrofon"
         },
         "preparing": {
+            "dialogTitle": "Slå på\/av kameran eller mikrofonen innan du går med",
             "micIsOff": "Mikrofonen är avstängd",
             "micIsOn": "Mic är på",
             "cameraIsOff": "Kameran är avstängd",
             "cameraIsOn": "Kameran är på",
             "screenSharingIsOn": "Skärmdelning är på",
             "screenSharingIsOff": "Dela skärm",
-            "joinNow": "Gå med i samtalet",
-            "dialogTitle": "Slå på\/av kameran eller mikrofonen innan du går med"
+            "joinNow": "Gå med i samtalet"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instruktioner",
             "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
             "point1": "Gå till &quot;Inställningar&quot; -&gt; &quot;Avancerat&quot; -&gt; &quot;Sekretess och säkerhet&quot; -&gt; &quot;Webbplatsinställningar&quot; -&gt; &quot;Kamera&quot; eller &quot;Webbplatsinställningar&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Ta bort {{hostname}} från listan &quot;Blockera&quot;."
+            "point2": "Ta bort {{hostname}} från &quot;Block&quot;-listan"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instruktioner",
-            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomsten till {{kind}} för att gå med i konferensen."
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomst till {{kind}} för att gå med i konferensen."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instruktioner",
             "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
             "point1": "Gå till dina Android-inställningar",
             "point2": "Öppna &quot;Appar och aviseringar&quot;",
-            "point3": "Hitta &quot;{{communityName}}&quot; och öppna den",
+            "point3": "Hitta &quot; {{communityName}} &quot; och öppna den",
             "point4": "Tryck på Behörigheter",
             "point5": "Aktivera {{kind}}"
         },
@@ -232,19 +253,22 @@
             "point1": "Gå till dina iOS-inställningar",
             "point2": "Öppna &quot;Sekretess&quot;",
             "point3": "Hitta {{kind}} och öppna den",
-            "point4": "Hitta &quot;{{communityName}}&quot; och aktivera"
+            "point4": "Hitta &quot; {{communityName}} &quot; och aktivera"
+        },
+        "fbLive": {
+            "dialogTitle": "Livestreaming på Facebook startade"
         },
         "notices": {
             "youJoinedRoom": "Du gick med i rummet",
-            "joining": "Går med: {{userName}}",
+            "joining": "Anslutning: {{userName}}",
             "sbLeftRoom": "{{userName}} lämnade rummet",
             "switchingRoom": "Byter rum...",
             "forceDisconnecting": "Du kommer att kopplas från inom 5 sekunder",
             "forceDisconnectingImmediately": "Du kopplades bort av en värd",
             "youLeftRoom": "Du lämnade rummet",
             "codeCopied": "Du lämnade rummet",
-            "sbBeganFbLive": "{{userName}} började sända det här samtalet på Facebook",
-            "sbStoppedFbLive": "{{userName}} slutade sända det här samtalet på Facebook",
+            "sbBeganFbLive": "{{userName}} började sända detta samtal på Facebook",
+            "sbStoppedFbLive": "{{userName}} slutade sända detta samtal på Facebook",
             "youBeganFbLive": "Du började sända det här samtalet på Facebook",
             "youStoppedFbLive": "Du slutade sända det här samtalet på Facebook",
             "youStartedLive": "Du började sända detta samtal till anpassad RTMP",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "Koden har kopierats till urklipp",
             "userHasNoVideo": "Deltagaren har ingen video",
             "openInBrowserAlert": "Öppna länken i webbläsaren Safari för att gå med i konferensen.",
-            "allowedVideoLimit": "Endast {{limit}} video tillåts i det här rummet",
-            "allowedAudioLimit": "Endast {{limit}} mikrofoner tillåtna i det här rummet"
+            "allowedVideoLimit": "Endast {{limit}} videor tillåtna i det här rummet",
+            "allowedAudioLimit": "Endast {{limit}} mikrofoner tillåtna i detta rum"
         },
         "settingsPopup": {
             "dialogTitle": "Videoinställningar",
@@ -289,17 +313,20 @@
             "fbStartLive": "Gå och lev",
             "fbStopLive": "Avsluta livestream",
             "streamingSettings": "inställningar",
+            "manageStream": "Hantera livestream",
             "fbEmbedCode": "Bädda in",
             "copy": "Kopiera",
             "streamToRTMP": "Streama till anpassad RTMP",
             "startBroadcasting": "Börja sända",
-            "broadcastingInProgress": "Sändning pågår",
-            "manageStream": "Hantera livestream"
+            "broadcastingInProgress": "Sändning pågår"
         },
         "audioSettings": {
             "dialogTitle": "Ljudinställningar",
             "speakers": "Högtalare",
             "microphone": "Mikrofon"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Hantera sändningar"
         },
         "participantsPopup": {
             "dialogTitle": "Deltagarinställningar",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Visa skärmdelning"
         },
         "streamingSettings": {
-            "title": "Streaminginställningar"
+            "title": "Direktsändning"
         },
         "preview": {
             "Meeting": "Telefonkonferens",
             "MeetingEnded": "Telefonkonferensen avslutades"
         },
         "requestSpeakDialog": {
-            "msg": "Det är för närvarande {{count}} personer som talar i mötet. Vill du byta ut en av dem efter att ha tillåtit dem {{seconds}} sekunder att prata klart?",
-            "dialogTitle": "Begäran om att tala"
-        },
-        "fbLive": {
-            "dialogTitle": "Livestreaming på Facebook startade"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Hantera sändningar"
+            "dialogTitle": "Begäran om att tala",
+            "msg": "Det är för närvarande {{count}} personer som talar i mötet. Vill du byta ut en av dem efter att ha gett dem {{seconds}} sekunder på sig att prata klart?"
         }
     },
     "types": {
@@ -379,7 +400,7 @@
         },
         "Streams\/text\/medium": {
             "displayType": "Text",
-            "description": "medelstor text"
+            "description": "medelstor textdel"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "E-postadress",
@@ -444,15 +465,15 @@
         },
         "Streams\/incoming": {
             "displayType": "Inkommande",
-            "description": "destination för meddelanden som skickats av andra användare"
+            "description": "destination för meddelanden som skickas av andra användare"
         },
         "Streams\/chat": {
             "displayType": "Konversation",
             "description": "en konversation mellan användare, med historik"
         },
         "Streams\/webrtc": {
-            "displayType": "Meeting",
-            "description": "ett video-\/ljudsamtal i realtid"
+            "displayType": "Telefonkonferens",
+            "description": "en video-\/ljudkonferens online"
         },
         "Streams\/question": {
             "displayType": "Fråga",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Svar fråga",
         "SetYourAnswer": "Vänligen svara på frågan",
         "NewQuestion": "Ny fråga",
+        "EditQuestion": "Redigera fråga",
         "NewAnswer": "Nytt svar",
+        "NewPossibleAnswer": "Nytt möjligt svar",
         "AnswerDetails": "Svarsdetaljer",
         "answerOption": "Alternativ",
         "answerOptionExclusive": "Exklusiv",
         "answerTextarea": "Textområde",
+        "answerText": "Text",
+        "HideUntilAnswered": "Göm tills du svarar",
+        "CantChangeAnswers": "Kan inte ändra svar",
         "FreeAnswer": "Skriv ditt svar här",
         "SaveQuestion": "Spara fråga",
         "SaveAnswer": "Spara svar",
-        "AddAnotherAnswer": "Lägg till ett annat svar",
-        "ErrorAnswers": "Lägg till ett enda svar",
+        "Save": "Spara",
+        "Send": "Skicka",
+        "TitleRequired": "Titel krävs!",
         "AlreadyAnswered": "Redan svarat",
         "TitlePlaceholder": "Skriv din fråga",
         "ContentPlaceholder": "Lägg in ytterligare information här för att hjälpa andra att svara",
         "ErrorTitle": "Fråga krävs",
         "Placeholder": "Platshållare",
-        "EditQuestion": "Redigera fråga",
-        "NewPossibleAnswer": "Nytt möjligt svar",
-        "answerText": "Text",
-        "HideUntilAnswered": "Göm tills du svarar",
-        "CantChangeAnswers": "Kan inte ändra svar",
-        "Save": "Spara",
-        "Send": "Skicka",
-        "TitleRequired": "Titel krävs!",
         "AreYouSure": "Är du säker?"
     },
     "experience": {
@@ -593,25 +612,5 @@
         "endCall": "Avsluta samtal",
         "interview": "Intervju",
         "markApproved": "Markera godkänd"
-    },
-    "identifier": {
-        "private": "Privat",
-        "public": "offentlig",
-        "configurationSaved": "Konfigurationen har sparats",
-        "error": "Något gick fel",
-        "privacySettings": "Sekretessinställningar"
-    },
-    "avatar": {
-        "firstName": "förnamn",
-        "lastName": "efternamn",
-        "username": "Användarnamn"
-    },
-    "login": {
-        "prompt": "Låt vänner känna igen dig:",
-        "newUser": "eller skapa ett nytt konto nedan",
-        "picTooltip": "Du kan ändra den här bilden senare",
-        "placeholder": {
-            "fullName": "Ange ditt fullständiga namn"
-        }
     }
 }

@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Jauns vienums"
     },
+    "avatar": {
+        "firstName": "vārds",
+        "lastName": "uzvārds",
+        "username": "lietotājvārds"
+    },
     "labels": {
         "Streams\/invited": "Cilvēki, kurus uzaicināju",
         "Streams\/invitedMe": "Kas mani uzaicināja",
@@ -13,16 +18,24 @@
         "Yes": "Jā",
         "No": "Nē"
     },
+    "login": {
+        "prompt": "Ļaujiet draugiem jūs atpazīt:",
+        "newUser": "vai izveidojiet jaunu kontu tālāk",
+        "picTooltip": "Vēlāk varat mainīt šo attēlu",
+        "placeholder": {
+            "fullName": "Ievadiet savu pilno vārdu"
+        }
+    },
     "interests": {
-        "Filter": "Kādas ir tavas intereses?",
+        "Filter": "Meklēšanas intereses",
         "CanGrant": "Ja joprojām nevarat atrast to, ko meklējat, tālāk varat pievienot jaunu interesi:",
-        "TrySynonyms": "Vai neredzat to? Izmēģiniet dažus sinonīmus.",
+        "TrySynonyms": "Vai neredzat? Izmēģiniet dažus sinonīmus.",
         "AddUnderCategory": "Pievienot zem kategorijas...",
         "Other": "Cits",
         "Unlisted": "Nerindots"
     },
     "chat": {
-        "flaggedForAdminReview": "Ziņojums ir atzīmēts ar karodziņu, lai to pārskatītu administrators. Pieskarieties vēlreiz, lai noņemtu karogu.",
+        "flaggedForAdminReview": "Ziņojums ir atzīmēts, lai to pārskatītu administrators. Pieskarieties vēlreiz, lai noņemtu karogu.",
         "noOneSaid": "Neviens neko nav teicis",
         "closeChatButton": "Aizvērt tērzēšanu",
         "closeChatConfirmTitle": "Vai aizvērt šo tērzēšanu?",
@@ -34,91 +47,49 @@
         "earlierComments": "iepriekšējie komentāri",
         "startedConversation": "uzsāka sarunu",
         "RealTimeCall": "Zvans reāllaikā",
-        "SearchByName": "Meklēt pēc vārda",
+        "JoinWebRTC": "Telekonference",
+        "SearchByName": "Meklēt pēc nosaukuma",
         "Notifications": {
             "Visit": "{{displayName}} apmeklē tērzēšanu",
             "Join": "{{displayName}} pievienojās tērzēšanai",
             "Leave": "{{displayName}} pameta tērzēšanu",
-            "RelatedTo": "{{displayName}} uzsāka {{stream.displayType}}"
+            "RelatedTo": "{{displayName}} sāka {{stream.displayType}}"
         },
-        "JoinWebRTC": "Telekonference"
+        "placeholders": {
+            "Public": "Pievieno komentāru",
+            "Private": "Rakstiet privātu ziņu"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "pārvaldīt savus e-pasta abonementus",
         "IfUnsubscribe": "Ja vēlaties anulēt abonementu",
-        "*": "Ziņa {{& message.fields.type}} uz {{& stream.fields.title}}",
+        "*": "Ziņa {{& message.fields.type}} līdz {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} pievienojās",
+        "Streams\/left": "{{&call 'avatar.displayName'}} palikuši",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} teica: {{& message.content}}",
-        "Streams\/changed": "Izmaiņas {{stream.fields.title}}",
+        "Streams\/changed": "Izmaiņas {{stream.fields.title}} gadā",
         "Streams\/invite": "Jūs tikāt uzaicināts uz {{& stream.fields.title}}",
-        "Streams\/announcement": "Paziņojums {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} mainīja piekļuvi šeit: {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Tērzēšanas ziņojums rediģēts {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Tērzēšanas ziņojums noņemts {{& stream.fields.title}}",
+        "Streams\/announcement": "Paziņojums {{& stream.fields.title}} gadā",
+        "Streams\/access": "{{&call 'avatar.displayName'}} mainīja piekļuvi {{& stream.fields.title}} gadā",
+        "Streams\/chat\/edit": "Tērzēšanas ziņojums rediģēts {{& stream.fields.title}} gadā",
+        "Streams\/chat\/remove": "Tērzēšanas ziņojums tika noņemts {{& stream.fields.title}} gadā",
         "Streams\/closed": "{{stream.fields.title}} ir slēgts",
-        "Streams\/task\/progress": "Progress sasniegts {{stream.fields.title}}",
-        "Streams\/task\/complete": "Uzdevums pabeigts: {{stream.fields.title}}",
+        "Streams\/task\/progress": "Progress sasniegts {{stream.fields.title}} gadā",
+        "Streams\/task\/complete": "Pabeigts uzdevums: {{stream.fields.title}}",
         "Streams\/task\/error": "Kļūda laikā: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ienākošā ziņa",
-        "Streams\/relatedTo\/Streams\/call": "Jauns zvans sākās {{toTitle}}",
-        "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} valodā {{toTitle}}",
+        "Streams\/incoming\/*": "{{app}} : ienākošā ziņa",
+        "Streams\/relatedTo\/Streams\/call": "Jauns zvans sākās {{toTitle}} gadā",
+        "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} no {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pievienots {{toTitle}} kā {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} pieminēja jūs komentārā",
-        "Streams\/call": "{{displayName}} sāka reāllaika zvanu",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} pievienojās",
-        "Streams\/left": "{{&call 'avatar.displayName'}} palicis"
+        "Streams\/call": "{{displayName}} sāka reāllaika zvanu"
     },
     "invite": {
         "command": "Uzaicināt",
-        "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
-        "youCanNowPaste": "Tagad varat ielīmēt šo saiti kaut kur, lai uzaicinātu cilvēkus",
-        "dialog": {
-            "chooseFromContacts": "Izvēlieties kādu no savām kontaktpersonām",
-            "chooseAgainFromContacts": "Sadaļā Kontakti izvēlieties vēlreiz",
-            "inviteSelectedContacts": "Uzaicināt atlasītās kontaktpersonas",
-            "selectFromContacts": "Atlasiet no kontaktpersonām",
-            "userChooserPlaceholder": "Meklēt pēc vārda",
-            "photo": "Fotogrāfēt",
-            "photoInstruction": "Ja persona, kas skenēja jūsu QR kodu, ir jūsu priekšā, nofotografējiet viņu",
-            "to": "Kam: {{Stream Title}}",
-            "go": "Aiziet",
-            "title": "Uzaicināt",
-            "placeholder": "Mobilā tālruņa numurs vai e-pasta adrese",
-            "orInvite": "Vai uzaiciniet cilvēkus, izmantojot:",
-            "copyLink": "{{ClickOrTap}}, lai kopētu uzaicinājuma saiti",
-            "shareOrCopyLink": "{{ClickOrTap}}, lai kopīgotu vai kopētu uzaicinājuma saiti",
-            "QR": "{{ClickOrTap}}, lai ģenerētu QR kodu",
-            "QRtitle": "Skenējiet šo QR kodu",
-            "QRscanned": "Viņi to skenēja!",
-            "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts",
-            "byEmail": "E-pasts",
-            "byText": "Teksts",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "title2": "Uzaiciniet cilvēkus",
-            "chooseMethod": "Izvēlieties metodi:",
-            "selectContacts": "Izvēlieties Kontakti",
-            "scanQRCode": "Skenējiet QR kodu",
-            "shareLink": "Kopīgojiet saiti",
-            "chooseFromRegistered": "Izvēlieties no reģistrētajiem lietotājiem",
-            "inviteViaEmailOrSms": "Uzaicināt pa e-pastu vai SMS"
-        },
-        "email": {
-            "subject": "Hei, pārbaudiet šo",
-            "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
-            "InvitingYou": "Es aicinu jūs uz {{title}}",
-            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}",
-            "HasMentionedYou": "{{displayName}} pieminēja jūs ierakstā &quot;{{title}}&quot;",
-            "YOUAREINVITED": "ESAT AICINĀTS!",
-            "AcceptInvite": "Pieņemt uzaicinājumu"
-        },
-        "sms": {
-            "content": "Jūs esat uzaicināts uz {{title}}. Lūdzu, pieskarieties {{url}}"
-        },
-        "notice": {
-            "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
-        },
         "Invite": "Uzaicināt",
         "Share": "Dalīties",
+        "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
+        "youCanNowPaste": "Tagad varat ielīmēt šo saiti kaut kur, lai uzaicinātu cilvēkus",
         "roles": {
             "title": "Vai piešķirt lomas uzaicinātajiem lietotājiem?",
             "NotAuthorizedToGrantRole": {
@@ -133,26 +104,73 @@
         "labels": {
             "title": "Kādas ir jūsu attiecības?"
         },
+        "dialog": {
+            "chooseFromContacts": "Izvēlieties kādu no savām kontaktpersonām",
+            "chooseAgainFromContacts": "Sadaļā Kontakti izvēlieties vēlreiz",
+            "inviteSelectedContacts": "Uzaicināt atlasītās kontaktpersonas",
+            "selectFromContacts": "Atlasiet no kontaktpersonām",
+            "userChooserPlaceholder": "Meklēt pēc nosaukuma",
+            "photo": "Fotogrāfēt",
+            "photoOf": "Uzņemiet fotoattēlu {{name}}",
+            "photoInstruction": "Ja persona, kas skenēja jūsu QR kodu, ir jūsu priekšā, nofotografējiet viņu",
+            "to": "Uz: {{Stream Title}}",
+            "go": "Aiziet",
+            "title": "Uzaicināt",
+            "placeholder": "Mobilā tālruņa numurs vai e-pasta adrese",
+            "orInvite": "Vai uzaiciniet cilvēkus, izmantojot:",
+            "copyLink": "{{ClickOrTap}} lai kopētu uzaicinājuma saiti",
+            "shareOrCopyLink": "{{ClickOrTap}} lai kopīgotu vai kopētu uzaicinājuma saiti",
+            "QR": "{{ClickOrTap}} lai ģenerētu QR kodu",
+            "QRtitle": "Skenējiet šo QR kodu",
+            "QRscanned": "Viņi to skenēja!",
+            "scannedQR": "{{ClickOrTap}} , ja kods tika skenēts",
+            "byEmail": "E-pasts",
+            "byText": "Teksts",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "title2": "Uzaiciniet cilvēkus",
+            "chooseMethod": "Izvēlieties metodi:",
+            "selectContacts": "Izvēlieties Kontakti",
+            "scanQRCode": "Skenējiet QR kodu",
+            "shareLink": "Kopīgojiet saiti",
+            "chooseFromRegistered": "Izvēlieties no reģistrētajiem lietotājiem",
+            "inviteViaEmailOrSms": "Uzaicināt pa e-pastu vai SMS"
+        },
         "complete": {
-            "HasInvitedYou": "uzaicināja jūs uz:",
             "WelcomeToCommunity": "Laipni lūdzam {{communityName}}",
+            "HasInvitedYou": "uzaicināja jūs uz:",
             "HasInvitedYouToTheirProfile": "uzaicināja jūs izveidot savienojumu.",
             "prompt": "Ļaujiet draugiem jūs atpazīt:",
             "accept": "Pieņemt uzaicinājumu"
+        },
+        "email": {
+            "subject": "Hei, pārbaudiet šo",
+            "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
+            "InvitingYou": "Es aicinu jūs uz {{title}}",
+            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}",
+            "HasMentionedYou": "{{displayName}} ir pieminējis jūs sadaļā &quot; {{title}} &quot;",
+            "YOUAREINVITED": "ESAT AICINĀTS!",
+            "AcceptInvite": "Pieņemt uzaicinājumu"
+        },
+        "sms": {
+            "content": "Jūs esat uzaicināts uz {{title}} . Lūdzu, pieskarieties {{url}}"
+        },
+        "notice": {
+            "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
         }
     },
     "messages": {
         "html": {
-            "posted": "ievietoja <em>{{message.fields.type}}<\/em> ziņojumu adresātam {{stream.fields.title}}"
+            "posted": "ievietoja <em>{{message.fields.type}}<\/em> ziņojumu uz {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "komentēja",
             "startedCallIn": "sāka zvanu",
             "in": "iekšā",
-            "body": "gadā {{& url}}: {{& message.fields.content}}",
+            "body": "gadā {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ir izlikts uz",
-                "byAvatar": "autors: {{avatar.displayName}}"
+                "byAvatar": "līdz {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "ir jauns {{instructions.fromDisplayType}}",
@@ -163,17 +181,20 @@
     "followup": {
         "mobile": {
             "alert": "No mūsu numura tiek sūtīti ielūgumi, kurus jūsu draugi vēl neatpazīst. Pēc tam nosūtiet īsu īsziņu, lai informētu viņus, ka ielūgums ir no jums, lūdzot noklikšķināt uz saites.",
-            "confirm": "No mūsu numura tiek sūtīti ielūgumi, kurus jūsu draugi vēl neatpazīst. Vai vēlaties ātri nosūtīt īsziņu, lai informētu viņus, ka ielūgums ir no jums, lūdzot noklikšķināt uz saites?",
-            "check": "Sveiki, es tikko nosūtīju jums uzaicinājumu izmantot lietotni {{app}}. Lūdzu, pārbaudiet savu sms un noklikšķiniet uz saites!",
+            "confirm": "No mūsu numura tiek sūtīti ielūgumi, kurus jūsu draugi vēl neatpazīst. Vai vēlaties nosūtīt viņiem ātru īsziņu, lai informētu, ka ielūgums ir no jums, lūdzot noklikšķināt uz saites?",
+            "check": "Sveiki, es tikko nosūtīju jums uzaicinājumu uz lietotni {{app}} . Lūdzu, pārbaudiet savu sms un noklikšķiniet uz saites!",
             "CheckYourMobile": "Lūdzu, pārbaudiet SMS un izpildiet norādījumus!"
         },
         "email": {
             "alert": "No mūsu domēna tiek sūtīti ielūgumi, kurus jūsu draugi vēl neatpazīst. Pēc tam nosūtiet īsu īsziņu, lai informētu viņus, ka ielūgums ir no jums, lūdzot noklikšķināt uz saites.",
-            "confirm": "No mūsu domēna tiek sūtīti ielūgumi, kurus jūsu draugi vēl neatpazīst. Vai vēlaties ātri nosūtīt īsziņu, lai informētu viņus, ka ielūgums ir no jums, lūdzot noklikšķināt uz saites?",
+            "confirm": "No mūsu domēna tiek sūtīti ielūgumi, kurus jūsu draugi vēl neatpazīst. Vai vēlaties nosūtīt viņiem ātru īsziņu, lai informētu, ka ielūgums ir no jums, lūdzot noklikšķināt uz saites?",
             "subject": "Vai saņēmāt ielūgumu?",
-            "body": "Sveiki, es tikko nosūtīju jums uzaicinājumu izmantot lietotni {{app}}. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!",
+            "body": "Sveiki, es tikko nosūtīju jums uzaicinājumu uz lietotni {{app}} . Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!",
             "CheckYourEmail": "Lūdzu, pārbaudiet savu e-pastu un izpildiet norādījumus!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Privātuma iestatījumi"
     },
     "participating": {
         "Title": "Nosaukums",
@@ -190,7 +211,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
-        "streamTitle": "{{1}} sāka telekonferenci",
+        "streamTitle": "{{1}} uzsāka telekonferenci",
         "allow": {
             "dialogTitle": "Savienojuma izveide",
             "microphoneBtn": "Iespējot mikrofonu",
@@ -198,53 +219,56 @@
             "cameraAndMicrophoneBtn": "Iespējot kameru un mikrofonu"
         },
         "preparing": {
+            "dialogTitle": "Pirms pievienošanās ieslēdziet\/izslēdziet kameru vai mikrofonu",
             "micIsOff": "Mikrofons ir izslēgts",
             "micIsOn": "Mikrofons ir ieslēgts",
             "cameraIsOff": "Kamera ir izslēgta",
             "cameraIsOn": "Kamera ir ieslēgta",
             "screenSharingIsOn": "Ekrāna koplietošana ir ieslēgta",
             "screenSharingIsOff": "Kopīgot ekrānu",
-            "joinNow": "Pievienojieties aicinājumam",
-            "dialogTitle": "Pirms pievienošanās ieslēdziet\/izslēdziet kameru vai mikrofonu"
+            "joinNow": "Pievienojieties aicinājumam"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
-            "permissionDenied": "{{kind}} atļauja liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
+            "permissionDenied": "Atļauja {{kind}} liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
             "point1": "Dodieties uz &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Konfidencialitāte un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
-            "point2": "Noņemiet {{hostname}} no &quot;Bloķēšanas&quot; saraksta"
+            "point2": "Noņemiet {{hostname}} no saraksta &quot;Bloķēt&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
-            "permissionDenied": "{{kind}} atļauja liegta. Lūdzu, atkārtoti ielādējiet šo lapu un apstipriniet piekļuvi {{kind}}, lai pievienotos konferencei."
+            "permissionDenied": "Atļauja {{kind}} liegta. Lūdzu, atkārtoti ielādējiet šo lapu un apstipriniet piekļuvi {{kind}} , lai pievienotos konferencei."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
-            "permissionDenied": "{{kind}} atļauja liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
+            "permissionDenied": "Atļauja {{kind}} liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
             "point1": "Dodieties uz Android iestatījumiem",
             "point2": "Atveriet sadaļu “Lietotnes un paziņojumi”",
-            "point3": "Atrodiet &quot;{{communityName}}&quot; un atveriet to",
+            "point3": "Atrodiet &quot; {{communityName}} &quot; un atveriet to",
             "point4": "Pieskarieties vienumam Atļaujas",
             "point5": "Iespējot {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
-            "permissionDenied": "{{kind}} atļauja liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
+            "permissionDenied": "Atļauja {{kind}} liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
             "point1": "Dodieties uz iOS iestatījumiem",
             "point2": "Atveriet sadaļu &quot;Privātums&quot;",
             "point3": "Atrodiet {{kind}} un atveriet to",
-            "point4": "Atrodiet &quot;{{communityName}}&quot; un iespējojiet"
+            "point4": "Atrodiet &quot; {{communityName}} &quot; un iespējojiet"
+        },
+        "fbLive": {
+            "dialogTitle": "Sākta Facebook tiešraide"
         },
         "notices": {
             "youJoinedRoom": "Jūs pievienojāties telpai",
             "joining": "Pievienošanās: {{userName}}",
-            "sbLeftRoom": "{{userName}} izgāja no telpas",
+            "sbLeftRoom": "{{userName}} izgāja no istabas",
             "switchingRoom": "Pārslēgšanās telpa...",
             "forceDisconnecting": "Jūs tiksit atvienots 5 sekunžu laikā",
             "forceDisconnectingImmediately": "Jūs atvienoja saimnieks",
             "youLeftRoom": "Jūs izgājāt no istabas",
             "codeCopied": "Jūs izgājāt no istabas",
             "sbBeganFbLive": "{{userName}} sāka pārraidīt šo zvanu pakalpojumā Facebook",
-            "sbStoppedFbLive": "{{userName}} pārtrauca pārraidīt šo zvanu pakalpojumā Facebook",
+            "sbStoppedFbLive": "{{userName}} pārtrauca šī zvana pārraidi Facebook",
             "youBeganFbLive": "Jūs sākāt pārraidīt šo zvanu pakalpojumā Facebook",
             "youStoppedFbLive": "Jūs pārtraucāt pārraidīt šo zvanu pakalpojumā Facebook",
             "youStartedLive": "Jūs sākāt pārraidīt šo zvanu uz pielāgotu RTMP",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "Kods ir kopēts starpliktuvē",
             "userHasNoVideo": "Dalībniekam nav video",
             "openInBrowserAlert": "Atveriet saiti pārlūkprogrammā Safari, lai pievienotos konferencei.",
-            "allowedVideoLimit": "Šajā telpā atļauts tikai {{limit}} video",
-            "allowedAudioLimit": "Šajā telpā ir atļauti tikai {{limit}} mikrofoni"
+            "allowedVideoLimit": "Šajā telpā ir atļauti tikai {{limit}} videoklipi",
+            "allowedAudioLimit": "Šajā telpā atļauti tikai {{limit}} mikrofoni"
         },
         "settingsPopup": {
             "dialogTitle": "Video iestatījumi",
@@ -289,23 +313,26 @@
             "fbStartLive": "Pāriet uz tiešraidi",
             "fbStopLive": "Beigt tiešraidi",
             "streamingSettings": "Iestatījumi",
+            "manageStream": "Pārvaldīt tiešraidi",
             "fbEmbedCode": "Iegult",
             "copy": "Kopēt",
             "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
             "startBroadcasting": "Sāciet apraidi",
-            "broadcastingInProgress": "Notiek apraide",
-            "manageStream": "Pārvaldīt tiešraidi"
+            "broadcastingInProgress": "Notiek apraide"
         },
         "audioSettings": {
             "dialogTitle": "Audio iestatījumi",
             "speakers": "Skaļruņi",
             "microphone": "Mikrofons"
         },
+        "broadcastPopup": {
+            "dialogTitle": "Pārvaldīt apraidi"
+        },
         "participantsPopup": {
             "dialogTitle": "Dalībnieka iestatījumi",
             "disconnect": "Atvienot",
             "floatingScreens": "Peldošie ekrāni",
-            "tiledScreens": "Flīzēti ekrāni",
+            "tiledScreens": "Flīžu ekrāni",
             "loudestExceptMe": "Skaļākais, izņemot mani",
             "maximizeLoudest": "Maksimizēt skaļāko",
             "staticMaximized": "Maksimizēts statiskais",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Rādīt ekrāna kopīgošanu"
         },
         "streamingSettings": {
-            "title": "Straumēšanas iestatījumi"
+            "title": "Tiešraide"
         },
         "preview": {
             "Meeting": "Telekonference",
             "MeetingEnded": "Telekonference beidzās"
         },
         "requestSpeakDialog": {
-            "msg": "Pašlaik sapulcē runā {{count}} personas. Vai vēlaties aizstāt vienu no tiem pēc tam, kad būsiet atļāvis {{seconds}} sekundes beigt runāt?",
-            "dialogTitle": "Lūgums runāt"
-        },
-        "fbLive": {
-            "dialogTitle": "Sākta Facebook tiešraide"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Pārvaldīt apraidi"
+            "dialogTitle": "Lūgums runāt",
+            "msg": "Pašlaik sapulcē runā {{count}} cilvēki. Vai vēlaties aizstāt vienu no tiem pēc tam, kad būsiet {{seconds}} sekundes, lai pabeigtu runu?"
         }
     },
     "types": {
@@ -358,7 +379,7 @@
             "displayType": "Kopienas locekļu kopīga pieredze"
         },
         "Streams\/greeting": {
-            "description": "sveiciens, ar kuru lietotājs var iepazīstināt ar sevi",
+            "description": "sveiciens, ar kuru lietotājs var sevi iepazīstināt",
             "displayType": "Sveiciens"
         },
         "Streams\/number": {
@@ -424,7 +445,7 @@
         "Streams\/pdf": {
             "displayType": "PDF dokuments",
             "description": "PDF dokuments",
-            "newItem": "Pievienojiet PDF"
+            "newItem": "Pievienot PDF"
         },
         "Streams\/live": {
             "displayType": "Tiešraide",
@@ -451,8 +472,8 @@
             "description": "saruna starp lietotājiem ar vēsturi"
         },
         "Streams\/webrtc": {
-            "displayType": "Tiešraides zvans",
-            "description": "reāllaika video\/audiozvans"
+            "displayType": "Telekonference",
+            "description": "tiešsaistes video\/audio konference"
         },
         "Streams\/question": {
             "displayType": "Jautājums",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Atbildēt uz jautājumu",
         "SetYourAnswer": "Lūdzu, atbildiet uz jautājumu",
         "NewQuestion": "Jauns Jautājums",
-        "NewAnswer": "Jauna atbilde",
+        "EditQuestion": "Rediģēt jautājumu",
+        "NewAnswer": "Jauna Atbilde",
+        "NewPossibleAnswer": "Jauna iespējamā atbilde",
         "AnswerDetails": "Atbildes detaļas",
         "answerOption": "Opcija",
         "answerOptionExclusive": "Ekskluzīvs",
         "answerTextarea": "Teksta apgabals",
+        "answerText": "Teksts",
+        "HideUntilAnswered": "Slēpt līdz atbildei",
+        "CantChangeAnswers": "Nevar mainīt atbildes",
         "FreeAnswer": "Uzrakstiet savu atbildi šeit",
         "SaveQuestion": "Saglabāt jautājumu",
         "SaveAnswer": "Saglabāt atbildi",
-        "AddAnotherAnswer": "Pievienojiet citu atbildi",
-        "ErrorAnswers": "Lūdzu, pievienojiet kaut vienu atbildi",
+        "Save": "Saglabāt",
+        "Send": "Sūtīt",
+        "TitleRequired": "Nepieciešams nosaukums!",
         "AlreadyAnswered": "Jau atbildēts",
         "TitlePlaceholder": "Ierakstiet savu jautājumu",
         "ContentPlaceholder": "Ievietojiet šeit jebkādu papildu informāciju, lai palīdzētu cilvēkiem atbildēt",
         "ErrorTitle": "Nepieciešams jautājums",
         "Placeholder": "Vietturis",
-        "EditQuestion": "Rediģēt jautājumu",
-        "NewPossibleAnswer": "Jauna iespējamā atbilde",
-        "answerText": "Teksts",
-        "HideUntilAnswered": "Slēpt līdz atbildei",
-        "CantChangeAnswers": "Nevar mainīt atbildes",
-        "Save": "Saglabāt",
-        "Send": "Sūtīt",
-        "TitleRequired": "Nepieciešams nosaukums!",
         "AreYouSure": "Vai tu esi pārliecināts?"
     },
     "experience": {
@@ -593,25 +612,5 @@
         "endCall": "Beigt zvanu",
         "interview": "Intervija",
         "markApproved": "Atzīmēt kā apstiprinātu"
-    },
-    "identifier": {
-        "private": "Privāts",
-        "public": "Publisks",
-        "configurationSaved": "Konfigurācija saglabāta",
-        "error": "Kaut kas nogāja greizi",
-        "privacySettings": "Privātuma iestatījumi"
-    },
-    "avatar": {
-        "firstName": "vārds",
-        "lastName": "uzvārds",
-        "username": "lietotājvārds"
-    },
-    "login": {
-        "prompt": "Ļaujiet draugiem jūs atpazīt:",
-        "newUser": "vai izveidojiet jaunu kontu tālāk",
-        "picTooltip": "Vēlāk varat mainīt šo attēlu",
-        "placeholder": {
-            "fullName": "Ievadiet savu pilno vārdu"
-        }
     }
 }

@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat., {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "dentro de {{1}}"
     },
     "units": {
@@ -18,7 +18,7 @@
         "inches": "polgadas"
     },
     "location": {
-        "interested": "Estou interesado en cousas que teñan lugar dentro de {{select}}",
+        "interested": "Estou interesado en cousas que teñan lugar dentro de {{select}} de",
         "update": "Actualizar a miña localización",
         "set": "Establecer a miña localización",
         "prompt": "{{ClickOrTap}} aquí para<br> configura o teu<br> localización",
@@ -38,7 +38,7 @@
         },
         "add": {
             "title": "Ponlle un nome a esta localización",
-            "placeholder": "Fogar, Traballo etc.",
+            "placeholder": "Fogar, Traballo, etc.",
             "ok": "Gardar"
         },
         "dialog": {

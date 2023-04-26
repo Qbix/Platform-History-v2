@@ -11,7 +11,7 @@
             },
             "interests": {
                 "Title": "Sía eftir vöxtum",
-                "FilterInterests": "Byrjaðu að slá inn áhugamál..."
+                "FilterInterests": "Byrjaðu að skrifa áhugamál..."
             },
             "Interest": "Áhugi",
             "Location": "Staðsetning"
@@ -33,7 +33,7 @@
             "setClip": "Klippa út",
             "invalidURL": "Ógild vefslóð"
         },
-        "FileTooLarge": "Skrá of stór fyrir skyndiminni. Hámarksskráarstærð {{size}}",
+        "FileTooLarge": "Skrá of stór fyrir skyndiminni. Hámarks skráarstærð {{size}}",
         "InvalidPDF": "Skrá er ekki gild PDF",
         "StartTypingTitleOrKeywords": "Byrjaðu að slá inn titil eða leitarorð..."
     },
@@ -51,11 +51,11 @@
             "displayType": "Kynning"
         },
         "Websites\/advert\/unit": {
-            "description": "Auglýsingaeining á vefsíðu",
+            "description": "Auglýsingareining á vefsíðu",
             "displayType": "Auglýsingareining"
         },
         "Websites\/advert\/placement": {
-            "description": "Leið til að flokka auglýsingaeiningar undir nafni",
+            "description": "Aðferð til að flokka auglýsingaeiningar undir nafni",
             "displayType": "Auglýsingasetning"
         },
         "Websites\/advert\/creative": {

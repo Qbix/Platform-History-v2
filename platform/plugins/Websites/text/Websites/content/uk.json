@@ -5,12 +5,12 @@
                 "link": "Посилання для просування",
                 "startDate": "Дата початку",
                 "startTime": "Час початку",
-                "endDate": "Кінцева дата",
+                "endDate": "Дата закінчення",
                 "endTime": "Час закінчення",
                 "budget": "Бюджет"
             },
             "interests": {
-                "Title": "Фільтр за інтересами",
+                "Title": "Фільтрувати за інтересами",
                 "FilterInterests": "Почніть вводити інтерес..."
             },
             "Interest": "Інтерес",
@@ -21,33 +21,33 @@
         "composer": {
             "Go": "Іди",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Огляд",
+            "BrowseTheWeb": "переглядати",
             "WriteToStartConversation": "Напишіть свої думки, щоб почати розмову",
-            "StartConversation": "Почати розмову",
-            "GotoConversation": "Перейдіть до Розмови",
+            "StartConversation": "Розпочати розмову",
+            "GotoConversation": "Перейдіть до розмови",
             "reset": "Скинути",
             "edit": "Редагувати",
             "link": "Посилання",
             "setUrl": "Встановити URL",
-            "save": "Зберегти",
-            "setClip": "Вирізаний кліп",
-            "invalidURL": "Недійсна URL-адреса"
+            "save": "зберегти",
+            "setClip": "Вирізати кліп",
+            "invalidURL": "Недійсний URL"
         },
         "FileTooLarge": "Файл завеликий для кешування. Максимальний розмір файлу {{size}}",
         "InvalidPDF": "Файл не є дійсним PDF",
-        "StartTypingTitleOrKeywords": "Почніть вводити назву або ключові слова..."
+        "StartTypingTitleOrKeywords": "Почніть вводити заголовок або ключові слова..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML-документ, який різні користувачі можуть переглядати та редагувати",
-            "displayType": "стаття"
+            "description": "Документ HTML, який різні користувачі можуть переглядати та редагувати",
+            "displayType": "ст"
         },
         "Websites\/slide": {
             "description": "Слайд у презентації може містити HTML, аудіо тощо.",
-            "displayType": "Слайд"
+            "displayType": "слайд"
         },
         "Websites\/presentation": {
-            "description": "Презентація, що складається з різноманітних слайдів",
+            "description": "Презентація, що складається з різних слайдів",
             "displayType": "Презентація"
         },
         "Websites\/advert\/unit": {
@@ -67,7 +67,7 @@
             "displayType": "Рекламна кампанія"
         },
         "Websites\/webpage": {
-            "description": "Представляє веб-сайт, метадані якого були очищені",
+            "description": "Представляє веб-сайт, метадані якого було зібрано",
             "displayType": "веб-сторінка"
         }
     }

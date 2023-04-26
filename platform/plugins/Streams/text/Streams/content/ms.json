@@ -1,10 +1,15 @@
 {
     "errors": {
-        "HiddenFromYou": "Kandungan ini tersembunyi daripada anda.",
+        "HiddenFromYou": "Kandungan ini disembunyikan daripada anda.",
         "InplaceTypeMustBe": "inplaceType mestilah &#39;textarea&#39; atau &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Item Baru"
+    },
+    "avatar": {
+        "firstName": "nama pertama",
+        "lastName": "nama terakhir",
+        "username": "nama pengguna"
     },
     "labels": {
         "Streams\/invited": "Orang yang saya jemput",
@@ -13,8 +18,16 @@
         "Yes": "ya",
         "No": "Tidak"
     },
+    "login": {
+        "prompt": "Biarkan rakan mengenali anda:",
+        "newUser": "atau buat akaun baharu di bawah",
+        "picTooltip": "Anda boleh menukar gambar ini kemudian",
+        "placeholder": {
+            "fullName": "Masukkan nama penuh anda"
+        }
+    },
     "interests": {
-        "Filter": "Apakah minat anda?",
+        "Filter": "Minat carian",
         "CanGrant": "Jika anda masih tidak menemui perkara yang anda cari, anda boleh menambah minat baharu di bawah:",
         "TrySynonyms": "Tidak nampak? Cuba beberapa sinonim.",
         "AddUnderCategory": "Tambah di bawah kategori...",
@@ -34,6 +47,7 @@
         "earlierComments": "komen terdahulu",
         "startedConversation": "memulakan perbualan",
         "RealTimeCall": "Panggilan Masa Nyata",
+        "JoinWebRTC": "Telesidang",
         "SearchByName": "Cari mengikut nama",
         "Notifications": {
             "Visit": "{{displayName}} sedang melawat sembang",
@@ -41,84 +55,41 @@
             "Leave": "{{displayName}} meninggalkan sembang",
             "RelatedTo": "{{displayName}} memulakan {{stream.displayType}}"
         },
-        "JoinWebRTC": "Telesidang"
+        "placeholders": {
+            "Public": "Tambah komen",
+            "Private": "Tulis mesej peribadi"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "menguruskan langganan e-mel anda",
         "IfUnsubscribe": "Jika anda ingin berhenti melanggan",
-        "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
+        "*": "Mesej {{& message.fields.type}} hingga {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} menyertai",
+        "Streams\/left": "{{&call 'avatar.displayName'}} lagi",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} berkata: {{& message.content}}",
-        "Streams\/changed": "Perubahan dalam {{stream.fields.title}}",
+        "Streams\/changed": "Perubahan pada {{stream.fields.title}}",
         "Streams\/invite": "Anda telah dijemput ke {{& stream.fields.title}}",
-        "Streams\/announcement": "Pengumuman dalam {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} menukar akses dalam {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Mesej sembang disunting dalam {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Mesej sembang dialih keluar dalam {{& stream.fields.title}}",
+        "Streams\/announcement": "Pengumuman pada {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} menukar akses pada {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Mesej sembang disunting pada {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Mesej sembang dialih keluar pada {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} telah ditutup",
         "Streams\/task\/progress": "Kemajuan dibuat pada {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tugasan selesai: {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
         "Streams\/task\/error": "Ralat semasa: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesej Masuk",
-        "Streams\/relatedTo\/Streams\/call": "Panggilan Baharu Dimulakan pada {{toTitle}}",
-        "Streams\/relatedTo\/*": "Baharu {{relationDisplayType}} dalam {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}",
+        "Streams\/incoming\/*": "{{app}} : Mesej Masuk",
+        "Streams\/relatedTo\/Streams\/call": "Panggilan Baru Bermula pada {{toTitle}}",
+        "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ditambah kepada {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut anda dalam ulasan",
-        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} menyertai",
-        "Streams\/left": "{{&call 'avatar.displayName'}} kiri"
+        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata"
     },
     "invite": {
         "command": "Jemput",
-        "messageContent": "{{displayName}} menjemput anda untuk {{inviteUrl}}",
-        "youCanNowPaste": "Anda kini boleh menampal pautan ini di suatu tempat untuk menjemput orang",
-        "dialog": {
-            "chooseFromContacts": "Pilih daripada Kenalan anda",
-            "chooseAgainFromContacts": "Pilih Lagi daripada Kenalan",
-            "inviteSelectedContacts": "Jemput Kenalan Terpilih",
-            "selectFromContacts": "Pilih Daripada Kenalan",
-            "userChooserPlaceholder": "Cari mengikut nama",
-            "photo": "Ambil gambar",
-            "photoInstruction": "Jika orang yang mengimbas kod QR anda berada di hadapan anda, ambil foto mereka",
-            "to": "Kepada: {{Stream Title}}",
-            "go": "Pergi",
-            "title": "Jemput",
-            "placeholder": "Nombor mudah alih atau alamat e-mel",
-            "orInvite": "Atau jemput orang dengan menggunakan:",
-            "copyLink": "{{ClickOrTap}} untuk menyalin pautan jemputan",
-            "shareOrCopyLink": "{{ClickOrTap}} untuk berkongsi atau menyalin pautan jemputan",
-            "QR": "{{ClickOrTap}} untuk menjana kod QR",
-            "QRtitle": "Imbas kod QR ini",
-            "QRscanned": "Mereka mengimbasnya!",
-            "scannedQR": "{{ClickOrTap}} jika kod itu diimbas",
-            "byEmail": "E-mel",
-            "byText": "Teks",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "title2": "Jemput Orang",
-            "chooseMethod": "Pilih kaedah:",
-            "selectContacts": "Pilih Kenalan",
-            "scanQRCode": "Imbas Kod QR",
-            "shareLink": "Kongsi pautan",
-            "chooseFromRegistered": "Pilih daripada pengguna berdaftar",
-            "inviteViaEmailOrSms": "Jemput melalui e-mel atau SMS"
-        },
-        "email": {
-            "subject": "Hei, semak ini",
-            "PleaseVisitLink": "Sila layari pautan berikut:",
-            "InvitingYou": "Saya menjemput anda untuk {{title}}",
-            "HasInvitedYou": "{{displayName}} telah menjemput anda untuk {{title}}",
-            "HasMentionedYou": "{{displayName}} telah menyebut anda dalam &quot;{{title}}&quot;",
-            "YOUAREINVITED": "ANDA DIJEMPUT!",
-            "AcceptInvite": "Terima Jemputan"
-        },
-        "sms": {
-            "content": "Anda telah dijemput ke {{title}}. Sila ketik {{url}}"
-        },
-        "notice": {
-            "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
-        },
         "Invite": "Jemput",
         "Share": "Kongsi",
+        "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
+        "youCanNowPaste": "Anda kini boleh menampal pautan ini di suatu tempat untuk menjemput orang",
         "roles": {
             "title": "Berikan Peranan kepada Pengguna Jemputan?",
             "NotAuthorizedToGrantRole": {
@@ -133,29 +104,76 @@
         "labels": {
             "title": "Apakah Hubungan anda?"
         },
+        "dialog": {
+            "chooseFromContacts": "Pilih daripada Kenalan anda",
+            "chooseAgainFromContacts": "Pilih Lagi daripada Kenalan",
+            "inviteSelectedContacts": "Jemput Kenalan Terpilih",
+            "selectFromContacts": "Pilih Daripada Kenalan",
+            "userChooserPlaceholder": "Cari mengikut nama",
+            "photo": "Ambil gambar",
+            "photoOf": "Ambil gambar {{name}}",
+            "photoInstruction": "Jika orang yang mengimbas kod QR anda berada di hadapan anda, ambil foto mereka",
+            "to": "Kepada: {{Stream Title}}",
+            "go": "Pergi",
+            "title": "Jemput",
+            "placeholder": "Nombor mudah alih atau alamat e-mel",
+            "orInvite": "Atau jemput orang dengan menggunakan:",
+            "copyLink": "{{ClickOrTap}} untuk menyalin pautan jemputan",
+            "shareOrCopyLink": "{{ClickOrTap}} untuk berkongsi atau menyalin pautan jemputan",
+            "QR": "{{ClickOrTap}} untuk menjana kod QR",
+            "QRtitle": "Imbas kod QR ini",
+            "QRscanned": "Mereka mengimbasnya!",
+            "scannedQR": "{{ClickOrTap}} jika kod telah diimbas",
+            "byEmail": "E-mel",
+            "byText": "Teks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "title2": "Jemput Orang",
+            "chooseMethod": "Pilih kaedah:",
+            "selectContacts": "Pilih Kenalan",
+            "scanQRCode": "Imbas Kod QR",
+            "shareLink": "Kongsi pautan",
+            "chooseFromRegistered": "Pilih daripada pengguna berdaftar",
+            "inviteViaEmailOrSms": "Jemput melalui e-mel atau SMS"
+        },
         "complete": {
-            "HasInvitedYou": "telah menjemput anda untuk:",
             "WelcomeToCommunity": "Selamat datang ke {{communityName}}",
+            "HasInvitedYou": "telah menjemput anda untuk:",
             "HasInvitedYouToTheirProfile": "telah menjemput anda untuk berhubung.",
             "prompt": "Biarkan rakan mengenali anda:",
             "accept": "Terima Jemputan"
+        },
+        "email": {
+            "subject": "Hei, semak ini",
+            "PleaseVisitLink": "Sila layari pautan berikut:",
+            "InvitingYou": "Saya menjemput anda ke {{title}}",
+            "HasInvitedYou": "{{displayName}} telah menjemput anda ke {{title}}",
+            "HasMentionedYou": "{{displayName}} telah menyebut anda dalam &quot; {{title}} &quot;",
+            "YOUAREINVITED": "ANDA DIJEMPUT!",
+            "AcceptInvite": "Terima Jemputan"
+        },
+        "sms": {
+            "content": "Anda telah dijemput ke {{title}} . Sila ketik {{url}}"
+        },
+        "notice": {
+            "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
         }
     },
     "messages": {
         "html": {
-            "posted": "menyiarkan <em>{{message.fields.type}}<\/em> mesej kepada {{stream.fields.title}}"
+            "posted": "menghantar mesej <em>{{message.fields.type}}<\/em> kepada {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "mengulas",
             "startedCallIn": "memulakan panggilan masuk",
             "in": "dalam",
-            "body": "dalam {{& url}}: {{& message.fields.content}}",
+            "body": "pada {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "telah diposkan ke",
-                "byAvatar": "oleh {{avatar.displayName}}"
+                "byAvatar": "menjelang {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "mempunyai {{instructions.fromDisplayType}} baharu",
+                "hasANew": "mempunyai {{instructions.fromDisplayType}} baru",
                 "byAvatar": "ditambah oleh {{avatar.displayName}}"
             }
         }
@@ -164,16 +182,19 @@
         "mobile": {
             "alert": "Jemputan dihantar daripada nombor kami, yang belum dikenali oleh rakan anda. Susulan dengan teks pantas untuk memberitahu mereka bahawa jemputan itu datang daripada anda, meminta mereka mengklik pautan.",
             "confirm": "Jemputan dihantar daripada nombor kami, yang belum dikenali oleh rakan anda. Adakah anda ingin membuat susulan dengan teks pantas untuk memberitahu mereka bahawa jemputan itu datang daripada anda, meminta mereka mengklik pautan.",
-            "check": "Hei, saya baru sahaja menghantar jemputan kepada apl {{app}}. Sila semak sms anda dan klik pautan!",
+            "check": "Hei, saya baru sahaja menghantar jemputan ke apl {{app}} kepada anda. Sila semak sms anda dan klik pautan!",
             "CheckYourMobile": "Sila semak SMS dan ikut arahan!"
         },
         "email": {
             "alert": "Jemputan dihantar daripada domain kami, yang belum dikenali oleh rakan anda. Susulan dengan teks pantas untuk memberitahu mereka bahawa jemputan itu datang daripada anda, meminta mereka mengklik pautan.",
             "confirm": "Jemputan dihantar daripada domain kami, yang belum dikenali oleh rakan anda. Adakah anda ingin membuat susulan dengan teks pantas untuk memberitahu mereka bahawa jemputan itu datang daripada anda, meminta mereka mengklik pautan.",
             "subject": "Adakah anda mendapat jemputan?",
-            "body": "Hei, saya baru sahaja menghantar jemputan kepada apl {{app}}. Sila semak e-mel anda dan klik pautan di sana!",
+            "body": "Hei, saya baru sahaja menghantar jemputan ke apl {{app}} kepada anda. Sila semak e-mel anda dan klik pautan di sana!",
             "CheckYourEmail": "Sila semak e-mel anda dan ikut arahan!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Tetapan privasi"
     },
     "participating": {
         "Title": "Tajuk",
@@ -198,14 +219,14 @@
             "cameraAndMicrophoneBtn": "Dayakan Kamera dan Mikrofon"
         },
         "preparing": {
+            "dialogTitle": "Hidupkan\/matikan kamera atau mikrofon sebelum anda menyertai",
             "micIsOff": "Mic dimatikan",
             "micIsOn": "Mic dihidupkan",
             "cameraIsOff": "Kamera dimatikan",
             "cameraIsOn": "Kamera dihidupkan",
             "screenSharingIsOn": "Perkongsian skrin dihidupkan",
             "screenSharingIsOff": "Kongsi skrin",
-            "joinNow": "Sertai Panggilan",
-            "dialogTitle": "Hidupkan\/matikan kamera atau mikrofon sebelum anda menyertai"
+            "joinNow": "Sertai Panggilan"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Arahan",
@@ -215,14 +236,14 @@
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Sila muatkan semula halaman ini dan sahkan akses kepada {{kind}} untuk menyertai persidangan."
+            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Sila muat semula halaman ini dan sahkan akses kepada {{kind}} untuk menyertai persidangan."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Arahan",
             "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Untuk menggunakannya sila ikuti langkah berikut:",
             "point1": "Pergi ke Tetapan Android anda",
             "point2": "Buka &quot;Apl &amp; pemberitahuan&quot;",
-            "point3": "Cari &quot;{{communityName}}&quot; dan bukanya",
+            "point3": "Cari &quot; {{communityName}} &quot; dan bukanya",
             "point4": "Ketik pada Kebenaran",
             "point5": "Dayakan {{kind}}"
         },
@@ -232,24 +253,27 @@
             "point1": "Pergi ke Tetapan iOS anda",
             "point2": "Buka &quot;Privasi&quot;",
             "point3": "Cari {{kind}} dan bukanya",
-            "point4": "Cari &quot;{{communityName}}&quot; dan dayakan"
+            "point4": "Cari &quot; {{communityName}} &quot; dan dayakan"
+        },
+        "fbLive": {
+            "dialogTitle": "Penstriman langsung Facebook bermula"
         },
         "notices": {
             "youJoinedRoom": "Anda menyertai bilik",
             "joining": "Menyertai: {{userName}}",
-            "sbLeftRoom": "{{userName}} meninggalkan bilik",
+            "sbLeftRoom": "{{userName}} keluar dari bilik",
             "switchingRoom": "Bilik bertukar...",
             "forceDisconnecting": "Anda akan terputus dalam masa 5 saat",
             "forceDisconnectingImmediately": "Anda telah diputuskan sambungan oleh hos",
             "youLeftRoom": "Awak keluar dari bilik",
             "codeCopied": "Awak keluar dari bilik",
-            "sbBeganFbLive": "{{userName}} mula menyiarkan panggilan ini dalam Facebook",
+            "sbBeganFbLive": "{{userName}} mula menyiarkan panggilan ini di Facebook",
             "sbStoppedFbLive": "{{userName}} berhenti menyiarkan panggilan ini dalam Facebook",
             "youBeganFbLive": "Anda mula menyiarkan panggilan ini dalam Facebook",
             "youStoppedFbLive": "Anda berhenti menyiarkan panggilan ini dalam Facebook",
             "youStartedLive": "Anda mula menyiarkan panggilan ini ke RTMP tersuai",
             "youStoppedLive": "Anda berhenti menyiarkan panggilan ini ke RTMP tersuai",
-            "sbStartedLiveStreaming": "{{userName}} mula secara langsung",
+            "sbStartedLiveStreaming": "{{userName}} bermula secara langsung",
             "sbStoppedLiveStreaming": "{{userName}} tamat secara langsung",
             "liveStopped": "Ralat semasa menghantar video ke titik akhir telah berlaku",
             "youBeganVideoRecording": "Anda mula merakam persidangan ini",
@@ -289,17 +313,20 @@
             "fbStartLive": "Siaran Langsung",
             "fbStopLive": "Tamatkan Strim Langsung",
             "streamingSettings": "tetapan",
+            "manageStream": "Urus Strim Langsung",
             "fbEmbedCode": "Benamkan",
             "copy": "Salinan",
             "streamToRTMP": "Strim ke RTMP tersuai",
             "startBroadcasting": "Mulakan penyiaran",
-            "broadcastingInProgress": "Penyiaran sedang dijalankan",
-            "manageStream": "Urus Strim Langsung"
+            "broadcastingInProgress": "Penyiaran sedang dijalankan"
         },
         "audioSettings": {
             "dialogTitle": "Tetapan Audio",
             "speakers": "Penceramah",
             "microphone": "Mikrofon"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Uruskan Siaran"
         },
         "participantsPopup": {
             "dialogTitle": "Tetapan Peserta",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Tunjukkan perkongsian skrin"
         },
         "streamingSettings": {
-            "title": "Tetapan Penstriman"
+            "title": "Siaran langsung"
         },
         "preview": {
             "Meeting": "Telesidang",
             "MeetingEnded": "Telesidang tamat"
         },
         "requestSpeakDialog": {
-            "msg": "Pada masa ini terdapat {{count}} orang bercakap dalam mesyuarat. Adakah anda mahu menggantikan salah satu daripadanya selepas membenarkan mereka {{seconds}} saat untuk selesai bercakap?",
-            "dialogTitle": "Minta Bercakap"
-        },
-        "fbLive": {
-            "dialogTitle": "Penstriman langsung Facebook bermula"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Uruskan Siaran"
+            "dialogTitle": "Minta Bercakap",
+            "msg": "Pada masa ini terdapat {{count}} orang bercakap dalam mesyuarat itu. Adakah anda mahu menggantikan salah satu daripada mereka selepas membenarkan mereka {{seconds}} saat untuk menghabiskan bercakap?"
         }
     },
     "types": {
@@ -451,8 +472,8 @@
             "description": "perbualan antara pengguna, dengan sejarah"
         },
         "Streams\/webrtc": {
-            "displayType": "Panggilan Langsung",
-            "description": "panggilan video\/audio masa nyata"
+            "displayType": "Telesidang",
+            "description": "persidangan video\/audio dalam talian"
         },
         "Streams\/question": {
             "displayType": "soalan",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Jawab soalan",
         "SetYourAnswer": "Sila jawab soalan",
         "NewQuestion": "Soalan Baru",
+        "EditQuestion": "Edit Soalan",
         "NewAnswer": "Jawapan Baru",
+        "NewPossibleAnswer": "Jawapan Baru yang Mungkin",
         "AnswerDetails": "Jawab Butiran",
         "answerOption": "Pilihan",
         "answerOptionExclusive": "Eksklusif",
         "answerTextarea": "Textarea",
+        "answerText": "Teks",
+        "HideUntilAnswered": "Sembunyi sehingga dijawab",
+        "CantChangeAnswers": "Tidak boleh menukar jawapan",
         "FreeAnswer": "Tulis jawapan anda di sini",
         "SaveQuestion": "Simpan Soalan",
         "SaveAnswer": "Simpan Jawapan",
-        "AddAnotherAnswer": "Tambah satu lagi jawapan",
-        "ErrorAnswers": "Sila tambah walaupun satu jawapan",
+        "Save": "Jimat",
+        "Send": "Hantar",
+        "TitleRequired": "Tajuk diperlukan!",
         "AlreadyAnswered": "Sudah dijawab",
         "TitlePlaceholder": "Taip soalan anda",
         "ContentPlaceholder": "Letakkan sebarang maklumat tambahan di sini untuk membantu orang ramai menjawab",
         "ErrorTitle": "Soalan diperlukan",
         "Placeholder": "Pemegang tempat",
-        "EditQuestion": "Edit Soalan",
-        "NewPossibleAnswer": "Jawapan Baru yang Mungkin",
-        "answerText": "Teks",
-        "HideUntilAnswered": "Sembunyi sehingga dijawab",
-        "CantChangeAnswers": "Tidak boleh menukar jawapan",
-        "Save": "Jimat",
-        "Send": "Hantar",
-        "TitleRequired": "Tajuk diperlukan!",
         "AreYouSure": "Adakah anda pasti?"
     },
     "experience": {
@@ -593,25 +612,5 @@
         "endCall": "Tamat panggilan",
         "interview": "Temuduga",
         "markApproved": "Tandakan Diluluskan"
-    },
-    "identifier": {
-        "private": "Persendirian",
-        "public": "Awam",
-        "configurationSaved": "Konfigurasi disimpan",
-        "error": "Sesuatu telah berlaku",
-        "privacySettings": "Tetapan privasi"
-    },
-    "avatar": {
-        "firstName": "nama pertama",
-        "lastName": "nama terakhir",
-        "username": "nama pengguna"
-    },
-    "login": {
-        "prompt": "Biarkan rakan mengenali anda:",
-        "newUser": "atau buat akaun baharu di bawah",
-        "picTooltip": "Anda boleh menukar gambar ini kemudian",
-        "placeholder": {
-            "fullName": "Masukkan nama penuh anda"
-        }
     }
 }

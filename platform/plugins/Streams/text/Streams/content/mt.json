@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Punt Ġdid"
     },
+    "avatar": {
+        "firstName": "isem",
+        "lastName": "kunjom",
+        "username": "username"
+    },
     "labels": {
         "Streams\/invited": "Nies li stedint",
         "Streams\/invitedMe": "Min stidinni",
@@ -13,9 +18,17 @@
         "Yes": "Iva",
         "No": "Nru"
     },
+    "login": {
+        "prompt": "Ħalli lill-ħbieb jagħrfuk:",
+        "newUser": "jew oħloq kont ġdid hawn taħt",
+        "picTooltip": "Tista&#39; tibdel din l-istampa aktar tard",
+        "placeholder": {
+            "fullName": "Daħħal l-isem sħiħ tiegħek"
+        }
+    },
     "interests": {
-        "Filter": "X&#39;inhuma l-interessi tiegħek?",
-        "CanGrant": "Jekk għadek ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
+        "Filter": "Interessi tat-tiftix",
+        "CanGrant": "Jekk għadek ma ssibx dak li qed tfittex, tista&#39; żżid interess ġdid hawn taħt:",
         "TrySynonyms": "Tarahx? Ipprova xi sinonimi.",
         "AddUnderCategory": "Żid taħt il-kategorija...",
         "Other": "Oħrajn",
@@ -26,51 +39,71 @@
         "noOneSaid": "Ħadd ma qal xejn",
         "closeChatButton": "Agħlaq iċ-chat",
         "closeChatConfirmTitle": "Tagħlaq dan iċ-chat?",
-        "closeChatConfirm": "Żgur li trid tagħlaq dan iċ-chat?",
+        "closeChatConfirm": "Int żgur li trid tagħlaq dan iċ-chat?",
         "Subscribed": "Notifiki Attivati",
         "Unsubscribed": "Notifiki Siekta",
         "closeChatConfirmYes": "Iva",
         "closeChatConfirmNo": "Nru",
         "earlierComments": "kummenti preċedenti",
         "startedConversation": "beda konverżazzjoni",
-        "RealTimeCall": "Sejħa f&#39;Ħin Real",
+        "RealTimeCall": "Sejħa f&#39;ħin reali",
+        "JoinWebRTC": "Telekonferenza",
         "SearchByName": "Fittex bl-isem",
         "Notifications": {
-            "Visit": "{{displayName}} qed iżżur iċ-chat",
+            "Visit": "{{displayName}} qed iżur iċ-chat",
             "Join": "{{displayName}} ingħaqad maċ-chat",
-            "Leave": "{{displayName}} ħalla ċ-chat",
+            "Leave": "{{displayName}} telqu miċ-chat",
             "RelatedTo": "{{displayName}} beda {{stream.displayType}}"
         },
-        "JoinWebRTC": "Telekonferenza"
+        "placeholders": {
+            "Public": "Żid kumment",
+            "Private": "Ikteb messaġġ privat"
+        }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "immaniġġja l-abbonamenti tal-email tiegħek",
+        "ManageEmailSubscriptions": "jimmaniġġja l-abbonamenti tal-email tiegħek",
         "IfUnsubscribe": "Jekk trid tneħħi l-abbonament",
-        "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
+        "*": "Messaġġ {{& message.fields.type}} sa {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} ssieħbu",
+        "Streams\/left": "{{&call 'avatar.displayName'}} xellug",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} qal: {{& message.content}}",
-        "Streams\/changed": "Bidliet fi {{stream.fields.title}}",
+        "Streams\/changed": "Bidliet fl- {{stream.fields.title}}",
         "Streams\/invite": "Int ġejt mistieden għal {{& stream.fields.title}}",
-        "Streams\/announcement": "Tħabbira fi {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} biddel l-aċċess fi {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Messaġġ taċ-chat editjat fi {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Messaġġ taċ-chat tneħħa fi {{& stream.fields.title}}",
+        "Streams\/announcement": "Tħabbira fl- {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} biddel l-aċċess {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Messaġġ taċ-chat editjat {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Il-messaġġ taċ-chat tneħħa {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} ingħalaq",
-        "Streams\/task\/progress": "Progress li sar fi {{stream.fields.title}}",
+        "Streams\/task\/progress": "Progress li sar fuq {{stream.fields.title}}",
         "Streams\/task\/complete": "Kompitu lest: {{stream.fields.title}}",
-        "Streams\/task\/error": "Żball waqt: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Messaġġ Dħul",
-        "Streams\/relatedTo\/Streams\/call": "Sejħa Ġdida Bdiet fi {{toTitle}}",
-        "Streams\/relatedTo\/*": "Ġdid {{relationDisplayType}} fi {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Miżjud ma&#39; {{toTitle}} bħala {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} semmejtek f&#39;kumment",
-        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} ingħaqad",
-        "Streams\/left": "{{&call 'avatar.displayName'}} telaq"
+        "Streams\/task\/error": "Żball matul: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}} : Messaġġ Dħul",
+        "Streams\/relatedTo\/Streams\/call": "Sejħa Ġdida Bdiet fl- {{toTitle}}",
+        "Streams\/relatedTo\/*": "{{relationDisplayType}} ġdid {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Miżjud ma {{toTitle}} bħala {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} semmetek f&#39;kumment",
+        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali"
     },
     "invite": {
         "command": "Stieden",
-        "messageContent": "{{displayName}} stedinkom biex {{inviteUrl}}",
-        "youCanNowPaste": "Issa tista&#39; tippejstja din il-link x&#39;imkien biex tistieden lin-nies",
+        "Invite": "Stieden",
+        "Share": "Aqsam",
+        "messageContent": "{{displayName}} stedinkom għal {{inviteUrl}}",
+        "youCanNowPaste": "Issa tista’ tippejstja din il-link x’imkien biex tistieden lin-nies",
+        "roles": {
+            "title": "Għoti Rwoli lill-Utenti Mistiedna?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Jiddispjacini",
+                "alert": "M&#39;intix awtorizzat li tagħti dan ir-rwol"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Jiddispjacini",
+                "alert": "M&#39;intix awtorizzat li tneħħi dan ir-rwol"
+            }
+        },
+        "labels": {
+            "title": "X&#39;inhi r-Relazzjoni tiegħek?"
+        },
         "dialog": {
             "chooseFromContacts": "Agħżel mill-Kuntatti tiegħek",
             "chooseAgainFromContacts": "Agħżel Erġa &#39;mill-Kuntatti",
@@ -78,14 +111,15 @@
             "selectFromContacts": "Agħżel Minn Kuntatti",
             "userChooserPlaceholder": "Fittex bl-isem",
             "photo": "Ħu ritratt",
-            "photoInstruction": "Jekk il-persuna li skennjat il-kodiċi QR tiegħek tkun quddiemek, ħudha ritratt",
+            "photoOf": "Ħu ritratt ta {{name}}",
+            "photoInstruction": "Jekk il-persuna li skennjat il-kodiċi QR tiegħek tkun quddiemek, ħu ritratt tagħhom",
             "to": "Lil: {{Stream Title}}",
             "go": "Mur",
             "title": "Stieden",
             "placeholder": "Numru tal-mowbajl jew indirizz elettroniku",
             "orInvite": "Jew stieden lin-nies billi tuża:",
-            "copyLink": "{{ClickOrTap}} biex tikkopja l-link tal-istedina",
-            "shareOrCopyLink": "{{ClickOrTap}} biex taqsam jew tikkopja link tal-istedina",
+            "copyLink": "{{ClickOrTap}} biex tikkopja stedina link",
+            "shareOrCopyLink": "{{ClickOrTap}} biex taqsam jew tikkopja l-link tal-istedina",
             "QR": "{{ClickOrTap}} biex tiġġenera kodiċi QR",
             "QRtitle": "Skennja dan il-kodiċi QR",
             "QRscanned": "Skennjawha!",
@@ -102,61 +136,45 @@
             "chooseFromRegistered": "Agħżel minn utenti reġistrati",
             "inviteViaEmailOrSms": "Stieden permezz ta&#39; email jew SMS"
         },
+        "complete": {
+            "WelcomeToCommunity": "Merħba għal {{communityName}}",
+            "HasInvitedYou": "stiedenek biex:",
+            "HasInvitedYouToTheirProfile": "stiedenek biex tikkonnettja.",
+            "prompt": "Ħalli lill-ħbieb jagħrfuk:",
+            "accept": "Aċċetta Stieden"
+        },
         "email": {
             "subject": "Ħej, iċċekkja dan",
             "PleaseVisitLink": "Jekk jogħġbok żur il-link li ġej:",
-            "InvitingYou": "Qed nistedinkom biex {{title}}",
-            "HasInvitedYou": "{{displayName}} stedinkom biex {{title}}",
-            "HasMentionedYou": "{{displayName}} semmejt f&#39;&quot;{{title}}&quot;",
+            "InvitingYou": "Qed nistedinkom għal {{title}}",
+            "HasInvitedYou": "{{displayName}} stedinkom għal {{title}}",
+            "HasMentionedYou": "{{displayName}} semmek f&#39;&quot; {{title}} &quot;",
             "YOUAREINVITED": "INTI MISTIEDNA!",
             "AcceptInvite": "Aċċetta Stieden"
         },
         "sms": {
-            "content": "Ġejt mistieden għal {{title}}. Jekk jogħġbok tektek {{url}}"
+            "content": "Ġejt mistieden għal {{title}} . Jekk jogħġbok tektek {{url}}"
         },
         "notice": {
             "text": "Ġejt mistieden. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
-        },
-        "Invite": "Stieden",
-        "Share": "Aqsam",
-        "roles": {
-            "title": "Għoti Rwoli lill-Utenti Mistiedna?",
-            "NotAuthorizedToGrantRole": {
-                "title": "Jiddispjacini",
-                "alert": "M&#39;intix awtorizzat li tagħti dan ir-rwol"
-            },
-            "NotAuthorizedToRemoveRole": {
-                "title": "Jiddispjacini",
-                "alert": "M&#39;intix awtorizzat li tneħħi dan ir-rwol"
-            }
-        },
-        "labels": {
-            "title": "X&#39;inhi r-Relazzjoni tiegħek?"
-        },
-        "complete": {
-            "HasInvitedYou": "stiedenek biex:",
-            "WelcomeToCommunity": "Merħba għal {{communityName}}",
-            "HasInvitedYouToTheirProfile": "stiedenek biex tikkonnettja.",
-            "prompt": "Ħalli lill-ħbieb jagħrfuk:",
-            "accept": "Aċċetta Stieden"
         }
     },
     "messages": {
         "html": {
-            "posted": "poġġiet messaġġ <em>{{message.fields.type}}<\/em> lil {{stream.fields.title}}"
+            "posted": "poġġa messaġġ <em>{{message.fields.type}}<\/em> lil {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "ikkummentat fuq",
             "startedCallIn": "beda sejħa fil",
             "in": "fi",
-            "body": "fi {{& url}}: {{& message.fields.content}}",
+            "body": "{{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ġie stazzjonat fuq",
-                "byAvatar": "minn {{avatar.displayName}}"
+                "byAvatar": "sa {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "għandha {{instructions.fromDisplayType}} ġdida",
-                "byAvatar": "miżjud minn {{avatar.displayName}}"
+                "hasANew": "għandu {{instructions.fromDisplayType}} ġdid",
+                "byAvatar": "miżjuda {{avatar.displayName}}"
             }
         }
     },
@@ -164,23 +182,26 @@
         "mobile": {
             "alert": "L-istediniet jintbagħtu min-numru tagħna, li sħabek għadhom ma jagħrfux. Segwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
             "confirm": "L-istediniet jintbagħtu min-numru tagħna, li sħabek għadhom ma jagħrfux. Tixtieq issegwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
-            "check": "Ħej, għadni kif bgħattlek stedina għall-app {{app}}. Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!",
+            "check": "Ħej, għadni kif bgħattlek stedina għall-app {{app}} . Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!",
             "CheckYourMobile": "Jekk jogħġbok iċċekkja l-SMS u segwi l-istruzzjonijiet!"
         },
         "email": {
-            "alert": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
-            "confirm": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
+            "alert": "L-istediniet jintbagħtu mid-dominju tagħna, li sħabek għadhom ma jagħrfux. Segwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
+            "confirm": "L-istediniet jintbagħtu mid-dominju tagħna, li sħabek għadhom ma jagħrfux. Tixtieq issegwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
             "subject": "Ġejt stedina?",
-            "body": "Ħej, għadni kif bgħattlek stedina għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemmhekk!",
+            "body": "Ħej, għadni kif bgħattlek stedina għall-app {{app}} . Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemmhekk!",
             "CheckYourEmail": "Jekk jogħġbok iċċekkja l-email tiegħek u segwi l-istruzzjonijiet!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Settings tal-Privatezza"
     },
     "participating": {
         "Title": "Titolu",
         "Subscribed": "Abbonat",
         "Participants": "Parteċipanti",
         "AreYouSureRemoveIdentifier": "Żgur li tneħħi dan l-identifikatur?",
-        "AreYouSureUnsubscribeIdentifier": "Żgur li tħassar dan l-identifikatur? Itfi n-notifiki lil dan l-identifikatur.",
+        "AreYouSureUnsubscribeIdentifier": "Żgur li tneħħi l-abbonament ta&#39; dan l-identifikatur? Itfi n-notifiki lil dan l-identifikatur.",
         "AreYouSureUnsubscribeDevice": "Żgur li tħassar dan l-apparat? Itfi n-notifiki lil dan l-apparat.",
         "AreYouSureRemoveParticipant": "Int żgur li trid tneħħi lil dan il-parteċipant?",
         "RemoveParticipant": "Neħħi parteċipant",
@@ -198,14 +219,14 @@
             "cameraAndMicrophoneBtn": "Ippermetti Kamera u Mikrofonu"
         },
         "preparing": {
+            "dialogTitle": "Ixgħel\/itfi kamera jew mikro qabel ma tingħaqad",
             "micIsOff": "Mic huwa mitfi",
             "micIsOn": "Mic huwa mixgħul",
             "cameraIsOff": "Il-kamera hija mitfija",
             "cameraIsOn": "Il-kamera hija mixgħula",
             "screenSharingIsOn": "Il-qsim tal-iskrin huwa mixgħul",
             "screenSharingIsOff": "Aqsam l-iskrin",
-            "joinNow": "Ingħaqad mas-Sejħa",
-            "dialogTitle": "Ixgħel\/itfi kamera jew mikro qabel ma tingħaqad"
+            "joinNow": "Ingħaqad mas-Sejħa"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Istruzzjonijiet",
@@ -222,35 +243,38 @@
             "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
             "point1": "Mur fis-Settings tal-Android tiegħek",
             "point2": "Iftaħ &quot;Apps u notifiki&quot;",
-            "point3": "Sib &quot;{{communityName}}&quot; u iftħu",
+            "point3": "Sib &quot; {{communityName}} &quot; u iftħu",
             "point4": "Tektek fuq Permessi",
-            "point5": "Attiva {{kind}}"
+            "point5": "Ippermetti {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Istruzzjonijiet",
             "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
             "point1": "Mur fis-Settings tal-iOS tiegħek",
             "point2": "Iftaħ &quot;Privatezza&quot;",
-            "point3": "Sib {{kind}} u iftħu",
-            "point4": "Sib &quot;{{communityName}}&quot; u abilita"
+            "point3": "Sib {{kind}} u iftah",
+            "point4": "Sib &quot; {{communityName}} &quot; u ppermettiet"
+        },
+        "fbLive": {
+            "dialogTitle": "Beda l-live streaming fuq Facebook"
         },
         "notices": {
             "youJoinedRoom": "Inti ssieħbu fil-kamra",
-            "joining": "Issieħeb: {{userName}}",
-            "sbLeftRoom": "{{userName}} telqet mill-kamra",
+            "joining": "Tgħaqqad: {{userName}}",
+            "sbLeftRoom": "{{userName}} telqu mill-kamra",
             "switchingRoom": "Kamra tal-bidla...",
             "forceDisconnecting": "Int tkun skonnettjat fi żmien 5 sekondi",
             "forceDisconnectingImmediately": "Int ġejt skonnettjat minn host",
             "youLeftRoom": "Tlaqt mill-kamra",
             "codeCopied": "Tlaqt mill-kamra",
             "sbBeganFbLive": "{{userName}} beda jxandar din is-sejħa fuq Facebook",
-            "sbStoppedFbLive": "{{userName}} waqaf ixxandar din is-sejħa fuq Facebook",
+            "sbStoppedFbLive": "{{userName}} waqfu jxandar din is-sejħa fuq Facebook",
             "youBeganFbLive": "Bdejt xxandar din is-sejħa fuq Facebook",
             "youStoppedFbLive": "Waqaft ixandir din is-sejħa fuq Facebook",
             "youStartedLive": "Bdejt xxandar din is-sejħa lill-RTMP tad-dwana",
             "youStoppedLive": "Waqaft ixandir din is-sejħa għal RTMP personalizzat",
-            "sbStartedLiveStreaming": "{{userName}} beda live",
-            "sbStoppedLiveStreaming": "{{userName}} spiċċa live",
+            "sbStartedLiveStreaming": "{{userName}} bdew ħajjin",
+            "sbStoppedLiveStreaming": "{{userName}} ntemmet live",
             "liveStopped": "Sar żball waqt li ntbagħat il-vidjo lill-endpoint",
             "youBeganVideoRecording": "Bdejt tirreġistra din il-konferenza",
             "youStoppedVideoRecording": "Waqaft tirreġistra din il-konferenza",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
             "userHasNoVideo": "Parteċipant m&#39;għandux vidjo",
             "openInBrowserAlert": "Iftaħ il-link fil-browser Safari biex tingħaqad mal-konferenza.",
-            "allowedVideoLimit": "{{limit}} vidjo biss permess f&#39;din il-kamra",
-            "allowedAudioLimit": "{{limit}} mikrofoni biss permessi f&#39;din il-kamra"
+            "allowedVideoLimit": "{{limit}} video biss permess f&#39;din il-kamra",
+            "allowedAudioLimit": "{{limit}} mikrofonu biss permessi f&#39;din il-kamra"
         },
         "settingsPopup": {
             "dialogTitle": "Settings tal-Vidjo",
@@ -289,17 +313,20 @@
             "fbStartLive": "Mur Ħaj",
             "fbStopLive": "Tmiem Livestream",
             "streamingSettings": "Settings",
+            "manageStream": "Immaniġġja Livestream",
             "fbEmbedCode": "Inkorpora",
             "copy": "Kopja",
             "streamToRTMP": "Stream għal RTMP tad-dwana",
             "startBroadcasting": "Ibda x-xandir",
-            "broadcastingInProgress": "Ix-xandir għaddej",
-            "manageStream": "Immaniġġja Livestream"
+            "broadcastingInProgress": "Ix-xandir għaddej"
         },
         "audioSettings": {
             "dialogTitle": "Settings tal-awdjo",
             "speakers": "Kelliema",
             "microphone": "Mikrofonu"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Immaniġġja Broadcast"
         },
         "participantsPopup": {
             "dialogTitle": "Settings tal-Parteċipant",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Uri l-qsim tal-iskrin"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Livestream"
         },
         "preview": {
             "Meeting": "Telekonferenza",
             "MeetingEnded": "Telekonferenza ntemmet"
         },
         "requestSpeakDialog": {
-            "msg": "Bħalissa hemm {{count}} nies jitkellmu fil-laqgħa. Trid tissostitwixxi waħda minnhom wara li tħallihom {{seconds}} sekondi biex jispiċċaw jitkellmu?",
-            "dialogTitle": "Talba biex Tkellem"
-        },
-        "fbLive": {
-            "dialogTitle": "Beda l-live streaming fuq Facebook"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Immaniġġja Broadcast"
+            "dialogTitle": "Talba biex Tkellem",
+            "msg": "Bħalissa hemm {{count}} persuna jitkellmu fil-laqgħa. Trid tissostitwixxi waħda minnhom wara li tħallihom {{seconds}} sekonda biex jispiċċaw jitkellmu?"
         }
     },
     "types": {
@@ -399,7 +420,7 @@
             "newItem": "Żid Immaġni"
         },
         "Streams\/images": {
-            "displayType": "Gallerija tal-Immaġni",
+            "displayType": "Gallerija tal-Immaġini",
             "description": "gallerija ta&#39; stampi"
         },
         "Streams\/album": {
@@ -436,7 +457,7 @@
         },
         "Streams\/participating": {
             "displayType": "Indiċi Parteċipanti",
-            "description": "flussi huma relatati\/mhux relatati ma&#39; dan meta utent jingħaqad\/titlaq"
+            "description": "streams huma relatati\/mhux relatati ma&#39; dan meta utent jingħaqad\/titlaq"
         },
         "Streams\/interest": {
             "displayType": "Interess",
@@ -451,8 +472,8 @@
             "description": "konverżazzjoni bejn l-utenti, bl-istorja"
         },
         "Streams\/webrtc": {
-            "displayType": "Sejħa Live",
-            "description": "sejħa vidjo\/awdjo f&#39;ħin reali"
+            "displayType": "Telekonferenza",
+            "description": "konferenza vidjo\/awdjo onlajn"
         },
         "Streams\/question": {
             "displayType": "Mistoqsija",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Wieġeb Mistoqsija",
         "SetYourAnswer": "Jekk jogħġbok wieġeb il-mistoqsija",
         "NewQuestion": "Mistoqsija Ġdida",
+        "EditQuestion": "Edit Mistoqsija",
         "NewAnswer": "Tweġiba Ġdida",
+        "NewPossibleAnswer": "Tweġiba Possibbli Ġdida",
         "AnswerDetails": "Tweġiba Dettalji",
         "answerOption": "Għażla",
         "answerOptionExclusive": "Esklussiva",
-        "answerTextarea": "Żona tat-test",
+        "answerTextarea": "Textarea",
+        "answerText": "Test",
+        "HideUntilAnswered": "Aħbi sakemm tirrispondi",
+        "CantChangeAnswers": "Ma tistax tbiddel it-tweġibiet",
         "FreeAnswer": "Ikteb it-tweġiba tiegħek hawn",
         "SaveQuestion": "Ħlief Mistoqsija",
         "SaveAnswer": "Ħlief Tweġiba",
-        "AddAnotherAnswer": "Żid tweġiba oħra",
-        "ErrorAnswers": "Jekk jogħġbok żid anke tweġiba waħda",
+        "Save": "Ħlief",
+        "Send": "Ibgħat",
+        "TitleRequired": "Titlu meħtieġ!",
         "AlreadyAnswered": "Diġà wieġeb",
         "TitlePlaceholder": "Ittajpja l-mistoqsija tiegħek",
         "ContentPlaceholder": "Poġġi kwalunkwe informazzjoni addizzjonali hawn biex tgħin lin-nies iwieġbu",
         "ErrorTitle": "Mistoqsija meħtieġa",
         "Placeholder": "Placeholder",
-        "EditQuestion": "Edit Mistoqsija",
-        "NewPossibleAnswer": "Tweġiba Possibbli Ġdida",
-        "answerText": "Test",
-        "HideUntilAnswered": "Aħbi sakemm tirrispondi",
-        "CantChangeAnswers": "Ma tistax tbiddel it-tweġibiet",
-        "Save": "Ħlief",
-        "Send": "Ibgħat",
-        "TitleRequired": "Titlu meħtieġ!",
         "AreYouSure": "Żgur?"
     },
     "experience": {
@@ -584,7 +603,7 @@
         "MaxCalls": "Max sejħiet",
         "Update": "Aġġornament",
         "NoCallsYet": "L-ebda telefonata għadha",
-        "CallReasonTitle": "Din is-sejħa dwar xiex?",
+        "CallReasonTitle": "Din is-sejħa dwar xiex hi?",
         "WaitingRoom": "Waiting Room",
         "LiveRoom": "Kamra Ħaj",
         "interviewedByAnotherHost": "Bħalissa huwa intervistat minn host ieħor",
@@ -593,25 +612,5 @@
         "endCall": "Tmiem Sejħa",
         "interview": "Intervista",
         "markApproved": "Mark Approvat"
-    },
-    "identifier": {
-        "private": "Privat",
-        "public": "Pubbliku",
-        "configurationSaved": "Konfigurazzjoni salvata",
-        "error": "Xi ħaġa marret ħażin",
-        "privacySettings": "Settings tal-Privatezza"
-    },
-    "avatar": {
-        "firstName": "isem",
-        "lastName": "kunjom",
-        "username": "username"
-    },
-    "login": {
-        "prompt": "Ħalli lill-ħbieb jagħrfuk:",
-        "newUser": "jew oħloq kont ġdid hawn taħt",
-        "picTooltip": "Tista&#39; tibdel din l-istampa aktar tard",
-        "placeholder": {
-            "fullName": "Daħħal l-isem sħiħ tiegħek"
-        }
     }
 }

@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "Ошибка",
+        "WalletAbsent": "Кошелек не подключен.",
+        "Rendering": "Были ошибки при рендеринге <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Цена обязательна!",
+        "NameRequired": "Имя (обязательно!",
+        "PriceInvalid": "Цена недействительна!",
+        "AmountInvalid": "Сумма недействительна!",
+        "TransactionFailed": "Транзакция не удалась",
+        "ChainNotSupported": "Выбранная цепочка не поддерживается. Поддерживаемая цепь: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Требуется подключение MetaMask для работы с приложением",
+        "UserNotLoggedInMetaMask": "Пользователь не авторизовался в MetaMask",
+        "CurrencyNotFound": "Валюта не найдена",
+        "WrongChain": "Этот NFT создан под &quot; {{chain}} &quot;. Пожалуйста, используйте эту цепочку.",
+        "NoRecipientSelected": "Получатель не выбран",
+        "NotEnoughPermissionsWallet": "Недостаточно прав для чтения кошелька этого пользователя",
+        "ThisUserHaveNoWallet": "Этому пользователю не назначен кошелек",
+        "TheWalletOfThisUserInvalid": "Кошелек этого пользователя недействителен",
+        "WalletInvalid": "Неверный адрес кошелька"
+    },
+    "admin": {
+        "Title": "Активы административные",
+        "SubscriptionTitle": "Планы подписки"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Нажмите, чтобы оплатить"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: платеж обработан за {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Благодарим вас за платеж {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} подписаны на {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : обработан платеж на {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Спасибо за ваш платеж на {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} подписались на {{plan.title}}",
         "YouSubscribedTo": "Вы подписаны на {{plan.title}}",
         "Assets\/credits\/alert": "У вас есть оповещение, связанное с вашей учетной записью"
     },
     "charge": {
-        "Subject": "Вы получаете платеж в размере {{displayAmount}} от {{call 'publisher.displayName'}} от &quot;{{description}}&quot;",
-        "HasBeenCharged": "Здравствуйте, это просто для того, чтобы вы знали, что {{1}} было списано {{2}} за {{3}} {{4}}"
+        "Subject": "Вы получаете оплату {{displayAmount}} из {{call 'publisher.displayName'}} по &quot; {{description}} &quot;",
+        "HasBeenCharged": "Эй, это только для того, чтобы вы знали, {{1}} был снят {{2}} за {{3}} на {{4}}"
     },
     "charged": {
-        "Subject": "Спасибо за оплату за &quot;{{description}}&quot;",
-        "HavePaid": "Здравствуйте, {{1}}, это просто быстрое подтверждение того, что вы успешно заплатили {{2}} {{3}} за {{4}}."
+        "Subject": "Благодарим Вас за оплату &quot; {{description}} &quot;",
+        "HavePaid": "Эй, {{1}} , это просто быстрое подтверждение того, что вы успешно заплатили {{2}} до {{3}} за {{4}}"
     },
     "payment": {
         "AboutOrder": "Информация о заказе",
@@ -36,48 +60,44 @@
     },
     "credits": {
         "InviteAcceptedBy": "Приглашение принято {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} введено имя",
-        "Streams_user_lastname": "{{invitedUserName}} введена фамилия",
-        "Streams_user_icon": "{{invitedUserName}} введенный значок",
-        "Places_user_location": "{{invitedUserName}} введенное местоположение",
-        "Streams_greeting": "{{invitedUserName}} введено приветствие",
+        "InvitedUserFilledStream": "{{invitedUserName}} заполнено {{FilledStreamTitle}}",
+        "ForFillingStream": "Для заполнения {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "У вас есть {{amount}} кредитов, чтобы начать",
-        "PaymentFor": "Платеж за &quot;{{1}}&quot;",
-        "PaymentTo": "Платеж {{1}}",
-        "PaymentToUser": "Платеж {{toUserName}}",
+        "PaymentFor": "Плата за &quot; {{1}} &quot;",
+        "PaymentTo": "Оплата до {{1}}",
+        "PaymentToUser": "Оплата до {{toUserName}}",
+        "CreatePrivateChat": "для приватного чата с {{toUserName}}",
         "CreatePaidStream": "за создание {{toStreamName}}",
-        "JoinedPaidStream": "для бронирования в &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "за создание сообщества &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "в качестве возмещения за бронирование в &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Куплено {{amount}} кредитов",
-        "BonusCredits": "Бонусные {{amount}} кредиты",
+        "JoinedPaidStream": "для резервирования в &quot; <a data-publisherId='<i translate='no'>999 &#39;data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "за создание сообщества &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "в качестве возврата за бронирование в &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName =&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Купил {{amount}} кредитов",
+        "BonusCredits": "Бонус {{amount}} кредитов",
         "BuyAmountCredits": "Купить {{amount}} кредитов",
-        "WatchClip": "Заработано {{amount}} кредитов за просмотр {{fromStreamTitle}}",
+        "WatchClip": "Заработал {{amount}} кредитов за просмотр {{fromStreamTitle}}",
         "MissingCredits": "Отсутствующие кредиты",
-        "YouMissingCredits": "Для продолжения вам потребуется еще {{amount}} кредитов.",
+        "YouMissingCredits": "Вам нужно дополнительно {{amount}} кредитов, чтобы продолжить.",
         "BuyCredits": "Купить кредиты",
         "BuyBonus": "Покупка {{amount}} кредитов сразу приведет к бонусу {{bonus}} кредитов.",
         "Buy": "Купить",
         "PurchaseCredits": "Покупка кредитов",
         "Credits": "Кредиты",
         "ErrorInvalidAmount": "Сумма недействительна",
-        "ErrorInvalidCurrency": "К сожалению, мы пока не поддерживаем валюту {{currency}}",
+        "ErrorInvalidCurrency": "К сожалению, мы пока не поддерживаем валюту {{currency}} .",
         "forMessages": {
             "BoughtCredits": "{{amount}} кредитов",
             "BonusCredits": "{{amount}} кредитов"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} заполнено {{FilledStreamTitle}}",
-        "ForFillingStream": "Для заполнения {{FilledStreamTitle}}",
-        "CreatePrivateChat": "для приватного чата с {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Дата",
         "Amount": "Количество",
         "Description": "Описание",
         "Client": "Клиент",
+        "User": "Пользователь",
         "To": "к",
         "From": "от",
-        "SeeHistory": "Посмотреть историю платежей для {{1}}",
+        "SeeHistory": "Посмотреть историю платежей за {{1}}",
         "HistoryEmpty": "У вас еще нет данных",
         "PaymentFor": "Отправлено {{amount}} кредитов",
         "PaymentTo": "Отправлено {{amount}} кредитов",
@@ -92,11 +112,11 @@
             "-": "Потрачено {{amount}} кредитов"
         },
         "LeftPaidStream": {
-            "+": "Получено {{amount}} кредитов",
+            "+": "Получил {{amount}} кредитов",
             "-": "Отправлено {{amount}} кредитов"
         },
         "CreatedCommunity": "Потрачено {{amount}} кредитов",
-        "BoughtCredits": "Куплено {{amount}} кредитов",
+        "BoughtCredits": "Купил {{amount}} кредитов",
         "BonusCredits": "Получил бонус {{amount}} кредитов",
         "InviteAcceptedBy": "Заработано {{amount}} кредитов",
         "Streams_user_firstname": "Заработано {{amount}} кредитов",
@@ -104,15 +124,14 @@
         "Streams_user_icon": "Заработано {{amount}} кредитов",
         "Places_user_location": "Заработано {{amount}} кредитов",
         "Streams_greeting": "Заработано {{amount}} кредитов",
-        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов",
-        "User": "Пользователь"
+        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов"
     },
     "subscriptions": {
         "infoTitle": "Установить платежную информацию",
         "confirm": {
             "title": "Начать подписку",
-            "message": "Хотите подписаться на {{title}}?",
-            "ok": "В ПОРЯДКЕ",
+            "message": "Начать регулярную подписку на &quot; {{title}} &quot;?",
+            "ok": "ХОРОШО",
             "cancel": "Отмена"
         },
         "CreditOrDebitCard": "Кредитная или дебетовая карта",
@@ -124,14 +143,14 @@
         "Subscribed": "Подписан",
         "Unsubscribed": "Отписался",
         "Unsubscribe": "Отписаться",
-        "Subscribe": "Подписывайся",
+        "Subscribe": "Подписаться",
         "Started": "Начал",
         "EndsIn": "Заканчивается в",
         "NextPay": "Следующий платеж",
         "Period": "Период",
         "Price": "Цена",
         "AreYouSureUnsubscribe": "Вы уверены, что хотите отменить подписку на этот план?",
-        "YouUnsubscribedFromPlan": "Вы отписались от плана &quot;{{planTitle}}&quot;. С вас не будет взиматься плата, но ваша подписка будет действовать до {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Вы отписались от плана &quot; {{planTitle}} &quot;. С вас не будет взиматься плата, но ваша подписка будет продолжаться до {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "название плана",
             "PricePlaceholder": "цена",
@@ -144,9 +163,9 @@
         "infoTitle": "Установить платежную информацию",
         "BuyAmountCredits": "Купить {{amount}} кредитов",
         "confirm": {
-            "title": "Совершить платеж",
-            "message": "Вы согласны заплатить {{symbol}}{{amount}}?",
-            "ok": "В ПОРЯДКЕ",
+            "title": "Оплатите",
+            "message": "Вы согласны заплатить {{symbol}} {{amount}} ?",
+            "ok": "ХОРОШО",
             "cancel": "Отмена"
         }
     },
@@ -177,10 +196,10 @@
             "content": "Заработано {{amount}} кредитов"
         },
         "Assets\/credits\/bought": {
-            "content": "Куплено {{amount}} кредитов"
+            "content": "Купил {{amount}} кредитов"
         },
         "Assets\/credits\/bonus": {
-            "content": "Бонусные кредиты {{amount}}"
+            "content": "Бонус {{amount}} кредитов"
         },
         "Assets\/credits\/spent": {
             "content": "Потрачено {{amount}} кредитов"
@@ -189,22 +208,36 @@
             "content": "Отправлено {{amount}} кредитов на {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Получено {{amount}} кредитов от {{fromUserName}}"
+            "content": "Получил {{amount}} кредитов из {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "У вас мало кредитов на вашем счету. Пожалуйста, перейдите по <a href='{{link}}'>этой ссылке<\/a> , чтобы купить больше кредитов."
+            "content": "У вас мало кредитов на вашем счету. Пожалуйста, посетите <a href='<i translate='no'>999 &#39;&gt; эту ссылку<\/a> , чтобы купить больше кредитов."
+        }
+    },
+    "billing": {
+        "Title": "Выставление счетов за активы",
+        "CreditsMinimum": "Минимальные кредиты",
+        "CreditsToAdd": "Кредиты для добавления",
+        "Save": "Сохранять",
+        "ThisLink": "эта ссылка",
+        "errors": {
+            "CreditsMinimumNegative": "Минимум кредитов не может быть отрицательным",
+            "CreditsToAddNegative": "Кредиты для добавления не могут быть отрицательными"
         }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Новая услуга",
-            "TitlePlaceholder": "Название услуги",
+            "TitlePlaceholder": "Название службы",
             "PricePlaceholder": "Установить цену",
             "LinkPlaceholder": "установить ссылку на дополнительную информацию",
             "DescriptionPlaceholder": "Описание услуг",
             "SaveService": "Сохранить сервис",
-            "SelectRequiredParticipants": "Требуемые участники",
+            "SelectRequiredParticipants": "Требуемые связанные участники",
             "RequiredParticipantsDesc": "Пожалуйста, выберите связанных участников, которые необходимы для использования этой услуги (например, домашние животные для «Выставки собак», или дети для «Детского праздника» и т. д.). Если услуга платная, пользователю нужно будет платить также за каждого связанного участника."
+        },
+        "EditServiceTemplate": {
+            "Title": "Редактировать сервис"
         },
         "ManageServiceTemplates": "Управление шаблонами услуг",
         "ManageServices": "Управление службами",
@@ -212,15 +245,30 @@
         "OptionalContribution": "Дополнительный вклад",
         "RequiredPayment": "Требуемый платеж",
         "AreYouSureDelete": "Вы уверены, что хотите удалить эту службу?",
-        "AmountServicesRelated": "Доступно {{amount}}, связанное с этой услугой. Они также будут удалены.",
-        "EditServiceTemplate": {
-            "Title": "Редактировать сервис"
-        }
+        "AmountServicesRelated": "Есть {{amount}} возможностей, связанных с этой услугой. Они также будут удалены."
+    },
+    "transfer": {
+        "SelectRecipient": "Выберите получателя",
+        "TransactionSuccess": "Успешная транзакция",
+        "OrTypeWalletAddress": "ИЛИ введите адрес кошелька получателя"
     },
     "NFT": {
-        "Title": "Информация о {{title}} NFT",
-        "Description": "Подробная информация о NFT",
-        "FixedBid": "Купи сейчас",
+        "Title": "Заголовок",
+        "Name": "Имя",
+        "EnterName": "Введите имя",
+        "EnterAuthorWallet": "Введите кошелек автора",
+        "InformationAboutTitle": "Информация о {{title}} NFT",
+        "Description": "Описание",
+        "DetailedInformationAboutNFT": "Подробная информация о NFT",
+        "PresaleStarts": "Предпродажа начинается 23 декабря",
+        "OwnerUserNotFound": "Владелец этого NFT не зарегистрирован в нашем приложении.",
+        "BuyNow": "Купить сейчас",
+        "Buy": "Купить",
+        "Add": "Добавлять",
+        "Remove": "Удалять",
+        "NoNFTyet": "NFT еще нет",
+        "Conversation": "Беседа",
+        "Create": "Создавать",
         "CurrentBid": "текущая ставка",
         "StartingIn": "Начиная с",
         "EndingIn": "Кончающийся на",
@@ -229,14 +277,17 @@
         "DescriptionPlaceholder": "Дайте вашему NFT описание",
         "CreateYourNFT": "Создайте свой NFT",
         "Royalties": "Роялти",
-        "RoyaltyPlaceholder": "По желанию. Сумма, выплаченная создателю до передачи.",
+        "RoyaltyPlaceholder": "Необязательный. Сумма, выплаченная создателю до передачи.",
         "ExpirationDate": "Дата окончания срока",
         "StartingDate": "Дата начала",
         "BidsBelowThisAmount": "Ставки ниже этой суммы не допускаются.",
         "MinimumBid": "Минимальная ставка",
+        "Author": "Автор",
         "Price": "Цена",
+        "Commission": "Комиссия",
+        "EnterCommission": "Введите комиссию",
         "Owner": "Владелец",
-        "SelectCategory": "Выбрать категорию",
+        "SelectCategory": "Выберите категорию",
         "Day": "День",
         "Days": "Дни",
         "Hour": "Час",
@@ -252,18 +303,26 @@
         "LoremIpsum": "Lorem Ipsum — это просто текст-пустышка полиграфической и наборной индустрии.",
         "PutOnSale": "Выставить на продажу",
         "PutOffSale": "Снять с продажи",
-        "Transfer": "Перечислить",
+        "Transfer": "Передача",
+        "Actions": "Действия",
+        "Claim": "Требовать",
+        "ClaimNFT": "Претензия NFT",
+        "Unlocking": "Разблокировка",
+        "Unlock": "Разблокировать",
         "Update": "Обновлять",
         "UpdateToken": "Обновить токен",
+        "UpdateNFT": "Обновить NFT",
         "CreateToken": "Создать токен",
         "PlaceBid": "Место ставку",
         "SoldOut": "Продал",
+        "NotOnSale": "Нет в продаже",
         "NftName": "Имя NFT",
         "DescribeYourNFT": "Пожалуйста, опишите ваш NFT",
         "NftPicture": "Изображение для представления NFT",
         "NftMovie": "Фильм, представляющий NFT",
         "UploadMovie": "Загрузить фильм",
         "MovieSource": "Источник фильма",
+        "MovieURL": "URL фильма",
         "UploadFile": "Загрузить файл",
         "PutOnMarketplace": "Выложить на рынок",
         "InstantPurchase": "Введите цену, чтобы пользователи могли мгновенно приобрести ваш NFT",
@@ -271,71 +330,20 @@
         "TimedAuction": "Временный аукцион",
         "OpenForBids": "Открыт для ставок",
         "PriceOnePiece": "Введите цену за одну штуку",
+        "EnterPrice": "Введите цену",
         "EnterMinimumBid": "Введите минимальную ставку",
         "SelectChain": "Выберите цепочку",
-        "WrongChain": "Этот NFT создан под &quot;{{chain}}&quot;. Пожалуйста, используйте эту цепочку.",
-        "import": {
-            "importNFT": "Импорт NFT",
-            "fileNotFound": "Извините, файл CSV не найден.",
-            "fileEmpty": "Извините, CSV-файл пуст.",
-            "userIdNotFound": "пользователь существует, но идентификатор пуст",
-            "errorLine": "строка {{1}}",
-            "fieldNotFound": "Обязательное поле &quot;{{1}}&quot; не найдено",
-            "taskStreamInvalid": "поток задач недействителен",
-            "instructionsEmpty": "инструкции потока задач пусты",
-            "complete": "Полный",
-            "activateUsers": "отправить сообщение об активации пользователям?",
-            "importProgress": "Прогресс",
-            "importOptions": "Опции",
-            "sampleCSV": "Скачать образец CSV",
-            "fileLabel": "Загрузить таблицу:",
-            "errorsTitle": "Произошли ошибки",
-            "importAttributes": "Импорт атрибутов NFT",
-            "displayTypeEmpty": "Тип отображения для &quot;{{1}}&quot; не найден"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Фильтр по коллекциям NFT",
-                "ShowNFTCollection": "Показать коллекцию NFT в...",
-                "AllCollections": "Все коллекции"
-            },
-            "ByUser": {
-                "AllAuthors": "Все авторы",
-                "AllUsers": "Все",
-                "FilterByAuthors": "Фильтровать по авторам"
-            }
-        },
-        "Back": "Назад к коллекции",
-        "Name": "Имя",
-        "EnterName": "Введите имя",
-        "EnterAuthorWallet": "Введите кошелек автора",
-        "InformationAboutTitle": "Информация о {{title}} NFT",
-        "DetailedInformationAboutNFT": "Подробная информация о NFT",
-        "PresaleStarts": "Предпродажа начинается 23 декабря",
-        "OwnerUserNotFound": "Владелец этого NFT не зарегистрирован в нашем приложении.",
-        "BuyNow": "Купи сейчас",
-        "Buy": "Купить",
-        "Conversation": "Беседа",
-        "Create": "Создавать",
-        "Author": "Автор",
-        "Commission": "комиссия",
-        "EnterCommission": "Введите комиссию",
-        "Actions": "Действия",
-        "UpdateNFT": "Обновить NFT",
-        "NotOnSale": "Нет в продаже",
-        "MovieURL": "URL фильма",
-        "EnterPrice": "Введите цену",
         "Currency": "Валюта",
         "AreYouSureDeleteImage": "Вы уверены, что хотите удалить изображение?",
         "AreYouSureDeleteVideo": "Вы уверены, что хотите удалить видео?",
         "series": {
             "Name": "Имя",
-            "Icon": "Значок",
+            "Icon": "Икона",
             "Description": "Описание",
             "Author": "Автор",
             "SelectSeries": "Выберите серию",
-            "Value": "Ценность",
-            "AreYouSure": "Ты уверен?",
+            "Value": "Ценить",
+            "AreYouSure": "Вы уверены?",
             "AuthorInvalid": "Адрес автора недействителен!",
             "Address": "Адрес",
             "CoverImage": "Изображение обложки",
@@ -355,7 +363,7 @@
         "contract": {
             "CreateContract": "Создать контракт",
             "SelectContract": "Выберите контракт",
-            "CreateContractFor": "Создать контракт для {{userName}}",
+            "CreateContractFor": "Создать контракт на {{userName}}",
             "ContractFor": "Контракт на {{userName}}",
             "UpdateContract": "Обновить контракт",
             "TransferOwnership": "Передача права собственности",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "Текущий базовый URL",
             "ContractAddressAbsent": "Адрес контракта отсутствует",
             "FactoryAddressAbsent": "Заводской адрес отсутствует",
-            "ContractName": "{{contractName}} – {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Требуется название",
             "SymbolRequired": "Требуется символ",
             "TypeContractName": "название контракта",
@@ -375,6 +383,38 @@
             "Title": "Конкурсы",
             "NewContest": "Новый конкурс"
         },
+        "import": {
+            "importNFT": "Импорт NFT",
+            "importAttributes": "Импорт атрибутов NFT",
+            "fileNotFound": "Извините, файл CSV не найден.",
+            "fileEmpty": "Извините, CSV-файл пуст.",
+            "userIdNotFound": "пользователь существует, но идентификатор пуст",
+            "errorLine": "строка {{1}}",
+            "fieldNotFound": "Обязательное поле &quot; {{1}} &quot; не найдено",
+            "displayTypeEmpty": "Тип отображения для &quot; {{1}} &quot; не найден",
+            "taskStreamInvalid": "поток задач недействителен",
+            "instructionsEmpty": "инструкции потока задач пусты",
+            "complete": "Полный",
+            "activateUsers": "отправить сообщение об активации пользователям?",
+            "importProgress": "Прогресс",
+            "importOptions": "Параметры",
+            "sampleCSV": "Скачать образец CSV",
+            "fileLabel": "Загрузить таблицу:",
+            "errorsTitle": "Произошли ошибки"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Фильтр по коллекциям NFT",
+                "ShowNFTCollection": "Показать коллекцию NFT в...",
+                "AllCollections": "Все коллекции"
+            },
+            "ByUser": {
+                "AllAuthors": "Все авторы",
+                "AllUsers": "Каждый",
+                "FilterByAuthors": "Фильтровать по авторам"
+            }
+        },
+        "Back": "Назад к коллекции",
         "attributes": {
             "Title": "Управление атрибутами",
             "Attributes": "Атрибуты",
@@ -384,7 +424,7 @@
             "TraitTitle": "Тип черты",
             "AddTraitTitle": "Добавить новый тип черты",
             "NewTrait": "Новый тип черты",
-            "ValueTitle": "Ценность",
+            "ValueTitle": "Ценить",
             "AddValueTitle": "Добавить новое значение",
             "NewValue": "Новое значение",
             "NewAttribute": "Новый атрибут",
@@ -398,13 +438,6 @@
             "aboutPlaceholder": "Изменить биографию",
             "SureLogOut": "Вы действительно хотите выйти?"
         },
-        "Add": "Добавлять",
-        "Remove": "Удалять",
-        "NoNFTyet": "NFT еще нет",
-        "Claim": "Требовать",
-        "ClaimNFT": "Претензия NFT",
-        "Unlocking": "Разблокировка",
-        "Unlock": "Разблокировать",
         "sales": {
             "factory": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "Разблокировать",
             "Locked": "Заблокировано",
             "CustodianAddress": "Адрес хранителя",
-            "TokenWasClaimed": "Токен &quot;{{title}}&quot; заявлен",
-            "TokenWasLocked": "Токен &quot;{{title}}&quot; заблокирован",
-            "TokenWasUnlocked": "Токен &quot;{{title}}&quot; разблокирован"
+            "TokenWasClaimed": "Токен &quot; {{title}} &quot; был востребован",
+            "TokenWasLocked": "Токен &quot; {{title}} &quot; заблокирован",
+            "TokenWasUnlocked": "Токен &quot; {{title}} &quot; был разблокирован"
         }
-    },
-    "errors": {
-        "Error": "Ошибка",
-        "WalletAbsent": "Кошелек не подключен.",
-        "Rendering": "При рендеринге <span class='url'>{{1}}<\/span> произошли ошибки",
-        "PriceRequired": "Цена обязательна!",
-        "NameRequired": "Имя (обязательно!",
-        "PriceInvalid": "Цена недействительна!",
-        "TransactionFailed": "Транзакция не удалась",
-        "ChainNotSupported": "Выбранная цепочка не поддерживается. Поддерживаемая цепочка: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Требуется подключение MetaMask для работы с приложением",
-        "UserNotLoggedInMetaMask": "Пользователь не авторизовался в MetaMask",
-        "CurrencyNotFound": "Валюта не найдена",
-        "WrongChain": "Этот NFT создан под &quot;{{chain}}&quot;. Пожалуйста, используйте эту цепочку.",
-        "AmountInvalid": "Сумма недействительна!",
-        "NoRecipientSelected": "Получатель не выбран",
-        "NotEnoughPermissionsWallet": "Недостаточно прав для чтения кошелька этого пользователя",
-        "ThisUserHaveNoWallet": "Этому пользователю не назначен кошелек",
-        "TheWalletOfThisUserInvalid": "Кошелек этого пользователя недействителен",
-        "WalletInvalid": "Неверный адрес кошелька"
-    },
-    "admin": {
-        "Title": "Активы административные",
-        "SubscriptionTitle": "Планы подписки"
-    },
-    "billing": {
-        "Title": "Выставление счетов за активы",
-        "CreditsMinimum": "Минимальные кредиты",
-        "CreditsToAdd": "Кредиты для добавления",
-        "Save": "Сохранять",
-        "ThisLink": "эта ссылка",
-        "errors": {
-            "CreditsMinimumNegative": "Минимум кредитов не может быть отрицательным",
-            "CreditsToAddNegative": "Кредиты для добавления не могут быть отрицательными"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Выберите получателя",
-        "TransactionSuccess": "Успешная транзакция",
-        "OrTypeWalletAddress": "ИЛИ введите адрес кошелька получателя"
     },
     "currencies": {
         "choose": "Выберите валюту"

@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "Λάθος",
+        "WalletAbsent": "Το πορτοφόλι δεν είναι συνδεδεμένο.",
+        "Rendering": "Παρουσιάστηκαν σφάλματα κατά την απόδοση <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Απαιτείται τιμή!",
+        "NameRequired": "Ονομα (απαιτείται!",
+        "PriceInvalid": "Άκυρη τιμή!",
+        "AmountInvalid": "Μη έγκυρο ποσό!",
+        "TransactionFailed": "Η συναλλαγή απέτυχε",
+        "ChainNotSupported": "Η επιλεγμένη αλυσίδα δεν υποστηρίζεται. Υποστηριζόμενη αλυσίδα: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Χρειάζεστε MetaMask συνδεδεμένο για να εργαστείτε με την εφαρμογή",
+        "UserNotLoggedInMetaMask": "Ο χρήστης δεν είναι συνδεδεμένος στο MetaMask",
+        "CurrencyNotFound": "Το νόμισμα δεν βρέθηκε",
+        "WrongChain": "Αυτό το NFT δημιουργήθηκε με &quot; {{chain}} &quot;. Χρησιμοποιήστε αυτήν την αλυσίδα.",
+        "NoRecipientSelected": "Δεν έχει επιλεγεί παραλήπτης",
+        "NotEnoughPermissionsWallet": "Δεν υπάρχουν αρκετά δικαιώματα για την ανάγνωση του πορτοφολιού αυτού του χρήστη",
+        "ThisUserHaveNoWallet": "Σε αυτόν τον χρήστη δεν έχει εκχωρηθεί πορτοφόλι",
+        "TheWalletOfThisUserInvalid": "Το πορτοφόλι αυτού του χρήστη δεν είναι έγκυρο",
+        "WalletInvalid": "Μη έγκυρη διεύθυνση πορτοφολιού"
+    },
+    "admin": {
+        "Title": "Περιουσιακά στοιχεία διοικητικά",
+        "SubscriptionTitle": "Σχέδια συνδρομής"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Πατήστε για πληρωμή"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: επεξεργασία χρέωσης για {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : χρέωση {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Σας ευχαριστούμε για την πληρωμή σας στο {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} εγγεγραμμένος στο {{plan.title}}",
+        "SubscribedTo": "{{call 'user.displayName'}} εγγεγραμμένοι σε {{plan.title}}",
         "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}",
         "Assets\/credits\/alert": "Έχετε ειδοποίηση που σχετίζεται με τον λογαριασμό σας"
     },
     "charge": {
-        "Subject": "Λαμβάνετε πληρωμή {{displayAmount}} από {{call 'publisher.displayName'}} από το &quot;{{description}}&quot;",
-        "HasBeenCharged": "Γεια σας, αυτό είναι απλώς για να σας ενημερώσουμε ότι το {{1}} έχει χρεωθεί {{2}} για {{3}} από {{4}}"
+        "Subject": "Λαμβάνετε πληρωμή {{displayAmount}} από {{call 'publisher.displayName'}} με &quot; {{description}} &quot;",
+        "HasBeenCharged": "Γεια σας, αυτό είναι απλώς για να σας ενημερώσω ότι {{1}} χρεώθηκε {{2}} για {{3}} από {{4}}"
     },
     "charged": {
-        "Subject": "Σας ευχαριστούμε για την πληρωμή σας για το &quot;{{description}}&quot;",
-        "HavePaid": "Γεια σας {{1}}, αυτή είναι απλώς μια γρήγορη επιβεβαίωση ότι πληρώσατε με επιτυχία {{2}} στον {{3}} για {{4}}"
+        "Subject": "Σας ευχαριστούμε για την πληρωμή σας για το &quot; {{description}} &quot;",
+        "HavePaid": "Γεια σου {{1}} , αυτή είναι απλώς μια γρήγορη επιβεβαίωση ότι πλήρωσες με επιτυχία {{2}} έως {{3}} για {{4}}"
     },
     "payment": {
         "AboutOrder": "Πληροφορίες για την παραγγελία",
@@ -30,88 +54,83 @@
         "PaymentStatus": "Κατάσταση πληρωμής",
         "PayTo": "Πληρώστε {{displayName}}",
         "ChooseCurrency": "Επιλέξτε ένα νόμισμα",
-        "YouCanSendUpTo": "Μπορείτε να στείλετε έως {{amount}} {{symbol}}",
+        "YouCanSendUpTo": "Μπορείτε να στείλετε έως και {{amount}} {{symbol}}",
         "Send": "Στείλετε",
         "EnterAmount": "Εισάγετε το ποσό"
     },
     "credits": {
-        "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} πληκτρολογήσατε το όνομα",
-        "Streams_user_lastname": "{{invitedUserName}} πληκτρολογήσατε το επώνυμο",
-        "Streams_user_icon": "{{invitedUserName}} εισαγάγατε το εικονίδιο",
-        "Places_user_location": "{{invitedUserName}} εισαγάγατε την τοποθεσία",
-        "Streams_greeting": "Ο {{invitedUserName}} εισήγαγε χαιρετισμό",
-        "YouHaveCreditsToStart": "Έχετε {{amount}} πιστώσεις για να ξεκινήσετε",
-        "PaymentFor": "Πληρωμή για &quot;{{1}}&quot;",
-        "PaymentTo": "Πληρωμή σε {{1}}",
-        "PaymentToUser": "Πληρωμή σε {{toUserName}}",
-        "CreatePaidStream": "για δημιουργία {{toStreamName}}",
-        "JoinedPaidStream": "για κράτηση στο &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "για τη δημιουργία κοινότητας &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "ως επιστροφή χρημάτων κράτησης στο &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Αγόρασα πιστώσεις {{amount}}",
-        "BonusCredits": "Μπόνους {{amount}} πιστώσεις",
-        "BuyAmountCredits": "Αγοράστε {{amount}} πιστώσεις",
-        "WatchClip": "Κέρδισε {{amount}} πιστώσεις για την παρακολούθηση {{fromStreamTitle}}",
+        "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από το {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} συμπλήρωσαν {{FilledStreamTitle}}",
+        "ForFillingStream": "Για συμπλήρωση {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "Έχετε {{amount}} μονάδες για να ξεκινήσετε",
+        "PaymentFor": "Πληρωμή για &quot; {{1}} &quot;",
+        "PaymentTo": "Πληρωμή στο {{1}}",
+        "PaymentToUser": "Πληρωμή στο {{toUserName}}",
+        "CreatePrivateChat": "για ιδιωτική συνομιλία με το {{toUserName}}",
+        "CreatePaidStream": "για τη δημιουργία {{toStreamName}}",
+        "JoinedPaidStream": "για κράτηση σε &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "για τη δημιουργία κοινότητας &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "ως επιστροφή χρημάτων κράτησης σε &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Αγόρασε {{amount}} μονάδες",
+        "BonusCredits": "Μπόνους {{amount}} μονάδες",
+        "BuyAmountCredits": "Αγοράστε {{amount}} μονάδες",
+        "WatchClip": "Κέρδισε {{amount}} μονάδες παρακολουθώντας {{fromStreamTitle}}",
         "MissingCredits": "Πιστώσεις που λείπουν",
-        "YouMissingCredits": "Χρειάζεστε επιπλέον {{amount}} πιστώσεις για να συνεχίσετε.",
+        "YouMissingCredits": "Χρειάζεστε επιπλέον {{amount}} μονάδες για να συνεχίσετε.",
         "BuyCredits": "Αγοράστε πιστώσεις",
-        "BuyBonus": "Η αγορά {{amount}} πιστώσεων ταυτόχρονα, θα οδηγήσει σε {{bonus}} μπόνους πιστώσεων.",
+        "BuyBonus": "Η αγορά {{amount}} μονάδων ταυτόχρονα, θα οδηγήσει σε μπόνους {{bonus}} μονάδων.",
         "Buy": "Αγορά",
         "PurchaseCredits": "Αγορά πιστώσεων",
         "Credits": "Πιστώσεις",
         "ErrorInvalidAmount": "Μη έγκυρο ποσό",
         "ErrorInvalidCurrency": "Δυστυχώς, δεν υποστηρίζουμε ακόμη το νόμισμα {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} πιστώσεις",
-            "BonusCredits": "{{amount}} πιστώσεις"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} γεμάτο {{FilledStreamTitle}}",
-        "ForFillingStream": "Για πλήρωση {{FilledStreamTitle}}",
-        "CreatePrivateChat": "για ιδιωτική συνομιλία με {{toUserName}}"
+            "BoughtCredits": "{{amount}} μονάδες",
+            "BonusCredits": "{{amount}} μονάδες"
+        }
     },
     "history": {
         "Date": "Ημερομηνία",
         "Amount": "Ποσό",
         "Description": "Περιγραφή",
         "Client": "Πελάτης",
-        "To": "προς το",
+        "User": "Χρήστης",
+        "To": "προς την",
         "From": "από",
         "SeeHistory": "Δείτε το ιστορικό πληρωμών για {{1}}",
-        "HistoryEmpty": "Δεν έχετε δεδομένα ακόμα",
-        "PaymentFor": "Έστειλε {{amount}} πιστώσεις",
-        "PaymentTo": "Έστειλε {{amount}} πιστώσεις",
-        "PaymentToUser": "Έστειλε {{amount}} πιστώσεις",
-        "CreatePaidStream": "Δαπανήθηκαν {{amount}} πιστώσεις",
+        "HistoryEmpty": "Δεν έχετε ακόμη δεδομένα",
+        "PaymentFor": "Έστειλε {{amount}} μονάδες",
+        "PaymentTo": "Έστειλε {{amount}} μονάδες",
+        "PaymentToUser": "Έστειλε {{amount}} μονάδες",
+        "CreatePaidStream": "Δαπάνησε {{amount}} μονάδες",
         "WatchClip": {
-            "+": "Κέρδισε {{amount}} πιστώσεις",
-            "-": "Δαπανήθηκαν {{amount}} πιστώσεις"
+            "+": "Κέρδισε {{amount}} μονάδες",
+            "-": "Δαπάνησε {{amount}} μονάδες"
         },
         "JoinedPaidStream": {
-            "+": "Κέρδισε {{amount}} πιστώσεις",
-            "-": "Δαπανήθηκαν {{amount}} πιστώσεις"
+            "+": "Κέρδισε {{amount}} μονάδες",
+            "-": "Δαπάνησε {{amount}} μονάδες"
         },
         "LeftPaidStream": {
-            "+": "Έλαβε {{amount}} πιστώσεις",
-            "-": "Έστειλε {{amount}} πιστώσεις"
+            "+": "Έλαβε {{amount}} μονάδες",
+            "-": "Έστειλε {{amount}} μονάδες"
         },
-        "CreatedCommunity": "Δαπανήθηκαν {{amount}} πιστώσεις",
-        "BoughtCredits": "Αγόρασα πιστώσεις {{amount}}",
-        "BonusCredits": "Πήρα μπόνους {{amount}} πιστώσεις",
-        "InviteAcceptedBy": "Κέρδισε {{amount}} πιστώσεις",
-        "Streams_user_firstname": "Κέρδισε {{amount}} πιστώσεις",
-        "Streams_user_lastname": "Κέρδισε {{amount}} πιστώσεις",
-        "Streams_user_icon": "Κέρδισε {{amount}} πιστώσεις",
-        "Places_user_location": "Κέρδισε {{amount}} πιστώσεις",
-        "Streams_greeting": "Κέρδισε {{amount}} πιστώσεις",
-        "YouHaveCreditsToStart": "Κέρδισε {{amount}} πιστώσεις",
-        "User": "Χρήστης"
+        "CreatedCommunity": "Δαπάνησε {{amount}} μονάδες",
+        "BoughtCredits": "Αγόρασε {{amount}} μονάδες",
+        "BonusCredits": "Πήρε μπόνους {{amount}} μονάδες",
+        "InviteAcceptedBy": "Κέρδισε {{amount}} μονάδες",
+        "Streams_user_firstname": "Κέρδισε {{amount}} μονάδες",
+        "Streams_user_lastname": "Κέρδισε {{amount}} μονάδες",
+        "Streams_user_icon": "Κέρδισε {{amount}} μονάδες",
+        "Places_user_location": "Κέρδισε {{amount}} μονάδες",
+        "Streams_greeting": "Κέρδισε {{amount}} μονάδες",
+        "YouHaveCreditsToStart": "Κέρδισε {{amount}} μονάδες"
     },
     "subscriptions": {
         "infoTitle": "Ορισμός πληροφοριών πληρωμής",
         "confirm": {
             "title": "Έναρξη Συνδρομής",
-            "message": "Θέλετε να εγγραφείτε στο {{title}};",
+            "message": "Ξεκινήστε μια επαναλαμβανόμενη συνδρομή στο &quot; {{title}} &quot;;",
             "ok": "Εντάξει",
             "cancel": "Ματαίωση"
         },
@@ -131,7 +150,7 @@
         "Period": "Περίοδος",
         "Price": "Τιμή",
         "AreYouSureUnsubscribe": "Είστε βέβαιοι ότι θέλετε να καταργήσετε την εγγραφή αυτού του προγράμματος;",
-        "YouUnsubscribedFromPlan": "Καταργήσατε την εγγραφή σας από το πρόγραμμα &quot;{{planTitle}}&quot;. Δεν θα χρεωθείτε, αλλά η συνδρομή σας θα συνεχιστεί έως τις {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Καταργήσατε την εγγραφή σας από το πρόγραμμα &quot; {{planTitle}} &quot;. Δεν θα χρεωθείτε, αλλά η συνδρομή σας θα συνεχιστεί μέχρι {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "τίτλος σχεδίου",
             "PricePlaceholder": "τιμή",
@@ -142,10 +161,10 @@
     },
     "payments": {
         "infoTitle": "Ορισμός πληροφοριών πληρωμής",
-        "BuyAmountCredits": "Αγοράστε {{amount}} πιστώσεις",
+        "BuyAmountCredits": "Αγοράστε {{amount}} μονάδες",
         "confirm": {
             "title": "Κάνω μια πληρωμή",
-            "message": "Συμφωνείτε να πληρώσετε {{symbol}}{{amount}};",
+            "message": "Συμφωνείτε να πληρώσετε {{symbol}} {{amount}} ;",
             "ok": "Εντάξει",
             "cancel": "Ματαίωση"
         }
@@ -174,25 +193,36 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Κέρδισε {{amount}} πιστώσεις"
+            "content": "Κέρδισε {{amount}} μονάδες"
         },
         "Assets\/credits\/bought": {
-            "content": "Αγόρασα πιστώσεις {{amount}}"
+            "content": "Αγόρασε {{amount}} μονάδες"
         },
         "Assets\/credits\/bonus": {
-            "content": "Μπόνους {{amount}} πιστώσεις"
+            "content": "Μπόνους {{amount}} μονάδες"
         },
         "Assets\/credits\/spent": {
-            "content": "Δαπανήθηκαν {{amount}} πιστώσεις"
+            "content": "Δαπάνησε {{amount}} μονάδες"
         },
         "Assets\/credits\/sent": {
-            "content": "Έστειλε {{amount}} πιστώσεις στο {{toUserName}}"
+            "content": "Έστειλε {{amount}} μονάδες σε {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Έλαβε {{amount}} πιστώσεις από {{fromUserName}}"
+            "content": "Έλαβε {{amount}} μονάδες από {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Έχετε μικρές πιστώσεις στον λογαριασμό σας. Επισκεφτείτε <a href='{{link}}'>αυτόν τον σύνδεσμο<\/a> για να αγοράσετε περισσότερες πιστώσεις."
+            "content": "Έχετε μικρές πιστώσεις στον λογαριασμό σας. Επισκεφτείτε <a href='<i translate='no'>τον σύνδεσμο 999 &#39;&gt;<\/a> για να αγοράσετε περισσότερες πιστώσεις."
+        }
+    },
+    "billing": {
+        "Title": "Τιμολόγηση περιουσιακών στοιχείων",
+        "CreditsMinimum": "Ελάχιστες πιστώσεις",
+        "CreditsToAdd": "Πιστώσεις για προσθήκη",
+        "Save": "Αποθηκεύσετε",
+        "ThisLink": "αυτός ο σύνδεσμος",
+        "errors": {
+            "CreditsMinimumNegative": "Οι ελάχιστες πιστώσεις δεν μπορούν να είναι αρνητικές",
+            "CreditsToAddNegative": "Οι πιστώσεις προς προσθήκη δεν μπορούν να είναι αρνητικές"
         }
     },
     "services": {
@@ -200,11 +230,14 @@
             "Title": "Νέα Υπηρεσία",
             "TitlePlaceholder": "Τίτλος υπηρεσίας",
             "PricePlaceholder": "Ορισμός τιμής",
-            "LinkPlaceholder": "ορίστε τον σύνδεσμο πρόσθετων πληροφοριών",
+            "LinkPlaceholder": "ορίστε σύνδεσμο πρόσθετων πληροφοριών",
             "DescriptionPlaceholder": "Περιγραφή υπηρεσίας",
             "SaveService": "Αποθήκευση υπηρεσίας",
-            "SelectRequiredParticipants": "Απαιτούμενοι Συμμετέχοντες",
+            "SelectRequiredParticipants": "Απαιτούνται σχετικοί συμμετέχοντες",
             "RequiredParticipantsDesc": "Παρακαλούμε επιλέξτε τους σχετικούς συμμετέχοντες που απαιτούνται για τη χρήση αυτής της υπηρεσίας (για παράδειγμα κατοικίδια για &quot;Συλίσια παράσταση&quot; ή παιδιά για &quot;Παιδικές διακοπές&quot; κ.λπ.). Εάν η υπηρεσία πληρώνεται, ο χρήστης θα πρέπει να πληρώσει επίσης για κάθε συνδεδεμένο συμμετέχοντα."
+        },
+        "EditServiceTemplate": {
+            "Title": "Υπηρεσία επεξεργασίας"
         },
         "ManageServiceTemplates": "Διαχείριση προτύπων υπηρεσιών",
         "ManageServices": "Διαχείριση Υπηρεσιών",
@@ -212,15 +245,30 @@
         "OptionalContribution": "Προαιρετική συνεισφορά",
         "RequiredPayment": "Απαιτούμενη πληρωμή",
         "AreYouSureDelete": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την υπηρεσία;",
-        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητες που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης.",
-        "EditServiceTemplate": {
-            "Title": "Υπηρεσία επεξεργασίας"
-        }
+        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητες που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης."
+    },
+    "transfer": {
+        "SelectRecipient": "Επιλέξτε παραλήπτη",
+        "TransactionSuccess": "Επιτυχία συναλλαγής",
+        "OrTypeWalletAddress": "Ή πληκτρολογήστε διεύθυνση πορτοφολιού παραλήπτη"
     },
     "NFT": {
-        "Title": "Πληροφορίες σχετικά με το {{title}} NFT",
-        "Description": "Αναλυτικές πληροφορίες για το NFT",
-        "FixedBid": "Αγορασε τωρα",
+        "Title": "Τίτλος",
+        "Name": "Ονομα",
+        "EnterName": "Εισαγάγετε όνομα",
+        "EnterAuthorWallet": "Εισαγάγετε το πορτοφόλι του συγγραφέα",
+        "InformationAboutTitle": "Πληροφορίες για το {{title}} NFT",
+        "Description": "Περιγραφή",
+        "DetailedInformationAboutNFT": "Αναλυτικές πληροφορίες για το NFT",
+        "PresaleStarts": "Η προπώληση ξεκινά στις 23 Δεκεμβρίου",
+        "OwnerUserNotFound": "Ο κάτοχος αυτού του NFT δεν είναι εγγεγραμμένος στην αίτησή μας.",
+        "BuyNow": "Αγορασε τωρα",
+        "Buy": "Αγορά",
+        "Add": "Προσθήκη",
+        "Remove": "Αφαιρώ",
+        "NoNFTyet": "Δεν υπάρχουν ακόμη NFT",
+        "Conversation": "Συνομιλία",
+        "Create": "Δημιουργώ",
         "CurrentBid": "Τρέχουσα προσφορά",
         "StartingIn": "Ξεκινώντας μέσα",
         "EndingIn": "Τελειωνει σε",
@@ -234,7 +282,10 @@
         "StartingDate": "Ημερομηνία έναρξης",
         "BidsBelowThisAmount": "Δεν θα επιτρέπονται προσφορές κάτω από αυτό το ποσό",
         "MinimumBid": "Ελάχιστη προσφορά",
+        "Author": "Συγγραφέας",
         "Price": "Τιμή",
+        "Commission": "Επιτροπή",
+        "EnterCommission": "Εισαγάγετε την προμήθεια",
         "Owner": "Ιδιοκτήτης",
         "SelectCategory": "Επιλέξτε Κατηγορία",
         "Day": "Ημέρα",
@@ -253,17 +304,25 @@
         "PutOnSale": "Βάλτε προς πώληση",
         "PutOffSale": "Απόσυρση από την πώληση",
         "Transfer": "ΜΕΤΑΦΟΡΑ",
+        "Actions": "Ενέργειες",
+        "Claim": "Απαίτηση",
+        "ClaimNFT": "Αξίωση NFT",
+        "Unlocking": "Ξεκλείδωμα",
+        "Unlock": "Ξεκλείδωμα",
         "Update": "Εκσυγχρονίζω",
         "UpdateToken": "Ενημέρωση διακριτικού",
+        "UpdateNFT": "Ενημέρωση NFT",
         "CreateToken": "Δημιουργία διακριτικού",
         "PlaceBid": "Τοποθετήστε την προσφορά",
         "SoldOut": "Πωληθεί",
+        "NotOnSale": "Δεν πωλείται",
         "NftName": "Όνομα NFT",
         "DescribeYourNFT": "Περιγράψτε το NFT σας",
         "NftPicture": "Εικόνα που αντιπροσωπεύει το NFT",
         "NftMovie": "Ταινία που αντιπροσωπεύει το NFT",
         "UploadMovie": "Ανεβάστε ταινία",
         "MovieSource": "Πηγή ταινίας",
+        "MovieURL": "URL ταινίας",
         "UploadFile": "Ανέβασε ένα αρχείο",
         "PutOnMarketplace": "Διαθέστε στην αγορά",
         "InstantPurchase": "Εισαγάγετε την τιμή για να επιτρέψετε στους χρήστες να αγοράσουν άμεσα το NFT σας",
@@ -271,60 +330,9 @@
         "TimedAuction": "Χρονική δημοπρασία",
         "OpenForBids": "Ανοιχτό για προσφορές",
         "PriceOnePiece": "Εισαγάγετε τιμή για ένα τεμάχιο",
+        "EnterPrice": "Εισαγάγετε τιμή",
         "EnterMinimumBid": "Εισαγάγετε την ελάχιστη προσφορά",
         "SelectChain": "Επιλέξτε αλυσίδα",
-        "WrongChain": "Αυτό το NFT δημιουργήθηκε στο &quot;{{chain}}&quot;. Χρησιμοποιήστε αυτήν την αλυσίδα.",
-        "import": {
-            "importNFT": "Εισαγωγή NFT",
-            "fileNotFound": "Λυπούμαστε, το αρχείο CSV δεν βρέθηκε.",
-            "fileEmpty": "Λυπούμαστε, το αρχείο CSV είναι κενό.",
-            "userIdNotFound": "χρήστης υπάρχει αλλά το αναγνωριστικό είναι κενό",
-            "errorLine": "γραμμή {{1}}",
-            "fieldNotFound": "Το υποχρεωτικό πεδίο &quot;{{1}}&quot; δεν βρέθηκε",
-            "taskStreamInvalid": "Μη έγκυρη ροή εργασιών",
-            "instructionsEmpty": "κενές οι οδηγίες ροής εργασιών",
-            "complete": "Πλήρης",
-            "activateUsers": "αποστολή μηνύματος ενεργοποίησης στους χρήστες;",
-            "importProgress": "Πρόοδος",
-            "importOptions": "Επιλογές",
-            "sampleCSV": "Λήψη δείγματος CSV",
-            "fileLabel": "Μεταφόρτωση υπολογιστικού φύλλου:",
-            "errorsTitle": "Παρουσιάστηκαν σφάλματα",
-            "importAttributes": "Εισαγωγή χαρακτηριστικών NFT",
-            "displayTypeEmpty": "Ο τύπος εμφάνισης για το &quot;{{1}}&quot; δεν βρέθηκε"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Φιλτράρισμα κατά συλλογές NFT",
-                "ShowNFTCollection": "Εμφάνιση συλλογής NFT σε...",
-                "AllCollections": "Όλες οι Συλλογές"
-            },
-            "ByUser": {
-                "AllAuthors": "Όλοι οι Συγγραφείς",
-                "AllUsers": "Ολοι",
-                "FilterByAuthors": "Φιλτράρισμα κατά συγγραφείς"
-            }
-        },
-        "Back": "Επιστροφή στη Συλλογή",
-        "Name": "Ονομα",
-        "EnterName": "Εισαγάγετε όνομα",
-        "EnterAuthorWallet": "Εισαγάγετε το πορτοφόλι του συγγραφέα",
-        "InformationAboutTitle": "Πληροφορίες σχετικά με το {{title}} NFT",
-        "DetailedInformationAboutNFT": "Αναλυτικές πληροφορίες για το NFT",
-        "PresaleStarts": "Η προπώληση ξεκινά στις 23 Δεκεμβρίου",
-        "OwnerUserNotFound": "Ο κάτοχος αυτού του NFT δεν είναι εγγεγραμμένος στην αίτησή μας.",
-        "BuyNow": "Αγορασε τωρα",
-        "Buy": "Αγορά",
-        "Conversation": "Συνομιλία",
-        "Create": "Δημιουργώ",
-        "Author": "Συγγραφέας",
-        "Commission": "Επιτροπή",
-        "EnterCommission": "Εισαγάγετε την προμήθεια",
-        "Actions": "Ενέργειες",
-        "UpdateNFT": "Ενημέρωση NFT",
-        "NotOnSale": "Δεν πωλείται",
-        "MovieURL": "URL ταινίας",
-        "EnterPrice": "Εισαγάγετε τιμή",
         "Currency": "Νόμισμα",
         "AreYouSureDeleteImage": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε την εικόνα;",
         "AreYouSureDeleteVideo": "Είστε βέβαιοι ότι θέλετε να καταργήσετε το βίντεο;",
@@ -336,7 +344,7 @@
             "SelectSeries": "Επιλέξτε σειρά",
             "Value": "αξία",
             "AreYouSure": "Είσαι σίγουρος?",
-            "AuthorInvalid": "Μη έγκυρη διεύθυνση συντάκτη!",
+            "AuthorInvalid": "Η διεύθυνση συγγραφέα δεν είναι έγκυρη!",
             "Address": "Διεύθυνση",
             "CoverImage": "Εικόνα εξωφύλλου",
             "UploadCoverImage": "Μεταφόρτωση εικόνας εξωφύλλου",
@@ -355,7 +363,7 @@
         "contract": {
             "CreateContract": "Δημιουργία συμβολαίου",
             "SelectContract": "Επιλέξτε σύμβαση",
-            "CreateContractFor": "Δημιουργία σύμβασης για {{userName}}",
+            "CreateContractFor": "Δημιουργία συμβολαίου για {{userName}}",
             "ContractFor": "Συμβόλαιο για {{userName}}",
             "UpdateContract": "Ενημέρωση σύμβασης",
             "TransferOwnership": "Μεταβίβαση ιδιοκτησίας",
@@ -363,9 +371,9 @@
             "SetSuffix": "Σύνολο επίθημα",
             "CurrentOwner": "Τρέχων Ιδιοκτήτης",
             "CurrentBaseURL": "Τρέχον BaseURL",
-            "ContractAddressAbsent": "Η διεύθυνση σύμβασης απουσιάζει",
+            "ContractAddressAbsent": "Η διεύθυνση της σύμβασης απουσιάζει",
             "FactoryAddressAbsent": "Η διεύθυνση εργοστασίου απουσιάζει",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Απαιτείται τίτλος",
             "SymbolRequired": "Απαιτείται σύμβολο",
             "TypeContractName": "όνομα της σύμβασης",
@@ -375,6 +383,38 @@
             "Title": "Διαγωνισμοί",
             "NewContest": "Νέος Διαγωνισμός"
         },
+        "import": {
+            "importNFT": "Εισαγωγή NFT&#39;s",
+            "importAttributes": "Εισαγωγή χαρακτηριστικών NFT",
+            "fileNotFound": "Λυπούμαστε, το αρχείο CSV δεν βρέθηκε.",
+            "fileEmpty": "Λυπούμαστε, το αρχείο CSV είναι κενό.",
+            "userIdNotFound": "χρήστης υπάρχει αλλά το αναγνωριστικό είναι κενό",
+            "errorLine": "γραμμή {{1}}",
+            "fieldNotFound": "Το υποχρεωτικό πεδίο &quot; {{1}} &quot; δεν βρέθηκε",
+            "displayTypeEmpty": "Ο τύπος οθόνης για &quot; {{1}} &quot; δεν βρέθηκε",
+            "taskStreamInvalid": "Μη έγκυρη ροή εργασιών",
+            "instructionsEmpty": "κενές οι οδηγίες ροής εργασιών",
+            "complete": "Πλήρης",
+            "activateUsers": "αποστολή μηνύματος ενεργοποίησης στους χρήστες;",
+            "importProgress": "Πρόοδος",
+            "importOptions": "Επιλογές",
+            "sampleCSV": "Λήψη δείγματος CSV",
+            "fileLabel": "Μεταφόρτωση υπολογιστικού φύλλου:",
+            "errorsTitle": "Παρουσιάστηκαν σφάλματα"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Φιλτράρισμα κατά συλλογές NFT",
+                "ShowNFTCollection": "Εμφάνιση συλλογής NFT σε...",
+                "AllCollections": "Όλες οι Συλλογές"
+            },
+            "ByUser": {
+                "AllAuthors": "Όλοι οι Συγγραφείς",
+                "AllUsers": "Ολοι",
+                "FilterByAuthors": "Φιλτράρισμα κατά συγγραφείς"
+            }
+        },
+        "Back": "Επιστροφή στη Συλλογή",
         "attributes": {
             "Title": "Διαχείριση χαρακτηριστικών",
             "Attributes": "Γνωρίσματα",
@@ -398,13 +438,6 @@
             "aboutPlaceholder": "Επεξεργασία βιογραφικού",
             "SureLogOut": "Είστε βέβαιοι ότι θέλετε να αποσυνδεθείτε;"
         },
-        "Add": "Προσθήκη",
-        "Remove": "Αφαιρώ",
-        "NoNFTyet": "Δεν υπάρχουν ακόμη NFT",
-        "Claim": "Απαίτηση",
-        "ClaimNFT": "Αξίωση NFT",
-        "Unlocking": "Ξεκλείδωμα",
-        "Unlock": "Ξεκλείδωμα",
         "sales": {
             "factory": {
                 "form": {
@@ -424,7 +457,7 @@
                         "NFTContract": "Σύμβαση NFTC",
                         "seriesId": "μάρκες θα κόβονται σε αυτή τη σειρά",
                         "owner": "κάτοχος του παραδείγματος, διαφορετικά θα γίνει αποστολέας",
-                        "currency": "Νόμισμα για αγορασμένα μάρκες, εάν είναι μηδέν - για εγγενή νομίσματα",
+                        "currency": "Νόμισμα για μάρκες που αγοράσατε, εάν είναι μηδέν - για εγγενή νομίσματα",
                         "price": "Τιμή",
                         "beneficiary": "Δικαιούχος πώλησης μάρκες, διαφορετικά θα είναι ο αποστολέας",
                         "autoindex": "Αυτόματος ευρετήριο",
@@ -458,7 +491,7 @@
                     },
                     "small": {
                         "seriesId": "το νέο διακριτικό θα ανήκει σε σειρά με τέτοιο αναγνωριστικό",
-                        "account": "ιδιοκτήτης του νεοσύστατου NFT. εάν δεν έχει οριστεί - θα χρησιμοποιήσει το τρέχον πορτοφόλι",
+                        "account": "κάτοχος του νεοσύστατου NFT. εάν δεν έχει οριστεί - θα χρησιμοποιήσει το τρέχον πορτοφόλι",
                         "amount": "ποσότητα NFT σε μέντα"
                     }
                 },
@@ -520,50 +553,10 @@
             "Unlock": "Ξεκλείδωμα",
             "Locked": "Κλειδωμένο",
             "CustodianAddress": "Διεύθυνση θεματοφύλακα",
-            "TokenWasClaimed": "Το διακριτικό &quot;{{title}}&quot; διεκδικήθηκε",
-            "TokenWasLocked": "Το διακριτικό &quot;{{title}}&quot; κλειδώθηκε",
-            "TokenWasUnlocked": "Το διακριτικό &quot;{{title}}&quot; ξεκλειδώθηκε"
+            "TokenWasClaimed": "Το διακριτικό &quot; {{title}} &quot; αξιώθηκε",
+            "TokenWasLocked": "Token &quot; {{title}} &quot; ήταν κλειδωμένο",
+            "TokenWasUnlocked": "Το Token &quot; {{title}} &quot; ξεκλειδώθηκε"
         }
-    },
-    "errors": {
-        "Error": "Λάθος",
-        "WalletAbsent": "Το πορτοφόλι δεν είναι συνδεδεμένο.",
-        "Rendering": "Παρουσιάστηκαν σφάλματα κατά την απόδοση του <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Απαιτείται τιμή!",
-        "NameRequired": "Ονομα (απαιτείται!",
-        "PriceInvalid": "Άκυρη τιμή!",
-        "TransactionFailed": "Η συναλλαγή απέτυχε",
-        "ChainNotSupported": "Η επιλεγμένη αλυσίδα δεν υποστηρίζεται. Υποστηριζόμενη αλυσίδα: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Χρειάζεστε MetaMask συνδεδεμένο για να εργαστείτε με την εφαρμογή",
-        "UserNotLoggedInMetaMask": "Ο χρήστης δεν είναι συνδεδεμένος στο MetaMask",
-        "CurrencyNotFound": "Το νόμισμα δεν βρέθηκε",
-        "WrongChain": "Αυτό το NFT δημιουργήθηκε στο &quot;{{chain}}&quot;. Χρησιμοποιήστε αυτήν την αλυσίδα.",
-        "AmountInvalid": "Μη έγκυρο ποσό!",
-        "NoRecipientSelected": "Δεν έχει επιλεγεί παραλήπτης",
-        "NotEnoughPermissionsWallet": "Δεν υπάρχουν αρκετά δικαιώματα για την ανάγνωση του πορτοφολιού αυτού του χρήστη",
-        "ThisUserHaveNoWallet": "Σε αυτόν τον χρήστη δεν έχει εκχωρηθεί πορτοφόλι",
-        "TheWalletOfThisUserInvalid": "Το πορτοφόλι αυτού του χρήστη δεν είναι έγκυρο",
-        "WalletInvalid": "Μη έγκυρη διεύθυνση πορτοφολιού"
-    },
-    "admin": {
-        "Title": "Περιουσιακά στοιχεία διοικητικά",
-        "SubscriptionTitle": "Σχέδια συνδρομής"
-    },
-    "billing": {
-        "Title": "Τιμολόγηση περιουσιακών στοιχείων",
-        "CreditsMinimum": "Ελάχιστες πιστώσεις",
-        "CreditsToAdd": "Πιστώσεις για προσθήκη",
-        "Save": "Αποθηκεύσετε",
-        "ThisLink": "αυτός ο σύνδεσμος",
-        "errors": {
-            "CreditsMinimumNegative": "Οι ελάχιστες πιστώσεις δεν μπορούν να είναι αρνητικές",
-            "CreditsToAddNegative": "Οι πιστώσεις προς προσθήκη δεν μπορούν να είναι αρνητικές"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Επιλέξτε παραλήπτη",
-        "TransactionSuccess": "Επιτυχία συναλλαγής",
-        "OrTypeWalletAddress": "Ή πληκτρολογήστε διεύθυνση πορτοφολιού παραλήπτη"
     },
     "currencies": {
         "choose": "Επιλέξτε ένα νόμισμα"

@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Alguén"
+    },
+    "identifier": {
+        "types": {
+            "email": "Correo electrónico",
+            "mobile": "Móbil",
+            "web3": "Web 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiado! Agora podes pegalo en calquera lugar."
+    },
     "analytics": {
         "Title": "Analítica",
         "Daily": "Diariamente",
@@ -11,17 +24,17 @@
         "WeekDays": "Días da semana"
     },
     "actions": {
-        "LogIn": "acceder",
+        "LogIn": "Iniciar sesión",
         "LogOut": "pechar sesión"
     },
     "activate": {
-        "SetAsPrimary": "Establecer {{1}} como o meu {{2}} principal",
-        "ChoosePassPhrase": "Escolle unha <strong>frase de paso<\/strong> coa que iniciar sesión.<br> Unha frase sinxela que consta dunhas poucas palabras que lembrarás facilmente.",
+        "OneTimeCode": "Introduza o código que recibiu:",
+        "SetAsPrimary": "Establece {{1}} como o meu {{2}} principal",
+        "ChoosePassPhrase": "Escolle unha <strong>frase de paso<\/strong> coa que iniciar sesión.<br> Unha frase sinxela que consta dunhas poucas palabras que recordarás facilmente.",
         "ChoosePassPhraseSeeSuggestions": "Escolle unha boa <strong>frase de paso<\/strong> para protexer a túa conta. Consulta as suxestións para algunhas ideas.",
         "LogOutAndTryAgain": "Pecha sesión e téntao de novo",
         "IfYouFeel": "Se cres que algo saíu mal, podes",
         "SetIdentifierButtonTitle": "comezar de novo",
-        "OneTimeCode": "Introduza o código que recibiu:",
         "ActivateMyAccount": "Activa a miña conta"
     },
     "session": {
@@ -47,7 +60,7 @@
         "WelcomeVerifyEmail": "Benvido! Verifica o teu enderezo de correo electrónico.",
         "ForgetPass": "Ola, esqueciches o teu contrasinal?",
         "PassphraseSaved": "A túa frase de paso gardouse.",
-        "IdentifierActivated": "Activouse o teu {{type}}.",
+        "IdentifierActivated": "Activouse o teu {{type}} .",
         "CompletedActivation": "Completaches a activación do usuario.",
         "CompletedActivationLogIn": "Completaches a activación do usuario. Proba a iniciar sesión agora."
     },
@@ -60,7 +73,7 @@
             "EmptyContacts": "Non se atoparon contactos..."
         },
         "select": {
-            "title": "Selecciona o contacto de {{displayName}}"
+            "title": "Seleccione o contacto do {{displayName}}"
         }
     },
     "usersContacts": {
@@ -70,11 +83,15 @@
         "inviteRole": "Invitar {{role}}"
     },
     "invalidLanguageSelected": "Seleccionouse un idioma non válido",
+    "platforms": {
+        "wallet": "Carteira",
+        "broadcast": "Emisión"
+    },
     "login": {
         "title": "Benvido",
         "directions": "Crea unha conta ou inicia sesión.",
         "directionsNoRegister": "Inicia sesión se tes unha conta.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Introduce a túa frase de paso:",
         "loginButton": "Comezar",
         "registerButton": "Comezar",
@@ -86,8 +103,9 @@
         "noPassphrase": "Antes de iniciar sesión, debes establecer unha frase de paso facendo clic na ligazón da túa mensaxe de activación.",
         "notVerified": "Debe enviarse unha mensaxe de activación para iniciar sesión.",
         "emailExists": "Tentaches rexistrarte con este correo electrónico antes? Se é así, revisa a túa caixa de entrada para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
-        "mobileExists": "Tentaches rexistrarte con este número de móbil antes? Se é así, comproba a túa SMS para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
+        "mobileExists": "Intentaches rexistrarte con este número de móbil antes? Se é así, comproba a túa SMS para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
         "usingOther": "ou podes",
+        "connectPlatforms": "ou conectar usando:",
         "prompt": "Escolle un nome de usuario:",
         "newUser": "ou crea unha nova conta a continuación",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Aceptar as Condicións de servizo?",
         "facebookNoEmail": "Falta un enderezo de correo electrónico confirmado na túa conta de Facebook. Simplemente inicie sesión na forma nativa.",
         "picTooltip": "Podes cambiar esta imaxe máis tarde",
-        "wallet": {
-            "payload": "Inicia sesión en {{host}} á hora {{timestamp}}",
-            "alert": {
-                "title": "Redirixindo a Wallet",
-                "content": "Unha vez que peches este diálogo, dirixirase á túa carteira. Despois de iniciar sesión, volve a esta páxina."
-            }
-        },
         "web3": {
-            "payload": "Inicia sesión en {{host}} á hora {{timestamp}}",
+            "payload": "Inicia sesión en {{host}} no momento {{timestamp}}",
             "alert": {
                 "title": "Redirixindo a Wallet",
                 "content": "Unha vez que peches este diálogo, dirixirase á túa carteira. Despois de iniciar sesión, volve a esta páxina."
             }
-        },
-        "connectPlatforms": "ou conectar usando:"
+        }
     },
     "setIdentifier": {
         "title": "Engade un xeito de iniciar sesión",
@@ -126,7 +136,7 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Conta",
+        "title": "Conta {{Platform}}",
         "areUsing": "Estás a usar {{platform}} como",
         "noLongerUsing": "Xa non estás conectado a {{platform}} como",
         "doAuth": "Inicia sesión con esta conta",
@@ -139,26 +149,9 @@
         "Guest": "Invitado",
         "Host": "Anfitrión"
     },
-    "avatar": {
-        "Someone": "Alguén"
-    },
     "web3": {
-        "WrongMethod": "Método de contrato incorrecto {{methodName}}",
+        "WrongMethod": "Método de contratación incorrecto {{methodName}}",
         "ChangeWallet": "Cambiar carteira"
-    },
-    "identifier": {
-        "types": {
-            "email": "Correo electrónico",
-            "mobile": "Móbil",
-            "web3": "Web 3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Copiado! Agora podes pegalo en calquera lugar."
-    },
-    "platforms": {
-        "wallet": "Carteira",
-        "broadcast": "Emisión"
     },
     "labels": {
         "addToPhonebook": "Engadir aos meus contactos do teléfono",

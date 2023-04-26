@@ -1,137 +1,156 @@
 {
+    "errors": {
+        "Error": "오류",
+        "WalletAbsent": "지갑이 연결되지 않았습니다.",
+        "Rendering": "<span class='url'>{{1}}<\/span> 렌더링하는 동안 오류가 발생했습니다.",
+        "PriceRequired": "가격 필수!",
+        "NameRequired": "이름 (필수!",
+        "PriceInvalid": "가격이 유효하지 않습니다!",
+        "AmountInvalid": "금액이 잘못되었습니다!",
+        "TransactionFailed": "거래 실패",
+        "ChainNotSupported": "선택한 체인은 지원되지 않습니다. 지원 체인: {{supportedChain}}",
+        "NeedMetaMaskConnected": "응용 프로그램과 함께 작동하려면 MetaMask가 연결되어 있어야 합니다.",
+        "UserNotLoggedInMetaMask": "사용자가 MetaMask에 로그인하지 않았습니다.",
+        "CurrencyNotFound": "통화를 찾을 수 없음",
+        "WrongChain": "이 NFT는 &quot; {{chain}} &quot;에서 생성되었습니다. 이 체인을 사용하십시오.",
+        "NoRecipientSelected": "수신자를 선택하지 않았습니다.",
+        "NotEnoughPermissionsWallet": "이 사용자의 지갑을 읽을 수 있는 권한이 없습니다.",
+        "ThisUserHaveNoWallet": "이 사용자에게는 할당된 지갑이 없습니다.",
+        "TheWalletOfThisUserInvalid": "이 사용자의 지갑이 유효하지 않습니다",
+        "WalletInvalid": "지갑 주소가 잘못되었습니다."
+    },
+    "admin": {
+        "Title": "자산 관리",
+        "SubscriptionTitle": "구독 계획"
+    },
     "browsertab": {
         "html": "{{button}}",
-        "button": "탭하여 결제"
+        "button": "결제하려면 탭하세요."
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}}에 대한 청구 처리됨",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}에 지불해 주셔서 감사합니다.",
-        "SubscribedTo": "{{call 'user.displayName'}}이(가) {{plan.title}} 구독함",
-        "YouSubscribedTo": "{{plan.title}}을(를) 구독했습니다.",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : {{call 'user.displayName'}} 에 대한 요금 처리",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} 로 결제해주셔서 감사합니다.",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} 구독했습니다.",
+        "YouSubscribedTo": "{{plan.title}} 구독했습니다.",
         "Assets\/credits\/alert": "계정과 관련된 알림이 있습니다."
     },
     "charge": {
-        "Subject": "&quot;{1001}}&quot;이(가) {{call 'publisher.displayName'}}로부터 {{displayAmount}}의 지불을 받습니다.",
-        "HasBeenCharged": "이봐, 이것은 {{1}}이(가) {{4}}에 대해 {{2}} 청구되었음을 알려드리기 위한 것입니다."
+        "Subject": "&quot; {{description}} &quot;에 의해 {{call 'publisher.displayName'}} 에서 {{displayAmount}} 의 지불금을 받습니다.",
+        "HasBeenCharged": "안녕하세요, {{1}} {{4}} 에 의해 {{3}} 에 대해 {{2}} 청구되었음을 알려드리기 위한 것입니다."
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot;을(를) 지불해 주셔서 감사합니다.",
-        "HavePaid": "{{1}}님, 이것은 귀하가 {{2}}에 대해 {{1002}"
+        "Subject": "&quot; {{description}} &quot;를 결제해 주셔서 감사합니다.",
+        "HavePaid": "안녕하세요 {{1}} , {{4}} 에 대해 {{2}} 에서 {{3}} 로 성공적으로 지불했다는 간단한 확인입니다."
     },
     "payment": {
-        "AboutOrder": "주문 정보",
+        "AboutOrder": "주문에 대한 정보",
         "PaymentMethod": "지불 방법",
         "ContactInfo": "연락처 정보",
-        "Pay": "지불",
+        "Pay": "지불하다",
         "PaymentSucceeded": "결제 성공",
-        "PaymentProcessing.": "결제가 처리 중입니다",
+        "PaymentProcessing.": "결제 처리 중",
         "FailTryAgain": "결제에 실패했습니다. 다시 시도해 주세요.",
         "SomethingWrong": "문제가 발생했습니다.",
         "PaymentStatus": "지불 상태",
         "PayTo": "{{displayName}} 지불",
         "ChooseCurrency": "통화를 선택하세요",
-        "YouCanSendUpTo": "최대 {{amount}} {{symbol}}까지 보낼 수 있습니다.",
+        "YouCanSendUpTo": "최대 {{amount}} {{symbol}} 까지 보낼 수 있습니다.",
         "Send": "보내다",
         "EnterAmount": "금액을 입력하세요"
     },
     "credits": {
-        "InviteAcceptedBy": "{{invitedUserName}}님이 초대를 수락했습니다.",
-        "Streams_user_firstname": "{{invitedUserName}} 입력한 이름",
-        "Streams_user_lastname": "{{invitedUserName}} 입력한 성을",
-        "Streams_user_icon": "{{invitedUserName}} 입력한 아이콘",
-        "Places_user_location": "{{invitedUserName}} 입력한 위치",
-        "Streams_greeting": "{{invitedUserName}} 인사말 입력",
-        "YouHaveCreditsToStart": "시작할 수 있는 크레딧이 {{amount}} 있습니다",
-        "PaymentFor": "&quot;{{1}}&quot; 결제",
-        "PaymentTo": "{{1}}에 지불",
-        "PaymentToUser": "{{toUserName}}에 지불",
-        "CreatePaidStream": "{{toStreamName}} 생성을 위해",
-        "JoinedPaidStream": "&#39; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39; 예약용",
-        "CreatedCommunity": "커뮤니티 &quot;{{communityId}}&quot; 생성을 위해",
-        "LeftPaidStream": "&#39; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;의 예약 환불로",
-        "BoughtCredits": "{{amount}} 크레딧 구매",
+        "InviteAcceptedBy": "{{invitedUserName}} 에서 초대 수락",
+        "InvitedUserFilledStream": "{{invitedUserName}} 채움 {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} 채우기 위해",
+        "YouHaveCreditsToStart": "시작할 수 있는 크레딧이 {{amount}} 개 있습니다.",
+        "PaymentFor": "&quot; {{1}} &quot;에 대한 지불",
+        "PaymentTo": "{{1}} 에 지불",
+        "PaymentToUser": "{{toUserName}} 에 지불",
+        "CreatePrivateChat": "{{toUserName}} 와의 비공개 채팅",
+        "CreatePaidStream": "{{toStreamName}} 만들기 위해",
+        "JoinedPaidStream": "&quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;에서 예약",
+        "CreatedCommunity": "커뮤니티 생성을 위한 &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;에서 예약 환불로",
+        "BoughtCredits": "{{amount}} 크레딧 구입",
         "BonusCredits": "보너스 {{amount}} 크레딧",
         "BuyAmountCredits": "{{amount}} 크레딧 구매",
-        "WatchClip": "{{amount}} 시청으로 {{fromStreamTitle}} 크레딧 획득",
+        "WatchClip": "{{fromStreamTitle}} 시청으로 {{amount}} 크레딧 획득",
         "MissingCredits": "누락된 크레딧",
-        "YouMissingCredits": "계속하려면 추가 {{amount}} 크레딧이 필요합니다.",
+        "YouMissingCredits": "계속 진행하려면 추가로 {{amount}} 크레딧이 필요합니다.",
         "BuyCredits": "크레딧 구매",
-        "BuyBonus": "한 번에 {{amount}} 크레딧을 구매하면 {{bonus}} 크레딧 보너스가 제공됩니다.",
-        "Buy": "구입",
+        "BuyBonus": "한 번에 {{amount}} 크레딧을 구매하면 {{bonus}} 크레딧 보너스로 이어집니다.",
+        "Buy": "구입하다",
         "PurchaseCredits": "구매 크레딧",
-        "Credits": "크레딧",
-        "ErrorInvalidAmount": "금액이 잘못되었습니다.",
-        "ErrorInvalidCurrency": "안타깝게도 아직 {{currency}} 통화를 지원하지 않습니다.",
+        "Credits": "학점",
+        "ErrorInvalidAmount": "유효하지 않은 금액",
+        "ErrorInvalidCurrency": "불행히도 우리는 아직 통화 {{currency}} 지원하지 않습니다",
         "forMessages": {
             "BoughtCredits": "{{amount}} 크레딧",
             "BonusCredits": "{{amount}} 크레딧"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} 채워진 {{FilledStreamTitle}}",
-        "ForFillingStream": "{{FilledStreamTitle}} 채우기",
-        "CreatePrivateChat": "{{toUserName}}님과의 비공개 채팅"
+        }
     },
     "history": {
         "Date": "날짜",
         "Amount": "양",
         "Description": "설명",
         "Client": "고객",
+        "User": "사용자",
         "To": "에게",
         "From": "~에서",
-        "SeeHistory": "{{1}}의 결제 내역 보기",
-        "HistoryEmpty": "아직 데이터가 없습니다.",
-        "PaymentFor": "전송된 {{amount}} 크레딧",
-        "PaymentTo": "전송된 {{amount}} 크레딧",
-        "PaymentToUser": "전송된 {{amount}} 크레딧",
+        "SeeHistory": "{{1}} 의 결제 내역 보기",
+        "HistoryEmpty": "아직 데이터가 없습니다",
+        "PaymentFor": "{{amount}} 크레딧 전송",
+        "PaymentTo": "{{amount}} 크레딧 전송",
+        "PaymentToUser": "{{amount}} 크레딧 전송",
         "CreatePaidStream": "{{amount}} 크레딧 사용",
         "WatchClip": {
-            "+": "{{amount}} 크레딧 획득",
+            "+": "{{amount}} 학점 취득",
             "-": "{{amount}} 크레딧 사용"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} 크레딧 획득",
+            "+": "{{amount}} 학점 취득",
             "-": "{{amount}} 크레딧 사용"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} 크레딧을 받았습니다.",
-            "-": "전송된 {{amount}} 크레딧"
+            "+": "{{amount}} 학점 취득",
+            "-": "{{amount}} 크레딧 전송"
         },
         "CreatedCommunity": "{{amount}} 크레딧 사용",
-        "BoughtCredits": "{{amount}} 크레딧 구매",
+        "BoughtCredits": "{{amount}} 크레딧 구입",
         "BonusCredits": "보너스 {{amount}} 크레딧 획득",
-        "InviteAcceptedBy": "{{amount}} 크레딧 획득",
-        "Streams_user_firstname": "{{amount}} 크레딧 획득",
-        "Streams_user_lastname": "{{amount}} 크레딧 획득",
-        "Streams_user_icon": "{{amount}} 크레딧 획득",
-        "Places_user_location": "{{amount}} 크레딧 획득",
-        "Streams_greeting": "{{amount}} 크레딧 획득",
-        "YouHaveCreditsToStart": "{{amount}} 크레딧 획득",
-        "User": "사용자"
+        "InviteAcceptedBy": "{{amount}} 학점 취득",
+        "Streams_user_firstname": "{{amount}} 학점 취득",
+        "Streams_user_lastname": "{{amount}} 학점 취득",
+        "Streams_user_icon": "{{amount}} 학점 취득",
+        "Places_user_location": "{{amount}} 학점 취득",
+        "Streams_greeting": "{{amount}} 학점 취득",
+        "YouHaveCreditsToStart": "{{amount}} 학점 취득"
     },
     "subscriptions": {
         "infoTitle": "결제 정보 설정",
         "confirm": {
             "title": "구독 시작",
-            "message": "{{title}}을(를) 구독하시겠습니까?",
-            "ok": "확인",
+            "message": "&quot; {{title}} &quot;에 대한 정기 구독을 시작하시겠습니까?",
+            "ok": "좋아요",
             "cancel": "취소"
         },
         "CreditOrDebitCard": "신용카드 또는 직불카드",
         "SubscribePayment": "구독 결제",
-        "ImmediatePayment": "즉시 지불",
+        "ImmediatePayment": "즉시결제",
         "ProcessingPayment": "결제 처리 중",
-        "SubscriptionAlreadyPaid": "이 구독은 이미 지불되었습니다.",
-        "SubscriptionNotActive": "이 구독은 활성 상태가 아닙니다.",
+        "SubscriptionAlreadyPaid": "이 구독은 이미 지불되었습니다",
+        "SubscriptionNotActive": "이 구독은 활성화되지 않았습니다.",
         "Subscribed": "구독",
-        "Unsubscribed": "구독 취소",
+        "Unsubscribed": "구독취소",
         "Unsubscribe": "구독 취소",
         "Subscribe": "구독하다",
         "Started": "시작됨",
         "EndsIn": "종료",
-        "NextPay": "다음 지불",
+        "NextPay": "다음 결제",
         "Period": "기간",
         "Price": "가격",
         "AreYouSureUnsubscribe": "이 요금제를 구독 취소하시겠습니까?",
-        "YouUnsubscribedFromPlan": "&quot;{{planTitle}}&quot; 요금제 구독을 취소했습니다. 요금은 청구되지 않지만 구독은 {{endsIn}}까지 계속됩니다.",
+        "YouUnsubscribedFromPlan": "귀하는 &quot; {{planTitle}} &quot; 요금제 구독을 취소했습니다. 요금은 청구되지 않지만 구독은 {{endsIn}} 까지 계속됩니다.",
         "plan": {
             "TitlePlaceholder": "계획 제목",
             "PricePlaceholder": "가격",
@@ -145,19 +164,19 @@
         "BuyAmountCredits": "{{amount}} 크레딧 구매",
         "confirm": {
             "title": "지불하다",
-            "message": "{{symbol}}{{amount}} 지불에 동의하십니까?",
-            "ok": "확인",
+            "message": "{{symbol}} {{amount}} 지불에 동의하십니까?",
+            "ok": "좋아요",
             "cancel": "취소"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "크레딧",
+            "displayType": "학점",
             "description": "신용 및 지불을 추적"
         },
         "Assets\/plan": {
-            "displayType": "구독 계획",
-            "description": "구독 계획"
+            "displayType": "구독 플랜",
+            "description": "가입 계획"
         },
         "Assets\/subscription": {
             "displayType": "신청",
@@ -174,10 +193,10 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} 크레딧 획득"
+            "content": "{{amount}} 학점 취득"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} 크레딧 구매"
+            "content": "{{amount}} 크레딧 구입"
         },
         "Assets\/credits\/bonus": {
             "content": "보너스 {{amount}} 크레딧"
@@ -186,13 +205,24 @@
             "content": "{{amount}} 크레딧 사용"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} 크레딧을 {{toUserName}}에게 보냈습니다."
+            "content": "{{amount}} 크레딧을 {{toUserName}} 으로 보냈습니다."
         },
         "Assets\/credits\/received": {
-            "content": "{{amount}} 크레딧을 {{fromUserName}}에서 받았습니다."
+            "content": "{{fromUserName}} 에서 {{amount}} 크레딧을 받았습니다."
         },
         "Assets\/credits\/alert": {
-            "content": "계정에 크레딧이 거의 없습니다. 더 많은 크레딧을 구매하려면 <a href='{{link}}'>이 링크<\/a> 를 방문하세요."
+            "content": "계정에 크레딧이 거의 없습니다. 더 많은 크레딧을 구입하려면 <a href='<i translate='no'>999 &#39;&gt;이 링크를<\/a> 방문하십시오."
+        }
+    },
+    "billing": {
+        "Title": "자산 청구",
+        "CreditsMinimum": "최소 학점",
+        "CreditsToAdd": "추가할 크레딧",
+        "Save": "구하다",
+        "ThisLink": "이 링크",
+        "errors": {
+            "CreditsMinimumNegative": "최소 크레딧은 음수가 될 수 없습니다.",
+            "CreditsToAddNegative": "추가할 크레딧은 음수가 될 수 없습니다."
         }
     },
     "services": {
@@ -202,9 +232,12 @@
             "PricePlaceholder": "가격 설정",
             "LinkPlaceholder": "추가 정보 링크 설정",
             "DescriptionPlaceholder": "서비스 설명",
-            "SaveService": "서비스 저장",
-            "SelectRequiredParticipants": "필수 참가자",
+            "SaveService": "세이브 서비스",
+            "SelectRequiredParticipants": "필수 관련 참가자",
             "RequiredParticipantsDesc": "이 서비스를 이용하기 위해 필요한 관련 참여자를 선택하세요. 서비스가 유료인 경우 사용자는 각 관련 참여자에 대해서도 비용을 지불해야 합니다."
+        },
+        "EditServiceTemplate": {
+            "Title": "서비스 편집"
         },
         "ManageServiceTemplates": "서비스 템플릿 관리",
         "ManageServices": "서비스 관리",
@@ -212,119 +245,94 @@
         "OptionalContribution": "선택적 기여",
         "RequiredPayment": "필수 결제",
         "AreYouSureDelete": "이 서비스를 삭제하시겠습니까?",
-        "AmountServicesRelated": "이 서비스와 관련된 {{amount}} 가용성이 있습니다. 그들은 또한 제거됩니다.",
-        "EditServiceTemplate": {
-            "Title": "서비스 수정"
-        }
+        "AmountServicesRelated": "이 서비스와 관련된 가용성이 {{amount}} 있습니다. 그들은 또한 제거됩니다."
+    },
+    "transfer": {
+        "SelectRecipient": "수신자 선택",
+        "TransactionSuccess": "거래 성공",
+        "OrTypeWalletAddress": "또는 받는 사람의 지갑 주소를 입력하세요."
     },
     "NFT": {
-        "Title": "{{title}} NFT에 대한 정보",
-        "Description": "NFT에 대한 자세한 정보",
-        "FixedBid": "지금 구매",
+        "Title": "제목",
+        "Name": "이름",
+        "EnterName": "이름을 입력하시오",
+        "EnterAuthorWallet": "저자 지갑 입력",
+        "InformationAboutTitle": "{{title}} NFT에 대한 정보",
+        "Description": "설명",
+        "DetailedInformationAboutNFT": "NFT에 대한 자세한 정보",
+        "PresaleStarts": "12월 23일 사전 판매 시작",
+        "OwnerUserNotFound": "이 NFT의 소유자는 애플리케이션에 등록되어 있지 않습니다.",
+        "BuyNow": "지금 구매",
+        "Buy": "구입하다",
+        "Add": "추가하다",
+        "Remove": "제거하다",
+        "NoNFTyet": "아직 NFT 없음",
+        "Conversation": "대화",
+        "Create": "만들다",
         "CurrentBid": "현재 입찰가",
-        "StartingIn": "에서 시작",
+        "StartingIn": "시작",
         "EndingIn": "종료",
         "CreateNFT": "NFT 생성",
-        "TitlePlaceholder": "NFT에 제목을 지정하세요.",
-        "DescriptionPlaceholder": "NFT에 대한 설명 제공",
+        "TitlePlaceholder": "NFT에 제목 지정",
+        "DescriptionPlaceholder": "NFT에 설명 제공",
         "CreateYourNFT": "NFT 만들기",
         "Royalties": "로열티",
-        "RoyaltyPlaceholder": "선택 과목. 전송 전 작성자에게 지급된 금액입니다.",
-        "ExpirationDate": "만료일",
+        "RoyaltyPlaceholder": "선택 과목. 송금 전 크리에이터에게 지급된 금액.",
+        "ExpirationDate": "만료 날짜",
         "StartingDate": "시작일",
         "BidsBelowThisAmount": "이 금액 미만의 입찰은 허용되지 않습니다.",
         "MinimumBid": "최소 입찰가",
+        "Author": "작가",
         "Price": "가격",
+        "Commission": "수수료",
+        "EnterCommission": "커미션 입력",
         "Owner": "소유자",
         "SelectCategory": "카테고리 선택",
         "Day": "낮",
         "Days": "날",
-        "Hour": "시",
+        "Hour": "시간",
         "Hours": "시간",
         "Minute": "분",
         "Minutes": "분",
-        "Second": "초",
+        "Second": "두번째",
         "Seconds": "초",
-        "SalesCreator": "판매액은 크리에이터에게 돌아갑니다.",
+        "SalesCreator": "의 판매는 크리에이터에게 돌아갑니다",
         "Details": "세부",
         "Bids": "입찰",
         "History": "역사",
-        "LoremIpsum": "Lorem Ipsum은 단순히 인쇄 및 조판 산업의 더미 텍스트입니다.",
-        "PutOnSale": "판매에 넣어",
-        "PutOffSale": "판매에서 철회",
+        "LoremIpsum": "Lorem Ipsum은 단순히 인쇄 및 조판 업계의 더미 텍스트입니다.",
+        "PutOnSale": "판매하다",
+        "PutOffSale": "판매 철회",
         "Transfer": "옮기다",
+        "Actions": "행위",
+        "Claim": "주장하다",
+        "ClaimNFT": "NFT 청구",
+        "Unlocking": "잠금 해제",
+        "Unlock": "터놓다",
         "Update": "업데이트",
-        "UpdateToken": "토큰 업데이트",
+        "UpdateToken": "업데이트 토큰",
+        "UpdateNFT": "NFT 업데이트",
         "CreateToken": "토큰 생성",
         "PlaceBid": "입찰하기",
-        "SoldOut": "판매 된",
+        "SoldOut": "판매된",
+        "NotOnSale": "판매하지 않음",
         "NftName": "NFT 이름",
-        "DescribeYourNFT": "NFT에 대해 설명해 주세요.",
-        "NftPicture": "NFT를 대표하는 그림",
+        "DescribeYourNFT": "당신의 NFT를 설명해주세요",
+        "NftPicture": "NFT를 나타내는 그림",
         "NftMovie": "NFT를 대표하는 영화",
         "UploadMovie": "영화 업로드",
         "MovieSource": "영화 소스",
+        "MovieURL": "영화 URL",
         "UploadFile": "파일을 올리다",
-        "PutOnMarketplace": "시장에 내놓다",
-        "InstantPurchase": "사용자가 즉시 NFT를 구매할 수 있도록 가격을 입력하세요.",
+        "PutOnMarketplace": "마켓플레이스에 올리기",
+        "InstantPurchase": "사용자가 NFT를 즉시 구매할 수 있도록 가격을 입력하세요.",
         "FixedPrice": "고정 가격",
         "TimedAuction": "시간 제한 경매",
-        "OpenForBids": "입찰을 위해 열려 있습니다",
-        "PriceOnePiece": "1개 가격 입력",
-        "EnterMinimumBid": "최소입찰가 입력",
-        "SelectChain": "체인 선택",
-        "WrongChain": "이 NFT는 &quot;{{chain}}&quot; 아래에 생성되었습니다. 이 체인을 사용하십시오.",
-        "import": {
-            "importNFT": "NFT 가져오기",
-            "fileNotFound": "죄송합니다. CSV 파일을 찾을 수 없습니다.",
-            "fileEmpty": "죄송합니다. CSV 파일이 비어 있습니다.",
-            "userIdNotFound": "사용자가 있지만 ID가 비어 있습니다.",
-            "errorLine": "줄 {{1}}",
-            "fieldNotFound": "필수 필드 &quot;{{1}}&quot;을(를) 찾을 수 없습니다.",
-            "taskStreamInvalid": "작업 스트림이 잘못되었습니다.",
-            "instructionsEmpty": "작업 스트림 지침이 비어 있습니다.",
-            "complete": "완벽한",
-            "activateUsers": "사용자에게 활성화 메시지를 보내시겠습니까?",
-            "importProgress": "진전",
-            "importOptions": "옵션",
-            "sampleCSV": "샘플 CSV 다운로드",
-            "fileLabel": "스프레드시트 업로드:",
-            "errorsTitle": "오류 발생",
-            "importAttributes": "NFT 속성 가져오기",
-            "displayTypeEmpty": "&quot;{{1}}&quot;에 대한 표시 유형을 찾을 수 없습니다."
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "NFT 컬렉션으로 필터링",
-                "ShowNFTCollection": "NFT 컬렉션 표시 ...",
-                "AllCollections": "모든 컬렉션"
-            },
-            "ByUser": {
-                "AllAuthors": "모든 저자",
-                "AllUsers": "모든 사람",
-                "FilterByAuthors": "작성자별 필터링"
-            }
-        },
-        "Back": "컬렉션으로 돌아가기",
-        "Name": "이름",
-        "EnterName": "이름을 입력하시오",
-        "EnterAuthorWallet": "작성자 지갑 입력",
-        "InformationAboutTitle": "{{title}} NFT에 대한 정보",
-        "DetailedInformationAboutNFT": "NFT에 대한 자세한 정보",
-        "PresaleStarts": "12월 23일 사전 판매 시작",
-        "OwnerUserNotFound": "이 NFT의 소유자는 우리 애플리케이션에 등록되어 있지 않습니다.",
-        "BuyNow": "지금 구매",
-        "Buy": "구입하다",
-        "Conversation": "대화",
-        "Create": "만들다",
-        "Author": "작가",
-        "Commission": "수수료",
-        "EnterCommission": "커미션 입력",
-        "Actions": "행위",
-        "UpdateNFT": "NFT 업데이트",
-        "NotOnSale": "비매품",
-        "MovieURL": "영화 URL",
+        "OpenForBids": "입찰 열기",
+        "PriceOnePiece": "한 조각의 가격을 입력하십시오",
         "EnterPrice": "가격 입력",
+        "EnterMinimumBid": "최소 입찰가 입력",
+        "SelectChain": "체인 선택",
         "Currency": "통화",
         "AreYouSureDeleteImage": "이미지를 삭제하시겠습니까?",
         "AreYouSureDeleteVideo": "동영상을 삭제하시겠습니까?",
@@ -340,11 +348,11 @@
             "Address": "주소",
             "CoverImage": "표지 이미지",
             "UploadCoverImage": "표지 이미지 업로드",
-            "CommissionAddressInvalid": "수수료 주소가 잘못되었습니다.",
-            "OnSale": "판매중",
+            "CommissionAddressInvalid": "커미션 주소가 유효하지 않음",
+            "OnSale": "판매 중",
             "OffSale": "할인",
             "CreateSeries": "시리즈 만들기",
-            "UpdateSeries": "업데이트 시리즈",
+            "UpdateSeries": "시리즈 업데이트",
             "SeriesInfo": "시리즈 정보",
             "SelectAuthor": "작성자 선택",
             "NewItem": "새로운 NFT 시리즈",
@@ -355,7 +363,7 @@
         "contract": {
             "CreateContract": "계약 생성",
             "SelectContract": "계약 선택",
-            "CreateContractFor": "{{userName}}에 대한 계약 생성",
+            "CreateContractFor": "{{userName}} 에 대한 계약 생성",
             "ContractFor": "{{userName}} 계약",
             "UpdateContract": "계약 업데이트",
             "TransferOwnership": "소유권 이전",
@@ -363,23 +371,55 @@
             "SetSuffix": "접미사 설정",
             "CurrentOwner": "현재 소유자",
             "CurrentBaseURL": "현재 BaseURL",
-            "ContractAddressAbsent": "계약 주소 부재",
-            "FactoryAddressAbsent": "공장 주소 부재",
-            "ContractName": "{{contractName}} - {{contractSymbol}} {{chainNetwork}})",
+            "ContractAddressAbsent": "계약 주소 없음",
+            "FactoryAddressAbsent": "공장 주소 없음",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "제목 필요",
-            "SymbolRequired": "기호 필요",
-            "TypeContractName": "계약명",
+            "SymbolRequired": "필요한 기호",
+            "TypeContractName": "계약 이름",
             "TypeContractSymbol": "계약 기호(최대 10자)"
         },
         "contests": {
             "Title": "콘테스트",
-            "NewContest": "새로운 콘테스트"
+            "NewContest": "새 콘테스트"
         },
+        "import": {
+            "importNFT": "NFT 가져오기",
+            "importAttributes": "NFT 속성 가져오기",
+            "fileNotFound": "죄송합니다. CSV 파일을 찾을 수 없습니다.",
+            "fileEmpty": "죄송합니다. CSV 파일이 비어 있습니다.",
+            "userIdNotFound": "사용자가 존재하지만 ID가 비어 있음",
+            "errorLine": "라인 {{1}}",
+            "fieldNotFound": "필수 필드 &quot; {{1}} &quot;를 찾을 수 없습니다.",
+            "displayTypeEmpty": "&quot; {{1}} &quot;에 대한 표시 유형을 찾을 수 없습니다.",
+            "taskStreamInvalid": "작업 스트림 유효하지 않음",
+            "instructionsEmpty": "작업 스트림 지침이 비어 있음",
+            "complete": "완벽한",
+            "activateUsers": "사용자에게 활성화 메시지를 보내시겠습니까?",
+            "importProgress": "진전",
+            "importOptions": "옵션",
+            "sampleCSV": "샘플 CSV 다운로드",
+            "fileLabel": "스프레드시트 업로드:",
+            "errorsTitle": "오류 발생"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "NFT 컬렉션으로 필터링",
+                "ShowNFTCollection": "다음에서 NFT 컬렉션 표시...",
+                "AllCollections": "모든 컬렉션"
+            },
+            "ByUser": {
+                "AllAuthors": "모든 저자",
+                "AllUsers": "모든 사람",
+                "FilterByAuthors": "저자로 필터링"
+            }
+        },
+        "Back": "컬렉션으로 돌아가기",
         "attributes": {
             "Title": "속성 관리",
             "Attributes": "속성",
             "DisplayTitle": "디스플레이 유형",
-            "AddDisplayType": "새 표시 유형 추가",
+            "AddDisplayType": "새 디스플레이 유형 추가",
             "NewDisplay": "새로운 디스플레이",
             "TraitTitle": "특성 유형",
             "AddTraitTitle": "새 특성 유형 추가",
@@ -395,16 +435,9 @@
             "LogOut": "로그 아웃",
             "Title": "{{userName}} 프로필",
             "Description": "사용자 세부정보",
-            "aboutPlaceholder": "약력 수정",
+            "aboutPlaceholder": "바이오 편집",
             "SureLogOut": "로그아웃하시겠습니까?"
         },
-        "Add": "추가하다",
-        "Remove": "제거하다",
-        "NoNFTyet": "아직 NFT 없음",
-        "Claim": "주장하다",
-        "ClaimNFT": "NFT 청구",
-        "Unlocking": "잠금 해제",
-        "Unlock": "터놓다",
         "sales": {
             "factory": {
                 "form": {
@@ -421,7 +454,7 @@
                         "rateAmount": "요금 금액"
                     },
                     "small": {
-                        "NFTContract": "NFT계약",
+                        "NFTContract": "NFT 계약",
                         "seriesId": "이 시리즈에서 토큰이 발행됩니다.",
                         "owner": "인스턴스의 소유자, 그렇지 않으면 보낸 사람이 됩니다.",
                         "currency": "구매한 토큰의 통화(0인 경우) - 네이티브 코인",
@@ -502,7 +535,7 @@
                 },
                 "small": {
                     "tokenId": "잠금 또는 잠금 해제에 필요한 토큰 ID",
-                    "custodian": "잠금 해제할 수 있는 주소",
+                    "custodian": "잠금을 해제할 수 있는 주소",
                     "recipient": "토큰을 받을 주소"
                 }
             },
@@ -520,50 +553,10 @@
             "Unlock": "터놓다",
             "Locked": "잠김",
             "CustodianAddress": "관리인 주소",
-            "TokenWasClaimed": "토큰 &quot;{{title}}&quot;이(가) 청구되었습니다.",
-            "TokenWasLocked": "토큰 &quot;{{title}}&quot;이(가) 잠겼습니다.",
-            "TokenWasUnlocked": "토큰 &quot;{{title}}&quot;이(가) 잠금 해제되었습니다"
+            "TokenWasClaimed": "토큰 &quot; {{title}} &quot;가 청구되었습니다.",
+            "TokenWasLocked": "토큰 &quot; {{title}} &quot;가 잠겼습니다.",
+            "TokenWasUnlocked": "토큰 &quot; {{title}} &quot;가 잠금 해제되었습니다"
         }
-    },
-    "errors": {
-        "Error": "오류",
-        "WalletAbsent": "지갑이 연결되지 않았습니다.",
-        "Rendering": "<span class='url'>{{1}}<\/span> 을(를) 렌더링하는 동안 오류가 발생했습니다.",
-        "PriceRequired": "가격 필수!",
-        "NameRequired": "이름 (필수!",
-        "PriceInvalid": "가격이 잘못되었습니다!",
-        "TransactionFailed": "거래 실패",
-        "ChainNotSupported": "선택한 체인은 지원되지 않습니다. 지원되는 체인: {{supportedChain}}",
-        "NeedMetaMaskConnected": "응용 프로그램과 함께 작동하려면 MetaMask가 연결되어 있어야 합니다.",
-        "UserNotLoggedInMetaMask": "사용자가 MetaMask에 로그인하지 않았습니다.",
-        "CurrencyNotFound": "통화를 찾을 수 없음",
-        "WrongChain": "이 NFT는 &quot;{{chain}}&quot; 아래에 생성되었습니다. 이 체인을 사용하십시오.",
-        "AmountInvalid": "금액이 잘못되었습니다!",
-        "NoRecipientSelected": "수신자를 선택하지 않았습니다.",
-        "NotEnoughPermissionsWallet": "이 사용자의 지갑을 읽을 수 있는 권한이 없습니다.",
-        "ThisUserHaveNoWallet": "이 사용자에게는 할당된 지갑이 없습니다.",
-        "TheWalletOfThisUserInvalid": "이 사용자의 지갑이 유효하지 않습니다",
-        "WalletInvalid": "지갑 주소가 잘못되었습니다."
-    },
-    "admin": {
-        "Title": "자산 관리",
-        "SubscriptionTitle": "구독 계획"
-    },
-    "billing": {
-        "Title": "자산 청구",
-        "CreditsMinimum": "최소 크레딧",
-        "CreditsToAdd": "추가할 크레딧",
-        "Save": "구하다",
-        "ThisLink": "이 링크",
-        "errors": {
-            "CreditsMinimumNegative": "최소 크레딧은 음수일 수 없습니다.",
-            "CreditsToAddNegative": "추가할 크레딧은 음수일 수 없습니다."
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "수신자 선택",
-        "TransactionSuccess": "거래 성공",
-        "OrTypeWalletAddress": "또는 받는 사람의 지갑 주소를 입력하세요."
     },
     "currencies": {
         "choose": "통화를 선택하세요"

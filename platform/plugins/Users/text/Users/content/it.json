@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Qualcuno"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobile",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiato! Ora puoi incollarlo ovunque."
+    },
     "analytics": {
         "Title": "Analitica",
         "Daily": "Quotidiano",
@@ -11,18 +24,18 @@
         "WeekDays": "Giorni della settimana"
     },
     "actions": {
-        "LogIn": "accesso",
+        "LogIn": "login",
         "LogOut": "disconnettersi"
     },
     "activate": {
+        "OneTimeCode": "Inserisci il codice che hai ricevuto:",
         "SetAsPrimary": "Imposta {{1}} come mio principale {{2}}",
         "ChoosePassPhrase": "Scegli una <strong>passphrase<\/strong> con cui accedere.<br> Una semplice frase composta da poche parole che ricorderete facilmente.",
-        "ChoosePassPhraseSeeSuggestions": "Scegli una buona <strong>passphrase<\/strong> per proteggere il tuo account. Vedi i suggerimenti per alcune idee.",
+        "ChoosePassPhraseSeeSuggestions": "Scegli una buona <strong>passphrase<\/strong> per proteggere il tuo account. Vedere i suggerimenti per alcune idee.",
         "LogOutAndTryAgain": "Esci e riprova",
-        "IfYouFeel": "Se senti che qualcosa è andato storto, puoi farlo",
+        "IfYouFeel": "Se ritieni che qualcosa sia andato storto, puoi farlo",
         "SetIdentifierButtonTitle": "ricominciare",
-        "OneTimeCode": "Inserisci il codice che hai ricevuto:",
-        "ActivateMyAccount": "Attiva Il mio account"
+        "ActivateMyAccount": "Attiva il mio account"
     },
     "session": {
         "GetStarted": "Iniziare"
@@ -30,7 +43,7 @@
     "authorize": {
         "GetStarted": "Iniziare",
         "Authorize": "Autorizzare",
-        "TermsLabel": "Ho letto e concordo<br> al {{link}}",
+        "TermsLabel": "Ho letto e sono d&#39;accordo<br> al {{link}}",
         "TermsTitle": "Termini",
         "mustAgree": "Per prima cosa devi accettare i termini."
     },
@@ -40,11 +53,11 @@
     },
     "notifications": {
         "title": "Autorizzazione",
-        "prompt": "Vuoi abilitare le notifiche? Riceverai aggiornamenti in tempo reale sulle cose a cui tieni.",
-        "yes": "sì",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Ben arrivato! Per cortesia verifichi il suo indirizzo email.",
-        "WelcomeVerifyEmail": "Ben arrivato! Verifica il tuo indirizzo email.",
+        "prompt": "Vuoi abilitare le notifiche? Riceverai aggiornamenti in tempo reale sulle cose che ti interessano.",
+        "yes": "SÌ",
+        "no": "NO",
+        "WelcomePleaseVerifyEmail": "Benvenuto! Per cortesia verifichi il suo indirizzo email.",
+        "WelcomeVerifyEmail": "Benvenuto! Verifica il tuo indirizzo email.",
         "ForgetPass": "Ehi, hai dimenticato la passphrase?",
         "PassphraseSaved": "La tua passphrase è stata salvata.",
         "IdentifierActivated": "Il tuo {{type}} è stato attivato.",
@@ -53,112 +66,92 @@
     },
     "contacts": {
         "dialog": {
-            "title": "Scegli contatto",
+            "title": "Scegli il contatto",
             "CreateAccount": "+ Nuovo contatto",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create non trovato",
             "SearchByName": "Ricerca per nome",
             "EmptyContacts": "Contatti non trovati..."
         },
         "select": {
-            "title": "Seleziona il contatto di {{displayName}}"
+            "title": "Seleziona il contatto del {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Si prega di selezionare l&#39;etichetta.",
-        "inviteUser": "Invita gli utenti",
+        "selectLabel": "Seleziona l&#39;etichetta.",
+        "inviteUser": "Invita utenti",
         "selectRole": "Seleziona Ruolo",
         "inviteRole": "Invita {{role}}"
     },
     "invalidLanguageSelected": "Lingua selezionata non valida",
+    "platforms": {
+        "wallet": "Portafoglio",
+        "broadcast": "Trasmissione"
+    },
     "login": {
-        "title": "Ben arrivato",
+        "title": "Benvenuto",
         "directions": "Crea un account o accedi.",
         "directionsNoRegister": "Accedi se hai un account.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Inserisci la tua passphrase:",
         "loginButton": "Iniziare",
         "registerButton": "Iniziare",
         "resendButton": "Invia messaggio di attivazione",
         "forgot": "Dimenticato?",
         "resendConfirm": "Vuoi inviare un messaggio per reimpostare la tua passphrase?",
-        "resendSuccess": "Verifica la presenza di un messaggio per reimpostare la passphrase",
+        "resendSuccess": "Cerca un messaggio per reimpostare la passphrase",
         "resendClose": "Vicino",
         "noPassphrase": "Prima di poter accedere, è necessario impostare una passphrase facendo clic sul collegamento nel messaggio di attivazione.",
-        "notVerified": "Devi inviarti un messaggio di attivazione per accedere.",
-        "emailExists": "Hai provato a registrarti con questa email prima? In tal caso, controlla la tua casella di posta per attivare il tuo account. <a href='#resend' class='Q_button Users_activation_resend'>Fare clic per inviare nuovamente il messaggio<\/a>",
+        "notVerified": "Devi inviarti un messaggio di attivazione per poter accedere.",
+        "emailExists": "Hai già provato a registrarti con questa email? In tal caso, controlla la tua casella di posta per attivare il tuo account. <a href='#resend' class='Q_button Users_activation_resend'>Fare clic per inviare nuovamente il messaggio<\/a>",
         "mobileExists": "Hai già provato a registrarti con questo numero di cellulare? In tal caso, controlla il tuo SMS per attivare il tuo account. <a href='#resend' class='Q_button Users_activation_resend'>Fare clic per inviare nuovamente il messaggio<\/a>",
         "usingOther": "o puoi",
+        "connectPlatforms": "o connettiti usando:",
         "prompt": "Scegli un nome utente:",
-        "newUser": "oppure crea un nuovo account qui sotto",
+        "newUser": "o crea un nuovo account qui sotto",
         "placeholders": {
             "identifier": "il tuo numero di cellulare o e-mail",
             "mobile": "inserisci il tuo numero di cellulare",
             "email": "Inserisci il tuo indirizzo email",
             "username": "usa solo lettere e numeri"
         },
-        "confirmTerms": "Accetti i Termini di servizio?",
-        "facebookNoEmail": "Nel tuo account Facebook manca un indirizzo email confermato. Accedi semplicemente in modo nativo.",
-        "picTooltip": "È possibile modificare questa immagine in un secondo momento",
-        "wallet": {
-            "payload": "Accedi a {{host}} alle ore {{timestamp}}",
-            "alert": {
-                "title": "Reindirizzamento a Wallet",
-                "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
-            }
-        },
+        "confirmTerms": "Accettare i Termini di servizio?",
+        "facebookNoEmail": "Nel tuo account Facebook manca un indirizzo email confermato. Basta accedere in modo nativo.",
+        "picTooltip": "Puoi cambiare questa immagine in seguito",
         "web3": {
-            "payload": "Accedi a {{host}} alle ore {{timestamp}}",
+            "payload": "Accedi al {{host}} all&#39;ora {{timestamp}}",
             "alert": {
                 "title": "Reindirizzamento a Wallet",
                 "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
             }
-        },
-        "connectPlatforms": "o connettiti usando:"
+        }
     },
     "setIdentifier": {
         "title": "Aggiungi un modo per accedere",
         "sendMessage": "Invia messaggio di attivazione",
         "placeholders": {
-            "identifier": "inserisci il tuo numero di cellulare o email",
+            "identifier": "inserisci il tuo numero di cellulare o la tua email",
             "mobile": "Inserisci il tuo numero di telefono",
             "email": "Inserisci il tuo indirizzo email",
             "username": "nome utente"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Conto",
-        "areUsing": "Stai usando {{platform}} come",
-        "noLongerUsing": "Non sei più connesso a {{platform}} come",
+        "title": "Conto {{Platform}}",
+        "areUsing": "Stai usando {{platform}} as",
+        "noLongerUsing": "Non sei più connesso al {{platform}} as",
         "doAuth": "Accedi con questo account",
         "doSwitch": "Passa a questo account"
     },
     "roles": {
         "Owner": "Proprietario",
-        "Admin": "amministratore",
+        "Admin": "Amministratore",
         "Member": "Membro",
         "Guest": "Ospite",
         "Host": "Ospite"
     },
-    "avatar": {
-        "Someone": "Qualcuno"
-    },
     "web3": {
-        "WrongMethod": "Metodo di contratto errato {{methodName}}",
+        "WrongMethod": "Metodo contrattuale errato {{methodName}}",
         "ChangeWallet": "Cambia portafoglio"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mail",
-            "mobile": "Mobile",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Copiato! Ora puoi incollarlo ovunque."
-    },
-    "platforms": {
-        "wallet": "Portafoglio",
-        "broadcast": "Trasmissione"
     },
     "labels": {
         "addToPhonebook": "Aggiungi ai contatti del mio telefono",

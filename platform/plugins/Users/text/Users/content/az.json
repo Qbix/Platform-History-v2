@@ -1,16 +1,40 @@
 {
+    "avatar": {
+        "Someone": "Kimsə"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-poçt",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopyalandı! İndi onu istənilən yerə yapışdıra bilərsiniz."
+    },
+    "analytics": {
+        "Title": "Analitika",
+        "Daily": "Gündəlik",
+        "Weekly": "Həftəlik",
+        "Monthly": "Aylıq",
+        "Application": "Ərizə",
+        "Pages": "Səhifələr",
+        "Services": "Xidmətlər",
+        "Faq": "Faq",
+        "WeekDays": "Həftə içi"
+    },
     "actions": {
         "LogIn": "daxil ol",
         "LogOut": "çıxış"
     },
     "activate": {
-        "SetAsPrimary": "{{1}}-ni əsas {{2}} olaraq təyin edin",
-        "ChoosePassPhrase": "Daxil olmaq üçün <strong>keçid ifadəsi<\/strong> seçin.<br> Asanlıqla xatırlayacağınız bir neçə sözdən ibarət sadə ifadə.",
-        "ChoosePassPhraseSeeSuggestions": "Hesabınızı qorumaq üçün yaxşı <strong>keçid ifadəsi<\/strong> seçin. Bəzi ideyalar üçün təkliflərə baxın.",
+        "OneTimeCode": "Aldığınız kodu daxil edin:",
+        "SetAsPrimary": "{{1}} əsas {{2}} olaraq təyin edin",
+        "ChoosePassPhrase": "Daxil olmaq üçün <strong>keçid ifadəsini<\/strong> seçin.<br> Asanlıqla xatırlayacağınız bir neçə sözdən ibarət sadə bir ifadə.",
+        "ChoosePassPhraseSeeSuggestions": "Hesabınızı qorumaq üçün yaxşı <strong>keçid ifadəsi<\/strong> seçin. Bəzi fikirlər üçün təkliflərə baxın.",
         "LogOutAndTryAgain": "Çıxın və Yenidən cəhd edin",
         "IfYouFeel": "Bir şeyin səhv getdiyini hiss edirsinizsə, edə bilərsiniz",
         "SetIdentifierButtonTitle": "yenidən başlamaq",
-        "OneTimeCode": "Aldığınız kodu daxil edin:",
         "ActivateMyAccount": "Hesabımı Aktivləşdirin"
     },
     "session": {
@@ -19,12 +43,12 @@
     "authorize": {
         "GetStarted": "Başlamaq",
         "Authorize": "Səlahiyyət verin",
-        "TermsLabel": "Oxudum və razıyam<br> {{link}} üçün",
+        "TermsLabel": "Oxudum və razıyam<br> {{link}} a qədər",
         "TermsTitle": "Şərtlər",
         "mustAgree": "Əvvəlcə şərtlərlə razılaşmalısınız."
     },
     "register": {
-        "TermsLabel": "Mən qəbul edirəm {{link}}",
+        "TermsLabel": "{{link}} -u qəbul edirəm",
         "TermsTitle": "Şərtlər"
     },
     "notifications": {
@@ -40,43 +64,48 @@
         "CompletedActivation": "İstifadəçinin aktivləşdirilməsini tamamladınız.",
         "CompletedActivationLogIn": "İstifadəçinin aktivləşdirilməsini tamamladınız. İndi daxil olmağa çalışın."
     },
-    "usersContacts": {
-        "selectLabel": "Lütfən etiket seçin.",
-        "inviteUser": "İstifadəçiləri dəvət edin",
-        "selectRole": "Rol seçin",
-        "inviteRole": "Dəvət edin {{role}}"
-    },
-    "invalidLanguageSelected": "Yanlış dil seçildi",
     "contacts": {
         "dialog": {
             "title": "Əlaqə seçin",
-            "SearchByName": "Ada görə axtarın",
             "CreateAccount": "+ Yeni Əlaqə",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create tapılmadı",
+            "SearchByName": "Ada görə axtarın",
             "EmptyContacts": "Kontaktlar tapılmadı..."
         },
         "select": {
             "title": "{{displayName}} kontaktını seçin"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Lütfən etiket seçin.",
+        "inviteUser": "İstifadəçiləri dəvət edin",
+        "selectRole": "Rol seçin",
+        "inviteRole": "{{role}} dəvət et"
+    },
+    "invalidLanguageSelected": "Yanlış dil seçildi",
+    "platforms": {
+        "wallet": "Pul kisəsi",
+        "broadcast": "Yayım"
+    },
     "login": {
         "title": "Xoş gəldiniz",
         "directions": "Hesab yaradın və ya daxil olun.",
         "directionsNoRegister": "Hesabınız varsa daxil olun.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Keçid ifadənizi daxil edin:",
         "loginButton": "Başlamaq",
         "registerButton": "Başlamaq",
         "resendButton": "Aktivləşdirmə mesajı göndərin",
         "forgot": "Unutmusan?",
-        "resendConfirm": "Parolunuzu sıfırlamaq üçün mesaj göndərmək istəyirsiniz?",
+        "resendConfirm": "Parolu sıfırlamaq üçün mesaj göndərmək istəyirsiniz?",
         "resendSuccess": "Parolunuzu sıfırlamaq üçün mesajı yoxlayın",
         "resendClose": "Yaxın",
         "noPassphrase": "Daxil etməzdən əvvəl aktivləşdirmə mesajınızdakı keçidə klikləməklə keçid ifadəsi təyin etməlisiniz.",
         "notVerified": "Daxil olmaq üçün özünüzə aktivasiya mesajı göndərməlisiniz.",
         "emailExists": "Daha əvvəl bu e-poçtla qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün gələnlər qutusunu yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün klikləyin<\/a>",
-        "mobileExists": "Daha əvvəl bu mobil nömrə ilə qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün SMS-inizi yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün klikləyin<\/a>",
+        "mobileExists": "Daha əvvəl bu mobil nömrə ilə qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün SMS-i yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün klikləyin<\/a>",
         "usingOther": "ya da bilərsən",
+        "connectPlatforms": "və ya istifadə edərək qoşulun:",
         "prompt": "İstifadəçi adı seçin:",
         "newUser": "və ya aşağıda yeni hesab yaradın",
         "placeholders": {
@@ -88,21 +117,13 @@
         "confirmTerms": "Xidmət Şərtlərini qəbul edirsiniz?",
         "facebookNoEmail": "Facebook hesabınızda təsdiqlənmiş e-poçt ünvanı yoxdur. Sadəcə yerli şəkildə daxil olun.",
         "picTooltip": "Bu şəkli sonra dəyişə bilərsiniz",
-        "wallet": {
-            "payload": "{{timestamp}} vaxtında {{host}} daxil olun",
-            "alert": {
-                "title": "Pulqabıya yönləndirilir",
-                "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
-            }
-        },
         "web3": {
-            "payload": "{{timestamp}} vaxtında {{host}} daxil olun",
+            "payload": "{{timestamp}} da {{host}} a daxil olun",
             "alert": {
                 "title": "Pulqabıya yönləndirilir",
                 "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
             }
-        },
-        "connectPlatforms": "və ya istifadə edərək qoşulun:"
+        }
     },
     "setIdentifier": {
         "title": "Daxil olmaq üçün bir yol əlavə edin",
@@ -117,7 +138,7 @@
     "prompt": {
         "title": "{{Platform}} Hesab",
         "areUsing": "Siz {{platform}} kimi istifadə edirsiniz",
-        "noLongerUsing": "Siz artıq {{platform}} ilə bağlı deyilsiniz",
+        "noLongerUsing": "Siz artıq {{platform}} olaraq qoşulmusunuz",
         "doAuth": "Bu hesabla daxil olun",
         "doSwitch": "Bu hesaba keçin"
     },
@@ -128,37 +149,9 @@
         "Guest": "Qonaq",
         "Host": "Ev sahibi"
     },
-    "analytics": {
-        "Title": "Analitika",
-        "Daily": "Gündəlik",
-        "Weekly": "Həftəlik",
-        "Monthly": "Aylıq",
-        "Application": "Ərizə",
-        "Pages": "Səhifələr",
-        "Services": "Xidmətlər",
-        "Faq": "Faq",
-        "WeekDays": "Həftə içi"
-    },
-    "avatar": {
-        "Someone": "Kimsə"
-    },
     "web3": {
         "WrongMethod": "Yanlış müqavilə üsulu {{methodName}}",
         "ChangeWallet": "Pul kisəsini dəyişdirin"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-poçt",
-            "mobile": "Mobil",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopyalandı! İndi onu istənilən yerə yapışdıra bilərsiniz."
-    },
-    "platforms": {
-        "wallet": "Pul kisəsi",
-        "broadcast": "Yayım"
     },
     "labels": {
         "addToPhonebook": "Telefon Əlaqələrimə əlavə et",
@@ -171,7 +164,7 @@
     "external": {
         "defaults": {
             "title": "",
-            "bio": "Forum nişan botu. Https:\/\/engageusers.ai saytından özünüz edin",
+            "bio": "Forum nişan botu. Https:\/\/engageusers.ai saytından özünüz əldə edin",
             "website": "https:\/\/engageusers.ai"
         }
     }

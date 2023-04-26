@@ -13,13 +13,13 @@
                 "Title": "Filtrar por interés",
                 "FilterInterests": "Comience a escribir un interés..."
             },
-            "Interest": "Interesar",
+            "Interest": "Interés",
             "Location": "Ubicación"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Vamos",
+            "Go": "Ir",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Navegar",
             "WriteToStartConversation": "Escribe tus pensamientos para comenzar la conversación.",
@@ -44,7 +44,7 @@
         },
         "Websites\/slide": {
             "description": "Una diapositiva en una presentación, puede incluir HTML, audio, etc.",
-            "displayType": "Diapositiva"
+            "displayType": "Deslizar"
         },
         "Websites\/presentation": {
             "description": "Una presentación que consta de varias diapositivas.",
@@ -68,7 +68,7 @@
         },
         "Websites\/webpage": {
             "description": "Representa un sitio web cuyos metadatos fueron raspados",
-            "displayType": "página web"
+            "displayType": "Página web"
         }
     }
 }

@@ -4,10 +4,10 @@
             "placeholders": {
                 "link": "Link para promover",
                 "startDate": "Data de início",
-                "startTime": "Hora de início",
+                "startTime": "hora de início",
                 "endDate": "Data final",
                 "endTime": "Fim do tempo",
-                "budget": "Despesas"
+                "budget": "Orçamento"
             },
             "interests": {
                 "Title": "Filtrar por interesse",
@@ -19,23 +19,23 @@
     },
     "webpage": {
         "composer": {
-            "Go": "Vai",
+            "Go": "Ir",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Navegar",
             "WriteToStartConversation": "Escreva seus pensamentos para iniciar a conversa",
             "StartConversation": "Iniciar conversa",
             "GotoConversation": "Ir para a conversa",
-            "reset": "Redefinir",
+            "reset": "Reiniciar",
             "edit": "Editar",
             "link": "Link",
             "setUrl": "Definir URL",
-            "save": "Salve ",
-            "setClip": "Clipe Recortado",
+            "save": "Salvar",
+            "setClip": "clipe recortado",
             "invalidURL": "URL inválida"
         },
         "FileTooLarge": "Arquivo muito grande para armazenamento em cache. Tamanho máximo do arquivo {{size}}",
         "InvalidPDF": "O arquivo não é um PDF válido",
-        "StartTypingTitleOrKeywords": "Comece a digitar o título ou palavras-chave..."
+        "StartTypingTitleOrKeywords": "Comece a digitar o título ou as palavras-chave..."
     },
     "types": {
         "Websites\/article": {
@@ -43,7 +43,7 @@
             "displayType": "Artigo"
         },
         "Websites\/slide": {
-            "description": "Um slide em uma apresentação pode incluir HTML, áudio etc.",
+            "description": "Um slide em uma apresentação pode incluir HTML, áudio, etc.",
             "displayType": "Deslizar"
         },
         "Websites\/presentation": {
@@ -55,8 +55,8 @@
             "displayType": "Unidade de anúncio"
         },
         "Websites\/advert\/placement": {
-            "description": "Uma maneira de agrupar unidades de publicidade sob um nome",
-            "displayType": "Posicionamento do anúncio"
+            "description": "Uma forma de agrupar unidades de publicidade sob um nome",
+            "displayType": "Posicionamento de anúncio"
         },
         "Websites\/advert\/creative": {
             "description": "Conteúdo para um anúncio",
@@ -64,7 +64,7 @@
         },
         "Websites\/advert\/campaign": {
             "description": "Uma campanha publicitária",
-            "displayType": "Campanha publicitária"
+            "displayType": "campanha publicitária"
         },
         "Websites\/webpage": {
             "description": "Representa um site cujos metadados foram copiados",

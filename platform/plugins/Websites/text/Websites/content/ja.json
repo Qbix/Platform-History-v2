@@ -10,8 +10,8 @@
                 "budget": "バジェット"
             },
             "interests": {
-                "Title": "関心でフィルタリング",
-                "FilterInterests": "興味のある入力を開始します..."
+                "Title": "興味で絞り込む",
+                "FilterInterests": "興味のあることを入力してください..."
             },
             "Interest": "興味",
             "Location": "位置"
@@ -19,27 +19,27 @@
     },
     "webpage": {
         "composer": {
-            "Go": "行け",
-            "PasteLinkHere": "https：\/\/..。",
+            "Go": "行く",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "ブラウズ",
             "WriteToStartConversation": "会話を始めるためにあなたの考えを書いてください",
-            "StartConversation": "会話を開始する",
-            "GotoConversation": "会話に行く",
+            "StartConversation": "会話を開始",
+            "GotoConversation": "会話に移動",
             "reset": "リセット",
             "edit": "編集",
             "link": "リンク",
-            "setUrl": "URLを設定する",
-            "save": "保存する",
+            "setUrl": "URL を設定",
+            "save": "保存",
             "setClip": "クリップを切り取る",
             "invalidURL": "無効なURL"
         },
         "FileTooLarge": "ファイルが大きすぎてキャッシュできません。最大ファイルサイズ{{size}}",
-        "InvalidPDF": "ファイルは有効なPDFではありません",
-        "StartTypingTitleOrKeywords": "タイトルまたはキーワードの入力を開始します..."
+        "InvalidPDF": "ファイルは有効な PDF ではありません",
+        "StartTypingTitleOrKeywords": "タイトルまたはキーワードの入力を開始..."
     },
     "types": {
         "Websites\/article": {
-            "description": "さまざまなユーザーが表示および編集できるHTMLドキュメント",
+            "description": "さまざまなユーザーが表示および編集できる HTML ドキュメント",
             "displayType": "記事"
         },
         "Websites\/slide": {
@@ -47,27 +47,27 @@
             "displayType": "滑り台"
         },
         "Websites\/presentation": {
-            "description": "さまざまなスライドで構成されるプレゼンテーション",
+            "description": "さまざまなスライドで構成されたプレゼンテーション",
             "displayType": "プレゼンテーション"
         },
         "Websites\/advert\/unit": {
-            "description": "ウェブサイト上の広告ユニット",
+            "description": "Web サイトの広告ユニット",
             "displayType": "広告ユニット"
         },
         "Websites\/advert\/placement": {
-            "description": "名前の下で広告ユニットをグループ化する方法",
-            "displayType": "広告の配置"
+            "description": "名前の下に広告ユニットをグループ化する方法",
+            "displayType": "広告掲載"
         },
         "Websites\/advert\/creative": {
             "description": "広告のコンテンツ",
-            "displayType": "クリエイティブな広告"
+            "displayType": "広告クリエイティブ"
         },
         "Websites\/advert\/campaign": {
             "description": "広告キャンペーン",
             "displayType": "広告キャンペーン"
         },
         "Websites\/webpage": {
-            "description": "メタデータがスクレイプされたWebサイトを表します",
+            "description": "メタデータがスクレイピングされた Web サイトを表します",
             "displayType": "ウェブページ"
         }
     }

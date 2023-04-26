@@ -22,7 +22,7 @@
             "Go": "Shkoni",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Shfletoni",
-            "WriteToStartConversation": "Shkruani mendimet tuaja për të filluar bisedën",
+            "WriteToStartConversation": "Shkruani mendimet tuaja për të nisur bisedën",
             "StartConversation": "Filloni Bisedën",
             "GotoConversation": "Shkoni te Biseda",
             "reset": "Rivendos",
@@ -35,7 +35,7 @@
         },
         "FileTooLarge": "Skedari shumë i madh për memorie. Madhësia maksimale e skedarit {{size}}",
         "InvalidPDF": "Skedari nuk është një PDF i vlefshëm",
-        "StartTypingTitleOrKeywords": "Filloni të shkruani titullin ose fjalë kyçe..."
+        "StartTypingTitleOrKeywords": "Filloni të shkruani titullin ose fjalët kyçe..."
     },
     "types": {
         "Websites\/article": {
@@ -60,7 +60,7 @@
         },
         "Websites\/advert\/creative": {
             "description": "Përmbajtja për një reklamë",
-            "displayType": "Reklamim kreativ"
+            "displayType": "Reklama krijuese"
         },
         "Websites\/advert\/campaign": {
             "description": "Një fushatë reklamuese",

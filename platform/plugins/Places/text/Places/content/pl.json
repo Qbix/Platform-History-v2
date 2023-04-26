@@ -1,14 +1,14 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lat)",
+    "LatLng": "( {{1}} łac., {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "w ciągu {{1}}"
     },
     "units": {
         "meter": "metr",
-        "meters": "metrów",
+        "meters": "metry",
         "kilometer": "kilometr",
-        "kilometers": "kilometrów",
+        "kilometers": "kilometry",
         "km": "km",
         "mile": "Mila",
         "miles": "mile",
@@ -18,11 +18,11 @@
         "inches": "cale"
     },
     "location": {
-        "interested": "Interesują mnie wydarzenia mające miejsce w ciągu {{select}} od",
+        "interested": "Interesują mnie rzeczy dziejące się w promieniu {{select}}",
         "update": "Zaktualizuj moją lokalizację",
         "set": "Ustaw moją lokalizację",
-        "prompt": "{{ClickOrTap}} tutaj, aby<br> Ustaw swój<br> Lokalizacja",
-        "myCurrentLocation": "Moja aktualna lokalizacja",
+        "prompt": "{{ClickOrTap}} tutaj do<br> Ustaw swój<br> Lokalizacja",
+        "myCurrentLocation": "Moja obecna lokalizacja",
         "enterAddress": "Podaj adres",
         "enterPostcode": "Wprowadź swój kod pocztowy \/ kod pocztowy",
         "create": {
@@ -32,21 +32,21 @@
         },
         "confirm": {
             "title": "Zapisać tę lokalizację?",
-            "message": "Czy planujesz ponownie korzystać z tej lokalizacji w przyszłości?",
-            "ok": "tak",
-            "cancel": "Nie"
+            "message": "Czy planujesz ponownie skorzystać z tej lokalizacji w przyszłości?",
+            "ok": "Tak",
+            "cancel": "NIE"
         },
         "add": {
             "title": "Nazwij tę lokalizację",
             "placeholder": "Dom, praca itp.",
-            "ok": "Zapisać"
+            "ok": "Ratować"
         },
         "dialog": {
             "title": "Wybierz lokacje"
         }
     },
     "areas": {
-        "filterPlaceholder": "Jakiś obszar w tej lokalizacji?",
+        "filterPlaceholder": "Jakiś obszar wewnątrz tej lokalizacji?",
         "newArea": "Nowa okolica",
         "promptTitle": "Wpisz nazwę obszaru:",
         "absent": "Proszę ustawić obszar",
@@ -57,7 +57,7 @@
     },
     "types": {
         "Places\/locations": {
-            "description": "zbiór lokalizacji",
+            "description": "zbiór lokacji",
             "displayType": "Lokalizacje"
         },
         "Places\/location": {
@@ -65,11 +65,11 @@
             "displayType": "Lokalizacja"
         },
         "Places\/area": {
-            "description": "Reprezentuje obszar w lokalizacji, taki jak pokój lub apartament",
-            "displayType": "Powierzchnia"
+            "description": "Reprezentuje obszar w lokalizacji, na przykład pokój lub apartament",
+            "displayType": "Obszar"
         },
         "Places\/floor": {
-            "description": "Reprezentuje podłogę w budynku lub statku",
+            "description": "Reprezentuje piętro w budynku lub statku",
             "displayType": "Podłoga"
         },
         "Places\/column": {
@@ -77,12 +77,12 @@
             "displayType": "Kolumna"
         },
         "Places\/nearby": {
-            "description": "Kategoria dla rzeczy w pewnej odległości od geohash",
+            "description": "Kategoria dla rzeczy znajdujących się w określonej odległości od geohash",
             "displayType": "Miejsca w pobliżu"
         },
         "Places\/interest": {
-            "description": "Kategoria dla rzeczy w pewnej odległości od geohash, pasująca do zainteresowań",
-            "displayType": "Zainteresowania miejscami"
+            "description": "Kategoria dla rzeczy znajdujących się w określonej odległości od geohash, pasująca do zainteresowania",
+            "displayType": "Zainteresowanie miejscami"
         }
     }
 }

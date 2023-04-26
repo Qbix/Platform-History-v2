@@ -1,122 +1,95 @@
 {
+    "errors": {
+        "HiddenFromYou": "此内容对您隐藏。",
+        "InplaceTypeMustBe": "inplaceType 必须是 &#39;textarea&#39; 或 &#39;text&#39;"
+    },
     "preview": {
         "NewItemTitle": "新物品"
+    },
+    "avatar": {
+        "firstName": "名",
+        "lastName": "姓",
+        "username": "用户名"
     },
     "labels": {
         "Streams\/invited": "我邀请的人",
         "Streams\/invitedMe": "谁邀请我",
-        "AreYouAgree": "你同意吗？",
+        "DoYouAgree": "你同意？",
         "Yes": "是的",
-        "No": "不",
-        "DoYouAgree": "你同意？"
+        "No": "不"
+    },
+    "login": {
+        "prompt": "让朋友认出你：",
+        "newUser": "或在下面创建一个新帐户",
+        "picTooltip": "您可以稍后更改此图片",
+        "placeholder": {
+            "fullName": "输入您的全名"
+        }
     },
     "interests": {
-        "Filter": "你的兴趣是什么？",
+        "Filter": "搜索兴趣",
         "CanGrant": "如果你仍然找不到你要找的东西，你可以在下面添加一个新的兴趣：",
-        "TrySynonyms": "没看到？尝试一些同义词。",
+        "TrySynonyms": "没看到吗？尝试一些同义词。",
         "AddUnderCategory": "在类别下添加...",
         "Other": "其他",
         "Unlisted": "未上市"
     },
     "chat": {
-        "flaggedForAdminReview": "邮件已标记为供管理员审核。再次点击以取消标记。",
+        "flaggedForAdminReview": "邮件已被标记以供管理员审核。再次点击取消标记。",
         "noOneSaid": "没有人说什么",
         "closeChatButton": "关闭聊天",
         "closeChatConfirmTitle": "关闭此聊天？",
         "closeChatConfirm": "您确定要关闭此聊天吗？",
+        "Subscribed": "已启用通知",
+        "Unsubscribed": "通知静音",
         "closeChatConfirmYes": "是的",
         "closeChatConfirmNo": "不",
         "earlierComments": "较早的评论",
-        "Subscribed": "启用通知",
-        "Unsubscribed": "通知已静音",
-        "notAllowedToJoinCall": "您无权加入此对话。",
         "startedConversation": "开始对话",
         "RealTimeCall": "实时通话",
+        "JoinWebRTC": "电话会议",
         "SearchByName": "按名称搜索",
         "Notifications": {
-            "Visit": "{{displayName}} 正在访问聊天",
-            "Join": "{{displayName}} 加入了聊天",
-            "Leave": "{{displayName}} 退出聊天",
-            "RelatedTo": "{{displayName}} 开始了 {{stream.displayType}}"
+            "Visit": "{{displayName}}正在访问聊天",
+            "Join": "{{displayName}}加入聊天",
+            "Leave": "{{displayName}}离开了聊天室",
+            "RelatedTo": "{{displayName}}开始{{stream.displayType}}"
         },
-        "JoinWebRTC": "电话会议"
+        "placeholders": {
+            "Public": "添加评论",
+            "Private": "写私信"
+        }
     },
     "notifications": {
-        "*": "向 {{& stream.fields.title}} 发送消息 {{& message.fields.type}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} 说：{{& message.content}}",
-        "Streams\/changed": "{{stream.fields.title}} 的变化",
-        "Streams\/invite": "您被邀请到 {{& stream.fields.title}}",
-        "Streams\/announcement": "{{& stream.fields.title}} 中的公告",
-        "Streams\/access": "{{&call 'avatar.displayName'}} 在 {{& stream.fields.title}} 中更改了访问权限",
-        "Streams\/chat\/edit": "在 {{& stream.fields.title}} 中编辑的聊天消息",
-        "Streams\/chat\/remove": "在 {{& stream.fields.title}} 中删除了聊天消息",
-        "Streams\/closed": "{{stream.fields.title}} 已关闭",
-        "Streams\/task\/progress": "{{stream.fields.title}}取得的进展",
-        "Streams\/task\/complete": "任务完成：{{stream.fields.title}}",
-        "Streams\/task\/error": "期间出错：{{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}：传入消息",
         "ManageEmailSubscriptions": "管理您的电子邮件订阅",
-        "IfUnsubscribe": "如果您想退订",
-        "Streams\/relatedTo\/Streams\/call": "新通话于 {{toTitle}} 开始",
-        "Streams\/relatedTo\/*": "{{toTitle}} 中的新 {{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "作为 {{relationDisplayType}} 添加到 {{toTitle}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} 在评论中提到了您",
-        "Streams\/call": "{{displayName}} 开始实时通话",
+        "IfUnsubscribe": "如果你想退订",
+        "*": "留言{{& message.fields.type}}至{{& stream.fields.title}}",
         "Streams\/joined": "{{&call 'avatar.displayName'}}加入",
-        "Streams\/left": "{{&call 'avatar.displayName'}} 离开"
+        "Streams\/left": "还剩{{&call 'avatar.displayName'}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}说： {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}}的变化",
+        "Streams\/invite": "你被邀请到{{& stream.fields.title}}",
+        "Streams\/announcement": "{{& stream.fields.title}}公告",
+        "Streams\/access": "{{&call 'avatar.displayName'}}在{{& stream.fields.title}}中更改了访问权限",
+        "Streams\/chat\/edit": "{{& stream.fields.title}}编辑的聊天信息",
+        "Streams\/chat\/remove": "聊天消息在{{& stream.fields.title}}中删除",
+        "Streams\/closed": "{{stream.fields.title}}已关闭",
+        "Streams\/task\/progress": "{{stream.fields.title}}取得进展",
+        "Streams\/task\/complete": "任务完成： {{stream.fields.title}}",
+        "Streams\/task\/error": "期间出错： {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}} ：传入消息",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}}开始的新呼叫",
+        "Streams\/relatedTo\/*": "新品{{toTitle}}中的{{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "添加到{{toTitle}}为{{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}}在评论中提到了你",
+        "Streams\/call": "{{displayName}}开始实时通话"
     },
     "invite": {
-        "messageContent": "{{displayName}}邀请您参加{{inviteUrl}}",
-        "dialog": {
-            "chooseFromContacts": "从您的通讯录中选择",
-            "selectFromContacts": "从联系人中选择",
-            "photo": "拍张照片",
-            "photoInstruction": "如果扫描您的二维码的人在您面前，请拍下他们的照片",
-            "to": "收件人：{{Stream Title}}",
-            "go": "去",
-            "title": "邀请",
-            "placeholder": "手机号码或电子邮件地址",
-            "orInvite": "或使用以下方式邀请他人：",
-            "QR": "{{ClickOrTap}} 生成二维码",
-            "QRtitle": "扫描此二维码",
-            "byEmail": "电子邮件",
-            "byText": "文本",
-            "byFacebook": "Facebook",
-            "byTwitter": "推特",
-            "QRscanned": "他们扫描了它！",
-            "chooseAgainFromContacts": "从联系人中再次选择",
-            "inviteSelectedContacts": "邀请选定的联系人",
-            "scannedQR": "{{ClickOrTap}} 如果代码已被扫描",
-            "copyLink": "{{ClickOrTap}} 复制邀请链接",
-            "userChooserPlaceholder": "按名称搜索",
-            "shareOrCopyLink": "{{ClickOrTap}} 分享或复制邀请链接",
-            "title2": "邀请人",
-            "chooseMethod": "选择一种方法：",
-            "selectContacts": "选择联系人",
-            "scanQRCode": "扫描二维码",
-            "shareLink": "分享链接",
-            "chooseFromRegistered": "从注册用户中选择",
-            "inviteViaEmailOrSms": "通过电子邮件或短信邀请"
-        },
-        "email": {
-            "subject": "嘿，看看这个",
-            "PleaseVisitLink": "请访问以下链接：",
-            "InvitingYou": "我邀请您{{title}}",
-            "HasInvitedYou": "{{displayName}}邀请您参加{{title}}",
-            "HasMentionedYou": "{{displayName}}在“{{title}}”中提到了您",
-            "YOUAREINVITED": "你被邀请了！",
-            "AcceptInvite": "接受邀请"
-        },
-        "sms": {
-            "content": "您已受邀加入 {{title}}。请点按 {{url}}"
-        },
-        "notice": {
-            "text": "你被邀请了。 {{ClickOrTap}} 在此处接受并加入。"
-        },
-        "youCanNowPaste": "您现在可以将此链接粘贴到某处以邀请他人",
         "command": "邀请",
         "Invite": "邀请",
         "Share": "分享",
+        "messageContent": "{{displayName}}邀请你到{{inviteUrl}}",
+        "youCanNowPaste": "您现在可以将此链接粘贴到某处以邀请其他人",
         "roles": {
             "title": "向受邀用户授予角色？",
             "NotAuthorizedToGrantRole": {
@@ -131,192 +104,257 @@
         "labels": {
             "title": "你是什么关系？"
         },
+        "dialog": {
+            "chooseFromContacts": "从您的联系人中选择",
+            "chooseAgainFromContacts": "从联系人中重新选择",
+            "inviteSelectedContacts": "邀请选定的联系人",
+            "selectFromContacts": "从联系人中选择",
+            "userChooserPlaceholder": "按名称搜索",
+            "photo": "拍个照",
+            "photoOf": "拍照{{name}}",
+            "photoInstruction": "如果扫描您二维码的人在您面前，请拍下他们的照片",
+            "to": "至： {{Stream Title}}",
+            "go": "去",
+            "title": "邀请",
+            "placeholder": "手机号码或电子邮件地址",
+            "orInvite": "或使用以下方式邀请他人：",
+            "copyLink": "{{ClickOrTap}}复制邀请链接",
+            "shareOrCopyLink": "{{ClickOrTap}}分享或复制邀请链接",
+            "QR": "{{ClickOrTap}}生成二维码",
+            "QRtitle": "扫描此二维码",
+            "QRscanned": "他们扫描了它！",
+            "scannedQR": "{{ClickOrTap}}如果代码被扫描",
+            "byEmail": "电子邮件",
+            "byText": "文本",
+            "byFacebook": "Facebook",
+            "byTwitter": "推特",
+            "title2": "邀请人",
+            "chooseMethod": "选择一种方法：",
+            "selectContacts": "选择联系人",
+            "scanQRCode": "扫描二维码",
+            "shareLink": "分享链接",
+            "chooseFromRegistered": "从注册用户中选择",
+            "inviteViaEmailOrSms": "通过电子邮件或短信邀请"
+        },
         "complete": {
-            "HasInvitedYou": "已邀请您：",
             "WelcomeToCommunity": "欢迎来到{{communityName}}",
+            "HasInvitedYou": "已邀请您：",
             "HasInvitedYouToTheirProfile": "已邀请您连接。",
             "prompt": "让朋友认出你：",
             "accept": "接受邀请"
+        },
+        "email": {
+            "subject": "嘿，看看这个",
+            "PleaseVisitLink": "请访问以下链接：",
+            "InvitingYou": "我邀请你{{title}}",
+            "HasInvitedYou": "{{displayName}}邀请你到{{title}}",
+            "HasMentionedYou": "“ {{title}} ”里有{{displayName}}提到过你",
+            "YOUAREINVITED": "你被邀请了！",
+            "AcceptInvite": "接受邀请"
+        },
+        "sms": {
+            "content": "您已被邀请加入{{title}} 。请点击{{url}}"
+        },
+        "notice": {
+            "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "向{{stream.fields.title}}发送了<em>{{message.fields.type}}<\/em>消息"
+        },
+        "text": {
+            "commentedOn": "评论了",
+            "startedCallIn": "开始通话",
+            "in": "在",
+            "body": "在{{& url}} : {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "已发布到",
+                "byAvatar": "通过{{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "有了新的{{instructions.fromDisplayType}}",
+                "byAvatar": "添加了{{avatar.displayName}}"
+            }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "邀请是从我们的号码发送的，您的朋友还不认识。跟进一个简短的文本，让他们知道邀请来自您，要求他们点击链接。",
-            "confirm": "邀请是从我们的号码发送的，您的朋友还不认识。您想跟进一个简短的文本，让他们知道邀请来自您，并要求他们单击链接。",
-            "check": "嘿，我刚刚向您发送了使用 {{app}} 应用程序的邀请。请检查您的短信并点击链接！",
-            "CheckYourMobile": "请查看短信并按照说明进行操作！"
+            "alert": "邀请是从我们的号码发送的，您的朋友还不知道。跟进快速文本，让他们知道邀请来自您，要求他们单击链接。",
+            "confirm": "邀请是从我们的号码发送的，您的朋友还不知道。你想跟进一个快速的文本，让他们知道邀请来自你，要求他们点击链接。",
+            "check": "嘿，我刚刚向你发送了{{app}}应用程序的邀请。请查看您的短信并点击链接！",
+            "CheckYourMobile": "请查看短信并按照说明操作！"
         },
         "email": {
-            "alert": "邀请是从我们的域发送的，您的朋友还不认识。跟进一个简短的文本，让他们知道邀请来自您，要求他们点击链接。",
-            "confirm": "邀请是从我们的域发送的，您的朋友还不认识。您想跟进一个简短的文本，让他们知道邀请来自您，并要求他们单击链接。",
+            "alert": "邀请是从我们的域发送的，您的朋友还不认识它。跟进快速文本，让他们知道邀请来自您，要求他们单击链接。",
+            "confirm": "邀请是从我们的域发送的，您的朋友还不认识它。你想跟进一个快速的文本，让他们知道邀请来自你，要求他们点击链接。",
             "subject": "你收到邀请了吗？",
-            "body": "嘿，我刚刚向您发送了使用 {{app}} 应用程序的邀请。请检查您的电子邮件并单击其中的链接！",
+            "body": "嘿，我刚刚向你发送了{{app}}应用程序的邀请。请检查您的电子邮件并单击其中的链接！",
             "CheckYourEmail": "请检查您的电子邮件并按照说明进行操作！"
         }
     },
+    "identifier": {
+        "privacySettings": "隐私设置"
+    },
     "participating": {
         "Title": "标题",
-        "Subscribed": "订阅",
-        "Participants": "参与者",
+        "Subscribed": "已订阅",
+        "Participants": "参加者",
         "AreYouSureRemoveIdentifier": "您确定要删除此标识符吗？",
         "AreYouSureUnsubscribeIdentifier": "您确定取消订阅此标识符吗？它将关闭对此标识符的通知。",
-        "AreYouSureUnsubscribeDevice": "您确定取消订阅此设备吗？它将关闭此设备的通知。",
+        "AreYouSureUnsubscribeDevice": "您确定取消订阅此设备吗？它将关闭对此设备的通知。",
+        "AreYouSureRemoveParticipant": "您确定要删除此参与者吗？",
+        "RemoveParticipant": "删除参与者",
         "Identifiers": "身份标识",
         "Devices": "设备",
-        "Streams": "流",
-        "AreYouSureRemoveParticipant": "确定要移除此参与者吗？",
-        "RemoveParticipant": "移除参与者"
+        "Streams": "溪流"
     },
     "webrtc": {
+        "notAllowedToJoinCall": "您无权加入此信息流。",
+        "streamTitle": "{{1}}开始电话会议",
         "allow": {
-            "microphoneTitle": "启用麦克风",
-            "cameraTitle": "启用相机",
-            "cameraAndMicrophoneTitle": "启用相机和麦克风",
-            "dialogTitle": "连接",
+            "dialogTitle": "连接中",
             "microphoneBtn": "启用麦克风",
             "cameraBtn": "启用相机",
             "cameraAndMicrophoneBtn": "启用摄像头和麦克风"
         },
+        "preparing": {
+            "dialogTitle": "加入前打开\/关闭摄像头或麦克风",
+            "micIsOff": "麦克风已关闭",
+            "micIsOn": "麦克风开启",
+            "cameraIsOff": "相机已关闭",
+            "cameraIsOn": "相机开启",
+            "screenSharingIsOn": "屏幕共享已开启",
+            "screenSharingIsOff": "共享屏幕",
+            "joinNow": "加入通话"
+        },
         "webInstructionsDialog": {
             "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} 的权限被拒绝。要使用它，请按照以下步骤操作：",
-            "point1": "转到“设置”-&gt;“高级”-&gt;“隐私和安全”-&gt;“站点设置”-&gt;“相机”或“站点设置”-&gt;“麦克风”",
-            "point2": "从“阻止”列表中删除 {{hostname}}"
+            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
+            "point1": "转到“设置”-&gt;“高级”-&gt;“隐私和安全”-&gt;“网站设置”-&gt;“相机”或“网站设置”-&gt;“麦克风”",
+            "point2": "从“阻止”列表中删除{{hostname}}"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} 的权限被拒绝。请重新加载此页面并确认访问 {{kind}} 以加入会议。"
+            "permissionDenied": "{{kind}}的权限被拒绝。请重新加载此页面并确认访问{{kind}}以加入会议。"
         },
         "androidInstructionsDialog": {
             "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} 的权限被拒绝。要使用它，请按照以下步骤操作：",
+            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
             "point1": "转到您的 Android 设置",
-            "point2": "打开“应用程序和通知”",
-            "point3": "找到“{{communityName}}”并打开它",
+            "point2": "打开“应用和通知”",
+            "point3": "找到“ {{communityName}} ”并打开",
             "point4": "点击权限",
-            "point5": "启用 {{kind}}"
+            "point5": "启用{{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} 的权限被拒绝。要使用它，请按照以下步骤操作：",
+            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
             "point1": "转到您的 iOS 设置",
             "point2": "打开“隐私”",
-            "point3": "找到 {{kind}} 并打开它",
-            "point4": "找到“{{communityName}}”并启用"
+            "point3": "找到{{kind}}并打开它",
+            "point4": "找到“ {{communityName}} ”并启用"
+        },
+        "fbLive": {
+            "dialogTitle": "脸书直播开始"
         },
         "notices": {
             "youJoinedRoom": "你加入了房间",
-            "joining": "加入：{{userName}}",
-            "sbLeftRoom": "{{userName}} 离开了房间",
+            "joining": "加入人数： {{userName}}",
+            "sbLeftRoom": "{{userName}}离开房间",
+            "switchingRoom": "切换室...",
+            "forceDisconnecting": "您将在 5 秒内断开连接",
+            "forceDisconnectingImmediately": "你被主机断开了",
             "youLeftRoom": "你离开了房间",
             "codeCopied": "你离开了房间",
-            "sbBeganFbLive": "{{userName}} 开始在 Facebook 中广播此通话",
-            "sbStoppedFbLive": "{{userName}} 已停止在 Facebook 中广播此通话",
-            "youBeganFbLive": "你开始在 Facebook 广播这个电话",
-            "youStoppedFbLive": "您已停止在 Facebook 中广播此通话",
+            "sbBeganFbLive": "{{userName}}开始在 Facebook 上广播此电话",
+            "sbStoppedFbLive": "{{userName}}停止在 Facebook 上广播此电话",
+            "youBeganFbLive": "您开始在 Facebook 广播此通话",
+            "youStoppedFbLive": "您已停止在 Facebook 广播此通话",
+            "youStartedLive": "您开始将此调用广播到自定义 RTMP",
+            "youStoppedLive": "您已停止将此调用广播到自定义 RTMP",
+            "sbStartedLiveStreaming": "{{userName}}开始直播",
+            "sbStoppedLiveStreaming": "{{userName}}直播结束",
+            "liveStopped": "向端点发送视频时出错",
+            "youBeganVideoRecording": "您开始录制此会议",
+            "youStoppedVideoRecording": "您已停止录制此会议",
             "linkCopiedToCb": "链接已复制到剪贴板",
             "codeCopiedToCb": "代码复制到剪贴板",
             "userHasNoVideo": "参与者没有视频",
             "openInBrowserAlert": "在 Safari 浏览器中打开链接以加入会议。",
-            "youBeganVideoRecording": "你开始录制这个会议",
-            "youStoppedVideoRecording": "您已停止录制此会议",
-            "switchingRoom": "换房...",
-            "forceDisconnecting": "您将在 5 秒内断开连接",
-            "youStartedLive": "您开始将此调用广播到自定义 RTMP",
-            "youStoppedLive": "您已停止将此调用广播到自定义 RTMP",
-            "sbStartedLiveStreaming": "{{userName}} 开始直播",
-            "sbStoppedLiveStreaming": "{{userName}} 直播结束",
-            "liveStopped": "向端点发送视频时出错",
-            "forceDisconnectingImmediately": "您已被主机断开连接",
-            "allowedVideoLimit": "此房间仅允许 {{limit}} 个视频",
-            "allowedAudioLimit": "此房间仅允许使用 {{limit}} 个麦克风"
+            "allowedVideoLimit": "此房间仅允许播放{{limit}}视频",
+            "allowedAudioLimit": "这个房间只允许{{limit}}麦克风"
         },
         "settingsPopup": {
+            "dialogTitle": "视频设置",
             "webCamera": "网络摄像头",
             "screenSharing": "屏幕共享",
             "shareAnotherScreen": "共享另一个屏幕",
             "turnOffCameras": "关闭相机",
+            "turnOffVideo": "关闭相机\/屏幕共享",
+            "turnOffAudioInput": "静音麦克风",
+            "turnOffScreenSharing": "关闭屏幕共享",
+            "cameraIsTurnedOff": "相机已关闭",
+            "micIsTurnedOff": "麦克风已关闭",
             "startFBLive": "开始 Facebook 直播",
             "stopFBLive": "停止 Facebook 直播",
+            "startRecording": "开始录音",
+            "stopRecording": "停止录音",
+            "start": "开始",
+            "stop": "停止",
+            "recordingInProgress": "正在录制中...",
             "fbLiveTitle": "直播标题",
             "fbLiveDescription": "描述您的直播。它是关于什么的？",
             "fbOnlyMeLiveAccess": "只有我",
             "fbFriendsAccess": "朋友们",
-            "fbPublicAccess": "上市",
-            "fbStartLive": "上线",
-            "fbStopLive": "结束直播",
-            "fbEmbedCode": "嵌入",
-            "copy": "复制",
-            "turnOffVideo": "关闭相机\/屏幕共享",
-            "turnOffScreenSharing": "关闭屏幕共享",
-            "cameraIsTurnedOff": "相机已关闭",
-            "startRecording": "开始录制",
-            "stopRecording": "停止录制",
-            "recordingInProgress": "正在录制中...",
+            "fbPublicAccess": "民众",
             "publishOnTimeline": "在时间轴上发布",
             "publishToGroup": "发布到群组",
-            "turnOffAudioInput": "静音麦克风",
-            "micIsTurnedOff": "麦克风已关闭",
-            "start": "开始",
-            "stop": "停止",
+            "fbStartLive": "上线",
+            "fbStopLive": "结束直播",
             "streamingSettings": "设置",
+            "manageStream": "管理直播",
+            "fbEmbedCode": "嵌入",
+            "copy": "复制",
             "streamToRTMP": "流式传输到自定义 RTMP",
-            "dialogTitle": "视频设置",
             "startBroadcasting": "开始广播",
-            "broadcastingInProgress": "广播正在进行中",
-            "manageStream": "管理直播"
+            "broadcastingInProgress": "广播进行中"
+        },
+        "audioSettings": {
+            "dialogTitle": "音频设置",
+            "speakers": "音箱",
+            "microphone": "麦克风"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "管理广播"
         },
         "participantsPopup": {
+            "dialogTitle": "参与者设置",
             "disconnect": "断开",
             "floatingScreens": "浮动屏幕",
             "tiledScreens": "平铺屏幕",
-            "loudestExceptMe": "除了我之外最响亮的",
-            "maximizeLoudest": "最大声",
+            "loudestExceptMe": "除了我最响",
+            "maximizeLoudest": "最大化最响",
             "staticMaximized": "静态最大化",
+            "fullScreen": "全屏",
             "manual": "手动的",
             "turnOffCamera": "隐藏视频",
             "turnOffAudio": "静音",
             "turnOffScreenSharing": "隐藏屏幕共享",
             "turnOnCamera": "显示视频",
             "turnOnAudio": "取消静音",
-            "turnOnScreenSharing": "显示屏幕共享",
-            "fullScreen": "全屏",
-            "dialogTitle": "参与者设置"
+            "turnOnScreenSharing": "显示屏幕共享"
         },
-        "notAllowedToJoinCall": "您无权加入此信息流。",
-        "streamTitle": "{{1}} 开始电话会议",
+        "streamingSettings": {
+            "title": "现场直播"
+        },
         "preview": {
-            "preamble": "会议：",
             "Meeting": "电话会议",
             "MeetingEnded": "电话会议结束"
         },
-        "preparing": {
-            "micIsOff": "麦克风已关闭",
-            "micIsOn": "麦克风已开启",
-            "cameraIsOff": "相机已关闭",
-            "cameraIsOn": "相机已开启",
-            "screenSharingIsOn": "屏幕共享已开启",
-            "screenSharingIsOff": "共享屏幕",
-            "joinNow": "加入通话",
-            "dialogTitle": "加入前打开\/关闭摄像头或麦克风"
-        },
-        "audioSettings": {
-            "dialogTitle": "音频设置",
-            "speakers": "扬声器",
-            "microphone": "麦克风"
-        },
-        "streamingSettings": {
-            "title": "流媒体设置"
-        },
         "requestSpeakDialog": {
-            "msg": "目前有 {{count}} 人在会议中发言。您想在他们 {{seconds}} 秒说完话后替换其中一个吗？",
-            "dialogTitle": "请求发言"
-        },
-        "fbLive": {
-            "dialogTitle": "脸书直播开始"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "管理广播"
+            "dialogTitle": "请求发言",
+            "msg": "目前有{{count}}人在会上发言。在让他们说完{{seconds}}秒后，你想更换其中一个吗？"
         }
     },
     "types": {
@@ -329,12 +367,24 @@
             "description": "用于管理对资源的访问和发布有关更新的消息的流"
         },
         "Streams\/task": {
-            "displayType": "任务",
-            "description": "用于接收有关特定任务进度的更新"
+            "description": "用于接收有关特定任务进度的更新",
+            "displayType": "任务"
+        },
+        "Streams\/tasks": {
+            "description": "任务类别",
+            "displayType": "任务"
+        },
+        "Streams\/experience": {
+            "description": "社区成员的共同经历",
+            "displayType": "社区成员的共同经历"
+        },
+        "Streams\/greeting": {
+            "description": "用户可以用来自我介绍的问候语",
+            "displayType": "问候语"
         },
         "Streams\/number": {
             "displayType": "数字",
-            "description": "数学数"
+            "description": "数学数字"
         },
         "Streams\/date": {
             "displayType": "日期",
@@ -365,7 +415,7 @@
             "description": "网络上的链接"
         },
         "Streams\/image": {
-            "displayType": "图片",
+            "displayType": "图像",
             "description": "视觉形象",
             "newItem": "添加图片"
         },
@@ -374,8 +424,8 @@
             "description": "图片库"
         },
         "Streams\/album": {
-            "displayType": "专辑",
-            "description": "与各种媒体相关的专辑"
+            "displayType": "相册",
+            "description": "各种媒体相关的专辑"
         },
         "Streams\/file": {
             "displayType": "文件",
@@ -388,17 +438,22 @@
             "newItem": "添加音频"
         },
         "Streams\/video": {
-            "displayType": "视频剪辑",
-            "description": "视频剪辑",
+            "displayType": "录像片段",
+            "description": "录像片段",
             "newItem": "添加视频"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF文档",
+            "description": "PDF文件",
+            "newItem": "添加PDF"
         },
         "Streams\/live": {
             "displayType": "现场直播",
-            "description": "实时音频或视频"
+            "description": "现场音频或视频"
         },
         "Streams\/category": {
             "displayType": "类别",
-            "description": "可以与其他流相关的类别"
+            "description": "与其他流相关的类别"
         },
         "Streams\/participating": {
             "displayType": "参与指数",
@@ -406,36 +461,19 @@
         },
         "Streams\/interest": {
             "displayType": "兴趣",
-            "description": "代表用户对某个主题的兴趣"
+            "description": "代表用户对某个话题的兴趣"
         },
         "Streams\/incoming": {
-            "displayType": "进货",
+            "displayType": "传入",
             "description": "其他用户发送的消息的目的地"
         },
         "Streams\/chat": {
             "displayType": "对话",
-            "description": "用户之间的对话，有历史"
+            "description": "用户之间的对话，具有历史记录"
         },
         "Streams\/webrtc": {
-            "displayType": "实时通话",
-            "description": "实时视频\/音频通话"
-        },
-        "Streams\/tasks": {
-            "description": "任务类别",
-            "displayType": "任务"
-        },
-        "Streams\/experience": {
-            "description": "社区成员的共同体验",
-            "displayType": "社区成员的共同经验"
-        },
-        "Streams\/greeting": {
-            "description": "用户可以用来介绍自己的问候语",
-            "displayType": "问候"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF文件",
-            "description": "PDF文件",
-            "newItem": "添加 PDF"
+            "displayType": "电话会议",
+            "description": "在线视频\/音频会议"
         },
         "Streams\/question": {
             "displayType": "问题",
@@ -444,111 +482,87 @@
         },
         "Streams\/answer": {
             "displayType": "回答",
-            "description": "应答流"
+            "description": "答案流"
         },
         "Streams\/calls": {
             "displayType": "来电",
-            "description": "Streams\/webrtc 的类别",
-            "MaxRelationsExceeded": "超过最大通话次数"
-        }
-    },
-    "messages": {
-        "html": {
-            "body": "向{{stream.fields.title}}发布了<em>{{message.fields.type}}条<\/em>消息",
-            "posted": "向 {{stream.fields.title}} 发布了<em>{{message.fields.type}}<\/em>消息"
-        },
-        "text": {
-            "commentedOn": "评论过",
-            "in": "在",
-            "body": "在 {{& url}}：{{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "已发布到",
-                "byAvatar": "由 {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "有一个新的 {{instructions.fromDisplayType}}",
-                "byAvatar": "由 {{avatar.displayName}} 添加"
-            },
-            "startedCallIn": "开始通话"
+            "description": "Streams\/webrtc 类别",
+            "MaxRelationsExceeded": "超出最大通话次数"
         }
     },
     "menu": {
         "placeholder": "输入页面标题",
         "ModTab": "修改项目",
-        "Save": "保存",
+        "Save": "节省",
         "Delete": "删除",
         "Submenu": "子菜单"
     },
-    "errors": {
-        "HiddenFromYou": "此内容对您隐藏。",
-        "InplaceTypeMustBe": "inplaceType 必须是 &#39;textarea&#39; 或 &#39;text&#39;"
-    },
     "audio": {
         "record": "记录",
-        "reset": "重启",
+        "reset": "重置",
         "edit": "编辑",
         "title": "标题",
         "description": "描述",
         "upload": "上传",
         "link": "关联",
         "setUrl": "设置网址",
-        "save": "保存",
-        "setClip": "剪出剪辑",
+        "save": "节省",
+        "setClip": "切出剪辑",
         "invalidURL": "无效的网址",
-        "invalidFile": "无效的文件",
-        "errorNoSource": "没有音源",
-        "uploadLimit": "最大文件大小：{{size}}",
-        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为 {{size}}"
+        "invalidFile": "无效文件",
+        "errorNoSource": "无音源",
+        "uploadLimit": "最大文件大小： {{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为{{size}}"
     },
     "video": {
-        "reset": "重启",
+        "reset": "重置",
         "edit": "编辑",
         "title": "标题",
         "description": "描述",
         "upload": "上传",
         "link": "关联",
         "setUrl": "设置网址",
-        "save": "保存",
-        "setClip": "剪出剪辑",
+        "save": "节省",
+        "setClip": "切出剪辑",
         "invalidURL": "无效的网址",
-        "invalidFile": "无效的文件",
+        "invalidFile": "无效文件",
         "errorNoSource": "没有视频源",
-        "uploadLimit": "最大文件大小：{{size}}",
-        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为 {{size}}"
+        "uploadLimit": "最大文件大小： {{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为{{size}}"
     },
     "pdf": {
-        "reset": "重启",
+        "reset": "重置",
         "edit": "编辑",
         "title": "标题",
         "description": "描述",
         "upload": "上传",
         "link": "关联",
         "setUrl": "设置网址",
-        "save": "保存",
-        "setClip": "剪出剪辑",
+        "save": "节省",
+        "setClip": "切出剪辑",
         "invalidURL": "无效的网址",
-        "invalidFile": "无效的文件",
+        "invalidFile": "无效文件",
         "errorNoSource": "没有pdf源",
-        "uploadLimit": "最大文件大小：{{size}}",
-        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为 {{size}}"
+        "uploadLimit": "最大文件大小： {{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为{{size}}"
     },
     "image": {
-        "reset": "重启",
+        "reset": "重置",
         "edit": "编辑",
         "title": "标题",
         "description": "描述",
         "upload": "上传",
         "link": "关联",
         "setUrl": "设置网址",
-        "save": "保存",
-        "setClip": "剪出剪辑",
-        "invalidURL": "无效的网址",
-        "invalidFile": "无效的文件",
-        "errorNoSource": "没有图片来源",
-        "uploadLimit": "最大文件大小：{{size}}",
-        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为 {{size}}",
+        "save": "节省",
         "uploadedImage": "上传的图片",
-        "imageTitle": "图片标题"
+        "imageTitle": "图片标题",
+        "setClip": "切出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效文件",
+        "errorNoSource": "没有图片来源",
+        "uploadLimit": "最大文件大小： {{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为{{size}}"
     },
     "questions": {
         "Questions": "问题",
@@ -556,39 +570,37 @@
         "AnswerQuestion": "回答问题",
         "SetYourAnswer": "请回答问题",
         "NewQuestion": "新问题",
+        "EditQuestion": "编辑问题",
         "NewAnswer": "新答案",
+        "NewPossibleAnswer": "新的可能答案",
         "AnswerDetails": "答案详情",
         "answerOption": "选项",
         "answerOptionExclusive": "独家的",
         "answerTextarea": "文本区域",
+        "answerText": "文本",
+        "HideUntilAnswered": "隐藏直到回答",
+        "CantChangeAnswers": "无法更改答案",
         "FreeAnswer": "在这里写下你的答案",
         "SaveQuestion": "保存问题",
         "SaveAnswer": "保存答案",
-        "AddAnotherAnswer": "添加另一个答案",
-        "ErrorAnswers": "请添加一个答案",
+        "Save": "节省",
+        "Send": "发送",
+        "TitleRequired": "标题必填！",
         "AlreadyAnswered": "已经回答",
         "TitlePlaceholder": "输入您的问题",
         "ContentPlaceholder": "在此处放置任何其他信息以帮助人们回答",
         "ErrorTitle": "需要提问",
         "Placeholder": "占位符",
-        "EditQuestion": "编辑问题",
-        "NewPossibleAnswer": "新的可能答案",
-        "answerText": "文本",
-        "HideUntilAnswered": "隐藏直到回答",
-        "CantChangeAnswers": "无法更改答案",
-        "Save": "节省",
-        "Send": "发送",
-        "TitleRequired": "标题必填！",
         "AreYouSure": "你确定吗？"
     },
     "experience": {
         "NewExperience": "新体验",
-        "DefineTitle": "请定义一个标题",
-        "Create": "创建"
+        "DefineTitle": "请定义标题",
+        "Create": "创造"
     },
     "calls": {
         "SettingsTitle": "来电",
-        "MaxCalls": "最大通话次数",
+        "MaxCalls": "最大调用",
         "Update": "更新",
         "NoCallsYet": "还没有来电",
         "CallReasonTitle": "这个电话是关于什么的？",
@@ -600,25 +612,5 @@
         "endCall": "结束通话",
         "interview": "面试",
         "markApproved": "标记已批准"
-    },
-    "identifier": {
-        "private": "私人的",
-        "public": "上市",
-        "configurationSaved": "配置已保存",
-        "error": "出问题了",
-        "privacySettings": "隐私设置"
-    },
-    "avatar": {
-        "firstName": "名",
-        "lastName": "姓",
-        "username": "用户名"
-    },
-    "login": {
-        "prompt": "让朋友认出你：",
-        "newUser": "或在下面创建一个新帐户",
-        "picTooltip": "您可以稍后更改此图片",
-        "placeholder": {
-            "fullName": "输入您的全名"
-        }
     }
 }

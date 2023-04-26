@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "seseorang"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mel",
+            "mobile": "Mudah alih",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "disalin! Kini anda boleh menampalnya di mana-mana sahaja."
+    },
     "analytics": {
         "Title": "Analitis",
         "Daily": "Setiap hari",
@@ -15,13 +28,13 @@
         "LogOut": "log keluar"
     },
     "activate": {
-        "SetAsPrimary": "Tetapkan {{1}} sebagai utama saya {{2}}",
+        "OneTimeCode": "Masukkan kod yang anda terima:",
+        "SetAsPrimary": "Tetapkan {{1}} sebagai {{2}} utama saya",
         "ChoosePassPhrase": "Pilih <strong>frasa laluan<\/strong> untuk log masuk.<br> Frasa mudah yang terdiri daripada beberapa perkataan yang anda akan ingat dengan mudah.",
         "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa laluan<\/strong> yang baik untuk melindungi akaun anda. Lihat cadangan untuk beberapa idea.",
         "LogOutAndTryAgain": "Log Keluar dan Cuba Lagi",
-        "IfYouFeel": "Jika anda rasa sesuatu telah berlaku, anda boleh",
+        "IfYouFeel": "Jika anda merasakan sesuatu yang tidak kena, anda boleh",
         "SetIdentifierButtonTitle": "mula semula",
-        "OneTimeCode": "Masukkan kod yang anda terima:",
         "ActivateMyAccount": "Aktifkan Akaun Saya"
     },
     "session": {
@@ -29,8 +42,8 @@
     },
     "authorize": {
         "GetStarted": "Mulakan",
-        "Authorize": "memberi kebenaran",
-        "TermsLabel": "Saya telah membaca dan bersetuju<br> ke {{link}}",
+        "Authorize": "membenarkan",
+        "TermsLabel": "Saya telah membaca dan bersetuju<br> kepada {{link}}",
         "TermsTitle": "Syarat",
         "mustAgree": "Mula-mula anda mesti bersetuju dengan terma."
     },
@@ -48,8 +61,8 @@
         "ForgetPass": "Hei, adakah anda terlupa frasa laluan anda?",
         "PassphraseSaved": "Frasa laluan anda telah disimpan.",
         "IdentifierActivated": "{{type}} anda telah diaktifkan.",
-        "CompletedActivation": "Anda telah menyelesaikan pengaktifan pengguna.",
-        "CompletedActivationLogIn": "Anda telah menyelesaikan pengaktifan pengguna. Cuba log masuk sekarang."
+        "CompletedActivation": "Anda telah melengkapkan pengaktifan pengguna.",
+        "CompletedActivationLogIn": "Anda telah melengkapkan pengaktifan pengguna. Cuba log masuk sekarang."
     },
     "contacts": {
         "dialog": {
@@ -70,11 +83,15 @@
         "inviteRole": "Jemput {{role}}"
     },
     "invalidLanguageSelected": "Bahasa tidak sah dipilih",
+    "platforms": {
+        "wallet": "Dompet",
+        "broadcast": "Siarkan"
+    },
     "login": {
-        "title": "selamat datang",
+        "title": "Selamat datang",
         "directions": "Buat akaun, atau log masuk.",
         "directionsNoRegister": "Log masuk jika anda mempunyai akaun.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Masukkan frasa laluan anda:",
         "loginButton": "Mulakan",
         "registerButton": "Mulakan",
@@ -88,32 +105,25 @@
         "emailExists": "Adakah anda cuba mendaftar dengan e-mel ini sebelum ini? Jika ya, semak peti masuk anda untuk mengaktifkan akaun anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk menghantar semula mesej<\/a>",
         "mobileExists": "Adakah anda cuba mendaftar dengan nombor telefon bimbit ini sebelum ini? Jika ya, semak SMS anda untuk mengaktifkan akaun anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk menghantar semula mesej<\/a>",
         "usingOther": "atau anda boleh",
+        "connectPlatforms": "atau sambung menggunakan:",
         "prompt": "Pilih nama pengguna:",
         "newUser": "atau buat akaun baharu di bawah",
         "placeholders": {
             "identifier": "# telefon bimbit atau e-mel anda",
             "mobile": "masukkan # telefon bimbit anda",
             "email": "Masukkan alamat emel anda",
-            "username": "menggunakan huruf dan nombor sahaja"
+            "username": "gunakan huruf dan nombor sahaja"
         },
         "confirmTerms": "Terima Syarat Perkhidmatan?",
         "facebookNoEmail": "Akaun facebook anda tiada alamat e-mel yang disahkan. Hanya log masuk dengan cara asli.",
         "picTooltip": "Anda boleh menukar gambar ini kemudian",
-        "wallet": {
-            "payload": "Log masuk ke {{host}} pada masa {{timestamp}}",
-            "alert": {
-                "title": "Mengubah hala ke Wallet",
-                "content": "Sebaik sahaja anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
-            }
-        },
         "web3": {
             "payload": "Log masuk ke {{host}} pada masa {{timestamp}}",
             "alert": {
                 "title": "Mengubah hala ke Wallet",
                 "content": "Sebaik sahaja anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
             }
-        },
-        "connectPlatforms": "atau sambung menggunakan:"
+        }
     },
     "setIdentifier": {
         "title": "Tambah cara untuk log masuk",
@@ -126,11 +136,11 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Akaun",
+        "title": "Akaun {{Platform}}",
         "areUsing": "Anda menggunakan {{platform}} sebagai",
         "noLongerUsing": "Anda tidak lagi disambungkan ke {{platform}} sebagai",
         "doAuth": "Log masuk dengan akaun ini",
-        "doSwitch": "Beralih ke akaun ini"
+        "doSwitch": "Tukar ke akaun ini"
     },
     "roles": {
         "Owner": "Pemilik",
@@ -139,26 +149,9 @@
         "Guest": "tetamu",
         "Host": "hos"
     },
-    "avatar": {
-        "Someone": "Seseorang"
-    },
     "web3": {
         "WrongMethod": "Kaedah kontrak yang salah {{methodName}}",
         "ChangeWallet": "Tukar Wallet"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mel",
-            "mobile": "Mudah alih",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "disalin! Kini anda boleh menampalnya di mana-mana sahaja."
-    },
-    "platforms": {
-        "wallet": "Dompet",
-        "broadcast": "Siarkan"
     },
     "labels": {
         "addToPhonebook": "Tambahkan Pada Kenalan Telefon Saya",

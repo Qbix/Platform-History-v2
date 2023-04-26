@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "შეცდომა",
+        "WalletAbsent": "საფულე არ არის დაკავშირებული.",
+        "Rendering": "<span class='url'>{{1}}<\/span> გადაცემისას იყო შეცდომები",
+        "PriceRequired": "ფასი სავალდებულოა!",
+        "NameRequired": "Სახელი (აუცილებელია!",
+        "PriceInvalid": "ფასი არასწორია!",
+        "AmountInvalid": "თანხა არასწორია!",
+        "TransactionFailed": "ტრანზაქცია ვერ მოხერხდა",
+        "ChainNotSupported": "არჩეული ჯაჭვი არ არის მხარდაჭერილი. მხარდაჭერილი ჯაჭვი: {{supportedChain}}",
+        "NeedMetaMaskConnected": "საჭიროა MetaMask დაკავშირებული აპლიკაციასთან მუშაობასთან",
+        "UserNotLoggedInMetaMask": "მომხმარებელი არ არის შესული MetaMask-ში",
+        "CurrencyNotFound": "ვალუტა ვერ მოიძებნა",
+        "WrongChain": "ეს NFT შეიქმნა &quot; {{chain}} &quot;-ის ქვეშ. გთხოვთ გამოიყენოთ ეს ჯაჭვი.",
+        "NoRecipientSelected": "მიმღები არ არის არჩეული",
+        "NotEnoughPermissionsWallet": "არ არის საკმარისი ნებართვები ამ მომხმარებლის საფულის წასაკითხად",
+        "ThisUserHaveNoWallet": "ამ მომხმარებელს არ აქვს მინიჭებული საფულე",
+        "TheWalletOfThisUserInvalid": "ამ მომხმარებლის საფულე არასწორია",
+        "WalletInvalid": "საფულის მისამართი არასწორია"
+    },
+    "admin": {
+        "Title": "აქტივების ადმინისტრაციული",
+        "SubscriptionTitle": "გამოწერის გეგმები"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "შეეხეთ გადასახდელად"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: გადასახადი დამუშავდა {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "გმადლობთ გადახდისთვის {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} გამოიწერა {{plan.title}}",
-        "YouSubscribedTo": "თქვენ გამოიწერეთ {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : გადასახადი დამუშავებულია {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "გმადლობთ {{call 'publisher.displayName'}} ზე გადახდისთვის",
+        "SubscribedTo": "{{call 'user.displayName'}} გამოწერილია {{plan.title}} ზე",
+        "YouSubscribedTo": "თქვენ გამოწერილი ხართ {{plan.title}}",
         "Assets\/credits\/alert": "თქვენ გაქვთ გაფრთხილება თქვენს ანგარიშთან დაკავშირებით"
     },
     "charge": {
-        "Subject": "თქვენ იღებთ {{displayAmount}}-ის გადახდას {{call 'publisher.displayName'}}-დან „{{description}}“-ის მიერ",
-        "HasBeenCharged": "გამარჯობა, უბრალოდ გაცნობებთ, რომ {{1}} ჩამოიჭრა {{2}} {{3}} {{4}}-ის მიერ"
+        "Subject": "{{call 'publisher.displayName'}} დან იღებთ {{displayAmount}} ლარს &quot; {{description}} &quot;-ით",
+        "HasBeenCharged": "ჰეი, ეს მხოლოდ იმის გასაგებად არის, რომ {{4}} ზე {{1}} {{2}} ით {{3}} ზე დარიცხეს"
     },
     "charged": {
-        "Subject": "გმადლობთ გადახდისთვის &quot;{{description}}&quot;-ისთვის",
-        "HavePaid": "გამარჯობა, {{1}}, ეს მხოლოდ სწრაფი დადასტურებაა, რომ თქვენ წარმატებით გადაიხადეთ {{2}} {{3}} {{4}}-ისთვის"
+        "Subject": "გმადლობთ გადახდისთვის &quot; {{description}} &quot;",
+        "HavePaid": "Hey {{1}} , ეს მხოლოდ სწრაფი დადასტურებაა, რომ თქვენ წარმატებით გადაიხადეთ {{2}} დან {{3}} მდე {{4}} ისთვის"
     },
     "payment": {
         "AboutOrder": "ინფორმაცია შეკვეთის შესახებ",
@@ -28,31 +52,29 @@
         "FailTryAgain": "თქვენი გადახდა არ განხორციელდა, გთხოვთ, სცადოთ ხელახლა",
         "SomethingWrong": "Რაღაც არასწორად წავიდა",
         "PaymentStatus": "გადახდის სტატუსი",
-        "PayTo": "გადახდა {{displayName}}",
+        "PayTo": "გადაიხადე {{displayName}}",
         "ChooseCurrency": "აირჩიეთ ვალუტა",
-        "YouCanSendUpTo": "შეგიძლიათ გაგზავნოთ მაქსიმუმ {{amount}} {{symbol}}",
+        "YouCanSendUpTo": "შეგიძლიათ გაგზავნოთ {{amount}} {{symbol}} მდე",
         "Send": "გაგზავნა",
         "EnterAmount": "შეიტანეთ თანხა"
     },
     "credits": {
-        "InviteAcceptedBy": "მოწვევა მიღებულია {{invitedUserName}}-ის მიერ",
-        "Streams_user_firstname": "{{invitedUserName}} შეიყვანეთ სახელი",
-        "Streams_user_lastname": "{{invitedUserName}} შეიყვანეთ გვარი",
-        "Streams_user_icon": "{{invitedUserName}} შეყვანილი ხატულა",
-        "Places_user_location": "{{invitedUserName}} შეიყვანეთ მდებარეობა",
-        "Streams_greeting": "{{invitedUserName}} შევიდა მისალმება",
+        "InviteAcceptedBy": "მოწვევა მიღებულია {{invitedUserName}} მიერ",
+        "InvitedUserFilledStream": "{{invitedUserName}} შეავსო {{FilledStreamTitle}}",
+        "ForFillingStream": "შესავსებად {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "დასაწყებად გაქვთ {{amount}} კრედიტი",
-        "PaymentFor": "გადახდა „{{1}}“-ისთვის",
-        "PaymentTo": "გადახდა {{1}}-ზე",
-        "PaymentToUser": "გადახდა {{toUserName}}-ზე",
-        "CreatePaidStream": "შესაქმნელად {{toStreamName}}",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;-ში დაჯავშნისთვის",
-        "CreatedCommunity": "საზოგადოების &quot;{{communityId}}&quot; შესაქმნელად",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;-ში ჯავშნის დაბრუნების სახით",
+        "PaymentFor": "გადახდა &quot; {{1}} &quot;",
+        "PaymentTo": "გადახდა {{1}} ნომერზე",
+        "PaymentToUser": "გადახდა {{toUserName}} ნომერზე",
+        "CreatePrivateChat": "{{toUserName}} თან პირადი ჩეთისთვის",
+        "CreatePaidStream": "{{toStreamName}} შესაქმნელად",
+        "JoinedPaidStream": "დაჯავშნისთვის &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;-ში",
+        "CreatedCommunity": "თემის შესაქმნელად &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "როგორც ჯავშნის დაბრუნების თანხა &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "ვიყიდე {{amount}} კრედიტი",
-        "BonusCredits": "ბონუს {{amount}} კრედიტი",
+        "BonusCredits": "ბონუსი {{amount}} კრედიტი",
         "BuyAmountCredits": "შეიძინეთ {{amount}} კრედიტი",
-        "WatchClip": "მოიპოვე {{amount}} კრედიტი ყურებისთვის {{fromStreamTitle}}",
+        "WatchClip": "დაიმსახურა {{amount}} კრედიტი {{fromStreamTitle}} ყურებით",
         "MissingCredits": "დაკარგული კრედიტები",
         "YouMissingCredits": "გასაგრძელებლად გჭირდებათ დამატებითი {{amount}} კრედიტი.",
         "BuyCredits": "შეიძინეთ კრედიტები",
@@ -61,57 +83,54 @@
         "PurchaseCredits": "შეიძინეთ კრედიტები",
         "Credits": "კრედიტები",
         "ErrorInvalidAmount": "თანხა არასწორია",
-        "ErrorInvalidCurrency": "სამწუხაროდ, ჩვენ ჯერ არ გვაქვს ვალუტის {{currency}} მხარდაჭერა",
+        "ErrorInvalidCurrency": "სამწუხაროდ, ჩვენ ჯერ არ გვაქვს {{currency}} ვალუტის მხარდაჭერა",
         "forMessages": {
             "BoughtCredits": "{{amount}} კრედიტი",
             "BonusCredits": "{{amount}} კრედიტი"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} შევსებული {{FilledStreamTitle}}",
-        "ForFillingStream": "შესავსებად {{FilledStreamTitle}}",
-        "CreatePrivateChat": "პირადი ჩატისთვის {{toUserName}}"
+        }
     },
     "history": {
         "Date": "თარიღი",
         "Amount": "თანხა",
         "Description": "აღწერა",
         "Client": "კლიენტი",
+        "User": "მომხმარებელი",
         "To": "რომ",
-        "From": "დან",
-        "SeeHistory": "იხილეთ გადახდის ისტორია {{1}}-ისთვის",
+        "From": "საწყისი",
+        "SeeHistory": "იხილეთ გადახდის ისტორია {{1}} ისთვის",
         "HistoryEmpty": "ჯერ მონაცემები არ გაქვთ",
         "PaymentFor": "გაგზავნილი {{amount}} კრედიტი",
         "PaymentTo": "გაგზავნილი {{amount}} კრედიტი",
         "PaymentToUser": "გაგზავნილი {{amount}} კრედიტი",
-        "CreatePaidStream": "დახარჯული {{amount}} კრედიტი",
+        "CreatePaidStream": "დახარჯა {{amount}} კრედიტი",
         "WatchClip": {
-            "+": "მოიპოვა {{amount}} კრედიტი",
-            "-": "დახარჯული {{amount}} კრედიტი"
+            "+": "დაიმსახურა {{amount}} კრედიტი",
+            "-": "დახარჯა {{amount}} კრედიტი"
         },
         "JoinedPaidStream": {
-            "+": "მოიპოვა {{amount}} კრედიტი",
-            "-": "დახარჯული {{amount}} კრედიტი"
+            "+": "დაიმსახურა {{amount}} კრედიტი",
+            "-": "დახარჯა {{amount}} კრედიტი"
         },
         "LeftPaidStream": {
-            "+": "მიღებულია {{amount}} კრედიტი",
+            "+": "მიიღო {{amount}} კრედიტი",
             "-": "გაგზავნილი {{amount}} კრედიტი"
         },
-        "CreatedCommunity": "დახარჯული {{amount}} კრედიტი",
+        "CreatedCommunity": "დახარჯა {{amount}} კრედიტი",
         "BoughtCredits": "ვიყიდე {{amount}} კრედიტი",
         "BonusCredits": "მიიღეთ ბონუსი {{amount}} კრედიტი",
-        "InviteAcceptedBy": "მოიპოვა {{amount}} კრედიტი",
-        "Streams_user_firstname": "მოიპოვა {{amount}} კრედიტი",
-        "Streams_user_lastname": "მოიპოვა {{amount}} კრედიტი",
-        "Streams_user_icon": "მოიპოვა {{amount}} კრედიტი",
-        "Places_user_location": "მოიპოვა {{amount}} კრედიტი",
-        "Streams_greeting": "მოიპოვა {{amount}} კრედიტი",
-        "YouHaveCreditsToStart": "მოიპოვა {{amount}} კრედიტი",
-        "User": "მომხმარებელი"
+        "InviteAcceptedBy": "დაიმსახურა {{amount}} კრედიტი",
+        "Streams_user_firstname": "დაიმსახურა {{amount}} კრედიტი",
+        "Streams_user_lastname": "დაიმსახურა {{amount}} კრედიტი",
+        "Streams_user_icon": "დაიმსახურა {{amount}} კრედიტი",
+        "Places_user_location": "დაიმსახურა {{amount}} კრედიტი",
+        "Streams_greeting": "დაიმსახურა {{amount}} კრედიტი",
+        "YouHaveCreditsToStart": "დაიმსახურა {{amount}} კრედიტი"
     },
     "subscriptions": {
         "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
         "confirm": {
             "title": "გამოწერის დაწყება",
-            "message": "გსურთ გამოიწეროთ {{title}}?",
+            "message": "გსურთ „ {{title}} “-ის განმეორებადი გამოწერა?",
             "ok": "კარგი",
             "cancel": "გაუქმება"
         },
@@ -131,7 +150,7 @@
         "Period": "პერიოდი",
         "Price": "ფასი",
         "AreYouSureUnsubscribe": "დარწმუნებული ხართ, რომ გსურთ ამ გეგმის გამოწერის გაუქმება?",
-        "YouUnsubscribedFromPlan": "თქვენ გააუქმეთ გეგმის „{{planTitle}}“ გამოწერა. თქვენ არ ჩამოგეჭრებათ, მაგრამ თქვენი გამოწერა გაგრძელდება {{endsIn}}-მდე",
+        "YouUnsubscribedFromPlan": "თქვენ გააუქმეთ გეგმის &quot; {{planTitle}} &quot; გამოწერა. თქვენ არ ჩამოგეჭრებათ, მაგრამ თქვენი გამოწერა გაგრძელდება {{endsIn}} წლამდე",
         "plan": {
             "TitlePlaceholder": "გეგმის სათაური",
             "PricePlaceholder": "ფასი",
@@ -145,7 +164,7 @@
         "BuyAmountCredits": "შეიძინეთ {{amount}} კრედიტი",
         "confirm": {
             "title": "Გადაიხადეთ",
-            "message": "თანახმა ხართ გადაიხადოთ {{symbol}}{{amount}}?",
+            "message": "თანახმა ხართ გადაიხადოთ {{symbol}} {{amount}} ?",
             "ok": "კარგი",
             "cancel": "გაუქმება"
         }
@@ -165,7 +184,7 @@
         },
         "Assets\/product": {
             "displayType": "პროდუქტი",
-            "description": "იყიდება პროდუქტი"
+            "description": "პროდუქტი იყიდება"
         },
         "Assets\/service": {
             "displayType": "სერვისი",
@@ -174,25 +193,36 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "მოიპოვა {{amount}} კრედიტი"
+            "content": "დაიმსახურა {{amount}} კრედიტი"
         },
         "Assets\/credits\/bought": {
             "content": "ვიყიდე {{amount}} კრედიტი"
         },
         "Assets\/credits\/bonus": {
-            "content": "ბონუს {{amount}} კრედიტი"
+            "content": "ბონუსი {{amount}} კრედიტი"
         },
         "Assets\/credits\/spent": {
-            "content": "დახარჯული {{amount}} კრედიტი"
+            "content": "დახარჯა {{amount}} კრედიტი"
         },
         "Assets\/credits\/sent": {
             "content": "გაუგზავნა {{amount}} კრედიტი {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "მიღებულია {{amount}} კრედიტი {{fromUserName}}-ისგან"
+            "content": "{{fromUserName}} დან {{amount}} კრედიტი მიიღო"
         },
         "Assets\/credits\/alert": {
-            "content": "თქვენ გაქვთ მცირე კრედიტი თქვენს ანგარიშზე. გთხოვთ ეწვიოთ <a href='{{link}}'>ამ ბმულს<\/a> მეტი კრედიტის შესაძენად."
+            "content": "თქვენ გაქვთ მცირე კრედიტი თქვენს ანგარიშზე. გთხოვთ, ეწვიოთ <a href='<i translate='no'>999 &#39;&gt; ამ ბმულს<\/a> მეტი კრედიტის შესაძენად."
+        }
+    },
+    "billing": {
+        "Title": "აქტივების ბილინგი",
+        "CreditsMinimum": "მინიმალური კრედიტები",
+        "CreditsToAdd": "დასამატებელი კრედიტები",
+        "Save": "Გადარჩენა",
+        "ThisLink": "ეს ბმული",
+        "errors": {
+            "CreditsMinimumNegative": "კრედიტების მინიმალური რაოდენობა არ შეიძლება იყოს უარყოფითი",
+            "CreditsToAddNegative": "დასამატებელი კრედიტები არ შეიძლება იყოს უარყოფითი"
         }
     },
     "services": {
@@ -203,8 +233,11 @@
             "LinkPlaceholder": "დააყენეთ დამატებითი ინფორმაციის ბმული",
             "DescriptionPlaceholder": "სერვისის აღწერა",
             "SaveService": "სერვისის შენახვა",
-            "SelectRequiredParticipants": "აუცილებელი მონაწილეები",
+            "SelectRequiredParticipants": "საჭირო დაკავშირებული მონაწილეები",
             "RequiredParticipantsDesc": "გთხოვთ, აირჩიოთ დაკავშირებული მონაწილეები, რომლებსაც ესაჭიროებათ ამ სერვისით სარგებლობა (მაგალითად, შინაური ცხოველები &quot;ძაღლების ჩვენებისთვის&quot;, ან ბავშვები &quot;ბავშვთა დღესასწაულისთვის&quot; და ა.შ.). თუ მომსახურება ფასიანია, მომხმარებელს მოუწევს გადაიხადოს ასევე თითოეული დაკავშირებული მონაწილესთვის."
+        },
+        "EditServiceTemplate": {
+            "Title": "სერვისის რედაქტირება"
         },
         "ManageServiceTemplates": "სერვისის შაბლონების მართვა",
         "ManageServices": "სერვისების მართვა",
@@ -212,15 +245,30 @@
         "OptionalContribution": "არჩევითი წვლილი",
         "RequiredPayment": "საჭირო გადახდა",
         "AreYouSureDelete": "დარწმუნებული ხართ, რომ გსურთ ამ სერვისის წაშლა?",
-        "AmountServicesRelated": "ამ სერვისთან დაკავშირებულია {{amount}} ხელმისაწვდომობა. ისინი ასევე მოიხსნება.",
-        "EditServiceTemplate": {
-            "Title": "სერვისის რედაქტირება"
-        }
+        "AmountServicesRelated": "ამ სერვისთან დაკავშირებული {{amount}} ხელმისაწვდომობაა. ისინი ასევე მოიხსნება."
+    },
+    "transfer": {
+        "SelectRecipient": "აირჩიეთ მიმღები",
+        "TransactionSuccess": "გარიგების წარმატება",
+        "OrTypeWalletAddress": "ან აკრიფეთ მიმღების საფულის მისამართი"
     },
     "NFT": {
-        "Title": "ინფორმაცია {{title}} NFT-ის შესახებ",
-        "Description": "დეტალური ინფორმაცია NFT-ის შესახებ",
-        "FixedBid": "Იყიდე ეხლა",
+        "Title": "სათაური",
+        "Name": "სახელი",
+        "EnterName": "შეიყვანეთ სახელი",
+        "EnterAuthorWallet": "შეიყვანეთ ავტორის საფულე",
+        "InformationAboutTitle": "ინფორმაცია {{title}} NFT-ის შესახებ",
+        "Description": "აღწერა",
+        "DetailedInformationAboutNFT": "დეტალური ინფორმაცია NFT-ის შესახებ",
+        "PresaleStarts": "წინასწარი გაყიდვა იწყება 23 დეკემბერს",
+        "OwnerUserNotFound": "ამ NFT-ის მფლობელი არ არის რეგისტრირებული ჩვენს განაცხადში.",
+        "BuyNow": "Იყიდე ეხლა",
+        "Buy": "იყიდე",
+        "Add": "დამატება",
+        "Remove": "ამოღება",
+        "NoNFTyet": "NFT ჯერ არ არის",
+        "Conversation": "Საუბარი",
+        "Create": "Შექმნა",
         "CurrentBid": "მიმდინარე შეთავაზება",
         "StartingIn": "დაწყებული",
         "EndingIn": "მთავრდება",
@@ -228,13 +276,16 @@
         "TitlePlaceholder": "მიეცით თქვენს NFT-ს სათაური",
         "DescriptionPlaceholder": "მიეცით თქვენი NFT აღწერა",
         "CreateYourNFT": "შექმენით თქვენი NFT",
-        "Royalties": "ჰონორარი",
+        "Royalties": "ჰონორარები",
         "RoyaltyPlaceholder": "სურვილისამებრ. შემქმნელისთვის გადარიცხვამდე გადახდილი თანხა.",
         "ExpirationDate": "Ვადის გასვლის თარიღი",
         "StartingDate": "Დაწყების თარიღი",
         "BidsBelowThisAmount": "ამ ოდენობის ქვემოთ შეთავაზებები დაუშვებელია",
         "MinimumBid": "მინიმალური შეთავაზება",
+        "Author": "ავტორი",
         "Price": "ფასი",
+        "Commission": "კომისია",
+        "EnterCommission": "შეიყვანეთ კომისია",
         "Owner": "მფლობელი",
         "SelectCategory": "Აირჩიეთ კატეგორია",
         "Day": "Დღეს",
@@ -253,17 +304,25 @@
         "PutOnSale": "გასაყიდად გაიტანეთ",
         "PutOffSale": "გაყიდვიდან ამოღება",
         "Transfer": "Გადაცემა",
+        "Actions": "მოქმედებები",
+        "Claim": "Მოთხოვნა",
+        "ClaimNFT": "მოითხოვეთ NFT",
+        "Unlocking": "განბლოკვა",
+        "Unlock": "განბლოკვა",
         "Update": "განახლება",
         "UpdateToken": "ტოკენის განახლება",
+        "UpdateNFT": "განაახლეთ NFT",
         "CreateToken": "შექმენით ტოკენი",
         "PlaceBid": "Დადო ფსონი",
         "SoldOut": "გაიყიდა",
+        "NotOnSale": "არ იყიდება",
         "NftName": "NFT სახელი",
         "DescribeYourNFT": "გთხოვთ აღწეროთ თქვენი NFT",
         "NftPicture": "სურათი, რომელიც წარმოადგენს NFT-ს",
         "NftMovie": "ფილმი, რომელიც წარმოადგენს NFT-ს",
         "UploadMovie": "ფილმის ატვირთვა",
         "MovieSource": "ფილმის წყარო",
+        "MovieURL": "ფილმის URL",
         "UploadFile": "Ფაილის ატვირთვა",
         "PutOnMarketplace": "განათავსეთ ბაზარზე",
         "InstantPurchase": "შეიყვანეთ ფასი, რათა მომხმარებლებს საშუალება მისცეთ დაუყოვნებლივ შეიძინონ თქვენი NFT",
@@ -271,60 +330,9 @@
         "TimedAuction": "დროული აუქციონი",
         "OpenForBids": "ღიაა ტენდერებისთვის",
         "PriceOnePiece": "შეიყვანეთ ფასი ერთი ცალი",
+        "EnterPrice": "შეიყვანეთ ფასი",
         "EnterMinimumBid": "შეიყვანეთ მინიმალური წინადადება",
         "SelectChain": "აირჩიეთ ჯაჭვი",
-        "WrongChain": "ეს NFT შექმნილია „{{chain}}“-ში. გთხოვთ გამოიყენოთ ეს ჯაჭვი.",
-        "import": {
-            "importNFT": "NFT-ების იმპორტი",
-            "fileNotFound": "უკაცრავად, CSV ფაილი ვერ მოიძებნა.",
-            "fileEmpty": "უკაცრავად, CSV ფაილი ცარიელია.",
-            "userIdNotFound": "მომხმარებელი არსებობს, მაგრამ ID ცარიელია",
-            "errorLine": "ხაზი {{1}}",
-            "fieldNotFound": "აუცილებელი ველი „{{1}}“ ვერ მოიძებნა",
-            "taskStreamInvalid": "დავალების ნაკადი არასწორია",
-            "instructionsEmpty": "დავალების ნაკადის ინსტრუქციები ცარიელია",
-            "complete": "სრული",
-            "activateUsers": "გაუგზავნოთ აქტივაციის შეტყობინება მომხმარებლებს?",
-            "importProgress": "პროგრესი",
-            "importOptions": "Პარამეტრები",
-            "sampleCSV": "ჩამოტვირთეთ ნიმუში CSV",
-            "fileLabel": "ელცხრილის ატვირთვა:",
-            "errorsTitle": "მოხდა შეცდომები",
-            "importAttributes": "NFT ატრიბუტების იმპორტი",
-            "displayTypeEmpty": "ჩვენების ტიპი „{{1}}“ ვერ მოიძებნა"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "გაფილტვრა NFT კოლექციების მიხედვით",
-                "ShowNFTCollection": "NFT კოლექციის ჩვენება...",
-                "AllCollections": "ყველა კოლექცია"
-            },
-            "ByUser": {
-                "AllAuthors": "ყველა ავტორი",
-                "AllUsers": "ყველას",
-                "FilterByAuthors": "გაფილტვრა ავტორების მიხედვით"
-            }
-        },
-        "Back": "დაბრუნება კოლექციაში",
-        "Name": "სახელი",
-        "EnterName": "შეიყვანეთ სახელი",
-        "EnterAuthorWallet": "შეიყვანეთ ავტორის საფულე",
-        "InformationAboutTitle": "ინფორმაცია {{title}} NFT-ის შესახებ",
-        "DetailedInformationAboutNFT": "დეტალური ინფორმაცია NFT-ის შესახებ",
-        "PresaleStarts": "წინასწარი გაყიდვა იწყება 23 დეკემბერს",
-        "OwnerUserNotFound": "ამ NFT-ის მფლობელი არ არის რეგისტრირებული ჩვენს განაცხადში.",
-        "BuyNow": "Იყიდე ეხლა",
-        "Buy": "იყიდე",
-        "Conversation": "Საუბარი",
-        "Create": "Შექმნა",
-        "Author": "ავტორი",
-        "Commission": "კომისია",
-        "EnterCommission": "შეიყვანეთ კომისია",
-        "Actions": "მოქმედებები",
-        "UpdateNFT": "განაახლეთ NFT",
-        "NotOnSale": "არ იყიდება",
-        "MovieURL": "ფილმის URL",
-        "EnterPrice": "შეიყვანეთ ფასი",
         "Currency": "ვალუტა",
         "AreYouSureDeleteImage": "დარწმუნებული ხართ, რომ გსურთ სურათის წაშლა?",
         "AreYouSureDeleteVideo": "დარწმუნებული ხართ, რომ გსურთ ვიდეოს წაშლა?",
@@ -355,17 +363,17 @@
         "contract": {
             "CreateContract": "შექმენით კონტრაქტი",
             "SelectContract": "აირჩიეთ კონტრაქტი",
-            "CreateContractFor": "შექმენით კონტრაქტი {{userName}}-ისთვის",
-            "ContractFor": "კონტრაქტი {{userName}}-ისთვის",
+            "CreateContractFor": "შექმენით ხელშეკრულება {{userName}} ზე",
+            "ContractFor": "კონტრაქტი {{userName}}",
             "UpdateContract": "კონტრაქტის განახლება",
             "TransferOwnership": "საკუთრების გადაცემა",
             "SetBaseURI": "დააყენეთ ბაზის URI",
-            "SetSuffix": "სუფიქსის დაყენება",
+            "SetSuffix": "დააყენეთ სუფიქსი",
             "CurrentOwner": "ამჟამინდელი მფლობელი",
             "CurrentBaseURL": "მიმდინარე BaseURL",
             "ContractAddressAbsent": "კონტრაქტის მისამართი არ არის",
             "FactoryAddressAbsent": "ქარხნის მისამართი არ არის",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "სათაურია საჭირო",
             "SymbolRequired": "საჭიროა სიმბოლო",
             "TypeContractName": "კონტრაქტის სახელწოდება",
@@ -375,6 +383,38 @@
             "Title": "კონკურსები",
             "NewContest": "ახალი კონკურსი"
         },
+        "import": {
+            "importNFT": "NFT-ების იმპორტი",
+            "importAttributes": "NFT ატრიბუტების იმპორტი",
+            "fileNotFound": "უკაცრავად, CSV ფაილი ვერ მოიძებნა.",
+            "fileEmpty": "უკაცრავად, CSV ფაილი ცარიელია.",
+            "userIdNotFound": "მომხმარებელი არსებობს, მაგრამ ID ცარიელია",
+            "errorLine": "ხაზი {{1}}",
+            "fieldNotFound": "აუცილებელი ველი &quot; {{1}} &quot; ვერ მოიძებნა",
+            "displayTypeEmpty": "ჩვენების ტიპი &quot; {{1}} &quot; ვერ მოიძებნა",
+            "taskStreamInvalid": "დავალების ნაკადი არასწორია",
+            "instructionsEmpty": "დავალების ნაკადის ინსტრუქციები ცარიელია",
+            "complete": "სრული",
+            "activateUsers": "გაუგზავნოთ აქტივაციის შეტყობინება მომხმარებლებს?",
+            "importProgress": "პროგრესი",
+            "importOptions": "Პარამეტრები",
+            "sampleCSV": "ჩამოტვირთეთ ნიმუში CSV",
+            "fileLabel": "ელცხრილის ატვირთვა:",
+            "errorsTitle": "მოხდა შეცდომები"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "გაფილტვრა NFT კოლექციების მიხედვით",
+                "ShowNFTCollection": "NFT კოლექციის ჩვენება...",
+                "AllCollections": "ყველა კოლექცია"
+            },
+            "ByUser": {
+                "AllAuthors": "ყველა ავტორი",
+                "AllUsers": "ყველას",
+                "FilterByAuthors": "გაფილტვრა ავტორების მიხედვით"
+            }
+        },
+        "Back": "დაბრუნება კოლექციაში",
         "attributes": {
             "Title": "ატრიბუტების მართვა",
             "Attributes": "ატრიბუტები",
@@ -393,18 +433,11 @@
         },
         "profile": {
             "LogOut": "გასვლა",
-            "Title": "პროფილი {{userName}}-ისთვის",
+            "Title": "{{userName}} ის პროფილი",
             "Description": "მომხმარებლის დეტალები",
             "aboutPlaceholder": "ბიო რედაქტირება",
             "SureLogOut": "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?"
         },
-        "Add": "დამატება",
-        "Remove": "ამოღება",
-        "NoNFTyet": "NFT ჯერ არ არის",
-        "Claim": "Მოთხოვნა",
-        "ClaimNFT": "მოითხოვეთ NFT",
-        "Unlocking": "განბლოკვა",
-        "Unlock": "განბლოკვა",
         "sales": {
             "factory": {
                 "form": {
@@ -503,7 +536,7 @@
                 "small": {
                     "tokenId": "ტოკენის ID, რისი ჩაკეტვა ან განბლოკვა გჭირდებათ",
                     "custodian": "მისამართი, რომლის განბლოკვაც შესაძლებელია",
-                    "recipient": "მისამართი, რომელიც მიიღებს ტოკენებს"
+                    "recipient": "მისამართი, რომელიც მიიღებს ჟეტონებს"
                 }
             },
             "errors": {
@@ -520,50 +553,10 @@
             "Unlock": "განბლოკვა",
             "Locked": "ჩაკეტილი",
             "CustodianAddress": "მეურვის მისამართი",
-            "TokenWasClaimed": "ჟეტონი „{{title}}“ მოითხოვა",
-            "TokenWasLocked": "ჟეტონი „{{title}}“ დაბლოკილია",
-            "TokenWasUnlocked": "ჟეტონი „{{title}}“ განბლოკილია"
+            "TokenWasClaimed": "ჟეტონი &quot; {{title}} &quot; მოითხოვა",
+            "TokenWasLocked": "ჟეტონი &quot; {{title}} &quot; დაბლოკილია",
+            "TokenWasUnlocked": "ჟეტონი &quot; {{title}} &quot; განბლოკილია"
         }
-    },
-    "errors": {
-        "Error": "შეცდომა",
-        "WalletAbsent": "საფულე არ არის დაკავშირებული.",
-        "Rendering": "წარმოიშვა შეცდომები <span class='url'>{{1}}<\/span> რენდერის დროს",
-        "PriceRequired": "ფასი სავალდებულოა!",
-        "NameRequired": "Სახელი (აუცილებელია!",
-        "PriceInvalid": "ფასი არასწორია!",
-        "TransactionFailed": "ტრანზაქცია ვერ მოხერხდა",
-        "ChainNotSupported": "არჩეული ჯაჭვი არ არის მხარდაჭერილი. მხარდაჭერილი ჯაჭვი: {{supportedChain}}",
-        "NeedMetaMaskConnected": "საჭიროა MetaMask დაკავშირებული აპლიკაციასთან მუშაობასთან",
-        "UserNotLoggedInMetaMask": "მომხმარებელი არ არის შესული MetaMask-ში",
-        "CurrencyNotFound": "ვალუტა ვერ მოიძებნა",
-        "WrongChain": "ეს NFT შექმნილია „{{chain}}“-ში. გთხოვთ გამოიყენოთ ეს ჯაჭვი.",
-        "AmountInvalid": "თანხა არასწორია!",
-        "NoRecipientSelected": "მიმღები არ არის არჩეული",
-        "NotEnoughPermissionsWallet": "არ არის საკმარისი ნებართვები ამ მომხმარებლის საფულის წასაკითხად",
-        "ThisUserHaveNoWallet": "ამ მომხმარებელს არ აქვს მინიჭებული საფულე",
-        "TheWalletOfThisUserInvalid": "ამ მომხმარებლის საფულე არასწორია",
-        "WalletInvalid": "საფულის მისამართი არასწორია"
-    },
-    "admin": {
-        "Title": "აქტივების ადმინისტრაციული",
-        "SubscriptionTitle": "გამოწერის გეგმები"
-    },
-    "billing": {
-        "Title": "აქტივების ბილინგი",
-        "CreditsMinimum": "მინიმალური კრედიტები",
-        "CreditsToAdd": "დასამატებელი კრედიტები",
-        "Save": "Გადარჩენა",
-        "ThisLink": "ეს ბმული",
-        "errors": {
-            "CreditsMinimumNegative": "კრედიტების მინიმალური რაოდენობა არ შეიძლება იყოს უარყოფითი",
-            "CreditsToAddNegative": "დასამატებელი კრედიტები არ შეიძლება იყოს უარყოფითი"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "აირჩიეთ მიმღები",
-        "TransactionSuccess": "გარიგების წარმატება",
-        "OrTypeWalletAddress": "ან აკრიფეთ მიმღების საფულის მისამართი"
     },
     "currencies": {
         "choose": "აირჩიეთ ვალუტა"

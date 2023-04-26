@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Uus üksus"
     },
+    "avatar": {
+        "firstName": "eesnimi",
+        "lastName": "perekonnanimi",
+        "username": "kasutajanimi"
+    },
     "labels": {
         "Streams\/invited": "Inimesed, keda kutsusin",
         "Streams\/invitedMe": "Kes mind kutsus",
@@ -13,13 +18,21 @@
         "Yes": "Jah",
         "No": "Ei"
     },
+    "login": {
+        "prompt": "Laske sõpradel teid ära tunda:",
+        "newUser": "või looge allpool uus konto",
+        "picTooltip": "Saate seda pilti hiljem muuta",
+        "placeholder": {
+            "fullName": "Sisestage oma täisnimi"
+        }
+    },
     "interests": {
-        "Filter": "Millised on teie huvid?",
-        "CanGrant": "Kui te ikka ei leia seda, mida otsite, saate allpool lisada uue huvi:",
+        "Filter": "Otsinguhuvid",
+        "CanGrant": "Kui te ikka ei leia seda, mida otsite, saate allpool lisada uue huvi.",
         "TrySynonyms": "Kas te ei näe seda? Proovige sünonüüme.",
         "AddUnderCategory": "Lisa kategooria alla...",
         "Other": "muud",
-        "Unlisted": "Noteeritud"
+        "Unlisted": "Registreerimata"
     },
     "chat": {
         "flaggedForAdminReview": "Sõnum on märgistatud administraatori ülevaatamiseks. Lipu tühistamiseks puudutage uuesti.",
@@ -34,6 +47,7 @@
         "earlierComments": "varasemad kommentaarid",
         "startedConversation": "alustas vestlust",
         "RealTimeCall": "Reaalajas kõne",
+        "JoinWebRTC": "Telekonverents",
         "SearchByName": "Otsi nime järgi",
         "Notifications": {
             "Visit": "{{displayName}} külastab vestlust",
@@ -41,36 +55,55 @@
             "Leave": "{{displayName}} lahkus vestlusest",
             "RelatedTo": "{{displayName}} alustas {{stream.displayType}}"
         },
-        "JoinWebRTC": "Telekonverents"
+        "placeholders": {
+            "Public": "Lisa kommentaar",
+            "Private": "Kirjutage privaatsõnum"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "hallata oma e-posti tellimusi",
         "IfUnsubscribe": "Kui soovite tellimusest loobuda",
-        "*": "Sõnum {{& message.fields.type}} numbrile {{& stream.fields.title}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ütles: {{& message.content}}",
-        "Streams\/changed": "Muudatused {{stream.fields.title}}",
-        "Streams\/invite": "Teid kutsuti {{& stream.fields.title}}",
-        "Streams\/announcement": "Teadaanne: {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} muutis juurdepääsu asukohas {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Vestlussõnumit muudeti: {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Vestlussõnum eemaldati {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} on suletud",
-        "Streams\/task\/progress": "Edusammud {{stream.fields.title}}",
-        "Streams\/task\/complete": "Ülesanne lõpetatud: {{stream.fields.title}}",
-        "Streams\/task\/error": "Viga ajal: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: sissetulev kiri",
-        "Streams\/relatedTo\/Streams\/call": "Uus kõne algas {{toTitle}}",
-        "Streams\/relatedTo\/*": "Uus {{relationDisplayType}} keeles {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Lisatud kausta {{toTitle}} kui {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mainis teid kommentaaris",
-        "Streams\/call": "{{displayName}} alustas reaalajas kõnet",
+        "*": "Sõnum {{& message.fields.type}} kuni {{& stream.fields.title}}",
         "Streams\/joined": "{{&call 'avatar.displayName'}} liitus",
-        "Streams\/left": "{{&call 'avatar.displayName'}} jäänud"
+        "Streams\/left": "{{&call 'avatar.displayName'}} jäänud",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ütles: {{& message.content}}",
+        "Streams\/changed": "Muudatused {{stream.fields.title}} aastal",
+        "Streams\/invite": "Teid kutsuti numbrile {{& stream.fields.title}}",
+        "Streams\/announcement": "Teadaanne aastal {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} muutis juurdepääsu {{& stream.fields.title}} aastal",
+        "Streams\/chat\/edit": "Vestlussõnumit on muudetud aastal {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Vestlussõnum eemaldati aastal {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} on suletud",
+        "Streams\/task\/progress": "Edusammud {{stream.fields.title}} aastal",
+        "Streams\/task\/complete": "Ülesanne täidetud: {{stream.fields.title}}",
+        "Streams\/task\/error": "Viga ajal: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}} : sissetulev sõnum",
+        "Streams\/relatedTo\/Streams\/call": "Uus kõne algas aastal {{toTitle}}",
+        "Streams\/relatedTo\/*": "Uus {{relationDisplayType}} {{toTitle}} st",
+        "Streams\/relatedFrom\/*": "Lisati {{toTitle}} kui {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mainis teid kommentaaris",
+        "Streams\/call": "{{displayName}} alustas reaalajas kõnet"
     },
     "invite": {
         "command": "Kutsu",
-        "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
+        "Invite": "Kutsu",
+        "Share": "Jaga",
+        "messageContent": "{{displayName}} kutsus teid {{inviteUrl}} le",
         "youCanNowPaste": "Nüüd saate selle lingi inimeste kutsumiseks kuhugi kleepida",
+        "roles": {
+            "title": "Kas anda kutsutud kasutajatele rolle?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Vabandust",
+                "alert": "Teil pole õigust seda rolli anda"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Vabandust",
+                "alert": "Teil ei ole õigust seda rolli eemaldada"
+            }
+        },
+        "labels": {
+            "title": "Mis on teie suhe?"
+        },
         "dialog": {
             "chooseFromContacts": "Valige oma kontaktide hulgast",
             "chooseAgainFromContacts": "Valige uuesti kontaktidest",
@@ -78,8 +111,9 @@
             "selectFromContacts": "Valige Kontaktidest",
             "userChooserPlaceholder": "Otsi nime järgi",
             "photo": "Pildista",
+            "photoOf": "Pildistage {{name}}",
             "photoInstruction": "Kui teie ees on QR-koodi skaneerinud inimene, tehke temast foto",
-            "to": "Saaja: {{Stream Title}}",
+            "to": "Kellele: {{Stream Title}}",
             "go": "Mine",
             "title": "Kutsu",
             "placeholder": "Mobiili number või e-posti aadress",
@@ -89,7 +123,7 @@
             "QR": "{{ClickOrTap}} QR-koodi genereerimiseks",
             "QRtitle": "Skannige see QR-kood",
             "QRscanned": "Nad skaneerisid selle!",
-            "scannedQR": "{{ClickOrTap}}, kui kood skanniti",
+            "scannedQR": "{{ClickOrTap}} , kui kood skanniti",
             "byEmail": "Meil",
             "byText": "Tekst",
             "byFacebook": "Facebook",
@@ -102,57 +136,41 @@
             "chooseFromRegistered": "Valige registreeritud kasutajate hulgast",
             "inviteViaEmailOrSms": "Kutsuge e-posti või SMS-i teel"
         },
+        "complete": {
+            "WelcomeToCommunity": "Tere tulemast numbrile {{communityName}}",
+            "HasInvitedYou": "on kutsunud teid:",
+            "HasInvitedYouToTheirProfile": "kutsus teid ühendust võtma.",
+            "prompt": "Laske sõpradel teid ära tunda:",
+            "accept": "Nõustu kutsega"
+        },
         "email": {
             "subject": "Hei, vaata seda",
             "PleaseVisitLink": "Külastage järgmist linki:",
-            "InvitingYou": "Kutsun teid osalema {{title}}",
-            "HasInvitedYou": "{{displayName}} kutsus teid {{title}}",
-            "HasMentionedYou": "{{displayName}} mainis teid filmis &quot;{{title}}&quot;",
+            "InvitingYou": "Kutsun teid numbrile {{title}}",
+            "HasInvitedYou": "{{displayName}} kutsus teid {{title}} le",
+            "HasMentionedYou": "{{displayName}} on teid &quot; {{title}} &quot; hulgas maininud",
             "YOUAREINVITED": "TE OLETE KUTSUTUD!",
             "AcceptInvite": "Nõustu kutsega"
         },
         "sms": {
-            "content": "Teid on kutsutud sündmusele {{title}}. Puudutage {{url}}"
+            "content": "Teid on kutsutud numbrile {{title}} . Puudutage {{url}}"
         },
         "notice": {
             "text": "Sind on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
-        },
-        "Invite": "Kutsu",
-        "Share": "Jaga",
-        "roles": {
-            "title": "Kas anda kutsutud kasutajatele rolle?",
-            "NotAuthorizedToGrantRole": {
-                "title": "Vabandust",
-                "alert": "Teil pole õigust seda rolli anda"
-            },
-            "NotAuthorizedToRemoveRole": {
-                "title": "Vabandust",
-                "alert": "Teil pole õigust seda rolli eemaldada"
-            }
-        },
-        "labels": {
-            "title": "Mis on teie suhe?"
-        },
-        "complete": {
-            "HasInvitedYou": "on kutsunud teid:",
-            "WelcomeToCommunity": "Tere tulemast {{communityName}}",
-            "HasInvitedYouToTheirProfile": "kutsus teid ühendust võtma.",
-            "prompt": "Laske sõpradel teid ära tunda:",
-            "accept": "Nõustu kutsega"
         }
     },
     "messages": {
         "html": {
-            "posted": "postitas <em>{{message.fields.type}}<\/em> sõnumi aadressile {{stream.fields.title}}"
+            "posted": "postitas <em>{{message.fields.type}}<\/em> sõnumi numbrile {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "kommenteeris",
             "startedCallIn": "alustas kõnet",
             "in": "sisse",
-            "body": "aastal {{& url}}: {{& message.fields.content}}",
+            "body": "aastal {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "on postitatud aadressile",
-                "byAvatar": "autor: {{avatar.displayName}}"
+                "byAvatar": "{{avatar.displayName}} võrra"
             },
             "relatedTo": {
                 "hasANew": "on uus {{instructions.fromDisplayType}}",
@@ -163,17 +181,20 @@
     "followup": {
         "mobile": {
             "alert": "Meie numbrilt saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Seejärel saatke neile kiire tekst, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
-            "confirm": "Meie numbrilt saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Kas soovite neile järgneda kiire tekstisõnumiga, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
-            "check": "Hei, saatsin teile just kutse rakendusse {{app}}. Palun kontrolli oma SMS-i ja kliki lingile!",
+            "confirm": "Meie numbrilt saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Kas soovite järgneda kiirele tekstile, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
+            "check": "Hei, saatsin teile just kutse rakendusse {{app}} . Palun kontrolli oma SMS-i ja vajuta lingile!",
             "CheckYourMobile": "Kontrollige SMS-i ja järgige juhiseid!"
         },
         "email": {
             "alert": "Meie domeenist saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Seejärel saatke neile kiire tekst, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
-            "confirm": "Meie domeenist saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Kas soovite neile järgneda kiire tekstisõnumiga, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
-            "subject": "Kas sa said kutse?",
-            "body": "Hei, saatsin teile just kutse rakendusse {{app}}. Kontrollige oma e-posti ja klõpsake seal olevat linki!",
+            "confirm": "Meie domeenist saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Kas soovite järgneda kiirele tekstile, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
+            "subject": "Kas said kutse?",
+            "body": "Hei, saatsin teile just kutse rakendusse {{app}} . Kontrollige oma e-posti ja klõpsake seal olevat linki!",
             "CheckYourEmail": "Palun kontrolli oma meili ja järgi juhiseid!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Privaatsusseaded"
     },
     "participating": {
         "Title": "Pealkiri",
@@ -198,46 +219,49 @@
             "cameraAndMicrophoneBtn": "Luba kaamera ja mikrofon"
         },
         "preparing": {
+            "dialogTitle": "Enne liitumist lülitage kaamera või mikrofon sisse\/välja",
             "micIsOff": "Mikrofon on välja lülitatud",
             "micIsOn": "Mikrofon on sisse lülitatud",
             "cameraIsOff": "Kaamera on välja lülitatud",
             "cameraIsOn": "Kaamera on sisse lülitatud",
             "screenSharingIsOn": "Ekraani jagamine on sisse lülitatud",
             "screenSharingIsOff": "Ekraani jagamine",
-            "joinNow": "Liituge kõnega",
-            "dialogTitle": "Enne liitumist lülitage kaamera või mikrofon sisse\/välja"
+            "joinNow": "Liituge kõnega"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks on keelatud. Selle kasutamiseks järgige neid samme:",
+            "permissionDenied": "Luba {{kind}} jaoks keelatud. Selle kasutamiseks järgige neid samme:",
             "point1": "Avage &quot;Seaded&quot; -&gt; &quot;Täpsemalt&quot; -&gt; &quot;Privaatsus ja turvalisus&quot; -&gt; &quot;Saidi seaded&quot; -&gt; &quot;Kaamera&quot; või &quot;Saidi seaded&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Eemalda {{hostname}} blokeeringute loendist"
+            "point2": "Eemaldage {{hostname}} loendist &quot;Blokeeri&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks on keelatud. Laadige see leht uuesti ja kinnitage konverentsiga liitumiseks juurdepääs domeenile {{kind}}."
+            "permissionDenied": "Luba {{kind}} jaoks keelatud. Laadige see leht uuesti ja kinnitage konverentsiga liitumiseks juurdepääs numbrile {{kind}} ."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks on keelatud. Selle kasutamiseks järgige neid samme:",
+            "permissionDenied": "Luba {{kind}} jaoks keelatud. Selle kasutamiseks järgige neid samme:",
             "point1": "Avage oma Androidi seaded",
             "point2": "Avage &quot;Rakendused ja märguanded&quot;",
-            "point3": "Otsige üles &quot;{{communityName}}&quot; ja avage see",
+            "point3": "Leidke &quot; {{communityName}} &quot; ja avage see",
             "point4": "Puudutage valikut Load",
             "point5": "Luba {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks on keelatud. Selle kasutamiseks järgige neid samme:",
+            "permissionDenied": "Luba {{kind}} jaoks keelatud. Selle kasutamiseks järgige neid samme:",
             "point1": "Avage iOS-i seaded",
             "point2": "Avage &quot;Privaatsus&quot;",
-            "point3": "Otsige üles {{kind}} ja avage see",
-            "point4": "Otsige üles &quot;{{communityName}}&quot; ja lubage"
+            "point3": "Leidke {{kind}} ja avage see",
+            "point4": "Leidke &quot; {{communityName}} &quot; ja lubage"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebooki otseülekanne algas"
         },
         "notices": {
             "youJoinedRoom": "Liitusid ruumiga",
             "joining": "Liitumine: {{userName}}",
-            "sbLeftRoom": "{{userName}} lahkus ruumist",
+            "sbLeftRoom": "{{userName}} lahkus toast",
             "switchingRoom": "Ruumi vahetamine...",
             "forceDisconnecting": "Teie ühendus katkestatakse 5 sekundi jooksul",
             "forceDisconnectingImmediately": "Host katkestas teie ühenduse",
@@ -250,7 +274,7 @@
             "youStartedLive": "Hakkasite seda kõnet kohandatud RTMP-le edastama",
             "youStoppedLive": "Lõpetasite selle kõne edastamise kohandatud RTMP-le",
             "sbStartedLiveStreaming": "{{userName}} alustas otseülekannet",
-            "sbStoppedLiveStreaming": "{{userName}} lõppes otseülekandega",
+            "sbStoppedLiveStreaming": "{{userName}} lõppes otse-eetris",
             "liveStopped": "Video lõpp-punkti saatmisel ilmnes viga",
             "youBeganVideoRecording": "Alustasite selle konverentsi salvestamist",
             "youStoppedVideoRecording": "Lõpetasite selle konverentsi salvestamise",
@@ -289,17 +313,20 @@
             "fbStartLive": "Minge otseülekandesse",
             "fbStopLive": "Lõpeta otseülekanne",
             "streamingSettings": "Seaded",
+            "manageStream": "Otseülekannete haldamine",
             "fbEmbedCode": "Manusta",
             "copy": "Kopeeri",
             "streamToRTMP": "Voogesitage kohandatud RTMP-le",
             "startBroadcasting": "Alustage saateid",
-            "broadcastingInProgress": "Ringhääling on pooleli",
-            "manageStream": "Otseülekannete haldamine"
+            "broadcastingInProgress": "Ringhääling on pooleli"
         },
         "audioSettings": {
             "dialogTitle": "Helisätted",
             "speakers": "Kõlarid",
             "microphone": "Mikrofon"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Saate haldamine"
         },
         "participantsPopup": {
             "dialogTitle": "Osaleja seaded",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Kuva ekraani jagamine"
         },
         "streamingSettings": {
-            "title": "Voogesituse seaded"
+            "title": "Otseülekanne"
         },
         "preview": {
             "Meeting": "Telekonverents",
             "MeetingEnded": "Telekonverents lõppes"
         },
         "requestSpeakDialog": {
-            "msg": "Praegu räägib koosolekul {{count}} inimest. Kas soovite ühe neist asendada pärast seda, kui olete lubanud neil {{seconds}} sekundit kõne lõpetada?",
-            "dialogTitle": "Rääkimise taotlus"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebooki otseülekanne algas"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Saate haldamine"
+            "dialogTitle": "Rääkimise taotlus",
+            "msg": "Praegu võtab koosolekul sõna {{count}} inimest. Kas soovite ühe neist asendada pärast seda, kui olete andnud neile {{seconds}} sekundit kõne lõpetamiseks?"
         }
     },
     "types": {
@@ -350,7 +371,7 @@
             "displayType": "Ülesanne"
         },
         "Streams\/tasks": {
-            "description": "ülesannete kategooria",
+            "description": "kategooria ülesannete jaoks",
             "displayType": "Ülesanded"
         },
         "Streams\/experience": {
@@ -367,7 +388,7 @@
         },
         "Streams\/date": {
             "displayType": "Kuupäev",
-            "description": "kuupäev"
+            "description": "kuupäeva"
         },
         "Streams\/text": {
             "displayType": "Tekst",
@@ -451,8 +472,8 @@
             "description": "kasutajatevaheline vestlus ajalooga"
         },
         "Streams\/webrtc": {
-            "displayType": "Otsekõne",
-            "description": "reaalajas video-\/helikõne"
+            "displayType": "Telekonverents",
+            "description": "veebipõhine video-\/helikonverents"
         },
         "Streams\/question": {
             "displayType": "küsimus",
@@ -465,8 +486,8 @@
         },
         "Streams\/calls": {
             "displayType": "Kõned",
-            "description": "kategooria Streams\/webrtc",
-            "MaxRelationsExceeded": "Kõnede arv on ületatud"
+            "description": "kategooria Streams\/webrtc jaoks",
+            "MaxRelationsExceeded": "Kõnede maksimum on ületatud"
         }
     },
     "menu": {
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Vasta küsimusele",
         "SetYourAnswer": "Palun vastake küsimusele",
         "NewQuestion": "Uus küsimus",
+        "EditQuestion": "Muuda küsimust",
         "NewAnswer": "Uus vastus",
+        "NewPossibleAnswer": "Uus võimalik vastus",
         "AnswerDetails": "Vastuse üksikasjad",
         "answerOption": "Võimalus",
         "answerOptionExclusive": "Eksklusiivne",
         "answerTextarea": "Tekstiala",
+        "answerText": "Tekst",
+        "HideUntilAnswered": "Peida, kuni vastatakse",
+        "CantChangeAnswers": "Vastuseid ei saa muuta",
         "FreeAnswer": "Kirjuta oma vastus siia",
         "SaveQuestion": "Salvesta küsimus",
         "SaveAnswer": "Salvesta vastus",
-        "AddAnotherAnswer": "Lisa veel üks vastus",
-        "ErrorAnswers": "Palun lisa kasvõi üks vastus",
+        "Save": "Salvesta",
+        "Send": "Saada",
+        "TitleRequired": "Pealkiri nõutav!",
         "AlreadyAnswered": "Juba vastatud",
         "TitlePlaceholder": "Sisestage oma küsimus",
         "ContentPlaceholder": "Pange siia lisateavet, et aidata inimestel vastata",
         "ErrorTitle": "Vajalik küsimus",
         "Placeholder": "Kohatäide",
-        "EditQuestion": "Muuda küsimust",
-        "NewPossibleAnswer": "Uus võimalik vastus",
-        "answerText": "Tekst",
-        "HideUntilAnswered": "Peida, kuni vastatakse",
-        "CantChangeAnswers": "Vastuseid ei saa muuta",
-        "Save": "Salvesta",
-        "Send": "Saada",
-        "TitleRequired": "Pealkiri nõutav!",
         "AreYouSure": "Oled sa kindel?"
     },
     "experience": {
@@ -586,32 +605,12 @@
         "NoCallsYet": "Kõnesid veel pole",
         "CallReasonTitle": "Millest see kõne räägib?",
         "WaitingRoom": "Ooteruum",
-        "LiveRoom": "Live tuba",
+        "LiveRoom": "Live Room",
         "interviewedByAnotherHost": "Hetkel intervjueerib teine saatejuht",
         "bringToLive": "Too otsesaatesse",
         "putOnHold": "Pane ootele",
         "endCall": "Lõpeta kõne",
         "interview": "Intervjuu",
         "markApproved": "Märgi heaks kiidetud"
-    },
-    "identifier": {
-        "private": "Privaatne",
-        "public": "Avalik",
-        "configurationSaved": "Konfiguratsioon salvestatud",
-        "error": "Midagi läks valesti",
-        "privacySettings": "Privaatsusseaded"
-    },
-    "avatar": {
-        "firstName": "eesnimi",
-        "lastName": "perekonnanimi",
-        "username": "kasutajanimi"
-    },
-    "login": {
-        "prompt": "Laske sõpradel teid ära tunda:",
-        "newUser": "või looge allpool uus konto",
-        "picTooltip": "Saate seda pilti hiljem muuta",
-        "placeholder": {
-            "fullName": "Sisestage oma täisnimi"
-        }
     }
 }

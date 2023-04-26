@@ -1,14 +1,46 @@
 {
+    "errors": {
+        "Error": "Gabim",
+        "WalletAbsent": "Portofoli nuk është i lidhur.",
+        "Rendering": "Pati gabime gjatë paraqitjes së <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Çmimi i kërkuar!",
+        "NameRequired": "Kërkohet emri!",
+        "PriceInvalid": "Çmimi i pavlefshëm!",
+        "AmountInvalid": "Shuma e pavlefshme!",
+        "TransactionFailed": "Transaksioni dështoi",
+        "ChainNotSupported": "Zinxhiri i zgjedhur nuk mbështetet. Zinxhiri i mbështetur: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Duhet MetaMask i lidhur për të punuar me aplikacionin",
+        "UserNotLoggedInMetaMask": "Përdoruesi nuk është i identifikuar në MetaMask",
+        "CurrencyNotFound": "Valuta nuk u gjet",
+        "WrongChain": "Kjo NFT e krijuar nën &quot; {{chain}} &quot;. Ju lutemi përdorni këtë zinxhir.",
+        "NoRecipientSelected": "Asnjë marrës i zgjedhur",
+        "NotEnoughPermissionsWallet": "Nuk ka leje të mjaftueshme për të lexuar portofolin e këtij përdoruesi",
+        "ThisUserHaveNoWallet": "Ky përdorues nuk ka një portofol të caktuar",
+        "TheWalletOfThisUserInvalid": "Portofoli i këtij përdoruesi është i pavlefshëm",
+        "WalletInvalid": "Adresa e portofolit është e pavlefshme"
+    },
+    "admin": {
+        "Title": "Asetet administrative",
+        "SubscriptionTitle": "Planet e abonimit"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Trokit për të paguar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tarifa e përpunuar për {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : tarifa e përpunuar për {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Faleminderit për pagesën në {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} abonuar në {{plan.title}}",
+        "SubscribedTo": "{{call 'user.displayName'}} të abonuar në {{plan.title}}",
         "YouSubscribedTo": "Ju jeni abonuar në {{plan.title}}",
         "Assets\/credits\/alert": "Ju keni një sinjalizim në lidhje me llogarinë tuaj"
+    },
+    "charge": {
+        "Subject": "Ju merrni pagesën prej {{displayAmount}} nga {{call 'publisher.displayName'}} nga &quot; {{description}} &quot;",
+        "HasBeenCharged": "Hej, kjo është vetëm për t&#39;ju bërë të ditur se {{1}} është tarifuar {{2}} për {{3}} nga {{4}}"
+    },
+    "charged": {
+        "Subject": "Faleminderit për pagesën tuaj për &quot; {{description}} &quot;",
+        "HavePaid": "Hej {{1}} , ky është vetëm një konfirmim i shpejtë që ke paguar me sukses {{2}} deri në {{3}} për {{4}}"
     },
     "payment": {
         "AboutOrder": "Informacion rreth porosisë",
@@ -20,7 +52,7 @@
         "FailTryAgain": "Pagesa juaj nuk ishte e suksesshme, ju lutemi provoni përsëri",
         "SomethingWrong": "Dicka shkoi keq",
         "PaymentStatus": "Statusi i pagesës",
-        "PayTo": "paguaj {{displayName}}",
+        "PayTo": "Paguaj {{displayName}}",
         "ChooseCurrency": "Zgjidhni një monedhë",
         "YouCanSendUpTo": "Mund të dërgoni deri në {{amount}} {{symbol}}",
         "Send": "Dërgo",
@@ -28,82 +60,77 @@
     },
     "credits": {
         "InviteAcceptedBy": "Ftesa u pranua nga {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} mbushur {{FilledStreamTitle}}",
+        "ForFillingStream": "Për plotësimin e {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "Ju keni {{amount}} kredite për të filluar",
-        "PaymentFor": "Pagesa për &quot;{{1}}&quot;",
-        "PaymentTo": "Pagesa për {{1}}",
-        "PaymentToUser": "Pagesa për {{toUserName}}",
-        "JoinedPaidStream": "për rezervim në &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "për krijimin e komunitetit &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "si rimbursim rezervimi në &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Bleva {{amount}} kredite",
-        "BuyAmountCredits": "Bli {{amount}} kredite",
+        "PaymentFor": "Pagesa për &quot; {{1}} &quot;",
+        "PaymentTo": "Pagesa ne {{1}}",
+        "PaymentToUser": "Pagesa ne {{toUserName}}",
+        "CreatePrivateChat": "për bisedë private me {{toUserName}}",
+        "CreatePaidStream": "për krijimin e {{toStreamName}}",
+        "JoinedPaidStream": "për rezervim në &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "për krijimin e komunitetit &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "si rimbursim rezervimi në &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Blerë {{amount}} kredite",
+        "BonusCredits": "Bonus {{amount}} kredite",
+        "BuyAmountCredits": "Blini {{amount}} kredite",
+        "WatchClip": "Fitoi {{amount}} kredite për shikimin e {{fromStreamTitle}}",
         "MissingCredits": "Kreditë që mungojnë",
-        "YouMissingCredits": "Të duhen {{amount}} kredite shtesë për të vazhduar.",
+        "YouMissingCredits": "Ju duhen {{amount}} kredite shtesë për të vazhduar.",
         "BuyCredits": "Blej kredite",
+        "BuyBonus": "Blerja e {{amount}} krediteve në të njëjtën kohë, do të çojë në {{bonus}} kredite bonus.",
         "Buy": "Blej",
+        "PurchaseCredits": "Bleni Kredi",
         "Credits": "Kreditë",
         "ErrorInvalidAmount": "Shuma e pavlefshme",
         "ErrorInvalidCurrency": "Fatkeqësisht, ne nuk e mbështesim ende monedhën {{currency}}",
-        "WatchClip": "Fitove {{amount}} kredite për shikimin {{fromStreamTitle}}",
-        "PurchaseCredits": "Bleni Kredi",
         "forMessages": {
             "BoughtCredits": "{{amount}} kredite",
             "BonusCredits": "{{amount}} kredite"
-        },
-        "CreatePaidStream": "për krijimin e {{toStreamName}}",
-        "BonusCredits": "Bonus {{amount}} kredite",
-        "BuyBonus": "Blerja e {999}} krediteve në të njëjtën kohë, do të çojë në {{bonus}} bonus kredite.",
-        "Streams_user_firstname": "{{invitedUserName}} futi emrin e parë",
-        "Streams_user_lastname": "{{invitedUserName}} futi mbiemrin",
-        "Streams_user_icon": "{{invitedUserName}} ikonën e futur",
-        "Places_user_location": "{{invitedUserName}} futur vendndodhjen",
-        "Streams_greeting": "{{invitedUserName}} hyri në përshëndetje",
-        "InvitedUserFilledStream": "{{invitedUserName}} e mbushur {{FilledStreamTitle}}",
-        "ForFillingStream": "Për mbushjen e {{FilledStreamTitle}}",
-        "CreatePrivateChat": "për bisedë private me {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Data",
         "Amount": "Shuma",
         "Description": "Përshkrim",
         "Client": "Klienti",
+        "User": "Përdoruesi",
         "To": "te",
         "From": "nga",
+        "SeeHistory": "Shikoni historinë e pagesave për {{1}}",
         "HistoryEmpty": "Nuk keni ende të dhëna",
-        "SeeHistory": "Shiko historikun e pagesave për {{1}}",
         "PaymentFor": "Dërguar {{amount}} kredite",
         "PaymentTo": "Dërguar {{amount}} kredite",
         "PaymentToUser": "Dërguar {{amount}} kredite",
+        "CreatePaidStream": "Shpenzuan {{amount}} kredite",
+        "WatchClip": {
+            "+": "Fitoi {{amount}} kredite",
+            "-": "Shpenzuan {{amount}} kredite"
+        },
         "JoinedPaidStream": {
             "+": "Fitoi {{amount}} kredite",
-            "-": "{{amount}} kredite të shpenzuara"
+            "-": "Shpenzuan {{amount}} kredite"
         },
         "LeftPaidStream": {
             "+": "Mori {{amount}} kredite",
             "-": "Dërguar {{amount}} kredite"
         },
-        "CreatedCommunity": "{{amount}} kredite të shpenzuara",
-        "BoughtCredits": "Bleva {{amount}} kredite",
+        "CreatedCommunity": "Shpenzuan {{amount}} kredite",
+        "BoughtCredits": "Blerë {{amount}} kredite",
+        "BonusCredits": "Mori bonus {{amount}} kredite",
         "InviteAcceptedBy": "Fitoi {{amount}} kredite",
-        "YouHaveCreditsToStart": "Fitoi {{amount}} kredite",
-        "CreatePaidStream": "{{amount}} kredite të shpenzuara",
-        "WatchClip": {
-            "+": "Fitoi {{amount}} kredite",
-            "-": "{{amount}} kredite të shpenzuara"
-        },
-        "BonusCredits": "Mora {{amount}} kredite bonus",
         "Streams_user_firstname": "Fitoi {{amount}} kredite",
         "Streams_user_lastname": "Fitoi {{amount}} kredite",
         "Streams_user_icon": "Fitoi {{amount}} kredite",
         "Places_user_location": "Fitoi {{amount}} kredite",
         "Streams_greeting": "Fitoi {{amount}} kredite",
-        "User": "Përdoruesi"
+        "YouHaveCreditsToStart": "Fitoi {{amount}} kredite"
     },
     "subscriptions": {
         "infoTitle": "Vendosni informacionin e pagesës",
         "confirm": {
             "title": "Filloni Abonimin",
-            "message": "Dëshironi të abonoheni në {{title}}?",
+            "message": "Filloni një abonim të përsëritur në &quot; {{title}} &quot;?",
             "ok": "Ne rregull",
             "cancel": "Anulo"
         },
@@ -123,7 +150,7 @@
         "Period": "Periudha",
         "Price": "Çmimi",
         "AreYouSureUnsubscribe": "Je i sigurt që dëshiron ta çabonosh këtë plan?",
-        "YouUnsubscribedFromPlan": "Je çabonuar nga plani &quot;{{planTitle}}&quot;. Nuk do të tarifohesh, por abonimi yt do të vazhdojë deri në {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Je çabonuar nga plani &quot; {{planTitle}} &quot;. Nuk do të tarifohesh, por abonimi yt do të vazhdojë deri në {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "titulli i planit",
             "PricePlaceholder": "çmimi",
@@ -134,13 +161,13 @@
     },
     "payments": {
         "infoTitle": "Vendosni informacionin e pagesës",
+        "BuyAmountCredits": "Blini {{amount}} kredite",
         "confirm": {
-            "title": "Bëni një pagesë",
-            "message": "A pranoni të paguani {{symbol}}{{amount}}?",
+            "title": "Bëni një Pagesë",
+            "message": "A pranoni të paguani {{symbol}} {{amount}} ?",
             "ok": "Ne rregull",
             "cancel": "Anulo"
-        },
-        "BuyAmountCredits": "Bli {{amount}} kredite"
+        }
     },
     "types": {
         "Assets\/credits": {
@@ -168,60 +195,80 @@
         "Assets\/credits\/earned": {
             "content": "Fitoi {{amount}} kredite"
         },
-        "Assets\/credits\/spent": {
-            "content": "{{amount}} kredite të shpenzuara"
-        },
-        "Assets\/credits\/sent": {
-            "content": "Dërgoi {{amount}} kredite te {{toUserName}}"
-        },
-        "Assets\/credits\/received": {
-            "content": "Mora {{amount}} kredite nga {{fromUserName}}"
-        },
         "Assets\/credits\/bought": {
             "content": "Bleva {{amount}} kredite"
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} kredite"
         },
+        "Assets\/credits\/spent": {
+            "content": "Shpenzuan {{amount}} kredite"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Dërguar {{amount}} kredite në {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Mori {{amount}} kredite nga {{fromUserName}}"
+        },
         "Assets\/credits\/alert": {
-            "content": "Ju keni pak kredi në llogarinë tuaj. Ju lutemi vizitoni <a href='{{link}}'>këtë lidhje<\/a> për të blerë më shumë kredite."
+            "content": "Ju keni pak kredi në llogarinë tuaj. Ju lutemi vizitoni <a href='<i translate='no'>999 &#39;&gt; këtë lidhje<\/a> për të blerë më shumë kredite."
         }
     },
-    "charge": {
-        "Subject": "Ju merrni pagesën prej {{displayAmount}} nga {{call 'publisher.displayName'}} nga &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hej, kjo është vetëm për t&#39;ju bërë të ditur se {{1}} është tarifuar {{2}} për {{3}} nga {{4}}"
-    },
-    "charged": {
-        "Subject": "Faleminderit për pagesën tuaj për &quot;{{description}}&quot;",
-        "HavePaid": "Hej {{1}}, ky është vetëm një konfirmim i shpejtë që i ke paguar me sukses {{2}} {{3}} për {{4}}"
+    "billing": {
+        "Title": "Faturimi i aseteve",
+        "CreditsMinimum": "Kredite minimale",
+        "CreditsToAdd": "Kredite për të shtuar",
+        "Save": "Ruaj",
+        "ThisLink": "kjo lidhje",
+        "errors": {
+            "CreditsMinimumNegative": "Minimumi i kredive nuk mund të jetë negativ",
+            "CreditsToAddNegative": "Kreditet për të shtuar nuk mund të jenë negative"
+        }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Shërbimi i ri",
             "TitlePlaceholder": "Titulli i shërbimit",
-            "PricePlaceholder": "Cakto çmimin",
+            "PricePlaceholder": "Përcaktoni çmimin",
             "LinkPlaceholder": "vendosni lidhjen e informacionit shtesë",
             "DescriptionPlaceholder": "Përshkrimi i shërbimit",
             "SaveService": "Ruaj shërbimin",
-            "SelectRequiredParticipants": "Pjesëmarrësit e kërkuar",
-            "RequiredParticipantsDesc": "Ju lutemi zgjidhni pjesëmarrësit e lidhur me të cilët kërkohet të përdorin këtë shërbim (për shembull kafshët shtëpiake për &quot;Dog show&quot;, ose fëmijët për &quot;Pushimet e fëmijëve&quot; etj). Nëse shërbimi paguhet, përdoruesi do të duhet të paguajë gjithashtu për secilin pjesëmarrës të lidhur."
+            "SelectRequiredParticipants": "Kërkohen pjesëmarrës të lidhur",
+            "RequiredParticipantsDesc": "Ju lutemi zgjidhni pjesëmarrësit e lidhur me të cilët kërkohet të përdorin këtë shërbim (për shembull kafshët shtëpiake për &quot;Dog show&quot;, ose fëmijët për &quot;Pushimet e fëmijëve&quot; etj). Nëse shërbimi paguhet, përdoruesi do të duhet të paguajë edhe për secilin pjesëmarrës të lidhur."
+        },
+        "EditServiceTemplate": {
+            "Title": "Redakto shërbimin"
         },
         "ManageServiceTemplates": "Menaxho modelet e shërbimit",
         "ManageServices": "Menaxho Shërbimet",
-        "FreeEvent": "Ngjarje falas",
-        "OptionalContribution": "Kontribut opsional",
-        "RequiredPayment": "Pagesa e nevojshme",
-        "AreYouSureDelete": "Jeni i sigurt që dëshironi ta fshini këtë shërbim?",
-        "AmountServicesRelated": "Ka {{amount}} disponueshmëri në lidhje me këtë shërbim. Ata gjithashtu do të hiqen.",
         "Free": "Falas",
-        "EditServiceTemplate": {
-            "Title": "Redakto shërbimin"
-        }
+        "OptionalContribution": "Kontribut opsional",
+        "RequiredPayment": "Pagesa e kërkuar",
+        "AreYouSureDelete": "Jeni i sigurt që dëshironi ta fshini këtë shërbim?",
+        "AmountServicesRelated": "Ka {{amount}} disponueshmëri në lidhje me këtë shërbim. Ata gjithashtu do të hiqen."
+    },
+    "transfer": {
+        "SelectRecipient": "Zgjidhni marrësin",
+        "TransactionSuccess": "Suksesi i transaksionit",
+        "OrTypeWalletAddress": "OSE shkruani adresën e portofolit të marrësit"
     },
     "NFT": {
-        "Title": "Informacion rreth {{title}} NFT",
-        "Description": "Informacione të hollësishme rreth NFT",
-        "FixedBid": "Bli tani",
+        "Title": "Titulli",
+        "Name": "Emri",
+        "EnterName": "Fut emrin",
+        "EnterAuthorWallet": "Fut portofolin e autorit",
+        "InformationAboutTitle": "Informacion rreth {{title}} NFT",
+        "Description": "Përshkrim",
+        "DetailedInformationAboutNFT": "Informacione të hollësishme rreth NFT",
+        "PresaleStarts": "Parashitja fillon me 23 Dhjetor",
+        "OwnerUserNotFound": "Pronari i kësaj NFT nuk është i regjistruar në aplikacionin tonë.",
+        "BuyNow": "Bli tani",
+        "Buy": "Blej",
+        "Add": "Shtoni",
+        "Remove": "Hiq",
+        "NoNFTyet": "Nuk ka ende NFT",
+        "Conversation": "bashkëbisedim",
+        "Create": "Krijo",
         "CurrentBid": "Oferta aktuale",
         "StartingIn": "Duke filluar në",
         "EndingIn": "Duke përfunduar në",
@@ -235,10 +282,13 @@
         "StartingDate": "Data e fillimit",
         "BidsBelowThisAmount": "Ofertat nën këtë shumë nuk do të lejohen",
         "MinimumBid": "Oferta minimale",
+        "Author": "Autori",
         "Price": "Çmimi",
+        "Commission": "Komisioni",
+        "EnterCommission": "Hyni në komision",
         "Owner": "Pronari",
         "SelectCategory": "Zgjidhni kategorinë",
-        "Day": "ditë",
+        "Day": "Dita",
         "Days": "Ditët",
         "Hour": "Ora",
         "Hours": "orët",
@@ -254,17 +304,25 @@
         "PutOnSale": "Vënë në shitje",
         "PutOffSale": "Tërhiqet nga shitja",
         "Transfer": "Transferimi",
+        "Actions": "Veprimet",
+        "Claim": "Kerkese",
+        "ClaimNFT": "Pretendoni NFT",
+        "Unlocking": "Zhbllokimi",
+        "Unlock": "Hap",
         "Update": "Përditëso",
         "UpdateToken": "Përditëso Token",
+        "UpdateNFT": "Përditëso NFT",
         "CreateToken": "Krijo Token",
         "PlaceBid": "Vendi i ofertës",
         "SoldOut": "Shitur",
+        "NotOnSale": "Jo Në shitje",
         "NftName": "Emri NFT",
         "DescribeYourNFT": "Ju lutemi përshkruani NFT-në tuaj",
         "NftPicture": "Foto për të përfaqësuar NFT",
         "NftMovie": "Film për të përfaqësuar NFT",
         "UploadMovie": "Ngarko film",
         "MovieSource": "Burimi i filmit",
+        "MovieURL": "URL e filmit",
         "UploadFile": "Ngarko një skedar",
         "PutOnMarketplace": "Vënë në treg",
         "InstantPurchase": "Fut çmimin për t&#39;i lejuar përdoruesit të blejnë menjëherë NFT-në tuaj",
@@ -272,60 +330,9 @@
         "TimedAuction": "Ankand me kohë",
         "OpenForBids": "Hapur për oferta",
         "PriceOnePiece": "Shkruani çmimin për një copë",
+        "EnterPrice": "Shkruani çmimin",
         "EnterMinimumBid": "Fut ofertën minimale",
         "SelectChain": "Zgjidhni zinxhirin",
-        "WrongChain": "Ky NFT u krijua nën &quot;{{chain}}&quot;. Ju lutemi përdorni këtë zinxhir.",
-        "import": {
-            "importNFT": "Importimi i NFT-ve",
-            "fileNotFound": "Na vjen keq, skedari CSV nuk u gjet.",
-            "fileEmpty": "Na vjen keq, skedari CSV është bosh.",
-            "userIdNotFound": "përdoruesi ekziston por ID-ja është bosh",
-            "errorLine": "rreshti {{1}}",
-            "fieldNotFound": "Fusha e kërkuar &quot;{{1}}&quot; nuk u gjet",
-            "taskStreamInvalid": "transmetimi i detyrës është i pavlefshëm",
-            "instructionsEmpty": "udhëzimet për rrjedhën e detyrave janë bosh",
-            "complete": "Kompletuar",
-            "activateUsers": "dërgoni mesazh aktivizimi për përdoruesit?",
-            "importProgress": "Përparim",
-            "importOptions": "Opsione",
-            "sampleCSV": "Shkarkoni shembullin CSV",
-            "fileLabel": "Ngarko fletëllogaritëse:",
-            "errorsTitle": "Ndodhën gabime",
-            "importAttributes": "Importoni atributet NFT",
-            "displayTypeEmpty": "Lloji i ekranit për &quot;{{1}}&quot; nuk u gjet"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Filtro sipas Koleksioneve NFT",
-                "ShowNFTCollection": "Shfaq koleksionin NFT në ...",
-                "AllCollections": "Të gjitha Koleksionet"
-            },
-            "ByUser": {
-                "AllAuthors": "Të gjithë Autorët",
-                "AllUsers": "Të gjithë",
-                "FilterByAuthors": "Filtro sipas autorëve"
-            }
-        },
-        "Back": "Kthehu te Koleksioni",
-        "Name": "Emri",
-        "EnterName": "Fut emrin",
-        "EnterAuthorWallet": "Fut portofolin e autorit",
-        "InformationAboutTitle": "Informacion rreth {{title}} NFT",
-        "DetailedInformationAboutNFT": "Informacione të hollësishme rreth NFT",
-        "PresaleStarts": "Parashitja fillon me 23 Dhjetor",
-        "OwnerUserNotFound": "Pronari i kësaj NFT nuk është i regjistruar në aplikacionin tonë.",
-        "BuyNow": "Bli tani",
-        "Buy": "Blej",
-        "Conversation": "bashkëbisedim",
-        "Create": "Krijo",
-        "Author": "Autori",
-        "Commission": "Komisioni",
-        "EnterCommission": "Hyni në komision",
-        "Actions": "Veprimet",
-        "UpdateNFT": "Përditëso NFT",
-        "NotOnSale": "Jo Në shitje",
-        "MovieURL": "URL e filmit",
-        "EnterPrice": "Shkruani çmimin",
         "Currency": "Monedha",
         "AreYouSureDeleteImage": "Jeni i sigurt që dëshironi të hiqni imazhin?",
         "AreYouSureDeleteVideo": "Je i sigurt që dëshiron ta heqësh videon?",
@@ -366,7 +373,7 @@
             "CurrentBaseURL": "BaseURL aktuale",
             "ContractAddressAbsent": "Adresa e kontratës mungon",
             "FactoryAddressAbsent": "Adresa e fabrikës mungon",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Kërkohet titulli",
             "SymbolRequired": "Kërkohet simbol",
             "TypeContractName": "emri i kontratës",
@@ -376,6 +383,38 @@
             "Title": "Konkurse",
             "NewContest": "Konkurs i ri"
         },
+        "import": {
+            "importNFT": "Importimi i NFT-ve",
+            "importAttributes": "Importoni atributet NFT",
+            "fileNotFound": "Na vjen keq, skedari CSV nuk u gjet.",
+            "fileEmpty": "Na vjen keq, skedari CSV është bosh.",
+            "userIdNotFound": "përdoruesi ekziston por ID-ja është bosh",
+            "errorLine": "rreshti {{1}}",
+            "fieldNotFound": "Fusha e kërkuar &quot; {{1}} &quot; nuk u gjet",
+            "displayTypeEmpty": "Lloji i ekranit për &quot; {{1}} &quot; nuk u gjet",
+            "taskStreamInvalid": "transmetimi i detyrës është i pavlefshëm",
+            "instructionsEmpty": "udhëzimet për rrjedhën e detyrave janë bosh",
+            "complete": "Kompletuar",
+            "activateUsers": "dërgoni mesazh aktivizimi për përdoruesit?",
+            "importProgress": "Përparim",
+            "importOptions": "Opsione",
+            "sampleCSV": "Shkarkoni shembullin CSV",
+            "fileLabel": "Ngarko fletëllogaritëse:",
+            "errorsTitle": "Ndodhën gabime"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filtro sipas Koleksioneve NFT",
+                "ShowNFTCollection": "Shfaq koleksionin NFT në ...",
+                "AllCollections": "Të gjitha Koleksionet"
+            },
+            "ByUser": {
+                "AllAuthors": "Të gjithë Autorët",
+                "AllUsers": "Të gjithë",
+                "FilterByAuthors": "Filtro sipas autorëve"
+            }
+        },
+        "Back": "Kthehu te Koleksioni",
         "attributes": {
             "Title": "Menaxho atributet",
             "Attributes": "Atributet",
@@ -399,13 +438,6 @@
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Jeni i sigurt që dëshironi të dilni?"
         },
-        "Add": "Shtoni",
-        "Remove": "Hiq",
-        "NoNFTyet": "Nuk ka ende NFT",
-        "Claim": "Kerkese",
-        "ClaimNFT": "Pretendoni NFT",
-        "Unlocking": "Zhbllokimi",
-        "Unlock": "Hap",
         "sales": {
             "factory": {
                 "form": {
@@ -503,7 +535,7 @@
                 },
                 "small": {
                     "tokenId": "identifikimi i shenjës se çfarë duhet të kyçet ose zhbllokohet",
-                    "custodian": "adresa që mund të jetë në gjendje të zhbllokohet",
+                    "custodian": "adresa që mund të zhbllokohet",
                     "recipient": "adresa që do të marrë argumentet"
                 }
             },
@@ -521,50 +553,10 @@
             "Unlock": "Hap",
             "Locked": "I bllokuar",
             "CustodianAddress": "Adresa e kujdestarit",
-            "TokenWasClaimed": "Shenja &quot;{{title}}&quot; u pretendua",
-            "TokenWasLocked": "Token &quot;{{title}}&quot; u kyç",
-            "TokenWasUnlocked": "Token &quot;{{title}}&quot; u shkyç"
+            "TokenWasClaimed": "Token &quot; {{title}} &quot; u pretendua",
+            "TokenWasLocked": "Token &quot; {{title}} &quot; ishte i kyçur",
+            "TokenWasUnlocked": "Token &quot; {{title}} &quot; u shkyç"
         }
-    },
-    "errors": {
-        "Error": "Gabim",
-        "WalletAbsent": "Portofoli nuk është i lidhur.",
-        "Rendering": "Pati gabime gjatë paraqitjes së <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Çmimi i kërkuar!",
-        "NameRequired": "Kërkohet emri!",
-        "PriceInvalid": "Çmimi i pavlefshëm!",
-        "TransactionFailed": "Transaksioni dështoi",
-        "ChainNotSupported": "Zinxhiri i zgjedhur nuk mbështetet. Zinxhiri i mbështetur: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Duhet MetaMask i lidhur për të punuar me aplikacionin",
-        "UserNotLoggedInMetaMask": "Përdoruesi nuk është i identifikuar në MetaMask",
-        "CurrencyNotFound": "Valuta nuk u gjet",
-        "WrongChain": "Ky NFT u krijua nën &quot;{{chain}}&quot;. Ju lutemi përdorni këtë zinxhir.",
-        "AmountInvalid": "Shuma e pavlefshme!",
-        "NoRecipientSelected": "Asnjë marrës i zgjedhur",
-        "NotEnoughPermissionsWallet": "Nuk ka leje të mjaftueshme për të lexuar portofolin e këtij përdoruesi",
-        "ThisUserHaveNoWallet": "Ky përdorues nuk ka një portofol të caktuar",
-        "TheWalletOfThisUserInvalid": "Portofoli i këtij përdoruesi është i pavlefshëm",
-        "WalletInvalid": "Adresa e portofolit është e pavlefshme"
-    },
-    "admin": {
-        "Title": "Asetet administrative",
-        "SubscriptionTitle": "Planet e abonimit"
-    },
-    "billing": {
-        "Title": "Faturimi i aseteve",
-        "CreditsMinimum": "Kredite minimale",
-        "CreditsToAdd": "Kredite për të shtuar",
-        "Save": "Ruaj",
-        "ThisLink": "kjo lidhje",
-        "errors": {
-            "CreditsMinimumNegative": "Minimumi i kredive nuk mund të jetë negativ",
-            "CreditsToAddNegative": "Kreditet për të shtuar nuk mund të jenë negative"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Zgjidhni marrësin",
-        "TransactionSuccess": "Suksesi i transaksionit",
-        "OrTypeWalletAddress": "OSE shkruani adresën e portofolit të marrësit"
     },
     "currencies": {
         "choose": "Zgjidhni një monedhë"

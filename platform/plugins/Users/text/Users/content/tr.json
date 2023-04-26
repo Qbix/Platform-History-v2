@@ -1,10 +1,23 @@
 {
+    "avatar": {
+        "Someone": "Birisi"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-posta",
+            "mobile": "mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "kopyalandı! Artık herhangi bir yere yapıştırabilirsiniz."
+    },
     "analytics": {
         "Title": "Analitik",
         "Daily": "Günlük",
         "Weekly": "Haftalık",
         "Monthly": "Aylık",
-        "Application": "Uygulama",
+        "Application": "Başvuru",
         "Pages": "Sayfalar",
         "Services": "Hizmetler",
         "Faq": "SSS",
@@ -15,13 +28,13 @@
         "LogOut": "çıkış Yap"
     },
     "activate": {
-        "SetAsPrimary": "{{1}} öğesini birincil {{2}} olarak ayarla",
-        "ChoosePassPhrase": "Giriş yapmak için bir <strong>parola<\/strong> seçin.<br> Kolayca hatırlayacağınız birkaç kelimeden oluşan basit bir cümle.",
+        "OneTimeCode": "Aldığınız kodu girin:",
+        "SetAsPrimary": "{{1}} birincil {{2}} olarak ayarla",
+        "ChoosePassPhrase": "Oturum açmak için bir <strong>parola<\/strong> seçin.<br> Kolayca hatırlayacağınız birkaç kelimeden oluşan basit bir cümle.",
         "ChoosePassPhraseSeeSuggestions": "Hesabınızı korumak için iyi bir <strong>parola<\/strong> seçin. Bazı fikirler için önerilere bakın.",
         "LogOutAndTryAgain": "Oturumu Kapatın ve Tekrar Deneyin",
-        "IfYouFeel": "Bir şeylerin ters gittiğini hissederseniz, şunları yapabilirsiniz:",
+        "IfYouFeel": "Bir şeylerin ters gittiğini hissederseniz,",
         "SetIdentifierButtonTitle": "baştan başlamak",
-        "OneTimeCode": "Aldığınız kodu girin:",
         "ActivateMyAccount": "Hesabımı Etkinleştir"
     },
     "session": {
@@ -30,26 +43,26 @@
     "authorize": {
         "GetStarted": "Başlamak",
         "Authorize": "Yetki vermek",
-        "TermsLabel": "okudum ve kabul ediyorum<br> {{link}}&#39;a",
-        "TermsTitle": "Şartlar",
+        "TermsLabel": "okudum ve kabul ediyorum<br> {{link}}",
+        "TermsTitle": "şartlar",
         "mustAgree": "Öncelikle şartları kabul etmelisiniz."
     },
     "register": {
         "TermsLabel": "{{link}} kabul ediyorum",
-        "TermsTitle": "Şartlar"
+        "TermsTitle": "şartlar"
     },
     "notifications": {
         "title": "İzin",
-        "prompt": "Bildirimleri etkinleştirmek istiyor musunuz? Önem verdiğiniz şeyler hakkında gerçek zamanlı güncellemeler alacaksınız.",
+        "prompt": "Bildirimleri etkinleştirmek istiyor musunuz? Önemsediğiniz şeyler hakkında gerçek zamanlı güncellemeler alacaksınız.",
         "yes": "Evet",
-        "no": "Numara",
+        "no": "HAYIR",
         "WelcomePleaseVerifyEmail": "Hoş geldin! Lütfen email adresini doğrula.",
         "WelcomeVerifyEmail": "Hoş geldin! Email adresinizi doğrulayın.",
-        "ForgetPass": "Hey, parolanı unuttun mu?",
+        "ForgetPass": "Hey, parolanı mı unuttun?",
         "PassphraseSaved": "Parolanız kaydedildi.",
-        "IdentifierActivated": "{{type}} hesabınız etkinleştirildi.",
+        "IdentifierActivated": "{{type}} etkinleştirildi.",
         "CompletedActivation": "Kullanıcı aktivasyonunu tamamladınız.",
-        "CompletedActivationLogIn": "Kullanıcı aktivasyonunu tamamladınız. Şimdi giriş yapmayı deneyin."
+        "CompletedActivationLogIn": "Kullanıcı aktivasyonunu tamamladınız. Şimdi oturum açmayı deneyin."
     },
     "contacts": {
         "dialog": {
@@ -60,66 +73,63 @@
             "EmptyContacts": "Kişiler bulunamadı..."
         },
         "select": {
-            "title": "{{displayName}} kişi seçin"
+            "title": "{{displayName}} kişisini seçin"
         }
     },
     "usersContacts": {
-        "selectLabel": "Lütfen etiket seçin.",
+        "selectLabel": "Lütfen etiketi seçin.",
         "inviteUser": "Kullanıcıları Davet Et",
         "selectRole": "Rol Seçin",
         "inviteRole": "{{role}} davet et"
     },
     "invalidLanguageSelected": "Geçersiz dil seçildi",
+    "platforms": {
+        "wallet": "Cüzdan",
+        "broadcast": "Yayın"
+    },
     "login": {
         "title": "Hoş geldin",
-        "directions": "Bir hesap oluşturun veya giriş yapın.",
+        "directions": "Bir hesap oluşturun veya oturum açın.",
         "directionsNoRegister": "Hesabınız varsa giriş yapın.",
-        "goButton": "⮕",
-        "passphrase": "Parola ifadenizi girin:",
+        "goButton": "➔",
+        "passphrase": "Parolanızı girin:",
         "loginButton": "Başlamak",
         "registerButton": "Başlamak",
         "resendButton": "Aktivasyon Mesajı Gönder",
         "forgot": "Onu unut?",
         "resendConfirm": "Parolanızı sıfırlamak için bir mesaj göndermek ister misiniz?",
         "resendSuccess": "Parolanızı sıfırlamak için bir mesaj olup olmadığını kontrol edin",
-        "resendClose": "Kapat",
-        "noPassphrase": "Giriş yapmadan önce, aktivasyon mesajınızdaki bağlantıya tıklayarak bir parola belirlemelisiniz.",
+        "resendClose": "Kapalı",
+        "noPassphrase": "Giriş yapmadan önce, aktivasyon mesajınızdaki bağlantıya tıklayarak bir şifre belirlemelisiniz.",
         "notVerified": "Giriş yapabilmek için kendinize bir aktivasyon mesajı göndermelisiniz.",
-        "emailExists": "Daha önce bu e-posta ile kaydolmayı denediniz mi? Öyleyse, hesabınızı etkinleştirmek için gelen kutunuzu kontrol edin. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yeniden göndermek için tıklayın<\/a>",
-        "mobileExists": "Daha önce bu cep telefonu numarasıyla kaydolmayı denediniz mi? Öyleyse, hesabınızı etkinleştirmek için SMS&#39;inizi kontrol edin. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yeniden göndermek için tıklayın<\/a>",
+        "emailExists": "Daha önce bu e-posta ile kaydolmayı denediniz mi? Öyleyse, hesabınızı etkinleştirmek için gelen kutunuzu kontrol edin. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı tekrar göndermek için tıklayın<\/a>",
+        "mobileExists": "Daha önce bu cep telefonu numarasıyla kayıt olmayı denediniz mi? Öyleyse, hesabınızı etkinleştirmek için SMS&#39;inizi kontrol edin. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı tekrar göndermek için tıklayın<\/a>",
         "usingOther": "ya da yapabilirsin",
+        "connectPlatforms": "veya şunu kullanarak bağlanın:",
         "prompt": "Bir kullanıcı adı seçin:",
-        "newUser": "veya aşağıda yeni bir hesap oluşturun",
+        "newUser": "veya aşağıdan yeni bir hesap oluşturun",
         "placeholders": {
             "identifier": "cep numaranız veya e-postanız",
-            "mobile": "cep numaranızı girin #",
+            "mobile": "cep telefonunuzu girin",
             "email": "E-posta adresinizi giriniz",
             "username": "sadece harf ve rakam kullan"
         },
-        "confirmTerms": "Hizmet Şartlarını kabul ediyor musunuz?",
+        "confirmTerms": "Hizmet Şartları&#39;nı kabul ediyor musunuz?",
         "facebookNoEmail": "Facebook hesabınızda onaylanmış bir e-posta adresi eksik. Basitçe yerel şekilde oturum açın.",
         "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz.",
-        "wallet": {
-            "payload": "{{host}}&#39;da {{timestamp}} saatinde oturum açın",
-            "alert": {
-                "title": "Cüzdan&#39;a Yönlendirme",
-                "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
-            }
-        },
         "web3": {
-            "payload": "{{host}}&#39;da {{timestamp}} zamanında oturum açın",
+            "payload": "{{timestamp}} zamanında {{host}} giriş yapın",
             "alert": {
-                "title": "Cüzdan&#39;a Yönlendirme",
+                "title": "Wallet&#39;a Yönlendirme",
                 "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
             }
-        },
-        "connectPlatforms": "veya şunu kullanarak bağlanın:"
+        }
     },
     "setIdentifier": {
         "title": "Giriş yapmak için bir yol ekleyin",
         "sendMessage": "Aktivasyon Mesajı Gönder",
         "placeholders": {
-            "identifier": "cep numaranızı veya e-posta adresinizi girin",
+            "identifier": "cep numaranızı veya e-postanızı girin",
             "mobile": "telefon numaranızı girin",
             "email": "E-posta adresinizi giriniz",
             "username": "Kullanıcı adı"
@@ -128,37 +138,20 @@
     "prompt": {
         "title": "{{Platform}} Hesap",
         "areUsing": "{{platform}} olarak kullanıyorsunuz",
-        "noLongerUsing": "Artık {{platform}} ile şu şekilde bağlı değilsiniz:",
+        "noLongerUsing": "Artık {{platform}} şu şekilde bağlı değilsiniz:",
         "doAuth": "Bu hesapla giriş yap",
         "doSwitch": "Bu hesaba geç"
     },
     "roles": {
-        "Owner": "Sahip",
+        "Owner": "Mal sahibi",
         "Admin": "yönetici",
         "Member": "Üye",
         "Guest": "Misafir",
         "Host": "Ev sahibi"
     },
-    "avatar": {
-        "Someone": "Birisi"
-    },
     "web3": {
         "WrongMethod": "Yanlış sözleşme yöntemi {{methodName}}",
         "ChangeWallet": "Cüzdanı Değiştir"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-posta",
-            "mobile": "Mobil",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopyalandı! Artık herhangi bir yere yapıştırabilirsiniz."
-    },
-    "platforms": {
-        "wallet": "Cüzdan",
-        "broadcast": "Yayın"
     },
     "labels": {
         "addToPhonebook": "Telefon Kişilerime Ekle",

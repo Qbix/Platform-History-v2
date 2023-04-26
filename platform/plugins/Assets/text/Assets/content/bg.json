@@ -1,20 +1,52 @@
 {
+    "errors": {
+        "Error": "Грешка",
+        "WalletAbsent": "Портфейлът не е свързан.",
+        "Rendering": "Имаше грешки при изобразяването <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Задължителна цена!",
+        "NameRequired": "Изисква се име!",
+        "PriceInvalid": "Невалидна цена!",
+        "AmountInvalid": "Невалидна сума!",
+        "TransactionFailed": "Транзакцията е неуспешна",
+        "ChainNotSupported": "Избраната верига не се поддържа. Поддържана верига: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Нуждаете се от свързана MetaMask, за да работите с приложението",
+        "UserNotLoggedInMetaMask": "Потребителят не е влязъл в MetaMask",
+        "CurrencyNotFound": "Валутата не е намерена",
+        "WrongChain": "Този NFT е създаден под „ {{chain}} “. Моля, използвайте тази верига.",
+        "NoRecipientSelected": "Няма избран получател",
+        "NotEnoughPermissionsWallet": "Няма достатъчно разрешения за четене на портфейла на този потребител",
+        "ThisUserHaveNoWallet": "Този потребител няма присвоен портфейл",
+        "TheWalletOfThisUserInvalid": "Портфейлът на този потребител е невалиден",
+        "WalletInvalid": "Адресът на портфейла е невалиден"
+    },
+    "admin": {
+        "Title": "Административни активи",
+        "SubscriptionTitle": "Абонаментни планове"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Докоснете за плащане"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: таксуването е обработено за {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Благодарим ви за плащането на {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} се абонира за {{plan.title}}",
-        "YouSubscribedTo": "Абонирахте се за {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : обработено таксуване за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Благодарим ви за плащането към {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} абонирани за {{plan.title}}",
+        "YouSubscribedTo": "Вие сте абонирани за {{plan.title}}",
         "Assets\/credits\/alert": "Имате сигнал, свързан с вашия акаунт"
+    },
+    "charge": {
+        "Subject": "Получавате плащане от {{displayAmount}} от {{call 'publisher.displayName'}} чрез &quot; {{description}} &quot;",
+        "HasBeenCharged": "Хей, това е само за да знаете, че {{1}} е таксуван {{2}} за {{3}} от {{4}}"
+    },
+    "charged": {
+        "Subject": "Благодарим ви за плащането за &quot; {{description}} &quot;",
+        "HavePaid": "Хей {{1}} , това е само бързо потвърждение, че успешно сте платили {{2}} до {{3}} за {{4}}"
     },
     "payment": {
         "AboutOrder": "Информация за поръчката",
         "PaymentMethod": "Начин на плащане",
         "ContactInfo": "Информация за контакт",
-        "Pay": "Плати",
+        "Pay": "Плащане",
         "PaymentSucceeded": "Плащането е успешно",
         "PaymentProcessing.": "Вашето плащане се обработва",
         "FailTryAgain": "Вашето плащане не беше успешно, моля опитайте отново",
@@ -28,87 +60,82 @@
     },
     "credits": {
         "InviteAcceptedBy": "Поканата е приета от {{invitedUserName}}",
-        "YouHaveCreditsToStart": "Имате {{amount}} кредити, за да започнете",
-        "PaymentFor": "Плащане за „{{1}}“",
-        "PaymentTo": "Плащане до {{1}}",
-        "PaymentToUser": "Плащане до {{toUserName}}",
-        "JoinedPaidStream": "за резервация в „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
-        "CreatedCommunity": "за създаване на общност &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "като възстановяване на сума за резервация в „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
-        "BoughtCredits": "Купих {{amount}} кредити",
-        "BuyAmountCredits": "Купете {{amount}} кредити",
+        "InvitedUserFilledStream": "{{invitedUserName}} попълни {{FilledStreamTitle}}",
+        "ForFillingStream": "За пълнене {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "Имате {{amount}} кредита, за да започнете",
+        "PaymentFor": "Плащане за &quot; {{1}} &quot;",
+        "PaymentTo": "Плащане на {{1}}",
+        "PaymentToUser": "Плащане на {{toUserName}}",
+        "CreatePrivateChat": "за личен чат с {{toUserName}}",
+        "CreatePaidStream": "за създаването {{toStreamName}}",
+        "JoinedPaidStream": "за резервация в &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "за създаване на общност &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "като възстановяване на резервация в &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Купих {{amount}} кредита",
+        "BonusCredits": "Бонус {{amount}} кредита",
+        "BuyAmountCredits": "Купете {{amount}} кредита",
+        "WatchClip": "Спечелени {{amount}} кредита за гледане {{fromStreamTitle}}",
         "MissingCredits": "Липсващи кредити",
-        "YouMissingCredits": "Нуждаете се от допълнителни {{amount}} кредити, за да продължите.",
-        "BuyCredits": "Купувайте кредити",
+        "YouMissingCredits": "Имате нужда от допълнителни {{amount}} кредита, за да продължите.",
+        "BuyCredits": "Купете кредити",
+        "BuyBonus": "Купуването на {{amount}} кредита наведнъж ще доведе до {{bonus}} кредита бонус.",
         "Buy": "Купува",
+        "PurchaseCredits": "Кредити за покупка",
         "Credits": "Кредити",
         "ErrorInvalidAmount": "Невалидна сума",
         "ErrorInvalidCurrency": "За съжаление все още не поддържаме валута {{currency}}",
-        "WatchClip": "Спечелени {{amount}} кредити за гледане на {{fromStreamTitle}}",
-        "PurchaseCredits": "Закупуване на кредити",
         "forMessages": {
-            "BoughtCredits": "{{amount}} кредити",
-            "BonusCredits": "{{amount}} кредити"
-        },
-        "CreatePaidStream": "за създаване на {{toStreamName}}",
-        "BonusCredits": "Бонус {{amount}} кредити",
-        "BuyBonus": "Купуването на {{amount}} кредита наведнъж ще доведе до бонус за {{bonus}} кредита.",
-        "Streams_user_firstname": "{{invitedUserName}} въведе собствено име",
-        "Streams_user_lastname": "{{invitedUserName}} въведе фамилно име",
-        "Streams_user_icon": "{{invitedUserName}} въведена икона",
-        "Places_user_location": "{{invitedUserName}} въведе местоположение",
-        "Streams_greeting": "{{invitedUserName}} въведе поздрав",
-        "InvitedUserFilledStream": "{{invitedUserName}} запълнено {{FilledStreamTitle}}",
-        "ForFillingStream": "За пълнене {{FilledStreamTitle}}",
-        "CreatePrivateChat": "за личен чат с {{toUserName}}"
+            "BoughtCredits": "{{amount}} кредита",
+            "BonusCredits": "{{amount}} кредита"
+        }
     },
     "history": {
         "Date": "Дата",
         "Amount": "Количество",
         "Description": "Описание",
-        "Client": "клиент",
+        "Client": "Клиент",
+        "User": "Потребител",
         "To": "да се",
         "From": "от",
-        "HistoryEmpty": "Все още нямате данни",
         "SeeHistory": "Вижте историята на плащанията за {{1}}",
-        "PaymentFor": "Изпратени {{amount}} кредити",
-        "PaymentTo": "Изпратени {{amount}} кредити",
-        "PaymentToUser": "Изпратени {{amount}} кредити",
+        "HistoryEmpty": "Все още нямате данни",
+        "PaymentFor": "Изпратени {{amount}} кредита",
+        "PaymentTo": "Изпратени {{amount}} кредита",
+        "PaymentToUser": "Изпратени {{amount}} кредита",
+        "CreatePaidStream": "Похарчени {{amount}} кредита",
+        "WatchClip": {
+            "+": "Спечелени {{amount}} кредита",
+            "-": "Похарчени {{amount}} кредита"
+        },
         "JoinedPaidStream": {
-            "+": "Спечелени {{amount}} кредити",
-            "-": "Изхарчени {{amount}} кредити"
+            "+": "Спечелени {{amount}} кредита",
+            "-": "Похарчени {{amount}} кредита"
         },
         "LeftPaidStream": {
-            "+": "Получихте {{amount}} кредити",
-            "-": "Изпратени {{amount}} кредити"
+            "+": "Получени {{amount}} кредита",
+            "-": "Изпратени {{amount}} кредита"
         },
-        "CreatedCommunity": "Изхарчени {{amount}} кредити",
-        "BoughtCredits": "Купих {{amount}} кредити",
-        "InviteAcceptedBy": "Спечелени {{amount}} кредити",
-        "YouHaveCreditsToStart": "Спечелени {{amount}} кредити",
-        "CreatePaidStream": "Изхарчени {{amount}} кредити",
-        "WatchClip": {
-            "+": "Спечелени {{amount}} кредити",
-            "-": "Изхарчени {{amount}} кредити"
-        },
-        "BonusCredits": "Получих бонус {{amount}} кредити",
-        "Streams_user_firstname": "Спечелени {{amount}} кредити",
-        "Streams_user_lastname": "Спечелени {{amount}} кредити",
-        "Streams_user_icon": "Спечелени {{amount}} кредити",
-        "Places_user_location": "Спечелени {{amount}} кредити",
-        "Streams_greeting": "Спечелени {{amount}} кредити",
-        "User": "Потребител"
+        "CreatedCommunity": "Похарчени {{amount}} кредита",
+        "BoughtCredits": "Купих {{amount}} кредита",
+        "BonusCredits": "Получих бонус {{amount}} кредита",
+        "InviteAcceptedBy": "Спечелени {{amount}} кредита",
+        "Streams_user_firstname": "Спечелени {{amount}} кредита",
+        "Streams_user_lastname": "Спечелени {{amount}} кредита",
+        "Streams_user_icon": "Спечелени {{amount}} кредита",
+        "Places_user_location": "Спечелени {{amount}} кредита",
+        "Streams_greeting": "Спечелени {{amount}} кредита",
+        "YouHaveCreditsToStart": "Спечелени {{amount}} кредита"
     },
     "subscriptions": {
         "infoTitle": "Задайте информация за плащане",
         "confirm": {
-            "title": "Стартиране на абонамента",
-            "message": "Искате ли да се абонирате за {{title}}?",
+            "title": "Започнете абонамент",
+            "message": "Започване на периодичен абонамент за &quot; {{title}} &quot;?",
             "ok": "Добре",
-            "cancel": "Отмяна"
+            "cancel": "Отказ"
         },
         "CreditOrDebitCard": "Кредитна или дебитна карта",
-        "SubscribePayment": "Абониране за плащане",
+        "SubscribePayment": "Плащане за абонамент",
         "ImmediatePayment": "Незабавно плащане",
         "ProcessingPayment": "Плащането се обработва",
         "SubscriptionAlreadyPaid": "Този абонамент вече е платен",
@@ -120,10 +147,10 @@
         "Started": "започна",
         "EndsIn": "Завършва в",
         "NextPay": "Следващо плащане",
-        "Period": "месечен цикъл",
+        "Period": "Период",
         "Price": "Цена",
         "AreYouSureUnsubscribe": "Сигурни ли сте, че искате да се отпишете от този план?",
-        "YouUnsubscribedFromPlan": "Отписахте се от план „{{planTitle}}“. Няма да бъдете таксувани, но абонаментът ви ще продължи до {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Отписахте се от план &quot; {{planTitle}} &quot;. Няма да бъдете таксувани, но вашият абонамент ще продължи до {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "заглавие на плана",
             "PricePlaceholder": "цена",
@@ -134,18 +161,18 @@
     },
     "payments": {
         "infoTitle": "Задайте информация за плащане",
+        "BuyAmountCredits": "Купете {{amount}} кредита",
         "confirm": {
-            "title": "Извършете плащане",
-            "message": "Съгласни ли сте да платите {{symbol}}{{amount}}?",
+            "title": "Направете плащане",
+            "message": "Съгласни ли сте да платите {{symbol}} {{amount}} ?",
             "ok": "Добре",
-            "cancel": "Отмяна"
-        },
-        "BuyAmountCredits": "Купете {{amount}} кредити"
+            "cancel": "Отказ"
+        }
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Кредити",
-            "description": "следи кредитите и плащанията"
+            "description": "следи кредити и плащания"
         },
         "Assets\/plan": {
             "displayType": "Абонаментен план",
@@ -161,39 +188,42 @@
         },
         "Assets\/service": {
             "displayType": "Обслужване",
-            "description": "предлаганата услуга"
+            "description": "предлагана услуга"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Спечелени {{amount}} кредити"
-        },
-        "Assets\/credits\/spent": {
-            "content": "Похарчени {{amount}} кредити"
-        },
-        "Assets\/credits\/sent": {
-            "content": "Изпрати {{amount}} кредити до {{toUserName}}"
-        },
-        "Assets\/credits\/received": {
-            "content": "Получихте {{amount}} кредити от {{fromUserName}}"
+            "content": "Спечелени {{amount}} кредита"
         },
         "Assets\/credits\/bought": {
-            "content": "Купих {{amount}} кредити"
+            "content": "Купих {{amount}} кредита"
         },
         "Assets\/credits\/bonus": {
-            "content": "Бонус {{amount}} кредити"
+            "content": "Бонус {{amount}} кредита"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Похарчени {{amount}} кредита"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Изпратени {{amount}} кредита на {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Получени {{amount}} кредита от {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Имате малко кредити в сметката си. Моля, посетете <a href='{{link}}'>тази връзка<\/a> , за да купите още кредити."
+            "content": "Имате малко кредити в сметката си. Моля, посетете <a href='<i translate='no'>999 &#39;&gt;тази връзка,<\/a> за да купите още кредити."
         }
     },
-    "charge": {
-        "Subject": "Получавате плащане в размер на {{displayAmount}} от {{call 'publisher.displayName'}} от „{{description}}“",
-        "HasBeenCharged": "Хей, това е само за да ви уведомя, че {{1}} е таксуван {{2}} за {{3}} от {{4}}"
-    },
-    "charged": {
-        "Subject": "Благодарим ви за плащането за „{{description}}“",
-        "HavePaid": "Хей, {{1}}, това е само бързо потвърждение, че успешно сте платили {{2}} на {{3}} за {{4}}"
+    "billing": {
+        "Title": "Таксуване на активи",
+        "CreditsMinimum": "Минимални кредити",
+        "CreditsToAdd": "Кредити за добавяне",
+        "Save": "Запазване",
+        "ThisLink": "тази връзка",
+        "errors": {
+            "CreditsMinimumNegative": "Минимумът на кредитите не може да бъде отрицателен",
+            "CreditsToAddNegative": "Кредитите за добавяне не могат да бъдат отрицателни"
+        }
     },
     "services": {
         "NewServiceTemplate": {
@@ -202,130 +232,107 @@
             "PricePlaceholder": "Задайте цена",
             "LinkPlaceholder": "задайте връзка за допълнителна информация",
             "DescriptionPlaceholder": "Описание на услугата",
-            "SaveService": "Запазване на услугата",
-            "SelectRequiredParticipants": "Задължителни участници",
+            "SaveService": "Услуга за запазване",
+            "SelectRequiredParticipants": "Необходими свързани участници",
             "RequiredParticipantsDesc": "Моля, изберете свързани участници, които са необходими за използване на тази услуга (например домашни любимци за „Кучешка изложба“ или деца за „Детски празник“ и т.н.). Ако услугата е платена, потребителят ще трябва да плати и за всеки свързан участник."
+        },
+        "EditServiceTemplate": {
+            "Title": "Редактиране на услугата"
         },
         "ManageServiceTemplates": "Управление на шаблони за услуги",
         "ManageServices": "Управление на услугите",
-        "FreeEvent": "Безплатно събитие",
-        "OptionalContribution": "Незадължителен принос",
-        "RequiredPayment": "Задължително плащане",
-        "AreYouSureDelete": "Наистина ли искате да изтриете тази услуга?",
-        "AmountServicesRelated": "Има {{amount}} наличности, свързани с тази услуга. Те също ще бъдат премахнати.",
         "Free": "Безплатно",
-        "EditServiceTemplate": {
-            "Title": "Редактиране на услугата"
-        }
+        "OptionalContribution": "Принос по желание",
+        "RequiredPayment": "Задължително плащане",
+        "AreYouSureDelete": "Сигурни ли сте, че искате да изтриете тази услуга?",
+        "AmountServicesRelated": "Има {{amount}} наличности, свързани с тази услуга. Те също ще бъдат премахнати."
+    },
+    "transfer": {
+        "SelectRecipient": "Изберете получател",
+        "TransactionSuccess": "Успех на транзакцията",
+        "OrTypeWalletAddress": "ИЛИ въведете адреса на портфейла на получателя"
     },
     "NFT": {
-        "Title": "Информация за {{title}} NFT",
-        "Description": "Подробна информация за NFT",
-        "FixedBid": "Купи сега",
+        "Title": "Заглавие",
+        "Name": "Име",
+        "EnterName": "Въведи име",
+        "EnterAuthorWallet": "Въведете портфейла на автора",
+        "InformationAboutTitle": "Информация за {{title}} NFT",
+        "Description": "Описание",
+        "DetailedInformationAboutNFT": "Подробна информация за NFT",
+        "PresaleStarts": "Предварителната продажба започва на 23 декември",
+        "OwnerUserNotFound": "Собственикът на този NFT не е регистриран в нашето приложение.",
+        "BuyNow": "Купи сега",
+        "Buy": "Купува",
+        "Add": "Добавете",
+        "Remove": "Премахване",
+        "NoNFTyet": "Все още няма NFT",
+        "Conversation": "Разговор",
+        "Create": "Създавайте",
         "CurrentBid": "сегашен залог",
         "StartingIn": "Започвайки в",
         "EndingIn": "Свършва след",
         "CreateNFT": "Създайте NFT",
-        "TitlePlaceholder": "Дайте заглавие на вашия NFT",
-        "DescriptionPlaceholder": "Дайте описание на вашия NFT",
+        "TitlePlaceholder": "Дайте заглавие на своя NFT",
+        "DescriptionPlaceholder": "Дайте описание на своя NFT",
         "CreateYourNFT": "Създайте своя NFT",
         "Royalties": "Роялти",
-        "RoyaltyPlaceholder": "По избор. Сума, платена на създателя преди прехвърляне.",
+        "RoyaltyPlaceholder": "Не е задължително. Сума, платена на създателя преди прехвърлянето.",
         "ExpirationDate": "Срок на годност",
         "StartingDate": "Начална дата",
         "BidsBelowThisAmount": "Оферти под тази сума няма да бъдат разрешени",
         "MinimumBid": "Минимална оферта",
+        "Author": "Автор",
         "Price": "Цена",
+        "Commission": "комисия",
+        "EnterCommission": "Въведете комисионна",
         "Owner": "Собственик",
         "SelectCategory": "Избери категория",
         "Day": "ден",
         "Days": "Дни",
         "Hour": "час",
         "Hours": "Часа",
-        "Minute": "Минута",
+        "Minute": "минута",
         "Minutes": "Минути",
         "Second": "Второ",
         "Seconds": "Секунди",
-        "SalesCreator": "от продажбите ще отиде при създателя",
+        "SalesCreator": "от продажбите ще отидат при създателя",
         "Details": "Подробности",
         "Bids": "Оферти",
         "History": "История",
-        "LoremIpsum": "Lorem Ipsum е просто фалшив текст от печатарската и наборната индустрия.",
+        "LoremIpsum": "Lorem Ipsum е просто фиктивен текст на печатарската и наборната индустрия.",
         "PutOnSale": "Пуснат в продажба",
         "PutOffSale": "Изтеглете от продажба",
         "Transfer": "Трансфер",
+        "Actions": "Действия",
+        "Claim": "Иск",
+        "ClaimNFT": "Заявете NFT",
+        "Unlocking": "Отключване",
+        "Unlock": "Отключи",
         "Update": "Актуализация",
-        "UpdateToken": "Актуализиране на маркера",
+        "UpdateToken": "Актуализиране на токена",
+        "UpdateNFT": "Актуализирайте NFT",
         "CreateToken": "Създаване на токен",
         "PlaceBid": "Наддавам",
-        "SoldOut": "продадено",
+        "SoldOut": "Продаден",
+        "NotOnSale": "Не се продава",
         "NftName": "NFT име",
-        "DescribeYourNFT": "Моля, опишете вашия NFT",
-        "NftPicture": "Снимка за представяне на NFT",
+        "DescribeYourNFT": "Моля, опишете своя NFT",
+        "NftPicture": "Картина за представяне на NFT",
         "NftMovie": "Филм за представяне на NFT",
         "UploadMovie": "Качване на филм",
-        "MovieSource": "Източник на филма",
+        "MovieSource": "Източник на филм",
+        "MovieURL": "URL адрес на филма",
         "UploadFile": "Качи файл",
-        "PutOnMarketplace": "Пуснат на пазара",
+        "PutOnMarketplace": "Поставете на пазара",
         "InstantPurchase": "Въведете цена, за да позволите на потребителите незабавно да закупят вашия NFT",
         "FixedPrice": "Фиксирана цена",
-        "TimedAuction": "Насрочен търг",
-        "OpenForBids": "Отворено за наддаване",
+        "TimedAuction": "Търг във време",
+        "OpenForBids": "Отворен за оферти",
         "PriceOnePiece": "Въведете цена за един брой",
+        "EnterPrice": "Въведете цена",
         "EnterMinimumBid": "Въведете минимална оферта",
         "SelectChain": "Изберете верига",
-        "WrongChain": "Този NFT е създаден под „{{chain}}“. Моля, използвайте тази верига.",
-        "import": {
-            "importNFT": "Импортиране на NFT",
-            "fileNotFound": "За съжаление CSV файлът не е намерен.",
-            "fileEmpty": "За съжаление CSV файлът е празен.",
-            "userIdNotFound": "потребител съществува, но идентификаторът е празен",
-            "errorLine": "ред {{1}}",
-            "fieldNotFound": "Задължителното поле „{{1}}“ не е намерено",
-            "taskStreamInvalid": "невалиден поток от задачи",
-            "instructionsEmpty": "инструкциите за поток от задачи са празни",
-            "complete": "Завършен",
-            "activateUsers": "изпрати съобщение за активиране на потребителите?",
-            "importProgress": "напредък",
-            "importOptions": "Настроики",
-            "sampleCSV": "Изтеглете примерен CSV",
-            "fileLabel": "Качване на електронна таблица:",
-            "errorsTitle": "Възникнаха грешки",
-            "importAttributes": "Импортирайте NFT атрибути",
-            "displayTypeEmpty": "Типът на дисплея за „{{1}}“ не е намерен"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Филтриране по NFT колекции",
-                "ShowNFTCollection": "Показване на NFT колекция в...",
-                "AllCollections": "Всички колекции"
-            },
-            "ByUser": {
-                "AllAuthors": "Всички Автори",
-                "AllUsers": "Всеки",
-                "FilterByAuthors": "Филтриране по автори"
-            }
-        },
-        "Back": "Обратно към колекцията",
-        "Name": "Име",
-        "EnterName": "Въведи име",
-        "EnterAuthorWallet": "Въведете портфейла на автора",
-        "InformationAboutTitle": "Информация за {{title}} NFT",
-        "DetailedInformationAboutNFT": "Подробна информация за NFT",
-        "PresaleStarts": "Предварителната продажба започва на 23 декември",
-        "OwnerUserNotFound": "Собственикът на този NFT не е регистриран в нашето приложение.",
-        "BuyNow": "Купи сега",
-        "Buy": "Купува",
-        "Conversation": "Разговор",
-        "Create": "Създавайте",
-        "Author": "Автор",
-        "Commission": "комисия",
-        "EnterCommission": "Въведете комисионна",
-        "Actions": "Действия",
-        "UpdateNFT": "Актуализирайте NFT",
-        "NotOnSale": "Не се продава",
-        "MovieURL": "URL адрес на филма",
-        "EnterPrice": "Въведете цена",
         "Currency": "Валута",
         "AreYouSureDeleteImage": "Сигурни ли сте, че искате да премахнете изображението?",
         "AreYouSureDeleteVideo": "Сигурни ли сте, че искате да премахнете видеоклипа?",
@@ -366,7 +373,7 @@
             "CurrentBaseURL": "Текущ BaseURL",
             "ContractAddressAbsent": "Липсва адрес на договора",
             "FactoryAddressAbsent": "Фабричен адрес липсва",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Изисква се заглавие",
             "SymbolRequired": "Изисква се символ",
             "TypeContractName": "име на договора",
@@ -376,6 +383,38 @@
             "Title": "Конкурси",
             "NewContest": "Нов конкурс"
         },
+        "import": {
+            "importNFT": "Импортиране на NFT",
+            "importAttributes": "Импортирайте NFT атрибути",
+            "fileNotFound": "За съжаление CSV файлът не е намерен.",
+            "fileEmpty": "За съжаление CSV файлът е празен.",
+            "userIdNotFound": "потребителят съществува, но идентификаторът е празен",
+            "errorLine": "ред {{1}}",
+            "fieldNotFound": "Задължителното поле &quot; {{1}} &quot; не е намерено",
+            "displayTypeEmpty": "Типът на дисплея за &quot; {{1}} &quot; не е намерен",
+            "taskStreamInvalid": "потокът от задачи е невалиден",
+            "instructionsEmpty": "инструкциите за поток от задачи са празни",
+            "complete": "Завършено",
+            "activateUsers": "изпращане на съобщение за активиране до потребителите?",
+            "importProgress": "Напредък",
+            "importOptions": "Настроики",
+            "sampleCSV": "Изтеглете примерен CSV",
+            "fileLabel": "Качване на електронна таблица:",
+            "errorsTitle": "Възникнаха грешки"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Филтрирайте по NFT колекции",
+                "ShowNFTCollection": "Показване на NFT колекция в...",
+                "AllCollections": "Всички колекции"
+            },
+            "ByUser": {
+                "AllAuthors": "Всички автори",
+                "AllUsers": "Всеки",
+                "FilterByAuthors": "Филтриране по автори"
+            }
+        },
+        "Back": "Назад към колекцията",
         "attributes": {
             "Title": "Управление на атрибути",
             "Attributes": "Атрибути",
@@ -399,13 +438,6 @@
             "aboutPlaceholder": "Редактиране на биография",
             "SureLogOut": "Сигурни ли сте, че искате да излезете?"
         },
-        "Add": "Добавете",
-        "Remove": "Премахване",
-        "NoNFTyet": "Все още няма NFT",
-        "Claim": "Иск",
-        "ClaimNFT": "Заявете NFT",
-        "Unlocking": "Отключване",
-        "Unlock": "Отключи",
         "sales": {
             "factory": {
                 "form": {
@@ -424,7 +456,7 @@
                     "small": {
                         "NFTContract": "NFTДоговор",
                         "seriesId": "жетони ще бъдат сечени в тази серия",
-                        "owner": "собственик на екземпляра, в противен случай ще бъде подател",
+                        "owner": "собственик на екземпляр, в противен случай ще бъде подател",
                         "currency": "Валута за закупени токени, ако е нула - за нативни монети",
                         "price": "Цена",
                         "beneficiary": "Бенефициент на продажба на токени, в противен случай ще бъде подател",
@@ -521,50 +553,10 @@
             "Unlock": "Отключи",
             "Locked": "Заключено",
             "CustodianAddress": "Адрес на попечителя",
-            "TokenWasClaimed": "Токенът „{{title}}“ бе поискан",
-            "TokenWasLocked": "Токенът „{{title}}“ беше заключен",
-            "TokenWasUnlocked": "Токенът „{{title}}“ беше отключен"
+            "TokenWasClaimed": "Токенът „ {{title}} “ беше поискан",
+            "TokenWasLocked": "Токенът &quot; {{title}} &quot; беше заключен",
+            "TokenWasUnlocked": "Токенът &quot; {{title}} &quot; беше отключен"
         }
-    },
-    "errors": {
-        "Error": "Грешка",
-        "WalletAbsent": "Портфейлът не е свързан.",
-        "Rendering": "Имаше грешки при изобразяването <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Задължителна цена!",
-        "NameRequired": "Изисква се име!",
-        "PriceInvalid": "Невалидна цена!",
-        "TransactionFailed": "Транзакцията е неуспешна",
-        "ChainNotSupported": "Избраната верига не се поддържа. Поддържана верига: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Нуждаете се от свързана MetaMask, за да работите с приложението",
-        "UserNotLoggedInMetaMask": "Потребителят не е влязъл в MetaMask",
-        "CurrencyNotFound": "Валутата не е намерена",
-        "WrongChain": "Този NFT е създаден под „{{chain}}“. Моля, използвайте тази верига.",
-        "AmountInvalid": "Невалидна сума!",
-        "NoRecipientSelected": "Няма избран получател",
-        "NotEnoughPermissionsWallet": "Няма достатъчно разрешения за четене на портфейла на този потребител",
-        "ThisUserHaveNoWallet": "Този потребител няма присвоен портфейл",
-        "TheWalletOfThisUserInvalid": "Портфейлът на този потребител е невалиден",
-        "WalletInvalid": "Адресът на портфейла е невалиден"
-    },
-    "admin": {
-        "Title": "Административни активи",
-        "SubscriptionTitle": "Абонаментни планове"
-    },
-    "billing": {
-        "Title": "Таксуване на активи",
-        "CreditsMinimum": "Минимални кредити",
-        "CreditsToAdd": "Кредити за добавяне",
-        "Save": "Запазване",
-        "ThisLink": "тази връзка",
-        "errors": {
-            "CreditsMinimumNegative": "Минимумът на кредитите не може да бъде отрицателен",
-            "CreditsToAddNegative": "Кредитите за добавяне не могат да бъдат отрицателни"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Изберете получател",
-        "TransactionSuccess": "Успех на транзакцията",
-        "OrTypeWalletAddress": "ИЛИ въведете адреса на портфейла на получателя"
     },
     "currencies": {
         "choose": "Изберете валута"

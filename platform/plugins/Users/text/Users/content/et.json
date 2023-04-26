@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "keegi"
+    },
+    "identifier": {
+        "types": {
+            "email": "Meil",
+            "mobile": "Mobiilne",
+            "web3": "Veeb3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopeeritud! Nüüd saate selle kõikjale kleepida."
+    },
     "analytics": {
         "Title": "Analüütika",
         "Daily": "Igapäevane",
@@ -15,13 +28,13 @@
         "LogOut": "Logi välja"
     },
     "activate": {
+        "OneTimeCode": "Sisesta saadud kood:",
         "SetAsPrimary": "Määra {{1}} minu peamiseks {{2}}",
-        "ChoosePassPhrase": "Valige sisselogimiseks <strong>parool<\/strong> .<br> Lihtne mõnest sõnast koosnev fraas, mis jääb kergesti meelde.",
+        "ChoosePassPhrase": "Valige sisselogimiseks <strong>parool<\/strong> .<br> Lihtne fraas, mis koosneb mõnest sõnast, mis jääb kergesti meelde.",
         "ChoosePassPhraseSeeSuggestions": "Valige oma konto kaitsmiseks hea <strong>parool<\/strong> . Vaadake mõnede ideede soovitusi.",
         "LogOutAndTryAgain": "Logige välja ja proovige uuesti",
         "IfYouFeel": "Kui tunnete, et midagi läks valesti, saate seda teha",
         "SetIdentifierButtonTitle": "Alusta uuesti",
-        "OneTimeCode": "Sisesta saadud kood:",
         "ActivateMyAccount": "Aktiveeri Minu konto"
     },
     "session": {
@@ -30,12 +43,12 @@
     "authorize": {
         "GetStarted": "Alustama",
         "Authorize": "Volita",
-        "TermsLabel": "Olen lugenud ja nõustun<br> {{link}}",
+        "TermsLabel": "Olen lugenud ja nõustun<br> {{link}} juurde",
         "TermsTitle": "Tingimused",
         "mustAgree": "Kõigepealt peate tingimustega nõustuma."
     },
     "register": {
-        "TermsLabel": "Nõustun {{link}}",
+        "TermsLabel": "Nõustun {{link}} ga",
         "TermsTitle": "Tingimused"
     },
     "notifications": {
@@ -60,7 +73,7 @@
             "EmptyContacts": "Kontakte ei leitud..."
         },
         "select": {
-            "title": "Valige kontakt {{displayName}}"
+            "title": "Valige {{displayName}} kontakt"
         }
     },
     "usersContacts": {
@@ -70,24 +83,29 @@
         "inviteRole": "Kutsu {{role}}"
     },
     "invalidLanguageSelected": "Valitud keel",
+    "platforms": {
+        "wallet": "Rahakott",
+        "broadcast": "Saade"
+    },
     "login": {
         "title": "Tere tulemast",
         "directions": "Looge konto või logige sisse.",
         "directionsNoRegister": "Logige sisse, kui teil on konto.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Sisestage oma paroolifraas:",
         "loginButton": "Alustama",
         "registerButton": "Alustama",
         "resendButton": "Saada aktiveerimissõnum",
         "forgot": "Unustasin?",
-        "resendConfirm": "Kas soovite parooli lähtestamiseks saata sõnumi?",
-        "resendSuccess": "Parooli lähtestamiseks vaadake sõnumit",
+        "resendConfirm": "Kas soovite saata parooli lähtestamiseks sõnumi?",
+        "resendSuccess": "Parooli lähtestamiseks otsige sõnumit",
         "resendClose": "Sulge",
         "noPassphrase": "Enne sisselogimist peate määrama parooli, klõpsates aktiveerimissõnumis olevat linki.",
         "notVerified": "Sisselogimiseks peate saatma endale aktiveerimissõnumi.",
-        "emailExists": "Kas proovisite selle meiliga varem registreeruda? Kui jah, kontrollige oma konto aktiveerimiseks oma postkasti. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
-        "mobileExists": "Kas proovisite varem selle mobiilinumbriga registreeruda? Kui jah, kontrollige oma konto aktiveerimiseks oma SMS-i. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
+        "emailExists": "Kas proovisite varem selle meiliga registreeruda? Kui jah, siis kontrollige oma konto aktiveerimiseks oma postkasti. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
+        "mobileExists": "Kas proovisite varem selle mobiilinumbriga registreeruda? Kui jah, kontrollige oma konto aktiveerimiseks SMS-i. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
         "usingOther": "või saate",
+        "connectPlatforms": "või ühendage kasutades:",
         "prompt": "Vali kasutajanimi:",
         "newUser": "või looge allpool uus konto",
         "placeholders": {
@@ -97,23 +115,15 @@
             "username": "kasutage ainult tähti ja numbreid"
         },
         "confirmTerms": "Kas nõustute teenusetingimustega?",
-        "facebookNoEmail": "Teie Facebooki kontol puudub kinnitatud e-posti aadress. Lihtsalt logige sisse algsel viisil.",
+        "facebookNoEmail": "Teie Facebooki kontol puudub kinnitatud e-posti aadress. Logige lihtsalt sisse algsel viisil.",
         "picTooltip": "Saate seda pilti hiljem muuta",
-        "wallet": {
-            "payload": "Logige sisse {{host}} kell {{timestamp}}",
-            "alert": {
-                "title": "Ümbersuunamine Walletisse",
-                "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
-            }
-        },
         "web3": {
-            "payload": "Logige sisse {{host}} kell {{timestamp}}",
+            "payload": "Logige sisse numbrile {{host}} kell {{timestamp}}",
             "alert": {
-                "title": "Ümbersuunamine Walletisse",
+                "title": "Ümbersuunamine Walleti",
                 "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
             }
-        },
-        "connectPlatforms": "või ühendage kasutades:"
+        }
     },
     "setIdentifier": {
         "title": "Lisage sisselogimisviis",
@@ -126,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Konto",
-        "areUsing": "Kasutate {{platform}} kui",
-        "noLongerUsing": "Te ei ole enam ühendatud kasutajaga {{platform}} as",
+        "title": "{{Platform}} konto",
+        "areUsing": "Kasutate {{platform}} as",
+        "noLongerUsing": "Te ei ole enam ühendatud numbriga {{platform}} as",
         "doAuth": "Logige sisse selle kontoga",
         "doSwitch": "Lülitu sellele kontole"
     },
@@ -139,26 +149,9 @@
         "Guest": "Külaline",
         "Host": "Host"
     },
-    "avatar": {
-        "Someone": "keegi"
-    },
     "web3": {
         "WrongMethod": "Vale lepingumeetod {{methodName}}",
         "ChangeWallet": "Vahetage rahakotti"
-    },
-    "identifier": {
-        "types": {
-            "email": "Meil",
-            "mobile": "Mobiilne",
-            "web3": "Veeb3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopeeritud! Nüüd saate selle kõikjale kleepida."
-    },
-    "platforms": {
-        "wallet": "Rahakott",
-        "broadcast": "Saade"
     },
     "labels": {
         "addToPhonebook": "Lisa minu telefoni kontaktidesse",

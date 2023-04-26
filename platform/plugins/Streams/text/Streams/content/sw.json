@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Kipengee Kipya"
     },
+    "avatar": {
+        "firstName": "jina la kwanza",
+        "lastName": "jina la familia",
+        "username": "jina la mtumiaji"
+    },
     "labels": {
         "Streams\/invited": "Watu niliowaalika",
         "Streams\/invitedMe": "Nani alinialika",
@@ -13,16 +18,24 @@
         "Yes": "Ndiyo",
         "No": "Hapana"
     },
+    "login": {
+        "prompt": "Waruhusu marafiki wakutambue:",
+        "newUser": "au fungua akaunti mpya hapa chini",
+        "picTooltip": "Unaweza kubadilisha picha hii baadaye",
+        "placeholder": {
+            "fullName": "Ingiza jina lako kamili"
+        }
+    },
     "interests": {
-        "Filter": "Una maslahi gani?",
-        "CanGrant": "Ikiwa bado huwezi kupata unachotafuta, unaweza kuongeza jambo jipya linalokuvutia hapa chini:",
+        "Filter": "Tafuta mambo yanayokuvutia",
+        "CanGrant": "Ikiwa bado huwezi kupata unachotafuta, unaweza kuongeza kitu kipya kinachokuvutia hapa chini:",
         "TrySynonyms": "Je! huoni? Jaribu baadhi ya visawe.",
         "AddUnderCategory": "Ongeza chini ya kategoria...",
         "Other": "Nyingine",
         "Unlisted": "Haijaorodheshwa"
     },
     "chat": {
-        "flaggedForAdminReview": "Ujumbe umealamishwa kwa ukaguzi wa msimamizi. Gusa tena ili kuripoti.",
+        "flaggedForAdminReview": "Ujumbe umealamishwa kwa ukaguzi wa msimamizi. Gusa tena ili ubatilishe alama.",
         "noOneSaid": "Hakuna aliyesema lolote",
         "closeChatButton": "Funga gumzo",
         "closeChatConfirmTitle": "Ungependa kufunga gumzo hili?",
@@ -34,43 +47,63 @@
         "earlierComments": "maoni ya awali",
         "startedConversation": "alianza mazungumzo",
         "RealTimeCall": "Simu ya Wakati halisi",
+        "JoinWebRTC": "Teleconference",
         "SearchByName": "Tafuta kwa jina",
         "Notifications": {
             "Visit": "{{displayName}} anatembelea gumzo",
             "Join": "{{displayName}} alijiunga na gumzo",
             "Leave": "{{displayName}} aliacha gumzo",
-            "RelatedTo": "{{displayName}} alianzisha {{stream.displayType}}"
+            "RelatedTo": "{{displayName}} ilianza {{stream.displayType}}"
         },
-        "JoinWebRTC": "Teleconference"
+        "placeholders": {
+            "Public": "Ongeza maoni",
+            "Private": "Andika ujumbe wa faragha"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "dhibiti usajili wako wa barua pepe",
         "IfUnsubscribe": "Ukitaka kujiondoa",
-        "*": "Tuma ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} alisema: {{& message.content}}",
-        "Streams\/changed": "Mabadiliko katika {{stream.fields.title}}",
-        "Streams\/invite": "Ulialikwa {{& stream.fields.title}}",
-        "Streams\/announcement": "Tangazo katika {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} alibadilisha ufikiaji katika {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Ujumbe wa gumzo umehaririwa {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Ujumbe wa gumzo umeondolewa katika {{& stream.fields.title}}",
+        "*": "Tuma ujumbe {{& message.fields.type}} hadi {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} walijiunga",
+        "Streams\/left": "{{&call 'avatar.displayName'}} wamebaki",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} walisema: {{& message.content}}",
+        "Streams\/changed": "Mabadiliko ya {{stream.fields.title}}",
+        "Streams\/invite": "Ulialikwa kwenye {{& stream.fields.title}}",
+        "Streams\/announcement": "Tangazo la {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ilibadilisha ufikiaji mnamo {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Ujumbe wa gumzo ulihaririwa mnamo {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Ujumbe wa gumzo uliondolewa mnamo {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} imefungwa",
-        "Streams\/task\/progress": "Maendeleo yaliyofanywa mnamo {{stream.fields.title}}",
-        "Streams\/task\/complete": "Jukumu limekamilika: {{stream.fields.title}}",
+        "Streams\/task\/progress": "Maendeleo yaliyopatikana mnamo {{stream.fields.title}}",
+        "Streams\/task\/complete": "Kazi iliyokamilishwa: {{stream.fields.title}}",
         "Streams\/task\/error": "Hitilafu wakati: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ujumbe Unaoingia",
+        "Streams\/incoming\/*": "{{app}} : Ujumbe Unaoingia",
         "Streams\/relatedTo\/Streams\/call": "Simu Mpya Ilianza mnamo {{toTitle}}",
-        "Streams\/relatedTo\/*": "Mpya {{relationDisplayType}} katika {{toTitle}}",
+        "Streams\/relatedTo\/*": "{{relationDisplayType}} mpya katika {{toTitle}}",
         "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} alikutaja kwenye maoni",
-        "Streams\/call": "{{displayName}} alianzisha simu ya moja kwa moja",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} alijiunga",
-        "Streams\/left": "{{&call 'avatar.displayName'}} imesalia"
+        "Streams\/call": "{{displayName}} ilianzisha simu katika muda halisi"
     },
     "invite": {
         "command": "Alika",
-        "messageContent": "{{displayName}} alikualika kwenye {{inviteUrl}}",
+        "Invite": "Alika",
+        "Share": "Shiriki",
+        "messageContent": "{{displayName}} walikualika kwenye {{inviteUrl}}",
         "youCanNowPaste": "Sasa unaweza kubandika kiungo hiki mahali fulani ili kuwaalika watu",
+        "roles": {
+            "title": "Ungependa Kutoa Majukumu kwa Watumiaji Walioalikwa?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Pole",
+                "alert": "Huna idhini ya kutoa jukumu hili"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Pole",
+                "alert": "Huna idhini ya kuondoa jukumu hili"
+            }
+        },
+        "labels": {
+            "title": "Uhusiano wako ni upi?"
+        },
         "dialog": {
             "chooseFromContacts": "Chagua kutoka kwa Anwani zako",
             "chooseAgainFromContacts": "Chagua Tena kutoka kwa Anwani",
@@ -78,6 +111,7 @@
             "selectFromContacts": "Chagua Kutoka kwa Anwani",
             "userChooserPlaceholder": "Tafuta kwa jina",
             "photo": "Piga picha",
+            "photoOf": "Piga picha ya {{name}}",
             "photoInstruction": "Ikiwa mtu aliyechanganua msimbo wako wa QR yuko mbele yako, mpiga picha",
             "to": "Kwa: {{Stream Title}}",
             "go": "Nenda",
@@ -86,7 +120,7 @@
             "orInvite": "Au waalike watu kwa kutumia:",
             "copyLink": "{{ClickOrTap}} ili kunakili kiungo cha mwaliko",
             "shareOrCopyLink": "{{ClickOrTap}} ili kushiriki au kunakili kiungo cha mwaliko",
-            "QR": "{{ClickOrTap}} ili kuzalisha msimbo wa QR",
+            "QR": "{{ClickOrTap}} ili kutoa msimbo wa QR",
             "QRtitle": "Changanua msimbo huu wa QR",
             "QRscanned": "Waliichanganua!",
             "scannedQR": "{{ClickOrTap}} ikiwa msimbo ulichanganuliwa",
@@ -102,57 +136,41 @@
             "chooseFromRegistered": "Chagua kutoka kwa watumiaji waliosajiliwa",
             "inviteViaEmailOrSms": "Alika kupitia barua pepe au SMS"
         },
+        "complete": {
+            "WelcomeToCommunity": "Karibu kwenye {{communityName}}",
+            "HasInvitedYou": "amekualika kwa:",
+            "HasInvitedYouToTheirProfile": "amekualika kuunganishwa.",
+            "prompt": "Waruhusu marafiki wakutambue:",
+            "accept": "Kubali Mwaliko"
+        },
         "email": {
             "subject": "Haya, angalia hii",
             "PleaseVisitLink": "Tafadhali tembelea kiungo kifuatacho:",
-            "InvitingYou": "Ninakualika {{title}}",
+            "InvitingYou": "Ninakualika kwa {{title}}",
             "HasInvitedYou": "{{displayName}} amekualika kwenye {{title}}",
-            "HasMentionedYou": "{{displayName}} amekutaja katika &quot;{1000}}&quot;",
+            "HasMentionedYou": "{{displayName}} amekutaja katika &quot; {{title}} &quot;",
             "YOUAREINVITED": "UMEALIKWA!",
             "AcceptInvite": "Kubali Mwaliko"
         },
         "sms": {
-            "content": "Umealikwa kwenye {{title}}. Tafadhali gusa {{url}}"
+            "content": "Umealikwa kwenye {{title}} . Tafadhali gusa {{url}}"
         },
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
-        },
-        "Invite": "Alika",
-        "Share": "Shiriki",
-        "roles": {
-            "title": "Ungependa Kutoa Majukumu kwa Watumiaji Walioalikwa?",
-            "NotAuthorizedToGrantRole": {
-                "title": "Pole",
-                "alert": "Huna idhini ya kutoa jukumu hili"
-            },
-            "NotAuthorizedToRemoveRole": {
-                "title": "Pole",
-                "alert": "Hujaidhinishwa kuondoa jukumu hili"
-            }
-        },
-        "labels": {
-            "title": "Uhusiano wako ni upi?"
-        },
-        "complete": {
-            "HasInvitedYou": "amekualika kwa:",
-            "WelcomeToCommunity": "Karibu kwenye {{communityName}}",
-            "HasInvitedYouToTheirProfile": "amekualika kuunganishwa.",
-            "prompt": "Waruhusu marafiki wakutambue:",
-            "accept": "Kubali Mwaliko"
         }
     },
     "messages": {
         "html": {
-            "posted": "alichapisha <em>{{message.fields.type}}<\/em> ujumbe kwa {{stream.fields.title}}"
+            "posted": "alichapisha ujumbe wa <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "alitoa maoni",
             "startedCallIn": "akapiga simu",
             "in": "katika",
-            "body": "katika {{& url}}: {{& message.fields.content}}",
+            "body": "katika {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "imetumwa kwa",
-                "byAvatar": "na {{avatar.displayName}}"
+                "byAvatar": "kwa {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "ina {{instructions.fromDisplayType}} mpya",
@@ -164,16 +182,19 @@
         "mobile": {
             "alert": "Mialiko inatumwa kutoka kwa nambari yetu, ambayo marafiki zako bado hawajaitambua. Fuatilia kwa maandishi ya haraka ili kuwafahamisha kuwa mwaliko umetoka kwako, ukiwauliza kubofya kiungo.",
             "confirm": "Mialiko inatumwa kutoka kwa nambari yetu, ambayo marafiki zako bado hawajaitambua. Je, ungependa kufuatilia kwa maandishi ya haraka ili kuwafahamisha kuwa mwaliko umetoka kwako, ukiwauliza kubofya kiungo.",
-            "check": "Ala, nimekutumia mwaliko kwenye programu ya {{app}}. Tafadhali angalia sms yako na ubofye kiungo!",
+            "check": "Ala, nimekutumia mwaliko kwenye programu ya {{app}} . Tafadhali angalia sms yako na ubofye kiungo!",
             "CheckYourMobile": "Tafadhali angalia SMS na ufuate maagizo!"
         },
         "email": {
-            "alert": "Mialiko inatumwa kutoka kwa kikoa chetu, ambayo marafiki zako bado hawajaitambua. Fuatilia kwa maandishi ya haraka ili kuwafahamisha kuwa mwaliko umetoka kwako, ukiwauliza kubofya kiungo.",
-            "confirm": "Mialiko inatumwa kutoka kwa kikoa chetu, ambayo marafiki zako bado hawajaitambua. Je, ungependa kufuatilia kwa maandishi ya haraka ili kuwafahamisha kuwa mwaliko umetoka kwako, ukiwauliza kubofya kiungo.",
+            "alert": "Mialiko inatumwa kutoka kwa kikoa chetu, ambacho marafiki zako bado hawajakitambua. Fuatilia kwa maandishi ya haraka ili kuwafahamisha kuwa mwaliko umetoka kwako, ukiwauliza kubofya kiungo.",
+            "confirm": "Mialiko inatumwa kutoka kwa kikoa chetu, ambacho marafiki zako bado hawajakitambua. Je, ungependa kufuatilia kwa maandishi ya haraka ili kuwafahamisha kuwa mwaliko umetoka kwako, ukiwauliza kubofya kiungo.",
             "subject": "Je, ulipata mwaliko?",
-            "body": "Ala, nimekutumia mwaliko kwenye programu ya {{app}}. Tafadhali angalia barua pepe yako na ubofye kiungo hapo!",
+            "body": "Ala, nimekutumia mwaliko kwenye programu ya {{app}} . Tafadhali angalia barua pepe yako na ubofye kiungo hapo!",
             "CheckYourEmail": "Tafadhali angalia barua pepe yako na ufuate maagizo!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Mipangilio ya Faragha"
     },
     "participating": {
         "Title": "Kichwa",
@@ -190,7 +211,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
-        "streamTitle": "{{1}} alianzisha Kongamano la Televisheni",
+        "streamTitle": "{{1}} ilianzisha Teleconference",
         "allow": {
             "dialogTitle": "Inaunganisha",
             "microphoneBtn": "Washa Maikrofoni",
@@ -198,31 +219,31 @@
             "cameraAndMicrophoneBtn": "Washa Kamera na Maikrofoni"
         },
         "preparing": {
+            "dialogTitle": "Washa\/zima kamera au maikrofoni kabla ya kujiunga",
             "micIsOff": "Maikrofoni imezimwa",
             "micIsOn": "Maikrofoni imewashwa",
             "cameraIsOff": "Kamera imezimwa",
             "cameraIsOn": "Kamera imewashwa",
             "screenSharingIsOn": "Kushiriki skrini kumewashwa",
             "screenSharingIsOff": "Shiriki skrini",
-            "joinNow": "Jiunge na Simu",
-            "dialogTitle": "Washa\/zima kamera au maikrofoni kabla ya kujiunga"
+            "joinNow": "Jiunge na Simu"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Maagizo",
             "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
             "point1": "Nenda kwa &quot;Mipangilio&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Faragha na usalama&quot; -&gt; &quot;Mipangilio ya Tovuti&quot; -&gt; &quot;Kamera&quot; au &quot;Mipangilio ya Tovuti&quot; -&gt; &quot;Makrofoni&quot;",
-            "point2": "Ondoa {{hostname}} kwenye orodha ya &quot;Zuia&quot;."
+            "point2": "Ondoa {{hostname}} kutoka kwenye orodha ya &quot;Block&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Maagizo",
-            "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Tafadhali pakia upya ukurasa huu na uthibitishe ufikiaji wa {{kind}} ili kujiunga na kongamano."
+            "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Tafadhali pakia upya ukurasa huu na uthibitishe ufikiaji wa {{kind}} ili kujiunga na mkutano."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Maagizo",
             "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
             "point1": "Nenda kwenye Mipangilio yako ya Android",
             "point2": "Fungua &quot;Programu na arifa&quot;",
-            "point3": "Tafuta &quot;{999}}&quot; na uifungue",
+            "point3": "Tafuta &quot; {{communityName}} &quot; na uifungue",
             "point4": "Gonga kwenye Ruhusa",
             "point5": "Washa {{kind}}"
         },
@@ -232,19 +253,22 @@
             "point1": "Nenda kwenye Mipangilio yako ya iOS",
             "point2": "Fungua &quot;Faragha&quot;",
             "point3": "Tafuta {{kind}} na uifungue",
-            "point4": "Tafuta &quot;{999}}&quot; na uwashe"
+            "point4": "Tafuta &quot; {{communityName}} &quot; na uwashe"
+        },
+        "fbLive": {
+            "dialogTitle": "Utiririshaji wa moja kwa moja wa Facebook umeanza"
         },
         "notices": {
             "youJoinedRoom": "Umejiunga kwenye chumba",
             "joining": "Kujiunga: {{userName}}",
-            "sbLeftRoom": "{{userName}} aliondoka kwenye chumba",
+            "sbLeftRoom": "{{userName}} walitoka chumbani",
             "switchingRoom": "Inabadilisha chumba...",
             "forceDisconnecting": "Utatenganishwa ndani ya sekunde 5",
             "forceDisconnectingImmediately": "Ulitenganishwa na mwenyeji",
             "youLeftRoom": "Uliondoka kwenye chumba",
             "codeCopied": "Uliondoka kwenye chumba",
-            "sbBeganFbLive": "{{userName}} alianza kutangaza simu hii katika Facebook",
-            "sbStoppedFbLive": "{{userName}} aliacha kutangaza simu hii katika Facebook",
+            "sbBeganFbLive": "{{userName}} ilianza kutangaza simu hii katika Facebook",
+            "sbStoppedFbLive": "{{userName}} iliacha kutangaza simu hii katika Facebook",
             "youBeganFbLive": "Ulianza kutangaza simu hii kwenye Facebook",
             "youStoppedFbLive": "Uliacha kutangaza simu hii kwenye Facebook",
             "youStartedLive": "Ulianza kutangaza simu hii kwa RTMP maalum",
@@ -257,8 +281,8 @@
             "linkCopiedToCb": "Kiungo kimenakiliwa kwenye ubao wa kunakili",
             "codeCopiedToCb": "Msimbo umenakiliwa kwenye ubao wa kunakili",
             "userHasNoVideo": "Mshiriki hana video",
-            "openInBrowserAlert": "Fungua kiungo kwenye kivinjari cha Safari ili ujiunge na mkutano.",
-            "allowedVideoLimit": "Video {{limit}} pekee ndiyo inayoruhusiwa kwenye chumba hiki",
+            "openInBrowserAlert": "Fungua kiungo katika kivinjari cha Safari ili ujiunge na mkutano.",
+            "allowedVideoLimit": "Video {{limit}} pekee inaruhusiwa kwenye chumba hiki",
             "allowedAudioLimit": "Ni maikrofoni {{limit}} pekee zinazoruhusiwa kwenye chumba hiki"
         },
         "settingsPopup": {
@@ -289,17 +313,20 @@
             "fbStartLive": "Nenda Moja kwa Moja",
             "fbStopLive": "Komesha Mtiririko wa moja kwa moja",
             "streamingSettings": "Mipangilio",
+            "manageStream": "Dhibiti Mtiririko wa moja kwa moja",
             "fbEmbedCode": "Pachika",
             "copy": "Nakili",
             "streamToRTMP": "Tiririsha hadi RTMP maalum",
             "startBroadcasting": "Anza kutangaza",
-            "broadcastingInProgress": "Utangazaji unaendelea",
-            "manageStream": "Dhibiti Mtiririko wa moja kwa moja"
+            "broadcastingInProgress": "Utangazaji unaendelea"
         },
         "audioSettings": {
             "dialogTitle": "Mipangilio ya Sauti",
             "speakers": "Wazungumzaji",
             "microphone": "Maikrofoni"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Dhibiti Matangazo"
         },
         "participantsPopup": {
             "dialogTitle": "Mipangilio ya Mshiriki",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Onyesha kushiriki skrini"
         },
         "streamingSettings": {
-            "title": "Mipangilio ya Kutiririsha"
+            "title": "Mtiririko wa moja kwa moja"
         },
         "preview": {
             "Meeting": "Teleconference",
             "MeetingEnded": "Teleconference imekamilika"
         },
         "requestSpeakDialog": {
-            "msg": "Kwa sasa kuna watu {{count}} wanaozungumza kwenye mkutano. Je, ungependa kubadilisha mojawapo baada ya kuwaruhusu sekunde {100}} kumaliza kuzungumza?",
-            "dialogTitle": "Ombi la Kuzungumza"
-        },
-        "fbLive": {
-            "dialogTitle": "Utiririshaji wa moja kwa moja wa Facebook umeanza"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Dhibiti Matangazo"
+            "dialogTitle": "Ombi la Kuzungumza",
+            "msg": "Hivi sasa kuna watu {{count}} wanaozungumza katika mkutano huo. Je, ungependa kubadilisha mojawapo baada ya kuwaruhusu sekunde {{seconds}} kumaliza kuzungumza?"
         }
     },
     "types": {
@@ -428,7 +449,7 @@
         },
         "Streams\/live": {
             "displayType": "Mtiririko wa moja kwa moja",
-            "description": "sauti au video ya moja kwa moja"
+            "description": "sauti ya moja kwa moja au video"
         },
         "Streams\/category": {
             "displayType": "Kategoria",
@@ -451,8 +472,8 @@
             "description": "mazungumzo kati ya watumiaji, na historia"
         },
         "Streams\/webrtc": {
-            "displayType": "Simu ya Moja kwa Moja",
-            "description": "simu ya video\/sauti ya wakati halisi"
+            "displayType": "Teleconference",
+            "description": "mkutano wa video\/sauti mtandaoni"
         },
         "Streams\/question": {
             "displayType": "Swali",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Jibu swali",
         "SetYourAnswer": "Tafadhali jibu swali",
         "NewQuestion": "Swali Jipya",
+        "EditQuestion": "Hariri Swali",
         "NewAnswer": "Jibu Jipya",
+        "NewPossibleAnswer": "Jibu Jipya Linalowezekana",
         "AnswerDetails": "Jibu Maelezo",
         "answerOption": "Chaguo",
         "answerOptionExclusive": "Kipekee",
         "answerTextarea": "Eneo la maandishi",
+        "answerText": "Maandishi",
+        "HideUntilAnswered": "Ficha hadi ujibu",
+        "CantChangeAnswers": "Haiwezi kubadilisha majibu",
         "FreeAnswer": "Andika jibu lako hapa",
         "SaveQuestion": "Hifadhi Swali",
         "SaveAnswer": "Hifadhi Jibu",
-        "AddAnotherAnswer": "Ongeza jibu lingine",
-        "ErrorAnswers": "Tafadhali ongeza hata jibu moja",
+        "Save": "Hifadhi",
+        "Send": "Tuma",
+        "TitleRequired": "Kichwa kinahitajika!",
         "AlreadyAnswered": "Tayari imejibu",
         "TitlePlaceholder": "Andika swali lako",
         "ContentPlaceholder": "Weka maelezo yoyote ya ziada hapa ili kuwasaidia watu kujibu",
         "ErrorTitle": "Swali linahitajika",
         "Placeholder": "Kishika nafasi",
-        "EditQuestion": "Hariri Swali",
-        "NewPossibleAnswer": "Jibu Jipya Linalowezekana",
-        "answerText": "Maandishi",
-        "HideUntilAnswered": "Ficha hadi ujibu",
-        "CantChangeAnswers": "Haiwezi kubadilisha majibu",
-        "Save": "Hifadhi",
-        "Send": "Tuma",
-        "TitleRequired": "Kichwa kinahitajika!",
         "AreYouSure": "Una uhakika?"
     },
     "experience": {
@@ -593,25 +612,5 @@
         "endCall": "Maliza Simu",
         "interview": "Mahojiano",
         "markApproved": "Alama Imeidhinishwa"
-    },
-    "identifier": {
-        "private": "Privat",
-        "public": "Hadharani",
-        "configurationSaved": "Usanidi umehifadhiwa",
-        "error": "Hitilafu fulani imetokea",
-        "privacySettings": "Mipangilio ya Faragha"
-    },
-    "avatar": {
-        "firstName": "jina la kwanza",
-        "lastName": "jina la familia",
-        "username": "jina la mtumiaji"
-    },
-    "login": {
-        "prompt": "Waruhusu marafiki wakutambue:",
-        "newUser": "au fungua akaunti mpya hapa chini",
-        "picTooltip": "Unaweza kubadilisha picha hii baadaye",
-        "placeholder": {
-            "fullName": "Ingiza jina lako kamili"
-        }
     }
 }

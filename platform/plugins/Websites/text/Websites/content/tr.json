@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Tanıtım için bağlantı",
+                "link": "Tanıtmak için bağlantı",
                 "startDate": "Başlangıç tarihi",
                 "startTime": "Başlangıç saati",
                 "endDate": "Bitiş tarihi",
@@ -23,19 +23,19 @@
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Araştır",
             "WriteToStartConversation": "Sohbeti başlatmak için düşüncelerinizi yazın",
-            "StartConversation": "Konuşmayı Başlat",
-            "GotoConversation": "Konuşmaya Git",
+            "StartConversation": "Sohbeti Başlat",
+            "GotoConversation": "Konuşmaya git",
             "reset": "Sıfırla",
             "edit": "Düzenlemek",
             "link": "Bağlantı",
             "setUrl": "URL&#39;yi ayarla",
-            "save": "Kayıt etmek",
-            "setClip": "Klip Kes",
+            "save": "Kaydetmek",
+            "setClip": "Klibi Kes",
             "invalidURL": "Geçersiz URL"
         },
         "FileTooLarge": "Dosya önbelleğe almak için çok büyük. Maksimum dosya boyutu {{size}}",
         "InvalidPDF": "Dosya geçerli bir PDF değil",
-        "StartTypingTitleOrKeywords": "Başlık veya anahtar kelimeleri yazmaya başlayın..."
+        "StartTypingTitleOrKeywords": "Başlık veya anahtar sözcükleri yazmaya başlayın..."
     },
     "types": {
         "Websites\/article": {
@@ -43,8 +43,8 @@
             "displayType": "Madde"
         },
         "Websites\/slide": {
-            "description": "Bir sunumdaki slayt, HTML, ses vb. içerebilir.",
-            "displayType": "Kayma"
+            "description": "Sunudaki bir slayt, HTML, ses vb. içerebilir.",
+            "displayType": "Slayt"
         },
         "Websites\/presentation": {
             "description": "Çeşitli slaytlardan oluşan bir sunum",
@@ -55,12 +55,12 @@
             "displayType": "reklam birimi"
         },
         "Websites\/advert\/placement": {
-            "description": "Reklam birimlerini bir ad altında gruplamanın bir yolu",
+            "description": "Reklam birimlerini bir ad altında gruplandırmanın bir yolu",
             "displayType": "reklam yerleşimi"
         },
         "Websites\/advert\/creative": {
             "description": "Bir reklam için içerik",
-            "displayType": "reklam kreatifi"
+            "displayType": "Reklam yaratıcısı"
         },
         "Websites\/advert\/campaign": {
             "description": "Bir reklam kampanyası",
@@ -68,7 +68,7 @@
         },
         "Websites\/webpage": {
             "description": "Meta verileri kazınmış bir web sitesini temsil eder",
-            "displayType": "internet sayfası"
+            "displayType": "web sayfası"
         }
     }
 }

@@ -1,111 +1,138 @@
 {
+    "errors": {
+        "Error": "Error",
+        "WalletAbsent": "Hindi konektado ang wallet.",
+        "Rendering": "May mga error habang nagre-render <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Kinakailangan ang presyo!",
+        "NameRequired": "Pangalan ang kailangan!",
+        "PriceInvalid": "Di-wasto ang presyo!",
+        "AmountInvalid": "Hindi wasto ang halaga!",
+        "TransactionFailed": "Nabigo ang Transaksyon",
+        "ChainNotSupported": "Ang napiling chain ay hindi suportado. Sinusuportahang chain: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Kailangan ng MetaMask konektado upang gumana sa application",
+        "UserNotLoggedInMetaMask": "Ang user ay hindi naka-log in sa MetaMask",
+        "CurrencyNotFound": "Hindi nahanap ang currency",
+        "WrongChain": "Nilikha ang NFT na ito sa ilalim ng &quot; {{chain}} &quot;. Mangyaring gamitin ang chain na ito.",
+        "NoRecipientSelected": "Walang napiling tatanggap",
+        "NotEnoughPermissionsWallet": "Walang sapat na pahintulot na basahin ang wallet ng user na ito",
+        "ThisUserHaveNoWallet": "Walang nakatalagang wallet ang user na ito",
+        "TheWalletOfThisUserInvalid": "Di-wasto ang wallet ng user na ito",
+        "WalletInvalid": "Di-wasto ang address ng pitaka"
+    },
+    "admin": {
+        "Title": "Administratibo ng mga asset",
+        "SubscriptionTitle": "Mga plano sa subscription"
+    },
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tapikin upang magbayad"
+        "button": "I-tap para magbayad"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: pinoproseso ang singil para sa {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : naproseso ang bayad para sa {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Salamat sa iyong pagbabayad sa {{call 'publisher.displayName'}}",
-        "SubscribedTo": "Nag-subscribe ang {{call 'user.displayName'}} sa {{plan.title}}",
-        "YouSubscribedTo": "Nag-subscribe ka sa {{plan.title}}",
+        "SubscribedTo": "Nag-subscribe {{call 'user.displayName'}} sa {{plan.title}}",
+        "YouSubscribedTo": "Naka-subscribe ka sa {{plan.title}}",
         "Assets\/credits\/alert": "Mayroon kang alerto na nauugnay sa iyong account"
     },
+    "charge": {
+        "Subject": "Makakakuha ka ng bayad na {{displayAmount}} mula sa {{call 'publisher.displayName'}} ng &quot; {{description}} &quot;",
+        "HasBeenCharged": "Uy, ito ay para lang ipaalam sa iyo na {{1}} ay nasingil {{2}} para sa {{3}} ng {{4}}"
+    },
+    "charged": {
+        "Subject": "Salamat sa iyong pagbabayad para sa &quot; {{description}} &quot;",
+        "HavePaid": "Uy {{1}} , ito ay isang mabilis na kumpirmasyon lamang na matagumpay mong nabayaran {{2}} hanggang {{3}} para sa {{4}}"
+    },
     "payment": {
-        "AboutOrder": "Impormasyon tungkol sa pagkakasunud-sunod",
+        "AboutOrder": "Impormasyon tungkol sa order",
         "PaymentMethod": "Paraan ng Pagbayad",
-        "ContactInfo": "Impormasyon sa pakikipag-ugnay",
+        "ContactInfo": "Impormasyon sa pakikipag-ugnayan",
         "Pay": "Magbayad",
         "PaymentSucceeded": "Nagtagumpay ang pagbabayad",
         "PaymentProcessing.": "Pinoproseso ang iyong bayad",
         "FailTryAgain": "Hindi matagumpay ang iyong pagbabayad, pakisubukang muli",
         "SomethingWrong": "Nagkaproblema",
         "PaymentStatus": "Katayuan ng pagbabayad",
-        "PayTo": "Magbayad {{displayName}}",
+        "PayTo": "Magbayad ng {{displayName}}",
         "ChooseCurrency": "Pumili ng pera",
         "YouCanSendUpTo": "Maaari kang magpadala ng hanggang {{amount}} {{symbol}}",
         "Send": "Ipadala",
         "EnterAmount": "ipasok ang halaga"
     },
     "credits": {
-        "InviteAcceptedBy": "Imbitasyon na tinanggap ng {{1}}",
-        "YouHaveCreditsToStart": "Mayroon kang {{1}} credits upang magsimula",
-        "PaymentFor": "Pagbabayad para sa &quot;{{1}}&quot;",
-        "PaymentTo": "Pagbabayad sa {{1}}",
-        "PaymentToUser": "Pagbabayad sa {{userName}}",
-        "JoinedPaidStream": "para sa pagsali sa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "para sa paglikha ng pamayanan &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "para sa pag-iwan ng &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Binili {{amount}} kredito",
-        "BuyAmountCredits": "Bumili ng {{amount}} credits",
-        "MissingCredits": "Nawawalang Mga Kredito",
-        "YouMissingCredits": "Nawawala ka {{amount}} credits",
-        "BuyCredits": "Bumili ng mga kredito",
-        "Buy": "Bumili",
-        "Credits": "Mga Kredito",
-        "ErrorInvalidAmount": "Hindi wasto ang halaga",
-        "ErrorInvalidCurrency": "Sa kasamaang palad hindi pa namin sinusuportahan ang pera {{currency}}",
-        "WatchClip": "Kumita ng mga kredito sa {{amount}} para sa panonood ng {{fromStreamTitle}}",
-        "PurchaseCredits": "Bumili ng Mga Kredito",
-        "forMessages": {
-            "BoughtCredits": "Mga kredito ng {{amount}}",
-            "BonusCredits": "{{amount}} na mga kredito"
-        },
-        "Streams_user_firstname": "{{invitedUserName}} naglagay ng unang pangalan",
-        "Streams_user_lastname": "Ipinasok ni {{invitedUserName}} ang apelyido",
-        "Streams_user_icon": "{{invitedUserName}} nagpasok ng icon",
-        "Places_user_location": "{{invitedUserName}} ipinasok ang lokasyon",
-        "Streams_greeting": "{{invitedUserName}} nagpasok ng pagbati",
-        "CreatePaidStream": "para sa paglikha ng {{toStreamName}}",
-        "BonusCredits": "Mga kredito ng bonus {{amount}}.",
-        "BuyBonus": "Ang pagbili ng {{amount}} na credit nang sabay-sabay, ay hahantong sa {{bonus}} credits bonus.",
+        "InviteAcceptedBy": "Tinanggap ang imbitasyon ng {{invitedUserName}}",
         "InvitedUserFilledStream": "{{invitedUserName}} napuno {{FilledStreamTitle}}",
         "ForFillingStream": "Para sa pagpuno {{FilledStreamTitle}}",
-        "CreatePrivateChat": "para sa pribadong pakikipag-chat kay {{toUserName}}"
+        "YouHaveCreditsToStart": "Mayroon kang {{amount}} na kredito upang magsimula",
+        "PaymentFor": "Pagbabayad para sa &quot; {{1}} &quot;",
+        "PaymentTo": "Pagbabayad sa {{1}}",
+        "PaymentToUser": "Pagbabayad sa {{toUserName}}",
+        "CreatePrivateChat": "para sa pribadong chat sa {{toUserName}}",
+        "CreatePaidStream": "para sa paglikha ng {{toStreamName}}",
+        "JoinedPaidStream": "para sa pagpapareserba sa &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "para sa paglikha ng komunidad &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "bilang refund ng reserbasyon sa &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Bumili ng {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} na kredito",
+        "BuyAmountCredits": "Bumili ng {{amount}} credits",
+        "WatchClip": "Nakakuha ng {{amount}} credits para sa panonood {{fromStreamTitle}}",
+        "MissingCredits": "Nawawalang Credits",
+        "YouMissingCredits": "Kailangan mo ng karagdagang {{amount}} na kredito upang magpatuloy.",
+        "BuyCredits": "Bumili ng mga kredito",
+        "BuyBonus": "Ang pagbili ng {{amount}} credits nang sabay-sabay, ay hahantong sa {{bonus}} credits bonus.",
+        "Buy": "Bumili",
+        "PurchaseCredits": "Bumili ng Mga Kredito",
+        "Credits": "Mga kredito",
+        "ErrorInvalidAmount": "Hindi wasto ang halaga",
+        "ErrorInvalidCurrency": "Sa kasamaang palad hindi pa namin sinusuportahan ang currency {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} na mga kredito",
+            "BonusCredits": "{{amount}} na mga kredito"
+        }
     },
     "history": {
         "Date": "Petsa",
         "Amount": "Halaga",
         "Description": "Paglalarawan",
         "Client": "Kliyente",
+        "User": "Gumagamit",
         "To": "sa",
         "From": "mula sa",
+        "SeeHistory": "Tingnan ang history ng pagbabayad para sa {{1}}",
         "HistoryEmpty": "Wala ka pang data",
-        "SeeHistory": "Tingnan ang kasaysayan ng pagbabayad para sa {{1}}",
-        "PaymentFor": "Gumastos ng {{amount}} credits",
-        "PaymentTo": "Ipinadala ang {{amount}} credits",
-        "PaymentToUser": "Ipinadala ang {{amount}} credits",
+        "PaymentFor": "Nagpadala ng {{amount}} credits",
+        "PaymentTo": "Nagpadala ng {{amount}} credits",
+        "PaymentToUser": "Nagpadala ng {{amount}} credits",
+        "CreatePaidStream": "Gumastos ng {{amount}} credits",
+        "WatchClip": {
+            "+": "Nakakuha ng {{amount}} credits",
+            "-": "Gumastos ng {{amount}} credits"
+        },
         "JoinedPaidStream": {
-            "+": "Nakakuha ng mga kredito {{amount}}",
+            "+": "Nakakuha ng {{amount}} credits",
             "-": "Gumastos ng {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "Natanggap ang {{amount}} kredito",
-            "-": "Ipinadala ang {{amount}} credits"
+            "+": "Nakatanggap ng {{amount}} credits",
+            "-": "Nagpadala ng {{amount}} credits"
         },
         "CreatedCommunity": "Gumastos ng {{amount}} credits",
-        "BoughtCredits": "Binili {{amount}} kredito",
-        "InviteAcceptedBy": "Nakakuha ng mga kredito {{amount}}",
-        "YouHaveCreditsToStart": "Nakakuha ng mga kredito {{amount}}",
-        "CreatePaidStream": "Gumastos ng {{amount}} na mga kredito",
-        "WatchClip": {
-            "+": "Nakakuha ng {{amount}} na mga kredito",
-            "-": "Gumastos ng {{amount}} na mga kredito"
-        },
-        "BonusCredits": "Nakakuha ng bonus na {{amount}} na mga kredito",
-        "Streams_user_firstname": "Nakakuha ng {{amount}} na mga kredito",
-        "Streams_user_lastname": "Nakakuha ng {{amount}} na mga kredito",
-        "Streams_user_icon": "Nakakuha ng {{amount}} na mga kredito",
-        "Places_user_location": "Nakakuha ng {{amount}} na mga kredito",
-        "Streams_greeting": "Nakakuha ng {{amount}} na mga kredito",
-        "User": "Gumagamit"
+        "BoughtCredits": "Bumili ng {{amount}} credits",
+        "BonusCredits": "Nakakuha ng bonus {{amount}} credits",
+        "InviteAcceptedBy": "Nakakuha ng {{amount}} credits",
+        "Streams_user_firstname": "Nakakuha ng {{amount}} credits",
+        "Streams_user_lastname": "Nakakuha ng {{amount}} credits",
+        "Streams_user_icon": "Nakakuha ng {{amount}} credits",
+        "Places_user_location": "Nakakuha ng {{amount}} credits",
+        "Streams_greeting": "Nakakuha ng {{amount}} credits",
+        "YouHaveCreditsToStart": "Nakakuha ng {{amount}} credits"
     },
     "subscriptions": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
         "confirm": {
-            "title": "Simulan ang Subskripsyon",
-            "message": "Nais mo bang mag-subscribe sa {{title}}?",
+            "title": "Simulan ang Subscription",
+            "message": "Magsimula ng umuulit na subscription sa &quot; {{title}} &quot;?",
             "ok": "OK",
-            "cancel": "Pagkansela"
+            "cancel": "Kanselahin"
         },
         "CreditOrDebitCard": "Credit o debit card",
         "SubscribePayment": "Mag-subscribe sa Pagbabayad",
@@ -123,7 +150,7 @@
         "Period": "Panahon",
         "Price": "Presyo",
         "AreYouSureUnsubscribe": "Sigurado ka bang gusto mong i-unsubscribe ang planong ito?",
-        "YouUnsubscribedFromPlan": "Nag-unsubscribe ka sa plan na &quot;{{planTitle}}&quot;. Hindi ka sisingilin, ngunit magpapatuloy ang iyong subscription hanggang {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Nag-unsubscribe ka sa plan na &quot; {{planTitle}} &quot;. Hindi ka sisingilin, ngunit magpapatuloy ang iyong subscription hanggang {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "pamagat ng plano",
             "PricePlaceholder": "presyo",
@@ -134,113 +161,58 @@
     },
     "payments": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
+        "BuyAmountCredits": "Bumili ng {{amount}} credits",
         "confirm": {
             "title": "Magbayad",
-            "message": "Sumasang-ayon ka bang magbayad {{symbol}} {{amount}}?",
+            "message": "Sumasang-ayon ka bang magbayad ng {{symbol}} {{amount}} ?",
             "ok": "OK",
-            "cancel": "Pagkansela"
-        },
-        "BuyAmountCredits": "Bumili ng {{amount}} credits"
+            "cancel": "Kanselahin"
+        }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Mga Kredito",
-            "description": "subaybayan ang mga kredito at pagbabayad"
+            "displayType": "Mga kredito",
+            "description": "sinusubaybayan ang mga kredito at pagbabayad"
         },
         "Assets\/plan": {
             "displayType": "Plano ng Subsription",
             "description": "plano ng subscription"
         },
         "Assets\/subscription": {
-            "displayType": "Suskrisyon",
+            "displayType": "Subscription",
             "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "Produkto",
-            "description": "ibinebenta ang produkto"
+            "displayType": "produkto",
+            "description": "produktong ibinebenta"
         },
         "Assets\/service": {
             "displayType": "Serbisyo",
-            "description": "inaalok ang serbisyo"
+            "description": "serbisyong iniaalok"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Nakakuha ng mga kredito {{amount}}"
+            "content": "Nakakuha ng {{amount}} credits"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Bumili ng {{amount}} credits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} na kredito"
         },
         "Assets\/credits\/spent": {
             "content": "Gumastos ng {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "Ipinadala ang {{amount}} credits"
+            "content": "Nagpadala {{amount}} credits sa {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Natanggap ang {{amount}} credits"
-        },
-        "Assets\/credits\/bought": {
-            "content": "Binili {{amount}} kredito"
-        },
-        "Assets\/credits\/bonus": {
-            "content": "Mga kredito ng bonus {{amount}}."
+            "content": "Nakatanggap {{amount}} credits mula sa {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Mayroon kang maliit na mga kredito sa iyong account. Mangyaring bisitahin <a href='{{link}}'>ang link<\/a> na ito upang bumili ng higit pang mga kredito."
+            "content": "Mayroon kang maliit na mga kredito sa iyong account. Mangyaring bisitahin ang <a href='<i translate='no'>999 &#39;&gt;ang link na ito<\/a> upang bumili ng higit pang mga kredito."
         }
-    },
-    "charge": {
-        "Subject": "Makakakuha ka ng pagbabayad ng {{displayAmount}} mula sa {{call 'publisher.displayName'}} sa pamamagitan ng &quot;{{description}}&quot;",
-        "HasBeenCharged": "Uy, ito ay upang ipaalam sa iyo na {{1}} ay sisingilin {{2}} para sa {{3}} sa pamamagitan ng {{4}}"
-    },
-    "charged": {
-        "Subject": "Salamat sa iyong pagbabayad para sa &quot;{{description}}&quot;",
-        "HavePaid": "Hoy {{1}}, ito ay isang mabilis na kumpirmasyon na matagumpay mong nabayaran {{2}} sa {{3}} para sa {{4}}"
-    },
-    "services": {
-        "NewServiceTemplate": {
-            "Title": "Bagong Serbisyo",
-            "TitlePlaceholder": "Pamagat ng serbisyo",
-            "PricePlaceholder": "Itakda ang presyo",
-            "LinkPlaceholder": "itakda ang karagdagang link sa impormasyon",
-            "DescriptionPlaceholder": "Paglalarawan ng serbisyo",
-            "SaveService": "I-save ang Serbisyo",
-            "SelectRequiredParticipants": "Mga Kinakailangang Kalahok",
-            "RequiredParticipantsDesc": "Mangyaring pumili ng mga kaugnay na kalahok na kinakailangang gamitin ang serbisyong ito (halimbawa, mga alagang hayop para sa &quot;Palabas ng mga aso&quot;, o mga bata para sa &quot;Pista ng mga bata&quot; atbp). Kung ang serbisyo ay binayaran, ang user ay kailangang magbayad din para sa bawat kaugnay na kalahok."
-        },
-        "ManageServiceTemplates": "Pamahalaan ang Mga template ng Serbisyo",
-        "ManageServices": "Pamahalaan ang mga Serbisyo",
-        "FreeEvent": "Libreng kaganapan",
-        "OptionalContribution": "Opsyonal na kontribusyon",
-        "RequiredPayment": "Kinakailangan na pagbabayad",
-        "AreYouSureDelete": "Sigurado ka bang gusto mong tanggalin ang serbisyong ito?",
-        "AmountServicesRelated": "Mayroong mga {{amount}} availability na may kaugnayan sa serbisyong ito. Aalisin din sila.",
-        "Free": "Libre",
-        "EditServiceTemplate": {
-            "Title": "I-edit ang Serbisyo"
-        }
-    },
-    "errors": {
-        "Error": "Error",
-        "WalletAbsent": "Hindi konektado ang wallet.",
-        "Rendering": "May mga error habang nagre-render <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Kinakailangan ang presyo!",
-        "NameRequired": "Pangalan ang kailangan!",
-        "PriceInvalid": "Di-wasto ang presyo!",
-        "TransactionFailed": "Nabigo ang Transaksyon",
-        "ChainNotSupported": "Ang napiling chain ay hindi suportado. Sinusuportahang chain: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Kailangan ng MetaMask konektado upang gumana sa application",
-        "UserNotLoggedInMetaMask": "Ang user ay hindi naka-log in sa MetaMask",
-        "CurrencyNotFound": "Hindi nahanap ang currency",
-        "WrongChain": "Nilikha ang NFT na ito sa ilalim ng &quot;{{chain}}&quot;. Mangyaring gamitin ang chain na ito.",
-        "AmountInvalid": "Hindi wasto ang halaga!",
-        "NoRecipientSelected": "Walang napiling tatanggap",
-        "NotEnoughPermissionsWallet": "Walang sapat na pahintulot na basahin ang wallet ng user na ito",
-        "ThisUserHaveNoWallet": "Walang nakatalagang wallet ang user na ito",
-        "TheWalletOfThisUserInvalid": "Di-wasto ang wallet ng user na ito",
-        "WalletInvalid": "Di-wasto ang address ng pitaka"
-    },
-    "admin": {
-        "Title": "Administratibo ng mga asset",
-        "SubscriptionTitle": "Mga plano sa subscription"
     },
     "billing": {
         "Title": "Pagsingil sa mga asset",
@@ -252,6 +224,33 @@
             "CreditsMinimumNegative": "Ang minimum na mga kredito ay hindi maaaring negatibo",
             "CreditsToAddNegative": "Ang mga credit na idaragdag ay hindi maaaring negatibo"
         }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Bagong Serbisyo",
+            "TitlePlaceholder": "Pamagat ng serbisyo",
+            "PricePlaceholder": "Itakda ang presyo",
+            "LinkPlaceholder": "magtakda ng karagdagang link ng impormasyon",
+            "DescriptionPlaceholder": "Paglalarawan ng serbisyo",
+            "SaveService": "I-save ang Serbisyo",
+            "SelectRequiredParticipants": "Mga kinakailangang kaugnay na kalahok",
+            "RequiredParticipantsDesc": "Mangyaring pumili ng mga kaugnay na kalahok na kinakailangang gamitin ang serbisyong ito (halimbawa, mga alagang hayop para sa &quot;Palabas ng mga aso&quot;, o mga bata para sa &quot;Pista ng mga bata&quot; atbp). Kung ang serbisyo ay binayaran, ang user ay kailangang magbayad din para sa bawat kaugnay na kalahok."
+        },
+        "EditServiceTemplate": {
+            "Title": "I-edit ang Serbisyo"
+        },
+        "ManageServiceTemplates": "Pamahalaan ang Mga Template ng Serbisyo",
+        "ManageServices": "Pamahalaan ang Mga Serbisyo",
+        "Free": "Libre",
+        "OptionalContribution": "Opsyonal na kontribusyon",
+        "RequiredPayment": "Kinakailangang bayad",
+        "AreYouSureDelete": "Sigurado ka bang gusto mong tanggalin ang serbisyong ito?",
+        "AmountServicesRelated": "Mayroong {{amount}} na mga magagamit na nauugnay sa serbisyong ito. Tatanggalin din sila."
+    },
+    "transfer": {
+        "SelectRecipient": "Pumili ng tatanggap",
+        "TransactionSuccess": "Tagumpay ng Transaksyon",
+        "OrTypeWalletAddress": "O i-type ang address ng wallet ng tatanggap"
     },
     "NFT": {
         "Title": "Pamagat",
@@ -265,6 +264,9 @@
         "OwnerUserNotFound": "Ang may-ari ng NFT na ito ay hindi nakarehistro sa aming aplikasyon.",
         "BuyNow": "Bumili ka na ngayon",
         "Buy": "Bumili",
+        "Add": "Idagdag",
+        "Remove": "Alisin",
+        "NoNFTyet": "Wala pang NFT",
         "Conversation": "Pag-uusap",
         "Create": "Lumikha",
         "CurrentBid": "Kasalukuyang bid",
@@ -303,6 +305,10 @@
         "PutOffSale": "Mag-withdraw mula sa pagbebenta",
         "Transfer": "Paglipat",
         "Actions": "Mga aksyon",
+        "Claim": "Claim",
+        "ClaimNFT": "I-claim ang NFT",
+        "Unlocking": "Pag-unlock",
+        "Unlock": "I-unlock",
         "Update": "Update",
         "UpdateToken": "I-update ang Token",
         "UpdateNFT": "I-update ang NFT",
@@ -357,7 +363,7 @@
         "contract": {
             "CreateContract": "Lumikha ng kontrata",
             "SelectContract": "Pumili ng kontrata",
-            "CreateContractFor": "Lumikha ng kontrata para sa {{userName}}",
+            "CreateContractFor": "Gumawa ng kontrata para sa {{userName}}",
             "ContractFor": "Kontrata para sa {{userName}}",
             "UpdateContract": "I-update ang Kontrata",
             "TransferOwnership": "Ilipat ang Pagmamay-ari",
@@ -367,7 +373,7 @@
             "CurrentBaseURL": "Kasalukuyang BaseURL",
             "ContractAddressAbsent": "Wala ang address ng kontrata",
             "FactoryAddressAbsent": "Wala ang factory address",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Kinakailangan ang pamagat",
             "SymbolRequired": "Kinakailangan ang simbolo",
             "TypeContractName": "pangalan ng kontrata",
@@ -384,8 +390,8 @@
             "fileEmpty": "Paumanhin, walang laman ang CSV file.",
             "userIdNotFound": "umiiral ang user ngunit walang laman ang id",
             "errorLine": "linya {{1}}",
-            "fieldNotFound": "Hindi nahanap ang kinakailangang field na &quot;{{1}}&quot;.",
-            "displayTypeEmpty": "Hindi nakita ang uri ng display para sa &quot;{{1}}&quot;.",
+            "fieldNotFound": "Hindi nahanap ang kinakailangang field na &quot; {{1}} &quot;",
+            "displayTypeEmpty": "Hindi nahanap ang uri ng display para sa &quot; {{1}} &quot;.",
             "taskStreamInvalid": "di-wasto ang stream ng gawain",
             "instructionsEmpty": "walang laman ang mga tagubilin sa stream ng gawain",
             "complete": "Kumpleto",
@@ -432,13 +438,6 @@
             "aboutPlaceholder": "I-edit ang Bio",
             "SureLogOut": "Sigurado ka bang gusto mong mag-log out?"
         },
-        "Add": "Idagdag",
-        "Remove": "Alisin",
-        "NoNFTyet": "Wala pang NFT",
-        "Claim": "Claim",
-        "ClaimNFT": "I-claim ang NFT",
-        "Unlocking": "Pag-unlock",
-        "Unlock": "I-unlock",
         "sales": {
             "factory": {
                 "form": {
@@ -463,7 +462,7 @@
                         "beneficiary": "Ang benepisyaryo ng pagbebenta ng mga token, kung hindi ay magiging sender",
                         "autoindex": "Autoindex",
                         "duration": "I-lock pagkatapos ng minting. Ang ibig sabihin ng Zero ay makuha agad.",
-                        "rateInterval": "bucket interval para sa espesyal na pagbili",
+                        "rateInterval": "pagitan ng bucket para sa espesyal na pagbili",
                         "rateAmount": "halaga ng bucket para sa espesyal na pagbili"
                     }
                 },
@@ -491,7 +490,7 @@
                         "amount": "Halaga"
                     },
                     "small": {
-                        "seriesId": "bagong token ay mapabilang sa serye na may ganoong ID",
+                        "seriesId": "bagong token ay mapapabilang sa serye na may ganoong ID",
                         "account": "may-ari ng bagong likhang NFT. kung hindi nakatakda - gagamit ng kasalukuyang wallet",
                         "amount": "halaga ng NFT sa mint"
                     }
@@ -554,15 +553,10 @@
             "Unlock": "I-unlock",
             "Locked": "Naka-lock",
             "CustodianAddress": "Address ng tagapag-alaga",
-            "TokenWasClaimed": "Ang token na &quot;{{title}}&quot; ay na-claim",
-            "TokenWasLocked": "Ang token na &quot;{{title}}&quot; ay naka-lock",
-            "TokenWasUnlocked": "Ang token na &quot;{{title}}&quot; ay na-unlock"
+            "TokenWasClaimed": "Na-claim ang Token na &quot; {{title}} &quot;.",
+            "TokenWasLocked": "Na-lock ang Token &quot; {{title}} &quot;.",
+            "TokenWasUnlocked": "Na-unlock ang Token &quot; {{title}} &quot;."
         }
-    },
-    "transfer": {
-        "SelectRecipient": "Pumili ng tatanggap",
-        "TransactionSuccess": "Tagumpay ng Transaksyon",
-        "OrTypeWalletAddress": "O i-type ang address ng wallet ng tatanggap"
     },
     "currencies": {
         "choose": "Pumili ng pera"

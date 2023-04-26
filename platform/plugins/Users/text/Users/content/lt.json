@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "kažkas"
+    },
+    "identifier": {
+        "types": {
+            "email": "El. paštas",
+            "mobile": "Mobilusis",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Nukopijuota! Dabar galite jį įklijuoti bet kur."
+    },
     "analytics": {
         "Title": "Analizė",
         "Daily": "Kasdien",
@@ -15,13 +28,13 @@
         "LogOut": "Atsijungti"
     },
     "activate": {
+        "OneTimeCode": "Įveskite gautą kodą:",
         "SetAsPrimary": "Nustatyti {{1}} kaip pagrindinį {{2}}",
-        "ChoosePassPhrase": "Pasirinkite <strong>slaptažodžio frazę<\/strong> , kurią naudodami norite prisijungti.<br> Paprasta frazė, susidedanti iš kelių žodžių, kurią lengvai įsiminsite.",
+        "ChoosePassPhrase": "Pasirinkite <strong>slaptažodžio frazę<\/strong> , kuria norite prisijungti.<br> Paprasta frazė, susidedanti iš kelių žodžių, kurią lengvai įsiminsite.",
         "ChoosePassPhraseSeeSuggestions": "Pasirinkite gerą <strong>slaptažodžio frazę<\/strong> , kad apsaugotumėte savo paskyrą. Peržiūrėkite kai kurių idėjų pasiūlymus.",
         "LogOutAndTryAgain": "Atsijunkite ir bandykite dar kartą",
         "IfYouFeel": "Jei jaučiate, kad kažkas nutiko ne taip, galite",
         "SetIdentifierButtonTitle": "pradėti iš naujo",
-        "OneTimeCode": "Įveskite gautą kodą:",
         "ActivateMyAccount": "Suaktyvinkite Mano paskyrą"
     },
     "session": {
@@ -35,7 +48,7 @@
         "mustAgree": "Pirmiausia turite sutikti su sąlygomis."
     },
     "register": {
-        "TermsLabel": "Sutinku su {{link}}",
+        "TermsLabel": "Priimu {{link}}",
         "TermsTitle": "Sąlygos"
     },
     "notifications": {
@@ -56,25 +69,29 @@
             "title": "Pasirinkite kontaktą",
             "CreateAccount": "+ Naujas kontaktas",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create nerastas",
-            "SearchByName": "Ieškokite pagal pavadinimą",
+            "SearchByName": "Ieškoti pagal pavadinimą",
             "EmptyContacts": "Kontaktai nerasta..."
         },
         "select": {
-            "title": "Pasirinkite {{displayName}} kontaktą"
+            "title": "Pasirinkite kontaktą iš {{displayName}}"
         }
     },
     "usersContacts": {
         "selectLabel": "Pasirinkite etiketę.",
         "inviteUser": "Pakviesti vartotojus",
         "selectRole": "Pasirinkite Role",
-        "inviteRole": "Pakviesti {{role}}"
+        "inviteRole": "Pakvieskite {{role}}"
     },
     "invalidLanguageSelected": "Pasirinkta netinkama kalba",
+    "platforms": {
+        "wallet": "Piniginė",
+        "broadcast": "Transliacija"
+    },
     "login": {
         "title": "Sveiki",
         "directions": "Susikurkite paskyrą arba prisijunkite.",
         "directionsNoRegister": "Prisijunkite, jei turite paskyrą.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Įveskite slaptažodžio frazę:",
         "loginButton": "Pradėti",
         "registerButton": "Pradėti",
@@ -88,6 +105,7 @@
         "emailExists": "Ar bandėte registruotis šiuo el. pašto adresu anksčiau? Jei taip, patikrinkite gautuosius, kad suaktyvintumėte paskyrą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite norėdami išsiųsti pranešimą dar kartą<\/a>",
         "mobileExists": "Ar bandėte registruotis šiuo mobiliojo telefono numeriu anksčiau? Jei taip, patikrinkite savo SMS, kad suaktyvintumėte paskyrą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite norėdami išsiųsti pranešimą dar kartą<\/a>",
         "usingOther": "arba tu gali",
+        "connectPlatforms": "arba prisijunkite naudodami:",
         "prompt": "Pasirinkite vartotojo vardą:",
         "newUser": "arba toliau sukurkite naują paskyrą",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Sutinkate su paslaugų teikimo sąlygomis?",
         "facebookNoEmail": "Jūsų Facebook paskyroje trūksta patvirtinto el. pašto adreso. Tiesiog prisijunkite vietiniu būdu.",
         "picTooltip": "Vėliau galėsite pakeisti šią nuotrauką",
-        "wallet": {
-            "payload": "Prisijunkite prie {{host}} laiku {{timestamp}}",
-            "alert": {
-                "title": "Peradresuojama į Piniginę",
-                "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
-            }
-        },
         "web3": {
-            "payload": "Prisijunkite prie {{host}} laiku {{timestamp}}",
+            "payload": "Prisijunkite prie {{host}} {{timestamp}} laiku",
             "alert": {
                 "title": "Peradresuojama į Piniginę",
                 "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
             }
-        },
-        "connectPlatforms": "arba prisijunkite naudodami:"
+        }
     },
     "setIdentifier": {
         "title": "Pridėkite prisijungimo būdą",
@@ -126,8 +136,8 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Paskyra",
-        "areUsing": "Naudojate {{platform}} kaip",
+        "title": "{{Platform}} sąskaita",
+        "areUsing": "Jūs naudojate {{platform}} kaip",
         "noLongerUsing": "Jūs nebesate prisijungę prie {{platform}} as",
         "doAuth": "Prisijunkite naudodami šią paskyrą",
         "doSwitch": "Perjungti į šią paskyrą"
@@ -139,26 +149,9 @@
         "Guest": "Svečias",
         "Host": "Šeimininkas"
     },
-    "avatar": {
-        "Someone": "kažkas"
-    },
     "web3": {
-        "WrongMethod": "Netinkamas sutarties metodas {{methodName}}",
+        "WrongMethod": "Neteisingas sutarties metodas {{methodName}}",
         "ChangeWallet": "Keisti Piniginę"
-    },
-    "identifier": {
-        "types": {
-            "email": "El. paštas",
-            "mobile": "Mobilusis",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Nukopijuota! Dabar galite jį įklijuoti bet kur."
-    },
-    "platforms": {
-        "wallet": "Piniginė",
-        "broadcast": "Transliacija"
     },
     "labels": {
         "addToPhonebook": "Pridėti prie mano telefono kontaktų",

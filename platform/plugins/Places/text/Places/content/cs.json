@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "v rámci {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "do {{1}}"
     },
     "units": {
         "meter": "Metr",
@@ -20,7 +20,8 @@
     "location": {
         "interested": "Zajímají mě věci, které se odehrávají do {{select}} od",
         "update": "Aktualizujte moji polohu",
-        "prompt": "{{ClickOrTap}} sem<br> nastavte svůj<br> umístění",
+        "set": "Nastavte moji polohu",
+        "prompt": "{{ClickOrTap}} sem<br> nastavte si svůj<br> umístění",
         "myCurrentLocation": "Moje aktuální poloha",
         "enterAddress": "Zadejte adresu",
         "enterPostcode": "Zadejte své PSČ",
@@ -42,11 +43,10 @@
         },
         "dialog": {
             "title": "Vyberte umístění"
-        },
-        "set": "Nastavte moji polohu"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Nějaká oblast uvnitř tohoto umístění?",
+        "filterPlaceholder": "Nějaká oblast uvnitř tohoto místa?",
         "newArea": "Nová oblast",
         "promptTitle": "Zadejte název oblasti:",
         "absent": "Nastavte prosím oblast",

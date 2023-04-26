@@ -1,124 +1,95 @@
 {
     "errors": {
-        "HiddenFromYou": "このコンテンツはあなたから隠されています。",
+        "HiddenFromYou": "このコンテンツは非表示になっています。",
         "InplaceTypeMustBe": "inplaceType は &#39;textarea&#39; または &#39;text&#39; でなければなりません"
     },
     "preview": {
         "NewItemTitle": "新商品"
     },
+    "avatar": {
+        "firstName": "ファーストネーム",
+        "lastName": "苗字",
+        "username": "ユーザー名"
+    },
     "labels": {
-        "Streams\/invited": "招待した人",
-        "Streams\/invitedMe": "誰が私を招待したか",
+        "Streams\/invited": "私が招待した人々",
+        "Streams\/invitedMe": "誰が私を招待したのか",
         "DoYouAgree": "同意しますか？",
         "Yes": "はい",
-        "No": "番号"
+        "No": "いいえ"
+    },
+    "login": {
+        "prompt": "友達にあなたを認識してもらいましょう:",
+        "newUser": "または、以下で新しいアカウントを作成してください",
+        "picTooltip": "この画像は後で変更できます",
+        "placeholder": {
+            "fullName": "フルネームを入れて下さい"
+        }
     },
     "interests": {
-        "Filter": "あなたの興味は何ですか？",
-        "CanGrant": "それでも探しているものが見つからない場合は、以下に新しい関心を追加できます。",
-        "TrySynonyms": "見えない？いくつかの同義語を試してください。",
+        "Filter": "インタレストを検索",
+        "CanGrant": "それでも探しているものが見つからない場合は、以下に新しい興味を追加できます。",
+        "TrySynonyms": "見えない？類義語をいくつか試してください。",
         "AddUnderCategory": "カテゴリの下に追加...",
         "Other": "他の",
-        "Unlisted": "非公開"
+        "Unlisted": "未公開"
     },
     "chat": {
-        "flaggedForAdminReview": "メッセージには管理者レビューのフラグが付けられています。もう一度タップしてフラグを解除します。",
-        "noOneSaid": "誰も何も言わなかった",
+        "flaggedForAdminReview": "メッセージは、管理者によるレビューのためにフラグが立てられました。フラグを解除するには、もう一度タップします。",
+        "noOneSaid": "誰も何も言っていない",
         "closeChatButton": "チャットを閉じる",
         "closeChatConfirmTitle": "このチャットを閉じますか？",
         "closeChatConfirm": "このチャットを閉じてもよろしいですか？",
-        "Subscribed": "通知を有効にする",
-        "Unsubscribed": "通知がミュートされました",
+        "Subscribed": "通知有効",
+        "Unsubscribed": "通知をミュートしました",
         "closeChatConfirmYes": "はい",
-        "closeChatConfirmNo": "番号",
+        "closeChatConfirmNo": "いいえ",
         "earlierComments": "以前のコメント",
         "startedConversation": "会話を始めた",
         "RealTimeCall": "リアルタイム通話",
+        "JoinWebRTC": "電話会議",
         "SearchByName": "名前で検索",
         "Notifications": {
             "Visit": "{{displayName}}がチャットにアクセスしています",
-            "Join": "{{displayName}}がチャットに参加しました",
-            "Leave": "{{displayName}}がチャットから退出しました",
-            "RelatedTo": "{{displayName}}は{{stream.displayType}}を開始しました"
+            "Join": "{{displayName}}チャットに参加",
+            "Leave": "{{displayName}}がチャットを退出しました",
+            "RelatedTo": "{{displayName}} {{stream.displayType}}を開始"
         },
-        "JoinWebRTC": "電話会議"
+        "placeholders": {
+            "Public": "コメントを追加",
+            "Private": "プライベートメッセージを書く"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "メール購読を管理する",
         "IfUnsubscribe": "退会したい場合",
-        "*": "{{& message.fields.type}}から{{& stream.fields.title}}へのメッセージ",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} の発言: {{& message.content}}",
-        "Streams\/changed": "{{stream.fields.title}}の変更",
-        "Streams\/invite": "{{& stream.fields.title}}に招待されました",
-        "Streams\/announcement": "{{& stream.fields.title}}での発表",
-        "Streams\/access": "{{&call 'avatar.displayName'}}は{{& stream.fields.title}}でアクセスを変更しました",
-        "Streams\/chat\/edit": "{{& stream.fields.title}}で編集されたチャットメッセージ",
-        "Streams\/chat\/remove": "{{& stream.fields.title}}でチャットメッセージが削除されました",
-        "Streams\/closed": "{{stream.fields.title}}は閉鎖されました",
-        "Streams\/task\/progress": "{{stream.fields.title}}の進捗状況",
-        "Streams\/task\/complete": "完了したタスク：{{stream.fields.title}}",
-        "Streams\/task\/error": "中のエラー：{{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}：着信メッセージ",
-        "Streams\/relatedTo\/Streams\/call": "{{toTitle}}で開始された新しい通話",
-        "Streams\/relatedTo\/*": "{{toTitle}}の新しい{{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "{{toTitle}}に{{relationDisplayType}}として追加",
-        "Streams\/mention": "{{&call 'avatar.displayName'}}がコメントであなたに言及しました",
-        "Streams\/call": "{{displayName}}がリアルタイム通話を開始しました",
+        "*": "メッセージ{{& message.fields.type}} ～ {{& stream.fields.title}}",
         "Streams\/joined": "{{&call 'avatar.displayName'}}が参加",
-        "Streams\/left": "{{&call 'avatar.displayName'}}左"
+        "Streams\/left": "{{&call 'avatar.displayName'}}残り",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}}が言った: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}}の変化",
+        "Streams\/invite": "{{& stream.fields.title}}に招待されました",
+        "Streams\/announcement": "{{& stream.fields.title}}発表",
+        "Streams\/access": "{{& stream.fields.title}}に{{&call 'avatar.displayName'}}のアクセスが変更されました",
+        "Streams\/chat\/edit": "{{& stream.fields.title}}で編集されたチャットメッセージ",
+        "Streams\/chat\/remove": "チャット メッセージは{{& stream.fields.title}}で削除されました",
+        "Streams\/closed": "{{stream.fields.title}}閉鎖されました",
+        "Streams\/task\/progress": "{{stream.fields.title}}の進捗",
+        "Streams\/task\/complete": "タスク完了: {{stream.fields.title}}",
+        "Streams\/task\/error": "エラー中: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}} : 着信メッセージ",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}}に開始された新しい通話",
+        "Streams\/relatedTo\/*": "{{toTitle}}の新しい{{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{relationDisplayType}}として{{toTitle}}に追加",
+        "Streams\/mention": "{{&call 'avatar.displayName'}}がコメントであなたをメンションしました",
+        "Streams\/call": "{{displayName}}リアルタイム通話を開始しました"
     },
     "invite": {
         "command": "招待",
-        "messageContent": "{{displayName}}があなたを{{inviteUrl}}に招待しました",
-        "youCanNowPaste": "このリンクをどこかに貼り付けて、人々を招待できるようになりました",
-        "dialog": {
-            "chooseFromContacts": "連絡先から選択",
-            "chooseAgainFromContacts": "連絡先からもう一度選択",
-            "inviteSelectedContacts": "選択した連絡先を招待する",
-            "selectFromContacts": "連絡先から選択",
-            "userChooserPlaceholder": "名前で検索",
-            "photo": "写真を撮る",
-            "photoInstruction": "QRコードをスキャンした人が目の前にいる場合は、写真を撮ります",
-            "to": "宛先：{{Stream Title}}",
-            "go": "行け",
-            "title": "招待",
-            "placeholder": "携帯電話番号またはメールアドレス",
-            "orInvite": "または、以下を使用して人々を招待します。",
-            "copyLink": "招待リンクをコピーするには{{ClickOrTap}}",
-            "shareOrCopyLink": "招待リンクを共有またはコピーするには{{ClickOrTap}}",
-            "QR": "{{ClickOrTap}}でQRコードを生成",
-            "QRtitle": "このQRコードをスキャンする",
-            "QRscanned": "彼らはそれをスキャンしました！",
-            "scannedQR": "コードがスキャンされた場合は{{ClickOrTap}}",
-            "byEmail": "Eメール",
-            "byText": "文章",
-            "byFacebook": "フェイスブック",
-            "byTwitter": "ツイッター",
-            "title2": "人を招待する",
-            "chooseMethod": "方法を選択してください:",
-            "selectContacts": "連絡先を選択",
-            "scanQRCode": "QRコードをスキャン",
-            "shareLink": "リンクを共有する",
-            "chooseFromRegistered": "登録ユーザーから選ぶ",
-            "inviteViaEmailOrSms": "メールまたは SMS で招待する"
-        },
-        "email": {
-            "subject": "ねえ、これをチェックしてください",
-            "PleaseVisitLink": "次のリンクにアクセスしてください。",
-            "InvitingYou": "{{title}}に招待します",
-            "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました",
-            "HasMentionedYou": "{{displayName}}が「{{title}}」であなたに言及しました",
-            "YOUAREINVITED": "あなたは招待されました！",
-            "AcceptInvite": "招待を受け入れる"
-        },
-        "sms": {
-            "content": "{{title}}に招待されました。 {{url}}をタップしてください"
-        },
-        "notice": {
-            "text": "あなたは招待されました。 {{ClickOrTap}}ここで受け入れて参加します。"
-        },
         "Invite": "招待",
-        "Share": "シェア",
+        "Share": "共有",
+        "messageContent": "{{displayName}}あなたを{{inviteUrl}}に招待しました",
+        "youCanNowPaste": "このリンクをどこかに貼り付けて、人を招待できるようになりました",
         "roles": {
             "title": "招待されたユーザーにロールを付与しますか?",
             "NotAuthorizedToGrantRole": {
@@ -133,26 +104,73 @@
         "labels": {
             "title": "あなたの関係は何ですか？"
         },
+        "dialog": {
+            "chooseFromContacts": "連絡先から選択",
+            "chooseAgainFromContacts": "連絡先からもう一度選択",
+            "inviteSelectedContacts": "選択した連絡先を招待",
+            "selectFromContacts": "連絡先から選択",
+            "userChooserPlaceholder": "名前で検索",
+            "photo": "写真を撮る",
+            "photoOf": "{{name}}の写真を撮る",
+            "photoInstruction": "QR コードをスキャンした人が目の前にいる場合は、その人の写真を撮ります",
+            "to": "宛先: {{Stream Title}}",
+            "go": "行く",
+            "title": "招待",
+            "placeholder": "携帯番号またはメールアドレス",
+            "orInvite": "または、次を使用して人を招待します。",
+            "copyLink": "招待リンクをコピーするには{{ClickOrTap}}",
+            "shareOrCopyLink": "招待リンクを共有またはコピーするには{{ClickOrTap}}",
+            "QR": "{{ClickOrTap}}でQRコード生成",
+            "QRtitle": "このQRコードをスキャン",
+            "QRscanned": "彼らはそれをスキャンしました！",
+            "scannedQR": "コードがスキャンされた場合は{{ClickOrTap}}",
+            "byEmail": "Eメール",
+            "byText": "文章",
+            "byFacebook": "フェイスブック",
+            "byTwitter": "ツイッター",
+            "title2": "人を招待する",
+            "chooseMethod": "方法を選択してください:",
+            "selectContacts": "連絡先を選択",
+            "scanQRCode": "QRコードをスキャン",
+            "shareLink": "リンクを共有する",
+            "chooseFromRegistered": "登録ユーザーから選ぶ",
+            "inviteViaEmailOrSms": "メールまたは SMS で招待する"
+        },
         "complete": {
-            "HasInvitedYou": "さんがあなたを招待しました:",
             "WelcomeToCommunity": "{{communityName}}へようこそ",
+            "HasInvitedYou": "さんがあなたを招待しました:",
             "HasInvitedYouToTheirProfile": "さんがあなたを接続に招待しています。",
             "prompt": "友達にあなたを認識してもらいましょう:",
             "accept": "招待を受け入れる"
+        },
+        "email": {
+            "subject": "ねえ、これをチェックしてください",
+            "PleaseVisitLink": "次のリンクにアクセスしてください。",
+            "InvitingYou": "あなたを{{title}}に招待します",
+            "HasInvitedYou": "{{displayName}}あなたを{{title}}に招待しました",
+            "HasMentionedYou": "{{displayName}}が「 {{title}} 」であなたをメンションしました",
+            "YOUAREINVITED": "あなたは招待されました！",
+            "AcceptInvite": "招待を受け入れる"
+        },
+        "sms": {
+            "content": "{{title}}に招待されました。 {{url}}をタップしてください"
+        },
+        "notice": {
+            "text": "招待されました。 {{ClickOrTap}}で承認して参加できます。"
         }
     },
     "messages": {
         "html": {
-            "posted": "<em>{{message.fields.type}}<\/em>メッセージを{{stream.fields.title}}に投稿しました"
+            "posted": "{{stream.fields.title}}に<em>{{message.fields.type}}<\/em>メッセージを投稿しました"
         },
         "text": {
-            "commentedOn": "コメント",
-            "startedCallIn": "で電話をかけた",
+            "commentedOn": "コメントした",
+            "startedCallIn": "で通話を開始しました",
             "in": "の",
-            "body": "{{& url}}の場合：{{& message.fields.content}}",
+            "body": "{{& url}} ： {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "に投稿されました",
-                "byAvatar": "{{avatar.displayName}}による"
+                "byAvatar": "{{avatar.displayName}}まで"
             },
             "relatedTo": {
                 "hasANew": "新しい{{instructions.fromDisplayType}}があります",
@@ -162,35 +180,38 @@
     },
     "followup": {
         "mobile": {
-            "alert": "招待状は、友達がまだ認識していない私たちの番号から送信されます。簡単なテキストでフォローアップして、招待状があなたから来たことを知らせ、リンクをクリックするように依頼します。",
-            "confirm": "招待状は、友達がまだ認識していない私たちの番号から送信されます。簡単なテキストでフォローアップして、招待状があなたから来たことを知らせ、リンクをクリックするように依頼しますか。",
-            "check": "ねえ、私はあなたに{{app}}アプリへの招待状を送りました。あなたのSMSをチェックして、リンクをクリックしてください！",
-            "CheckYourMobile": "SMSを確認し、指示に従ってください。"
+            "alert": "招待状は私たちの番号から送信されますが、あなたの友人はまだその番号を認識していません.フォローアップの簡単なテキストで、招待状があなたからのものであることを知らせ、リンクをクリックするように依頼します。",
+            "confirm": "招待状は私たちの番号から送信されますが、あなたの友人はまだその番号を認識していません.招待状があなたからのものであることを知らせ、リンクをクリックするように求める簡単なテキストでフォローアップしますか.",
+            "check": "こんにちは、 {{app}}アプリへの招待状を送信しました。 SMS を確認して、リンクをクリックしてください。",
+            "CheckYourMobile": "SMSをチェックして指示に従ってください！"
         },
         "email": {
-            "alert": "招待状は私たちのドメインから送信されますが、友達はまだ認識していません。簡単なテキストでフォローアップして、招待状があなたから来たことを知らせ、リンクをクリックするように依頼します。",
-            "confirm": "招待状は私たちのドメインから送信されますが、友達はまだ認識していません。簡単なテキストでフォローアップして、招待状があなたから来たことを知らせ、リンクをクリックするように依頼しますか。",
-            "subject": "招待状はもらえましたか？",
-            "body": "ねえ、私はあなたに{{app}}アプリへの招待状を送りました。メールをチェックして、そこにあるリンクをクリックしてください！",
-            "CheckYourEmail": "あなたの電子メールをチェックして、指示に従ってください！"
+            "alert": "招待状は私たちのドメインから送信されますが、あなたの友人はまだそれを認識していません.フォローアップの簡単なテキストで、招待状があなたからのものであることを知らせ、リンクをクリックするように依頼します。",
+            "confirm": "招待状は私たちのドメインから送信されますが、あなたの友人はまだそれを認識していません.招待状があなたからのものであることを知らせ、リンクをクリックするように求める簡単なテキストでフォローアップしますか.",
+            "subject": "招待状は届きましたか？",
+            "body": "こんにちは、 {{app}}アプリへの招待状を送信しました。メールを確認して、そこにあるリンクをクリックしてください。",
+            "CheckYourEmail": "メールを確認し、指示に従ってください。"
         }
+    },
+    "identifier": {
+        "privacySettings": "プライバシー設定"
     },
     "participating": {
         "Title": "タイトル",
         "Subscribed": "購読済み",
         "Participants": "参加者",
-        "AreYouSureRemoveIdentifier": "この識別子を削除してもよろしいですか？",
-        "AreYouSureUnsubscribeIdentifier": "この識別子の購読を解除してもよろしいですか？この識別子への通知をオフにします。",
-        "AreYouSureUnsubscribeDevice": "このデバイスの購読を解除してもよろしいですか？このデバイスへの通知をオフにします。",
-        "AreYouSureRemoveParticipant": "この参加者を削除してもよろしいですか？",
-        "RemoveParticipant": "参加者を削除する",
+        "AreYouSureRemoveIdentifier": "この識別子を削除してもよろしいですか?",
+        "AreYouSureUnsubscribeIdentifier": "この識別子の登録を解除してもよろしいですか?この識別子への通知をオフにします。",
+        "AreYouSureUnsubscribeDevice": "このデバイスのサブスクリプションを解除してもよろしいですか?このデバイスへの通知をオフにします。",
+        "AreYouSureRemoveParticipant": "この参加者を削除してもよろしいですか?",
+        "RemoveParticipant": "参加者を削除",
         "Identifiers": "識別子",
         "Devices": "デバイス",
         "Streams": "ストリーム"
     },
     "webrtc": {
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
-        "streamTitle": "{{1}} が電話会議を開始しました",
+        "streamTitle": "{{1}}電話会議を開始しました",
         "allow": {
             "dialogTitle": "接続中",
             "microphoneBtn": "マイクを有効にする",
@@ -198,59 +219,62 @@
             "cameraAndMicrophoneBtn": "カメラとマイクを有効にする"
         },
         "preparing": {
+            "dialogTitle": "参加する前にカメラまたはマイクのオン\/オフを切り替えます",
             "micIsOff": "マイクがオフです",
             "micIsOn": "マイクはオンです",
             "cameraIsOff": "カメラがオフです",
             "cameraIsOn": "カメラがオンになっています",
             "screenSharingIsOn": "画面共有はオンです",
-            "screenSharingIsOff": "画面を共有する",
-            "joinNow": "通話に参加",
-            "dialogTitle": "参加する前にカメラまたはマイクのオン\/オフを切り替えます"
+            "screenSharingIsOff": "画面を共有",
+            "joinNow": "通話に参加"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "dialogTitle": "手順",
+            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
             "point1": "「設定」 -&gt; 「詳細」 -&gt; 「プライバシーとセキュリティ」 -&gt; 「サイトの設定」 -&gt; 「カメラ」または「サイトの設定」 -&gt; 「マイク」に移動します",
             "point2": "「ブロック」リストから{{hostname}}を削除"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} の許可が拒否されました。会議に参加するには、このページをリロードして {{kind}} へのアクセスを確認してください。"
+            "dialogTitle": "手順",
+            "permissionDenied": "{{kind}}の許可が拒否されました。会議に参加するには、このページをリロードして{{kind}}へのアクセスを確認してください。"
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "dialogTitle": "手順",
+            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
             "point1": "Android の設定に移動します",
             "point2": "「アプリと通知」を開く",
-            "point3": "「{{communityName}}」を見つけて開く",
+            "point3": "「 {{communityName}} 」を見つけて開く",
             "point4": "権限をタップします",
             "point5": "{{kind}}を有効にする"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}} の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "dialogTitle": "手順",
+            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
             "point1": "iOS の設定に移動します",
             "point2": "「プライバシー」を開く",
-            "point3": "{{kind}}を見つけて開く",
-            "point4": "「{{communityName}}」を見つけて有効にする"
+            "point3": "{{kind}}見つけて開く",
+            "point4": "「 {{communityName}} 」を見つけて有効にする"
+        },
+        "fbLive": {
+            "dialogTitle": "フェイスブックライブ配信開始"
         },
         "notices": {
             "youJoinedRoom": "ルームに参加しました",
-            "joining": "参加中: {{userName}}",
-            "sbLeftRoom": "{{userName}}が部屋を出ました",
+            "joining": "加入： {{userName}}",
+            "sbLeftRoom": "{{userName}}が退室しました",
             "switchingRoom": "スイッチングルーム...",
             "forceDisconnecting": "5秒以内に切断されます",
             "forceDisconnectingImmediately": "ホストによって切断されました",
             "youLeftRoom": "あなたは部屋を出ました",
             "codeCopied": "あなたは部屋を出ました",
-            "sbBeganFbLive": "{{userName}}がFacebookでこの通話のブロードキャストを開始しました",
-            "sbStoppedFbLive": "{{userName}} は Facebook でのこの通話の配信を停止しました",
+            "sbBeganFbLive": "{{userName}} Facebook でこの通話のブロードキャストを開始しました",
+            "sbStoppedFbLive": "{{userName}} Facebook でこの通話のブロードキャストを停止しました",
             "youBeganFbLive": "Facebook でこの通話のブロードキャストを開始しました",
             "youStoppedFbLive": "この通話の Facebook での配信を停止しました",
             "youStartedLive": "この呼び出しをカスタム RTMP にブロードキャストし始めました",
             "youStoppedLive": "カスタム RTMP へのこの呼び出しのブロードキャストを停止しました",
-            "sbStartedLiveStreaming": "{{userName}}がライブを開始しました",
-            "sbStoppedLiveStreaming": "{{userName}} ライブ終了",
+            "sbStartedLiveStreaming": "{{userName}}ライブ開始",
+            "sbStoppedLiveStreaming": "{{userName}}ライブ終了",
             "liveStopped": "ビデオをエンドポイントに送信中にエラーが発生しました",
             "youBeganVideoRecording": "この会議の記録を開始しました",
             "youStoppedVideoRecording": "この会議の記録を停止しました",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "クリップボードにコピーされたコード",
             "userHasNoVideo": "参加者にはビデオがありません",
             "openInBrowserAlert": "リンクを Safari ブラウザーで開き、会議に参加します。",
-            "allowedVideoLimit": "この部屋では{{limit}}の動画のみ許可されています",
-            "allowedAudioLimit": "この部屋では {{limit}} 個のマイクのみ許可されています"
+            "allowedVideoLimit": "このルームでは{{limit}}ビデオのみが許可されています",
+            "allowedAudioLimit": "この部屋では{{limit}}マイクのみが許可されています"
         },
         "settingsPopup": {
             "dialogTitle": "ビデオ設定",
@@ -274,32 +298,35 @@
             "micIsTurnedOff": "マイクがオフになっています",
             "startFBLive": "Facebookライブストリームを開始",
             "stopFBLive": "Facebook ライブストリームを停止する",
-            "startRecording": "録音開始",
+            "startRecording": "録音を開始",
             "stopRecording": "記録を停止",
             "start": "始める",
-            "stop": "止まる",
+            "stop": "ストップ",
             "recordingInProgress": "レコーディング中…",
             "fbLiveTitle": "ライブストリームのタイトル",
             "fbLiveDescription": "ライブストリームについて説明してください。どんな内容ですか？",
             "fbOnlyMeLiveAccess": "私だけ",
             "fbFriendsAccess": "友達",
-            "fbPublicAccess": "公衆",
+            "fbPublicAccess": "公共",
             "publishOnTimeline": "タイムラインで公開",
             "publishToGroup": "グループに公開",
             "fbStartLive": "ライブに行く",
             "fbStopLive": "ライブ配信を終了",
             "streamingSettings": "設定",
+            "manageStream": "ライブストリームの管理",
             "fbEmbedCode": "埋め込む",
             "copy": "コピー",
             "streamToRTMP": "カスタム RTMP にストリーミング",
             "startBroadcasting": "放送開始",
-            "broadcastingInProgress": "放送中です",
-            "manageStream": "ライブストリームの管理"
+            "broadcastingInProgress": "放送中です"
         },
         "audioSettings": {
             "dialogTitle": "オーディオ設定",
             "speakers": "スピーカー",
             "microphone": "マイクロフォン"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "ブロードキャストの管理"
         },
         "participantsPopup": {
             "dialogTitle": "参加者の設定",
@@ -319,26 +346,20 @@
             "turnOnScreenSharing": "画面共有を表示"
         },
         "streamingSettings": {
-            "title": "ストリーミング設定"
+            "title": "ライブストリーム"
         },
         "preview": {
             "Meeting": "電話会議",
             "MeetingEnded": "電話会議終了"
         },
         "requestSpeakDialog": {
-            "msg": "現在{{count}}人が会議で発言しています。 {{seconds}} 秒間話し終えたら、そのうちの 1 つを置き換えますか?",
-            "dialogTitle": "発言のリクエスト"
-        },
-        "fbLive": {
-            "dialogTitle": "フェイスブックライブ配信開始"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "ブロードキャストの管理"
+            "dialogTitle": "発言のリクエスト",
+            "msg": "現在、 {{count}}人が会議で発言しています。 {{seconds}}秒間話し終えたら、そのうちの 1 つを置き換えますか?"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "招待",
+            "displayType": "招待された",
             "description": "招待状の受信トレイ"
         },
         "Streams\/resource": {
@@ -346,19 +367,19 @@
             "description": "リソースへのアクセスを管理し、更新に関するメッセージを投稿するためのストリーム"
         },
         "Streams\/task": {
-            "description": "特定のタスクの進捗状況に関する更新を受信するため",
-            "displayType": "仕事"
+            "description": "特定のタスクの進行状況に関する最新情報を受け取るため",
+            "displayType": "タスク"
         },
         "Streams\/tasks": {
             "description": "タスクのカテゴリ",
             "displayType": "タスク"
         },
         "Streams\/experience": {
-            "description": "コミュニティのメンバーに共通の経験",
-            "displayType": "コミュニティのメンバーに共通の経験"
+            "description": "コミュニティのメンバーの共通の経験",
+            "displayType": "コミュニティのメンバーの共通の経験"
         },
         "Streams\/greeting": {
-            "description": "ユーザーが自己紹介できる挨拶",
+            "description": "ユーザーが自己紹介できるあいさつ",
             "displayType": "挨拶"
         },
         "Streams\/number": {
@@ -375,7 +396,7 @@
         },
         "Streams\/text\/small": {
             "displayType": "文章",
-            "description": "テキストの小さな本文"
+            "description": "小さな本文"
         },
         "Streams\/text\/medium": {
             "displayType": "文章",
@@ -400,20 +421,20 @@
         },
         "Streams\/images": {
             "displayType": "イメージギャラリー",
-            "description": "画像のギャラリー"
+            "description": "画像ギャラリー"
         },
         "Streams\/album": {
             "displayType": "アルバム",
-            "description": "様々なメディアが関わっているアルバム"
+            "description": "様々なメディアが関係するアルバム"
         },
         "Streams\/file": {
             "displayType": "ファイル",
             "description": "アップロードされたファイル",
-            "newItem": "ファイルの追加"
+            "newItem": "ファイルを追加"
         },
         "Streams\/audio": {
-            "displayType": "オーディオクリップ",
-            "description": "オーディオクリップ",
+            "displayType": "オーディオ クリップ",
+            "description": "オーディオ クリップ",
             "newItem": "オーディオを追加"
         },
         "Streams\/video": {
@@ -422,8 +443,8 @@
             "newItem": "ビデオを追加"
         },
         "Streams\/pdf": {
-            "displayType": "PDFドキュメント",
-            "description": "PDFドキュメント",
+            "displayType": "PDF文書",
+            "description": "PDF文書",
             "newItem": "PDFを追加"
         },
         "Streams\/live": {
@@ -432,11 +453,11 @@
         },
         "Streams\/category": {
             "displayType": "カテゴリー",
-            "description": "他のストリームを関連付けることができるカテゴリ"
+            "description": "他のストリームが関連付けられるカテゴリ"
         },
         "Streams\/participating": {
             "displayType": "参加指数",
-            "description": "ユーザーが参加\/離脱するときに、ストリームはこれに関連する\/関連しない"
+            "description": "ユーザーが参加\/脱退するとき、ストリームはこれに関連する\/関連しない"
         },
         "Streams\/interest": {
             "displayType": "興味",
@@ -444,35 +465,35 @@
         },
         "Streams\/incoming": {
             "displayType": "着信",
-            "description": "他のユーザーから送信されたメッセージの宛先"
+            "description": "他のユーザーが送信したメッセージの送信先"
         },
         "Streams\/chat": {
             "displayType": "会話",
             "description": "歴史のあるユーザー間の会話"
         },
         "Streams\/webrtc": {
-            "displayType": "ライブコール",
-            "description": "リアルタイムのビデオ\/音声通話"
+            "displayType": "電話会議",
+            "description": "オンライン ビデオ\/オーディオ会議"
         },
         "Streams\/question": {
             "displayType": "質問",
-            "description": "質問ストリーム",
+            "description": "質問の流れ",
             "newItem": "質問を追加"
         },
         "Streams\/answer": {
             "displayType": "答え",
-            "description": "回答ストリーム"
+            "description": "回答の流れ"
         },
         "Streams\/calls": {
-            "displayType": "呼び出し",
-            "description": "Streams \/ webrtcのカテゴリ",
-            "MaxRelationsExceeded": "最大通話数を超えました"
+            "displayType": "通話",
+            "description": "Streams\/webrtc のカテゴリ",
+            "MaxRelationsExceeded": "最大呼び出し数を超えました"
         }
     },
     "menu": {
         "placeholder": "ページタイトルを入力",
-        "ModTab": "アイテムの変更",
-        "Save": "保存する",
+        "ModTab": "アイテムの修正",
+        "Save": "保存",
         "Delete": "消去",
         "Submenu": "サブメニュー"
     },
@@ -484,14 +505,14 @@
         "description": "説明",
         "upload": "アップロード",
         "link": "リンク",
-        "setUrl": "URLを設定する",
-        "save": "保存する",
+        "setUrl": "URL を設定",
+        "save": "保存",
         "setClip": "クリップを切り取る",
         "invalidURL": "無効なURL",
         "invalidFile": "無効なファイル",
-        "errorNoSource": "オーディオソースなし",
-        "uploadLimit": "最大ファイルサイズ：{{size}}",
-        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+        "errorNoSource": "音源なし",
+        "uploadLimit": "最大ファイル サイズ: {{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイル サイズは{{size}}です"
     },
     "video": {
         "reset": "リセット",
@@ -500,14 +521,14 @@
         "description": "説明",
         "upload": "アップロード",
         "link": "リンク",
-        "setUrl": "URLを設定する",
-        "save": "保存する",
+        "setUrl": "URL を設定",
+        "save": "保存",
         "setClip": "クリップを切り取る",
         "invalidURL": "無効なURL",
         "invalidFile": "無効なファイル",
         "errorNoSource": "ビデオソースなし",
-        "uploadLimit": "最大ファイルサイズ：{{size}}",
-        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+        "uploadLimit": "最大ファイル サイズ: {{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイル サイズは{{size}}です"
     },
     "pdf": {
         "reset": "リセット",
@@ -516,14 +537,14 @@
         "description": "説明",
         "upload": "アップロード",
         "link": "リンク",
-        "setUrl": "URLを設定する",
-        "save": "保存する",
+        "setUrl": "URL を設定",
+        "save": "保存",
         "setClip": "クリップを切り取る",
         "invalidURL": "無効なURL",
         "invalidFile": "無効なファイル",
         "errorNoSource": "PDFソースなし",
-        "uploadLimit": "最大ファイルサイズ：{{size}}",
-        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+        "uploadLimit": "最大ファイル サイズ: {{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイル サイズは{{size}}です"
     },
     "image": {
         "reset": "リセット",
@@ -532,16 +553,16 @@
         "description": "説明",
         "upload": "アップロード",
         "link": "リンク",
-        "setUrl": "URLを設定する",
-        "save": "保存する",
-        "uploadedImage": "アップロードした画像",
+        "setUrl": "URL を設定",
+        "save": "保存",
+        "uploadedImage": "アップロードされた画像",
         "imageTitle": "画像タイトル",
         "setClip": "クリップを切り取る",
         "invalidURL": "無効なURL",
         "invalidFile": "無効なファイル",
         "errorNoSource": "画像ソースなし",
-        "uploadLimit": "最大ファイルサイズ：{{size}}",
-        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+        "uploadLimit": "最大ファイル サイズ: {{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイル サイズは{{size}}です"
     },
     "questions": {
         "Questions": "質問",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "質問に答える",
         "SetYourAnswer": "質問に答えてください",
         "NewQuestion": "新しい質問",
+        "EditQuestion": "質問を編集",
         "NewAnswer": "新しい答え",
+        "NewPossibleAnswer": "新しい可能な答え",
         "AnswerDetails": "回答の詳細",
         "answerOption": "オプション",
         "answerOptionExclusive": "エクスクルーシブ",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "ここにあなたの答えを書いてください",
-        "SaveQuestion": "質問を保存",
-        "SaveAnswer": "回答を保存",
-        "AddAnotherAnswer": "別の答えを追加",
-        "ErrorAnswers": "答えを1つでも追加してください",
-        "AlreadyAnswered": "すでに回答済み",
-        "TitlePlaceholder": "質問を入力してください",
-        "ContentPlaceholder": "人々が答えるのを助けるためにここに追加情報を入れてください",
-        "ErrorTitle": "質問が必要です",
-        "Placeholder": "プレースホルダー",
-        "EditQuestion": "質問を編集",
-        "NewPossibleAnswer": "新しい可能な答え",
+        "answerTextarea": "テキストエリア",
         "answerText": "文章",
         "HideUntilAnswered": "回答があるまで非表示",
         "CantChangeAnswers": "回答を変更できません",
+        "FreeAnswer": "ここに答えを書いてください",
+        "SaveQuestion": "質問を保存",
+        "SaveAnswer": "回答を保存",
         "Save": "保存",
         "Send": "送信",
         "TitleRequired": "タイトル必須！",
+        "AlreadyAnswered": "回答済み",
+        "TitlePlaceholder": "質問を入力してください",
+        "ContentPlaceholder": "人々が回答できるように、ここに追加情報を入力してください",
+        "ErrorTitle": "質問必須",
+        "Placeholder": "プレースホルダー",
         "AreYouSure": "本気ですか？"
     },
     "experience": {
@@ -580,11 +599,11 @@
         "Create": "作成"
     },
     "calls": {
-        "SettingsTitle": "呼び出し",
-        "MaxCalls": "最大呼び出し",
+        "SettingsTitle": "通話",
+        "MaxCalls": "最大通話数",
         "Update": "アップデート",
-        "NoCallsYet": "まだ電話はありません",
-        "CallReasonTitle": "この呼びかけは何ですか？",
+        "NoCallsYet": "まだ通話はありません",
+        "CallReasonTitle": "この電話は何についてですか？",
         "WaitingRoom": "待合室",
         "LiveRoom": "ライブルーム",
         "interviewedByAnotherHost": "現在、別のホストからインタビューを受けています",
@@ -593,25 +612,5 @@
         "endCall": "通話終了",
         "interview": "インタビュー",
         "markApproved": "承認済みとしてマーク"
-    },
-    "identifier": {
-        "private": "プライベート",
-        "public": "公衆",
-        "configurationSaved": "設定を保存しました",
-        "error": "エラーが発生しました",
-        "privacySettings": "プライバシー設定"
-    },
-    "avatar": {
-        "firstName": "ファーストネーム",
-        "lastName": "苗字",
-        "username": "ユーザー名"
-    },
-    "login": {
-        "prompt": "友達にあなたを認識してもらいましょう:",
-        "newUser": "または、以下で新しいアカウントを作成してください",
-        "picTooltip": "この画像は後で変更できます",
-        "placeholder": {
-            "fullName": "フルネームを入れて下さい"
-        }
     }
 }
