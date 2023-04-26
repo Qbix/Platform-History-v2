@@ -6,119 +6,90 @@
     "preview": {
         "NewItemTitle": "Yeni öğe"
     },
+    "avatar": {
+        "firstName": "ilk adı",
+        "lastName": "soy isim",
+        "username": "Kullanıcı adı"
+    },
     "labels": {
         "Streams\/invited": "Davet ettiğim kişiler",
         "Streams\/invitedMe": "beni kim davet etti",
         "DoYouAgree": "Katılıyor musun?",
         "Yes": "Evet",
-        "No": "Numara"
+        "No": "HAYIR"
+    },
+    "login": {
+        "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
+        "newUser": "veya aşağıdan yeni bir hesap oluşturun",
+        "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz.",
+        "placeholder": {
+            "fullName": "Ad ve soyadınızı girin"
+        }
     },
     "interests": {
-        "Filter": "İlgi alanların nelerdir?",
-        "CanGrant": "Hala aradığınızı bulamıyorsanız, aşağıya yeni bir ilgi alanı ekleyebilirsiniz:",
-        "TrySynonyms": "görmüyor musun? Bazı eş anlamlıları deneyin.",
+        "Filter": "Arama ilgi alanları",
+        "CanGrant": "Aradığınızı hâlâ bulamıyorsanız, aşağıdan yeni bir ilgi alanı ekleyebilirsiniz:",
+        "TrySynonyms": "Görmüyor musun? Bazı eş anlamlıları deneyin.",
         "AddUnderCategory": "Kategori altına ekle...",
         "Other": "Diğer",
-        "Unlisted": "Liste dışı"
+        "Unlisted": "listelenmemiş"
     },
     "chat": {
-        "flaggedForAdminReview": "İleti, yönetici incelemesi için işaretlendi. İşaretini kaldırmak için tekrar dokunun.",
+        "flaggedForAdminReview": "İleti yönetici incelemesi için işaretlendi. İşareti kaldırmak için tekrar dokunun.",
         "noOneSaid": "Kimse bir şey söylemedi",
         "closeChatButton": "sohbeti kapat",
         "closeChatConfirmTitle": "Bu sohbet kapatılsın mı?",
         "closeChatConfirm": "Bu sohbeti kapatmak istediğinizden emin misiniz?",
-        "Subscribed": "Bildirimler Etkinleştirildi",
-        "Unsubscribed": "Bildirimler Susturuldu",
+        "Subscribed": "Bildirimler Etkin",
+        "Unsubscribed": "Bildirimler Kapatıldı",
         "closeChatConfirmYes": "Evet",
-        "closeChatConfirmNo": "Numara",
+        "closeChatConfirmNo": "HAYIR",
         "earlierComments": "önceki yorumlar",
         "startedConversation": "bir konuşma başlattı",
-        "RealTimeCall": "Gerçek Zamanlı Çağrı",
+        "RealTimeCall": "Gerçek Zamanlı Arama",
+        "JoinWebRTC": "Tele konferans",
         "SearchByName": "Ada göre ara",
         "Notifications": {
             "Visit": "{{displayName}} sohbeti ziyaret ediyor",
             "Join": "{{displayName}} sohbete katıldı",
             "Leave": "{{displayName}} sohbetten ayrıldı",
-            "RelatedTo": "{{displayName}} bir {{stream.displayType}} başlattı"
+            "RelatedTo": "{{displayName}} {{stream.displayType}} başladı"
         },
-        "JoinWebRTC": "Tele konferans"
+        "placeholders": {
+            "Public": "Yorum ekle",
+            "Private": "özel mesaj yaz"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "e-posta aboneliklerinizi yönetin",
-        "IfUnsubscribe": "Aboneliğinizi iptal etmek istiyorsanız",
-        "*": "{{& message.fields.type}}&#39;dan {{& stream.fields.title}}&#39;e mesaj",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dedi ki: {{& message.content}}",
-        "Streams\/changed": "{{stream.fields.title}}&#39;daki Değişiklikler",
-        "Streams\/invite": "{{& stream.fields.title}} için davet edildiniz",
-        "Streams\/announcement": "{{& stream.fields.title}} içinde duyuru",
-        "Streams\/access": "{{&call 'avatar.displayName'}}, {{& stream.fields.title}} içinde erişimi değiştirdi",
-        "Streams\/chat\/edit": "Sohbet mesajı {{& stream.fields.title}} içinde düzenlendi",
-        "Streams\/chat\/remove": "{{& stream.fields.title}} içinde sohbet mesajı kaldırıldı",
-        "Streams\/closed": "{{stream.fields.title}} kapatıldı",
-        "Streams\/task\/progress": "{{stream.fields.title}} tarihinde kaydedilen ilerleme",
-        "Streams\/task\/complete": "Tamamlanan görev: {{stream.fields.title}}",
-        "Streams\/task\/error": "Şu süre boyunca hata: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Gelen Mesaj",
-        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} Yılında Yeni Çağrı Başlatıldı",
-        "Streams\/relatedTo\/*": "{{toTitle}} içinde yeni {{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "{{toTitle}}&#39;a {{relationDisplayType}} olarak eklendi",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} bir yorumda sizden bahsetti",
-        "Streams\/call": "{{displayName}} gerçek zamanlı bir arama başlattı",
+        "IfUnsubscribe": "Abonelikten çıkmak istiyorsanız",
+        "*": "Mesaj {{& message.fields.type}} - {{& stream.fields.title}}",
         "Streams\/joined": "{{&call 'avatar.displayName'}} katıldı",
-        "Streams\/left": "{{&call 'avatar.displayName'}} kaldı"
+        "Streams\/left": "{{&call 'avatar.displayName'}} kaldı",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dedi ki: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} değişiklikler",
+        "Streams\/invite": "{{& stream.fields.title}} davet edildin",
+        "Streams\/announcement": "{{& stream.fields.title}} Duyuru",
+        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} erişimi değiştirdi",
+        "Streams\/chat\/edit": "Sohbet mesajı {{& stream.fields.title}} düzenlendi",
+        "Streams\/chat\/remove": "Sohbet mesajı {{& stream.fields.title}} kaldırıldı",
+        "Streams\/closed": "{{stream.fields.title}} kapatıldı",
+        "Streams\/task\/progress": "{{stream.fields.title}} kaydedilen ilerleme",
+        "Streams\/task\/complete": "Görev tamamlandı: {{stream.fields.title}}",
+        "Streams\/task\/error": "Sırasında hata: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}} : Gelen Mesaj",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} Yeni Çağrı Başladı",
+        "Streams\/relatedTo\/*": "{{toTitle}} yeni {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} olarak eklendi",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} bir yorumda sizden bahsetti",
+        "Streams\/call": "{{displayName}} gerçek zamanlı bir arama başlattı"
     },
     "invite": {
-        "command": "Davet et",
-        "messageContent": "{{displayName}} sizi {{inviteUrl}}&#39;a davet etti",
-        "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz.",
-        "dialog": {
-            "chooseFromContacts": "Kişilerinizden seçin",
-            "chooseAgainFromContacts": "Kişilerden Tekrar Seçin",
-            "inviteSelectedContacts": "Seçilen Kişileri Davet Et",
-            "selectFromContacts": "Kişilerden Seçin",
-            "userChooserPlaceholder": "Ada göre ara",
-            "photo": "Fotoğraf çekmek",
-            "photoInstruction": "QR kodunuzu tarayan kişi önünüzdeyse fotoğrafını çekin",
-            "to": "Kime: {{Stream Title}}",
-            "go": "Gitmek",
-            "title": "Davet et",
-            "placeholder": "Cep telefonu numarası veya e-posta adresi",
-            "orInvite": "Veya aşağıdakileri kullanarak insanları davet edin:",
-            "copyLink": "{{ClickOrTap}} davet bağlantısını kopyalamak için",
-            "shareOrCopyLink": "{{ClickOrTap}} davet bağlantısını paylaşmak veya kopyalamak için",
-            "QR": "{{ClickOrTap}} QR kodu oluşturmak için",
-            "QRtitle": "Bu QR kodunu tarayın",
-            "QRscanned": "Taradılar!",
-            "scannedQR": "{{ClickOrTap}} kod tarandıysa",
-            "byEmail": "E-posta",
-            "byText": "Metin",
-            "byFacebook": "Facebook",
-            "byTwitter": "heyecan",
-            "title2": "İnsanları davet et",
-            "chooseMethod": "Bir yöntem seçin:",
-            "selectContacts": "Kişileri Seçin",
-            "scanQRCode": "QR Kodunu Tara",
-            "shareLink": "Bağlantı paylaş",
-            "chooseFromRegistered": "Kayıtlı kullanıcılar arasından seçim yapın",
-            "inviteViaEmailOrSms": "E-posta veya SMS yoluyla davet edin"
-        },
-        "email": {
-            "subject": "Şuna bir bak",
-            "PleaseVisitLink": "Lütfen aşağıdaki bağlantıyı ziyaret edin:",
-            "InvitingYou": "Sizi {{title}}&#39;a davet ediyorum",
-            "HasInvitedYou": "{{displayName}} sizi {{title}}&#39;a davet etti",
-            "HasMentionedYou": "{{displayName}}, &quot;{{title}}&quot; bölümünde sizden bahsetti",
-            "YOUAREINVITED": "SEN DAVETLİSİN!",
-            "AcceptInvite": "Daveti Kabul Et"
-        },
-        "sms": {
-            "content": "{{title}} için davet edildiniz. Lütfen {{url}} öğesine dokunun"
-        },
-        "notice": {
-            "text": "Davet edildiniz. {{ClickOrTap}} kabul etmek ve katılmak için buraya."
-        },
+        "command": "Davet etmek",
         "Invite": "Davet etmek",
         "Share": "Paylaşmak",
+        "messageContent": "{{displayName}} sizi {{inviteUrl}} davet etti",
+        "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz.",
         "roles": {
             "title": "Davetli Kullanıcılara Roller Verilsin mi?",
             "NotAuthorizedToGrantRole": {
@@ -133,23 +104,70 @@
         "labels": {
             "title": "İlişki durumun nedir?"
         },
+        "dialog": {
+            "chooseFromContacts": "Kişileriniz arasından seçim yapın",
+            "chooseAgainFromContacts": "Kişilerden Tekrar Seçin",
+            "inviteSelectedContacts": "Seçilen Kişileri Davet Et",
+            "selectFromContacts": "Kişilerden Seçin",
+            "userChooserPlaceholder": "Ada göre ara",
+            "photo": "Fotoğraf çekmek",
+            "photoOf": "{{name}} fotoğrafını çek",
+            "photoInstruction": "QR kodunuzu tarayan kişi karşınızdaysa fotoğrafını çekin",
+            "to": "Kime: {{Stream Title}}",
+            "go": "Gitmek",
+            "title": "Davet etmek",
+            "placeholder": "Cep telefonu numarası veya e-posta adresi",
+            "orInvite": "Veya aşağıdakileri kullanarak insanları davet edin:",
+            "copyLink": "{{ClickOrTap}} davet bağlantısını kopyalamak için",
+            "shareOrCopyLink": "{{ClickOrTap}} davet bağlantısını paylaşmak veya kopyalamak için",
+            "QR": "{{ClickOrTap}} QR kodu oluşturmak için",
+            "QRtitle": "Bu QR kodunu tarayın",
+            "QRscanned": "Taradılar!",
+            "scannedQR": "Kod tarandıysa {{ClickOrTap}}",
+            "byEmail": "E-posta",
+            "byText": "Metin",
+            "byFacebook": "Facebook",
+            "byTwitter": "twitter",
+            "title2": "İnsanları davet et",
+            "chooseMethod": "Bir yöntem seçin:",
+            "selectContacts": "Kişileri Seçin",
+            "scanQRCode": "QR Kodunu Tara",
+            "shareLink": "bağlantı paylaş",
+            "chooseFromRegistered": "Kayıtlı kullanıcılar arasından seçim yapın",
+            "inviteViaEmailOrSms": "E-posta veya SMS ile davet edin"
+        },
         "complete": {
-            "HasInvitedYou": "sizi şuna davet etti:",
             "WelcomeToCommunity": "{{communityName}} hoş geldiniz",
+            "HasInvitedYou": "sizi şuna davet etti:",
             "HasInvitedYouToTheirProfile": "sizi bağlanmaya davet etti.",
             "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
             "accept": "Daveti Kabul Et"
+        },
+        "email": {
+            "subject": "Hey, şuna bir bak",
+            "PleaseVisitLink": "Lütfen aşağıdaki bağlantıyı ziyaret edin:",
+            "InvitingYou": "seni {{title}} davet ediyorum",
+            "HasInvitedYou": "{{displayName}} sizi {{title}} davet etti",
+            "HasMentionedYou": "{{displayName}} &quot; {{title}} &quot; de sizden bahsetti",
+            "YOUAREINVITED": "SEN DAVETLİSİN!",
+            "AcceptInvite": "Daveti Kabul Et"
+        },
+        "sms": {
+            "content": "{{title}} davet edildiniz. Lütfen {{url}} dokunun"
+        },
+        "notice": {
+            "text": "davet edildin {{ClickOrTap}} kabul etmek ve katılmak için burada."
         }
     },
     "messages": {
         "html": {
-            "posted": "{{stream.fields.title}}&#39;e bir <em>{{message.fields.type}}<\/em> mesaj gönderdi"
+            "posted": "{{stream.fields.title}} <em>{{message.fields.type}}<\/em> mesajı gönderdi"
         },
         "text": {
             "commentedOn": "yorum yaptı",
-            "startedCallIn": "bir çağrı başlattı",
+            "startedCallIn": "arama başlattı",
             "in": "içinde",
-            "body": "{{& url}} içinde: {{& message.fields.content}}",
+            "body": "{{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "gönderildi",
                 "byAvatar": "{{avatar.displayName}} tarafından"
@@ -162,30 +180,33 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Davetler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için kısa bir metinle devam edin ve bağlantıyı tıklamalarını isteyin.",
-            "confirm": "Davetler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek ve bağlantıyı tıklamalarını istemek için kısa bir metin ile devam etmek ister misiniz?",
-            "check": "Hey, az önce sana {{app}} uygulaması için bir davet gönderdim. Lütfen sms&#39;inizi kontrol edin ve bağlantıya tıklayın!",
+            "alert": "Davetler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Ardından, davetiyenin sizden geldiğini onlara bildirmek için kısa bir mesaj göndererek bağlantıyı tıklamalarını isteyin.",
+            "confirm": "Davetler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Ardından, davetiyenin sizden geldiğini onlara bildirmek ve bağlantıyı tıklamalarını istemek için kısa bir mesaj göndermek ister misiniz?",
+            "check": "Hey, az önce sana {{app}} uygulamasına davet gönderdim. Lütfen SMS&#39;lerinizi kontrol edin ve linke tıklayın!",
             "CheckYourMobile": "Lütfen SMS&#39;i kontrol edin ve talimatları izleyin!"
         },
         "email": {
-            "alert": "Davetler, arkadaşlarınızın henüz tanımadığı alanımızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için kısa bir metinle devam edin ve bağlantıyı tıklamalarını isteyin.",
-            "confirm": "Davetler, arkadaşlarınızın henüz tanımadığı alanımızdan gönderilir. Davetiyenin sizden geldiğini bildirmek ve bağlantıyı tıklamalarını istemek için kısa bir metin ile devam etmek ister misiniz?",
-            "subject": "Davet aldınız mı?",
-            "body": "Hey, az önce sana {{app}} uygulaması için bir davet gönderdim. Lütfen e-postanızı kontrol edin ve oradaki bağlantıya tıklayın!",
+            "alert": "Davetler, arkadaşlarınızın henüz tanımadığı alanımızdan gönderilir. Ardından, davetiyenin sizden geldiğini onlara bildirmek için kısa bir mesaj göndererek bağlantıyı tıklamalarını isteyin.",
+            "confirm": "Davetler, arkadaşlarınızın henüz tanımadığı alanımızdan gönderilir. Ardından, davetiyenin sizden geldiğini onlara bildirmek ve bağlantıyı tıklamalarını istemek için kısa bir mesaj göndermek ister misiniz?",
+            "subject": "Davet aldın mı?",
+            "body": "Hey, az önce sana {{app}} uygulamasına davet gönderdim. Lütfen e-postanızı kontrol edin ve oradaki bağlantıya tıklayın!",
             "CheckYourEmail": "Lütfen e-postanızı kontrol edin ve talimatları izleyin!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Gizlilik ayarları"
     },
     "participating": {
         "Title": "Başlık",
         "Subscribed": "Abone olundu",
         "Participants": "Katılımcılar",
-        "AreYouSureRemoveIdentifier": "Bu tanımlayıcıyı kaldırmak istediğinizden emin misiniz?",
-        "AreYouSureUnsubscribeIdentifier": "Bu tanımlayıcının aboneliğinden çıktığınızdan emin misiniz? Bu tanımlayıcıya gelen bildirimleri kapatacaktır.",
-        "AreYouSureUnsubscribeDevice": "Bu cihazın aboneliğinden çıktığınızdan emin misiniz? Bu cihaza gelen bildirimleri kapatacak.",
+        "AreYouSureRemoveIdentifier": "Bu tanımlayıcıyı kaldıracağınızdan emin misiniz?",
+        "AreYouSureUnsubscribeIdentifier": "Bu tanımlayıcının aboneliğini iptal ettiğinizden emin misiniz? Bu tanımlayıcıya gelen bildirimleri kapatacaktır.",
+        "AreYouSureUnsubscribeDevice": "Bu cihazın aboneliğini iptal ettiğinizden emin misiniz? Bu cihaza gelen bildirimleri kapatacak.",
         "AreYouSureRemoveParticipant": "Bu katılımcıyı kaldırmak istediğinizden emin misiniz?",
         "RemoveParticipant": "Katılımcıyı kaldır",
         "Identifiers": "tanımlayıcılar",
-        "Devices": "cihazlar",
+        "Devices": "Cihazlar",
         "Streams": "Canlı Yayınlar"
     },
     "webrtc": {
@@ -198,64 +219,67 @@
             "cameraAndMicrophoneBtn": "Kamera ve Mikrofonu Etkinleştir"
         },
         "preparing": {
+            "dialogTitle": "Katılmadan önce kamerayı veya mikrofonu açın\/kapatın",
             "micIsOff": "mikrofon kapalı",
             "micIsOn": "mikrofon açık",
             "cameraIsOff": "kamera kapalı",
             "cameraIsOn": "kamera açık",
             "screenSharingIsOn": "Ekran paylaşımı açık",
             "screenSharingIsOff": "Ekran paylaşımı",
-            "joinNow": "Çağrıya Katılın",
-            "dialogTitle": "Katılmadan önce kamerayı veya mikrofonu açın\/kapatın"
+            "joinNow": "Aramaya Katılın"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Talimatlar",
             "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen şu adımları izleyin:",
-            "point1": "&quot;Ayarlar&quot; -&gt; &quot;Gelişmiş&quot; -&gt; &quot;Gizlilik ve güvenlik&quot; -&gt; &quot;Site Ayarları&quot; -&gt; &quot;Kamera&quot; veya &quot;Site Ayarları&quot; -&gt; &quot;Mikrofon&quot; seçeneğine gidin",
-            "point2": "{{hostname}} öğesini &quot;Engelle&quot; listesinden kaldırın"
+            "point1": "&quot;Ayarlar&quot; -&gt; &quot;Gelişmiş&quot; -&gt; &quot;Gizlilik ve güvenlik&quot; -&gt; &quot;Site Ayarları&quot; -&gt; &quot;Kamera&quot; veya &quot;Site Ayarları&quot; -&gt; &quot;Mikrofon&quot;a gidin",
+            "point2": "{{hostname}} &quot;Engelle&quot; listesinden kaldır"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Talimatlar",
-            "permissionDenied": "{{kind}} için izin reddedildi. Lütfen bu sayfayı yeniden yükleyin ve konferansa katılmak için {{kind}} erişimini onaylayın."
+            "permissionDenied": "{{kind}} için izin reddedildi. Lütfen bu sayfayı yeniden yükleyin ve konferansa katılmak için {{kind}} erişimi onaylayın."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Talimatlar",
             "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen şu adımları izleyin:",
             "point1": "Android Ayarlarınıza gidin",
             "point2": "&quot;Uygulamalar ve bildirimler&quot;i açın",
-            "point3": "&quot;{{communityName}}&quot; öğesini bulun ve açın",
+            "point3": "&quot; {{communityName}} &quot; u bulun ve açın",
             "point4": "İzinler&#39;e dokunun",
-            "point5": "{{kind}} Etkinleştir"
+            "point5": "{{kind}} etkinleştir"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Talimatlar",
             "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen şu adımları izleyin:",
             "point1": "iOS Ayarlarınıza gidin",
-            "point2": "&quot;Gizlilik&quot; i açın",
-            "point3": "{{kind}} öğesini bulun ve açın",
-            "point4": "&quot;{{communityName}}&quot; öğesini bulun ve etkinleştirin"
+            "point2": "&quot;Gizlilik&quot;i aç",
+            "point3": "{{kind}} bulun ve açın",
+            "point4": "&quot; {{communityName}} &quot;u bulun ve etkinleştirin"
+        },
+        "fbLive": {
+            "dialogTitle": "Facebook canlı yayın başladı"
         },
         "notices": {
             "youJoinedRoom": "odaya katıldın",
-            "joining": "Katılma: {{userName}}",
-            "sbLeftRoom": "{{userName}} odadan ayrıldı",
+            "joining": "Katılım: {{userName}}",
+            "sbLeftRoom": "{{userName}} odayı terk etti",
             "switchingRoom": "Anahtarlama odası...",
             "forceDisconnecting": "5 saniye içinde bağlantınız kesilecek",
-            "forceDisconnectingImmediately": "Bir ev sahibi tarafından bağlantınız kesildi",
-            "youLeftRoom": "odayı terk ettin",
-            "codeCopied": "odayı terk ettin",
+            "forceDisconnectingImmediately": "Bir ana bilgisayar tarafından bağlantınız kesildi",
+            "youLeftRoom": "odadan çıktın",
+            "codeCopied": "odadan çıktın",
             "sbBeganFbLive": "{{userName}} bu çağrıyı Facebook&#39;ta yayınlamaya başladı",
             "sbStoppedFbLive": "{{userName}} bu aramayı Facebook&#39;ta yayınlamayı durdurdu",
-            "youBeganFbLive": "Bu aramayı Facebook&#39;ta yayınlamaya başladınız",
-            "youStoppedFbLive": "Bu aramayı Facebook&#39;ta yayınlamayı durdurdunuz",
-            "youStartedLive": "Bu çağrıyı özel RTMP&#39;ye yayınlamaya başladınız",
-            "youStoppedLive": "Bu çağrıyı özel RTMP&#39;ye yayınlamayı durdurdunuz",
-            "sbStartedLiveStreaming": "{{userName}} canlı yayına başladı",
-            "sbStoppedLiveStreaming": "{{userName}} canlı olarak sona erdi",
-            "liveStopped": "Videoyu uç noktaya gönderirken hata oluştu",
+            "youBeganFbLive": "Bu görüşmeyi Facebook&#39;ta yayınlamaya başladınız",
+            "youStoppedFbLive": "Facebook&#39;ta bu görüşmeyi yayınlamayı durdurdunuz",
+            "youStartedLive": "Bu aramayı özel RTMP&#39;ye yayınlamaya başladınız",
+            "youStoppedLive": "Bu aramayı özel RTMP&#39;ye yayınlamayı durdurdunuz",
+            "sbStartedLiveStreaming": "{{userName}} canlı başladı",
+            "sbStoppedLiveStreaming": "{{userName}} canlı yayında sona erdi",
+            "liveStopped": "Uç noktaya video gönderilirken hata oluştu",
             "youBeganVideoRecording": "Bu konferansı kaydetmeye başladınız",
-            "youStoppedVideoRecording": "Bu konferansı kaydetmeyi durdurdunuz",
+            "youStoppedVideoRecording": "Bu konferansın kaydını durdurdunuz",
             "linkCopiedToCb": "link kopyalandı",
-            "codeCopiedToCb": "Kod panoya kopyalandı",
+            "codeCopiedToCb": "Panoya kopyalanan kod",
             "userHasNoVideo": "Katılımcının videosu yok",
             "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın.",
             "allowedVideoLimit": "Bu odada yalnızca {{limit}} videoya izin verilir",
@@ -265,88 +289,85 @@
             "dialogTitle": "Video ayarları",
             "webCamera": "İnternet kamerası",
             "screenSharing": "Ekran paylaşımı",
-            "shareAnotherScreen": "Başka bir ekran paylaş",
+            "shareAnotherScreen": "Başka bir ekran paylaşın",
             "turnOffCameras": "kamerayı kapat",
             "turnOffVideo": "Kamera\/ekran paylaşımını kapat",
-            "turnOffAudioInput": "mikrofonu sessize al",
+            "turnOffAudioInput": "Mikrofonu sessize al",
             "turnOffScreenSharing": "Ekran paylaşımını kapat",
             "cameraIsTurnedOff": "kamera kapalı",
-            "micIsTurnedOff": "Mikrofon kapalı",
-            "startFBLive": "Facebook Canlı Yayınını Başlatın",
+            "micIsTurnedOff": "mikrofon kapalı",
+            "startFBLive": "Facebook Canlı Yayınını Başlat",
             "stopFBLive": "Facebook Canlı Yayınını Durdur",
             "startRecording": "Kayda başla",
             "stopRecording": "Kaydetmeyi bırak",
-            "start": "Başlama",
+            "start": "Başlangıç",
             "stop": "Durmak",
             "recordingInProgress": "Kayıt devam ediyor...",
-            "fbLiveTitle": "Canlı Yayının Başlığı",
-            "fbLiveDescription": "Canlı yayınınızı tanımlayın. Neyle ilgili?",
+            "fbLiveTitle": "Canlı Akışın Başlığı",
+            "fbLiveDescription": "Canlı Yayınınızı açıklayın. Neyle ilgili?",
             "fbOnlyMeLiveAccess": "Sadece ben",
             "fbFriendsAccess": "Arkadaşlar",
             "fbPublicAccess": "Halk",
-            "publishOnTimeline": "Zaman çizelgesinde yayınla",
-            "publishToGroup": "Gruba yayınla",
+            "publishOnTimeline": "Zaman tünelinde yayınla",
+            "publishToGroup": "gruba yayınla",
             "fbStartLive": "Canlı Yayına Geç",
-            "fbStopLive": "Canlı Yayını Bitir",
+            "fbStopLive": "Canlı Yayını Sonlandır",
             "streamingSettings": "Ayarlar",
+            "manageStream": "Canlı Yayını Yönet",
             "fbEmbedCode": "Göm",
-            "copy": "kopyala",
+            "copy": "Kopyala",
             "streamToRTMP": "Özel RTMP&#39;ye akış",
-            "startBroadcasting": "Yayına başla",
-            "broadcastingInProgress": "Yayın devam ediyor",
-            "manageStream": "Canlı Yayını Yönet"
+            "startBroadcasting": "yayına başla",
+            "broadcastingInProgress": "Yayın devam ediyor"
         },
         "audioSettings": {
             "dialogTitle": "Ses ayarları",
-            "speakers": "Hoparlörler",
+            "speakers": "Konuşmacılar",
             "microphone": "Mikrofon"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Yayını Yönet"
         },
         "participantsPopup": {
             "dialogTitle": "Katılımcı Ayarları",
             "disconnect": "bağlantıyı kes",
             "floatingScreens": "Yüzer Ekranlar",
             "tiledScreens": "Çinili Ekranlar",
-            "loudestExceptMe": "Ben hariç en gürültülü",
-            "maximizeLoudest": "En Yüksek Ses Seviyesini En Üst Düzeye Çıkar",
+            "loudestExceptMe": "Ben Hariç En Gürültülü",
+            "maximizeLoudest": "En Yüksek Sesi Büyüt",
             "staticMaximized": "Statik Maksimize Edilmiş",
             "fullScreen": "Tam ekran",
             "manual": "Manuel",
             "turnOffCamera": "Videoyu gizle",
             "turnOffAudio": "Sesi kapat",
             "turnOffScreenSharing": "Ekran paylaşımını gizle",
-            "turnOnCamera": "Videoyu göster",
+            "turnOnCamera": "videoyu göster",
             "turnOnAudio": "Sesi aç",
             "turnOnScreenSharing": "Ekran paylaşımını göster"
         },
         "streamingSettings": {
-            "title": "Akış Ayarları"
+            "title": "Canlı yayın"
         },
         "preview": {
             "Meeting": "Tele konferans",
             "MeetingEnded": "telekonferans sona erdi"
         },
         "requestSpeakDialog": {
-            "msg": "Şu anda toplantıda konuşan {{count}} kişi var. Konuşmasını bitirmeleri için {{seconds}} saniye bekledikten sonra bunlardan birini değiştirmek istiyor musunuz?",
-            "dialogTitle": "Konuşma İsteği"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebook canlı yayın başladı"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Yayını Yönet"
+            "dialogTitle": "Konuşma İsteği",
+            "msg": "Şu anda toplantıda konuşan {{count}} kişi var. Konuşmalarını bitirmeleri için {{seconds}} saniye bekledikten sonra birini değiştirmek ister misiniz?"
         }
     },
     "types": {
         "Streams\/invited": {
             "displayType": "davet edildi",
-            "description": "Davetiyeler için gelen kutusu"
+            "description": "davetiyeler için gelen kutusu"
         },
         "Streams\/resource": {
             "displayType": "Kaynak",
             "description": "bir kaynağa erişimi yönetmek ve güncellemeler hakkında mesajlar göndermek için akış"
         },
         "Streams\/task": {
-            "description": "belirli bir görevdeki ilerlemeyle ilgili güncellemeleri almak için",
+            "description": "belirli bir görevdeki ilerleme hakkında güncellemeler almak için",
             "displayType": "Görev"
         },
         "Streams\/tasks": {
@@ -358,11 +379,11 @@
             "displayType": "Bir topluluğun üyeleri için ortak deneyim"
         },
         "Streams\/greeting": {
-            "description": "bir kullanıcının kendini tanıtabileceği selamlama",
+            "description": "bir kullanıcının kendisini tanıtabileceği selamlama",
             "displayType": "Selamlama"
         },
         "Streams\/number": {
-            "displayType": "Numara",
+            "displayType": "Sayı",
             "description": "matematiksel sayı"
         },
         "Streams\/date": {
@@ -371,7 +392,7 @@
         },
         "Streams\/text": {
             "displayType": "Metin",
-            "description": "metnin gövdesi"
+            "description": "metin gövdesi"
         },
         "Streams\/text\/small": {
             "displayType": "Metin",
@@ -382,8 +403,8 @@
             "description": "orta metin gövdesi"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "E",
-            "description": "e"
+            "displayType": "E-posta Adresi",
+            "description": "e-posta adresi"
         },
         "Streams\/text\/phoneNumber": {
             "displayType": "Telefon numarası",
@@ -391,7 +412,7 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "web&#39;deki bağlantı"
+            "description": "web üzerinde bağlantı"
         },
         "Streams\/image": {
             "displayType": "resim",
@@ -404,7 +425,7 @@
         },
         "Streams\/album": {
             "displayType": "Albüm",
-            "description": "çeşitli medyanın ilişkili olduğu bir albüm"
+            "description": "çeşitli ortamların ilişkili olduğu bir albüm"
         },
         "Streams\/file": {
             "displayType": "Dosya",
@@ -436,7 +457,7 @@
         },
         "Streams\/participating": {
             "displayType": "Katılım Endeksi",
-            "description": "bir kullanıcı katıldığında\/ayrıldığında akışlar bununla ilgilidir\/ilgisizdir"
+            "description": "bir kullanıcı katıldığında\/ayrıldığında akışlar bununla ilgili\/ilgisizdir"
         },
         "Streams\/interest": {
             "displayType": "Faiz",
@@ -451,8 +472,8 @@
             "description": "geçmişi olan kullanıcılar arasında bir konuşma"
         },
         "Streams\/webrtc": {
-            "displayType": "Canlı Çağrı",
-            "description": "gerçek zamanlı görüntülü\/sesli arama"
+            "displayType": "Tele konferans",
+            "description": "çevrimiçi bir video\/ses konferansı"
         },
         "Streams\/question": {
             "displayType": "Soru",
@@ -460,19 +481,19 @@
             "newItem": "Soru Ekle"
         },
         "Streams\/answer": {
-            "displayType": "Yanıt vermek",
+            "displayType": "Cevap",
             "description": "cevap akışı"
         },
         "Streams\/calls": {
-            "displayType": "aramalar",
+            "displayType": "Aramalar",
             "description": "Akışlar\/webrtc kategorisi",
-            "MaxRelationsExceeded": "Maksimum arama aşıldı"
+            "MaxRelationsExceeded": "Maksimum çağrı aşıldı"
         }
     },
     "menu": {
-        "placeholder": "sayfa başlığını yazın",
+        "placeholder": "sayfa başlığı yazın",
         "ModTab": "Öğeyi Değiştir",
-        "Save": "Kayıt etmek",
+        "Save": "Kaydetmek",
         "Delete": "Silmek",
         "Submenu": "alt menü"
     },
@@ -480,98 +501,96 @@
         "record": "Kayıt",
         "reset": "Sıfırla",
         "edit": "Düzenlemek",
-        "title": "Başlık",
-        "description": "tanım",
+        "title": "başlık",
+        "description": "Tanım",
         "upload": "Yüklemek",
         "link": "Bağlantı",
         "setUrl": "URL&#39;yi ayarla",
-        "save": "Kayıt etmek",
-        "setClip": "Klip Kes",
+        "save": "Kaydetmek",
+        "setClip": "Klibi Kes",
         "invalidURL": "Geçersiz URL",
         "invalidFile": "Geçersiz dosya",
-        "errorNoSource": "Ses kaynağı yok",
+        "errorNoSource": "ses kaynağı yok",
         "uploadLimit": "Maksimum dosya boyutu: {{size}}",
         "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}"
     },
     "video": {
         "reset": "Sıfırla",
         "edit": "Düzenlemek",
-        "title": "Başlık",
-        "description": "tanım",
+        "title": "başlık",
+        "description": "Tanım",
         "upload": "Yüklemek",
         "link": "Bağlantı",
         "setUrl": "URL&#39;yi ayarla",
-        "save": "Kayıt etmek",
-        "setClip": "Klip Kes",
+        "save": "Kaydetmek",
+        "setClip": "Klibi Kes",
         "invalidURL": "Geçersiz URL",
         "invalidFile": "Geçersiz dosya",
-        "errorNoSource": "Video kaynağı yok",
+        "errorNoSource": "video kaynağı yok",
         "uploadLimit": "Maksimum dosya boyutu: {{size}}",
         "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}"
     },
     "pdf": {
         "reset": "Sıfırla",
         "edit": "Düzenlemek",
-        "title": "Başlık",
-        "description": "tanım",
+        "title": "başlık",
+        "description": "Tanım",
         "upload": "Yüklemek",
         "link": "Bağlantı",
         "setUrl": "URL&#39;yi ayarla",
-        "save": "Kayıt etmek",
-        "setClip": "Klip Kes",
+        "save": "Kaydetmek",
+        "setClip": "Klibi Kes",
         "invalidURL": "Geçersiz URL",
         "invalidFile": "Geçersiz dosya",
-        "errorNoSource": "pdf kaynağı yok",
+        "errorNoSource": "Pdf kaynağı yok",
         "uploadLimit": "Maksimum dosya boyutu: {{size}}",
         "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}"
     },
     "image": {
         "reset": "Sıfırla",
         "edit": "Düzenlemek",
-        "title": "Başlık",
-        "description": "tanım",
+        "title": "başlık",
+        "description": "Tanım",
         "upload": "Yüklemek",
         "link": "Bağlantı",
         "setUrl": "URL&#39;yi ayarla",
-        "save": "Kayıt etmek",
+        "save": "Kaydetmek",
         "uploadedImage": "yüklenen resim",
         "imageTitle": "Resim başlığı",
-        "setClip": "Klip Kes",
+        "setClip": "Klibi Kes",
         "invalidURL": "Geçersiz URL",
         "invalidFile": "Geçersiz dosya",
-        "errorNoSource": "Görüntü kaynağı yok",
+        "errorNoSource": "Resim kaynağı yok",
         "uploadLimit": "Maksimum dosya boyutu: {{size}}",
         "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}"
     },
     "questions": {
-        "Questions": "sorular",
+        "Questions": "Sorular",
         "Answers": "Yanıtlar",
         "AnswerQuestion": "Soruyu cevapla",
         "SetYourAnswer": "Lütfen soruya cevap ver",
         "NewQuestion": "Yeni Soru",
+        "EditQuestion": "Soruyu Düzenle",
         "NewAnswer": "Yeni Cevap",
-        "AnswerDetails": "Cevap Detayları",
+        "NewPossibleAnswer": "Yeni Olası Cevap",
+        "AnswerDetails": "Yanıt Ayrıntıları",
         "answerOption": "Seçenek",
         "answerOptionExclusive": "Özel",
         "answerTextarea": "metin alanı",
-        "FreeAnswer": "Cevabını buraya yaz",
-        "SaveQuestion": "Soruyu Kaydet",
-        "SaveAnswer": "Cevabı Kaydet",
-        "AddAnotherAnswer": "Başka bir cevap ekle",
-        "ErrorAnswers": "Lütfen bir cevap bile ekleyin",
-        "AlreadyAnswered": "Zaten cevaplandı",
-        "TitlePlaceholder": "Sorunuzu yazın",
-        "ContentPlaceholder": "İnsanların yanıtlamasına yardımcı olmak için ek bilgileri buraya koyun",
-        "ErrorTitle": "Soru gerekli",
-        "Placeholder": "Yer tutucu",
-        "EditQuestion": "Soruyu Düzenle",
-        "NewPossibleAnswer": "Yeni Olası Cevap",
         "answerText": "Metin",
         "HideUntilAnswered": "Cevaplanana kadar gizle",
         "CantChangeAnswers": "cevaplar değiştirilemiyor",
+        "FreeAnswer": "Cevabını buraya yaz",
+        "SaveQuestion": "Soruyu Kaydet",
+        "SaveAnswer": "Cevabı Kaydet",
         "Save": "Kaydetmek",
         "Send": "Göndermek",
         "TitleRequired": "Başlık gerekli!",
+        "AlreadyAnswered": "Zaten cevaplandı",
+        "TitlePlaceholder": "sorunuzu yazın",
+        "ContentPlaceholder": "İnsanların yanıt vermesine yardımcı olmak için ek bilgileri buraya ekleyin",
+        "ErrorTitle": "Soru gerekli",
+        "Placeholder": "Yer tutucu",
         "AreYouSure": "Emin misin?"
     },
     "experience": {
@@ -580,38 +599,18 @@
         "Create": "Yaratmak"
     },
     "calls": {
-        "SettingsTitle": "aramalar",
-        "MaxCalls": "Maksimum arama",
+        "SettingsTitle": "Aramalar",
+        "MaxCalls": "Maksimum çağrı",
         "Update": "Güncelleme",
         "NoCallsYet": "Henüz arama yok",
-        "CallReasonTitle": "Bu çağrı ne hakkında?",
+        "CallReasonTitle": "Bu arama ne hakkında?",
         "WaitingRoom": "Bekleme odası",
-        "LiveRoom": "Canlı Oda",
+        "LiveRoom": "canlı oda",
         "interviewedByAnotherHost": "Şu anda başka bir ev sahibi tarafından röportaj yapılıyor",
         "bringToLive": "Canlı Gösteriye Getir",
         "putOnHold": "Beklemeye Al",
         "endCall": "Son Arama",
-        "interview": "Röportaj yapmak",
+        "interview": "Röportaj",
         "markApproved": "Onaylandı Olarak İşaretle"
-    },
-    "identifier": {
-        "private": "Özel",
-        "public": "Halk",
-        "configurationSaved": "Yapılandırma kaydedildi",
-        "error": "Bir şeyler yanlış gitti",
-        "privacySettings": "Gizlilik ayarları"
-    },
-    "avatar": {
-        "firstName": "ilk adı",
-        "lastName": "soy isim",
-        "username": "Kullanıcı adı"
-    },
-    "login": {
-        "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
-        "newUser": "veya aşağıdan yeni bir hesap oluşturun",
-        "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz.",
-        "placeholder": {
-            "fullName": "Ad ve soyadınızı girin"
-        }
     }
 }

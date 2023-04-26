@@ -7,11 +7,11 @@
                 "startTime": "שעת התחלה",
                 "endDate": "תאריך סיום",
                 "endTime": "שעת סיום",
-                "budget": "תקציב"
+                "budget": "תַקצִיב"
             },
             "interests": {
                 "Title": "סינון לפי עניין",
-                "FilterInterests": "התחל להקליד עניין ..."
+                "FilterInterests": "התחל להקליד עניין..."
             },
             "Interest": "ריבית",
             "Location": "מקום"
@@ -20,22 +20,22 @@
     "webpage": {
         "composer": {
             "Go": "ללכת",
-            "PasteLinkHere": "הדבק קישור כאן",
-            "BrowseTheWeb": "עיון",
-            "WriteToStartConversation": "כתוב את המחשבות שלך כדי להתחיל את השיחה",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "לְדַפדֵף",
+            "WriteToStartConversation": "כתבו את מחשבותיכם כדי להתחיל את השיחה",
             "StartConversation": "התחל שיחה",
             "GotoConversation": "עבור אל שיחה",
             "reset": "אִתחוּל",
             "edit": "לַעֲרוֹך",
             "link": "קישור",
-            "setUrl": "הגדר כתובת אתר",
+            "setUrl": "הגדר כתובת URL",
             "save": "להציל",
-            "setClip": "גזור קליפ",
+            "setClip": "חתוך קליפ",
             "invalidURL": "כתובת אתר לא חוקית"
         },
-        "FileTooLarge": "הקובץ גדול מדי למטמון. גודל קובץ מקסימלי {{size}}",
-        "InvalidPDF": "הקובץ אינו PDF תקף",
-        "StartTypingTitleOrKeywords": "התחל להקליד כותרת או מילות מפתח ..."
+        "FileTooLarge": "קובץ גדול מדי לאחסון במטמון. גודל קובץ מקסימלי {{size}}",
+        "InvalidPDF": "הקובץ אינו PDF חוקי",
+        "StartTypingTitleOrKeywords": "התחל להקליד כותרת או מילות מפתח..."
     },
     "types": {
         "Websites\/article": {
@@ -43,31 +43,31 @@
             "displayType": "מאמר"
         },
         "Websites\/slide": {
-            "description": "שקופית במצגת, יכולה לכלול HTML, שמע וכו &#39;.",
+            "description": "שקופית במצגת, יכולה לכלול HTML, אודיו וכו&#39;.",
             "displayType": "שקופית"
         },
         "Websites\/presentation": {
-            "description": "מצגת הכוללת שקופיות שונות",
-            "displayType": "מצגת"
+            "description": "מצגת המורכבת משקופיות שונות",
+            "displayType": "הַצָגָה"
         },
         "Websites\/advert\/unit": {
             "description": "יחידת פרסום באתר אינטרנט",
-            "displayType": "יחידת מודעות"
+            "displayType": "יחידת פרסום"
         },
         "Websites\/advert\/placement": {
             "description": "דרך לקבץ יחידות פרסום תחת שם",
-            "displayType": "מיקום מודעות"
+            "displayType": "מיקום מודעה"
         },
         "Websites\/advert\/creative": {
             "description": "תוכן לפרסומת",
-            "displayType": "קריאייטיב לפרסום"
+            "displayType": "מודעה קריאייטיב"
         },
         "Websites\/advert\/campaign": {
             "description": "קמפיין פרסומי",
-            "displayType": "קמפיין פרסומות"
+            "displayType": "מסע פרסום"
         },
         "Websites\/webpage": {
-            "description": "מייצג אתר אינטרנט שהמטא נתונים שלו נחרטו",
+            "description": "מייצג אתר שהמטא-נתונים שלו נגרדו",
             "displayType": "עמוד אינטרנט"
         }
     }

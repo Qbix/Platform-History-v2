@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "kāds"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-pasts",
+            "mobile": "Mobilais",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopēts! Tagad varat to ielīmēt jebkurā vietā."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Ikdienas",
@@ -15,13 +28,13 @@
         "LogOut": "izlogoties"
     },
     "activate": {
+        "OneTimeCode": "Ievadiet saņemto kodu:",
         "SetAsPrimary": "Iestatīt {{1}} kā galveno {{2}}",
         "ChoosePassPhrase": "Izvēlieties <strong>ieejas frāzi<\/strong> , ar kuru pieteikties.<br> Vienkārša frāze, kas sastāv no dažiem vārdiem, ko jūs viegli atcerēsities.",
         "ChoosePassPhraseSeeSuggestions": "Izvēlieties labu <strong>ieejas frāzi<\/strong> , lai aizsargātu savu kontu. Skatiet ieteikumus dažām idejām.",
         "LogOutAndTryAgain": "Izejiet un mēģiniet vēlreiz",
         "IfYouFeel": "Ja jūtat, ka kaut kas nogāja greizi, varat",
         "SetIdentifierButtonTitle": "sākt no jauna",
-        "OneTimeCode": "Ievadiet saņemto kodu:",
         "ActivateMyAccount": "Aktivizējiet Manu kontu"
     },
     "session": {
@@ -29,13 +42,13 @@
     },
     "authorize": {
         "GetStarted": "Sāc",
-        "Authorize": "Autorizēties",
+        "Authorize": "Autorizēt",
         "TermsLabel": "Izlasīju un piekrītu<br> uz {{link}}",
         "TermsTitle": "Noteikumi",
         "mustAgree": "Vispirms jums jāpiekrīt noteikumiem."
     },
     "register": {
-        "TermsLabel": "Es piekrītu {{link}}",
+        "TermsLabel": "Es pieņemu {{link}}",
         "TermsTitle": "Noteikumi"
     },
     "notifications": {
@@ -56,11 +69,11 @@
             "title": "Izvēlieties kontaktpersonu",
             "CreateAccount": "+ Jauna kontaktpersona",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create nav atrasts",
-            "SearchByName": "Meklēt pēc vārda",
+            "SearchByName": "Meklēt pēc nosaukuma",
             "EmptyContacts": "Kontakti nav atrasti..."
         },
         "select": {
-            "title": "Atlasīt {{displayName}} kontaktpersonu"
+            "title": "Izvēlieties kontaktpersonu no {{displayName}}"
         }
     },
     "usersContacts": {
@@ -70,11 +83,15 @@
         "inviteRole": "Uzaicināt {{role}}"
     },
     "invalidLanguageSelected": "Atlasīta nederīga valoda",
+    "platforms": {
+        "wallet": "Maks",
+        "broadcast": "Raidījums"
+    },
     "login": {
         "title": "Laipni lūdzam",
         "directions": "Izveidojiet kontu vai piesakieties.",
         "directionsNoRegister": "Piesakieties, ja jums ir konts.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Ievadiet ieejas frāzi:",
         "loginButton": "Sāc",
         "registerButton": "Sāc",
@@ -88,6 +105,7 @@
         "emailExists": "Vai iepriekš mēģinājāt reģistrēties, izmantojot šo e-pastu? Ja tā, pārbaudiet savu iesūtni, lai aktivizētu savu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu<\/a>",
         "mobileExists": "Vai iepriekš mēģinājāt reģistrēties ar šo mobilā tālruņa numuru? Ja tā, pārbaudiet savu SMS, lai aktivizētu savu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu<\/a>",
         "usingOther": "vai arī jūs varat",
+        "connectPlatforms": "vai izveidojiet savienojumu, izmantojot:",
         "prompt": "Izvēlies lietotājvārdu:",
         "newUser": "vai izveidojiet jaunu kontu tālāk",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Vai piekrītat pakalpojumu sniegšanas noteikumiem?",
         "facebookNoEmail": "Jūsu Facebook kontā trūkst apstiprinātas e-pasta adreses. Vienkārši piesakieties vietējā veidā.",
         "picTooltip": "Vēlāk varat mainīt šo attēlu",
-        "wallet": {
-            "payload": "Piesakieties {{host}} laikā {{timestamp}}",
-            "alert": {
-                "title": "Notiek novirzīšana uz maku",
-                "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
-            }
-        },
         "web3": {
             "payload": "Piesakieties {{host}} laikā {{timestamp}}",
             "alert": {
                 "title": "Notiek novirzīšana uz maku",
                 "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
             }
-        },
-        "connectPlatforms": "vai izveidojiet savienojumu, izmantojot:"
+        }
     },
     "setIdentifier": {
         "title": "Pievienojiet veidu, kā pieteikties",
@@ -126,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Konts",
+        "title": "{{Platform}} konts",
         "areUsing": "Jūs izmantojat {{platform}} kā",
-        "noLongerUsing": "Jūs vairs neesat savienots ar {{platform}} kā",
+        "noLongerUsing": "Jūs vairs neesat savienots ar {{platform}} as",
         "doAuth": "Piesakieties ar šo kontu",
         "doSwitch": "Pārslēdzieties uz šo kontu"
     },
@@ -139,26 +149,9 @@
         "Guest": "Viesis",
         "Host": "Uzņēmēja"
     },
-    "avatar": {
-        "Someone": "kāds"
-    },
     "web3": {
         "WrongMethod": "Nepareiza līguma metode {{methodName}}",
         "ChangeWallet": "Mainīt maku"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-pasts",
-            "mobile": "Mobilais",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopēts! Tagad varat to ielīmēt jebkurā vietā."
-    },
-    "platforms": {
-        "wallet": "Maks",
-        "broadcast": "Raidījums"
     },
     "labels": {
         "addToPhonebook": "Pievienot mana tālruņa kontaktpersonām",

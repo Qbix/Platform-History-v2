@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} latai, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "per {{1}}"
     },
     "units": {
@@ -18,7 +18,7 @@
         "inches": "colių"
     },
     "location": {
-        "interested": "Mane domina dalykai, vykstantys per {{select}} nuo",
+        "interested": "Mane domina dalykai, vykstantys per {{select}} m",
         "update": "Atnaujinti Mano vietą",
         "set": "Nustatyti Mano vietą",
         "prompt": "{{ClickOrTap}} čia<br> nustatykite savo<br> vieta",
@@ -27,7 +27,7 @@
         "enterPostcode": "Įveskite savo pašto kodą \/ pašto kodą",
         "create": {
             "action": "Pridėti vietą",
-            "title": "Nauja Vieta",
+            "title": "Nauja vieta",
             "nameYourLocation": "Pavadinkite savo vietą"
         },
         "confirm": {
@@ -49,7 +49,7 @@
         "filterPlaceholder": "Ar yra kokia nors sritis šioje vietoje?",
         "newArea": "Nauja sritis",
         "promptTitle": "Įveskite srities pavadinimą:",
-        "absent": "Nustatykite plotą",
+        "absent": "Prašome nustatyti plotą",
         "error": "Klaida",
         "exist": "Teritorija jau egzistuoja",
         "addNewArea": "Pridėti naują sritį",
@@ -73,7 +73,7 @@
             "displayType": "Grindys"
         },
         "Places\/column": {
-            "description": "Reiškia koloną pastate ar laive",
+            "description": "Žymi koloną pastate ar laive",
             "displayType": "Stulpelis"
         },
         "Places\/nearby": {

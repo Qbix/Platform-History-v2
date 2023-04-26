@@ -5,37 +5,37 @@
                 "link": "प्रचार करने के लिए लिंक",
                 "startDate": "आरंभ करने की तिथि",
                 "startTime": "समय शुरू",
-                "endDate": "समाप्ति तिथि",
-                "endTime": "अंतिम समय",
+                "endDate": "अंतिम तिथि",
+                "endTime": "अंत समय",
                 "budget": "बजट"
             },
             "interests": {
                 "Title": "रुचि के अनुसार फ़िल्टर करें",
                 "FilterInterests": "रुचि लिखना प्रारंभ करें..."
             },
-            "Interest": "रुचि",
-            "Location": "स्थान"
+            "Interest": "दिलचस्पी",
+            "Location": "जगह"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "जाओ",
+            "Go": "जाना",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "ब्राउज़",
             "WriteToStartConversation": "बातचीत शुरू करने के लिए अपने विचार लिखें",
             "StartConversation": "बातचीत शुरू करें",
             "GotoConversation": "बातचीत पर जाएं",
             "reset": "रीसेट",
-            "edit": "संपादित करें",
-            "link": "संपर्क",
-            "setUrl": "यूआरएल सेट करें",
-            "save": "सहेजें",
+            "edit": "संपादन करना",
+            "link": "जोड़ना",
+            "setUrl": "URL सेट करें",
+            "save": "बचाना",
             "setClip": "कट आउट क्लिप",
             "invalidURL": "असामान्य यूआरएल"
         },
-        "FileTooLarge": "कैशिंग के लिए फ़ाइल बहुत बड़ी है। अधिकतम फ़ाइल आकार {{size}}",
+        "FileTooLarge": "संचय करने के लिए फ़ाइल बहुत बड़ी है. अधिकतम फ़ाइल आकार {{size}}",
         "InvalidPDF": "फ़ाइल मान्य PDF नहीं है",
-        "StartTypingTitleOrKeywords": "शीर्षक या कीवर्ड लिखना प्रारंभ करें..."
+        "StartTypingTitleOrKeywords": "शीर्षक या कीवर्ड टाइप करना प्रारंभ करें..."
     },
     "types": {
         "Websites\/article": {
@@ -43,12 +43,12 @@
             "displayType": "लेख"
         },
         "Websites\/slide": {
-            "description": "एक प्रस्तुति में एक स्लाइड में HTML, ऑडियो आदि शामिल हो सकते हैं।",
-            "displayType": "फिसल पट्टी"
+            "description": "प्रस्तुति में एक स्लाइड में HTML, ऑडियो आदि शामिल हो सकते हैं।",
+            "displayType": "फिसलना"
         },
         "Websites\/presentation": {
             "description": "विभिन्न स्लाइडों से युक्त एक प्रस्तुति",
-            "displayType": "प्रस्तुतीकरण"
+            "displayType": "प्रस्तुति"
         },
         "Websites\/advert\/unit": {
             "description": "एक वेबसाइट पर एक विज्ञापन इकाई",
@@ -60,14 +60,14 @@
         },
         "Websites\/advert\/creative": {
             "description": "एक विज्ञापन के लिए सामग्री",
-            "displayType": "विज्ञापन क्रिएटिव"
+            "displayType": "विज्ञापन रचनात्मक"
         },
         "Websites\/advert\/campaign": {
             "description": "एक विज्ञापन अभियान",
             "displayType": "विज्ञापन अभियान"
         },
         "Websites\/webpage": {
-            "description": "एक ऐसी वेबसाइट का प्रतिनिधित्व करता है जिसका मेटाडेटा स्क्रैप किया गया था",
+            "description": "उस वेबसाइट का प्रतिनिधित्व करता है जिसका मेटाडेटा स्क्रैप किया गया था",
             "displayType": "वेब पृष्ठ"
         }
     }

@@ -1,128 +1,147 @@
 {
+    "errors": {
+        "Error": "ข้อผิดพลาด",
+        "WalletAbsent": "กระเป๋าเงินไม่ได้เชื่อมต่อ",
+        "Rendering": "เกิดข้อผิดพลาดขณะแสดงผล <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "ราคาจับต้องได้!",
+        "NameRequired": "ต้องระบุชื่อ!",
+        "PriceInvalid": "ราคาไม่ถูกต้อง!",
+        "AmountInvalid": "จำนวนเงินไม่ถูกต้อง!",
+        "TransactionFailed": "การทำธุรกรรมล้มเหลว",
+        "ChainNotSupported": "ไม่รองรับห่วงโซ่ที่เลือก ห่วงโซ่ที่รองรับ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "ต้องเชื่อมต่อ MetaMask เพื่อทำงานกับแอปพลิเคชัน",
+        "UserNotLoggedInMetaMask": "ผู้ใช้ไม่ได้เข้าสู่ระบบ MetaMask",
+        "CurrencyNotFound": "ไม่พบสกุลเงิน",
+        "WrongChain": "NFT นี้สร้างขึ้นภายใต้ &quot; {{chain}} &quot; โปรดใช้ห่วงโซ่นี้",
+        "NoRecipientSelected": "ไม่ได้เลือกผู้รับ",
+        "NotEnoughPermissionsWallet": "สิทธิ์ไม่เพียงพอที่จะอ่านกระเป๋าเงินของผู้ใช้รายนี้",
+        "ThisUserHaveNoWallet": "ผู้ใช้รายนี้ไม่ได้กำหนดกระเป๋าเงิน",
+        "TheWalletOfThisUserInvalid": "กระเป๋าเงินของผู้ใช้รายนี้ไม่ถูกต้อง",
+        "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง"
+    },
+    "admin": {
+        "Title": "การบริหารสินทรัพย์",
+        "SubscriptionTitle": "แผนการสมัครสมาชิก"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "แตะเพื่อจ่าย"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: การเรียกเก็บเงินที่ดำเนินการสำหรับ {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "ขอขอบคุณสำหรับการชำระเงินของคุณไปที่ {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} สมัครรับข้อมูล {{plan.title}}",
-        "YouSubscribedTo": "คุณได้สมัครรับข้อมูลจาก {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : ค่าใช้จ่ายดำเนินการ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "ขอบคุณสำหรับการชำระเงินของคุณถึง {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} สมัครเป็น {{plan.title}}",
+        "YouSubscribedTo": "คุณได้สมัครรับ {{plan.title}}",
         "Assets\/credits\/alert": "คุณมีการแจ้งเตือนที่เกี่ยวข้องกับบัญชีของคุณ"
     },
     "charge": {
-        "Subject": "คุณได้รับการชำระเงินจำนวน {{displayAmount}} จาก {{call 'publisher.displayName'}} โดย &quot;{{description}}&quot;",
-        "HasBeenCharged": "สวัสดี นี่เป็นเพียงเพื่อแจ้งให้คุณทราบว่า {{1}} ถูกเรียกเก็บเงิน {{2}} สำหรับ {{3}} ภายใน {{4}}"
+        "Subject": "คุณได้รับการชำระเงิน {{displayAmount}} จาก {{call 'publisher.displayName'}} โดย &quot; {{description}} &quot;",
+        "HasBeenCharged": "เฮ้ นี่เป็นเพียงการแจ้งให้คุณทราบว่า {{1}} ถูกเรียกเก็บเงิน {{2}} สำหรับ {{3}} โดย {{4}}"
     },
     "charged": {
-        "Subject": "ขอขอบคุณสำหรับการชำระเงินสำหรับ &quot;{{description}}&quot;",
-        "HavePaid": "สวัสดี {{1}} นี่เป็นเพียงการยืนยันอย่างรวดเร็วว่าคุณได้ชำระเงิน {{2}} ถึง {{3}} สำหรับ {{4}} สำเร็จแล้ว"
+        "Subject": "ขอบคุณสำหรับการชำระเงินสำหรับ &quot; {{description}} &quot;",
+        "HavePaid": "สวัสดี {{1}} นี่เป็นเพียงการยืนยันอย่างรวดเร็วว่าคุณได้ชำระเงิน {{2}} ถึง {{3}} สำหรับ {{4}} เรียบร้อยแล้ว"
     },
     "payment": {
-        "AboutOrder": "ข้อมูลการสั่งซื้อ",
+        "AboutOrder": "ข้อมูลเกี่ยวกับการสั่งซื้อ",
         "PaymentMethod": "วิธีการชำระเงิน",
         "ContactInfo": "ข้อมูลติดต่อ",
         "Pay": "จ่าย",
         "PaymentSucceeded": "ชำระเงินสำเร็จ",
-        "PaymentProcessing.": "กำลังดำเนินการชำระเงินของคุณ",
+        "PaymentProcessing.": "กำลังประมวลผลการชำระเงินของคุณ",
         "FailTryAgain": "การชำระเงินของคุณไม่สำเร็จ โปรดลองอีกครั้ง",
         "SomethingWrong": "บางอย่างผิดพลาด",
         "PaymentStatus": "สถานะการชำระเงิน",
         "PayTo": "จ่าย {{displayName}}",
         "ChooseCurrency": "เลือกสกุลเงิน",
-        "YouCanSendUpTo": "คุณสามารถส่งได้ถึง {{amount}} {{symbol}}",
+        "YouCanSendUpTo": "คุณสามารถส่งได้มากถึง {{amount}} {{symbol}}",
         "Send": "ส่ง",
         "EnterAmount": "ใส่จำนวนเงิน"
     },
     "credits": {
-        "InviteAcceptedBy": "ตอบรับคำเชิญโดย {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} ป้อนชื่อ",
-        "Streams_user_lastname": "{{invitedUserName}} ใส่นามสกุล",
-        "Streams_user_icon": "{{invitedUserName}} ป้อนไอคอน",
-        "Places_user_location": "{{invitedUserName}} เข้าสู่ตำแหน่ง",
-        "Streams_greeting": "{{invitedUserName}} เข้ามาทักทาย",
-        "YouHaveCreditsToStart": "คุณมี {{amount}} เครดิตเพื่อเริ่มต้น",
-        "PaymentFor": "การชำระเงินสำหรับ &quot;{{1}}&quot;",
-        "PaymentTo": "ชำระเงินให้กับ {{1}}",
-        "PaymentToUser": "ชำระเงินให้กับ {{toUserName}}",
-        "CreatePaidStream": "สำหรับการสร้าง {{toStreamName}}",
-        "JoinedPaidStream": "สำหรับการจองใน &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "สำหรับการสร้างชุมชน &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "เป็นการคืนเงินการจองใน &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "ซื้อ {{amount}} เครดิต",
-        "BonusCredits": "โบนัส {{amount}} หน่วยกิต",
-        "BuyAmountCredits": "ซื้อเครดิต {{amount}} หน่วย",
-        "WatchClip": "ได้รับ {{amount}} เครดิตจากการรับชม {{fromStreamTitle}}",
-        "MissingCredits": "เครดิตหาย",
-        "YouMissingCredits": "คุณต้องมีเครดิตเพิ่มเติม {{amount}} หน่วยเพื่อดำเนินการต่อ",
+        "InviteAcceptedBy": "คำเชิญได้รับการยอมรับโดย {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} เติม {{FilledStreamTitle}}",
+        "ForFillingStream": "สำหรับเติม {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "คุณมี {{amount}} เครดิตในการเริ่มต้น",
+        "PaymentFor": "ชำระเงินสำหรับ &quot; {{1}} &quot;",
+        "PaymentTo": "จ่าย {{1}}",
+        "PaymentToUser": "จ่าย {{toUserName}}",
+        "CreatePrivateChat": "สำหรับแชทส่วนตัวกับ {{toUserName}}",
+        "CreatePaidStream": "สำหรับสร้าง {{toStreamName}}",
+        "JoinedPaidStream": "สำหรับการจองใน &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "เพื่อสร้างสรรค์ชุมชน &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "เป็นการคืนเงินการจองใน &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "ซื้อเครดิต {{amount}}",
+        "BonusCredits": "โบนัส {{amount}} เครดิต",
+        "BuyAmountCredits": "ซื้อเครดิต {{amount}}",
+        "WatchClip": "ได้รับ {{amount}} เครดิตสำหรับการดู {{fromStreamTitle}}",
+        "MissingCredits": "เครดิตขาดหายไป",
+        "YouMissingCredits": "คุณต้องมีเครดิตเพิ่มเติม {{amount}} เพื่อดำเนินการต่อ",
         "BuyCredits": "ซื้อเครดิต",
-        "BuyBonus": "การซื้อเครดิตมูลค่า {{amount}} หน่วยในคราวเดียว จะนำไปสู่โบนัสเครดิตจำนวน {{bonus}} หน่วย",
+        "BuyBonus": "ซื้อ {{amount}} เครดิตในครั้งเดียว จะได้รับโบนัส {{bonus}} เครดิต",
         "Buy": "ซื้อ",
         "PurchaseCredits": "ซื้อเครดิต",
         "Credits": "เครดิต",
-        "ErrorInvalidAmount": "จำนวนเงินที่ไม่ถูกต้อง",
-        "ErrorInvalidCurrency": "ขออภัย เรายังไม่รองรับสกุลเงิน {{currency}} เลย",
+        "ErrorInvalidAmount": "จำนวนเงินไม่ถูกต้อง",
+        "ErrorInvalidCurrency": "ขออภัย เรายังไม่รองรับสกุลเงิน {{currency}}",
         "forMessages": {
             "BoughtCredits": "{{amount}} หน่วยกิต",
             "BonusCredits": "{{amount}} หน่วยกิต"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} เติม {{FilledStreamTitle}}",
-        "ForFillingStream": "สำหรับกรอก {{FilledStreamTitle}}",
-        "CreatePrivateChat": "สำหรับแชทส่วนตัวกับ {{toUserName}}"
+        }
     },
     "history": {
         "Date": "วันที่",
         "Amount": "จำนวน",
         "Description": "คำอธิบาย",
         "Client": "ลูกค้า",
+        "User": "ผู้ใช้",
         "To": "ถึง",
         "From": "จาก",
         "SeeHistory": "ดูประวัติการชำระเงินสำหรับ {{1}}",
         "HistoryEmpty": "คุณยังไม่มีข้อมูล",
-        "PaymentFor": "ส่ง {{amount}} หน่วยกิต",
-        "PaymentTo": "ส่ง {{amount}} หน่วยกิต",
-        "PaymentToUser": "ส่ง {{amount}} หน่วยกิต",
-        "CreatePaidStream": "ใช้ไป {{amount}} หน่วยกิต",
+        "PaymentFor": "ส่ง {{amount}} เครดิต",
+        "PaymentTo": "ส่ง {{amount}} เครดิต",
+        "PaymentToUser": "ส่ง {{amount}} เครดิต",
+        "CreatePaidStream": "ใช้จ่าย {{amount}} เครดิต",
         "WatchClip": {
             "+": "ได้รับ {{amount}} เครดิต",
-            "-": "ใช้ไป {{amount}} หน่วยกิต"
+            "-": "ใช้จ่าย {{amount}} เครดิต"
         },
         "JoinedPaidStream": {
             "+": "ได้รับ {{amount}} เครดิต",
-            "-": "ใช้ไป {{amount}} หน่วยกิต"
+            "-": "ใช้จ่าย {{amount}} เครดิต"
         },
         "LeftPaidStream": {
             "+": "ได้รับ {{amount}} หน่วยกิต",
-            "-": "ส่ง {{amount}} หน่วยกิต"
+            "-": "ส่ง {{amount}} เครดิต"
         },
-        "CreatedCommunity": "ใช้ไป {{amount}} หน่วยกิต",
-        "BoughtCredits": "ซื้อ {{amount}} เครดิต",
-        "BonusCredits": "ได้รับโบนัส {{amount}} หน่วยกิต",
+        "CreatedCommunity": "ใช้จ่าย {{amount}} เครดิต",
+        "BoughtCredits": "ซื้อเครดิต {{amount}}",
+        "BonusCredits": "รับโบนัส {{amount}} เครดิต",
         "InviteAcceptedBy": "ได้รับ {{amount}} เครดิต",
         "Streams_user_firstname": "ได้รับ {{amount}} เครดิต",
         "Streams_user_lastname": "ได้รับ {{amount}} เครดิต",
         "Streams_user_icon": "ได้รับ {{amount}} เครดิต",
         "Places_user_location": "ได้รับ {{amount}} เครดิต",
         "Streams_greeting": "ได้รับ {{amount}} เครดิต",
-        "YouHaveCreditsToStart": "ได้รับ {{amount}} เครดิต",
-        "User": "ผู้ใช้"
+        "YouHaveCreditsToStart": "ได้รับ {{amount}} เครดิต"
     },
     "subscriptions": {
-        "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
+        "infoTitle": "กำหนดข้อมูลการชำระเงิน",
         "confirm": {
-            "title": "เริ่มสมัครสมาชิก",
-            "message": "คุณต้องการสมัครรับข้อมูล {{title}} หรือไม่",
+            "title": "เริ่มการสมัครสมาชิก",
+            "message": "เริ่มการสมัครสมาชิกแบบประจำที่ &quot; {{title}} &quot;?",
             "ok": "ตกลง",
             "cancel": "ยกเลิก"
         },
         "CreditOrDebitCard": "บัตรเครดิตหรือบัตรเดบิต",
         "SubscribePayment": "สมัครสมาชิกชำระเงิน",
         "ImmediatePayment": "ชำระเงินทันที",
-        "ProcessingPayment": "กำลังดำเนินการชำระเงิน",
-        "SubscriptionAlreadyPaid": "สมัครสมาชิกนี้ชำระเงินแล้ว",
-        "SubscriptionNotActive": "การสมัครนี้ไม่ทำงาน",
-        "Subscribed": "สมัครแล้ว",
-        "Unsubscribed": "Unsubscribed",
+        "ProcessingPayment": "กำลังประมวลผลการชำระเงิน",
+        "SubscriptionAlreadyPaid": "การสมัครนี้ชำระเงินแล้ว",
+        "SubscriptionNotActive": "การสมัครรับข้อมูลนี้ไม่ได้ใช้งาน",
+        "Subscribed": "สมัครสมาชิกแล้ว",
+        "Unsubscribed": "ยกเลิกการสมัคร",
         "Unsubscribe": "ยกเลิกการสมัคร",
         "Subscribe": "ติดตาม",
         "Started": "เริ่ม",
@@ -131,7 +150,7 @@
         "Period": "ระยะเวลา",
         "Price": "ราคา",
         "AreYouSureUnsubscribe": "คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสมัครแผนนี้",
-        "YouUnsubscribedFromPlan": "คุณยกเลิกการสมัครแผน &quot;{{planTitle}}&quot; คุณจะไม่ถูกเรียกเก็บเงิน แต่การสมัครของคุณจะดำเนินต่อไปจนถึง {{endsIn}}",
+        "YouUnsubscribedFromPlan": "คุณยกเลิกการสมัครแผน &quot; {{planTitle}} &quot; คุณจะไม่ถูกเรียกเก็บเงิน แต่การสมัครสมาชิกของคุณจะดำเนินต่อไปจนถึง {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "ชื่อแผน",
             "PricePlaceholder": "ราคา",
@@ -141,11 +160,11 @@
         }
     },
     "payments": {
-        "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
-        "BuyAmountCredits": "ซื้อเครดิต {{amount}} หน่วย",
+        "infoTitle": "กำหนดข้อมูลการชำระเงิน",
+        "BuyAmountCredits": "ซื้อเครดิต {{amount}}",
         "confirm": {
             "title": "ชำระเงิน",
-            "message": "คุณตกลงที่จะจ่าย {{symbol}}{{amount}} หรือไม่",
+            "message": "คุณตกลงที่จะจ่าย {{symbol}} {{amount}} ?",
             "ok": "ตกลง",
             "cancel": "ยกเลิก"
         }
@@ -160,16 +179,16 @@
             "description": "แผนการสมัครสมาชิก"
         },
         "Assets\/subscription": {
-            "displayType": "สมัครสมาชิก",
-            "description": "สมัครสมาชิก"
+            "displayType": "การสมัครสมาชิก",
+            "description": "การสมัครสมาชิก"
         },
         "Assets\/product": {
             "displayType": "ผลิตภัณฑ์",
-            "description": "สินค้าที่จำหน่าย"
+            "description": "สินค้าที่กำลังขาย"
         },
         "Assets\/service": {
             "displayType": "บริการ",
-            "description": "ที่เปิดให้บริการ"
+            "description": "บริการที่กำลังนำเสนอ"
         }
     },
     "messages": {
@@ -177,66 +196,98 @@
             "content": "ได้รับ {{amount}} เครดิต"
         },
         "Assets\/credits\/bought": {
-            "content": "ซื้อ {{amount}} เครดิต"
+            "content": "ซื้อเครดิต {{amount}}"
         },
         "Assets\/credits\/bonus": {
-            "content": "โบนัส {{amount}} หน่วยกิต"
+            "content": "โบนัส {{amount}} เครดิต"
         },
         "Assets\/credits\/spent": {
-            "content": "ใช้ไป {{amount}} หน่วยกิต"
+            "content": "ใช้จ่าย {{amount}} เครดิต"
         },
         "Assets\/credits\/sent": {
-            "content": "ส่ง {{amount}} เครดิตไปยัง {{toUserName}}"
+            "content": "ส่งเครดิต {{amount}} เป็น {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "ได้รับ {{amount}} หน่วยกิตจาก {{fromUserName}}"
+            "content": "ได้รับ {{amount}} เครดิตจาก {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "คุณมีเครดิตน้อยในบัญชีของคุณ โปรดไปที่ <a href='{{link}}'>ลิงก์นี้<\/a> เพื่อซื้อเครดิตเพิ่มเติม"
+            "content": "คุณมีเครดิตเล็กน้อยในบัญชีของคุณ โปรดไปที่ <a href='<i translate='no'>999 &#39;&gt;ลิงก์นี้<\/a> เพื่อซื้อเครดิตเพิ่มเติม"
+        }
+    },
+    "billing": {
+        "Title": "การเรียกเก็บเงินสินทรัพย์",
+        "CreditsMinimum": "หน่วยกิตขั้นต่ำ",
+        "CreditsToAdd": "เครดิตที่จะเพิ่ม",
+        "Save": "บันทึก",
+        "ThisLink": "ลิงค์นี้",
+        "errors": {
+            "CreditsMinimumNegative": "เครดิตขั้นต่ำต้องไม่ติดลบ",
+            "CreditsToAddNegative": "เครดิตที่จะเพิ่มต้องไม่ติดลบ"
         }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "บริการใหม่",
             "TitlePlaceholder": "ชื่อบริการ",
-            "PricePlaceholder": "กำหนดราคา",
-            "LinkPlaceholder": "ตั้งค่าลิงค์ข้อมูลเพิ่มเติม",
+            "PricePlaceholder": "ตั้งราคา",
+            "LinkPlaceholder": "กำหนดลิงค์ข้อมูลเพิ่มเติม",
             "DescriptionPlaceholder": "รายละเอียดการบริการ",
             "SaveService": "บันทึกบริการ",
-            "SelectRequiredParticipants": "ผู้เข้าร่วมที่ต้องการ",
+            "SelectRequiredParticipants": "ต้องการผู้เข้าร่วมที่เกี่ยวข้อง",
             "RequiredParticipantsDesc": "โปรดเลือกผู้เข้าร่วมที่เกี่ยวข้องซึ่งจำเป็นต้องใช้บริการนี้ (เช่น สัตว์เลี้ยงสำหรับ &quot;การแสดงสุนัข&quot; หรือเด็กสำหรับ &quot;วันหยุดสำหรับเด็ก&quot; เป็นต้น) หากมีการชำระค่าบริการ ผู้ใช้จะต้องชำระเงินสำหรับผู้เข้าร่วมที่เกี่ยวข้องแต่ละคนด้วย"
+        },
+        "EditServiceTemplate": {
+            "Title": "แก้ไขบริการ"
         },
         "ManageServiceTemplates": "จัดการเทมเพลตบริการ",
         "ManageServices": "จัดการบริการ",
         "Free": "ฟรี",
-        "OptionalContribution": "ผลงานเสริม",
+        "OptionalContribution": "การสนับสนุนเพิ่มเติม",
         "RequiredPayment": "การชำระเงินที่จำเป็น",
         "AreYouSureDelete": "คุณแน่ใจหรือไม่ว่าต้องการลบบริการนี้",
-        "AmountServicesRelated": "มี {{amount}} ความพร้อมใช้งานที่เกี่ยวข้องกับบริการนี้ พวกมันจะถูกลบออกด้วย",
-        "EditServiceTemplate": {
-            "Title": "แก้ไขบริการ"
-        }
+        "AmountServicesRelated": "มีความพร้อมใช้งาน {{amount}} รายการที่เกี่ยวข้องกับบริการนี้ พวกเขาจะถูกลบออกด้วย"
+    },
+    "transfer": {
+        "SelectRecipient": "เลือกผู้รับ",
+        "TransactionSuccess": "ความสำเร็จของการทำธุรกรรม",
+        "OrTypeWalletAddress": "หรือพิมพ์ที่อยู่กระเป๋าสตางค์ของผู้รับ"
     },
     "NFT": {
-        "Title": "ข้อมูลเกี่ยวกับ {{title}} NFT",
-        "Description": "ข้อมูลโดยละเอียดเกี่ยวกับ NFT",
-        "FixedBid": "ซื้อเลย",
+        "Title": "ชื่อ",
+        "Name": "ชื่อ",
+        "EnterName": "ใส่ชื่อ",
+        "EnterAuthorWallet": "ใส่กระเป๋าเงินผู้เขียน",
+        "InformationAboutTitle": "ข้อมูลเกี่ยวกับ {{title}} NFT",
+        "Description": "คำอธิบาย",
+        "DetailedInformationAboutNFT": "ข้อมูลโดยละเอียดเกี่ยวกับ NFT",
+        "PresaleStarts": "Presale เริ่ม 23 ธ.ค",
+        "OwnerUserNotFound": "เจ้าของ NFT นี้ไม่ได้ลงทะเบียนในแอปพลิเคชันของเรา",
+        "BuyNow": "ซื้อเลย",
+        "Buy": "ซื้อ",
+        "Add": "เพิ่ม",
+        "Remove": "ลบ",
+        "NoNFTyet": "ยังไม่มี NFT",
+        "Conversation": "การสนทนา",
+        "Create": "สร้าง",
         "CurrentBid": "การเสนอราคาปัจจุบัน",
         "StartingIn": "เริ่มต้นใน",
         "EndingIn": "สิ้นสุดใน",
         "CreateNFT": "สร้าง NFT",
         "TitlePlaceholder": "ตั้งชื่อ NFT ของคุณ",
         "DescriptionPlaceholder": "ให้คำอธิบาย NFT ของคุณ",
-        "CreateYourNFT": "สร้าง NFT . ของคุณ",
+        "CreateYourNFT": "สร้าง NFT ของคุณ",
         "Royalties": "ค่าลิขสิทธิ์",
         "RoyaltyPlaceholder": "ไม่จำเป็น. จำนวนเงินที่จ่ายให้กับผู้สร้างก่อนโอน",
         "ExpirationDate": "วันหมดอายุ",
         "StartingDate": "วันที่เริ่มต้น",
-        "BidsBelowThisAmount": "ไม่อนุญาตให้เสนอราคาต่ำกว่าจำนวนนี้",
-        "MinimumBid": "ราคาเสนอขั้นต่ำ",
+        "BidsBelowThisAmount": "ไม่อนุญาตให้เสนอราคาต่ำกว่าจำนวนเงินนี้",
+        "MinimumBid": "การเสนอราคาขั้นต่ำ",
+        "Author": "ผู้เขียน",
         "Price": "ราคา",
+        "Commission": "คณะกรรมการ",
+        "EnterCommission": "ป้อนค่าคอมมิชชัน",
         "Owner": "เจ้าของ",
-        "SelectCategory": "เลือกหมวดหมู่",
+        "SelectCategory": "เลือกประเภท",
         "Day": "วัน",
         "Days": "วัน",
         "Hour": "ชั่วโมง",
@@ -245,89 +296,46 @@
         "Minutes": "นาที",
         "Second": "ที่สอง",
         "Seconds": "วินาที",
-        "SalesCreator": "ของยอดขายจะตกเป็นของครีเอเตอร์",
+        "SalesCreator": "ยอดขายจะตกเป็นของครีเอเตอร์",
         "Details": "รายละเอียด",
-        "Bids": "ประมูล",
+        "Bids": "การเสนอราคา",
         "History": "ประวัติศาสตร์",
         "LoremIpsum": "Lorem Ipsum เป็นเพียงข้อความจำลองของอุตสาหกรรมการพิมพ์และการเรียงพิมพ์",
-        "PutOnSale": "ลงขาย",
-        "PutOffSale": "ถอนออกจากการขาย",
+        "PutOnSale": "วางขาย",
+        "PutOffSale": "ถอนตัวจากการขาย",
         "Transfer": "โอนย้าย",
+        "Actions": "การกระทำ",
+        "Claim": "เรียกร้อง",
+        "ClaimNFT": "อ้างสิทธิ์ NFT",
+        "Unlocking": "กำลังปลดล็อก",
+        "Unlock": "ปลดล็อค",
         "Update": "อัปเดต",
         "UpdateToken": "อัปเดตโทเค็น",
+        "UpdateNFT": "อัปเดต NFT",
         "CreateToken": "สร้างโทเค็น",
-        "PlaceBid": "เสนอราคา",
+        "PlaceBid": "วางประมูล",
         "SoldOut": "ขายแล้ว",
-        "NftName": "ชื่อ NFT",
-        "DescribeYourNFT": "โปรดอธิบาย NFT . ของคุณ",
-        "NftPicture": "รูปภาพแทน NFT",
+        "NotOnSale": "ไม่ขาย",
+        "NftName": "ชื่อเอ็นเอฟที",
+        "DescribeYourNFT": "โปรดอธิบาย NFT ของคุณ",
+        "NftPicture": "รูปภาพเพื่อแสดงถึง NFT",
         "NftMovie": "ภาพยนตร์เพื่อเป็นตัวแทนของ NFT",
         "UploadMovie": "อัปโหลดภาพยนตร์",
-        "MovieSource": "แหล่งภาพยนตร์",
+        "MovieSource": "ที่มาภาพยนตร์",
+        "MovieURL": "URL ภาพยนตร์",
         "UploadFile": "อัปโหลดไฟล์",
         "PutOnMarketplace": "วางตลาด",
-        "InstantPurchase": "ป้อนราคาเพื่อให้ผู้ใช้ซื้อ NFT . ของคุณได้ทันที",
+        "InstantPurchase": "ป้อนราคาเพื่อให้ผู้ใช้ซื้อ NFT ของคุณได้ทันที",
         "FixedPrice": "ราคาคงที่",
-        "TimedAuction": "หมดเวลาการประมูล",
-        "OpenForBids": "เปิดให้ประมูล",
-        "PriceOnePiece": "ใส่ราคาสำหรับหนึ่งชิ้น",
-        "EnterMinimumBid": "ป้อนราคาเสนอขั้นต่ำ",
+        "TimedAuction": "การประมูลแบบกำหนดเวลา",
+        "OpenForBids": "เปิดประมูล",
+        "PriceOnePiece": "ใส่ราคาต่อชิ้น",
+        "EnterPrice": "ป้อนราคา",
+        "EnterMinimumBid": "ป้อนการเสนอราคาขั้นต่ำ",
         "SelectChain": "เลือกโซ่",
-        "WrongChain": "NFT นี้สร้างขึ้นภายใต้ &quot;{{chain}}&quot; โปรดใช้โซ่นี้",
-        "import": {
-            "importNFT": "การนำเข้าของ NFT",
-            "fileNotFound": "ขออภัย ไม่พบไฟล์ CSV",
-            "fileEmpty": "ขออภัย ไฟล์ CSV ว่างเปล่า",
-            "userIdNotFound": "มีผู้ใช้แต่ ID ว่างเปล่า",
-            "errorLine": "บรรทัด {{1}}",
-            "fieldNotFound": "ไม่พบช่องที่ต้องกรอก &quot;{{1}}&quot;",
-            "taskStreamInvalid": "สตรีมงานไม่ถูกต้อง",
-            "instructionsEmpty": "คำแนะนำสตรีมงานว่างเปล่า",
-            "complete": "สมบูรณ์",
-            "activateUsers": "ส่งข้อความการเปิดใช้งานไปยังผู้ใช้?",
-            "importProgress": "ความคืบหน้า",
-            "importOptions": "ตัวเลือก",
-            "sampleCSV": "ดาวน์โหลดตัวอย่าง CSV",
-            "fileLabel": "อัปโหลดสเปรดชีต:",
-            "errorsTitle": "เกิดข้อผิดพลาด",
-            "importAttributes": "นำเข้าแอตทริบิวต์ NFT",
-            "displayTypeEmpty": "ไม่พบประเภทการแสดงผลสำหรับ &quot;{{1}}&quot;"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "กรองตาม NFT Collections",
-                "ShowNFTCollection": "แสดงคอลเลกชัน NFT ใน ...",
-                "AllCollections": "คอลเลกชันทั้งหมด"
-            },
-            "ByUser": {
-                "AllAuthors": "ผู้เขียนทั้งหมด",
-                "AllUsers": "ทุกคน",
-                "FilterByAuthors": "กรองตามผู้เขียน"
-            }
-        },
-        "Back": "กลับไปที่คอลเลกชัน",
-        "Name": "ชื่อ",
-        "EnterName": "ใส่ชื่อ",
-        "EnterAuthorWallet": "ใส่กระเป๋าสตางค์ของผู้เขียน",
-        "InformationAboutTitle": "ข้อมูลเกี่ยวกับ {{title}} NFT",
-        "DetailedInformationAboutNFT": "ข้อมูลโดยละเอียดเกี่ยวกับ NFT",
-        "PresaleStarts": "เปิดพรีเซลล์วันที่ 23 ธ.ค",
-        "OwnerUserNotFound": "เจ้าของ NFT นี้ไม่ได้ลงทะเบียนในแอปพลิเคชันของเรา",
-        "BuyNow": "ซื้อเลย",
-        "Buy": "ซื้อ",
-        "Conversation": "การสนทนา",
-        "Create": "สร้าง",
-        "Author": "ผู้เขียน",
-        "Commission": "คณะกรรมการ",
-        "EnterCommission": "ป้อนค่าคอมมิชชั่น",
-        "Actions": "การกระทำ",
-        "UpdateNFT": "อัปเดต NFT",
-        "NotOnSale": "ไม่ขาย",
-        "MovieURL": "URL ภาพยนตร์",
-        "EnterPrice": "ใส่ราคา",
         "Currency": "สกุลเงิน",
-        "AreYouSureDeleteImage": "คุณแน่ใจหรือไม่ว่าต้องการลบภาพ",
-        "AreYouSureDeleteVideo": "คุณแน่ใจหรือไม่ว่าต้องการนำวิดีโอออก",
+        "AreYouSureDeleteImage": "คุณแน่ใจหรือไม่ว่าต้องการนำรูปภาพออก",
+        "AreYouSureDeleteVideo": "คุณแน่ใจหรือไม่ว่าต้องการลบวิดีโอ",
         "series": {
             "Name": "ชื่อ",
             "Icon": "ไอคอน",
@@ -339,8 +347,8 @@
             "AuthorInvalid": "ที่อยู่ผู้เขียนไม่ถูกต้อง!",
             "Address": "ที่อยู่",
             "CoverImage": "ภาพหน้าปก",
-            "UploadCoverImage": "อัพโหลดภาพหน้าปก",
-            "CommissionAddressInvalid": "ที่อยู่ของคอมมิชชันไม่ถูกต้อง",
+            "UploadCoverImage": "อัปโหลดภาพหน้าปก",
+            "CommissionAddressInvalid": "ที่อยู่ค่าคอมมิชชันไม่ถูกต้อง",
             "OnSale": "ลดราคา",
             "OffSale": "ปิดการขาย",
             "CreateSeries": "สร้างซีรีส์",
@@ -348,63 +356,88 @@
             "SeriesInfo": "ข้อมูลซีรีส์",
             "SelectAuthor": "เลือกผู้เขียน",
             "NewItem": "ซีรีส์ NFT ใหม่",
-            "NamePlaceholder": "ใส่ชื่อซีรีส์",
+            "NamePlaceholder": "ป้อนชื่อซีรีส์",
             "DescPlaceholder": "ป้อนคำอธิบายซีรีส์",
             "EndingIn": "สิ้นสุดใน"
         },
         "contract": {
             "CreateContract": "สร้างสัญญา",
             "SelectContract": "เลือกสัญญา",
-            "CreateContractFor": "สร้างสัญญาสำหรับ {{userName}}",
-            "ContractFor": "สัญญาสำหรับ {{userName}}",
-            "UpdateContract": "อัพเดทสัญญา",
+            "CreateContractFor": "ทำสัญญา {{userName}}",
+            "ContractFor": "สัญญา {{userName}}",
+            "UpdateContract": "ปรับปรุงสัญญา",
             "TransferOwnership": "โอนกรรมสิทธิ์",
             "SetBaseURI": "ตั้งค่า URI ฐาน",
-            "SetSuffix": "ตั้งค่าคำต่อท้าย",
+            "SetSuffix": "ตั้งคำต่อท้าย",
             "CurrentOwner": "เจ้าของปัจจุบัน",
-            "CurrentBaseURL": "URL ฐานปัจจุบัน",
-            "ContractAddressAbsent": "ไม่มีที่อยู่สัญญา",
+            "CurrentBaseURL": "BaseURL ปัจจุบัน",
+            "ContractAddressAbsent": "ไม่มีที่อยู่ตามสัญญา",
             "FactoryAddressAbsent": "ไม่มีที่อยู่โรงงาน",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
-            "TitleRequired": "ต้องการชื่อเรื่อง",
-            "SymbolRequired": "สัญลักษณ์ที่จำเป็น",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
+            "TitleRequired": "ชื่อเรื่องที่จำเป็น",
+            "SymbolRequired": "ต้องใช้สัญลักษณ์",
             "TypeContractName": "ชื่อสัญญา",
             "TypeContractSymbol": "สัญลักษณ์สัญญา (สูงสุด 10 ตัวอักษร)"
         },
         "contests": {
             "Title": "การแข่งขัน",
-            "NewContest": "การแข่งขันใหม่"
+            "NewContest": "การประกวดใหม่"
         },
+        "import": {
+            "importNFT": "การนำเข้า NFT",
+            "importAttributes": "นำเข้าแอตทริบิวต์ NFT",
+            "fileNotFound": "ขออภัย ไม่พบไฟล์ CSV",
+            "fileEmpty": "ขออภัย ไฟล์ CSV ว่างเปล่า",
+            "userIdNotFound": "มีผู้ใช้อยู่ แต่ ID ว่างเปล่า",
+            "errorLine": "สาย {{1}}",
+            "fieldNotFound": "ไม่พบฟิลด์ที่ต้องกรอก &quot; {{1}} &quot;",
+            "displayTypeEmpty": "ไม่พบประเภทการแสดงผลสำหรับ &quot; {{1}} &quot;",
+            "taskStreamInvalid": "สตรีมงานไม่ถูกต้อง",
+            "instructionsEmpty": "คำแนะนำสตรีมงานว่างเปล่า",
+            "complete": "สมบูรณ์",
+            "activateUsers": "ส่งข้อความเปิดใช้งานไปยังผู้ใช้?",
+            "importProgress": "ความคืบหน้า",
+            "importOptions": "ตัวเลือก",
+            "sampleCSV": "ดาวน์โหลดตัวอย่าง CSV",
+            "fileLabel": "อัปโหลดสเปรดชีต:",
+            "errorsTitle": "เกิดข้อผิดพลาด"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "กรองตามคอลเลกชัน NFT",
+                "ShowNFTCollection": "แสดงคอลเลกชัน NFT ใน ...",
+                "AllCollections": "คอลเลกชันทั้งหมด"
+            },
+            "ByUser": {
+                "AllAuthors": "ผู้เขียนทั้งหมด",
+                "AllUsers": "ทุกคน",
+                "FilterByAuthors": "กรองตามผู้เขียน"
+            }
+        },
+        "Back": "กลับไปที่คอลเลกชัน",
         "attributes": {
-            "Title": "จัดการคุณสมบัติ",
+            "Title": "จัดการแอตทริบิวต์",
             "Attributes": "คุณลักษณะ",
             "DisplayTitle": "ประเภทการแสดงผล",
             "AddDisplayType": "เพิ่มประเภทการแสดงผลใหม่",
             "NewDisplay": "จอแสดงผลใหม่",
             "TraitTitle": "ลักษณะนิสัย",
             "AddTraitTitle": "เพิ่มประเภทลักษณะใหม่",
-            "NewTrait": "ลักษณะนิสัยใหม่",
+            "NewTrait": "ประเภทลักษณะใหม่",
             "ValueTitle": "ค่า",
             "AddValueTitle": "เพิ่มมูลค่าใหม่",
             "NewValue": "ค่าใหม่",
-            "NewAttribute": "คุณสมบัติใหม่",
-            "UpdateAttributes": "อัพเดทคุณสมบัติ",
+            "NewAttribute": "แอตทริบิวต์ใหม่",
+            "UpdateAttributes": "อัปเดตแอตทริบิวต์",
             "SaveAttributes": "บันทึกคุณสมบัติ"
         },
         "profile": {
             "LogOut": "ออกจากระบบ",
-            "Title": "โปรไฟล์สำหรับ {{userName}}",
+            "Title": "รายละเอียดสำหรับ {{userName}}",
             "Description": "รายละเอียดผู้ใช้",
-            "aboutPlaceholder": "แก้ไขชีวประวัติ",
+            "aboutPlaceholder": "แก้ไขประวัติ",
             "SureLogOut": "คุณแน่ใจว่าคุณต้องการที่จะออกจากระบบ?"
         },
-        "Add": "เพิ่ม",
-        "Remove": "ลบ",
-        "NoNFTyet": "ยังไม่มี NFT",
-        "Claim": "เรียกร้อง",
-        "ClaimNFT": "อ้างสิทธิ์ NFT",
-        "Unlocking": "กำลังปลดล็อก",
-        "Unlock": "ปลดล็อค",
         "sales": {
             "factory": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "ปลดล็อค",
             "Locked": "ล็อค",
             "CustodianAddress": "ที่อยู่ผู้ดูแล",
-            "TokenWasClaimed": "อ้างสิทธิ์โทเค็น &quot;{{title}}&quot; แล้ว",
-            "TokenWasLocked": "โทเค็น &quot;{{title}}&quot; ถูกล็อค",
-            "TokenWasUnlocked": "ปลดล็อกโทเค็น &quot;{{title}}&quot; แล้ว"
+            "TokenWasClaimed": "โทเค็น &quot; {{title}} &quot; ถูกอ้างสิทธิ์",
+            "TokenWasLocked": "โทเค็น &quot; {{title}} &quot; ถูกล็อค",
+            "TokenWasUnlocked": "โทเค็น &quot; {{title}} &quot; ถูกปลดล็อค"
         }
-    },
-    "errors": {
-        "Error": "ข้อผิดพลาด",
-        "WalletAbsent": "ไม่ได้เชื่อมต่อกระเป๋าเงิน",
-        "Rendering": "มีข้อผิดพลาดขณะแสดงผล <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "ต้องการราคา!",
-        "NameRequired": "ต้องระบุชื่อ!",
-        "PriceInvalid": "ราคาไม่ถูกต้อง!",
-        "TransactionFailed": "การทำธุรกรรมล้มเหลว",
-        "ChainNotSupported": "ไม่รองรับเชนที่เลือก ห่วงโซ่ที่รองรับ: {{supportedChain}}",
-        "NeedMetaMaskConnected": "ต้องการ MetaMask ที่เชื่อมต่อกับแอพพลิเคชั่น",
-        "UserNotLoggedInMetaMask": "ผู้ใช้ไม่ได้เข้าสู่ระบบ MetaMask",
-        "CurrencyNotFound": "ไม่พบสกุลเงิน",
-        "WrongChain": "NFT นี้สร้างขึ้นภายใต้ &quot;{{chain}}&quot; โปรดใช้โซ่นี้",
-        "AmountInvalid": "จำนวนเงินไม่ถูกต้อง!",
-        "NoRecipientSelected": "ไม่ได้เลือกผู้รับ",
-        "NotEnoughPermissionsWallet": "สิทธิ์ไม่เพียงพอที่จะอ่านกระเป๋าเงินของผู้ใช้รายนี้",
-        "ThisUserHaveNoWallet": "ผู้ใช้รายนี้ไม่ได้กำหนดกระเป๋าเงิน",
-        "TheWalletOfThisUserInvalid": "กระเป๋าเงินของผู้ใช้รายนี้ไม่ถูกต้อง",
-        "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง"
-    },
-    "admin": {
-        "Title": "การบริหารสินทรัพย์",
-        "SubscriptionTitle": "แผนการสมัครสมาชิก"
-    },
-    "billing": {
-        "Title": "การเรียกเก็บเงินสินทรัพย์",
-        "CreditsMinimum": "เครดิตขั้นต่ำ",
-        "CreditsToAdd": "เครดิตเพิ่ม",
-        "Save": "บันทึก",
-        "ThisLink": "ลิงค์นี้",
-        "errors": {
-            "CreditsMinimumNegative": "เครดิตขั้นต่ำไม่สามารถติดลบได้",
-            "CreditsToAddNegative": "เครดิตที่จะเพิ่มไม่สามารถติดลบได้"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "เลือกผู้รับ",
-        "TransactionSuccess": "ความสำเร็จของการทำธุรกรรม",
-        "OrTypeWalletAddress": "หรือพิมพ์ที่อยู่กระเป๋าสตางค์ของผู้รับ"
     },
     "currencies": {
         "choose": "เลือกสกุลเงิน"

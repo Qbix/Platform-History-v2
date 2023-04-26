@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Jemand"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Handy, Mobiltelefon",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopiert! Jetzt können Sie es überall einfügen."
+    },
     "analytics": {
         "Title": "Analytik",
         "Daily": "Täglich",
@@ -11,17 +24,17 @@
         "WeekDays": "Wochentage"
     },
     "actions": {
-        "LogIn": "Einloggen",
+        "LogIn": "Anmeldung",
         "LogOut": "Ausloggen"
     },
     "activate": {
-        "SetAsPrimary": "{{1}} als primäres {{2}} festlegen",
-        "ChoosePassPhrase": "Wählen Sie eine <strong>Passphrase<\/strong> , mit der Sie sich anmelden möchten.<br> Ein einfacher Satz, der aus wenigen Wörtern besteht, an die Sie sich leicht erinnern werden.",
-        "ChoosePassPhraseSeeSuggestions": "Wählen Sie eine gute <strong>Passphrase<\/strong> , um Ihr Konto zu schützen. Sehen Sie sich die Vorschläge für einige Ideen an.",
+        "OneTimeCode": "Geben Sie den erhaltenen Code ein:",
+        "SetAsPrimary": "Stellen Sie {{1}} als meine primäre {{2}} ein",
+        "ChoosePassPhrase": "Wählen Sie eine <strong>Passphrase,<\/strong> mit der Sie sich anmelden möchten.<br> Ein einfacher Satz, der aus wenigen Wörtern besteht, an die Sie sich leicht erinnern werden.",
+        "ChoosePassPhraseSeeSuggestions": "Wählen Sie eine gute <strong>Passphrase,<\/strong> um Ihr Konto zu schützen. Sehen Sie sich die Vorschläge für einige Ideen an.",
         "LogOutAndTryAgain": "Melden Sie sich ab und versuchen Sie es erneut",
         "IfYouFeel": "Wenn Sie das Gefühl haben, dass etwas schief gelaufen ist, können Sie das tun",
         "SetIdentifierButtonTitle": "Von vorn anfangen",
-        "OneTimeCode": "Geben Sie den erhaltenen Code ein:",
         "ActivateMyAccount": "Mein Konto aktivieren"
     },
     "session": {
@@ -30,7 +43,7 @@
     "authorize": {
         "GetStarted": "Loslegen",
         "Authorize": "Autorisieren",
-        "TermsLabel": "Ich habe gelesen und stimme zu<br> zum {{link}}",
+        "TermsLabel": "Ich habe gelesen und stimme zu<br> bis {{link}}",
         "TermsTitle": "Bedingungen",
         "mustAgree": "Zuerst müssen Sie den Bedingungen zustimmen."
     },
@@ -41,10 +54,10 @@
     "notifications": {
         "title": "Erlaubnis",
         "prompt": "Möchten Sie Benachrichtigungen aktivieren? Sie erhalten Echtzeit-Updates zu Dingen, die Ihnen wichtig sind.",
-        "yes": "ja",
-        "no": "Nein",
-        "WelcomePleaseVerifyEmail": "Herzlich willkommen! Bitte bestätigen sie ihre E-Mail Adresse.",
-        "WelcomeVerifyEmail": "Herzlich willkommen! Bestätige deine Email-Adresse.",
+        "yes": "Ja",
+        "no": "NEIN",
+        "WelcomePleaseVerifyEmail": "Willkommen! Bitte bestätige deine Email Adresse.",
+        "WelcomeVerifyEmail": "Willkommen! Bestätige deine Email-Adresse.",
         "ForgetPass": "Hey, hast du deine Passphrase vergessen?",
         "PassphraseSaved": "Ihre Passphrase wurde gespeichert.",
         "IdentifierActivated": "Ihr {{type}} wurde aktiviert.",
@@ -70,11 +83,15 @@
         "inviteRole": "{{role}} einladen"
     },
     "invalidLanguageSelected": "Ungültige Sprache ausgewählt",
+    "platforms": {
+        "wallet": "Geldbörse",
+        "broadcast": "Übertragen"
+    },
     "login": {
-        "title": "Herzlich willkommen",
+        "title": "Willkommen",
         "directions": "Erstellen Sie ein Konto oder melden Sie sich an.",
         "directionsNoRegister": "Melden Sie sich an, wenn Sie ein Konto haben.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Geben Sie Ihre Passphrase ein:",
         "loginButton": "Loslegen",
         "registerButton": "Loslegen",
@@ -82,12 +99,13 @@
         "forgot": "Hab&#39;s vergessen?",
         "resendConfirm": "Möchten Sie eine Nachricht senden, um Ihre Passphrase zurückzusetzen?",
         "resendSuccess": "Suchen Sie nach einer Nachricht zum Zurücksetzen Ihrer Passphrase",
-        "resendClose": "Nah dran",
+        "resendClose": "Schließen",
         "noPassphrase": "Bevor Sie sich anmelden können, müssen Sie eine Passphrase festlegen, indem Sie auf den Link in Ihrer Aktivierungsnachricht klicken.",
         "notVerified": "Sie müssen sich selbst eine Aktivierungsnachricht senden, um sich anzumelden.",
         "emailExists": "Haben Sie schon einmal versucht, sich mit dieser E-Mail zu registrieren? Überprüfen Sie in diesem Fall Ihren Posteingang, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie auf , um die Nachricht erneut zu senden<\/a>",
         "mobileExists": "Haben Sie schon einmal versucht, sich mit dieser Handynummer zu registrieren? Überprüfen Sie in diesem Fall Ihre SMS, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie auf , um die Nachricht erneut zu senden<\/a>",
         "usingOther": "oder du kannst",
+        "connectPlatforms": "oder verbinden Sie sich mit:",
         "prompt": "Wählen Sie einen Benutzernamen:",
         "newUser": "oder erstellen Sie unten ein neues Konto",
         "placeholders": {
@@ -99,36 +117,28 @@
         "confirmTerms": "Akzeptieren Sie die Nutzungsbedingungen?",
         "facebookNoEmail": "Ihrem Facebook-Konto fehlt eine bestätigte E-Mail-Adresse. Melden Sie sich einfach auf native Weise an.",
         "picTooltip": "Sie können dieses Bild später ändern",
-        "wallet": {
-            "payload": "Melden Sie sich um {{timestamp}} bei {{host}} an",
+        "web3": {
+            "payload": "Melden Sie sich zur Zeit {{timestamp}} bei {{host}} an",
             "alert": {
                 "title": "Weiterleitung an Wallet",
                 "content": "Sobald Sie diesen Dialog schließen, werden Sie zu Ihrer Brieftasche weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
             }
-        },
-        "web3": {
-            "payload": "Melden Sie sich um {{timestamp}} bei {{host}} an",
-            "alert": {
-                "title": "Umleitung zu Wallet",
-                "content": "Sobald Sie diesen Dialog schließen, werden Sie zu Ihrer Brieftasche weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
-            }
-        },
-        "connectPlatforms": "oder verbinden Sie sich mit:"
+        }
     },
     "setIdentifier": {
         "title": "Fügen Sie eine Möglichkeit hinzu, sich anzumelden",
         "sendMessage": "Aktivierungsnachricht senden",
         "placeholders": {
             "identifier": "Geben Sie Ihre Handynummer oder E-Mail ein",
-            "mobile": "Geben sie Ihre Mobilfunknummer ein",
+            "mobile": "Geben Sie Ihre Mobiltelefonnummer ein",
             "email": "Geben sie ihre E-Mailadresse ein",
             "username": "Nutzername"
         }
     },
     "prompt": {
-        "title": "{{Platform}}-Konto",
+        "title": "{{Platform}} Konto",
         "areUsing": "Sie verwenden {{platform}} als",
-        "noLongerUsing": "Du bist nicht mehr mit {{platform}} als verbunden",
+        "noLongerUsing": "Sie sind nicht mehr mit {{platform}} as verbunden",
         "doAuth": "Melden Sie sich mit diesem Konto an",
         "doSwitch": "Wechseln Sie zu diesem Konto"
     },
@@ -139,26 +149,9 @@
         "Guest": "Gast",
         "Host": "Gastgeber"
     },
-    "avatar": {
-        "Someone": "Jemand"
-    },
     "web3": {
         "WrongMethod": "Falsche Vertragsmethode {{methodName}}",
         "ChangeWallet": "Geldbörse wechseln"
-    },
-    "identifier": {
-        "types": {
-            "email": "Email",
-            "mobile": "Handy, Mobiltelefon",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopiert! Jetzt können Sie es überall einfügen."
-    },
-    "platforms": {
-        "wallet": "Geldbörse",
-        "broadcast": "Übertragen"
     },
     "labels": {
         "addToPhonebook": "Zu meinen Telefonkontakten hinzufügen",

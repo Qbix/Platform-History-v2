@@ -14,7 +14,7 @@
                 "FilterInterests": "Пачніце ўводзіць цікавасць..."
             },
             "Interest": "Цікавасць",
-            "Location": "Месцазнаходжанне"
+            "Location": "Размяшчэнне"
         }
     },
     "webpage": {
@@ -24,7 +24,7 @@
             "BrowseTheWeb": "Праглядзіце",
             "WriteToStartConversation": "Напішыце свае думкі, каб пачаць размову",
             "StartConversation": "Пачаць размову",
-            "GotoConversation": "Перайсці да Размовы",
+            "GotoConversation": "Перайсці да размовы",
             "reset": "Скінуць",
             "edit": "Рэдагаваць",
             "link": "Спасылка",
@@ -43,8 +43,8 @@
             "displayType": "Артыкул"
         },
         "Websites\/slide": {
-            "description": "Слайд у прэзентацыі можа ўключаць HTML, аўдыё і г.д.",
-            "displayType": "Слайд"
+            "description": "Слайд у прэзентацыі можа ўключаць HTML, аўдыя і г.д.",
+            "displayType": "слайд"
         },
         "Websites\/presentation": {
             "description": "Прэзентацыя, якая складаецца з розных слайдаў",
@@ -67,7 +67,7 @@
             "displayType": "Рэкламная кампанія"
         },
         "Websites\/webpage": {
-            "description": "Уяўляе сабой вэб-сайт, метададзеныя якога былі ачышчаны",
+            "description": "Прадстаўляе вэб-сайт, метаданыя якога былі скрапаваныя",
             "displayType": "вэб-старонка"
         }
     }

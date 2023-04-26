@@ -7,13 +7,13 @@
                 "startTime": "وقت البدء",
                 "endDate": "تاريخ الانتهاء",
                 "endTime": "وقت النهاية",
-                "budget": "الدخل"
+                "budget": "ميزانية"
             },
             "interests": {
                 "Title": "تصفية حسب الفائدة",
-                "FilterInterests": "ابدأ في كتابة اهتمام ..."
+                "FilterInterests": "ابدأ بكتابة اهتمام ..."
             },
-            "Interest": "فائدة",
+            "Interest": "اهتمام",
             "Location": "موقع"
         }
     },
@@ -26,29 +26,29 @@
             "StartConversation": "ابدأ المحادثة",
             "GotoConversation": "اذهب إلى المحادثة",
             "reset": "إعادة ضبط",
-            "edit": "تعديل",
+            "edit": "يحرر",
             "link": "وصلة",
             "setUrl": "تعيين URL",
             "save": "يحفظ",
             "setClip": "قطع مقطع",
             "invalidURL": "URL غير صالح"
         },
-        "FileTooLarge": "الملف كبير جدًا للتخزين المؤقت. أقصى حجم للملف {{size}}",
+        "FileTooLarge": "الملف كبير جدًا للتخزين المؤقت. الحد الأقصى لحجم الملف {{size}}",
         "InvalidPDF": "الملف ليس ملف PDF صالحًا",
         "StartTypingTitleOrKeywords": "ابدأ في كتابة العنوان أو الكلمات الأساسية ..."
     },
     "types": {
         "Websites\/article": {
             "description": "مستند HTML يمكن للعديد من المستخدمين عرضه وتحريره",
-            "displayType": "مقالة - سلعة"
+            "displayType": "شرط"
         },
         "Websites\/slide": {
             "description": "شريحة في عرض تقديمي ، يمكن أن تتضمن HTML والصوت وما إلى ذلك.",
             "displayType": "الانزلاق"
         },
         "Websites\/presentation": {
-            "description": "عرض يتكون من شرائح مختلفة",
-            "displayType": "عرض"
+            "description": "عرض تقديمي يتكون من شرائح مختلفة",
+            "displayType": "عرض تقديمي"
         },
         "Websites\/advert\/unit": {
             "description": "وحدة إعلانية على موقع على شبكة الإنترنت",

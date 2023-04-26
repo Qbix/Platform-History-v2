@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "ลิงค์โปรโมท",
+                "link": "ลิงค์สำหรับโปรโมท",
                 "startDate": "วันที่เริ่มต้น",
                 "startTime": "เวลาเริ่มต้น",
                 "endDate": "วันที่สิ้นสุด",
@@ -11,7 +11,7 @@
             },
             "interests": {
                 "Title": "กรองตามความสนใจ",
-                "FilterInterests": "เริ่มพิมพ์สนใจ..."
+                "FilterInterests": "เริ่มพิมพ์ความสนใจ..."
             },
             "Interest": "ความสนใจ",
             "Location": "ที่ตั้ง"
@@ -22,7 +22,7 @@
             "Go": "ไป",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "เรียกดู",
-            "WriteToStartConversation": "เขียนความคิดของคุณเพื่อเริ่มต้นการสนทนา",
+            "WriteToStartConversation": "เขียนความคิดของคุณเพื่อเริ่มการสนทนา",
             "StartConversation": "เริ่มการสนทนา",
             "GotoConversation": "ไปที่การสนทนา",
             "reset": "รีเซ็ต",
@@ -33,9 +33,9 @@
             "setClip": "ตัดคลิป",
             "invalidURL": "URL ไม่ถูกต้อง"
         },
-        "FileTooLarge": "ไฟล์มีขนาดใหญ่เกินไปสำหรับการแคช ขนาดไฟล์สูงสุด {{size}}",
-        "InvalidPDF": "ไฟล์ไม่ใช่ PDF . ที่ถูกต้อง",
-        "StartTypingTitleOrKeywords": "เริ่มพิมพ์ชื่อหรือคำสำคัญ..."
+        "FileTooLarge": "ไฟล์ใหญ่เกินไปสำหรับการแคช ขนาดไฟล์สูงสุด {{size}}",
+        "InvalidPDF": "ไฟล์ไม่ใช่ PDF ที่ถูกต้อง",
+        "StartTypingTitleOrKeywords": "เริ่มพิมพ์ชื่อเรื่องหรือคีย์เวิร์ด..."
     },
     "types": {
         "Websites\/article": {
@@ -43,11 +43,11 @@
             "displayType": "บทความ"
         },
         "Websites\/slide": {
-            "description": "สไลด์ในงานนำเสนอ สามารถรวม HTML เสียง ฯลฯ",
+            "description": "สไลด์ในงานนำเสนอสามารถรวม HTML, เสียง ฯลฯ",
             "displayType": "สไลด์"
         },
         "Websites\/presentation": {
-            "description": "การนำเสนอประกอบด้วยสไลด์ต่างๆ",
+            "description": "งานนำเสนอประกอบด้วยสไลด์ต่างๆ",
             "displayType": "การนำเสนอ"
         },
         "Websites\/advert\/unit": {
@@ -55,19 +55,19 @@
             "displayType": "หน่วยโฆษณา"
         },
         "Websites\/advert\/placement": {
-            "description": "วิธีการจัดกลุ่มหน่วยโฆษณาภายใต้ชื่อ",
+            "description": "วิธีจัดกลุ่มหน่วยโฆษณาภายใต้ชื่อ",
             "displayType": "ตำแหน่งโฆษณา"
         },
         "Websites\/advert\/creative": {
-            "description": "เนื้อหาโฆษณา",
-            "displayType": "โฆษณาสร้างสรรค์"
+            "description": "เนื้อหาสำหรับโฆษณา",
+            "displayType": "สร้างสรรค์งานโฆษณา"
         },
         "Websites\/advert\/campaign": {
             "description": "แคมเปญโฆษณา",
             "displayType": "แคมเปญโฆษณา"
         },
         "Websites\/webpage": {
-            "description": "หมายถึงเว็บไซต์ที่มีการคัดลอกข้อมูลเมตา",
+            "description": "แสดงเว็บไซต์ที่มีการคัดลอกข้อมูลเมตา",
             "displayType": "หน้าเว็บ"
         }
     }

@@ -22,19 +22,19 @@
             "Go": "Ewch",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Pori",
-            "WriteToStartConversation": "Ysgrifennwch eich meddyliau i gychwyn y sgwrs",
+            "WriteToStartConversation": "Ysgrifennwch eich meddyliau i ddechrau&#39;r sgwrs",
             "StartConversation": "Dechrau Sgwrs",
             "GotoConversation": "Ewch i Sgwrs",
             "reset": "Ail gychwyn",
             "edit": "Golygu",
-            "link": "Cyswllt",
+            "link": "Dolen",
             "setUrl": "Gosod URL",
             "save": "Arbed",
             "setClip": "Clip Torri Allan",
             "invalidURL": "URL annilys"
         },
         "FileTooLarge": "Ffeil yn rhy fawr ar gyfer caching. Maint ffeil mwyaf {{size}}",
-        "InvalidPDF": "Nid yw ffeil yn PDF dilys",
+        "InvalidPDF": "Nid yw&#39;r ffeil yn PDF dilys",
         "StartTypingTitleOrKeywords": "Dechreuwch deipio teitl neu eiriau allweddol..."
     },
     "types": {

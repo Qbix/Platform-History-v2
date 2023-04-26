@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "inden for {{1}}"
     },
     "units": {
@@ -20,7 +20,8 @@
     "location": {
         "interested": "Jeg er interesseret i ting, der finder sted inden for {{select}} af",
         "update": "Opdater min placering",
-        "prompt": "{{ClickOrTap}} her for at<br> sæt din<br> Beliggenhed",
+        "set": "Indstil min placering",
+        "prompt": "{{ClickOrTap}} her til<br> sæt din<br> Beliggenhed",
         "myCurrentLocation": "Min nuværende placering",
         "enterAddress": "Indtast en adresse",
         "enterPostcode": "Indtast venligst dit postnummer\/postnummer",
@@ -42,8 +43,7 @@
         },
         "dialog": {
             "title": "Vælg Placering"
-        },
-        "set": "Indstil min placering"
+        }
     },
     "areas": {
         "filterPlaceholder": "Noget område inden for dette sted?",

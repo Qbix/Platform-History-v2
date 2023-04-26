@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} ng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "{{1}} içinde"
     },
     "units": {
@@ -18,10 +18,10 @@
         "inches": "inç"
     },
     "location": {
-        "interested": "{{select}} içinde gerçekleşen şeylerle ilgileniyorum",
+        "interested": "{{select}} saat içinde gerçekleşen şeylerle ilgileniyorum.",
         "update": "Konumumu Güncelle",
         "set": "Konumumu Ayarla",
-        "prompt": "{{ClickOrTap}} buraya<br> seninkini ayarla<br> yer",
+        "prompt": "{{ClickOrTap}} buraya<br> senin ayarla<br> konum",
         "myCurrentLocation": "şu anki konumum",
         "enterAddress": "Bir adres girin",
         "enterPostcode": "Lütfen posta kodunuzu \/ posta kodunuzu girin",
@@ -34,12 +34,12 @@
             "title": "Bu konum kaydedilsin mi?",
             "message": "Gelecekte bu konumu tekrar kullanmayı planlıyor musunuz?",
             "ok": "Evet",
-            "cancel": "Numara"
+            "cancel": "HAYIR"
         },
         "add": {
             "title": "Bu konumu adlandırın",
             "placeholder": "Ev, İş vb.",
-            "ok": "Kayıt etmek"
+            "ok": "Kaydetmek"
         },
         "dialog": {
             "title": "Konum seç"
@@ -57,15 +57,15 @@
     },
     "types": {
         "Places\/locations": {
-            "description": "konumlar topluluğu",
-            "displayType": "Konumlar"
+            "description": "bir dizi konum",
+            "displayType": "konumlar"
         },
         "Places\/location": {
             "description": "Bir binayı, mekanı, gemiyi, parkı vb. temsil eder.",
             "displayType": "Konum"
         },
         "Places\/area": {
-            "description": "Oda veya süit gibi bir konum içindeki bir alanı temsil eder",
+            "description": "Oda veya süit gibi bir konumdaki bir alanı temsil eder",
             "displayType": "Alan"
         },
         "Places\/floor": {
@@ -77,12 +77,12 @@
             "displayType": "Kolon"
         },
         "Places\/nearby": {
-            "description": "Bir geohash&#39;in belirli bir mesafesindeki şeyler için kategori",
+            "description": "Geohash&#39;ın belirli bir mesafesindeki şeyler için kategori",
             "displayType": "Yakın yerler"
         },
         "Places\/interest": {
-            "description": "İlgi alanıyla eşleşen, bir geohash&#39;in belirli bir mesafesindeki şeyler için kategori",
-            "displayType": "İlgi alanları"
+            "description": "Bir ilgi alanıyla eşleşen, bir geohash&#39;ın belirli bir mesafesindeki şeyler için kategori",
+            "displayType": "ilgi alanları"
         }
     }
 }

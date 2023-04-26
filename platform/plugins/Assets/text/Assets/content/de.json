@@ -1,26 +1,50 @@
 {
+    "errors": {
+        "Error": "Fehler",
+        "WalletAbsent": "Die Brieftasche ist nicht verbunden.",
+        "Rendering": "Beim Rendern von <span class='url'>{{1}}<\/span> sind Fehler aufgetreten",
+        "PriceRequired": "Preis erforderlich!",
+        "NameRequired": "Name erforderlich!",
+        "PriceInvalid": "Preis ungültig!",
+        "AmountInvalid": "Betrag ungültig!",
+        "TransactionFailed": "Transaktion fehlgeschlagen",
+        "ChainNotSupported": "Die ausgewählte Kette wird nicht unterstützt. Unterstützte Kette: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Benötigen Sie eine MetaMask-Verbindung, um mit der Anwendung zu arbeiten",
+        "UserNotLoggedInMetaMask": "Der Benutzer ist nicht bei MetaMask angemeldet",
+        "CurrencyNotFound": "Währung nicht gefunden",
+        "WrongChain": "Diese NFT erstellt unter „ {{chain}} “. Bitte verwenden Sie diese Kette.",
+        "NoRecipientSelected": "Kein Empfänger ausgewählt",
+        "NotEnoughPermissionsWallet": "Nicht genügend Berechtigungen zum Lesen der Brieftasche dieses Benutzers",
+        "ThisUserHaveNoWallet": "Diesem Benutzer ist kein Wallet zugewiesen",
+        "TheWalletOfThisUserInvalid": "Die Brieftasche dieses Benutzers ist ungültig",
+        "WalletInvalid": "Wallet-Adresse ungültig"
+    },
+    "admin": {
+        "Title": "Vermögen administrativ",
+        "SubscriptionTitle": "Abonnementpläne"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Zum Bezahlen tippen"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: Belastung verarbeitet für {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : Belastung für {{call 'user.displayName'}} verarbeitet",
         "ThankYouForYourPayment": "Vielen Dank für Ihre Zahlung an {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} hat {{plan.title}} abonniert",
-        "YouSubscribedTo": "Du hast {{plan.title}} abonniert",
+        "SubscribedTo": "{{call 'user.displayName'}} bis {{plan.title}} abonniert",
+        "YouSubscribedTo": "Sie haben {{plan.title}} abonniert",
         "Assets\/credits\/alert": "Sie haben eine Benachrichtigung zu Ihrem Konto"
     },
     "charge": {
-        "Subject": "Sie erhalten eine Zahlung von {{displayAmount}} von {{call 'publisher.displayName'}} von &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hey, dies soll dich nur darüber informieren, dass {{1}} von {{4}} {{2}} für {{3}} in Rechnung gestellt wurde"
+        "Subject": "Sie erhalten eine Zahlung von {{displayAmount}} von {{call 'publisher.displayName'}} durch &quot; {{description}} &quot;",
+        "HasBeenCharged": "Hey, das soll dich nur darüber informieren, {{1}} von {{4}} {{2}} für {{3}} in Rechnung gestellt wurden"
     },
     "charged": {
-        "Subject": "Vielen Dank für Ihre Zahlung für &quot;{{description}}&quot;",
-        "HavePaid": "Hallo {{1}}, dies ist nur eine kurze Bestätigung, dass Sie erfolgreich {{2}} an {{3}} für {{4}} bezahlt haben"
+        "Subject": "Vielen Dank für Ihre Zahlung für &quot; {{description}} &quot;",
+        "HavePaid": "Hey {{1}} , dies ist nur eine kurze Bestätigung, dass du erfolgreich {{2}} zu {{3}} für {{4}} bezahlt hast"
     },
     "payment": {
         "AboutOrder": "Infos zur Bestellung",
-        "PaymentMethod": "Zahlungsmethode",
+        "PaymentMethod": "Bezahlverfahren",
         "ContactInfo": "Kontaktinformation",
         "Pay": "Zahlen",
         "PaymentSucceeded": "Zahlung erfolgreich abgeschlossen",
@@ -36,25 +60,23 @@
     },
     "credits": {
         "InviteAcceptedBy": "Einladung angenommen von {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} hat den Vornamen eingegeben",
-        "Streams_user_lastname": "{{invitedUserName}} hat den Nachnamen eingegeben",
-        "Streams_user_icon": "{{invitedUserName}} eingegebenes Symbol",
-        "Places_user_location": "{{invitedUserName}} hat den Standort eingegeben",
-        "Streams_greeting": "{{invitedUserName}} hat die Begrüßung eingegeben",
-        "YouHaveCreditsToStart": "Du hast {{amount}} Credits zum Starten",
-        "PaymentFor": "Zahlung für &quot;{{1}}&quot;",
-        "PaymentTo": "Zahlung an {{1}}",
-        "PaymentToUser": "Zahlung an {{toUserName}}",
-        "CreatePaidStream": "zum Erstellen von {{toStreamName}}",
-        "JoinedPaidStream": "für die Reservierung in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "zum Erstellen der Community &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "als Reservierungsrückerstattung in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "InvitedUserFilledStream": "{{invitedUserName}} gefüllt {{FilledStreamTitle}}",
+        "ForFillingStream": "Zum Befüllen {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "Sie haben zu Beginn {{amount}} Credits",
+        "PaymentFor": "Zahlung für &quot; {{1}} &quot;",
+        "PaymentTo": "Zahlung bis {{1}}",
+        "PaymentToUser": "Zahlung bis {{toUserName}}",
+        "CreatePrivateChat": "für privaten Chat mit {{toUserName}}",
+        "CreatePaidStream": "für die Erstellung von {{toStreamName}}",
+        "JoinedPaidStream": "für Reservierung in &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "zum Erstellen der Community &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "als Reservierungsrückerstattung in &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "{{amount}} Credits gekauft",
-        "BonusCredits": "Bonus-{{amount}}-Credits",
+        "BonusCredits": "Bonus {{amount}} Credits",
         "BuyAmountCredits": "Kaufen Sie {{amount}} Credits",
-        "WatchClip": "{{amount}} Credits für das Ansehen von {{fromStreamTitle}} verdient",
+        "WatchClip": "{{amount}} Credits für das Ansehen {{fromStreamTitle}} verdient",
         "MissingCredits": "Fehlende Credits",
-        "YouMissingCredits": "Sie benötigen zusätzliche {{amount}} Credits, um fortzufahren.",
+        "YouMissingCredits": "Sie benötigen weitere {{amount}} Credits, um fortzufahren.",
         "BuyCredits": "Guthaben kaufen",
         "BuyBonus": "Der Kauf von {{amount}} Credits auf einmal führt zu einem Bonus von {{bonus}} Credits.",
         "Buy": "Besorgen",
@@ -63,20 +85,18 @@
         "ErrorInvalidAmount": "Betrag ungültig",
         "ErrorInvalidCurrency": "Leider unterstützen wir die Währung {{currency}} noch nicht",
         "forMessages": {
-            "BoughtCredits": "{{amount}} Guthaben",
-            "BonusCredits": "{{amount}} Guthaben"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} gefüllt {{FilledStreamTitle}}",
-        "ForFillingStream": "Zum Füllen {{FilledStreamTitle}}",
-        "CreatePrivateChat": "für privaten Chat mit {{toUserName}}"
+            "BoughtCredits": "{{amount}} Credits",
+            "BonusCredits": "{{amount}} Credits"
+        }
     },
     "history": {
         "Date": "Datum",
-        "Amount": "Höhe",
+        "Amount": "Menge",
         "Description": "Beschreibung",
         "Client": "Klient",
-        "To": "zu",
-        "From": "von",
+        "User": "Benutzer",
+        "To": "Zu",
+        "From": "aus",
         "SeeHistory": "Siehe Zahlungsverlauf für {{1}}",
         "HistoryEmpty": "Sie haben noch keine Daten",
         "PaymentFor": "{{amount}} Credits gesendet",
@@ -84,11 +104,11 @@
         "PaymentToUser": "{{amount}} Credits gesendet",
         "CreatePaidStream": "{{amount}} Credits ausgegeben",
         "WatchClip": {
-            "+": "{{amount}} Credits verdient",
+            "+": "{{amount}} Credits verdient",
             "-": "{{amount}} Credits ausgegeben"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} Credits verdient",
+            "+": "{{amount}} Credits verdient",
             "-": "{{amount}} Credits ausgegeben"
         },
         "LeftPaidStream": {
@@ -97,23 +117,22 @@
         },
         "CreatedCommunity": "{{amount}} Credits ausgegeben",
         "BoughtCredits": "{{amount}} Credits gekauft",
-        "BonusCredits": "Bonus-Credits von {{amount}} erhalten",
-        "InviteAcceptedBy": "{{amount}} Credits verdient",
-        "Streams_user_firstname": "{{amount}} Credits verdient",
-        "Streams_user_lastname": "{{amount}} Credits verdient",
-        "Streams_user_icon": "{{amount}} Credits verdient",
-        "Places_user_location": "{{amount}} Credits verdient",
-        "Streams_greeting": "{{amount}} Credits verdient",
-        "YouHaveCreditsToStart": "{{amount}} Credits verdient",
-        "User": "Benutzer"
+        "BonusCredits": "{{amount}} Bonus-Credits erhalten",
+        "InviteAcceptedBy": "{{amount}} Credits verdient",
+        "Streams_user_firstname": "{{amount}} Credits verdient",
+        "Streams_user_lastname": "{{amount}} Credits verdient",
+        "Streams_user_icon": "{{amount}} Credits verdient",
+        "Places_user_location": "{{amount}} Credits verdient",
+        "Streams_greeting": "{{amount}} Credits verdient",
+        "YouHaveCreditsToStart": "{{amount}} Credits verdient"
     },
     "subscriptions": {
         "infoTitle": "Zahlungsinformationen festlegen",
         "confirm": {
             "title": "Abonnement starten",
-            "message": "Möchten Sie {{title}} abonnieren?",
+            "message": "Ein wiederkehrendes Abonnement für „ {{title}} “ starten?",
             "ok": "OK",
-            "cancel": "Abbrechen"
+            "cancel": "Stornieren"
         },
         "CreditOrDebitCard": "Kredit- oder Debitkarte",
         "SubscribePayment": "Zahlung abonnieren",
@@ -131,7 +150,7 @@
         "Period": "Zeitraum",
         "Price": "Preis",
         "AreYouSureUnsubscribe": "Möchten Sie dieses Abonnement wirklich kündigen?",
-        "YouUnsubscribedFromPlan": "Sie haben sich vom Tarif „{{planTitle}}“ abgemeldet. Ihnen werden keine Kosten in Rechnung gestellt, aber Ihr Abonnement läuft bis {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Sie haben sich vom Plan &quot; {{planTitle}} &quot; abgemeldet. Ihnen werden keine Kosten in Rechnung gestellt, aber Ihr Abonnement läuft bis {{endsIn}} weiter",
         "plan": {
             "TitlePlaceholder": "Plantitel",
             "PricePlaceholder": "Preis",
@@ -145,9 +164,9 @@
         "BuyAmountCredits": "Kaufen Sie {{amount}} Credits",
         "confirm": {
             "title": "Bezahlen",
-            "message": "Sind Sie damit einverstanden, {{symbol}}{{amount}} zu zahlen?",
+            "message": "Sind Sie damit einverstanden, {{symbol}} {{amount}} zu zahlen?",
             "ok": "OK",
-            "cancel": "Abbrechen"
+            "cancel": "Stornieren"
         }
     },
     "types": {
@@ -174,25 +193,36 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} Credits verdient"
+            "content": "{{amount}} Credits verdient"
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} Credits gekauft"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus-{{amount}}-Credits"
+            "content": "Bonus {{amount}} Credits"
         },
         "Assets\/credits\/spent": {
             "content": "{{amount}} Credits ausgegeben"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} Guthaben an {{toUserName}} gesendet"
+            "content": "{{amount}} Credits an {{toUserName}} gesendet"
         },
         "Assets\/credits\/received": {
-            "content": "{{amount}} Guthaben von {{fromUserName}} erhalten"
+            "content": "{{amount}} Credits von {{fromUserName}} erhalten"
         },
         "Assets\/credits\/alert": {
-            "content": "Sie haben wenig Guthaben auf Ihrem Konto. Bitte besuchen Sie <a href='{{link}}'>diesen Link<\/a> , um weitere Credits zu kaufen."
+            "content": "Sie haben wenig Guthaben auf Ihrem Konto. Bitte besuchen Sie <a href='<i translate='no'>999 &#39;&gt;diesen Link,<\/a> um mehr Credits zu kaufen."
+        }
+    },
+    "billing": {
+        "Title": "Vermögensabrechnung",
+        "CreditsMinimum": "Mindestguthaben",
+        "CreditsToAdd": "Credits hinzuzufügen",
+        "Save": "Speichern",
+        "ThisLink": "dieser Link",
+        "errors": {
+            "CreditsMinimumNegative": "Das Credit-Minimum darf nicht negativ sein",
+            "CreditsToAddNegative": "Hinzuzufügende Credits dürfen nicht negativ sein"
         }
     },
     "services": {
@@ -203,24 +233,42 @@
             "LinkPlaceholder": "Zusatzinfolink setzen",
             "DescriptionPlaceholder": "Leistungsbeschreibung",
             "SaveService": "Dienst speichern",
-            "SelectRequiredParticipants": "Erforderliche Teilnehmer",
+            "SelectRequiredParticipants": "Erforderliche verwandte Teilnehmer",
             "RequiredParticipantsDesc": "Bitte wählen Sie entsprechende Teilnehmer aus, die für die Nutzung dieses Dienstes erforderlich sind (z. B. Haustiere für &quot;Hundeshow&quot; oder Kinder für &quot;Kinderferien&quot; usw.). Wenn der Dienst bezahlt wird, muss der Benutzer auch für jeden zugehörigen Teilnehmer bezahlen."
+        },
+        "EditServiceTemplate": {
+            "Title": "Dienst bearbeiten"
         },
         "ManageServiceTemplates": "Dienstvorlagen verwalten",
         "ManageServices": "Dienste verwalten",
-        "Free": "Kostenlos",
+        "Free": "Frei",
         "OptionalContribution": "Optionaler Beitrag",
         "RequiredPayment": "Erforderliche Zahlung",
         "AreYouSureDelete": "Möchten Sie diesen Dienst wirklich löschen?",
-        "AmountServicesRelated": "Es gibt {{amount}} Verfügbarkeiten für diesen Dienst. Sie werden ebenfalls entfernt.",
-        "EditServiceTemplate": {
-            "Title": "Dienst bearbeiten"
-        }
+        "AmountServicesRelated": "Es gibt {{amount}} Verfügbarkeiten für diesen Dienst. Sie werden ebenfalls entfernt."
+    },
+    "transfer": {
+        "SelectRecipient": "Empfänger auswählen",
+        "TransactionSuccess": "Transaktionserfolg",
+        "OrTypeWalletAddress": "ODER geben Sie die Wallet-Adresse des Empfängers ein"
     },
     "NFT": {
-        "Title": "Informationen über {{title}} NFT",
-        "Description": "Ausführliche Informationen zu NFT",
-        "FixedBid": "Kaufe jetzt",
+        "Title": "Titel",
+        "Name": "Name",
+        "EnterName": "Name eingeben",
+        "EnterAuthorWallet": "Geben Sie die Brieftasche des Autors ein",
+        "InformationAboutTitle": "Informationen zu {{title}} NFT",
+        "Description": "Beschreibung",
+        "DetailedInformationAboutNFT": "Ausführliche Informationen zu NFT",
+        "PresaleStarts": "Der Vorverkauf beginnt am 23. Dezember",
+        "OwnerUserNotFound": "Der Besitzer dieses NFT ist nicht in unserer Anwendung registriert.",
+        "BuyNow": "Kaufe jetzt",
+        "Buy": "Besorgen",
+        "Add": "Hinzufügen",
+        "Remove": "Entfernen",
+        "NoNFTyet": "Noch keine NFTs",
+        "Conversation": "Gespräch",
+        "Create": "Erstellen",
         "CurrentBid": "Aktuelles Gebot",
         "StartingIn": "Ab in",
         "EndingIn": "Endet in",
@@ -230,11 +278,14 @@
         "CreateYourNFT": "Erstellen Sie Ihre NFT",
         "Royalties": "Lizenzgebühren",
         "RoyaltyPlaceholder": "Optional. Betrag, der vor der Übertragung an den Ersteller gezahlt wurde.",
-        "ExpirationDate": "Ablaufdatum",
+        "ExpirationDate": "Verfallsdatum",
         "StartingDate": "Startdatum",
         "BidsBelowThisAmount": "Gebote unter diesem Betrag werden nicht zugelassen",
         "MinimumBid": "Mindestgebot",
+        "Author": "Autor",
         "Price": "Preis",
+        "Commission": "Kommission",
+        "EnterCommission": "Provision eingeben",
         "Owner": "Eigentümer",
         "SelectCategory": "Kategorie wählen",
         "Day": "Tag",
@@ -252,18 +303,26 @@
         "LoremIpsum": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie.",
         "PutOnSale": "Zum Verkauf anbieten",
         "PutOffSale": "Vom Verkauf zurücktreten",
-        "Transfer": "Transfer",
+        "Transfer": "Überweisen",
+        "Actions": "Aktionen",
+        "Claim": "Beanspruchen",
+        "ClaimNFT": "NFT beanspruchen",
+        "Unlocking": "Entsperren",
+        "Unlock": "Freischalten",
         "Update": "Aktualisieren",
         "UpdateToken": "Token aktualisieren",
+        "UpdateNFT": "NFT aktualisieren",
         "CreateToken": "Token erstellen",
         "PlaceBid": "Gebot abgeben",
         "SoldOut": "Verkauft",
+        "NotOnSale": "Nicht im Angebot",
         "NftName": "NFT-Name",
         "DescribeYourNFT": "Bitte beschreiben Sie Ihre NFT",
         "NftPicture": "Bild zur Darstellung von NFT",
         "NftMovie": "Film zur Darstellung von NFT",
         "UploadMovie": "Film hochladen",
         "MovieSource": "Filmquelle",
+        "MovieURL": "Film-URL",
         "UploadFile": "Eine Datei hochladen",
         "PutOnMarketplace": "Auf den Marktplatz stellen",
         "InstantPurchase": "Geben Sie den Preis ein, damit Benutzer Ihr NFT sofort kaufen können",
@@ -271,60 +330,9 @@
         "TimedAuction": "Zeitgesteuerte Auktion",
         "OpenForBids": "Offen für Gebote",
         "PriceOnePiece": "Geben Sie den Preis für ein Stück ein",
+        "EnterPrice": "Preis eingeben",
         "EnterMinimumBid": "Geben Sie das Mindestgebot ein",
         "SelectChain": "Kette auswählen",
-        "WrongChain": "Diese NFT wurde unter &quot;{{chain}}&quot; erstellt. Bitte verwenden Sie diese Kette.",
-        "import": {
-            "importNFT": "Importieren von NFTs",
-            "fileNotFound": "Entschuldigung, CSV-Datei nicht gefunden.",
-            "fileEmpty": "Die CSV-Datei ist leider leer.",
-            "userIdNotFound": "Benutzer vorhanden, aber ID leer",
-            "errorLine": "Linie {{1}}",
-            "fieldNotFound": "Erforderliches Feld &quot;{{1}}&quot; nicht gefunden",
-            "taskStreamInvalid": "Taskstream ungültig",
-            "instructionsEmpty": "Taskstream-Anweisungen leer",
-            "complete": "Vollständig",
-            "activateUsers": "Aktivierungsnachricht an Benutzer senden?",
-            "importProgress": "Fortschritt",
-            "importOptions": "Optionen",
-            "sampleCSV": "Beispiel-CSV herunterladen",
-            "fileLabel": "Tabelle hochladen:",
-            "errorsTitle": "Fehler aufgetreten",
-            "importAttributes": "NFT-Attribute importieren",
-            "displayTypeEmpty": "Anzeigetyp für &quot;{{1}}&quot; nicht gefunden"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Filtern Sie nach NFT-Sammlungen",
-                "ShowNFTCollection": "NFT-Kollektion anzeigen in ...",
-                "AllCollections": "Alle Sammlungen"
-            },
-            "ByUser": {
-                "AllAuthors": "Alle Autoren",
-                "AllUsers": "Alle",
-                "FilterByAuthors": "Nach Autoren filtern"
-            }
-        },
-        "Back": "Zurück zur Sammlung",
-        "Name": "Name",
-        "EnterName": "Name eingeben",
-        "EnterAuthorWallet": "Geben Sie die Brieftasche des Autors ein",
-        "InformationAboutTitle": "Informationen über {{title}} NFT",
-        "DetailedInformationAboutNFT": "Ausführliche Informationen zu NFT",
-        "PresaleStarts": "Der Vorverkauf beginnt am 23. Dezember",
-        "OwnerUserNotFound": "Der Besitzer dieses NFT ist nicht in unserer Anwendung registriert.",
-        "BuyNow": "Kaufe jetzt",
-        "Buy": "Besorgen",
-        "Conversation": "Gespräch",
-        "Create": "Schaffen",
-        "Author": "Autor",
-        "Commission": "Kommission",
-        "EnterCommission": "Provision eingeben",
-        "Actions": "Aktionen",
-        "UpdateNFT": "NFT aktualisieren",
-        "NotOnSale": "Nicht im Angebot",
-        "MovieURL": "Film-URL",
-        "EnterPrice": "Preis eingeben",
         "Currency": "Währung",
         "AreYouSureDeleteImage": "Möchten Sie das Bild wirklich entfernen?",
         "AreYouSureDeleteVideo": "Möchten Sie das Video wirklich entfernen?",
@@ -355,7 +363,7 @@
         "contract": {
             "CreateContract": "Vertrag erstellen",
             "SelectContract": "Vertrag auswählen",
-            "CreateContractFor": "Vertrag erstellen für {{userName}}",
+            "CreateContractFor": "Vertrag für {{userName}} erstellen",
             "ContractFor": "Vertrag für {{userName}}",
             "UpdateContract": "Vertrag aktualisieren",
             "TransferOwnership": "Eigentum übertragen",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "Aktuelle BaseURL",
             "ContractAddressAbsent": "Vertragsadresse fehlt",
             "FactoryAddressAbsent": "Werksadresse fehlt",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Titel erforderlich",
             "SymbolRequired": "Symbol erforderlich",
             "TypeContractName": "Vertragsname",
@@ -375,6 +383,38 @@
             "Title": "Wettbewerbe",
             "NewContest": "Neuer Wettbewerb"
         },
+        "import": {
+            "importNFT": "Importieren von NFTs",
+            "importAttributes": "NFT-Attribute importieren",
+            "fileNotFound": "Entschuldigung, CSV-Datei nicht gefunden.",
+            "fileEmpty": "Die CSV-Datei ist leider leer.",
+            "userIdNotFound": "Benutzer vorhanden, aber ID leer",
+            "errorLine": "Zeile {{1}}",
+            "fieldNotFound": "Pflichtfeld &quot; {{1}} &quot; nicht gefunden",
+            "displayTypeEmpty": "Anzeigetyp für „ {{1}} “ nicht gefunden",
+            "taskStreamInvalid": "Taskstream ungültig",
+            "instructionsEmpty": "Taskstream-Anweisungen leer",
+            "complete": "Vollständig",
+            "activateUsers": "Aktivierungsnachricht an Benutzer senden?",
+            "importProgress": "Fortschritt",
+            "importOptions": "Optionen",
+            "sampleCSV": "Beispiel-CSV herunterladen",
+            "fileLabel": "Tabelle hochladen:",
+            "errorsTitle": "Fehler aufgetreten"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filtern Sie nach NFT-Sammlungen",
+                "ShowNFTCollection": "NFT-Kollektion anzeigen in ...",
+                "AllCollections": "Alle Sammlungen"
+            },
+            "ByUser": {
+                "AllAuthors": "Alle Autoren",
+                "AllUsers": "Alle",
+                "FilterByAuthors": "Nach Autoren filtern"
+            }
+        },
+        "Back": "Zurück zur Sammlung",
         "attributes": {
             "Title": "Attribute verwalten",
             "Attributes": "Attribute",
@@ -398,13 +438,6 @@
             "aboutPlaceholder": "Bio bearbeiten",
             "SureLogOut": "Möchten Sie sich wirklich abmelden?"
         },
-        "Add": "Hinzufügen",
-        "Remove": "Entfernen",
-        "NoNFTyet": "Noch keine NFTs",
-        "Claim": "Beanspruchen",
-        "ClaimNFT": "NFT beanspruchen",
-        "Unlocking": "Entsperren",
-        "Unlock": "Freischalten",
         "sales": {
             "factory": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "Freischalten",
             "Locked": "Gesperrt",
             "CustodianAddress": "Depotadresse",
-            "TokenWasClaimed": "Token &quot;{{title}}&quot; wurde beansprucht",
-            "TokenWasLocked": "Token &quot;{{title}}&quot; wurde gesperrt",
-            "TokenWasUnlocked": "Token &quot;{{title}}&quot; wurde entsperrt"
+            "TokenWasClaimed": "Der Token „ {{title}} “ wurde beansprucht",
+            "TokenWasLocked": "Token „ {{title}} “ wurde gesperrt",
+            "TokenWasUnlocked": "Token „ {{title}} “ wurde freigeschaltet"
         }
-    },
-    "errors": {
-        "Error": "Fehler",
-        "WalletAbsent": "Die Brieftasche ist nicht verbunden.",
-        "Rendering": "Beim Rendern von <span class='url'>{{1}}<\/span> sind Fehler aufgetreten",
-        "PriceRequired": "Preis erforderlich!",
-        "NameRequired": "Name erforderlich!",
-        "PriceInvalid": "Preis ungültig!",
-        "TransactionFailed": "Transaktion fehlgeschlagen",
-        "ChainNotSupported": "Die ausgewählte Kette wird nicht unterstützt. Unterstützte Kette: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Benötigen Sie eine MetaMask-Verbindung, um mit der Anwendung zu arbeiten",
-        "UserNotLoggedInMetaMask": "Der Benutzer ist nicht bei MetaMask angemeldet",
-        "CurrencyNotFound": "Währung nicht gefunden",
-        "WrongChain": "Diese NFT wurde unter &quot;{{chain}}&quot; erstellt. Bitte verwenden Sie diese Kette.",
-        "AmountInvalid": "Betrag ungültig!",
-        "NoRecipientSelected": "Kein Empfänger ausgewählt",
-        "NotEnoughPermissionsWallet": "Nicht genügend Berechtigungen zum Lesen der Brieftasche dieses Benutzers",
-        "ThisUserHaveNoWallet": "Diesem Benutzer ist kein Wallet zugewiesen",
-        "TheWalletOfThisUserInvalid": "Die Brieftasche dieses Benutzers ist ungültig",
-        "WalletInvalid": "Wallet-Adresse ungültig"
-    },
-    "admin": {
-        "Title": "Vermögen administrativ",
-        "SubscriptionTitle": "Abonnementpläne"
-    },
-    "billing": {
-        "Title": "Vermögensabrechnung",
-        "CreditsMinimum": "Mindestguthaben",
-        "CreditsToAdd": "Credits hinzuzufügen",
-        "Save": "Speichern",
-        "ThisLink": "dieser Link",
-        "errors": {
-            "CreditsMinimumNegative": "Das Credit-Minimum darf nicht negativ sein",
-            "CreditsToAddNegative": "Hinzuzufügende Credits dürfen nicht negativ sein"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Empfänger auswählen",
-        "TransactionSuccess": "Transaktionserfolg",
-        "OrTypeWalletAddress": "ODER geben Sie die Wallet-Adresse des Empfängers ein"
     },
     "currencies": {
         "choose": "Wählen Sie eine Währung"

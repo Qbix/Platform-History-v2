@@ -1,17 +1,49 @@
 {
+    "errors": {
+        "Error": "Памылка",
+        "WalletAbsent": "Кашалёк не падключаны.",
+        "Rendering": "Былі памылкі падчас рэндэрынгу <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Патрабуецца цана!",
+        "NameRequired": "Патрабуецца імя!",
+        "PriceInvalid": "Цана несапраўдная!",
+        "AmountInvalid": "Сума несапраўдная!",
+        "TransactionFailed": "Збой транзакцыі",
+        "ChainNotSupported": "Выбраны ланцужок не падтрымліваецца. Падтрымліваецца ланцуг: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Для працы з дадаткам неабходна падключыць MetaMask",
+        "UserNotLoggedInMetaMask": "Карыстальнік не ўвайшоў у MetaMask",
+        "CurrencyNotFound": "Валюта не знойдзена",
+        "WrongChain": "Гэты NFT створаны пад « {{chain}} ». Калі ласка, выкарыстоўвайце гэты ланцужок.",
+        "NoRecipientSelected": "Атрымальнік не выбраны",
+        "NotEnoughPermissionsWallet": "Недастаткова правоў для чытання кашалька гэтага карыстальніка",
+        "ThisUserHaveNoWallet": "Гэтаму карыстальніку не прызначаны кашалёк",
+        "TheWalletOfThisUserInvalid": "Кашалёк гэтага карыстальніка несапраўдны",
+        "WalletInvalid": "Несапраўдны адрас кашалька"
+    },
+    "admin": {
+        "Title": "Актывы адміністрацыйныя",
+        "SubscriptionTitle": "Планы падпіскі"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Націсніце, каб аплаціць"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: плата апрацавана на {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Дзякуй за ваш плацёж на адрас {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} падпісаўся на {{plan.title}}",
-        "YouSubscribedTo": "Вы былі падпісаныя на {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : апрацавана плата за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Дзякуй за аплату на {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} падпісаліся на {{plan.title}}",
+        "YouSubscribedTo": "Вы падпісаны на {{plan.title}}",
         "Assets\/credits\/alert": "У вас ёсць абвестка, звязаная з вашым уліковым запісам"
     },
+    "charge": {
+        "Subject": "Вы атрымліваеце аплату {{displayAmount}} з {{call 'publisher.displayName'}} праз « {{description}} »",
+        "HasBeenCharged": "Гэй, гэта проста каб паведаміць вам, што {{1}} спагнана {{2}} за {{3}} на {{4}}"
+    },
+    "charged": {
+        "Subject": "Дзякуй за аплату &quot; {{description}} &quot;",
+        "HavePaid": "Прывітанне, {{1}} , гэта толькі кароткае пацверджанне таго, што вы паспяхова заплацілі {{2}} да {{3}} за {{4}}"
+    },
     "payment": {
-        "AboutOrder": "Інфармацыя пра заказ",
+        "AboutOrder": "Інфармацыя аб замове",
         "PaymentMethod": "Спосаб аплаты",
         "ContactInfo": "Кантактная інфармацыя",
         "Pay": "Плаціць",
@@ -20,7 +52,7 @@
         "FailTryAgain": "Ваш плацёж не прайшоў, паспрабуйце яшчэ раз",
         "SomethingWrong": "Нешта пайшло не так",
         "PaymentStatus": "Статус аплаты",
-        "PayTo": "Аплаціць {{displayName}}",
+        "PayTo": "Плаці {{displayName}}",
         "ChooseCurrency": "Выберыце валюту",
         "YouCanSendUpTo": "Вы можаце адправіць да {{amount}} {{symbol}}",
         "Send": "Адправіць",
@@ -28,82 +60,77 @@
     },
     "credits": {
         "InviteAcceptedBy": "Запрашэнне прынята {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} запоўніў {{FilledStreamTitle}}",
+        "ForFillingStream": "Для запаўнення {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "У вас ёсць {{amount}} крэдытаў для пачатку",
-        "PaymentFor": "Аплата за &quot;{{1}}&quot;",
-        "PaymentTo": "Аплата {{1}}",
-        "PaymentToUser": "Аплата {{toUserName}}",
-        "JoinedPaidStream": "для браніравання ў &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "за стварэнне суполкі &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "як вяртанне сродкаў за браніраванне ў &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "PaymentFor": "Аплата за &quot; {{1}} &quot;",
+        "PaymentTo": "Аплата на {{1}}",
+        "PaymentToUser": "Аплата на {{toUserName}}",
+        "CreatePrivateChat": "для прыватнага чата з {{toUserName}}",
+        "CreatePaidStream": "для стварэння {{toStreamName}}",
+        "JoinedPaidStream": "для рэзервавання ў &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "за стварэнне суполкі &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "як вяртанне браніравання ў &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "Купіў {{amount}} крэдытаў",
-        "BuyAmountCredits": "Купіце крэдыты на {{amount}}",
-        "MissingCredits": "Адсутнічаюць крэдыты",
-        "YouMissingCredits": "Вам патрэбны дадатковыя {{amount}} крэдытаў, каб працягнуць.",
-        "BuyCredits": "Купляйце крэдыты",
+        "BonusCredits": "Бонус {{amount}} крэдытаў",
+        "BuyAmountCredits": "Купіце {{amount}} крэдытаў",
+        "WatchClip": "Атрымаў {{amount}} крэдытаў за {{fromStreamTitle}} праглядаў",
+        "MissingCredits": "Адсутнасць крэдытаў",
+        "YouMissingCredits": "Каб працягнуць, вам патрэбны дадатковыя {{amount}} крэдытаў.",
+        "BuyCredits": "Купіць крэдыты",
+        "BuyBonus": "Купля {{amount}} крэдытаў адначасова прывядзе да бонуса {{bonus}} крэдытаў.",
         "Buy": "Купіць",
+        "PurchaseCredits": "Крэдыты на куплю",
         "Credits": "Крэдыты",
         "ErrorInvalidAmount": "Сума несапраўдная",
         "ErrorInvalidCurrency": "На жаль, мы пакуль не падтрымліваем валюту {{currency}}",
-        "WatchClip": "Атрымана {{amount}} крэдытаў за прагляд {{fromStreamTitle}}",
-        "PurchaseCredits": "Купля крэдытаў",
         "forMessages": {
             "BoughtCredits": "{{amount}} крэдытаў",
             "BonusCredits": "{{amount}} крэдытаў"
-        },
-        "CreatePaidStream": "для стварэння {{toStreamName}}",
-        "BonusCredits": "Бонусныя {{amount}} крэдыты",
-        "BuyBonus": "Купля адразу {{amount}} крэдытаў прывядзе да {{bonus}} бонуса крэдытаў.",
-        "Streams_user_firstname": "{{invitedUserName}} увёў імя",
-        "Streams_user_lastname": "{{invitedUserName}} увёў прозвішча",
-        "Streams_user_icon": "{{invitedUserName}} уведзены значок",
-        "Places_user_location": "{{invitedUserName}} увёў месцазнаходжанне",
-        "Streams_greeting": "{{invitedUserName}} увёў прывітанне",
-        "InvitedUserFilledStream": "{{invitedUserName}} запоўнена {{FilledStreamTitle}}",
-        "ForFillingStream": "Для напаўнення {{FilledStreamTitle}}",
-        "CreatePrivateChat": "для прыватнага чата з {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Дата",
         "Amount": "Сума",
         "Description": "Апісанне",
         "Client": "Кліент",
+        "User": "Карыстальнік",
         "To": "каб",
         "From": "ад",
-        "HistoryEmpty": "У вас пакуль няма дадзеных",
         "SeeHistory": "Глядзіце гісторыю плацяжоў за {{1}}",
+        "HistoryEmpty": "У вас пакуль няма дадзеных",
         "PaymentFor": "Адпраўлена {{amount}} крэдытаў",
         "PaymentTo": "Адпраўлена {{amount}} крэдытаў",
         "PaymentToUser": "Адпраўлена {{amount}} крэдытаў",
+        "CreatePaidStream": "Выдаткавана {{amount}} крэдытаў",
+        "WatchClip": {
+            "+": "Зарабіў {{amount}} крэдытаў",
+            "-": "Выдаткавана {{amount}} крэдытаў"
+        },
         "JoinedPaidStream": {
-            "+": "Атрымана {{amount}} крэдытаў",
-            "-": "Вытрачана {{amount}} крэдытаў"
+            "+": "Зарабіў {{amount}} крэдытаў",
+            "-": "Выдаткавана {{amount}} крэдытаў"
         },
         "LeftPaidStream": {
-            "+": "Атрымана {{amount}} крэдытаў",
+            "+": "Атрымана {{amount}} балаў",
             "-": "Адпраўлена {{amount}} крэдытаў"
         },
-        "CreatedCommunity": "Вытрачана {{amount}} крэдытаў",
+        "CreatedCommunity": "Выдаткавана {{amount}} крэдытаў",
         "BoughtCredits": "Купіў {{amount}} крэдытаў",
-        "InviteAcceptedBy": "Атрымана {{amount}} крэдытаў",
-        "YouHaveCreditsToStart": "Атрымана {{amount}} крэдытаў",
-        "CreatePaidStream": "Вытрачана {{amount}} крэдытаў",
-        "WatchClip": {
-            "+": "Атрымана {{amount}} крэдытаў",
-            "-": "Вытрачана {{amount}} крэдытаў"
-        },
-        "BonusCredits": "Атрымаў бонусныя {{amount}} крэдытаў",
-        "Streams_user_firstname": "Атрымана {{amount}} крэдытаў",
-        "Streams_user_lastname": "Атрымана {{amount}} крэдытаў",
-        "Streams_user_icon": "Атрымана {{amount}} крэдытаў",
-        "Places_user_location": "Атрымана {{amount}} крэдытаў",
-        "Streams_greeting": "Атрымана {{amount}} крэдытаў",
-        "User": "Карыстальнік"
+        "BonusCredits": "Атрымаў бонус {{amount}} крэдытаў",
+        "InviteAcceptedBy": "Зарабіў {{amount}} крэдытаў",
+        "Streams_user_firstname": "Зарабіў {{amount}} крэдытаў",
+        "Streams_user_lastname": "Зарабіў {{amount}} крэдытаў",
+        "Streams_user_icon": "Зарабіў {{amount}} крэдытаў",
+        "Places_user_location": "Зарабіў {{amount}} крэдытаў",
+        "Streams_greeting": "Зарабіў {{amount}} крэдытаў",
+        "YouHaveCreditsToStart": "Зарабіў {{amount}} крэдытаў"
     },
     "subscriptions": {
-        "infoTitle": "Усталюйце інфармацыю аб аплаце",
+        "infoTitle": "Усталюйце плацежную інфармацыю",
         "confirm": {
-            "title": "Пачаць падпіску",
-            "message": "Вы жадаеце падпісацца на {{title}}?",
+            "title": "Пачніце падпіску",
+            "message": "Пачаць перыядычную падпіску на &quot; {{title}} &quot;?",
             "ok": "добра",
             "cancel": "Адмяніць"
         },
@@ -123,7 +150,7 @@
         "Period": "Кропка",
         "Price": "Кошт",
         "AreYouSureUnsubscribe": "Вы ўпэўнены, што хочаце адмовіцца ад падпіскі на гэты план?",
-        "YouUnsubscribedFromPlan": "Вы адмовіліся ад падпіскі на план &quot;{{planTitle}}&quot;. З вас не спаганяецца плата, але ваша падпіска працягнецца да {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Вы адмовіліся ад падпіскі на план « {{planTitle}} ». З вас не спаганяецца плата, але ваша падпіска будзе працягвацца да {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "назва плана",
             "PricePlaceholder": "цана",
@@ -133,22 +160,22 @@
         }
     },
     "payments": {
-        "infoTitle": "Усталюйце інфармацыю аб аплаце",
+        "infoTitle": "Усталюйце плацежную інфармацыю",
+        "BuyAmountCredits": "Купіце {{amount}} крэдытаў",
         "confirm": {
-            "title": "Зрабіце аплату",
-            "message": "Ці згодныя вы аплаціць {{symbol}}{{amount}}?",
+            "title": "Зрабіць плацёж",
+            "message": "Вы згодныя плаціць {{symbol}} {{amount}} ?",
             "ok": "добра",
             "cancel": "Адмяніць"
-        },
-        "BuyAmountCredits": "Купіце крэдыты на {{amount}}"
+        }
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Крэдыты",
-            "description": "адсочвае крэдыты і плацяжы"
+            "description": "вядзе ўлік крэдытаў і плацяжоў"
         },
         "Assets\/plan": {
-            "displayType": "Абанементны план",
+            "displayType": "План падпіскі",
             "description": "план падпіскі"
         },
         "Assets\/subscription": {
@@ -166,166 +193,146 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Атрымана {{amount}} крэдытаў"
-        },
-        "Assets\/credits\/spent": {
-            "content": "Вытрачана {{amount}} крэдытаў"
-        },
-        "Assets\/credits\/sent": {
-            "content": "Адпраўлена {{amount}} крэдытаў на {{toUserName}}"
-        },
-        "Assets\/credits\/received": {
-            "content": "Атрымана {{amount}} крэдытаў ад {{fromUserName}}"
+            "content": "Зарабіў {{amount}} крэдытаў"
         },
         "Assets\/credits\/bought": {
             "content": "Купіў {{amount}} крэдытаў"
         },
         "Assets\/credits\/bonus": {
-            "content": "Бонусныя {{amount}} крэдыты"
+            "content": "Бонус {{amount}} крэдытаў"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Выдаткавана {{amount}} крэдытаў"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Адпраўлена {{amount}} крэдытаў на {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Атрымана {{amount}} крэдытаў з {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "На вашым рахунку мала крэдытаў. Перайдзіце па <a href='{{link}}'>гэтай спасылцы<\/a> , каб купіць дадатковыя крэдыты."
+            "content": "На вашым рахунку мала крэдытаў. Калі ласка, наведайце <a href='<i translate='no'>999 &#39;&gt;гэтую спасылку<\/a> , каб купіць больш крэдытаў."
         }
     },
-    "charge": {
-        "Subject": "Вы атрымліваеце аплату {{displayAmount}} ад {{call 'publisher.displayName'}} ад &quot;{{description}}&quot;",
-        "HasBeenCharged": "Гэй, гэта проста для таго, каб паведаміць вам, што {{1}} быў спагнаны {{2}} за {{3}} з {{4}}"
-    },
-    "charged": {
-        "Subject": "Дзякуй за аплату за &quot;{{description}}&quot;",
-        "HavePaid": "Гэй, {{1}}, гэта простае пацвярджэнне таго, што вы паспяхова аплацілі {{2}} {{3}} за {{4}}"
+    "billing": {
+        "Title": "Разлік актываў",
+        "CreditsMinimum": "Мінімальныя крэдыты",
+        "CreditsToAdd": "Крэдыты для дадання",
+        "Save": "Захаваць",
+        "ThisLink": "гэтая спасылка",
+        "errors": {
+            "CreditsMinimumNegative": "Мінімум крэдытаў не можа быць адмоўным",
+            "CreditsToAddNegative": "Крэдыты для дадання не могуць быць адмоўнымі"
+        }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Новы сэрвіс",
+            "Title": "Новая паслуга",
             "TitlePlaceholder": "Назва службы",
             "PricePlaceholder": "Устанавіць цану",
             "LinkPlaceholder": "ўсталяваць спасылку на дадатковую інфармацыю",
             "DescriptionPlaceholder": "Апісанне паслугі",
             "SaveService": "Сэрвіс захавання",
-            "SelectRequiredParticipants": "Абавязковыя ўдзельнікі",
+            "SelectRequiredParticipants": "Неабходныя звязаныя ўдзельнікі",
             "RequiredParticipantsDesc": "Калі ласка, абярыце звязаных удзельнікаў, якія неабходныя для выкарыстання гэтай паслугі (напрыклад, хатніх жывёл для &quot;Выставы сабак&quot;, або дзяцей для &quot;Дзіцячага свята&quot; і г.д.). Калі паслуга платная, карыстальнік павінен будзе плаціць таксама за кожнага звязанага ўдзельніка."
         },
-        "ManageServiceTemplates": "Кіраванне шаблонамі сэрвісаў",
-        "ManageServices": "Кіраванне паслугамі",
-        "FreeEvent": "Бясплатнае мерапрыемства",
-        "OptionalContribution": "Дадатковы ўклад",
-        "RequiredPayment": "Абавязковая аплата",
-        "AreYouSureDelete": "Вы ўпэўнены, што жадаеце выдаліць гэты сэрвіс?",
-        "AmountServicesRelated": "Ёсць {{amount}} даступнасці, звязаныя з гэтай паслугай. Яны таксама будуць выдаленыя.",
-        "Free": "Бясплатна",
         "EditServiceTemplate": {
             "Title": "Служба рэдагавання"
-        }
+        },
+        "ManageServiceTemplates": "Кіраванне шаблонамі паслуг",
+        "ManageServices": "Кіраванне службамі",
+        "Free": "Бясплатна",
+        "OptionalContribution": "Неабавязковы ўклад",
+        "RequiredPayment": "Абавязковая аплата",
+        "AreYouSureDelete": "Вы ўпэўнены, што хочаце выдаліць гэту службу?",
+        "AmountServicesRelated": "Ёсць {{amount}} даступных, звязаных з гэтай паслугай. Яны таксама будуць выдаленыя."
+    },
+    "transfer": {
+        "SelectRecipient": "Выберыце атрымальніка",
+        "TransactionSuccess": "Поспех транзакцыі",
+        "OrTypeWalletAddress": "АБО ўвядзіце адрас кашалька атрымальніка"
     },
     "NFT": {
-        "Title": "Інфармацыя аб {{title}} NFT",
-        "Description": "Падрабязная інфармацыя аб NFT",
-        "FixedBid": "Купіць зараз",
-        "CurrentBid": "бягучая стаўка",
-        "StartingIn": "Пачынаючы ў",
-        "EndingIn": "Заканчваецца ў",
-        "CreateNFT": "Стварыце NFT",
-        "TitlePlaceholder": "Дайце свайму NFT назву",
-        "DescriptionPlaceholder": "Дайце апісанне вашай NFT",
-        "CreateYourNFT": "Стварыце свой NFT",
-        "Royalties": "Роялці",
-        "RoyaltyPlaceholder": "Неабавязкова. Сума, выплачаная стваральніку перад пераводам.",
-        "ExpirationDate": "Тэрмін прыдатнасці",
-        "StartingDate": "Дата пачатку",
-        "BidsBelowThisAmount": "Стаўкі ніжэй за гэтую суму не будуць дапускацца",
-        "MinimumBid": "Мінімальная стаўка",
-        "Price": "Кошт",
-        "Owner": "Уладальнік",
-        "SelectCategory": "Выберыце катэгорыю",
-        "Day": "Дзень",
-        "Days": "Дні",
-        "Hour": "Гадзіна",
-        "Hours": "Гадзін",
-        "Minute": "Хвіліна",
-        "Minutes": "Хвіліны",
-        "Second": "Другое",
-        "Seconds": "Сэкунды",
-        "SalesCreator": "продажаў пойдзе стваральніку",
-        "Details": "Падрабязнасці",
-        "Bids": "Заяўкі",
-        "History": "Гісторыя",
-        "LoremIpsum": "Lorem Ipsum - гэта проста фіктыўны тэкст паліграфічнай і вёрстнай прамысловасці.",
-        "PutOnSale": "Выставілі ў продаж",
-        "PutOffSale": "Зняць з продажу",
-        "Transfer": "Перадача",
-        "Update": "Абнаўленне",
-        "UpdateToken": "Абнавіць токен",
-        "CreateToken": "Стварыце токен",
-        "PlaceBid": "Размясціць стаўку",
-        "SoldOut": "Прададзены",
-        "NftName": "Імя NFT",
-        "DescribeYourNFT": "Калі ласка, апішыце ваш NFT",
-        "NftPicture": "Малюнак для прадстаўлення NFT",
-        "NftMovie": "Фільм, які прадстаўляе NFT",
-        "UploadMovie": "Спампаваць фільм",
-        "MovieSource": "Крыніца фільма",
-        "UploadFile": "Загрузіць файл",
-        "PutOnMarketplace": "Пастаўце на рынак",
-        "InstantPurchase": "Увядзіце цану, каб дазволіць карыстальнікам імгненна набыць ваш NFT",
-        "FixedPrice": "Фіксаваная цана",
-        "TimedAuction": "Прымеркаваны аўкцыён",
-        "OpenForBids": "Адкрыты для таргоў",
-        "PriceOnePiece": "Увядзіце цану за адну штуку",
-        "EnterMinimumBid": "Увядзіце мінімальную стаўку",
-        "SelectChain": "Выберыце ланцужок",
-        "WrongChain": "Гэты NFT створаны пад &quot;{{chain}}&quot;. Калі ласка, выкарыстоўвайце гэты ланцужок.",
-        "import": {
-            "importNFT": "Імпарт NFT",
-            "fileNotFound": "На жаль, файл CSV не знойдзены.",
-            "fileEmpty": "На жаль, файл CSV пусты.",
-            "userIdNotFound": "карыстальнік існуе, але ідэнтыфікатар пусты",
-            "errorLine": "радок {{1}}",
-            "fieldNotFound": "Абавязковае поле &quot;{{1}}&quot; не знойдзена",
-            "taskStreamInvalid": "паток задач несапраўдны",
-            "instructionsEmpty": "Інструкцыі патоку задач пустыя",
-            "complete": "Завяршыць",
-            "activateUsers": "адправіць паведамленне аб актывацыі карыстальнікам?",
-            "importProgress": "Прагрэс",
-            "importOptions": "Параметры",
-            "sampleCSV": "Спампаваць узор CSV",
-            "fileLabel": "Запампаваць табліцу:",
-            "errorsTitle": "Адбыліся памылкі",
-            "importAttributes": "Імпартаваць атрыбуты NFT",
-            "displayTypeEmpty": "Тып адлюстравання для &quot;{{1}}&quot; не знойдзены"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Фільтр па калекцыях NFT",
-                "ShowNFTCollection": "Паказаць калекцыю NFT у ...",
-                "AllCollections": "Усе калекцыі"
-            },
-            "ByUser": {
-                "AllAuthors": "Усе Аўтары",
-                "AllUsers": "Усе",
-                "FilterByAuthors": "Фільтр па аўтарах"
-            }
-        },
-        "Back": "Вярнуцца да калекцыі",
+        "Title": "Назва",
         "Name": "Імя",
         "EnterName": "Увядзіце імя",
         "EnterAuthorWallet": "Увядзіце аўтарскі кашалёк",
         "InformationAboutTitle": "Інфармацыя пра {{title}} NFT",
+        "Description": "Апісанне",
         "DetailedInformationAboutNFT": "Падрабязная інфармацыя аб NFT",
         "PresaleStarts": "Перадпродаж стартуе 23 снежня",
         "OwnerUserNotFound": "Уладальнік гэтага NFT не зарэгістраваны ў нашым дадатку.",
         "BuyNow": "Купіць зараз",
         "Buy": "Купіць",
+        "Add": "Дадаць",
+        "Remove": "Выдаліць",
+        "NoNFTyet": "Пакуль няма NFT",
         "Conversation": "Гутарка",
         "Create": "Ствараць",
+        "CurrentBid": "бягучая стаўка",
+        "StartingIn": "Пачынаючы ў",
+        "EndingIn": "Канчатак у",
+        "CreateNFT": "Стварыце NFT",
+        "TitlePlaceholder": "Дайце назву свайму NFT",
+        "DescriptionPlaceholder": "Дайце апісанне сваёй NFT",
+        "CreateYourNFT": "Стварыце свой NFT",
+        "Royalties": "Роялці",
+        "RoyaltyPlaceholder": "Дадаткова. Сума, выплачаная стваральніку перад перадачай.",
+        "ExpirationDate": "Тэрмін прыдатнасці",
+        "StartingDate": "Дата пачатку",
+        "BidsBelowThisAmount": "Стаўкі ніжэй за гэтую суму не будуць дапушчаныя",
+        "MinimumBid": "Мінімальная стаўка",
         "Author": "Аўтар",
+        "Price": "Кошт",
         "Commission": "Камісія",
         "EnterCommission": "Увядзіце камісію",
+        "Owner": "Уладальнік",
+        "SelectCategory": "Выберыце катэгорыю",
+        "Day": "Дзень",
+        "Days": "дзён",
+        "Hour": "гадзіна",
+        "Hours": "Гадзіны",
+        "Minute": "хвіліна",
+        "Minutes": "хвіліны",
+        "Second": "Па-другое",
+        "Seconds": "Секунды",
+        "SalesCreator": "ад продажаў пойдзе стваральнік",
+        "Details": "Дэталі",
+        "Bids": "Стаўкі",
+        "History": "Гісторыя",
+        "LoremIpsum": "Lorem Ipsum - гэта проста фіктыўны тэкст паліграфічнай і вёрсткай прамысловасці.",
+        "PutOnSale": "Выставіць на продаж",
+        "PutOffSale": "Зняць з продажу",
+        "Transfer": "Трансфер",
         "Actions": "Дзеянні",
+        "Claim": "Прэтэнзія",
+        "ClaimNFT": "Патрабаваць NFT",
+        "Unlocking": "Разблакіроўка",
+        "Unlock": "Разблакіраваць",
+        "Update": "Абнаўленне",
+        "UpdateToken": "Абнавіць маркер",
         "UpdateNFT": "Абнавіць NFT",
+        "CreateToken": "Стварыць маркер",
+        "PlaceBid": "Зрабіць стаўку",
+        "SoldOut": "Прададзена",
         "NotOnSale": "Няма ў продажы",
+        "NftName": "Назва NFT",
+        "DescribeYourNFT": "Калі ласка, апішыце свой NFT",
+        "NftPicture": "Малюнак для прадстаўлення NFT",
+        "NftMovie": "Фільм для прадстаўлення NFT",
+        "UploadMovie": "Спампаваць фільм",
+        "MovieSource": "Крыніца фільма",
         "MovieURL": "URL фільма",
+        "UploadFile": "Загрузіць файл",
+        "PutOnMarketplace": "Выставіць на рынак",
+        "InstantPurchase": "Увядзіце цану, каб дазволіць карыстальнікам імгненна набыць ваш NFT",
+        "FixedPrice": "Фіксаваная цана",
+        "TimedAuction": "Тэрмінаваны аўкцыён",
+        "OpenForBids": "Адкрыты для ставак",
+        "PriceOnePiece": "Увядзіце цану за адну штуку",
         "EnterPrice": "Увядзіце цану",
+        "EnterMinimumBid": "Увядзіце мінімальную стаўку",
+        "SelectChain": "Выберыце ланцужок",
         "Currency": "Валюта",
         "AreYouSureDeleteImage": "Вы ўпэўнены, што хочаце выдаліць выяву?",
         "AreYouSureDeleteVideo": "Вы ўпэўнены, што хочаце выдаліць відэа?",
@@ -356,7 +363,7 @@
         "contract": {
             "CreateContract": "Стварыць кантракт",
             "SelectContract": "Выберыце кантракт",
-            "CreateContractFor": "Стварыце кантракт на {{userName}}",
+            "CreateContractFor": "Стварыць кантракт на {{userName}}",
             "ContractFor": "Кантракт на {{userName}}",
             "UpdateContract": "Абнавіць кантракт",
             "TransferOwnership": "Перадаць права ўласнасці",
@@ -366,7 +373,7 @@
             "CurrentBaseURL": "Бягучы базавы URL",
             "ContractAddressAbsent": "Дагаворны адрас адсутнічае",
             "FactoryAddressAbsent": "Адрас завода адсутнічае",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Патрабуецца назва",
             "SymbolRequired": "Патрабуецца сімвал",
             "TypeContractName": "назва дагавора",
@@ -376,6 +383,38 @@
             "Title": "Конкурсы",
             "NewContest": "Новы конкурс"
         },
+        "import": {
+            "importNFT": "Імпарт NFT",
+            "importAttributes": "Імпартаваць атрыбуты NFT",
+            "fileNotFound": "На жаль, файл CSV не знойдзены.",
+            "fileEmpty": "На жаль, файл CSV пусты.",
+            "userIdNotFound": "карыстальнік існуе, але ідэнтыфікатар пусты",
+            "errorLine": "радок {{1}}",
+            "fieldNotFound": "Абавязковае поле &quot; {{1}} &quot; не знойдзена",
+            "displayTypeEmpty": "Тып адлюстравання для &quot; {{1}} &quot; не знойдзены",
+            "taskStreamInvalid": "паток задач несапраўдны",
+            "instructionsEmpty": "інструкцыі патоку задач пустыя",
+            "complete": "Поўнае",
+            "activateUsers": "адправіць паведамленне аб актывацыі карыстальнікам?",
+            "importProgress": "Прагрэс",
+            "importOptions": "Параметры",
+            "sampleCSV": "Спампаваць узор CSV",
+            "fileLabel": "Загрузіць электронную табліцу:",
+            "errorsTitle": "Адбыліся памылкі"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Фільтр па калекцыях NFT",
+                "ShowNFTCollection": "Паказаць калекцыю NFT у ...",
+                "AllCollections": "Усе калекцыі"
+            },
+            "ByUser": {
+                "AllAuthors": "Усе аўтары",
+                "AllUsers": "Усе",
+                "FilterByAuthors": "Фільтр па аўтарах"
+            }
+        },
+        "Back": "Вярнуцца да калекцыі",
         "attributes": {
             "Title": "Кіраванне атрыбутамі",
             "Attributes": "Атрыбуты",
@@ -399,13 +438,6 @@
             "aboutPlaceholder": "Рэдагаваць біяграфію",
             "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?"
         },
-        "Add": "Дадаць",
-        "Remove": "Выдаліць",
-        "NoNFTyet": "Пакуль няма NFT",
-        "Claim": "Прэтэнзія",
-        "ClaimNFT": "Патрабаваць NFT",
-        "Unlocking": "Разблакіроўка",
-        "Unlock": "Разблакіраваць",
         "sales": {
             "factory": {
                 "form": {
@@ -521,50 +553,10 @@
             "Unlock": "Разблакіраваць",
             "Locked": "Зачынены",
             "CustodianAddress": "Адрас захавальніка",
-            "TokenWasClaimed": "Маркер &quot;{{title}}&quot; быў запатрабаваны",
-            "TokenWasLocked": "Маркер &quot;{{title}}&quot; быў заблакаваны",
-            "TokenWasUnlocked": "Токен &quot;{{title}}&quot; быў разблакіраваны"
+            "TokenWasClaimed": "Быў запатрабаваны токен &quot; {{title}} &quot;",
+            "TokenWasLocked": "Токен &quot; {{title}} &quot; быў заблакаваны",
+            "TokenWasUnlocked": "Токен &quot; {{title}} &quot; быў разблакіраваны"
         }
-    },
-    "errors": {
-        "Error": "Памылка",
-        "WalletAbsent": "Кашалёк не падключаны.",
-        "Rendering": "Былі памылкі падчас рэндэрынгу <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Патрабуецца цана!",
-        "NameRequired": "Патрабуецца імя!",
-        "PriceInvalid": "Цана несапраўдная!",
-        "TransactionFailed": "Збой транзакцыі",
-        "ChainNotSupported": "Выбраны ланцужок не падтрымліваецца. Ланцуг, які падтрымліваецца: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Для працы з дадаткам неабходна падключыць MetaMask",
-        "UserNotLoggedInMetaMask": "Карыстальнік не ўвайшоў у MetaMask",
-        "CurrencyNotFound": "Валюта не знойдзена",
-        "WrongChain": "Гэты NFT створаны пад &quot;{{chain}}&quot;. Калі ласка, выкарыстоўвайце гэты ланцужок.",
-        "AmountInvalid": "Сума несапраўдная!",
-        "NoRecipientSelected": "Атрымальнік не выбраны",
-        "NotEnoughPermissionsWallet": "Недастаткова правоў для чытання кашалька гэтага карыстальніка",
-        "ThisUserHaveNoWallet": "Гэтаму карыстальніку не прызначаны кашалёк",
-        "TheWalletOfThisUserInvalid": "Кашалёк гэтага карыстальніка несапраўдны",
-        "WalletInvalid": "Несапраўдны адрас кашалька"
-    },
-    "admin": {
-        "Title": "Актывы адміністрацыйныя",
-        "SubscriptionTitle": "Планы падпіскі"
-    },
-    "billing": {
-        "Title": "Разлік актываў",
-        "CreditsMinimum": "Мінімальныя крэдыты",
-        "CreditsToAdd": "Крэдыты для дадання",
-        "Save": "Захаваць",
-        "ThisLink": "гэтая спасылка",
-        "errors": {
-            "CreditsMinimumNegative": "Мінімум крэдытаў не можа быць адмоўным",
-            "CreditsToAddNegative": "Крэдыты для дадання не могуць быць адмоўнымі"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Выберыце атрымальніка",
-        "TransactionSuccess": "Поспех транзакцыі",
-        "OrTypeWalletAddress": "АБО ўвядзіце адрас кашалька атрымальніка"
     },
     "currencies": {
         "choose": "Выберыце валюту"

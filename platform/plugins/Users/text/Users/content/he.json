@@ -1,132 +1,16 @@
 {
-    "actions": {
-        "LogIn": "התחברות",
-        "LogOut": "להתנתק"
+    "avatar": {
+        "Someone": "מִישֶׁהוּ"
     },
-    "activate": {
-        "SetAsPrimary": "הגדר את {{1}} בתור {{2}} הראשי שלי",
-        "ChoosePassPhrase": "בחר <strong>ביטוי לעבור<\/strong> כדי להתחבר עם. <br> ביטוי פשוט המורכב ממספר מילים, כי אתה זוכר בקלות.",
-        "ChoosePassPhraseSeeSuggestions": "בחר <strong>ביטוי ביטוי<\/strong> טוב כדי להגן על החשבון שלך. ראה את ההצעות עבור כמה רעיונות.",
-        "LogOutAndTryAgain": "צא ונסה שוב",
-        "IfYouFeel": "אם אתה מרגיש שמשהו השתבש, אתה יכול",
-        "SetIdentifierButtonTitle": "להתחיל מחדש",
-        "OneTimeCode": "הכנס את הקוד שקיבלת:",
-        "ActivateMyAccount": "הפעל את החשבון שלי"
-    },
-    "session": {
-        "GetStarted": "להתחיל"
-    },
-    "authorize": {
-        "GetStarted": "להתחיל",
-        "Authorize": "הרשאה",
-        "TermsLabel": "קראתי ואני מסכים <br> אל {{link}}",
-        "TermsTitle": "תנאים",
-        "mustAgree": "ראשית עליכם להסכים לתנאים."
-    },
-    "register": {
-        "TermsLabel": "אני מקבל את {{link}}",
-        "TermsTitle": "תנאים"
-    },
-    "notifications": {
-        "title": "אישור",
-        "prompt": "האם ברצונך להפעיל התראות? תקבל עדכונים בזמן אמת על דברים שאכפת לך מהם.",
-        "yes": "כן",
-        "no": "לא",
-        "WelcomePleaseVerifyEmail": "ברוך הבא! אמת את כתובת האימייל שלך.",
-        "WelcomeVerifyEmail": "ברוך הבא! אמת את כתובת הדוא&quot;ל שלך.",
-        "ForgetPass": "היי, האם שכחת את משפט הסיסמה שלך?",
-        "PassphraseSaved": "משפט הביטוי שלך נשמר.",
-        "IdentifierActivated": "{{type}} שלך הופעל.",
-        "CompletedActivation": "השלמת את הפעלת המשתמש.",
-        "CompletedActivationLogIn": "השלמת את הפעלת המשתמש. נסה להתחבר עכשיו."
-    },
-    "usersContacts": {
-        "selectLabel": "בחר תווית.",
-        "inviteUser": "הזמנת משתמש",
-        "selectRole": "בחר תפקיד",
-        "inviteRole": "הזמן {{role}}"
-    },
-    "invalidLanguageSelected": "נבחרה שפה לא חוקית",
-    "contacts": {
-        "dialog": {
-            "title": "בחר איש קשר",
-            "SearchByName": "חפש לפי שם",
-            "CreateAccount": "+ איש קשר חדש",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.creat לא נמצא",
-            "EmptyContacts": "אנשי קשר לא נמצאו ..."
-        },
-        "select": {
-            "title": "בחר איש קשר של {{displayName}}"
+    "identifier": {
+        "types": {
+            "email": "אימייל",
+            "mobile": "נייד",
+            "web3": "אינטרנט 3"
         }
     },
-    "login": {
-        "title": "ברוך הבא",
-        "directions": "צור חשבון, או התחבר.",
-        "directionsNoRegister": "התחבר אם יש לך חשבון.",
-        "goButton": "⮕",
-        "passphrase": "הזן את ביטוי הסיסמה שלך:",
-        "loginButton": "להתחיל",
-        "registerButton": "להתחיל",
-        "resendButton": "שלח הודעת הפעלה",
-        "forgot": "שכח מזה?",
-        "resendConfirm": "האם אתה רוצה לשלוח הודעה לאיפוס משפט הסיסמה שלך?",
-        "resendSuccess": "בדוק אם קיימת הודעה לאיפוס ביטוי הסיסמה שלך",
-        "resendClose": "קרוב",
-        "noPassphrase": "לפני שתוכל להתחבר, עליך להגדיר ביטוי מעבר על ידי לחיצה על הקישור בהודעת ההפעלה שלך.",
-        "notVerified": "עליך לשלוח לעצמך הודעת הפעלה על מנת להיכנס.",
-        "emailExists": "האם ניסית להירשם באמצעות דוא&quot;ל זה בעבר? אם כן, בדוק בתיבת הדואר הנכנס שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
-        "mobileExists": "האם ניסית להירשם למספר הנייד הזה בעבר? אם כן, בדוק את ה- SMS שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
-        "usingOther": "או שאתה יכול",
-        "prompt": "בחר שם משתמש:",
-        "newUser": "או צור חשבון חדש למטה",
-        "placeholders": {
-            "identifier": "מספר הטלפון הנייד או הדוא&quot;ל שלך",
-            "mobile": "הזן את מספר הטלפון הנייד שלך",
-            "email": "הזן את כתובת הדוא&quot;ל שלך",
-            "username": "שם משתמש"
-        },
-        "confirmTerms": "לקבל את תנאי השירות?",
-        "facebookNoEmail": "בחשבון הפייסבוק שלך חסרה כתובת דוא&quot;ל מאושרת. פשוט התחבר בדרך המקורית.",
-        "picTooltip": "אתה יכול לשנות תמונה זו מאוחר יותר",
-        "wallet": {
-            "payload": "היכנס ל- {{host}} בזמן {{timestamp}}",
-            "alert": {
-                "title": "הפניה מחדש לארנק",
-                "content": "לאחר שתסגור דיאלוג זה, תועבר לארנק שלך. לאחר שתיכנס, חזור לדף זה."
-            }
-        },
-        "web3": {
-            "payload": "היכנס אל {{host}} בשעה {{timestamp}}",
-            "alert": {
-                "title": "מפנה מחדש לארנק",
-                "content": "לאחר שתסגור את הדו-שיח הזה, תועבר לארנק שלך. לאחר הכניסה, חזור לדף זה."
-            }
-        },
-        "connectPlatforms": "או התחבר באמצעות:"
-    },
-    "setIdentifier": {
-        "title": "הוסף דרך להתחברות",
-        "sendMessage": "שלח הודעת הפעלה",
-        "placeholders": {
-            "identifier": "הזן את מספר הטלפון הנייד שלך או את הדוא&quot;ל שלך",
-            "mobile": "הזן את מספר הנייד שלך",
-            "email": "הזן את כתובת הדוא&quot;ל שלך",
-            "username": "שם משתמש"
-        }
-    },
-    "prompt": {
-        "title": "{{Platform}} חשבון",
-        "areUsing": "אתה משתמש {{platform}} בתור",
-        "noLongerUsing": "אינך מחובר עוד ל- {{platform}} בתור",
-        "doAuth": "התחבר באמצעות חשבון זה",
-        "doSwitch": "עבור לחשבון זה"
-    },
-    "roles": {
-        "Owner": "בעלים",
-        "Admin": "מנהל",
-        "Member": "חבר",
-        "Guest": "אורח",
-        "Host": "מנחה"
+    "clipboard": {
+        "Copied": "מוּעֲתָק! עכשיו אתה יכול להדביק אותו בכל מקום."
     },
     "analytics": {
         "Title": "ניתוח",
@@ -139,26 +23,135 @@
         "Faq": "שאלות נפוצות",
         "WeekDays": "ימי חול"
     },
-    "avatar": {
-        "Someone": "מִישֶׁהוּ"
+    "actions": {
+        "LogIn": "התחברות",
+        "LogOut": "להתנתק"
+    },
+    "activate": {
+        "OneTimeCode": "הכנס את הקוד שקיבלת:",
+        "SetAsPrimary": "הגדר {{1}} כ {{2}} העיקרי שלי",
+        "ChoosePassPhrase": "בחר <strong>ביטוי סיסמה<\/strong> להתחבר איתו.<br> ביטוי פשוט המורכב מכמה מילים שתזכרו בקלות.",
+        "ChoosePassPhraseSeeSuggestions": "בחר <strong>ביטוי סיסמה<\/strong> טוב כדי להגן על החשבון שלך. עיין בהצעות לכמה רעיונות.",
+        "LogOutAndTryAgain": "צא ונסה שוב",
+        "IfYouFeel": "אם אתה מרגיש שמשהו השתבש, אתה יכול",
+        "SetIdentifierButtonTitle": "להתחיל מחדש",
+        "ActivateMyAccount": "הפעל את החשבון שלי"
+    },
+    "session": {
+        "GetStarted": "להתחיל"
+    },
+    "authorize": {
+        "GetStarted": "להתחיל",
+        "Authorize": "לְאַשֵׁר",
+        "TermsLabel": "קראתי ואני מסכים<br> ל {{link}}",
+        "TermsTitle": "תנאים",
+        "mustAgree": "ראשית עליך להסכים לתנאים."
+    },
+    "register": {
+        "TermsLabel": "אני מקבל את ה {{link}}",
+        "TermsTitle": "תנאים"
+    },
+    "notifications": {
+        "title": "רְשׁוּת",
+        "prompt": "האם אתה רוצה להפעיל התראות? תקבל עדכונים בזמן אמת לגבי דברים שחשובים לך.",
+        "yes": "כן",
+        "no": "לא",
+        "WelcomePleaseVerifyEmail": "ברוך הבא! נא לאמת את כתובת הדוא&quot;ל שלך.",
+        "WelcomeVerifyEmail": "ברוך הבא! אמת את כתובת הדוא&quot;ל שלך.",
+        "ForgetPass": "היי, שכחת את משפט הסיסמה שלך?",
+        "PassphraseSaved": "ביטוי הסיסמה שלך נשמר.",
+        "IdentifierActivated": "{{type}} שלך הופעל.",
+        "CompletedActivation": "השלמת את הפעלת המשתמש.",
+        "CompletedActivationLogIn": "השלמת את הפעלת המשתמש. נסה להיכנס עכשיו."
+    },
+    "contacts": {
+        "dialog": {
+            "title": "בחר איש קשר",
+            "CreateAccount": "+ איש קשר חדש",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create לא נמצא",
+            "SearchByName": "חפש לפי שם",
+            "EmptyContacts": "אנשי קשר לא נמצאו..."
+        },
+        "select": {
+            "title": "בחר איש קשר של {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "אנא בחר תווית.",
+        "inviteUser": "הזמן משתמשים",
+        "selectRole": "בחר תפקיד",
+        "inviteRole": "הזמן {{role}}"
+    },
+    "invalidLanguageSelected": "נבחרה שפה לא חוקית",
+    "platforms": {
+        "wallet": "ארנק",
+        "broadcast": "מִשׁדָר"
+    },
+    "login": {
+        "title": "ברוך הבא",
+        "directions": "צור חשבון, או היכנס.",
+        "directionsNoRegister": "היכנס אם יש לך חשבון.",
+        "goButton": "➔",
+        "passphrase": "הזן את משפט הסיסמה שלך:",
+        "loginButton": "להתחיל",
+        "registerButton": "להתחיל",
+        "resendButton": "שלח הודעת הפעלה",
+        "forgot": "שכח מזה?",
+        "resendConfirm": "האם ברצונך לשלוח הודעה לאיפוס ביטוי הסיסמה שלך?",
+        "resendSuccess": "בדוק אם יש הודעה לאיפוס ביטוי הסיסמה שלך",
+        "resendClose": "סגור",
+        "noPassphrase": "לפני שתוכל להתחבר, עליך להגדיר ביטוי סיסמה על ידי לחיצה על הקישור בהודעת ההפעלה שלך.",
+        "notVerified": "עליך לשלוח לעצמך הודעת הפעלה כדי להיכנס.",
+        "emailExists": "האם ניסית להירשם עם האימייל הזה בעבר? אם כן, בדוק את תיבת הדואר הנכנס שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
+        "mobileExists": "ניסית להירשם עם מספר הנייד הזה בעבר? אם כן, בדוק את ה-SMS שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
+        "usingOther": "או שאתה יכול",
+        "connectPlatforms": "או התחבר באמצעות:",
+        "prompt": "בחר שם משתמש:",
+        "newUser": "או צור חשבון חדש למטה",
+        "placeholders": {
+            "identifier": "# הנייד או האימייל שלך",
+            "mobile": "הזן את מספר הטלפון הנייד שלך",
+            "email": "הזן את כתובת הדוא&quot;ל שלך",
+            "username": "השתמש באותיות ומספרים בלבד"
+        },
+        "confirmTerms": "האם לקבל את התנאים וההגבלות?",
+        "facebookNoEmail": "בחשבון הפייסבוק שלך חסרה כתובת אימייל מאושרת. פשוט התחבר בצורה המקורית.",
+        "picTooltip": "אתה יכול לשנות תמונה זו מאוחר יותר",
+        "web3": {
+            "payload": "היכנס ל {{host}} בזמן {{timestamp}}",
+            "alert": {
+                "title": "מפנה מחדש לארנק",
+                "content": "לאחר שתסגור את הדו-שיח הזה, תועבר לארנק שלך. לאחר הכניסה, חזור לדף זה."
+            }
+        }
+    },
+    "setIdentifier": {
+        "title": "הוסף דרך להתחבר",
+        "sendMessage": "שלח הודעת הפעלה",
+        "placeholders": {
+            "identifier": "הזן את מספר הטלפון הנייד או האימייל שלך",
+            "mobile": "הזן את מספר הנייד שלך",
+            "email": "הזן את כתובת הדוא&quot;ל שלך",
+            "username": "שם משתמש"
+        }
+    },
+    "prompt": {
+        "title": "חשבון {{Platform}}",
+        "areUsing": "אתה משתמש ב {{platform}} as",
+        "noLongerUsing": "אינך מחובר יותר ל {{platform}} as",
+        "doAuth": "התחבר עם חשבון זה",
+        "doSwitch": "עבור לחשבון זה"
+    },
+    "roles": {
+        "Owner": "בעלים",
+        "Admin": "מנהל מערכת",
+        "Member": "חבר",
+        "Guest": "אוֹרֵחַ",
+        "Host": "מנחה"
     },
     "web3": {
         "WrongMethod": "שיטת חוזה שגויה {{methodName}}",
         "ChangeWallet": "שנה ארנק"
-    },
-    "identifier": {
-        "types": {
-            "email": "אימייל",
-            "mobile": "נייד",
-            "web3": "אינטרנט 3"
-        }
-    },
-    "clipboard": {
-        "Copied": "מוּעֲתָק! עכשיו אתה יכול להדביק אותו בכל מקום."
-    },
-    "platforms": {
-        "wallet": "ארנק",
-        "broadcast": "מִשׁדָר"
     },
     "labels": {
         "addToPhonebook": "הוסף לטלפון שלי אנשי קשר",

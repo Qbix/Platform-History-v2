@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "{{1}} barruan"
     },
     "units": {
@@ -18,9 +18,10 @@
         "inches": "zentimetroak"
     },
     "location": {
-        "interested": "{{select}} barrutik gertatzen diren gauzak interesatzen zait",
+        "interested": "{{select}} -en barruan gertatzen diren gauzak interesatzen zait",
         "update": "Eguneratu Nire kokapena",
-        "prompt": "{{ClickOrTap}} hona<br> ezarri zure<br> kokapena",
+        "set": "Ezarri Nire kokapena",
+        "prompt": "{{ClickOrTap}} honaino<br> ezarri zure<br> kokapena",
         "myCurrentLocation": "Nire uneko kokapena",
         "enterAddress": "Sartu helbide bat",
         "enterPostcode": "Mesedez, idatzi zure posta-kodea \/ posta-kodea",
@@ -42,8 +43,7 @@
         },
         "dialog": {
             "title": "Aukeratu Kokapena"
-        },
-        "set": "Ezarri Nire kokapena"
+        }
     },
     "areas": {
         "filterPlaceholder": "Kokapen honen barruan dagoen eremurik?",
@@ -51,7 +51,7 @@
         "promptTitle": "Sartu eremuaren izena:",
         "absent": "Mesedez, ezarri eremua",
         "error": "Errorea",
-        "exist": "Dagoeneko eremua existitzen da",
+        "exist": "Eremua dagoeneko existitzen da",
         "addNewArea": "Gehitu eremu berria",
         "add": "Gehitu"
     },

@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "Грешка",
+        "WalletAbsent": "Новчаник није повезан.",
+        "Rendering": "Било је грешака при приказивању <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Цена обавезна!",
+        "NameRequired": "Име (обавезно!",
+        "PriceInvalid": "Цена неважећа!",
+        "AmountInvalid": "Износ је неважећи!",
+        "TransactionFailed": "Трансакција није успела",
+        "ChainNotSupported": "Изабрани ланац није подржан. Подржани ланац: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Потребан је МетаМаск повезан за рад са апликацијом",
+        "UserNotLoggedInMetaMask": "Корисник није пријављен на МетаМаск",
+        "CurrencyNotFound": "Валута није пронађена",
+        "WrongChain": "Овај НФТ креиран под &quot; {{chain}} &quot;. Молимо користите овај ланац.",
+        "NoRecipientSelected": "Није изабран прималац",
+        "NotEnoughPermissionsWallet": "Нема довољно дозвола за читање новчаника овог корисника",
+        "ThisUserHaveNoWallet": "Овом кориснику није додељен новчаник",
+        "TheWalletOfThisUserInvalid": "Новчаник овог корисника је неважећи",
+        "WalletInvalid": "Адреса новчаника је неважећа"
+    },
+    "admin": {
+        "Title": "Средства административна",
+        "SubscriptionTitle": "Планови претплате"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Додирните за плаћање"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: наплата обрађена за {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Хвала вам на уплати за {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} се пријавио на {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : наплата обрађена за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Хвала вам на уплати на {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} претплаћено на {{plan.title}}",
         "YouSubscribedTo": "Претплаћени сте на {{plan.title}}",
         "Assets\/credits\/alert": "Имате упозорење у вези са вашим налогом"
     },
     "charge": {
-        "Subject": "Добијате уплату од {{displayAmount}} од {{call 'publisher.displayName'}} од стране „{{description}}“",
-        "HasBeenCharged": "Хеј, ово је само да вас обавестим да је {{1}} наплатио {{2}} за {{3}} од стране {{4}}"
+        "Subject": "Добијате уплату од {{displayAmount}} од {{call 'publisher.displayName'}} од &quot; {{description}} &quot;",
+        "HasBeenCharged": "Хеј, ово је само да вас обавестим да је {{1}} наплаћено {{2}} за {{3}} од {{4}}"
     },
     "charged": {
-        "Subject": "Хвала вам на уплати за „{{description}}“",
-        "HavePaid": "Хеј {{1}}, ово је само кратка потврда да сте успешно платили {{2}} кориснику {{3}} за {{4}}"
+        "Subject": "Хвала вам на уплати за &quot; {{description}} &quot;",
+        "HavePaid": "Хеј {{1}} , ово је само брза потврда да сте успешно платили {{2}} до {{3}} за {{4}}"
     },
     "payment": {
         "AboutOrder": "Информације о поруџбини",
@@ -26,7 +50,7 @@
         "PaymentSucceeded": "Плаћање је успело",
         "PaymentProcessing.": "Ваша уплата се обрађује",
         "FailTryAgain": "Ваша уплата није успела, покушајте поново",
-        "SomethingWrong": "Нешто је кренуло наопако",
+        "SomethingWrong": "Нешто није у реду",
         "PaymentStatus": "Статус плаћање",
         "PayTo": "Плати {{displayName}}",
         "ChooseCurrency": "Изаберите валуту",
@@ -35,28 +59,26 @@
         "EnterAmount": "унети износ"
     },
     "credits": {
-        "InviteAcceptedBy": "{{invitedUserName}} прихватио позив",
-        "Streams_user_firstname": "{{invitedUserName}} је унео име",
-        "Streams_user_lastname": "{{invitedUserName}} је унео презиме",
-        "Streams_user_icon": "{{invitedUserName}} унета икона",
-        "Places_user_location": "{{invitedUserName}} је унео локацију",
-        "Streams_greeting": "{{invitedUserName}} је унео поздрав",
+        "InviteAcceptedBy": "Позив је прихватио {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} попуњено {{FilledStreamTitle}}",
+        "ForFillingStream": "За пуњење {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "За почетак имате {{amount}} кредита",
-        "PaymentFor": "Плаћање за „{{1}}“",
-        "PaymentTo": "Плаћање на {{1}}",
-        "PaymentToUser": "Плаћање на {{toUserName}}",
-        "CreatePaidStream": "за креирање {{toStreamName}}",
-        "JoinedPaidStream": "за резервацију у „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
-        "CreatedCommunity": "за стварање заједнице &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "као рефундирање резервације у „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
+        "PaymentFor": "Плаћање за &quot; {{1}} &quot;",
+        "PaymentTo": "Плаћање до {{1}}",
+        "PaymentToUser": "Плаћање до {{toUserName}}",
+        "CreatePrivateChat": "за приватно ћаскање са {{toUserName}}",
+        "CreatePaidStream": "за стварање {{toStreamName}}",
+        "JoinedPaidStream": "за резервацију у &quot; <a data-publisherId='<i translate='no'>999 &#39; дата-стреамНаме=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "за стварање заједнице &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "као рефундирање резервације у &quot; <a data-publisherId='<i translate='no'>999 &#39; дата-стреамНаме=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "Купио {{amount}} кредита",
         "BonusCredits": "Бонус {{amount}} кредита",
         "BuyAmountCredits": "Купите {{amount}} кредита",
-        "WatchClip": "Зарадили сте {{amount}} кредита за гледање {{fromStreamTitle}}",
+        "WatchClip": "Зарадио {{amount}} кредита за гледање {{fromStreamTitle}}",
         "MissingCredits": "Недостају кредити",
-        "YouMissingCredits": "Треба вам додатних {{amount}} кредита да бисте наставили.",
+        "YouMissingCredits": "Потребно вам је додатних {{amount}} кредита да бисте наставили.",
         "BuyCredits": "Купите кредите",
-        "BuyBonus": "Куповина {{amount}} кредита одједном, довешће до {{bonus}} бонуса кредита.",
+        "BuyBonus": "Куповина {{amount}} кредита одједном, довешће до бонуса {{bonus}} кредита.",
         "Buy": "Купи",
         "PurchaseCredits": "Куповина кредита",
         "Credits": "Цредитс",
@@ -65,20 +87,18 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} кредита",
             "BonusCredits": "{{amount}} кредита"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} попуњено {{FilledStreamTitle}}",
-        "ForFillingStream": "За пуњење {{FilledStreamTitle}}",
-        "CreatePrivateChat": "за приватно ћаскање са {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Датум",
         "Amount": "Износ",
         "Description": "Опис",
         "Client": "Клијент",
+        "User": "Корисник",
         "To": "до",
         "From": "из",
         "SeeHistory": "Погледајте историју плаћања за {{1}}",
-        "HistoryEmpty": "Још увек немате податке",
+        "HistoryEmpty": "Још немате податке",
         "PaymentFor": "Послато {{amount}} кредита",
         "PaymentTo": "Послато {{amount}} кредита",
         "PaymentToUser": "Послато {{amount}} кредита",
@@ -97,22 +117,21 @@
         },
         "CreatedCommunity": "Потрошено {{amount}} кредита",
         "BoughtCredits": "Купио {{amount}} кредита",
-        "BonusCredits": "Добио сам бонус {{amount}} кредита",
+        "BonusCredits": "Добио бонус {{amount}} кредита",
         "InviteAcceptedBy": "Зарадио {{amount}} кредита",
         "Streams_user_firstname": "Зарадио {{amount}} кредита",
         "Streams_user_lastname": "Зарадио {{amount}} кредита",
         "Streams_user_icon": "Зарадио {{amount}} кредита",
         "Places_user_location": "Зарадио {{amount}} кредита",
         "Streams_greeting": "Зарадио {{amount}} кредита",
-        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита",
-        "User": "Корисник"
+        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита"
     },
     "subscriptions": {
         "infoTitle": "Подесите информације о плаћању",
         "confirm": {
             "title": "Покрени претплату",
-            "message": "Да ли желите да се претплатите на {{title}}?",
-            "ok": "ок",
+            "message": "Започните понављајућу претплату на „ {{title}} “?",
+            "ok": "У реду",
             "cancel": "Поништити, отказати"
         },
         "CreditOrDebitCard": "Кредитна или дебитна картица",
@@ -131,7 +150,7 @@
         "Period": "Раздобље",
         "Price": "Цена",
         "AreYouSureUnsubscribe": "Да ли сте сигурни да желите да опозовете претплату на овај план?",
-        "YouUnsubscribedFromPlan": "Отказали сте претплату на план „{{planTitle}}“. Нећете наплаћивати, али ваша претплата ће се наставити до {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Отказали сте претплату на план &quot; {{planTitle}} &quot;. Нећете наплаћивати, али ваша претплата ће се наставити до {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "наслов плана",
             "PricePlaceholder": "Цена",
@@ -145,8 +164,8 @@
         "BuyAmountCredits": "Купите {{amount}} кредита",
         "confirm": {
             "title": "Извршити уплату",
-            "message": "Да ли се слажете да платите {{symbol}}{{amount}}?",
-            "ok": "ок",
+            "message": "Да ли се слажете да платите {{symbol}} {{amount}} ?",
+            "ok": "У реду",
             "cancel": "Поништити, отказати"
         }
     },
@@ -189,10 +208,21 @@
             "content": "Послато {{amount}} кредита на {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Добио {{amount}} кредита од {{fromUserName}}"
+            "content": "Примио {{amount}} кредита од {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Имате мало кредита на свом рачуну. Посетите <a href='{{link}}'>ову везу<\/a> да бисте купили још кредита."
+            "content": "Имате мало кредита на свом рачуну. Посетите <a href='<i translate='no'>999 &#39;&gt;овај линк<\/a> да бисте купили још кредита."
+        }
+    },
+    "billing": {
+        "Title": "Наплата средстава",
+        "CreditsMinimum": "Минимални кредити",
+        "CreditsToAdd": "Кредити за додавање",
+        "Save": "сачувати",
+        "ThisLink": "овај линк",
+        "errors": {
+            "CreditsMinimumNegative": "Минимум кредита не може бити негативан",
+            "CreditsToAddNegative": "Кредити за додавање не могу бити негативни"
         }
     },
     "services": {
@@ -203,8 +233,11 @@
             "LinkPlaceholder": "поставите везу за додатне информације",
             "DescriptionPlaceholder": "Опис услуге",
             "SaveService": "Саве Сервице",
-            "SelectRequiredParticipants": "Обавезни учесници",
+            "SelectRequiredParticipants": "Обавезни сродни учесници",
             "RequiredParticipantsDesc": "Молимо изаберите повезане учеснике који су обавезни да користе ову услугу (на пример кућни љубимци за „Изложбу паса“, или деца за „Дечји празник“ итд.). Ако је услуга плаћена, корисник ће морати да плати и за сваког повезаног учесника."
+        },
+        "EditServiceTemplate": {
+            "Title": "Уреди услугу"
         },
         "ManageServiceTemplates": "Управљајте предлошцима услуга",
         "ManageServices": "Управљајте услугама",
@@ -212,15 +245,30 @@
         "OptionalContribution": "Факултативни допринос",
         "RequiredPayment": "Обавезно плаћање",
         "AreYouSureDelete": "Да ли сте сигурни да желите да избришете ову услугу?",
-        "AmountServicesRelated": "Постоји {{amount}} доступности у вези са овом услугом. Они ће такође бити уклоњени.",
-        "EditServiceTemplate": {
-            "Title": "Уреди услугу"
-        }
+        "AmountServicesRelated": "Постоји {{amount}} доступности у вези са овом услугом. Они ће такође бити уклоњени."
+    },
+    "transfer": {
+        "SelectRecipient": "Изаберите примаоца",
+        "TransactionSuccess": "Трансацтион Суццесс",
+        "OrTypeWalletAddress": "ИЛИ унесите адресу новчаника примаоца"
     },
     "NFT": {
-        "Title": "Информације о {{title}} НФТ",
-        "Description": "Детаљне информације о НФТ-у",
-        "FixedBid": "Купите сада",
+        "Title": "Наслов",
+        "Name": "Име",
+        "EnterName": "Унесите име",
+        "EnterAuthorWallet": "Унесите новчаник аутора",
+        "InformationAboutTitle": "Информације о {{title}} НФТ",
+        "Description": "Опис",
+        "DetailedInformationAboutNFT": "Детаљне информације о НФТ-у",
+        "PresaleStarts": "Претпродаја почиње 23. децембра",
+        "OwnerUserNotFound": "Власник овог НФТ-а није регистрован у нашој апликацији.",
+        "BuyNow": "Купите сада",
+        "Buy": "Купи",
+        "Add": "Додати",
+        "Remove": "Уклони",
+        "NoNFTyet": "Још нема НФТ-а",
+        "Conversation": "Разговор",
+        "Create": "Креирај",
         "CurrentBid": "Тренутна понуда",
         "StartingIn": "Почевши у",
         "EndingIn": "Завршава",
@@ -234,14 +282,17 @@
         "StartingDate": "Датум почетка",
         "BidsBelowThisAmount": "Понуде испод овог износа неће бити дозвољене",
         "MinimumBid": "Минимална понуда",
+        "Author": "Аутор",
         "Price": "Цена",
+        "Commission": "Комисија",
+        "EnterCommission": "Унесите провизију",
         "Owner": "Власник",
         "SelectCategory": "Изаберите категорију",
         "Day": "Дан",
         "Days": "Дани",
         "Hour": "Сат",
         "Hours": "Сати",
-        "Minute": "Минуте",
+        "Minute": "Минута",
         "Minutes": "Минута",
         "Second": "Друго",
         "Seconds": "Секунде",
@@ -253,17 +304,25 @@
         "PutOnSale": "Ставите на продају",
         "PutOffSale": "Повући из продаје",
         "Transfer": "Трансфер",
+        "Actions": "Акције",
+        "Claim": "Потраживање",
+        "ClaimNFT": "Захтевај НФТ",
+        "Unlocking": "Откључавање",
+        "Unlock": "Откључај",
         "Update": "ажурирање",
         "UpdateToken": "Упдате Токен",
+        "UpdateNFT": "Ажурирајте НФТ",
         "CreateToken": "Цреате Токен",
         "PlaceBid": "Уложи",
-        "SoldOut": "Продато",
+        "SoldOut": "Продат",
+        "NotOnSale": "Није на продају",
         "NftName": "НФТ име",
         "DescribeYourNFT": "Молимо опишите свој НФТ",
         "NftPicture": "Слика која представља НФТ",
         "NftMovie": "Филм који представља НФТ",
         "UploadMovie": "Отпреми филм",
         "MovieSource": "Мовие Соурце",
+        "MovieURL": "УРЛ филма",
         "UploadFile": "Отпремите датотеку",
         "PutOnMarketplace": "Ставите на тржиште",
         "InstantPurchase": "Унесите цену да бисте омогућили корисницима да одмах купе ваш НФТ",
@@ -271,60 +330,9 @@
         "TimedAuction": "Временска аукција",
         "OpenForBids": "Отворено за понуде",
         "PriceOnePiece": "Унесите цену за један комад",
+        "EnterPrice": "Унесите цену",
         "EnterMinimumBid": "Унесите минималну понуду",
         "SelectChain": "Изаберите ланац",
-        "WrongChain": "Овај НФТ је креиран под „{{chain}}“. Молимо користите овај ланац.",
-        "import": {
-            "importNFT": "Увоз НФТ-а",
-            "fileNotFound": "Жао нам је, ЦСВ датотека није пронађена.",
-            "fileEmpty": "Жао нам је, ЦСВ датотека је празна.",
-            "userIdNotFound": "корисник постоји, али је ИД празан",
-            "errorLine": "ред {{1}}",
-            "fieldNotFound": "Обавезно поље „{{1}}“ није пронађено",
-            "taskStreamInvalid": "ток задатака је неважећи",
-            "instructionsEmpty": "упутства за ток задатака празна",
-            "complete": "комплетан",
-            "activateUsers": "послати активациону поруку корисницима?",
-            "importProgress": "Напредак",
-            "importOptions": "Опције",
-            "sampleCSV": "Преузмите пример ЦСВ-а",
-            "fileLabel": "Отпреми табелу:",
-            "errorsTitle": "Дошло је до грешака",
-            "importAttributes": "Увезите НФТ атрибуте",
-            "displayTypeEmpty": "Тип приказа за „{{1}}“ није пронађен"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Филтрирај према НФТ колекцијама",
-                "ShowNFTCollection": "Прикажи НФТ колекцију у...",
-                "AllCollections": "Све колекције"
-            },
-            "ByUser": {
-                "AllAuthors": "Сви аутори",
-                "AllUsers": "Сви",
-                "FilterByAuthors": "Филтрирај по ауторима"
-            }
-        },
-        "Back": "Назад на колекцију",
-        "Name": "Име",
-        "EnterName": "Унесите име",
-        "EnterAuthorWallet": "Унесите новчаник аутора",
-        "InformationAboutTitle": "Информације о {{title}} НФТ",
-        "DetailedInformationAboutNFT": "Детаљне информације о НФТ-у",
-        "PresaleStarts": "Претпродаја почиње 23. децембра",
-        "OwnerUserNotFound": "Власник овог НФТ-а није регистрован у нашој апликацији.",
-        "BuyNow": "Купите сада",
-        "Buy": "Купи",
-        "Conversation": "Разговор",
-        "Create": "Креирај",
-        "Author": "Аутор",
-        "Commission": "Комисија",
-        "EnterCommission": "Унесите провизију",
-        "Actions": "Акције",
-        "UpdateNFT": "Ажурирајте НФТ",
-        "NotOnSale": "Није на продају",
-        "MovieURL": "УРЛ филма",
-        "EnterPrice": "Унесите цену",
         "Currency": "Валута",
         "AreYouSureDeleteImage": "Да ли сте сигурни да желите да уклоните слику?",
         "AreYouSureDeleteVideo": "Да ли сте сигурни да желите да уклоните видео?",
@@ -335,7 +343,7 @@
             "Author": "Аутор",
             "SelectSeries": "Изаберите серију",
             "Value": "Валуе",
-            "AreYouSure": "Да ли сте сигурни?",
+            "AreYouSure": "Јеси ли сигуран?",
             "AuthorInvalid": "Адреса аутора је неважећа!",
             "Address": "Адреса",
             "CoverImage": "Насловна слика",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "Цуррент БасеУРЛ",
             "ContractAddressAbsent": "Адреса уговора одсутна",
             "FactoryAddressAbsent": "Адреса фабрике одсутна",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Наслов је обавезан",
             "SymbolRequired": "Симбол је обавезан",
             "TypeContractName": "назив уговора",
@@ -375,6 +383,38 @@
             "Title": "Конкурси",
             "NewContest": "Нев Цонтест"
         },
+        "import": {
+            "importNFT": "Увоз НФТ-а",
+            "importAttributes": "Увезите НФТ атрибуте",
+            "fileNotFound": "Жао нам је, ЦСВ датотека није пронађена.",
+            "fileEmpty": "Жао нам је, ЦСВ датотека је празна.",
+            "userIdNotFound": "корисник постоји, али је ИД празан",
+            "errorLine": "ред {{1}}",
+            "fieldNotFound": "Обавезно поље &quot; {{1}} &quot; није пронађено",
+            "displayTypeEmpty": "Тип приказа за &quot; {{1}} &quot; није пронађен",
+            "taskStreamInvalid": "ток задатака је неважећи",
+            "instructionsEmpty": "упутства за ток задатака празна",
+            "complete": "комплетан",
+            "activateUsers": "послати активациону поруку корисницима?",
+            "importProgress": "Напредак",
+            "importOptions": "Опције",
+            "sampleCSV": "Преузмите пример ЦСВ-а",
+            "fileLabel": "Отпреми табелу:",
+            "errorsTitle": "Дошло је до грешака"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Филтрирај према НФТ колекцијама",
+                "ShowNFTCollection": "Прикажи НФТ колекцију у...",
+                "AllCollections": "Све колекције"
+            },
+            "ByUser": {
+                "AllAuthors": "Сви аутори",
+                "AllUsers": "Сви",
+                "FilterByAuthors": "Филтрирај по ауторима"
+            }
+        },
+        "Back": "Назад на колекцију",
         "attributes": {
             "Title": "Управљајте атрибутима",
             "Attributes": "Атрибути",
@@ -398,13 +438,6 @@
             "aboutPlaceholder": "Уреди биографију",
             "SureLogOut": "Да ли сте сигурни да желите да се одјавите?"
         },
-        "Add": "Додати",
-        "Remove": "Уклони",
-        "NoNFTyet": "Још нема НФТ-а",
-        "Claim": "Потраживање",
-        "ClaimNFT": "Захтевај НФТ",
-        "Unlocking": "Откључавање",
-        "Unlock": "Откључај",
         "sales": {
             "factory": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "Откључај",
             "Locked": "Закључано",
             "CustodianAddress": "Адреса чувара",
-            "TokenWasClaimed": "Токен „{{title}}“ је затражен",
-            "TokenWasLocked": "Токен „{{title}}“ је закључан",
-            "TokenWasUnlocked": "Токен „{{title}}“ је откључан"
+            "TokenWasClaimed": "Токен &quot; {{title}} &quot; је заузет",
+            "TokenWasLocked": "Токен &quot; {{title}} &quot; је закључан",
+            "TokenWasUnlocked": "Токен &quot; {{title}} &quot; је откључан"
         }
-    },
-    "errors": {
-        "Error": "Грешка",
-        "WalletAbsent": "Новчаник није повезан.",
-        "Rendering": "Било је грешака при приказивању <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Цена обавезна!",
-        "NameRequired": "Име (обавезно!",
-        "PriceInvalid": "Цена неважећа!",
-        "TransactionFailed": "Трансакција није успела",
-        "ChainNotSupported": "Изабрани ланац није подржан. Подржани ланац: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Потребан је МетаМаск повезан за рад са апликацијом",
-        "UserNotLoggedInMetaMask": "Корисник није пријављен на МетаМаск",
-        "CurrencyNotFound": "Валута није пронађена",
-        "WrongChain": "Овај НФТ је креиран под „{{chain}}“. Молимо користите овај ланац.",
-        "AmountInvalid": "Износ је неважећи!",
-        "NoRecipientSelected": "Није изабран прималац",
-        "NotEnoughPermissionsWallet": "Нема довољно дозвола за читање новчаника овог корисника",
-        "ThisUserHaveNoWallet": "Овом кориснику није додељен новчаник",
-        "TheWalletOfThisUserInvalid": "Новчаник овог корисника је неважећи",
-        "WalletInvalid": "Адреса новчаника је неважећа"
-    },
-    "admin": {
-        "Title": "Средства административна",
-        "SubscriptionTitle": "Планови претплате"
-    },
-    "billing": {
-        "Title": "Наплата средстава",
-        "CreditsMinimum": "Минимални кредити",
-        "CreditsToAdd": "Кредити за додавање",
-        "Save": "сачувати",
-        "ThisLink": "овај линк",
-        "errors": {
-            "CreditsMinimumNegative": "Минимум кредита не може бити негативан",
-            "CreditsToAddNegative": "Кредити за додавање не могу бити негативни"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Изаберите примаоца",
-        "TransactionSuccess": "Трансацтион Суццесс",
-        "OrTypeWalletAddress": "ИЛИ унесите адресу новчаника примаоца"
     },
     "currencies": {
         "choose": "Изаберите валуту"

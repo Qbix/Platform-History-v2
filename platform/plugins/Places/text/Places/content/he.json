@@ -1,59 +1,59 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} לונג)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "בתוך {{1}}"
     },
     "units": {
         "meter": "מטר",
-        "meters": "מטר",
-        "kilometer": "קילומטר",
-        "kilometers": "קיאומטרים",
+        "meters": "מטרים",
+        "kilometer": "קִילוֹמֶטֶר",
+        "kilometers": "קילומטרים",
         "km": "ק&quot;מ",
-        "mile": "קילומטר",
-        "miles": "stomach",
-        "mi": "mi",
+        "mile": "מִיל",
+        "miles": "מיילס",
+        "mi": "מִי",
         "foot": "כף רגל",
-        "feet": "רגל",
+        "feet": "רגליים",
         "inches": "אינץ"
     },
     "location": {
-        "interested": "אני מתעניין בדברים שמתרחשים בתוך {{select}} מתוך",
+        "interested": "אני מעוניין בדברים שיתרחשו בתוך {{select}} של",
         "update": "עדכן את המיקום שלי",
-        "prompt": "{{ClickOrTap}} כאן <br> להגדיר את <br> מקום",
+        "set": "הגדר את המיקום שלי",
+        "prompt": "{{ClickOrTap}} כאן ל<br> הגדר את שלך<br> מקום",
         "myCurrentLocation": "המיקום הנוכחי שלי",
         "enterAddress": "הכנס כתובת",
-        "enterPostcode": "הזן את המיקוד \/ מיקוד שלך",
+        "enterPostcode": "אנא הזן את המיקוד\/מיקוד שלך",
         "create": {
             "action": "הוסף מיקום",
             "title": "מיקום חדש",
-            "nameYourLocation": "תן שם למיקום שלך"
+            "nameYourLocation": "תן שם למיקומך"
         },
         "confirm": {
-            "title": "האם לשמור את המיקום הזה?",
-            "message": "האם אתה מתכוון להשתמש במיקום זה בעתיד?",
+            "title": "לשמור את המיקום הזה?",
+            "message": "האם אתה מתכנן להשתמש במיקום זה שוב בעתיד?",
             "ok": "כן",
             "cancel": "לא"
         },
         "add": {
             "title": "תן שם למיקום זה",
-            "placeholder": "דף הבית, עבודה וכו &#39;",
+            "placeholder": "בית, עבודה וכו&#39;.",
             "ok": "להציל"
         },
         "dialog": {
             "title": "בחר מיקום"
-        },
-        "set": "קבע את המיקום שלי"
+        }
     },
     "areas": {
-        "filterPlaceholder": "כל אזור בתוך מיקום זה?",
+        "filterPlaceholder": "אזור כלשהו בתוך המיקום הזה?",
         "newArea": "אזור חדש",
-        "promptTitle": "הזן שם עבור האזור:",
-        "absent": "הגדר אזור",
-        "error": "שגיאה",
-        "exist": "השטח כבר קיים",
+        "promptTitle": "הזן שם לאזור:",
+        "absent": "נא להגדיר אזור",
+        "error": "שְׁגִיאָה",
+        "exist": "אזור כבר קיים",
         "addNewArea": "הוסף אזור חדש",
-        "add": "הוסף"
+        "add": "לְהוֹסִיף"
     },
     "types": {
         "Places\/locations": {
@@ -61,28 +61,28 @@
             "displayType": "מיקומים"
         },
         "Places\/location": {
-            "description": "מייצג בניין, מקום, ספינה, פארק וכו &#39;.",
+            "description": "מייצג בניין, מקום, ספינה, פארק וכו&#39;.",
             "displayType": "מקום"
         },
         "Places\/area": {
-            "description": "מייצג אזור בתוך מיקום, למשל חדר או סוויטה",
-            "displayType": "אזור"
+            "description": "מייצג אזור בתוך מיקום, כגון חדר או סוויטה",
+            "displayType": "אֵזוֹר"
         },
         "Places\/floor": {
-            "description": "מייצג רצפה בבניין או בספינה",
-            "displayType": "קומה"
+            "description": "מייצג קומה בבניין או בספינה",
+            "displayType": "קוֹמָה"
         },
         "Places\/column": {
-            "description": "מייצג טור בבניין או בספינה",
+            "description": "מייצג עמודה בבניין או בספינה",
             "displayType": "טור"
         },
         "Places\/nearby": {
-            "description": "קטגוריה לדברים שנמצאים במרחק מסוים מגיאוש",
+            "description": "קטגוריה של דברים במרחק מסוים מגיאואש",
             "displayType": "מקומות קרובים"
         },
         "Places\/interest": {
-            "description": "קטגוריה לדברים שנמצאים במרחק מסוים מגאוש, התואמים עניין",
-            "displayType": "מקומות מעניינים"
+            "description": "קטגוריה של דברים במרחק מסוים מגיאואש, תואמת עניין",
+            "displayType": "מקומות עניין"
         }
     }
 }

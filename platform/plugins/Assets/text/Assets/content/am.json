@@ -1,0 +1,564 @@
+{
+    "errors": {
+        "Error": "ስህተት",
+        "WalletAbsent": "ቦርሳው አልተገናኘም።",
+        "Rendering": "<span class='url'>{{1}}<\/span> ሲሰጡ ስህተቶች ነበሩ።",
+        "PriceRequired": "ዋጋ ያስፈልጋል!",
+        "NameRequired": "ስም ያስፈልጋል!",
+        "PriceInvalid": "ዋጋ ልክ ያልሆነ!",
+        "AmountInvalid": "መጠኑ ልክ ያልሆነ!",
+        "TransactionFailed": "ግብይት አልተሳካም።",
+        "ChainNotSupported": "የተመረጠው ሰንሰለት አይደገፍም። የሚደገፍ ሰንሰለት {{supportedChain}}",
+        "NeedMetaMaskConnected": "ከመተግበሪያ ጋር ለመስራት MetaMask ያስፈልጋል",
+        "UserNotLoggedInMetaMask": "ተጠቃሚ ወደ MetaMask አልገባም።",
+        "CurrencyNotFound": "ምንዛሪ አልተገኘም።",
+        "WrongChain": "ይህ NFT የተፈጠረው በ&quot; {{chain}} &quot; ስር ነው። እባኮትን ይህን ሰንሰለት ይጠቀሙ።",
+        "NoRecipientSelected": "ምንም ተቀባይ አልተመረጠም።",
+        "NotEnoughPermissionsWallet": "የዚህን ተጠቃሚ ቦርሳ ለማንበብ በቂ ፍቃዶች የሉም",
+        "ThisUserHaveNoWallet": "ይህ ተጠቃሚ የተመደበ የኪስ ቦርሳ የለውም",
+        "TheWalletOfThisUserInvalid": "የዚህ ተጠቃሚ ቦርሳ ልክ ያልሆነ ነው።",
+        "WalletInvalid": "የኪስ ቦርሳ አድራሻ ልክ አይደለም።"
+    },
+    "admin": {
+        "Title": "ንብረቶች አስተዳደራዊ",
+        "SubscriptionTitle": "የደንበኝነት ምዝገባ ዕቅዶች"
+    },
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ለመክፈል መታ ያድርጉ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} ፡ ክፍያ ለ {{call 'user.displayName'}} ተሰራ",
+        "ThankYouForYourPayment": "ለ {{call 'publisher.displayName'}} ስለከፈሉ እናመሰግናለን",
+        "SubscribedTo": "{{call 'user.displayName'}} ለ {{plan.title}} ተመዝግቧል",
+        "YouSubscribedTo": "ለ {{plan.title}} ተመዝግበዋል።",
+        "Assets\/credits\/alert": "ከመለያዎ ጋር የተያያዘ ማንቂያ አለዎት"
+    },
+    "charge": {
+        "Subject": "ከ {{call 'publisher.displayName'}} በ &quot; {{description}} &quot; {{displayAmount}} ክፍያ ያገኛሉ",
+        "HasBeenCharged": "ሄይ፣ ይህ {{1}} {{2}} ለ {{3}} በ {{4}} መከፈሉን ለማሳወቅ ነው።"
+    },
+    "charged": {
+        "Subject": "ለ&quot; {{description}} &quot; ስለከፈሉ እናመሰግናለን",
+        "HavePaid": "ሄይ {{1}} ፣ ለ {{4}} ከ {{2}} እስከ {{3}} በተሳካ ሁኔታ መክፈላችሁ ፈጣን ማረጋገጫ ነው።"
+    },
+    "payment": {
+        "AboutOrder": "ስለ ትዕዛዝ መረጃ",
+        "PaymentMethod": "የመክፈያ ዘዴ",
+        "ContactInfo": "የመገኛ አድራሻ",
+        "Pay": "ይክፈሉ።",
+        "PaymentSucceeded": "ክፍያ ተሳክቷል።",
+        "PaymentProcessing.": "ክፍያዎ በሂደት ላይ ነው።",
+        "FailTryAgain": "ክፍያዎ የተሳካ አልነበረም፣ እባክዎ እንደገና ይሞክሩ",
+        "SomethingWrong": "የሆነ ስህተት ተከስቷል",
+        "PaymentStatus": "የክፍያ ሁኔታ",
+        "PayTo": "{{displayName}} ይክፈሉ።",
+        "ChooseCurrency": "ምንዛሬ ይምረጡ",
+        "YouCanSendUpTo": "እስከ {{amount}} {{symbol}} ድረስ መላክ ይችላሉ።",
+        "Send": "ላክ",
+        "EnterAmount": "መጠን ያስገቡ"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ግብዣ በ {{invitedUserName}} ተቀብሏል።",
+        "InvitedUserFilledStream": "{{invitedUserName}} {{FilledStreamTitle}} ተሞልቷል።",
+        "ForFillingStream": "ለመሙላት {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "ለመጀመር {{amount}} ክሬዲቶች አሉዎት",
+        "PaymentFor": "ክፍያ ለ&quot; {{1}} &quot;",
+        "PaymentTo": "ክፍያ ለ {{1}}",
+        "PaymentToUser": "ክፍያ ለ {{toUserName}}",
+        "CreatePrivateChat": "ከ {{toUserName}} ጋር ለግል ውይይት",
+        "CreatePaidStream": "{{toStreamName}} ለመፍጠር",
+        "JoinedPaidStream": "በ&quot; <a data-publisherId='<i translate='no'>999&#39; data-streamName=&#39; {{toStreamName}} &quot;&gt; {{toStreamTitle}}<\/a> &quot; ውስጥ ለማስያዝ",
+        "CreatedCommunity": "ማህበረሰብ ለመፍጠር &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "በ&quot; <a data-publisherId='<i translate='no'>999&#39; data-streamName=&#39; {{fromStreamName}} &quot;&gt; {{fromStreamTitle}}<\/a> &quot; ውስጥ እንደ ማስያዣ ተመላሽ ገንዘብ",
+        "BoughtCredits": "{{amount}} ክሬዲት ገዝቷል።",
+        "BonusCredits": "ጉርሻ {{amount}} ምስጋናዎች",
+        "BuyAmountCredits": "{{amount}} ክሬዲት ይግዙ",
+        "WatchClip": "{{fromStreamTitle}} በመመልከት {{amount}} ክሬዲቶች አግኝተዋል",
+        "MissingCredits": "የጠፉ ክሬዲቶች",
+        "YouMissingCredits": "ለመቀጠል ተጨማሪ {{amount}} ክሬዲቶች ያስፈልግዎታል።",
+        "BuyCredits": "ክሬዲቶች ይግዙ",
+        "BuyBonus": "በአንድ ጊዜ {{amount}} ክሬዲት መግዛት ወደ {{bonus}} ክሬዲት ጉርሻ ይመራል።",
+        "Buy": "ግዛ",
+        "PurchaseCredits": "የግዢ ክሬዲቶች",
+        "Credits": "ምስጋናዎች",
+        "ErrorInvalidAmount": "መጠኑ ልክ ያልሆነ",
+        "ErrorInvalidCurrency": "እንደ አለመታደል ሆኖ እስካሁን ምንዛሬ {{currency}} አንደግፍም።",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ምስጋናዎች",
+            "BonusCredits": "{{amount}} ምስጋናዎች"
+        }
+    },
+    "history": {
+        "Date": "ቀን",
+        "Amount": "መጠን",
+        "Description": "መግለጫ",
+        "Client": "ደንበኛ",
+        "User": "ተጠቃሚ",
+        "To": "ወደ",
+        "From": "ከ",
+        "SeeHistory": "ለ {{1}} የክፍያ ታሪክ ይመልከቱ",
+        "HistoryEmpty": "እስካሁን ምንም ውሂብ የለዎትም።",
+        "PaymentFor": "{{amount}} ምስጋናዎች ተልኳል።",
+        "PaymentTo": "{{amount}} ምስጋናዎች ተልኳል።",
+        "PaymentToUser": "{{amount}} ምስጋናዎች ተልኳል።",
+        "CreatePaidStream": "{{amount}} ክሬዲት አውጥቷል።",
+        "WatchClip": {
+            "+": "{{amount}} ክሬዲት አግኝቷል",
+            "-": "{{amount}} ክሬዲት አውጥቷል።"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} ክሬዲት አግኝቷል",
+            "-": "{{amount}} ክሬዲት አውጥቷል።"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} ምስጋናዎችን ተቀብሏል።",
+            "-": "{{amount}} ምስጋናዎች ተልኳል።"
+        },
+        "CreatedCommunity": "{{amount}} ክሬዲት አውጥቷል።",
+        "BoughtCredits": "{{amount}} ክሬዲት ገዝቷል።",
+        "BonusCredits": "{{amount}} ክሬዲት ጉርሻ አግኝቷል",
+        "InviteAcceptedBy": "{{amount}} ክሬዲት አግኝቷል",
+        "Streams_user_firstname": "{{amount}} ክሬዲት አግኝቷል",
+        "Streams_user_lastname": "{{amount}} ክሬዲት አግኝቷል",
+        "Streams_user_icon": "{{amount}} ክሬዲት አግኝቷል",
+        "Places_user_location": "{{amount}} ክሬዲት አግኝቷል",
+        "Streams_greeting": "{{amount}} ክሬዲት አግኝቷል",
+        "YouHaveCreditsToStart": "{{amount}} ክሬዲት አግኝቷል"
+    },
+    "subscriptions": {
+        "infoTitle": "የክፍያ መረጃ ያቀናብሩ",
+        "confirm": {
+            "title": "የደንበኝነት ምዝገባን ጀምር",
+            "message": "ለ&quot; {{title}} &quot; ተደጋጋሚ ምዝገባ ይጀመር?",
+            "ok": "እሺ",
+            "cancel": "ሰርዝ"
+        },
+        "CreditOrDebitCard": "ክሬዲት ወይም ዴቢት ካርድ",
+        "SubscribePayment": "ክፍያ ይመዝገቡ",
+        "ImmediatePayment": "አፋጣኝ ክፍያ",
+        "ProcessingPayment": "ክፍያን በማስኬድ ላይ",
+        "SubscriptionAlreadyPaid": "ይህ የደንበኝነት ምዝገባ አስቀድሞ ተከፍሏል።",
+        "SubscriptionNotActive": "ይህ የደንበኝነት ምዝገባ ገቢር አይደለም።",
+        "Subscribed": "ተመዝግቧል",
+        "Unsubscribed": "ከደንበኝነት ምዝገባ ወጥተዋል።",
+        "Unsubscribe": "ከደንበኝነት ምዝገባ ይውጡ",
+        "Subscribe": "ሰብስክራይብ ያድርጉ",
+        "Started": "ተጀመረ",
+        "EndsIn": "ውስጥ ያበቃል",
+        "NextPay": "ቀጣይ ክፍያ",
+        "Period": "ጊዜ",
+        "Price": "ዋጋ",
+        "AreYouSureUnsubscribe": "እርግጠኛ ነዎት ይህን እቅድ ከደንበኝነት ምዝገባ መውጣት ይፈልጋሉ?",
+        "YouUnsubscribedFromPlan": "ከዕቅድ &quot; {{planTitle}} &quot; ደንበኝነት ምዝገባ ወጥተዋል። ክፍያ አይከፍሉም፣ ነገር ግን ምዝገባዎ እስከ {{endsIn}} ድረስ ይቀጥላል",
+        "plan": {
+            "TitlePlaceholder": "የእቅድ ርዕስ",
+            "PricePlaceholder": "ዋጋ",
+            "DescriptionPlaceholder": "የደንበኝነት ምዝገባ ዕቅድ መግለጫ",
+            "SavePlan": "እቅድ አስቀምጥ",
+            "NewPlan": "አዲስ እቅድ"
+        }
+    },
+    "payments": {
+        "infoTitle": "የክፍያ መረጃ ያቀናብሩ",
+        "BuyAmountCredits": "{{amount}} ክሬዲት ይግዙ",
+        "confirm": {
+            "title": "ክፍያ ፈጽሙ",
+            "message": "{{symbol}} {{amount}} ለመክፈል ተስማምተዋል?",
+            "ok": "እሺ",
+            "cancel": "ሰርዝ"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ምስጋናዎች",
+            "description": "ክሬዲቶችን እና ክፍያዎችን ይከታተላል"
+        },
+        "Assets\/plan": {
+            "displayType": "የደንበኝነት ምዝገባ እቅድ",
+            "description": "የደንበኝነት ምዝገባ እቅድ"
+        },
+        "Assets\/subscription": {
+            "displayType": "የደንበኝነት ምዝገባ",
+            "description": "የደንበኝነት ምዝገባ"
+        },
+        "Assets\/product": {
+            "displayType": "ምርት",
+            "description": "እየተሸጠ ያለ ምርት"
+        },
+        "Assets\/service": {
+            "displayType": "አገልግሎት",
+            "description": "አገልግሎት እየተሰጠ ነው።"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} ክሬዲት አግኝቷል"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} ክሬዲት ገዝቷል።"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ጉርሻ {{amount}} ምስጋናዎች"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} ክሬዲት አውጥቷል።"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} ክሬዲት ወደ {{toUserName}} ተልኳል።"
+        },
+        "Assets\/credits\/received": {
+            "content": "ከ {{fromUserName}} {{amount}} ክሬዲት ተቀብሏል።"
+        },
+        "Assets\/credits\/alert": {
+            "content": "በመለያዎ ላይ ትንሽ ክሬዲቶች አሉዎት። ተጨማሪ ክሬዲቶችን ለመግዛት እባክዎን <a href='<i translate='no'>999&#39;&gt;ን<\/a> ይጎብኙ።"
+        }
+    },
+    "billing": {
+        "Title": "የንብረት ማስከፈል",
+        "CreditsMinimum": "ዝቅተኛ ክሬዲቶች",
+        "CreditsToAdd": "ለማከል ምስጋናዎች",
+        "Save": "አስቀምጥ",
+        "ThisLink": "ይህ አገናኝ",
+        "errors": {
+            "CreditsMinimumNegative": "ዝቅተኛው ክሬዲት አሉታዊ ሊሆን አይችልም።",
+            "CreditsToAddNegative": "የሚጨመሩ ክሬዲቶች አሉታዊ ሊሆኑ አይችሉም"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "አዲስ አገልግሎት",
+            "TitlePlaceholder": "የአገልግሎት ርዕስ",
+            "PricePlaceholder": "ዋጋ ያዘጋጁ",
+            "LinkPlaceholder": "ተጨማሪ መረጃ አገናኝ ያዘጋጁ",
+            "DescriptionPlaceholder": "የአገልግሎት መግለጫ",
+            "SaveService": "አገልግሎት ይቆጥቡ",
+            "SelectRequiredParticipants": "የሚፈለጉ ተዛማጅ ተሳታፊዎች",
+            "RequiredParticipantsDesc": "እባክዎ ይህን አገልግሎት ለመጠቀም የሚያስፈልጉትን ተዛማጅ ተሳታፊዎችን ይምረጡ (ለምሳሌ የቤት እንስሳት ለ &quot;ውሾች ትርኢት&quot;፣ ወይም ልጆች ለ&quot;የልጆች በዓል&quot; ወዘተ)። አገልግሎቱ የሚከፈል ከሆነ ተጠቃሚ ለእያንዳንዱ ተዛማጅ ተሳታፊዎች መክፈል አለበት።"
+        },
+        "EditServiceTemplate": {
+            "Title": "አገልግሎትን ያርትዑ"
+        },
+        "ManageServiceTemplates": "የአገልግሎት አብነቶችን አስተዳድር",
+        "ManageServices": "አገልግሎቶችን ያስተዳድሩ",
+        "Free": "ፍርይ",
+        "OptionalContribution": "አማራጭ አስተዋፅዖ",
+        "RequiredPayment": "የሚፈለግ ክፍያ",
+        "AreYouSureDelete": "እርግጠኛ ነዎት ይህን አገልግሎት መሰረዝ ይፈልጋሉ?",
+        "AmountServicesRelated": "ከዚህ አገልግሎት ጋር የተያያዙ {{amount}} አቅርቦቶች አሉ። እንዲሁም ይወገዳሉ."
+    },
+    "transfer": {
+        "SelectRecipient": "ተቀባይ ይምረጡ",
+        "TransactionSuccess": "የግብይት ስኬት",
+        "OrTypeWalletAddress": "ወይም የተቀባይ ቦርሳ አድራሻ ይተይቡ"
+    },
+    "NFT": {
+        "Title": "ርዕስ",
+        "Name": "ስም",
+        "EnterName": "ስም አስገባ",
+        "EnterAuthorWallet": "የደራሲ ቦርሳ አስገባ",
+        "InformationAboutTitle": "ስለ {{title}} NFT መረጃ",
+        "Description": "መግለጫ",
+        "DetailedInformationAboutNFT": "ስለ NFT ዝርዝር መረጃ",
+        "PresaleStarts": "ቅድመ ሽያጭ ዲሴምበር 23 ይጀምራል",
+        "OwnerUserNotFound": "የዚህ NFT ባለቤት በእኛ መተግበሪያ ውስጥ አልተመዘገበም።",
+        "BuyNow": "አሁን ግዛ",
+        "Buy": "ግዛ",
+        "Add": "አክል",
+        "Remove": "አስወግድ",
+        "NoNFTyet": "እስካሁን ምንም ኤንኤፍቲዎች የሉም",
+        "Conversation": "ውይይት",
+        "Create": "ፍጠር",
+        "CurrentBid": "አሁን ያለ ጨረታ",
+        "StartingIn": "ጀምሮ",
+        "EndingIn": "የሚጨርስ",
+        "CreateNFT": "NFT ይፍጠሩ",
+        "TitlePlaceholder": "የእርስዎን NFT ርዕስ ይስጡት።",
+        "DescriptionPlaceholder": "የእርስዎን NFT መግለጫ ይስጡ",
+        "CreateYourNFT": "የእርስዎን NFT ይፍጠሩ",
+        "Royalties": "የሮያሊቲ ክፍያ",
+        "RoyaltyPlaceholder": "አማራጭ። ከመተላለፉ በፊት ለፈጣሪ የተከፈለው መጠን።",
+        "ExpirationDate": "የመጠቀሚያ ግዜ",
+        "StartingDate": "የመጀመሪያ ቀን",
+        "BidsBelowThisAmount": "ከዚህ መጠን በታች የሆነ ጨረታ አይፈቀድም።",
+        "MinimumBid": "ዝቅተኛው ጨረታ",
+        "Author": "ደራሲ",
+        "Price": "ዋጋ",
+        "Commission": "ኮሚሽን",
+        "EnterCommission": "ኮሚሽን አስገባ",
+        "Owner": "ባለቤት",
+        "SelectCategory": "ምድብ ይምረጡ",
+        "Day": "ቀን",
+        "Days": "ቀናት",
+        "Hour": "ሰአት",
+        "Hours": "ሰዓታት",
+        "Minute": "ደቂቃ",
+        "Minutes": "ደቂቃዎች",
+        "Second": "ሁለተኛ",
+        "Seconds": "ሰከንዶች",
+        "SalesCreator": "ሽያጩ ወደ ፈጣሪ ይሄዳል",
+        "Details": "ዝርዝሮች",
+        "Bids": "ጨረታዎች",
+        "History": "ታሪክ",
+        "LoremIpsum": "ሎሬም ኢፕሱም የሕትመት እና የጽሕፈት መኪና ኢንዱስትሪ ጽሑፍ ብቻ ነው።",
+        "PutOnSale": "ለሽያጭ ያቅርቡ",
+        "PutOffSale": "ከሽያጭ ይውጡ",
+        "Transfer": "ማስተላለፍ",
+        "Actions": "ድርጊቶች",
+        "Claim": "የይገባኛል ጥያቄ",
+        "ClaimNFT": "NFT ይገባኛል",
+        "Unlocking": "በመክፈት ላይ",
+        "Unlock": "ክፈት",
+        "Update": "አዘምን",
+        "UpdateToken": "ማስመሰያ ያዘምኑ",
+        "UpdateNFT": "NFT አዘምን",
+        "CreateToken": "ማስመሰያ ይፍጠሩ",
+        "PlaceBid": "ጨረታ ማስገባት",
+        "SoldOut": "የተሸጠ",
+        "NotOnSale": "በሽያጭ ላይ አይደለም",
+        "NftName": "የ NFT ስም",
+        "DescribeYourNFT": "እባክዎ የእርስዎን NFT ይግለጹ",
+        "NftPicture": "NFT የሚወክል ምስል",
+        "NftMovie": "NFT የሚወክል ፊልም",
+        "UploadMovie": "ፊልም ስቀል",
+        "MovieSource": "የፊልም ምንጭ",
+        "MovieURL": "የፊልም URL",
+        "UploadFile": "ፋይል ስቀል",
+        "PutOnMarketplace": "በገበያ ቦታ ላይ ያስቀምጡ",
+        "InstantPurchase": "ተጠቃሚዎች የእርስዎን NFT ወዲያውኑ እንዲገዙ ለማስቻል ዋጋ ያስገቡ",
+        "FixedPrice": "ቋሚ ዋጋ",
+        "TimedAuction": "በጊዜ የተያዘ ጨረታ",
+        "OpenForBids": "ለጨረታ ክፍት ነው።",
+        "PriceOnePiece": "ለአንድ ቁራጭ ዋጋ ያስገቡ",
+        "EnterPrice": "ዋጋ ያስገቡ",
+        "EnterMinimumBid": "ዝቅተኛውን ጨረታ ያስገቡ",
+        "SelectChain": "ሰንሰለት ይምረጡ",
+        "Currency": "ምንዛሪ",
+        "AreYouSureDeleteImage": "እርግጠኛ ነህ ምስልን ማስወገድ ትፈልጋለህ?",
+        "AreYouSureDeleteVideo": "እርግጠኛ ነዎት ቪዲዮን ማስወገድ ይፈልጋሉ?",
+        "series": {
+            "Name": "ስም",
+            "Icon": "አዶ",
+            "Description": "መግለጫ",
+            "Author": "ደራሲ",
+            "SelectSeries": "ተከታታይ ይምረጡ",
+            "Value": "ዋጋ",
+            "AreYouSure": "ኧረ",
+            "AuthorInvalid": "የደራሲ አድራሻ ልክ አይደለም!",
+            "Address": "አድራሻ",
+            "CoverImage": "የሽፋን ምስል",
+            "UploadCoverImage": "የሽፋን ምስል ይስቀሉ",
+            "CommissionAddressInvalid": "የኮሚሽኑ አድራሻ ልክ ያልሆነ ነው።",
+            "OnSale": "በሽያጭ ላይ",
+            "OffSale": "ከሽያጭ ውጪ",
+            "CreateSeries": "ተከታታይ ይፍጠሩ",
+            "UpdateSeries": "ተከታታይ አዘምን",
+            "SeriesInfo": "ተከታታይ መረጃ",
+            "SelectAuthor": "ደራሲ ይምረጡ",
+            "NewItem": "አዲስ NFT ተከታታይ",
+            "NamePlaceholder": "የተከታታይ ስም አስገባ",
+            "DescPlaceholder": "ተከታታይ መግለጫ አስገባ",
+            "EndingIn": "በማጠናቀቅ ላይ"
+        },
+        "contract": {
+            "CreateContract": "ውል ይፍጠሩ",
+            "SelectContract": "ውል ይምረጡ",
+            "CreateContractFor": "ለ {{userName}} ውል ይፍጠሩ",
+            "ContractFor": "ውል ለ {{userName}}",
+            "UpdateContract": "ኮንትራቱን አዘምን",
+            "TransferOwnership": "ባለቤትነትን ማስተላለፍ",
+            "SetBaseURI": "Base URI አዘጋጅ",
+            "SetSuffix": "ቅጥያ አዘጋጅ",
+            "CurrentOwner": "የአሁን ባለቤት",
+            "CurrentBaseURL": "የአሁኑ BaseURL",
+            "ContractAddressAbsent": "የውል አድራሻ የለም።",
+            "FactoryAddressAbsent": "የፋብሪካ አድራሻ የለም።",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
+            "TitleRequired": "ርዕስ ያስፈልጋል",
+            "SymbolRequired": "ምልክት ያስፈልጋል",
+            "TypeContractName": "የውል ስም",
+            "TypeContractSymbol": "የኮንትራት ምልክት (ከፍተኛው 10 ቁምፊዎች)"
+        },
+        "contests": {
+            "Title": "ውድድሮች",
+            "NewContest": "አዲስ ውድድር"
+        },
+        "import": {
+            "importNFT": "NFT ን በማስመጣት ላይ",
+            "importAttributes": "NFT ባህሪያትን አስመጣ",
+            "fileNotFound": "ይቅርታ፣ የCSV ፋይል አልተገኘም።",
+            "fileEmpty": "ይቅርታ፣ የCSV ፋይል ባዶ ነው።",
+            "userIdNotFound": "ተጠቃሚ አለ ግን መታወቂያ ባዶ ነው።",
+            "errorLine": "መስመር {{1}}",
+            "fieldNotFound": "አስፈላጊው መስክ &quot; {{1}} &quot; አልተገኘም",
+            "displayTypeEmpty": "የ&quot; {{1}} &quot; ማሳያ አይነት አልተገኘም።",
+            "taskStreamInvalid": "የተግባር ዥረት ልክ አይደለም።",
+            "instructionsEmpty": "የተግባር ዥረት መመሪያዎች ባዶ",
+            "complete": "ተጠናቀቀ",
+            "activateUsers": "የማግበር መልእክት ለተጠቃሚዎች ይላኩ?",
+            "importProgress": "እድገት",
+            "importOptions": "አማራጮች",
+            "sampleCSV": "ናሙና CSV አውርድ",
+            "fileLabel": "የተመን ሉህ ስቀል፡",
+            "errorsTitle": "ስህተቶች ተከስተዋል።"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "በNFT ስብስቦች አጣራ",
+                "ShowNFTCollection": "የNFT ስብስብን አሳይ በ...",
+                "AllCollections": "ሁሉም ስብስቦች"
+            },
+            "ByUser": {
+                "AllAuthors": "ሁሉም ደራሲዎች",
+                "AllUsers": "ሁሉም ሰው",
+                "FilterByAuthors": "በደራሲያን አጣራ"
+            }
+        },
+        "Back": "ወደ ስብስብ ተመለስ",
+        "attributes": {
+            "Title": "ባህሪያትን አስተዳድር",
+            "Attributes": "ባህሪያት",
+            "DisplayTitle": "የማሳያ ዓይነት",
+            "AddDisplayType": "አዲስ የማሳያ አይነት ያክሉ",
+            "NewDisplay": "አዲስ ማሳያ",
+            "TraitTitle": "የባህርይ አይነት",
+            "AddTraitTitle": "አዲስ የባህሪ አይነት ያክሉ",
+            "NewTrait": "አዲስ የባህርይ ዓይነት",
+            "ValueTitle": "ዋጋ",
+            "AddValueTitle": "አዲስ እሴት ጨምር",
+            "NewValue": "አዲስ እሴት",
+            "NewAttribute": "አዲስ ባህሪ",
+            "UpdateAttributes": "ባህሪያትን አዘምን",
+            "SaveAttributes": "ባህሪያትን አስቀምጥ"
+        },
+        "profile": {
+            "LogOut": "ውጣ",
+            "Title": "መገለጫ ለ {{userName}}",
+            "Description": "የተጠቃሚ ዝርዝሮች",
+            "aboutPlaceholder": "Bio አርትዕ",
+            "SureLogOut": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?"
+        },
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFT ውል",
+                        "seriesId": "ተከታታይ መታወቂያ",
+                        "owner": "ባለቤት",
+                        "currency": "ምንዛሬ",
+                        "price": "ዋጋ",
+                        "beneficiary": "ተጠቃሚ",
+                        "autoindex": "አውቶኢንዴክስ",
+                        "duration": "ቆይታ",
+                        "rateInterval": "የጊዜ ክፍተት",
+                        "rateAmount": "መጠን መጠን"
+                    },
+                    "small": {
+                        "NFTContract": "NFT ውል",
+                        "seriesId": "ቶከኖች በዚህ ተከታታይ ውስጥ ይለጠፋሉ።",
+                        "owner": "የአብነት ባለቤት፣ ያለበለዚያ ላኪ ይሆናል።",
+                        "currency": "ለተገዙ ቶከኖች ምንዛሬ, ዜሮ ከሆነ - ለአገሬው ሳንቲሞች",
+                        "price": "ዋጋ",
+                        "beneficiary": "ቶከን በመሸጥ ተጠቃሚ፣ ካልሆነ ላኪ ይሆናል።",
+                        "autoindex": "አውቶኢንዴክስ",
+                        "duration": "ከተጣራ በኋላ ቆልፍ. ዜሮ ማለት ወዲያውኑ ያግኙት.",
+                        "rateInterval": "ለልዩ ግዢ ባልዲ ክፍተት",
+                        "rateAmount": "ለልዩ ግዢ ባልዲ መጠን"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(አማራጭ)",
+                    "number": "ቁጥር",
+                    "address": "አድራሻ",
+                    "fraction": "ክፍልፋይ",
+                    "integer": "ኢንቲጀር",
+                    "seconds": "ሰከንዶች",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce": "ማምረት",
+                "viewInstancesList": "ዝርዝር አድስ"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "ተከታታይ መታወቂያ",
+                        "account": "መለያ",
+                        "amount": "መጠን"
+                    },
+                    "small": {
+                        "seriesId": "አዲስ ማስመሰያ ከእንደዚህ ዓይነት መታወቂያ ጋር በተከታታይ ይሆናል።",
+                        "account": "አዲስ የተፈጠረ NFT ባለቤት። ካልተዋቀረ - የአሁኑ የኪስ ቦርሳ ይጠቀማል",
+                        "amount": "መጠን NFT ወደ ሚንት"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(አማራጭ)",
+                    "seriesId": "መታወቂያ",
+                    "account": "መለያ",
+                    "amount": "መጠን",
+                    "integer": "ኢንቲጀር"
+                },
+                "btn": {
+                    "Purchase": "ግዢ",
+                    "SpecialPurchase": "ልዩ ግዢ"
+                }
+            },
+            "whitelist": {
+                "form": {
+                    "labels": {
+                        "account": "አድራሻ"
+                    },
+                    "small": {
+                        "account": "አድራሻ"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "ልክ ያልሆነ አድራሻ"
+                },
+                "placeholders": {
+                    "account": "አድራሻ"
+                },
+                "addToWhitelist": "ወደ የተፈቀደላቸው ዝርዝር ያክሉ",
+                "removeFromWhitelist": "ከተፈቀደላቸው ዝርዝር አስወግድ"
+            }
+        },
+        "locked": {
+            "form": {
+                "labels": {
+                    "tokenId": "ማስመሰያ መታወቂያ",
+                    "custodian": "ጠባቂ",
+                    "recipient": "ተቀባይ"
+                },
+                "small": {
+                    "tokenId": "token መታወቂያ ምን መቆለፍ ወይም መክፈት እንዳለበት",
+                    "custodian": "መክፈት የሚችል አድራሻ",
+                    "recipient": "ቶከኖችን የሚቀበል አድራሻ"
+                }
+            },
+            "errors": {
+                "invalidTokenId": "ልክ ያልሆነ tokenId",
+                "invalidCustodian": "ልክ ያልሆነ ጠባቂ",
+                "invalidRecipient": "ልክ ያልሆነ ተቀባይ"
+            },
+            "placeholders": {
+                "optional": "(አማራጭ)",
+                "tokenId": "መታወቂያ",
+                "custodian": "አድራሻ"
+            },
+            "Lock": "ቆልፍ",
+            "Unlock": "ክፈት",
+            "Locked": "ተቆልፏል",
+            "CustodianAddress": "የጥበቃ አድራሻ",
+            "TokenWasClaimed": "ማስመሰያ &quot; {{title}} &quot; ተብሏል",
+            "TokenWasLocked": "ማስመሰያ &quot; {{title}} &quot; ተቆልፏል",
+            "TokenWasUnlocked": "ማስመሰያ &quot; {{title}} &quot; ተከፍቷል።"
+        }
+    },
+    "currencies": {
+        "choose": "ምንዛሬ ይምረጡ"
+    }
+}

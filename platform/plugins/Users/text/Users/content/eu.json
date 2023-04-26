@@ -1,16 +1,40 @@
 {
+    "avatar": {
+        "Someone": "Norbait"
+    },
+    "identifier": {
+        "types": {
+            "email": "Posta elektronikoa",
+            "mobile": "Mugikorra",
+            "web3": "Web 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopiatu! Orain edonon itsats dezakezu."
+    },
+    "analytics": {
+        "Title": "Analitika",
+        "Daily": "Egunero",
+        "Weekly": "Asterokoa",
+        "Monthly": "Hilerokoa",
+        "Application": "Aplikazio",
+        "Pages": "Orriak",
+        "Services": "Zerbitzuak",
+        "Faq": "Ohiko galderak",
+        "WeekDays": "Aste Egunak"
+    },
     "actions": {
         "LogIn": "saioa hasi",
         "LogOut": "Saioa amaitu"
     },
     "activate": {
+        "OneTimeCode": "Sartu jaso duzun kodea:",
         "SetAsPrimary": "Ezarri {{1}} nire {{2}} nagusi gisa",
         "ChoosePassPhrase": "Aukeratu <strong>pasaesaldi<\/strong> bat saioa hasteko.<br> Erraz gogoratuko dituzun hitz batzuez osatutako esaldi sinplea.",
         "ChoosePassPhraseSeeSuggestions": "Aukeratu <strong>pasaesaldi<\/strong> on bat zure kontua babesteko. Ikusi ideia batzuen iradokizunak.",
         "LogOutAndTryAgain": "Amaitu saioa eta saiatu berriro",
         "IfYouFeel": "Zerbait gaizki joan dela sentitzen baduzu, egin dezakezu",
         "SetIdentifierButtonTitle": "berriro hasi",
-        "OneTimeCode": "Sartu jaso duzun kodea:",
         "ActivateMyAccount": "Aktibatu Nire kontua"
     },
     "session": {
@@ -40,31 +64,35 @@
         "CompletedActivation": "Erabiltzaileen aktibazioa osatu duzu.",
         "CompletedActivationLogIn": "Erabiltzaileen aktibazioa osatu duzu. Saiatu orain saioa hasten."
     },
-    "usersContacts": {
-        "selectLabel": "Hautatu etiketa.",
-        "inviteUser": "Erabiltzaileak gonbidatu",
-        "selectRole": "Hautatu Rol",
-        "inviteRole": "Gonbidatu {{role}}"
-    },
-    "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da",
     "contacts": {
         "dialog": {
             "title": "Aukeratu kontaktua",
-            "SearchByName": "Bilatu izenaren arabera",
             "CreateAccount": "+ Kontaktu berria",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ez da aurkitu",
+            "SearchByName": "Bilatu izenaren arabera",
             "EmptyContacts": "Kontaktuak ez dira aurkitu..."
         },
         "select": {
             "title": "Hautatu {{displayName}} kontaktua"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Mesedez, hautatu etiketa.",
+        "inviteUser": "Erabiltzaileak gonbidatu",
+        "selectRole": "Hautatu Rol",
+        "inviteRole": "Gonbidatu {{role}}"
+    },
+    "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da",
+    "platforms": {
+        "wallet": "Diru-zorroa",
+        "broadcast": "Emisioa"
+    },
     "login": {
         "title": "Ongi etorri",
         "directions": "Sortu kontu bat edo hasi saioa.",
         "directionsNoRegister": "Hasi saioa kontu bat baduzu.",
-        "goButton": "⮕",
-        "passphrase": "Idatzi pasaesaldia:",
+        "goButton": "➔",
+        "passphrase": "Sartu pasaesaldia:",
         "loginButton": "Hasi",
         "registerButton": "Hasi",
         "resendButton": "Bidali aktibazio-mezua",
@@ -74,9 +102,10 @@
         "resendClose": "Itxi",
         "noPassphrase": "Saioa hasi aurretik, pasaesaldi bat ezarri behar duzu zure aktibazio-mezuko estekan klik eginez.",
         "notVerified": "Zure buruari aktibazio-mezu bat bidali behar diozu saioa hasteko.",
-        "emailExists": "Email honekin erregistratzen saiatu zara aurretik? Hala bada, egiaztatu sarrera-ontzia zure kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
+        "emailExists": "Saiatu al zara aurretik mezu elektroniko honekin erregistratzen? Hala bada, egiaztatu sarrera-ontzia zure kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
         "mobileExists": "Saiatu al zara aurretik mugikor zenbaki honekin erregistratzen? Hala bada, egiaztatu zure SMSa zure kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
         "usingOther": "edo ahal duzu",
+        "connectPlatforms": "edo konektatu erabiliz:",
         "prompt": "Erabiltzaile izena aukeratu:",
         "newUser": "edo sortu kontu berri bat behean",
         "placeholders": {
@@ -88,21 +117,13 @@
         "confirmTerms": "Zerbitzu-baldintzak onartu?",
         "facebookNoEmail": "Zure facebook-eko kontuari baieztatutako helbide elektroniko bat falta zaio. Hasi saioa jatorrizko moduan.",
         "picTooltip": "Irudi hau geroago alda dezakezu",
-        "wallet": {
-            "payload": "Hasi saioa {{host}} unean {{timestamp}}",
-            "alert": {
-                "title": "Wallet-era birbideratzen",
-                "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
-            }
-        },
         "web3": {
-            "payload": "Hasi saioa {{host}}-n {{timestamp}} unean",
+            "payload": "Hasi saioa {{host}} {{timestamp}} momentuan",
             "alert": {
                 "title": "Wallet-era birbideratzen",
                 "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
             }
-        },
-        "connectPlatforms": "edo konektatu erabiliz:"
+        }
     },
     "setIdentifier": {
         "title": "Gehitu saioa hasteko modu bat",
@@ -117,7 +138,7 @@
     "prompt": {
         "title": "{{Platform}} Kontua",
         "areUsing": "{{platform}} gisa erabiltzen ari zara",
-        "noLongerUsing": "Jada ez zaude {{platform}}-ra konektatuta",
+        "noLongerUsing": "Jada ez zaude {{platform}} ra konektatuta",
         "doAuth": "Hasi saioa kontu honekin",
         "doSwitch": "Aldatu kontu honetara"
     },
@@ -128,37 +149,9 @@
         "Guest": "Gonbidatua",
         "Host": "Ostalaria"
     },
-    "analytics": {
-        "Title": "Analitika",
-        "Daily": "Egunero",
-        "Weekly": "Asterokoa",
-        "Monthly": "Hilerokoa",
-        "Application": "Aplikazio",
-        "Pages": "Orriak",
-        "Services": "Zerbitzuak",
-        "Faq": "Ohiko galderak",
-        "WeekDays": "Aste Egunak"
-    },
-    "avatar": {
-        "Someone": "Norbait"
-    },
     "web3": {
         "WrongMethod": "Kontratu-metodo okerra {{methodName}}",
         "ChangeWallet": "Aldatu zorroa"
-    },
-    "identifier": {
-        "types": {
-            "email": "Posta elektronikoa",
-            "mobile": "Mugikorra",
-            "web3": "Web 3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopiatu! Orain edonon itsats dezakezu."
-    },
-    "platforms": {
-        "wallet": "Diru-zorroa",
-        "broadcast": "Emisioa"
     },
     "labels": {
         "addToPhonebook": "Gehitu Nire telefonoko kontaktuetara",

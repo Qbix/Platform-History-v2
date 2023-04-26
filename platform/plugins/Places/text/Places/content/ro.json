@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "în {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "în termen de {{1}}"
     },
     "units": {
         "meter": "metru",
@@ -32,14 +32,14 @@
         },
         "confirm": {
             "title": "Salvați această locație?",
-            "message": "Intenționați să folosiți această locație din nou în viitor?",
+            "message": "Intenționați să utilizați din nou această locație în viitor?",
             "ok": "da",
             "cancel": "Nu"
         },
         "add": {
             "title": "Denumiți această locație",
             "placeholder": "Acasă, serviciu etc.",
-            "ok": "salva"
+            "ok": "Salvați"
         },
         "dialog": {
             "title": "Alegeți Locație"

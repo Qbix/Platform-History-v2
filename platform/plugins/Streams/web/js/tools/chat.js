@@ -184,7 +184,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			dir: '{{Streams}}/views',
 			name: 'Streams/chat/main',
 			fields: {
-				placeholder: "Add a comment"
+				placeholder: null
 			}
 		},
 		Streams_chat_noMessages: {
@@ -320,7 +320,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = tool.state;
 		var loggedInUserId = Q.Users.loggedInUserId();
 		var isPublisher = loggedInUserId === Q.getObject("stream.fields.publisherId", state);
-
 		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
 		var what = subscribed ? 'on' : 'off';
 		var touchlabel = subscribed ? tool.text.Subscribed : tool.text.Unsubscribed;
@@ -331,6 +330,13 @@ Q.Tool.define('Streams/chat', function(options) {
 		fields.closeable = state.closeable && isPublisher;
 		fields.earlierSrc = Q.url('{{Streams}}/img/chat/earlier.png');
 		fields.subscriptionSrc = Q.url('{{Communities}}/img/subscription/'+what+'/80.png');
+		
+		if (!fields.placeholder) {
+			var isPrivate = state.stream && state.stream.getAttribute('private');
+			var placeholderKey = isPrivate ? 'Private' : 'Public';
+			fields.placeholder = Q.text.Streams.chat.placeholders[placeholderKey];
+		}
+
 		Q.Template.render(
 			'Streams/chat/main',
 			fields,

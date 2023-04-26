@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Mtu fulani"
+    },
+    "identifier": {
+        "types": {
+            "email": "Barua pepe",
+            "mobile": "Rununu",
+            "web3": "Wavuti3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Imenakiliwa! Sasa unaweza kuibandika popote."
+    },
     "analytics": {
         "Title": "Uchanganuzi",
         "Daily": "Kila siku",
@@ -12,16 +25,16 @@
     },
     "actions": {
         "LogIn": "Ingia",
-        "LogOut": "toka nje"
+        "LogOut": "ingia nje"
     },
     "activate": {
-        "SetAsPrimary": "Weka {{1}} kama msingi wangu {{100}}",
-        "ChoosePassPhrase": "Chagua neno la <strong>kupita<\/strong> ili kuingia nalo.<br> Maneno rahisi yenye maneno machache ambayo utakumbuka kwa urahisi.",
-        "ChoosePassPhraseSeeSuggestions": "Chagua neno zuri la <strong>pasi<\/strong> ili kulinda akaunti yako. Tazama mapendekezo kwa baadhi ya mawazo.",
+        "OneTimeCode": "Weka msimbo uliopokea:",
+        "SetAsPrimary": "Weka {{1}} kama {{2}} yangu ya msingi",
+        "ChoosePassPhrase": "Chagua <strong>neno la kupita<\/strong> ili kuingia nalo.<br> Maneno rahisi yenye maneno machache ambayo utakumbuka kwa urahisi.",
+        "ChoosePassPhraseSeeSuggestions": "Chagua <strong>kifungu kizuri cha pasi<\/strong> ili kulinda akaunti yako. Tazama mapendekezo kwa baadhi ya mawazo.",
         "LogOutAndTryAgain": "Toka na Ujaribu Tena",
         "IfYouFeel": "Ikiwa unahisi kuwa kuna kitu kimeenda vibaya, unaweza",
         "SetIdentifierButtonTitle": "anza tena",
-        "OneTimeCode": "Weka msimbo uliopokea:",
         "ActivateMyAccount": "Washa Akaunti Yangu"
     },
     "session": {
@@ -30,7 +43,7 @@
     "authorize": {
         "GetStarted": "Anza",
         "Authorize": "Kuidhinisha",
-        "TermsLabel": "Nimesoma na kukubali<br> kwa {{link}}",
+        "TermsLabel": "Nimesoma na kukubali<br> hadi {{link}}",
         "TermsTitle": "Masharti",
         "mustAgree": "Kwanza lazima ukubali masharti."
     },
@@ -70,12 +83,16 @@
         "inviteRole": "Alika {{role}}"
     },
     "invalidLanguageSelected": "Lugha batili imechaguliwa",
+    "platforms": {
+        "wallet": "Mkoba",
+        "broadcast": "Tangaza"
+    },
     "login": {
         "title": "Karibu",
         "directions": "Unda akaunti, au ingia.",
         "directionsNoRegister": "Ingia ikiwa una akaunti.",
-        "goButton": "⮕",
-        "passphrase": "Weka maneno yako ya pasi:",
+        "goButton": "➔",
+        "passphrase": "Ingiza kifungu chako cha kupita:",
         "loginButton": "Anza",
         "registerButton": "Anza",
         "resendButton": "Tuma Ujumbe wa Kuanzisha",
@@ -85,9 +102,10 @@
         "resendClose": "Funga",
         "noPassphrase": "Kabla ya kuingia, lazima uweke neno la kupita kwa kubofya kiungo katika ujumbe wako wa kuwezesha.",
         "notVerified": "Lazima ujitume ujumbe wa kuwezesha ili uingie.",
-        "emailExists": "Je, ulijaribu kujisajili kwa barua pepe hii hapo awali? Ikiwa ndivyo, angalia kisanduku pokezi chako ili kuamilisha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bofya ili kutuma ujumbe tena<\/a>",
-        "mobileExists": "Je, ulijaribu kujisajili ukitumia nambari hii ya simu hapo awali? Ikiwa ndivyo, angalia SMS yako ili kuwezesha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bofya ili kutuma ujumbe tena<\/a>",
+        "emailExists": "Je, ulijaribu kujisajili kwa barua pepe hii hapo awali? Ikiwa ndivyo, angalia kisanduku pokezi chako ili kuamilisha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bofya ili kutuma tena ujumbe<\/a>",
+        "mobileExists": "Je, ulijaribu kujisajili kwa nambari hii ya simu hapo awali? Ikiwa ndivyo, angalia SMS yako ili kuwezesha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bofya ili kutuma tena ujumbe<\/a>",
         "usingOther": "au unaweza",
+        "connectPlatforms": "au unganisha kwa kutumia:",
         "prompt": "Chagua jina la mtumiaji:",
         "newUser": "au fungua akaunti mpya hapa chini",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Je, ukubali Sheria na Masharti?",
         "facebookNoEmail": "Akaunti yako ya facebook haina barua pepe iliyothibitishwa. Ingia tu kwa njia ya asili.",
         "picTooltip": "Unaweza kubadilisha picha hii baadaye",
-        "wallet": {
-            "payload": "Ingia katika {{host}} kwa wakati {{timestamp}}",
-            "alert": {
-                "title": "Inaelekeza kwenye Wallet",
-                "content": "Mara tu ukifunga kidirisha hiki, utachukuliwa hadi kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
-            }
-        },
         "web3": {
-            "payload": "Ingia katika {{host}} kwa wakati {{timestamp}}",
+            "payload": "Ingia {{host}} kwa wakati {{timestamp}}",
             "alert": {
                 "title": "Inaelekeza kwenye Wallet",
                 "content": "Mara tu ukifunga kidirisha hiki, utachukuliwa hadi kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
             }
-        },
-        "connectPlatforms": "au unganisha kwa kutumia:"
+        }
     },
     "setIdentifier": {
         "title": "Ongeza njia ya kuingia",
@@ -126,7 +136,7 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Akaunti",
+        "title": "Akaunti ya {{Platform}}",
         "areUsing": "Unatumia {{platform}} kama",
         "noLongerUsing": "Hujaunganishwa tena kwa {{platform}} kama",
         "doAuth": "Ingia kwa akaunti hii",
@@ -139,26 +149,9 @@
         "Guest": "Mgeni",
         "Host": "Mwenyeji"
     },
-    "avatar": {
-        "Someone": "Mtu fulani"
-    },
     "web3": {
         "WrongMethod": "Mbinu mbaya ya mkataba {{methodName}}",
         "ChangeWallet": "Badilisha Wallet"
-    },
-    "identifier": {
-        "types": {
-            "email": "Barua pepe",
-            "mobile": "Rununu",
-            "web3": "Wavuti3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Imenakiliwa! Sasa unaweza kuibandika popote."
-    },
-    "platforms": {
-        "wallet": "Mkoba",
-        "broadcast": "Tangaza"
     },
     "labels": {
         "addToPhonebook": "Ongeza Kwenye Anwani Zangu za Simu",

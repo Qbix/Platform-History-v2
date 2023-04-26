@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "خطا",
+        "WalletAbsent": "کیف پول وصل نیست",
+        "Rendering": "هنگام رندر کردن <span class='url'>{{1}}<\/span> خطاهایی وجود داشت",
+        "PriceRequired": "قیمت مورد نیاز!",
+        "NameRequired": "نام لازم است!",
+        "PriceInvalid": "قیمت نامعتبر است!",
+        "AmountInvalid": "مبلغ نامعتبر است!",
+        "TransactionFailed": "تراکنش ناموفق بود",
+        "ChainNotSupported": "زنجیره انتخاب شده پشتیبانی نمی شود. زنجیره پشتیبانی شده: {{supportedChain}}",
+        "NeedMetaMaskConnected": "برای کار با برنامه به MetaMask متصل است",
+        "UserNotLoggedInMetaMask": "کاربر به MetaMask وارد نشده است",
+        "CurrencyNotFound": "ارز پیدا نشد",
+        "WrongChain": "این NFT تحت &quot; {{chain}} &quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید",
+        "NoRecipientSelected": "هیچ گیرنده ای انتخاب نشده است",
+        "NotEnoughPermissionsWallet": "مجوزهای کافی برای خواندن کیف پول این کاربر وجود ندارد",
+        "ThisUserHaveNoWallet": "این کاربر هیچ کیف پولی اختصاص ندارد",
+        "TheWalletOfThisUserInvalid": "کیف پول این کاربر نامعتبر است",
+        "WalletInvalid": "آدرس کیف پول نامعتبر است"
+    },
+    "admin": {
+        "Title": "اداری دارایی ها",
+        "SubscriptionTitle": "طرح های اشتراک"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "برای پرداخت ضربه بزنید"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: هزینه پردازش شده برای {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "از پرداخت شما به {{call 'publisher.displayName'}} سپاسگزاریم",
-        "SubscribedTo": "{{call 'user.displayName'}} مشترک {{plan.title}}",
-        "YouSubscribedTo": "شما مشترک {{plan.title}} شده اید",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : شارژ برای {{call 'user.displayName'}} پردازش شده است",
+        "ThankYouForYourPayment": "از پرداخت شما به {{call 'publisher.displayName'}} متشکریم",
+        "SubscribedTo": "{{call 'user.displayName'}} مشترک به {{plan.title}}",
+        "YouSubscribedTo": "شما در {{plan.title}} مشترک شده اید",
         "Assets\/credits\/alert": "شما هشدار مربوط به حساب خود را دارید"
     },
     "charge": {
-        "Subject": "شما مبلغ {{displayAmount}} را از {{call 'publisher.displayName'}} توسط &quot;{1001}}&quot; دریافت می‌کنید",
-        "HasBeenCharged": "سلام، این فقط برای اطلاع شماست که {{1}} هزینه {{2}} برای {{3}} توسط {{4}} کسر شده است"
+        "Subject": "شما مبلغ {{displayAmount}} از {{call 'publisher.displayName'}} توسط &quot; {{description}} &quot; دریافت می کنید",
+        "HasBeenCharged": "سلام، این فقط برای اطلاع شماست که {{1}} برای {{3}} در {{4}} ، {{2}} شارژ شده است."
     },
     "charged": {
-        "Subject": "از پرداخت شما برای &quot;{{description}}&quot; سپاسگزاریم",
-        "HavePaid": "سلام {{1}}، این فقط یک تأیید سریع است که با موفقیت {{2}} را به {{3}} برای {{4}} پرداخت کرده‌اید"
+        "Subject": "با تشکر از پرداخت شما برای &quot; {{description}} &quot;",
+        "HavePaid": "هی {{1}} ، این فقط یک تایید سریع است که شما با موفقیت {{2}} تا {{3}} برای {{4}} پرداخت کرده اید."
     },
     "payment": {
         "AboutOrder": "اطلاعات در مورد سفارش",
@@ -28,7 +52,7 @@
         "FailTryAgain": "پرداخت شما با موفقیت انجام نشد، لطفا دوباره امتحان کنید",
         "SomethingWrong": "مشکلی پیش آمد",
         "PaymentStatus": "وضعیت پرداخت",
-        "PayTo": "پرداخت {{displayName}}",
+        "PayTo": "{{displayName}} پرداخت کنید",
         "ChooseCurrency": "یک ارز را انتخاب کنید",
         "YouCanSendUpTo": "می توانید تا {{amount}} {{symbol}} ارسال کنید",
         "Send": "ارسال",
@@ -36,48 +60,44 @@
     },
     "credits": {
         "InviteAcceptedBy": "دعوت توسط {{invitedUserName}} پذیرفته شد",
-        "Streams_user_firstname": "{{invitedUserName}} نام کوچک را وارد کرد",
-        "Streams_user_lastname": "{{invitedUserName}} نام خانوادگی را وارد کرد",
-        "Streams_user_icon": "{{invitedUserName}} نماد وارد شده است",
-        "Places_user_location": "{{invitedUserName}} مکان را وارد کرد",
-        "Streams_greeting": "{{invitedUserName}} سلام را وارد کرد",
+        "InvitedUserFilledStream": "{{invitedUserName}} پر {{FilledStreamTitle}}",
+        "ForFillingStream": "برای پر کردن {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "شما {{amount}} اعتبار برای شروع دارید",
-        "PaymentFor": "پرداخت برای &quot;{{1}}&quot;",
+        "PaymentFor": "پرداخت برای &quot; {{1}} &quot;",
         "PaymentTo": "پرداخت به {{1}}",
         "PaymentToUser": "پرداخت به {{toUserName}}",
+        "CreatePrivateChat": "برای چت خصوصی با {{toUserName}}",
         "CreatePaidStream": "برای ایجاد {{toStreamName}}",
-        "JoinedPaidStream": "برای رزرو در &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
-        "CreatedCommunity": "برای ایجاد انجمن &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "به عنوان بازپرداخت رزرو در &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
+        "JoinedPaidStream": "برای رزرو در &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "برای ایجاد انجمن &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "به عنوان بازپرداخت رزرو در &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "{{amount}} اعتبار خریداری کرد",
-        "BonusCredits": "پاداش {{amount}} اعتبار",
-        "BuyAmountCredits": "{{amount}} اعتبار بخرید",
-        "WatchClip": "برای تماشای {{amount}} اعتبار کسب کرد{1000}}",
+        "BonusCredits": "جایزه {{amount}} اعتبار",
+        "BuyAmountCredits": "خرید {{amount}} اعتبار",
+        "WatchClip": "{{amount}} اعتبار برای تماشای {{fromStreamTitle}} کسب کرد",
         "MissingCredits": "اعتبارات از دست رفته",
         "YouMissingCredits": "برای ادامه به {{amount}} اعتبار اضافی نیاز دارید.",
         "BuyCredits": "اعتبار بخرید",
-        "BuyBonus": "خرید یکباره {{amount}} اعتبار، به پاداش {{bonus}} اعتبار منجر می‌شود.",
+        "BuyBonus": "خرید {{amount}} واحد در یک زمان، منجر به {{bonus}} اعتبار پاداش خواهد شد.",
         "Buy": "خرید کنید",
         "PurchaseCredits": "خرید اعتبار",
         "Credits": "وام",
         "ErrorInvalidAmount": "مبلغ نامعتبر است",
-        "ErrorInvalidCurrency": "متأسفانه ما هنوز از ارز {{currency}} پشتیبانی نمی‌کنیم",
+        "ErrorInvalidCurrency": "متأسفانه ما هنوز از ارز {{currency}} پشتیبانی نمی کنیم",
         "forMessages": {
             "BoughtCredits": "{{amount}} اعتبار",
             "BonusCredits": "{{amount}} اعتبار"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} پر شد {{FilledStreamTitle}}",
-        "ForFillingStream": "برای پر کردن {{FilledStreamTitle}}",
-        "CreatePrivateChat": "برای چت خصوصی با {{toUserName}}"
+        }
     },
     "history": {
         "Date": "تاریخ",
         "Amount": "میزان",
         "Description": "شرح",
         "Client": "مشتری",
+        "User": "کاربر",
         "To": "به",
         "From": "از جانب",
-        "SeeHistory": "مشاهده سابقه پرداخت برای {{1}}",
+        "SeeHistory": "تاریخچه پرداخت {{1}} را ببینید",
         "HistoryEmpty": "شما هنوز هیچ داده ای ندارید",
         "PaymentFor": "{{amount}} اعتبار ارسال شد",
         "PaymentTo": "{{amount}} اعتبار ارسال شد",
@@ -97,21 +117,20 @@
         },
         "CreatedCommunity": "{{amount}} اعتبار هزینه کرد",
         "BoughtCredits": "{{amount}} اعتبار خریداری کرد",
-        "BonusCredits": "{{amount}} اعتبار دریافت کرد",
+        "BonusCredits": "جایزه {{amount}} اعتبار دریافت کرد",
         "InviteAcceptedBy": "{{amount}} اعتبار کسب کرد",
         "Streams_user_firstname": "{{amount}} اعتبار کسب کرد",
         "Streams_user_lastname": "{{amount}} اعتبار کسب کرد",
         "Streams_user_icon": "{{amount}} اعتبار کسب کرد",
         "Places_user_location": "{{amount}} اعتبار کسب کرد",
         "Streams_greeting": "{{amount}} اعتبار کسب کرد",
-        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد",
-        "User": "کاربر"
+        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد"
     },
     "subscriptions": {
         "infoTitle": "تنظیم اطلاعات پرداخت",
         "confirm": {
             "title": "شروع اشتراک",
-            "message": "آیا می خواهید در {{title}} مشترک شوید؟",
+            "message": "اشتراک تکراری &quot; {{title}} &quot; شروع شود؟",
             "ok": "خوب",
             "cancel": "لغو کنید"
         },
@@ -128,10 +147,10 @@
         "Started": "آغاز شده",
         "EndsIn": "به پایان می رسد در",
         "NextPay": "پرداخت بعدی",
-        "Period": "عادت زنانه",
+        "Period": "دوره زمانی",
         "Price": "قیمت",
         "AreYouSureUnsubscribe": "آیا مطمئنید که می خواهید اشتراک این طرح را لغو کنید؟",
-        "YouUnsubscribedFromPlan": "شما اشتراک طرح &quot;{{planTitle}}&quot; را لغو کردید. هزینه ای از شما کسر نمی شود، اما اشتراک شما تا {{endsIn}} ادامه خواهد داشت",
+        "YouUnsubscribedFromPlan": "شما اشتراک طرح &quot; {{planTitle}} &quot; را لغو کردید. شما هزینه ای دریافت نمی کنید، اما اشتراک شما تا {{endsIn}} ادامه خواهد داشت",
         "plan": {
             "TitlePlaceholder": "عنوان طرح",
             "PricePlaceholder": "قیمت",
@@ -142,10 +161,10 @@
     },
     "payments": {
         "infoTitle": "تنظیم اطلاعات پرداخت",
-        "BuyAmountCredits": "{{amount}} اعتبار بخرید",
+        "BuyAmountCredits": "خرید {{amount}} اعتبار",
         "confirm": {
             "title": "ایجاد یک پرداخت",
-            "message": "آیا با پرداخت {{symbol}}{{amount}} موافقید؟",
+            "message": "آیا موافق پرداخت {{symbol}} {{amount}} هستید؟",
             "ok": "خوب",
             "cancel": "لغو کنید"
         }
@@ -186,25 +205,39 @@
             "content": "{{amount}} اعتبار هزینه کرد"
         },
         "Assets\/credits\/sent": {
-            "content": "ارسال {{amount}} اعتبار به {{toUserName}}"
+            "content": "{{amount}} اعتبار به {{toUserName}} ارسال شد"
         },
         "Assets\/credits\/received": {
-            "content": "دریافت {{amount}} اعتبار از {{fromUserName}}"
+            "content": "{{amount}} اعتبار از {{fromUserName}} دریافت کرد"
         },
         "Assets\/credits\/alert": {
-            "content": "شما اعتبار کمی در حساب خود دارید. لطفا برای خرید اعتبار بیشتر به <a href='{{link}}'>این لینک<\/a> مراجعه کنید."
+            "content": "شما اعتبار کمی در حساب خود دارید. لطفاً برای خرید اعتبار بیشتر به <a href='<i translate='no'>999 &#39;&gt; این پیوند<\/a> مراجعه کنید."
+        }
+    },
+    "billing": {
+        "Title": "صورتحساب دارایی ها",
+        "CreditsMinimum": "حداقل اعتبار",
+        "CreditsToAdd": "اعتبار برای افزودن",
+        "Save": "صرفه جویی",
+        "ThisLink": "این لینک",
+        "errors": {
+            "CreditsMinimumNegative": "حداقل اعتبار نمی تواند منفی باشد",
+            "CreditsToAddNegative": "اعتبار برای افزودن نمی تواند منفی باشد"
         }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "سرویس جدید",
             "TitlePlaceholder": "عنوان خدمات",
-            "PricePlaceholder": "تعیین قیمت",
+            "PricePlaceholder": "قیمت را تعیین کنید",
             "LinkPlaceholder": "تنظیم لینک اطلاعات اضافی",
             "DescriptionPlaceholder": "شرح خدمات",
             "SaveService": "ذخیره سرویس",
-            "SelectRequiredParticipants": "شرکت کنندگان مورد نیاز",
+            "SelectRequiredParticipants": "شرکت کنندگان مرتبط مورد نیاز",
             "RequiredParticipantsDesc": "لطفاً شرکت کنندگان مرتبطی را که برای استفاده از این سرویس مورد نیاز هستند انتخاب کنید (به عنوان مثال حیوانات خانگی برای &quot;نمایش سگ ها&quot; یا کودکان برای &quot;تعطیلات کودکان&quot; و غیره). در صورت پرداخت هزینه، کاربر باید برای هر شرکت کننده مرتبط نیز هزینه پرداخت کند."
+        },
+        "EditServiceTemplate": {
+            "Title": "سرویس ویرایش"
         },
         "ManageServiceTemplates": "مدیریت الگوهای خدمات",
         "ManageServices": "مدیریت خدمات",
@@ -212,29 +245,47 @@
         "OptionalContribution": "مشارکت اختیاری",
         "RequiredPayment": "پرداخت مورد نیاز",
         "AreYouSureDelete": "آیا مطمئن هستید که می خواهید این سرویس را حذف کنید؟",
-        "AmountServicesRelated": "{{amount}} امکانات مربوط به این سرویس وجود دارد. آنها نیز حذف خواهند شد.",
-        "EditServiceTemplate": {
-            "Title": "سرویس ویرایش"
-        }
+        "AmountServicesRelated": "{{amount}} موجودی مربوط به این سرویس وجود دارد. آنها نیز حذف خواهند شد."
+    },
+    "transfer": {
+        "SelectRecipient": "گیرنده را انتخاب کنید",
+        "TransactionSuccess": "موفقیت در معامله",
+        "OrTypeWalletAddress": "یا آدرس کیف پول گیرنده را تایپ کنید"
     },
     "NFT": {
-        "Title": "اطلاعاتی درباره {{title}} NFT",
-        "Description": "اطلاعات دقیق در مورد NFT",
-        "FixedBid": "هم اکنون خریداری کنید",
+        "Title": "عنوان",
+        "Name": "نام",
+        "EnterName": "نام را وارد کنید",
+        "EnterAuthorWallet": "کیف پول نویسنده را وارد کنید",
+        "InformationAboutTitle": "اطلاعاتی در مورد {{title}} NFT",
+        "Description": "شرح",
+        "DetailedInformationAboutNFT": "اطلاعات دقیق در مورد NFT",
+        "PresaleStarts": "شروع پیش فروش 23 دسامبر",
+        "OwnerUserNotFound": "مالک این NFT در برنامه ما ثبت نشده است.",
+        "BuyNow": "هم اکنون خریداری کنید",
+        "Buy": "خرید کنید",
+        "Add": "اضافه کردن",
+        "Remove": "برداشتن",
+        "NoNFTyet": "هنوز NFT وجود ندارد",
+        "Conversation": "گفتگو",
+        "Create": "ايجاد كردن",
         "CurrentBid": "پیشنهاد فعلی",
         "StartingIn": "شروع در",
         "EndingIn": "پایان در",
         "CreateNFT": "یک NFT ایجاد کنید",
         "TitlePlaceholder": "به NFT خود یک عنوان بدهید",
-        "DescriptionPlaceholder": "NFT خود را توضیح دهید",
+        "DescriptionPlaceholder": "NFT خود را شرح دهید",
         "CreateYourNFT": "NFT خود را ایجاد کنید",
         "Royalties": "مزایا و امتیازها",
-        "RoyaltyPlaceholder": "اختیاری. مبلغ پرداخت شده به پدیدآورنده قبل از انتقال.",
+        "RoyaltyPlaceholder": "اختیاری. مبلغی که قبل از انتقال به پدیدآورنده پرداخت شده است.",
         "ExpirationDate": "تاریخ انقضا",
         "StartingDate": "تاریخ شروع",
         "BidsBelowThisAmount": "پیشنهادهای کمتر از این مقدار مجاز نخواهد بود",
         "MinimumBid": "حداقل پیشنهاد",
+        "Author": "نویسنده",
         "Price": "قیمت",
+        "Commission": "کمیسیون",
+        "EnterCommission": "کمیسیون را وارد کنید",
         "Owner": "مالک",
         "SelectCategory": "دسته را انتخاب کنید",
         "Day": "روز",
@@ -253,78 +304,35 @@
         "PutOnSale": "به فروش گذاشته شود",
         "PutOffSale": "انصراف از فروش",
         "Transfer": "انتقال",
+        "Actions": "اقدامات",
+        "Claim": "مطالبه",
+        "ClaimNFT": "ادعای NFT",
+        "Unlocking": "باز کردن قفل",
+        "Unlock": "باز کردن قفل",
         "Update": "به روز رسانی",
         "UpdateToken": "رمز را به روز کنید",
+        "UpdateNFT": "NFT را به روز کنید",
         "CreateToken": "توکن ایجاد کنید",
         "PlaceBid": "محل مناقصه",
         "SoldOut": "فروخته شد",
+        "NotOnSale": "در فروش نیست",
         "NftName": "نام NFT",
-        "DescribeYourNFT": "لطفا NFT خود را شرح دهید",
+        "DescribeYourNFT": "لطفا NFT خود را توضیح دهید",
         "NftPicture": "تصویر برای نشان دادن NFT",
         "NftMovie": "فیلمی برای نشان دادن NFT",
         "UploadMovie": "آپلود فیلم",
         "MovieSource": "منبع فیلم",
+        "MovieURL": "آدرس فیلم",
         "UploadFile": "یک فایل آپلود کنید",
         "PutOnMarketplace": "در بازار قرار دهید",
-        "InstantPurchase": "قیمت را وارد کنید تا کاربران بتوانند فوراً NFT شما را خریداری کنند",
+        "InstantPurchase": "قیمت را وارد کنید تا به کاربران اجازه دهید فورا NFT شما را خریداری کنند",
         "FixedPrice": "قیمت ثابت",
         "TimedAuction": "حراج به موقع",
         "OpenForBids": "برای مناقصه باز است",
         "PriceOnePiece": "قیمت یک عدد را وارد کنید",
+        "EnterPrice": "قیمت را وارد کنید",
         "EnterMinimumBid": "حداقل پیشنهاد را وارد کنید",
         "SelectChain": "زنجیره را انتخاب کنید",
-        "WrongChain": "این NFT تحت &quot;{{chain}}&quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید",
-        "import": {
-            "importNFT": "واردات NFT",
-            "fileNotFound": "با عرض پوزش، فایل CSV یافت نشد.",
-            "fileEmpty": "با عرض پوزش، فایل CSV خالی است.",
-            "userIdNotFound": "کاربر وجود دارد اما شناسه خالی است",
-            "errorLine": "خط {{1}}",
-            "fieldNotFound": "فیلد الزامی &quot;{{1}}&quot; یافت نشد",
-            "taskStreamInvalid": "جریان کار نامعتبر است",
-            "instructionsEmpty": "دستورالعمل های جریان کار خالی است",
-            "complete": "کامل",
-            "activateUsers": "ارسال پیام فعال سازی برای کاربران؟",
-            "importProgress": "پیش رفتن",
-            "importOptions": "گزینه ها",
-            "sampleCSV": "دانلود نمونه CSV",
-            "fileLabel": "آپلود صفحه گسترده:",
-            "errorsTitle": "خطاهایی رخ داده است",
-            "importAttributes": "ویژگی های NFT را وارد کنید",
-            "displayTypeEmpty": "نوع نمایش برای &quot;{{1}}&quot; یافت نشد"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "فیلتر بر اساس مجموعه های NFT",
-                "ShowNFTCollection": "نمایش مجموعه NFT در ...",
-                "AllCollections": "همه مجموعه ها"
-            },
-            "ByUser": {
-                "AllAuthors": "همه نویسندگان",
-                "AllUsers": "هر کس",
-                "FilterByAuthors": "فیلتر بر اساس نویسندگان"
-            }
-        },
-        "Back": "بازگشت به مجموعه",
-        "Name": "نام",
-        "EnterName": "نام را وارد کنید",
-        "EnterAuthorWallet": "کیف پول نویسنده را وارد کنید",
-        "InformationAboutTitle": "اطلاعاتی درباره {{title}} NFT",
-        "DetailedInformationAboutNFT": "اطلاعات دقیق در مورد NFT",
-        "PresaleStarts": "شروع پیش فروش 23 دسامبر",
-        "OwnerUserNotFound": "مالک این NFT در برنامه ما ثبت نشده است.",
-        "BuyNow": "هم اکنون خریداری کنید",
-        "Buy": "خرید کنید",
-        "Conversation": "گفتگو",
-        "Create": "ایجاد کردن",
-        "Author": "نویسنده",
-        "Commission": "کمیسیون",
-        "EnterCommission": "کمیسیون را وارد کنید",
-        "Actions": "اقدامات",
-        "UpdateNFT": "NFT را به روز کنید",
-        "NotOnSale": "در فروش نیست",
-        "MovieURL": "آدرس فیلم",
-        "EnterPrice": "قیمت را وارد کنید",
         "Currency": "واحد پول",
         "AreYouSureDeleteImage": "آیا مطمئن هستید که می خواهید تصویر را حذف کنید؟",
         "AreYouSureDeleteVideo": "آیا مطمئن هستید که می خواهید ویدیو را حذف کنید؟",
@@ -356,7 +364,7 @@
             "CreateContract": "قرارداد ایجاد کنید",
             "SelectContract": "قرارداد را انتخاب کنید",
             "CreateContractFor": "ایجاد قرارداد برای {{userName}}",
-            "ContractFor": "قرارداد برای {{userName}}",
+            "ContractFor": "قرارداد {{userName}}",
             "UpdateContract": "به روز رسانی قرارداد",
             "TransferOwnership": "انتقال مالکیت",
             "SetBaseURI": "URI پایه را تنظیم کنید",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "BaseURL فعلی",
             "ContractAddressAbsent": "آدرس قرارداد وجود ندارد",
             "FactoryAddressAbsent": "آدرس کارخانه وجود ندارد",
-            "ContractName": "{{contractName}} - {{contractSymbol}} {{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "عنوان مورد نیاز",
             "SymbolRequired": "نماد مورد نیاز است",
             "TypeContractName": "نام قرارداد",
@@ -375,6 +383,38 @@
             "Title": "مسابقات",
             "NewContest": "مسابقه جدید"
         },
+        "import": {
+            "importNFT": "واردات NFT",
+            "importAttributes": "ویژگی های NFT را وارد کنید",
+            "fileNotFound": "با عرض پوزش، فایل CSV یافت نشد.",
+            "fileEmpty": "با عرض پوزش، فایل CSV خالی است.",
+            "userIdNotFound": "کاربر وجود دارد اما شناسه خالی است",
+            "errorLine": "خط {{1}}",
+            "fieldNotFound": "فیلد مورد نیاز &quot; {{1}} &quot; یافت نشد",
+            "displayTypeEmpty": "نوع نمایش برای &quot; {{1}} &quot; یافت نشد",
+            "taskStreamInvalid": "جریان کار نامعتبر است",
+            "instructionsEmpty": "دستورالعمل های جریان کار خالی است",
+            "complete": "کامل",
+            "activateUsers": "ارسال پیام فعال سازی برای کاربران؟",
+            "importProgress": "پیش رفتن",
+            "importOptions": "گزینه ها",
+            "sampleCSV": "دانلود نمونه CSV",
+            "fileLabel": "آپلود صفحه گسترده:",
+            "errorsTitle": "خطاهایی رخ داده است"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "فیلتر بر اساس مجموعه های NFT",
+                "ShowNFTCollection": "نمایش مجموعه NFT در ...",
+                "AllCollections": "همه مجموعه ها"
+            },
+            "ByUser": {
+                "AllAuthors": "همه نویسندگان",
+                "AllUsers": "هر کس",
+                "FilterByAuthors": "فیلتر بر اساس نویسندگان"
+            }
+        },
+        "Back": "بازگشت به مجموعه",
         "attributes": {
             "Title": "مدیریت ویژگی ها",
             "Attributes": "ویژگی های",
@@ -393,18 +433,11 @@
         },
         "profile": {
             "LogOut": "خروج",
-            "Title": "نمایه برای {{userName}}",
+            "Title": "نمایه {{userName}}",
             "Description": "جزئیات کاربر",
             "aboutPlaceholder": "ویرایش بیو",
             "SureLogOut": "آیا برای خارج شدن مطمئن هستید؟"
         },
-        "Add": "اضافه کردن",
-        "Remove": "برداشتن",
-        "NoNFTyet": "هنوز NFT وجود ندارد",
-        "Claim": "مطالبه",
-        "ClaimNFT": "ادعای NFT",
-        "Unlocking": "باز کردن قفل",
-        "Unlock": "باز کردن قفل",
         "sales": {
             "factory": {
                 "form": {
@@ -447,7 +480,7 @@
                     "uint16": "uint16"
                 },
                 "produce": "تولید کردن",
-                "viewInstancesList": "فهرست بازخوانی"
+                "viewInstancesList": "فهرست بازخوانی کنید"
             },
             "instance": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "باز کردن قفل",
             "Locked": "قفل شده است",
             "CustodianAddress": "آدرس حافظ",
-            "TokenWasClaimed": "نشانه &quot;{{title}}&quot; ادعا شد",
-            "TokenWasLocked": "رمز &quot;{{title}}&quot; قفل شد",
-            "TokenWasUnlocked": "رمز &quot;{{title}}&quot; باز شد"
+            "TokenWasClaimed": "توکن &quot; {{title}} &quot; ادعا شد",
+            "TokenWasLocked": "توکن &quot; {{title}} &quot; قفل شد",
+            "TokenWasUnlocked": "رمز &quot; {{title}} &quot; باز شد"
         }
-    },
-    "errors": {
-        "Error": "خطا",
-        "WalletAbsent": "کیف پول وصل نیست",
-        "Rendering": "هنگام رندر کردن <span class='url'>{{1}}<\/span> خطاهایی وجود داشت",
-        "PriceRequired": "قیمت مورد نیاز!",
-        "NameRequired": "نام لازم است!",
-        "PriceInvalid": "قیمت نامعتبر است!",
-        "TransactionFailed": "تراکنش ناموفق بود",
-        "ChainNotSupported": "زنجیره انتخاب شده پشتیبانی نمی شود. زنجیره پشتیبانی شده: {{supportedChain}}",
-        "NeedMetaMaskConnected": "برای کار با برنامه به MetaMask متصل است",
-        "UserNotLoggedInMetaMask": "کاربر به MetaMask وارد نشده است",
-        "CurrencyNotFound": "ارز پیدا نشد",
-        "WrongChain": "این NFT تحت &quot;{{chain}}&quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید",
-        "AmountInvalid": "مبلغ نامعتبر است!",
-        "NoRecipientSelected": "هیچ گیرنده ای انتخاب نشده است",
-        "NotEnoughPermissionsWallet": "مجوزهای کافی برای خواندن کیف پول این کاربر وجود ندارد",
-        "ThisUserHaveNoWallet": "این کاربر هیچ کیف پولی اختصاص ندارد",
-        "TheWalletOfThisUserInvalid": "کیف پول این کاربر نامعتبر است",
-        "WalletInvalid": "آدرس کیف پول نامعتبر است"
-    },
-    "admin": {
-        "Title": "اداری دارایی ها",
-        "SubscriptionTitle": "طرح های اشتراک"
-    },
-    "billing": {
-        "Title": "صورتحساب دارایی ها",
-        "CreditsMinimum": "حداقل اعتبار",
-        "CreditsToAdd": "اعتبار برای افزودن",
-        "Save": "صرفه جویی",
-        "ThisLink": "این لینک",
-        "errors": {
-            "CreditsMinimumNegative": "حداقل اعتبار نمی تواند منفی باشد",
-            "CreditsToAddNegative": "اعتبار برای افزودن نمی تواند منفی باشد"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "گیرنده را انتخاب کنید",
-        "TransactionSuccess": "موفقیت در معامله",
-        "OrTypeWalletAddress": "یا آدرس کیف پول گیرنده را تایپ کنید"
     },
     "currencies": {
         "choose": "یک ارز را انتخاب کنید"

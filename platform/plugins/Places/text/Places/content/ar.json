@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} خطوط الطول ، {{2}} lng)",
+    "LatLng": "( {{1}} خطًا ، {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "في نطاق {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "في حدود {{1}}"
     },
     "units": {
         "meter": "متر",
@@ -15,12 +15,13 @@
         "mi": "ميل",
         "foot": "قدم",
         "feet": "قدم",
-        "inches": "بوصات"
+        "inches": "بوصة"
     },
     "location": {
-        "interested": "أنا مهتم بالأشياء التي تحدث في حدود {{select}} من",
+        "interested": "أنا مهتم بالأشياء التي تحدث خلال {{select}} من",
         "update": "تحديث موقعي",
-        "prompt": "{{ClickOrTap}} هنا ل<br> وضع الخاص بك<br> موقعك",
+        "set": "قم بتعيين موقعي",
+        "prompt": "{{ClickOrTap}} هنا ل<br> وضع الخاص بك<br> موقع",
         "myCurrentLocation": "موقعي الحالي",
         "enterAddress": "أدخل عنوانا",
         "enterPostcode": "الرجاء إدخال الرمز البريدي الخاص بك \/ الرمز البريدي",
@@ -33,7 +34,7 @@
             "title": "حفظ هذا الموقع؟",
             "message": "هل تخطط لاستخدام هذا الموقع مرة أخرى في المستقبل؟",
             "ok": "نعم",
-            "cancel": "رقم"
+            "cancel": "لا"
         },
         "add": {
             "title": "اسم هذا الموقع",
@@ -42,8 +43,7 @@
         },
         "dialog": {
             "title": "اختيار موقع"
-        },
-        "set": "تعيين موقعي"
+        }
     },
     "areas": {
         "filterPlaceholder": "أي منطقة داخل هذا الموقع؟",
@@ -66,11 +66,11 @@
         },
         "Places\/area": {
             "description": "يمثل منطقة داخل موقع ، مثل غرفة أو جناح",
-            "displayType": "مساحة"
+            "displayType": "منطقة"
         },
         "Places\/floor": {
             "description": "يمثل أرضية في مبنى أو سفينة",
-            "displayType": "الأرض"
+            "displayType": "أرضية"
         },
         "Places\/column": {
             "description": "يمثل عمودًا في مبنى أو سفينة",
@@ -81,7 +81,7 @@
             "displayType": "الاماكن المجاورة"
         },
         "Places\/interest": {
-            "description": "تصنيف للأشياء الواقعة على مسافة معينة من geohash ، ومطابقة إحدى الاهتمامات",
+            "description": "تصنيف للأشياء الواقعة على مسافة معينة من geohash ، ومطابقة أحد الاهتمامات",
             "displayType": "أماكن الاهتمام"
         }
     }

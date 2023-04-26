@@ -25,12 +25,12 @@
             "WriteToStartConversation": "Напишете ги вашите мисли за да го започнете разговорот",
             "StartConversation": "Започнете разговор",
             "GotoConversation": "Одете во Разговор",
-            "reset": "Ресетирање",
+            "reset": "Ресетирај",
             "edit": "Уредување",
             "link": "Врска",
             "setUrl": "Поставете URL",
             "save": "Зачувај",
-            "setClip": "Отсечен клип",
+            "setClip": "Исечете клип",
             "invalidURL": "Неважечка URL-адреса"
         },
         "FileTooLarge": "Датотеката е преголема за кеширање. Максимална големина на датотека {{size}}",
@@ -51,7 +51,7 @@
             "displayType": "Презентација"
         },
         "Websites\/advert\/unit": {
-            "description": "Рекламна единица на веб-страница",
+            "description": "Рекламна единица на веб-локација",
             "displayType": "Единица за огласување"
         },
         "Websites\/advert\/placement": {

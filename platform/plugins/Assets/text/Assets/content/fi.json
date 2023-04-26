@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "Virhe",
+        "WalletAbsent": "Lompakkoa ei ole yhdistetty.",
+        "Rendering": "<span class='url'>{{1}}<\/span> ää hahmonnettaessa tapahtui virheitä",
+        "PriceRequired": "Hinta vaaditaan!",
+        "NameRequired": "Nimi (pakollinen!",
+        "PriceInvalid": "Hinta virheellinen!",
+        "AmountInvalid": "Summa virheellinen!",
+        "TransactionFailed": "Tapahtuma epäonnistui",
+        "ChainNotSupported": "Valittua ketjua ei tueta. Tuettu ketju: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Tarvitset MetaMaskiin yhdistetyn työskentelyn sovelluksen kanssa",
+        "UserNotLoggedInMetaMask": "Käyttäjä ei ole kirjautunut MetaMaskiin",
+        "CurrencyNotFound": "Valuuttaa ei löydy",
+        "WrongChain": "Tämä NFT luotiin nimellä &quot; {{chain}} &quot;. Käytä tätä ketjua.",
+        "NoRecipientSelected": "Vastaanottajaa ei ole valittu",
+        "NotEnoughPermissionsWallet": "Ei tarpeeksi oikeuksia tämän käyttäjän lompakon lukemiseen",
+        "ThisUserHaveNoWallet": "Tälle käyttäjälle ei ole määritetty lompakkoa",
+        "TheWalletOfThisUserInvalid": "Tämän käyttäjän lompakko on virheellinen",
+        "WalletInvalid": "Lompakon osoite on virheellinen"
+    },
+    "admin": {
+        "Title": "Omaisuuden hallinto",
+        "SubscriptionTitle": "Tilaussuunnitelmat"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Maksa napauttamalla"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: veloitus käsitelty: {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Kiitos maksustasi vastaanottajalle {{call 'publisher.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : veloitus käsitelty {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Kiitos maksusta numeroon {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} tilasi {{plan.title}}",
-        "YouSubscribedTo": "Olet tilannut {{plan.title}}",
+        "YouSubscribedTo": "Olet tilannut numeron {{plan.title}}",
         "Assets\/credits\/alert": "Sinulla on tiliisi liittyvä hälytys"
     },
     "charge": {
-        "Subject": "Saat maksun {{displayAmount}} lähettäjältä {{call 'publisher.displayName'}} &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hei, tämä on vain ilmoitus, että {{1}} on veloitettu {{2}} summasta {{3}}, {{4}}"
+        "Subject": "Saat maksun {{displayAmount}} {{call 'publisher.displayName'}} :sta &quot; {{description}} &quot;",
+        "HasBeenCharged": "Hei, tämä on vain tiedoksi, että {{1}} on veloitettu {{2}} {{3}} mennessä {{4}}"
     },
     "charged": {
-        "Subject": "Kiitos maksusta &quot;{{description}}&quot;",
-        "HavePaid": "Hei {{1}}, tämä on vain nopea vahvistus siitä, että olet onnistuneesti maksanut {{2}} henkilölle {{3}} summasta {{4}}"
+        "Subject": "Kiitos maksusta &quot; {{description}} &quot;",
+        "HavePaid": "Hei {{1}} , tämä on vain nopea vahvistus siitä, että olet onnistuneesti maksanut {{2}} {{4}} {{3}}"
     },
     "payment": {
         "AboutOrder": "Tietoja tilauksesta",
@@ -36,82 +60,77 @@
     },
     "credits": {
         "InviteAcceptedBy": "Kutsun hyväksyi {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} antoi etunimen",
-        "Streams_user_lastname": "{{invitedUserName}} syötti sukunimen",
-        "Streams_user_icon": "{{invitedUserName}} syötetty kuvake",
-        "Places_user_location": "{{invitedUserName}} syötetty sijainti",
-        "Streams_greeting": "{{invitedUserName}} näppäili tervehdyksen",
-        "YouHaveCreditsToStart": "Sinulla on {{amount}} saldoa aloittaaksesi",
-        "PaymentFor": "Maksu kohteelle &quot;{{1}}&quot;",
-        "PaymentTo": "Maksu: {{1}}",
-        "PaymentToUser": "Maksu: {{toUserName}}",
-        "CreatePaidStream": "luomiseen {{toStreamName}}",
-        "JoinedPaidStream": "varaukseen paikassa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "yhteisön &quot;{{communityId}}&quot; luomiseen",
-        "LeftPaidStream": "varaushyvityksenä kohteessa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Ostin {{amount}} krediittiä",
+        "InvitedUserFilledStream": "{{invitedUserName}} täynnä {{FilledStreamTitle}}",
+        "ForFillingStream": "Täyttämiseen {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "Sinulla on {{amount}} krediittiä aloittaaksesi",
+        "PaymentFor": "Maksu &quot; {{1}} &quot;",
+        "PaymentTo": "Maksu {{1}}",
+        "PaymentToUser": "Maksu {{toUserName}}",
+        "CreatePrivateChat": "yksityiseen keskusteluun {{toUserName}} kanssa",
+        "CreatePaidStream": "{{toStreamName}} luomiseen",
+        "JoinedPaidStream": "varaukseen &quot; <a data-publisherId='<i translate='no'>999&quot; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "yhteisön &quot; {{communityId}} &quot; luomiseen",
+        "LeftPaidStream": "varaushyvityksenä kohdassa &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Ostettu {{amount}} krediittiä",
         "BonusCredits": "Bonus {{amount}} krediittiä",
         "BuyAmountCredits": "Osta {{amount}} krediittiä",
-        "WatchClip": "Ansainnut {{amount}} saldoa katsomalla {{fromStreamTitle}}",
+        "WatchClip": "Ansaitsi {{amount}} krediittiä katsomalla {{fromStreamTitle}}",
         "MissingCredits": "Krediitit puuttuvat",
-        "YouMissingCredits": "Tarvitset lisää {{amount}} saldoa jatkaaksesi.",
+        "YouMissingCredits": "Tarvitset {{amount}} lisäpistettä jatkaaksesi.",
         "BuyCredits": "Osta krediittejä",
-        "BuyBonus": "Kun ostat {{amount}} saldoa kerralla, saat {{bonus}} krediittiä bonuksen.",
+        "BuyBonus": "Ostaessasi {{amount}} krediittiä kerralla, saat {{bonus}} krediittiä bonuksen.",
         "Buy": "Ostaa",
         "PurchaseCredits": "Ostokreditit",
         "Credits": "Krediitit",
         "ErrorInvalidAmount": "Summa virheellinen",
         "ErrorInvalidCurrency": "Valitettavasti emme vielä tue valuuttaa {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} luottoa",
-            "BonusCredits": "{{amount}} luottoa"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} täynnä {{FilledStreamTitle}}",
-        "ForFillingStream": "Täyttämiseen {{FilledStreamTitle}}",
-        "CreatePrivateChat": "yksityiseen keskusteluun henkilön {{toUserName}} kanssa"
+            "BoughtCredits": "{{amount}} krediittiä",
+            "BonusCredits": "{{amount}} krediittiä"
+        }
     },
     "history": {
         "Date": "Päivämäärä",
         "Amount": "Määrä",
         "Description": "Kuvaus",
         "Client": "Asiakas",
-        "To": "kohtaan",
+        "User": "Käyttäjä",
+        "To": "to",
         "From": "alkaen",
-        "SeeHistory": "Katso maksuhistoria: {{1}}",
+        "SeeHistory": "Katso {{1}} n maksuhistoria",
         "HistoryEmpty": "Sinulla ei ole vielä tietoja",
-        "PaymentFor": "Lähetetty {{amount}} hyvitystä",
-        "PaymentTo": "Lähetetty {{amount}} hyvitystä",
-        "PaymentToUser": "Lähetetty {{amount}} hyvitystä",
-        "CreatePaidStream": "Käyttänyt {{amount}} krediittiä",
+        "PaymentFor": "Lähetetty {{amount}} krediittiä",
+        "PaymentTo": "Lähetetty {{amount}} krediittiä",
+        "PaymentToUser": "Lähetetty {{amount}} krediittiä",
+        "CreatePaidStream": "Käytti {{amount}} krediittiä",
         "WatchClip": {
-            "+": "Ansaittu {{amount}} krediittiä",
-            "-": "Käyttänyt {{amount}} krediittiä"
+            "+": "Ansaittu {{amount}} opintopistettä",
+            "-": "Käytti {{amount}} krediittiä"
         },
         "JoinedPaidStream": {
-            "+": "Ansaittu {{amount}} krediittiä",
-            "-": "Käyttänyt {{amount}} krediittiä"
+            "+": "Ansaittu {{amount}} opintopistettä",
+            "-": "Käytti {{amount}} krediittiä"
         },
         "LeftPaidStream": {
-            "+": "Sai {{amount}} hyvitystä",
-            "-": "Lähetetty {{amount}} hyvitystä"
+            "+": "Sai {{amount}} opintopistettä",
+            "-": "Lähetetty {{amount}} krediittiä"
         },
-        "CreatedCommunity": "Käyttänyt {{amount}} krediittiä",
-        "BoughtCredits": "Ostin {{amount}} krediittiä",
-        "BonusCredits": "Sain {{amount}} bonuspistettä",
-        "InviteAcceptedBy": "Ansaittu {{amount}} krediittiä",
-        "Streams_user_firstname": "Ansaittu {{amount}} krediittiä",
-        "Streams_user_lastname": "Ansaittu {{amount}} krediittiä",
-        "Streams_user_icon": "Ansaittu {{amount}} krediittiä",
-        "Places_user_location": "Ansaittu {{amount}} krediittiä",
-        "Streams_greeting": "Ansaittu {{amount}} krediittiä",
-        "YouHaveCreditsToStart": "Ansaittu {{amount}} krediittiä",
-        "User": "Käyttäjä"
+        "CreatedCommunity": "Käytti {{amount}} krediittiä",
+        "BoughtCredits": "Ostettu {{amount}} krediittiä",
+        "BonusCredits": "Sain bonusta {{amount}} krediittiä",
+        "InviteAcceptedBy": "Ansaittu {{amount}} opintopistettä",
+        "Streams_user_firstname": "Ansaittu {{amount}} opintopistettä",
+        "Streams_user_lastname": "Ansaittu {{amount}} opintopistettä",
+        "Streams_user_icon": "Ansaittu {{amount}} opintopistettä",
+        "Places_user_location": "Ansaittu {{amount}} opintopistettä",
+        "Streams_greeting": "Ansaittu {{amount}} opintopistettä",
+        "YouHaveCreditsToStart": "Ansaittu {{amount}} opintopistettä"
     },
     "subscriptions": {
         "infoTitle": "Aseta maksutiedot",
         "confirm": {
             "title": "Aloita tilaus",
-            "message": "Haluatko tilata {{title}}?",
+            "message": "Aloitetaanko toistuva &quot; {{title}} &quot; -tilaus?",
             "ok": "OK",
             "cancel": "Peruuttaa"
         },
@@ -131,7 +150,7 @@
         "Period": "Kausi",
         "Price": "Hinta",
         "AreYouSureUnsubscribe": "Haluatko varmasti peruuttaa tämän tilauksen?",
-        "YouUnsubscribedFromPlan": "Peruutit suunnitelman &quot;{{planTitle}}&quot; tilauksen. Sinua ei veloiteta, mutta tilauksesi jatkuu {{endsIn}} asti",
+        "YouUnsubscribedFromPlan": "Peruutit suunnitelman &quot; {{planTitle}} &quot; tilauksen. Sinua ei veloiteta, mutta tilauksesi jatkuu {{endsIn}} asti",
         "plan": {
             "TitlePlaceholder": "suunnitelman otsikko",
             "PricePlaceholder": "hinta",
@@ -145,7 +164,7 @@
         "BuyAmountCredits": "Osta {{amount}} krediittiä",
         "confirm": {
             "title": "Suorita maksu",
-            "message": "Suostutko maksamaan {{symbol}}{{amount}}?",
+            "message": "Suostutko maksamaan {{symbol}} {{amount}} ?",
             "ok": "OK",
             "cancel": "Peruuttaa"
         }
@@ -174,25 +193,36 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Ansaittu {{amount}} krediittiä"
+            "content": "Ansaittu {{amount}} opintopistettä"
         },
         "Assets\/credits\/bought": {
-            "content": "Ostin {{amount}} krediittiä"
+            "content": "Ostettu {{amount}} krediittiä"
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} krediittiä"
         },
         "Assets\/credits\/spent": {
-            "content": "Käyttänyt {{amount}} krediittiä"
+            "content": "Käytti {{amount}} krediittiä"
         },
         "Assets\/credits\/sent": {
-            "content": "Lähetetty {{amount}} hyvitystä henkilölle {{toUserName}}"
+            "content": "Lähetetty {{amount}} krediittiä {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Sai {{amount}} hyvitystä käyttäjältä {{fromUserName}}"
+            "content": "Sai {{amount}} krediittiä {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Tililläsi on vähän luottoja. <a href='{{link}}'>Tästä linkistä<\/a> voit ostaa lisää krediittejä."
+            "content": "Tililläsi on vähän luottoja. Käy <a href='<i translate='no'>999 &#39;&gt;tämän linkin kautta<\/a> ostaaksesi lisää krediittejä."
+        }
+    },
+    "billing": {
+        "Title": "Omaisuuden laskutus",
+        "CreditsMinimum": "Minimipisteet",
+        "CreditsToAdd": "Lisättävät krediitit",
+        "Save": "Tallentaa",
+        "ThisLink": "tämä linkki",
+        "errors": {
+            "CreditsMinimumNegative": "Krediittien vähimmäismäärä ei voi olla negatiivinen",
+            "CreditsToAddNegative": "Lisättävät krediitit eivät voi olla negatiivisia"
         }
     },
     "services": {
@@ -206,21 +236,39 @@
             "SelectRequiredParticipants": "Pakolliset osallistujat",
             "RequiredParticipantsDesc": "Valitse asiaan liittyvät osallistujat, jotka tarvitaan tämän palvelun käyttöön (esimerkiksi lemmikit &quot;Koiranäyttelyyn&quot; tai lapset &quot;Lasten lomalle&quot; jne.). Jos palvelu on maksullinen, käyttäjän tulee maksaa myös jokaisesta asiaan liittyvästä osallistujasta."
         },
+        "EditServiceTemplate": {
+            "Title": "Muokkaa palvelua"
+        },
         "ManageServiceTemplates": "Hallinnoi palvelumalleja",
         "ManageServices": "Hallinnoi palveluita",
         "Free": "Vapaa",
         "OptionalContribution": "Valinnainen panos",
         "RequiredPayment": "Vaadittu maksu",
         "AreYouSureDelete": "Haluatko varmasti poistaa tämän palvelun?",
-        "AmountServicesRelated": "Tähän palveluun liittyy {{amount}} saatavuutta. Ne myös poistetaan.",
-        "EditServiceTemplate": {
-            "Title": "Muokkaa palvelua"
-        }
+        "AmountServicesRelated": "Tähän palveluun liittyy {{amount}} saatavuutta. Ne myös poistetaan."
+    },
+    "transfer": {
+        "SelectRecipient": "Valitse vastaanottaja",
+        "TransactionSuccess": "Kaupan onnistuminen",
+        "OrTypeWalletAddress": "TAI kirjoita vastaanottajan lompakon osoite"
     },
     "NFT": {
-        "Title": "Tietoja {{title}} NFT:stä",
-        "Description": "Yksityiskohtaiset tiedot NFT:stä",
-        "FixedBid": "Osta nyt",
+        "Title": "Otsikko",
+        "Name": "Nimi",
+        "EnterName": "Kirjoita nimi",
+        "EnterAuthorWallet": "Syötä kirjoittajan lompakko",
+        "InformationAboutTitle": "Tietoja {{title}} NFT:stä",
+        "Description": "Kuvaus",
+        "DetailedInformationAboutNFT": "Yksityiskohtaiset tiedot NFT:stä",
+        "PresaleStarts": "Ennakkomyynti alkaa 23.12",
+        "OwnerUserNotFound": "Tämän NFT:n omistajaa ei ole rekisteröity sovellukseemme.",
+        "BuyNow": "Osta nyt",
+        "Buy": "Ostaa",
+        "Add": "Lisätä",
+        "Remove": "Poista",
+        "NoNFTyet": "Ei vielä NFT:tä",
+        "Conversation": "Keskustelu",
+        "Create": "Luoda",
         "CurrentBid": "Tämänhetkinen tarjous",
         "StartingIn": "Alkaa sisään",
         "EndingIn": "Päättyy sisään",
@@ -234,7 +282,10 @@
         "StartingDate": "Aloituspäivämäärä",
         "BidsBelowThisAmount": "Tämän summan alapuolella olevia tarjouksia ei hyväksytä",
         "MinimumBid": "Minimihinta",
+        "Author": "Tekijä",
         "Price": "Hinta",
+        "Commission": "komissio",
+        "EnterCommission": "Anna provisio",
         "Owner": "Omistaja",
         "SelectCategory": "Valitse kategoria",
         "Day": "Päivä",
@@ -245,7 +296,7 @@
         "Minutes": "Pöytäkirja",
         "Second": "Toinen",
         "Seconds": "Sekuntia",
-        "SalesCreator": "myynnistä menee luojalle",
+        "SalesCreator": "myynnistä menee tekijälle",
         "Details": "Yksityiskohdat",
         "Bids": "Tarjoukset",
         "History": "Historia",
@@ -253,17 +304,25 @@
         "PutOnSale": "Laita myyntiin",
         "PutOffSale": "Vetäytyä myynnistä",
         "Transfer": "Siirtää",
+        "Actions": "Toiminnot",
+        "Claim": "Väite",
+        "ClaimNFT": "Lunasta NFT",
+        "Unlocking": "Avataan",
+        "Unlock": "Avata",
         "Update": "Päivittää",
         "UpdateToken": "Päivitä Token",
+        "UpdateNFT": "Päivitä NFT",
         "CreateToken": "Luo tunnus",
         "PlaceBid": "Asettaa tarjous",
         "SoldOut": "myyty",
+        "NotOnSale": "Ei myynnissä",
         "NftName": "NFT nimi",
         "DescribeYourNFT": "Kuvaile NFT:täsi",
         "NftPicture": "NFT:tä edustava kuva",
         "NftMovie": "NFT:tä edustava elokuva",
         "UploadMovie": "Lataa elokuva",
         "MovieSource": "Elokuvan lähde",
+        "MovieURL": "Elokuvan URL-osoite",
         "UploadFile": "Lataa tiedosto",
         "PutOnMarketplace": "Laita torille",
         "InstantPurchase": "Anna hinta, jotta käyttäjät voivat ostaa NFT:si välittömästi",
@@ -271,60 +330,9 @@
         "TimedAuction": "Ajastettu huutokauppa",
         "OpenForBids": "Avoinna tarjouksille",
         "PriceOnePiece": "Syötä hinta yhdelle kappaleelle",
+        "EnterPrice": "Syötä hinta",
         "EnterMinimumBid": "Anna vähimmäishinta",
         "SelectChain": "Valitse ketju",
-        "WrongChain": "Tämä NFT luotiin nimellä &quot;{{chain}}&quot;. Käytä tätä ketjua.",
-        "import": {
-            "importNFT": "NFT:n tuonti",
-            "fileNotFound": "Anteeksi, CSV-tiedostoa ei löydy.",
-            "fileEmpty": "Anteeksi, CSV-tiedosto on tyhjä.",
-            "userIdNotFound": "käyttäjä on olemassa, mutta id tyhjä",
-            "errorLine": "rivi {{1}}",
-            "fieldNotFound": "Pakollista kenttää &quot;{{1}}&quot; ei löydy",
-            "taskStreamInvalid": "tehtävävirta on virheellinen",
-            "instructionsEmpty": "tehtävävirran ohjeet tyhjät",
-            "complete": "Saattaa loppuun",
-            "activateUsers": "lähettää aktivointiviestin käyttäjille?",
-            "importProgress": "Edistyminen",
-            "importOptions": "Vaihtoehdot",
-            "sampleCSV": "Lataa malli-CSV",
-            "fileLabel": "Lataa laskentataulukko:",
-            "errorsTitle": "Virheitä tapahtui",
-            "importAttributes": "Tuo NFT-attribuutit",
-            "displayTypeEmpty": "Kohteen &quot;{{1}}&quot; näyttötyyppiä ei löydy"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Suodata NFT-kokoelman mukaan",
-                "ShowNFTCollection": "Näytä NFT-kokoelma...",
-                "AllCollections": "Kaikki kokoelmat"
-            },
-            "ByUser": {
-                "AllAuthors": "Kaikki tekijät",
-                "AllUsers": "Kaikki",
-                "FilterByAuthors": "Suodata tekijöiden mukaan"
-            }
-        },
-        "Back": "Takaisin kokoelmaan",
-        "Name": "Nimi",
-        "EnterName": "Kirjoita nimi",
-        "EnterAuthorWallet": "Syötä kirjoittajan lompakko",
-        "InformationAboutTitle": "Tietoja {{title}} NFT:stä",
-        "DetailedInformationAboutNFT": "Yksityiskohtaiset tiedot NFT:stä",
-        "PresaleStarts": "Ennakkomyynti alkaa 23.12",
-        "OwnerUserNotFound": "Tämän NFT:n omistajaa ei ole rekisteröity sovellukseemme.",
-        "BuyNow": "Osta nyt",
-        "Buy": "Ostaa",
-        "Conversation": "Keskustelu",
-        "Create": "Luoda",
-        "Author": "Tekijä",
-        "Commission": "komissio",
-        "EnterCommission": "Anna provisio",
-        "Actions": "Toiminnot",
-        "UpdateNFT": "Päivitä NFT",
-        "NotOnSale": "Ei myynnissä",
-        "MovieURL": "Elokuvan URL-osoite",
-        "EnterPrice": "Syötä hinta",
         "Currency": "Valuutta",
         "AreYouSureDeleteImage": "Haluatko varmasti poistaa kuvan?",
         "AreYouSureDeleteVideo": "Haluatko varmasti poistaa videon?",
@@ -355,7 +363,7 @@
         "contract": {
             "CreateContract": "Luo sopimus",
             "SelectContract": "Valitse sopimus",
-            "CreateContractFor": "Luo sopimus {{userName}}",
+            "CreateContractFor": "Luo sopimus hintaan {{userName}}",
             "ContractFor": "Sopimus {{userName}}",
             "UpdateContract": "Päivitä sopimus",
             "TransferOwnership": "Siirrä omistusoikeus",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "Nykyinen BaseURL",
             "ContractAddressAbsent": "Sopimusosoite puuttuu",
             "FactoryAddressAbsent": "Tehdasosoite puuttuu",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Otsikko vaaditaan",
             "SymbolRequired": "Symboli vaaditaan",
             "TypeContractName": "sopimuksen nimi",
@@ -375,6 +383,38 @@
             "Title": "Kilpailut",
             "NewContest": "Uusi Kilpailu"
         },
+        "import": {
+            "importNFT": "NFT:n tuonti",
+            "importAttributes": "Tuo NFT-attribuutit",
+            "fileNotFound": "Anteeksi, CSV-tiedostoa ei löydy.",
+            "fileEmpty": "Anteeksi, CSV-tiedosto on tyhjä.",
+            "userIdNotFound": "käyttäjä on olemassa, mutta id tyhjä",
+            "errorLine": "rivi {{1}}",
+            "fieldNotFound": "Pakollista kenttää &quot; {{1}} &quot; ei löydy",
+            "displayTypeEmpty": "Näyttötyyppiä &quot; {{1}} &quot; ei löydy",
+            "taskStreamInvalid": "tehtävävirta on virheellinen",
+            "instructionsEmpty": "tehtävävirran ohjeet tyhjät",
+            "complete": "Saattaa loppuun",
+            "activateUsers": "lähettää aktivointiviestin käyttäjille?",
+            "importProgress": "Edistyminen",
+            "importOptions": "Vaihtoehdot",
+            "sampleCSV": "Lataa malli-CSV",
+            "fileLabel": "Lataa laskentataulukko:",
+            "errorsTitle": "Tapahtui virheitä"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Suodata NFT-kokoelman mukaan",
+                "ShowNFTCollection": "Näytä NFT-kokoelma...",
+                "AllCollections": "Kaikki kokoelmat"
+            },
+            "ByUser": {
+                "AllAuthors": "Kaikki tekijät",
+                "AllUsers": "Kaikki",
+                "FilterByAuthors": "Suodata tekijöiden mukaan"
+            }
+        },
+        "Back": "Takaisin kokoelmaan",
         "attributes": {
             "Title": "Hallitse määritteitä",
             "Attributes": "Attribuutit",
@@ -393,18 +433,11 @@
         },
         "profile": {
             "LogOut": "Kirjautua ulos",
-            "Title": "Profiili käyttäjälle {{userName}}",
+            "Title": "Profiili hintaan {{userName}}",
             "Description": "Käyttäjätiedot",
             "aboutPlaceholder": "Muokkaa Bioa",
             "SureLogOut": "Haluatko varmasti kirjautua ulos?"
         },
-        "Add": "Lisätä",
-        "Remove": "Poista",
-        "NoNFTyet": "Ei vielä NFT:tä",
-        "Claim": "Väite",
-        "ClaimNFT": "Lunasta NFT",
-        "Unlocking": "Avataan",
-        "Unlock": "Avata",
         "sales": {
             "factory": {
                 "form": {
@@ -458,7 +491,7 @@
                     },
                     "small": {
                         "seriesId": "uusi tunnus kuuluu sarjaan tällaisen tunnuksen kanssa",
-                        "account": "vasta perustetun NFT:n omistaja. jos ei asetettu - käyttää nykyistä lompakkoa",
+                        "account": "hiljattain perustetun NFT:n omistaja. jos ei asetettu - käyttää nykyistä lompakkoa",
                         "amount": "määrä NFT:tä minttuun"
                     }
                 },
@@ -501,7 +534,7 @@
                     "recipient": "Vastaanottaja"
                 },
                 "small": {
-                    "tokenId": "tunnus, joka on lukittava tai avattava",
+                    "tokenId": "token id, joka on lukittava tai avattava",
                     "custodian": "osoite, jonka lukitus voidaan avata",
                     "recipient": "osoite, joka vastaanottaa tunnukset"
                 }
@@ -520,50 +553,10 @@
             "Unlock": "Avata",
             "Locked": "Lukittu",
             "CustodianAddress": "Säilyttäjän osoite",
-            "TokenWasClaimed": "Tunnus &quot;{{title}}&quot; on lunastettu",
-            "TokenWasLocked": "Tunnus &quot;{{title}}&quot; lukittiin",
-            "TokenWasUnlocked": "Tunnus &quot;{{title}}&quot; avattiin"
+            "TokenWasClaimed": "Tunnus &quot; {{title}} &quot; lunastettiin",
+            "TokenWasLocked": "Tunnus &quot; {{title}} &quot; lukittiin",
+            "TokenWasUnlocked": "Tunnus &quot; {{title}} &quot; avattiin"
         }
-    },
-    "errors": {
-        "Error": "Virhe",
-        "WalletAbsent": "Lompakkoa ei ole yhdistetty.",
-        "Rendering": "Renderöitäessä tapahtui virheitä <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Hinta vaaditaan!",
-        "NameRequired": "Nimi (pakollinen!",
-        "PriceInvalid": "Hinta virheellinen!",
-        "TransactionFailed": "Tapahtuma epäonnistui",
-        "ChainNotSupported": "Valittua ketjua ei tueta. Tuettu ketju: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Tarvitset MetaMaskiin yhdistetyn työskentelyn sovelluksen kanssa",
-        "UserNotLoggedInMetaMask": "Käyttäjä ei ole kirjautunut MetaMaskiin",
-        "CurrencyNotFound": "Valuuttaa ei löydy",
-        "WrongChain": "Tämä NFT luotiin nimellä &quot;{{chain}}&quot;. Käytä tätä ketjua.",
-        "AmountInvalid": "Summa virheellinen!",
-        "NoRecipientSelected": "Vastaanottajaa ei ole valittu",
-        "NotEnoughPermissionsWallet": "Ei tarpeeksi oikeuksia tämän käyttäjän lompakon lukemiseen",
-        "ThisUserHaveNoWallet": "Tälle käyttäjälle ei ole määritetty lompakkoa",
-        "TheWalletOfThisUserInvalid": "Tämän käyttäjän lompakko on virheellinen",
-        "WalletInvalid": "Lompakon osoite on virheellinen"
-    },
-    "admin": {
-        "Title": "Omaisuuden hallinto",
-        "SubscriptionTitle": "Tilaussuunnitelmat"
-    },
-    "billing": {
-        "Title": "Omaisuuden laskutus",
-        "CreditsMinimum": "Minimipisteet",
-        "CreditsToAdd": "Lisättävät krediitit",
-        "Save": "Tallentaa",
-        "ThisLink": "tämä linkki",
-        "errors": {
-            "CreditsMinimumNegative": "Krediittien vähimmäismäärä ei voi olla negatiivinen",
-            "CreditsToAddNegative": "Lisättävät krediitit eivät voi olla negatiivisia"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Valitse vastaanottaja",
-        "TransactionSuccess": "Kaupan onnistuminen",
-        "OrTypeWalletAddress": "TAI kirjoita vastaanottajan lompakon osoite"
     },
     "currencies": {
         "choose": "Valitse valuutta"

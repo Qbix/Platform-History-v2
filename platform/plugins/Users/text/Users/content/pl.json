@@ -1,13 +1,26 @@
 {
+    "avatar": {
+        "Someone": "Ktoś"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "mobilny",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Skopiowane! Teraz możesz wkleić go w dowolnym miejscu."
+    },
     "analytics": {
         "Title": "Analityka",
         "Daily": "Codziennie",
-        "Weekly": "Tygodniowo",
+        "Weekly": "Co tydzień",
         "Monthly": "Miesięczny",
-        "Application": "Podanie",
+        "Application": "Aplikacja",
         "Pages": "Strony",
         "Services": "Usługi",
-        "Faq": "FAQ",
+        "Faq": "Często zadawane pytania",
         "WeekDays": "Dni tygodnia"
     },
     "actions": {
@@ -15,13 +28,13 @@
         "LogOut": "Wyloguj"
     },
     "activate": {
-        "SetAsPrimary": "Ustaw {{1}} jako mój podstawowy {{2}}",
-        "ChoosePassPhrase": "Wybierz <strong>hasło<\/strong> do logowania.<br> Prosta fraza składająca się z kilku słów, które łatwo zapamiętasz.",
-        "ChoosePassPhraseSeeSuggestions": "Wybierz dobrą <strong>frazę hasła<\/strong> , aby chronić swoje konto. Zobacz sugestie dotyczące niektórych pomysłów.",
+        "OneTimeCode": "Wpisz otrzymany kod:",
+        "SetAsPrimary": "Ustaw {{1}} jako moje podstawowe {{2}}",
+        "ChoosePassPhrase": "Wybierz <strong>hasło<\/strong> , aby się zalogować.<br> Prosta fraza składająca się z kilku słów, które z łatwością zapamiętasz.",
+        "ChoosePassPhraseSeeSuggestions": "Wybierz dobre <strong>hasło<\/strong> , aby chronić swoje konto. Zobacz sugestie dotyczące niektórych pomysłów.",
         "LogOutAndTryAgain": "Wyloguj się i spróbuj ponownie",
         "IfYouFeel": "Jeśli czujesz, że coś poszło nie tak, możesz",
         "SetIdentifierButtonTitle": "zacząć od nowa",
-        "OneTimeCode": "Wpisz otrzymany kod:",
         "ActivateMyAccount": "Aktywuj moje konto"
     },
     "session": {
@@ -31,25 +44,25 @@
         "GetStarted": "Zaczynaj",
         "Authorize": "Autoryzować",
         "TermsLabel": "Przeczytałem i zgadzam się<br> do {{link}}",
-        "TermsTitle": "Semestry",
-        "mustAgree": "Najpierw musisz zgodzić się na warunki."
+        "TermsTitle": "Warunki",
+        "mustAgree": "Najpierw musisz zaakceptować warunki."
     },
     "register": {
         "TermsLabel": "Akceptuję {{link}}",
-        "TermsTitle": "Semestry"
+        "TermsTitle": "Warunki"
     },
     "notifications": {
         "title": "Pozwolenie",
-        "prompt": "Czy chcesz włączyć powiadomienia? Będziesz otrzymywać aktualne informacje o rzeczach, na których Ci zależy.",
-        "yes": "tak",
-        "no": "Nie",
-        "WelcomePleaseVerifyEmail": "Witam! Zweryfikuj swój adres e-mail.",
-        "WelcomeVerifyEmail": "Witam! Zweryfikuj swój adres email.",
+        "prompt": "Czy chcesz włączyć powiadomienia? Będziesz otrzymywać aktualizacje w czasie rzeczywistym o rzeczach, na których Ci zależy.",
+        "yes": "Tak",
+        "no": "NIE",
+        "WelcomePleaseVerifyEmail": "Powitanie! Proszę zweryfikować swój adres e-mail.",
+        "WelcomeVerifyEmail": "Powitanie! Zweryfikuj swój adres email.",
         "ForgetPass": "Hej, zapomniałeś hasła?",
         "PassphraseSaved": "Twoje hasło zostało zapisane.",
         "IdentifierActivated": "Twoje {{type}} zostało aktywowane.",
-        "CompletedActivation": "Zakończyłeś aktywację użytkownika.",
-        "CompletedActivationLogIn": "Zakończyłeś aktywację użytkownika. Spróbuj się zalogować teraz."
+        "CompletedActivation": "Aktywacja użytkownika została zakończona.",
+        "CompletedActivationLogIn": "Aktywacja użytkownika została zakończona. Spróbuj zalogować się teraz."
     },
     "contacts": {
         "dialog": {
@@ -70,95 +83,75 @@
         "inviteRole": "Zaproś {{role}}"
     },
     "invalidLanguageSelected": "Wybrano nieprawidłowy język",
+    "platforms": {
+        "wallet": "Portfel",
+        "broadcast": "Audycja"
+    },
     "login": {
-        "title": "Witamy",
+        "title": "Powitanie",
         "directions": "Utwórz konto lub zaloguj się.",
         "directionsNoRegister": "Zaloguj się, jeśli masz konto.",
-        "goButton": "",
-        "passphrase": "Wpisz swoje hasło:",
+        "goButton": "➔",
+        "passphrase": "Wpisz hasło:",
         "loginButton": "Zaczynaj",
         "registerButton": "Zaczynaj",
         "resendButton": "Wyślij wiadomość aktywacyjną",
         "forgot": "Zapomniałem?",
         "resendConfirm": "Czy chcesz wysłać wiadomość, aby zresetować hasło?",
         "resendSuccess": "Sprawdź, czy pojawiła się wiadomość, aby zresetować hasło",
-        "resendClose": "Blisko",
-        "noPassphrase": "Aby móc się zalogować, musisz ustawić frazę hasła, klikając łącze w wiadomości aktywacyjnej.",
+        "resendClose": "Zamknąć",
+        "noPassphrase": "Zanim będziesz mógł się zalogować, musisz ustawić hasło, klikając link w wiadomości aktywacyjnej.",
         "notVerified": "Aby się zalogować, musisz wysłać do siebie wiadomość aktywacyjną.",
         "emailExists": "Czy próbowałeś wcześniej zarejestrować się za pomocą tego adresu e-mail? Jeśli tak, sprawdź swoją skrzynkę odbiorczą, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość<\/a>",
-        "mobileExists": "Czy próbowałeś już wcześniej zarejestrować się pod tym numerem telefonu komórkowego? Jeśli tak, sprawdź swój SMS, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość<\/a>",
-        "usingOther": "czy możesz",
+        "mobileExists": "Czy próbowałeś wcześniej zarejestrować się przy użyciu tego numeru telefonu komórkowego? Jeśli tak, sprawdź wiadomość SMS, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość<\/a>",
+        "usingOther": "albo możesz",
+        "connectPlatforms": "lub połącz za pomocą:",
         "prompt": "Wybierz nazwę użytkownika:",
         "newUser": "lub utwórz nowe konto poniżej",
         "placeholders": {
-            "identifier": "Twój telefon komórkowy # lub e-mail",
-            "mobile": "wprowadź swój telefon #",
-            "email": "wpisz swój adres e-mail",
+            "identifier": "numer telefonu komórkowego lub adres e-mail",
+            "mobile": "wprowadź swój numer telefonu komórkowego",
+            "email": "wprowadź swój adres e-mail",
             "username": "używaj tylko liter i cyfr"
         },
         "confirmTerms": "Zaakceptować Warunki korzystania z usługi?",
-        "facebookNoEmail": "Na Twoim koncie Facebook brakuje potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
+        "facebookNoEmail": "Twoje konto na Facebooku nie ma potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
         "picTooltip": "Możesz zmienić to zdjęcie później",
-        "wallet": {
-            "payload": "Zaloguj się do {{host}} o godzinie {{timestamp}}",
-            "alert": {
-                "title": "Przekierowanie do Portfela",
-                "content": "Gdy zamkniesz to okno, zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
-            }
-        },
         "web3": {
             "payload": "Zaloguj się do {{host}} o godzinie {{timestamp}}",
             "alert": {
                 "title": "Przekierowanie do Portfela",
-                "content": "Gdy zamkniesz to okno, zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
+                "content": "Po zamknięciu tego okna dialogowego zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
             }
-        },
-        "connectPlatforms": "lub połącz za pomocą:"
+        }
     },
     "setIdentifier": {
-        "title": "Dodaj sposób na zalogowanie się",
+        "title": "Dodaj sposób logowania",
         "sendMessage": "Wyślij wiadomość aktywacyjną",
         "placeholders": {
-            "identifier": "wpisz swój numer telefonu komórkowego lub e-mail",
+            "identifier": "wprowadź swój numer telefonu komórkowego lub adres e-mail",
             "mobile": "Wprowadź swój numer telefonu komórkowego",
-            "email": "wpisz swój adres e-mail",
-            "username": "Nazwa Użytkownika"
+            "email": "wprowadź swój adres e-mail",
+            "username": "nazwa użytkownika"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Konto",
+        "title": "Konto {{Platform}}",
         "areUsing": "Używasz {{platform}} jako",
-        "noLongerUsing": "Nie masz już połączenia z {{platform}} jako",
+        "noLongerUsing": "Nie jesteś już połączony z {{platform}} jako",
         "doAuth": "Zaloguj się na to konto",
         "doSwitch": "Przełącz się na to konto"
     },
     "roles": {
         "Owner": "Właściciel",
-        "Admin": "Administrator",
+        "Admin": "Admin",
         "Member": "Członek",
         "Guest": "Gość",
         "Host": "Gospodarz"
     },
-    "avatar": {
-        "Someone": "Ktoś"
-    },
     "web3": {
-        "WrongMethod": "Niewłaściwa metoda umowy {{methodName}}",
+        "WrongMethod": "Niewłaściwa metoda kontraktu {{methodName}}",
         "ChangeWallet": "Zmień portfel"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mail",
-            "mobile": "mobilny",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Skopiowane! Teraz możesz wkleić go w dowolnym miejscu."
-    },
-    "platforms": {
-        "wallet": "Portfel",
-        "broadcast": "Audycja"
     },
     "labels": {
         "addToPhonebook": "Dodaj do moich kontaktów w telefonie",

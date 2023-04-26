@@ -11,7 +11,7 @@
             },
             "interests": {
                 "Title": "Iffiltra mill-Interess",
-                "FilterInterests": "Ibda ittajpja interess..."
+                "FilterInterests": "Ibda ttajpja interess..."
             },
             "Interest": "Interess",
             "Location": "Post"
@@ -55,7 +55,7 @@
             "displayType": "Unità reklam"
         },
         "Websites\/advert\/placement": {
-            "description": "Mod kif jinġabru unitajiet ta&#39; reklamar taħt isem",
+            "description": "Mod ta &#39;raggruppament ta&#39; unitajiet ta &#39;reklamar taħt isem",
             "displayType": "Tqegħid tar-reklam"
         },
         "Websites\/advert\/creative": {

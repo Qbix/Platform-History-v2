@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} gjatësi)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "brenda {{1}}"
     },
     "units": {
@@ -18,19 +18,20 @@
         "inches": "inç"
     },
     "location": {
-        "interested": "Unë jam i interesuar që gjërat të ndodhin brenda {{select}} prej",
+        "interested": "Unë jam i interesuar që gjërat të ndodhin brenda {{select}} ditësh",
         "update": "Përditëso vendndodhjen time",
+        "set": "Cakto vendndodhjen time",
         "prompt": "{{ClickOrTap}} këtu për të<br> vendosni tuajën<br> vendndodhjen",
         "myCurrentLocation": "Vendndodhja ime aktuale",
         "enterAddress": "Fut një adresë",
         "enterPostcode": "Ju lutemi shkruani kodin postar \/ kodin postar",
         "create": {
-            "action": "Shto vendndodhje",
+            "action": "Shto vendndodhjen",
             "title": "Vendndodhja e re",
             "nameYourLocation": "Emërtoni vendndodhjen tuaj"
         },
         "confirm": {
-            "title": "Të ruhet kjo vendndodhje?",
+            "title": "Të ruhet ky vend?",
             "message": "A planifikoni ta përdorni përsëri këtë vendndodhje në të ardhmen?",
             "ok": "po",
             "cancel": "Nr"
@@ -42,8 +43,7 @@
         },
         "dialog": {
             "title": "Zgjidhni Vendndodhjen"
-        },
-        "set": "Cakto vendndodhjen time"
+        }
     },
     "areas": {
         "filterPlaceholder": "Ndonjë zonë brenda këtij lokacioni?",
@@ -65,7 +65,7 @@
             "displayType": "Vendndodhja"
         },
         "Places\/area": {
-            "description": "Përfaqëson një zonë brenda një vendndodhjeje, si p.sh. një dhomë ose suitë",
+            "description": "Përfaqëson një zonë brenda një vendndodhjeje, të tillë si një dhomë ose suitë",
             "displayType": "Zona"
         },
         "Places\/floor": {
@@ -81,7 +81,7 @@
             "displayType": "Pranë nga vendet"
         },
         "Places\/interest": {
-            "description": "Kategoria për gjërat brenda një distancë të caktuar nga një gjeohash, që përputhet me një interes",
+            "description": "Kategoria për gjërat brenda një distance të caktuar nga një gjeohash, që përputhet me një interes",
             "displayType": "Vende me interes"
         }
     }

@@ -13,7 +13,7 @@
                 "Title": "Filtrer par intérêt",
                 "FilterInterests": "Commencez à saisir un centre d&#39;intérêt..."
             },
-            "Interest": "L&#39;intérêt",
+            "Interest": "Intérêt",
             "Location": "Emplacement"
         }
     },
@@ -26,7 +26,7 @@
             "StartConversation": "Démarrer la conversation",
             "GotoConversation": "Aller à Conversation",
             "reset": "Réinitialiser",
-            "edit": "Éditer",
+            "edit": "Modifier",
             "link": "Lien",
             "setUrl": "Définir l&#39;URL",
             "save": "Sauvegarder",
@@ -68,7 +68,7 @@
         },
         "Websites\/webpage": {
             "description": "Représente un site Web dont les métadonnées ont été récupérées",
-            "displayType": "page Web"
+            "displayType": "page web"
         }
     }
 }

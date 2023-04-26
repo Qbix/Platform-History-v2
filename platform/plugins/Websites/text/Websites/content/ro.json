@@ -29,7 +29,7 @@
             "edit": "Editați | ×",
             "link": "Legătură",
             "setUrl": "Setați adresa URL",
-            "save": "salva",
+            "save": "Salvați",
             "setClip": "Clipul decupat",
             "invalidURL": "URL invalid"
         },
@@ -56,7 +56,7 @@
         },
         "Websites\/advert\/placement": {
             "description": "O modalitate de grupare a unităților de publicitate sub un nume",
-            "displayType": "Plasarea reclamelor"
+            "displayType": "Plasarea reclamei"
         },
         "Websites\/advert\/creative": {
             "description": "Conținut pentru o reclamă",
@@ -68,7 +68,7 @@
         },
         "Websites\/webpage": {
             "description": "Reprezintă un site web ale cărui metadate au fost răzuite",
-            "displayType": "pagină web"
+            "displayType": "Pagină web"
         }
     }
 }

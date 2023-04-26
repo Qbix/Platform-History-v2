@@ -24,16 +24,16 @@
             "BrowseTheWeb": "浏览",
             "WriteToStartConversation": "写下您的想法以开始对话",
             "StartConversation": "开始对话",
-            "GotoConversation": "去对话",
-            "reset": "重启",
+            "GotoConversation": "进入对话",
+            "reset": "重置",
             "edit": "编辑",
             "link": "关联",
             "setUrl": "设置网址",
-            "save": "保存",
-            "setClip": "剪出剪辑",
+            "save": "节省",
+            "setClip": "切出剪辑",
             "invalidURL": "无效的网址"
         },
-        "FileTooLarge": "文件太大，无法缓存。最大文件大小 {{size}}",
+        "FileTooLarge": "文件太大，无法缓存。最大文件大小{{size}}",
         "InvalidPDF": "文件不是有效的 PDF",
         "StartTypingTitleOrKeywords": "开始输入标题或关键字..."
     },
@@ -43,7 +43,7 @@
             "displayType": "文章"
         },
         "Websites\/slide": {
-            "description": "演示文稿中的幻灯片，可以包括 HTML、音频等。",
+            "description": "演示文稿中的幻灯片可以包含 HTML、音频等。",
             "displayType": "滑动"
         },
         "Websites\/presentation": {
@@ -55,19 +55,19 @@
             "displayType": "广告单元"
         },
         "Websites\/advert\/placement": {
-            "description": "一种按名称对广告单元进行分组的方法",
-            "displayType": "广告展示位置"
+            "description": "一种以名称对广告单元进行分组的方法",
+            "displayType": "广告投放"
         },
         "Websites\/advert\/creative": {
             "description": "广告内容",
-            "displayType": "广告素材"
+            "displayType": "广告创意"
         },
         "Websites\/advert\/campaign": {
-            "description": "一场广告活动",
+            "description": "广告活动",
             "displayType": "广告活动"
         },
         "Websites\/webpage": {
-            "description": "表示其元数据被抓取的网站",
+            "description": "表示元数据被抓取的网站",
             "displayType": "网页"
         }
     }

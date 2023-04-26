@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "{{1}} daxilində"
     },
     "units": {
@@ -18,9 +18,10 @@
         "inches": "düym"
     },
     "location": {
-        "interested": "{{select}} ərzində baş verənlərlə maraqlanıram",
+        "interested": "{{select}} -cu ildə baş verənlərlə maraqlanıram",
         "update": "Məkanımı Yeniləyin",
-        "prompt": "{{ClickOrTap}} buradan<br> təyin edin<br> yer",
+        "set": "Yerimi təyin edin",
+        "prompt": "{{ClickOrTap}} burada<br> təyin edin<br> yer",
         "myCurrentLocation": "Mənim cari yerim",
         "enterAddress": "Ünvan daxil edin",
         "enterPostcode": "Zəhmət olmasa poçt indeksinizi \/ poçt indeksinizi daxil edin",
@@ -41,19 +42,18 @@
             "ok": "Yadda saxla"
         },
         "dialog": {
-            "title": "Yer seçin"
-        },
-        "set": "Yerimi təyin edin"
+            "title": "Məkanı seçin"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Bu məkanın daxilində hər hansı sahə varmı?",
+        "filterPlaceholder": "Bu məkanda hər hansı bir sahə varmı?",
         "newArea": "Yeni ərazi",
         "promptTitle": "Ərazi üçün ad daxil edin:",
         "absent": "Zəhmət olmasa ərazini təyin edin",
         "error": "Xəta",
         "exist": "Ərazi artıq mövcuddur",
         "addNewArea": "Yeni sahə əlavə edin",
-        "add": "Əlavə et"
+        "add": "əlavə et"
     },
     "types": {
         "Places\/locations": {
@@ -77,11 +77,11 @@
             "displayType": "Sütun"
         },
         "Places\/nearby": {
-            "description": "Bir geohashdan müəyyən bir məsafədə olan şeylər üçün kateqoriya",
+            "description": "Geohaşdan müəyyən məsafədə olan şeylər üçün kateqoriya",
             "displayType": "Yerlərə yaxın"
         },
         "Places\/interest": {
-            "description": "Geohashdan müəyyən məsafədə olan, marağa uyğun gələn şeylər üçün kateqoriya",
+            "description": "Geohashdan müəyyən məsafədə olan, maraqlara uyğun olan şeylər üçün kateqoriya",
             "displayType": "Maraqlı yerlər"
         }
     }

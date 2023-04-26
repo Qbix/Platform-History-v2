@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} latitude, {{2}} longueur)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "dans {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "dans les {{1}}"
     },
     "units": {
         "meter": "mètre",
@@ -13,12 +13,12 @@
         "mile": "mile",
         "miles": "milles",
         "mi": "mi",
-        "foot": "le pied",
+        "foot": "pied",
         "feet": "pieds",
         "inches": "pouces"
     },
     "location": {
-        "interested": "Je suis intéressé par les événements qui se déroulent dans un délai de {{select}}",
+        "interested": "Je m&#39;intéresse aux choses qui se passent dans l&#39;intervalle de {{select}}",
         "update": "Mettre à jour ma position",
         "set": "Définir ma position",
         "prompt": "{{ClickOrTap}} ici pour<br> Définissez votre<br> emplacement",
@@ -70,7 +70,7 @@
         },
         "Places\/floor": {
             "description": "Représente un étage dans un bâtiment ou un navire",
-            "displayType": "Étage"
+            "displayType": "Sol"
         },
         "Places\/column": {
             "description": "Représente une colonne dans un bâtiment ou un navire",

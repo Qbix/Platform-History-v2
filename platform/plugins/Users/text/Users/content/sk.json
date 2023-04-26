@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Niekto"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Mobilné",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Skopírované! Teraz ho môžete prilepiť kdekoľvek."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Denne",
@@ -6,7 +19,7 @@
         "Monthly": "Mesačne",
         "Application": "Aplikácia",
         "Pages": "Stránky",
-        "Services": "služby",
+        "Services": "Služby",
         "Faq": "Faq",
         "WeekDays": "Dni v týždni"
     },
@@ -15,13 +28,13 @@
         "LogOut": "odhlásiť sa"
     },
     "activate": {
-        "SetAsPrimary": "Nastaviť {{1}} ako môj primárny {{2}}",
-        "ChoosePassPhrase": "Vyberte <strong>heslo<\/strong> , pomocou ktorého sa chcete prihlásiť.<br> Jednoduchá fráza pozostávajúca z niekoľkých slov, ktoré si ľahko zapamätáte.",
-        "ChoosePassPhraseSeeSuggestions": "Zvoľte si dobrú <strong>prístupovú frázu<\/strong> na ochranu svojho účtu. Pozrite si návrhy niektorých nápadov.",
+        "OneTimeCode": "Zadajte kód, ktorý ste dostali:",
+        "SetAsPrimary": "Nastaviť {{1}} ako mojich primárnych {{2}}",
+        "ChoosePassPhrase": "Vyberte <strong>heslo,<\/strong> pomocou ktorého sa chcete prihlásiť.<br> Jednoduchá fráza pozostávajúca z niekoľkých slov, ktoré si ľahko zapamätáte.",
+        "ChoosePassPhraseSeeSuggestions": "Vyberte si dobrú <strong>prístupovú frázu<\/strong> na ochranu svojho účtu. Pozrite si návrhy niektorých nápadov.",
         "LogOutAndTryAgain": "Odhláste sa a skúste to znova",
         "IfYouFeel": "Ak máte pocit, že sa niečo pokazilo, môžete",
         "SetIdentifierButtonTitle": "začať odznova",
-        "OneTimeCode": "Zadajte kód, ktorý ste dostali:",
         "ActivateMyAccount": "Aktivovať môj účet"
     },
     "session": {
@@ -42,12 +55,12 @@
         "title": "Povolenie",
         "prompt": "Chcete povoliť upozornenia? Budete dostávať aktuálne informácie o veciach, na ktorých vám záleží.",
         "yes": "Áno",
-        "no": "nie",
+        "no": "Nie",
         "WelcomePleaseVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
         "WelcomeVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
-        "ForgetPass": "Ahoj, zabudli ste svoju prístupovú frázu?",
+        "ForgetPass": "Hej, zabudli ste svoju prístupovú frázu?",
         "PassphraseSaved": "Vaša prístupová fráza bola uložená.",
-        "IdentifierActivated": "Váš {{type}} bol aktivovaný.",
+        "IdentifierActivated": "Vaša {{type}} bola aktivovaná.",
         "CompletedActivation": "Dokončili ste aktiváciu používateľa.",
         "CompletedActivationLogIn": "Dokončili ste aktiváciu používateľa. Skúste sa teraz prihlásiť."
     },
@@ -56,7 +69,7 @@
             "title": "Vyberte kontakt",
             "CreateAccount": "+ Nový kontakt",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create sa nenašiel",
-            "SearchByName": "Hľadaj podľa mena",
+            "SearchByName": "Hľadajte podľa mena",
             "EmptyContacts": "Kontakty sa nenašli..."
         },
         "select": {
@@ -70,25 +83,30 @@
         "inviteRole": "Pozvať {{role}}"
     },
     "invalidLanguageSelected": "Vybrali ste neplatný jazyk",
+    "platforms": {
+        "wallet": "Peňaženka",
+        "broadcast": "Vysielanie"
+    },
     "login": {
         "title": "Vitajte",
         "directions": "Vytvorte si účet alebo sa prihláste.",
         "directionsNoRegister": "Prihláste sa, ak máte účet.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Zadajte svoju prístupovú frázu:",
         "loginButton": "Začať",
         "registerButton": "Začať",
         "resendButton": "Odoslať aktivačnú správu",
-        "forgot": "Zabudol som?",
+        "forgot": "Zabudol som to?",
         "resendConfirm": "Chcete odoslať správu na obnovenie prístupovej frázy?",
         "resendSuccess": "Vyhľadajte správu na obnovenie prístupovej frázy",
         "resendClose": "Zavrieť",
         "noPassphrase": "Pred prihlásením musíte nastaviť prístupovú frázu kliknutím na odkaz v aktivačnej správe.",
         "notVerified": "Ak sa chcete prihlásiť, musíte si poslať aktivačnú správu.",
         "emailExists": "Skúšali ste sa už zaregistrovať pomocou tohto e-mailu? Ak áno, skontrolujte si doručenú poštu a aktivujte si účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
-        "mobileExists": "Skúšali ste sa už zaregistrovať pomocou tohto mobilného čísla? Ak áno, skontrolujte svoju SMS a aktivujte svoj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
+        "mobileExists": "Skúšali ste sa už predtým zaregistrovať pomocou tohto mobilného čísla? Ak áno, skontrolujte svoju SMS a aktivujte svoj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
         "usingOther": "alebo môžeš",
-        "prompt": "Vyberte si užívateľské meno:",
+        "connectPlatforms": "alebo sa pripojte pomocou:",
+        "prompt": "Vyber si meno:",
         "newUser": "alebo si vytvorte nový účet nižšie",
         "placeholders": {
             "identifier": "váš mobil # alebo e-mail",
@@ -99,66 +117,41 @@
         "confirmTerms": "Súhlasíte so zmluvnými podmienkami?",
         "facebookNoEmail": "Vo vašom facebookovom účte chýba potvrdená e-mailová adresa. Jednoducho sa prihláste natívnym spôsobom.",
         "picTooltip": "Tento obrázok môžete neskôr zmeniť",
-        "wallet": {
-            "payload": "Prihláste sa do {{host}} v čase {{timestamp}}",
-            "alert": {
-                "title": "Prebieha presmerovanie do Peňaženky",
-                "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
-            }
-        },
         "web3": {
-            "payload": "Prihláste sa do {{host}} v čase {{timestamp}}",
+            "payload": "Prihláste sa na {{host}} v čase {{timestamp}}",
             "alert": {
                 "title": "Prebieha presmerovanie do Peňaženky",
                 "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
             }
-        },
-        "connectPlatforms": "alebo sa pripojte pomocou:"
+        }
     },
     "setIdentifier": {
         "title": "Pridajte spôsob prihlásenia",
         "sendMessage": "Odoslať aktivačnú správu",
         "placeholders": {
-            "identifier": "zadajte číslo svojho mobilného telefónu alebo e-mail",
+            "identifier": "zadajte číslo mobilného telefónu alebo e-mail",
             "mobile": "Zadajte Vaše telefónne číslo",
             "email": "Vložte svoju e-mailovú adresu",
             "username": "užívateľské meno"
         }
     },
     "prompt": {
-        "title": "{{Platform}} účet",
+        "title": "Účet {{Platform}}",
         "areUsing": "Používate {{platform}} ako",
         "noLongerUsing": "Už nie ste pripojení k {{platform}} ako",
         "doAuth": "Prihláste sa pomocou tohto účtu",
         "doSwitch": "Prepnúť na tento účet"
     },
     "roles": {
-        "Owner": "vlastník",
+        "Owner": "Vlastník",
         "Admin": "Admin",
         "Member": "člen",
         "Guest": "Hosť",
         "Host": "Hostiteľ"
     },
-    "avatar": {
-        "Someone": "Niekto"
-    },
     "web3": {
-        "WrongMethod": "Nesprávna metóda zmluvy {{methodName}}",
+        "WrongMethod": "Nesprávna zmluvná metóda {{methodName}}",
         "ChangeWallet": "Zmeniť Peňaženku"
-    },
-    "identifier": {
-        "types": {
-            "email": "Email",
-            "mobile": "Mobilné",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Skopírované! Teraz ho môžete prilepiť kdekoľvek."
-    },
-    "platforms": {
-        "wallet": "Peňaženka",
-        "broadcast": "Vysielanie"
     },
     "labels": {
         "addToPhonebook": "Pridať do kontaktov v mojom telefóne",

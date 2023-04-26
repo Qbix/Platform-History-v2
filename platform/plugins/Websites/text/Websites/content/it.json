@@ -19,7 +19,7 @@
     },
     "webpage": {
         "composer": {
-            "Go": "andare",
+            "Go": "Andare",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Navigare",
             "WriteToStartConversation": "Scrivi i tuoi pensieri per iniziare la conversazione",
@@ -43,7 +43,7 @@
             "displayType": "Articolo"
         },
         "Websites\/slide": {
-            "description": "Una diapositiva in una presentazione può includere HTML, audio, ecc.",
+            "description": "Una diapositiva in una presentazione, può includere HTML, audio ecc.",
             "displayType": "Diapositiva"
         },
         "Websites\/presentation": {
@@ -59,7 +59,7 @@
             "displayType": "Posizionamento dell&#39;annuncio"
         },
         "Websites\/advert\/creative": {
-            "description": "Contenuto per una pubblicità",
+            "description": "Contenuto per un annuncio",
             "displayType": "Annuncio creativo"
         },
         "Websites\/advert\/campaign": {
@@ -67,7 +67,7 @@
             "displayType": "Campagna pubblicitaria"
         },
         "Websites\/webpage": {
-            "description": "Rappresenta un sito Web i cui metadati sono stati eliminati",
+            "description": "Rappresenta un sito Web i cui metadati sono stati estratti",
             "displayType": "pagina web"
         }
     }

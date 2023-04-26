@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{100}} lng)",
+    "LatLng": "(lati {{1}} , lng {{2}} )",
     "nearby": {
-        "PostcodeLabel": "{{1}} {{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "ndani ya {{1}}"
     },
     "units": {
@@ -18,10 +18,10 @@
         "inches": "inchi"
     },
     "location": {
-        "interested": "Ninavutiwa na mambo yanayoendelea ndani ya {{select}} ya",
+        "interested": "Ninavutiwa na mambo yanayofanyika ndani ya {{select}} ya",
         "update": "Sasisha Mahali Pangu",
         "set": "Weka Mahali Pangu",
-        "prompt": "{{ClickOrTap}} hapa kwa<br> weka yako<br> eneo",
+        "prompt": "{{ClickOrTap}} hapa<br> weka yako<br> eneo",
         "myCurrentLocation": "Eneo langu la sasa",
         "enterAddress": "Weka anwani",
         "enterPostcode": "Tafadhali weka msimbo wako wa posta \/ zipcode",
@@ -82,7 +82,7 @@
         },
         "Places\/interest": {
             "description": "Aina ya vitu vilivyo umbali fulani wa geohash, vinavyolingana na mambo yanayokuvutia",
-            "displayType": "Maslahi ya maeneo"
+            "displayType": "Maeneo yanayovutia"
         }
     }
 }

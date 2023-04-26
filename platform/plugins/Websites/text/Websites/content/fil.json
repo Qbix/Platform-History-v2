@@ -2,25 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "I-link upang itaguyod",
-                "startDate": "Simulan ang Petsa",
+                "link": "Link para i-promote",
+                "startDate": "Petsa ng Pagsisimula",
                 "startTime": "Oras ng simula",
                 "endDate": "Petsa ng Pagtatapos",
                 "endTime": "Oras ng Pagtatapos",
                 "budget": "Badyet"
             },
             "interests": {
-                "Title": "I-filter Ayon sa Interes",
-                "FilterInterests": "Simulan ang pag-type ng interes ..."
+                "Title": "Salain Ayon sa Interes",
+                "FilterInterests": "Magsimulang mag-type ng interes..."
             },
-            "Interest": "Interes",
+            "Interest": "interes",
             "Location": "Lokasyon"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Pumunta",
-            "PasteLinkHere": "Mag-paste ng isang link dito",
+            "Go": "Pumunta ka",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Mag-browse",
             "WriteToStartConversation": "Isulat ang iyong mga saloobin upang simulan ang pag-uusap",
             "StartConversation": "Simulan ang Pag-uusap",
@@ -29,45 +29,45 @@
             "edit": "I-edit",
             "link": "Link",
             "setUrl": "Itakda ang URL",
-            "save": "Magtipid",
+            "save": "I-save",
             "setClip": "Gupitin ang Clip",
             "invalidURL": "Di-wastong URL"
         },
-        "FileTooLarge": "Masyadong malaki ang file para sa pag-cache. Max na laki ng file na {{size}}",
+        "FileTooLarge": "Masyadong malaki ang file para sa pag-cache. Max na laki ng file {{size}}",
         "InvalidPDF": "Ang file ay hindi wastong PDF",
-        "StartTypingTitleOrKeywords": "Simulang mag-type ng pamagat o mga keyword ..."
+        "StartTypingTitleOrKeywords": "Simulan ang pag-type ng pamagat o mga keyword..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Isang dokumento na HTML na maaaring tingnan at mai-edit ng iba&#39;t ibang mga gumagamit",
+            "description": "Isang HTML na dokumento na maaaring tingnan at i-edit ng iba&#39;t ibang mga user",
             "displayType": "Artikulo"
         },
         "Websites\/slide": {
-            "description": "Ang isang slide sa isang pagtatanghal, ay maaaring magsama ng HTML, audio atbp.",
+            "description": "Ang isang slide sa isang presentasyon, ay maaaring magsama ng HTML, audio atbp.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Isang presentasyon na binubuo ng iba&#39;t ibang mga slide",
-            "displayType": "Paglalahad"
+            "description": "Isang pagtatanghal na binubuo ng iba&#39;t ibang mga slide",
+            "displayType": "Pagtatanghal"
         },
         "Websites\/advert\/unit": {
             "description": "Isang yunit ng advertising sa isang website",
-            "displayType": "Advert unit"
+            "displayType": "Unit ng ad"
         },
         "Websites\/advert\/placement": {
-            "description": "Isang paraan ng pagpangkat ng mga yunit ng advertising sa ilalim ng isang pangalan",
+            "description": "Isang paraan ng pagpapangkat ng mga unit ng advertising sa ilalim ng isang pangalan",
             "displayType": "Paglalagay ng ad"
         },
         "Websites\/advert\/creative": {
-            "description": "Nilalaman para sa isang ad",
-            "displayType": "Mag-advertise ng malikhaing"
+            "description": "Nilalaman para sa isang patalastas",
+            "displayType": "Malikhain ng ad"
         },
         "Websites\/advert\/campaign": {
             "description": "Isang kampanya sa advertising",
-            "displayType": "Kampanya sa advertising"
+            "displayType": "Kampanya ng patalastas"
         },
         "Websites\/webpage": {
-            "description": "Kinakatawan ang isang website na ang metadata ay na-scrap",
+            "description": "Kumakatawan sa isang website na ang metadata ay na-scrap",
             "displayType": "Pahina ng web"
         }
     }

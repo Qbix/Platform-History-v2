@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Xi ħadd"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Mobbli",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Ikkopjati! Issa inti tista paste kullimkien."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Kuljum",
@@ -15,13 +28,13 @@
         "LogOut": "Oħroġ"
     },
     "activate": {
-        "SetAsPrimary": "Issettja {{1}} bħala l-primarja {{2}} tiegħi",
+        "OneTimeCode": "Daħħal il-kodiċi li rċevejt:",
+        "SetAsPrimary": "Issettja {{1}} bħala l {{2}} primarju tiegħi",
         "ChoosePassPhrase": "Agħżel <strong>pass phrase<\/strong> biex tidħol magħha.<br> Frażi sempliċi li tikkonsisti fi ftit kliem li faċilment tiftakar.",
         "ChoosePassPhraseSeeSuggestions": "Agħżel <strong>pass phrase<\/strong> tajba biex tipproteġi l-kont tiegħek. Ara s-suġġerimenti għal xi ideat.",
         "LogOutAndTryAgain": "Log Out u Erġa Ipprova",
         "IfYouFeel": "Jekk tħoss li xi ħaġa marret ħażin, tista’",
         "SetIdentifierButtonTitle": "Ibda mill-bidu",
-        "OneTimeCode": "Daħħal il-kodiċi li rċevejt:",
         "ActivateMyAccount": "Attiva l-Kont Tiegħi"
     },
     "session": {
@@ -30,12 +43,12 @@
     "authorize": {
         "GetStarted": "Ibda",
         "Authorize": "Awtorizza",
-        "TermsLabel": "Qrajt u naqbel<br> lill-{{link}}",
+        "TermsLabel": "Qrajt u naqbel<br> sal- {{link}}",
         "TermsTitle": "Termini",
         "mustAgree": "L-ewwel trid taqbel mat-termini."
     },
     "register": {
-        "TermsLabel": "Naċċetta l-{{link}}",
+        "TermsLabel": "Naċċetta l- {{link}}",
         "TermsTitle": "Termini"
     },
     "notifications": {
@@ -44,7 +57,7 @@
         "yes": "Iva",
         "no": "Nru",
         "WelcomePleaseVerifyEmail": "Merħba! Jekk jogħġbok ivverifika l-indirizz elettroniku tiegħek.",
-        "WelcomeVerifyEmail": "Merħba! Ivverifika l-indirizz email tiegħek.",
+        "WelcomeVerifyEmail": "Merħba! Ivverifika l-indirizz elettroniku tiegħek.",
         "ForgetPass": "Ħej, insejt il-passphrase tiegħek?",
         "PassphraseSaved": "Il-frażi tal-pass tiegħek ġiet salvata.",
         "IdentifierActivated": "{{type}} tiegħek ġie attivat.",
@@ -70,24 +83,29 @@
         "inviteRole": "Stieden {{role}}"
     },
     "invalidLanguageSelected": "Lingwa mhux valida magħżula",
+    "platforms": {
+        "wallet": "Kartiera",
+        "broadcast": "Xandira"
+    },
     "login": {
         "title": "Merħba",
         "directions": "Oħloq kont, jew idħol.",
         "directionsNoRegister": "Idħol jekk għandek kont.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Daħħal il-frażi tal-pass tiegħek:",
         "loginButton": "Ibda",
         "registerButton": "Ibda",
         "resendButton": "Ibgħat Messaġġ ta &#39;Attivazzjoni",
-        "forgot": "Insejtha?",
+        "forgot": "Insejt?",
         "resendConfirm": "Trid tibgħat messaġġ biex tirrisettja l-passphrase tiegħek?",
         "resendSuccess": "Iċċekkja għal messaġġ biex tirrisettja l-passphrase tiegħek",
         "resendClose": "Agħlaq",
         "noPassphrase": "Qabel ma tkun tista&#39; tidħol, trid tissettja pass phrase billi tikklikkja l-link fil-messaġġ ta&#39; attivazzjoni tiegħek.",
         "notVerified": "Trid tibgħat lilek innifsek messaġġ ta&#39; attivazzjoni sabiex tidħol.",
         "emailExists": "Ippruvajt tirreġistra b&#39;din l-email qabel? Jekk iva, iċċekkja l-inbox tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa&#39; tibgħat il-messaġġ<\/a>",
-        "mobileExists": "Ippruvajt tirreġistra b&#39;dan in-numru tal-mobile qabel? Jekk iva, iċċekkja l-SMS tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa&#39; tibgħat il-messaġġ<\/a>",
+        "mobileExists": "Ippruvajt tirreġistra ma&#39; dan in-numru tal-mobile qabel? Jekk iva, iċċekkja l-SMS tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa&#39; tibgħat il-messaġġ<\/a>",
         "usingOther": "jew tista&#39;",
+        "connectPlatforms": "jew qabbad billi tuża:",
         "prompt": "Għażel Username:",
         "newUser": "jew oħloq kont ġdid hawn taħt",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Taċċetta t-Termini tas-Servizz?",
         "facebookNoEmail": "Il-kont tal-facebook tiegħek nieqes indirizz tal-email ikkonfermat. Sempliċement log fil-mod nattiv.",
         "picTooltip": "Tista&#39; tibdel din l-istampa aktar tard",
-        "wallet": {
-            "payload": "Idħol f&#39;{{host}} fil-ħin {{timestamp}}",
-            "alert": {
-                "title": "Direzzjoni mill-ġdid lejn Wallet",
-                "content": "Ladarba tagħlaq dan id-djalogu, tittieħed fil-kartiera tiegħek. Wara li tidħol, erġa&#39; lura għal din il-paġna."
-            }
-        },
         "web3": {
-            "payload": "Idħol f&#39;{{host}} fil-ħin {{timestamp}}",
+            "payload": "Idħol {{host}} fil-ħin {{timestamp}}",
             "alert": {
                 "title": "Direzzjoni mill-ġdid lejn Wallet",
                 "content": "Ladarba tagħlaq dan id-djalogu, tittieħed fil-kartiera tiegħek. Wara li tidħol, erġa&#39; lura għal din il-paġna."
             }
-        },
-        "connectPlatforms": "jew qabbad billi tuża:"
+        }
     },
     "setIdentifier": {
         "title": "Żid mod biex tidħol",
@@ -139,26 +149,9 @@
         "Guest": "Mistieden",
         "Host": "Ospitanti"
     },
-    "avatar": {
-        "Someone": "Xi ħadd"
-    },
     "web3": {
-        "WrongMethod": "Metodu ta&#39; kuntratt ħażin {{methodName}}",
+        "WrongMethod": "Metodu kuntrattwali ħażin {{methodName}}",
         "ChangeWallet": "Bidla Kartiera"
-    },
-    "identifier": {
-        "types": {
-            "email": "Email",
-            "mobile": "Mobbli",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Ikkopjati! Issa inti tista paste kullimkien."
-    },
-    "platforms": {
-        "wallet": "Kartiera",
-        "broadcast": "Xandira"
     },
     "labels": {
         "addToPhonebook": "Żid Mal-Kuntatti tat-Telefown Tiegħi",

@@ -1,14 +1,14 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "sa loob ng {{1}}"
     },
     "units": {
         "meter": "metro",
         "meters": "metro",
         "kilometer": "kilometro",
-        "kilometers": "kiometers",
+        "kilometers": "mga kiometer",
         "km": "km",
         "mile": "milya",
         "miles": "milya",
@@ -19,11 +19,12 @@
     },
     "location": {
         "interested": "Interesado ako sa mga bagay na nagaganap sa loob ng {{select}} ng",
-        "update": "I-update ang aking lokasyon",
-        "prompt": "{{ClickOrTap}} dito sa <br> itakda ang iyong <br> lokasyon",
-        "myCurrentLocation": "Ang aking kasalukuyang lokasyon",
-        "enterAddress": "Magpasok ng isang address",
-        "enterPostcode": "Mangyaring ipasok ang iyong postcode \/ zipcode",
+        "update": "I-update ang Aking Lokasyon",
+        "set": "Itakda ang Aking Lokasyon",
+        "prompt": "{{ClickOrTap}} dito<br> itakda ang iyong<br> lokasyon",
+        "myCurrentLocation": "Aking kasalukuyang lokasyon",
+        "enterAddress": "Maglagay ng address",
+        "enterPostcode": "Pakilagay ang iyong postcode \/ zipcode",
         "create": {
             "action": "Magdagdag ng Lokasyon",
             "title": "Bagong lokasyon",
@@ -31,19 +32,18 @@
         },
         "confirm": {
             "title": "I-save ang lokasyong ito?",
-            "message": "Nais mo bang gamitin muli ang lokasyong ito sa hinaharap?",
+            "message": "Plano mo bang gamitin muli ang lokasyong ito sa hinaharap?",
             "ok": "Oo",
             "cancel": "Hindi"
         },
         "add": {
             "title": "Pangalanan ang lokasyong ito",
-            "placeholder": "Home, Work etc.",
+            "placeholder": "Tahanan, Trabaho atbp.",
             "ok": "I-save"
         },
         "dialog": {
             "title": "Pumili ng Lokasyon"
-        },
-        "set": "Itakda ang Aking Lokasyon"
+        }
     },
     "areas": {
         "filterPlaceholder": "Anumang lugar sa loob ng lokasyong ito?",
@@ -51,9 +51,9 @@
         "promptTitle": "Maglagay ng pangalan para sa lugar:",
         "absent": "Mangyaring itakda ang lugar",
         "error": "Error",
-        "exist": "Ang lugar ay umiiral na",
+        "exist": "Umiiral na ang lugar",
         "addNewArea": "Magdagdag ng bagong lugar",
-        "add": "Magdagdag"
+        "add": "Idagdag"
     },
     "types": {
         "Places\/locations": {
@@ -61,28 +61,28 @@
             "displayType": "Mga lokasyon"
         },
         "Places\/location": {
-            "description": "Kinakatawan ng isang gusali, lugar, barko, parke, atbp.",
+            "description": "Kumakatawan sa isang gusali, lugar, barko, parke, atbp.",
             "displayType": "Lokasyon"
         },
         "Places\/area": {
-            "description": "Kinakatawan ang isang lugar sa loob ng isang lokasyon, tulad ng isang silid o suite",
+            "description": "Kumakatawan sa isang lugar sa loob ng isang lokasyon, tulad ng isang silid o suite",
             "displayType": "Lugar"
         },
         "Places\/floor": {
-            "description": "Kinakatawan ang isang sahig sa isang gusali o barko",
-            "displayType": "Palapag"
+            "description": "Kumakatawan sa isang palapag sa isang gusali o barko",
+            "displayType": "Sahig"
         },
         "Places\/column": {
-            "description": "Kinakatawan ng isang haligi sa isang gusali o barko",
-            "displayType": "Hanay"
+            "description": "Kumakatawan sa isang column sa isang gusali o barko",
+            "displayType": "Kolum"
         },
         "Places\/nearby": {
-            "description": "Mga kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash",
+            "description": "Kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash",
             "displayType": "Malapit sa mga lugar"
         },
         "Places\/interest": {
-            "description": "Mga kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash, na tumutugma sa isang interes",
-            "displayType": "Mga interes sa lugar"
+            "description": "Kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash, na tumutugma sa isang interes",
+            "displayType": "Mga lugar na interes"
         }
     }
 }

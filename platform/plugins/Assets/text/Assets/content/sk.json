@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "Chyba",
+        "WalletAbsent": "Peňaženka nie je pripojená.",
+        "Rendering": "Pri vykresľovaní <span class='url'>{{1}}<\/span> sa vyskytli chyby",
+        "PriceRequired": "Požadovaná cena!",
+        "NameRequired": "Meno (vyžadované!",
+        "PriceInvalid": "Cena je neplatná!",
+        "AmountInvalid": "Neplatná suma!",
+        "TransactionFailed": "Transakcia zlyhala",
+        "ChainNotSupported": "Vybraný reťazec nie je podporovaný. Podporovaná reťaz: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Na prácu s aplikáciou potrebujete pripojenú MetaMask",
+        "UserNotLoggedInMetaMask": "Používateľ nie je prihlásený do MetaMask",
+        "CurrencyNotFound": "Mena sa nenašla",
+        "WrongChain": "Tento NFT vytvorený pod &quot; {{chain}} &quot;. Prosím, použite túto reťaz.",
+        "NoRecipientSelected": "Nie je vybratý žiadny príjemca",
+        "NotEnoughPermissionsWallet": "Nemáte dostatočné povolenia na čítanie peňaženky tohto používateľa",
+        "ThisUserHaveNoWallet": "Tento používateľ nemá priradenú žiadnu peňaženku",
+        "TheWalletOfThisUserInvalid": "Peňaženka tohto používateľa je neplatná",
+        "WalletInvalid": "Adresa peňaženky je neplatná"
+    },
+    "admin": {
+        "Title": "Správa majetku",
+        "SubscriptionTitle": "Plány predplatného"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Zaplaťte klepnutím"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: platba spracovaná za {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Ďakujeme za platbu pre {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} sa prihlásil na odber {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : spracovaný poplatok za {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Ďakujeme za platbu na {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} sa prihlásilo na odber {{plan.title}}",
         "YouSubscribedTo": "Boli ste prihlásení na odber {{plan.title}}",
         "Assets\/credits\/alert": "Máte upozornenie týkajúce sa vášho účtu"
     },
     "charge": {
-        "Subject": "Dostanete platbu vo výške {{displayAmount}} od {{call 'publisher.displayName'}} prostredníctvom „{{description}}“",
-        "HasBeenCharged": "Dobrý deň, chceme vám oznámiť, že {{1}} bola účtovaná {{100}} za {{3}} používateľom {{4}}"
+        "Subject": "Dostanete platbu {{displayAmount}} z {{call 'publisher.displayName'}} od &quot; {{description}} &quot;",
+        "HasBeenCharged": "Hej, to je len aby ste vedeli, že {{1}} bola účtovaná {{2}} za {{3}} za {{4}}"
     },
     "charged": {
-        "Subject": "Ďakujeme za vašu platbu za „{{description}}“",
-        "HavePaid": "Dobrý deň, {{1}}, toto je len rýchle potvrdenie, že ste úspešne zaplatili {{100}} používateľovi {{3}} za {{4}}"
+        "Subject": "Ďakujeme za vašu platbu za &quot; {{description}} &quot;",
+        "HavePaid": "Hej {{1}} , toto je len rýchle potvrdenie, že ste úspešne zaplatili {{2}} až {{3}} za {{4}}"
     },
     "payment": {
         "AboutOrder": "Info o objednávke",
@@ -28,90 +52,85 @@
         "FailTryAgain": "Vaša platba nebola úspešná, skúste to znova",
         "SomethingWrong": "Niečo sa pokazilo",
         "PaymentStatus": "Stav platby",
-        "PayTo": "Zaplatiť {{displayName}}",
+        "PayTo": "Zaplaťte {{displayName}}",
         "ChooseCurrency": "Vyberte menu",
-        "YouCanSendUpTo": "Môžete odoslať až {{amount}} {{symbol}}",
+        "YouCanSendUpTo": "Môžete poslať až {{amount}} {{symbol}}",
         "Send": "Odoslať",
         "EnterAmount": "zadajte sumu"
     },
     "credits": {
-        "InviteAcceptedBy": "Pozvanie prijal {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} zadal krstné meno",
-        "Streams_user_lastname": "{{invitedUserName}} zadali priezvisko",
-        "Streams_user_icon": "{{invitedUserName}} zadaná ikona",
-        "Places_user_location": "{{invitedUserName}} zadané miesto",
-        "Streams_greeting": "{{invitedUserName}} zadal pozdrav",
+        "InviteAcceptedBy": "Pozvanie prijaté {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} naplnilo {{FilledStreamTitle}}",
+        "ForFillingStream": "Za plnenie {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "Na začiatok máte {{amount}} kreditov",
-        "PaymentFor": "Platba za „{{1}}“",
+        "PaymentFor": "Platba za &quot; {{1}} &quot;",
         "PaymentTo": "Platba na {{1}}",
         "PaymentToUser": "Platba na {{toUserName}}",
+        "CreatePrivateChat": "pre súkromný chat s {{toUserName}}",
         "CreatePaidStream": "za vytvorenie {{toStreamName}}",
-        "JoinedPaidStream": "pre rezerváciu v „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> “",
-        "CreatedCommunity": "za vytvorenie komunity „{{communityId}}“",
-        "LeftPaidStream": "ako vrátenie peňazí za rezerváciu v „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> “",
-        "BoughtCredits": "Kúpili ste {{amount}} kreditov",
-        "BonusCredits": "Bonusové {{amount}} kredity",
+        "JoinedPaidStream": "pre rezerváciu v &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "za vytvorenie komunity &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "ako refundácia rezervácie v &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kúpené za {{amount}} kreditov",
+        "BonusCredits": "Bonus {{amount}} kreditov",
         "BuyAmountCredits": "Kúpte si {{amount}} kreditov",
-        "WatchClip": "Získali ste {{amount}} kreditov za sledovanie {{100}}",
+        "WatchClip": "Získali ste {{amount}} kreditov za sledovanie {{fromStreamTitle}}",
         "MissingCredits": "Chýbajúce kredity",
-        "YouMissingCredits": "Ak chcete pokračovať, potrebujete ďalšie {{amount}} kreditov.",
+        "YouMissingCredits": "Na pokračovanie potrebujete ďalších {{amount}} kreditov.",
         "BuyCredits": "Kúpte si kredity",
         "BuyBonus": "Nákup {{amount}} kreditov naraz povedie k bonusu {{bonus}} kreditov.",
         "Buy": "Kúpiť",
         "PurchaseCredits": "Nákupné kredity",
         "Credits": "Kredity",
         "ErrorInvalidAmount": "Neplatná suma",
-        "ErrorInvalidCurrency": "Ľutujeme, zatiaľ nepodporujeme menu {{currency}}",
+        "ErrorInvalidCurrency": "Bohužiaľ, zatiaľ nepodporujeme menu {{currency}}",
         "forMessages": {
             "BoughtCredits": "{{amount}} kreditov",
             "BonusCredits": "{{amount}} kreditov"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} vyplnené {{FilledStreamTitle}}",
-        "ForFillingStream": "Na vyplnenie {{FilledStreamTitle}}",
-        "CreatePrivateChat": "pre súkromný rozhovor s {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Dátum",
         "Amount": "Suma",
         "Description": "Popis",
         "Client": "Zákazník",
+        "User": "Používateľ",
         "To": "do",
         "From": "od",
-        "SeeHistory": "Zobraziť históriu platieb za {{1}}",
+        "SeeHistory": "Pozrite si históriu platieb pre {{1}}",
         "HistoryEmpty": "Zatiaľ nemáte žiadne údaje",
-        "PaymentFor": "Odoslaných kreditov: {{amount}}",
-        "PaymentTo": "Odoslaných kreditov: {{amount}}",
-        "PaymentToUser": "Odoslaných kreditov: {{amount}}",
-        "CreatePaidStream": "Minul(a) {{amount}} kreditov",
+        "PaymentFor": "Poslaných {{amount}} kreditov",
+        "PaymentTo": "Poslaných {{amount}} kreditov",
+        "PaymentToUser": "Poslaných {{amount}} kreditov",
+        "CreatePaidStream": "Využili ste {{amount}} kreditov",
         "WatchClip": {
-            "+": "Získali ste {{amount}} kreditov",
-            "-": "Minul(a) {{amount}} kreditov"
+            "+": "Získal {{amount}} kreditov",
+            "-": "Využili ste {{amount}} kreditov"
         },
         "JoinedPaidStream": {
-            "+": "Získali ste {{amount}} kreditov",
-            "-": "Minul(a) {{amount}} kreditov"
+            "+": "Získal {{amount}} kreditov",
+            "-": "Využili ste {{amount}} kreditov"
         },
         "LeftPaidStream": {
-            "+": "Prijatých {{amount}} kreditov",
-            "-": "Odoslaných kreditov: {{amount}}"
+            "+": "Získaných {{amount}} kreditov",
+            "-": "Poslaných {{amount}} kreditov"
         },
-        "CreatedCommunity": "Minul(a) {{amount}} kreditov",
-        "BoughtCredits": "Kúpili ste {{amount}} kreditov",
-        "BonusCredits": "Získali ste bonusové {{amount}} kredity",
-        "InviteAcceptedBy": "Získali ste {{amount}} kreditov",
-        "Streams_user_firstname": "Získali ste {{amount}} kreditov",
-        "Streams_user_lastname": "Získali ste {{amount}} kreditov",
-        "Streams_user_icon": "Získali ste {{amount}} kreditov",
-        "Places_user_location": "Získali ste {{amount}} kreditov",
-        "Streams_greeting": "Získali ste {{amount}} kreditov",
-        "YouHaveCreditsToStart": "Získali ste {{amount}} kreditov",
-        "User": "Používateľ"
+        "CreatedCommunity": "Využili ste {{amount}} kreditov",
+        "BoughtCredits": "Kúpené za {{amount}} kreditov",
+        "BonusCredits": "Získal bonus {{amount}} kreditov",
+        "InviteAcceptedBy": "Získal {{amount}} kreditov",
+        "Streams_user_firstname": "Získal {{amount}} kreditov",
+        "Streams_user_lastname": "Získal {{amount}} kreditov",
+        "Streams_user_icon": "Získal {{amount}} kreditov",
+        "Places_user_location": "Získal {{amount}} kreditov",
+        "Streams_greeting": "Získal {{amount}} kreditov",
+        "YouHaveCreditsToStart": "Získal {{amount}} kreditov"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informácie o platbe",
         "confirm": {
             "title": "Začať predplatné",
-            "message": "Chcete sa prihlásiť na odber {{title}}?",
+            "message": "Chcete spustiť opakované predplatné na &quot; {{title}} &quot;?",
             "ok": "OK",
             "cancel": "Zrušiť"
         },
@@ -131,7 +150,7 @@
         "Period": "Obdobie",
         "Price": "cena",
         "AreYouSureUnsubscribe": "Naozaj chcete zrušiť odber tohto plánu?",
-        "YouUnsubscribedFromPlan": "Zrušili ste odber plánu „{{planTitle}}“. Nebude vám nič účtované, ale váš odber bude pokračovať do {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Zrušili ste odber plánu „ {{planTitle}} “. Nebude vám nič účtované, ale vaše predplatné bude pokračovať až do {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "názov plánu",
             "PricePlaceholder": "cena",
@@ -145,7 +164,7 @@
         "BuyAmountCredits": "Kúpte si {{amount}} kreditov",
         "confirm": {
             "title": "Vykonať platbu",
-            "message": "Súhlasíte so zaplatením {{symbol}}{{amount}}?",
+            "message": "Súhlasíte so zaplatením {{symbol}} {{amount}} ?",
             "ok": "OK",
             "cancel": "Zrušiť"
         }
@@ -174,25 +193,36 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Získali ste {{amount}} kreditov"
+            "content": "Získal {{amount}} kreditov"
         },
         "Assets\/credits\/bought": {
-            "content": "Kúpili ste {{amount}} kreditov"
+            "content": "Kúpené za {{amount}} kreditov"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonusové {{amount}} kredity"
+            "content": "Bonus {{amount}} kreditov"
         },
         "Assets\/credits\/spent": {
-            "content": "Minul(a) {{amount}} kreditov"
+            "content": "Využili ste {{amount}} kreditov"
         },
         "Assets\/credits\/sent": {
-            "content": "Poslané {{amount}} kreditov na {{toUserName}}"
+            "content": "Poslaných {{amount}} kreditov {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Prijatých {{amount}} kreditov od {{fromUserName}}"
+            "content": "Získaných {{amount}} kreditov z {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Na účte máte málo kreditov. Ak chcete kúpiť ďalšie kredity, navštívte <a href='{{link}}'>tento odkaz<\/a> ."
+            "content": "Na účte máte málo kreditov. Ak si chcete kúpiť viac kreditov, navštívte <a href='<i translate='no'>999 &#39;&gt;tento odkaz<\/a> ."
+        }
+    },
+    "billing": {
+        "Title": "Fakturácia majetku",
+        "CreditsMinimum": "Minimálne kredity",
+        "CreditsToAdd": "Kredity na pridanie",
+        "Save": "Uložiť",
+        "ThisLink": "tento odkaz",
+        "errors": {
+            "CreditsMinimumNegative": "Minimálny počet kreditov nemôže byť záporný",
+            "CreditsToAddNegative": "Kredity na pridanie nemôžu byť záporné"
         }
     },
     "services": {
@@ -203,26 +233,44 @@
             "LinkPlaceholder": "nastaviť odkaz na ďalšie informácie",
             "DescriptionPlaceholder": "Popis služby",
             "SaveService": "Uložiť službu",
-            "SelectRequiredParticipants": "Povinní účastníci",
+            "SelectRequiredParticipants": "Povinní príbuzní účastníci",
             "RequiredParticipantsDesc": "Prosím, vyberte súvisiacich účastníkov, ktorí sú povinní využívať túto službu (napríklad domáce zvieratá na &quot;Dogs show&quot; alebo deti na &quot;Detské prázdniny&quot; atď.). Ak je služba platená, používateľ bude musieť zaplatiť aj za každého súvisiaceho účastníka."
+        },
+        "EditServiceTemplate": {
+            "Title": "Upraviť službu"
         },
         "ManageServiceTemplates": "Spravujte šablóny služieb",
         "ManageServices": "Spravovať služby",
         "Free": "zadarmo",
-        "OptionalContribution": "Voliteľný príspevok",
+        "OptionalContribution": "Nepovinný príspevok",
         "RequiredPayment": "Požadovaná platba",
         "AreYouSureDelete": "Naozaj chcete odstrániť túto službu?",
-        "AmountServicesRelated": "Existuje {{amount}} dostupných možností súvisiacich s touto službou. Budú tiež odstránené.",
-        "EditServiceTemplate": {
-            "Title": "Upraviť službu"
-        }
+        "AmountServicesRelated": "S touto službou súvisí {{amount}} dostupných služieb. Budú tiež odstránené."
+    },
+    "transfer": {
+        "SelectRecipient": "Vyberte príjemcu",
+        "TransactionSuccess": "Úspech transakcie",
+        "OrTypeWalletAddress": "ALEBO zadajte adresu peňaženky príjemcu"
     },
     "NFT": {
-        "Title": "Informácie o {{title}} NFT",
-        "Description": "Podrobné informácie o NFT",
-        "FixedBid": "Kúpte teraz",
+        "Title": "Názov",
+        "Name": "názov",
+        "EnterName": "Zadaj meno",
+        "EnterAuthorWallet": "Zadajte autorskú peňaženku",
+        "InformationAboutTitle": "Informácie o {{title}} NFT",
+        "Description": "Popis",
+        "DetailedInformationAboutNFT": "Podrobné informácie o NFT",
+        "PresaleStarts": "Predpredaj začína 23. decembra",
+        "OwnerUserNotFound": "Vlastník tohto NFT nie je registrovaný v našej aplikácii.",
+        "BuyNow": "Kúpte teraz",
+        "Buy": "Kúpiť",
+        "Add": "Pridať",
+        "Remove": "Odstrániť",
+        "NoNFTyet": "Zatiaľ žiadne NFT",
+        "Conversation": "Konverzácia",
+        "Create": "Vytvorte",
         "CurrentBid": "Aktuálna stávka",
-        "StartingIn": "Začiatok v",
+        "StartingIn": "Začiatok o",
         "EndingIn": "Koniec v",
         "CreateNFT": "Vytvorte NFT",
         "TitlePlaceholder": "Dajte svojmu NFT názov",
@@ -234,8 +282,11 @@
         "StartingDate": "Dátum začiatku",
         "BidsBelowThisAmount": "Ponuky pod túto sumu nebudú povolené",
         "MinimumBid": "Minimálna ponuka",
+        "Author": "Autor",
         "Price": "cena",
-        "Owner": "vlastník",
+        "Commission": "Komisia",
+        "EnterCommission": "Zadajte províziu",
+        "Owner": "Vlastník",
         "SelectCategory": "Vybrať kategóriu",
         "Day": "deň",
         "Days": "Dni",
@@ -249,21 +300,29 @@
         "Details": "Podrobnosti",
         "Bids": "Ponuky",
         "History": "História",
-        "LoremIpsum": "Lorem Ipsum je jednoducho fiktívny text tlačiarenského a sadzobného priemyslu.",
+        "LoremIpsum": "Lorem Ipsum je jednoducho fiktívny text tlačiarenského a sadzačského priemyslu.",
         "PutOnSale": "Dajte do predaja",
         "PutOffSale": "Odstúpiť z predaja",
         "Transfer": "Prestup",
+        "Actions": "Akcie",
+        "Claim": "Nárokovať",
+        "ClaimNFT": "Nárokujte si NFT",
+        "Unlocking": "Odblokovanie",
+        "Unlock": "Odomknúť",
         "Update": "Aktualizovať",
         "UpdateToken": "Aktualizovať token",
+        "UpdateNFT": "Aktualizujte NFT",
         "CreateToken": "Vytvoriť token",
         "PlaceBid": "Prihodiť",
         "SoldOut": "Predané",
+        "NotOnSale": "Nie je v predaji",
         "NftName": "Názov NFT",
         "DescribeYourNFT": "Popíšte svoje NFT",
         "NftPicture": "Obrázok predstavujúci NFT",
         "NftMovie": "Film reprezentujúci NFT",
         "UploadMovie": "Nahrajte film",
         "MovieSource": "Zdroj filmu",
+        "MovieURL": "Adresa URL filmu",
         "UploadFile": "Nahrajte súbor",
         "PutOnMarketplace": "Dajte na trhovisko",
         "InstantPurchase": "Zadajte cenu, aby používatelia mohli okamžite kúpiť váš NFT",
@@ -271,60 +330,9 @@
         "TimedAuction": "Časovaná aukcia",
         "OpenForBids": "Otvoriť pre ponuky",
         "PriceOnePiece": "Zadajte cenu za jeden kus",
+        "EnterPrice": "Zadajte cenu",
         "EnterMinimumBid": "Zadajte Minimálnu ponuku",
         "SelectChain": "Vyberte reťaz",
-        "WrongChain": "Tento NFT bol vytvorený pod „{{chain}}“. Prosím, použite túto reťaz.",
-        "import": {
-            "importNFT": "Importovanie NFT",
-            "fileNotFound": "Ľutujeme, súbor CSV sa nenašiel.",
-            "fileEmpty": "Ľutujeme, súbor CSV je prázdny.",
-            "userIdNotFound": "používateľ existuje, ale ID je prázdne",
-            "errorLine": "riadok {{1}}",
-            "fieldNotFound": "Povinné pole „{{1}}“ sa nenašlo",
-            "taskStreamInvalid": "tok úloh je neplatný",
-            "instructionsEmpty": "inštrukcie toku úloh sú prázdne",
-            "complete": "Dokončiť",
-            "activateUsers": "poslať aktivačnú správu používateľom?",
-            "importProgress": "Pokrok",
-            "importOptions": "možnosti",
-            "sampleCSV": "Stiahnite si vzorový CSV",
-            "fileLabel": "Nahrať tabuľku:",
-            "errorsTitle": "Vyskytli sa chyby",
-            "importAttributes": "Importujte atribúty NFT",
-            "displayTypeEmpty": "Typ zobrazenia pre „{{1}}“ sa nenašiel"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Filtrujte podľa zbierok NFT",
-                "ShowNFTCollection": "Zobraziť kolekciu NFT v...",
-                "AllCollections": "Všetky zbierky"
-            },
-            "ByUser": {
-                "AllAuthors": "Všetci autori",
-                "AllUsers": "Všetci",
-                "FilterByAuthors": "Filtrovať podľa autorov"
-            }
-        },
-        "Back": "Späť na kolekciu",
-        "Name": "názov",
-        "EnterName": "Zadaj meno",
-        "EnterAuthorWallet": "Zadajte autorskú peňaženku",
-        "InformationAboutTitle": "Informácie o {{title}} NFT",
-        "DetailedInformationAboutNFT": "Podrobné informácie o NFT",
-        "PresaleStarts": "Predpredaj začína 23. decembra",
-        "OwnerUserNotFound": "Vlastník tohto NFT nie je registrovaný v našej aplikácii.",
-        "BuyNow": "Kúpte teraz",
-        "Buy": "Kúpiť",
-        "Conversation": "Konverzácia",
-        "Create": "Vytvorte",
-        "Author": "Autor",
-        "Commission": "Komisia",
-        "EnterCommission": "Zadajte províziu",
-        "Actions": "Akcie",
-        "UpdateNFT": "Aktualizujte NFT",
-        "NotOnSale": "Nie je v predaji",
-        "MovieURL": "Adresa URL filmu",
-        "EnterPrice": "Zadajte cenu",
         "Currency": "mena",
         "AreYouSureDeleteImage": "Naozaj chcete odstrániť obrázok?",
         "AreYouSureDeleteVideo": "Naozaj chcete odstrániť video?",
@@ -355,7 +363,7 @@
         "contract": {
             "CreateContract": "Vytvorte zmluvu",
             "SelectContract": "Vyberte zmluvu",
-            "CreateContractFor": "Vytvoriť zmluvu pre {{userName}}",
+            "CreateContractFor": "Vytvorte zmluvu na {{userName}}",
             "ContractFor": "Zmluva na {{userName}}",
             "UpdateContract": "Aktualizovať zmluvu",
             "TransferOwnership": "Previesť vlastníctvo",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "Aktuálna základná adresa URL",
             "ContractAddressAbsent": "Chýba adresa zmluvy",
             "FactoryAddressAbsent": "Adresa továrne chýba",
-            "ContractName": "{{contractName}} – {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} – {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Vyžaduje sa titul",
             "SymbolRequired": "Vyžaduje sa symbol",
             "TypeContractName": "názov zmluvy",
@@ -375,6 +383,38 @@
             "Title": "Súťaže",
             "NewContest": "Nová súťaž"
         },
+        "import": {
+            "importNFT": "Importovanie NFT",
+            "importAttributes": "Importujte atribúty NFT",
+            "fileNotFound": "Ľutujeme, súbor CSV sa nenašiel.",
+            "fileEmpty": "Ľutujeme, súbor CSV je prázdny.",
+            "userIdNotFound": "používateľ existuje, ale ID je prázdne",
+            "errorLine": "riadok {{1}}",
+            "fieldNotFound": "Povinné pole &quot; {{1}} &quot; sa nenašlo",
+            "displayTypeEmpty": "Typ zobrazenia pre &quot; {{1}} &quot; sa nenašiel",
+            "taskStreamInvalid": "tok úloh je neplatný",
+            "instructionsEmpty": "inštrukcie toku úloh sú prázdne",
+            "complete": "Dokončiť",
+            "activateUsers": "poslať aktivačnú správu používateľom?",
+            "importProgress": "Pokrok",
+            "importOptions": "možnosti",
+            "sampleCSV": "Stiahnite si vzorový CSV",
+            "fileLabel": "Nahrať tabuľku:",
+            "errorsTitle": "Vyskytli sa chyby"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filtrujte podľa zbierok NFT",
+                "ShowNFTCollection": "Zobraziť kolekciu NFT v...",
+                "AllCollections": "Všetky zbierky"
+            },
+            "ByUser": {
+                "AllAuthors": "Všetci autori",
+                "AllUsers": "Každý",
+                "FilterByAuthors": "Filtrovať podľa autorov"
+            }
+        },
+        "Back": "Späť na kolekciu",
         "attributes": {
             "Title": "Spravovať atribúty",
             "Attributes": "Atribúty",
@@ -393,18 +433,11 @@
         },
         "profile": {
             "LogOut": "Odhlásiť sa",
-            "Title": "Profil pre {{userName}}",
+            "Title": "Profil za {{userName}}",
             "Description": "Podrobnosti o používateľovi",
             "aboutPlaceholder": "Upraviť životopis",
             "SureLogOut": "Naozaj sa chcete odhlásiť?"
         },
-        "Add": "Pridať",
-        "Remove": "Odstrániť",
-        "NoNFTyet": "Zatiaľ žiadne NFT",
-        "Claim": "Nárokovať",
-        "ClaimNFT": "Nárokujte si NFT",
-        "Unlocking": "Odblokovanie",
-        "Unlock": "Odomknúť",
         "sales": {
             "factory": {
                 "form": {
@@ -520,50 +553,10 @@
             "Unlock": "Odomknúť",
             "Locked": "Zamknuté",
             "CustodianAddress": "Adresa správcu",
-            "TokenWasClaimed": "Token „{{title}}“ bol nárokovaný",
-            "TokenWasLocked": "Token „{{title}}“ bol uzamknutý",
-            "TokenWasUnlocked": "Token „{{title}}“ bol odomknutý"
+            "TokenWasClaimed": "Bol nárokovaný token „ {{title}} “.",
+            "TokenWasLocked": "Token &quot; {{title}} &quot; bol uzamknutý",
+            "TokenWasUnlocked": "Token &quot; {{title}} &quot; bol odomknutý"
         }
-    },
-    "errors": {
-        "Error": "Chyba",
-        "WalletAbsent": "Peňaženka nie je pripojená.",
-        "Rendering": "Pri vykresľovaní sa vyskytli chyby <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Požadovaná cena!",
-        "NameRequired": "Meno (vyžadované!",
-        "PriceInvalid": "Cena je neplatná!",
-        "TransactionFailed": "Transakcia zlyhala",
-        "ChainNotSupported": "Vybraný reťazec nie je podporovaný. Podporovaný reťazec: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Na prácu s aplikáciou potrebujete pripojenú MetaMask",
-        "UserNotLoggedInMetaMask": "Používateľ nie je prihlásený do MetaMask",
-        "CurrencyNotFound": "Mena sa nenašla",
-        "WrongChain": "Tento NFT bol vytvorený pod „{{chain}}“. Prosím, použite túto reťaz.",
-        "AmountInvalid": "Neplatná suma!",
-        "NoRecipientSelected": "Nie je vybratý žiadny príjemca",
-        "NotEnoughPermissionsWallet": "Nemáte dostatočné povolenia na čítanie peňaženky tohto používateľa",
-        "ThisUserHaveNoWallet": "Tento používateľ nemá priradenú žiadnu peňaženku",
-        "TheWalletOfThisUserInvalid": "Peňaženka tohto používateľa je neplatná",
-        "WalletInvalid": "Adresa peňaženky je neplatná"
-    },
-    "admin": {
-        "Title": "Správa majetku",
-        "SubscriptionTitle": "Plány predplatného"
-    },
-    "billing": {
-        "Title": "Fakturácia majetku",
-        "CreditsMinimum": "Minimálne kredity",
-        "CreditsToAdd": "Kredity na pridanie",
-        "Save": "Uložiť",
-        "ThisLink": "tento odkaz",
-        "errors": {
-            "CreditsMinimumNegative": "Minimálny počet kreditov nemôže byť záporný",
-            "CreditsToAddNegative": "Kredity na pridanie nemôžu byť záporné"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Vyberte príjemcu",
-        "TransactionSuccess": "Úspech transakcie",
-        "OrTypeWalletAddress": "ALEBO zadajte adresu peňaženky príjemcu"
     },
     "currencies": {
         "choose": "Vyberte menu"

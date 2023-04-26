@@ -1,14 +1,14 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "unutar {{1}}"
     },
     "units": {
         "meter": "metar",
         "meters": "metara",
         "kilometer": "kilometar",
-        "kilometers": "kilometara",
+        "kilometers": "kiometara",
         "km": "km",
         "mile": "milja",
         "miles": "milja",
@@ -18,9 +18,10 @@
         "inches": "inča"
     },
     "location": {
-        "interested": "Zanimaju me stvari koje se događaju unutar {{select}} od",
-        "update": "Ažurirajte moju lokaciju",
-        "prompt": "{{ClickOrTap}} ovdje za<br> postavite svoje<br> mjesto",
+        "interested": "Zanimaju me stvari koje se odvijaju unutar {{select}}",
+        "update": "Ažuriraj Moju lokaciju",
+        "set": "Postavi Moju lokaciju",
+        "prompt": "{{ClickOrTap}} ovdje<br> postavite svoje<br> mjesto",
         "myCurrentLocation": "Moja trenutna lokacija",
         "enterAddress": "Unesite adresu",
         "enterPostcode": "Unesite svoj poštanski broj",
@@ -30,7 +31,7 @@
             "nameYourLocation": "Imenujte svoju lokaciju"
         },
         "confirm": {
-            "title": "Želite li spremiti ovu lokaciju?",
+            "title": "Spremiti ovu lokaciju?",
             "message": "Planirate li ponovno koristiti ovu lokaciju u budućnosti?",
             "ok": "Da",
             "cancel": "Ne"
@@ -42,13 +43,12 @@
         },
         "dialog": {
             "title": "Odaberite Lokacija"
-        },
-        "set": "Postavite moju lokaciju"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Ima li područja unutar ove lokacije?",
+        "filterPlaceholder": "Ima li neko područje unutar ove lokacije?",
         "newArea": "Novo područje",
-        "promptTitle": "Unesite naziv područja:",
+        "promptTitle": "Unesite naziv za područje:",
         "absent": "Molimo postavite područje",
         "error": "Greška",
         "exist": "Područje već postoji",
@@ -61,12 +61,12 @@
             "displayType": "Lokacije"
         },
         "Places\/location": {
-            "description": "Predstavlja zgradu, mjesto, brod, park itd.",
+            "description": "Predstavlja zgradu, prostor, brod, park itd.",
             "displayType": "Mjesto"
         },
         "Places\/area": {
             "description": "Predstavlja područje unutar lokacije, kao što je soba ili apartman",
-            "displayType": "Područje"
+            "displayType": "Površina"
         },
         "Places\/floor": {
             "description": "Predstavlja kat u zgradi ili brodu",
@@ -78,10 +78,10 @@
         },
         "Places\/nearby": {
             "description": "Kategorija za stvari unutar određene udaljenosti od geohasha",
-            "displayType": "U blizini mjesta"
+            "displayType": "Mjesta u blizini"
         },
         "Places\/interest": {
-            "description": "Kategorija za stvari na određenoj udaljenosti od geohasha, koja odgovara interesu",
+            "description": "Kategorija za stvari unutar određene udaljenosti od geohasha, koja odgovara interesu",
             "displayType": "Interes mjesta"
         }
     }

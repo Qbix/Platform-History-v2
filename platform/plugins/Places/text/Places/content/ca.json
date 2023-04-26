@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "dins de {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "dins del {{1}}"
     },
     "units": {
         "meter": "metre",
@@ -18,8 +18,9 @@
         "inches": "polzades"
     },
     "location": {
-        "interested": "M&#39;interessen les coses que tenen lloc dins de {{select}}",
+        "interested": "M&#39;interessen les coses que tenen lloc dins del {{select}} de",
         "update": "Actualitza la meva ubicació",
+        "set": "Estableix la meva ubicació",
         "prompt": "{{ClickOrTap}} aquí per<br> configura el teu<br> ubicació",
         "myCurrentLocation": "La meva ubicació actual",
         "enterAddress": "Introduïu una adreça",
@@ -42,11 +43,10 @@
         },
         "dialog": {
             "title": "Trieu Ubicació"
-        },
-        "set": "Estableix la meva ubicació"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Alguna zona dins d&#39;aquesta ubicació?",
+        "filterPlaceholder": "Alguna zona dins d&#39;aquest lloc?",
         "newArea": "Zona nova",
         "promptTitle": "Introduïu un nom per a l&#39;àrea:",
         "absent": "Si us plau, defineix l&#39;àrea",
@@ -69,7 +69,7 @@
             "displayType": "Àrea"
         },
         "Places\/floor": {
-            "description": "Representa un pis en un edifici o vaixell",
+            "description": "Representa un pis d&#39;un edifici o nau",
             "displayType": "Pis"
         },
         "Places\/column": {
@@ -78,7 +78,7 @@
         },
         "Places\/nearby": {
             "description": "Categoria per a coses dins d&#39;una distància determinada d&#39;un geohash",
-            "displayType": "Llocs a prop"
+            "displayType": "Llocs propers"
         },
         "Places\/interest": {
             "description": "Categoria per a coses dins d&#39;una distància determinada d&#39;un geohash, que coincideix amb un interès",

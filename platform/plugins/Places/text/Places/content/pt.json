@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "dentro de {{1}}"
     },
     "units": {
@@ -20,26 +20,26 @@
     "location": {
         "interested": "Estou interessado em coisas que acontecem dentro de {{select}} de",
         "update": "Atualizar meu local",
-        "set": "Definir meu local",
+        "set": "Definir minha localização",
         "prompt": "{{ClickOrTap}} aqui para<br> Defina seu<br> localização",
-        "myCurrentLocation": "Minha localização atual",
+        "myCurrentLocation": "minha localização atual",
         "enterAddress": "Insira um endereço",
-        "enterPostcode": "Por favor, digite seu CEP\/CEP",
+        "enterPostcode": "Por favor insira o seu código postal\/código postal",
         "create": {
             "action": "Adicionar local",
             "title": "Nova localização",
-            "nameYourLocation": "Dê um nome ao seu local"
+            "nameYourLocation": "Nomeie sua localização"
         },
         "confirm": {
             "title": "Salvar este local?",
             "message": "Você planeja usar este local novamente no futuro?",
-            "ok": "sim",
+            "ok": "Sim",
             "cancel": "Não"
         },
         "add": {
             "title": "Dê um nome a este local",
             "placeholder": "Casa, Trabalho etc",
-            "ok": "Salve "
+            "ok": "Salvar"
         },
         "dialog": {
             "title": "Escolha a localização"
@@ -51,7 +51,7 @@
         "promptTitle": "Digite um nome para a área:",
         "absent": "Por favor, defina a área",
         "error": "Erro",
-        "exist": "Área já existe",
+        "exist": "A área já existe",
         "addNewArea": "Adicionar nova área",
         "add": "Adicionar"
     },
@@ -69,8 +69,8 @@
             "displayType": "Área"
         },
         "Places\/floor": {
-            "description": "Representa um andar em um prédio ou navio",
-            "displayType": "Piso"
+            "description": "Representa um andar em um edifício ou navio",
+            "displayType": "Chão"
         },
         "Places\/column": {
             "description": "Representa uma coluna em um edifício ou navio",

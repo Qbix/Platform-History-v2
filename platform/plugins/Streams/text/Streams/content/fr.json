@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Nouvel article"
     },
+    "avatar": {
+        "firstName": "prénom",
+        "lastName": "nom de famille",
+        "username": "nom d&#39;utilisateur"
+    },
     "labels": {
         "Streams\/invited": "Les gens que j&#39;ai invités",
         "Streams\/invitedMe": "Qui m&#39;a invité",
@@ -13,8 +18,16 @@
         "Yes": "Oui",
         "No": "Non"
     },
+    "login": {
+        "prompt": "Laissez vos amis vous reconnaître :",
+        "newUser": "ou créez un nouveau compte ci-dessous",
+        "picTooltip": "Vous pouvez changer cette image plus tard",
+        "placeholder": {
+            "fullName": "Entrez votre nom complet"
+        }
+    },
     "interests": {
-        "Filter": "Quels sont vos intérêts?",
+        "Filter": "Centres d&#39;intérêt",
         "CanGrant": "Si vous ne trouvez toujours pas ce que vous cherchez, vous pouvez ajouter un nouvel intérêt ci-dessous :",
         "TrySynonyms": "Vous ne le voyez pas ? Essayez quelques synonymes.",
         "AddUnderCategory": "Ajouter sous catégorie...",
@@ -34,43 +47,63 @@
         "earlierComments": "commentaires précédents",
         "startedConversation": "commencé une conversation",
         "RealTimeCall": "Appel en temps réel",
+        "JoinWebRTC": "Téléconférence",
         "SearchByName": "Rechercher par nom",
         "Notifications": {
             "Visit": "{{displayName}} visite le chat",
-            "Join": "{{displayName}} a rejoint le chat",
-            "Leave": "{{displayName}} a quitté le chat",
+            "Join": "{{displayName}} ont rejoint le chat",
+            "Leave": "{{displayName}} ont quitté le chat",
             "RelatedTo": "{{displayName}} a commencé un {{stream.displayType}}"
         },
-        "JoinWebRTC": "Téléconférence"
+        "placeholders": {
+            "Public": "Ajouter un commentaire",
+            "Private": "Ecrire un message privé"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "gérer vos abonnements aux e-mails",
         "IfUnsubscribe": "Si vous souhaitez vous désinscrire",
-        "*": "Message {{& message.fields.type}} à {{& stream.fields.title}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a dit : {{& message.content}}",
-        "Streams\/changed": "Changements dans {{stream.fields.title}}",
+        "*": "Messages {{& message.fields.type}} à {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} ont rejoint",
+        "Streams\/left": "{{&call 'avatar.displayName'}} restants",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a dit : {{& message.content}}",
+        "Streams\/changed": "Changements en {{stream.fields.title}}",
         "Streams\/invite": "Vous avez été invité à {{& stream.fields.title}}",
         "Streams\/announcement": "Annonce en {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} a modifié l&#39;accès dans {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Message de chat modifié dans {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Message de chat supprimé dans {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} accès modifié en {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Message de chat modifié en {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Message de chat supprimé en {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} a été fermé",
-        "Streams\/task\/progress": "Progrès réalisés le {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tâche terminée : {{stream.fields.title}}",
+        "Streams\/task\/progress": "Progrès réalisés sur {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tâche terminée : {{stream.fields.title}}",
         "Streams\/task\/error": "Erreur pendant : {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}} : message entrant",
-        "Streams\/relatedTo\/Streams\/call": "Nouvel appel commencé dans {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nouveau {{relationDisplayType}} dans {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ajouté à {{toTitle}} en tant que {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} vous a mentionné dans un commentaire",
-        "Streams\/call": "{{displayName}} a démarré un appel en temps réel",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} a rejoint",
-        "Streams\/left": "{{&call 'avatar.displayName'}} restant"
+        "Streams\/incoming\/*": "{{app}} : Message entrant",
+        "Streams\/relatedTo\/Streams\/call": "Nouvel appel commencé en {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nouveau {{relationDisplayType}} sur {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ajouté à {{toTitle}} comme {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} vous ont mentionné dans un commentaire",
+        "Streams\/call": "{{displayName}} a lancé un appel en temps réel"
     },
     "invite": {
         "command": "Inviter",
+        "Invite": "Inviter",
+        "Share": "Partager",
         "messageContent": "{{displayName}} vous a invité à {{inviteUrl}}",
         "youCanNowPaste": "Vous pouvez maintenant coller ce lien quelque part pour inviter des personnes",
+        "roles": {
+            "title": "Accorder des rôles aux utilisateurs invités ?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Désolé",
+                "alert": "Vous n&#39;êtes pas autorisé à accorder ce rôle"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Désolé",
+                "alert": "Vous n&#39;êtes pas autorisé à supprimer ce rôle"
+            }
+        },
+        "labels": {
+            "title": "Quelle est votre relation?"
+        },
         "dialog": {
             "chooseFromContacts": "Choisissez parmi vos contacts",
             "chooseAgainFromContacts": "Choisissez à nouveau dans les contacts",
@@ -78,8 +111,9 @@
             "selectFromContacts": "Sélectionner à partir des contacts",
             "userChooserPlaceholder": "Rechercher par nom",
             "photo": "Prendre une photo",
+            "photoOf": "Prendre une photo de {{name}}",
             "photoInstruction": "Si la personne qui a scanné votre code QR est devant vous, prenez-la en photo",
-            "to": "À : {{Stream Title}}",
+            "to": "Jusqu&#39;à : {{Stream Title}}",
             "go": "Aller",
             "title": "Inviter",
             "placeholder": "Numéro de portable ou adresse e-mail",
@@ -102,54 +136,38 @@
             "chooseFromRegistered": "Choisissez parmi les utilisateurs enregistrés",
             "inviteViaEmailOrSms": "Inviter par e-mail ou SMS"
         },
-        "email": {
-            "subject": "Hé, regarde ça",
-            "PleaseVisitLink": "Veuillez visiter le lien suivant :",
-            "InvitingYou": "Je vous invite à {{title}}",
-            "HasInvitedYou": "{{displayName}} vous a invité à {{title}}",
-            "HasMentionedYou": "{{displayName}} vous a mentionné dans &quot;{{title}}&quot;",
-            "YOUAREINVITED": "TU ES INVITÉ!",
-            "AcceptInvite": "Accepter une invitation"
-        },
-        "sms": {
-            "content": "Vous avez été invité à {{title}}. Veuillez appuyer sur {{url}}"
-        },
-        "notice": {
-            "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
-        },
-        "Invite": "Inviter",
-        "Share": "Partager",
-        "roles": {
-            "title": "Accorder des rôles aux utilisateurs invités ?",
-            "NotAuthorizedToGrantRole": {
-                "title": "Désolé",
-                "alert": "Vous n&#39;êtes pas autorisé à accorder ce rôle"
-            },
-            "NotAuthorizedToRemoveRole": {
-                "title": "Désolé",
-                "alert": "Vous n&#39;êtes pas autorisé à supprimer ce rôle"
-            }
-        },
-        "labels": {
-            "title": "Quelle est votre relation?"
-        },
         "complete": {
+            "WelcomeToCommunity": "Bienvenue au {{communityName}}",
             "HasInvitedYou": "vous a invité à :",
-            "WelcomeToCommunity": "Bienvenue à {{communityName}}",
             "HasInvitedYouToTheirProfile": "vous a invité à vous connecter.",
             "prompt": "Laissez vos amis vous reconnaître :",
             "accept": "Accepter l&#39;invitation"
+        },
+        "email": {
+            "subject": "Hé, regarde ça",
+            "PleaseVisitLink": "Veuillez visiter le lien suivant :",
+            "InvitingYou": "Je t&#39;invite au {{title}}",
+            "HasInvitedYou": "{{displayName}} vous a invité à {{title}}",
+            "HasMentionedYou": "{{displayName}} vous a mentionné dans &quot; {{title}} &quot;",
+            "YOUAREINVITED": "TU ES INVITÉ!",
+            "AcceptInvite": "Accepter l&#39;invitation"
+        },
+        "sms": {
+            "content": "Vous avez été invité au {{title}} . Veuillez appuyer sur {{url}}"
+        },
+        "notice": {
+            "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
         }
     },
     "messages": {
         "html": {
-            "posted": "a posté un message <em>{{message.fields.type}}<\/em> à {{stream.fields.title}}"
+            "posted": "posté un message <em>{{message.fields.type}}<\/em> à {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "commenté sur",
             "startedCallIn": "lancé un appel dans",
             "in": "dans",
-            "body": "dans {{& url}} : {{& message.fields.content}}",
+            "body": "en {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "a été posté sur",
                 "byAvatar": "par {{avatar.displayName}}"
@@ -164,16 +182,19 @@
         "mobile": {
             "alert": "Les invitations sont envoyées depuis notre numéro, que vos amis ne reconnaissent pas encore. Faites suivre par un SMS rapide pour leur faire savoir que l&#39;invitation vient de vous, en leur demandant de cliquer sur le lien.",
             "confirm": "Les invitations sont envoyées depuis notre numéro, que vos amis ne reconnaissent pas encore. Souhaitez-vous poursuivre avec un SMS rapide pour leur faire savoir que l&#39;invitation vient de vous, en leur demandant de cliquer sur le lien.",
-            "check": "Hé, je viens de vous envoyer une invitation à l&#39;application {{app}}. S&#39;il vous plaît vérifier votre sms et cliquez sur le lien!",
+            "check": "Hé, je viens de vous envoyer une invitation à l&#39;application {{app}} . S&#39;il vous plaît vérifier votre sms et cliquez sur le lien!",
             "CheckYourMobile": "Veuillez vérifier les SMS et suivre les instructions !"
         },
         "email": {
             "alert": "Les invitations sont envoyées depuis notre domaine, que vos amis ne reconnaissent pas encore. Faites suivre par un SMS rapide pour leur faire savoir que l&#39;invitation vient de vous, en leur demandant de cliquer sur le lien.",
             "confirm": "Les invitations sont envoyées depuis notre domaine, que vos amis ne reconnaissent pas encore. Souhaitez-vous poursuivre avec un SMS rapide pour leur faire savoir que l&#39;invitation vient de vous, en leur demandant de cliquer sur le lien.",
             "subject": "Avez-vous reçu une invitation ?",
-            "body": "Hé, je viens de vous envoyer une invitation à l&#39;application {{app}}. Veuillez vérifier votre e-mail et cliquez sur le lien qui s&#39;y trouve !",
+            "body": "Hé, je viens de vous envoyer une invitation à l&#39;application {{app}} . Veuillez vérifier votre e-mail et cliquez sur le lien qui s&#39;y trouve !",
             "CheckYourEmail": "S&#39;il vous plaît vérifier votre e-mail et suivez les instructions!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Paramètres de confidentialité"
     },
     "participating": {
         "Title": "Titre",
@@ -190,7 +211,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
-        "streamTitle": "{{1}} a démarré une téléconférence",
+        "streamTitle": "{{1}} a commencé une téléconférence",
         "allow": {
             "dialogTitle": "De liaison",
             "microphoneBtn": "Activer le microphone",
@@ -198,58 +219,61 @@
             "cameraAndMicrophoneBtn": "Activer la caméra et le microphone"
         },
         "preparing": {
+            "dialogTitle": "Activez\/désactivez la caméra ou le micro avant de vous joindre",
             "micIsOff": "Le micro est éteint",
             "micIsOn": "Le micro est allumé",
             "cameraIsOff": "La caméra est éteinte",
             "cameraIsOn": "La caméra est allumée",
             "screenSharingIsOn": "Le partage d&#39;écran est activé",
             "screenSharingIsOff": "Partager l&#39;écran",
-            "joinNow": "Rejoignez l&#39;appel",
-            "dialogTitle": "Activez\/désactivez la caméra ou le micro avant de vous joindre"
+            "joinNow": "Rejoignez l&#39;appel"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Des instructions",
+            "dialogTitle": "Instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Allez dans &quot;Paramètres&quot; -&gt; &quot;Avancé&quot; -&gt; &quot;Confidentialité et sécurité&quot; -&gt; &quot;Paramètres du site&quot; -&gt; &quot;Appareil photo&quot; ou &quot;Paramètres du site&quot; -&gt; &quot;Microphone&quot;",
             "point2": "Supprimer {{hostname}} de la liste &quot;Bloquer&quot;"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Des instructions",
-            "permissionDenied": "Autorisation pour {{kind}} refusée. Veuillez actualiser cette page et confirmer l&#39;accès à {{kind}} pour rejoindre la conférence."
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Autorisation pour {{kind}} refusée. Veuillez recharger cette page et confirmer l&#39;accès au {{kind}} pour rejoindre la conférence."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Des instructions",
+            "dialogTitle": "Instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Accédez à vos paramètres Android",
             "point2": "Ouvrez &quot;Applications et notifications&quot;",
-            "point3": "Trouvez &quot;{{communityName}}&quot; et ouvrez-le",
+            "point3": "Trouvez &quot; {{communityName}} &quot; et ouvrez-le",
             "point4": "Appuyez sur Autorisations",
             "point5": "Activer {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Des instructions",
+            "dialogTitle": "Instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Accédez à vos paramètres iOS",
             "point2": "Ouvrez &quot;Confidentialité&quot;",
             "point3": "Trouvez {{kind}} et ouvrez-le",
-            "point4": "Trouvez &quot;{{communityName}}&quot; et activez"
+            "point4": "Trouvez &quot; {{communityName}} &quot; et activez"
+        },
+        "fbLive": {
+            "dialogTitle": "La diffusion en direct sur Facebook a commencé"
         },
         "notices": {
             "youJoinedRoom": "Vous avez rejoint la salle",
             "joining": "Rejoindre : {{userName}}",
-            "sbLeftRoom": "{{userName}} a quitté la pièce",
+            "sbLeftRoom": "{{userName}} ont quitté la salle",
             "switchingRoom": "Chambre de passage...",
             "forceDisconnecting": "Vous serez déconnecté dans les 5 secondes",
             "forceDisconnectingImmediately": "Vous avez été déconnecté par un hôte",
             "youLeftRoom": "Tu as quitté la pièce",
             "codeCopied": "Tu as quitté la pièce",
             "sbBeganFbLive": "{{userName}} a commencé à diffuser cet appel sur Facebook",
-            "sbStoppedFbLive": "{{userName}} a arrêté de diffuser cet appel sur Facebook",
+            "sbStoppedFbLive": "{{userName}} a cessé de diffuser cet appel sur Facebook",
             "youBeganFbLive": "Vous avez commencé à diffuser cet appel sur Facebook",
             "youStoppedFbLive": "Vous avez arrêté de diffuser cet appel sur Facebook",
             "youStartedLive": "Vous avez commencé à diffuser cet appel vers un RTMP personnalisé",
             "youStoppedLive": "Vous avez arrêté de diffuser cet appel vers le RTMP personnalisé",
-            "sbStartedLiveStreaming": "{{userName}} a commencé à vivre",
+            "sbStartedLiveStreaming": "{{userName}} ont commencé à vivre",
             "sbStoppedLiveStreaming": "{{userName}} terminé en direct",
             "liveStopped": "Une erreur s&#39;est produite lors de l&#39;envoi de la vidéo au point de terminaison",
             "youBeganVideoRecording": "Vous avez commencé à enregistrer cette conférence",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "Code copié dans le presse-papiers",
             "userHasNoVideo": "Le participant n&#39;a pas de vidéo",
             "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence.",
-            "allowedVideoLimit": "Seules {{limit}} vidéos sont autorisées dans cette salle",
-            "allowedAudioLimit": "Seuls {{limit}} microphones sont autorisés dans cette salle"
+            "allowedVideoLimit": "Seulement {{limit}} vidéos autorisées dans cette salle",
+            "allowedAudioLimit": "Seuls {{limit}} microphones sont autorisés dans cette salle"
         },
         "settingsPopup": {
             "dialogTitle": "Paramètres vidéo",
@@ -288,18 +312,21 @@
             "publishToGroup": "Publier dans le groupe",
             "fbStartLive": "Passez en direct",
             "fbStopLive": "Mettre fin à la diffusion en direct",
-            "streamingSettings": "Réglages",
+            "streamingSettings": "Paramètres",
+            "manageStream": "Gérer la diffusion en direct",
             "fbEmbedCode": "Intégrer",
             "copy": "Copie",
             "streamToRTMP": "Diffuser vers RTMP personnalisé",
             "startBroadcasting": "Commencer à diffuser",
-            "broadcastingInProgress": "La diffusion est en cours",
-            "manageStream": "Gérer la diffusion en direct"
+            "broadcastingInProgress": "La diffusion est en cours"
         },
         "audioSettings": {
             "dialogTitle": "Les paramètres audio",
             "speakers": "Haut-parleurs",
             "microphone": "Microphone"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Gérer la diffusion"
         },
         "participantsPopup": {
             "dialogTitle": "Paramètres des participants",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Afficher le partage d&#39;écran"
         },
         "streamingSettings": {
-            "title": "Paramètres de diffusion"
+            "title": "Direct"
         },
         "preview": {
             "Meeting": "Téléconférence",
             "MeetingEnded": "Téléconférence terminée"
         },
         "requestSpeakDialog": {
-            "msg": "Il y a actuellement {{count}} personnes qui parlent dans la réunion. Voulez-vous remplacer l&#39;un d&#39;entre eux après lui avoir accordé {{seconds}} secondes pour finir de parler ?",
-            "dialogTitle": "Demander à parler"
-        },
-        "fbLive": {
-            "dialogTitle": "La diffusion en direct sur Facebook a commencé"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Gérer la diffusion"
+            "dialogTitle": "Demande de prise de parole",
+            "msg": "Il y a actuellement {{count}} personnes qui parlent dans la réunion. Voulez-vous remplacer l&#39;un d&#39;eux après lui avoir accordé {{seconds}} secondes pour finir de parler ?"
         }
     },
     "types": {
@@ -367,7 +388,7 @@
         },
         "Streams\/date": {
             "displayType": "Date",
-            "description": "Date"
+            "description": "date"
         },
         "Streams\/text": {
             "displayType": "Texte",
@@ -439,7 +460,7 @@
             "description": "les flux sont liés\/non liés à cela lorsqu&#39;un utilisateur rejoint\/quitte"
         },
         "Streams\/interest": {
-            "displayType": "L&#39;intérêt",
+            "displayType": "Intérêt",
             "description": "représente l&#39;intérêt d&#39;un utilisateur pour un certain sujet"
         },
         "Streams\/incoming": {
@@ -451,8 +472,8 @@
             "description": "une conversation entre utilisateurs, avec historique"
         },
         "Streams\/webrtc": {
-            "displayType": "Appel en direct",
-            "description": "un appel vidéo\/audio en temps réel"
+            "displayType": "Téléconférence",
+            "description": "une conférence vidéo\/audio en ligne"
         },
         "Streams\/question": {
             "displayType": "Question",
@@ -460,7 +481,7 @@
             "newItem": "Ajouter une question"
         },
         "Streams\/answer": {
-            "displayType": "Réponse",
+            "displayType": "Répondre",
             "description": "flux de réponses"
         },
         "Streams\/calls": {
@@ -477,11 +498,11 @@
         "Submenu": "Sous-menu"
     },
     "audio": {
-        "record": "Enregistrement",
+        "record": "Enregistrer",
         "reset": "Réinitialiser",
-        "edit": "Éditer",
-        "title": "Titre",
-        "description": "la description",
+        "edit": "Modifier",
+        "title": "titre",
+        "description": "description",
         "upload": "Télécharger",
         "link": "Lien",
         "setUrl": "Définir l&#39;URL",
@@ -495,9 +516,9 @@
     },
     "video": {
         "reset": "Réinitialiser",
-        "edit": "Éditer",
-        "title": "Titre",
-        "description": "la description",
+        "edit": "Modifier",
+        "title": "titre",
+        "description": "description",
         "upload": "Télécharger",
         "link": "Lien",
         "setUrl": "Définir l&#39;URL",
@@ -511,9 +532,9 @@
     },
     "pdf": {
         "reset": "Réinitialiser",
-        "edit": "Éditer",
-        "title": "Titre",
-        "description": "la description",
+        "edit": "Modifier",
+        "title": "titre",
+        "description": "description",
         "upload": "Télécharger",
         "link": "Lien",
         "setUrl": "Définir l&#39;URL",
@@ -527,9 +548,9 @@
     },
     "image": {
         "reset": "Réinitialiser",
-        "edit": "Éditer",
-        "title": "Titre",
-        "description": "la description",
+        "edit": "Modifier",
+        "title": "titre",
+        "description": "description",
         "upload": "Télécharger",
         "link": "Lien",
         "setUrl": "Définir l&#39;URL",
@@ -539,7 +560,7 @@
         "setClip": "Clip découpé",
         "invalidURL": "URL invalide",
         "invalidFile": "Fichier non valide",
-        "errorNoSource": "Aucune source d&#39;image",
+        "errorNoSource": "Aucune source d&#39;images",
         "uploadLimit": "Taille maximale du fichier : {{size}}",
         "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est {{size}}"
     },
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Répondez à la question",
         "SetYourAnswer": "Veuillez répondre à la question",
         "NewQuestion": "Nouvelle question",
+        "EditQuestion": "Modifier la question",
         "NewAnswer": "Nouvelle réponse",
+        "NewPossibleAnswer": "Nouvelle réponse possible",
         "AnswerDetails": "Détails de la réponse",
         "answerOption": "Option",
         "answerOptionExclusive": "Exclusif",
         "answerTextarea": "Zone de texte",
+        "answerText": "Texte",
+        "HideUntilAnswered": "Masquer jusqu&#39;à réponse",
+        "CantChangeAnswers": "Impossible de modifier les réponses",
         "FreeAnswer": "Écrivez votre réponse ici",
         "SaveQuestion": "Enregistrer la question",
         "SaveAnswer": "Enregistrer la réponse",
-        "AddAnotherAnswer": "Ajouter une autre réponse",
-        "ErrorAnswers": "Veuillez ajouter ne serait-ce qu&#39;une seule réponse",
+        "Save": "Sauvegarder",
+        "Send": "Envoyer",
+        "TitleRequired": "Titre requis !",
         "AlreadyAnswered": "Déjà répondu",
         "TitlePlaceholder": "Tapez votre question",
         "ContentPlaceholder": "Mettez toute information supplémentaire ici pour aider les gens à répondre",
         "ErrorTitle": "Question requise",
         "Placeholder": "Espace réservé",
-        "EditQuestion": "Modifier la question",
-        "NewPossibleAnswer": "Nouvelle réponse possible",
-        "answerText": "Texte",
-        "HideUntilAnswered": "Masquer jusqu&#39;à réponse",
-        "CantChangeAnswers": "Impossible de modifier les réponses",
-        "Save": "Sauvegarder",
-        "Send": "Envoyer",
-        "TitleRequired": "Titre requis !",
         "AreYouSure": "Es-tu sûr?"
     },
     "experience": {
@@ -582,36 +601,16 @@
     "calls": {
         "SettingsTitle": "Appels",
         "MaxCalls": "Appels maximum",
-        "Update": "Mettre à jour",
+        "Update": "Mise à jour",
         "NoCallsYet": "Pas encore d&#39;appels",
         "CallReasonTitle": "De quoi parle cet appel ?",
-        "WaitingRoom": "Salle d&#39;attente",
+        "WaitingRoom": "SALLE D&#39;ATTENTE",
         "LiveRoom": "Salon",
         "interviewedByAnotherHost": "Est actuellement interviewé par un autre hôte",
         "bringToLive": "Apporter au spectacle en direct",
         "putOnHold": "Mettre en attente",
         "endCall": "Fin d&#39;appel",
-        "interview": "Interview",
+        "interview": "Entretien",
         "markApproved": "Marquer approuvé"
-    },
-    "identifier": {
-        "private": "Privé",
-        "public": "Public",
-        "configurationSaved": "Configuration enregistrée",
-        "error": "Quelque chose s&#39;est mal passé",
-        "privacySettings": "Paramètres de confidentialité"
-    },
-    "avatar": {
-        "firstName": "prénom",
-        "lastName": "nom de famille",
-        "username": "nom d&#39;utilisateur"
-    },
-    "login": {
-        "prompt": "Laissez vos amis vous reconnaître :",
-        "newUser": "ou créez un nouveau compte ci-dessous",
-        "picTooltip": "Vous pouvez changer cette image plus tard",
-        "placeholder": {
-            "fullName": "Entrez votre nom complet"
-        }
     }
 }

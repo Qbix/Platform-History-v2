@@ -55,7 +55,12 @@ Q.text.Streams = {
 		}
 	},
 	chat: {
-		noMessages: ""
+		noMessags: "",
+		noOneSaid: "No messages yet",
+		placeholders: {
+			"Public": "Add a comment",
+			"Private": "Write a private message"
+		}
 	},
 	followup: {
 		mobile: {
@@ -1855,7 +1860,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                     + '</div>',
                     onActivate: function (dialog) {
                         // fill QR code
-                        Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
+                        Q.addScript("{{Q}}/js/qrcode/qrcode.js", function () {
                             var $qrIcon = $(".Streams_invite_QR_content", dialog);
                             new QRCode($qrIcon[0], {
                                 text: rsd.url,
@@ -1866,6 +1871,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 correctLevel : QRCode.CorrectLevel.H
                             });
                             var _setPhoto = function (message) {
+                            	var dialogClassName = "Dialog_invite_photo_camera";
                             	var invitingUserId = Q.getObject("byUserId", message);
                             	var title = Q.getObject(['invite', 'dialog', 'photo'], text);
                             	if (invitingUserId) {
@@ -1876,11 +1882,17 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 									subpath = invitingUserId.splitId() + '/icon/' + Math.floor(Date.now()/1000);
 								}
 
-                            	Q.Dialogs.pop();
+								if (Q.Dialogs.dialogs.length) {
+									var $lastDialog = Q.Dialogs.dialogs[Q.Dialogs.dialogs.length-1];
+									if ($lastDialog instanceof jQuery && !$lastDialog.hasClass(dialogClassName)) {
+										Q.Dialogs.pop();
+									}
+								}
+
 								Q.Dialogs.push({
 									title: title,
 									apply: true,
-									className: "Dialog_invite_photo_camera",
+									className: dialogClassName,
 									content:
 										'<div class="Streams_invite_photo_dialog">' +
 										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
@@ -1900,7 +1912,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 											subpath: subpath,
 											saveSizeName: saveSizeName,
 											onFinish: function () {
-												Q.Dialogs.pop();
+												Q.Dialogs.close(dialog);
 											}
 										};
 										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
@@ -2879,7 +2891,7 @@ Sp.getAllAttributes = function _Stream_prototype_getAllAttributes (usePending) {
  * @return {Mixed}
  */
 Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePending) {
-	return (attributeName in this.pendingAttributes)
+	return (usePending && attributeName in this.pendingAttributes)
 		? this.pendingAttributes[attributeName]
 		: this.attributes[attributeName];
 };

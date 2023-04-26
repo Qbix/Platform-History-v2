@@ -180,5 +180,7 @@ class Q_Translate
 		}
 	}
 
+	public $locales;
+
 }
 

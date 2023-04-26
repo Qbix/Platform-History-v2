@@ -1,150 +1,6 @@
 {
-    "analytics": {
-        "Title": "해석학",
-        "Daily": "일일",
-        "Weekly": "주간",
-        "Monthly": "월간 간행물",
-        "Application": "애플리케이션",
-        "Pages": "페이지",
-        "Services": "서비스",
-        "Faq": "자주하는 질문",
-        "WeekDays": "요일"
-    },
-    "actions": {
-        "LogIn": "로그인",
-        "LogOut": "로그 아웃"
-    },
-    "activate": {
-        "SetAsPrimary": "{{1}}을(를) 기본 {{2}}으로 설정",
-        "ChoosePassPhrase": "로그인 <strong>할 암호<\/strong> 를 선택하십시오.<br> 당신이 쉽게 기억할 몇 단어로 구성된 간단한 문구.",
-        "ChoosePassPhraseSeeSuggestions": "계정을 보호하기 위해 좋은 <strong>암호<\/strong> 를 선택하십시오. 몇 가지 아이디어에 대한 제안을 참조하십시오.",
-        "LogOutAndTryAgain": "로그아웃하고 다시 시도",
-        "IfYouFeel": "문제가 발생했다고 생각되면 다음을 수행할 수 있습니다.",
-        "SetIdentifierButtonTitle": "다시 시작하다",
-        "OneTimeCode": "받은 코드를 입력하세요.",
-        "ActivateMyAccount": "내 계정 활성화"
-    },
-    "session": {
-        "GetStarted": "시작하다"
-    },
-    "authorize": {
-        "GetStarted": "시작하다",
-        "Authorize": "승인",
-        "TermsLabel": "읽었으며 동의합니다<br> {{link}}에게",
-        "TermsTitle": "자귀",
-        "mustAgree": "먼저 약관에 동의해야 합니다."
-    },
-    "register": {
-        "TermsLabel": "동의합니다 {{link}}",
-        "TermsTitle": "자귀"
-    },
-    "notifications": {
-        "title": "허가",
-        "prompt": "알림을 사용하시겠습니까? 관심 있는 항목에 대한 실시간 업데이트를 받게 됩니다.",
-        "yes": "네",
-        "no": "아니",
-        "WelcomePleaseVerifyEmail": "어서 오십시오! 이메일 주소를 확인하세요.",
-        "WelcomeVerifyEmail": "어서 오십시오! 이메일 주소를 확인.",
-        "ForgetPass": "야, 암호를 잊어버렸니?",
-        "PassphraseSaved": "암호가 저장되었습니다.",
-        "IdentifierActivated": "{{type}}이(가) 활성화되었습니다.",
-        "CompletedActivation": "사용자 활성화를 완료했습니다.",
-        "CompletedActivationLogIn": "사용자 활성화를 완료했습니다. 지금 로그인해 보세요."
-    },
-    "contacts": {
-        "dialog": {
-            "title": "연락처 선택",
-            "CreateAccount": "+ 새 연락처",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create를 찾을 수 없음",
-            "SearchByName": "이름으로 검색",
-            "EmptyContacts": "연락처를 찾을 수 없습니다..."
-        },
-        "select": {
-            "title": "{{displayName}}의 연락처 선택"
-        }
-    },
-    "usersContacts": {
-        "selectLabel": "라벨을 선택하세요.",
-        "inviteUser": "사용자 초대",
-        "selectRole": "역할 선택",
-        "inviteRole": "{{role}} 초대"
-    },
-    "invalidLanguageSelected": "잘못된 언어 선택",
-    "login": {
-        "title": "어서 오십시오",
-        "directions": "계정을 만들거나 로그인하세요.",
-        "directionsNoRegister": "계정이 있으면 로그인하세요.",
-        "goButton": "⮕",
-        "passphrase": "암호를 입력하십시오:",
-        "loginButton": "시작하다",
-        "registerButton": "시작하다",
-        "resendButton": "활성화 메시지 보내기",
-        "forgot": "잊어 버려?",
-        "resendConfirm": "암호를 재설정하라는 메시지를 보내시겠습니까?",
-        "resendSuccess": "암호를 재설정하라는 메시지 확인",
-        "resendClose": "닫다",
-        "noPassphrase": "로그인하기 전에 활성화 메시지의 링크를 클릭하여 암호를 설정해야 합니다.",
-        "notVerified": "로그인하려면 자신에게 활성화 메시지를 보내야 합니다.",
-        "emailExists": "이전에 이 이메일로 등록을 시도하셨습니까? 그렇다면 받은 편지함을 확인하여 계정을 활성화하십시오. <a href='#resend' class='Q_button Users_activation_resend'>메시지를 다시 보내려면 클릭하십시오.<\/a>",
-        "mobileExists": "이전에 이 휴대폰 번호로 등록을 시도하셨습니까? 그렇다면 SMS를 확인하여 계정을 활성화하십시오. <a href='#resend' class='Q_button Users_activation_resend'>메시지를 다시 보내려면 클릭하십시오.<\/a>",
-        "usingOther": "또는 당신은 할 수 있습니다",
-        "prompt": "사용자 이름 선택:",
-        "newUser": "또는 아래에서 새 계정을 만드십시오.",
-        "placeholders": {
-            "identifier": "휴대폰 번호 또는 이메일",
-            "mobile": "휴대폰 번호를 입력하세요.",
-            "email": "이메일 주소를 입력하세요",
-            "username": "문자와 숫자만 사용"
-        },
-        "confirmTerms": "서비스 약관에 동의하시겠습니까?",
-        "facebookNoEmail": "귀하의 Facebook 계정에 확인된 이메일 주소가 없습니다. 기본 방식으로 로그인하기만 하면 됩니다.",
-        "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
-        "wallet": {
-            "payload": "{{timestamp}} 시간에 {{host}}에 로그인합니다.",
-            "alert": {
-                "title": "지갑으로 리디렉션",
-                "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
-            }
-        },
-        "web3": {
-            "payload": "{{host}} 시간에 {{timestamp}}에 로그인합니다.",
-            "alert": {
-                "title": "지갑으로 리디렉션",
-                "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
-            }
-        },
-        "connectPlatforms": "또는 다음을 사용하여 연결합니다."
-    },
-    "setIdentifier": {
-        "title": "로그인 방법 추가",
-        "sendMessage": "활성화 메시지 보내기",
-        "placeholders": {
-            "identifier": "휴대폰 번호 또는 이메일을 입력하세요",
-            "mobile": "당신의 휴대폰 번호를 입력하십시오",
-            "email": "이메일 주소를 입력하세요",
-            "username": "사용자 이름"
-        }
-    },
-    "prompt": {
-        "title": "{{Platform}} 계정",
-        "areUsing": "{{platform}}을(를) 다음으로 사용 중입니다.",
-        "noLongerUsing": "더 이상 {{platform}}에 다음과 같이 연결되어 있지 않습니다.",
-        "doAuth": "이 계정으로 로그인",
-        "doSwitch": "이 계정으로 전환"
-    },
-    "roles": {
-        "Owner": "소유자",
-        "Admin": "관리자",
-        "Member": "회원",
-        "Guest": "손님",
-        "Host": "주최자"
-    },
     "avatar": {
         "Someone": "누구"
-    },
-    "web3": {
-        "WrongMethod": "잘못된 계약 방법 {{methodName}}",
-        "ChangeWallet": "지갑 변경"
     },
     "identifier": {
         "types": {
@@ -156,9 +12,146 @@
     "clipboard": {
         "Copied": "복사했습니다! 이제 아무 곳에나 붙여넣을 수 있습니다."
     },
+    "analytics": {
+        "Title": "해석학",
+        "Daily": "일일",
+        "Weekly": "주간",
+        "Monthly": "월간 간행물",
+        "Application": "애플리케이션",
+        "Pages": "페이지",
+        "Services": "서비스",
+        "Faq": "자주하는 질문",
+        "WeekDays": "평일"
+    },
+    "actions": {
+        "LogIn": "로그인",
+        "LogOut": "로그 아웃"
+    },
+    "activate": {
+        "OneTimeCode": "받은 코드를 입력하세요:",
+        "SetAsPrimary": "{{1}} 내 기본 {{2}} 으로 설정",
+        "ChoosePassPhrase": "로그인에 사용할 <strong>암호 문구를<\/strong> 선택하십시오.<br> 쉽게 기억할 수 있는 몇 개의 단어로 구성된 간단한 문구입니다.",
+        "ChoosePassPhraseSeeSuggestions": "계정을 보호하기 위해 좋은 <strong>암호 문구를<\/strong> 선택하십시오. 몇 가지 아이디어에 대한 제안을 참조하십시오.",
+        "LogOutAndTryAgain": "로그아웃하고 다시 시도하십시오",
+        "IfYouFeel": "무언가 잘못되었다고 생각되면 다음을 수행할 수 있습니다.",
+        "SetIdentifierButtonTitle": "다시 시작하다",
+        "ActivateMyAccount": "내 계정 활성화"
+    },
+    "session": {
+        "GetStarted": "시작하다"
+    },
+    "authorize": {
+        "GetStarted": "시작하다",
+        "Authorize": "승인하다",
+        "TermsLabel": "읽었으며 동의합니다<br> {{link}} 에게",
+        "TermsTitle": "자귀",
+        "mustAgree": "먼저 약관에 동의해야 합니다."
+    },
+    "register": {
+        "TermsLabel": "{{link}} 받아들입니다",
+        "TermsTitle": "자귀"
+    },
+    "notifications": {
+        "title": "허가",
+        "prompt": "알림을 활성화하시겠습니까? 관심 있는 항목에 대한 실시간 업데이트를 받게 됩니다.",
+        "yes": "예",
+        "no": "아니요",
+        "WelcomePleaseVerifyEmail": "환영! 이메일 주소를 확인하십시오.",
+        "WelcomeVerifyEmail": "환영! 이메일 주소를 확인.",
+        "ForgetPass": "암호를 잊으셨나요?",
+        "PassphraseSaved": "암호 문구가 저장되었습니다.",
+        "IdentifierActivated": "{{type}} 가 활성화되었습니다.",
+        "CompletedActivation": "사용자 활성화를 완료했습니다.",
+        "CompletedActivationLogIn": "사용자 활성화를 완료했습니다. 지금 로그인해 보세요."
+    },
+    "contacts": {
+        "dialog": {
+            "title": "연락처 선택",
+            "CreateAccount": "+ 새 연락처",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create를 찾을 수 없습니다.",
+            "SearchByName": "이름으로 검색",
+            "EmptyContacts": "연락처를 찾을 수 없습니다..."
+        },
+        "select": {
+            "title": "{{displayName}} 의 연락처 선택"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "라벨을 선택하세요.",
+        "inviteUser": "사용자 초대",
+        "selectRole": "역할 선택",
+        "inviteRole": "{{role}} 초대"
+    },
+    "invalidLanguageSelected": "잘못된 언어를 선택했습니다.",
     "platforms": {
         "wallet": "지갑",
         "broadcast": "방송"
+    },
+    "login": {
+        "title": "환영",
+        "directions": "계정을 만들거나 로그인하세요.",
+        "directionsNoRegister": "계정이 있으면 로그인하십시오.",
+        "goButton": "➔",
+        "passphrase": "암호 문구를 입력하십시오.",
+        "loginButton": "시작하다",
+        "registerButton": "시작하다",
+        "resendButton": "활성화 메시지 보내기",
+        "forgot": "잊어 버려?",
+        "resendConfirm": "암호를 재설정하라는 메시지를 보내시겠습니까?",
+        "resendSuccess": "암호를 재설정하라는 메시지를 확인하십시오.",
+        "resendClose": "닫다",
+        "noPassphrase": "로그인하기 전에 활성화 메시지의 링크를 클릭하여 암호를 설정해야 합니다.",
+        "notVerified": "로그인하려면 자신에게 활성화 메시지를 보내야 합니다.",
+        "emailExists": "이전에 이 이메일로 등록을 시도하셨습니까? 그렇다면 받은 편지함을 확인하여 계정을 활성화하십시오. <a href='#resend' class='Q_button Users_activation_resend'>메시지를 다시 보내려면 클릭하십시오.<\/a>",
+        "mobileExists": "이전에 이 휴대폰 번호로 등록을 시도하셨나요? 그렇다면 SMS를 확인하여 계정을 활성화하십시오. <a href='#resend' class='Q_button Users_activation_resend'>메시지를 다시 보내려면 클릭하십시오.<\/a>",
+        "usingOther": "또는 당신은 할 수 있습니다",
+        "connectPlatforms": "또는 다음을 사용하여 연결합니다.",
+        "prompt": "사용자 이름 선택:",
+        "newUser": "또는 아래에서 새 계정을 만드십시오.",
+        "placeholders": {
+            "identifier": "모바일 번호 또는 이메일",
+            "mobile": "모바일 번호를 입력하세요",
+            "email": "당신의 이메일 주소를 입력 해주세요",
+            "username": "문자와 숫자만 사용"
+        },
+        "confirmTerms": "서비스 약관에 동의하시겠습니까?",
+        "facebookNoEmail": "귀하의 Facebook 계정에 확인된 이메일 주소가 없습니다. 기본 방식으로 로그인하기만 하면 됩니다.",
+        "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
+        "web3": {
+            "payload": "시간 {{timestamp}} 에 {{host}} 에 로그인",
+            "alert": {
+                "title": "월렛으로 리디렉션 중",
+                "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오십시오."
+            }
+        }
+    },
+    "setIdentifier": {
+        "title": "로그인 방법 추가",
+        "sendMessage": "활성화 메시지 보내기",
+        "placeholders": {
+            "identifier": "모바일 # 또는 이메일을 입력하십시오",
+            "mobile": "당신의 휴대폰 번호를 입력하십시오",
+            "email": "당신의 이메일 주소를 입력 해주세요",
+            "username": "사용자 이름"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} 계정",
+        "areUsing": "{{platform}} 다음과 같이 사용하고 있습니다.",
+        "noLongerUsing": "더 이상 {{platform}} 에 다음과 같이 연결되어 있지 않습니다.",
+        "doAuth": "이 계정으로 로그인",
+        "doSwitch": "이 계정으로 전환"
+    },
+    "roles": {
+        "Owner": "소유자",
+        "Admin": "관리자",
+        "Member": "회원",
+        "Guest": "손님",
+        "Host": "주인"
+    },
+    "web3": {
+        "WrongMethod": "잘못된 계약 방식 {{methodName}}",
+        "ChangeWallet": "지갑 변경"
     },
     "labels": {
         "addToPhonebook": "내 전화 연락처에 추가",

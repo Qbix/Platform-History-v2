@@ -6,15 +6,28 @@
     "preview": {
         "NewItemTitle": "Articol nou"
     },
+    "avatar": {
+        "firstName": "Nume",
+        "lastName": "nume",
+        "username": "nume de utilizator"
+    },
     "labels": {
         "Streams\/invited": "Oamenii pe care i-am invitat",
         "Streams\/invitedMe": "Cine m-a invitat",
-        "DoYouAgree": "Ești de acord?",
+        "DoYouAgree": "Sunteți de acord?",
         "Yes": "da",
         "No": "Nu"
     },
+    "login": {
+        "prompt": "Lasă prietenii să te recunoască:",
+        "newUser": "sau creați un cont nou mai jos",
+        "picTooltip": "Puteți schimba această imagine mai târziu",
+        "placeholder": {
+            "fullName": "Introduceți numele dvs. complet"
+        }
+    },
     "interests": {
-        "Filter": "Care sunt interesele dumneavoastră?",
+        "Filter": "Interese de căutare",
         "CanGrant": "Dacă tot nu găsiți ceea ce căutați, puteți adăuga un nou interes mai jos:",
         "TrySynonyms": "Nu-l vezi? Încercați câteva sinonime.",
         "AddUnderCategory": "Adăugați în categoria...",
@@ -22,7 +35,7 @@
         "Unlisted": "Nelistate"
     },
     "chat": {
-        "flaggedForAdminReview": "Mesajul a fost semnalat pentru examinare de către administrator. Atingeți din nou pentru a anula semnalizarea.",
+        "flaggedForAdminReview": "Mesajul a fost marcat pentru examinare de către administrator. Atingeți din nou pentru a anula semnalizarea.",
         "noOneSaid": "Nimeni nu a spus nimic",
         "closeChatButton": "Închide chatul",
         "closeChatConfirmTitle": "Închideți acest chat?",
@@ -34,43 +47,63 @@
         "earlierComments": "comentarii anterioare",
         "startedConversation": "a început o conversație",
         "RealTimeCall": "Apel în timp real",
+        "JoinWebRTC": "Teleconferinta",
         "SearchByName": "Cauta dupa nume",
         "Notifications": {
             "Visit": "{{displayName}} vizitează chatul",
-            "Join": "{{displayName}} s-a alăturat chatului",
+            "Join": "{{displayName}} s-au alăturat chatului",
             "Leave": "{{displayName}} a părăsit chatul",
             "RelatedTo": "{{displayName}} a început un {{stream.displayType}}"
         },
-        "JoinWebRTC": "Teleconferinta"
+        "placeholders": {
+            "Public": "Adauga un comentariu",
+            "Private": "Scrie un mesaj privat"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "gestionați-vă abonamentele de e-mail",
         "IfUnsubscribe": "Dacă doriți să vă dezabonați",
-        "*": "Mesaj {{& message.fields.type}} către {{& stream.fields.title}}",
+        "*": "Mesaj {{& message.fields.type}} la {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} s-au alăturat",
+        "Streams\/left": "Au mai rămas {{&call 'avatar.displayName'}}",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a spus: {{& message.content}}",
         "Streams\/changed": "Modificări în {{stream.fields.title}}",
         "Streams\/invite": "Ai fost invitat la {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunț în {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} a modificat accesul în {{& stream.fields.title}}",
+        "Streams\/announcement": "Anunț din {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} a schimbat accesul în {{& stream.fields.title}}",
         "Streams\/chat\/edit": "Mesaj de chat editat în {{& stream.fields.title}}",
         "Streams\/chat\/remove": "Mesaj de chat eliminat în {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} a fost închis",
-        "Streams\/task\/progress": "Progres realizat pe {{stream.fields.title}}",
+        "Streams\/task\/progress": "Progresul înregistrat în {{stream.fields.title}}",
         "Streams\/task\/complete": "Sarcina finalizată: {{stream.fields.title}}",
         "Streams\/task\/error": "Eroare în timpul: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesaj primit",
+        "Streams\/incoming\/*": "{{app}} : Mesaj primit",
         "Streams\/relatedTo\/Streams\/call": "Apel nou început în {{toTitle}}",
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} în {{toTitle}}",
         "Streams\/relatedFrom\/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} te-a menționat într-un comentariu",
-        "Streams\/call": "{{displayName}} a început un apel în timp real",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} s-a alăturat",
-        "Streams\/left": "{{&call 'avatar.displayName'}} a plecat"
+        "Streams\/call": "{{displayName}} a început un apel în timp real"
     },
     "invite": {
         "command": "A invita",
-        "messageContent": "{{displayName}} v-a invitat la {{inviteUrl}}",
+        "Invite": "A invita",
+        "Share": "Acțiune",
+        "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
         "youCanNowPaste": "Acum puteți lipi acest link undeva pentru a invita persoane",
+        "roles": {
+            "title": "Acordați roluri utilizatorilor invitați?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Îmi pare rău",
+                "alert": "Nu sunteți autorizat să acordați acest rol"
+            },
+            "NotAuthorizedToRemoveRole": {
+                "title": "Îmi pare rău",
+                "alert": "Nu sunteți autorizat să eliminați acest rol"
+            }
+        },
+        "labels": {
+            "title": "Care este relația ta?"
+        },
         "dialog": {
             "chooseFromContacts": "Alegeți dintre contactele dvs",
             "chooseAgainFromContacts": "Alege din nou din Contacte",
@@ -78,8 +111,9 @@
             "selectFromContacts": "Selectați Din Contacte",
             "userChooserPlaceholder": "Cauta dupa nume",
             "photo": "Fă o poză",
+            "photoOf": "Faceți o fotografie cu {{name}}",
             "photoInstruction": "Dacă persoana care ți-a scanat codul QR se află în fața ta, fă-i o fotografie",
-            "to": "Către: {{Stream Title}}",
+            "to": "La: {{Stream Title}}",
             "go": "Merge",
             "title": "A invita",
             "placeholder": "Număr de mobil sau adresa de e-mail",
@@ -102,57 +136,41 @@
             "chooseFromRegistered": "Alegeți dintre utilizatorii înregistrați",
             "inviteViaEmailOrSms": "Invitați prin e-mail sau SMS"
         },
+        "complete": {
+            "WelcomeToCommunity": "Bun venit la {{communityName}}",
+            "HasInvitedYou": "v-a invitat la:",
+            "HasInvitedYouToTheirProfile": "v-a invitat să vă conectați.",
+            "prompt": "Lasă prietenii să te recunoască:",
+            "accept": "Acceptă invitația"
+        },
         "email": {
             "subject": "Hei, verifică asta",
             "PleaseVisitLink": "Vă rugăm să vizitați următorul link:",
-            "InvitingYou": "Vă invit să {{title}}",
-            "HasInvitedYou": "{{displayName}} v-a invitat la {{title}}",
-            "HasMentionedYou": "{{displayName}} te-a menționat în „{{title}}”",
+            "InvitingYou": "Vă invit la {{title}}",
+            "HasInvitedYou": "{{displayName}} te-a invitat la {{title}}",
+            "HasMentionedYou": "{{displayName}} te-a menționat în „ {{title}} ”",
             "YOUAREINVITED": "ESTI INVITAT!",
             "AcceptInvite": "Acceptă invitația"
         },
         "sms": {
-            "content": "Ai fost invitat la {{title}}. Vă rugăm să atingeți {{url}}"
+            "content": "Ai fost invitat la {{title}} . Vă rugăm să atingeți {{url}}"
         },
         "notice": {
             "text": "Ai fost invitat. {{ClickOrTap}} aici pentru a accepta și a vă alătura."
-        },
-        "Invite": "A invita",
-        "Share": "Acțiune",
-        "roles": {
-            "title": "Acordați roluri utilizatorilor invitați?",
-            "NotAuthorizedToGrantRole": {
-                "title": "Îmi pare rău",
-                "alert": "Nu sunteți autorizat să acordați acest rol"
-            },
-            "NotAuthorizedToRemoveRole": {
-                "title": "Îmi pare rău",
-                "alert": "Nu sunteți autorizat să eliminați acest rol"
-            }
-        },
-        "labels": {
-            "title": "Care este relația ta?"
-        },
-        "complete": {
-            "HasInvitedYou": "v-a invitat la:",
-            "WelcomeToCommunity": "Bun venit la {{communityName}}",
-            "HasInvitedYouToTheirProfile": "v-a invitat să vă conectați.",
-            "prompt": "Lasă prietenii să te recunoască:",
-            "accept": "Acceptă invitația"
         }
     },
     "messages": {
         "html": {
-            "posted": "a postat un <em>{{message.fields.type}}<\/em> mesaj către {{stream.fields.title}}"
+            "posted": "a postat un mesaj <em>{{message.fields.type}}<\/em> la {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "comentat",
             "startedCallIn": "a început un apel",
             "in": "în",
-            "body": "în {{& url}}: {{& message.fields.content}}",
+            "body": "în {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "a fost postat pe",
-                "byAvatar": "de {{avatar.displayName}}"
+                "byAvatar": "prin {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "are un nou {{instructions.fromDisplayType}}",
@@ -162,25 +180,28 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Invitațiile sunt trimise de pe numărul nostru, pe care prietenii tăi nu îl recunosc încă. Continuați cu un text rapid pentru a le informa că invitația a venit de la dvs., cerându-le să facă clic pe link.",
-            "confirm": "Invitațiile sunt trimise de pe numărul nostru, pe care prietenii tăi nu îl recunosc încă. Doriți să continuați cu un text rapid pentru a le informa că invitația a venit de la dvs., cerându-i să facă clic pe link.",
-            "check": "Hei, tocmai ți-am trimis o invitație la aplicația {{app}}. Vă rugăm să vă verificați sms-ul și să faceți clic pe link!",
+            "alert": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii tăi nu îl recunosc încă. Continuați cu un text rapid pentru a le informa că invitația a venit de la dvs., cerându-le să facă clic pe link.",
+            "confirm": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii tăi nu îl recunosc încă. Doriți să continuați cu un text rapid pentru a le informa că invitația a venit de la dvs., cerându-i să facă clic pe link.",
+            "check": "Hei, tocmai ți-am trimis o invitație la aplicația {{app}} . Vă rugăm să verificați sms-ul și să faceți clic pe link!",
             "CheckYourMobile": "Vă rugăm să verificați SMS-urile și să urmați instrucțiunile!"
         },
         "email": {
             "alert": "Invitațiile sunt trimise de pe domeniul nostru, pe care prietenii tăi nu îl recunosc încă. Continuați cu un text rapid pentru a le informa că invitația a venit de la dvs., cerându-le să facă clic pe link.",
             "confirm": "Invitațiile sunt trimise de pe domeniul nostru, pe care prietenii tăi nu îl recunosc încă. Doriți să continuați cu un text rapid pentru a le informa că invitația a venit de la dvs., cerându-i să facă clic pe link.",
             "subject": "Ai primit o invitație?",
-            "body": "Hei, tocmai ți-am trimis o invitație la aplicația {{app}}. Vă rugăm să vă verificați e-mailul și să faceți clic pe linkul de acolo!",
+            "body": "Hei, tocmai ți-am trimis o invitație la aplicația {{app}} . Vă rugăm să vă verificați e-mailul și să faceți clic pe linkul de acolo!",
             "CheckYourEmail": "Vă rugăm să vă verificați e-mailul și să urmați instrucțiunile!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Setările de confidențialitate"
     },
     "participating": {
         "Title": "Titlu",
         "Subscribed": "Abonat",
         "Participants": "Participanții",
         "AreYouSureRemoveIdentifier": "Sunteți sigur că eliminați acest identificator?",
-        "AreYouSureUnsubscribeIdentifier": "Sunteți sigur că vă dezabonați de acest identificator? Va dezactiva notificările pentru acest identificator.",
+        "AreYouSureUnsubscribeIdentifier": "Sunteți sigur că vă dezabonați de acest identificator? Va dezactiva notificările la acest identificator.",
         "AreYouSureUnsubscribeDevice": "Sunteți sigur că vă dezabonați de acest dispozitiv? Va dezactiva notificările către acest dispozitiv.",
         "AreYouSureRemoveParticipant": "Sigur doriți să eliminați acest participant?",
         "RemoveParticipant": "Eliminați participantul",
@@ -198,14 +219,14 @@
             "cameraAndMicrophoneBtn": "Activați camera și microfonul"
         },
         "preparing": {
+            "dialogTitle": "Porniți\/opriți camera sau microfonul înainte de a vă alătura",
             "micIsOff": "Microfonul este oprit",
             "micIsOn": "Microfonul este pornit",
             "cameraIsOff": "Camera este oprită",
             "cameraIsOn": "Camera este pornită",
             "screenSharingIsOn": "Partajarea ecranului este activată",
             "screenSharingIsOff": "Distribuie ecran",
-            "joinNow": "Alăturați-vă apelului",
-            "dialogTitle": "Porniți\/opriți camera sau microfonul înainte de a vă alătura"
+            "joinNow": "Alăturați-vă apelului"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrucțiuni",
@@ -222,7 +243,7 @@
             "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
             "point1": "Accesați Setările Android",
             "point2": "Deschideți „Aplicații și notificări”",
-            "point3": "Găsiți „{{communityName}}” și deschideți-l",
+            "point3": "Găsiți „ {{communityName}} ” și deschideți-l",
             "point4": "Atingeți Permisiuni",
             "point5": "Activați {{kind}}"
         },
@@ -232,7 +253,10 @@
             "point1": "Accesați Setările iOS",
             "point2": "Deschideți „Confidențialitate”",
             "point3": "Găsiți {{kind}} și deschideți-l",
-            "point4": "Găsiți „{{communityName}}” și activați"
+            "point4": "Găsiți „ {{communityName}} ” și activați"
+        },
+        "fbLive": {
+            "dialogTitle": "A început fluxul live pe Facebook"
         },
         "notices": {
             "youJoinedRoom": "Te-ai alăturat camerei",
@@ -258,8 +282,8 @@
             "codeCopiedToCb": "Cod copiat în clipboard",
             "userHasNoVideo": "Participantul nu are videoclip",
             "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a participa la conferință.",
-            "allowedVideoLimit": "Numai {{limit}} videoclipuri permise în această sală",
-            "allowedAudioLimit": "Numai {{limit}} microfoane sunt permise în această cameră"
+            "allowedVideoLimit": "Numai {{limit}} de videoclipuri permise în această cameră",
+            "allowedAudioLimit": "Numai {{limit}} de microfoane sunt permise în această cameră"
         },
         "settingsPopup": {
             "dialogTitle": "Setari video",
@@ -274,7 +298,7 @@
             "micIsTurnedOff": "Microfonul este oprit",
             "startFBLive": "Porniți Facebook Livestream",
             "stopFBLive": "Opriți fluxul live Facebook",
-            "startRecording": "Începe înregistrarea",
+            "startRecording": "Începe să înregistrezi",
             "stopRecording": "Opriți înregistrarea",
             "start": "start",
             "stop": "Stop",
@@ -289,17 +313,20 @@
             "fbStartLive": "Du-te si traieste",
             "fbStopLive": "Încheiați fluxul live",
             "streamingSettings": "Setări",
+            "manageStream": "Gestionați fluxul live",
             "fbEmbedCode": "Încorporare",
             "copy": "Copie",
             "streamToRTMP": "Transmiteți în flux la RTMP personalizat",
             "startBroadcasting": "Începeți să difuzați",
-            "broadcastingInProgress": "Difuzarea este în curs",
-            "manageStream": "Gestionați fluxul live"
+            "broadcastingInProgress": "Difuzarea este în curs"
         },
         "audioSettings": {
             "dialogTitle": "Setari audio",
             "speakers": "Difuzoare",
             "microphone": "Microfon"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Gestionați difuzarea"
         },
         "participantsPopup": {
             "dialogTitle": "Setări pentru participanți",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Afișează partajarea ecranului"
         },
         "streamingSettings": {
-            "title": "Setări de streaming"
+            "title": "Transmitere live"
         },
         "preview": {
             "Meeting": "Teleconferinta",
             "MeetingEnded": "Teleconferința s-a încheiat"
         },
         "requestSpeakDialog": {
-            "msg": "În prezent, sunt {{count}} persoane care vorbesc în întâlnire. Doriți să înlocuiți unul dintre ele după ce le-ați lăsat {{seconds}} secunde pentru a termina de vorbit?",
-            "dialogTitle": "Cerere de a vorbi"
-        },
-        "fbLive": {
-            "dialogTitle": "A început fluxul live pe Facebook"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Gestionați difuzarea"
+            "dialogTitle": "Cerere de a vorbi",
+            "msg": "În prezent, la întâlnire vorbesc {{count}} de persoane. Doriți să înlocuiți unul dintre ele după ce le-ați lăsat {{seconds}} de secunde pentru a termina de vorbit?"
         }
     },
     "types": {
@@ -382,12 +403,12 @@
             "description": "corp mediu de text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Adresa de email",
-            "description": "adresa de email"
+            "displayType": "Adresa de e-mail",
+            "description": "Adresa de e-mail"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Numar de telefon",
-            "description": "numar de telefon"
+            "displayType": "Număr de telefon",
+            "description": "număr de telefon"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
@@ -436,7 +457,7 @@
         },
         "Streams\/participating": {
             "displayType": "Index de participare",
-            "description": "fluxurile sunt legate\/fără legătură cu aceasta atunci când un utilizator se alătură\/păreșește"
+            "description": "fluxurile sunt legate\/fără legătură cu aceasta atunci când un utilizator se alătură\/păreșează"
         },
         "Streams\/interest": {
             "displayType": "Interes",
@@ -451,8 +472,8 @@
             "description": "o conversație între utilizatori, cu istoric"
         },
         "Streams\/webrtc": {
-            "displayType": "Apel live",
-            "description": "un apel video\/audio în timp real"
+            "displayType": "Teleconferinta",
+            "description": "o conferință video\/audio online"
         },
         "Streams\/question": {
             "displayType": "Întrebare",
@@ -472,7 +493,7 @@
     "menu": {
         "placeholder": "introduceți titlul paginii",
         "ModTab": "Modificați elementul",
-        "Save": "salva",
+        "Save": "Salvați",
         "Delete": "Șterge",
         "Submenu": "Submeniu"
     },
@@ -485,13 +506,13 @@
         "upload": "Încărcați",
         "link": "Legătură",
         "setUrl": "Setați adresa URL",
-        "save": "salva",
+        "save": "Salvați",
         "setClip": "Clipul decupat",
         "invalidURL": "URL invalid",
         "invalidFile": "Fișier invalid",
         "errorNoSource": "Fără sursă audio",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este de {{size}}"
     },
     "video": {
         "reset": "Resetați",
@@ -501,13 +522,13 @@
         "upload": "Încărcați",
         "link": "Legătură",
         "setUrl": "Setați adresa URL",
-        "save": "salva",
+        "save": "Salvați",
         "setClip": "Clipul decupat",
         "invalidURL": "URL invalid",
         "invalidFile": "Fișier invalid",
         "errorNoSource": "Fără sursă video",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este de {{size}}"
     },
     "pdf": {
         "reset": "Resetați",
@@ -517,13 +538,13 @@
         "upload": "Încărcați",
         "link": "Legătură",
         "setUrl": "Setați adresa URL",
-        "save": "salva",
+        "save": "Salvați",
         "setClip": "Clipul decupat",
         "invalidURL": "URL invalid",
         "invalidFile": "Fișier invalid",
         "errorNoSource": "Fără sursă pdf",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este de {{size}}"
     },
     "image": {
         "reset": "Resetați",
@@ -533,7 +554,7 @@
         "upload": "Încărcați",
         "link": "Legătură",
         "setUrl": "Setați adresa URL",
-        "save": "salva",
+        "save": "Salvați",
         "uploadedImage": "Imagine încărcată",
         "imageTitle": "Titlul imaginii",
         "setClip": "Clipul decupat",
@@ -541,7 +562,7 @@
         "invalidFile": "Fișier invalid",
         "errorNoSource": "Nicio sursă de imagine",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este de {{size}}"
     },
     "questions": {
         "Questions": "Întrebări",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Răspuns întrebare",
         "SetYourAnswer": "Vă rugăm să răspundeți la întrebare",
         "NewQuestion": "Întrebare nouă",
+        "EditQuestion": "Editați întrebarea",
         "NewAnswer": "Răspuns nou",
+        "NewPossibleAnswer": "Răspuns posibil nou",
         "AnswerDetails": "Detalii de răspuns",
         "answerOption": "Opțiune",
         "answerOptionExclusive": "Exclusiv",
         "answerTextarea": "Textarea",
+        "answerText": "Text",
+        "HideUntilAnswered": "Ascunde până la răspuns",
+        "CantChangeAnswers": "Nu pot schimba răspunsurile",
         "FreeAnswer": "Scrie răspunsul tău aici",
         "SaveQuestion": "Salvați întrebarea",
         "SaveAnswer": "Salvați răspunsul",
-        "AddAnotherAnswer": "Adaugă un alt răspuns",
-        "ErrorAnswers": "Vă rugăm să adăugați chiar și un singur răspuns",
-        "AlreadyAnswered": "Deja a răspuns",
+        "Save": "Salvați",
+        "Send": "Trimite",
+        "TitleRequired": "Titlul necesar!",
+        "AlreadyAnswered": "Deja răspuns",
         "TitlePlaceholder": "Introduceți întrebarea dvs",
         "ContentPlaceholder": "Pune orice informații suplimentare aici pentru a ajuta oamenii să răspundă",
         "ErrorTitle": "Întrebare necesară",
         "Placeholder": "Substituent",
-        "EditQuestion": "Editați întrebarea",
-        "NewPossibleAnswer": "Răspuns posibil nou",
-        "answerText": "Text",
-        "HideUntilAnswered": "Ascunde până la răspuns",
-        "CantChangeAnswers": "Nu pot schimba răspunsurile",
-        "Save": "Salvați",
-        "Send": "Trimite",
-        "TitleRequired": "Titlul necesar!",
         "AreYouSure": "Esti sigur?"
     },
     "experience": {
@@ -588,30 +607,10 @@
         "WaitingRoom": "Sală de așteptare",
         "LiveRoom": "Sala Live",
         "interviewedByAnotherHost": "În prezent este intervievat de o altă gazdă",
-        "bringToLive": "Bring To Live Show",
+        "bringToLive": "Emisiune Bring To Live",
         "putOnHold": "Pus în așteptare",
         "endCall": "Terminare apel",
         "interview": "Interviu",
         "markApproved": "Marcați aprobat"
-    },
-    "identifier": {
-        "private": "Privat",
-        "public": "Public",
-        "configurationSaved": "Configurație salvată",
-        "error": "Ceva n-a mers bine",
-        "privacySettings": "Setările de confidențialitate"
-    },
-    "avatar": {
-        "firstName": "Nume",
-        "lastName": "nume",
-        "username": "nume de utilizator"
-    },
-    "login": {
-        "prompt": "Lasă prietenii să te recunoască:",
-        "newUser": "sau creați un cont nou mai jos",
-        "picTooltip": "Puteți schimba această imagine mai târziu",
-        "placeholder": {
-            "fullName": "Introduceți numele dvs. complet"
-        }
     }
 }

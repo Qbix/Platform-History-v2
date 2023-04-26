@@ -1,8 +1,8 @@
 {
-    "LatLng": "({999} lat፣ {{2}} lng)",
+    "LatLng": "( {{1}} ላት፣ {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({1000})",
-        "Title": "በ{999} ውስጥ"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "በ {{1}}"
     },
     "units": {
         "meter": "ሜትር",
@@ -18,10 +18,10 @@
         "inches": "ኢንች"
     },
     "location": {
-        "interested": "በ{999} ውስጥ በሚከናወኑ ነገሮች ላይ ፍላጎት አለኝ",
+        "interested": "በ {{select}} ውስጥ በሚከናወኑ ነገሮች ላይ ፍላጎት አለኝ",
         "update": "የእኔን አካባቢ አዘምን",
         "set": "አካባቢዬን አቀናብር",
-        "prompt": "{{ClickOrTap}} እዚህ ለ<br> የእርስዎን<br> አካባቢ",
+        "prompt": "{{ClickOrTap}} እዚህ ወደ<br> የእርስዎን<br> አካባቢ",
         "myCurrentLocation": "አሁን ያለኝ ቦታ",
         "enterAddress": "አድራሻ አስገባ",
         "enterPostcode": "እባክዎ የፖስታ ኮድዎን \/ ዚፕ ኮድዎን ያስገቡ",
@@ -42,7 +42,7 @@
             "ok": "አስቀምጥ"
         },
         "dialog": {
-            "title": "ቦታ ይምረጡ"
+            "title": "አካባቢ ይምረጡ"
         }
     },
     "areas": {
@@ -81,7 +81,7 @@
             "displayType": "በቦታዎች አቅራቢያ"
         },
         "Places\/interest": {
-            "description": "በተወሰነ የጂኦሃሽ ርቀት ውስጥ ያሉ ነገሮች ምድብ፣ ከፍላጎት ጋር የሚዛመድ",
+            "description": "በጂኦሃሽ የተወሰነ ርቀት ውስጥ ያሉ ነገሮች፣ ከፍላጎት ጋር የሚዛመድ ምድብ",
             "displayType": "ቦታዎች ፍላጎት"
         }
     }

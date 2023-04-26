@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} latitud, {{2}} longitud)",
+    "LatLng": "( {{1}} latitud, {{2}} longitud)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "dentro de {{1}}"
     },
     "units": {
@@ -18,7 +18,7 @@
         "inches": "pulgadas"
     },
     "location": {
-        "interested": "Estoy interesado en cosas que suceden dentro de {{select}} de",
+        "interested": "Estoy interesado en las cosas que suceden dentro de {{select}} de",
         "update": "Actualizar mi ubicación",
         "set": "Establecer mi ubicación",
         "prompt": "{{ClickOrTap}} aquí para<br> establecer su<br> ubicación",
@@ -33,7 +33,7 @@
         "confirm": {
             "title": "¿Guardar esta ubicación?",
             "message": "¿Piensa volver a utilizar esta ubicación en el futuro?",
-            "ok": "sí",
+            "ok": "Sí",
             "cancel": "No"
         },
         "add": {
@@ -73,7 +73,7 @@
             "displayType": "Piso"
         },
         "Places\/column": {
-            "description": "Representa una columna en un edificio o barco.",
+            "description": "Representa una columna en un edificio o nave.",
             "displayType": "Columna"
         },
         "Places\/nearby": {

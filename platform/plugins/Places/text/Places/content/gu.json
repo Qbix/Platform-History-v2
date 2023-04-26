@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} અક્ષાંશ, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "{{1}} ની અંદર"
     },
     "units": {
@@ -21,7 +21,7 @@
         "interested": "મને {{select}} ની અંદર થતી વસ્તુઓમાં રસ છે",
         "update": "મારું સ્થાન અપડેટ કરો",
         "set": "મારું સ્થાન સેટ કરો",
-        "prompt": "{{ClickOrTap}} અહીં સુધી<br> તમારા સેટ કરો<br> સ્થાન",
+        "prompt": "{{ClickOrTap}} અહીંથી<br> તમારા સેટ કરો<br> સ્થાન",
         "myCurrentLocation": "મારું વર્તમાન સ્થાન",
         "enterAddress": "સરનામું દાખલ કરો",
         "enterPostcode": "કૃપા કરીને તમારો પોસ્ટકોડ \/ પિનકોડ દાખલ કરો",
@@ -61,7 +61,7 @@
             "displayType": "સ્થાનો"
         },
         "Places\/location": {
-            "description": "બિલ્ડિંગ, સ્થળ, જહાજ, પાર્ક, વગેરેનું પ્રતિનિધિત્વ કરે છે.",
+            "description": "ઇમારત, સ્થળ, જહાજ, પાર્ક, વગેરેનું પ્રતિનિધિત્વ કરે છે.",
             "displayType": "સ્થાન"
         },
         "Places\/area": {

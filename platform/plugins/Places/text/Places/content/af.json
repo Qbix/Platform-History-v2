@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} ng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "binne {{1}}"
     },
     "units": {
@@ -20,7 +20,8 @@
     "location": {
         "interested": "Ek stel belang in dinge wat plaasvind binne {{select}} van",
         "update": "Dateer my ligging op",
-        "prompt": "{{ClickOrTap}} hier om<br> stel jou<br> ligging",
+        "set": "Stel My ligging",
+        "prompt": "{{ClickOrTap}} hiernatoe<br> stel jou<br> ligging",
         "myCurrentLocation": "My huidige ligging",
         "enterAddress": "Voer &#39;n adres in",
         "enterPostcode": "Voer asseblief jou poskode\/poskode in",
@@ -42,8 +43,7 @@
         },
         "dialog": {
             "title": "Kies Ligging"
-        },
-        "set": "Stel my ligging"
+        }
     },
     "areas": {
         "filterPlaceholder": "Enige area binne hierdie ligging?",

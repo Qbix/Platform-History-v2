@@ -319,11 +319,11 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	static function transfer($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
-		$amount = (int)$amount;
+		$amount = floatval($amount);
 		if ($amount <= 0) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'amount',
-				'type' => 'integer'
+				'type' => 'positive number'
 			));
 		}
 
@@ -519,15 +519,15 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	static function convert($amount, $fromCurrency, $toCurrency)
 	{
-		$amount = (float)$amount;
+		$amount = floatval($amount);
 		if ($fromCurrency == $toCurrency) {
 			return $amount;
 		} elseif ($fromCurrency == "credits") {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $toCurrency);
-			$amount = ceil($amount / $rate);
+			$amount = $amount / $rate;
 		} else {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $fromCurrency);
-			$amount = ceil($amount * $rate);
+			$amount = $amount * $rate;
 		}
 
 		return $amount;

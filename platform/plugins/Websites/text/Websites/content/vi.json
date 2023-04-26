@@ -11,63 +11,63 @@
             },
             "interests": {
                 "Title": "Lọc theo sở thích",
-                "FilterInterests": "Bắt đầu nhập sở thích ..."
+                "FilterInterests": "Bắt đầu nhập sở thích..."
             },
             "Interest": "Quan tâm",
-            "Location": "Địa điểm"
+            "Location": "Vị trí"
         }
     },
     "webpage": {
         "composer": {
             "Go": "Đi",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Duyệt qua",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "duyệt",
             "WriteToStartConversation": "Viết suy nghĩ của bạn để bắt đầu cuộc trò chuyện",
             "StartConversation": "Bắt đầu cuộc trò chuyện",
-            "GotoConversation": "Đi tới Cuộc trò chuyện",
+            "GotoConversation": "Chuyển đến Cuộc trò chuyện",
             "reset": "Cài lại",
             "edit": "Biên tập",
-            "link": "Liên kết",
+            "link": "liên kết",
             "setUrl": "Đặt URL",
             "save": "Cứu",
-            "setClip": "Cắt ra Clip",
+            "setClip": "Cắt Clip",
             "invalidURL": "URL không hợp lệ"
         },
         "FileTooLarge": "Tệp quá lớn để lưu vào bộ nhớ đệm. Kích thước tệp tối đa {{size}}",
-        "InvalidPDF": "Tệp không phải là PDF hợp lệ",
-        "StartTypingTitleOrKeywords": "Bắt đầu nhập tiêu đề hoặc từ khóa ..."
+        "InvalidPDF": "Tệp không phải là tệp PDF hợp lệ",
+        "StartTypingTitleOrKeywords": "Bắt đầu nhập tiêu đề hoặc từ khóa..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Một tài liệu HTML mà nhiều người dùng khác nhau có thể xem và chỉnh sửa",
-            "displayType": "Bài viết"
+            "description": "Một tài liệu HTML mà nhiều người dùng có thể xem và chỉnh sửa",
+            "displayType": "Bài báo"
         },
         "Websites\/slide": {
-            "description": "Trang trình bày trong bản trình bày, có thể bao gồm HTML, âm thanh, v.v.",
-            "displayType": "Trượt"
+            "description": "Một slide trong bản trình bày, có thể bao gồm HTML, âm thanh, v.v.",
+            "displayType": "Cầu trượt"
         },
         "Websites\/presentation": {
-            "description": "Một bản trình bày bao gồm các trang trình bày khác nhau",
+            "description": "Một bài thuyết trình bao gồm các slide khác nhau",
             "displayType": "Bài thuyết trình"
         },
         "Websites\/advert\/unit": {
             "description": "Một đơn vị quảng cáo trên một trang web",
-            "displayType": "Đơn vị quảng cáo"
+            "displayType": "đơn vị quảng cáo"
         },
         "Websites\/advert\/placement": {
-            "description": "Một cách nhóm các đơn vị quảng cáo dưới một tên",
-            "displayType": "Advert vị trí"
+            "description": "Một cách nhóm các đơn vị quảng cáo dưới một cái tên",
+            "displayType": "Vị trí quảng cáo"
         },
         "Websites\/advert\/creative": {
             "description": "Nội dung cho một quảng cáo",
-            "displayType": "Advert quảng cáo"
+            "displayType": "Quảng cáo sáng tạo"
         },
         "Websites\/advert\/campaign": {
             "description": "Một chiến dịch quảng cáo",
-            "displayType": "Advert chiến dịch"
+            "displayType": "chiến dịch quảng cáo"
         },
         "Websites\/webpage": {
-            "description": "Trình bày một trang web có siêu dữ liệu đã được thu thập",
+            "description": "Đại diện cho một trang web có siêu dữ liệu đã bị loại bỏ",
             "displayType": "trang web"
         }
     }

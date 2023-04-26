@@ -112,7 +112,9 @@ class   Q_Translate_Google {
 			}
 			$j = 0;
 			foreach($matches[0] as $search) {
-				$v['value'] = str_replace($search, "{{" . ($j + $startNumber) . "}}", $v['value']);
+				$index = $j + $startNumber;
+				$text = "<i translate='no'>$index</i>";
+				$v['value'] = str_replace($search, $text, $v['value']);
 				$v['value'];
 				$j++;
 			}
@@ -128,8 +130,10 @@ class   Q_Translate_Google {
 			}
 			$j = 0;
 			foreach($d['tags'] as $tag) {
-				$d['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $d['value']);
-				$d['value'] = str_replace("({" . ($j + $startNumber) . "}}", $tag, $d['value']);
+				$index = $j + $startNumber;
+				$text = "<i translate='no'>$index</i>";
+				$d['value'] = str_replace($text, $tag, $d['value']);
+				$d['value'] = str_replace($text, $tag, $d['value']);
 				$j++;
 			}
 		};
@@ -270,5 +274,8 @@ class   Q_Translate_Google {
 		));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
 	}
+
+	public $apiKey;
+	public $parent;
 
 }
