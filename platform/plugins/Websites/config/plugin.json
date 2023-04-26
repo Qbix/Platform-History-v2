@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Websites": {
-				"version": "1.0.5",
+				"version": "1.0.6",
 				"compatible": "0.8",
 				"requires": {"Streams": "1.0"},
 				"connections": ["Users", "Streams", "Websites"]
@@ -55,6 +55,25 @@
 				"86400": {
 					"": 10,
 					"Users/admins": 1000
+				}
+			}
+		},
+		"communities": {
+			"roles": {
+				"Users/owners": {
+					"canGrant": ["Websites/admins"],
+					"canRevoke": ["Websites/admins"],
+					"canSee": ["Websites/admins"]
+				},
+				"Users/admins": {
+					"canGrant": ["Websites/admins"],
+					"canRevoke": ["Websites/admins"],
+					"canSee": ["Websites/admins"]
+				},
+				"Websites/admins": {
+					"canGrant": ["Websites/admins"],
+					"canRevoke": ["Websites/admins"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Websites/admins"]
 				}
 			}
 		}

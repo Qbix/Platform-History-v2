@@ -6,7 +6,7 @@
 .Users_labels_action { white-space: nowrap; }
 .Users_labels_active .Users_labels_label,
 .Users_labels_active .Users_labels_action.Users_labels_add,
-.Users_labels_action button { margin-top: 10px; width: 100%; }
+.Users_labels_action button { margin-top: 10px; }
 .Users_labels_tool ul {
     display: flex;
     flex-wrap: wrap;

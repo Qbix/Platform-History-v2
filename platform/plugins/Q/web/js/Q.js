@@ -13779,8 +13779,10 @@ Q.Dialogs = {
 		if (dontTriggerClose === undefined) {
 			dontTriggerClose = false;
 		}
-		
-		var $dialog = this.dialogs.pop();
+
+		var $dialog = this.dialogs[this.dialogs.length - 1];
+		$dialog = this.dialogs.pop();
+
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].removeClass('Q_hide');
 		}
@@ -13821,7 +13823,10 @@ Q.Dialogs = {
 			});
 		}
 		if (index >= 0) {
-			this.dialogs.splice(index, 1);
+			if (index < this.dialogs.length-1) {
+				Q.Dialogs.dontPopOnClose = true;
+				this.dialogs.splice(index, 1);
+			}
 			$(dialog).plugin('Q/dialog', 'close');
 			return dialog;
 		}
