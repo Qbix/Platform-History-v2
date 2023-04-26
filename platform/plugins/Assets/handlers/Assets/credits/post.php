@@ -9,7 +9,7 @@ function Assets_credits_post($params = array())
 	$amount = (float)$req['amount'];
 	$credits = (int)Assets_Credits::amount($loggedUserId);
 	$currency = $req['currency'];
-	$needCredits = (int)Assets_Credits::convert($amount, $currency, "credits");
+	$needCredits = Assets_Credits::convert($amount, $currency, "credits");
 	$payments = Q::ifset($req, "payments", "stripe");
 
 	if ($credits < $needCredits) {
