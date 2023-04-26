@@ -55,7 +55,12 @@ Q.text.Streams = {
 		}
 	},
 	chat: {
-		noMessages: ""
+		noMessags: "",
+		noOneSaid: "No messages yet",
+		placeholders: {
+			"Public": "Add a comment",
+			"Private": "Write a private message"
+		}
 	},
 	followup: {
 		mobile: {
@@ -2879,7 +2884,7 @@ Sp.getAllAttributes = function _Stream_prototype_getAllAttributes (usePending) {
  * @return {Mixed}
  */
 Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePending) {
-	return (attributeName in this.pendingAttributes)
+	return (usePending && attributeName in this.pendingAttributes)
 		? this.pendingAttributes[attributeName]
 		: this.attributes[attributeName];
 };
