@@ -146,8 +146,19 @@ function Assets_grant_credits_for_invited_users ($params) {
 		return;
 	}
 
+	$displayName = array();
+	foreach (array("Streams/user/firstName", "Streams/user/lastName") as $streamName) {
+		if ($stream->name == $streamName) {
+			$displayName[] = $stream->content;
+		} else {
+			try {
+				$displayName[] = Streams::fetchOne($invitedUser->id, $invitedUser->id, $streamName)->content;
+			} catch (Exception $e) {}
+		}
+	}
+
 	Assets_Credits::grant($credits, "InvitedUserFilledStream", $inviteRow->invitingUserId, array(
-		'invitedUserName' => $invitedUser->displayName(array('asUserId' => $inviteRow->invitingUserId)),
+		'invitedUserName' => implode(" ", $displayName),
 		'FilledStreamTitle' => $stream->title
 	));
 }
