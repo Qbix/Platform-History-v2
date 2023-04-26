@@ -15600,7 +15600,7 @@ Q.Notices = {
 	add: function(options)
 	{
 		if (!this.container instanceof HTMLElement) {
-			throw new Error("Q.Notices.add: Notices container element don't exists.");
+			throw new Error("Q.Notices.add: Notices container element doesn't exist.");
 		}
 
 		// default options
@@ -15669,7 +15669,7 @@ Q.Notices = {
 		setTimeout(function () {
 			Q.Notices.show(li);
 			var element = document.getElementById('notices_slot');
-			element && (element.style.zIndex = Q.zIndexTopmost() + 1);
+			element && (element.style.zIndex = Q.zIndexTopmost(this.container) + 1);
 			if (!o.persistent) {
 				return;
 			}
