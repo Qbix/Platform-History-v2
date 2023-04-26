@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Връзка за популяризиране",
+                "link": "Линк за популяризиране",
                 "startDate": "Начална дата",
                 "startTime": "Начален час",
                 "endDate": "Крайна дата",
@@ -13,7 +13,7 @@
                 "Title": "Филтриране по интерес",
                 "FilterInterests": "Започнете да пишете интерес..."
             },
-            "Interest": "Интерес",
+            "Interest": "интерес",
             "Location": "Местоположение"
         }
     },
@@ -24,26 +24,26 @@
             "BrowseTheWeb": "Прегледайте",
             "WriteToStartConversation": "Напишете вашите мисли, за да започнете разговора",
             "StartConversation": "Започнете разговор",
-            "GotoConversation": "Отидете в Разговор",
+            "GotoConversation": "Отидете на Разговор",
             "reset": "Нулиране",
             "edit": "редактиране",
             "link": "Връзка",
-            "setUrl": "Задайте URL",
-            "save": "Запазете",
-            "setClip": "Изрежете клипс",
+            "setUrl": "Задаване на URL",
+            "save": "Запазване",
+            "setClip": "Изрежете клип",
             "invalidURL": "невалиден адрес"
         },
         "FileTooLarge": "Файлът е твърде голям за кеширане. Максимален размер на файла {{size}}",
         "InvalidPDF": "Файлът не е валиден PDF",
-        "StartTypingTitleOrKeywords": "Започнете да пишете заглавие или ключови думи..."
+        "StartTypingTitleOrKeywords": "Започнете да въвеждате заглавие или ключови думи..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML документ, който различни потребители могат да разглеждат и редактират",
-            "displayType": "член"
+            "description": "HTML документ, който различни потребители могат да преглеждат и редактират",
+            "displayType": "статия"
         },
         "Websites\/slide": {
-            "description": "Слайд в презентация може да включва HTML, аудио и др.",
+            "description": "Слайд в презентация, може да включва HTML, аудио и др.",
             "displayType": "пързалка"
         },
         "Websites\/presentation": {
@@ -52,11 +52,11 @@
         },
         "Websites\/advert\/unit": {
             "description": "Рекламна единица в уебсайт",
-            "displayType": "Рекламен блок"
+            "displayType": "Рекламна единица"
         },
         "Websites\/advert\/placement": {
             "description": "Начин за групиране на рекламни единици под име",
-            "displayType": "Поставяне на реклама"
+            "displayType": "Поставяне на реклами"
         },
         "Websites\/advert\/creative": {
             "description": "Съдържание за реклама",
@@ -67,7 +67,7 @@
             "displayType": "Рекламна кампания"
         },
         "Websites\/webpage": {
-            "description": "Представлява уебсайт, чиито метаданни са били изтъркани",
+            "description": "Представлява уебсайт, чиито метаданни са изкопани",
             "displayType": "уеб страница"
         }
     }

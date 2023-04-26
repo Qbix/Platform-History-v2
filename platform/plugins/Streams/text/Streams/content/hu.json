@@ -6,6 +6,11 @@
     "preview": {
         "NewItemTitle": "Új elem"
     },
+    "avatar": {
+        "firstName": "keresztnév",
+        "lastName": "vezetéknév",
+        "username": "felhasználónév"
+    },
     "labels": {
         "Streams\/invited": "Emberek, akiket meghívtam",
         "Streams\/invitedMe": "Aki meghívott",
@@ -13,8 +18,16 @@
         "Yes": "Igen",
         "No": "Nem"
     },
+    "login": {
+        "prompt": "Hagyd, hogy barátaid felismerjenek:",
+        "newUser": "vagy hozzon létre egy új fiókot alább",
+        "picTooltip": "Ezt a képet később megváltoztathatja",
+        "placeholder": {
+            "fullName": "Add meg a teljes neved"
+        }
+    },
     "interests": {
-        "Filter": "Mik érdekelnek?",
+        "Filter": "Keresési érdeklődési körök",
         "CanGrant": "Ha még mindig nem találja, amit keres, az alábbiakban hozzáadhat egy új érdeklődési kört:",
         "TrySynonyms": "Nem látod? Próbáljon ki néhány szinonimát.",
         "AddUnderCategory": "Hozzáadás a kategória alatt...",
@@ -28,97 +41,55 @@
         "closeChatConfirmTitle": "Bezárja ezt a csevegést?",
         "closeChatConfirm": "Biztosan bezárja ezt a csevegést?",
         "Subscribed": "Értesítések engedélyezve",
-        "Unsubscribed": "Értesítések elnémítva",
+        "Unsubscribed": "Értesítések némítva",
         "closeChatConfirmYes": "Igen",
         "closeChatConfirmNo": "Nem",
-        "earlierComments": "korábbi megjegyzések",
+        "earlierComments": "korábbi hozzászólások",
         "startedConversation": "beszélgetésbe kezdett",
         "RealTimeCall": "Valós idejű hívás",
+        "JoinWebRTC": "Telekonferencia",
         "SearchByName": "Keresés név szerint",
         "Notifications": {
-            "Visit": "{{displayName}} felkeresi a csevegést",
-            "Join": "{{displayName}} csatlakozott a csevegéshez",
+            "Visit": "{{displayName}} látogatja a chat",
+            "Join": "{{displayName}} csatlakozott a chathez",
             "Leave": "{{displayName}} kilépett a csevegésből",
-            "RelatedTo": "{{displayName}} elindított egy {{stream.displayType}}"
+            "RelatedTo": "{{displayName}} {{stream.displayType}} et indított"
         },
-        "JoinWebRTC": "Telekonferencia"
+        "placeholders": {
+            "Public": "Hozzászólni",
+            "Private": "Írj privát üzenetet"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "kezelheti e-mail-feliratkozásait",
         "IfUnsubscribe": "Ha le szeretne iratkozni",
-        "*": "Üzenet {{& message.fields.type}} címre: {{& stream.fields.title}}",
+        "*": "{{& stream.fields.title}} {{& message.fields.type}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} en csatlakoztak",
+        "Streams\/left": "{{&call 'avatar.displayName'}} maradt",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} azt mondta: {{& message.content}}",
-        "Streams\/changed": "Változások a következőben: {{stream.fields.title}}",
-        "Streams\/invite": "Meghívtak a következőre: {{& stream.fields.title}}",
-        "Streams\/announcement": "Bejelentés itt: {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} megváltoztatta a hozzáférést itt: {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "A csevegőüzenet szerkesztve itt: {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "A csevegőüzenet eltávolítva itt: {{& stream.fields.title}}",
+        "Streams\/changed": "Változások {{stream.fields.title}} -ben",
+        "Streams\/invite": "Meghívást kaptál {{& stream.fields.title}}",
+        "Streams\/announcement": "Bejelentés {{& stream.fields.title}} -ben",
+        "Streams\/access": "{{&call 'avatar.displayName'}} hozzáférést változtatott {{& stream.fields.title}} ben",
+        "Streams\/chat\/edit": "{{& stream.fields.title}} ben szerkesztett csevegőüzenet",
+        "Streams\/chat\/remove": "A csevegőüzenet {{& stream.fields.title}} -ben eltávolítva",
         "Streams\/closed": "{{stream.fields.title}} bezárva",
-        "Streams\/task\/progress": "Előrelépés a következő napon: {{stream.fields.title}}",
-        "Streams\/task\/complete": "Feladat befejezve: {{stream.fields.title}}",
+        "Streams\/task\/progress": "Előrelépés {{stream.fields.title}} -ben",
+        "Streams\/task\/complete": "Feladat teljesítve: {{stream.fields.title}}",
         "Streams\/task\/error": "Hiba közben: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Bejövő üzenet",
-        "Streams\/relatedTo\/Streams\/call": "Új hívás indult: {{toTitle}}",
-        "Streams\/relatedTo\/*": "Új {{relationDisplayType}} itt: {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Hozzáadva a következőhöz: {{toTitle}} mint {{relationDisplayType}}",
+        "Streams\/incoming\/*": "{{app}} : Bejövő üzenet",
+        "Streams\/relatedTo\/Streams\/call": "Új felhívás {{toTitle}} -ben indult",
+        "Streams\/relatedTo\/*": "Új {{relationDisplayType}} az {{toTitle}} -ben",
+        "Streams\/relatedFrom\/*": "{{toTitle}} hez hozzáadva {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} megemlített egy megjegyzésben",
-        "Streams\/call": "{{displayName}} valós idejű hívást indított",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} csatlakozott",
-        "Streams\/left": "{{&call 'avatar.displayName'}} maradt"
+        "Streams\/call": "A {{displayName}} valós idejű hívást indított"
     },
     "invite": {
-        "command": "Meghívás",
-        "messageContent": "{{displayName}} meghívta Önt ide: {{inviteUrl}}",
+        "command": "Meghív",
+        "Invite": "Meghív",
+        "Share": "Ossza meg",
+        "messageContent": "{{displayName}} meghívott az {{inviteUrl}}",
         "youCanNowPaste": "Most már beillesztheti ezt a linket valahova emberek meghívásához",
-        "dialog": {
-            "chooseFromContacts": "Válasszon a Névjegyek közül",
-            "chooseAgainFromContacts": "Válassza újra a Névjegyek közül",
-            "inviteSelectedContacts": "A kiválasztott névjegyek meghívása",
-            "selectFromContacts": "Válassza a Névjegyekből lehetőséget",
-            "userChooserPlaceholder": "Keresés név szerint",
-            "photo": "Fotózd le",
-            "photoInstruction": "Ha a QR-kódot beolvasó személy előtted van, készíts róla fényképet",
-            "to": "Címzett: {{Stream Title}}",
-            "go": "Megy",
-            "title": "Meghívás",
-            "placeholder": "Mobilszám vagy email cím",
-            "orInvite": "Vagy hívjon meg embereket a következő használatával:",
-            "copyLink": "{{ClickOrTap}} a meghívólink másolásához",
-            "shareOrCopyLink": "{{ClickOrTap}} a meghívólink megosztásához vagy másolásához",
-            "QR": "{{ClickOrTap}} QR-kód generálásához",
-            "QRtitle": "Olvassa be ezt a QR-kódot",
-            "QRscanned": "Beszkennelték!",
-            "scannedQR": "{{ClickOrTap}}, ha a kód beolvasásra került",
-            "byEmail": "Email",
-            "byText": "Szöveg",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "title2": "Emberek meghívása",
-            "chooseMethod": "Válasszon egy módszert:",
-            "selectContacts": "Válassza a Névjegyek lehetőséget",
-            "scanQRCode": "QR kód beolvasása",
-            "shareLink": "Link megosztása",
-            "chooseFromRegistered": "Válasszon a regisztrált felhasználók közül",
-            "inviteViaEmailOrSms": "Meghívás e-mailben vagy SMS-ben"
-        },
-        "email": {
-            "subject": "Hé, ezt nézd meg",
-            "PleaseVisitLink": "Kérjük, látogasson el az alábbi linkre:",
-            "InvitingYou": "Meghívlak a következőre: {{title}}",
-            "HasInvitedYou": "{{displayName}} meghívta Önt ide: {{title}}",
-            "HasMentionedYou": "{{displayName}} megemlített téged a következőben: &quot;{{title}}&quot;",
-            "YOUAREINVITED": "MEG VAGY HÍVVA!",
-            "AcceptInvite": "Meghívás elfogadása"
-        },
-        "sms": {
-            "content": "Meghívtak a következőre: {{title}}. Kérjük, érintse meg a {{url}}"
-        },
-        "notice": {
-            "text": "Meghívták. {{ClickOrTap}} itt az elfogadáshoz és a csatlakozáshoz."
-        },
-        "Invite": "Meghívás",
-        "Share": "Részvény",
         "roles": {
             "title": "Szerepeket biztosít a meghívott felhasználóknak?",
             "NotAuthorizedToGrantRole": {
@@ -133,47 +104,97 @@
         "labels": {
             "title": "Milyen a kapcsolatod?"
         },
+        "dialog": {
+            "chooseFromContacts": "Válasszon a Névjegyek közül",
+            "chooseAgainFromContacts": "Válassza újra a Névjegyek közül",
+            "inviteSelectedContacts": "A kiválasztott névjegyek meghívása",
+            "selectFromContacts": "Válassza a Névjegyekből lehetőséget",
+            "userChooserPlaceholder": "Keresés név szerint",
+            "photo": "Fotózd le",
+            "photoOf": "Készítsen fényképet {{name}} -ről",
+            "photoInstruction": "Ha a QR-kódot beolvasó személy előtted van, készíts róla fényképet",
+            "to": "Címzett: {{Stream Title}}",
+            "go": "Megy",
+            "title": "Meghív",
+            "placeholder": "Mobilszám vagy email cím",
+            "orInvite": "Vagy hívjon meg másokat a következő használatával:",
+            "copyLink": "{{ClickOrTap}} a meghívó link másolásához",
+            "shareOrCopyLink": "{{ClickOrTap}} a meghívólink megosztásához vagy másolásához",
+            "QR": "{{ClickOrTap}} QR-kód generálásához",
+            "QRtitle": "Olvassa be ezt a QR-kódot",
+            "QRscanned": "Beszkennelték!",
+            "scannedQR": "{{ClickOrTap}} , ha a kód beolvasásra került",
+            "byEmail": "Email",
+            "byText": "Szöveg",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "title2": "Emberek meghívása",
+            "chooseMethod": "Válasszon egy módszert:",
+            "selectContacts": "Válassza a Névjegyek lehetőséget",
+            "scanQRCode": "QR kód beolvasása",
+            "shareLink": "Link megosztása",
+            "chooseFromRegistered": "Válasszon a regisztrált felhasználók közül",
+            "inviteViaEmailOrSms": "Meghívás e-mailben vagy SMS-ben"
+        },
         "complete": {
+            "WelcomeToCommunity": "Üdvözöljük a {{communityName}} -ben",
             "HasInvitedYou": "meghívott téged a következőkre:",
-            "WelcomeToCommunity": "Üdvözöljük itt: {{communityName}}",
             "HasInvitedYouToTheirProfile": "meghívta Önt, hogy csatlakozzon.",
             "prompt": "Hagyd, hogy barátaid felismerjenek:",
             "accept": "Meghívás elfogadása"
+        },
+        "email": {
+            "subject": "Hé, ezt nézd meg",
+            "PleaseVisitLink": "Kérjük, látogasson el az alábbi linkre:",
+            "InvitingYou": "Meghívlak a {{title}}",
+            "HasInvitedYou": "{{displayName}} meghívott az {{title}}",
+            "HasMentionedYou": "{{displayName}} említett téged az &quot; {{title}} &quot;-ben",
+            "YOUAREINVITED": "MEG VAGY HÍVVA!",
+            "AcceptInvite": "Meghívás elfogadása"
+        },
+        "sms": {
+            "content": "Meghívást kapott {{title}} . Kérjük, érintse meg {{url}}"
+        },
+        "notice": {
+            "text": "Meghívták. {{ClickOrTap}} ide, hogy elfogadja és csatlakozzon."
         }
     },
     "messages": {
         "html": {
-            "posted": "közzétett egy <em>{{message.fields.type}}<\/em> üzenetet a következőnek: {{stream.fields.title}}"
+            "posted": "<em>{{message.fields.type}}<\/em> üzenetet írt az {{stream.fields.title}} re"
         },
         "text": {
             "commentedOn": "kommentálta",
             "startedCallIn": "hívást indított",
             "in": "ban ben",
-            "body": "itt: {{& url}}: {{& message.fields.content}}",
+            "body": "{{& url}} : {{& message.fields.content}} ben",
             "relatedFrom": {
                 "hasBeenPostedTo": "elküldve ide",
-                "byAvatar": "szerző: {{avatar.displayName}}"
+                "byAvatar": "{{avatar.displayName}} -ig"
             },
             "relatedTo": {
                 "hasANew": "van egy új {{instructions.fromDisplayType}}",
-                "byAvatar": "hozzáadta: {{avatar.displayName}}"
+                "byAvatar": "hozzáadta {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "A meghívókat a mi számunkról küldjük, amelyeket ismerősei még nem ismernek fel. Kövesse egy gyors szöveges üzenetet, amelyben tudatja velük, hogy a meghívó Öntől érkezett, és kéri meg őket, hogy kattintson a linkre.",
-            "confirm": "A meghívókat a mi számunkról küldjük, amelyeket ismerősei még nem ismernek fel. Szeretne egy gyors üzenetet küldeni, amelyben tudatja velük, hogy a meghívó Öntől érkezett, és megkéri őket, hogy kattintson a linkre.",
+            "alert": "A meghívókat a mi számunkról küldjük, amelyeket ismerősei még nem ismernek fel. Kövesse egy gyors szöveges üzenetet, amelyben tudatja velük, hogy Öntől érkezett meghívó, és kéri meg őket, hogy kattintson a linkre.",
+            "confirm": "A meghívókat a mi számunkról küldjük, amelyeket ismerősei még nem ismernek fel. Szeretne egy gyors szöveget küldeni, amelyben tudatja velük, hogy Öntől érkezett a meghívó, és megkéri őket, hogy kattintson a linkre.",
             "check": "Hé, most küldtem egy meghívót a {{app}} alkalmazásba. Kérjük, nézze meg sms-ét és kattintson a linkre!",
             "CheckYourMobile": "Kérjük, ellenőrizze az SMS-t, és kövesse az utasításokat!"
         },
         "email": {
-            "alert": "A meghívókat a mi domainünkből küldjük, amelyeket az ismerősei még nem ismernek fel. Kövesse egy gyors szöveges üzenetet, amelyben tudatja velük, hogy a meghívó Öntől érkezett, és kéri meg őket, hogy kattintson a linkre.",
-            "confirm": "A meghívókat a mi domainünkből küldjük, amelyeket az ismerősei még nem ismernek fel. Szeretne egy gyors üzenetet küldeni, amelyben tudatja velük, hogy a meghívó Öntől érkezett, és megkéri őket, hogy kattintson a linkre.",
+            "alert": "A meghívókat a mi domainünkből küldjük, amelyeket az ismerősei még nem ismernek fel. Kövesse egy gyors szöveges üzenetet, amelyben tudatja velük, hogy Öntől érkezett meghívó, és kéri meg őket, hogy kattintson a linkre.",
+            "confirm": "A meghívókat a mi domainünkből küldjük, amelyeket az ismerősei még nem ismernek fel. Szeretne egy gyors szöveget küldeni, amelyben tudatja velük, hogy Öntől érkezett a meghívó, és megkéri őket, hogy kattintson a linkre.",
             "subject": "Kaptál meghívót?",
             "body": "Hé, most küldtem egy meghívót a {{app}} alkalmazásba. Kérjük, ellenőrizze e-mailjeit, és kattintson az ott található linkre!",
             "CheckYourEmail": "Kérjük, ellenőrizze e-mailjeit, és kövesse az utasításokat!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Adatvédelmi beállítások"
     },
     "participating": {
         "Title": "Cím",
@@ -190,7 +211,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Nincs engedélye, hogy csatlakozzon ehhez a falhoz.",
-        "streamTitle": "{{1}} telekonferenciát indított",
+        "streamTitle": "{{1}} Telekonferenciát indított",
         "allow": {
             "dialogTitle": "Csatlakozás",
             "microphoneBtn": "Mikrofon engedélyezése",
@@ -198,68 +219,71 @@
             "cameraAndMicrophoneBtn": "Kamera és mikrofon engedélyezése"
         },
         "preparing": {
+            "dialogTitle": "Csatlakozás előtt kapcsolja be\/ki a kamerát vagy a mikrofont",
             "micIsOff": "A mikrofon ki van kapcsolva",
             "micIsOn": "A mikrofon be van kapcsolva",
             "cameraIsOff": "A kamera ki van kapcsolva",
             "cameraIsOn": "A kamera be van kapcsolva",
             "screenSharingIsOn": "A képernyőmegosztás be van kapcsolva",
             "screenSharingIsOff": "Képernyő megosztása",
-            "joinNow": "Csatlakozzon a felhíváshoz",
-            "dialogTitle": "Csatlakozás előtt kapcsolja be\/ki a kamerát vagy a mikrofont"
+            "joinNow": "Csatlakozzon a felhíváshoz"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Utasítás",
-            "permissionDenied": "A(z) {{kind}} engedélye megtagadva. A használatához kövesse az alábbi lépéseket:",
+            "permissionDenied": "A {{kind}} es engedély megtagadva. A használatához kövesse az alábbi lépéseket:",
             "point1": "Lépjen a &quot;Beállítások&quot; -&gt; &quot;Speciális&quot; -&gt; &quot;Adatvédelem és biztonság&quot; -&gt; &quot;Webhelybeállítások&quot; -&gt; &quot;Kamera&quot; vagy &quot;Webhelybeállítások&quot; -&gt; &quot;Mikrofon&quot; menüpontra.",
-            "point2": "Távolítsa el a(z) {{hostname}} elemet a &quot;Block&quot; listáról"
+            "point2": "Távolítsa el {{hostname}} a &quot;Block&quot; listáról"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Utasítás",
-            "permissionDenied": "A(z) {{kind}} engedélye megtagadva. Kérjük, töltse be újra ezt az oldalt, és erősítse meg a(z) {{kind}} hozzáférését a konferenciához való csatlakozáshoz."
+            "permissionDenied": "A {{kind}} es engedély megtagadva. Kérjük, töltse be újra ezt az oldalt, és erősítse meg {{kind}} hez való hozzáférést a konferenciához való csatlakozáshoz."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Utasítás",
-            "permissionDenied": "A(z) {{kind}} engedélye megtagadva. A használatához kövesse az alábbi lépéseket:",
+            "permissionDenied": "A {{kind}} es engedély megtagadva. A használatához kövesse az alábbi lépéseket:",
             "point1": "Nyissa meg az Android beállításait",
             "point2": "Nyissa meg az „Alkalmazások és értesítések” elemet",
-            "point3": "Keresse meg a „{{communityName}}” elemet, és nyissa meg",
+            "point3": "Keresse meg a „ {{communityName}} ”-et, és nyissa meg",
             "point4": "Érintse meg az Engedélyek elemet",
             "point5": "{{kind}} engedélyezése"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Utasítás",
-            "permissionDenied": "A(z) {{kind}} engedélye megtagadva. A használatához kövesse az alábbi lépéseket:",
+            "permissionDenied": "A {{kind}} es engedély megtagadva. A használatához kövesse az alábbi lépéseket:",
             "point1": "Nyissa meg az iOS beállításait",
             "point2": "Nyissa meg az &quot;Adatvédelem&quot; elemet",
-            "point3": "Keresse meg a {{kind}} elemet, és nyissa meg",
-            "point4": "Keresse meg a „{{communityName}}” elemet, és engedélyezze"
+            "point3": "Keresse meg {{kind}} , és nyissa meg",
+            "point4": "Keresse meg a &quot; {{communityName}} &quot;-et és engedélyezze"
+        },
+        "fbLive": {
+            "dialogTitle": "Elindult a Facebook élő közvetítés"
         },
         "notices": {
             "youJoinedRoom": "Belépett a szobába",
             "joining": "Csatlakozás: {{userName}}",
-            "sbLeftRoom": "{{userName}} elhagyta a szobát",
+            "sbLeftRoom": "{{userName}} hagyták el a szobát",
             "switchingRoom": "Szobaváltás...",
             "forceDisconnecting": "A kapcsolat 5 másodpercen belül megszakad",
             "forceDisconnectingImmediately": "Egy házigazda megszakította a kapcsolatot",
             "youLeftRoom": "Kimentél a szobából",
             "codeCopied": "Kimentél a szobából",
-            "sbBeganFbLive": "{{userName}} elkezdte sugározni ezt a hívást a Facebookon",
-            "sbStoppedFbLive": "{{userName}} leállította ennek a hívásnak a közvetítését a Facebookon",
+            "sbBeganFbLive": "{{userName}} elkezdte sugározni ezt a felhívást a Facebookon",
+            "sbStoppedFbLive": "{{userName}} leállította ennek a hívásnak a sugárzását a Facebookon",
             "youBeganFbLive": "Elkezdted sugározni ezt a hívást a Facebookon",
             "youStoppedFbLive": "Leállítottad ennek a hívásnak a közvetítését a Facebookon",
             "youStartedLive": "Elkezdte sugározni ezt a hívást egyéni RTMP-nek",
             "youStoppedLive": "Leállította ennek a hívásnak az egyéni RTMP-re történő sugárzását",
             "sbStartedLiveStreaming": "{{userName}} élőben indult",
-            "sbStoppedLiveStreaming": "A {{userName}} élő adásban véget ért",
-            "liveStopped": "Hiba történt a videó végpontra való elküldése közben",
+            "sbStoppedLiveStreaming": "{{userName}} élőben ért véget",
+            "liveStopped": "Hiba történt a videó végpontra való küldése közben",
             "youBeganVideoRecording": "Elkezdte rögzíteni ezt a konferenciát",
-            "youStoppedVideoRecording": "Leállította a konferencia rögzítését",
+            "youStoppedVideoRecording": "Leállítottad a konferencia rögzítését",
             "linkCopiedToCb": "Link a vágólapra másolva",
             "codeCopiedToCb": "A kód a vágólapra másolva",
             "userHasNoVideo": "A résztvevőnek nincs videója",
             "openInBrowserAlert": "A konferenciához való csatlakozáshoz nyissa meg a hivatkozást a Safari böngészőben.",
-            "allowedVideoLimit": "Csak {{limit}} videó engedélyezett ebben a szobában",
-            "allowedAudioLimit": "Csak {{limit}} mikrofon engedélyezett ebben a szobában"
+            "allowedVideoLimit": "Ebben a szobában csak {{limit}} videó engedélyezett",
+            "allowedAudioLimit": "Ebben a szobában csak {{limit}} mikrofon megengedett"
         },
         "settingsPopup": {
             "dialogTitle": "Videó beállítások",
@@ -289,17 +313,20 @@
             "fbStartLive": "Élesben",
             "fbStopLive": "Élő közvetítés befejezése",
             "streamingSettings": "Beállítások",
+            "manageStream": "Élő közvetítés kezelése",
             "fbEmbedCode": "Beágyaz",
             "copy": "Másolat",
             "streamToRTMP": "Adatfolyam egyéni RTMP-re",
             "startBroadcasting": "Indítsa el a közvetítést",
-            "broadcastingInProgress": "A közvetítés folyamatban van",
-            "manageStream": "Élő közvetítés kezelése"
+            "broadcastingInProgress": "A közvetítés folyamatban van"
         },
         "audioSettings": {
             "dialogTitle": "Hangbeállítások",
             "speakers": "Hangszórók",
             "microphone": "Mikrofon"
+        },
+        "broadcastPopup": {
+            "dialogTitle": "Adás kezelése"
         },
         "participantsPopup": {
             "dialogTitle": "Résztvevő beállításai",
@@ -319,21 +346,15 @@
             "turnOnScreenSharing": "Képernyőmegosztás megjelenítése"
         },
         "streamingSettings": {
-            "title": "Streaming beállítások"
+            "title": "Élő adás"
         },
         "preview": {
             "Meeting": "Telekonferencia",
             "MeetingEnded": "A telekonferencia véget ért"
         },
         "requestSpeakDialog": {
-            "msg": "Jelenleg {{count}} személy beszél a megbeszélésen. Le szeretné cserélni az egyiket, miután {{seconds}} másodpercet hagyott a beszéd befejezésére?",
-            "dialogTitle": "Beszédkérés"
-        },
-        "fbLive": {
-            "dialogTitle": "Elindult a Facebook élő közvetítés"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Adás kezelése"
+            "dialogTitle": "Beszédkérés",
+            "msg": "Jelenleg {{count}} en beszélnek az ülésen. Le szeretné cserélni az egyiket, miután {{seconds}} másodpercet hagyott nekik a beszéd befejezésére?"
         }
     },
     "types": {
@@ -432,7 +453,7 @@
         },
         "Streams\/category": {
             "displayType": "Kategória",
-            "description": "egy kategória, amelyhez más folyamok kapcsolhatók"
+            "description": "egy kategória, amelyhez más folyamok is kapcsolhatók"
         },
         "Streams\/participating": {
             "displayType": "Részvételi index",
@@ -451,8 +472,8 @@
             "description": "a felhasználók közötti beszélgetés előzményekkel"
         },
         "Streams\/webrtc": {
-            "displayType": "Élő hívás",
-            "description": "valós idejű video-\/audiohívás"
+            "displayType": "Telekonferencia",
+            "description": "online video\/audio konferencia"
         },
         "Streams\/question": {
             "displayType": "Kérdés",
@@ -484,7 +505,7 @@
         "description": "leírás",
         "upload": "Feltöltés",
         "link": "Link",
-        "setUrl": "URL beállítása",
+        "setUrl": "Állítsa be az URL-t",
         "save": "Megment",
         "setClip": "Kivágott klip",
         "invalidURL": "érvénytelen URL",
@@ -500,7 +521,7 @@
         "description": "leírás",
         "upload": "Feltöltés",
         "link": "Link",
-        "setUrl": "URL beállítása",
+        "setUrl": "Állítsa be az URL-t",
         "save": "Megment",
         "setClip": "Kivágott klip",
         "invalidURL": "érvénytelen URL",
@@ -516,7 +537,7 @@
         "description": "leírás",
         "upload": "Feltöltés",
         "link": "Link",
-        "setUrl": "URL beállítása",
+        "setUrl": "Állítsa be az URL-t",
         "save": "Megment",
         "setClip": "Kivágott klip",
         "invalidURL": "érvénytelen URL",
@@ -532,7 +553,7 @@
         "description": "leírás",
         "upload": "Feltöltés",
         "link": "Link",
-        "setUrl": "URL beállítása",
+        "setUrl": "Állítsa be az URL-t",
         "save": "Megment",
         "uploadedImage": "Feltöltött kép",
         "imageTitle": "Kép címe",
@@ -549,29 +570,27 @@
         "AnswerQuestion": "Válaszolj a kérdésre",
         "SetYourAnswer": "Kérem, válaszoljon a kérdésre",
         "NewQuestion": "Új Kérdés",
+        "EditQuestion": "Kérdés szerkesztése",
         "NewAnswer": "Új válasz",
+        "NewPossibleAnswer": "Új lehetséges válasz",
         "AnswerDetails": "Válasz Részletek",
         "answerOption": "választási lehetőség",
         "answerOptionExclusive": "Kizárólagos",
         "answerTextarea": "Textarea",
+        "answerText": "Szöveg",
+        "HideUntilAnswered": "Rejtse el a válaszig",
+        "CantChangeAnswers": "A válaszokat nem lehet megváltoztatni",
         "FreeAnswer": "Írja ide a válaszát",
         "SaveQuestion": "Kérdés mentése",
         "SaveAnswer": "Válasz mentése",
-        "AddAnotherAnswer": "Adjon hozzá másik választ",
-        "ErrorAnswers": "Kérjük, adjon meg akár egy választ is",
+        "Save": "Megment",
+        "Send": "Küld",
+        "TitleRequired": "Cím kötelező!",
         "AlreadyAnswered": "Már válaszolt",
         "TitlePlaceholder": "Írja be kérdését",
         "ContentPlaceholder": "Írjon ide minden további információt, hogy segítsen az embereknek válaszolni",
         "ErrorTitle": "Kérdés kötelező",
         "Placeholder": "Helykitöltő",
-        "EditQuestion": "Kérdés szerkesztése",
-        "NewPossibleAnswer": "Új lehetséges válasz",
-        "answerText": "Szöveg",
-        "HideUntilAnswered": "Rejtse el a válaszig",
-        "CantChangeAnswers": "A válaszokat nem lehet megváltoztatni",
-        "Save": "Megment",
-        "Send": "Küld",
-        "TitleRequired": "Cím kötelező!",
         "AreYouSure": "biztos vagy ebben?"
     },
     "experience": {
@@ -593,25 +612,5 @@
         "endCall": "Hívás befejezése",
         "interview": "Interjú",
         "markApproved": "Jelölje meg jóváhagyva"
-    },
-    "identifier": {
-        "private": "Magán",
-        "public": "Nyilvános",
-        "configurationSaved": "A konfiguráció mentve",
-        "error": "Valami elromlott",
-        "privacySettings": "Adatvédelmi beállítások"
-    },
-    "avatar": {
-        "firstName": "keresztnév",
-        "lastName": "vezetéknév",
-        "username": "felhasználónév"
-    },
-    "login": {
-        "prompt": "Hagyd, hogy barátaid felismerjenek:",
-        "newUser": "vagy hozzon létre egy új fiókot alább",
-        "picTooltip": "Ezt a képet később megváltoztathatja",
-        "placeholder": {
-            "fullName": "Add meg a teljes neved"
-        }
     }
 }

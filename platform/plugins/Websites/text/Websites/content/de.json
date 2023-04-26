@@ -14,12 +14,12 @@
                 "FilterInterests": "Beginnen Sie mit der Eingabe eines Interesses..."
             },
             "Interest": "Interesse",
-            "Location": "Ort"
+            "Location": "Standort"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "gehen",
+            "Go": "Gehen",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Durchsuche",
             "WriteToStartConversation": "Schreiben Sie Ihre Gedanken auf, um das Gespräch zu beginnen",

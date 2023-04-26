@@ -28,7 +28,7 @@
             "reset": "Visszaállítás",
             "edit": "Szerkesztés",
             "link": "Link",
-            "setUrl": "URL beállítása",
+            "setUrl": "Állítsa be az URL-t",
             "save": "Megment",
             "setClip": "Kivágott klip",
             "invalidURL": "érvénytelen URL"
@@ -47,7 +47,7 @@
             "displayType": "Csúszik"
         },
         "Websites\/presentation": {
-            "description": "Különféle diákból álló prezentáció",
+            "description": "Különböző diákból álló prezentáció",
             "displayType": "Bemutatás"
         },
         "Websites\/advert\/unit": {

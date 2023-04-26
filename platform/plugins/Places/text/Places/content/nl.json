@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "binnen {{1}}"
     },
     "units": {
@@ -11,7 +11,7 @@
         "kilometers": "kilometer",
         "km": "km",
         "mile": "mijl",
-        "miles": "mijlen",
+        "miles": "mijl",
         "mi": "mi",
         "foot": "voet",
         "feet": "voeten",
@@ -19,37 +19,37 @@
     },
     "location": {
         "interested": "Ik ben geïnteresseerd in dingen die plaatsvinden binnen {{select}} van",
-        "update": "Update mijn locatie",
-        "prompt": "{{ClickOrTap}} hier om<br> Stel je<br> plaats",
+        "update": "Update Mijn locatie",
+        "set": "Stel Mijn locatie in",
+        "prompt": "{{ClickOrTap}} hier naar<br> Stel je<br> plaats",
         "myCurrentLocation": "Mijn huidige locatie",
         "enterAddress": "Geef een adres in",
-        "enterPostcode": "Vul a.u.b. uw postcode \/ postcode in",
+        "enterPostcode": "Vul a.u.b. uw postcode\/postcode in",
         "create": {
             "action": "Voeg locatie toe",
             "title": "Nieuwe locatie",
-            "nameYourLocation": "Geef je locatie een naam"
+            "nameYourLocation": "Geef uw locatie een naam"
         },
         "confirm": {
             "title": "Deze locatie opslaan?",
-            "message": "Ben je van plan om in de toekomst nog eens gebruik te maken van deze locatie?",
+            "message": "Ben je van plan om in de toekomst weer gebruik te maken van deze locatie?",
             "ok": "Ja",
             "cancel": "Nee"
         },
         "add": {
             "title": "Geef deze locatie een naam",
             "placeholder": "Thuis, werk enz.",
-            "ok": "Sparen"
+            "ok": "Redden"
         },
         "dialog": {
             "title": "Kies locatie"
-        },
-        "set": "Mijn locatie instellen"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Is er een gebied binnen deze locatie?",
+        "filterPlaceholder": "Elk gebied binnen deze locatie?",
         "newArea": "Nieuw gebied",
         "promptTitle": "Voer een naam in voor het gebied:",
-        "absent": "Stel gebied in a.u.b",
+        "absent": "Stel het gebied in",
         "error": "Fout",
         "exist": "Gebied bestaat al",
         "addNewArea": "Nieuw gebied toevoegen",
@@ -82,7 +82,7 @@
         },
         "Places\/interest": {
             "description": "Categorie voor dingen binnen een bepaalde afstand van een geohash, overeenkomend met een interesse",
-            "displayType": "Interessante plaatsen"
+            "displayType": "Plaatst interesse"
         }
     }
 }

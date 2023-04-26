@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "fi żmien {{1}}"
     },
     "units": {
@@ -18,7 +18,7 @@
         "inches": "pulzieri"
     },
     "location": {
-        "interested": "Jien interessat f&#39;affarijiet li jseħħu fi żmien {{select}} minn",
+        "interested": "Jien interessat f&#39;affarijiet li jseħħu fi żmien {{select}} ta&#39;",
         "update": "Aġġorna l-Post Tiegħi",
         "set": "Issettja l-Post Tiegħi",
         "prompt": "{{ClickOrTap}} hawn biex<br> issettja tiegħek<br> post",
@@ -81,7 +81,7 @@
             "displayType": "Qrib mill-postijiet"
         },
         "Places\/interest": {
-            "description": "Kategorija għall-affarijiet f&#39;ċerta distanza ta&#39; geohash, li taqbel ma&#39; interess",
+            "description": "Kategorija għal affarijiet f&#39;ċerta distanza ta&#39; geohash, li taqbel ma&#39; interess",
             "displayType": "Postijiet ta&#39; interess"
         }
     }

@@ -39,7 +39,7 @@
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokument HTML, který mohou prohlížet a upravovat různí uživatelé",
+            "description": "HTML dokument, který mohou prohlížet a upravovat různí uživatelé",
             "displayType": "Článek"
         },
         "Websites\/slide": {

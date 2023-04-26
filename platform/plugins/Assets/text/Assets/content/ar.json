@@ -1,26 +1,58 @@
 {
+    "errors": {
+        "Error": "خطأ",
+        "WalletAbsent": "المحفظة غير متصلة.",
+        "Rendering": "حدثت أخطاء أثناء العرض <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "السعر مطلوب!",
+        "NameRequired": "الاسم مطلوب!",
+        "PriceInvalid": "السعر غير صالح!",
+        "AmountInvalid": "المبلغ غير صالح!",
+        "TransactionFailed": "فشل الاجراء",
+        "ChainNotSupported": "السلسلة المحددة غير مدعومة. السلسلة المدعومة: {{supportedChain}}",
+        "NeedMetaMaskConnected": "تحتاج إلى توصيل MetaMask للعمل مع التطبيق",
+        "UserNotLoggedInMetaMask": "لم يقم المستخدم بتسجيل الدخول إلى MetaMask",
+        "CurrencyNotFound": "العملة غير موجودة",
+        "WrongChain": "تم إنشاء NFT هذا تحت رقم &quot; {{chain}} &quot;. الرجاء استخدام هذه السلسلة.",
+        "NoRecipientSelected": "لم يتم تحديد مستلم",
+        "NotEnoughPermissionsWallet": "لا توجد أذونات كافية لقراءة محفظة هذا المستخدم",
+        "ThisUserHaveNoWallet": "لم يتم تخصيص محفظة لهذا المستخدم",
+        "TheWalletOfThisUserInvalid": "محفظة هذا المستخدم غير صالحة",
+        "WalletInvalid": "عنوان المحفظة غير صالح"
+    },
+    "admin": {
+        "Title": "الأصول الإدارية",
+        "SubscriptionTitle": "خطط الاشتراك"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "انقر للدفع"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: تمت معالجة الرسوم بمبلغ {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "شكرًا لك على الدفع لـ {{call 'publisher.displayName'}}",
-        "SubscribedTo": "اشترك {{call 'user.displayName'}} في {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : معالجة الرسوم مقابل {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "شكرًا لك على الدفع إلى {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} مشترك بـ {{plan.title}}",
         "YouSubscribedTo": "لقد تم اشتراكك في {{plan.title}}",
         "Assets\/credits\/alert": "لديك تنبيه متعلق بحسابك"
+    },
+    "charge": {
+        "Subject": "تحصل على دفعة {{displayAmount}} من {{call 'publisher.displayName'}} بواسطة &quot; {{description}} &quot;",
+        "HasBeenCharged": "مرحبًا ، هذا فقط لإعلامك بأنه تم تحصيل {{2}} {{1}} {{3}} في {{4}} على 999"
+    },
+    "charged": {
+        "Subject": "شكرًا لك على الدفع مقابل &quot; {{description}} &quot;",
+        "HavePaid": "مرحبًا {{1}} ، هذا مجرد تأكيد سريع على أنك دفعت بنجاح {{2}} إلى {{3}} مقابل {{4}}"
     },
     "payment": {
         "AboutOrder": "معلومات حول الطلب",
         "PaymentMethod": "طريقة الدفع او السداد",
         "ContactInfo": "معلومات الاتصال",
-        "Pay": "دفع",
+        "Pay": "يدفع",
         "PaymentSucceeded": "نجح الدفع",
         "PaymentProcessing.": "دفعتك قيد المعالجة",
         "FailTryAgain": "لم تكن عملية الدفع الخاصة بك ناجحة ، يرجى المحاولة مرة أخرى",
         "SomethingWrong": "هناك خطأ ما",
         "PaymentStatus": "حالة السداد",
-        "PayTo": "دفع {{displayName}}",
+        "PayTo": "ادفع {{displayName}}",
         "ChooseCurrency": "اختر عملة",
         "YouCanSendUpTo": "يمكنك إرسال ما يصل إلى {{amount}} {{symbol}}",
         "Send": "يرسل",
@@ -28,83 +60,78 @@
     },
     "credits": {
         "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{invitedUserName}}",
-        "YouHaveCreditsToStart": "لديك {{amount}} ائتمانات للبدء",
-        "PaymentFor": "الدفع مقابل &quot;{{1}}&quot;",
-        "PaymentTo": "دفع إلى {{1}}",
-        "PaymentToUser": "دفع إلى {{toUserName}}",
-        "JoinedPaidStream": "للحجز في &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "لإنشاء مجتمع &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "كاسترداد للحجز في &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "اشترى رصيدًا بقيمة {{amount}}",
-        "BuyAmountCredits": "شراء رصيد بقيمة {{amount}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} مليئة {{FilledStreamTitle}}",
+        "ForFillingStream": "لملء {{FilledStreamTitle}}",
+        "YouHaveCreditsToStart": "لديك {{amount}} نقطة لتبدأ",
+        "PaymentFor": "الدفع مقابل &quot; {{1}} &quot;",
+        "PaymentTo": "الدفع ل {{1}}",
+        "PaymentToUser": "الدفع ل {{toUserName}}",
+        "CreatePrivateChat": "للدردشة الخاصة مع {{toUserName}}",
+        "CreatePaidStream": "لإنشاء {{toStreamName}}",
+        "JoinedPaidStream": "للحجز في &quot; <a data-publisherId='<i translate='no'>999&quot; data-streamName = &#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "لإنشاء مجتمع &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "كاسترداد للحجز في &quot; <a data-publisherId='<i translate='no'>999&quot; data-streamName = &#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "اشترى {{amount}} كريدت",
+        "BonusCredits": "مكافأة {{amount}} ائتمانات",
+        "BuyAmountCredits": "شراء {{amount}} كريدت",
+        "WatchClip": "حصلت على {{amount}} رصيدًا مقابل مشاهدة {{fromStreamTitle}}",
         "MissingCredits": "قروض مفقودة",
-        "YouMissingCredits": "أنت بحاجة إلى أرصدة {{amount}} إضافية للمتابعة.",
+        "YouMissingCredits": "أنت بحاجة إلى {{amount}} نقطة إضافية للمتابعة.",
         "BuyCredits": "شراء إئتمانات",
+        "BuyBonus": "سيؤدي شراء {{amount}} نقطة في وقت واحد إلى مكافأة {{bonus}} ائتمان.",
         "Buy": "يشتري",
+        "PurchaseCredits": "قروض شراء",
         "Credits": "الاعتمادات",
         "ErrorInvalidAmount": "المبلغ غير صالح",
         "ErrorInvalidCurrency": "للأسف ، لا ندعم العملة {{currency}} حتى الآن",
-        "WatchClip": "حصلت على {{amount}} أرصدة مقابل مشاهدة {{fromStreamTitle}}",
-        "PurchaseCredits": "قروض شراء",
         "forMessages": {
-            "BoughtCredits": "{{amount}} ائتمانات",
-            "BonusCredits": "{{amount}} ائتمانات"
-        },
-        "CreatePaidStream": "لإنشاء {{toStreamName}}",
-        "BonusCredits": "ائتمانات منحة {{amount}}",
-        "BuyBonus": "سيؤدي شراء رصيد بقيمة {999}} مرة واحدة إلى الحصول على {{bonus}} رصيد إضافي.",
-        "Streams_user_firstname": "أدخل {{invitedUserName}} الاسم الأول",
-        "Streams_user_lastname": "أدخل {{invitedUserName}} الاسم الأخير",
-        "Streams_user_icon": "تم إدخال {{invitedUserName}}",
-        "Places_user_location": "دخل {{invitedUserName}} إلى الموقع",
-        "Streams_greeting": "{{invitedUserName}} تم إدخال التحية",
-        "InvitedUserFilledStream": "{{invitedUserName}} تم ملء {{FilledStreamTitle}}",
-        "ForFillingStream": "لملء {{FilledStreamTitle}}",
-        "CreatePrivateChat": "للدردشة الخاصة مع {{toUserName}}"
+            "BoughtCredits": "{{amount}} كريدت",
+            "BonusCredits": "{{amount}} كريدت"
+        }
     },
     "history": {
         "Date": "تاريخ",
-        "Amount": "مقدار",
+        "Amount": "كمية",
         "Description": "وصف",
         "Client": "عميل",
+        "User": "مستخدم",
         "To": "ل",
         "From": "من",
+        "SeeHistory": "انظر تاريخ الدفع لـ {{1}}",
         "HistoryEmpty": "ليس لديك بيانات حتى الان",
-        "SeeHistory": "راجع سجل الدفع لـ {{1}}",
-        "PaymentFor": "تم إرسال {{amount}} من الائتمانات",
-        "PaymentTo": "تم إرسال {{amount}} من الائتمانات",
-        "PaymentToUser": "تم إرسال {{amount}} من الائتمانات",
+        "PaymentFor": "إرسال {{amount}} نقطة",
+        "PaymentTo": "إرسال {{amount}} نقطة",
+        "PaymentToUser": "إرسال {{amount}} نقطة",
+        "CreatePaidStream": "أنفق {{amount}} نقطة",
+        "WatchClip": {
+            "+": "حصلت على {{amount}} نقطة",
+            "-": "أنفق {{amount}} نقطة"
+        },
         "JoinedPaidStream": {
-            "+": "حصلت على {{amount}} ائتمانات",
-            "-": "أنفقت {{amount}} من الاعتمادات"
+            "+": "حصلت على {{amount}} نقطة",
+            "-": "أنفق {{amount}} نقطة"
         },
         "LeftPaidStream": {
-            "+": "تلقيت {{amount}} من الاعتمادات",
-            "-": "تم إرسال {{amount}} من الائتمانات"
+            "+": "حصل على {{amount}} نقطة",
+            "-": "إرسال {{amount}} نقطة"
         },
-        "CreatedCommunity": "أنفقت {{amount}} من الاعتمادات",
-        "BoughtCredits": "اشترى رصيدًا بقيمة {{amount}}",
-        "InviteAcceptedBy": "حصلت على {{amount}} ائتمانات",
-        "YouHaveCreditsToStart": "حصلت على {{amount}} ائتمانات",
-        "CreatePaidStream": "أنفقت {{amount}} من الاعتمادات",
-        "WatchClip": {
-            "+": "حصلت على {{amount}} ائتمانات",
-            "-": "أنفقت {{amount}} من الاعتمادات"
-        },
-        "BonusCredits": "حصلت على مكافأة {{amount}} ائتمانات",
-        "Streams_user_firstname": "حصلت على {{amount}} ائتمانات",
-        "Streams_user_lastname": "حصلت على {{amount}} ائتمانات",
-        "Streams_user_icon": "حصلت على {{amount}} ائتمانات",
-        "Places_user_location": "حصلت على {{amount}} ائتمانات",
-        "Streams_greeting": "حصلت على {{amount}} ائتمانات",
-        "User": "مستخدم"
+        "CreatedCommunity": "أنفق {{amount}} نقطة",
+        "BoughtCredits": "اشترى {{amount}} كريدت",
+        "BonusCredits": "حصلت على {{amount}} نقطة إضافية",
+        "InviteAcceptedBy": "حصلت على {{amount}} نقطة",
+        "Streams_user_firstname": "حصلت على {{amount}} نقطة",
+        "Streams_user_lastname": "حصلت على {{amount}} نقطة",
+        "Streams_user_icon": "حصلت على {{amount}} نقطة",
+        "Places_user_location": "حصلت على {{amount}} نقطة",
+        "Streams_greeting": "حصلت على {{amount}} نقطة",
+        "YouHaveCreditsToStart": "حصلت على {{amount}} نقطة"
     },
     "subscriptions": {
-        "infoTitle": "تعيين معلومات الدفع",
+        "infoTitle": "قم بتعيين معلومات الدفع",
         "confirm": {
             "title": "ابدأ الاشتراك",
-            "message": "هل ترغب في الاشتراك في {{title}}؟",
-            "ok": "موافق",
+            "message": "بدء إشتراك متكرر إلى &quot; {{title}} &quot;؟",
+            "ok": "نعم",
             "cancel": "يلغي"
         },
         "CreditOrDebitCard": "بطاقة الائتمان أو الخصم",
@@ -116,14 +143,14 @@
         "Subscribed": "مشترك",
         "Unsubscribed": "غير مشترك",
         "Unsubscribe": "إلغاء الاشتراك",
-        "Subscribe": "الإشتراك",
+        "Subscribe": "يشترك",
         "Started": "بدأت",
         "EndsIn": "ينتهي بـ",
         "NextPay": "الدفعة التالية",
         "Period": "فترة",
         "Price": "سعر",
         "AreYouSureUnsubscribe": "هل أنت متأكد أنك تريد إلغاء الاشتراك في هذه الخطة؟",
-        "YouUnsubscribedFromPlan": "لقد ألغيت اشتراكك في خطة &quot;{{planTitle}}&quot;. لن يتم تحصيل الرسوم منك ، ولكن اشتراكك سيستمر حتى {{endsIn}}",
+        "YouUnsubscribedFromPlan": "لقد ألغيت اشتراكك من الخطة &quot; {{planTitle}} &quot;. لن يتم تحصيل رسوم منك ، لكن اشتراكك سيستمر حتى {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "عنوان الخطة",
             "PricePlaceholder": "سعر",
@@ -133,14 +160,14 @@
         }
     },
     "payments": {
-        "infoTitle": "تعيين معلومات الدفع",
+        "infoTitle": "قم بتعيين معلومات الدفع",
+        "BuyAmountCredits": "شراء {{amount}} كريدت",
         "confirm": {
             "title": "أتم عملية الدفع",
-            "message": "هل توافق على دفع {{symbol}} {{amount}}؟",
-            "ok": "موافق",
+            "message": "هل توافق على دفع {{symbol}} {{amount}} ؟",
+            "ok": "نعم",
             "cancel": "يلغي"
-        },
-        "BuyAmountCredits": "شراء رصيد بقيمة {{amount}}"
+        }
     },
     "types": {
         "Assets\/credits": {
@@ -166,34 +193,37 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "حصلت على {{amount}} ائتمانات"
-        },
-        "Assets\/credits\/spent": {
-            "content": "أنفقت {{amount}} من الاعتمادات"
-        },
-        "Assets\/credits\/sent": {
-            "content": "تم إرسال {{amount}} من الاعتمادات إلى {{toUserName}}"
-        },
-        "Assets\/credits\/received": {
-            "content": "تلقيت {{amount}} أرصدة من {{fromUserName}}"
+            "content": "حصلت على {{amount}} نقطة"
         },
         "Assets\/credits\/bought": {
-            "content": "اشترى {{amount}} رصيد"
+            "content": "اشترى {{amount}} كريدت"
         },
         "Assets\/credits\/bonus": {
-            "content": "ائتمانات منحة {{amount}}"
+            "content": "مكافأة {{amount}} ائتمانات"
+        },
+        "Assets\/credits\/spent": {
+            "content": "أنفق {{amount}} نقطة"
+        },
+        "Assets\/credits\/sent": {
+            "content": "أرسل {{amount}} نقطة إلى {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "حصل على {{amount}} نقطة من {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "لديك ائتمانات قليلة في حسابك. يرجى زيارة <a href='{{link}}'>هذا الرابط<\/a> لشراء المزيد من الاعتمادات."
+            "content": "لديك ائتمانات قليلة في حسابك. يرجى زيارة <a href='<i translate='no'>999 &#39;&gt; هذا الرابط<\/a> لشراء المزيد من الاعتمادات."
         }
     },
-    "charge": {
-        "Subject": "تحصل على دفعة قدرها {{displayAmount}} من {{call 'publisher.displayName'}} عن طريق &quot;{{description}}&quot;",
-        "HasBeenCharged": "مرحبًا ، هذا فقط لإعلامك بأنه تم تحصيل مبلغ {{1}} {{2}} مقابل {{3}} بواسطة {{4}}"
-    },
-    "charged": {
-        "Subject": "شكرًا لك على الدفع مقابل &quot;{{description}}&quot;",
-        "HavePaid": "مرحبًا {{1}} ، هذا مجرد تأكيد سريع على أنك دفعت مبلغ {{2}} بنجاح إلى {{3}} مقابل {{4}}"
+    "billing": {
+        "Title": "فواتير الأصول",
+        "CreditsMinimum": "الحد الأدنى من الاعتمادات",
+        "CreditsToAdd": "الاعتمادات لإضافتها",
+        "Save": "يحفظ",
+        "ThisLink": "هذا الرابط",
+        "errors": {
+            "CreditsMinimumNegative": "لا يمكن أن يكون الحد الأدنى للاعتمادات سالبًا",
+            "CreditsToAddNegative": "لا يمكن أن تكون الائتمانات المراد إضافتها سالبة"
+        }
     },
     "services": {
         "NewServiceTemplate": {
@@ -203,25 +233,42 @@
             "LinkPlaceholder": "تعيين ارتباط معلومات إضافية",
             "DescriptionPlaceholder": "وصف الخدمة",
             "SaveService": "حفظ الخدمة",
-            "SelectRequiredParticipants": "المشاركون المطلوبون",
+            "SelectRequiredParticipants": "المشاركين ذوي الصلة المطلوب",
             "RequiredParticipantsDesc": "يرجى تحديد المشاركين ذوي الصلة المطلوبين لاستخدام هذه الخدمة (على سبيل المثال الحيوانات الأليفة في &quot;عرض الكلاب&quot; أو الأطفال في &quot;عطلة الأطفال&quot; وما إلى ذلك). إذا تم دفع الخدمة ، سيحتاج المستخدم إلى الدفع أيضًا لكل مشارك ذي صلة."
+        },
+        "EditServiceTemplate": {
+            "Title": "تحرير الخدمة"
         },
         "ManageServiceTemplates": "إدارة قوالب الخدمة",
         "ManageServices": "إدارة الخدمات",
-        "FreeEvent": "حدث مجاني",
+        "Free": "حر",
         "OptionalContribution": "مساهمة اختيارية",
         "RequiredPayment": "الدفع المطلوب",
         "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف هذه الخدمة؟",
-        "AmountServicesRelated": "هناك {{amount}} توافر متعلق بهذه الخدمة. هم أيضا سيتم إزالتها.",
-        "Free": "حر",
-        "EditServiceTemplate": {
-            "Title": "تحرير الخدمة"
-        }
+        "AmountServicesRelated": "هناك {{amount}} اتاحة متعلقة بهذه الخدمة. هم أيضا سيتم إزالتها."
+    },
+    "transfer": {
+        "SelectRecipient": "حدد المستلم",
+        "TransactionSuccess": "نجاح الصفقة",
+        "OrTypeWalletAddress": "أو اكتب عنوان محفظة المستلم"
     },
     "NFT": {
-        "Title": "معلومات حول {{title}} NFT",
-        "Description": "معلومات مفصلة عن NFT",
-        "FixedBid": "اشتري الآن",
+        "Title": "عنوان",
+        "Name": "اسم",
+        "EnterName": "أدخل الاسم",
+        "EnterAuthorWallet": "أدخل محفظة المؤلف",
+        "InformationAboutTitle": "معلومات حول {{title}} NFT",
+        "Description": "وصف",
+        "DetailedInformationAboutNFT": "معلومات مفصلة حول NFT",
+        "PresaleStarts": "يبدأ البيع المسبق في 23 ديسمبر",
+        "OwnerUserNotFound": "لم يتم تسجيل مالك NFT هذا في تطبيقنا.",
+        "BuyNow": "اشتري الآن",
+        "Buy": "يشتري",
+        "Add": "يضيف",
+        "Remove": "يزيل",
+        "NoNFTyet": "لا توجد NFTs حتى الآن",
+        "Conversation": "محادثة",
+        "Create": "يخلق",
         "CurrentBid": "مناقصه قائمة",
         "StartingIn": "يبدأ في",
         "EndingIn": "تنتهي في",
@@ -230,21 +277,24 @@
         "DescriptionPlaceholder": "أعط وصف NFT الخاص بك",
         "CreateYourNFT": "قم بإنشاء NFT الخاص بك",
         "Royalties": "العائدات",
-        "RoyaltyPlaceholder": "اختياري. المبلغ المدفوع للمبدع قبل التحويل.",
+        "RoyaltyPlaceholder": "خياري. المبلغ المدفوع للمبدع قبل التحويل.",
         "ExpirationDate": "تاريخ انتهاء الصلاحية",
         "StartingDate": "تاريخ البدء",
         "BidsBelowThisAmount": "لن يتم السماح بالمزايدة التي تقل عن هذا المبلغ",
         "MinimumBid": "الحد الأدنى للمزايدة",
-        "Price": "السعر",
-        "Owner": "صاحب",
+        "Author": "مؤلف",
+        "Price": "سعر",
+        "Commission": "عمولة",
+        "EnterCommission": "أدخل العمولة",
+        "Owner": "مالك",
         "SelectCategory": "اختر الفئة",
         "Day": "يوم",
         "Days": "أيام",
         "Hour": "ساعة",
         "Hours": "ساعات",
-        "Minute": "اللحظة",
-        "Minutes": "الدقائق",
-        "Second": "ثانيا",
+        "Minute": "دقيقة",
+        "Minutes": "دقائق",
+        "Second": "ثانية",
         "Seconds": "ثواني",
         "SalesCreator": "من المبيعات ستذهب إلى المنشئ",
         "Details": "تفاصيل",
@@ -254,17 +304,25 @@
         "PutOnSale": "طرح للبيع",
         "PutOffSale": "سحب من البيع",
         "Transfer": "تحويل",
+        "Actions": "أجراءات",
+        "Claim": "مطالبة",
+        "ClaimNFT": "مطالبة NFT",
+        "Unlocking": "فتح",
+        "Unlock": "الغاء القفل",
         "Update": "تحديث",
         "UpdateToken": "تحديث الرمز",
+        "UpdateNFT": "تحديث NFT",
         "CreateToken": "إنشاء رمز",
         "PlaceBid": "مكان العطاء",
-        "SoldOut": "تم البيع",
+        "SoldOut": "مُباع",
+        "NotOnSale": "ليس للبيع",
         "NftName": "اسم NFT",
         "DescribeYourNFT": "يرجى وصف NFT الخاص بك",
         "NftPicture": "صورة لتمثيل NFT",
         "NftMovie": "فيلم لتمثيل NFT",
         "UploadMovie": "تحميل الفيلم",
         "MovieSource": "مصدر الفيلم",
+        "MovieURL": "رابط الفيلم",
         "UploadFile": "قم بتحميل ملف",
         "PutOnMarketplace": "ضع في السوق",
         "InstantPurchase": "أدخل السعر للسماح للمستخدمين بشراء NFT الخاص بك على الفور",
@@ -272,60 +330,9 @@
         "TimedAuction": "المزاد الموقوت",
         "OpenForBids": "فتح للعطاءات",
         "PriceOnePiece": "أدخل السعر لقطعة واحدة",
+        "EnterPrice": "أدخل السعر",
         "EnterMinimumBid": "أدخل الحد الأدنى للمزايدة",
         "SelectChain": "حدد سلسلة",
-        "WrongChain": "تم إنشاء NFT هذا تحت عنوان &quot;{{chain}}&quot;. الرجاء استخدام هذه السلسلة.",
-        "import": {
-            "importNFT": "استيراد NFT&#39;s",
-            "fileNotFound": "عذرا ، ملف CSV غير موجود.",
-            "fileEmpty": "عذرا ، ملف CSV فارغ.",
-            "userIdNotFound": "المستخدم موجود ولكن معرف فارغ",
-            "errorLine": "السطر {{1}}",
-            "fieldNotFound": "الحقل المطلوب &quot;{{1}}&quot; غير موجود",
-            "taskStreamInvalid": "دفق المهام غير صالح",
-            "instructionsEmpty": "تعليمات تدفق المهام فارغة",
-            "complete": "إكمال",
-            "activateUsers": "إرسال رسالة التفعيل للمستخدمين؟",
-            "importProgress": "تقدم",
-            "importOptions": "خيارات",
-            "sampleCSV": "تنزيل نموذج CSV",
-            "fileLabel": "تحميل جدول البيانات:",
-            "errorsTitle": "حدثت أخطاء",
-            "importAttributes": "سمات استيراد NFT",
-            "displayTypeEmpty": "نوع العرض لـ &quot;{{1}}&quot; غير موجود"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "تصفية حسب مجموعات NFT",
-                "ShowNFTCollection": "إظهار مجموعة NFT في ...",
-                "AllCollections": "كل المجموعات"
-            },
-            "ByUser": {
-                "AllAuthors": "كل المؤلفين",
-                "AllUsers": "الجميع",
-                "FilterByAuthors": "تصفية حسب المؤلفين"
-            }
-        },
-        "Back": "رجوع إلى المجموعة",
-        "Name": "اسم",
-        "EnterName": "أدخل الاسم",
-        "EnterAuthorWallet": "أدخل محفظة المؤلف",
-        "InformationAboutTitle": "معلومات حول {{title}} NFT",
-        "DetailedInformationAboutNFT": "معلومات مفصلة حول NFT",
-        "PresaleStarts": "يبدأ البيع المسبق في 23 ديسمبر",
-        "OwnerUserNotFound": "لم يتم تسجيل مالك NFT هذا في تطبيقنا.",
-        "BuyNow": "اشتري الآن",
-        "Buy": "يشتري",
-        "Conversation": "محادثة",
-        "Create": "خلق",
-        "Author": "مؤلف",
-        "Commission": "عمولة",
-        "EnterCommission": "أدخل العمولة",
-        "Actions": "أجراءات",
-        "UpdateNFT": "تحديث NFT",
-        "NotOnSale": "ليس للبيع",
-        "MovieURL": "رابط الفيلم",
-        "EnterPrice": "أدخل السعر",
         "Currency": "عملة",
         "AreYouSureDeleteImage": "هل أنت متأكد أنك تريد إزالة الصورة؟",
         "AreYouSureDeleteVideo": "هل أنت متأكد أنك تريد إزالة الفيديو؟",
@@ -336,9 +343,9 @@
             "Author": "مؤلف",
             "SelectSeries": "حدد سلسلة",
             "Value": "قيمة",
-            "AreYouSure": "هل أنت واثق؟",
+            "AreYouSure": "هل أنت متأكد؟",
             "AuthorInvalid": "عنوان المؤلف غير صحيح!",
-            "Address": "تبوك",
+            "Address": "عنوان",
             "CoverImage": "صورة الغلاف",
             "UploadCoverImage": "تحميل صورة الغلاف",
             "CommissionAddressInvalid": "عنوان العمولة غير صحيح",
@@ -357,7 +364,7 @@
             "CreateContract": "إنشاء عقد",
             "SelectContract": "حدد العقد",
             "CreateContractFor": "إنشاء عقد لـ {{userName}}",
-            "ContractFor": "عقد بقيمة {{userName}}",
+            "ContractFor": "عقد مقابل {{userName}}",
             "UpdateContract": "تحديث العقد",
             "TransferOwnership": "نقل الملكية",
             "SetBaseURI": "تعيين Base URI",
@@ -366,7 +373,7 @@
             "CurrentBaseURL": "BaseURL الحالي",
             "ContractAddressAbsent": "عنوان العقد غائب",
             "FactoryAddressAbsent": "عنوان المصنع غائب",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} ( {{contractSymbol}} {{chainNetwork}}",
             "TitleRequired": "العنوان مطلوب",
             "SymbolRequired": "الرمز مطلوب",
             "TypeContractName": "اسم العقد",
@@ -376,6 +383,38 @@
             "Title": "مسابقات",
             "NewContest": "مسابقة جديدة"
         },
+        "import": {
+            "importNFT": "استيراد NFT&#39;s",
+            "importAttributes": "سمات استيراد NFT",
+            "fileNotFound": "عذرا ، ملف CSV غير موجود.",
+            "fileEmpty": "عذرا ، ملف CSV فارغ.",
+            "userIdNotFound": "المستخدم موجود ولكن معرف فارغ",
+            "errorLine": "خط {{1}}",
+            "fieldNotFound": "الحقل المطلوب &quot; {{1}} &quot; غير موجود",
+            "displayTypeEmpty": "نوع العرض لـ &quot; {{1}} &quot; غير موجود",
+            "taskStreamInvalid": "دفق المهام غير صالح",
+            "instructionsEmpty": "تعليمات تدفق المهام فارغة",
+            "complete": "مكتمل",
+            "activateUsers": "إرسال رسالة التفعيل للمستخدمين؟",
+            "importProgress": "تقدم",
+            "importOptions": "خيارات",
+            "sampleCSV": "تنزيل نموذج CSV",
+            "fileLabel": "تحميل جدول البيانات:",
+            "errorsTitle": "حدثت أخطاء"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "تصفية حسب مجموعات NFT",
+                "ShowNFTCollection": "عرض مجموعة NFT في ...",
+                "AllCollections": "كل المجموعات"
+            },
+            "ByUser": {
+                "AllAuthors": "كل المؤلفين",
+                "AllUsers": "الجميع",
+                "FilterByAuthors": "تصفية حسب المؤلفين"
+            }
+        },
+        "Back": "رجوع إلى المجموعة",
         "attributes": {
             "Title": "إدارة السمات",
             "Attributes": "صفات",
@@ -394,18 +433,11 @@
         },
         "profile": {
             "LogOut": "تسجيل خروج",
-            "Title": "ملف تعريف لـ {{userName}}",
+            "Title": "الملف الشخصي لـ {{userName}}",
             "Description": "بيانات المستخدم",
             "aboutPlaceholder": "تحرير السيرة الذاتية",
             "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
         },
-        "Add": "يضيف",
-        "Remove": "يزيل",
-        "NoNFTyet": "لا توجد NFTs حتى الآن",
-        "Claim": "مطالبة",
-        "ClaimNFT": "مطالبة NFT",
-        "Unlocking": "فتح",
-        "Unlock": "الغاء القفل",
         "sales": {
             "factory": {
                 "form": {
@@ -458,7 +490,7 @@
                         "amount": "كمية"
                     },
                     "small": {
-                        "seriesId": "سوف ينتمي الرمز المميز الجديد في سلسلة مع هذا المعرف",
+                        "seriesId": "رمز جديد ينتمي إلى سلسلة مع هذا المعرف",
                         "account": "مالك NFT المنشأ حديثًا. إذا لم يتم تعيينها - ستستخدم المحفظة الحالية",
                         "amount": "كمية NFT للنعناع"
                     }
@@ -504,7 +536,7 @@
                 "small": {
                     "tokenId": "معرف الرمز الذي يجب قفله أو إلغاء قفله",
                     "custodian": "عنوان يمكن فتحه",
-                    "recipient": "العنوان الذي سيتلقى الرموز المميزة"
+                    "recipient": "العنوان الذي سيتلقى الرموز"
                 }
             },
             "errors": {
@@ -521,50 +553,10 @@
             "Unlock": "الغاء القفل",
             "Locked": "مقفل",
             "CustodianAddress": "عنوان الوصي",
-            "TokenWasClaimed": "تمت المطالبة بالرمز &quot;{{title}}&quot;",
-            "TokenWasLocked": "تم قفل الرمز &quot;{{title}}&quot;",
-            "TokenWasUnlocked": "تم إلغاء قفل الرمز &quot;{{title}}&quot;"
+            "TokenWasClaimed": "تمت المطالبة بالرمز &quot; {{title}} &quot;",
+            "TokenWasLocked": "تم قفل الرمز &quot; {{title}} &quot;",
+            "TokenWasUnlocked": "تم إلغاء تأمين الرمز &quot; {{title}} &quot;"
         }
-    },
-    "errors": {
-        "Error": "خطأ",
-        "WalletAbsent": "المحفظة غير متصلة.",
-        "Rendering": "حدثت أخطاء أثناء عرض <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "السعر مطلوب!",
-        "NameRequired": "الاسم مطلوب!",
-        "PriceInvalid": "السعر غير صالح!",
-        "TransactionFailed": "فشل الاجراء",
-        "ChainNotSupported": "السلسلة المحددة غير مدعومة. السلسلة المدعومة: {{supportedChain}}",
-        "NeedMetaMaskConnected": "تحتاج إلى توصيل MetaMask للعمل مع التطبيق",
-        "UserNotLoggedInMetaMask": "لم يقم المستخدم بتسجيل الدخول إلى MetaMask",
-        "CurrencyNotFound": "العملة غير موجودة",
-        "WrongChain": "تم إنشاء NFT هذا تحت عنوان &quot;{{chain}}&quot;. الرجاء استخدام هذه السلسلة.",
-        "AmountInvalid": "المبلغ غير صالح!",
-        "NoRecipientSelected": "لم يتم تحديد مستلم",
-        "NotEnoughPermissionsWallet": "لا توجد أذونات كافية لقراءة محفظة هذا المستخدم",
-        "ThisUserHaveNoWallet": "لم يتم تخصيص محفظة لهذا المستخدم",
-        "TheWalletOfThisUserInvalid": "محفظة هذا المستخدم غير صالحة",
-        "WalletInvalid": "عنوان المحفظة غير صالح"
-    },
-    "admin": {
-        "Title": "الأصول الإدارية",
-        "SubscriptionTitle": "خطط الاشتراك"
-    },
-    "billing": {
-        "Title": "فواتير الأصول",
-        "CreditsMinimum": "الحد الأدنى من الاعتمادات",
-        "CreditsToAdd": "الاعتمادات لإضافتها",
-        "Save": "يحفظ",
-        "ThisLink": "هذا الرابط",
-        "errors": {
-            "CreditsMinimumNegative": "لا يمكن أن يكون الحد الأدنى للاعتمادات سالبًا",
-            "CreditsToAddNegative": "لا يمكن أن تكون الائتمانات المراد إضافتها سالبة"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "حدد المستلم",
-        "TransactionSuccess": "نجاح الصفقة",
-        "OrTypeWalletAddress": "أو اكتب عنوان محفظة المستلم"
     },
     "currencies": {
         "choose": "اختر عملة"

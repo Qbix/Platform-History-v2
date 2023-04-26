@@ -6,7 +6,7 @@
                 "startDate": "شروع کرنے کی تاریخ",
                 "startTime": "وقت آغاز",
                 "endDate": "آخری تاریخ",
-                "endTime": "اختتامی وقت",
+                "endTime": "آخر وقت",
                 "budget": "بجٹ"
             },
             "interests": {
@@ -33,7 +33,7 @@
             "setClip": "کٹ آؤٹ کلپ",
             "invalidURL": "غلط URL"
         },
-        "FileTooLarge": "کیشنگ کے لیے فائل بہت بڑی ہے۔ فائل کا زیادہ سے زیادہ سائز {{size}}",
+        "FileTooLarge": "کیشنگ کے لیے فائل بہت بڑی ہے۔ زیادہ سے زیادہ فائل سائز {{size}}",
         "InvalidPDF": "فائل ایک درست PDF نہیں ہے۔",
         "StartTypingTitleOrKeywords": "عنوان یا مطلوبہ الفاظ ٹائپ کرنا شروع کریں..."
     },
@@ -43,7 +43,7 @@
             "displayType": "مضمون"
         },
         "Websites\/slide": {
-            "description": "پریزنٹیشن میں ایک سلائیڈ، ایچ ٹی ایم ایل، آڈیو وغیرہ شامل کر سکتی ہے۔",
+            "description": "پریزنٹیشن میں ایک سلائیڈ، ایچ ٹی ایم ایل، آڈیو وغیرہ کو شامل کر سکتی ہے۔",
             "displayType": "سلائیڈ"
         },
         "Websites\/presentation": {

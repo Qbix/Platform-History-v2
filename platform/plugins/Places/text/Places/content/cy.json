@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lang)",
+    "LatLng": "( {{1}} lat, {{2}} LC)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "o fewn {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "fewn {{1}}"
     },
     "units": {
         "meter": "metr",
@@ -78,11 +78,11 @@
         },
         "Places\/nearby": {
             "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash",
-            "displayType": "Gerllaw lleoedd"
+            "displayType": "Gerllaw gan lefydd"
         },
         "Places\/interest": {
             "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash, sy&#39;n cyfateb i ddiddordeb",
-            "displayType": "Yn gosod diddordeb"
+            "displayType": "Yn rhoi diddordeb"
         }
     }
 }

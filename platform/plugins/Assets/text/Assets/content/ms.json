@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "ralat",
+        "WalletAbsent": "Dompet tidak bersambung.",
+        "Rendering": "Terdapat ralat semasa memaparkan <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Harga diperlukan!",
+        "NameRequired": "Nama (diperlukan!",
+        "PriceInvalid": "Harga tidak sah!",
+        "AmountInvalid": "Jumlah tidak sah!",
+        "TransactionFailed": "Transaksi gagal",
+        "ChainNotSupported": "Rantaian yang dipilih tidak disokong. Rantaian yang disokong: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Perlu MetaMask disambungkan untuk berfungsi dengan aplikasi",
+        "UserNotLoggedInMetaMask": "Pengguna tidak log masuk ke MetaMask",
+        "CurrencyNotFound": "Mata wang tidak ditemui",
+        "WrongChain": "NFT ini dibuat di bawah &quot; {{chain}} &quot;. Sila gunakan rantai ini.",
+        "NoRecipientSelected": "Tiada penerima dipilih",
+        "NotEnoughPermissionsWallet": "Tidak cukup kebenaran untuk membaca dompet pengguna ini",
+        "ThisUserHaveNoWallet": "Pengguna ini tidak mempunyai dompet yang diberikan",
+        "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak sah",
+        "WalletInvalid": "Alamat dompet tidak sah"
+    },
+    "admin": {
+        "Title": "Pentadbiran aset",
+        "SubscriptionTitle": "Pelan langganan"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Ketik untuk membayar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: caj diproses untuk {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : caj diproses untuk {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Terima kasih atas pembayaran anda kepada {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} melanggan {{plan.title}}",
         "YouSubscribedTo": "Anda telah melanggan {{plan.title}}",
         "Assets\/credits\/alert": "Anda mempunyai makluman yang berkaitan dengan akaun anda"
     },
     "charge": {
-        "Subject": "Anda mendapat bayaran sebanyak {{displayAmount}} daripada {{call 'publisher.displayName'}} oleh &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hei, ini hanya untuk memberitahu anda {{1}} telah dikenakan bayaran {{2}} untuk {{3}} oleh {{4}}"
+        "Subject": "Anda mendapat bayaran {{displayAmount}} daripada {{call 'publisher.displayName'}} dengan &quot; {{description}} &quot;",
+        "HasBeenCharged": "Hei, ini hanya untuk memberitahu anda {{1}} telah dicaj {{2}} untuk {{3}} oleh {{4}}"
     },
     "charged": {
-        "Subject": "Terima kasih atas pembayaran anda untuk &quot;{{description}}&quot;",
-        "HavePaid": "Hai {{1}}, ini hanyalah pengesahan pantas bahawa anda telah berjaya membayar {{2}} kepada {{3}} untuk {{4}}"
+        "Subject": "Terima kasih atas pembayaran anda untuk &quot; {{description}} &quot;",
+        "HavePaid": "Hai {{1}} , ini hanyalah pengesahan pantas bahawa anda telah berjaya membayar {{2}} hingga {{3}} untuk {{4}}"
     },
     "payment": {
         "AboutOrder": "Info tentang pesanan",
@@ -36,27 +60,25 @@
     },
     "credits": {
         "InviteAcceptedBy": "Jemputan diterima oleh {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} memasukkan nama pertama",
-        "Streams_user_lastname": "{{invitedUserName}} memasukkan nama keluarga",
-        "Streams_user_icon": "{{invitedUserName}} memasukkan ikon",
-        "Places_user_location": "{{invitedUserName}} memasukkan lokasi",
-        "Streams_greeting": "{{invitedUserName}} memasukkan salam",
+        "InvitedUserFilledStream": "{{invitedUserName}} diisi {{FilledStreamTitle}}",
+        "ForFillingStream": "Untuk mengisi {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "Anda mempunyai {{amount}} kredit untuk bermula",
-        "PaymentFor": "Pembayaran untuk &quot;{{1}}&quot;",
-        "PaymentTo": "Pembayaran kepada {{1}}",
-        "PaymentToUser": "Pembayaran kepada {{toUserName}}",
+        "PaymentFor": "Bayaran untuk &quot; {{1}} &quot;",
+        "PaymentTo": "Bayaran kepada {{1}}",
+        "PaymentToUser": "Bayaran kepada {{toUserName}}",
+        "CreatePrivateChat": "untuk sembang peribadi dengan {{toUserName}}",
         "CreatePaidStream": "untuk mencipta {{toStreamName}}",
-        "JoinedPaidStream": "untuk tempahan dalam &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "untuk mewujudkan komuniti &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "sebagai bayaran balik tempahan dalam &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "JoinedPaidStream": "untuk tempahan dalam &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "untuk mewujudkan komuniti &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "sebagai bayaran balik tempahan dalam &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "Membeli {{amount}} kredit",
         "BonusCredits": "Bonus {{amount}} kredit",
         "BuyAmountCredits": "Beli {{amount}} kredit",
-        "WatchClip": "Memperoleh {{amount}} kredit untuk menonton {{fromStreamTitle}}",
+        "WatchClip": "Mendapat {{amount}} kredit kerana menonton {{fromStreamTitle}}",
         "MissingCredits": "Hilang Kredit",
         "YouMissingCredits": "Anda memerlukan {{amount}} kredit tambahan untuk meneruskan.",
         "BuyCredits": "Beli kredit",
-        "BuyBonus": "Membeli {{amount}} kredit sekali gus, akan membawa kepada {{bonus}} bonus kredit.",
+        "BuyBonus": "Membeli {{amount}} kredit sekaligus, akan membawa kepada {{bonus}} kredit bonus.",
         "Buy": "Beli",
         "PurchaseCredits": "Kredit Belian",
         "Credits": "Kredit",
@@ -65,16 +87,14 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} kredit",
             "BonusCredits": "{{amount}} kredit"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} diisi {{FilledStreamTitle}}",
-        "ForFillingStream": "Untuk mengisi {{FilledStreamTitle}}",
-        "CreatePrivateChat": "untuk sembang peribadi dengan {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Tarikh",
         "Amount": "Jumlah",
         "Description": "Penerangan",
         "Client": "Pelanggan",
+        "User": "pengguna",
         "To": "kepada",
         "From": "daripada",
         "SeeHistory": "Lihat sejarah pembayaran untuk {{1}}",
@@ -84,11 +104,11 @@
         "PaymentToUser": "Menghantar {{amount}} kredit",
         "CreatePaidStream": "Menghabiskan {{amount}} kredit",
         "WatchClip": {
-            "+": "Memperoleh {{amount}} kredit",
+            "+": "Mendapat {{amount}} kredit",
             "-": "Menghabiskan {{amount}} kredit"
         },
         "JoinedPaidStream": {
-            "+": "Memperoleh {{amount}} kredit",
+            "+": "Mendapat {{amount}} kredit",
             "-": "Menghabiskan {{amount}} kredit"
         },
         "LeftPaidStream": {
@@ -98,20 +118,19 @@
         "CreatedCommunity": "Menghabiskan {{amount}} kredit",
         "BoughtCredits": "Membeli {{amount}} kredit",
         "BonusCredits": "Mendapat bonus {{amount}} kredit",
-        "InviteAcceptedBy": "Memperoleh {{amount}} kredit",
-        "Streams_user_firstname": "Memperoleh {{amount}} kredit",
-        "Streams_user_lastname": "Memperoleh {{amount}} kredit",
-        "Streams_user_icon": "Memperoleh {{amount}} kredit",
-        "Places_user_location": "Memperoleh {{amount}} kredit",
-        "Streams_greeting": "Memperoleh {{amount}} kredit",
-        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit",
-        "User": "pengguna"
+        "InviteAcceptedBy": "Mendapat {{amount}} kredit",
+        "Streams_user_firstname": "Mendapat {{amount}} kredit",
+        "Streams_user_lastname": "Mendapat {{amount}} kredit",
+        "Streams_user_icon": "Mendapat {{amount}} kredit",
+        "Places_user_location": "Mendapat {{amount}} kredit",
+        "Streams_greeting": "Mendapat {{amount}} kredit",
+        "YouHaveCreditsToStart": "Mendapat {{amount}} kredit"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Maklumat Pembayaran",
         "confirm": {
             "title": "Mula Langganan",
-            "message": "Adakah anda ingin melanggan {{title}}?",
+            "message": "Mulakan langganan berulang kepada &quot; {{title}} &quot;?",
             "ok": "okey",
             "cancel": "Batal"
         },
@@ -131,7 +150,7 @@
         "Period": "Tempoh",
         "Price": "harga",
         "AreYouSureUnsubscribe": "Adakah anda pasti mahu menyahlanggan pelan ini?",
-        "YouUnsubscribedFromPlan": "Anda berhenti melanggan pelan &quot;{{planTitle}}&quot;. Anda tidak akan dicaj, tetapi langganan anda akan diteruskan sehingga {{endsIn}}",
+        "YouUnsubscribedFromPlan": "Anda menyahlanggan pelan &quot; {{planTitle}} &quot;. Anda tidak akan dicaj, tetapi langganan anda akan diteruskan sehingga {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "tajuk rancangan",
             "PricePlaceholder": "harga",
@@ -145,7 +164,7 @@
         "BuyAmountCredits": "Beli {{amount}} kredit",
         "confirm": {
             "title": "Membuat pembayaran",
-            "message": "Adakah anda bersetuju untuk membayar {{symbol}}{{amount}}?",
+            "message": "Adakah anda bersetuju untuk membayar {{symbol}} {{amount}} ?",
             "ok": "okey",
             "cancel": "Batal"
         }
@@ -174,7 +193,7 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Memperoleh {{amount}} kredit"
+            "content": "Mendapat {{amount}} kredit"
         },
         "Assets\/credits\/bought": {
             "content": "Membeli {{amount}} kredit"
@@ -192,7 +211,18 @@
             "content": "Menerima {{amount}} kredit daripada {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Anda mempunyai sedikit kredit pada akaun anda. Sila layari <a href='{{link}}'>pautan ini<\/a> untuk membeli lebih banyak kredit."
+            "content": "Anda mempunyai sedikit kredit pada akaun anda. Sila layari <a href='<i translate='no'>999 &#39;&gt;pautan ini<\/a> untuk membeli lebih banyak kredit."
+        }
+    },
+    "billing": {
+        "Title": "Pengebilan aset",
+        "CreditsMinimum": "Kredit minimum",
+        "CreditsToAdd": "Kredit untuk ditambah",
+        "Save": "Jimat",
+        "ThisLink": "pautan ini",
+        "errors": {
+            "CreditsMinimumNegative": "Minimum kredit tidak boleh negatif",
+            "CreditsToAddNegative": "Kredit untuk ditambahkan tidak boleh negatif"
         }
     },
     "services": {
@@ -203,8 +233,11 @@
             "LinkPlaceholder": "tetapkan pautan maklumat tambahan",
             "DescriptionPlaceholder": "Penerangan perkhidmatan",
             "SaveService": "Simpan Perkhidmatan",
-            "SelectRequiredParticipants": "Peserta Diperlukan",
+            "SelectRequiredParticipants": "Diperlukan peserta berkaitan",
             "RequiredParticipantsDesc": "Sila pilih peserta berkaitan yang diperlukan untuk menggunakan perkhidmatan ini (contohnya haiwan peliharaan untuk &quot;Pertunjukan anjing&quot;, atau kanak-kanak untuk &quot;Percutian kanak-kanak&quot; dll). Jika perkhidmatan dibayar, pengguna perlu membayar juga untuk setiap peserta yang berkaitan."
+        },
+        "EditServiceTemplate": {
+            "Title": "Edit Perkhidmatan"
         },
         "ManageServiceTemplates": "Urus Templat Perkhidmatan",
         "ManageServices": "Urus Perkhidmatan",
@@ -212,15 +245,30 @@
         "OptionalContribution": "Sumbangan pilihan",
         "RequiredPayment": "Bayaran yang diperlukan",
         "AreYouSureDelete": "Adakah anda pasti mahu memadamkan perkhidmatan ini?",
-        "AmountServicesRelated": "Terdapat {{amount}} ketersediaan yang berkaitan dengan perkhidmatan ini. Mereka juga akan dikeluarkan.",
-        "EditServiceTemplate": {
-            "Title": "Edit Perkhidmatan"
-        }
+        "AmountServicesRelated": "Terdapat {{amount}} ketersediaan yang berkaitan dengan perkhidmatan ini. Mereka juga akan dikeluarkan."
+    },
+    "transfer": {
+        "SelectRecipient": "Pilih penerima",
+        "TransactionSuccess": "Kejayaan Transaksi",
+        "OrTypeWalletAddress": "ATAU taip alamat dompet penerima"
     },
     "NFT": {
-        "Title": "Maklumat tentang {{title}} NFT",
-        "Description": "Maklumat terperinci tentang NFT",
-        "FixedBid": "Beli sekarang",
+        "Title": "Tajuk",
+        "Name": "Nama",
+        "EnterName": "Masukkan nama",
+        "EnterAuthorWallet": "Masukkan dompet pengarang",
+        "InformationAboutTitle": "Maklumat tentang {{title}} NFT",
+        "Description": "Penerangan",
+        "DetailedInformationAboutNFT": "Maklumat terperinci tentang NFT",
+        "PresaleStarts": "Prajualan Bermula 23 Dis",
+        "OwnerUserNotFound": "Pemilik NFT ini tidak berdaftar dalam permohonan kami.",
+        "BuyNow": "Beli sekarang",
+        "Buy": "Beli",
+        "Add": "Tambah",
+        "Remove": "Alih keluar",
+        "NoNFTyet": "Belum ada NFT",
+        "Conversation": "Perbualan",
+        "Create": "Buat",
         "CurrentBid": "Tawaran semasa",
         "StartingIn": "Bermula dalam",
         "EndingIn": "Berakhir dalam",
@@ -234,7 +282,10 @@
         "StartingDate": "Tarikh mula",
         "BidsBelowThisAmount": "Bida di bawah jumlah ini tidak akan dibenarkan",
         "MinimumBid": "Tawaran minimum",
+        "Author": "Pengarang",
         "Price": "harga",
+        "Commission": "Suruhanjaya",
+        "EnterCommission": "Masukkan komisen",
         "Owner": "Pemilik",
         "SelectCategory": "Pilih Kategori",
         "Day": "Hari",
@@ -247,23 +298,31 @@
         "Seconds": "Detik",
         "SalesCreator": "daripada jualan akan diberikan kepada pencipta",
         "Details": "Butiran",
-        "Bids": "bidaan",
+        "Bids": "Bida",
         "History": "Sejarah",
-        "LoremIpsum": "Lorem Ipsum hanyalah teks tiruan bagi industri percetakan dan penataan huruf.",
+        "LoremIpsum": "Lorem Ipsum hanyalah teks tiruan bagi industri percetakan dan taip huruf.",
         "PutOnSale": "Dijual",
         "PutOffSale": "Menarik diri daripada jualan",
         "Transfer": "Pemindahan",
+        "Actions": "Tindakan",
+        "Claim": "Tuntutan",
+        "ClaimNFT": "Tuntut NFT",
+        "Unlocking": "Membuka kunci",
+        "Unlock": "Buka kunci",
         "Update": "Kemas kini",
-        "UpdateToken": "Kemas Kini Token",
+        "UpdateToken": "Kemas kini Token",
+        "UpdateNFT": "Kemas kini NFT",
         "CreateToken": "Cipta Token",
         "PlaceBid": "Letakkan taruhan",
         "SoldOut": "terjual",
+        "NotOnSale": "Tidak Dijual",
         "NftName": "nama NFT",
         "DescribeYourNFT": "Sila terangkan NFT anda",
         "NftPicture": "Gambar untuk mewakili NFT",
         "NftMovie": "Filem untuk mewakili NFT",
         "UploadMovie": "Muat naik filem",
         "MovieSource": "Sumber Filem",
+        "MovieURL": "URL filem",
         "UploadFile": "Muat naik fail",
         "PutOnMarketplace": "Letakkan di pasaran",
         "InstantPurchase": "Masukkan harga untuk membolehkan pengguna membeli NFT anda dengan serta-merta",
@@ -271,60 +330,9 @@
         "TimedAuction": "Lelongan bermasa",
         "OpenForBids": "Terbuka untuk tawaran",
         "PriceOnePiece": "Masukkan harga untuk sekeping",
+        "EnterPrice": "Masukkan harga",
         "EnterMinimumBid": "Masukkan bida minimum",
         "SelectChain": "Pilih rantai",
-        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Sila gunakan rantai ini.",
-        "import": {
-            "importNFT": "Mengimport NFT",
-            "fileNotFound": "Maaf, fail CSV tidak ditemui.",
-            "fileEmpty": "Maaf, fail CSV kosong.",
-            "userIdNotFound": "pengguna wujud tetapi id kosong",
-            "errorLine": "baris {{1}}",
-            "fieldNotFound": "Medan yang diperlukan &quot;{{1}}&quot; tidak ditemui",
-            "taskStreamInvalid": "aliran tugas tidak sah",
-            "instructionsEmpty": "arahan aliran tugas kosong",
-            "complete": "lengkap",
-            "activateUsers": "hantar mesej pengaktifan kepada pengguna?",
-            "importProgress": "Kemajuan",
-            "importOptions": "Pilihan",
-            "sampleCSV": "Muat turun Contoh CSV",
-            "fileLabel": "Muat Naik Hamparan:",
-            "errorsTitle": "Ralat berlaku",
-            "importAttributes": "Import atribut NFT",
-            "displayTypeEmpty": "Jenis paparan untuk &quot;{{1}}&quot; tidak ditemui"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Tapis mengikut Koleksi NFT",
-                "ShowNFTCollection": "Tunjukkan koleksi NFT dalam ...",
-                "AllCollections": "Semua Koleksi"
-            },
-            "ByUser": {
-                "AllAuthors": "Semua Pengarang",
-                "AllUsers": "Semua orang",
-                "FilterByAuthors": "Tapis mengikut Pengarang"
-            }
-        },
-        "Back": "Kembali ke Koleksi",
-        "Name": "Nama",
-        "EnterName": "Masukkan nama",
-        "EnterAuthorWallet": "Masukkan dompet pengarang",
-        "InformationAboutTitle": "Maklumat tentang {{title}} NFT",
-        "DetailedInformationAboutNFT": "Maklumat terperinci tentang NFT",
-        "PresaleStarts": "Prajualan Bermula 23 Dis",
-        "OwnerUserNotFound": "Pemilik NFT ini tidak berdaftar dalam permohonan kami.",
-        "BuyNow": "Beli sekarang",
-        "Buy": "Beli",
-        "Conversation": "Perbualan",
-        "Create": "Buat",
-        "Author": "Pengarang",
-        "Commission": "Suruhanjaya",
-        "EnterCommission": "Masukkan komisen",
-        "Actions": "Tindakan",
-        "UpdateNFT": "Kemas kini NFT",
-        "NotOnSale": "Tidak Dijual",
-        "MovieURL": "URL filem",
-        "EnterPrice": "Masukkan harga",
         "Currency": "mata wang",
         "AreYouSureDeleteImage": "Adakah anda pasti mahu mengalih keluar imej?",
         "AreYouSureDeleteVideo": "Adakah anda pasti mahu mengalih keluar video?",
@@ -365,7 +373,7 @@
             "CurrentBaseURL": "BaseURL semasa",
             "ContractAddressAbsent": "Alamat kontrak tidak hadir",
             "FactoryAddressAbsent": "Alamat kilang tiada",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "Tajuk diperlukan",
             "SymbolRequired": "Simbol diperlukan",
             "TypeContractName": "nama kontrak",
@@ -375,6 +383,38 @@
             "Title": "Peraduan",
             "NewContest": "Peraduan Baru"
         },
+        "import": {
+            "importNFT": "Mengimport NFT",
+            "importAttributes": "Import atribut NFT",
+            "fileNotFound": "Maaf, fail CSV tidak ditemui.",
+            "fileEmpty": "Maaf, fail CSV kosong.",
+            "userIdNotFound": "pengguna wujud tetapi id kosong",
+            "errorLine": "baris {{1}}",
+            "fieldNotFound": "Medan yang diperlukan &quot; {{1}} &quot; tidak dijumpai",
+            "displayTypeEmpty": "Jenis paparan untuk &quot; {{1}} &quot; tidak ditemui",
+            "taskStreamInvalid": "aliran tugas tidak sah",
+            "instructionsEmpty": "arahan aliran tugas kosong",
+            "complete": "lengkap",
+            "activateUsers": "hantar mesej pengaktifan kepada pengguna?",
+            "importProgress": "Kemajuan",
+            "importOptions": "Pilihan",
+            "sampleCSV": "Muat turun Contoh CSV",
+            "fileLabel": "Muat Naik Hamparan:",
+            "errorsTitle": "Ralat berlaku"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Tapis mengikut Koleksi NFT",
+                "ShowNFTCollection": "Tunjukkan koleksi NFT dalam ...",
+                "AllCollections": "Semua Koleksi"
+            },
+            "ByUser": {
+                "AllAuthors": "Semua Pengarang",
+                "AllUsers": "Semua orang",
+                "FilterByAuthors": "Tapis mengikut Pengarang"
+            }
+        },
+        "Back": "Kembali ke Koleksi",
         "attributes": {
             "Title": "Urus Atribut",
             "Attributes": "Atribut",
@@ -398,13 +438,6 @@
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Adakah anda pasti mahu log keluar?"
         },
-        "Add": "Tambah",
-        "Remove": "Alih keluar",
-        "NoNFTyet": "Belum ada NFT",
-        "Claim": "Tuntutan",
-        "ClaimNFT": "Tuntut NFT",
-        "Unlocking": "Membuka kunci",
-        "Unlock": "Buka kunci",
         "sales": {
             "factory": {
                 "form": {
@@ -428,7 +461,7 @@
                         "price": "harga",
                         "beneficiary": "Benefisiari menjual token, jika tidak akan menjadi penghantar",
                         "autoindex": "Autoindex",
-                        "duration": "Kunci selepas mencetak. Zero bermakna dapatkannya dengan segera.",
+                        "duration": "Kunci selepas mencetak. Sifar bermakna dapatkan segera.",
                         "rateInterval": "selang baldi untuk pembelian khas",
                         "rateAmount": "jumlah baldi untuk pembelian khas"
                     }
@@ -520,50 +553,10 @@
             "Unlock": "Buka kunci",
             "Locked": "Terkunci",
             "CustodianAddress": "Alamat penjaga",
-            "TokenWasClaimed": "Token &quot;{{title}}&quot; telah dituntut",
-            "TokenWasLocked": "Token &quot;{{title}}&quot; telah dikunci",
-            "TokenWasUnlocked": "Token &quot;{{title}}&quot; telah dibuka kuncinya"
+            "TokenWasClaimed": "Token &quot; {{title}} &quot; telah dituntut",
+            "TokenWasLocked": "Token &quot; {{title}} &quot; telah dikunci",
+            "TokenWasUnlocked": "Token &quot; {{title}} &quot; telah dibuka kuncinya"
         }
-    },
-    "errors": {
-        "Error": "ralat",
-        "WalletAbsent": "Dompet tidak bersambung.",
-        "Rendering": "Terdapat ralat semasa memaparkan <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Harga diperlukan!",
-        "NameRequired": "Nama (diperlukan!",
-        "PriceInvalid": "Harga tidak sah!",
-        "TransactionFailed": "Transaksi gagal",
-        "ChainNotSupported": "Rantaian yang dipilih tidak disokong. Rantaian yang disokong: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Perlu MetaMask disambungkan untuk berfungsi dengan aplikasi",
-        "UserNotLoggedInMetaMask": "Pengguna tidak log masuk ke MetaMask",
-        "CurrencyNotFound": "Mata wang tidak ditemui",
-        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Sila gunakan rantai ini.",
-        "AmountInvalid": "Jumlah tidak sah!",
-        "NoRecipientSelected": "Tiada penerima dipilih",
-        "NotEnoughPermissionsWallet": "Tidak cukup kebenaran untuk membaca dompet pengguna ini",
-        "ThisUserHaveNoWallet": "Pengguna ini tidak mempunyai dompet yang diberikan",
-        "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak sah",
-        "WalletInvalid": "Alamat dompet tidak sah"
-    },
-    "admin": {
-        "Title": "Pentadbiran aset",
-        "SubscriptionTitle": "Pelan langganan"
-    },
-    "billing": {
-        "Title": "Pengebilan aset",
-        "CreditsMinimum": "Kredit minimum",
-        "CreditsToAdd": "Kredit untuk ditambah",
-        "Save": "Jimat",
-        "ThisLink": "pautan ini",
-        "errors": {
-            "CreditsMinimumNegative": "Minimum kredit tidak boleh negatif",
-            "CreditsToAddNegative": "Kredit untuk ditambahkan tidak boleh negatif"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Pilih penerima",
-        "TransactionSuccess": "Kejayaan Transaksi",
-        "OrTypeWalletAddress": "ATAU taip alamat dompet penerima"
     },
     "currencies": {
         "choose": "Pilih mata wang"

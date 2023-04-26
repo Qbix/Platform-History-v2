@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} ng)",
+    "LatLng": "( {{1}} lat, {{2}} ng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "inom {{1}}"
     },
     "units": {
@@ -18,10 +18,10 @@
         "inches": "tum"
     },
     "location": {
-        "interested": "Jag är intresserad av saker som äger rum inom {{select}} från",
+        "interested": "Jag är intresserad av saker som äger rum inom {{select}} av",
         "update": "Uppdatera min plats",
         "set": "Ställ in min plats",
-        "prompt": "{{ClickOrTap}} här för att<br> ställ in din<br> plats",
+        "prompt": "{{ClickOrTap}} hit till<br> ställ in din<br> plats",
         "myCurrentLocation": "Min nuvarande plats",
         "enterAddress": "Ange en adress",
         "enterPostcode": "Vänligen ange ditt postnummer\/postnummer",
@@ -61,7 +61,7 @@
             "displayType": "Platser"
         },
         "Places\/location": {
-            "description": "Representerar en byggnad, plats, fartyg, park, etc.",
+            "description": "Representerar en byggnad, lokal, fartyg, park, etc.",
             "displayType": "Plats"
         },
         "Places\/area": {

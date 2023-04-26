@@ -1,16 +1,40 @@
 {
+    "avatar": {
+        "Someone": "شخص ما"
+    },
+    "identifier": {
+        "types": {
+            "email": "بريد إلكتروني",
+            "mobile": "متحرك",
+            "web3": "ويب 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "نسخ! الآن يمكنك لصقه في أي مكان."
+    },
+    "analytics": {
+        "Title": "تحليلات",
+        "Daily": "يوميًا",
+        "Weekly": "أسبوعي",
+        "Monthly": "شهريا",
+        "Application": "طلب",
+        "Pages": "الصفحات",
+        "Services": "خدمات",
+        "Faq": "التعليمات",
+        "WeekDays": "أيام الأسبوع"
+    },
     "actions": {
         "LogIn": "تسجيل الدخول",
         "LogOut": "تسجيل خروج"
     },
     "activate": {
-        "SetAsPrimary": "تعيين {{1}} باعتباره {{2}} الأساسي",
+        "OneTimeCode": "أدخل الرمز الذي تلقيته:",
+        "SetAsPrimary": "تعيين {{1}} ك {{2}} الأساسي الخاص بي",
         "ChoosePassPhrase": "اختر <strong>عبارة مرور<\/strong> لتسجيل الدخول باستخدامها.<br> عبارة بسيطة تتكون من بضع كلمات يسهل عليك تذكرها.",
         "ChoosePassPhraseSeeSuggestions": "اختر <strong>عبارة مرور<\/strong> جيدة لحماية حسابك. انظر إلى الاقتراحات لبعض الأفكار.",
         "LogOutAndTryAgain": "سجل الخروج وحاول مرة أخرى",
         "IfYouFeel": "إذا شعرت أن شيئًا ما قد حدث خطأ ، يمكنك ذلك",
         "SetIdentifierButtonTitle": "ابدأ من جديد",
-        "OneTimeCode": "أدخل الرمز الذي تلقيته:",
         "ActivateMyAccount": "تفعيل حسابي"
     },
     "session": {
@@ -31,39 +55,43 @@
         "title": "إذن",
         "prompt": "هل تريد تمكين الإخطارات؟ ستتلقى تحديثات في الوقت الفعلي حول الأشياء التي تهتم بها.",
         "yes": "نعم",
-        "no": "رقم",
-        "WelcomePleaseVerifyEmail": "مرحبا! يرجى التحقق من عنوان البريد الإلكتروني الخاص بك.",
-        "WelcomeVerifyEmail": "مرحبا! تحقق من عنوان بريدك الإلكتروني.",
+        "no": "لا",
+        "WelcomePleaseVerifyEmail": "مرحباً! يرجى التحقق من عنوان البريد الإلكتروني الخاص بك.",
+        "WelcomeVerifyEmail": "مرحباً! تحقق من عنوان بريدك الإلكتروني.",
         "ForgetPass": "مرحبًا ، هل نسيت عبارة مرورك؟",
         "PassphraseSaved": "تم حفظ عبارة المرور الخاصة بك.",
         "IdentifierActivated": "تم تفعيل {{type}} الخاص بك.",
         "CompletedActivation": "لقد أكملت تنشيط المستخدم.",
         "CompletedActivationLogIn": "لقد أكملت تنشيط المستخدم. حاول تسجيل الدخول الآن."
     },
+    "contacts": {
+        "dialog": {
+            "title": "اختر جهة اتصال",
+            "CreateAccount": "+ جهة اتصال جديدة",
+            "CreateAccountNotFound": "Q.users.Cordova.UI.create غير موجود",
+            "SearchByName": "البحث عن طريق الإسم",
+            "EmptyContacts": "لم يتم العثور على جهات الاتصال ..."
+        },
+        "select": {
+            "title": "حدد جهة اتصال {{displayName}}"
+        }
+    },
     "usersContacts": {
         "selectLabel": "الرجاء تحديد التسمية.",
         "inviteUser": "قم بدعوة المستخدمين",
         "selectRole": "حدد الدور",
-        "inviteRole": "دعوة {{role}}"
+        "inviteRole": "قم بدعوة {{role}}"
     },
     "invalidLanguageSelected": "تم تحديد لغة غير صالحة",
-    "contacts": {
-        "dialog": {
-            "title": "اختر جهة اتصال",
-            "SearchByName": "البحث عن طريق الإسم",
-            "CreateAccount": "+ جهة اتصال جديدة",
-            "CreateAccountNotFound": "Q.users.Cordova.UI.create غير موجود",
-            "EmptyContacts": "لم يتم العثور على جهات الاتصال ..."
-        },
-        "select": {
-            "title": "حدد جهة اتصال لـ {{displayName}}"
-        }
+    "platforms": {
+        "wallet": "محفظة",
+        "broadcast": "إذاعة"
     },
     "login": {
-        "title": "مرحبا",
+        "title": "مرحباً",
         "directions": "إنشاء حساب أو تسجيل الدخول.",
         "directionsNoRegister": "تسجيل الدخول إذا كان لديك حساب.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "أدخل عبارة المرور الخاصة بك:",
         "loginButton": "البدء",
         "registerButton": "البدء",
@@ -71,12 +99,13 @@
         "forgot": "هل نسيت ذلك؟",
         "resendConfirm": "هل تريد إرسال رسالة لإعادة تعيين عبارة مرورك؟",
         "resendSuccess": "تحقق من وجود رسالة لإعادة تعيين عبارة المرور الخاصة بك",
-        "resendClose": "قريب",
-        "noPassphrase": "قبل أن تتمكن من تسجيل الدخول ، يجب عليك تعيين عبارة مرور عن طريق النقر فوق الارتباط الموجود في رسالة التنشيط الخاصة بك.",
+        "resendClose": "يغلق",
+        "noPassphrase": "قبل أن تتمكن من تسجيل الدخول ، يجب عليك تعيين عبارة مرور بالنقر فوق الارتباط الموجود في رسالة التنشيط الخاصة بك.",
         "notVerified": "يجب أن ترسل لنفسك رسالة تفعيل من أجل تسجيل الدخول.",
-        "emailExists": "هل حاولت التسجيل مع هذا البريد الإلكتروني من قبل؟ إذا كان الأمر كذلك ، فتحقق من صندوق الوارد الخاص بك لتنشيط حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
+        "emailExists": "هل حاولت التسجيل بهذا البريد الإلكتروني من قبل؟ إذا كان الأمر كذلك ، فتحقق من صندوق الوارد الخاص بك لتنشيط حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
         "mobileExists": "هل حاولت التسجيل باستخدام رقم الهاتف المحمول هذا من قبل؟ إذا كان الأمر كذلك ، فتحقق من رسائل SMS الخاصة بك لتنشيط حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
         "usingOther": "أو تستطيع",
+        "connectPlatforms": "أو الاتصال باستخدام:",
         "prompt": "اختيار اسم المستخدم:",
         "newUser": "أو إنشاء حساب جديد أدناه",
         "placeholders": {
@@ -88,21 +117,13 @@
         "confirmTerms": "قبول شروط الخدمة؟",
         "facebookNoEmail": "يفتقد حساب Facebook الخاص بك إلى عنوان بريد إلكتروني مؤكد. ببساطة قم بتسجيل الدخول بالطريقة الأصلية.",
         "picTooltip": "يمكنك تغيير هذه الصورة لاحقا",
-        "wallet": {
-            "payload": "سجّل الدخول إلى {{host}} في الساعة {{timestamp}}",
-            "alert": {
-                "title": "إعادة التوجيه إلى Wallet",
-                "content": "بمجرد إغلاق مربع الحوار هذا ، سيتم نقلك إلى محفظتك. بعد تسجيل الدخول ، عد إلى هذه الصفحة."
-            }
-        },
         "web3": {
-            "payload": "سجّل الدخول إلى {{host}} في الساعة {{timestamp}}",
+            "payload": "قم بتسجيل الدخول إلى {{host}} في الوقت {{timestamp}}",
             "alert": {
                 "title": "إعادة التوجيه إلى Wallet",
                 "content": "بمجرد إغلاق مربع الحوار هذا ، سيتم نقلك إلى محفظتك. بعد تسجيل الدخول ، عد إلى هذه الصفحة."
             }
-        },
-        "connectPlatforms": "أو الاتصال باستخدام:"
+        }
     },
     "setIdentifier": {
         "title": "أضف طريقة لتسجيل الدخول",
@@ -111,54 +132,26 @@
             "identifier": "أدخل رقم هاتفك المحمول أو البريد الإلكتروني",
             "mobile": "أدخل رقم هاتفك المحمول",
             "email": "أدخل عنوان بريدك الالكتروني",
-            "username": "اسم االمستخدم"
+            "username": "اسم المستخدم"
         }
     },
     "prompt": {
-        "title": "{{Platform}} الحساب",
-        "areUsing": "أنت تستخدم {{platform}} كـ",
-        "noLongerUsing": "لم تعد متصلًا بـ {{platform}} كـ",
+        "title": "{{Platform}} حساب",
+        "areUsing": "أنت تستخدم {{platform}} كملف",
+        "noLongerUsing": "لم تعد متصل بـ {{platform}} كـ",
         "doAuth": "تسجيل الدخول بهذا الحساب",
         "doSwitch": "قم بالتبديل إلى هذا الحساب"
     },
     "roles": {
-        "Owner": "صاحب",
-        "Admin": "مشرف",
+        "Owner": "مالك",
+        "Admin": "مسؤل",
         "Member": "عضو",
-        "Guest": "زائر",
+        "Guest": "ضيف",
         "Host": "يستضيف"
     },
-    "analytics": {
-        "Title": "تحليلات",
-        "Daily": "اليومي",
-        "Weekly": "أسبوعي",
-        "Monthly": "شهريا",
-        "Application": "طلب",
-        "Pages": "الصفحات",
-        "Services": "خدمات",
-        "Faq": "التعليمات",
-        "WeekDays": "أيام الأسبوع"
-    },
-    "avatar": {
-        "Someone": "شخصا ما"
-    },
     "web3": {
-        "WrongMethod": "طريقة العقد غير صحيحة {{methodName}}",
+        "WrongMethod": "طريقة العقد الخاطئة {{methodName}}",
         "ChangeWallet": "تغيير المحفظة"
-    },
-    "identifier": {
-        "types": {
-            "email": "البريد الإلكتروني",
-            "mobile": "التليفون المحمول",
-            "web3": "ويب 3"
-        }
-    },
-    "clipboard": {
-        "Copied": "نسخ! الآن يمكنك لصقه في أي مكان."
-    },
-    "platforms": {
-        "wallet": "محفظة",
-        "broadcast": "إذاعة"
     },
     "labels": {
         "addToPhonebook": "إضافة إلى جهات اتصال هاتفي",

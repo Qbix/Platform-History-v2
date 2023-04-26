@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} latia, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "sisällä {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "{{1}} sisällä"
     },
     "units": {
         "meter": "mittari",
@@ -18,13 +18,13 @@
         "inches": "tuumaa"
     },
     "location": {
-        "interested": "Olen kiinnostunut asioista, jotka tapahtuvat {{select}} sisällä",
+        "interested": "Olen kiinnostunut asioista, jotka tapahtuvat {{select}} :n sisällä",
         "update": "Päivitä Oma sijainti",
         "set": "Aseta Oma sijainti",
         "prompt": "{{ClickOrTap}} tänne<br> aseta omasi<br> sijainti",
         "myCurrentLocation": "Nykyinen sijaintini",
         "enterAddress": "Anna osoite",
-        "enterPostcode": "Anna postinumerosi",
+        "enterPostcode": "Anna postinumerosi\/postinumerosi",
         "create": {
             "action": "Lisää sijainti",
             "title": "Uusi sijainti",

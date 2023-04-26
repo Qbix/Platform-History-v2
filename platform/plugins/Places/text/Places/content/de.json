@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lang)",
+    "LatLng": "( {{1}} Lat, {{2}} Ing)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "innerhalb von {{1}}"
     },
     "units": {
@@ -14,27 +14,27 @@
         "miles": "Meilen",
         "mi": "mi",
         "foot": "Fuß",
-        "feet": "Fuß",
+        "feet": "Füße",
         "inches": "Zoll"
     },
     "location": {
         "interested": "Ich interessiere mich für Dinge, die innerhalb von {{select}} von stattfinden",
         "update": "Meinen Standort aktualisieren",
         "set": "Meinen Standort festlegen",
-        "prompt": "{{ClickOrTap}} hierher<br> setze deine<br> Lage",
+        "prompt": "{{ClickOrTap}} hier an<br> setze deine<br> Standort",
         "myCurrentLocation": "Mein aktueller Standort",
         "enterAddress": "Gib eine Adresse ein",
         "enterPostcode": "Bitte geben Sie Ihre Postleitzahl \/ Postleitzahl ein",
         "create": {
             "action": "Ort hinzufügen",
-            "title": "Neuer Standort",
+            "title": "Neuen Ort",
             "nameYourLocation": "Nennen Sie Ihren Standort"
         },
         "confirm": {
             "title": "Diesen Ort speichern?",
             "message": "Planen Sie, diesen Standort in Zukunft wieder zu nutzen?",
-            "ok": "ja",
-            "cancel": "Nein"
+            "ok": "Ja",
+            "cancel": "NEIN"
         },
         "add": {
             "title": "Benennen Sie diesen Ort",
@@ -62,7 +62,7 @@
         },
         "Places\/location": {
             "description": "Repräsentiert ein Gebäude, einen Veranstaltungsort, ein Schiff, einen Park usw.",
-            "displayType": "Ort"
+            "displayType": "Standort"
         },
         "Places\/area": {
             "description": "Stellt einen Bereich innerhalb eines Standorts dar, z. B. ein Zimmer oder eine Suite",
@@ -70,7 +70,7 @@
         },
         "Places\/floor": {
             "description": "Stellt eine Etage in einem Gebäude oder Schiff dar",
-            "displayType": "Umhauen"
+            "displayType": "Boden"
         },
         "Places\/column": {
             "description": "Stellt eine Säule in einem Gebäude oder Schiff dar",

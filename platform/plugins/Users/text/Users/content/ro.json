@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Cineva"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiat! Acum îl puteți lipi oriunde."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Zilnic",
@@ -11,17 +24,17 @@
         "WeekDays": "Zilele saptamanii"
     },
     "actions": {
-        "LogIn": "Autentificare",
+        "LogIn": "log in",
         "LogOut": "deconectați-vă"
     },
     "activate": {
-        "SetAsPrimary": "Setați {{1}} ca {{2}} principal",
-        "ChoosePassPhrase": "Alegeți o <strong>expresie<\/strong> de acces cu care să vă conectați.<br> O frază simplă formată din câteva cuvinte pe care le vei aminti cu ușurință.",
-        "ChoosePassPhraseSeeSuggestions": "Alegeți o <strong>expresie<\/strong> de acces bună pentru a vă proteja contul. Vedeți sugestiile pentru câteva idei.",
+        "OneTimeCode": "Introdu codul primit:",
+        "SetAsPrimary": "Setează {{1}} ca {{2}} principal",
+        "ChoosePassPhrase": "Alegeți o <strong>expresie de acces<\/strong> cu care să vă conectați.<br> O frază simplă constând din câteva cuvinte pe care le vei aminti cu ușurință.",
+        "ChoosePassPhraseSeeSuggestions": "Alegeți o <strong>expresie de acces<\/strong> bună pentru a vă proteja contul. Vedeți sugestiile pentru câteva idei.",
         "LogOutAndTryAgain": "Deconectați-vă și încercați din nou",
         "IfYouFeel": "Dacă simți că ceva nu a mers prost, poți",
         "SetIdentifierButtonTitle": "ia de la capăt",
-        "OneTimeCode": "Introdu codul primit:",
         "ActivateMyAccount": "Activați contul meu"
     },
     "session": {
@@ -60,7 +73,7 @@
             "EmptyContacts": "Persoane de contact nu au fost găsite..."
         },
         "select": {
-            "title": "Selectați persoana de contact din {{displayName}}"
+            "title": "Selectați contactul {{displayName}}"
         }
     },
     "usersContacts": {
@@ -70,28 +83,33 @@
         "inviteRole": "Invitați {{role}}"
     },
     "invalidLanguageSelected": "Limbă nevalidă selectată",
+    "platforms": {
+        "wallet": "Portofel",
+        "broadcast": "Difuzare"
+    },
     "login": {
         "title": "Bine ati venit",
         "directions": "Creați un cont sau conectați-vă.",
         "directionsNoRegister": "Conectați-vă dacă aveți un cont.",
-        "goButton": "⮕",
-        "passphrase": "Introduceți expresia dvs. de acces:",
+        "goButton": "➔",
+        "passphrase": "Introdu fraza ta de acces:",
         "loginButton": "Incepe",
         "registerButton": "Incepe",
-        "resendButton": "Trimiteți mesaj de activare",
+        "resendButton": "Trimiteți mesajul de activare",
         "forgot": "Am uitat asta?",
         "resendConfirm": "Doriți să trimiteți un mesaj pentru a vă reseta expresia de acces?",
         "resendSuccess": "Verificați dacă există un mesaj pentru a vă reseta expresia de acces",
         "resendClose": "Închide",
-        "noPassphrase": "Înainte de a vă putea conecta, trebuie să setați o expresie de acces făcând clic pe linkul din mesajul de activare.",
+        "noPassphrase": "Înainte de a vă putea conecta, trebuie să setați o expresie de acces făcând clic pe linkul din mesajul dvs. de activare.",
         "notVerified": "Trebuie să vă trimiteți un mesaj de activare pentru a vă autentifica.",
         "emailExists": "Ați încercat să vă înregistrați cu acest e-mail înainte? Dacă da, verificați căsuța de e-mail pentru a vă activa contul. <a href='#resend' class='Q_button Users_activation_resend'>Faceți clic pentru a retrimite mesajul<\/a>",
         "mobileExists": "Ați încercat să vă înregistrați cu acest număr de mobil înainte? Dacă da, verificați SMS-ul pentru a vă activa contul. <a href='#resend' class='Q_button Users_activation_resend'>Faceți clic pentru a retrimite mesajul<\/a>",
         "usingOther": "sau puteți",
+        "connectPlatforms": "sau conectați-vă folosind:",
         "prompt": "Alegeți un nume de utilizator:",
         "newUser": "sau creați un cont nou mai jos",
         "placeholders": {
-            "identifier": "# de mobil sau e-mailul dvs",
+            "identifier": "# de telefon mobil sau e-mail",
             "mobile": "introduceți numărul dvs. de mobil",
             "email": "introduceți adresa dvs. de e-mail",
             "username": "utilizați numai litere și cifre"
@@ -99,25 +117,17 @@
         "confirmTerms": "Acceptați Termenii și condițiile?",
         "facebookNoEmail": "Contului tău de Facebook lipsește o adresă de e-mail confirmată. Conectați-vă pur și simplu în modul nativ.",
         "picTooltip": "Puteți schimba această imagine mai târziu",
-        "wallet": {
-            "payload": "Conectați-vă la {{host}} la ora {{timestamp}}",
-            "alert": {
-                "title": "Redirecționare către Wallet",
-                "content": "După ce închideți acest dialog, veți fi dus la portofel. După ce vă conectați, reveniți la această pagină."
-            }
-        },
         "web3": {
             "payload": "Conectați-vă la {{host}} la ora {{timestamp}}",
             "alert": {
                 "title": "Redirecționare către Wallet",
                 "content": "După ce închideți acest dialog, veți fi dus la portofel. După ce vă conectați, reveniți la această pagină."
             }
-        },
-        "connectPlatforms": "sau conectați-vă folosind:"
+        }
     },
     "setIdentifier": {
         "title": "Adăugați o modalitate de a vă conecta",
-        "sendMessage": "Trimiteți mesaj de activare",
+        "sendMessage": "Trimiteți mesajul de activare",
         "placeholders": {
             "identifier": "introduceți numărul dvs. de mobil sau e-mailul",
             "mobile": "Introdu numărul tău de telefon",
@@ -127,8 +137,8 @@
     },
     "prompt": {
         "title": "{{Platform}} Cont",
-        "areUsing": "Folosiți {{platform}} ca",
-        "noLongerUsing": "Nu mai sunteți conectat(ă) la {{platform}} ca",
+        "areUsing": "Folosești {{platform}} ca",
+        "noLongerUsing": "Nu mai sunteți conectat la {{platform}} ca",
         "doAuth": "Conectați-vă cu acest cont",
         "doSwitch": "Comutați la acest cont"
     },
@@ -139,26 +149,9 @@
         "Guest": "Oaspete",
         "Host": "Gazdă"
     },
-    "avatar": {
-        "Someone": "Cineva"
-    },
     "web3": {
-        "WrongMethod": "Metodă de contract greșită {{methodName}}",
+        "WrongMethod": "Metoda de contract greșită {{methodName}}",
         "ChangeWallet": "Schimbați portofelul"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mail",
-            "mobile": "Mobil",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Copiat! Acum îl puteți lipi oriunde."
-    },
-    "platforms": {
-        "wallet": "Portofel",
-        "broadcast": "Difuzare"
     },
     "labels": {
         "addToPhonebook": "Adăugați la contactele mele din telefon",

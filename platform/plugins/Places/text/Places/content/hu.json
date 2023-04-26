@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "belül {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "{{1}} en belül"
     },
     "units": {
         "meter": "méter",
@@ -18,7 +18,7 @@
         "inches": "hüvelyk"
     },
     "location": {
-        "interested": "Érdekelnek a dolgok, amelyek {{select}}-án belül zajlanak",
+        "interested": "Érdekelnek a {{select}} -en belül zajló dolgok",
         "update": "Saját pozíció frissítése",
         "set": "Saját pozíció beállítása",
         "prompt": "{{ClickOrTap}} ide<br> állítsa be<br> elhelyezkedés",
@@ -26,7 +26,7 @@
         "enterAddress": "Adjon meg egy címet",
         "enterPostcode": "Kérjük, adja meg irányítószámát \/ irányítószámát",
         "create": {
-            "action": "Helyszín hozzáadása",
+            "action": "Add meg a helyet",
             "title": "Új hely",
             "nameYourLocation": "Nevezze el a helyét"
         },
@@ -73,7 +73,7 @@
             "displayType": "Padló"
         },
         "Places\/column": {
-            "description": "Egy oszlopot jelöl egy épületben vagy hajóban",
+            "description": "Egy épületben vagy hajóban lévő oszlopot ábrázol",
             "displayType": "Oszlop"
         },
         "Places\/nearby": {

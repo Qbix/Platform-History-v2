@@ -1,22 +1,46 @@
 {
+    "errors": {
+        "Error": "ભૂલ",
+        "WalletAbsent": "વૉલેટ કનેક્ટેડ નથી.",
+        "Rendering": "<span class='url'>{{1}}<\/span> રેન્ડર કરતી વખતે ભૂલો આવી હતી",
+        "PriceRequired": "કિંમત જરૂરી છે!",
+        "NameRequired": "નામ જરૂરી છે!",
+        "PriceInvalid": "કિંમત અમાન્ય!",
+        "AmountInvalid": "રકમ અમાન્ય!",
+        "TransactionFailed": "વ્યવહાર નિષ્ફળ થયો",
+        "ChainNotSupported": "પસંદ કરેલ સાંકળ સમર્થિત નથી. સમર્થિત સાંકળ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "એપ્લિકેશન સાથે કામ કરવા માટે મેટામાસ્કને કનેક્ટ કરવાની જરૂર છે",
+        "UserNotLoggedInMetaMask": "વપરાશકર્તા મેટામાસ્કમાં લૉગ ઇન નથી",
+        "CurrencyNotFound": "ચલણ મળ્યું નથી",
+        "WrongChain": "આ NFT &quot; {{chain}} &quot; હેઠળ બનાવેલ છે. કૃપા કરીને આ સાંકળનો ઉપયોગ કરો.",
+        "NoRecipientSelected": "કોઈ પ્રાપ્તકર્તા પસંદ કરેલ નથી",
+        "NotEnoughPermissionsWallet": "આ વપરાશકર્તાનું વૉલેટ વાંચવા માટે પૂરતી પરવાનગીઓ નથી",
+        "ThisUserHaveNoWallet": "આ વપરાશકર્તાને કોઈ વૉલેટ અસાઇન કરેલ નથી",
+        "TheWalletOfThisUserInvalid": "આ વપરાશકર્તાનું વૉલેટ અમાન્ય છે",
+        "WalletInvalid": "વૉલેટ સરનામું અમાન્ય"
+    },
+    "admin": {
+        "Title": "અસ્કયામતો વહીવટી",
+        "SubscriptionTitle": "સબ્સ્ક્રિપ્શન યોજનાઓ"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "ચૂકવણી કરવા માટે ટૅપ કરો"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} માટે ચાર્જ પ્રક્રિયા",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ને તમારી ચૂકવણી બદલ આભાર",
-        "SubscribedTo": "{{call 'user.displayName'}} એ {{plan.title}} પર સબ્સ્ક્રાઇબ કર્યું",
-        "YouSubscribedTo": "તમે {{plan.title}} પર સબ્સ્ક્રાઇબ કર્યું છે",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : {{call 'user.displayName'}} માટે ચાર્જ પ્રક્રિયા",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} પર તમારી ચુકવણી બદલ આભાર",
+        "SubscribedTo": "{{plan.title}} પર {{call 'user.displayName'}} સબ્સ્ક્રાઇબ થયા",
+        "YouSubscribedTo": "તમે {{plan.title}} પર સબ્સ્ક્રાઇબ થયા છો",
         "Assets\/credits\/alert": "તમારી પાસે તમારા એકાઉન્ટ સંબંધિત ચેતવણી છે"
     },
     "charge": {
-        "Subject": "તમને &quot;{1001}}&quot; દ્વારા {{call 'publisher.displayName'}} તરફથી {{displayAmount}}ની ચુકવણી મળે છે",
-        "HasBeenCharged": "અરે, આ ફક્ત તમને જણાવવા માટે છે કે {{4}} દ્વારા {{3}} માટે {{1}} ચાર્જ કરવામાં આવ્યો છે {{2}}"
+        "Subject": "તમને &quot; {{description}} &quot; સુધીમાં {{call 'publisher.displayName'}} થી {{displayAmount}} ની ચુકવણી મળે છે",
+        "HasBeenCharged": "અરે, આ ફક્ત તમને જણાવવા માટે છે કે {{1}} {{4}} દ્વારા {{3}} માટે {{2}} ચાર્જ કરવામાં આવ્યા છે."
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; માટે તમારી ચુકવણી બદલ આભાર",
-        "HavePaid": "અરે {{1}}, આ માત્ર એક ઝડપી પુષ્ટિ છે કે તમે {{4}} માટે {{3}} ને સફળતાપૂર્વક {{2}} ચૂકવી દીધા છે."
+        "Subject": "&quot; {{description}} &quot; માટે તમારી ચુકવણી બદલ આભાર",
+        "HavePaid": "અરે {{1}} , આ માત્ર એક ઝડપી પુષ્ટિ છે કે તમે {{4}} માટે {{2}} થી {{3}} સફળતાપૂર્વક ચૂકવ્યા છે"
     },
     "payment": {
         "AboutOrder": "ઓર્ડર વિશે માહિતી",
@@ -36,19 +60,17 @@
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} દ્વારા આમંત્રણ સ્વીકારવામાં આવ્યું",
-        "Streams_user_firstname": "{{invitedUserName}}એ પ્રથમ નામ દાખલ કર્યું",
-        "Streams_user_lastname": "{{invitedUserName}} છેલ્લું નામ દાખલ કર્યું",
-        "Streams_user_icon": "{{invitedUserName}} દાખલ કરેલ આઇકન",
-        "Places_user_location": "{{invitedUserName}} સ્થાન દાખલ કર્યું",
-        "Streams_greeting": "{{invitedUserName}} એ શુભેચ્છા દાખલ કરી",
+        "InvitedUserFilledStream": "{{invitedUserName}} ભરેલ {{FilledStreamTitle}}",
+        "ForFillingStream": "{{FilledStreamTitle}} ભરવા માટે",
         "YouHaveCreditsToStart": "શરૂ કરવા માટે તમારી પાસે {{amount}} ક્રેડિટ છે",
-        "PaymentFor": "&quot;{{1}}&quot; માટે ચુકવણી",
-        "PaymentTo": "{{1}} ને ચુકવણી",
-        "PaymentToUser": "{{toUserName}} ને ચુકવણી",
+        "PaymentFor": "&quot; {{1}} &quot; માટે ચુકવણી",
+        "PaymentTo": "{{1}} પર ચુકવણી કરો",
+        "PaymentToUser": "{{toUserName}} પર ચુકવણી કરો",
+        "CreatePrivateChat": "{{toUserName}} સાથે ખાનગી ચેટ માટે",
         "CreatePaidStream": "{{toStreamName}} બનાવવા માટે",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; માં આરક્ષણ માટે",
-        "CreatedCommunity": "સમુદાય &quot;{{communityId}}&quot; બનાવવા માટે",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; માં આરક્ષણ રિફંડ તરીકે",
+        "JoinedPaidStream": "&quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot; માં આરક્ષણ માટે",
+        "CreatedCommunity": "સમુદાય બનાવવા માટે &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot; માં આરક્ષણ રિફંડ તરીકે",
         "BoughtCredits": "{{amount}} ક્રેડિટ્સ ખરીદી",
         "BonusCredits": "બોનસ {{amount}} ક્રેડિટ",
         "BuyAmountCredits": "{{amount}} ક્રેડિટ ખરીદો",
@@ -56,46 +78,44 @@
         "MissingCredits": "ક્રેડિટ ખૂટે છે",
         "YouMissingCredits": "આગળ વધવા માટે તમારે વધારાની {{amount}} ક્રેડિટની જરૂર છે.",
         "BuyCredits": "ક્રેડિટ્સ ખરીદો",
-        "BuyBonus": "એકવારમાં {{amount}} ક્રેડિટ્સ ખરીદવાથી, {{bonus}} ક્રેડિટ બોનસ મળશે.",
+        "BuyBonus": "એકસાથે {{amount}} ક્રેડિટ્સ ખરીદવાથી {{bonus}} ક્રેડિટ બોનસ મળશે.",
         "Buy": "ખરીદો",
         "PurchaseCredits": "ક્રેડિટ્સ ખરીદો",
-        "Credits": "ક્રેડિટ્સ",
+        "Credits": "શ્રેય",
         "ErrorInvalidAmount": "રકમ અમાન્ય",
-        "ErrorInvalidCurrency": "કમનસીબે અમે હજુ સુધી ચલણ {{currency}}ને સમર્થન આપતા નથી",
+        "ErrorInvalidCurrency": "કમનસીબે અમે હજુ સુધી ચલણ {{currency}} ને સપોર્ટ કરતા નથી",
         "forMessages": {
             "BoughtCredits": "{{amount}} ક્રેડિટ",
             "BonusCredits": "{{amount}} ક્રેડિટ"
-        },
-        "InvitedUserFilledStream": "{{invitedUserName}} ભરેલ {{FilledStreamTitle}}",
-        "ForFillingStream": "{{FilledStreamTitle}} ભરવા માટે",
-        "CreatePrivateChat": "{{toUserName}} સાથે ખાનગી ચેટ માટે"
+        }
     },
     "history": {
         "Date": "તારીખ",
         "Amount": "રકમ",
         "Description": "વર્ણન",
         "Client": "ક્લાયન્ટ",
+        "User": "વપરાશકર્તા",
         "To": "પ્રતિ",
         "From": "થી",
-        "SeeHistory": "{{1}} માટે ચૂકવણીનો ઇતિહાસ જુઓ",
+        "SeeHistory": "{{1}} માટે ચુકવણી ઇતિહાસ જુઓ",
         "HistoryEmpty": "તમારી પાસે હજી સુધી કોઈ ડેટા નથી",
         "PaymentFor": "{{amount}} ક્રેડિટ્સ મોકલી",
         "PaymentTo": "{{amount}} ક્રેડિટ્સ મોકલી",
         "PaymentToUser": "{{amount}} ક્રેડિટ્સ મોકલી",
-        "CreatePaidStream": "{{amount}} ક્રેડિટ્સ ખર્ચી",
+        "CreatePaidStream": "{{amount}} ક્રેડિટ્સ ખર્ચ્યા",
         "WatchClip": {
             "+": "{{amount}} ક્રેડિટ મેળવી",
-            "-": "{{amount}} ક્રેડિટ્સ ખર્ચી"
+            "-": "{{amount}} ક્રેડિટ્સ ખર્ચ્યા"
         },
         "JoinedPaidStream": {
             "+": "{{amount}} ક્રેડિટ મેળવી",
-            "-": "{{amount}} ક્રેડિટ્સ ખર્ચી"
+            "-": "{{amount}} ક્રેડિટ્સ ખર્ચ્યા"
         },
         "LeftPaidStream": {
             "+": "{{amount}} ક્રેડિટ્સ પ્રાપ્ત થઈ",
             "-": "{{amount}} ક્રેડિટ્સ મોકલી"
         },
-        "CreatedCommunity": "{{amount}} ક્રેડિટ્સ ખર્ચી",
+        "CreatedCommunity": "{{amount}} ક્રેડિટ્સ ખર્ચ્યા",
         "BoughtCredits": "{{amount}} ક્રેડિટ્સ ખરીદી",
         "BonusCredits": "બોનસ {{amount}} ક્રેડિટ્સ મળી",
         "InviteAcceptedBy": "{{amount}} ક્રેડિટ મેળવી",
@@ -104,14 +124,13 @@
         "Streams_user_icon": "{{amount}} ક્રેડિટ મેળવી",
         "Places_user_location": "{{amount}} ક્રેડિટ મેળવી",
         "Streams_greeting": "{{amount}} ક્રેડિટ મેળવી",
-        "YouHaveCreditsToStart": "{{amount}} ક્રેડિટ મેળવી",
-        "User": "વપરાશકર્તા"
+        "YouHaveCreditsToStart": "{{amount}} ક્રેડિટ મેળવી"
     },
     "subscriptions": {
         "infoTitle": "ચુકવણી માહિતી સેટ કરો",
         "confirm": {
             "title": "સબ્સ્ક્રિપ્શન શરૂ કરો",
-            "message": "શું તમે {{title}} પર સબ્સ્ક્રાઇબ કરવા માંગો છો?",
+            "message": "&quot; {{title}} &quot; માટે રિકરિંગ સબ્સ્ક્રિપ્શન શરૂ કરીએ?",
             "ok": "બરાબર",
             "cancel": "રદ કરો"
         },
@@ -131,7 +150,7 @@
         "Period": "સમયગાળો",
         "Price": "કિંમત",
         "AreYouSureUnsubscribe": "શું તમે ખરેખર આ પ્લાનને અનસબ્સ્ક્રાઇબ કરવા માંગો છો?",
-        "YouUnsubscribedFromPlan": "તમે &quot;{{planTitle}}&quot; પ્લાનમાંથી અનસબ્સ્ક્રાઇબ કર્યું છે. તમારી પાસેથી શુલ્ક લેવામાં આવશે નહીં, પરંતુ તમારું સબ્સ્ક્રિપ્શન {{endsIn}} સુધી ચાલુ રહેશે",
+        "YouUnsubscribedFromPlan": "તમે પ્લાન &quot; {{planTitle}} &quot;માંથી અનસબ્સ્ક્રાઇબ કર્યું છે. તમારી પાસેથી શુલ્ક લેવામાં આવશે નહીં, પરંતુ તમારું સબ્સ્ક્રિપ્શન {{endsIn}} સુધી ચાલુ રહેશે",
         "plan": {
             "TitlePlaceholder": "યોજનાનું શીર્ષક",
             "PricePlaceholder": "કિંમત",
@@ -145,14 +164,14 @@
         "BuyAmountCredits": "{{amount}} ક્રેડિટ ખરીદો",
         "confirm": {
             "title": "ચુકવણી કરી",
-            "message": "શું તમે {{symbol}}{{amount}} ચૂકવવા માટે સંમત છો?",
+            "message": "શું તમે {{symbol}} {{amount}} ચૂકવવા માટે સંમત છો?",
             "ok": "બરાબર",
             "cancel": "રદ કરો"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "ક્રેડિટ્સ",
+            "displayType": "શ્રેય",
             "description": "ક્રેડિટ્સ અને પેમેન્ટ્સનો ટ્રેક રાખે છે"
         },
         "Assets\/plan": {
@@ -183,16 +202,27 @@
             "content": "બોનસ {{amount}} ક્રેડિટ"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} ક્રેડિટ્સ ખર્ચી"
+            "content": "{{amount}} ક્રેડિટ્સ ખર્ચ્યા"
         },
         "Assets\/credits\/sent": {
-            "content": "{{toUserName}} ને {{amount}} ક્રેડિટ્સ મોકલી"
+            "content": "{{toUserName}} પર {{amount}} ક્રેડિટ મોકલી"
         },
         "Assets\/credits\/received": {
-            "content": "{{fromUserName}} તરફથી {{amount}} ક્રેડિટ્સ પ્રાપ્ત થઈ"
+            "content": "{{fromUserName}} થી {{amount}} ક્રેડિટ્સ પ્રાપ્ત થઈ"
         },
         "Assets\/credits\/alert": {
-            "content": "તમારા એકાઉન્ટ પર તમારી પાસે થોડી ક્રેડિટ છે. વધુ ક્રેડિટ ખરીદવા માટે કૃપા કરીને <a href='{{link}}'>આ લિંકની<\/a> મુલાકાત લો."
+            "content": "તમારા એકાઉન્ટ પર તમારી પાસે થોડી ક્રેડિટ છે. વધુ ક્રેડિટ ખરીદવા માટે કૃપા કરીને <a href='<i translate='no'>999&#39;&gt;આ લિંકની<\/a> મુલાકાત લો."
+        }
+    },
+    "billing": {
+        "Title": "સંપત્તિ બિલિંગ",
+        "CreditsMinimum": "ન્યૂનતમ ક્રેડિટ્સ",
+        "CreditsToAdd": "ઉમેરવા માટે ક્રેડિટ્સ",
+        "Save": "સાચવો",
+        "ThisLink": "આ લિંક",
+        "errors": {
+            "CreditsMinimumNegative": "ન્યૂનતમ ક્રેડિટ નકારાત્મક હોઈ શકતી નથી",
+            "CreditsToAddNegative": "ઉમેરવા માટેની ક્રેડિટ નકારાત્મક હોઈ શકતી નથી"
         }
     },
     "services": {
@@ -203,8 +233,11 @@
             "LinkPlaceholder": "વધારાની માહિતી લિંક સેટ કરો",
             "DescriptionPlaceholder": "સેવા વર્ણન",
             "SaveService": "સેવા સાચવો",
-            "SelectRequiredParticipants": "જરૂરી સહભાગીઓ",
+            "SelectRequiredParticipants": "જરૂરી સંબંધિત સહભાગીઓ",
             "RequiredParticipantsDesc": "કૃપા કરીને સંબંધિત સહભાગીઓને પસંદ કરો કે જેઓ આ સેવાનો ઉપયોગ કરવા માટે જરૂરી છે (ઉદાહરણ તરીકે &quot;ડોગ્સ શો માટે પાલતુ&quot; અથવા &quot;બાળકોની રજા&quot; માટે બાળકો વગેરે). જો સેવા ચૂકવવામાં આવે છે, તો વપરાશકર્તાએ દરેક સંબંધિત સહભાગીઓ માટે પણ ચૂકવણી કરવાની જરૂર પડશે."
+        },
+        "EditServiceTemplate": {
+            "Title": "સેવા સંપાદિત કરો"
         },
         "ManageServiceTemplates": "સેવા નમૂનાઓનું સંચાલન કરો",
         "ManageServices": "સેવાઓનું સંચાલન કરો",
@@ -212,19 +245,34 @@
         "OptionalContribution": "વૈકલ્પિક યોગદાન",
         "RequiredPayment": "આવશ્યક ચુકવણી",
         "AreYouSureDelete": "શું તમે ખરેખર આ સેવાને કાઢી નાખવા માંગો છો?",
-        "AmountServicesRelated": "આ સેવા સંબંધિત {{amount}} ઉપલબ્ધતાઓ છે. તેઓ પણ દૂર કરવામાં આવશે.",
-        "EditServiceTemplate": {
-            "Title": "સેવા સંપાદિત કરો"
-        }
+        "AmountServicesRelated": "આ સેવા સંબંધિત {{amount}} ઉપલબ્ધતાઓ છે. તેઓ પણ દૂર કરવામાં આવશે."
+    },
+    "transfer": {
+        "SelectRecipient": "પ્રાપ્તકર્તા પસંદ કરો",
+        "TransactionSuccess": "વ્યવહારમાં સફળતા",
+        "OrTypeWalletAddress": "અથવા પ્રાપ્તકર્તા વૉલેટ સરનામું લખો"
     },
     "NFT": {
-        "Title": "{{title}} NFT વિશે માહિતી",
-        "Description": "NFT વિશે વિગતવાર માહિતી",
-        "FixedBid": "હમણાં જ ખરીદો",
+        "Title": "શીર્ષક",
+        "Name": "નામ",
+        "EnterName": "નામ દાખલ કરો",
+        "EnterAuthorWallet": "લેખક વૉલેટ દાખલ કરો",
+        "InformationAboutTitle": "{{title}} NFT વિશે માહિતી",
+        "Description": "વર્ણન",
+        "DetailedInformationAboutNFT": "NFT વિશે વિગતવાર માહિતી",
+        "PresaleStarts": "પ્રીસેલ 23 ડિસેમ્બરથી શરૂ થાય છે",
+        "OwnerUserNotFound": "આ NFT ના માલિક અમારી અરજીમાં નોંધાયેલા નથી.",
+        "BuyNow": "હમણાં જ ખરીદો",
+        "Buy": "ખરીદો",
+        "Add": "ઉમેરો",
+        "Remove": "દૂર કરો",
+        "NoNFTyet": "હજુ સુધી કોઈ NFTs નથી",
+        "Conversation": "વાતચીત",
+        "Create": "બનાવો",
         "CurrentBid": "ચાલુ હરાજી",
         "StartingIn": "માં શરૂ થાય છે",
         "EndingIn": "માં સમાપ્ત થાય છે",
-        "CreateNFT": "એક NFT બનાવો",
+        "CreateNFT": "NFT બનાવો",
         "TitlePlaceholder": "તમારા NFT ને શીર્ષક આપો",
         "DescriptionPlaceholder": "તમારા NFTનું વર્ણન આપો",
         "CreateYourNFT": "તમારું NFT બનાવો",
@@ -234,7 +282,10 @@
         "StartingDate": "પ્રારંભ તારીખ",
         "BidsBelowThisAmount": "આ રકમથી ઓછી બિડને મંજૂરી આપવામાં આવશે નહીં",
         "MinimumBid": "ન્યૂનતમ બિડ",
+        "Author": "લેખક",
         "Price": "કિંમત",
+        "Commission": "કમિશન",
+        "EnterCommission": "કમિશન દાખલ કરો",
         "Owner": "માલિક",
         "SelectCategory": "શ્રેણી પસંદ કરો",
         "Day": "દિવસ",
@@ -253,17 +304,25 @@
         "PutOnSale": "વેચાણ પર મૂકો",
         "PutOffSale": "વેચાણમાંથી ઉપાડો",
         "Transfer": "ટ્રાન્સફર",
+        "Actions": "ક્રિયાઓ",
+        "Claim": "દાવો કરો",
+        "ClaimNFT": "NFT નો દાવો કરો",
+        "Unlocking": "અનલોકીંગ",
+        "Unlock": "અનલોક કરો",
         "Update": "અપડેટ કરો",
         "UpdateToken": "અપડેટ ટોકન",
+        "UpdateNFT": "NFT અપડેટ કરો",
         "CreateToken": "ટોકન બનાવો",
         "PlaceBid": "બોલી લગાવો",
         "SoldOut": "વેચાય છે",
+        "NotOnSale": "વેચાણ પર નથી",
         "NftName": "NFT નામ",
         "DescribeYourNFT": "કૃપા કરીને તમારા NFTનું વર્ણન કરો",
         "NftPicture": "NFT રજૂ કરવા માટેનું ચિત્ર",
         "NftMovie": "NFT રજૂ કરવા માટે મૂવી",
         "UploadMovie": "મૂવી અપલોડ કરો",
         "MovieSource": "મૂવી સ્ત્રોત",
+        "MovieURL": "મૂવી URL",
         "UploadFile": "ફાઇલ અપલોડ કરો",
         "PutOnMarketplace": "બજાર પર મૂકો",
         "InstantPurchase": "વપરાશકર્તાઓને તરત જ તમારું NFT ખરીદવાની મંજૂરી આપવા માટે કિંમત દાખલ કરો",
@@ -271,60 +330,9 @@
         "TimedAuction": "સમયસર હરાજી",
         "OpenForBids": "બિડ માટે ખોલો",
         "PriceOnePiece": "એક ભાગ માટે કિંમત દાખલ કરો",
+        "EnterPrice": "કિંમત દાખલ કરો",
         "EnterMinimumBid": "ન્યૂનતમ બિડ દાખલ કરો",
         "SelectChain": "સાંકળ પસંદ કરો",
-        "WrongChain": "આ NFT &quot;{{chain}}&quot; હેઠળ બનાવેલ છે. કૃપા કરીને આ સાંકળનો ઉપયોગ કરો.",
-        "import": {
-            "importNFT": "NFT ની આયાત",
-            "fileNotFound": "માફ કરશો, CSV ફાઇલ મળી નથી.",
-            "fileEmpty": "માફ કરશો, CSV ફાઇલ ખાલી છે.",
-            "userIdNotFound": "વપરાશકર્તા અસ્તિત્વમાં છે પરંતુ આઈડી ખાલી છે",
-            "errorLine": "રેખા {{1}}",
-            "fieldNotFound": "આવશ્યક ફીલ્ડ &quot;{{1}}&quot; મળ્યું નથી",
-            "taskStreamInvalid": "કાર્ય પ્રવાહ અમાન્ય",
-            "instructionsEmpty": "કાર્ય સ્ટ્રીમ સૂચનાઓ ખાલી છે",
-            "complete": "પૂર્ણ",
-            "activateUsers": "વપરાશકર્તાઓને સક્રિયકરણ સંદેશ મોકલો?",
-            "importProgress": "પ્રગતિ",
-            "importOptions": "વિકલ્પો",
-            "sampleCSV": "સેમ્પલ CSV ડાઉનલોડ કરો",
-            "fileLabel": "સ્પ્રેડશીટ અપલોડ કરો:",
-            "errorsTitle": "ભૂલો આવી",
-            "importAttributes": "NFT વિશેષતાઓ આયાત કરો",
-            "displayTypeEmpty": "&quot;{{1}}&quot; માટે ડિસ્પ્લે પ્રકાર મળ્યો નથી"
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "NFT સંગ્રહો દ્વારા ફિલ્ટર કરો",
-                "ShowNFTCollection": "NFT સંગ્રહ આમાં બતાવો...",
-                "AllCollections": "બધા સંગ્રહો"
-            },
-            "ByUser": {
-                "AllAuthors": "બધા લેખકો",
-                "AllUsers": "દરેકને",
-                "FilterByAuthors": "લેખકો દ્વારા ફિલ્ટર કરો"
-            }
-        },
-        "Back": "સંગ્રહ પર પાછા જાઓ",
-        "Name": "નામ",
-        "EnterName": "નામ દાખલ કરો",
-        "EnterAuthorWallet": "લેખક વૉલેટ દાખલ કરો",
-        "InformationAboutTitle": "{{title}} NFT વિશે માહિતી",
-        "DetailedInformationAboutNFT": "NFT વિશે વિગતવાર માહિતી",
-        "PresaleStarts": "પ્રીસેલ 23 ડિસેમ્બરથી શરૂ થાય છે",
-        "OwnerUserNotFound": "આ NFT ના માલિક અમારી અરજીમાં નોંધાયેલા નથી.",
-        "BuyNow": "હમણાં જ ખરીદો",
-        "Buy": "ખરીદો",
-        "Conversation": "વાતચીત",
-        "Create": "બનાવો",
-        "Author": "લેખક",
-        "Commission": "કમિશન",
-        "EnterCommission": "કમિશન દાખલ કરો",
-        "Actions": "ક્રિયાઓ",
-        "UpdateNFT": "NFT અપડેટ કરો",
-        "NotOnSale": "વેચાણ પર નથી",
-        "MovieURL": "મૂવી URL",
-        "EnterPrice": "કિંમત દાખલ કરો",
         "Currency": "ચલણ",
         "AreYouSureDeleteImage": "શું તમે ખરેખર છબી દૂર કરવા માંગો છો?",
         "AreYouSureDeleteVideo": "શું તમે ખરેખર વિડિઓ દૂર કરવા માંગો છો?",
@@ -363,9 +371,9 @@
             "SetSuffix": "પ્રત્યય સેટ કરો",
             "CurrentOwner": "વર્તમાન માલિક",
             "CurrentBaseURL": "વર્તમાન BaseURL",
-            "ContractAddressAbsent": "કરાર સરનામું ગેરહાજર",
+            "ContractAddressAbsent": "કરારનું સરનામું ગેરહાજર",
             "FactoryAddressAbsent": "ફેક્ટરીનું સરનામું ગેરહાજર",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ( {{chainNetwork}} )",
             "TitleRequired": "શીર્ષક આવશ્યક છે",
             "SymbolRequired": "પ્રતીક જરૂરી",
             "TypeContractName": "કરાર નામ",
@@ -375,6 +383,38 @@
             "Title": "સ્પર્ધાઓ",
             "NewContest": "નવી હરીફાઈ"
         },
+        "import": {
+            "importNFT": "NFT ની આયાત",
+            "importAttributes": "NFT વિશેષતાઓ આયાત કરો",
+            "fileNotFound": "માફ કરશો, CSV ફાઇલ મળી નથી.",
+            "fileEmpty": "માફ કરશો, CSV ફાઇલ ખાલી છે.",
+            "userIdNotFound": "વપરાશકર્તા અસ્તિત્વમાં છે પરંતુ આઈડી ખાલી છે",
+            "errorLine": "લાઇન {{1}}",
+            "fieldNotFound": "આવશ્યક ક્ષેત્ર &quot; {{1}} &quot; મળ્યું નથી",
+            "displayTypeEmpty": "&quot; {{1}} &quot; માટે ડિસ્પ્લે પ્રકાર મળ્યો નથી",
+            "taskStreamInvalid": "કાર્ય પ્રવાહ અમાન્ય",
+            "instructionsEmpty": "કાર્ય સ્ટ્રીમ સૂચનાઓ ખાલી છે",
+            "complete": "પૂર્ણ",
+            "activateUsers": "વપરાશકર્તાઓને સક્રિયકરણ સંદેશ મોકલો?",
+            "importProgress": "પ્રગતિ",
+            "importOptions": "વિકલ્પો",
+            "sampleCSV": "સેમ્પલ CSV ડાઉનલોડ કરો",
+            "fileLabel": "સ્પ્રેડશીટ અપલોડ કરો:",
+            "errorsTitle": "ભૂલો આવી"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "NFT સંગ્રહો દ્વારા ફિલ્ટર કરો",
+                "ShowNFTCollection": "NFT સંગ્રહ આમાં બતાવો...",
+                "AllCollections": "બધા સંગ્રહો"
+            },
+            "ByUser": {
+                "AllAuthors": "બધા લેખકો",
+                "AllUsers": "દરેકને",
+                "FilterByAuthors": "લેખકો દ્વારા ફિલ્ટર કરો"
+            }
+        },
+        "Back": "સંગ્રહ પર પાછા",
         "attributes": {
             "Title": "વિશેષતાઓનું સંચાલન કરો",
             "Attributes": "વિશેષતાઓ",
@@ -398,13 +438,6 @@
             "aboutPlaceholder": "બાયો સંપાદિત કરો",
             "SureLogOut": "શું તમે ખરેખર લૉગ આઉટ કરવા માંગો છો?"
         },
-        "Add": "ઉમેરો",
-        "Remove": "દૂર કરો",
-        "NoNFTyet": "હજુ સુધી કોઈ NFTs નથી",
-        "Claim": "દાવો કરો",
-        "ClaimNFT": "NFT નો દાવો કરો",
-        "Unlocking": "અનલોકીંગ",
-        "Unlock": "અનલોક કરો",
         "sales": {
             "factory": {
                 "form": {
@@ -503,7 +536,7 @@
                 "small": {
                     "tokenId": "ટોકન આઈડી જેને લોક અથવા અનલોક કરવાની જરૂર છે",
                     "custodian": "સરનામું જે અનલૉક કરવામાં સક્ષમ હોઈ શકે છે",
-                    "recipient": "સરનામું જે ટોકન્સ પ્રાપ્ત કરશે"
+                    "recipient": "સરનામું કે જે ટોકન્સ પ્રાપ્ત કરશે"
                 }
             },
             "errors": {
@@ -520,50 +553,10 @@
             "Unlock": "અનલોક કરો",
             "Locked": "તાળું મારેલું",
             "CustodianAddress": "કસ્ટોડિયન સરનામું",
-            "TokenWasClaimed": "&quot;{{title}}&quot; ટોકનનો દાવો કરવામાં આવ્યો હતો",
-            "TokenWasLocked": "ટોકન &quot;{{title}}&quot; લૉક હતું",
-            "TokenWasUnlocked": "ટોકન &quot;{{title}}&quot; અનલૉક કરવામાં આવ્યું હતું"
+            "TokenWasClaimed": "ટોકન &quot; {{title}} &quot; નો દાવો કરવામાં આવ્યો હતો",
+            "TokenWasLocked": "ટોકન &quot; {{title}} &quot; લૉક હતું",
+            "TokenWasUnlocked": "ટોકન &quot; {{title}} &quot; અનલોક કરવામાં આવ્યું હતું"
         }
-    },
-    "errors": {
-        "Error": "ભૂલ",
-        "WalletAbsent": "વૉલેટ કનેક્ટેડ નથી.",
-        "Rendering": "<span class='url'>{{1}}<\/span> રેન્ડર કરતી વખતે ભૂલો આવી હતી",
-        "PriceRequired": "કિંમત જરૂરી છે!",
-        "NameRequired": "નામ જરૂરી છે!",
-        "PriceInvalid": "કિંમત અમાન્ય!",
-        "TransactionFailed": "વ્યવહાર નિષ્ફળ થયો",
-        "ChainNotSupported": "પસંદ કરેલ સાંકળ સમર્થિત નથી. સમર્થિત સાંકળ: {{supportedChain}}",
-        "NeedMetaMaskConnected": "એપ્લિકેશન સાથે કામ કરવા માટે મેટામાસ્કને કનેક્ટ કરવાની જરૂર છે",
-        "UserNotLoggedInMetaMask": "વપરાશકર્તા મેટામાસ્કમાં લૉગ ઇન નથી",
-        "CurrencyNotFound": "ચલણ મળ્યું નથી",
-        "WrongChain": "આ NFT &quot;{{chain}}&quot; હેઠળ બનાવેલ છે. કૃપા કરીને આ સાંકળનો ઉપયોગ કરો.",
-        "AmountInvalid": "રકમ અમાન્ય!",
-        "NoRecipientSelected": "કોઈ પ્રાપ્તકર્તા પસંદ કરેલ નથી",
-        "NotEnoughPermissionsWallet": "આ વપરાશકર્તાનું વૉલેટ વાંચવા માટે પૂરતી પરવાનગીઓ નથી",
-        "ThisUserHaveNoWallet": "આ વપરાશકર્તાને કોઈ વૉલેટ અસાઇન કરેલ નથી",
-        "TheWalletOfThisUserInvalid": "આ વપરાશકર્તાનું વૉલેટ અમાન્ય છે",
-        "WalletInvalid": "વૉલેટ સરનામું અમાન્ય"
-    },
-    "admin": {
-        "Title": "અસ્કયામતો વહીવટી",
-        "SubscriptionTitle": "સબ્સ્ક્રિપ્શન યોજનાઓ"
-    },
-    "billing": {
-        "Title": "સંપત્તિ બિલિંગ",
-        "CreditsMinimum": "ન્યૂનતમ ક્રેડિટ્સ",
-        "CreditsToAdd": "ઉમેરવા માટે ક્રેડિટ્સ",
-        "Save": "સાચવો",
-        "ThisLink": "આ લિંક",
-        "errors": {
-            "CreditsMinimumNegative": "ન્યૂનતમ ક્રેડિટ નકારાત્મક હોઈ શકતી નથી",
-            "CreditsToAddNegative": "ઉમેરવા માટેની ક્રેડિટ નકારાત્મક હોઈ શકતી નથી"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "પ્રાપ્તકર્તા પસંદ કરો",
-        "TransactionSuccess": "વ્યવહારમાં સફળતા",
-        "OrTypeWalletAddress": "અથવા પ્રાપ્તકર્તા વૉલેટ સરનામું લખો"
     },
     "currencies": {
         "choose": "ચલણ પસંદ કરો"

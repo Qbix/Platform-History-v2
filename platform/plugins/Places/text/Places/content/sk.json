@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} zemepisná šírka, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "v rámci {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "do {{1}}"
     },
     "units": {
         "meter": "meter",
@@ -18,7 +18,7 @@
         "inches": "palce"
     },
     "location": {
-        "interested": "Zaujímam sa o veci, ktoré sa dejú do {{select}} od",
+        "interested": "Zaujímajú ma veci, ktoré sa dejú do {{select}} od",
         "update": "Aktualizujte moju polohu",
         "set": "Nastaviť moju polohu",
         "prompt": "{{ClickOrTap}} sem<br> nastavte si<br> umiestnenie",
@@ -34,7 +34,7 @@
             "title": "Chcete uložiť toto miesto?",
             "message": "Plánujete v budúcnosti znova využiť túto lokalitu?",
             "ok": "Áno",
-            "cancel": "nie"
+            "cancel": "Nie"
         },
         "add": {
             "title": "Pomenujte toto miesto",
@@ -62,7 +62,7 @@
         },
         "Places\/location": {
             "description": "Predstavuje budovu, miesto konania, loď, park atď.",
-            "displayType": "Miesto"
+            "displayType": "Poloha"
         },
         "Places\/area": {
             "description": "Predstavuje oblasť v rámci miesta, ako je napríklad izba alebo apartmán",

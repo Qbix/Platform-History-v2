@@ -1,16 +1,40 @@
 {
+    "avatar": {
+        "Someone": "Algú"
+    },
+    "identifier": {
+        "types": {
+            "email": "Correu electrònic",
+            "mobile": "Mòbil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiat! Ara podeu enganxar-lo a qualsevol lloc."
+    },
+    "analytics": {
+        "Title": "Analítica",
+        "Daily": "Diàriament",
+        "Weekly": "Setmanalment",
+        "Monthly": "Mensual",
+        "Application": "Aplicació",
+        "Pages": "Pàgines",
+        "Services": "Serveis",
+        "Faq": "Faq",
+        "WeekDays": "Dies de la setmana"
+    },
     "actions": {
         "LogIn": "iniciar Sessió",
         "LogOut": "tancar sessió"
     },
     "activate": {
-        "SetAsPrimary": "Estableix {{1}} com a {{2}} principal",
-        "ChoosePassPhrase": "Trieu una <strong>frase<\/strong> de contrasenya per iniciar sessió.<br> Una frase senzilla que consta d&#39;unes poques paraules que recordareu fàcilment.",
-        "ChoosePassPhraseSeeSuggestions": "Trieu una bona <strong>frase<\/strong> de contrasenya per protegir el vostre compte. Consulteu els suggeriments per a algunes idees.",
-        "LogOutAndTryAgain": "Tanca la sessió i torna-ho a provar",
-        "IfYouFeel": "Si creus que alguna cosa ha anat malament, pots",
-        "SetIdentifierButtonTitle": "comença de nou",
         "OneTimeCode": "Introdueix el codi que has rebut:",
+        "SetAsPrimary": "Estableix {{1}} com el meu {{2}} principal",
+        "ChoosePassPhrase": "Trieu una <strong>frase de contrasenya<\/strong> per iniciar sessió.<br> Una frase senzilla que consta d&#39;unes poques paraules que recordareu fàcilment.",
+        "ChoosePassPhraseSeeSuggestions": "Trieu una bona <strong>frase de contrasenya<\/strong> per protegir el vostre compte. Consulteu els suggeriments per a algunes idees.",
+        "LogOutAndTryAgain": "Tanca la sessió i torna-ho a provar",
+        "IfYouFeel": "Si creus que alguna cosa ha anat malament, pots fer-ho",
+        "SetIdentifierButtonTitle": "comença de nou",
         "ActivateMyAccount": "Activa el meu compte"
     },
     "session": {
@@ -19,7 +43,7 @@
     "authorize": {
         "GetStarted": "Començar",
         "Authorize": "Autoritzar",
-        "TermsLabel": "He llegit i estic d&#39;acord<br> al {{link}}",
+        "TermsLabel": "He llegit i estic d&#39;acord<br> fins al {{link}}",
         "TermsTitle": "Termes",
         "mustAgree": "Primer has d&#39;acceptar els termes."
     },
@@ -40,6 +64,18 @@
         "CompletedActivation": "Heu completat l&#39;activació de l&#39;usuari.",
         "CompletedActivationLogIn": "Heu completat l&#39;activació de l&#39;usuari. Prova d&#39;iniciar sessió ara."
     },
+    "contacts": {
+        "dialog": {
+            "title": "Trieu contacte",
+            "CreateAccount": "+ Contacte nou",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create no s&#39;ha trobat",
+            "SearchByName": "Cerca per nom",
+            "EmptyContacts": "No s&#39;han trobat contactes..."
+        },
+        "select": {
+            "title": "Seleccioneu el contacte del {{displayName}}"
+        }
+    },
     "usersContacts": {
         "selectLabel": "Seleccioneu l&#39;etiqueta.",
         "inviteUser": "Convida usuaris",
@@ -47,23 +83,15 @@
         "inviteRole": "Convida {{role}}"
     },
     "invalidLanguageSelected": "Idioma seleccionat no vàlid",
-    "contacts": {
-        "dialog": {
-            "title": "Trieu contacte",
-            "SearchByName": "Cerca per nom",
-            "CreateAccount": "+ Contacte nou",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create no s&#39;ha trobat",
-            "EmptyContacts": "No s&#39;han trobat contactes..."
-        },
-        "select": {
-            "title": "Seleccioneu el contacte de {{displayName}}"
-        }
+    "platforms": {
+        "wallet": "Cartera",
+        "broadcast": "Transmissió"
     },
     "login": {
         "title": "Benvingut",
         "directions": "Creeu un compte o inicieu sessió.",
         "directionsNoRegister": "Inicieu sessió si teniu un compte.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Introduïu la vostra frase de pas:",
         "loginButton": "Començar",
         "registerButton": "Començar",
@@ -73,10 +101,11 @@
         "resendSuccess": "Comproveu si hi ha un missatge per restablir la vostra frase de contrasenya",
         "resendClose": "Tanca",
         "noPassphrase": "Abans de poder iniciar sessió, heu d&#39;establir una frase de contrasenya fent clic a l&#39;enllaç del missatge d&#39;activació.",
-        "notVerified": "Heu d&#39;enviar-vos un missatge d&#39;activació per iniciar sessió.",
+        "notVerified": "Heu d&#39;enviar-vos un missatge d&#39;activació per poder iniciar sessió.",
         "emailExists": "Has provat de registrar-te amb aquest correu electrònic abans? Si és així, comproveu la vostra safata d&#39;entrada per activar el vostre compte. <a href='#resend' class='Q_button Users_activation_resend'>Feu clic per tornar a enviar el missatge<\/a>",
         "mobileExists": "Has provat de registrar-te amb aquest número de mòbil abans? Si és així, comproveu el vostre SMS per activar el vostre compte. <a href='#resend' class='Q_button Users_activation_resend'>Feu clic per tornar a enviar el missatge<\/a>",
         "usingOther": "o pots",
+        "connectPlatforms": "o connectar amb:",
         "prompt": "Escull un nom d&#39;usuari:",
         "newUser": "o crea un compte nou a continuació",
         "placeholders": {
@@ -86,23 +115,15 @@
             "username": "utilitzar només lletres i números"
         },
         "confirmTerms": "Accepteu les condicions del servei?",
-        "facebookNoEmail": "Al teu compte de Facebook li falta una adreça de correu electrònic confirmada. Simplement inicieu sessió de manera nativa.",
+        "facebookNoEmail": "Falta una adreça de correu electrònic confirmada al teu compte de Facebook. Simplement inicieu sessió de manera nativa.",
         "picTooltip": "Podeu canviar aquesta imatge més endavant",
-        "wallet": {
-            "payload": "Inicieu sessió a {{host}} a l&#39;hora {{timestamp}}",
-            "alert": {
-                "title": "Redirecció a Wallet",
-                "content": "Un cop tanqueu aquest diàleg, se us dirigirà a la vostra cartera. Després d&#39;iniciar la sessió, torneu a aquesta pàgina."
-            }
-        },
         "web3": {
-            "payload": "Inicieu sessió a {{host}} a l&#39;hora {{timestamp}}",
+            "payload": "Inicieu sessió al {{host}} a l&#39;hora {{timestamp}}",
             "alert": {
                 "title": "S&#39;està redirigint a Wallet",
                 "content": "Un cop tanqueu aquest diàleg, se us dirigirà a la vostra cartera. Després d&#39;iniciar la sessió, torneu a aquesta pàgina."
             }
-        },
-        "connectPlatforms": "o connectar amb:"
+        }
     },
     "setIdentifier": {
         "title": "Afegiu una manera d&#39;iniciar sessió",
@@ -117,7 +138,7 @@
     "prompt": {
         "title": "{{Platform}} Compte",
         "areUsing": "Esteu utilitzant {{platform}} com a",
-        "noLongerUsing": "Ja no esteu connectat a {{platform}} com",
+        "noLongerUsing": "Ja no esteu connectat al {{platform}} com",
         "doAuth": "Inicieu sessió amb aquest compte",
         "doSwitch": "Canvia a aquest compte"
     },
@@ -128,37 +149,9 @@
         "Guest": "Convidat",
         "Host": "Amfitrió"
     },
-    "analytics": {
-        "Title": "Analítica",
-        "Daily": "Diàriament",
-        "Weekly": "Setmanalment",
-        "Monthly": "Mensual",
-        "Application": "Aplicació",
-        "Pages": "Pàgines",
-        "Services": "Serveis",
-        "Faq": "Faq",
-        "WeekDays": "Dies de la setmana"
-    },
-    "avatar": {
-        "Someone": "Algú"
-    },
     "web3": {
         "WrongMethod": "Mètode de contracte incorrecte {{methodName}}",
         "ChangeWallet": "Canvia Wallet"
-    },
-    "identifier": {
-        "types": {
-            "email": "Correu electrònic",
-            "mobile": "Mòbil",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Copiat! Ara podeu enganxar-lo a qualsevol lloc."
-    },
-    "platforms": {
-        "wallet": "Cartera",
-        "broadcast": "Transmissió"
     },
     "labels": {
         "addToPhonebook": "Afegeix als meus contactes del telèfon",

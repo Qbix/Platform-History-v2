@@ -6,119 +6,90 @@
     "preview": {
         "NewItemTitle": "새로운 물품"
     },
+    "avatar": {
+        "firstName": "이름",
+        "lastName": "성",
+        "username": "사용자 이름"
+    },
     "labels": {
         "Streams\/invited": "내가 초대한 사람들",
         "Streams\/invitedMe": "나를 초대한 사람",
         "DoYouAgree": "동의하십니까?",
-        "Yes": "네",
-        "No": "아니"
+        "Yes": "예",
+        "No": "아니요"
+    },
+    "login": {
+        "prompt": "친구들이 당신을 알아보도록 하세요:",
+        "newUser": "또는 아래에서 새 계정을 만드십시오.",
+        "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
+        "placeholder": {
+            "fullName": "당신의 성명을 입력하십시오"
+        }
     },
     "interests": {
-        "Filter": "니가 관심 있는게 뭐니?",
-        "CanGrant": "여전히 원하는 것을 찾을 수 없다면 아래에서 새로운 관심분야를 추가할 수 있습니다.",
-        "TrySynonyms": "안 보여? 몇 가지 동의어를 시도하십시오.",
+        "Filter": "관심사 검색",
+        "CanGrant": "여전히 원하는 것을 찾을 수 없는 경우 아래에서 새로운 관심사를 추가할 수 있습니다.",
+        "TrySynonyms": "보이지 않습니까? 몇 가지 동의어를 사용해 보세요.",
         "AddUnderCategory": "카테고리 아래에 추가...",
         "Other": "다른",
-        "Unlisted": "비공개"
+        "Unlisted": "미등록"
     },
     "chat": {
-        "flaggedForAdminReview": "메시지가 관리자 검토를 위해 플래그가 지정되었습니다. 플래그를 해제하려면 다시 탭하세요.",
-        "noOneSaid": "아무도 아무 말도 하지 않았다",
+        "flaggedForAdminReview": "관리자 검토를 위해 메시지에 플래그가 지정되었습니다. 플래그를 해제하려면 다시 탭하세요.",
+        "noOneSaid": "아무도 아무 말도 하지 않았어",
         "closeChatButton": "채팅 닫기",
-        "closeChatConfirmTitle": "이 채팅을 닫으시겠습니까?",
+        "closeChatConfirmTitle": "이 채팅을 종료하시겠습니까?",
         "closeChatConfirm": "이 채팅을 종료하시겠습니까?",
         "Subscribed": "알림 사용",
-        "Unsubscribed": "알림 음소거",
-        "closeChatConfirmYes": "네",
-        "closeChatConfirmNo": "아니",
+        "Unsubscribed": "알림 음소거됨",
+        "closeChatConfirmYes": "예",
+        "closeChatConfirmNo": "아니요",
         "earlierComments": "이전 댓글",
         "startedConversation": "대화를 시작했다",
         "RealTimeCall": "실시간 통화",
+        "JoinWebRTC": "원격회의",
         "SearchByName": "이름으로 검색",
         "Notifications": {
-            "Visit": "{{displayName}}이(가) 채팅을 방문 중입니다.",
-            "Join": "{{displayName}}이(가) 채팅에 참여했습니다.",
-            "Leave": "{{displayName}}이(가) 채팅을 떠났습니다.",
-            "RelatedTo": "{{displayName}}이(가) {{stream.displayType}}을(를) 시작했습니다."
+            "Visit": "{{displayName}} 채팅방을 방문 중입니다.",
+            "Join": "{{displayName}} 채팅에 참여했습니다.",
+            "Leave": "{{displayName}} 채팅을 떠났습니다.",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} 시작했습니다."
         },
-        "JoinWebRTC": "원격 회의"
+        "placeholders": {
+            "Public": "의견을 추가하다",
+            "Private": "비공개 메시지 작성"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "이메일 구독 관리",
         "IfUnsubscribe": "구독을 취소하려면",
-        "*": "메시지 {{& message.fields.type}}: {{& stream.fields.title}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}}이(가) 말했습니다: {{& message.content}}",
-        "Streams\/changed": "{{stream.fields.title}}의 변경 사항",
-        "Streams\/invite": "{{& stream.fields.title}}에 초대되었습니다.",
-        "Streams\/announcement": "{{& stream.fields.title}} 발표",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}}에서 액세스 변경됨",
-        "Streams\/chat\/edit": "{{& stream.fields.title}}에서 편집된 채팅 메시지",
-        "Streams\/chat\/remove": "{{& stream.fields.title}}에서 채팅 메시지가 삭제됨",
-        "Streams\/closed": "{{stream.fields.title}}이(가) 닫혔습니다.",
-        "Streams\/task\/progress": "{{stream.fields.title}} 진행 상황",
-        "Streams\/task\/complete": "작업 완료: {{stream.fields.title}}",
-        "Streams\/task\/error": "오류: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: 수신 메시지",
-        "Streams\/relatedTo\/Streams\/call": "{{toTitle}}에 새로운 통화 시작",
-        "Streams\/relatedTo\/*": "{{relationDisplayType}}의 새로운 {{toTitle}}",
-        "Streams\/relatedFrom\/*": "{{toTitle}}에 {{relationDisplayType}}(으)로 추가됨",
-        "Streams\/mention": "{{&call 'avatar.displayName'}}이(가) 댓글에서 나를 멘션했습니다.",
-        "Streams\/call": "{{displayName}} 실시간 통화를 시작했습니다.",
+        "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
         "Streams\/joined": "{{&call 'avatar.displayName'}} 가입",
-        "Streams\/left": "{{&call 'avatar.displayName'}} 남음"
+        "Streams\/left": "{{&call 'avatar.displayName'}} 개 남음",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} 가 말했다: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} 의 변화",
+        "Streams\/invite": "당신은 {{& stream.fields.title}} 에 초대되었습니다",
+        "Streams\/announcement": "{{& stream.fields.title}} 발표",
+        "Streams\/access": "{{& stream.fields.title}} 에 {{&call 'avatar.displayName'}} 액세스 권한을 변경했습니다.",
+        "Streams\/chat\/edit": "{{& stream.fields.title}} 에서 수정된 채팅 메시지",
+        "Streams\/chat\/remove": "{{& stream.fields.title}} 에서 삭제된 채팅 메시지",
+        "Streams\/closed": "{{stream.fields.title}} 가 마감되었습니다.",
+        "Streams\/task\/progress": "{{stream.fields.title}} 에서 진행",
+        "Streams\/task\/complete": "작업 완료: {{stream.fields.title}}",
+        "Streams\/task\/error": "다음 중 오류 발생: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}} : 들어오는 메시지",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} 에 시작된 새로운 부름",
+        "Streams\/relatedTo\/*": "새로운 {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} 에 {{relationDisplayType}} 으로 추가",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} 댓글에서 당신을 언급했습니다",
+        "Streams\/call": "{{displayName}} 실시간 통화 시작"
     },
     "invite": {
-        "command": "초대",
-        "messageContent": "{{displayName}}이(가) 귀하를 {{inviteUrl}}에 초대했습니다.",
-        "youCanNowPaste": "이제 이 링크를 어딘가에 붙여넣어 사람들을 초대할 수 있습니다.",
-        "dialog": {
-            "chooseFromContacts": "연락처에서 선택",
-            "chooseAgainFromContacts": "연락처에서 다시 선택",
-            "inviteSelectedContacts": "선택한 연락처 초대",
-            "selectFromContacts": "연락처에서 선택",
-            "userChooserPlaceholder": "이름으로 검색",
-            "photo": "사진을 찍다",
-            "photoInstruction": "QR코드를 스캔한 사람이 앞에 있으면 사진을 찍어주세요.",
-            "to": "받는 사람: {{Stream Title}}",
-            "go": "가다",
-            "title": "초대",
-            "placeholder": "휴대폰 번호 또는 이메일 주소",
-            "orInvite": "또는 다음을 사용하여 사람을 초대합니다.",
-            "copyLink": "{{ClickOrTap}} 초대 링크 복사",
-            "shareOrCopyLink": "{{ClickOrTap}} 초대 링크 공유 또는 복사",
-            "QR": "{{ClickOrTap}} QR 코드 생성",
-            "QRtitle": "이 QR 코드를 스캔하세요",
-            "QRscanned": "그들은 그것을 스캔했습니다!",
-            "scannedQR": "{{ClickOrTap}} 코드가 스캔된 경우",
-            "byEmail": "이메일",
-            "byText": "텍스트",
-            "byFacebook": "페이스북",
-            "byTwitter": "트위터",
-            "title2": "사람들을 초대",
-            "chooseMethod": "방법 선택:",
-            "selectContacts": "연락처 선택",
-            "scanQRCode": "QR 코드 스캔",
-            "shareLink": "링크 공유",
-            "chooseFromRegistered": "등록된 사용자 중에서 선택",
-            "inviteViaEmailOrSms": "이메일 또는 SMS로 초대"
-        },
-        "email": {
-            "subject": "이봐, 이것 좀 봐",
-            "PleaseVisitLink": "다음 링크를 방문하십시오.",
-            "InvitingYou": "{{title}}에 초대합니다",
-            "HasInvitedYou": "{{displayName}}님이 귀하를 {{title}}에 초대했습니다",
-            "HasMentionedYou": "{{displayName}}님이 &quot;{1000}}&quot;에서 귀하를 멘션했습니다.",
-            "YOUAREINVITED": "당신은 초대!",
-            "AcceptInvite": "초대를 수락하다"
-        },
-        "sms": {
-            "content": "{{title}}에 초대되었습니다. {{url}}을(를) 탭하세요."
-        },
-        "notice": {
-            "text": "당신은 초대되었습니다. {{ClickOrTap}} 여기에서 수락하고 가입하세요."
-        },
-        "Invite": "초대",
+        "command": "초대하다",
+        "Invite": "초대하다",
         "Share": "공유하다",
+        "messageContent": "{{displayName}} 당신을 {{inviteUrl}} 에 초대했습니다",
+        "youCanNowPaste": "이제 이 링크를 어딘가에 붙여넣어 사람들을 초대할 수 있습니다.",
         "roles": {
             "title": "초대된 사용자에게 역할을 부여하시겠습니까?",
             "NotAuthorizedToGrantRole": {
@@ -133,64 +104,114 @@
         "labels": {
             "title": "당신의 관계는 무엇입니까?"
         },
+        "dialog": {
+            "chooseFromContacts": "연락처에서 선택",
+            "chooseAgainFromContacts": "연락처에서 다시 선택",
+            "inviteSelectedContacts": "선택한 연락처 초대",
+            "selectFromContacts": "연락처에서 선택",
+            "userChooserPlaceholder": "이름으로 검색",
+            "photo": "사진을 찍다",
+            "photoOf": "{{name}} 사진 찍기",
+            "photoInstruction": "QR코드를 스캔한 사람이 앞에 있다면 사진을 찍어주세요.",
+            "to": "받는 사람: {{Stream Title}}",
+            "go": "가다",
+            "title": "초대하다",
+            "placeholder": "휴대폰 번호 또는 이메일 주소",
+            "orInvite": "또는 다음을 사용하여 사람들을 초대합니다.",
+            "copyLink": "{{ClickOrTap}} 초대 링크 복사",
+            "shareOrCopyLink": "{{ClickOrTap}} 초대 링크 공유 또는 복사",
+            "QR": "{{ClickOrTap}} QR 코드 생성",
+            "QRtitle": "이 QR 코드 스캔",
+            "QRscanned": "그들은 그것을 스캔했습니다!",
+            "scannedQR": "코드가 스캔된 경우 {{ClickOrTap}}",
+            "byEmail": "이메일",
+            "byText": "텍스트",
+            "byFacebook": "페이스북",
+            "byTwitter": "트위터",
+            "title2": "사람 초대",
+            "chooseMethod": "방법을 선택하십시오.",
+            "selectContacts": "연락처 선택",
+            "scanQRCode": "QR 코드 스캔",
+            "shareLink": "링크 공유",
+            "chooseFromRegistered": "등록된 사용자 중에서 선택",
+            "inviteViaEmailOrSms": "이메일 또는 SMS를 통해 초대"
+        },
         "complete": {
+            "WelcomeToCommunity": "{{communityName}} 에 오신 것을 환영합니다",
             "HasInvitedYou": "님이 귀하를 초대했습니다:",
-            "WelcomeToCommunity": "{{communityName}}에 오신 것을 환영합니다",
             "HasInvitedYouToTheirProfile": "연결하도록 초대했습니다.",
             "prompt": "친구들이 당신을 알아보도록 하세요:",
             "accept": "초대를 수락하다"
+        },
+        "email": {
+            "subject": "이봐, 이것 좀 봐봐",
+            "PleaseVisitLink": "다음 링크를 방문하십시오.",
+            "InvitingYou": "{{title}} 에 당신을 초대합니다",
+            "HasInvitedYou": "{{displayName}} 당신을 {{title}} 에 초대했습니다",
+            "HasMentionedYou": "{{displayName}} &quot; {{title}} &quot;에서 귀하를 언급했습니다.",
+            "YOUAREINVITED": "당신은 초대!",
+            "AcceptInvite": "초대를 수락하다"
+        },
+        "sms": {
+            "content": "{{title}} 에 초대되었습니다. {{url}} 눌러주세요"
+        },
+        "notice": {
+            "text": "당신은 초대되었습니다. {{ClickOrTap}} 여기에서 수락하고 가입하세요."
         }
     },
     "messages": {
         "html": {
-            "posted": "<em>{{message.fields.type}}<\/em> 메시지를 {{stream.fields.title}}에 게시했습니다."
+            "posted": "<em>{{message.fields.type}}<\/em> 메시지를 {{stream.fields.title}} 에 게시했습니다."
         },
         "text": {
-            "commentedOn": "에 댓글을 달았다",
-            "startedCallIn": "통화를 시작했습니다",
+            "commentedOn": "댓글을 달았습니다",
+            "startedCallIn": "전화를 걸었다",
             "in": "~에",
-            "body": "{{& url}}: {{& message.fields.content}}",
+            "body": "{{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "에 게시되었습니다",
-                "byAvatar": "의해 {{avatar.displayName}}"
+                "byAvatar": "{{avatar.displayName}} 까지"
             },
             "relatedTo": {
-                "hasANew": "새로운 {{instructions.fromDisplayType}}이(가) 있습니다",
-                "byAvatar": "{{avatar.displayName}}에 의해 추가됨"
+                "hasANew": "새로운 {{instructions.fromDisplayType}} 가 있습니다",
+                "byAvatar": "{{avatar.displayName}} 에 의해 추가됨"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "친구가 아직 인식하지 못하는 번호로 초대장이 전송됩니다. 링크를 클릭하도록 요청하는 초대장이 귀하로부터 왔다는 것을 알리기 위해 빠른 텍스트로 후속 조치를 취하십시오.",
-            "confirm": "친구가 아직 인식하지 못하는 번호로 초대장이 전송됩니다. 초대장이 귀하로부터 온 것임을 알리고 링크를 클릭하도록 요청하는 빠른 문자를 보내시겠습니까?",
-            "check": "안녕하세요. 방금 {{app}} 앱 초대장을 보냈습니다. SMS를 확인하고 링크를 클릭하십시오!",
-            "CheckYourMobile": "SMS를 확인하고 지침을 따르십시오!"
+            "alert": "초대는 친구가 아직 인식하지 못하는 당사 번호로 전송됩니다. 링크를 클릭하도록 요청하는 빠른 텍스트로 후속 조치를 취하여 귀하가 보낸 초대장임을 알립니다.",
+            "confirm": "초대는 친구가 아직 인식하지 못하는 당사 번호로 전송됩니다. 귀하로부터 초대를 받았다는 사실을 알리고 링크를 클릭하도록 요청하는 빠른 문자 메시지를 보내시겠습니까?",
+            "check": "안녕하세요, 방금 {{app}} 앱에 대한 초대장을 보냈습니다. SMS를 확인하고 링크를 클릭하세요!",
+            "CheckYourMobile": "SMS를 확인하고 안내를 따르세요!"
         },
         "email": {
-            "alert": "친구가 아직 인식하지 못하는 도메인에서 초대장이 전송됩니다. 링크를 클릭하도록 요청하는 초대장이 귀하로부터 왔다는 것을 알리기 위해 빠른 텍스트로 후속 조치를 취하십시오.",
-            "confirm": "친구가 아직 인식하지 못하는 도메인에서 초대장이 전송됩니다. 초대장이 귀하로부터 온 것임을 알리고 링크를 클릭하도록 요청하는 빠른 문자를 보내시겠습니까?",
-            "subject": "초대장 받으셨나요?",
-            "body": "안녕하세요, 방금 {{app}} 앱 초대장을 보냈습니다. 이메일을 확인하고 거기에 있는 링크를 클릭하세요!",
-            "CheckYourEmail": "이메일을 확인하고 지침을 따르십시오!"
+            "alert": "초대는 친구가 아직 인식하지 못하는 도메인에서 전송됩니다. 링크를 클릭하도록 요청하는 빠른 텍스트로 후속 조치를 취하여 귀하가 보낸 초대장임을 알립니다.",
+            "confirm": "초대는 친구가 아직 인식하지 못하는 도메인에서 전송됩니다. 귀하로부터 초대를 받았다는 사실을 알리고 링크를 클릭하도록 요청하는 빠른 문자 메시지를 보내시겠습니까?",
+            "subject": "초대장을 받으셨나요?",
+            "body": "안녕하세요, 방금 {{app}} 앱에 대한 초대장을 보냈습니다. 이메일을 확인하고 거기에 있는 링크를 클릭하세요!",
+            "CheckYourEmail": "이메일을 확인하고 안내를 따르세요!"
         }
+    },
+    "identifier": {
+        "privacySettings": "개인 정보 설정"
     },
     "participating": {
         "Title": "제목",
         "Subscribed": "구독",
         "Participants": "참가자들",
-        "AreYouSureRemoveIdentifier": "이 식별자를 삭제하시겠습니까?",
+        "AreYouSureRemoveIdentifier": "이 식별자를 제거하시겠습니까?",
         "AreYouSureUnsubscribeIdentifier": "이 식별자를 구독 취소하시겠습니까? 이 식별자에 대한 알림을 끕니다.",
         "AreYouSureUnsubscribeDevice": "이 기기를 구독 취소하시겠습니까? 이 장치에 대한 알림을 끕니다.",
-        "AreYouSureRemoveParticipant": "이 참가자를 삭제하시겠습니까?",
+        "AreYouSureRemoveParticipant": "이 참여자를 삭제하시겠습니까?",
         "RemoveParticipant": "참가자 제거",
         "Identifiers": "식별자",
         "Devices": "장치",
         "Streams": "스트림"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "이 스트림에 참여할 수 있는 권한이 없습니다.",
-        "streamTitle": "{{1}}이(가) 원격 회의를 시작했습니다.",
+        "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
+        "streamTitle": "{{1}} 원격회의 시작",
         "allow": {
             "dialogTitle": "연결 중",
             "microphoneBtn": "마이크 활성화",
@@ -198,68 +219,71 @@
             "cameraAndMicrophoneBtn": "카메라 및 마이크 활성화"
         },
         "preparing": {
+            "dialogTitle": "참여하기 전에 카메라 또는 마이크 켜기\/끄기",
             "micIsOff": "마이크가 꺼져 있습니다",
-            "micIsOn": "마이크가 켜져 있습니다",
-            "cameraIsOff": "카메라가 꺼져 있습니다",
+            "micIsOn": "마이크 켜짐",
+            "cameraIsOff": "카메라가 꺼져 있습니다.",
             "cameraIsOn": "카메라가 켜져 있습니다.",
             "screenSharingIsOn": "화면 공유 사용 중",
             "screenSharingIsOff": "화면 공유",
-            "joinNow": "통화 참여",
-            "dialogTitle": "참여하기 전에 카메라 또는 마이크 켜기\/끄기"
+            "joinNow": "통화에 참여"
         },
         "webInstructionsDialog": {
             "dialogTitle": "지침",
-            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
-            "point1": "&quot;설정&quot; -&gt; &quot;고급&quot; -&gt; &quot;개인정보 및 보안&quot; -&gt; &quot;사이트 설정&quot; -&gt; &quot;카메라&quot; 또는 &quot;사이트 설정&quot; -&gt; &quot;마이크&quot;로 이동합니다.",
+            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
+            "point1": "&quot;설정&quot; -&gt; &quot;고급&quot; -&gt; &quot;개인 정보 및 보안&quot; -&gt; &quot;사이트 설정&quot; -&gt; &quot;카메라&quot; 또는 &quot;사이트 설정&quot; -&gt; &quot;마이크&quot;로 이동합니다.",
             "point2": "&quot;차단&quot; 목록에서 {{hostname}} 제거"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "지침",
-            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 회의에 참가하려면 이 페이지를 새로고침하고 {{kind}}에 대한 액세스를 확인하세요."
+            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 회의에 참여하려면 이 페이지를 새로고침하고 {{kind}} 에 대한 액세스를 확인하십시오."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "지침",
-            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
+            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
             "point1": "Android 설정으로 이동",
             "point2": "&quot;앱 및 알림&quot; 열기",
-            "point3": "&quot;{{communityName}}&quot;을(를) 찾아 엽니다.",
-            "point4": "권한을 탭하십시오",
-            "point5": "활성화 {{kind}}"
+            "point3": "&quot; {{communityName}} &quot;를 찾아 엽니다.",
+            "point4": "권한을 누릅니다",
+            "point5": "{{kind}} 활성화"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "지침",
-            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
+            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
             "point1": "iOS 설정으로 이동",
-            "point2": "&quot;개인 정보&quot;를 엽니다.",
-            "point3": "{{kind}}을(를) 찾아 엽니다.",
-            "point4": "&quot;{{communityName}}&quot;을(를) 찾아 활성화합니다."
+            "point2": "&quot;프라이버시&quot; 열기",
+            "point3": "{{kind}} 찾아 엽니다.",
+            "point4": "&quot; {{communityName}} &quot;를 찾아 활성화"
+        },
+        "fbLive": {
+            "dialogTitle": "페이스북 라이브 스트리밍 시작"
         },
         "notices": {
-            "youJoinedRoom": "당신은 방에 합류했습니다",
-            "joining": "합류: {{userName}}",
-            "sbLeftRoom": "{{userName}}이(가) 방을 나갔습니다.",
-            "switchingRoom": "탈의실...",
+            "youJoinedRoom": "방에 참여했습니다.",
+            "joining": "가입: {{userName}}",
+            "sbLeftRoom": "{{userName}} 방을 나갔다",
+            "switchingRoom": "방을 바꾸다...",
             "forceDisconnecting": "5초 이내에 연결이 끊어집니다.",
             "forceDisconnectingImmediately": "호스트에 의해 연결이 끊어졌습니다.",
-            "youLeftRoom": "당신은 방을 떠났다",
-            "codeCopied": "당신은 방을 떠났다",
-            "sbBeganFbLive": "{{userName}}이(가) Facebook에서 이 통화를 방송하기 시작했습니다.",
-            "sbStoppedFbLive": "{{userName}}이(가) Facebook에서 이 통화 방송을 중단했습니다.",
+            "youLeftRoom": "당신은 방을 나갔다",
+            "codeCopied": "당신은 방을 나갔다",
+            "sbBeganFbLive": "{{userName}} 이 통화를 Facebook에서 방송하기 시작했습니다.",
+            "sbStoppedFbLive": "{{userName}} Facebook에서 이 통화 방송을 중지했습니다.",
             "youBeganFbLive": "Facebook에서 이 통화를 방송하기 시작했습니다.",
-            "youStoppedFbLive": "Facebook에서 이 통화 방송을 중단했습니다.",
-            "youStartedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하기 시작했습니다.",
-            "youStoppedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하는 것을 중지했습니다.",
+            "youStoppedFbLive": "Facebook에서 이 통화 방송을 중지했습니다.",
+            "youStartedLive": "이 호출을 사용자 지정 RTMP에 브로드캐스팅하기 시작했습니다.",
+            "youStoppedLive": "맞춤 RTMP에 대한 이 호출 브로드캐스팅을 중지했습니다.",
             "sbStartedLiveStreaming": "{{userName}} 라이브 시작",
             "sbStoppedLiveStreaming": "{{userName}} 라이브 종료",
-            "liveStopped": "엔드포인트로 비디오를 보내는 동안 오류가 발생했습니다.",
+            "liveStopped": "끝점에 비디오를 보내는 중 오류가 발생했습니다.",
             "youBeganVideoRecording": "이 회의를 녹화하기 시작했습니다.",
             "youStoppedVideoRecording": "이 회의 녹화를 중지했습니다.",
             "linkCopiedToCb": "클립보드에 복사된 링크",
             "codeCopiedToCb": "클립보드에 복사된 코드",
-            "userHasNoVideo": "참가자에게 동영상이 없습니다.",
-            "openInBrowserAlert": "회의에 참가하려면 Safari 브라우저에서 링크를 엽니다.",
-            "allowedVideoLimit": "이 방에는 {{limit}}개의 동영상만 허용됩니다.",
-            "allowedAudioLimit": "이 방에는 {{limit}}개의 마이크만 허용됩니다."
+            "userHasNoVideo": "참가자에게 비디오가 없습니다.",
+            "openInBrowserAlert": "회의에 참여하려면 Safari 브라우저에서 링크를 여십시오.",
+            "allowedVideoLimit": "이 방에는 {{limit}} 비디오만 허용됩니다.",
+            "allowedAudioLimit": "이 방에는 {{limit}} 마이크만 허용됩니다."
         },
         "settingsPopup": {
             "dialogTitle": "비디오 설정",
@@ -270,44 +294,47 @@
             "turnOffVideo": "카메라\/화면 공유 끄기",
             "turnOffAudioInput": "마이크 음소거",
             "turnOffScreenSharing": "화면 공유 끄기",
-            "cameraIsTurnedOff": "카메라가 꺼져 있습니다",
-            "micIsTurnedOff": "마이크가 꺼져 있습니다",
-            "startFBLive": "페이스북 라이브스트림 시작",
-            "stopFBLive": "Facebook 실시간 스트리밍 중지",
+            "cameraIsTurnedOff": "카메라가 꺼져 있습니다.",
+            "micIsTurnedOff": "마이크가 꺼져 있습니다.",
+            "startFBLive": "페이스북 라이브스트림 시작하기",
+            "stopFBLive": "페이스북 라이브스트림 중지",
             "startRecording": "녹음 시작",
             "stopRecording": "녹음 중지",
             "start": "시작",
-            "stop": "중지",
+            "stop": "멈추다",
             "recordingInProgress": "녹음이 진행 중입니다...",
-            "fbLiveTitle": "실시간 스트리밍 제목",
-            "fbLiveDescription": "라이브스트림에 대해 설명하세요. 그것은 무엇에 관한 것입니까?",
+            "fbLiveTitle": "생중계 제목",
+            "fbLiveDescription": "귀하의 라이브스트림을 설명하십시오. 무엇에 관한 것입니까?",
             "fbOnlyMeLiveAccess": "나만",
-            "fbFriendsAccess": "친구들",
+            "fbFriendsAccess": "친구",
             "fbPublicAccess": "공공의",
             "publishOnTimeline": "타임라인에 게시",
             "publishToGroup": "그룹에 게시",
             "fbStartLive": "생중계",
-            "fbStopLive": "실시간 스트리밍 종료",
+            "fbStopLive": "생중계 종료",
             "streamingSettings": "설정",
+            "manageStream": "라이브스트림 관리",
             "fbEmbedCode": "포함시키다",
             "copy": "복사",
-            "streamToRTMP": "사용자 지정 RTMP로 스트리밍",
+            "streamToRTMP": "맞춤형 RTMP로 스트리밍",
             "startBroadcasting": "방송 시작",
-            "broadcastingInProgress": "방송중입니다",
-            "manageStream": "라이브스트림 관리"
+            "broadcastingInProgress": "방송중입니다"
         },
         "audioSettings": {
             "dialogTitle": "오디오 설정",
             "speakers": "스피커",
             "microphone": "마이크로폰"
         },
+        "broadcastPopup": {
+            "dialogTitle": "방송 관리"
+        },
         "participantsPopup": {
             "dialogTitle": "참가자 설정",
-            "disconnect": "연결 해제",
+            "disconnect": "연결 끊기",
             "floatingScreens": "플로팅 스크린",
             "tiledScreens": "타일 스크린",
-            "loudestExceptMe": "나를 제외하고 가장 시끄러운",
-            "maximizeLoudest": "가장 큰 소리로 최대화",
+            "loudestExceptMe": "나 빼고 시끄러워",
+            "maximizeLoudest": "가장 크게 최대화",
             "staticMaximized": "정적 최대화",
             "fullScreen": "전체 화면",
             "manual": "수동",
@@ -319,43 +346,37 @@
             "turnOnScreenSharing": "화면 공유 표시"
         },
         "streamingSettings": {
-            "title": "스트리밍 설정"
+            "title": "생중계"
         },
         "preview": {
-            "Meeting": "원격 회의",
-            "MeetingEnded": "원격 회의 종료"
+            "Meeting": "원격회의",
+            "MeetingEnded": "원격회의 종료"
         },
         "requestSpeakDialog": {
-            "msg": "현재 {{count}}명이 회의에서 말하고 있습니다. {{seconds}}초 동안 말을 마친 후 그 중 하나를 교체하시겠습니까?",
-            "dialogTitle": "발언 요청"
-        },
-        "fbLive": {
-            "dialogTitle": "페이스북 라이브 스트리밍 시작"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "방송 관리"
+            "dialogTitle": "발언 요청",
+            "msg": "현재 {{count}} 명이 회의에서 발언하고 있습니다. {{seconds}} 초 동안 말을 마칠 수 있도록 허용한 후 그 중 하나를 교체하시겠습니까?"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "초대됨",
-            "description": "초대 받은편지함"
+            "displayType": "초대",
+            "description": "초대장 받은편지함"
         },
         "Streams\/resource": {
             "displayType": "자원",
             "description": "리소스에 대한 액세스를 관리하고 업데이트에 대한 메시지를 게시하기 위한 스트림"
         },
         "Streams\/task": {
-            "description": "특정 작업 진행 상황에 대한 업데이트 수신",
+            "description": "특정 작업의 진행 상황에 대한 업데이트 수신",
             "displayType": "일"
         },
         "Streams\/tasks": {
-            "description": "작업 카테고리",
+            "description": "작업 범주",
             "displayType": "작업"
         },
         "Streams\/experience": {
-            "description": "커뮤니티 구성원을 위한 공통 경험",
-            "displayType": "커뮤니티 구성원을 위한 공통 경험"
+            "description": "커뮤니티 구성원의 공통 경험",
+            "displayType": "커뮤니티 구성원의 공통 경험"
         },
         "Streams\/greeting": {
             "description": "사용자가 자신을 소개할 수 있는 인사말",
@@ -367,7 +388,7 @@
         },
         "Streams\/date": {
             "displayType": "날짜",
-            "description": "데이트"
+            "description": "날짜"
         },
         "Streams\/text": {
             "displayType": "텍스트",
@@ -379,7 +400,7 @@
         },
         "Streams\/text\/medium": {
             "displayType": "텍스트",
-            "description": "중간 본문"
+            "description": "중간 텍스트 본문"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "이메일 주소",
@@ -391,7 +412,7 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "웹상의 링크"
+            "description": "웹에서 링크"
         },
         "Streams\/image": {
             "displayType": "영상",
@@ -427,7 +448,7 @@
             "newItem": "PDF 추가"
         },
         "Streams\/live": {
-            "displayType": "라이브스트림",
+            "displayType": "생중계",
             "description": "라이브 오디오 또는 비디오"
         },
         "Streams\/category": {
@@ -435,7 +456,7 @@
             "description": "다른 스트림이 관련될 수 있는 범주"
         },
         "Streams\/participating": {
-            "displayType": "참여지수",
+            "displayType": "참여 지수",
             "description": "스트림은 사용자가 가입\/탈퇴할 때 이것과 관련이 있거나 관련이 없습니다."
         },
         "Streams\/interest": {
@@ -448,24 +469,24 @@
         },
         "Streams\/chat": {
             "displayType": "대화",
-            "description": "사용자 간의 대화, 역사"
+            "description": "역사와 함께 사용자 간의 대화"
         },
         "Streams\/webrtc": {
-            "displayType": "라이브 콜",
-            "description": "실시간 영상\/음성 통화"
+            "displayType": "원격회의",
+            "description": "온라인 비디오\/오디오 컨퍼런스"
         },
         "Streams\/question": {
-            "displayType": "의문",
+            "displayType": "질문",
             "description": "질문 스트림",
             "newItem": "질문 추가"
         },
         "Streams\/answer": {
-            "displayType": "대답",
+            "displayType": "답변",
             "description": "응답 스트림"
         },
         "Streams\/calls": {
             "displayType": "통화",
-            "description": "스트림\/webrtc에 대한 범주",
+            "description": "Streams\/webrtc 카테고리",
             "MaxRelationsExceeded": "최대 통화 초과"
         }
     },
@@ -486,12 +507,12 @@
         "link": "링크",
         "setUrl": "URL 설정",
         "save": "구하다",
-        "setClip": "컷 아웃 클립",
+        "setClip": "컷아웃 클립",
         "invalidURL": "잘못된 URL",
         "invalidFile": "유효하지 않은 파일",
         "errorNoSource": "오디오 소스 없음",
         "uploadLimit": "최대 파일 크기: {{size}}",
-        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}} 입니다."
     },
     "video": {
         "reset": "초기화",
@@ -502,12 +523,12 @@
         "link": "링크",
         "setUrl": "URL 설정",
         "save": "구하다",
-        "setClip": "컷 아웃 클립",
+        "setClip": "컷아웃 클립",
         "invalidURL": "잘못된 URL",
         "invalidFile": "유효하지 않은 파일",
         "errorNoSource": "비디오 소스 없음",
         "uploadLimit": "최대 파일 크기: {{size}}",
-        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}} 입니다."
     },
     "pdf": {
         "reset": "초기화",
@@ -518,12 +539,12 @@
         "link": "링크",
         "setUrl": "URL 설정",
         "save": "구하다",
-        "setClip": "컷 아웃 클립",
+        "setClip": "컷아웃 클립",
         "invalidURL": "잘못된 URL",
         "invalidFile": "유효하지 않은 파일",
-        "errorNoSource": "pdf 소스 없음",
+        "errorNoSource": "PDF 소스 없음",
         "uploadLimit": "최대 파일 크기: {{size}}",
-        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}} 입니다."
     },
     "image": {
         "reset": "초기화",
@@ -536,82 +557,60 @@
         "save": "구하다",
         "uploadedImage": "업로드된 이미지",
         "imageTitle": "이미지 제목",
-        "setClip": "컷 아웃 클립",
+        "setClip": "컷아웃 클립",
         "invalidURL": "잘못된 URL",
         "invalidFile": "유효하지 않은 파일",
         "errorNoSource": "이미지 출처 없음",
         "uploadLimit": "최대 파일 크기: {{size}}",
-        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}} 입니다."
     },
     "questions": {
         "Questions": "질문",
         "Answers": "답변",
-        "AnswerQuestion": "질문에 대답",
+        "AnswerQuestion": "답변 질문",
         "SetYourAnswer": "질문에 답해주세요",
-        "NewQuestion": "새 질문",
-        "NewAnswer": "새 답변",
+        "NewQuestion": "새로운 질문",
+        "EditQuestion": "질문 편집",
+        "NewAnswer": "새로운 답변",
+        "NewPossibleAnswer": "새로운 가능한 답변",
         "AnswerDetails": "답변 세부정보",
         "answerOption": "옵션",
-        "answerOptionExclusive": "독점적 인",
+        "answerOptionExclusive": "독점적인",
         "answerTextarea": "텍스트 영역",
-        "FreeAnswer": "여기에 답을 쓰세요",
-        "SaveQuestion": "질문 저장",
-        "SaveAnswer": "답변 저장",
-        "AddAnotherAnswer": "다른 답변 추가",
-        "ErrorAnswers": "답변을 하나만 추가해주세요.",
-        "AlreadyAnswered": "이미 답변함",
-        "TitlePlaceholder": "질문을 입력하세요",
-        "ContentPlaceholder": "사람들이 답변하는 데 도움이 되도록 여기에 추가 정보를 입력하세요.",
-        "ErrorTitle": "질문 필수",
-        "Placeholder": "자리 표시자",
-        "EditQuestion": "질문 편집",
-        "NewPossibleAnswer": "새로운 가능한 답변",
         "answerText": "텍스트",
         "HideUntilAnswered": "대답할 때까지 숨기기",
         "CantChangeAnswers": "답변을 변경할 수 없습니다.",
+        "FreeAnswer": "여기에 답변을 작성하세요",
+        "SaveQuestion": "질문 저장",
+        "SaveAnswer": "답변 저장",
         "Save": "구하다",
         "Send": "보내다",
         "TitleRequired": "제목 필수!",
+        "AlreadyAnswered": "이미 답변했습니다",
+        "TitlePlaceholder": "질문을 입력하세요",
+        "ContentPlaceholder": "사람들이 답변할 수 있도록 여기에 추가 정보를 입력하세요.",
+        "ErrorTitle": "질문 필수",
+        "Placeholder": "자리 표시자",
         "AreYouSure": "확실합니까?"
     },
     "experience": {
         "NewExperience": "새로운 경험",
-        "DefineTitle": "제목을 정의하십시오",
+        "DefineTitle": "제목을 정해주세요",
         "Create": "만들다"
     },
     "calls": {
         "SettingsTitle": "통화",
         "MaxCalls": "최대 통화",
         "Update": "업데이트",
-        "NoCallsYet": "아직 통화 없음",
-        "CallReasonTitle": "이 전화는 무엇에 대한 것입니까?",
+        "NoCallsYet": "아직 전화 없음",
+        "CallReasonTitle": "무엇에 관한 전화입니까?",
         "WaitingRoom": "대기실",
         "LiveRoom": "라이브 룸",
-        "interviewedByAnotherHost": "현재 다른 호스트가 인터뷰 중입니다.",
-        "bringToLive": "라이브 쇼 가져오기",
+        "interviewedByAnotherHost": "현재 다른 호스트와 인터뷰 중입니다.",
+        "bringToLive": "라이브 쇼에 가져오기",
         "putOnHold": "보류",
         "endCall": "통화 종료",
         "interview": "회견",
-        "markApproved": "승인 표시"
-    },
-    "identifier": {
-        "private": "사적인",
-        "public": "공공의",
-        "configurationSaved": "구성 저장됨",
-        "error": "문제가 발생했습니다.",
-        "privacySettings": "개인 정보 설정"
-    },
-    "avatar": {
-        "firstName": "이름",
-        "lastName": "성",
-        "username": "사용자 이름"
-    },
-    "login": {
-        "prompt": "친구들이 당신을 알아보도록 하세요:",
-        "newUser": "또는 아래에서 새 계정을 만드십시오.",
-        "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
-        "placeholder": {
-            "fullName": "당신의 성명을 입력하십시오"
-        }
+        "markApproved": "승인됨으로 표시"
     }
 }

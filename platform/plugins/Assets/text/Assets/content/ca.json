@@ -1,14 +1,46 @@
 {
+    "errors": {
+        "Error": "Error",
+        "WalletAbsent": "La cartera no està connectada.",
+        "Rendering": "Hi ha hagut errors en renderitzar <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Preu obligatori!",
+        "NameRequired": "Nom obligatori!",
+        "PriceInvalid": "Preu no vàlid!",
+        "AmountInvalid": "Import no vàlid!",
+        "TransactionFailed": "La transacció ha fallat",
+        "ChainNotSupported": "La cadena seleccionada no és compatible. Cadena suportada: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Necessites MetaMask connectat per treballar amb l&#39;aplicació",
+        "UserNotLoggedInMetaMask": "L&#39;usuari no ha iniciat sessió a MetaMask",
+        "CurrencyNotFound": "No s&#39;ha trobat la moneda",
+        "WrongChain": "Aquesta NFT creada sota &quot; {{chain}} &quot;. Si us plau, utilitzeu aquesta cadena.",
+        "NoRecipientSelected": "No s&#39;ha seleccionat cap destinatari",
+        "NotEnoughPermissionsWallet": "No hi ha prou permisos per llegir la cartera d&#39;aquest usuari",
+        "ThisUserHaveNoWallet": "Aquest usuari no té assignada cap cartera",
+        "TheWalletOfThisUserInvalid": "La cartera d&#39;aquest usuari no és vàlida",
+        "WalletInvalid": "L&#39;adreça de la cartera no és vàlida"
+    },
+    "admin": {
+        "Title": "Administratiu patrimonial",
+        "SubscriptionTitle": "Plans de subscripció"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Toca per pagar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: càrrec processat per {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Gràcies pel pagament a {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} s&#39;ha subscrit a {{plan.title}}",
-        "YouSubscribedTo": "T&#39;has subscrit a {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : càrrec processat per {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Gràcies pel vostre pagament a {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscrits a {{plan.title}}",
+        "YouSubscribedTo": "T&#39;has subscrit al {{plan.title}}",
         "Assets\/credits\/alert": "Teniu una alerta relacionada amb el vostre compte"
+    },
+    "charge": {
+        "Subject": "Rebreu el pagament de {{displayAmount}} de {{call 'publisher.displayName'}} per &quot; {{description}} &quot;",
+        "HasBeenCharged": "Hola, això és només per fer-te saber que {{1}} s&#39;han cobrat {{2}} per {{3}} per {{4}}"
+    },
+    "charged": {
+        "Subject": "Gràcies pel pagament de &quot; {{description}} &quot;",
+        "HavePaid": "Hola {{1}} , això és només una confirmació ràpida que has pagat correctament entre {{2}} i {{3}} per {{4}}"
     },
     "payment": {
         "AboutOrder": "Informació sobre la comanda",
@@ -20,90 +52,85 @@
         "FailTryAgain": "El vostre pagament no s&#39;ha realitzat correctament, torneu-ho a provar",
         "SomethingWrong": "Alguna cosa ha anat malament",
         "PaymentStatus": "Estat de pagament",
-        "PayTo": "Pagar {{displayName}}",
+        "PayTo": "Paga {{displayName}}",
         "ChooseCurrency": "Trieu una moneda",
         "YouCanSendUpTo": "Podeu enviar fins a {{amount}} {{symbol}}",
         "Send": "Enviar",
         "EnterAmount": "introduïu la quantitat"
     },
     "credits": {
-        "InviteAcceptedBy": "Invitació acceptada per {{invitedUserName}}",
+        "InviteAcceptedBy": "Invitació acceptada pel {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} plens {{FilledStreamTitle}}",
+        "ForFillingStream": "Per omplir {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "Tens {{amount}} crèdits per començar",
-        "PaymentFor": "Pagament de &quot;{{1}}&quot;",
-        "PaymentTo": "Pagament a {{1}}",
-        "PaymentToUser": "Pagament a {{toUserName}}",
-        "JoinedPaidStream": "per reservar a &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "per crear la comunitat &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "com a devolució de la reserva a &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
-        "BoughtCredits": "He comprat {{amount}} crèdits",
+        "PaymentFor": "Pagament per &quot; {{1}} &quot;",
+        "PaymentTo": "Pagament al {{1}}",
+        "PaymentToUser": "Pagament al {{toUserName}}",
+        "CreatePrivateChat": "per xat privat amb {{toUserName}}",
+        "CreatePaidStream": "per crear {{toStreamName}}",
+        "JoinedPaidStream": "per reservar a &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{toStreamName}} &#39;&gt; {{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "per crear comunitat &quot; {{communityId}} &quot;",
+        "LeftPaidStream": "com a devolució de la reserva a &quot; <a data-publisherId='<i translate='no'>999 &#39; data-streamName=&#39; {{fromStreamName}} &#39;&gt; {{fromStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "S&#39;han comprat {{amount}} crèdits",
+        "BonusCredits": "Bonificació {{amount}} crèdits",
         "BuyAmountCredits": "Compra {{amount}} crèdits",
+        "WatchClip": "Va guanyar {{amount}} crèdits per veure&#39;n {{fromStreamTitle}}",
         "MissingCredits": "Falten crèdits",
         "YouMissingCredits": "Necessites {{amount}} crèdits addicionals per continuar.",
         "BuyCredits": "Comprar crèdits",
-        "Buy": "Comprar",
+        "BuyBonus": "La compra {{amount}} crèdits alhora, donarà lloc a una bonificació {{bonus}} crèdits.",
+        "Buy": "Compra",
+        "PurchaseCredits": "Compra de crèdits",
         "Credits": "Crèdits",
         "ErrorInvalidAmount": "Import no vàlid",
         "ErrorInvalidCurrency": "Malauradament, encara no admetem la moneda {{currency}}",
-        "WatchClip": "Heu guanyat {{amount}} crèdits per veure {{fromStreamTitle}}",
-        "PurchaseCredits": "Compra de crèdits",
         "forMessages": {
             "BoughtCredits": "{{amount}} crèdits",
             "BonusCredits": "{{amount}} crèdits"
-        },
-        "CreatePaidStream": "per crear {{toStreamName}}",
-        "BonusCredits": "{{amount}} crèdits de bonificació",
-        "BuyBonus": "Si compra {{amount}} crèdits alhora, obtindreu una bonificació de {{bonus}} crèdits.",
-        "Streams_user_firstname": "{{invitedUserName}} ha introduït el nom",
-        "Streams_user_lastname": "{{invitedUserName}} ha introduït el cognom",
-        "Streams_user_icon": "{{invitedUserName}} icona introduïda",
-        "Places_user_location": "{{invitedUserName}} ha introduït la ubicació",
-        "Streams_greeting": "{{invitedUserName}} ha introduït la salutació",
-        "InvitedUserFilledStream": "{{invitedUserName}} omplert {{FilledStreamTitle}}",
-        "ForFillingStream": "Per omplir {{FilledStreamTitle}}",
-        "CreatePrivateChat": "per xat privat amb {{toUserName}}"
+        }
     },
     "history": {
         "Date": "Data",
         "Amount": "Import",
         "Description": "Descripció",
         "Client": "Client",
+        "User": "Usuari",
         "To": "a",
         "From": "des de",
+        "SeeHistory": "Consulta l&#39;historial de pagaments del {{1}}",
         "HistoryEmpty": "Encara no tens dades",
-        "SeeHistory": "Consulta l&#39;historial de pagaments de {{1}}",
         "PaymentFor": "S&#39;han enviat {{amount}} crèdits",
         "PaymentTo": "S&#39;han enviat {{amount}} crèdits",
         "PaymentToUser": "S&#39;han enviat {{amount}} crèdits",
+        "CreatePaidStream": "S&#39;han gastat {{amount}} crèdits",
+        "WatchClip": {
+            "+": "Ha obtingut {{amount}} crèdits",
+            "-": "S&#39;han gastat {{amount}} crèdits"
+        },
         "JoinedPaidStream": {
-            "+": "{{amount}} crèdits obtinguts",
-            "-": "{{amount}} crèdits gastats"
+            "+": "Ha obtingut {{amount}} crèdits",
+            "-": "S&#39;han gastat {{amount}} crèdits"
         },
         "LeftPaidStream": {
-            "+": "S&#39;han rebut {{amount}} crèdits",
+            "+": "Ha rebut {{amount}} crèdits",
             "-": "S&#39;han enviat {{amount}} crèdits"
         },
-        "CreatedCommunity": "{{amount}} crèdits gastats",
-        "BoughtCredits": "He comprat {{amount}} crèdits",
-        "InviteAcceptedBy": "{{amount}} crèdits obtinguts",
-        "YouHaveCreditsToStart": "{{amount}} crèdits obtinguts",
-        "CreatePaidStream": "{{amount}} crèdits gastats",
-        "WatchClip": {
-            "+": "{{amount}} crèdits obtinguts",
-            "-": "{{amount}} crèdits gastats"
-        },
-        "BonusCredits": "Teniu {{amount}} crèdits addicionals",
-        "Streams_user_firstname": "{{amount}} crèdits obtinguts",
-        "Streams_user_lastname": "{{amount}} crèdits obtinguts",
-        "Streams_user_icon": "{{amount}} crèdits obtinguts",
-        "Places_user_location": "{{amount}} crèdits obtinguts",
-        "Streams_greeting": "{{amount}} crèdits obtinguts",
-        "User": "Usuari"
+        "CreatedCommunity": "S&#39;han gastat {{amount}} crèdits",
+        "BoughtCredits": "S&#39;han comprat {{amount}} crèdits",
+        "BonusCredits": "He aconseguit {{amount}} crèdits addicionals",
+        "InviteAcceptedBy": "Ha obtingut {{amount}} crèdits",
+        "Streams_user_firstname": "Ha obtingut {{amount}} crèdits",
+        "Streams_user_lastname": "Ha obtingut {{amount}} crèdits",
+        "Streams_user_icon": "Ha obtingut {{amount}} crèdits",
+        "Places_user_location": "Ha obtingut {{amount}} crèdits",
+        "Streams_greeting": "Ha obtingut {{amount}} crèdits",
+        "YouHaveCreditsToStart": "Ha obtingut {{amount}} crèdits"
     },
     "subscriptions": {
         "infoTitle": "Estableix la informació de pagament",
         "confirm": {
             "title": "Inicieu la subscripció",
-            "message": "Vols subscriure&#39;t a {{title}}?",
+            "message": "Començar una subscripció recurrent a &quot; {{title}} &quot;?",
             "ok": "D&#39;acord",
             "cancel": "Cancel · lar"
         },
@@ -123,7 +150,7 @@
         "Period": "Període",
         "Price": "Preu",
         "AreYouSureUnsubscribe": "Esteu segur que voleu cancel·lar la subscripció a aquest pla?",
-        "YouUnsubscribedFromPlan": "T&#39;has cancel·lat la subscripció al pla &quot;{{planTitle}}&quot;. No se us cobrarà, però la vostra subscripció continuarà fins al {{endsIn}}",
+        "YouUnsubscribedFromPlan": "T&#39;has cancel·lat la subscripció al pla &quot; {{planTitle}} &quot;. No se us cobrarà, però la vostra subscripció continuarà fins al {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "títol del pla",
             "PricePlaceholder": "preu",
@@ -134,13 +161,13 @@
     },
     "payments": {
         "infoTitle": "Estableix la informació de pagament",
+        "BuyAmountCredits": "Compra {{amount}} crèdits",
         "confirm": {
             "title": "Fer un pagament",
-            "message": "Accepteu pagar {{symbol}}{{amount}}?",
+            "message": "Estàs d&#39;acord amb pagar {{symbol}} {{amount}} ?",
             "ok": "D&#39;acord",
             "cancel": "Cancel · lar"
-        },
-        "BuyAmountCredits": "Compra {{amount}} crèdits"
+        }
     },
     "types": {
         "Assets\/credits": {
@@ -166,34 +193,37 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} crèdits obtinguts"
+            "content": "Ha obtingut {{amount}} crèdits"
+        },
+        "Assets\/credits\/bought": {
+            "content": "S&#39;han comprat {{amount}} crèdits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonificació {{amount}} crèdits"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} crèdits gastats"
+            "content": "S&#39;han gastat {{amount}} crèdits"
         },
         "Assets\/credits\/sent": {
             "content": "S&#39;han enviat {{amount}} crèdits a {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "S&#39;ha rebut {{amount}} crèdits de {{fromUserName}}"
-        },
-        "Assets\/credits\/bought": {
-            "content": "He comprat {{amount}} crèdits"
-        },
-        "Assets\/credits\/bonus": {
-            "content": "{{amount}} crèdits addicionals"
+            "content": "S&#39;han rebut {{amount}} crèdits de {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "Tens pocs crèdits al teu compte. Visiteu <a href='{{link}}'>aquest enllaç<\/a> per comprar més crèdits."
+            "content": "Tens pocs crèdits al teu compte. Visiteu <a href='<i translate='no'>999 &#39;&gt;aquest enllaç<\/a> per comprar més crèdits."
         }
     },
-    "charge": {
-        "Subject": "Rebreu el pagament de {{displayAmount}} de {{call 'publisher.displayName'}} per &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hola, això és només per informar-vos que {{1}} s&#39;ha cobrat {{2}} per {{3}} per {{4}}"
-    },
-    "charged": {
-        "Subject": "Gràcies pel pagament de &quot;{{description}}&quot;",
-        "HavePaid": "Hola, {{1}}, això és només una confirmació ràpida que heu pagat correctament {{2}} a {{3}} per {{4}}"
+    "billing": {
+        "Title": "Facturació d&#39;actius",
+        "CreditsMinimum": "Crèdits mínims",
+        "CreditsToAdd": "Crèdits per afegir",
+        "Save": "Desa",
+        "ThisLink": "aquest enllaç",
+        "errors": {
+            "CreditsMinimumNegative": "Els crèdits mínims no poden ser negatius",
+            "CreditsToAddNegative": "Els crèdits per afegir no poden ser negatius"
+        }
     },
     "services": {
         "NewServiceTemplate": {
@@ -203,25 +233,42 @@
             "LinkPlaceholder": "establiu un enllaç d&#39;informació addicional",
             "DescriptionPlaceholder": "Descripció del servei",
             "SaveService": "Servei d&#39;estalvi",
-            "SelectRequiredParticipants": "Participants obligatoris",
+            "SelectRequiredParticipants": "Participants relacionats obligatoris",
             "RequiredParticipantsDesc": "Si us plau, seleccioneu els participants relacionats que són necessaris per utilitzar aquest servei (per exemple, mascotes per a &quot;Exhibició de gossos&quot;, o nens per a &quot;Vacances infantils&quot;, etc.). Si el servei és de pagament, l&#39;usuari haurà de pagar també per cada participant relacionat."
+        },
+        "EditServiceTemplate": {
+            "Title": "Servei d&#39;edició"
         },
         "ManageServiceTemplates": "Gestionar plantilles de servei",
         "ManageServices": "Gestionar Serveis",
-        "FreeEvent": "Esdeveniment gratuït",
+        "Free": "Gratuït",
         "OptionalContribution": "Aportació opcional",
         "RequiredPayment": "Pagament obligatori",
         "AreYouSureDelete": "Esteu segur que voleu suprimir aquest servei?",
-        "AmountServicesRelated": "Hi ha {{amount}} disponibilitats relacionades amb aquest servei. També s&#39;eliminaran.",
-        "Free": "Gratuït",
-        "EditServiceTemplate": {
-            "Title": "Servei d&#39;edició"
-        }
+        "AmountServicesRelated": "Hi ha {{amount}} disponibilitats relacionades amb aquest servei. També s&#39;eliminaran."
+    },
+    "transfer": {
+        "SelectRecipient": "Seleccioneu el destinatari",
+        "TransactionSuccess": "Èxit de la transacció",
+        "OrTypeWalletAddress": "O escriviu l&#39;adreça de la cartera del destinatari"
     },
     "NFT": {
-        "Title": "Informació sobre {{title}} NFT",
-        "Description": "Informació detallada sobre NFT",
-        "FixedBid": "Compra ara",
+        "Title": "Títol",
+        "Name": "Nom",
+        "EnterName": "Introduïu el nom",
+        "EnterAuthorWallet": "Introduïu la cartera de l&#39;autor",
+        "InformationAboutTitle": "Informació sobre {{title}} NFT",
+        "Description": "Descripció",
+        "DetailedInformationAboutNFT": "Informació detallada sobre NFT",
+        "PresaleStarts": "La venda anticipada comença el 23 de desembre",
+        "OwnerUserNotFound": "El propietari d&#39;aquest NFT no està registrat a la nostra aplicació.",
+        "BuyNow": "Compra ara",
+        "Buy": "Compra",
+        "Add": "Afegeix",
+        "Remove": "Eliminar",
+        "NoNFTyet": "Encara no hi ha NFT",
+        "Conversation": "Conversa",
+        "Create": "Crear",
         "CurrentBid": "Oferta actual",
         "StartingIn": "A partir de",
         "EndingIn": "Acaba en",
@@ -235,7 +282,10 @@
         "StartingDate": "Data d&#39;inici",
         "BidsBelowThisAmount": "No es permetran ofertes per sota d&#39;aquest import",
         "MinimumBid": "Oferta mínima",
+        "Author": "Autor",
         "Price": "Preu",
+        "Commission": "Comissió",
+        "EnterCommission": "Entra comissió",
         "Owner": "Propietari",
         "SelectCategory": "Seleccioneu la categoria",
         "Day": "Dia",
@@ -245,8 +295,8 @@
         "Minute": "Minut",
         "Minutes": "Minuts",
         "Second": "Segon",
-        "Seconds": "segons",
-        "SalesCreator": "de vendes aniran al creador",
+        "Seconds": "Segons",
+        "SalesCreator": "de les vendes aniran al creador",
         "Details": "Detalls",
         "Bids": "Ofertes",
         "History": "Història",
@@ -254,17 +304,25 @@
         "PutOnSale": "Posar a la venda",
         "PutOffSale": "Retirar de la venda",
         "Transfer": "Transferència",
+        "Actions": "Accions",
+        "Claim": "Reclamació",
+        "ClaimNFT": "Reclama NFT",
+        "Unlocking": "Desbloqueig",
+        "Unlock": "Descobrir",
         "Update": "Actualització",
         "UpdateToken": "Token d&#39;actualització",
+        "UpdateNFT": "Actualitza NFT",
         "CreateToken": "Crea un testimoni",
         "PlaceBid": "Posa l&#39;oferta",
         "SoldOut": "Vengut",
+        "NotOnSale": "No a la venda",
         "NftName": "Nom NFT",
-        "DescribeYourNFT": "Descriu la teva NFT",
+        "DescribeYourNFT": "Descriu el teu NFT",
         "NftPicture": "Imatge per representar NFT",
         "NftMovie": "Pel·lícula per representar NFT",
         "UploadMovie": "Carrega pel·lícula",
         "MovieSource": "Font de la pel·lícula",
+        "MovieURL": "URL de la pel·lícula",
         "UploadFile": "Carregueu un fitxer",
         "PutOnMarketplace": "Posar al mercat",
         "InstantPurchase": "Introduïu el preu per permetre als usuaris comprar el vostre NFT a l&#39;instant",
@@ -272,60 +330,9 @@
         "TimedAuction": "Subhasta cronometrada",
         "OpenForBids": "Obert a licitació",
         "PriceOnePiece": "Introduïu el preu d&#39;una peça",
+        "EnterPrice": "Introduïu el preu",
         "EnterMinimumBid": "Introduïu l&#39;oferta mínima",
         "SelectChain": "Seleccioneu la cadena",
-        "WrongChain": "Aquesta NFT creada sota &quot;{{chain}}&quot;. Si us plau, utilitzeu aquesta cadena.",
-        "import": {
-            "importNFT": "Importació de NFT",
-            "fileNotFound": "Ho sentim, no s&#39;ha trobat el fitxer CSV.",
-            "fileEmpty": "Ho sentim, el fitxer CSV està buit.",
-            "userIdNotFound": "l&#39;usuari existeix però l&#39;identificador està buit",
-            "errorLine": "línia {{1}}",
-            "fieldNotFound": "No s&#39;ha trobat el camp obligatori &quot;{{1}}&quot;.",
-            "taskStreamInvalid": "El flux de tasques no és vàlid",
-            "instructionsEmpty": "instruccions del flux de tasques buides",
-            "complete": "Completa",
-            "activateUsers": "enviar missatges d&#39;activació als usuaris?",
-            "importProgress": "Progrés, progressar",
-            "importOptions": "Opcions",
-            "sampleCSV": "Baixeu CSV de mostra",
-            "fileLabel": "Carregueu el full de càlcul:",
-            "errorsTitle": "S&#39;han produït errors",
-            "importAttributes": "Importa els atributs NFT",
-            "displayTypeEmpty": "No s&#39;ha trobat el tipus de visualització de &quot;{{1}}&quot;."
-        },
-        "filter": {
-            "ByCategory": {
-                "FilterByNFTCollections": "Filtra per col·leccions NFT",
-                "ShowNFTCollection": "Mostra la col·lecció NFT a...",
-                "AllCollections": "Totes les col·leccions"
-            },
-            "ByUser": {
-                "AllAuthors": "Tots els autors",
-                "AllUsers": "Tothom",
-                "FilterByAuthors": "Filtra per Autors"
-            }
-        },
-        "Back": "Tornar a la col·lecció",
-        "Name": "Nom",
-        "EnterName": "Introduïu el nom",
-        "EnterAuthorWallet": "Introduïu la cartera de l&#39;autor",
-        "InformationAboutTitle": "Informació sobre {{title}} NFT",
-        "DetailedInformationAboutNFT": "Informació detallada sobre NFT",
-        "PresaleStarts": "La venda anticipada comença el 23 de desembre",
-        "OwnerUserNotFound": "El propietari d&#39;aquest NFT no està registrat a la nostra aplicació.",
-        "BuyNow": "Compra ara",
-        "Buy": "Compra",
-        "Conversation": "Conversa",
-        "Create": "Crear",
-        "Author": "Autor",
-        "Commission": "Comissió",
-        "EnterCommission": "Entra comissió",
-        "Actions": "Accions",
-        "UpdateNFT": "Actualitza NFT",
-        "NotOnSale": "No a la venda",
-        "MovieURL": "URL de la pel·lícula",
-        "EnterPrice": "Introduïu el preu",
         "Currency": "Moneda",
         "AreYouSureDeleteImage": "Esteu segur que voleu eliminar la imatge?",
         "AreYouSureDeleteVideo": "Confirmes que vols eliminar el vídeo?",
@@ -356,8 +363,8 @@
         "contract": {
             "CreateContract": "Crear contracte",
             "SelectContract": "Seleccioneu contracte",
-            "CreateContractFor": "Crea un contracte per a {{userName}}",
-            "ContractFor": "Contracte per a {{userName}}",
+            "CreateContractFor": "Crear contracte per al {{userName}}",
+            "ContractFor": "Contracte per al {{userName}}",
             "UpdateContract": "Actualització del contracte",
             "TransferOwnership": "Transferència de la propietat",
             "SetBaseURI": "Estableix l&#39;URI base",
@@ -366,7 +373,7 @@
             "CurrentBaseURL": "BaseURL actual",
             "ContractAddressAbsent": "Adreça del contracte absent",
             "FactoryAddressAbsent": "No hi ha adreça de fàbrica",
-            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "ContractName": "{{contractName}} ( {{contractSymbol}} {{chainNetwork}}",
             "TitleRequired": "Títol obligatori",
             "SymbolRequired": "Símbol obligatori",
             "TypeContractName": "nom del contracte",
@@ -376,6 +383,38 @@
             "Title": "Concursos",
             "NewContest": "Nou Concurs"
         },
+        "import": {
+            "importNFT": "Importació de NFT",
+            "importAttributes": "Importa els atributs NFT",
+            "fileNotFound": "Ho sentim, no s&#39;ha trobat el fitxer CSV.",
+            "fileEmpty": "Ho sentim, el fitxer CSV està buit.",
+            "userIdNotFound": "l&#39;usuari existeix però l&#39;identificador està buit",
+            "errorLine": "línia {{1}}",
+            "fieldNotFound": "No s&#39;ha trobat el camp obligatori &quot; {{1}} &quot;",
+            "displayTypeEmpty": "No s&#39;ha trobat el tipus de pantalla per a &quot; {{1}} &quot;",
+            "taskStreamInvalid": "El flux de tasques no és vàlid",
+            "instructionsEmpty": "instruccions del flux de tasques buides",
+            "complete": "Completa",
+            "activateUsers": "enviar missatges d&#39;activació als usuaris?",
+            "importProgress": "Progrés, progressar",
+            "importOptions": "Opcions",
+            "sampleCSV": "Baixeu CSV de mostra",
+            "fileLabel": "Carregueu el full de càlcul:",
+            "errorsTitle": "S&#39;han produït errors"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filtra per col·leccions NFT",
+                "ShowNFTCollection": "Mostra la col·lecció NFT a...",
+                "AllCollections": "Totes les col·leccions"
+            },
+            "ByUser": {
+                "AllAuthors": "Tots els autors",
+                "AllUsers": "Tothom",
+                "FilterByAuthors": "Filtra per Autors"
+            }
+        },
+        "Back": "Tornar a la col·lecció",
         "attributes": {
             "Title": "Gestionar els atributs",
             "Attributes": "Atributs",
@@ -399,13 +438,6 @@
             "aboutPlaceholder": "Edita la biografia",
             "SureLogOut": "Esteu segur que voleu tancar la sessió?"
         },
-        "Add": "Afegeix",
-        "Remove": "Eliminar",
-        "NoNFTyet": "Encara no hi ha NFT",
-        "Claim": "Reclamació",
-        "ClaimNFT": "Reclama NFT",
-        "Unlocking": "Desbloqueig",
-        "Unlock": "Descobrir",
         "sales": {
             "factory": {
                 "form": {
@@ -429,7 +461,7 @@
                         "price": "Preu",
                         "beneficiary": "Beneficiari de la venda de fitxes, en cas contrari serà el remitent",
                         "autoindex": "Autoindex",
-                        "duration": "Tancament després de l&#39;encunyació. Zero vol dir aconseguir-ho immediatament.",
+                        "duration": "Tancament després de l&#39;encunyació. Zero significa aconseguir-ho immediatament.",
                         "rateInterval": "interval de cub per a compra especial",
                         "rateAmount": "quantitat de cub per a una compra especial"
                     }
@@ -521,50 +553,10 @@
             "Unlock": "Descobrir",
             "Locked": "Tancat",
             "CustodianAddress": "Adreça del custodi",
-            "TokenWasClaimed": "S&#39;ha reclamat el testimoni &quot;{{title}}&quot;.",
-            "TokenWasLocked": "El testimoni &quot;{{title}}&quot; s&#39;ha bloquejat",
-            "TokenWasUnlocked": "S&#39;ha desbloquejat el testimoni &quot;{{title}}&quot;."
+            "TokenWasClaimed": "S&#39;ha reclamat el testimoni &quot; {{title}} &quot;.",
+            "TokenWasLocked": "El testimoni &quot; {{title}} &quot; s&#39;ha bloquejat",
+            "TokenWasUnlocked": "S&#39;ha desbloquejat el testimoni &quot; {{title}} &quot;."
         }
-    },
-    "errors": {
-        "Error": "Error",
-        "WalletAbsent": "La cartera no està connectada.",
-        "Rendering": "Hi ha hagut errors en renderitzar <span class='url'>{{1}}<\/span>",
-        "PriceRequired": "Preu obligatori!",
-        "NameRequired": "Nom obligatori!",
-        "PriceInvalid": "Preu no vàlid!",
-        "TransactionFailed": "La transacció ha fallat",
-        "ChainNotSupported": "La cadena seleccionada no és compatible. Cadena compatible: {{supportedChain}}",
-        "NeedMetaMaskConnected": "Necessites MetaMask connectat per treballar amb l&#39;aplicació",
-        "UserNotLoggedInMetaMask": "L&#39;usuari no ha iniciat sessió a MetaMask",
-        "CurrencyNotFound": "No s&#39;ha trobat la moneda",
-        "WrongChain": "Aquesta NFT creada sota &quot;{{chain}}&quot;. Si us plau, utilitzeu aquesta cadena.",
-        "AmountInvalid": "Import no vàlid!",
-        "NoRecipientSelected": "No s&#39;ha seleccionat cap destinatari",
-        "NotEnoughPermissionsWallet": "No hi ha prou permisos per llegir la cartera d&#39;aquest usuari",
-        "ThisUserHaveNoWallet": "Aquest usuari no té assignada cap cartera",
-        "TheWalletOfThisUserInvalid": "La cartera d&#39;aquest usuari no és vàlida",
-        "WalletInvalid": "L&#39;adreça de la cartera no és vàlida"
-    },
-    "admin": {
-        "Title": "Administratiu patrimonial",
-        "SubscriptionTitle": "Plans de subscripció"
-    },
-    "billing": {
-        "Title": "Facturació d&#39;actius",
-        "CreditsMinimum": "Crèdits mínims",
-        "CreditsToAdd": "Crèdits per afegir",
-        "Save": "Desa",
-        "ThisLink": "aquest enllaç",
-        "errors": {
-            "CreditsMinimumNegative": "Els crèdits mínims no poden ser negatius",
-            "CreditsToAddNegative": "Els crèdits per afegir no poden ser negatius"
-        }
-    },
-    "transfer": {
-        "SelectRecipient": "Seleccioneu el destinatari",
-        "TransactionSuccess": "Èxit de la transacció",
-        "OrTypeWalletAddress": "O escriviu l&#39;adreça de la cartera del destinatari"
     },
     "currencies": {
         "choose": "Trieu una moneda"

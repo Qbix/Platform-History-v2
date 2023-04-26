@@ -1,150 +1,6 @@
 {
-    "actions": {
-        "LogIn": "Log in",
-        "LogOut": "uitloggen"
-    },
-    "activate": {
-        "SetAsPrimary": "Stel {{1}} in als mijn primaire {{2}}",
-        "ChoosePassPhrase": "Kies een <strong>wachtwoordzin<\/strong> om in te loggen.<br> Een eenvoudige zin bestaande uit een paar woorden die u gemakkelijk zult onthouden.",
-        "ChoosePassPhraseSeeSuggestions": "Kies een goede <strong>wachtwoordzin<\/strong> om uw account te beschermen. Zie de suggesties voor enkele ideeën.",
-        "LogOutAndTryAgain": "Log uit en probeer het opnieuw",
-        "IfYouFeel": "Als u denkt dat er iets mis is gegaan, kunt u",
-        "SetIdentifierButtonTitle": "begin opnieuw",
-        "OneTimeCode": "Vul de code in die je hebt ontvangen:",
-        "ActivateMyAccount": "Activeer mijn account"
-    },
-    "session": {
-        "GetStarted": "Begin"
-    },
-    "authorize": {
-        "GetStarted": "Begin",
-        "Authorize": "Toestemming geven",
-        "TermsLabel": "Ik heb gelezen en ga akkoord<br> naar de {{link}}",
-        "TermsTitle": "voorwaarden",
-        "mustAgree": "Eerst moet u akkoord gaan met de voorwaarden."
-    },
-    "register": {
-        "TermsLabel": "Ik accepteer de {{link}}",
-        "TermsTitle": "voorwaarden"
-    },
-    "notifications": {
-        "title": "Toestemming",
-        "prompt": "Wil je meldingen inschakelen? U ontvangt realtime updates over dingen die u belangrijk vindt.",
-        "yes": "Ja",
-        "no": "Nee",
-        "WelcomePleaseVerifyEmail": "Welkom! Verifieer uw email adres alstublieft.",
-        "WelcomeVerifyEmail": "Welkom! Verifieer je e-mailadres.",
-        "ForgetPass": "Hé, ben je je wachtwoordzin vergeten?",
-        "PassphraseSaved": "Uw wachtwoordzin is opgeslagen.",
-        "IdentifierActivated": "Uw {{type}} is geactiveerd.",
-        "CompletedActivation": "U heeft de gebruikersactivering voltooid.",
-        "CompletedActivationLogIn": "U heeft de gebruikersactivering voltooid. Probeer nu in te loggen."
-    },
-    "usersContacts": {
-        "selectLabel": "Selecteer etiket.",
-        "inviteUser": "Gebruikers uitnodigen",
-        "selectRole": "Selecteer rol",
-        "inviteRole": "Nodig {{role}} uit"
-    },
-    "invalidLanguageSelected": "Ongeldige taal geselecteerd",
-    "contacts": {
-        "dialog": {
-            "title": "Kies contact",
-            "SearchByName": "Zoek op naam",
-            "CreateAccount": "+ Nieuw contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden",
-            "EmptyContacts": "Contacten niet gevonden..."
-        },
-        "select": {
-            "title": "Selecteer contact van {{displayName}}"
-        }
-    },
-    "login": {
-        "title": "Welkom",
-        "directions": "Maak een account aan, of log in.",
-        "directionsNoRegister": "Log in als je een account hebt.",
-        "goButton": "",
-        "passphrase": "Voer uw wachtwoordzin in:",
-        "loginButton": "Begin",
-        "registerButton": "Begin",
-        "resendButton": "Activeringsbericht verzenden",
-        "forgot": "Vergeet het?",
-        "resendConfirm": "Wil je een bericht sturen om je wachtwoordzin te resetten?",
-        "resendSuccess": "Controleer op een bericht om uw wachtwoordzin opnieuw in te stellen",
-        "resendClose": "Dichtbij",
-        "noPassphrase": "Voordat u kunt inloggen, moet u een wachtwoordzin instellen door op de link in uw activeringsbericht te klikken.",
-        "notVerified": "U moet uzelf een activeringsbericht sturen om in te loggen.",
-        "emailExists": "Heeft u zich eerder met dit e-mailadres proberen te registreren? Controleer in dat geval uw inbox om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
-        "mobileExists": "Heb je je al eerder geprobeerd te registreren met dit mobiele nummer? Check dan je sms om je account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
-        "usingOther": "of je kan",
-        "prompt": "Kies een gebruikersnaam:",
-        "newUser": "of maak hieronder een nieuw account aan",
-        "placeholders": {
-            "identifier": "uw mobiele # of e-mail",
-            "mobile": "voer je mobiel # in",
-            "email": "Vul je e-mailadres in",
-            "username": "gebruik alleen letters en cijfers"
-        },
-        "confirmTerms": "De servicevoorwaarden accepteren?",
-        "facebookNoEmail": "Je Facebook-account mist een bevestigd e-mailadres. Log gewoon in op de native manier.",
-        "picTooltip": "Je kunt deze afbeelding later wijzigen",
-        "wallet": {
-            "payload": "Log in op {{host}} om {{timestamp}}",
-            "alert": {
-                "title": "Omleiden naar Wallet",
-                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Nadat u zich heeft aangemeld, keert u terug naar deze pagina."
-            }
-        },
-        "web3": {
-            "payload": "Log in op {{host}} op tijdstip {{timestamp}}",
-            "alert": {
-                "title": "Omleiden naar Wallet",
-                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Ga na het inloggen terug naar deze pagina."
-            }
-        },
-        "connectPlatforms": "of maak verbinding via:"
-    },
-    "setIdentifier": {
-        "title": "Voeg een manier toe om in te loggen",
-        "sendMessage": "Activeringsbericht verzenden",
-        "placeholders": {
-            "identifier": "voer je mobiele # of e-mail in",
-            "mobile": "voer je mobiele nummer in",
-            "email": "Vul je e-mailadres in",
-            "username": "gebruikersnaam"
-        }
-    },
-    "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "Je gebruikt {{platform}} als",
-        "noLongerUsing": "U bent niet langer verbonden met {{platform}} as",
-        "doAuth": "Log in met dit account",
-        "doSwitch": "Overschakelen naar dit account"
-    },
-    "roles": {
-        "Owner": "Baasje",
-        "Admin": "beheerder",
-        "Member": "Lid",
-        "Guest": "Gast",
-        "Host": "Gastheer"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Dagelijks",
-        "Weekly": "Wekelijks",
-        "Monthly": "Maandelijks",
-        "Application": "Sollicitatie",
-        "Pages": "Pagina&#39;s",
-        "Services": "Diensten",
-        "Faq": "FAQ",
-        "WeekDays": "Doordeweekse dagen"
-    },
     "avatar": {
         "Someone": "Iemand"
-    },
-    "web3": {
-        "WrongMethod": "Verkeerde contractmethode {{methodName}}",
-        "ChangeWallet": "Portefeuille wijzigen"
     },
     "identifier": {
         "types": {
@@ -156,9 +12,146 @@
     "clipboard": {
         "Copied": "Gekopieerd! Nu kun je het overal plakken."
     },
+    "analytics": {
+        "Title": "Analyse",
+        "Daily": "Dagelijks",
+        "Weekly": "Wekelijks",
+        "Monthly": "Maandelijks",
+        "Application": "Sollicitatie",
+        "Pages": "Pagina&#39;s",
+        "Services": "Diensten",
+        "Faq": "FAQ",
+        "WeekDays": "Doordeweekse dagen"
+    },
+    "actions": {
+        "LogIn": "Log in",
+        "LogOut": "uitloggen"
+    },
+    "activate": {
+        "OneTimeCode": "Vul de ontvangen code in:",
+        "SetAsPrimary": "Stel {{1}} in als mijn primaire {{2}}",
+        "ChoosePassPhrase": "Kies een <strong>wachtwoordzin<\/strong> om mee in te loggen.<br> Een eenvoudige zin bestaande uit een paar woorden die u gemakkelijk zult onthouden.",
+        "ChoosePassPhraseSeeSuggestions": "Kies een goede <strong>wachtwoordzin<\/strong> om uw account te beschermen. Zie de suggesties voor enkele ideeën.",
+        "LogOutAndTryAgain": "Log uit en probeer het opnieuw",
+        "IfYouFeel": "Als je het gevoel hebt dat er iets mis is gegaan, dan kan dat",
+        "SetIdentifierButtonTitle": "begin opnieuw",
+        "ActivateMyAccount": "Activeer Mijn Account"
+    },
+    "session": {
+        "GetStarted": "Begin"
+    },
+    "authorize": {
+        "GetStarted": "Begin",
+        "Authorize": "Toestemming geven",
+        "TermsLabel": "Ik heb gelezen en ga akkoord<br> naar de {{link}}",
+        "TermsTitle": "Voorwaarden",
+        "mustAgree": "Eerst moet u akkoord gaan met de voorwaarden."
+    },
+    "register": {
+        "TermsLabel": "Ik accepteer de {{link}}",
+        "TermsTitle": "Voorwaarden"
+    },
+    "notifications": {
+        "title": "Toestemming",
+        "prompt": "Wil je notificaties inschakelen? U ontvangt realtime updates over dingen die u belangrijk vindt.",
+        "yes": "Ja",
+        "no": "Nee",
+        "WelcomePleaseVerifyEmail": "Welkom! Verifieer uw email adres alstublieft.",
+        "WelcomeVerifyEmail": "Welkom! Verifieer je e-mailadres.",
+        "ForgetPass": "Hé, ben je je wachtwoordzin vergeten?",
+        "PassphraseSaved": "Uw wachtwoordzin is opgeslagen.",
+        "IdentifierActivated": "Uw {{type}} is geactiveerd.",
+        "CompletedActivation": "U heeft de activering van de gebruiker voltooid.",
+        "CompletedActivationLogIn": "U heeft de activering van de gebruiker voltooid. Probeer nu in te loggen."
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Kies contactpersoon",
+            "CreateAccount": "+ Nieuw contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden",
+            "SearchByName": "Zoek op naam",
+            "EmptyContacts": "Contacten niet gevonden..."
+        },
+        "select": {
+            "title": "Selecteer contactpersoon van {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Selecteer een etiket.",
+        "inviteUser": "Nodig gebruikers uit",
+        "selectRole": "Selecteer Rol",
+        "inviteRole": "Nodig {{role}} uit"
+    },
+    "invalidLanguageSelected": "Ongeldige taal geselecteerd",
     "platforms": {
         "wallet": "Portemonnee",
         "broadcast": "Uitzending"
+    },
+    "login": {
+        "title": "Welkom",
+        "directions": "Maak een account aan, of log in.",
+        "directionsNoRegister": "Log in als je een account hebt.",
+        "goButton": "➔",
+        "passphrase": "Voer uw wachtwoordzin in:",
+        "loginButton": "Begin",
+        "registerButton": "Begin",
+        "resendButton": "Activeringsbericht verzenden",
+        "forgot": "Vergeet het?",
+        "resendConfirm": "Wil je een bericht sturen om je wachtwoordzin te resetten?",
+        "resendSuccess": "Controleer op een bericht om uw wachtwoordzin opnieuw in te stellen",
+        "resendClose": "Dichtbij",
+        "noPassphrase": "Voordat u kunt inloggen, moet u een wachtwoordzin instellen door op de link in uw activeringsbericht te klikken.",
+        "notVerified": "U moet uzelf een activeringsbericht sturen om in te loggen.",
+        "emailExists": "Heb je je eerder met dit e-mailadres proberen te registreren? Controleer dan je inbox om je account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
+        "mobileExists": "Heb je je eerder met dit mobiele nummer proberen te registreren? Controleer dan je sms om je account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
+        "usingOther": "of je kan",
+        "connectPlatforms": "of maak verbinding via:",
+        "prompt": "Kies een gebruikersnaam:",
+        "newUser": "of maak hieronder een nieuw account aan",
+        "placeholders": {
+            "identifier": "uw mobiele # of e-mail",
+            "mobile": "voer je mobiele nummer in",
+            "email": "Vul je e-mailadres in",
+            "username": "gebruik alleen letters en cijfers"
+        },
+        "confirmTerms": "Accepteer de Servicevoorwaarden?",
+        "facebookNoEmail": "Je Facebook-account mist een bevestigd e-mailadres. Log gewoon op de native manier in.",
+        "picTooltip": "U kunt deze afbeelding later wijzigen",
+        "web3": {
+            "payload": "Log in op {{host}} op tijdstip {{timestamp}}",
+            "alert": {
+                "title": "Omleiden naar Wallet",
+                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee gebracht. Keer na het inloggen terug naar deze pagina."
+            }
+        }
+    },
+    "setIdentifier": {
+        "title": "Voeg een manier toe om in te loggen",
+        "sendMessage": "Activeringsbericht verzenden",
+        "placeholders": {
+            "identifier": "voer uw mobiele nummer of e-mailadres in",
+            "mobile": "voer je mobiele nummer in",
+            "email": "Vul je e-mailadres in",
+            "username": "gebruikersnaam"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} rekening",
+        "areUsing": "U gebruikt {{platform}} as",
+        "noLongerUsing": "U bent niet langer verbonden met {{platform}} as",
+        "doAuth": "Log in met dit account",
+        "doSwitch": "Schakel over naar dit account"
+    },
+    "roles": {
+        "Owner": "Eigenaar",
+        "Admin": "beheerder",
+        "Member": "Lid",
+        "Guest": "Gast",
+        "Host": "Gastheer"
+    },
+    "web3": {
+        "WrongMethod": "Verkeerde contractmethode {{methodName}}",
+        "ChangeWallet": "Portefeuille wijzigen"
     },
     "labels": {
         "addToPhonebook": "Toevoegen aan Mijn telefooncontacten",

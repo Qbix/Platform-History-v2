@@ -1,7 +1,7 @@
 {
-    "LatLng": "{{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} {{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "entro {{1}}"
     },
     "units": {
@@ -18,23 +18,23 @@
         "inches": "pollici"
     },
     "location": {
-        "interested": "Sono interessato a cose che si svolgono entro {{select}} di",
+        "interested": "Mi interessano le cose che accadono entro {{select}} di",
         "update": "Aggiorna la mia posizione",
         "set": "Imposta la mia posizione",
-        "prompt": "{{ClickOrTap}} qui a<br> imposta il tuo<br> Posizione",
+        "prompt": "{{ClickOrTap}} qui a<br> imposta il tuo<br> posizione",
         "myCurrentLocation": "La mia posizione attuale",
         "enterAddress": "Inserisci un indirizzo",
-        "enterPostcode": "Inserisci il tuo codice postale\/codice postale",
+        "enterPostcode": "Inserisci il tuo codice postale \/ codice postale",
         "create": {
             "action": "Aggiungi luogo",
             "title": "Nuova sede",
             "nameYourLocation": "Assegna un nome alla tua posizione"
         },
         "confirm": {
-            "title": "Salva questa posizione?",
-            "message": "Prevedi di utilizzare nuovamente questa posizione in futuro?",
-            "ok": "sì",
-            "cancel": "No"
+            "title": "Salvare questa posizione?",
+            "message": "Prevedi di utilizzare nuovamente questo luogo in futuro?",
+            "ok": "SÌ",
+            "cancel": "NO"
         },
         "add": {
             "title": "Assegna un nome a questa posizione",
@@ -42,34 +42,34 @@
             "ok": "Salva"
         },
         "dialog": {
-            "title": "Scegli posizione"
+            "title": "Scegli Posizione"
         }
     },
     "areas": {
-        "filterPlaceholder": "Qualche area all&#39;interno di questa posizione?",
+        "filterPlaceholder": "Qualsiasi area all&#39;interno di questa posizione?",
         "newArea": "Nuova zona",
         "promptTitle": "Inserisci un nome per l&#39;area:",
         "absent": "Si prega di impostare l&#39;area",
         "error": "Errore",
-        "exist": "L&#39;area esiste già",
-        "addNewArea": "Aggiungi nuova area",
+        "exist": "Area già esistente",
+        "addNewArea": "Aggiungi nuova zona",
         "add": "Aggiungere"
     },
     "types": {
         "Places\/locations": {
-            "description": "una raccolta di posizioni",
-            "displayType": "Posizioni"
+            "description": "una raccolta di luoghi",
+            "displayType": "Luoghi"
         },
         "Places\/location": {
-            "description": "Rappresenta un edificio, una sede, una nave, un parco, ecc.",
+            "description": "Rappresenta un edificio, un luogo, una nave, un parco, ecc.",
             "displayType": "Posizione"
         },
         "Places\/area": {
-            "description": "Rappresenta un&#39;area all&#39;interno di una posizione, ad esempio una stanza o una suite",
+            "description": "Rappresenta un&#39;area all&#39;interno di una posizione, ad esempio una camera o una suite",
             "displayType": "La zona"
         },
         "Places\/floor": {
-            "description": "Rappresenta un piano di un edificio o di una nave",
+            "description": "Rappresenta un piano in un edificio o in una nave",
             "displayType": "Pavimento"
         },
         "Places\/column": {

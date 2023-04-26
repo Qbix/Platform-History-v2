@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lats, {{2}} lng)",
+    "LatLng": "( {{1}} lati, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "laikā {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "{{1}} robežās"
     },
     "units": {
         "meter": "metrs",
@@ -18,10 +18,10 @@
         "inches": "collas"
     },
     "location": {
-        "interested": "Mani interesē lietas, kas notiek {{select}} laikā no",
+        "interested": "Mani interesē lietas, kas notiek {{select}} gadu robežās",
         "update": "Atjaunināt manu atrašanās vietu",
         "set": "Iestatīt manu atrašanās vietu",
-        "prompt": "{{ClickOrTap}} šeit, lai<br> iestatiet savu<br> atrašanās vieta",
+        "prompt": "{{ClickOrTap}} šeit uz<br> iestatiet savu<br> atrašanās vieta",
         "myCurrentLocation": "Mana pašreizējā atrašanās vieta",
         "enterAddress": "Ievadiet adresi",
         "enterPostcode": "Lūdzu, ievadiet savu pasta indeksu\/pasta indeksu",
@@ -32,7 +32,7 @@
         },
         "confirm": {
             "title": "Vai saglabāt šo atrašanās vietu?",
-            "message": "Vai plānojat šo vietu izmantot arī turpmāk?",
+            "message": "Vai plānojat izmantot šo vietu arī turpmāk?",
             "ok": "Jā",
             "cancel": "Nē"
         },
@@ -74,7 +74,7 @@
         },
         "Places\/column": {
             "description": "Apzīmē kolonnu ēkā vai kuģī",
-            "displayType": "Sleja"
+            "displayType": "Kolonna"
         },
         "Places\/nearby": {
             "description": "Kategorija lietām, kas atrodas noteiktā attālumā no ģeohašas",

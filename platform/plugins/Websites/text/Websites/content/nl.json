@@ -22,20 +22,20 @@
             "Go": "Gaan",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Bladeren",
-            "WriteToStartConversation": "Schrijf je gedachten om het gesprek te beginnen",
+            "WriteToStartConversation": "Schrijf je gedachten op om het gesprek te beginnen",
             "StartConversation": "Gesprek starten",
-            "GotoConversation": "Ga naar gesprek",
+            "GotoConversation": "Ga naar Gesprek",
             "reset": "Resetten",
-            "edit": "Bewerk",
+            "edit": "Bewerking",
             "link": "Koppeling",
             "setUrl": "URL instellen",
-            "save": "Sparen",
-            "setClip": "Knip Clip uit",
+            "save": "Redden",
+            "setClip": "Clipje uitknippen",
             "invalidURL": "Ongeldige URL"
         },
-        "FileTooLarge": "Bestand te groot om in cache te plaatsen. Maximale bestandsgrootte {{size}}",
-        "InvalidPDF": "Bestand is geen geldige PDF",
-        "StartTypingTitleOrKeywords": "Begin titel of trefwoorden te typen..."
+        "FileTooLarge": "Bestand te groot voor cachen. Maximale bestandsgrootte {{size}}",
+        "InvalidPDF": "Bestand is geen geldige pdf",
+        "StartTypingTitleOrKeywords": "Begin met het typen van titel of trefwoorden..."
     },
     "types": {
         "Websites\/article": {
@@ -43,31 +43,31 @@
             "displayType": "Artikel"
         },
         "Websites\/slide": {
-            "description": "Een dia in een presentatie kan HTML, audio enz. bevatten.",
+            "description": "Een dia in een presentatie kan HTML, audio enz.",
             "displayType": "Schuif"
         },
         "Websites\/presentation": {
-            "description": "Een presentatie bestaande uit verschillende slides",
+            "description": "Een presentatie bestaande uit verschillende dia&#39;s",
             "displayType": "Presentatie"
         },
         "Websites\/advert\/unit": {
             "description": "Een advertentieblok op een website",
-            "displayType": "Advertentieblok"
+            "displayType": "Advertentie-eenheid"
         },
         "Websites\/advert\/placement": {
-            "description": "Een manier om advertentieblokken onder een naam te groeperen",
-            "displayType": "Advertentieplaatsing"
+            "description": "Een manier om advertentie-eenheden onder een naam te groeperen",
+            "displayType": "Advertentie plaatsing"
         },
         "Websites\/advert\/creative": {
             "description": "Inhoud voor een advertentie",
-            "displayType": "Advertentieadvertentie"
+            "displayType": "Advertentie creatief"
         },
         "Websites\/advert\/campaign": {
             "description": "Een reclamecampagne",
-            "displayType": "Advertentiecampagne"
+            "displayType": "Advertentie campagne"
         },
         "Websites\/webpage": {
-            "description": "Vertegenwoordigt een website waarvan de metadata is geschraapt",
+            "description": "Vertegenwoordigt een website waarvan de metagegevens zijn geschraapt",
             "displayType": "webpagina"
         }
     }

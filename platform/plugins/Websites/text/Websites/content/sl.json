@@ -19,11 +19,11 @@
     },
     "webpage": {
         "composer": {
-            "Go": "Pojdi",
+            "Go": "pojdi",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Prebrskaj",
-            "WriteToStartConversation": "Za začetek pogovora napišite svoje misli",
-            "StartConversation": "Začni pogovor",
+            "WriteToStartConversation": "Napišite svoje misli, da začnete pogovor",
+            "StartConversation": "Začnite pogovor",
             "GotoConversation": "Pojdite na Pogovor",
             "reset": "Ponastaviti",
             "edit": "Uredi",
@@ -39,7 +39,7 @@
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokument HTML, ki si ga lahko ogledajo in urejajo različni uporabniki",
+            "description": "Dokument HTML, ki si ga lahko ogledujejo in urejajo različni uporabniki",
             "displayType": "Članek"
         },
         "Websites\/slide": {
@@ -51,12 +51,12 @@
             "displayType": "Predstavitev"
         },
         "Websites\/advert\/unit": {
-            "description": "Oglaševalska enota na spletni strani",
+            "description": "Oglasna enota na spletni strani",
             "displayType": "Oglasna enota"
         },
         "Websites\/advert\/placement": {
-            "description": "Način združevanja oglaševalskih enot pod imenom",
-            "displayType": "Umestitev oglasa"
+            "description": "Način združevanja oglasnih enot pod imenom",
+            "displayType": "Postavitev oglasa"
         },
         "Websites\/advert\/creative": {
             "description": "Vsebina za oglas",
@@ -67,7 +67,7 @@
             "displayType": "Oglasna kampanja"
         },
         "Websites\/webpage": {
-            "description": "Predstavlja spletno mesto, katerega metapodatki so bili postrgani",
+            "description": "Predstavlja spletno stran, katere metapodatki so bili postrgani",
             "displayType": "Spletna stran"
         }
     }

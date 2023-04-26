@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "dalam {{1}}"
     },
     "units": {
@@ -47,7 +47,7 @@
     },
     "areas": {
         "filterPlaceholder": "Mana-mana kawasan di dalam lokasi ini?",
-        "newArea": "kawasan baru",
+        "newArea": "Kawasan baru",
         "promptTitle": "Masukkan nama untuk kawasan:",
         "absent": "Sila tetapkan kawasan",
         "error": "ralat",
@@ -58,7 +58,7 @@
     "types": {
         "Places\/locations": {
             "description": "koleksi lokasi",
-            "displayType": "lokasi"
+            "displayType": "Lokasi"
         },
         "Places\/location": {
             "description": "Mewakili bangunan, tempat, kapal, taman, dsb.",
@@ -66,7 +66,7 @@
         },
         "Places\/area": {
             "description": "Mewakili kawasan dalam lokasi, seperti bilik atau suite",
-            "displayType": "kawasan"
+            "displayType": "Kawasan"
         },
         "Places\/floor": {
             "description": "Mewakili lantai dalam bangunan atau kapal",
@@ -74,10 +74,10 @@
         },
         "Places\/column": {
             "description": "Mewakili lajur dalam bangunan atau kapal",
-            "displayType": "Ruangan"
+            "displayType": "Kolum"
         },
         "Places\/nearby": {
-            "description": "Kategori untuk perkara dalam jarak tertentu dari geohash",
+            "description": "Kategori untuk perkara dalam jarak tertentu geohash",
             "displayType": "Berdekatan dengan tempat"
         },
         "Places\/interest": {

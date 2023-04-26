@@ -33,7 +33,7 @@
             "setClip": "Udskåret klip",
             "invalidURL": "ugyldig URL"
         },
-        "FileTooLarge": "Filen er for stor til cachelagring. Maks. filstørrelse {{size}}",
+        "FileTooLarge": "Filen er for stor til cachelagring. Maks filstørrelse {{size}}",
         "InvalidPDF": "Filen er ikke en gyldig PDF",
         "StartTypingTitleOrKeywords": "Begynd at skrive overskrift eller søgeord..."
     },
@@ -51,7 +51,7 @@
             "displayType": "Præsentation"
         },
         "Websites\/advert\/unit": {
-            "description": "En annonceenhed på en hjemmeside",
+            "description": "En annonceenhed på et websted",
             "displayType": "Annonceenhed"
         },
         "Websites\/advert\/placement": {

@@ -14,7 +14,7 @@
                 "FilterInterests": "Začnite písať záujem..."
             },
             "Interest": "Záujem",
-            "Location": "Miesto"
+            "Location": "Poloha"
         }
     },
     "webpage": {
@@ -22,7 +22,7 @@
             "Go": "Choď",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Prehľadávať",
-            "WriteToStartConversation": "Napíšte svoje myšlienky a začnite konverzáciu",
+            "WriteToStartConversation": "Napíšte svoje myšlienky, aby ste mohli začať konverzáciu",
             "StartConversation": "Začať konverzáciu",
             "GotoConversation": "Prejdite na konverzáciu",
             "reset": "Resetovať",

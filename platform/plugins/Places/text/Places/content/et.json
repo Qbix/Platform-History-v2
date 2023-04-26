@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} latti, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "jooksul {{1}}"
+        "PostcodeLabel": "{{1}} ( {{2}} )",
+        "Title": "{{1}} piires"
     },
     "units": {
         "meter": "meeter",
@@ -18,7 +18,7 @@
         "inches": "tolli"
     },
     "location": {
-        "interested": "Olen huvitatud asjadest, mis toimuvad {{select}} jooksul",
+        "interested": "Mind huvitavad asjad, mis toimuvad {{select}} raadiuses",
         "update": "Värskenda Minu asukohta",
         "set": "Määra Minu asukoht",
         "prompt": "{{ClickOrTap}} siia<br> määra oma<br> asukoht",
@@ -78,7 +78,7 @@
         },
         "Places\/nearby": {
             "description": "Kategooria asjade jaoks, mis asuvad geohašist teatud kaugusel",
-            "displayType": "Kohad lähedal"
+            "displayType": "Lähedal asuvad kohad"
         },
         "Places\/interest": {
             "description": "Kategooria asjadele, mis asuvad geohašist teatud kaugusel, mis vastab huvidele",

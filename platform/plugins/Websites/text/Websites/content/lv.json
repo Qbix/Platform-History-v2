@@ -33,7 +33,7 @@
             "setClip": "Izgriezt klipu",
             "invalidURL": "Nederīgs URL"
         },
-        "FileTooLarge": "Fails ir pārāk liels kešatmiņas saglabāšanai. Maksimālais faila lielums {{size}}",
+        "FileTooLarge": "Fails ir pārāk liels, lai saglabātu kešatmiņu. Maksimālais faila lielums {{size}}",
         "InvalidPDF": "Fails nav derīgs PDF",
         "StartTypingTitleOrKeywords": "Sāciet rakstīt virsrakstu vai atslēgvārdus..."
     },

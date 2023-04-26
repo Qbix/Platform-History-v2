@@ -4,7 +4,7 @@
             "placeholders": {
                 "link": "ለማስተዋወቅ አገናኝ",
                 "startDate": "የመጀመሪያ ቀን",
-                "startTime": "የመጀመሪያ ጊዜ",
+                "startTime": "የመነሻ ጊዜ",
                 "endDate": "የመጨረሻ ቀን",
                 "endTime": "የመጨረሻ ጊዜ",
                 "budget": "በጀት"
@@ -67,8 +67,8 @@
             "displayType": "የማስታወቂያ ዘመቻ"
         },
         "Websites\/webpage": {
-            "description": "ሜታዳታው የተቦጫጨቀ ድር ጣቢያን ይወክላል",
-            "displayType": "ድረገፅ"
+            "description": "ሜታዳታው የተቦረቦረ ድር ጣቢያን ይወክላል",
+            "displayType": "ድረ ገጽ"
         }
     }
 }

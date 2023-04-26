@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Någon"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-post",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopierade! Nu kan du klistra in den var som helst."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Dagligen",
@@ -15,13 +28,13 @@
         "LogOut": "logga ut"
     },
     "activate": {
+        "OneTimeCode": "Ange koden du fick:",
         "SetAsPrimary": "Ställ in {{1}} som min primära {{2}}",
-        "ChoosePassPhrase": "Välj en <strong>lösenordsfras<\/strong> att logga in med.<br> En enkel fras som består av några få ord som du lätt kommer ihåg.",
+        "ChoosePassPhrase": "Välj en <strong>lösenordsfras<\/strong> att logga in med.<br> En enkel fras som består av några ord som du lätt kommer ihåg.",
         "ChoosePassPhraseSeeSuggestions": "Välj en bra <strong>lösenordsfras<\/strong> för att skydda ditt konto. Se förslagen för några idéer.",
         "LogOutAndTryAgain": "Logga ut och försök igen",
         "IfYouFeel": "Om du känner att något gick fel kan du",
         "SetIdentifierButtonTitle": "börja om",
-        "OneTimeCode": "Ange koden du fick:",
         "ActivateMyAccount": "Aktivera Mitt konto"
     },
     "session": {
@@ -30,16 +43,16 @@
     "authorize": {
         "GetStarted": "Komma igång",
         "Authorize": "Godkänna",
-        "TermsLabel": "Jag har läst och håller med<br> till {{link}}",
+        "TermsLabel": "Jag har läst och håller med<br> till {{link}} an",
         "TermsTitle": "Villkor",
         "mustAgree": "Först måste du godkänna villkoren."
     },
     "register": {
-        "TermsLabel": "Jag accepterar {{link}}",
+        "TermsLabel": "Jag accepterar {{link}} an",
         "TermsTitle": "Villkor"
     },
     "notifications": {
-        "title": "Tillstånd",
+        "title": "Lov",
         "prompt": "Vill du aktivera aviseringar? Du kommer att få uppdateringar i realtid om saker du bryr dig om.",
         "yes": "Ja",
         "no": "Nej",
@@ -57,10 +70,10 @@
             "CreateAccount": "+ Ny kontakt",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create hittades inte",
             "SearchByName": "Sök på namn",
-            "EmptyContacts": "Hittade inte kontakter..."
+            "EmptyContacts": "Det gick inte att hitta kontakter..."
         },
         "select": {
-            "title": "Välj kontakt för {{displayName}}"
+            "title": "Välj kontakt på {{displayName}}"
         }
     },
     "usersContacts": {
@@ -70,11 +83,15 @@
         "inviteRole": "Bjud in {{role}}"
     },
     "invalidLanguageSelected": "Ogiltigt språk valt",
+    "platforms": {
+        "wallet": "Plånbok",
+        "broadcast": "Utsända"
+    },
     "login": {
         "title": "Välkommen",
         "directions": "Skapa ett konto eller logga in.",
         "directionsNoRegister": "Logga in om du har ett konto.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Ange din lösenordsfras:",
         "loginButton": "Komma igång",
         "registerButton": "Komma igång",
@@ -85,9 +102,10 @@
         "resendClose": "Stänga",
         "noPassphrase": "Innan du kan logga in måste du ställa in en lösenordsfras genom att klicka på länken i ditt aktiveringsmeddelande.",
         "notVerified": "Du måste skicka ett aktiveringsmeddelande till dig själv för att kunna logga in.",
-        "emailExists": "Försökte du registrera dig med det här mejlet tidigare? Om så är fallet, kontrollera din inkorg för att aktivera ditt konto. <a href='#resend' class='Q_button Users_activation_resend'>Klicka för att skicka meddelandet igen<\/a>",
+        "emailExists": "Försökte du registrera dig med detta e-postmeddelande tidigare? Om så är fallet, kontrollera din inkorg för att aktivera ditt konto. <a href='#resend' class='Q_button Users_activation_resend'>Klicka för att skicka meddelandet igen<\/a>",
         "mobileExists": "Har du försökt registrera dig med detta mobilnummer tidigare? Om så är fallet, kontrollera ditt SMS för att aktivera ditt konto. <a href='#resend' class='Q_button Users_activation_resend'>Klicka för att skicka meddelandet igen<\/a>",
         "usingOther": "Eller kan du",
+        "connectPlatforms": "eller anslut med:",
         "prompt": "Välj ett användarnamn:",
         "newUser": "eller skapa ett nytt konto nedan",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Acceptera användarvillkoren?",
         "facebookNoEmail": "Ditt Facebook-konto saknar en bekräftad e-postadress. Logga helt enkelt på det ursprungliga sättet.",
         "picTooltip": "Du kan ändra den här bilden senare",
-        "wallet": {
-            "payload": "Logga in på {{host}} vid tidpunkten {{timestamp}}",
-            "alert": {
-                "title": "Omdirigerar till Wallet",
-                "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
-            }
-        },
         "web3": {
             "payload": "Logga in på {{host}} vid tidpunkten {{timestamp}}",
             "alert": {
                 "title": "Omdirigerar till Wallet",
                 "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
             }
-        },
-        "connectPlatforms": "eller anslut med:"
+        }
     },
     "setIdentifier": {
         "title": "Lägg till ett sätt att logga in",
@@ -126,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Konto",
+        "title": "{{Platform}} konto",
         "areUsing": "Du använder {{platform}} som",
-        "noLongerUsing": "Du är inte längre ansluten till {{platform}} som",
+        "noLongerUsing": "Du är inte längre ansluten till {{platform}} as",
         "doAuth": "Logga in med detta konto",
         "doSwitch": "Byt till det här kontot"
     },
@@ -139,26 +149,9 @@
         "Guest": "Gäst",
         "Host": "Värd"
     },
-    "avatar": {
-        "Someone": "Någon"
-    },
     "web3": {
         "WrongMethod": "Fel kontraktsmetod {{methodName}}",
         "ChangeWallet": "Byt plånbok"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-post",
-            "mobile": "Mobil",
-            "web3": "Webb3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Kopierade! Nu kan du klistra in den var som helst."
-    },
-    "platforms": {
-        "wallet": "Plånbok",
-        "broadcast": "Utsända"
     },
     "labels": {
         "addToPhonebook": "Lägg till i mina telefonkontakter",

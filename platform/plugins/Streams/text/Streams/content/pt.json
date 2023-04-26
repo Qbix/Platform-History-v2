@@ -6,19 +6,32 @@
     "preview": {
         "NewItemTitle": "Novo item"
     },
+    "avatar": {
+        "firstName": "primeiro nome",
+        "lastName": "sobrenome",
+        "username": "nome de usuário"
+    },
     "labels": {
-        "Streams\/invited": "Pessoas que eu convidei",
-        "Streams\/invitedMe": "Quem me convidou",
+        "Streams\/invited": "Pessoas que convidei",
+        "Streams\/invitedMe": "quem me convidou",
         "DoYouAgree": "Você concorda?",
-        "Yes": "sim",
+        "Yes": "Sim",
         "No": "Não"
     },
+    "login": {
+        "prompt": "Permita que seus amigos o reconheçam:",
+        "newUser": "ou crie uma nova conta abaixo",
+        "picTooltip": "Você pode alterar esta imagem mais tarde",
+        "placeholder": {
+            "fullName": "Escreva seu nome completo"
+        }
+    },
     "interests": {
-        "Filter": "Quais são seus interesses?",
-        "CanGrant": "Se você ainda não encontrar o que está procurando, adicione um novo interesse abaixo:",
+        "Filter": "Pesquisar interesses",
+        "CanGrant": "Se você ainda não encontrou o que procura, pode adicionar um novo interesse abaixo:",
         "TrySynonyms": "Não vê? Tente alguns sinônimos.",
         "AddUnderCategory": "Adicionar na categoria...",
-        "Other": "De outros",
+        "Other": "Outro",
         "Unlisted": "Não-listado"
     },
     "chat": {
@@ -29,96 +42,54 @@
         "closeChatConfirm": "Tem certeza de que deseja fechar este bate-papo?",
         "Subscribed": "Notificações ativadas",
         "Unsubscribed": "Notificações silenciadas",
-        "closeChatConfirmYes": "sim",
+        "closeChatConfirmYes": "Sim",
         "closeChatConfirmNo": "Não",
         "earlierComments": "comentários anteriores",
         "startedConversation": "começou uma conversa",
         "RealTimeCall": "Chamada em tempo real",
+        "JoinWebRTC": "Teleconferência",
         "SearchByName": "Procura por nome",
         "Notifications": {
-            "Visit": "{{displayName}} está visitando o bate-papo",
+            "Visit": "{{displayName}} está visitando o chat",
             "Join": "{{displayName}} entrou no chat",
-            "Leave": "{{displayName}} saiu do bate-papo",
-            "RelatedTo": "{{displayName}} iniciou um {{stream.displayType}}"
+            "Leave": "{{displayName}} saiu do chat",
+            "RelatedTo": "{{displayName}} começou um {{stream.displayType}}"
         },
-        "JoinWebRTC": "Teleconferência"
+        "placeholders": {
+            "Public": "Adicione um comentário",
+            "Private": "Escreva uma mensagem privada"
+        }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "gerenciar suas assinaturas de e-mail",
+        "ManageEmailSubscriptions": "gerencie suas assinaturas de e-mail",
         "IfUnsubscribe": "Se você deseja cancelar a inscrição",
         "*": "Mensagem {{& message.fields.type}} para {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} se juntaram",
+        "Streams\/left": "{{&call 'avatar.displayName'}} restantes",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} disse: {{& message.content}}",
         "Streams\/changed": "Mudanças em {{stream.fields.title}}",
-        "Streams\/invite": "Você foi convidado para {{& stream.fields.title}}",
+        "Streams\/invite": "Você foi convidado para o {{& stream.fields.title}}",
         "Streams\/announcement": "Anúncio em {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} alterou o acesso em {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Mensagem de bate-papo editada em {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Mensagem de chat removida em {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} acesso alterado em {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Mensagem de chat editada em {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Mensagem de bate-papo removida em {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} foi fechado",
         "Streams\/task\/progress": "Progresso feito em {{stream.fields.title}}",
         "Streams\/task\/complete": "Tarefa concluída: {{stream.fields.title}}",
         "Streams\/task\/error": "Erro durante: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mensagem recebida",
+        "Streams\/incoming\/*": "{{app}} : Mensagem Recebida",
         "Streams\/relatedTo\/Streams\/call": "Nova chamada iniciada em {{toTitle}}",
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} em {{toTitle}}",
         "Streams\/relatedFrom\/*": "Adicionado a {{toTitle}} como {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mencionou você em um comentário",
-        "Streams\/call": "{{displayName}} iniciou uma chamada em tempo real",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} entrou",
-        "Streams\/left": "{{&call 'avatar.displayName'}} restantes"
+        "Streams\/call": "{{displayName}} iniciou uma chamada em tempo real"
     },
     "invite": {
         "command": "Convidar",
-        "messageContent": "{{displayName}} convidou você para {{inviteUrl}}",
-        "youCanNowPaste": "Agora você pode colar este link em algum lugar para convidar pessoas",
-        "dialog": {
-            "chooseFromContacts": "Escolha entre seus contatos",
-            "chooseAgainFromContacts": "Escolha novamente em Contatos",
-            "inviteSelectedContacts": "Convidar contatos selecionados",
-            "selectFromContacts": "Selecionar de contatos",
-            "userChooserPlaceholder": "Procura por nome",
-            "photo": "Tire uma foto",
-            "photoInstruction": "Se a pessoa que escaneou seu código QR estiver na sua frente, tire uma foto dela",
-            "to": "Para: {{Stream Title}}",
-            "go": "Vai",
-            "title": "Convidar",
-            "placeholder": "Número de celular ou endereço de e-mail",
-            "orInvite": "Ou convide pessoas usando:",
-            "copyLink": "{{ClickOrTap}} para copiar o link do convite",
-            "shareOrCopyLink": "{{ClickOrTap}} para compartilhar ou copiar o link do convite",
-            "QR": "{{ClickOrTap}} para gerar o código QR",
-            "QRtitle": "Digitalize este código QR",
-            "QRscanned": "Eles escanearam!",
-            "scannedQR": "{{ClickOrTap}} se o código foi verificado",
-            "byEmail": "E-mail",
-            "byText": "Texto",
-            "byFacebook": "o Facebook",
-            "byTwitter": "Twitter",
-            "title2": "Convidar pessoas",
-            "chooseMethod": "Escolha um método:",
-            "selectContacts": "Selecionar contatos",
-            "scanQRCode": "Digitalizar código QR",
-            "shareLink": "Compartilhar um link",
-            "chooseFromRegistered": "Escolha entre usuários registrados",
-            "inviteViaEmailOrSms": "Convidar por e-mail ou SMS"
-        },
-        "email": {
-            "subject": "Ei, verifique isso",
-            "PleaseVisitLink": "Por favor, visite o seguinte link:",
-            "InvitingYou": "Estou convidando você para {{title}}",
-            "HasInvitedYou": "{{displayName}} convidou você para {{title}}",
-            "HasMentionedYou": "{{displayName}} mencionou você em &quot;{{title}}&quot;",
-            "YOUAREINVITED": "VOCÊ ESTÁ CONVIDADO!",
-            "AcceptInvite": "Aceitar convite"
-        },
-        "sms": {
-            "content": "Você foi convidado para {{title}}. Toque em {{url}}"
-        },
-        "notice": {
-            "text": "Você foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
-        },
         "Invite": "Convidar",
         "Share": "Compartilhar",
+        "messageContent": "{{displayName}} convidou você para o {{inviteUrl}}",
+        "youCanNowPaste": "Agora você pode colar este link em algum lugar para convidar pessoas",
         "roles": {
             "title": "Conceder funções a usuários convidados?",
             "NotAuthorizedToGrantRole": {
@@ -133,12 +104,59 @@
         "labels": {
             "title": "Qual é o seu relacionamento?"
         },
+        "dialog": {
+            "chooseFromContacts": "Escolha entre seus contatos",
+            "chooseAgainFromContacts": "Escolha Novamente em Contatos",
+            "inviteSelectedContacts": "Convidar contatos selecionados",
+            "selectFromContacts": "Selecione de contatos",
+            "userChooserPlaceholder": "Procura por nome",
+            "photo": "Tire uma foto",
+            "photoOf": "Tire uma foto de {{name}}",
+            "photoInstruction": "Se a pessoa que escaneou seu código QR estiver na sua frente, tire uma foto dela",
+            "to": "Para: {{Stream Title}}",
+            "go": "Ir",
+            "title": "Convidar",
+            "placeholder": "Número de celular ou endereço de e-mail",
+            "orInvite": "Ou convide pessoas usando:",
+            "copyLink": "{{ClickOrTap}} para copiar o link do convite",
+            "shareOrCopyLink": "{{ClickOrTap}} para compartilhar ou copiar o link do convite",
+            "QR": "{{ClickOrTap}} para gerar o código QR",
+            "QRtitle": "Escaneie este código QR",
+            "QRscanned": "Eles digitalizaram!",
+            "scannedQR": "{{ClickOrTap}} se o código foi escaneado",
+            "byEmail": "E-mail",
+            "byText": "Texto",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "title2": "Convidar pessoas",
+            "chooseMethod": "Escolha um método:",
+            "selectContacts": "Selecione Contatos",
+            "scanQRCode": "Escanear código QR",
+            "shareLink": "Compartilhar um link",
+            "chooseFromRegistered": "Escolha entre usuários registrados",
+            "inviteViaEmailOrSms": "Convide por e-mail ou SMS"
+        },
         "complete": {
+            "WelcomeToCommunity": "Bem-vindo ao {{communityName}}",
             "HasInvitedYou": "convidou você para:",
-            "WelcomeToCommunity": "Bem-vindo a {{communityName}}",
             "HasInvitedYouToTheirProfile": "convidou você para se conectar.",
             "prompt": "Permita que seus amigos o reconheçam:",
             "accept": "Aceitar convite"
+        },
+        "email": {
+            "subject": "Ei, veja isso",
+            "PleaseVisitLink": "Por favor, visite o seguinte link:",
+            "InvitingYou": "Estou convidando você para {{title}}",
+            "HasInvitedYou": "{{displayName}} convidou você para o {{title}}",
+            "HasMentionedYou": "{{displayName}} mencionou você em &quot; {{title}} &quot;",
+            "YOUAREINVITED": "VOCÊ ESTÁ CONVIDADO!",
+            "AcceptInvite": "Aceitar convite"
+        },
+        "sms": {
+            "content": "Você foi convidado para {{title}} . Por favor toque em {{url}}"
+        },
+        "notice": {
+            "text": "Você foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
         }
     },
     "messages": {
@@ -146,10 +164,10 @@
             "posted": "postou uma mensagem <em>{{message.fields.type}}<\/em> para {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "comentou",
+            "commentedOn": "comentado",
             "startedCallIn": "iniciou uma chamada em",
-            "in": "dentro",
-            "body": "em {{& url}}: {{& message.fields.content}}",
+            "in": "em",
+            "body": "em {{& url}} : {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "foi postado para",
                 "byAvatar": "por {{avatar.displayName}}"
@@ -162,26 +180,29 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Os convites são enviados do nosso número, que seus amigos ainda não reconhecem. Acompanhe com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
-            "confirm": "Os convites são enviados do nosso número, que seus amigos ainda não reconhecem. Você gostaria de acompanhar com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
-            "check": "Ei, acabei de enviar um convite para você para o app {{app}}. Por favor, verifique seu sms e clique no link!",
+            "alert": "Os convites são enviados do nosso número, que seus amigos ainda não reconhecem. Acompanhe com um texto rápido para que eles saibam que o convite veio de você, pedindo que cliquem no link.",
+            "confirm": "Os convites são enviados do nosso número, que seus amigos ainda não reconhecem. Você gostaria de enviar um texto rápido para que eles saibam que o convite veio de você, pedindo-lhes que cliquem no link.",
+            "check": "Ei, acabei de te enviar um convite para o aplicativo {{app}} . Por favor, verifique seu sms e clique no link!",
             "CheckYourMobile": "Por favor, verifique o SMS e siga as instruções!"
         },
         "email": {
-            "alert": "Os convites são enviados do nosso domínio, que seus amigos ainda não reconhecem. Acompanhe com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
-            "confirm": "Os convites são enviados do nosso domínio, que seus amigos ainda não reconhecem. Você gostaria de acompanhar com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
+            "alert": "Os convites são enviados de nosso domínio, que seus amigos ainda não reconhecem. Acompanhe com um texto rápido para que eles saibam que o convite veio de você, pedindo que cliquem no link.",
+            "confirm": "Os convites são enviados de nosso domínio, que seus amigos ainda não reconhecem. Você gostaria de enviar um texto rápido para que eles saibam que o convite veio de você, pedindo-lhes que cliquem no link.",
             "subject": "Você recebeu um convite?",
-            "body": "Ei, acabei de enviar a você um convite para o app {{app}}. Por favor, verifique seu e-mail e clique no link lá!",
+            "body": "Ei, acabei de te enviar um convite para o aplicativo {{app}} . Por favor, verifique seu e-mail e clique no link lá!",
             "CheckYourEmail": "Verifique seu e-mail e siga as instruções!"
         }
+    },
+    "identifier": {
+        "privacySettings": "Configurações de privacidade"
     },
     "participating": {
         "Title": "Título",
         "Subscribed": "Subscrito",
-        "Participants": "Participantes",
+        "Participants": "participantes",
         "AreYouSureRemoveIdentifier": "Tem certeza de que deseja remover este identificador?",
         "AreYouSureUnsubscribeIdentifier": "Tem certeza de cancelar a assinatura deste identificador? Ele desativará as notificações para esse identificador.",
-        "AreYouSureUnsubscribeDevice": "Tem certeza de que cancelar a assinatura deste dispositivo? Isso desativará as notificações para este dispositivo.",
+        "AreYouSureUnsubscribeDevice": "Tem certeza de cancelar a assinatura deste dispositivo? Ele desativará as notificações para este dispositivo.",
         "AreYouSureRemoveParticipant": "Tem certeza de que deseja remover este participante?",
         "RemoveParticipant": "Remover participante",
         "Identifiers": "Identificadores",
@@ -189,7 +210,7 @@
         "Streams": "Fluxos"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "Você não tem permissão para participar deste stream.",
+        "notAllowedToJoinCall": "Você não tem permissão para entrar neste stream.",
         "streamTitle": "{{1}} iniciou uma teleconferência",
         "allow": {
             "dialogTitle": "Conectando",
@@ -198,51 +219,54 @@
             "cameraAndMicrophoneBtn": "Ativar câmera e microfone"
         },
         "preparing": {
+            "dialogTitle": "Ligue\/desligue a câmera ou o microfone antes de entrar",
             "micIsOff": "O microfone está desligado",
-            "micIsOn": "O microfone está ativado",
+            "micIsOn": "O microfone está ligado",
             "cameraIsOff": "A câmera está desligada",
             "cameraIsOn": "A câmera está ligada",
             "screenSharingIsOn": "O compartilhamento de tela está ativado",
             "screenSharingIsOff": "Compartilhar tela",
-            "joinNow": "Junte-se à Chamada",
-            "dialogTitle": "Ligue\/desligue a câmera ou o microfone antes de entrar"
+            "joinNow": "Junte-se à Chamada"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instruções",
-            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estes passos:",
+            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estas etapas:",
             "point1": "Vá para &quot;Configurações&quot; -&gt; &quot;Avançado&quot; -&gt; &quot;Privacidade e segurança&quot; -&gt; &quot;Configurações do site&quot; -&gt; &quot;Câmera&quot; ou &quot;Configurações do site&quot; -&gt; &quot;Microfone&quot;",
             "point2": "Remover {{hostname}} da lista &quot;Bloquear&quot;"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instruções",
-            "permissionDenied": "Permissão para {{kind}} negada. Atualize esta página e confirme o acesso a {{kind}} para participar da conferência."
+            "permissionDenied": "Permissão para {{kind}} negada. Recarregue esta página e confirme o acesso ao {{kind}} para participar da conferência."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instruções",
-            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estes passos:",
+            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estas etapas:",
             "point1": "Vá para as configurações do seu Android",
             "point2": "Abra &quot;Aplicativos e notificações&quot;",
-            "point3": "Encontre &quot;{{communityName}}&quot; e abra-o",
+            "point3": "Encontre &quot; {{communityName}} &quot; e abra-o",
             "point4": "Toque em Permissões",
             "point5": "Ativar {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instruções",
-            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estes passos:",
-            "point1": "Vá para suas configurações do iOS",
+            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estas etapas:",
+            "point1": "Vá para as configurações do iOS",
             "point2": "Abra &quot;Privacidade&quot;",
             "point3": "Encontre {{kind}} e abra-o",
-            "point4": "Encontre &quot;{{communityName}}&quot; e ative"
+            "point4": "Encontre &quot; {{communityName}} &quot; e habilite"
+        },
+        "fbLive": {
+            "dialogTitle": "A transmissão ao vivo do Facebook começou"
         },
         "notices": {
             "youJoinedRoom": "Você entrou na sala",
-            "joining": "Participando: {{userName}}",
+            "joining": "Adesão: {{userName}}",
             "sbLeftRoom": "{{userName}} saiu da sala",
             "switchingRoom": "Troca de quarto...",
             "forceDisconnecting": "Você será desconectado em 5 segundos",
             "forceDisconnectingImmediately": "Você foi desconectado por um host",
-            "youLeftRoom": "Você saiu do quarto",
-            "codeCopied": "Você saiu do quarto",
+            "youLeftRoom": "Você saiu da sala",
+            "codeCopied": "Você saiu da sala",
             "sbBeganFbLive": "{{userName}} começou a transmitir esta chamada no Facebook",
             "sbStoppedFbLive": "{{userName}} parou de transmitir esta chamada no Facebook",
             "youBeganFbLive": "Você começou a transmitir esta chamada no Facebook",
@@ -251,15 +275,15 @@
             "youStoppedLive": "Você parou de transmitir esta chamada para RTMP personalizado",
             "sbStartedLiveStreaming": "{{userName}} começou ao vivo",
             "sbStoppedLiveStreaming": "{{userName}} terminou ao vivo",
-            "liveStopped": "Ocorreu um erro ao enviar vídeo para o endpoint",
+            "liveStopped": "Ocorreu um erro ao enviar o vídeo para o terminal",
             "youBeganVideoRecording": "Você começou a gravar esta conferência",
             "youStoppedVideoRecording": "Você parou de gravar esta conferência",
             "linkCopiedToCb": "Link copiado para a área de transferência",
             "codeCopiedToCb": "Código copiado para a área de transferência",
             "userHasNoVideo": "O participante não tem vídeo",
-            "openInBrowserAlert": "Abra o link no navegador Safari para participar da conferência.",
-            "allowedVideoLimit": "Apenas {{limit}} vídeo permitido nesta sala",
-            "allowedAudioLimit": "Apenas {{limit}} microfones permitidos nesta sala"
+            "openInBrowserAlert": "Abra o link no navegador Safari para entrar na conferência.",
+            "allowedVideoLimit": "Apenas {{limit}} vídeos são permitidos nesta sala",
+            "allowedAudioLimit": "Apenas {{limit}} microfones são permitidos nesta sala"
         },
         "settingsPopup": {
             "dialogTitle": "Configurações de vídeo",
@@ -267,17 +291,17 @@
             "screenSharing": "Compartilhamento de tela",
             "shareAnotherScreen": "Compartilhar outra tela",
             "turnOffCameras": "Desligue a câmera",
-            "turnOffVideo": "Desativar o compartilhamento de câmera\/tela",
-            "turnOffAudioInput": "Silenciar microfone",
+            "turnOffVideo": "Desative o compartilhamento de câmera\/tela",
+            "turnOffAudioInput": "microfone mudo",
             "turnOffScreenSharing": "Desative o compartilhamento de tela",
             "cameraIsTurnedOff": "A câmera está desligada",
             "micIsTurnedOff": "O microfone está desligado",
-            "startFBLive": "Iniciar transmissão ao vivo do Facebook",
-            "stopFBLive": "Interromper a transmissão ao vivo do Facebook",
+            "startFBLive": "Iniciar transmissão ao vivo no Facebook",
+            "stopFBLive": "Parar a transmissão ao vivo do Facebook",
             "startRecording": "Comece a gravar",
             "stopRecording": "Pare de gravar",
             "start": "Começar",
-            "stop": "Pare",
+            "stop": "Parar",
             "recordingInProgress": "A gravação está em andamento...",
             "fbLiveTitle": "Título da transmissão ao vivo",
             "fbLiveDescription": "Descreva sua transmissão ao vivo. Sobre o que é isso?",
@@ -286,54 +310,51 @@
             "fbPublicAccess": "Público",
             "publishOnTimeline": "Publicar na linha do tempo",
             "publishToGroup": "Publicar no grupo",
-            "fbStartLive": "Ativar",
-            "fbStopLive": "Finalizar transmissão ao vivo",
-            "streamingSettings": "Definições",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "Encerrar transmissão ao vivo",
+            "streamingSettings": "Configurações",
+            "manageStream": "Gerenciar transmissão ao vivo",
             "fbEmbedCode": "Embutir",
             "copy": "cópia de",
             "streamToRTMP": "Transmita para RTMP personalizado",
             "startBroadcasting": "Começar a transmissão",
-            "broadcastingInProgress": "A transmissão está em andamento",
-            "manageStream": "Gerenciar transmissão ao vivo"
+            "broadcastingInProgress": "A transmissão está em andamento"
         },
         "audioSettings": {
             "dialogTitle": "Configurações de áudio",
             "speakers": "caixas de som",
             "microphone": "Microfone"
         },
+        "broadcastPopup": {
+            "dialogTitle": "Gerenciar transmissão"
+        },
         "participantsPopup": {
             "dialogTitle": "Configurações do participante",
             "disconnect": "desconectar",
             "floatingScreens": "Telas Flutuantes",
             "tiledScreens": "Telas lado a lado",
-            "loudestExceptMe": "Mais alto, exceto eu",
-            "maximizeLoudest": "Maximizar mais alto",
+            "loudestExceptMe": "Mais alto exceto eu",
+            "maximizeLoudest": "Maximize mais alto",
             "staticMaximized": "Estático Maximizado",
             "fullScreen": "Tela cheia",
             "manual": "Manual",
             "turnOffCamera": "Ocultar vídeo",
-            "turnOffAudio": "Silenciar áudio",
+            "turnOffAudio": "Mudo áudio",
             "turnOffScreenSharing": "Ocultar compartilhamento de tela",
             "turnOnCamera": "Mostrar vídeo",
             "turnOnAudio": "Ativar áudio",
             "turnOnScreenSharing": "Mostrar compartilhamento de tela"
         },
         "streamingSettings": {
-            "title": "Configurações de transmissão"
+            "title": "Transmissão ao vivo"
         },
         "preview": {
             "Meeting": "Teleconferência",
             "MeetingEnded": "Teleconferência encerrada"
         },
         "requestSpeakDialog": {
-            "msg": "Atualmente, há {{count}} pessoas falando na reunião. Você quer substituir um deles depois de permitir que ele {{seconds}} segundos para terminar de falar?",
-            "dialogTitle": "Pedir para falar"
-        },
-        "fbLive": {
-            "dialogTitle": "A transmissão ao vivo do Facebook começou"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Gerenciar transmissão"
+            "dialogTitle": "Pedir para falar",
+            "msg": "Há atualmente {{count}} pessoas falando na reunião. Deseja substituir um deles depois de permitir que eles terminem de falar por {{seconds}} segundos?"
         }
     },
     "types": {
@@ -343,10 +364,10 @@
         },
         "Streams\/resource": {
             "displayType": "Recurso",
-            "description": "stream para gerenciar o acesso a um recurso e postar mensagens sobre atualizações"
+            "description": "fluxo para gerenciar o acesso a um recurso e postar mensagens sobre atualizações"
         },
         "Streams\/task": {
-            "description": "para receber atualizações sobre o progresso de uma determinada tarefa",
+            "description": "para receber atualizações sobre o andamento de uma determinada tarefa",
             "displayType": "Tarefa"
         },
         "Streams\/tasks": {
@@ -366,8 +387,8 @@
             "description": "número matemático"
         },
         "Streams\/date": {
-            "displayType": "Encontro",
-            "description": "encontro"
+            "displayType": "Data",
+            "description": "data"
         },
         "Streams\/text": {
             "displayType": "Texto",
@@ -375,15 +396,15 @@
         },
         "Streams\/text\/small": {
             "displayType": "Texto",
-            "description": "corpo de texto pequeno"
+            "description": "pequeno corpo de texto"
         },
         "Streams\/text\/medium": {
             "displayType": "Texto",
-            "description": "corpo médio do texto"
+            "description": "corpo de texto médio"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Endereço de e-mail",
-            "description": "endereço de e-mail"
+            "displayType": "Endereço de email",
+            "description": "endereço de email"
         },
         "Streams\/text\/phoneNumber": {
             "displayType": "Número de telefone",
@@ -408,7 +429,7 @@
         },
         "Streams\/file": {
             "displayType": "Arquivo",
-            "description": "arquivo enviado",
+            "description": "arquivo carregado",
             "newItem": "Adicionar ficheiro"
         },
         "Streams\/audio": {
@@ -436,7 +457,7 @@
         },
         "Streams\/participating": {
             "displayType": "Índice de participação",
-            "description": "fluxos são relacionados\/não relacionados a isso quando um usuário entra\/sai"
+            "description": "streams estão relacionados\/não relacionados a isso quando um usuário entra\/sai"
         },
         "Streams\/interest": {
             "displayType": "Interesse",
@@ -444,15 +465,15 @@
         },
         "Streams\/incoming": {
             "displayType": "Entrada",
-            "description": "destino para mensagens enviadas por outros usuários"
+            "description": "destino das mensagens enviadas por outros usuários"
         },
         "Streams\/chat": {
             "displayType": "Conversação",
             "description": "uma conversa entre usuários, com histórico"
         },
         "Streams\/webrtc": {
-            "displayType": "Chamada ao vivo",
-            "description": "uma chamada de vídeo\/áudio em tempo real"
+            "displayType": "Teleconferência",
+            "description": "uma videoconferência\/áudio online"
         },
         "Streams\/question": {
             "displayType": "Pergunta",
@@ -464,45 +485,45 @@
             "description": "fluxo de resposta"
         },
         "Streams\/calls": {
-            "displayType": "Chamadas",
+            "displayType": "chamadas",
             "description": "categoria para Streams\/webrtc",
             "MaxRelationsExceeded": "Máximo de chamadas excedido"
         }
     },
     "menu": {
-        "placeholder": "tipo título da página",
+        "placeholder": "digite o título da página",
         "ModTab": "Modificar item",
-        "Save": "Salve ",
+        "Save": "Salvar",
         "Delete": "Excluir",
         "Submenu": "Submenu"
     },
     "audio": {
         "record": "Registro",
-        "reset": "Redefinir",
+        "reset": "Reiniciar",
         "edit": "Editar",
         "title": "título",
-        "description": "Descrição",
-        "upload": "Envio",
+        "description": "descrição",
+        "upload": "Carregar",
         "link": "Link",
         "setUrl": "Definir URL",
-        "save": "Salve ",
-        "setClip": "Clipe Recortado",
+        "save": "Salvar",
+        "setClip": "clipe recortado",
         "invalidURL": "URL inválida",
         "invalidFile": "Arquivo inválido",
-        "errorNoSource": "Sem fonte de áudio",
+        "errorNoSource": "Nenhuma fonte de áudio",
         "uploadLimit": "Tamanho máximo do arquivo: {{size}}",
         "errorFileSize": "Desculpe, mas o arquivo é muito grande.<br> O tamanho máximo do arquivo é {{size}}"
     },
     "video": {
-        "reset": "Redefinir",
+        "reset": "Reiniciar",
         "edit": "Editar",
         "title": "título",
-        "description": "Descrição",
-        "upload": "Envio",
+        "description": "descrição",
+        "upload": "Carregar",
         "link": "Link",
         "setUrl": "Definir URL",
-        "save": "Salve ",
-        "setClip": "Clipe Recortado",
+        "save": "Salvar",
+        "setClip": "clipe recortado",
         "invalidURL": "URL inválida",
         "invalidFile": "Arquivo inválido",
         "errorNoSource": "Nenhuma fonte de vídeo",
@@ -510,33 +531,33 @@
         "errorFileSize": "Desculpe, mas o arquivo é muito grande.<br> O tamanho máximo do arquivo é {{size}}"
     },
     "pdf": {
-        "reset": "Redefinir",
+        "reset": "Reiniciar",
         "edit": "Editar",
         "title": "título",
-        "description": "Descrição",
-        "upload": "Envio",
+        "description": "descrição",
+        "upload": "Carregar",
         "link": "Link",
         "setUrl": "Definir URL",
-        "save": "Salve ",
-        "setClip": "Clipe Recortado",
+        "save": "Salvar",
+        "setClip": "clipe recortado",
         "invalidURL": "URL inválida",
         "invalidFile": "Arquivo inválido",
-        "errorNoSource": "Sem fonte pdf",
+        "errorNoSource": "Nenhuma fonte de pdf",
         "uploadLimit": "Tamanho máximo do arquivo: {{size}}",
         "errorFileSize": "Desculpe, mas o arquivo é muito grande.<br> O tamanho máximo do arquivo é {{size}}"
     },
     "image": {
-        "reset": "Redefinir",
+        "reset": "Reiniciar",
         "edit": "Editar",
         "title": "título",
-        "description": "Descrição",
-        "upload": "Envio",
+        "description": "descrição",
+        "upload": "Carregar",
         "link": "Link",
         "setUrl": "Definir URL",
-        "save": "Salve ",
-        "uploadedImage": "Imagem enviada",
+        "save": "Salvar",
+        "uploadedImage": "imagem carregada",
         "imageTitle": "Título da imagem",
-        "setClip": "Clipe Recortado",
+        "setClip": "clipe recortado",
         "invalidURL": "URL inválida",
         "invalidFile": "Arquivo inválido",
         "errorNoSource": "Nenhuma fonte de imagem",
@@ -544,74 +565,52 @@
         "errorFileSize": "Desculpe, mas o arquivo é muito grande.<br> O tamanho máximo do arquivo é {{size}}"
     },
     "questions": {
-        "Questions": "Perguntas",
+        "Questions": "Questões",
         "Answers": "Respostas",
         "AnswerQuestion": "Responder à pergunta",
         "SetYourAnswer": "Por favor, responda a questão",
         "NewQuestion": "Nova pergunta",
+        "EditQuestion": "Editar pergunta",
         "NewAnswer": "Nova resposta",
+        "NewPossibleAnswer": "Nova resposta possível",
         "AnswerDetails": "Detalhes da resposta",
         "answerOption": "Opção",
         "answerOptionExclusive": "Exclusivo",
-        "answerTextarea": "Área de texto",
-        "FreeAnswer": "Escreva sua resposta aqui",
-        "SaveQuestion": "Salvar pergunta",
-        "SaveAnswer": "Salvar resposta",
-        "AddAnotherAnswer": "Adicionar outra resposta",
-        "ErrorAnswers": "Por favor, adicione até mesmo uma resposta",
-        "AlreadyAnswered": "Já respondido",
-        "TitlePlaceholder": "Digite sua pergunta",
-        "ContentPlaceholder": "Coloque qualquer informação adicional aqui para ajudar as pessoas a responder",
-        "ErrorTitle": "Pergunta obrigatória",
-        "Placeholder": "Espaço reservado",
-        "EditQuestion": "Editar pergunta",
-        "NewPossibleAnswer": "Nova resposta possível",
+        "answerTextarea": "área de texto",
         "answerText": "Texto",
         "HideUntilAnswered": "Ocultar até responder",
         "CantChangeAnswers": "Não é possível alterar as respostas",
+        "FreeAnswer": "Escreva sua resposta aqui",
+        "SaveQuestion": "Salvar pergunta",
+        "SaveAnswer": "Salvar resposta",
         "Save": "Salvar",
         "Send": "Enviar",
         "TitleRequired": "Título necessário!",
+        "AlreadyAnswered": "Já respondido",
+        "TitlePlaceholder": "Digite sua pergunta",
+        "ContentPlaceholder": "Coloque qualquer informação adicional aqui para ajudar as pessoas a responder",
+        "ErrorTitle": "Pergunta necessária",
+        "Placeholder": "espaço reservado",
         "AreYouSure": "Tem certeza?"
     },
     "experience": {
         "NewExperience": "Nova experiência",
-        "DefineTitle": "Por favor, defina um título",
-        "Create": "Crio"
+        "DefineTitle": "Defina um título",
+        "Create": "Criar"
     },
     "calls": {
-        "SettingsTitle": "Chamadas",
-        "MaxCalls": "Máx. de chamadas",
+        "SettingsTitle": "chamadas",
+        "MaxCalls": "Chamadas máximas",
         "Update": "Atualizar",
         "NoCallsYet": "Nenhuma chamada ainda",
         "CallReasonTitle": "Do que se trata esta chamada?",
         "WaitingRoom": "Sala de espera",
-        "LiveRoom": "Sala ao vivo",
+        "LiveRoom": "Sala Ao Vivo",
         "interviewedByAnotherHost": "Atualmente é entrevistado por outro apresentador",
-        "bringToLive": "Mostrar ao vivo",
+        "bringToLive": "Traga para o show ao vivo",
         "putOnHold": "Colocada em espera",
-        "endCall": "Terminar chamada",
+        "endCall": "Terminar Chamada",
         "interview": "Entrevista",
-        "markApproved": "Marca aprovada"
-    },
-    "identifier": {
-        "private": "Privado",
-        "public": "Público",
-        "configurationSaved": "Configuração salva",
-        "error": "Algo deu errado",
-        "privacySettings": "Configurações de privacidade"
-    },
-    "avatar": {
-        "firstName": "primeiro nome",
-        "lastName": "sobrenome",
-        "username": "nome de usuário"
-    },
-    "login": {
-        "prompt": "Permita que seus amigos o reconheçam:",
-        "newUser": "ou crie uma nova conta abaixo",
-        "picTooltip": "Você pode alterar esta imagem mais tarde",
-        "placeholder": {
-            "fullName": "Escreva seu nome completo"
-        }
+        "markApproved": "Marcar aprovado"
     }
 }

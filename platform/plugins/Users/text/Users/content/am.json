@@ -1,15 +1,41 @@
 {
+    "avatar": {
+        "Someone": "አንድ ሰው"
+    },
+    "identifier": {
+        "types": {
+            "email": "ኢሜይል",
+            "mobile": "ሞባይል",
+            "web3": "ድር3"
+        }
+    },
+    "clipboard": {
+        "Copied": "ተቀድቷል! አሁን በማንኛውም ቦታ መለጠፍ ይችላሉ."
+    },
+    "analytics": {
+        "Title": "ትንታኔ",
+        "Daily": "በየቀኑ",
+        "Weekly": "በየሳምንቱ",
+        "Monthly": "ወርሃዊ",
+        "Application": "መተግበሪያ",
+        "Pages": "ገፆች",
+        "Services": "አገልግሎቶች",
+        "Faq": "በየጥ",
+        "WeekDays": "የሳምንት ቀናት"
+    },
     "actions": {
         "LogIn": "ግባ",
         "LogOut": "ውጣ"
     },
     "activate": {
-        "SetAsPrimary": "{{1}}ን እንደ ዋና {{2}} አቀናብር",
-        "ChoosePassPhrase": "ለመግባት <strong>የማለፊያ ሀረግ<\/strong> ይምረጡ።<br> በቀላሉ የሚያስታውሷቸው ጥቂት ቃላትን የያዘ ቀላል ሐረግ።",
+        "OneTimeCode": "የተቀበልከውን ኮድ አስገባ፡-",
+        "SetAsPrimary": "{{1}} እንደ አንደኛ ደረጃ {{2}} አዘጋጅ",
+        "ChoosePassPhrase": "<strong>ለመግባት የማለፊያ ሀረግ<\/strong> ይምረጡ።<br> በቀላሉ የሚያስታውሷቸው ጥቂት ቃላትን የያዘ ቀላል ሐረግ።",
         "ChoosePassPhraseSeeSuggestions": "መለያዎን ለመጠበቅ ጥሩ <strong>ማለፊያ ሐረግ<\/strong> ይምረጡ። ለአንዳንድ ሀሳቦች ጥቆማዎችን ይመልከቱ።",
         "LogOutAndTryAgain": "ይውጡ እና እንደገና ይሞክሩ",
         "IfYouFeel": "የሆነ ችግር እንደተፈጠረ ከተሰማዎት ማድረግ ይችላሉ።",
-        "SetIdentifierButtonTitle": "እንደገና ጀምር"
+        "SetIdentifierButtonTitle": "እንደገና ጀምር",
+        "ActivateMyAccount": "መለያዬን አግብር"
     },
     "session": {
         "GetStarted": "እንጀምር"
@@ -22,7 +48,7 @@
         "mustAgree": "በመጀመሪያ በውሉ መስማማት አለብዎት።"
     },
     "register": {
-        "TermsLabel": "{{999}ን ተቀብያለሁ",
+        "TermsLabel": "{{link}} ተቀብያለሁ",
         "TermsTitle": "ውሎች"
     },
     "notifications": {
@@ -34,34 +60,38 @@
         "WelcomeVerifyEmail": "እንኳን ደህና መጣህ! የኢሜይል አድራሻህን አረጋግጥ.",
         "ForgetPass": "ሄይ የይለፍ ሐረግህን ረሳኸው?",
         "PassphraseSaved": "የማለፊያ ሐረግዎ ተቀምጧል።",
-        "IdentifierActivated": "የእርስዎ {999} ነቅቷል።",
+        "IdentifierActivated": "የእርስዎ {{type}} ነቅቷል።",
         "CompletedActivation": "የተጠቃሚ ማግበር ጨርሰሃል።",
         "CompletedActivationLogIn": "የተጠቃሚ ማግበር ጨርሰሃል። አሁን ለመግባት ይሞክሩ።"
     },
     "contacts": {
         "dialog": {
-            "title": "እውቂያ ይምረጡ",
+            "title": "እውቂያን ይምረጡ",
             "CreateAccount": "+ አዲስ እውቂያ",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create አልተገኘም።",
             "SearchByName": "በስም ፈልግ",
             "EmptyContacts": "እውቂያዎች አልተገኙም..."
         },
         "select": {
-            "title": "የ{999}ን አድራሻ ይምረጡ"
+            "title": "የ {{displayName}} አድራሻ ይምረጡ"
         }
     },
     "usersContacts": {
         "selectLabel": "እባክዎ መለያ ይምረጡ።",
         "inviteUser": "ተጠቃሚዎችን ይጋብዙ",
         "selectRole": "ሚና ይምረጡ",
-        "inviteRole": "ጋብዝ {999}"
+        "inviteRole": "{{role}} ጋብዝ"
     },
     "invalidLanguageSelected": "ልክ ያልሆነ ቋንቋ ተመርጧል",
+    "platforms": {
+        "wallet": "የኪስ ቦርሳ",
+        "broadcast": "ስርጭት"
+    },
     "login": {
         "title": "እንኳን ደህና መጣህ",
         "directions": "መለያ ይፍጠሩ ወይም ይግቡ።",
         "directionsNoRegister": "መለያ ካለዎት ይግቡ።",
-        "goButton": "ሂድ",
+        "goButton": "➔",
         "passphrase": "የማለፊያ ሐረግዎን ያስገቡ፡-",
         "loginButton": "እንጀምር",
         "registerButton": "እንጀምር",
@@ -73,8 +103,9 @@
         "noPassphrase": "ከመግባትዎ በፊት በማግበር መልእክትዎ ውስጥ ያለውን ሊንክ በመጫን ማለፊያ ሀረግ ማዘጋጀት አለብዎት።",
         "notVerified": "ለመግባት ለራስህ የማግበር መልእክት መላክ አለብህ።",
         "emailExists": "ከዚህ በፊት በዚህ ኢሜይል ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማግበር የገቢ መልእክት ሳጥንዎን ያረጋግጡ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
-        "mobileExists": "ከዚህ በፊት በዚህ የሞባይል ቁጥር ለመመዝገብ ሞክረዋል? ከሆነ መለያህን ለማግበር ኤስኤምኤስህን ተመልከት። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
+        "mobileExists": "ከዚህ በፊት በዚህ የሞባይል ቁጥር ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማግበር ኤስኤምኤስዎን ያረጋግጡ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
         "usingOther": "ወይም ይችላሉ",
+        "connectPlatforms": "ወይም የሚከተሉትን በመጠቀም ይገናኙ:",
         "prompt": "የመጠቀሚያ ስም ምረጥ:",
         "newUser": "ወይም ከዚህ በታች አዲስ መለያ ይፍጠሩ",
         "placeholders": {
@@ -84,10 +115,10 @@
             "username": "ፊደሎችን እና ቁጥሮችን ብቻ ይጠቀሙ"
         },
         "confirmTerms": "የአገልግሎት ውሉን ይቀበሉ?",
-        "facebookNoEmail": "የፌስቡክ መለያህ የተረጋገጠ ኢሜል ይጎድላል። በቀላሉ በአገርኛ መንገድ ይግቡ።",
-        "picTooltip": "ይህን ምስል በኋላ መቀየር ይችላሉ",
-        "wallet": {
-            "payload": "ወደ {999}} በጊዜው ይግቡ {{timestamp}}",
+        "facebookNoEmail": "የፌስቡክ መለያህ የተረጋገጠ የኢሜይል አድራሻ ይጎድለዋል። በቀላሉ በአገርኛ መንገድ ይግቡ።",
+        "picTooltip": "ይህን ምስል በኋላ መቀየር ትችላለህ",
+        "web3": {
+            "payload": "በጊዜ {{timestamp}} ወደ {{host}} ይግቡ",
             "alert": {
                 "title": "ወደ Wallet በማዞር ላይ",
                 "content": "ይህን ንግግር አንዴ ከዘጉ፣ ወደ ቦርሳዎ ይወሰዳሉ። ከገቡ በኋላ ወደዚህ ገጽ ይመለሱ።"
@@ -105,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{999} መለያ",
-        "areUsing": "እንደ {{platform}} እየተጠቀምክ ነው።",
-        "noLongerUsing": "ከአሁን በኋላ ከ{999}} ጋር አልተገናኘህም።",
+        "title": "{{Platform}} መለያ",
+        "areUsing": "{{platform}} እየተጠቀሙ ነው።",
+        "noLongerUsing": "ከ {{platform}} ጋር አልተገናኘህም።",
         "doAuth": "በዚህ መለያ ይግቡ",
         "doSwitch": "ወደዚህ መለያ ቀይር"
     },
@@ -118,15 +149,23 @@
         "Guest": "እንግዳ",
         "Host": "አስተናጋጅ"
     },
-    "analytics": {
-        "Title": "ትንታኔ",
-        "Daily": "በየቀኑ",
-        "Weekly": "በየሳምንቱ",
-        "Monthly": "ወርሃዊ",
-        "Application": "መተግበሪያ",
-        "Pages": "ገፆች",
-        "Services": "አገልግሎቶች",
-        "Faq": "በየጥ",
-        "WeekDays": "የሳምንት ቀናት"
+    "web3": {
+        "WrongMethod": "የተሳሳተ የውል ዘዴ {{methodName}}",
+        "ChangeWallet": "Wallet ቀይር"
+    },
+    "labels": {
+        "addToPhonebook": "ወደ ስልኬ እውቂያዎች አክል",
+        "addLabel": "አዲስ ግንኙነት",
+        "prompt": "ስም ስጠው"
+    },
+    "people": {
+        "People": "ሰዎች"
+    },
+    "external": {
+        "defaults": {
+            "title": "",
+            "bio": "መድረክ ተሳትፎ bot. https:\/\/engageusers.ai ላይ የራስዎን ያግኙ",
+            "website": "https:\/\/engageusers.ai"
+        }
     }
 }

@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Alguém"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Móvel",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiado! Agora você pode colá-lo em qualquer lugar."
+    },
     "analytics": {
         "Title": "Análise",
         "Daily": "Diário",
@@ -8,20 +21,20 @@
         "Pages": "Páginas",
         "Services": "Serviços",
         "Faq": "Perguntas frequentes",
-        "WeekDays": "Dias úteis"
+        "WeekDays": "Dias da semana"
     },
     "actions": {
         "LogIn": "Conecte-se",
         "LogOut": "sair"
     },
     "activate": {
-        "SetAsPrimary": "Definir {{1}} como meu {{2}} principal",
-        "ChoosePassPhrase": "Escolha uma <strong>frase secreta<\/strong> para fazer login.<br> Uma frase simples composta por algumas palavras que você lembrará facilmente.",
-        "ChoosePassPhraseSeeSuggestions": "Escolha uma boa <strong>senha<\/strong> para proteger sua conta. Veja as sugestões para algumas ideias.",
+        "OneTimeCode": "Digite o código que você recebeu:",
+        "SetAsPrimary": "Defina {{1}} como meu {{2}} primário",
+        "ChoosePassPhrase": "Escolha uma <strong>frase secreta<\/strong> para fazer login.<br> Uma frase simples que consiste em algumas palavras que você lembrará facilmente.",
+        "ChoosePassPhraseSeeSuggestions": "Escolha uma boa <strong>frase secreta<\/strong> para proteger sua conta. Veja as sugestões para algumas ideias.",
         "LogOutAndTryAgain": "Saia e tente novamente",
         "IfYouFeel": "Se você sentir que algo deu errado, você pode",
         "SetIdentifierButtonTitle": "recomeçar",
-        "OneTimeCode": "Digite o código que você recebeu:",
         "ActivateMyAccount": "Ativar minha conta"
     },
     "session": {
@@ -35,18 +48,18 @@
         "mustAgree": "Primeiro você deve concordar com os termos."
     },
     "register": {
-        "TermsLabel": "Eu aceito o {{link}}",
+        "TermsLabel": "eu aceito o {{link}}",
         "TermsTitle": "Termos"
     },
     "notifications": {
         "title": "Permissão",
-        "prompt": "Deseja ativar as notificações? Você receberá atualizações em tempo real sobre coisas importantes para você.",
-        "yes": "sim",
+        "prompt": "Deseja ativar as notificações? Você receberá atualizações em tempo real sobre as coisas que lhe interessam.",
+        "yes": "Sim",
         "no": "Não",
-        "WelcomePleaseVerifyEmail": "Bem vinda! Por favor verifique seu endereço de email.",
-        "WelcomeVerifyEmail": "Bem vinda! Verifique seu endereço de e-mail.",
+        "WelcomePleaseVerifyEmail": "Bem-vindo! Por favor verifique seu endereço de email.",
+        "WelcomeVerifyEmail": "Bem-vindo! Verifique seu endereço de e-mail.",
         "ForgetPass": "Ei, você esqueceu sua senha?",
-        "PassphraseSaved": "Sua senha foi salva.",
+        "PassphraseSaved": "Sua frase secreta foi salva.",
         "IdentifierActivated": "Seu {{type}} foi ativado.",
         "CompletedActivation": "Você concluiu a ativação do usuário.",
         "CompletedActivationLogIn": "Você concluiu a ativação do usuário. Tente fazer login agora."
@@ -60,22 +73,26 @@
             "EmptyContacts": "Contatos não encontrados..."
         },
         "select": {
-            "title": "Selecione o contato de {{displayName}}"
+            "title": "Selecione o contato do {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Por favor, selecione o rótulo.",
+        "selectLabel": "Selecione o rótulo.",
         "inviteUser": "Convidar usuários",
-        "selectRole": "Selecionar função",
-        "inviteRole": "Convide {{role}}"
+        "selectRole": "Selecione a Função",
+        "inviteRole": "Convidar {{role}}"
     },
     "invalidLanguageSelected": "Idioma inválido selecionado",
+    "platforms": {
+        "wallet": "Carteira",
+        "broadcast": "Transmissão"
+    },
     "login": {
-        "title": "Bem vinda",
-        "directions": "Crie uma conta ou faça login.",
+        "title": "Bem-vindo",
+        "directions": "Crie uma conta, ou faça login.",
         "directionsNoRegister": "Faça login se você tiver uma conta.",
-        "goButton": "⮕",
-        "passphrase": "Digite sua senha:",
+        "goButton": "➔",
+        "passphrase": "Digite sua frase secreta:",
         "loginButton": "Iniciar",
         "registerButton": "Iniciar",
         "resendButton": "Enviar mensagem de ativação",
@@ -85,35 +102,28 @@
         "resendClose": "Fechar",
         "noPassphrase": "Antes de fazer login, você deve definir uma frase secreta clicando no link em sua mensagem de ativação.",
         "notVerified": "Você deve enviar a si mesmo uma mensagem de ativação para fazer login.",
-        "emailExists": "Você já tentou se registrar com este e-mail antes? Nesse caso, verifique sua caixa de entrada para ativar sua conta. <a href='#resend' class='Q_button Users_activation_resend'>Clique para reenviar a mensagem<\/a>",
+        "emailExists": "Você tentou se registrar com este e-mail antes? Nesse caso, verifique sua caixa de entrada para ativar sua conta. <a href='#resend' class='Q_button Users_activation_resend'>Clique para reenviar a mensagem<\/a>",
         "mobileExists": "Você tentou se registrar com este número de celular antes? Nesse caso, verifique seu SMS para ativar sua conta. <a href='#resend' class='Q_button Users_activation_resend'>Clique para reenviar a mensagem<\/a>",
         "usingOther": "ou você pode",
+        "connectPlatforms": "ou conecte usando:",
         "prompt": "Escolha um nome de usuário:",
         "newUser": "ou crie uma nova conta abaixo",
         "placeholders": {
-            "identifier": "seu celular # ou e-mail",
+            "identifier": "seu número de celular ou e-mail",
             "mobile": "digite o número do seu celular",
             "email": "Insira o seu endereço de email",
             "username": "use apenas letras e números"
         },
         "confirmTerms": "Aceitar os Termos de Serviço?",
-        "facebookNoEmail": "Falta um endereço de e-mail confirmado na sua conta do Facebook. Basta fazer login da maneira nativa.",
+        "facebookNoEmail": "Sua conta do Facebook está sem um endereço de e-mail confirmado. Basta fazer login da maneira nativa.",
         "picTooltip": "Você pode alterar esta imagem mais tarde",
-        "wallet": {
-            "payload": "Faça login em {{host}} no horário {{timestamp}}",
-            "alert": {
-                "title": "Redirecionando para a carteira",
-                "content": "Depois de fechar esta caixa de diálogo, você será levado para sua carteira. Depois de fazer login, retorne a esta página."
-            }
-        },
         "web3": {
-            "payload": "Faça login em {{host}} no horário {{timestamp}}",
+            "payload": "Entre no {{host}} na hora {{timestamp}}",
             "alert": {
-                "title": "Redirecionando para a carteira",
-                "content": "Depois de fechar esta caixa de diálogo, você será levado para sua carteira. Depois de fazer login, retorne a esta página."
+                "title": "Redirecionando para Wallet",
+                "content": "Depois de fechar esta caixa de diálogo, você será levado à sua carteira. Depois de entrar, retorne a esta página."
             }
-        },
-        "connectPlatforms": "ou conecte usando:"
+        }
     },
     "setIdentifier": {
         "title": "Adicionar uma maneira de fazer login",
@@ -122,43 +132,26 @@
             "identifier": "digite seu número de celular ou e-mail",
             "mobile": "digite seu número de celular",
             "email": "Insira o seu endereço de email",
-            "username": "nome do usuário"
+            "username": "nome de usuário"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Conta",
+        "title": "Conta {{Platform}}",
         "areUsing": "Você está usando {{platform}} como",
-        "noLongerUsing": "Você não está mais conectado a {{platform}} como",
-        "doAuth": "Faça login com esta conta",
-        "doSwitch": "Mudar para esta conta"
+        "noLongerUsing": "Você não está mais conectado ao {{platform}} como",
+        "doAuth": "Entrar com esta conta",
+        "doSwitch": "Alternar para esta conta"
     },
     "roles": {
         "Owner": "Proprietário",
         "Admin": "Administrador",
         "Member": "Membro",
-        "Guest": "Hóspede",
-        "Host": "Hospedeiro"
-    },
-    "avatar": {
-        "Someone": "Alguém"
+        "Guest": "Convidado",
+        "Host": "Hospedar"
     },
     "web3": {
-        "WrongMethod": "Método de contrato incorreto {{methodName}}",
+        "WrongMethod": "Método de contrato errado {{methodName}}",
         "ChangeWallet": "Trocar Carteira"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mail",
-            "mobile": "Móvel",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Copiado! Agora você pode colá-lo em qualquer lugar."
-    },
-    "platforms": {
-        "wallet": "Carteira",
-        "broadcast": "Transmissão"
     },
     "labels": {
         "addToPhonebook": "Adicionar aos contatos do meu telefone",

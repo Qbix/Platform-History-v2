@@ -1,16 +1,40 @@
 {
+    "avatar": {
+        "Someone": "Někdo"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mailem",
+            "mobile": "mobilní, pohybliví",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Zkopírováno! Nyní jej můžete vložit kamkoli."
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Denně",
+        "Weekly": "Týdně",
+        "Monthly": "Měsíční",
+        "Application": "aplikace",
+        "Pages": "Stránky",
+        "Services": "Služby",
+        "Faq": "Faq",
+        "WeekDays": "Týdenní dny"
+    },
     "actions": {
         "LogIn": "přihlásit se",
         "LogOut": "odhlásit se"
     },
     "activate": {
-        "SetAsPrimary": "Nastavit {{1}} jako primární {{2}}",
-        "ChoosePassPhrase": "Vyberte <strong>heslo<\/strong> , pomocí kterého se chcete přihlásit.<br> Jednoduchá fráze složená z pár slov, které si snadno zapamatujete.",
+        "OneTimeCode": "Zadejte kód, který jste obdrželi:",
+        "SetAsPrimary": "Nastavit {{1}} jako mých primárních {{2}}",
+        "ChoosePassPhrase": "Vyberte <strong>heslo,<\/strong> pomocí kterého se chcete přihlásit.<br> Jednoduchá fráze složená z pár slov, které si snadno zapamatujete.",
         "ChoosePassPhraseSeeSuggestions": "Vyberte si dobrou <strong>přístupovou frázi<\/strong> k ochraně svého účtu. Podívejte se na návrhy některých nápadů.",
         "LogOutAndTryAgain": "Odhlaste se a zkuste to znovu",
         "IfYouFeel": "Pokud máte pocit, že se něco pokazilo, můžete",
         "SetIdentifierButtonTitle": "začít znovu",
-        "OneTimeCode": "Zadejte kód, který jste obdrželi:",
         "ActivateMyAccount": "Aktivujte Můj účet"
     },
     "session": {
@@ -19,7 +43,7 @@
     "authorize": {
         "GetStarted": "Začít",
         "Authorize": "Povolit",
-        "TermsLabel": "Přečetl jsem a souhlasím<br> do {{link}}",
+        "TermsLabel": "Přečetl jsem a souhlasím<br> na {{link}}",
         "TermsTitle": "Podmínky",
         "mustAgree": "Nejprve musíte souhlasit s podmínkami."
     },
@@ -29,16 +53,28 @@
     },
     "notifications": {
         "title": "Povolení",
-        "prompt": "Chcete povolit upozornění? Budete dostávat aktualizace v reálném čase o věcech, které vás zajímají.",
+        "prompt": "Chcete povolit upozornění? Budete dostávat aktuální informace o věcech, které vás zajímají.",
         "yes": "Ano",
         "no": "Ne",
-        "WelcomePleaseVerifyEmail": "Vítejte! Prosím ověřte svou e-mailovou adresu.",
+        "WelcomePleaseVerifyEmail": "Vítejte! Ověřte prosím svou e-mailovou adresu.",
         "WelcomeVerifyEmail": "Vítejte! Ověřte svou e-mailovou adresu.",
         "ForgetPass": "Hej, zapomněl jsi heslo?",
         "PassphraseSaved": "Vaše heslo bylo uloženo.",
-        "IdentifierActivated": "Váš {{type}} byl aktivován.",
+        "IdentifierActivated": "Vaše {{type}} byla aktivována.",
         "CompletedActivation": "Dokončili jste aktivaci uživatele.",
         "CompletedActivationLogIn": "Dokončili jste aktivaci uživatele. Zkuste se nyní přihlásit."
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Vyberte kontakt",
+            "CreateAccount": "+ Nový kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen",
+            "SearchByName": "Hledat podle jména",
+            "EmptyContacts": "Kontakty nenalezeny..."
+        },
+        "select": {
+            "title": "Vyberte kontakt {{displayName}}"
+        }
     },
     "usersContacts": {
         "selectLabel": "Vyberte štítek.",
@@ -47,23 +83,15 @@
         "inviteRole": "Pozvat {{role}}"
     },
     "invalidLanguageSelected": "Vybrán neplatný jazyk",
-    "contacts": {
-        "dialog": {
-            "title": "Vyberte kontakt",
-            "SearchByName": "Hledejte podle jména",
-            "CreateAccount": "+ Nový kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen",
-            "EmptyContacts": "Kontakty nenalezeny..."
-        },
-        "select": {
-            "title": "Vyberte kontakt {{displayName}}"
-        }
+    "platforms": {
+        "wallet": "Peněženka",
+        "broadcast": "Přenos"
     },
     "login": {
         "title": "Vítejte",
         "directions": "Vytvořte si účet nebo se přihlaste.",
         "directionsNoRegister": "Přihlaste se, pokud máte účet.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Zadejte heslo:",
         "loginButton": "Začít",
         "registerButton": "Začít",
@@ -77,6 +105,7 @@
         "emailExists": "Zkoušeli jste se registrovat pomocí tohoto e-mailu dříve? Pokud ano, zkontrolujte svou doručenou poštu a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím zprávu znovu odešlete<\/a>",
         "mobileExists": "Zkoušeli jste se dříve registrovat pomocí tohoto mobilního čísla? Pokud ano, zkontrolujte svou SMS a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím zprávu znovu odešlete<\/a>",
         "usingOther": "nebo můžete",
+        "connectPlatforms": "nebo se připojte pomocí:",
         "prompt": "Vyberte si uživatelské jméno:",
         "newUser": "nebo si níže vytvořte nový účet",
         "placeholders": {
@@ -88,21 +117,13 @@
         "confirmTerms": "Přijmout podmínky služby?",
         "facebookNoEmail": "Ve vašem facebookovém účtu chybí potvrzená e-mailová adresa. Jednoduše se přihlaste nativním způsobem.",
         "picTooltip": "Tento obrázek můžete později změnit",
-        "wallet": {
-            "payload": "Přihlaste se do {{host}} v čase {{timestamp}}",
-            "alert": {
-                "title": "Přesměrování do Peněženky",
-                "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
-            }
-        },
         "web3": {
             "payload": "Přihlaste se do {{host}} v čase {{timestamp}}",
             "alert": {
                 "title": "Přesměrování do Peněženky",
                 "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
             }
-        },
-        "connectPlatforms": "nebo se připojte pomocí:"
+        }
     },
     "setIdentifier": {
         "title": "Přidejte způsob přihlášení",
@@ -115,9 +136,9 @@
         }
     },
     "prompt": {
-        "title": "{{Platform}} Účet",
+        "title": "Účet {{Platform}}",
         "areUsing": "Používáte {{platform}} jako",
-        "noLongerUsing": "Již nejste připojeni k {{platform}} jako",
+        "noLongerUsing": "Již nejste připojeni k {{platform}} as",
         "doAuth": "Přihlaste se pomocí tohoto účtu",
         "doSwitch": "Přepnout na tento účet"
     },
@@ -128,37 +149,9 @@
         "Guest": "Host",
         "Host": "Hostitel"
     },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Denně",
-        "Weekly": "Týdně",
-        "Monthly": "Měsíční",
-        "Application": "aplikace",
-        "Pages": "stránky",
-        "Services": "Služby",
-        "Faq": "Faq",
-        "WeekDays": "Týdenní dny"
-    },
-    "avatar": {
-        "Someone": "Někdo"
-    },
     "web3": {
         "WrongMethod": "Nesprávná metoda smlouvy {{methodName}}",
         "ChangeWallet": "Změnit peněženku"
-    },
-    "identifier": {
-        "types": {
-            "email": "E-mailem",
-            "mobile": "mobilní, pohybliví",
-            "web3": "Web3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Zkopírováno! Nyní jej můžete vložit kamkoli."
-    },
-    "platforms": {
-        "wallet": "Peněženka",
-        "broadcast": "Přenos"
     },
     "labels": {
         "addToPhonebook": "Přidat do kontaktů v mém telefonu",

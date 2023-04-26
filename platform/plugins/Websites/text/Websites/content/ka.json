@@ -29,13 +29,13 @@
             "edit": "რედაქტირება",
             "link": "Ბმული",
             "setUrl": "URL-ის დაყენება",
-            "save": "Შენახვა",
+            "save": "Გადარჩენა",
             "setClip": "ამოჭრა კლიპი",
             "invalidURL": "არასწორი ლინკი"
         },
         "FileTooLarge": "ფაილი ძალიან დიდია ქეშირებისთვის. ფაილის მაქსიმალური ზომა {{size}}",
         "InvalidPDF": "ფაილი არ არის სწორი PDF",
-        "StartTypingTitleOrKeywords": "დაიწყე სათაურის ან საკვანძო სიტყვების აკრეფა..."
+        "StartTypingTitleOrKeywords": "დაიწყეთ სათაურის ან საკვანძო სიტყვების აკრეფა..."
     },
     "types": {
         "Websites\/article": {
@@ -43,7 +43,7 @@
             "displayType": "სტატია"
         },
         "Websites\/slide": {
-            "description": "პრეზენტაციის სლაიდი, შეიძლება შეიცავდეს HTML, აუდიო და ა.შ.",
+            "description": "სლაიდი პრეზენტაციაში, შეიძლება შეიცავდეს HTML, აუდიო და ა.შ.",
             "displayType": "სლაიდი"
         },
         "Websites\/presentation": {
@@ -59,7 +59,7 @@
             "displayType": "რეკლამის განთავსება"
         },
         "Websites\/advert\/creative": {
-            "description": "რეკლამის შინაარსი",
+            "description": "შინაარსი რეკლამისთვის",
             "displayType": "კრეატიული რეკლამა"
         },
         "Websites\/advert\/campaign": {
@@ -67,7 +67,7 @@
             "displayType": "სარეკლამო კამპანია"
         },
         "Websites\/webpage": {
-            "description": "წარმოადგენს ვებსაიტს, რომლის მეტამონაცემები დაიშალა",
+            "description": "წარმოადგენს ვებსაიტს, რომლის მეტამონაცემები გაფუჭდა",
             "displayType": "ვებ გვერდი"
         }
     }

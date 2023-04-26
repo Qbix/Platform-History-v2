@@ -54,6 +54,10 @@
             "Join": "{{displayName}} joined the chat",
             "Leave": "{{displayName}} left the chat",
             "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+        },
+        "placeholders": {
+            "Public": "Add a comment",
+            "Private": "Write a private message"
         }
     },
     "notifications": {

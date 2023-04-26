@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} déanach, {{2}} lang)",
+    "LatLng": "( {{1}} lat, {{2}} lch)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "laistigh de {{1}}"
     },
     "units": {
@@ -18,10 +18,10 @@
         "inches": "orlach"
     },
     "location": {
-        "interested": "Tá suim agam i rudaí atá ar siúl laistigh de {{select}} de",
+        "interested": "Tá suim agam i rudaí ar siúl taobh istigh de {{select}} de",
         "update": "Nuashonraigh Mo Shuíomh",
         "set": "Socraigh Mo Shuíomh",
-        "prompt": "{{ClickOrTap}} anseo chun<br> leag do<br> suíomh",
+        "prompt": "{{ClickOrTap}} anseo chun<br> socraigh do<br> suíomh",
         "myCurrentLocation": "Mo shuíomh reatha",
         "enterAddress": "Cuir isteach seoladh",
         "enterPostcode": "Cuir isteach do chód poist \/ zipchód le do thoil",

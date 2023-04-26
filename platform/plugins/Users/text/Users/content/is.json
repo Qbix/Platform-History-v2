@@ -1,4 +1,17 @@
 {
+    "avatar": {
+        "Someone": "Einhver"
+    },
+    "identifier": {
+        "types": {
+            "email": "Tölvupóstur",
+            "mobile": "Farsími",
+            "web3": "Vef3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Afritað! Nú geturðu límt það hvar sem er."
+    },
     "analytics": {
         "Title": "Greining",
         "Daily": "Daglega",
@@ -15,13 +28,13 @@
         "LogOut": "að skrá þig út"
     },
     "activate": {
-        "SetAsPrimary": "Stilla {{1}} sem aðal {{2}}",
+        "OneTimeCode": "Sláðu inn kóðann sem þú fékkst:",
+        "SetAsPrimary": "Stilltu {{1}} sem aðal {{2}}",
         "ChoosePassPhrase": "Veldu <strong>lykilorð<\/strong> til að skrá þig inn með.<br> Einföld setning sem samanstendur af nokkrum orðum sem þú munt auðveldlega muna.",
-        "ChoosePassPhraseSeeSuggestions": "Veldu góða <strong>aðgangsorð<\/strong> til að vernda reikninginn þinn. Sjáðu tillögurnar um nokkrar hugmyndir.",
+        "ChoosePassPhraseSeeSuggestions": "Veldu góða <strong>lykilorð<\/strong> til að vernda reikninginn þinn. Sjá tillögur um nokkrar hugmyndir.",
         "LogOutAndTryAgain": "Skráðu þig út og reyndu aftur",
         "IfYouFeel": "Ef þér finnst eitthvað hafa farið úrskeiðis geturðu það",
         "SetIdentifierButtonTitle": "byrja aftur",
-        "OneTimeCode": "Sláðu inn kóðann sem þú fékkst:",
         "ActivateMyAccount": "Virkjaðu reikninginn minn"
     },
     "session": {
@@ -30,7 +43,7 @@
     "authorize": {
         "GetStarted": "Byrja",
         "Authorize": "Heimild",
-        "TermsLabel": "Ég hef lesið og er sammála<br> til {{link}}",
+        "TermsLabel": "Ég hef lesið og er sammála<br> í {{link}}",
         "TermsTitle": "Skilmálar",
         "mustAgree": "Fyrst verður þú að samþykkja skilmálana."
     },
@@ -47,8 +60,8 @@
         "WelcomeVerifyEmail": "Velkominn! Staðfestu netfangið þitt.",
         "ForgetPass": "Hæ, gleymdirðu lykilorðinu þínu?",
         "PassphraseSaved": "Aðgangsorðið þitt hefur verið vistað.",
-        "IdentifierActivated": "{{type}} þinn hefur verið virkjaður.",
-        "CompletedActivation": "Þú hefur lokið við notendavirkjun.",
+        "IdentifierActivated": "{{type}} hefur verið virkjað.",
+        "CompletedActivation": "Þú hefur lokið virkjun notanda.",
         "CompletedActivationLogIn": "Þú hefur lokið virkjun notanda. Prófaðu að skrá þig inn núna."
     },
     "contacts": {
@@ -70,11 +83,15 @@
         "inviteRole": "Bjóða {{role}}"
     },
     "invalidLanguageSelected": "Ógilt tungumál valið",
+    "platforms": {
+        "wallet": "Veski",
+        "broadcast": "Útsending"
+    },
     "login": {
         "title": "Velkominn",
         "directions": "Búðu til reikning eða skráðu þig inn.",
         "directionsNoRegister": "Skráðu þig inn ef þú ert með reikning.",
-        "goButton": "⮕",
+        "goButton": "➔",
         "passphrase": "Sláðu inn lykilorðið þitt:",
         "loginButton": "Byrja",
         "registerButton": "Byrja",
@@ -88,6 +105,7 @@
         "emailExists": "Hefur þú reynt að skrá þig með þessum tölvupósti áður? Ef svo er skaltu athuga pósthólfið þitt til að virkja reikninginn þinn. <a href='#resend' class='Q_button Users_activation_resend'>Smelltu til að endursenda skilaboðin<\/a>",
         "mobileExists": "Hefur þú reynt að skrá þig með þessu farsímanúmeri áður? Ef svo er skaltu athuga SMS til að virkja reikninginn þinn. <a href='#resend' class='Q_button Users_activation_resend'>Smelltu til að endursenda skilaboðin<\/a>",
         "usingOther": "eða þú getur",
+        "connectPlatforms": "eða tengdu með:",
         "prompt": "Veldu notendanafn:",
         "newUser": "eða stofnaðu nýjan reikning hér að neðan",
         "placeholders": {
@@ -99,21 +117,13 @@
         "confirmTerms": "Samþykkja þjónustuskilmálana?",
         "facebookNoEmail": "Á Facebook reikningnum þínum vantar staðfest netfang. Skráðu þig einfaldlega á innfæddan hátt.",
         "picTooltip": "Þú getur breytt þessari mynd síðar",
-        "wallet": {
-            "payload": "Skráðu þig inn á {{host}} klukkan {{timestamp}}",
-            "alert": {
-                "title": "Beinir áfram í veski",
-                "content": "Þegar þú lokar þessum glugga verðurðu færður í veskið þitt. Eftir að þú hefur skráð þig inn skaltu fara aftur á þessa síðu."
-            }
-        },
         "web3": {
-            "payload": "Skráðu þig inn á {{host}} klukkan {{timestamp}}",
+            "payload": "Skráðu þig inn á {{host}} á tíma {{timestamp}}",
             "alert": {
                 "title": "Beinir áfram í veski",
                 "content": "Þegar þú lokar þessum glugga verðurðu færður í veskið þitt. Eftir að þú hefur skráð þig inn skaltu fara aftur á þessa síðu."
             }
-        },
-        "connectPlatforms": "eða tengdu með:"
+        }
     },
     "setIdentifier": {
         "title": "Bættu við leið til að skrá þig inn",
@@ -127,8 +137,8 @@
     },
     "prompt": {
         "title": "{{Platform}} Reikningur",
-        "areUsing": "Þú ert að nota {{platform}} sem",
-        "noLongerUsing": "Þú ert ekki lengur tengdur við {{platform}} sem",
+        "areUsing": "Þú ert að nota {{platform}} as",
+        "noLongerUsing": "Þú ert ekki lengur tengdur við {{platform}} as",
         "doAuth": "Skráðu þig inn með þessum reikningi",
         "doSwitch": "Skiptu yfir á þennan reikning"
     },
@@ -139,26 +149,9 @@
         "Guest": "Gestur",
         "Host": "Gestgjafi"
     },
-    "avatar": {
-        "Someone": "Einhver"
-    },
     "web3": {
         "WrongMethod": "Röng samningsaðferð {{methodName}}",
-        "ChangeWallet": "Skiptu um veski"
-    },
-    "identifier": {
-        "types": {
-            "email": "Tölvupóstur",
-            "mobile": "Farsími",
-            "web3": "Vef3"
-        }
-    },
-    "clipboard": {
-        "Copied": "Afritað! Nú geturðu límt það hvar sem er."
-    },
-    "platforms": {
-        "wallet": "Veski",
-        "broadcast": "Útsending"
+        "ChangeWallet": "Breyta veski"
     },
     "labels": {
         "addToPhonebook": "Bæta við tengiliði í símanum mínum",

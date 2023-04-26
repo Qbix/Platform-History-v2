@@ -1,14 +1,14 @@
 {
-    "LatLng": "{{1}} 위도, {{2}} 경도)",
+    "LatLng": "( {{1}} 위도, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} {{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "{{1}} 이내"
     },
     "units": {
         "meter": "미터",
         "meters": "미터",
         "kilometer": "킬로미터",
-        "kilometers": "킬로미터",
+        "kilometers": "키오미터",
         "km": "km",
         "mile": "마일",
         "miles": "마일",
@@ -18,13 +18,13 @@
         "inches": "신장"
     },
     "location": {
-        "interested": "{{select}} 이내에 일어나는 일에 관심이 있습니다.",
+        "interested": "나는 {{select}} 년 안에 일어나는 일들에 관심이 있다.",
         "update": "내 위치 업데이트",
         "set": "내 위치 설정",
-        "prompt": "{{ClickOrTap}} 여기로<br> 당신의<br> 위치",
+        "prompt": "{{ClickOrTap}} 여기<br> 설정<br> 위치",
         "myCurrentLocation": "내 현재 위치",
         "enterAddress": "주소를 입력하세요",
-        "enterPostcode": "우편번호\/우편번호를 입력하세요.",
+        "enterPostcode": "우편번호를 입력하세요.",
         "create": {
             "action": "위치 추가",
             "title": "새로운 위치",
@@ -32,12 +32,12 @@
         },
         "confirm": {
             "title": "이 위치를 저장하시겠습니까?",
-            "message": "앞으로 이 위치를 다시 이용할 의향이 있습니까?",
-            "ok": "네",
-            "cancel": "아니"
+            "message": "향후 이 위치를 다시 사용할 계획이 있습니까?",
+            "ok": "예",
+            "cancel": "아니요"
         },
         "add": {
-            "title": "이 위치의 이름을 지정",
+            "title": "이 위치 이름 지정",
             "placeholder": "집, 직장 등",
             "ok": "구하다"
         },
@@ -46,13 +46,13 @@
         }
     },
     "areas": {
-        "filterPlaceholder": "이 위치 안에 어떤 지역이 있습니까?",
+        "filterPlaceholder": "이 위치 안에 지역이 있습니까?",
         "newArea": "새로운 지역",
-        "promptTitle": "지역 이름 입력:",
+        "promptTitle": "영역 이름 입력:",
         "absent": "지역을 설정해주세요",
         "error": "오류",
-        "exist": "영역이 이미 존재합니다.",
-        "addNewArea": "새 지역 추가",
+        "exist": "이미 존재하는 지역",
+        "addNewArea": "새 영역 추가",
         "add": "추가하다"
     },
     "types": {
@@ -61,12 +61,12 @@
             "displayType": "위치"
         },
         "Places\/location": {
-            "description": "건물, 행사장, 선박, 공원 등을 나타냅니다.",
+            "description": "건물, 장소, 선박, 공원 등을 나타냅니다.",
             "displayType": "위치"
         },
         "Places\/area": {
-            "description": "방 또는 스위트룸과 같은 위치 내의 영역을 나타냅니다.",
-            "displayType": "지역"
+            "description": "방이나 스위트와 같은 위치 내의 영역을 나타냅니다.",
+            "displayType": "영역"
         },
         "Places\/floor": {
             "description": "건물이나 선박의 바닥을 나타냅니다.",
@@ -77,11 +77,11 @@
             "displayType": "열"
         },
         "Places\/nearby": {
-            "description": "지오해시에서 일정 거리 이내에 있는 사물에 대한 카테고리",
+            "description": "geohash의 일정 거리 내에 있는 항목에 대한 범주",
             "displayType": "주변 장소"
         },
         "Places\/interest": {
-            "description": "지오해시에서 일정 거리 이내의 사물에 대한 카테고리, 관심 매칭",
+            "description": "geohash의 특정 거리 내에 있는 사물에 대한 카테고리, 관심사 일치",
             "displayType": "관심 장소"
         }
     }

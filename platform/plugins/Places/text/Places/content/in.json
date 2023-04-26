@@ -1,7 +1,7 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "( {{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
+        "PostcodeLabel": "{{1}} ( {{2}} )",
         "Title": "dalam {{1}}"
     },
     "units": {
@@ -19,11 +19,12 @@
     },
     "location": {
         "interested": "Saya tertarik pada hal-hal yang terjadi dalam {{select}} dari",
-        "update": "Perbarui lokasi saya",
-        "prompt": "{{ClickOrTap}} di sini untuk <br> atur <br> lokasi",
+        "update": "Perbarui Lokasiku",
+        "set": "Tetapkan Lokasiku",
+        "prompt": "{{ClickOrTap}} di sini untuk<br> mengatur Anda<br> lokasi",
         "myCurrentLocation": "Lokasi saya saat ini",
         "enterAddress": "Masukkan alamat",
-        "enterPostcode": "Silakan masukkan kode pos \/ kode pos Anda",
+        "enterPostcode": "Silakan masukkan kode pos\/kode pos Anda",
         "create": {
             "action": "Menambahkan lokasi",
             "title": "Lokasi baru",
@@ -31,27 +32,26 @@
         },
         "confirm": {
             "title": "Simpan lokasi ini?",
-            "message": "Apakah Anda berencana untuk menggunakan lokasi ini lagi di masa mendatang?",
-            "ok": "iya nih",
-            "cancel": "Tidak"
+            "message": "Apakah Anda berencana menggunakan lokasi ini lagi di masa mendatang?",
+            "ok": "Ya",
+            "cancel": "TIDAK"
         },
         "add": {
             "title": "Beri nama lokasi ini",
-            "placeholder": "Rumah, kantor dll",
+            "placeholder": "Rumah, Pekerjaan dll.",
             "ok": "Menyimpan"
         },
         "dialog": {
             "title": "Pilih Lokasi"
-        },
-        "set": "Tetapkan Lokasi Saya"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Adakah area di dalam lokasi ini?",
-        "newArea": "Area baru",
+        "filterPlaceholder": "Ada area di dalam lokasi ini?",
+        "newArea": "Daerah baru",
         "promptTitle": "Masukkan nama untuk area:",
-        "absent": "Silakan tentukan area",
+        "absent": "Silakan atur luasnya",
         "error": "Kesalahan",
-        "exist": "Area sudah ada",
+        "exist": "Daerah sudah ada",
         "addNewArea": "Tambahkan area baru",
         "add": "Menambahkan"
     },
@@ -65,7 +65,7 @@
             "displayType": "Lokasi"
         },
         "Places\/area": {
-            "description": "Merupakan area di dalam lokasi, seperti kamar atau suite",
+            "description": "Mewakili area di dalam lokasi, seperti kamar atau suite",
             "displayType": "Daerah"
         },
         "Places\/floor": {
