@@ -1456,7 +1456,7 @@
         
                                 //if participant is offline, remove those track from canvas
                                 if(participants[v].online == false) {
-                                    log('updateWebRTCCanvasLayout participants[v].online == false: REMOVE TRACK')
+                                    log('updateWebRTCCanvasLayout participants[v].online == false: REMOVE TRACK', participants[v])
         
                                     tracksToRemove = tracksToRemove.concat(renderedTracks);
                                     continue;
@@ -3181,7 +3181,7 @@
     
                                     //log('compositeVideosAndDraw', tool.webrtcSignalingLib.state)
                                     if(tool.webrtcSignalingLib.state == 'disconnected') {
-                                        window.clearWorkerInterval(canvasRenderInterval);
+                                        window.clearWorkerInterval(_canvasRenderInterval);
                                         _canvasRenderInterval = null;
                                     }
                                 }, 16);
@@ -4268,7 +4268,7 @@
                         }
         
                         function addSource(newSource) {
-                            log('addSource audio', newSource, getOptions().liveStreaming)
+                            log('addSource audio', newSource, newSource.participant, getOptions().liveStreaming)
                             
                             if (audioContext == null) {
                                 audioComposer.mix();
@@ -4281,6 +4281,13 @@
                                 for (let i =  _activeScene.webrtcAudioSources.length - 1; i >= 0; i--) {
                                     let source =  _activeScene.webrtcAudioSources[i];
                                     if (source.participant == participant) {
+                                        log('addSource audio: for', source.mediaStreamTrack.readyState, source.mediaStreamTrack.muted, source.mediaStreamTrack.enabled, source.mediaStream.active)
+                                        log('addSource audio: for2', source.track.mediaStreamTrack.readyState, source.track.mediaStreamTrack.muted, source.track.mediaStreamTrack.enabled, source.track.stream.active)
+                                        setTimeout(function () {
+
+                                            log('addSource audio: for', source.mediaStreamTrack.readyState, source.mediaStreamTrack.muted, source.mediaStreamTrack.enabled, source.mediaStream.active)
+                                            log('addSource audio: for2', source.track.mediaStreamTrack.readyState, source.track.mediaStreamTrack.muted, source.track.mediaStreamTrack.enabled, source.track.stream.active)
+                                        }, 5000)
                                         if(source.mediaStreamTrack.readyState == 'live') {
                                             return source;
                                         } else {
@@ -4509,18 +4516,19 @@
                             };
                         }
         
-                        function mix() {
+                        function mix(recreate) {
                             log('audioComposer: mix');
-                            if (audioContext == null) {
+                            if (audioContext == null || recreate) {
                                 log('audioComposer: create AudioContext');
                                 audioContext = new AudioContext();
                             }
-                            if (_dest == null) {
+                            if (_dest == null || recreate) {
                                 log('audioComposer: createMediaStreamDestination');
                                 _dest = audioContext.createMediaStreamDestination();
                             }
 
-                            _stopSilenceLoop = audioSilenceLoop(1000 / 60);
+                            //if(_stopSilenceLoop) _stopSilenceLoop();
+                            //_stopSilenceLoop = audioSilenceLoop(1000 / 60);
 
                             /*if(_canvasMediStream) {
                                 log('audioComposer: addTrack');
@@ -4528,6 +4536,7 @@
                                 _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
                             }*/
         
+                            if(recreate) return;
                             function declareOrRefreshEventHandlers() {
                                 var webrtcSignalingLib = tool.webrtcSignalingLib;
 
@@ -4654,11 +4663,15 @@
                         log('captureStream', _canvasMediStream);
         
                         if(!videoComposer.isActive()) {
+                            log('captureStream : compositeVideosAndDraw');
+
                             videoComposer.compositeVideosAndDraw();
                         }
         
                         _canvasMediStream = _canvas.captureStream(30); // 30 FPS
-        
+                        window.getCanvasStream = function () {
+                            return _canvasMediStream;
+                        }
                         /*var vTrack = _canvasMediStream.getVideoTracks()[0];
         
                         vTrack.addEventListener('mute', function(e){
@@ -4670,11 +4683,21 @@
                             log('captureStream: TRACK UNMUTED');
                         });*/
                         audioComposer.mix();
-                        let destinationNode = audioComposer.getDestination();
+                        function addAudioTrack() {                            
+                            let destinationNode = audioComposer.getDestination();
+                            log('destinationNode', destinationNode, destinationNode.stream.getTracks())
+                            if (destinationNode && destinationNode.stream.getTracks().length != 0) {
+                                log('captureStream addAudioTrack', destinationNode.stream);
+                                _canvasMediStream.addTrack(destinationNode.stream.getTracks()[0]);
+                            }
+                        }
+                        addAudioTrack();
+                        window.addAudioTrack = addAudioTrack;
+                        /*let destinationNode = audioComposer.getDestination();
                         if(destinationNode && destinationNode.stream.getTracks().length != 0) {
                             log('captureStream addAudioTrack');
                             _canvasMediStream.addTrack(destinationNode.stream.getTracks()[0]);
-                        }
+                        }*/
 
         
                         _composerIsActive = true;
@@ -4683,8 +4706,10 @@
                     }
         
                     function createRecorder(ondataavailable) {
-        
+                        log('createRecorder START');
+
                         if(_canvasMediStream == null) {
+                            log('createRecorder captureStream');
                             captureStream();
                         }
         
@@ -4692,7 +4717,7 @@
                         var isChrome = localInfo.browserName && localInfo.browserName.toLowerCase() == 'chrome';
         
                         var codecs = 'video/webm;codecs=vp8';
-                        log('captureStream isChrome',localInfo, isChrome, !_isMobile);
+                        log('createRecorder isChrome',localInfo, isChrome, !_isMobile);
         
                         //alert('mp4 ' + (MediaRecorder.isTypeSupported('video/mp4;codecs="vp8"')));
                         if (MediaRecorder.isTypeSupported('video/mp4')) {
@@ -4702,16 +4727,16 @@
                         } else if (_isMobile && _isAndroid) {
                             codecs = 'video/webm;codecs=vp8';
                         }
-                        log('captureStream codecs', codecs);
+                        log('createRecorder codecs', codecs);
         
 
-                        log('captureStream if1 else', _canvasMediStream);
+                        log('createRecorder if1 else', _canvasMediStream);
 
 
-                        var mediaRecorder = new MediaRecorder(_canvasMediStream, {
+                        let mediaRecorder = new MediaRecorder(_canvasMediStream, {
                             //mimeType: 'video/webm',
                             mimeType: codecs,
-                            /*audioBitsPerSecond : 128000,*/
+                            audioBitsPerSecond : 128000,
                             videoBitsPerSecond: 3 * 1024 * 1024
                         });
 
@@ -4749,17 +4774,17 @@
                     }
         
                     function stopCaptureCanvas(stopCanvasDrawingAndMixing) {
-                        log('stopRecorder')                        
+                        log('stopCaptureCanvas', stopCanvasDrawingAndMixing)                        
                         
                         //if user ends call, stop all processes related to livestreaming
                         if(stopCanvasDrawingAndMixing) {
-                            log('stopRecorder: stopCanvasDrawingAndMixing')
+                            log('stopCaptureCanvas: stopCanvasDrawingAndMixing')
                             videoComposer.stop();
                             audioComposer.stop();
                         }
 
                         if(_canvasMediStream != null) {
-                            log('stopRecorder: stop tracks')
+                            log('stopCaptureCanvas: stop tracks')
                             let tracks = _canvasMediStream.getTracks();
                             for(let t in tracks) {
                                 if(tracks[t].kind == 'audio') {

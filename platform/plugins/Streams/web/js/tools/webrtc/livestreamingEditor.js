@@ -801,7 +801,7 @@
                             fakeInput.style.border = '0';
                             fakeInput.style.position = 'absolute';
                             fakeInput.style.left = '0';
-                            fakeInput.style.top = '0';
+                            fakeInput.style.top = '-99999px';
                             fakeInput.tabindex = '-1';
                             fakeInput.type = 'password';
                             fakeInput.autocomplete = 'off';
@@ -2059,6 +2059,9 @@
 
                     function defineShortcuts() {
                         window.addEventListener('keyup', function (e) {
+                            if (!(e instanceof KeyboardEvent)) {
+                                return;
+                            }
                             if ( this !== e.target && 
                                 ( /textarea|select/i.test( e.target.nodeName ) ||
                                   e.target.type === "text") ) {
@@ -7562,12 +7565,18 @@
                         title: 'Microphone'
                     });
 
-                    let localAudioTracks = tool.webrtcSignalingLib.localParticipant().audioTracks(true);
+                    function addGlobalMic() {
 
-                    if (localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
-                        log('localAudioTracks[0].stream', localAudioTracks[0].stream)
-                        _globalMicSource.addStream(localAudioTracks[0].stream);
+                        let localAudioTracks = tool.webrtcSignalingLib.localParticipant().audioTracks(true);
+
+                        if (localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
+                            log('localAudioTracks[0].stream', localAudioTracks[0].stream)
+                            _globalMicSource.addStream(localAudioTracks[0].stream);
+                        }
                     }
+
+                    addGlobalMic();
+                    window.addGlobalMic = addGlobalMic;
 
 
                     function declareOrRefreshEventHandlers() {
@@ -8112,22 +8121,27 @@
                     );
 
                     window.addEventListener('keyup', function (e) {
+                        if (!(e instanceof KeyboardEvent)) {
+                            return;
+                        }
                         if ( this !== e.target && 
                             ( /textarea|select/i.test( e.target.nodeName ) ||
                               e.target.type === "text") ) {
                             return;
                         }
 
-                        let existingPopupDialogs = document.querySelectorAll('.live-editor-dialog-window');
-                        if(existingPopupDialogs.length != 0) {
-                            let existingPopupDialogsArr = Array.prototype.slice.call(existingPopupDialogs, 0);
-                            existingPopupDialogsArr.sort(function (a, b) {
-                                return parseInt(b.dataset.time) - parseInt(a.dataset.time);
-                            });
-                            if(dialogInstance.dialogEl == existingPopupDialogsArr[0]) {
-                                dialogInstance.hide();
-                            }
-                        }             
+                        if(['Escape'].indexOf(e.key) != -1) {
+                            let existingPopupDialogs = document.querySelectorAll('.live-editor-dialog-window');
+                            if(existingPopupDialogs.length != 0) {
+                                let existingPopupDialogsArr = Array.prototype.slice.call(existingPopupDialogs, 0);
+                                existingPopupDialogsArr.sort(function (a, b) {
+                                    return parseInt(b.dataset.time) - parseInt(a.dataset.time);
+                                });
+                                if(dialogInstance.dialogEl == existingPopupDialogsArr[0]) {
+                                    dialogInstance.hide();
+                                }
+                            }   
+                        }    
                     });
 
                     this.resizeObserver = new ResizeObserver(function (entries) {
