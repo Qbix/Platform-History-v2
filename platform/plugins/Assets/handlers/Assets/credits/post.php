@@ -6,8 +6,8 @@ function Assets_credits_post($params = array())
 
 	$loggedUserId = Users::loggedInUser(true)->id;
 	$user = Users::fetch($loggedUserId);
-	$amount = (float)$req['amount'];
-	$credits = (int)Assets_Credits::amount($loggedUserId);
+	$amount = floatval($req['amount']);
+	$credits = Assets_Credits::amount($loggedUserId);
 	$currency = $req['currency'];
 	$needCredits = Assets_Credits::convert($amount, $currency, "credits");
 	$payments = Q::ifset($req, "payments", "stripe");
