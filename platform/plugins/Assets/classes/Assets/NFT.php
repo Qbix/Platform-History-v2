@@ -397,10 +397,10 @@ class Assets_NFT
 			$normalizedAttributeValue = Q_Utils::normalize($nftAttribute["value"]);
 			$weight = time();
 			if (empty($nftAttribute["display_type"]) || $nftAttribute["display_type"] == "string") {
-				$relationType = implode("/", array("attribute", $normalizedAttributeName, $normalizedAttributeValue));
+				$relationType = implode("/", array("Assets", "NFT", "attribute", $normalizedAttributeName, $normalizedAttributeValue));
 			} else {
-				$relationType = implode("/", array("attribute", $normalizedAttributeName));
-				$weight = $normalizedAttributeValue;
+				$relationType = implode("/", array("Assets", "NFT", "attribute", $normalizedAttributeName));
+				$weight = (int)$normalizedAttributeValue;
 			}
 			$stream->relateTo($category, $relationType, null, array(
 				'skipAccess' => true,
