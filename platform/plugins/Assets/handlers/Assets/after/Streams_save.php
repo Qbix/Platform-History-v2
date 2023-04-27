@@ -158,7 +158,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 	}
 
 	Assets_Credits::grant($credits, "InvitedUserFilledStream", $inviteRow->invitingUserId, array(
-		'invitedUserName' => implode(" ", $displayName),
+		'displayName' => implode(" ", $displayName),
 		'FilledStreamTitle' => $stream->title
 	));
 }
