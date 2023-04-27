@@ -87,7 +87,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 		}, (err, html) => {
 		    
 		    Q.replace(tool.element, html);
-			
+		
 		    $("button[name=produce]", $toolElement).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
 				var $this = $(this);
 
@@ -189,20 +189,20 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 
 						Q.req("Users/transaction", ["result"], function (err, response) {
 
-						var fem = Q.firstErrorMessage(err, response);
-						if (fem) {return console.warn(fem);}
+							var fem = Q.firstErrorMessage(err, response);
+							if (fem) {return console.warn(fem);}
 
 						}, {
-						method: "post",
-						fields: {
-							communityId: state.communityId,
-							chainId: tx.chainId == 0 ? userParams.selectedChainId : tx.chainId,
-							transactionId: tx.hash,
-							fromAddress: tx.from,
-							contract: factoryAddress,
-							methodName: "produce",
-							params: JSON.stringify(produceParams)
-						}
+							method: "post",
+							fields: {
+								communityId: state.communityId,
+								chainId: tx.chainId == 0 ? userParams.selectedChainId : tx.chainId,
+								transactionId: tx.hash,
+								fromAddress: tx.from,
+								contract: factoryAddress,
+								methodName: "produce",
+								params: JSON.stringify(produceParams)
+							}
 						});
 						txData["tx"] = tx;
 
