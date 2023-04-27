@@ -113,11 +113,11 @@ Q.exports(function (options, index, column, data) {
 		});
 
 
+		var $attrsBox = $(".Assets_NFT_section[data-type=attributes]", column);
+		var $attrs = $(".assetsNFTAttributes", column);
 		Q.Streams.Stream.onAttribute(publisherId, streamName, "Assets/NFT/attributes").set(function (attributes, k) {
 			var isEmpty = Q.isEmpty(attributes[k]) ? 1 : 0;
-			var $attrsBox = $(".Assets_NFT_section[data-type=attributes]", column);
 			$attrsBox.attr("data-empty", isEmpty);
-			var $attrs = $(".assetsNFTAttributes", column);
 			$attrs.empty();
 
 			Q.each(attributes[k], function () {
