@@ -1352,13 +1352,13 @@
             <div class="Assets_nft_form_group" data-type="nft_attributes">
                 <label>{{NFT.attributes.Title}}:</label>
                 <div class="Assets_nft_attributes"></div>
-                <button class="Q_button" name="addAttribute">{{NFT.attributes.NewAttribute}}</button>
+                <button class="Q_button" name="addAttribute" type="button">{{NFT.attributes.NewAttribute}}</button>
             </div>
             <div class="Assets_nft_form_group">
                 <label>{{NFT.NftPicture}}:</label>
                 <div class="Assets_nft_container">
                     <img class="NFT_preview_icon">
-                    <button class="Assets_nft_upload_button">{{NFT.UploadFile}}</button>
+                    <button class="Assets_nft_upload_button" type="button">{{NFT.UploadFile}}</button>
                 </div>
             </div>
             <div class="Assets_nft_form_group">
@@ -1368,7 +1368,7 @@
                     <div class="Assets_nft_movie"></div>
                 </div>
             </div>
-            <button class="Q_button" name="save">{{saveButtonText}}</button>
+            <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
         </form>
     </div>`,
         {text: ['Assets/content']});
@@ -1398,7 +1398,7 @@
                     <input type="number" name="royalty" class="Assets_nft_form_control" placeholder="{{NFT.RoyaltyPlaceholder}}">%
                 </div>
             </div>
-            <button class="Q_button" name="save">{{NFT.MintNFT}}</button>
+            <button class="Q_button" name="save" type="button">{{NFT.MintNFT}}</button>
         </div>
     `, {text: ['Assets/content']});
 
@@ -1439,10 +1439,10 @@
                 <li class="Assets_NFT_price">
                     <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
                     <span class="Assets_NFT_comingsoon">Coming Soon</span>
-                    <button name="transfer" class="Q_button">{{NFT.Transfer}}</button>
+                    <button name="transfer" class="Q_button" type="button">{{NFT.Transfer}}</button>
                 </li>
                 <li class="action-block">
-                    <button name="claim" class="Q_button">{{NFT.ClaimNFT}}</button>
+                    <button name="claim" class="Q_button" type="button">{{NFT.ClaimNFT}}</button>
                 </li>
             </ul>
             <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>

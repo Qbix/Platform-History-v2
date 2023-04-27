@@ -2431,7 +2431,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$name = "$module/content";
 		}
 		if ($name) {
-			$text = Q_Text::get($name, $options);
+			$text = Q_Text::get($name, array_merge(array("dontThrow" => true), $options));
 			$displayType = Q::ifset($text, 'relations', $relationType, 'displayType', null);
 			if (!empty($options['plural'])) {
 				$displayType = Q::ifset($text, 'relations', $relationType, 'displayTypePlural', $displayType);
