@@ -7266,9 +7266,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          *      Is required as argument for getting Stream from db
          */
         module.start = function () {
+            log('module.start');
+
             var socketConns = Q.Users.Socket.get();
             if(!socketConns || Object.keys(socketConns).length == 0 || socketConns[Object.keys(socketConns)[0]] == null || !socketConns[Object.keys(socketConns)[0]].socket.id) {
-                Q.Socket.onConnect('Users').add(function() {
+                Q.Socket.onConnect('Users').addOnce(function() {
                     log('initWithNodeServer: no socket connection yet');
                     module.start();
                 })
