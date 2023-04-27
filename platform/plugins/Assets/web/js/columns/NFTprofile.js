@@ -23,6 +23,7 @@ Q.exports(function (options, index, column, data) {
 					}
 				});
 			});
+			return false;
 		});
 	});
 

@@ -373,8 +373,8 @@
             var publisherId = stream.fields.publisherId;
             var streamName = stream.fields.name;
 
-            tool.minted = stream.getAttribute("tokenId");
-            $toolElement.attr("data-minted", !!tool.minted);
+            tool.tokenId = stream.getAttribute("tokenId");
+            $toolElement.attr("data-minted", !!tool.tokenId);
             var templateName = state.templates.view.name;
             var templateFields = Q.extend({
                 show: state.show
