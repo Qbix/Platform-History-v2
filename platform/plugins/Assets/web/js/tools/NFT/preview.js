@@ -1352,7 +1352,7 @@
             <div class="Assets_nft_form_group" data-type="nft_attributes">
                 <label>{{NFT.attributes.Title}}:</label>
                 <div class="Assets_nft_attributes"></div>
-                <button class="Q_button" name="addAttribute">{{NFT.attributes.NewAttribute}}</button>
+                <button class="Q_button" name="addAttribute" type="button">{{NFT.attributes.NewAttribute}}</button>
             </div>
             <div class="Assets_nft_form_group">
                 <label>{{NFT.NftPicture}}:</label>
