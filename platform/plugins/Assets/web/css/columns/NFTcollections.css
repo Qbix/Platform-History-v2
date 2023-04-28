@@ -35,6 +35,7 @@ html .Q_column_0.Q_column_NFTcollections .Q_columns_title {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    margin: 10px 0;
 }
 .Q_column_NFTcollection button[name=enter] {
     margin: 10px auto;

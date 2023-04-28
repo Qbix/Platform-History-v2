@@ -1,8 +1,8 @@
 <?php
 function Assets_NFTcollections_response_column () {
-	$loggedInUser = Users::loggedInUser(true);
+	/*$loggedInUser = Users::loggedInUser(true);
 	$loggedInUserId = Q::ifset($loggedInUser, 'id', null);
-	/*$isAdmin = (bool)Users::roles(null, 'Users/admins');
+	$isAdmin = (bool)Users::roles(null, 'Users/admins');
 	if (!$isAdmin) {
 		throw new Users_Exception_NotAuthorized();
 	}*/
