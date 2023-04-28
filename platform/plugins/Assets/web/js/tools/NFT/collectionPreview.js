@@ -10,15 +10,15 @@
 
     /**
      * YUIDoc description goes here
-     * @class Assets NFT/series
+     * @class Assets NFT/collections
      * @constructor
      * @param {Object} [options] Override various options for this tool
      *  @param {Q.Event} [options.onInvoke] - Event occur when user click on tool element.
-     *  @param {Q.Event} [options.onCreated] - Event occur when series created.
+     *  @param {Q.Event} [options.onCreated] - Event occur when collection created.
      *  @param {Q.Event} [options.onIconChanged] - Event occur when icon changed.
-     *  @param {Q.Event} [options.onClose] Event occur when series stream closed
+     *  @param {Q.Event} [options.onClose] Event occur when collection stream closed
      */
-    Q.Tool.define("Assets/NFT/series/preview", ["Streams/preview"],function(options, preview) {
+    Q.Tool.define("Assets/NFT/collection/preview", ["Streams/preview"],function(options, preview) {
         var tool = this;
         var state = tool.state;
         var $toolElement = $(this.element);
@@ -46,7 +46,7 @@
             }
         });
 
-        Q.addStylesheet("{{Assets}}/css/tools/NFT/seriesPreview.css", pipe.fill('stylesheet'), { slotName: 'Assets' });
+        Q.addStylesheet("{{Assets}}/css/tools/NFT/collectionPreview.css", pipe.fill('stylesheet'), { slotName: 'Assets' });
         Q.Text.get('Assets/content', function(err, text) {
             tool.text = text;
             pipe.fill('text')();
@@ -54,7 +54,7 @@
             ignoreCache: true
         });
 
-        // onClose series
+        // onClose collection
         preview.state.onClose.set(function () {
             Q.handle(state.onClose, preview);
         }, tool);
@@ -62,10 +62,10 @@
 
     { // default options here
         imagepicker: {
-            showSize: "300x.png",
-            save: "NFT/series/icon"
+            showSize: "200.png",
+            save: "Users/icon"
         },
-        editable: true,
+        editable: false,
         onInvoke: new Q.Event(),
         onCreated: new Q.Event(),
         onIconChanged: new Q.Event(),
@@ -84,42 +84,16 @@
             var $toolElement = $(this.element);
             tool.stream = stream;
 
-            var seriesId = tool.stream.getAttribute("seriesId");
-            $toolElement.attr("data-seriesid", seriesId);
-            var isEditable = state.editable && tool.preview.state.editable && tool.stream.testWriteLevel('edit');
-            $toolElement.attr("data-editable", isEditable);
+            var collectionId = tool.stream.getAttribute("collectionId");
+            $toolElement.attr("data-collectionid", collectionId);
 
-            Q.Template.render('Assets/NFT/series/view', {
-                stream: tool.stream
+            Q.Template.render('Assets/NFT/collection/view', {
+                stream: tool.stream,
+                editable: state.editable
             }, (err, html) => {
                 Q.replace(tool.element, html);
                 Q.activate(tool.element);
-                $(".Assets_NFT_series_icon", $toolElement).css("background-image", "url(" + stream.iconUrl("x") + ")");
-
-                if (isEditable) {
-                    setTimeout(function () {
-                        $toolElement.plugin('Q/actions', {
-                            alwaysShow: true,
-                            actions: {
-                                edit: function () {
-                                    tool.update();
-                                },
-                                delete: function () {
-                                    Q.confirm(tool.text.NFT.series.AreYouSure, function(result) {
-                                        if (!result) {
-                                            return;
-                                        }
-
-                                        tool.preview.delete();
-                                    });
-                                }
-                            }
-                        });
-                    }, 100);
-                }
-
-                //var $icon = $("img.NFT_series_icon", tool.element);
-                //tool.preview.icon($icon[0]);
+                tool.preview.icon($("img.Assets_NFT_collection_icon", $toolElement)[0]);
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
@@ -128,7 +102,7 @@
             });
         },
         /**
-         * Create series
+         * Create collection
          * @method composer
          */
         composer: function () {
@@ -137,15 +111,15 @@
             var $toolElement = $(this.element);
             var previewState = tool.preview.state;
 
-            $toolElement.addClass("Assets_NFT_series_new");
+            $toolElement.addClass("Assets_NFT_collection_new");
 
-            Q.Template.render('Assets/NFT/series/newItem', {
+            Q.Template.render('Assets/NFT/collection/newItem', {
                 iconUrl: Q.url("{{Q}}/img/actions/add.png")
             }, function(err, html) {
                 Q.replace(tool.element, html);
-                $toolElement.off("click.nftSeriesComposer").on("click.nftSeriesComposer", function () {
+                $toolElement.off("click.nftCollectionComposer").on("click.nftCollectionComposer", function () {
                     $toolElement.addClass("Q_working");
-                    Q.req("Assets/NFTseries", "newItem", function (err, response) {
+                    Q.req("Assets/NFTcollections", "newItem", function (err, response) {
                         if (err) {
                             return $toolElement.removeClass("Q_working");
                         }
@@ -169,15 +143,12 @@
                             tool.update();
                         });
                     }, {
-                        fields: {
-                            userId: previewState.publisherId
-                        }
                     });
                 });
             });
         },
         /**
-         * Update series
+         * Update collection
          * @method update
          */
         update: function () {
@@ -194,21 +165,22 @@
             }, tool);
 
             Q.Dialogs.push({
-                title: isNew ? tool.text.NFT.series.CreateSeries : tool.text.NFT.series.UpdateSeries,
-                className: "Assets_NFT_series_composer",
+                title: isNew ? tool.text.NFT.collections.CreateCollection : tool.text.NFT.collections.UpdateCollection,
+                className: "Assets_NFT_collection_composer",
                 template: {
-                    name: "Assets/NFT/series/Create",
+                    name: "Assets/NFT/collection/Create",
                     fields: {
-                        name: tool.stream.fields.title,
+                        title: tool.stream.fields.title,
+                        content: tool.stream.fields.content,
                         buttonText: isNew ? tool.text.NFT.Create : tool.text.NFT.Update
                     }
                 },
                 onActivate: function (dialog) {
-                    var $icon = $("img.NFT_series_icon", dialog);
+                    var $icon = $("img.NFT_collection_icon", dialog);
 
                     var overrides = NFT.icon.defaultSize ? {
                         "overrideShowSize": {
-                            '': (state.imagepicker.showSize || NFT.series.icon.defaultSize)
+                            '': (state.imagepicker.showSize || NFT.collections.icon.defaultSize)
                         }
                     } : {};
 
@@ -221,7 +193,7 @@
                         $icon.trigger("click");
                     });
 
-                    $(".series_name_inplace", dialog).tool("Streams/inplace", {
+                    $(".collection_name_inplace", dialog).tool("Streams/inplace", {
                         publisherId: tool.stream.fields.publisherId,
                         streamName: tool.stream.fields.name,
                         field: 'title',
@@ -231,15 +203,15 @@
                     $("button[name=save]", dialog).on(Q.Pointer.fastclick, function (event) {
                         event.preventDefault();
 
-                        var name = $("input[name=name]", dialog).val();
+                        var title = $("input[name=title]", dialog).val();
 
-                        if (!name) {
+                        if (!title) {
                             return Q.alert(tool.text.errors.NameRequired);
                         }
 
                         Q.Dialogs.pop();
 
-                        Q.req("Assets/NFTseries",function (err) {
+                        Q.req("Assets/NFTcollections",function (err) {
                             if (err) {
                                 return;
                             }
@@ -249,19 +221,6 @@
                                 relatedTool.refresh();
                             }
 
-                            /*Streams.get.force(stream.fields.publisherId, stream.fields.name, function () {
-                                Q.Dialogs.pop();
-                                $toolElement.removeClass("Assets_NFT_series_new");
-
-                                tool.refresh(this);
-
-                                $("<div>").insertAfter($toolElement).tool("Streams/preview", {
-                                    publisherId: previewState.publisherId
-                                }).tool("Assets/NFT/series/preview", {
-                                    userId: previewState.publisherId
-                                }).activate();
-                            });*/
-
                             Streams.get.force(tool.stream.fields.publisherId, tool.stream.fields.name, function () {
                                 tool.stream = this;
                                 Q.handle(state.onCreated, tool, [tool.stream]);
@@ -270,7 +229,8 @@
                         }, {
                             method: "post",
                             fields: {
-                                title: name,
+                                title: title,
+                                content: $("textarea[name=content]", dialog).val(),
                                 publisherId: tool.stream.fields.publisherId,
                                 streamName: tool.stream.fields.name
                             }
@@ -283,30 +243,30 @@
         }
     });
 
-    Q.Template.set('Assets/NFT/series/newItem',
+    Q.Template.set('Assets/NFT/collection/newItem',
         `<img src="{{iconUrl}}" alt="new" class="Streams_preview_add">
-        <h3 class="Streams_preview_title">{{NFT.series.NewItem}}</h3>`, {text: ['Assets/content']}
+        <h3 class="Streams_preview_title">{{NFT.collections.NewItem}}</h3>`, {text: ['Assets/content']}
     );
 
-    Q.Template.set('Assets/NFT/series/Create',
-`<div class="Assets_nft_form_group Assets_nft_series_name">
-            <label>{{NFT.Name}}:</label>
-            <input type="text" name="name" value="{{name}}">
-        </div>
-        <div class="Assets_nft_form_group Assets_nft_series_icon">
-            <label>{{NFT.series.CoverImage}}:</label>
+    Q.Template.set('Assets/NFT/collection/Create',
+`<input type="text" name="title" value="{{title}}" placeholder="{{NFT.collections.EnterTitle}}">
+        <textarea type="text" name="content" placeholder="{{NFT.collections.EnterDescription}}">{{content}}</textarea>
+        <div class="Assets_nft_form_group Assets_nft_collection_icon">
+            <label>{{NFT.collections.UploadIcon}}:</label>
             <div class="Assets_nft_form_details">
-                <img class="NFT_series_icon">
-                <button name="upload_icon">{{NFT.series.UploadCoverImage}}</button>
+                <img class="NFT_collection_icon">
+                <button name="upload_icon">{{NFT.collections.UploadIcon}}</button>
             </div>
         </div>
         <button class="Q_button" name="save">{{buttonText}}</button>`,
         {text: ['Assets/content']});
 
-    Q.Template.set('Assets/NFT/series/view',
-`<div class="Assets_NFT_series_icon"></div>
-        <div class="Assets_NFT_series_info">
-            {{&tool "Streams/inplace" "title" field="title" inplaceType="text" editable=false publisherId=stream.fields.publisherId streamName=stream.fields.name}}
+    Q.Template.set('Assets/NFT/collection/view',
+`{{&tool "Users/avatar" userId=stream.fields.publisherId icon=40}}
+        <img class="Assets_NFT_collection_icon" />
+        <div class="Assets_NFT_collection_info">
+            {{&tool "Streams/inplace" "title" field="title" inplaceType="text" editable=editable publisherId=stream.fields.publisherId streamName=stream.fields.name}}
+            {{&tool "Streams/inplace" "content" field="content" inplaceType="textarea" editable=editable publisherId=stream.fields.publisherId streamName=stream.fields.name}}
         </div>`,
         {text: ['Assets/content']}
     );

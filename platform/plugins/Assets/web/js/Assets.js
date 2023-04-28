@@ -1527,6 +1527,7 @@
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
 		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
+		"Assets/NFT/collection/preview": "{{Assets}}/js/tools/NFT/collectionPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": {
 			js: "{{Assets}}/js/tools/NFT/owned.js",
@@ -1744,6 +1745,7 @@
 			billing: "{{Assets}}/js/columns/billing.js",
 			subscription: "{{Assets}}/js/columns/subscription.js",
 			services: "{{Assets}}/js/columns/services.js",
+			NFTcollections: "{{Assets}}/js/columns/NFTcollections.js"
 		}
 	};
 	if (Q.info.isMobile) {

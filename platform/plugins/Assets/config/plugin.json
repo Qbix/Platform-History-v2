@@ -370,7 +370,7 @@
 					"icon": "Streams/file"
 				}
 			},
-			"Assets/contest": {
+			"Assets/NFT/collection": {
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -379,7 +379,7 @@
 					"icon": "Streams/category"
 				}
 			},
-			"Assets/contest/round": {
+			"Assets/collection/round": {
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -392,11 +392,10 @@
 		"possibleUserStreams": {
 			"Assets/user/NFTs": true,
 			"Assets/NFT/contracts": true,
-			"Assets/NFT/series": true,
-			"Assets/contests": true
+			"Assets/NFT/series": true
 		},
 		"onInsert": {
-			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/contests"],
+			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/NFT/collections"],
 			"person": ["Assets/NFT/series"]
 		}
 	},

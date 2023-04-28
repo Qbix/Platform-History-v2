@@ -1,0 +1,193 @@
+.Q_mobile .Q_columns_column .Assets_NFT_collection_preview_tool.Streams_preview_tool,
+.Q_notMobile .Q_columns_stretchFirstColumn .Q_columns_column .Assets_NFT_collection_preview_tool.Streams_preview_tool {
+    width: 260px;
+    position: relative;
+    outline: solid 1px #535353;
+    border-radius: 10px;
+    padding: 5px;
+    height: 330px;
+    cursor: pointer;
+}
+.Assets_NFT_collection_preview_tool.Assets_NFT_collection_new {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.Assets_NFT_collection_preview_tool.Assets_NFT_collection_new .Streams_preview_add {
+    width: 40px;
+    height: 40px;
+}
+.Assets_NFT_collection_preview_tool.Assets_NFT_collection_new > * {
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    margin: 0;
+    line-height: 40px;
+}
+
+.Assets_NFT_collection_preview_tool > img[src*="loading.gif"] {
+    display: block;
+    margin: 100px auto;
+}
+.Assets_NFT_collection_preview_tool .Assets_NFT_collection_info {
+    border-top: 1px solid;
+}
+
+/***create nft form css***/
+.Assets_NFT_collection_composer {
+    width: 350px;
+}
+.Assets_NFT_collection_composer .Q_dialog_content {
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    font-size: 20px;
+}
+
+.Assets_NFT_collection_composer label {
+    text-align: left;
+    display: block;
+    color: #000;
+}
+.Assets_NFT_collection_composer .Assets_nft_form_control {
+    background: transparent;
+    color: rgba(4, 4, 5, 0.8);
+    font-weight: 500;
+    font-family: inherit;
+    overflow: hidden;
+    outline: none;
+    width: 100%;
+    border-width: 0 0 2px;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-left-color: initial;
+    border-image: initial;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom-color: rgba(4, 4, 5, 0.07);
+    border-style: solid !important;
+}
+
+.Assets_NFT_collection_composer .active {
+    border: 2px solid rgb(0, 102, 255) !important;
+}
+
+.Assets_NFT_collection_composer .Assets_nft_clickable span {
+    color: #000;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.Assets_NFT_collection_composer input[type="datetime-local"i] {
+    background: transparent;
+    padding: 0;
+    color: rgba(4, 4, 5, 0.8);
+    font-weight: 500;
+    font-family: inherit;
+    overflow: hidden;
+    outline: none;
+    width: 90%;
+    border-width: 0 0 2px;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-left-color: initial;
+    border-image: initial;
+    border-bottom-color: rgba(4, 4, 5, 0.07);
+    border-style: solid;
+}
+.Assets_NFT_collection_composer button[name=save] {
+    white-space: nowrap;
+    color: #fff;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* new css */
+.Assets_NFT_collection_composer .Q_dialog_content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.Assets_NFT_collection_composer .collection_name_inplace,
+.Assets_NFT_collection_composer .Assets_nft_form_details {
+    border: 2px dashed rgba(4, 4, 5, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+}
+.Assets_NFT_collection_composer .collection_name_inplace {
+    padding: 0 10px;
+}
+.Assets_NFT_collection_composer .Assets_nft_collection_icon .Assets_nft_form_details {
+    text-align: center;
+    border: 2px dashed rgba(4, 4, 5, 0.1);
+    min-height: 115px;
+    position: relative;
+    border-radius: 16px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.Assets_NFT_collection_composer .Assets_nft_collection_icon .Assets_nft_form_details .NFT_collection_icon {
+    display: block;
+}
+.Assets_NFT_collection_composer .Assets_nft_collection_icon .Assets_nft_form_details button {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    color: rgb(0, 102, 255);
+    background: rgba(0, 102, 255, 0.15);
+    width: 160px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Assets_NFT_collection_composer .Streams_inplace_tool {
+    white-space: nowrap;
+}
+.Assets_NFT_collection_composer .Streams_inplace_tool label {
+    display: inline-block;
+    vertical-align: middle;
+}
+.Assets_NFT_collection_composer input[name=title],
+.Assets_NFT_collection_composer textarea[name=content] {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.Assets_NFT_collection_composer textarea[name=content] {
+    height: 50px;
+}
+.Assets_NFT_collection_composer .NFT_collection_icon {
+    margin: auto;
+}
+.Assets_NFT_collection_composer input,
+.Assets_NFT_collection_composer button,
+.Assets_NFT_collection_composer select {
+    height: 40px;
+}
+
+.Assets_NFT_collection_preview_tool .Streams_inplace_tool:first-of-type {
+    font-weight: bold;
+    font-size: 20px;
+}
+.Assets_NFT_collection_preview_tool .Streams_inplace_tool:last-of-type {
+    font-size: 14px;
+    max-height: 44px;
+}
+.Assets_NFT_collection_preview_tool .Users_avatar_tool {
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid;
+}
+/***create nft form css ends here***/
