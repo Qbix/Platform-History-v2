@@ -34,6 +34,7 @@
     -ms-transform: translate3d(0,-50%,0);
     transform: translate3d(0,-50%,0);
     display: inline-block;
+    background-color: #fff;
 }
 .Assets_NFTprofile_column #Users_avatar-profile-avatar_tool .Users_avatar_name {
     display: none;
