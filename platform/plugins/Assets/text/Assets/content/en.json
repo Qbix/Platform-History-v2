@@ -383,6 +383,10 @@
             "Title": "Contests",
             "NewContest": "New Contest"
         },
+        "collections": {
+            "Title": "Collection",
+            "NewCollection": "New Collection"
+        },
         "import": {
             "importNFT": "Importing NFT's",
             "importAttributes": "Import NFT attributes",

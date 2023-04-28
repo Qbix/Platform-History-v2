@@ -29,7 +29,7 @@
 			"Assets/billing": { "module": "Assets", "action": "billing" },
 			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
 			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
-			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
+			"Assets/NFTcollections": {"module": "Assets", "action": "NFTcollections"},
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"assetsIcons": { "module": "Assets", "action": "icons" },

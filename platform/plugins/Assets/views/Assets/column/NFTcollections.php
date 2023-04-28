@@ -1,4 +1,4 @@
-<div class="Assets_NFTcontests_column">
+<div class="Assets_NFTcollections_column">
     <?=Q::tool("Streams/related", array(
         "publisherId" => $communityId,
         "streamName" => "Assets/contests",
@@ -9,7 +9,7 @@
 		"sortable" => false,
         "creatable" => array(
 			"Assets/contest" => array(
-				"title" => $NFT["contests"]["NewContest"]
+				"title" => $NFT["collections"]["NewCollection"]
 			)
 		)
 	))?>
