@@ -167,6 +167,7 @@
     float: left;
     width: 100%;
     margin-bottom: 20px;
+    position: relative;
 }
 .Assets_NFT_preview_composer .Assets_NFT_attribute {
     white-space: nowrap;
@@ -794,6 +795,16 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 
 .Assets_NFT_preview_tool .Assets_NFT_claim_timeout {
     font-size: 13px;
+}
+
+
+
+button.Assets_nft_generate_description {
+    display: none;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    zoom: 0.8;
 }
 
 @media (max-width:1200px) {

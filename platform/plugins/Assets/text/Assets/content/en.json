@@ -320,6 +320,7 @@
         "DescribeYourNFT": "Please describe your NFT",
         "NFTImage": "Image for NFT",
         "NFTVideo": "Video for NFT, if any",
+        "GenerateDescription": "or auto-generate",
         "UploadMovie": "Upload movie",
         "MovieSource": "Movie Source",
         "MovieURL": "Movie URL",

@@ -12,8 +12,8 @@ function Streams_description_response_data()
     
     $communityId = Users::communityId();
     $normalizedSubject = Q_Utils::normalize($subject);
-    $streamName = "Streams/description/$normalizedSubject";
-    $stream = Streams_Stream::fetch($communityId, $communityId, $streamName);
+    $name = "Streams/description/$normalizedSubject";
+    $stream = Streams_Stream::fetch($communityId, $communityId, $name);
     if ($stream) {
         return $stream->content;
     }
@@ -30,9 +30,6 @@ function Streams_description_response_data()
         $content = $choice['message']['content'];
     }
     $title = "Description of $subject";
-    Streams::create($communityId, $communityId, $streamName, array(
-        'fields' => compact('title', 'content')
-    ));
-    $stream->save();
+    Streams::create($communityId, $communityId, 'Streams/text', compact('name', 'title', 'content'));
     return $content;
 }

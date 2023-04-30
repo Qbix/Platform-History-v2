@@ -505,7 +505,7 @@
                     title: tool.text.NFT.CreateNFT,
                     className: "Assets_NFT_preview_composer",
                     template: {
-                        name: "Assets/NFT/nftCreate",
+                        name: "Assets/NFT/create",
                         fields: {
                             chains: chains,
                             mode: state.mode,
@@ -824,7 +824,7 @@
                 });
             };
 
-            Q.Template.render('Assets/NFT/composer', {}, function(err, html) {
+            Q.Template.render('Assets/NFT/composer/interface', {}, function(err, html) {
                 Q.replace(tool.element, html);
 
                 // get or create composer stream
@@ -1163,7 +1163,7 @@
         {text: ['Assets/content']}
     );
 
-    Q.Template.set('Assets/NFT/nftCreate',
+    Q.Template.set('Assets/NFT/composer/interface',
         `<div class="Assets_nft" data-mode="{{mode}}">
         <form>
             <div class="Assets_nft_form_group">
