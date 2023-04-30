@@ -266,7 +266,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				// by default set src equal to first element of the response
 				key = Q.firstKey(res.slots.data, {nonEmpty: true});
 			}
-			var c = Q.handle([state.onSuccess, state.onFinish], $this, 
+			var c = Q.handle(
+				[callback, state.onSuccess, state.onFinish],
+				$this,
 				[res.slots.data, key, state.file || null]
 			);
 			if (c !== false && key) {
@@ -408,8 +410,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					destLeft, destTop, dw, dh
 				);
 				var imageData = ['image/png', 'image/gif', 'image/jpeg', 'image/webp']
-					.indexOf(options.saveImageType) >= 0
-					? canvas.toDataURL(options.saveImageType)
+					.indexOf(state.saveImageType) >= 0
+					? canvas.toDataURL(state.saveImageType)
 					: canvas.toDataURL();
 				$(canvas).remove();
 				$img.remove();

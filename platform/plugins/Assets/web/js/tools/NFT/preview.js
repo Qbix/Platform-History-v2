@@ -793,9 +793,11 @@
                 onActivate: function (dialog) {
                     var $icon = $("img.NFT_preview_icon", dialog);
                     var $imageContainer = $icon.closest(".Assets_nft_container");
+                    var o = Q.extend({},previewState, {editable: true});
 
                     // create new Streams/preview tool to set icon behavior to $icon element
-                    $("<div>").tool("Streams/preview", Q.extend(previewState, {editable: true})).activate(function () {
+                    $("<div>").tool("Streams/preview", "Streams_preview", o)
+                    .activate(function () {
                         this.icon($icon[0], function (element) {
                             var src = element.src;
 

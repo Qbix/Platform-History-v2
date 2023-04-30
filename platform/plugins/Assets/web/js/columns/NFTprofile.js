@@ -26,13 +26,11 @@ Q.exports(function (options, index, column, data) {
 		});
 	});
 
-	if (Q.Assets.NFTprofile.userId === Q.Users.loggedInUserId()) {
-		Q.Users.Interface.coverPhoto(
-			$("button[name=coverPhoto]")[0],
-			$(".banner-block")[0]
-		);
-		$("button[name=coverPhoto]").show();
-	}
+	Q.Users.Interface.coverPhoto(
+		$("button[name=coverPhoto]")[0],
+		$(".banner-block")[0]
+	);
+	$("button[name=coverPhoto]").show();
 
 	var $bannerBlock = $(".banner-block", $profileColumn);
 	var _setCover = function (stream) {
