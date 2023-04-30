@@ -18,7 +18,7 @@
  *   @param {String} [options.field] Optional, name of a field to change instead of the content of the stream
  *   @param {String} [options.attribute] Optional, name of an attribute to change instead of a field.
  *   @param {Object} [options.inplace] Additional fields to pass to the child Q/inplace tool, if any
- *   @param {boolean} [options.URLtoLink=false] If true, replace all URLs with links.
+ *   @param {boolean} [options.linkify=false] If true, replace all URLs with links.
  *   @param {Function} [options.create] Optional. You can pass a function here, which takes the tool as "this"
  *     and a callback as the first parameter, is supposed to create a stream and
  *     call the callback with (err, stream). If omitted, then the tool doesn't render.
@@ -57,10 +57,10 @@ Q.Tool.define("Streams/inplace", function (options) {
 
 		/**
 		 * Replace UTLs with links
-		 * @method _urlToLink
+		 * @method _linkify
 		 * @param {String} html html string need to parse
 		 */
-		function _urlToLink (html) {
+		function _linkify (html) {
 			var aURLs = html.matchTypes("url");
 			if (!Q.isEmpty(aURLs)) {
 				var oURLs = {};
@@ -94,8 +94,8 @@ Q.Tool.define("Streams/inplace", function (options) {
 			) || '<span class="Q_placeholder">'+placeholder+'</div>';
 
 			// replace URLs with links
-			if (state.URLtoLink) {
-				html = _urlToLink(html);
+			if (state.linkify) {
+				html = _linkify(html);
 			}
 
 			if (state.inplaceType === 'textarea') {
@@ -203,8 +203,8 @@ Q.Tool.define("Streams/inplace", function (options) {
 			div.setAttribute('class', staticClass);
 			if (div.innerHTML !== ipo.staticHtml) {
 				// replace URLs with links
-				if (state.URLtoLink) {
-					ipo.staticHtml = _urlToLink(ipo.staticHtml);
+				if (state.linkify) {
+					ipo.staticHtml = _linkify(ipo.staticHtml);
 				}
 				div.innerHTML = ipo.staticHtml;
 			}
@@ -254,7 +254,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 	fallback: null,
 	editable: true,
 	create: null,
-	URLtoLink: false,
+	linkify: false,
 	inplace: {},
 	convert: [],
 	onLoad: new Q.Event(),

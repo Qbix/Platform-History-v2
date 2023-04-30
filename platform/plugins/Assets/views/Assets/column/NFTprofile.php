@@ -73,7 +73,7 @@
 				echo Q::tool('Streams/inplace', array(
 					'stream' => $greeting,
 					'inplaceType' => 'textarea',
-					'URLtoLink' => true,
+					'linkify' => true,
 					'inplace' => array(
 						'placeholder' => $profile['aboutPlaceholder'],
 						'editing' => empty($greeting->content),
