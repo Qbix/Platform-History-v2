@@ -436,7 +436,8 @@
             "Title": "الملف الشخصي لـ {{userName}}",
             "Description": "بيانات المستخدم",
             "aboutPlaceholder": "تحرير السيرة الذاتية",
-            "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+            "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "UploadCoverPhoto": "تحميل صورة الغلاف"
         },
         "sales": {
             "factory": {

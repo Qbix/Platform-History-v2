@@ -436,7 +436,8 @@
             "Title": "פרופיל עבור {{userName}}",
             "Description": "פרטי המשתמש",
             "aboutPlaceholder": "ערוך ביוגרפיה",
-            "SureLogOut": "האם אתה בטוח שאתה רוצה להתנתק?"
+            "SureLogOut": "האם אתה בטוח שאתה רוצה להתנתק?",
+            "UploadCoverPhoto": "העלה תמונת שער"
         },
         "sales": {
             "factory": {

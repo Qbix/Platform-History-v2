@@ -436,7 +436,8 @@
             "Title": "{{userName}}さんのプロフィール",
             "Description": "ユーザーの詳細",
             "aboutPlaceholder": "略歴を編集",
-            "SureLogOut": "ログアウトしてもよろしいですか？"
+            "SureLogOut": "ログアウトしてもよろしいですか？",
+            "UploadCoverPhoto": "カバー写真をアップロード"
         },
         "sales": {
             "factory": {

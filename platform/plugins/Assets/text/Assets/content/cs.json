@@ -436,7 +436,8 @@
             "Title": "Profil za {{userName}}",
             "Description": "Podrobnosti o uživateli",
             "aboutPlaceholder": "Upravit Bio",
-            "SureLogOut": "Opravdu se chcete odhlásit?"
+            "SureLogOut": "Opravdu se chcete odhlásit?",
+            "UploadCoverPhoto": "Nahrajte titulní fotografii"
         },
         "sales": {
             "factory": {

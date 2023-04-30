@@ -436,7 +436,8 @@
             "Title": "{{userName}} ის პროფილი",
             "Description": "მომხმარებლის დეტალები",
             "aboutPlaceholder": "ბიო რედაქტირება",
-            "SureLogOut": "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?"
+            "SureLogOut": "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?",
+            "UploadCoverPhoto": "ატვირთეთ ყდის ფოტო"
         },
         "sales": {
             "factory": {

@@ -436,7 +436,8 @@
             "Title": "መገለጫ ለ {{userName}}",
             "Description": "የተጠቃሚ ዝርዝሮች",
             "aboutPlaceholder": "Bio አርትዕ",
-            "SureLogOut": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?"
+            "SureLogOut": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?",
+            "UploadCoverPhoto": "የሽፋን ፎቶ ይስቀሉ"
         },
         "sales": {
             "factory": {

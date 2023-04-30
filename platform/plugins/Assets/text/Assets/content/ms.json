@@ -436,7 +436,8 @@
             "Title": "Profil untuk {{userName}}",
             "Description": "Butiran pengguna",
             "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Adakah anda pasti mahu log keluar?"
+            "SureLogOut": "Adakah anda pasti mahu log keluar?",
+            "UploadCoverPhoto": "Muat Naik Foto Muka Depan"
         },
         "sales": {
             "factory": {

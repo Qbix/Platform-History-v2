@@ -436,7 +436,8 @@
             "Title": "Wasifu wa {{userName}}",
             "Description": "Maelezo ya mtumiaji",
             "aboutPlaceholder": "Hariri Wasifu",
-            "SureLogOut": "Je, una uhakika unataka kutoka?"
+            "SureLogOut": "Je, una uhakika unataka kutoka?",
+            "UploadCoverPhoto": "Pakia Picha ya Jalada"
         },
         "sales": {
             "factory": {

@@ -436,7 +436,8 @@
             "Title": "Profil za {{userName}}",
             "Description": "Podaci o korisniku",
             "aboutPlaceholder": "Uredi biografiju",
-            "SureLogOut": "Jeste li sigurni da se želite odjaviti?"
+            "SureLogOut": "Jeste li sigurni da se želite odjaviti?",
+            "UploadCoverPhoto": "Prenesi naslovnu fotografiju"
         },
         "sales": {
             "factory": {

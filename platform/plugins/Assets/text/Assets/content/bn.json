@@ -436,7 +436,8 @@
             "Title": "{{userName}} এর জন্য প্রোফাইল",
             "Description": "ব্যবহারকারীর বৃত্যান্ত",
             "aboutPlaceholder": "বায়ো সম্পাদনা করুন",
-            "SureLogOut": "আপনি লগ আউট করতে চান?"
+            "SureLogOut": "আপনি লগ আউট করতে চান?",
+            "UploadCoverPhoto": "কভার ফটো আপলোড করুন"
         },
         "sales": {
             "factory": {

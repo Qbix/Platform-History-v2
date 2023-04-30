@@ -436,7 +436,8 @@
             "Title": "{{userName}} کے لیے پروفائل",
             "Description": "صارف کی تفصیلات",
             "aboutPlaceholder": "بائیو میں ترمیم کریں۔",
-            "SureLogOut": "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟"
+            "SureLogOut": "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟",
+            "UploadCoverPhoto": "کور فوٹو اپ لوڈ کریں۔"
         },
         "sales": {
             "factory": {

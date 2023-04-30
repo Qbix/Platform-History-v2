@@ -436,7 +436,8 @@
             "Title": "Prófíll fyrir {{userName}}",
             "Description": "Upplýsingar um notanda",
             "aboutPlaceholder": "Breyta ævisögu",
-            "SureLogOut": "Ertu viss um að þú viljir skrá þig út?"
+            "SureLogOut": "Ertu viss um að þú viljir skrá þig út?",
+            "UploadCoverPhoto": "Hladdu inn forsíðumynd"
         },
         "sales": {
             "factory": {

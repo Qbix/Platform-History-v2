@@ -436,7 +436,8 @@
             "Title": "Profil untuk {{userName}}",
             "Description": "Detail pengguna",
             "aboutPlaceholder": "Sunting Biografi",
-            "SureLogOut": "Apakah Anda yakin ingin keluar?"
+            "SureLogOut": "Apakah Anda yakin ingin keluar?",
+            "UploadCoverPhoto": "Unggah Foto Sampul"
         },
         "sales": {
             "factory": {

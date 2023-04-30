@@ -436,7 +436,8 @@
             "Title": "Profili për {{userName}}",
             "Description": "Detajet e përdoruesit",
             "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Jeni i sigurt që dëshironi të dilni?"
+            "SureLogOut": "Jeni i sigurt që dëshironi të dilni?",
+            "UploadCoverPhoto": "Ngarkoni foton e kopertinës"
         },
         "sales": {
             "factory": {

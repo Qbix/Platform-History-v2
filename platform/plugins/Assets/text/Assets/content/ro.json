@@ -436,7 +436,8 @@
             "Title": "Profil pentru {{userName}}",
             "Description": "Detalii utilizator",
             "aboutPlaceholder": "Editează biografia",
-            "SureLogOut": "Sunteți sigur că doriți să vă deconectați?"
+            "SureLogOut": "Sunteți sigur că doriți să vă deconectați?",
+            "UploadCoverPhoto": "Încărcați o fotografie de copertă"
         },
         "sales": {
             "factory": {

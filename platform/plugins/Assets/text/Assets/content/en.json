@@ -436,6 +436,7 @@
             "Title": "Profile for {{userName}}",
             "Description": "User details",
             "aboutPlaceholder": "Edit Bio",
+            "UploadCoverPhoto": "Upload Cover Photo",
             "SureLogOut": "Are you sure you want to log out?"
         },
         "sales": {

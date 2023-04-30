@@ -436,7 +436,8 @@
             "Title": "Profile para sa {{userName}}",
             "Description": "Mga detalye ng user",
             "aboutPlaceholder": "I-edit ang Bio",
-            "SureLogOut": "Sigurado ka bang gusto mong mag-log out?"
+            "SureLogOut": "Sigurado ka bang gusto mong mag-log out?",
+            "UploadCoverPhoto": "Mag-upload ng Cover Photo"
         },
         "sales": {
             "factory": {

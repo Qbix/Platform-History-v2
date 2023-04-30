@@ -436,7 +436,8 @@
             "Title": "Profilo per {{userName}}",
             "Description": "Dettagli dell&#39;utente",
             "aboutPlaceholder": "Modifica biografia",
-            "SureLogOut": "Sei sicuro di voler uscire?"
+            "SureLogOut": "Sei sicuro di voler uscire?",
+            "UploadCoverPhoto": "Carica la foto di copertina"
         },
         "sales": {
             "factory": {

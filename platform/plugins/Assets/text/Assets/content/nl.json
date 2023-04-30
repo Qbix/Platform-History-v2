@@ -436,7 +436,8 @@
             "Title": "Profiel voor {{userName}}",
             "Description": "Gebruikersdetails",
             "aboutPlaceholder": "Biografie bewerken",
-            "SureLogOut": "Weet je zeker dat je wilt uitloggen?"
+            "SureLogOut": "Weet je zeker dat je wilt uitloggen?",
+            "UploadCoverPhoto": "Omslagfoto uploaden"
         },
         "sales": {
             "factory": {

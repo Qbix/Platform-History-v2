@@ -436,7 +436,8 @@
             "Title": "Profiili hintaan {{userName}}",
             "Description": "Käyttäjätiedot",
             "aboutPlaceholder": "Muokkaa Bioa",
-            "SureLogOut": "Haluatko varmasti kirjautua ulos?"
+            "SureLogOut": "Haluatko varmasti kirjautua ulos?",
+            "UploadCoverPhoto": "Lataa kansikuva"
         },
         "sales": {
             "factory": {

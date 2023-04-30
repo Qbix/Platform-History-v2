@@ -436,7 +436,8 @@
             "Title": "{{userName}} için profil",
             "Description": "Kullanıcı detayları",
             "aboutPlaceholder": "Biyografiyi Düzenle",
-            "SureLogOut": "Oturumu kapatmak istediğinizden emin misiniz?"
+            "SureLogOut": "Oturumu kapatmak istediğinizden emin misiniz?",
+            "UploadCoverPhoto": "Kapak Fotoğrafı Yükle"
         },
         "sales": {
             "factory": {

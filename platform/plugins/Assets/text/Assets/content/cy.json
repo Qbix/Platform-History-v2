@@ -436,7 +436,8 @@
             "Title": "Proffil ar gyfer {{userName}}",
             "Description": "Manylion defnyddiwr",
             "aboutPlaceholder": "Golygu Bio",
-            "SureLogOut": "Ydych chi&#39;n siŵr eich bod am allgofnodi?"
+            "SureLogOut": "Ydych chi&#39;n siŵr eich bod am allgofnodi?",
+            "UploadCoverPhoto": "Uwchlwytho Llun Clawr"
         },
         "sales": {
             "factory": {

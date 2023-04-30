@@ -436,7 +436,8 @@
             "Title": "Profil {{userName}} ért",
             "Description": "Felhasználói adatok",
             "aboutPlaceholder": "Életrajz szerkesztése",
-            "SureLogOut": "Biztos, hogy ki akar jelentkezni?"
+            "SureLogOut": "Biztos, hogy ki akar jelentkezni?",
+            "UploadCoverPhoto": "Borítókép feltöltése"
         },
         "sales": {
             "factory": {

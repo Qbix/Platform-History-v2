@@ -436,7 +436,8 @@
             "Title": "{{userName}} 프로필",
             "Description": "사용자 세부정보",
             "aboutPlaceholder": "바이오 편집",
-            "SureLogOut": "로그아웃하시겠습니까?"
+            "SureLogOut": "로그아웃하시겠습니까?",
+            "UploadCoverPhoto": "표지 사진 업로드"
         },
         "sales": {
             "factory": {

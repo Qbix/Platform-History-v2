@@ -436,7 +436,8 @@
             "Title": "Profil għal {{userName}}",
             "Description": "Dettalji tal-utent",
             "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Int żgur li trid toħroġ?"
+            "SureLogOut": "Int żgur li trid toħroġ?",
+            "UploadCoverPhoto": "Ittella Ritratt tal-Qoxra"
         },
         "sales": {
             "factory": {

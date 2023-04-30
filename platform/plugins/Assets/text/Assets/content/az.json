@@ -436,7 +436,8 @@
             "Title": "{{userName}} üçün profil",
             "Description": "İstifadəçi təfərrüatları",
             "aboutPlaceholder": "Bio-nu redaktə et",
-            "SureLogOut": "Çıxmaq istədiyinizə əminsiniz?"
+            "SureLogOut": "Çıxmaq istədiyinizə əminsiniz?",
+            "UploadCoverPhoto": "Qapaq şəklini yükləyin"
         },
         "sales": {
             "factory": {

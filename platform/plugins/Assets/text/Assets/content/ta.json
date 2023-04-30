@@ -436,7 +436,8 @@
             "Title": "{{userName}} க்கான சுயவிவரம்",
             "Description": "பயனர் விவரங்கள்",
             "aboutPlaceholder": "பயோவை திருத்து",
-            "SureLogOut": "நிச்சயமாக வெளியேற விரும்புகிறீர்களா?"
+            "SureLogOut": "நிச்சயமாக வெளியேற விரும்புகிறீர்களா?",
+            "UploadCoverPhoto": "அட்டைப் படத்தைப் பதிவேற்றவும்"
         },
         "sales": {
             "factory": {

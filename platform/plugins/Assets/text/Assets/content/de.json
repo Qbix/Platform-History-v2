@@ -436,7 +436,8 @@
             "Title": "Profil für {{userName}}",
             "Description": "Nutzerdetails",
             "aboutPlaceholder": "Bio bearbeiten",
-            "SureLogOut": "Möchten Sie sich wirklich abmelden?"
+            "SureLogOut": "Möchten Sie sich wirklich abmelden?",
+            "UploadCoverPhoto": "Titelbild hochladen"
         },
         "sales": {
             "factory": {

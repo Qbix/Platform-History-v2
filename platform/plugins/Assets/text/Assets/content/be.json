@@ -436,7 +436,8 @@
             "Title": "Профіль для {{userName}}",
             "Description": "Падрабязнасці карыстальніка",
             "aboutPlaceholder": "Рэдагаваць біяграфію",
-            "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?"
+            "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?",
+            "UploadCoverPhoto": "Загрузіць вокладку"
         },
         "sales": {
             "factory": {

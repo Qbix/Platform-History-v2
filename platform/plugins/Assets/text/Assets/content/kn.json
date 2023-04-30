@@ -436,7 +436,8 @@
             "Title": "{{userName}} ಗಾಗಿ ಪ್ರೊಫೈಲ್",
             "Description": "ಬಳಕೆದಾರರ ವಿವರಗಳು",
             "aboutPlaceholder": "ಬಯೋ ಸಂಪಾದಿಸಿ",
-            "SureLogOut": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
+            "SureLogOut": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+            "UploadCoverPhoto": "ಕವರ್ ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ"
         },
         "sales": {
             "factory": {

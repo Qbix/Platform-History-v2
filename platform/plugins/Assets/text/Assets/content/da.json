@@ -436,7 +436,8 @@
             "Title": "Profil for {{userName}}",
             "Description": "Brugeroplysninger",
             "aboutPlaceholder": "Rediger bio",
-            "SureLogOut": "Er du sikker på, at du vil logge ud?"
+            "SureLogOut": "Er du sikker på, at du vil logge ud?",
+            "UploadCoverPhoto": "Upload forsidebillede"
         },
         "sales": {
             "factory": {

@@ -436,7 +436,8 @@
             "Title": "Профил за {{userName}}",
             "Description": "Данни за потребителя",
             "aboutPlaceholder": "Редактиране на биография",
-            "SureLogOut": "Сигурни ли сте, че искате да излезете?"
+            "SureLogOut": "Сигурни ли сте, че искате да излезете?",
+            "UploadCoverPhoto": "Качете снимка на корицата"
         },
         "sales": {
             "factory": {

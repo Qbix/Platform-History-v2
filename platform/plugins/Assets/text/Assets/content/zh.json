@@ -436,7 +436,8 @@
             "Title": "简介{{userName}}",
             "Description": "用户详情",
             "aboutPlaceholder": "编辑简介",
-            "SureLogOut": "您确定要退出吗？"
+            "SureLogOut": "您确定要退出吗？",
+            "UploadCoverPhoto": "上传封面照片"
         },
         "sales": {
             "factory": {

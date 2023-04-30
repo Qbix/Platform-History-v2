@@ -436,7 +436,8 @@
             "Title": "Profilis už {{userName}}",
             "Description": "Vartotojo informacija",
             "aboutPlaceholder": "Redaguoti biografiją",
-            "SureLogOut": "Ar tikrai norite atsijungti?"
+            "SureLogOut": "Ar tikrai norite atsijungti?",
+            "UploadCoverPhoto": "Įkelti viršelio nuotrauką"
         },
         "sales": {
             "factory": {

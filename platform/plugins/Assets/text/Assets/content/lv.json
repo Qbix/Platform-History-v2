@@ -436,7 +436,8 @@
             "Title": "Profils par {{userName}}",
             "Description": "Lietotāja informācija",
             "aboutPlaceholder": "Rediģēt biogrāfiju",
-            "SureLogOut": "Vai tiešām vēlaties atteikties?"
+            "SureLogOut": "Vai tiešām vēlaties atteikties?",
+            "UploadCoverPhoto": "Augšupielādējiet vāka fotoattēlu"
         },
         "sales": {
             "factory": {

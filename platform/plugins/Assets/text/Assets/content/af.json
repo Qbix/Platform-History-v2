@@ -436,7 +436,8 @@
             "Title": "Profiel vir {{userName}}",
             "Description": "Gebruiker besonderhede",
             "aboutPlaceholder": "Wysig Bio",
-            "SureLogOut": "Is jy seker jy wil afmeld?"
+            "SureLogOut": "Is jy seker jy wil afmeld?",
+            "UploadCoverPhoto": "Laai voorbladfoto op"
         },
         "sales": {
             "factory": {

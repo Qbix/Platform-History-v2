@@ -436,7 +436,8 @@
             "Title": "نمایه {{userName}}",
             "Description": "جزئیات کاربر",
             "aboutPlaceholder": "ویرایش بیو",
-            "SureLogOut": "آیا برای خارج شدن مطمئن هستید؟"
+            "SureLogOut": "آیا برای خارج شدن مطمئن هستید؟",
+            "UploadCoverPhoto": "آپلود عکس جلد"
         },
         "sales": {
             "factory": {

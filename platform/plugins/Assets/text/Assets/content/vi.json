@@ -436,7 +436,8 @@
             "Title": "Hồ sơ cho {{userName}}",
             "Description": "Chi tiết người dùng",
             "aboutPlaceholder": "Chỉnh sửa tiểu sử",
-            "SureLogOut": "Bạn có chắc chắn bạn muốn thoát?"
+            "SureLogOut": "Bạn có chắc chắn bạn muốn thoát?",
+            "UploadCoverPhoto": "Tải ảnh bìa lên"
         },
         "sales": {
             "factory": {

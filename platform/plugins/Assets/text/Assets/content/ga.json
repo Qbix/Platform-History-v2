@@ -436,7 +436,8 @@
             "Title": "Próifíl do {{userName}}",
             "Description": "Sonraí úsáideora",
             "aboutPlaceholder": "Cuir Bitheolaíocht in Eagar",
-            "SureLogOut": "An bhfuil tú cinnte gur mhaith leat logáil amach?"
+            "SureLogOut": "An bhfuil tú cinnte gur mhaith leat logáil amach?",
+            "UploadCoverPhoto": "Íosluchtaigh grianghraf clúdach"
         },
         "sales": {
             "factory": {

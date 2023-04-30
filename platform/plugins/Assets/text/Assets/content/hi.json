@@ -436,7 +436,8 @@
             "Title": "{{userName}} के लिए प्रोफ़ाइल",
             "Description": "उपयोगकर्ता विवरण",
             "aboutPlaceholder": "जैव संपादित करें",
-            "SureLogOut": "क्या आप लॉग आउट करना चाहते हैं?"
+            "SureLogOut": "क्या आप लॉग आउट करना चाहते हैं?",
+            "UploadCoverPhoto": "कवर फोटो अपलोड करें"
         },
         "sales": {
             "factory": {

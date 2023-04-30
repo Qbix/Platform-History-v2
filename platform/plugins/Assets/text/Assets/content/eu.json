@@ -436,7 +436,8 @@
             "Title": "{{userName}} ren profila",
             "Description": "Erabiltzailearen datuak",
             "aboutPlaceholder": "Editatu biografia",
-            "SureLogOut": "Ziur saioa amaitu nahi duzula?"
+            "SureLogOut": "Ziur saioa amaitu nahi duzula?",
+            "UploadCoverPhoto": "Kargatu azaleko argazkia"
         },
         "sales": {
             "factory": {

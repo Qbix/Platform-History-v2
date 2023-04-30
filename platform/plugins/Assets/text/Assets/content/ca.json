@@ -436,7 +436,8 @@
             "Title": "Perfil de {{userName}}",
             "Description": "Dades de l&#39;usuari",
             "aboutPlaceholder": "Edita la biografia",
-            "SureLogOut": "Esteu segur que voleu tancar la sessió?"
+            "SureLogOut": "Esteu segur que voleu tancar la sessió?",
+            "UploadCoverPhoto": "Carrega la foto de portada"
         },
         "sales": {
             "factory": {

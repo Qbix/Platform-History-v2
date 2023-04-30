@@ -436,7 +436,8 @@
             "Title": "{{userName}} માટે પ્રોફાઇલ",
             "Description": "વપરાશકર્તા વિગતો",
             "aboutPlaceholder": "બાયો સંપાદિત કરો",
-            "SureLogOut": "શું તમે ખરેખર લૉગ આઉટ કરવા માંગો છો?"
+            "SureLogOut": "શું તમે ખરેખર લૉગ આઉટ કરવા માંગો છો?",
+            "UploadCoverPhoto": "કવર ફોટો અપલોડ કરો"
         },
         "sales": {
             "factory": {

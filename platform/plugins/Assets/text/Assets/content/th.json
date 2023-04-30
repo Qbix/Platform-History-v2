@@ -436,7 +436,8 @@
             "Title": "รายละเอียดสำหรับ {{userName}}",
             "Description": "รายละเอียดผู้ใช้",
             "aboutPlaceholder": "แก้ไขประวัติ",
-            "SureLogOut": "คุณแน่ใจว่าคุณต้องการที่จะออกจากระบบ?"
+            "SureLogOut": "คุณแน่ใจว่าคุณต้องการที่จะออกจากระบบ?",
+            "UploadCoverPhoto": "อัปโหลดรูปภาพหน้าปก"
         },
         "sales": {
             "factory": {
