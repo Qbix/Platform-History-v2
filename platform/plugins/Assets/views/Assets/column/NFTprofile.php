@@ -75,7 +75,7 @@
 					'inplaceType' => 'textarea',
 					'linkify' => true,
 					'inplace' => array(
-						'placeholder' => $profile['aboutPlaceholder'],
+						'placeholder' => $NFT['profile']['aboutPlaceholder'],
 						'editing' => empty($greeting->content),
 						'showEditButtons' => true,
 						'selectOnEdit' => false
