@@ -4271,7 +4271,7 @@
 						_subscribeToEvents(ethereum);
 						Web3.provider = ethereum;
 						return Q.handle(callback, null, [null, Web3.provider]);
-					}).catch(function (e) {
+					}).catch(function (ex) {
 						Q.handle(callback, null, [ex]);
 						throw new Error(ex);
 					});
