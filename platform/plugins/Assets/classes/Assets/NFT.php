@@ -147,8 +147,9 @@ class Assets_NFT
 		}
 
 		// main Assets/userNFTs category
-		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
+		$category = self::category($stream->publisherId);
+		Streams::unrelate($userId, $stream->publisherId, $category->name, "new", $stream->publisherId, $stream->name);
+		Streams::relate($userId, $stream->publisherId, $category->name, self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if (filter_var($onMarketPlace, FILTER_VALIDATE_BOOLEAN)) {
