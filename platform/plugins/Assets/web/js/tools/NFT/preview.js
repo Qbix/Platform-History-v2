@@ -799,7 +799,7 @@
                         this.icon($icon[0], function (element) {
                             var src = element.src;
 
-                            if (src.includes("empty_white")) {
+                            if (src.indexOf("/empty_white.png") >= 0) {
                                 $imageContainer.plugin("Q/actions", "remove");
                             } else {
                                 $imageContainer.plugin("Q/actions", {
@@ -1355,14 +1355,14 @@
                 <button class="Q_button" name="addAttribute" type="button">{{NFT.attributes.NewAttribute}}</button>
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftPicture}}:</label>
+                <label>{{NFT.NFTImage}}:</label>
                 <div class="Assets_nft_container">
                     <img class="NFT_preview_icon">
                     <button class="Assets_nft_upload_button" type="button">{{NFT.UploadFile}}</button>
                 </div>
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftMovie}}:</label>
+                <label>{{NFT.NFTVideo}}:</label>
                 <div class="Assets_nft_container">
                     <input name="movieUrl" placeholder="{{NFT.MovieURL}}"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
                     <div class="Assets_nft_movie"></div>

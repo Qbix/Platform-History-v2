@@ -301,12 +301,12 @@
                 // apply Streams/preview icon behavior
                 var movie = data.animation_url;
                 var poster = state.poster;
-                var nftMovie = state.movie;
+                var NFTVideo = state.movie;
                 var nftSrc = state.src;
                 var $videoContainer = $(".video-container", tool.element);
 
-                if (nftMovie) {
-                    $videoContainer.html('<video preload="auto" poster="' + poster + '" controls="" src="' + nftMovie + '"></video>');
+                if (NFTVideo) {
+                    $videoContainer.html('<video preload="auto" poster="' + poster + '" controls="" src="' + NFTVideo + '"></video>');
                     $videoContainer.on(Q.Pointer.fastclick, function (e) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -1180,14 +1180,14 @@
                 <button class="Q_button" name="addAttribute">{{NFT.attributes.NewAttribute}}</button>
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftPicture}}:</label>
+                <label>{{NFT.NFTImage}}:</label>
                 <div class="Assets_nft_picture">
                     <img class="NFT_preview_icon">
                     <button class="Assets_nft_upload_button">{{NFT.UploadFile}}</button>
                 </div>
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftMovie}}:</label>
+                <label>{{NFT.NFTVideo}}:</label>
                 <div class="Assets_nft_picture">
                     <input name="museVideoId" placeholder="muse video id"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
                     <input name="movieURL" placeholder="{{NFT.MovieSource}}">
