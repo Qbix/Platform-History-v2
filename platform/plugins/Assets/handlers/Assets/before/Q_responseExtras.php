@@ -50,5 +50,4 @@ function Assets_before_Q_responseExtras() {
     Q_Response::setScriptData('Q.Assets.Web3.contracts', Q_Config::get("Assets", "NFT", "sales", "factory", array()));
         
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.contracts', Q_Config::get('Assets', 'Web3', 'factories'));
-
 }

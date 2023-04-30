@@ -2488,7 +2488,6 @@ class Streams_Stream extends Base_Streams_Stream
 			$iconFile = $options['iconFile'];
 		} else {
 			$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
-			ksort($sizes);
 			$iconFile = end($sizes);
 		}
 		$maxLength = Q_Config::get('Streams', 'meta', 'description', 'maxLength', 150);

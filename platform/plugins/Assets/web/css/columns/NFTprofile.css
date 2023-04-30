@@ -132,6 +132,15 @@
     margin: 50px auto 50px;
 }
 
+#page .Assets_NFTprofile_column .banner-block button[name=coverPhoto] {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.3);
+}
+
 @media (max-width: 768px) {
     .Assets_NFTprofile_column .profile-name {
         font-size: 23px !important;

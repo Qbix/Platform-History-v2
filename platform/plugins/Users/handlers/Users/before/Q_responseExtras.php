@@ -38,12 +38,21 @@ function Users_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.plugins.Users.communitySuffix', Users::communitySuffix());
 	Q_Response::setScriptData('Q.plugins.Users.currentCommunityId', Users::currentCommunityId(true));
 	if ($sizes = Q_Image::getSizes('Users/icon', $maxStretch)) {
-		ksort($sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.sizes', $sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.maxStretch', $maxStretch);
 	}
 	$defaultSize = Q_Image::getDefaultSize('Users/icon');
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
+	try {
+		if ($sizes = Q_Image::getSizes('Users/cover', $maxStretch)) {
+			Q_Response::setScriptData('Q.plugins.Users.cover.sizes', $sizes);
+			Q_Response::setScriptData('Q.plugins.Users.cover.maxStretch', $maxStretch);
+		}
+		$defaultSize = Q_Image::getDefaultSize('Users/cover');
+		Q_Response::setScriptData('Q.plugins.Users.cover.defaultSize', $defaultSize);
+	} catch (Exception $e) {
+		
+	}
 	Q_Response::addStylesheet("{{Users}}/css/Users.css", 'Users');
 	$platforms = array(Q_Request::platform());
 	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
