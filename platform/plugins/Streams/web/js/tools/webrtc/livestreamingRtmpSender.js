@@ -70,7 +70,7 @@
         
                     var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
-                    function connect(rtmpUrls, platform, livestreamStream, callback) {
+                    function connect(rtmpUrls, platform, livestreamOrRecordingStream, callback) {
                         if(typeof io == 'undefined') return;
                         log('startStreaming connect');
 
@@ -86,7 +86,8 @@
                             query: {
                                 rtmp: rtmpUrls.length != 0 ? JSON.stringify(rtmpUrls) : '',
                                 recording: platform == 'rec' ? true : '',
-                                livestreamStream: livestreamStream ? JSON.stringify({ publisherId: livestreamStream.fields.publisherId, streamName: livestreamStream.fields.name }) : null,
+                                livestreamStream: platform != 'rec' && livestreamOrRecordingStream ? JSON.stringify({ publisherId: livestreamOrRecordingStream.fields.publisherId, streamName: livestreamOrRecordingStream.fields.name }) : null,
+                                recordingStream: platform == 'rec' && livestreamOrRecordingStream ? JSON.stringify({ publisherId: livestreamOrRecordingStream.fields.publisherId, streamName: livestreamOrRecordingStream.fields.name }) : null,
                                 localInfo: JSON.stringify(_localInfo),
                                 platform: platform,
                                 roomId: _webrtcUserInterface.roomStream() ? _webrtcUserInterface.roomStream().fields.name.split('/')[2] : 'undefined',
@@ -169,7 +170,7 @@
                         connect(rtmpUrls, service, livestreamStream, function () {
                             log('startStreaming connected');
     
-                            if(_streamingSocket['rec'].mediaRecorder) {
+                            if(_streamingSocket[service].mediaRecorder) {
                                 log('startStreaming: mediaRecorder exists');
                                 return;
                             }
@@ -229,9 +230,9 @@
     
                     }
         
-                    function startRecordingOnServer() {
+                    function startRecordingOnServer(recordingStream) {
                         log('startRecordingOnServer');
-                        connect([], 'rec', null, function () {
+                        connect([], 'rec', recordingStream, function () {
                             log('startRecordingOnServer connected');
                             if(_streamingSocket['rec'].mediaRecorder) {
                                 log('startRecordingOnServer: mediaRecorder exists');

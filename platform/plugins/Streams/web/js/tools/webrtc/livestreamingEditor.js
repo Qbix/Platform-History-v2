@@ -111,7 +111,6 @@
 
             tool.webrtcUserInterface = options.webrtcUserInterface();
             tool.webrtcSignalingLib = tool.webrtcUserInterface.getWebrtcSignalingLib();
-            tool.roomStream = tool.webrtcUserInterface.roomStream();
 
             _controlsToolIcons = tool.state.controlsTool.getIcons();
 
@@ -835,18 +834,18 @@
                             var addUrlBtn = document.createElement('BUTTON');
                             addUrlBtn.type = 'button';
                             addUrlBtn.className = 'Q_button live-editor-stream-to-section-rtmp-add-rtmp';
-                            addUrlBtn.innerHTML = 'Add RTMP';
+                            addUrlBtn.innerHTML = _streamingIcons.plusIcon;
                             startStreamingBtnCon.appendChild(addUrlBtn);
 
                             var startStreamingBtn = document.createElement('BUTTON');
                             startStreamingBtn.type = 'button';
-                            startStreamingBtn.className = 'Q_button';
+                            startStreamingBtn.className = 'Q_button Q_button live-editor-stream-to-section-rtmp-go-live';
                             startStreamingBtn.innerHTML = 'Go Live';
                             startStreamingBtnCon.appendChild(startStreamingBtn);
 
                             var instructionsCon = document.createElement('DIV');
                             instructionsCon.className = 'live-editor-stream-to-section-rtmp-instructions';
-                            startStreamingBtnCon.appendChild(instructionsCon);
+                            rtmpStreamingSettings.appendChild(instructionsCon);
 
                             Q.activate(
                                 Q.Tool.setUpElement(
@@ -913,7 +912,7 @@
                                 linkToLiveInput.autocomplete = 'off';
                                 linkToLiveCon.appendChild(linkToLiveInput);
 
-                                rtmpStreamingSettings.insertBefore(rtmpLiveItem, rtmpStreamingSettings.lastChild);
+                                rtmpStreamingSettings.insertBefore(rtmpLiveItem, startStreamingBtnCon);
                             })
 
                             startStreamingBtn.addEventListener('click', function (e) {
@@ -1024,12 +1023,27 @@
 
                             startRecordingBtn.addEventListener('click', function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
-                                tool.livestreamingRtmpSenderTool.rtmpSender.startRecordingOnServer();
+                                Q.req("Streams/recording", ["recording"], function (err, response) {
+                                    var msg = Q.firstErrorMessage(err, response && response.errors);
+            
+                                    if (msg) {
+                                        return Q.alert(msg);
+                                    }
+                                   
+                                    tool.livestreamingRtmpSenderTool.rtmpSender.startRecordingOnServer(response.slots.recording.recordingStream);
 
-                                if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                                recordingSettings.style.display = 'none';
-                                activeRecordingSection.style.display = 'block';
-                                showLiveIndicator('rec');
+                                    if (recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                    recordingSettings.style.display = 'none';
+                                    activeRecordingSection.style.display = 'block';
+                                    showLiveIndicator('rec');
+                                
+                                }, {
+                                    method: 'post',
+                                    fields: {
+                                       publisherId: tool.webrtcUserInterface.roomStream().fields.publisherId,
+                                       streamName: tool.webrtcUserInterface.roomStream().fields.name
+                                    }
+                                });
                             })
                             stopRecordingBtn.addEventListener('click', function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
@@ -2622,7 +2636,7 @@
                         _participantsListEl.className = 'live-editor-participants-list';
                         _participantsContainerEl.appendChild(_participantsListEl);
 
-                        if (tool.roomStream.testAdminLevel('manage')) {
+                        if (tool.webrtcUserInterface.roomStream().testAdminLevel('manage')) {
                         
                             let waitingRooms = document.createElement('DIV');
                             waitingRooms.className = 'live-editor-participants-waiting';
@@ -4563,7 +4577,7 @@
                         
                         inviteBtn.addEventListener('click', function () {
                             //invitePopup.show();
-                            Q.Streams.invite(tool.roomStream.fields.publisherId, tool.roomStream.fields.name, {
+                            Q.Streams.invite(tool.webrtcUserInterface.roomStream().fields.publisherId, tool.webrtcUserInterface.roomStream().fields.name, {
                                 appUrl: Q.url("meeting"),
                                 title: 'Invite to Teleconference',
                                 addLabel: null,
@@ -7925,6 +7939,9 @@
                     this.active = false;
                     this.time = performance.now();
                     this.isChangingPosition = {x: null, y: null};
+                    this.updateOnceMore = false;
+                    this.events = new EventSystem();
+
                     this.hide = function (e) {
                         if (!e || (e && e.target.offsetParent != dialogInstance.dialogEl || e.target == this.closeButtonEl)) {
                             if (dialogInstance.dialogEl.parentElement) dialogInstance.dialogEl.parentElement.removeChild(dialogInstance.dialogEl);
@@ -7997,6 +8014,7 @@
                     }
 
                     function updateDialogPostion(animate) {
+                        console.log('updateDialogPostion')
                         dialogInstance.isChangingPosition.y = true;
                         let rectangleToShowIn = dialogInstance.rectangleToShowIn;
                         let dialogRect = dialogInstance.dialogEl.getBoundingClientRect();
@@ -8020,6 +8038,10 @@
                                     let startTime = timestamp || new Date().getTime()
                                     moveit(timestamp, dialogInstance.dialogEl, { x: null, y: midYOfRectangleToShowIn - (dialogRect.height / 2) }, {x: null, y: dialogRect.y}, 300, startTime, function () {
                                         dialogInstance.isChangingPosition.y = false;
+                                        if(dialogInstance.updateOnceMore) {
+                                            updateDialogPostion(true);
+                                        }
+                                        dialogInstance.updateOnceMore = false;
                                     });
                                 })
                             }
@@ -8031,6 +8053,10 @@
                                     let startTime = timestamp || new Date().getTime()
                                     moveit(timestamp, dialogInstance.dialogEl, { x: null, y: rectangleToShowIn.y }, {x: null, y: dialogRect.y}, 300, startTime, function () {
                                         dialogInstance.isChangingPosition.y = false;
+                                        if(dialogInstance.updateOnceMore) {
+                                            updateDialogPostion(true);
+                                        }
+                                        dialogInstance.updateOnceMore = false;
                                     });
                                 })
                             }
@@ -8149,6 +8175,7 @@
                             let width = entry.contentBoxSize && entry.contentBoxSize.length != 0 ? entry.contentBoxSize[0].inlineSize : entry.contentRect.width;
                             let height = entry.contentBoxSize  && entry.contentBoxSize.length != 0 ? entry.contentBoxSize[0].blockSize : entry.contentRect.height;
                             if(dialogInstance.isChangingPosition.x || dialogInstance.isChangingPosition.y) {
+                                dialogInstance.updateOnceMore = true;
                                 continue;
                             }
 

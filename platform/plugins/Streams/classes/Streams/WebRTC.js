@@ -88,6 +88,7 @@ WebRTC.listen = function () {
             if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA2', rtmpUrlsData);
             if(_debug) console.log('made sockets connection (LIVE STREAMING) DATA3', socket.handshake.query.recording);
             var livestreamStreamData = JSON.parse(socket.handshake.query.livestreamStream);
+            var recordingStreamData = JSON.parse(socket.handshake.query.recordingStream);
             var platform = socket.handshake.query.platform;
             var isAndroid = usersInfo.platform == 'android' ? true : false
 
@@ -96,6 +97,7 @@ WebRTC.listen = function () {
                 let userConnectedTime = socket.handshake.query.userConnectedTime;
                 let roomStartTime = socket.handshake.query.roomStartTime;
                 let roomId = socket.handshake.query.roomId;
+                let recordingStartTime = +Date.now();
 
                 var localRecordDir = appDir + 'files/' + appName + '/uploads/Streams/recordings/' + roomId + '/' + roomStartTime + '/' + userId + '/' + userConnectedTime;
                 if (!fs.existsSync(localRecordDir)) {
@@ -103,8 +105,13 @@ WebRTC.listen = function () {
                     mkdirp(localRecordDir);
                     process.umask(oldmask);
                 }
-                let filePath = localRecordDir + '/' + +Date.now() + '.mp4';
-                rtmpUrlsData.push({ rtmpUrl: filePath });
+                let absolutePath = localRecordDir + '/' + recordingStartTime + '.mp4';
+                rtmpUrlsData.push({ rtmpUrl: absolutePath });
+
+                let qbixPath = '{{baseUrl}}/Q/uploads/Streams/recordings/' + roomId + '/' + roomStartTime + '/' + userId + '/' + userConnectedTime + '/' + recordingStartTime + '.mp4';
+                let qbixSubPath = '/Q/uploads/Streams/recordings/' + roomId + '/' + roomStartTime + '/' + userId + '/' + userConnectedTime + '/' + recordingStartTime + '.mp4';
+
+                updateRecordingStream(absolutePath, qbixPath, qbixSubPath, recordingStartTime);
             }
 
             if(rtmpUrlsData.length == 0) return;
@@ -124,6 +131,31 @@ WebRTC.listen = function () {
                 const dirname = path.dirname(dir)
                 mkdirp(dirname);
                 fs.mkdirSync(dir);
+            }
+
+            function updateRecordingStream(absolutePath, qbixPath, qbixSubPath, recordingStartTime, recordingEndTime) {
+                Q.plugins.Streams.fetchOne(recordingStreamData.publisherId, recordingStreamData.publisherId, recordingStreamData.streamName, function (err, stream) {
+                    if (err || !stream) {
+                        console.log('No livestream stream found with next publisherId and streamName', recordingStreamData.publisherId, recordingStreamData.streamName);
+                        return;
+                    }
+                    if(qbixSubPath) {
+                        stream.setAttribute('path', qbixPath);
+                    }
+                    if(qbixSubPath) {
+                        stream.setAttribute('subpath', qbixSubPath);
+                    }
+                    if(absolutePath) {
+                        stream.setAttribute('absolutePath', absolutePath);
+                    }
+                    if(recordingStartTime) {
+                        stream.setAttribute('fromTime', recordingStartTime); 
+                    }
+                    if(recordingEndTime) {
+                        stream.setAttribute('toTime', recordingEndTime); 
+                    }
+                    stream.save();
+                });
             }
 
             function postStartMessageAndBeginLivestreaming () {
@@ -305,6 +337,9 @@ WebRTC.listen = function () {
 
                         if(livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                             postStopMessageAndStopLivestreaming();
+                        }
+                        if(recordingStreamData && recordingStreamData.publisherId != null && recordingStreamData.streamName != null) {
+                            updateRecordingStream(null, null, null, null, +Date.now());
                         }
                         //console.log('End _streamingData');
 

@@ -17,7 +17,7 @@
         },
 
         {
-
+            showAsButton: false
         },
 
         {
@@ -35,13 +35,11 @@
                         rtmpLive: '<img src="' + rtmpLiveImg + '" />'
                     });
 
-                    var tabsCon = document.createElement('DIV');
+                    var tabsCon = tool.tabs = document.createElement('DIV');
                     tabsCon.className = 'livestream-instructions-tool-content'
                     var youtubeCon = document.createElement('DIV');
                     youtubeCon.class = 'livestream-instructions-youtube';
                     tabsCon.appendChild(youtubeCon);
-
-
 
                     Q.activate(
                         Q.Tool.setUpElement(
@@ -85,33 +83,37 @@
                         }
                     );
 
-                    var toolIconCon = document.createElement('DIV');
-                    toolIconCon.className = 'Streams_livestream_instructions-icon-con';
-                    var toolIcon = document.createElement('DIV');
-                    toolIcon.className = 'Streams_livestream_instructions-icon';
-                    toolIcon.innerHTML = '?';
-                    toolIconCon.appendChild(toolIcon);
+                    if (tool.state.showAsButton) {
+                        var toolIconCon = document.createElement('DIV');
+                        toolIconCon.className = 'Streams_livestream_instructions-icon-con';
+                        var toolIcon = document.createElement('DIV');
+                        toolIcon.className = 'Streams_livestream_instructions-icon';
+                        toolIcon.innerHTML = '?';
+                        toolIconCon.appendChild(toolIcon);
 
-                    toolIconCon.addEventListener('click', function () {
-                        Q.Dialogs.push({
-                            title: 'Livestream instructions',
-                            className: 'Streams_livestream_instructions_dialog',
-                            content: tabsCon,
-                            apply: false,
-                            mask: false,
-                            hidePrevious:true,
-                            removeOnClose: true,
-                            beforeClose: function() {
+                        toolIconCon.addEventListener('click', function () {
+                            Q.Dialogs.push({
+                                title: 'Livestream instructions',
+                                className: 'Streams_livestream_instructions_dialog',
+                                content: tabsCon,
+                                apply: false,
+                                mask: false,
+                                hidePrevious: true,
+                                removeOnClose: true,
+                                beforeClose: function () {
 
 
-                            },
-                            onClose:function () {
+                                },
+                                onClose: function () {
 
-                            },
+                                },
+                            });
                         });
-                    });
 
-                    tool.element.appendChild(toolIconCon);
+                        tool.element.appendChild(toolIconCon);
+                    } else {
+                        tool.element.appendChild(tabsCon);
+                    }
 
 
                 })

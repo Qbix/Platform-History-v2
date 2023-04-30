@@ -431,12 +431,42 @@
     padding: 10px 0 10px 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-instructions {
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-instructions .Q_expandable_tool > h2{
+    padding: 0 5px;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-instructions .Q_expandable_tool .Q_expandable_content img{
+    max-width: 100%;
 }
 .live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-start .live-editor-stream-to-section-rtmp-instructions .Streams_livestream_instructions-icon{
     color: #ffffff;
 }
 .live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-start button{
-    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-start .live-editor-stream-to-section-rtmp-add-rtmp {
+    padding: 7px;
+    border-radius: 50%;
+    background: no-repeat;
+    border: 1px solid #999999;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-start .live-editor-stream-to-section-rtmp-add-rtmp svg {
+    max-width: 20px;
+    max-height: 20px;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-start .live-editor-stream-to-section-rtmp-add-rtmp svg path{
+    fill:white;
+}
+.live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-start .live-editor-stream-to-section-rtmp-go-live {
+    background-color: #1e5b7f;
 }
 .live-editor-stream-to-section-rtmp .live-editor-stream-to-section-rtmp-rtmp-item {
     margin-top: 10px;
