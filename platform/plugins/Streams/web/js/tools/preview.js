@@ -461,6 +461,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			} else {
 				Q.handle(onLoad, tool, [element]);
 			}
+		}, {
+			messages: 1
 		});
 		Q.Streams.Stream.onFieldChanged(state.publisherId, state.streamName, 'icon')
 		.set(function (fields) {
