@@ -318,8 +318,8 @@
         "NotOnSale": "არ იყიდება",
         "NftName": "NFT სახელი",
         "DescribeYourNFT": "გთხოვთ აღწეროთ თქვენი NFT",
-        "NftPicture": "სურათი, რომელიც წარმოადგენს NFT-ს",
-        "NftMovie": "ფილმი, რომელიც წარმოადგენს NFT-ს",
+        "NFTImage": "სურათი NFT-სთვის",
+        "NFTVideo": "ვიდეო NFT-სთვის, ასეთის არსებობის შემთხვევაში",
         "UploadMovie": "ფილმის ატვირთვა",
         "MovieSource": "ფილმის წყარო",
         "MovieURL": "ფილმის URL",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} ის პროფილი",
             "Description": "მომხმარებლის დეტალები",
             "aboutPlaceholder": "ბიო რედაქტირება",
-            "SureLogOut": "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?"
+            "SureLogOut": "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?",
+            "UploadCoverPhoto": "ატვირთეთ ყდის ფოტო"
         },
         "sales": {
             "factory": {

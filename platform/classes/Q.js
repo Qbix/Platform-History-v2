@@ -649,7 +649,7 @@ Q.batcher.options = {
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
- *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
+ *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
  *  This function also contains Q.Events called onCalled, onResult and onExecuted.
  */
 Q.getter = function _Q_getter(original, options) {

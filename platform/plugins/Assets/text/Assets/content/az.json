@@ -318,8 +318,8 @@
         "NotOnSale": "Satışda Yoxdur",
         "NftName": "NFT adı",
         "DescribeYourNFT": "Zəhmət olmasa NFT-nizi təsvir edin",
-        "NftPicture": "NFT-ni təmsil edən şəkil",
-        "NftMovie": "NFT-ni təmsil edən film",
+        "NFTImage": "NFT üçün şəkil",
+        "NFTVideo": "NFT üçün video, əgər varsa",
         "UploadMovie": "Film yükləmək",
         "MovieSource": "Film Mənbə",
         "MovieURL": "Film URL",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} üçün profil",
             "Description": "İstifadəçi təfərrüatları",
             "aboutPlaceholder": "Bio-nu redaktə et",
-            "SureLogOut": "Çıxmaq istədiyinizə əminsiniz?"
+            "SureLogOut": "Çıxmaq istədiyinizə əminsiniz?",
+            "UploadCoverPhoto": "Qapaq şəklini yükləyin"
         },
         "sales": {
             "factory": {

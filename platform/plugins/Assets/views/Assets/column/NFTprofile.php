@@ -3,6 +3,7 @@
 	<div class="banner-container">
 		<div class="banner-block" <?php if (!empty($cover) && preg_match("/^image/", $cover["mimeType"])) { echo 'style="background-image: url('.$cover["url"].')"'; } ?>>
 			<?php if (!empty($cover) && preg_match("/^video/", $cover["mimeType"])) { echo '<video autoplay loop muted src="'.$cover["url"].'"></video>'; } ?>
+			<button class="Q_button" name="coverPhoto"><?php echo $NFT["profile"]["UploadCoverPhoto"] ?></button>
 		</div>
 		<?php echo Q::tool("Users/avatar", array(
 			'userId' => $user->id,
@@ -73,9 +74,9 @@
 				echo Q::tool('Streams/inplace', array(
 					'stream' => $greeting,
 					'inplaceType' => 'textarea',
-					'URLtoLink' => true,
+					'linkify' => true,
 					'inplace' => array(
-						'placeholder' => $profile['aboutPlaceholder'],
+						'placeholder' => $NFT['profile']['aboutPlaceholder'],
 						'editing' => empty($greeting->content),
 						'showEditButtons' => true,
 						'selectOnEdit' => false

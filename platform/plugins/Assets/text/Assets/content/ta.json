@@ -318,8 +318,8 @@
         "NotOnSale": "விற்பனையில் இல்லை",
         "NftName": "NFT பெயர்",
         "DescribeYourNFT": "உங்கள் NFTயை விவரிக்கவும்",
-        "NftPicture": "NFT ஐக் குறிக்கும் படம்",
-        "NftMovie": "NFT ஐப் பிரதிநிதித்துவப்படுத்தும் திரைப்படம்",
+        "NFTImage": "NFTக்கான படம்",
+        "NFTVideo": "NFTக்கான வீடியோ, ஏதேனும் இருந்தால்",
         "UploadMovie": "திரைப்படத்தைப் பதிவேற்றவும்",
         "MovieSource": "திரைப்பட ஆதாரம்",
         "MovieURL": "திரைப்பட URL",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} க்கான சுயவிவரம்",
             "Description": "பயனர் விவரங்கள்",
             "aboutPlaceholder": "பயோவை திருத்து",
-            "SureLogOut": "நிச்சயமாக வெளியேற விரும்புகிறீர்களா?"
+            "SureLogOut": "நிச்சயமாக வெளியேற விரும்புகிறீர்களா?",
+            "UploadCoverPhoto": "அட்டைப் படத்தைப் பதிவேற்றவும்"
         },
         "sales": {
             "factory": {

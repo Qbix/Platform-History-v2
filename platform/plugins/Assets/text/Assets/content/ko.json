@@ -318,8 +318,8 @@
         "NotOnSale": "판매하지 않음",
         "NftName": "NFT 이름",
         "DescribeYourNFT": "당신의 NFT를 설명해주세요",
-        "NftPicture": "NFT를 나타내는 그림",
-        "NftMovie": "NFT를 대표하는 영화",
+        "NFTImage": "NFT용 이미지",
+        "NFTVideo": "NFT용 비디오(있는 경우)",
         "UploadMovie": "영화 업로드",
         "MovieSource": "영화 소스",
         "MovieURL": "영화 URL",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} 프로필",
             "Description": "사용자 세부정보",
             "aboutPlaceholder": "바이오 편집",
-            "SureLogOut": "로그아웃하시겠습니까?"
+            "SureLogOut": "로그아웃하시겠습니까?",
+            "UploadCoverPhoto": "표지 사진 업로드"
         },
         "sales": {
             "factory": {

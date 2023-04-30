@@ -165,7 +165,6 @@ function Streams_after_Users_User_saveExecute($params)
 		}
 		if ($name === 'Streams/user/icon') {
 			$sizes = Q_Image::getSizes('Users/icon');
-			ksort($sizes);
 			$s['attributes']['sizes'] = $sizes;
 			$s['attributes']['icon'] = $user->icon;
 		} elseif ($name === 'Streams/user/xid/web3') {
@@ -305,7 +304,6 @@ function Streams_after_Users_User_saveExecute($params)
 				}
 				if ($name === "Streams/user/icon") {
 					$sizes = Q_Image::getSizes('Users/icon');
-					ksort($sizes);
 					$stream->setAttribute('sizes', $sizes);
 				}
 				Streams::$beingSavedQuery = $stream->changed($user->id);

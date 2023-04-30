@@ -4552,7 +4552,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  * @return {Boolean|null|Q.Pipe}
  *   Returns false if the cached stream already got this message.
  *   Returns true if we decided to send a request for the messages.
- *   Returns new Q.Pipe if we decided to wait for messages to arrive via socket.
+ *   Returns new Q.Promise if we decided to wait for messages to arrive via socket.
  *   Returns null if no attempt was made because ordinal=-1 and stream wasn't cached.
  *   In this last case, the callback is not called.
  */
@@ -5847,8 +5847,8 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// events about updated fields
 	for (k in fields) {
 		if (onlyChangedFields
-			&& fields[k] === stream.fields[k]
-			&& !Q.has(onlyChangedFields, k)) {
+		&& fields[k] === stream.fields[k]
+		&& !Q.has(onlyChangedFields, k)) {
 			continue;
 		}
 		Q.handle(

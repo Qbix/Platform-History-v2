@@ -318,8 +318,8 @@
         "NotOnSale": "Neparduodama",
         "NftName": "NFT pavadinimas",
         "DescribeYourNFT": "Aprašykite savo NFT",
-        "NftPicture": "Nuotrauka, vaizduojanti NFT",
-        "NftMovie": "Filmas, reprezentuojantis NFT",
+        "NFTImage": "NFT vaizdas",
+        "NFTVideo": "Vaizdo įrašas, skirtas NFT, jei yra",
         "UploadMovie": "Įkelti filmą",
         "MovieSource": "Filmo šaltinis",
         "MovieURL": "Filmo URL",
@@ -436,7 +436,8 @@
             "Title": "Profilis už {{userName}}",
             "Description": "Vartotojo informacija",
             "aboutPlaceholder": "Redaguoti biografiją",
-            "SureLogOut": "Ar tikrai norite atsijungti?"
+            "SureLogOut": "Ar tikrai norite atsijungti?",
+            "UploadCoverPhoto": "Įkelti viršelio nuotrauką"
         },
         "sales": {
             "factory": {

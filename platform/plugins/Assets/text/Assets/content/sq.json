@@ -318,8 +318,8 @@
         "NotOnSale": "Jo Në shitje",
         "NftName": "Emri NFT",
         "DescribeYourNFT": "Ju lutemi përshkruani NFT-në tuaj",
-        "NftPicture": "Foto për të përfaqësuar NFT",
-        "NftMovie": "Film për të përfaqësuar NFT",
+        "NFTImage": "Imazhi për NFT",
+        "NFTVideo": "Video për NFT, nëse ka",
         "UploadMovie": "Ngarko film",
         "MovieSource": "Burimi i filmit",
         "MovieURL": "URL e filmit",
@@ -436,7 +436,8 @@
             "Title": "Profili për {{userName}}",
             "Description": "Detajet e përdoruesit",
             "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Jeni i sigurt që dëshironi të dilni?"
+            "SureLogOut": "Jeni i sigurt që dëshironi të dilni?",
+            "UploadCoverPhoto": "Ngarkoni foton e kopertinës"
         },
         "sales": {
             "factory": {

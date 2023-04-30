@@ -1865,6 +1865,8 @@ class Q_Utils
 
 	/**
 	 * Used to turn a filesize into a human-readable file size
+	 * @method humanReadableFilesize
+	 * @static
 	 * @param {integer} $bytes the number of bytes in the file
 	 * @param {integer} [$decimals=2] number of decimals to display, if any
 	 * @return {string}
@@ -1873,6 +1875,34 @@ class Q_Utils
 		$sz = 'BKMGTP';
 		$factor = floor((strlen($bytes) - 1) / 3);
 		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
+	}
+
+	/**
+	 * Sorts keys such as "4x8x9" numerically by dimensions
+	 * @method sortKeysNumerically
+	 * @static
+	 * @param {array&} $arr Reference to an array
+	 * @return 
+	 */
+	static function sortKeysNumerically(&$arr)
+	{
+		return uksort($arr, array('Q_Utils', 'compareKeysNumerically'));
+	}
+
+	private static function compareKeysNumerically($a, $b)
+	{
+		$ap = preg_split('/\D/', $a, -1);
+		$bp = preg_split('/\D/', $b, -1);
+		foreach ($ap as $i => $av) {
+			$av = floatval($av);
+			$bv = floatval($bp[$i]);
+			if (!isset($bp[$i]) || $bv < $av) {
+				return 1;
+			} else if ($bv > $av) {
+				return -1;
+			}
+		}
+		return 0;
 	}
 
 	protected static $urand;

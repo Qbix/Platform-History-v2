@@ -2483,6 +2483,43 @@
 	};
 
 	/**
+	 * Methods for setting up common user interface elements
+	 * @class Users.Interface
+	 */
+	Users.Interface = {
+		/**
+		 * Set up cover photo editor
+		 * @method coverPhoto
+		 * @static
+		 * @param {Element} trigger the button
+		 * @param {Element} container 
+		 * @param {Object} trigger
+		 */
+		coverPhoto: function (trigger, container, options) {
+			var userId = Q.Users.loggedInUserId();
+			if (!userId) {
+				return false;
+			}
+			var splitId = userId.splitId('');
+			var url = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.Users.cover.defaultSize + ".png?" + new Date().getTime());
+			container.style['background-image'] = "url(" + url + ")";
+			Q.Tool.setUpElement(trigger, 'Q/imagepicker', Q.extend({
+				saveSizeName: Q.Users.cover.sizes,
+				maxStretch: Q.Users.cover.maxStretch,
+				//showSize: state.icon || $img.width(),
+				path: 'Q/uploads/Users',
+				subpath: splitId + '/cover',
+				save: "Users/cover",
+				onSuccess: function () {
+					var newUrl = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.Users.cover.defaultSize + ".png?" + new Date().getTime());
+					container.style['background-image'] = "url(" + newUrl + ")";
+				}
+			}, options));
+			Q.activate(trigger);
+		}
+	};
+
+	/**
 	 * Methods for user sessions
 	 * @class Users.Session
 	 */
@@ -4271,7 +4308,7 @@
 						_subscribeToEvents(ethereum);
 						Web3.provider = ethereum;
 						return Q.handle(callback, null, [null, Web3.provider]);
-					}).catch(function (e) {
+					}).catch(function (ex) {
 						Q.handle(callback, null, [ex]);
 						throw new Error(ex);
 					});

@@ -409,8 +409,9 @@
                     field: "title",
                     inplaceType: "text",
                     publisherId: publisherId,
-                    streamName: streamName
-                }, "nft_preview_title_" + tool.stream.fields.name.split("/").pop()).activate();
+                    streamName: streamName,
+                }, "nft_preview_title_" + tool.stream.fields.name.split("/").pop())
+                .activate();
 
                 $(".Assets_NFT_description", tool.element).tool("Streams/inplace", {
                     editable: false,
@@ -418,7 +419,8 @@
                     inplaceType: "text",
                     publisherId: publisherId,
                     streamName: streamName
-                }, "nft_preview_description_" + tool.stream.fields.name.split("/").pop()).activate();
+                }, "nft_preview_description_" + tool.stream.fields.name.split("/").pop())
+                .activate();
 
                 // apply Streams/preview icon behavior
                 var videoUrl = state.video || stream.getAttribute("videoUrl");
@@ -782,7 +784,7 @@
                 title: isNew ? tool.text.NFT.CreateNFT : tool.text.NFT.UpdateNFT,
                 className: "Assets_NFT_preview_composer",
                 template: {
-                    name: "Assets/NFT/nftCreate",
+                    name: "Assets/NFT/composer/interface",
                     fields: {
                         minted: false,
                         title: Q.getObject("stream.fields.title", tool) || "",
@@ -793,13 +795,39 @@
                 onActivate: function (dialog) {
                     var $icon = $("img.NFT_preview_icon", dialog);
                     var $imageContainer = $icon.closest(".Assets_nft_container");
+                    var o = Q.extend({},previewState, {editable: true});
+
+                    var $button = $('.Assets_nft_generate_description')
+                    var $description = $button.prev('[name="description"]')
+                    .plugin('Q/autogrow');
+
+                    $('input[name="title"]').on('change', function () {
+                        var $this = $(this);
+                        if (!$this.val()) {
+                            return;
+                        }
+                        $button.show().off('click').on('click', function () {
+                            var $button = $(this);
+                            $button.hide().add($description).addClass('Q_working');
+                            Q.req("Streams/description", "data", function (err, result) {
+                                var fem = Q.firstErrorMessage(err, result);
+                                if (fem) {
+                                    return Q.alert(fem);
+                                }
+                                $description.val(result.slots.data).trigger('autogrowCheck');
+                                $button.add($description).removeClass('Q_working');
+                            }, { fields: { subject: $this.val() } });
+                            return false;
+                        });
+                    });
 
                     // create new Streams/preview tool to set icon behavior to $icon element
-                    $("<div>").tool("Streams/preview", Q.extend(previewState, {editable: true})).activate(function () {
+                    $("<div>").tool("Streams/preview", o)
+                    .activate(function () {
                         this.icon($icon[0], function (element) {
                             var src = element.src;
 
-                            if (src.includes("empty_white")) {
+                            if (src.indexOf("/empty_white.png") >= 0) {
                                 $imageContainer.plugin("Q/actions", "remove");
                             } else {
                                 $imageContainer.plugin("Q/actions", {
@@ -1340,35 +1368,36 @@
         {text: ['Assets/content']}
     );
 
-    Q.Template.set('Assets/NFT/nftCreate',
+    Q.Template.set('Assets/NFT/composer/interface',
         `<div class="Assets_nft" data-minted="{{minted}}">
         <form>
             <div class="Assets_nft_form_group">
                 <input type="text" name="title" value="{{title}}" class="Assets_nft_form_control" placeholder="{{NFT.TitlePlaceholder}}">
             </div>
             <div class="Assets_nft_form_group">
-                <input type="text" name="description" value="{{content}}" class="Assets_nft_form_control" placeholder="{{NFT.DescribeYourNFT}}">
+                <textarea name="description" value="{{content}}" class="Assets_nft_form_control" placeholder="{{NFT.DescribeYourNFT}}"></textarea>
+                <button class="Q_button Assets_nft_generate_description">{{NFT.GenerateDescription}}</button>
             </div>
             <div class="Assets_nft_form_group" data-type="nft_attributes">
                 <label>{{NFT.attributes.Title}}:</label>
                 <div class="Assets_nft_attributes"></div>
-                <button class="Q_button" name="addAttribute">{{NFT.attributes.NewAttribute}}</button>
+                <button class="Q_button" name="addAttribute" type="button">{{NFT.attributes.NewAttribute}}</button>
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftPicture}}:</label>
+                <label>{{NFT.NFTImage}}:</label>
                 <div class="Assets_nft_container">
                     <img class="NFT_preview_icon">
-                    <button class="Assets_nft_upload_button">{{NFT.UploadFile}}</button>
+                    <button class="Assets_nft_upload_button" type="button">{{NFT.UploadFile}}</button>
                 </div>
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftMovie}}:</label>
+                <label>{{NFT.NFTVideo}}:</label>
                 <div class="Assets_nft_container">
                     <input name="movieUrl" placeholder="{{NFT.MovieURL}}"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
                     <div class="Assets_nft_movie"></div>
                 </div>
             </div>
-            <button class="Q_button" name="save">{{saveButtonText}}</button>
+            <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
         </form>
     </div>`,
         {text: ['Assets/content']});
@@ -1398,7 +1427,7 @@
                     <input type="number" name="royalty" class="Assets_nft_form_control" placeholder="{{NFT.RoyaltyPlaceholder}}">%
                 </div>
             </div>
-            <button class="Q_button" name="save">{{NFT.MintNFT}}</button>
+            <button class="Q_button" name="save" type="button">{{NFT.MintNFT}}</button>
         </div>
     `, {text: ['Assets/content']});
 
@@ -1439,10 +1468,10 @@
                 <li class="Assets_NFT_price">
                     <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
                     <span class="Assets_NFT_comingsoon">Coming Soon</span>
-                    <button name="transfer" class="Q_button">{{NFT.Transfer}}</button>
+                    <button name="transfer" class="Q_button" type="button">{{NFT.Transfer}}</button>
                 </li>
                 <li class="action-block">
-                    <button name="claim" class="Q_button">{{NFT.ClaimNFT}}</button>
+                    <button name="claim" class="Q_button" type="button">{{NFT.ClaimNFT}}</button>
                 </li>
             </ul>
             <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>

@@ -318,8 +318,8 @@
         "NotOnSale": "ليس للبيع",
         "NftName": "اسم NFT",
         "DescribeYourNFT": "يرجى وصف NFT الخاص بك",
-        "NftPicture": "صورة لتمثيل NFT",
-        "NftMovie": "فيلم لتمثيل NFT",
+        "NFTImage": "صورة لـ NFT",
+        "NFTVideo": "فيديو لـ NFT ، إن وجد",
         "UploadMovie": "تحميل الفيلم",
         "MovieSource": "مصدر الفيلم",
         "MovieURL": "رابط الفيلم",
@@ -436,7 +436,8 @@
             "Title": "الملف الشخصي لـ {{userName}}",
             "Description": "بيانات المستخدم",
             "aboutPlaceholder": "تحرير السيرة الذاتية",
-            "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+            "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "UploadCoverPhoto": "تحميل صورة الغلاف"
         },
         "sales": {
             "factory": {
