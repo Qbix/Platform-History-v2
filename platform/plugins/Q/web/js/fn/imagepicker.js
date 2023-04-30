@@ -54,7 +54,7 @@ Q.onInit.add(function () {
  *   @param {Number} [options.crop.w] width for cropping
  *   @param {Number} [options.crop.h] height value for cropping
  * @param {Boolean} [options.cropping=true] Whether to display an interface for selecting cropping images, before sending them to the server. If true, the cropping area overrides the crop option.
- * @default Q.action('Q/image')
+ * @param {String} [options.saveImageType="image/png"] Pass null here to match the type of file selected (as long as it's one of image/png, image/gif, image/jpeg or image/webp)
  * @param {Q.Event} [options.preprocess] preprocess is a function which is triggering before image upload.
  *  Its "this" object will be a jQuery of the imagepicker element
  *  The first parameter is a callback, which should be called with an optional
@@ -407,7 +407,10 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					sourceLeft, sourceTop, sourceWidth, sourceHeight,
 					destLeft, destTop, dw, dh
 				);
-				var imageData = canvas.toDataURL();
+				var imageData = ['image/png', 'image/gif', 'image/jpeg', 'image/webp']
+					.indexOf(options.saveImageType) >= 0
+					? canvas.toDataURL(options.saveImageType)
+					: canvas.toDataURL();
 				$(canvas).remove();
 				$img.remove();
 				callback.call(this, imageData, null);
