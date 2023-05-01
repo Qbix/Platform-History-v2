@@ -264,7 +264,7 @@
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}",
 				"participating": ["Streams/participating"]
 			},
-			"Streams/calls": {
+			"Media/calls": {
 				"create": false,
 				"edit": ["attributes"]
 			},
@@ -624,7 +624,7 @@
 				"Streams/image/album"
 			],
 			"community": [
-				"Streams/calls/main"
+				"Media/calls/main"
 			]
 		},
 		"onUpdate": { /* streams to update when a row is updated */

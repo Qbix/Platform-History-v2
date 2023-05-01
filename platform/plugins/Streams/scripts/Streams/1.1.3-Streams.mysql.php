@@ -2,13 +2,13 @@
 	
 function Streams_1_1_3_Streams()
 {
-	echo "Adding access for Streams/calls/main".PHP_EOL;
+	echo "Adding access for Media/calls/main".PHP_EOL;
 
 	$adminLabels = Q_Config::get("Streams", "calls", "answered", array());
 	foreach ($adminLabels as $adminLabel) {
 		$access = new Streams_Access();
 		$access->publisherId = "";
-		$access->streamName = "Streams/calls/main";
+		$access->streamName = "Media/calls/main";
 		$access->ofContactLabel = $adminLabel;
 		if (!$access->retrieve()) {
 			$access->readLevel = 40;
@@ -18,9 +18,9 @@ function Streams_1_1_3_Streams()
 		}
 	}
 
-	echo "Adding Streams/calls/main for each community".PHP_EOL;
-	$streamType = "Streams/calls";
-	$streamName = "Streams/calls/main";
+	echo "Adding Media/calls/main for each community".PHP_EOL;
+	$streamType = "Media/calls";
+	$streamName = "Media/calls/main";
 	$communities = Users_User::select()->where(array(
 		"signedUpWith" => "none"
 	))->fetchDbRows();
