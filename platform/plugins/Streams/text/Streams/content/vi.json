@@ -471,7 +471,7 @@
             "displayType": "Cuộc hội thoại",
             "description": "một cuộc trò chuyện giữa những người dùng, với lịch sử"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Hội nghị từ xa",
             "description": "hội nghị truyền hình\/âm thanh trực tuyến"
         },

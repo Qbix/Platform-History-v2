@@ -471,7 +471,7 @@
             "displayType": "بات چیت",
             "description": "تاریخ کے ساتھ صارفین کے درمیان گفتگو"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ٹیلی کانفرنس",
             "description": "ایک آن لائن ویڈیو\/آڈیو کانفرنس"
         },

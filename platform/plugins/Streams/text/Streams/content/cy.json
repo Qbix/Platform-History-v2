@@ -471,7 +471,7 @@
             "displayType": "Sgwrs",
             "description": "sgwrs rhwng defnyddwyr, gyda hanes"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telegynhadledd",
             "description": "cynhadledd fideo\/sain ar-lein"
         },

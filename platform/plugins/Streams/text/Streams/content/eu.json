@@ -471,7 +471,7 @@
             "displayType": "Elkarrizketa",
             "description": "erabiltzaileen arteko elkarrizketa, historiarekin"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferentzia",
             "description": "lineako bideo\/audiokonferentzia bat"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Deiak",
-            "description": "Streams\/webrtc kategorian",
+            "description": "Media\/WebRTC kategorian",
             "MaxRelationsExceeded": "Gehienezko deiak gainditu dira"
         }
     },

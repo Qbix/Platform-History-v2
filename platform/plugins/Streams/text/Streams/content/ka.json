@@ -471,7 +471,7 @@
             "displayType": "Საუბარი",
             "description": "საუბარი მომხმარებლებს შორის, ისტორიასთან"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ტელეკონფერენცია",
             "description": "ონლაინ ვიდეო\/აუდიო კონფერენცია"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "რეკავს",
-            "description": "კატეგორია Streams\/webrtc-ისთვის",
+            "description": "კატეგორია Media\/WebRTC-ისთვის",
             "MaxRelationsExceeded": "ზარების მაქსიმუმი გადააჭარბა"
         }
     },

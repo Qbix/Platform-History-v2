@@ -471,7 +471,7 @@
             "displayType": "உரையாடல்",
             "description": "வரலாற்றுடன் பயனர்களுக்கு இடையே ஒரு உரையாடல்"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "தொலைதொடர்பு",
             "description": "ஆன்லைன் வீடியோ\/ஆடியோ மாநாடு"
         },

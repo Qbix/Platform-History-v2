@@ -1,6 +1,6 @@
 <?php
 
-function Streams_webrtc_put($params = array()) {
+function Media_webrtc_put($params = array()) {
     $params = array_merge($_REQUEST, $params);
 
     $loggedUserId = Users::loggedInUser(true)->id;
@@ -34,7 +34,7 @@ function Streams_webrtc_put($params = array()) {
 				throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
 		}
 
-		$className = "Streams_WebRTC_".ucfirst($adapter);
+		$className = "Media_WebRTC_".ucfirst($adapter);
 
 		$webrtc = new $className();
 		$result = $webrtc->endRoom($publisherId, $roomId);
@@ -54,7 +54,7 @@ function Streams_webrtc_put($params = array()) {
         $logsDirectory = str_replace('/', DS, Q_Config::get('Q', 'logs', 'directory', 'Q/logs'));
         $logsPath = (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR).DS.$logsDirectory.DS.'webrtc';
 
-        $streamName = "Streams/webrtc/$roomId";
+        $streamName = "Media/webrtc/$roomId";
         $stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
         $startTime = date('YmdHis', round($stream->getAttribute('startTime') / 1000));
 

@@ -18,11 +18,11 @@ video {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-.notice-container.Streams_webrtc_notice_position_left {
+.notice-container.Media_webrtc_notice_position_left {
     left:0;
     right: auto;
 }
-.notice-container.Streams_webrtc_notice_position_right {
+.notice-container.Media_webrtc_notice_position_right {
     left:auto;
     right: 0;
 }

@@ -471,7 +471,7 @@
             "displayType": "对话",
             "description": "用户之间的对话，具有历史记录"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "电话会议",
             "description": "在线视频\/音频会议"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "来电",
-            "description": "Streams\/webrtc 类别",
+            "description": "Media\/WebRTC 类别",
             "MaxRelationsExceeded": "超出最大通话次数"
         }
     },

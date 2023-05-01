@@ -471,7 +471,7 @@
             "displayType": "محادثة",
             "description": "محادثة بين المستخدمين ، مع التاريخ"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "مؤتمر عبر الهاتف",
             "description": "مؤتمر فيديو \/ صوتي عبر الإنترنت"
         },

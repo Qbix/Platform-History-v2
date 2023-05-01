@@ -471,7 +471,7 @@
             "displayType": "Konuşma",
             "description": "geçmişi olan kullanıcılar arasında bir konuşma"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Tele konferans",
             "description": "çevrimiçi bir video\/ses konferansı"
         },

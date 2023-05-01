@@ -626,24 +626,24 @@ Q.Tool.define({
 	"Streams/form"		 : "{{Streams}}/js/tools/form.js",
 	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
 	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
-	"Streams/audioVisualization"	 : "{{Streams}}/js/tools/webrtc/audioVisualization.js",
-	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
-	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
-	"Streams/webrtc/preview/default" : "{{Streams}}/js/tools/webrtc/preview/default.js",
-	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/preview/call.js",
-	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
-	"Streams/webrtc/participants"  : "{{Streams}}/js/tools/webrtc/participants.js",
-	"Streams/webrtc/waitingRoomList"  : "{{Streams}}/js/tools/webrtc/waitingRoomList.js",
-	"Streams/webrtc/video"  : "{{Streams}}/js/tools/webrtc/video.js",
-	"Streams/webrtc/audio"  : "{{Streams}}/js/tools/webrtc/audio.js",
-	"Streams/webrtc/livestreaming"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
-	"Streams/webrtc/livestreaming/rtmpSender"  : "{{Streams}}/js/tools/webrtc/livestreamingRtmpSender.js",
-	"Streams/webrtc/livestreaming/canvasComposer"  : "{{Streams}}/js/tools/webrtc/livestreamingCanvasComposer.js",
-	"Streams/webrtc/livestreamInstructions"  : "{{Streams}}/js/tools/webrtc/livestreamInstructions.js",
-	"Streams/webrtc/livestream"  : "{{Streams}}/js/tools/webrtc/livestream.js",
-	"Streams/webrtc/callCenter/manager"  : "{{Streams}}/js/tools/webrtc/callCenter/manager.js",
-	"Streams/webrtc/callCenter/client"  : "{{Streams}}/js/tools/webrtc/callCenter/client.js",
-	"Streams/webrtc/popupDialog"  : "{{Streams}}/js/tools/webrtc/popupDialog.js",
+	"Streams/audioVisualization"	 : "{{Media}}/js/tools/webrtc/audioVisualization.js",
+	"Media/webrtc"	   : "{{Media}}/js/tools/webrtc/webrtc.js",
+	"Media/webrtc/preview" : "{{Media}}/js/tools/webrtc/preview.js",
+	"Media/webrtc/preview/default" : "{{Media}}/js/tools/webrtc/preview/default.js",
+	"Media/webrtc/preview/call" : "{{Media}}/js/tools/webrtc/preview/call.js",
+	"Media/webrtc/controls"  : "{{Media}}/js/tools/webrtc/controls.js",
+	"Media/webrtc/participants"  : "{{Media}}/js/tools/webrtc/participants.js",
+	"Media/webrtc/waitingRoomList"  : "{{Media}}/js/tools/webrtc/waitingRoomList.js",
+	"Media/webrtc/video"  : "{{Media}}/js/tools/webrtc/video.js",
+	"Media/webrtc/audio"  : "{{Media}}/js/tools/webrtc/audio.js",
+	"Media/webrtc/livestreaming"  : "{{Media}}/js/tools/webrtc/livestreamingEditor.js",
+	"Media/webrtc/livestreaming/rtmpSender"  : "{{Media}}/js/tools/webrtc/livestreamingRtmpSender.js",
+	"Media/webrtc/livestreaming/canvasComposer"  : "{{Media}}/js/tools/webrtc/livestreamingCanvasComposer.js",
+	"Media/webrtc/livestreamInstructions"  : "{{Media}}/js/tools/webrtc/livestreamInstructions.js",
+	"Media/webrtc/livestream"  : "{{Media}}/js/tools/webrtc/livestream.js",
+	"Media/webrtc/callCenter/manager"  : "{{Media}}/js/tools/webrtc/callCenter/manager.js",
+	"Media/webrtc/callCenter/client"  : "{{Media}}/js/tools/webrtc/callCenter/client.js",
+	"Media/webrtc/popupDialog"  : "{{Media}}/js/tools/webrtc/popupDialog.js",
 	"Streams/fileManager"  : "{{Streams}}/js/tools/fileManager.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
@@ -1860,7 +1860,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                     + '</div>',
                     onActivate: function (dialog) {
                         // fill QR code
-                        Q.addScript("{{Q}}/js/qrcode/qrcode.js", function () {
+                        Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
                             var $qrIcon = $(".Streams_invite_QR_content", dialog);
                             new QRCode($qrIcon[0], {
                                 text: rsd.url,
@@ -1871,7 +1871,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 correctLevel : QRCode.CorrectLevel.H
                             });
                             var _setPhoto = function (message) {
-                            	var dialogClassName = "Dialog_invite_photo_camera";
                             	var invitingUserId = Q.getObject("byUserId", message);
                             	var title = Q.getObject(['invite', 'dialog', 'photo'], text);
                             	if (invitingUserId) {
@@ -1885,14 +1884,14 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								if (Q.Dialogs.dialogs.length) {
 									var $lastDialog = Q.Dialogs.dialogs[Q.Dialogs.dialogs.length-1];
 									if ($lastDialog instanceof jQuery && !$lastDialog.hasClass(dialogClassName)) {
-										Q.Dialogs.pop();
+		                            	Q.Dialogs.pop();
 									}
 								}
 
 								Q.Dialogs.push({
 									title: title,
 									apply: true,
-									className: dialogClassName,
+									className: "Dialog_invite_photo_camera",
 									content:
 										'<div class="Streams_invite_photo_dialog">' +
 										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
@@ -1912,7 +1911,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 											subpath: subpath,
 											saveSizeName: saveSizeName,
 											onFinish: function () {
-												Q.Dialogs.close(dialog);
+												Q.Dialogs.pop();
 											}
 										};
 										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
@@ -5847,8 +5846,8 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// events about updated fields
 	for (k in fields) {
 		if (onlyChangedFields
-		&& fields[k] === stream.fields[k]
-		&& !Q.has(onlyChangedFields, k)) {
+			&& fields[k] === stream.fields[k]
+			&& !Q.has(onlyChangedFields, k)) {
 			continue;
 		}
 		Q.handle(
@@ -6975,8 +6974,8 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	var toUrl = Q.getObject("toUrl", instructions);
 	var conversationUrl;
 
-	// only relation type Streams/webrtc and not for myself
-	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId() || !toUrl) {
+	// only relation type Media/webrtc and not for myself
+	if (relationType !== 'Media/webrtc' || publisherId === Q.Users.loggedInUserId() || !toUrl) {
 		return;
 	}
 
@@ -6994,7 +6993,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 			streamName: toStreamName,
 			messageType: message.type,
 			callback: function () {
-				Q.Template.render('Streams/chat/webrtc/available', {
+				Q.Template.render('Media/chat/webrtc/available', {
 					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
 						userId: publisherId,
 						icon: false,
@@ -7025,7 +7024,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 		});
 	});
 }, "Streams.chat.webrtc");
-Q.Template.set('Streams/chat/webrtc/available',
+Q.Template.set('Media/chat/webrtc/available',
 	'<div class="Streams_chat_webrtc_available">'+
 	'	{{& avatar}} {{text}}'+
 	'</div>'

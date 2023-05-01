@@ -471,7 +471,7 @@
             "displayType": "Mazungumzo",
             "description": "mazungumzo kati ya watumiaji, na historia"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Teleconference",
             "description": "mkutano wa video\/sauti mtandaoni"
         },

@@ -471,7 +471,7 @@
             "displayType": "Pogovor",
             "description": "pogovor med uporabniki z zgodovino"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferenca",
             "description": "spletno video\/zvočno konferenco"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Klici",
-            "description": "kategorija za Streams\/webrtc",
+            "description": "kategorija za Media\/WebRTC",
             "MaxRelationsExceeded": "Največje število klicev je preseženo"
         }
     },

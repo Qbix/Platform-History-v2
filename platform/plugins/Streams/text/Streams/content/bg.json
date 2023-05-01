@@ -471,7 +471,7 @@
             "displayType": "Разговор",
             "description": "разговор между потребители, с история"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Телеконференция",
             "description": "онлайн видео\/аудио конференция"
         },

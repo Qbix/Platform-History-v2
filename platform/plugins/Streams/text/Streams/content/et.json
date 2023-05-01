@@ -471,7 +471,7 @@
             "displayType": "Vestlus",
             "description": "kasutajatevaheline vestlus ajalooga"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonverents",
             "description": "veebipõhine video-\/helikonverents"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Kõned",
-            "description": "kategooria Streams\/webrtc jaoks",
+            "description": "kategooria Media\/WebRTC jaoks",
             "MaxRelationsExceeded": "Kõnede maksimum on ületatud"
         }
     },

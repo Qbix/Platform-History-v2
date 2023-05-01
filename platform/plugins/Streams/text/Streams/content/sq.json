@@ -471,7 +471,7 @@
             "displayType": "bashkëbisedim",
             "description": "një bisedë midis përdoruesve, me historinë"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferencë",
             "description": "një video\/audio konferencë në internet"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Thirrjet",
-            "description": "kategori për Streams\/webrtc",
+            "description": "kategori për Media\/WebRTC",
             "MaxRelationsExceeded": "Maksimumi i telefonatave u tejkalua"
         }
     },

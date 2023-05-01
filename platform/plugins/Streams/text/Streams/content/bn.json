@@ -471,7 +471,7 @@
             "displayType": "কথোপকথন",
             "description": "ইতিহাস সহ ব্যবহারকারীদের মধ্যে একটি কথোপকথন"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "টেলিকনফারেন্স",
             "description": "একটি অনলাইন ভিডিও\/অডিও সম্মেলন"
         },

@@ -471,7 +471,7 @@
             "displayType": "Συνομιλία",
             "description": "μια συνομιλία μεταξύ των χρηστών, με το ιστορικό"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Τηλεδιάσκεψη",
             "description": "μια διαδικτυακή διάσκεψη βίντεο\/ήχου"
         },

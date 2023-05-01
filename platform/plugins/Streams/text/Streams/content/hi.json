@@ -471,7 +471,7 @@
             "displayType": "बातचीत",
             "description": "इतिहास के साथ, उपयोगकर्ताओं के बीच बातचीत"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "दूर संवाद",
             "description": "एक ऑनलाइन वीडियो\/ऑडियो सम्मेलन"
         },

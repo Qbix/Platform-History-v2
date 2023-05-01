@@ -471,7 +471,7 @@
             "displayType": "ውይይት",
             "description": "በተጠቃሚዎች መካከል የሚደረግ ውይይት ከታሪክ ጋር"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ቴሌ ኮንፈረንስ",
             "description": "የመስመር ላይ ቪዲዮ \/ ኦዲዮ ኮንፈረንስ"
         },

@@ -471,7 +471,7 @@
             "displayType": "Konverzácia",
             "description": "konverzácia medzi používateľmi s históriou"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferencia",
             "description": "online video\/audio konferencie"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "hovory",
-            "description": "kategória pre Streams\/webrtc",
+            "description": "kategória pre Media\/WebRTC",
             "MaxRelationsExceeded": "Bol prekročený maximálny počet hovorov"
         }
     },

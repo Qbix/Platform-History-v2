@@ -471,7 +471,7 @@
             "displayType": "Beszélgetés",
             "description": "a felhasználók közötti beszélgetés előzményekkel"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferencia",
             "description": "online video\/audio konferencia"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Hívások",
-            "description": "kategória a Streams\/webrtc számára",
+            "description": "kategória a Media\/WebRTC számára",
             "MaxRelationsExceeded": "A hívások maximális száma túllépve"
         }
     },

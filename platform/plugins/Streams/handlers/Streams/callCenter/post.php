@@ -8,8 +8,8 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  */
 
 /**
- * Used to start a new Streams/webrtc stream (a real time audio/video call)
- * @class HTTP Streams webrtc
+ * Used to start a new Media/webrtc stream (a real time audio/video call)
+ * @class HTTP Media webrtc
  * @method post
  * @param {array} [$_REQUEST] Parameters that can come from the request
  *   @param {string} $_REQUEST.publisherId  Required. The id of the user to publish the stream.
@@ -153,7 +153,7 @@ function Streams_callCenter_post($params = array())
         }
     
         $waitingRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/accepted',
+            'type' => 'Media/webrtc/accepted',
             'instructions' => [
                 'msg' => 'Your call request was accepted'
             ]
@@ -164,7 +164,7 @@ function Streams_callCenter_post($params = array())
         $waitingRoomStream->save();
 
         $liveShowRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/accepted',
+            'type' => 'Media/webrtc/accepted',
             'instructions' => [
                 'waitingRoom' => $waitingRoom,
                 'byUserId' => $loggedInUserId
@@ -207,12 +207,12 @@ function Streams_callCenter_post($params = array())
             'immediate' => true, 
             'userId' => $waitingRoom['publisherId']
         ];
-        $messageType = 'Streams/webrtc/callEnded';
+        $messageType = 'Media/webrtc/callEnded';
         if($action == 'endCall') {
-            $messageType = 'Streams/webrtc/callEnded';
+            $messageType = 'Media/webrtc/callEnded';
             $instructions['msg'] = 'Call ended';
         } else if($action == 'declineCall') {
-            $messageType = 'Streams/webrtc/callDeclined';
+            $messageType = 'Media/webrtc/callDeclined';
             $instructions['msg'] = 'Your call request was declined';
         }
     
@@ -259,7 +259,7 @@ function Streams_callCenter_post($params = array())
         }
 
         $waitingRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/interview',
+            'type' => 'Media/webrtc/interview',
             'instructions' => ['msg' => 'Operator started interview with you']
         ));
 
@@ -268,7 +268,7 @@ function Streams_callCenter_post($params = array())
         $waitingRoomStream->save();
 
         $liveShowRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/interview',
+            'type' => 'Media/webrtc/interview',
             'instructions' => [
                 'waitingRoom' => $waitingRoom,
                 'byUserId' => $loggedInUserId
@@ -298,7 +298,7 @@ function Streams_callCenter_post($params = array())
         $waitingRoomStream->save();
 
         $liveShowRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/approved',
+            'type' => 'Media/webrtc/approved',
             'instructions' => [
                 'waitingRoom' => $waitingRoom,
                 'byUserId' => $loggedInUserId,
@@ -324,7 +324,7 @@ function Streams_callCenter_post($params = array())
         }
 
         $waitingRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/hold',
+            'type' => 'Media/webrtc/hold',
             'instructions' => [
                 'msg' => 'Your call was put on hold...',
                 'userId' => $waitingRoom['publisherId']
@@ -337,7 +337,7 @@ function Streams_callCenter_post($params = array())
         $waitingRoomStream->save();
 
         $liveShowRoomStream->post($publisherId, array(
-            'type' => 'Streams/webrtc/hold',
+            'type' => 'Media/webrtc/hold',
             'instructions' => [
                 'waitingRoom' => $waitingRoom,
                 'byUserId' => $loggedInUserId,
@@ -350,7 +350,7 @@ function Streams_callCenter_post($params = array())
             throw new Exception('To continue you should be connected to the socket server.');
         }
 
-        $webrtc = new Streams_WebRTC_Node();
+        $webrtc = new Media_WebRTC_Node();
 
         if($useTwilioTurn) {
             try {

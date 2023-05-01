@@ -471,7 +471,7 @@
             "displayType": "Беседа",
             "description": "разговор между пользователями, с историей"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Телеконференция",
             "description": "онлайн-видео\/аудиоконференция"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Звонки",
-            "description": "категория для Streams\/webrtc",
+            "description": "категория для Media\/WebRTC",
             "MaxRelationsExceeded": "Превышено максимальное количество звонков"
         }
     },

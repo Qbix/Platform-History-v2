@@ -108,8 +108,8 @@ Q.Tool.define("Streams/topic/preview", "Streams/preview", function (options, pre
 		"Streams/pdf": {
 			icon: "{{Streams}}/img/icons/files/pdf/40.png"
 		},
-		"Streams/webrtc": {
-			icon: "{{Streams}}/img/icons/Streams/webrtc/40.png"
+		"Media/webrtc": {
+			icon: "{{Media}}/img/icons/Media/webrtc/40.png"
 		},
 		"Websites/webpage": {
 			icon: "{{Websites}}/img/icons/Websites/webpage/40.png"

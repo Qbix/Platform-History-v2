@@ -428,14 +428,14 @@ Broadcast.listen = function () {
 
         socket.on('disconnect', function() {
             if(!roomId) return;
-            if(_debug) console.log('DISCONNECT', nspName + '#' + socket.client.id, socket.userPlatformId, 'Streams/webrtc/' + roomId);
+            if(_debug) console.log('DISCONNECT', nspName + '#' + socket.client.id, socket.userPlatformId, 'Media/webrtc/' + roomId);
             io.of(nspName).in(roomId).clients(function (error, clients) {
                 if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
                 if(clients.length > 0) {
                     return;
                 }
 
-                var streamName = 'Streams/webrtc/' + roomId;
+                var streamName = 'Media/webrtc/' + roomId;
                 Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
                     if(err || !stream) {
                         return;

@@ -471,7 +471,7 @@
             "displayType": "Pokalbis",
             "description": "pokalbis tarp vartotojų su istorija"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferencija",
             "description": "internetinė vaizdo \/ garso konferencija"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Skambučiai",
-            "description": "kategorija Streams\/webrtc",
+            "description": "kategorija Media\/WebRTC",
             "MaxRelationsExceeded": "Viršytas maksimalus skambučių skaičius"
         }
     },

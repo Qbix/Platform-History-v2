@@ -471,7 +471,7 @@
             "displayType": "گفتگو",
             "description": "مکالمه بین کاربران، با تاریخچه"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "کنفرانس تلفنی",
             "description": "یک کنفرانس ویدیویی\/صوتی آنلاین"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "تماس می گیرد",
-            "description": "دسته بندی برای Streams\/webrtc",
+            "description": "دسته بندی برای Media\/WebRTC",
             "MaxRelationsExceeded": "بیش از حداکثر تماس"
         }
     },

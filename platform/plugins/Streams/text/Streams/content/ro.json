@@ -471,7 +471,7 @@
             "displayType": "Conversaţie",
             "description": "o conversație între utilizatori, cu istoric"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Teleconferinta",
             "description": "o conferință video\/audio online"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Apeluri",
-            "description": "categorie pentru Streams\/webrtc",
+            "description": "categorie pentru Media\/WebRTC",
             "MaxRelationsExceeded": "Numărul maxim de apeluri a fost depășit"
         }
     },

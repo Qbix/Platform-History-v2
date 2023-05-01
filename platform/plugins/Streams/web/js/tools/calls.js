@@ -2,6 +2,7 @@
 
     var Streams = Q.Streams;
     var Users = Q.Users;
+    var Media = Q.Media;
 
     /**
      * @module Streams-tools
@@ -155,7 +156,7 @@
                 var mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
                 console.log('calls: initMainRoom mainRoomStream', mainRoomStream.fields.publisherId, mainRoomStream.fields.name);
                 console.log('calls: initMainRoom eventsStream', tool.state.eventsStream.fields.publisherId, tool.state.eventsStream.fields.name);
-                var WebRTCClientUI = tool.state.mainWebrtcRoom = Streams.WebRTC.start({
+                var WebRTCClientUI = tool.state.mainWebrtcRoom = Media.WebRTC.start({
                     element: tool.state.mainRoomConfig.mainRoomContainer,
                     audioOnlyMode: true,
                     roomPublisherId: mainRoomStream ? mainRoomStream.fields.publisherId : null,
@@ -392,7 +393,7 @@
                         tool.state.mainRoomConfig.mainRoomContainer.appendChild(subtitleEl);
                         tool.state.mainRoomConfig.mainRoomContainer.appendChild(containerForMedia);
                         //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
-                        state.waitingRoom = Streams.WebRTC.start({
+                        state.waitingRoom = Media.WebRTC.start({
                             element: tool.state.mainRoomConfig.mainRoomContainer,
                             audioOnlyMode: true,
                             publisherId: state.publisherId,

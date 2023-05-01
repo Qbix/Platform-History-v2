@@ -471,7 +471,7 @@
             "displayType": "Pag-uusap",
             "description": "isang pag-uusap sa pagitan ng mga user, na may kasaysayan"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Teleconference",
             "description": "isang online na video\/audio conference"
         },

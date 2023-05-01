@@ -583,8 +583,8 @@ Q.Tool.define('Streams/chat', function(options) {
 						var stream = this;
 						var streamType = stream.fields.type;
 
-						if (["Streams/webrtc", "Streams/question", "Streams/answer"].includes(streamType)) {
-							// Streams/webrtc/preview tool handle click event itself
+						if (["Media/webrtc", "Streams/question", "Streams/answer"].includes(streamType)) {
+							// Media/webrtc/preview tool handle click event itself
 							return;
 						}
 
@@ -765,7 +765,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		$toolElement.attr('data-webrtc', 'loading');
 
-		Q.Streams.WebRTC.start({
+		Q.Media.WebRTC.start({
 			roomPublisherId: Q.Users.loggedInUserId(),
 			publisherId: state.publisherId,
 			streamName: state.streamName,

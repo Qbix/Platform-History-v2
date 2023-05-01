@@ -471,7 +471,7 @@
             "displayType": "సంభాషణ",
             "description": "చరిత్రతో వినియోగదారుల మధ్య సంభాషణ"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "టెలికాన్ఫరెన్స్",
             "description": "ఆన్‌లైన్ వీడియో\/ఆడియో కాన్ఫరెన్స్"
         },

@@ -35,33 +35,33 @@ function Streams_livestream_post($params = array())
 	$livestreamStreamRelation = Streams_RelatedTo::select()->where(array(
 		"toPublisherId" => $publisherId,
 		"toStreamName" => $streamName,
-		"type" => "Streams/webrtc/livestream"
+		"type" => "Media/webrtc/livestream"
 	))->orderBy("weight", false)->limit(1)->fetchDbRow();
 
 
 	if(is_null($livestreamStreamRelation) || empty($livestreamStreamRelation)) {
 		//if there is no livestream stream found, create it and relate it to webrtc stream of room
-		$livestreamStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/livestream', ['writeLevel' => 23]);
+		$livestreamStream = Streams::create($loggedInUserId, $loggedInUserId, 'Media/webrtc/livestream', ['writeLevel' => 23]);
 		$livestreamStream->subscribe();
 		$livestreamStream->join(['subscribed' => true]);
 
 		$livestreamStream->relateTo((object)array(
 			"publisherId" => $publisherId,
 			"name" => $streamName
-		), "Streams/webrtc/livestream", $loggedInUserId, array(
+		), "Media/webrtc/livestream", $loggedInUserId, array(
 			"inheritAccess" => false,
 			"weight" => time()
 		));
 
 		//create stream for public chat room and relate it to livestream stream
-		$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/chat', ['title' => 'Public']);
+		$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Media/webrtc/chat', ['title' => 'Public']);
 		$publicChatStream->setAttribute('publicChat', true);
 		$publicChatStream->changed();
 
 		$publicChatStream->relateTo((object)array(
 			"publisherId" => $livestreamStream->publisherId,
 			"name" => $livestreamStream->name,
-		), "Streams/webrtc/livestream/chat", $loggedInUserId, array(
+		), "Media/webrtc/livestream/chat", $loggedInUserId, array(
 			"inheritAccess" => false,
 			"weight" => 9999999999.0000
 		));
@@ -73,7 +73,7 @@ function Streams_livestream_post($params = array())
 		$publicChatStreamRelation = Streams_RelatedTo::select()->where(array(
 			"toPublisherId" => $livestreamStream->publisherId,
 			"toStreamName" => $livestreamStream->name,
-			"type" => "Streams/webrtc/livestream/chat",
+			"type" => "Media/webrtc/livestream/chat",
 			"weight" =>  9999999999.0000
 		))->limit(1)->fetchDbRow();
 
@@ -81,14 +81,14 @@ function Streams_livestream_post($params = array())
 			$publicChatStream = Streams_Stream::fetch($loggedInUserId, $publicChatStreamRelation->fromPublisherId, $publicChatStreamRelation->fromStreamName);
 		} else {
 			//create stream for public chat room and relate it to livestream stream
-			$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Streams/webrtc/chat', ['title' => 'Public']);
+			$publicChatStream = Streams::create($loggedInUserId, $loggedInUserId, 'Media/webrtc/chat', ['title' => 'Public']);
 			$publicChatStream->setAttribute('publicChat', true);
 			$publicChatStream->changed();
 
 			$publicChatStream->relateTo((object)array(
 				"publisherId" => $livestreamStream->publisherId,
 				"name" => $livestreamStream->name,
-			), "Streams/webrtc/livestream/chat", $loggedInUserId, array(
+			), "Media/webrtc/livestream/chat", $loggedInUserId, array(
 				"inheritAccess" => false,
 				"weight" => 9999999999.0000
 			));

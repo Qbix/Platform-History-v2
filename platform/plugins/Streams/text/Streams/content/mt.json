@@ -471,7 +471,7 @@
             "displayType": "Konversazzjoni",
             "description": "konverżazzjoni bejn l-utenti, bl-istorja"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferenza",
             "description": "konferenza vidjo\/awdjo onlajn"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Sejħiet",
-            "description": "kategorija għal Streams\/webrtc",
+            "description": "kategorija għal Media\/WebRTC",
             "MaxRelationsExceeded": "Max sejħiet inqabeż"
         }
     },

@@ -471,7 +471,7 @@
             "displayType": "Percakapan",
             "description": "percakapan antara pengguna, dengan sejarah"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferensi",
             "description": "konferensi video\/audio online"
         },

@@ -471,7 +471,7 @@
             "displayType": "વાતચીત",
             "description": "ઇતિહાસ સાથે વપરાશકર્તાઓ વચ્ચે વાતચીત"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ટેલિકોન્ફરન્સ",
             "description": "ઓનલાઈન વિડિયો\/ઓડિયો કોન્ફરન્સ"
         },

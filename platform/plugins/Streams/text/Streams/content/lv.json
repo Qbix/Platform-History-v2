@@ -471,7 +471,7 @@
             "displayType": "Saruna",
             "description": "saruna starp lietotājiem ar vēsturi"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonference",
             "description": "tiešsaistes video\/audio konference"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Zvani",
-            "description": "kategorija Streams\/webrtc",
+            "description": "kategorija Media\/WebRTC",
             "MaxRelationsExceeded": "Pārsniegts zvanu maksimālais skaits"
         }
     },

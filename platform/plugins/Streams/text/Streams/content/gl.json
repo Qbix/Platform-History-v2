@@ -471,7 +471,7 @@
             "displayType": "Conversa",
             "description": "unha conversa entre usuarios, con historia"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Teleconferencia",
             "description": "unha videoconferencia\/audio en liña"
         },
@@ -486,7 +486,7 @@
         },
         "Streams\/calls": {
             "displayType": "Chamadas",
-            "description": "categoría para Streams\/webrtc",
+            "description": "categoría para Media\/WebRTC",
             "MaxRelationsExceeded": "Superouse o número máximo de chamadas"
         }
     },
