@@ -35,8 +35,8 @@
  *   @param {Object} [options.preprocess=[]] Array of functions which call one by one before message post.
  *   Each function will get callback as argument. Need to call this callback when ready to go further.
  *   @param {Array} [option.allowedRelatedStreams] Array of related streams types allowed to display as chat message.
- *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
- *   @param {Q.Event} [options.onRefresh] Event when tool element rendered
+ *   @param {Q.Event} [options.onRefresh] Event for when the entire chat has been updated
+
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
  *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
@@ -397,8 +397,6 @@ Q.Tool.define('Streams/chat', function(options) {
 					});
 				});
 
-				$te.find('.Streams_chat_call').attr('data-touchlabel', tool.text.JoinWebRTC);
-
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
 					tool.$('.Streams_chat_composer').hide();
@@ -747,44 +745,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 	},
 	/**
-	 * @method startWebRTC
-	 * Trying to connect user to video/audio conversation related to current chat stream.
-	 * If WebRTC stream doesn't exist, try to create one.
-	 */
-	startWebRTC: function () {
-		console.log('startWebRTC');
-
-		var tool = this;
-		var state = this.state;
-		var $toolElement = $(this.element);
-
-		if (state.webrtc) {
-			console.log('startWebRTC state.webrtc');
-			return;
-		}
-
-		$toolElement.attr('data-webrtc', 'loading');
-
-		Q.Media.WebRTC.start({
-			roomPublisherId: Q.Users.loggedInUserId(),
-			publisherId: state.publisherId,
-			streamName: state.streamName,
-			closeManually: true,
-			tool: tool,
-			useRelatedTo: true,
-			onWebrtcControlsCreated: function () {
-				$toolElement.attr('data-webrtc', true);
-			},
-			onStart: function () {
-				state.webrtc = this;
-			},
-			onEnd: function () {
-				state.webrtc = null;
-				$toolElement.attr('data-webrtc', false);
-			}
-		});
-	},
-	/**
 	 * Render single message
 	 * @method renderMessage
 	 * @param message
@@ -965,16 +925,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		// submit button handler
 		tool.$(".Streams_chat_composer .Streams_chat_submit").on(Q.Pointer.fastclick, function(){
 			Q.handle(_submit, $input[0], [$input]);
-		});
-
-		// call button handler
-		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(e){
-			e.stopPropagation();
-			e.preventDefault();
-
-			$input.blur();
-
-			tool.startWebRTC();
 		});
 
 		function _submit ($this, key) {
@@ -1338,9 +1288,9 @@ Q.Tool.define('Streams/chat', function(options) {
 						// if startWebRTC is true, start webrtc
 						if (state.startWebRTC
 						|| (location.href.indexOf(state.stream.url() >= 0)
-							&& location.href.indexOf('startWebRTC') >= 0
+						&& location.href.indexOf('startWebRTC') >= 0
 						)) {
-							tool.startWebRTC();
+							tool.startWebRTC && tool.startWebRTC();
 						}
 					}
 				);
