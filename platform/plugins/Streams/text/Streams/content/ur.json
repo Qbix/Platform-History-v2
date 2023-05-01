@@ -484,7 +484,7 @@
             "displayType": "جواب دیں۔",
             "description": "جوابی سلسلہ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "کالز",
             "description": "اسٹریمز\/webrtc کے لیے زمرہ",
             "MaxRelationsExceeded": "زیادہ سے زیادہ کالز ہو گئیں۔"

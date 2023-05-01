@@ -484,7 +484,7 @@
             "displayType": "Antwoord",
             "description": "antwoordstroom"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Oproepe",
             "description": "kategorie vir Media\/WebRTC",
             "MaxRelationsExceeded": "Maksimum oproepe oorskry"

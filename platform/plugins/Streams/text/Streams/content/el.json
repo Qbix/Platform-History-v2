@@ -484,7 +484,7 @@
             "displayType": "Απάντηση",
             "description": "ροή απαντήσεων"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "κλήσεις",
             "description": "κατηγορία για Ροές\/webrtc",
             "MaxRelationsExceeded": "Υπέρβαση του μέγιστου αριθμού κλήσεων"

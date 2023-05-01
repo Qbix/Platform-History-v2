@@ -484,7 +484,7 @@
             "displayType": "Vastaus",
             "description": "vastausvirta"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Puhelut",
             "description": "luokka Media\/WebRTC:lle",
             "MaxRelationsExceeded": "Puhelujen enimmäismäärä ylitetty"

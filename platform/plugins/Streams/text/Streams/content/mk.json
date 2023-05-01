@@ -484,7 +484,7 @@
             "displayType": "Одговори",
             "description": "тек на одговори"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Повици",
             "description": "категорија за Потоци\/webrtc",
             "MaxRelationsExceeded": "Надминат максимум повици"

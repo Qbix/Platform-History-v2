@@ -484,7 +484,7 @@
             "displayType": "Respon",
             "description": "corrent de resposta"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Trucades",
             "description": "categoria per a Media\/WebRTC",
             "MaxRelationsExceeded": "S&#39;ha superat el màxim de trucades"

@@ -484,7 +484,7 @@
             "displayType": "Svar",
             "description": "svarstrøm"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Opkald",
             "description": "kategori for Media\/WebRTC",
             "MaxRelationsExceeded": "Det maksimale antal opkald er overskredet"

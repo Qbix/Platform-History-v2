@@ -484,7 +484,7 @@
             "displayType": "Responder",
             "description": "fluxo de resposta"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "chamadas",
             "description": "categoria para Media\/WebRTC",
             "MaxRelationsExceeded": "Máximo de chamadas excedido"

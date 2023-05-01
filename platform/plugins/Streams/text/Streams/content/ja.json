@@ -484,7 +484,7 @@
             "displayType": "答え",
             "description": "回答の流れ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "通話",
             "description": "Media\/WebRTC のカテゴリ",
             "MaxRelationsExceeded": "最大呼び出し数を超えました"

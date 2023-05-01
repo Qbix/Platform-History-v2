@@ -484,7 +484,7 @@
             "displayType": "Atsakymas",
             "description": "atsakymų srautas"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Skambučiai",
             "description": "kategorija Media\/WebRTC",
             "MaxRelationsExceeded": "Viršytas maksimalus skambučių skaičius"

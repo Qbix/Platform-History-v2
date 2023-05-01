@@ -484,7 +484,7 @@
             "displayType": "უპასუხე",
             "description": "პასუხების ნაკადი"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "რეკავს",
             "description": "კატეგორია Media\/WebRTC-ისთვის",
             "MaxRelationsExceeded": "ზარების მაქსიმუმი გადააჭარბა"

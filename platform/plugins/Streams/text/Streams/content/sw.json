@@ -484,7 +484,7 @@
             "displayType": "Jibu",
             "description": "jibu mkondo"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Simu",
             "description": "kategoria ya Mipasho\/webrtc",
             "MaxRelationsExceeded": "Simu za juu zaidi zimepitwa"

@@ -484,7 +484,7 @@
             "displayType": "Sagot",
             "description": "sagot stream"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Mga tawag",
             "description": "kategorya para sa Mga Stream\/webrtc",
             "MaxRelationsExceeded": "Lumampas ang max na tawag"

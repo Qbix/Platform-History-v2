@@ -484,7 +484,7 @@
             "displayType": "Atbilde",
             "description": "atbilžu straume"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Zvani",
             "description": "kategorija Media\/WebRTC",
             "MaxRelationsExceeded": "Pārsniegts zvanu maksimālais skaits"

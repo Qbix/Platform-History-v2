@@ -484,7 +484,7 @@
             "displayType": "Отвечать",
             "description": "поток ответов"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Звонки",
             "description": "категория для Media\/WebRTC",
             "MaxRelationsExceeded": "Превышено максимальное количество звонков"

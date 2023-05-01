@@ -484,7 +484,7 @@
             "displayType": "Cavab verin",
             "description": "cavab axını"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Zənglər",
             "description": "Yayımlar\/webrtc üçün kateqoriya",
             "MaxRelationsExceeded": "Maksimum zənglər keçdi"

@@ -484,7 +484,7 @@
             "displayType": "Freagra",
             "description": "sruth freagra"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Glaonna",
             "description": "chatagóir do Media\/WebRTC",
             "MaxRelationsExceeded": "Sáraíodh uasghlaonna"

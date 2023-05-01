@@ -484,7 +484,7 @@
             "displayType": "Trả lời",
             "description": "dòng câu trả lời"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "cuộc gọi",
             "description": "danh mục cho Luồng\/webrtc",
             "MaxRelationsExceeded": "Đã vượt quá số cuộc gọi tối đa"

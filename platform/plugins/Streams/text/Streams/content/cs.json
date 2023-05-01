@@ -484,7 +484,7 @@
             "displayType": "Odpovědět",
             "description": "stream odpovědí"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "hovory",
             "description": "kategorie pro Media\/WebRTC",
             "MaxRelationsExceeded": "Překročen maximální počet hovorů"

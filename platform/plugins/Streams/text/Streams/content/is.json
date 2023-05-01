@@ -484,7 +484,7 @@
             "displayType": "Svaraðu",
             "description": "svarstraumur"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Símtöl",
             "description": "flokkur fyrir Media\/WebRTC",
             "MaxRelationsExceeded": "Hámarks símtöl náð"

@@ -484,7 +484,7 @@
             "displayType": "Përgjigju",
             "description": "rrjedha e përgjigjeve"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Thirrjet",
             "description": "kategori për Media\/WebRTC",
             "MaxRelationsExceeded": "Maksimumi i telefonatave u tejkalua"

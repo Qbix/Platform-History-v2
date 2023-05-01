@@ -484,7 +484,7 @@
             "displayType": "సమాధానం",
             "description": "జవాబు ప్రవాహం"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "కాల్స్",
             "description": "స్ట్రీమ్‌లు\/webrtc కోసం వర్గం",
             "MaxRelationsExceeded": "గరిష్ట కాల్‌లు మించిపోయాయి"

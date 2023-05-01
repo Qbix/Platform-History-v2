@@ -484,7 +484,7 @@
             "displayType": "Vastus",
             "description": "vastuste voog"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Kõned",
             "description": "kategooria Media\/WebRTC jaoks",
             "MaxRelationsExceeded": "Kõnede maksimum on ületatud"

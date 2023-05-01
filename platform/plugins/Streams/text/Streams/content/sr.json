@@ -484,7 +484,7 @@
             "displayType": "Одговор",
             "description": "ток одговора"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Позиви",
             "description": "категорија за Стреамс\/вебртц",
             "MaxRelationsExceeded": "Максимални број позива је премашен"

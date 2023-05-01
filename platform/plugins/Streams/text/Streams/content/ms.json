@@ -484,7 +484,7 @@
             "displayType": "Jawab",
             "description": "aliran jawapan"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Panggilan",
             "description": "kategori untuk Strim\/webrtc",
             "MaxRelationsExceeded": "Panggilan maksimum melebihi"

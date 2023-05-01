@@ -484,7 +484,7 @@
             "displayType": "જવાબ આપો",
             "description": "જવાબ પ્રવાહ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "કૉલ્સ",
             "description": "સ્ટ્રીમ્સ\/webrtc માટે શ્રેણી",
             "MaxRelationsExceeded": "મહત્તમ કૉલ્સ ઓળંગી ગયા"

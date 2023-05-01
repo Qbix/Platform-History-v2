@@ -484,7 +484,7 @@
             "displayType": "คำตอบ",
             "description": "สตรีมคำตอบ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "โทร",
             "description": "หมวดหมู่สำหรับ Media\/WebRTC",
             "MaxRelationsExceeded": "เกินจำนวนการโทรสูงสุด"

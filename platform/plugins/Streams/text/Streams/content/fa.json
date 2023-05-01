@@ -484,7 +484,7 @@
             "displayType": "پاسخ",
             "description": "جریان پاسخ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "تماس می گیرد",
             "description": "دسته بندی برای Media\/WebRTC",
             "MaxRelationsExceeded": "بیش از حداکثر تماس"

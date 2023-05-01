@@ -484,7 +484,7 @@
             "displayType": "Válasz",
             "description": "válaszfolyam"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Hívások",
             "description": "kategória a Media\/WebRTC számára",
             "MaxRelationsExceeded": "A hívások maximális száma túllépve"

@@ -484,7 +484,7 @@
             "displayType": "Tweġiba",
             "description": "fluss tat-tweġiba"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Sejħiet",
             "description": "kategorija għal Media\/WebRTC",
             "MaxRelationsExceeded": "Max sejħiet inqabeż"

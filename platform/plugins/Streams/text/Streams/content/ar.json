@@ -484,7 +484,7 @@
             "displayType": "إجابة",
             "description": "دفق الإجابة"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "المكالمات",
             "description": "فئة لتيارات \/ webrtc",
             "MaxRelationsExceeded": "تم تجاوز الحد الأقصى من المكالمات"

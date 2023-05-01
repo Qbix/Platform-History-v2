@@ -484,7 +484,7 @@
             "displayType": "उत्तर",
             "description": "उत्तर धारा"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "कॉल",
             "description": "स्ट्रीम\/वेबआरटीसी के लिए श्रेणी",
             "MaxRelationsExceeded": "अधिकतम कॉल पार हो गई"

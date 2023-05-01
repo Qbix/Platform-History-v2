@@ -484,7 +484,7 @@
             "displayType": "답변",
             "description": "응답 스트림"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "통화",
             "description": "Media\/WebRTC 카테고리",
             "MaxRelationsExceeded": "최대 통화 초과"

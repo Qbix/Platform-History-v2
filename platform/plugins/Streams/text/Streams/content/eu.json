@@ -484,7 +484,7 @@
             "displayType": "Erantzun",
             "description": "erantzun korrontea"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Deiak",
             "description": "Media\/WebRTC kategorian",
             "MaxRelationsExceeded": "Gehienezko deiak gainditu dira"

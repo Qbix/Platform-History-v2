@@ -484,7 +484,7 @@
             "displayType": "Відповідь",
             "description": "потік відповідей"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Дзвінки",
             "description": "категорія для Media\/WebRTC",
             "MaxRelationsExceeded": "Перевищено максимальну кількість викликів"

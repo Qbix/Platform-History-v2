@@ -484,7 +484,7 @@
             "displayType": "መልስ",
             "description": "መልስ ዥረት"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "ጥሪዎች",
             "description": "ምድብ ለዥረቶች\/webrtc",
             "MaxRelationsExceeded": "ከፍተኛ ጥሪዎች ታልፈዋል"

@@ -484,7 +484,7 @@
             "displayType": "উত্তর",
             "description": "উত্তর প্রবাহ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "কল",
             "description": "স্ট্রিম\/webrtc-এর জন্য বিভাগ",
             "MaxRelationsExceeded": "সর্বাধিক কলগুলি অতিক্রম করেছে৷"

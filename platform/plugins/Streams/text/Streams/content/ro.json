@@ -484,7 +484,7 @@
             "displayType": "Răspuns",
             "description": "flux de răspunsuri"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Apeluri",
             "description": "categorie pentru Media\/WebRTC",
             "MaxRelationsExceeded": "Numărul maxim de apeluri a fost depășit"

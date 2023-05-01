@@ -484,7 +484,7 @@
             "displayType": "பதில்",
             "description": "பதில் ஸ்ட்ரீம்"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "அழைப்புகள்",
             "description": "ஸ்ட்ரீம்கள்\/webrtc க்கான வகை",
             "MaxRelationsExceeded": "அதிகபட்ச அழைப்புகள் மீறப்பட்டுள்ளன"

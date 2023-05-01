@@ -484,7 +484,7 @@
             "displayType": "回答",
             "description": "答案流"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "来电",
             "description": "Media\/WebRTC 类别",
             "MaxRelationsExceeded": "超出最大通话次数"

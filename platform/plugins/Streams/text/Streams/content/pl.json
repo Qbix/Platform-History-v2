@@ -484,7 +484,7 @@
             "displayType": "Odpowiedź",
             "description": "strumień odpowiedzi"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Połączenia",
             "description": "kategoria dla strumieni\/webrtc",
             "MaxRelationsExceeded": "Przekroczono maksymalną liczbę połączeń"

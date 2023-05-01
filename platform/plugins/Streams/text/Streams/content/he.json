@@ -484,7 +484,7 @@
             "displayType": "תשובה",
             "description": "זרם תשובות"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "שיחות",
             "description": "קטגוריה עבור Media\/WebRTC",
             "MaxRelationsExceeded": "חרג ממספר השיחות"
