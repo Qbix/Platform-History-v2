@@ -27,9 +27,9 @@ function Streams_webcast_post($params = array())
     $https = strpos($nodeUrl, 'https:');
     $socketServer = ($https !== false ? 'https://' : 'http://') . $nodeHost . ':' . ((int)$nodePort + 5);
 
-    $turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
-    $liveStreamingConfig = Q_Config::get('Streams', 'webrtc', 'liveStreaming', []);
-    $debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
+    $turnServers = Q_Config::get('Media', 'webrtc', 'turnServers', []);
+    $liveStreamingConfig = Q_Config::get('Media', 'webrtc', 'liveStreaming', []);
+    $debug = Q_Config::get('Media', 'webrtc', 'debug', false);
 
 	$params = array_merge($_REQUEST, $params);
 	$loggedInUserId = Users::loggedInUser(true)->id;

@@ -28,10 +28,10 @@ function Streams_callCenter_post($params = array())
         $socketServer = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', Q_Config::get('Q', 'node', 'url', null)), '/');
     }
 
-    $turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
-    $useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
-    $liveStreamingConfig = Q_Config::get('Streams', 'webrtc', 'liveStreaming', []);
-    $globalLimitsConfig = Q_Config::get('Streams', 'webrtc', 'limits', []);
+    $turnServers = Q_Config::get('Media', 'webrtc', 'turnServers', []);
+    $useTwilioTurn = Q_Config::get('Media', 'webrtc', 'useTwilioTurnServers', null);
+    $liveStreamingConfig = Q_Config::get('Media', 'webrtc', 'liveStreaming', []);
+    $globalLimitsConfig = Q_Config::get('Media', 'webrtc', 'limits', []);
     $debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
 
 	$params = array_merge($_REQUEST, $params);
