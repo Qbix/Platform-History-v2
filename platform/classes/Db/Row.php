@@ -944,6 +944,7 @@ class Db_Row
 		if (!isset($fieldNames)) {
 			$fieldNames = array_keys($this->fields);
 		}
+		$original = $this->fieldsOriginal;
 		foreach ($fieldNames as $f) {
 			if (!isset($this->fields[$f]) and !isset($original[$f])) {
 				continue;

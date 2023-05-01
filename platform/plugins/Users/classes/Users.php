@@ -586,7 +586,6 @@ abstract class Users extends Base_Users
 
 				// Download and save platform icon for the user
 				$sizes = array_keys(Q_Image::getSizes('Users/icon'));
-				sort($sizes);
 				$icon = $externalFrom->icon($sizes, '.png');
 				if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 					self::importIcon($user, $icon);
@@ -1270,7 +1269,6 @@ abstract class Users extends Base_Users
 
 		$directory = null;
 		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
-		sort($sizes);
 		if (empty($icon)) {
 			if ($externalFrom = Users_ExternalFrom::authenticate($platform, $appId)) {
 				$icon = $externalFrom->icon($sizes, '.png');

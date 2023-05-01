@@ -121,6 +121,12 @@
 					"": 10,
 					"Users/admins": 1000
 				}
+			},
+			"Streams/description": {
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
+				}
 			}
 		}
 	},

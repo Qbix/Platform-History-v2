@@ -318,8 +318,8 @@
         "NotOnSale": "ಮಾರಾಟದಲ್ಲಿಲ್ಲ",
         "NftName": "NFT ಹೆಸರು",
         "DescribeYourNFT": "ದಯವಿಟ್ಟು ನಿಮ್ಮ NFT ಅನ್ನು ವಿವರಿಸಿ",
-        "NftPicture": "NFT ಅನ್ನು ಪ್ರತಿನಿಧಿಸಲು ಚಿತ್ರ",
-        "NftMovie": "NFT ಅನ್ನು ಪ್ರತಿನಿಧಿಸಲು ಚಲನಚಿತ್ರ",
+        "NFTImage": "NFT ಗಾಗಿ ಚಿತ್ರ",
+        "NFTVideo": "ಯಾವುದಾದರೂ ಇದ್ದರೆ NFT ಗಾಗಿ ವೀಡಿಯೊ",
         "UploadMovie": "ಚಲನಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
         "MovieSource": "ಚಲನಚಿತ್ರ ಮೂಲ",
         "MovieURL": "ಚಲನಚಿತ್ರ URL",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} ಗಾಗಿ ಪ್ರೊಫೈಲ್",
             "Description": "ಬಳಕೆದಾರರ ವಿವರಗಳು",
             "aboutPlaceholder": "ಬಯೋ ಸಂಪಾದಿಸಿ",
-            "SureLogOut": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
+            "SureLogOut": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+            "UploadCoverPhoto": "ಕವರ್ ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ"
         },
         "sales": {
             "factory": {

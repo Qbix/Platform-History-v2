@@ -36,7 +36,7 @@ class Q_Image
 	 * @param {string} $type The type of image
 	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
 	 *   with a number from the config, or 1 if nothing is found
-	 * @return {array} 
+	 * @return {array} The sizes, sorted by key (e.g. "30" comes before "20x80")
 	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
 	 */
 	static function getSizes($type, &$maxStretch = null)
@@ -44,6 +44,7 @@ class Q_Image
 		$sizes = Q_Config::expect("Q", "images", $type, 'sizes');
 		$maxStretch = Q_Config::get("Q", "images", $type, 'maxStretch', 1);
 		if (Q::isAssociative($sizes)) {
+			Q_Utils::sortKeysNumerically($sizes);
 			return $sizes;
 		}
 
@@ -52,6 +53,7 @@ class Q_Image
 			$sizes2[$size] = "$size.png";
 		}
 
+		Q_Utils::sortKeysNumerically($sizes2);
 		return $sizes2;
 	}
 
@@ -350,6 +352,7 @@ class Q_Image
 				'type' => 'string'
 			));
 		}
+		// sizes are ksorted, thus square sizes get listed before others, because names are shorter
 		$sizes = Q_Image::getSizes($save);
 		// crop parameters - size of source image
 		$isw = isset($crop['w']) ? $crop['w'] : $iw;
@@ -369,7 +372,6 @@ class Q_Image
 			}
 		}
 		$dwMax = $dhMax = 0;
-		ksort($sizes); // to make sure square sizes get listed before others, because names are shorter
 		foreach ($sizes as $size => $name) {
 			if (empty($name)) {
 				// generate a filename

@@ -318,8 +318,8 @@
         "NotOnSale": "అమ్మకానికి లేదు",
         "NftName": "NFT పేరు",
         "DescribeYourNFT": "దయచేసి మీ NFTని వివరించండి",
-        "NftPicture": "NFTని సూచించే చిత్రం",
-        "NftMovie": "NFTకి ప్రాతినిధ్యం వహించే సినిమా",
+        "NFTImage": "NFT కోసం చిత్రం",
+        "NFTVideo": "ఏదైనా ఉంటే NFT కోసం వీడియో",
         "UploadMovie": "సినిమాని అప్‌లోడ్ చేయండి",
         "MovieSource": "సినిమా మూలం",
         "MovieURL": "సినిమా URL",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} కోసం ప్రొఫైల్",
             "Description": "వినియోగదారు వివరాలు",
             "aboutPlaceholder": "బయోని సవరించండి",
-            "SureLogOut": "మీరు ఖచ్చితంగా లాగ్ అవుట్ చేయాలనుకుంటున్నారా?"
+            "SureLogOut": "మీరు ఖచ్చితంగా లాగ్ అవుట్ చేయాలనుకుంటున్నారా?",
+            "UploadCoverPhoto": "కవర్ ఫోటోను అప్‌లోడ్ చేయండి"
         },
         "sales": {
             "factory": {

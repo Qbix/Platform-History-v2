@@ -318,8 +318,8 @@
         "NotOnSale": "Inte till rea",
         "NftName": "NFT-namn",
         "DescribeYourNFT": "Beskriv din NFT",
-        "NftPicture": "Bild för att representera NFT",
-        "NftMovie": "Film för att representera NFT",
+        "NFTImage": "Bild för NFT",
+        "NFTVideo": "Video för NFT, om någon",
         "UploadMovie": "Ladda upp film",
         "MovieSource": "Filmkälla",
         "MovieURL": "Filmens URL",
@@ -436,7 +436,8 @@
             "Title": "Profil för {{userName}}",
             "Description": "Användarinformation",
             "aboutPlaceholder": "Redigera bio",
-            "SureLogOut": "Är du säker på att du vill logga ut?"
+            "SureLogOut": "Är du säker på att du vill logga ut?",
+            "UploadCoverPhoto": "Ladda upp omslagsfoto"
         },
         "sales": {
             "factory": {

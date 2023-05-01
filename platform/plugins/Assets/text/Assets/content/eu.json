@@ -318,8 +318,8 @@
         "NotOnSale": "Ez Salgai",
         "NftName": "NFT izena",
         "DescribeYourNFT": "Mesedez, deskribatu zure NFT",
-        "NftPicture": "NFT irudikatzeko irudia",
-        "NftMovie": "NFT irudikatzeko filma",
+        "NFTImage": "NFTrako irudia",
+        "NFTVideo": "NFTrako bideoa, halakorik badago",
         "UploadMovie": "Kargatu filma",
         "MovieSource": "Filmaren iturria",
         "MovieURL": "Filmaren URLa",
@@ -436,7 +436,8 @@
             "Title": "{{userName}} ren profila",
             "Description": "Erabiltzailearen datuak",
             "aboutPlaceholder": "Editatu biografia",
-            "SureLogOut": "Ziur saioa amaitu nahi duzula?"
+            "SureLogOut": "Ziur saioa amaitu nahi duzula?",
+            "UploadCoverPhoto": "Kargatu azaleko argazkia"
         },
         "sales": {
             "factory": {

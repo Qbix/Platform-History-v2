@@ -328,8 +328,9 @@ WebRTC.listen = function () {
                     socket.on('disconnect', function() {
                         console.log(socket.id + ' FFmpeg USER DISCONNECTED', ffmpeg.killed);
     
-                        ffmpeg.kill('SIGINT');
                         ffmpeg.stdin.write('q');
+                        ffmpeg.stdin.end();
+                        ffmpeg.kill('SIGINT');
                         setTimeout(function() {
                             if(!ffmpeg.killed && livestreamStreamData && livestreamStreamData.publisherId != null && livestreamStreamData.streamName != null) {
                                 postStopMessageAndStopLivestreaming();
@@ -353,7 +354,7 @@ WebRTC.listen = function () {
                     }
                 })
                 // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
-                socket.on('Streams/webrtc/videoData', function(data, callback) {
+                socket.on('Streams/webrtc/videoData', function(data) {
                     //console.log(socket.id + ' VIDEODATA', data);
                     if(!_streamingData) {
                         //console.log('createFfmpegProcess create PassThrough')
@@ -361,7 +362,7 @@ WebRTC.listen = function () {
                     }
 
                     _streamingData.push(data);
-                    if(callback) callback();
+                    //if(callback) callback();
                     return;
                     for(let d in data) {
                         _streamingData.push(data[d]);

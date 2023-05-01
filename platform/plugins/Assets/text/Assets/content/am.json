@@ -318,8 +318,8 @@
         "NotOnSale": "በሽያጭ ላይ አይደለም",
         "NftName": "የ NFT ስም",
         "DescribeYourNFT": "እባክዎ የእርስዎን NFT ይግለጹ",
-        "NftPicture": "NFT የሚወክል ምስል",
-        "NftMovie": "NFT የሚወክል ፊልም",
+        "NFTImage": "ምስል ለኤንኤፍቲ",
+        "NFTVideo": "ቪዲዮ ለ NFT፣ ካለ",
         "UploadMovie": "ፊልም ስቀል",
         "MovieSource": "የፊልም ምንጭ",
         "MovieURL": "የፊልም URL",
@@ -436,7 +436,8 @@
             "Title": "መገለጫ ለ {{userName}}",
             "Description": "የተጠቃሚ ዝርዝሮች",
             "aboutPlaceholder": "Bio አርትዕ",
-            "SureLogOut": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?"
+            "SureLogOut": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?",
+            "UploadCoverPhoto": "የሽፋን ፎቶ ይስቀሉ"
         },
         "sales": {
             "factory": {

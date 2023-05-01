@@ -318,8 +318,8 @@
         "NotOnSale": "Mhux Fuq Bejgħ",
         "NftName": "Isem NFT",
         "DescribeYourNFT": "Jekk jogħġbok iddeskrivi l-NFT tiegħek",
-        "NftPicture": "Stampa biex tirrappreżenta NFT",
-        "NftMovie": "Film biex jirrappreżenta NFT",
+        "NFTImage": "Immaġni għal NFT",
+        "NFTVideo": "Vidjow għal NFT, jekk ikun hemm",
         "UploadMovie": "Tella&#39; film",
         "MovieSource": "Sors tal-film",
         "MovieURL": "URL tal-film",
@@ -436,7 +436,8 @@
             "Title": "Profil għal {{userName}}",
             "Description": "Dettalji tal-utent",
             "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Int żgur li trid toħroġ?"
+            "SureLogOut": "Int żgur li trid toħroġ?",
+            "UploadCoverPhoto": "Ittella Ritratt tal-Qoxra"
         },
         "sales": {
             "factory": {

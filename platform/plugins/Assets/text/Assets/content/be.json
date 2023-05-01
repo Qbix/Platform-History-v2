@@ -318,8 +318,8 @@
         "NotOnSale": "Няма ў продажы",
         "NftName": "Назва NFT",
         "DescribeYourNFT": "Калі ласка, апішыце свой NFT",
-        "NftPicture": "Малюнак для прадстаўлення NFT",
-        "NftMovie": "Фільм для прадстаўлення NFT",
+        "NFTImage": "Выява для NFT",
+        "NFTVideo": "Відэа для NFT, калі ёсць",
         "UploadMovie": "Спампаваць фільм",
         "MovieSource": "Крыніца фільма",
         "MovieURL": "URL фільма",
@@ -436,7 +436,8 @@
             "Title": "Профіль для {{userName}}",
             "Description": "Падрабязнасці карыстальніка",
             "aboutPlaceholder": "Рэдагаваць біяграфію",
-            "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?"
+            "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?",
+            "UploadCoverPhoto": "Загрузіць вокладку"
         },
         "sales": {
             "factory": {

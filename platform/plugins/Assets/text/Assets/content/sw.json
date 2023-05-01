@@ -318,8 +318,8 @@
         "NotOnSale": "Haiuzwi",
         "NftName": "Jina la NFT",
         "DescribeYourNFT": "Tafadhali eleza NFT yako",
-        "NftPicture": "Picha ya kuwakilisha NFT",
-        "NftMovie": "Filamu ya kuwakilisha NFT",
+        "NFTImage": "Picha ya NFT",
+        "NFTVideo": "Video ya NFT, ikiwa ipo",
         "UploadMovie": "Pakia filamu",
         "MovieSource": "Chanzo cha Sinema",
         "MovieURL": "URL ya filamu",
@@ -436,7 +436,8 @@
             "Title": "Wasifu wa {{userName}}",
             "Description": "Maelezo ya mtumiaji",
             "aboutPlaceholder": "Hariri Wasifu",
-            "SureLogOut": "Je, una uhakika unataka kutoka?"
+            "SureLogOut": "Je, una uhakika unataka kutoka?",
+            "UploadCoverPhoto": "Pakia Picha ya Jalada"
         },
         "sales": {
             "factory": {

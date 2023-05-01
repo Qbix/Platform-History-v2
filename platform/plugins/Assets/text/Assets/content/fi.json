@@ -318,8 +318,8 @@
         "NotOnSale": "Ei myynnissä",
         "NftName": "NFT nimi",
         "DescribeYourNFT": "Kuvaile NFT:täsi",
-        "NftPicture": "NFT:tä edustava kuva",
-        "NftMovie": "NFT:tä edustava elokuva",
+        "NFTImage": "NFT-kuva",
+        "NFTVideo": "Video NFT:lle, jos sellainen on",
         "UploadMovie": "Lataa elokuva",
         "MovieSource": "Elokuvan lähde",
         "MovieURL": "Elokuvan URL-osoite",
@@ -436,7 +436,8 @@
             "Title": "Profiili hintaan {{userName}}",
             "Description": "Käyttäjätiedot",
             "aboutPlaceholder": "Muokkaa Bioa",
-            "SureLogOut": "Haluatko varmasti kirjautua ulos?"
+            "SureLogOut": "Haluatko varmasti kirjautua ulos?",
+            "UploadCoverPhoto": "Lataa kansikuva"
         },
         "sales": {
             "factory": {

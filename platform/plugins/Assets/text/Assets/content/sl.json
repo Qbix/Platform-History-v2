@@ -318,8 +318,8 @@
         "NotOnSale": "Ni v prodaji",
         "NftName": "Ime NFT",
         "DescribeYourNFT": "Opišite svoj NFT",
-        "NftPicture": "Slika, ki predstavlja NFT",
-        "NftMovie": "Film, ki predstavlja NFT",
+        "NFTImage": "Slika za NFT",
+        "NFTVideo": "Video za NFT, če obstaja",
         "UploadMovie": "Naloži film",
         "MovieSource": "Vir filma",
         "MovieURL": "URL filma",
@@ -436,7 +436,8 @@
             "Title": "Profil za {{userName}}",
             "Description": "Podrobnosti o uporabniku",
             "aboutPlaceholder": "Uredi življenjepis",
-            "SureLogOut": "Ste prepričani, da se želite odjaviti?"
+            "SureLogOut": "Ste prepričani, da se želite odjaviti?",
+            "UploadCoverPhoto": "Naloži naslovno fotografijo"
         },
         "sales": {
             "factory": {

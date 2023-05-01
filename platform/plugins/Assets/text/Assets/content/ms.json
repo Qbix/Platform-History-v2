@@ -318,8 +318,8 @@
         "NotOnSale": "Tidak Dijual",
         "NftName": "nama NFT",
         "DescribeYourNFT": "Sila terangkan NFT anda",
-        "NftPicture": "Gambar untuk mewakili NFT",
-        "NftMovie": "Filem untuk mewakili NFT",
+        "NFTImage": "Imej untuk NFT",
+        "NFTVideo": "Video untuk NFT, jika ada",
         "UploadMovie": "Muat naik filem",
         "MovieSource": "Sumber Filem",
         "MovieURL": "URL filem",
@@ -436,7 +436,8 @@
             "Title": "Profil untuk {{userName}}",
             "Description": "Butiran pengguna",
             "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Adakah anda pasti mahu log keluar?"
+            "SureLogOut": "Adakah anda pasti mahu log keluar?",
+            "UploadCoverPhoto": "Muat Naik Foto Muka Depan"
         },
         "sales": {
             "factory": {

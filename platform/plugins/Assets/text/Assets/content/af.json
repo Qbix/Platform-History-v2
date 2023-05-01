@@ -318,8 +318,8 @@
         "NotOnSale": "Nie te koop nie",
         "NftName": "NFT naam",
         "DescribeYourNFT": "Beskryf asseblief jou NFT",
-        "NftPicture": "Foto om NFT voor te stel",
-        "NftMovie": "Fliek om NFT voor te stel",
+        "NFTImage": "Beeld vir NFT",
+        "NFTVideo": "Video vir NFT, indien enige",
         "UploadMovie": "Laai fliek op",
         "MovieSource": "Film Bron",
         "MovieURL": "Fliek URL",
@@ -436,7 +436,8 @@
             "Title": "Profiel vir {{userName}}",
             "Description": "Gebruiker besonderhede",
             "aboutPlaceholder": "Wysig Bio",
-            "SureLogOut": "Is jy seker jy wil afmeld?"
+            "SureLogOut": "Is jy seker jy wil afmeld?",
+            "UploadCoverPhoto": "Laai voorbladfoto op"
         },
         "sales": {
             "factory": {

@@ -318,8 +318,8 @@
         "NotOnSale": "不出售",
         "NftName": "NFT名称",
         "DescribeYourNFT": "请描述你的 NFT",
-        "NftPicture": "代表NFT的图片",
-        "NftMovie": "代表NFT的电影",
+        "NFTImage": "NFT 图像",
+        "NFTVideo": "NFT 视频（如果有）",
         "UploadMovie": "上传影片",
         "MovieSource": "片源",
         "MovieURL": "影片网址",
@@ -436,7 +436,8 @@
             "Title": "简介{{userName}}",
             "Description": "用户详情",
             "aboutPlaceholder": "编辑简介",
-            "SureLogOut": "您确定要退出吗？"
+            "SureLogOut": "您确定要退出吗？",
+            "UploadCoverPhoto": "上传封面照片"
         },
         "sales": {
             "factory": {

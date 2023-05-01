@@ -332,7 +332,7 @@ class Q_Bootstrap
 		$app = Q_Config::get('Q', 'app', null);
 		$prefix = $app ? "$app/" : '';
 		if (Q_Config::get('Q', 'localNotYetConfigured', null)) {
-			throw new Q_Exception("Please edit local config in {{prefix}}local/app.json");
+			throw new Q_Exception("Please edit local config in {$prefix}local/app.json");
 		}
 	}
 	

@@ -318,8 +318,8 @@
         "NotOnSale": "Nu se vinde",
         "NftName": "Nume NFT",
         "DescribeYourNFT": "Vă rugăm să descrieți NFT-ul dvs",
-        "NftPicture": "Imagine pentru a reprezenta NFT",
-        "NftMovie": "Film pentru a reprezenta NFT",
+        "NFTImage": "Imagine pentru NFT",
+        "NFTVideo": "Video pentru NFT, dacă există",
         "UploadMovie": "Încărcați film",
         "MovieSource": "Sursa filmului",
         "MovieURL": "Adresa URL a filmului",
@@ -436,7 +436,8 @@
             "Title": "Profil pentru {{userName}}",
             "Description": "Detalii utilizator",
             "aboutPlaceholder": "Editează biografia",
-            "SureLogOut": "Sunteți sigur că doriți să vă deconectați?"
+            "SureLogOut": "Sunteți sigur că doriți să vă deconectați?",
+            "UploadCoverPhoto": "Încărcați o fotografie de copertă"
         },
         "sales": {
             "factory": {

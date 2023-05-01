@@ -134,7 +134,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 		if (!isset($sizes)) {
 			$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 		}
-		sort($sizes);
+		ksort($sizes);
 		if (!$this->xid) {
 			return null;
 		}

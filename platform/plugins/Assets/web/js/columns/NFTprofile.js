@@ -27,6 +27,12 @@ Q.exports(function (options, index, column, data) {
 		});
 	});
 
+	Q.Users.Interface.coverPhoto(
+		$("button[name=coverPhoto]")[0],
+		$(".banner-block")[0]
+	);
+	$("button[name=coverPhoto]").show();
+
 	var $bannerBlock = $(".banner-block", $profileColumn);
 	var _setCover = function (stream) {
 		var seriesPreviewTool = this;

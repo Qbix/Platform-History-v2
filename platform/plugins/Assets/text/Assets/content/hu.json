@@ -318,8 +318,8 @@
         "NotOnSale": "Nem eladó",
         "NftName": "NFT név",
         "DescribeYourNFT": "Kérjük, írja le az NFT-jét",
-        "NftPicture": "Kép az NFT-t ábrázolni",
-        "NftMovie": "Az NFT-t képviselő film",
+        "NFTImage": "Kép az NFT-hez",
+        "NFTVideo": "Videó NFT-hez, ha van",
         "UploadMovie": "Film feltöltése",
         "MovieSource": "Film Forrás",
         "MovieURL": "Film URL",
@@ -436,7 +436,8 @@
             "Title": "Profil {{userName}} ért",
             "Description": "Felhasználói adatok",
             "aboutPlaceholder": "Életrajz szerkesztése",
-            "SureLogOut": "Biztos, hogy ki akar jelentkezni?"
+            "SureLogOut": "Biztos, hogy ki akar jelentkezni?",
+            "UploadCoverPhoto": "Borítókép feltöltése"
         },
         "sales": {
             "factory": {

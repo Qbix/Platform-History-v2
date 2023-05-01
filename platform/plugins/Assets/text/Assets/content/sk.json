@@ -318,8 +318,8 @@
         "NotOnSale": "Nie je v predaji",
         "NftName": "Názov NFT",
         "DescribeYourNFT": "Popíšte svoje NFT",
-        "NftPicture": "Obrázok predstavujúci NFT",
-        "NftMovie": "Film reprezentujúci NFT",
+        "NFTImage": "Obrázok pre NFT",
+        "NFTVideo": "Video pre NFT, ak existuje",
         "UploadMovie": "Nahrajte film",
         "MovieSource": "Zdroj filmu",
         "MovieURL": "Adresa URL filmu",
@@ -436,7 +436,8 @@
             "Title": "Profil za {{userName}}",
             "Description": "Podrobnosti o používateľovi",
             "aboutPlaceholder": "Upraviť životopis",
-            "SureLogOut": "Naozaj sa chcete odhlásiť?"
+            "SureLogOut": "Naozaj sa chcete odhlásiť?",
+            "UploadCoverPhoto": "Nahrajte titulnú fotografiu"
         },
         "sales": {
             "factory": {

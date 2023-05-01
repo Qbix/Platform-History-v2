@@ -318,8 +318,8 @@
         "NotOnSale": "Nav Pārdošanā",
         "NftName": "NFT nosaukums",
         "DescribeYourNFT": "Lūdzu, aprakstiet savu NFT",
-        "NftPicture": "Attēls, kas attēlo NFT",
-        "NftMovie": "Filma, kas pārstāv NFT",
+        "NFTImage": "Attēls NFT",
+        "NFTVideo": "Videoklips NFT, ja tāds ir",
         "UploadMovie": "Augšupielādēt filmu",
         "MovieSource": "Filmas avots",
         "MovieURL": "Filmas URL",
@@ -436,7 +436,8 @@
             "Title": "Profils par {{userName}}",
             "Description": "Lietotāja informācija",
             "aboutPlaceholder": "Rediģēt biogrāfiju",
-            "SureLogOut": "Vai tiešām vēlaties atteikties?"
+            "SureLogOut": "Vai tiešām vēlaties atteikties?",
+            "UploadCoverPhoto": "Augšupielādējiet vāka fotoattēlu"
         },
         "sales": {
             "factory": {
