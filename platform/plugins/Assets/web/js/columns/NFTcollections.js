@@ -118,7 +118,7 @@ Q.Template.set('Assets/NFT/collection/column',
     `<div class="Assets_NFT_collection"></div>
         <div class="Assets_NFT_collection_relation"></div>
         {{#if userId}}
-            <button class="Q_button" name="enter">{{NFT.collections.EnterCollection}}</button>
+            <button class="Q_button" name="enter">{{NFT.collections.SubmitSeries}}</button>
         {{/if}}
         {{&tool "Streams/participants" maxShow=10 showSummary=false showControls=true publisherId=stream.fields.publisherId streamName=stream.fields.name}}
     </div>`,

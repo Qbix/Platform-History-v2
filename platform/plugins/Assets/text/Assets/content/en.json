@@ -411,7 +411,7 @@
             "NamePlaceholder": "Enter collection name",
             "DescPlaceholder": "Enter collection description",
             "EndingIn": "Ending In",
-            "EnterCollection": "Enter Collection"
+            "SubmitSeries": "Submit a Series"
         },
         "import": {
             "importNFT": "Importing NFT's",
