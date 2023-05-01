@@ -626,24 +626,6 @@ Q.Tool.define({
 	"Streams/form"		 : "{{Streams}}/js/tools/form.js",
 	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
 	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
-	"Streams/audioVisualization"	 : "{{Media}}/js/tools/webrtc/audioVisualization.js",
-	"Media/webrtc"	   : "{{Media}}/js/tools/webrtc/webrtc.js",
-	"Media/webrtc/preview" : "{{Media}}/js/tools/webrtc/preview.js",
-	"Media/webrtc/preview/default" : "{{Media}}/js/tools/webrtc/preview/default.js",
-	"Media/webrtc/preview/call" : "{{Media}}/js/tools/webrtc/preview/call.js",
-	"Media/webrtc/controls"  : "{{Media}}/js/tools/webrtc/controls.js",
-	"Media/webrtc/participants"  : "{{Media}}/js/tools/webrtc/participants.js",
-	"Media/webrtc/waitingRoomList"  : "{{Media}}/js/tools/webrtc/waitingRoomList.js",
-	"Media/webrtc/video"  : "{{Media}}/js/tools/webrtc/video.js",
-	"Media/webrtc/audio"  : "{{Media}}/js/tools/webrtc/audio.js",
-	"Media/webrtc/livestreaming"  : "{{Media}}/js/tools/webrtc/livestreamingEditor.js",
-	"Media/webrtc/livestreaming/rtmpSender"  : "{{Media}}/js/tools/webrtc/livestreamingRtmpSender.js",
-	"Media/webrtc/livestreaming/canvasComposer"  : "{{Media}}/js/tools/webrtc/livestreamingCanvasComposer.js",
-	"Media/webrtc/livestreamInstructions"  : "{{Media}}/js/tools/webrtc/livestreamInstructions.js",
-	"Media/webrtc/livestream"  : "{{Media}}/js/tools/webrtc/livestream.js",
-	"Media/webrtc/callCenter/manager"  : "{{Media}}/js/tools/webrtc/callCenter/manager.js",
-	"Media/webrtc/callCenter/client"  : "{{Media}}/js/tools/webrtc/callCenter/client.js",
-	"Media/webrtc/popupDialog"  : "{{Media}}/js/tools/webrtc/popupDialog.js",
 	"Streams/fileManager"  : "{{Streams}}/js/tools/fileManager.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
@@ -6960,75 +6942,6 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 }
 
 _scheduleUpdate.delay = 5000;
-
-
-// show Q.Notice when somebody opened webrtc in chat where current user participated
-Users.Socket.onEvent('Streams/post').set(function (message) {
-	message = Streams.Message.construct(message);
-	var instructions = message.getAllInstructions();
-	var relationType = Q.getObject("type", instructions);
-	var publisherId = Q.getObject("fromPublisherId", instructions);
-	var streamName = Q.getObject("fromStreamName", instructions);
-	var toStreamName = Q.getObject("streamName", message) || "";
-	var toPublisherId = Q.getObject("publisherId", message) || "";
-	var toUrl = Q.getObject("toUrl", instructions);
-	var conversationUrl;
-
-	// only relation type Media/webrtc and not for myself
-	if (relationType !== 'Media/webrtc' || publisherId === Q.Users.loggedInUserId() || !toUrl) {
-		return;
-	}
-
-	// skip messages older than 24 hours
-	var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
-	if (timeDiff >= parseInt(Q.Streams.notifications.notices.expired)) {
-		return;
-	}
-
-	toUrl += '?startWebRTC';
-
-	Q.Text.get("Streams/content", function (err, text) {
-		Streams.showNoticeIfSubscribed({
-			publisherId: toPublisherId,
-			streamName: toStreamName,
-			messageType: message.type,
-			callback: function () {
-				Q.Template.render('Media/chat/webrtc/available', {
-					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-						userId: publisherId,
-						icon: false,
-						short: true
-					}),
-					text: text.chat.startedConversation
-				}, function (err, html) {
-					if (err) {
-						return;
-					}
-
-					Q.Notices.add({
-						content: html,
-						handler: function () {
-							if (window.location.href.includes(conversationUrl)) {
-								var tool = Q.Tool.from($(".Q_tool.Streams_chat_tool[data-streams-chat*='" + toStreamName + "']"), "Streams/chat");
-
-								if (tool) {
-									return tool.startWebRTC();
-								}
-							}
-
-							Q.handle(toUrl);
-						}
-					});
-				});
-			}
-		});
-	});
-}, "Streams.chat.webrtc");
-Q.Template.set('Media/chat/webrtc/available',
-	'<div class="Streams_chat_webrtc_available">'+
-	'	{{& avatar}} {{text}}'+
-	'</div>'
-);
 
 Q.Streams.cache = Q.Streams.cache || {};
 

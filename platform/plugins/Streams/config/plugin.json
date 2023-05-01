@@ -19,8 +19,7 @@
 			"Users/canManageContacts": ["Streams/before/Users_canManageContacts"],
 			"Users/canManageLabels": ["Streams/before/Users_canManageLabels"],
 			"Users/User/displayName": ["Streams/before/Users_User_displayName"],
-			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"],
-			"Media/close/Media/webrtc/waitingRoom": ["Streams/before/Streams_close_Media_webrtc_waitingRoom"]
+			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"]
 		},
 		"handlersAfterEvent": {
 			"Q/Plugin/install": ["Streams/after/Q_Plugin_install"],
@@ -111,12 +110,6 @@
 		},
 		"quotas": {
 			"Streams/invite": {
-				"86400": {
-					"": 10,
-					"Users/admins": 1000
-				}
-			},
-			"Media/webrtc": {
 				"86400": {
 					"": 10,
 					"Users/admins": 1000
@@ -245,9 +238,6 @@
 				"relatedTo": {
 					"*": {
 						"description": ["Streams/content", ["notifications", "Streams/relatedTo/*"]]
-					},
-					"Media/webrtc": {
-						"description": ["Streams/content", ["notifications", "Streams/relatedTo/Streams/call"]]
 					}
 				},
 				"relatedFrom": {
@@ -541,37 +531,6 @@
 					"title": "Community Greeting"
 				}
 			},
-			"Media/webrtc": {
-				"defaults": {
-					"title": "Teleconference",
-					"icon": "Media/webrtc"
-				},
-				"edit": ["title", "content", "attributes"],
-				"messages": {
-					"Media/webrtc/joined": {}
-				}
-			},
-			"Media/webrtc/livestream": {
-				"defaults": {
-					"title": "Livestream",
-					"icon": "Media/webrtc/livestream"
-				},
-				"edit": ["title"],
-				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
-			},
-			"Media/webrtc/chat": {
-				"defaults": {
-					"title": "Chat",
-					"icon": "Streams/chat"
-				},
-				"edit": ["title"],
-				"create": true,
-				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
-			},
-			"Media/webrtc/callCenter/endpoint": {
-				"create": true, 
-				"edit": true
-			},
 			"Streams/user/profile": {
 				"url": "{{baseUrl}}/profile/{{publisherId}}"
 			},
@@ -730,7 +689,7 @@
 			"answered": ["Users/owners", "Users/admins"]
 		},
 		"chat": {
-			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Media/webrtc", "Streams/question"],
+			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Streams/question"],
 			"delay": 20 /* delay between chat messages in seconds */
 		}
 	}
