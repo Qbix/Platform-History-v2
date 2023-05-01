@@ -42,7 +42,7 @@ Q.exports(function (options, index, column, data) {
                         this.state.onInvoke.set(function (seriesStream) {
                             var publisherId = seriesStream.fields.publisherId;
                             var streamName = seriesStream.fields.name;
-                            Q.handle(Q.url("{{baseUrl}}/Assets/NFTprofile/" + publisherId + "?selectedSeriesId=" + streamName.split("/").pop()));
+                            Q.handle(Q.url("{{baseUrl}}/" + ["profile", publisherId].join("/") + "?selectedSeriesId=" + streamName.split("/").pop()));
                         }, this);
                     }, true);
                     var collectionRelationTool = null;

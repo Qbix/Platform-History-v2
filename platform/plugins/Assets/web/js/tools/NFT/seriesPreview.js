@@ -96,7 +96,7 @@
                 Q.activate(tool.element);
                 $(".Assets_NFT_series_icon", $toolElement).css("background-image", "url(" + stream.iconUrl("x") + ")");
 
-                if (isEditable) {
+                if (!stream.getAttribute("frozen") && isEditable) {
                     setTimeout(function () {
                         $toolElement.plugin('Q/actions', {
                             alwaysShow: true,
@@ -116,6 +116,9 @@
                             }
                         });
                     }, 100);
+                } else {
+                    $toolElement.plugin('Q/actions', 'remove');
+                    tool.preview.state.closeable = false;
                 }
 
                 //var $icon = $("img.NFT_series_icon", tool.element);

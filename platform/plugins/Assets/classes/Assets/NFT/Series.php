@@ -91,8 +91,6 @@ class Assets_NFT_Series
 			}
 			$stream->attributes = Q::json_encode(array_merge($attributes, $fields["attributes"]));
 			$fieldsUpdated = true;
-		} else {
-			$stream->attributes = '{}';
 		}
 
 		if ($fieldsUpdated) {
