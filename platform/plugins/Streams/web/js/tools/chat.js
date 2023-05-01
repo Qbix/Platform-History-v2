@@ -881,7 +881,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			var $this = $(this);
 			var $form = $this.closest('form');
 			var $submit = $form.find('.Streams_chat_submit');
-			var $call = $form.find('.Streams_chat_call');
+			var $replacement = $form.find('.Streams_chat_submit_replacement');
 			var content = $this.val().trim();
 			var key = Q.Streams.key(
 				state.publisherId, state.streamName
@@ -897,10 +897,10 @@ Q.Tool.define('Streams/chat', function(options) {
 
 			if (content) {
 				$submit.removeClass('Q_disappear').addClass('Q_appear');
-				$call.removeClass('Q_appear').addClass('Q_disappear');
+				$replacement.removeClass('Q_appear').addClass('Q_disappear');
 			} else {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
-				$call.removeClass('Q_disappear').addClass('Q_appear');
+				$replacement.removeClass('Q_disappear').addClass('Q_appear');
 			}
 		}, state.debounce || 100)).on('keypress', function () {
 			// 'enter' key handler
@@ -1388,7 +1388,6 @@ Q.Template.set('Streams/chat/main',
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
 		'<div class="Streams_chat_submit Q_disappear"></div>' +
-		'<div class="Streams_chat_call Q_appear"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +
