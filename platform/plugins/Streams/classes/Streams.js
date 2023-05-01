@@ -1215,7 +1215,6 @@ Streams.displayType = function _Streams_displayType(type, callback, options) {
 	callback(result || ret);
 };
 
-Media.WebRTC = require('Media/WebRTC');
 Streams.Mentions = require('Streams/Mentions');
 
 /**
