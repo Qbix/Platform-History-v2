@@ -205,7 +205,8 @@
 
             tool.selectedSeries = streamName;
 
-            history.replaceState({}, null, Q.url(window.location + "?selectedSeriesId=" + streamName.split("/").pop()));
+            var parsedUrl = new URL(window.location);
+            history.replaceState({}, null, parsedUrl.origin + parsedUrl.pathname + "?selectedSeriesId=" + streamName.split("/").pop());
 
             Streams.get(publisherId, streamName, function () {
                 Q.handle(state.onSelected, seriesPreview, [this]);
