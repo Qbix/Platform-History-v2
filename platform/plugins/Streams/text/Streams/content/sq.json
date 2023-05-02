@@ -48,7 +48,7 @@
         "startedConversation": "filloi një bisedë",
         "RealTimeCall": "Thirrje në kohë reale",
         "JoinWebRTC": "Telekonferencë",
-        "SearchByName": "Kërkoni sipas emrit",
+        "SearchByName": "Kërko sipas emrit",
         "Notifications": {
             "Visit": "{{displayName}} po viziton bisedën",
             "Join": "{{displayName}} iu bashkuan bisedës",
@@ -74,7 +74,7 @@
         "Streams\/chat\/edit": "Mesazhi i bisedës i modifikuar në {{& stream.fields.title}}",
         "Streams\/chat\/remove": "Mesazhi i bisedës u hoq në {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} është mbyllur",
-        "Streams\/task\/progress": "Përparimi i bërë në {{stream.fields.title}}",
+        "Streams\/task\/progress": "Përparimi i bërë më {{stream.fields.title}}",
         "Streams\/task\/complete": "Detyra e përfunduar: {{stream.fields.title}}",
         "Streams\/task\/error": "Gabim gjatë: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}} : Mesazhi në hyrje",
@@ -209,154 +209,6 @@
         "Devices": "Pajisjet",
         "Streams": "Përrenjtë"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Nuk ke leje për t&#39;u bashkuar me këtë transmetim.",
-        "streamTitle": "{{1}} filloi një telekonferencë",
-        "allow": {
-            "dialogTitle": "Duke u lidhur",
-            "microphoneBtn": "Aktivizo mikrofonin",
-            "cameraBtn": "Aktivizo kamerën",
-            "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
-        },
-        "preparing": {
-            "dialogTitle": "Aktivizo\/fike kamerën ose mikrofonin përpara se të bashkohesh",
-            "micIsOff": "Mikrofoni është i fikur",
-            "micIsOn": "Mikrofoni është aktiv",
-            "cameraIsOff": "Kamera është e fikur",
-            "cameraIsOn": "Kamera është e ndezur",
-            "screenSharingIsOn": "Ndarja e ekranit është aktive",
-            "screenSharingIsOff": "Ndani ekranin",
-            "joinNow": "Bashkohuni me Thirrjen"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Udhëzimet",
-            "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
-            "point1": "Shkoni te &quot;Cilësimet&quot; -&gt; &quot;Të avancuara&quot; -&gt; &quot;Privatësia dhe siguria&quot; -&gt; &quot;Cilësimet e sitit&quot; -&gt; &quot;Kamera&quot; ose &quot;Cilësimet e sitit&quot; -&gt; &quot;Mikrofoni&quot;",
-            "point2": "Hiq {{hostname}} nga lista &quot;Blloko&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Udhëzimet",
-            "permissionDenied": "Leja për {{kind}} u refuzua. Ju lutemi ringarkoni këtë faqe dhe konfirmoni hyrjen në {{kind}} për t&#39;u bashkuar me konferencën."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Udhëzimet",
-            "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
-            "point1": "Shkoni te cilësimet tuaja të Android",
-            "point2": "Hapni &quot;Aplikacionet dhe njoftimet&quot;",
-            "point3": "Gjeni &quot; {{communityName}} &quot; dhe hapeni atë",
-            "point4": "Klikoni te Lejet",
-            "point5": "Aktivizo {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Udhëzimet",
-            "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
-            "point1": "Shkoni te cilësimet tuaja iOS",
-            "point2": "Hapni &quot;Privatësia&quot;",
-            "point3": "Gjeni {{kind}} dhe hapeni",
-            "point4": "Gjeni &quot; {{communityName}} &quot; dhe aktivizoni"
-        },
-        "fbLive": {
-            "dialogTitle": "Transmetimi i drejtpërdrejtë në Facebook filloi"
-        },
-        "notices": {
-            "youJoinedRoom": "Ju u bashkuat në dhomë",
-            "joining": "Duke u bashkuar: {{userName}}",
-            "sbLeftRoom": "{{userName}} u larguan nga dhoma",
-            "switchingRoom": "Dhomë ndërrimi...",
-            "forceDisconnecting": "Do të shkëputeni brenda 5 sekondave",
-            "forceDisconnectingImmediately": "Je shkëputur nga një host",
-            "youLeftRoom": "Dole nga dhoma",
-            "codeCopied": "Dole nga dhoma",
-            "sbBeganFbLive": "{{userName}} filloi transmetimin e kësaj thirrje në Facebook",
-            "sbStoppedFbLive": "{{userName}} ndaloi transmetimin e kësaj thirrje në Facebook",
-            "youBeganFbLive": "Ju filluat ta transmetoni këtë telefonatë në Facebook",
-            "youStoppedFbLive": "Ju ndaluat transmetimin e kësaj telefonate në Facebook",
-            "youStartedLive": "Fillove ta transmetosh këtë telefonatë në RTMP të personalizuar",
-            "youStoppedLive": "E ndalove transmetimin e kësaj telefonate në RTMP të personalizuar",
-            "sbStartedLiveStreaming": "{{userName}} filloi drejtpërdrejt",
-            "sbStoppedLiveStreaming": "{{userName}} përfunduan drejtpërdrejt",
-            "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare",
-            "youBeganVideoRecording": "Ju filluat të regjistroni këtë konferencë",
-            "youStoppedVideoRecording": "Ju ndaluat regjistrimin e kësaj konference",
-            "linkCopiedToCb": "Lidhja u kopjua në kujtesën e fragmenteve",
-            "codeCopiedToCb": "Kodi u kopjua në kujtesën e fragmenteve",
-            "userHasNoVideo": "Pjesëmarrësi nuk ka video",
-            "openInBrowserAlert": "Hapni lidhjen në shfletuesin Safari për t&#39;u bashkuar me konferencën.",
-            "allowedVideoLimit": "Vetëm {{limit}} video lejohen në këtë dhomë",
-            "allowedAudioLimit": "Vetëm {{limit}} mikrofona lejohen në këtë dhomë"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Cilësimet e videos",
-            "webCamera": "Kamera në internet",
-            "screenSharing": "Ndarja e ekranit",
-            "shareAnotherScreen": "Ndani një ekran tjetër",
-            "turnOffCameras": "Fik kamerën",
-            "turnOffVideo": "Çaktivizo ndarjen e kamerës\/ekranit",
-            "turnOffAudioInput": "Çaktivizo mikrofonin",
-            "turnOffScreenSharing": "Çaktivizo ndarjen e ekranit",
-            "cameraIsTurnedOff": "Kamera është e fikur",
-            "micIsTurnedOff": "Mikrofoni është i fikur",
-            "startFBLive": "Filloni transmetimin e drejtpërdrejtë të Facebook",
-            "stopFBLive": "Ndalo transmetimin e drejtpërdrejtë të Facebook",
-            "startRecording": "Filloni regjistrimin",
-            "stopRecording": "Ndalo regjistrimin",
-            "start": "Filloni",
-            "stop": "Ndalo",
-            "recordingInProgress": "Regjistrimi është në vazhdim...",
-            "fbLiveTitle": "Titulli i Livestream",
-            "fbLiveDescription": "Përshkruani transmetimin tuaj të drejtpërdrejtë. Për çfarë bëhet fjalë?",
-            "fbOnlyMeLiveAccess": "Vetëm unë",
-            "fbFriendsAccess": "Miqtë",
-            "fbPublicAccess": "Publike",
-            "publishOnTimeline": "Publikoni në afatin kohor",
-            "publishToGroup": "Publikoni në grup",
-            "fbStartLive": "Shko jeto",
-            "fbStopLive": "Përfundo transmetimin e drejtpërdrejtë",
-            "streamingSettings": "Cilësimet",
-            "manageStream": "Menaxho Livestream",
-            "fbEmbedCode": "Embed",
-            "copy": "Kopjo",
-            "streamToRTMP": "Transmetoni në RTMP të personalizuar",
-            "startBroadcasting": "Filloni transmetimin",
-            "broadcastingInProgress": "Transmetimi është në vazhdim"
-        },
-        "audioSettings": {
-            "dialogTitle": "Cilësimet e audios",
-            "speakers": "Folësit",
-            "microphone": "Mikrofoni"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Menaxho transmetimin"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Cilësimet e pjesëmarrësve",
-            "disconnect": "Shkëputeni",
-            "floatingScreens": "Ekranet lundrues",
-            "tiledScreens": "Ekrane me pllaka",
-            "loudestExceptMe": "Më e zëshme përveç meje",
-            "maximizeLoudest": "Maksimizimi më i zhurmshëm",
-            "staticMaximized": "Maksimizuar statike",
-            "fullScreen": "Ekran i plotë",
-            "manual": "Manual",
-            "turnOffCamera": "Fshih videon",
-            "turnOffAudio": "Çaktivizo audion",
-            "turnOffScreenSharing": "Fshih ndarjen e ekranit",
-            "turnOnCamera": "Shfaq video",
-            "turnOnAudio": "Hiq zërin e audios",
-            "turnOnScreenSharing": "Shfaq ndarjen e ekranit"
-        },
-        "streamingSettings": {
-            "title": "Transmetim i drejtpërdrejtë"
-        },
-        "preview": {
-            "Meeting": "Telekonferencë",
-            "MeetingEnded": "Përfundoi telekonferenca"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Kërkesë për të folur",
-            "msg": "Aktualisht në mbledhje po flasin {{count}} persona. Dëshiron të zëvendësosh njërin prej tyre pasi t&#39;i lejosh {{seconds}} sekonda për të përfunduar së foluri?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "I ftuar",
@@ -453,7 +305,7 @@
         },
         "Streams\/category": {
             "displayType": "Kategoria",
-            "description": "një kategori me të cilën mund të lidhen rrymat e tjera"
+            "description": "një kategori me të cilën mund të lidhen rryma të tjera"
         },
         "Streams\/participating": {
             "displayType": "Indeksi pjesëmarrës",
@@ -471,10 +323,6 @@
             "displayType": "bashkëbisedim",
             "description": "një bisedë midis përdoruesve, me historinë"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telekonferencë",
-            "description": "një video\/audio konferencë në internet"
-        },
         "Streams\/question": {
             "displayType": "Pyetje",
             "description": "rrymë pyetjesh",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Përgjigju",
             "description": "rrjedha e përgjigjeve"
-        },
-        "Media\/calls": {
-            "displayType": "Thirrjet",
-            "description": "kategori për Media\/WebRTC",
-            "MaxRelationsExceeded": "Maksimumi i telefonatave u tejkalua"
         }
     },
     "menu": {

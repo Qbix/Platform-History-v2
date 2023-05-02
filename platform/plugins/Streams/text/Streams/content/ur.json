@@ -29,7 +29,7 @@
     "interests": {
         "Filter": "دلچسپیاں تلاش کریں۔",
         "CanGrant": "اگر آپ اب بھی وہ چیز نہیں ڈھونڈ پا رہے ہیں جس کی آپ تلاش کر رہے ہیں، تو آپ ذیل میں ایک نئی دلچسپی شامل کر سکتے ہیں:",
-        "TrySynonyms": "نظر نہیں آرہا؟ کچھ مترادفات آزمائیں۔",
+        "TrySynonyms": "یہ نہیں دیکھتے؟ کچھ مترادفات آزمائیں۔",
         "AddUnderCategory": "زمرہ کے تحت شامل کریں...",
         "Other": "دیگر",
         "Unlisted": "غیر فہرست شدہ"
@@ -209,154 +209,6 @@
         "Devices": "آلات",
         "Streams": "سلسلے"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "آپ کو اس سلسلے میں شامل ہونے کی اجازت نہیں ہے۔",
-        "streamTitle": "{{1}} نے ٹیلی کانفرنس شروع کی۔",
-        "allow": {
-            "dialogTitle": "جڑ رہا ہے۔",
-            "microphoneBtn": "مائیکروفون کو فعال کریں۔",
-            "cameraBtn": "کیمرہ فعال کریں۔",
-            "cameraAndMicrophoneBtn": "کیمرہ اور مائیکروفون کو فعال کریں۔"
-        },
-        "preparing": {
-            "dialogTitle": "شامل ہونے سے پہلے کیمرہ یا مائیک آن\/آف کریں۔",
-            "micIsOff": "مائیک بند ہے۔",
-            "micIsOn": "مائیک آن ہے۔",
-            "cameraIsOff": "کیمرہ آف ہے۔",
-            "cameraIsOn": "کیمرہ آن ہے۔",
-            "screenSharingIsOn": "اسکرین شیئرنگ آن ہے۔",
-            "screenSharingIsOff": "اسکرین شیئر کریں۔",
-            "joinNow": "کال میں شامل ہوں۔"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "ہدایات",
-            "permissionDenied": "{{kind}} کی اجازت سے انکار کر دیا گیا۔ اسے استعمال کرنے کے لیے ان اقدامات پر عمل کریں:",
-            "point1": "&quot;ترتیبات&quot; -&gt; &quot;ایڈوانسڈ&quot; -&gt; &quot;پرائیویسی اور سیکیورٹی&quot; -&gt; &quot;سائٹ سیٹنگز&quot; -&gt; &quot;کیمرہ&quot; یا &quot;سائٹ سیٹنگز&quot; -&gt; &quot;مائیکروفون&quot; پر جائیں۔",
-            "point2": "&quot;بلاک&quot; کی فہرست سے {{hostname}} ہٹا دیں۔"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "ہدایات",
-            "permissionDenied": "{{kind}} کی اجازت سے انکار کر دیا گیا۔ براہ کرم اس صفحہ کو دوبارہ لوڈ کریں اور کانفرنس میں شامل ہونے کے لیے {{kind}} تک رسائی کی تصدیق کریں۔"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "ہدایات",
-            "permissionDenied": "{{kind}} کی اجازت سے انکار کر دیا گیا۔ اسے استعمال کرنے کے لیے ان اقدامات پر عمل کریں:",
-            "point1": "اپنی اینڈرائیڈ سیٹنگز پر جائیں۔",
-            "point2": "&quot;ایپس اور اطلاعات&quot; کھولیں",
-            "point3": "&quot; {{communityName}} &quot; تلاش کریں اور اسے کھولیں۔",
-            "point4": "اجازتوں پر ٹیپ کریں۔",
-            "point5": "{{kind}} فعال کریں۔"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "ہدایات",
-            "permissionDenied": "{{kind}} کی اجازت سے انکار کر دیا گیا۔ اسے استعمال کرنے کے لیے ان اقدامات پر عمل کریں:",
-            "point1": "اپنی iOS کی ترتیبات پر جائیں۔",
-            "point2": "&quot;رازداری&quot; کھولیں",
-            "point3": "{{kind}} تلاش کریں اور اسے کھولیں۔",
-            "point4": "&quot; {{communityName}} &quot; تلاش کریں اور فعال کریں۔"
-        },
-        "fbLive": {
-            "dialogTitle": "فیس بک لائیو سٹریمنگ شروع ہو گئی۔"
-        },
-        "notices": {
-            "youJoinedRoom": "آپ کمرے میں شامل ہو گئے۔",
-            "joining": "شمولیت: {{userName}}",
-            "sbLeftRoom": "{{userName}} کمرے سے نکل گیا۔",
-            "switchingRoom": "سوئچنگ روم...",
-            "forceDisconnecting": "آپ کا رابطہ 5 سیکنڈ میں منقطع ہو جائے گا۔",
-            "forceDisconnectingImmediately": "آپ کو ایک میزبان نے منقطع کر دیا تھا۔",
-            "youLeftRoom": "آپ کمرے سے نکل گئے۔",
-            "codeCopied": "آپ کمرے سے نکل گئے۔",
-            "sbBeganFbLive": "{{userName}} نے فیس بک میں اس کال کو نشر کرنا شروع کیا۔",
-            "sbStoppedFbLive": "{{userName}} نے فیس بک میں اس کال کو نشر کرنا بند کردیا۔",
-            "youBeganFbLive": "آپ نے اس کال کو فیس بک پر نشر کرنا شروع کیا۔",
-            "youStoppedFbLive": "آپ نے فیس بک میں اس کال کو نشر کرنا بند کر دیا ہے۔",
-            "youStartedLive": "آپ نے اس کال کو حسب ضرورت RTMP پر نشر کرنا شروع کیا۔",
-            "youStoppedLive": "آپ نے اس کال کو حسب ضرورت RTMP پر نشر کرنا بند کر دیا ہے۔",
-            "sbStartedLiveStreaming": "{{userName}} نے لائیو شروع کیا۔",
-            "sbStoppedLiveStreaming": "{{userName}} براہ راست ختم ہوا۔",
-            "liveStopped": "اینڈ پوائنٹ پر ویڈیو بھیجتے وقت خرابی پیش آگئی",
-            "youBeganVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا شروع کیا۔",
-            "youStoppedVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا بند کر دیا۔",
-            "linkCopiedToCb": "لنک کلپ بورڈ پر کاپی ہو گیا۔",
-            "codeCopiedToCb": "کوڈ کلپ بورڈ پر کاپی ہو گیا۔",
-            "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے۔",
-            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لیے سفاری براؤزر میں لنک کھولیں۔",
-            "allowedVideoLimit": "اس کمرے میں صرف {{limit}} ویڈیو کی اجازت ہے۔",
-            "allowedAudioLimit": "اس کمرے میں صرف {{limit}} مائکروفون کی اجازت ہے۔"
-        },
-        "settingsPopup": {
-            "dialogTitle": "ویڈیو کی ترتیبات",
-            "webCamera": "ویب کیمرا",
-            "screenSharing": "اسکرین شیئرنگ",
-            "shareAnotherScreen": "دوسری اسکرین کا اشتراک کریں۔",
-            "turnOffCameras": "کیمرہ بند کر دیں۔",
-            "turnOffVideo": "کیمرہ\/اسکرین شیئرنگ بند کریں۔",
-            "turnOffAudioInput": "مائیکروفون خاموش کریں۔",
-            "turnOffScreenSharing": "اسکرین شیئرنگ کو بند کریں۔",
-            "cameraIsTurnedOff": "کیمرہ بند ہے۔",
-            "micIsTurnedOff": "مائیکروفون بند ہے۔",
-            "startFBLive": "فیس بک لائیو اسٹریم شروع کریں۔",
-            "stopFBLive": "فیس بک لائیو اسٹریم بند کریں۔",
-            "startRecording": "ریکارڈنگ شروع کریں۔",
-            "stopRecording": "ریکارڈنگ بند کرو",
-            "start": "شروع کریں۔",
-            "stop": "رک جاؤ",
-            "recordingInProgress": "ریکارڈنگ جاری ہے...",
-            "fbLiveTitle": "لائیو اسٹریم کا عنوان",
-            "fbLiveDescription": "اپنے لائیو اسٹریم کی وضاحت کریں۔ اس کے بارے میں کیا ہے؟",
-            "fbOnlyMeLiveAccess": "صرف میں",
-            "fbFriendsAccess": "دوستو",
-            "fbPublicAccess": "عوام",
-            "publishOnTimeline": "ٹائم لائن پر شائع کریں۔",
-            "publishToGroup": "گروپ میں شائع کریں۔",
-            "fbStartLive": "لائیو جاؤ",
-            "fbStopLive": "لائیو اسٹریم ختم کریں۔",
-            "streamingSettings": "ترتیبات",
-            "manageStream": "لائیو اسٹریم کا نظم کریں۔",
-            "fbEmbedCode": "ایمبیڈ",
-            "copy": "کاپی",
-            "streamToRTMP": "اپنی مرضی کے مطابق RTMP پر سٹریم کریں۔",
-            "startBroadcasting": "نشریات شروع کریں۔",
-            "broadcastingInProgress": "نشریات جاری ہیں۔"
-        },
-        "audioSettings": {
-            "dialogTitle": "آڈیو کی ترتیبات",
-            "speakers": "مقررین",
-            "microphone": "مائیکروفون"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "نشریات کا نظم کریں۔"
-        },
-        "participantsPopup": {
-            "dialogTitle": "شرکاء کی ترتیبات",
-            "disconnect": "منقطع کرنا",
-            "floatingScreens": "فلوٹنگ اسکرینز",
-            "tiledScreens": "ٹائلڈ اسکرینز",
-            "loudestExceptMe": "میرے علاوہ سب سے بلند آواز",
-            "maximizeLoudest": "بلند ترین کو زیادہ سے زیادہ کریں۔",
-            "staticMaximized": "جامد زیادہ سے زیادہ",
-            "fullScreen": "مکمل اسکرین یا بڑی اسکرین",
-            "manual": "دستی",
-            "turnOffCamera": "ویڈیو چھپائیں۔",
-            "turnOffAudio": "آڈیو خاموش کریں۔",
-            "turnOffScreenSharing": "اسکرین شیئرنگ کو چھپائیں۔",
-            "turnOnCamera": "ویڈیو دکھائیں۔",
-            "turnOnAudio": "آڈیو کو چالو کریں۔",
-            "turnOnScreenSharing": "اسکرین شیئرنگ دکھائیں۔"
-        },
-        "streamingSettings": {
-            "title": "لائیو سٹریم"
-        },
-        "preview": {
-            "Meeting": "ٹیلی کانفرنس",
-            "MeetingEnded": "ٹیلی کانفرنس ختم ہوئی۔"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "بولنے کی درخواست",
-            "msg": "میٹنگ میں فی الحال {{count}} لوگ بول رہے ہیں۔ کیا آپ ان میں سے ایک کو {{seconds}} سیکنڈ تک بولنے کی اجازت دینے کے بعد تبدیل کرنا چاہتے ہیں؟"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "مدعو کیا۔",
@@ -471,10 +323,6 @@
             "displayType": "بات چیت",
             "description": "تاریخ کے ساتھ صارفین کے درمیان گفتگو"
         },
-        "Media\/WebRTC": {
-            "displayType": "ٹیلی کانفرنس",
-            "description": "ایک آن لائن ویڈیو\/آڈیو کانفرنس"
-        },
         "Streams\/question": {
             "displayType": "سوال",
             "description": "سوال کا سلسلہ",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "جواب دیں۔",
             "description": "جوابی سلسلہ"
-        },
-        "Media\/calls": {
-            "displayType": "کالز",
-            "description": "اسٹریمز\/webrtc کے لیے زمرہ",
-            "MaxRelationsExceeded": "زیادہ سے زیادہ کالز ہو گئیں۔"
         }
     },
     "menu": {

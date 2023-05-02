@@ -32,7 +32,7 @@
         "TrySynonyms": "Görmüyor musun? Bazı eş anlamlıları deneyin.",
         "AddUnderCategory": "Kategori altına ekle...",
         "Other": "Diğer",
-        "Unlisted": "listelenmemiş"
+        "Unlisted": "liste dışı"
     },
     "chat": {
         "flaggedForAdminReview": "İleti yönetici incelemesi için işaretlendi. İşareti kaldırmak için tekrar dokunun.",
@@ -46,7 +46,7 @@
         "closeChatConfirmNo": "HAYIR",
         "earlierComments": "önceki yorumlar",
         "startedConversation": "bir konuşma başlattı",
-        "RealTimeCall": "Gerçek Zamanlı Arama",
+        "RealTimeCall": "Gerçek Zamanlı Çağrı",
         "JoinWebRTC": "Tele konferans",
         "SearchByName": "Ada göre ara",
         "Notifications": {
@@ -91,7 +91,7 @@
         "messageContent": "{{displayName}} sizi {{inviteUrl}} davet etti",
         "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz.",
         "roles": {
-            "title": "Davetli Kullanıcılara Roller Verilsin mi?",
+            "title": "Davet Edilen Kullanıcılara Roller Verilsin mi?",
             "NotAuthorizedToGrantRole": {
                 "title": "Üzgünüm",
                 "alert": "Bu rolü verme yetkiniz yok"
@@ -117,7 +117,7 @@
             "go": "Gitmek",
             "title": "Davet etmek",
             "placeholder": "Cep telefonu numarası veya e-posta adresi",
-            "orInvite": "Veya aşağıdakileri kullanarak insanları davet edin:",
+            "orInvite": "Veya şunu kullanarak insanları davet edin:",
             "copyLink": "{{ClickOrTap}} davet bağlantısını kopyalamak için",
             "shareOrCopyLink": "{{ClickOrTap}} davet bağlantısını paylaşmak veya kopyalamak için",
             "QR": "{{ClickOrTap}} QR kodu oluşturmak için",
@@ -208,154 +208,6 @@
         "Identifiers": "tanımlayıcılar",
         "Devices": "Cihazlar",
         "Streams": "Canlı Yayınlar"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
-        "streamTitle": "{{1}} bir Telekonferans başlattı",
-        "allow": {
-            "dialogTitle": "Bağlanıyor",
-            "microphoneBtn": "Mikrofonu Etkinleştir",
-            "cameraBtn": "Kamerayı Etkinleştir",
-            "cameraAndMicrophoneBtn": "Kamera ve Mikrofonu Etkinleştir"
-        },
-        "preparing": {
-            "dialogTitle": "Katılmadan önce kamerayı veya mikrofonu açın\/kapatın",
-            "micIsOff": "mikrofon kapalı",
-            "micIsOn": "mikrofon açık",
-            "cameraIsOff": "kamera kapalı",
-            "cameraIsOn": "kamera açık",
-            "screenSharingIsOn": "Ekran paylaşımı açık",
-            "screenSharingIsOff": "Ekran paylaşımı",
-            "joinNow": "Aramaya Katılın"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Talimatlar",
-            "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen şu adımları izleyin:",
-            "point1": "&quot;Ayarlar&quot; -&gt; &quot;Gelişmiş&quot; -&gt; &quot;Gizlilik ve güvenlik&quot; -&gt; &quot;Site Ayarları&quot; -&gt; &quot;Kamera&quot; veya &quot;Site Ayarları&quot; -&gt; &quot;Mikrofon&quot;a gidin",
-            "point2": "{{hostname}} &quot;Engelle&quot; listesinden kaldır"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Talimatlar",
-            "permissionDenied": "{{kind}} için izin reddedildi. Lütfen bu sayfayı yeniden yükleyin ve konferansa katılmak için {{kind}} erişimi onaylayın."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Talimatlar",
-            "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen şu adımları izleyin:",
-            "point1": "Android Ayarlarınıza gidin",
-            "point2": "&quot;Uygulamalar ve bildirimler&quot;i açın",
-            "point3": "&quot; {{communityName}} &quot; u bulun ve açın",
-            "point4": "İzinler&#39;e dokunun",
-            "point5": "{{kind}} etkinleştir"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Talimatlar",
-            "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen şu adımları izleyin:",
-            "point1": "iOS Ayarlarınıza gidin",
-            "point2": "&quot;Gizlilik&quot;i aç",
-            "point3": "{{kind}} bulun ve açın",
-            "point4": "&quot; {{communityName}} &quot;u bulun ve etkinleştirin"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebook canlı yayın başladı"
-        },
-        "notices": {
-            "youJoinedRoom": "odaya katıldın",
-            "joining": "Katılım: {{userName}}",
-            "sbLeftRoom": "{{userName}} odayı terk etti",
-            "switchingRoom": "Anahtarlama odası...",
-            "forceDisconnecting": "5 saniye içinde bağlantınız kesilecek",
-            "forceDisconnectingImmediately": "Bir ana bilgisayar tarafından bağlantınız kesildi",
-            "youLeftRoom": "odadan çıktın",
-            "codeCopied": "odadan çıktın",
-            "sbBeganFbLive": "{{userName}} bu çağrıyı Facebook&#39;ta yayınlamaya başladı",
-            "sbStoppedFbLive": "{{userName}} bu aramayı Facebook&#39;ta yayınlamayı durdurdu",
-            "youBeganFbLive": "Bu görüşmeyi Facebook&#39;ta yayınlamaya başladınız",
-            "youStoppedFbLive": "Facebook&#39;ta bu görüşmeyi yayınlamayı durdurdunuz",
-            "youStartedLive": "Bu aramayı özel RTMP&#39;ye yayınlamaya başladınız",
-            "youStoppedLive": "Bu aramayı özel RTMP&#39;ye yayınlamayı durdurdunuz",
-            "sbStartedLiveStreaming": "{{userName}} canlı başladı",
-            "sbStoppedLiveStreaming": "{{userName}} canlı yayında sona erdi",
-            "liveStopped": "Uç noktaya video gönderilirken hata oluştu",
-            "youBeganVideoRecording": "Bu konferansı kaydetmeye başladınız",
-            "youStoppedVideoRecording": "Bu konferansın kaydını durdurdunuz",
-            "linkCopiedToCb": "link kopyalandı",
-            "codeCopiedToCb": "Panoya kopyalanan kod",
-            "userHasNoVideo": "Katılımcının videosu yok",
-            "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın.",
-            "allowedVideoLimit": "Bu odada yalnızca {{limit}} videoya izin verilir",
-            "allowedAudioLimit": "Bu odada yalnızca {{limit}} mikrofona izin verilir"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Video ayarları",
-            "webCamera": "İnternet kamerası",
-            "screenSharing": "Ekran paylaşımı",
-            "shareAnotherScreen": "Başka bir ekran paylaşın",
-            "turnOffCameras": "kamerayı kapat",
-            "turnOffVideo": "Kamera\/ekran paylaşımını kapat",
-            "turnOffAudioInput": "Mikrofonu sessize al",
-            "turnOffScreenSharing": "Ekran paylaşımını kapat",
-            "cameraIsTurnedOff": "kamera kapalı",
-            "micIsTurnedOff": "mikrofon kapalı",
-            "startFBLive": "Facebook Canlı Yayınını Başlat",
-            "stopFBLive": "Facebook Canlı Yayınını Durdur",
-            "startRecording": "Kayda başla",
-            "stopRecording": "Kaydetmeyi bırak",
-            "start": "Başlangıç",
-            "stop": "Durmak",
-            "recordingInProgress": "Kayıt devam ediyor...",
-            "fbLiveTitle": "Canlı Akışın Başlığı",
-            "fbLiveDescription": "Canlı Yayınınızı açıklayın. Neyle ilgili?",
-            "fbOnlyMeLiveAccess": "Sadece ben",
-            "fbFriendsAccess": "Arkadaşlar",
-            "fbPublicAccess": "Halk",
-            "publishOnTimeline": "Zaman tünelinde yayınla",
-            "publishToGroup": "gruba yayınla",
-            "fbStartLive": "Canlı Yayına Geç",
-            "fbStopLive": "Canlı Yayını Sonlandır",
-            "streamingSettings": "Ayarlar",
-            "manageStream": "Canlı Yayını Yönet",
-            "fbEmbedCode": "Göm",
-            "copy": "Kopyala",
-            "streamToRTMP": "Özel RTMP&#39;ye akış",
-            "startBroadcasting": "yayına başla",
-            "broadcastingInProgress": "Yayın devam ediyor"
-        },
-        "audioSettings": {
-            "dialogTitle": "Ses ayarları",
-            "speakers": "Konuşmacılar",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Yayını Yönet"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Katılımcı Ayarları",
-            "disconnect": "bağlantıyı kes",
-            "floatingScreens": "Yüzer Ekranlar",
-            "tiledScreens": "Çinili Ekranlar",
-            "loudestExceptMe": "Ben Hariç En Gürültülü",
-            "maximizeLoudest": "En Yüksek Sesi Büyüt",
-            "staticMaximized": "Statik Maksimize Edilmiş",
-            "fullScreen": "Tam ekran",
-            "manual": "Manuel",
-            "turnOffCamera": "Videoyu gizle",
-            "turnOffAudio": "Sesi kapat",
-            "turnOffScreenSharing": "Ekran paylaşımını gizle",
-            "turnOnCamera": "videoyu göster",
-            "turnOnAudio": "Sesi aç",
-            "turnOnScreenSharing": "Ekran paylaşımını göster"
-        },
-        "streamingSettings": {
-            "title": "Canlı yayın"
-        },
-        "preview": {
-            "Meeting": "Tele konferans",
-            "MeetingEnded": "telekonferans sona erdi"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Konuşma İsteği",
-            "msg": "Şu anda toplantıda konuşan {{count}} kişi var. Konuşmalarını bitirmeleri için {{seconds}} saniye bekledikten sonra birini değiştirmek ister misiniz?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -471,10 +323,6 @@
             "displayType": "Konuşma",
             "description": "geçmişi olan kullanıcılar arasında bir konuşma"
         },
-        "Media\/WebRTC": {
-            "displayType": "Tele konferans",
-            "description": "çevrimiçi bir video\/ses konferansı"
-        },
         "Streams\/question": {
             "displayType": "Soru",
             "description": "soru akışı",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Cevap",
             "description": "cevap akışı"
-        },
-        "Media\/calls": {
-            "displayType": "Aramalar",
-            "description": "Akışlar\/webrtc kategorisi",
-            "MaxRelationsExceeded": "Maksimum çağrı aşıldı"
         }
     },
     "menu": {
@@ -599,7 +442,7 @@
         "Create": "Yaratmak"
     },
     "calls": {
-        "SettingsTitle": "Aramalar",
+        "SettingsTitle": "aramalar",
         "MaxCalls": "Maksimum çağrı",
         "Update": "Güncelleme",
         "NoCallsYet": "Henüz arama yok",

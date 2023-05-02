@@ -78,7 +78,7 @@
         "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
         "Streams\/task\/error": "Ralat semasa: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}} : Mesej Masuk",
-        "Streams\/relatedTo\/Streams\/call": "Panggilan Baru Bermula pada {{toTitle}}",
+        "Streams\/relatedTo\/Streams\/call": "Panggilan Baru Dimulakan pada {{toTitle}}",
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambah kepada {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut anda dalam ulasan",
@@ -209,154 +209,6 @@
         "Devices": "Peranti",
         "Streams": "Aliran"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai strim ini.",
-        "streamTitle": "{{1}} memulakan Telesidang",
-        "allow": {
-            "dialogTitle": "Menyambung",
-            "microphoneBtn": "Dayakan Mikrofon",
-            "cameraBtn": "Dayakan Kamera",
-            "cameraAndMicrophoneBtn": "Dayakan Kamera dan Mikrofon"
-        },
-        "preparing": {
-            "dialogTitle": "Hidupkan\/matikan kamera atau mikrofon sebelum anda menyertai",
-            "micIsOff": "Mic dimatikan",
-            "micIsOn": "Mic dihidupkan",
-            "cameraIsOff": "Kamera dimatikan",
-            "cameraIsOn": "Kamera dihidupkan",
-            "screenSharingIsOn": "Perkongsian skrin dihidupkan",
-            "screenSharingIsOff": "Kongsi skrin",
-            "joinNow": "Sertai Panggilan"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Untuk menggunakannya sila ikuti langkah berikut:",
-            "point1": "Pergi ke &quot;Tetapan&quot; -&gt; &quot;Lanjutan&quot; -&gt; &quot;Privasi dan keselamatan&quot; -&gt; &quot;Tetapan Tapak&quot; -&gt; &quot;Kamera&quot; atau &quot;Tetapan Tapak&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Alih keluar {{hostname}} daripada senarai &quot;Sekat&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Sila muat semula halaman ini dan sahkan akses kepada {{kind}} untuk menyertai persidangan."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Untuk menggunakannya sila ikuti langkah berikut:",
-            "point1": "Pergi ke Tetapan Android anda",
-            "point2": "Buka &quot;Apl &amp; pemberitahuan&quot;",
-            "point3": "Cari &quot; {{communityName}} &quot; dan bukanya",
-            "point4": "Ketik pada Kebenaran",
-            "point5": "Dayakan {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Untuk menggunakannya sila ikuti langkah berikut:",
-            "point1": "Pergi ke Tetapan iOS anda",
-            "point2": "Buka &quot;Privasi&quot;",
-            "point3": "Cari {{kind}} dan bukanya",
-            "point4": "Cari &quot; {{communityName}} &quot; dan dayakan"
-        },
-        "fbLive": {
-            "dialogTitle": "Penstriman langsung Facebook bermula"
-        },
-        "notices": {
-            "youJoinedRoom": "Anda menyertai bilik",
-            "joining": "Menyertai: {{userName}}",
-            "sbLeftRoom": "{{userName}} keluar dari bilik",
-            "switchingRoom": "Bilik bertukar...",
-            "forceDisconnecting": "Anda akan terputus dalam masa 5 saat",
-            "forceDisconnectingImmediately": "Anda telah diputuskan sambungan oleh hos",
-            "youLeftRoom": "Awak keluar dari bilik",
-            "codeCopied": "Awak keluar dari bilik",
-            "sbBeganFbLive": "{{userName}} mula menyiarkan panggilan ini di Facebook",
-            "sbStoppedFbLive": "{{userName}} berhenti menyiarkan panggilan ini dalam Facebook",
-            "youBeganFbLive": "Anda mula menyiarkan panggilan ini dalam Facebook",
-            "youStoppedFbLive": "Anda berhenti menyiarkan panggilan ini dalam Facebook",
-            "youStartedLive": "Anda mula menyiarkan panggilan ini ke RTMP tersuai",
-            "youStoppedLive": "Anda berhenti menyiarkan panggilan ini ke RTMP tersuai",
-            "sbStartedLiveStreaming": "{{userName}} bermula secara langsung",
-            "sbStoppedLiveStreaming": "{{userName}} tamat secara langsung",
-            "liveStopped": "Ralat semasa menghantar video ke titik akhir telah berlaku",
-            "youBeganVideoRecording": "Anda mula merakam persidangan ini",
-            "youStoppedVideoRecording": "Anda berhenti merakam persidangan ini",
-            "linkCopiedToCb": "Pautan disalin ke papan keratan",
-            "codeCopiedToCb": "Kod disalin ke papan keratan",
-            "userHasNoVideo": "Peserta tidak mempunyai video",
-            "openInBrowserAlert": "Buka pautan dalam penyemak imbas Safari untuk menyertai persidangan.",
-            "allowedVideoLimit": "Hanya {{limit}} video dibenarkan di dalam bilik ini",
-            "allowedAudioLimit": "Hanya {{limit}} mikrofon dibenarkan di dalam bilik ini"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Tetapan Video",
-            "webCamera": "Kamera sesawang",
-            "screenSharing": "Perkongsian Skrin",
-            "shareAnotherScreen": "Kongsi skrin lain",
-            "turnOffCameras": "Matikan kamera",
-            "turnOffVideo": "Matikan perkongsian kamera\/skrin",
-            "turnOffAudioInput": "Redam mikrofon",
-            "turnOffScreenSharing": "Matikan perkongsian skrin",
-            "cameraIsTurnedOff": "Kamera dimatikan",
-            "micIsTurnedOff": "Mikrofon dimatikan",
-            "startFBLive": "Mulakan Strim Langsung Facebook",
-            "stopFBLive": "Hentikan Strim Langsung Facebook",
-            "startRecording": "Mulakan Rakaman",
-            "stopRecording": "Hentikan Rakaman",
-            "start": "Mulakan",
-            "stop": "Berhenti",
-            "recordingInProgress": "Rakaman sedang dijalankan...",
-            "fbLiveTitle": "Tajuk Strim Langsung",
-            "fbLiveDescription": "Terangkan Strim Langsung anda. Hal ini berkaitan dengan apa?",
-            "fbOnlyMeLiveAccess": "Hanya saya",
-            "fbFriendsAccess": "Kawan-kawan",
-            "fbPublicAccess": "Awam",
-            "publishOnTimeline": "Terbitkan pada garis masa",
-            "publishToGroup": "Terbitkan ke kumpulan",
-            "fbStartLive": "Siaran Langsung",
-            "fbStopLive": "Tamatkan Strim Langsung",
-            "streamingSettings": "tetapan",
-            "manageStream": "Urus Strim Langsung",
-            "fbEmbedCode": "Benamkan",
-            "copy": "Salinan",
-            "streamToRTMP": "Strim ke RTMP tersuai",
-            "startBroadcasting": "Mulakan penyiaran",
-            "broadcastingInProgress": "Penyiaran sedang dijalankan"
-        },
-        "audioSettings": {
-            "dialogTitle": "Tetapan Audio",
-            "speakers": "Penceramah",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Uruskan Siaran"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Tetapan Peserta",
-            "disconnect": "Putuskan sambungan",
-            "floatingScreens": "Skrin Terapung",
-            "tiledScreens": "Skrin Berjubin",
-            "loudestExceptMe": "Paling Keras Kecuali Saya",
-            "maximizeLoudest": "Maksimumkan Paling Keras",
-            "staticMaximized": "Statik Dimaksimumkan",
-            "fullScreen": "Skrin penuh",
-            "manual": "Manual",
-            "turnOffCamera": "Sembunyikan video",
-            "turnOffAudio": "Redamkan audio",
-            "turnOffScreenSharing": "Sembunyikan perkongsian skrin",
-            "turnOnCamera": "Tunjukkan video",
-            "turnOnAudio": "Nyahredam audio",
-            "turnOnScreenSharing": "Tunjukkan perkongsian skrin"
-        },
-        "streamingSettings": {
-            "title": "Siaran langsung"
-        },
-        "preview": {
-            "Meeting": "Telesidang",
-            "MeetingEnded": "Telesidang tamat"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Minta Bercakap",
-            "msg": "Pada masa ini terdapat {{count}} orang bercakap dalam mesyuarat itu. Adakah anda mahu menggantikan salah satu daripada mereka selepas membenarkan mereka {{seconds}} saat untuk menghabiskan bercakap?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "dijemput",
@@ -471,10 +323,6 @@
             "displayType": "Perbualan",
             "description": "perbualan antara pengguna, dengan sejarah"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telesidang",
-            "description": "persidangan video\/audio dalam talian"
-        },
         "Streams\/question": {
             "displayType": "soalan",
             "description": "aliran soalan",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Jawab",
             "description": "aliran jawapan"
-        },
-        "Media\/calls": {
-            "displayType": "Panggilan",
-            "description": "kategori untuk Strim\/webrtc",
-            "MaxRelationsExceeded": "Panggilan maksimum melebihi"
         }
     },
     "menu": {

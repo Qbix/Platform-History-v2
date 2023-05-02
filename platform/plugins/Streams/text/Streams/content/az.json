@@ -209,154 +209,6 @@
         "Devices": "Cihazlar",
         "Streams": "Axınlar"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Bu yayıma qoşulmaq icazəniz yoxdur.",
-        "streamTitle": "{{1}} telekonfransa başladı",
-        "allow": {
-            "dialogTitle": "Qoşulur",
-            "microphoneBtn": "Mikrofonu aktivləşdirin",
-            "cameraBtn": "Kameranı aktivləşdirin",
-            "cameraAndMicrophoneBtn": "Kamera və Mikrofonu aktivləşdirin"
-        },
-        "preparing": {
-            "dialogTitle": "Qoşulmazdan əvvəl kameranı və ya mikrofonu yandırın\/söndürün",
-            "micIsOff": "Mikrofon söndürülüb",
-            "micIsOn": "Mikrofon aktivdir",
-            "cameraIsOff": "Kamera söndürülüb",
-            "cameraIsOn": "Kamera aktivdir",
-            "screenSharingIsOn": "Ekran paylaşımı aktivdir",
-            "screenSharingIsOff": "Ekranı paylaşın",
-            "joinNow": "Zəngə qoşulun"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Təlimatlar",
-            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Onu istifadə etmək üçün bu addımları yerinə yetirin:",
-            "point1": "&quot;Parametrlər&quot; -&gt; &quot;Qabaqcıl&quot; -&gt; &quot;Məxfilik və təhlükəsizlik&quot; -&gt; &quot;Sayt Parametrləri&quot; -&gt; &quot;Kamera&quot; və ya &quot;Sayt Parametrləri&quot; -&gt; &quot;Mikrofon&quot;a keçin.",
-            "point2": "{{hostname}} &quot;Blok&quot; siyahısından çıxarın"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Təlimatlar",
-            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Konfransa qoşulmaq üçün bu səhifəni yenidən yükləyin və {{kind}} a girişi təsdiqləyin."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Təlimatlar",
-            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Onu istifadə etmək üçün bu addımları yerinə yetirin:",
-            "point1": "Android Parametrlərinizə keçin",
-            "point2": "&quot;Tətbiqlər və bildirişlər&quot;i açın",
-            "point3": "&quot; {{communityName}} &quot; tapın və açın",
-            "point4": "İcazələr üzərinə toxunun",
-            "point5": "{{kind}} u aktivləşdirin"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Təlimatlar",
-            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Onu istifadə etmək üçün bu addımları yerinə yetirin:",
-            "point1": "iOS Parametrlərinizə keçin",
-            "point2": "&quot;Məxfilik&quot; bölməsini açın",
-            "point3": "{{kind}} tapın və açın",
-            "point4": "&quot; {{communityName}} &quot; tapın və aktivləşdirin"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebook canlı yayımı başladı"
-        },
-        "notices": {
-            "youJoinedRoom": "Otağa qoşuldunuz",
-            "joining": "Qoşulma: {{userName}}",
-            "sbLeftRoom": "{{userName}} otaqdan çıxdı",
-            "switchingRoom": "Otağın dəyişdirilməsi...",
-            "forceDisconnecting": "5 saniyə ərzində əlaqəniz kəsiləcək",
-            "forceDisconnectingImmediately": "Ev sahibi tərəfindən əlaqəniz kəsildi",
-            "youLeftRoom": "Otağı tərk etdin",
-            "codeCopied": "Otağı tərk etdin",
-            "sbBeganFbLive": "{{userName}} bu çağırışı Facebook-da yayımlamağa başladı",
-            "sbStoppedFbLive": "{{userName}} bu zəngi Facebook-da yayımlamağı dayandırdı",
-            "youBeganFbLive": "Siz bu zəngi Facebook-da yayımlamağa başladınız",
-            "youStoppedFbLive": "Siz bu zəngi Facebook-da yayımlamağı dayandırdınız",
-            "youStartedLive": "Siz bu zəngi fərdi RTMP-yə yayımlamağa başladınız",
-            "youStoppedLive": "Siz bu zəngi fərdi RTMP-yə yayımlamağı dayandırdınız",
-            "sbStartedLiveStreaming": "{{userName}} canlı yayıma başladı",
-            "sbStoppedLiveStreaming": "{{userName}} canlı yayımı bitirdi",
-            "liveStopped": "Videonu son nöqtəyə göndərərkən xəta baş verdi",
-            "youBeganVideoRecording": "Siz bu konfransı yazmağa başladınız",
-            "youStoppedVideoRecording": "Bu konfransı yazmağı dayandırdınız",
-            "linkCopiedToCb": "Link buferə kopyalandı",
-            "codeCopiedToCb": "Kod buferə kopyalandı",
-            "userHasNoVideo": "İştirakçının videosu yoxdur",
-            "openInBrowserAlert": "Konfransa qoşulmaq üçün Safari brauzerində linki açın.",
-            "allowedVideoLimit": "Bu otaqda yalnız {{limit}} videoya icazə verilir",
-            "allowedAudioLimit": "Bu otaqda yalnız {{limit}} mikrofona icazə verilir"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Video Parametrləri",
-            "webCamera": "Veb kamera",
-            "screenSharing": "Ekran Paylaşımı",
-            "shareAnotherScreen": "Başqa ekran paylaşın",
-            "turnOffCameras": "Kameranı söndürün",
-            "turnOffVideo": "Kamera\/ekran paylaşımını söndürün",
-            "turnOffAudioInput": "Mikrofonu susdur",
-            "turnOffScreenSharing": "Ekran paylaşımını söndürün",
-            "cameraIsTurnedOff": "Kamera söndürülüb",
-            "micIsTurnedOff": "Mikrofon söndürülüb",
-            "startFBLive": "Facebook Live Stream-a başlayın",
-            "stopFBLive": "Facebook canlı yayımını dayandırın",
-            "startRecording": "Yazmağa başlayın",
-            "stopRecording": "Qeydi dayandırın",
-            "start": "Başlamaq",
-            "stop": "Dayan",
-            "recordingInProgress": "Qeydiyyat davam edir...",
-            "fbLiveTitle": "Canlı Yayımın Başlığı",
-            "fbLiveDescription": "Canlı Yayımınızı təsvir edin. Söhbət nədən gedir?",
-            "fbOnlyMeLiveAccess": "Təkcə mən",
-            "fbFriendsAccess": "Dostlar",
-            "fbPublicAccess": "İctimai",
-            "publishOnTimeline": "Zaman qrafikində dərc edin",
-            "publishToGroup": "Qrupda yayımlayın",
-            "fbStartLive": "Canlı keçin",
-            "fbStopLive": "Canlı Yayımı bitir",
-            "streamingSettings": "Parametrlər",
-            "manageStream": "Canlı yayımı idarə edin",
-            "fbEmbedCode": "Yerləşdirin",
-            "copy": "Kopyalayın",
-            "streamToRTMP": "Fərdi RTMP-yə yayımlayın",
-            "startBroadcasting": "Yayımlanmağa başlayın",
-            "broadcastingInProgress": "Yayım davam edir"
-        },
-        "audioSettings": {
-            "dialogTitle": "Audio Parametrlər",
-            "speakers": "Dinamiklər",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Yayımı idarə et"
-        },
-        "participantsPopup": {
-            "dialogTitle": "İştirakçı Parametrləri",
-            "disconnect": "Bağlantını kəsin",
-            "floatingScreens": "Üzən ekranlar",
-            "tiledScreens": "Kirəmitli Ekranlar",
-            "loudestExceptMe": "Məndən başqa ən səsli",
-            "maximizeLoudest": "Ən Güclü",
-            "staticMaximized": "Statik Maksimallaşdırılmışdır",
-            "fullScreen": "Tam ekran",
-            "manual": "Manual",
-            "turnOffCamera": "Videonu gizlədin",
-            "turnOffAudio": "Audionu söndürün",
-            "turnOffScreenSharing": "Ekran paylaşımını gizlədin",
-            "turnOnCamera": "Videonu göstərin",
-            "turnOnAudio": "Audionun səsini söndürün",
-            "turnOnScreenSharing": "Ekran paylaşımını göstərin"
-        },
-        "streamingSettings": {
-            "title": "Canlı yayım"
-        },
-        "preview": {
-            "Meeting": "Telekonfrans",
-            "MeetingEnded": "Telekonfrans başa çatıb"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Danışmaq tələbi",
-            "msg": "Hazırda iclasda {{count}} nəfər çıxış edir. Danışmağı bitirmək üçün {{seconds}} saniyə vaxt verdikdən sonra onlardan birini əvəz etmək istəyirsiniz?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Dəvət",
@@ -471,10 +323,6 @@
             "displayType": "Söhbət",
             "description": "istifadəçilər arasında tarixlə söhbət"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telekonfrans",
-            "description": "onlayn video\/audio konfrans"
-        },
         "Streams\/question": {
             "displayType": "Sual",
             "description": "sual axını",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Cavab verin",
             "description": "cavab axını"
-        },
-        "Media\/calls": {
-            "displayType": "Zənglər",
-            "description": "Yayımlar\/webrtc üçün kateqoriya",
-            "MaxRelationsExceeded": "Maksimum zənglər keçdi"
         }
     },
     "menu": {

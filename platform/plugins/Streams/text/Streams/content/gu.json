@@ -209,154 +209,6 @@
         "Devices": "ઉપકરણો",
         "Streams": "સ્ટ્રીમ્સ"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "તમને આ સ્ટ્રીમમાં જોડાવાની પરવાનગી નથી.",
-        "streamTitle": "{{1}} એ ટેલીકોન્ફરન્સ શરૂ કરી",
-        "allow": {
-            "dialogTitle": "કનેક્ટિંગ",
-            "microphoneBtn": "માઇક્રોફોન સક્ષમ કરો",
-            "cameraBtn": "કૅમેરા સક્ષમ કરો",
-            "cameraAndMicrophoneBtn": "કૅમેરા અને માઇક્રોફોનને સક્ષમ કરો"
-        },
-        "preparing": {
-            "dialogTitle": "તમે જોડાઓ તે પહેલા કેમેરા અથવા માઈક ચાલુ\/બંધ કરો",
-            "micIsOff": "માઈક બંધ છે",
-            "micIsOn": "માઈક ચાલુ છે",
-            "cameraIsOff": "કૅમેરો બંધ છે",
-            "cameraIsOn": "કેમેરા ચાલુ છે",
-            "screenSharingIsOn": "સ્ક્રીનશેરિંગ ચાલુ છે",
-            "screenSharingIsOff": "સ્ક્રીન શેર કરો",
-            "joinNow": "કૉલમાં જોડાઓ"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "સૂચનાઓ",
-            "permissionDenied": "{{kind}} માટે પરવાનગી નકારી. તેનો ઉપયોગ કરવા માટે, કૃપા કરીને આ પગલાં અનુસરો:",
-            "point1": "&quot;સેટિંગ્સ&quot; -&gt; &quot;એડવાન્સ્ડ&quot; -&gt; &quot;ગોપનીયતા અને સુરક્ષા&quot; -&gt; &quot;સાઇટ સેટિંગ્સ&quot; -&gt; &quot;કેમેરા&quot; અથવા &quot;સાઇટ સેટિંગ્સ&quot; -&gt; &quot;માઇક્રોફોન&quot; પર જાઓ",
-            "point2": "&quot;બ્લોક&quot; સૂચિમાંથી {{hostname}} દૂર કરો"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "સૂચનાઓ",
-            "permissionDenied": "{{kind}} માટે પરવાનગી નકારી. કૃપા કરીને આ પૃષ્ઠને ફરીથી લોડ કરો અને કોન્ફરન્સમાં જોડાવા માટે {{kind}} ની ઍક્સેસની પુષ્ટિ કરો."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "સૂચનાઓ",
-            "permissionDenied": "{{kind}} માટે પરવાનગી નકારી. તેનો ઉપયોગ કરવા માટે, કૃપા કરીને આ પગલાં અનુસરો:",
-            "point1": "તમારી Android સેટિંગ્સ પર જાઓ",
-            "point2": "&quot;એપ્લિકેશનો અને સૂચનાઓ&quot; ખોલો",
-            "point3": "&quot; {{communityName}} &quot; શોધો અને તેને ખોલો",
-            "point4": "પરવાનગીઓ પર ટેપ કરો",
-            "point5": "{{kind}} સક્ષમ કરો"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "સૂચનાઓ",
-            "permissionDenied": "{{kind}} માટે પરવાનગી નકારી. તેનો ઉપયોગ કરવા માટે, કૃપા કરીને આ પગલાં અનુસરો:",
-            "point1": "તમારા iOS સેટિંગ્સ પર જાઓ",
-            "point2": "&quot;ગોપનીયતા&quot; ખોલો",
-            "point3": "{{kind}} શોધો અને તેને ખોલો",
-            "point4": "&quot; {{communityName}} &quot; શોધો અને સક્ષમ કરો"
-        },
-        "fbLive": {
-            "dialogTitle": "ફેસબુક લાઇવ સ્ટ્રીમિંગ શરૂ થયું"
-        },
-        "notices": {
-            "youJoinedRoom": "તમે રૂમમાં જોડાયા",
-            "joining": "જોડાવું: {{userName}}",
-            "sbLeftRoom": "{{userName}} રૂમમાંથી બહાર નીકળ્યા",
-            "switchingRoom": "રૂમ સ્વિચ કરી રહ્યું છે...",
-            "forceDisconnecting": "તમે 5 સેકન્ડમાં ડિસ્કનેક્ટ થઈ જશો",
-            "forceDisconnectingImmediately": "તમે હોસ્ટ દ્વારા ડિસ્કનેક્ટ થયા હતા",
-            "youLeftRoom": "તમે રૂમ છોડી ગયા",
-            "codeCopied": "તમે રૂમ છોડી ગયા",
-            "sbBeganFbLive": "{{userName}} ફેસબુકમાં આ કૉલનું પ્રસારણ કરવાનું શરૂ કર્યું",
-            "sbStoppedFbLive": "{{userName}} ફેસબુકમાં આ કૉલનું પ્રસારણ બંધ કરી દીધું",
-            "youBeganFbLive": "તમે ફેસબુકમાં આ કૉલનું પ્રસારણ કરવાનું શરૂ કર્યું",
-            "youStoppedFbLive": "તમે Facebook માં આ કૉલનું પ્રસારણ બંધ કર્યું છે",
-            "youStartedLive": "તમે આ કૉલને કસ્ટમ RTMP પર બ્રોડકાસ્ટ કરવાનું શરૂ કર્યું",
-            "youStoppedLive": "તમે આ કૉલને કસ્ટમ RTMP પર પ્રસારિત કરવાનું બંધ કર્યું છે",
-            "sbStartedLiveStreaming": "{{userName}} લાઇવ શરૂ કર્યું",
-            "sbStoppedLiveStreaming": "{{userName}} લાઈવ સમાપ્ત",
-            "liveStopped": "અંતિમ બિંદુ પર વિડિઓ મોકલતી વખતે ભૂલ આવી",
-            "youBeganVideoRecording": "તમે આ કોન્ફરન્સ રેકોર્ડ કરવાનું શરૂ કર્યું",
-            "youStoppedVideoRecording": "તમે આ કોન્ફરન્સ રેકોર્ડ કરવાનું બંધ કર્યું",
-            "linkCopiedToCb": "લિંક ક્લિપબોર્ડ પર કૉપિ કરી",
-            "codeCopiedToCb": "કોડ ક્લિપબોર્ડ પર કૉપિ કર્યો",
-            "userHasNoVideo": "સહભાગી પાસે કોઈ વિડિઓ નથી",
-            "openInBrowserAlert": "કોન્ફરન્સમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો.",
-            "allowedVideoLimit": "આ રૂમમાં માત્ર {{limit}} વીડિયોની મંજૂરી છે",
-            "allowedAudioLimit": "આ રૂમમાં માત્ર {{limit}} માઇક્રોફોનની મંજૂરી છે"
-        },
-        "settingsPopup": {
-            "dialogTitle": "વિડિઓ સેટિંગ્સ",
-            "webCamera": "વેબ કેમેરા",
-            "screenSharing": "સ્ક્રીન શેરિંગ",
-            "shareAnotherScreen": "બીજી સ્ક્રીન શેર કરો",
-            "turnOffCameras": "કેમેરા બંધ કરો",
-            "turnOffVideo": "કેમેરા\/સ્ક્રીન શેરિંગ બંધ કરો",
-            "turnOffAudioInput": "માઇક્રોફોન મ્યૂટ કરો",
-            "turnOffScreenSharing": "સ્ક્રીન શેરિંગ બંધ કરો",
-            "cameraIsTurnedOff": "કેમેરા બંધ છે",
-            "micIsTurnedOff": "માઇક્રોફોન બંધ છે",
-            "startFBLive": "ફેસબુક લાઇવસ્ટ્રીમ શરૂ કરો",
-            "stopFBLive": "ફેસબુક લાઇવસ્ટ્રીમ રોકો",
-            "startRecording": "રેકોર્ડિંગ શરૂ કરો",
-            "stopRecording": "રેકોર્ડિંગ બંધ કરો",
-            "start": "શરૂઆત",
-            "stop": "બંધ",
-            "recordingInProgress": "રેકોર્ડિંગ ચાલુ છે...",
-            "fbLiveTitle": "લાઇવસ્ટ્રીમનું શીર્ષક",
-            "fbLiveDescription": "તમારી લાઇવસ્ટ્રીમનું વર્ણન કરો. તે શાના વિશે છે?",
-            "fbOnlyMeLiveAccess": "માત્ર મને",
-            "fbFriendsAccess": "મિત્રો",
-            "fbPublicAccess": "જાહેર",
-            "publishOnTimeline": "સમયરેખા પર પ્રકાશિત કરો",
-            "publishToGroup": "જૂથમાં પ્રકાશિત કરો",
-            "fbStartLive": "લાઈવ જાઓ",
-            "fbStopLive": "લાઇવસ્ટ્રીમ સમાપ્ત કરો",
-            "streamingSettings": "સેટિંગ્સ",
-            "manageStream": "લાઇવસ્ટ્રીમ મેનેજ કરો",
-            "fbEmbedCode": "એમ્બેડ કરો",
-            "copy": "નકલ કરો",
-            "streamToRTMP": "કસ્ટમ RTMP પર સ્ટ્રીમ કરો",
-            "startBroadcasting": "પ્રસારણ શરૂ કરો",
-            "broadcastingInProgress": "પ્રસારણ ચાલુ છે"
-        },
-        "audioSettings": {
-            "dialogTitle": "ઑડિઓ સેટિંગ્સ",
-            "speakers": "સ્પીકર્સ",
-            "microphone": "માઇક્રોફોન"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "બ્રોડકાસ્ટ મેનેજ કરો"
-        },
-        "participantsPopup": {
-            "dialogTitle": "સહભાગી સેટિંગ્સ",
-            "disconnect": "ડિસ્કનેક્ટ કરો",
-            "floatingScreens": "ફ્લોટિંગ સ્ક્રીન્સ",
-            "tiledScreens": "ટાઇલ્ડ સ્ક્રીન",
-            "loudestExceptMe": "મારા સિવાય સૌથી મોટેથી",
-            "maximizeLoudest": "મોટેથી મોટા કરો",
-            "staticMaximized": "સ્થિર મહત્તમ",
-            "fullScreen": "પૂર્ણ - પટ, આખો પડદો",
-            "manual": "મેન્યુઅલ",
-            "turnOffCamera": "વિડિઓ છુપાવો",
-            "turnOffAudio": "ઑડિયો મ્યૂટ કરો",
-            "turnOffScreenSharing": "સ્ક્રીન શેરિંગ છુપાવો",
-            "turnOnCamera": "વિડિઓ બતાવો",
-            "turnOnAudio": "ઑડિયો અનમ્યૂટ કરો",
-            "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો"
-        },
-        "streamingSettings": {
-            "title": "લાઇવસ્ટ્રીમ"
-        },
-        "preview": {
-            "Meeting": "ટેલિકોન્ફરન્સ",
-            "MeetingEnded": "ટેલીકોન્ફરન્સ સમાપ્ત થઈ"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "બોલવા વિનંતી",
-            "msg": "મીટિંગમાં હાલમાં {{count}} લોકો બોલી રહ્યા છે. શું તમે તેમને બોલવાનું સમાપ્ત કરવા માટે {{seconds}} સેકન્ડની મંજૂરી આપ્યા પછી તેમાંથી એકને બદલવા માંગો છો?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "આમંત્રિત",
@@ -364,7 +216,7 @@
         },
         "Streams\/resource": {
             "displayType": "સંસાધન",
-            "description": "સંસાધનની ઍક્સેસ મેનેજ કરવા અને અપડેટ્સ વિશે સંદેશાઓ પોસ્ટ કરવા માટે સ્ટ્રીમ"
+            "description": "સંસાધનની ઍક્સેસનું સંચાલન કરવા અને અપડેટ્સ વિશેના સંદેશા પોસ્ટ કરવા માટે સ્ટ્રીમ"
         },
         "Streams\/task": {
             "description": "ચોક્કસ કાર્ય પર પ્રગતિ વિશે અપડેટ્સ પ્રાપ્ત કરવા માટે",
@@ -453,7 +305,7 @@
         },
         "Streams\/category": {
             "displayType": "શ્રેણી",
-            "description": "એક શ્રેણી કે જેમાં અન્ય સ્ટ્રીમ્સ સંબંધિત હોઈ શકે"
+            "description": "કેટેગરી કે જેમાં અન્ય સ્ટ્રીમ્સ સંબંધિત હોઈ શકે"
         },
         "Streams\/participating": {
             "displayType": "સહભાગી સૂચકાંક",
@@ -471,10 +323,6 @@
             "displayType": "વાતચીત",
             "description": "ઇતિહાસ સાથે વપરાશકર્તાઓ વચ્ચે વાતચીત"
         },
-        "Media\/WebRTC": {
-            "displayType": "ટેલિકોન્ફરન્સ",
-            "description": "ઓનલાઈન વિડિયો\/ઓડિયો કોન્ફરન્સ"
-        },
         "Streams\/question": {
             "displayType": "પ્રશ્ન",
             "description": "પ્રશ્ન પ્રવાહ",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "જવાબ આપો",
             "description": "જવાબ પ્રવાહ"
-        },
-        "Media\/calls": {
-            "displayType": "કૉલ્સ",
-            "description": "સ્ટ્રીમ્સ\/webrtc માટે શ્રેણી",
-            "MaxRelationsExceeded": "મહત્તમ કૉલ્સ ઓળંગી ગયા"
         }
     },
     "menu": {
@@ -603,7 +446,7 @@
         "MaxCalls": "મહત્તમ કૉલ્સ",
         "Update": "અપડેટ કરો",
         "NoCallsYet": "હજુ સુધી કોઈ કૉલ નથી",
-        "CallReasonTitle": "આ કોલ શેના વિશે છે?",
+        "CallReasonTitle": "આ કૉલ શેના વિશે છે?",
         "WaitingRoom": "પ્રતિક્ષા ખંડ",
         "LiveRoom": "લાઈવ રૂમ",
         "interviewedByAnotherHost": "હાલમાં અન્ય હોસ્ટ દ્વારા ઇન્ટરવ્યુ લેવામાં આવે છે",

@@ -29,7 +29,7 @@
     "interests": {
         "Filter": "Интересовања за претрагу",
         "CanGrant": "Ако и даље не можете да пронађете оно што тражите, можете додати ново интересовање испод:",
-        "TrySynonyms": "Не видите? Покушајте са неким синонимима.",
+        "TrySynonyms": "Не видите? Пробајте неке синониме.",
         "AddUnderCategory": "Додај под категорију...",
         "Other": "Остало",
         "Unlisted": "Ненаведено"
@@ -52,7 +52,7 @@
         "Notifications": {
             "Visit": "{{displayName}} посећује ћаскање",
             "Join": "{{displayName}} се придружио ћаскању",
-            "Leave": "{{displayName}} је напустио ћаскање",
+            "Leave": "{{displayName}} је напустило ћаскање",
             "RelatedTo": "{{displayName}} је почело {{stream.displayType}}"
         },
         "placeholders": {
@@ -209,154 +209,6 @@
         "Devices": "Уређаји",
         "Streams": "Стреамс"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Немате дозволу да се придружите овом стриму.",
-        "streamTitle": "{{1}} је започео телеконференцију",
-        "allow": {
-            "dialogTitle": "Повезивање",
-            "microphoneBtn": "Омогући микрофон",
-            "cameraBtn": "Омогући камеру",
-            "cameraAndMicrophoneBtn": "Омогућите камеру и микрофон"
-        },
-        "preparing": {
-            "dialogTitle": "Укључите\/искључите камеру или микрофон пре него што се придружите",
-            "micIsOff": "Микрофон је искључен",
-            "micIsOn": "Микрофон је укључен",
-            "cameraIsOff": "Камера је искључена",
-            "cameraIsOn": "Камера је укључена",
-            "screenSharingIsOn": "Дељење екрана је укључено",
-            "screenSharingIsOff": "Дели екран",
-            "joinNow": "Придружите се позиву"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Упутства",
-            "permissionDenied": "Дозвола за {{kind}} одбијена. Да бисте га користили, следите ове кораке:",
-            "point1": "Идите на &quot;Подешавања&quot; -&gt; &quot;Напредно&quot; -&gt; &quot;Приватност и безбедност&quot; -&gt; &quot;Подешавања сајта&quot; -&gt; &quot;Камера&quot; или &quot;Подешавања сајта&quot; -&gt; &quot;Микрофон&quot;",
-            "point2": "Уклоните {{hostname}} са листе „Блокирај“."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Упутства",
-            "permissionDenied": "Дозвола за {{kind}} одбијена. Поново учитајте ову страницу и потврдите приступ на {{kind}} да бисте се придружили конференцији."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Упутства",
-            "permissionDenied": "Дозвола за {{kind}} одбијена. Да бисте га користили, следите ове кораке:",
-            "point1": "Идите на подешавања за Андроид",
-            "point2": "Отворите „Апликације и обавештења“",
-            "point3": "Пронађите „ {{communityName}} “ и отворите га",
-            "point4": "Додирните Дозволе",
-            "point5": "Омогући {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Упутства",
-            "permissionDenied": "Дозвола за {{kind}} одбијена. Да бисте га користили, следите ове кораке:",
-            "point1": "Идите на подешавања иОС-а",
-            "point2": "Отворите „Приватност“",
-            "point3": "Пронађите {{kind}} и отворите га",
-            "point4": "Пронађите „ {{communityName}} “ и омогућите"
-        },
-        "fbLive": {
-            "dialogTitle": "Фацебоок ливе стреаминг је почео"
-        },
-        "notices": {
-            "youJoinedRoom": "Придружили сте се соби",
-            "joining": "Придруживање: {{userName}}",
-            "sbLeftRoom": "{{userName}} је напустио собу",
-            "switchingRoom": "Замена соба...",
-            "forceDisconnecting": "Бићете искључени у року од 5 секунди",
-            "forceDisconnectingImmediately": "Хост вам је прекинуо везу",
-            "youLeftRoom": "Напустио си собу",
-            "codeCopied": "Напустио си собу",
-            "sbBeganFbLive": "{{userName}} је почео да емитује овај позив на Фејсбуку",
-            "sbStoppedFbLive": "{{userName}} је прекинуо емитовање овог позива на Фејсбуку",
-            "youBeganFbLive": "Почели сте да емитујете овај позив на Фејсбуку",
-            "youStoppedFbLive": "Престали сте да емитујете овај позив на Фејсбуку",
-            "youStartedLive": "Почели сте да емитујете овај позив на прилагођени РТМП",
-            "youStoppedLive": "Престали сте да емитујете овај позив на прилагођени РТМП",
-            "sbStartedLiveStreaming": "{{userName}} је почео уживо",
-            "sbStoppedLiveStreaming": "{{userName}} је завршило уживо",
-            "liveStopped": "Дошло је до грешке при слању видеа на крајњу тачку",
-            "youBeganVideoRecording": "Почели сте да снимате ову конференцију",
-            "youStoppedVideoRecording": "Престали сте да снимате ову конференцију",
-            "linkCopiedToCb": "Веза је копирана у међуспремник",
-            "codeCopiedToCb": "Код је копиран у међуспремник",
-            "userHasNoVideo": "Учесник нема видео снимак",
-            "openInBrowserAlert": "Отворите везу у Сафари претраживачу да бисте се придружили конференцији.",
-            "allowedVideoLimit": "У овој просторији је дозвољено само {{limit}} видео записа",
-            "allowedAudioLimit": "У овој просторији је дозвољено само {{limit}} микрофона"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Видео Сеттингс",
-            "webCamera": "Веб камера",
-            "screenSharing": "Дељење екрана",
-            "shareAnotherScreen": "Делите други екран",
-            "turnOffCameras": "Искључите камеру",
-            "turnOffVideo": "Искључите дељење камере\/екрана",
-            "turnOffAudioInput": "Искључите микрофон",
-            "turnOffScreenSharing": "Искључите дељење екрана",
-            "cameraIsTurnedOff": "Камера је искључена",
-            "micIsTurnedOff": "Микрофон је искључен",
-            "startFBLive": "Покрените Фацебоок Ливестреам",
-            "stopFBLive": "Зауставите Фацебоок Ливестреам",
-            "startRecording": "Почели са снимањем",
-            "stopRecording": "Заустави снимање",
-            "start": "Почетак",
-            "stop": "Зауставити",
-            "recordingInProgress": "Снимање је у току...",
-            "fbLiveTitle": "Наслов преноса уживо",
-            "fbLiveDescription": "Опишите свој пренос уживо. О чему се ради?",
-            "fbOnlyMeLiveAccess": "Само ја",
-            "fbFriendsAccess": "Пријатељи",
-            "fbPublicAccess": "Јавно",
-            "publishOnTimeline": "Објавите на временској линији",
-            "publishToGroup": "Објави у групи",
-            "fbStartLive": "Уживо",
-            "fbStopLive": "Заврши пренос уживо",
-            "streamingSettings": "Подешавања",
-            "manageStream": "Управљајте преносом уживо",
-            "fbEmbedCode": "Уграђивање",
-            "copy": "Копирај",
-            "streamToRTMP": "Стреам на прилагођени РТМП",
-            "startBroadcasting": "Почните са емитовањем",
-            "broadcastingInProgress": "Емитовање је у току"
-        },
-        "audioSettings": {
-            "dialogTitle": "Аудио подешавања",
-            "speakers": "Звучници",
-            "microphone": "Микрофон"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Управљајте емитовањем"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Подешавања учесника",
-            "disconnect": "Прекини везу",
-            "floatingScreens": "Плутајући екрани",
-            "tiledScreens": "Тилед Сцреенс",
-            "loudestExceptMe": "Најгласнији осим мене",
-            "maximizeLoudest": "Максимално најгласније",
-            "staticMaximized": "Статиц Макимизед",
-            "fullScreen": "Цео екран",
-            "manual": "Упутство",
-            "turnOffCamera": "Сакриј видео",
-            "turnOffAudio": "Искључи звук",
-            "turnOffScreenSharing": "Сакриј дељење екрана",
-            "turnOnCamera": "Прикажи видео",
-            "turnOnAudio": "Укључи звук",
-            "turnOnScreenSharing": "Прикажи дељење екрана"
-        },
-        "streamingSettings": {
-            "title": "Ливестреам"
-        },
-        "preview": {
-            "Meeting": "Телеконференција",
-            "MeetingEnded": "Телеконференција је завршена"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Захтев за говор",
-            "msg": "На састанку тренутно говори {{count}} људи. Да ли желите да замените једног од њих након што им дате {{seconds}} секунди да заврше са говором?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Позвани",
@@ -471,10 +323,6 @@
             "displayType": "Разговор",
             "description": "разговор између корисника, са историјом"
         },
-        "Media\/WebRTC": {
-            "displayType": "Телеконференција",
-            "description": "онлајн видео\/аудио конференцију"
-        },
         "Streams\/question": {
             "displayType": "Питање",
             "description": "ток питања",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Одговор",
             "description": "ток одговора"
-        },
-        "Media\/calls": {
-            "displayType": "Позиви",
-            "description": "категорија за Стреамс\/вебртц",
-            "MaxRelationsExceeded": "Максимални број позива је премашен"
         }
     },
     "menu": {

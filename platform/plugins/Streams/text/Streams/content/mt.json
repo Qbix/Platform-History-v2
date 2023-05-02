@@ -28,7 +28,7 @@
     },
     "interests": {
         "Filter": "Interessi tat-tiftix",
-        "CanGrant": "Jekk għadek ma ssibx dak li qed tfittex, tista&#39; żżid interess ġdid hawn taħt:",
+        "CanGrant": "Jekk għadek ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
         "TrySynonyms": "Tarahx? Ipprova xi sinonimi.",
         "AddUnderCategory": "Żid taħt il-kategorija...",
         "Other": "Oħrajn",
@@ -112,7 +112,7 @@
             "userChooserPlaceholder": "Fittex bl-isem",
             "photo": "Ħu ritratt",
             "photoOf": "Ħu ritratt ta {{name}}",
-            "photoInstruction": "Jekk il-persuna li skennjat il-kodiċi QR tiegħek tkun quddiemek, ħu ritratt tagħhom",
+            "photoInstruction": "Jekk il-persuna li skennjat il-kodiċi QR tiegħek tkun quddiemek, ħudha ritratt",
             "to": "Lil: {{Stream Title}}",
             "go": "Mur",
             "title": "Stieden",
@@ -208,154 +208,6 @@
         "Identifiers": "Identifikaturi",
         "Devices": "Apparat",
         "Streams": "Streams"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
-        "streamTitle": "{{1}} bdiet Telekonferenza",
-        "allow": {
-            "dialogTitle": "Konnessjoni",
-            "microphoneBtn": "Ippermetti Mikrofonu",
-            "cameraBtn": "Ippermetti Kamera",
-            "cameraAndMicrophoneBtn": "Ippermetti Kamera u Mikrofonu"
-        },
-        "preparing": {
-            "dialogTitle": "Ixgħel\/itfi kamera jew mikro qabel ma tingħaqad",
-            "micIsOff": "Mic huwa mitfi",
-            "micIsOn": "Mic huwa mixgħul",
-            "cameraIsOff": "Il-kamera hija mitfija",
-            "cameraIsOn": "Il-kamera hija mixgħula",
-            "screenSharingIsOn": "Il-qsim tal-iskrin huwa mixgħul",
-            "screenSharingIsOff": "Aqsam l-iskrin",
-            "joinNow": "Ingħaqad mas-Sejħa"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Istruzzjonijiet",
-            "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
-            "point1": "Mur &quot;Settings&quot; -&gt; &quot;Avvanzat&quot; -&gt; &quot;Privatezza u sigurtà&quot; -&gt; &quot;Settings tas-Sit&quot; -&gt; &quot;Kamera&quot; jew &quot;Settings tas-Sit&quot; -&gt; &quot;Mikrofonu&quot;",
-            "point2": "Neħħi {{hostname}} mil-lista &quot;Blokk&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Istruzzjonijiet",
-            "permissionDenied": "Permess għal {{kind}} miċħud. Jekk jogħġbok erġa&#39; tagħbija din il-paġna u kkonferma l-aċċess għal {{kind}} biex tissieħeb fil-konferenza."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Istruzzjonijiet",
-            "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
-            "point1": "Mur fis-Settings tal-Android tiegħek",
-            "point2": "Iftaħ &quot;Apps u notifiki&quot;",
-            "point3": "Sib &quot; {{communityName}} &quot; u iftħu",
-            "point4": "Tektek fuq Permessi",
-            "point5": "Ippermetti {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Istruzzjonijiet",
-            "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
-            "point1": "Mur fis-Settings tal-iOS tiegħek",
-            "point2": "Iftaħ &quot;Privatezza&quot;",
-            "point3": "Sib {{kind}} u iftah",
-            "point4": "Sib &quot; {{communityName}} &quot; u ppermettiet"
-        },
-        "fbLive": {
-            "dialogTitle": "Beda l-live streaming fuq Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "Inti ssieħbu fil-kamra",
-            "joining": "Tgħaqqad: {{userName}}",
-            "sbLeftRoom": "{{userName}} telqu mill-kamra",
-            "switchingRoom": "Kamra tal-bidla...",
-            "forceDisconnecting": "Int tkun skonnettjat fi żmien 5 sekondi",
-            "forceDisconnectingImmediately": "Int ġejt skonnettjat minn host",
-            "youLeftRoom": "Tlaqt mill-kamra",
-            "codeCopied": "Tlaqt mill-kamra",
-            "sbBeganFbLive": "{{userName}} beda jxandar din is-sejħa fuq Facebook",
-            "sbStoppedFbLive": "{{userName}} waqfu jxandar din is-sejħa fuq Facebook",
-            "youBeganFbLive": "Bdejt xxandar din is-sejħa fuq Facebook",
-            "youStoppedFbLive": "Waqaft ixandir din is-sejħa fuq Facebook",
-            "youStartedLive": "Bdejt xxandar din is-sejħa lill-RTMP tad-dwana",
-            "youStoppedLive": "Waqaft ixandir din is-sejħa għal RTMP personalizzat",
-            "sbStartedLiveStreaming": "{{userName}} bdew ħajjin",
-            "sbStoppedLiveStreaming": "{{userName}} ntemmet live",
-            "liveStopped": "Sar żball waqt li ntbagħat il-vidjo lill-endpoint",
-            "youBeganVideoRecording": "Bdejt tirreġistra din il-konferenza",
-            "youStoppedVideoRecording": "Waqaft tirreġistra din il-konferenza",
-            "linkCopiedToCb": "Link ikkupjat mal-clipboard",
-            "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
-            "userHasNoVideo": "Parteċipant m&#39;għandux vidjo",
-            "openInBrowserAlert": "Iftaħ il-link fil-browser Safari biex tingħaqad mal-konferenza.",
-            "allowedVideoLimit": "{{limit}} video biss permess f&#39;din il-kamra",
-            "allowedAudioLimit": "{{limit}} mikrofonu biss permessi f&#39;din il-kamra"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Settings tal-Vidjo",
-            "webCamera": "Web Camera",
-            "screenSharing": "Qsim tal-Iskrin",
-            "shareAnotherScreen": "Aqsam skrin ieħor",
-            "turnOffCameras": "Itfi l-kamera",
-            "turnOffVideo": "Itfi l-kondiviżjoni tal-kamera\/iskrin",
-            "turnOffAudioInput": "Mikrofonu mute",
-            "turnOffScreenSharing": "Itfi l-qsim tal-iskrin",
-            "cameraIsTurnedOff": "Il-kamera hija mitfija",
-            "micIsTurnedOff": "Il-mikrofonu huwa mitfi",
-            "startFBLive": "Ibda Facebook Livestream",
-            "stopFBLive": "Waqqaf Facebook Livestream",
-            "startRecording": "Ibda Reġistrazzjoni",
-            "stopRecording": "Waqqaf ir-Reġistrazzjoni",
-            "start": "Ibda",
-            "stop": "Waqfa",
-            "recordingInProgress": "Ir-reġistrazzjoni għaddejja...",
-            "fbLiveTitle": "Titolu ta&#39; Livestream",
-            "fbLiveDescription": "Iddeskrivi l-Livestream tiegħek. X&#39;inhu dwar?",
-            "fbOnlyMeLiveAccess": "Jien biss",
-            "fbFriendsAccess": "Ħbieb",
-            "fbPublicAccess": "Pubbliku",
-            "publishOnTimeline": "Ippubblika fuq il-kalendarju",
-            "publishToGroup": "Ippubblika lill-grupp",
-            "fbStartLive": "Mur Ħaj",
-            "fbStopLive": "Tmiem Livestream",
-            "streamingSettings": "Settings",
-            "manageStream": "Immaniġġja Livestream",
-            "fbEmbedCode": "Inkorpora",
-            "copy": "Kopja",
-            "streamToRTMP": "Stream għal RTMP tad-dwana",
-            "startBroadcasting": "Ibda x-xandir",
-            "broadcastingInProgress": "Ix-xandir għaddej"
-        },
-        "audioSettings": {
-            "dialogTitle": "Settings tal-awdjo",
-            "speakers": "Kelliema",
-            "microphone": "Mikrofonu"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Immaniġġja Broadcast"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Settings tal-Parteċipant",
-            "disconnect": "Skonnettja",
-            "floatingScreens": "Skrins li jżommu f&#39;wiċċ l-ilma",
-            "tiledScreens": "Skrins bil-madum",
-            "loudestExceptMe": "L-aktar Għoli Ħlief Jien",
-            "maximizeLoudest": "Timmassimizza Loudest",
-            "staticMaximized": "Statika Maximized",
-            "fullScreen": "Sħiħ Screen",
-            "manual": "Manwal",
-            "turnOffCamera": "Aħbi l-vidjo",
-            "turnOffAudio": "Awdjo mute",
-            "turnOffScreenSharing": "Aħbi l-qsim tal-iskrin",
-            "turnOnCamera": "Uri vidjo",
-            "turnOnAudio": "Iċċekkja l-awdjo",
-            "turnOnScreenSharing": "Uri l-qsim tal-iskrin"
-        },
-        "streamingSettings": {
-            "title": "Livestream"
-        },
-        "preview": {
-            "Meeting": "Telekonferenza",
-            "MeetingEnded": "Telekonferenza ntemmet"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Talba biex Tkellem",
-            "msg": "Bħalissa hemm {{count}} persuna jitkellmu fil-laqgħa. Trid tissostitwixxi waħda minnhom wara li tħallihom {{seconds}} sekonda biex jispiċċaw jitkellmu?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -471,10 +323,6 @@
             "displayType": "Konversazzjoni",
             "description": "konverżazzjoni bejn l-utenti, bl-istorja"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telekonferenza",
-            "description": "konferenza vidjo\/awdjo onlajn"
-        },
         "Streams\/question": {
             "displayType": "Mistoqsija",
             "description": "fluss tal-mistoqsijiet",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Tweġiba",
             "description": "fluss tat-tweġiba"
-        },
-        "Media\/calls": {
-            "displayType": "Sejħiet",
-            "description": "kategorija għal Media\/WebRTC",
-            "MaxRelationsExceeded": "Max sejħiet inqabeż"
         }
     },
     "menu": {

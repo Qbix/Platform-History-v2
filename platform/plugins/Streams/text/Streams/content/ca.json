@@ -51,7 +51,7 @@
         "SearchByName": "Cerca per nom",
         "Notifications": {
             "Visit": "{{displayName}} està visitant el xat",
-            "Join": "{{displayName}} va unir al xat",
+            "Join": "{{displayName}} s&#39;han unit al xat",
             "Leave": "{{displayName}} va sortir del xat",
             "RelatedTo": "{{displayName}} va començar un {{stream.displayType}}"
         },
@@ -209,154 +209,6 @@
         "Devices": "Dispositius",
         "Streams": "Corrents"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "No tens permís per unir-te a aquest flux.",
-        "streamTitle": "{{1}} va iniciar una teleconferència",
-        "allow": {
-            "dialogTitle": "Connectant",
-            "microphoneBtn": "Activa el micròfon",
-            "cameraBtn": "Activa la càmera",
-            "cameraAndMicrophoneBtn": "Activa la càmera i el micròfon"
-        },
-        "preparing": {
-            "dialogTitle": "Enceneu o apagueu la càmera o el micròfon abans d&#39;unir-vos-hi",
-            "micIsOff": "El micròfon està apagat",
-            "micIsOn": "El micròfon està activat",
-            "cameraIsOff": "La càmera està apagada",
-            "cameraIsOn": "La càmera està activada",
-            "screenSharingIsOn": "La compartició de pantalla està activada",
-            "screenSharingIsOff": "Comparteix pantalla",
-            "joinNow": "Uneix-te a la Crida"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instruccions",
-            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}} . Per utilitzar-lo, seguiu aquests passos:",
-            "point1": "Aneu a &quot;Configuració&quot; -&gt; &quot;Avançat&quot; -&gt; &quot;Privadesa i seguretat&quot; -&gt; &quot;Configuració del lloc&quot; -&gt; &quot;Càmera&quot; o &quot;Configuració del lloc&quot; -&gt; &quot;Micròfon&quot;",
-            "point2": "Elimina {{hostname}} de la llista &quot;Bloqueja&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instruccions",
-            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}} . Torneu a carregar aquesta pàgina i confirmeu l&#39;accés al {{kind}} per unir-vos a la conferència."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instruccions",
-            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}} . Per utilitzar-lo, seguiu aquests passos:",
-            "point1": "Aneu a la configuració d&#39;Android",
-            "point2": "Obriu &quot;Aplicacions i notificacions&quot;",
-            "point3": "Cerqueu &quot; {{communityName}} &quot; i obriu-lo",
-            "point4": "Toqueu Permisos",
-            "point5": "Activa {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instruccions",
-            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}} . Per utilitzar-lo, seguiu aquests passos:",
-            "point1": "Aneu a la configuració d&#39;iOS",
-            "point2": "Obriu &quot;Privadesa&quot;",
-            "point3": "Cerca {{kind}} i obre-lo",
-            "point4": "Cerqueu &quot; {{communityName}} &quot; i activeu-lo"
-        },
-        "fbLive": {
-            "dialogTitle": "Va començar la transmissió en directe de Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "T&#39;has incorporat a la sala",
-            "joining": "Inscripció: {{userName}}",
-            "sbLeftRoom": "{{userName}} va sortir de l&#39;habitació",
-            "switchingRoom": "Canvi de sala...",
-            "forceDisconnecting": "Se us desconnectarà en 5 segons",
-            "forceDisconnectingImmediately": "Un amfitrió t&#39;ha desconnectat",
-            "youLeftRoom": "Vas sortir de l&#39;habitació",
-            "codeCopied": "Vas sortir de l&#39;habitació",
-            "sbBeganFbLive": "{{userName}} va començar a emetre aquesta trucada a Facebook",
-            "sbStoppedFbLive": "{{userName}} va deixar d&#39;emetre aquesta trucada a Facebook",
-            "youBeganFbLive": "Vau començar a emetre aquesta trucada a Facebook",
-            "youStoppedFbLive": "Has deixat d&#39;emetre aquesta trucada a Facebook",
-            "youStartedLive": "Heu començat a emetre aquesta trucada a RTMP personalitzat",
-            "youStoppedLive": "Has deixat d&#39;emetre aquesta trucada a RTMP personalitzat",
-            "sbStartedLiveStreaming": "{{userName}} va començar en directe",
-            "sbStoppedLiveStreaming": "{{userName}} va acabar en directe",
-            "liveStopped": "S&#39;ha produït un error en enviar el vídeo al punt final",
-            "youBeganVideoRecording": "Vau començar a gravar aquesta conferència",
-            "youStoppedVideoRecording": "Has deixat de gravar aquesta conferència",
-            "linkCopiedToCb": "S&#39;ha copiat l&#39;enllaç al porta-retalls",
-            "codeCopiedToCb": "Codi copiat al porta-retalls",
-            "userHasNoVideo": "El participant no té cap vídeo",
-            "openInBrowserAlert": "Obriu l&#39;enllaç al navegador Safari per unir-vos a la conferència.",
-            "allowedVideoLimit": "Només es permeten {{limit}} vídeos en aquesta sala",
-            "allowedAudioLimit": "Només es permeten {{limit}} micròfons en aquesta sala"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Configuració de vídeo",
-            "webCamera": "Càmera web",
-            "screenSharing": "Compartició de pantalla",
-            "shareAnotherScreen": "Comparteix una altra pantalla",
-            "turnOffCameras": "Apagueu la càmera",
-            "turnOffVideo": "Desactiva la compartició de càmera\/pantalla",
-            "turnOffAudioInput": "Silencia el micròfon",
-            "turnOffScreenSharing": "Desactiva la compartició de pantalla",
-            "cameraIsTurnedOff": "La càmera està apagada",
-            "micIsTurnedOff": "El micròfon està apagat",
-            "startFBLive": "Inicieu Facebook Livestream",
-            "stopFBLive": "Atura la transmissió en directe de Facebook",
-            "startRecording": "Comença a gravar",
-            "stopRecording": "Atura la gravació",
-            "start": "Començar",
-            "stop": "Atura",
-            "recordingInProgress": "La gravació està en curs...",
-            "fbLiveTitle": "Títol de Livestream",
-            "fbLiveDescription": "Descriu la teva emissió en directe. De què va?",
-            "fbOnlyMeLiveAccess": "Només jo",
-            "fbFriendsAccess": "Amics",
-            "fbPublicAccess": "Públic",
-            "publishOnTimeline": "Publicar a la línia de temps",
-            "publishToGroup": "Publicar al grup",
-            "fbStartLive": "Anar a viure",
-            "fbStopLive": "Finalitza l&#39;emissió en directe",
-            "streamingSettings": "Configuració",
-            "manageStream": "Gestiona la transmissió en directe",
-            "fbEmbedCode": "Insereix",
-            "copy": "Còpia",
-            "streamToRTMP": "Transmet a RTMP personalitzat",
-            "startBroadcasting": "Comença a emetre",
-            "broadcastingInProgress": "L&#39;emissió està en curs"
-        },
-        "audioSettings": {
-            "dialogTitle": "Configuració d&#39;àudio",
-            "speakers": "Altaveus",
-            "microphone": "Micròfon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Gestiona la difusió"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Configuració dels participants",
-            "disconnect": "Desconnecta",
-            "floatingScreens": "Pantalles flotants",
-            "tiledScreens": "Pantalles enrajolades",
-            "loudestExceptMe": "El més fort excepte jo",
-            "maximizeLoudest": "Maximitza el més fort",
-            "staticMaximized": "Maximitzat estàtic",
-            "fullScreen": "Pantalla completa",
-            "manual": "Manual",
-            "turnOffCamera": "Amaga el vídeo",
-            "turnOffAudio": "Silencia l&#39;àudio",
-            "turnOffScreenSharing": "Amaga la compartició de pantalla",
-            "turnOnCamera": "Mostra el vídeo",
-            "turnOnAudio": "Activa l&#39;àudio",
-            "turnOnScreenSharing": "Mostra la compartició de pantalla"
-        },
-        "streamingSettings": {
-            "title": "Transmissió en directe"
-        },
-        "preview": {
-            "Meeting": "Teleconferència",
-            "MeetingEnded": "S&#39;ha acabat la teleconferència"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Sol·licitud de Parla",
-            "msg": "Actualment hi ha {{count}} persones parlant a la reunió. Vols substituir-ne un després de deixar-los {{seconds}} segons per acabar de parlar?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Convidat",
@@ -471,10 +323,6 @@
             "displayType": "Conversa",
             "description": "una conversa entre usuaris, amb història"
         },
-        "Media\/WebRTC": {
-            "displayType": "Teleconferència",
-            "description": "una videoconferència\/àudio en línia"
-        },
         "Streams\/question": {
             "displayType": "Pregunta",
             "description": "corrent de preguntes",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Respon",
             "description": "corrent de resposta"
-        },
-        "Media\/calls": {
-            "displayType": "Trucades",
-            "description": "categoria per a Media\/WebRTC",
-            "MaxRelationsExceeded": "S&#39;ha superat el màxim de trucades"
         }
     },
     "menu": {

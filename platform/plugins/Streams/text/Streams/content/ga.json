@@ -38,7 +38,7 @@
         "flaggedForAdminReview": "Brataíodh an teachtaireacht le haghaidh athbhreithniú riaracháin. Tapáil arís chun an bhratach a bhaint.",
         "noOneSaid": "Níl aon rud ráite ag éinne",
         "closeChatButton": "Dún comhrá",
-        "closeChatConfirmTitle": "Dún an comhrá seo?",
+        "closeChatConfirmTitle": "An bhfuil fonn ort an comhrá seo a dhúnadh?",
         "closeChatConfirm": "An bhfuil tú cinnte gur mhaith leat an comhrá seo a dhúnadh?",
         "Subscribed": "Fógraí Cumasaithe",
         "Unsubscribed": "Fógraí balbhaithe",
@@ -64,7 +64,7 @@
         "ManageEmailSubscriptions": "bainistigh do shíntiúis ríomhphoist",
         "IfUnsubscribe": "Más mian leat díliostáil",
         "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
-        "Streams\/joined": "Chuaigh {{&call 'avatar.displayName'}} isteach",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} isteach",
         "Streams\/left": "{{&call 'avatar.displayName'}} fágtha",
         "Streams\/chat\/message": "💬 dúirt {{&call 'avatar.displayName'}} : {{& message.content}}",
         "Streams\/changed": "Athruithe i {{stream.fields.title}}",
@@ -209,154 +209,6 @@
         "Devices": "Gléasanna",
         "Streams": "Sruthanna"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Níl cead agat páirt a ghlacadh sa sruth seo.",
-        "streamTitle": "Chuir {{1}} tús le Teilechomhdháil",
-        "allow": {
-            "dialogTitle": "Ag nascadh",
-            "microphoneBtn": "Cumasaigh Micreafón",
-            "cameraBtn": "Cumasaigh Ceamara",
-            "cameraAndMicrophoneBtn": "Cumasaigh Ceamara agus Micreafón"
-        },
-        "preparing": {
-            "dialogTitle": "Cuir an ceamara nó an micreafón ar siúl \/ as sula nglacann tú páirt ann",
-            "micIsOff": "Tá mic múchta",
-            "micIsOn": "Tá Mic ar siúl",
-            "cameraIsOff": "Tá an ceamara múchta",
-            "cameraIsOn": "Tá an ceamara ar siúl",
-            "screenSharingIsOn": "Tá comhroinnt scáileáin ar siúl",
-            "screenSharingIsOff": "Comhroinn scáileán",
-            "joinNow": "Bí ar an nGlao"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}} . Chun é a úsáid lean na céimeanna seo le do thoil:",
-            "point1": "Téigh go dtí &quot;Socruithe&quot; -&gt; &quot;Ard-&quot; -&gt; &quot;Príobháideacht agus slándáil&quot; -&gt; &quot;Socruithe Suímh&quot; -&gt; &quot;Ceamara&quot; nó &quot;Socruithe Suímh&quot; -&gt; &quot;Micreafón&quot;",
-            "point2": "Bain {{hostname}} ón liosta &quot;Bloc&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}} . Athlódáil an leathanach seo agus deimhnigh rochtain ar {{kind}} chun páirt a ghlacadh sa chomhdháil."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}} . Chun é a úsáid lean na céimeanna seo le do thoil:",
-            "point1": "Téigh go dtí do shocruithe Android",
-            "point2": "Oscail &quot;Aipeanna &amp; fógraí&quot;",
-            "point3": "Aimsigh &quot; {{communityName}} &quot; agus oscail é",
-            "point4": "Tap ar Ceadanna",
-            "point5": "Cumasaigh {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}} . Chun é a úsáid lean na céimeanna seo le do thoil:",
-            "point1": "Téigh go dtí do chuid Socruithe iOS",
-            "point2": "Oscail &quot;Príobháideacht&quot;",
-            "point3": "Faigh {{kind}} agus oscail é",
-            "point4": "Aimsigh &quot; {{communityName}} &quot; agus cumasaigh"
-        },
-        "fbLive": {
-            "dialogTitle": "Cuireadh tús le sruthú beo Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "Chuaigh tú isteach sa seomra",
-            "joining": "Clárú: {{userName}}",
-            "sbLeftRoom": "D’fhág {{userName}} an seomra",
-            "switchingRoom": "Seomra á aistriú...",
-            "forceDisconnecting": "Déanfar tú a dhínascadh laistigh de 5 soicind",
-            "forceDisconnectingImmediately": "Dhícheangail ósta thú",
-            "youLeftRoom": "D&#39;fhág tú an seomra",
-            "codeCopied": "D&#39;fhág tú an seomra",
-            "sbBeganFbLive": "Thosaigh {{userName}} ag craoladh an ghlao seo ar Facebook",
-            "sbStoppedFbLive": "Stop {{userName}} den ghlao seo a chraoladh ar Facebook",
-            "youBeganFbLive": "Thosaigh tú ag craoladh an ghlao seo ar Facebook",
-            "youStoppedFbLive": "Stop tú den ghlao seo a chraoladh ar Facebook",
-            "youStartedLive": "Thosaigh tú ag craoladh an ghlao seo chuig RTMP saincheaptha",
-            "youStoppedLive": "Stop tú den ghlao seo a chraoladh chuig RTMP saincheaptha",
-            "sbStartedLiveStreaming": "Thosaigh {{userName}} beo",
-            "sbStoppedLiveStreaming": "Chríochnaigh {{userName}} beo",
-            "liveStopped": "Tharla earráid agus an físeán á sheoladh chuig an gcríochphointe",
-            "youBeganVideoRecording": "Thosaigh tú ag taifeadadh na comhdhála seo",
-            "youStoppedVideoRecording": "Stop tú ag taifeadadh na comhdhála seo",
-            "linkCopiedToCb": "Cóipeáladh an nasc chuig an ngearrthaisce",
-            "codeCopiedToCb": "Cóipeáladh an cód chuig an ngearrthaisce",
-            "userHasNoVideo": "Níl físeán ar bith ag an rannpháirtí",
-            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun páirt a ghlacadh sa chomhdháil.",
-            "allowedVideoLimit": "Ní cheadaítear ach {{limit}} físeán sa seomra seo",
-            "allowedAudioLimit": "Ní cheadaítear ach {{limit}} micreafón sa seomra seo"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Socruithe Físeáin",
-            "webCamera": "Ceamara gréasáin",
-            "screenSharing": "Comhroinnt Scáileáin",
-            "shareAnotherScreen": "Roinn scáileán eile",
-            "turnOffCameras": "Múch an ceamara",
-            "turnOffVideo": "Cas as comhroinnt ceamara\/scáileáin",
-            "turnOffAudioInput": "Balbhaigh micreafón",
-            "turnOffScreenSharing": "Múch comhroinnt scáileáin",
-            "cameraIsTurnedOff": "Tá an ceamara múchta",
-            "micIsTurnedOff": "Tá an micreafón múchta",
-            "startFBLive": "Tosaigh Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Tosaigh Taifeadadh",
-            "stopRecording": "Stop Taifeadadh",
-            "start": "Tosaigh",
-            "stop": "Stop",
-            "recordingInProgress": "Tá an taifeadadh ar siúl...",
-            "fbLiveTitle": "Teideal an Livestream",
-            "fbLiveDescription": "Déan cur síos ar do Livestream. Cad é faoi?",
-            "fbOnlyMeLiveAccess": "Mise amháin",
-            "fbFriendsAccess": "Cairde",
-            "fbPublicAccess": "Poiblí",
-            "publishOnTimeline": "Foilsigh ar amlíne",
-            "publishToGroup": "Foilsigh don ghrúpa",
-            "fbStartLive": "Téigh Beo",
-            "fbStopLive": "Cuir deireadh le sruth beo",
-            "streamingSettings": "Socruithe",
-            "manageStream": "Bainistigh Livestream",
-            "fbEmbedCode": "Leabú",
-            "copy": "Cóip",
-            "streamToRTMP": "Sruth go RTMP saincheaptha",
-            "startBroadcasting": "Tosaigh ag craoladh",
-            "broadcastingInProgress": "Tá an craoladh ar siúl"
-        },
-        "audioSettings": {
-            "dialogTitle": "Socruithe Fuaime",
-            "speakers": "Cainteoirí",
-            "microphone": "Micreafón"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Bainistigh Craoladh"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Socruithe Rannpháirtí",
-            "disconnect": "Dícheangail",
-            "floatingScreens": "Scáileáin Snámh",
-            "tiledScreens": "Scáileáin Tílithe",
-            "loudestExceptMe": "Is glóraí seachas Mise",
-            "maximizeLoudest": "Uasmhéadaigh Loudest",
-            "staticMaximized": "Statach Uasmhéadaithe",
-            "fullScreen": "Scáileán iomlán",
-            "manual": "Lámhleabhar",
-            "turnOffCamera": "Folaigh físeán",
-            "turnOffAudio": "Balbhaigh fuaime",
-            "turnOffScreenSharing": "Folaigh comhroinnt scáileáin",
-            "turnOnCamera": "Taispeáin físeán",
-            "turnOnAudio": "Díbhalbhaigh an fhuaim",
-            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin"
-        },
-        "streamingSettings": {
-            "title": "Sruth beo"
-        },
-        "preview": {
-            "Meeting": "Teileachomhdháil",
-            "MeetingEnded": "Tháinig deireadh le teileachomhdháil"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Iarratas ar Labhairt",
-            "msg": "Tá {{count}} duine ag labhairt sa chruinniú faoi láthair. Ar mhaith leat ceann amháin acu a athsholáthar tar éis dóibh {{seconds}} soicind a cheadú chun labhairt?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Cuireadh",
@@ -471,10 +323,6 @@
             "displayType": "Comhrá",
             "description": "comhrá idir úsáideoirí, leis an stair"
         },
-        "Media\/WebRTC": {
-            "displayType": "Teileachomhdháil",
-            "description": "comhdháil físe\/fuaime ar líne"
-        },
         "Streams\/question": {
             "displayType": "Ceist",
             "description": "sruth ceiste",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Freagra",
             "description": "sruth freagra"
-        },
-        "Media\/calls": {
-            "displayType": "Glaonna",
-            "description": "chatagóir do Media\/WebRTC",
-            "MaxRelationsExceeded": "Sáraíodh uasghlaonna"
         }
     },
     "menu": {
@@ -528,7 +371,7 @@
         "invalidFile": "Comhad Neamhbhailí",
         "errorNoSource": "Níl aon fhoinse físeáin",
         "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Ár leithscéal, ach tá an comhad rómhór.<br> Is é {{size}} méid uasta comhaid"
+        "errorFileSize": "Ár leithscéal, ach tá an comhad rómhór.<br> Is é {{size}} méid comhaid uasta"
     },
     "pdf": {
         "reset": "Athshocraigh",

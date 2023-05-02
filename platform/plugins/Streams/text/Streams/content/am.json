@@ -190,7 +190,7 @@
             "confirm": "ግብዣዎች ከኛ ጎራ ተልከዋል፣ ጓደኛዎችዎ እስካሁን የማያውቁት። ግብዣው ከእርስዎ እንደመጣ ለማሳወቅ አገናኙን ጠቅ እንዲያደርጉ በመጠየቅ ፈጣን ጽሁፍ በመከተል መከታተል ይፈልጋሉ።",
             "subject": "ግብዣ አግኝተዋል?",
             "body": "ሄይ፣ አሁን የ {{app}} መተግበሪያ ግብዣ ልኬልዎታል። እባክዎን ኢሜልዎን ያረጋግጡ እና እዚያ ያለውን ሊንክ ይጫኑ!",
-            "CheckYourEmail": "እባክዎ ኢሜልዎን ይመልከቱ እና መመሪያዎችን ይከተሉ!"
+            "CheckYourEmail": "እባክዎ ኢሜልዎን ያረጋግጡ እና መመሪያዎችን ይከተሉ!"
         }
     },
     "identifier": {
@@ -208,154 +208,6 @@
         "Identifiers": "መለያዎች",
         "Devices": "መሳሪያዎች",
         "Streams": "ዥረቶች"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "ይህን ዥረት ለመቀላቀል ፍቃድ የለዎትም።",
-        "streamTitle": "{{1}} ቴሌ ኮንፈረንስ ጀመረ",
-        "allow": {
-            "dialogTitle": "በመገናኘት ላይ",
-            "microphoneBtn": "ማይክሮፎን አንቃ",
-            "cameraBtn": "ካሜራን አንቃ",
-            "cameraAndMicrophoneBtn": "ካሜራ እና ማይክሮፎን አንቃ"
-        },
-        "preparing": {
-            "dialogTitle": "ከመቀላቀልዎ በፊት ካሜራውን ወይም ማይክሮፎኑን ያብሩ\/ያጥፉ",
-            "micIsOff": "ማይክሮፎን ጠፍቷል",
-            "micIsOn": "ማይክሮፎን በርቷል።",
-            "cameraIsOff": "ካሜራ ጠፍቷል",
-            "cameraIsOn": "ካሜራ በርቷል።",
-            "screenSharingIsOn": "ስክሪን ማጋራት በርቷል።",
-            "screenSharingIsOff": "ማያ አጋራ",
-            "joinNow": "ጥሪውን ይቀላቀሉ"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፍቃድ ተከልክሏል። እሱን ለመጠቀም እባክዎ የሚከተሉትን ደረጃዎች ይከተሉ።",
-            "point1": "ወደ &quot;ቅንጅቶች&quot; -&gt; &quot;የላቀ&quot; -&gt; &quot;ግላዊነት እና ደህንነት&quot; -&gt; &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ካሜራ&quot; ወይም &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ማይክሮፎን&quot; ይሂዱ",
-            "point2": "{{hostname}} ከ&quot;አግድ&quot; ዝርዝር ውስጥ ያስወግዱ"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፍቃድ ተከልክሏል። እባክዎ ይህን ገጽ እንደገና ይጫኑ እና ኮንፈረንሱን ለመቀላቀል የ {{kind}} መዳረሻ ያረጋግጡ።"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፍቃድ ተከልክሏል። እሱን ለመጠቀም እባክዎ የሚከተሉትን ደረጃዎች ይከተሉ።",
-            "point1": "ወደ የእርስዎ አንድሮይድ ቅንብሮች ይሂዱ",
-            "point2": "&quot;መተግበሪያዎች እና ማሳወቂያዎች&quot; ክፈት",
-            "point3": "&quot; {{communityName}} &quot; ን ይፈልጉ እና ይክፈቱት።",
-            "point4": "ፈቃዶች ላይ መታ ያድርጉ",
-            "point5": "{{kind}} አንቃ"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፍቃድ ተከልክሏል። እሱን ለመጠቀም እባክዎ የሚከተሉትን ደረጃዎች ይከተሉ።",
-            "point1": "ወደ የእርስዎ iOS ቅንብሮች ይሂዱ",
-            "point2": "&quot;ግላዊነት&quot; ክፈት",
-            "point3": "{{kind}} ፈልጉ እና ይክፈቱት።",
-            "point4": "&quot; {{communityName}} &quot; ን አግኝ እና አንቃ"
-        },
-        "fbLive": {
-            "dialogTitle": "የፌስቡክ ቀጥታ ስርጭት ተጀመረ"
-        },
-        "notices": {
-            "youJoinedRoom": "ክፍሉን ተቀላቅለዋል።",
-            "joining": "መቀላቀል {{userName}}",
-            "sbLeftRoom": "{{userName}} ክፍሉን ለቅቋል",
-            "switchingRoom": "ክፍል መቀየሪያ...",
-            "forceDisconnecting": "በ5 ሰከንድ ውስጥ ግንኙነቱ ይቋረጣል",
-            "forceDisconnectingImmediately": "በአስተናጋጅ ተቋርጠዋል",
-            "youLeftRoom": "ክፍሉን ለቀው ወጡ",
-            "codeCopied": "ክፍሉን ለቀው ወጡ",
-            "sbBeganFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨት ጀመረ",
-            "sbStoppedFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨቱን አቁሟል",
-            "youBeganFbLive": "ይህን ጥሪ በፌስቡክ ማስተላለፍ ጀመርክ",
-            "youStoppedFbLive": "ይህንን ጥሪ በፌስቡክ ማሰራጨት አቁመዋል",
-            "youStartedLive": "ይህንን ጥሪ ወደ ብጁ RTMP ማሰራጨት ጀመርክ",
-            "youStoppedLive": "ይህንን ጥሪ ወደ ብጁ RTMP ማሰራጨት አቁመዋል",
-            "sbStartedLiveStreaming": "{{userName}} በቀጥታ ስርጭት ጀመረ",
-            "sbStoppedLiveStreaming": "{{userName}} በቀጥታ ተጠናቀቀ",
-            "liveStopped": "ቪዲዮ ወደ መጨረሻ ነጥብ በመላክ ላይ ሳለ ስህተት ተከስቷል።",
-            "youBeganVideoRecording": "ይህንን ጉባኤ መቅዳት ጀመርክ",
-            "youStoppedVideoRecording": "ይህን ኮንፈረንስ መቅዳት አቁመዋል",
-            "linkCopiedToCb": "ማገናኛ ወደ ቅንጥብ ሰሌዳ ተቀድቷል።",
-            "codeCopiedToCb": "ኮድ ወደ ቅንጥብ ሰሌዳ ተቀድቷል።",
-            "userHasNoVideo": "ተሳታፊ ምንም ቪዲዮ የለውም",
-            "openInBrowserAlert": "ኮንፈረንሱን ለመቀላቀል በ Safari አሳሽ ውስጥ ያለውን አገናኝ ይክፈቱ።",
-            "allowedVideoLimit": "በዚህ ክፍል ውስጥ የተፈቀደው {{limit}} ቪዲዮ ብቻ ነው።",
-            "allowedAudioLimit": "በዚህ ክፍል ውስጥ {{limit}} ማይክሮፎኖች ብቻ ተፈቅደዋል"
-        },
-        "settingsPopup": {
-            "dialogTitle": "የቪዲዮ ቅንጅቶች",
-            "webCamera": "የድር ካሜራ",
-            "screenSharing": "ስክሪን ማጋራት።",
-            "shareAnotherScreen": "ሌላ ማያ ገጽ አጋራ",
-            "turnOffCameras": "ካሜራን ያጥፉ",
-            "turnOffVideo": "ካሜራ\/ስክሪን ማጋራትን ያጥፉ",
-            "turnOffAudioInput": "ማይክሮፎን ድምጸ-ከል አድርግ",
-            "turnOffScreenSharing": "ማያ ገጽ ማጋራትን ያጥፉ",
-            "cameraIsTurnedOff": "ካሜራ ጠፍቷል",
-            "micIsTurnedOff": "ማይክሮፎን ጠፍቷል",
-            "startFBLive": "Facebook Livestream ጀምር",
-            "stopFBLive": "የፌስቡክ ቀጥታ ስርጭትን አቁም",
-            "startRecording": "መቅዳት ጀምር",
-            "stopRecording": "መቅዳት አቁም",
-            "start": "ጀምር",
-            "stop": "ተወ",
-            "recordingInProgress": "ቀረጻ በሂደት ላይ ነው...",
-            "fbLiveTitle": "የቀጥታ ስርጭት ርዕስ",
-            "fbLiveDescription": "የእርስዎን የቀጥታ ስርጭት ይግለጹ። ስለምንድን ነው?",
-            "fbOnlyMeLiveAccess": "እኔ ብቻ",
-            "fbFriendsAccess": "ጓደኞች",
-            "fbPublicAccess": "የህዝብ",
-            "publishOnTimeline": "በጊዜ መስመር ላይ አትም",
-            "publishToGroup": "ወደ ቡድን ያትሙ",
-            "fbStartLive": "በቀጥታ ስርጭት ይሂዱ",
-            "fbStopLive": "የቀጥታ ስርጭትን ጨርስ",
-            "streamingSettings": "ቅንብሮች",
-            "manageStream": "የቀጥታ ስርጭትን ያስተዳድሩ",
-            "fbEmbedCode": "መክተት",
-            "copy": "ቅዳ",
-            "streamToRTMP": "ወደ ብጁ RTMP ይልቀቁ",
-            "startBroadcasting": "ስርጭት ጀምር",
-            "broadcastingInProgress": "ስርጭት በሂደት ላይ ነው።"
-        },
-        "audioSettings": {
-            "dialogTitle": "የድምጽ ቅንብሮች",
-            "speakers": "ተናጋሪዎች",
-            "microphone": "ማይክሮፎን"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "ስርጭትን አስተዳድር"
-        },
-        "participantsPopup": {
-            "dialogTitle": "የተሳታፊ ቅንብሮች",
-            "disconnect": "ግንኙነት አቋርጥ",
-            "floatingScreens": "ተንሳፋፊ ማያ ገጾች",
-            "tiledScreens": "የታጠቁ ስክሪኖች",
-            "loudestExceptMe": "ከእኔ በቀር በጣም ጮሆ",
-            "maximizeLoudest": "ከፍተኛውን ከፍ አድርግ",
-            "staticMaximized": "የማይንቀሳቀስ ከፍተኛ ደረጃ ላይ ደርሷል",
-            "fullScreen": "ሙሉ ማያ",
-            "manual": "መመሪያ",
-            "turnOffCamera": "ቪዲዮ ደብቅ",
-            "turnOffAudio": "ኦዲዮ ድምጸ-ከል አድርግ",
-            "turnOffScreenSharing": "ማያ ገጽ ማጋራትን ደብቅ",
-            "turnOnCamera": "ቪዲዮ አሳይ",
-            "turnOnAudio": "የድምጽ ድምጸ-ከል አንሳ",
-            "turnOnScreenSharing": "ማያ ገጽ ማጋራትን አሳይ"
-        },
-        "streamingSettings": {
-            "title": "የቀጥታ ስርጭት"
-        },
-        "preview": {
-            "Meeting": "ቴሌ ኮንፈረንስ",
-            "MeetingEnded": "ቴሌ ኮንፈረንስ ተጠናቀቀ"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "የመናገር ጥያቄ",
-            "msg": "በአሁኑ ጊዜ በስብሰባው ላይ {{count}} ሰዎች እየተናገሩ ይገኛሉ። ንግግራቸውን እንዲጨርሱ {{seconds}} ሰከንድ ከፈቀዱ በኋላ ከመካከላቸው አንዱን መተካት ይፈልጋሉ?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -471,10 +323,6 @@
             "displayType": "ውይይት",
             "description": "በተጠቃሚዎች መካከል የሚደረግ ውይይት ከታሪክ ጋር"
         },
-        "Media\/WebRTC": {
-            "displayType": "ቴሌ ኮንፈረንስ",
-            "description": "የመስመር ላይ ቪዲዮ \/ ኦዲዮ ኮንፈረንስ"
-        },
         "Streams\/question": {
             "displayType": "ጥያቄ",
             "description": "የጥያቄ ዥረት",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "መልስ",
             "description": "መልስ ዥረት"
-        },
-        "Media\/calls": {
-            "displayType": "ጥሪዎች",
-            "description": "ምድብ ለዥረቶች\/webrtc",
-            "MaxRelationsExceeded": "ከፍተኛ ጥሪዎች ታልፈዋል"
         }
     },
     "menu": {

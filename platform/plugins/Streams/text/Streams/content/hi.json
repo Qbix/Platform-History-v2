@@ -1,7 +1,7 @@
 {
     "errors": {
         "HiddenFromYou": "यह सामग्री आपसे छिपी हुई है।",
-        "InplaceTypeMustBe": "इनप्लेस टाइप &#39;टेक्स्टरीआ&#39; या &#39;टेक्स्ट&#39; होना चाहिए"
+        "InplaceTypeMustBe": "inplaceType &#39;textarea&#39; या &#39;text&#39; होना चाहिए"
     },
     "preview": {
         "NewItemTitle": "नए वस्तु"
@@ -29,7 +29,7 @@
     "interests": {
         "Filter": "रुचियां खोजें",
         "CanGrant": "यदि आपको अभी भी वह नहीं मिल रहा है जिसकी आप तलाश कर रहे हैं, तो आप नीचे एक नई रुचि जोड़ सकते हैं:",
-        "TrySynonyms": "यह नहीं देखा? कुछ समानार्थी प्रयास करें।",
+        "TrySynonyms": "यह नहीं देखा? कुछ पर्यायवाची शब्द आजमाएं।",
         "AddUnderCategory": "श्रेणी के अंतर्गत जोड़ें...",
         "Other": "अन्य",
         "Unlisted": "गैर-सूचीबद्ध"
@@ -209,154 +209,6 @@
         "Devices": "उपकरण",
         "Streams": "स्ट्रीम"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "आपके पास इस स्ट्रीम में शामिल होने की अनुमति नहीं है.",
-        "streamTitle": "{{1}} ने एक टेलीकांफ्रेंस शुरू की",
-        "allow": {
-            "dialogTitle": "कनेक्ट",
-            "microphoneBtn": "माइक्रोफ़ोन सक्षम करें",
-            "cameraBtn": "कैमरा सक्षम करें",
-            "cameraAndMicrophoneBtn": "कैमरा और माइक्रोफ़ोन सक्षम करें"
-        },
-        "preparing": {
-            "dialogTitle": "शामिल होने से पहले कैमरा या माइक चालू\/बंद करें",
-            "micIsOff": "माइक बंद है",
-            "micIsOn": "माइक चालू है",
-            "cameraIsOff": "कैमरा बंद है",
-            "cameraIsOn": "कैमरा चालू है",
-            "screenSharingIsOn": "स्क्रीन शेयरिंग चालू है",
-            "screenSharingIsOff": "स्क्रीन साझा करना",
-            "joinNow": "कॉल में शामिल हों"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "निर्देश",
-            "permissionDenied": "{{kind}} के लिए अनुमति अस्वीकृत। इसका उपयोग करने के लिए कृपया इन चरणों का पालन करें:",
-            "point1": "&quot;सेटिंग&quot; -&gt; &quot;उन्नत&quot; -&gt; &quot;गोपनीयता और सुरक्षा&quot; -&gt; &quot;साइट सेटिंग&quot; -&gt; &quot;कैमरा&quot; या &quot;साइट सेटिंग&quot; -&gt; &quot;माइक्रोफ़ोन&quot; पर जाएं",
-            "point2": "{{hostname}} &quot;ब्लॉक&quot; सूची से हटाएं"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "निर्देश",
-            "permissionDenied": "{{kind}} के लिए अनुमति अस्वीकृत। कृपया इस पृष्ठ को पुनः लोड करें और सम्मेलन में शामिल होने के लिए {{kind}} तक पहुंच की पुष्टि करें।"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "निर्देश",
-            "permissionDenied": "{{kind}} के लिए अनुमति अस्वीकृत। इसका उपयोग करने के लिए कृपया इन चरणों का पालन करें:",
-            "point1": "अपनी एंड्रॉइड सेटिंग्स पर जाएं",
-            "point2": "&quot;एप्लिकेशन और सूचनाएं&quot; खोलें",
-            "point3": "&quot; {{communityName}} &quot; ढूंढें और इसे खोलें",
-            "point4": "अनुमतियों पर टैप करें",
-            "point5": "{{kind}} सक्षम करें"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "निर्देश",
-            "permissionDenied": "{{kind}} के लिए अनुमति अस्वीकृत। इसका उपयोग करने के लिए कृपया इन चरणों का पालन करें:",
-            "point1": "अपनी आईओएस सेटिंग में जाएं",
-            "point2": "&quot;गोपनीयता&quot; खोलें",
-            "point3": "{{kind}} ढूंढें और इसे खोलें",
-            "point4": "&quot; {{communityName}} &quot; ढूंढें और सक्षम करें"
-        },
-        "fbLive": {
-            "dialogTitle": "फेसबुक लाइव स्ट्रीमिंग शुरू"
-        },
-        "notices": {
-            "youJoinedRoom": "आप कमरे में शामिल हो गए",
-            "joining": "शामिल होना: {{userName}}",
-            "sbLeftRoom": "{{userName}} ने कमरा छोड़ दिया",
-            "switchingRoom": "स्विचिंग रूम...",
-            "forceDisconnecting": "आप 5 सेकंड के भीतर डिस्कनेक्ट हो जाएंगे",
-            "forceDisconnectingImmediately": "आपको एक मेज़बान ने डिसकनेक्ट कर दिया था",
-            "youLeftRoom": "आपने कमरा छोड़ दिया",
-            "codeCopied": "आपने कमरा छोड़ दिया",
-            "sbBeganFbLive": "{{userName}} इस कॉल को फेसबुक में प्रसारित करना शुरू किया",
-            "sbStoppedFbLive": "{{userName}} फेसबुक में इस कॉल का प्रसारण बंद कर दिया",
-            "youBeganFbLive": "आपने इस कॉल को Facebook में प्रसारित करना प्रारंभ किया",
-            "youStoppedFbLive": "आपने इस कॉल को Facebook में प्रसारित करना बंद कर दिया है",
-            "youStartedLive": "आपने इस कॉल को कस्टम आरटीएमपी पर प्रसारित करना शुरू किया",
-            "youStoppedLive": "आपने इस कॉल को कस्टम RTMP पर प्रसारित करना बंद कर दिया है",
-            "sbStartedLiveStreaming": "{{userName}} लाइव शुरू किया",
-            "sbStoppedLiveStreaming": "{{userName}} लाइव समाप्त हुआ",
-            "liveStopped": "एंडपॉइंट पर वीडियो भेजते समय गड़बड़ी हुई",
-            "youBeganVideoRecording": "आपने इस सम्मेलन की रिकॉर्डिंग शुरू की",
-            "youStoppedVideoRecording": "आपने इस कॉन्फ़्रेंस की रिकॉर्डिंग बंद कर दी है",
-            "linkCopiedToCb": "लिंक को क्लिपबोर्ड पर कॉपी किया गया",
-            "codeCopiedToCb": "कोड को क्लिपबोर्ड पर कॉपी किया गया",
-            "userHasNoVideo": "प्रतिभागी के पास कोई वीडियो नहीं है",
-            "openInBrowserAlert": "कॉन्फ़्रेंस में शामिल होने के लिए सफ़ारी ब्राउज़र में लिंक खोलें।",
-            "allowedVideoLimit": "इस कमरे में केवल {{limit}} वीडियो की अनुमति है",
-            "allowedAudioLimit": "इस कमरे में केवल {{limit}} माइक्रोफोन की अनुमति है"
-        },
-        "settingsPopup": {
-            "dialogTitle": "वीडियो सेटिंग्स",
-            "webCamera": "वेब कैमेरा",
-            "screenSharing": "स्क्रीन साझेदारी",
-            "shareAnotherScreen": "दूसरी स्क्रीन साझा करें",
-            "turnOffCameras": "कैमरा बंद करो",
-            "turnOffVideo": "कैमरा\/स्क्रीन शेयरिंग बंद करें",
-            "turnOffAudioInput": "म्यूट माइक्रोफोन",
-            "turnOffScreenSharing": "स्क्रीन शेयरिंग बंद करें",
-            "cameraIsTurnedOff": "कैमरा बंद है",
-            "micIsTurnedOff": "माइक्रोफ़ोन बंद है",
-            "startFBLive": "फेसबुक लाइवस्ट्रीम शुरू करें",
-            "stopFBLive": "फेसबुक लाइवस्ट्रीम बंद करो",
-            "startRecording": "रिकॉर्डिंग शुरू",
-            "stopRecording": "रिकॉर्डिंग बंद करें",
-            "start": "शुरू",
-            "stop": "रुकना",
-            "recordingInProgress": "रिकॉर्डिंग चल रही है...",
-            "fbLiveTitle": "लाइवस्ट्रीम का शीर्षक",
-            "fbLiveDescription": "अपने लाइवस्ट्रीम का वर्णन करें। यह किस बारे में है?",
-            "fbOnlyMeLiveAccess": "केवल मैं",
-            "fbFriendsAccess": "दोस्त",
-            "fbPublicAccess": "जनता",
-            "publishOnTimeline": "टाइमलाइन पर प्रकाशित करें",
-            "publishToGroup": "समूह में प्रकाशित करें",
-            "fbStartLive": "रहने जाओ",
-            "fbStopLive": "लाइवस्ट्रीम समाप्त करें",
-            "streamingSettings": "समायोजन",
-            "manageStream": "लाइवस्ट्रीम प्रबंधित करें",
-            "fbEmbedCode": "एम्बेड",
-            "copy": "प्रतिलिपि",
-            "streamToRTMP": "कस्टम RTMP पर स्ट्रीम करें",
-            "startBroadcasting": "प्रसारण शुरू करें",
-            "broadcastingInProgress": "प्रसारण हो रहा है"
-        },
-        "audioSettings": {
-            "dialogTitle": "श्रव्य विन्यास",
-            "speakers": "वक्ताओं",
-            "microphone": "माइक्रोफ़ोन"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "प्रसारण प्रबंधित करें"
-        },
-        "participantsPopup": {
-            "dialogTitle": "प्रतिभागी सेटिंग्स",
-            "disconnect": "डिस्कनेक्ट",
-            "floatingScreens": "फ्लोटिंग स्क्रीन",
-            "tiledScreens": "टाइल वाली स्क्रीन",
-            "loudestExceptMe": "मेरे अलावा सबसे जोर से",
-            "maximizeLoudest": "जोर से अधिकतम करें",
-            "staticMaximized": "स्थैतिक अधिकतम",
-            "fullScreen": "पूर्ण स्क्रीन",
-            "manual": "नियमावली",
-            "turnOffCamera": "वीडियो छुपाएं",
-            "turnOffAudio": "ऑडियो म्यूट करें",
-            "turnOffScreenSharing": "स्क्रीन शेयरिंग छुपाएं",
-            "turnOnCamera": "वीडियो दिखाओ",
-            "turnOnAudio": "ऑडियो अनम्यूट करें",
-            "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाएं"
-        },
-        "streamingSettings": {
-            "title": "लाइव स्ट्रीम"
-        },
-        "preview": {
-            "Meeting": "दूर संवाद",
-            "MeetingEnded": "टेलीकांफ्रेंस समाप्त हो गई"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "बोलने का अनुरोध",
-            "msg": "बैठक में वर्तमान में {{count}} लोग बोल रहे हैं। क्या आप उनमें से एक को बोलना समाप्त करने के लिए {{seconds}} सेकंड की अनुमति देने के बाद बदलना चाहते हैं?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "आमंत्रित",
@@ -456,7 +308,7 @@
             "description": "एक श्रेणी जिससे अन्य धाराएँ संबंधित हो सकती हैं"
         },
         "Streams\/participating": {
-            "displayType": "भागीदारी सूचकांक",
+            "displayType": "भाग लेने वाला सूचकांक",
             "description": "जब कोई उपयोगकर्ता जुड़ता\/छोड़ता है तो धाराएँ इससे संबंधित\/असंबंधित होती हैं"
         },
         "Streams\/interest": {
@@ -471,10 +323,6 @@
             "displayType": "बातचीत",
             "description": "इतिहास के साथ, उपयोगकर्ताओं के बीच बातचीत"
         },
-        "Media\/WebRTC": {
-            "displayType": "दूर संवाद",
-            "description": "एक ऑनलाइन वीडियो\/ऑडियो सम्मेलन"
-        },
         "Streams\/question": {
             "displayType": "सवाल",
             "description": "प्रश्न धारा",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "उत्तर",
             "description": "उत्तर धारा"
-        },
-        "Media\/calls": {
-            "displayType": "कॉल",
-            "description": "स्ट्रीम\/वेबआरटीसी के लिए श्रेणी",
-            "MaxRelationsExceeded": "अधिकतम कॉल पार हो गई"
         }
     },
     "menu": {

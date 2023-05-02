@@ -70,7 +70,7 @@
         "Streams\/changed": "Spremembe leta {{stream.fields.title}}",
         "Streams\/invite": "Povabljeni ste bili na {{& stream.fields.title}}",
         "Streams\/announcement": "Oznanilo leta {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} spremenil dostop v {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} spremenilo dostop v {{& stream.fields.title}}",
         "Streams\/chat\/edit": "Sporočilo klepeta urejeno leta {{& stream.fields.title}}",
         "Streams\/chat\/remove": "Sporočilo v klepetu je bilo odstranjeno leta {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} je zaprt",
@@ -209,154 +209,6 @@
         "Devices": "Naprave",
         "Streams": "Tokovi"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu toku.",
-        "streamTitle": "{{1}} je začel telekonferenco",
-        "allow": {
-            "dialogTitle": "Povezovanje",
-            "microphoneBtn": "Omogoči mikrofon",
-            "cameraBtn": "Omogoči kamero",
-            "cameraAndMicrophoneBtn": "Omogoči kamero in mikrofon"
-        },
-        "preparing": {
-            "dialogTitle": "Preden se pridružite, vklopite\/izklopite kamero ali mikrofon",
-            "micIsOff": "Mikrofon je izklopljen",
-            "micIsOn": "Mikrofon je vključen",
-            "cameraIsOff": "Kamera je izklopljena",
-            "cameraIsOn": "Kamera je vklopljena",
-            "screenSharingIsOn": "Skupna raba zaslona je vklopljena",
-            "screenSharingIsOff": "Delite zaslon",
-            "joinNow": "Pridružite se razpisu"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Navodila",
-            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Če ga želite uporabiti, sledite tem korakom:",
-            "point1": "Pojdite na &quot;Nastavitve&quot; -&gt; &quot;Napredno&quot; -&gt; &quot;Zasebnost in varnost&quot; -&gt; &quot;Nastavitve mesta&quot; -&gt; &quot;Kamera&quot; ali &quot;Nastavitve mesta&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Odstranite {{hostname}} s seznama &quot;Blokiraj&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Navodila",
-            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Ponovno naložite to stran in potrdite dostop do {{kind}} , da se pridružite konferenci."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Navodila",
-            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Če ga želite uporabiti, sledite tem korakom:",
-            "point1": "Pojdite v nastavitve za Android",
-            "point2": "Odprite &quot;Aplikacije in obvestila&quot;",
-            "point3": "Poiščite &quot; {{communityName}} &quot; in ga odprite",
-            "point4": "Dotaknite se možnosti Dovoljenja",
-            "point5": "Omogoči {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Navodila",
-            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Če ga želite uporabiti, sledite tem korakom:",
-            "point1": "Pojdite v nastavitve sistema iOS",
-            "point2": "Odpri &quot;Zasebnost&quot;",
-            "point3": "Poiščite {{kind}} in ga odprite",
-            "point4": "Poiščite &quot; {{communityName}} &quot; in omogočite"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebook prenos v živo se je začel"
-        },
-        "notices": {
-            "youJoinedRoom": "Pridružil si se sobi",
-            "joining": "Pridruženih: {{userName}}",
-            "sbLeftRoom": "{{userName}} je zapustil sobo",
-            "switchingRoom": "Preklopna soba ...",
-            "forceDisconnecting": "Povezava bo prekinjena v 5 sekundah",
-            "forceDisconnectingImmediately": "Gostitelj vas je prekinil",
-            "youLeftRoom": "Zapustil si sobo",
-            "codeCopied": "Zapustil si sobo",
-            "sbBeganFbLive": "{{userName}} je začel oddajati ta klic na Facebooku",
-            "sbStoppedFbLive": "{{userName}} je prenehal predvajati ta klic na Facebooku",
-            "youBeganFbLive": "Ta klic ste začeli oddajati na Facebooku",
-            "youStoppedFbLive": "Prekinili ste predvajanje tega klica na Facebooku",
-            "youStartedLive": "Začeli ste oddajati ta klic na RTMP po meri",
-            "youStoppedLive": "Ustavili ste oddajanje tega klica na RTMP po meri",
-            "sbStartedLiveStreaming": "{{userName}} je začel v živo",
-            "sbStoppedLiveStreaming": "{{userName}} se je končalo v živo",
-            "liveStopped": "Med pošiljanjem videoposnetka na končno točko je prišlo do napake",
-            "youBeganVideoRecording": "Začeli ste snemati to konferenco",
-            "youStoppedVideoRecording": "Ustavili ste snemanje te konference",
-            "linkCopiedToCb": "Povezava je bila kopirana v odložišče",
-            "codeCopiedToCb": "Koda je bila kopirana v odložišče",
-            "userHasNoVideo": "Udeleženec nima videa",
-            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci.",
-            "allowedVideoLimit": "V tej sobi je dovoljenih samo {{limit}} videoposnetkov",
-            "allowedAudioLimit": "V tej sobi je dovoljenih samo {{limit}} mikrofonov"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Nastavitve videa",
-            "webCamera": "Spletna kamera",
-            "screenSharing": "Skupna raba zaslona",
-            "shareAnotherScreen": "Delite drug zaslon",
-            "turnOffCameras": "Izklopi kamero",
-            "turnOffVideo": "Izklopite skupno rabo kamere\/zaslona",
-            "turnOffAudioInput": "Izklopi mikrofon",
-            "turnOffScreenSharing": "Izklopite skupno rabo zaslona",
-            "cameraIsTurnedOff": "Kamera je izklopljena",
-            "micIsTurnedOff": "Mikrofon je izklopljen",
-            "startFBLive": "Zaženite Facebook Livestream",
-            "stopFBLive": "Ustavite Facebook Livestream",
-            "startRecording": "Začnite snemati",
-            "stopRecording": "Ustavi snemanje",
-            "start": "Začetek",
-            "stop": "Stop",
-            "recordingInProgress": "Snemanje je v teku...",
-            "fbLiveTitle": "Naslov prenosa v živo",
-            "fbLiveDescription": "Opišite svoj prenos v živo. Za kaj se gre?",
-            "fbOnlyMeLiveAccess": "Samo jaz",
-            "fbFriendsAccess": "prijatelji",
-            "fbPublicAccess": "Javno",
-            "publishOnTimeline": "Objavi na časovnici",
-            "publishToGroup": "Objavi v skupini",
-            "fbStartLive": "Pojdi v živo",
-            "fbStopLive": "Končaj pretakanje v živo",
-            "streamingSettings": "nastavitve",
-            "manageStream": "Upravljanje prenosa v živo",
-            "fbEmbedCode": "Vdelati",
-            "copy": "Kopirati",
-            "streamToRTMP": "Pretakajte v RTMP po meri",
-            "startBroadcasting": "Začnite oddajati",
-            "broadcastingInProgress": "Oddaja je v teku"
-        },
-        "audioSettings": {
-            "dialogTitle": "Nastavitve zvoka",
-            "speakers": "Zvočniki",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Upravljanje oddajanja"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Nastavitve udeleženca",
-            "disconnect": "Prekini povezavo",
-            "floatingScreens": "Lebdeči zasloni",
-            "tiledScreens": "Zasloni s ploščicami",
-            "loudestExceptMe": "Najglasnejši razen mene",
-            "maximizeLoudest": "Povečaj najglasneje",
-            "staticMaximized": "Statično maksimirano",
-            "fullScreen": "Celozaslonski način",
-            "manual": "Priročnik",
-            "turnOffCamera": "Skrij video",
-            "turnOffAudio": "Izklop zvoka",
-            "turnOffScreenSharing": "Skrij skupno rabo zaslona",
-            "turnOnCamera": "Prikaži video",
-            "turnOnAudio": "Vklop zvoka",
-            "turnOnScreenSharing": "Pokaži skupno rabo zaslona"
-        },
-        "streamingSettings": {
-            "title": "Prenos v živo"
-        },
-        "preview": {
-            "Meeting": "Telekonferenca",
-            "MeetingEnded": "Telekonferenca je končana"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Zahteva za govor",
-            "msg": "Trenutno na sestanku govori {{count}} oseb. Ali želite zamenjati enega od njih, potem ko jim dovolite {{seconds}} sekund, da nehajo govoriti?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Vabljeni",
@@ -471,10 +323,6 @@
             "displayType": "Pogovor",
             "description": "pogovor med uporabniki z zgodovino"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telekonferenca",
-            "description": "spletno video\/zvočno konferenco"
-        },
         "Streams\/question": {
             "displayType": "vprašanje",
             "description": "tok vprašanj",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Odgovori",
             "description": "tok odgovorov"
-        },
-        "Media\/calls": {
-            "displayType": "Klici",
-            "description": "kategorija za Media\/WebRTC",
-            "MaxRelationsExceeded": "Največje število klicev je preseženo"
         }
     },
     "menu": {

@@ -57,7 +57,7 @@
         },
         "placeholders": {
             "Public": "Dodaj komentarz",
-            "Private": "Napisz prywatną wiadomość"
+            "Private": "Napisz wiadomość prywatną"
         }
     },
     "notifications": {
@@ -209,154 +209,6 @@
         "Devices": "Urządzenia",
         "Streams": "Strumienie"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tej transmisji.",
-        "streamTitle": "{{1}} rozpoczęło telekonferencję",
-        "allow": {
-            "dialogTitle": "Złączony",
-            "microphoneBtn": "Włącz mikrofon",
-            "cameraBtn": "Włącz aparat",
-            "cameraAndMicrophoneBtn": "Włącz kamerę i mikrofon"
-        },
-        "preparing": {
-            "dialogTitle": "Włącz\/wyłącz kamerę lub mikrofon, zanim dołączysz",
-            "micIsOff": "Mikrofon jest wyłączony",
-            "micIsOn": "Mikrofon jest włączony",
-            "cameraIsOff": "Aparat jest wyłączony",
-            "cameraIsOn": "Aparat jest włączony",
-            "screenSharingIsOn": "Udostępnianie ekranu jest włączone",
-            "screenSharingIsOff": "Udostępnij ekran",
-            "joinNow": "Dołącz do wezwania"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instrukcje",
-            "permissionDenied": "Odmowa pozwolenia na {{kind}} . Aby z niego skorzystać, wykonaj następujące kroki:",
-            "point1": "Przejdź do „Ustawienia” -&gt; „Zaawansowane” -&gt; „Prywatność i bezpieczeństwo” -&gt; „Ustawienia witryny” -&gt; „Aparat” lub „Ustawienia witryny” -&gt; „Mikrofon”",
-            "point2": "Usuń {{hostname}} z listy „Zablokuj”."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instrukcje",
-            "permissionDenied": "Odmowa pozwolenia na {{kind}} . Załaduj ponownie tę stronę i potwierdź dostęp do {{kind}} , aby dołączyć do konferencji."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instrukcje",
-            "permissionDenied": "Odmowa pozwolenia na {{kind}} . Aby z niego skorzystać, wykonaj następujące kroki:",
-            "point1": "Przejdź do ustawień Androida",
-            "point2": "Otwórz „Aplikacje i powiadomienia”",
-            "point3": "Znajdź „ {{communityName}} ” i otwórz go",
-            "point4": "Stuknij w Uprawnienia",
-            "point5": "Włącz {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instrukcje",
-            "permissionDenied": "Odmowa pozwolenia na {{kind}} . Aby z niego skorzystać, wykonaj następujące kroki:",
-            "point1": "Przejdź do ustawień iOS",
-            "point2": "Otwórz „Prywatność”",
-            "point3": "Znajdź {{kind}} i otwórz je",
-            "point4": "Znajdź „ {{communityName}} ” i włącz"
-        },
-        "fbLive": {
-            "dialogTitle": "Rozpoczęła się transmisja na żywo na Facebooku"
-        },
-        "notices": {
-            "youJoinedRoom": "Dołączyłeś do pokoju",
-            "joining": "Dołączenie: {{userName}}",
-            "sbLeftRoom": "{{userName}} opuściło pokój",
-            "switchingRoom": "Przebieralnia...",
-            "forceDisconnecting": "Zostaniesz rozłączony w ciągu 5 sekund",
-            "forceDisconnectingImmediately": "Zostałeś rozłączony przez hosta",
-            "youLeftRoom": "Opuściłeś pokój",
-            "codeCopied": "Opuściłeś pokój",
-            "sbBeganFbLive": "{{userName}} zaczął transmitować tę rozmowę na Facebooku",
-            "sbStoppedFbLive": "{{userName}} przestał nadawać tę rozmowę na Facebooku",
-            "youBeganFbLive": "Zacząłeś transmitować tę rozmowę na Facebooku",
-            "youStoppedFbLive": "Przestałeś transmitować tę rozmowę na Facebooku",
-            "youStartedLive": "Rozpoczęłeś nadawanie tego wywołania do niestandardowego protokołu RTMP",
-            "youStoppedLive": "Przerwałeś nadawanie tego wywołania do niestandardowego protokołu RTMP",
-            "sbStartedLiveStreaming": "{{userName}} rozpoczęło transmisję na żywo",
-            "sbStoppedLiveStreaming": "{{userName}} zakończyło się na żywo",
-            "liveStopped": "Wystąpił błąd podczas wysyłania wideo do punktu końcowego",
-            "youBeganVideoRecording": "Rozpocząłeś nagrywanie tej konferencji",
-            "youStoppedVideoRecording": "Przerwałeś nagrywanie tej konferencji",
-            "linkCopiedToCb": "Link skopiowany do schowka",
-            "codeCopiedToCb": "Kod skopiowany do schowka",
-            "userHasNoVideo": "Uczestnik nie ma wideo",
-            "openInBrowserAlert": "Otwórz łącze w przeglądarce Safari, aby dołączyć do konferencji.",
-            "allowedVideoLimit": "W tym pokoju dozwolone jest tylko {{limit}} wideo",
-            "allowedAudioLimit": "W tym pokoju można używać tylko {{limit}} mikrofonów"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Ustawienia wideo",
-            "webCamera": "Kamerka internetowa",
-            "screenSharing": "Udostępnianie ekranu",
-            "shareAnotherScreen": "Udostępnij inny ekran",
-            "turnOffCameras": "Wyłącz aparat",
-            "turnOffVideo": "Wyłącz udostępnianie aparatu\/ekranu",
-            "turnOffAudioInput": "Wycisz mikrofon",
-            "turnOffScreenSharing": "Wyłącz udostępnianie ekranu",
-            "cameraIsTurnedOff": "Aparat jest wyłączony",
-            "micIsTurnedOff": "Mikrofon jest wyłączony",
-            "startFBLive": "Rozpocznij transmisję na żywo na Facebooku",
-            "stopFBLive": "Zatrzymaj transmisję na żywo na Facebooku",
-            "startRecording": "Rozpocznij nagrywanie",
-            "stopRecording": "Zatrzymaj nagrywanie",
-            "start": "Początek",
-            "stop": "Zatrzymywać się",
-            "recordingInProgress": "Trwa nagrywanie...",
-            "fbLiveTitle": "Tytuł transmisji na żywo",
-            "fbLiveDescription": "Opisz swoją transmisję na żywo. O czym to jest?",
-            "fbOnlyMeLiveAccess": "Tylko ja",
-            "fbFriendsAccess": "Przyjaciele",
-            "fbPublicAccess": "Publiczny",
-            "publishOnTimeline": "Opublikuj na osi czasu",
-            "publishToGroup": "Opublikuj w grupie",
-            "fbStartLive": "Przejdź na żywo",
-            "fbStopLive": "Zakończ transmisję na żywo",
-            "streamingSettings": "Ustawienia",
-            "manageStream": "Zarządzaj transmisją na żywo",
-            "fbEmbedCode": "Osadzać",
-            "copy": "Kopiuj",
-            "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego RTMP",
-            "startBroadcasting": "Rozpocząć nadawanie",
-            "broadcastingInProgress": "Trwa nadawanie"
-        },
-        "audioSettings": {
-            "dialogTitle": "Ustawienia dźwięku",
-            "speakers": "Głośniki",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Zarządzaj transmisją"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Ustawienia uczestnika",
-            "disconnect": "Rozłączyć się",
-            "floatingScreens": "Pływające ekrany",
-            "tiledScreens": "Kafelkowe ekrany",
-            "loudestExceptMe": "Najgłośniejszy oprócz mnie",
-            "maximizeLoudest": "Maksymalizuj najgłośniejszy",
-            "staticMaximized": "Maksymalizacja statyczna",
-            "fullScreen": "Pełny ekran",
-            "manual": "podręcznik",
-            "turnOffCamera": "Ukryj wideo",
-            "turnOffAudio": "Wycisz dźwięk",
-            "turnOffScreenSharing": "Ukryj udostępnianie ekranu",
-            "turnOnCamera": "Pokaż wideo",
-            "turnOnAudio": "Wyłącz wyciszenie dźwięku",
-            "turnOnScreenSharing": "Pokaż udostępnianie ekranu"
-        },
-        "streamingSettings": {
-            "title": "Transmisja na żywo"
-        },
-        "preview": {
-            "Meeting": "Konferencja telefoniczna",
-            "MeetingEnded": "Telekonferencja zakończona"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Prośba o zabranie głosu",
-            "msg": "Obecnie na spotkaniu przemawia {{count}} osób. Czy chcesz zastąpić jednego z nich po tym, jak dałeś mu {{seconds}} sekund na dokończenie mówienia?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Zaproszony",
@@ -425,7 +277,7 @@
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "album, z którym powiązane są różne media"
+            "description": "album, z którym związane są różne media"
         },
         "Streams\/file": {
             "displayType": "Plik",
@@ -457,7 +309,7 @@
         },
         "Streams\/participating": {
             "displayType": "Indeks uczestnictwa",
-            "description": "strumienie są powiązane\/niepowiązane z tym, gdy użytkownik dołącza\/opuszcza"
+            "description": "strumienie są powiązane\/niezwiązane z tym, gdy użytkownik dołącza\/opuszcza"
         },
         "Streams\/interest": {
             "displayType": "Odsetki",
@@ -471,10 +323,6 @@
             "displayType": "Rozmowa",
             "description": "rozmowa między użytkownikami, z historią"
         },
-        "Media\/WebRTC": {
-            "displayType": "Konferencja telefoniczna",
-            "description": "konferencję wideo\/audio online"
-        },
         "Streams\/question": {
             "displayType": "Pytanie",
             "description": "strumień pytań",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Odpowiedź",
             "description": "strumień odpowiedzi"
-        },
-        "Media\/calls": {
-            "displayType": "Połączenia",
-            "description": "kategoria dla strumieni\/webrtc",
-            "MaxRelationsExceeded": "Przekroczono maksymalną liczbę połączeń"
         }
     },
     "menu": {
@@ -580,7 +423,7 @@
         "answerText": "Tekst",
         "HideUntilAnswered": "Ukryj do odpowiedzi",
         "CantChangeAnswers": "Nie można zmienić odpowiedzi",
-        "FreeAnswer": "Wpisz tutaj swoją odpowiedź",
+        "FreeAnswer": "Wpisz swoją odpowiedź tutaj",
         "SaveQuestion": "Zapisz pytanie",
         "SaveAnswer": "Zapisz odpowiedź",
         "Save": "Ratować",

@@ -74,7 +74,7 @@
         "Streams\/chat\/edit": "Vestlussõnumit on muudetud aastal {{& stream.fields.title}}",
         "Streams\/chat\/remove": "Vestlussõnum eemaldati aastal {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} on suletud",
-        "Streams\/task\/progress": "Edusammud {{stream.fields.title}} aastal",
+        "Streams\/task\/progress": "Edusammud {{stream.fields.title}} puhul",
         "Streams\/task\/complete": "Ülesanne täidetud: {{stream.fields.title}}",
         "Streams\/task\/error": "Viga ajal: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}} : sissetulev sõnum",
@@ -98,7 +98,7 @@
             },
             "NotAuthorizedToRemoveRole": {
                 "title": "Vabandust",
-                "alert": "Teil ei ole õigust seda rolli eemaldada"
+                "alert": "Teil pole õigust seda rolli eemaldada"
             }
         },
         "labels": {
@@ -182,7 +182,7 @@
         "mobile": {
             "alert": "Meie numbrilt saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Seejärel saatke neile kiire tekst, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
             "confirm": "Meie numbrilt saadetakse kutsed, mida teie sõbrad veel ära ei tunne. Kas soovite järgneda kiirele tekstile, et anda neile teada, et kutse tuli teilt, paludes neil lingil klõpsata.",
-            "check": "Hei, saatsin teile just kutse rakendusse {{app}} . Palun kontrolli oma SMS-i ja vajuta lingile!",
+            "check": "Hei, saatsin teile just kutse rakendusse {{app}} . Palun kontrolli oma SMS-i ja kliki lingile!",
             "CheckYourMobile": "Kontrollige SMS-i ja järgige juhiseid!"
         },
         "email": {
@@ -208,154 +208,6 @@
         "Identifiers": "Identifikaatorid",
         "Devices": "Seadmed",
         "Streams": "Vood"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "Teil pole selle vooga liitumiseks luba.",
-        "streamTitle": "{{1}} alustas telekonverentsi",
-        "allow": {
-            "dialogTitle": "Ühendamine",
-            "microphoneBtn": "Mikrofoni lubamine",
-            "cameraBtn": "Luba kaamera",
-            "cameraAndMicrophoneBtn": "Luba kaamera ja mikrofon"
-        },
-        "preparing": {
-            "dialogTitle": "Enne liitumist lülitage kaamera või mikrofon sisse\/välja",
-            "micIsOff": "Mikrofon on välja lülitatud",
-            "micIsOn": "Mikrofon on sisse lülitatud",
-            "cameraIsOff": "Kaamera on välja lülitatud",
-            "cameraIsOn": "Kaamera on sisse lülitatud",
-            "screenSharingIsOn": "Ekraani jagamine on sisse lülitatud",
-            "screenSharingIsOff": "Ekraani jagamine",
-            "joinNow": "Liituge kõnega"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks keelatud. Selle kasutamiseks järgige neid samme:",
-            "point1": "Avage &quot;Seaded&quot; -&gt; &quot;Täpsemalt&quot; -&gt; &quot;Privaatsus ja turvalisus&quot; -&gt; &quot;Saidi seaded&quot; -&gt; &quot;Kaamera&quot; või &quot;Saidi seaded&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Eemaldage {{hostname}} loendist &quot;Blokeeri&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks keelatud. Laadige see leht uuesti ja kinnitage konverentsiga liitumiseks juurdepääs numbrile {{kind}} ."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks keelatud. Selle kasutamiseks järgige neid samme:",
-            "point1": "Avage oma Androidi seaded",
-            "point2": "Avage &quot;Rakendused ja märguanded&quot;",
-            "point3": "Leidke &quot; {{communityName}} &quot; ja avage see",
-            "point4": "Puudutage valikut Load",
-            "point5": "Luba {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Juhised",
-            "permissionDenied": "Luba {{kind}} jaoks keelatud. Selle kasutamiseks järgige neid samme:",
-            "point1": "Avage iOS-i seaded",
-            "point2": "Avage &quot;Privaatsus&quot;",
-            "point3": "Leidke {{kind}} ja avage see",
-            "point4": "Leidke &quot; {{communityName}} &quot; ja lubage"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebooki otseülekanne algas"
-        },
-        "notices": {
-            "youJoinedRoom": "Liitusid ruumiga",
-            "joining": "Liitumine: {{userName}}",
-            "sbLeftRoom": "{{userName}} lahkus toast",
-            "switchingRoom": "Ruumi vahetamine...",
-            "forceDisconnecting": "Teie ühendus katkestatakse 5 sekundi jooksul",
-            "forceDisconnectingImmediately": "Host katkestas teie ühenduse",
-            "youLeftRoom": "Sa lahkusid toast",
-            "codeCopied": "Sa lahkusid toast",
-            "sbBeganFbLive": "{{userName}} hakkas seda kõnet Facebookis edastama",
-            "sbStoppedFbLive": "{{userName}} lõpetas selle kõne edastamise Facebookis",
-            "youBeganFbLive": "Hakkasite seda kõnet Facebookis edastama",
-            "youStoppedFbLive": "Lõpetasite selle kõne edastamise Facebookis",
-            "youStartedLive": "Hakkasite seda kõnet kohandatud RTMP-le edastama",
-            "youStoppedLive": "Lõpetasite selle kõne edastamise kohandatud RTMP-le",
-            "sbStartedLiveStreaming": "{{userName}} alustas otseülekannet",
-            "sbStoppedLiveStreaming": "{{userName}} lõppes otse-eetris",
-            "liveStopped": "Video lõpp-punkti saatmisel ilmnes viga",
-            "youBeganVideoRecording": "Alustasite selle konverentsi salvestamist",
-            "youStoppedVideoRecording": "Lõpetasite selle konverentsi salvestamise",
-            "linkCopiedToCb": "Link on lõikelauale kopeeritud",
-            "codeCopiedToCb": "Kood kopeeriti lõikelauale",
-            "userHasNoVideo": "Osalejal pole videot",
-            "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris.",
-            "allowedVideoLimit": "Selles ruumis on lubatud ainult {{limit}} videot",
-            "allowedAudioLimit": "Selles ruumis on lubatud ainult {{limit}} mikrofoni"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Video seaded",
-            "webCamera": "Veebikaamera",
-            "screenSharing": "Ekraani jagamine",
-            "shareAnotherScreen": "Jaga teist ekraani",
-            "turnOffCameras": "Lülitage kaamera välja",
-            "turnOffVideo": "Lülitage kaamera\/ekraani jagamine välja",
-            "turnOffAudioInput": "Mikrofoni vaigistamine",
-            "turnOffScreenSharing": "Lülitage ekraani jagamine välja",
-            "cameraIsTurnedOff": "Kaamera on välja lülitatud",
-            "micIsTurnedOff": "Mikrofon on välja lülitatud",
-            "startFBLive": "Käivitage Facebooki otseülekanne",
-            "stopFBLive": "Peatage Facebooki otseülekanne",
-            "startRecording": "Alustage salvestamist",
-            "stopRecording": "Lõpeta salvestamine",
-            "start": "Alusta",
-            "stop": "Peatus",
-            "recordingInProgress": "Salvestamine on pooleli...",
-            "fbLiveTitle": "Otseülekande pealkiri",
-            "fbLiveDescription": "Kirjeldage oma otseülekannet. Millest see räägib?",
-            "fbOnlyMeLiveAccess": "Ainult mina",
-            "fbFriendsAccess": "Sõbrad",
-            "fbPublicAccess": "Avalik",
-            "publishOnTimeline": "Avalda ajajoonel",
-            "publishToGroup": "Avalda rühmas",
-            "fbStartLive": "Minge otseülekandesse",
-            "fbStopLive": "Lõpeta otseülekanne",
-            "streamingSettings": "Seaded",
-            "manageStream": "Otseülekannete haldamine",
-            "fbEmbedCode": "Manusta",
-            "copy": "Kopeeri",
-            "streamToRTMP": "Voogesitage kohandatud RTMP-le",
-            "startBroadcasting": "Alustage saateid",
-            "broadcastingInProgress": "Ringhääling on pooleli"
-        },
-        "audioSettings": {
-            "dialogTitle": "Helisätted",
-            "speakers": "Kõlarid",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Saate haldamine"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Osaleja seaded",
-            "disconnect": "Katkesta ühendus",
-            "floatingScreens": "Ujuvad ekraanid",
-            "tiledScreens": "Plaaditud ekraanid",
-            "loudestExceptMe": "Kõige valjem peale mina",
-            "maximizeLoudest": "Maksimeeri kõige valjem",
-            "staticMaximized": "Staatiline maksimeeritud",
-            "fullScreen": "Täisekraan",
-            "manual": "Käsiraamat",
-            "turnOffCamera": "Peida video",
-            "turnOffAudio": "Heli vaigistamine",
-            "turnOffScreenSharing": "Peida ekraani jagamine",
-            "turnOnCamera": "Näita videot",
-            "turnOnAudio": "Tühista heli vaigistus",
-            "turnOnScreenSharing": "Kuva ekraani jagamine"
-        },
-        "streamingSettings": {
-            "title": "Otseülekanne"
-        },
-        "preview": {
-            "Meeting": "Telekonverents",
-            "MeetingEnded": "Telekonverents lõppes"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Rääkimise taotlus",
-            "msg": "Praegu võtab koosolekul sõna {{count}} inimest. Kas soovite ühe neist asendada pärast seda, kui olete andnud neile {{seconds}} sekundit kõne lõpetamiseks?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -469,11 +321,7 @@
         },
         "Streams\/chat": {
             "displayType": "Vestlus",
-            "description": "kasutajatevaheline vestlus ajalooga"
-        },
-        "Media\/WebRTC": {
-            "displayType": "Telekonverents",
-            "description": "veebipõhine video-\/helikonverents"
+            "description": "vestlus kasutajate vahel ajalooga"
         },
         "Streams\/question": {
             "displayType": "küsimus",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Vastus",
             "description": "vastuste voog"
-        },
-        "Media\/calls": {
-            "displayType": "Kõned",
-            "description": "kategooria Media\/WebRTC jaoks",
-            "MaxRelationsExceeded": "Kõnede maksimum on ületatud"
         }
     },
     "menu": {
@@ -607,7 +450,7 @@
         "WaitingRoom": "Ooteruum",
         "LiveRoom": "Live Room",
         "interviewedByAnotherHost": "Hetkel intervjueerib teine saatejuht",
-        "bringToLive": "Too otsesaatesse",
+        "bringToLive": "Bring To Live Show",
         "putOnHold": "Pane ootele",
         "endCall": "Lõpeta kõne",
         "interview": "Intervjuu",

@@ -21,7 +21,7 @@
     "login": {
         "prompt": "תן לחברים לזהות אותך:",
         "newUser": "או צור חשבון חדש למטה",
-        "picTooltip": "תוכל לשנות תמונה זו מאוחר יותר",
+        "picTooltip": "אתה יכול לשנות תמונה זו מאוחר יותר",
         "placeholder": {
             "fullName": "הכנס את שמך המלא"
         }
@@ -201,161 +201,13 @@
         "Subscribed": "נרשם",
         "Participants": "משתתפים",
         "AreYouSureRemoveIdentifier": "האם אתה בטוח להסיר מזהה זה?",
-        "AreYouSureUnsubscribeIdentifier": "האם אתה בטוח לבטל את הרישום של המזהה הזה? זה יכבה את ההתראות למזהה הזה.",
+        "AreYouSureUnsubscribeIdentifier": "האם אתה בטוח לבטל את הרישום של מזהה זה? זה יכבה את ההתראות למזהה הזה.",
         "AreYouSureUnsubscribeDevice": "האם אתה בטוח לבטל את הרישום של המכשיר הזה? זה יכבה את ההתראות למכשיר הזה.",
         "AreYouSureRemoveParticipant": "האם אתה בטוח שברצונך להסיר את המשתתף הזה?",
         "RemoveParticipant": "הסר את המשתתף",
         "Identifiers": "מזהים",
         "Devices": "מכשירים",
         "Streams": "זרמים"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם הזה.",
-        "streamTitle": "{{1}} התחילה ועידה טלפונית",
-        "allow": {
-            "dialogTitle": "מְקַשֵׁר",
-            "microphoneBtn": "אפשר מיקרופון",
-            "cameraBtn": "הפעל את המצלמה",
-            "cameraAndMicrophoneBtn": "אפשר מצלמה ומיקרופון"
-        },
-        "preparing": {
-            "dialogTitle": "הפעל\/כבה את המצלמה או המיקרופון לפני ההצטרפות",
-            "micIsOff": "המיקרופון כבוי",
-            "micIsOn": "המיקרופון פועל",
-            "cameraIsOff": "המצלמה כבויה",
-            "cameraIsOn": "המצלמה מופעלת",
-            "screenSharingIsOn": "שיתוף מסך מופעל",
-            "screenSharingIsOff": "שתף מסך",
-            "joinNow": "הצטרף לשיחה"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "הוראות",
-            "permissionDenied": "ההרשאה ל {{kind}} נדחתה. כדי להשתמש בו אנא בצע את השלבים הבאים:",
-            "point1": "עבור אל &quot;הגדרות&quot; -&gt; &quot;מתקדם&quot; -&gt; &quot;פרטיות ואבטחה&quot; -&gt; &quot;הגדרות אתר&quot; -&gt; &quot;מצלמה&quot; או &quot;הגדרות אתר&quot; -&gt; &quot;מיקרופון&quot;",
-            "point2": "הסר {{hostname}} מרשימת &quot;חסימה&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "הוראות",
-            "permissionDenied": "ההרשאה ל {{kind}} נדחתה. אנא טען מחדש את הדף הזה ואשר את הגישה ל {{kind}} כדי להצטרף לוועידה."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "הוראות",
-            "permissionDenied": "ההרשאה ל {{kind}} נדחתה. כדי להשתמש בו אנא בצע את השלבים הבאים:",
-            "point1": "עבור להגדרות אנדרואיד שלך",
-            "point2": "פתח את &quot;אפליקציות והתראות&quot;",
-            "point3": "מצא את &quot; {{communityName}} &quot; ופתח אותו",
-            "point4": "הקש על הרשאות",
-            "point5": "אפשר {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "הוראות",
-            "permissionDenied": "ההרשאה ל {{kind}} נדחתה. כדי להשתמש בו אנא בצע את השלבים הבאים:",
-            "point1": "עבור להגדרות iOS שלך",
-            "point2": "פתח את &quot;פרטיות&quot;",
-            "point3": "מצא {{kind}} ופתח אותו",
-            "point4": "מצא את &quot; {{communityName}} &quot; והפעל"
-        },
-        "fbLive": {
-            "dialogTitle": "הסטרימינג בשידור חי בפייסבוק התחיל"
-        },
-        "notices": {
-            "youJoinedRoom": "הצטרפת לחדר",
-            "joining": "הצטרפות: {{userName}}",
-            "sbLeftRoom": "{{userName}} יצאו מהחדר",
-            "switchingRoom": "מחליף חדר...",
-            "forceDisconnecting": "תתנתק תוך 5 שניות",
-            "forceDisconnectingImmediately": "נותקת על ידי מארח",
-            "youLeftRoom": "יצאת מהחדר",
-            "codeCopied": "יצאת מהחדר",
-            "sbBeganFbLive": "{{userName}} החלה לשדר את השיחה הזו בפייסבוק",
-            "sbStoppedFbLive": "{{userName}} הפסיק לשדר את השיחה הזו בפייסבוק",
-            "youBeganFbLive": "התחלת לשדר את השיחה הזו בפייסבוק",
-            "youStoppedFbLive": "הפסקת לשדר את השיחה הזו בפייסבוק",
-            "youStartedLive": "התחלת לשדר את השיחה הזו ל-RTMP מותאם אישית",
-            "youStoppedLive": "הפסקת לשדר את השיחה הזו ל-RTMP מותאם אישית",
-            "sbStartedLiveStreaming": "{{userName}} התחילו בשידור חי",
-            "sbStoppedLiveStreaming": "{{userName}} הסתיימו בשידור חי",
-            "liveStopped": "אירעה שגיאה בעת שליחת וידאו לנקודת הקצה",
-            "youBeganVideoRecording": "התחלת להקליט את הוועידה הזו",
-            "youStoppedVideoRecording": "הפסקת להקליט את הוועידה הזו",
-            "linkCopiedToCb": "הקישור הועתק ללוח",
-            "codeCopiedToCb": "הקוד הועתק ללוח",
-            "userHasNoVideo": "למשתתף אין סרטון",
-            "openInBrowserAlert": "פתח קישור בדפדפן Safari כדי להצטרף לוועידה.",
-            "allowedVideoLimit": "רק {{limit}} וידאו מותר בחדר זה",
-            "allowedAudioLimit": "רק {{limit}} מיקרופונים מותרים בחדר זה"
-        },
-        "settingsPopup": {
-            "dialogTitle": "הגדרות וידאו",
-            "webCamera": "מצלמת רשת",
-            "screenSharing": "שיתוף מסך",
-            "shareAnotherScreen": "שתף מסך אחר",
-            "turnOffCameras": "כבה את המצלמה",
-            "turnOffVideo": "כבה את שיתוף המצלמה\/מסך",
-            "turnOffAudioInput": "השתקת מיקרופון",
-            "turnOffScreenSharing": "כבה את שיתוף המסך",
-            "cameraIsTurnedOff": "המצלמה כבויה",
-            "micIsTurnedOff": "המיקרופון כבוי",
-            "startFBLive": "התחל את הסטרימינג בשידור חי של פייסבוק",
-            "stopFBLive": "עצור את השידור החי של פייסבוק",
-            "startRecording": "התחל להקליט",
-            "stopRecording": "הפסק להקליט",
-            "start": "הַתחָלָה",
-            "stop": "תפסיק",
-            "recordingInProgress": "ההקלטה בעיצומה...",
-            "fbLiveTitle": "שם הסטרימינג בשידור חי",
-            "fbLiveDescription": "תאר את השידור החי שלך. על מה זה?",
-            "fbOnlyMeLiveAccess": "רק אני",
-            "fbFriendsAccess": "חברים",
-            "fbPublicAccess": "פּוּמְבֵּי",
-            "publishOnTimeline": "פרסם בציר הזמן",
-            "publishToGroup": "פרסם לקבוצה",
-            "fbStartLive": "לך תחיה",
-            "fbStopLive": "סיום שידור חי",
-            "streamingSettings": "הגדרות",
-            "manageStream": "נהל שידור חי",
-            "fbEmbedCode": "לְשַׁבֵּץ",
-            "copy": "עותק",
-            "streamToRTMP": "הזרם ל-RTMP מותאם אישית",
-            "startBroadcasting": "תתחיל לשדר",
-            "broadcastingInProgress": "השידור בעיצומו"
-        },
-        "audioSettings": {
-            "dialogTitle": "הגדרות אודיו",
-            "speakers": "רמקולים",
-            "microphone": "מִיקרוֹפוֹן"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "ניהול שידור"
-        },
-        "participantsPopup": {
-            "dialogTitle": "הגדרות משתתף",
-            "disconnect": "לְנַתֵק",
-            "floatingScreens": "מסכים צפים",
-            "tiledScreens": "מסכי אריחים",
-            "loudestExceptMe": "הכי חזק חוץ ממני",
-            "maximizeLoudest": "מקסימום חזק ביותר",
-            "staticMaximized": "סטטי ממקסם",
-            "fullScreen": "מסך מלא",
-            "manual": "מדריך ל",
-            "turnOffCamera": "הסתר סרטון",
-            "turnOffAudio": "השתקת אודיו",
-            "turnOffScreenSharing": "הסתר את שיתוף המסך",
-            "turnOnCamera": "הצג וידאו",
-            "turnOnAudio": "בטל השתקת אודיו",
-            "turnOnScreenSharing": "הצג שיתוף מסך"
-        },
-        "streamingSettings": {
-            "title": "שידור חי"
-        },
-        "preview": {
-            "Meeting": "ועידה טלפונית",
-            "MeetingEnded": "הועידה הטלפונית הסתיימה"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "בקשה לדבר",
-            "msg": "יש כרגע {{count}} אנשים שמדברים בפגישה. האם ברצונך להחליף אחד מהם לאחר שתאפשר לו {{seconds}} שניות לסיים לדבר?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -471,10 +323,6 @@
             "displayType": "שִׂיחָה",
             "description": "שיחה בין משתמשים, עם היסטוריה"
         },
-        "Media\/WebRTC": {
-            "displayType": "ועידה טלפונית",
-            "description": "ועידת וידאו\/שמע מקוונת"
-        },
         "Streams\/question": {
             "displayType": "שְׁאֵלָה",
             "description": "זרם שאלות",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "תשובה",
             "description": "זרם תשובות"
-        },
-        "Media\/calls": {
-            "displayType": "שיחות",
-            "description": "קטגוריה עבור Media\/WebRTC",
-            "MaxRelationsExceeded": "חרג ממספר השיחות"
         }
     },
     "menu": {

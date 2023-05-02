@@ -209,154 +209,6 @@
         "Devices": "thiết bị",
         "Streams": "Dòng"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Bạn không có quyền tham gia luồng này.",
-        "streamTitle": "{{1}} bắt đầu Hội nghị truyền hình",
-        "allow": {
-            "dialogTitle": "Đang kết nối",
-            "microphoneBtn": "Bật micrô",
-            "cameraBtn": "Bật máy ảnh",
-            "cameraAndMicrophoneBtn": "Bật máy ảnh và micrô"
-        },
-        "preparing": {
-            "dialogTitle": "Bật\/tắt camera hoặc micrô trước khi bạn tham gia",
-            "micIsOff": "Micrô đã tắt",
-            "micIsOn": "Micrô đang bật",
-            "cameraIsOff": "Máy ảnh đã tắt",
-            "cameraIsOn": "Máy ảnh đang bật",
-            "screenSharingIsOn": "Chia sẻ màn hình đang bật",
-            "screenSharingIsOff": "Chia sẻ màn hình",
-            "joinNow": "tham gia cuộc gọi"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng nó, vui lòng làm theo các bước sau:",
-            "point1": "Chuyển đến &quot;Cài đặt&quot; -&gt; &quot;Nâng cao&quot; -&gt; &quot;Quyền riêng tư và bảo mật&quot; -&gt; &quot;Cài đặt trang&quot; -&gt; &quot;Máy ảnh&quot; hoặc &quot;Cài đặt trang&quot; -&gt; &quot;Micrô&quot;",
-            "point2": "Xóa {{hostname}} khỏi danh sách &quot;Chặn&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Vui lòng tải lại trang này và xác nhận truy cập {{kind}} để tham gia hội thảo."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng nó, vui lòng làm theo các bước sau:",
-            "point1": "Chuyển đến Cài đặt Android của bạn",
-            "point2": "Mở &quot;Ứng dụng và thông báo&quot;",
-            "point3": "Tìm &quot; {{communityName}} &quot; và mở nó",
-            "point4": "Nhấn vào Quyền",
-            "point5": "Kích hoạt {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng nó, vui lòng làm theo các bước sau:",
-            "point1": "Chuyển đến Cài đặt iOS của bạn",
-            "point2": "Mở &quot;Quyền riêng tư&quot;",
-            "point3": "Tìm {{kind}} và mở nó",
-            "point4": "Tìm &quot; {{communityName}} &quot; và kích hoạt"
-        },
-        "fbLive": {
-            "dialogTitle": "Phát trực tiếp trên Facebook đã bắt đầu"
-        },
-        "notices": {
-            "youJoinedRoom": "Bạn đã tham gia phòng",
-            "joining": "Tham gia: {{userName}}",
-            "sbLeftRoom": "{{userName}} rời khỏi phòng",
-            "switchingRoom": "Chuyển phòng...",
-            "forceDisconnecting": "Bạn sẽ bị ngắt kết nối trong vòng 5 giây",
-            "forceDisconnectingImmediately": "Bạn đã bị ngắt kết nối bởi một máy chủ",
-            "youLeftRoom": "Bạn rời khỏi phòng",
-            "codeCopied": "Bạn rời khỏi phòng",
-            "sbBeganFbLive": "{{userName}} bắt đầu phát sóng cuộc gọi này trên Facebook",
-            "sbStoppedFbLive": "{{userName}} ngừng phát cuộc gọi này trên Facebook",
-            "youBeganFbLive": "Bạn đã bắt đầu phát cuộc gọi này trên Facebook",
-            "youStoppedFbLive": "Bạn đã ngừng phát cuộc gọi này trên Facebook",
-            "youStartedLive": "Bạn đã bắt đầu phát cuộc gọi này tới RTMP tùy chỉnh",
-            "youStoppedLive": "Bạn đã ngừng phát cuộc gọi này tới RTMP tùy chỉnh",
-            "sbStartedLiveStreaming": "{{userName}} bắt đầu trực tiếp",
-            "sbStoppedLiveStreaming": "{{userName}} kết thúc trực tiếp",
-            "liveStopped": "Đã xảy ra lỗi khi gửi video đến điểm cuối",
-            "youBeganVideoRecording": "Bạn đã bắt đầu ghi lại hội nghị này",
-            "youStoppedVideoRecording": "Bạn đã dừng ghi lại hội nghị này",
-            "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
-            "codeCopiedToCb": "Đã sao chép mã vào khay nhớ tạm",
-            "userHasNoVideo": "Người tham gia không có video",
-            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị.",
-            "allowedVideoLimit": "Chỉ cho phép {{limit}} video trong phòng này",
-            "allowedAudioLimit": "Phòng này chỉ cho phép {{limit}} micrô"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Cài đặt video",
-            "webCamera": "máy ảnh web",
-            "screenSharing": "Chia sẻ màn hình",
-            "shareAnotherScreen": "Chia sẻ màn hình khác",
-            "turnOffCameras": "Tắt máy ảnh",
-            "turnOffVideo": "Tắt máy ảnh\/chia sẻ màn hình",
-            "turnOffAudioInput": "Tắt tiếng micrô",
-            "turnOffScreenSharing": "Tắt chia sẻ màn hình",
-            "cameraIsTurnedOff": "Máy ảnh đã tắt",
-            "micIsTurnedOff": "Micrô đã tắt",
-            "startFBLive": "Bắt đầu phát trực tiếp trên Facebook",
-            "stopFBLive": "Dừng phát trực tiếp trên Facebook",
-            "startRecording": "Bắt đầu ghi âm",
-            "stopRecording": "Dừng ghi âm",
-            "start": "Bắt đầu",
-            "stop": "Dừng lại",
-            "recordingInProgress": "Quá trình ghi đang diễn ra...",
-            "fbLiveTitle": "Tiêu đề của buổi phát trực tiếp",
-            "fbLiveDescription": "Mô tả Livestream của bạn. Nó nói về cái gì?",
-            "fbOnlyMeLiveAccess": "Chỉ có tôi",
-            "fbFriendsAccess": "Bạn",
-            "fbPublicAccess": "Công cộng",
-            "publishOnTimeline": "Xuất bản trên dòng thời gian",
-            "publishToGroup": "Xuất bản lên nhóm",
-            "fbStartLive": "Chưa lên",
-            "fbStopLive": "Kết thúc phát trực tiếp",
-            "streamingSettings": "Cài đặt",
-            "manageStream": "Quản lý phát trực tiếp",
-            "fbEmbedCode": "Nhúng",
-            "copy": "Sao chép",
-            "streamToRTMP": "Truyền phát tới RTMP tùy chỉnh",
-            "startBroadcasting": "Bắt đầu phát sóng",
-            "broadcastingInProgress": "Đang phát sóng"
-        },
-        "audioSettings": {
-            "dialogTitle": "Cài đặt âm thanh",
-            "speakers": "Diễn giả",
-            "microphone": "Cái mic cờ rô"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Quản lý phát sóng"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Cài đặt người tham gia",
-            "disconnect": "Ngắt kết nối",
-            "floatingScreens": "Màn hình nổi",
-            "tiledScreens": "Màn hình lát gạch",
-            "loudestExceptMe": "To nhất trừ tôi",
-            "maximizeLoudest": "Phóng to nhất",
-            "staticMaximized": "Tối đa hóa tĩnh",
-            "fullScreen": "Toàn màn hình",
-            "manual": "Thủ công",
-            "turnOffCamera": "Ẩn video",
-            "turnOffAudio": "Tắt tiếng",
-            "turnOffScreenSharing": "Ẩn chia sẻ màn hình",
-            "turnOnCamera": "Hiển thị video",
-            "turnOnAudio": "Bật âm thanh",
-            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình"
-        },
-        "streamingSettings": {
-            "title": "trực tiếp"
-        },
-        "preview": {
-            "Meeting": "Hội nghị từ xa",
-            "MeetingEnded": "Hội nghị truyền hình đã kết thúc"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Yêu cầu nói",
-            "msg": "Hiện tại có {{count}} người đang phát biểu trong cuộc họp. Bạn có muốn thay thế một trong số họ sau khi cho phép họ nói xong {{seconds}} giây không?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Được mời",
@@ -471,10 +323,6 @@
             "displayType": "Cuộc hội thoại",
             "description": "một cuộc trò chuyện giữa những người dùng, với lịch sử"
         },
-        "Media\/WebRTC": {
-            "displayType": "Hội nghị từ xa",
-            "description": "hội nghị truyền hình\/âm thanh trực tuyến"
-        },
         "Streams\/question": {
             "displayType": "Câu hỏi",
             "description": "luồng câu hỏi",
@@ -482,12 +330,7 @@
         },
         "Streams\/answer": {
             "displayType": "Trả lời",
-            "description": "dòng câu trả lời"
-        },
-        "Media\/calls": {
-            "displayType": "cuộc gọi",
-            "description": "danh mục cho Luồng\/webrtc",
-            "MaxRelationsExceeded": "Đã vượt quá số cuộc gọi tối đa"
+            "description": "luồng câu trả lời"
         }
     },
     "menu": {
@@ -495,7 +338,7 @@
         "ModTab": "Sửa đổi mục",
         "Save": "Cứu",
         "Delete": "Xóa bỏ",
-        "Submenu": "menu phụ"
+        "Submenu": "menu con"
     },
     "audio": {
         "record": "Ghi",
@@ -607,7 +450,7 @@
         "WaitingRoom": "Phòng chờ",
         "LiveRoom": "phòng trực tiếp",
         "interviewedByAnotherHost": "Hiện đang được phỏng vấn bởi một máy chủ khác",
-        "bringToLive": "Mang đến buổi biểu diễn trực tiếp",
+        "bringToLive": "Mang Đến Chương Trình Trực Tiếp",
         "putOnHold": "Hoãn lại",
         "endCall": "Kết thúc cuộc gọi",
         "interview": "Phỏng vấn",

@@ -88,7 +88,7 @@
         "command": "მოიწვიე",
         "Invite": "მოიწვიე",
         "Share": "გააზიარეთ",
-        "messageContent": "{{displayName}} მოგიწვიათ {{inviteUrl}} ში",
+        "messageContent": "{{displayName}} მოგიწვიათ {{inviteUrl}} ზე",
         "youCanNowPaste": "ახლა შეგიძლიათ ჩასვათ ეს ბმული სადმე ხალხის მოსაწვევად",
         "roles": {
             "title": "მიენიჭოთ როლები მოწვეულ მომხმარებლებს?",
@@ -111,7 +111,7 @@
             "selectFromContacts": "აირჩიეთ კონტაქტებიდან",
             "userChooserPlaceholder": "მოძებნეთ სახელით",
             "photo": "Გადაიღეთ სურათი",
-            "photoOf": "გადაიღეთ {{name}} ფოტო",
+            "photoOf": "გადაიღეთ {{name}} ის ფოტო",
             "photoInstruction": "თუ თქვენს თვალწინ არის ადამიანი, რომელმაც დაასკანირა თქვენი QR კოდი, გადაუღეთ მას ფოტო",
             "to": "მდე: {{Stream Title}}",
             "go": "წადი",
@@ -123,7 +123,7 @@
             "QR": "{{ClickOrTap}} QR კოდის შესაქმნელად",
             "QRtitle": "დაასკანირეთ ეს QR კოდი",
             "QRscanned": "მათ დაასკანერეს!",
-            "scannedQR": "{{ClickOrTap}} თუ კოდი იყო დასკანირებული",
+            "scannedQR": "{{ClickOrTap}} თუ კოდი დასკანირებული იყო",
             "byEmail": "ელფოსტა",
             "byText": "ტექსტი",
             "byFacebook": "ფეისბუქი",
@@ -208,154 +208,6 @@
         "Identifiers": "იდენტიფიკატორები",
         "Devices": "მოწყობილობები",
         "Streams": "ნაკადები"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "თქვენ არ გაქვთ ნებართვა შეუერთდეთ ამ ნაკადს.",
-        "streamTitle": "{{1}} დაიწყო ტელეკონფერენცია",
-        "allow": {
-            "dialogTitle": "დაკავშირება",
-            "microphoneBtn": "მიკროფონის ჩართვა",
-            "cameraBtn": "კამერის ჩართვა",
-            "cameraAndMicrophoneBtn": "ჩართეთ კამერა და მიკროფონი"
-        },
-        "preparing": {
-            "dialogTitle": "ჩართეთ\/გამორთეთ კამერა ან მიკროფონი, სანამ შეუერთდებით",
-            "micIsOff": "მიკროფონი გამორთულია",
-            "micIsOn": "მიკროფონი ჩართულია",
-            "cameraIsOff": "კამერა გამორთულია",
-            "cameraIsOn": "კამერა ჩართულია",
-            "screenSharingIsOn": "ეკრანის გაზიარება ჩართულია",
-            "screenSharingIsOff": "ეკრანის გაზიარება",
-            "joinNow": "შეუერთდი ზარს"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "ინსტრუქციები",
-            "permissionDenied": "ნებართვა {{kind}} ზე უარყოფილია. მის გამოსაყენებლად, მიჰყევით ამ ნაბიჯებს:",
-            "point1": "გადადით &quot;პარამეტრები&quot; -&gt; &quot;გაფართოებული&quot; -&gt; &quot;კონფიდენციალურობა და უსაფრთხოება&quot; -&gt; &quot;საიტის პარამეტრები&quot; -&gt; &quot;კამერა&quot; ან &quot;საიტის პარამეტრები&quot; -&gt; &quot;მიკროფონი&quot;",
-            "point2": "ამოიღეთ {{hostname}} &quot;ბლოკის&quot; სიიდან"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "ინსტრუქციები",
-            "permissionDenied": "ნებართვა {{kind}} ზე უარყოფილია. გთხოვთ, გადატვირთოთ ეს გვერდი და დაადასტუროთ წვდომა {{kind}} ზე, რათა შეუერთდეთ კონფერენციას."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "ინსტრუქციები",
-            "permissionDenied": "ნებართვა {{kind}} ზე უარყოფილია. მის გამოსაყენებლად, მიჰყევით ამ ნაბიჯებს:",
-            "point1": "გადადით თქვენს Android პარამეტრებში",
-            "point2": "გახსენით &quot;აპები და შეტყობინებები&quot;",
-            "point3": "იპოვეთ &quot; {{communityName}} &quot; და გახსენით იგი",
-            "point4": "შეეხეთ ნებართვებს",
-            "point5": "ჩართეთ {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "ინსტრუქციები",
-            "permissionDenied": "ნებართვა {{kind}} ზე უარყოფილია. მის გამოსაყენებლად, მიჰყევით ამ ნაბიჯებს:",
-            "point1": "გადადით თქვენს iOS პარამეტრებში",
-            "point2": "გახსენით &quot;კონფიდენციალურობა&quot;",
-            "point3": "იპოვე {{kind}} და გახსენი",
-            "point4": "იპოვეთ &quot; {{communityName}} &quot; და ჩართეთ"
-        },
-        "fbLive": {
-            "dialogTitle": "ფეისბუქის პირდაპირი ტრანსლაცია დაიწყო"
-        },
-        "notices": {
-            "youJoinedRoom": "შენ შეუერთდი ოთახს",
-            "joining": "გაწევრიანება: {{userName}}",
-            "sbLeftRoom": "{{userName}} ოთახიდან გავიდა",
-            "switchingRoom": "გადართვის ოთახი...",
-            "forceDisconnecting": "5 წამში გაითიშება",
-            "forceDisconnectingImmediately": "თქვენ გათიშა მასპინძელმა",
-            "youLeftRoom": "ოთახიდან გამოხვედი",
-            "codeCopied": "ოთახიდან გამოხვედი",
-            "sbBeganFbLive": "{{userName}} დაიწყო ამ ზარის მაუწყებლობა ფეისბუქზე",
-            "sbStoppedFbLive": "{{userName}} შეწყვიტა ამ ზარის მაუწყებლობა ფეისბუქზე",
-            "youBeganFbLive": "თქვენ დაიწყეთ ამ ზარის მაუწყებლობა ფეისბუქზე",
-            "youStoppedFbLive": "თქვენ შეწყვიტეთ ამ ზარის მაუწყებლობა Facebook-ზე",
-            "youStartedLive": "თქვენ დაიწყეთ ამ ზარის მაუწყებლობა მორგებულ RTMP-ზე",
-            "youStoppedLive": "თქვენ შეწყვიტეთ ამ ზარის მაუწყებლობა მორგებულ RTMP-ზე",
-            "sbStartedLiveStreaming": "{{userName}} დაიწყო პირდაპირ ეთერში",
-            "sbStoppedLiveStreaming": "{{userName}} დასრულდა პირდაპირ ეთერში",
-            "liveStopped": "მოხდა შეცდომა ვიდეოს საბოლოო წერტილში გაგზავნისას",
-            "youBeganVideoRecording": "თქვენ დაიწყეთ ამ კონფერენციის ჩაწერა",
-            "youStoppedVideoRecording": "თქვენ შეწყვიტეთ ამ კონფერენციის ჩაწერა",
-            "linkCopiedToCb": "ბმული კოპირებულია ბუფერში",
-            "codeCopiedToCb": "კოდი კოპირებულია ბუფერში",
-            "userHasNoVideo": "მონაწილეს არ აქვს ვიდეო",
-            "openInBrowserAlert": "გახსენით ბმული Safari ბრაუზერში, რათა შეუერთდეთ კონფერენციას.",
-            "allowedVideoLimit": "ამ ოთახში დაშვებულია მხოლოდ {{limit}} ვიდეო",
-            "allowedAudioLimit": "ამ ოთახში დაშვებულია მხოლოდ {{limit}} მიკროფონი"
-        },
-        "settingsPopup": {
-            "dialogTitle": "ვიდეოს პარამეტრები",
-            "webCamera": "Ვებ კამერა",
-            "screenSharing": "ეკრანის გაზიარება",
-            "shareAnotherScreen": "გააზიარეთ სხვა ეკრანი",
-            "turnOffCameras": "გამორთეთ კამერა",
-            "turnOffVideo": "გამორთეთ კამერა\/ეკრანის გაზიარება",
-            "turnOffAudioInput": "მიკროფონის დადუმება",
-            "turnOffScreenSharing": "ეკრანის გაზიარების გამორთვა",
-            "cameraIsTurnedOff": "კამერა გამორთულია",
-            "micIsTurnedOff": "მიკროფონი გამორთულია",
-            "startFBLive": "დაიწყეთ Facebook Livestream",
-            "stopFBLive": "შეაჩერე Facebook Livestream",
-            "startRecording": "ჩაწერის დაწყება",
-            "stopRecording": "ჩაწერის შეწყვეტა",
-            "start": "დაწყება",
-            "stop": "გაჩერდი",
-            "recordingInProgress": "მიმდინარეობს ჩაწერა...",
-            "fbLiveTitle": "Livestream-ის სათაური",
-            "fbLiveDescription": "აღწერეთ თქვენი Livestream. Რის შესახებაა?",
-            "fbOnlyMeLiveAccess": "Მხოლოდ მე",
-            "fbFriendsAccess": "Მეგობრები",
-            "fbPublicAccess": "საჯარო",
-            "publishOnTimeline": "გამოაქვეყნეთ ვადებში",
-            "publishToGroup": "გამოქვეყნება ჯგუფში",
-            "fbStartLive": "გადადით პირდაპირ ეთერში",
-            "fbStopLive": "დაასრულეთ Livestream",
-            "streamingSettings": "პარამეტრები",
-            "manageStream": "მართეთ Livestream",
-            "fbEmbedCode": "ჩაშენება",
-            "copy": "კოპირება",
-            "streamToRTMP": "სტრიმინგი მორგებულ RTMP-ზე",
-            "startBroadcasting": "დაიწყეთ მაუწყებლობა",
-            "broadcastingInProgress": "მაუწყებლობა მიმდინარეობს"
-        },
-        "audioSettings": {
-            "dialogTitle": "აუდიო პარამეტრები",
-            "speakers": "სპიკერები",
-            "microphone": "მიკროფონი"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "მაუწყებლობის მართვა"
-        },
-        "participantsPopup": {
-            "dialogTitle": "მონაწილის პარამეტრები",
-            "disconnect": "გათიშვა",
-            "floatingScreens": "მცურავი ეკრანები",
-            "tiledScreens": "კრამიტით მოპირკეთებული ეკრანები",
-            "loudestExceptMe": "ყველაზე ხმამაღალი ჩემს გარდა",
-            "maximizeLoudest": "მაქსიმალურად ხმამაღალი",
-            "staticMaximized": "სტატიკური მაქსიმალური",
-            "fullScreen": "Მთლიანი ეკრანი",
-            "manual": "სახელმძღვანელო",
-            "turnOffCamera": "ვიდეოს დამალვა",
-            "turnOffAudio": "აუდიოს დადუმება",
-            "turnOffScreenSharing": "ეკრანის გაზიარების დამალვა",
-            "turnOnCamera": "ვიდეოს ჩვენება",
-            "turnOnAudio": "აუდიოს დადუმების მოხსნა",
-            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება"
-        },
-        "streamingSettings": {
-            "title": "Პირდაპირი ეთერი"
-        },
-        "preview": {
-            "Meeting": "ტელეკონფერენცია",
-            "MeetingEnded": "ტელეკონფერენცია დასრულდა"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "საუბრის მოთხოვნა",
-            "msg": "შეხვედრაზე ამჟამად {{count}} ადამიანი საუბრობს. გსურთ შეცვალოთ ერთი მათგანი მას შემდეგ, რაც მათ {{seconds}} წამის მიცემას მისცემთ საუბრის დასრულების შემდეგ?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -465,15 +317,11 @@
         },
         "Streams\/incoming": {
             "displayType": "შემომავალი",
-            "description": "სხვა მომხმარებლების მიერ გაგზავნილი შეტყობინებების დანიშნულება"
+            "description": "დანიშნულება სხვა მომხმარებლების მიერ გაგზავნილი შეტყობინებებისთვის"
         },
         "Streams\/chat": {
             "displayType": "Საუბარი",
             "description": "საუბარი მომხმარებლებს შორის, ისტორიასთან"
-        },
-        "Media\/WebRTC": {
-            "displayType": "ტელეკონფერენცია",
-            "description": "ონლაინ ვიდეო\/აუდიო კონფერენცია"
         },
         "Streams\/question": {
             "displayType": "Კითხვა",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "უპასუხე",
             "description": "პასუხების ნაკადი"
-        },
-        "Media\/calls": {
-            "displayType": "რეკავს",
-            "description": "კატეგორია Media\/WebRTC-ისთვის",
-            "MaxRelationsExceeded": "ზარების მაქსიმუმი გადააჭარბა"
         }
     },
     "menu": {

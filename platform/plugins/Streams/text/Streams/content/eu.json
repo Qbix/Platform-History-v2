@@ -107,7 +107,7 @@
         "dialog": {
             "chooseFromContacts": "Aukeratu zure kontaktuetatik",
             "chooseAgainFromContacts": "Aukeratu Berriro Kontaktuetatik",
-            "inviteSelectedContacts": "Gonbidatu hautatutako kontaktuak",
+            "inviteSelectedContacts": "Gonbidatu Hautatutako Kontaktuak",
             "selectFromContacts": "Hautatu Kontaktuetatik",
             "userChooserPlaceholder": "Bilatu izenaren arabera",
             "photo": "Argazkia atera",
@@ -156,7 +156,7 @@
             "content": "{{title}} gonbidatu zaituzte. Mesedez, sakatu {{url}}"
         },
         "notice": {
-            "text": "Gonbidatu zaituzte. {{ClickOrTap}} hona onartzeko eta bat egiteko."
+            "text": "Gonbidatu zaituzte. {{ClickOrTap}} hona onartzeko eta sartzeko."
         }
     },
     "messages": {
@@ -182,7 +182,7 @@
         "mobile": {
             "alert": "Gonbidapenak gure zenbakitik bidaltzen dira, zure lagunek oraindik ezagutzen ez dutena. Jarraitu testu azkar batekin gonbidapena zuregandik etorri dela jakinarazteko, estekan klik egiteko eskatuz.",
             "confirm": "Gonbidapenak gure zenbakitik bidaltzen dira, zure lagunek oraindik ezagutzen ez dutena. Testu azkar batekin jarraitu nahi al duzu gonbidapena zuregandik etorri dela jakinarazteko, estekan klik egiteko eskatuz.",
-            "check": "Aizu, gonbidapen bat bidali dizut {{app}} aplikaziora. Mesedez, egiaztatu zure sms eta egin klik estekan!",
+            "check": "Aizu, gonbidapena bidali berri dizut {{app}} aplikaziora. Mesedez, egiaztatu zure sms eta egin klik estekan!",
             "CheckYourMobile": "Mesedez, egiaztatu SMSak eta jarraitu argibideak!"
         },
         "email": {
@@ -209,154 +209,6 @@
         "Devices": "Gailuak",
         "Streams": "Errekak"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
-        "streamTitle": "{{1}} Telekonferentzia bat hasi zuen",
-        "allow": {
-            "dialogTitle": "Konektatzen",
-            "microphoneBtn": "Gaitu Mikrofonoa",
-            "cameraBtn": "Gaitu kamera",
-            "cameraAndMicrophoneBtn": "Gaitu kamera eta mikrofonoa"
-        },
-        "preparing": {
-            "dialogTitle": "Aktibatu\/itzali kamera edo mikrofonoa sartu aurretik",
-            "micIsOff": "Mikrofonoa itzalita dago",
-            "micIsOn": "Mikrofonoa piztuta dago",
-            "cameraIsOff": "Kamera itzalita dago",
-            "cameraIsOn": "Kamera piztuta dago",
-            "screenSharingIsOn": "Pantaila partekatzea aktibatuta dago",
-            "screenSharingIsOff": "Partekatu pantaila",
-            "joinNow": "Bat egin Deialdira"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Argibideak",
-            "permissionDenied": "{{kind}} baimena ukatu egin da. Erabiltzeko, jarraitu urrats hauek:",
-            "point1": "Joan &quot;Ezarpenak&quot; -&gt; &quot;Aurreratua&quot; -&gt; &quot;Pribatutasuna eta segurtasuna&quot; -&gt; &quot;Gunearen ezarpenak&quot; -&gt; &quot;Kamera&quot; edo &quot;Gunearen ezarpenak&quot; -&gt; &quot;Mikrofonoa&quot;",
-            "point2": "Kendu {{hostname}} &quot;Blokeatu&quot; zerrendatik"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Argibideak",
-            "permissionDenied": "{{kind}} baimena ukatu egin da. Mesedez, berriro kargatu orrialde hau eta berretsi {{kind}} sarbidea konferentzian sartzeko."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Argibideak",
-            "permissionDenied": "{{kind}} baimena ukatu egin da. Erabiltzeko, jarraitu urrats hauek:",
-            "point1": "Joan zure Android ezarpenetara",
-            "point2": "Ireki &quot;Aplikazioak eta jakinarazpenak&quot;",
-            "point3": "Bilatu &quot; {{communityName}} &quot; eta ireki",
-            "point4": "Sakatu Baimenak",
-            "point5": "Gaitu {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Argibideak",
-            "permissionDenied": "{{kind}} baimena ukatu egin da. Erabiltzeko, jarraitu urrats hauek:",
-            "point1": "Joan zure iOS ezarpenetara",
-            "point2": "Ireki &quot;Pribatutasuna&quot;",
-            "point3": "Aurkitu {{kind}} eta ireki",
-            "point4": "Bilatu &quot; {{communityName}} &quot; eta gaitu"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebookeko zuzeneko erreprodukzioa hasi zen"
-        },
-        "notices": {
-            "youJoinedRoom": "Gelan sartu zara",
-            "joining": "Batasuna: {{userName}}",
-            "sbLeftRoom": "{{userName}} gelatik irten zen",
-            "switchingRoom": "Gela aldatzen...",
-            "forceDisconnecting": "5 segundo barru deskonektatuko zara",
-            "forceDisconnectingImmediately": "Ostalari batek deskonektatu zaitu",
-            "youLeftRoom": "Gelatik irten zinen",
-            "codeCopied": "Gelatik irten zinen",
-            "sbBeganFbLive": "{{userName}} dei hau Facebooken igortzen hasi zen",
-            "sbStoppedFbLive": "{{userName}} dei hau Facebook-en igortzeari utzi zion",
-            "youBeganFbLive": "Dei hau Facebook-en igortzen hasi zinen",
-            "youStoppedFbLive": "Dei hau Facebook-en igortzeari utzi diozu",
-            "youStartedLive": "Dei hau RTMP pertsonalizatura igortzen hasi zara",
-            "youStoppedLive": "Deia RTMP pertsonalizatura igortzeari utzi diozu",
-            "sbStartedLiveStreaming": "{{userName}} zuzenean hasi zen",
-            "sbStoppedLiveStreaming": "{{userName}} zuzenean amaitu zen",
-            "liveStopped": "Errore bat gertatu da bideoa amaiera puntura bidaltzean",
-            "youBeganVideoRecording": "Jardunaldi hau grabatzen hasi zinen",
-            "youStoppedVideoRecording": "Konferentzia hau grabatzeari utzi diozu",
-            "linkCopiedToCb": "Esteka arbelean kopiatu da",
-            "codeCopiedToCb": "Kopiatu da kodea arbelean",
-            "userHasNoVideo": "Parte hartzaileak ez du bideorik",
-            "openInBrowserAlert": "Ireki esteka Safari arakatzailean konferentzian sartzeko.",
-            "allowedVideoLimit": "Gela honetan {{limit}} bideo bakarrik onartzen dira",
-            "allowedAudioLimit": "Gela honetan {{limit}} mikrofono bakarrik onartzen dira"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Bideo ezarpenak",
-            "webCamera": "Web Kamera",
-            "screenSharing": "Pantaila partekatzea",
-            "shareAnotherScreen": "Partekatu beste pantaila bat",
-            "turnOffCameras": "Itzali kamera",
-            "turnOffVideo": "Desaktibatu kamera\/pantaila partekatzea",
-            "turnOffAudioInput": "Ezkutatu mikrofonoa",
-            "turnOffScreenSharing": "Desaktibatu pantaila partekatzea",
-            "cameraIsTurnedOff": "Kamera itzalita dago",
-            "micIsTurnedOff": "Mikrofonoa itzalita dago",
-            "startFBLive": "Hasi Facebook Livestream",
-            "stopFBLive": "Gelditu Facebook Livestream",
-            "startRecording": "Hasi Grabatzen",
-            "stopRecording": "Gelditu grabaketa",
-            "start": "Hasi",
-            "stop": "Gelditu",
-            "recordingInProgress": "Grabaketa abian da...",
-            "fbLiveTitle": "Livestream-en izenburua",
-            "fbLiveDescription": "Deskribatu zure zuzeneko igorpena. Zertaz ari da?",
-            "fbOnlyMeLiveAccess": "Ni bakarrik",
-            "fbFriendsAccess": "Lagunak",
-            "fbPublicAccess": "Publiko",
-            "publishOnTimeline": "Argitaratu denbora-lerroan",
-            "publishToGroup": "Argitaratu taldean",
-            "fbStartLive": "Joan Zuzenean",
-            "fbStopLive": "Amaitu zuzeneko igorpena",
-            "streamingSettings": "Ezarpenak",
-            "manageStream": "Kudeatu zuzeneko igorpena",
-            "fbEmbedCode": "Kapsulatu",
-            "copy": "Kopiatu",
-            "streamToRTMP": "Igorri RTMP pertsonalizatura",
-            "startBroadcasting": "Hasi emititzen",
-            "broadcastingInProgress": "Emisioa abian da"
-        },
-        "audioSettings": {
-            "dialogTitle": "Audio ezarpenak",
-            "speakers": "Hizlariak",
-            "microphone": "Mikrofonoa"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Kudeatu Igorpena"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Parte-hartzaileen ezarpenak",
-            "disconnect": "Deskonektatu",
-            "floatingScreens": "Pantaila flotagarriak",
-            "tiledScreens": "Lauza-pantailak",
-            "loudestExceptMe": "Ozenena Ni ezik",
-            "maximizeLoudest": "Maximizatu ozenena",
-            "staticMaximized": "Maximizatu estatikoa",
-            "fullScreen": "Pantaila osoa",
-            "manual": "Eskuliburua",
-            "turnOffCamera": "Ezkutatu bideoa",
-            "turnOffAudio": "Ezkutatu audioa",
-            "turnOffScreenSharing": "Ezkutatu pantaila partekatzea",
-            "turnOnCamera": "Erakutsi bideoa",
-            "turnOnAudio": "Aktibatu audioa",
-            "turnOnScreenSharing": "Erakutsi pantaila partekatzea"
-        },
-        "streamingSettings": {
-            "title": "Zuzeneko igorpena"
-        },
-        "preview": {
-            "Meeting": "Telekonferentzia",
-            "MeetingEnded": "Telekonferentzia amaitu zen"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Hitz egiteko eskaera",
-            "msg": "Gaur egun, {{count}} pertsona daude hitz egiten bileran. Horietako bat ordezkatu nahi al duzu hitz egiten amaitzeko {{seconds}} segundo eman ondoren?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Gonbidatua",
@@ -364,7 +216,7 @@
         },
         "Streams\/resource": {
             "displayType": "Baliabidea",
-            "description": "baliabide baterako sarbidea kudeatzeko eta eguneratzeei buruzko mezuak argitaratzeko korrontea"
+            "description": "baliabide baterako sarbidea kudeatzeko eta eguneratzeei buruzko mezuak bidaltzeko korrontea"
         },
         "Streams\/task": {
             "description": "ataza jakin baten aurrerapenari buruzko eguneraketak jasotzeko",
@@ -412,7 +264,7 @@
         },
         "Streams\/text\/url": {
             "displayType": "URLa",
-            "description": "esteka sarean"
+            "description": "esteka webean"
         },
         "Streams\/image": {
             "displayType": "Irudia",
@@ -471,10 +323,6 @@
             "displayType": "Elkarrizketa",
             "description": "erabiltzaileen arteko elkarrizketa, historiarekin"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telekonferentzia",
-            "description": "lineako bideo\/audiokonferentzia bat"
-        },
         "Streams\/question": {
             "displayType": "Galdera",
             "description": "galdera-jarioa",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Erantzun",
             "description": "erantzun korrontea"
-        },
-        "Media\/calls": {
-            "displayType": "Deiak",
-            "description": "Media\/WebRTC kategorian",
-            "MaxRelationsExceeded": "Gehienezko deiak gainditu dira"
         }
     },
     "menu": {

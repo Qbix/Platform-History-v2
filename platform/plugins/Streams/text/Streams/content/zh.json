@@ -182,7 +182,7 @@
         "mobile": {
             "alert": "邀请是从我们的号码发送的，您的朋友还不知道。跟进快速文本，让他们知道邀请来自您，要求他们单击链接。",
             "confirm": "邀请是从我们的号码发送的，您的朋友还不知道。你想跟进一个快速的文本，让他们知道邀请来自你，要求他们点击链接。",
-            "check": "嘿，我刚刚向你发送了{{app}}应用程序的邀请。请查看您的短信并点击链接！",
+            "check": "嘿，我刚刚向你发送了{{app}}应用程序的邀请。请检查您的短信并点击链接！",
             "CheckYourMobile": "请查看短信并按照说明操作！"
         },
         "email": {
@@ -208,154 +208,6 @@
         "Identifiers": "身份标识",
         "Devices": "设备",
         "Streams": "溪流"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "您无权加入此信息流。",
-        "streamTitle": "{{1}}开始电话会议",
-        "allow": {
-            "dialogTitle": "连接中",
-            "microphoneBtn": "启用麦克风",
-            "cameraBtn": "启用相机",
-            "cameraAndMicrophoneBtn": "启用摄像头和麦克风"
-        },
-        "preparing": {
-            "dialogTitle": "加入前打开\/关闭摄像头或麦克风",
-            "micIsOff": "麦克风已关闭",
-            "micIsOn": "麦克风开启",
-            "cameraIsOff": "相机已关闭",
-            "cameraIsOn": "相机开启",
-            "screenSharingIsOn": "屏幕共享已开启",
-            "screenSharingIsOff": "共享屏幕",
-            "joinNow": "加入通话"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
-            "point1": "转到“设置”-&gt;“高级”-&gt;“隐私和安全”-&gt;“网站设置”-&gt;“相机”或“网站设置”-&gt;“麦克风”",
-            "point2": "从“阻止”列表中删除{{hostname}}"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}}的权限被拒绝。请重新加载此页面并确认访问{{kind}}以加入会议。"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
-            "point1": "转到您的 Android 设置",
-            "point2": "打开“应用和通知”",
-            "point3": "找到“ {{communityName}} ”并打开",
-            "point4": "点击权限",
-            "point5": "启用{{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "指示",
-            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
-            "point1": "转到您的 iOS 设置",
-            "point2": "打开“隐私”",
-            "point3": "找到{{kind}}并打开它",
-            "point4": "找到“ {{communityName}} ”并启用"
-        },
-        "fbLive": {
-            "dialogTitle": "脸书直播开始"
-        },
-        "notices": {
-            "youJoinedRoom": "你加入了房间",
-            "joining": "加入人数： {{userName}}",
-            "sbLeftRoom": "{{userName}}离开房间",
-            "switchingRoom": "切换室...",
-            "forceDisconnecting": "您将在 5 秒内断开连接",
-            "forceDisconnectingImmediately": "你被主机断开了",
-            "youLeftRoom": "你离开了房间",
-            "codeCopied": "你离开了房间",
-            "sbBeganFbLive": "{{userName}}开始在 Facebook 上广播此电话",
-            "sbStoppedFbLive": "{{userName}}停止在 Facebook 上广播此电话",
-            "youBeganFbLive": "您开始在 Facebook 广播此通话",
-            "youStoppedFbLive": "您已停止在 Facebook 广播此通话",
-            "youStartedLive": "您开始将此调用广播到自定义 RTMP",
-            "youStoppedLive": "您已停止将此调用广播到自定义 RTMP",
-            "sbStartedLiveStreaming": "{{userName}}开始直播",
-            "sbStoppedLiveStreaming": "{{userName}}直播结束",
-            "liveStopped": "向端点发送视频时出错",
-            "youBeganVideoRecording": "您开始录制此会议",
-            "youStoppedVideoRecording": "您已停止录制此会议",
-            "linkCopiedToCb": "链接已复制到剪贴板",
-            "codeCopiedToCb": "代码复制到剪贴板",
-            "userHasNoVideo": "参与者没有视频",
-            "openInBrowserAlert": "在 Safari 浏览器中打开链接以加入会议。",
-            "allowedVideoLimit": "此房间仅允许播放{{limit}}视频",
-            "allowedAudioLimit": "这个房间只允许{{limit}}麦克风"
-        },
-        "settingsPopup": {
-            "dialogTitle": "视频设置",
-            "webCamera": "网络摄像头",
-            "screenSharing": "屏幕共享",
-            "shareAnotherScreen": "共享另一个屏幕",
-            "turnOffCameras": "关闭相机",
-            "turnOffVideo": "关闭相机\/屏幕共享",
-            "turnOffAudioInput": "静音麦克风",
-            "turnOffScreenSharing": "关闭屏幕共享",
-            "cameraIsTurnedOff": "相机已关闭",
-            "micIsTurnedOff": "麦克风已关闭",
-            "startFBLive": "开始 Facebook 直播",
-            "stopFBLive": "停止 Facebook 直播",
-            "startRecording": "开始录音",
-            "stopRecording": "停止录音",
-            "start": "开始",
-            "stop": "停止",
-            "recordingInProgress": "正在录制中...",
-            "fbLiveTitle": "直播标题",
-            "fbLiveDescription": "描述您的直播。它是关于什么的？",
-            "fbOnlyMeLiveAccess": "只有我",
-            "fbFriendsAccess": "朋友们",
-            "fbPublicAccess": "民众",
-            "publishOnTimeline": "在时间轴上发布",
-            "publishToGroup": "发布到群组",
-            "fbStartLive": "上线",
-            "fbStopLive": "结束直播",
-            "streamingSettings": "设置",
-            "manageStream": "管理直播",
-            "fbEmbedCode": "嵌入",
-            "copy": "复制",
-            "streamToRTMP": "流式传输到自定义 RTMP",
-            "startBroadcasting": "开始广播",
-            "broadcastingInProgress": "广播进行中"
-        },
-        "audioSettings": {
-            "dialogTitle": "音频设置",
-            "speakers": "音箱",
-            "microphone": "麦克风"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "管理广播"
-        },
-        "participantsPopup": {
-            "dialogTitle": "参与者设置",
-            "disconnect": "断开",
-            "floatingScreens": "浮动屏幕",
-            "tiledScreens": "平铺屏幕",
-            "loudestExceptMe": "除了我最响",
-            "maximizeLoudest": "最大化最响",
-            "staticMaximized": "静态最大化",
-            "fullScreen": "全屏",
-            "manual": "手动的",
-            "turnOffCamera": "隐藏视频",
-            "turnOffAudio": "静音",
-            "turnOffScreenSharing": "隐藏屏幕共享",
-            "turnOnCamera": "显示视频",
-            "turnOnAudio": "取消静音",
-            "turnOnScreenSharing": "显示屏幕共享"
-        },
-        "streamingSettings": {
-            "title": "现场直播"
-        },
-        "preview": {
-            "Meeting": "电话会议",
-            "MeetingEnded": "电话会议结束"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "请求发言",
-            "msg": "目前有{{count}}人在会上发言。在让他们说完{{seconds}}秒后，你想更换其中一个吗？"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -443,8 +295,8 @@
             "newItem": "添加视频"
         },
         "Streams\/pdf": {
-            "displayType": "PDF文档",
-            "description": "PDF文件",
+            "displayType": "PDF文件",
+            "description": "PDF文档",
             "newItem": "添加PDF"
         },
         "Streams\/live": {
@@ -471,10 +323,6 @@
             "displayType": "对话",
             "description": "用户之间的对话，具有历史记录"
         },
-        "Media\/WebRTC": {
-            "displayType": "电话会议",
-            "description": "在线视频\/音频会议"
-        },
         "Streams\/question": {
             "displayType": "问题",
             "description": "问题流",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "回答",
             "description": "答案流"
-        },
-        "Media\/calls": {
-            "displayType": "来电",
-            "description": "Media\/WebRTC 类别",
-            "MaxRelationsExceeded": "超出最大通话次数"
         }
     },
     "menu": {
@@ -588,7 +431,7 @@
         "TitleRequired": "标题必填！",
         "AlreadyAnswered": "已经回答",
         "TitlePlaceholder": "输入您的问题",
-        "ContentPlaceholder": "在此处放置任何其他信息以帮助人们回答",
+        "ContentPlaceholder": "将任何其他信息放在这里以帮助人们回答",
         "ErrorTitle": "需要提问",
         "Placeholder": "占位符",
         "AreYouSure": "你确定吗？"

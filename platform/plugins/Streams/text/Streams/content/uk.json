@@ -209,154 +209,6 @@
         "Devices": "Пристрої",
         "Streams": "Потоки"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цього потоку.",
-        "streamTitle": "{{1}} почав телеконференцію",
-        "allow": {
-            "dialogTitle": "Підключення",
-            "microphoneBtn": "Увімкнути мікрофон",
-            "cameraBtn": "Увімкнути камеру",
-            "cameraAndMicrophoneBtn": "Увімкніть камеру та мікрофон"
-        },
-        "preparing": {
-            "dialogTitle": "Перш ніж приєднатися, увімкніть або вимкніть камеру або мікрофон",
-            "micIsOff": "Мікрофон вимкнено",
-            "micIsOn": "Мікрофон увімкнено",
-            "cameraIsOff": "Камера вимкнена",
-            "cameraIsOn": "Камера включена",
-            "screenSharingIsOn": "Показ екрана ввімкнено",
-            "screenSharingIsOff": "Поділитися екраном",
-            "joinNow": "Приєднуйтесь до виклику"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Інструкції",
-            "permissionDenied": "Дозвіл для {{kind}} відхилено. Щоб використовувати його, виконайте такі дії:",
-            "point1": "Перейдіть до «Налаштування» -&gt; «Додатково» -&gt; «Конфіденційність і безпека» -&gt; «Налаштування сайту» -&gt; «Камера» або «Налаштування сайту» -&gt; «Мікрофон»",
-            "point2": "Видалити {{hostname}} зі списку &quot;Заблокувати&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Інструкції",
-            "permissionDenied": "Дозвіл для {{kind}} відхилено. Перезавантажте цю сторінку та підтвердьте доступ до {{kind}} , щоб приєднатися до конференції."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Інструкції",
-            "permissionDenied": "Дозвіл для {{kind}} відхилено. Щоб використовувати його, виконайте такі дії:",
-            "point1": "Перейдіть у налаштування Android",
-            "point2": "Відкрийте «Програми та сповіщення»",
-            "point3": "Знайдіть « {{communityName}} » і відкрийте його",
-            "point4": "Торкніться Дозволи",
-            "point5": "Увімкнути {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Інструкції",
-            "permissionDenied": "Дозвіл для {{kind}} відхилено. Щоб використовувати його, виконайте такі дії:",
-            "point1": "Перейдіть до налаштувань iOS",
-            "point2": "Відкрийте «Конфіденційність»",
-            "point3": "Знайдіть {{kind}} і відкрийте його",
-            "point4": "Знайдіть « {{communityName}} » і ввімкніть"
-        },
-        "fbLive": {
-            "dialogTitle": "Почалася пряма трансляція у Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "Ви приєдналися до кімнати",
-            "joining": "Приєднання: {{userName}}",
-            "sbLeftRoom": "{{userName}} вийшли з кімнати",
-            "switchingRoom": "Перехідна кімната...",
-            "forceDisconnecting": "Вас буде відключено протягом 5 секунд",
-            "forceDisconnectingImmediately": "Вас від’єднав хост",
-            "youLeftRoom": "Ви вийшли з кімнати",
-            "codeCopied": "Ви вийшли з кімнати",
-            "sbBeganFbLive": "{{userName}} почав транслювати цей дзвінок у Facebook",
-            "sbStoppedFbLive": "{{userName}} припинив трансляцію цього дзвінка у Facebook",
-            "youBeganFbLive": "Ви почали транслювати цей дзвінок у Facebook",
-            "youStoppedFbLive": "Ви припинили трансляцію цього дзвінка у Facebook",
-            "youStartedLive": "Ви почали трансляцію цього виклику на спеціальний RTMP",
-            "youStoppedLive": "Ви припинили трансляцію цього виклику на спеціальний RTMP",
-            "sbStartedLiveStreaming": "{{userName}} почав ефір",
-            "sbStoppedLiveStreaming": "{{userName}} закінчився в прямому ефірі",
-            "liveStopped": "Під час надсилання відео до кінцевої точки сталася помилка",
-            "youBeganVideoRecording": "Ви почали запис цієї конференції",
-            "youStoppedVideoRecording": "Ви припинили запис цієї конференції",
-            "linkCopiedToCb": "Посилання скопійовано в буфер обміну",
-            "codeCopiedToCb": "Код скопійовано в буфер обміну",
-            "userHasNoVideo": "В учасника немає відео",
-            "openInBrowserAlert": "Відкрийте посилання в браузері Safari, щоб приєднатися до конференції.",
-            "allowedVideoLimit": "У цій кімнаті дозволено лише {{limit}} відео",
-            "allowedAudioLimit": "У цій кімнаті дозволено лише {{limit}} мікрофонів"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Налаштування відео",
-            "webCamera": "веб-камера",
-            "screenSharing": "Спільний доступ до екрана",
-            "shareAnotherScreen": "Поділіться іншим екраном",
-            "turnOffCameras": "Вимкніть камеру",
-            "turnOffVideo": "Вимкніть спільний доступ до камери\/екрана",
-            "turnOffAudioInput": "Вимкнути мікрофон",
-            "turnOffScreenSharing": "Вимкніть спільний доступ до екрана",
-            "cameraIsTurnedOff": "Камера вимкнена",
-            "micIsTurnedOff": "Мікрофон вимкнено",
-            "startFBLive": "Запустіть пряму трансляцію Facebook",
-            "stopFBLive": "Зупинити пряму трансляцію Facebook",
-            "startRecording": "Почати запис",
-            "stopRecording": "Зупинити запис",
-            "start": "старт",
-            "stop": "СТІЙ",
-            "recordingInProgress": "Триває запис...",
-            "fbLiveTitle": "Назва прямого ефіру",
-            "fbLiveDescription": "Опишіть свою пряму трансляцію. Про що це?",
-            "fbOnlyMeLiveAccess": "Тільки я",
-            "fbFriendsAccess": "друзі",
-            "fbPublicAccess": "Громадський",
-            "publishOnTimeline": "Опублікувати на шкалі часу",
-            "publishToGroup": "Опублікувати в групі",
-            "fbStartLive": "Йти жити",
-            "fbStopLive": "Завершити пряму трансляцію",
-            "streamingSettings": "Налаштування",
-            "manageStream": "Керувати прямою трансляцією",
-            "fbEmbedCode": "Вставити",
-            "copy": "Копія",
-            "streamToRTMP": "Потокова передача на спеціальний RTMP",
-            "startBroadcasting": "Почати трансляцію",
-            "broadcastingInProgress": "Трансляція триває"
-        },
-        "audioSettings": {
-            "dialogTitle": "Параметри звуку",
-            "speakers": "Доповідачі",
-            "microphone": "мікрофон"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Керувати трансляцією"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Налаштування учасника",
-            "disconnect": "Відключити",
-            "floatingScreens": "Плаваючі екрани",
-            "tiledScreens": "Плиткові екрани",
-            "loudestExceptMe": "Найгучніший, крім мене",
-            "maximizeLoudest": "Збільшити найгучніше",
-            "staticMaximized": "Статичний розгорнутий",
-            "fullScreen": "Повноекранний",
-            "manual": "Інструкція",
-            "turnOffCamera": "Приховати відео",
-            "turnOffAudio": "Вимкнути звук",
-            "turnOffScreenSharing": "Приховати спільний доступ до екрана",
-            "turnOnCamera": "Показати відео",
-            "turnOnAudio": "Увімкнути звук",
-            "turnOnScreenSharing": "Показати спільний доступ до екрана"
-        },
-        "streamingSettings": {
-            "title": "Наживо"
-        },
-        "preview": {
-            "Meeting": "Телеконференція",
-            "MeetingEnded": "Телеконференція завершена"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Запит на виступ",
-            "msg": "Зараз на засіданні виступає {{count}} осіб. Ви бажаєте замінити одного з них після того, як дасте їм {{seconds}} секунд, щоб закінчити говорити?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Запрошений",
@@ -471,10 +323,6 @@
             "displayType": "Розмова",
             "description": "розмова між користувачами з історією"
         },
-        "Media\/WebRTC": {
-            "displayType": "Телеконференція",
-            "description": "онлайн-відео\/аудіоконференція"
-        },
         "Streams\/question": {
             "displayType": "Питання",
             "description": "потік запитань",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Відповідь",
             "description": "потік відповідей"
-        },
-        "Media\/calls": {
-            "displayType": "Дзвінки",
-            "description": "категорія для Media\/WebRTC",
-            "MaxRelationsExceeded": "Перевищено максимальну кількість викликів"
         }
     },
     "menu": {

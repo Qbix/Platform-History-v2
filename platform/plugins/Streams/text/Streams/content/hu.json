@@ -35,7 +35,7 @@
         "Unlisted": "Nem listázott"
     },
     "chat": {
-        "flaggedForAdminReview": "Az üzenet adminisztrátori ellenőrzésre meg lett jelölve. Koppintson újra a megjelölés megszüntetéséhez.",
+        "flaggedForAdminReview": "Az üzenet meg lett jelölve adminisztrátori felülvizsgálatra. Koppintson újra a megjelölés megszüntetéséhez.",
         "noOneSaid": "Senki nem mondott semmit",
         "closeChatButton": "Csevegés bezárása",
         "closeChatConfirmTitle": "Bezárja ezt a csevegést?",
@@ -71,7 +71,7 @@
         "Streams\/invite": "Meghívást kaptál {{& stream.fields.title}}",
         "Streams\/announcement": "Bejelentés {{& stream.fields.title}} -ben",
         "Streams\/access": "{{&call 'avatar.displayName'}} hozzáférést változtatott {{& stream.fields.title}} ben",
-        "Streams\/chat\/edit": "{{& stream.fields.title}} ben szerkesztett csevegőüzenet",
+        "Streams\/chat\/edit": "{{& stream.fields.title}} -ben szerkesztett csevegőüzenet",
         "Streams\/chat\/remove": "A csevegőüzenet {{& stream.fields.title}} -ben eltávolítva",
         "Streams\/closed": "{{stream.fields.title}} bezárva",
         "Streams\/task\/progress": "Előrelépés {{stream.fields.title}} -ben",
@@ -94,7 +94,7 @@
             "title": "Szerepeket biztosít a meghívott felhasználóknak?",
             "NotAuthorizedToGrantRole": {
                 "title": "Sajnálom",
-                "alert": "Nincs jogosultsága ennek a szerepkörnek a megadására"
+                "alert": "Nincs jogosultsága ennek a szerepnek a megadására"
             },
             "NotAuthorizedToRemoveRole": {
                 "title": "Sajnálom",
@@ -208,154 +208,6 @@
         "Identifiers": "Azonosítók",
         "Devices": "Eszközök",
         "Streams": "Streamek"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "Nincs engedélye, hogy csatlakozzon ehhez a falhoz.",
-        "streamTitle": "{{1}} Telekonferenciát indított",
-        "allow": {
-            "dialogTitle": "Csatlakozás",
-            "microphoneBtn": "Mikrofon engedélyezése",
-            "cameraBtn": "Kamera engedélyezése",
-            "cameraAndMicrophoneBtn": "Kamera és mikrofon engedélyezése"
-        },
-        "preparing": {
-            "dialogTitle": "Csatlakozás előtt kapcsolja be\/ki a kamerát vagy a mikrofont",
-            "micIsOff": "A mikrofon ki van kapcsolva",
-            "micIsOn": "A mikrofon be van kapcsolva",
-            "cameraIsOff": "A kamera ki van kapcsolva",
-            "cameraIsOn": "A kamera be van kapcsolva",
-            "screenSharingIsOn": "A képernyőmegosztás be van kapcsolva",
-            "screenSharingIsOff": "Képernyő megosztása",
-            "joinNow": "Csatlakozzon a felhíváshoz"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Utasítás",
-            "permissionDenied": "A {{kind}} es engedély megtagadva. A használatához kövesse az alábbi lépéseket:",
-            "point1": "Lépjen a &quot;Beállítások&quot; -&gt; &quot;Speciális&quot; -&gt; &quot;Adatvédelem és biztonság&quot; -&gt; &quot;Webhelybeállítások&quot; -&gt; &quot;Kamera&quot; vagy &quot;Webhelybeállítások&quot; -&gt; &quot;Mikrofon&quot; menüpontra.",
-            "point2": "Távolítsa el {{hostname}} a &quot;Block&quot; listáról"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Utasítás",
-            "permissionDenied": "A {{kind}} es engedély megtagadva. Kérjük, töltse be újra ezt az oldalt, és erősítse meg {{kind}} hez való hozzáférést a konferenciához való csatlakozáshoz."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Utasítás",
-            "permissionDenied": "A {{kind}} es engedély megtagadva. A használatához kövesse az alábbi lépéseket:",
-            "point1": "Nyissa meg az Android beállításait",
-            "point2": "Nyissa meg az „Alkalmazások és értesítések” elemet",
-            "point3": "Keresse meg a „ {{communityName}} ”-et, és nyissa meg",
-            "point4": "Érintse meg az Engedélyek elemet",
-            "point5": "{{kind}} engedélyezése"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Utasítás",
-            "permissionDenied": "A {{kind}} es engedély megtagadva. A használatához kövesse az alábbi lépéseket:",
-            "point1": "Nyissa meg az iOS beállításait",
-            "point2": "Nyissa meg az &quot;Adatvédelem&quot; elemet",
-            "point3": "Keresse meg {{kind}} , és nyissa meg",
-            "point4": "Keresse meg a &quot; {{communityName}} &quot;-et és engedélyezze"
-        },
-        "fbLive": {
-            "dialogTitle": "Elindult a Facebook élő közvetítés"
-        },
-        "notices": {
-            "youJoinedRoom": "Belépett a szobába",
-            "joining": "Csatlakozás: {{userName}}",
-            "sbLeftRoom": "{{userName}} hagyták el a szobát",
-            "switchingRoom": "Szobaváltás...",
-            "forceDisconnecting": "A kapcsolat 5 másodpercen belül megszakad",
-            "forceDisconnectingImmediately": "Egy házigazda megszakította a kapcsolatot",
-            "youLeftRoom": "Kimentél a szobából",
-            "codeCopied": "Kimentél a szobából",
-            "sbBeganFbLive": "{{userName}} elkezdte sugározni ezt a felhívást a Facebookon",
-            "sbStoppedFbLive": "{{userName}} leállította ennek a hívásnak a sugárzását a Facebookon",
-            "youBeganFbLive": "Elkezdted sugározni ezt a hívást a Facebookon",
-            "youStoppedFbLive": "Leállítottad ennek a hívásnak a közvetítését a Facebookon",
-            "youStartedLive": "Elkezdte sugározni ezt a hívást egyéni RTMP-nek",
-            "youStoppedLive": "Leállította ennek a hívásnak az egyéni RTMP-re történő sugárzását",
-            "sbStartedLiveStreaming": "{{userName}} élőben indult",
-            "sbStoppedLiveStreaming": "{{userName}} élőben ért véget",
-            "liveStopped": "Hiba történt a videó végpontra való küldése közben",
-            "youBeganVideoRecording": "Elkezdte rögzíteni ezt a konferenciát",
-            "youStoppedVideoRecording": "Leállítottad a konferencia rögzítését",
-            "linkCopiedToCb": "Link a vágólapra másolva",
-            "codeCopiedToCb": "A kód a vágólapra másolva",
-            "userHasNoVideo": "A résztvevőnek nincs videója",
-            "openInBrowserAlert": "A konferenciához való csatlakozáshoz nyissa meg a hivatkozást a Safari böngészőben.",
-            "allowedVideoLimit": "Ebben a szobában csak {{limit}} videó engedélyezett",
-            "allowedAudioLimit": "Ebben a szobában csak {{limit}} mikrofon megengedett"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Videó beállítások",
-            "webCamera": "Webkamera",
-            "screenSharing": "Képernyőmegosztás",
-            "shareAnotherScreen": "Másik képernyő megosztása",
-            "turnOffCameras": "Kapcsolja ki a kamerát",
-            "turnOffVideo": "Kapcsolja ki a kamera\/képernyő megosztását",
-            "turnOffAudioInput": "Mikrofon némítása",
-            "turnOffScreenSharing": "Kapcsolja ki a képernyőmegosztást",
-            "cameraIsTurnedOff": "A kamera ki van kapcsolva",
-            "micIsTurnedOff": "A mikrofon ki van kapcsolva",
-            "startFBLive": "Indítsa el a Facebook élő közvetítését",
-            "stopFBLive": "Állítsa le a Facebook élő közvetítését",
-            "startRecording": "Felvétel megkezdése",
-            "stopRecording": "Felvétel leállítása",
-            "start": "Rajt",
-            "stop": "Állj meg",
-            "recordingInProgress": "Felvétel folyamatban...",
-            "fbLiveTitle": "Az élő közvetítés címe",
-            "fbLiveDescription": "Ismertesse az élő közvetítést. Miről szól?",
-            "fbOnlyMeLiveAccess": "Csak én",
-            "fbFriendsAccess": "Barátok",
-            "fbPublicAccess": "Nyilvános",
-            "publishOnTimeline": "Közzététel az idővonalon",
-            "publishToGroup": "Közzététel csoportban",
-            "fbStartLive": "Élesben",
-            "fbStopLive": "Élő közvetítés befejezése",
-            "streamingSettings": "Beállítások",
-            "manageStream": "Élő közvetítés kezelése",
-            "fbEmbedCode": "Beágyaz",
-            "copy": "Másolat",
-            "streamToRTMP": "Adatfolyam egyéni RTMP-re",
-            "startBroadcasting": "Indítsa el a közvetítést",
-            "broadcastingInProgress": "A közvetítés folyamatban van"
-        },
-        "audioSettings": {
-            "dialogTitle": "Hangbeállítások",
-            "speakers": "Hangszórók",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Adás kezelése"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Résztvevő beállításai",
-            "disconnect": "Leválasztás",
-            "floatingScreens": "Lebegő képernyők",
-            "tiledScreens": "Csempézett képernyők",
-            "loudestExceptMe": "A leghangosabb, kivéve engem",
-            "maximizeLoudest": "Maximális hangerő",
-            "staticMaximized": "Statikus maximalizált",
-            "fullScreen": "Teljes képernyő",
-            "manual": "Kézikönyv",
-            "turnOffCamera": "Videó elrejtése",
-            "turnOffAudio": "Hang némítása",
-            "turnOffScreenSharing": "Képernyőmegosztás elrejtése",
-            "turnOnCamera": "Videó megjelenítése",
-            "turnOnAudio": "Hang némításának feloldása",
-            "turnOnScreenSharing": "Képernyőmegosztás megjelenítése"
-        },
-        "streamingSettings": {
-            "title": "Élő adás"
-        },
-        "preview": {
-            "Meeting": "Telekonferencia",
-            "MeetingEnded": "A telekonferencia véget ért"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Beszédkérés",
-            "msg": "Jelenleg {{count}} en beszélnek az ülésen. Le szeretné cserélni az egyiket, miután {{seconds}} másodpercet hagyott nekik a beszéd befejezésére?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -471,10 +323,6 @@
             "displayType": "Beszélgetés",
             "description": "a felhasználók közötti beszélgetés előzményekkel"
         },
-        "Media\/WebRTC": {
-            "displayType": "Telekonferencia",
-            "description": "online video\/audio konferencia"
-        },
         "Streams\/question": {
             "displayType": "Kérdés",
             "description": "kérdésfolyam",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Válasz",
             "description": "válaszfolyam"
-        },
-        "Media\/calls": {
-            "displayType": "Hívások",
-            "description": "kategória a Media\/WebRTC számára",
-            "MaxRelationsExceeded": "A hívások maximális száma túllépve"
         }
     },
     "menu": {
