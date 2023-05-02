@@ -10,7 +10,11 @@
 		},
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["Assets/before/Q_responseExtras"],
-			"Streams/create/Assets/service": ["Assets/before/Streams_create_Assets_service"]
+			"Streams/create/Assets/service": ["Assets/before/Streams_create_Assets_service"],
+			"Streams/Stream/save/Assets/NFT": ["Assets/before/Streams_manage_Assets_NFT"],
+			"Streams/close/Assets/NFT": ["Assets/before/Streams_manage_Assets_NFT"],
+			"Streams/Stream/save/Assets/NFT/series": ["Assets/before/Streams_manage_Assets_NFT_series"],
+			"Streams/close/Assets/NFT/series": ["Assets/before/Streams_manage_Assets_NFT_series"]
 		},
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
@@ -29,7 +33,7 @@
 			"Assets/billing": { "module": "Assets", "action": "billing" },
 			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
 			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
-			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
+			"Assets/NFTcollections": {"module": "Assets", "action": "NFTcollections"},
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"assetsIcons": { "module": "Assets", "action": "icons" },
@@ -342,7 +346,7 @@
 					"icon": "Streams/file"
 				}
 			},
-			"Assets/contest": {
+			"Assets/NFT/collection": {
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -351,7 +355,7 @@
 					"icon": "Streams/category"
 				}
 			},
-			"Assets/contest/round": {
+			"Assets/collection/round": {
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -364,12 +368,11 @@
 		"possibleUserStreams": {
 			"Assets/user/NFTs": true,
 			"Assets/NFT/contracts": true,
-			"Assets/NFT/series": true,
-			"Assets/contests": true
+			"Assets/NFT/series": true
 		},
 		"onInsert": {
-			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/contests"],
-			"person": []
+			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/NFT/collections"],
+			"person": ["Assets/NFT/series"]
 		}
 	},
 	"Assets": {

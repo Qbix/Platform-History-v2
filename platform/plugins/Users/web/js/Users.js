@@ -2493,7 +2493,7 @@
 		 * @static
 		 * @param {Element} trigger the button
 		 * @param {Element} container 
-		 * @param {Object} trigger
+		 * @param {Object} options
 		 */
 		coverPhoto: function (trigger, container, options) {
 			var userId = Q.Users.loggedInUserId();

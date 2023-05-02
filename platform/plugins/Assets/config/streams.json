@@ -40,12 +40,12 @@
     "writeLevel": 10,
     "adminLevel": 0
   },
-  "Assets/contests": {
+  "Assets/NFT/collections": {
     "type": "Streams/category",
-    "title": "Community contests",
+    "title": "NFT collections",
     "icon": "",
     "readLevel": 40,
-    "writeLevel": 10,
+    "writeLevel": 23,
     "adminLevel": 0
   }
 }

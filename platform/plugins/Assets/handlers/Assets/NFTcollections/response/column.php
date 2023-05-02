@@ -1,21 +1,21 @@
 <?php
-function Assets_NFTcontests_response_column () {
-	$loggedInUser = Users::loggedInUser(true);
+function Assets_NFTcollections_response_column () {
+	/*$loggedInUser = Users::loggedInUser(true);
 	$loggedInUserId = Q::ifset($loggedInUser, 'id', null);
 	$isAdmin = (bool)Users::roles(null, 'Users/admins');
 	if (!$isAdmin) {
 		throw new Users_Exception_NotAuthorized();
-	}
+	}*/
 
-	Q_Response::addScript("{{Assets}}/js/columns/NFTcontests.js");
-	Q_Response::addStylesheet("{{Assets}}/css/columns/NFTcontests.css");
+	Q_Response::addScript("{{Assets}}/js/columns/NFTcollections.js");
+	Q_Response::addStylesheet("{{Assets}}/css/columns/NFTcollections.css");
 
 	$communityId = Users::communityId();
 	$text = Q_Text::get("Assets/content");
-	$title = Q::ifset($text, "NFT", "contests", "Title", null);
-	$description = Q::ifset($text, "NFT", "contests", "Description", null);
-	$keywords = Q::ifset($text, "NFT", "contests", "Keywords", null);
-	$url = Q_Uri::url("Assets/NFTcontests");
+	$title = Q::ifset($text, "NFT", "collections", "Title", null);
+	$description = Q::ifset($text, "NFT", "collections", "Description", null);
+	$keywords = Q::ifset($text, "NFT", "collections", "Keywords", null);
+	$url = Q_Uri::url("Assets/NFTcollections");
 	$image = Q_Uri::interpolateUrl('{{baseUrl}}/img/icon/400.png');
 	Q_Response::setMeta(array(
 		array('name' => 'name', 'value' => 'title', 'content' => $title),
@@ -35,9 +35,9 @@ function Assets_NFTcontests_response_column () {
 		array('name' => 'property', 'value' => 'twitter:card', 'content' => 'summary')
 	));
 
-	$column = Q::view('Assets/column/NFTcontests.php', @compact("loggedInUserId", "communityId"));
+	$column = Q::view('Assets/column/NFTcollections.php', @compact("loggedInUserId", "communityId"));
 
-	$url = Q_Uri::url("Assets/NFTcontests");
+	$url = Q_Uri::url("Assets/NFTcollections");
 	$columnsStyle = Q_Config::get(
 		'Q', 'response', 'layout', 'columns', 'style', 'classic'
 	);
@@ -47,7 +47,7 @@ function Assets_NFTcontests_response_column () {
 		$showControls = Q_Config::get('Assets', 'NFTprofile', 'controls', true);
 		$controls = $showControls ? Q::view('Assets/controls/NFTprofile.php') : null;
 	}*/
-	Assets::$columns['NFTcontests'] = array(
+	Assets::$columns['NFTcollections'] = array(
 		'title' => $title,
 		'column' => $column,
 		'columnClass' => 'Assets_column_'.$columnsStyle,

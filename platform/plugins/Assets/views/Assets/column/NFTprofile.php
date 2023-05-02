@@ -18,47 +18,42 @@
 	</div>
 
 	<!-- Social icons, quick links -->
-	<ul class="header-list-social">
-		<li>
-			<?php
-			$facebook = Q::ifset($xids, 'facebook/'.$app, null);
-			if ($self || $facebook) {
-				echo '<i class="Communities_social_icon" data-type="facebook" data-connected="'.$facebook.'"></i>';
-			}?>
-		</li>
-		<li>
-			<?php
-			$twitter = Q::ifset($xids, 'twitter/'.$app, null);
-			if ($self || $twitter) {
-				echo '<i class="Communities_social_icon" data-type="twitter" data-connected="'.$twitter.'"></i>';
-			}
-			?>
-		</li>
-		<li>
-			<?php
-			$linkedin = Q::ifset($xids, 'linkedin/'.$app, null);
-			if ($self || $linkedin) {
-				echo '<i class="Communities_social_icon" data-type="linkedin" data-connected="'.$linkedin.'"></i>';
-			}
-			?>
-		</li>
-		<li>
-			<?php
-			$github = Q::ifset($xids, 'github/'.$app, null);
-			if ($self || $github) {
-				echo '<i class="Communities_social_icon" data-type="github" data-connected="'.$github.'"></i>';
-			}
-			?>
-		</li>
-		<li>
-			<?php
-			$instagram = Q::ifset($xids, 'instagram/'.$app, null);
-			if ($self || $instagram) {
-				echo '<i class="Communities_social_icon" data-type="instagram" data-connected="'.$instagram.'"></i>';
-			}
-			?>
-		</li>
-	</ul>
+    <ul class="header-list-items">
+        <li>
+            <div class="Communities_profile" data-val="social">
+				<?php
+				$facebook = Q::ifset($xids, 'facebook/'.$app, null);
+				if ($self || $facebook) {
+					echo '<i class="Communities_social_icon" data-type="facebook" data-connected="'.$facebook.'"></i>';
+				}
+
+				$twitter = Q::ifset($xids, 'twitter/'.$app, null);
+				if ($self || $twitter) {
+					echo '<i class="Communities_social_icon" data-type="twitter" data-connected="'.$twitter.'"></i>';
+				}
+
+				$linkedin = Q::ifset($xids, 'linkedin/'.$app, null);
+				if ($self || $linkedin) {
+					echo '<i class="Communities_social_icon" data-type="linkedin" data-connected="'.$linkedin.'"></i>';
+				}
+
+				$github = Q::ifset($xids, 'github/'.$app, null);
+				if ($self || $github) {
+					echo '<i class="Communities_social_icon" data-type="github" data-connected="'.$github.'"></i>';
+				}
+
+				$instagram = Q::ifset($xids, 'instagram/'.$app, null);
+				if ($self || $instagram) {
+					echo '<i class="Communities_social_icon" data-type="instagram" data-connected="'.$instagram.'"></i>';
+				}
+				?>
+            </div>
+        </li>
+        <!--<li class="followers <?php echo ($followers["res"] ? "Q_selected" : "") ?>"><?php echo $NFT["Followers"] ?> <span><?php echo $followers["followers"]?></span></li>
+        <li class="follow"><a href="#" class="follow-btn"><?php echo $NFT["Follow"] ?></a></li>
+        <li class="following"><?php echo $NFT["Following"] ?> <span><?php echo $following ?></span></li>//-->
+    </ul>
+
 	<div class="profile-block">
 		<div class="profile-name">
 			<?php echo Q::tool("Users/avatar", array(

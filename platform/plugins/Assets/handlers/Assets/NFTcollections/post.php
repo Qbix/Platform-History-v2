@@ -1,5 +1,5 @@
 <?php
-function Assets_NFTseries_post ($params) {
+function Assets_NFTcollections_post ($params) {
 	$req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array("publisherId", "streamName"), $req, true);
 	$loggedInUserId = Users::loggedInUser(true)->id;
@@ -13,6 +13,6 @@ function Assets_NFTseries_post ($params) {
 
 	$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 
-	$fields = Q::take($req, array("title"));
-	Assets_NFT_Series::update($stream, $fields);
+	$fields = Q::take($req, array("title", "content", "attributes"));
+	Assets_NFT_Collections::update($stream, $fields);
 }
