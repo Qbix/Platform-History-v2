@@ -42,7 +42,8 @@ Base.tableClasses = [
 	"Users_Total",
 	"Users_User",
 	"Users_Vote",
-	"Users_Web3"
+	"Users_Web3",
+	"Users_Web3Transaction"
 ];
 
 /**
