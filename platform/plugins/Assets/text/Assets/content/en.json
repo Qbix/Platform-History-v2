@@ -59,8 +59,8 @@
         "EnterAmount": "enter amount"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "InvitedUserFilledStream": "{{invitedUserName}} filled {{FilledStreamTitle}}",
+        "InviteAcceptedBy": "Invite accepted by {{displayName}}",
+        "InvitedUserFilledStream": "{{displayName}} filled {{FilledStreamTitle}}",
         "ForFillingStream": "For filling {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "You have {{amount}} credits to start",
         "PaymentFor": "Payment for \"{{1}}\"",

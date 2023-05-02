@@ -802,7 +802,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$iconSmall = self::normalizeHref(Q::ifset($siteData, 'iconSmall', null), $url);
 		$contentType = Q::ifset($siteData, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
-		$streamIcon = $iconBig ? $iconBig : Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
+		$streamIcon = null;
 
 		// special interest stream for websites/webpage stream
 		$port = Q::ifset($urlParsed, 'port', null);
@@ -835,15 +835,25 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 			if (Q_Valid::url($iconSmall)) {
 				try {
-					$result = Users::importIcon($interestStream, array(
-						'32.png' => $iconSmall
-					), $interestStream->iconDirectory());
+					if (pathinfo($iconSmall, PATHINFO_EXTENSION) == 'svg') {
+						$directory = $interestStream->iconDirectory();
+						Q_Utils::canWriteToPath($directory, null, true);
+						$fileName = $directory.DS.'icon.svg';
+						file_put_contents($fileName, file_get_contents($iconSmall));
+						$head = APP_FILES_DIR.DS.Q::app().DS.'uploads';
+						$tail = str_replace(DS, '/', substr($fileName, strlen($head)));
+						$interestStream->icon = '{{baseUrl}}/Q/uploads' . $tail;
+					} else {
+						$result = Users::importIcon($interestStream, array(
+							'32.png' => $iconSmall
+						), $interestStream->iconDirectory());
+					}
 				} catch (Exception $e) {
 
 				}
 			}
 
-			if (empty($result)) {
+			if (empty($result) && $streamIcon) {
 				$interestStream->icon = $streamIcon;
 				$interestStream->setAttribute('iconSize', 40);
 			} else {
@@ -864,7 +874,6 @@ class Websites_Webpage extends Base_Websites_Webpage
             'attributes' => array(
                 'url' => $url,
                 'urlParsed' => $urlParsed,
-                'image' => $iconBig,
                 'host' => $host,
                 'port' => $port,
                 'copyright' => $copyright,
@@ -894,6 +903,9 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'relatedParams' => $relatedParams
             ));
         }
+
+		// try to import icon from $iconBig
+		self::importIcon($iconBig, $webpageStream);
 
 		// grant access to this stream for logged user
 		$streamsAccess = new Streams_Access();
@@ -988,7 +1000,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 */
 	static function importIcon ($url, $stream) {
 		if (!Q_Valid::url($url)) {
-			return;
+			return false;
 		}
 
 		$icon = file_get_contents($url);
@@ -1002,6 +1014,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 				'subpath' => Q_Utils::splitId($stream->publisherId, 3, '/')."/".$stream->name."/icon/".time(),
 				'save' => "Websites/image"
 			));
+			return true;
 		}
+		return false;
 	}
 }
