@@ -645,9 +645,7 @@ Q.Tool.define({
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
 	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
-	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
-	"Media/calls": "{{Streams}}/js/tools/calls.js",
-	"Media/calls/call": "{{Streams}}/js/tools/call.js"
+	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js"
 });
 
 Streams.Chat = {
