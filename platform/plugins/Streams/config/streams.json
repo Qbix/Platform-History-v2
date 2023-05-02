@@ -301,13 +301,5 @@
 		"type": "Streams/album",
 		"title": "Quotes",
 		"icon": ""
-	},
-	"Media/calls/main": {
-		"type": "Media/calls",
-		"title": "Calls",
-		"icon": "Streams/category",
-		"readLevel": 40,
-		"writeLevel": 23,
-		"adminLevel": 20
 	}
 }

@@ -622,9 +622,6 @@
 				"Streams/user/xid/web3",
 				"Streams/user/interests",
 				"Streams/image/album"
-			],
-			"community": [
-				"Media/calls/main"
 			]
 		},
 		"onUpdate": { /* streams to update when a row is updated */
