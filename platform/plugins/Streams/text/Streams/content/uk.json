@@ -471,7 +471,7 @@
             "displayType": "Розмова",
             "description": "розмова між користувачами з історією"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Телеконференція",
             "description": "онлайн-відео\/аудіоконференція"
         },
@@ -484,9 +484,9 @@
             "displayType": "Відповідь",
             "description": "потік відповідей"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Дзвінки",
-            "description": "категорія для Streams\/webrtc",
+            "description": "категорія для Media\/WebRTC",
             "MaxRelationsExceeded": "Перевищено максимальну кількість викликів"
         }
     },

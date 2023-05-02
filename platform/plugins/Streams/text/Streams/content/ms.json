@@ -471,7 +471,7 @@
             "displayType": "Perbualan",
             "description": "perbualan antara pengguna, dengan sejarah"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telesidang",
             "description": "persidangan video\/audio dalam talian"
         },
@@ -484,7 +484,7 @@
             "displayType": "Jawab",
             "description": "aliran jawapan"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Panggilan",
             "description": "kategori untuk Strim\/webrtc",
             "MaxRelationsExceeded": "Panggilan maksimum melebihi"

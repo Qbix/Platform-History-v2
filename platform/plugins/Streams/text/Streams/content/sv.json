@@ -471,7 +471,7 @@
             "displayType": "Konversation",
             "description": "en konversation mellan användare, med historik"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telefonkonferens",
             "description": "en video-\/ljudkonferens online"
         },
@@ -484,9 +484,9 @@
             "displayType": "Svar",
             "description": "svarsström"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Samtal",
-            "description": "kategori för Streams\/webrtc",
+            "description": "kategori för Media\/WebRTC",
             "MaxRelationsExceeded": "Max antal samtal har överskridits"
         }
     },

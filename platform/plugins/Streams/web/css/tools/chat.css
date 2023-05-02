@@ -196,7 +196,7 @@
 	cursor: none;
 	pointer-events: none;
 }
-.Streams_chat_tool .Streams_webrtc_preview_tool .Streams_preview_icon {
+.Streams_chat_tool .Media_webrtc_preview_tool .Streams_preview_icon {
 	display: none;
 }
 

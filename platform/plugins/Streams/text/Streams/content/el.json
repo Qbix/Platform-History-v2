@@ -471,7 +471,7 @@
             "displayType": "Συνομιλία",
             "description": "μια συνομιλία μεταξύ των χρηστών, με το ιστορικό"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Τηλεδιάσκεψη",
             "description": "μια διαδικτυακή διάσκεψη βίντεο\/ήχου"
         },
@@ -484,7 +484,7 @@
             "displayType": "Απάντηση",
             "description": "ροή απαντήσεων"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "κλήσεις",
             "description": "κατηγορία για Ροές\/webrtc",
             "MaxRelationsExceeded": "Υπέρβαση του μέγιστου αριθμού κλήσεων"

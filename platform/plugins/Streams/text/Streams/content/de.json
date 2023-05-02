@@ -471,7 +471,7 @@
             "displayType": "Gespräch",
             "description": "ein Gespräch zwischen Benutzern, mit Geschichte"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telefonkonferenz",
             "description": "eine Online-Video-\/Audiokonferenz"
         },
@@ -484,9 +484,9 @@
             "displayType": "Antworten",
             "description": "Antwort-Stream"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Anrufe",
-            "description": "Kategorie für Streams\/webrtc",
+            "description": "Kategorie für Media\/WebRTC",
             "MaxRelationsExceeded": "Max. Aufrufe überschritten"
         }
     },

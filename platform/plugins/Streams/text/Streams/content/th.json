@@ -471,7 +471,7 @@
             "displayType": "การสนทนา",
             "description": "การสนทนาระหว่างผู้ใช้พร้อมประวัติ"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "การประชุมทางไกล",
             "description": "การประชุมทางวิดีโอ\/เสียงออนไลน์"
         },
@@ -484,9 +484,9 @@
             "displayType": "คำตอบ",
             "description": "สตรีมคำตอบ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "โทร",
-            "description": "หมวดหมู่สำหรับ Streams\/webrtc",
+            "description": "หมวดหมู่สำหรับ Media\/WebRTC",
             "MaxRelationsExceeded": "เกินจำนวนการโทรสูงสุด"
         }
     },

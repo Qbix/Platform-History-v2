@@ -471,7 +471,7 @@
             "displayType": "Comhrá",
             "description": "comhrá idir úsáideoirí, leis an stair"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Teileachomhdháil",
             "description": "comhdháil físe\/fuaime ar líne"
         },
@@ -484,9 +484,9 @@
             "displayType": "Freagra",
             "description": "sruth freagra"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Glaonna",
-            "description": "chatagóir do Streams\/webrtc",
+            "description": "chatagóir do Media\/WebRTC",
             "MaxRelationsExceeded": "Sáraíodh uasghlaonna"
         }
     },

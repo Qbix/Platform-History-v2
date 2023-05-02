@@ -471,7 +471,7 @@
             "displayType": "Rozmowa",
             "description": "rozmowa między użytkownikami, z historią"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Konferencja telefoniczna",
             "description": "konferencję wideo\/audio online"
         },
@@ -484,7 +484,7 @@
             "displayType": "Odpowiedź",
             "description": "strumień odpowiedzi"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Połączenia",
             "description": "kategoria dla strumieni\/webrtc",
             "MaxRelationsExceeded": "Przekroczono maksymalną liczbę połączeń"

@@ -4,7 +4,7 @@
 	 * @class Streams/audio/chat
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
-	 * @param {string} [options.appendTo=bubble] Where to append preview tool in chat message:
+	 * @param {string} [options.appendTo="bubble"] Where to append preview tool in chat message:
 	 * 	bubble - inside bubble element of message,
 	 * 	message - inside message element itself
 	 */

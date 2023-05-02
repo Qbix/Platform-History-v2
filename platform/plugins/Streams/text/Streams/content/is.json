@@ -471,7 +471,7 @@
             "displayType": "Samtal",
             "description": "samtal á milli notenda, með sögu"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Fjarfundur",
             "description": "mynd-\/hljóðráðstefnu á netinu"
         },
@@ -484,9 +484,9 @@
             "displayType": "Svaraðu",
             "description": "svarstraumur"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Símtöl",
-            "description": "flokkur fyrir Streams\/webrtc",
+            "description": "flokkur fyrir Media\/WebRTC",
             "MaxRelationsExceeded": "Hámarks símtöl náð"
         }
     },

@@ -850,6 +850,7 @@
 		 * @class Assets.Currencies
 		 */
 		Currencies: {
+			
 			/**
 			 * Use this to load currency data into Q.Assets.Currencies.symbols and Q.Assets.Currencies.names
 			 * @method load
@@ -883,6 +884,31 @@
 						return;
 					}
 					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
+				});
+			},
+			/**
+			 * Get amount of tokens by wallet and chain
+			 * @method balanceOf
+			 * @param {String} userId - if null logged in user Id used
+			 * @param {String} chainId
+			 * @param {function} callback
+			 * @param {object} [options] - some options pass to getContract method
+			 * @param {string} [options.tokenAddress] - filter tokens with this contract address
+			 */
+			balanceOf: function (userId, chainId, callback, options) {
+				Q.req("Assets/balances", "balance", function (err, response) {
+					if (err) {
+						return;
+					}
+
+					var balance = response.slots.balance;
+					Q.handle(callback, null, [null, balance]);
+				}, {
+					fields: {
+						userId: userId || Q.Users.loggedInUserId(),
+						chainId: chainId,
+						tokenAddresses: Q.getObject("tokenAddresses", options)
+					}
 				});
 			},
 			Web3: {
@@ -1378,35 +1404,6 @@
 			 */
 			seriesIdFromTokenId(tokenId) {
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
-			}
-		},
-		Currency: {
-			Web3: {
-				/**
-				 * Get amount of tokens by wallet and chain
-				 * @method balanceOf
-				 * @param {String} userId - if null logged in user Id used
-				 * @param {String} chainId
-				 * @param {function} callback
-				 * @param {object} [options] - some options pass to getContract method
-				 * @param {string} [options.tokenAddress] - filter tokens with this contract address
-				 */
-				balanceOf: function (userId, chainId, callback, options) {
-					Q.req("Assets/balances", "balance", function (err, response) {
-						if (err) {
-							return;
-						}
-
-						var balance = response.slots.balance;
-						Q.handle(callback, null, [null, balance]);
-					}, {
-						fields: {
-							userId: userId || Q.Users.loggedInUserId(),
-							chainId: chainId,
-							tokenAddresses: Q.getObject("tokenAddresses", options)
-						}
-					});
-				}
 			}
 		},
 		Web3: {

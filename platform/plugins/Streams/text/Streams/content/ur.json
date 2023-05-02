@@ -471,7 +471,7 @@
             "displayType": "بات چیت",
             "description": "تاریخ کے ساتھ صارفین کے درمیان گفتگو"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ٹیلی کانفرنس",
             "description": "ایک آن لائن ویڈیو\/آڈیو کانفرنس"
         },
@@ -484,7 +484,7 @@
             "displayType": "جواب دیں۔",
             "description": "جوابی سلسلہ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "کالز",
             "description": "اسٹریمز\/webrtc کے لیے زمرہ",
             "MaxRelationsExceeded": "زیادہ سے زیادہ کالز ہو گئیں۔"

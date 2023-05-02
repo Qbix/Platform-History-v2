@@ -471,7 +471,7 @@
             "displayType": "Söhbət",
             "description": "istifadəçilər arasında tarixlə söhbət"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonfrans",
             "description": "onlayn video\/audio konfrans"
         },
@@ -484,7 +484,7 @@
             "displayType": "Cavab verin",
             "description": "cavab axını"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Zənglər",
             "description": "Yayımlar\/webrtc üçün kateqoriya",
             "MaxRelationsExceeded": "Maksimum zənglər keçdi"

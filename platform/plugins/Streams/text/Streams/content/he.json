@@ -471,7 +471,7 @@
             "displayType": "שִׂיחָה",
             "description": "שיחה בין משתמשים, עם היסטוריה"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ועידה טלפונית",
             "description": "ועידת וידאו\/שמע מקוונת"
         },
@@ -484,9 +484,9 @@
             "displayType": "תשובה",
             "description": "זרם תשובות"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "שיחות",
-            "description": "קטגוריה עבור Streams\/webrtc",
+            "description": "קטגוריה עבור Media\/WebRTC",
             "MaxRelationsExceeded": "חרג ממספר השיחות"
         }
     },

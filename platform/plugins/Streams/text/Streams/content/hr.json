@@ -471,7 +471,7 @@
             "displayType": "Razgovor",
             "description": "razgovor između korisnika, s poviješću"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Telekonferencija",
             "description": "online video\/audio konferencija"
         },
@@ -484,9 +484,9 @@
             "displayType": "Odgovor",
             "description": "tok odgovora"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Pozivi",
-            "description": "kategorija za Streams\/webrtc",
+            "description": "kategorija za Media\/WebRTC",
             "MaxRelationsExceeded": "Maksimalni broj poziva premašen"
         }
     },

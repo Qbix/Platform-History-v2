@@ -471,7 +471,7 @@
             "displayType": "ውይይት",
             "description": "በተጠቃሚዎች መካከል የሚደረግ ውይይት ከታሪክ ጋር"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ቴሌ ኮንፈረንስ",
             "description": "የመስመር ላይ ቪዲዮ \/ ኦዲዮ ኮንፈረንስ"
         },
@@ -484,7 +484,7 @@
             "displayType": "መልስ",
             "description": "መልስ ዥረት"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "ጥሪዎች",
             "description": "ምድብ ለዥረቶች\/webrtc",
             "MaxRelationsExceeded": "ከፍተኛ ጥሪዎች ታልፈዋል"

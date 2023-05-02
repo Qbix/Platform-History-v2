@@ -471,7 +471,7 @@
             "displayType": "సంభాషణ",
             "description": "చరిత్రతో వినియోగదారుల మధ్య సంభాషణ"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "టెలికాన్ఫరెన్స్",
             "description": "ఆన్‌లైన్ వీడియో\/ఆడియో కాన్ఫరెన్స్"
         },
@@ -484,7 +484,7 @@
             "displayType": "సమాధానం",
             "description": "జవాబు ప్రవాహం"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "కాల్స్",
             "description": "స్ట్రీమ్‌లు\/webrtc కోసం వర్గం",
             "MaxRelationsExceeded": "గరిష్ట కాల్‌లు మించిపోయాయి"

@@ -471,7 +471,7 @@
             "displayType": "Keskustelu",
             "description": "keskustelu käyttäjien välillä historian kera"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Puhelinkonferenssi",
             "description": "online-video-\/äänikonferenssi"
         },
@@ -484,9 +484,9 @@
             "displayType": "Vastaus",
             "description": "vastausvirta"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Puhelut",
-            "description": "luokka Streams\/webrtc:lle",
+            "description": "luokka Media\/WebRTC:lle",
             "MaxRelationsExceeded": "Puhelujen enimmäismäärä ylitetty"
         }
     },

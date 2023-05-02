@@ -471,7 +471,7 @@
             "displayType": "会話",
             "description": "歴史のあるユーザー間の会話"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "電話会議",
             "description": "オンライン ビデオ\/オーディオ会議"
         },
@@ -484,9 +484,9 @@
             "displayType": "答え",
             "description": "回答の流れ"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "通話",
-            "description": "Streams\/webrtc のカテゴリ",
+            "description": "Media\/WebRTC のカテゴリ",
             "MaxRelationsExceeded": "最大呼び出し数を超えました"
         }
     },

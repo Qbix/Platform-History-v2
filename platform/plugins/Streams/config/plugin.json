@@ -19,8 +19,7 @@
 			"Users/canManageContacts": ["Streams/before/Users_canManageContacts"],
 			"Users/canManageLabels": ["Streams/before/Users_canManageLabels"],
 			"Users/User/displayName": ["Streams/before/Users_User_displayName"],
-			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"],
-			"Streams/close/Streams/webrtc/waitingRoom": ["Streams/before/Streams_close_Streams_webrtc_waitingRoom"]
+			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"]
 		},
 		"handlersAfterEvent": {
 			"Q/Plugin/install": ["Streams/after/Q_Plugin_install"],
@@ -111,12 +110,6 @@
 		},
 		"quotas": {
 			"Streams/invite": {
-				"86400": {
-					"": 10,
-					"Users/admins": 1000
-				}
-			},
-			"Streams/webrtc": {
 				"86400": {
 					"": 10,
 					"Users/admins": 1000
@@ -245,9 +238,6 @@
 				"relatedTo": {
 					"*": {
 						"description": ["Streams/content", ["notifications", "Streams/relatedTo/*"]]
-					},
-					"Streams/webrtc": {
-						"description": ["Streams/content", ["notifications", "Streams/relatedTo/Streams/call"]]
 					}
 				},
 				"relatedFrom": {
@@ -274,7 +264,7 @@
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}",
 				"participating": ["Streams/participating"]
 			},
-			"Streams/calls": {
+			"Media/calls": {
 				"create": false,
 				"edit": ["attributes"]
 			},
@@ -541,37 +531,6 @@
 					"title": "Community Greeting"
 				}
 			},
-			"Streams/webrtc": {
-				"defaults": {
-					"title": "Teleconference",
-					"icon": "Streams/webrtc"
-				},
-				"edit": ["title", "content", "attributes"],
-				"messages": {
-					"Streams/webrtc/joined": {}
-				}
-			},
-			"Streams/webrtc/livestream": {
-				"defaults": {
-					"title": "Livestream",
-					"icon": "Streams/webrtc/livestream"
-				},
-				"edit": ["title"],
-				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
-			},
-			"Streams/webrtc/chat": {
-				"defaults": {
-					"title": "Chat",
-					"icon": "Streams/chat"
-				},
-				"edit": ["title"],
-				"create": true,
-				"url": "{{baseUrl}}/livestream/{{publisherId}}/{{name}}"
-			},
-			"Streams/webrtc/callCenter/endpoint": {
-				"create": true, 
-				"edit": true
-			},
 			"Streams/user/profile": {
 				"url": "{{baseUrl}}/profile/{{publisherId}}"
 			},
@@ -665,7 +624,7 @@
 				"Streams/image/album"
 			],
 			"community": [
-				"Streams/calls/main"
+				"Media/calls/main"
 			]
 		},
 		"onUpdate": { /* streams to update when a row is updated */
@@ -730,7 +689,7 @@
 			"answered": ["Users/owners", "Users/admins"]
 		},
 		"chat": {
-			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Streams/webrtc", "Streams/question"],
+			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Streams/question"],
 			"delay": 20 /* delay between chat messages in seconds */
 		}
 	}

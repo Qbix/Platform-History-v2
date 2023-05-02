@@ -302,8 +302,8 @@
 		"title": "Quotes",
 		"icon": ""
 	},
-	"Streams/calls/main": {
-		"type": "Streams/calls",
+	"Media/calls/main": {
+		"type": "Media/calls",
 		"title": "Calls",
 		"icon": "Streams/category",
 		"readLevel": 40,

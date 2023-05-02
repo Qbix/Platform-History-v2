@@ -471,7 +471,7 @@
             "displayType": "Konuşma",
             "description": "geçmişi olan kullanıcılar arasında bir konuşma"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "Tele konferans",
             "description": "çevrimiçi bir video\/ses konferansı"
         },
@@ -484,7 +484,7 @@
             "displayType": "Cevap",
             "description": "cevap akışı"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "Aramalar",
             "description": "Akışlar\/webrtc kategorisi",
             "MaxRelationsExceeded": "Maksimum çağrı aşıldı"

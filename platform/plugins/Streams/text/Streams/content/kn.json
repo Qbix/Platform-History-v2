@@ -471,7 +471,7 @@
             "displayType": "ಸಂಭಾಷಣೆ",
             "description": "ಇತಿಹಾಸದೊಂದಿಗೆ ಬಳಕೆದಾರರ ನಡುವಿನ ಸಂಭಾಷಣೆ"
         },
-        "Streams\/webrtc": {
+        "Media\/WebRTC": {
             "displayType": "ಟೆಲಿಕಾನ್ಫರೆನ್ಸ್",
             "description": "ಆನ್‌ಲೈನ್ ವಿಡಿಯೋ\/ಆಡಿಯೋ ಕಾನ್ಫರೆನ್ಸ್"
         },
@@ -484,7 +484,7 @@
             "displayType": "ಉತ್ತರ",
             "description": "ಉತ್ತರ ಸ್ಟ್ರೀಮ್"
         },
-        "Streams\/calls": {
+        "Media\/calls": {
             "displayType": "ಕರೆಗಳು",
             "description": "ಸ್ಟ್ರೀಮ್‌ಗಳು\/webrtc ಗಾಗಿ ವರ್ಗ",
             "MaxRelationsExceeded": "ಗರಿಷ್ಠ ಕರೆಗಳನ್ನು ಮೀರಿದೆ"
