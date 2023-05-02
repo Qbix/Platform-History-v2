@@ -3,7 +3,6 @@
 function Streams_before_Q_responseExtras()
 {
 	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
-	Q_Response::addScript('{{Media}}/js/webrtc.js' , 'Streams');
 
 	if (!Q_Request::isAjax()) {
 		$invite_url = Q_Config::get('Streams', 'invite', 'url', "https://invites.to");
