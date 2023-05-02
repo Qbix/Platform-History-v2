@@ -1,7 +1,7 @@
 <?php
 $offset = 0;
 $i = 0;
-$categoryStreamNames = array("Assets/NFT/series", "Assets/contests");
+$categoryStreamNames = array("Assets/NFT/series", "Assets/NFT/collections");
 $adminLabels = Q_Config::get("Users", "communities", "admins", null);
 // create access row
 foreach ($adminLabels as $adminLabel) {

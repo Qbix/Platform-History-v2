@@ -23,16 +23,12 @@ Q.exports(function (options, index, column, data) {
 					}
 				});
 			});
+			return false;
 		});
 	});
 
-	Q.Users.Interface.coverPhoto(
-		$("button[name=coverPhoto]")[0],
-		$(".banner-block")[0]
-	);
-	$("button[name=coverPhoto]").show();
-
 	var $bannerBlock = $(".banner-block", $profileColumn);
+	var $coverPhoto = $("button[name=coverPhoto]", $profileColumn);
 	var _setCover = function (stream) {
 		var seriesPreviewTool = this;
 		if (!$(seriesPreviewTool.element).hasClass("Q_selected")) {
@@ -41,6 +37,11 @@ Q.exports(function (options, index, column, data) {
 
 		$bannerBlock.css("background-image", "url(" + stream.iconUrl("x") + ")");
 	};
+	Q.Users.Interface.coverPhoto(
+		$coverPhoto[0],
+		$bannerBlock[0]
+	);
+	$coverPhoto.show();
 	$profileColumn[0].forEachTool("Assets/NFT/series", function () {
 		this.state.onSelected.set(_setCover, true);
 	});
@@ -79,6 +80,83 @@ Q.exports(function (options, index, column, data) {
 	});
 
 	$(".Q_column_slot", column).plugin("Q/scrollbarsAutoHide", {vertical: true, horizontal: true});
+
+	var _socialHandlerProfile = function () {
+		var $this = $(this);
+		var social = $this.attr('data-type');
+		var socialUserName = $this.attr('data-connected');
+
+		const socialUrls = {
+			"facebook": "https://www.facebook.com/",
+			"twitter": "https://twitter.com/",
+			"linkedin": "https://www.linkedin.com/in/",
+			"github": "https://github.com/",
+			"instagram": "https://www.instagram.com/"
+		};
+
+		if (userId !== Q.getObject("loggedInUser.id", Q.Users)) {
+			var url = socialUserName;
+			if (!url.includes(socialUrls[social])) {
+				url = socialUrls[social] + url;
+			}
+			Q.openUrl(url);
+			return;
+		}
+
+		$this.addClass('Q_working');
+
+		Q.Text.get('Communities/content', function (err, content) {
+			Q.req('Communities/profileInfo', 'social', function (err, data) {
+				$this.removeClass('Q_working');
+
+				var msg = Q.firstErrorMessage(err, data && data.errors);
+				if (msg) {
+					return;
+				}
+
+				var value = data.slots.social;
+				Q.prompt(null, function (username) {
+					// dialog closed
+					if (username === null) {
+						return;
+					}
+
+					$this.addClass('Q_working');
+					Q.req('Communities/profileInfo', 'social', function (err, data) {
+						$this.removeClass('Q_working');
+						var msg = Q.firstErrorMessage(err, data && data.errors);
+						if (msg) {
+							return;
+						}
+
+						$this.attr('data-connected', data.slots.social);
+					}, {
+						fields: {
+							social: social,
+							value: username,
+							action: "update"
+						}
+					});
+				}, {
+					title: content.me.UpdateSocialTitle.replace('{{1}}', social),
+					initialText: value,
+					className: 'profile-social'
+				});
+			}, {
+				fields: {
+					social: social,
+					action: "get"
+				}
+			});
+		});
+
+		return false;
+	};
+	$(".header-list-itms .Communities_social_icon[data-type=facebook]").on(Q.Pointer.fastclick, _socialHandlerProfile);
+	$(".header-list-itms .Communities_social_icon[data-type=twitter]").on(Q.Pointer.fastclick, _socialHandlerProfile);
+	$(".header-list-itms .Communities_social_icon[data-type=linkedin]").on(Q.Pointer.fastclick, _socialHandlerProfile);
+	$(".header-list-itms .Communities_social_icon[data-type=github]").on(Q.Pointer.fastclick, _socialHandlerProfile);
+	$(".header-list-itms .Communities_social_icon[data-type=instagram]").on(Q.Pointer.fastclick, _socialHandlerProfile);
 });
 
 })(Q, jQuery);

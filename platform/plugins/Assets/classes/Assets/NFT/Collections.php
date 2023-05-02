@@ -4,14 +4,14 @@
  * @module Assets
  */
 /**
- * Methods for manipulating "Assets/NFT/Series" streams
- * @class Assets_NFT_Series
+ * Methods for manipulating "Assets/NFT/Collection" streams
+ * @class Assets_NFT_Collection
  */
-class Assets_NFT_Series
+class Assets_NFT_Collections
 {
-	static $categoryStreamName = "Assets/NFT/series";
-	static $relationType = "Assets/NFT/series";
-	static $streamType = "Assets/NFT/series";
+	static $categoryStreamName = "Assets/NFT/collections";
+	static $relationType = "Assets/NFT/collection";
+	static $streamType = "Assets/NFT/collection";
 
 	/**
 	 * Get or create new NFT empty stream for composer
@@ -21,11 +21,13 @@ class Assets_NFT_Series
 	 */
 	static function getComposerStream ($userId=null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$communityId = Users::communityId();
 
 		$relations = Streams_RelatedTo::select()->where(array(
-			"toPublisherId" => $userId,
+			"toPublisherId" => $communityId,
 			"toStreamName" => self::$categoryStreamName,
-			"type" => "new"
+			"type" => "new",
+			"fromPublisherId" => $userId
 		))->ignoreCache()->fetchDbRows();
 
 		if (!empty($relations)) {
@@ -35,17 +37,13 @@ class Assets_NFT_Series
 		}
 
 		$data = Q::event("Users/external/response/data", array("userId"));
-		$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(
-			"attributes" => array(
-				"author" => $data["wallet"]
-			)
-		), array(
-			"publisherId" => $userId,
+		$stream = Streams::create($userId, $userId, self::$streamType, array(), array(
+			"publisherId" => $communityId,
 			"streamName" => self::$categoryStreamName,
 			"type" => "new"
 		));
 		$maxWeight = Streams_RelatedTo::select()->where(array(
-			"toPublisherId" => $userId,
+			"toPublisherId" => $communityId,
 			"toStreamName" => self::$categoryStreamName,
 			"type" => self::$relationType
 		))->orderBy("weight", false)->limit(1)->fetchDbRow();
@@ -54,9 +52,9 @@ class Assets_NFT_Series
 		$lastPart = end($lastPart);
 		$tokenId = Streams::toHexString($userId, "$maxWeight/$lastPart");
 		$tokenId = preg_replace("/0+$/", "", $tokenId);
-		$seriesId = substr($tokenId, 0, 18);
+		$collectionId = substr($tokenId, 0, 18);
 		$stream->setAttribute("tokenId", $tokenId);
-		$stream->setAttribute("seriesId", $seriesId);
+		$stream->setAttribute("collectionId", $collectionId);
 		$stream->save();
 
 		$stream->join(compact("userId"));
@@ -91,6 +89,8 @@ class Assets_NFT_Series
 			}
 			$stream->attributes = Q::json_encode(array_merge($attributes, $fields["attributes"]));
 			$fieldsUpdated = true;
+		} else {
+			$stream->attributes = '{}';
 		}
 
 		if ($fieldsUpdated) {
@@ -108,8 +108,8 @@ class Assets_NFT_Series
 			$category = Streams_Stream::fetch($relation->toPublisherId, $relation->toPublisherId, $relation->toStreamName, true);
 
 			// change stream relation
-			Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name);
-			Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, self::$relationType, $stream->publisherId, $stream->name, array("weight" => "+1"));
+			Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name, array("skipAccess" => true));
+			Streams::relate($userId, $category->publisherId, $category->name, self::$relationType, $stream->publisherId, $stream->name, array("weight" => "+1", "skipAccess" => true));
 		}
 
 		return $stream;
