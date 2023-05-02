@@ -1,0 +1,12 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.Users_web3_community_tool .form {
+    padding: 20px;
+    min-width:500px;
+}
+.Users_web3_community_tool .fieldErrorBox {
+	border:1px solid #f00;
+}
+.Users_web3_community_tool span.error {
+	color: #f00;
+}

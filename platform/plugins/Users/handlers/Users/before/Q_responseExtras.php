@@ -96,4 +96,7 @@ function Users_before_Q_responseExtras()
 
 	// fetch labels info
 	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
+	
+	
+	Q_Response::setScriptData('Q.Users.web3.contracts', Q_Config::get("Users", "web3", "contracts", "R1",  array()));
 }

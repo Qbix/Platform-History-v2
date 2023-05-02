@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS {{prefix}}web3_transaction;
+CREATE TABLE {{prefix}}web3_transaction (
+  
+  `chainId` varchar(10) NOT NULL,
+  `transactionId` varchar(100) NOT NULL,
+  `status` enum('pending','mined')  NOT NULL DEFAULT 'pending',
+  `contract` varchar(42) NOT NULL DEFAULT '',
+  `methodName` varchar(63) NOT NULL DEFAULT '',
+  `params` varchar(1023) NOT NULL DEFAULT '',
+  `fromAddress` varchar(100) NOT NULL,
+  `userId` varbinary(31) NOT NULL,
+  `extra` varbinary(1023) DEFAULT '',
+  `result` text,
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`chainId`, `transactionId`), 
+  INDEX (`status`, `userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
