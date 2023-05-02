@@ -93,32 +93,32 @@
 }
 
 .Assets_NFTprofile_column .header-list-items .Communities_profile[data-val=social] .Communities_social_icon[data-type=facebook] {
-    background: url(../../img/icons/social-ic.png) no-repeat -54px -124px;
+    background: url(../../img/social-ic.png) no-repeat -54px -124px;
     width: 35px;
     height: 35px;
 }
 
 .Assets_NFTprofile_column .header-list-items .Communities_profile[data-val=social] .Communities_social_icon[data-type=twitter] {
-    background: url(../../img/icons/social-ic.png) no-repeat 0 -130px;
+    background: url(../../img/social-ic.png) no-repeat 0 -130px;
     width: 35px;
     height: 35px;
 
 }
 
 .Assets_NFTprofile_column .header-list-items .Communities_profile[data-val=social] .Communities_social_icon[data-type=linkedin] {
-    background: url(../../img/icons/social-ic.png) no-repeat -54px -160px;
+    background: url(../../img/social-ic.png) no-repeat -54px -160px;
     width: 35px;
     height: 35px;
 }
 
 .Assets_NFTprofile_column .header-list-items .Communities_profile[data-val=social] .Communities_social_icon[data-type=github] {
-    background: url(../../img/icons/social-ic.png) no-repeat -54px -245px;
+    background: url(../../img/social-ic.png) no-repeat -54px -245px;
     width: 35px;
     height: 35px;
 }
 
 .Assets_NFTprofile_column .header-list-items .Communities_profile[data-val=social] .Communities_social_icon[data-type=instagram] {
-    background: url(../../img/icons/social-ic.png) no-repeat 0 -203px;
+    background: url(../../img/social-ic.png) no-repeat 0 -203px;
     width: 35px;
     height: 35px;
 }
