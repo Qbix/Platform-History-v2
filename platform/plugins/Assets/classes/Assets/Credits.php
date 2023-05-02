@@ -76,7 +76,7 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		$userId = $user->id;
 		$streamName = 'Assets/user/credits';
-		$stream = Streams::fetchOneOrCreate($asUserId, $userId, $streamName, array(
+		$stream = Streams_Stream::fetchOrCreate($asUserId, $userId, $streamName, array(
 			'subscribe' => true
 		), $results);
 		if ($results['created']) {

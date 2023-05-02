@@ -45,7 +45,7 @@ function Streams_vcard_response ($params) {
         $vcr .= "NICKNAME:$nickname\n";
     }
 
-    $emailStream = Streams::fetchOneOrCreate($loggedInUserId, $user->id, "Streams/user/emailAddress");
+    $emailStream = Streams_Stream::fetchOrCreate($loggedInUserId, $user->id, "Streams/user/emailAddress");
     if($emailStream) {
         $emailStream->calculateAccess($loggedInUserId);
         if ($emailStream->testReadLevel('content')) {
@@ -56,7 +56,7 @@ function Streams_vcard_response ($params) {
         }
     }
 
-    $numberStream = Streams::fetchOneOrCreate($loggedInUserId, $user->id, "Streams/user/mobileNumber");
+    $numberStream = Streams_Stream::fetchOrCreate($loggedInUserId, $user->id, "Streams/user/mobileNumber");
     if($numberStream) {
         $numberStream->calculateAccess($loggedInUserId);
         if ($numberStream->testReadLevel('content')) {
