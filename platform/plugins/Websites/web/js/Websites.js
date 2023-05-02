@@ -153,9 +153,7 @@ Q.Tool.define({
 	"Websites/advert/campaigns": function () {}
 });
 
-Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element).tool('Websites/webpage/chat').activate();
-}, 'Websites');
+Q.Streams.Chat.extensions.push('Websites/webpage/chat');
 
 Q.page('', function () {
 	var streamName = Websites.metadataStreamName;
