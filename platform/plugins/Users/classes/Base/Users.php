@@ -36,6 +36,7 @@ abstract class Base_Users
   13 => 'Users_User',
   14 => 'Users_Vote',
   15 => 'Users_Web3',
+  16 => 'Users_Web3Transaction'
 );
 
 	/**
