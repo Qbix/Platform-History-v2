@@ -69,7 +69,7 @@ class Assets_NFT
 
 		$stream = Streams::create(null, $publisherId, "Assets/NFT", array(), array(
 			"publisherId" => $category->publisherId,
-			"streamName" => $category->name,
+			"name" => $category->name,
 			"type" => "new"
 		));
 		$stream->join(compact("userId"));
