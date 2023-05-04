@@ -1851,14 +1851,15 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 correctLevel : QRCode.CorrectLevel.H
                             });
                             var _setPhoto = function (message) {
-                            	var invitingUserId = Q.getObject("byUserId", message);
+								var dialogClassName = "Dialog_invite_photo_camera";
+                            	var invitedUserId = Q.getObject("byUserId", message);
                             	var title = Q.getObject(['invite', 'dialog', 'photo'], text);
-                            	if (invitingUserId) {
+                            	if (invitedUserId) {
 									title = Q.getObject(['invite', 'dialog', 'photoOf'], text).interpolate({"name": message.getInstruction("displayName")});
 								}
                             	var subpath = loggedUserId.splitId() + '/invited/' + rsd.invite.token;
-								if (invitingUserId) {
-									subpath = invitingUserId.splitId() + '/icon/' + Math.floor(Date.now()/1000);
+								if (invitedUserId) {
+									subpath = invitedUserId.splitId() + '/icon/' + Math.floor(Date.now()/1000);
 								}
 
 								if (Q.Dialogs.dialogs.length) {
@@ -1871,7 +1872,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								Q.Dialogs.push({
 									title: title,
 									apply: true,
-									className: "Dialog_invite_photo_camera",
+									className: dialogClassName,
 									content:
 										'<div class="Streams_invite_photo_dialog">' +
 										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
@@ -1891,22 +1892,27 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 											subpath: subpath,
 											saveSizeName: saveSizeName,
 											onFinish: function () {
-												Q.Dialogs.pop();
+												Q.Dialogs.close(dialog);
 											}
 										};
 										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
 
-										if (invitingUserId) {
-											rss.onMessage('User/icon/filled').set(function (stream, msg) {
-												if (
-													message.getInstruction('token') !== Q.getObject("invite.token", rsd)
-													|| invitingUserId !== msg.getInstruction('userId')
-												) {
+										if (invitedUserId) {
+											Q.Streams.get(invitedUserId, "Streams/user/icon", function (err) {
+												if (err) {
 													return;
 												}
 
-												Q.Dialogs.close(dialog);
-											}, 'User_icon_filled_' + invitingUserId);
+												var userIconStream = this;
+												userIconStream.join();
+												var eventKey = "invite_icon_changed_" + invitedUserId;
+												var event = userIconStream.onMessage("Streams/changed");
+												event.set(function (err, msg) {
+													Q.Dialogs.close(dialog);
+													userIconStream.leave();
+													event.remove(eventKey);
+												}, eventKey);
+											});
 										}
 									}
 								});
