@@ -1736,13 +1736,9 @@
 	var co = {
 		scrollbarsAutoHide: false,
 		handlers: {
-			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
-			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
-			NFT: "{{Assets}}/js/columns/NFT.js",
 			billing: "{{Assets}}/js/columns/billing.js",
 			subscription: "{{Assets}}/js/columns/subscription.js",
-			services: "{{Assets}}/js/columns/services.js",
-			NFTcollections: "{{Assets}}/js/columns/NFTcollections.js"
+			services: "{{Assets}}/js/columns/services.js"
 		}
 	};
 	if (Q.info.isMobile) {
