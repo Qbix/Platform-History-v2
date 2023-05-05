@@ -524,7 +524,6 @@ img[data-lazyload-src],
 [data-q-lazyload="removed"] {
 	opacity: 0.1;
 	transition: opacity 1s;
-	min-width: 50px; min-height: 50px;
 }
 
 [data-q-lazyload="activated"] {
