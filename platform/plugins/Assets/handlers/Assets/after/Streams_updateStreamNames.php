@@ -23,12 +23,15 @@ function Assets_after_Streams_updateStreamNames($params)
             $ClassName = $Connection . '_' . $Table;
             foreach ($f2 as $publisherIdField => $streamNameField) {
                 foreach ($chunks as $chunk) {
+                    $criteria = isset($publisherId)
+						? array(
+							$publisherIdField => $publisherId,
+							$streamNameField => array_keys($chunk)
+						) : array($streamNameField => array_keys($chunk));
                     call_user_func(array($ClassName, 'update'))
                         ->set(array($streamNameField => $chunk))
-                        ->where(array(
-                            $publisherIdField => $publisherId,
-                            $streamNameField => array_keys($chunk)
-                        ))->execute();
+                        ->where($criteria)
+                        ->execute();
                 }
             }
         }

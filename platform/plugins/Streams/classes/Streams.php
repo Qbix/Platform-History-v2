@@ -5233,7 +5233,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $publisherId
 	 * @param {array} $updates pairs of (oldStreamName => newStreamName)
 	 */
-	static function updateStreamNames(string $publisherId, array $updates)
+	static function updateStreamNames($publisherId, array $updates)
 	{
 		$chunkSize = 100;
 		$chunks = array_chunk($updates, $chunkSize, true);
@@ -5275,12 +5275,15 @@ abstract class Streams extends Base_Streams
 				foreach ($fields as $i => $field) {
 					$publisherIdField = Q::ifset($publisherIdFields, $Connection, $Table, $i, 'publisherId');
 					foreach ($chunks as $chunk) {
+						$criteria = isset($publisherId)
+						? array(
+							$publisherIdField => $publisherId,
+							$field => array_keys($chunk)
+						) : array($field => array_keys($chunk));
 						call_user_func(array($ClassName, 'update'))
 							->set(array($field => $chunk))
-							->where(array(
-								$publisherIdField => $publisherId,
-								$field => array_keys($chunk)
-							))->execute();
+							->where($criteria)
+							->execute();
 					}
 				}
 			}
