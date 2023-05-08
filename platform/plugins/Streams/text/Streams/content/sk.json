@@ -81,7 +81,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nový hovor sa začal v {{toTitle}}",
         "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} z {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridané k {{toTitle}} ako {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} sa o vás zmienil v komentári",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} vás spomenul v komentári",
         "Streams\/call": "{{displayName}} spustilo hovor v reálnom čase"
     },
     "invite": {
@@ -209,154 +209,6 @@
         "Devices": "Zariadenia",
         "Streams": "Prúdy"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Nemáte povolenie pripojiť sa k tomuto streamu.",
-        "streamTitle": "{{1}} začal telekonferenciu",
-        "allow": {
-            "dialogTitle": "Pripája sa",
-            "microphoneBtn": "Povoliť mikrofón",
-            "cameraBtn": "Povoliť fotoaparát",
-            "cameraAndMicrophoneBtn": "Povoliť fotoaparát a mikrofón"
-        },
-        "preparing": {
-            "dialogTitle": "Pred pripojením zapnite\/vypnite kameru alebo mikrofón",
-            "micIsOff": "Mikrofón je vypnutý",
-            "micIsOn": "Mikrofón je zapnutý",
-            "cameraIsOff": "Kamera je vypnutá",
-            "cameraIsOn": "Kamera je zapnutá",
-            "screenSharingIsOn": "Zdieľanie obrazovky je zapnuté",
-            "screenSharingIsOff": "Zdieľať obrazovku",
-            "joinNow": "Pripojte sa k výzve"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Inštrukcie",
-            "permissionDenied": "Povolenie pre {{kind}} zamietnuté. Ak ho chcete použiť, postupujte podľa týchto krokov:",
-            "point1": "Prejdite na &quot;Nastavenia&quot; -&gt; &quot;Rozšírené&quot; -&gt; &quot;Ochrana osobných údajov a zabezpečenie&quot; -&gt; &quot;Nastavenia lokality&quot; -&gt; &quot;Fotoaparát&quot; alebo &quot;Nastavenia lokality&quot; -&gt; &quot;Mikrofón&quot;",
-            "point2": "Odstráňte {{hostname}} zo zoznamu &quot;Blokovať&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Inštrukcie",
-            "permissionDenied": "Povolenie pre {{kind}} zamietnuté. Znova načítajte túto stránku a potvrďte prístup k {{kind}} , aby ste sa mohli pripojiť ku konferencii."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Inštrukcie",
-            "permissionDenied": "Povolenie pre {{kind}} zamietnuté. Ak ho chcete použiť, postupujte podľa týchto krokov:",
-            "point1": "Prejdite do nastavení systému Android",
-            "point2": "Otvorte &quot;Aplikácie a upozornenia&quot;",
-            "point3": "Nájdite „ {{communityName}} “ a otvorte ho",
-            "point4": "Klepnite na Povolenia",
-            "point5": "Povoliť {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Inštrukcie",
-            "permissionDenied": "Povolenie pre {{kind}} zamietnuté. Ak ho chcete použiť, postupujte podľa týchto krokov:",
-            "point1": "Prejdite do nastavení iOS",
-            "point2": "Otvorte &quot;Ochrana osobných údajov&quot;",
-            "point3": "Nájdite {{kind}} a otvorte ho",
-            "point4": "Nájdite „ {{communityName}} “ a povoľte"
-        },
-        "fbLive": {
-            "dialogTitle": "Začalo sa živé vysielanie na Facebooku"
-        },
-        "notices": {
-            "youJoinedRoom": "Pripojili ste sa k miestnosti",
-            "joining": "Vstup: {{userName}}",
-            "sbLeftRoom": "{{userName}} opustilo miestnosť",
-            "switchingRoom": "Prepínacia miestnosť...",
-            "forceDisconnecting": "Do 5 sekúnd budete odpojení",
-            "forceDisconnectingImmediately": "Boli ste odpojený hostiteľom",
-            "youLeftRoom": "Odišiel si z miestnosti",
-            "codeCopied": "Odišiel si z miestnosti",
-            "sbBeganFbLive": "{{userName}} začala túto výzvu vysielať na Facebooku",
-            "sbStoppedFbLive": "{{userName}} prestalo vysielať túto výzvu na Facebooku",
-            "youBeganFbLive": "Túto výzvu ste začali vysielať na Facebooku",
-            "youStoppedFbLive": "Prestali ste vysielať túto výzvu na Facebooku",
-            "youStartedLive": "Tento hovor ste začali vysielať do vlastného RTMP",
-            "youStoppedLive": "Prestali ste vysielať tento hovor na vlastný RTMP",
-            "sbStartedLiveStreaming": "{{userName}} začalo naživo",
-            "sbStoppedLiveStreaming": "{{userName}} skončilo naživo",
-            "liveStopped": "Pri odosielaní videa do koncového bodu sa vyskytla chyba",
-            "youBeganVideoRecording": "Začali ste nahrávať túto konferenciu",
-            "youStoppedVideoRecording": "Prestali ste nahrávať túto konferenciu",
-            "linkCopiedToCb": "Odkaz bol skopírovaný do schránky",
-            "codeCopiedToCb": "Kód bol skopírovaný do schránky",
-            "userHasNoVideo": "Účastník nemá žiadne video",
-            "openInBrowserAlert": "Otvorte odkaz v prehliadači Safari a pripojte sa ku konferencii.",
-            "allowedVideoLimit": "V tejto miestnosti je povolených iba {{limit}} videí",
-            "allowedAudioLimit": "V tejto miestnosti je povolených iba {{limit}} mikrofónov"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Nastavenia videa",
-            "webCamera": "Webová kamera",
-            "screenSharing": "Zdieľanie obrazovky",
-            "shareAnotherScreen": "Zdieľajte ďalšiu obrazovku",
-            "turnOffCameras": "Vypnite fotoaparát",
-            "turnOffVideo": "Vypnite zdieľanie fotoaparátu\/obrazovky",
-            "turnOffAudioInput": "Stlmiť mikrofón",
-            "turnOffScreenSharing": "Vypnite zdieľanie obrazovky",
-            "cameraIsTurnedOff": "Kamera je vypnutá",
-            "micIsTurnedOff": "Mikrofón je vypnutý",
-            "startFBLive": "Spustite Facebook Livestream",
-            "stopFBLive": "Zastavte Facebook Livestream",
-            "startRecording": "Spustite nahrávanie",
-            "stopRecording": "Zastaviť nahrávanie",
-            "start": "Štart",
-            "stop": "Stop",
-            "recordingInProgress": "Prebieha nahrávanie...",
-            "fbLiveTitle": "Názov Livestreamu",
-            "fbLiveDescription": "Popíšte svoj priamy prenos. O čom to je?",
-            "fbOnlyMeLiveAccess": "Iba ja",
-            "fbFriendsAccess": "Priatelia",
-            "fbPublicAccess": "Verejné",
-            "publishOnTimeline": "Zverejniť na časovej osi",
-            "publishToGroup": "Zverejniť v skupine",
-            "fbStartLive": "Choď žiť",
-            "fbStopLive": "Ukončiť priamy prenos",
-            "streamingSettings": "nastavenie",
-            "manageStream": "Spravovať priamy prenos",
-            "fbEmbedCode": "Vložiť",
-            "copy": "Kopírovať",
-            "streamToRTMP": "Streamujte do vlastného RTMP",
-            "startBroadcasting": "Začnite vysielať",
-            "broadcastingInProgress": "Prebieha vysielanie"
-        },
-        "audioSettings": {
-            "dialogTitle": "Nastavenia zvuku",
-            "speakers": "Reproduktory",
-            "microphone": "Mikrofón"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Spravovať vysielanie"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Nastavenia účastníka",
-            "disconnect": "Odpojiť",
-            "floatingScreens": "Plávajúce obrazovky",
-            "tiledScreens": "Kachľové obrazovky",
-            "loudestExceptMe": "Najhlasnejšie okrem mňa",
-            "maximizeLoudest": "Maximalizovať najhlasnejšie",
-            "staticMaximized": "Statické maximalizované",
-            "fullScreen": "Celá obrazovka",
-            "manual": "Manuálny",
-            "turnOffCamera": "Skryť video",
-            "turnOffAudio": "Stlmiť zvuk",
-            "turnOffScreenSharing": "Skryť zdieľanie obrazovky",
-            "turnOnCamera": "Zobraziť video",
-            "turnOnAudio": "Zapnúť zvuk",
-            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky"
-        },
-        "streamingSettings": {
-            "title": "Živý prenos"
-        },
-        "preview": {
-            "Meeting": "Telekonferencia",
-            "MeetingEnded": "Telekonferencia sa skončila"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Žiadosť o rozprávanie",
-            "msg": "Na schôdzi momentálne hovorí {{count}} ľudí. Chcete jedného z nich nahradiť po tom, čo mu necháte {{seconds}} sekúnd na dorozprávanie?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Pozvaný",
@@ -471,10 +323,6 @@
             "displayType": "Konverzácia",
             "description": "konverzácia medzi používateľmi s históriou"
         },
-        "Streams\/webrtc": {
-            "displayType": "Telekonferencia",
-            "description": "online video\/audio konferencie"
-        },
         "Streams\/question": {
             "displayType": "Otázka",
             "description": "stream otázok",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Odpoveď",
             "description": "stream odpovedí"
-        },
-        "Streams\/calls": {
-            "displayType": "hovory",
-            "description": "kategória pre Streams\/webrtc",
-            "MaxRelationsExceeded": "Bol prekročený maximálny počet hovorov"
         }
     },
     "menu": {
@@ -568,7 +411,7 @@
         "Questions": "Otázky",
         "Answers": "Odpovede",
         "AnswerQuestion": "Odpoveď na otázku",
-        "SetYourAnswer": "Odpovedzte na otázku",
+        "SetYourAnswer": "Odpovedzte prosím na otázku",
         "NewQuestion": "Nová otázka",
         "EditQuestion": "Upraviť otázku",
         "NewAnswer": "Nová odpoveď",

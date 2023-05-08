@@ -209,154 +209,6 @@
         "Devices": "ಸಾಧನಗಳು",
         "Streams": "ಸ್ಟ್ರೀಮ್‌ಗಳು"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "ಈ ಸ್ಟ್ರೀಮ್‌ಗೆ ಸೇರಲು ನೀವು ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ.",
-        "streamTitle": "{{1}} ಟೆಲಿಕಾನ್ಫರೆನ್ಸ್ ಆರಂಭಿಸಿದರು",
-        "allow": {
-            "dialogTitle": "ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ",
-            "microphoneBtn": "ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
-            "cameraBtn": "ಕ್ಯಾಮರಾವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
-            "cameraAndMicrophoneBtn": "ಕ್ಯಾಮರಾ ಮತ್ತು ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
-        },
-        "preparing": {
-            "dialogTitle": "ನೀವು ಸೇರುವ ಮೊದಲು ಕ್ಯಾಮರಾ ಅಥವಾ ಮೈಕ್ ಅನ್ನು ಆನ್\/ಆಫ್ ಮಾಡಿ",
-            "micIsOff": "ಮೈಕ್ ಆಫ್ ಆಗಿದೆ",
-            "micIsOn": "ಮೈಕ್ ಆನ್ ಆಗಿದೆ",
-            "cameraIsOff": "ಕ್ಯಾಮರಾ ಆಫ್ ಆಗಿದೆ",
-            "cameraIsOn": "ಕ್ಯಾಮರಾ ಆನ್ ಆಗಿದೆ",
-            "screenSharingIsOn": "ಸ್ಕ್ರೀನ್‌ಶೇರಿಂಗ್ ಆನ್ ಆಗಿದೆ",
-            "screenSharingIsOff": "ಪರದೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
-            "joinNow": "ಕರೆಗೆ ಸೇರಿಕೊಳ್ಳಿ"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "ಸೂಚನೆಗಳು",
-            "permissionDenied": "{{kind}} ಕ್ಕೆ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ಇದನ್ನು ಬಳಸಲು ದಯವಿಟ್ಟು ಈ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ:",
-            "point1": "&quot;ಸೆಟ್ಟಿಂಗ್‌ಗಳು&quot; -&gt; &quot;ಸುಧಾರಿತ&quot; -&gt; &quot;ಗೌಪ್ಯತೆ ಮತ್ತು ಭದ್ರತೆ&quot; -&gt; &quot;ಸೈಟ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು&quot; -&gt; &quot;ಕ್ಯಾಮೆರಾ&quot; ಅಥವಾ &quot;ಸೈಟ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು&quot; -&gt; &quot;ಮೈಕ್ರೋಫೋನ್&quot; ಗೆ ಹೋಗಿ",
-            "point2": "&quot;ಬ್ಲಾಕ್&quot; ಪಟ್ಟಿಯಿಂದ {{hostname}} ತೆಗೆದುಹಾಕಿ"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "ಸೂಚನೆಗಳು",
-            "permissionDenied": "{{kind}} ಕ್ಕೆ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಈ ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ ಮತ್ತು ಕಾನ್ಫರೆನ್ಸ್‌ಗೆ ಸೇರಲು {{kind}} ಗೆ ಪ್ರವೇಶವನ್ನು ಖಚಿತಪಡಿಸಿ."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "ಸೂಚನೆಗಳು",
-            "permissionDenied": "{{kind}} ಕ್ಕೆ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ಇದನ್ನು ಬಳಸಲು ದಯವಿಟ್ಟು ಈ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ:",
-            "point1": "ನಿಮ್ಮ Android ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ",
-            "point2": "&quot;ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಅಧಿಸೂಚನೆಗಳು&quot; ತೆರೆಯಿರಿ",
-            "point3": "&quot; {{communityName}} &quot; ಅನ್ನು ಹುಡುಕಿ ಮತ್ತು ಅದನ್ನು ತೆರೆಯಿರಿ",
-            "point4": "ಅನುಮತಿಗಳ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ",
-            "point5": "{{kind}} ಸಕ್ರಿಯಗೊಳಿಸಿ"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "ಸೂಚನೆಗಳು",
-            "permissionDenied": "{{kind}} ಕ್ಕೆ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ಇದನ್ನು ಬಳಸಲು ದಯವಿಟ್ಟು ಈ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ:",
-            "point1": "ನಿಮ್ಮ iOS ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ",
-            "point2": "&quot;ಗೌಪ್ಯತೆ&quot; ತೆರೆಯಿರಿ",
-            "point3": "{{kind}} ಹುಡುಕಿ ಮತ್ತು ಅದನ್ನು ತೆರೆಯಿರಿ",
-            "point4": "&quot; {{communityName}} &quot; ಅನ್ನು ಹುಡುಕಿ ಮತ್ತು ಸಕ್ರಿಯಗೊಳಿಸಿ"
-        },
-        "fbLive": {
-            "dialogTitle": "ಫೇಸ್ ಬುಕ್ ಲೈವ್ ಸ್ಟ್ರೀಮಿಂಗ್ ಆರಂಭವಾಗಿದೆ"
-        },
-        "notices": {
-            "youJoinedRoom": "ನೀನು ಕೋಣೆಗೆ ಸೇರಿಕೊಂಡೆ",
-            "joining": "ಸೇರ್ಪಡೆ: {{userName}}",
-            "sbLeftRoom": "{{userName}} ಕೊಠಡಿಯಿಂದ ಹೊರಬಂದರು",
-            "switchingRoom": "ಕೊಠಡಿ ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ...",
-            "forceDisconnecting": "ನೀವು 5 ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಸಂಪರ್ಕ ಕಡಿತಗೊಳ್ಳುತ್ತೀರಿ",
-            "forceDisconnectingImmediately": "ಹೋಸ್ಟ್‌ನಿಂದ ನೀವು ಸಂಪರ್ಕ ಕಡಿತಗೊಂಡಿದ್ದೀರಿ",
-            "youLeftRoom": "ನೀನು ಕೋಣೆಯಿಂದ ಹೊರಟೆ",
-            "codeCopied": "ನೀನು ಕೋಣೆಯಿಂದ ಹೊರಟೆ",
-            "sbBeganFbLive": "{{userName}} ಈ ಕರೆಯನ್ನು Facebook ನಲ್ಲಿ ಪ್ರಸಾರ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿತು",
-            "sbStoppedFbLive": "{{userName}} ಈ ಕರೆಯನ್ನು Facebook ನಲ್ಲಿ ಪ್ರಸಾರ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿದೆ",
-            "youBeganFbLive": "ನೀವು ಈ ಕರೆಯನ್ನು Facebook ನಲ್ಲಿ ಪ್ರಸಾರ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿದ್ದೀರಿ",
-            "youStoppedFbLive": "ನೀವು ಈ ಕರೆಯನ್ನು Facebook ನಲ್ಲಿ ಪ್ರಸಾರ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ",
-            "youStartedLive": "ನೀವು ಈ ಕರೆಯನ್ನು ಕಸ್ಟಮ್ RTMP ಗೆ ಪ್ರಸಾರ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿದ್ದೀರಿ",
-            "youStoppedLive": "ನೀವು ಈ ಕರೆಯನ್ನು ಕಸ್ಟಮ್ RTMP ಗೆ ಪ್ರಸಾರ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ",
-            "sbStartedLiveStreaming": "{{userName}} ಲೈವ್ ಪ್ರಾರಂಭವಾಯಿತು",
-            "sbStoppedLiveStreaming": "{{userName}} ಲೈವ್ ಕೊನೆಗೊಂಡಿತು",
-            "liveStopped": "ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗೆ ವೀಡಿಯೊ ಕಳುಹಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ",
-            "youBeganVideoRecording": "ನೀವು ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿದ್ದೀರಿ",
-            "youStoppedVideoRecording": "ನೀವು ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ",
-            "linkCopiedToCb": "ಲಿಂಕ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ",
-            "codeCopiedToCb": "ಕೋಡ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ",
-            "userHasNoVideo": "ಭಾಗವಹಿಸುವವರು ಯಾವುದೇ ವೀಡಿಯೊವನ್ನು ಹೊಂದಿಲ್ಲ",
-            "openInBrowserAlert": "ಸಮ್ಮೇಳನಕ್ಕೆ ಸೇರಲು ಸಫಾರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಲಿಂಕ್ ತೆರೆಯಿರಿ.",
-            "allowedVideoLimit": "ಈ ಕೋಣೆಯಲ್ಲಿ {{limit}} ವೀಡಿಯೊಗಳನ್ನು ಮಾತ್ರ ಅನುಮತಿಸಲಾಗಿದೆ",
-            "allowedAudioLimit": "ಈ ಕೋಣೆಯಲ್ಲಿ {{limit}} ಮೈಕ್ರೊಫೋನ್‌ಗಳನ್ನು ಮಾತ್ರ ಅನುಮತಿಸಲಾಗಿದೆ"
-        },
-        "settingsPopup": {
-            "dialogTitle": "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
-            "webCamera": "ವೆಬ್ ಕ್ಯಾಮರಾ",
-            "screenSharing": "ಸ್ಕ್ರೀನ್ ಹಂಚಿಕೆ",
-            "shareAnotherScreen": "ಇನ್ನೊಂದು ಪರದೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
-            "turnOffCameras": "ಕ್ಯಾಮರಾ ಆಫ್ ಮಾಡಿ",
-            "turnOffVideo": "ಕ್ಯಾಮರಾ\/ಸ್ಕ್ರೀನ್ ಹಂಚಿಕೆಯನ್ನು ಆಫ್ ಮಾಡಿ",
-            "turnOffAudioInput": "ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ",
-            "turnOffScreenSharing": "ಸ್ಕ್ರೀನ್ ಹಂಚಿಕೆಯನ್ನು ಆಫ್ ಮಾಡಿ",
-            "cameraIsTurnedOff": "ಕ್ಯಾಮರಾ ಆಫ್ ಆಗಿದೆ",
-            "micIsTurnedOff": "ಮೈಕ್ರೊಫೋನ್ ಆಫ್ ಆಗಿದೆ",
-            "startFBLive": "ಫೇಸ್‌ಬುಕ್ ಲೈವ್‌ಸ್ಟ್ರೀಮ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ",
-            "stopFBLive": "ಫೇಸ್‌ಬುಕ್ ಲೈವ್‌ಸ್ಟ್ರೀಮ್ ನಿಲ್ಲಿಸಿ",
-            "startRecording": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
-            "stopRecording": "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ",
-            "start": "ಪ್ರಾರಂಭಿಸಿ",
-            "stop": "ನಿಲ್ಲಿಸು",
-            "recordingInProgress": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಗತಿಯಲ್ಲಿದೆ...",
-            "fbLiveTitle": "ಲೈವ್‌ಸ್ಟ್ರೀಮ್‌ನ ಶೀರ್ಷಿಕೆ",
-            "fbLiveDescription": "ನಿಮ್ಮ ಲೈವ್‌ಸ್ಟ್ರೀಮ್ ಅನ್ನು ವಿವರಿಸಿ. ಅದು ಯಾವುದರ ಬಗ್ಗೆ?",
-            "fbOnlyMeLiveAccess": "ನಾನು ಮಾತ್ರ",
-            "fbFriendsAccess": "ಸ್ನೇಹಿತರು",
-            "fbPublicAccess": "ಸಾರ್ವಜನಿಕ",
-            "publishOnTimeline": "ಟೈಮ್‌ಲೈನ್‌ನಲ್ಲಿ ಪ್ರಕಟಿಸಿ",
-            "publishToGroup": "ಗುಂಪಿಗೆ ಪ್ರಕಟಿಸಿ",
-            "fbStartLive": "ಲೈವ್ ಹೋಗಿ",
-            "fbStopLive": "ಲೈವ್‌ಸ್ಟ್ರೀಮ್ ಅನ್ನು ಕೊನೆಗೊಳಿಸಿ",
-            "streamingSettings": "ಸಂಯೋಜನೆಗಳು",
-            "manageStream": "ಲೈವ್‌ಸ್ಟ್ರೀಮ್ ನಿರ್ವಹಿಸಿ",
-            "fbEmbedCode": "ಎಂಬೆಡ್",
-            "copy": "ನಕಲು ಮಾಡಿ",
-            "streamToRTMP": "ಕಸ್ಟಮ್ RTMP ಗೆ ಸ್ಟ್ರೀಮ್ ಮಾಡಿ",
-            "startBroadcasting": "ಪ್ರಸಾರವನ್ನು ಪ್ರಾರಂಭಿಸಿ",
-            "broadcastingInProgress": "ಪ್ರಸಾರ ಪ್ರಗತಿಯಲ್ಲಿದೆ"
-        },
-        "audioSettings": {
-            "dialogTitle": "ಆಡಿಯೋ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
-            "speakers": "ಸ್ಪೀಕರ್ಗಳು",
-            "microphone": "ಮೈಕ್ರೊಫೋನ್"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "ಪ್ರಸಾರವನ್ನು ನಿರ್ವಹಿಸಿ"
-        },
-        "participantsPopup": {
-            "dialogTitle": "ಭಾಗವಹಿಸುವವರ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
-            "disconnect": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ",
-            "floatingScreens": "ತೇಲುವ ಪರದೆಗಳು",
-            "tiledScreens": "ಟೈಲ್ಡ್ ಸ್ಕ್ರೀನ್‌ಗಳು",
-            "loudestExceptMe": "ನನ್ನನ್ನು ಹೊರತುಪಡಿಸಿ ಜೋರಾಗಿ",
-            "maximizeLoudest": "ಗರಿಷ್ಟ ಲೌಡೆಸ್ಟ್",
-            "staticMaximized": "ಸ್ಥಿರ ಗರಿಷ್ಠಗೊಳಿಸಲಾಗಿದೆ",
-            "fullScreen": "ಪೂರ್ಣ ಪರದೆ",
-            "manual": "ಕೈಪಿಡಿ",
-            "turnOffCamera": "ವೀಡಿಯೊ ಮರೆಮಾಡಿ",
-            "turnOffAudio": "ಆಡಿಯೊವನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ",
-            "turnOffScreenSharing": "ಪರದೆ ಹಂಚಿಕೆಯನ್ನು ಮರೆಮಾಡಿ",
-            "turnOnCamera": "ವೀಡಿಯೊ ತೋರಿಸಿ",
-            "turnOnAudio": "ಆಡಿಯೊವನ್ನು ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ",
-            "turnOnScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ತೋರಿಸಿ"
-        },
-        "streamingSettings": {
-            "title": "ನಿರಂತರ ಪ್ರಸಾರ"
-        },
-        "preview": {
-            "Meeting": "ಟೆಲಿಕಾನ್ಫರೆನ್ಸ್",
-            "MeetingEnded": "ಟೆಲಿಕಾನ್ಫರೆನ್ಸ್ ಮುಗಿದಿದೆ"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "ಮಾತನಾಡಲು ವಿನಂತಿ",
-            "msg": "ಪ್ರಸ್ತುತ {{count}} ಜನರು ಸಭೆಯಲ್ಲಿ ಮಾತನಾಡುತ್ತಿದ್ದಾರೆ. ಮಾತನಾಡುವುದನ್ನು ಮುಗಿಸಲು {{seconds}} ಸೆಕೆಂಡುಗಳನ್ನು ಅನುಮತಿಸಿದ ನಂತರ ಅವುಗಳಲ್ಲಿ ಒಂದನ್ನು ಬದಲಾಯಿಸಲು ನೀವು ಬಯಸುವಿರಾ?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "ಆಹ್ವಾನಿಸಲಾಗಿದೆ",
@@ -471,10 +323,6 @@
             "displayType": "ಸಂಭಾಷಣೆ",
             "description": "ಇತಿಹಾಸದೊಂದಿಗೆ ಬಳಕೆದಾರರ ನಡುವಿನ ಸಂಭಾಷಣೆ"
         },
-        "Streams\/webrtc": {
-            "displayType": "ಟೆಲಿಕಾನ್ಫರೆನ್ಸ್",
-            "description": "ಆನ್‌ಲೈನ್ ವಿಡಿಯೋ\/ಆಡಿಯೋ ಕಾನ್ಫರೆನ್ಸ್"
-        },
         "Streams\/question": {
             "displayType": "ಪ್ರಶ್ನೆ",
             "description": "ಪ್ರಶ್ನೆ ಸ್ಟ್ರೀಮ್",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "ಉತ್ತರ",
             "description": "ಉತ್ತರ ಸ್ಟ್ರೀಮ್"
-        },
-        "Streams\/calls": {
-            "displayType": "ಕರೆಗಳು",
-            "description": "ಸ್ಟ್ರೀಮ್‌ಗಳು\/webrtc ಗಾಗಿ ವರ್ಗ",
-            "MaxRelationsExceeded": "ಗರಿಷ್ಠ ಕರೆಗಳನ್ನು ಮೀರಿದೆ"
         }
     },
     "menu": {

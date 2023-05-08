@@ -388,26 +388,26 @@
 	white-space: nowrap;
 }
 
-/* <Streams_webrtc_preview> */
-.Streams_webrtc_preview_tool .Streams_webrtc_duration {
+/* <Media_webrtc_preview> */
+.Media_webrtc_preview_tool .Media_webrtc_duration {
 	font-weight: normal;
 	font-size: .8em;
 }
-.Streams_webrtc_preview_tool .Streams_participants_tool .Users_avatar_icon {
+.Media_webrtc_preview_tool .Streams_participants_tool .Users_avatar_icon {
 	position: unset;
 	margin: 0;
 }
 
-.Streams_webrtc_preview_tool .Streams_preview_call_control {
+.Media_webrtc_preview_tool .Streams_preview_call_control {
 	display: flex;
 	padding: 10px 5px 5px 5px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_accept_button,
-.Streams_webrtc_preview_tool .Streams_preview_disconnect_button,
-.Streams_webrtc_preview_tool .Streams_preview_call_button,
-.Streams_webrtc_preview_tool .Streams_preview_switch_back_button,
-.Streams_webrtc_preview_tool .Streams_preview_hold_button,
-.Streams_webrtc_preview_tool .Streams_preview_approve_button {
+.Media_webrtc_preview_tool .Streams_preview_accept_button,
+.Media_webrtc_preview_tool .Streams_preview_disconnect_button,
+.Media_webrtc_preview_tool .Streams_preview_call_button,
+.Media_webrtc_preview_tool .Streams_preview_switch_back_button,
+.Media_webrtc_preview_tool .Streams_preview_hold_button,
+.Media_webrtc_preview_tool .Streams_preview_approve_button {
 	/*width: 100px;*/
 	height: 40px;
 	display: flex;
@@ -416,27 +416,27 @@
 	padding: 5px;
 	border-radius: 4px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_accept_button {
+.Media_webrtc_preview_tool .Streams_preview_accept_button {
 	background: #37c837;
 	/*width:80px;*/
 	height:40px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_disconnect_button, .Streams_preview_switch_back_button {
+.Media_webrtc_preview_tool .Streams_preview_disconnect_button, .Streams_preview_switch_back_button {
 	display: none;
 	background: #f93b2f;
 	/*width:100px;*/
 	height:40px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_call_control_call {
+.Media_webrtc_preview_tool .Streams_preview_call_control_call {
 	margin-right: 10px;
 	display: flex;
 }
-.Streams_webrtc_preview_tool .Streams_preview_call_button {
+.Media_webrtc_preview_tool .Streams_preview_call_button {
 	background: #007bff;
 	/*width:60px;*/
 	height:40px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_hold_button {
+.Media_webrtc_preview_tool .Streams_preview_hold_button {
 	display: none;
 	background: #17a2b8;
 	/*width:60px;*/
@@ -444,36 +444,36 @@
 	margin-left: 10px;
 
 }
-.Streams_webrtc_preview_tool .Streams_preview_approve_button {
+.Media_webrtc_preview_tool .Streams_preview_approve_button {
 	background: #ffc107;
 	/*width:60px;*/
 	height:40px;
 	margin-right: 10px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved {
+.Media_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved {
 	background: #007bff;
 }
-.Streams_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved:before {
+.Media_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved:before {
 	display: inline-block;
 	content: '\2713';
 	color:white;
 	padding:0 2px 0 0;
 }
 
-.Streams_webrtc_preview_tool .Streams_preview_contents {
+.Media_webrtc_preview_tool .Streams_preview_contents {
 	padding:0 0 5px 0;
 }
-.Streams_webrtc_preview_tool .Streams_preview_container .Streams_preview_title{
+.Media_webrtc_preview_tool .Streams_preview_container .Streams_preview_title{
 	display: flex;
 	justify-content: space-between;
 }
-.Streams_webrtc_preview_tool .Streams_preview_container .Streams_preview_contents {
+.Media_webrtc_preview_tool .Streams_preview_container .Streams_preview_contents {
 	width: 100%;
 }
-.Streams_webrtc_preview_tool .Streams_preview_container .Streams_preview_about {
+.Media_webrtc_preview_tool .Streams_preview_container .Streams_preview_about {
 	display: flex;
 }
-.Streams_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble {
+.Media_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble {
 	-webkit-border-radius: 13px;
 	-moz-border-radius: 13px;
 	border-radius: 13px;
@@ -486,14 +486,14 @@
 	flex: 1;
 	align-self:center;
 }
-.Streams_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_tick{
+.Media_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_tick{
 	float:left;
 	margin: 0 0 0 -19px;
 	width:9px;
 	height: 13px;
 }
-.Streams_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_message{
+.Media_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_message{
 	color:#222;
 	overflow: hidden;
 }
-/* </Streams_webrtc_preview> */
+/* </Media_webrtc_preview> */

@@ -2370,12 +2370,61 @@ abstract class Users extends Base_Users
 		return $result;
 	}
 
-	function updateUserIds(array $modifications)
+	/**
+	 * Call this method to update names of one or more streams.
+	 * This should update them in many tables of the Users plugin.
+	 * Also, other plugins can add a hook to create their own updates.
+	 * @param {array} $updates pairs of (oldUserId => newUserId)
+	 */
+	static function updateUserIds(array $updates)
 	{
-		// TODO: implement
-		foreach ($modifications as $from => $to) {
-			Q::event('Users/updateUserIds', $modifications);
+		$chunkSize = 100;
+		$chunks = array_chunk($updates, $chunkSize, true);
+		$transactionKey = Q_Utils::randomString(10);
+		Users_User::begin(null, $transactionKey)->execute();
+		// can be rolled back on any exception
+		$fields = array(
+			'Users' => array(
+				'Contact' => array('userId', 'contactUserId'),
+				'Device' => 'userId',
+				'Email' => 'userId',
+				'Mobile' => 'userId',
+				'ExternalFrom' => 'userId',
+				'ExternalTo' => 'userId',
+				'Identify' => 'userId',
+				'Label' => 'userId',
+				'Link' => 'userId',
+				'Permission' => 'userId',
+				'Quota' => 'userId',
+				'Session' => 'userId',
+				'User' => 'id',
+				'Vote' => 'userId',
+				'Web3Transaction' => 'userId'
+			)
+		);
+		foreach ($fields as $Connection => $f1) {
+			foreach ($f1 as $Table => $fields) {
+				if (!is_array($fields)) {
+					$fields = array($fields);
+				}
+				$ClassName = $Connection . '_' . $Table;
+				foreach ($fields as $i => $field) {
+					foreach ($chunks as $chunk) {
+						call_user_func(array($ClassName, 'update'))
+							->set(array($field => $chunk))
+							->where(array($field => array_keys($chunk)))
+							->execute();
+					}
+				}
+			}
 		}
+		/**
+		 * Gives any plugin or app a chance to update stream names in its own tables
+		 * @event Users/updateUserIds
+		 * @param {array} $updates an array of (oldUserId => newUserId)
+		 */
+		Q::event('Users/updateUserIds', compact('updates', 'chunks', 'fields', 'chunks'), 'after');
+		Users_User::commit($transactionKey)->execute();
 	}
 
 	/**

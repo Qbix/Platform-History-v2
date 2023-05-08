@@ -21,7 +21,7 @@
 .Assets_NFT_series_preview_tool .Assets_NFT_series_untilTime {
     display: inline-block;
 }
-.Assets_NFT_series_preview_tool.Assets_NFT_series_manager_tool .Assets_NFT_series_name,
+.Assets_NFT_series_preview_tool.Assets_NFT_series_manager_tool .Streams_inplace_tool,
 .Assets_NFT_series_preview_tool.Assets_NFT_series_manager_tool .Assets_NFT_series_price,
 .Assets_NFT_series_preview_tool.Assets_NFT_series_manager_tool .Assets_NFT_series_ending,
 .Assets_NFT_series_preview_tool.Assets_NFT_series_manager_tool .Assets_NFT_series_untilTime {
@@ -294,14 +294,14 @@
 }
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author,
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name,
+.Assets_NFT_series_composer .Assets_nft_form_group.Streams_inplace_tool,
 .Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_percents,
 .Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_address {
     white-space: nowrap;
 }
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price label,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author label,
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name label,
+.Assets_NFT_series_composer .Assets_nft_form_group.Streams_inplace_tool label,
 .Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_percents label,
 .Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_address label {
     display: inline-block;
@@ -331,7 +331,7 @@
     height: 40px;
 }
 
-.Assets_NFT_series_preview_tool .Assets_NFT_series_name {
+.Assets_NFT_series_preview_tool .Streams_inplace_tool {
     line-height: 40px;
     text-shadow: 0 0 5px #fff;
     font-weight: bold;

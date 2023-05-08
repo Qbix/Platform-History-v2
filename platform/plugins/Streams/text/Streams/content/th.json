@@ -209,154 +209,6 @@
         "Devices": "อุปกรณ์",
         "Streams": "ลำธาร"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "คุณไม่มีสิทธิ์เข้าร่วมสตรีมนี้",
-        "streamTitle": "{{1}} เริ่มการประชุมทางไกล",
-        "allow": {
-            "dialogTitle": "กำลังเชื่อมต่อ",
-            "microphoneBtn": "เปิดใช้งานไมโครโฟน",
-            "cameraBtn": "เปิดใช้งานกล้อง",
-            "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
-        },
-        "preparing": {
-            "dialogTitle": "เปิด\/ปิดกล้องหรือไมค์ก่อนเข้าร่วม",
-            "micIsOff": "ไมค์ปิดอยู่",
-            "micIsOn": "ไมค์เปิดอยู่",
-            "cameraIsOff": "กล้องปิดอยู่",
-            "cameraIsOn": "กล้องเปิดอยู่",
-            "screenSharingIsOn": "การแชร์หน้าจอเปิดอยู่",
-            "screenSharingIsOff": "แบ่งปันหน้าจอ",
-            "joinNow": "เข้าร่วมการโทร"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "การอนุญาตสำหรับ {{kind}} ถูกปฏิเสธ หากต้องการใช้ โปรดทำตามขั้นตอนเหล่านี้:",
-            "point1": "ไปที่ &quot;การตั้งค่า&quot; -&gt; &quot;ขั้นสูง&quot; -&gt; &quot;ความเป็นส่วนตัวและความปลอดภัย&quot; -&gt; &quot;การตั้งค่าไซต์&quot; -&gt; &quot;กล้อง&quot; หรือ &quot;การตั้งค่าไซต์&quot; -&gt; &quot;ไมโครโฟน&quot;",
-            "point2": "ลบ {{hostname}} ออกจากรายการ &quot;บล็อก&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "การอนุญาตสำหรับ {{kind}} ถูกปฏิเสธ โปรดโหลดหน้านี้ซ้ำและยืนยันการเข้าถึง {{kind}} เพื่อเข้าร่วมการประชุม"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "การอนุญาตสำหรับ {{kind}} ถูกปฏิเสธ หากต้องการใช้ โปรดทำตามขั้นตอนเหล่านี้:",
-            "point1": "ไปที่การตั้งค่า Android ของคุณ",
-            "point2": "เปิด &quot;แอปและการแจ้งเตือน&quot;",
-            "point3": "ค้นหา &quot; {{communityName}} &quot; แล้วเปิด",
-            "point4": "แตะที่สิทธิ์",
-            "point5": "เปิดใช้งาน {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "การอนุญาตสำหรับ {{kind}} ถูกปฏิเสธ หากต้องการใช้ โปรดทำตามขั้นตอนเหล่านี้:",
-            "point1": "ไปที่การตั้งค่า iOS ของคุณ",
-            "point2": "เปิด &quot;ความเป็นส่วนตัว&quot;",
-            "point3": "ค้นหา {{kind}} และเปิด",
-            "point4": "ค้นหา &quot; {{communityName}} &quot; และเปิดใช้งาน"
-        },
-        "fbLive": {
-            "dialogTitle": "เริ่มสตรีมสดบน Facebook แล้ว"
-        },
-        "notices": {
-            "youJoinedRoom": "คุณเข้าร่วมห้อง",
-            "joining": "เข้าร่วม: {{userName}}",
-            "sbLeftRoom": "{{userName}} ออกจากห้อง",
-            "switchingRoom": "เปลี่ยนห้อง...",
-            "forceDisconnecting": "คุณจะถูกตัดการเชื่อมต่อภายใน 5 วินาที",
-            "forceDisconnectingImmediately": "คุณถูกตัดการเชื่อมต่อโดยโฮสต์",
-            "youLeftRoom": "คุณออกจากห้อง",
-            "codeCopied": "คุณออกจากห้อง",
-            "sbBeganFbLive": "{{userName}} เริ่มออกอากาศการโทรนี้ใน Facebook",
-            "sbStoppedFbLive": "{{userName}} หยุดออกอากาศการโทรนี้ใน Facebook",
-            "youBeganFbLive": "คุณเริ่มแพร่ภาพการโทรนี้ใน Facebook",
-            "youStoppedFbLive": "คุณหยุดเผยแพร่การโทรนี้ใน Facebook",
-            "youStartedLive": "คุณเริ่มออกอากาศการโทรนี้ไปยัง RTMP ที่กำหนดเอง",
-            "youStoppedLive": "คุณหยุดเผยแพร่การโทรนี้ไปยัง RTMP ที่กำหนดเองแล้ว",
-            "sbStartedLiveStreaming": "{{userName}} เริ่มถ่ายทอดสด",
-            "sbStoppedLiveStreaming": "{{userName}} จบการถ่ายทอดสด",
-            "liveStopped": "เกิดข้อผิดพลาดขณะส่งวิดีโอไปยังปลายทาง",
-            "youBeganVideoRecording": "คุณเริ่มบันทึกการประชุมนี้",
-            "youStoppedVideoRecording": "คุณหยุดบันทึกการประชุมนี้",
-            "linkCopiedToCb": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว",
-            "codeCopiedToCb": "คัดลอกโค้ดไปยังคลิปบอร์ดแล้ว",
-            "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ",
-            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม",
-            "allowedVideoLimit": "อนุญาตวิดีโอเพียง {{limit}} ในห้องนี้",
-            "allowedAudioLimit": "อนุญาตให้ใช้ไมโครโฟนเพียง {{limit}} ในห้องนี้"
-        },
-        "settingsPopup": {
-            "dialogTitle": "การตั้งค่าวิดีโอ",
-            "webCamera": "กล้องเว็บ",
-            "screenSharing": "การแชร์หน้าจอ",
-            "shareAnotherScreen": "แบ่งปันหน้าจออื่น",
-            "turnOffCameras": "ปิดกล้อง",
-            "turnOffVideo": "ปิดการแชร์กล้อง\/หน้าจอ",
-            "turnOffAudioInput": "ปิดเสียงไมโครโฟน",
-            "turnOffScreenSharing": "ปิดการแชร์หน้าจอ",
-            "cameraIsTurnedOff": "กล้องปิดอยู่",
-            "micIsTurnedOff": "ไมโครโฟนปิดอยู่",
-            "startFBLive": "เริ่ม Facebook Livestream",
-            "stopFBLive": "หยุด Facebook Livestream",
-            "startRecording": "เริ่มการบันทึก",
-            "stopRecording": "หยุดการบันทึก",
-            "start": "เริ่ม",
-            "stop": "หยุด",
-            "recordingInProgress": "กำลังบันทึก...",
-            "fbLiveTitle": "ชื่อเรื่อง Livestream",
-            "fbLiveDescription": "อธิบายสตรีมสดของคุณ มันเกี่ยวกับอะไร?",
-            "fbOnlyMeLiveAccess": "แค่ฉัน",
-            "fbFriendsAccess": "เพื่อน",
-            "fbPublicAccess": "สาธารณะ",
-            "publishOnTimeline": "เผยแพร่บนไทม์ไลน์",
-            "publishToGroup": "เผยแพร่ไปยังกลุ่ม",
-            "fbStartLive": "ถ่ายทอดสด",
-            "fbStopLive": "จบการถ่ายทอดสด",
-            "streamingSettings": "การตั้งค่า",
-            "manageStream": "จัดการสตรีมสด",
-            "fbEmbedCode": "ฝัง",
-            "copy": "สำเนา",
-            "streamToRTMP": "สตรีมไปยัง RTMP ที่กำหนดเอง",
-            "startBroadcasting": "เริ่มออกอากาศ",
-            "broadcastingInProgress": "กำลังดำเนินการออกอากาศ"
-        },
-        "audioSettings": {
-            "dialogTitle": "การตั้งค่าเสียง",
-            "speakers": "ลำโพง",
-            "microphone": "ไมโครโฟน"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "จัดการการออกอากาศ"
-        },
-        "participantsPopup": {
-            "dialogTitle": "การตั้งค่าผู้เข้าร่วม",
-            "disconnect": "ตัดการเชื่อมต่อ",
-            "floatingScreens": "หน้าจอลอย",
-            "tiledScreens": "หน้าจอกระเบื้อง",
-            "loudestExceptMe": "ดังที่สุดยกเว้นฉัน",
-            "maximizeLoudest": "เพิ่มเสียงดังที่สุด",
-            "staticMaximized": "คงที่สูงสุด",
-            "fullScreen": "เต็มจอ",
-            "manual": "คู่มือ",
-            "turnOffCamera": "ซ่อนวิดีโอ",
-            "turnOffAudio": "ปิดเสียง",
-            "turnOffScreenSharing": "ซ่อนการแชร์หน้าจอ",
-            "turnOnCamera": "แสดงวิดีโอ",
-            "turnOnAudio": "เปิดเสียง",
-            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ"
-        },
-        "streamingSettings": {
-            "title": "สตรีมสด"
-        },
-        "preview": {
-            "Meeting": "การประชุมทางไกล",
-            "MeetingEnded": "การประชุมทางไกลสิ้นสุดลง"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "ขอให้พูด",
-            "msg": "ขณะนี้มีผู้พูด {{count}} คนในการประชุม คุณต้องการแทนที่หนึ่งในนั้นหลังจากปล่อยให้พวกเขาพูดจบ {{seconds}} วินาทีหรือไม่?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "เชิญ",
@@ -471,10 +323,6 @@
             "displayType": "การสนทนา",
             "description": "การสนทนาระหว่างผู้ใช้พร้อมประวัติ"
         },
-        "Streams\/webrtc": {
-            "displayType": "การประชุมทางไกล",
-            "description": "การประชุมทางวิดีโอ\/เสียงออนไลน์"
-        },
         "Streams\/question": {
             "displayType": "คำถาม",
             "description": "สตรีมคำถาม",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "คำตอบ",
             "description": "สตรีมคำตอบ"
-        },
-        "Streams\/calls": {
-            "displayType": "โทร",
-            "description": "หมวดหมู่สำหรับ Streams\/webrtc",
-            "MaxRelationsExceeded": "เกินจำนวนการโทรสูงสุด"
         }
     },
     "menu": {

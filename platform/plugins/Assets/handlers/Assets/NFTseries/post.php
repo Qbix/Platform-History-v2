@@ -13,6 +13,6 @@ function Assets_NFTseries_post ($params) {
 
 	$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 
-	$fields = Q::take($req, array("title", "attributes"));
+	$fields = Q::take($req, array("title"));
 	Assets_NFT_Series::update($stream, $fields);
 }

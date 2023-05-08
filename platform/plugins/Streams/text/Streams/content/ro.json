@@ -105,10 +105,10 @@
             "title": "Care este relația ta?"
         },
         "dialog": {
-            "chooseFromContacts": "Alegeți dintre contactele dvs",
+            "chooseFromContacts": "Alegeți din Agendă",
             "chooseAgainFromContacts": "Alege din nou din Contacte",
             "inviteSelectedContacts": "Invitați persoanele de contact selectate",
-            "selectFromContacts": "Selectați Din Contacte",
+            "selectFromContacts": "Selectați Din contacte",
             "userChooserPlaceholder": "Cauta dupa nume",
             "photo": "Fă o poză",
             "photoOf": "Faceți o fotografie cu {{name}}",
@@ -208,154 +208,6 @@
         "Identifiers": "Identificatori",
         "Devices": "Dispozitive",
         "Streams": "Fluxuri"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
-        "streamTitle": "{{1}} a început o teleconferință",
-        "allow": {
-            "dialogTitle": "Conectare",
-            "microphoneBtn": "Activați microfonul",
-            "cameraBtn": "Activați Camera",
-            "cameraAndMicrophoneBtn": "Activați camera și microfonul"
-        },
-        "preparing": {
-            "dialogTitle": "Porniți\/opriți camera sau microfonul înainte de a vă alătura",
-            "micIsOff": "Microfonul este oprit",
-            "micIsOn": "Microfonul este pornit",
-            "cameraIsOff": "Camera este oprită",
-            "cameraIsOn": "Camera este pornită",
-            "screenSharingIsOn": "Partajarea ecranului este activată",
-            "screenSharingIsOff": "Distribuie ecran",
-            "joinNow": "Alăturați-vă apelului"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
-            "point1": "Accesați „Setări” -&gt; „Avansat” -&gt; „Confidențialitate și securitate” -&gt; „Setări site” -&gt; „Cameră” sau „Setări site” -&gt; „Microfon”",
-            "point2": "Eliminați {{hostname}} din lista „Blocați”."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Vă rugăm să reîncărcați această pagină și să confirmați accesul la {{kind}} pentru a vă alătura conferinței."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
-            "point1": "Accesați Setările Android",
-            "point2": "Deschideți „Aplicații și notificări”",
-            "point3": "Găsiți „ {{communityName}} ” și deschideți-l",
-            "point4": "Atingeți Permisiuni",
-            "point5": "Activați {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
-            "point1": "Accesați Setările iOS",
-            "point2": "Deschideți „Confidențialitate”",
-            "point3": "Găsiți {{kind}} și deschideți-l",
-            "point4": "Găsiți „ {{communityName}} ” și activați"
-        },
-        "fbLive": {
-            "dialogTitle": "A început fluxul live pe Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "Te-ai alăturat camerei",
-            "joining": "Alăturare: {{userName}}",
-            "sbLeftRoom": "{{userName}} a părăsit camera",
-            "switchingRoom": "Schimbarea camerei...",
-            "forceDisconnecting": "Veți fi deconectat în 5 secunde",
-            "forceDisconnectingImmediately": "Ai fost deconectat de o gazdă",
-            "youLeftRoom": "Ai părăsit camera",
-            "codeCopied": "Ai părăsit camera",
-            "sbBeganFbLive": "{{userName}} a început să transmită acest apel pe Facebook",
-            "sbStoppedFbLive": "{{userName}} a încetat să mai difuzeze acest apel pe Facebook",
-            "youBeganFbLive": "Ați început să difuzați acest apel pe Facebook",
-            "youStoppedFbLive": "Ai încetat să mai difuzezi acest apel pe Facebook",
-            "youStartedLive": "Ați început să difuzați acest apel către RTMP personalizat",
-            "youStoppedLive": "Ați oprit difuzarea acestui apel la RTMP personalizat",
-            "sbStartedLiveStreaming": "{{userName}} a început live",
-            "sbStoppedLiveStreaming": "{{userName}} sa încheiat în direct",
-            "liveStopped": "A apărut o eroare la trimiterea videoclipului la punctul final",
-            "youBeganVideoRecording": "Ați început să înregistrați această conferință",
-            "youStoppedVideoRecording": "Ai oprit înregistrarea acestei conferințe",
-            "linkCopiedToCb": "Link copiat în clipboard",
-            "codeCopiedToCb": "Cod copiat în clipboard",
-            "userHasNoVideo": "Participantul nu are videoclip",
-            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a participa la conferință.",
-            "allowedVideoLimit": "Numai {{limit}} de videoclipuri permise în această cameră",
-            "allowedAudioLimit": "Numai {{limit}} de microfoane sunt permise în această cameră"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Setari video",
-            "webCamera": "Camera web",
-            "screenSharing": "Partajarea ecranului",
-            "shareAnotherScreen": "Partajați un alt ecran",
-            "turnOffCameras": "Opriți camera",
-            "turnOffVideo": "Dezactivați partajarea camerei\/ecranului",
-            "turnOffAudioInput": "Dezactivați microfonul",
-            "turnOffScreenSharing": "Dezactivați partajarea ecranului",
-            "cameraIsTurnedOff": "Camera este oprită",
-            "micIsTurnedOff": "Microfonul este oprit",
-            "startFBLive": "Porniți Facebook Livestream",
-            "stopFBLive": "Opriți fluxul live Facebook",
-            "startRecording": "Începe să înregistrezi",
-            "stopRecording": "Opriți înregistrarea",
-            "start": "start",
-            "stop": "Stop",
-            "recordingInProgress": "Înregistrarea este în curs...",
-            "fbLiveTitle": "Titlul streamului live",
-            "fbLiveDescription": "Descrieți fluxul dvs. live. Despre ce e vorba?",
-            "fbOnlyMeLiveAccess": "Doar eu",
-            "fbFriendsAccess": "Prieteni",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publicați pe cronologie",
-            "publishToGroup": "Publicați în grup",
-            "fbStartLive": "Du-te si traieste",
-            "fbStopLive": "Încheiați fluxul live",
-            "streamingSettings": "Setări",
-            "manageStream": "Gestionați fluxul live",
-            "fbEmbedCode": "Încorporare",
-            "copy": "Copie",
-            "streamToRTMP": "Transmiteți în flux la RTMP personalizat",
-            "startBroadcasting": "Începeți să difuzați",
-            "broadcastingInProgress": "Difuzarea este în curs"
-        },
-        "audioSettings": {
-            "dialogTitle": "Setari audio",
-            "speakers": "Difuzoare",
-            "microphone": "Microfon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Gestionați difuzarea"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Setări pentru participanți",
-            "disconnect": "Deconectat",
-            "floatingScreens": "Ecrane plutitoare",
-            "tiledScreens": "Ecrane cu gresie",
-            "loudestExceptMe": "Cel mai tare în afară de mine",
-            "maximizeLoudest": "Maximizați cel mai tare",
-            "staticMaximized": "Maximizat static",
-            "fullScreen": "Ecran complet",
-            "manual": "Manual",
-            "turnOffCamera": "Ascunde videoclipul",
-            "turnOffAudio": "Dezactivați sunetul",
-            "turnOffScreenSharing": "Ascunde partajarea ecranului",
-            "turnOnCamera": "Afișează videoclipul",
-            "turnOnAudio": "Activați sunetul",
-            "turnOnScreenSharing": "Afișează partajarea ecranului"
-        },
-        "streamingSettings": {
-            "title": "Transmitere live"
-        },
-        "preview": {
-            "Meeting": "Teleconferinta",
-            "MeetingEnded": "Teleconferința s-a încheiat"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Cerere de a vorbi",
-            "msg": "În prezent, la întâlnire vorbesc {{count}} de persoane. Doriți să înlocuiți unul dintre ele după ce le-ați lăsat {{seconds}} de secunde pentru a termina de vorbit?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -457,7 +309,7 @@
         },
         "Streams\/participating": {
             "displayType": "Index de participare",
-            "description": "fluxurile sunt legate\/fără legătură cu aceasta atunci când un utilizator se alătură\/păreșează"
+            "description": "fluxurile sunt legate\/fără legătură cu aceasta atunci când un utilizator se alătură\/părăsește"
         },
         "Streams\/interest": {
             "displayType": "Interes",
@@ -471,10 +323,6 @@
             "displayType": "Conversaţie",
             "description": "o conversație între utilizatori, cu istoric"
         },
-        "Streams\/webrtc": {
-            "displayType": "Teleconferinta",
-            "description": "o conferință video\/audio online"
-        },
         "Streams\/question": {
             "displayType": "Întrebare",
             "description": "flux de întrebări",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Răspuns",
             "description": "flux de răspunsuri"
-        },
-        "Streams\/calls": {
-            "displayType": "Apeluri",
-            "description": "categorie pentru Streams\/webrtc",
-            "MaxRelationsExceeded": "Numărul maxim de apeluri a fost depășit"
         }
     },
     "menu": {

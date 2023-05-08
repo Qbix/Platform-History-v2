@@ -1349,10 +1349,12 @@ class Q
 	static function log (
 		$message,
 		$key = null,
-		$options = array())
+		$options = array(),
+		$extra = null)
 	{
 		if (is_bool($options)) {
 			$timestamp = $options;
+			$options = $extra;
 		} else {
 			$timestamp = Q::ifset($options, 'timestamp', true);
 		}

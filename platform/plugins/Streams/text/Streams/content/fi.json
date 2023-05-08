@@ -107,7 +107,7 @@
         "dialog": {
             "chooseFromContacts": "Valitse yhteystiedoistasi",
             "chooseAgainFromContacts": "Valitse uudelleen yhteystiedoista",
-            "inviteSelectedContacts": "Kutsu valitut yhteyshenkilöt",
+            "inviteSelectedContacts": "Kutsu valitut yhteystiedot",
             "selectFromContacts": "Valitse yhteystiedoista",
             "userChooserPlaceholder": "Hae nimellä",
             "photo": "Ottaa valokuva",
@@ -209,154 +209,6 @@
         "Devices": "Laitteet",
         "Streams": "Streamit"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
-        "streamTitle": "{{1}} aloitti puhelinkonferenssin",
-        "allow": {
-            "dialogTitle": "Yhdistetään",
-            "microphoneBtn": "Ota mikrofoni käyttöön",
-            "cameraBtn": "Ota kamera käyttöön",
-            "cameraAndMicrophoneBtn": "Ota kamera ja mikrofoni käyttöön"
-        },
-        "preparing": {
-            "dialogTitle": "Kytke kamera tai mikrofoni päälle\/pois ennen liittymistä",
-            "micIsOff": "Mikrofoni on pois päältä",
-            "micIsOn": "Mikrofoni on päällä",
-            "cameraIsOff": "Kamera on pois päältä",
-            "cameraIsOn": "Kamera on päällä",
-            "screenSharingIsOn": "Näytönjako on päällä",
-            "screenSharingIsOff": "Jaa näyttö",
-            "joinNow": "Liity puheluun"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Lupa {{kind}} lle evätty. Voit käyttää sitä seuraavasti:",
-            "point1": "Siirry kohtaan &quot;Asetukset&quot; -&gt; &quot;Lisäasetukset&quot; -&gt; &quot;Tietosuoja ja turvallisuus&quot; -&gt; &quot;Sivustoasetukset&quot; -&gt; &quot;Kamera&quot; tai &quot;Sivustoasetukset&quot; -&gt; &quot;Mikrofoni&quot;",
-            "point2": "Poista {{hostname}} &quot;Estä&quot;-luettelosta"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Lupa {{kind}} lle evätty. Lataa tämä sivu uudelleen ja vahvista pääsy numeroon {{kind}} liittyäksesi konferenssiin."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Lupa {{kind}} lle evätty. Voit käyttää sitä seuraavasti:",
-            "point1": "Siirry Android-asetuksiin",
-            "point2": "Avaa &quot;Sovellukset ja ilmoitukset&quot;",
-            "point3": "Etsi &quot; {{communityName}} &quot; ja avaa se",
-            "point4": "Napauta Käyttöoikeudet",
-            "point5": "Ota {{kind}} käyttöön"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Lupa {{kind}} lle evätty. Voit käyttää sitä seuraavasti:",
-            "point1": "Siirry iOS-asetuksiin",
-            "point2": "Avaa &quot;Tietosuoja&quot;",
-            "point3": "Etsi {{kind}} ja avaa se",
-            "point4": "Etsi &quot; {{communityName}} &quot; ja ota käyttöön"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebookin live-lähetys alkoi"
-        },
-        "notices": {
-            "youJoinedRoom": "Liityit huoneeseen",
-            "joining": "Liittyjät: {{userName}}",
-            "sbLeftRoom": "{{userName}} lähti huoneesta",
-            "switchingRoom": "Vaihdetaan huonetta...",
-            "forceDisconnecting": "Yhteys katkeaa 5 sekunnin kuluessa",
-            "forceDisconnectingImmediately": "Isäntä katkaisi yhteyden sinuun",
-            "youLeftRoom": "Lähdit huoneesta",
-            "codeCopied": "Lähdit huoneesta",
-            "sbBeganFbLive": "{{userName}} aloitti tämän puhelun lähettämisen Facebookissa",
-            "sbStoppedFbLive": "{{userName}} lopetti tämän puhelun lähettämisen Facebookissa",
-            "youBeganFbLive": "Aloitit tämän puhelun lähettämisen Facebookissa",
-            "youStoppedFbLive": "Lopetit tämän puhelun lähettämisen Facebookissa",
-            "youStartedLive": "Aloitit tämän puhelun lähettämisen mukautetulle RTMP:lle",
-            "youStoppedLive": "Lopetit tämän puhelun lähettämisen mukautetulle RTMP:lle",
-            "sbStartedLiveStreaming": "{{userName}} aloitti live-lähetyksen",
-            "sbStoppedLiveStreaming": "{{userName}} päättyi livenä",
-            "liveStopped": "Virhe lähetettäessä videota päätepisteeseen",
-            "youBeganVideoRecording": "Aloitit tämän konferenssin tallentamisen",
-            "youStoppedVideoRecording": "Lopetit tämän konferenssin tallentamisen",
-            "linkCopiedToCb": "Linkki kopioitu leikepöydälle",
-            "codeCopiedToCb": "Koodi kopioitu leikepöydälle",
-            "userHasNoVideo": "Osallistujalla ei ole videota",
-            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin.",
-            "allowedVideoLimit": "Vain {{limit}} videota sallitaan tässä huoneessa",
-            "allowedAudioLimit": "Vain {{limit}} mikrofonia sallitaan tässä huoneessa"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Videoasetukset",
-            "webCamera": "Nettikamera",
-            "screenSharing": "Näytön jakaminen",
-            "shareAnotherScreen": "Jaa toinen näyttö",
-            "turnOffCameras": "Sammuta kamera",
-            "turnOffVideo": "Poista kameran\/näytön jakaminen käytöstä",
-            "turnOffAudioInput": "Mykistä mikrofoni",
-            "turnOffScreenSharing": "Poista näytön jakaminen käytöstä",
-            "cameraIsTurnedOff": "Kamera on sammutettu",
-            "micIsTurnedOff": "Mikrofoni on pois päältä",
-            "startFBLive": "Aloita Facebook Livestream",
-            "stopFBLive": "Lopeta Facebook Livestream",
-            "startRecording": "Aloita nauhottaminen",
-            "stopRecording": "Lopeta tallennus",
-            "start": "alkaa",
-            "stop": "Lopettaa",
-            "recordingInProgress": "Tallennus on käynnissä...",
-            "fbLiveTitle": "Livestreamin otsikko",
-            "fbLiveDescription": "Kuvaile suoratoistoasi. Mitä se koskee?",
-            "fbOnlyMeLiveAccess": "Vain minä",
-            "fbFriendsAccess": "Ystävät",
-            "fbPublicAccess": "Julkinen",
-            "publishOnTimeline": "Julkaise aikajanalla",
-            "publishToGroup": "Julkaise ryhmässä",
-            "fbStartLive": "Elä",
-            "fbStopLive": "Lopeta suoratoisto",
-            "streamingSettings": "asetukset",
-            "manageStream": "Hallinnoi suoratoistoa",
-            "fbEmbedCode": "Upottaa",
-            "copy": "Kopio",
-            "streamToRTMP": "Striimaa muokattuun RTMP:hen",
-            "startBroadcasting": "Aloita lähetys",
-            "broadcastingInProgress": "Lähetys on käynnissä"
-        },
-        "audioSettings": {
-            "dialogTitle": "Ääniasetukset",
-            "speakers": "Kaiuttimet",
-            "microphone": "Mikrofoni"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Hallinnoi lähetystä"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Osallistujaasetukset",
-            "disconnect": "Katkaista",
-            "floatingScreens": "Kelluvat näytöt",
-            "tiledScreens": "Laatoitettu näytöt",
-            "loudestExceptMe": "Äänekkäin paitsi minä",
-            "maximizeLoudest": "Maksimoi äänekkäin",
-            "staticMaximized": "Staattinen maksimoitu",
-            "fullScreen": "Koko näyttö",
-            "manual": "Manuaalinen",
-            "turnOffCamera": "Piilota video",
-            "turnOffAudio": "Mykistä ääni",
-            "turnOffScreenSharing": "Piilota näytön jakaminen",
-            "turnOnCamera": "Näytä video",
-            "turnOnAudio": "Poista mykistys",
-            "turnOnScreenSharing": "Näytä näytön jakaminen"
-        },
-        "streamingSettings": {
-            "title": "Suora lähetys"
-        },
-        "preview": {
-            "Meeting": "Puhelinkonferenssi",
-            "MeetingEnded": "Puhelinkonferenssi päättyi"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Pyydä puhua",
-            "msg": "Tällä hetkellä kokouksessa puhuu {{count}} henkilöä. Haluatko korvata yhden niistä, kun olet antanut heille {{seconds}} sekuntia puhua loppuun?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Kutsuttu",
@@ -364,7 +216,7 @@
         },
         "Streams\/resource": {
             "displayType": "Resurssi",
-            "description": "stream resurssien käytön hallintaan ja päivitysviestien lähettämiseen"
+            "description": "stream resurssin käytön hallintaan ja päivitysviestien lähettämiseen"
         },
         "Streams\/task": {
             "description": "saadaksesi päivitykset tietyn tehtävän edistymisestä",
@@ -471,10 +323,6 @@
             "displayType": "Keskustelu",
             "description": "keskustelu käyttäjien välillä historian kera"
         },
-        "Streams\/webrtc": {
-            "displayType": "Puhelinkonferenssi",
-            "description": "online-video-\/äänikonferenssi"
-        },
         "Streams\/question": {
             "displayType": "Kysymys",
             "description": "kysymysvirta",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Vastaus",
             "description": "vastausvirta"
-        },
-        "Streams\/calls": {
-            "displayType": "Puhelut",
-            "description": "luokka Streams\/webrtc:lle",
-            "MaxRelationsExceeded": "Puhelujen enimmäismäärä ylitetty"
         }
     },
     "menu": {

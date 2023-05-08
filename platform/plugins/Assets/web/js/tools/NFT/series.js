@@ -104,6 +104,7 @@
                 var count = 0;
                 $relatedToolBox[0].forEachTool("Assets/NFT/series/preview", function () {
                     var seriesPreviewTool = this;
+                    var publisherId = seriesPreviewTool.preview.state.publisherId;
                     var streamName = seriesPreviewTool.preview.state.streamName;
                     if (!streamName) {
                         return;
@@ -127,39 +128,6 @@
                     }
 
                     var $nftBox = $("<div>").addClass(normalizedStreamName).appendTo($nftToolBox);
-                    var relatedOptions = {
-                        publisherId: seriesPreviewTool.preview.state.publisherId,
-                        streamName: seriesPreviewTool.preview.state.streamName,
-                        relationType: NFT.relationType,
-                        editable: false,
-                        closeable: true,
-                        sortable: true,
-                        relatedOptions: {
-                            withParticipant: false
-                        },
-                        specificOptions: {
-                            userId: state.userId,
-                            onCreated: function (streamData) {
-                                var NFTPreview = this;
-                                var NFTsRelatedTool = Q.Tool.from($(NFTPreview.element).closest(".Streams_related_tool")[0], "Streams/related");
-                                NFTsRelatedTool && NFTsRelatedTool.refresh();
-
-                                $(".Assets_NFT_preview_tool.Streams_related_composer", $toolElement).each(function () {
-                                    var NFTpreview = Q.Tool.from(this, "Assets/NFT/preview");
-                                    NFTpreview && NFTpreview.composer();
-                                });
-                            }
-                        }
-                    };
-                    if (tool.isAdmin || state.userId === loggedInUserId) {
-                        relatedOptions.creatable = {};
-                        relatedOptions.creatable = {
-                            "Assets/NFT": {
-                                publisherId: state.userId,
-                                title: tool.text.NFT.CreateNFT
-                            }
-                        };
-                    }
                     $nftBox[0].forEachTool("Streams/related", function () {
                         if (tool.selectedSeries === streamName) {
                             $(this.element).addClass("Q_selected");
@@ -183,7 +151,49 @@
                         }
                     }, tool);
 
-                    $nftBox.tool("Streams/related", relatedOptions, null, Q.normalize(streamName)).activate();
+                    Streams.get(publisherId, streamName, function (err) {
+                        if (err) {
+                            return;
+                        }
+
+                        var frozen = this.getAttribute('frozen');
+                        var relatedOptions = {
+                            publisherId: seriesPreviewTool.preview.state.publisherId,
+                            streamName: seriesPreviewTool.preview.state.streamName,
+                            relationType: NFT.relationType,
+                            editable: false,
+                            closeable: !frozen,
+                            sortable: true,
+                            relatedOptions: {
+                                withParticipant: false
+                            },
+                            specificOptions: {
+                                userId: state.userId,
+                                onCreated: function (streamData) {
+                                    var NFTPreview = this;
+                                    var NFTsRelatedTool = Q.Tool.from($(NFTPreview.element).closest(".Streams_related_tool")[0], "Streams/related");
+                                    NFTsRelatedTool && NFTsRelatedTool.refresh();
+
+                                    $(".Assets_NFT_preview_tool.Streams_related_composer", $toolElement).each(function () {
+                                        var NFTpreview = Q.Tool.from(this, "Assets/NFT/preview");
+                                        NFTpreview && NFTpreview.composer();
+                                    });
+                                }
+                            }
+                        };
+
+                        if (!frozen && (tool.isAdmin || state.userId === loggedInUserId)) {
+                            relatedOptions.creatable = {};
+                            relatedOptions.creatable = {
+                                "Assets/NFT": {
+                                    publisherId: state.userId,
+                                    title: tool.text.NFT.CreateNFT
+                                }
+                            };
+                        }
+
+                        $nftBox.tool("Streams/related", relatedOptions, null, Q.normalize(streamName)).activate();
+                    });
                 });
             });
         },
@@ -205,7 +215,8 @@
 
             tool.selectedSeries = streamName;
 
-            history.replaceState({}, null, Q.url(window.location + "?selectedSeriesId=" + streamName.split("/").pop()));
+            var parsedUrl = new URL(window.location);
+            history.replaceState({}, null, parsedUrl.origin + parsedUrl.pathname + "?selectedSeriesId=" + streamName.split("/").pop());
 
             Streams.get(publisherId, streamName, function () {
                 Q.handle(state.onSelected, seriesPreview, [this]);

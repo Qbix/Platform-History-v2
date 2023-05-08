@@ -74,7 +74,7 @@ class Assets_NFT_Series
 		$userId = Users::loggedInUser(true)->id;
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
-			if (!Q::ifset($fields, $field)) {
+			if (!Q::ifset($fields, $field, null)) {
 				continue;
 			}
 
@@ -91,12 +91,10 @@ class Assets_NFT_Series
 			}
 			$stream->attributes = Q::json_encode(array_merge($attributes, $fields["attributes"]));
 			$fieldsUpdated = true;
-		} else {
-			$stream->attributes = '{}';
 		}
 
 		if ($fieldsUpdated) {
-			$stream->save();
+			$stream->changed();
 		}
 
 		// check if new

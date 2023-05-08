@@ -209,154 +209,6 @@
         "Devices": "Dispositivi",
         "Streams": "Flussi"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Non sei autorizzato a partecipare a questo stream.",
-        "streamTitle": "{{1}} ha avviato una teleconferenza",
-        "allow": {
-            "dialogTitle": "Collegamento",
-            "microphoneBtn": "Abilita microfono",
-            "cameraBtn": "Abilita fotocamera",
-            "cameraAndMicrophoneBtn": "Abilita fotocamera e microfono"
-        },
-        "preparing": {
-            "dialogTitle": "Accendi\/spegni la videocamera o il microfono prima di unirti",
-            "micIsOff": "Il microfono è spento",
-            "micIsOn": "Il microfono è acceso",
-            "cameraIsOff": "La fotocamera è spenta",
-            "cameraIsOn": "La fotocamera è accesa",
-            "screenSharingIsOn": "La condivisione dello schermo è attiva",
-            "screenSharingIsOff": "Condividere lo schermo",
-            "joinNow": "Partecipa alla chiamata"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Istruzioni",
-            "permissionDenied": "Autorizzazione per {{kind}} negata. Per usarlo, segui questi passaggi:",
-            "point1": "Vai su &quot;Impostazioni&quot; -&gt; &quot;Avanzate&quot; -&gt; &quot;Privacy e sicurezza&quot; -&gt; &quot;Impostazioni sito&quot; -&gt; &quot;Fotocamera&quot; o &quot;Impostazioni sito&quot; -&gt; &quot;Microfono&quot;",
-            "point2": "Rimuovi {{hostname}} dall&#39;elenco &quot;Blocca&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Istruzioni",
-            "permissionDenied": "Autorizzazione per {{kind}} negata. Ricarica questa pagina e conferma l&#39;accesso al {{kind}} per partecipare alla conferenza."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Istruzioni",
-            "permissionDenied": "Autorizzazione per {{kind}} negata. Per usarlo, segui questi passaggi:",
-            "point1": "Vai alle tue Impostazioni Android",
-            "point2": "Apri &quot;App e notifiche&quot;",
-            "point3": "Trova &quot; {{communityName}} &quot; e aprilo",
-            "point4": "Tocca Autorizzazioni",
-            "point5": "Abilita {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Istruzioni",
-            "permissionDenied": "Autorizzazione per {{kind}} negata. Per usarlo, segui questi passaggi:",
-            "point1": "Vai alle tue Impostazioni iOS",
-            "point2": "Apri &quot;Privacy&quot;",
-            "point3": "Trova {{kind}} e aprilo",
-            "point4": "Trova &quot; {{communityName}} &quot; e abilita"
-        },
-        "fbLive": {
-            "dialogTitle": "È iniziata la diretta Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "Ti sei unito alla stanza",
-            "joining": "Aderire: {{userName}}",
-            "sbLeftRoom": "{{userName}} ha lasciato la stanza",
-            "switchingRoom": "Cambio stanza...",
-            "forceDisconnecting": "Sarai disconnesso entro 5 secondi",
-            "forceDisconnectingImmediately": "Sei stato disconnesso da un host",
-            "youLeftRoom": "Hai lasciato la stanza",
-            "codeCopied": "Hai lasciato la stanza",
-            "sbBeganFbLive": "{{userName}} ha iniziato a trasmettere questa chiamata su Facebook",
-            "sbStoppedFbLive": "{{userName}} ha interrotto la trasmissione di questa chiamata su Facebook",
-            "youBeganFbLive": "Hai iniziato a trasmettere questa chiamata su Facebook",
-            "youStoppedFbLive": "Hai interrotto la trasmissione di questa chiamata su Facebook",
-            "youStartedLive": "Hai iniziato a trasmettere questa chiamata a RTMP personalizzato",
-            "youStoppedLive": "Hai interrotto la trasmissione di questa chiamata a RTMP personalizzato",
-            "sbStartedLiveStreaming": "{{userName}} è iniziato dal vivo",
-            "sbStoppedLiveStreaming": "{{userName}} è terminato dal vivo",
-            "liveStopped": "Si è verificato un errore durante l&#39;invio del video all&#39;endpoint",
-            "youBeganVideoRecording": "Hai iniziato a registrare questa conferenza",
-            "youStoppedVideoRecording": "Hai interrotto la registrazione di questa conferenza",
-            "linkCopiedToCb": "Link copiato negli appunti",
-            "codeCopiedToCb": "Codice copiato negli appunti",
-            "userHasNoVideo": "Il partecipante non ha video",
-            "openInBrowserAlert": "Aprire il collegamento nel browser Safari per partecipare alla conferenza.",
-            "allowedVideoLimit": "Solo {{limit}} video consentiti in questa stanza",
-            "allowedAudioLimit": "In questa stanza sono ammessi solo {{limit}} microfoni"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Impostazioni video",
-            "webCamera": "Web camera",
-            "screenSharing": "Condivisione dello schermo",
-            "shareAnotherScreen": "Condividi un&#39;altra schermata",
-            "turnOffCameras": "Spegni la fotocamera",
-            "turnOffVideo": "Disattiva la condivisione della fotocamera\/schermo",
-            "turnOffAudioInput": "Microfono muto",
-            "turnOffScreenSharing": "Disattiva la condivisione dello schermo",
-            "cameraIsTurnedOff": "La fotocamera è spenta",
-            "micIsTurnedOff": "Il microfono è spento",
-            "startFBLive": "Avvia il live streaming di Facebook",
-            "stopFBLive": "Interrompi il live streaming di Facebook",
-            "startRecording": "Inizia a registrare",
-            "stopRecording": "Interrompi la registrazione",
-            "start": "Inizio",
-            "stop": "Fermare",
-            "recordingInProgress": "La registrazione è in corso...",
-            "fbLiveTitle": "Titolo della diretta",
-            "fbLiveDescription": "Descrivi il tuo live streaming. Di cosa si tratta?",
-            "fbOnlyMeLiveAccess": "Solo io",
-            "fbFriendsAccess": "Amici",
-            "fbPublicAccess": "Pubblico",
-            "publishOnTimeline": "Pubblica sulla cronologia",
-            "publishToGroup": "Pubblica nel gruppo",
-            "fbStartLive": "Andare in diretta",
-            "fbStopLive": "Termina il live streaming",
-            "streamingSettings": "Impostazioni",
-            "manageStream": "Gestisci live streaming",
-            "fbEmbedCode": "Incorporare",
-            "copy": "copia",
-            "streamToRTMP": "Streaming su RTMP personalizzato",
-            "startBroadcasting": "Inizia a trasmettere",
-            "broadcastingInProgress": "La trasmissione è in corso"
-        },
-        "audioSettings": {
-            "dialogTitle": "Impostazioni audio",
-            "speakers": "Altoparlanti",
-            "microphone": "Microfono"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Gestisci trasmissione"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Impostazioni dei partecipanti",
-            "disconnect": "Disconnetti",
-            "floatingScreens": "Schermi galleggianti",
-            "tiledScreens": "Schermi piastrellati",
-            "loudestExceptMe": "I più rumorosi tranne me",
-            "maximizeLoudest": "Massimizza Più forte",
-            "staticMaximized": "Statico massimizzato",
-            "fullScreen": "A schermo intero",
-            "manual": "Manuale",
-            "turnOffCamera": "Nascondi video",
-            "turnOffAudio": "Disattiva l&#39;audio",
-            "turnOffScreenSharing": "Nascondi la condivisione dello schermo",
-            "turnOnCamera": "Mostra filmato",
-            "turnOnAudio": "Riattiva l&#39;audio",
-            "turnOnScreenSharing": "Mostra la condivisione dello schermo"
-        },
-        "streamingSettings": {
-            "title": "Trasmissione in diretta"
-        },
-        "preview": {
-            "Meeting": "Teleconferenza",
-            "MeetingEnded": "La teleconferenza è terminata"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Richiesta di intervento",
-            "msg": "Attualmente ci sono {{count}} persone che parlano nella riunione. Vuoi sostituirne uno dopo avergli concesso {{seconds}} secondi per finire di parlare?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Invitato",
@@ -453,7 +305,7 @@
         },
         "Streams\/category": {
             "displayType": "Categoria",
-            "description": "una categoria a cui possono essere correlati altri flussi"
+            "description": "una categoria alla quale possono essere correlati altri flussi"
         },
         "Streams\/participating": {
             "displayType": "Indice partecipanti",
@@ -471,10 +323,6 @@
             "displayType": "Conversazione",
             "description": "una conversazione tra utenti, con cronologia"
         },
-        "Streams\/webrtc": {
-            "displayType": "Teleconferenza",
-            "description": "una conferenza video\/audio online"
-        },
         "Streams\/question": {
             "displayType": "Domanda",
             "description": "flusso di domande",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Risposta",
             "description": "flusso di risposta"
-        },
-        "Streams\/calls": {
-            "displayType": "Chiamate",
-            "description": "categoria per Stream\/webrtc",
-            "MaxRelationsExceeded": "Numero massimo di chiamate superato"
         }
     },
     "menu": {
@@ -606,7 +449,7 @@
         "CallReasonTitle": "Di cosa tratta questa chiamata?",
         "WaitingRoom": "Sala D&#39;Attesa",
         "LiveRoom": "Sala dal vivo",
-        "interviewedByAnotherHost": "Attualmente è intervistato da un altro host",
+        "interviewedByAnotherHost": "Attualmente è intervistato da un altro ospite",
         "bringToLive": "Porta allo spettacolo dal vivo",
         "putOnHold": "Messa in attesa",
         "endCall": "Fine chiamata",

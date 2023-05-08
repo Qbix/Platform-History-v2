@@ -209,154 +209,6 @@
         "Devices": "Toestelle",
         "Streams": "Strome"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Jy het nie toestemming om by hierdie stroom aan te sluit nie.",
-        "streamTitle": "{{1}} het &#39;n Telekonferensie begin",
-        "allow": {
-            "dialogTitle": "Verbind",
-            "microphoneBtn": "Aktiveer mikrofoon",
-            "cameraBtn": "Aktiveer kamera",
-            "cameraAndMicrophoneBtn": "Aktiveer kamera en mikrofoon"
-        },
-        "preparing": {
-            "dialogTitle": "Skakel kamera of mikrofoon aan\/af voor jy aansluit",
-            "micIsOff": "Mikrofoon is af",
-            "micIsOn": "Mikrofoon is aan",
-            "cameraIsOff": "Kamera is af",
-            "cameraIsOn": "Kamera is aan",
-            "screenSharingIsOn": "Skermdeling is aan",
-            "screenSharingIsOff": "Deel skerm",
-            "joinNow": "Sluit aan by die oproep"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instruksies",
-            "permissionDenied": "Toestemming vir {{kind}} geweier. Om dit te gebruik, volg asseblief hierdie stappe:",
-            "point1": "Gaan na &quot;Instellings&quot; -&gt; &quot;Gevorderd&quot; -&gt; &quot;Privaatheid en sekuriteit&quot; -&gt; &quot;werfinstellings&quot; -&gt; &quot;Kamera&quot; of &quot;werfinstellings&quot; -&gt; &quot;mikrofoon&quot;",
-            "point2": "Verwyder {{hostname}} van &quot;Blok&quot; lys"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instruksies",
-            "permissionDenied": "Toestemming vir {{kind}} geweier. Herlaai asseblief hierdie bladsy en bevestig toegang tot {{kind}} om by die konferensie aan te sluit."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instruksies",
-            "permissionDenied": "Toestemming vir {{kind}} geweier. Om dit te gebruik, volg asseblief hierdie stappe:",
-            "point1": "Gaan na jou Android-instellings",
-            "point2": "Maak &quot;Toepassings en kennisgewings&quot; oop",
-            "point3": "Soek &quot; {{communityName}} &quot; en maak dit oop",
-            "point4": "Tik op Toestemmings",
-            "point5": "Aktiveer {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instruksies",
-            "permissionDenied": "Toestemming vir {{kind}} geweier. Om dit te gebruik, volg asseblief hierdie stappe:",
-            "point1": "Gaan na jou iOS-instellings",
-            "point2": "Maak &quot;Privaatheid&quot; oop",
-            "point3": "Soek {{kind}} en maak dit oop",
-            "point4": "Soek &quot; {{communityName}} &quot; en aktiveer"
-        },
-        "fbLive": {
-            "dialogTitle": "Facebook regstreekse streaming het begin"
-        },
-        "notices": {
-            "youJoinedRoom": "Jy het by die kamer aangesluit",
-            "joining": "Aansluiting: {{userName}}",
-            "sbLeftRoom": "{{userName}} het die kamer verlaat",
-            "switchingRoom": "Skakel tans kamer...",
-            "forceDisconnecting": "Jy sal binne 5 sekondes ontkoppel word",
-            "forceDisconnectingImmediately": "Jy is deur &#39;n gasheer ontkoppel",
-            "youLeftRoom": "Jy het die kamer verlaat",
-            "codeCopied": "Jy het die kamer verlaat",
-            "sbBeganFbLive": "{{userName}} het hierdie oproep op Facebook begin uitsaai",
-            "sbStoppedFbLive": "{{userName}} het opgehou om hierdie oproep in Facebook uit te saai",
-            "youBeganFbLive": "Jy het hierdie oproep op Facebook begin uitsaai",
-            "youStoppedFbLive": "Jy het opgehou om hierdie oproep in Facebook uit te saai",
-            "youStartedLive": "Jy het hierdie oproep na gepasmaakte RTMP begin uitsaai",
-            "youStoppedLive": "Jy het opgehou om hierdie oproep na gepasmaakte RTMP uit te saai",
-            "sbStartedLiveStreaming": "{{userName}} het regstreeks begin",
-            "sbStoppedLiveStreaming": "{{userName}} het regstreeks geëindig",
-            "liveStopped": "Kon nie video na eindpunt stuur nie",
-            "youBeganVideoRecording": "Jy het hierdie konferensie begin opneem",
-            "youStoppedVideoRecording": "Jy het opgehou om hierdie konferensie op te neem",
-            "linkCopiedToCb": "Skakel na knipbord gekopieer",
-            "codeCopiedToCb": "Kode na knipbord gekopieer",
-            "userHasNoVideo": "Deelnemer het geen video nie",
-            "openInBrowserAlert": "Maak skakel in Safari-blaaier oop om by die konferensie aan te sluit.",
-            "allowedVideoLimit": "Slegs {{limit}} video&#39;s word in hierdie kamer toegelaat",
-            "allowedAudioLimit": "Slegs {{limit}} mikrofone word in hierdie kamer toegelaat"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Video-instellings",
-            "webCamera": "Webkamera",
-            "screenSharing": "Skermdeling",
-            "shareAnotherScreen": "Deel &#39;n ander skerm",
-            "turnOffCameras": "Skakel kamera af",
-            "turnOffVideo": "Skakel kamera\/skermdeling af",
-            "turnOffAudioInput": "Demp mikrofoon",
-            "turnOffScreenSharing": "Skakel skermdeling af",
-            "cameraIsTurnedOff": "Kamera is afgeskakel",
-            "micIsTurnedOff": "Mikrofoon is afgeskakel",
-            "startFBLive": "Begin Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Begin opname",
-            "stopRecording": "Hou op opname",
-            "start": "Begin",
-            "stop": "Stop",
-            "recordingInProgress": "Opname is aan die gang...",
-            "fbLiveTitle": "Titel van regstreekse stroom",
-            "fbLiveDescription": "Beskryf jou regstreekse stroom. Waaroor gaan dit?",
-            "fbOnlyMeLiveAccess": "Slegs Ek",
-            "fbFriendsAccess": "Vriende",
-            "fbPublicAccess": "Publiek",
-            "publishOnTimeline": "Publiseer op tydlyn",
-            "publishToGroup": "Publiseer na groep",
-            "fbStartLive": "Gaan regstreeks",
-            "fbStopLive": "Beëindig regstreekse stroom",
-            "streamingSettings": "Instellings",
-            "manageStream": "Bestuur regstreekse stroom",
-            "fbEmbedCode": "Ingebed",
-            "copy": "Kopieer",
-            "streamToRTMP": "Stroom na pasgemaakte RTMP",
-            "startBroadcasting": "Begin uitsaai",
-            "broadcastingInProgress": "Uitsaai is aan die gang"
-        },
-        "audioSettings": {
-            "dialogTitle": "Oudio-instellings",
-            "speakers": "Luidsprekers",
-            "microphone": "Mikrofoon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Bestuur uitsending"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Deelnemer instellings",
-            "disconnect": "Ontkoppel",
-            "floatingScreens": "Swaai skerms",
-            "tiledScreens": "Betegelde skerms",
-            "loudestExceptMe": "Die hardste behalwe ek",
-            "maximizeLoudest": "Maksimeer die hardste",
-            "staticMaximized": "Staties gemaksimeer",
-            "fullScreen": "Volskerm",
-            "manual": "Handleiding",
-            "turnOffCamera": "Versteek video",
-            "turnOffAudio": "Demp oudio",
-            "turnOffScreenSharing": "Versteek skermdeling",
-            "turnOnCamera": "Wys video",
-            "turnOnAudio": "Ontdemp oudio",
-            "turnOnScreenSharing": "Wys skermdeling"
-        },
-        "streamingSettings": {
-            "title": "Lewendige stroom"
-        },
-        "preview": {
-            "Meeting": "Telekonferensie",
-            "MeetingEnded": "Telekonferensie geëindig"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Versoek om te praat",
-            "msg": "Daar is tans {{count}} mense wat in die vergadering praat. Wil jy een van hulle vervang nadat jy hulle {{seconds}} sekondes toegelaat het om klaar te praat?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Genooi",
@@ -471,10 +323,6 @@
             "displayType": "Gesprek",
             "description": "&#39;n gesprek tussen gebruikers, met geskiedenis"
         },
-        "Streams\/webrtc": {
-            "displayType": "Telekonferensie",
-            "description": "&#39;n aanlyn video\/klankkonferensie"
-        },
         "Streams\/question": {
             "displayType": "Vraag",
             "description": "vraestroom",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Antwoord",
             "description": "antwoordstroom"
-        },
-        "Streams\/calls": {
-            "displayType": "Oproepe",
-            "description": "kategorie vir Streams\/webrtc",
-            "MaxRelationsExceeded": "Maksimum oproepe oorskry"
         }
     },
     "menu": {

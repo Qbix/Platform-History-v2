@@ -1,0 +1,2 @@
+ALTER TABLE {{prefix}}leader
+CHANGE app communityId varbinary(31) NOT NULL;

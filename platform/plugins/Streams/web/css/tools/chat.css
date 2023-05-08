@@ -196,7 +196,7 @@
 	cursor: none;
 	pointer-events: none;
 }
-.Streams_chat_tool .Streams_webrtc_preview_tool .Streams_preview_icon {
+.Streams_chat_tool .Media_webrtc_preview_tool .Streams_preview_icon {
 	display: none;
 }
 
@@ -206,6 +206,7 @@
 }
 .Streams_chat_tool .Streams_chat_item > .Users_avatar_tool {
 	position: absolute;
+	left: 0;
 	cursor: pointer;
 }
 .Streams_chat_tool .Streams_participants_tool .Users_avatar_icon {

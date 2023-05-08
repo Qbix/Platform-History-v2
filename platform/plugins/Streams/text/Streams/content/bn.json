@@ -35,7 +35,7 @@
         "Unlisted": "তালিকাভুক্ত নয়"
     },
     "chat": {
-        "flaggedForAdminReview": "বার্তা প্রশাসক পর্যালোচনার জন্য পতাকাঙ্কিত করা হয়েছে. আনফ্ল্যাগ করতে আবার আলতো চাপুন।",
+        "flaggedForAdminReview": "বার্তা প্রশাসক পর্যালোচনার জন্য পতাকাঙ্কিত করা হয়েছে. ফ্ল্যাগ খুলতে আবার আলতো চাপুন।",
         "noOneSaid": "কেউ কিছু বলেনি",
         "closeChatButton": "চ্যাট বন্ধ করুন",
         "closeChatConfirmTitle": "এই চ্যাট বন্ধ করবেন?",
@@ -115,7 +115,7 @@
             "photoInstruction": "যে ব্যক্তি আপনার QR কোড স্ক্যান করেছে সে যদি আপনার সামনে থাকে, তাহলে তার একটি ছবি তুলুন",
             "to": "প্রতি: {{Stream Title}}",
             "go": "যাওয়া",
-            "title": "আমন্ত্রণ",
+            "title": "আমন্ত্রণ জানান",
             "placeholder": "মোবাইল নম্বর বা ইমেল ঠিকানা",
             "orInvite": "অথবা ব্যবহার করে লোকেদের আমন্ত্রণ জানান:",
             "copyLink": "আমন্ত্রণ লিঙ্ক কপি করতে {{ClickOrTap}}",
@@ -207,155 +207,7 @@
         "RemoveParticipant": "অংশগ্রহণকারীকে সরান",
         "Identifiers": "শনাক্তকারী",
         "Devices": "ডিভাইস",
-        "Streams": "প্রবাহ"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "আপনার এই স্ট্রীমে যোগ দেওয়ার অনুমতি নেই৷",
-        "streamTitle": "{{1}} একটি টেলিকনফারেন্স শুরু করেছে",
-        "allow": {
-            "dialogTitle": "সংযোগ করা হচ্ছে",
-            "microphoneBtn": "মাইক্রোফোন সক্ষম করুন",
-            "cameraBtn": "ক্যামেরা সক্ষম করুন",
-            "cameraAndMicrophoneBtn": "ক্যামেরা এবং মাইক্রোফোন সক্ষম করুন"
-        },
-        "preparing": {
-            "dialogTitle": "আপনি যোগদানের আগে ক্যামেরা বা মাইক চালু\/বন্ধ করুন",
-            "micIsOff": "মাইক বন্ধ",
-            "micIsOn": "মাইক চালু আছে",
-            "cameraIsOff": "ক্যামেরা বন্ধ",
-            "cameraIsOn": "ক্যামেরা চালু আছে",
-            "screenSharingIsOn": "স্ক্রিন শেয়ারিং চালু আছে",
-            "screenSharingIsOff": "ভাগ পর্দা",
-            "joinNow": "কলে যোগ দিন"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "নির্দেশনা",
-            "permissionDenied": "{{kind}} এর জন্য অনুমতি অস্বীকার করা হয়েছে। এটি ব্যবহার করতে অনুগ্রহ করে এই পদক্ষেপগুলি অনুসরণ করুন:",
-            "point1": "&quot;সেটিংস&quot; -&gt; &quot;উন্নত&quot; -&gt; &quot;গোপনীয়তা এবং নিরাপত্তা&quot; -&gt; &quot;সাইট সেটিংস&quot; -&gt; &quot;ক্যামেরা&quot; বা &quot;সাইট সেটিংস&quot; -&gt; &quot;মাইক্রোফোন&quot; এ যান",
-            "point2": "&quot;ব্লক&quot; তালিকা থেকে {{hostname}} সরান"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "নির্দেশনা",
-            "permissionDenied": "{{kind}} এর জন্য অনুমতি অস্বীকার করা হয়েছে। অনুগ্রহ করে এই পৃষ্ঠাটি পুনরায় লোড করুন এবং সম্মেলনে যোগদানের জন্য {{kind}} এ অ্যাক্সেস নিশ্চিত করুন৷"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "নির্দেশনা",
-            "permissionDenied": "{{kind}} এর জন্য অনুমতি অস্বীকার করা হয়েছে। এটি ব্যবহার করতে অনুগ্রহ করে এই পদক্ষেপগুলি অনুসরণ করুন:",
-            "point1": "আপনার অ্যান্ড্রয়েড সেটিংসে যান",
-            "point2": "&quot;অ্যাপস এবং বিজ্ঞপ্তি&quot; খুলুন",
-            "point3": "&quot; {{communityName}} &quot; খুঁজুন এবং এটি খুলুন",
-            "point4": "অনুমতিগুলিতে আলতো চাপুন",
-            "point5": "{{kind}} সক্ষম করুন"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "নির্দেশনা",
-            "permissionDenied": "{{kind}} এর জন্য অনুমতি অস্বীকার করা হয়েছে। এটি ব্যবহার করতে অনুগ্রহ করে এই পদক্ষেপগুলি অনুসরণ করুন:",
-            "point1": "আপনার iOS সেটিংসে যান",
-            "point2": "&quot;গোপনীয়তা&quot; খুলুন",
-            "point3": "{{kind}} খুঁজুন এবং এটি খুলুন",
-            "point4": "&quot; {{communityName}} &quot; খুঁজুন এবং সক্ষম করুন"
-        },
-        "fbLive": {
-            "dialogTitle": "শুরু হলো ফেসবুক লাইভ স্ট্রিমিং"
-        },
-        "notices": {
-            "youJoinedRoom": "আপনি রুমে যোগদান করেছেন",
-            "joining": "যোগদান: {{userName}}",
-            "sbLeftRoom": "{{userName}} রুম ছেড়ে",
-            "switchingRoom": "রুম পাল্টানো হচ্ছে...",
-            "forceDisconnecting": "আপনি 5 সেকেন্ডের মধ্যে সংযোগ বিচ্ছিন্ন করা হবে",
-            "forceDisconnectingImmediately": "আপনি একটি হোস্ট দ্বারা সংযোগ বিচ্ছিন্ন করা হয়েছে",
-            "youLeftRoom": "তুমি রুম থেকে চলে গেলে",
-            "codeCopied": "তুমি রুম থেকে চলে গেলে",
-            "sbBeganFbLive": "{{userName}} ফেসবুকে এই কল সম্প্রচার শুরু করেছে",
-            "sbStoppedFbLive": "{{userName}} ফেসবুকে এই কল সম্প্রচার বন্ধ করে দিয়েছে",
-            "youBeganFbLive": "আপনি ফেসবুকে এই কল সম্প্রচার শুরু করেছেন",
-            "youStoppedFbLive": "আপনি Facebook-এ এই কল সম্প্রচার বন্ধ করে দিয়েছেন",
-            "youStartedLive": "আপনি এই কলটি কাস্টম RTMP-তে সম্প্রচার করা শুরু করেছেন৷",
-            "youStoppedLive": "আপনি কাস্টম RTMP-তে এই কল সম্প্রচার বন্ধ করেছেন",
-            "sbStartedLiveStreaming": "{{userName}} লাইভ শুরু হয়েছে",
-            "sbStoppedLiveStreaming": "{{userName}} লাইভ শেষ হয়েছে",
-            "liveStopped": "এন্ডপয়েন্টে ভিডিও পাঠানোর সময় ত্রুটি ঘটেছে৷",
-            "youBeganVideoRecording": "আপনি এই সম্মেলন রেকর্ড করা শুরু করেছেন",
-            "youStoppedVideoRecording": "আপনি এই সম্মেলন রেকর্ড করা বন্ধ করেছেন",
-            "linkCopiedToCb": "ক্লিপবোর্ডে লিঙ্ক কপি করা হয়েছে",
-            "codeCopiedToCb": "ক্লিপবোর্ডে কোড কপি করা হয়েছে",
-            "userHasNoVideo": "অংশগ্রহণকারীর কোন ভিডিও নেই",
-            "openInBrowserAlert": "সম্মেলনে যোগ দিতে সাফারি ব্রাউজারে লিঙ্ক খুলুন।",
-            "allowedVideoLimit": "এই রুমে শুধুমাত্র {{limit}} ভিডিও অনুমোদিত",
-            "allowedAudioLimit": "এই রুমে শুধুমাত্র {{limit}} মাইক্রোফোন অনুমোদিত"
-        },
-        "settingsPopup": {
-            "dialogTitle": "ভিডিও সেটিংস",
-            "webCamera": "ওয়েব ক্যামেরা",
-            "screenSharing": "স্ক্রিন শেয়ারিং",
-            "shareAnotherScreen": "অন্য স্ক্রিন শেয়ার করুন",
-            "turnOffCameras": "ক্যামেরা বন্ধ করুন",
-            "turnOffVideo": "ক্যামেরা\/স্ক্রিন শেয়ারিং বন্ধ করুন",
-            "turnOffAudioInput": "মাইক্রোফোন নিঃশব্দ করুন",
-            "turnOffScreenSharing": "স্ক্রিন শেয়ারিং বন্ধ করুন",
-            "cameraIsTurnedOff": "ক্যামেরা বন্ধ",
-            "micIsTurnedOff": "মাইক্রোফোন বন্ধ আছে",
-            "startFBLive": "Facebook Livestream শুরু করুন",
-            "stopFBLive": "ফেসবুক লাইভস্ট্রিম বন্ধ করুন",
-            "startRecording": "রেকর্ড শুরু কর",
-            "stopRecording": "রেকর্ডিং বন্ধ করুন",
-            "start": "শুরু করুন",
-            "stop": "থামো",
-            "recordingInProgress": "রেকর্ডিং চলছে...",
-            "fbLiveTitle": "লাইভস্ট্রিমের শিরোনাম",
-            "fbLiveDescription": "আপনার লাইভস্ট্রিম বর্ণনা করুন। এটা কিসের ব্যাপারে?",
-            "fbOnlyMeLiveAccess": "শুধু আমি",
-            "fbFriendsAccess": "বন্ধুরা",
-            "fbPublicAccess": "পাবলিক",
-            "publishOnTimeline": "টাইমলাইনে প্রকাশ করুন",
-            "publishToGroup": "গ্রুপে প্রকাশ করুন",
-            "fbStartLive": "সরাসরি যাও",
-            "fbStopLive": "লাইভস্ট্রিম শেষ করুন",
-            "streamingSettings": "সেটিংস",
-            "manageStream": "লাইভস্ট্রিম পরিচালনা করুন",
-            "fbEmbedCode": "বসান",
-            "copy": "কপি",
-            "streamToRTMP": "কাস্টম RTMP-তে স্ট্রিম করুন",
-            "startBroadcasting": "সম্প্রচার শুরু করুন",
-            "broadcastingInProgress": "সম্প্রচার চলছে"
-        },
-        "audioSettings": {
-            "dialogTitle": "অডিও সেটিংস",
-            "speakers": "বক্তারা",
-            "microphone": "মাইক্রোফোন"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "সম্প্রচার পরিচালনা করুন"
-        },
-        "participantsPopup": {
-            "dialogTitle": "অংশগ্রহণকারী সেটিংস",
-            "disconnect": "সংযোগ বিচ্ছিন্ন করুন",
-            "floatingScreens": "ভাসমান পর্দা",
-            "tiledScreens": "টাইল্ড স্ক্রিন",
-            "loudestExceptMe": "আমি ছাড়া সবচেয়ে জোরে",
-            "maximizeLoudest": "সর্বোচ্চ জোরে",
-            "staticMaximized": "স্ট্যাটিক ম্যাক্সিমাইজড",
-            "fullScreen": "পূর্ণ পর্দা",
-            "manual": "ম্যানুয়াল",
-            "turnOffCamera": "ভিডিও লুকান",
-            "turnOffAudio": "অডিও নিঃশব্দ করুন",
-            "turnOffScreenSharing": "স্ক্রিন শেয়ারিং লুকান",
-            "turnOnCamera": "ভিডিও দেখান",
-            "turnOnAudio": "অডিও আনমিউট করুন",
-            "turnOnScreenSharing": "স্ক্রিন শেয়ারিং দেখান"
-        },
-        "streamingSettings": {
-            "title": "সরাসরি সম্প্রচার"
-        },
-        "preview": {
-            "Meeting": "টেলিকনফারেন্স",
-            "MeetingEnded": "টেলিকনফারেন্স শেষ"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "কথা বলার অনুরোধ",
-            "msg": "সভায় বর্তমানে {{count}} জন লোক কথা বলছেন। কথা শেষ করার জন্য {{seconds}} সেকেন্ড সময় দেওয়ার পরে আপনি কি তাদের একটিকে প্রতিস্থাপন করতে চান?"
-        }
+        "Streams": "স্ট্রীম"
     },
     "types": {
         "Streams\/invited": {
@@ -364,7 +216,7 @@
         },
         "Streams\/resource": {
             "displayType": "সম্পদ",
-            "description": "একটি সংস্থান অ্যাক্সেস পরিচালনা এবং আপডেট সম্পর্কে বার্তা পোস্ট করার জন্য স্ট্রীম"
+            "description": "একটি সংস্থানে অ্যাক্সেস পরিচালনা এবং আপডেট সম্পর্কে বার্তা পোস্ট করার জন্য স্ট্রীম"
         },
         "Streams\/task": {
             "description": "একটি নির্দিষ্ট কাজের অগ্রগতি সম্পর্কে আপডেট পাওয়ার জন্য",
@@ -471,10 +323,6 @@
             "displayType": "কথোপকথন",
             "description": "ইতিহাস সহ ব্যবহারকারীদের মধ্যে একটি কথোপকথন"
         },
-        "Streams\/webrtc": {
-            "displayType": "টেলিকনফারেন্স",
-            "description": "একটি অনলাইন ভিডিও\/অডিও সম্মেলন"
-        },
         "Streams\/question": {
             "displayType": "প্রশ্ন",
             "description": "প্রশ্ন প্রবাহ",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "উত্তর",
             "description": "উত্তর প্রবাহ"
-        },
-        "Streams\/calls": {
-            "displayType": "কল",
-            "description": "স্ট্রিম\/webrtc-এর জন্য বিভাগ",
-            "MaxRelationsExceeded": "সর্বাধিক কলগুলি অতিক্রম করেছে৷"
         }
     },
     "menu": {

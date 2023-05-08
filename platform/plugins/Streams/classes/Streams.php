@@ -5225,6 +5225,80 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Call this method to update names of one or more streams.
+	 * This should update them in many tables of the Streams plugin.
+	 * Also, other plugins can add a hook to create their own updates.
+	 * @method updateStreamNames
+	 * @static
+	 * @param {string} $publisherId
+	 * @param {array} $updates pairs of (oldStreamName => newStreamName)
+	 */
+	static function updateStreamNames($publisherId, array $updates)
+	{
+		$chunkSize = 100;
+		$chunks = array_chunk($updates, $chunkSize, true);
+		$transactionKey = Q_Utils::randomString(10);
+		Streams_Stream::begin(null, $transactionKey)->execute();
+		// can be rolled back on any exception
+		$fields = array(
+			'Streams' => array(
+				'Stream' => 'name',
+				'Message' => 'streamName',
+				'MessageTotal' => 'streamName',
+				'RelatedTo' => array('toStreamName', 'fromStreamName'),
+				'RelatedToTotal' => 'toStreamName',
+				'RelatedFrom' => array('toStreamName', 'fromStreamName'),
+				'RelatedFromTotal' => 'fromStreamName',
+				'Participant' => 'streamName',
+				'Subscription' => 'streamName',
+				'SubscriptionRule' => 'streamName',
+				'Notification' => 'streamName',
+				'Request' => 'streamName',
+				'Invite' => 'streamName',
+				'Task' => 'streamName'
+			)
+		);
+		$publisherIdFields = array(
+			'Streams' => array(
+				'RelatedTo' => array('toPublisherId', 'fromPublisherId'),
+				'RelatedToTotal' => array('toPublisherId'),
+				'RelatedFrom' => array('toPublisherId', 'fromPublisherId'),
+				'RelatedFromTotal' => array('fromPublisherId')
+			)
+		);
+		foreach ($fields as $Connection => $f1) {
+			foreach ($f1 as $Table => $fields) {
+				if (!is_array($fields)) {
+					$fields = array($fields);
+				}
+				$ClassName = $Connection . '_' . $Table;
+				foreach ($fields as $i => $field) {
+					$publisherIdField = Q::ifset($publisherIdFields, $Connection, $Table, $i, 'publisherId');
+					foreach ($chunks as $chunk) {
+						$criteria = isset($publisherId)
+						? array(
+							$publisherIdField => $publisherId,
+							$field => array_keys($chunk)
+						) : array($field => array_keys($chunk));
+						call_user_func(array($ClassName, 'update'))
+							->set(array($field => $chunk))
+							->where($criteria)
+							->execute();
+					}
+				}
+			}
+		}
+		/**
+		 * Gives any plugin or app a chance to update stream names in its own tables
+		 * @event Streams/updateStreamNames
+		 * @param {array} $publisherId
+		 * @param {array} $updates an array of (oldStreamName => newStreamName) pairs
+		 */
+		Q::event('Streams/updateStreamNames', compact('publisherId', 'updates', 'chunks', 'fields', 'publisherIdFields'), 'after');
+		Streams_Stream::commit($transactionKey)->execute();
+	}
+
+	/**
 	 * @property $fetch
 	 * @static
 	 * @type array

@@ -209,154 +209,6 @@
         "Devices": "పరికరాలు",
         "Streams": "ప్రవాహాలు"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
-        "streamTitle": "{{1}} టెలికాన్ఫరెన్స్‌ను ప్రారంభించింది",
-        "allow": {
-            "dialogTitle": "కనెక్ట్ అవుతోంది",
-            "microphoneBtn": "మైక్రోఫోన్‌ని ప్రారంభించండి",
-            "cameraBtn": "కెమెరాను ప్రారంభించండి",
-            "cameraAndMicrophoneBtn": "కెమెరా మరియు మైక్రోఫోన్‌ని ప్రారంభించండి"
-        },
-        "preparing": {
-            "dialogTitle": "మీరు చేరడానికి ముందు కెమెరా లేదా మైక్‌ని ఆన్\/ఆఫ్ చేయండి",
-            "micIsOff": "మైక్ ఆఫ్‌లో ఉంది",
-            "micIsOn": "మైక్ ఆన్‌లో ఉంది",
-            "cameraIsOff": "కెమెరా ఆఫ్‌లో ఉంది",
-            "cameraIsOn": "కెమెరా ఆన్‌లో ఉంది",
-            "screenSharingIsOn": "స్క్రీన్ షేరింగ్ ఆన్‌లో ఉంది",
-            "screenSharingIsOff": "స్క్రీన్ షేర్ చేయండి",
-            "joinNow": "కాల్‌లో చేరండి"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "సూచనలు",
-            "permissionDenied": "{{kind}} కి అనుమతి నిరాకరించబడింది. దీన్ని ఉపయోగించడానికి దయచేసి ఈ దశలను అనుసరించండి:",
-            "point1": "&quot;సెట్టింగ్‌లు&quot; -&gt; &quot;అధునాతన&quot; -&gt; &quot;గోప్యత మరియు భద్రత&quot; -&gt; &quot;సైట్ సెట్టింగ్‌లు&quot; -&gt; &quot;కెమెరా&quot; లేదా &quot;సైట్ సెట్టింగ్‌లు&quot; -&gt; &quot;మైక్రోఫోన్&quot;కి వెళ్లండి",
-            "point2": "&quot;బ్లాక్&quot; జాబితా నుండి {{hostname}} తీసివేయండి"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "సూచనలు",
-            "permissionDenied": "{{kind}} కి అనుమతి నిరాకరించబడింది. కాన్ఫరెన్స్‌లో చేరడానికి దయచేసి ఈ పేజీని మళ్లీ లోడ్ చేయండి మరియు {{kind}} కి యాక్సెస్‌ను నిర్ధారించండి."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "సూచనలు",
-            "permissionDenied": "{{kind}} కి అనుమతి నిరాకరించబడింది. దీన్ని ఉపయోగించడానికి దయచేసి ఈ దశలను అనుసరించండి:",
-            "point1": "మీ Android సెట్టింగ్‌లకు వెళ్లండి",
-            "point2": "&quot;యాప్‌లు &amp; నోటిఫికేషన్‌లు&quot; తెరవండి",
-            "point3": "&quot; {{communityName}} &quot;ని కనుగొని దానిని తెరవండి",
-            "point4": "అనుమతులపై నొక్కండి",
-            "point5": "{{kind}} ప్రారంభించండి"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "సూచనలు",
-            "permissionDenied": "{{kind}} కి అనుమతి నిరాకరించబడింది. దీన్ని ఉపయోగించడానికి దయచేసి ఈ దశలను అనుసరించండి:",
-            "point1": "మీ iOS సెట్టింగ్‌లకు వెళ్లండి",
-            "point2": "&quot;గోప్యత&quot; తెరవండి",
-            "point3": "{{kind}} కనుగొని దాన్ని తెరవండి",
-            "point4": "&quot; {{communityName}} &quot;ని కనుగొని, ప్రారంభించండి"
-        },
-        "fbLive": {
-            "dialogTitle": "ఫేస్‌బుక్ లైవ్ స్ట్రీమింగ్ ప్రారంభమైంది"
-        },
-        "notices": {
-            "youJoinedRoom": "మీరు గదిలోకి చేరారు",
-            "joining": "చేరడం: {{userName}}",
-            "sbLeftRoom": "{{userName}} గది నుండి నిష్క్రమించారు",
-            "switchingRoom": "గది మారుతోంది...",
-            "forceDisconnecting": "మీరు 5 సెకన్లలో డిస్‌కనెక్ట్ చేయబడతారు",
-            "forceDisconnectingImmediately": "మీరు హోస్ట్ ద్వారా డిస్‌కనెక్ట్ చేయబడ్డారు",
-            "youLeftRoom": "మీరు గది నుండి వెళ్లిపోయారు",
-            "codeCopied": "మీరు గది నుండి వెళ్లిపోయారు",
-            "sbBeganFbLive": "{{userName}} ఈ కాల్‌ని Facebookలో ప్రసారం చేయడం ప్రారంభించింది",
-            "sbStoppedFbLive": "{{userName}} ఈ కాల్‌ని Facebookలో ప్రసారం చేయడం ఆపివేసింది",
-            "youBeganFbLive": "మీరు Facebookలో ఈ కాల్‌ని ప్రసారం చేయడం ప్రారంభించారు",
-            "youStoppedFbLive": "మీరు Facebookలో ఈ కాల్‌ని ప్రసారం చేయడం ఆపివేశారు",
-            "youStartedLive": "మీరు ఈ కాల్‌ని అనుకూల RTMPకి ప్రసారం చేయడం ప్రారంభించారు",
-            "youStoppedLive": "మీరు ఈ కాల్‌ని అనుకూల RTMPకి ప్రసారం చేయడాన్ని ఆపివేశారు",
-            "sbStartedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం చేసారు",
-            "sbStoppedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ముగిసింది",
-            "liveStopped": "ఎండ్‌పాయింట్‌కి వీడియోను పంపుతున్నప్పుడు లోపం సంభవించింది",
-            "youBeganVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం ప్రారంభించారు",
-            "youStoppedVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం ఆపివేశారు",
-            "linkCopiedToCb": "లింక్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది",
-            "codeCopiedToCb": "కోడ్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది",
-            "userHasNoVideo": "పాల్గొనేవారి వద్ద వీడియో లేదు",
-            "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ని తెరవండి.",
-            "allowedVideoLimit": "ఈ గదిలో {{limit}} వీడియోలు మాత్రమే అనుమతించబడతాయి",
-            "allowedAudioLimit": "ఈ గదిలో {{limit}} మైక్రోఫోన్‌లు మాత్రమే అనుమతించబడతాయి"
-        },
-        "settingsPopup": {
-            "dialogTitle": "వీడియో సెట్టింగ్‌లు",
-            "webCamera": "వెబ్ కెమెరా",
-            "screenSharing": "స్క్రీన్ భాగస్వామ్యం",
-            "shareAnotherScreen": "మరొక స్క్రీన్‌ని షేర్ చేయండి",
-            "turnOffCameras": "కెమెరాను ఆఫ్ చేయండి",
-            "turnOffVideo": "కెమెరా\/స్క్రీన్ షేరింగ్‌ని ఆఫ్ చేయండి",
-            "turnOffAudioInput": "మైక్రోఫోన్‌ను మ్యూట్ చేయండి",
-            "turnOffScreenSharing": "స్క్రీన్ షేరింగ్‌ని ఆఫ్ చేయండి",
-            "cameraIsTurnedOff": "కెమెరా ఆఫ్ చేయబడింది",
-            "micIsTurnedOff": "మైక్రోఫోన్ ఆఫ్ చేయబడింది",
-            "startFBLive": "Facebook ప్రత్యక్ష ప్రసారాన్ని ప్రారంభించండి",
-            "stopFBLive": "ఫేస్బుక్ లైవ్ స్ట్రీమ్ను ఆపండి",
-            "startRecording": "రికార్డింగ్ ప్రారంభించండి",
-            "stopRecording": "రికార్డింగ్ ఆపివేయండి",
-            "start": "ప్రారంభించండి",
-            "stop": "ఆపు",
-            "recordingInProgress": "రికార్డింగ్ ప్రోగ్రెస్‌లో ఉంది...",
-            "fbLiveTitle": "ప్రత్యక్ష ప్రసారం యొక్క శీర్షిక",
-            "fbLiveDescription": "మీ ప్రత్యక్ష ప్రసారాన్ని వివరించండి. ఇది దేని గురించి?",
-            "fbOnlyMeLiveAccess": "నేనొక్కడినే",
-            "fbFriendsAccess": "స్నేహితులు",
-            "fbPublicAccess": "ప్రజా",
-            "publishOnTimeline": "టైమ్‌లైన్‌లో ప్రచురించండి",
-            "publishToGroup": "సమూహానికి ప్రచురించండి",
-            "fbStartLive": "ప్రత్యక్ష ప్రసారం చేయి",
-            "fbStopLive": "ప్రత్యక్ష ప్రసారాన్ని ముగించండి",
-            "streamingSettings": "సెట్టింగ్‌లు",
-            "manageStream": "ప్రత్యక్ష ప్రసారాన్ని నిర్వహించండి",
-            "fbEmbedCode": "పొందుపరచండి",
-            "copy": "కాపీ చేయండి",
-            "streamToRTMP": "అనుకూల RTMPకి ప్రసారం చేయండి",
-            "startBroadcasting": "ప్రసారాన్ని ప్రారంభించండి",
-            "broadcastingInProgress": "ప్రసారం జరుగుతోంది"
-        },
-        "audioSettings": {
-            "dialogTitle": "ఆడియో సెట్టింగ్‌లు",
-            "speakers": "స్పీకర్లు",
-            "microphone": "మైక్రోఫోన్"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "ప్రసారాన్ని నిర్వహించండి"
-        },
-        "participantsPopup": {
-            "dialogTitle": "పాల్గొనేవారి సెట్టింగ్‌లు",
-            "disconnect": "డిస్‌కనెక్ట్ చేయండి",
-            "floatingScreens": "తేలియాడే తెరలు",
-            "tiledScreens": "టైల్డ్ స్క్రీన్‌లు",
-            "loudestExceptMe": "నేను తప్ప బిగ్గరగా",
-            "maximizeLoudest": "బిగ్గరగా పెంచండి",
-            "staticMaximized": "స్టాటిక్ గరిష్టీకరించబడింది",
-            "fullScreen": "పూర్తి స్క్రీన్",
-            "manual": "మాన్యువల్",
-            "turnOffCamera": "వీడియోను దాచు",
-            "turnOffAudio": "ఆడియోను మ్యూట్ చేయండి",
-            "turnOffScreenSharing": "స్క్రీన్ షేరింగ్‌ని దాచండి",
-            "turnOnCamera": "వీడియో చూపించు",
-            "turnOnAudio": "ఆడియోను అన్‌మ్యూట్ చేయండి",
-            "turnOnScreenSharing": "స్క్రీన్ షేరింగ్‌ని చూపించు"
-        },
-        "streamingSettings": {
-            "title": "అంతర్జాలం ద్వారా ప్రత్యక్ష ప్రసారం"
-        },
-        "preview": {
-            "Meeting": "టెలికాన్ఫరెన్స్",
-            "MeetingEnded": "టెలికాన్ఫరెన్స్ ముగిసింది"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "మాట్లాడటానికి అభ్యర్థన",
-            "msg": "ప్రస్తుతం {{count}} మంది సమావేశంలో మాట్లాడుతున్నారు. మాట్లాడటం పూర్తి చేయడానికి {{seconds}} సెకన్లు అనుమతించిన తర్వాత మీరు వాటిలో ఒకదాన్ని భర్తీ చేయాలనుకుంటున్నారా?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "ఆహ్వానించారు",
@@ -364,7 +216,7 @@
         },
         "Streams\/resource": {
             "displayType": "వనరు",
-            "description": "రిసోర్స్‌కి యాక్సెస్‌ని మేనేజ్ చేయడం మరియు అప్‌డేట్‌ల గురించి మెసేజ్‌లను పోస్ట్ చేయడం కోసం స్ట్రీమ్ చేయండి"
+            "description": "రిసోర్స్‌కి యాక్సెస్‌ని నిర్వహించడం మరియు అప్‌డేట్‌ల గురించి సందేశాలను పోస్ట్ చేయడం కోసం స్ట్రీమ్"
         },
         "Streams\/task": {
             "description": "ఒక నిర్దిష్ట పనిలో పురోగతి గురించి నవీకరణలను స్వీకరించడం కోసం",
@@ -471,10 +323,6 @@
             "displayType": "సంభాషణ",
             "description": "చరిత్రతో వినియోగదారుల మధ్య సంభాషణ"
         },
-        "Streams\/webrtc": {
-            "displayType": "టెలికాన్ఫరెన్స్",
-            "description": "ఆన్‌లైన్ వీడియో\/ఆడియో కాన్ఫరెన్స్"
-        },
         "Streams\/question": {
             "displayType": "ప్రశ్న",
             "description": "ప్రశ్న ప్రవాహం",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "సమాధానం",
             "description": "జవాబు ప్రవాహం"
-        },
-        "Streams\/calls": {
-            "displayType": "కాల్స్",
-            "description": "స్ట్రీమ్‌లు\/webrtc కోసం వర్గం",
-            "MaxRelationsExceeded": "గరిష్ట కాల్‌లు మించిపోయాయి"
         }
     },
     "menu": {

@@ -65,6 +65,7 @@
             showSize: "300x.png",
             save: "NFT/series/icon"
         },
+        editable: true,
         onInvoke: new Q.Event(),
         onCreated: new Q.Event(),
         onIconChanged: new Q.Event(),
@@ -85,17 +86,17 @@
 
             var seriesId = tool.stream.getAttribute("seriesId");
             $toolElement.attr("data-seriesid", seriesId);
-            var isEditable = tool.preview.state.editable && tool.stream.testWriteLevel('edit');
+            var isEditable = state.editable && tool.preview.state.editable && tool.stream.testWriteLevel('edit');
             $toolElement.attr("data-editable", isEditable);
 
             Q.Template.render('Assets/NFT/series/view', {
-                name: tool.stream.fields.title || ""
+                stream: tool.stream
             }, (err, html) => {
                 Q.replace(tool.element, html);
-
+                Q.activate(tool.element);
                 $(".Assets_NFT_series_icon", $toolElement).css("background-image", "url(" + stream.iconUrl("x") + ")");
 
-                if (isEditable) {
+                if (!stream.getAttribute("frozen") && isEditable) {
                     setTimeout(function () {
                         $toolElement.plugin('Q/actions', {
                             alwaysShow: true,
@@ -115,6 +116,9 @@
                             }
                         });
                     }, 100);
+                } else {
+                    $toolElement.plugin('Q/actions', 'remove');
+                    tool.preview.state.closeable = false;
                 }
 
                 //var $icon = $("img.NFT_series_icon", tool.element);
@@ -299,13 +303,13 @@
                 <button name="upload_icon">{{NFT.series.UploadCoverImage}}</button>
             </div>
         </div>
-        <button class="Q_button" name="save">{{buttonText}}</button>
-        `, {text: ['Assets/content']});
+        <button class="Q_button" name="save">{{buttonText}}</button>`,
+        {text: ['Assets/content']});
 
     Q.Template.set('Assets/NFT/series/view',
 `<div class="Assets_NFT_series_icon"></div>
         <div class="Assets_NFT_series_info">
-            <div class="Assets_NFT_series_name">{{name}}</div>
+            {{&tool "Streams/inplace" "title" field="title" inplaceType="text" editable=false publisherId=stream.fields.publisherId streamName=stream.fields.name}}
         </div>`,
         {text: ['Assets/content']}
     );

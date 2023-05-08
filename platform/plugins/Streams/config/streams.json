@@ -66,7 +66,7 @@
 		"title": "Icon",
 		"icon": "Streams/image",
 		"readLevel": 40,
-		"writeLevel": 0,
+		"writeLevel": 10,
 		"adminLevel": 0,
 		"userField": "icon",
 		"platforms": {
@@ -301,13 +301,5 @@
 		"type": "Streams/album",
 		"title": "Quotes",
 		"icon": ""
-	},
-	"Streams/calls/main": {
-		"type": "Streams/calls",
-		"title": "Calls",
-		"icon": "Streams/category",
-		"readLevel": 40,
-		"writeLevel": 23,
-		"adminLevel": 20
 	}
 }

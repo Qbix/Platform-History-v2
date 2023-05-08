@@ -3,7 +3,7 @@ require('../Q.inc')(function(Q) {
 	
 	Q.plugins.Users.listen();
 	Q.plugins.Streams.listen();
-	Q.plugins.Streams.WebRTC.listen();
+	Q.plugins.Media.WebRTC.listen();
 	
 	// TODO: Make some classes in classes/MyApp and then require() them
 

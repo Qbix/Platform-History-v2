@@ -98,7 +98,7 @@
             },
             "NotAuthorizedToRemoveRole": {
                 "title": "آسف",
-                "alert": "أنت غير مصرح لك بإزالة هذا الدور"
+                "alert": "أنت غير مخول لإزالة هذا الدور"
             }
         },
         "labels": {
@@ -209,154 +209,6 @@
         "Devices": "الأجهزة",
         "Streams": "تيارات"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا التدفق.",
-        "streamTitle": "{{1}} بدأ مؤتمر عبر الهاتف",
-        "allow": {
-            "dialogTitle": "توصيل",
-            "microphoneBtn": "تمكين الميكروفون",
-            "cameraBtn": "فعل الكاميرا",
-            "cameraAndMicrophoneBtn": "تمكين الكاميرا والميكروفون"
-        },
-        "preparing": {
-            "dialogTitle": "قم بتشغيل \/ إيقاف تشغيل الكاميرا أو الميكروفون قبل الانضمام",
-            "micIsOff": "الميكروفون متوقف",
-            "micIsOn": "الميكروفون قيد التشغيل",
-            "cameraIsOff": "الكاميرا متوقفة",
-            "cameraIsOn": "الكاميرا قيد التشغيل",
-            "screenSharingIsOn": "مشاركة الشاشة قيد التشغيل",
-            "screenSharingIsOff": "شاشة المشاركة",
-            "joinNow": "انضم إلى المكالمة"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض الإذن لـ {{kind}} . لاستخدامه يرجى اتباع الخطوات التالية:",
-            "point1": "انتقل إلى &quot;الإعدادات&quot; -&gt; &quot;خيارات متقدمة&quot; -&gt; &quot;الخصوصية والأمان&quot; -&gt; &quot;إعدادات الموقع&quot; -&gt; &quot;الكاميرا&quot; أو &quot;إعدادات الموقع&quot; -&gt; &quot;الميكروفون&quot;",
-            "point2": "إزالة {{hostname}} من قائمة &quot;الحظر&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض الإذن لـ {{kind}} . يرجى إعادة تحميل هذه الصفحة وتأكيد الوصول إلى {{kind}} للانضمام إلى المؤتمر."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض الإذن لـ {{kind}} . لاستخدامه يرجى اتباع الخطوات التالية:",
-            "point1": "انتقل إلى إعدادات Android",
-            "point2": "افتح &quot;التطبيقات والإشعارات&quot;",
-            "point3": "ابحث عن &quot; {{communityName}} &quot; وافتحه",
-            "point4": "اضغط على أذونات",
-            "point5": "تمكين {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض الإذن لـ {{kind}} . لاستخدامه يرجى اتباع الخطوات التالية:",
-            "point1": "انتقل إلى إعدادات iOS الخاصة بك",
-            "point2": "افتح &quot;الخصوصية&quot;",
-            "point3": "ابحث عن {{kind}} وافتحه",
-            "point4": "ابحث عن &quot; {{communityName}} &quot; وقم بتمكينه"
-        },
-        "fbLive": {
-            "dialogTitle": "بدأ البث المباشر على Facebook"
-        },
-        "notices": {
-            "youJoinedRoom": "لقد انضممت إلى الغرفة",
-            "joining": "الانضمام: {{userName}}",
-            "sbLeftRoom": "{{userName}} غادر الغرفة",
-            "switchingRoom": "غرفة التبديل ...",
-            "forceDisconnecting": "سيتم قطع اتصالك في غضون 5 ثوان",
-            "forceDisconnectingImmediately": "تم قطع اتصالك من قبل مضيف",
-            "youLeftRoom": "لقد غادرت الغرفة",
-            "codeCopied": "لقد غادرت الغرفة",
-            "sbBeganFbLive": "{{userName}} بدأ ببث هذه المكالمة على Facebook",
-            "sbStoppedFbLive": "توقف {{userName}} عن بث هذه المكالمة على Facebook",
-            "youBeganFbLive": "لقد بدأت ببث هذه المكالمة على Facebook",
-            "youStoppedFbLive": "لقد توقفت عن بث هذه المكالمة في Facebook",
-            "youStartedLive": "لقد بدأت في بث هذه المكالمة إلى RTMP المخصص",
-            "youStoppedLive": "لقد توقفت عن بث هذه المكالمة إلى RTMP المخصص",
-            "sbStartedLiveStreaming": "{{userName}} بدأ العيش",
-            "sbStoppedLiveStreaming": "{{userName}} انتهى يعيش",
-            "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية",
-            "youBeganVideoRecording": "لقد بدأت في تسجيل هذا المؤتمر",
-            "youStoppedVideoRecording": "لقد توقفت عن تسجيل هذا المؤتمر",
-            "linkCopiedToCb": "تم نسخ الرابط إلى الحافظة",
-            "codeCopiedToCb": "تم نسخ الرمز إلى الحافظة",
-            "userHasNoVideo": "المشارك ليس لديه فيديو",
-            "openInBrowserAlert": "افتح الرابط في متصفح Safari للانضمام إلى المؤتمر.",
-            "allowedVideoLimit": "يُسمح فقط {{limit}} مقطع فيديو في هذه الغرفة",
-            "allowedAudioLimit": "يُسمح فقط {{limit}} ميكروفونًا في هذه الغرفة"
-        },
-        "settingsPopup": {
-            "dialogTitle": "اعدادات الفيديو",
-            "webCamera": "كاميرا ويب",
-            "screenSharing": "مشاركة الشاشة",
-            "shareAnotherScreen": "مشاركة شاشة أخرى",
-            "turnOffCameras": "قم بإيقاف تشغيل الكاميرا",
-            "turnOffVideo": "قم بإيقاف تشغيل مشاركة الكاميرا \/ الشاشة",
-            "turnOffAudioInput": "كتم صوت الميكروفون",
-            "turnOffScreenSharing": "قم بإيقاف تشغيل مشاركة الشاشة",
-            "cameraIsTurnedOff": "تم إيقاف تشغيل الكاميرا",
-            "micIsTurnedOff": "تم إيقاف تشغيل الميكروفون",
-            "startFBLive": "ابدأ البث المباشر من Facebook",
-            "stopFBLive": "أوقف البث المباشر على Facebook",
-            "startRecording": "ابدأ التسجيل",
-            "stopRecording": "إيقاف التسجيل",
-            "start": "يبدأ",
-            "stop": "قف",
-            "recordingInProgress": "التسجيل قيد التقدم ...",
-            "fbLiveTitle": "عنوان البث المباشر",
-            "fbLiveDescription": "صِف البث المباشر. عن ماذا يتكلم؟",
-            "fbOnlyMeLiveAccess": "انا فقط",
-            "fbFriendsAccess": "أصدقاء",
-            "fbPublicAccess": "عام",
-            "publishOnTimeline": "انشر في الجدول الزمني",
-            "publishToGroup": "انشر في المجموعة",
-            "fbStartLive": "انطلق مباشرة",
-            "fbStopLive": "إنهاء البث المباشر",
-            "streamingSettings": "إعدادات",
-            "manageStream": "إدارة البث المباشر",
-            "fbEmbedCode": "تضمين",
-            "copy": "ينسخ",
-            "streamToRTMP": "دفق إلى RTMP مخصص",
-            "startBroadcasting": "بدء البث",
-            "broadcastingInProgress": "البث قيد التقدم"
-        },
-        "audioSettings": {
-            "dialogTitle": "إعدادات الصوت",
-            "speakers": "مكبرات الصوت",
-            "microphone": "ميكروفون"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "إدارة البث"
-        },
-        "participantsPopup": {
-            "dialogTitle": "إعدادات المشاركين",
-            "disconnect": "قطع الاتصال",
-            "floatingScreens": "الشاشات العائمة",
-            "tiledScreens": "شاشات القرميد",
-            "loudestExceptMe": "بأعلى صوت ما عدا أنا",
-            "maximizeLoudest": "تعظيم بصوت عال",
-            "staticMaximized": "تكبير ثابت",
-            "fullScreen": "تكبير الشاشة",
-            "manual": "يدوي",
-            "turnOffCamera": "إخفاء الفيديو",
-            "turnOffAudio": "كتم الصوت",
-            "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
-            "turnOnCamera": "مشاهدة الفيديو",
-            "turnOnAudio": "إعادة الصوت",
-            "turnOnScreenSharing": "عرض مشاركة الشاشة"
-        },
-        "streamingSettings": {
-            "title": "البث المباشر"
-        },
-        "preview": {
-            "Meeting": "مؤتمر عبر الهاتف",
-            "MeetingEnded": "انتهى المؤتمر الهاتفي"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "طلب التحدث",
-            "msg": "يوجد حاليًا {{count}} شخصًا يتحدثون في الاجتماع. هل تريد استبدال أحدهم بعد السماح لهم {{seconds}} ثانية لإنهاء حديثهم؟"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "مدعو",
@@ -375,7 +227,7 @@
             "displayType": "مهام"
         },
         "Streams\/experience": {
-            "description": "تجربة مشتركة لأفراد المجتمع",
+            "description": "تجربة مشتركة لأعضاء المجتمع",
             "displayType": "تجربة مشتركة لأعضاء المجتمع"
         },
         "Streams\/greeting": {
@@ -471,10 +323,6 @@
             "displayType": "محادثة",
             "description": "محادثة بين المستخدمين ، مع التاريخ"
         },
-        "Streams\/webrtc": {
-            "displayType": "مؤتمر عبر الهاتف",
-            "description": "مؤتمر فيديو \/ صوتي عبر الإنترنت"
-        },
         "Streams\/question": {
             "displayType": "سؤال",
             "description": "تيار السؤال",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "إجابة",
             "description": "دفق الإجابة"
-        },
-        "Streams\/calls": {
-            "displayType": "المكالمات",
-            "description": "فئة لتيارات \/ webrtc",
-            "MaxRelationsExceeded": "تم تجاوز الحد الأقصى من المكالمات"
         }
     },
     "menu": {

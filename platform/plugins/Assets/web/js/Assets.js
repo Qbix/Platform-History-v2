@@ -850,6 +850,7 @@
 		 * @class Assets.Currencies
 		 */
 		Currencies: {
+			
 			/**
 			 * Use this to load currency data into Q.Assets.Currencies.symbols and Q.Assets.Currencies.names
 			 * @method load
@@ -883,6 +884,31 @@
 						return;
 					}
 					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
+				});
+			},
+			/**
+			 * Get amount of tokens by wallet and chain
+			 * @method balanceOf
+			 * @param {String} userId - if null logged in user Id used
+			 * @param {String} chainId
+			 * @param {function} callback
+			 * @param {object} [options] - some options pass to getContract method
+			 * @param {string} [options.tokenAddress] - filter tokens with this contract address
+			 */
+			balanceOf: function (userId, chainId, callback, options) {
+				Q.req("Assets/balances", "balance", function (err, response) {
+					if (err) {
+						return;
+					}
+
+					var balance = response.slots.balance;
+					Q.handle(callback, null, [null, balance]);
+				}, {
+					fields: {
+						userId: userId || Q.Users.loggedInUserId(),
+						chainId: chainId,
+						tokenAddresses: Q.getObject("tokenAddresses", options)
+					}
 				});
 			},
 			Web3: {
@@ -1380,35 +1406,6 @@
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
-		Currency: {
-			Web3: {
-				/**
-				 * Get amount of tokens by wallet and chain
-				 * @method balanceOf
-				 * @param {String} userId - if null logged in user Id used
-				 * @param {String} chainId
-				 * @param {function} callback
-				 * @param {object} [options] - some options pass to getContract method
-				 * @param {string} [options.tokenAddress] - filter tokens with this contract address
-				 */
-				balanceOf: function (userId, chainId, callback, options) {
-					Q.req("Assets/balances", "balance", function (err, response) {
-						if (err) {
-							return;
-						}
-
-						var balance = response.slots.balance;
-						Q.handle(callback, null, [null, balance]);
-					}, {
-						fields: {
-							userId: userId || Q.Users.loggedInUserId(),
-							chainId: chainId,
-							tokenAddresses: Q.getObject("tokenAddresses", options)
-						}
-					});
-				}
-			}
-		},
 		Web3: {
 			/**
 			 * Generates a link for opening a coin
@@ -1527,6 +1524,7 @@
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
 		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
+		"Assets/NFT/collection/preview": "{{Assets}}/js/tools/NFT/collectionPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": {
 			js: "{{Assets}}/js/tools/NFT/owned.js",
@@ -1738,12 +1736,9 @@
 	var co = {
 		scrollbarsAutoHide: false,
 		handlers: {
-			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
-			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
-			NFT: "{{Assets}}/js/columns/NFT.js",
 			billing: "{{Assets}}/js/columns/billing.js",
 			subscription: "{{Assets}}/js/columns/subscription.js",
-			services: "{{Assets}}/js/columns/services.js",
+			services: "{{Assets}}/js/columns/services.js"
 		}
 	};
 	if (Q.info.isMobile) {

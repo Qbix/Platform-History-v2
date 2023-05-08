@@ -209,154 +209,6 @@
         "Devices": "Vifaa",
         "Streams": "Mitiririko"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
-        "streamTitle": "{{1}} ilianzisha Teleconference",
-        "allow": {
-            "dialogTitle": "Inaunganisha",
-            "microphoneBtn": "Washa Maikrofoni",
-            "cameraBtn": "Washa Kamera",
-            "cameraAndMicrophoneBtn": "Washa Kamera na Maikrofoni"
-        },
-        "preparing": {
-            "dialogTitle": "Washa\/zima kamera au maikrofoni kabla ya kujiunga",
-            "micIsOff": "Maikrofoni imezimwa",
-            "micIsOn": "Maikrofoni imewashwa",
-            "cameraIsOff": "Kamera imezimwa",
-            "cameraIsOn": "Kamera imewashwa",
-            "screenSharingIsOn": "Kushiriki skrini kumewashwa",
-            "screenSharingIsOff": "Shiriki skrini",
-            "joinNow": "Jiunge na Simu"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Maagizo",
-            "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwa &quot;Mipangilio&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Faragha na usalama&quot; -&gt; &quot;Mipangilio ya Tovuti&quot; -&gt; &quot;Kamera&quot; au &quot;Mipangilio ya Tovuti&quot; -&gt; &quot;Makrofoni&quot;",
-            "point2": "Ondoa {{hostname}} kutoka kwenye orodha ya &quot;Block&quot;."
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Maagizo",
-            "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Tafadhali pakia upya ukurasa huu na uthibitishe ufikiaji wa {{kind}} ili kujiunga na mkutano."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Maagizo",
-            "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwenye Mipangilio yako ya Android",
-            "point2": "Fungua &quot;Programu na arifa&quot;",
-            "point3": "Tafuta &quot; {{communityName}} &quot; na uifungue",
-            "point4": "Gonga kwenye Ruhusa",
-            "point5": "Washa {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Maagizo",
-            "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwenye Mipangilio yako ya iOS",
-            "point2": "Fungua &quot;Faragha&quot;",
-            "point3": "Tafuta {{kind}} na uifungue",
-            "point4": "Tafuta &quot; {{communityName}} &quot; na uwashe"
-        },
-        "fbLive": {
-            "dialogTitle": "Utiririshaji wa moja kwa moja wa Facebook umeanza"
-        },
-        "notices": {
-            "youJoinedRoom": "Umejiunga kwenye chumba",
-            "joining": "Kujiunga: {{userName}}",
-            "sbLeftRoom": "{{userName}} walitoka chumbani",
-            "switchingRoom": "Inabadilisha chumba...",
-            "forceDisconnecting": "Utatenganishwa ndani ya sekunde 5",
-            "forceDisconnectingImmediately": "Ulitenganishwa na mwenyeji",
-            "youLeftRoom": "Uliondoka kwenye chumba",
-            "codeCopied": "Uliondoka kwenye chumba",
-            "sbBeganFbLive": "{{userName}} ilianza kutangaza simu hii katika Facebook",
-            "sbStoppedFbLive": "{{userName}} iliacha kutangaza simu hii katika Facebook",
-            "youBeganFbLive": "Ulianza kutangaza simu hii kwenye Facebook",
-            "youStoppedFbLive": "Uliacha kutangaza simu hii kwenye Facebook",
-            "youStartedLive": "Ulianza kutangaza simu hii kwa RTMP maalum",
-            "youStoppedLive": "Uliacha kutangaza simu hii kwa RTMP maalum",
-            "sbStartedLiveStreaming": "{{userName}} ilianza moja kwa moja",
-            "sbStoppedLiveStreaming": "{{userName}} iliisha moja kwa moja",
-            "liveStopped": "Hitilafu wakati wa kutuma video hadi mwisho ilitokea",
-            "youBeganVideoRecording": "Ulianza kurekodi mkutano huu",
-            "youStoppedVideoRecording": "Uliacha kurekodi mkutano huu",
-            "linkCopiedToCb": "Kiungo kimenakiliwa kwenye ubao wa kunakili",
-            "codeCopiedToCb": "Msimbo umenakiliwa kwenye ubao wa kunakili",
-            "userHasNoVideo": "Mshiriki hana video",
-            "openInBrowserAlert": "Fungua kiungo katika kivinjari cha Safari ili ujiunge na mkutano.",
-            "allowedVideoLimit": "Video {{limit}} pekee inaruhusiwa kwenye chumba hiki",
-            "allowedAudioLimit": "Ni maikrofoni {{limit}} pekee zinazoruhusiwa kwenye chumba hiki"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Mipangilio ya Video",
-            "webCamera": "Kamera ya Wavuti",
-            "screenSharing": "Kushiriki skrini",
-            "shareAnotherScreen": "Shiriki skrini nyingine",
-            "turnOffCameras": "Zima kamera",
-            "turnOffVideo": "Zima kushiriki kamera\/skrini",
-            "turnOffAudioInput": "Zima maikrofoni",
-            "turnOffScreenSharing": "Zima kushiriki skrini",
-            "cameraIsTurnedOff": "Kamera imezimwa",
-            "micIsTurnedOff": "Maikrofoni imezimwa",
-            "startFBLive": "Anzisha Facebook Livestream",
-            "stopFBLive": "Acha utiririshaji wa moja kwa moja wa Facebook",
-            "startRecording": "Anza Kurekodi",
-            "stopRecording": "Acha Kurekodi",
-            "start": "Anza",
-            "stop": "Acha",
-            "recordingInProgress": "Kurekodi kunaendelea...",
-            "fbLiveTitle": "Kichwa cha mkondo wa moja kwa moja",
-            "fbLiveDescription": "Eleza mtiririko wako wa moja kwa moja. Inahusu nini?",
-            "fbOnlyMeLiveAccess": "Mimi Pekee",
-            "fbFriendsAccess": "Marafiki",
-            "fbPublicAccess": "Hadharani",
-            "publishOnTimeline": "Chapisha kwenye kalenda ya matukio",
-            "publishToGroup": "Chapisha kwa kikundi",
-            "fbStartLive": "Nenda Moja kwa Moja",
-            "fbStopLive": "Komesha Mtiririko wa moja kwa moja",
-            "streamingSettings": "Mipangilio",
-            "manageStream": "Dhibiti Mtiririko wa moja kwa moja",
-            "fbEmbedCode": "Pachika",
-            "copy": "Nakili",
-            "streamToRTMP": "Tiririsha hadi RTMP maalum",
-            "startBroadcasting": "Anza kutangaza",
-            "broadcastingInProgress": "Utangazaji unaendelea"
-        },
-        "audioSettings": {
-            "dialogTitle": "Mipangilio ya Sauti",
-            "speakers": "Wazungumzaji",
-            "microphone": "Maikrofoni"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Dhibiti Matangazo"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Mipangilio ya Mshiriki",
-            "disconnect": "Tenganisha",
-            "floatingScreens": "Skrini zinazoelea",
-            "tiledScreens": "Skrini zenye Vigae",
-            "loudestExceptMe": "Sauti kali zaidi Ila Mimi",
-            "maximizeLoudest": "Ongeza Sauti Zaidi",
-            "staticMaximized": "Iliyoongezwa Tuli",
-            "fullScreen": "Skrini Kamili",
-            "manual": "Mwongozo",
-            "turnOffCamera": "Ficha video",
-            "turnOffAudio": "Zima sauti",
-            "turnOffScreenSharing": "Ficha kushiriki skrini",
-            "turnOnCamera": "Onyesha video",
-            "turnOnAudio": "Rejesha sauti",
-            "turnOnScreenSharing": "Onyesha kushiriki skrini"
-        },
-        "streamingSettings": {
-            "title": "Mtiririko wa moja kwa moja"
-        },
-        "preview": {
-            "Meeting": "Teleconference",
-            "MeetingEnded": "Teleconference imekamilika"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Ombi la Kuzungumza",
-            "msg": "Hivi sasa kuna watu {{count}} wanaozungumza katika mkutano huo. Je, ungependa kubadilisha mojawapo baada ya kuwaruhusu sekunde {{seconds}} kumaliza kuzungumza?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Umealikwa",
@@ -471,10 +323,6 @@
             "displayType": "Mazungumzo",
             "description": "mazungumzo kati ya watumiaji, na historia"
         },
-        "Streams\/webrtc": {
-            "displayType": "Teleconference",
-            "description": "mkutano wa video\/sauti mtandaoni"
-        },
         "Streams\/question": {
             "displayType": "Swali",
             "description": "mkondo wa maswali",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Jibu",
             "description": "jibu mkondo"
-        },
-        "Streams\/calls": {
-            "displayType": "Simu",
-            "description": "kategoria ya Mipasho\/webrtc",
-            "MaxRelationsExceeded": "Simu za juu zaidi zimepitwa"
         }
     },
     "menu": {

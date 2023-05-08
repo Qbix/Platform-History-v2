@@ -69,7 +69,7 @@
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sa: {{& message.content}}",
         "Streams\/changed": "Ändringar i {{stream.fields.title}}",
         "Streams\/invite": "Du blev inbjuden till {{& stream.fields.title}}",
-        "Streams\/announcement": "Tillkännagivande i {{& stream.fields.title}}",
+        "Streams\/announcement": "Tillkännagivande {{& stream.fields.title}}",
         "Streams\/access": "{{&call 'avatar.displayName'}} ändrade åtkomst i {{& stream.fields.title}}",
         "Streams\/chat\/edit": "Chattmeddelande redigerat {{& stream.fields.title}}",
         "Streams\/chat\/remove": "Chattmeddelandet togs bort {{& stream.fields.title}}",
@@ -209,154 +209,6 @@
         "Devices": "Enheter",
         "Streams": "Strömmar"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Du har inte behörighet att gå med i denna stream.",
-        "streamTitle": "{{1}} startade en telefonkonferens",
-        "allow": {
-            "dialogTitle": "Ansluter",
-            "microphoneBtn": "Aktivera mikrofon",
-            "cameraBtn": "Aktivera kamera",
-            "cameraAndMicrophoneBtn": "Aktivera kamera och mikrofon"
-        },
-        "preparing": {
-            "dialogTitle": "Slå på\/av kameran eller mikrofonen innan du går med",
-            "micIsOff": "Mikrofonen är avstängd",
-            "micIsOn": "Mic är på",
-            "cameraIsOff": "Kameran är avstängd",
-            "cameraIsOn": "Kameran är på",
-            "screenSharingIsOn": "Skärmdelning är på",
-            "screenSharingIsOff": "Dela skärm",
-            "joinNow": "Gå med i samtalet"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instruktioner",
-            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
-            "point1": "Gå till &quot;Inställningar&quot; -&gt; &quot;Avancerat&quot; -&gt; &quot;Sekretess och säkerhet&quot; -&gt; &quot;Webbplatsinställningar&quot; -&gt; &quot;Kamera&quot; eller &quot;Webbplatsinställningar&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Ta bort {{hostname}} från &quot;Block&quot;-listan"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instruktioner",
-            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomst till {{kind}} för att gå med i konferensen."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instruktioner",
-            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
-            "point1": "Gå till dina Android-inställningar",
-            "point2": "Öppna &quot;Appar och aviseringar&quot;",
-            "point3": "Hitta &quot; {{communityName}} &quot; och öppna den",
-            "point4": "Tryck på Behörigheter",
-            "point5": "Aktivera {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instruktioner",
-            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
-            "point1": "Gå till dina iOS-inställningar",
-            "point2": "Öppna &quot;Sekretess&quot;",
-            "point3": "Hitta {{kind}} och öppna den",
-            "point4": "Hitta &quot; {{communityName}} &quot; och aktivera"
-        },
-        "fbLive": {
-            "dialogTitle": "Livestreaming på Facebook startade"
-        },
-        "notices": {
-            "youJoinedRoom": "Du gick med i rummet",
-            "joining": "Anslutning: {{userName}}",
-            "sbLeftRoom": "{{userName}} lämnade rummet",
-            "switchingRoom": "Byter rum...",
-            "forceDisconnecting": "Du kommer att kopplas från inom 5 sekunder",
-            "forceDisconnectingImmediately": "Du kopplades bort av en värd",
-            "youLeftRoom": "Du lämnade rummet",
-            "codeCopied": "Du lämnade rummet",
-            "sbBeganFbLive": "{{userName}} började sända detta samtal på Facebook",
-            "sbStoppedFbLive": "{{userName}} slutade sända detta samtal på Facebook",
-            "youBeganFbLive": "Du började sända det här samtalet på Facebook",
-            "youStoppedFbLive": "Du slutade sända det här samtalet på Facebook",
-            "youStartedLive": "Du började sända detta samtal till anpassad RTMP",
-            "youStoppedLive": "Du slutade sända det här samtalet till anpassad RTMP",
-            "sbStartedLiveStreaming": "{{userName}} började live",
-            "sbStoppedLiveStreaming": "{{userName}} slutade live",
-            "liveStopped": "Ett fel uppstod när videon skulle skickas till slutpunkten",
-            "youBeganVideoRecording": "Du började spela in den här konferensen",
-            "youStoppedVideoRecording": "Du slutade spela in den här konferensen",
-            "linkCopiedToCb": "Länken har kopierats till urklipp",
-            "codeCopiedToCb": "Koden har kopierats till urklipp",
-            "userHasNoVideo": "Deltagaren har ingen video",
-            "openInBrowserAlert": "Öppna länken i webbläsaren Safari för att gå med i konferensen.",
-            "allowedVideoLimit": "Endast {{limit}} videor tillåtna i det här rummet",
-            "allowedAudioLimit": "Endast {{limit}} mikrofoner tillåtna i detta rum"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Videoinställningar",
-            "webCamera": "Webbkamera",
-            "screenSharing": "Skärmdelning",
-            "shareAnotherScreen": "Dela en annan skärm",
-            "turnOffCameras": "Stäng av kameran",
-            "turnOffVideo": "Stäng av kamera\/skärmdelning",
-            "turnOffAudioInput": "Stäng av mikrofonen",
-            "turnOffScreenSharing": "Stäng av skärmdelning",
-            "cameraIsTurnedOff": "Kameran är avstängd",
-            "micIsTurnedOff": "Mikrofonen är avstängd",
-            "startFBLive": "Starta Facebook Livestream",
-            "stopFBLive": "Stoppa Facebook Livestream",
-            "startRecording": "Börja filma",
-            "stopRecording": "Stoppa inspelning",
-            "start": "Start",
-            "stop": "Sluta",
-            "recordingInProgress": "Inspelning pågår...",
-            "fbLiveTitle": "Titel på Livestream",
-            "fbLiveDescription": "Beskriv din livestream. Vad handlar det om?",
-            "fbOnlyMeLiveAccess": "Bara jag",
-            "fbFriendsAccess": "Vänner",
-            "fbPublicAccess": "offentlig",
-            "publishOnTimeline": "Publicera på tidslinjen",
-            "publishToGroup": "Publicera till grupp",
-            "fbStartLive": "Gå och lev",
-            "fbStopLive": "Avsluta livestream",
-            "streamingSettings": "inställningar",
-            "manageStream": "Hantera livestream",
-            "fbEmbedCode": "Bädda in",
-            "copy": "Kopiera",
-            "streamToRTMP": "Streama till anpassad RTMP",
-            "startBroadcasting": "Börja sända",
-            "broadcastingInProgress": "Sändning pågår"
-        },
-        "audioSettings": {
-            "dialogTitle": "Ljudinställningar",
-            "speakers": "Högtalare",
-            "microphone": "Mikrofon"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Hantera sändningar"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Deltagarinställningar",
-            "disconnect": "Koppla ifrån",
-            "floatingScreens": "Flytande skärmar",
-            "tiledScreens": "Kaklade skärmar",
-            "loudestExceptMe": "Högst utom jag",
-            "maximizeLoudest": "Maximera Högst",
-            "staticMaximized": "Statisk maximerad",
-            "fullScreen": "Fullskärm",
-            "manual": "Manuell",
-            "turnOffCamera": "Dölj video",
-            "turnOffAudio": "Stäng av ljudet",
-            "turnOffScreenSharing": "Dölj skärmdelning",
-            "turnOnCamera": "Visa video",
-            "turnOnAudio": "Slå på ljudet",
-            "turnOnScreenSharing": "Visa skärmdelning"
-        },
-        "streamingSettings": {
-            "title": "Direktsändning"
-        },
-        "preview": {
-            "Meeting": "Telefonkonferens",
-            "MeetingEnded": "Telefonkonferensen avslutades"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Begäran om att tala",
-            "msg": "Det är för närvarande {{count}} personer som talar i mötet. Vill du byta ut en av dem efter att ha gett dem {{seconds}} sekunder på sig att prata klart?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Inbjudna",
@@ -471,10 +323,6 @@
             "displayType": "Konversation",
             "description": "en konversation mellan användare, med historik"
         },
-        "Streams\/webrtc": {
-            "displayType": "Telefonkonferens",
-            "description": "en video-\/ljudkonferens online"
-        },
         "Streams\/question": {
             "displayType": "Fråga",
             "description": "frågeström",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Svar",
             "description": "svarsström"
-        },
-        "Streams\/calls": {
-            "displayType": "Samtal",
-            "description": "kategori för Streams\/webrtc",
-            "MaxRelationsExceeded": "Max antal samtal har överskridits"
         }
     },
     "menu": {

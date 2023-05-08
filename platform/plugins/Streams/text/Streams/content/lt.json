@@ -35,7 +35,7 @@
         "Unlisted": "Neįtraukta į sąrašą"
     },
     "chat": {
-        "flaggedForAdminReview": "Laiškas buvo pažymėtas administratoriaus peržiūrai. Bakstelėkite dar kartą, kad panaikintumėte vėliavėlę.",
+        "flaggedForAdminReview": "Laiškas pažymėtas administratoriaus peržiūrai. Bakstelėkite dar kartą, kad panaikintumėte vėliavėlę.",
         "noOneSaid": "Niekas nieko nesakė",
         "closeChatButton": "Uždaryti pokalbį",
         "closeChatConfirmTitle": "Uždaryti šį pokalbį?",
@@ -209,154 +209,6 @@
         "Devices": "Prietaisai",
         "Streams": "Srautai"
     },
-    "webrtc": {
-        "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio srauto.",
-        "streamTitle": "{{1}} pradėjo telekonferenciją",
-        "allow": {
-            "dialogTitle": "Prisijungimas",
-            "microphoneBtn": "Įjungti mikrofoną",
-            "cameraBtn": "Įgalinti fotoaparatą",
-            "cameraAndMicrophoneBtn": "Įjungti kamerą ir mikrofoną"
-        },
-        "preparing": {
-            "dialogTitle": "Prieš prisijungdami įjunkite \/ išjunkite fotoaparatą arba mikrofoną",
-            "micIsOff": "Mikrofonas išjungtas",
-            "micIsOn": "Mikrofonas įjungtas",
-            "cameraIsOff": "Kamera išjungta",
-            "cameraIsOn": "Kamera įjungta",
-            "screenSharingIsOn": "Ekrano bendrinimas įjungtas",
-            "screenSharingIsOff": "Bendrinti ekraną",
-            "joinNow": "Prisijunkite prie skambučio"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instrukcijos",
-            "permissionDenied": "Leidimas {{kind}} atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
-            "point1": "Eikite į &quot;Nustatymai&quot; -&gt; &quot;Išplėstiniai&quot; -&gt; &quot;Privatumas ir sauga&quot; -&gt; &quot;Svetainės nustatymai&quot; -&gt; &quot;Kamera&quot; arba &quot;Svetainės nustatymai&quot; -&gt; &quot;Mikrofonas&quot;",
-            "point2": "Pašalinkite {{hostname}} iš „Blokuoti“ sąrašo"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instrukcijos",
-            "permissionDenied": "Leidimas {{kind}} atmestas. Įkelkite šį puslapį iš naujo ir patvirtinkite prieigą prie {{kind}} , kad galėtumėte prisijungti prie konferencijos."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instrukcijos",
-            "permissionDenied": "Leidimas {{kind}} atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
-            "point1": "Eikite į „Android“ nustatymus",
-            "point2": "Atidarykite „Programos ir pranešimai“",
-            "point3": "Raskite „ {{communityName}} “ ir atidarykite jį",
-            "point4": "Bakstelėkite Leidimai",
-            "point5": "Įgalinti {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instrukcijos",
-            "permissionDenied": "Leidimas {{kind}} atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
-            "point1": "Eikite į „iOS“ nustatymus",
-            "point2": "Atidarykite „Privatumas“",
-            "point3": "Raskite {{kind}} ir atidarykite",
-            "point4": "Raskite „ {{communityName}} “ ir įjunkite"
-        },
-        "fbLive": {
-            "dialogTitle": "Prasidėjo tiesioginė „Facebook“ transliacija"
-        },
-        "notices": {
-            "youJoinedRoom": "Jūs prisijungėte prie kambario",
-            "joining": "Prisijungimas: {{userName}}",
-            "sbLeftRoom": "{{userName}} išėjo iš kambario",
-            "switchingRoom": "Persijungimo kambarys...",
-            "forceDisconnecting": "Būsite atjungti per 5 sekundes",
-            "forceDisconnectingImmediately": "Jus atjungė šeimininkas",
-            "youLeftRoom": "Tu išėjai iš kambario",
-            "codeCopied": "Tu išėjai iš kambario",
-            "sbBeganFbLive": "{{userName}} pradėjo transliuoti šį skambutį „Facebook“.",
-            "sbStoppedFbLive": "{{userName}} nustojo transliuoti šį skambutį „Facebook“.",
-            "youBeganFbLive": "Pradėjote transliuoti šį skambutį „Facebook“.",
-            "youStoppedFbLive": "Nustojote transliuoti šį skambutį „Facebook“.",
-            "youStartedLive": "Pradėjote transliuoti šį skambutį į tinkintą RTMP",
-            "youStoppedLive": "Nustojote transliuoti šį skambutį į tinkintą RTMP",
-            "sbStartedLiveStreaming": "{{userName}} pradėjo tiesiogiai",
-            "sbStoppedLiveStreaming": "{{userName}} baigėsi tiesiogiai",
-            "liveStopped": "Įvyko klaida siunčiant vaizdo įrašą į galinį tašką",
-            "youBeganVideoRecording": "Pradėjote įrašyti šią konferenciją",
-            "youStoppedVideoRecording": "Sustabdėte šios konferencijos įrašymą",
-            "linkCopiedToCb": "Nuoroda nukopijuota į mainų sritį",
-            "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
-            "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
-            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje.",
-            "allowedVideoLimit": "Šiame kambaryje leidžiama rodyti tik {{limit}} vaizdo įrašus",
-            "allowedAudioLimit": "Šiame kambaryje leidžiami tik {{limit}} mikrofonai"
-        },
-        "settingsPopup": {
-            "dialogTitle": "Vaizdo įrašo nustatymai",
-            "webCamera": "Internetinė kamera",
-            "screenSharing": "Ekrano bendrinimas",
-            "shareAnotherScreen": "Bendrinkite kitą ekraną",
-            "turnOffCameras": "Išjunkite kamerą",
-            "turnOffVideo": "Išjunkite fotoaparato \/ ekrano bendrinimą",
-            "turnOffAudioInput": "Nutildyti mikrofoną",
-            "turnOffScreenSharing": "Išjunkite ekrano bendrinimą",
-            "cameraIsTurnedOff": "Kamera išjungta",
-            "micIsTurnedOff": "Mikrofonas išjungtas",
-            "startFBLive": "Pradėkite „Facebook“ tiesioginę transliaciją",
-            "stopFBLive": "Sustabdykite „Facebook“ tiesioginę transliaciją",
-            "startRecording": "Pradėti įrašymą",
-            "stopRecording": "Sustabdykite įrašymą",
-            "start": "Pradėti",
-            "stop": "Sustabdyti",
-            "recordingInProgress": "Įrašymas vyksta...",
-            "fbLiveTitle": "Tiesioginės transliacijos pavadinimas",
-            "fbLiveDescription": "Aprašykite savo tiesioginį srautą. Apie ką tai?",
-            "fbOnlyMeLiveAccess": "Tik aš",
-            "fbFriendsAccess": "Draugai",
-            "fbPublicAccess": "Viešas",
-            "publishOnTimeline": "Paskelbti laiko juostoje",
-            "publishToGroup": "Paskelbti grupėje",
-            "fbStartLive": "Tiesiogiai",
-            "fbStopLive": "Baigti tiesioginę transliaciją",
-            "streamingSettings": "Nustatymai",
-            "manageStream": "Tvarkyti tiesioginę transliaciją",
-            "fbEmbedCode": "Įterpti",
-            "copy": "Kopijuoti",
-            "streamToRTMP": "Perduokite srautu į tinkintą RTMP",
-            "startBroadcasting": "Pradėkite transliuoti",
-            "broadcastingInProgress": "Transliacija vyksta"
-        },
-        "audioSettings": {
-            "dialogTitle": "Garso nustatymai",
-            "speakers": "Garsiakalbiai",
-            "microphone": "Mikrofonas"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "Valdykite transliaciją"
-        },
-        "participantsPopup": {
-            "dialogTitle": "Dalyvio nustatymai",
-            "disconnect": "Atsijungti",
-            "floatingScreens": "Plaukiojantys ekranai",
-            "tiledScreens": "Plytelių ekranai",
-            "loudestExceptMe": "Garsiausias, išskyrus mane",
-            "maximizeLoudest": "Maksimalus garsiausias",
-            "staticMaximized": "Statinis maksimalus",
-            "fullScreen": "Per visą ekraną",
-            "manual": "vadovas",
-            "turnOffCamera": "Slėpti vaizdo įrašą",
-            "turnOffAudio": "Nutildyti garsą",
-            "turnOffScreenSharing": "Slėpti ekrano bendrinimą",
-            "turnOnCamera": "Rodyti vaizdo įrašą",
-            "turnOnAudio": "Įjungti garsą",
-            "turnOnScreenSharing": "Rodyti ekrano bendrinimą"
-        },
-        "streamingSettings": {
-            "title": "Tiesiogiai"
-        },
-        "preview": {
-            "Meeting": "Telekonferencija",
-            "MeetingEnded": "Telekonferencija baigėsi"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "Prašymas kalbėti",
-            "msg": "Šiuo metu posėdyje kalba {{count}} žmonės. Ar norite pakeisti vieną iš jų, suteikę jiems {{seconds}} sekundžių, kad baigtų kalbėti?"
-        }
-    },
     "types": {
         "Streams\/invited": {
             "displayType": "Pakviestas",
@@ -471,10 +323,6 @@
             "displayType": "Pokalbis",
             "description": "pokalbis tarp vartotojų su istorija"
         },
-        "Streams\/webrtc": {
-            "displayType": "Telekonferencija",
-            "description": "internetinė vaizdo \/ garso konferencija"
-        },
         "Streams\/question": {
             "displayType": "Klausimas",
             "description": "klausimų srautas",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "Atsakymas",
             "description": "atsakymų srautas"
-        },
-        "Streams\/calls": {
-            "displayType": "Skambučiai",
-            "description": "kategorija Streams\/webrtc",
-            "MaxRelationsExceeded": "Viršytas maksimalus skambučių skaičius"
         }
     },
     "menu": {

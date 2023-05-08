@@ -2493,7 +2493,7 @@
 		 * @static
 		 * @param {Element} trigger the button
 		 * @param {Element} container 
-		 * @param {Object} trigger
+		 * @param {Object} options
 		 */
 		coverPhoto: function (trigger, container, options) {
 			var userId = Q.Users.loggedInUserId();
@@ -2947,6 +2947,10 @@
 		"Users/people": {
 			js: "{{Users}}/js/tools/people.js",
 			css: "{{Users}}/css/tools/people.css"
+		},
+		"Users/web3/community": {
+			js: "{{Users}}/js/tools/web3/community.js",
+			css: "{{Users}}/css/tools/web3/community.css"
 		}
 	});
 

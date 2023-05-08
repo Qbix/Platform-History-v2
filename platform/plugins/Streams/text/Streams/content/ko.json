@@ -112,7 +112,7 @@
             "userChooserPlaceholder": "이름으로 검색",
             "photo": "사진을 찍다",
             "photoOf": "{{name}} 사진 찍기",
-            "photoInstruction": "QR코드를 스캔한 사람이 앞에 있다면 사진을 찍어주세요.",
+            "photoInstruction": "QR코드를 스캔한 사람이 앞에 있다면 사진을 찍어주세요",
             "to": "받는 사람: {{Stream Title}}",
             "go": "가다",
             "title": "초대하다",
@@ -208,154 +208,6 @@
         "Identifiers": "식별자",
         "Devices": "장치",
         "Streams": "스트림"
-    },
-    "webrtc": {
-        "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
-        "streamTitle": "{{1}} 원격회의 시작",
-        "allow": {
-            "dialogTitle": "연결 중",
-            "microphoneBtn": "마이크 활성화",
-            "cameraBtn": "카메라 활성화",
-            "cameraAndMicrophoneBtn": "카메라 및 마이크 활성화"
-        },
-        "preparing": {
-            "dialogTitle": "참여하기 전에 카메라 또는 마이크 켜기\/끄기",
-            "micIsOff": "마이크가 꺼져 있습니다",
-            "micIsOn": "마이크 켜짐",
-            "cameraIsOff": "카메라가 꺼져 있습니다.",
-            "cameraIsOn": "카메라가 켜져 있습니다.",
-            "screenSharingIsOn": "화면 공유 사용 중",
-            "screenSharingIsOff": "화면 공유",
-            "joinNow": "통화에 참여"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "지침",
-            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
-            "point1": "&quot;설정&quot; -&gt; &quot;고급&quot; -&gt; &quot;개인 정보 및 보안&quot; -&gt; &quot;사이트 설정&quot; -&gt; &quot;카메라&quot; 또는 &quot;사이트 설정&quot; -&gt; &quot;마이크&quot;로 이동합니다.",
-            "point2": "&quot;차단&quot; 목록에서 {{hostname}} 제거"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "지침",
-            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 회의에 참여하려면 이 페이지를 새로고침하고 {{kind}} 에 대한 액세스를 확인하십시오."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "지침",
-            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
-            "point1": "Android 설정으로 이동",
-            "point2": "&quot;앱 및 알림&quot; 열기",
-            "point3": "&quot; {{communityName}} &quot;를 찾아 엽니다.",
-            "point4": "권한을 누릅니다",
-            "point5": "{{kind}} 활성화"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "지침",
-            "permissionDenied": "{{kind}} 에 대한 허가가 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
-            "point1": "iOS 설정으로 이동",
-            "point2": "&quot;프라이버시&quot; 열기",
-            "point3": "{{kind}} 찾아 엽니다.",
-            "point4": "&quot; {{communityName}} &quot;를 찾아 활성화"
-        },
-        "fbLive": {
-            "dialogTitle": "페이스북 라이브 스트리밍 시작"
-        },
-        "notices": {
-            "youJoinedRoom": "방에 참여했습니다.",
-            "joining": "가입: {{userName}}",
-            "sbLeftRoom": "{{userName}} 방을 나갔다",
-            "switchingRoom": "방을 바꾸다...",
-            "forceDisconnecting": "5초 이내에 연결이 끊어집니다.",
-            "forceDisconnectingImmediately": "호스트에 의해 연결이 끊어졌습니다.",
-            "youLeftRoom": "당신은 방을 나갔다",
-            "codeCopied": "당신은 방을 나갔다",
-            "sbBeganFbLive": "{{userName}} 이 통화를 Facebook에서 방송하기 시작했습니다.",
-            "sbStoppedFbLive": "{{userName}} Facebook에서 이 통화 방송을 중지했습니다.",
-            "youBeganFbLive": "Facebook에서 이 통화를 방송하기 시작했습니다.",
-            "youStoppedFbLive": "Facebook에서 이 통화 방송을 중지했습니다.",
-            "youStartedLive": "이 호출을 사용자 지정 RTMP에 브로드캐스팅하기 시작했습니다.",
-            "youStoppedLive": "맞춤 RTMP에 대한 이 호출 브로드캐스팅을 중지했습니다.",
-            "sbStartedLiveStreaming": "{{userName}} 라이브 시작",
-            "sbStoppedLiveStreaming": "{{userName}} 라이브 종료",
-            "liveStopped": "끝점에 비디오를 보내는 중 오류가 발생했습니다.",
-            "youBeganVideoRecording": "이 회의를 녹화하기 시작했습니다.",
-            "youStoppedVideoRecording": "이 회의 녹화를 중지했습니다.",
-            "linkCopiedToCb": "클립보드에 복사된 링크",
-            "codeCopiedToCb": "클립보드에 복사된 코드",
-            "userHasNoVideo": "참가자에게 비디오가 없습니다.",
-            "openInBrowserAlert": "회의에 참여하려면 Safari 브라우저에서 링크를 여십시오.",
-            "allowedVideoLimit": "이 방에는 {{limit}} 비디오만 허용됩니다.",
-            "allowedAudioLimit": "이 방에는 {{limit}} 마이크만 허용됩니다."
-        },
-        "settingsPopup": {
-            "dialogTitle": "비디오 설정",
-            "webCamera": "웹 카메라",
-            "screenSharing": "화면 공유",
-            "shareAnotherScreen": "다른 화면 공유",
-            "turnOffCameras": "카메라 끄기",
-            "turnOffVideo": "카메라\/화면 공유 끄기",
-            "turnOffAudioInput": "마이크 음소거",
-            "turnOffScreenSharing": "화면 공유 끄기",
-            "cameraIsTurnedOff": "카메라가 꺼져 있습니다.",
-            "micIsTurnedOff": "마이크가 꺼져 있습니다.",
-            "startFBLive": "페이스북 라이브스트림 시작하기",
-            "stopFBLive": "페이스북 라이브스트림 중지",
-            "startRecording": "녹음 시작",
-            "stopRecording": "녹음 중지",
-            "start": "시작",
-            "stop": "멈추다",
-            "recordingInProgress": "녹음이 진행 중입니다...",
-            "fbLiveTitle": "생중계 제목",
-            "fbLiveDescription": "귀하의 라이브스트림을 설명하십시오. 무엇에 관한 것입니까?",
-            "fbOnlyMeLiveAccess": "나만",
-            "fbFriendsAccess": "친구",
-            "fbPublicAccess": "공공의",
-            "publishOnTimeline": "타임라인에 게시",
-            "publishToGroup": "그룹에 게시",
-            "fbStartLive": "생중계",
-            "fbStopLive": "생중계 종료",
-            "streamingSettings": "설정",
-            "manageStream": "라이브스트림 관리",
-            "fbEmbedCode": "포함시키다",
-            "copy": "복사",
-            "streamToRTMP": "맞춤형 RTMP로 스트리밍",
-            "startBroadcasting": "방송 시작",
-            "broadcastingInProgress": "방송중입니다"
-        },
-        "audioSettings": {
-            "dialogTitle": "오디오 설정",
-            "speakers": "스피커",
-            "microphone": "마이크로폰"
-        },
-        "broadcastPopup": {
-            "dialogTitle": "방송 관리"
-        },
-        "participantsPopup": {
-            "dialogTitle": "참가자 설정",
-            "disconnect": "연결 끊기",
-            "floatingScreens": "플로팅 스크린",
-            "tiledScreens": "타일 스크린",
-            "loudestExceptMe": "나 빼고 시끄러워",
-            "maximizeLoudest": "가장 크게 최대화",
-            "staticMaximized": "정적 최대화",
-            "fullScreen": "전체 화면",
-            "manual": "수동",
-            "turnOffCamera": "비디오 숨기기",
-            "turnOffAudio": "오디오 음소거",
-            "turnOffScreenSharing": "화면 공유 숨기기",
-            "turnOnCamera": "비디오 보기",
-            "turnOnAudio": "오디오 음소거 해제",
-            "turnOnScreenSharing": "화면 공유 표시"
-        },
-        "streamingSettings": {
-            "title": "생중계"
-        },
-        "preview": {
-            "Meeting": "원격회의",
-            "MeetingEnded": "원격회의 종료"
-        },
-        "requestSpeakDialog": {
-            "dialogTitle": "발언 요청",
-            "msg": "현재 {{count}} 명이 회의에서 발언하고 있습니다. {{seconds}} 초 동안 말을 마칠 수 있도록 허용한 후 그 중 하나를 교체하시겠습니까?"
-        }
     },
     "types": {
         "Streams\/invited": {
@@ -471,10 +323,6 @@
             "displayType": "대화",
             "description": "역사와 함께 사용자 간의 대화"
         },
-        "Streams\/webrtc": {
-            "displayType": "원격회의",
-            "description": "온라인 비디오\/오디오 컨퍼런스"
-        },
         "Streams\/question": {
             "displayType": "질문",
             "description": "질문 스트림",
@@ -483,11 +331,6 @@
         "Streams\/answer": {
             "displayType": "답변",
             "description": "응답 스트림"
-        },
-        "Streams\/calls": {
-            "displayType": "통화",
-            "description": "Streams\/webrtc 카테고리",
-            "MaxRelationsExceeded": "최대 통화 초과"
         }
     },
     "menu": {
@@ -589,7 +432,7 @@
         "AlreadyAnswered": "이미 답변했습니다",
         "TitlePlaceholder": "질문을 입력하세요",
         "ContentPlaceholder": "사람들이 답변할 수 있도록 여기에 추가 정보를 입력하세요.",
-        "ErrorTitle": "질문 필수",
+        "ErrorTitle": "질문 필요",
         "Placeholder": "자리 표시자",
         "AreYouSure": "확실합니까?"
     },
