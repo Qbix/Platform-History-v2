@@ -662,6 +662,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 								throw new Exception($e->getMessage() . " [query was: $sql]", -1);
 							}
 							throw new Q_Exception_DbQuery(array(
+								'shardName' => $shardName,
+								'query' => $query,
 								'sql' => $sql,
 								'msg' => $e->getMessage()
 							));
@@ -1273,10 +1275,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	/**
 	 * This function is specifically for adding criteria to query for sharding purposes.
 	 * It doesn't affect the SQL generated for the query.
+	 * You can also call this function with an empty set of parameters, to get the current criteria.
 	 * @method criteria
-	 * @param {Db_Expression|array} $criteria An associative array of expression => value pairs.
+	 * @param {array} $criteria An associative array of expression => value pairs.
 	 */
-	function criteria($criteria)
+	function criteria($criteria = null)
 	{
 		if (is_array($criteria)) {
 			if (empty($this->criteria)) {
@@ -1285,6 +1288,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				$this->criteria = array_merge($this->criteria, $criteria);
 			}
 		}
+		return $this->criteria;
 	}
 
 	/**
