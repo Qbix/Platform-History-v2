@@ -3,6 +3,8 @@
 function Assets_after_Users_updateUserIds($params)
 {
     $chunks = $params['chunks'];
+    $errors = &$params['errors'];
+    $accumulateErrors = $params['accumulateErrors'];
     $userIdFields = array(
         'Assets' => array(
             'Badge' => array('appId', 'communityId'),
@@ -23,11 +25,19 @@ function Assets_after_Users_updateUserIds($params)
             $ClassName = $Connection . '_' . $Table;
             foreach ($fields as $field) {
                 foreach ($chunks as $chunk) {
-                    call_user_func(array($ClassName, 'update'))
+                    try {
+                        call_user_func(array($ClassName, 'update'))
                         ->set(array($field => $chunk))
                         ->where(array(
                             $field => array_keys($chunk)
                         ))->execute();
+                    } catch (Exception $e) {
+                        if ($accumulateErrors) {
+                            $errors[] = $e;
+                        } else {
+                            throw $e;
+                        }
+                    }
                 }
             }
         }

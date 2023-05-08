@@ -2375,12 +2375,15 @@ abstract class Users extends Base_Users
 	 * This should update them in many tables of the Users plugin.
 	 * Also, other plugins can add a hook to create their own updates.
 	 * @param {array} $updates pairs of (oldUserId => newUserId)
+	 * @param {boolean} [$accumulateErrors=false] set to true to keep going
+	 *  even if an update fails, accumulating errors
 	 */
-	static function updateUserIds(array $updates)
+	static function updateUserIds(array $updates, $accumulateErrors = false)
 	{
 		$chunkSize = 100;
 		$chunks = array_chunk($updates, $chunkSize, true);
 		$transactionKey = Q_Utils::randomString(10);
+		$errors = array();
 		Users_User::begin(null, $transactionKey)->execute();
 		// can be rolled back on any exception
 		$fields = array(
@@ -2410,21 +2413,35 @@ abstract class Users extends Base_Users
 				$ClassName = $Connection . '_' . $Table;
 				foreach ($fields as $i => $field) {
 					foreach ($chunks as $chunk) {
-						call_user_func(array($ClassName, 'update'))
+						try {
+							call_user_func(array($ClassName, 'update'))
 							->set(array($field => $chunk))
 							->where(array($field => array_keys($chunk)))
 							->execute();
+						} catch (Exception $e) {
+							if ($accumulateErrors) {
+								$errors[] = $e;
+							} else {
+								throw $e;
+							}
+						}
 					}
 				}
 			}
 		}
+		$params = compact('updates', 'accumulateErrors', 'chunks', 'fields', 'chunks');
+		$params['errors'] =& $errors;
 		/**
 		 * Gives any plugin or app a chance to update stream names in its own tables
 		 * @event Users/updateUserIds
 		 * @param {array} $updates an array of (oldUserId => newUserId)
+		 * @param {boolean} [$accumulateErrors=false] if true, accumulate errors and keep going
+		 * @param {boolean} [$errors=array()] reference to an array to push errors here
+	 	 * @return {array} any errors that have accumulated, if accumulateErrors is true, otherwise empty array
 		 */
-		Q::event('Users/updateUserIds', compact('updates', 'chunks', 'fields', 'chunks'), 'after');
+		Q::event('Users/updateUserIds', $params, 'after');
 		Users_User::commit($transactionKey)->execute();
+		return $errors;
 	}
 
 	/**
