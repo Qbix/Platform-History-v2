@@ -1991,8 +1991,8 @@ class Db_Row
 	 *   You can also pass true in place of the modifyQuery field to achieve
 	 *   the same effect as array("query" => true)
 	 * @param {boolean|string} [$modifyQuery.begin] this will cause the query 
-	 *   to have .begin() a transaction which locks the row for update. 
-	 *   You should call .save(..., true) to commit the transaction, or else
+	 *   to ->begin() a transaction which locks the row for update. 
+	 *   You should call ->save(..., true) to commit the transaction, or else
 	 *   other database connections trying to access the row will be blocked.
 	 * @param {boolean} [$modifyQuery.rollbackIfMissing=false]
 	 *   If begin is true, this option determines whether to immediately

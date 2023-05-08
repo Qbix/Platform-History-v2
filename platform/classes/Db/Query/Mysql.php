@@ -855,8 +855,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * you often need the "where" clauses to figure out which database to send it to,
 	 * if sharding is being used.
 	 * @method begin
-	 * @param {string} [$lockType='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
-	 * or set it to null to avoid adding a "LOCK" clause
+	 * @param {string|false} [$lockType='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
+	 *  or set it to false to avoid adding a "LOCK" clause
 	 * @param {string} [$transactionKey=null] Passing a key here makes the system throw an
 	 *  exception if the script exits without a corresponding commit by a query with the
 	 *  same transactionKey or with "*" as the transactionKey to "resolve" this transaction.
@@ -1450,6 +1450,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * @method set
 	 * @param {array} $updates An associative array of column => value pairs.
 	 * The values are automatically escaped using PDO placeholders.
+	 * The value can also be an array of changes, in which case they
+	 * would form a CASE WHEN column = {{key}} THEN {{value}}
+	 * and if there is a "" key with a corresponding elseValue, 
+	 * then it ends with ELSE {{elseValue}}
 	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @chainable
 	 */
@@ -1896,13 +1900,34 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (is_array($updates)) {
 			$updates_list = array();
 			foreach ($updates as $field => $value) {
+				$column = self::column($field);
 				if ($value instanceof Db_Expression) {
 					if (is_array($value->parameters)) {
 						$this->parameters = array_merge($this->parameters, $value->parameters);
 					}
-					$updates_list[] = self::column($field) . " = $value";
+					$updates_list[] = "$column = $value";
+				} else if (is_array($value)) {
+					$cases = "$column = (CASE";
+					foreach ($value as $k => $v) {
+						if (!$k) {
+							continue;
+						}
+						$cases .= "\n\tWHEN $column = :_set_$i THEN :_set_".($i+1);
+						$this->parameters["_set_$i"] = $k;
+						$this->parameters["_set_".($i+1)] = $v;
+						$i += 2;
+					}
+					if (isset($value[''])) {
+						$cases .= "\n\tELSE :_set_$i";
+						$this->parameters["_set_$i"] = $k;
+					} else {
+						$cases .= "\n\tELSE ''";
+					}
+					++$i;
+					$cases .= "\nEND)";
+					$updates_list[] = $cases;
 				} else {
-					$updates_list[] = self::column($field) . " = :_set_$i";
+					$updates_list[] = "$column = :_set_$i";
 					$this->parameters["_set_$i"] = $value;
 					++ $i;
 				}

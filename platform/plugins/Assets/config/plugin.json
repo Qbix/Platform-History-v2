@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.12",
+				"version": "1.0.14",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -18,13 +18,15 @@
 		},
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
+			"Users/updateUserIds": ["Assets/after/Users_updateUserIds"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/credits/spent": ["Assets/after/Assets_credits_spent"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
 			"Streams/Stream/save/Streams/text/name": ["Assets/after/Streams_save"],
-			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
+			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"],
+			"Streams/updateStreamNames": ["Assets/after/Streams_updateStreamNames"]
 		},
 		"routes@start": {
 			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},

@@ -34,6 +34,7 @@
 			"Db/Row/Users_Label/removeExecute": ["Streams/after/Users_Label_removeExecute"],
 			"Users/saveContactsFromLinks": ["Streams/after/Users_saveContactsFromLinks"],
 			"Users/setLoggedInUser": ["Streams/after/Users_setLoggedInUser"],
+			"Users/updateUserIds": ["Streams/after/Users_updateUserIds"],
 			"Streams/message/Streams/chat/message": ["Streams/after/Streams_message_Streams_chat_message"],
 			"Streams/message/Streams/relatedTo": ["Streams/after/Streams_message_Streams_relatedTo"],
 			"Streams/message/Streams/unrelatedTo": ["Streams/after/Streams_message_Streams_unrelatedTo"],

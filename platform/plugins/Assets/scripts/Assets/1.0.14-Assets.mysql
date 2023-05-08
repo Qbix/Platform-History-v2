@@ -1,0 +1,2 @@
+ALTER TABLE {{prefix}}leader
+RENAME COLUMN app TO appId;
