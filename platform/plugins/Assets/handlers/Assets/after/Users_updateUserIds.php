@@ -11,7 +11,7 @@ function Assets_after_Users_updateUserIds($params)
             'Credits' => array('fromUserId', 'toUserId', 'fromPublisherId', 'toPublisherId'),
             'Customer' => array('userId'),
             'Earned' => array('appId', 'communityId', 'userId'),
-            'Leader' => array('appId', 'userId'),
+            'Leader' => array('communityId', 'userId'),
             'NftAttributes' => array('publisherId')
         )
     );
