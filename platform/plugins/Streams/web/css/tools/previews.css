@@ -239,9 +239,6 @@
 .Streams_question_preview_tool {
 	cursor: pointer;
 }
-.Streams_question_preview_tool {
-	padding-top: 10px;
-}
 .Streams_answer_preview_tool {
 	white-space: nowrap;
 }
