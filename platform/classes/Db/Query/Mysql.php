@@ -277,6 +277,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				$lock = empty($this->clauses['LOCK']) ? '' : "\n".$this->clauses['LOCK'];
 				$lock .= !isset($this->after['LOCK']) ? '' : "\n".$this->after['LOCK'];
 				$q = "SELECT $select$from$join$where $groupBy $having $orderBy $limit $lock";
+				if (!empty($this->clauses['EXISTS'])) {
+					$q = "EXISTS(\n$q\n)";
+				} else if (!empty($this->clauses['NOT EXISTS'])) {
+					$q = "NOT EXISTS(\n$q\n)";
+				}
 				break;
 			case Db_Query::TYPE_INSERT:
 				// INTO
@@ -1078,6 +1083,22 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	}
 
 	/**
+	 * Surround the query with "EXISTS()" or "NOT EXISTS()"
+	 * to be used as a Db_Expression object
+	 * @param {boolean} $shouldExist
+	 * @chainable
+	 */
+	function exists($shouldExist)
+	{
+		if ($shouldExist) {
+			$this->clauses['EXISTS'] = true;
+		} else {
+			$this->clauses['NOT EXISTS'] = true;
+		}
+		return $this;
+	}
+
+	/**
 	 * Adds a WHERE clause to a query
 	 * @method where
 	 * @param {Db_Expression|array} $criteria An associative array of expression => value pairs.
@@ -1791,7 +1812,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						}
 					}
 					$list = array();
-					foreach ($value as $j => $arr) {
+					foreach ($value as $arr) {
 						if (!is_array($arr)) {
 							$json = json_encode($arr);
 							throw new Exception("Db.Query.Mysql: Value $json needs to be an array");
@@ -1802,7 +1823,6 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 							);
 						}
 						$vector = array();
-						$valuesArray = array();
 						foreach ($arr as $v) {
 							$vector[] = ":_where_$i";
 							$this->parameters["_where_$i"] = $v;

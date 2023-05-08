@@ -5275,11 +5275,10 @@ abstract class Streams extends Base_Streams
 				foreach ($fields as $i => $field) {
 					$publisherIdField = Q::ifset($publisherIdFields, $Connection, $Table, $i, 'publisherId');
 					foreach ($chunks as $chunk) {
-						$criteria = isset($publisherId)
-						? array(
-							$publisherIdField => $publisherId,
-							$field => array_keys($chunk)
-						) : array($field => array_keys($chunk));
+						$criteria = array($field => array_keys($chunk));
+						if (isset($publisherId)) {
+							$criteria[$publisherIdField] = $publisherId;
+						}
 						call_user_func(array($ClassName, 'update'))
 							->set(array($field => $chunk))
 							->where($criteria)
