@@ -3,7 +3,7 @@
     overflow: hidden;
     overflow-x: auto;
 }
-.Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool {
+.Q_notMobile .Q_columns_stretchFirstColumn .Q_columns_column .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool {
     display: inline-block;
     width: auto;
     margin-left: 1%;

@@ -37,22 +37,4 @@ function Streams_after_Q_image_save($params)
 	} else {
 		$stream->save();
 	}
-
-	// if user invited send message User/icon/filled to invited stream to inform inviting user
-	$invites = Streams_Invited::select('si.*', 'sid')
-		->where(array(
-			"sid.userId" => $user->id
-		))
-		->join(Streams_Invite::table() . ' si', array(
-			"si.token" => "sid.token"
-		), 'LEFT')->fetchDbRows();
-	foreach ($invites as $invite) {
-		Streams_Message::post($user->id, $invite->publisherId, $invite->streamName, array(
-			'type' => 'User/icon/filled',
-			'instructions' => array(
-				"userId" => $user->id,
-				"token" => $invite->token
-			)
-		), true);
-	}
 }
