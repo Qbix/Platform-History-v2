@@ -75,11 +75,12 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 		$toolElement.tool("Streams/default/preview").activate(function () {
 			var $previewContents = $(".Streams_preview_contents", tool.element);
-
 			var content = stream.fields.content;
 			if (content) {
 				$("<div class='Streams_question_subtitle'>").appendTo($previewContents).html(content);
 			}
+
+			Q.Tool.from(this.element, "Streams/default/preview").state.onInvoke = null;
 
 			tool.$answersRelated = $("<div>").insertAfter($toolElement);
 			tool.$answersRelated.attr("data-hideUntilAnswered", tool.stream.getAttribute("hideUntilAnswered"));
