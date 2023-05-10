@@ -75,7 +75,7 @@
         "BoughtCredits": "Bought {{amount}} credits",
         "BonusCredits": "Bonus {{amount}} credits",
         "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "WatchClip": "for watching {{fromStreamTitle}}",
         "MissingCredits": "Missing Credits",
         "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",
@@ -125,7 +125,10 @@
         "Streams_user_icon": "Earned {{amount}} credits",
         "Places_user_location": "Earned {{amount}} credits",
         "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "YouHaveCreditsToStart": "Earned {{amount}} credits",
+        "InvitedUserFilledStream": "Earned {{amount}} credits",
+        "ForFillingStream": "Earned {{amount}} credits",
+        "CreatePrivateChat": "Spent {{amount}} credits"
     },
     "subscriptions": {
         "infoTitle": "Set Payment Information",
