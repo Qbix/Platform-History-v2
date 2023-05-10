@@ -416,6 +416,7 @@
 }
 .Streams_chat_message .Streams_preview_tool .Streams_inplace_tool:not(.Q_inplace_tool) .Q_inplace_tool_static {
 	white-space: normal;
+	overflow: hidden;
 }
 .Streams_chat_message .Streams_chat_avatar_name {
 	margin-right: .4em;
