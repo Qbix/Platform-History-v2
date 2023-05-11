@@ -99,15 +99,17 @@ Q.Tool.define("Assets/history", function (options) {
 					return;
 				}
 
-				var rowOperation = Q.getObject(["history", row.reason, row.sign], tool.text) || Q.getObject(["history", row.reason], tool.text);
-				if (rowOperation) {
-					row.operation = rowOperation.interpolate(row);
-				} else {
-					row.operation = row.amount;
-				}
-				var rowReason = Q.getObject([state.type, row.reason], tool.text);
-				if (rowReason) {
-					row.reason = rowReason.interpolate(row);
+				if (row.reason) {
+					var rowOperation = Q.getObject(["history", row.reason, row.sign], tool.text) || Q.getObject(["history", row.reason], tool.text);
+					if (rowOperation) {
+						row.operation = rowOperation.interpolate(row);
+					} else {
+						row.operation = row.amount;
+					}
+					var rowReason = Q.getObject([state.type, row.reason], tool.text);
+					if (rowReason) {
+						row.reason = rowReason.interpolate(row);
+					}
 				}
 
 				Q.Template.render("Assets/row/" + state.type, row, function (err, html) {
