@@ -212,6 +212,13 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
+	 * Can share the stream's actual content with others
+	 * @property $ADMIN_LEVEL['share']
+	 * @type integer
+	 * @default 10
+	 * @final
+	 */
+	/**
 	 * Able to create invitations for others, granting access
 	 * and permissions up to what they themselves have
 	 * @property $ADMIN_LEVEL['invite']
@@ -243,6 +250,7 @@ abstract class Streams extends Base_Streams
 	public static $ADMIN_LEVEL = array(
 		'none' => 0,
 		'tell' => 10,
+		'share' => 15,
 		'invite' => 20,
 		'manage' => 30,
 		'own' => 40,

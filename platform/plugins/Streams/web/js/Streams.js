@@ -297,10 +297,11 @@ Streams.WRITE_LEVEL = {
 Streams.ADMIN_LEVEL = {
 	'none':	 		0,		// cannot do anything related to admin / users
 	'tell':	 		10,		// can prove things about the stream's content or participants
+	'share': 		15,		// can share the stream's actual content with others
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':	 		40,		// can give people any adminLevel <= 40
-	'max':		  40  	// max admin level
+	'max':			40  	// max admin level
 };
 
 Streams.defined = {};
