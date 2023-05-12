@@ -39,7 +39,7 @@ Q.Tool.define("Assets/history", function (options) {
 			return console.warn(msg);
 		}
 
-		tool.text = text.history;
+		tool.text = text;
 		pipe.fill("texts")();
 	});
 
@@ -55,7 +55,7 @@ Q.Tool.define("Assets/history", function (options) {
 
 	// generate table
 	Q.Template.render('Assets/history/' + state.type, {
-		text: tool.text
+		text: tool.text.history
 	},
 	function (err, html) {
 		if (err) return;
@@ -90,7 +90,7 @@ Q.Tool.define("Assets/history", function (options) {
 
 			/*if (Q.typeOf(rows) !== 'array' || !rows.length) {
 				$te.attr('data-empty', true);
-				return $te.html(tool.text.HistoryEmpty);
+				return $te.html(tool.text.history.HistoryEmpty);
 			}*/
 
 			Q.each(rows, function (i, row) {
@@ -99,7 +99,20 @@ Q.Tool.define("Assets/history", function (options) {
 					return;
 				}
 
-				Q.Template.render("Assets/row/" + state.type, row,function (err, html) {
+				if (row.reason) {
+					var rowOperation = Q.getObject(["history", row.reason, row.sign], tool.text) || Q.getObject(["history", row.reason], tool.text);
+					if (rowOperation) {
+						row.operation = rowOperation.interpolate(row);
+					} else {
+						row.operation = row.amount;
+					}
+					var rowReason = Q.getObject([state.type, row.reason], tool.text);
+					if (rowReason) {
+						row.reason = rowReason.interpolate(row);
+					}
+				}
+
+				Q.Template.render("Assets/row/" + state.type, row, function (err, html) {
 					if (err) return;
 
 					var $tr = $(html).attr("id", row.id).addClass("Q_newsflash");

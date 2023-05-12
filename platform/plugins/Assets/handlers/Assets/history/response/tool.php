@@ -67,31 +67,14 @@ function Assets_history_response_tool($options)
 				);
 			}
 
-			$operation = Q::ifset($texts, 'history', $row->reason, $sign, Q::ifset($texts, 'history', $row->reason, null));
-			if ($operation) {
-				$operation = Q::interpolate($operation, @compact("amount"));
-			} else {
-				$operation = $amount;
-			}
-
-			if ($reason = Q::ifset($texts, 'credits', $row->reason, null)) {
-				$reason = Q::interpolate($reason, $attributes);
-			} else {
-				$reason = $row->reason;
-			}
-
-			// remove operation from reason to avoid repeat
-			$reason = str_replace($operation, "", $reason);
-
-			$res[] = array(
+			$res[] = array_merge(array(
 				'id' => $row->id,
 				'date' => $row->insertedTime,
 				'amount' => $amount,
-				'operation' => $operation,
-				'reason' => $reason,
+				'reason' => $row->reason,
 				'sign' => $sign,
 				'clientInfo' => $clientInfo
-			);
+			), $attributes);
 		}
 	} elseif ($type == 'charges') {
 		$rows = Assets_Charge::select()
