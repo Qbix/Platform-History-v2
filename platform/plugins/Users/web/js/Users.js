@@ -1793,11 +1793,11 @@
 		var placeholder = Q.text.Users.login.placeholders.identifier;
 		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = options.identifierType ? options.identifierType.split(',') : [];
-		if (parts.length === 1) {
-			if (Q.info.isMobile && parts.indexOf('mobile') >= 0) {
-				type = 'tel';
-				placeholder = Q.text.Users.login.placeholders.mobile;
-			} else if (parts[0] == 'email') {
+		if (Q.info.isMobile && parts.indexOf('mobile') >= 0) {
+			type = 'tel';
+			placeholder = Q.text.Users.login.placeholders.mobile;
+		} else if (parts.length >= 1) {
+			if (parts[0] == 'email') {
 				type = 'email';
 				placeholder = Q.text.Users.login.placeholders.email;
 			} else if (parts[0] == 'mobile') {
