@@ -1794,8 +1794,8 @@
 		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = options.identifierType ? options.identifierType.split(',') : [];
 		if (Q.info.isMobile && parts.indexOf('mobile') >= 0) {
-			type = 'tel';
 			placeholder = Q.text.Users.login.placeholders.mobile;
+			type = (parts.indexOf('email') >= 0) ? 'email' : 'tel';
 		} else if (parts.length >= 1) {
 			if (parts[0] == 'email') {
 				type = 'email';
