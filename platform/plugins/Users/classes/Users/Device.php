@@ -218,7 +218,7 @@ class Users_Device extends Base_Users_Device
 	protected function handlePushNotification($notifications, $options = array())
 	{
 		throw new Q_Exception_MethodNotSupported(array(
-			'method' => 'schedulePushNotification'
+			'method' => 'handlePushNotification'
 		));
 	}
 	
