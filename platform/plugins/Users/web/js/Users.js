@@ -1793,9 +1793,12 @@
 		var placeholder = Q.text.Users.login.placeholders.identifier;
 		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = options.identifierType ? options.identifierType.split(',') : [];
+		var autocomplete;
 		if (Q.info.isMobile && parts.indexOf('mobile') >= 0) {
 			placeholder = Q.text.Users.login.placeholders.mobile;
-			type = (parts.indexOf('email') >= 0) ? 'email' : 'tel';
+			if (parts.indexOf('email') < 0) {
+				type = 'tel';
+			}
 		} else if (parts.length >= 1) {
 			if (parts[0] == 'email') {
 				type = 'email';
@@ -1804,8 +1807,8 @@
 				type = 'tel';
 				placeholder = Q.text.Users.login.placeholders.mobile;
 			}
+			autocomplete = (type === 'text') ? 'on' : type;
 		}
-		var autocomplete = (type === 'text') ? 'on' : type;
 		Q.addScript("{{Q}}/js/sha1.js");
 		var identifierInput = $('<input id="Users_login_identifier" />').attr({
 			name: 'identifier',
