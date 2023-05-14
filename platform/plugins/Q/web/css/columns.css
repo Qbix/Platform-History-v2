@@ -243,11 +243,11 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	transition: transform 300ms, border-radius 300ms, opacity 300ms;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	box-shadow: rgb(0 0 0 / 50%) 0px -20px 500px;
+	box-shadow: rgb(0 0 0 / 50%) 0 -40px 500px;
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_latest {
-	box-shadow: rgb(0 0 0 / 90%) 0px -20px 500px;
+	box-shadow: rgb(0 0 0 / 90%) 0 -40px 500px;
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_1 {
