@@ -870,7 +870,7 @@ Elp.swap = function(element) {
 	var parent1, next1, parent2, next2;
 	parent1 = this.parentElement;
 	next1   = this.nextSibling;
-	parent2 = element.parentElement];
+	parent2 = element.parentElement;
 	next2   = element.nextSibling;
 	parent1.insertBefore(element, next1);
 	parent2.insertBefore(this, next2);
