@@ -836,7 +836,9 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 				|| pcs.overflowY || p.style.overflowY
 				|| pcs.overflowX || p.style.overflowX;
 		}
-		if (overflow && (p === document.documentElement || ['hidden', 'visible'].indexOf(overflow) < 0)) {
+		if (overflow && overflow !== 'hidden' && (
+			(p === document.documentElement || overflow !== 'visible')
+		)) {
 			if (!skipIfNotOverflowed || p.clientHeight < p.scrollHeight) {
 				return p;
 			}
