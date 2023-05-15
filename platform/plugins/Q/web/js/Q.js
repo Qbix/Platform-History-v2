@@ -738,7 +738,7 @@ Elp.contains = function (child) {
 		if (node == this) {
 			return true;
 		}
-		node = node.parentNode;
+		node = node.parentElement;
 	}
 	return false;
 };
@@ -804,9 +804,9 @@ Elp.copyComputedStyle = function(src) {
 Elp.cssDimensions = function () {
     var cn = this.cloneNode();
 	cn.style.display = 'none';
-    this.parentNode.appendChild(cn);
+    this.parentElement.appendChild(cn);
     var cs = Q.copy(cn.computedStyle());
-    this.parentNode.removeChild(cn);
+    this.parentElement.removeChild(cn);
     return { width: cs.width, height: cs.height };
 };
 
@@ -820,7 +820,7 @@ Elp.cssDimensions = function () {
  */
 Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
-	while (includeSelf ? 1 : (p = p.parentNode)) {
+	while (includeSelf ? 1 : (p = p.parentElement)) {
 		includeSelf = false;
 		if (typeof p.computedStyle !== 'function') {
 			continue;
@@ -836,7 +836,7 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 				|| pcs.overflowY || p.style.overflowY
 				|| pcs.overflowX || p.style.overflowX;
 		}
-		if (overflow && ['hidden', 'visible'].indexOf(overflow) < 0) {
+		if (overflow && (p === document.documentElement || ['hidden', 'visible'].indexOf(overflow) < 0)) {
 			if (!skipIfNotOverflowed || p.clientHeight < p.scrollHeight) {
 				return p;
 			}
@@ -868,9 +868,9 @@ Elp.adjustScrolling = function() {
  */
 Elp.swap = function(element) {
 	var parent1, next1, parent2, next2;
-	parent1 = this.parentNode;
+	parent1 = this.parentElement;
 	next1   = this.nextSibling;
-	parent2 = element.parentNode;
+	parent2 = element.parentElement];
 	next2   = element.nextSibling;
 	parent1.insertBefore(element, next1);
 	parent2.insertBefore(this, next2);
@@ -945,7 +945,7 @@ Elp.restoreSelections = function (deep) {
  */
 Elp.isBefore = function (element, context) {
 	var before = true, that = this;
-	context = context || document.documentElement; // TODO: can triangulate a parentNode instead
+	context = context || document.documentElement; // TODO: can triangulate a parentElement instead
 	Q.find(context, null, function (elem) {
 		if (elem === element) {
 			before = false;
@@ -1072,7 +1072,7 @@ Elp.isVisible = function () {
  */
 Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	var element = this;
-	var pn = this.parentNode;
+	var pn = this.parentElement;
 	if (!pn) {
 		return null;
 	}
@@ -1839,7 +1839,7 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 						? argk
 						: Q.copy(argk, null, levels);
 				}
-				if (target[k] === undefined) {
+				if (argk === undefined) {
 					delete target[k];
 				}
 			}
@@ -4211,14 +4211,14 @@ Q.Tool = function _Q_Tool(element, options) {
 	if (!this.element.id) {
 		var prefix = Q.Tool.beingActivated ? Q.Tool.beingActivated.prefix : '';
 		if (!prefix) {
-			var e = this.element.parentNode;
+			var e = this.element.parentElement;
 			do {
 				if (e.hasClass && e.hasClass('Q_tool')) {
 					prefix = Q.getObject('Q.tool.prefix', e)
 						|| Q.Tool.calculatePrefix(e.id);
 					break;
 				}
-			} while (e = e.parentNode);
+			} while (e = e.parentElement);
 		}
 		var name = Q.Tool.names[this.name] || this.name.toCapitalized();
 		this.element.id = prefix + name.split('/').join('_')
@@ -6793,7 +6793,7 @@ Q.init = function _Q_init(options) {
 						s = t.target && (t.target === "_blank" ? "_blank" : "_system");
 						root.open(t.href, s, "location=no");
 					}
-				} while ((t = t.parentNode));
+				} while ((t = t.parentElement));
 			});
 			p.fill("device")();
 		}
@@ -7046,7 +7046,7 @@ Q.fixedOffset = function (from, filter) {
 			var classes = this.className.split(' ');
 			if (false === Q.each(filter, function (i, item) {
 				if (item instanceof HTMLElement) {
-					if (false !== Q.each(this.parentNode.childNodes, function () {
+					if (false !== Q.each(this.parentElement.childNodes, function () {
 						if (this === filter) {
 							return false;
 						}
@@ -7107,14 +7107,14 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 				--i; --l;
 				break;
 			}
-		} while (p = p.parentNode);
+		} while (p = p.parentElement);
 	}
 	if (root.jQuery) {
 		// give jQuery a chance to do its own cleanup
 		return jQuery(element).remove();
 	}
-	if (!element.parentNode) return false;
-	element.parentNode.removeChild(element);
+	if (!element.parentElement) return false;
+	element.parentElement.removeChild(element);
 	try {
 		for (var prop in element) {
 			delete element[prop];
@@ -7682,7 +7682,7 @@ Q.scrollIntoView = function _Q_scrollIntoView(element, options) {
 	options = options || {};
 	if (options.unlessOffscreenHorizontally) {
 		var p = element, er = element.getBoundingClientRect();
-		while (p = p.parentNode) {
+		while (p = p.parentElement) {
 			var pr = p.getBoundingClientRect && p.getBoundingClientRect();
 			if (pr && er.left < pr.left) {
 				return false;
@@ -8657,7 +8657,7 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 	if (iframe) {
 		Q.addEventListener(iframe, 'load', function _Q_formPost_loaded() {
 			Q.handle(onload, this, [iframe]);
-			if (!iframeProvided && iframe.parentNode) {
+			if (!iframeProvided && iframe.parentElement) {
 				// iframe has loaded everything, and onload callback completed
 				// time to remove it from the DOM
 				// if someone still needs it, they should have saved a reference to it.
@@ -8875,7 +8875,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			// hopefully, moving the script element won't change the order of execution
 			p = scripts[i];
 			var outside = true;
-			while (p = p.parentNode) {
+			while (p = p.parentElement) {
 				if (p === container) {
 					outside = false;
     				break;
@@ -9148,7 +9148,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		// Move the element to the right container if necessary
 		// (This may change the order in which stylesheets are applied).
 		var p = e, outside = true;
-		while (p = p.parentNode) {
+		while (p = p.parentElement) {
 			if (p === container) {
 				outside = false;
 				break;
@@ -9207,7 +9207,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		}
 	}
 	if (insertBefore) {
-		insertBefore.parentNode.insertBefore(link, insertBefore);
+		insertBefore.parentElement.insertBefore(link, insertBefore);
 	} else {
 		container.appendChild(link);
 	}
@@ -9648,7 +9648,7 @@ Q.replace = function _Q_replace(container, source, options) {
 			// This way tools can avoid doing expensive operations each time
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
-			incomingElement.parentNode.replaceChild(element, incomingElement);
+			incomingElement.parentElement.replaceChild(element, incomingElement);
 			for (var name in element.Q.tools) {
 				var tool = Q.Tool.from(element, name);
 				var attrName = 'data-' + Q.normalize(tool.name, '-');
@@ -12116,7 +12116,7 @@ function _touchScrollingHandler(event) {
 			scrollable = p;
 			break;
 		}
-	} while (p = p.parentNode);
+	} while (p = p.parentElement);
     if (!scrollable) {
         Q.Pointer.preventDefault(event);
     }
@@ -12733,7 +12733,7 @@ Q.Visual = Q.Pointer = {
 	target: function (e) {
 		var target = e.target || e.srcElement;
 		if (target.nodeType === 3) { // Safari bug
-			target = target.parentNode;
+			target = target.parentElement;
 		}
 		return target;
 	},
@@ -12835,11 +12835,11 @@ Q.Visual = Q.Pointer = {
 		if (!options.dontRemove && !options.waitForEvents) {
 			for (i=0, l=Q.Visual.hint.imgs.length; i<l; ++i) {
 				img = Q.Visual.hint.imgs[i];
-				if (img.parentNode) {
-					img.parentNode.removeChild(img);
+				if (img.paparentElementrentNode) {
+					img.parentElement.removeChild(img);
 				}
-				if (img.tooltip && img.tooltip.parentNode) {
-					img.tooltip.parentNode.removeChild(img.tooltip);
+				if (img.tooltip && img.tooltip.parentElement) {
+					img.tooltip.parentElement.removeChild(img.tooltip);
 				}
 			}
 			Q.Visual.hint.imgs = [];
@@ -12906,10 +12906,10 @@ Q.Visual = Q.Pointer = {
                         var target = img.target;
                         if (Q.instanceOf(target, Element)) {
                             if (!target.isVisible()) {
-                                if (img.parentNode) {
-                                    img.parentNode.removeChild(img);
-									if (img.tooltip && img.tooltip.parentNode) {
-										img.tooltip.parentNode.removeChild(img.tooltip);
+                                if (img.parentElement) {
+                                    img.parentElement.removeChild(img);
+									if (img.tooltip && img.tooltip.parentElement) {
+										img.tooltip.parentElement.removeChild(img.tooltip);
 									}
                                 }
                                 return; // perhaps it disappeared
@@ -12943,8 +12943,8 @@ Q.Visual = Q.Pointer = {
 							tooltip.setAttribute('class', 'Q_hint_tooltip'
 								+ (className ? ' ' + className : '')
 							);
-							if (img.parentNode) {
-								img.parentNode.insertBefore(tooltip, img);
+							if (img.parentElement) {
+								img.parentElement.insertBefore(tooltip, img);
 							}
 							if (options.tooltip.html) {
 								tool.innerHTML = options.tooltip.html;
@@ -13101,7 +13101,7 @@ Q.Visual = Q.Pointer = {
 			}
 			while (t) {
 				if (!t.hasAttribute || !t.hasAttribute('data-touchlabel')) {
-					t = t.parentNode
+					t = t.parentElement
 					continue;
 				}
 				var content = t.getAttribute('data-touchlabel');
@@ -13355,10 +13355,10 @@ function _stopHint(img, container) {
 		}
 	}, img.hide.duration, img.hide.ease)
 	.onComplete.set(function () {
-		if (img.parentNode) {
-			img.parentNode.removeChild(img);
+		if (img.parentElement) {
+			img.parentElement.removeChild(img);
 			if (img.tooltip) {
-				img.tooltip.parentNode.removeChild(img.tooltip);
+				img.tooltip.parentElement.removeChild(img.tooltip);
 			}
 		}
 	});
@@ -15909,7 +15909,7 @@ Q.stackTrace = function() {
 Q.removeCurrentScript = function() {
 	var cs;
 	cs = document.currentScript || document.scripts[document.scripts.length - 1];
-	cs.parentNode.removeChild(cs);
+	cs.parentElement.removeChild(cs);
 };
 
 var _udid = location.search.queryField('Q.udid');
