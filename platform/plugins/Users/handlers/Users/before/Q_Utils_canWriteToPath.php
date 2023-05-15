@@ -27,28 +27,28 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	if ($labelsCanManage = Q_Config::get("Users", "icon", "canManage", array())) {
 		// if founded labels which can manage icons, collect users who can edit logged user
 		$usersCanHandle = array_merge($usersCanHandle, array_keys(Users::byRoles($labelsCanManage)));
+	}
 
-		// collect also invited users if icon not custom
-		$invitedByMe = Users_Contact::select()->where(array(
-			"contactUserId" => $user->id,
-			"label" => "Streams/invitedMe"
-		))->fetchDbRows();
-		foreach ($invitedByMe as $invite) {
-			if ($invite->userId == $user->id) {
-				continue;
-			}
-
-			$invitedUser = Users::fetch($invite->userId, false);
-			if (empty($invitedUser)) {
-				continue;
-			}
-
-			if (Users::isCustomIcon($invitedUser->icon, true)) {
-				continue;
-			}
-
-			$usersCanHandle[] = $invitedUser->id;
+	// collect also invited users if icon not custom
+	$invitedByMe = Users_Contact::select()->where(array(
+		"contactUserId" => $user->id,
+		"label" => "Streams/invitedMe"
+	))->fetchDbRows();
+	foreach ($invitedByMe as $invite) {
+		if ($invite->userId == $user->id) {
+			continue;
 		}
+
+		$invitedUser = Users::fetch($invite->userId, false);
+		if (empty($invitedUser)) {
+			continue;
+		}
+
+		if (Users::isCustomIcon($invitedUser->icon, true)) {
+			continue;
+		}
+
+		$usersCanHandle[] = $invitedUser->id;
 	}
 
 	$paths = array();
