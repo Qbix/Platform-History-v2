@@ -43,7 +43,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 				continue;
 			}
 
-			if (Users::isCustomIcon($invitedUser->icon)) {
+			if (Users::isCustomIcon($invitedUser->icon, true)) {
 				continue;
 			}
 
