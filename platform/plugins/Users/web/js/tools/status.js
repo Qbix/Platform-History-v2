@@ -51,7 +51,7 @@ Q.Tool.define("Users/status", function(options) {
 				Q.handle(state.onInvoke);
 			});
 			if (state.clickable) {
-				$avatar.plugin('Q/clickable', clickable || {})
+				$avatar.plugin('Q/clickable')
 			}
 			_wireup();
 		} else {
@@ -66,9 +66,11 @@ Q.Tool.define("Users/status", function(options) {
 			});
 		}
 		function _wireup() {
-			tool.$('.Users_status_login')
-			.plugin('Q/clickable')
-			.on(Q.Pointer.click, tool, function () {
+			var $status = tool.$('.Users_status_login');
+			if (state.clickable) {
+				$status.plugin('Q/clickable');
+			}
+			$status.on(Q.Pointer.click, tool, function () {
 				Q.Users.login()
 			})
 		}
