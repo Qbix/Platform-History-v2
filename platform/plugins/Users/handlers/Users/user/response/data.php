@@ -21,7 +21,6 @@ function Users_user_response_data($params)
 
 	// check our db
 	if ($user = Users::userFromContactInfo($type, $identifier)) {
-		$displayname = $user->displayName();
 		$verified = !!Users::identify($type, $identifier);
 		// NOTE: Do not return anything that would identify the user on the system
 		return array(

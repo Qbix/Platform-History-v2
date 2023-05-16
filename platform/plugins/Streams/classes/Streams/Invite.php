@@ -188,12 +188,20 @@ class Streams_Invite extends Base_Streams_Invite
 			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
 			'ofUserId', 'ofContactLabel'
 		));
-		$instructions['displayName'] = Users::fetch($userId, true)->displayName();
 
 		$stream->post($userId, array(
 			'type' => 'Streams/invite/accept',
 			'instructions' => $instructions
 		), true);
+
+		Q_Utils::sendToNode(array(
+			"Q/method" => "Users/emitToUser",
+			"userId" => $invite->invitingUserId,
+			"event" => "Streams/invite/accept",
+			"data" => array(
+				"displayName" => Users::fetch($userId, true)->displayName()
+			)
+		));
 		
 		if (!empty($options['access'])) {
 			// Check if the users exist

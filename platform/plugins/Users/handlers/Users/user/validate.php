@@ -9,7 +9,7 @@ function Users_user_validate()
 		? $_REQUEST['identifierType']
 		: Q_Config::get("Users", "login", "identifierType", "email,mobile");
 	$parts = explode(',', $type);
-	$accept_mobile = true;
+	$accept_mobile = $accept_email = true;
 	$expected = 'email address or mobile number';
 	$fields = array('emailAddress', 'mobileNumber', 'identifier');
 	if (count($parts) === 1) {
@@ -20,12 +20,17 @@ function Users_user_validate()
 		} else if ($parts[0] === 'mobile') {
 			$expected = 'mobile number';
 			$fields = array('mobileNumber', 'identifier');
+			$accept_email = false;
 		}
 	}
 	if (!isset($_REQUEST['identifier'])) {
 		throw new Q_Exception("a valid $expected is required", $fields);
 	}
-	if (!Q_Valid::email($_REQUEST['identifier'])) {
+	if (Q_Valid::email($_REQUEST['identifier'])) {
+		if (!$accept_email) {
+			throw new Q_Exception("a valid $expected is required", $fields);
+		}
+	} else {
 		if (!$accept_mobile) {
 			throw new Q_Exception("a valid $expected is required", $fields);
 		}

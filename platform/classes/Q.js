@@ -1914,7 +1914,7 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... *
 						? argk
 						: Q.copy(argk, null, levels-1);
 				}
-				if (target[k] === undefined) {
+				if (argk === undefined) {
 					delete target[k];
 				}
 			}
