@@ -76,7 +76,7 @@ class Users_Label extends Base_Users_Label
 	 * @param {string} [$icon='labels/default']
 	 * @param {string|false} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks and set Q::app() as the user.
-	 * @param boolean [$unlessExists=false] If true, skips adding label if it already exists
+	 * @param boolean [$unlessExists=true] If true, skips adding label if it already exists
 	 *   in the database.
 	 * @return {Users_Label}
 	 */
@@ -86,7 +86,7 @@ class Users_Label extends Base_Users_Label
 		$title = null, 
 		$icon = 'labels/default',
 		$asUserId = null,
-		$unlessExists = false)
+		$unlessExists = true)
 	{
 		if (!isset($label)) {
 			throw new Q_Exception_RequiredField(array('field' => 'label'));
@@ -124,16 +124,16 @@ class Users_Label extends Base_Users_Label
 			$user = Users::loggedInUser(true);
 			$asUserId = $user->id;
 		}
-		Users::canManageLabels($asUserId, $userId, $label, true);
-		if (empty($title)) {
-			$parts = explode("/", $label);
-			$title = ucfirst(end($parts));
-		}
 		$l = new Users_Label();
 		$l->label = $label;
 		$l->userId = $userId;
 		if ($l->retrieve() and $unlessExists) {
 			return $l;
+		}
+		Users::canManageLabels($asUserId, $userId, $label, true);
+		if (empty($title)) {
+			$parts = explode("/", $label);
+			$title = ucfirst(end($parts));
 		}
 		self::_icon($l, $icon, $userId);
 		$l->title = $title;
