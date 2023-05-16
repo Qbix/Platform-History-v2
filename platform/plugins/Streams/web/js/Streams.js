@@ -2021,7 +2021,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.loggedInUserId(),
 					filter: 'Users/',
-					canGrant: true
+					canAdd: true
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,
@@ -6379,7 +6379,7 @@ Q.onInit.add(function _Streams_onInit() {
 				evenIfNotRetained: true,
 				unlessSocket: true
 			};
-			var p = new Q.Pipe(['first', 'last'], function (params) {
+			var p = new Q.Pipe(['first', 'last', 'inviteComplete'], function (params) {
 				Q.handle(Streams.onInviteComplete, Streams, [params.first[0], params.last[0]]);
 			});
 			Stream.refresh(Users.loggedInUser.id,
