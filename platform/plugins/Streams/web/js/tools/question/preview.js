@@ -94,8 +94,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				previewOptions: {
 					closeable: false
 				},
-				realtime: false,
-				sortable: true
+				realtime: true,
+				sortable: false
 			}).activate();
 
 			tool.$answersRelated[0].forEachTool("Streams/answer/preview", function () {
