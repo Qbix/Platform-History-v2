@@ -549,6 +549,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 */
 	relatedResult: function (result, partial, onUpdate) {
 		var tool = this;
+		tool.stream = result.stream;
 
 		if (typeof arguments[1] === "function") {
 			onUpdate = arguments[1];
@@ -582,7 +583,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (tool.state.realtime) {
 			// join user to category stream to allow get messages
 			if (Q.getObject("participant.state", result.stream) !== 'participating') {
-				result.stream.join();
+				result.stream.observe();
 			}
 
 			Q.each(eventNames, function (i, eventName) {
@@ -851,6 +852,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 			if (this.intersetionObserver) {
 				this.intersectionObserver.disconnect();
+			}
+			if (this.stream) {
+				this.stream.neglect();
 			}
 		}
 	}
