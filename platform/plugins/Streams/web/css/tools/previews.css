@@ -364,6 +364,9 @@
 .Streams_dialog_answer_composer input {
 	height: 40px;
 }
+.Q_mobile .Streams_dialog_answer_composer input[name=value] {
+	width: calc(100% - 170px);
+}
 .Streams_dialog_answer_composer select,
 .Streams_dialog_answer_composer select option {
 	font-size: 110%;
