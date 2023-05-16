@@ -2037,6 +2037,22 @@ abstract class Users extends Base_Users
 			return true;
 		}
 		$authorized = false;
+		$roles = Users::roles($userId);
+		foreach ($roles as $role) {
+			$prefixes = Q_Config::get('Users', 'communities', 'roles', $role, 'canManageLabels', array());
+			if ($prefixes) {
+				if (!$label) {
+					$authorized = true;
+					break;
+				}
+				foreach ($prefixes as $prefix) {
+					if (Q::startsWith($label, $prefix)) {
+						$authorized = true;
+						break;
+					}
+				}
+			}
+		}
 		$result = Q::event(
 			"Users/canManageLabels",
 			@compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
