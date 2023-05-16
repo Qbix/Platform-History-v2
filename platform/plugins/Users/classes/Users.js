@@ -358,6 +358,9 @@ function Users_request_handler(req, res, next) {
 				
 			}
 			break;
+		case "Users/emitToUser":
+			Users.emitToUser(parsed.userId, parsed.event, parsed.data);
+			break;
 		default:
 			break;
 	}
