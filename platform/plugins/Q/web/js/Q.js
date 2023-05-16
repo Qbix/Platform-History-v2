@@ -6758,7 +6758,9 @@ Q.init = function _Q_init(options) {
 
 		function _ready() {
 			Q.handle(navigator.onLine ? Q.onOnline : Q.onOffline);
-			Q.ready();
+			setTimeout(function () {
+				Q.ready();
+			}, 0);
 		}
 
 		var baseUrl = Q.baseUrl();
