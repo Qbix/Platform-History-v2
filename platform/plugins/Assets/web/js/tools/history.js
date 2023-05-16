@@ -183,7 +183,7 @@ Q.Tool.define("Assets/history", function (options) {
 
 Q.Template.set('Assets/history/credits',
 	'<table class="Assets_history" data-type="credits">' +
-	'	<thead><tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.User}}</th><th>{{text.Description}}</th><th></th></tr></thead>' +
+	'	<thead><tr><th data-type="date">{{text.Date}}</th><th data-type="amount">{{text.Amount}}</th><th data-type="user">{{text.User}}</th><th data-type="desc">{{text.Description}}</th><th></th></tr></thead>' +
 	'	<tbody></tbody>' +
 	'</table>'
 );
@@ -196,7 +196,7 @@ Q.Template.set('Assets/row/credits',
 
 Q.Template.set('Assets/history/charges',
 	'<table class="Assets_history" data-type="charges">' +
-	'	<thead><tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.Description}}</th><th></th></tr></thead>' +
+	'	<thead><tr><th data-type="date">{{text.Date}}</th><th data-type="amount">{{text.Amount}}</th><th data-type="desc">{{text.Description}}</th><th></th></tr></thead>' +
 	'	<tbody></tbody>' +
 	'</table>'
 );
