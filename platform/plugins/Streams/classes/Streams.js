@@ -479,7 +479,9 @@ Streams.listen = function (options, servers) {
 							message: 'too many observers already'
 						});
 					}
-					Streams.observers[publisherId][streamName][client.id] = client;
+					Q.setObject(
+						[publisherId, streamName, client.id], client, Streams.observers
+					);
 					Q.setObject(
 						[client.id, publisherId, streamName], true, Streams.observing
 					);
