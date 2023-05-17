@@ -466,9 +466,7 @@ Streams.listen = function (options, servers) {
 							message: 'not authorized'
 						});
 					}
-					var clients = Q.getObject(
-						[publisherId, streamName], Streams.observers, null, {}
-					);
+					var clients = Q.getObject([publisherId, streamName], Streams.observers) || {};
 					var max = Streams.Stream.getConfigField(
 						stream.fields.type,
 						'observersMax'
