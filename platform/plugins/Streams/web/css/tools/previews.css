@@ -360,15 +360,20 @@
 	vertical-align: middle;
 }
 
-.Streams_dialog_answer_composer select,
-.Streams_dialog_answer_composer input {
+.Streams_dialog_answer_composer form * {
 	height: 40px;
 }
-.Q_mobile .Streams_dialog_answer_composer input[name=value] {
-	width: calc(100% - 170px);
+.Streams_dialog_answer_composer form input[name=value] {
+	width: 50%;
 }
-.Streams_dialog_answer_composer select,
-.Streams_dialog_answer_composer select option {
+.Streams_dialog_answer_composer form select {
+	width: 30%;
+}
+.Streams_dialog_answer_composer form button {
+	width: 17%;
+}
+.Streams_dialog_answer_composer form select,
+.Streams_dialog_answer_composer form select option {
 	font-size: 110%;
 }
 .Streams_dialog_answer_composer .Q_dialog_content {
