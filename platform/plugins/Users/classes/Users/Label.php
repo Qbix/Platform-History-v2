@@ -76,7 +76,7 @@ class Users_Label extends Base_Users_Label
 	 * @param {string} [$icon='labels/default']
 	 * @param {string|false} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks and set Q::app() as the user.
-	 * @param boolean [$unlessExists=true] If true, skips adding label if it already exists
+	 * @param boolean [$updateIfExists=false] If true, updates the label if it already exists
 	 *   in the database.
 	 * @return {Users_Label}
 	 */
@@ -86,7 +86,7 @@ class Users_Label extends Base_Users_Label
 		$title = null, 
 		$icon = 'labels/default',
 		$asUserId = null,
-		$unlessExists = true)
+		$updateIfExists = false)
 	{
 		if (!isset($label)) {
 			throw new Q_Exception_RequiredField(array('field' => 'label'));
@@ -94,7 +94,7 @@ class Users_Label extends Base_Users_Label
 		if (is_array($label)) {
 			if (!Q::isAssociative($label)) {
 				foreach ($label as $l) {
-					Users_Label::addLabel($l, $userId, null, null, $asUserId, $unlessExists);
+					Users_Label::addLabel($l, $userId, null, null, $asUserId, $updateIfExists);
 				}
 				return;
 			}
@@ -105,7 +105,7 @@ class Users_Label extends Base_Users_Label
 				} else {
 					$icon = 'labels/default';
 				}
-				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $unlessExists);
+				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $updateIfExists);
 			}
 			return;
 		}
@@ -127,7 +127,7 @@ class Users_Label extends Base_Users_Label
 		$l = new Users_Label();
 		$l->label = $label;
 		$l->userId = $userId;
-		if ($l->retrieve() and $unlessExists) {
+		if ($l->retrieve() and !$updateIfExists) {
 			return $l;
 		}
 		Users::canManageLabels($asUserId, $userId, $label, true);

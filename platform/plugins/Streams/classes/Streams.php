@@ -3858,13 +3858,13 @@ abstract class Streams extends Base_Streams
 			if (is_string($label)) {
 				$addLabel = explode("\t", $addLabel);
 			}
-			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2);
 		}
 		if ($addMyLabel = Q::ifset($options, 'addMyLabel', null)) {
 			if (is_string($addMyLabel)) {
 				$addMyLabel = explode("\t", $addMyLabel);
 			}
-			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2);
 		}
 
 		$asUserDisplayName = Streams::displayName($asUser);
