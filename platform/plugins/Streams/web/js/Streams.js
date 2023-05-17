@@ -6374,7 +6374,7 @@ Q.onInit.add(function _Streams_onInit() {
 				evenIfNotRetained: true,
 				unlessSocket: true
 			};
-			var p = new Q.Pipe(['first', 'last', 'inviteComplete'], function (params) {
+			var p = new Q.Pipe(['first', 'last'], function (params) {
 				Q.handle(Streams.onInviteComplete, Streams, [params.first[0], params.last[0]]);
 			});
 			Stream.refresh(Users.loggedInUser.id,
