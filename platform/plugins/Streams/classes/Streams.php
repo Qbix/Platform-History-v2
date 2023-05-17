@@ -3858,13 +3858,13 @@ abstract class Streams extends Base_Streams
 			if (is_string($label)) {
 				$addLabel = explode("\t", $addLabel);
 			}
-			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2);
 		}
 		if ($addMyLabel = Q::ifset($options, 'addMyLabel', null)) {
 			if (is_string($addMyLabel)) {
 				$addMyLabel = explode("\t", $addMyLabel);
 			}
-			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2);
 		}
 
 		$asUserDisplayName = Streams::displayName($asUser);
@@ -4987,7 +4987,18 @@ abstract class Streams extends Base_Streams
 			$tree = new Q_Tree();
 			$tree->load("files/Streams/interests/".Users::communityId()."/".Q_Text::basename().".json");
 			$interests = $tree->getAll();
-			$skipAccess = Q::ifset($interests, $parts[0], "", $parts[1], null) === null ? false : true;
+			$arr = Q::ifset($interests, $parts[0], array());
+			$skipAccess = false;
+			foreach ($arr as $section => $list) {
+				$c = isset($section[0]) ? $section[0] : '';
+				if ($c === '@' or $c === '#') {
+					continue;
+				}
+				if (isset($list[$parts[1]])) {
+					$skipAccess = true;
+					break;
+				}
+			}
 			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
 				'title' => $title,
