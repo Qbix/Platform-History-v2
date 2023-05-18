@@ -144,7 +144,10 @@ Utils.validateCapability = function (capability, permissions) {
 function ksort(obj) {
 	var i, sorted = {}, keys = Object.keys(obj);
 	keys.sort();
-	for (i=0; i<keys.length; i++) sorted[keys[i]] = obj[keys[i]];
+	for (i=0; i<keys.length; i++) {
+		var value = obj[keys[i]];
+		sorted[keys[i]] = Q.isPlainObject(value) ? ksort(value) : value;
+	}
 	return sorted;
 }
 

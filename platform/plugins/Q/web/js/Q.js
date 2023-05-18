@@ -9827,7 +9827,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		// 	return Q.handle(onError, this, [e, response]);
 		// }
 		if (!Q.isEmpty(response.errors)) {
-			response.errors[0].message
+			e = response.errors[0].message;
 			_reject && _reject(e);
 			return Q.handle(onError, this, [e]);
 		}
@@ -10221,8 +10221,10 @@ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options)
 						onActivate: function () {
 							if (callback) callback();
 						}
-					}, o)).then(function () {
-
+					}, o)).then(function (a) {
+						
+					}, function (err) {
+						debugger; // pause here if debugging
 					});
 				} else if (o.externalLoader) {
 					o.externalLoader.apply(this, arguments);

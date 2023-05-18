@@ -2322,6 +2322,7 @@ Q.listen = function _Q_listen(options, callback) {
 			res.header(headers);
 		}
 		if (internalHost == host && internalPort == port) {
+			req.internal = true;
 			Q.Utils.validateRequest(req, res, _requested);
 		} else {
 			_requested();
@@ -2333,6 +2334,7 @@ Q.listen = function _Q_listen(options, callback) {
 			 * @param {http.Request} req The request object
 			 * @param {http.Response} res The response object
 			 */
+			req.validated = true;
 			Q.emit('request', req, res);
 			next();
 		}
