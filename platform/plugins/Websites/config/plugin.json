@@ -71,6 +71,7 @@
 					"canSee": ["Websites/admins"]
 				},
 				"Websites/admins": {
+					"title": "Websites Admin",
 					"icon": "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/roles/admins",
 					"canGrant": ["Websites/admins"],
 					"canRevoke": ["Websites/admins"],

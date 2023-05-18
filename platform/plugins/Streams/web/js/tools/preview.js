@@ -368,7 +368,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			return onLoad(false);
 		}
 		options = options || {};
-		Q.Streams.get(state.publisherId, state.streamName, function () {
+		Q.Streams.get(state.publisherId, state.streamName, function (err) {
+			if (err) {
+				return Q.handle(onLoad, tool, [element]);
+			}
+
 			// icon and imagepicker
 			var oss = Q.extend({}, state.overrideShowSize, options.overrideShowSize);
 			var fields = this.fields;
@@ -425,7 +429,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				var ipo = Q.extend({}, si, 10, {
 					preprocess: function (callback) {
 						var path, subpath;
-						Q.Streams.get(state.publisherId, state.streamName, function () {
+						Q.Streams.get(state.publisherId, state.streamName, function (err) {
+							if (err) {
+								return;
+							}
 							var iconUrl = this.iconUrl(40);
 							var p = 'Q/plugins/';
 							var i = iconUrl.indexOf('Q/plugins/');
@@ -478,8 +485,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
-		Q.Streams.get(state.publisherId, state.streamName, function () {
-			var stream = this;
+		Q.Streams.get(state.publisherId, state.streamName, function (err) {
+			if (err) {
+				return;
+			}
+
 			var actions = {};
 
 			// check if we should add this behavior

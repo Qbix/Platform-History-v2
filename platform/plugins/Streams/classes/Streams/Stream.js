@@ -638,6 +638,7 @@ Sp.inheritAccess = function (callback) {
 	if (!callback) {
 		return;
 	}
+	var subj = this;
 	var asUserId = subj.get('asUserId', '');
 	if (asUserId === this.fields.publisherId) {
 		callback.call(this, null, false);
@@ -645,7 +646,6 @@ Sp.inheritAccess = function (callback) {
 	if (!this.fields.inheritAccess) {
 		callback.call(this, null, false);
 	}
-	var subj = this;
 	var names;
 	try {
 		names = JSON.parse(this.fields.inheritAccess);

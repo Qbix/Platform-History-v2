@@ -35,7 +35,7 @@ Q.Tool.define("Streams/question", function(options) {
 	isCategory: true,
 	creatable: {
 		"Streams/question": {
-			publisherId: Q.Users.communityId,
+			publisherId: Q.Users.loggedInUserId(),
 			//title: tool.text.NewQuestion
 		}
 	}

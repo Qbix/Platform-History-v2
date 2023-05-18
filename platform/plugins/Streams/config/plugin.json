@@ -342,7 +342,7 @@
 			},
 			"Streams/question": {
 				"create": true,
-				"edit": false,
+				"edit": true,
 				"defaults": {
 					"title": "Untitled question",
 					"icon": "Streams/question",

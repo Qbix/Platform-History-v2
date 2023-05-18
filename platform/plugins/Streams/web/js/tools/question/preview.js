@@ -16,7 +16,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
-	preview.state.editable = ["icon", "title"];
+	preview.state.editable = ["icon"];
 	Q.Text.get('Streams/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
@@ -51,7 +51,6 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					}
 				}
 			};
-			preview.actions();
 		});
 	}
 
@@ -92,8 +91,11 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				relatedOptions: {
 					ascending: true,
 				},
-				realtime: false,
-				sortable: true
+				previewOptions: {
+					closeable: false
+				},
+				realtime: true,
+				sortable: false
 			}).activate();
 
 			tool.$answersRelated[0].forEachTool("Streams/answer/preview", function () {
@@ -255,7 +257,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 					}
 				}).activate();
 				$(".Streams_question_answers", dialog).tool("Streams/related", {
-					stream: tool.stream,
+					publisherId: tool.stream.fields.publisherId,
+					streamName: tool.stream.fields.name,
 					relationType: "Streams/answers",
 					realtime: false,
 					sortable: true,
