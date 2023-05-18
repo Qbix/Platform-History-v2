@@ -1,12 +1,5 @@
 "use strict";
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-navigator.getUserMedia = 
-  (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
-  || navigator.getUserMedia 
-  || navigator.webkitGetUserMedia 
-  || navigator.mozGetUserMedia 
-  || navigator.msGetUserMedia 
-  || (window.NavigatorUserMedia && window.NavigatorUserMedia.getUserMedia);
 
 var Recorder = function( config ){
 
@@ -51,7 +44,7 @@ var Recorder = function( config ){
 };
 
 Recorder.isRecordingSupported = function(){
-  return window.AudioContext && navigator.getUserMedia;
+  return window.AudioContext && navigator.mediaDevices.getUserMedia;
 };
 
 Recorder.prototype.addEventListener = function( type, listener, useCapture ){
@@ -98,7 +91,7 @@ Recorder.prototype.initStream = function(){
   }
 
   var that = this;
-  navigator.getUserMedia(
+  navigator.mediaDevices.getUserMedia(
     { audio : this.config.streamOptions },
     function ( stream ) {
       that.stream = stream;
