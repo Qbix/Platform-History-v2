@@ -1,5 +1,6 @@
 <?php
 function Streams_after_Streams_updateAvatars ($params) {
+
 	$rows_that_show = Q::ifset($params, 'rows_that_show', array());
 	$rows_that_hide = Q::ifset($params, 'rows_that_hide', array());
 

@@ -3,7 +3,7 @@
 function Streams_stream_response_content()
 {
 	$publisherId = Streams::requestedPublisherId(true);
-	$name = Streams::requestedName(true);
+	$streamName = Streams::requestedName(true);
 	$fields = Streams::requestedFields();
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : 0;
@@ -23,7 +23,7 @@ function Streams_stream_response_content()
 
 	// show stream as usual
 	return Q::view('Streams/content/stream.php', @compact(
-		'publisherId', 'name', 'fields',
+		'publisherId', 'streamName', 'fields',
 		'user', 'stream'
 	));
 }
