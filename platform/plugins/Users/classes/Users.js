@@ -227,7 +227,8 @@ Users.appInfo = function (platform, appId)
 
 function Users_request_handler(req, res, next) {
 	var parsed = req.body;
-    if (!parsed || !parsed['Q/method']) {
+    if (!req.internal || req.validated
+	|| !parsed || !parsed['Q/method']) {
 		return next();
 	}
 	var userId = parsed.userId;
