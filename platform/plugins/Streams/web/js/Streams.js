@@ -1855,6 +1855,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								data = data || {};
 								var dialogClassName = "Dialog_invite_photo_camera";
                             	var title = Q.getObject(['invite', 'dialog', 'photo'], text);
+								var invitedUserId = data.invitedUserId;
                             	if (invitedUserId && data.displayName) {
 									title = Q.getObject(['invite', 'dialog', 'photoOf'], text)
 									.interpolate({"name": data.displayName});
@@ -1920,16 +1921,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								});
 							};
                             $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
-							rss.onMessage('Streams/invite/accept').set(function (stream, message) {
-								if (message.getInstruction('token') !== Q.getObject("invite.token", rsd)) {
-									return;
-								}
-
-								Users.Socket.onEvent('Streams/invite/accept')
-								.set(function _Streams_invite_accept_handler (data) {
-									console.log('Users.Socket.onEvent("Streams/invite/accept")', p);
-									_setPhoto(data);
-								}, 'Streams');
+							Users.Socket.onEvent('Streams/invite/accept')
+							.set(function _Streams_invite_accept_handler (data) {
+								console.log('Users.Socket.onEvent("Streams/invite/accept")');
+								_setPhoto(data);
 							}, 'Streams_invite_QR_content');
                         });
                     }
@@ -6379,7 +6374,7 @@ Q.onInit.add(function _Streams_onInit() {
 				evenIfNotRetained: true,
 				unlessSocket: true
 			};
-			var p = new Q.Pipe(['first', 'last', 'inviteComplete'], function (params) {
+			var p = new Q.Pipe(['first', 'last'], function (params) {
 				Q.handle(Streams.onInviteComplete, Streams, [params.first[0], params.last[0]]);
 			});
 			Stream.refresh(Users.loggedInUser.id,

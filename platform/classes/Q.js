@@ -196,7 +196,7 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 		return name;
 	}
 	var result = _getProp(name, false, context);
-	if (create !== undefined) {
+	if (result === undefined && create !== undefined) {
 		result = Q.setObject(name, create, context, delimiter);
 	}
 	return result;

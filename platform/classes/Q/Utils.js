@@ -140,7 +140,7 @@ Utils.validateCapability = function (capability, permissions) {
 	}
 	return true;
 };
-	
+
 function ksort(obj) {
 	var i, sorted = {}, keys = Object.keys(obj);
 	keys.sort();
