@@ -4,6 +4,8 @@ function Assets_after_Streams_updateStreamNames($params)
 {
     $publisherId = $params['publisherId'];
     $chunks = $params['chunks'];
+    $errors = &$params['errors'];
+    $accumulateErrors = $params['accumulateErrors'];
     $userIdFields = array(
         'Assets' => array(
             'Charge' => array(
@@ -28,10 +30,18 @@ function Assets_after_Streams_updateStreamNames($params)
 							$publisherIdField => $publisherId,
 							$streamNameField => array_keys($chunk)
 						) : array($streamNameField => array_keys($chunk));
-                    call_user_func(array($ClassName, 'update'))
-                        ->set(array($streamNameField => $chunk))
-                        ->where($criteria)
-                        ->execute();
+                    try {
+                        call_user_func(array($ClassName, 'update'))
+                            ->set(array($streamNameField => $chunk))
+                            ->where($criteria)
+                            ->execute();
+                    }  catch (Exception $e) {
+                        if ($accumulateErrors) {
+                            $errors[] = $e;
+                        } else {
+                            throw $e;
+                        }
+                    }
                 }
             }
         }

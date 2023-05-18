@@ -196,7 +196,7 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 		return name;
 	}
 	var result = _getProp(name, false, context);
-	if (create !== undefined) {
+	if (result === undefined && create !== undefined) {
 		result = Q.setObject(name, create, context, delimiter);
 	}
 	return result;
@@ -1914,7 +1914,7 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... *
 						? argk
 						: Q.copy(argk, null, levels-1);
 				}
-				if (target[k] === undefined) {
+				if (argk === undefined) {
 					delete target[k];
 				}
 			}
@@ -2322,6 +2322,7 @@ Q.listen = function _Q_listen(options, callback) {
 			res.header(headers);
 		}
 		if (internalHost == host && internalPort == port) {
+			req.internal = true;
 			Q.Utils.validateRequest(req, res, _requested);
 		} else {
 			_requested();
@@ -2333,6 +2334,7 @@ Q.listen = function _Q_listen(options, callback) {
 			 * @param {http.Request} req The request object
 			 * @param {http.Response} res The response object
 			 */
+			req.validated = true;
 			Q.emit('request', req, res);
 			next();
 		}

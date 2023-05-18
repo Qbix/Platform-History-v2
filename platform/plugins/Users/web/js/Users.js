@@ -1801,6 +1801,10 @@
 				type = 'tel';
 				placeholder = Q.text.Users.login.placeholders.mobile;
 			}
+		} else if (Q.info.isMobile && parts.indexOf('mobile') >= 0
+		&& parts.indexOf('email') < 0) {
+			type = 'tel';
+			placeholder = Q.text.Users.login.placeholders.mobile;
 		}
 		var autocomplete = (type === 'text') ? 'on' : type;
 		Q.addScript("{{Q}}/js/sha1.js");

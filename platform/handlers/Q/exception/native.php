@@ -10,6 +10,7 @@ function Q_exception_native($params)
 		echo Q_Exception::coloredString($exception);
 		exit;
 	}
+	Q_Response::errorHeaderCode();
 	if ($is_ajax = Q_Request::isAjax()) {
 		$json = @Q::json_encode(array(
 			'errors' => Q_Exception::buildArray(array($exception))

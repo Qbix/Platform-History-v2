@@ -635,10 +635,16 @@ Sp.calculateAccess = function(asUserId, callback) {
  *	Callback receives "error" and boolean as arguments - whether the access potentially changed.
  */
 Sp.inheritAccess = function (callback) {
-	if (!callback) return;
+	if (!callback) {
+		return;
+	}
 	var subj = this;
+	var asUserId = subj.get('asUserId', '');
+	if (asUserId === this.fields.publisherId) {
+		callback.call(this, null, false);
+	}
 	if (!this.fields.inheritAccess) {
-		callback.call(subj, null, false);
+		callback.call(this, null, false);
 	}
 	var names;
 	try {
@@ -689,7 +695,6 @@ Sp.inheritAccess = function (callback) {
 	// 'inheritAccess': [["publisherId","grandparentStreamName"],
 	//                  ["publisherId","parentStreamName"]]
 	Q.each(names, function (i, name) {
-		var asUserId = subj.get('asUserId', '');
 		var publisherId;
 		var key = JSON.stringify(name);
 		if (Q.isArrayLike(name)) {
@@ -833,7 +838,7 @@ Sp._fetchAsUser = function (options, callback) {
 		if (err) return callback.call(stream, err);
 		if (!users.length) return callback.call(stream, new Error(pfx+"User not found"));
 		var user = users[0];
-		if (user.fields.id === stream.get(['asUserId'], null)) {
+		if (user.fields.id === stream.get('asUserId', null)) {
 			return callback.call(stream, null, stream, user.fields.id, user);
 		}
 		Streams.fetch(user.fields.id, stream.fields.publisherId, stream.fields.name,

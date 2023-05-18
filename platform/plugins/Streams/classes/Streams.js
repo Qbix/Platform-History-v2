@@ -229,6 +229,13 @@ Streams.WRITE_LEVEL = {
  * @final
  */
 /**
+ * Can share the stream's actual content with others
+ * @property $ADMIN_LEVEL.share
+ * @type integer
+ * @default 10
+ * @final
+ */
+/**
  * Able to create invitations for others, granting access
  * and permissions up to what they themselves have
  * @property ADMIN_LEVEL.invite
@@ -260,6 +267,7 @@ Streams.WRITE_LEVEL = {
 Streams.ADMIN_LEVEL = {
 	'none':	 		0,		// cannot do anything related to admin / users
 	'tell':	 		10,		// can prove things about the stream's content or participants
+	'share': 		15,		// can share the stream's actual content with others
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':			40,		// can give people any adminLevel <= 40
@@ -458,9 +466,7 @@ Streams.listen = function (options, servers) {
 							message: 'not authorized'
 						});
 					}
-					var clients = Q.getObject(
-						[publisherId, streamName], Streams.observers, null, {}
-					);
+					var clients = Q.getObject([publisherId, streamName], Streams.observers) || {};
 					var max = Streams.Stream.getConfigField(
 						stream.fields.type,
 						'observersMax'
@@ -471,7 +477,9 @@ Streams.listen = function (options, servers) {
 							message: 'too many observers already'
 						});
 					}
-					Streams.observers[publisherId][streamName][client.id] = client;
+					Q.setObject(
+						[publisherId, streamName, client.id], client, Streams.observers
+					);
 					Q.setObject(
 						[client.id, publisherId, streamName], true, Streams.observing
 					);
@@ -556,7 +564,8 @@ function _validateSessionId(sessionId, fn) {
 
 function Streams_request_handler (req, res, next) {
 	var parsed = req.body;
-	if (!parsed || !parsed['Q/method']) {
+	if (!parsed || !parsed['Q/method']
+	|| !req.internal || req.validated) {
 		return next();
 	}
 	var participant, msg, posted, streams, k;

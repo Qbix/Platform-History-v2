@@ -13,7 +13,7 @@ function Users_0_9_4_Users()
 			continue;
 		}
 
-		Users_Label::addLabel($labels, $user->id, null, null, $user->id, true);
+		Users_Label::addLabel($labels, $user->id, null, null, $user->id);
 		++$i;
 		echo "\033[100D";
 		echo "Added labels for $i of $c users";

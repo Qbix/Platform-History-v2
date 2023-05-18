@@ -39,10 +39,19 @@
 	width: 10px;
 	position: absolute;
 	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 .Assets_history_tool table.Assets_history td.bookmark[data-status="0"] div:before {
 	content: "\e932";
 }
 .Assets_history_tool table.Assets_history td.bookmark[data-status="1"] div:before {
 	content: "\e939";
+}
+
+@media (max-width: 580px) {
+	.Q_mobile .Assets_history_tool table.Assets_history[data-type=credits] th[data-type=user],
+	.Q_mobile .Assets_history_tool table.Assets_history[data-type=credits] td.Assets_history_client {
+		display: none;
+	}
 }

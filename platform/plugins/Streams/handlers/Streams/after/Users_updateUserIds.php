@@ -3,6 +3,8 @@
 function Streams_after_Users_updateUserIds($params)
 {
     $chunks = $params['chunks'];
+    $accumulateErrors = $params['accumulateErrors'];
+    $errors = &$params['errors'];
     $userIdFields = array(
         'Streams' => array(
             'Stream' => 'publisherId',
@@ -30,11 +32,19 @@ function Streams_after_Users_updateUserIds($params)
             $ClassName = $Connection . '_' . $Table;
             foreach ($fields as $field) {
                 foreach ($chunks as $chunk) {
-                    call_user_func(array($ClassName, 'update'))
-                        ->set(array($field => $chunk))
-                        ->where(array(
-                            $field => array_keys($chunk)
-                        ))->execute();
+                    try {
+                        call_user_func(array($ClassName, 'update'))
+                            ->set(array($field => $chunk))
+                            ->where(array(
+                                $field => array_keys($chunk)
+                            ))->execute();
+                    } catch (Exception $e) {
+                        if ($accumulateErrors) {
+                            $errors[] = $e;
+                        } else {
+                            throw $e;
+                        }
+                    }
                 }
             }
         }

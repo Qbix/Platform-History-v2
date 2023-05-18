@@ -278,7 +278,8 @@
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
 					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
 					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
-					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"]
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"],
+					"canManageLabels": ["Users/"]
 				},
 				"Users/admins": {
 					"title": "Admin",

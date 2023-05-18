@@ -1444,7 +1444,9 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Calculate admin level to correspond to Streams::$ADMIN_LEVEL
+	 * Calculate admin level to correspond to the highest
+	 * Streams::$ADMIN_LEVEL lower than the user's currently
+	 * calculated adminLevel in the stream.
 	 * Primarily used by apps which invite a user to a stream
 	 * and giving them a slightly lower admin level.
 	 * @method lowerAdminLevel
@@ -1452,13 +1454,14 @@ class Streams_Stream extends Base_Streams_Stream
 	function lowerAdminLevel()
 	{
 		$this->inheritAccess();
-		$current_level = $this->get('adminLevel', 0);
-		$lower_level = 0;
+		$currentLevel = $this->get('adminLevel', 0);
+		$lowerLevel = 0;
 		foreach (Streams::$ADMIN_LEVEL as $k => $v) {
-			if ($v < $current_level) {
-				$lower_level = $v;
+			if ($v < $currentLevel) {
+				$lowerLevel = $v;
 			}
 		}
+		return $lowerLevel;
 	}
 	/**
 	 * Inherits access from any streams specified in the inheritAccess field.
@@ -1468,6 +1471,10 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	function inheritAccess()
 	{
+		$asUserId = $this->get('asUserId', '');
+		if ($asUserId === $this->publisherId) {
+			return false;
+		}
 		if (empty($this->inheritAccess)) {
 			return false;
 		}
@@ -1504,7 +1511,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$publisherId = reset($ia);
 			$name = next($ia);
 			$stream = Streams_Stream::fetch(
-				$this->get('asUserId', ''),
+				$asUserId,
 				$publisherId,
 				$name,
 				'*',

@@ -24,7 +24,7 @@ Q.text.Users.labels = Q.extend({
  *   	Alternatively pass an array of label names here, to filter by.
  *   @param {Array} [exclude] - array of labels needed to exclude from result
  *   @param {String} [options.contactUserId] Pass a user id here to var the tool add/remove contacts with the various labels, between userId and contactUserId
- *   @param {Boolean|String} [options.canGrant=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
+ *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
  *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
  *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Is passed (element, label, title, wasSelected). Handlers may return false to cancel the default behavior of toggling the label.
@@ -35,8 +35,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	if (state.userId == null) {
 		state.userId = Users.loggedInUserId();
 	}
-	if (state.canGrant === true) {
-		state.canGrant = Q.text.Users.labels.addLabel;
+	if (state.canAdd === true) {
+		state.canAdd = Q.text.Users.labels.addLabel;
 	}
 	if (Users.isCommunityId(state.userId)) {
 		tool.element.addClass('Users_labels_communityRoles');
@@ -78,7 +78,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	filter: 'Users/',
 	exclude: null,
 	contactUserId: null,
-	canGrant: false,
+	canAd: false,
 	addToPhonebook: Q.info.isMobile,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
@@ -113,8 +113,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
-				canGrant: Q.Users.loggedInUser && state.canGrant,
-				canGrantIcon: Q.url('{{Q}}/img/actions/add.png'),
+				canAdd: Q.Users.loggedInUser && state.canAdd,
+				canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
 				phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
                 addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
@@ -148,7 +148,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 					});
 				});
 			}
-			if (state.canGrant) {
+			if (state.canAd) {
 				var $add = tool.$('.Users_labels_add')
 				.on(Q.Pointer.fastclick, function () {
 					Q.prompt(Q.text.Users.labels.prompt, function (title) {
@@ -157,7 +157,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 							tool.refresh();
 						});
 					}, { 
-						title: state.canGrant, 
+						title: state.canAdd, 
 						hidePrevious: true,
 						maxLength: 63
 					});
@@ -228,10 +228,10 @@ Q.Template.set('Users/labels', ''
 +   '<div class="Users_labels_title">{{this.title}}</div>'
 + '</li>'
 + '{{/each}}'
-+ '{{#if canGrant}}'
++ '{{#if canAdd}}'
 + '<li class="Users_labels_action Users_labels_add">'
-+   '<img class="Users_labels_icon" src="{{canGrantIcon}}">'
-+   '<div class="Users_labels_title">{{canGrant}}</div>'
++   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
++   '<div class="Users_labels_title">{{canAdd}}</div>'
 + '</li>'
 + '{{/if}}'
 + '</ul>');

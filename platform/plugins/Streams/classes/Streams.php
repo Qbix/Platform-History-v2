@@ -212,6 +212,13 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
+	 * Can share the stream's actual content with others
+	 * @property $ADMIN_LEVEL['share']
+	 * @type integer
+	 * @default 10
+	 * @final
+	 */
+	/**
 	 * Able to create invitations for others, granting access
 	 * and permissions up to what they themselves have
 	 * @property $ADMIN_LEVEL['invite']
@@ -243,6 +250,7 @@ abstract class Streams extends Base_Streams
 	public static $ADMIN_LEVEL = array(
 		'none' => 0,
 		'tell' => 10,
+		'share' => 15,
 		'invite' => 20,
 		'manage' => 30,
 		'own' => 40,
@@ -3850,13 +3858,13 @@ abstract class Streams extends Base_Streams
 			if (is_string($label)) {
 				$addLabel = explode("\t", $addLabel);
 			}
-			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addLabel, $publisherId, null, null, $asUserId2);
 		}
 		if ($addMyLabel = Q::ifset($options, 'addMyLabel', null)) {
 			if (is_string($addMyLabel)) {
 				$addMyLabel = explode("\t", $addMyLabel);
 			}
-			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2, true);
+			Users_Label::addLabel($addMyLabel, $asUserId, null, null, $asUserId2);
 		}
 
 		$asUserDisplayName = Streams::displayName($asUser);
@@ -4979,7 +4987,18 @@ abstract class Streams extends Base_Streams
 			$tree = new Q_Tree();
 			$tree->load("files/Streams/interests/".Users::communityId()."/".Q_Text::basename().".json");
 			$interests = $tree->getAll();
-			$skipAccess = Q::ifset($interests, $parts[0], "", $parts[1], null) === null ? false : true;
+			$arr = Q::ifset($interests, $parts[0], array());
+			$skipAccess = false;
+			foreach ($arr as $section => $list) {
+				$c = isset($section[0]) ? $section[0] : '';
+				if ($c === '@' or $c === '#') {
+					continue;
+				}
+				if (isset($list[$parts[1]])) {
+					$skipAccess = true;
+					break;
+				}
+			}
 			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
 				'title' => $title,
@@ -5232,12 +5251,16 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $publisherId
 	 * @param {array} $updates pairs of (oldStreamName => newStreamName)
+	 * @param {boolean} [$accumulateErrors=false] set to true to keep going
+	 *  even if an update fails, accumulating errors
+	 * @return {array} any errors that have accumulated, if accumulateErrors is true, otherwise empty array
 	 */
-	static function updateStreamNames($publisherId, array $updates)
+	static function updateStreamNames($publisherId, array $updates, $accumulateErrors = false)
 	{
 		$chunkSize = 100;
 		$chunks = array_chunk($updates, $chunkSize, true);
 		$transactionKey = Q_Utils::randomString(10);
+		$errors = array();
 		Streams_Stream::begin(null, $transactionKey)->execute();
 		// can be rolled back on any exception
 		$fields = array(
@@ -5275,27 +5298,39 @@ abstract class Streams extends Base_Streams
 				foreach ($fields as $i => $field) {
 					$publisherIdField = Q::ifset($publisherIdFields, $Connection, $Table, $i, 'publisherId');
 					foreach ($chunks as $chunk) {
-						$criteria = isset($publisherId)
-						? array(
-							$publisherIdField => $publisherId,
-							$field => array_keys($chunk)
-						) : array($field => array_keys($chunk));
-						call_user_func(array($ClassName, 'update'))
+						$criteria = array($field => array_keys($chunk));
+						if (isset($publisherId)) {
+							$criteria[$publisherIdField] = $publisherId;
+						}
+						try {
+							call_user_func(array($ClassName, 'update'))
 							->set(array($field => $chunk))
 							->where($criteria)
 							->execute();
+						} catch (Exception $e) {
+							if ($accumulateErrors) {
+								$errors[] = $e;
+							} else {
+								throw $e;
+							}
+						}
 					}
 				}
 			}
 		}
+		$params = compact('publisherId', 'updates', 'accumulateErrors', 'chunks', 'fields', 'publisherIdFields');
+		$params['errors'] =& $errors;
 		/**
 		 * Gives any plugin or app a chance to update stream names in its own tables
 		 * @event Streams/updateStreamNames
 		 * @param {array} $publisherId
 		 * @param {array} $updates an array of (oldStreamName => newStreamName) pairs
+		 * @param {boolean} [$accumulateErrors=false] if true, accumulate errors and keep going
+		 * @param {boolean} [$errors=array()] reference to an array to push errors here
 		 */
-		Q::event('Streams/updateStreamNames', compact('publisherId', 'updates', 'chunks', 'fields', 'publisherIdFields'), 'after');
+		Q::event('Streams/updateStreamNames', $params, 'after');
 		Streams_Stream::commit($transactionKey)->execute();
+		return $errors;
 	}
 
 	/**

@@ -297,10 +297,11 @@ Streams.WRITE_LEVEL = {
 Streams.ADMIN_LEVEL = {
 	'none':	 		0,		// cannot do anything related to admin / users
 	'tell':	 		10,		// can prove things about the stream's content or participants
+	'share': 		15,		// can share the stream's actual content with others
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':	 		40,		// can give people any adminLevel <= 40
-	'max':		  40  	// max admin level
+	'max':			40  	// max admin level
 };
 
 Streams.defined = {};
@@ -1850,12 +1851,14 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 colorLight : "#ffffff",
                                 correctLevel : QRCode.CorrectLevel.H
                             });
-                            var _setPhoto = function (message) {
+                            var _setPhoto = function (data) {
+								data = data || {};
 								var dialogClassName = "Dialog_invite_photo_camera";
-                            	var invitedUserId = Q.getObject("byUserId", message);
                             	var title = Q.getObject(['invite', 'dialog', 'photo'], text);
-                            	if (invitedUserId) {
-									title = Q.getObject(['invite', 'dialog', 'photoOf'], text).interpolate({"name": message.getInstruction("displayName")});
+								var invitedUserId = data.invitedUserId;
+                            	if (invitedUserId && data.displayName) {
+									title = Q.getObject(['invite', 'dialog', 'photoOf'], text)
+									.interpolate({"name": data.displayName});
 								}
                             	var subpath = loggedUserId.splitId() + '/invited/' + rsd.invite.token;
 								if (invitedUserId) {
@@ -1918,12 +1921,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								});
 							};
                             $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
-							rss.onMessage('Streams/invite/accept').set(function (stream, message) {
-								if (message.getInstruction('token') !== Q.getObject("invite.token", rsd)) {
-									return;
-								}
-
-								_setPhoto(message);
+							Users.Socket.onEvent('Streams/invite/accept')
+							.set(function _Streams_invite_accept_handler (data) {
+								console.log('Users.Socket.onEvent("Streams/invite/accept")');
+								_setPhoto(data);
 							}, 'Streams_invite_QR_content');
                         });
                     }
@@ -2015,7 +2016,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
 					userId: Q.Users.loggedInUserId(),
 					filter: 'Users/',
-					canGrant: true
+					canAdd: true
 				}),
 				className: 'Streams_invite_labels_dialog',
 				apply: true,
