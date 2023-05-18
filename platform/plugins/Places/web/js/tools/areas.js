@@ -156,8 +156,13 @@
 									tool.prompt(_proceed);
 								}
 							}
+						},
+						"specificOptions": {
+							onInvoke: {
+								"Streams/default/preview": function () {}
+							}
 						}
-					}).activate(function(){
+					}, null, tool.prefix).activate(function(){
 						tool.relatedTool = this;
 					});
 				});
