@@ -1,7 +1,7 @@
 "use strict";
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 navigator.getUserMedia = 
-  (navigator.mediaDevices && navigator.mediaDevices.getUserMedia())
+  (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
   || navigator.getUserMedia 
   || navigator.webkitGetUserMedia 
   || navigator.mozGetUserMedia 
