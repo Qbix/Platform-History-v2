@@ -6353,15 +6353,16 @@ Q.onInit.add(function _Streams_onInit() {
 		var mask = Q.Masks.show('Streams.onInvited', {
 			fadeIn: 0
 		});
+		var t;
 		$(mask.element).on('click', function () {
 			_showWelcomeFlow();
-			clearInterval(t);
+			t && clearInterval(t);
 		});
 		Q.onReady.addOnce(function () {
-			var t = setTimeout(_showWelcomeFlow, delay);
+			t = setTimeout(_showWelcomeFlow, delay);
 		}, 'Streams');
 		function _showWelcomeFlow() {
-			Q.Mask.hide('Streams.onInvited');
+			Q.Masks.hide('Streams.onInvited');
 			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
 			Stream.construct(params.stream, function () {
 				Q.extend(params, {
