@@ -6349,12 +6349,17 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_Streams_onInvited.showed = true;
-		var delay = params.delay || 1000;
-		Q.Masks.show('Streams.onInvited', {
+		var delay = params.delay || 3000;
+		var mask = Q.Masks.show('Streams.onInvited', {
 			fadeIn: 0,
 			duration: delay
 		});
-		setTimeout(function () {
+		$(mask.element).on('click', function () {
+			_showDialog();
+			clearInterval(t);
+		});
+		var t = setTimeout(_showDialog, delay);
+		function _showDialog() {
 			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
 			Stream.construct(params.stream, function () {
 				Q.extend(params, {
@@ -6381,7 +6386,7 @@ Q.onInit.add(function _Streams_onInit() {
 					}
 				});
 			}, true);
-		}, delay);
+		}
 		function _inviteComplete() {
 			var params = {
 				evenIfNotRetained: true,
