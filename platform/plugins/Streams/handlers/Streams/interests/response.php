@@ -4,7 +4,8 @@ function Streams_interests_response()
 {
 	// serve a javascript file and tell client to cache it
 	$communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
-	$interests = Streams::interests($communityId);
+	$skipStreams = filter_var(Q::ifset($_REQUEST, 'skipStreams', false), FILTER_VALIDATE_BOOLEAN);
+	$interests = Streams::interests($communityId, $skipStreams);
 	header('Content-Type: application/javascript');
 	header("Pragma: cache");
 	header("Cache-Control: public, max-age=60"); // cache for 1 minute

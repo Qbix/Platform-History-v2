@@ -21,6 +21,7 @@ var Interests = Streams.Interests;
  *  @param {String|null} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
  *  @param {String} [options.trySynonyms] You can override the "try synonyms" text using this option
  *  @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new interest, or a string to override the title of the command.
+ *  @param {Boolean} [skipStreams=false] - if true, use only interests from json file, skip other interests added as streams
  *  @param {String|Object} [options.all] To show "all interests" option, pass here its title or object with "title" and "icon" properties.
  *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cacheBust=1000*60*60*24] How often to reload the list of major community interests
@@ -45,6 +46,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	communityId: null,
 	expandable: {},
 	dontAllowSelecting: false,
+	skipStreams: false,
 	cacheBust: 1000*60*60*24,
 	ordering: null,
 	all: false,
@@ -122,7 +124,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				tool.container = $(tool.element).find('.Streams_interests_container');
 				state.communityId = state.communityId || Q.Users.communityId;
 
-				Streams.Interests.load(state.communityId, function () {
+				Streams.Interests.load(state.communityId, state.skipStreams, function () {
 					var categories = Object.keys(Interests.all[state.communityId]) || [];
 					state.ordering = state.ordering || Q.getObject(['Interests', 'ordering', state.communityId], Streams) || categories;
 
