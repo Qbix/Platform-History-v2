@@ -6357,7 +6357,7 @@ Q.onInit.add(function _Streams_onInit() {
 			_showWelcomeFlow();
 			clearInterval(t);
 		});
-		Q.onReady.set(function () {
+		Q.onReady.addOnce(function () {
 			var t = setTimeout(_showWelcomeFlow, delay);
 		}, 'Streams');
 		function _showWelcomeFlow() {
