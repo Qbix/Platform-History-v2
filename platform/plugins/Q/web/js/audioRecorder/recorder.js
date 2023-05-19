@@ -1,6 +1,5 @@
 "use strict";
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || NavigatorUserMedia.getUserMedia;
 
 var Recorder = function( config ){
 
@@ -45,7 +44,7 @@ var Recorder = function( config ){
 };
 
 Recorder.isRecordingSupported = function(){
-  return window.AudioContext && navigator.getUserMedia;
+  return window.AudioContext && navigator.mediaDevices.getUserMedia;
 };
 
 Recorder.prototype.addEventListener = function( type, listener, useCapture ){
@@ -92,19 +91,16 @@ Recorder.prototype.initStream = function(){
   }
 
   var that = this;
-  navigator.getUserMedia(
-    { audio : this.config.streamOptions },
-    function ( stream ) {
-      that.stream = stream;
-      that.sourceNode = that.audioContext.createMediaStreamSource( stream );
-      that.sourceNode.connect( that.scriptProcessorNode );
-      that.sourceNode.connect( that.monitorNode );
-      that.eventTarget.dispatchEvent( new Event( "streamReady" ) );
-    },
-    function ( e ) {
-      that.eventTarget.dispatchEvent( new ErrorEvent( "streamError", { error: e } ) );
-    }
-  );
+  navigator.mediaDevices.getUserMedia({ audio : this.config.streamOptions })
+  .then(function (stream) {
+    that.stream = stream;
+    that.sourceNode = that.audioContext.createMediaStreamSource( stream );
+    that.sourceNode.connect( that.scriptProcessorNode );
+    that.sourceNode.connect( that.monitorNode );
+    that.eventTarget.dispatchEvent( new Event( "streamReady" ) );
+  }).catch(function (e) {
+    that.eventTarget.dispatchEvent( new ErrorEvent( "streamError", { error: e } ) );
+  })
 };
 
 Recorder.prototype.pause = function(){
