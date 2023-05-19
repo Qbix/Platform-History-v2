@@ -300,8 +300,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				return true;
 			}
 			var ms = state.maxStretch || 1;
-			if (requiredSize.width > imageSize.width * ms
-			 || requiredSize.height > imageSize.height * ms) {
+			if (requiredSize.width - 1 > imageSize.width * ms
+			 || requiredSize.height - 1 > imageSize.height * ms) {
 				var diff = 0;
 				if (requiredSize.width - 1 < imageSize.width * ms) {
 					var dw = requiredSize.width / ms - requiredSize.width;
