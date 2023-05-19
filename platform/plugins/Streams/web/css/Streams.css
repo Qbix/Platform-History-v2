@@ -429,6 +429,17 @@
 .Streams_preview_add { width: 50px; height: 50px; }
 .Q_inplace_tool_static_container { vertical-align: middle; }
 
+.Streams_file_preview_tool .Streams_preview_container,
+.Streams_pdf_preview_tool .Streams_preview_container {
+	white-space: nowrap;
+}
+
+.Streams_file_preview_tool .Streams_inplace_tool,
+.Streams_pdf_preview_tool .Streams_inplace_tool {
+	height: 40p;
+	line-height: 40px;
+}
+
 /* Streams access tool */
 .Streams_access_tool_dialog_container { width: 450px; }
 .Streams_access_tool_dialog_container .Streams_access_controls { padding: 10px; }
