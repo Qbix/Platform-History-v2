@@ -6358,9 +6358,9 @@ Q.onInit.add(function _Streams_onInit() {
 			_showWelcomeFlow();
 			t && clearInterval(t);
 		});
-		Q.onReady.addOnce(function () {
+		$(window).on('load', function () {
 			t = setTimeout(_showWelcomeFlow, delay);
-		}, 'Streams');
+		});
 		function _showWelcomeFlow() {
 			Q.Masks.hide('Streams.onInvited');
 			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
