@@ -6349,32 +6349,39 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_Streams_onInvited.showed = true;
-		var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
-		Stream.construct(params.stream, function () {
-			Q.extend(params, {
-				stream: this,
-				communityId: params.communityId || Q.Users.communityId,
-				communityName: params.communityName || Q.Users.communityName,
-				button: Q.getObject('Q.text.Streams.invite.complete.accept')
-				     || Q.getObject('Q.text.Users.login.registerButton'),
-				prompt: (params.prompt !== undefined)
-					? params.prompt
-					: Q.getObject('Q.text.Streams.invite.complete.prompt')
-			});
-			Q.Template.render(explanationTemplateName, params, function (err, html) {
-				params.explanation = html;
-				if (Q.Users.loggedInUserId()) {
-					_showDialog();
-				} else {
-					params.loggedInFirst = true;
-					Q.Users.login({
-						onSuccess: {'Users': _inviteComplete},
-						noClose: true,
-						explanation: html
-					});
-				}
-			});
-		}, true);
+		var delay = params.delay || 1000;
+		Q.Masks.show('Streams.onInvited', {
+			fadeIn: 0,
+			duration: delay
+		});
+		setTimeout(function () {
+			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
+			Stream.construct(params.stream, function () {
+				Q.extend(params, {
+					stream: this,
+					communityId: params.communityId || Q.Users.communityId,
+					communityName: params.communityName || Q.Users.communityName,
+					button: Q.getObject('Q.text.Streams.invite.complete.accept')
+						 || Q.getObject('Q.text.Users.login.registerButton'),
+					prompt: (params.prompt !== undefined)
+						? params.prompt
+						: Q.getObject('Q.text.Streams.invite.complete.prompt')
+				});
+				Q.Template.render(explanationTemplateName, params, function (err, html) {
+					params.explanation = html;
+					if (Q.Users.loggedInUserId()) {
+						_showDialog();
+					} else {
+						params.loggedInFirst = true;
+						Q.Users.login({
+							onSuccess: {'Users': _inviteComplete},
+							noClose: true,
+							explanation: html
+						});
+					}
+				});
+			}, true);
+		}, delay);
 		function _inviteComplete() {
 			var params = {
 				evenIfNotRetained: true,
