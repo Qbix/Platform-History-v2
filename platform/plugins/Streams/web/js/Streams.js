@@ -5268,11 +5268,17 @@ var Interests = Streams.Interests = {
 	 * @method load
 	 * @static
 	 * @param {String} communityId
+	 * @param {boolean} skipStreams
 	 * @param {Function} callback
 	 */
-	load: function (communityId, callback) {
+	load: function (communityId, skipStreams, callback) {
+		if (!callback && typeof skipStreams === "function") {
+			callback = skipStreams;
+			skipStreams = false;
+		}
 		var src = Q.action('Streams/interests', {
-			communityId: communityId
+			communityId: communityId,
+			skipStreams: skipStreams
 		});
 		Q.addScript(src, callback);
 	},

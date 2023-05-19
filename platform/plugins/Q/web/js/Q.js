@@ -2850,10 +2850,16 @@ Evp.occurring = false;
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  * @param {boolean} prepend If true, then prepends the handler to the chain
- * @return {String|null} The key under which the handler was set, or null if handler is empty
+ * @return {String|null} The key under which the handler was set, or null if handler and key were both empty
  */
 Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
-	if (!handler) return undefined;
+	if (!handler) {
+		if (key) {
+			handler = null;
+		} else {
+			return null;
+		}
+	}
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	if (key === true || (key === undefined
 	&& Q.Page && Q.Page.beingActivated)) {
@@ -2897,8 +2903,6 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
-	if (!handler) return undefined;
-	var event = this;
 	var ret = this.set(handler, key, prepend);
 	if (this.occurred || this.occurring) {
 		Q.handle(handler, this.lastContext, this.lastArgs);
@@ -14083,6 +14087,9 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
  */
 Q.invoke = function (options) {
+	if (!Q.isPlainObject(options)) {
+		throw new Q.Error("Q.invoke: please pass an object instead of " + typeof options);
+	}
 	if (options.template) {
 		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
 			options.content = html;

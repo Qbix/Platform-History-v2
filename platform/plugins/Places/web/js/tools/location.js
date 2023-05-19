@@ -63,7 +63,8 @@ Q.Tool.define("Places/location", function (options) {
 			if (!placesAreas) {
 				$("<div>").tool("Places/areas", {
 					location: location
-				}).appendTo($te).activate();
+				}, null, this.prefix)
+				.appendTo($te).activate();
 
 				return true;
 			}

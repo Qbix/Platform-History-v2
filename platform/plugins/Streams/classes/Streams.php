@@ -4455,9 +4455,10 @@ abstract class Streams extends Base_Streams
 	 * @method interests
 	 * @static
 	 * @param {string} [$communityId=Users::communityId()] the id of the community
+	 * @param {boolean} [$skipStreams] - if true skip interests streams, use only from json file
 	 * @return {array} an array of $category => ($subcategory =>) $interest
 	 */
-	static function interests($communityId = null)
+	static function interests($communityId = null, $skipStreams = false)
 	{
 		if (!isset($communityId)) {
 			$communityId = Users::communityId();
@@ -4466,10 +4467,13 @@ abstract class Streams extends Base_Streams
 		$basename = Q_Text::basename();
 		$tree->load("files/Streams/interests/$communityId/$basename.json");
 		$interests = $tree->getAll();
-		$interestsStreams = Streams_Stream::select()->where(array(
-			"publisherId" => $communityId,
-			"type" => "Streams/interest"
-		))->fetchDbRows();
+		$interestsStreams = array();
+		if (!$skipStreams) {
+			$interestsStreams = Streams_Stream::select()->where(array(
+				"publisherId" => $communityId,
+				"type" => "Streams/interest"
+			))->fetchDbRows();
+		}
 		foreach ($interests as $category => &$v1) {
 			// add interests from streams
 			foreach ($interestsStreams as $interestsStream) {
