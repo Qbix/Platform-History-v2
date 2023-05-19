@@ -6360,7 +6360,9 @@ Q.onInit.add(function _Streams_onInit() {
 			_showWelcomeFlow();
 			t && clearInterval(t);
 		});
-		$(window).on('load', function () {
+		Q.onReady.addOnce(function () {
+			// don't use "load" event because it might not fire on the page
+			// if some image is broken for example
 			t = setTimeout(_showWelcomeFlow, delay);
 		});
 		function _showWelcomeFlow() {
