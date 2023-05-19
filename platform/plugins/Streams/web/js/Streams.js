@@ -1907,12 +1907,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 												}
 
 												var userIconStream = this;
-												userIconStream.join();
+												userIconStream.observe();
 												var eventKey = "invite_icon_changed_" + invitedUserId;
 												var event = userIconStream.onMessage("Streams/changed");
 												event.set(function (err, msg) {
 													Q.Dialogs.close(dialog);
-													userIconStream.leave();
+													userIconStream.neglect();
 													event.remove(eventKey);
 												}, eventKey);
 											});
