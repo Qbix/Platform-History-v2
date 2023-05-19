@@ -6351,15 +6351,17 @@ Q.onInit.add(function _Streams_onInit() {
 		_Streams_onInvited.showed = true;
 		var delay = params.delay || 3000;
 		var mask = Q.Masks.show('Streams.onInvited', {
-			fadeIn: 0,
-			duration: delay
+			fadeIn: 0
 		});
 		$(mask.element).on('click', function () {
 			_showWelcomeFlow();
 			clearInterval(t);
 		});
-		var t = setTimeout(_showWelcomeFlow, delay);
+		Q.onReady.set(function () {
+			var t = setTimeout(_showWelcomeFlow, delay);
+		}, 'Streams');
 		function _showWelcomeFlow() {
+			Q.Mask.hide('Streams.onInvited');
 			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
 			Stream.construct(params.stream, function () {
 				Q.extend(params, {
