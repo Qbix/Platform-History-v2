@@ -194,14 +194,15 @@ class Streams_Invite extends Base_Streams_Invite
 			'instructions' => $instructions
 		), true);
 
+		$user = Users::fetch($userId, true);
 		Q_Utils::sendToNode(array(
 			"Q/method" => "Users/emitToUser",
 			"userId" => $invite->invitingUserId,
 			"event" => "Streams/invite/accept",
 			"data" => array(
 				"invitedUserId" => $userId,
-				"displayName" => Users::fetch($userId, true)->displayName(),
-				"icon" => $this->icon
+				"displayName" => $user->displayName(),
+				"icon" => $user->icon
 			)
 		));
 		
