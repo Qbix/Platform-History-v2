@@ -6349,7 +6349,7 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_Streams_onInvited.showed = true;
-		var delay = params.delay || Streams.Invite.delay;
+		var delay = params.delay || 3000;
 		var mask = Q.Masks.show('Streams.onInvited', {
 			fadeIn: 0,
 			duration: delay
