@@ -1924,7 +1924,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							Users.Socket.onEvent('Streams/invite/accept')
 							.set(function _Streams_invite_accept_handler (data) {
 								console.log('Users.Socket.onEvent("Streams/invite/accept")');
-								_setPhoto(data);
+								if (Users.isCustomIcon(data.icon)) {
+									_setPhoto(data);
+								}
 							}, 'Streams_invite_QR_content');
                         });
                     }
@@ -6349,7 +6351,7 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_Streams_onInvited.showed = true;
-		var delay = params.delay || 3000;
+		var delay = params.delay || 2000;
 		var mask = Q.Masks.show('Streams.onInvited', {
 			fadeIn: 0
 		});

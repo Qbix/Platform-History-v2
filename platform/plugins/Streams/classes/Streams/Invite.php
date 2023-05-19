@@ -200,7 +200,8 @@ class Streams_Invite extends Base_Streams_Invite
 			"event" => "Streams/invite/accept",
 			"data" => array(
 				"invitedUserId" => $userId,
-				"displayName" => Users::fetch($userId, true)->displayName()
+				"displayName" => Users::fetch($userId, true)->displayName(),
+				"icon" => $this->icon
 			)
 		));
 		
