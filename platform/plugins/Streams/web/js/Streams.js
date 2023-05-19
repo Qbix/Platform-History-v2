@@ -6349,17 +6349,17 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_Streams_onInvited.showed = true;
-		var delay = params.delay || 3000;
+		var delay = params.delay || Streams.Invite.delay ||;
 		var mask = Q.Masks.show('Streams.onInvited', {
 			fadeIn: 0,
 			duration: delay
 		});
 		$(mask.element).on('click', function () {
-			_showDialog();
+			_showWelcomeFlow();
 			clearInterval(t);
 		});
-		var t = setTimeout(_showDialog, delay);
-		function _showDialog() {
+		var t = setTimeout(_showWelcomeFlow, delay);
+		function _showWelcomeFlow() {
 			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
 			Stream.construct(params.stream, function () {
 				Q.extend(params, {
