@@ -178,6 +178,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$s['content'] = $values[$name];
 			if ($s['type'] === 'Streams/image') {
 				$s['icon'] = $s['content'];
+				$s['content'] = 'User Icon';
 			}
 		}
 		$toCreate[$name] = $s;
@@ -301,6 +302,7 @@ function Streams_after_Users_User_saveExecute($params)
 
 				if ($stream->type === 'Streams/image') {
 					$stream->icon = $value;
+					$stream->content = 'User Icon';
 				}
 				if ($name === "Streams/user/icon") {
 					$sizes = Q_Image::getSizes('Users/icon');
