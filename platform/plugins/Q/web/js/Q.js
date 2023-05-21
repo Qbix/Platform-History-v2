@@ -5175,7 +5175,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * Sets up element so that it can be used to activate a tool
  * For example: $('container').append(Q.Tool.setUpElement('div', 'Streams/chat')).activate(options);
  * @static
- * @method setUpElement
+ * @method prepare
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String|Array} toolName
@@ -5194,7 +5194,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * @return {HTMLElement}
  *  Returns an element you can append to things, and/or call Q.activate on
  */
-Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix, lazyload) {
+Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolName, toolOptions, id, prefix, lazyload) {
 	if (typeof toolOptions === 'string') {
 		prefix = id;
 		id = toolOptions;
@@ -5248,7 +5248,7 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 /**
  * Returns HTML for an element that it can be used to activate a tool
  * @static
- * @method setUpElementHTML
+ * @method prepareHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String} toolName
@@ -5264,7 +5264,7 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
  * @return {String}
  *  Returns HTML that you can include in templates, etc.
  */
-Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
+Q.Tool.prepareHTML = Q.Tool.setUpElementHTML = function _Q_Tool_prepareHTML(
 	element, toolName, toolOptions, id, prefix, attributes
 ) {
 	var e = Q.Tool.setUpElement(element, toolName, null, id, prefix);
@@ -5288,7 +5288,7 @@ Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
  * Sets up element so that it can be used to activate a tool
  * For example: $('container').append(Q.Tool.setUpElement('div', 'Streams/chat')).activate(options);
  * The prefix and id of the element are derived from the tool on which this method is called.
- * @method setUpElement
+ * @method prepare
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String} toolName
@@ -5300,7 +5300,7 @@ Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
  * @return {HTMLElement}
  *  Returns an element you can append to things
  */
-Tp.setUpElement = function (element, toolName, toolOptions, id) {
+Tp.prepare = Tp.setUpElement = function (element, toolName, toolOptions, id) {
 	return Q.Tool.setUpElement(element, toolName, toolOptions, id, this.prefix);
 };
 
@@ -5308,7 +5308,7 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
  * Returns HTML for an element that it can be used to activate a tool.
  * The prefix and id of the element are derived from the tool on which this method is called.
  * For example: $('container').append(Q.Tool.setUpElementHTML('Streams/chat')).activate(options);
- * @method setUpElementHTML
+ * @method prepareHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String} toolName
@@ -5322,7 +5322,7 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
  * @return {String}
  *  Returns HTML that you can include in templates, etc.
  */
-Tp.setUpElementHTML = function (element, toolName, toolOptions, id, attributes) {
+Tp.prepareHTML = Tp.setUpElementHTML = function (element, toolName, toolOptions, id, attributes) {
 	return Q.Tool.setUpElementHTML(element, toolName, toolOptions, id, this.prefix, attributes);
 };
 
