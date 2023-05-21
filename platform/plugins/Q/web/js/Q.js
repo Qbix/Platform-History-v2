@@ -5267,7 +5267,7 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 Q.Tool.prepareHTML = Q.Tool.setUpElementHTML = function _Q_Tool_prepareHTML(
 	element, toolName, toolOptions, id, prefix, attributes
 ) {
-	var e = Q.Tool.setUpElement(element, toolName, null, id, prefix);
+	var e = Q.Tool.prepare(element, toolName, null, id, prefix);
 	var ntt = toolName.replace(/\//g, '_');
 	if (toolOptions) {
 		e.setAttribute('data-'+ntt.replace(/_/g, '-'), JSON.stringify(toolOptions));
@@ -5301,7 +5301,7 @@ Q.Tool.prepareHTML = Q.Tool.setUpElementHTML = function _Q_Tool_prepareHTML(
  *  Returns an element you can append to things
  */
 Tp.prepare = Tp.setUpElement = function (element, toolName, toolOptions, id) {
-	return Q.Tool.setUpElement(element, toolName, toolOptions, id, this.prefix);
+	return Q.Tool.prepare(element, toolName, toolOptions, id, this.prefix);
 };
 
 /**
@@ -5323,7 +5323,7 @@ Tp.prepare = Tp.setUpElement = function (element, toolName, toolOptions, id) {
  *  Returns HTML that you can include in templates, etc.
  */
 Tp.prepareHTML = Tp.setUpElementHTML = function (element, toolName, toolOptions, id, attributes) {
-	return Q.Tool.setUpElementHTML(element, toolName, toolOptions, id, this.prefix, attributes);
+	return Q.Tool.prepareHTML(element, toolName, toolOptions, id, this.prefix, attributes);
 };
 
 /**
@@ -11843,7 +11843,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		var args = arguments;
 		return this.each(function () {
 			var id2 = (typeof id === 'function') ? id.apply(this, args) : id;
-			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix, lazyload);
+			Q.Tool.prepare(this, toolName, toolOptions, id2, prefix, lazyload);
 		});
 	};
 	/**
@@ -15015,7 +15015,7 @@ function _addHandlebarsHelpers() {
 					Q.extend(o, this['id:'+id]);
 				}
 			}
-			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix, {'class': className});
+			return Q.Tool.prepareHTML(tag, name, o, id, prefix, {'class': className});
 		});
 	}
 	if (!Handlebars.helpers.url) {
