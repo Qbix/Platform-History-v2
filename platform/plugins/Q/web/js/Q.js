@@ -5173,7 +5173,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
 
 /**
  * Sets up element so that it can be used to activate a tool
- * For example: $('container').append(Q.Tool.setUpElement('div', 'Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.prepare('div', 'Streams/chat')).activate(options);
  * @static
  * @method prepare
  * @param {String|Element} element
@@ -5286,7 +5286,7 @@ Q.Tool.prepareHTML = Q.Tool.setUpElementHTML = function _Q_Tool_prepareHTML(
 
 /**
  * Sets up element so that it can be used to activate a tool
- * For example: $('container').append(Q.Tool.setUpElement('div', 'Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.prepare('div', 'Streams/chat')).activate(options);
  * The prefix and id of the element are derived from the tool on which this method is called.
  * @method prepare
  * @param {String|Element} element
@@ -5307,7 +5307,7 @@ Tp.prepare = Tp.setUpElement = function (element, toolName, toolOptions, id) {
 /**
  * Returns HTML for an element that it can be used to activate a tool.
  * The prefix and id of the element are derived from the tool on which this method is called.
- * For example: $('container').append(Q.Tool.setUpElementHTML('Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.prepareHTML('Streams/chat')).activate(options);
  * @method prepareHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
@@ -11819,7 +11819,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		return $(this).data(key);
 	};
 	/**
-	 * Calls Q.Tool.setUpElement on the elements in the jQuery.
+	 * Calls Q.Tool.prepare on the elements in the jQuery.
 	 * Follow this up with a call to .activate()
 	 * @class jQuery.fn
 	 * @static
