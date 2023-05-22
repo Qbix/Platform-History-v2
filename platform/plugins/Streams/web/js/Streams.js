@@ -2180,7 +2180,10 @@ Streams.followup.options = {
  * @param {String} streamName
  *	Name of the stream to/from which the others are related
  * @param {String|Array|null} relationType the type of the relation
- * @param {boolean} isCategory defaults to false. If true, then gets streams related TO this stream.
+ * @param {boolean|String} [isCategory=true]
+ *  If false, returns the categories that this stream is related to.
+ *  If true, returns all the streams this related to this category.
+ *  If a string, returns all the streams related to this category with names prefixed by this string.
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
@@ -2214,6 +2217,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		callback = options;
 		options = isCategory;
 		isCategory = undefined;
+	}
+	if (isCategory === undefined) {
+		isCategory = true;
 	}
 	if (Q.typeOf(options) === 'function') {
 		callback = options;
