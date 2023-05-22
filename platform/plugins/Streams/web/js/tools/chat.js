@@ -179,6 +179,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	afterPost: new Q.Event(),
 	preprocess: [],
 	openInSameColumn: [],
+	handleTheirOwnClicks: ["Streams/question", "Streams/answer"],
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -581,8 +582,8 @@ Q.Tool.define('Streams/chat', function(options) {
 						var stream = this;
 						var streamType = stream.fields.type;
 
-						if (["Media/webrtc", "Streams/question", "Streams/answer"].includes(streamType)) {
-							// Media/webrtc/preview tool handle click event itself
+						if (state.handleTheirOwnClicks.includes(streamType)) {
+							// let the tool handle click event itself
 							return;
 						}
 
