@@ -239,6 +239,9 @@
 .Streams_question_preview_tool {
 	cursor: pointer;
 }
+.Streams_question_preview_tool.Streams_preview_tool .Streams_preview_container .Streams_preview_contents .Streams_question_subtitle {
+	white-space: normal;
+}
 .Streams_answer_preview_tool {
 	white-space: nowrap;
 }

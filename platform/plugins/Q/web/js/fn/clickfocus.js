@@ -51,7 +51,7 @@ function _Q_clickfocus(o) {
 {
 	scroll: null,
 	scrollTopMargin: 80,
-	timeout: 100
+	timeout: 500
 }
 
 );

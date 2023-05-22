@@ -424,6 +424,7 @@
 .Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; }
 .Streams_preview_tool .Streams_preview_icon,
 .Streams_preview_tool .Streams_preview_add { margin-right: 3px; }
+.Streams_image_preview_tool .Streams_inplace_tool { width: 100%; text-align: center; }
 
 .Streams_preview_icon,
 .Streams_preview_add { width: 50px; height: 50px; }

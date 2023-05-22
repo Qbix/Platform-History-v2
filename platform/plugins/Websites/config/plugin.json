@@ -113,29 +113,6 @@
 				},
 				"extend": ["Websites_Article"]
 			},
-			"Websites/slide": {
-				"create": true,
-				"edit": true,
-				"defaults": {
-					"title": "Untitled Slide",
-					"icon": "{{Websites}}/img/icons/Websites/slide",
-					"readLevel": 10,
-					"writeLevel": 0,
-					"adminLevel": 10
-				},
-				"extend": ["Websites_Slide"]
-			},
-			"Websites/presentation": {
-				"create": true,
-				"edit": true,
-				"defaults": {
-					"title": "Presentation",
-					"icon": "{{Websites}}/img/icons/Websites/presentation",
-					"readLevel": 10,
-					"writeLevel": 0,
-					"adminLevel": 10
-				}
-			},
 			"Websites/advert/unit": {
 				"create": true,
 				"edit": true,

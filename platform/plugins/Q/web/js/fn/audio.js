@@ -395,7 +395,9 @@
 				}
 			},
 			text: {
-				allowMicrophoneAccess: Q.text.Q.audio.allowMicrophoneAccess,
+				allowMicrophoneAccess: window.isSecureContext
+					? Q.text.Q.audio.allowMicrophoneAccess
+					: Q.text.Q.browser.insecureContext,
 				record: Q.text.Q.audio.record,
 				recording: Q.text.Q.audio.recording,
 				remains: Q.text.Q.audio.remains,

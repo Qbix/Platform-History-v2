@@ -11,10 +11,6 @@
 .Websites_metadata_tool .Streams_inplace_tool,
 .Websites_metadata_tool .Streams_inplace_tool_container { display: block; text-align: left; }
 
-.Websites_presentation_tool .Streams_preview_tool.Streams_related_stream { cursor: pointer; }
-.Websites_presentation_tool .Streams_preview_tool.Streams_related_stream:hover { background: rgba(200, 200, 200, 0.2); }
-.Websites_slide_dialog .Q_dialog_content { padding: 10px; }
-
 .Websites_article_preview_tool {
 	cursor: pointer;
 }

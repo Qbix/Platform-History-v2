@@ -590,7 +590,10 @@ Q.Tool.define("Q/audio", function (options) {
 
 		Q.Template.render("Q/audio/recorder", {
 			maxRecordTime: tool.formatRecordTime(state.maxRecordTime),
-			text: tool.text
+			text: tool.text,
+			allowMicrophoneAccess: window.isSecureContext
+				? Q.text.Q.audio.allowMicrophoneAccess
+				: Q.text.Q.browser.insecureContext
 		}, function (err, html) {
 			$toolElement.html(html);
 
@@ -914,7 +917,7 @@ Q.Template.set('Q/audio/recorder',
 	'  <div class="Q_audio_record">'
 	+ '    <div class="Q_audio_pie"></div>'
 	+ '    <div class="Q_audio_record_label"><p class="Q_audio_record_recordText">{{text.record}}</p><p><span class="Q_audio_record_recordTime">{{maxRecordTime}}</span> <span class="Q_audio_record_elapsed">{{text.maximum}}</span></p></div>'
-	+ '    <div class="Q_audio_allow">{{text.allowMicrophoneAccess}}</div>'
+	+ '    <div class="Q_audio_allow">{{allowMicrophoneAccess}}</div>'
 	+ '</div>'
 	//+ '<div class="Q_audio_actions">'
 	//+ '    <button name="discard">{{textDiscard}}</button>'

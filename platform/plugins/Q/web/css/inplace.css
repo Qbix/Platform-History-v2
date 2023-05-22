@@ -15,6 +15,11 @@
 	border-bottom: 1px solid #eee;
 	border-left: 1px solid #aaa;
 	border: dashed 1px #AAA; cursor: pointer; }
+.Q_inplace_tool:not(.Q_inplace_noEditOnClick) .Q_hover .Q_inplace_tool_static *,
+.Q_inplace_tool:not(.Q_inplace_noEditOnClick) .Q_hover .Q_inplace_tool_blockstatic * {
+	background: inherit;
+	color: inherit;	
+}
 .Q_inplace_tool .Q_hover .Q_inplace_tool_editbuttons { background-color: #EEE; display: inline; }
 .Q_inplace_tool .Q_inplace_tool_fieldinput { max-height: 500px; text-align: inherit; }
 .Q_inplace_tool .Q_inplace_tool_undermessage { display: none; position: absolute; bottom: -18px; left: 10px; min-width: 100px; }

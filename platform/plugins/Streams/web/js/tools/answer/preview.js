@@ -163,11 +163,14 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 					if (type === "text") {
 						$input.attr("placeholder", tool.text.questions.Placeholder);
 					} else {
-						$input.removeAttr("placeholder");
+						$input.attr("placeholder", tool.text.questions.ShortAnswer);
 					}
+					$input.empty().focus();
 				}).trigger("change");
 
 				$form.on('submit', _save);
+
+				$input.plugin('Q/clickfocus');
 
 				function _save() {
 					var title = $input.val();
@@ -218,11 +221,11 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 Q.Template.set('Streams/answer/composer',
 	`<form action="">
 		<select name="type">
-			<option value="option">{{questions.answerOption}}</option>
 			<option value="option.exclusive">{{questions.answerOptionExclusive}}</option>
+			<option value="option">{{questions.answerOption}}</option>
 			<option value="text">{{questions.answerText}}</option>
 		</select>
-		<input name="value" enterkeyhint="send" />
+		<input name="value" enterkeyhint="send" placeholder="{{questions.ShortAnswer}}" />
 		<button type="submit" name="save" type="button" class="Q_button">{{questions.Save}}</button>
 	</form>`,
 	{text: ['Streams/content']}
@@ -230,7 +233,7 @@ Q.Template.set('Streams/answer/composer',
 Q.Template.set("Streams/answer/view",
 	`{{#ifEquals type "text"}}
 		<form action="">
-			<input placeholder="{{content}}" type="text" value="{{extra}}" enterkeyhint="send">
+			<input placeholder="{{content}}" type="text" value="{{extra}}" enterkeyhint="send"  placeholder="{{questions.ShortAnswer}}">
 			<button type="submit" class="Q_button" name="send" enterkeyhint="send">{{questions.Send}}</button>
 		</form>
 	{{/ifEquals}}

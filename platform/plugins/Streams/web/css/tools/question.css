@@ -88,6 +88,10 @@
 .Streams_question_tool .Streams_question_content {
     font-size: 80%;
 }
-.Streams_question_tool .Streams_question_content:empty {
+.Streams_question_tool .Streams_question_content:empty,
+.Streams_question_tool .Streams_question_subtitle:empty {
     display: none;
+}
+.Streams_question_subtitle {
+    white-space: normal;
 }

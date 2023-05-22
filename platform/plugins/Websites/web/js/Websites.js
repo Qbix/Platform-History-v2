@@ -25,37 +25,6 @@ var Websites = Q.Websites = Q.plugins.Websites = {
 			stateStream.save();
 		}
 	},
-	presentation: {
-		invoke: function (preview) {
-			var ps = preview.state;
-			Q.Streams.get(ps.publisherId, ps.streamName, function () {
-				var className = 'Websites_slide_dialog';
-				var editable = this.testWriteLevel('edit');
-				if (editable) {
-					className += ' Websites_slide_editable'
-				}
-				var element = Q.Tool.setUpElement('div', 'Websites/slide', {
-					publisherId: ps.publisherId,
-					streamName: ps.streamName
-				});
-				var $dialog = Q.Dialogs.push({
-					title: this.fields.title,
-					content: element,
-					className: className,
-					apply: editable,
-					onActivate: function () {
-						if (editable) {
-							element.Q.tool.forEachChild('Streams/html', function () {
-								this.state.onFroalaEditor.add(function () {
-									this.focus();
-								}, this)
-							});
-						}
-					}
-				});
-			});
-		}
-	},
 	advert: {
 		creatives: function (publisherId, callback) {
 			Q.Streams.related(

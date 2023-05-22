@@ -90,6 +90,9 @@ Q.text = {
 			"century": "century",
 			"centuries": "centuries"
 		},
+		"browser": {
+			"insecureContext": "You need to browse in a secure context for this to work"
+		},
 		"audio": {
 			"allowMicrophoneAccess": "Please allow access to your microphone",
 			"record": "Record",
