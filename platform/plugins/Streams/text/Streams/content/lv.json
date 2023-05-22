@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Ierakstiet savu jautājumu",
         "ContentPlaceholder": "Ievietojiet šeit jebkādu papildu informāciju, lai palīdzētu cilvēkiem atbildēt",
         "ErrorTitle": "Nepieciešams jautājums",
-        "Placeholder": "Vietturis",
-        "AreYouSure": "Vai tu esi pārliecināts?"
+        "Placeholder": "Uzrakstiet instrukcijas",
+        "AreYouSure": "Vai tu esi pārliecināts?",
+        "ShortAnswer": "Uzrakstiet īsu atbildi"
     },
     "experience": {
         "NewExperience": "Jauna pieredze",

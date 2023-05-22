@@ -433,8 +433,9 @@
         "TitlePlaceholder": "הקלד את השאלה שלך",
         "ContentPlaceholder": "שים כאן כל מידע נוסף כדי לעזור לאנשים לענות",
         "ErrorTitle": "נדרשת שאלה",
-        "Placeholder": "מציין מקום",
-        "AreYouSure": "האם אתה בטוח?"
+        "Placeholder": "כתוב הוראות",
+        "AreYouSure": "האם אתה בטוח?",
+        "ShortAnswer": "כתבו תשובה קצרה"
     },
     "experience": {
         "NewExperience": "חוויה חדשה",

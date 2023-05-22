@@ -433,8 +433,9 @@
         "TitlePlaceholder": "మీ ప్రశ్నను టైప్ చేయండి",
         "ContentPlaceholder": "వ్యక్తులు సమాధానమివ్వడంలో సహాయపడటానికి ఏదైనా అదనపు సమాచారాన్ని ఇక్కడ ఉంచండి",
         "ErrorTitle": "ప్రశ్న అవసరం",
-        "Placeholder": "ప్లేస్‌హోల్డర్",
-        "AreYouSure": "మీరు చెప్పేది నిజమా?"
+        "Placeholder": "సూచనలను వ్రాయండి",
+        "AreYouSure": "మీరు చెప్పేది నిజమా?",
+        "ShortAnswer": "చిన్న సమాధానం రాయండి"
     },
     "experience": {
         "NewExperience": "కొత్త అనుభవం",

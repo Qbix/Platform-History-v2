@@ -433,8 +433,9 @@
         "TitlePlaceholder": "আপনার প্রশ্ন টাইপ করুন",
         "ContentPlaceholder": "লোকেদের উত্তর দিতে সাহায্য করার জন্য এখানে কোনো অতিরিক্ত তথ্য রাখুন",
         "ErrorTitle": "প্রশ্ন আবশ্যক",
-        "Placeholder": "স্থানধারক",
-        "AreYouSure": "তুমি কি নিশ্চিত?"
+        "Placeholder": "নির্দেশনা লিখুন",
+        "AreYouSure": "তুমি কি নিশ্চিত?",
+        "ShortAnswer": "একটি সংক্ষিপ্ত উত্তর লিখুন"
     },
     "experience": {
         "NewExperience": "নতুন অভিজ্ঞতা",

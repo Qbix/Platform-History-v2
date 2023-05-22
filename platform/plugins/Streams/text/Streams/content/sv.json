@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Skriv din fråga",
         "ContentPlaceholder": "Lägg in ytterligare information här för att hjälpa andra att svara",
         "ErrorTitle": "Fråga krävs",
-        "Placeholder": "Platshållare",
-        "AreYouSure": "Är du säker?"
+        "Placeholder": "Skriv instruktioner",
+        "AreYouSure": "Är du säker?",
+        "ShortAnswer": "Skriv ett kort svar"
     },
     "experience": {
         "NewExperience": "Ny upplevelse",

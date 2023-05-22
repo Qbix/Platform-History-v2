@@ -433,8 +433,9 @@
         "TitlePlaceholder": "질문을 입력하세요",
         "ContentPlaceholder": "사람들이 답변할 수 있도록 여기에 추가 정보를 입력하세요.",
         "ErrorTitle": "질문 필요",
-        "Placeholder": "자리 표시자",
-        "AreYouSure": "확실합니까?"
+        "Placeholder": "쓰기 지침",
+        "AreYouSure": "확실합니까?",
+        "ShortAnswer": "짧은 답을 쓰세요"
     },
     "experience": {
         "NewExperience": "새로운 경험",

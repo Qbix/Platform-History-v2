@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Teipiwch eich cwestiwn",
         "ContentPlaceholder": "Rhowch unrhyw wybodaeth ychwanegol yma i helpu pobl i ateb",
         "ErrorTitle": "Angen cwestiwn",
-        "Placeholder": "Dalfan",
-        "AreYouSure": "Wyt ti&#39;n siwr?"
+        "Placeholder": "Ysgrifennu Cyfarwyddiadau",
+        "AreYouSure": "Wyt ti&#39;n siwr?",
+        "ShortAnswer": "Ysgrifennwch ateb byr"
     },
     "experience": {
         "NewExperience": "Profiad Newydd",

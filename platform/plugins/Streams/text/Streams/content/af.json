@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Tik jou vraag",
         "ContentPlaceholder": "Plaas enige bykomende inligting hier om mense te help antwoord",
         "ErrorTitle": "Vraag vereis",
-        "Placeholder": "Plekhouer",
-        "AreYouSure": "Is jy seker?"
+        "Placeholder": "Skryf instruksies",
+        "AreYouSure": "Is jy seker?",
+        "ShortAnswer": "Skryf &#39;n kort antwoord"
     },
     "experience": {
         "NewExperience": "Nuwe ervaring",

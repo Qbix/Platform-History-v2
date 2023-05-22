@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Įveskite savo klausimą",
         "ContentPlaceholder": "Čia pateikite bet kokią papildomą informaciją, kad padėtumėte žmonėms atsakyti",
         "ErrorTitle": "Reikalingas klausimas",
-        "Placeholder": "Vietos rezervuaras",
-        "AreYouSure": "Ar tu tuo tikras?"
+        "Placeholder": "Parašykite instrukcijas",
+        "AreYouSure": "Ar tu tuo tikras?",
+        "ShortAnswer": "Parašykite trumpą atsakymą"
     },
     "experience": {
         "NewExperience": "Nauja patirtis",

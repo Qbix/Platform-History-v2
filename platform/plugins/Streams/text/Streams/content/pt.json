@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Digite sua pergunta",
         "ContentPlaceholder": "Coloque qualquer informação adicional aqui para ajudar as pessoas a responder",
         "ErrorTitle": "Pergunta obrigatória",
-        "Placeholder": "espaço reservado",
-        "AreYouSure": "Tem certeza?"
+        "Placeholder": "Instruções de escrita",
+        "AreYouSure": "Tem certeza?",
+        "ShortAnswer": "Escreva uma resposta curta"
     },
     "experience": {
         "NewExperience": "Nova experiência",

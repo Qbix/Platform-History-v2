@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Πληκτρολογήστε την ερώτησή σας",
         "ContentPlaceholder": "Βάλτε οποιεσδήποτε πρόσθετες πληροφορίες εδώ για να βοηθήσετε τους ανθρώπους να απαντήσουν",
         "ErrorTitle": "Απαιτείται ερώτηση",
-        "Placeholder": "Placeholder",
-        "AreYouSure": "Είσαι σίγουρος?"
+        "Placeholder": "Γράψτε Οδηγίες",
+        "AreYouSure": "Είσαι σίγουρος?",
+        "ShortAnswer": "Γράψε μια σύντομη απάντηση"
     },
     "experience": {
         "NewExperience": "Νέα εμπειρία",

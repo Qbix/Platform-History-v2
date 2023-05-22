@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Въведете въпроса си",
         "ContentPlaceholder": "Поставете допълнителна информация тук, за да помогнете на хората да отговорят",
         "ErrorTitle": "Задължителен въпрос",
-        "Placeholder": "Заместител",
-        "AreYouSure": "Сигурен ли си?"
+        "Placeholder": "Напишете инструкции",
+        "AreYouSure": "Сигурен ли си?",
+        "ShortAnswer": "Напишете кратък отговор"
     },
     "experience": {
         "NewExperience": "Ново преживяване",

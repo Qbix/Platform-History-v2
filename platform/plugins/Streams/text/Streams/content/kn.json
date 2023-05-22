@@ -433,8 +433,9 @@
         "TitlePlaceholder": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ",
         "ContentPlaceholder": "ಜನರು ಉತ್ತರಿಸಲು ಸಹಾಯ ಮಾಡಲು ಯಾವುದೇ ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಹಾಕಿ",
         "ErrorTitle": "ಪ್ರಶ್ನೆ ಅಗತ್ಯವಿದೆ",
-        "Placeholder": "ಪ್ಲೇಸ್‌ಹೋಲ್ಡರ್",
-        "AreYouSure": "ನೀವು ಖಚಿತವಾಗಿರುವಿರಾ?"
+        "Placeholder": "ಸೂಚನೆಗಳನ್ನು ಬರೆಯಿರಿ",
+        "AreYouSure": "ನೀವು ಖಚಿತವಾಗಿರುವಿರಾ?",
+        "ShortAnswer": "ಸಣ್ಣ ಉತ್ತರವನ್ನು ಬರೆಯಿರಿ"
     },
     "experience": {
         "NewExperience": "ಹೊಸ ಅನುಭವ",

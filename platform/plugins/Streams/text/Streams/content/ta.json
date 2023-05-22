@@ -433,8 +433,9 @@
         "TitlePlaceholder": "உங்கள் கேள்வியை உள்ளிடவும்",
         "ContentPlaceholder": "மக்கள் பதிலளிக்க உதவுவதற்கு ஏதேனும் கூடுதல் தகவலை இங்கே வைக்கவும்",
         "ErrorTitle": "கேள்வி தேவை",
-        "Placeholder": "ப்ளேஸ்ஹோல்டர்",
-        "AreYouSure": "நீ சொல்வது உறுதியா?"
+        "Placeholder": "வழிமுறைகளை எழுதுங்கள்",
+        "AreYouSure": "நீ சொல்வது உறுதியா?",
+        "ShortAnswer": "சுருக்கமாக பதில் எழுதவும்"
     },
     "experience": {
         "NewExperience": "புதிய அனுபவம்",

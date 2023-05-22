@@ -433,8 +433,9 @@
         "TitlePlaceholder": "I-type ang iyong tanong",
         "ContentPlaceholder": "Maglagay ng anumang karagdagang impormasyon dito upang matulungan ang mga tao na sumagot",
         "ErrorTitle": "Kailangang tanong",
-        "Placeholder": "Placeholder",
-        "AreYouSure": "Sigurado ka ba?"
+        "Placeholder": "Sumulat ng Mga Tagubilin",
+        "AreYouSure": "Sigurado ka ba?",
+        "ShortAnswer": "Sumulat ng maikling sagot"
     },
     "experience": {
         "NewExperience": "Bagong karanasan",

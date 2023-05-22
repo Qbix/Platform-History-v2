@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Indtast dit spørgsmål",
         "ContentPlaceholder": "Læg yderligere oplysninger her for at hjælpe folk med at svare",
         "ErrorTitle": "Spørgsmål påkrævet",
-        "Placeholder": "Pladsholder",
-        "AreYouSure": "Er du sikker?"
+        "Placeholder": "Skriv instruktioner",
+        "AreYouSure": "Er du sikker?",
+        "ShortAnswer": "Skriv et kort svar"
     },
     "experience": {
         "NewExperience": "Ny oplevelse",

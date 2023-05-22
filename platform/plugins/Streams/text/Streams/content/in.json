@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Ketik pertanyaan Anda",
         "ContentPlaceholder": "Masukkan informasi tambahan apa pun di sini untuk membantu orang menjawab",
         "ErrorTitle": "Pertanyaan diperlukan",
-        "Placeholder": "Placeholder",
-        "AreYouSure": "Apa kamu yakin?"
+        "Placeholder": "Tulis Instruksi",
+        "AreYouSure": "Apa kamu yakin?",
+        "ShortAnswer": "Tulis jawaban singkat"
     },
     "experience": {
         "NewExperience": "Pengalaman baru",

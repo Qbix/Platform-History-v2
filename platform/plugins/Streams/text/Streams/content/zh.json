@@ -433,8 +433,9 @@
         "TitlePlaceholder": "输入您的问题",
         "ContentPlaceholder": "将任何其他信息放在这里以帮助人们回答",
         "ErrorTitle": "需要提问",
-        "Placeholder": "占位符",
-        "AreYouSure": "你确定吗？"
+        "Placeholder": "写指令",
+        "AreYouSure": "你确定吗？",
+        "ShortAnswer": "写一个简短的答案"
     },
     "experience": {
         "NewExperience": "新体验",

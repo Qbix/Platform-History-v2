@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Introduceți întrebarea dvs",
         "ContentPlaceholder": "Pune orice informații suplimentare aici pentru a ajuta oamenii să răspundă",
         "ErrorTitle": "Întrebare necesară",
-        "Placeholder": "Substituent",
-        "AreYouSure": "Esti sigur?"
+        "Placeholder": "Scrieți instrucțiuni",
+        "AreYouSure": "Esti sigur?",
+        "ShortAnswer": "Scrieți un răspuns scurt"
     },
     "experience": {
         "NewExperience": "Experienta noua",

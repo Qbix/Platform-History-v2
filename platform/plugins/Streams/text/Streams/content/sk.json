@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Napíšte svoju otázku",
         "ContentPlaceholder": "Sem zadajte akékoľvek ďalšie informácie, ktoré ľuďom pomôžu odpovedať",
         "ErrorTitle": "Vyžaduje sa otázka",
-        "Placeholder": "Zástupný symbol",
-        "AreYouSure": "Si si istý?"
+        "Placeholder": "Napíšte Pokyny",
+        "AreYouSure": "Si si istý?",
+        "ShortAnswer": "Napíšte krátku odpoveď"
     },
     "experience": {
         "NewExperience": "Nová skúsenosť",

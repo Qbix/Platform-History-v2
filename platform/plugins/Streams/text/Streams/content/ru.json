@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Введите свой вопрос",
         "ContentPlaceholder": "Поместите здесь любую дополнительную информацию, чтобы помочь людям ответить",
         "ErrorTitle": "Требуется вопрос",
-        "Placeholder": "Заполнитель",
-        "AreYouSure": "Вы уверены?"
+        "Placeholder": "Написать инструкции",
+        "AreYouSure": "Вы уверены?",
+        "ShortAnswer": "Напишите краткий ответ"
     },
     "experience": {
         "NewExperience": "Новый опыт",

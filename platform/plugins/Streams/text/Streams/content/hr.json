@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Upišite svoje pitanje",
         "ContentPlaceholder": "Ovdje stavite sve dodatne informacije kako biste pomogli ljudima da odgovore",
         "ErrorTitle": "Pitanje obavezno",
-        "Placeholder": "Rezerviranog mjesta",
-        "AreYouSure": "Jesi li siguran?"
+        "Placeholder": "Napiši upute",
+        "AreYouSure": "Jesi li siguran?",
+        "ShortAnswer": "Napiši kratak odgovor"
     },
     "experience": {
         "NewExperience": "Novo iskustvo",

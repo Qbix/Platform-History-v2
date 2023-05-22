@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Kirjoita kysymyksesi",
         "ContentPlaceholder": "Laita tähän lisätietoa auttaaksesi ihmisiä vastaamaan",
         "ErrorTitle": "Kysymys vaaditaan",
-        "Placeholder": "Paikanpitäjä",
-        "AreYouSure": "Oletko varma?"
+        "Placeholder": "Kirjoita ohjeet",
+        "AreYouSure": "Oletko varma?",
+        "ShortAnswer": "Kirjoita lyhyt vastaus"
     },
     "experience": {
         "NewExperience": "Uusi kokemus",

@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Sisestage oma küsimus",
         "ContentPlaceholder": "Pange siia lisateavet, et aidata inimestel vastata",
         "ErrorTitle": "Vajalik küsimus",
-        "Placeholder": "Kohatäide",
-        "AreYouSure": "Oled sa kindel?"
+        "Placeholder": "Kirjutage juhised",
+        "AreYouSure": "Oled sa kindel?",
+        "ShortAnswer": "Kirjutage lühike vastus"
     },
     "experience": {
         "NewExperience": "Uus kogemus",

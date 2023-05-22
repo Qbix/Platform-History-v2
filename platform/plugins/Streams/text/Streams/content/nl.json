@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Typ uw vraag",
         "ContentPlaceholder": "Plaats hier aanvullende informatie om mensen te helpen antwoorden",
         "ErrorTitle": "Vraag vereist",
-        "Placeholder": "Tijdelijke aanduiding",
-        "AreYouSure": "Weet je het zeker?"
+        "Placeholder": "Schrijf instructies",
+        "AreYouSure": "Weet je het zeker?",
+        "ShortAnswer": "Schrijf een kort antwoord"
     },
     "experience": {
         "NewExperience": "Nieuwe ervaring",

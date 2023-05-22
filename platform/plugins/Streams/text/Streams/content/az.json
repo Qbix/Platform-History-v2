@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Sualınızı yazın",
         "ContentPlaceholder": "İnsanlara cavab verməyə kömək etmək üçün hər hansı əlavə məlumatı bura qoyun",
         "ErrorTitle": "Sual tələb olunur",
-        "Placeholder": "Yer tutucu",
-        "AreYouSure": "Sən əminsən?"
+        "Placeholder": "Təlimatları yazın",
+        "AreYouSure": "Sən əminsən?",
+        "ShortAnswer": "Qısa cavab yazın"
     },
     "experience": {
         "NewExperience": "Yeni Təcrübə",

@@ -433,8 +433,9 @@
         "TitlePlaceholder": "ጥያቄዎን ይተይቡ",
         "ContentPlaceholder": "ሰዎች እንዲመልሱ ለመርዳት ማንኛውንም ተጨማሪ መረጃ እዚህ ያስቀምጡ",
         "ErrorTitle": "ጥያቄ ያስፈልጋል",
-        "Placeholder": "ቦታ ያዥ",
-        "AreYouSure": "ኧረ"
+        "Placeholder": "መመሪያዎችን ጻፍ",
+        "AreYouSure": "ኧረ",
+        "ShortAnswer": "አጭር መልስ ጻፍ"
     },
     "experience": {
         "NewExperience": "አዲስ ልምድ",

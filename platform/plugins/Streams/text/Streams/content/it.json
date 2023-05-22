@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Digita la tua domanda",
         "ContentPlaceholder": "Inserisci qui eventuali informazioni aggiuntive per aiutare le persone a rispondere",
         "ErrorTitle": "Domanda richiesta",
-        "Placeholder": "Segnaposto",
-        "AreYouSure": "Sei sicuro?"
+        "Placeholder": "Scrivi istruzioni",
+        "AreYouSure": "Sei sicuro?",
+        "ShortAnswer": "Scrivi una breve risposta"
     },
     "experience": {
         "NewExperience": "Nuova esperienza",

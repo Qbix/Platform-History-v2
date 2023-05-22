@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Escriviu la vostra pregunta",
         "ContentPlaceholder": "Posa aquí qualsevol informació addicional per ajudar la gent a respondre",
         "ErrorTitle": "Pregunta necessària",
-        "Placeholder": "Posseïdor del lloc",
-        "AreYouSure": "Estàs segur?"
+        "Placeholder": "Escriu instruccions",
+        "AreYouSure": "Estàs segur?",
+        "ShortAnswer": "Escriu una resposta breu"
     },
     "experience": {
         "NewExperience": "Nova experiència",

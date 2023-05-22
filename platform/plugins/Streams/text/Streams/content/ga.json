@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Clóscríobh do cheist",
         "ContentPlaceholder": "Cuir aon eolas breise anseo chun cabhrú le daoine freagra a thabhairt",
         "ErrorTitle": "Ceist ag teastáil",
-        "Placeholder": "Áitsealbhóir",
-        "AreYouSure": "An bhfuil tú cinnte?"
+        "Placeholder": "Scríobh Treoracha",
+        "AreYouSure": "An bhfuil tú cinnte?",
+        "ShortAnswer": "Scríobh freagra gairid"
     },
     "experience": {
         "NewExperience": "Taithí Nua",

@@ -433,8 +433,9 @@
         "TitlePlaceholder": "اپنا سوال ٹائپ کریں۔",
         "ContentPlaceholder": "لوگوں کو جواب دینے میں مدد کے لیے کوئی بھی اضافی معلومات یہاں رکھیں",
         "ErrorTitle": "سوال درکار ہے۔",
-        "Placeholder": "پلیس ہولڈر",
-        "AreYouSure": "کیا تمہیں یقین ہے؟"
+        "Placeholder": "ہدایات لکھیں۔",
+        "AreYouSure": "کیا تمہیں یقین ہے؟",
+        "ShortAnswer": "مختصر جواب لکھیں۔"
     },
     "experience": {
         "NewExperience": "نیا تجربہ",

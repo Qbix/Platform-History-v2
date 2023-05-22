@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Vnesite svoje vprašanje",
         "ContentPlaceholder": "Tukaj vnesite morebitne dodatne informacije, da bodo ljudje lažje odgovorili",
         "ErrorTitle": "Zahtevano vprašanje",
-        "Placeholder": "Rezervirano mesto",
-        "AreYouSure": "Ali si prepričan?"
+        "Placeholder": "Napiši navodila",
+        "AreYouSure": "Ali si prepričan?",
+        "ShortAnswer": "Napišite kratek odgovor"
     },
     "experience": {
         "NewExperience": "Nova izkušnja",

@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Увядзіце пытанне",
         "ContentPlaceholder": "Дадайце тут любую дадатковую інфармацыю, каб дапамагчы людзям адказаць",
         "ErrorTitle": "Пытанне патрабуецца",
-        "Placeholder": "Запаўняльнік",
-        "AreYouSure": "Вы ўпэўнены?"
+        "Placeholder": "Напісаць інструкцыі",
+        "AreYouSure": "Вы ўпэўнены?",
+        "ShortAnswer": "Напішыце кароткі адказ"
     },
     "experience": {
         "NewExperience": "Новы вопыт",

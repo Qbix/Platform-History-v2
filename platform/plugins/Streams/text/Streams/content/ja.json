@@ -433,8 +433,9 @@
         "TitlePlaceholder": "質問を入力してください",
         "ContentPlaceholder": "人々が回答できるように、ここに追加情報を入力してください",
         "ErrorTitle": "質問必須",
-        "Placeholder": "プレースホルダ",
-        "AreYouSure": "本気ですか？"
+        "Placeholder": "指示を書く",
+        "AreYouSure": "本気ですか？",
+        "ShortAnswer": "短い答えを書いてください"
     },
     "experience": {
         "NewExperience": "新しい経験",

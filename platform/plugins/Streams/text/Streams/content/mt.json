@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Ittajpja l-mistoqsija tiegħek",
         "ContentPlaceholder": "Poġġi kwalunkwe informazzjoni addizzjonali hawn biex tgħin lin-nies iwieġbu",
         "ErrorTitle": "Mistoqsija meħtieġa",
-        "Placeholder": "Placeholder",
-        "AreYouSure": "Żgur?"
+        "Placeholder": "Ikteb Istruzzjonijiet",
+        "AreYouSure": "Żgur?",
+        "ShortAnswer": "Ikteb tweġiba qasira"
     },
     "experience": {
         "NewExperience": "Esperjenza Ġdida",

@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Sláðu inn spurninguna þína",
         "ContentPlaceholder": "Settu allar viðbótarupplýsingar hér til að hjálpa fólki að svara",
         "ErrorTitle": "Spurning nauðsynleg",
-        "Placeholder": "Staðfestir",
-        "AreYouSure": "Ertu viss?"
+        "Placeholder": "Skrifaðu leiðbeiningar",
+        "AreYouSure": "Ertu viss?",
+        "ShortAnswer": "Skrifaðu stutt svar"
     },
     "experience": {
         "NewExperience": "Ný upplifun",

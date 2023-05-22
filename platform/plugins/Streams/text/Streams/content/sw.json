@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Andika swali lako",
         "ContentPlaceholder": "Weka maelezo yoyote ya ziada hapa ili kuwasaidia watu kujibu",
         "ErrorTitle": "Swali linahitajika",
-        "Placeholder": "Kishika nafasi",
-        "AreYouSure": "Una uhakika?"
+        "Placeholder": "Andika Maagizo",
+        "AreYouSure": "Una uhakika?",
+        "ShortAnswer": "Andika jibu fupi"
     },
     "experience": {
         "NewExperience": "Uzoefu Mpya",

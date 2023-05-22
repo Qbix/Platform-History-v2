@@ -433,8 +433,9 @@
         "TitlePlaceholder": "سوال خود را تایپ کنید",
         "ContentPlaceholder": "هر گونه اطلاعات اضافی را در اینجا قرار دهید تا به افراد کمک کند پاسخ دهند",
         "ErrorTitle": "سوال مورد نیاز",
-        "Placeholder": "جای جای",
-        "AreYouSure": "مطمئنی؟"
+        "Placeholder": "دستورالعمل ها را بنویسید",
+        "AreYouSure": "مطمئنی؟",
+        "ShortAnswer": "یک پاسخ کوتاه بنویسید"
     },
     "experience": {
         "NewExperience": "تجربه جدید",

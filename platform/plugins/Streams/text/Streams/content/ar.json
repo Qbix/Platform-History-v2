@@ -433,8 +433,9 @@
         "TitlePlaceholder": "اكتب سؤالك",
         "ContentPlaceholder": "ضع أي معلومات إضافية هنا لمساعدة الناس على الإجابة",
         "ErrorTitle": "السؤال مطلوب",
-        "Placeholder": "عنصر نائب",
-        "AreYouSure": "هل أنت متأكد؟"
+        "Placeholder": "اكتب التعليمات",
+        "AreYouSure": "هل أنت متأكد؟",
+        "ShortAnswer": "اكتب إجابة قصيرة"
     },
     "experience": {
         "NewExperience": "تجربة جديدة",

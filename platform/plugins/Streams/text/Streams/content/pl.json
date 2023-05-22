@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Wpisz swoje pytanie",
         "ContentPlaceholder": "Umieść tutaj wszelkie dodatkowe informacje, aby pomóc innym odpowiedzieć",
         "ErrorTitle": "Wymagane pytanie",
-        "Placeholder": "Symbol zastępczy",
-        "AreYouSure": "Jesteś pewny?"
+        "Placeholder": "Napisz instrukcje",
+        "AreYouSure": "Jesteś pewny?",
+        "ShortAnswer": "Napisz krótką odpowiedź"
     },
     "experience": {
         "NewExperience": "Nowe doświadczenie",

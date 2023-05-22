@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Nhập câu hỏi của bạn",
         "ContentPlaceholder": "Đặt bất kỳ thông tin bổ sung ở đây để giúp mọi người trả lời",
         "ErrorTitle": "câu hỏi bắt buộc",
-        "Placeholder": "Trình giữ chỗ",
-        "AreYouSure": "Bạn có chắc không?"
+        "Placeholder": "Viết hướng dẫn",
+        "AreYouSure": "Bạn có chắc không?",
+        "ShortAnswer": "Viết một câu trả lời ngắn"
     },
     "experience": {
         "NewExperience": "Kinh nghiệm mới",

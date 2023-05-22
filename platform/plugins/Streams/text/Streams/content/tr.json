@@ -433,8 +433,9 @@
         "TitlePlaceholder": "sorunuzu yazın",
         "ContentPlaceholder": "İnsanların yanıt vermesine yardımcı olmak için ek bilgileri buraya ekleyin",
         "ErrorTitle": "Soru gerekli",
-        "Placeholder": "Yer tutucu",
-        "AreYouSure": "Emin misin?"
+        "Placeholder": "Talimatları Yaz",
+        "AreYouSure": "Emin misin?",
+        "ShortAnswer": "kısa bir cevap yaz"
     },
     "experience": {
         "NewExperience": "Yeni deneyim",

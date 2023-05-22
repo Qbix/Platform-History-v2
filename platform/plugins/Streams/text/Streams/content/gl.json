@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Escribe a túa pregunta",
         "ContentPlaceholder": "Pon aquí calquera información adicional para axudar á xente a responder",
         "ErrorTitle": "Pregunta necesaria",
-        "Placeholder": "Marcador de posición",
-        "AreYouSure": "Estás seguro?"
+        "Placeholder": "Escribe instrucións",
+        "AreYouSure": "Estás seguro?",
+        "ShortAnswer": "Escribe unha resposta curta"
     },
     "experience": {
         "NewExperience": "Nova experiencia",

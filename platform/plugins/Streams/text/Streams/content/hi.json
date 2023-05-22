@@ -433,8 +433,9 @@
         "TitlePlaceholder": "अपना प्रश्न टाइप करें",
         "ContentPlaceholder": "लोगों को जवाब देने में मदद करने के लिए यहां कोई अतिरिक्त जानकारी दें",
         "ErrorTitle": "प्रश्न आवश्यक है",
-        "Placeholder": "प्लेसहोल्डर",
-        "AreYouSure": "क्या आपको यकीन है?"
+        "Placeholder": "निर्देश लिखें",
+        "AreYouSure": "क्या आपको यकीन है?",
+        "ShortAnswer": "संक्षिप्त उत्तर लिखें"
     },
     "experience": {
         "NewExperience": "नया अनुभव",

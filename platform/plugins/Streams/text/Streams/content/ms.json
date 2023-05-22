@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Taip soalan anda",
         "ContentPlaceholder": "Letakkan sebarang maklumat tambahan di sini untuk membantu orang ramai menjawab",
         "ErrorTitle": "Soalan diperlukan",
-        "Placeholder": "Pemegang tempat",
-        "AreYouSure": "Adakah anda pasti?"
+        "Placeholder": "Tulis Arahan",
+        "AreYouSure": "Adakah anda pasti?",
+        "ShortAnswer": "Tulis jawapan ringkas"
     },
     "experience": {
         "NewExperience": "Pengalaman baru",

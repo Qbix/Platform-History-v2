@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Idatzi zure galdera",
         "ContentPlaceholder": "Jarri hemen informazio gehigarria jendeari erantzuten laguntzeko",
         "ErrorTitle": "Galdera behar da",
-        "Placeholder": "Leku-marka",
-        "AreYouSure": "Ziur zaude?"
+        "Placeholder": "Idatzi Jarraibideak",
+        "AreYouSure": "Ziur zaude?",
+        "ShortAnswer": "Idatzi erantzun labur bat"
     },
     "experience": {
         "NewExperience": "Esperientzia Berria",

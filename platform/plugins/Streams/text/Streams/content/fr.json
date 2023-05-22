@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Tapez votre question",
         "ContentPlaceholder": "Mettez toute information supplémentaire ici pour aider les gens à répondre",
         "ErrorTitle": "Question requise",
-        "Placeholder": "Espace réservé",
-        "AreYouSure": "Es-tu sûr?"
+        "Placeholder": "Instructions d&#39;écriture",
+        "AreYouSure": "Es-tu sûr?",
+        "ShortAnswer": "Rédigez une courte réponse"
     },
     "experience": {
         "NewExperience": "Nouvelle expérience",

@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Введіть своє запитання",
         "ContentPlaceholder": "Додайте будь-яку додаткову інформацію тут, щоб допомогти людям відповісти",
         "ErrorTitle": "Питання обов&#39;язкове",
-        "Placeholder": "Заповнювач",
-        "AreYouSure": "Ти впевнений?"
+        "Placeholder": "Напишіть інструкції",
+        "AreYouSure": "Ти впевнений?",
+        "ShortAnswer": "Напишіть коротку відповідь"
     },
     "experience": {
         "NewExperience": "Новий досвід",

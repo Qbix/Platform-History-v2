@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Írja be kérdését",
         "ContentPlaceholder": "Írjon ide minden további információt, hogy segítsen az embereknek válaszolni",
         "ErrorTitle": "Kérdés kötelező",
-        "Placeholder": "Helykitöltő",
-        "AreYouSure": "biztos vagy ebben?"
+        "Placeholder": "Írja meg az utasításokat",
+        "AreYouSure": "biztos vagy ebben?",
+        "ShortAnswer": "Írj egy rövid választ"
     },
     "experience": {
         "NewExperience": "Új tapasztalat",

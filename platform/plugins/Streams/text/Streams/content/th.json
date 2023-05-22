@@ -433,8 +433,9 @@
         "TitlePlaceholder": "พิมพ์คำถามของคุณ",
         "ContentPlaceholder": "ใส่ข้อมูลเพิ่มเติมที่นี่เพื่อช่วยให้ผู้คนตอบ",
         "ErrorTitle": "คำถามที่จำเป็น",
-        "Placeholder": "ตัวยึดตำแหน่ง",
-        "AreYouSure": "คุณแน่ใจไหม?"
+        "Placeholder": "เขียนคำแนะนำ",
+        "AreYouSure": "คุณแน่ใจไหม?",
+        "ShortAnswer": "เขียนคำตอบสั้นๆ"
     },
     "experience": {
         "NewExperience": "ประสบการณ์ใหม่",

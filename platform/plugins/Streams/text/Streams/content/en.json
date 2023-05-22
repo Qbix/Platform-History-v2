@@ -423,6 +423,7 @@
         "answerText": "Text",
         "HideUntilAnswered": "Hide until answered",
         "CantChangeAnswers": "Can't change answers",
+        "ShortAnswer": "Write a short answer",
         "FreeAnswer": "Write your answer here",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",
@@ -433,7 +434,7 @@
         "TitlePlaceholder": "Type your question",
         "ContentPlaceholder": "Put any additional information here to help people answer",
         "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder",
+        "Placeholder": "Write Instructions",
         "AreYouSure": "Are you sure?"
     },
     "experience": {

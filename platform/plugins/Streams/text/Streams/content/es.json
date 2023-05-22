@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Escriba su pregunta",
         "ContentPlaceholder": "Ponga cualquier información adicional aquí para ayudar a las personas a responder",
         "ErrorTitle": "Pregunta requerida",
-        "Placeholder": "Marcador de posición",
-        "AreYouSure": "¿Está seguro?"
+        "Placeholder": "escribir instrucciones",
+        "AreYouSure": "¿Está seguro?",
+        "ShortAnswer": "Escribe una respuesta corta"
     },
     "experience": {
         "NewExperience": "Nueva experiencia",

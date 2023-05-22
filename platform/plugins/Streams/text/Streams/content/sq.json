@@ -433,8 +433,9 @@
         "TitlePlaceholder": "Shkruani pyetjen tuaj",
         "ContentPlaceholder": "Vendos çdo informacion shtesë këtu për t&#39;i ndihmuar njerëzit të përgjigjen",
         "ErrorTitle": "Kërkohet pyetje",
-        "Placeholder": "Vendmbajtësi",
-        "AreYouSure": "A je i sigurt?"
+        "Placeholder": "Shkruani udhëzime",
+        "AreYouSure": "A je i sigurt?",
+        "ShortAnswer": "Shkruani një përgjigje të shkurtër"
     },
     "experience": {
         "NewExperience": "Përvojë e re",
