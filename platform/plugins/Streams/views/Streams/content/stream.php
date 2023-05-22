@@ -33,9 +33,6 @@
 		<div class='Streams_participants'>
 			<?php echo Q::tool('Streams/participants', @compact('stream'))?>
 		</div>
-		<div class='Streams_stream_content'>
-			<?php echo $stream->content ?>
-		</div>
 		<div class='Streams_stream_activity'>
 			<?php echo Q::tool('Streams/activity')?>
 		</div>
