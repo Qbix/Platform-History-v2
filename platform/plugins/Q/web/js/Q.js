@@ -12628,6 +12628,22 @@ Q.Visual = Q.Pointer = {
 		return rect;
 	},
 	/**
+	 * Call this function to find out whether a click on a link
+	 * should typically result in opening a new window on this
+	 * operating system. Since the choice of tab or window is
+	 * controlled by the browser preferences, this function just
+	 * returns a boolean in either case so you can do window.open().
+	 * @method shouldOpenInNewWindow
+	 * @static
+	 * @param {Event} event
+	 * @return {Boolean}
+	 */
+	shouldOpenInNewWindow: function (event) {
+		return event.shiftKey
+			|| (Q.info.platform === 'windows' && event.ctrlKey)
+			|| (Q.info.platform === 'mac' && event.metaKey);
+	},
+	/**
 	 * Sets an observer to wait for an element become visible.
 	 * @static
 	 * @method waitUntilVisible
