@@ -3665,7 +3665,7 @@ abstract class Streams extends Base_Streams
 	{
 		$options = Q::take($options, array(
 			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId', 'html',
-			'addLabel', 'addMyLabel', 'name', 'appUrl', 'alwaysSend', 'skipAccess',
+			'addLabel', 'addMyLabel', 'name', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
 			'templateDir', 'icon'
 		));
 		
@@ -3869,7 +3869,7 @@ abstract class Streams extends Base_Streams
 
 		$asUserDisplayName = Streams::displayName($asUser);
 		
-		$displayName = Q::ifset($options, 'name', null);
+		$displayName = Q::ifset($options, 'displayName', Q::ifset($options, 'name', null));
 		$icon = Q::ifset($options, 'icon', null);
 
 		foreach ($raw_userIds as $userId) {
