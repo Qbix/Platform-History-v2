@@ -1285,7 +1285,7 @@ class Q_Utils
 			$server = "$url/$handler";
 		}
 
-		$response = self::post($server, self::sign($data), null, true);
+		$response = self::post($server, self::sign($data), null, true, null, Q_UTILS_CONNECTION_TIMEOUT);
 		if (empty($response)) {
 			throw new Q_Exception("Utils::queryInternal: not sent");
 		}
