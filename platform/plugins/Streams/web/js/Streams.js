@@ -349,20 +349,25 @@ Streams.define = function (type, ctor, methods) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+ * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ *  Setting it to false skips appending "/size".
+ *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively.
  * @return {String} the url
  */
-Streams.iconUrl = function(icon, basename) {
+Streams.iconUrl = function(icon, size) {
 	if (!icon) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if ((basename === true) // for backward compatibility
-	|| (!basename && basename !== false)) {
-		basename = '40';
+	if ((size === true) // for backward compatibility
+	|| (!size && size !== false)) {
+		size = '40';
 	}
-	basename = (String(basename).match(/\.\w+$/g)) ? basename : basename+'.png';
-	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
+	if (size === 'largestWidth' || size === 'largestHeight') {
+		size = Q.largestSize(Streams.image.sizes, size === 'largestHeight');
+	}
+	size = (String(size).match(/\.\w+$/g)) ? size : size+'.png';
+	icon = icon.match(/\.\w+$/g) ? icon : icon + (size ? '/' + size : '');
 	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? Q.url(src)
@@ -2780,10 +2785,17 @@ Sp.retainWith = Streams.retainWith;
 /**
  * Calculate the url of a stream's icon
  * @method iconUrl
- * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+ * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ *  Setting it to false skips appending "/size".
+ *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively,
+ *  and in this method we use getAttribute("sizes") before falling back to the default Streams.icon.sizes
  * @return {String} the url
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
+	if (size === 'largestWidth' || size === 'largestHeight') {
+		var sizes = this.getAttribute('sizes') || Streams.image.sizes;
+		size = Q.largestSize(sizes, size === 'largestHeight');
+	}
 	return Streams.iconUrl(this.fields.icon, size);
 };
 
@@ -5120,13 +5132,14 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 /**
  * Get the url of the user icon from a Streams.Avatar
  * @method
- * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+  * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ *  Setting it to false skips appending "/size".
  * @return {String} the url
  */
-Ap.iconUrl = function _Avatar_prototype_iconUrl (basename) {
+Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
 	return Users.iconUrl(this.icon.interpolate({
 		userId: this.publisherId.splitId()
-	}), basename);
+	}), size);
 };
 
 /**

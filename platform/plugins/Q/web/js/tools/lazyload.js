@@ -152,7 +152,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!beingInsertedIntoDOM) {
 					return true; // too late anyway, browser will load image
 				}
-				if (img.hasClass('Q_lazy_load') || img.hasClass('Q_lazy_loaded')) {
+				if (img.hasClass('Q_lazy_load')
+				|| img.hasClass('Q_lazy_loaded')
+				|| img.hasClass('Q_no_lazyload')) {
 					return true; // this was already processed by lazy-loading
 				}
 				var src = img.getAttribute('src');

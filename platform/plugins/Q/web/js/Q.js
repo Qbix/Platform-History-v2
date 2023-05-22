@@ -1528,6 +1528,41 @@ Q.firstKey = function _Q_firstKey(container, options) {
 };
 
 /**
+ * Find an index with the largest width or height
+ * @param {Object|Array} sizes If an object, it will use Object.keys()
+ * @param {Boolean} [useHeight=false] by default, uses width
+ * @returns 
+ */
+Q.largestSize = function (sizes, useHeight) {
+	var size, w, h, wMax = 0, hMax = 0, parts, largestIndex;
+	if (!Q.isArrayLike(sizes)) {
+		sizes = Object.keys(sizes);
+	}
+	for (var i = 0; i<sizes.length; ++i) {
+		size = sizes[i];
+		if (!size || size === 'x') {
+			continue;
+		}
+		parts = size.split('x');
+		if (parts.length == 0) {
+			continue;
+		}
+		w = parseInt(parts[0] || parts[1]);
+		h = parseInt(parts[1] || parts[0]);
+		if (useHeight && h > hMax) {
+			wMax = w;
+			hMax = h;
+			largestIndex = i;
+		} else if (w > wMax) {
+			wMax = w;
+			hMax = h;
+			largestIndex = i;
+		}
+	}
+	return largestIndex !== undefined ? sizes[largestIndex] : null;
+};
+
+/**
  * Returns a container with the items in the first parameter that are not in the others
  * @static
  * @method diff
@@ -10144,7 +10179,7 @@ Q.loadUrl.loading = {};
  *	Note: this will still not supress loading of external websites done with other means, such as window.location
  *  @param {Object} [options.fields] optional fields to pass with any method other than "get"
  *  @param {String|Function} [options.callback] if a string, adds a '&Q.callback='+encodeURIComponent(callback) to the querystring. If a function, this is the callback.
- * @param {String} [options.loadExtras="all"] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
+ *  @param {String} [options.loadExtras="all"] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  *  @param {String} [options.target] the name of a window or iframe to use as the target. In this case callables is treated as a url.
  *  @param {String|Array} [options.slotNames] a comma-separated list of slot names, or an array of slot names
  *  @param {boolean} [options.quiet] defaults to false. If true, allows visual indications that the request is going to take place.

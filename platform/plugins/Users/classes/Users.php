@@ -39,7 +39,7 @@ abstract class Users extends Base_Users
 	 * @method isCustomIcon
 	 * @static
 	 * @param {String} $icon
-	 * @param {Boolean} [$unlessImported=false] - If true, don't mean imported icon as custom
+	 * @param {Boolean} [$unlessImported=false] - If true, don't treat imported icon as custom
 	 * @return {boolean}
 	 */
 	static function isCustomIcon ($icon, $unlessImported=false) {

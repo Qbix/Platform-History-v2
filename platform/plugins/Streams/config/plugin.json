@@ -180,6 +180,7 @@
 				"observersMax": 100,
 				"getMessagesLimit": 100,
 				"getParticipantsLimit": 100,
+				"ephemerals": {},
 				"messages": {
 					"*": {
 						"subject": ["Streams/content", ["notifications", "*"]],

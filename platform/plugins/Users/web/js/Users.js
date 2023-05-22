@@ -1201,7 +1201,9 @@
 	/**
 	 * Calculate the url of a user's icon
 	 * @method
-	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+	 * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+	 *  Setting it to false skips appending "/size".
+	 *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively.
 	 * @return {String} the url
 	 */
 	Users.User.prototype.iconUrl = function Users_User_iconUrl(size) {
@@ -1216,20 +1218,25 @@
 	 * Calculate the url of a user's icon
 	 * @method
 	 * @param {String} icon the value of the user's "icon" field
-	 * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+ 	 * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+	 *  Setting it to false skips appending "/size".
+ 	 *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively.
 	 * @return {String} the url
 	 */
-	Users.iconUrl = function Users_iconUrl(icon, basename) {
+	Users.iconUrl = function Users_iconUrl(icon, size) {
 		if (!icon) {
 			console.warn("Users.iconUrl: icon is empty");
 			return '';
 		}
-		if ((basename === true) // for backward compatibility
-		|| (!basename && basename !== false)) {
-			basename = '40';
+		if ((size === true) // for backward compatibility
+		|| (!size && size !== false)) {
+			size = '40';
 		}
-		basename = (String(basename).indexOf('.') >= 0) ? basename : basename + '.png';
-		var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
+		if (size === 'largestWidth' || size === 'largestHeight') {
+			size = Q.largestSize(Streams.image.sizes, size === 'largestHeight');
+		}
+		size = (String(size).indexOf('.') >= 0) ? size : size + '.png';
+		var src = Q.interpolateUrl(icon + (size ? '/' + size : ''));
 		return src.isUrl() || icon.substr(0, 2) === '{{'
 			? Q.url(src)
 			: Q.url('{{Users}}/img/icons/' + src);
@@ -2912,7 +2919,7 @@
 	/**
 	 * Calculate the url of a label's icon
 	 * @method
-	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/size"
 	 * @return {String} the url
 	 */
 	Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
