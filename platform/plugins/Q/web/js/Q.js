@@ -3966,7 +3966,8 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
- *  This function also contains Q.Events called onCalled, onResult and onExecuted.
+ *  The promise resolves with the "this" object returned in the getter, or rejects on any errors.
+ *  This wrapper function also contains Q.Events called onCalled, onResult and onExecuted.
  */
 Q.getter = function _Q_getter(original, options) {
 
