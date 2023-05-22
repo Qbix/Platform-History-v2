@@ -897,7 +897,7 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
+	 * @param {array} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @return {string|false} The response, or false if not received
@@ -923,7 +923,7 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
+	 * @param {array} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @return {string|false} The response, or false if not received
 	 *
@@ -947,7 +947,7 @@ class Q_Utils
 	 *  This can also be an array of ($url, $ip) to send the request
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
+	 * @param {array} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @return {string|false} The response, or false if not received
@@ -1008,7 +1008,7 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
+	 * @param {array} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
@@ -1123,7 +1123,7 @@ class Q_Utils
 			}
 			$header = implode("\r\n", $headers);
 		} else {
-			$headers = explode("\r\n", $header);
+			$header = explode("\r\n", $header);
 		}
 		if (function_exists('curl_init')) {
 			// Use CURL if installed...
@@ -1285,10 +1285,7 @@ class Q_Utils
 			$server = "$url/$handler";
 		}
 
-		$response = self::post(
-			$server, self::sign($data), null, true, null, 
-			Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT
-		);
+		$response = self::post($server, self::sign($data), null, true);
 		if (empty($response)) {
 			throw new Q_Exception("Utils::queryInternal: not sent");
 		}
