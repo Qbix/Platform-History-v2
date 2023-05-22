@@ -159,7 +159,7 @@ Streams.READ_LEVEL = {
  * @final
  */
 /**
- * Can update properties of relations directly, and unrelate
+ * Can update weights and relations directly, and unrelate
  * @property WRITE_LEVEL.relations
  * @type integer
  * @default 25
@@ -202,7 +202,7 @@ Streams.WRITE_LEVEL = {
 	'contribute':   18,		// can contribute to the stream (e.g. "join the stage")
 	'post':			20,		// can post messages which take effect immediately
 	'relate':       23,		// can relate other streams to this one
-	'relations':    25,		// can update properties of relations directly
+	'relations':    25,		// can update weights and relations directly
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream

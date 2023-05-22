@@ -136,7 +136,7 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can update properties of relations directly, and unrelate
+	 * Can update weights and properties of relations directly, and unrelate
 	 * @property $WRITE_LEVEL['relations']
 	 * @type integer
 	 * @default 25
