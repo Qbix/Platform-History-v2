@@ -141,5 +141,8 @@
         "inHour": "per {{h}} val",
         "inHours": "per {{h}} val",
         "inUnderMinute": "mažiau nei per 1 minutę"
+    },
+    "browser": {
+        "insecureContext": "Kad tai veiktų, turite naršyti saugiame kontekste"
     }
 }

@@ -141,5 +141,8 @@
         "inHour": "{{h}} saat içinde",
         "inHours": "{{h}} saat içinde",
         "inUnderMinute": "1 dakikanın altında"
+    },
+    "browser": {
+        "insecureContext": "Bunun çalışması için güvenli bir bağlamda göz atmanız gerekir"
     }
 }

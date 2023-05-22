@@ -143,5 +143,8 @@
         "decades": "tientallen jaren",
         "century": "eeuw",
         "centuries": "eeuwen"
+    },
+    "browser": {
+        "insecureContext": "U moet in een veilige context bladeren om dit te laten werken"
     }
 }

@@ -141,5 +141,8 @@
         "inHour": "{{h}} órán belül",
         "inHours": "{{h}} órán belül",
         "inUnderMinute": "1 perc alatt"
+    },
+    "browser": {
+        "insecureContext": "Ahhoz, hogy ez működjön, biztonságos környezetben kell böngésznie"
     }
 }

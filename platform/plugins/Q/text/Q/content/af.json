@@ -143,5 +143,8 @@
         "decades": "dekades",
         "century": "eeu",
         "centuries": "eeue"
+    },
+    "browser": {
+        "insecureContext": "Jy moet in &#39;n veilige konteks blaai om dit te werk"
     }
 }

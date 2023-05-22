@@ -141,5 +141,8 @@
         "inHour": "čez {{h}} uro",
         "inHours": "čez {{h}} ur",
         "inUnderMinute": "v manj kot 1 minuti"
+    },
+    "browser": {
+        "insecureContext": "Da bo to delovalo, morate brskati v varnem kontekstu"
     }
 }

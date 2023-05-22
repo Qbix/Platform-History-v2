@@ -141,5 +141,8 @@
         "inHour": "ndani ya {{h}} saa",
         "inHours": "ndani ya saa {{h}}",
         "inUnderMinute": "chini ya dakika 1"
+    },
+    "browser": {
+        "insecureContext": "Unahitaji kuvinjari katika muktadha salama ili hii ifanye kazi"
     }
 }

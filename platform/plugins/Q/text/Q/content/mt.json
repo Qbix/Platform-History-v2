@@ -141,5 +141,8 @@
         "inHour": "fi {{h}} siegħa",
         "inHours": "fi {{h}} sigħat",
         "inUnderMinute": "f&#39;inqas minn minuta"
+    },
+    "browser": {
+        "insecureContext": "Ikollok bżonn tfittex f&#39;kuntest sigur biex dan jaħdem"
     }
 }

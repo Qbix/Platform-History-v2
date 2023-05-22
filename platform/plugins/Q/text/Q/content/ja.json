@@ -141,5 +141,8 @@
         "inHour": "{{h}}時間で",
         "inHours": "{{h}}時間で",
         "inUnderMinute": "1分以内に"
+    },
+    "browser": {
+        "insecureContext": "これを機能させるには、安全なコンテキストで参照する必要があります"
     }
 }

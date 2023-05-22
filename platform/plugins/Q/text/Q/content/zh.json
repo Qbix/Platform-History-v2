@@ -143,5 +143,8 @@
         "decades": "几十年",
         "century": "世纪",
         "centuries": "世纪"
+    },
+    "browser": {
+        "insecureContext": "您需要在安全的上下文中浏览才能正常工作"
     }
 }

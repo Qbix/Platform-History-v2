@@ -143,5 +143,8 @@
         "decades": "عقود",
         "century": "قرن",
         "centuries": "قرون"
+    },
+    "browser": {
+        "insecureContext": "تحتاج إلى التصفح في سياق آمن حتى يعمل هذا"
     }
 }

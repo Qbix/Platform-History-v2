@@ -143,5 +143,8 @@
         "decades": "dècades",
         "century": "segle",
         "centuries": "segles"
+    },
+    "browser": {
+        "insecureContext": "Heu de navegar en un context segur perquè això funcioni"
     }
 }

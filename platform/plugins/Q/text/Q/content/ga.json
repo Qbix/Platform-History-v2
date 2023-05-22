@@ -141,5 +141,8 @@
         "inHour": "i {{h}} uair",
         "inHours": "i {{h}} uair an chloig",
         "inUnderMinute": "i níos lú ná 1 nóiméad"
+    },
+    "browser": {
+        "insecureContext": "Ní mór duit brabhsáil i gcomhthéacs slán le go n-oibreoidh sé seo"
     }
 }

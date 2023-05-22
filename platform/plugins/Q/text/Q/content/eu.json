@@ -143,5 +143,8 @@
         "decades": "hamarkadak",
         "century": "mendean",
         "centuries": "mendeetan"
+    },
+    "browser": {
+        "insecureContext": "Testuinguru seguru batean arakatu behar duzu honek funtziona dezan"
     }
 }

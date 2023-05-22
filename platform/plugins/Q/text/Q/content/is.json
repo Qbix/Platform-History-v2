@@ -141,5 +141,8 @@
         "inHour": "eftir {{h}} klukkustund",
         "inHours": "eftir {{h}} klukkustundir",
         "inUnderMinute": "á innan við 1 mínútu"
+    },
+    "browser": {
+        "insecureContext": "Þú þarft að vafra í öruggu samhengi til að þetta virki"
     }
 }

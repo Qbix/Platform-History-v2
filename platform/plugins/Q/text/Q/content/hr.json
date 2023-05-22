@@ -143,5 +143,8 @@
         "decades": "desetljećima",
         "century": "stoljeća",
         "centuries": "stoljeća"
+    },
+    "browser": {
+        "insecureContext": "Morate pregledavati u sigurnom kontekstu da bi ovo funkcioniralo"
     }
 }

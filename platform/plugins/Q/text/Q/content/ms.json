@@ -141,5 +141,8 @@
         "inHour": "dalam {{h}} jam",
         "inHours": "dalam {{h}} jam",
         "inUnderMinute": "dalam masa kurang 1 minit"
+    },
+    "browser": {
+        "insecureContext": "Anda perlu menyemak imbas dalam konteks yang selamat untuk ini berfungsi"
     }
 }

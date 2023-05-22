@@ -143,5 +143,8 @@
         "decades": "mga dekada",
         "century": "siglo",
         "centuries": "mga siglo"
+    },
+    "browser": {
+        "insecureContext": "Kailangan mong mag-browse sa isang secure na konteksto para gumana ito"
     }
 }

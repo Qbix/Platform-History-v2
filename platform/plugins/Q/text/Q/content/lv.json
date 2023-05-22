@@ -141,5 +141,8 @@
         "inHour": "{{h}} stundā",
         "inHours": "pēc {{h}} stundām",
         "inUnderMinute": "mazāk nekā 1 minūtē"
+    },
+    "browser": {
+        "insecureContext": "Lai tas darbotos, jums ir jāveic pārlūkošana drošā kontekstā"
     }
 }

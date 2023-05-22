@@ -143,5 +143,8 @@
         "decades": "dekade",
         "century": "abad",
         "centuries": "abad"
+    },
+    "browser": {
+        "insecureContext": "Anda perlu menjelajah dalam konteks yang aman agar ini berfungsi"
     }
 }

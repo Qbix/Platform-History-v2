@@ -141,5 +141,8 @@
         "inHour": "tra {{h}} ora",
         "inHours": "tra {{h}} ore",
         "inUnderMinute": "in meno di 1 minuto"
+    },
+    "browser": {
+        "insecureContext": "Devi navigare in un contesto sicuro affinché funzioni"
     }
 }

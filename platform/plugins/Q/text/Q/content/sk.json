@@ -141,5 +141,8 @@
         "inHour": "za {{h}} hodinu",
         "inHours": "za {{h}} hodín",
         "inUnderMinute": "za menej ako 1 minútu"
+    },
+    "browser": {
+        "insecureContext": "Aby to fungovalo, musíte prehľadávať v zabezpečenom kontexte"
     }
 }

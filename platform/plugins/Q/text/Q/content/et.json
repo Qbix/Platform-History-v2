@@ -141,5 +141,8 @@
         "inHour": "{{h}} tunni pärast",
         "inHours": "{{h}} tunni pärast",
         "inUnderMinute": "alla 1 minuti jooksul"
+    },
+    "browser": {
+        "insecureContext": "Selle toimimiseks peate sirvima turvalises kontekstis"
     }
 }

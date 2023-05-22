@@ -141,5 +141,8 @@
         "inHour": "sau {{h}} giờ nữa",
         "inHours": "sau {{h}} giờ",
         "inUnderMinute": "trong dưới 1 phút"
+    },
+    "browser": {
+        "insecureContext": "Bạn cần duyệt trong ngữ cảnh an toàn để tính năng này hoạt động"
     }
 }

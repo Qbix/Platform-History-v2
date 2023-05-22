@@ -143,5 +143,8 @@
         "decades": "årtier",
         "century": "århundrede",
         "centuries": "århundreder"
+    },
+    "browser": {
+        "insecureContext": "Du skal browse i en sikker kontekst, for at dette fungerer"
     }
 }

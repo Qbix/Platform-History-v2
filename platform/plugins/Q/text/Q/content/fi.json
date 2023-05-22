@@ -141,5 +141,8 @@
         "inHour": "{{h}} tunnin kuluttua",
         "inHours": "{{h}} tunnissa",
         "inUnderMinute": "alle 1 minuutissa"
+    },
+    "browser": {
+        "insecureContext": "Sinun on selattava suojatussa kontekstissa, jotta tämä toimii"
     }
 }

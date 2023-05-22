@@ -143,5 +143,8 @@
         "decades": "onilliklər",
         "century": "əsr",
         "centuries": "əsrlər"
+    },
+    "browser": {
+        "insecureContext": "Bunun işləməsi üçün təhlükəsiz kontekstdə axtarış etməlisiniz"
     }
 }

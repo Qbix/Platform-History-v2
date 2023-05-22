@@ -143,5 +143,8 @@
         "decades": "dekada",
         "century": "shekulli",
         "centuries": "shekuj"
+    },
+    "browser": {
+        "insecureContext": "Ju duhet të shfletoni në një kontekst të sigurt që kjo të funksionojë"
     }
 }
