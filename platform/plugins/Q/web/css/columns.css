@@ -213,7 +213,8 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	width: calc(100% - 2*(var(--column-width) + var(--column-margin)));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_animateWidth .Q_columns_column {
-	transition: width border-radius 50ms;
+	transition-property: width, border-radius;
+	transition-duration: 50ms;
 }
 
 

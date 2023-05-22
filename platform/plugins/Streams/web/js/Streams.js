@@ -349,20 +349,25 @@ Streams.define = function (type, ctor, methods) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+ * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ *  Setting it to false skips appending "/size".
+ *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively.
  * @return {String} the url
  */
-Streams.iconUrl = function(icon, basename) {
+Streams.iconUrl = function(icon, size) {
 	if (!icon) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if ((basename === true) // for backward compatibility
-	|| (!basename && basename !== false)) {
-		basename = '40';
+	if ((size === true) // for backward compatibility
+	|| (!size && size !== false)) {
+		size = '40';
 	}
-	basename = (String(basename).match(/\.\w+$/g)) ? basename : basename+'.png';
-	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
+	if (size === 'largestWidth' || size === 'largestHeight') {
+		size = Q.largestSize(Streams.image.sizes, size === 'largestHeight');
+	}
+	size = (String(size).match(/\.\w+$/g)) ? size : size+'.png';
+	icon = icon.match(/\.\w+$/g) ? icon : icon + (size ? '/' + size : '');
 	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? Q.url(src)
@@ -1907,12 +1912,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 												}
 
 												var userIconStream = this;
-												userIconStream.join();
+												userIconStream.observe();
 												var eventKey = "invite_icon_changed_" + invitedUserId;
 												var event = userIconStream.onMessage("Streams/changed");
 												event.set(function (err, msg) {
 													Q.Dialogs.close(dialog);
-													userIconStream.leave();
+													userIconStream.neglect();
 													event.remove(eventKey);
 												}, eventKey);
 											});
@@ -1924,7 +1929,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							Users.Socket.onEvent('Streams/invite/accept')
 							.set(function _Streams_invite_accept_handler (data) {
 								console.log('Users.Socket.onEvent("Streams/invite/accept")');
-								_setPhoto(data);
+								if (!Users.isCustomIcon(data.icon)) {
+									_setPhoto(data);
+								}
 							}, 'Streams_invite_QR_content');
                         });
                     }
@@ -2778,10 +2785,17 @@ Sp.retainWith = Streams.retainWith;
 /**
  * Calculate the url of a stream's icon
  * @method iconUrl
- * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+ * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ *  Setting it to false skips appending "/size".
+ *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively,
+ *  and in this method we use getAttribute("sizes") before falling back to the default Streams.icon.sizes
  * @return {String} the url
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
+	if (size === 'largestWidth' || size === 'largestHeight') {
+		var sizes = this.getAttribute('sizes') || Streams.image.sizes;
+		size = Q.largestSize(sizes, size === 'largestHeight');
+	}
 	return Streams.iconUrl(this.fields.icon, size);
 };
 
@@ -5118,13 +5132,14 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 /**
  * Get the url of the user icon from a Streams.Avatar
  * @method
- * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+  * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ *  Setting it to false skips appending "/size".
  * @return {String} the url
  */
-Ap.iconUrl = function _Avatar_prototype_iconUrl (basename) {
+Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
 	return Users.iconUrl(this.icon.interpolate({
 		userId: this.publisherId.splitId()
-	}), basename);
+	}), size);
 };
 
 /**
@@ -6349,32 +6364,49 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 		_Streams_onInvited.showed = true;
-		var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
-		Stream.construct(params.stream, function () {
-			Q.extend(params, {
-				stream: this,
-				communityId: params.communityId || Q.Users.communityId,
-				communityName: params.communityName || Q.Users.communityName,
-				button: Q.getObject('Q.text.Streams.invite.complete.accept')
-				     || Q.getObject('Q.text.Users.login.registerButton'),
-				prompt: (params.prompt !== undefined)
-					? params.prompt
-					: Q.getObject('Q.text.Streams.invite.complete.prompt')
-			});
-			Q.Template.render(explanationTemplateName, params, function (err, html) {
-				params.explanation = html;
-				if (Q.Users.loggedInUserId()) {
-					_showDialog();
-				} else {
-					params.loggedInFirst = true;
-					Q.Users.login({
-						onSuccess: {'Users': _inviteComplete},
-						noClose: true,
-						explanation: html
-					});
-				}
-			});
-		}, true);
+		var delay = params.delay || 2000;
+		var mask = Q.Masks.show('Streams.onInvited', {
+			fadeIn: 0
+		});
+		var t;
+		$(mask.element).on('click', function () {
+			_showWelcomeFlow();
+			t && clearInterval(t);
+		});
+		Q.onReady.addOnce(function () {
+			// don't use "load" event because it might not fire on the page
+			// if some image is broken for example
+			t = setTimeout(_showWelcomeFlow, delay);
+		});
+		function _showWelcomeFlow() {
+			Q.Masks.hide('Streams.onInvited');
+			var explanationTemplateName = params.explanationTemplateName || 'Streams/templates/invited/explanation';
+			Stream.construct(params.stream, function () {
+				Q.extend(params, {
+					stream: this,
+					communityId: params.communityId || Q.Users.communityId,
+					communityName: params.communityName || Q.Users.communityName,
+					button: Q.getObject('Q.text.Streams.invite.complete.accept')
+						 || Q.getObject('Q.text.Users.login.registerButton'),
+					prompt: (params.prompt !== undefined)
+						? params.prompt
+						: Q.getObject('Q.text.Streams.invite.complete.prompt')
+				});
+				Q.Template.render(explanationTemplateName, params, function (err, html) {
+					params.explanation = html;
+					if (Q.Users.loggedInUserId()) {
+						_showDialog();
+					} else {
+						params.loggedInFirst = true;
+						Q.Users.login({
+							onSuccess: {'Users': _inviteComplete},
+							noClose: true,
+							explanation: html
+						});
+					}
+				});
+			}, true);
+		}
 		function _inviteComplete() {
 			var params = {
 				evenIfNotRetained: true,

@@ -19,7 +19,7 @@ foreach ($adminLabels as $adminLabel) {
 	}
 }
 
-echo "Creating ".implode(",", $categoryStreamNames)." categories for each users".PHP_EOL;
+echo "Creating ".implode(", ", $categoryStreamNames)." categories for each user".PHP_EOL;
 while (1) {
 	$users = Users_User::select()
 		->limit(100, $offset)

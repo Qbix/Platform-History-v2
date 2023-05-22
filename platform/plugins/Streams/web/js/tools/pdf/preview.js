@@ -588,7 +588,7 @@ Q.Template.set('Streams/pdf/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">' +
 	'	<img alt="icon" class="Streams_preview_icon Q_imagepicker" src="{{icon}}">' +
 	'	<div class="Streams_preview_contents">' +
-	'		<h3 class="Streams_preview_title">{{& inplace}}</h3>' +
+	'		<h3 class="Streams_preview_title">{{{inplace}}}</h3>' +
 	'	</div>' +
 	'</div>'
 );

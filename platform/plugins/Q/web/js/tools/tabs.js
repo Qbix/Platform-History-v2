@@ -172,7 +172,11 @@
 				}
 
 				if (href && !state.selectors) {
-					Q.handle(href);
+					if (Q.Visual.shouldOpenInNewWindow(loaderOptions.event)) {
+						window.open(href);
+					} else {
+						Q.handle(href);
+					}
 					return;
 				}
 
@@ -206,7 +210,11 @@
 					handler: handler
 				}, 10, state.loaderOptions, 10, loaderOptions);
 
-				Q.handle(href, o);
+				if (Q.Visual.shouldOpenInNewWindow(loaderOptions.event)) {
+					window.open(href);
+				} else {
+					Q.handle(href, o);
+				}
 
 				function slotContainer(slotName) {
 					var container = null;
@@ -737,7 +745,9 @@
 			Q.Pointer.cancelClick(true, event, {});
 			var element = this;
 			setTimeout(function () {
-				tool.switchTo([element.getAttribute('data-name'), element]);
+				tool.switchTo([element.getAttribute('data-name'), element], {
+					event: event
+				});
 			}, 0);
 		}).off('click.Q_tabs_preventDefault')
 		.on('click.Q_tabs_preventDefault', function (event) {

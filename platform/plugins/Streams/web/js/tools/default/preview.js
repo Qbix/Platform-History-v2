@@ -155,7 +155,7 @@ Q.Template.set('Streams/default/preview/edit',
 	'<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon" src="">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
-	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
+	+ '<{{titleTag}} class="Streams_preview_title">{{{inplace}}}</{{titleTag}}>'
 	+ '</div></div>'
 );
 

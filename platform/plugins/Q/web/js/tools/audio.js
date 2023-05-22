@@ -223,9 +223,7 @@ Q.Tool.define("Q/audio", function (options) {
 	currentPosition: 0,
 	clipStart: null,
 	clipEnd: null,
-	metrics: {
-		useFaces: false
-	},
+	metrics: {},
 	floating: {
 		evenIfPaused: false
 	},

@@ -121,7 +121,7 @@ Q.Template.set('Communities/announcement/preview/edit',
 	'<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
-	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
+	+ '<{{titleTag}} class="Streams_preview_title">{{{inplace}}}</{{titleTag}}>'
 	+ '{{#each announced}}'
 	  + '<div class="Streams_preview_announced">'
 	  + 'Posted {{&tool "Q/timestamp" time=@key}} to {{this.title}}'

@@ -688,7 +688,7 @@
 		'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 		+ '<div class="Streams_preview_audio_player"></div>'
 		+ '<div class="Streams_preview_contents">'
-		+ '<h2 class="Streams_preview_title">{{& inplace}}</h2>'
+		+ '<h2 class="Streams_preview_title">{{{inplace}}}</h2>'
 		+ '<div class="Streams_preview_audio_duration"></div>'
 		+ '</div></div>'
 	);

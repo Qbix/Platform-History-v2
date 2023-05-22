@@ -1528,6 +1528,41 @@ Q.firstKey = function _Q_firstKey(container, options) {
 };
 
 /**
+ * Find an index with the largest width or height
+ * @param {Object|Array} sizes If an object, it will use Object.keys()
+ * @param {Boolean} [useHeight=false] by default, uses width
+ * @returns 
+ */
+Q.largestSize = function (sizes, useHeight) {
+	var size, w, h, wMax = 0, hMax = 0, parts, largestIndex;
+	if (!Q.isArrayLike(sizes)) {
+		sizes = Object.keys(sizes);
+	}
+	for (var i = 0; i<sizes.length; ++i) {
+		size = sizes[i];
+		if (!size || size === 'x') {
+			continue;
+		}
+		parts = size.split('x');
+		if (parts.length == 0) {
+			continue;
+		}
+		w = parseInt(parts[0] || parts[1]);
+		h = parseInt(parts[1] || parts[0]);
+		if (useHeight && h > hMax) {
+			wMax = w;
+			hMax = h;
+			largestIndex = i;
+		} else if (w > wMax) {
+			wMax = w;
+			hMax = h;
+			largestIndex = i;
+		}
+	}
+	return largestIndex !== undefined ? sizes[largestIndex] : null;
+};
+
+/**
  * Returns a container with the items in the first parameter that are not in the others
  * @static
  * @method diff
@@ -5173,9 +5208,9 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
 
 /**
  * Sets up element so that it can be used to activate a tool
- * For example: $('container').append(Q.Tool.setUpElement('div', 'Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.prepare('div', 'Streams/chat')).activate(options);
  * @static
- * @method setUpElement
+ * @method prepare
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String|Array} toolName
@@ -5194,7 +5229,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * @return {HTMLElement}
  *  Returns an element you can append to things, and/or call Q.activate on
  */
-Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix, lazyload) {
+Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolName, toolOptions, id, prefix, lazyload) {
 	if (typeof toolOptions === 'string') {
 		prefix = id;
 		id = toolOptions;
@@ -5248,7 +5283,7 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 /**
  * Returns HTML for an element that it can be used to activate a tool
  * @static
- * @method setUpElementHTML
+ * @method prepareHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String} toolName
@@ -5264,10 +5299,10 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
  * @return {String}
  *  Returns HTML that you can include in templates, etc.
  */
-Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
+Q.Tool.prepareHTML = Q.Tool.setUpElementHTML = function _Q_Tool_prepareHTML(
 	element, toolName, toolOptions, id, prefix, attributes
 ) {
-	var e = Q.Tool.setUpElement(element, toolName, null, id, prefix);
+	var e = Q.Tool.prepare(element, toolName, null, id, prefix);
 	var ntt = toolName.replace(/\//g, '_');
 	if (toolOptions) {
 		e.setAttribute('data-'+ntt.replace(/_/g, '-'), JSON.stringify(toolOptions));
@@ -5286,9 +5321,9 @@ Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
 
 /**
  * Sets up element so that it can be used to activate a tool
- * For example: $('container').append(Q.Tool.setUpElement('div', 'Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.prepare('div', 'Streams/chat')).activate(options);
  * The prefix and id of the element are derived from the tool on which this method is called.
- * @method setUpElement
+ * @method prepare
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String} toolName
@@ -5300,15 +5335,15 @@ Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
  * @return {HTMLElement}
  *  Returns an element you can append to things
  */
-Tp.setUpElement = function (element, toolName, toolOptions, id) {
-	return Q.Tool.setUpElement(element, toolName, toolOptions, id, this.prefix);
+Tp.prepare = Tp.setUpElement = function (element, toolName, toolOptions, id) {
+	return Q.Tool.prepare(element, toolName, toolOptions, id, this.prefix);
 };
 
 /**
  * Returns HTML for an element that it can be used to activate a tool.
  * The prefix and id of the element are derived from the tool on which this method is called.
- * For example: $('container').append(Q.Tool.setUpElementHTML('Streams/chat')).activate(options);
- * @method setUpElementHTML
+ * For example: $('container').append(Q.Tool.prepareHTML('Streams/chat')).activate(options);
+ * @method prepareHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
  * @param {String} toolName
@@ -5322,8 +5357,8 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
  * @return {String}
  *  Returns HTML that you can include in templates, etc.
  */
-Tp.setUpElementHTML = function (element, toolName, toolOptions, id, attributes) {
-	return Q.Tool.setUpElementHTML(element, toolName, toolOptions, id, this.prefix, attributes);
+Tp.prepareHTML = Tp.setUpElementHTML = function (element, toolName, toolOptions, id, attributes) {
+	return Q.Tool.prepareHTML(element, toolName, toolOptions, id, this.prefix, attributes);
 };
 
 /**
@@ -10144,7 +10179,7 @@ Q.loadUrl.loading = {};
  *	Note: this will still not supress loading of external websites done with other means, such as window.location
  *  @param {Object} [options.fields] optional fields to pass with any method other than "get"
  *  @param {String|Function} [options.callback] if a string, adds a '&Q.callback='+encodeURIComponent(callback) to the querystring. If a function, this is the callback.
- * @param {String} [options.loadExtras="all"] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
+ *  @param {String} [options.loadExtras="all"] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  *  @param {String} [options.target] the name of a window or iframe to use as the target. In this case callables is treated as a url.
  *  @param {String|Array} [options.slotNames] a comma-separated list of slot names, or an array of slot names
  *  @param {boolean} [options.quiet] defaults to false. If true, allows visual indications that the request is going to take place.
@@ -11819,7 +11854,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		return $(this).data(key);
 	};
 	/**
-	 * Calls Q.Tool.setUpElement on the elements in the jQuery.
+	 * Calls Q.Tool.prepare on the elements in the jQuery.
 	 * Follow this up with a call to .activate()
 	 * @class jQuery.fn
 	 * @static
@@ -11843,7 +11878,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		var args = arguments;
 		return this.each(function () {
 			var id2 = (typeof id === 'function') ? id.apply(this, args) : id;
-			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix, lazyload);
+			Q.Tool.prepare(this, toolName, toolOptions, id2, prefix, lazyload);
 		});
 	};
 	/**
@@ -12591,6 +12626,22 @@ Q.Visual = Q.Pointer = {
 		rect.width = rect.right - rect.left;
 		rect.height = rect.bottom - rect.top;
 		return rect;
+	},
+	/**
+	 * Call this function to find out whether a click on a link
+	 * should typically result in opening a new window on this
+	 * operating system. Since the choice of tab or window is
+	 * controlled by the browser preferences, this function just
+	 * returns a boolean in either case so you can do window.open().
+	 * @method shouldOpenInNewWindow
+	 * @static
+	 * @param {Event} event
+	 * @return {Boolean}
+	 */
+	shouldOpenInNewWindow: function (event) {
+		return event.shiftKey
+			|| (Q.info.platform === 'windows' && event.ctrlKey)
+			|| (Q.info.platform === 'mac' && event.metaKey);
 	},
 	/**
 	 * Sets an observer to wait for an element become visible.
@@ -15015,7 +15066,7 @@ function _addHandlebarsHelpers() {
 					Q.extend(o, this['id:'+id]);
 				}
 			}
-			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix, {'class': className});
+			return Q.Tool.prepareHTML(tag, name, o, id, prefix, {'class': className});
 		});
 	}
 	if (!Handlebars.helpers.url) {

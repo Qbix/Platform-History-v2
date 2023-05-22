@@ -626,12 +626,12 @@
 	});
 
 	Q.Template.set('Websites/webpage/preview',
-		'<img alt="icon" class="Streams_preview_icon" src="{{& src}}">' +
+		'<img alt="icon" class="Streams_preview_icon" src="{{{src}}}">' +
 		'<div class="Streams_preview_contents">' +
-		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
-		//'	<div class="Streams_aspect_url">{{& url}}</div>' +
-		'	<div class="Streams_aspect_description" data-show="{{showDescription}}">{{& description}}</div>' +
-		'	<div class="Streams_aspect_interests" data-hide="{{showDescription}}"><img src="{{& interest.icon}}"><a href="{{& url}}" target="_blank">{{& interest.title}}</a></div>' +
+		'	<h3 class="Streams_preview_title Streams_preview_view">{{{title}}}</h3>' +
+		//'	<div class="Streams_aspect_url">{{{url}}}</div>' +
+		'	<div class="Streams_aspect_description" data-show="{{showDescription}}">{{{description}}}</div>' +
+		'	<div class="Streams_aspect_interests" data-hide="{{showDescription}}"><img src="{{{interest.icon}}}"><a href="{{{url}}}" target="_blank">{{{interest.title}}}</a></div>' +
 		'	<div class="streams_chat_participants"></div>' +
 		'	<div class="Streams_chat_unseen"></div>' +
 		'</div>'

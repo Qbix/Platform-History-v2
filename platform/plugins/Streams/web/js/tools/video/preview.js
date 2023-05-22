@@ -650,7 +650,7 @@ Q.Template.set('Streams/video/preview/view',
 	'	<div class="Streams_video_preview_icon"></div>' +
 	'	{{/if}}' +
 	'	<div class="Streams_preview_contents">' +
-	'		<h3 class="Streams_preview_title">{{& inplace}}</h3>' +
+	'		<h3 class="Streams_preview_title">{{{inplace}}}</h3>' +
 	'	</div>' +
 	'</div>'
 );

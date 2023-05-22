@@ -680,7 +680,7 @@ Q.Template.set('Q/inplace/tool',
 +			"<button class='Q_inplace_tool_save basic16 basic16_save'>Save</button>"
 +		"</div>"
 +	"</form>"
-+	"<div class='Q_inplace_tool_static_container {{staticClass}}'>{{& staticHtml}}</div>"
++	"<div class='Q_inplace_tool_static_container {{staticClass}}'>{{{staticHtml}}}</div>"
 +"</div>"
 );
 

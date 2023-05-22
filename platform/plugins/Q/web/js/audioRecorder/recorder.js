@@ -91,19 +91,16 @@ Recorder.prototype.initStream = function(){
   }
 
   var that = this;
-  navigator.mediaDevices.getUserMedia(
-    { audio : this.config.streamOptions },
-    function ( stream ) {
-      that.stream = stream;
-      that.sourceNode = that.audioContext.createMediaStreamSource( stream );
-      that.sourceNode.connect( that.scriptProcessorNode );
-      that.sourceNode.connect( that.monitorNode );
-      that.eventTarget.dispatchEvent( new Event( "streamReady" ) );
-    },
-    function ( e ) {
-      that.eventTarget.dispatchEvent( new ErrorEvent( "streamError", { error: e } ) );
-    }
-  );
+  navigator.mediaDevices.getUserMedia({ audio : this.config.streamOptions })
+  .then(function (stream) {
+    that.stream = stream;
+    that.sourceNode = that.audioContext.createMediaStreamSource( stream );
+    that.sourceNode.connect( that.scriptProcessorNode );
+    that.sourceNode.connect( that.monitorNode );
+    that.eventTarget.dispatchEvent( new Event( "streamReady" ) );
+  }).catch(function (e) {
+    that.eventTarget.dispatchEvent( new ErrorEvent( "streamError", { error: e } ) );
+  })
 };
 
 Recorder.prototype.pause = function(){

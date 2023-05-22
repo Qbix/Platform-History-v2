@@ -469,7 +469,7 @@
         + '</div>'
         + '<div class="Streams_image_preview_title Streams_preview_contents{{titleClass}}">'
         + '{{#if showTitle}}'
-        + '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
+        + '<{{titleTag}} class="Streams_preview_title">{{{inplace}}}</{{titleTag}}>'
         + '{{/if}}'
         + '</div></div>'
     );
@@ -479,7 +479,7 @@
         + '<img alt="{{alt}}" class="Streams_preview_icon">'
         + '</div>'
         + '<div class="Streams_preview_contents {{titleClass}}">'
-        + '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
+        + '<{{titleTag}} class="Streams_preview_title">{{{inplace}}}</{{titleTag}}>'
         + '</div></div>'
     );
 })(window.jQuery, window);

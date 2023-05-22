@@ -281,7 +281,7 @@
 		+ '<img alt="{{alt}}" class="Streams_album_preview_icon">'
 		+ '<div class="Streams_album_preview_title {{titleClass}}">'
 		+ '{{#if showTitle}}'
-		+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
+		+ '<{{titleTag}} class="Streams_preview_title">{{{inplace}}}</{{titleTag}}>'
 		+ '{{/if}}'
 		+ '</div></div>'
 	);
