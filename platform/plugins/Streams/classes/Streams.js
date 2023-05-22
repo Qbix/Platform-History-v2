@@ -565,7 +565,7 @@ function _validateSessionId(sessionId, fn) {
 function Streams_request_handler (req, res, next) {
 	var parsed = req.body;
 	if (!parsed || !parsed['Q/method']
-	|| !req.internal || req.validated) {
+	|| !req.internal || !req.validated) {
 		return next();
 	}
 	var participant, msg, posted, streams, k;
