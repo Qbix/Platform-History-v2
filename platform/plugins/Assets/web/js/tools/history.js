@@ -191,7 +191,7 @@ Q.Template.set('Assets/row/credits',
 	'<tr><td class="Assets_history_date">{{date}}</td>' +
 	'<td class="Assets_history_amount">{{operation}}</td>' +
 	'<td class="Assets_history_client">{{clientInfo.direction}} <a data-userId="{{clientInfo.id}}">{{clientInfo.name}}</a></td>' +
-	'<td class="Assets_history_description">{{& reason}}</td></tr>'
+	'<td class="Assets_history_description">{{{reason}}}</td></tr>'
 );
 
 Q.Template.set('Assets/history/charges',

@@ -93,7 +93,7 @@ Q.Tool.define("Websites/metadata", function () {
 );
 
 Q.Template.set("Websites/metadata",
-	"{{& url}}{{& title}}{{& keywords}}{{& description}}"
+	"{{{url}}}{{{title}}}{{{keywords}}}{{{description}}}"
 );
 
 })(Q, Q.$, window, document);
