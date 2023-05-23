@@ -12643,7 +12643,7 @@ Q.Visual = Q.Pointer = {
 	 * @return {Boolean}
 	 */
 	shouldOpenInNewWindow: function (event) {
-		return event.shiftKey
+		return event && event.shiftKey
 			|| (Q.info.platform === 'windows' && event.ctrlKey)
 			|| (Q.info.platform === 'mac' && event.metaKey);
 	},
