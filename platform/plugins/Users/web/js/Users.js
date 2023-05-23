@@ -3172,6 +3172,13 @@
 // 		}
 	}
 
+	$('body').on('click', '[data-users-login]', function () {
+		Q.Users.login({
+			successUrl: location.href
+		});
+		return false;
+	});
+
 	Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler() {
 		$.fn.plugin.load('Q/placeholders');
 		$('#notices_set_email, #notices_set_mobile')
@@ -3180,13 +3187,6 @@
 				return false;
 			});
 		_setSessionFromQueryString(location.hash);
-
-		Q.each(document.querySelectorAll('[data-users-login'), function () {
-			Q.addEventListener(this, 'click', function () {
-				Q.Users.login();
-				return false;
-			});
-		});
 
 		document.documentElement.removeClass(Users.loggedInUser ? 'Users_loggedOut' : 'Users_loggedIn');
 		document.documentElement.addClass(Users.loggedInUser ? 'Users_loggedIn' : 'Users_loggedOut');
