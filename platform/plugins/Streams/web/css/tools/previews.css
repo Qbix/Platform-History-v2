@@ -398,3 +398,7 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 	text-align: left;
 	white-space: nowrap;
 }
+
+.Streams_preview_tool.Streams_image_preview_tool .Streams_preview_container {
+	text-align: center;
+}

@@ -891,3 +891,7 @@
 	vertical-align: middle;
 	background-color: #cc5555;
 }
+
+.Streams_stream #content {
+	padding: 20px;
+}
