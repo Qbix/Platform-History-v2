@@ -242,9 +242,6 @@
 .Streams_question_preview_tool.Streams_preview_tool .Streams_preview_container .Streams_preview_contents .Streams_question_subtitle {
 	white-space: normal;
 }
-.Streams_answer_preview_tool {
-	white-space: nowrap;
-}
 .Streams_question_preview_tool .Streams_preview_title,
 .Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool,
 .Streams_question_preview_tool .Streams_preview_title .Streams_inplace_tool .Q_inplace_tool_container {
@@ -287,9 +284,6 @@
 .Streams_question_preview_tool:not(:last-of-type),
 .Streams_answer_preview_tool:not(:last-of-type) {
 	margin-bottom: 5px;
-}
-.Streams_answer_preview_tool .Users_avatar_tool {
-	margin-right: 5px;
 }
 .Streams_answer_preview_tool .Users_avatar_name {
 	display: none;
