@@ -294,6 +294,9 @@
 .Streams_answer_preview_tool .Users_avatar_name {
 	display: none;
 }
+html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
+	display: none;
+}
 .Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Q_inplace_tool_static,
 .Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Streams_preview_title,
 .Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Q_inplace_tool_static_container,
@@ -395,113 +398,3 @@
 	text-align: left;
 	white-space: nowrap;
 }
-
-/* <Media_webrtc_preview> */
-.Media_webrtc_preview_tool .Media_webrtc_duration {
-	font-weight: normal;
-	font-size: .8em;
-}
-.Media_webrtc_preview_tool .Streams_participants_tool .Users_avatar_icon {
-	position: unset;
-	margin: 0;
-}
-
-.Media_webrtc_preview_tool .Streams_preview_call_control {
-	display: flex;
-	padding: 10px 5px 5px 5px;
-}
-.Media_webrtc_preview_tool .Streams_preview_accept_button,
-.Media_webrtc_preview_tool .Streams_preview_disconnect_button,
-.Media_webrtc_preview_tool .Streams_preview_call_button,
-.Media_webrtc_preview_tool .Streams_preview_switch_back_button,
-.Media_webrtc_preview_tool .Streams_preview_hold_button,
-.Media_webrtc_preview_tool .Streams_preview_approve_button {
-	/*width: 100px;*/
-	height: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 5px;
-	border-radius: 4px;
-}
-.Media_webrtc_preview_tool .Streams_preview_accept_button {
-	background: #37c837;
-	/*width:80px;*/
-	height:40px;
-}
-.Media_webrtc_preview_tool .Streams_preview_disconnect_button, .Streams_preview_switch_back_button {
-	display: none;
-	background: #f93b2f;
-	/*width:100px;*/
-	height:40px;
-}
-.Media_webrtc_preview_tool .Streams_preview_call_control_call {
-	margin-right: 10px;
-	display: flex;
-}
-.Media_webrtc_preview_tool .Streams_preview_call_button {
-	background: #007bff;
-	/*width:60px;*/
-	height:40px;
-}
-.Media_webrtc_preview_tool .Streams_preview_hold_button {
-	display: none;
-	background: #17a2b8;
-	/*width:60px;*/
-	height:40px;
-	margin-left: 10px;
-
-}
-.Media_webrtc_preview_tool .Streams_preview_approve_button {
-	background: #ffc107;
-	/*width:60px;*/
-	height:40px;
-	margin-right: 10px;
-}
-.Media_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved {
-	background: #007bff;
-}
-.Media_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved:before {
-	display: inline-block;
-	content: '\2713';
-	color:white;
-	padding:0 2px 0 0;
-}
-
-.Media_webrtc_preview_tool .Streams_preview_contents {
-	padding:0 0 5px 0;
-}
-.Media_webrtc_preview_tool .Streams_preview_container .Streams_preview_title{
-	display: flex;
-	justify-content: space-between;
-}
-.Media_webrtc_preview_tool .Streams_preview_container .Streams_preview_contents {
-	width: 100%;
-}
-.Media_webrtc_preview_tool .Streams_preview_container .Streams_preview_about {
-	display: flex;
-}
-.Media_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble {
-	-webkit-border-radius: 13px;
-	-moz-border-radius: 13px;
-	border-radius: 13px;
-	background-color: #cbf9fb;
-	text-align: left;
-	padding: 10px;
-	margin-right: 5px;
-	margin-left: 10px;
-	border: 1px solid #bae8ea;
-	flex: 1;
-	align-self:center;
-}
-.Media_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_tick{
-	float:left;
-	margin: 0 0 0 -19px;
-	width:9px;
-	height: 13px;
-}
-.Media_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_message{
-	color:#222;
-	overflow: hidden;
-}
-/* </Media_webrtc_preview> */
