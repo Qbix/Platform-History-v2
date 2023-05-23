@@ -348,8 +348,11 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 .Streams_answer_preview_tool[data-participants=true] .Streams_answer_participants:empty {
 	display: none;
 }
+.Streams_answer_preview_tool form {
+	display: flex;
+}
 .Streams_answer_preview_tool[data-participants=true][data-type=text] input[type=text] {
-	width: calc(100% - 110px);
+	flex: 1;
 }
 .Streams_dialog_editQuestion input[type=checkbox],
 .Streams_answer_preview_tool input[type=checkbox],
