@@ -3873,7 +3873,7 @@ abstract class Streams extends Base_Streams
 		$icon = Q::ifset($options, 'icon', null);
 
 		foreach ($raw_userIds as $userId) {
-			if (Users::isCommunityId($asUserId) and $asUserId === $publisherId) {
+			if (!Users::isCommunityId($asUserId) or $asUserId !== $publisherId) {
 				// For now, don't add labels to community itself
 				// for just inviting the user to its own published streams.
 				// TODO: Debate the merits of this approach.
