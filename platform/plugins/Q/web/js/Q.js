@@ -12900,7 +12900,7 @@ Q.Visual = Q.Pointer = {
 		if (!options.dontRemove && !options.waitForEvents) {
 			for (i=0, l=Q.Visual.hint.imgs.length; i<l; ++i) {
 				img = Q.Visual.hint.imgs[i];
-				if (img.paparentElementrentNode) {
+				if (img.parentElement) {
 					img.parentElement.removeChild(img);
 				}
 				if (img.tooltip && img.tooltip.parentElement) {
