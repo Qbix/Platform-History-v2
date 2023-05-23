@@ -385,7 +385,7 @@
 }
 .Streams_chat_to_me .Streams_chat_tick {
 	float: left;
-	margin: 0 0 0 -19px
+	margin: 0 0 0 -14px
 }
 .Streams_chat_to_me .Streams_chat_bubble {
 	border-radius: 13px;
@@ -401,7 +401,7 @@
 }
 .Streams_chat_from_me .Streams_chat_tick {
 	float: right;
-	margin: 0 -19px 0 0;
+	margin: 0 -14px 0 0;
 	background-position: 0 13px;
 }
 .Streams_chat_notification {
