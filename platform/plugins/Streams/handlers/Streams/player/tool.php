@@ -11,8 +11,7 @@ function Streams_player_tool($options)
 		return "<a href='#$streamName_html'>hidden</a>";
 	}
 	$options['streamName'] = $stream->name;
-	$parts = explode('/', $stream->type);
-	switch ($parts[0]) {
+	switch ($stream->type) {
 		case 'Streams/text/small':
 		case 'Streams/text/medium':
 		case 'Streams/text':
@@ -31,6 +30,14 @@ function Streams_player_tool($options)
 				return null;
 			}
 			return $stream->content;
+		case 'Streams/question':
+			return Q::tool(array(
+				'Streams/preview' => array(
+					'publisherId' => $stream->publisherId,
+					'streamName' => $stream->name
+				),
+				'Streams/question/preview' => array()
+			));
 		case 'Streams/category': // TODO: implement
 		case 'Streams/chat': // TODO: implement
 		case 'Streams/experience': // TODO: implement
