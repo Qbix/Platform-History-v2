@@ -174,7 +174,21 @@ Streams.READ_LEVEL = {
  * @final
  */
 /**
- * Can post messages which appear immediately
+ * Can contribute to the stream (e.g. "join the stage")
+ * @property WRITE_LEVEL.contribute
+ * @type integer
+ * @default 18
+ * @final
+ */
+/**
+ * Can send ephemeral payloads to the stream to be broadcast
+ * @property WRITE_LEVEL.ephemeral
+ * @type integer
+ * @default 19
+ * @final
+ */
+/**
+ * Can post durable messages which appear immediately
  * @property WRITE_LEVEL.messages
  * @type integer
  * @default 20
@@ -234,9 +248,10 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':		    13,		// can vote for a relation message posted to the stream
-	'suggest':      15,     // can post messages which require manager's approval
+	'suggest':      15,     // can post durable messages which require manager's approval
 	'contribute':	18,		// can contribute to the stream (e.g. "join the stage")
-	'post':			20,		// can post messages which take effect immediately
+	'ephemeral':    19, 	// can send ephemeral payloads to the stream to be broadcast
+	'post':			20,		// can post durable messages which take effect immediately
 	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update weights and relations directly
 	'edit':			30,		// can edit stream content immediately
@@ -438,7 +453,7 @@ Streams.onError = new Q.Event(function (err, data) {
  * @event onEphemeral
  * @static
  * @param {String} [streamType] id of publisher which is publishing the stream
- * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
+ * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
 Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
 
@@ -3184,7 +3199,7 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
+ * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
 Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
 
@@ -3384,6 +3399,18 @@ Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
 };
 
 /**
+ * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
+ * @event onEphemeral
+ * @static
+ * @param {String} [publisherId] id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [ephemeral] type of the ephemeral, pass "" for all types
+ */
+Sp.onEphemeral = function _Stream_prototype_onEphemeral (messageType) {
+	return Stream.onMessage(this.fields.publisherId, this.fields.name, messageType);
+};
+
+/**
  * Returns Q.Event which occurs when attributes of the stream officially updated
  * @event onAttribute
  * @param {String} [attributeName] name of the attribute to listen for, or "" for all
@@ -3572,9 +3599,11 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
 };
 
 /**
- * Send some payload which is not saved as a message in the stream's history,
+ * Send some ephemeral payload which is not saved as a message in the stream's history,
+ * shouldn't change the state on the server at all, 
  * but is broadcast to everyone curently connected by a socket and participating
  * or observing the stream.
+ * Users with testWriteLevel("contribute") can do this.
  * This can be used for "typing..." indicators, cursor movements and more.
  *
  * @method ephemeral

@@ -122,7 +122,14 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can post messages which appear immediately
+	 * Can send ephemeral payloads to the stream to be broadcast
+	 * @property $WRITE_LEVEL['ephemeral']
+	 * @type integer
+	 * @default 19
+	 * @final
+	 */
+	/**
+	 * Can post durable messages which appear immediately
 	 * @property $WRITE_LEVEL['post']
 	 * @type integer
 	 * @default 20
