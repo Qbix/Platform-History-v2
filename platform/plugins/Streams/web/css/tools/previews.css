@@ -319,7 +319,7 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 }
 .Streams_answer_preview_tool label {
 	display: block;
-	padding: 5px 40px 5px 5px;
+	padding: 5px;
 	text-align: left;
 }
 .Streams_answer_preview_tool label span {
