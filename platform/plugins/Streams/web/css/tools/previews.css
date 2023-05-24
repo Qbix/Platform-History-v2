@@ -319,7 +319,7 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 }
 .Streams_answer_preview_tool label {
 	display: block;
-	padding: 5px;
+	padding: 5px 40px 5px 5px;
 	text-align: left;
 }
 .Streams_answer_preview_tool label span {
@@ -338,6 +338,7 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 	line-height: 34px;
 	border: 1px solid red;
 	border-radius: 50%;
+	background-color: #fff;
 }
 .Streams_answer_preview_tool[data-participants=true] .Streams_answer_participants:empty {
 	display: none;
