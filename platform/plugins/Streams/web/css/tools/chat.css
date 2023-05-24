@@ -29,10 +29,11 @@
 }
 
 .Streams_chat_message_content .Streams_question_preview_tool + .Streams_related_tool {
-	margin-left: 5px;
+	margin-left: 0;
 }
 .Streams_chat_message_content .Streams_question_preview_tool + .Streams_related_tool .Streams_answer_participants {
-	margin-right: 5px;
+	margin-right: 0;
+	padding: 0;
 }
 
 .Streams_chat_preview_tool {
@@ -372,7 +373,7 @@
 	position: relative;
 	min-width: 30%;
 	margin-right: 15px;
-	padding: 10px;
+	padding: 5px;
 	border: 1px solid #bae8ea;
 	clear: both;
 	font-size: 0.8em;
@@ -384,7 +385,7 @@
 }
 .Streams_chat_to_me .Streams_chat_tick {
 	float: left;
-	margin: 0 0 0 -19px
+	margin: 0 0 0 -14px
 }
 .Streams_chat_to_me .Streams_chat_bubble {
 	border-radius: 13px;
@@ -400,7 +401,7 @@
 }
 .Streams_chat_from_me .Streams_chat_tick {
 	float: right;
-	margin: 0 -19px 0 0;
+	margin: 0 -14px 0 0;
 	background-position: 0 13px;
 }
 .Streams_chat_notification {
