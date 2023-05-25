@@ -224,6 +224,15 @@ Streams_Message.post = function (fields, callback)
 };
 
 /**
+ * Gets the type of the message
+ * @method getType
+ * @returns {String}
+ */
+Streams_Message.prototype.getType = function () {
+	return this.fields.type;
+};
+
+/**
  * Delivers the message posted to stream according to particular
  * delivery method (see: Streams_SubscriptionRule.deliver). Message template is taken from views/{message.type} folder -
  * 'email.handlebars' or 'mobile.handlebars' or 'device.handlebars' depending on delivery
