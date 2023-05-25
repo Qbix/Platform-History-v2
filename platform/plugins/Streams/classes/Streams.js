@@ -145,7 +145,14 @@ Streams.READ_LEVEL = {
  * @final
  */
 /**
- * Can post messages which appear immediately
+ * Can send ephemeral payloads to the stream to be broadcast
+ * @property WRITE_LEVEL.ephemeral
+ * @type integer
+ * @default 19
+ * @final
+ */
+/**
+ * Can post durable messages which appear immediately
  * @property WRITE_LEVEL.messages
  * @type integer
  * @default 20
@@ -198,9 +205,10 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':         13,		// can vote for a relation message posted to the stream
-	'suggest':	    15,		// can post messages which require manager's approval
+	'suggest':	    15,		// can post durable messages which require manager's approval
 	'contribute':   18,		// can contribute to the stream (e.g. "join the stage")
-	'post':			20,		// can post messages which take effect immediately
+	'ephemeral':    19, 	// can send ephemeral payloads to the stream to be broadcast
+	'post':			20,		// can post durable messages which take effect immediately
 	'relate':       23,		// can relate other streams to this one
 	'relations':    25,		// can update weights and relations directly
 	'edit':			30,		// can edit stream content immediately
@@ -498,20 +506,30 @@ Streams.listen = function (options, servers) {
 			return fn && fn(null, true);
 		});
 		client.on('Streams/ephemeral',
-		function (clientId, capability, payload, dontNotifyObservers, fn) {
-			if (!payload || !payload.publisherId || !payload.streamName || !payload.type) {
-				return fn && fn("Payload must have publisherId and streamName and type set");
+		function (clientId, capability, publisherId, streamName, payload, dontNotifyObservers, fn) {
+			if (!payload.type) {
+				return fn && fn("Payload must have type set");
 			}
 			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
 				return fn && fn("Capability not valid", null);
 			}
 			var byUserId = capability.userId;
-			Streams.fetchOne(byUserId, payload.publisherId, payload.streamName, function (err) {
+			Streams.fetchOne(byUserId, publisherId, streamName, function (err, stream) {
 				if (err) {
 					return fn && fn(err, false);
 				}
+				var ephemeralTypes  = Streams.Stream.getConfigField(
+					stream.fields.type,
+					'ephemerals'
+				);
+				if (!ephemeralTypes[payload.type]) {
+					var err2 = 'Ephemeral of type "' + payload.type
+						+ '" is not supported by stream of type "' + stream.fields.type + '"';
+					return fn && fn(err2, false);
+				}
+				var ephemeral = new Streams.Ephemeral(payload, Date.now());
 				this.notifyParticipants(
-					'Streams/ephemeral', byUserId, payload, dontNotifyObservers, fn
+					'Streams/ephemeral', byUserId, ephemeral, dontNotifyObservers, fn
 				);
 			});
 		});
@@ -1225,6 +1243,7 @@ Streams.displayType = function _Streams_displayType(type, callback, options) {
 };
 
 Streams.Mentions = require('Streams/Mentions');
+Streams.Ephemeral = require('Streams/Ephemeral');
 
 /**
  * @property _messageHandlers

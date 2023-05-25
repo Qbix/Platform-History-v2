@@ -174,7 +174,21 @@ Streams.READ_LEVEL = {
  * @final
  */
 /**
- * Can post messages which appear immediately
+ * Can contribute to the stream (e.g. "join the stage")
+ * @property WRITE_LEVEL.contribute
+ * @type integer
+ * @default 18
+ * @final
+ */
+/**
+ * Can send ephemeral payloads to the stream to be broadcast
+ * @property WRITE_LEVEL.ephemeral
+ * @type integer
+ * @default 19
+ * @final
+ */
+/**
+ * Can post durable messages which appear immediately
  * @property WRITE_LEVEL.messages
  * @type integer
  * @default 20
@@ -234,9 +248,10 @@ Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
 	'vote':		    13,		// can vote for a relation message posted to the stream
-	'suggest':      15,     // can post messages which require manager's approval
+	'suggest':      15,     // can post durable messages which require manager's approval
 	'contribute':	18,		// can contribute to the stream (e.g. "join the stage")
-	'post':			20,		// can post messages which take effect immediately
+	'ephemeral':    19, 	// can send ephemeral payloads to the stream to be broadcast
+	'post':			20,		// can post durable messages which take effect immediately
 	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update weights and relations directly
 	'edit':			30,		// can edit stream content immediately
@@ -438,7 +453,7 @@ Streams.onError = new Q.Event(function (err, data) {
  * @event onEphemeral
  * @static
  * @param {String} [streamType] id of publisher which is publishing the stream
- * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
+ * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
 Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
 
@@ -3184,7 +3199,7 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
+ * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
 Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
 
@@ -3384,6 +3399,18 @@ Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
 };
 
 /**
+ * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
+ * @event onEphemeral
+ * @static
+ * @param {String} [publisherId] id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [ephemeral] type of the ephemeral, pass "" for all types
+ */
+Sp.onEphemeral = function _Stream_prototype_onEphemeral (messageType) {
+	return Stream.onMessage(this.fields.publisherId, this.fields.name, messageType);
+};
+
+/**
  * Returns Q.Event which occurs when attributes of the stream officially updated
  * @event onAttribute
  * @param {String} [attributeName] name of the attribute to listen for, or "" for all
@@ -3572,9 +3599,11 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
 };
 
 /**
- * Send some payload which is not saved as a message in the stream's history,
+ * Send some ephemeral payload which is not saved as a message in the stream's history,
+ * shouldn't change the state on the server at all, nor generate offline notifications,
  * but is broadcast to everyone curently connected by a socket and participating
  * or observing the stream.
+ * Users with testWriteLevel("contribute") can do this.
  * This can be used for "typing..." indicators, cursor movements and more.
  *
  * @method ephemeral
@@ -3585,7 +3614,6 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
 Sp.ephemeral = function _Stream_ephemeral (payload, dontNotifyObservers, callback) {
 	return Stream.ephemeral(this.fields.publisherId, this.fields.name, payload, dontNotifyObservers, callback);
 };
-
 
 /**
  * Test whether the user has enough access rights when it comes to reading from the stream
@@ -4016,7 +4044,7 @@ Stream.unsubscribe.onError = new Q.Event();
  * @param {Function} [callback] receives (err, result) as parameters
  */
 Stream.observe = function _Stream_observe (publisherId, streamName, callback) {
-	Streams.socketRequest('Streams/observe',  publisherId, streamName, callback);
+	Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
 };
 
 /**
@@ -4038,7 +4066,12 @@ Stream.neglect = function _Stream_neglect (publisherId, streamName, callback) {
  * but is broadcast to everyone curently connected by a socket and participating
  * or observing the stream.
  * This can be used for read receipts, "typing..." indicators, cursor movements and more.
- *
+ * Ephemerals payloads are generated on clients, and clients can lie.
+ * Ephemeral payloads can reference stream state hashes, to prove that the client
+ * saw a certain state of the stream (i.e. messages up to a certain ordinal)
+ * and the server also adds "Streams.messageCount" to the ephemeral payload when sending it out,
+ * so others know what the messageCount was on the server when it was sent out.
+ * These two things can help localize the ephemeral message in time.
  * @static
  * @method ephemeral
  * @param {String} publisherId id of publisher which is publishing the stream
@@ -4050,9 +4083,7 @@ Stream.neglect = function _Stream_neglect (publisherId, streamName, callback) {
 Stream.ephemeral = function _Stream_ephemeral (
 	publisherId, streamName, payload, dontNotifyObservers, callback
 ) {
-	payload.publisherId = publisherId;
-	payload.streamName = streamName;
-	Streams.socketRequest('Streams/ephemeral', publisherId, streamName, dontNotifyObservers, callback);
+	Streams.socketRequest('Streams/ephemeral', publisherId, streamName, payload, dontNotifyObservers, callback);
 };
 
 /**
@@ -4106,8 +4137,8 @@ Stream.close.onError = new Q.Event();
  * and they will be sent to the node.
  * @param {String} event the name of the socket.io event, such as "Streams/observe"
  * @param {String} publisherId the id of the stream's publisher
- * @param {String} streamName the name of the stream
- * @param {Function} [callback] Any socket.io acknowledgement callback
+ * @param {String} streamName the name of the stream. Put any additional parameters after this.
+ * @param {Function} [callback] Comes at the end. Any socket.io acknowledgement callback
  * @return {Q.Socket} returns null if request wasn't sent, otherwise returns the socket
  */
 Streams.socketRequest = function (event, publisherId, streamName, callback) {
@@ -6539,20 +6570,22 @@ Q.onInit.add(function _Streams_onInit() {
 		);
 	});
 	
-	Users.Socket.onEvent('Streams/ephemeral').set(function (payload, byUserId) {
-		Streams.get(payload.publisherId, payload.streamName, function (err) {
+	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, byUserId, stream) {
+		Streams.get(stream.fields.publisherId, stream.fields.name, function (err) {
 			if (err) {
 				console.warn(Q.firstErrorMessage(err));
 				return;
 			}
 
+			var payload = ephemeral.payload;
 			var stream = this;
 			var streamType = stream.fields.type;
-			var params = [stream, payload, 'ephemeral', latest];
 			var event = Streams.onEphemeral(streamType, payload.type);
-			Q.handle(event, stream, [payload]);
-			event = Streams.Stream.onEphemeral(payload.publisherId, payload.streamName, payload.type);
-			Q.handle(event, stream, [payload]);
+			Q.handle(event, stream, [ephemeral, byUserId, stream]);
+			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, '');
+			Q.handle(event, stream, [ephemeral, byUserId, stream]);
+			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, payload.type);
+			Q.handle(event, stream, [ephemeral, byUserId, stream]);
 		});
 	});
 

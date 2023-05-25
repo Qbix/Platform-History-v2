@@ -391,6 +391,7 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 
 /**
  * Send some payload which is not saved as a message in the stream's history,
+ * * shouldn't change the state on the server at all, nor generate offline notifications,
  * but is broadcast to everyone curently connected by a socket and participating
  * or observing the stream.
  * This can be used for read receipts, "typing..." indicators, cursor movements and more.
@@ -415,18 +416,19 @@ Sp.ephemeral = function _Stream_ephemeral (
  * Also sends it to observers unless dontNotifyObservers is true.
  * @method notifyParticipants
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {String} byUserId User who initiated the event
- * @param {Streams_Message} message 
+ * @param {String} byUserId User who posted the event or ephemeral
+ * @param {Streams.Message|Streams.Ephemeral} messageOrEphemeral can be a Streams.Message or an Streams.Ephemeral
  * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
  * @param {Function} [callback] Optional, receives receives (err, participants)
  * @return {Boolean} Whether the system went on to get and notify participants
  */
-Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers, callback) {
+Sp.notifyParticipants = function (event, byUserId, messageOrEphemeral, dontNotifyObservers, callback) {
 	var fields = this.fields;
 	var stream = this;
 
+	// messageOrEphemeral.stream = stream;
+	
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
-		message.fields.streamType = fields.type;
 		var userIds = Object.keys(participants) || [];
 		if (byUserId) {
 			var index = userIds.indexOf(byUserId);
@@ -437,7 +439,7 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 		for (var i = 0; i < userIds.length; i++) {
 			var userId = userIds[i];
 			var participant = participants[userId];
-			stream.notify(participant, event, message, byUserId, function(err) {
+			stream.notify(participant, event, messageOrEphemeral, byUserId, function(err) {
 				callback && callback(err, participants);
 				if (!err) return;
 				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
@@ -448,7 +450,7 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 			});
 		}
 		if (!dontNotifyObservers) {
-			stream.notifyObservers(event, userId, message);
+			stream.notifyObservers(event, byUserId, messageOrEphemeral);
 		}
 	});
 	return true;
@@ -459,17 +461,24 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
  * i.e. socket clients besides the ones which are associated to participants.
  * This can include socket clients that are not associated to any user.
  * @method notifyObservers
- * @param {string} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {string} userId User who initiated the event
- * @param {Streams_Message} message 
+ * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
+ * @param {String} byUserId User who initiated the event
+ * @param {Streams_Message|Steams_Ephemeral} messageOrEphemeral pass a message with instructions or ephemeral with payload
  */
-Sp.notifyObservers = function (event, userId, message) {
-	var fields = this.fields;
+Sp.notifyObservers = function (event, byUserId, messageOrEphemeral) {
 	var stream = this;
+	var fields = this.fields;
 	Streams.getObservers(fields.publisherId, fields.name, function (observers) {
-		message.fields.streamType = fields.type;
+		var p = Object.getPrototypeOf(messageOrEphemeral);
+		var f;
+		if (p.className === 'Streams_Message') { // a Streams_Ephemeral
+			messageOrEphemeral.fields.streamType = fields.type;
+			f = messageOrEphemeral.getFields();
+		} else { // a Streams_Ephemeral
+			f = messageOrEphemeral.payload;
+		}
 		for (var clientId in observers) {
-			observers[clientId].emit(event, message.getFields());
+			observers[clientId].emit(event, messageOrEphemeral, byUserId, stream);
 		}
 	});
 };
@@ -1226,10 +1235,10 @@ Sp.unsubscribe = function(options, callback) {
  * @param {Streams_Participant} participant The stream participant to notify
  * @param {String} event The type of Streams event, such as "post" or "remove"
  * @param {String} byUserId The user who initiated the message
- * @param {Streams_Message} message  Message on 'post' event or stream on other events
+ * @param {Streams_Message|Steams_Ephemeral} messageOrEphemeral pass a message with instructions or ephemeral with payload
  * @param {Function} [callback] This would be called after all the notifying was done
  */
-Sp.notify = function(participant, event, message, byUserId, callback) {
+Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback) {
 	var stream = this;
 	var userId = participant.fields.userId;
 	function _notify(err, access) {
@@ -1241,13 +1250,13 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 		}
 		
 		// 1) check for socket clients which are online
-		var only = stream.getAttribute('Streams/onlyIfAllClientsOffline');
+		var only = stream.getAttribute(['Streams', 'notifications', 'onlyIfAllClientsOffline']);
 		if (only == undefined) {
 			only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
 		}
 		if (only) {
-			// check if message send even if client online
-			var evenIfOnline = Streams.Stream.getConfigField(stream.fields.type, ['messages', message.fields.type, 'evenIfOnline'], false);
+			// should we notify even if a user has a client online
+			var evenIfOnline = Streams.Stream.getConfigField(stream.fields.type, ['messages', messageOrEphemeral.getType(), 'evenIfOnline'], false);
 			// check if any socket clients are online
 			var clients = Users.User.clientsOnline(userId);
 
@@ -1257,14 +1266,22 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 			_devices(_continue);
 		}
 		function _continue(online, evenIfOnline) {
+			var p = Object.getPrototypeOf(messageOrEphemeral);
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
-				Users.Socket.emitToUser(userId, event, message.getFields(), byUserId);
+				Users.Socket.emitToUser(userId, event, messageOrEphemeral, byUserId, stream);
 
 				if (!evenIfOnline) {
 					return callback && callback();
 				}
 			}
+			if (p.className !== 'Streams_Ephemeral') {
+				return callback && callback();
+			}
+			var p = Object.getPrototypeOf(messageOrEphemeral);
+			if (p.className !== 'Streams_Message') { // a Streams_Ephemeral
+				return false;
+			}		
 			// 3) if user has no socket connected, send offline notifications
 			//      to users who subscribed and filters match
 			if (userId === message.fields.byUserId) {
@@ -1279,7 +1296,7 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 				return false;
 			}
 
-			Streams.Subscription.test(userId, stream, message.fields.type, _continue2);
+			Streams.Subscription.test(userId, stream, messageOrEphemeral.getType(), _continue2);
 		}
 		function _continue2(err, deliveries) {
 			if (err || !deliveries.length) {
@@ -1393,9 +1410,10 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 		}
 	}
 	// check access
+	var t = messageOrEphemeral.getType();
 	var readLevel = (
-		message.fields.type === 'Streams/left' ||
-		message.fields.type === 'Streams/joined'
+		t === 'Streams/left' ||
+		t === 'Streams/joined'
 	) ? 'participants' : 'messages';
 	if (this.get('asUserId') !== userId) {
 		this.calculateAccess(userId, function (err) {
