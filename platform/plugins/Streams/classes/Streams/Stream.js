@@ -1269,7 +1269,10 @@ Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback)
 			var p = Object.getPrototypeOf(messageOrEphemeral);
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
-				Users.Socket.emitToUser(userId, event, messageOrEphemeral, byUserId, stream);
+				Users.Socket.emitToUser(userId, event, messageOrEphemeral, byUserId, {
+					streamType: stream.fields.type,
+					messageCount: stream.fields.messageCount
+				});
 
 				if (!evenIfOnline) {
 					return callback && callback();

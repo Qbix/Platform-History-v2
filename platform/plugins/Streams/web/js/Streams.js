@@ -6570,7 +6570,7 @@ Q.onInit.add(function _Streams_onInit() {
 		);
 	});
 	
-	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, byUserId, stream) {
+	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, byUserId, streamInfo) {
 		Streams.get(stream.fields.publisherId, stream.fields.name, function (err) {
 			if (err) {
 				console.warn(Q.firstErrorMessage(err));
@@ -6581,11 +6581,11 @@ Q.onInit.add(function _Streams_onInit() {
 			var stream = this;
 			var streamType = stream.fields.type;
 			var event = Streams.onEphemeral(streamType, payload.type);
-			Q.handle(event, stream, [ephemeral, byUserId, stream]);
+			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
 			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, '');
-			Q.handle(event, stream, [ephemeral, byUserId, stream]);
+			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
 			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, payload.type);
-			Q.handle(event, stream, [ephemeral, byUserId, stream]);
+			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
 		});
 	});
 
