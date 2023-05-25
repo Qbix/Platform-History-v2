@@ -1270,6 +1270,8 @@ Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback)
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
 				Users.Socket.emitToUser(userId, event, messageOrEphemeral, byUserId, {
+					publisherId: stream.fields.publisherId,
+					streamName: stream.fields.name,
 					streamType: stream.fields.type,
 					messageCount: stream.fields.messageCount
 				});

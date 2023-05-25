@@ -6571,7 +6571,7 @@ Q.onInit.add(function _Streams_onInit() {
 	});
 	
 	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, byUserId, streamInfo) {
-		Streams.get(stream.fields.publisherId, stream.fields.name, function (err) {
+		Streams.get(streamInfo.publisherId, streamInfo.streamName, function (err) {
 			if (err) {
 				console.warn(Q.firstErrorMessage(err));
 				return;
