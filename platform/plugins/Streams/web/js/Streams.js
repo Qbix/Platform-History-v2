@@ -3407,7 +3407,7 @@ Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
  * @param {String} [ephemeral] type of the ephemeral, pass "" for all types
  */
 Sp.onEphemeral = function _Stream_prototype_onEphemeral (messageType) {
-	return Stream.onMessage(this.fields.publisherId, this.fields.name, messageType);
+	return Stream.onEphemeral(this.fields.publisherId, this.fields.name, messageType);
 };
 
 /**
