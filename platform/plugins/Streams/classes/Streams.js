@@ -527,7 +527,7 @@ Streams.listen = function (options, servers) {
 						+ '" is not supported by stream of type "' + stream.fields.type + '"';
 					return fn && fn(err2, false);
 				}
-				var ephemeral = new Streams.Ephemeral(payload, Date.now());
+				var ephemeral = new Streams.Ephemeral(payload, Date.now() / 1000);
 				this.notifyParticipants(
 					'Streams/ephemeral', byUserId, ephemeral, dontNotifyObservers, fn
 				);
