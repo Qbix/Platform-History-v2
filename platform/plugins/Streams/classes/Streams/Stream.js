@@ -478,7 +478,12 @@ Sp.notifyObservers = function (event, byUserId, messageOrEphemeral) {
 			f = messageOrEphemeral.payload;
 		}
 		for (var clientId in observers) {
-			observers[clientId].emit(event, messageOrEphemeral, byUserId, stream);
+			observers[clientId].emit(event, messageOrEphemeral, byUserId, {
+				publisherId: stream.fields.publisherId,
+				streamName: stream.fields.name,
+				streamType: stream.fields.type,
+				messageCount: stream.fields.messageCount
+			});
 		}
 	});
 };
