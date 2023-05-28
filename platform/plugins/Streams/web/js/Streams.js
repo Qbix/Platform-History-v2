@@ -719,7 +719,8 @@ var _publicStreams = Streams.arePublic.collection = {};
  * @param {String} streamName Name of the stream published by this publisher
  * @param {Function} callback
  *	If there were errors, first parameter is an array of errors.
- *  Otherwise, first parameter is null and second parameter is a Streams.Stream object
+ *  Otherwise, first parameter is null and second parameter is a Streams.Stream object.
+ *  The third parameter can contain more retrieved objects, under keys like "messages" and "participants"
  * @param {object} [extra] Optional object which can include the following keys:
  *   @param {Number|Object} [extra.participants=0] Optionally fetch up to that many participants
  *   @param {Number|Object} [extra.messages=0] Optionally fetch up to that many latest messages
