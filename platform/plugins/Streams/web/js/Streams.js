@@ -4044,7 +4044,13 @@ Stream.unsubscribe.onError = new Q.Event();
  * @param {Function} [callback] receives (err, result) as parameters
  */
 Stream.observe = function _Stream_observe (publisherId, streamName, callback) {
-	Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
+	var nodeUrl = Q.nodeUrl({
+		publisherId: publisherId,
+		streamName: streamName
+	});
+	Q.Socket.onConnect('Users', nodeUrl).add(function () {
+		Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
+	}, 'Streams.Stream.observe');
 };
 
 /**
