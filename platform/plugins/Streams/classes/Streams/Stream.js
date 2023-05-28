@@ -793,9 +793,9 @@ Sp.testAdminLevel = function(level, callback) {
 	return testLevel (this, 'adminLevel', 'ADMIN_LEVEL', level, callback);
 };
 /**
- * Verifies whether the user has at least the given permission
+ * Verifies whether the user has all of the given permissions
  * @method testPermission
- * @param {String|Array} permission The name of the permission
+ * @param {String|Array} permission The name(s) of the permission(s)
  * @param callback=null {function}
  *	Callback receives "error" and boolean as arguments - whether the access is granted.
  * @return {Boolean}
@@ -835,7 +835,7 @@ Sp.testPermission = function(permission, callback)
 		} else {
 			var permissions = subj.get('permissions', []);
 			var result = (permissions.indexOf(permission) >= 0);
-			callback && callback.call(subj, null, true);
+			callback && callback.call(subj, null, result);
 		}
 	});
 	return false;

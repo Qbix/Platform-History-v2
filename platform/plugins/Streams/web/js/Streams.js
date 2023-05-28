@@ -3627,7 +3627,7 @@ Sp.testReadLevel = function _Stream_prototype_testReadLevel (level) {
 		level = Streams.READ_LEVEL[level];
 	}
 	if (level === undefined) {
-		throw new Q.Error("Streams.Sp.testReadLevel: level is undefined");
+		throw new Q.Error("Streams.Stream.prototype.testReadLevel: level is undefined");
 	}
 	return this.access.readLevel >= level;
 };
@@ -3644,7 +3644,7 @@ Sp.testWriteLevel = function _Stream_prototype_testWriteLevel (level) {
 		level = Streams.WRITE_LEVEL[level];
 	}
 	if (level === undefined) {
-		throw new Q.Error("Streams.Sp.testWriteLevel: level is undefined");
+		throw new Q.Error("Streams.Stream.prototype.testWriteLevel: level is undefined");
 	}
 	return this.access.writeLevel >= level;
 };
@@ -3661,9 +3661,23 @@ Sp.testAdminLevel = function _Stream_prototype_testAdminLevel (level) {
 		level = Streams.ADMIN_LEVEL[level];
 	}
 	if (level === undefined) {
-		throw new Q.Error("Streams.Sp.testAdminLevel: level is undefined");
+		throw new Q.Error("Streams.Stream.prototype.testAdminLevel: level is undefined");
 	}
 	return this.access.adminLevel >= level;
+};
+
+/**
+ * Test whether the user has a given permission
+ *
+ * @method testPermission
+ * @param {String} permission The name of a permission
+ * @return {Boolean} Returns true if the user has this permission
+ */
+Sp.testPermission = function _Stream_prototype_testPermission (permission) {
+	if (level === undefined) {
+		throw new Q.Error("Streams.prototype.testWriteLevel: level is undefined");
+	}
+	return this.access.permissions.indexOf(permission) >= 0;
 };
 
 /**
