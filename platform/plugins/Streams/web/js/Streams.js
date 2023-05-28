@@ -3755,7 +3755,7 @@ Sp.refresh = function _Stream_prototype_refresh (callback, options) {
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight, otherwise sorts by descrending weight.
  * @param {Function} callback callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedFrom objects you can iterate over with Q.each
  */
@@ -3771,7 +3771,7 @@ Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, 
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight, otherwise sorts by descrending weight.
  *   @param {String} [options.prefix] optional prefix to filter the streams by
  * @param {Function} callback callback to call with the results
  *  First parameter is the error, the second one is an object of
@@ -4457,6 +4457,8 @@ Mp.seen = function _Message_seen (messageTotal) {
  * @param {Number} [ordinal.min] The minimum ordinal in the range. If omitted, uses limit.
  * @param {Number} [ordinal.max] The maximum ordinal in the range. If omitted, gets the latest messages.
  * @param {Number} [ordinal.limit] Change the max number of messages to retrieve. If only max and limit are specified, messages are sorted by decreasing ordinal.
+ * @param {String} [ordinal.type] the type of the messages, if you only need a specific type
+ * @param {Boolean} [ordinal.ascending=false] whether to sort by ascending weight, otherwise sorts by descrending weight.
  * @param {Function} callback This receives two parameters. The first is the error.
  *   If ordinal was a Number, then the second parameter is the Streams.Message, as well as the "this" object.
  *   If ordinal was an Object, then the second parameter is a hash of { ordinal: Streams.Message } pairs
