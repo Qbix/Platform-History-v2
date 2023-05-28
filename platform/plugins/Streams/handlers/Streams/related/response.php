@@ -83,9 +83,9 @@ function Streams_related_response()
 	if ($streams_requested) {
 		$streams = $result[1];
 		$arr = Db::exportArray($streams, array('numeric' => true));
-		foreach ($arr as $k => $stream) {
-			if (!$stream) continue;
-			$s = $streams[$stream['name']];
+		foreach ($arr as $k => $v) {
+			if (!$v) continue;
+			$s = $streams[$v['name']];
 			$arr[$k]['access'] = array(
 				'readLevel' => $s->get('readLevel', $s->readLevel),
 				'writeLevel' => $s->get('writeLevel', $s->writeLevel),

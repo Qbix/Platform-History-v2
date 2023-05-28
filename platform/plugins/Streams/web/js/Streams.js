@@ -2423,7 +2423,7 @@ Streams.related.byTimestamps = function(publisherId, streamName, relationType, o
 		callback = options;
 		options = {};
 	}
-	var o = Q.extend({}, options, {
+	var o = Q.extend({}, Streams.related.byTimestamps.options, options, {
 		relationsOnly: true
 	});
 	Q.Streams.related(publisherId, streamName, relationType, true, o,
