@@ -154,7 +154,7 @@ function Q_response($params)
 <!doctype html><html lang=en>
 <head><meta charset=utf-8><title>Q Result</title></head>
 <body>
-<script type="application/javascript">
+<script type="text/javascript">
 window.result = function () { return $json };
 </script>
 </body>
@@ -164,7 +164,7 @@ EOT;
 		case 'json':
 		default:
 			if (!Q_Response::$batch) {
-				header("Content-type: " . ($callback ? "application/javascript" : "application/json"));
+				header("Content-type: " . ($callback ? "text/javascript" : "application/json"));
 			}
 			echo $callback ? "/**/$callback($json)" : $json;
 		}

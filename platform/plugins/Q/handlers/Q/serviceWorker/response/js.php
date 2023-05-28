@@ -2,7 +2,7 @@
 
 function Q_serviceWorker_response_js()
 {
-    header("Content-Type: application/javascript");
+    header("Content-Type: text/javascript");
 
 	$cookies_json = Q::json_encode(Q_Response::$cookies);
 

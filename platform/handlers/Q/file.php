@@ -18,7 +18,7 @@ function Q_file($params)
 			header ("Content-type: application/$ext");
 			break;
 		case 'js':
-			header ("Content-type: application/javascript");
+			header ("Content-type: text/javascript");
 			break;
 		case 'ogg':
 		case 'mp3':

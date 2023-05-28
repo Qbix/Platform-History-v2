@@ -962,7 +962,7 @@ class Q_Html
 		$attributes = array())
 	{
 		if (empty($attributes['type'])) {
-			$attributes['type'] = 'application/javascript';
+			$attributes['type'] = 'text/javascript';
 		}
 		if (!isset($attributes['cdata'])) {
 			$attributes['cdata'] = true;
@@ -1182,7 +1182,7 @@ class Q_Html
 					'dir' => '/'
 				),
 				'script' => array(
-					'type' => 'application/javascript'
+					'type' => 'text/javascript'
 				),
 				'style' => array(
 					'type' => 'text/css'

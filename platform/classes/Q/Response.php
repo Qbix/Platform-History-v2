@@ -925,10 +925,10 @@ class Q_Response
 	 * @static
 	 * @param {string} $src
 	 * @param {string} [$slotName=null]
-	 * @param {string} [$type='application/javascript']
+	 * @param {string} [$type='text/javascript']
 	 * @return {boolean} returns false if script was already added, else returns true
 	 */
-	static function addScript ($src, $slotName = null, $type = 'application/javascript')
+	static function addScript ($src, $slotName = null, $type = 'text/javascript')
 	{
 		/**
 		 * @event Q/response/addScript {before}

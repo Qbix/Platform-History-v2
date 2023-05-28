@@ -983,10 +983,12 @@ class Q_Request
 				return $result;
 			}
 		}
-		if (null !== Q_Request::special('method', null)) {
+		$method = Q::ifset($_SERVER, 'REQUEST_METHOD', null);
+		if ($method !== 'OPTIONS'
+		&& null !== Q_Request::special('method', null)) {
 			return strtoupper(Q_Request::special('method', null));
 		}
-		if (!isset($_SERVER['REQUEST_METHOD'])) {
+		if (!$method) {
 			return 'GET';
 		}
 		return strtoupper($_SERVER['REQUEST_METHOD']);

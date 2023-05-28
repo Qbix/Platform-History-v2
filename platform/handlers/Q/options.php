@@ -27,8 +27,9 @@ function Q_options($params)
 		}
 
 		if ($allow) {
+			$allowed[] = 'GET';
 			$METHODS = array(
-				'response' => 'GET', 
+//				'response' => 'GET', 
 				'post' => 'POST', 
 				'put' => 'PUT', 
 				'delete' => 'DELETE'
@@ -39,17 +40,15 @@ function Q_options($params)
 				}
 			}
 		}
+		$allowedMethods = implode(', ', $allowed);
 
-		echo <<<EOT
-
-HTTP/1.1 204 No Content
-Connection: keep-alive
-Access-Control-Allow-Origin: $origin
-Access-Control-Allow-Methods: $METHODS
-Access-Control-Max-Age: 86400
-
-EOT;
-		return true;
+		header('HTTP/1.1 204 No Content');
+		header("Access-Control-Allow-Origin: $origin");
+		header("Access-Control-Allow-Methods: $allowedMethods");
+		header("Access-Control-Max-Age: 86400");
+		header('HTTP/1.1 204 No Content');
+		Q_Dispatcher::$servedResponse = true;
+		return false;
 	}
 	return Q::event("$module/$action/options", $params);
 }
