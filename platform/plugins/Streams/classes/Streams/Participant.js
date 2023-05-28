@@ -65,6 +65,58 @@ Streams_Participant.states = function() {
 	return JSON.parse(('[' + column[0][1] + ']').replaceAll({"'": '"'}));
 };
 
+var Pp = Streams_Participant.prototype;
+
+/**
+ * Get all extra attributes
+ *
+ * @method getAllExtras
+ * @return {Object}
+ */
+Pp.getAllExtras = function _Participant_prototype_getAllExtras () {
+	try {
+		return JSON.parse(this.fields.extra);
+	} catch (e) {
+		return {};
+	}
+};
+
+/**
+ * Get the value of an extra
+ *
+ * @method getExtra
+ * @param {String} extraName the name of the extra to get
+ * @return {Mixed}
+ */
+Pp.getExtra = function _Participant_prototype_getExtra (extraName) {
+	var extras = this.getAllExtras();
+	return extras[extraName];
+};
+
+/**
+ * Test whether participant has one or more roles in stream
+ * 
+ * @param {String|Array} roles You can pass a role name, or array of role names
+ * @return {Boolean} whether the user has all the roles
+ */
+Pp.testRoles = function _Participant_prototype_testRoles (roles) {
+	var extras = this.getAllExtras();
+	if (typeof roles === 'string') {
+		if (extras.role === roles) {
+			return true;
+		}
+		roles = [roles];
+	} else if (roles.length == 1 && extras.role === roles[0]) {
+		return true;
+	}
+	for (var i=0, l=roles.length; i<l; ++i) {
+		if (extras.roles.indexOf(roles[i]) < 0) {
+			return false;
+		}
+	}
+	return true;
+};
+
 /**
  * The setUp() method is called the first time
  * an object of this class is constructed.

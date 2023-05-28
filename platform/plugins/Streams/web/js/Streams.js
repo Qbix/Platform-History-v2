@@ -5023,9 +5023,33 @@ Pp.getAllExtras = function _Participant_prototype_getAllExtras () {
  * @param {String} extraName the name of the extra to get
  * @return {Mixed}
  */
-Pp.getExtra = function _Participant_prototype_get (extraName) {
-	var attr = this.getAllExtras();
-	return attr[extraName];
+Pp.getExtra = function _Participant_prototype_getExtra (extraName) {
+	var extras = this.getAllExtras();
+	return extras[extraName];
+};
+
+/**
+ * Test whether participant has one or more roles in stream
+ * 
+ * @param {String|Array} roles You can pass a role name, or array of role names
+ * @return {Boolean} whether the user has all the roles
+ */
+Pp.testRoles = function _Participant_prototype_testRoles (roles) {
+	var extras = this.getAllExtras();
+	if (typeof roles === 'string') {
+		if (extras.role === roles) {
+			return true;
+		}
+		roles = [roles];
+	} else if (roles.length == 1 && extras.role === roles[0]) {
+		return true;
+	}
+	for (var i=0, l=roles.length; i<l; ++i) {
+		if (extras.roles.indexOf(roles[i]) < 0) {
+			return false;
+		}
+	}
+	return true;
 };
 
 /**

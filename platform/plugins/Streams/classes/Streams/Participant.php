@@ -141,6 +141,31 @@ class Streams_Participant extends Base_Streams_Participant
 	{
 		$this->extra = '{}';
 	}
+
+	/**
+	 * Test whether participant has one or more roles in stream
+	 * 
+	 * @param {string|array} $roles You can pass a role name, or array of role names
+	 * @return {boolean} whether the user has all the roles
+	 */
+	function testRoles ($roles) {
+		if (is_string($roles)) {
+			if ($this->getExtra('role') === $roles) {
+				return true;
+			}
+			$roles = array($roles);
+		} else if (count($roles) == 1
+		&& $this->getExtra('role') === $roles[0]) {
+			return true;
+		}
+		$eroles = $this->getExtra($roles);
+		foreach ($roles as $role) {
+			if (!in_array($role, $eroles)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	/**
 	 * @method beforeSave
