@@ -2334,6 +2334,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 			// Now process all the relations
 			Q.each(data.slots.relations, function (j, relation) {
 				relation[near] = stream;
+				if (options.relationsOnly) {
+					return; // no need to get the related streams
+				}
 				var key = Streams.key(relation[farPublisherId], relation[farStreamName]);
 				if (!keys2[key] && relation[farPublisherId] != publisherId) {
 					// Fetch all the related streams from other publishers
