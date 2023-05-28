@@ -144,6 +144,10 @@ table { table-layout: fixed; }
 	z-index: 99999;
 }
 
+html.MyApp_terms #content {
+	padding: 20px;
+}
+
 /* Dashboard contents */
 #dashboard>* { margin: 0; padding: 0; line-height: 40px; text-align: center; }
 #dashboard>h1 { float: left; padding: 5px; width: auto; }
