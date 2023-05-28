@@ -109,6 +109,9 @@ Pp.testRoles = function _Participant_prototype_testRoles (roles) {
 	} else if (roles.length == 1 && extras.role === roles[0]) {
 		return true;
 	}
+	if (!extras.roles) {
+		return false;
+	}
 	for (var i=0, l=roles.length; i<l; ++i) {
 		if (extras.roles.indexOf(roles[i]) < 0) {
 			return false;
