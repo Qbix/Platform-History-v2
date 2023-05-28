@@ -9019,12 +9019,13 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		for (i=0; i<scripts.length; ++i) {
 			script = scripts[i];
 			var s = script.getAttribute('src');
-			if (s !== src && s !== src2) {
+			var s2 = s.split('?')[0];
+			if (s2 !== src2) {
 				continue;
 			}
 			// move the element to the right container if necessary
 			// hopefully, moving the script element won't change the order of execution
-			p = scripts[i];
+			p = script;
 			var outside = true;
 			while (p = p.parentElement) {
 				if (p === container) {
