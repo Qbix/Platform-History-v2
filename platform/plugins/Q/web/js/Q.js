@@ -9019,8 +9019,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		for (i=0; i<scripts.length; ++i) {
 			script = scripts[i];
 			var s = script.getAttribute('src');
-			var s2 = s.split('?')[0];
-			if (s2 !== src2) {
+			if (!s || s.split('?')[0] !== src2) {
 				continue;
 			}
 			// move the element to the right container if necessary
@@ -9293,7 +9292,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		e = links[i];
 		m = e.getAttribute('media');
 		h = e.getAttribute('href');
-		if ((m && m !== media) || h.split('?')[0] !== href2) {
+		if ((m && m !== media) || !h || h.split('?')[0] !== href2) {
 			continue;
 		}
 		// A link element with this media and href is already found in the document.
