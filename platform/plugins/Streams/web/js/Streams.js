@@ -2406,6 +2406,45 @@ Streams.related.options = {
 Streams.related.onError = new Q.Event();
 
 /**
+ * Get lists of { timestamp, publisherId, streamName }
+ * for displaying countdowns and calling functions like switchTo.
+ * It assumes that the relation weights are timestamps.
+ * @method related.ByTimestamps
+ * @param {String} publisherId publisher of the category stream
+ * @param {String} streamName name of the category stream
+ * @param {String|Array|null} relationType the type of the relation, to filter by if any
+ * @param {Object} options you can pass options to Streams.related here, such as "min" and "max"
+ * @param {Function} callback Receives (err, results) where results is an array
+ *  of objects with keys "timestamp", "publisherId", "streamName"
+ */
+Streams.related.byTimestamps = function(publisherId, streamName, relationType, options, callback) {
+	if (Q.typeOf(options) === 'function') {
+		callback = options;
+		options = {};
+	}
+	var o = Q.extend({}, options, {
+		relationsOnly: true
+	});
+	Q.Streams.related(publisherId, streamName, relationType, true, o,
+	function (err) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			Q.handle(callback, null, [msg]);
+			return console.warn(msg);
+		}
+		var results = [];
+		Q.each(this.relations, function () {
+			results.push({
+				timestamp: this.weight,
+				publisherId: this.fromPublisherId,
+				streamName: this.fromStreamName
+			});
+		});
+		Q.handle(callback, this, [null, results]);
+	});
+};
+
+/**
  * @class Streams.Stream
  */
 
