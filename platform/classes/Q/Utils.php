@@ -1493,7 +1493,43 @@ class Q_Utils
 	}
 
 	/**
-	 * Checks whether the path can be used for writing files by the current session
+	 * Checks whether the path can be used for reading files in the current session
+	 * @method canReadFromPath
+	 * @static
+	 * @param {string} $path
+	 * @return {boolean}
+	 */
+	static function canReadFromPath(
+		$path
+	) {
+		$result = Q::event(
+			"Q/Utils/canReadFromPath",
+			@compact('path'),
+			'before'
+		);
+		$paths = array(APP_FILES_DIR);
+		foreach (Q::plugins() as $plugin) {
+			$c = strtoupper($plugin).'_PLUGIN_FILES_DIR';
+			if (defined($c)) {
+				$paths[] = constant($c);
+			}
+		}
+		$paths[] = Q_FILES_DIR;
+		if (strpos($path, "../") === false
+		and strpos($path, "..".DS) === false) {
+			foreach ($paths as $p) {
+				$len = strlen($p);
+				if (strncmp($path, $p, $len) === 0) {
+					// we can read from this path
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Checks whether the path can be used for writing files in the current session
 	 * @method canWriteToPath
 	 * @static
 	 * @param {string} $path The path to check
@@ -1511,12 +1547,12 @@ class Q_Utils
 		$throwIfNotWritable = false, 
 		$mkdirIfMissing = false
 	) {
+		$result = Q::event(
+			"Q/Utils/canWriteToPath",
+			@compact('path', 'throwIfNotWritable', 'mkdirIfMissing'),
+			'before'
+		);
 		if (isset($throwIfNotWritable)) {
-			$result = Q::event(
-				"Q/Utils/canWriteToPath",
-				@compact('path', 'throwIfNotWritable', 'mkdirIfMissing'),
-				'before'
-			);
 			if (isset($result)) {
 				if (!$result and $throwIfNotWritable) {
 					throw new Q_Exception_CantWriteToPath(@compact('path', 'mkdirIfMissing'));

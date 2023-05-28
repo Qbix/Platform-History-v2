@@ -22,7 +22,8 @@
 			"Q/sessionExtras": ["Users/before/Q_sessionExtras"],
 			"Q/response/notices": ["Users/before/Q_response_notices"],
 			"Q/session/save": ["Users/before/Q_session_save"],
-			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
+			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"],
+			"Q/Users/canReadFromPath": ["Users/before/Q_Utils_canReadFromPath"]
 		},
 		"handlersAfterEvent": {
 			"Q/session/write": ["Users/after/Q_session_write"],
