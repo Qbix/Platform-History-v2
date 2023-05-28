@@ -3717,7 +3717,7 @@ Sp.testAdminLevel = function _Stream_prototype_testAdminLevel (level) {
  * @return {Boolean} Returns true if the user has this permission
  */
 Sp.testPermission = function _Stream_prototype_testPermission (permission) {
-	if (level === undefined) {
+	if (permission === undefined) {
 		throw new Q.Error("Streams.prototype.testWriteLevel: level is undefined");
 	}
 	return this.access.permissions.indexOf(permission) >= 0;
