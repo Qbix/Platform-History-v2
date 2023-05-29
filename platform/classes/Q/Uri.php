@@ -788,7 +788,8 @@ class Q_Uri
 	static function proxyDestination($url)
 	{
 		$proxies = Q_Config::get('Q', 'proxies', array());
-		foreach ($proxies as $dest_url => $src_url) {
+		foreach ($proxies as $dest_url => $src_info) {
+			$src_url = is_string($src_info) ? $src_info : $src_info['url'];
 			$src_url_strlen = strlen($src_url);
 			if (substr($url, 0, $src_url_strlen) == $src_url) {
 				if (!isset($url[$src_url_strlen]) 
@@ -801,7 +802,9 @@ class Q_Uri
 	}
 	
 	/**
-	 * If a proxy exists for this URL, returns the source URL, otherwise returns the input URL
+	 * If a proxy exists for this URL, returns the source URL, otherwise returns the input URL again.
+	 * Depending on the config, it may also append a key and HMAC to the request,
+	 * to help the proxy authorize the request.
 	 * @method proxySource
 	 * @static
 	 * @param {string} $url
@@ -811,12 +814,26 @@ class Q_Uri
 	{
 		$url = self::fixUrl($url);
 		$proxies = Q_Config::get('Q', 'proxies', array());
-		foreach ($proxies as $dest_url => $src_url) {
+		foreach ($proxies as $dest_url => $src_info) {
+			$secret = null;
+			if (is_string($src_info)) {
+				$src_url = $src_info;
+			} else {
+				Q_Valid::requireFields(array('url', 'secret'), $src_info, true);
+				$src_url = $src_info['url'];
+				$secret = $src_info['secret'];
+			}
+			$src_url = is_string($src_info) ? $src_info : $src_info['url'];
 			$dest_url_strlen = strlen($dest_url);
 			if (substr($url, 0, $dest_url_strlen) == $dest_url) {
 				if (!isset($url[$dest_url_strlen]) 
 				or $url[$dest_url_strlen] == '/') {
-					return $src_url.substr($url, $dest_url_strlen);
+					$proxy_url = $src_url.substr($url, $dest_url_strlen);
+					if ($secret) {
+						$interval = Q::ifset($src_info, 'interval', 3600);
+						$proxy_url = self::signUrl($proxy_url, $secret, $interval);
+					}
+					return $proxy_url;
 				}
 			}
 		}
@@ -936,6 +953,24 @@ class Q_Uri
 		return $url;
 	}
 	
+	/**
+	 * Signs a URL with HMAC using a recent timestamp, sha1 a secret.
+	 * The secret is stored in the config under "Q"/"proxies". Each
+	 * entry has src_url as a key, pointing to an object with "url" and "secret" keys.
+	 * @method fixUrl
+	 * @static
+	 * @param {string} $url The url to sign
+	 * @param {string} $secret The secret to use
+	 * @param {integer} [$interval=3600] The time interval to quantize, defaults to an hour
+	 * @return {string} The URL with all subsequent ? and # replaced by &
+	 */
+	static function signUrl($url, $secret = null, $interval = 3600)
+	{
+		$timestamp = intval(time() / $interval) * $interval;
+		$signature = Q_Utils::signature(compact('url', 'timestamp'), $secret);
+		return self::fixUrl("$url?Q.timestamp=$timestamp&Q.sig=$signature");
+	}
+
 	/**
 	 * May append a "Q.cacheBust" parameter to URL's querystring, and also
 	 * returns the content digest hash for that particular URL, 
