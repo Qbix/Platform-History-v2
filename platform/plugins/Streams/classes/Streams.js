@@ -417,7 +417,7 @@ Streams.listen = function (options, servers) {
 			_messageHandlers[msg.fields.type].call(this, msg);
 		}
 
-		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg.fields);
+		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg);
 		stream.notifyParticipants('Streams/post', byUserId, msg);
 	});
 
