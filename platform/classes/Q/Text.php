@@ -45,7 +45,7 @@ class Q_Text
 	 * Sets the language and locale to use in Q_Text::basename() calls.
 	 * The Q_Dispatcher::dispatch() method calls this by default using
 	 * information from Q_Request::languages().
-	 * @method set
+	 * @method setLanguage
 	 * @static
 	 * @param {String} language Something like "en"
 	 * @param {String} [locale=null] Something like "US", but can also be null if unknown
@@ -54,6 +54,25 @@ class Q_Text
 	{
 		self::$language = strtolower($language);
 		self::$locale = $locale ? strtoupper($locale) : '';
+	}
+
+	/**
+	 * Set the language automatically from the request
+	 * @method setLanguageFromRequest
+	 * @static
+	 */
+	static function setLanguageFromRequest()
+	{
+		$languages = Q_Request::languages();
+		$l_chosen = reset($languages);
+		$l_preference = 0;
+		foreach ($languages as $language) {
+			if (isset($language[2]) and $l_preference < $language[2]) {
+				$l_preference = $language[2];
+				$l_chosen = $language;
+			}
+		}
+		Q_Text::setLanguage($l_chosen[0], Q::ifset($l_chosen, 1, null));
 	}
 	
 	/**

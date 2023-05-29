@@ -154,16 +154,7 @@ class Q_Dispatcher
 			self::$uri = clone($request_uri);
 		}
 		
-		$languages = Q_Request::languages();
-		$l_chosen = reset($languages);
-		$l_preference = 0;
-		foreach ($languages as $language) {
-			if (isset($language[2]) and $l_preference < $language[2]) {
-				$l_preference = $language[2];
-				$l_chosen = $language;
-			}
-		}
-		Q_Text::setLanguage($l_chosen[0], Q::ifset($l_chosen, 1, null));
+		Q_Text::setLanguageFromRequest();
 
 		// if the Q service worker is requested, generate and serve it
 		if (Q_Request::isServiceWorker()) {
