@@ -14,7 +14,7 @@
 			"Q/responseExtras": ["Streams/before/Q_responseExtras"],
 			"Q/sessionExtras": ["Streams/before/Q_sessionExtras"],
 			"Q/Utils/canWriteToPath": ["Streams/before/Q_Utils_canWriteToPath"],
-			"Q/Users/canReadFromPath": ["Streams/before/Q_Utils_canReadFromPath"],
+			"Q/Utils/canReadFromPath": ["Streams/before/Q_Utils_canReadFromPath"],
 			"Db/Row/Users_Contact/saveExecute": ["Streams/before/Users_Contact_saveExecute"],
 			"Db/Row/Users_Contact/removeExecute": ["Streams/before/Users_Contact_removeExecute"],
 			"Users/canManageContacts": ["Streams/before/Users_canManageContacts"],
