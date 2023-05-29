@@ -6669,14 +6669,13 @@ Q.onInit.add(function _Streams_onInit() {
 				return;
 			}
 
-			var payload = ephemeral.payload;
 			var stream = this;
 			var streamType = stream.fields.type;
-			var event = Streams.onEphemeral(streamType, payload.type);
+			var event = Streams.onEphemeral(streamType, ephemeral.type);
 			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
 			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, '');
 			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
-			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, payload.type);
+			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, ephemeral.type);
 			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
 		});
 	});

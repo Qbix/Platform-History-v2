@@ -471,14 +471,8 @@ Sp.notifyObservers = function (event, byUserId, messageOrEphemeral) {
 	Streams.getObservers(fields.publisherId, fields.name, function (observers) {
 		var p = Object.getPrototypeOf(messageOrEphemeral);
 		var f;
-		if (p.className === 'Streams_Message') { // a Streams_Ephemeral
-			messageOrEphemeral.fields.streamType = fields.type;
-			f = messageOrEphemeral.getFields();
-		} else { // a Streams_Ephemeral
-			f = messageOrEphemeral.payload;
-		}
 		for (var clientId in observers) {
-			observers[clientId].emit(event, messageOrEphemeral, byUserId, {
+			observers[clientId].emit(event, messageOrEphemeral.getFields(), byUserId, {
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
 				streamType: stream.fields.type,
@@ -1274,7 +1268,7 @@ Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback)
 			var p = Object.getPrototypeOf(messageOrEphemeral);
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
-				Users.Socket.emitToUser(userId, event, messageOrEphemeral, byUserId, {
+				Users.Socket.emitToUser(userId, event, messageOrEphemeral.getFields(), byUserId, {
 					publisherId: stream.fields.publisherId,
 					streamName: stream.fields.name,
 					streamType: stream.fields.type,
