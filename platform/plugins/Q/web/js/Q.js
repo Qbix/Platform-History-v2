@@ -173,6 +173,26 @@ Object.getPrototypeOf = function (obj) {
 };
 
 /**
+ * @class JSON
+ * @description Q extended methods for JSON
+ */
+
+/**
+ * Returns whether the JSON is valid or not
+ * @method isValid
+ * @static
+ * @param {String} str 
+ */
+JSON.isValid = function (str) {
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
+};
+
+/**
  * @class Array
  * @description Q extended methods for Arrays
  */
