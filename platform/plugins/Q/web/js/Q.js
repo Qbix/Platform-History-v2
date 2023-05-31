@@ -10803,8 +10803,7 @@ Q.Template.compile = function _Q_Template_compile (content, type) {
 	return r[content];
 };
 Q.Template.compile.options = {
-	preventIndent: true,
-	noEscape: true
+	preventIndent: true
 };
 Q.Template.compile.results = {};
 
