@@ -10786,17 +10786,18 @@ Q.Template.remove = function (name) {
  * @method compile
  * @param {String} content The content of the template
  * @param {String} [type="handlebars"] The type of the template
+ * @param {Object} [options] Pass any extra options to Handlebars.compile
  * @return {Function} a function that can be called to render the template
  */
-Q.Template.compile = function _Q_Template_compile (content, type) {
+Q.Template.compile = function _Q_Template_compile (content, type, options) {
 	type = type || 'handlebars';
 	var r = Q.Template.compile.results;
 	if (!r[content]) {
 		if (type === 'handlebars') {
-			r[content] = Handlebars.compile(content, Q.Template.compile.options);
+			r[content] = Handlebars.compile(content, Q.extend({}, Q.Template.compile.options, options));
 		} else {
 			r[content] = function (fields, options) {
-				return content;
+				return content; // just renders the template's content itself
 			};
 		}
 	}
@@ -10970,7 +10971,7 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			Q.Page.beingActivated = pba;
 			try {
 				var type = (info && info.type) || (options && options.type);
-				var compiled = Q.Template.compile(params.template[1], type);
+				var compiled = Q.Template.compile(params.template[1], type, options);
 				callback(null, compiled(fields, options));
 			} catch (e) {
 				console.warn(e);
