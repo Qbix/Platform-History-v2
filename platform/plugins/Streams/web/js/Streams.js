@@ -5923,6 +5923,7 @@ function updateAvatarCache(stream) {
 	if (avatarStreamNames[sf.name]) {
 		var field = sf.name.split('/').pop();
 		var userId = sf.publisherId;
+		var isIcon = sf.name === 'Streams/user/icon';
 		var c = isIcon ? sf.icon : sf.content;
 		cache = Avatar.get.cache;
 		if ((item = cache.get([userId])) && item.subject) {
@@ -5933,7 +5934,6 @@ function updateAvatarCache(stream) {
 			cache = Users.get.cache;
 			if (item = cache.get([userId])) {
 				var user = item.subject;
-				var isIcon = sf.name === 'Streams/user/icon';
 				user[field] = c;
 				cache.set([userId], 0, item.subject, [null, item.subject]);
 			}
