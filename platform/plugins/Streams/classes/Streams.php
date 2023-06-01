@@ -150,13 +150,6 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can post messages requesting edits of stream
-	 * @property $WRITE_LEVEL['suggest']
-	 * @type integer
-	 * @default 28
-	 * @final
-	 */
-	/**
 	 * Can post messages to edit stream content immediately
 	 * @property $WRITE_LEVEL['edit']
 	 * @type integer
@@ -189,11 +182,11 @@ abstract class Streams extends Base_Streams
 		'none' => 0,
 		'join' => 10,
 		'vote' => 13,
-		'suggest' => 15,
 		'contribute' => 18,		
 		'post' => 20,
 		'relate' => 23,
 		'relations' => 25,
+		'suggest' => 28,
 		'edit' => 30,
 		'closePending' => 35,
 		'close' => 40,
