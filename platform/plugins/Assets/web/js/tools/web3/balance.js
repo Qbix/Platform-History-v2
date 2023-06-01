@@ -5,7 +5,6 @@
  */
 
 var Assets = Q.Assets;
-var Web3 = Assets.Currency.Web3;
 
 /**
  * Show balance of tokens by chain and token
@@ -43,7 +42,6 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var tool = this;
 		var state = tool.state;
 
-		tool.element.innerHTML = "";
 		Q.Template.render("Assets/web3/balance", {
 			chainId: state.chainId,
 			chains: Assets.Web3.chains
@@ -69,7 +67,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		};
 
 		Q.Users.init.web3(function () { // to load ethers.js
-			Q.handle(Web3.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
+			Q.handle(Assets.Currencies.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
 				if (err) {
 					return console.warn(err);
 				}
@@ -88,12 +86,12 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 							if (err) {
 								return;
 							}
-	
+
 							contract.on("Transfer", function _assets_web3_balance_listener (from, to, value) {
 								if (![from.toLowerCase(), to.toLowerCase()].includes(tool.loggedInUserXid.toLowerCase())) {
 									return;
 								}
-	
+
 								contract.balanceOf(tool.loggedInUserXid).then(function (balance) {
 									balance = _parseAmount(balance);
 									$("*[data-address='" + item.token_address + "']", tool.element)
@@ -161,13 +159,13 @@ Q.Template.set('Assets/web3/balance',
 
 Q.Template.set('Assets/web3/balance/list',
 `{{#each results}}
-	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenAmount}} {{this.tokenName}}</div>
+	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenName}} {{this.tokenAmount}}</div>
 {{/each}}`);
 
 Q.Template.set('Assets/web3/balance/select',
 `<select name="tokens" data-count="{{results.length}}">
 	{{#each results}}
-		<option data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}" data-decimals="{{this.decimals}}">{{this.tokenAmount}} {{this.tokenName}}</option>
+		<option data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}" data-decimals="{{this.decimals}}">{{this.tokenName}} {{this.tokenAmount}}</option>
 	{{/each}}
 </select>`);
 

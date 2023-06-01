@@ -1145,7 +1145,7 @@
 							Q.each(events, function (event1, event2) {
 								if (obj.type === "event" && obj.name === event1) {
 									contract.on(event1, function () {
-										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										Q.handle(Assets.NFT.Web3[event2], contract, Array.from(arguments))
 									});
 								}
 							});
