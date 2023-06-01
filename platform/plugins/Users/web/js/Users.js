@@ -274,15 +274,16 @@
 	 * @method isCustomIcon
 	 * @static
 	 * @param {String} icon
+	 * @param {Boolean} [unlessImported=false] - If true, don't treat imported icon as custom
 	 * @return {boolean}
 	 */
-	Users.isCustomIcon = function (icon) {
+	Users.isCustomIcon = function (icon, unlessImported=false) {
 		if (!icon) {
 			return false;
 		}
-		return !!(icon.indexOf('imported') >= 0
-		|| icon.match(/\/icon\/[0-9]+/))
-		|| icon.indexOf('invited') >= 0;
+		return !!((!unlessImported && icon.indexOf('imported') >= 0)
+		|| icon.match(/\/icon\/[0-9]+/)
+		|| icon.indexOf('invited') >= 0);
 	};
 
 	/**
