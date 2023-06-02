@@ -238,10 +238,10 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 					var $form = $(this).closest("form");
 					var valid = true;
 
-					Q.each(['title', 'price', 'description'], function (i, value) {
+					Q.each(['title', 'price'], function (i, value) {
 						var $item = $("input[name=" + value + "]", $form);
 
-						if ($item.is(":visible") && $item.attr('required') && !$item.val()) {
+						if ($item.is(":visible") && !$item.val()) {
 							$item.addClass('Q_error');
 							valid = false;
 						} else {
@@ -283,9 +283,9 @@ Q.Template.set('Assets/service/preview',
 
 Q.Template.set("Assets/service/composer",
 `<form>
-		<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">
+		<input type="text" name="title" placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">
 		<select name="payment"><option value="free">{{text.services.Free}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>
-		<label for="price"><span class="Assets_service_composer_currency">{{currency}}</span><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>
+		<label for="price"><span class="Assets_service_composer_currency">{{currency}}</span><input type="text" name="price" placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>
 		{{#if relatedParticipantsExists}}
 			<label>{{text.services.NewServiceTemplate.SelectRequiredParticipants}}</label>
 			<span class="Assets_service_composer_requiredPaymentDesc">{{text.services.NewServiceTemplate.RequiredParticipantsDesc}}</span>	
@@ -297,7 +297,7 @@ Q.Template.set("Assets/service/composer",
 		{{/if}}
 		<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">
 		<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>
-		<button name="save" class="Q_button">{{text.services.NewServiceTemplate.SaveService}}</button>
+		<button name="save" type="button" class="Q_button">{{text.services.NewServiceTemplate.SaveService}}</button>
 	</form>`
 );
 
