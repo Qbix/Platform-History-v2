@@ -6526,6 +6526,9 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!params || _Streams_onInvited.showed) {
 			return;
 		}
+		if (Q.Users.loggedInUser && Q.Users.loggedInUser.sessionCount > 1) {
+			return; // in this case, skip the dialog for now
+		}
 		_Streams_onInvited.showed = true;
 		var delay = params.delay || 2000;
 		var mask = Q.Masks.show('Streams.onInvited', {
