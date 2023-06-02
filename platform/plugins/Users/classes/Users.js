@@ -396,7 +396,7 @@ Users.Socket = {
 				return;
 			}
 			client.alreadyListening = true;
-			client.on('Users/user', function (capability, clientId) {
+			client.on('Users/user', function (capability, clientId, callback) {
 				if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
 					client.disconnect(); // force disconnect
 					return;
@@ -434,6 +434,16 @@ Users.Socket = {
 					} else {
 						Q.log('User connected: ' + client.userId);
 					}
+					var oci = {};
+					for (var cid in Users.clients[userId]){
+						var c = Users.clients[userId][cid];
+						oci[cid] = {
+							clientId: c.clientId
+						};
+					}
+					callback({
+						onlineClientInfo: oci
+					});
 				});
 			});
 			client.on('Users/online', function (options, callback) {
