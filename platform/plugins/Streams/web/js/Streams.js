@@ -1910,16 +1910,16 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										Q.each(Users.icon.sizes, function (k, v) {
 											saveSizeName[k] = v;
 										});
-										var o = {
+										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', {
 											path: 'Q/uploads/Users',
 											save: 'Users/icon',
 											subpath: subpath,
 											saveSizeName: saveSizeName,
+											maxStretch: Users.icon.maxStretch,
 											onFinish: function () {
 												Q.Dialogs.close(dialog);
 											}
-										};
-										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
+										});
 
 										if (invitedUserId) {
 											Q.Streams.get(invitedUserId, "Streams/user/icon", function (err) {
