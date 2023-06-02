@@ -285,7 +285,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					}
 				}
 			}
-		};
+		}
 
 		function addComposer(streamType, params) {
 			// TODO: test whether the user can really create streams of this type
@@ -347,8 +347,16 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					Q.setObject("options.streams_preview.related.weight", this.state.related.weight, element);
 					element.setAttribute('data-weight', this.state.related.weight);
 
-					// place new preview to the valid place in the list
-					_placeRelatedTool(element);
+					if (Q.handle(state.beforeRenderPreview, tool, [{
+						publisherId: stream.fields.publisherId,
+						name: stream.fields.name,
+						type: stream.fields.type
+					}, element]) === false) {
+						element.remove();
+					} else {
+						// place new preview to the valid place in the list
+						_placeRelatedTool(element);
+					}
 
 					addComposer(streamType, params);
 				}, tool);
