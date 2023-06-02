@@ -11286,9 +11286,9 @@ Q.Socket.getAll = function _Q_Socket_all() {
 	return _qsockets;
 };
 
-function _connectSocketNS(ns, url, callback, callback2, forceNew) {
+function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 	// load socket.io script and connect socket
-	function _connectNS(ns, url, callback, callback2) {
+	function _connectNS(ns, url, callback, earlyCallback) {
 		// connect to (ns, url)
 		if (!root.io) return;
 		var qs = _qsockets[ns] && _qsockets[ns][url];
@@ -11328,14 +11328,14 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 			console.log('Error on connection '+url+' ('+error+')');
 		});
 
-		callback2 && callback2(_qsockets[ns][url], ns, url);
+		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
 		
-		function _Q_Socket_register(socket) {
+		function _Q_Socket_register(qs) {
 			Q.each(_socketRegister, function (i, item) {
 				if (item[0] !== ns) return;
 				var name = item[1];
-				_ioOn(socket, name, Q.Socket.onEvent(ns, url, name).handle); // may overwrite again, but it's ok
-				_ioOn(socket, name, Q.Socket.onEvent(ns, '', name).handle);
+				_ioOn(qs.socket, name, Q.Socket.onEvent(ns, url, name).handle); // may overwrite again, but it's ok
+				_ioOn(qs.socket, name, Q.Socket.onEvent(ns, '', name).handle);
 				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url, name]);
 			});
 		}
@@ -11357,14 +11357,14 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 	}
 	
 	if (root.io && root.io.Socket) {
-		_connectNS(ns, url, callback, callback2);
+		_connectNS(ns, url, callback, earlyCallback);
 	} else {
 		var socketPath = Q.getObject('Q.info.socketPath');
 		if (socketPath === undefined) {
 			socketPath = '/socket.io';
 		}
 		Q.addScript(url+socketPath+'/socket.io.js', function () {
-			_connectNS(ns, url, callback, callback2, forceNew);
+			_connectNS(ns, url, callback, earlyCallback, forceNew);
 		});
 	}
 }
@@ -11376,9 +11376,9 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
  * @param {String} ns A socket.io namespace to use
  * @param {String} url The url of the socket.io node to connect to
  * @param {Function} [callback] Called after socket connects successfully. Receives Q.Socket
- * @param {Function} [callback2] Receives Q.Socket as soon as it's constructed
+ * @param {Function} [earlyCallback] Receives Q.Socket as soon as it's constructed
  */
-Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
+Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, earlyCallback) {
 	if (!url) {
 		return false;
 	}
@@ -11395,7 +11395,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 		_qsockets[ns][url] = null; // pending
 	}
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, callback2, false);
+	_connectSocketNS(ns, url, callback, earlyCallback, false);
 };
 
 Q.Socket.onRegister = new Q.Event();

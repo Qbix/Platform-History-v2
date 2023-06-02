@@ -3300,11 +3300,11 @@
 	Users.onConnected = new Q.Event();
 	Users.onDisconnected = new Q.Event();
 	
-	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
+	Q.Socket.onConnect('Users').set(function (qs, ns, url) {
 		Q.loadNonce(function () {
-			socket.emit('Users/user', Users.capability, Q.clientId(),
+			qs.socket.emit('Users/user', Users.capability, Q.clientId(),
 			function () {
-				Q.handle(Users.Socket.onSession);
+				Q.handle(Users.Socket.onSession, Users.Socket, qs, ns, url);
 			});
 		});
 	}, 'Users');

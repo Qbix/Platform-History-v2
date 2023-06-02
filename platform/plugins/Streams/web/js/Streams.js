@@ -418,6 +418,7 @@ var _retainedByKey = {};
 var _retainedByStream = {};
 var _retainedStreams = {};
 var _retainedNodes = {};
+var _connectedNodes = {};
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
