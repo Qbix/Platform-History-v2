@@ -3912,11 +3912,11 @@
 		 * Returns a socket, if it was already connected, or returns undefined
 		 * @static
 		 * @method get
-		 * @param {String} url The url where socket.io is listening. If it's empty, then returns all matching sockets.
+		 * @param {String} nodeUrl The url where socket.io is listening. If it's empty, then returns all matching sockets.
 		 * @return {Q.Socket}
 		 */
-		get: function _Users_Socket_get(url) {
-			return Q.Socket.get('Users', url);
+		get: function _Users_Socket_get(nodeUrl) {
+			return Q.Socket.get('Users', nodeUrl);
 		},
 		
 		/**

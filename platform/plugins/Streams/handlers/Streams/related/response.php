@@ -13,7 +13,6 @@
  *   @param {string} $_REQUEST.streamName  Required streamName or name. The name of the stream
  *   @param {string|array} $_REQUEST.type The type of the relation(s)
  *   @param {boolean} [$_REQUEST.isCategory=false] Whether to fetch streams related TO the stream with this publisherId and streamName.
- *   @param {boolean} [$_REQUEST.relationsOnly=false] Return only the relations, not the streams
  *   @param {boolean} [$_REQUEST.ascending=false] Whether to sort by ascending instead of descending weight
  *   @param {boolean} [$_REQUEST.omitRedundantInfo=false] Whether to omit redundant publisherId and streamName fields in the output
  *   @param {integer} [$_REQUEST.messages=0] Whether to also return this many latest messages per stream
@@ -23,17 +22,34 @@
  */
 function Streams_related_response()
 {
-	if (!Q_Request::slotName('relations') and !Q_Request::slotName('streams')) {
-		return;
-	}
+	$slots = Q_Request::slotNames();
+
+	$relations_requested = in_array('relations', $slots);
+	$streams_requested = in_array('relatedStreams', $slots);
+	$nodeUrls_requested = in_array('nodeUrls', $slots);
 	
 	$user = Users::loggedInUser();
 	$asUserId = $user ? $user->id : '';
+	
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true, 'original');
+
+	if (!in_array('relations', $slots)
+	and !in_array('streams', $slots)) {
+		if (!in_array('nodeUrls', $slots)) {
+			return;
+		}
+		if (empty(Q_Utils::$nodeUrlRouters)) {
+			$nodeUrls = array(Q_Utils::nodeUrl());
+			$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
+			Q_Response::setSlot('nodeUrls', $nodeUrls);
+			Q_Response::setSlot('stream', $stream->exportArray());
+			return;
+		}
+	}
+
+
 	$isCategory = !(empty($_REQUEST['isCategory']) or strtolower($_REQUEST['isCategory']) === 'false');
-	$slotNames = Q_Request::slotNames();
-	$streams_requested = in_array('relatedStreams', $slotNames);
 	$withParticipant = Q::ifset($_REQUEST, 'withParticipant', true) === "false" ? false : true;
 	$options = Q::take($_REQUEST, array(
 		'limit', 'offset', 'min', 'max', 'type', 'prefix', 'filter'
@@ -65,20 +81,39 @@ function Streams_related_response()
 		$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
 	}
 
-	if (!empty($_REQUEST['omitRedundantInfo'])) {
-		if ($isCategory) {
-			foreach ($rel as &$r) {
-				unset($r['toPublisherId']);
-				unset($r['toStreamName']);
-			}
-		} else {
-			foreach ($rel as &$r) {
-				unset($r['fromPublisherId']);
-				unset($r['fromStreamName']);
+	if ($relations_requested) {
+		if (!empty($_REQUEST['omitRedundantInfo'])) {
+			if ($isCategory) {
+				foreach ($rel as &$r) {
+					unset($r['toPublisherId']);
+					unset($r['toStreamName']);
+				}
+			} else {
+				foreach ($rel as &$r) {
+					unset($r['fromPublisherId']);
+					unset($r['fromStreamName']);
+				}
 			}
 		}
+		Q_Response::setSlot('relations', $rel);
+	} else {
+		Q_Response::setSlot('relations', array());
 	}
-	Q_Response::setSlot('relations', $rel);
+
+	if ($nodeUrls_requested) {
+		$nodeUrls = array();
+		foreach ($rel as $r) {
+			$far = $isCategory ? 'from' : 'to';
+			$farPublisherId = $far . 'PublisherId';
+			$farStreamName = $far . 'StreamName';
+			$nodeUrl = Q_Utils::nodeUrl(array(
+				'publisherId' => $r->$farPublisherId,
+				'streamName' => $r->$farStreamName
+			));
+			$nodeUrls[$nodeUrl] = true;
+		}
+		Q_Response::setSlot('nodeUrls', array_keys($nodeUrls));
+	}
 
 	if ($streams_requested) {
 		$streams = $result[1];
