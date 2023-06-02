@@ -11302,7 +11302,6 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		// If we have a disconnected socket that is not connecting.
 		// Forget this socket manager, we must connect another one
 		// because g doesn't reconnect normally otherwise
-		var baseUrl = Q.baseUrl();
 		var parsed = url.parseUrl();
 		var host = parsed.scheme + '://' + parsed.host 
 			+ (parsed.port ? ':'+parsed.port : '');
@@ -11342,10 +11341,13 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		}
 		
 		function _connected() {
-			Q.Socket.onConnect().handle(this, ns, url);
-			Q.Socket.onConnect(ns).handle(this, ns, url);
-			Q.Socket.onConnect(ns, url).handle(this, ns, url);
-			callback && callback(_qsockets[ns][url], ns, url);
+			var qs = _qsockets[ns][url];
+			qs.connected = true;
+			Q.Socket.onConnect().handle(qs, ns, url);
+			Q.Socket.onConnect(ns).handle(qs, ns, url);
+			Q.Socket.onConnect(ns, url).handle(qs, ns, url);
+			callback && callback(qs, ns, url);
+			
 			console.log('Socket connected to '+url);
 		}
 	}
@@ -11413,6 +11415,7 @@ Q.Socket.prototype.disconnect = function _Q_Socket_prototype_disconnect() {
 		return;
 	}
 	qs.socket.disconnect();
+	qs.connected = false;
 };
 
 Q.Socket.prototype.toJSON = function () {
@@ -11489,9 +11492,9 @@ Q.Socket.onEvent = Q.Event.factory(
     	event.onFirst().set(function () {
 			// The first handler was added to the event
 			Q.each(Q.Socket.get(ns, url), function (url, qs) {
-				function _Q_Socket_register(socket) {
+				function _Q_Socket_register(qs) {
 					// this occurs when socket is connected
-					_ioOn(socket, name, event.handle);
+					_ioOn(qs.socket, name, event.handle);
 		    	}
 				if (qs) { 
 					// add listeners on sockets which are already constructed
