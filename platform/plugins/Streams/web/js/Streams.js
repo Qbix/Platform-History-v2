@@ -569,8 +569,12 @@ function _connectSockets(refresh) {
 	Q.Streams.related(Users.loggedInUser.id, 'Streams/participating', null, true, {
 		nodeUrlsOnly: true
 	}, function () {
-		for (var i=0, l = this.nodeUrls.length; i < l; ++i) {
-			Users.Socket.connect(this.nodeUrls[i]);
+		var n = this.nodeUrls;
+		for (var i=0, l = n.length; i < l; ++i) {
+			Users.Socket.connect(n[i], function (qs, ns, url) {
+				_connectedNodes[url] = qs;
+			});
+			_connectedNodes[n[i]] = true;
 		}
 	});
 }
@@ -1606,6 +1610,7 @@ Streams.retainWith = function (key) {
 	return Streams;
 };
 
+
 /**
  * Releases all retained streams under a given key. See Streams.retain()
  * It also closes sockets corresponding to all the released streams,
@@ -1618,32 +1623,25 @@ Streams.release = function (key) {
 	key = Q.calculateKey(key);
 	if (_retainedByKey[key]) {
 		for (var ps in _retainedByKey) {
-			if (!_retainedByStream[ps]) {
+			if (Q.isEmpty(_retainedByStream[ps])) {
 				continue;
 			}
 			var parts = ps.split("\t");
+			var publisherId = parts[0];
+			var streamName = parts[1];
 			delete _retainedByStream[ps][key];
 			if (Q.isEmpty(_retainedByStream[ps])) {
+				Streams.neglect(publisherId, streamName);
 				delete(_retainedByStream[ps]);
 				delete(_retainedStreams[ps]);
 				var stream = _retainedStreams[ps];
 				Q.handle([
-					Stream.onRelease.ifAny(parts[0], ""),
-					Stream.onRelease.ifAny(parts[0], parts[1]),
+					Stream.onRelease.ifAny(publisherId, ""),
+					Stream.onRelease.ifAny(publisherId, streamName),
 					Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
 				], stream, [key]);
 			}
-			var nodeUrl = Q.nodeUrl({
-				publisherId: parts[0],
-				streamName: parts[1]
-			});
-			var hasNode = !Q.isEmpty(_retainedNodes[nodeUrl]);
-			delete _retainedNodes[nodeUrl][ps];
-			if (hasNode && Q.isEmpty(_retainedNodes[nodeUrl])) {
-				delete(_retainedNodes[nodeUrl]);
-				var socket = Users.Socket.get(nodeUrl);
-				socket && socket.disconnect();
-			}
+			_disconnectStreamNode(publisherId, streamName, ps);
 		}
 	}
 	delete _retainedByKey[key];
@@ -2739,17 +2737,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
 			if (Q.isEmpty(_retainedByKey[key])) {
 				delete _retainedByKey[key];
 			}
-			var nodeUrl = Q.nodeUrl({
-				publisherId: publisherId,
-				streamName: streamName
-			});
-			var hasNode = !Q.isEmpty(_retainedNodes[nodeUrl]);
-			delete _retainedNodes[nodeUrl][ps];
-			if (hasNode && Q.isEmpty(_retainedNodes[nodeUrl])) {
-				delete(_retainedNodes[nodeUrl]);
-				var socket = Users.Socket.get(nodeUrl);
-				socket && socket.disconnect();
-			}
+			_disconnectStreamNode(publisherId, streamName, ps);
 		}
 	}
 	delete _retainedByStream[ps];
@@ -2854,6 +2842,24 @@ var Sp = Stream.prototype;
  * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Sp.retainWith = Streams.retainWith;
+
+function _disconnectStreamNode(publisherId, streamName, ps) {
+	var nodeUrl = Q.nodeUrl({
+		publisherId: publisherId,
+		streamName: streamName
+	});
+	var hadNode = !Q.isEmpty(_retainedNodes[nodeUrl]);
+	delete _retainedNodes[nodeUrl][ps];
+	if (!hadNode || !Q.isEmpty(_retainedNodes[nodeUrl])
+	|| !_connectedNodes[nodeUrl]) {
+		return false;
+	}
+	// we can disconnect the node
+	delete(_retainedNodes[nodeUrl]);
+	var socket = Users.Socket.get(nodeUrl);
+	socket && socket.disconnect();
+	return true;
+}
 
 /**
  * Calculate the url of a stream's icon
@@ -3186,25 +3192,31 @@ Sp.reopen = function _Stream_remove () {
  * @param {Boolean} [options.dontObserve] If true, doesn't call observe() to begin getting realtime notifications
  * @return {Q.Streams.Stream}
  */
-Sp.retain = function _Stream_prototype_retain (key) {
+Sp.retain = function _Stream_prototype_retain (key, options) {
+	options = options || {};
 	var publisherId = this.fields.publisherId;
 	var streamName = this.fields.name;
 	var ps = Streams.key(publisherId, streamName);
 	key = Q.calculateKey(key);
 	var wasRetained = !!_retainedStreams[ps];
-	_retainedStreams[ps] = this;
+	var stream = _retainedStreams[ps] = this;
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var stream = _retainedStreams[ps];
-	if (stream) {
-		Users.Socket.connect(nodeUrl, function () {
-			var sp = stream.participant;
-			if (sp && sp.state === 'participating') {
-				Q.setObject([nodeUrl, ps], true, _retainedNodes);
-			}
-		});
+	if (!wasRetained) {
+		var sp = stream.participant;
+		var participating = (sp && sp.state === 'participating');
+		if (participating || !options.dontObserve) {
+			// If the socket already connected, this will just call the callback:
+			Users.Socket.connect(nodeUrl, function () {
+				if (!participating && !options.dontObserve) {
+					stream.observe();
+				}
+			});
+			// set the node to disconnect after last stream is released
+			Q.setObject([nodeUrl, ps], true, _retainedNodes);	
+		}
 	}
 	Q.setObject([ps, key], true, _retainedByStream);
 	Q.setObject([key, ps], true, _retainedByKey);

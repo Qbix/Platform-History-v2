@@ -3897,11 +3897,10 @@
 			var qs = Q.Socket.get('Users', nodeUrl);
 			if (qs && qs.socket &&
 			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
-				_waitForSession.call(qs.socket, 'Users', nodeUrl);
+				_waitForSession.call(qs, 'Users', nodeUrl);
 			}
 			Q.Socket.connect('Users', nodeUrl, _waitForSession);
 			function _waitForSession() {
-				var t = this, a = arguments;
 				Users.Socket.onSession.addOnce(function (socket, ns, url) {
 					callback && callback(socket, ns, url);
 				});
