@@ -87,7 +87,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 	$allowedNames = array(
 		array("name" => "Streams/user/firstName", "field" => "content"),
 		array("name" => "Streams/user/lastName", "field" => "content"),
-		array("name" => "Streams/user/icon", "field" => "content"),
+		array("name" => "Streams/user/icon", "field" => "icon"),
 		array("name" => "Places/user/location", "field" => "attributes"),
 		array("name" => "Streams/greeting/".Users::communityId(), "field" => "content")
 	);
@@ -105,7 +105,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 	$originalContent = Q::ifset($stream, "fieldsOriginal", $appropriateName["field"], null);
 	if (
 		($stream->name != "Streams/user/icon" && !empty($originalContent))
-		|| ($stream->name == "Streams/user/icon" && (Users::isCustomIcon($originalContent) || !Users::isCustomIcon($stream->content)))
+		|| ($stream->name == "Streams/user/icon" && Users::isCustomIcon($originalContent, true))
 	) {
 		return;
 	}
