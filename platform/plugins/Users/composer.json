@@ -12,6 +12,6 @@
 		"web3p/ethereum-tx": "dev-master",
 		"minishlink/web-push": "^6.0.0",
 		"aws/aws-sdk-php": "3.*",
-		"twilio/sdk": "5.29.1"
+		"twilio/sdk": "^7.4"
 	}
 }

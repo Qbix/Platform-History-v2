@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @module Users
  */
@@ -93,7 +94,7 @@ class Users_Mobile extends Base_Users_Mobile
 			$token = Q_Config::get('Users', 'mobile', 'twilio', 'token', null);
 
 			if ($sid and $token) {
-				$client = new Services_Twilio($sid, $token);
+				$client = new Twilio\Rest\Client($sid, $token);
 				/**
 				 * @event Users/mobile/sendMessage/twilio {before}
 				 * @param {string} view
@@ -106,10 +107,9 @@ class Users_Mobile extends Base_Users_Mobile
 				if (isset($result)) {
 					return $result;
 				}
-				$message = $client->account->sms_messages->create(
-					$from, // From a valid Twilio number
+				$message = $client->messages->create(
 					$number, // Text this number
-					$body
+					compact('body', 'from') // a valid Twilio number
 				);
 			} else {
 				if(!Q_Config::get('Users', 'email', 'smtp', null)){

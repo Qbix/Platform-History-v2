@@ -6,7 +6,6 @@
 		}
 	],
 	"require": {
-		"twilio/sdk": "5.29.1",
 		"nelexa/zip": "^4.0"
 	}
 }
