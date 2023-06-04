@@ -4,7 +4,7 @@
  * Used to close an existing stream. A cron job may delete this stream later.
  *
  * @module Streams
- * @class Streams_stream
+ * @class Streams stream
  * @method delete
  * @static
  * @param {array} $_REQUEST

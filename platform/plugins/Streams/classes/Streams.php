@@ -4011,7 +4011,8 @@ abstract class Streams extends Base_Streams
 	}
 	
 	/**
-	 * Each user is allowed at most one request per stream.
+	 * This is for any user to request access to a stream (rather than being invited).
+	 * Each user is allowed at most one request per stream at a time.
 	 * If a request already exists, then this function returns it, even if it has
 	 * different parameters.
 	 * Otherwise, it inserts a request for upgrading access to a stream,

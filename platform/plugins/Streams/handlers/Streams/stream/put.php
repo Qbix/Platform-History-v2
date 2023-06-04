@@ -3,6 +3,9 @@
 /**
  * Used to update an existing stream
  *
+ * @module Streams
+ * @class HTTP Streams stream
+ * @method post
  * @param string $params Must include "publisherId" as well as "name" or "streamName".
  *    Can also include 'type', 'title', 'icon', 'content', 'attributes', 'readLevel',
  *    'writeLevel', 'adminLevel', as well as any fields named in the

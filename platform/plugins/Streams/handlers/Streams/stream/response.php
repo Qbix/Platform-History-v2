@@ -3,6 +3,9 @@
 /**
  * Used to get a stream
  *
+ * @module Streams
+ * @class HTTP Streams stream
+ * @method get
  * @param {array} $_REQUEST 
  * @param {string} $_REQUEST.publisherId Required
  * @param {string} $_REQUEST.streamName Required streamName or name
