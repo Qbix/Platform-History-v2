@@ -112,7 +112,7 @@ class Streams_Access extends Base_Streams_Access
 					'type' => 'Streams/access/save',
 					'instructions' => Q::take($this->fields, array(
 						'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-						'ofUserId', 'ofContactLabel'
+						'ofUserId', 'ofContactLabel', 'grantedByUserId'
 					))
 				), true);
 			}
@@ -205,6 +205,7 @@ class Streams_Access extends Base_Streams_Access
 		}
 		return parent::beforeSave($value);			
 	}
+
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
