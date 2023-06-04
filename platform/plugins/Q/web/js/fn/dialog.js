@@ -40,7 +40,9 @@ Q.Tool.jQuery('Q/overlay',
 			if (o.noCalculatePosition) {
 				return;
 			}
-			var width = $this.outerWidth(), height = $this.outerHeight();
+
+			var width = $this.outerWidth();
+			var height = $this.outerHeight();
 			
 			var ww = Q.Visual.windowWidth();
 			var wh = Q.Visual.windowHeight();
@@ -71,7 +73,7 @@ Q.Tool.jQuery('Q/overlay',
 			if (($this.previousWidth === undefined)
 			|| (Math.abs(width - $this.previousWidth) > diff)) {
 				if (o.left === 'center') {
-					$this.css({ 'left': (sl + (sw - width) / 2) + 'px' });
+					$this.css('left', (sl + sw / 2) + 'px');
 				} else if (typeof(o.left) === 'string' && o.left.indexOf('%') !== -1) {
 					var left = sl + sw * parseInt(o.left) / 100;
 					$this.css({ 'left': left + 'px' });
@@ -81,12 +83,18 @@ Q.Tool.jQuery('Q/overlay',
 			}
 			$this.previousWidth = width;
 			if (o.top === 'middle') {
-				$this.css({ 'top': (st + (sh - height) / 2) + 'px' });
+				$this.css('top', (st + sh / 2) + 'px');
 			} else if (typeof(o.top) === 'string' && o.top.indexOf('%') !== -1) {
 				var top = st + sh * parseInt(o.top) / 100;
 				$this.css({ 'top': top + 'px' });
 			} else {
 				$this.css({ 'top': st + o.top + 'px' });
+			}
+
+			if (o.left === 'center' && o.top === 'middle') {
+				$this.css('translate', '-50% -50%');
+			} else if (o.left === 'center') {
+				$this.css('translate', '-50%');
 			}
 		}
 
