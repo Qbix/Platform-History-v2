@@ -167,7 +167,7 @@ class Streams_Access extends Base_Streams_Access
 				'type' => 'Streams/access/remove',
 				'instructions' => Q::take($this->fields, array(
 					'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-					'ofUserId', 'ofContactLabel'
+					'ofUserId', 'ofContactLabel', 'grantedByUserId'
 				))
 			), true);
 		}
