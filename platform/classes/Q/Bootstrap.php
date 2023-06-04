@@ -52,7 +52,7 @@ class Q_Bootstrap
 			}
 			$filename = $path . DS . 'vendor' . DS . 'autoload.php';
 			if (file_exists($filename)) {
-				include_once$filename;
+				include_once($filename);
 			};
 			$loaded[$name] = true;
 		}
