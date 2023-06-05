@@ -270,6 +270,11 @@
                 "type": "address"
             },
             {
+                "internalType": "uint256",
+                "name": "recipientTokenId",
+                "type": "uint256"
+            },
+            {
                 "internalType": "address",
                 "name": "hook",
                 "type": "address"
@@ -332,6 +337,11 @@
                 "internalType": "address",
                 "name": "recipient",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "recipientTokenId",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
