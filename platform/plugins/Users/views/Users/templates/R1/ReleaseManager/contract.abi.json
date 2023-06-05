@@ -1,385 +1,385 @@
 [
-	{
-		"inputs": [],
-		"name": "EmptyArray",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "IncorrectArraysLength",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "factory",
-				"type": "address"
-			}
-		],
-		"name": "MakeReleaseWithFactory",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "tag",
-				"type": "uint16"
-			}
-		],
-		"name": "TagAlreadyFinalized",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "tag",
-				"type": "uint16"
-			}
-		],
-		"name": "UnknownTag",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "ZeroFactoryIndex",
-		"type": "error"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint8",
-				"name": "version",
-				"type": "uint8"
-			}
-		],
-		"name": "Initialized",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "factoryAddress",
-				"type": "address"
-			}
-		],
-		"name": "checkFactory",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "instanceAddress",
-				"type": "address"
-			}
-		],
-		"name": "checkInstance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "factories",
-		"outputs": [
-			{
-				"internalType": "uint8",
-				"name": "factoryIndex",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint16",
-				"name": "releaseTag",
-				"type": "uint16"
-			},
-			{
-				"internalType": "bytes24",
-				"name": "factoryChangeNotes",
-				"type": "bytes24"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "tag",
-				"type": "uint16"
-			}
-		],
-		"name": "finalizeRelease",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "initialize",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "instances",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "factoryAddress",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address[]",
-				"name": "factoryAddresses",
-				"type": "address[]"
-			},
-			{
-				"components": [
-					{
-						"internalType": "uint8",
-						"name": "factoryIndex",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint16",
-						"name": "releaseTag",
-						"type": "uint16"
-					},
-					{
-						"internalType": "bytes24",
-						"name": "factoryChangeNotes",
-						"type": "bytes24"
-					}
-				],
-				"internalType": "struct ReleaseManager.FactoryInfo[]",
-				"name": "factoryInfos",
-				"type": "tuple[]"
-			}
-		],
-		"name": "newRelease",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "notes",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "instanceAddress",
-				"type": "address"
-			}
-		],
-		"name": "registerInstance",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "releaseManagerFactory",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "factoryAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "url",
-				"type": "string"
-			}
-		],
-		"name": "setNotes",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "factoryAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "url",
-				"type": "string"
-			}
-		],
-		"name": "setWarnings",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "tag",
-				"type": "uint16"
-			}
-		],
-		"name": "tags",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "exists",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "finalized",
-				"type": "bool"
-			},
-			{
-				"internalType": "address[]",
-				"name": "list",
-				"type": "address[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "warnings",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
+    {
+        "inputs": [],
+        "name": "EmptyArray",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "IncorrectArraysLength",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "factory",
+                "type": "address"
+            }
+        ],
+        "name": "MakeReleaseWithFactory",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "tag",
+                "type": "uint16"
+            }
+        ],
+        "name": "TagAlreadyFinalized",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "tag",
+                "type": "uint16"
+            }
+        ],
+        "name": "UnknownTag",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ZeroFactoryIndex",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint8",
+                "name": "version",
+                "type": "uint8"
+            }
+        ],
+        "name": "Initialized",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "factoryAddress",
+                "type": "address"
+            }
+        ],
+        "name": "checkFactory",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "instanceAddress",
+                "type": "address"
+            }
+        ],
+        "name": "checkInstance",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "factories",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "factoryIndex",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint16",
+                "name": "releaseTag",
+                "type": "uint16"
+            },
+            {
+                "internalType": "bytes24",
+                "name": "factoryChangeNotes",
+                "type": "bytes24"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "tag",
+                "type": "uint16"
+            }
+        ],
+        "name": "finalizeRelease",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "instances",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "factoryAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "factoryAddresses",
+                "type": "address[]"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint8",
+                        "name": "factoryIndex",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "releaseTag",
+                        "type": "uint16"
+                    },
+                    {
+                        "internalType": "bytes24",
+                        "name": "factoryChangeNotes",
+                        "type": "bytes24"
+                    }
+                ],
+                "internalType": "struct ReleaseManager.FactoryInfo[]",
+                "name": "factoryInfos",
+                "type": "tuple[]"
+            }
+        ],
+        "name": "newRelease",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "notes",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "instanceAddress",
+                "type": "address"
+            }
+        ],
+        "name": "registerInstance",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "releaseManagerFactory",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "factoryAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "url",
+                "type": "string"
+            }
+        ],
+        "name": "setNotes",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "factoryAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "url",
+                "type": "string"
+            }
+        ],
+        "name": "setWarnings",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "tag",
+                "type": "uint16"
+            }
+        ],
+        "name": "tags",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "exists",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "finalized",
+                "type": "bool"
+            },
+            {
+                "internalType": "address[]",
+                "name": "list",
+                "type": "address[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "warnings",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
 ]
