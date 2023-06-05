@@ -135,9 +135,9 @@
 					},
 					"ClaimManager": {
 						"factory": {
-							"all": "<put address here>",
-							"0x89": "<put address here>",
-							"0x13881": "<put address here>"
+							"0x38": "0x130101007bA13B731669bdF23819924F3213f1B8",
+							"0x89": "0x130101007bA13B731669bdF23819924F3213f1B8",
+							"0x13881": "0x27771453Ab75d3CD6f7Aa90b2D68609F055811A2"
 						}
 					},
 					"CommunityCoin": {
