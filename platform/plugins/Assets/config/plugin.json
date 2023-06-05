@@ -121,6 +121,18 @@
 							"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
 						}
 					},
+					"AuthorizedInviteManager": {
+						"factory": {
+							"0x38": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
+							"0x89": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
+							"0x13881": "0x1E84e70D6614F4848aEfDcC358f9776a76B81A85"
+						},
+						"contract": {
+							"0x38": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
+							"0x89": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
+							"0x13881": "0xce080378825C79CB0668c47C03f63d65020973A1"
+						}
+					},
 					"ClaimManager": {
 						"factory": {
 							"all": "<put address here>",
