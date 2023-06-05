@@ -79,6 +79,7 @@ Q.Tool.define("Assets/history", function (options) {
 		var state = tool.state;
 		var $table = $("table.Assets_history tbody", tool.element);
 		var operation = $table.is(':empty') ? "append" : "prepend";
+		var $toolElement = $(tool.element);
 
 		Q.req('Assets/history', ['tool'], function (err, data) {
 			var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
@@ -88,10 +89,10 @@ Q.Tool.define("Assets/history", function (options) {
 
 			var rows = data.slots.tool;
 
-			/*if (Q.typeOf(rows) !== 'array' || !rows.length) {
-				$te.attr('data-empty', true);
-				return $te.html(tool.text.history.HistoryEmpty);
-			}*/
+			if (Q.typeOf(rows) !== 'array' || !rows.length) {
+				$toolElement.attr('data-empty', true);
+				return $toolElement.html(tool.text.history.HistoryEmpty);
+			}
 
 			Q.each(rows, function (i, row) {
 				// skip duplicated requests for same message

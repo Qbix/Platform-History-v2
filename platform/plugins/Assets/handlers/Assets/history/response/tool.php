@@ -46,6 +46,19 @@ function Assets_history_response_tool($options)
 			$attributes['fromPublisherId'] = $row->fromPublisherId;
 			$attributes['fromStreamName'] = $row->fromStreamName;
 
+			// for backward compatibility when invitedUserName was displayName
+			$attributes['invitedUserName'] = Q::ifset($attributes, 'invitedUserName', Q::ifset($attributes, 'displayName', null));
+
+			if (!empty($attributes['invitedUserId']) && empty($attributes['invitedUserName'])) {
+				$attributes['invitedUserName'] = Streams::displayName($attributes['invitedUserId']);
+			}
+			if (!empty($attributes['toUserId']) && empty($attributes['toUserName'])) {
+				$attributes['toUserName'] = Streams::displayName($attributes['toUserId']);
+			}
+			if (!empty($attributes['fromUserId']) && empty($attributes['fromUserName'])) {
+				$attributes['fromUserName'] = Streams::displayName($attributes['fromUserId']);
+			}
+
 			$amount = $row->credits;
 			$sign = $direction = $clientInfo = $clientId = null;
 			if ($row->fromUserId == $userId) {
