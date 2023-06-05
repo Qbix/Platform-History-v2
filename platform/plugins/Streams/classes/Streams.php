@@ -1614,7 +1614,19 @@ abstract class Streams extends Base_Streams
 			$asUserId = $asUser ? $asUser->id : "";
 		}
 		$avatar = Streams_Avatar::fetch($asUserId, $userId);
-		return $avatar ? $avatar->displayName($options, $fallback) : $fallback;
+		if ($avatar) {
+			return $avatar->displayName($options, $fallback);
+		}
+
+		$displayName = array();
+		try {
+			$displayName['firstName'] = Streams::fetchOne(null, $userId, "Streams/user/firstName")->content;
+		} catch (Exception $e) {}
+		try {
+			$displayName['lastName'] = Streams::fetchOne(null, $userId, "Streams/user/lastName")->content;
+		} catch (Exception $e) {}
+
+		return empty($displayName) ? $fallback : implode(' ', $displayName);
 	}
 
 	/**
