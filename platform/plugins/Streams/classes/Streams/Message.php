@@ -310,12 +310,10 @@ class Streams_Message extends Base_Streams_Message
 		// on all the shards where the streams were fetched.
 		foreach ($updates as $publisherId => $arr) {
 			foreach ($arr as $count => $streamNames) {
-				if (!is_numeric($count)) {
-					continue;
-				}
+				$suffix = is_numeric($count) ? " + $count" : '';
 				Streams_Stream::update()
 					->set(array(
-						'messageCount' => new Db_Expression("messageCount + $count"),
+						'messageCount' => new Db_Expression('messageCount'.$suffix),
 						'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP")
 					))->where(array(
 						'publisherId' => $publisherId,
