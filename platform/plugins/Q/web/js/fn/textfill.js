@@ -37,7 +37,8 @@ Q.Tool.jQuery('Q/textfill',
 	{
 		maxFontPixels: 30,
 		minFontPixels: 10,
-		refreshOnLayout: true
+		refreshOnLayout: true,
+		maxLines: null
 	},
 
 	{
@@ -52,9 +53,7 @@ Q.Tool.jQuery('Q/textfill',
 				}
 			});
 			if (!ourElement) {
-				//var e = new Q.Error("Q/textfill missing a visible element inside the container");
-				//console.warn(e);
-				return false;
+				ourElement = this;
 			}
 			var $this = $(this);
 			var fontSize = o.maxFontPixels || ($this.height() + 10);
@@ -70,8 +69,9 @@ Q.Tool.jQuery('Q/textfill',
 				if (o.maxLines) {
 					lines = textHeight / Math.floor(fontSize * 1.5);
 				}
-				if (tooBig = (textHeight > maxHeight || textWidth > maxWidth
-				|| (o.maxLines && lines > o.maxLines))) {
+				tooBig = (textHeight > maxHeight || textWidth > maxWidth
+					|| (o.maxLines && lines > o.maxLines))
+				if (tooBig) {
 					lastBadFontSize = fontSize;
 					jump = (lastGoodFontSize - fontSize) / 2;
 				} else {
@@ -86,7 +86,7 @@ Q.Tool.jQuery('Q/textfill',
 					lastGoodFontSize = 3;
 					break; // container is super small
 				}
-			};
+			}
 			lastGoodFontSize = Math.max(o.minFontPixels, lastGoodFontSize);
 			ourElement.add(this).css('font-size', lastGoodFontSize + 'px');
 			ourElement.removeClass('Q_textfill_resizing').addClass('Q_textfill_resized');
