@@ -1548,6 +1548,10 @@
 		"Assets/web3/balance": {
 			js: "{{Assets}}/js/tools/web3/balance.js",
 			css: "{{Assets}}/css/tools/web3/balance.css"
+		},
+		"Assets/credits/balance": {
+			js: "{{Assets}}/js/tools/credits/balance.js",
+			css: "{{Assets}}/css/tools/credits/balance.css"
 		}
 	});
     
