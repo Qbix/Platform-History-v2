@@ -16,6 +16,7 @@
  *  @param {Q.Event} [options.onStream] Event occur when user click on stream title link.
  *  Passed tool as context and publisherId, streamName as arguments.
  *  @param {boolean} [options.mergeRows=false] If true merge rows with same "amount" field
+ *  @param {String} [options.withUserId] - if defined, show only operations with this user
  */
 
 Q.Tool.define("Assets/history", function (options) {
@@ -68,6 +69,7 @@ Q.Tool.define("Assets/history", function (options) {
 { // default options here
 	type: null,
 	mergeRows: false,
+	withUserId: null,
 	userId: Q.Users.loggedInUserId(),
 	onClient: new Q.Event(),
 	onStream: new Q.Event()
@@ -176,7 +178,8 @@ Q.Tool.define("Assets/history", function (options) {
 			});
 		}, {
 			fields: {
-				type: state.type
+				type: state.type,
+				withUserId: state.withUserId
 			}
 		});
 	}
