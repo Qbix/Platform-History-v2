@@ -215,7 +215,7 @@ abstract class Streams extends Base_Streams
 	 * Can share the stream's actual content with others
 	 * @property $ADMIN_LEVEL['share']
 	 * @type integer
-	 * @default 10
+	 * @default 15
 	 * @final
 	 */
 	/**

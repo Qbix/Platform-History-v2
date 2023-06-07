@@ -281,6 +281,13 @@ Streams.WRITE_LEVEL = {
  * @final
  */
 /**
+ * Can share the stream's actual content with others
+ * @property $ADMIN_LEVEL.share
+ * @type integer
+ * @default 15
+ * @final
+ */
+/**
  * Able to create invitations for others, granting access
  * and permissions up to what they themselves have
  * @property ADMIN_LEVEL.invite
