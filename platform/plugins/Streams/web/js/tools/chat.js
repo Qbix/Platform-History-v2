@@ -587,7 +587,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							return;
 						}
 
-						$toolElement.off([Q.Pointer.fastclick, 'Streams_chat')
+						$toolElement.off([Q.Pointer.fastclick, 'Streams_chat'])
 						.on([Q.Pointer.fastclick, 'Streams_chat'], function () {
 							// need to request stream again, because stream may be modified since it requested when message created
 							Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
