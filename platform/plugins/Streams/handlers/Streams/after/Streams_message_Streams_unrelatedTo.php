@@ -38,10 +38,13 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 		$o = $message->getInstruction('options', null);
 		$w = $message->getInstruction('weight', null);
 		if (!empty($o['adjustWeights'])) {
+			$aw = $o['adjustWeights'] === true
+				? -1 // backward compatibility
+				: floatval($o['adjustWeights']);
 			$rt = array();
 			foreach ($relatedTo[$type] as $weight => $info) {
 				if ($weight > $w) {
-					$rt[$weight-1] = $info;
+					$rt[$weight + $aw] = $info;
 				} else {
 					$rt[$weight] = $info;
 				}

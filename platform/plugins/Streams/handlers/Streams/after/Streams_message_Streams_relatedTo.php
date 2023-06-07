@@ -38,12 +38,13 @@ function Streams_after_Streams_message_Streams_relatedTo($params)
 		$rt->retrieve(null, null, array('ignoreCache' => true));
 		$weight = $rt->weight;
 	}
-	$fs = Streams_Stream::fetch($message->byUserId, $fromPublisherId, $fromStreamName);
-	$weight = floor($weight);
-	$relatedTo[$type][$weight] = array(
-		$fromPublisherId, $fromStreamName, $fs->title, $fs->icon
-	);
-	$c->relatedTo = Q::json_encode($relatedTo);
+	if ($fs = Streams_Stream::fetch($message->byUserId, $fromPublisherId, $fromStreamName)) {
+		$weight = floor($weight);
+		$relatedTo[$type][$weight] = array(
+			$fromPublisherId, $fromStreamName, $fs->title, $fs->icon
+		);
+		$c->relatedTo = Q::json_encode($relatedTo);
+	}
 	$c->save(false, true);
 	// End database transaction
 
