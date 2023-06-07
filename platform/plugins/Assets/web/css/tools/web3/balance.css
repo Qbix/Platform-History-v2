@@ -1,7 +1,6 @@
 .Assets_web3_balance_tool,
 .Assets_web3_balance_tool select,
 .Assets_web3_balance_tool select option {
-    text-align: center;
     font-size: 16px;
 }
 .Assets_web3_balance_tool select[name=tokens] option:first-child {
@@ -26,4 +25,13 @@
     pointer-events:none;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+.Assets_web3_balance_tool .Assets_web3_balance_select {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.Assets_web3_balance_tool .Assets_web3_balance_select .Assets_credits_balance_tool {
+    display: inline-block;
+    margin-left: 10px;
 }

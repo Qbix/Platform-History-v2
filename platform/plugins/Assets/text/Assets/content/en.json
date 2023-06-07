@@ -254,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Select recipient",
         "TransactionSuccess": "Transaction Success",
-        "OrTypeWalletAddress": "OR type recipient wallet address"
+        "OrTypeWalletAddress": "OR type recipient wallet address",
+        "AppCredits": "App Credits"
     },
     "NFT": {
         "Title": "Title",

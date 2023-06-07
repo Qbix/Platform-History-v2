@@ -9,7 +9,8 @@
  * @class Assets
  * @constructor
  * @param {integer} [decimals=2] - decimals after point in credits amount
- * @param {Q.Event} onUpdate - event occur when credits amount updated
+ * @param {Q.Event} [onUpdate] - event occur when credits amount updated
+ * @param {Boolean} [textfill] - if true use Q/textfill plugin on tool.element
  */
 
 Q.Tool.define("Assets/credits/balance", function (options) {
@@ -31,6 +32,7 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 
 { // default options here
 	decimals: 2,
+	textfill: false,
 	onUpdate: new Q.Event()
 },
 
@@ -40,11 +42,13 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 		var state = tool.state;
 		var _fillContent = function (credits) {
 			Q.replace(tool.element, parseFloat(credits).toFixed(state.decimals));
-			$(tool.element).plugin('Q/textfill', {
-				maxFontPixels: 22,
-				minFontPixels: 14,
-				maxLines: 1
-			});
+			if (state.textfill) {
+				$(tool.element).plugin('Q/textfill', {
+					maxFontPixels: 22,
+					minFontPixels: 14,
+					maxLines: 1
+				});
+			}
 		};
 		Q.Assets.Credits.userStream(function (err) {
 			if (err) {
@@ -59,6 +63,9 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 		}, {
 			retainWith: tool
 		});
+	},
+	getValue: function () {
+		return parseFloat(this.element.innerText).toFixed(this.state.decimals);
 	}
 });
 
