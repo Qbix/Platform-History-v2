@@ -15,6 +15,7 @@ function Assets_history_response_tool($options)
 
 	Q_Valid::requireFields(array('type'), $options, true);
 	$type = $options["type"];
+	$withUserId = Q::ifset($options, "withUserId", null);
 	$loggedUser = Users::loggedInUser(true);
 	//$userId = Q::ifset($options, 'userId', $loggedUser->id);
 	$userId = $loggedUser->id;
@@ -32,11 +33,25 @@ function Assets_history_response_tool($options)
 
 	$res = array();
 	if ($type == 'credits') {
-		$rows = Assets_Credits::select()
-		->where(array('fromUserId' => $userId))
-		->orWhere(array('toUserId' => $userId))
-		->orderBy('insertedTime', false)
-		->fetchDbRows();
+		if ($withUserId) {
+			$queryRows = Assets_Credits::select()
+				->where(array(
+					'fromUserId' => $userId,
+					'toUserId' => $withUserId
+				))
+				->orWhere(array(
+					'toUserId' => $userId,
+					'fromUserId' => $withUserId
+				));
+		} else {
+			$queryRows = Assets_Credits::select()
+				->where(array('fromUserId' => $userId))
+				->orWhere(array('toUserId' => $userId));
+		}
+
+		$queryRows->orderBy('insertedTime', false);
+
+		$rows = $queryRows->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
 			$attributes = (array)Q::json_decode($row->attributes);
