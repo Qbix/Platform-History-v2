@@ -2654,7 +2654,7 @@ abstract class Streams extends Base_Streams
 				));
 			}
 
-			if ($throw) {
+			if ($throwIfUnavailable) {
 				throw new Q_Exception(Q::interpolate($exceededText, @compact("maxRelations")));
 			}
 
