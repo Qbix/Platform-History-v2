@@ -1561,9 +1561,12 @@ Q.largestSize = function (sizes, useHeight) {
 	if (!Q.isArrayLike(sizes)) {
 		sizes = Object.keys(sizes);
 	}
+	if (sizes.indexOf('x') >= 0) {
+		return 'x';
+	}
 	for (var i = 0; i<sizes.length; ++i) {
 		size = sizes[i];
-		if (!size || size === 'x') {
+		if (!size) {
 			continue;
 		}
 		parts = size.split('x');
