@@ -257,7 +257,26 @@
                 "type": "uint64"
             }
         ],
-        "name": "SubscriptionIsBroken",
+        "name": "SubscriptionIsCanceled",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "subscriber",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint64",
+                "name": "chargeTime",
+                "type": "uint64"
+            }
+        ],
+        "name": "SubscriptionLapsed",
         "type": "event"
     },
     {
@@ -346,6 +365,19 @@
     },
     {
         "inputs": [],
+        "name": "community",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "controller",
         "outputs": [
             {
@@ -397,6 +429,19 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "hook",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "uint32",
@@ -437,6 +482,11 @@
                 "internalType": "address",
                 "name": "recipient_",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "recipientTokenId_",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -562,6 +612,32 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "recipient",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "recipientTokenId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -604,6 +680,19 @@
     {
         "inputs": [],
         "name": "retries",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "roleId",
         "outputs": [
             {
                 "internalType": "uint8",

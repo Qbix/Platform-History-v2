@@ -121,11 +121,23 @@
 							"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
 						}
 					},
+					"AuthorizedInviteManager": {
+						"factory": {
+							"0x38": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
+							"0x89": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
+							"0x13881": "0x1E84e70D6614F4848aEfDcC358f9776a76B81A85"
+						},
+						"contract": {
+							"0x38": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
+							"0x89": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
+							"0x13881": "0xce080378825C79CB0668c47C03f63d65020973A1"
+						}
+					},
 					"ClaimManager": {
 						"factory": {
-							"all": "<put address here>",
-							"0x89": "<put address here>",
-							"0x13881": "<put address here>"
+							"0x38": "0x130101007bA13B731669bdF23819924F3213f1B8",
+							"0x89": "0x130101007bA13B731669bdF23819924F3213f1B8",
+							"0x13881": "0x27771453Ab75d3CD6f7Aa90b2D68609F055811A2"
 						}
 					},
 					"CommunityCoin": {
@@ -236,9 +248,9 @@
 					},
 					"Subscription": {
 						"factory": {
-							"all": "0x040101003eFD667D30429214223C31c319113E4F",
-							"0x89": "0x040101003eFD667D30429214223C31c319113E4F",
-							"0x13881": "0x7b0650C06010f8b9cC9e58a7E3D6C60bCb7A4517"
+							"all": "0x04010100099d18Da3d85886Ad297e8F654797d99",
+							"0x89": "0x04010100099d18Da3d85886Ad297e8F654797d99",
+							"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
 						}
 					}
 				}
