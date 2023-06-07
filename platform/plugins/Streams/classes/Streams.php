@@ -2639,7 +2639,7 @@ abstract class Streams extends Base_Streams
 					"fromPublisherId" => $asUserId
 				))->execute()->fetchColumn(0);
 				if ($selfRelations) {
-					if ($$throwIfUnavailable) {
+					if ($throwIfUnavailable) {
 						throw new Q_Exception(Q::interpolate($exceededText, @compact("maxRelations")));
 					}
 					return false;
