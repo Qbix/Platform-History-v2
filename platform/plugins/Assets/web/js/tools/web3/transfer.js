@@ -9,8 +9,9 @@
  * @class Assets/web3/transfer
  * @constructor
  * @param {Object} options Override various options for this tool
- * @param {String} options.recipientUserId - id of user to whom the tokens should be sent
- * @param {Q.Event} options.onSubmitted - when signed transaction is submitted to the mempool to be mined
+ * @param {String} [options.recipientUserId] - id of user to whom the tokens should be sent
+ * @param {Q.Event} [options.onSubmitted] - when signed transaction is submitted to the mempool to be mined
+ * @param {Boolean} [options.withHistory] - if true ad a Assets/history tool to the bottom
  */
 
 Q.Tool.define("Assets/web3/transfer", function (options) {
@@ -22,22 +23,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
         }
 
         tool[state.action]();
-
-        /*var pipe = new Q.Pipe(["avatar"], tool[state.action].bind(tool));
-        Q.Streams.Avatar.get(state.recipientUserId, function (err, avatar) {
-            if (err) {
-                return
-            }
-
-            state.displayName = avatar.displayName({short: true});
-            pipe.fill("avatar")();
-        });*/
     },
 
     { // default options here
         action: "send",
         recipientUserId: null,
         tokenInfo: null,
+        withHistory: false,
         onSubmitted: new Q.Event()
     },
 
@@ -53,13 +45,15 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
             Q.Template.render("Assets/web3/transfer/send", {
                 recipientUserId: state.recipientUserId,
-                tokenInfo: state.tokenInfo
+                tokenInfo: state.tokenInfo,
+                withHistory: state.withHistory
             }, function (err, html) {
                 if (err) {
                     return;
                 }
 
                 Q.replace(tool.element, html);
+                Q.activate(tool.element);
 
                 var userSelected = null;
                 var $send = $("button[name=send]", tool.element);
@@ -212,10 +206,13 @@ Q.Template.set("Assets/web3/transfer/send",
     {{#if recipientUserId}}{{else}}
         <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
     {{/if}}
-    <div style="white-space: nowrap">
+    <div class="Assets_transfer_send">
         <input name="amount" placeholder="{{payment.EnterAmount}}" />
         <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>
-    </div>`,
+    </div>
+    {{#if withHistory}}
+        {{&tool "Assets/history" type="credits" withUserId=recipientUserId}}
+    {{/if}}`,
     {text: ['Assets/content']}
 );
 })(window, Q, jQuery);
