@@ -246,6 +246,7 @@ function _request(method, uri, data /* '' */, query /* null */, user_agent /* Mo
 		url = uri[0];
 		if (!!uri[1]) ip = uri[1];
 	} else url = uri;
+	var URL = globalThis.URL;
 	var parts = new URL(url);
 	var host = parts.host;
 	if (!ip) ip = host;
