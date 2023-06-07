@@ -1,4 +1,15 @@
 <?php
+/**
+ * HTTP method for sending funds to some user. Requires a user to be logged in.
+ * @param {array} $_REQUEST
+ * @param {string|number} $_REQUEST.amount - amount to send
+ * @param {String} $_REQUEST.currency - currency of funds
+ * @param {String} [$_REQUEST.payments="stripe"] - payments gateway
+ * @param {Array} [$_REQUEST.toStream] - pair of publisherId, (streamName or name) if pay for joining valuable stream
+ * @param {String} [$_REQUEST.toUserId] - if of user to send to
+ * @param {Array} [$_REQUEST.items] - array of items to pay to
+ * @param {String} [$_REQUEST.reason] - reason of payment
+ */
 function Assets_credits_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
