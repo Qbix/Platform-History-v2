@@ -8,6 +8,7 @@ function Streams_after_Users_updateUserIds($params)
     $userIdFields = array(
         'Streams' => array(
             'Stream' => 'publisherId',
+            'Category' => 'publisherId',
             'Message' => 'publisherId',
             'MessageTotal' => 'publisherId',
             'RelatedTo' => array('toPublisherId', 'fromPublisherId'),
