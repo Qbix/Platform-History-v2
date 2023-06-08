@@ -76,12 +76,14 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 *	'limit' => number of records to fetch
 	 *  'fields' => defaults to array('username', 'firstName', 'lastName') 
 	 *  'public' => defaults to false. If true, also gets publicly accessible names.
+	 *  'communities' => defaults to false. If true, also gets communities.
 	 * @return {array}
 	 */
 	static function fetchByPrefix($toUserId, $prefix, $options = array()) {
 		if ($toUserId instanceof Users_User) {
 			$toUserId = $toUserId->id;
 		}
+		$communities = Q::ifset($options, 'communities', false);
 		$toUserId = empty($options['public'])
 			? $toUserId
 			: array($toUserId, '');
@@ -128,6 +130,9 @@ class Streams_Avatar extends Base_Streams_Avatar
 				->orderBy('firstName');
 			$rows = $q->limit($max)->fetchDbRows();
 			foreach ($rows as $r) {
+				if (!$communities and Users::isCommunityId($r->publisherId)) {
+					continue;
+				}
 				if (!isset($avatars[$r->publisherId])
 				or $r->toUserId !== '') {
 					$avatars[$r->publisherId] = $r;

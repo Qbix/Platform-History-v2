@@ -13,6 +13,10 @@
  * @param {Object} [options] this object contains function parameters
  *   @param {Q.Event} [options.onChoose] is triggered with (userId, avatar)
  *       parameters when a user is chosen
+ *   @param {Object} [options.initialList] information for showing a list when focus is placed in textbox
+ *   @param {Boolean} [options.initialList.hide] set to true to not use the initialList
+ *   @param {String} [options.initialList.key=""] the key under which to store this list, by default it's ""
+ *   @param {Number} [options.initialList.limit=10] how many recent users show when the focus is placed in the textbox
  *   @param {Number} [options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
  *   @param {bool} [options.communitiesOnly=false] If true, search communities instead regular users
@@ -32,6 +36,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	tool.onChoose = o.onChoose;
 	tool.delay = o.delay;
 	tool.exclude = o.exclude;
+	tool.lastChooseTime = 0;
 
 	var element = $(this.element);
 	this.$input = $('input', element);
@@ -58,30 +63,24 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	tool.Q.onStateChanged('resultsHeight').set(function () {
 		tool.$results.css("height", state.resultsHeight);
 	}, tool);
-
-	tool.$input.on('blur', function (event) {
-		setTimeout(function () {
-			if (!focusedResults) {
-				tool.$results.remove();
-			} else {
-				function _handlePointerEnd() {
-					tool.$results.remove();
-					$(document).off(Q.Pointer.end, _handlePointerEnd);
-				}
-				$(document).on(Q.Pointer.end, tool, function () {
-					setTimeout(_handlePointerEnd, 0);
-				});
-			}
-			focusedResults = false;
-		}, 10);
-	}).on('focus change keyup keydown', doQuery)
 	
 	var lastQuery = null;
 
-	function doQuery(event) {
+	var doQuery = Q.debounce(function (event) {
 
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
+
+		if (!query && Date.now() - tool.lastChooseTime > 1000) {
+			var key = Q.Streams.userChooser.lsKey + "\t" + state.initialList.key;
+			var userIds = JSON.parse(localStorage.getItem(key)) || [];
+			Q.Streams.Avatar.get.all(userIds, function (params, subjects) {
+				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), function (err, avatars) {
+					onResponse(null, Q.extend({}, subjects, avatars));
+				}, {'public': true})
+			});
+			lastQuery = query;
+		}
 
 		switch (event.keyCode) {
 			case 38: // up arrow
@@ -94,6 +93,12 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				tool.$results.children().removeClass('Q_selected');
 				prev.addClass('Q_selected');
+				if (prev[0]) {
+					prev[0].scrollIntoView({
+						behavior: 'instant',
+						block: 'nearest'
+					})
+				}
 				return false;
 			case 40: // down arrow
 				if (event.type === 'keyup') {
@@ -102,6 +107,12 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				var next = cur.next();
 				if (!next.length) {
 					next = tool.$results.children().first();
+				}
+				if (next[0]) {
+					next[0].scrollIntoView({
+						behavior: 'instant',
+						block: 'nearest'
+					});
 				}
 				tool.$results.children().removeClass('Q_selected');
 				next.addClass('Q_selected');
@@ -122,7 +133,8 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				if (event.type === 'keydown') {
 					return;
 				}
-				if (!query) {
+				var hide = (!state.initialList || state.initialList.hide || !state.initialList.limit);
+				if (!query && hide) {
 					tool.$results.remove();
 					return;
 				}
@@ -137,6 +149,16 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			var userId = cur.data('userId');
 			var avatar = cur.data('avatar');
 			tool.$input.blur().val('');
+			var key = Q.Streams.userChooser.lsKey + "\t" + state.initialList.key;
+			var userIds = JSON.parse(localStorage.getItem(key)) || [];
+			userIds.unshift(userId);
+			if (userIds.length > state) {
+				if (userIds.length > state.initialList.limit) {
+					userIds = userIds.slice(0, state.initialList.limit);
+				}
+			}
+			localStorage.setItem(key, JSON.stringify(userIds));
+			tool.lastChooseTime = Date.now();
 			Q.handle(tool.onChoose, this, [userId, avatar]);
 			tool.end();
 		}
@@ -209,7 +231,24 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				tool.$results.remove();
 			}
 		}
-	}
+	}, 200);
+
+	tool.$input.on('blur', function (event) {
+		setTimeout(function () {
+			if (!focusedResults) {
+				tool.$results.remove();
+			} else {
+				function _handlePointerEnd() {
+					tool.$results.remove();
+					$(document).off(Q.Pointer.end, _handlePointerEnd);
+				}
+				$(document).on(Q.Pointer.end, tool, function () {
+					setTimeout(_handlePointerEnd, 0);
+				});
+			}
+			focusedResults = false;
+		}, 10);
+	}).on('focus change keyup keydown', doQuery)
 
 },
 
@@ -218,7 +257,11 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	delay: 500,
 	communitiesOnly: false,
 	resultsHeight: "auto",
-	exclude: {}
+	exclude: {},
+	initialList: {
+		key: "",
+		limit: 10
+	}
 },
 
 {
@@ -238,5 +281,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 }
 
 );
+
+Q.Streams.userChooser = {
+	lsKey: 'Streams.userChooser.initialList'
+};
 
 })(Q, jQuery);

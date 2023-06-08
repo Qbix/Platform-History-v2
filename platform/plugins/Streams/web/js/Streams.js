@@ -1099,6 +1099,7 @@ Streams.Dialogs = {
         var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
 
         var pipe = Q.pipe(['stream', 'text'], function () {
+			
             var copyLinkText = text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
             if (Q.getObject("share", navigator)) {
                 copyLinkText = text.shareOrCopyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
@@ -1540,7 +1541,11 @@ Streams.Dialogs = {
             pipe.fill('text')();
         });
 
-        Streams.get(publisherId, streamName, function() {
+        Streams.get(publisherId, streamName, function(err) {
+			var fem = Q.firstErrorMessage(err);
+			if (fem) {
+				throw new Q.Exception("Streams.invite: " + fem);
+			}
             stream = this;
             pipe.fill('stream')();
         });
