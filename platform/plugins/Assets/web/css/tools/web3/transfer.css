@@ -49,3 +49,12 @@
 .Assets_web3_transfer_tool .Assets_transfer_userSelected:empty {
     display: none;
 }
+.Assets_web3_transfer_tool .Assets_transfer_userSelected .Users_avatar_tool .Users_avatar_icon {
+    margin-right: 5px;
+}
+.Assets_web3_transfer_tool .Assets_transfer_send {
+    white-space: nowrap;
+}
+.Assets_web3_transfer_tool .Assets_history_tool {
+    margin-top: 10px;
+}

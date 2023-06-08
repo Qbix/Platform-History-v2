@@ -219,7 +219,7 @@ class Assets_Credits extends Base_Assets_Credits
 				'operation' => '-',
 				'reason' => self::reasonToText($reason, $more)
 			),
-			$more
+			self::fillInstructions($assets_credits, $more)
 		));
 
 		$text = Q_Text::get('Assets/content');
@@ -269,32 +269,27 @@ class Assets_Credits extends Base_Assets_Credits
 		$fromUserId = Q::ifset($more, 'fromUserId', Q::app());
 
 		$assets_credits = self::createRow($amount, $reason, $userId, $fromUserId, $more);
-		$more = self::fillInstructions($assets_credits, $more);
 
 		// Post that this user granted $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
-		$instructions = array(
+		$instructions = array_merge(array(
 			'app' => Q::app(),
-			'operation' => '+',
-			'amount' => $amount
-		);
+			'operation' => '+'
+		), self::fillInstructions($assets_credits, $more));
 		if ($reason == 'BoughtCredits') {
 			$type = 'Assets/credits/bought';
-			$instructions['charge'] = $more["charge"];
-			$instructions['token'] = $more["token"];
 		} elseif ($reason == 'BonusCredits') {
 			$type = 'Assets/credits/bonus';
 		} else {
 			$type = 'Assets/credits/granted';
-			$instructions = array_merge($instructions, $more);
-			$instructions['reason'] = self::reasonToText($reason, $more);
+			$instructions['reason'] = self::reasonToText($reason, $instructions);
 		}
 
 		$content = Q::ifset($text, 'messages', $type, "content", "Granted {{amount}} credits");
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, @compact('amount')),
-			'byClientId' => Q::ifset($more, 'publisherId', null),
+			'byClientId' => Q::ifset($instructions, 'publisherId', null),
 			'instructions' => Q::json_encode($instructions)
 		));
 
@@ -380,16 +375,9 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream->setAttribute('amount', $existing_amount - $amount);
 		$from_stream->changed();
 
-		$more = self::fillInstructions($assets_credits, $more);
-
-		$instructions = array_merge(
-			array(
-				'app' => Q::app(),
-				'reason' => self::reasonToText($reason, $more)
-			),
-			$more
-		);
-
+		$instructions = self::fillInstructions($assets_credits, $more);
+		$instructions['app'] = Q::app();
+		$instructions['reason'] = self::reasonToText($reason, $instructions);
 		$instructions['operation'] = '-';
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/sent';
@@ -397,7 +385,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream->post($fromUserId, array(
 			'type' => $type,
 			'byClientId' => $toUserId,
-			'content' => Q::interpolate($content, $more),
+			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
 		));
 		
@@ -414,7 +402,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$to_stream->post($toUserId, array(
 			'type' => $type,
 			'byClientId' => $fromUserId,
-			'content' => Q::interpolate($content, $more),
+			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
 		));
 	}
@@ -426,18 +414,26 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {array} [$more=array()] Predefined instructions array.
 	 * @return {Array}
 	 */
-	private static function fillInstructions ($assetsCredits, $more = array()) {
+	static function fillInstructions ($assetsCredits, $more = array()) {
 		$more['messageId'] = $assetsCredits->id;
 		$more['toStreamTitle'] = $assetsCredits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assetsCredits->getAttribute("fromStreamTitle");
-		$more['toUserId'] = $assetsCredits->toUserId;
-		$more['fromUserId'] = $assetsCredits->fromUserId;
+		$more['toUserId'] = $assetsCredits->toUserId ?: $assetsCredits->getAttribute("toUserId");
+		$more['fromUserId'] = $assetsCredits->fromUserId ?: $assetsCredits->getAttribute("fromUserId");
+		$more['invitedUserId'] = $assetsCredits->getAttribute("invitedUserId");
 		$more['fromPublisherId'] = $assetsCredits->fromPublisherId;
-		$more['fromUserName'] = $assetsCredits->getAttribute("fromUserName");
 		$more['fromStreamName'] = $assetsCredits->fromStreamName;
 		$more['toPublisherId'] = $assetsCredits->toPublisherId;
-		$more['toUserName'] = $assetsCredits->getAttribute("toUserName");
 		$more['toStreamName'] = $assetsCredits->toStreamName;
+		if (empty($more['toUserName']) && !empty($more['toUserId'])) {
+			$more['toUserName'] = Streams::displayName($more['toUserId']);
+		}
+		if (empty($more['fromUserName']) && !empty($more['fromUserId'])) {
+			$more['fromUserName'] = Streams::displayName($more['fromUserId']);
+		}
+		if (empty($more['invitedUserName']) && !empty($more['invitedUserId'])) {
+			$more['invitedUserName'] = Streams::displayName($more['invitedUserId']);
+		}
 
 		return $more;
 	}
@@ -480,17 +476,17 @@ class Assets_Credits extends Base_Assets_Credits
 		unset($more['toStreamName']);
 
 		if ($toUserId) {
-			$more['toUserName'] = Streams::displayName($toUserId);
+			$more['toUserId'] = $toUserId;
 		}
 
 		if ($toPublisherId && $toStreamName) {
 			$more['toStreamTitle'] = Streams_Stream::fetch($toPublisherId, $toPublisherId, $toStreamName)->title;
-			$more['toUserName'] = Streams::displayName($toPublisherId);
+			$more['toUserId'] = $toPublisherId;
 		}
 
 		if ($fromPublisherId && $fromStreamName) {
 			$more['fromStreamTitle'] = Streams_Stream::fetch($fromPublisherId, $fromPublisherId, $fromStreamName, true)->title;
-			$more['fromUserName'] = Streams::displayName($fromPublisherId);
+			$more['fromUserId'] = $fromPublisherId;
 		}
 
 		$assets_credits = new Assets_Credits();

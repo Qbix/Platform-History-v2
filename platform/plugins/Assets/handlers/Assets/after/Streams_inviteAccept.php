@@ -17,7 +17,7 @@ function Assets_after_Streams_inviteAccept($params)
 		Assets_Credits::grant($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
 			'publisherId' => $stream->publisherId,
 			'streamName' => $stream->name,
-			'displayName' => $invitedUser->displayName()
+			'invitedUserId' => $invitedUser->id
 		));
 	}
 }
