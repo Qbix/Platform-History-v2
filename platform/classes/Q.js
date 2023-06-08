@@ -844,6 +844,27 @@ Q.getter = function _Q_getter(original, options) {
 	gw.original = original;
 	Q.makeEventEmitter(gw);
 
+	gw.all = function (arrayOfArguments, callback, useIndexes) {
+		var keys = [], argsArray = [];
+		for (var i=0, l=arrayOfArguments.length; i<l; ++i) {
+			var args = arrayOfArguments[i];
+			keys.push(useIndexes ? i : Q.Cache.key(args));
+			if (!(args instanceof Array)) {
+				args = [args];
+			}
+			argsArray.push(args);
+
+		}
+		var pipe = Q.pipe(keys, 1, function (params, subjects) {
+			Q.handle(callback, this, [params, subjects, arrayOfArguments]);
+		});
+		for (i=0, l=keys.length; i < l; ++i) {
+			argsArray[i].push(pipe.fill(keys[i]));
+			gw.apply(this, argsArray[i]);
+		}
+		pipe.run();
+	};
+
 	var _waiting = {};
 	if (gw.cache === false) {
 		// no cache
