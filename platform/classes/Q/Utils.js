@@ -263,8 +263,12 @@ function _request(method, uri, data /* '' */, query /* null */, user_agent /* Mo
 
 	var request = {
 		headers: header,
-		uri: server+"?"+data
+		uri: server+"?"+data,
+		agentOptions: {
+			rejectUnauthorized: false
+		}
 	};
+
 	if (query) request.qs = query;
 
 	require('request')[method](request, function (err, res, body) {
