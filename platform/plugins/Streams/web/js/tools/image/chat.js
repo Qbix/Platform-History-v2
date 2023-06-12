@@ -69,10 +69,10 @@
 				};
 
 				if (tool.menuItem) {
-					return tool.menuItem.data("handler", _handler);
+					return $(tool.menuItem).data("handler", _handler);
 				}
 
-				tool.menuItem = tool.chatTool.addMenuItem({
+				tool.menuItem = tool.chatTool.addMenuItem('image', {
 					title: Q.getObject(["types", "Streams/image", "newItem"], tool.text) || "Add Image",
 					icon: "{{Streams}}/img/icons/Streams/image/40.png",
 					className: "Streams_image_chat",

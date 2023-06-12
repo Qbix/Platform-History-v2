@@ -72,6 +72,12 @@ Q.text.Streams = {
 	},
 	identifier: {
 		privacySettings: "Privacy Settings"
+	},
+
+	addStream: function (streamType) {
+		var Add = Q.getObject(['relate', 'Add'], Q.text.Streams);
+		var displayType = Streams.displayType(streamType);
+		return Add.interpolate({streamDisplayType: displayType})
 	}
 
 };
@@ -5687,25 +5693,25 @@ Streams.Metrics = function (params) {
 
 /**
  * Returns the type name to display from a stream type.
- * If none is set, try to figure out a displayable title from a stream's type
+ * If none is set, try to figure out a displayable title from a stream's type.
+ * It expects all relevant text files to have already been loaded override anything in Q.text.Streams
  * @method displayType
  * @param {String} type
- * @param {Function} callback The first parameter will be the displayType
  * @param {Object} [options] Options to use with Q.Text.get, and also
- * @param {string} [$options.plural=false] Whether to display plural, when available
+ * @param {string} [options.plural=false] Whether to display plural, when available
+ * @return {String} the displayType
  */
-Streams.displayType = function _Streams_displayType(type, callback, options) {
+Streams.displayType = function _Streams_displayType(type, options) {
 	var parts = type.split('/');
 	var module = parts.shift();
 	var ret = parts.pop();
-	Q.Text.get(module+'/content', function(err, text) {
-		var field = 'displayType' + (options && options.plural) ? 'Plural' : '';
-		var result = Q.getObject(['types', type, 'displayType']);
-		if (options && options.plural) {
-			result = Q.getObject(['types', type, 'displayTypePlural'], text) || result;
-		}
-		callback(result || ret);
-	}, options);
+	options = options || {};
+	var field = 'displayType' + (options.plural ? 'Plural' : '');
+	var result = Q.getObject(['types', type, field], Q.text.Streams);
+	if (options.plural) {
+		result = Q.getObject(['types', type, 'displayTypePlural'], Q.text.Streams) || result;
+	}
+	return result || ret.toCapitalized();
 };
 
 /**

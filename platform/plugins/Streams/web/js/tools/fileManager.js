@@ -149,8 +149,9 @@
                 });
 
                 function contextualToolLoadHandler() {
-                    tool.addMenuItem({
-                        title: 'Add image',
+                    var title = Q.getObject(["types", "Streams/image", "newItem"], tool.text) || "Add Image";
+                    tool.addMenuItem('image', {
+                        title: title,
                         icon: '{{Streams}}/img/icons/Streams/image/40.png',
                         className: "Streams_image_chat",
                         handler: function () {
@@ -189,8 +190,9 @@
                         }
                     });
 
-                    tool.addMenuItem({
-                        title: 'Add video',
+                    var title = Q.getObject(["types", "Streams/video", "newItem"], tool.text) || "Add Video";
+                    tool.addMenuItem('video', {
+                        title: title,
                         icon: '{{Streams}}/img/icons/Streams/video/40.png',
                         className: "Streams_video_chat",
                         handler: function () {
@@ -226,8 +228,9 @@
                         }
                     });
 
-                    tool.addMenuItem({
-                        title: 'Add audio',
+                    var title = Q.getObject(["types", "Streams/audio", "newItem"], tool.text) || "Add Audio";
+                    tool.addMenuItem('audio', {
+                        title: title,
                         icon: "{{Streams}}/img/icons/Streams/audio/40.png",
                         className: "Streams_audio_chat",
                         handler: function () {
@@ -258,10 +261,11 @@
                         }
                     });
 
-                    tool.addMenuItem({
-                        title: 'Add folder',
+                    var title = Q.getObject(["types", "Streams/category", "newItem"], tool.text) || "Add Folder";
+                    tool.addMenuItem('category', {
+                        title: title,
                         icon: "{{Streams}}/img/icons/Streams/category/40.png",
-                        className: "Streams_folder_chat",
+                        className: "Streams_category_chat",
                         handler: function () {
                             var fields = {
                                 publisherId: userId,

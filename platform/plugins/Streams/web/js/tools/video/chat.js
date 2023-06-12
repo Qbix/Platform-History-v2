@@ -39,7 +39,7 @@
 		}
 
 		// add contect menu item
-		tool.chatTool.addMenuItem({
+		tool.chatTool.addMenuItem('video', {
 			title: title,
 			icon: "{{Streams}}/img/icons/Streams/video/40.png",
 			className: "Streams_video_chat",

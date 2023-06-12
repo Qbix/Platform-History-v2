@@ -39,7 +39,7 @@
 		}
 
 		// add contect menu item
-		tool.chatTool.addMenuItem({
+		tool.chatTool.addMenuItem('pdf', {
 			title: title,
 			icon: "{{Streams}}/img/icons/files/pdf/40.png",
 			className: "Streams_pdf_chat",

@@ -347,7 +347,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						}
 					});
 
-					tool.addMenuItem({
+					tool.addMenuItem('subscription', {
 						title: touchlabel,
 						className: "Streams_chat_subscription",
 						attributes: {
@@ -396,15 +396,20 @@ Q.Tool.define('Streams/chat', function(options) {
 	/**
 	 * Add element to addons contextual menu
 	 * @method addMenuItem
-	 * @param {object} params
-	 * @param {string} params.title Element text
-	 * @param {string} [params.icon] Element icon url
-	 * @param {string} [params.className] Element class
-	 * @param {object} [params.attributes] Element attributes
+	 * @param {String} key
+	 * @param {Object} params
+	 * @param {String} params.title Element text
+	 * @param {String} [params.icon] Element icon url
+	 * @param {String} [params.className] Element class
+	 * @param {Object} [params.attributes] Element attributes
 	 * @param {function} [params.handler] click event handler
 	 * @return {jQuery} Result element
 	 */
-	addMenuItem: function (params) {
+	addMenuItem: function (key, params) {
+		if (this.menuItems[key]) {
+			return this.menuItems[key];
+		}
+
 		var $element = $("<li class='Streams_chat_addon'></li>");
 
 		$("<div class='Streams_chat_addon_icon'><img src='" + Q.url(params.icon) + "' /></div>").appendTo($element);
@@ -432,7 +437,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			$ul.append($element);
 		});
 
-		return $element;
+		return this.menuItems[key] = $element[0];
 	},
 	renderMessages: function(messages, callback){
 		var tool = this;
@@ -1246,6 +1251,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	refresh: function (callback) {
 		var tool = this;
 		var state = tool.state;
+		tool.menuItems = {};
 		state.earliest = null;
 		callback = callback || function () {
 			Q.Visual.waitUntilVisible(tool, function () {

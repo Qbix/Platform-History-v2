@@ -34,6 +34,9 @@
         "Other": "Other",
         "Unlisted": "Unlisted"
     },
+    "relate": {
+        "Add": "Add {{streamDisplayType}}"
+    },
     "chat": {
         "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
         "noOneSaid": "No one has said anything",
@@ -305,7 +308,8 @@
         },
         "Streams\/category": {
             "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "description": "a category to which other streams can be related",
+            "newItem": "Add Category"
         },
         "Streams\/participating": {
             "displayType": "Participating Index",

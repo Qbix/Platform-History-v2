@@ -39,7 +39,7 @@
 		}
 
 		// add contect menu item
-		tool.chatTool.addMenuItem({
+		tool.chatTool.addMenuItem('audio', {
 			title: title,
 			icon: "{{Streams}}/img/icons/Streams/audio/40.png",
 			className: "Streams_audio_chat",

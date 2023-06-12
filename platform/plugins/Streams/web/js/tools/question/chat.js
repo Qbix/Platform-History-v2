@@ -40,7 +40,7 @@
 		}
 
 		// add contect menu item
-		tool.chatTool.addMenuItem({
+		tool.chatTool.addMenuItem('question', {
 			title: title,
 			icon: "{{Streams}}/img/icons/Streams/question/40.png",
 			className: "Streams_question_chat",
