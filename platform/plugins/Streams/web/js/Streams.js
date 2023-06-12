@@ -631,7 +631,10 @@ Q.Text.addFor(
 );
 Q.Tool.define({
 	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
-	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
+	"Streams/chat"		 : {
+		js: "{{Streams}}/js/tools/chat.js",
+		css: "{{Streams}}/css/tools/chat.css"
+	},
 	"Streams/mentions/chat": "{{Streams}}/js/tools/mentions/chat.js",
 	"Streams/comments"	 : "{{Streams}}/js/tools/comments.js",
 	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
@@ -649,7 +652,10 @@ Q.Tool.define({
 	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
 	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
-	"Streams/image/chat": "{{Streams}}/js/tools/image/chat.js",
+	"Streams/image/chat": {
+		js: "{{Streams}}/js/tools/image/chat.js",
+		css: "{{Streams}}/css/tools/previews.css"
+	},
 	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
 	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
 	"Streams/category"	 : "{{Streams}}/js/tools/category.js",
@@ -666,12 +672,21 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
-	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chat.js",
+	"Streams/audio/chat" : {
+		js: "{{Streams}}/js/tools/audio/chat.js",
+		css: "{{Streams}}/css/tools/previews.css"
+	},
 	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
-	"Streams/video/chat" : "{{Streams}}/js/tools/video/chat.js",
+	"Streams/video/chat" : {
+		js: "{{Streams}}/js/tools/video/chat.js",
+		css: "{{Streams}}/css/tools/previews.css"
+	},
 	"Streams/question/chat" : "{{Streams}}/js/tools/question/chat.js",
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
-	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chat.js",
+	"Streams/pdf/chat" : {
+		js: "{{Streams}}/js/tools/pdf/chat.js",
+		css: "{{Streams}}/css/tools/previews.css"
+	},
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
 	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",

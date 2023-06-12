@@ -15,8 +15,6 @@
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
 
-		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
-
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
 
@@ -32,13 +30,8 @@
 
 		});
 
-		Q.Text.get('Streams/content', function (err, text) {
-			tool.text = text;
-
-			// add contect menu item
-			tool.refresh();
-		});
-
+		// add contect menu item
+		tool.refresh();
 	},
 
 	{
@@ -66,30 +59,6 @@
 				},
 				onRefresh: function () {
 					tool.refresh();
-				},
-				creatable: {
-					/*preprocess: function (_proceed) {
-						var fields = Q.extend({
-							publisherId: userId,
-							type: "Streams/image"
-						});
-
-						var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
-
-						Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
-							$dummy.remove();
-
-							if (err) {
-								return err;
-							}
-
-							console.log(this);
-						}, {
-							publisherId: tool.chatTool.state.publisherId,
-							streamName: tool.chatTool.state.streamName,
-							type: "Streams/image"
-						});
-					}*/
 				}
 			}).tool("Streams/image/preview", {
 				defineTitle: '',
@@ -106,6 +75,7 @@
 				tool.menuItem = tool.chatTool.addMenuItem({
 					title: Q.getObject(["types", "Streams/image", "newItem"], tool.text) || "Add Image",
 					icon: "{{Streams}}/img/icons/Streams/image/40.png",
+					className: "Streams_image_chat",
 					handler: _handler
 				});
 			});
