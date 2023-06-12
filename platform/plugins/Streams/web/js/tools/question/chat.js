@@ -43,6 +43,7 @@
 		tool.chatTool.addMenuItem({
 			title: title,
 			icon: "{{Streams}}/img/icons/Streams/question/40.png",
+			className: "Streams_question_chat",
 			handler: function () {
 				Q.Dialogs.push({
 					title: title,

@@ -149,12 +149,10 @@
                 });
 
                 function contextualToolLoadHandler() {
-                    
-
                     tool.addMenuItem({
                         title: 'Add image',
                         icon: '{{Streams}}/img/icons/Streams/image/40.png',
-                        className: "Streams_fileManager_add_image",
+                        className: "Streams_image_chat",
                         handler: function () {
                             if(tool.imagePreviewElement) {
                                 Q.Tool.remove(tool.imagePreviewElement[0], true, true);
@@ -194,8 +192,8 @@
                     tool.addMenuItem({
                         title: 'Add video',
                         icon: '{{Streams}}/img/icons/Streams/video/40.png',
-                        className: "Streams_fileManager_add_video",
-                        handler: function ($this) {
+                        className: "Streams_video_chat",
+                        handler: function () {
                             $("<div>").tool("Streams/preview", {
                                 publisherId: userId
                             }).tool("Streams/video/preview").activate(function () {
@@ -231,6 +229,7 @@
                     tool.addMenuItem({
                         title: 'Add audio',
                         icon: "{{Streams}}/img/icons/Streams/audio/40.png",
+                        className: "Streams_audio_chat",
                         handler: function () {
                             $("<div>").tool("Streams/preview", {
                                 publisherId: userId
@@ -262,6 +261,7 @@
                     tool.addMenuItem({
                         title: 'Add folder',
                         icon: "{{Streams}}/img/icons/Streams/category/40.png",
+                        className: "Streams_folder_chat",
                         handler: function () {
                             var fields = {
                                 publisherId: userId,
@@ -303,7 +303,7 @@
                     $element.data("handler", params.handler);
                 }
 
-                $("ul.Q_listing", tool.addonsContextual.element).append($element);
+                $("ul.Q_listing", tool.addonsContextual).append($element);
 
                 return $element;
             },

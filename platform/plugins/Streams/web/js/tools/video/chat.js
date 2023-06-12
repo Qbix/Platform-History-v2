@@ -16,8 +16,6 @@
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
 
-		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
-
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
 
@@ -33,51 +31,48 @@
 
 		});
 
-		Q.Text.get('Streams/content', function (err, text) {
-			tool.text = text;
-			var title = Q.getObject(["types", "Streams/video", "newItem"], text) || "Add Video";
+		var title = Q.getObject(["types", "Streams/video", "newItem"], tool.text) || "Add Video";
 
-			// non logged user can't add any items to chat
-			if (!Q.Users.loggedInUserId()) {
-				return;
-			}
+		// non logged user can't add any items to chat
+		if (!Q.Users.loggedInUserId()) {
+			return;
+		}
 
-			// add contect menu item
-			tool.chatTool.addMenuItem({
-				title: title,
-				icon: "{{Streams}}/img/icons/Streams/video/40.png",
-				handler: function () {
-					$("<div>").tool("Streams/preview", {
-						publisherId: userId
-					}).tool("Streams/video/preview").activate(function () {
-                        var videoPreview = Q.Tool.from(this.element, "Streams/video/preview");
+		// add contect menu item
+		tool.chatTool.addMenuItem({
+			title: title,
+			icon: "{{Streams}}/img/icons/Streams/video/40.png",
+			className: "Streams_video_chat",
+			handler: function () {
+				$("<div>").tool("Streams/preview", {
+					publisherId: userId
+				}).tool("Streams/video/preview").activate(function () {
+					var videoPreview = Q.Tool.from(this.element, "Streams/video/preview");
 
-						videoPreview.composer(function (params) {
-                            var fields = Q.extend({
-								publisherId: userId,
-								type: "Streams/video"
-							}, 10, params);
+					videoPreview.composer(function (params) {
+						var fields = Q.extend({
+							publisherId: userId,
+							type: "Streams/video"
+						}, 10, params);
 
-							var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
-							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
-								$dummy.remove();
+						var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
+						Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
+							$dummy.remove();
 
-								if (err) {
-									return err;
-								}
+							if (err) {
+								return err;
+							}
 
-								console.log(this);
-							}, {
-								publisherId: tool.chatTool.state.publisherId,
-								streamName: tool.chatTool.state.streamName,
-								type: "Streams/video"
-							});
+							console.log(this);
+						}, {
+							publisherId: tool.chatTool.state.publisherId,
+							streamName: tool.chatTool.state.streamName,
+							type: "Streams/video"
 						});
 					});
-				}
-			});
+				});
+			}
 		});
-
 	},
 
 	{
