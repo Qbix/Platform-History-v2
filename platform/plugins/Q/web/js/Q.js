@@ -14186,6 +14186,7 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Q.Event} [options.onActivate] Q.Event or function which is called when invoked container is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
  * @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when invoked container closing was initiated and it's still visible. Can return false to cancel closing.
  * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
+ * @return {Object} an object with methods like "close", that you can call to close the invoked interface
  */
 Q.invoke = function (options) {
 	if (!Q.isPlainObject(options)) {
@@ -14200,20 +14201,25 @@ Q.invoke = function (options) {
 	} else {
 		_continue();
 	}
+	var methods = {};
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, [options]);
+			var ret = Q.handle(handler, Q, [options, methods]);
 			if (ret === false) {
-				return false
+				return false;
 			}
 		});
 	}
+	return methods;
 };
 Q.invoke.handlers = [
-	function (options) {
-		Q.Dialogs.push(Q.extend({}, options, {
+	function (options, methods) {
+		var element = Q.Dialogs.push(Q.extend({}, options, {
 			onActivate: options.onActivate || function () { }
 		}));
+		methods.close = function () {
+			Q.Dialogs.close(element);
+		};
 	}
 ];
 

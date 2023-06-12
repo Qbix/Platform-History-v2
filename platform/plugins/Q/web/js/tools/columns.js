@@ -762,9 +762,10 @@ Q.Tool.define("Q/columns", function(options) {
 	/**
 	 * Closes a column
 	 * @method close
-	 * @param {Number|Array|Object} index The index of the column to close.
+	 * @param {Number|Array|Object|Element} index The index of the column to close.
 	 *  You can pass an array of indexes here, or an object with "min" and
-	 *  optional "max"
+	 *  optional "max". You can also pass an element to match instead, like with
+	 *  Q.Dialogs.close(element).
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override some values taken from tool state
@@ -778,6 +779,16 @@ Q.Tool.define("Q/columns", function(options) {
 		var state = tool.state;
 		var t = Q.typeOf(index);
 		var p, waitFor = [];
+		if (index instanceof Element) {
+			Q.each(state.columns, function (i) {
+				if (this === index) {
+					index = i;
+				}
+			});
+			if (index instanceof Element) {
+				return false;
+			}
+		}
 		if (t === 'object') {
 			p = new Q.Pipe();
 			Q.each(index.max||state.max, index.min||0, -1, function (i) {
@@ -1185,7 +1196,7 @@ function _updateAttributes() {
 	}
 }
 
-Q.invoke.handlers.unshift(function (options, callback) {
+Q.invoke.handlers.unshift(function (options, methods) {
 	var index, columns;
 	var node = options.trigger;
 	if (!node) {
@@ -1211,10 +1222,14 @@ Q.invoke.handlers.unshift(function (options, callback) {
 	}
 	if (columns) {
 		columns.close({min: index+1}, null, {animation: {duration: 0}});
-		columns.open(Q.extend({}, options, {
+		columns.push(Q.extend({}, options, {
 			column: options.content,
 			onActivate: options.onActivate || function () {}
 		}));
+		var max = columns.max();
+		methods.close = function (options) {
+			columns.close(max, function () { }, options);
+		};
 		return false;
 	}
 });
