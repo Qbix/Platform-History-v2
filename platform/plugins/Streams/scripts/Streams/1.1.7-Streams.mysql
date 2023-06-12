@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `{{prefix}}state`;
 CREATE TABLE `{{prefix}}state` (
   `hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'typically this is hexadecimal format',
-  `algorithm` enum('sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'sha256' COMMENT 'the HMAC versions should use a secret key not storeed in this table',
+  `algorithm` enum('sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'sha256' COMMENT 'the HMAC versions should use a secret key not stored in this table',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `extra` varbinary(1023) DEFAULT '',
