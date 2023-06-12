@@ -71,7 +71,7 @@
 				);
 				Q.Template.set('Assets/credits/buy',
 					'{{#each bonuses}}' +
-					'	<div class="Assets_credits_bonus">{{this}}</div>' +
+					'	<div class="Assets_credits_bonus">{{&this}}</div>' +
 					'{{/each}}' +
 					'<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>' +
 					'<button class="Q_button" name="buy">{{texts.PurchaseCredits}}</button>'
@@ -1548,6 +1548,10 @@
 		"Assets/web3/balance": {
 			js: "{{Assets}}/js/tools/web3/balance.js",
 			css: "{{Assets}}/css/tools/web3/balance.css"
+		},
+		"Assets/credits/balance": {
+			js: "{{Assets}}/js/tools/credits/balance.js",
+			css: "{{Assets}}/css/tools/credits/balance.css"
 		}
 	});
     

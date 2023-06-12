@@ -66,6 +66,19 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 			return parseFloat(parseFloat(ethers.utils.formatUnits(amount)).toFixed(12));
 		};
 
+		if (!state.chainId) {
+			Q.Template.render("Assets/web3/balance/credits", {}, function (err, html) {
+				if (err) {
+					return;
+				}
+
+				Q.replace($(".Assets_web3_balance_select", tool.element)[0], html);
+				Q.activate(tool.element);
+				Q.handle(state.onRefresh, tool);
+			});
+			return;
+		}
+
 		Q.Users.init.web3(function () { // to load ethers.js
 			Q.handle(Assets.Currencies.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
 				if (err) {
@@ -122,25 +135,35 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 					Q.replace($(".Assets_web3_balance_select", tool.element)[0], html);
 					Q.handle(state.onRefresh, tool);
 				});
-
 			}, {
 				tokenAddresses: state.tokenAddresses
 			}]);
 		});
 	},
 	getValue: function () {
+		var tool = this;
+		var state = this.state;
+
 		var $selectedOption = $("select[name=tokens]", this.element).find(":selected");
-		if (!$selectedOption.length) {
-			return null;
+		if ($selectedOption.length) {
+			return {
+				chainId: state.chainId,
+				tokenAmount: $selectedOption.attr("data-amount"),
+				tokenName: $selectedOption.attr("data-name"),
+				tokenAddress: $selectedOption.attr("data-address"),
+				decimals: $selectedOption.attr("data-decimals")
+			};
 		}
 
-		return {
-			chainId: this.state.chainId,
-			tokenAmount: $selectedOption.attr("data-amount"),
-			tokenName: $selectedOption.attr("data-name"),
-			tokenAddress: $selectedOption.attr("data-address"),
-			decimals: $selectedOption.attr("data-decimals")
-		};
+		// for app credits
+		var assetsCreditsBalance = Q.Tool.from($(".Assets_credits_balance_tool", tool.element)[0], "Assets/credits/balance");
+		if (assetsCreditsBalance) {
+			return {
+				chainId: null,
+				tokenAmount: assetsCreditsBalance.getValue(),
+				tokenName: "credits"
+			};
+		}
 	},
 	Q: {
 		beforeRemove: function () {
@@ -154,13 +177,17 @@ Q.Template.set('Assets/web3/balance',
 	{{#each chains}}
 		<option value="{{this.chainId}}">{{this.name}}</option>
 	{{/each}}
+	<option value="">{{transfer.AppCredits}}</option>
 </select>{{/if}}
-<div class="Assets_web3_balance_select"></div>`);
+<div class="Assets_web3_balance_select"></div>`, {text: ['Assets/content']});
 
 Q.Template.set('Assets/web3/balance/list',
 `{{#each results}}
 	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenName}} {{this.tokenAmount}}</div>
 {{/each}}`);
+
+Q.Template.set('Assets/web3/balance/credits',
+`{{credits.Credits}} {{&tool "Assets/credits/balance"}}`, {text: ['Assets/content']});
 
 Q.Template.set('Assets/web3/balance/select',
 `<select name="tokens" data-count="{{results.length}}">

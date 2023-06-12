@@ -46,7 +46,9 @@
  */
 Q.Tool.define('Streams/chat', function(options) {
 	var tool = this;
+	tool.text = tool.text.chat;
 	var state = tool.state;
+
 	state.more = {};
 	switch (state.loadMore) {
 		case 'click': state.more.isClick = true; break;
@@ -75,34 +77,12 @@ Q.Tool.define('Streams/chat', function(options) {
 		tool.cache = Q.Cache.local('Streams/chat');
 	}
 
-	var pipe = new Q.Pipe(["text", "styles"], function () {
-		tool.refresh(function () {
-			Q.Visual.waitUntilVisible(tool, function () {
-				Q.activate(tool.element, function () {
-					// all message bubbles should have stabilized
-					// their height at this point
-					Q.Visual.waitUntilAnimationsEnd(function () {
-						tool.scrollToBottom(null, true);
-					});
-				});
-			});
-		});
-		Q.Streams.refresh.beforeRequest.add(function () {
-			if (state.stream && state.stream.refresh) {
-				state.stream.refresh(null, {messages: true});
-			}
-		}, tool);
-	});
-	Q.addStylesheet('{{Streams}}/css/tools/chat.css', pipe.fill("styles"));
-	Q.Text.get('Streams/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			console.warn(msg);
+	tool.refresh();
+	Q.Streams.refresh.beforeRequest.add(function () {
+		if (state.stream && state.stream.refresh) {
+			state.stream.refresh(null, {messages: true});
 		}
-
-		tool.text = text.chat;
-		pipe.fill("text")();
-	});
+	}, tool);
 
 	// close chat button handler
 	$(tool.element).on(Q.Pointer.fastclick, "button[name=close]", function (event) {
@@ -444,7 +424,12 @@ Q.Tool.define('Streams/chat', function(options) {
 		}
 
 		this.state.onContextualCreated.add(function (contextual) {
-			$("ul.Q_listing", contextual).append($element);
+			var $ul = $("ul.Q_listing", contextual);
+			if (params.className && $("." + params.className, $ul).length) {
+				return;
+			}
+
+			$ul.append($element);
 		});
 
 		return $element;
@@ -1259,9 +1244,20 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 
 	refresh: function (callback) {
-
 		var tool = this;
 		var state = tool.state;
+		state.earliest = null;
+		callback = callback || function () {
+			Q.Visual.waitUntilVisible(tool, function () {
+				Q.activate(tool.element, function () {
+					// all message bubbles should have stabilized
+					// their height at this point
+					Q.Visual.waitUntilAnimationsEnd(function () {
+						tool.scrollToBottom(null, true);
+					});
+				});
+			});
+		};
 
 		function _render(messages) {
 			Q.each(messages, function (ordinal) {
@@ -1285,8 +1281,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						tool.processDOM();
 						tool.addEvents();
 						Q.handle(callback, tool);
-						Q.handle(state.onRefresh, tool);
-		
+
 						// if startWebRTC is true, start webrtc
 						if (state.startWebRTC
 						|| (location.href.indexOf(state.stream.url() >= 0)
@@ -1297,7 +1292,6 @@ Q.Tool.define('Streams/chat', function(options) {
 					}
 				);
 			});
-
 		}
 
 		Q.Streams.retainWith(this).get.force(state.publisherId, state.streamName, function () {

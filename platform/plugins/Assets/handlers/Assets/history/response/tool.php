@@ -15,6 +15,7 @@ function Assets_history_response_tool($options)
 
 	Q_Valid::requireFields(array('type'), $options, true);
 	$type = $options["type"];
+	$withUserId = Q::ifset($options, "withUserId", null);
 	$loggedUser = Users::loggedInUser(true);
 	//$userId = Q::ifset($options, 'userId', $loggedUser->id);
 	$userId = $loggedUser->id;
@@ -32,11 +33,25 @@ function Assets_history_response_tool($options)
 
 	$res = array();
 	if ($type == 'credits') {
-		$rows = Assets_Credits::select()
-		->where(array('fromUserId' => $userId))
-		->orWhere(array('toUserId' => $userId))
-		->orderBy('insertedTime', false)
-		->fetchDbRows();
+		if ($withUserId) {
+			$queryRows = Assets_Credits::select()
+				->where(array(
+					'fromUserId' => $userId,
+					'toUserId' => $withUserId
+				))
+				->orWhere(array(
+					'toUserId' => $userId,
+					'fromUserId' => $withUserId
+				));
+		} else {
+			$queryRows = Assets_Credits::select()
+				->where(array('fromUserId' => $userId))
+				->orWhere(array('toUserId' => $userId));
+		}
+
+		$queryRows->orderBy('insertedTime', false);
+
+		$rows = $queryRows->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
 			$attributes = (array)Q::json_decode($row->attributes);
@@ -45,6 +60,19 @@ function Assets_history_response_tool($options)
 			$attributes['toStreamName'] = $row->toStreamName;
 			$attributes['fromPublisherId'] = $row->fromPublisherId;
 			$attributes['fromStreamName'] = $row->fromStreamName;
+
+			// for backward compatibility when invitedUserName was displayName
+			$attributes['invitedUserName'] = Q::ifset($attributes, 'invitedUserName', Q::ifset($attributes, 'displayName', null));
+
+			if (!empty($attributes['invitedUserId']) && empty($attributes['invitedUserName'])) {
+				$attributes['invitedUserName'] = Streams::displayName($attributes['invitedUserId']);
+			}
+			if (!empty($attributes['toUserId']) && empty($attributes['toUserName'])) {
+				$attributes['toUserName'] = Streams::displayName($attributes['toUserId']);
+			}
+			if (!empty($attributes['fromUserId']) && empty($attributes['fromUserName'])) {
+				$attributes['fromUserName'] = Streams::displayName($attributes['fromUserId']);
+			}
 
 			$amount = $row->credits;
 			$sign = $direction = $clientInfo = $clientId = null;

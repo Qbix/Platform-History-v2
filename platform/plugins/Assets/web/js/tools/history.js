@@ -16,6 +16,7 @@
  *  @param {Q.Event} [options.onStream] Event occur when user click on stream title link.
  *  Passed tool as context and publisherId, streamName as arguments.
  *  @param {boolean} [options.mergeRows=false] If true merge rows with same "amount" field
+ *  @param {String} [options.withUserId] - if defined, show only operations with this user
  */
 
 Q.Tool.define("Assets/history", function (options) {
@@ -68,6 +69,7 @@ Q.Tool.define("Assets/history", function (options) {
 { // default options here
 	type: null,
 	mergeRows: false,
+	withUserId: null,
 	userId: Q.Users.loggedInUserId(),
 	onClient: new Q.Event(),
 	onStream: new Q.Event()
@@ -79,6 +81,7 @@ Q.Tool.define("Assets/history", function (options) {
 		var state = tool.state;
 		var $table = $("table.Assets_history tbody", tool.element);
 		var operation = $table.is(':empty') ? "append" : "prepend";
+		var $toolElement = $(tool.element);
 
 		Q.req('Assets/history', ['tool'], function (err, data) {
 			var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
@@ -88,10 +91,10 @@ Q.Tool.define("Assets/history", function (options) {
 
 			var rows = data.slots.tool;
 
-			/*if (Q.typeOf(rows) !== 'array' || !rows.length) {
-				$te.attr('data-empty', true);
-				return $te.html(tool.text.history.HistoryEmpty);
-			}*/
+			if (Q.typeOf(rows) !== 'array' || !rows.length) {
+				$toolElement.attr('data-empty', true);
+				return $toolElement.html(tool.text.history.HistoryEmpty);
+			}
 
 			Q.each(rows, function (i, row) {
 				// skip duplicated requests for same message
@@ -175,7 +178,8 @@ Q.Tool.define("Assets/history", function (options) {
 			});
 		}, {
 			fields: {
-				type: state.type
+				type: state.type,
+				withUserId: state.withUserId
 			}
 		});
 	}

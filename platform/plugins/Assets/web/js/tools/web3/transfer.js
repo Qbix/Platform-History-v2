@@ -9,8 +9,9 @@
  * @class Assets/web3/transfer
  * @constructor
  * @param {Object} options Override various options for this tool
- * @param {String} options.recipientUserId - id of user to whom the tokens should be sent
- * @param {Q.Event} options.onSubmitted - when signed transaction is submitted to the mempool to be mined
+ * @param {String} [options.recipientUserId] - id of user to whom the tokens should be sent
+ * @param {Q.Event} [options.onSubmitted] - when signed transaction is submitted to the mempool to be mined
+ * @param {Boolean} [options.withHistory] - if true ad a Assets/history tool to the bottom
  */
 
 Q.Tool.define("Assets/web3/transfer", function (options) {
@@ -22,22 +23,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
         }
 
         tool[state.action]();
-
-        /*var pipe = new Q.Pipe(["avatar"], tool[state.action].bind(tool));
-        Q.Streams.Avatar.get(state.recipientUserId, function (err, avatar) {
-            if (err) {
-                return
-            }
-
-            state.displayName = avatar.displayName({short: true});
-            pipe.fill("avatar")();
-        });*/
     },
 
     { // default options here
         action: "send",
         recipientUserId: null,
         tokenInfo: null,
+        withHistory: false,
         onSubmitted: new Q.Event()
     },
 
@@ -53,13 +45,15 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
             Q.Template.render("Assets/web3/transfer/send", {
                 recipientUserId: state.recipientUserId,
-                tokenInfo: state.tokenInfo
+                tokenInfo: state.tokenInfo,
+                withHistory: state.withHistory
             }, function (err, html) {
                 if (err) {
                     return;
                 }
 
                 Q.replace(tool.element, html);
+                Q.activate(tool.element);
 
                 var userSelected = null;
                 var $send = $("button[name=send]", tool.element);
@@ -74,15 +68,16 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             return;
                         }
 
+                        var wallet,walletError;
                         if (!this.testReadLevel("content")) {
-                            return Q.alert(tool.text.errors.NotEnoughPermissionsWallet);
-                        }
-
-                        var wallet = this.fields.content;
-                        if (Q.isEmpty(wallet)) {
-                            return Q.alert(tool.text.errors.ThisUserHaveNoWallet);
-                        } else if (!ethers.utils.isAddress(wallet)) {
-                            return Q.alert(tool.text.errors.TheWalletOfThisUserInvalid);
+                            walletError = tool.text.errors.NotEnoughPermissionsWallet;
+                        } else {
+                            wallet = this.fields.content;
+                            if (!wallet) {
+                                walletError = tool.text.errors.ThisUserHaveNoWallet;
+                            } else if (!ethers.utils.isAddress(wallet)) {
+                                walletError = tool.text.errors.TheWalletOfThisUserInvalid;
+                            }
                         }
 
                         userSelected = null;
@@ -99,7 +94,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                         userSelected = {
                             userId: userId,
-                            wallet: this.fields.content
+                            wallet: this.fields.content,
+                            walletError: walletError
                         };
 
                         $send.removeClass("Q_disabled");
@@ -133,28 +129,47 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 var $amount = $("input[name=amount]", tool.element);
                 $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
-                    if (Q.isEmpty(state.tokenInfo)) {
-                        state.tokenInfo = Q.Tool.from($(".Assets_web3_balance_tool", tool.element)[0], "Assets/web3/balance").getValue();
+                    var tokenInfo = state.tokenInfo;
+                    if (Q.isEmpty(tokenInfo)) {
+                        tokenInfo = Q.Tool.from($(".Assets_web3_balance_tool", tool.element)[0], "Assets/web3/balance").getValue();
                     }
                     var amount = parseFloat($amount.val());
-                    if (!amount || amount > state.tokenInfo.tokenAmount) {
+
+                    $this.addClass("Q_working");
+
+                    if (tokenInfo.tokenName === "credits") {
+                        return Q.Assets.Credits.pay({
+                            amount: amount,
+                            currency: "credits",
+                            userId: userSelected.userId,
+                            onSuccess: function () {
+                                _transactionSuccess();
+                            },
+                            onFailure: function (err) {
+                                Q.Dialogs.pop();
+                                Q.alert(err);
+                            }
+                        });
+                    }
+
+                    if (!amount || amount > tokenInfo.tokenAmount) {
+                        $this.removeClass("Q_working");
                         return Q.alert(tool.text.errors.AmountInvalid);
                     }
 
                     var walletSelected = $("input[name=wallet]", tool.element).val() || Q.getObject("wallet", userSelected);
 
                     if (Q.isEmpty(walletSelected)) {
-                        return Q.alert(tool.text.errors.NoRecipientSelected);
-                    }
-                    if (!ethers.utils.isAddress(walletSelected)) {
+                        $this.removeClass("Q_working");
+                        return Q.alert(userSelected.walletError || tool.text.errors.NoRecipientSelected);
+                    } else if (!ethers.utils.isAddress(walletSelected)) {
+                        $this.removeClass("Q_working");
                         return Q.alert(tool.text.errors.WalletInvalid);
                     }
 
-                    $this.addClass("Q_working");
+                    var parsedAmount = ethers.utils.parseUnits(String(amount), tokenInfo.decimals);
 
-                    var parsedAmount = ethers.utils.parseUnits(String(amount), state.tokenInfo.decimals);
-
-                    if (parseInt(state.tokenInfo.tokenAddress) === 0) {
+                    if (parseInt(tokenInfo.tokenAddress) === 0) {
                         Q.Users.Web3.transaction(walletSelected, amount, function (err, transactionRequest, transactionReceipt) {
                             Q.handle(state.onSubmitted, tool, [err, transactionRequest, transactionReceipt]);
 
@@ -165,14 +180,14 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             _transactionSuccess();
                         }, {
                             wait: 1,
-                            chainId: state.tokenInfo.chainId
+                            chainId: tokenInfo.chainId
                         });
                         return;
                     }
 
                     Q.Users.Web3.getContract("Assets/templates/ERC20", {
-                        chainId: state.tokenInfo.chainId,
-                        contractAddress: state.tokenInfo.tokenAddress,
+                        chainId: tokenInfo.chainId,
+                        contractAddress: tokenInfo.tokenAddress,
                         readOnly: false
                     }, function (err, contract) {
                         if (err) {
@@ -212,10 +227,13 @@ Q.Template.set("Assets/web3/transfer/send",
     {{#if recipientUserId}}{{else}}
         <input name="wallet" placeholder="{{transfer.OrTypeWalletAddress}}" />
     {{/if}}
-    <div style="white-space: nowrap">
+    <div class="Assets_transfer_send">
         <input name="amount" placeholder="{{payment.EnterAmount}}" />
-        <button class="Q_button Q_disabled" name="send">{{payment.Send}}</button>
-    </div>`,
+        <button class="Q_button" name="send">{{payment.Send}}</button>
+    </div>
+    {{#if withHistory}}
+        {{&tool "Assets/history" type="credits" withUserId=recipientUserId}}
+    {{/if}}`,
     {text: ['Assets/content']}
 );
 })(window, Q, jQuery);

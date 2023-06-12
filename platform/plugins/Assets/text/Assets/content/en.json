@@ -60,8 +60,8 @@
         "EnterAmount": "enter amount"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{displayName}}",
-        "InvitedUserFilledStream": "{{displayName}} filled {{FilledStreamTitle}}",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "InvitedUserFilledStream": "{{invitedUserName}} filled {{FilledStreamTitle}}",
         "ForFillingStream": "For filling {{FilledStreamTitle}}",
         "YouHaveCreditsToStart": "You have {{amount}} credits to start",
         "PaymentFor": "Payment for \"{{1}}\"",
@@ -254,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Select recipient",
         "TransactionSuccess": "Transaction Success",
-        "OrTypeWalletAddress": "OR type recipient wallet address"
+        "OrTypeWalletAddress": "OR type recipient wallet address",
+        "AppCredits": "App Credits"
     },
     "NFT": {
         "Title": "Title",
