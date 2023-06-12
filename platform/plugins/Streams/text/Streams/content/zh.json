@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "类别",
-            "description": "与其他流相关的类别"
+            "description": "与其他流相关的类别",
+            "newItem": "添加类别"
         },
         "Streams\/participating": {
             "displayType": "参与指数",
@@ -456,5 +457,8 @@
         "endCall": "结束通话",
         "interview": "面试",
         "markApproved": "标记已批准"
+    },
+    "relate": {
+        "Add": "加{{streamDisplayType}}"
     }
 }

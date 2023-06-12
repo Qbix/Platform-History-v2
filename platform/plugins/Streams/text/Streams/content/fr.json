@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Catégorie",
-            "description": "une catégorie à laquelle d&#39;autres flux peuvent être liés"
+            "description": "une catégorie à laquelle d&#39;autres flux peuvent être liés",
+            "newItem": "ajouter une catégorie"
         },
         "Streams\/participating": {
             "displayType": "Indice de participation",
@@ -456,5 +457,8 @@
         "endCall": "Fin d&#39;appel",
         "interview": "Entretien",
         "markApproved": "Marquer approuvé"
+    },
+    "relate": {
+        "Add": "Ajouter {{streamDisplayType}}"
     }
 }

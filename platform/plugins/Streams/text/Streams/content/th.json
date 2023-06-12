@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "หมวดหมู่",
-            "description": "หมวดหมู่ที่สตรีมอื่นสามารถเกี่ยวข้องได้"
+            "description": "หมวดหมู่ที่สตรีมอื่นสามารถเกี่ยวข้องได้",
+            "newItem": "เพิ่มหมวดหมู่"
         },
         "Streams\/participating": {
             "displayType": "ดัชนีที่เข้าร่วม",
@@ -456,5 +457,8 @@
         "endCall": "วางสาย",
         "interview": "สัมภาษณ์",
         "markApproved": "ทำเครื่องหมายอนุมัติ"
+    },
+    "relate": {
+        "Add": "เพิ่ม {{streamDisplayType}}"
     }
 }

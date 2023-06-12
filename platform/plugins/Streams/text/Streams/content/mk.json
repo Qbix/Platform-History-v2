@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Категорија",
-            "description": "категорија со која може да се поврзат други текови"
+            "description": "категорија со која може да се поврзат други текови",
+            "newItem": "Додадете категорија"
         },
         "Streams\/participating": {
             "displayType": "Индекс за учество",
@@ -456,5 +457,8 @@
         "endCall": "Заврши повик",
         "interview": "Интервју",
         "markApproved": "Означи одобрено"
+    },
+    "relate": {
+        "Add": "Додадете {{streamDisplayType}}"
     }
 }

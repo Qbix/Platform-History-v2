@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Катэгорыя",
-            "description": "катэгорыя, да якой можна аднесці іншыя плыні"
+            "description": "катэгорыя, да якой можна аднесці іншыя плыні",
+            "newItem": "Дадаць катэгорыю"
         },
         "Streams\/participating": {
             "displayType": "Індэкс удзельнікаў",
@@ -456,5 +457,8 @@
         "endCall": "Завяршыць выклік",
         "interview": "Інтэрв&#39;ю",
         "markApproved": "Пазначыць ухвалена"
+    },
+    "relate": {
+        "Add": "Дадайце {{streamDisplayType}}"
     }
 }

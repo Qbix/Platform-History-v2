@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categoria",
-            "description": "una categoria amb la qual es poden relacionar altres fluxos"
+            "description": "una categoria amb la qual es poden relacionar altres fluxos",
+            "newItem": "Afegeix una categoria"
         },
         "Streams\/participating": {
             "displayType": "Índex de participació",
@@ -456,5 +457,8 @@
         "endCall": "Finalitzar la trucada",
         "interview": "Entrevista",
         "markApproved": "Marcar aprovat"
+    },
+    "relate": {
+        "Add": "Afegeix {{streamDisplayType}}"
     }
 }

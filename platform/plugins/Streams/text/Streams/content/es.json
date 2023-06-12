@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categoría",
-            "description": "una categoría con la que se pueden relacionar otras corrientes"
+            "description": "una categoría con la que se pueden relacionar otras corrientes",
+            "newItem": "añadir categoría"
         },
         "Streams\/participating": {
             "displayType": "Índice participante",
@@ -456,5 +457,8 @@
         "endCall": "Finalizar llamada",
         "interview": "Entrevista",
         "markApproved": "Marcar Aprobado"
+    },
+    "relate": {
+        "Add": "Agregar {{streamDisplayType}}"
     }
 }

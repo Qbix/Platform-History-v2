@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categorie",
-            "description": "een categorie waaraan andere streams kunnen worden gerelateerd"
+            "description": "een categorie waaraan andere streams kunnen worden gerelateerd",
+            "newItem": "categorie toevoegen"
         },
         "Streams\/participating": {
             "displayType": "Deelnemende Index",
@@ -456,5 +457,8 @@
         "endCall": "Ophangen",
         "interview": "Interview",
         "markApproved": "Markeer Goedgekeurd"
+    },
+    "relate": {
+        "Add": "Voeg {{streamDisplayType}} toe"
     }
 }

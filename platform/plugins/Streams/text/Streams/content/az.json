@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kateqoriya",
-            "description": "digər axınların əlaqəli ola biləcəyi kateqoriya"
+            "description": "digər axınların əlaqəli ola biləcəyi kateqoriya",
+            "newItem": "Kateqoriya əlavə edin"
         },
         "Streams\/participating": {
             "displayType": "İştirakçı indeksi",
@@ -456,5 +457,8 @@
         "endCall": "Zəngi bitir",
         "interview": "Müsahibə",
         "markApproved": "Təsdiqlə işarələyin"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} əlavə edin"
     }
 }

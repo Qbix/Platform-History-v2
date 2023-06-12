@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategória",
-            "description": "egy kategória, amelyhez más folyamok is kapcsolhatók"
+            "description": "egy kategória, amelyhez más folyamok is kapcsolhatók",
+            "newItem": "Kategória hozzáadása"
         },
         "Streams\/participating": {
             "displayType": "Részvételi index",
@@ -456,5 +457,8 @@
         "endCall": "Hívás befejezése",
         "interview": "Interjú",
         "markApproved": "Jelölje meg jóváhagyva"
+    },
+    "relate": {
+        "Add": "Adjunk hozzá {{streamDisplayType}} et"
     }
 }

@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "ವರ್ಗ",
-            "description": "ಇತರ ಸ್ಟ್ರೀಮ್‌ಗಳಿಗೆ ಸಂಬಂಧಿಸಬಹುದಾದ ವರ್ಗ"
+            "description": "ಇತರ ಸ್ಟ್ರೀಮ್‌ಗಳಿಗೆ ಸಂಬಂಧಿಸಬಹುದಾದ ವರ್ಗ",
+            "newItem": "ವರ್ಗವನ್ನು ಸೇರಿಸಿ"
         },
         "Streams\/participating": {
             "displayType": "ಭಾಗವಹಿಸುವ ಸೂಚ್ಯಂಕ",
@@ -456,5 +457,8 @@
         "endCall": "ಕರೆಯನ್ನು ಕೊನೆಗೊಳಿಸಿ",
         "interview": "ಸಂದರ್ಶನ",
         "markApproved": "ಮಾರ್ಕ್ ಅನುಮೋದಿಸಲಾಗಿದೆ"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} ಸೇರಿಸಿ"
     }
 }

@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "فئة",
-            "description": "فئة يمكن أن ترتبط بها تدفقات أخرى"
+            "description": "فئة يمكن أن ترتبط بها تدفقات أخرى",
+            "newItem": "إضافة فئة"
         },
         "Streams\/participating": {
             "displayType": "المؤشر المشارك",
@@ -456,5 +457,8 @@
         "endCall": "إنهاء المكالمة",
         "interview": "مقابلة",
         "markApproved": "علامة موافق عليها"
+    },
+    "relate": {
+        "Add": "أضف {{streamDisplayType}}"
     }
 }

@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategoria",
-            "description": "një kategori me të cilën mund të lidhen rryma të tjera"
+            "description": "një kategori me të cilën mund të lidhen rryma të tjera",
+            "newItem": "Shto kategori"
         },
         "Streams\/participating": {
             "displayType": "Indeksi pjesëmarrës",
@@ -456,5 +457,8 @@
         "endCall": "Fundi i telefonatës",
         "interview": "Intervistë",
         "markApproved": "Mark i miratuar"
+    },
+    "relate": {
+        "Add": "Shto {{streamDisplayType}}"
     }
 }

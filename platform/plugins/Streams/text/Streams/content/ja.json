@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "カテゴリー",
-            "description": "他のストリームが関連付けられるカテゴリ"
+            "description": "他のストリームが関連付けられるカテゴリ",
+            "newItem": "カテゴリを追加"
         },
         "Streams\/participating": {
             "displayType": "参加指数",
@@ -456,5 +457,8 @@
         "endCall": "通話終了",
         "interview": "インタビュー",
         "markApproved": "承認済みとしてマーク"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}}を追加"
     }
 }

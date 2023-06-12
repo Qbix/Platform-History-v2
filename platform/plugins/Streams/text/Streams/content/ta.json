@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "வகை",
-            "description": "மற்ற ஸ்ட்ரீம்கள் தொடர்புடைய ஒரு வகை"
+            "description": "மற்ற ஸ்ட்ரீம்கள் தொடர்புடைய ஒரு வகை",
+            "newItem": "வகையைச் சேர்க்கவும்"
         },
         "Streams\/participating": {
             "displayType": "பங்கேற்பு அட்டவணை",
@@ -456,5 +457,8 @@
         "endCall": "அழைப்பை முடிக்கவும்",
         "interview": "நேர்காணல்",
         "markApproved": "மார்க் அங்கீகரிக்கப்பட்டது"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} சேர்க்கவும்"
     }
 }

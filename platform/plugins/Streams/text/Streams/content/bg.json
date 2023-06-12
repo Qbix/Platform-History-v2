@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Категория",
-            "description": "категория, към която могат да бъдат свързани други потоци"
+            "description": "категория, към която могат да бъдат свързани други потоци",
+            "newItem": "Добавяне на категория"
         },
         "Streams\/participating": {
             "displayType": "Участващ индекс",
@@ -456,5 +457,8 @@
         "endCall": "Край на обаждането",
         "interview": "Интервю",
         "markApproved": "Маркирайте одобрено"
+    },
+    "relate": {
+        "Add": "Добавете {{streamDisplayType}}"
     }
 }

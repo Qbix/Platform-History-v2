@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorija",
-            "description": "kategorija li magħha jistgħu jkunu relatati flussi oħra"
+            "description": "kategorija li magħha jistgħu jkunu relatati flussi oħra",
+            "newItem": "Żid Kategorija"
         },
         "Streams\/participating": {
             "displayType": "Indiċi Parteċipanti",
@@ -456,5 +457,8 @@
         "endCall": "Tmiem Sejħa",
         "interview": "Intervista",
         "markApproved": "Mark Approvat"
+    },
+    "relate": {
+        "Add": "Żid {{streamDisplayType}}"
     }
 }

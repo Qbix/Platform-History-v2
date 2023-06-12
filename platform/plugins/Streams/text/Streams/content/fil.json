@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorya",
-            "description": "isang kategorya kung saan maaaring maiugnay ang iba pang mga stream"
+            "description": "isang kategorya kung saan maaaring maiugnay ang iba pang mga stream",
+            "newItem": "Magdagdag ng Kategorya"
         },
         "Streams\/participating": {
             "displayType": "Kalahok na Index",
@@ -456,5 +457,8 @@
         "endCall": "Tapusin ang Tawag",
         "interview": "Panayam",
         "markApproved": "Naaprubahan si Mark"
+    },
+    "relate": {
+        "Add": "Magdagdag ng {{streamDisplayType}}"
     }
 }

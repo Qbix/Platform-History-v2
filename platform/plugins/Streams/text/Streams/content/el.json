@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Κατηγορία",
-            "description": "μια κατηγορία με την οποία μπορούν να συσχετιστούν άλλα ρεύματα"
+            "description": "μια κατηγορία με την οποία μπορούν να συσχετιστούν άλλα ρεύματα",
+            "newItem": "Προσθήκη κατηγορίας"
         },
         "Streams\/participating": {
             "displayType": "Συμμετέχοντας Ευρετήριο",
@@ -456,5 +457,8 @@
         "endCall": "Τέλος κλήσης",
         "interview": "Συνέντευξη",
         "markApproved": "Σήμα Εγκρίθηκε"
+    },
+    "relate": {
+        "Add": "Προσθέστε {{streamDisplayType}}"
     }
 }

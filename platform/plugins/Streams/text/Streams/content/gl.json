@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categoría",
-            "description": "unha categoría coa que se poden relacionar outros fluxos"
+            "description": "unha categoría coa que se poden relacionar outros fluxos",
+            "newItem": "Engadir categoría"
         },
         "Streams\/participating": {
             "displayType": "Índice de participación",
@@ -456,5 +457,8 @@
         "endCall": "Finalizar chamada",
         "interview": "Entrevista",
         "markApproved": "Marcar Aprobado"
+    },
+    "relate": {
+        "Add": "Engadir {{streamDisplayType}}"
     }
 }

@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categorie",
-            "description": "o categorie la care pot fi asociate alte fluxuri"
+            "description": "o categorie la care pot fi asociate alte fluxuri",
+            "newItem": "Adăugați o categorie"
         },
         "Streams\/participating": {
             "displayType": "Index de participare",
@@ -456,5 +457,8 @@
         "endCall": "Terminare apel",
         "interview": "Interviu",
         "markApproved": "Marcați aprobat"
+    },
+    "relate": {
+        "Add": "Adăugați {{streamDisplayType}}"
     }
 }

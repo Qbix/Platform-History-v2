@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Flokkur",
-            "description": "flokkur sem aðrir straumar geta tengst"
+            "description": "flokkur sem aðrir straumar geta tengst",
+            "newItem": "Bæta við flokki"
         },
         "Streams\/participating": {
             "displayType": "Þátttökuvísitala",
@@ -456,5 +457,8 @@
         "endCall": "Ljúka símtali",
         "interview": "Viðtal",
         "markApproved": "Mark samþykkt"
+    },
+    "relate": {
+        "Add": "Bættu við {{streamDisplayType}}"
     }
 }

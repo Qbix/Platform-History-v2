@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "კატეგორია",
-            "description": "კატეგორია, რომელსაც სხვა ნაკადები შეიძლება უკავშირდებოდეს"
+            "description": "კატეგორია, რომელსაც სხვა ნაკადები შეიძლება უკავშირდებოდეს",
+            "newItem": "დაამატეთ კატეგორია"
         },
         "Streams\/participating": {
             "displayType": "მონაწილე ინდექსი",
@@ -456,5 +457,8 @@
         "endCall": "Ზარის დასასრული",
         "interview": "ინტერვიუ",
         "markApproved": "მარკ დამტკიცებულია"
+    },
+    "relate": {
+        "Add": "დაამატეთ {{streamDisplayType}}"
     }
 }

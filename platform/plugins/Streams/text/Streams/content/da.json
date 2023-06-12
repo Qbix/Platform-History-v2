@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategori",
-            "description": "en kategori, som andre strømme kan relateres til"
+            "description": "en kategori, som andre strømme kan relateres til",
+            "newItem": "Tilføj kategori"
         },
         "Streams\/participating": {
             "displayType": "Deltagende indeks",
@@ -456,5 +457,8 @@
         "endCall": "Afslut opkald",
         "interview": "Interview",
         "markApproved": "Mærke godkendt"
+    },
+    "relate": {
+        "Add": "Tilføj {{streamDisplayType}}"
     }
 }

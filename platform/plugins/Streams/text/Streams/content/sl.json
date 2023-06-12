@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorija",
-            "description": "kategorijo, s katero so lahko povezani drugi tokovi"
+            "description": "kategorijo, s katero so lahko povezani drugi tokovi",
+            "newItem": "Dodaj kategorijo"
         },
         "Streams\/participating": {
             "displayType": "Sodelujoči indeks",
@@ -456,5 +457,8 @@
         "endCall": "Končaj klic",
         "interview": "Intervju",
         "markApproved": "Označi odobreno"
+    },
+    "relate": {
+        "Add": "Dodajte {{streamDisplayType}}"
     }
 }

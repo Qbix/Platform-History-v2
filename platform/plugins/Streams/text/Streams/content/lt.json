@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorija",
-            "description": "kategorija, su kuria galima susieti kitus srautus"
+            "description": "kategorija, su kuria galima susieti kitus srautus",
+            "newItem": "Pridėti kategoriją"
         },
         "Streams\/participating": {
             "displayType": "Dalyvavimo indeksas",
@@ -456,5 +457,8 @@
         "endCall": "Baigti skambutį",
         "interview": "Interviu",
         "markApproved": "Pažymėti patvirtintą"
+    },
+    "relate": {
+        "Add": "Pridėkite {{streamDisplayType}}"
     }
 }

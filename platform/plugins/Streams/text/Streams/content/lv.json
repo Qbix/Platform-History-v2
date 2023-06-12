@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorija",
-            "description": "kategorija, ar kuru var saistīt citas straumes"
+            "description": "kategorija, ar kuru var saistīt citas straumes",
+            "newItem": "Pievienot kategoriju"
         },
         "Streams\/participating": {
             "displayType": "Dalības indekss",
@@ -456,5 +457,8 @@
         "endCall": "Beigt zvanu",
         "interview": "Intervija",
         "markApproved": "Atzīmēt kā apstiprinātu"
+    },
+    "relate": {
+        "Add": "Pievienojiet {{streamDisplayType}}"
     }
 }

@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Категорія",
-            "description": "категорія, до якої можна віднести інші потоки"
+            "description": "категорія, до якої можна віднести інші потоки",
+            "newItem": "Додати категорію"
         },
         "Streams\/participating": {
             "displayType": "Індекс участі",
@@ -456,5 +457,8 @@
         "endCall": "Завершити виклик",
         "interview": "Інтерв&#39;ю",
         "markApproved": "Позначте схвалено"
+    },
+    "relate": {
+        "Add": "Додайте {{streamDisplayType}}"
     }
 }

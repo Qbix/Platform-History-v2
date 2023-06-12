@@ -44,7 +44,7 @@ Q.mixin(Base, Row);
  * @property algorithm
  * @type String
  * @default "sha256"
- * the HMAC versions should use a secret key not storeed in this table
+ * the HMAC versions should use a secret key not stored in this table
  */
 /**
  * @property insertedTime

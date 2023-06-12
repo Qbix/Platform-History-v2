@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategooria",
-            "description": "kategooria, millega saab seostada teisi vooge"
+            "description": "kategooria, millega saab seostada teisi vooge",
+            "newItem": "Lisa kategooria"
         },
         "Streams\/participating": {
             "displayType": "Osalemise indeks",
@@ -456,5 +457,8 @@
         "endCall": "Lõpeta kõne",
         "interview": "Intervjuu",
         "markApproved": "Märgi heaks kiidetud"
+    },
+    "relate": {
+        "Add": "Lisage {{streamDisplayType}}"
     }
 }

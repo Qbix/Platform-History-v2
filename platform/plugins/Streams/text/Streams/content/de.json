@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorie",
-            "description": "eine Kategorie, der andere Streams zugeordnet werden können"
+            "description": "eine Kategorie, der andere Streams zugeordnet werden können",
+            "newItem": "Kategorie hinzufügen"
         },
         "Streams\/participating": {
             "displayType": "Teilnehmender Index",
@@ -456,5 +457,8 @@
         "endCall": "Anruf beenden",
         "interview": "Interview",
         "markApproved": "Genehmigt markieren"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} hinzufügen"
     }
 }

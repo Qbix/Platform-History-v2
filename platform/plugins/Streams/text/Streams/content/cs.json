@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorie",
-            "description": "kategorie, ke které lze přiřadit další proudy"
+            "description": "kategorie, ke které lze přiřadit další proudy",
+            "newItem": "Přidat kategorii"
         },
         "Streams\/participating": {
             "displayType": "Zúčastněný index",
@@ -456,5 +457,8 @@
         "endCall": "Ukončit hovor",
         "interview": "Rozhovor",
         "markApproved": "Označit schváleno"
+    },
+    "relate": {
+        "Add": "Přidejte {{streamDisplayType}}"
     }
 }

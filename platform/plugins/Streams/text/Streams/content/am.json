@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "ምድብ",
-            "description": "ሌሎች ዥረቶች ሊዛመዱ የሚችሉበት ምድብ"
+            "description": "ሌሎች ዥረቶች ሊዛመዱ የሚችሉበት ምድብ",
+            "newItem": "ምድብ ጨምር"
         },
         "Streams\/participating": {
             "displayType": "ተሳታፊ ኢንዴክስ",
@@ -456,5 +457,8 @@
         "endCall": "ጥሪን ጨርስ",
         "interview": "ቃለ መጠይቅ",
         "markApproved": "ማርክ ጸድቋል"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} ጨምር"
     }
 }

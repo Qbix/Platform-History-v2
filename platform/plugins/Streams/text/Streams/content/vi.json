@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Loại",
-            "description": "một danh mục mà các luồng khác có thể liên quan"
+            "description": "một danh mục mà các luồng khác có thể liên quan",
+            "newItem": "thêm thể loại"
         },
         "Streams\/participating": {
             "displayType": "Chỉ số tham gia",
@@ -456,5 +457,8 @@
         "endCall": "Kết thúc cuộc gọi",
         "interview": "Phỏng vấn",
         "markApproved": "Đánh dấu đã được phê duyệt"
+    },
+    "relate": {
+        "Add": "Thêm {{streamDisplayType}}"
     }
 }

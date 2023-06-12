@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategori",
-            "description": "en kategori som andra strömmar kan relateras till"
+            "description": "en kategori som andra strömmar kan relateras till",
+            "newItem": "Lägg till Kategori"
         },
         "Streams\/participating": {
             "displayType": "Deltagande Index",
@@ -456,5 +457,8 @@
         "endCall": "Avsluta samtal",
         "interview": "Intervju",
         "markApproved": "Markera godkänd"
+    },
+    "relate": {
+        "Add": "Lägg till {{streamDisplayType}}"
     }
 }

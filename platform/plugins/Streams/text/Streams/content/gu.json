@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "શ્રેણી",
-            "description": "કેટેગરી કે જેમાં અન્ય સ્ટ્રીમ્સ સંબંધિત હોઈ શકે"
+            "description": "કેટેગરી કે જેમાં અન્ય સ્ટ્રીમ્સ સંબંધિત હોઈ શકે",
+            "newItem": "શ્રેણી ઉમેરો"
         },
         "Streams\/participating": {
             "displayType": "સહભાગી સૂચકાંક",
@@ -456,5 +457,8 @@
         "endCall": "કૉલ સમાપ્ત કરો",
         "interview": "ઈન્ટરવ્યુ",
         "markApproved": "માર્ક મંજૂર"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} ઉમેરો"
     }
 }

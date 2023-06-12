@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categori",
-            "description": "categori y gall ffrydiau eraill fod yn berthnasol iddo"
+            "description": "categori y gall ffrydiau eraill fod yn berthnasol iddo",
+            "newItem": "Ychwanegu Categori"
         },
         "Streams\/participating": {
             "displayType": "Mynegai Cyfranogi",
@@ -456,5 +457,8 @@
         "endCall": "Galwad Diwedd",
         "interview": "Cyfweliad",
         "markApproved": "Marc wedi&#39;i Gymeradwyo"
+    },
+    "relate": {
+        "Add": "Ychwanegu {{streamDisplayType}}"
     }
 }

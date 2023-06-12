@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Categoria",
-            "description": "una categoria alla quale possono essere correlati altri flussi"
+            "description": "una categoria alla quale possono essere correlati altri flussi",
+            "newItem": "Aggiungi categoria"
         },
         "Streams\/participating": {
             "displayType": "Indice partecipanti",
@@ -456,5 +457,8 @@
         "endCall": "Fine chiamata",
         "interview": "Colloquio",
         "markApproved": "Contrassegno approvato"
+    },
+    "relate": {
+        "Add": "Aggiungi {{streamDisplayType}}"
     }
 }

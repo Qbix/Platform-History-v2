@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "শ্রেণী",
-            "description": "একটি বিভাগ যার সাথে অন্যান্য স্ট্রীম সম্পর্কিত হতে পারে"
+            "description": "একটি বিভাগ যার সাথে অন্যান্য স্ট্রীম সম্পর্কিত হতে পারে",
+            "newItem": "বিভাগ যোগ করুন"
         },
         "Streams\/participating": {
             "displayType": "অংশগ্রহণকারী সূচক",
@@ -456,5 +457,8 @@
         "endCall": "কল শেষ",
         "interview": "সাক্ষাৎকার",
         "markApproved": "অনুমোদিত চিহ্নিত করুন"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} যোগ করুন"
     }
 }

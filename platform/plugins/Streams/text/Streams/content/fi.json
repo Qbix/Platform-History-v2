@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategoria",
-            "description": "luokka, johon muita virtoja voidaan yhdistää"
+            "description": "luokka, johon muita virtoja voidaan yhdistää",
+            "newItem": "Lisää luokka"
         },
         "Streams\/participating": {
             "displayType": "Osallistuva indeksi",
@@ -456,5 +457,8 @@
         "endCall": "Lopeta puhelu",
         "interview": "Haastatella",
         "markApproved": "Merkitse Hyväksytty"
+    },
+    "relate": {
+        "Add": "Lisää {{streamDisplayType}}"
     }
 }

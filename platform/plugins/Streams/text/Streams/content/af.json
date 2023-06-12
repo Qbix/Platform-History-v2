@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategorie",
-            "description": "&#39;n kategorie waarmee ander strome in verband gebring kan word"
+            "description": "&#39;n kategorie waarmee ander strome in verband gebring kan word",
+            "newItem": "Voeg kategorie by"
         },
         "Streams\/participating": {
             "displayType": "Deelnemende Indeks",
@@ -456,5 +457,8 @@
         "endCall": "Beëindig oproep",
         "interview": "Onderhoud",
         "markApproved": "Merk Goedgekeur"
+    },
+    "relate": {
+        "Add": "Voeg {{streamDisplayType}} by"
     }
 }

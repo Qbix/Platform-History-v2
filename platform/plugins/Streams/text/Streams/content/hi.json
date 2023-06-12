@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "वर्ग",
-            "description": "एक श्रेणी जिससे अन्य धाराएँ संबंधित हो सकती हैं"
+            "description": "एक श्रेणी जिससे अन्य धाराएँ संबंधित हो सकती हैं",
+            "newItem": "श्रेणी जोड़ना"
         },
         "Streams\/participating": {
             "displayType": "भाग लेने वाला सूचकांक",
@@ -456,5 +457,8 @@
         "endCall": "कॉल समाप्त करें",
         "interview": "साक्षात्कार",
         "markApproved": "मार्क स्वीकृत"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} जोड़ें"
     }
 }

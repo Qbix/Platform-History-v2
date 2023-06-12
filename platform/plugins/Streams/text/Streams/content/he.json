@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "קטגוריה",
-            "description": "קטגוריה שאליה ניתן לקשר זרמים אחרים"
+            "description": "קטגוריה שאליה ניתן לקשר זרמים אחרים",
+            "newItem": "הוסף קטגוריה"
         },
         "Streams\/participating": {
             "displayType": "אינדקס משתתף",
@@ -456,5 +457,8 @@
         "endCall": "סיום שיחה",
         "interview": "רֵאָיוֹן",
         "markApproved": "סמן אושר"
+    },
+    "relate": {
+        "Add": "הוסף {{streamDisplayType}}"
     }
 }

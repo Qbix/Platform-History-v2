@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategoria",
-            "description": "kategoria ambayo mitiririko mingine inaweza kuhusishwa"
+            "description": "kategoria ambayo mitiririko mingine inaweza kuhusishwa",
+            "newItem": "Ongeza Kategoria"
         },
         "Streams\/participating": {
             "displayType": "Kielezo cha Kushiriki",
@@ -456,5 +457,8 @@
         "endCall": "Maliza Simu",
         "interview": "Mahojiano",
         "markApproved": "Alama Imeidhinishwa"
+    },
+    "relate": {
+        "Add": "Ongeza {{streamDisplayType}}"
     }
 }

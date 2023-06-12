@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "قسم",
-            "description": "ایک زمرہ جس سے دوسرے سلسلے وابستہ ہو سکتے ہیں۔"
+            "description": "ایک زمرہ جس سے دوسرے سلسلے وابستہ ہو سکتے ہیں۔",
+            "newItem": "زمرہ شامل کریں۔"
         },
         "Streams\/participating": {
             "displayType": "حصہ لینے والا انڈیکس",
@@ -456,5 +457,8 @@
         "endCall": "کال ختم",
         "interview": "انٹرویو",
         "markApproved": "مارک منظور شدہ"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} شامل کریں۔"
     }
 }

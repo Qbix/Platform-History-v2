@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "دسته بندی",
-            "description": "مقوله ای که جریان های دیگر را می توان به آن مرتبط کرد"
+            "description": "مقوله ای که جریان های دیگر را می توان به آن مرتبط کرد",
+            "newItem": "اضافه کردن دسته"
         },
         "Streams\/participating": {
             "displayType": "شاخص مشارکت",
@@ -456,5 +457,8 @@
         "endCall": "پایان تماس",
         "interview": "مصاحبه",
         "markApproved": "علامت تایید شده"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} اضافه کنید"
     }
 }

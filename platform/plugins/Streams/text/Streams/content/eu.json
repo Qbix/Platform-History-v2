@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategoria",
-            "description": "beste korronte batzuekin erlazionatu daitezkeen kategoria"
+            "description": "beste korronte batzuekin erlazionatu daitezkeen kategoria",
+            "newItem": "Gehitu Kategoria"
         },
         "Streams\/participating": {
             "displayType": "Parte hartzeko indizea",
@@ -456,5 +457,8 @@
         "endCall": "Amaitu deia",
         "interview": "Elkarrizketa",
         "markApproved": "Markatu Onartuta"
+    },
+    "relate": {
+        "Add": "Gehitu {{streamDisplayType}}"
     }
 }

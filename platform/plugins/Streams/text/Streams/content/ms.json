@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "kategori",
-            "description": "kategori yang boleh dikaitkan dengan aliran lain"
+            "description": "kategori yang boleh dikaitkan dengan aliran lain",
+            "newItem": "Tambah Kategori"
         },
         "Streams\/participating": {
             "displayType": "Indeks Penyertaan",
@@ -456,5 +457,8 @@
         "endCall": "Tamat panggilan",
         "interview": "Temuduga",
         "markApproved": "Tandakan Diluluskan"
+    },
+    "relate": {
+        "Add": "Tambah {{streamDisplayType}}"
     }
 }

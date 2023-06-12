@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Catagóir",
-            "description": "catagóir ar féidir baint a bheith ag sruthanna eile léi"
+            "description": "catagóir ar féidir baint a bheith ag sruthanna eile léi",
+            "newItem": "Cuir Catagóir leis"
         },
         "Streams\/participating": {
             "displayType": "Innéacs Rannpháirteach",
@@ -456,5 +457,8 @@
         "endCall": "Glao Deiridh",
         "interview": "Agallamh",
         "markApproved": "Marcáil Ceadaithe"
+    },
+    "relate": {
+        "Add": "Cuir {{streamDisplayType}} leis"
     }
 }

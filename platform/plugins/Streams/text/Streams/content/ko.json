@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "범주",
-            "description": "다른 스트림이 관련될 수 있는 범주"
+            "description": "다른 스트림이 관련될 수 있는 범주",
+            "newItem": "카테고리 추가"
         },
         "Streams\/participating": {
             "displayType": "참여 지수",
@@ -456,5 +457,8 @@
         "endCall": "통화 종료",
         "interview": "회견",
         "markApproved": "승인됨으로 표시"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} 추가"
     }
 }

@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "Kategori",
-            "description": "diğer akışların ilişkilendirilebileceği bir kategori"
+            "description": "diğer akışların ilişkilendirilebileceği bir kategori",
+            "newItem": "Kategori ekle"
         },
         "Streams\/participating": {
             "displayType": "Katılım Endeksi",
@@ -456,5 +457,8 @@
         "endCall": "Son Arama",
         "interview": "Röportaj",
         "markApproved": "Onaylandı Olarak İşaretle"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} ekle"
     }
 }

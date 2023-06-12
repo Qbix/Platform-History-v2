@@ -305,7 +305,8 @@
         },
         "Streams\/category": {
             "displayType": "వర్గం",
-            "description": "ఇతర స్ట్రీమ్‌లకు సంబంధించిన వర్గం"
+            "description": "ఇతర స్ట్రీమ్‌లకు సంబంధించిన వర్గం",
+            "newItem": "వర్గం జోడించండి"
         },
         "Streams\/participating": {
             "displayType": "పాల్గొనే సూచిక",
@@ -456,5 +457,8 @@
         "endCall": "కాల్ ముగించు",
         "interview": "ఇంటర్వ్యూ",
         "markApproved": "మార్క్ ఆమోదించబడింది"
+    },
+    "relate": {
+        "Add": "{{streamDisplayType}} జోడించండి"
     }
 }
