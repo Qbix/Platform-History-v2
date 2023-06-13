@@ -1160,9 +1160,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			var $scm = tool.$('.Streams_chat_messages');
 			var overflow = $scm.css('overflow-y');
-			if (!$scm.children().not('.Streams_chat_more').length) {
-				return false; // no messages to scroll yet
-			}
+			// commented out because chat might be at the bottom of a container
+			// with more stuff above it
+			// if (!$scm.children().not('.Streams_chat_more').length) {
+			// 	return false; // no messages to scroll yet
+			// }
 			if (['scroll', 'auto'].indexOf(overflow) >= 0
 			&& $scm[0].clientHeight
 			&& $scm[0].clientHeight < $scm[0].scrollHeight) {
