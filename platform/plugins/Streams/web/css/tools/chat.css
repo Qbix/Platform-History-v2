@@ -377,7 +377,12 @@
 	border: 1px solid #bae8ea;
 	clear: both;
 	font-size: 0.8em;
+	padding: 10px 5px;
 }
+.Streams_chat_message {
+	padding: 0 5px;
+}
+
 .Streams_chat_tick {
 	background: url('../../img/chat/message-tick.png');
 	width: 9px;
