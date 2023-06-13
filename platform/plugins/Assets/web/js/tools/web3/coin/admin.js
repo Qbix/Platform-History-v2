@@ -112,7 +112,6 @@
 	* @param {String} [options.abiPath] ABI path for CommunityCoin contract
 	* @param {String} [options.abiPathPoolF] ABI path for CommunityStakingPoolFactory contract
 	* @param {String} [options.chainId] chainId
-	* @param {String} [options.communityAddress] address of Community contract
 	* @param {String} [options.communityCoinAddress] address od CommunityCoin contract
 	* @param {String} [options.fields] array of defaults for the values
 	*  @param {String} [options.fields.tokenErc20.value]
@@ -157,9 +156,7 @@
 		if (Q.isEmpty(state.communityCoinAddress)) {
 			return console.warn("communityCoinAddress required!");
 		}
-		if (Q.isEmpty(state.communityAddress)) {
-			return console.warn("communityAddress required!");
-		}
+
 		if (Q.isEmpty(state.chainId)) {
 			return console.warn("chainId required!");
 		}
@@ -216,7 +213,6 @@
 		abiPath: "Assets/templates/R1/CommunityCoin/contract",	// for test predefined in local app.json
 		abiPathPoolF: "Assets/templates/R1/CommunityStakingPool/factory",	// for test predefined in local app.json
 		chainId: null,
-		communityAddress: null,
 		communityCoinAddress: null,
 		fields: {
 			
