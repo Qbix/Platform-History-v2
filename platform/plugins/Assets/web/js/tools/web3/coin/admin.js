@@ -19,7 +19,6 @@
 
                         var str = '';
                         contracts.every(function (contract) {
-                            console.log(contract);
                             try {
                                 var customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
                                 if (customErrorDescription) {
@@ -262,10 +261,10 @@
 						className: 'Assets_web3_coin_admin_create',
 						trigger: tool.element,
 						onActivate: function ($element) {
+							
 							if (!($element instanceof $)) {
 								$element = $(arguments[2]);
 							}
-console.log(state.fields);
 							for (var fieldName in state.fields) {
 								var $input = $element.find("input[name="+fieldName+"]");
 								if (state.fields[fieldName].hide) {
@@ -279,24 +278,12 @@ console.log(state.fields);
 								}
 							}
 
-
-							// filling test data
-							$("button[name=testFill]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-								$element.find("input[name=tokenErc20]").val("0x00010100597b8c232656D76a319b6FF696Ed3293");
-								$element.find("input[name=duration]").val("365");
-								$element.find("input[name=bonusTokenFraction]").val("0");
-								$element.find("input[name=popularToken]").val("0x0000000000000000000000000000000000000000");
-								$element.find("input[name=donations]").val("[]");
-								$element.find("input[name=rewardsRateFraction]").val("0");
-								$element.find("input[name=numerator]").val("1");
-								$element.find("input[name=denominator]").val("1");
-							});
-							
 							// creation staking pool
 							$("button[name=create]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
 								var $this = $(this);
 
 								var _close = function(){
+									
 									var isDialog = $element.find('.Q_dialog_content').length;
 									var columns = Q.Tool.from($this.closest(".Q_columns_tool"), "Q/columns");
 									var $column = $this.closest('.Q_columns_column');	
