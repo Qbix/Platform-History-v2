@@ -14197,6 +14197,7 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @return {Object} an object with methods like "close", that you can call to close the invoked interface
  */
 Q.invoke = function (options) {
+	var methods = {};
 	if (!Q.isPlainObject(options)) {
 		throw new Q.Error("Q.invoke: please pass an object instead of " + typeof options);
 	}
@@ -14209,7 +14210,6 @@ Q.invoke = function (options) {
 	} else {
 		_continue();
 	}
-	var methods = {};
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
 			var ret = Q.handle(handler, Q, [options, methods]);

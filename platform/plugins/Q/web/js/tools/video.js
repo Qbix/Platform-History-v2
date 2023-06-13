@@ -224,8 +224,6 @@ Q.Tool.define("Q/video", function (options) {
 
 			$toolElement.append($("<div class='Q_video_close'>"));
 
-			Q.Template.set("Q/video/twitch/overplay", `<div class="Q_video_overlay_play" style="background-image: url({{poster}})"><img src="{{src}}" /></div>`);
-
 			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
 				state.player = new Twitch.Player(element, options);
 
@@ -1198,7 +1196,7 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set("Q/video/videojs",
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} {{loop}} {{poster}} playsinline webkit-playsinline /></video>' +
+	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{{autoplay}}} {{{loop}}} {{{poster}}} playsinline webkit-playsinline /></video>' +
 	'<div class="Q_video_close"></div>'
 );
 
@@ -1220,6 +1218,10 @@ Q.Template.set("Q/video/clips/control",
 	'	</div>' +
 	'	<div class="vjs-fullscreen-control"></div>' +
 	'</div>'
+);
+
+Q.Template.set("Q/video/twitch/overplay", 
+	'<div class="Q_video_overlay_play" style="background-image: url({{poster}})"><img src="{{src}}" /></div>'
 );
 
 })(window, Q, jQuery);
