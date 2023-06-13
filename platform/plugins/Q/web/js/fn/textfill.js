@@ -60,6 +60,9 @@ Q.Tool.jQuery('Q/textfill',
 			var fontSize = o.maxFontPixels || ($this.height() + 10);
 			var lastGoodFontSize = 0, lastBadFontSize = fontSize, jump;
 			var $c = o.fillParent ? $this.parent() : $this;
+			if (!$c) {
+				return false; // it's not part of the DOM yet
+			}
 			var maxHeight = Math.round(o.fillPadding ? $c.innerHeight() : $c.height());
 			var maxWidth = Math.round(o.fillPadding ? $c.innerWidth() : $c.width());
 			var textHeight, textWidth, lines, tooBig;
