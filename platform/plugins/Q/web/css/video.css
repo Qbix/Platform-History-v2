@@ -175,6 +175,7 @@
 .Q_video_tool .video-js .vjs-big-play-button .vjs-control-text {
     display: none;
 }
+.Q_video_tool .vjs-paused .vjs-big-play-button,
 .Q_video_tool .vjs-has-started .vjs-big-play-button {
     display: block;
 }
