@@ -17,6 +17,7 @@
  *   set this if you'd like to have a maximum number of lines.
  *   @param {boolean} [options.refreshOnLayout=true] Whether to refresh the textfill on any layout change that affects its container
  *   @param {boolean} [options.fillPadding=false] Whether to have the text extend into the padding as well
+ *   @param {boolean} [options.fillParent=false] Whether we should fit the parent of this element instead
  */
 Q.Tool.jQuery('Q/textfill',
 
@@ -58,8 +59,9 @@ Q.Tool.jQuery('Q/textfill',
 			var $this = $(this);
 			var fontSize = o.maxFontPixels || ($this.height() + 10);
 			var lastGoodFontSize = 0, lastBadFontSize = fontSize, jump;
-			var maxHeight = Math.round(o.fillPadding ? $this.innerHeight() : $this.height());
-			var maxWidth = Math.round(o.fillPadding ? $this.innerWidth() : $this.width());
+			var $c = o.fillParent ? $c.parent() : $c;
+			var maxHeight = Math.round(o.fillPadding ? $c.innerHeight() : $c.height());
+			var maxWidth = Math.round(o.fillPadding ? $c.innerWidth() : $c.width());
 			var textHeight, textWidth, lines, tooBig;
 			ourElement.addClass('Q_textfill_resizing');
 			for (var i=0; i<100; ++i) {
