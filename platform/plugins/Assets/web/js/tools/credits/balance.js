@@ -41,7 +41,7 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 		var tool = this;
 		var state = tool.state;
 		var _fillContent = function (credits) {
-			Q.replace(tool.element, parseFloat(credits).toFixed(state.decimals));
+			tool.element.innerHTML = tool.format(credits);
 			if (state.textfill) {
 				$(tool.element).plugin('Q/textfill', {
 					maxFontPixels: 22,
@@ -65,8 +65,12 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 			retainWith: tool
 		});
 	},
+	format: function (credits) {
+		credits = parseFloat(credits);
+		return Number.isInteger(credits) ? credits : credits.toFixed(this.state.decimals);
+	},
 	getValue: function () {
-		return parseFloat(this.element.innerText).toFixed(this.state.decimals);
+		return this.format(this.element.innerText);
 	}
 });
 
