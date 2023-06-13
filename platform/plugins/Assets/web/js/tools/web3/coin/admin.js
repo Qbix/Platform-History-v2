@@ -247,24 +247,31 @@
 				chains: Assets.Web3.chains
 			}, function (err, html) {
 				Q.replace(tool.element, html);
-				
                 
 				//tool.checkOwner();
 				//tool.refreshPoolList();
 
 				$('.Assets_web3_coin_admin_produce', tool.element).off(Q.Pointer.click).on(Q.Pointer.fastclick, function(){
-					Q.invoke({
+					
+					var invokeObj = Q.invoke({
 						title: tool.text.coin.admin.createPool,
 						template: {
+							
+							fields: {
+								objfields: state.fields
+							},
 							name: 'Assets/web3/coin/admin/create'
 						},
 						className: 'Assets_web3_coin_admin_create',
+						
 						trigger: tool.element,
 						onActivate: function ($element) {
 							
 							if (!($element instanceof $)) {
 								$element = $(arguments[2]);
 							}
+							
+							/*
 							for (var fieldName in state.fields) {
 								var $input = $element.find("input[name="+fieldName+"]");
 								if (state.fields[fieldName].hide) {
@@ -277,31 +284,14 @@
 									);
 								}
 							}
+							*/
 
 							// creation staking pool
 							$("button[name=create]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-								var $this = $(this);
-
-								var _close = function(){
-									
-									var isDialog = $element.find('.Q_dialog_content').length;
-									var columns = Q.Tool.from($this.closest(".Q_columns_tool"), "Q/columns");
-									var $column = $this.closest('.Q_columns_column');	
-
-									if (isDialog) {
-										Q.Dialogs.pop();
-									} else if (columns) {
-										var min = parseInt($column.data('index'));
-										columns.close({min: min}, null, {animation: {duration: 0}});
-									}
-
-								}
-
 								e.preventDefault();
 								e.stopPropagation();
 
 								$element.addClass("Q_working");
-								
 								
 								// clone state fields
 								let fields = Object.assign({}, state.fields);
@@ -312,10 +302,7 @@
 									// use default values if present
 									fields[key].userValue = fields[key].userValue || fields[key].value;
 								}
-	//							fields.owner.userValue = fields.owner.userValue || Q.Users.Web3.getSelectedXid();
-	//
-	//							fields.beneficiary.userValue = fields.beneficiary.userValue || Q.Users.Web3.getSelectedXid();
-
+	
 								// validate (after user input and applied defaults value)
 								var validated = true;
 								for (let key in fields) {
@@ -332,27 +319,6 @@
 										}
 									}
 								}
-
-//								var vals = {};
-//								vals.tokenErc20 = $element.find("input[name=tokenErc20]").val();
-//								vals.duration = $element.find("input[name=duration]").val();
-//								vals.bonusTokenFraction = $element.find("input[name=bonusTokenFraction]").val();
-//								vals.popularToken = $element.find("input[name=popularToken]").val();
-//								vals.donations = $element.find("input[name=donations]").val();
-//								vals.rewardsRateFraction = $element.find("input[name=rewardsRateFraction]").val();
-//								vals.numerator = $element.find("input[name=numerator]").val();
-//								vals.denominator = $element.find("input[name=denominator]").val();
-
-								// simple check on Q.empty
-//								for (var i in vals) {
-//
-//									if (Q.isEmpty(vals[i])) {
-//										$element.find(".form-group").find("label, input, small").removeClass('text-danger');
-//										$element.find(`input[name=${i}]`).closest('.form-group').find("label, input, small").addClass('text-danger');
-//										$element.removeClass("Q_working");
-//										return console.warn(`"${i}" value can not be empty`);
-//									}
-//								}
 								
 								if (validated) {
 									var contract;
@@ -401,11 +367,11 @@
 
 									}).finally(function(){
 										$element.removeClass("Q_working");
-										_close();
+										invokeObj.close();
 									});
 								} else {
 									$element.removeClass("Q_working");
-									_close();
+									invokeObj.close();
 								}
 							});
 						}
@@ -528,51 +494,63 @@
 	Q.Template.set("Assets/web3/coin/admin/create",
 	`
 		<div class="form Assets_web3_coin_admin_produceContainer">
+	{{#unless objfields.tokenErc20.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.tokenErc20}}</label>
-				<input name="tokenErc20" type="text" class="form-control" placeholder="{{coin.admin.placeholders.address}}">
+				<input name="tokenErc20" type="text" class="form-control" placeholder="{{coin.admin.placeholders.address}}" value="{{objfields.tokenErc20.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.tokenErc20}}</small>
 			</div>
+	{{/unless}} 
+	{{#unless objfields.duration.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.duration}}</label>
-				<input name="duration" type="text" class="form-control" placeholder="{{coin.admin.placeholders.days}}">
+				<input name="duration" type="text" class="form-control" placeholder="{{coin.admin.placeholders.days}}" value="{{objfields.duration.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.duration}}</small>
 			</div>
+	{{/unless}} 
+	{{#unless objfields.bonusTokenFraction.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.bonusTokenFraction}}</label>
-				<input name="bonusTokenFraction" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}">
+				<input name="bonusTokenFraction" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}" value="{{objfields.bonusTokenFraction.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.bonusTokenFraction}}</small>
 			</div>
+	{{/unless}} 
+	{{#unless objfields.popularToken.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.popularToken}}</label>
-				<input name="popularToken" type="text" class="form-control" placeholder="{{coin.admin.placeholders.address}}">
+				<input name="popularToken" type="text" class="form-control" placeholder="{{coin.admin.placeholders.address}}" value="{{objfields.popularToken.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.popularToken}}</small>
 			</div>
+	{{/unless}} 
+	{{#unless objfields.donations.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.donations}}</label>
-				<input name="donations" type="text" class="form-control" placeholder="{{coin.admin.placeholders.tuple}}">
+				<input name="donations" type="text" class="form-control" placeholder="{{coin.admin.placeholders.tuple}}" value="{{objfields.donations.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.donations}}</small>
 			</div>
+	{{/unless}} 
+	{{#unless objfields.rewardsRateFraction.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.rewardsRateFraction}}</label>
-				<input name="rewardsRateFraction" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}">
+				<input name="rewardsRateFraction" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}" value="{{objfields.rewardsRateFraction.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.rewardsRateFraction}}</small>
 			</div>
-
+	{{/unless}} 
+	{{#unless objfields.numerator.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.numerator}}</label>
-				<input name="numerator" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}">
+				<input name="numerator" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}" value="{{objfields.numerator.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.numerator}}</small>
 			</div>
-
+	{{/unless}} 
+	{{#unless objfields.denominator.hide}}
 			<div class="form-group">
 				<label>{{coin.admin.form.labels.denominator}}</label>
-				<input name="denominator" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}">
+				<input name="denominator" type="text" class="form-control" placeholder="{{coin.admin.placeholders.fraction}}" value="{{objfields.denominator.value}}">
 				<small class="form-text text-muted">{{coin.admin.form.small.denominator}}</small>
 			</div>
-
+	{{/unless}} 
 			<button name="create" class="Assets_web3_coin_admin_produce Q_button">{{coin.admin.btns.createPoolInForm}}</button>	
-			<button name="testFill" class="Q_button">testfill</button>	
 
 		</div>
 	`,

@@ -627,6 +627,7 @@
 				"fraction": "fraction",
 				"integer": "integer",
 				"seconds": "seconds",
+				"days": "days",
 				"uint256": "uint256",
 				"uint192": "uint192",
 				"uint64": "uint64",
