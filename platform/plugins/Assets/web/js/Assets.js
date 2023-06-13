@@ -1406,6 +1406,74 @@
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
+		CommunityCoins: {
+			Pools: {
+				/**
+				 * Get pool instances from blockchain
+				 * @method getAll
+				 * @param {String} communityCoinAddress address of communitycoin contract
+				 * @param {Object} abiPaths optional parameter
+				 * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
+				 * @param {String} abiPaths.abiPathStakingPoolF  path in config to CommunityStakingPoolFactory's ABI
+				 * @param {String} chainId
+				 * @param {function} callback
+				 * @param {object} options
+				 */
+				getAll: function(communityCoinAddress, abiPaths, chainId, callback) {
+					const defaultAbi = {
+						abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
+						abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
+					};
+					var abi = {};
+					if (Q.isEmpty(abiPaths)) {
+						abi = defaultAbi;
+					} else if (Q.isEmpty(abiPaths.abiPathCommunityCoin)) {
+						abi.abiPathCommunityCoin = defaultAbi.abiPathCommunityCoin;
+					} else if (Q.isEmpty(abiPaths.abiPathStakingPoolF)) {
+						abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
+					}
+					
+					var contractPoolF;
+					
+					Q.Users.Web3.getContract(
+						abi.abiPathCommunityCoin, 
+						{
+							contractAddress: communityCoinAddress,
+							readOnly: true,
+							chainId: chainId
+						}
+					).then(function (contract) {
+						return contract.instanceManagment();
+					}).then(function (stakingPoolFactory) {
+						return Q.Users.Web3.getContract(
+							abi.abiPathStakingPoolF, 
+							{
+								contractAddress: stakingPoolFactory,
+								readOnly: true,
+								chainId: chainId
+							});
+					}).then(function (_contractPoolF) {
+						contractPoolF = _contractPoolF
+						return contractPoolF.instances();
+					}).then(function (instanceAddresses) {
+
+						if (Q.isEmpty(instanceAddresses)) {
+							return instanceAddresses;
+						} else {
+							var p = [];
+							instanceAddresses.forEach(function(i){
+								p.push(contractPoolF.getInstanceInfoByPoolAddress(i));
+							});
+							return Promise.all(p);
+						}
+					}).then(function (instanceInfos) {	
+						Q.handle(callback, null, [null, instanceInfos]);
+					}).catch(function(err){
+						Q.handle(callback, null, [err.reason]);
+					});	
+				},
+			},
+		},
 		Web3: {
 			/**
 			 * Generates a link for opening a coin
@@ -1552,6 +1620,10 @@
 		"Assets/credits/balance": {
 			js: "{{Assets}}/js/tools/credits/balance.js",
 			css: "{{Assets}}/css/tools/credits/balance.css"
+		},
+		"Assets/web3/coin/admin": {
+			js: "{{Assets}}/js/tools/web3/coin/admin.js",
+			css: "{{Assets}}/css/tools/web3/coin/admin.css"
 		}
 	});
     
