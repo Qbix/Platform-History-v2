@@ -289,7 +289,7 @@ Q.Tool.define('Streams/chat', function(options) {
 								? ' Streams_chat_from_me'
 								: ' Streams_chat_to_me'
 			}, message);
-			r[action] = true;
+			r.action = action;
 		}
 
 		return res;
@@ -635,13 +635,16 @@ Q.Tool.define('Streams/chat', function(options) {
 	renderNotification: function(message){
 		var tool = this;
 		var state = tool.state;
+		var notificationTemplate = tool.text[message.action.toUpperCase()];
+		var m = Q.extend({
+			time: Date.now() / 1000
+		}, message);
 		Q.Streams.Avatar.get(message.byUserId, function (err, avatar) {
-			message.displayName = avatar.displayName();
-			message.time = Date.now() / 1000;
-
+			m.displayName = avatar.displayName();
+			m.notificationHTML = m.notificationTemplate.interpolate(m);
 			Q.Template.render(
-				'Streams/chat/message/notification',
-				message,
+				state.templates.message.notification.name,
+				m,
 				function(error, html){
 					if (error) { return error }
 
@@ -1348,11 +1351,9 @@ Q.Template.set('Streams/chat/message/bubble',
 Q.Template.set('Streams/chat/message/notification',
 	'<div class="Streams_chat_notification>'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
-		'{{#if visit}}{{interpolate Visit displayName=displayName}}{{/if}}'+
-		'{{#if join}}{{interpolate Join displayName=displayName}}{{/if}}'+
-		'{{#if leave}}{{interpolate Leave displayName=displayName}}{{/if}}'+
-		'{{#if relatedTo}}{{interpolate RelatedTo displayName=displayName stream=stream}}{{/if}}'+
+		'{{{notificationHTML}}}'+
 	'</div>',
+	
 	{ text: ['Streams/content'] }
 );
 
