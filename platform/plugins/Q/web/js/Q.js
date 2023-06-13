@@ -504,9 +504,7 @@ Sp.splitId = function(lengths, delimiter) {
 	return segments.join(delimiter);
 };
 /**
- * Used to split ids into one or more segments, in order to store millions
- * of files under a directory, without running into limits of various filesystems
- * on the number of files in a directory.
+ * Used to match string content to certain types of data
  * Consider using Amazon S3 or another service for uploading files in production.
  * @method matchTypes
  * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
@@ -592,6 +590,16 @@ Sp.deobfuscate = function (key) {
 };
 
 /**
+ * Converts a hex representation of a number to decimal
+ * @method hexToDecimal
+ * @return {String}
+ */
+Sp.hexToDecimal = function () {
+	var hex = this.substr(0, 2) == '0x' ? this : '0x' + this;
+	return BigInt(hex).toString();
+};
+
+/**
  * Converts a decimal representation of a number to hex
  * @method decimalToHex
  * @return {String}
@@ -610,7 +618,7 @@ Sp.decimalToHex = function () {
         hex.push(sum.pop().toString(16));
     }
     return hex.join('');
-}
+};
 
 /**
  * @class Function
@@ -6599,7 +6607,7 @@ Q.IndexedDB = {
 		var open = indexedDB.open(dbName, version || 1);
 		open.onupgradeneeded = function() {
 			var db = open.result;
-			var store = db.createObjectStore(storeName, {keyPath: keyPath});
+			db.createObjectStore(storeName, {keyPath: keyPath});
 		};
 		open.onerror = function (error) {
 			callback && callback(error);

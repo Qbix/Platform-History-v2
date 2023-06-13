@@ -3562,6 +3562,60 @@ Sp.splitId = function(lengths, delimiter) {
 	return segments.join(delimiter);
 };
 
+/**
+ * Deobfuscates some text that was obfuscated by Q_Utils::obfuscate
+ * @method deobfuscate
+ * @param {String} str
+ * @param {String} [key=' ']
+ * @return {String}
+ */
+Sp.deobfuscate = function (key) {
+	key = key || ' ';
+	var len1 = Math.floor(this.length / 2);
+	var len2 = key.length;
+	var result = '';
+	for (var i=0; i<len1; ++i) {
+		var j = i % len2;
+		var diff = this.charCodeAt(i*2+1);
+		if (this.charAt(i*2) == '1') {
+			diff = -diff;
+		}
+		result += String.fromCharCode(key.charCodeAt(j)+diff);
+	}
+	return result;
+};
+
+/**
+ * Converts a hex representation of a number to decimal
+ * @method hexToDecimal
+ * @return {String}
+ */
+Sp.hexToDecimal = function () {
+	var hex = this.substr(0, 2) == '0x' ? this : '0x' + this;
+	return BigInt(hex).toString();
+};
+
+/**
+ * Converts a decimal representation of a number to hex
+ * @method decimalToHex
+ * @return {String}
+ */
+Sp.decimalToHex = function () {
+    var dec = this.split(''), sum = [], hex = [], i, s;
+    while (dec.length) {
+        s = 1 * dec.shift();
+        for(i = 0; s || i < sum.length; i++){
+            s += (sum[i] || 0) * 10;
+            sum[i] = s % 16;
+            s = (s - sum[i]) / 16;
+        }
+    }
+    while (sum.length){
+        hex.push(sum.pop().toString(16));
+    }
+    return hex.join('');
+};
+
 Sp.quote = function _String_prototype_quote() {
 	var c, i, l = this.length, o = '"';
 	for (i = 0; i < l; i += 1) {
@@ -3599,10 +3653,7 @@ Sp.quote = function _String_prototype_quote() {
 };
 
 /**
- * Used to split ids into one or more segments, in order to store millions
- * of files under a directory, without running into limits of various filesystems
- * on the number of files in a directory.
- * Consider using Amazon S3 or another service for uploading files in production.
+ * Used to match string content to certain types of data
  * @method matchTypes
  * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
  *  If omitted, all types are processed.

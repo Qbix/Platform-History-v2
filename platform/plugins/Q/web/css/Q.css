@@ -17,12 +17,12 @@ body {margin: 0}
 	}
 }
 
-@keyframes Q_working {
+@keyframes Q_working { /* apply to trigger element that sent request */
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }
 }
 
-@keyframes Q_loading {
+@keyframes Q_loading { /* apply to container loading content */
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }
 }

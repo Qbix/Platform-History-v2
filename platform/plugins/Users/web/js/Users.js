@@ -2550,7 +2550,7 @@
 		 * @param {Function} callback Receives (err, key)
 		 */
 		getKey: function (callback) {
-			Q.IndexedDB.open('Q.Users.keys', Q.info.baseUrl, 'id', function (err, store) {
+			Q.IndexedDB.open(Q.info.baseUrl, 'Q.Users.keys', 'id', function (err, store) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
@@ -2587,7 +2587,7 @@
 				namedCurve: info.namedCurve
 			}, false, ['sign', 'verify'])
 			.then(function (key) {
-				Q.IndexedDB.open('Q.Users.keys', Q.info.baseUrl, 'id', function (err, store) {
+				Q.IndexedDB.open(Q.info.baseUrl, 'Q.Users.keys', 'id', function (err, store) {
 					var request = store.put({
 						id: 'Users.Session',
 						key: key
