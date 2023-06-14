@@ -113,4 +113,5 @@
 }
 .Q_pdf_tool canvas {
     display: block;
+    width: 100%;
 }
