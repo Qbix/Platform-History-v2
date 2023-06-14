@@ -9852,8 +9852,9 @@ Q.activate = function _Q_activate(elem, options, callback, internal) {
  * @param {Q.Event} [options.onLoad] event which occurs when the parsed data comes back from the server
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
  * @param {Q.Event} [options.onLoadStart] handlers of this event will be called after the request is initiated, if "quiet" option is false they can add some visual indicators
- * @param {Q.Event} [options.onLoadEnd] handlers of this event will be called after the request is fully completed, if "quiet" option is false they can add some visual indicators
- * @param {Q.Event} [options.beforeFillSlots] handler to call before filling slots with new content
+ * @param {Q.Event} [options.onLoadEnd] handlers called after the request is fully completed, if "quiet" option is false they can add some visual indicators
+ * @param {Q.Event} [options.beforeFillSlots] handler called before filling slots with new content
+ * @param {Q.Event} [options.onFillSlots] use this handler to do things with elements as soon as they are filled into the slots
  * @param {Q.Event} [options.beforeUnloadUrl] opportunity to save state around current url, such as scroll positions of displayed slots
  * @param {Q.Event} [options.unloadedUrl] if the URL was already replaced by the time Q.loadUrl is called (e.g. from popState handler) pass the URL being unloaded here
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
@@ -10033,6 +10034,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				// this is where we fill all the slots
 				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
 				domElements = handler(response, url, o);
+				Q.handle(o.onFillSlots, Q, [domElements, response, url, o]);
 
 				if (!o.ignoreHistory) {
 					Q.Page.push(url, Q.getObject('slots.title', response));
@@ -12370,6 +12372,18 @@ function _Q_Pointer_start_end_handler (e) {
  * @class Q.Visual
  */
 Q.Visual = Q.Pointer = {
+
+	awaitNaturalImageSize: function (img, callback) {
+		var wait = setInterval(function() {
+			var w = img.naturalWidth;
+			var h = img.naturalHeight;
+			if (w && h) {
+				clearInterval(wait);
+				callback.apply(img, [w, h]);
+			}
+		}, 30);
+	},
+
 	/**
 	 * Intelligent pointer start event that also works on touchscreens
 	 * @static

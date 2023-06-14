@@ -14,6 +14,7 @@
  *   before the username. Or pass true to render the default size.
  * @param {array} [options.iconAttributes]
  *   Optional. Array of attributes to render for the icon.
+ *   You can pass "dontLazyload" here to disable any lazyload of the icon.
  * @param {boolean|array} [options.editable=false]
  *   Optional. Whether to provide an interface for editing the user's info. Can be array containing one or more of "icon", "name".
  * @param {boolean} [$options.show] The parts of the name to show. Can have "f", "l", "u", "fu", "lu", "flu" in any order, separated by a space.
@@ -33,7 +34,6 @@ function Users_avatar_tool($options)
 		'editable' => false
 	);
 	$options = array_merge($defaults, $options);
-	unset($options['iconAttributes']);
 	if (empty($options['editable'])) {
 		$options['editable'] = array();
 	} else if (is_string($options['editable'])) {

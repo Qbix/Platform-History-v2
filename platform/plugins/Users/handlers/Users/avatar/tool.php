@@ -11,6 +11,7 @@
  *   Optional. Render icon before the username.
  * @param {boolean} [$options.iconAttributes]
  *   Optional. Array of attributes to render for the icon.
+ *   You can pass "dontLazyload" here to disable any lazyload of the icon.
  * @param {boolean} [$options.editable]
  *   Optional. Whether to provide an interface for editing the user's info. Can be array containing "icon", "name".
  * @param {array} [$options.inplaces] Additional fields to pass to the child Streams/inplace tools, if any
