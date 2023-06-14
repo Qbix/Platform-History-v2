@@ -2238,10 +2238,10 @@ Q.listen = function _Q_listen(options, callback) {
 		});
 		return server;
 	}
-	var _express;
+	var app;
 	if (express.version === undefined
 	|| parseInt(express.version) >= 3) {
-		_express = express();
+		app = express();
 		if (options.https !== false) {
 			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
 			var keys = ['key', 'cert', 'ca', 'dhparam'];
@@ -2258,7 +2258,7 @@ Q.listen = function _Q_listen(options, callback) {
 					o[k] = fs.readFileSync(h[k]).toString();
 				}
 			});
-			server = https.createServer(o, _express);
+			server = https.createServer(o, app);
 
 			fs.watch(certFolder, function (event, filename) {
 				clearTimeout(sslCertsDirTimeout);
@@ -2277,19 +2277,18 @@ Q.listen = function _Q_listen(options, callback) {
 				}, 5000);
 			 });
 		} else {
-			server = http.createServer(_express);
+			server = http.createServer(app);
 		}
 	} else {
 		server = express.createServer();
-		_express = server;
+		app = server;
 	}
 	server.host = host;
 	server.port = port;
 	server.attached = {
-		express: _express
+		express: app
 	};
 	
-	var app = server.attached.express;
 	var bodyParser = require('body-parser');
 	app.use(bodyParser());
 	
