@@ -244,8 +244,8 @@
 			}, function (err, html) {
 				Q.replace(tool.element, html);
                 
-				//tool.checkOwner();
-				//tool.refreshPoolList();
+				tool.checkOwner();
+				tool.refreshPoolList();
 
 				$('.Assets_web3_coin_admin_produce', tool.element).off(Q.Pointer.click).on(Q.Pointer.fastclick, function(){
 					
