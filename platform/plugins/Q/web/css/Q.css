@@ -110,7 +110,7 @@ body {margin: 0}
 .Q_success { background: #e2ffee !important; }
 .Q_selectable { border: 1px solid transparent; }
 .Q_notTouchscreen .Q_selectable:hover { background: #aeaeae; background: rgba(175,175,175,0.5); }
-.Q_selected { background: #98bede; border: 1px solid #5ca3df; color: black; }
+.Q_selected { background: #98bede; outline: 1px solid #5ca3df; color: black; }
 .Q_selectable.Q_selected:hover { background: #98bede; }
 .Q_throb,
 .Q_throb input,
