@@ -1624,6 +1624,10 @@
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
 			css: "{{Assets}}/css/tools/web3/coin/admin.css"
+		},
+		"Assets/web3/coin/staking/start": {
+			js: "{{Assets}}/js/tools/web3/coin/staking/start.js",
+			css: "{{Assets}}/css/tools/web3/coin/staking/start.css"
 		}
 	});
     
