@@ -1348,7 +1348,7 @@ Q.Template.set('Streams/chat/message/bubble',
 );
 
 Q.Template.set('Streams/chat/message/notification',
-	'<div class="Streams_chat_notification>'+
+	'<div class="Streams_chat_notification">'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
 		'{{{notificationHTML}}}'+
 	'</div>',
