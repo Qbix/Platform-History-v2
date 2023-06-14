@@ -4675,6 +4675,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			_loadedConstructor(ctor, params);
 		});
 		var waitFor = [];
+		Q.Text.addedFor('Q.Tool.define', n, c);
 		if (c.text) {
 			waitFor.push('text');
 			Q.Text.get(c.text, p.fill('text'));
@@ -11239,7 +11240,7 @@ Q.Text = {
 	 * Get the array of text files added for this normalized name
 	 * @param {String|Array} methods Can be "Q.Tool.define" or "Q.Template.set", or array of them
 	 * @param {String} normalizedName The prefix for the names of tools to load the text files for
-	 * @param {Object} objectToExtend This object's "text" property is extended
+	 * @param {Object} objectToExtend This object's "text" property array will be set or extended.
 	 * @return {Array} the array of text files, if any
 	 */
 	addedFor: function (method, normalizedName, objectToExtend) {
