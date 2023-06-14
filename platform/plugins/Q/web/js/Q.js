@@ -14885,6 +14885,16 @@ if (!root.console) {
 		warn: noop
 	};
 }
+root.console.log.register = function (name) {
+	root.console.log[name] = function() {
+		var params = Array.prototype.slice.call(arguments);
+		params.unshift(name + ":");
+		console.log.apply(console, params);
+	};
+};
+root.console.log.unregister = function (name) {
+	root.console.log[name] = function () { }
+};
 
 /**
  * This function is just here in case prefixfree.js is included

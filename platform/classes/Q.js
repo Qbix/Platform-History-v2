@@ -2206,7 +2206,7 @@ Q.servers = {};
  * @param {String} [options.port] the port to listen on
  * @param {String} [options.host] the hostname to listen on
  * @param {Array} [options.attach] an array of additional listeners to attach. Each member is a name of a class (e.g. "Q.Socket", "Q.Dispatcher" and "Db") which has the listen(options) method.
- * @param {Object} [options.https] To start an https server, pass options to https.createServer here, to override the ones in the "Q"/"node"/"https" config options, if any.
+ * @param {Object} [options.https] To avoid starting https server, pass false here. Otherwise you can pass options to https.createServer here, to override the ones in the "Q"/"node"/"https" config options, if any.
  * @param {String|Buffer} [options.https.key] Content of the private key file
  * @param {String|Buffer} [options.https.cert] Content of the certificate file
  * @param {String|Buffer} [options.https.ca] Content of the certificate authority file
@@ -2242,33 +2242,34 @@ Q.listen = function _Q_listen(options, callback) {
 	if (express.version === undefined
 	|| parseInt(express.version) >= 3) {
 		_express = express();
-		if (!Q.isEmpty(options.https)) {
+		if (options.https !== false) {
 			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
 			var keys = ['key', 'cert', 'ca', 'dhparam'];
 			var certFolder = path.dirname(h.cert)
-			var privatKeyPath = h.key;
+			var privateKeyPath = h.key;
 			var certPath = h.cert;
 			var caPath = h.ca;
-			keys.forEach(function (k) {
-				if (h[k]) {
-					h[k] = fs.readFileSync(h[k]).toString();
-				}
-			});
 			if (Q.isPlainObject(options.https)) {
 				Q.extend(h, options.https);
 			}
-			server = https.createServer(h, _express);
+			var o = Q.copy(h);
+			keys.forEach(function (k) {
+				if (h[k]) {
+					o[k] = fs.readFileSync(h[k]).toString();
+				}
+			});
+			server = https.createServer(o, _express);
 
 			fs.watch(certFolder, function (event, filename) {
 				clearTimeout(sslCertsDirTimeout);
 				sslCertsDirTimeout = setTimeout(function() {
-					if(!fs.existsSync(privatKeyPath) || !fs.existsSync(certPath) || !fs.existsSync(caPath)) return;
+					keys.forEach(function (k) {
+						if (h[k]) {
+							o[k] = fs.readFileSync(h[k]).toString();
+						}
+					});
 					try {
-						server.setSecureContext({
-							key: fs.readFileSync(privatKeyPath).toString(),
-							cert: fs.readFileSync(certPath).toString(),
-							ca: fs.readFileSync(caPath).toString()
-						});
+						server.setSecureContext(o);
 						console.log('Secure context updated.');
 					} catch (error) {
 						console.log('Error while updating secure context: ' + error.message);
@@ -3162,6 +3163,15 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 		stream.write(message);
 		_removeOldLogs();
 	});
+};
+
+Q.log.register = function (name) {
+	Q.log[name] = function() {
+		Q.log(arguments[0], name, arguments[2], arguments[3]);
+	};
+};
+Q.log.unregister = function (name) {
+	Q.log[name] = function () { }
 };
 
 /**
