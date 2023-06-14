@@ -215,10 +215,10 @@ class Streams_Stream extends Base_Streams_Stream
 	 * and asUserId is not authorized to create this stream.
 	 * @method fetchOrCreate
 	 * @static
-	 * @param {string} $asUserId used for fetchOne and create functions
-	 * @param {string} $publisherId used for fetchOne and create functions
-	 * @param {string} $name used for fetchOne and create functions
-	 * @param {array} [$options] to pass to fetchOne. Also the following options to be used with stream creation:
+	 * @param {string} $asUserId used for fetch and create functions
+	 * @param {string} $publisherId used for fetch and create functions
+	 * @param {string} $name used for fetch and create functions
+	 * @param {array} [$options] to pass to fetch. Also the following options to be used with stream creation:
 	 * @param {boolean|array} [$options.subscribe] pass true to autosubscribe 
 	 *   to the stream right after creating it. You can also pass an array of options 
 	 *   that will be passed to the subscribe function.
@@ -240,9 +240,14 @@ class Streams_Stream extends Base_Streams_Stream
 		$options = array(),
 		&$results = array())
 	{
-		$stream = Streams::fetchOne($asUserId, $publisherId, $name, '*', $options, $results);
+		$begin = Streams_Stream::begin();
+		$commit = Streams_Stream::commit();
+		$criteria = compact('publisherId', 'name');
+		$begin->execute(null, $begin->shard(null, $criteria));
+		$stream = Streams_Stream::fetch($asUserId, $publisherId, $name, '*', $options, $results);
 		$results['created'] = false;
 		if ($stream) {
+			$commit->execute(null, $commit->shard(null, $criteria));
 			return $stream;
 		}
 		$fields = Q::ifset($options, 'fields', array());
@@ -254,6 +259,7 @@ class Streams_Stream extends Base_Streams_Stream
 			Q::ifset($options, 'relate', null),
 			$relateResults
 		);
+		$commit->execute(null, $commit->shard(null, $criteria));
 		if (!$stream) {
 			return null;
 		}
