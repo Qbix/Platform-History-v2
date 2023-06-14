@@ -1420,6 +1420,54 @@
 				 * @param {object} options
 				 */
 				getAll: function(communityCoinAddress, abiPaths, chainId, callback) {
+					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId).then(function (instanceInfos) {
+						Q.handle(callback, null, [null, instanceInfos]);
+					}).catch(function(err){
+						Q.handle(callback, null, [err.reason]);
+					});	
+				},
+				/**
+				 * Get pool instances from blockchain and additionally get token info name/symbol/user/balance
+				 * @method getAll
+				 * @param {String} communityCoinAddress address of communitycoin contract
+				 * @param {Object} abiPaths optional parameter
+				 * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
+				 * @param {String} abiPaths.abiPathStakingPoolF  path in config to CommunityStakingPoolFactory's ABI
+				 * @param {String} chainId
+				 * @param {String} userAddress
+				 * @param {function} callback
+				 * @param {object} options
+				 */
+				getAllExtended: function(communityCoinAddress, abiPaths, chainId, userAddress, callback){
+					var t = Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId);
+					
+					t.then(function (instanceInfos) {
+
+						var p = [];
+						
+						p.push(
+							new Promise(function (resolve, reject) {resolve(instanceInfos)})
+						);
+						
+							instanceInfos.forEach(function(i){
+								p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
+							});
+							return Promise.all(p);
+					}).then(function (_ref) {
+						
+						var instanceInfos = _ref.shift(0);
+						var p = [];
+						
+						_ref.forEach(function(i, index){
+							instanceInfos[index].erc20TokenInfo = i;
+						});
+						Q.handle(callback, null, [null, instanceInfos]);
+						
+					}).catch(function(err){
+						Q.handle(callback, null, [err.reason]);
+					});
+				},
+				_getAll: function(communityCoinAddress, abiPaths, chainId) {
 					const defaultAbi = {
 						abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
 						abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
@@ -1435,7 +1483,13 @@
 					
 					var contractPoolF;
 					
-					Q.Users.Web3.getContract(
+//					Promise.all([
+//						tool.nftContractPromise(), 
+//						tool.lockedContractPromise()
+//					])
+//					Q.Users.Web3.getContract(state.abiNFT, state.NFTAddress);
+					
+					return Q.Users.Web3.getContract(
 						abi.abiPathCommunityCoin, 
 						{
 							contractAddress: communityCoinAddress,
@@ -1453,10 +1507,9 @@
 								chainId: chainId
 							});
 					}).then(function (_contractPoolF) {
-						contractPoolF = _contractPoolF
+						contractPoolF = _contractPoolF;
 						return contractPoolF.instances();
 					}).then(function (instanceAddresses) {
-
 						if (Q.isEmpty(instanceAddresses)) {
 							return instanceAddresses;
 						} else {
@@ -1466,14 +1519,60 @@
 							});
 							return Promise.all(p);
 						}
-					}).then(function (instanceInfos) {	
-						Q.handle(callback, null, [null, instanceInfos]);
-					}).catch(function(err){
-						Q.handle(callback, null, [err.reason]);
-					});	
+					});
 				},
+				_getERC20TokenInfo: function(contract, userAddress, chainId){
+
+					return Q.Users.Web3.getContract(
+						"Assets/templates/ERC20", 
+						{
+							contractAddress: contract,
+							readOnly: true,
+							chainId: chainId
+						}
+					).then(function (contract) {
+						var p = [];
+						p.push(contract.name());
+						p.push(contract.symbol());
+						p.push(contract.balanceOf(userAddress));
+						
+						return Promise.all(p);
+					})
+						
+						
+				}
 			},
 		},
+		
+//		.then(function (instanceInfos) {	
+//						var p = [];
+//						p.push(
+//							new Promise(function (resolve, reject) {resolve(instanceInfos)})
+//						);
+//						if (Q.isEmpty(instanceInfos)) {
+//							
+//						} else {
+//							instanceInfos.forEach(function(i){
+//								p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20))
+//							});
+//						}
+//						return Promise.all(p);
+//						
+//					}).then(function (_ref) {
+//						var instanceInfos = _ref.shift(0);
+//						var p = [];
+//						p.push(
+//							new Promise(function (resolve, reject) {resolve(instanceInfos)})
+//						);
+//						_ref.forEach(function(i, index){
+//							p.push(_ref[i])
+//						});
+//						
+//						return Promise.all(p);
+//					})
+		
+		
+		
 		Web3: {
 			/**
 			 * Generates a link for opening a coin

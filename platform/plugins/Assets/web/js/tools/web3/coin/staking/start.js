@@ -98,15 +98,29 @@
 		if (!loggedInUser) {
 			return console.warn("user not logged in");
 		}
+		
+		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
+		
+		if (Q.isEmpty(state.communityStakingPoolAddress)) {
+			return console.warn("communityStakingPoolAddress required!");
+		}
+		if (Q.isEmpty(state.communityCoinAddress)) {
+			return console.warn("communityCoinAddress required!");
+		}
+		
+		if (Q.isEmpty(state.chainId)) {
+			return console.warn("chainId required!");
+		}
 
 		tool.refresh();
 
 	},
 
 	{ // default options here
-		abiPath: "Assets/templates/R1/CommunityCoin/contract",	// for test predefined in local app.json
-		//abiPathPoolF: "Assets/templates/R1/CommunityStakingPool/factory",	// for test predefined in local app.json
+		abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",
+		abiPathCommunityStakingPool: "Assets/templates/R1/CommunityStakingPool/contract",
 		chainId: null,
+		communityStakingPoolAddress: null,
 		communityCoinAddress: null,
 		fields: {
 			
@@ -131,6 +145,14 @@
 		refresh: function () {
 			var tool = this;
 			var state = tool.state;
+			`
+			Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
+Donating 80% to {{avatar by xid}} <-- show only if donation > 0%
+Staking pool duration: {{ duration }}:
+[ stake amount ] _Max_ [[ Stake ]]
+`
+			tool.fillPoolSelect();
+			
 			
 			Q.Template.render("Assets/web3/coin/staking/start", {
 				chainId: state.chainId,
@@ -139,18 +161,127 @@
 				Q.replace(tool.element, html);
 				///
 				// !!
+				
 				///
 			});
+		},
+		_getCommunityCoinContract: function() {
+			return Q.Users.Web3.getContract(
+				state.abiPathCommunityCoin, 
+				{
+					contractAddress: state.communityCoinAddress,
+					chainId: state.chainId
+				}
+			)
+		},
+		_getStakingPoolContract: function() {
+			return Q.Users.Web3.getContract(
+				state.abiPathCommunityStakingPool, 
+				{
+					contractAddress: state.communityStakingPoolAddress,
+					chainId: state.chainId
+				}
+			)
+		},
+		fillPoolSelect: function(){
+			var tool = this;
+			var state = tool.state;
+			
+			var $selectElement = $(this.element).find('input[name=reserveToken]');
+			//var contract;
+			$selectElement.addClass("Q_working");
+			Assets.CommunityCoins.Pools.getAllExtended(
+				state.communityCoinAddress, 
+				null, 
+				state.chainId, 
+				ethers.utils.getAddress(tool.loggedInUserXid),
+				function (err, instanceInfos) {
+					if (err) {
+						return console.warn(err);
+					}
+				
+//					instanceInfos.forEach(function(i, index){
+//						$selectElement.append('<option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>')
+//					});
+					/*
+					<td>{{i.tokenErc20}}</td>
+		<td>{{i.duration}}</td>
+		<td>{{i.bonusTokenFraction}}</td>
+		<td>{{i.popularToken}}</td>
+
+		<td>{{i.rewardsRateFraction}}</td>
+		<td>{{i.numerator}}</td>
+		<td>{{i.denominator}}</td>
+					*/
+					
+					console.log("instanceInfos = ", instanceInfos);
+					return (err, instanceInfos);
+				}
+			);
+//	
+//			return tool._getCommunityCoinContract().
+//			).then(function (_contract) {
+//				contract = _contract;
+//				return contract.producedBy();
+//
+//			}).then(function (tx) {
+//				return tx.wait();
+//			}).then(function (receipt) {
+//
+//				if (receipt.status == 0) {
+//					throw 'Smth unexpected';
+//				}
+//				tool.refreshPoolList();	
+//
+//			}).catch(function (err) {
+//
+//				Q.Notices.add({
+//					content: Q.grabMetamaskError(err, [contract]),
+//					timeout: 5
+//				});
+//
+//
+//
+//			}).finally(function(){
+//				$element.removeClass("Q_working");
+//				invokeObj.close();
+//			});
+			
 		}
 	});
 
 	Q.Template.set("Assets/web3/coin/staking/start",
 	`
 	<div>
-Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
-Donating 80% to {{avatar by xid}} <-- show only if donation > 0%
-Staking pool duration: {{ duration }}:
-[ stake amount ] _Max_ [[ Stake ]]
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form Assets_web3_coin_staking_start_form">
+				<div class="form-group">
+					<label>{{coin.staking.start.form.labels.reserveToken}}</label>
+					<select class="form-control" name="reserveToken">
+					{{#each chains}}
+						<option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>
+					{{/each}}
+					</select>
+					<input name="tokenErc20" type="text" class="form-control">
+					<small class="form-text text-muted">{{coin.staking.start.form.small.tokenErc20}}</small>
+				</div>
+
+				<div class="form-group">
+					<label>{{coin.staking.start.form.labels.duration}}</label>
+					<input name="amount" type="text" class="form-control" placeholder="{{coin.staking.start.placeholders.amount}}">
+					<small class="form-text text-muted">{{coin.staking.start.form.small.amount}}</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
+	Donating 80% to {{avatarbyxid}} <-- show only if donation > 0%
+	Staking pool duration: {{ duration }}:
+	[ stake amount ] _Max_ [[ Stake ]]
+		</div>
+	</div>
+
 	</div>
 	`,
 		{text: ["Assets/content"]}
