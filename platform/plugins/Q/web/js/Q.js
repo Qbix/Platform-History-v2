@@ -4645,7 +4645,6 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			}
 			continue;
 		}
-		_qtc[n] = ctor;
 		ctor.toolName = n;
 		if (!Q.isArrayLike(stateKeys)) {
 			methods = stateKeys;
@@ -4664,11 +4663,38 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 				v.type = k;
 			}
 		}
-		Q.extend(ctor.prototype, 10, methods);
-		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
-		Q.Tool.onLoadedConstructor("").handle(n, ctor);
+
+		var c = _qtc[n];
+		_qtc[n] = ctor;
+
+		if (!Q.isPlainObject(c)) {
+			_loadedConstructor(ctor);
+			continue;
+		}
+		var p = new Q.Pipe(waitFor, 1, function (params) {
+			_loadedConstructor(ctor, params);
+		});
+		var waitFor = [];
+		if (c.text) {
+			waitFor.push('text');
+			Q.Text.get(c.text, p.fill('text'));
+		}
+		if (c.css) {
+			waitFor.push('css');
+			Q.addStylesheet(c.css, p.fill('css'));
+		}
+		p.run();
 	}
 	return ctor;
+
+	function _loadedConstructor(ctor, params) {
+		if (params && params.text && params.text[1]) {
+			ctor.text = params.text[1];
+		}
+		Q.extend(ctor.prototype, 10, methods);
+		Q.Tool.onLoadedConstructor(ctor.toolName).handle(ctor.toolName, ctor);
+		Q.Tool.onLoadedConstructor("").handle(ctor.toolName, ctor);
+	}
 };
 
 Q.Tool.beingActivated = undefined;
@@ -9335,7 +9361,9 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	options.info = {};
 	href = Q.url(href, null, options);
-	if (!media) media = 'screen,print';
+	if (!media) {
+		media = 'screen,print';
+	}
 	var links = document.getElementsByTagName('link');
 	var i, e, h, m;
 	var href2 = href.split('?')[0];
@@ -10537,8 +10565,8 @@ function _activateTools(toolElement, options, shared) {
 					this.constructor = toolConstructor;
 					Q.Tool.call(this, element, options);
 					this.state = Q.copy(this.options, toolConstructor.stateKeys);
-					if (params && params.text) {
-						this.text = params.text[1];
+					if (toolConstructor.text) {
+						this.text = toolConstructor.text;
 					}
 					var prevTool = Q.Tool.beingActivated;
 					Q.Tool.beingActivated = this;
@@ -10598,23 +10626,25 @@ function _activateTools(toolElement, options, shared) {
 			// NOTE: inside the tool constructor, after you add
 			// any child elements, call Q.activate() and Qbix
 			// will work correctly, whether it's sync or async.
-			var _constructor = _constructors[toolName];
-			var result = new _constructor(toolElement, options);
-			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			shared.tool = tool;
-			Q.setObject([toolId, toolName], tool, shared);
-			if (uniqueToolId) {
-				if (uniqueToolId === shared.firstToolId) {
-					shared.firstTool = tool;
+			Q.Tool.onLoadedConstructor(toolName).add(function () {
+				var _constructor = _constructors[toolName];
+				var result = new _constructor(toolElement, options);
+				var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
+				shared.tool = tool;
+				Q.setObject([toolId, toolName], tool, shared);
+				if (uniqueToolId) {
+					if (uniqueToolId === shared.firstToolId) {
+						shared.firstTool = tool;
+					}
+					shared.pipe.fill(uniqueToolId)();
+					shared.internal && shared.internal.progress && shared.internal.progress(shared);
 				}
-				shared.pipe.fill(uniqueToolId)();
-				shared.internal && shared.internal.progress && shared.internal.progress(shared);
-			}
-			if (!tool) {
-				return;
-			}
-			pendingCurrentEvent.handle.call(tool, options, result);
-			pendingCurrentEvent.removeAllHandlers();
+				if (!tool) {
+					return;
+				}
+				pendingCurrentEvent.handle.call(tool, options, result);
+				pendingCurrentEvent.removeAllHandlers();
+			}, 'Q.Tool.construct');
 		}
 	}, shared, null, { placeholder: true });
 }

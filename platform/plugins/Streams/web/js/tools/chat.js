@@ -46,7 +46,6 @@
  */
 Q.Tool.define('Streams/chat', function(options) {
 	var tool = this;
-	tool.text = tool.text.chat;
 	var state = tool.state;
 
 	state.more = {};
@@ -92,7 +91,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var button = $(this);
 		var stream = state.stream;
 
-		Q.confirm(tool.text.closeChatConfirm, function (res) {
+		Q.confirm(tool.text.chat.closeChatConfirm, function (res) {
 			if (!res) return;
 
 
@@ -107,9 +106,9 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.handle(state.onClose, tool, [stream]);
 			});
 		}, {
-			ok: tool.text.closeChatConfirmYes,
-			cancel: tool.text.closeChatConfirmNo,
-			title: tool.text.closeChatConfirmTitle
+			ok: tool.text.chat.closeChatConfirmYes,
+			cancel: tool.text.chat.closeChatConfirmNo,
+			title: tool.text.chat.closeChatConfirmTitle
 		});
 
 		return false;
@@ -303,11 +302,11 @@ Q.Tool.define('Streams/chat', function(options) {
 		var isPublisher = loggedInUserId === Q.getObject("stream.fields.publisherId", state);
 		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
 		var what = subscribed ? 'on' : 'off';
-		var touchlabel = subscribed ? tool.text.Subscribed : tool.text.Unsubscribed;
+		var touchlabel = subscribed ? tool.text.chat.Subscribed : tool.text.chat.Unsubscribed;
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
 		fields.loggedIn = loggedInUserId;
-		fields.text = tool.text;
+		fields.text = tool.text.chat;
 		fields.closeable = state.closeable && isPublisher;
 		fields.earlierSrc = Q.url('{{Streams}}/img/chat/earlier.png');
 		fields.subscriptionSrc = Q.url('{{Communities}}/img/subscription/'+what+'/80.png');
@@ -361,7 +360,7 @@ Q.Tool.define('Streams/chat', function(options) {
 									return console.warn(err);
 								}
 
-								$(".Streams_chat_addon_title", $this).html(participant.subscribed === 'yes' ? tool.text.Subscribed : tool.text.Unsubscribed);
+								$(".Streams_chat_addon_title", $this).html(participant.subscribed === 'yes' ? tool.text.chat.Subscribed : tool.text.chat.Unsubscribed);
 								$this.attr({'data-subscribed': participant.subscribed === 'yes'});
 							};
 
@@ -447,7 +446,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			return Q.Template.render(
 				'Streams/chat/Streams_chat_noMessages',
 				{
-					text: tool.text
+					text: tool.text.chat
 				},
 				function(error, html){
 					if (error) { return error; }
@@ -538,7 +537,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							: state.vote[type].src;
 						$this.attr('src', src);
 						if (type === 'flag' && src === state.vote[type].activeSrc) {
-							Q.alert(tool.text.flaggedForAdminReview);
+							Q.alert(tool.text.chat.flaggedForAdminReview);
 							var fields = {type: type};
 							Q.req('Streams/chatVote', function () {
 								// Vote up/down/flag has been submitted
@@ -635,7 +634,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	renderNotification: function(message){
 		var tool = this;
 		var state = tool.state;
-		var notificationTemplate = tool.text[message.action.toCapitalized()];
+		var notificationTemplate = tool.text.chat[message.action.toCapitalized()];
 		var m = Q.extend({
 			time: Date.now() / 1000
 		}, message);
