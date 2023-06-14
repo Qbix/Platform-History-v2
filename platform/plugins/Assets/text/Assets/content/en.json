@@ -66,7 +66,7 @@
         "YouHaveCreditsToStart": "You have {{amount}} credits to start",
         "PaymentFor": "Payment for \"{{1}}\"",
         "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
+        "PaymentToUser": "Transfer to {{toUserName}}",
         "CreatePrivateChat": "for private chat with {{toUserName}}",
         "CreatePaidStream": "for creating {{toStreamName}}",
         "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
