@@ -7,6 +7,8 @@ var events = require('events');
 var util = require('util');
 var url = require("url");
 
+var log = console.log.register('Q.Socket');
+
 /**
  * Attach socket to server
  * @class Socket
@@ -19,6 +21,8 @@ function Socket (server, options) {
 	var io = require('socket.io');
 	this.io = io.listen(server, options || {});
 }
+
+var _listening = false;
 
 /**
  * Start http server if needed and start listening to socket
@@ -34,21 +38,29 @@ function Socket (server, options) {
  */
 Socket.listen = function (options) {
 	options = options || {};
-	Q.extend(options, Q.Config.get(['Q', 'node', 'socket']));
+	options = Q.extend({}, Q.Config.get(['Q', 'node', 'socket']), options);
 	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
 	if (options.path) {
 		options.path = options.path.interpolate({baseUrl: baseUrl});
 	}
 	var server = Q.listen(options);
 	if (!server.attached.socket) {
+		if (!_listening) {
+			try {
+				log("Version of socket.io: " + require('socket.io/package').version);
+			} catch (e) { }
+			_listening = true;
+		}
 		var s = !Q.isEmpty(options.https) ? 's' : '';
-		console.log("Starting socket server on http"+s+"://"+server.host+":"+server.port);
+		log("Starting socket server on http"+s+"://"
+			+server.host+":"+server.port + (server.internalString || '')
+		);
 		try {
 			server.attached.socket = new Q.Socket(server, Q.take(options, [
 				'path', 'serveClient', 'adapter', 'origins', 'parser'
 			]));
 		} catch (e) {
-			console.log("Socket was not attached.", e);
+			log("Socket was not attached.", e);
 		}
 	}
 	return server.attached.socket;

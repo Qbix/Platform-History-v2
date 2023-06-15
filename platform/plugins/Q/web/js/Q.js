@@ -620,6 +620,49 @@ Sp.decimalToHex = function () {
     return hex.join('');
 };
 
+Sp.consoleColor = function(color) {
+	var code;
+	if (color instanceof Array) {
+		code = '';
+		color.forEach(function (c) {
+			code += _consoleColors[c];
+		});
+	} else {
+		code = _consoleColors[color];
+	}
+	return code + this + _consoleColors.Reset;
+};
+
+var _consoleColors = {
+	Reset: "\x1b[0m",
+	Bright: "\x1b[1m",
+	Dim: "\x1b[2m",
+	Underscore: "\x1b[4m",
+	Blink: "\x1b[5m",
+	Reverse: "\x1b[7m",
+	Hidden: "\x1b[8m",
+
+	FgBlack: "\x1b[30m",
+	FgRed: "\x1b[31m",
+	FgGreen: "\x1b[32m",
+	FgYellow: "\x1b[33m",
+	FgBlue: "\x1b[34m",
+	FgMagenta: "\x1b[35m",
+	FgCyan: "\x1b[36m",
+	FgWhite: "\x1b[37m",
+	FgGray: "\x1b[90m",
+
+	BgBlack: "\x1b[40m",
+	BgRed: "\x1b[41m",
+	BgGreen: "\x1b[42m",
+	BgYellow: "\x1b[43m",
+	BgBlue: "\x1b[44m",
+	BgMagenta: "\x1b[45m",
+	BgCyan: "\x1b[46m",
+	BgWhite: "\x1b[47m",
+	BgGray: "\x1b[100m",
+};
+
 /**
  * @class Function
  * @description Q extended methods for Functions
@@ -5624,7 +5667,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			&& typeof toolConstructor !== 'string'
 			&& !(Q.isPlainObject(toolConstructor) && toolConstructor.js)) {
 				toolConstructor = function () {
-					console.log("Missing tool constructor for " + toolName);
+					log("Missing tool constructor for " + toolName);
 				}; 
 			}
 		}
@@ -8461,7 +8504,7 @@ Q.request = function (url, slotNames, callback, options) {
 					if (xmlhttp.status == 200) {
 						onSuccess.call(xmlhttp, xmlhttp.responseText);
 					} else {
-						console.log("Q.request xhr: " + xmlhttp.status + ' ' 
+						log("Q.request xhr: " + xmlhttp.status + ' ' 
 							+ xmlhttp.responseText.substr(xmlhttp.responseText.indexOf('<body')));
 						onCancel.call(xmlhttp, xmlhttp.status);
 					}
@@ -9481,7 +9524,7 @@ Q.ServiceWorker = {
 		var src = Q.url('Q-ServiceWorker');
 		navigator.serviceWorker.register(src)
 		.then(function (registration) {
-			console.log("Q.ServiceWorker.register", registration);
+			log("Q.ServiceWorker.register", registration);
 			var worker;
 			if (registration.active) {
 				worker = registration.active;
@@ -11383,13 +11426,13 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
 		_ioOn(socket, 'connect', _connected);
 		_ioOn(socket, 'connect_error', function (error) {
-			console.log('Failed to connect to '+url, error);
+			log('Failed to connect to '+url, error);
 		});
 		_ioOn(socket.io, 'close', function () {
-			console.log('Socket ' + ns + ' disconnected from '+url);
+			log('Socket ' + ns + ' disconnected from '+url);
 		});
 		_ioOn(socket, 'error', function (error) {
-			console.log('Error on connection '+url+' ('+error+')');
+			log('Error on connection '+url+' ('+error+')');
 		});
 
 		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
@@ -11412,7 +11455,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			Q.Socket.onConnect(ns, url).handle(qs, ns, url);
 			callback && callback(qs, ns, url);
 			
-			console.log('Socket connected to '+url);
+			log('Socket connected to '+url);
 		}
 	}
 	
@@ -14442,7 +14485,7 @@ Aup.recorderInit = function (options) {
 
 		// when error occur with audio stream
 		tool.recorder.addEventListener("streamError", function(e){
-			console.log('Error encountered: ' + e.error.name );
+			log('Error encountered: ' + e.error.name );
 		});
 
 		tool.recorder.addEventListener("dataAvailable", function(e){
@@ -14886,15 +14929,16 @@ if (!root.console) {
 	};
 }
 root.console.log.register = function (name) {
-	root.console.log[name] = function() {
+	return root.console.log[name] = function() {
 		var params = Array.prototype.slice.call(arguments);
-		params.unshift(name + ":");
+		params.unshift((name+':').consoleColor(['Bright', 'BgGray', 'FgWhite']));
 		console.log.apply(console, params);
 	};
 };
 root.console.log.unregister = function (name) {
 	root.console.log[name] = function () { }
 };
+var log = root.console.log.register('Q');
 
 /**
  * This function is just here in case prefixfree.js is included
