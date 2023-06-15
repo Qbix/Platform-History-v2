@@ -5655,7 +5655,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
 				toolConstructor = _qtc[toolName];
 				if (typeof toolConstructor !== 'function') {
-					toolConstructor = function () { console.log("Missing tool constructor for " + toolName); }; 
+					toolConstructor = function () { log("Missing tool constructor for " + toolName); }; 
 				}
 			}
 			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);

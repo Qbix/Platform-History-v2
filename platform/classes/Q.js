@@ -14,6 +14,18 @@ var events = require('events');
 var path = require('path');
 var fs = require('fs');
 
+console.log.register = function (name) {
+	return console.log[name] = function() {
+		var params = Array.prototype.slice.call(arguments);
+		params.unshift((name+':').consoleColor(['Bright', 'BgGray', 'FgWhite']));
+		console.log.apply(console, params);
+	};
+};
+console.log.unregister = function (name) {
+	console.log[name] = function () { }
+};
+console.log.register('Q');
+
 var root = this;
 var QConstructor = function QConstructor() {};
 QConstructor.prototype = new events.EventEmitter();
@@ -2270,9 +2282,9 @@ Q.listen = function _Q_listen(options, callback) {
 					});
 					try {
 						server.setSecureContext(o);
-						console.log('Secure context updated.');
+						console.log.Q('Secure context updated.');
 					} catch (error) {
-						console.log('Error while updating secure context: ' + error.message);
+						console.log.Q('Error while updating secure context: ' + error.message);
 					}
 				}, 5000);
 			 });
@@ -2294,7 +2306,7 @@ Q.listen = function _Q_listen(options, callback) {
 	
 	var use = app.use;
 	app.use = function _app_use() {
-		console.log("Adding request handler under " + server.host + ":" + server.port + " :", arguments[0].name);
+		console.log.Q("Adding request handler under " + server.host + ":" + server.port + " :", arguments[0].name);
 		use.apply(this, Array.prototype.slice.call(arguments));
 	};
 	var methods = {
@@ -2323,7 +2335,7 @@ Q.listen = function _Q_listen(options, callback) {
 			} else if (typeof h !== 'string') {
 				h = h.toString();
 			}
-			console.log("Adding " + methods[k] + " handler under "
+			console.log.Q("Adding " + methods[k] + " handler under "
 				+ server.host + ":" + server.port
 				+ w + " :", h);
 			f.apply(this, Array.prototype.slice.call(arguments));
@@ -2361,9 +2373,11 @@ Q.listen = function _Q_listen(options, callback) {
 			next();
 		}
 	});
+
+	server.internal = (internalHost == host && internalPort == port);
+	server.internalString = server.internal ? ' (internal requests)' : '';
 	server.listen(port, host, function () {
-		var internalString = (internalHost == host && internalPort == port) ? ' (internal requests)' : '';
-		console.log('Q: listening at ' + host + ':' + port + internalString);
+		console.log.Q('listening at ' + host + ':' + port + server.internalString);
 		callback && callback(server.address());
 	});
 
@@ -2379,10 +2393,10 @@ Q.listen = function _Q_listen(options, callback) {
  * @method init
  * @param {Object} app An object that MUST contain one key:
  * @param {Object} app.DIR the directory of the app
- * @param {boolean} [notListen=false] Indicate wheather start http server. Useful for forking parallel processes.
+ * @param {boolean} [noServers=false] Indicate wherh to start http servers. Useful for forking parallel processes.
  * @throws {Q.Exception} if app is not provided or does not contain DIR field
  */
-Q.init = function _Q_init(app, notListen) {
+Q.init = function _Q_init(app, noServers) {
 	if (!app) { throw new Q.Exception("Q.init: app is required"); }
 	if (!app.DIR) { throw new Q.Exception("Q.init: app.DIR is required"); }
 
@@ -2564,7 +2578,7 @@ Q.init = function _Q_init(app, notListen) {
 		Q.app.name = Q.Config.expect(["Q", "app"]);
 		Q.Bootstrap.loadPlugins(function () {
 			Q.Bootstrap.loadHandlers(function () {
-				console.log(typeof notListen === "string" ? notListen : 'Q platform initialized!');
+				console.log.Q(typeof noServers === "string" ? noServers : 'PLATFORM INITIALIZED!');
 				/**
 				 * Qbix platform initialized
 				 * @event init
@@ -2573,7 +2587,7 @@ Q.init = function _Q_init(app, notListen) {
 				Q.emit('init', Q);
 			});
 		});
-	}, notListen);
+	}, noServers);
 };
 
 /**
@@ -3152,11 +3166,11 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 	message = (timestamp ? '['+Q.date('Y-m-d H:i:s')+'] ' : '')+(name ? name : 'Q')+': ' + message + "\n";
 
 	if (!name) {
-		return console.log(message);
+		return console.log.Q(message);
 	}
 	getLogStream(name, function (err, stream) {
 		if (err) {
-			console.log(err);
+			console.log.Q(err);
 			return;
 		}
 		stream.write(message);
@@ -3165,13 +3179,14 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 };
 
 Q.log.register = function (name) {
-	Q.log[name] = function() {
+	return Q.log[name] = function() {
 		Q.log(arguments[0], name, arguments[2], arguments[3]);
 	};
 };
 Q.log.unregister = function (name) {
 	Q.log[name] = function () { }
 };
+Q.log.register('Q');
 
 /**
  * Obtain a URL
@@ -3715,6 +3730,49 @@ Sp.matchTypes.adapters = {
 	qbixUserId: function () {
 		return this.match(/(@[a-z]{8}@)/gi) || [];
 	}
+};
+
+Sp.consoleColor = function(color) {
+	var code;
+	if (color instanceof Array) {
+		code = '';
+		color.forEach(function (c) {
+			code += _consoleColors[c];
+		});
+	} else {
+		code = _consoleColors[color];
+	}
+	return code + this + _consoleColors.Reset;
+};
+
+var _consoleColors = {
+	Reset: "\x1b[0m",
+	Bright: "\x1b[1m",
+	Dim: "\x1b[2m",
+	Underscore: "\x1b[4m",
+	Blink: "\x1b[5m",
+	Reverse: "\x1b[7m",
+	Hidden: "\x1b[8m",
+
+	FgBlack: "\x1b[30m",
+	FgRed: "\x1b[31m",
+	FgGreen: "\x1b[32m",
+	FgYellow: "\x1b[33m",
+	FgBlue: "\x1b[34m",
+	FgMagenta: "\x1b[35m",
+	FgCyan: "\x1b[36m",
+	FgWhite: "\x1b[37m",
+	FgGray: "\x1b[90m",
+
+	BgBlack: "\x1b[40m",
+	BgRed: "\x1b[41m",
+	BgGreen: "\x1b[42m",
+	BgYellow: "\x1b[43m",
+	BgBlue: "\x1b[44m",
+	BgMagenta: "\x1b[45m",
+	BgCyan: "\x1b[46m",
+	BgWhite: "\x1b[47m",
+	BgGray: "\x1b[100m",
 };
 
 /**
