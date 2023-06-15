@@ -2235,6 +2235,10 @@ Q.listen = function _Q_listen(options, callback) {
 	var host = options.host || internalHost;
 	var info;
 	var sslCertsDirTimeout;
+	var isInternal = (internalHost == host && internalPort == port);
+	if (isInternal) {
+		options.https = false;
+	}
 
 	if (port === null)
 		throw new Q.Exception("Q.listen: Missing config field: Q/nodeInternal/port");
@@ -2270,7 +2274,9 @@ Q.listen = function _Q_listen(options, callback) {
 					o[k] = fs.readFileSync(h[k]).toString();
 				}
 			});
-			server = https.createServer(o, app);
+			server = https.createServer(o, function () {
+				debugger;
+			});
 
 			fs.watch(certFolder, function (event, filename) {
 				clearTimeout(sslCertsDirTimeout);
@@ -2300,6 +2306,9 @@ Q.listen = function _Q_listen(options, callback) {
 	server.attached = {
 		express: app
 	};
+	if (isInternal) {
+		server.internal = true;
+	}
 	
 	var bodyParser = require('body-parser');
 	app.use(bodyParser());
@@ -2355,7 +2364,7 @@ Q.listen = function _Q_listen(options, callback) {
 		if (headers = Q.Config.get(['Q', 'node', 'headers'], false)) {
 			res.header(headers);
 		}
-		if (internalHost == host && internalPort == port) {
+		if (server.internal) {
 			req.internal = true;
 			Q.Utils.validateRequest(req, res, _requested);
 		} else {
