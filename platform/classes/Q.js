@@ -2274,9 +2274,7 @@ Q.listen = function _Q_listen(options, callback) {
 					o[k] = fs.readFileSync(h[k]).toString();
 				}
 			});
-			server = https.createServer(o, function () {
-				debugger;
-			});
+			server = https.createServer(o, app);
 
 			fs.watch(certFolder, function (event, filename) {
 				clearTimeout(sslCertsDirTimeout);
