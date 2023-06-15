@@ -2262,9 +2262,6 @@ Q.listen = function _Q_listen(options, callback) {
 			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
 			var keys = ['key', 'cert', 'ca', 'dhparam'];
 			var certFolder = path.dirname(h.cert)
-			var privateKeyPath = h.key;
-			var certPath = h.cert;
-			var caPath = h.ca;
 			if (Q.isPlainObject(options.https)) {
 				Q.extend(h, options.https);
 			}

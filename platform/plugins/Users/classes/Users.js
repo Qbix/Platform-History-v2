@@ -306,6 +306,7 @@ function Users_request_handler(req, res, next) {
 				});
 			}
 			break;
+		
 		case 'Users/checkIfOnline':
 
 			var operatorUserId = parsed.operatorUserId;
