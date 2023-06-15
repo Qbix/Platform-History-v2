@@ -34,7 +34,7 @@ var _listening = false;
  * @param {Object} [options.socket={}] Options for the socket server
  * @param {Object} [options.socket.path]
  * @param {Object} [options.origins] Array of allowed origins for requests, defaults to Q.app.url
- * @param {Object} [options.https] If you use https, pass https options here (see Q.listen)
+ * @param {Object} [options.https] To avoid starting https server, pass false here. Otherwise you can pass options to https.createServer here, to override the ones in the "Q"/"node"/"https" config options, if any.
  */
 Socket.listen = function (options) {
 	options = options || {};
