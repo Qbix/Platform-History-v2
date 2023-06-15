@@ -553,16 +553,11 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 * @method relatedResult
 	 * @param {Object} result related result
 	 * @param {function} onUpdate callback executed when updated
-	 * @param {boolean} partial Flag indicated that loaded partial data. This case no need to compare streams for exiting.
+	 * @param {boolean} [partial] flag to indicate that loaded partial data. This case no need to compare streams for exiting.
 	 */
-	relatedResult: function (result, partial, onUpdate) {
+	relatedResult: function (result, onUpdate, partial) {
 		var tool = this;
 		tool.stream = result.stream;
-
-		if (typeof arguments[1] === "function") {
-			onUpdate = arguments[1];
-			partial = false;
-		}
 
 		var entering, exiting, updating;
 		entering = exiting = updating = null;
@@ -653,7 +648,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					return console.warn("Streams/related refresh: " + errorMessage);
 				}
 
-				tool.relatedResult(this, true, onUpdate);
+				tool.relatedResult(this, onUpdate, true);
 			}
 		);
 	},
