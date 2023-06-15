@@ -634,7 +634,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	renderNotification: function(message){
 		var tool = this;
 		var state = tool.state;
-		var notificationTemplate = tool.text.chat[message.action.toCapitalized()];
+		var notificationTemplate = tool.text.chat.Notifications[message.action.toCapitalized()];
 		var m = Q.extend({
 			time: Date.now() / 1000
 		}, message);
