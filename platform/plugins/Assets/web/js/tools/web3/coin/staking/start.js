@@ -151,8 +151,6 @@ Donating 80% to {{avatar by xid}} <-- show only if donation > 0%
 Staking pool duration: {{ duration }}:
 [ stake amount ] _Max_ [[ Stake ]]
 `
-			tool.fillPoolSelect();
-			
 			
 			Q.Template.render("Assets/web3/coin/staking/start", {
 				chainId: state.chainId,
@@ -160,6 +158,9 @@ Staking pool duration: {{ duration }}:
 			}, function (err, html) {
 				Q.replace(tool.element, html);
 				///
+				tool.fillPoolSelect();
+			
+			
 				// !!
 				
 				///
@@ -187,7 +188,7 @@ Staking pool duration: {{ duration }}:
 			var tool = this;
 			var state = tool.state;
 			
-			var $selectElement = $(this.element).find('input[name=reserveToken]');
+			var $selectElement = $(tool.element).find('select[name=reserveToken]');
 			//var contract;
 			$selectElement.addClass("Q_working");
 			Assets.CommunityCoins.Pools.getAllExtended(
@@ -199,10 +200,20 @@ Staking pool duration: {{ duration }}:
 					if (err) {
 						return console.warn(err);
 					}
-				
-//					instanceInfos.forEach(function(i, index){
-//						$selectElement.append('<option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>')
-//					});
+					$selectElement.html('');
+					
+					instanceInfos.forEach(function(i, index){
+					
+						var selectTitle;
+						var selectVal = i.tokenErc20;
+						if (Q.isEmpty(i.erc20TokenInfo.name) && Q.isEmpty(i.erc20TokenInfo.symbol)) {
+							selectTitle = Assets.NFT.Web3.minimizeAddress(selectVal, 20, 3);
+						} else {
+							selectTitle = i.erc20TokenInfo.name + "("+i.erc20TokenInfo.symbol+")";
+						}
+						$selectElement.append('<option value="'+selectVal+'">'+selectTitle+'</option>');
+						
+					});
 					/*
 					<td>{{i.tokenErc20}}</td>
 		<td>{{i.duration}}</td>
@@ -213,40 +224,11 @@ Staking pool duration: {{ duration }}:
 		<td>{{i.numerator}}</td>
 		<td>{{i.denominator}}</td>
 					*/
+				   $selectElement.removeClass("Q_working");
 					
-					console.log("instanceInfos = ", instanceInfos);
-					return (err, instanceInfos);
 				}
 			);
-//	
-//			return tool._getCommunityCoinContract().
-//			).then(function (_contract) {
-//				contract = _contract;
-//				return contract.producedBy();
-//
-//			}).then(function (tx) {
-//				return tx.wait();
-//			}).then(function (receipt) {
-//
-//				if (receipt.status == 0) {
-//					throw 'Smth unexpected';
-//				}
-//				tool.refreshPoolList();	
-//
-//			}).catch(function (err) {
-//
-//				Q.Notices.add({
-//					content: Q.grabMetamaskError(err, [contract]),
-//					timeout: 5
-//				});
-//
-//
-//
-//			}).finally(function(){
-//				$element.removeClass("Q_working");
-//				invokeObj.close();
-//			});
-			
+
 		}
 	});
 
@@ -263,15 +245,16 @@ Staking pool duration: {{ duration }}:
 						<option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>
 					{{/each}}
 					</select>
-					<input name="tokenErc20" type="text" class="form-control">
-					<small class="form-text text-muted">{{coin.staking.start.form.small.tokenErc20}}</small>
+					<small class="form-text text-muted">{{coin.staking.start.form.small.reserveToken}}</small>
 				</div>
 
 				<div class="form-group">
-					<label>{{coin.staking.start.form.labels.duration}}</label>
+					<label>{{coin.staking.start.form.labels.amount}}</label>
 					<input name="amount" type="text" class="form-control" placeholder="{{coin.staking.start.placeholders.amount}}">
 					<small class="form-text text-muted">{{coin.staking.start.form.small.amount}}</small>
 				</div>
+	
+				<button name="stake" class="Assets_web3_coin_staking_start_stake Q_button">{{coin.staking.start.btns.stake}}</button>	
 			</div>
 		</div>
 		<div class="col-sm-4">

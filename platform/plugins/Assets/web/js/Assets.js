@@ -1439,31 +1439,40 @@
 				 * @param {object} options
 				 */
 				getAllExtended: function(communityCoinAddress, abiPaths, chainId, userAddress, callback){
-					var t = Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId);
 					
-					t.then(function (instanceInfos) {
+					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
+					.then(function (instanceInfos) {
+						var p = [];
+						p.push(new Promise(function (resolve, reject) {resolve(instanceInfos)}));
 
-						var p = [];
-						
-						p.push(
-							new Promise(function (resolve, reject) {resolve(instanceInfos)})
-						);
-						
-							instanceInfos.forEach(function(i){
-								p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
-							});
-							return Promise.all(p);
-					}).then(function (_ref) {
-						
-						var instanceInfos = _ref.shift(0);
-						var p = [];
-						
-						_ref.forEach(function(i, index){
-							instanceInfos[index].erc20TokenInfo = i;
+						instanceInfos.forEach(function(i){
+							p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
 						});
-						Q.handle(callback, null, [null, instanceInfos]);
+
+						return Promise.allSettled(p);
+					}).then(function (_ref) {
+
+						var instanceInfos = _ref.shift(0);
+
+						var ret = [];
+						_ref.forEach(function(i, index){
+							ret.push(
+								$.extend(
+									{}, 
+									instanceInfos.value[index], 
+									{
+										"erc20TokenInfo": i.status == 'rejected' ? 
+														{name:"", symbol:"", balance:""} : 
+														{name:i.value[0], symbol:i.value[1], balance:i.value[2]}
+									}
+								)
+							); 
+						});
+
+						Q.handle(callback, null, [null, ret]);
 						
 					}).catch(function(err){
+						console.warn(err);
 						Q.handle(callback, null, [err.reason]);
 					});
 				},
@@ -1543,35 +1552,6 @@
 				}
 			},
 		},
-		
-//		.then(function (instanceInfos) {	
-//						var p = [];
-//						p.push(
-//							new Promise(function (resolve, reject) {resolve(instanceInfos)})
-//						);
-//						if (Q.isEmpty(instanceInfos)) {
-//							
-//						} else {
-//							instanceInfos.forEach(function(i){
-//								p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20))
-//							});
-//						}
-//						return Promise.all(p);
-//						
-//					}).then(function (_ref) {
-//						var instanceInfos = _ref.shift(0);
-//						var p = [];
-//						p.push(
-//							new Promise(function (resolve, reject) {resolve(instanceInfos)})
-//						);
-//						_ref.forEach(function(i, index){
-//							p.push(_ref[i])
-//						});
-//						
-//						return Promise.all(p);
-//					})
-		
-		
 		
 		Web3: {
 			/**
