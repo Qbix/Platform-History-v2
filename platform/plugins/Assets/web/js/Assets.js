@@ -1707,6 +1707,10 @@
 		"Assets/web3/coin/staking/start": {
 			js: "{{Assets}}/js/tools/web3/coin/staking/start.js",
 			css: "{{Assets}}/css/tools/web3/coin/staking/start.css"
+		},
+		"Assets/web3/coin/staking/history": {
+			js: "{{Assets}}/js/tools/web3/coin/staking/history.js",
+			css: "{{Assets}}/css/tools/web3/coin/staking/history.css"
 		}
 	});
     

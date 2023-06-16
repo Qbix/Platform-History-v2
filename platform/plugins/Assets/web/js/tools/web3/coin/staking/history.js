@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 
 (function (window, Q, $, undefined) {
@@ -83,11 +88,11 @@
 //	*  @param {Integer} [options.fields.numerator.value]
 //	*  @param {Integer} [options.fields.denominator.value]
 //	*/
-	Q.Tool.define("Assets/web3/coin/staking/start", function (options) {
+	Q.Tool.define("Assets/web3/coin/staking/history", function (options) {
 		
 		var tool = this;
 		var state = this.state;
-		
+	/*	
 		var defaultsValidate = {
             notEmpty: "<b>%key%</b> cannot be empty", 
             integer: "<b>%key%</b> must be an integer", 
@@ -111,7 +116,7 @@
 		if (Q.isEmpty(state.chainId)) {
 			return console.warn("chainId required!");
 		}
-
+*/
 		tool.refresh();
 
 	},
@@ -145,153 +150,30 @@
 		refresh: function () {
 			var tool = this;
 			var state = tool.state;
-			`
-			Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
-Donating 80% to {{avatar by xid}} <-- show only if donation > 0%
-Staking pool duration: {{ duration }}:
-[ stake amount ] _Max_ [[ Stake ]]
-`
-			
-			Q.Template.render("Assets/web3/coin/staking/start", {
+				
+			Q.Template.render("Assets/web3/coin/staking/history", {
 				chainId: state.chainId,
 				chains: Assets.Web3.chains
 			}, function (err, html) {
 				Q.replace(tool.element, html);
 				///
 				
-				//activate history tool
-				var $historyContainer = $(tool.element).find('.Assets_web3_coin_staking_start_historyContainer');
-				$('<div />')
-				.tool('Assets/web3/coin/staking/history', {})
-				.appendTo($historyContainer).activate(function () {
-				  // called after tool was activated
-				});
-
-
-				tool.fillPoolSelect();
+				$(tool.element).find('.lastTsupdated').html(new Date(Date.now()).toLocaleTimeString("en-US"));
 			
-				
-				
-				$("button[name=refresh_history]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-					e.preventDefault();
-					e.stopPropagation();
-					
-					tool._historyRefresh();
-				});
+			
 				// !!
 				
 				///
 			});
-		},
-		_getCommunityCoinContract: function() {
-			return Q.Users.Web3.getContract(
-				state.abiPathCommunityCoin, 
-				{
-					contractAddress: state.communityCoinAddress,
-					chainId: state.chainId
-				}
-			)
-		},
-		_getStakingPoolContract: function() {
-			return Q.Users.Web3.getContract(
-				state.abiPathCommunityStakingPool, 
-				{
-					contractAddress: state.communityStakingPoolAddress,
-					chainId: state.chainId
-				}
-			)
-		},
-		_historyRefresh: function(){
-			var tool = this;
-
-			var historyTool = Q.Tool.from($(tool.element).find('.Assets_web3_coin_staking_history_tool'), "Assets/web3/coin/staking/history");
-			historyTool.refresh();
-		},
-		fillPoolSelect: function(){
-			var tool = this;
-			var state = tool.state;
-			
-			var $selectElement = $(tool.element).find('select[name=reserveToken]');
-			//var contract;
-			$selectElement.addClass("Q_working");
-			Assets.CommunityCoins.Pools.getAllExtended(
-				state.communityCoinAddress, 
-				null, 
-				state.chainId, 
-				ethers.utils.getAddress(tool.loggedInUserXid),
-				function (err, instanceInfos) {
-					if (err) {
-						return console.warn(err);
-					}
-					$selectElement.html('');
-					
-					instanceInfos.forEach(function(i, index){
-					
-						var selectTitle;
-						var selectVal = i.tokenErc20;
-						if (Q.isEmpty(i.erc20TokenInfo.name) && Q.isEmpty(i.erc20TokenInfo.symbol)) {
-							selectTitle = Assets.NFT.Web3.minimizeAddress(selectVal, 20, 3);
-						} else {
-							selectTitle = i.erc20TokenInfo.name + "("+i.erc20TokenInfo.symbol+")";
-						}
-						$selectElement.append('<option value="'+selectVal+'">'+selectTitle+'</option>');
-						
-					});
-					/*
-					<td>{{i.tokenErc20}}</td>
-		<td>{{i.duration}}</td>
-		<td>{{i.bonusTokenFraction}}</td>
-		<td>{{i.popularToken}}</td>
-
-		<td>{{i.rewardsRateFraction}}</td>
-		<td>{{i.numerator}}</td>
-		<td>{{i.denominator}}</td>
-					*/
-				   $selectElement.removeClass("Q_working");
-					
-				}
-			);
-
 		}
 	});
 
-	Q.Template.set("Assets/web3/coin/staking/start",
+	Q.Template.set("Assets/web3/coin/staking/history",
 	`
-	<div>
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="form Assets_web3_coin_staking_start_form">
-					<div class="form-group">
-						<label>{{coin.staking.start.form.labels.reserveToken}}</label>
-						<select class="form-control" name="reserveToken">
-						{{#each chains}}
-							<option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>
-						{{/each}}
-						</select>
-						<small class="form-text text-muted">{{coin.staking.start.form.small.reserveToken}}</small>
-					</div>
-
-					<div class="form-group">
-						<label>{{coin.staking.start.form.labels.amount}}</label>
-						<input name="amount" type="text" class="form-control" placeholder="{{coin.staking.start.placeholders.amount}}">
-						<small class="form-text text-muted">{{coin.staking.start.form.small.amount}}</small>
-					</div>
-
-					<button name="stake" class="Assets_web3_coin_staking_start_stake Q_button">{{coin.staking.start.btns.stake}}</button>	
-<button name="refresh_history" class="Q_button">Refresh history</button>	
-				</div>
-			</div>
-			<div class="col-sm-4">
-				Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
-		Donating 80% to {{avatarbyxid}} <-- show only if donation > 0%
-		Staking pool duration: {{ duration }}:
-		[ stake amount ] _Max_ [[ Stake ]]
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12 Assets_web3_coin_staking_start_historyContainer">
-			</div>
-		</div>
+	<div class="Assets_web3_coin_staking_history">
+	
+	Template: "Assets/web3/coin/staking/history"
+	Update at: <div class="lastTsupdated"></div>
 	</div>
 	`,
 		{text: ["Assets/content"]}
