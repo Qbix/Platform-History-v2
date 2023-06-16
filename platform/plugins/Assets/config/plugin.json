@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.14",
+				"version": "1.0.15",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -41,6 +41,9 @@
 			"assetsIcons": { "module": "Assets", "action": "icons" },
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
 			"Assets/subscription": {"module": "Assets", "action": "subscription"},
+			"Assets/connected": {"module": "Assets", "action": "connected"},
+			"Assets/connected/:payments": {"module": "Assets", "action": "connected"},
+			"Assets/connected/:payments/:method": {"module": "Assets", "action": "connected"},
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
