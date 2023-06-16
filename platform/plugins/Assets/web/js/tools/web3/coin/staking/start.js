@@ -160,24 +160,16 @@ Staking pool duration: {{ duration }}:
 				///
 				
 				//activate history tool
-				var $historyContainer = $(tool.element).find('.Assets_web3_coin_staking_start_historyContainer');
-				$('<div />')
-				.tool('Assets/web3/coin/staking/history', {})
-				.appendTo($historyContainer).activate(function () {
-				  // called after tool was activated
-				});
+//				var $historyContainer = $(tool.element).find('.Assets_web3_coin_staking_start_historyContainer');
+//				$('<div />')
+//				.tool('Assets/web3/coin/staking/history', {})
+//				.appendTo($historyContainer).activate(function () {
+//				  // called after tool was activated
+//				});
 
 
 				tool.fillPoolSelect();
 			
-				
-				
-				$("button[name=refresh_history]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-					e.preventDefault();
-					e.stopPropagation();
-					
-					tool._historyRefresh();
-				});
 				// !!
 				
 				///
@@ -207,13 +199,30 @@ Staking pool duration: {{ duration }}:
 			var historyTool = Q.Tool.from($(tool.element).find('.Assets_web3_coin_staking_history_tool'), "Assets/web3/coin/staking/history");
 			historyTool.refresh();
 		},
+		_renderPoolInfo: function(optionSelected, data){
+			var tool = this;
+			
+			var stake_amount = $(tool.element).find('input[name=amount]').val();
+			
+			Q.Template.render("Assets/web3/coin/staking/start/poolInfo", {
+				selectValue:optionSelected.val(),
+				selectTitle:optionSelected.html(),
+				//data: data,
+				data: data,
+				stake_amount: Q.isEmpty(stake_amount) ? 0 : stake_amount
+			}, function (err, html) {
+				Q.replace($(tool.element).find('.infoContainer')[0], html);
+			});
+		},
 		fillPoolSelect: function(){
 			var tool = this;
 			var state = tool.state;
 			
 			var $selectElement = $(tool.element).find('select[name=reserveToken]');
+			var $infoContainer = $(tool.element).find('.infoContainer');
 			//var contract;
 			$selectElement.addClass("Q_working");
+			$infoContainer.addClass("Q_working");
 			Assets.CommunityCoins.Pools.getAllExtended(
 				state.communityCoinAddress, 
 				null, 
@@ -234,11 +243,17 @@ Staking pool duration: {{ duration }}:
 						} else {
 							selectTitle = i.erc20TokenInfo.name + "("+i.erc20TokenInfo.symbol+")";
 						}
-						$selectElement.append('<option value="'+selectVal+'">'+selectTitle+'</option>');
+						
+						$selectElement.append(`
+						<option 
+							data-instancedata='${JSON.stringify(i)}'
+							value="${selectVal}">${selectTitle}
+						</option>
+						`);
 						
 					});
 					/*
-					<td>{{i.tokenErc20}}</td>
+		<td>{{i.tokenErc20}}</td>
 		<td>{{i.duration}}</td>
 		<td>{{i.bonusTokenFraction}}</td>
 		<td>{{i.popularToken}}</td>
@@ -248,6 +263,16 @@ Staking pool duration: {{ duration }}:
 		<td>{{i.denominator}}</td>
 					*/
 				   $selectElement.removeClass("Q_working");
+				   $selectElement.off("change").on("change", function (e) {
+						var optionSelected = $("option:selected", this);
+						//var valueSelected = this.value;
+						var data = optionSelected.data();
+						
+						tool._renderPoolInfo(optionSelected, data.instancedata);
+						
+						$infoContainer.removeClass("Q_working");
+				
+				   }).trigger('change');
 					
 				}
 			);
@@ -278,21 +303,33 @@ Staking pool duration: {{ duration }}:
 					</div>
 
 					<button name="stake" class="Assets_web3_coin_staking_start_stake Q_button">{{coin.staking.start.btns.stake}}</button>	
-<button name="refresh_history" class="Q_button">Refresh history</button>	
+
 				</div>
 			</div>
-			<div class="col-sm-4">
-				Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
-		Donating 80% to {{avatarbyxid}} <-- show only if donation > 0%
-		Staking pool duration: {{ duration }}:
-		[ stake amount ] _Max_ [[ Stake ]]
+			<div class="col-sm-4 infoContainer" >
+				Loading
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12 Assets_web3_coin_staking_start_historyContainer">
+				{{&tool "Assets/web3/coin/staking/history"}}
+	<!--  salesAddress=salesAddress abiPath=abiNFTSales -->
 			</div>
 		</div>
 	</div>
+	`,
+		{text: ["Assets/content"]}
+	);
+	
+	Q.Template.set("Assets/web3/coin/staking/start/poolInfo",
+	`
+		Stake {{selectTitle}} in {{data.communityCoinInfo.name}}<br>
+		
+		{{#if data.donations}}
+		Donating % to [[avatarbyxid]]<br>
+		{{/if}} 
+		Staking pool duration: {{data.duration}}:<br>
+		{{stake_amount}} _Max_ 
 	`,
 		{text: ["Assets/content"]}
 	);

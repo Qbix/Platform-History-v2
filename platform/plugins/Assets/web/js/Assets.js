@@ -1444,7 +1444,9 @@
 					.then(function (instanceInfos) {
 						var p = [];
 						p.push(new Promise(function (resolve, reject) {resolve(instanceInfos)}));
-
+						
+						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(communityCoinAddress, userAddress, chainId));
+						
 						instanceInfos.forEach(function(i){
 							p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
 						});
@@ -1453,17 +1455,36 @@
 					}).then(function (_ref) {
 
 						var instanceInfos = _ref.shift(0);
+						var communityCoinInfos = _ref.shift(0);
 
 						var ret = [];
 						_ref.forEach(function(i, index){
+							var t;
+							t = {...instanceInfos.value[index]};
+							for (var j in t) {
+								if (
+								(typeof t[j] == 'object') && 
+								(typeof t.duration._isBigNumber == 'boolean') &&
+								(t.duration._isBigNumber == true)
+								) {
+									t[j] = t[j].toNumber();
+								}
+							}
+							
 							ret.push(
 								$.extend(
 									{}, 
-									instanceInfos.value[index], 
+									//instanceInfos.value[index], 
+									t, 
 									{
 										"erc20TokenInfo": i.status == 'rejected' ? 
 														{name:"", symbol:"", balance:""} : 
 														{name:i.value[0], symbol:i.value[1], balance:i.value[2]}
+									},
+									{
+										"communityCoinInfo": communityCoinInfos.status == 'rejected' ? 
+														{name:"", symbol:"", balance:""} : 
+														{name:communityCoinInfos.value[0], symbol:communityCoinInfos.value[1], balance:communityCoinInfos.value[2]}
 									}
 								)
 							); 

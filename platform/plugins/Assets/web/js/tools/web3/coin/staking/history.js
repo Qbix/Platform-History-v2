@@ -118,6 +118,7 @@
 		}
 */
 		tool.refresh();
+		setInterval(function(){tool.refresh();},5000);
 
 	},
 
@@ -172,7 +173,7 @@
 	`
 	<div class="Assets_web3_coin_staking_history">
 	
-	Template: "Assets/web3/coin/staking/history"
+	Template: "Assets/web3/coin/staking/history"<br>
 	Update at: <div class="lastTsupdated"></div>
 	</div>
 	`,
