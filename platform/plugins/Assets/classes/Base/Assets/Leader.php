@@ -16,7 +16,7 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.app] defaults to ""
+ * @param {string} [$fields.communityId] defaults to ""
  * @param {string|Db_Expression} [$fields.day] defaults to ""
  * @param {string} [$fields.userId] defaults to ""
  * @param {integer} [$fields.points] defaults to 0
@@ -24,7 +24,7 @@
 abstract class Base_Assets_Leader extends Db_Row
 {
 	/**
-	 * @property $app
+	 * @property $communityId
 	 * @type string
 	 * @default ""
 	 * 
@@ -58,7 +58,7 @@ abstract class Base_Assets_Leader extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'app',
+			  0 => 'communityId',
 			  1 => 'day',
 			  2 => 'userId',
 			)
@@ -277,49 +277,49 @@ abstract class Base_Assets_Leader extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_app
+	 * @method beforeSet_communityId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_app($value)
+	function beforeSet_communityId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
-			return array('app', $value);
+			return array('communityId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".app");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".app");
-		return array('app', $value);			
+			throw new Exception('Must pass a string to '.$this->getTable().".communityId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".communityId");
+		return array('communityId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the app field
+	 * Returns the maximum string length that can be assigned to the communityId field
 	 * @return {integer}
 	 */
-	function maxSize_app()
+	function maxSize_communityId()
 	{
 
-		return 255;			
+		return 31;			
 	}
 
 	/**
-	 * Returns schema information for app column
+	 * Returns schema information for communityId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_app()
+	static function column_communityId()
 	{
 
 return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -367,7 +367,7 @@ return array (
   0 => 
   array (
     0 => 'date',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -498,7 +498,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('app','day','userId') as $name) {
+			foreach (array('communityId','day','userId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -517,7 +517,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('app', 'day', 'userId', 'points');
+		$field_names = array('communityId', 'day', 'userId', 'points');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
