@@ -21,7 +21,7 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {String|Buffer} [fields.app] defaults to ""
+ * @param {String|Buffer} [fields.communityId] defaults to ""
  * @param {String|Db.Expression} [fields.day] defaults to ""
  * @param {String} [fields.userId] defaults to ""
  * @param {Integer} [fields.points] defaults to 0
@@ -33,7 +33,7 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property app
+ * @property communityId
  * @type String|Buffer
  * @default ""
  * 
@@ -243,7 +243,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"app",
+		"communityId",
 		"day",
 		"userId"
 	];
@@ -266,7 +266,7 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"app",
+		"communityId",
 		"day",
 		"userId",
 		"points"
@@ -276,39 +276,39 @@ Base.fieldNames = function () {
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_app
+ * @method beforeSet_communityId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_app = function (value) {
+Base.prototype.beforeSet_communityId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".app");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".app");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".communityId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".communityId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the app field
+	 * Returns the maximum string length that can be assigned to the communityId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_app = function () {
+Base.prototype.maxSize_communityId = function () {
 
-		return 255;
+		return 31;
 };
 
 	/**
-	 * Returns schema information for app column
+	 * Returns schema information for communityId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_app = function () {
+Base.column_communityId = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -329,7 +329,7 @@ Base.prototype.beforeSet_day = function (value) {
 	 */
 Base.column_day = function () {
 
-return [["date","255","",false],false,"PRI",null];
+return [["date","31","",false],false,"PRI",null];
 };
 
 /**
@@ -414,7 +414,7 @@ return [["smallint","4","",false],false,"","0"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['app','day','userId'], i;
+	var fields = ['communityId','day','userId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

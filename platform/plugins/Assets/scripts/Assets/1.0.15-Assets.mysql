@@ -1,0 +1,4 @@
+ALTER TABLE {{prefix}}connected DROP PRIMARY KEY;
+ALTER TABLE {{prefix}}connected CHANGE merchantUserId userId varbinary(8) NOT NULL;
+ALTER TABLE {{prefix}}connected CHANGE refreshToken refreshToken varchar(255) DEFAULT NULL;
+ALTER TABLE {{prefix}}connected ADD PRIMARY KEY (userId,payments(80));
