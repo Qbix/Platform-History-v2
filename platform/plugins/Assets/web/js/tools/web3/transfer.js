@@ -123,15 +123,18 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     _getSelectedUser(state.recipientUserId);
                 }
 
+                tool.assetsWeb3BalanceTool = null;
                 if (!state.tokenInfo) {
-                    $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance").activate();
+                    $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance").activate(function () {
+                        tool.assetsWeb3BalanceTool = this;
+                    });
                 }
                 var $amount = $("input[name=amount]", tool.element);
                 $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
                     var tokenInfo = state.tokenInfo;
                     if (Q.isEmpty(tokenInfo)) {
-                        tokenInfo = Q.Tool.from($(".Assets_web3_balance_tool", tool.element)[0], "Assets/web3/balance").getValue();
+                        tokenInfo = tool.assetsWeb3BalanceTool.getValue();
                     }
                     var amount = parseFloat($amount.val());
 
