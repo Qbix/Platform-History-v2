@@ -1638,6 +1638,8 @@
 			Assets.texts = text;
 		});
 
+		Q.extend(Q.Users.Web3.chains, Q.Assets.Web3.chains);
+
 		// Listen for Assets/user/credits stream changes to update Q.Assets.Credits on client.
 		// and listem messages to show Q.Notices
 		var _listenUserStream = function () {
