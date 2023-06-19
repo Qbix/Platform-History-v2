@@ -1093,7 +1093,9 @@
 						'Assets/templates/R1/NFT/factory',
 						chainId
 					).then(function () {
-						var events = {
+						// commented becasue contract.on send infinite requests to publicRPC url
+						//TODO: need to use some third party API to listen contract event
+						/*var events = {
 							InstanceCreated: "onInstanceCreated",
 							OwnershipTransferred: "onInstanceOwnershipTransferred"
 						};
@@ -1105,9 +1107,9 @@
 									});
 								}
 							});
-						});
+						});*/
 						return contract;
-						Q.handle(callback, null, [err, contract]);
+						//Q.handle(callback, null, [err, contract]);
 					});
 				},
 				/**
@@ -1141,7 +1143,9 @@
 							SeriesPutOnSale: "onSeriesPutOnSale",
 							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
 						};
-						Q.each(contract.ABI, function (index, obj) {
+						// commented becasue contract.on send infinite requests to publicRPC url
+						//TODO: need to use some third party API to listen contract event
+						/*Q.each(contract.ABI, function (index, obj) {
 							Q.each(events, function (event1, event2) {
 								if (obj.type === "event" && obj.name === event1) {
 									contract.on(event1, function () {
@@ -1149,7 +1153,7 @@
 									});
 								}
 							});
-						});
+						});*/
 
 						Q.handle(callback, null, [null, contract]);
 					});

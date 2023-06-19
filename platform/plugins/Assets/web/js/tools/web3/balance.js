@@ -88,8 +88,10 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				var results = [];
 				Q.each(balance, function (i, item) {
 					var amount = _parseAmount(item.balance);
-	
-					if (parseInt(item.token_address) > 0) {
+
+					// commented becasue contract.on send infinite requests to publicRPC url
+					//TODO: need to use some third party API to listen contract event
+					/*if (parseInt(item.token_address) > 0) {
 						// listen transfer event
 						Q.Users.Web3.getContract("Assets/templates/R1/CommunityCoin/contract", {
 							chainId: state.chainId,
@@ -115,7 +117,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 								});
 							});
 						});
-					}
+					}*/
 	
 					results.push({
 						tokenAmount: amount,
