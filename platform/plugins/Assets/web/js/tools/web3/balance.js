@@ -5,6 +5,7 @@
  */
 
 var Assets = Q.Assets;
+var Users = Q.Users;
 
 /**
  * Show balance of tokens by chain and token
@@ -14,23 +15,15 @@ var Assets = Q.Assets;
  */
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
-	var state = this.state;
-	var loggedInUser = Q.Users.loggedInUser;
-	if (!loggedInUser) {
-		return console.warn("user not logged in");
-	}
 
-	tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
-
-	if (Q.isEmpty(state.userId)) {
-		return console.warn("userId not found");
-	}
-
-	tool.refresh();
+	Users.Web3.connect(function () {
+		Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
+		tool.refresh();
+	});
 },
 
 { // default options here
-	userId: Q.Users.loggedInUserId(),
+	walletAddress: null,
 	chainId: null,
 	tokenAddresses: null,
 	template: "Assets/web3/balance/select",
@@ -41,33 +34,49 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	refresh: function () {
 		var tool = this;
 		var state = tool.state;
-
-		Q.Template.render("Assets/web3/balance", {
-			chainId: state.chainId,
-			chains: Assets.Web3.chains
-		}, function (err, html) {
-			Q.replace(tool.element, html);
-
-			if (state.chainId) {
-				tool.balanceOf();
-			} else {
-				$("select[name=chains]", tool.element).on("change", function () {
-					state.chainId = $(this).val();
-					$("select[name=tokens]", tool.element).addClass("Q_disabled");
-					tool.balanceOf();
-				}).trigger("change");
+		var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
+		var _getWalletAddress = function (callback) {
+			if (state.walletAddress) {
+				return Q.handle(callback, null, [state.walletAddress]);
 			}
+
+			Users.Web3.getWalletAddress().then(function (address) {
+				return Q.handle(callback, null, [address]);
+			});
+		};
+
+		_getWalletAddress(function (walletAddress) {
+			if (!ethers.utils.isAddress(walletAddress)) {
+				return Q.alert(tool.text.errors.WalletInvalid);
+			}
+
+			Q.Template.render("Assets/web3/balance", {
+				chainId: state.chainId,
+				chains: Assets.Web3.chains
+			}, function (err, html) {
+				Q.replace(tool.element, html);
+
+				if (state.chainId) {
+					tool.balanceOf(walletAddress, state.chainId);
+				} else {
+					$("select[name=chains]", tool.element).on("change", function () {
+						var chainId = $(this).val();
+						$("select[name=tokens]", tool.element).addClass("Q_disabled");
+						tool.balanceOf(walletAddress, chainId);
+					}).trigger("change");
+				}
+			});
 		});
 	},
-	balanceOf: function (callback) {
+	balanceOf: function (walletAddress, chainId) {
 		var tool = this;
 		var state = this.state;
 		var _parseAmount = function (amount) {
 			return parseFloat(parseFloat(ethers.utils.formatUnits(amount)).toFixed(12));
 		};
 
-		if (!state.chainId) {
-			Q.Template.render("Assets/web3/balance/credits", {}, function (err, html) {
+		if (!chainId) {
+			return Q.Template.render("Assets/web3/balance/credits", {}, function (err, html) {
 				if (err) {
 					return;
 				}
@@ -76,11 +85,10 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				Q.activate(tool.element);
 				Q.handle(state.onRefresh, tool);
 			});
-			return;
 		}
 
-		Q.Users.init.web3(function () { // to load ethers.js
-			Q.handle(Assets.Currencies.balanceOf, tool, [state.userId, state.chainId, function (err, balance) {
+		Users.init.web3(function () { // to load ethers.js
+			Q.handle(Assets.Currencies.balanceOf, tool, [walletAddress, chainId, function (err, balance) {
 				if (err) {
 					return console.warn(err);
 				}
@@ -93,8 +101,8 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 					//TODO: need to use some third party API to listen contract event
 					/*if (parseInt(item.token_address) > 0) {
 						// listen transfer event
-						Q.Users.Web3.getContract("Assets/templates/R1/CommunityCoin/contract", {
-							chainId: state.chainId,
+						Users.Web3.getContract("Assets/templates/R1/CommunityCoin/contract", {
+							chainId: chainId,
 							contractAddress: item.token_address,
 							readOnly: true
 						}, function (err, contract) {
@@ -149,7 +157,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var $selectedOption = $("select[name=tokens]", this.element).find(":selected");
 		if ($selectedOption.length) {
 			return {
-				chainId: state.chainId,
+				chainId: state.chainId || $("select[name=chains]", tool.element).val(),
 				tokenAmount: $selectedOption.attr("data-amount"),
 				tokenName: $selectedOption.attr("data-name"),
 				tokenAddress: $selectedOption.attr("data-address"),
