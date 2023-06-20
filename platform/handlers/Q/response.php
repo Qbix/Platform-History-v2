@@ -54,8 +54,10 @@ function Q_response($params)
 
 	$action = $uri->action;
 	if (Q::canHandle("$module/$action/response")) {
-		if (false === Q::event("$module/$action/response", $_REQUEST) and $isAjax !== 'json') {
-			return;
+		if (false === Q::event("$module/$action/response", $_REQUEST)) {
+			if ($isAjax !== 'json') {
+				return; // response was handled,
+			}
 		}
 	}
 	
@@ -73,7 +75,15 @@ function Q_response($params)
 	// What to do if this is an AJAX request
 	if ($isAjax) {
 		$to_encode = array();
-		if (is_array($slotNames)) {
+		if (Q_Response::$redirected) {
+			// We already called Q_Response::redirect from Q/response
+			$to_encode['redirect']['url'] = Q_Uri::url(Q_Response::$redirected);
+			try {
+				$to_encode['redirect']['uri'] = Q_Uri::from(Q_Response::$redirected)->toArray();
+			} catch (Exception $e) {
+				// couldn't get internal URI
+			}
+		} else if (is_array($slotNames)) {
 			foreach ($slotNames as $slotName) {
 				Q_Response::fillSlot($slotName, 'default',
 					Q::ifset($idPrefixes, $slotName, null)
