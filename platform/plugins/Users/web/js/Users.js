@@ -4462,6 +4462,23 @@
 		},
 
 		/**
+		 * Check if user logged in to MetaMask
+		 * @method loggedIn
+		 * @param {Function} [callback]
+		 * @return {Boolean}
+		 */
+		loggedIn: function (callback) {
+			if (typeof ethereum === 'undefined') {
+				return console.log("MetaMask browser plugin not found");
+			}
+			var provider = new ethers.providers.Web3Provider(ethereum);
+			provider.listAccounts().then(function(accounts){
+				return Q.handle(callback, null, [accounts.length]);
+			}).catch(function (err) {
+				Q.alert(err.message);
+			});
+		},
+		/**
 		 * Execute method on contract
 		 * @method execute
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
@@ -4726,6 +4743,8 @@
 						}, function (err) {
 							Q.handle(callback, null, [err, transactionRequest]);
 						});
+					}).catch(function (err) {
+						Q.handle(callback, null, [err]);
 					});
 				} catch (err) {
 					Q.handle(callback, null, [err]);
@@ -4847,7 +4866,7 @@
 				}, callback);
 			}
 		}),
-		parseMetamaskError: function (err, contracts) {
+		parseMetamaskError: function (err, contracts=[]) {
             if (err.code != '-32603' || Q.isEmpty(err.data)) {
 				return err.message;
 			}
