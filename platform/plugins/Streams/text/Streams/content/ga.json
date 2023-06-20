@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Cé a thug cuireadh dom",
         "DoYouAgree": "An aontaíonn tú?",
         "Yes": "Tá",
-        "No": "Níl"
+        "No": "Níl",
+        "JoinItNow": "Bígí ann anois?"
     },
     "login": {
         "prompt": "Lig do chairde tú a aithint:",

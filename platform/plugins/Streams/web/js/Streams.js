@@ -6489,7 +6489,7 @@ Q.onInit.add(function _Streams_onInit() {
 								html += " as " + label.join(', ');
 							}
 
-							html += "<br>" + content.labels.DoYouAgree;
+							html += "<br>" + content.labels.JoinItNow;
 							Q.confirm(html, function (res) {
 								if (res) {
 									Q.handle(inviteUrl);

@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Kdo me je povabil",
         "DoYouAgree": "Ali se strinjaš?",
         "Yes": "ja",
-        "No": "št"
+        "No": "št",
+        "JoinItNow": "Se pridružite zdaj?"
     },
     "login": {
         "prompt": "Naj vas prijatelji prepoznajo:",

@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "ማን ጋበዘኝ።",
         "DoYouAgree": "ትስማማለህ?",
         "Yes": "አዎ",
-        "No": "አይ"
+        "No": "አይ",
+        "JoinItNow": "አሁን ተቀላቀል?"
     },
     "login": {
         "prompt": "ጓደኞች እንዲያውቁዎት ያድርጉ፡-",

@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Kas mane pakvietė",
         "DoYouAgree": "Ar sutinki?",
         "Yes": "Taip",
-        "No": "Nr"
+        "No": "Nr",
+        "JoinItNow": "Prisijunk dabar?"
     },
     "login": {
         "prompt": "Leisk draugams tave atpažinti:",

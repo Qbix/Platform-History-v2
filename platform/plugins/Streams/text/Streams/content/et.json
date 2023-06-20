@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Kes mind kutsus",
         "DoYouAgree": "Kas sa nõustud?",
         "Yes": "Jah",
-        "No": "Ei"
+        "No": "Ei",
+        "JoinItNow": "Kas liituda sellega kohe?"
     },
     "login": {
         "prompt": "Laske sõpradel teid ära tunda:",
