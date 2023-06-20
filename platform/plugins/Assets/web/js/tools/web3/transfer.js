@@ -1,5 +1,8 @@
 (function (window, Q, $, undefined) {
 
+var Assets = Q.Assets;
+var Users = Q.Users;
+
 /**
  * @module Assets
  */
@@ -18,7 +21,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
         var tool = this;
         var state = this.state;
 
-        if (!Q.Users.loggedInUserId()) {
+        if (!Users.loggedInUserId()) {
             throw new Q.Exception("You are not logged in");
         }
 
@@ -141,7 +144,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     $this.addClass("Q_working");
 
                     if (tokenInfo.tokenName === "credits") {
-                        return Q.Assets.Credits.pay({
+                        return Assets.Credits.pay({
                             amount: amount,
                             currency: "credits",
                             userId: userSelected.userId,
@@ -173,10 +176,11 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     var parsedAmount = ethers.utils.parseUnits(String(amount), tokenInfo.decimals);
 
                     if (parseInt(tokenInfo.tokenAddress) === 0) {
-                        Q.Users.Web3.transaction(walletSelected, amount, function (err, transactionRequest, transactionReceipt) {
+                        Users.Web3.transaction(walletSelected, amount, function (err, transactionRequest, transactionReceipt) {
                             Q.handle(state.onSubmitted, tool, [err, transactionRequest, transactionReceipt]);
 
                             if (err) {
+                                Q.alert(Users.Web3.parseMetamaskError(err));
                                 return $this.removeClass("Q_working");
                             }
 
@@ -188,12 +192,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         return;
                     }
 
-                    Q.Users.Web3.getContract("Assets/templates/ERC20", {
+                    Users.Web3.getContract("Assets/templates/ERC20", {
                         chainId: tokenInfo.chainId,
                         contractAddress: tokenInfo.tokenAddress,
                         readOnly: false
                     }, function (err, contract) {
                         if (err) {
+                            //Q.alert(Users.Web3.parseMetamaskError(err, [contract]));
                             return $this.removeClass("Q_working");
                         }
 
@@ -206,10 +211,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             contract.off(_assets_web3_transfer_listener);
                         });
 
-                        contract.transfer(walletSelected, parsedAmount).then(function (info) {
-                            Q.handle(state.onSubmitted, tool, [null, info]);
-                        }, function (err) {
-                            $this.removeClass("Q_working");
+                        Users.Web3.withChain(tokenInfo.chainId, function () {
+                            contract.transfer(walletSelected, parsedAmount).then(function (info) {
+                                Q.handle(state.onSubmitted, tool, [null, info]);
+                            }, function (err) {
+                                Q.alert(Users.Web3.parseMetamaskError(err, [contract]));
+                                $this.removeClass("Q_working");
+                            });
                         });
                     });
                 });
