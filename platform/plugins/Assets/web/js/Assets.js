@@ -889,13 +889,13 @@
 			/**
 			 * Get amount of tokens by wallet and chain
 			 * @method balanceOf
-			 * @param {String} userId - if null logged in user Id used
+			 * @param {String} walletAddress
 			 * @param {String} chainId
 			 * @param {function} callback
 			 * @param {object} [options] - some options pass to getContract method
 			 * @param {string} [options.tokenAddress] - filter tokens with this contract address
 			 */
-			balanceOf: function (userId, chainId, callback, options) {
+			balanceOf: function (walletAddress, chainId, callback, options) {
 				Q.req("Assets/balances", "balance", function (err, response) {
 					if (err) {
 						return;
@@ -905,7 +905,7 @@
 					Q.handle(callback, null, [null, balance]);
 				}, {
 					fields: {
-						userId: userId || Q.Users.loggedInUserId(),
+						walletAddress: walletAddress,
 						chainId: chainId,
 						tokenAddresses: Q.getObject("tokenAddresses", options)
 					}
@@ -1134,7 +1134,9 @@
 							return Q.handle(callback, null, [err]);
 						}
 
-						var events = {
+						// commented becasue contract.on send infinite requests to publicRPC url
+						//TODO: need to use some third party API to listen contract event
+						/*var events = {
 							TokenRemovedFromSale: "onTokenRemovedFromSale",
 							TokenPutOnSale: "onTokenAddedToSale",
 							Transfer: "onTransfer",
@@ -1143,9 +1145,7 @@
 							SeriesPutOnSale: "onSeriesPutOnSale",
 							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
 						};
-						// commented becasue contract.on send infinite requests to publicRPC url
-						//TODO: need to use some third party API to listen contract event
-						/*Q.each(contract.ABI, function (index, obj) {
+						Q.each(contract.ABI, function (index, obj) {
 							Q.each(events, function (event1, event2) {
 								if (obj.type === "event" && obj.name === event1) {
 									contract.on(event1, function () {
