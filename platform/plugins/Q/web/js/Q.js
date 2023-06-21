@@ -4667,9 +4667,9 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		var c = _qtc[n] || {};
 		if (typeof c === 'string') {
 			if (c.split('.').pop() === 'js') {
-				c = { js: toolConstructor };
+				c = { js: c };
 			} else {
-				c = { html: toolConstructor };
+				c = { html: c };
 			}
 		}
 		_qtc[n] = ctor;
