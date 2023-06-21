@@ -4667,15 +4667,8 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		var c = _qtc[n];
 		_qtc[n] = ctor;
 
-		if (!Q.isPlainObject(c)) {
-			_loadedConstructor(ctor);
-			continue;
-		}
-		var p = new Q.Pipe(waitFor, 1, function (params) {
-			_loadedConstructor(ctor, params);
-		});
-		var waitFor = [];
 		Q.Text.addedFor('Q.Tool.define', n, c);
+		var waitFor = [];
 		if (c.text) {
 			waitFor.push('text');
 			Q.Text.get(c.text, p.fill('text'));
@@ -4684,6 +4677,9 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			waitFor.push('css');
 			Q.addStylesheet(c.css, p.fill('css'));
 		}
+		var p = new Q.Pipe(waitFor, 1, function (params) {
+			_loadedConstructor(ctor, params);
+		});
 		p.run();
 	}
 	return ctor;
@@ -5696,7 +5692,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
 		}
 		var n = Q.normalize(toolName);
-		var text = Q.Text.addedFor('Q.Tool.define', n, toolConstructor);
+		var text = Q.Text.addedFor('Q.Tool.define', n);
 		if (text) {
 			waitFor.push('text');
 			Q.Text.get(text, pipe.fill('text'));
