@@ -4669,6 +4669,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 
 		Q.Text.addedFor('Q.Tool.define', n, c);
 		var waitFor = [];
+		var p = new Q.Pipe();
 		if (c.text) {
 			waitFor.push('text');
 			Q.Text.get(c.text, p.fill('text'));
@@ -4677,10 +4678,9 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			waitFor.push('css');
 			Q.addStylesheet(c.css, p.fill('css'));
 		}
-		var p = new Q.Pipe(waitFor, 1, function (params) {
+		p.add(waitFor, 1, function (params) {
 			_loadedConstructor(ctor, params);
-		});
-		p.run();
+		}).run();
 	}
 	return ctor;
 
