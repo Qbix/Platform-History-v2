@@ -15009,69 +15009,69 @@ Q.onInit.add(function () {
 	Q.Audio.speak.options.mute = !!Q.getObject("Audio.speak.mute", Q);
 }, 'Q');
 
+Q.Tool.define({
+	"Q/inplace": "{{Q}}/js/tools/inplace.js",
+	"Q/tabs": {
+		js: "{{Q}}/js/tools/tabs.js",
+		css: "{{Q}}/css/tabs.css"
+	},
+	"Q/form": "{{Q}}/js/tools/form.js",
+	"Q/panel": "{{Q}}/js/tools/panel.js",
+	"Q/ticker": "{{Q}}/js/tools/ticker.js",
+	"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
+	"Q/countdown": "{{Q}}/js/tools/countdown.js",
+	"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
+	"Q/columns": "{{Q}}/js/tools/columns.js",
+	"Q/drawers": "{{Q}}/js/tools/drawers.js",
+	"Q/expandable": "{{Q}}/js/tools/expandable.js",
+	"Q/filter": "{{Q}}/js/tools/filter.js",
+	"Q/rating": "{{Q}}/js/tools/rating.js",
+	"Q/paging": "{{Q}}/js/tools/paging.js",
+	"Q/pie": "{{Q}}/js/tools/pie.js",
+	"Q/badge": "{{Q}}/js/tools/badge.js",
+	"Q/resize": "{{Q}}/js/tools/resize.js",
+	"Q/layouts": "{{Q}}/js/tools/layouts.js",
+	"Q/carousel": "{{Q}}/js/tools/carousel.js",
+	"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
+	"Q/parallax": "{{Q}}/js/tools/parallax.js",
+	"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
+	"Q/audio": "{{Q}}/js/tools/audio.js",
+	"Q/video": "{{Q}}/js/tools/video.js",
+	"Q/pdf": "{{Q}}/js/tools/pdf.js",
+	"Q/image": "{{Q}}/js/tools/image.js",
+	"Q/clip": "{{Q}}/js/tools/clip.js",
+	"Q/floating": "{{Q}}/js/tools/floating.js"
+});
+
+Q.Tool.jQuery({
+	"Q/placeholders": "{{Q}}/js/fn/placeholders.js",
+	"Q/textfill": "{{Q}}/js/fn/textfill.js",
+	"Q/autogrow": "{{Q}}/js/fn/autogrow.js",
+	"Q/dialog": "{{Q}}/js/fn/dialog.js",
+	"Q/flip": "{{Q}}/js/fn/flip.js",
+	"Q/gallery": "{{Q}}/js/fn/gallery.js",
+	"Q/zoomer": "{{Q}}/js/fn/zoomer.js",
+	"Q/fisheye": "{{Q}}/js/fn/fisheye.js",
+	"Q/listing": "{{Q}}/js/fn/listing.js",
+	"Q/hautoscroll": "{{Q}}/js/fn/hautoscroll.js",
+	"Q/imagepicker": "{{Q}}/js/fn/imagepicker.js",
+	"Q/viewport": "{{Q}}/js/fn/viewport.js",
+	"Q/actions": "{{Q}}/js/fn/actions.js",
+	"Q/clickable": "{{Q}}/js/fn/clickable.js",
+	"Q/clickfocus": "{{Q}}/js/fn/clickfocus.js",
+	"Q/contextual": "{{Q}}/js/fn/contextual.js",
+	"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
+	"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
+	"Q/scroller": "{{Q}}/js/fn/scroller.js",
+	"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
+	"Q/sortable": "{{Q}}/js/fn/sortable.js",
+	"Q/validator": "{{Q}}/js/fn/validator.js",
+	"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js"
+});
+
 Q.onJQuery.add(function ($) {
 	
 	Q.$ = $;
-	
-	Q.Tool.define({
-		"Q/inplace": "{{Q}}/js/tools/inplace.js",
-		"Q/tabs": {
-			js: "{{Q}}/js/tools/tabs.js",
-			css: "{{Q}}/css/tabs.css"
-		},
-		"Q/form": "{{Q}}/js/tools/form.js",
-		"Q/panel": "{{Q}}/js/tools/panel.js",
-		"Q/ticker": "{{Q}}/js/tools/ticker.js",
-		"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
-		"Q/countdown": "{{Q}}/js/tools/countdown.js",
-		"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
-		"Q/columns": "{{Q}}/js/tools/columns.js",
-		"Q/drawers": "{{Q}}/js/tools/drawers.js",
-		"Q/expandable": "{{Q}}/js/tools/expandable.js",
-		"Q/filter": "{{Q}}/js/tools/filter.js",
-		"Q/rating": "{{Q}}/js/tools/rating.js",
-		"Q/paging": "{{Q}}/js/tools/paging.js",
-		"Q/pie": "{{Q}}/js/tools/pie.js",
-		"Q/badge": "{{Q}}/js/tools/badge.js",
-		"Q/resize": "{{Q}}/js/tools/resize.js",
-		"Q/layouts": "{{Q}}/js/tools/layouts.js",
-		"Q/carousel": "{{Q}}/js/tools/carousel.js",
-		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
-		"Q/parallax": "{{Q}}/js/tools/parallax.js",
-		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
-		"Q/audio": "{{Q}}/js/tools/audio.js",
-		"Q/video": "{{Q}}/js/tools/video.js",
-		"Q/pdf": "{{Q}}/js/tools/pdf.js",
-		"Q/image": "{{Q}}/js/tools/image.js",
-		"Q/clip": "{{Q}}/js/tools/clip.js",
-		"Q/floating": "{{Q}}/js/tools/floating.js"
-	});
-	
-	Q.Tool.jQuery({
-		"Q/placeholders": "{{Q}}/js/fn/placeholders.js",
-		"Q/textfill": "{{Q}}/js/fn/textfill.js",
-		"Q/autogrow": "{{Q}}/js/fn/autogrow.js",
-		"Q/dialog": "{{Q}}/js/fn/dialog.js",
-		"Q/flip": "{{Q}}/js/fn/flip.js",
-		"Q/gallery": "{{Q}}/js/fn/gallery.js",
-		"Q/zoomer": "{{Q}}/js/fn/zoomer.js",
-		"Q/fisheye": "{{Q}}/js/fn/fisheye.js",
-		"Q/listing": "{{Q}}/js/fn/listing.js",
-		"Q/hautoscroll": "{{Q}}/js/fn/hautoscroll.js",
-		"Q/imagepicker": "{{Q}}/js/fn/imagepicker.js",
-		"Q/viewport": "{{Q}}/js/fn/viewport.js",
-		"Q/actions": "{{Q}}/js/fn/actions.js",
-		"Q/clickable": "{{Q}}/js/fn/clickable.js",
-		"Q/clickfocus": "{{Q}}/js/fn/clickfocus.js",
-		"Q/contextual": "{{Q}}/js/fn/contextual.js",
-		"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
-		"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
-		"Q/scroller": "{{Q}}/js/fn/scroller.js",
-		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js",
-		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js"
-	});
 	
 	Q.onLoad.add(function () {
 		// Start loading some plugins asynchronously after document loads.
