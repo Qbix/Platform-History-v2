@@ -4664,7 +4664,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			}
 		}
 
-		var c = _qtc[n];
+		var c = _qtc[n] || {};
 		_qtc[n] = ctor;
 
 		Q.Text.addedFor('Q.Tool.define', n, c);
