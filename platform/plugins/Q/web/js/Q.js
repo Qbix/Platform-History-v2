@@ -4623,11 +4623,11 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		}
 		ctors[name] = ctor;
 	}
-	for (name in ctors) {
-		ctor = ctors[name];
+	Q.each(ctors, function (name) {
+		var ctor = this;
 		var n = Q.normalize(name);
 		if (!overwrite && typeof _qtc[n] === 'function') {
-			continue;
+			return;
 		}
 		if (ctor == null) {
 			ctor = function _Q_Tool_default_constructor() {
@@ -4643,7 +4643,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 					_qtp[n] = ctor.placeholder;
 				}
 			}
-			continue;
+			return;
 		}
 		ctor.toolName = n;
 		if (!Q.isArrayLike(stateKeys)) {
@@ -4673,32 +4673,34 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			}
 		}
 		_qtc[n] = ctor;
-
 		Q.Text.addedFor('Q.Tool.define', n, c);
-		var waitFor = [];
-		var p = new Q.Pipe();
-		if (c.text) {
-			waitFor.push('text');
-			Q.Text.get(c.text, p.fill('text'));
-		}
-		if (c.css) {
-			waitFor.push('css');
-			Q.addStylesheet(c.css, p.fill('css'));
-		}
-		p.add(waitFor, 1, function (params) {
-			_loadedConstructor(ctor, params);
-		}).run();
-	}
-	return ctor;
 
-	function _loadedConstructor(ctor, params) {
-		if (params && params.text && params.text[1]) {
-			ctor.text = params.text[1];
+		if (typeof ctor !== 'function') {
+			return;
 		}
+
 		Q.extend(ctor.prototype, 10, methods);
-		Q.Tool.onLoadedConstructor(ctor.toolName).handle(ctor.toolName, ctor);
-		Q.Tool.onLoadedConstructor("").handle(ctor.toolName, ctor);
-	}
+		Q.onInit.addOnce(function () {
+			var waitFor = [];
+			var p = new Q.Pipe();
+			if (c.text) {
+				waitFor.push('text');
+				Q.Text.get(c.text, p.fill('text'));
+			}
+			if (c.css) {
+				waitFor.push('css');
+				Q.addStylesheet(c.css, p.fill('css'));
+			}
+			p.add(waitFor, 1, function (params) {
+				if (params && params.text && params.text[1]) {
+					ctor.text = params.text[1];
+				}
+				Q.Tool.onLoadedConstructor(ctor.toolName).handle(ctor.toolName, ctor);
+				Q.Tool.onLoadedConstructor("").handle(ctor.toolName, ctor);
+			}).run();
+		});
+	});
+	return ctor;
 };
 
 Q.Tool.beingActivated = undefined;
@@ -11209,10 +11211,12 @@ Q.Text = {
 					reject(errors);
 				}
 			});
-			Q.each(names, function (i, name) {
-				var url = Q.url(dir + '/' + name + '/' + lls + '.json');
-				return func(name, url, pipe.fill(name), options);
-			});	
+			Q.onInit.addOnce(function () {
+				Q.each(names, function (i, name) {
+					var url = Q.url(dir + '/' + name + '/' + lls + '.json');
+					return func(name, url, pipe.fill(name), options);
+				});	
+			});
 		});
 	},
 
@@ -11251,6 +11255,7 @@ Q.Text = {
 		if (!d) {
 			return [];
 		}
+		objectToExtend = objectToExtend || {};
 		for (var namePrefix in d) {
 			if (!normalizedName.startsWith(namePrefix)) {
 				continue;
