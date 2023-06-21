@@ -4665,6 +4665,13 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		}
 
 		var c = _qtc[n] || {};
+		if (typeof c === 'string') {
+			if (c.split('.').pop() === 'js') {
+				c = { js: toolConstructor };
+			} else {
+				c = { html: toolConstructor };
+			}
+		}
 		_qtc[n] = ctor;
 
 		Q.Text.addedFor('Q.Tool.define', n, c);
