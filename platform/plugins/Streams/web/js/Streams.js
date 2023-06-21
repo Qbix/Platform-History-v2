@@ -581,8 +581,11 @@ function _connectSockets(refresh) {
 	}
 	Q.Streams.related(Users.loggedInUser.id, 'Streams/participating', null, true, {
 		nodeUrlsOnly: true
-	}, function () {
+	}, function (err) {
 		var n = this.nodeUrls;
+		if (!n) {
+			return;
+		}
 		for (var i=0, l = n.length; i < l; ++i) {
 			Users.Socket.connect(n[i], function (qs, ns, url) {
 				_connectedNodes[url] = qs;
