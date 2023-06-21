@@ -5699,7 +5699,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
 		}
 		var n = Q.normalize(toolName);
-		var text = Q.Text.addedFor('Q.Tool.define', n);
+		var text = Q.Text.addedFor('Q.Tool.define', n, toolConstructor);
 		if (text) {
 			waitFor.push('text');
 			Q.Text.get(text, pipe.fill('text'));
