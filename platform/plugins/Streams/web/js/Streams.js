@@ -6219,8 +6219,8 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized, toolName) {
 	Q.Tool.onLoadedConstructor('Streams/default/preview')
 	.add(function (n, constructor) {
 		constructors[normalized] = constructor;
-		Q.Tool.onLoadedConstructor(toolName)
-		.handle.call(Tool, normalized, constructor);
+		Q.Tool.onLoadedConstructor(normalized)
+		.handle.call(Q.Tool, normalized, constructor);
 	}, toolName);
 }, 'Streams');
 
