@@ -5614,7 +5614,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function') {
-				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
+				Q.Tool.onMissingConstructor.handle(_qtc, toolName, Q.Tool.names[toolName]);
 				toolConstructor = _qtc[toolName];
 				if (typeof toolConstructor !== 'function') {
 					toolConstructor = function () { log("Missing tool constructor for " + toolName); }; 
@@ -5623,7 +5623,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);
 		}
 		if (toolConstructor === undefined) {
-			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
+			Q.Tool.onMissingConstructor.handle(_qtc, toolName, Q.Tool.names[toolName]);
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function'
 			&& typeof toolConstructor !== 'string'

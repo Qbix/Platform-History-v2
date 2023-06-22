@@ -6206,7 +6206,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 	}
 }
 
-Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
+Q.Tool.onMissingConstructor.set(function (constructors, normalized, toolName) {
 	var str = "_preview";
 	if (normalized.substr(normalized.length-str.length) !== str) {
 		return;
@@ -6216,6 +6216,10 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	} else {
 		constructors[normalized] = "{{Streams}}/js/tools/default/preview.js";
 	}
+	Q.Tool.onLoadedConstructor('Streams/default/preview')
+	.add(function (n, constructor) {
+		Q.Tool.define(toolName, constructor);
+	}, toolName);
 }, 'Streams');
 
 Q.beforeInit.add(function _Streams_beforeInit() {
