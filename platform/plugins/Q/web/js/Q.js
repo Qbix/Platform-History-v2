@@ -3010,10 +3010,15 @@ Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  * @param {boolean} prepend If true, then prepends the handler to the chain
- * @return {String} The key under which the handler was set
+ * @return {String|boolean} The key under which the handler was set,
+ *  or true the handler was synchronously executed during this function call.
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
 	if (!handler) return undefined;
+	if (this.occurred || this.occurring) {
+		Q.handle(handler, this.lastContext, this.lastArgs);
+		return true;
+	}
 	var event = this;
 	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
@@ -5614,7 +5619,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function') {
-				Q.Tool.onMissingConstructor.handle(_qtc, toolName, Q.Tool.names[toolName]);
+				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
 				toolConstructor = _qtc[toolName];
 				if (typeof toolConstructor !== 'function') {
 					toolConstructor = function () { log("Missing tool constructor for " + toolName); }; 
@@ -5623,7 +5628,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);
 		}
 		if (toolConstructor === undefined) {
-			Q.Tool.onMissingConstructor.handle(_qtc, toolName, Q.Tool.names[toolName]);
+			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function'
 			&& typeof toolConstructor !== 'string'
