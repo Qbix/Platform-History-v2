@@ -581,8 +581,11 @@ function _connectSockets(refresh) {
 	}
 	Q.Streams.related(Users.loggedInUser.id, 'Streams/participating', null, true, {
 		nodeUrlsOnly: true
-	}, function () {
+	}, function (err) {
 		var n = this.nodeUrls;
+		if (!n) {
+			return;
+		}
 		for (var i=0, l = n.length; i < l; ++i) {
 			Users.Socket.connect(n[i], function (qs, ns, url) {
 				_connectedNodes[url] = qs;
@@ -6203,7 +6206,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 	}
 }
 
-Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
+Q.Tool.onMissingConstructor.set(function (constructors, normalized, toolName) {
 	var str = "_preview";
 	if (normalized.substr(normalized.length-str.length) !== str) {
 		return;
@@ -6213,6 +6216,12 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	} else {
 		constructors[normalized] = "{{Streams}}/js/tools/default/preview.js";
 	}
+	Q.Tool.onLoadedConstructor('Streams/default/preview')
+	.add(function (n, constructor) {
+		constructors[normalized] = constructor;
+		Q.Tool.onLoadedConstructor(normalized)
+		.handle.call(Q.Tool, normalized, constructor);
+	}, toolName);
 }, 'Streams');
 
 Q.beforeInit.add(function _Streams_beforeInit() {
@@ -6489,7 +6498,7 @@ Q.onInit.add(function _Streams_onInit() {
 								html += " as " + label.join(', ');
 							}
 
-							html += "<br>" + content.labels.DoYouAgree;
+							html += "<br>" + content.labels.JoinItNow;
 							Q.confirm(html, function (res) {
 								if (res) {
 									Q.handle(inviteUrl);

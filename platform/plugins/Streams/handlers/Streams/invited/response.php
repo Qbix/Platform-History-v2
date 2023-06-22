@@ -17,4 +17,5 @@ function Streams_invited_response()
 		$invite->appUrl = $stream->url();
 	}
 	Q_Response::redirect($invite->appUrl.'?'.$querystring);
+	return false;
 }

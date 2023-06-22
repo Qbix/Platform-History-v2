@@ -3010,10 +3010,15 @@ Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  * @param {boolean} prepend If true, then prepends the handler to the chain
- * @return {String} The key under which the handler was set
+ * @return {String|boolean} The key under which the handler was set,
+ *  or true the handler was synchronously executed during this function call.
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
 	if (!handler) return undefined;
+	if (this.occurred || this.occurring) {
+		Q.handle(handler, this.lastContext, this.lastArgs);
+		return true;
+	}
 	var event = this;
 	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
@@ -4623,11 +4628,11 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		}
 		ctors[name] = ctor;
 	}
-	for (name in ctors) {
-		ctor = ctors[name];
+	Q.each(ctors, function (name) {
+		var ctor = this;
 		var n = Q.normalize(name);
 		if (!overwrite && typeof _qtc[n] === 'function') {
-			continue;
+			return;
 		}
 		if (ctor == null) {
 			ctor = function _Q_Tool_default_constructor() {
@@ -4643,7 +4648,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 					_qtp[n] = ctor.placeholder;
 				}
 			}
-			continue;
+			return;
 		}
 		ctor.toolName = n;
 		if (!Q.isArrayLike(stateKeys)) {
@@ -4664,37 +4669,43 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			}
 		}
 
-		var c = _qtc[n];
+		var c = _qtc[n] || {};
+		if (typeof c === 'string') {
+			if (c.split('.').pop() === 'js') {
+				c = { js: c };
+			} else {
+				c = { html: c };
+			}
+		}
 		_qtc[n] = ctor;
+		Q.Text.addedFor('Q.Tool.define', n, c);
 
-		if (!Q.isPlainObject(c)) {
-			_loadedConstructor(ctor);
-			continue;
+		if (typeof ctor !== 'function') {
+			return;
 		}
-		var p = new Q.Pipe(waitFor, 1, function (params) {
-			_loadedConstructor(ctor, params);
-		});
-		var waitFor = [];
-		if (c.text) {
-			waitFor.push('text');
-			Q.Text.get(c.text, p.fill('text'));
-		}
-		if (c.css) {
-			waitFor.push('css');
-			Q.addStylesheet(c.css, p.fill('css'));
-		}
-		p.run();
-	}
-	return ctor;
 
-	function _loadedConstructor(ctor, params) {
-		if (params && params.text && params.text[1]) {
-			ctor.text = params.text[1];
-		}
 		Q.extend(ctor.prototype, 10, methods);
-		Q.Tool.onLoadedConstructor(ctor.toolName).handle(ctor.toolName, ctor);
-		Q.Tool.onLoadedConstructor("").handle(ctor.toolName, ctor);
-	}
+		Q.onInit.addOnce(function () {
+			var waitFor = [];
+			var p = new Q.Pipe();
+			if (c.text) {
+				waitFor.push('text');
+				Q.Text.get(c.text, p.fill('text'));
+			}
+			if (c.css) {
+				waitFor.push('css');
+				Q.addStylesheet(c.css, p.fill('css'));
+			}
+			p.add(waitFor, 1, function (params) {
+				if (params && params.text && params.text[1]) {
+					ctor.text = params.text[1];
+				}
+				Q.Tool.onLoadedConstructor(ctor.toolName).handle(ctor.toolName, ctor);
+				Q.Tool.onLoadedConstructor("").handle(ctor.toolName, ctor);
+			}).run();
+		});
+	});
+	return ctor;
 };
 
 Q.Tool.beingActivated = undefined;
@@ -5611,7 +5622,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
 				toolConstructor = _qtc[toolName];
 				if (typeof toolConstructor !== 'function') {
-					toolConstructor = function () { console.log("Missing tool constructor for " + toolName); }; 
+					toolConstructor = function () { log("Missing tool constructor for " + toolName); }; 
 				}
 			}
 			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);
@@ -5623,7 +5634,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			&& typeof toolConstructor !== 'string'
 			&& !(Q.isPlainObject(toolConstructor) && toolConstructor.js)) {
 				toolConstructor = function () {
-					console.log("Missing tool constructor for " + toolName);
+					log("Missing tool constructor for " + toolName);
 				}; 
 			}
 		}
@@ -8460,7 +8471,7 @@ Q.request = function (url, slotNames, callback, options) {
 					if (xmlhttp.status == 200) {
 						onSuccess.call(xmlhttp, xmlhttp.responseText);
 					} else {
-						console.log("Q.request xhr: " + xmlhttp.status + ' ' 
+						log("Q.request xhr: " + xmlhttp.status + ' ' 
 							+ xmlhttp.responseText.substr(xmlhttp.responseText.indexOf('<body')));
 						onCancel.call(xmlhttp, xmlhttp.status);
 					}
@@ -9480,7 +9491,7 @@ Q.ServiceWorker = {
 		var src = Q.url('Q-ServiceWorker');
 		navigator.serviceWorker.register(src)
 		.then(function (registration) {
-			console.log("Q.ServiceWorker.register", registration);
+			log("Q.ServiceWorker.register", registration);
 			var worker;
 			if (registration.active) {
 				worker = registration.active;
@@ -10628,7 +10639,7 @@ function _activateTools(toolElement, options, shared) {
 			// NOTE: inside the tool constructor, after you add
 			// any child elements, call Q.activate() and Qbix
 			// will work correctly, whether it's sync or async.
-			Q.Tool.onLoadedConstructor(toolName).add(function () {
+			Q.Tool.onLoadedConstructor(toolName).addOnce(function () {
 				var _constructor = _constructors[toolName];
 				var result = new _constructor(toolElement, options);
 				var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
@@ -10646,7 +10657,7 @@ function _activateTools(toolElement, options, shared) {
 				}
 				pendingCurrentEvent.handle.call(tool, options, result);
 				pendingCurrentEvent.removeAllHandlers();
-			}, 'Q.Tool.construct');
+			});
 		}
 	}, shared, null, { placeholder: true });
 }
@@ -11205,10 +11216,12 @@ Q.Text = {
 					reject(errors);
 				}
 			});
-			Q.each(names, function (i, name) {
-				var url = Q.url(dir + '/' + name + '/' + lls + '.json');
-				return func(name, url, pipe.fill(name), options);
-			});	
+			Q.onInit.addOnce(function () {
+				Q.each(names, function (i, name) {
+					var url = Q.url(dir + '/' + name + '/' + lls + '.json');
+					return func(name, url, pipe.fill(name), options);
+				});	
+			});
 		});
 	},
 
@@ -11239,7 +11252,7 @@ Q.Text = {
 	 * Get the array of text files added for this normalized name
 	 * @param {String|Array} methods Can be "Q.Tool.define" or "Q.Template.set", or array of them
 	 * @param {String} normalizedName The prefix for the names of tools to load the text files for
-	 * @param {Object} objectToExtend This object's "text" property is extended
+	 * @param {Object} objectToExtend This object's "text" property array will be set or extended.
 	 * @return {Array} the array of text files, if any
 	 */
 	addedFor: function (method, normalizedName, objectToExtend) {
@@ -11247,6 +11260,7 @@ Q.Text = {
 		if (!d) {
 			return [];
 		}
+		objectToExtend = objectToExtend || {};
 		for (var namePrefix in d) {
 			if (!normalizedName.startsWith(namePrefix)) {
 				continue;
@@ -11382,13 +11396,13 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
 		_ioOn(socket, 'connect', _connected);
 		_ioOn(socket, 'connect_error', function (error) {
-			console.log('Failed to connect to '+url, error);
+			log('Failed to connect to '+url, error);
 		});
 		_ioOn(socket.io, 'close', function () {
-			console.log('Socket ' + ns + ' disconnected from '+url);
+			log('Socket ' + ns + ' disconnected from '+url);
 		});
 		_ioOn(socket, 'error', function (error) {
-			console.log('Error on connection '+url+' ('+error+')');
+			log('Error on connection '+url+' ('+error+')');
 		});
 
 		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
@@ -11411,7 +11425,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			Q.Socket.onConnect(ns, url).handle(qs, ns, url);
 			callback && callback(qs, ns, url);
 			
-			console.log('Socket connected to '+url);
+			log('Socket connected to '+url);
 		}
 	}
 	
@@ -14441,7 +14455,7 @@ Aup.recorderInit = function (options) {
 
 		// when error occur with audio stream
 		tool.recorder.addEventListener("streamError", function(e){
-			console.log('Error encountered: ' + e.error.name );
+			log('Error encountered: ' + e.error.name );
 		});
 
 		tool.recorder.addEventListener("dataAvailable", function(e){
@@ -14884,6 +14898,17 @@ if (!root.console) {
 		warn: noop
 	};
 }
+root.console.log.register = function (name) {
+	return root.console.log[name] = function() {
+		var params = Array.prototype.slice.call(arguments);
+		params.unshift('%c' + name + ':', "background: gray; color: white; font-weight: bold;");
+		console.log.apply(console, params);
+	};
+};
+root.console.log.unregister = function (name) {
+	root.console.log[name] = function () { }
+};
+var log = root.console.log.register('Q');
 
 /**
  * This function is just here in case prefixfree.js is included
@@ -15001,69 +15026,69 @@ Q.onInit.add(function () {
 	Q.Audio.speak.options.mute = !!Q.getObject("Audio.speak.mute", Q);
 }, 'Q');
 
+Q.Tool.define({
+	"Q/inplace": "{{Q}}/js/tools/inplace.js",
+	"Q/tabs": {
+		js: "{{Q}}/js/tools/tabs.js",
+		css: "{{Q}}/css/tabs.css"
+	},
+	"Q/form": "{{Q}}/js/tools/form.js",
+	"Q/panel": "{{Q}}/js/tools/panel.js",
+	"Q/ticker": "{{Q}}/js/tools/ticker.js",
+	"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
+	"Q/countdown": "{{Q}}/js/tools/countdown.js",
+	"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
+	"Q/columns": "{{Q}}/js/tools/columns.js",
+	"Q/drawers": "{{Q}}/js/tools/drawers.js",
+	"Q/expandable": "{{Q}}/js/tools/expandable.js",
+	"Q/filter": "{{Q}}/js/tools/filter.js",
+	"Q/rating": "{{Q}}/js/tools/rating.js",
+	"Q/paging": "{{Q}}/js/tools/paging.js",
+	"Q/pie": "{{Q}}/js/tools/pie.js",
+	"Q/badge": "{{Q}}/js/tools/badge.js",
+	"Q/resize": "{{Q}}/js/tools/resize.js",
+	"Q/layouts": "{{Q}}/js/tools/layouts.js",
+	"Q/carousel": "{{Q}}/js/tools/carousel.js",
+	"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
+	"Q/parallax": "{{Q}}/js/tools/parallax.js",
+	"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
+	"Q/audio": "{{Q}}/js/tools/audio.js",
+	"Q/video": "{{Q}}/js/tools/video.js",
+	"Q/pdf": "{{Q}}/js/tools/pdf.js",
+	"Q/image": "{{Q}}/js/tools/image.js",
+	"Q/clip": "{{Q}}/js/tools/clip.js",
+	"Q/floating": "{{Q}}/js/tools/floating.js"
+});
+
+Q.Tool.jQuery({
+	"Q/placeholders": "{{Q}}/js/fn/placeholders.js",
+	"Q/textfill": "{{Q}}/js/fn/textfill.js",
+	"Q/autogrow": "{{Q}}/js/fn/autogrow.js",
+	"Q/dialog": "{{Q}}/js/fn/dialog.js",
+	"Q/flip": "{{Q}}/js/fn/flip.js",
+	"Q/gallery": "{{Q}}/js/fn/gallery.js",
+	"Q/zoomer": "{{Q}}/js/fn/zoomer.js",
+	"Q/fisheye": "{{Q}}/js/fn/fisheye.js",
+	"Q/listing": "{{Q}}/js/fn/listing.js",
+	"Q/hautoscroll": "{{Q}}/js/fn/hautoscroll.js",
+	"Q/imagepicker": "{{Q}}/js/fn/imagepicker.js",
+	"Q/viewport": "{{Q}}/js/fn/viewport.js",
+	"Q/actions": "{{Q}}/js/fn/actions.js",
+	"Q/clickable": "{{Q}}/js/fn/clickable.js",
+	"Q/clickfocus": "{{Q}}/js/fn/clickfocus.js",
+	"Q/contextual": "{{Q}}/js/fn/contextual.js",
+	"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
+	"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
+	"Q/scroller": "{{Q}}/js/fn/scroller.js",
+	"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
+	"Q/sortable": "{{Q}}/js/fn/sortable.js",
+	"Q/validator": "{{Q}}/js/fn/validator.js",
+	"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js"
+});
+
 Q.onJQuery.add(function ($) {
 	
 	Q.$ = $;
-	
-	Q.Tool.define({
-		"Q/inplace": "{{Q}}/js/tools/inplace.js",
-		"Q/tabs": {
-			js: "{{Q}}/js/tools/tabs.js",
-			css: "{{Q}}/css/tabs.css"
-		},
-		"Q/form": "{{Q}}/js/tools/form.js",
-		"Q/panel": "{{Q}}/js/tools/panel.js",
-		"Q/ticker": "{{Q}}/js/tools/ticker.js",
-		"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
-		"Q/countdown": "{{Q}}/js/tools/countdown.js",
-		"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
-		"Q/columns": "{{Q}}/js/tools/columns.js",
-		"Q/drawers": "{{Q}}/js/tools/drawers.js",
-		"Q/expandable": "{{Q}}/js/tools/expandable.js",
-		"Q/filter": "{{Q}}/js/tools/filter.js",
-		"Q/rating": "{{Q}}/js/tools/rating.js",
-		"Q/paging": "{{Q}}/js/tools/paging.js",
-		"Q/pie": "{{Q}}/js/tools/pie.js",
-		"Q/badge": "{{Q}}/js/tools/badge.js",
-		"Q/resize": "{{Q}}/js/tools/resize.js",
-		"Q/layouts": "{{Q}}/js/tools/layouts.js",
-		"Q/carousel": "{{Q}}/js/tools/carousel.js",
-		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
-		"Q/parallax": "{{Q}}/js/tools/parallax.js",
-		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
-		"Q/audio": "{{Q}}/js/tools/audio.js",
-		"Q/video": "{{Q}}/js/tools/video.js",
-		"Q/pdf": "{{Q}}/js/tools/pdf.js",
-		"Q/image": "{{Q}}/js/tools/image.js",
-		"Q/clip": "{{Q}}/js/tools/clip.js",
-		"Q/floating": "{{Q}}/js/tools/floating.js"
-	});
-	
-	Q.Tool.jQuery({
-		"Q/placeholders": "{{Q}}/js/fn/placeholders.js",
-		"Q/textfill": "{{Q}}/js/fn/textfill.js",
-		"Q/autogrow": "{{Q}}/js/fn/autogrow.js",
-		"Q/dialog": "{{Q}}/js/fn/dialog.js",
-		"Q/flip": "{{Q}}/js/fn/flip.js",
-		"Q/gallery": "{{Q}}/js/fn/gallery.js",
-		"Q/zoomer": "{{Q}}/js/fn/zoomer.js",
-		"Q/fisheye": "{{Q}}/js/fn/fisheye.js",
-		"Q/listing": "{{Q}}/js/fn/listing.js",
-		"Q/hautoscroll": "{{Q}}/js/fn/hautoscroll.js",
-		"Q/imagepicker": "{{Q}}/js/fn/imagepicker.js",
-		"Q/viewport": "{{Q}}/js/fn/viewport.js",
-		"Q/actions": "{{Q}}/js/fn/actions.js",
-		"Q/clickable": "{{Q}}/js/fn/clickable.js",
-		"Q/clickfocus": "{{Q}}/js/fn/clickfocus.js",
-		"Q/contextual": "{{Q}}/js/fn/contextual.js",
-		"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
-		"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
-		"Q/scroller": "{{Q}}/js/fn/scroller.js",
-		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js",
-		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js"
-	});
 	
 	Q.onLoad.add(function () {
 		// Start loading some plugins asynchronously after document loads.

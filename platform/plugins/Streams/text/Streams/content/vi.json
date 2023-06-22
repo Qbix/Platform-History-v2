@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Ai đã mời tôi",
         "DoYouAgree": "Bạn có đồng ý không?",
         "Yes": "Đúng",
-        "No": "KHÔNG"
+        "No": "KHÔNG",
+        "JoinItNow": "Tham gia nó ngay bây giờ?"
     },
     "login": {
         "prompt": "Hãy để bạn bè nhận ra bạn:",

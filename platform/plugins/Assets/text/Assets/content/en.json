@@ -43,6 +43,12 @@
         "Subject": "Thank you for your payment for \"{{description}}\"",
         "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
+    "connectedAccount": {
+        "Title": "Connect account",
+        "Success": "Success",
+        "YourAccountCreated": "Your account created successfully!",
+        "YourAccountAlreadyCreated": "Your account already created and ready to use"
+    },
     "payment": {
         "AboutOrder": "Info about order",
         "PaymentMethod": "Payment method",
@@ -66,7 +72,7 @@
         "YouHaveCreditsToStart": "You have {{amount}} credits to start",
         "PaymentFor": "Payment for \"{{1}}\"",
         "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
+        "PaymentToUser": "Transfer to {{toUserName}}",
         "CreatePrivateChat": "for private chat with {{toUserName}}",
         "CreatePaidStream": "for creating {{toStreamName}}",
         "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
@@ -594,7 +600,6 @@
             "TokenWasUnlocked": "Token \"{{title}}\" was unlocked"
         }
     },
-	
 	"coin": {
 		"staking": {
 			"start": {

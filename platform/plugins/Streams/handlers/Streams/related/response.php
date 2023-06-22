@@ -102,13 +102,13 @@ function Streams_related_response()
 
 	if ($nodeUrls_requested) {
 		$nodeUrls = array();
-		foreach ($rel as $r) {
+		foreach ($rel as $r2) {
 			$far = $isCategory ? 'from' : 'to';
 			$farPublisherId = $far . 'PublisherId';
 			$farStreamName = $far . 'StreamName';
 			$nodeUrl = Q_Utils::nodeUrl(array(
-				'publisherId' => $r->$farPublisherId,
-				'streamName' => $r->$farStreamName
+				'publisherId' => $r2->$farPublisherId,
+				'streamName' => $r2->$farStreamName
 			));
 			$nodeUrls[$nodeUrl] = true;
 		}

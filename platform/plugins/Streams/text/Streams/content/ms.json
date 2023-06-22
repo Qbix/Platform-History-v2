@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Siapa yang menjemput saya",
         "DoYouAgree": "Adakah anda bersetuju?",
         "Yes": "ya",
-        "No": "Tidak"
+        "No": "Tidak",
+        "JoinItNow": "Sertai sekarang?"
     },
     "login": {
         "prompt": "Biarkan rakan mengenali anda:",

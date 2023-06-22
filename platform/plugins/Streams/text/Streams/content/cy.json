@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Pwy a&#39;m gwahoddodd",
         "DoYouAgree": "Wyt ti&#39;n cytuno?",
         "Yes": "Oes",
-        "No": "Nac ydw"
+        "No": "Nac ydw",
+        "JoinItNow": "Ymunwch ag ef nawr?"
     },
     "login": {
         "prompt": "Gadewch i ffrindiau eich adnabod:",

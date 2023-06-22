@@ -78,7 +78,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	filter: 'Users/',
 	exclude: null,
 	contactUserId: null,
-	canAd: false,
+	canAdd: false,
 	addToPhonebook: Q.info.isMobile,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
@@ -148,7 +148,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 					});
 				});
 			}
-			if (state.canAd) {
+			if (state.canAdd) {
 				var $add = tool.$('.Users_labels_add')
 				.on(Q.Pointer.fastclick, function () {
 					Q.prompt(Q.text.Users.labels.prompt, function (title) {

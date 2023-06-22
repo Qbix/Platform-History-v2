@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Hver bauð mér",
         "DoYouAgree": "Ertu sammála?",
         "Yes": "Já",
-        "No": "Nei"
+        "No": "Nei",
+        "JoinItNow": "Skráðu þig núna?"
     },
     "login": {
         "prompt": "Láttu vini þekkja þig:",

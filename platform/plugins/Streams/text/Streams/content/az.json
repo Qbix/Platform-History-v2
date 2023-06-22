@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Məni kim dəvət etdi",
         "DoYouAgree": "Razısan?",
         "Yes": "Bəli",
-        "No": "Yox"
+        "No": "Yox",
+        "JoinItNow": "İndi qoşulun?"
     },
     "login": {
         "prompt": "Dostlar sizi tanısın:",

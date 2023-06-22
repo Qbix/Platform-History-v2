@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Nani alinialika",
         "DoYouAgree": "Unakubali?",
         "Yes": "Ndiyo",
-        "No": "Hapana"
+        "No": "Hapana",
+        "JoinItNow": "Jiunge nayo sasa?"
     },
     "login": {
         "prompt": "Waruhusu marafiki wakutambue:",

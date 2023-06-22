@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Nork gonbidatu nau",
         "DoYouAgree": "Ados zaude?",
         "Yes": "Bai",
-        "No": "Ez"
+        "No": "Ez",
+        "JoinItNow": "Bat egin orain?"
     },
     "login": {
         "prompt": "Utzi lagunei ezagutarazten:",

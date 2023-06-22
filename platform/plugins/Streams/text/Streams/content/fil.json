@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Sino ang nag-imbita sa akin",
         "DoYouAgree": "Sumasang-ayon ka ba?",
         "Yes": "Oo",
-        "No": "Hindi"
+        "No": "Hindi",
+        "JoinItNow": "Sumali dito ngayon?"
     },
     "login": {
         "prompt": "Hayaang makilala ka ng mga kaibigan:",

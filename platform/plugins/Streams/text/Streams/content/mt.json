@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Min stidinni",
         "DoYouAgree": "Taqbel?",
         "Yes": "Iva",
-        "No": "Nru"
+        "No": "Nru",
+        "JoinItNow": "Ingħaqad magħha issa?"
     },
     "login": {
         "prompt": "Ħalli lill-ħbieb jagħrfuk:",

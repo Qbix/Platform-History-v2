@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "Aki meghívott",
         "DoYouAgree": "Egyetértesz?",
         "Yes": "Igen",
-        "No": "Nem"
+        "No": "Nem",
+        "JoinItNow": "Csatlakozz most?"
     },
     "login": {
         "prompt": "Hagyd, hogy barátaid felismerjenek:",

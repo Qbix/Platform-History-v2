@@ -31,6 +31,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		$this->options = array_merge(array(
 			'secret' => Q_Config::expect('Assets', 'payments', 'stripe', 'secret'),
 			'publishableKey' => Q_Config::expect('Assets', 'payments', 'stripe', 'publishableKey'),
+			'clientId' => Q_Config::get("Assets", "payments", "stripe", "clientId", null)
 		), $options);
 		\Stripe\Stripe::setApiKey($this->options['secret']);
 	}
@@ -160,23 +161,121 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			'metadata' => !empty($options['metadata']) ? $options['metadata'] : null
 		);
 
-		// get connected account
-		$connectedAccount = new Assets_Connected();
-		$connectedAccount->merchantUserId = Q::app();
-		$connectedAccount->payments = 'stripe';
-		if ($connectedAccount->retrieve()) {
-			// get commission percents
-			$commission = (int)Q_Config::expect("Assets", "commission");
-
-			$params['application_fee_amount'] = ceil($amount - $amount/100 * $commission);
-			$params['transfer_data'] = array(
-				'destination' => $connectedAccount->accountId
-			);
-		}
-
 		$intent = \Stripe\PaymentIntent::create($params); // can throw some exception
 
 		return $intent;
+	}
+
+	/**
+	 * Create connected account for user
+	 * @method createConnectedAccount
+	 * @param {array} [$options=array()] Any additional options
+	 */
+	function createConnectedAccount ($options = array()) {
+		$options = array_merge($this->options, $options);
+		$uri = Q_Dispatcher::uri();
+		$method = Q::ifset($uri, 'method', null);
+
+		$stripe = new \Stripe\StripeClient($options['secret']);
+		$account = self::getConnectedAccount($options['user']);
+		if ($account) {
+			if (self::connectedAccountReady($account)) {
+				return Q::view("Assets/content/connectedAccountCreated.php", compact("method"));
+			}
+		} else {
+			$params = [
+				'type' => 'standard'
+			];
+			if ($options['user']->emailAddress) {
+				$params['email'] = $options['user']->emailAddress;
+			}
+			$account = $stripe->accounts->create($params);
+			self::setConnectedAccount($account->id);
+		}
+
+		$accountLink = $stripe->accountLinks->create([
+			'account' => $account->id,
+			'refresh_url' => Q_Uri::url("Assets/connected payments=stripe method=refresh"),
+			'return_url' => Q_Uri::url("Assets/connected payments=stripe method=return"),
+			'type' => 'account_onboarding',
+		]);
+
+		header("Location: ".$accountLink->url);
+		return true;
+	}
+
+	/**
+	 * Check if connected account ready to use
+	 * @method connectedAccountReady
+	 * @param {array} [$account]
+	 * @return string
+	 */
+	function connectedAccountReady ($account=null) {
+		if (!$account) {
+			$account = self::getConnectedAccount();
+		}
+
+		return Q::ifset($account, 'details_submitted', false);
+	}
+
+	/**
+	 * Get connected account for user
+	 * @method getConnectedAccount
+	 * @param {array} [$options=array()] Any additional options
+	 * @return string
+	 */
+	function getConnectedAccount ($options = array()) {
+		$options = array_merge($this->options, $options);
+
+		$connectedAccount = new Assets_Connected();
+		$connectedAccount->userId = $this->options['user']->id;
+		$connectedAccount->payments = 'stripe';
+		if ($connectedAccount->retrieve()) {
+			$stripe = new \Stripe\StripeClient($this->options['secret']);
+			return $account = $stripe->accounts->retrieve($connectedAccount->accountId, []);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Set connected account for user
+	 * @method setConnectedAccount
+	 * @param {string} $accountId
+	 */
+	function setConnectedAccount ($accountId) {
+		$connectedAccount = new Assets_Connected();
+		$connectedAccount->userId = $this->options['user']->id;
+		$connectedAccount->payments = 'stripe';
+		$connectedAccount->accountId = $accountId;
+		$connectedAccount->save(true);
+	}
+
+	/**
+	 * Delete connected account for user
+	 * @method deleteConnectedAccount
+	 * @param {array} [$options=array()] Any additional options
+	 * @return string
+	 */
+	function deleteConnectedAccount ($options = array()) {
+		$options = array_merge($this->options, $options);
+
+		$accountId = self::getConnectedAccount($this->options['user']);
+		if (!$accountId) {
+			throw new Exception("You have no connected account");
+		}
+
+		$stripe = new \Stripe\StripeClient($this->options['secret']);
+		$stripe->accounts->delete($accountId, []);
+
+		$connectedAccount = new Assets_Connected();
+		$connectedAccount->userId = $this->options['user']->id;
+		$connectedAccount->payments = 'stripe';
+		if ($connectedAccount->retrieve()) {
+			$connectedAccount->remove();
+		}
+
+		return null;
 	}
 
 	static function log ($key, $title, $message=null) {

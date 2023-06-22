@@ -4,28 +4,17 @@
      * Zoomer tool Generates an image and zooms it
      * @method zoomer
      * @param {Object} [options] this object contains properties for function
-     *  @param {Number} [options.overlayWidth] Image Overlay Width
-     *  @default 75
-     *  @param {Number} [options.overlayHeight] Image Overlay Height
-     *  @default 75
-     *  @param {Number} [options.leftMargin] Image left margin
-     *  @default 0.1
-     *  @param {Number} [options.rightMargin] Image right Margin
-     *  @default 0.1
-     *  @param {Number} [options.topMargin] Image top Margin
-     *  @default 0.1
-     *  @param {Number} [options.bottomMargin] Image bottom Margin
-     *  @default 0.1
-     *  @param {Number} [options.zoomedWidth] Zooming width
-     *  @default null
-     *  @param {Number} [options.zoomedHeight] Zooming height
-     *  @default null
-     *  @param {Number} [options.widthRatio] Ratio for width on zooming
-     *  @default 2
-     *  @param {Number} [options.heightRatio] Ratio for height on zooming
-     *  @default 2
-     *  @param {String} [options.overlayClass] Class for Overlay styles
-     *  @default "Q_zoomer"
+     *  @param {Number} [options.overlayWidth=75] Image Overlay Width
+     *  @param {Number} [options.overlayHeight=75] Image Overlay Height
+     *  @param {Number} [options.leftMargin=0.1] Image left margin
+     *  @param {Number} [options.rightMargin=0.1] Image right Margin
+     *  @param {Number} [options.topMargin=0.1] Image top Margin
+     *  @param {Number} [options.bottomMargin=0.1] Image bottom Margin
+     *  @param {Number} [options.zoomedWidth=null] Zooming width
+     *  @param {Number} [options.zoomedHeight=null] Zooming height
+     *  @param {Number} [options.widthRatio=2] Ratio for width on zooming
+     *  @param {Number} [options.heightRatio=2] Ratio for height on zooming
+     *  @param {String} [options.overlayClass="Q_zoomer"] Class for Overlay styles
      */
 
     Q.Tool.jQuery('Q/zoomer',
@@ -34,9 +23,6 @@
 
             // they should all be images
             var $this = this;
-            if (!$this.is('img')) {
-                return;
-            }
 
             var data = $this.data('Q/zoomer');
             if (data) {
@@ -55,8 +41,9 @@
                 .css('overflow', 'hidden')
                 .addClass('Q_zoomer')
                 .addClass(o.overlayClass);
-            var z_img = $('<img />')
+            var z_img = $('<div />')
                 .css('position', 'absolute');
+            z_img.html($this[0].outerHTML);
             if (o.zoomedWidth) {
                 z_img.css('width', zoomedWidth);
             } else if (o.widthRatio) {
@@ -67,7 +54,7 @@
             } else if (o.heightRatio) {
                 z_img.height((o.heightRatio * $this.height()));
             }
-            z_img.attr('src', $this.attr('src'));
+            // z_img.attr('src', $this.attr('src'));
             if (o.overlayWidth) {
                 o_div.width(o.overlayWidth);
             }

@@ -1805,10 +1805,11 @@ class Q_Response
 		if (!Q_Request::isAjax()) {
 			if (!empty($permanently)) {
 				header("HTTP/1.1 301 Moved Permanently");
-			}
+			} else
 			header("Location: $url");
 		}
 		self::$redirected = $uri;
+		self::$redirectedToUrl = $url;
 		return true;
 	}
 
@@ -2051,12 +2052,20 @@ class Q_Response
 	 * @static
 	 */
 	public static $batch = false;
+	
 	/**
 	 * @property $redirected
-	 * @type boolean
+	 * @type null|string
 	 * @static
 	 */
-	public static $redirected = false;
+	public static $redirected = null;
+
+	/**
+	 * @property $redirectedToUrl
+	 * @type string
+	 * @static
+	 */
+	public static $redirectedToUrl = null;
 
 	/**
 	 * @property $slots

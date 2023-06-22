@@ -23,7 +23,7 @@ function Streams_after_Q_file_save($params)
 		include_once(Q_CLASSES_DIR.DS.'Audio'.DS.'getid3'.DS.'getid3.php');
 		$getID3 = new getID3;
 		$meta = $getID3->analyze($filePath);
-		$bitrate = $meta['audio']['bitrate'];
+		$bitrate = Q::ifset($meta, 'audio', 'bitrate', 128000);
 		$bits = $size * 8;
 		$duration = $bits / $bitrate;
 		$stream->setAttribute('Q.audio.bitrate', $bitrate);

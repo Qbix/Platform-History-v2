@@ -634,7 +634,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	renderNotification: function(message){
 		var tool = this;
 		var state = tool.state;
-		var notificationTemplate = tool.text.chat[message.action.toCapitalized()];
+		var notificationTemplate = tool.text.chat.Notifications[message.action.toCapitalized()];
 		var m = Q.extend({
 			time: Date.now() / 1000
 		}, message);
@@ -1348,7 +1348,7 @@ Q.Template.set('Streams/chat/message/bubble',
 );
 
 Q.Template.set('Streams/chat/message/notification',
-	'<div class="Streams_chat_notification>'+
+	'<div class="Streams_chat_notification">'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
 		'{{{notificationHTML}}}'+
 	'</div>',

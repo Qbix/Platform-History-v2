@@ -21,12 +21,12 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {String|Buffer} [fields.merchantUserId] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
  * @param {String} [fields.payments] defaults to ""
  * @param {String} [fields.accountId] defaults to ""
- * @param {String} [fields.refreshToken] defaults to ""
+ * @param {String} [fields.refreshToken] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
- * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -35,7 +35,7 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property merchantUserId
+ * @property userId
  * @type String|Buffer
  * @default ""
  * 
@@ -55,7 +55,7 @@ Q.mixin(Base, Row);
 /**
  * @property refreshToken
  * @type String
- * @default ""
+ * @default null
  * 
  */
 /**
@@ -67,7 +67,7 @@ Q.mixin(Base, Row);
 /**
  * @property updatedTime
  * @type String|Db.Expression
- * @default "0000-00-00 00:00:00"
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 
@@ -257,7 +257,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"merchantUserId",
+		"userId",
 		"payments"
 	];
 };
@@ -279,7 +279,7 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"merchantUserId",
+		"userId",
 		"payments",
 		"accountId",
 		"refreshToken",
@@ -291,39 +291,39 @@ Base.fieldNames = function () {
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_merchantUserId
+ * @method beforeSet_userId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_merchantUserId = function (value) {
+Base.prototype.beforeSet_userId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".merchantUserId");
-		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".merchantUserId");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value === "string" && value.length > 8)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the merchantUserId field
+	 * Returns the maximum string length that can be assigned to the userId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_merchantUserId = function () {
+Base.prototype.maxSize_userId = function () {
 
-		return 31;
+		return 8;
 };
 
 	/**
-	 * Returns schema information for merchantUserId column
+	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_merchantUserId = function () {
+Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varbinary","8","",false],false,"PRI",null];
 };
 
 /**
@@ -411,9 +411,7 @@ return [["varchar","255","",false],false,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_refreshToken = function (value) {
-		if (value == null) {
-			value='';
-		}
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".refreshToken");
@@ -437,7 +435,7 @@ Base.prototype.maxSize_refreshToken = function () {
 	 */
 Base.column_refreshToken = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -487,7 +485,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -499,7 +497,7 @@ return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['merchantUserId','payments'], i;
+	var fields = ['userId','payments'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

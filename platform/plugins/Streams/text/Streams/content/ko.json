@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "나를 초대한 사람",
         "DoYouAgree": "동의하십니까?",
         "Yes": "예",
-        "No": "아니요"
+        "No": "아니요",
+        "JoinItNow": "지금 가입하시겠습니까?"
     },
     "login": {
         "prompt": "친구들이 당신을 알아보도록 하세요:",

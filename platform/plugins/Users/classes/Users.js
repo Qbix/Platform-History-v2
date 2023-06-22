@@ -306,6 +306,7 @@ function Users_request_handler(req, res, next) {
 				});
 			}
 			break;
+		
 		case 'Users/checkIfOnline':
 
 			var operatorUserId = parsed.operatorUserId;
@@ -348,11 +349,13 @@ function Users_request_handler(req, res, next) {
 				data.userIsOnline = client != null ? 'true' : 'false';
 
 				var operatorClient = getOperatorClient();
-
-				var headers = {
-					'user-agent':'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9',
-					'cookie':operatorClient.handshake.headers.cookie
-				};
+				var headers = {};
+				if (operatorClient) {
+					headers = {
+						'user-agent':'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9',
+						'cookie':operatorClient.handshake.headers.cookie
+					};
+				}
 
 				Q.Utils.queryExternal(handlerToExecute, data, null, headers, function(err, response) {
 				});
@@ -378,7 +381,7 @@ var timeouts = {};
 Users.Socket = {
 	/**
 	 * Start http server if needed, and start listening to socket.
-	 * Use this instead of Users.socket
+	 * Use this instead of Q.Socket
 	 * This also attaches a few event handlers for Users events.
 	 * @method listen
 	 * @param {Object} options Can be any options for the server.listen() in socket.io,

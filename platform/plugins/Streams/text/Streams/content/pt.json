@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "quem me convidou",
         "DoYouAgree": "Você concorda?",
         "Yes": "Sim",
-        "No": "Não"
+        "No": "Não",
+        "JoinItNow": "Junte-se a ele agora?"
     },
     "login": {
         "prompt": "Permita que seus amigos o reconheçam:",

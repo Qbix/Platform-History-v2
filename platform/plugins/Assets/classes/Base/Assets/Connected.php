@@ -16,17 +16,17 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.merchantUserId] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.payments] defaults to ""
  * @param {string} [$fields.accountId] defaults to ""
- * @param {string} [$fields.refreshToken] defaults to ""
+ * @param {string} [$fields.refreshToken] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 abstract class Base_Assets_Connected extends Db_Row
 {
 	/**
-	 * @property $merchantUserId
+	 * @property $userId
 	 * @type string
 	 * @default ""
 	 * 
@@ -46,7 +46,7 @@ abstract class Base_Assets_Connected extends Db_Row
 	/**
 	 * @property $refreshToken
 	 * @type string
-	 * @default ""
+	 * @default null
 	 * 
 	 */
 	/**
@@ -58,7 +58,7 @@ abstract class Base_Assets_Connected extends Db_Row
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
-	 * @default "0000-00-00 00:00:00"
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 * 
 	 */
 	/**
@@ -72,7 +72,7 @@ abstract class Base_Assets_Connected extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'merchantUserId',
+			  0 => 'userId',
 			  1 => 'payments',
 			)
 		);
@@ -290,49 +290,49 @@ abstract class Base_Assets_Connected extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_merchantUserId
+	 * @method beforeSet_userId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_merchantUserId($value)
+	function beforeSet_userId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
-			return array('merchantUserId', $value);
+			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".merchantUserId");
-		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".merchantUserId");
-		return array('merchantUserId', $value);			
+			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+		if (strlen($value) > 8)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
+		return array('userId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the merchantUserId field
+	 * Returns the maximum string length that can be assigned to the userId field
 	 * @return {integer}
 	 */
-	function maxSize_merchantUserId()
+	function maxSize_userId()
 	{
 
-		return 31;			
+		return 8;			
 	}
 
 	/**
-	 * Returns schema information for merchantUserId column
+	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_merchantUserId()
+	static function column_userId()
 	{
 
 return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '31',
+    1 => '8',
     2 => '',
     3 => false,
   ),
@@ -463,7 +463,7 @@ return array (
 	function beforeSet_refreshToken($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('refreshToken', $value);
 		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
@@ -501,7 +501,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
   3 => NULL,
 );			
@@ -597,7 +597,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => '0000-00-00 00:00:00',
+  3 => 'CURRENT_TIMESTAMP',
 );			
 	}
 
@@ -612,7 +612,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('merchantUserId','payments') as $name) {
+			foreach (array('userId','payments') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -633,7 +633,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('merchantUserId', 'payments', 'accountId', 'refreshToken', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'payments', 'accountId', 'refreshToken', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

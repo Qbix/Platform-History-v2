@@ -16,7 +16,8 @@
         "Streams\/invitedMe": "beni kim davet etti",
         "DoYouAgree": "Katılıyor musun?",
         "Yes": "Evet",
-        "No": "HAYIR"
+        "No": "HAYIR",
+        "JoinItNow": "Şimdi katılmak ister misin?"
     },
     "login": {
         "prompt": "Arkadaşlarınızın sizi tanımasına izin verin:",
