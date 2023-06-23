@@ -622,6 +622,7 @@
 				"btns":{
 					"stake": "Stake"
 				},
+				"stake": "Stake",
 				"loading": "Loading"
 			}
 		},

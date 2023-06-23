@@ -1408,6 +1408,42 @@
 		},
 		CommunityCoins: {
 			Pools: {
+				Factory: {
+					Get: function(communityCoinAddress, abiPaths, chainId) {
+						const defaultAbi = {
+							abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
+							abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
+						};
+						var abi = {};
+						if (Q.isEmpty(abiPaths)) {
+							abi = defaultAbi;
+						} else if (Q.isEmpty(abiPaths.abiPathCommunityCoin)) {
+							abi.abiPathCommunityCoin = defaultAbi.abiPathCommunityCoin;
+						} else if (Q.isEmpty(abiPaths.abiPathStakingPoolF)) {
+							abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
+						}
+					
+						return Q.Users.Web3.getContract(
+							abi.abiPathCommunityCoin, 
+							{
+								contractAddress: communityCoinAddress,
+								readOnly: true,
+								chainId: chainId
+							}
+						).then(function (contract) {
+							return contract.instanceManagment();
+						}).then(function (stakingPoolFactory) {
+							return Q.Users.Web3.getContract(
+								abi.abiPathStakingPoolF, 
+								{
+									contractAddress: stakingPoolFactory,
+									readOnly: true,
+									chainId: chainId
+								});
+						})
+					}
+					
+				},
 				/**
 				 * Get pool instances from blockchain
 				 * @method getAll
@@ -1419,7 +1455,7 @@
 				 * @param {function} callback
 				 * @param {object} options
 				 */
-				getAll: function(communityCoinAddress, abiPaths, chainId, callback) {
+				getAll: function Assets_CommunityCoins_Pools_getAll(communityCoinAddress, abiPaths, chainId, callback) {
 					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId).then(function (instanceInfos) {
 						Q.handle(callback, null, [null, instanceInfos]);
 					}).catch(function(err){
@@ -1438,7 +1474,7 @@
 				 * @param {function} callback
 				 * @param {object} options
 				 */
-				getAllExtended: function(communityCoinAddress, abiPaths, chainId, userAddress, callback){
+				getAllExtended: function Assets_CommunityCoins_Pools_getAllExtended(communityCoinAddress, abiPaths, chainId, userAddress, callback){
 					
 					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
 					.then(function (instanceInfos) {
@@ -1497,6 +1533,7 @@
 						Q.handle(callback, null, [err.reason]);
 					});
 				},
+				
 				_getAll: function(communityCoinAddress, abiPaths, chainId) {
 					const defaultAbi = {
 						abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
@@ -1511,32 +1548,11 @@
 						abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
 					}
 					
-					var contractPoolF;
-					
-//					Promise.all([
-//						tool.nftContractPromise(), 
-//						tool.lockedContractPromise()
-//					])
-//					Q.Users.Web3.getContract(state.abiNFT, state.NFTAddress);
-					
-					return Q.Users.Web3.getContract(
-						abi.abiPathCommunityCoin, 
-						{
-							contractAddress: communityCoinAddress,
-							readOnly: true,
-							chainId: chainId
-						}
-					).then(function (contract) {
-						return contract.instanceManagment();
-					}).then(function (stakingPoolFactory) {
-						return Q.Users.Web3.getContract(
-							abi.abiPathStakingPoolF, 
-							{
-								contractAddress: stakingPoolFactory,
-								readOnly: true,
-								chainId: chainId
-							});
-					}).then(function (_contractPoolF) {
+					return Assets.CommunityCoins.Pools.Factory.Get(
+						communityCoinAddress, 
+						abiPaths, 
+						chainId
+					).then(function (_contractPoolF) {
 						contractPoolF = _contractPoolF;
 						return contractPoolF.instances();
 					}).then(function (instanceAddresses) {
@@ -1544,11 +1560,33 @@
 							return instanceAddresses;
 						} else {
 							var p = [];
+							
+							p.push(new Promise(function (resolve, reject) {resolve(instanceAddresses)}));
+							
 							instanceAddresses.forEach(function(i){
 								p.push(contractPoolF.getInstanceInfoByPoolAddress(i));
 							});
-							return Promise.all(p);
+							return Promise.allSettled(p);
 						}
+					}).then(function (_ref) {
+
+						var instanceAddresses = _ref.shift(0);
+
+						var ret = [];
+						_ref.forEach(function(i, index){
+							ret.push(
+								$.extend(
+									{}, 
+									//instanceInfos.value[index], 
+									//t, 
+									{...i.value},
+									{
+										"communityPoolAddress": instanceAddresses.value[index]
+									}
+								)
+							); 
+						});
+						return new Promise(function (resolve, reject) {resolve(ret)});
 					});
 				},
 				_getERC20TokenInfo: function(contract, userAddress, chainId){

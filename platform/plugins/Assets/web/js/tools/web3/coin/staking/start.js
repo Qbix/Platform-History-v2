@@ -54,6 +54,46 @@
             // handle revert and grab custom error
             return (err.message);
         }
+		
+		if (Q.isEmpty(Q.isAddress)) {
+			Q.isAddress = function _Q_isAddress(address) {
+				// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
+				if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+					// check if it has the basic requirements of an address
+					return false;
+				} else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+					// If it's all small caps or all all caps, return true
+					return true;
+				} else {
+					// Otherwise check each case
+		//            address = address.replace('0x','');
+		//            var addressHash = Web3.utils.sha3(address.toLowerCase());
+		//            for (var i = 0; i < 40; i++ ) {
+		//                // the nth letter should be uppercase if the nth digit of casemap is 1
+		//                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+		//                    return false;
+		//                }
+		//            }
+					return true;
+				}
+
+			}
+		}
+
+		if (Q.isEmpty(Q.validate)) {
+			Q.validate = function _Q_validate(address) {
+
+			}
+			Q.validate.notEmpty = function _Q_validate_notEmpty(input) {
+				return !Q.isEmpty(input)
+			}
+			Q.validate.integer = function _Q_validate_integer(input) {
+				return Q.isInteger(input)
+			}
+			Q.validate.address = function _Q_validate_address(input) {
+				return Q.isAddress(input)
+			}
+		}
     }
 	
 	/**
@@ -101,9 +141,6 @@
 		
 		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
 		
-		if (Q.isEmpty(state.communityStakingPoolAddress)) {
-			return console.warn("communityStakingPoolAddress required!");
-		}
 		if (Q.isEmpty(state.communityCoinAddress)) {
 			return console.warn("communityCoinAddress required!");
 		}
@@ -120,7 +157,6 @@
 		abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",
 		abiPathCommunityStakingPool: "Assets/templates/R1/CommunityStakingPool/contract",
 		chainId: null,
-		communityStakingPoolAddress: null,
 		communityCoinAddress: null,
 		fields: {
 			
@@ -169,13 +205,137 @@ Staking pool duration: {{ duration }}:
 
 
 				tool.fillPoolSelect();
-			
+					
 				// !!
+				// stake
+				$("button[name=stake]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+
+					//$(this).addClass("Q_working");
+					
+					var tmp = tool._getUserChoose();
+					
+					var stake_amount = tmp[0];
+					var data = tmp[1].instancedata;
+					var optionSelected = tmp[2];
+
+
+					var validated = true;
+
+					if (
+						Q.validate.notEmpty(optionSelected.val()) && 
+						Q.validate.address(optionSelected.val())
+					) {
+					//
+					} else {
+						Q.Notices.add({
+							content: "Token invalid",
+							timeout: 5
+						});
+						validated = false;
+					}
+
+					if (
+						Q.validate.notEmpty(stake_amount) && 
+						Q.validate.integer(stake_amount)
+					) {
+					//
+					} else {
+						Q.Notices.add({
+							content: "Amount invalid",
+							timeout: 5
+						});
+						validated = false;
+					}
+							
+					if (validated) {
+						var invokeObj = Q.invoke({
+							title: tool.text.coin.staking.start.stake,
+							template: {
+								name: 'Assets/web3/coin/staking/start/stake/interface',
+								fields: {
+//									token_amount: 123123123,
+//									poolname: "AABBBCCC"
+								},
+							},
+							className: 'Assets_web3_coin_staking_start_stake',
+
+							trigger: tool.element,
+							onActivate: function ($element) {
+								if (!($element instanceof $)) {
+									$element = $(arguments[2]);
+								}
+
+								
+								var erc20Contract;
+								var poolContract;
+								Q.Users.Web3.getContract(
+									"Assets/templates/ERC20", 
+									{
+										contractAddress: optionSelected.val(),
+										chainId: state.chainId
+									}
+								).then(function (contract) {
+									erc20Contract = contract;
+									$($element).find('.step1 .bi-asterisk').addClass('animate');
+
+									return contract.approve(
+										data.communityPoolAddress,
+										ethers.utils.parseUnits(stake_amount)
+									);
+								}).then(function (tx) {
+									return tx.wait();
+								}).then(function (receipt) {
+									if (receipt.status == 0) {
+										throw 'Smth unexpected when approve';
+									}
+									Q.Template.render("Assets/web3/coin/staking/start/stake/interface/check", {}, function (err, html) {
+										$($element).find('.step1').html(html);
+										$($element).find('.step2 .bi-asterisk').addClass('animate');
+									});
+								}).then(function () {	
+									return tool._getStakingPoolContract(data.communityPoolAddress);
+								}).then(function (pool) {
+									poolContract = pool;
+
+									return pool.stake(
+										ethers.utils.parseUnits(stake_amount),
+										tool.loggedInUserXid
+									);
+								}).then(function (tx) {
+									return tx.wait();
+								}).then(function (receipt) {
+									if (receipt.status == 0) {
+										throw 'Smth unexpected when stake';
+									}
+									Q.Template.render("Assets/web3/coin/staking/start/stake/interface/check", {}, function (err, html) {
+										$($element).find('.step2').html(html);
+									});
+								}).catch(function (err) {
+
+									Q.Notices.add({
+										content: Q.grabMetamaskError(err, [erc20Contract, poolContract]),
+										timeout: 5
+									});
+								}).finally(function(){
+									
+									invokeObj.close();
+								});
+
+							}
+						});
+					}
+					
+				});		
 				
 				///
 			});
 		},
 		_getCommunityCoinContract: function() {
+			var tool = this;
+			var state = tool.state;
+			
 			return Q.Users.Web3.getContract(
 				state.abiPathCommunityCoin, 
 				{
@@ -184,11 +344,14 @@ Staking pool duration: {{ duration }}:
 				}
 			)
 		},
-		_getStakingPoolContract: function() {
+		_getStakingPoolContract: function(communityStakingPoolAddress) {
+			var tool = this;
+			var state = tool.state;
+			
 			return Q.Users.Web3.getContract(
 				state.abiPathCommunityStakingPool, 
 				{
-					contractAddress: state.communityStakingPoolAddress,
+					contractAddress: communityStakingPoolAddress,
 					chainId: state.chainId
 				}
 			)
@@ -199,16 +362,31 @@ Staking pool duration: {{ duration }}:
 			var historyTool = Q.Tool.from($(tool.element).find('.Assets_web3_coin_staking_history_tool'), "Assets/web3/coin/staking/history");
 			historyTool.refresh();
 		},
-		_renderPoolInfo: function(optionSelected, data){
+		_getUserChoose: function() {
 			var tool = this;
+			var $selectEl = $(tool.element).find('select[name=reserveToken]');
+			var $inputEl = $(tool.element).find('input[name=amount]');
+
+			var optionSelected = $selectEl.find('option:selected');
+			var data = optionSelected.data();
+			var stake_amount = $inputEl.val();			
 			
-			var stake_amount = $(tool.element).find('input[name=amount]').val();
+			return [stake_amount, data, optionSelected];
+		},
+		_renderPoolInfo: function(){
+			var tool = this;
+
+			var optionSelected;
+			var data;
+			var stake_amount;
+			
+			[stake_amount, data, optionSelected] = tool._getUserChoose();
 			
 			Q.Template.render("Assets/web3/coin/staking/start/poolInfo", {
 				selectValue:optionSelected.val(),
 				selectTitle:optionSelected.html(),
 				//data: data,
-				data: data,
+				data: Q.isEmpty(data.instancedata) ? {} : data.instancedata,
 				stake_amount: Q.isEmpty(stake_amount) ? 0 : stake_amount
 			}, function (err, html) {
 				Q.replace($(tool.element).find('.infoContainer')[0], html);
@@ -219,6 +397,7 @@ Staking pool duration: {{ duration }}:
 			var state = tool.state;
 			
 			var $selectElement = $(tool.element).find('select[name=reserveToken]');
+			var $amountElement = $(tool.element).find('input[name=amount]');
 			var $infoContainer = $(tool.element).find('.infoContainer');
 			//var contract;
 			$selectElement.addClass("Q_working");
@@ -235,7 +414,7 @@ Staking pool duration: {{ duration }}:
 					$selectElement.html('');
 					
 					instanceInfos.forEach(function(i, index){
-					
+			
 						var selectTitle;
 						var selectVal = i.tokenErc20;
 						if (Q.isEmpty(i.erc20TokenInfo.name) && Q.isEmpty(i.erc20TokenInfo.symbol)) {
@@ -252,28 +431,18 @@ Staking pool duration: {{ duration }}:
 						`);
 						
 					});
-					/*
-		<td>{{i.tokenErc20}}</td>
-		<td>{{i.duration}}</td>
-		<td>{{i.bonusTokenFraction}}</td>
-		<td>{{i.popularToken}}</td>
-
-		<td>{{i.rewardsRateFraction}}</td>
-		<td>{{i.numerator}}</td>
-		<td>{{i.denominator}}</td>
-					*/
-				   $selectElement.removeClass("Q_working");
-				   $selectElement.off("change").on("change", function (e) {
-						var optionSelected = $("option:selected", this);
-						//var valueSelected = this.value;
-						var data = optionSelected.data();
-						
-						tool._renderPoolInfo(optionSelected, data.instancedata);
-						
-						$infoContainer.removeClass("Q_working");
-				
-				   }).trigger('change');
 					
+					$selectElement.removeClass("Q_working");
+					$amountElement.removeClass("Q_working");
+					
+					var __renderOnchange = function (e) {
+						tool._renderPoolInfo();
+						$infoContainer.removeClass("Q_working");
+					};
+
+					$selectElement.off("change").on("change", __renderOnchange).trigger('change');
+					$amountElement.off("keyup").on("keyup", __renderOnchange);
+				   
 				}
 			);
 
@@ -282,6 +451,9 @@ Staking pool duration: {{ duration }}:
 
 	Q.Template.set("Assets/web3/coin/staking/start",
 	`
+	
+	
+	
 	<div>
 		<div class="row">
 			<div class="col-sm-4">
@@ -330,6 +502,41 @@ Staking pool duration: {{ duration }}:
 		{{/if}} 
 		Staking pool duration: {{data.duration}}:<br>
 		{{stake_amount}} _Max_ 
+	`,
+		{text: ["Assets/content"]}
+	);
+	
+	Q.Template.set("Assets/web3/coin/staking/start/stake/interface",
+	`
+		You should needproceed two transactions:<br>
+
+		<table class="table table-stripe">
+		<tr>
+		<td>Approve {{token_amount}} to the pool {{poolname}}</td>
+		<td class="steps step1">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+				<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+			</svg>
+		</td>
+		</tr>
+		<tr>
+		<td>staking</td>
+		<td class="steps step2">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+				<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+			</svg>
+		</td>
+		</tr>
+	</table>
+	`,
+		{text: ["Assets/content"]}
+	);
+				    
+	Q.Template.set("Assets/web3/coin/staking/start/stake/interface/check",
+	`
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+		<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+	</svg>
 	`,
 		{text: ["Assets/content"]}
 	);
