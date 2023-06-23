@@ -303,7 +303,7 @@ class Q
 	}
 
 	/**
-	 * Test whether $text is prefixed by $prefix
+	 * Test whether $text is suffixed by $suffix
 	 * @method endsWith
 	 * @static
 	 * @param {string|array} $text The string or array of strings to check
