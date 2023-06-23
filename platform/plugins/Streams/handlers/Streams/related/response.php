@@ -31,7 +31,7 @@ function Streams_related_response()
 	$user = Users::loggedInUser();
 	$asUserId = $user ? $user->id : '';
 
-	if (!$relations_requested && !$streams_requested && !!$nodeUrls_requested) {
+	if (!$relations_requested && !$streams_requested && !$nodeUrls_requested) {
 		return;
 	}
 
