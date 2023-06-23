@@ -3559,18 +3559,6 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
 };
 
 /**
- * @method startsWith
- * @param {String} prefix
- * @return {boolean}
- */
-Sp.startsWith = function _String_prototype_startsWith(prefix) {
-	if (this.length < prefix.length) {
-		return false;
-	}
-	return this.substr(0, prefix.length) === prefix;
-};
-
-/**
  * Used to split ids into one or more segments, in order to store millions
  * of files under a directory, without running into limits of various filesystems
  * on the number of files in a directory.

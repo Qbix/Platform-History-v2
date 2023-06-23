@@ -303,6 +303,29 @@ class Q
 	}
 
 	/**
+	 * Test whether $text is prefixed by $prefix
+	 * @method endsWith
+	 * @static
+	 * @param {string|array} $text The string or array of strings to check
+	 * @param {string} $suffix
+	 * @return {boolean}
+	 */
+	static function endsWith($text, $suffix)
+	{
+		if (is_string($text)) {
+			return substr($text, -strlen($suffix)) === $suffix;	
+		}
+		if (is_array($text)) {
+			foreach ($text as $t) {
+				if (!self::endsWith($t, $suffix)) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+
+	/**
 	 * Goes through the params and replaces any references
 	 * to their names in the string with their value.
 	 * References are expected to be of the form {{varname}} or $varname.

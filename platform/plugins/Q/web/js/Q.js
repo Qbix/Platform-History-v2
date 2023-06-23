@@ -477,11 +477,25 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
  * @param {String} prefix
  * @return {boolean}
  */
+if (!Sp.startsWith)
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
 	if (prefix == null || this.length < prefix.length) {
 		return false;
 	}
 	return this.substr(0, prefix.length) === prefix;
+};
+
+/**
+ * @method endsWith
+ * @param {String} suffix
+ * @return {boolean}
+ */
+if (!Sp.endsWith)
+Sp.endsWith = function _String_prototype_endsWith(suffix) {
+	if (suffix == null || this.length < suffix.length) {
+		return false;
+	}
+	return this.substr(-suffix.length) === suffix;
 };
 
 /**
@@ -5620,24 +5634,12 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function') {
-				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
-				toolConstructor = _qtc[toolName];
-				if (typeof toolConstructor !== 'function') {
-					toolConstructor = function () { log("Missing tool constructor for " + toolName); }; 
-				}
+				_handleMissingConstructor(true);
 			}
 			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);
 		}
 		if (toolConstructor === undefined) {
-			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
-			toolConstructor = _qtc[toolName];
-			if (typeof toolConstructor !== 'function'
-			&& typeof toolConstructor !== 'string'
-			&& !(Q.isPlainObject(toolConstructor) && toolConstructor.js)) {
-				toolConstructor = function () {
-					log("Missing tool constructor for " + toolName);
-				}; 
-			}
+			_handleMissingConstructor(false);
 		}
 		if (parentId) {
 			Q.setObject([toolId, parentId], true, _toolsToInit);
@@ -5713,6 +5715,29 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			Q.Text.get(text, pipe.fill('text'));
 		}
 		pipe.add(waitFor, 1, _loadToolScript_loaded).run();
+
+		function _handleMissingConstructor(requireFunction) {
+			var result = {};
+			Q.Tool.onMissingConstructor.handle(_qtc, toolName, result);
+			if (result.toolName) {
+				toolConstructor = _qtc[toolName] = Q.Tool.defined(result.toolName);
+				Q.Tool.onLoadedConstructor(result.toolName)
+				.add(function (n, constructor) {
+					_qtc[toolName] = constructor;
+					Q.Tool.onLoadedConstructor(toolName)
+					.handle.call(Q.Tool, toolName, constructor);
+				}, toolName);
+			}
+			if (typeof toolConstructor !== 'function'
+			&& (requireFunction || (
+				typeof toolConstructor !== 'string'
+				&& !(Q.isPlainObject(toolConstructor) && toolConstructor.js
+			)))) {
+				toolConstructor = function () {
+					log("Missing tool constructor for " + toolName);
+				}; 
+			}
+		}
 	});
 }
 

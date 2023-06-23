@@ -6206,22 +6206,10 @@ function _onResultHandler(subject, params, args, shared, original) {
 	}
 }
 
-Q.Tool.onMissingConstructor.set(function (constructors, normalized, toolName) {
-	var str = "_preview";
-	if (normalized.substr(normalized.length-str.length) !== str) {
-		return;
+Q.Tool.onMissingConstructor.set(function (constructors, normalized, result) {
+	if (normalized.endsWith('_preview')) {
+		result.toolName = 'Streams/default/preview';
 	}
-	if (Q.typeOf(constructors["streams_default_preview"]) === "function") {
-		constructors[normalized] = constructors["streams_default_preview"];
-	} else {
-		constructors[normalized] = "{{Streams}}/js/tools/default/preview.js";
-	}
-	Q.Tool.onLoadedConstructor('Streams/default/preview')
-	.add(function (n, constructor) {
-		constructors[normalized] = constructor;
-		Q.Tool.onLoadedConstructor(normalized)
-		.handle.call(Q.Tool, normalized, constructor);
-	}, toolName);
 }, 'Streams');
 
 Q.beforeInit.add(function _Streams_beforeInit() {
