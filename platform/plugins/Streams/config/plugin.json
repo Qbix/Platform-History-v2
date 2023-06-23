@@ -360,9 +360,7 @@
 					"writeLevel": 0
 				},
 				"messages": {
-					"Streams/extra/changed": {
-						"post": true
-					}
+					"Streams/extra/changed": {}
 				}
 			},
 			"Streams/topic": {
