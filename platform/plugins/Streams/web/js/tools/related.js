@@ -550,7 +550,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	relatedResult: function (result, onUpdate, partial) {
 		var tool = this;
 
-		if (!tool.stream) {
+		if (tool.state.realtime && !tool.stream) {
 			// join user to category stream to allow get messages
 			if (Q.getObject("participant.state", result.stream) !== 'participating') {
 				result.stream.observe();
