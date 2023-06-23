@@ -23,7 +23,7 @@
  *   @default 'smooth'
  *   @param {String} [options.transition.type] type the type of transition. Can only be 'crossfade'
  *   @default 'crossfade'
- * @param {Object} [options.interval] interval object that contains properties for intervals
+ * @param {Object} [options.interval] interval object that contains default properties for intervals
  *   @param {Number} [options.interval.duration] duration number of milliseconds between beginning times of consecutive transitions.
  *      It's recommended to make this at least 2x the duration of the transitions!
  *   @param {String} [options.interval.ease] ease the type of easing function to apply from Q.Animation.ease object.

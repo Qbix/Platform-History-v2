@@ -1911,7 +1911,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 	/**
 	 * Updates relations after a stream was inserted or updated.
-	 * Checks the "updateRelations" config first, which haswhich is an array that can contain "to", "from" or both.
+	 * Checks the "updateRelations" config first, which is an array that can contain "to", "from" or both.
 	 * @return {array} Consists of ("to" => array(Streams_RelatedTo), "from" => array(Streams_RelatedFrom))
 	 */
 	function updateRelations($asUserId = null)

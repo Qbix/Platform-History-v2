@@ -16,10 +16,10 @@
  *  @param {String} [options.type='textarea'] The type of the input field. Can be "textarea", "text", or "select"
  *  @param {String} [options.capitalize=false] Whether to automatically capitalize the first letter
  *  @param {String} [options.options={}] If the type is "select", then this would be an object of {value: optionTitle} pairs
- *  @param {Boolean=true} [options.editing] Whether to start out in editing mode
- *  @param {Boolean=true} [options.editOnClick] Whether to enter editing mode when clicking on the text.
+ *  @param {Boolean} [options.editing=true] Whether to start out in editing mode
+ *  @param {Boolean} [options.editOnClick=true] Whether to enter editing mode when clicking on the text.
  *  @param {Boolean} [options.selectOnEdit=true] Whether to select everything in the input field when entering edit mode.
- *  @param {Boolean=true} [options.showEditButtons=false] Set to true to force showing the edit buttons on touchscreens
+ *  @param {Boolean} [options.showEditButtons=false] Set to true to force showing the edit buttons on touchscreens
  *  @param {Number} [options.maxWidth=null] The maximum width that the field can grow to
  *  @param {Number} [options.minWidth=100] The minimum width that the field can shrink to
  *  @param {String} [options.staticHtml] The static HTML to start out with

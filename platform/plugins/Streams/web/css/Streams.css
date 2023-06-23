@@ -186,6 +186,10 @@
 	text-align: left;
 }
 
+.Streams_participants_tool.Streams_noParticipants {
+	display: none;
+}
+
 .Users_avatar_tool {
 	display: inline-block;
 }

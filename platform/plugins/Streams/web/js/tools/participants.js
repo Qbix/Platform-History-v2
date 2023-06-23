@@ -44,6 +44,10 @@ function _Streams_participants(options) {
 		throw new Q.Error("Streams/chat: missing streamName option");
 	}
 	
+	if (state.hideIfNoParticipants) {
+		tool.element.addClass('Streams_noParticipants');
+	}
+	
 	tool.Q.onStateChanged('count').set(function (name) {
 		var c = state.count || 0;
 		tool.$count.text(c >= 100 ? '99+' : c.toString());
@@ -56,9 +60,9 @@ function _Streams_participants(options) {
 		if (state.hideIfNoParticipants) {
 			if (c <= 0) {
 				tool.cssDisplay = $toolElement.css("display");
-				$toolElement.css("display", "none");
+				tool.element.addClass('Streams_noParticipants');
 			} else {
-				$toolElement.css("display", tool.cssDisplay && tool.cssDisplay!=="none" ? tool.cssDisplay : "block");
+				tool.element.removeClass('Streams_noParticipants');
 			}
 		}
 	}, tool);

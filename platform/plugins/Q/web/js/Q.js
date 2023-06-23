@@ -3001,6 +3001,7 @@ Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
 };
 
 /**
+ * Use this method to defer a function until an event has occurred.
  * Like "add" method, but removes the handler right after it has executed.
  * @method addOnce
  * @param {mixed} handler Any kind of callable which Q.handle can invoke
