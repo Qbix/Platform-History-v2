@@ -584,11 +584,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var dir = tool.state.isCategory ? 'To' : 'From';
 		var eventNames = ['onRelated'+dir, 'onUnrelated'+dir, 'onUpdatedRelate'+dir];
 		if (tool.state.realtime) {
-			// join user to category stream to allow get messages
-			if (Q.getObject("participant.state", result.stream) !== 'participating') {
-				result.stream.observe();
-			}
-
 			Q.each(eventNames, function (i, eventName) {
 				result.stream[eventName]().set(function (msg, fields) {
 					// TODO: REPLACE THIS WITH AN ANIMATED UPDATE BY LOOKING AT THE ARRAYS entering, exiting, updating
