@@ -7724,12 +7724,6 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		return;
 	}
-	if (element === root
-	&& detected.name === 'explorer'
-	&& detected.mainVersion <= 8
-	&& ['mousedown','mouseup','click','dblclick'].indexOf(eventName) >= 0) {
-		element = document;
-	}
 	if (element.addEventListener) {
 		element.addEventListener(eventName, handler, useCapture);
 	} else if (element.attachEvent) {
@@ -7833,12 +7827,6 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		if (!eventName) {
 			return false;
 		}
-	}
-	if (element === root
-	&& detected.name === 'explorer'
-	&& detected.mainVersion <= 8
-	&& ['mousedown','mouseup','click','dblclick'].indexOf(eventName) >= 0) {
-		element = document;
 	}
 	if (element.removeEventListener) {
 		element.removeEventListener(eventName, handler, false);
@@ -12486,7 +12474,7 @@ Q.Visual = Q.Pointer = {
 	 * @method cancel
 	 */
 	cancel: function _Q_Pointer_cancel(params) {
-		params.eventName = 'touchcancel mousecancel'; // mousecancel can be a custom event
+		params.eventName = 'pointercancel'; // mousecancel can be a custom event
 		return params.original;
 	},
 	/**
@@ -12584,7 +12572,7 @@ Q.Visual = Q.Pointer = {
 		if (!Q.info.isTouchscreen) {
 			return Q.Pointer.click(params);
 		}
-		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
+		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'pointerdown';
 		return function _Q_touchclick_on_wrapper (e) {
 			var _relevantClick = true;
 			var t = this, a = arguments;
@@ -13290,10 +13278,10 @@ Q.Visual = Q.Pointer = {
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
-			if (e.type == 'touchstart') {
-				Q.addEventListener(document.body, 'touchend mouseup', function _removeClass() {
+			if (e.type == 'pointerdown') {
+				Q.addEventListener(document.body, 'pointerup', function _removeClass() {
 					div.removeClass('Q_touchlabel_show');
-					Q.removeEventListener(document.body, 'touchend mouseup', _removeClass);
+					Q.removeEventListener(document.body, 'pointerup', _removeClass);
 				}, false, true);
 			}
 			var x = Q.Pointer.getX(e);
@@ -13363,7 +13351,7 @@ Q.Visual = Q.Pointer = {
 	 * @method cancelClick
 	 * @param {boolean} [skipMask=false] Pass true here to skip showing
 	 *   the Q.click.mask for 300 milliseconds, which blocks any
-	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
+	 *   stray clicks on pointerup or touchend, which occurs on some browsers.
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
@@ -13569,12 +13557,12 @@ function _stopHint(img, container) {
 }
 
 var _useTouchEvents = Q.info.useTouchEvents;
-Q.Pointer.start.eventName = _useTouchEvents ? 'touchstart' : 'mousedown';
-Q.Pointer.move.eventName = _useTouchEvents ? 'touchmove' : 'mousemove';
-Q.Pointer.end.eventName = _useTouchEvents ? 'touchend' : 'mouseup';
-Q.Pointer.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'mousecancel';
-Q.Pointer.enter.eventName = _useTouchEvents ? 'touchenter' : 'mouseenter';
-Q.Pointer.leave.eventName = _useTouchEvents ? 'touchleave' : 'mouseleave';
+Q.Pointer.start.eventName = _useTouchEvents ? 'touchstart' : 'pointerdown';
+Q.Pointer.move.eventName = _useTouchEvents ? 'touchmove' : 'pointermove';
+Q.Pointer.end.eventName = _useTouchEvents ? 'touchend' : 'pointerup';
+Q.Pointer.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'pointercancel';
+Q.Pointer.enter.eventName = _useTouchEvents ? 'touchenter' : 'pointerenter';
+Q.Pointer.leave.eventName = _useTouchEvents ? 'touchleave' : 'pointerleave';
 
 Q.Pointer.which.NONE = 0;
 Q.Pointer.which.LEFT = 1;
@@ -13593,20 +13581,14 @@ Q.Visual.waitUntilVisible.options = {
 	threshold: 1.0
 };
 
-Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
-	if (e.type === 'mousedown') {
-		Q.Pointer.latest.which = Q.Pointer.which(e);
-	} else {
-		Q.Pointer.latest.touches = e.touches;
-	}
+Q.addEventListener(document.body, 'pointerdown', function (e) {
+	Q.Pointer.latest.which = Q.Visual.which(e);
+	Q.Pointer.latest.touches = e.touches;
 }, false, true);
 
-Q.addEventListener(document.body, 'touchend touchcancel mouseup', function (e) {
-	if (e.type === 'mouseup') {
-		Q.Pointer.latest.which = Q.Visual.which(e);
-	} else {
-		Q.Pointer.latest.touches = e.touches;
-	}
+Q.addEventListener(document.body, 'pointerup pointercancel', function (e) {
+	Q.Pointer.latest.which = Q.Visual.which(e);
+	Q.Pointer.latest.touches = e.touches;
 }, false, true);
 
 Q.Pointer.hint.options = {
@@ -13776,7 +13758,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
  * Removes event listeners that are activated when the pointer has started.
  * This method is called automatically when the mouse or fingers are released
  * on the window. However, in the code that stops propagation of the Q.Visual.end
- * event (mouseup or touchend), you'd have to call this method manually.
+ * event (pointerup or touchend), you'd have to call this method manually.
  * @method ended
  * @static
  */
