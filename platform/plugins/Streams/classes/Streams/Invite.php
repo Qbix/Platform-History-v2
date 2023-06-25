@@ -217,7 +217,7 @@ class Streams_Invite extends Base_Streams_Invite
 			$access = new Streams_Access();
 			$access->publisherId = $toStream->publisherId;
 			$access->streamName = $toStream->name;
-			$access->ofUserId = $this->userId;
+			$access->ofUserId = $userId;
 			// Check if we should update the access
 			$shouldUpdateAccess = false;
 			foreach (array('readLevel', 'writeLevel', 'adminLevel') as $level_type) {
