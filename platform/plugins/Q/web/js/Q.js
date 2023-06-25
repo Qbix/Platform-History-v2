@@ -12543,7 +12543,7 @@ Q.Visual = Q.Pointer = {
 				if (oe.touches && oe.touches.length) {
 					return; // still some touches happening
 				}
-				Q.Pointer.touches = oe.touches;
+				Q.Pointer.touches = oe.touches || [];
 			}
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
@@ -13583,12 +13583,12 @@ Q.Visual.waitUntilVisible.options = {
 
 Q.addEventListener(document.body, 'pointerdown', function (e) {
 	Q.Pointer.latest.which = Q.Visual.which(e);
-	Q.Pointer.latest.touches = e.touches;
+	Q.Pointer.latest.touches = e.touches || [];
 }, false, true);
 
 Q.addEventListener(document.body, 'pointerup pointercancel', function (e) {
 	Q.Pointer.latest.which = Q.Visual.which(e);
-	Q.Pointer.latest.touches = e.touches;
+	Q.Pointer.latest.touches = e.touches || [];
 }, false, true);
 
 Q.Pointer.hint.options = {
