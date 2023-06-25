@@ -41,6 +41,7 @@
 			"Streams/message/Streams/unrelatedTo": ["Streams/after/Streams_message_Streams_unrelatedTo"],
 			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
 			"Streams/message/Streams/changed": ["Streams/after/Streams_message_Streams_changed"],
+			"Streams/create/Streams/chat": ["Streams/after/Streams_create_Streams_chat"],
 			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"],
 			"Streams/relateTo/Streams/question": ["Streams/after/Streams_relateTo_Streams_question"],
 			"Streams/updateAvatars": ["Streams/after/Streams_updateAvatars"]
