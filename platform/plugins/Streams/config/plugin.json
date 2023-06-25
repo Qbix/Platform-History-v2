@@ -265,6 +265,9 @@
 				},
 				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}",
+				"onInviteAccepted": {
+					"subscribe": true
+				},
 				"participating": ["Streams/participating"]
 			},
 			"Media/calls": {
