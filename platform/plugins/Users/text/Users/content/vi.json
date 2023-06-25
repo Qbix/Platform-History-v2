@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Chào mừng",
-        "directions": "Tạo một tài khoản, hoặc đăng nhập.",
+        "directions": {
+            "GetStarted": "Tạo một tài khoản, hoặc đăng nhập.",
+            "NoRegister": "Đăng nhập nếu bạn có tài khoản.",
+            "WasInvited": "Cách tốt nhất để tiếp cận bạn là gì?"
+        },
         "directionsNoRegister": "Đăng nhập nếu bạn có tài khoản.",
         "goButton": "➔",
         "passphrase": "Nhập cụm mật khẩu của bạn:",

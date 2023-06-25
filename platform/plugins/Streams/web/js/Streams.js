@@ -6597,7 +6597,8 @@ Q.onInit.add(function _Streams_onInit() {
 						Q.Users.login({
 							onSuccess: {'Users': _inviteComplete},
 							noClose: true,
-							explanation: html
+							explanation: html,
+							wasInvited: true
 						});
 					}
 				});

@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "እንኳን ደህና መጣህ",
-        "directions": "መለያ ይፍጠሩ ወይም ይግቡ።",
+        "directions": {
+            "GetStarted": "መለያ ይፍጠሩ ወይም ይግቡ።",
+            "NoRegister": "መለያ ካለዎት ይግቡ።",
+            "WasInvited": "እርስዎን ለማግኘት ምርጡ መንገድ ምንድነው?"
+        },
         "directionsNoRegister": "መለያ ካለዎት ይግቡ።",
         "goButton": "➔",
         "passphrase": "የማለፊያ ሐረግዎን ያስገቡ፡-",

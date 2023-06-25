@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Üdvözöljük",
-        "directions": "Hozzon létre egy fiókot, vagy jelentkezzen be.",
+        "directions": {
+            "GetStarted": "Hozzon létre egy fiókot, vagy jelentkezzen be.",
+            "NoRegister": "Jelentkezzen be, ha van fiókja.",
+            "WasInvited": "Hogyan lehet a legjobban elérni?"
+        },
         "directionsNoRegister": "Jelentkezzen be, ha van fiókja.",
         "goButton": "➔",
         "passphrase": "Írja be jelmondatát:",

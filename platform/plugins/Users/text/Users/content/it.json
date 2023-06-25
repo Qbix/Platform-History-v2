@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Benvenuto",
-        "directions": "Crea un account o accedi.",
+        "directions": {
+            "GetStarted": "Crea un account o accedi.",
+            "NoRegister": "Accedi se hai un account.",
+            "WasInvited": "Qual è il modo migliore per raggiungerti?"
+        },
         "directionsNoRegister": "Accedi se hai un account.",
         "goButton": "➔",
         "passphrase": "Inserisci la tua passphrase:",

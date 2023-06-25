@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "いらっしゃいませ",
-        "directions": "アカウントを作成するか、ログインします。",
+        "directions": {
+            "GetStarted": "アカウントを作成するか、ログインします。",
+            "NoRegister": "アカウントをお持ちの場合はログインしてください。",
+            "WasInvited": "あなたに連絡する最善の方法は何ですか?"
+        },
         "directionsNoRegister": "アカウントを持っている場合はログインします。",
         "goButton": "➔",
         "passphrase": "パスフレーズを入力してください:",

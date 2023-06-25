@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Bem-vindo",
-        "directions": "Crie uma conta, ou faça login.",
+        "directions": {
+            "GetStarted": "Crie uma conta, ou faça login.",
+            "NoRegister": "Faça login se você tiver uma conta.",
+            "WasInvited": "Qual é a melhor maneira de chegar até você?"
+        },
         "directionsNoRegister": "Faça login se você tiver uma conta.",
         "goButton": "➔",
         "passphrase": "Digite sua frase secreta:",

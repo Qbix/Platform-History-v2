@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Tere tulemast",
-        "directions": "Looge konto või logige sisse.",
+        "directions": {
+            "GetStarted": "Looge konto või logige sisse.",
+            "NoRegister": "Logige sisse, kui teil on konto.",
+            "WasInvited": "Milline on parim viis teieni jõudmiseks?"
+        },
         "directionsNoRegister": "Logige sisse, kui teil on konto.",
         "goButton": "➔",
         "passphrase": "Sisestage oma paroolifraas:",

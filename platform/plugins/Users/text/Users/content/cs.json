@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Vítejte",
-        "directions": "Vytvořte si účet nebo se přihlaste.",
+        "directions": {
+            "GetStarted": "Vytvořte si účet nebo se přihlaste.",
+            "NoRegister": "Přihlaste se, pokud máte účet.",
+            "WasInvited": "Jaký je nejlepší způsob, jak se k vám dostat?"
+        },
         "directionsNoRegister": "Přihlaste se, pokud máte účet.",
         "goButton": "➔",
         "passphrase": "Zadejte heslo:",

@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "환영",
-        "directions": "계정을 만들거나 로그인하세요.",
+        "directions": {
+            "GetStarted": "계정을 만들거나 로그인하세요.",
+            "NoRegister": "계정이 있으면 로그인하십시오.",
+            "WasInvited": "귀하에게 연락하는 가장 좋은 방법은 무엇입니까?"
+        },
         "directionsNoRegister": "계정이 있으면 로그인하십시오.",
         "goButton": "➔",
         "passphrase": "암호 문구를 입력하십시오.",

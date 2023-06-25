@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Maligayang pagdating",
-        "directions": "Gumawa ng account, o mag-log in.",
+        "directions": {
+            "GetStarted": "Gumawa ng account, o mag-log in.",
+            "NoRegister": "Mag-log in kung mayroon kang account.",
+            "WasInvited": "Ano ang pinakamagandang paraan para maabot ka?"
+        },
         "directionsNoRegister": "Mag-log in kung mayroon kang account.",
         "goButton": "➔",
         "passphrase": "Ilagay ang iyong pass phrase:",

@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Welkom",
-        "directions": "Maak een account aan, of log in.",
+        "directions": {
+            "GetStarted": "Maak een account aan, of log in.",
+            "NoRegister": "Log in als je een account hebt.",
+            "WasInvited": "Wat is de beste manier om u te bereiken?"
+        },
         "directionsNoRegister": "Log in als je een account hebt.",
         "goButton": "➔",
         "passphrase": "Voer uw wachtwoordzin in:",

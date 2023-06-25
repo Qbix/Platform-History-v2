@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Benvido",
-        "directions": "Crea unha conta ou inicia sesión.",
+        "directions": {
+            "GetStarted": "Crea unha conta ou inicia sesión.",
+            "NoRegister": "Inicia sesión se tes unha conta.",
+            "WasInvited": "Cal é a mellor forma de chegar a ti?"
+        },
         "directionsNoRegister": "Inicia sesión se tes unha conta.",
         "goButton": "➔",
         "passphrase": "Introduce a túa frase de paso:",

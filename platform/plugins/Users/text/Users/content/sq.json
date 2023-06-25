@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Mirë se vini",
-        "directions": "Krijo një llogari, ose identifikohu.",
+        "directions": {
+            "GetStarted": "Krijo një llogari, ose identifikohu.",
+            "NoRegister": "Hyni nëse keni një llogari.",
+            "WasInvited": "Cila është mënyra më e mirë për të arritur tek ju?"
+        },
         "directionsNoRegister": "Hyni nëse keni një llogari.",
         "goButton": "➔",
         "passphrase": "Shkruani frazën tuaj të kalimit:",

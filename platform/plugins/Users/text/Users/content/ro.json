@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Bine ati venit",
-        "directions": "Creați un cont sau conectați-vă.",
+        "directions": {
+            "GetStarted": "Creați un cont sau conectați-vă.",
+            "NoRegister": "Conectați-vă dacă aveți un cont.",
+            "WasInvited": "Care este cel mai bun mod de a ajunge la tine?"
+        },
         "directionsNoRegister": "Conectați-vă dacă aveți un cont.",
         "goButton": "➔",
         "passphrase": "Introdu fraza ta de acces:",

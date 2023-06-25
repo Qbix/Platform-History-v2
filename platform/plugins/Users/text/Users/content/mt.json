@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Merħba",
-        "directions": "Oħloq kont, jew idħol.",
+        "directions": {
+            "GetStarted": "Oħloq kont, jew idħol.",
+            "NoRegister": "Idħol jekk għandek kont.",
+            "WasInvited": "X&#39;inhu l-aħjar mod biex nilħqu miegħek?"
+        },
         "directionsNoRegister": "Idħol jekk għandek kont.",
         "goButton": "➔",
         "passphrase": "Daħħal il-frażi tal-pass tiegħek:",

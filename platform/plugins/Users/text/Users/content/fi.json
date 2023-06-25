@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Tervetuloa",
-        "directions": "Luo tili tai kirjaudu sisään.",
+        "directions": {
+            "GetStarted": "Luo tili tai kirjaudu sisään.",
+            "NoRegister": "Kirjaudu sisään, jos sinulla on tili.",
+            "WasInvited": "Mikä on paras tapa tavoittaa sinut?"
+        },
         "directionsNoRegister": "Kirjaudu sisään, jos sinulla on tili.",
         "goButton": "➔",
         "passphrase": "Kirjoita salasanasi:",

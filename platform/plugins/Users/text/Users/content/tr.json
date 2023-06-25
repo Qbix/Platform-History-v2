@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Hoş geldin",
-        "directions": "Bir hesap oluşturun veya oturum açın.",
+        "directions": {
+            "GetStarted": "Bir hesap oluşturun veya oturum açın.",
+            "NoRegister": "Hesabınız varsa giriş yapın.",
+            "WasInvited": "Size ulaşmanın en iyi yolu nedir?"
+        },
         "directionsNoRegister": "Hesabınız varsa giriş yapın.",
         "goButton": "➔",
         "passphrase": "Parolanızı girin:",

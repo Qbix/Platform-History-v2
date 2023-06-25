@@ -49,8 +49,11 @@
 
 		login: {
 			title: 'Welcome',
-			directions: 'Create an account, or log in.',
-			directionsNoRegister: 'Log in if you have an account.',
+			directions: {
+				"GetStarted": "Create an account, or log in.",
+				"NoRegister": "Log in if you have an account.",
+				"WasInvited": "What's the best way to reach you?"
+			},
 			explanation: null,
 			goButton: "&#10132",
 			passphrase: 'Enter your pass phrase:',
@@ -1790,6 +1793,7 @@
 	 * login_setupDialog.dialog will contain the dialog
 	 */
 	function login_setupDialog(usingPlatforms, options) {
+		options = options || {};
 		$('#Users_login_step1_form').data('used', null);
 		if (login_setupDialog.dialog) {
 			return;
@@ -1838,9 +1842,9 @@
 				submitClosestForm.apply($a, arguments);
 			});
 
-		var directions = Q.plugins.Users.login.serverOptions.noRegister
-			? Q.text.Users.login.directionsNoRegister
-			: Q.text.Users.login.directions;
+		var d = Q.text.Users.login.directions;
+		var directions = options.wasInvited
+			? d.WasInvited : (options.noRegister ? d.NoRegister : d.GetStarted);
 		step1_form.html(
 			$('<label for="Users_login_identifier" />').html(directions)
 		).append('<br />').append(

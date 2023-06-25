@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Powitanie",
-        "directions": "Utwórz konto lub zaloguj się.",
+        "directions": {
+            "GetStarted": "Utwórz konto lub zaloguj się.",
+            "NoRegister": "Zaloguj się, jeśli masz konto.",
+            "WasInvited": "Jak najlepiej się z Tobą skontaktować?"
+        },
         "directionsNoRegister": "Zaloguj się, jeśli masz konto.",
         "goButton": "➔",
         "passphrase": "Wpisz hasło:",

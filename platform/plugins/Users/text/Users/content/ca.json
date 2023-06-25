@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Benvingut",
-        "directions": "Creeu un compte o inicieu sessió.",
+        "directions": {
+            "GetStarted": "Creeu un compte o inicieu sessió.",
+            "NoRegister": "Inicieu sessió si teniu un compte.",
+            "WasInvited": "Quina és la millor manera d&#39;arribar-hi?"
+        },
         "directionsNoRegister": "Inicieu sessió si teniu un compte.",
         "goButton": "➔",
         "passphrase": "Introduïu la vostra frase de pas:",

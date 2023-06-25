@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "欢迎",
-        "directions": "创建一个帐户，或登录。",
+        "directions": {
+            "GetStarted": "创建帐户，或登录。",
+            "NoRegister": "如果您有帐户，请登录。",
+            "WasInvited": "联系您的最佳方式是什么？"
+        },
         "directionsNoRegister": "如果您有帐户，请登录。",
         "goButton": "➔",
         "passphrase": "输入您的密码：",

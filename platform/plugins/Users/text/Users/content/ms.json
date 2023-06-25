@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Selamat datang",
-        "directions": "Buat akaun, atau log masuk.",
+        "directions": {
+            "GetStarted": "Buat akaun, atau log masuk.",
+            "NoRegister": "Log masuk jika anda mempunyai akaun.",
+            "WasInvited": "Apakah cara terbaik untuk menghubungi anda?"
+        },
         "directionsNoRegister": "Log masuk jika anda mempunyai akaun.",
         "goButton": "➔",
         "passphrase": "Masukkan frasa laluan anda:",

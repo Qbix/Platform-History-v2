@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Velkominn",
-        "directions": "Búðu til reikning eða skráðu þig inn.",
+        "directions": {
+            "GetStarted": "Búðu til reikning eða skráðu þig inn.",
+            "NoRegister": "Skráðu þig inn ef þú ert með reikning.",
+            "WasInvited": "Hver er besta leiðin til að ná til þín?"
+        },
         "directionsNoRegister": "Skráðu þig inn ef þú ert með reikning.",
         "goButton": "➔",
         "passphrase": "Sláðu inn lykilorðið þitt:",
