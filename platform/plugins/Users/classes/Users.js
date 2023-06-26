@@ -406,11 +406,11 @@ Users.Socket = {
 				}
 				var userId = capability.userId;
 				Users.fetch(userId, function (err, results) {
-					var user = results[0];
-					if (!user) {
+					if (err || !results[0]) {
 						client.disconnect(); // force disconnect
 						return;
 					}
+					var user = results[0];
 					if (!Users.clients[userId]) {
 						Users.clients[userId] = {};
 					}
