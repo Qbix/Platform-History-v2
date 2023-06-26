@@ -312,7 +312,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		fields.subscriptionSrc = Q.url('{{Communities}}/img/subscription/'+what+'/80.png');
 		
 		if (!fields.placeholder) {
-			var isPrivate = state.stream && state.stream.getAttribute('private');
+			var isPrivate = state.stream && state.stream.getAttribute('Streams.private');
 			var placeholderKey = isPrivate ? 'Private' : 'Public';
 			fields.placeholder = Q.text.Streams.chat.placeholders[placeholderKey];
 		}

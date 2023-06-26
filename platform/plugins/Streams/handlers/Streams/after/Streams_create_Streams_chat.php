@@ -6,7 +6,7 @@ function Streams_after_Streams_create_Streams_chat($params)
 	$weight = time();
 
 	// if chat is private - don't relate it to experience categories
-	if ($stream->getAttribute('private')) {
+	if ($stream->getAttribute('Streams.private')) {
 		return;
 	}
 

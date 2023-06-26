@@ -2589,13 +2589,13 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 		Q.addScript(streamFunc, function () {
 			streamFunc = Streams.defined[streamName];
 			if (typeof streamFunc !== 'function') {
-				throw new Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
+				throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
 			}
 			return _doConstruct();
 		});
 		return true;
 	} else if (typeof streamFunc !== 'undefined') {
-		throw new Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
+		throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
 	}
 	function _doConstruct() {
 		if (!streamFunc.streamConstructor) {
@@ -3802,6 +3802,16 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
 };
 
 /**
+ * Return whether invite is allowed
+ * @method fileUrl
+ * @return {String|null} the url, or null if no url
+ */
+Sp.inviteIsAllowed = function() {
+	var private = this.getAttribute('Streams.private');
+	return !private || (private instanceof Array && private.indexOf('invite'));
+};
+
+/**
  * Invite other users to this stream. Must be logged in first.
  *
  * @method invite
@@ -3831,6 +3841,9 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
 Sp.invite = function (options, callback) {
+	if (!this.inviteIsAllowed()) {
+		throw new Q.Error("Stream.prototype.invite: not allowed");
+	}
 	Streams.invite(this.fields.publisherId, this.fields.name, options, callback);
 };
 
@@ -3956,7 +3969,7 @@ Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPub
  */
 Stream.join = function _Stream_join (publisherId, streamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.Stream.join: Not logged in.");
+		throw new Q.Error("Streams.Stream.join: Not logged in.");
 	}
 	var slotName = "participant";
 	var fields = {"publisherId": publisherId, "name": streamName};
@@ -4001,7 +4014,7 @@ Stream.join.onError = new Q.Event();
  */
 Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.Stream.leave: Not logged in.");
+		throw new Q.Error("Streams.Stream.leave: Not logged in.");
 	}
 	var slotName = "participant";
 	var fields = {
@@ -4050,7 +4063,7 @@ Stream.leave.onError = new Q.Event();
  */
 Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback, options) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.Stream.subscribe: Not logged in.");
+		throw new Q.Error("Streams.Stream.subscribe: Not logged in.");
 	}
 
 	options = Q.extend({}, Stream.subscribe.options, options);
@@ -4122,7 +4135,7 @@ Stream.subscribe.options = {
  */
 Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.Stream.unsubscribe: Not logged in.");
+		throw new Q.Error("Streams.Stream.unsubscribe: Not logged in.");
 	}
 	var slotName = "participant";
 	var fields = {
@@ -4273,7 +4286,7 @@ Stream.close.onError = new Q.Event();
  */
 Streams.socketRequest = function (event, publisherId, streamName, callback) {
 	// if (!Q.sessionId()) {
-	// 	throw new Error("Stream.observe: a valid session is required");
+	// 	throw new Q.Error("Stream.observe: a valid session is required");
 	// }
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
@@ -4302,7 +4315,7 @@ Streams.socketRequest = function (event, publisherId, streamName, callback) {
  */
 Streams.relate = function _Streams_relate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.relate: Not logged in.");
+		throw new Q.Error("Streams.relate: Not logged in.");
 	}
 	var slotName = "result";
 	var fields = {
@@ -4342,7 +4355,7 @@ Streams.relate = function _Streams_relate (publisherId, streamName, relationType
  */
 Streams.unrelate = function _Stream_prototype_unrelate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.unrelate: Not logged in.");
+		throw new Q.Error("Streams.unrelate: Not logged in.");
 	}
 	var slotName = "result";
 	var fields = {
@@ -4391,7 +4404,7 @@ Streams.updateRelation = function(
 	callback
 ) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.relate: Not logged in.");
+		throw new Q.Error("Streams.relate: Not logged in.");
 	}
 	// We will send a request to wherever (toPublisherId, toStreamName) is hosted
 	var slotName = "result";
@@ -6395,7 +6408,7 @@ Q.onInit.add(function _Streams_onInit() {
 				};
 				var suffix = m[options.identifierType];
 				if (!suffix) {
-					throw new Q.Error("Wrong identifierType");
+					throw new Q.Error("Users.setIdentifier: Wrong identifierType");
 				}
 				Q.Dialogs.pop();
 				Q.Streams.Dialogs.access(
