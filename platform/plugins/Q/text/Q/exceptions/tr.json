@@ -1,3 +1,4 @@
 {
-    "MissingFile": "eksik dosya {{filename}}"
+    "MissingFile": "eksik dosya {{filename}}",
+    "InvalidLanguage": "geçersiz dil {{language}}"
 }

@@ -16,17 +16,18 @@ function Users_language_post($params = array())
 {
 	$req = array_merge($_REQUEST, $params);
 	Q_Request::requireFields(array('language'), $req, true);
-	$loggedInUser = Users::loggedInUser(true);
 	$language = Q::ifset($req, 'language', null);
 	$list = array_keys(Q_Config::expect('Q', 'web', 'languages'));
 
-	if (empty($language) || !in_array($language, $list)) {
-		$text = Q_Text::get("Users/content", array('language' => $loggedInUser->preferredLanguage));
-		throw new Exception($text['invalidLanguageSelected']);
+	$loggedInUser = Users::loggedInUser(true);
+	if (!empty($language)) {
+		if (!in_array($language, $list)) {
+			// throw exception in the user's language
+			throw new Q_Exception_InvalidLanguage(compact('language'));
+		}
+		$loggedInUser->preferredLanguage = $language;
+		$loggedInUser->save();
 	}
-
-	$loggedInUser->preferredLanguage = $language;
-	$loggedInUser->save();
 
 	Q_Response::setSlot('result', true);
 }

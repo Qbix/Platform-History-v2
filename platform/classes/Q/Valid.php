@@ -372,9 +372,10 @@ class Q_Valid
 	 * @param {array} [$source=$_REQUEST] Where to look for the fields
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception
 	 *    on the first violation, or add them to a list.
+	 * @param {boolean} [$emptyMeansMissing=false] Whether empty value means missing field
 	 * @return {array} The resulting list of exceptions
 	 */
-	static function requireFields($fields, $source = null, $throwIfMissing = false)
+	static function requireFields($fields, $source = null, $throwIfMissing = false, $emptyMeansMissing = false)
 	{
 		if (!isset($source)) {
 			$source = $_REQUEST;
@@ -386,8 +387,11 @@ class Q_Valid
 			if (is_array($fieldname)) {
 				$t = $source;
 				foreach ($fieldname as $f) {
-					if (!isset($t[$f])) {
-						$missing = true;
+					if (empty($t[$f])) {
+						$empty = true;
+						if (!isset($t[$f])) {
+							$missing = true;
+						}
 						break;
 					}
 					$t = $t[$f];
@@ -398,12 +402,15 @@ class Q_Valid
 					}
 				}
 			} else {
-				if (!isset($source[$fieldname])) {
-					$missing = true;
+				if (empty($source[$fieldname])) {
+					$empty = true;
+					if (!isset($source[$fieldname])) {
+						$missing = true;
+					}
 				}
 				$field = $fieldname;
 			}
-			if ($missing) {
+			if ($missing or ($empty and $emptyMeansMissing)) {
 				$exception = new Q_Exception_RequiredField(@compact('field'), $field);
 				if ($throwIfMissing) {
 					throw $exception;

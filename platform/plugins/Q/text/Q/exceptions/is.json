@@ -1,3 +1,4 @@
 {
-    "MissingFile": "vantar skrá {{filename}}"
+    "MissingFile": "vantar skrá {{filename}}",
+    "InvalidLanguage": "ógilt tungumál {{language}}"
 }

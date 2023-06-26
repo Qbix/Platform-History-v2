@@ -1,3 +1,4 @@
 {
-    "MissingFile": "የጠፋ ፋይል {{filename}}"
+    "MissingFile": "የጠፋ ፋይል {{filename}}",
+    "InvalidLanguage": "ልክ ያልሆነ ቋንቋ {{language}}"
 }

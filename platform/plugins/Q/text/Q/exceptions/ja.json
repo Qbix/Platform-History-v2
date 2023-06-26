@@ -1,3 +1,4 @@
 {
-    "MissingFile": "ファイル{{filename}}がありません"
+    "MissingFile": "ファイル{{filename}}がありません",
+    "InvalidLanguage": "無効な言語{{language}}"
 }

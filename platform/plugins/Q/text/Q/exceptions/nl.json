@@ -1,3 +1,4 @@
 {
-    "MissingFile": "ontbrekend bestand {{filename}}"
+    "MissingFile": "ontbrekend bestand {{filename}}",
+    "InvalidLanguage": "ongeldige taal {{language}}"
 }
