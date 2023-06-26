@@ -90,7 +90,7 @@
         "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Notice"
     },
     "confirm": {
         "title": "Confirm",
