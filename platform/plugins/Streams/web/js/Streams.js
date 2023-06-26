@@ -3804,9 +3804,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
 };
 
 /**
- * Return whether invite is allowed
- * @method fileUrl
- * @return {String|null} the url, or null if no url
+ * Return whether invite is allowed, or restricted by the stream's attributes
+ * @return {Boolean}
  */
 Sp.inviteIsAllowed = function() {
 	var priv = this.getAttribute('Streams.private');

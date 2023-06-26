@@ -843,8 +843,10 @@ abstract class Streams extends Base_Streams
 						$stream->set('adminLevel', $access->adminLevel);
 						$stream->set('adminLevel_source', $direct_source);
 					}
-					$stream->set('permissions', $access->getAllPermissions());
-					$stream->set('permissions_source', $direct_source);
+					if (isset($access->permissions)) {
+						$stream->set('permissions', $access->getAllPermissions());
+						$stream->set('permissions_source', $direct_source);
+					}
 				}
 			}
 		}
