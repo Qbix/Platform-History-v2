@@ -2920,7 +2920,9 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * @return {String|null} the url, or null if no url
  */
 Sp.fileUrl = function() {
-	var url = this.getAttribute("Q.file.url", this.getAttribute("file.url", this.getAttribute("url")));
+	var url = this.getAttribute("Q.file.url")
+		|| this.getAttribute("file.url")
+		|| this.getAttribute("url");
 
 	if (!url) {
 		return null;
@@ -3807,7 +3809,10 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  * @return {String|null} the url, or null if no url
  */
 Sp.inviteIsAllowed = function() {
-	var priv = this.getAttribute('Streams.private', this.getAttribute('private'));
+	var priv = this.getAttribute('Streams.private');
+	if (priv === undefined) {
+		priv = this.getAttribute('private');
+	}
 	return !priv || (priv instanceof Array && priv.indexOf('invite') >= 0);
 };
 
