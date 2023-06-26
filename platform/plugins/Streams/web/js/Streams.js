@@ -3807,8 +3807,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  * @return {String|null} the url, or null if no url
  */
 Sp.inviteIsAllowed = function() {
-	var private = this.getAttribute('Streams.private');
-	return !private || (private instanceof Array && private.indexOf('invite'));
+	var priv = this.getAttribute('Streams.private');
+	return !priv || (priv instanceof Array && private.indexOf('invite'));
 };
 
 /**
