@@ -23,7 +23,7 @@
         "prompt": "Naj vas prijatelji prepoznajo:",
         "newUser": "ali ustvarite nov račun spodaj",
         "picTooltip": "To sliko lahko pozneje spremenite",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Vnesite vaše polno ime"
         }
     },

@@ -23,7 +23,7 @@
         "prompt": "친구들이 당신을 알아보도록 하세요:",
         "newUser": "또는 아래에서 새 계정을 만드십시오.",
         "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
-        "placeholder": {
+        "placeholders": {
             "fullName": "당신의 성명을 입력하십시오"
         }
     },

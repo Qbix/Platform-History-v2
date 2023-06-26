@@ -23,7 +23,7 @@
         "prompt": "Hayaang makilala ka ng mga kaibigan:",
         "newUser": "o gumawa ng bagong account sa ibaba",
         "picTooltip": "Maaari mong baguhin ang larawang ito sa ibang pagkakataon",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Ilagay ang iyong buong pangalan"
         }
     },

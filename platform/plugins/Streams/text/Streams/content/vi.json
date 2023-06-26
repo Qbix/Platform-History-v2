@@ -23,7 +23,7 @@
         "prompt": "Hãy để bạn bè nhận ra bạn:",
         "newUser": "hoặc tạo tài khoản mới bên dưới",
         "picTooltip": "Bạn có thể thay đổi hình ảnh này sau",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Nhập tên đầy đủ của bạn"
         }
     },

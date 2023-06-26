@@ -23,7 +23,7 @@
         "prompt": "Laske sõpradel teid ära tunda:",
         "newUser": "või looge allpool uus konto",
         "picTooltip": "Saate seda pilti hiljem muuta",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Sisestage oma täisnimi"
         }
     },

@@ -23,7 +23,7 @@
         "prompt": "Umožnite priateľom, aby vás spoznali:",
         "newUser": "alebo si vytvorte nový účet nižšie",
         "picTooltip": "Tento obrázok môžete neskôr zmeniť",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Zadajte svoje celé meno"
         }
     },

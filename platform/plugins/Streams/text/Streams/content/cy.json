@@ -23,7 +23,7 @@
         "prompt": "Gadewch i ffrindiau eich adnabod:",
         "newUser": "neu greu cyfrif newydd isod",
         "picTooltip": "Gallwch newid y llun hwn yn ddiweddarach",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Rhowch eich enw llawn"
         }
     },

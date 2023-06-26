@@ -23,7 +23,7 @@
         "prompt": "Laat vriende jou herken:",
         "newUser": "of skep &#39;n nuwe rekening hieronder",
         "picTooltip": "Jy kan hierdie prentjie later verander",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Vul u volle naam in"
         }
     },

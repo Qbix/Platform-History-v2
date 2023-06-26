@@ -23,7 +23,7 @@
         "prompt": "Utzi lagunei ezagutarazten:",
         "newUser": "edo sortu kontu berri bat behean",
         "picTooltip": "Irudi hau geroago alda dezakezu",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Sartu zure izen-abizenak"
         }
     },

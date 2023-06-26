@@ -23,7 +23,7 @@
         "prompt": "Fatti riconoscere dagli amici:",
         "newUser": "o crea un nuovo account qui sotto",
         "picTooltip": "Puoi cambiare questa immagine in seguito",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Inserisci il tuo nome e cognome"
         }
     },

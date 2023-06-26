@@ -23,7 +23,7 @@
         "prompt": "ጓደኞች እንዲያውቁዎት ያድርጉ፡-",
         "newUser": "ወይም ከዚህ በታች አዲስ መለያ ይፍጠሩ",
         "picTooltip": "ይህን ምስል በኋላ መቀየር ትችላለህ",
-        "placeholder": {
+        "placeholders": {
             "fullName": "ሙሉ ስምህን አስገባ"
         }
     },

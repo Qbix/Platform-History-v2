@@ -23,7 +23,7 @@
         "prompt": "Laat vrienden je herkennen:",
         "newUser": "of maak hieronder een nieuw account aan",
         "picTooltip": "U kunt deze afbeelding later wijzigen",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Vul uw volledige naam in"
         }
     },

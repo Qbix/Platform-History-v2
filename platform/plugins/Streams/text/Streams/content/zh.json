@@ -23,7 +23,7 @@
         "prompt": "让朋友认出你：",
         "newUser": "或在下面创建一个新帐户",
         "picTooltip": "您可以稍后更改此图片",
-        "placeholder": {
+        "placeholders": {
             "fullName": "输入您的全名"
         }
     },
