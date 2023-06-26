@@ -13,11 +13,11 @@
         "otherDomain": "Permintaan lintas domain diblokir ke domain asing di {{baseUrl}}"
     },
     "words": {
-        "tap": "keran",
+        "tap": "mengetuk",
         "click": "klik",
         "yes": "iya nih",
         "no": "tidak",
-        "Tap": "Keran",
+        "Tap": "Menyentuh",
         "Click": "Klik",
         "Yes": "iya nih",
         "No": "Tidak"

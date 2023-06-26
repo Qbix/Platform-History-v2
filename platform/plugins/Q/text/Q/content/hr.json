@@ -13,11 +13,11 @@
         "otherDomain": "Blokiran zahtjev za više domena za stranu domenu na {{baseUrl}}"
     },
     "words": {
-        "tap": "tapnite",
+        "tap": "dodir",
         "click": "klik",
         "yes": "Da",
         "no": "Ne",
-        "Tap": "Dodirnite",
+        "Tap": "Dodir",
         "Click": "Klik",
         "Yes": "Da",
         "No": "Ne"

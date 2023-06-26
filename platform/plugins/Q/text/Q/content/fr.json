@@ -13,11 +13,11 @@
         "otherDomain": "Requête interdomaine bloquée vers un domaine étranger à {{baseUrl}}"
     },
     "words": {
-        "tap": "robinet",
+        "tap": "touche",
         "click": "Cliquez sur",
         "yes": "Oui",
         "no": "non",
-        "Tap": "Robinet",
+        "Tap": "Touche",
         "Click": "Cliquez sur",
         "Yes": "Oui",
         "No": "Non"

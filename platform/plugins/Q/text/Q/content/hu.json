@@ -13,11 +13,11 @@
         "otherDomain": "Blokkolt domainek közötti kérés külföldi domain felé a következő címen: {{baseUrl}}"
     },
     "words": {
-        "tap": "Koppintson a",
+        "tap": "érintés",
         "click": "kattintson",
         "yes": "Igen",
         "no": "nem",
-        "Tap": "Koppintson a",
+        "Tap": "Érintés",
         "Click": "Kattintson",
         "Yes": "Igen",
         "No": "Nem"

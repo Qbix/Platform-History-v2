@@ -13,11 +13,11 @@
         "otherDomain": "Ang hiniling na cross-domain na kahilingan sa dayuhang domain sa {{baseUrl}}"
     },
     "words": {
-        "tap": "tapikin ang",
+        "tap": "tapikin",
         "click": "mag-click",
         "yes": "oo",
         "no": "hindi",
-        "Tap": "Tapikin",
+        "Tap": "Hawakan",
         "Click": "Mag-click",
         "Yes": "Oo",
         "No": "Hindi"

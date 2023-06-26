@@ -13,11 +13,11 @@
         "otherDomain": "Yêu cầu tên miền chéo bị chặn đối với tên miền nước ngoài tại {{baseUrl}}"
     },
     "words": {
-        "tap": "vô nhẹ",
+        "tap": "vỗ nhẹ",
         "click": "nhấp chuột",
         "yes": "Đúng",
         "no": "không",
-        "Tap": "Vô nhẹ",
+        "Tap": "Chạm",
         "Click": "Nhấp chuột",
         "Yes": "Đúng",
         "No": "Không"
