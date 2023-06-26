@@ -3808,7 +3808,7 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  */
 Sp.inviteIsAllowed = function() {
 	var priv = this.getAttribute('Streams.private');
-	return !priv || (priv instanceof Array && private.indexOf('invite'));
+	return !priv || (priv instanceof Array && priv.indexOf('invite'));
 };
 
 /**
