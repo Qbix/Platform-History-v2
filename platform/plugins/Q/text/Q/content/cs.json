@@ -13,11 +13,11 @@
         "otherDomain": "Zablokován požadavek z více domén na zahraniční doménu na adrese {{baseUrl}}"
     },
     "words": {
-        "tap": "klepnout",
+        "tap": "dotek",
         "click": "klikněte",
         "yes": "Ano",
         "no": "Ne",
-        "Tap": "Klepněte",
+        "Tap": "Dotek",
         "Click": "Klikněte",
         "Yes": "Ano",
         "No": "Ne"

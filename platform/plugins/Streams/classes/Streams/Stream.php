@@ -328,6 +328,15 @@ class Streams_Stream extends Base_Streams_Stream
 		return Streams::invite($this->publisherId, $this->name, $who, $options);
 	}
 
+	/**
+	 * Return whether invite is allowed, or restricted by the stream's attributes
+	 * @return {boolean}
+	 */
+	function inviteIsAllowed() {
+		$priv = $this->getAttribute('Streams.private', $this->getAttribute('private'));
+		return !$priv || (is_array($priv) && in_array('invite', $priv));
+	}
+
 	private static function sortTemplateTypes(
 		$templates, 
 		$userField, 

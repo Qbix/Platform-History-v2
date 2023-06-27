@@ -1,3 +1,4 @@
 {
-    "MissingFile": "file mancante {{filename}}"
+    "MissingFile": "file mancante {{filename}}",
+    "InvalidLanguage": "lingua non valida {{language}}"
 }

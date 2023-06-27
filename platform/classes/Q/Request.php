@@ -1144,9 +1144,10 @@ class Q_Request
 	 * @static
 	 * @param {array} $fields Array of strings or arrays naming fields that are required
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if the field is missing
+	 * @param {boolean} [$emptyMeansMissing=false] Whether empty value means missing field
 	 * @return {array} The resulting list of exceptions
 	 */
-	static function requireFields($fields, $throwIfMissing = false)
+	static function requireFields($fields, $throwIfMissing = false, $throwIfEmpty = false)
 	{
 		$args = func_get_args();
 		array_splice($args, 1, 0, array(null));

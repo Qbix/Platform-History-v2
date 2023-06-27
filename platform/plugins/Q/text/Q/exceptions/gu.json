@@ -1,3 +1,4 @@
 {
-    "MissingFile": "ગુમ થયેલ ફાઇલ {{filename}}"
+    "MissingFile": "ગુમ થયેલ ફાઇલ {{filename}}",
+    "InvalidLanguage": "અમાન્ય ભાષા {{language}}"
 }

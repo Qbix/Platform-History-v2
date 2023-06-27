@@ -13,11 +13,11 @@
         "otherDomain": "Permintaan merentas domain yang disekat ke domain asing di {{baseUrl}}"
     },
     "words": {
-        "tap": "ketuk",
+        "tap": "sentuh",
         "click": "klik",
         "yes": "ya",
         "no": "tidak",
-        "Tap": "Ketik",
+        "Tap": "Sentuh",
         "Click": "klik",
         "Yes": "ya",
         "No": "Tidak"

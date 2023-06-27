@@ -628,8 +628,10 @@ Sp.calculateAccess = function(asUserId, callback) {
 					subj.set('adminLevel', row.fields.adminLevel);
 					subj.set('adminLevel_source', direct_source);
 				}
-				subj.set('permissions', row.getAllPermissions());
-				subj.set('permissions_source', direct_source);
+				if (row.fields.permissions != null) {
+					subj.set('permissions', row.getAllPermissions());
+					subj.set('permissions_source', direct_source);
+				}
 			}
 		}
 		callback.call(subj);

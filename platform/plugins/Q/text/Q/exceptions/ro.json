@@ -1,3 +1,4 @@
 {
-    "MissingFile": "lipsește fișierul {{filename}}"
+    "MissingFile": "lipsește fișierul {{filename}}",
+    "InvalidLanguage": "limba invalidă {{language}}"
 }

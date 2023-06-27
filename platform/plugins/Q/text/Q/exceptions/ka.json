@@ -1,3 +1,4 @@
 {
-    "MissingFile": "აკლია ფაილი {{filename}}"
+    "MissingFile": "აკლია ფაილი {{filename}}",
+    "InvalidLanguage": "არასწორი ენა {{language}}"
 }

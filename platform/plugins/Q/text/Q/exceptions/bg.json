@@ -1,3 +1,4 @@
 {
-    "MissingFile": "липсващ файл {{filename}}"
+    "MissingFile": "липсващ файл {{filename}}",
+    "InvalidLanguage": "невалиден език {{language}}"
 }

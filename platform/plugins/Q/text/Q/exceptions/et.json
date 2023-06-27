@@ -1,3 +1,4 @@
 {
-    "MissingFile": "puudu fail {{filename}}"
+    "MissingFile": "puudu fail {{filename}}",
+    "InvalidLanguage": "kehtetu keel {{language}}"
 }

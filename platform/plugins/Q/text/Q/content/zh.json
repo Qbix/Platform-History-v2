@@ -13,11 +13,11 @@
         "otherDomain": "在 {{baseUrl}} 阻止对外部域的跨域请求"
     },
     "words": {
-        "tap": "轻敲",
+        "tap": "触碰",
         "click": "点击",
         "yes": "是的",
         "no": "不",
-        "Tap": "轻敲",
+        "Tap": "触碰",
         "Click": "点击",
         "Yes": "是的",
         "No": "不"

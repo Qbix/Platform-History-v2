@@ -13,11 +13,11 @@
         "otherDomain": "{{baseUrl}} adresindeki yabancı etki alanına yönelik etki alanları arası istek engellendi"
     },
     "words": {
-        "tap": "musluk",
+        "tap": "dokunmak",
         "click": "Tıklayın",
         "yes": "Evet",
         "no": "Hayır",
-        "Tap": "Musluk",
+        "Tap": "Dokunmak",
         "Click": "Tıklamak",
         "Yes": "Evet",
         "No": "Numara"

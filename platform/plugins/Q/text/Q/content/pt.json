@@ -13,11 +13,11 @@
         "otherDomain": "Solicitação de domínio cruzado bloqueada para domínio estrangeiro em {{baseUrl}}"
     },
     "words": {
-        "tap": "toque",
+        "tap": "tocar",
         "click": "clique",
         "yes": "sim",
         "no": "não",
-        "Tap": "Toque",
+        "Tap": "Tocar",
         "Click": "Clique",
         "Yes": "sim",
         "No": "Não"

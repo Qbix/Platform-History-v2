@@ -13,11 +13,11 @@
         "otherDomain": "Bloķēts starpdomēnu pieprasījums ārvalstu domēnam vietnē {{baseUrl}}"
     },
     "words": {
-        "tap": "krāns",
+        "tap": "pieskarties",
         "click": "klikšķis",
         "yes": "Jā",
         "no": "Nē",
-        "Tap": "Krāns",
+        "Tap": "Pieskarieties",
         "Click": "Klikšķis",
         "Yes": "Jā",
         "No": "Nē"

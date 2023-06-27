@@ -1,3 +1,4 @@
 {
-    "MissingFile": "缺少文件{{filename}}"
+    "MissingFile": "缺少文件{{filename}}",
+    "InvalidLanguage": "无效语言{{language}}"
 }

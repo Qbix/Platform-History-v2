@@ -1,3 +1,4 @@
 {
-    "MissingFile": "অনুপস্থিত ফাইল {{filename}}"
+    "MissingFile": "অনুপস্থিত ফাইল {{filename}}",
+    "InvalidLanguage": "অবৈধ ভাষা {{language}}"
 }

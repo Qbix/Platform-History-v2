@@ -1,3 +1,4 @@
 {
-    "MissingFile": "nawawalang file {{filename}}"
+    "MissingFile": "nawawalang file {{filename}}",
+    "InvalidLanguage": "di-wastong wika {{language}}"
 }

@@ -1,3 +1,4 @@
 {
-    "MissingFile": "trūkst faila {{filename}}"
+    "MissingFile": "trūkst faila {{filename}}",
+    "InvalidLanguage": "nederīga valoda {{language}}"
 }
