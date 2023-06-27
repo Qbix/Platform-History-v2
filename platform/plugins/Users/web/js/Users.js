@@ -3001,7 +3001,7 @@
 				}
 				for (var i in params[1]) {
 					params[1][i] = new Users.Contact(params[1][i]);
-				};
+				}
 				return callback(subject, params);
 			}
 		});
@@ -3015,7 +3015,7 @@
 				}
 				for (var i in params[1]) {
 					params[1][i] = new Users.Label(params[1][i]);
-				};
+				}
 				return callback(subject, params);
 			}
 		});
