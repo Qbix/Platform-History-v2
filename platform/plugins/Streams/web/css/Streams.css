@@ -445,6 +445,16 @@
 	line-height: 40px;
 }
 
+.Q_columns_title_container .Streams_preview_tool .Streams_preview_contents {
+	position: relative;
+}
+
+.Q_columns_title_container .Streams_preview_tool .Streams_preview_title {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
 /* Streams access tool */
 .Streams_access_tool_dialog_container { width: 450px; }
 .Streams_access_tool_dialog_container .Streams_access_controls { padding: 10px; }
