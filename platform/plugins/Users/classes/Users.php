@@ -1192,6 +1192,14 @@ abstract class Users extends Base_Users
 			}
 		}
 
+		$languages = Q_Request::languages();
+		if ($firstLanguage = reset($languages)) {
+			$list = array_keys(Q_Config::expect('Q', 'web', 'languages'));
+			if (in_array($firstLanguage, $list)) {
+				$user->preferredLanguage = reset($firstLanguage);
+			}
+		}
+
 		Users::$cache['user'] = $user;
 
 		if ($username) {
