@@ -305,7 +305,8 @@ class Users_Contact extends Base_Users_Contact
 			if ($loggedInUser->id === $this->userId) {
 				$authorized = true;
 			} elseif (Users::isCommunityId($this->userId)) {
-				$authorized = in_array($this->label, Users_Label::can($this->userId, $loggedInUser->id)['see']);
+				$can = Users_Label::can($this->userId, $loggedInUser->id);
+				$authorized = in_array($this->label, $can['see']);
 			}
 		}
 
