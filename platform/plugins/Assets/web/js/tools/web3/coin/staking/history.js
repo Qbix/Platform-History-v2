@@ -11,7 +11,7 @@
 
 
 (function (window, Q, $, undefined) {
-	
+
 	if (Q.isEmpty(Q.grabMetamaskError)) {
 
         // see https://github.com/MetaMask/eth-rpc-errors/blob/main/src/error-constants.ts
@@ -104,7 +104,8 @@
 			return console.warn("user not logged in");
 		}
 		
-		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
+		
+		
 		
 		if (Q.isEmpty(state.communityStakingPoolAddress)) {
 			return console.warn("communityStakingPoolAddress required!");
@@ -117,8 +118,10 @@
 			return console.warn("chainId required!");
 		}
 */
+		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
+		
 		tool.refresh();
-		setInterval(function(){tool.refresh();},5000);
+		//setInterval(function(){tool.refresh();},5000);
 
 	},
 
@@ -126,7 +129,6 @@
 		abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",
 		abiPathCommunityStakingPool: "Assets/templates/R1/CommunityStakingPool/contract",
 		chainId: null,
-		communityStakingPoolAddress: null,
 		communityCoinAddress: null,
 		fields: {
 			
@@ -151,31 +153,105 @@
 		refresh: function () {
 			var tool = this;
 			var state = tool.state;
-				
-			Q.Template.render("Assets/web3/coin/staking/history", {
-				chainId: state.chainId,
-				chains: Assets.Web3.chains
-			}, function (err, html) {
-				Q.replace(tool.element, html);
-				///
-				
-				$(tool.element).find('.lastTsupdated').html(new Date(Date.now()).toLocaleTimeString("en-US"));
 			
-			
-				// !!
-				
-				///
+			Q.Users.Web3.getContract(
+				state.abiPathCommunityCoin, 
+				{
+					contractAddress: state.communityCoinAddress,
+					chainId: state.chainId
+				}
+			).then(function(contract){
+				return contract.viewLockedWalletTokensList(ethers.utils.getAddress(tool.loggedInUserXid))
+			}).then(function (data) {
+
+				state.stakesList = tool._adjustValues(data[0]);
+				state.bonuseslist = tool._adjustValues(data[1]);
+
+			}).finally(function(){
+				Q.Template.render("Assets/web3/coin/staking/history", {
+					stakesList: state.stakesList,
+					bonuseslist: state.bonuseslist
+				}, function (err, html) {
+					Q.replace(tool.element, html);
+					
+					 $("[data-timestamp]", tool.element).each(function () {
+                        $(this).tool("Q/countdown").activate();
+                    });
+					///
+
+
+
+	//	function viewLockedWalletTokens(address account) public view returns (uint256) {
+	//        //return users[account].tokensLocked._getMinimum() + users[account].tokensBonus._getMinimum();
+	//        return MinimumsLib._getMinimum(users[account].tokensLocked) + MinimumsLib._getMinimum(users[account].tokensBonus);
+	//    }
+	//
+	//    
+	//     * @notice way to view locked tokens lists(main and bonuses) that still can be unstakeable by user
+	//     
+	//    function viewLockedWalletTokensList(address account) public view returns (uint256[][] memory, uint256[][] memory) {
+	//        //return (users[account].tokensLocked._getMinimumList(), users[account].tokensBonus._getMinimumList());
+	//        return (MinimumsLib._getMinimumList(users[account].tokensLocked), MinimumsLib._getMinimumList(users[account].tokensBonus));
+	//    }
+
+
+					// !!
+
+					///
+				});
 			});
+			
+			
+		},
+		_adjustValues: function(data){
+			var ret = [];
+			data.forEach(function(i, index){
+				ret.push({
+					0:ethers.utils.formatUnits(i[0].toString(), 18), 
+					1:parseInt(i[1]),
+				});
+			})
+			return ret;
 		}
 	});
-
 	Q.Template.set("Assets/web3/coin/staking/history",
 	`
 	<div class="Assets_web3_coin_staking_history">
-	
-	Template: "Assets/web3/coin/staking/history"<br>
-	Update at: <div class="lastTsupdated"></div>
+	<table class="table table-stripe">
+	<tr>
+	<th>amount</th>
+	<th>time left</th>
+	</tr>
+	{{#each stakesList}}
+	<tr>
+	<td>{{this.[0]}}</td>
+	<td>
+		<div data-timestamp="{{this.[1]}}">
+			{{> Assets/web3/coin/staking/history/countdown/interface}}
+		</div>
+	</td>
+	</tr>
+	{{/each}}
+	{{#each bonuseslist}}
+	<tr>
+	<td>{{this.[0]}}</td>
+	<td>{{this.[1]}}</td>
+	</tr>
+	{{/each}}
+	</table>
 	</div>
+	`,
+		{
+			text: ["Assets/content"],
+			partials:[
+				"Assets/web3/coin/staking/history/countdown/interface"
+			]
+		}
+	);
+	
+	Q.Template.set("Assets/web3/coin/staking/history/countdown/interface",
+	`
+		<span class="Q_days"></span>&nbsp;&nbsp;<span class="Q_hours"></span>:<span class="Q_minutes"></span>:<span class="Q_seconds"></span>
 	`,
 		{text: ["Assets/content"]}
 	);

@@ -181,15 +181,10 @@
 		refresh: function () {
 			var tool = this;
 			var state = tool.state;
-			`
-			Stake {{ ReserveSymbol }} in {{ CommunityCoinSymbol }}
-Donating 80% to {{avatar by xid}} <-- show only if donation > 0%
-Staking pool duration: {{ duration }}:
-[ stake amount ] _Max_ [[ Stake ]]
-`
 			
 			Q.Template.render("Assets/web3/coin/staking/start", {
 				chainId: state.chainId,
+				communityCoinAddress: state.communityCoinAddress,
 				chains: Assets.Web3.chains
 			}, function (err, html) {
 				Q.replace(tool.element, html);
@@ -237,8 +232,7 @@ Staking pool duration: {{ duration }}:
 					}
 
 					if (
-						Q.validate.notEmpty(stake_amount) && 
-						Q.validate.integer(stake_amount)
+						Q.validate.notEmpty(stake_amount)
 					) {
 					//
 					} else {
@@ -267,7 +261,7 @@ Staking pool duration: {{ duration }}:
 									$element = $(arguments[2]);
 								}
 
-								
+
 								var erc20Contract;
 								var poolContract;
 								Q.Users.Web3.getContract(
@@ -321,6 +315,9 @@ Staking pool duration: {{ duration }}:
 								}).finally(function(){
 									
 									invokeObj.close();
+									
+									tool.fillPoolSelect(optionSelected.val());
+									tool._historyRefresh();
 								});
 
 							}
@@ -359,7 +356,7 @@ Staking pool duration: {{ duration }}:
 		_historyRefresh: function(){
 			var tool = this;
 
-			var historyTool = Q.Tool.from($(tool.element).find('.Assets_web3_coin_staking_history_tool'), "Assets/web3/coin/staking/history");
+			var historyTool = Q.Tool.from($(tool.element).find('.Assets_web3_coin_staking_history_tool')[0], "Assets/web3/coin/staking/history");
 			historyTool.refresh();
 		},
 		_getUserChoose: function() {
@@ -381,18 +378,19 @@ Staking pool duration: {{ duration }}:
 			var stake_amount;
 			
 			[stake_amount, data, optionSelected] = tool._getUserChoose();
-			
+			console.log([stake_amount, data, optionSelected]);
 			Q.Template.render("Assets/web3/coin/staking/start/poolInfo", {
 				selectValue:optionSelected.val(),
 				selectTitle:optionSelected.html(),
 				//data: data,
 				data: Q.isEmpty(data.instancedata) ? {} : data.instancedata,
-				stake_amount: Q.isEmpty(stake_amount) ? 0 : stake_amount
+				stake_amount: Q.isEmpty(stake_amount) ? 0 : stake_amount,
+				stake_amount_max: Q.isEmpty(data.instancedata.erc20TokenInfo.balance) ? '-' : ethers.utils.formatUnits(data.instancedata.erc20TokenInfo.balance, 18),
 			}, function (err, html) {
 				Q.replace($(tool.element).find('.infoContainer')[0], html);
 			});
 		},
-		fillPoolSelect: function(){
+		fillPoolSelect: function(setValAfterFill){
 			var tool = this;
 			var state = tool.state;
 			
@@ -442,7 +440,9 @@ Staking pool duration: {{ duration }}:
 
 					$selectElement.off("change").on("change", __renderOnchange).trigger('change');
 					$amountElement.off("keyup").on("keyup", __renderOnchange);
-				   
+					if (typeof setValAfterFill !== "undefined") {
+						$selectElement.val(setValAfterFill).trigger("change");
+					}
 				}
 			);
 
@@ -451,8 +451,6 @@ Staking pool duration: {{ duration }}:
 
 	Q.Template.set("Assets/web3/coin/staking/start",
 	`
-	
-	
 	
 	<div>
 		<div class="row">
@@ -484,13 +482,14 @@ Staking pool duration: {{ duration }}:
 		</div>
 		<div class="row">
 			<div class="col-sm-12 Assets_web3_coin_staking_start_historyContainer">
-				{{&tool "Assets/web3/coin/staking/history"}}
-	<!--  salesAddress=salesAddress abiPath=abiNFTSales -->
+				{{&tool "Assets/web3/coin/staking/history" chainId=chainId communityCoinAddress=communityCoinAddress}}
 			</div>
 		</div>
 	</div>
 	`,
-		{text: ["Assets/content"]}
+		{
+			text: ["Assets/content"]
+		}
 	);
 	
 	Q.Template.set("Assets/web3/coin/staking/start/poolInfo",
@@ -501,42 +500,53 @@ Staking pool duration: {{ duration }}:
 		Donating % to [[avatarbyxid]]<br>
 		{{/if}} 
 		Staking pool duration: {{data.duration}}:<br>
-		{{stake_amount}} _Max_ 
+		{{stake_amount}} {{stake_amount_max}}
 	`,
 		{text: ["Assets/content"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/staking/start/stake/interface",
 	`
-		You should needproceed two transactions:<br>
+		You should need to execute two transactions:<br>
 
 		<table class="table table-stripe">
-		<tr>
-		<td>Approve {{token_amount}} to the pool {{poolname}}</td>
-		<td class="steps step1">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
-				<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
-			</svg>
-		</td>
-		</tr>
-		<tr>
-		<td>staking</td>
-		<td class="steps step2">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
-				<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
-			</svg>
-		</td>
-		</tr>
-	</table>
+			<tr>
+			<td>Approve {{token_amount}} to the pool {{poolname}}</td>
+			<td class="steps step1">
+				{{> "Assets/web3/coin/staking/start/stake/interface/asterisk"}}
+			</td>
+			</tr>
+			<tr>
+			<td>staking</td>
+			<td class="steps step2">
+				{{> "Assets/web3/coin/staking/start/stake/interface/asterisk"}}
+			</td>
+			</tr>
+		</table>
 	`,
-		{text: ["Assets/content"]}
+		{
+			text: ["Assets/content"],
+			partials:[
+				"Assets/web3/coin/staking/start/stake/interface/check",
+				"Assets/web3/coin/staking/start/stake/interface/asterisk"
+			]
+		}
 	);
 				    
 	Q.Template.set("Assets/web3/coin/staking/start/stake/interface/check",
 	`
-	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-		<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-	</svg>
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+			<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+		</svg>
+	`,
+		{text: ["Assets/content"]}
+	);
+	
+	Q.Template.set("Assets/web3/coin/staking/start/stake/interface/asterisk",
+	`
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+			<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+		</svg>
 	`,
 		{text: ["Assets/content"]}
 	);
