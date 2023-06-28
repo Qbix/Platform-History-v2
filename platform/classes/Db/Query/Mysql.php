@@ -1651,17 +1651,23 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (empty($conn_name)) {
 			$conn_name = 'empty connection name';
 		}
-		$sql = $this->getSQL();
-		if (isset(Db_Query::$cache[$conn_name][$sql]['fetchDbRows'])
+		$index = $this->getSQL();
+		if ($fields_prefix) {
+			$index .= ":fields_prefix=".$fields_prefix;
+		}
+		if ($by_field) {
+			$index .= ":by_field=".$by_field;
+		}
+		if (isset(Db_Query::$cache[$conn_name][$index]['fetchDbRows'])
 		and !$this->ignoreCache) {
-			return Db_Query::$cache[$conn_name][$sql]['fetchDbRows'];
+			return Db_Query::$cache[$conn_name][$index]['fetchDbRows'];
 		}
 		$ret = $this->execute()->fetchDbRows($class_name, $fields_prefix, $by_field);
 		if ($this->caching === true
 		or ($this->caching === null and !empty($ret))) {
 			if (Db::allowCaching()) {
 				// cache the result of executing this particular SQL on this db connection
-				Db_Query::$cache[$conn_name][$sql]['fetchDbRows'] = $ret;
+				Db_Query::$cache[$conn_name][$index]['fetchDbRows'] = $ret;
 			}
 		}
 		return $ret;
