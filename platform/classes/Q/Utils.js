@@ -342,8 +342,8 @@ Utils.queryExternal = function(handler, data /* {} */, url /* null */, headers /
 	}
 
 	var query = {}, sig = 'Q.'+Q.Config.get(['Q', 'internal', 'sigField'], 'sig');
-	query['Q.ajax'] = 'json';
-	query['Q.slotNames'] = 'data';
+	query['Q_ajax'] = 'json';
+	query['Q_slotNames'] = 'data';
 	query[sig] = Utils.sign(Q.extend({}, data, query))[sig];
 
 	if (!url && !(url = Q.Config.get(['Q', 'web', 'appRootUrl'], false)))
