@@ -302,7 +302,7 @@ class Users_Contact extends Base_Users_Contact
 		$loggedInUser = Users::loggedInUser(false, false);
 		$authorized = false;
 		if ($loggedInUser) {
-			if ($loggedInUser->id === $this->userId) {
+			if (in_array($loggedInUser->id, [$this->userId, $this->contactUserId])) {
 				$authorized = true;
 			} elseif (Users::isCommunityId($this->userId)) {
 				$can = Users_Label::can($this->userId, $loggedInUser->id);
