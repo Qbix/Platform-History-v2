@@ -510,6 +510,7 @@ Sp.calculateAccess = function(asUserId, callback) {
 	}
 	var subj = this;
 	var public_source = Streams.ACCESS_SOURCES['public'];
+	var direct_source = Streams.ACCESS_SOURCES['direct'];
 
 	this.set('asUserId', asUserId);
 	this.set('readLevel', this.fields.readLevel);
@@ -527,6 +528,15 @@ Sp.calculateAccess = function(asUserId, callback) {
 
 	if (asUserId && asUserId === this.fields.publisherId) {
 		// The publisher should have full access to every one of their streams.
+		// Streams which are "required", though, won't be deleted by the system.
+		var required = Q.Config.get(['Streams', 'requiredUserStreams', this.fields.name], false);
+		this.set('isRequired', required);
+		this.set('readLevel', Streams.READ_LEVEL['max']);
+		this.set('writeLevel', Streams.WRITE_LEVEL['max']);
+		this.set('adminLevel', Streams.ADMIN_LEVEL['max']);
+		this.set('readLevel_source', direct_source);
+		this.set('writeLevel_source', direct_source);
+		this.set('adminLevel_source', direct_source);
 		this.publishedByFetcher = true;
 		return callback.call(subj);
 	}
