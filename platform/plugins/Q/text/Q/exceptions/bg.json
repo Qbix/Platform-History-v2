@@ -1,4 +1,5 @@
 {
     "MissingFile": "липсващ файл {{filename}}",
-    "InvalidLanguage": "невалиден език {{language}}"
+    "InvalidLanguage": "невалиден език {{language}}",
+    "RequiredField": "{{field}} е задължително"
 }

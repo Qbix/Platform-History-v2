@@ -20,7 +20,11 @@
         "Tap": "Pieskarieties",
         "Click": "Klikšķis",
         "Yes": "Jā",
-        "No": "Nē"
+        "No": "Nē",
+        "OK": "labi",
+        "Alert": "Brīdinājums",
+        "Confirm": "Apstiprināt",
+        "Prompt": "Pamudināt"
     },
     "months": {
         "1": "janvārī",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Lai tas darbotos, jums ir jāveic pārlūkošana drošā kontekstā"
+    },
+    "scan": {
+        "QR": "Skenējiet QR kodus"
     }
 }

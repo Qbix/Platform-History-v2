@@ -20,7 +20,11 @@
         "Tap": "Érintés",
         "Click": "Kattintson",
         "Yes": "Igen",
-        "No": "Nem"
+        "No": "Nem",
+        "OK": "rendben",
+        "Alert": "Éber",
+        "Confirm": "megerősít",
+        "Prompt": "Gyors"
     },
     "months": {
         "1": "január",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Ahhoz, hogy ez működjön, biztonságos környezetben kell böngésznie"
+    },
+    "scan": {
+        "QR": "QR-kódok beolvasása"
     }
 }

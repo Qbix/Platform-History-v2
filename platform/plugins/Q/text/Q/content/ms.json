@@ -20,7 +20,11 @@
         "Tap": "Sentuh",
         "Click": "klik",
         "Yes": "ya",
-        "No": "Tidak"
+        "No": "Tidak",
+        "OK": "okey",
+        "Alert": "Amaran",
+        "Confirm": "sahkan",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "Januari",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Anda perlu menyemak imbas dalam konteks yang selamat untuk ini berfungsi"
+    },
+    "scan": {
+        "QR": "Imbas kod QR"
     }
 }

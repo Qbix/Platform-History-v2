@@ -20,7 +20,11 @@
         "Tap": "Hawakan",
         "Click": "Mag-click",
         "Yes": "Oo",
-        "No": "Hindi"
+        "No": "Hindi",
+        "OK": "OK",
+        "Alert": "Alerto",
+        "Confirm": "Kumpirmahin",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "Enero",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Kailangan mong mag-browse sa isang secure na konteksto para gumana ito"
+    },
+    "scan": {
+        "QR": "I-scan ang mga QR code"
     }
 }

@@ -20,7 +20,11 @@
         "Tap": "Røre ved",
         "Click": "Klik",
         "Yes": "Ja",
-        "No": "Ingen"
+        "No": "Ingen",
+        "OK": "Okay",
+        "Alert": "Alert",
+        "Confirm": "Bekræfte",
+        "Prompt": "Hurtig"
     },
     "months": {
         "1": "januar",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Du skal browse i en sikker kontekst, for at dette fungerer"
+    },
+    "scan": {
+        "QR": "Scan QR-koder"
     }
 }

@@ -54,7 +54,11 @@ Q.text = {
 			"Tap": "Tap",
 			"Click": "Click",
 			"Yes": "Yes",
-			"No": "No"
+			"No": "No",
+			"OK": "OK",
+			"Alert": "Alert",
+			"Confirm": "Confirm",
+			"Prompt": "Prompt"
 		},
 		"months": {
 			"1": "January",
@@ -122,6 +126,9 @@ Q.text = {
 		"tabs": {
 			"more": "more",
 			"Menu": "Menu"
+		},
+		"scan": {
+			"QR": "Scan QR codes"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -14082,9 +14089,9 @@ Q.alert = function(message, options) {
 };
 
 Q.alert.options = {
-	title: 'Alert'
+	title: Q.text.Q.words.Alert
 };
-Q.extend(Q.alert.options, Q.text.alert);
+Q.extend(Q.alert.options, Q.text.Q.alert);
 
 /**
  * Provides replacement for default javascript confirm() using Q front-end features, specifically dialogs.
@@ -14145,11 +14152,10 @@ Q.confirm = function(message, callback, options) {
 	var buttonYes = dialog.querySelectorAll('.Q_buttons button:first-child')[0];
 	return dialog;
 };
-
 Q.confirm.options = {
-	title: 'Confirm',
-	ok: 'Yes',
-	cancel: 'No',
+	title: Q.text.words.Confirm,
+	ok: Q.text.words.Yes,
+	cancel: Q.text.words.No,
 	noClose: true
 };
 Q.extend(Q.confirm.options, Q.text.confirm);
@@ -14233,13 +14239,13 @@ Q.prompt = function(message, callback, options) {
 	return dialog;
 };
 Q.prompt.options = {
-	title: 'Prompt',
-	ok: 'OK',
+	title: Q.text.Q.words.Prompt,
+	ok: Q.text.Q.words.OK,
 	placeholder: '',
 	maxlength: 100,
 	noClose: true
 };
-Q.extend(Q.prompt.options, Q.text.prompt);
+Q.extend(Q.prompt.options, Q.text.Q.prompt);
 
 /**
  * Opens some content with a title inside an interface construct,
@@ -14998,9 +15004,9 @@ Q.onInit.add(function () {
 				return;
 			}
 			Q.extend(Q.text.Q, 10, text);
-			Q.extend(Q.confirm.options, 10, Q.text.confirm);
-			Q.extend(Q.prompt.options, 10, Q.text.prompt);
-			Q.extend(Q.alert.options, 10, Q.text.alert);
+			Q.extend(Q.confirm.options, 10, Q.text.Q.confirm);
+			Q.extend(Q.prompt.options, 10, Q.text.Q.prompt);
+			Q.extend(Q.alert.options, 10, Q.text.Q.alert);
 			var QtQw = Q.text.Q.words;
 			QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
 			QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
@@ -15445,7 +15451,7 @@ Q.Camera = {
 				src: "{{Q}}/audio/scanned.mp3"
 			},
 			dialog: {
-				title: "Scan QR codes"
+				title: Q.text.Q.scan.QR
 			}
 		},
 		/**

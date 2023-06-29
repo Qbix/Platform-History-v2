@@ -20,7 +20,11 @@
         "Tap": "Aanraken",
         "Click": "Klik",
         "Yes": "Ja",
-        "No": "Nee"
+        "No": "Nee",
+        "OK": "OK",
+        "Alert": "Alarm",
+        "Confirm": "Bevestigen",
+        "Prompt": "Snel"
     },
     "months": {
         "1": "januari",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "U moet in een veilige context bladeren om dit te laten werken"
+    },
+    "scan": {
+        "QR": "QR-codes scannen"
     }
 }

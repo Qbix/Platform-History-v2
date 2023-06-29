@@ -1,4 +1,5 @@
 {
     "MissingFile": "অনুপস্থিত ফাইল {{filename}}",
-    "InvalidLanguage": "অবৈধ ভাষা {{language}}"
+    "InvalidLanguage": "অবৈধ ভাষা {{language}}",
+    "RequiredField": "{{field}} প্রয়োজন"
 }

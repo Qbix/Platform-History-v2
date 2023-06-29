@@ -1,4 +1,5 @@
 {
     "MissingFile": "comhad {{filename}} in easnamh",
-    "InvalidLanguage": "teanga neamhbhailí {{language}}"
+    "InvalidLanguage": "teanga neamhbhailí {{language}}",
+    "RequiredField": "{{field}} ag teastáil"
 }

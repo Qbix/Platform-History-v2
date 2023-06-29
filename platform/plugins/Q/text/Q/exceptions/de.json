@@ -1,4 +1,5 @@
 {
     "MissingFile": "fehlende Datei {{filename}}",
-    "InvalidLanguage": "ungültige Sprache {{language}}"
+    "InvalidLanguage": "ungültige Sprache {{language}}",
+    "RequiredField": "{{field}} ist erforderlich"
 }

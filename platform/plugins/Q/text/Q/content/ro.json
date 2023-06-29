@@ -20,7 +20,11 @@
         "Tap": "Atingere",
         "Click": "Clic",
         "Yes": "da",
-        "No": "Nu"
+        "No": "Nu",
+        "OK": "Bine",
+        "Alert": "Alerta",
+        "Confirm": "A confirma",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "ianuarie",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Pentru ca acest lucru să funcționeze, trebuie să navigați într-un context securizat"
+    },
+    "scan": {
+        "QR": "Scanați coduri QR"
     }
 }

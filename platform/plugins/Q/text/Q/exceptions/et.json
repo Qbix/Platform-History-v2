@@ -1,4 +1,5 @@
 {
     "MissingFile": "puudu fail {{filename}}",
-    "InvalidLanguage": "kehtetu keel {{language}}"
+    "InvalidLanguage": "kehtetu keel {{language}}",
+    "RequiredField": "{{field}} on nõutav"
 }

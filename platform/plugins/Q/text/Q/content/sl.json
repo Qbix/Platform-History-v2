@@ -20,7 +20,11 @@
         "Tap": "Dotik",
         "Click": "Kliknite",
         "Yes": "da",
-        "No": "št"
+        "No": "št",
+        "OK": "v redu",
+        "Alert": "Opozorilo",
+        "Confirm": "Potrdi",
+        "Prompt": "Poziv"
     },
     "months": {
         "1": "januarja",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Da bo to delovalo, morate brskati v varnem kontekstu"
+    },
+    "scan": {
+        "QR": "Skenirajte kode QR"
     }
 }

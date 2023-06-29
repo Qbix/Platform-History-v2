@@ -1,4 +1,5 @@
 {
     "MissingFile": "கோப்பு {{filename}} இல்லை",
-    "InvalidLanguage": "தவறான மொழி {{language}}"
+    "InvalidLanguage": "தவறான மொழி {{language}}",
+    "RequiredField": "{{field}} தேவைப்படுகிறது"
 }

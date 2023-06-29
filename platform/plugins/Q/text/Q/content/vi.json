@@ -20,7 +20,11 @@
         "Tap": "Chạm",
         "Click": "Nhấp chuột",
         "Yes": "Đúng",
-        "No": "Không"
+        "No": "Không",
+        "OK": "ĐƯỢC RỒI",
+        "Alert": "Báo động",
+        "Confirm": "Xác nhận",
+        "Prompt": "Lời nhắc"
     },
     "months": {
         "1": "Tháng một",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Bạn cần duyệt trong ngữ cảnh an toàn để tính năng này hoạt động"
+    },
+    "scan": {
+        "QR": "Quét mã QR"
     }
 }

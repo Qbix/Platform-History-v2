@@ -1,4 +1,5 @@
 {
     "MissingFile": "ملف مفقود {{filename}}",
-    "InvalidLanguage": "لغة غير صالحة {{language}}"
+    "InvalidLanguage": "لغة غير صالحة {{language}}",
+    "RequiredField": "مطلوب {{field}}"
 }
