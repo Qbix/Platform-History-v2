@@ -20,7 +20,11 @@
         "Tap": "Ukitu",
         "Click": "Egin klik",
         "Yes": "Bai",
-        "No": "Ez"
+        "No": "Ez",
+        "OK": "Ados",
+        "Alert": "Alerta",
+        "Confirm": "Berretsi",
+        "Prompt": "Galdera"
     },
     "months": {
         "1": "Urtarrila",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Testuinguru seguru batean arakatu behar duzu honek funtziona dezan"
+    },
+    "scan": {
+        "QR": "Eskaneatu QR kodeak"
     }
 }

@@ -20,7 +20,11 @@
         "Tap": "Palieskite",
         "Click": "Spustelėkite",
         "Yes": "Taip",
-        "No": "Nr"
+        "No": "Nr",
+        "OK": "Gerai",
+        "Alert": "Budrus",
+        "Confirm": "Patvirtinti",
+        "Prompt": "Raginimas"
     },
     "months": {
         "1": "sausio mėn",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Kad tai veiktų, turite naršyti saugiame kontekste"
+    },
+    "scan": {
+        "QR": "Nuskaitykite QR kodus"
     }
 }

@@ -1,4 +1,5 @@
 {
     "MissingFile": "ファイル{{filename}}がありません",
-    "InvalidLanguage": "無効な言語{{language}}"
+    "InvalidLanguage": "無効な言語{{language}}",
+    "RequiredField": "{{field}}は必須です"
 }

@@ -1,4 +1,5 @@
 {
     "MissingFile": "누락된 파일 {{filename}}",
-    "InvalidLanguage": "잘못된 언어 {{language}}"
+    "InvalidLanguage": "잘못된 언어 {{language}}",
+    "RequiredField": "{{field}} 가 필요합니다"
 }

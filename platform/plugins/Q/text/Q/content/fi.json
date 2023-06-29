@@ -20,7 +20,11 @@
         "Tap": "Kosketus",
         "Click": "Klikkaus",
         "Yes": "Joo",
-        "No": "Ei"
+        "No": "Ei",
+        "OK": "OK",
+        "Alert": "Varoitus",
+        "Confirm": "Vahvistaa",
+        "Prompt": "Kehote"
     },
     "months": {
         "1": "tammikuu",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Sinun on selattava suojatussa kontekstissa, jotta tämä toimii"
+    },
+    "scan": {
+        "QR": "Skannaa QR-koodit"
     }
 }

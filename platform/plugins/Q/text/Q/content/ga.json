@@ -20,7 +20,11 @@
         "Tap": "Dteagmháil",
         "Click": "Cliceáil",
         "Yes": "Tá",
-        "No": "Níl"
+        "No": "Níl",
+        "OK": "ceart go leor",
+        "Alert": "Airdeall",
+        "Confirm": "Deimhnigh",
+        "Prompt": "Leid"
     },
     "months": {
         "1": "Eanáir",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Ní mór duit brabhsáil i gcomhthéacs slán le go n-oibreoidh sé seo"
+    },
+    "scan": {
+        "QR": "Scan cóid QR"
     }
 }

@@ -1,4 +1,5 @@
 {
     "MissingFile": "აკლია ფაილი {{filename}}",
-    "InvalidLanguage": "არასწორი ენა {{language}}"
+    "InvalidLanguage": "არასწორი ენა {{language}}",
+    "RequiredField": "საჭიროა {{field}}"
 }

@@ -20,7 +20,11 @@
         "Tap": "Dotek",
         "Click": "Klikněte",
         "Yes": "Ano",
-        "No": "Ne"
+        "No": "Ne",
+        "OK": "OK",
+        "Alert": "Upozornění",
+        "Confirm": "Potvrdit",
+        "Prompt": "Výzva"
     },
     "months": {
         "1": "leden",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Aby to fungovalo, musíte procházet v zabezpečeném kontextu"
+    },
+    "scan": {
+        "QR": "Naskenujte QR kódy"
     }
 }

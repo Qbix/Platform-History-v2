@@ -20,7 +20,11 @@
         "Tap": "Rör",
         "Click": "Klick",
         "Yes": "Ja",
-        "No": "Nej"
+        "No": "Nej",
+        "OK": "OK",
+        "Alert": "Varna",
+        "Confirm": "Bekräfta",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "januari",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Du måste surfa i ett säkert sammanhang för att detta ska fungera"
+    },
+    "scan": {
+        "QR": "Skanna QR-koder"
     }
 }

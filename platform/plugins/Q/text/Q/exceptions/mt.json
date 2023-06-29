@@ -1,4 +1,5 @@
 {
     "MissingFile": "fajl nieqes {{filename}}",
-    "InvalidLanguage": "lingwa invalida {{language}}"
+    "InvalidLanguage": "lingwa invalida {{language}}",
+    "RequiredField": "{{field}} hija meħtieġa"
 }

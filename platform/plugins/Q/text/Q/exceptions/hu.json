@@ -1,4 +1,5 @@
 {
     "MissingFile": "hiányzó fájl {{filename}}",
-    "InvalidLanguage": "érvénytelen nyelv {{language}}"
+    "InvalidLanguage": "érvénytelen nyelv {{language}}",
+    "RequiredField": "{{field}} szükséges"
 }

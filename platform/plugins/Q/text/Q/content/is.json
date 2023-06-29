@@ -20,7 +20,11 @@
         "Tap": "Snertu",
         "Click": "Smellur",
         "Yes": "Já",
-        "No": "Nei"
+        "No": "Nei",
+        "OK": "Allt í lagi",
+        "Alert": "Viðvörun",
+        "Confirm": "Staðfesta",
+        "Prompt": "Hvetja"
     },
     "months": {
         "1": "janúar",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Þú þarft að vafra í öruggu samhengi til að þetta virki"
+    },
+    "scan": {
+        "QR": "Skannaðu QR kóða"
     }
 }

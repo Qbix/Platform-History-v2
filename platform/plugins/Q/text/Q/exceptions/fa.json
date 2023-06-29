@@ -1,4 +1,5 @@
 {
     "MissingFile": "فایل گم شده {{filename}}",
-    "InvalidLanguage": "زبان {{language}} نامعتبر است"
+    "InvalidLanguage": "زبان {{language}} نامعتبر است",
+    "RequiredField": "{{field}} مورد نیاز است"
 }

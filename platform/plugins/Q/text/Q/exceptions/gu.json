@@ -1,4 +1,5 @@
 {
     "MissingFile": "ગુમ થયેલ ફાઇલ {{filename}}",
-    "InvalidLanguage": "અમાન્ય ભાષા {{language}}"
+    "InvalidLanguage": "અમાન્ય ભાષા {{language}}",
+    "RequiredField": "{{field}} જરૂરી છે"
 }

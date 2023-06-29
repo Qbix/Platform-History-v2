@@ -20,7 +20,11 @@
         "Tap": "Dokunmak",
         "Click": "Tıklamak",
         "Yes": "Evet",
-        "No": "Numara"
+        "No": "Numara",
+        "OK": "TAMAM",
+        "Alert": "Uyarı",
+        "Confirm": "Onaylamak",
+        "Prompt": "Çabuk"
     },
     "months": {
         "1": "Ocak ayı",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Bunun çalışması için güvenli bir bağlamda göz atmanız gerekir"
+    },
+    "scan": {
+        "QR": "QR kodlarını tarayın"
     }
 }

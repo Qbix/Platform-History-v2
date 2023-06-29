@@ -1,4 +1,5 @@
 {
     "MissingFile": "chybějící soubor {{filename}}",
-    "InvalidLanguage": "neplatný jazyk {{language}}"
+    "InvalidLanguage": "neplatný jazyk {{language}}",
+    "RequiredField": "{{field}} je vyžadováno"
 }

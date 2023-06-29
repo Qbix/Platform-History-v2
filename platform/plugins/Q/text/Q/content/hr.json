@@ -20,7 +20,11 @@
         "Tap": "Dodir",
         "Click": "Klik",
         "Yes": "Da",
-        "No": "Ne"
+        "No": "Ne",
+        "OK": "u redu",
+        "Alert": "uzbuna",
+        "Confirm": "Potvrdi",
+        "Prompt": "Potaknuti"
     },
     "months": {
         "1": "siječnja",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Morate pregledavati u sigurnom kontekstu da bi ovo funkcioniralo"
+    },
+    "scan": {
+        "QR": "Skenirajte QR kodove"
     }
 }

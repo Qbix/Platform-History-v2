@@ -20,7 +20,11 @@
         "Tap": "Toca",
         "Click": "Feu clic",
         "Yes": "Sí",
-        "No": "No"
+        "No": "No",
+        "OK": "D&#39;acord",
+        "Alert": "Alerta",
+        "Confirm": "Confirmeu",
+        "Prompt": "Avís"
     },
     "months": {
         "1": "gener",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Heu de navegar en un context segur perquè això funcioni"
+    },
+    "scan": {
+        "QR": "Escaneja codis QR"
     }
 }
