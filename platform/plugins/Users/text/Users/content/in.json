@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Selamat datang",
-        "directions": "Buat akun, atau masuk.",
+        "directions": {
+            "GetStarted": "Buat akun, atau masuk.",
+            "NoRegister": "Masuk jika Anda memiliki akun.",
+            "WasInvited": "Apa cara terbaik untuk menghubungi Anda?"
+        },
         "directionsNoRegister": "Masuk jika Anda memiliki akun.",
         "goButton": "➔",
         "passphrase": "Masukkan frasa sandi Anda:",

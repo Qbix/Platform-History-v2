@@ -186,6 +186,10 @@
 	text-align: left;
 }
 
+.Streams_participants_tool.Streams_noParticipants {
+	display: none;
+}
+
 .Users_avatar_tool {
 	display: inline-block;
 }
@@ -439,6 +443,16 @@
 .Streams_pdf_preview_tool .Streams_inplace_tool {
 	height: 40p;
 	line-height: 40px;
+}
+
+.Q_columns_title_container .Streams_preview_tool .Streams_preview_contents {
+	position: relative;
+}
+
+.Q_columns_title_container .Streams_preview_tool .Streams_preview_title {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
 }
 
 /* Streams access tool */

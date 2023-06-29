@@ -17,10 +17,14 @@
         "click": "ikklikkja",
         "yes": "iva",
         "no": "le",
-        "Tap": "Tektek",
+        "Tap": "Mess",
         "Click": "Ikklikkja",
         "Yes": "Iva",
-        "No": "Nru"
+        "No": "Nru",
+        "OK": "kollox sew",
+        "Alert": "Twissija",
+        "Confirm": "Ikkonferma",
+        "Prompt": "Pront"
     },
     "months": {
         "1": "Jannar",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argument &#39;li&#39; invalidu"
     },
     "alert": {
-        "title": "Twissija"
+        "title": "Avviż"
     },
     "confirm": {
         "title": "Ikkonferma",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Ikollok bżonn tfittex f&#39;kuntest sigur biex dan jaħdem"
+    },
+    "scan": {
+        "QR": "Skennja l-kodiċijiet QR"
     }
 }

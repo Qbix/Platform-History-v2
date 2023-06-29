@@ -1606,9 +1606,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		}
 		$sql = $this->getSQL();
 
-		if (isset(Db_Query::$cache[$conn_name][$sql]['fetchArray'])
+		if (isset(Db_Query::$cache[$conn_name][$sql]['fetchArray'][$by_field])
 		and !$this->ignoreCache) {
-			return Db_Query::$cache[$conn_name][$sql]['fetchArray'];
+			return Db_Query::$cache[$conn_name][$sql]['fetchArray'][$by_field];
 		}
 		$result = $this->execute();
 		$arguments = func_get_args();
@@ -1618,7 +1618,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		or ($this->caching === null and !empty($ret))) {
 			if (Db::allowCaching()) {
 				// cache the result of executing this particular SQL on this db connection
-				Db_Query::$cache[$conn_name][$sql]['fetchArray'] = $ret;
+				Db_Query::$cache[$conn_name][$sql]['fetchArray'][$by_field] = $ret;
 			}
 		}
 		return $ret;
@@ -1652,16 +1652,17 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$conn_name = 'empty connection name';
 		}
 		$sql = $this->getSQL();
-		if (isset(Db_Query::$cache[$conn_name][$sql]['fetchDbRows'])
+		$key = $by_field . $fields_prefix;
+		if (isset(Db_Query::$cache[$conn_name][$sql]['fetchDbRows'][$key])
 		and !$this->ignoreCache) {
-			return Db_Query::$cache[$conn_name][$sql]['fetchDbRows'];
+			return Db_Query::$cache[$conn_name][$sql]['fetchDbRows'][$key];
 		}
 		$ret = $this->execute()->fetchDbRows($class_name, $fields_prefix, $by_field);
 		if ($this->caching === true
 		or ($this->caching === null and !empty($ret))) {
 			if (Db::allowCaching()) {
 				// cache the result of executing this particular SQL on this db connection
-				Db_Query::$cache[$conn_name][$sql]['fetchDbRows'] = $ret;
+				Db_Query::$cache[$conn_name][$sql]['fetchDbRows'][$key] = $ret;
 			}
 		}
 		return $ret;

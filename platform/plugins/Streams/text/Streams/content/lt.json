@@ -23,7 +23,7 @@
         "prompt": "Leisk draugams tave atpažinti:",
         "newUser": "arba toliau sukurkite naują paskyrą",
         "picTooltip": "Vėliau galėsite pakeisti šią nuotrauką",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Įveskite savo vardą ir pavardę"
         }
     },

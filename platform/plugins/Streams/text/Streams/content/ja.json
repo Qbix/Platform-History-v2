@@ -23,7 +23,7 @@
         "prompt": "友達にあなたを認識してもらいましょう:",
         "newUser": "または、以下で新しいアカウントを作成してください",
         "picTooltip": "この画像は後で変更できます",
-        "placeholder": {
+        "placeholders": {
             "fullName": "フルネームを入れて下さい"
         }
     },

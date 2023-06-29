@@ -13,14 +13,18 @@
         "otherDomain": "Lokað á beiðni milli léna til erlendra léna á {{baseUrl}}"
     },
     "words": {
-        "tap": "tappa",
+        "tap": "snerta",
         "click": "smellur",
         "yes": "Já",
         "no": "nei",
-        "Tap": "Bankaðu á",
+        "Tap": "Snertu",
         "Click": "Smellur",
         "Yes": "Já",
-        "No": "Nei"
+        "No": "Nei",
+        "OK": "Allt í lagi",
+        "Alert": "Viðvörun",
+        "Confirm": "Staðfesta",
+        "Prompt": "Hvetja"
     },
     "months": {
         "1": "janúar",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Rök „hver“ ógild"
     },
     "alert": {
-        "title": "Viðvörun"
+        "title": "Takið eftir"
     },
     "confirm": {
         "title": "Staðfesta",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Þú þarft að vafra í öruggu samhengi til að þetta virki"
+    },
+    "scan": {
+        "QR": "Skannaðu QR kóða"
     }
 }

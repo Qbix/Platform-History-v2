@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Karibu",
-        "directions": "Unda akaunti, au ingia.",
+        "directions": {
+            "GetStarted": "Unda akaunti, au ingia.",
+            "NoRegister": "Ingia ikiwa una akaunti.",
+            "WasInvited": "Ni ipi njia bora ya kukufikia?"
+        },
         "directionsNoRegister": "Ingia ikiwa una akaunti.",
         "goButton": "➔",
         "passphrase": "Ingiza kifungu chako cha kupita:",

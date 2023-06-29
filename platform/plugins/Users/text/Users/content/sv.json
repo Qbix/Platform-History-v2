@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Välkommen",
-        "directions": "Skapa ett konto eller logga in.",
+        "directions": {
+            "GetStarted": "Skapa ett konto eller logga in.",
+            "NoRegister": "Logga in om du har ett konto.",
+            "WasInvited": "Vad är det bästa sättet att nå dig?"
+        },
         "directionsNoRegister": "Logga in om du har ett konto.",
         "goButton": "➔",
         "passphrase": "Ange din lösenordsfras:",

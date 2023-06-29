@@ -23,7 +23,7 @@
         "prompt": "Ļaujiet draugiem jūs atpazīt:",
         "newUser": "vai izveidojiet jaunu kontu tālāk",
         "picTooltip": "Vēlāk varat mainīt šo attēlu",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Ievadiet savu pilno vārdu"
         }
     },

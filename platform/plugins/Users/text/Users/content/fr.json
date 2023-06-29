@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Accueillir",
-        "directions": "Créez un compte ou connectez-vous.",
+        "directions": {
+            "GetStarted": "Créez un compte ou connectez-vous.",
+            "NoRegister": "Connectez-vous si vous avez un compte.",
+            "WasInvited": "Quel est le meilleur moyen de vous joindre ?"
+        },
         "directionsNoRegister": "Connectez-vous si vous avez un compte.",
         "goButton": "➔",
         "passphrase": "Saisissez votre phrase de passe :",

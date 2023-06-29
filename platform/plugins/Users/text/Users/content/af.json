@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Welkom",
-        "directions": "Skep &#39;n rekening, of meld aan.",
+        "directions": {
+            "GetStarted": "Skep &#39;n rekening, of meld aan.",
+            "NoRegister": "Meld aan as jy &#39;n rekening het.",
+            "WasInvited": "Wat is die beste manier om jou te bereik?"
+        },
         "directionsNoRegister": "Meld aan as jy &#39;n rekening het.",
         "goButton": "➔",
         "passphrase": "Voer jou wagwoordfrase in:",

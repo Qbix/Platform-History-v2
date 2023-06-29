@@ -1,3 +1,5 @@
 {
-    "MissingFile": "çatışmayan fayl {{filename}}"
+    "MissingFile": "çatışmayan fayl {{filename}}",
+    "InvalidLanguage": "etibarsız dil {{language}}",
+    "RequiredField": "{{field}} tələb olunur"
 }

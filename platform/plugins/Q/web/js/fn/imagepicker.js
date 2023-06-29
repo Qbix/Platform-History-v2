@@ -13,7 +13,7 @@ Q.setObject('Q.text.Q.imagepicker', {
 		touchscreen: 'Use your fingers to zoom and drag',
 		notTouchscreen: 'Use your mouse & wheel to zoom and drag'
 	}
-});
+}, Q.getObject('Q.text.Q.imagepicker'));
 
 var qtqi = Q.text.Q.imagepicker;
 

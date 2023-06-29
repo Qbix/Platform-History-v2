@@ -300,18 +300,13 @@ class Users_Contact extends Base_Users_Contact
 	function exportArray($options = null)
 	{
 		$loggedInUser = Users::loggedInUser(false, false);
-		$adminLabels = Q_Config::get("Users", "communities", "admins", null);
 		$authorized = false;
 		if ($loggedInUser) {
-			if ($loggedInUser->id === $this->userId) {
+			if (in_array($loggedInUser->id, [$this->userId, $this->contactUserId])) {
 				$authorized = true;
-			}
-
-			if (Users::isCommunityId($this->userId)) {
-				if ($loggedInUser->id === $this->contactUserId
-					|| (bool)Users::roles($this->userId, $adminLabels, array(), $loggedInUser->id)) {
-					$authorized = true;
-				}
+			} elseif (Users::isCommunityId($this->userId)) {
+				$can = Users_Label::can($this->userId, $loggedInUser->id);
+				$authorized = in_array($this->label, $can['see']);
 			}
 		}
 

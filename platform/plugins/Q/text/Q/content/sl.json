@@ -17,10 +17,14 @@
         "click": "kliknite",
         "yes": "da",
         "no": "št",
-        "Tap": "Dotaknite se",
+        "Tap": "Dotik",
         "Click": "Kliknite",
         "Yes": "da",
-        "No": "št"
+        "No": "št",
+        "OK": "v redu",
+        "Alert": "Opozorilo",
+        "Confirm": "Potrdi",
+        "Prompt": "Poziv"
     },
     "months": {
         "1": "januarja",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argument &#39;kateri&#39; je neveljaven"
     },
     "alert": {
-        "title": "Opozorilo"
+        "title": "Opaziti"
     },
     "confirm": {
         "title": "Potrdi",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Da bo to delovalo, morate brskati v varnem kontekstu"
+    },
+    "scan": {
+        "QR": "Skenirajte kode QR"
     }
 }

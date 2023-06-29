@@ -17,10 +17,14 @@
         "click": "basın",
         "yes": "bəli",
         "no": "yox",
-        "Tap": "vurun",
+        "Tap": "toxunun",
         "Click": "klikləyin",
         "Yes": "Bəli",
-        "No": "Yox"
+        "No": "Yox",
+        "OK": "tamam",
+        "Alert": "Xəbərdarlıq",
+        "Confirm": "Təsdiq edin",
+        "Prompt": "Tələb"
     },
     "months": {
         "1": "yanvar",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Bunun işləməsi üçün təhlükəsiz kontekstdə axtarış etməlisiniz"
+    },
+    "scan": {
+        "QR": "QR kodları skan edin"
     }
 }

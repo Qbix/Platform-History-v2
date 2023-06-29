@@ -17,10 +17,14 @@
         "click": "clic",
         "yes": "da",
         "no": "Nu",
-        "Tap": "Atingeți",
+        "Tap": "Atingere",
         "Click": "Clic",
         "Yes": "da",
-        "No": "Nu"
+        "No": "Nu",
+        "OK": "Bine",
+        "Alert": "Alerta",
+        "Confirm": "A confirma",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "ianuarie",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argumentul „care” este invalid"
     },
     "alert": {
-        "title": "Alerta"
+        "title": "Înștiințare"
     },
     "confirm": {
         "title": "A confirma",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Pentru ca acest lucru să funcționeze, trebuie să navigați într-un context securizat"
+    },
+    "scan": {
+        "QR": "Scanați coduri QR"
     }
 }

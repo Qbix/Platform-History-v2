@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Dobrodošli",
-        "directions": "Napravite račun ili se prijavite.",
+        "directions": {
+            "GetStarted": "Napravite račun ili se prijavite.",
+            "NoRegister": "Prijavite se ako imate račun.",
+            "WasInvited": "Koji je najbolji način da dođemo do vas?"
+        },
         "directionsNoRegister": "Prijavite se ako imate račun.",
         "goButton": "➔",
         "passphrase": "Unesite svoju lozinku:",

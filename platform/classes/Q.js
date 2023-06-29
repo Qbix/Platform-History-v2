@@ -2258,8 +2258,8 @@ Q.listen = function _Q_listen(options, callback) {
 	if (express.version === undefined
 	|| parseInt(express.version) >= 3) {
 		app = express();
-		if (options.https !== false) {
-			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
+		var h = Q.Config.get(['Q', 'node', 'https'], false);
+		if (h && options.https !== false) {
 			var keys = ['key', 'cert', 'ca', 'dhparam'];
 			var certFolder = path.dirname(h.cert)
 			if (Q.isPlainObject(options.https)) {
@@ -3556,18 +3556,6 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
 	return options && options.compareScheme
 		? same && (parsed1.scheme === parsed2.scheme)
 		: same;
-};
-
-/**
- * @method startsWith
- * @param {String} prefix
- * @return {boolean}
- */
-Sp.startsWith = function _String_prototype_startsWith(prefix) {
-	if (this.length < prefix.length) {
-		return false;
-	}
-	return this.substr(0, prefix.length) === prefix;
 };
 
 /**

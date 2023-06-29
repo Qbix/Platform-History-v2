@@ -23,7 +23,7 @@
         "prompt": "Ħalli lill-ħbieb jagħrfuk:",
         "newUser": "jew oħloq kont ġdid hawn taħt",
         "picTooltip": "Tista&#39; tibdel din l-istampa aktar tard",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Daħħal l-isem sħiħ tiegħek"
         }
     },

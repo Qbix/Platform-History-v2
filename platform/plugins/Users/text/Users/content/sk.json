@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Vitajte",
-        "directions": "Vytvorte si účet alebo sa prihláste.",
+        "directions": {
+            "GetStarted": "Vytvorte si účet alebo sa prihláste.",
+            "NoRegister": "Prihláste sa, ak máte účet.",
+            "WasInvited": "Aký je najlepší spôsob, ako sa k vám dostať?"
+        },
         "directionsNoRegister": "Prihláste sa, ak máte účet.",
         "goButton": "➔",
         "passphrase": "Zadajte svoju prístupovú frázu:",

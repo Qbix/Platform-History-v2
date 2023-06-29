@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Willkommen",
-        "directions": "Erstellen Sie ein Konto oder melden Sie sich an.",
+        "directions": {
+            "GetStarted": "Erstellen Sie ein Konto oder melden Sie sich an.",
+            "NoRegister": "Melden Sie sich an, wenn Sie ein Konto haben.",
+            "WasInvited": "Wie kann ich Sie am besten erreichen?"
+        },
         "directionsNoRegister": "Melden Sie sich an, wenn Sie ein Konto haben.",
         "goButton": "➔",
         "passphrase": "Geben Sie Ihre Passphrase ein:",

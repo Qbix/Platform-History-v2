@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Croeso",
-        "directions": "Creu cyfrif, neu fewngofnodi.",
+        "directions": {
+            "GetStarted": "Creu cyfrif, neu fewngofnodi.",
+            "NoRegister": "Mewngofnodwch os oes gennych gyfrif.",
+            "WasInvited": "Beth yw&#39;r ffordd orau i&#39;ch cyrraedd?"
+        },
         "directionsNoRegister": "Mewngofnodwch os oes gennych gyfrif.",
         "goButton": "➔",
         "passphrase": "Rhowch eich ymadrodd pasio:",

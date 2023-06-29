@@ -17,10 +17,14 @@
         "click": "clic",
         "yes": "sì",
         "no": "no",
-        "Tap": "Rubinetto",
+        "Tap": "Tocco",
         "Click": "Clic",
         "Yes": "sì",
-        "No": "No"
+        "No": "No",
+        "OK": "OK",
+        "Alert": "Mettere in guardia",
+        "Confirm": "Confermare",
+        "Prompt": "Richiesta"
     },
     "months": {
         "1": "gennaio",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argomento &#39;quale&#39; non valido"
     },
     "alert": {
-        "title": "Mettere in guardia"
+        "title": "Avviso"
     },
     "confirm": {
         "title": "Confermare",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Devi navigare in un contesto sicuro affinché funzioni"
+    },
+    "scan": {
+        "QR": "Scansiona i codici QR"
     }
 }

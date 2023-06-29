@@ -17,10 +17,14 @@
         "click": "Klik",
         "yes": "Ja",
         "no": "Nee",
-        "Tap": "Kraan",
+        "Tap": "Aanraken",
         "Click": "Klik",
         "Yes": "Ja",
-        "No": "Nee"
+        "No": "Nee",
+        "OK": "OK",
+        "Alert": "Alarm",
+        "Confirm": "Bevestigen",
+        "Prompt": "Snel"
     },
     "months": {
         "1": "januari",
@@ -51,7 +55,7 @@
         "encoding": "codering"
     },
     "alert": {
-        "title": "Waarschuwing"
+        "title": "Kennisgeving"
     },
     "confirm": {
         "title": "Bevestigen",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "U moet in een veilige context bladeren om dit te laten werken"
+    },
+    "scan": {
+        "QR": "QR-codes scannen"
     }
 }

@@ -13,14 +13,18 @@
         "otherDomain": "Ombi la vikoa tofauti limezuiwa kwa kikoa cha kigeni kwa {{baseUrl}}"
     },
     "words": {
-        "tap": "bomba",
+        "tap": "kugusa",
         "click": "bonyeza",
         "yes": "ndio",
         "no": "Hapana",
-        "Tap": "Gonga",
+        "Tap": "Gusa",
         "Click": "Bofya",
         "Yes": "Ndiyo",
-        "No": "Hapana"
+        "No": "Hapana",
+        "OK": "sawa",
+        "Alert": "Tahadhari",
+        "Confirm": "Thibitisha",
+        "Prompt": "Haraka"
     },
     "months": {
         "1": "Januari",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Hoja &#39;ambayo&#39; ni batili"
     },
     "alert": {
-        "title": "Tahadhari"
+        "title": "Taarifa"
     },
     "confirm": {
         "title": "Thibitisha",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Unahitaji kuvinjari katika muktadha salama ili hii ifanye kazi"
+    },
+    "scan": {
+        "QR": "Changanua misimbo ya QR"
     }
 }

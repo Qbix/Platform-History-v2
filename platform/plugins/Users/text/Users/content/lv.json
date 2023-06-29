@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Laipni lūdzam",
-        "directions": "Izveidojiet kontu vai piesakieties.",
+        "directions": {
+            "GetStarted": "Izveidojiet kontu vai piesakieties.",
+            "NoRegister": "Piesakieties, ja jums ir konts.",
+            "WasInvited": "Kāds ir labākais veids, kā ar jums sazināties?"
+        },
         "directionsNoRegister": "Piesakieties, ja jums ir konts.",
         "goButton": "➔",
         "passphrase": "Ievadiet ieejas frāzi:",

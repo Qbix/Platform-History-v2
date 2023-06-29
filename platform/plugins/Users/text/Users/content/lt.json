@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Sveiki",
-        "directions": "Susikurkite paskyrą arba prisijunkite.",
+        "directions": {
+            "GetStarted": "Susikurkite paskyrą arba prisijunkite.",
+            "NoRegister": "Prisijunkite, jei turite paskyrą.",
+            "WasInvited": "Koks yra geriausias būdas su jumis susisiekti?"
+        },
         "directionsNoRegister": "Prisijunkite, jei turite paskyrą.",
         "goButton": "➔",
         "passphrase": "Įveskite slaptažodžio frazę:",

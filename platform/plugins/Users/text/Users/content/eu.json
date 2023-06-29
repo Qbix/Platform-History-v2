@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Ongi etorri",
-        "directions": "Sortu kontu bat edo hasi saioa.",
+        "directions": {
+            "GetStarted": "Sortu kontu bat edo hasi saioa.",
+            "NoRegister": "Hasi saioa kontu bat baduzu.",
+            "WasInvited": "Zein da zuregana iristeko modurik onena?"
+        },
         "directionsNoRegister": "Hasi saioa kontu bat baduzu.",
         "goButton": "➔",
         "passphrase": "Sartu pasaesaldia:",

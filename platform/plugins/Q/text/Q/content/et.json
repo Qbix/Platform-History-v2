@@ -13,14 +13,18 @@
         "otherDomain": "Blokeeritud domeenidevaheline taotlus välisdomeenile aadressil {{baseUrl}}"
     },
     "words": {
-        "tap": "puudutage",
+        "tap": "puudutada",
         "click": "klõpsa",
         "yes": "jah",
         "no": "ei",
         "Tap": "Puudutage",
         "Click": "Klõpsake",
         "Yes": "Jah",
-        "No": "Ei"
+        "No": "Ei",
+        "OK": "Okei",
+        "Alert": "Hoiatus",
+        "Confirm": "Kinnita",
+        "Prompt": "Viip"
     },
     "months": {
         "1": "jaanuaril",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argument &quot;mis&quot; on kehtetu"
     },
     "alert": {
-        "title": "Hoiatus"
+        "title": "Märka"
     },
     "confirm": {
         "title": "Kinnita",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Selle toimimiseks peate sirvima turvalises kontekstis"
+    },
+    "scan": {
+        "QR": "QR-koodide skannimine"
     }
 }

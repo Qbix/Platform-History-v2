@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "ברוך הבא",
-        "directions": "צור חשבון, או היכנס.",
+        "directions": {
+            "GetStarted": "צור חשבון, או היכנס.",
+            "NoRegister": "היכנס אם יש לך חשבון.",
+            "WasInvited": "מהי הדרך הטובה ביותר להגיע אליך?"
+        },
         "directionsNoRegister": "היכנס אם יש לך חשבון.",
         "goButton": "➔",
         "passphrase": "הזן את משפט הסיסמה שלך:",

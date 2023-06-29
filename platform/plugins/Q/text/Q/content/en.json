@@ -20,7 +20,11 @@
         "Tap": "Tap",
         "Click": "Click",
         "Yes": "Yes",
-        "No": "No"
+        "No": "No",
+        "OK": "OK",
+        "Alert": "Alert",
+        "Confirm": "Confirm",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "January",
@@ -90,7 +94,7 @@
         "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Notice"
     },
     "confirm": {
         "title": "Confirm",
@@ -144,5 +148,8 @@
         "inHour": "in {{h}} hour",
         "inHours": "in {{h}} hours",
         "inUnderMinute": "in under 1 minute"
+    },
+    "scan": {
+        "QR": "Scan QR codes"
     }
 }

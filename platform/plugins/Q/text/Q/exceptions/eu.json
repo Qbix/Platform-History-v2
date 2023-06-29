@@ -1,3 +1,5 @@
 {
-    "MissingFile": "fitxategia falta da {{filename}}"
+    "MissingFile": "fitxategia falta da {{filename}}",
+    "InvalidLanguage": "hizkuntza baliogabea {{language}}",
+    "RequiredField": "{{field}} behar da"
 }

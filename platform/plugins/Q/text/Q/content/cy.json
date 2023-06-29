@@ -17,10 +17,14 @@
         "click": "cliciwch",
         "yes": "oes",
         "no": "nac oes",
-        "Tap": "Tap",
+        "Tap": "Cyffwrdd",
         "Click": "Cliciwch",
         "Yes": "Oes",
-        "No": "Nac ydw"
+        "No": "Nac ydw",
+        "OK": "iawn",
+        "Alert": "Rhybudd",
+        "Confirm": "Cadarnhau",
+        "Prompt": "Yn brydlon"
     },
     "months": {
         "1": "Ionawr",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Dadl &#39;sy&#39; yn annilys"
     },
     "alert": {
-        "title": "Rhybudd"
+        "title": "Hysbysiad"
     },
     "confirm": {
         "title": "Cadarnhau",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Mae angen i chi bori mewn cyd-destun diogel er mwyn i hyn weithio"
+    },
+    "scan": {
+        "QR": "Sganiwch godau QR"
     }
 }

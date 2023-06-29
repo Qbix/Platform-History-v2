@@ -13,14 +13,18 @@
         "otherDomain": "Geblokkeerde kruisdomeinversoek na buitelandse domein by {{baseUrl}}"
     },
     "words": {
-        "tap": "tik",
+        "tap": "raak",
         "click": "klik",
         "yes": "ja",
         "no": "geen",
-        "Tap": "Tik",
+        "Tap": "Raak",
         "Click": "Klik",
         "Yes": "Ja",
-        "No": "Geen"
+        "No": "Geen",
+        "OK": "OK",
+        "Alert": "Waarskuwing",
+        "Confirm": "Bevestig",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "Januarie",
@@ -51,7 +55,7 @@
         "encoding": "Enkodering"
     },
     "alert": {
-        "title": "Waarskuwing"
+        "title": "Kennisgewing"
     },
     "confirm": {
         "title": "Bevestig",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Jy moet in &#39;n veilige konteks blaai om dit te werk"
+    },
+    "scan": {
+        "QR": "Skandeer QR-kodes"
     }
 }

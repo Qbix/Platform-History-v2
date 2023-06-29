@@ -13,14 +13,18 @@
         "otherDomain": "Zablokován požadavek z více domén na zahraniční doménu na adrese {{baseUrl}}"
     },
     "words": {
-        "tap": "klepnout",
+        "tap": "dotek",
         "click": "klikněte",
         "yes": "Ano",
         "no": "Ne",
-        "Tap": "Klepněte",
+        "Tap": "Dotek",
         "Click": "Klikněte",
         "Yes": "Ano",
-        "No": "Ne"
+        "No": "Ne",
+        "OK": "OK",
+        "Alert": "Upozornění",
+        "Confirm": "Potvrdit",
+        "Prompt": "Výzva"
     },
     "months": {
         "1": "leden",
@@ -51,7 +55,7 @@
         "encoding": "Kódování"
     },
     "alert": {
-        "title": "Upozornění"
+        "title": "Oznámení"
     },
     "confirm": {
         "title": "Potvrdit",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Aby to fungovalo, musíte procházet v zabezpečeném kontextu"
+    },
+    "scan": {
+        "QR": "Naskenujte QR kódy"
     }
 }

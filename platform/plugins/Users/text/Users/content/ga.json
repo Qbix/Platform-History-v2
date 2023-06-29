@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Fáilte",
-        "directions": "Cruthaigh cuntas, nó logáil isteach.",
+        "directions": {
+            "GetStarted": "Cruthaigh cuntas, nó logáil isteach.",
+            "NoRegister": "Logáil isteach má tá cuntas agat.",
+            "WasInvited": "Cad é an bealach is fearr chun teagmháil a dhéanamh leat?"
+        },
         "directionsNoRegister": "Logáil isteach má tá cuntas agat.",
         "goButton": "➔",
         "passphrase": "Cuir isteach frása do phas:",

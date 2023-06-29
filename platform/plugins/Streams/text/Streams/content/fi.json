@@ -23,7 +23,7 @@
         "prompt": "Anna ystävien tunnistaa sinut:",
         "newUser": "tai luo uusi tili alla",
         "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Kirjoita koko nimesi"
         }
     },

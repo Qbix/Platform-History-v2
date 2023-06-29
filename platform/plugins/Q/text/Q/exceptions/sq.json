@@ -1,3 +1,5 @@
 {
-    "MissingFile": "mungon skedari {{filename}}"
+    "MissingFile": "mungon skedari {{filename}}",
+    "InvalidLanguage": "gjuhë e pavlefshme {{language}}",
+    "RequiredField": "Kërkohet {{field}}"
 }

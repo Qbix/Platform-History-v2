@@ -217,7 +217,7 @@ class Streams_Invite extends Base_Streams_Invite
 			$access = new Streams_Access();
 			$access->publisherId = $toStream->publisherId;
 			$access->streamName = $toStream->name;
-			$access->ofUserId = $this->userId;
+			$access->ofUserId = $userId;
 			// Check if we should update the access
 			$shouldUpdateAccess = false;
 			foreach (array('readLevel', 'writeLevel', 'adminLevel') as $level_type) {
@@ -249,39 +249,6 @@ class Streams_Invite extends Base_Streams_Invite
 			if ($shouldUpdateAccess) {
 				$access->save(true);
 			}
-		}
-
-		$onInvited = Q_Config::get("Streams", "types", $stream->type, "onInvited", null);
-		if ($onInvited) {
-			$options["subscribe"] = $onInvited == "subscribe";
-			$options["join"] = $onInvited == "join";
-		}
-		if (Q::ifset($options, "subscribe", false)) {
-			$participant = new Streams_Participant();
-			$participant->publisherId = $stream->publisherId;
-			$participant->streamName = $stream->name;
-			$participant->userId = $userId;
-			$participant->state = "participating";
-			$participant->subscribed = "yes";
-			if (!$participant->retrieve()) {
-				try {
-					$extra = Q::ifset($options, 'extra', array());
-					$configExtra = Streams_Stream::getConfigField($stream->type, array(
-						'invite', 'extra'
-					), array());
-					$extra = array_merge($configExtra, $extra);
-					$options['extra'] = $extra;
-					$stream->subscribe($options);
-				} catch (Exception $e) {
-					// Swallow this exception. If the caller wanted to catch
-					// this exception, they could have written this code block themselves.
-				}
-			}
-		} else if (Q::ifset($options, "join", true)) {
-			$stream->join($userId, $this->publisherId, $this->streamName, array(
-				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
-				'noVisit' => true
-			));
 		}
 
 		// add roles
@@ -320,6 +287,40 @@ class Streams_Invite extends Base_Streams_Invite
 		Users_Contact::addContact($this->invitingUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
 		Users_Contact::addContact($userId, "Streams/invitedMe", $this->invitingUserId, null, false, true);
 		Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $this->invitingUserId, null, false, true);
+
+		// subscribe or join, if needed
+		$onInviteAccepted = Q_Config::get("Streams", "types", $stream->type, "onInviteAccepted", null);
+		if ($onInviteAccepted) {
+			$options["subscribe"] = $onInviteAccepted == "subscribe";
+			$options["join"] = $onInviteAccepted == "join";
+		}
+		if (Q::ifset($options, "subscribe", false)) {
+			$participant = new Streams_Participant();
+			$participant->publisherId = $stream->publisherId;
+			$participant->streamName = $stream->name;
+			$participant->userId = $userId;
+			$participant->state = "participating";
+			$participant->subscribed = "yes";
+			if (!$participant->retrieve()) {
+				try {
+					$extra = Q::ifset($options, 'extra', array());
+					$configExtra = Streams_Stream::getConfigField($stream->type, array(
+						'invite', 'extra'
+					), array());
+					$extra = array_merge($configExtra, $extra);
+					$options['extra'] = $extra;
+					$stream->subscribe($options);
+				} catch (Exception $e) {
+					// Swallow this exception. If the caller wanted to catch
+					// this exception, they could have written this code block themselves.
+				}
+			}
+		} else if (Q::ifset($options, "join", true)) {
+			$stream->join($userId, $this->publisherId, $this->streamName, array(
+				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
+				'noVisit' => true
+			));
+		}
 
 		/**
 		 * @event Streams/invite {after}

@@ -23,7 +23,7 @@
         "prompt": "Lasă prietenii să te recunoască:",
         "newUser": "sau creați un cont nou mai jos",
         "picTooltip": "Puteți schimba această imagine mai târziu",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Introduceți numele dvs. complet"
         }
     },

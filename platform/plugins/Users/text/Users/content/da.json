@@ -89,7 +89,11 @@
     },
     "login": {
         "title": "Velkommen",
-        "directions": "Opret en konto, eller log ind.",
+        "directions": {
+            "GetStarted": "Opret en konto, eller log ind.",
+            "NoRegister": "Log ind, hvis du har en konto.",
+            "WasInvited": "Hvad er den bedste måde at nå dig på?"
+        },
         "directionsNoRegister": "Log ind, hvis du har en konto.",
         "goButton": "➔",
         "passphrase": "Indtast din adgangssætning:",

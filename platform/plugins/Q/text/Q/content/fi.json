@@ -17,10 +17,14 @@
         "click": "klikkaus",
         "yes": "Joo",
         "no": "ei",
-        "Tap": "Napauta",
+        "Tap": "Kosketus",
         "Click": "Klikkaus",
         "Yes": "Joo",
-        "No": "Ei"
+        "No": "Ei",
+        "OK": "OK",
+        "Alert": "Varoitus",
+        "Confirm": "Vahvistaa",
+        "Prompt": "Kehote"
     },
     "months": {
         "1": "tammikuu",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argumentti &quot;mikä&quot; on virheellinen"
     },
     "alert": {
-        "title": "Varoitus"
+        "title": "Ilmoitus"
     },
     "confirm": {
         "title": "Vahvistaa",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Sinun on selattava suojatussa kontekstissa, jotta tämä toimii"
+    },
+    "scan": {
+        "QR": "Skannaa QR-koodit"
     }
 }

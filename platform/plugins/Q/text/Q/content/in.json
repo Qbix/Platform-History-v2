@@ -13,14 +13,18 @@
         "otherDomain": "Permintaan lintas domain diblokir ke domain asing di {{baseUrl}}"
     },
     "words": {
-        "tap": "keran",
+        "tap": "mengetuk",
         "click": "klik",
         "yes": "iya nih",
         "no": "tidak",
-        "Tap": "Keran",
+        "Tap": "Menyentuh",
         "Click": "Klik",
         "Yes": "iya nih",
-        "No": "Tidak"
+        "No": "Tidak",
+        "OK": "OKE",
+        "Alert": "Peringatan",
+        "Confirm": "Mengonfirmasi",
+        "Prompt": "Mengingatkan"
     },
     "months": {
         "1": "Januari",
@@ -51,7 +55,7 @@
         "encoding": "Pengkodean"
     },
     "alert": {
-        "title": "Waspada"
+        "title": "Melihat"
     },
     "confirm": {
         "title": "Memastikan",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Anda perlu menjelajah dalam konteks yang aman agar ini berfungsi"
+    },
+    "scan": {
+        "QR": "Pindai kode QR"
     }
 }

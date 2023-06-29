@@ -13,14 +13,18 @@
         "otherDomain": "Solicitação de domínio cruzado bloqueada para domínio estrangeiro em {{baseUrl}}"
     },
     "words": {
-        "tap": "toque",
+        "tap": "tocar",
         "click": "clique",
         "yes": "sim",
         "no": "não",
-        "Tap": "Toque",
+        "Tap": "Tocar",
         "Click": "Clique",
         "Yes": "sim",
-        "No": "Não"
+        "No": "Não",
+        "OK": "OK",
+        "Alert": "Alerta",
+        "Confirm": "confirme",
+        "Prompt": "Incitar"
     },
     "months": {
         "1": "Janeiro",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argumento &#39;qual&#39; inválido"
     },
     "alert": {
-        "title": "Alerta"
+        "title": "Perceber"
     },
     "confirm": {
         "title": "confirme",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Você precisa navegar em um contexto seguro para que isso funcione"
+    },
+    "scan": {
+        "QR": "Escanear códigos QR"
     }
 }

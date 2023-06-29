@@ -13,14 +13,18 @@
         "otherDomain": "Requête interdomaine bloquée vers un domaine étranger à {{baseUrl}}"
     },
     "words": {
-        "tap": "robinet",
+        "tap": "touche",
         "click": "Cliquez sur",
         "yes": "Oui",
         "no": "non",
-        "Tap": "Robinet",
+        "Tap": "Touche",
         "Click": "Cliquez sur",
         "Yes": "Oui",
-        "No": "Non"
+        "No": "Non",
+        "OK": "D&#39;ACCORD",
+        "Alert": "Alerte",
+        "Confirm": "Confirmer",
+        "Prompt": "Rapide"
     },
     "months": {
         "1": "janvier",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argument &#39;qui&#39; invalide"
     },
     "alert": {
-        "title": "Alerte"
+        "title": "Avis"
     },
     "confirm": {
         "title": "Confirmer",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Vous devez naviguer dans un contexte sécurisé pour que cela fonctionne"
+    },
+    "scan": {
+        "QR": "Scannez les codes QR"
     }
 }

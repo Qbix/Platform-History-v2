@@ -38,8 +38,8 @@ var Streams = Q.Streams;
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
  *   @param {Boolean|Object} [infinitescroll=false] If true or object, enables loading more related streams on demand, by activate Q/infinitescroll tool on closest scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params. 
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
- *   @param {Object} [options.beforeRenderPreview] Event occur before Streams/preview tool rendered inside related tool.
- *   If executing result of this handler===false, skip adding this preview tool to the related list.
+ *   @param {Object} [options.beforeRenderPreview] Event occurs before Streams/preview tool rendered inside related tool.
+ *      If a handler returns false, the preview tool won't be added to the related list
  *   @param {Q.Event} [options.onUpdate] Event that receives parameters "data", "entering", "exiting", "updating"
  *   @param {Q.Event} [options.onRefresh] Event that occurs when the tool is completely refreshed, the "this" is the tool.
  *      Parameters are (previews, map, entering, exiting, updating).
@@ -347,16 +347,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					Q.setObject("options.streams_preview.related.weight", this.state.related.weight, element);
 					element.setAttribute('data-weight', this.state.related.weight);
 
-					if (Q.handle(state.beforeRenderPreview, tool, [{
-						publisherId: stream.fields.publisherId,
-						name: stream.fields.name,
-						type: stream.fields.type
-					}, element]) === false) {
-						element.remove();
-					} else {
-						// place new preview to the valid place in the list
-						_placeRelatedTool(element);
-					}
+					// place new preview to the valid place in the list
+					_placeRelatedTool(element);
 
 					addComposer(streamType, params);
 				}, tool);
@@ -557,6 +549,14 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 */
 	relatedResult: function (result, onUpdate, partial) {
 		var tool = this;
+
+		if (tool.state.realtime && !tool.stream) {
+			// join user to category stream to allow get messages
+			if (Q.getObject("participant.state", result.stream) !== 'participating') {
+				result.stream.observe();
+			}
+		}
+
 		tool.stream = result.stream;
 
 		var entering, exiting, updating;
@@ -584,11 +584,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var dir = tool.state.isCategory ? 'To' : 'From';
 		var eventNames = ['onRelated'+dir, 'onUnrelated'+dir, 'onUpdatedRelate'+dir];
 		if (tool.state.realtime) {
-			// join user to category stream to allow get messages
-			if (Q.getObject("participant.state", result.stream) !== 'participating') {
-				result.stream.observe();
-			}
-
 			Q.each(eventNames, function (i, eventName) {
 				result.stream[eventName]().set(function (msg, fields) {
 					// TODO: REPLACE THIS WITH AN ANIMATED UPDATE BY LOOKING AT THE ARRAYS entering, exiting, updating
@@ -816,7 +811,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			var element = this;
 			element.addClass("Q_tabs_tab");
 			var preview = Q.Tool.from(element, 'Streams/preview');
-			var key = preview.state.onRefresh.add(function () {
+			preview.state.onRefresh.addOnce(function () {
 				var value = state.tabs.call(tool, preview, tabs);
 				var attr = value.isUrl() ? 'href' : 'data-name';
 				element.setAttribute(attr, value);
@@ -825,12 +820,11 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				}
 				var onLoad = preview.state.onLoad;
 				if (onLoad) {
-					onLoad.add(function () {
+					onLoad.addOnce(function () {
 						// all the related tabs have loaded, process them
 						tabs.refresh();
 					});
 				}
-				preview.state.onRefresh.remove(key);
 			});
 			var key2 = preview.state.onComposer.add(function () {
 				tabs.refresh();

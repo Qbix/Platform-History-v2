@@ -23,7 +23,7 @@
         "prompt": "Biarkan teman mengenali Anda:",
         "newUser": "atau buat akun baru di bawah ini",
         "picTooltip": "Anda dapat mengubah gambar ini nanti",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Masukkan nama lengkapmu"
         }
     },

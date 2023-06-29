@@ -17,10 +17,14 @@
         "click": "feu clic",
         "yes": "sí",
         "no": "no",
-        "Tap": "Aixeta",
+        "Tap": "Toca",
         "Click": "Feu clic",
         "Yes": "Sí",
-        "No": "No"
+        "No": "No",
+        "OK": "D&#39;acord",
+        "Alert": "Alerta",
+        "Confirm": "Confirmeu",
+        "Prompt": "Avís"
     },
     "months": {
         "1": "gener",
@@ -51,7 +55,7 @@
         "encoding": "Codificació"
     },
     "alert": {
-        "title": "Alerta"
+        "title": "Avís"
     },
     "confirm": {
         "title": "Confirmeu",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Heu de navegar en un context segur perquè això funcioni"
+    },
+    "scan": {
+        "QR": "Escaneja codis QR"
     }
 }

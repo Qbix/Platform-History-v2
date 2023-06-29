@@ -13,14 +13,18 @@
         "otherDomain": "Permintaan merentas domain yang disekat ke domain asing di {{baseUrl}}"
     },
     "words": {
-        "tap": "ketuk",
+        "tap": "sentuh",
         "click": "klik",
         "yes": "ya",
         "no": "tidak",
-        "Tap": "Ketik",
+        "Tap": "Sentuh",
         "Click": "klik",
         "Yes": "ya",
-        "No": "Tidak"
+        "No": "Tidak",
+        "OK": "okey",
+        "Alert": "Amaran",
+        "Confirm": "sahkan",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "Januari",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Hujah &#39;yang&#39; tidak sah"
     },
     "alert": {
-        "title": "Amaran"
+        "title": "Notis"
     },
     "confirm": {
         "title": "sahkan",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Anda perlu menyemak imbas dalam konteks yang selamat untuk ini berfungsi"
+    },
+    "scan": {
+        "QR": "Imbas kod QR"
     }
 }

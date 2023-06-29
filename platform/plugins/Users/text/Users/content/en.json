@@ -89,8 +89,11 @@
     },
     "login": {
         "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
+        "directions": {
+            "GetStarted": "Create an account, or log in.",
+            "NoRegister": "Log in if you have an account.",
+            "WasInvited": "What's the best way to reach you?"
+        },
         "goButton": "&#10132",
         "passphrase": "Enter your pass phrase:",
         "loginButton": "Get Started",

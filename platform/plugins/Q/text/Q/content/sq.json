@@ -20,7 +20,11 @@
         "Tap": "Prekni",
         "Click": "Klikoni",
         "Yes": "po",
-        "No": "Nr"
+        "No": "Nr",
+        "OK": "Ne rregull",
+        "Alert": "Alarmi",
+        "Confirm": "Konfirmo",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "janar",
@@ -51,7 +55,7 @@
         "encoding": "Kodimi"
     },
     "alert": {
-        "title": "Alarmi"
+        "title": "Njoftim"
     },
     "confirm": {
         "title": "Konfirmo",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Ju duhet të shfletoni në një kontekst të sigurt që kjo të funksionojë"
+    },
+    "scan": {
+        "QR": "Skanoni kodet QR"
     }
 }

@@ -23,7 +23,7 @@
         "prompt": "Lad venner genkende dig:",
         "newUser": "eller opret en ny konto nedenfor",
         "picTooltip": "Du kan ændre dette billede senere",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Skriv dit fulde navn"
         }
     },

@@ -328,6 +328,15 @@ class Streams_Stream extends Base_Streams_Stream
 		return Streams::invite($this->publisherId, $this->name, $who, $options);
 	}
 
+	/**
+	 * Return whether invite is allowed, or restricted by the stream's attributes
+	 * @return {boolean}
+	 */
+	function inviteIsAllowed() {
+		$priv = $this->getAttribute('Streams', 'private', $this->getAttribute('private'));
+		return !$priv || (is_array($priv) && in_array('invite', $priv));
+	}
+
 	private static function sortTemplateTypes(
 		$templates, 
 		$userField, 
@@ -1911,7 +1920,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 	/**
 	 * Updates relations after a stream was inserted or updated.
-	 * Checks the "updateRelations" config first, which haswhich is an array that can contain "to", "from" or both.
+	 * Checks the "updateRelations" config first, which is an array that can contain "to", "from" or both.
 	 * @return {array} Consists of ("to" => array(Streams_RelatedTo), "from" => array(Streams_RelatedFrom))
 	 */
 	function updateRelations($asUserId = null)

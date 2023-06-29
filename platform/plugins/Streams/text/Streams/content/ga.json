@@ -23,7 +23,7 @@
         "prompt": "Lig do chairde tú a aithint:",
         "newUser": "nó cruthaigh cuntas nua thíos",
         "picTooltip": "Is féidir leat an pictiúr seo a athrú níos déanaí",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Cuir isteach d&#39;ainm iomlán"
         }
     },

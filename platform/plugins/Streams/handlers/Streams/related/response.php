@@ -30,15 +30,15 @@ function Streams_related_response()
 	
 	$user = Users::loggedInUser();
 	$asUserId = $user ? $user->id : '';
-	
+
+	if (!$relations_requested && !$streams_requested && !$nodeUrls_requested) {
+		return;
+	}
+
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true, 'original');
 
-	if (!in_array('relations', $slots)
-	and !in_array('streams', $slots)) {
-		if (!in_array('nodeUrls', $slots)) {
-			return;
-		}
+	if (!$relations_requested && !$streams_requested) {
 		if (empty(Q_Utils::$nodeUrlRouters)) {
 			$nodeUrls = array(Q_Utils::nodeUrl());
 			$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
@@ -47,7 +47,6 @@ function Streams_related_response()
 			return;
 		}
 	}
-
 
 	$isCategory = !(empty($_REQUEST['isCategory']) or strtolower($_REQUEST['isCategory']) === 'false');
 	$withParticipant = Q::ifset($_REQUEST, 'withParticipant', true) === "false" ? false : true;
@@ -102,7 +101,7 @@ function Streams_related_response()
 
 	if ($nodeUrls_requested) {
 		$nodeUrls = array();
-		foreach ($rel as $r2) {
+		foreach ($rel as $r) {
 			$far = $isCategory ? 'from' : 'to';
 			$farPublisherId = $far . 'PublisherId';
 			$farStreamName = $far . 'StreamName';

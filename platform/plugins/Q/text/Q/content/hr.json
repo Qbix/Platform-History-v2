@@ -13,14 +13,18 @@
         "otherDomain": "Blokiran zahtjev za više domena za stranu domenu na {{baseUrl}}"
     },
     "words": {
-        "tap": "tapnite",
+        "tap": "dodir",
         "click": "klik",
         "yes": "Da",
         "no": "Ne",
-        "Tap": "Dodirnite",
+        "Tap": "Dodir",
         "Click": "Klik",
         "Yes": "Da",
-        "No": "Ne"
+        "No": "Ne",
+        "OK": "u redu",
+        "Alert": "uzbuna",
+        "Confirm": "Potvrdi",
+        "Prompt": "Potaknuti"
     },
     "months": {
         "1": "siječnja",
@@ -51,7 +55,7 @@
         "encoding": "Kodiranje"
     },
     "alert": {
-        "title": "Upozorenje"
+        "title": "Obavijest"
     },
     "confirm": {
         "title": "Potvrdite",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Morate pregledavati u sigurnom kontekstu da bi ovo funkcioniralo"
+    },
+    "scan": {
+        "QR": "Skenirajte QR kodove"
     }
 }

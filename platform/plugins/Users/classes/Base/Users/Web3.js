@@ -22,12 +22,11 @@ var Row = Q.require('Db/Row');
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
  * @param {String} [fields.chainId] defaults to ""
+ * @param {String} [fields.contract] defaults to ""
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
  * @param {String} [fields.fromAddress] defaults to ""
- * @param {String} [fields.contract] defaults to ""
  * @param {String} [fields.result] defaults to null
- * @param {String} [fields.extra] defaults to "{}"
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  */
@@ -39,6 +38,12 @@ Q.mixin(Base, Row);
 
 /**
  * @property chainId
+ * @type String
+ * @default ""
+ * 
+ */
+/**
+ * @property contract
  * @type String
  * @default ""
  * 
@@ -62,21 +67,9 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property contract
- * @type String
- * @default ""
- * 
- */
-/**
  * @property result
  * @type String
  * @default null
- * 
- */
-/**
- * @property extra
- * @type String
- * @default "{}"
  * 
  */
 /**
@@ -279,10 +272,10 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"chainId",
+		"contract",
 		"methodName",
 		"params",
-		"fromAddress",
-		"contract"
+		"fromAddress"
 	];
 };
 
@@ -304,12 +297,11 @@ Base.prototype.fieldNames = function () {
 Base.fieldNames = function () {
 	return [
 		"chainId",
+		"contract",
 		"methodName",
 		"params",
 		"fromAddress",
-		"contract",
 		"result",
-		"extra",
 		"insertedTime",
 		"updatedTime"
 	];
@@ -351,6 +343,44 @@ Base.prototype.maxSize_chainId = function () {
 Base.column_chainId = function () {
 
 return [["varchar","10","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_contract
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_contract = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".contract");
+		if (typeof value === "string" && value.length > 42)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".contract");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the contract field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_contract = function () {
+
+		return 42;
+};
+
+	/**
+	 * Returns schema information for contract column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_contract = function () {
+
+return [["varchar","42","",false],false,"PRI",null];
 };
 
 /**
@@ -470,44 +500,6 @@ return [["varchar","42","",false],false,"PRI",""];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_contract
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_contract = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".contract");
-		if (typeof value === "string" && value.length > 42)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".contract");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the contract field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_contract = function () {
-
-		return 42;
-};
-
-	/**
-	 * Returns schema information for contract column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_contract = function () {
-
-return [["varchar","42","",false],false,"PRI",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
  * @method beforeSet_result
  * @param {string} value
  * @return {string} The value
@@ -542,42 +534,6 @@ return [["text",65535,"",false],true,"",null];
 };
 
 /**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_extra
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_extra = function (value) {
-		if (value == undefined) return value;
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".extra");
-		if (typeof value === "string" && value.length > 1024)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".extra");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the extra field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_extra = function () {
-
-		return 1024;
-};
-
-	/**
-	 * Returns schema information for extra column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_extra = function () {
-
-return [["varchar","1024","",false],true,"","{}"];
-};
-
-/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -599,7 +555,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","1024","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","42","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -625,7 +581,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","1024","",false],true,"",null];
+return [["timestamp","42","",false],true,"",null];
 };
 
 /**

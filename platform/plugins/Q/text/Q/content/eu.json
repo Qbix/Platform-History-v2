@@ -13,14 +13,18 @@
         "otherDomain": "Domeinuen arteko eskaera blokeatu da atzerriko domeinurako {{baseUrl}} helbidean"
     },
     "words": {
-        "tap": "sakatu",
+        "tap": "ukitu",
         "click": "egin klik",
         "yes": "bai",
         "no": "ez",
-        "Tap": "Sakatu",
+        "Tap": "Ukitu",
         "Click": "Egin klik",
         "Yes": "Bai",
-        "No": "Ez"
+        "No": "Ez",
+        "OK": "Ados",
+        "Alert": "Alerta",
+        "Confirm": "Berretsi",
+        "Prompt": "Galdera"
     },
     "months": {
         "1": "Urtarrila",
@@ -51,7 +55,7 @@
         "encoding": "Kodeketa"
     },
     "alert": {
-        "title": "Alerta"
+        "title": "Oharra"
     },
     "confirm": {
         "title": "Berretsi",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "Testuinguru seguru batean arakatu behar duzu honek funtziona dezan"
+    },
+    "scan": {
+        "QR": "Eskaneatu QR kodeak"
     }
 }

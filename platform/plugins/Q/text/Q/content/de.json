@@ -17,10 +17,14 @@
         "click": "klicken",
         "yes": "ja",
         "no": "Nein",
-        "Tap": "Klopfen",
+        "Tap": "Berühren",
         "Click": "Klicken",
         "Yes": "ja",
-        "No": "Nein"
+        "No": "Nein",
+        "OK": "OK",
+        "Alert": "Alarm",
+        "Confirm": "Bestätigen",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "Januar",
@@ -87,7 +91,7 @@
         "WhichInvalid": "Argument &#39;was&#39; ungültig"
     },
     "alert": {
-        "title": "Alarm"
+        "title": "Notiz"
     },
     "confirm": {
         "title": "Bestätigen Sie",
@@ -144,5 +148,8 @@
     },
     "browser": {
         "insecureContext": "Damit dies funktioniert, müssen Sie in einem sicheren Kontext surfen"
+    },
+    "scan": {
+        "QR": "QR-Codes scannen"
     }
 }

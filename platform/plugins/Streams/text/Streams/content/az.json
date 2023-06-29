@@ -23,7 +23,7 @@
         "prompt": "Dostlar sizi tanısın:",
         "newUser": "və ya aşağıda yeni hesab yaradın",
         "picTooltip": "Bu şəkli sonra dəyişə bilərsiniz",
-        "placeholder": {
+        "placeholders": {
             "fullName": "Tam adınızı daxil edin"
         }
     },

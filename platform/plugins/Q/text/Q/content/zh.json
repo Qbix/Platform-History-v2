@@ -13,14 +13,18 @@
         "otherDomain": "在 {{baseUrl}} 阻止对外部域的跨域请求"
     },
     "words": {
-        "tap": "轻敲",
+        "tap": "触碰",
         "click": "点击",
         "yes": "是的",
         "no": "不",
-        "Tap": "轻敲",
+        "Tap": "触碰",
         "Click": "点击",
         "Yes": "是的",
-        "No": "不"
+        "No": "不",
+        "OK": "好的",
+        "Alert": "警报",
+        "Confirm": "确认",
+        "Prompt": "迅速的"
     },
     "months": {
         "1": "一月",
@@ -51,7 +55,7 @@
         "encoding": "编码"
     },
     "alert": {
-        "title": "警报"
+        "title": "注意"
     },
     "confirm": {
         "title": "确认",
@@ -146,5 +150,8 @@
     },
     "browser": {
         "insecureContext": "您需要在安全的上下文中浏览才能正常工作"
+    },
+    "scan": {
+        "QR": "扫描二维码"
     }
 }
