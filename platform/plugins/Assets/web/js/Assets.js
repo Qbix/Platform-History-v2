@@ -1465,6 +1465,7 @@
 				/**
 				 * Get pool instances from blockchain and additionally get token info name/symbol/user/balance
 				 * @method getAll
+				 * @param {Object} poolsList pool list from blockchain. can be obtained from server side(php) or form client side (js) by `Assets.CommunityCoins.Pools._getAll`
 				 * @param {String} communityCoinAddress address of communitycoin contract
 				 * @param {Object} abiPaths optional parameter
 				 * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
@@ -1474,10 +1475,17 @@
 				 * @param {function} callback
 				 * @param {object} options
 				 */
-				getAllExtended: function Assets_CommunityCoins_Pools_getAllExtended(communityCoinAddress, abiPaths, chainId, userAddress, callback){
+				getAllExtended: function Assets_CommunityCoins_Pools_getAllExtended(poolsList, communityCoinAddress, abiPaths, chainId, userAddress, callback){
+					var m;
+					if (Q.isEmpty(poolsList)) {
+						//poolsList retrive from js
+						m = Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
+					} else {
+						//poolsList got from backend;
+						m = new Promise(function (resolve, reject) {resolve(poolsList)})
+					}
 					
-					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
-					.then(function (instanceInfos) {
+					m.then(function (instanceInfos) {
 						var p = [];
 						p.push(new Promise(function (resolve, reject) {resolve(instanceInfos)}));
 						
@@ -1586,6 +1594,7 @@
 								)
 							); 
 						});
+
 						return new Promise(function (resolve, reject) {resolve(ret)});
 					});
 				},

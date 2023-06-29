@@ -1,15 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 (function (window, Q, $, undefined) {
 
 	if (Q.isEmpty(Q.grabMetamaskError)) {
@@ -71,57 +59,32 @@
 	var Users = Q.Users;
 
 //	/**
-//	* creation and viewing stakings pools
+//	* creation and viewing history stakes
 //	* @class Assets Community Coin Admin
 //	* @constructor
 //	* @param {Object} options Override various options for this tool
-//	* @param {String} [options.abiPath] ABI path for CommunityCoin contract
-//	* @param {String} [options.abiPathPoolF] ABI path for CommunityStakingPoolFactory contract
 //	* @param {String} [options.chainId] chainId
 //	* @param {String} [options.communityCoinAddress] address od CommunityCoin contract
-//	* @param {String} [options.fields] array of defaults for the values
-//	*  @param {String} [options.fields.tokenErc20.value]
-//	*  @param {Integer} [options.fields.bonusTokenFraction.value]
-//	*  @param {String} [options.fields.popularToken.value]
-//	*  @param {String} [options.fields.donations.value] array of tuple like [[address, fraction], ...]
-//	*  @param {Integer} [options.fields.rewardsRateFraction.value]
-//	*  @param {Integer} [options.fields.numerator.value]
-//	*  @param {Integer} [options.fields.denominator.value]
 //	*/
 	Q.Tool.define("Assets/web3/coin/staking/history", function (options) {
 		
 		var tool = this;
 		var state = this.state;
-	/*	
-		var defaultsValidate = {
-            notEmpty: "<b>%key%</b> cannot be empty", 
-            integer: "<b>%key%</b> must be an integer", 
-            address: "<b>%key%</b> invalid"
-        };
 		
-		var loggedInUser = Q.Users.loggedInUser;
-		if (!loggedInUser) {
+		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
+		if (!tool.loggedInUserXid) {
 			return console.warn("user not logged in");
 		}
-		
-		
-		
-		
-		if (Q.isEmpty(state.communityStakingPoolAddress)) {
-			return console.warn("communityStakingPoolAddress required!");
-		}
+	
 		if (Q.isEmpty(state.communityCoinAddress)) {
 			return console.warn("communityCoinAddress required!");
 		}
-		
+
 		if (Q.isEmpty(state.chainId)) {
 			return console.warn("chainId required!");
 		}
-*/
-		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
-		
+
 		tool.refresh();
-		//setInterval(function(){tool.refresh();},5000);
 
 	},
 
@@ -129,24 +92,7 @@
 		abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",
 		abiPathCommunityStakingPool: "Assets/templates/R1/CommunityStakingPool/contract",
 		chainId: null,
-		communityCoinAddress: null,
-		fields: {
-			
-			// key validate is optional
-			// value can be :
-			// - plain array
-			//  validate: ["isEmpty", "isInteger", ...] and try to call Q methods: Q.isEmpty, Q.isInteger ...
-			// - object  like {key => errormessage}
-			//  validate: {"isEmpty": "err msg here to key %key%, "isInteger": "invalid key %key%, ...} and try to call Q methods: Q.isEmpty, Q.isInteger ...
-//			tokenErc20: {value: "", hide: false, validate: ["notEmpty", "address"]},
-//			duration: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			bonusTokenFraction: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			popularToken: {value: "", hide: false, validate: ["notEmpty", "address"]},
-//			donations: {value: "", hide: false, validate: ["notEmpty"]},
-//			rewardsRateFraction: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			numerator: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			denominator: {value: "", hide: false, validate: ["notEmpty", "integer"]}
-		},
+		communityCoinAddress: null
 	},
 
 	{ // methods go here
@@ -177,27 +123,7 @@
 					 $("[data-timestamp]", tool.element).each(function () {
                         $(this).tool("Q/countdown").activate();
                     });
-					///
-
-
-
-	//	function viewLockedWalletTokens(address account) public view returns (uint256) {
-	//        //return users[account].tokensLocked._getMinimum() + users[account].tokensBonus._getMinimum();
-	//        return MinimumsLib._getMinimum(users[account].tokensLocked) + MinimumsLib._getMinimum(users[account].tokensBonus);
-	//    }
-	//
-	//    
-	//     * @notice way to view locked tokens lists(main and bonuses) that still can be unstakeable by user
-	//     
-	//    function viewLockedWalletTokensList(address account) public view returns (uint256[][] memory, uint256[][] memory) {
-	//        //return (users[account].tokensLocked._getMinimumList(), users[account].tokensBonus._getMinimumList());
-	//        return (MinimumsLib._getMinimumList(users[account].tokensLocked), MinimumsLib._getMinimumList(users[account].tokensBonus));
-	//    }
-
-
-					// !!
-
-					///
+					
 				});
 			});
 			
@@ -206,10 +132,12 @@
 		_adjustValues: function(data){
 			var ret = [];
 			data.forEach(function(i, index){
-				ret.push({
-					0:ethers.utils.formatUnits(i[0].toString(), 18), 
-					1:parseInt(i[1]),
-				});
+				if (!Q.isEmpty(i)) {
+					ret.push({
+						0:ethers.utils.formatUnits(i[0].toString(), 18), 
+						1:parseInt(i[1]),
+					});
+				}
 			})
 			return ret;
 		}

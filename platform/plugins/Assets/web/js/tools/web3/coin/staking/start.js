@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 (function (window, Q, $, undefined) {
 	
@@ -114,14 +108,6 @@
 //	* @param {String} [options.abiPathPoolF] ABI path for CommunityStakingPoolFactory contract
 //	* @param {String} [options.chainId] chainId
 //	* @param {String} [options.communityCoinAddress] address od CommunityCoin contract
-//	* @param {String} [options.fields] array of defaults for the values
-//	*  @param {String} [options.fields.tokenErc20.value]
-//	*  @param {Integer} [options.fields.bonusTokenFraction.value]
-//	*  @param {String} [options.fields.popularToken.value]
-//	*  @param {String} [options.fields.donations.value] array of tuple like [[address, fraction], ...]
-//	*  @param {Integer} [options.fields.rewardsRateFraction.value]
-//	*  @param {Integer} [options.fields.numerator.value]
-//	*  @param {Integer} [options.fields.denominator.value]
 //	*/
 	Q.Tool.define("Assets/web3/coin/staking/start", function (options) {
 		
@@ -158,23 +144,6 @@
 		abiPathCommunityStakingPool: "Assets/templates/R1/CommunityStakingPool/contract",
 		chainId: null,
 		communityCoinAddress: null,
-		fields: {
-			
-			// key validate is optional
-			// value can be :
-			// - plain array
-			//  validate: ["isEmpty", "isInteger", ...] and try to call Q methods: Q.isEmpty, Q.isInteger ...
-			// - object  like {key => errormessage}
-			//  validate: {"isEmpty": "err msg here to key %key%, "isInteger": "invalid key %key%, ...} and try to call Q methods: Q.isEmpty, Q.isInteger ...
-//			tokenErc20: {value: "", hide: false, validate: ["notEmpty", "address"]},
-//			duration: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			bonusTokenFraction: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			popularToken: {value: "", hide: false, validate: ["notEmpty", "address"]},
-//			donations: {value: "", hide: false, validate: ["notEmpty"]},
-//			rewardsRateFraction: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			numerator: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-//			denominator: {value: "", hide: false, validate: ["notEmpty", "integer"]}
-		},
 	},
 
 	{ // methods go here
@@ -189,15 +158,6 @@
 			}, function (err, html) {
 				Q.replace(tool.element, html);
 				///
-				
-				//activate history tool
-//				var $historyContainer = $(tool.element).find('.Assets_web3_coin_staking_start_historyContainer');
-//				$('<div />')
-//				.tool('Assets/web3/coin/staking/history', {})
-//				.appendTo($historyContainer).activate(function () {
-//				  // called after tool was activated
-//				});
-
 
 				tool.fillPoolSelect();
 					
@@ -378,7 +338,7 @@
 			var stake_amount;
 			
 			[stake_amount, data, optionSelected] = tool._getUserChoose();
-			console.log([stake_amount, data, optionSelected]);
+			
 			Q.Template.render("Assets/web3/coin/staking/start/poolInfo", {
 				selectValue:optionSelected.val(),
 				selectTitle:optionSelected.html(),
@@ -400,7 +360,15 @@
 			//var contract;
 			$selectElement.addClass("Q_working");
 			$infoContainer.addClass("Q_working");
+			
+			//get from cache or retrieve
+			var poolsList;
+			if (!Q.isEmpty(state.cache) && !Q.isEmpty(state.cache.poolsList)) {
+				poolsList = state.cache.poolsList;
+			}
+			
 			Assets.CommunityCoins.Pools.getAllExtended(
+				poolsList,
 				state.communityCoinAddress, 
 				null, 
 				state.chainId, 
@@ -451,7 +419,6 @@
 
 	Q.Template.set("Assets/web3/coin/staking/start",
 	`
-	
 	<div>
 		<div class="row">
 			<div class="col-sm-4">
