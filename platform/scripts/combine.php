@@ -149,7 +149,8 @@ function Q_combine($process)
 				foreach ($parts as $src => $part) {
 					echo "\t\t$src\n";
 				}
-				$params = @compact('dest', 'parts', 'ext');
+				$printProgress = true;
+				$params = @compact('dest', 'parts', 'ext', 'printProgress');
 				if (!empty($filter['params'])) {
 					$params = array_merge($params, $filter['params']);
 				}

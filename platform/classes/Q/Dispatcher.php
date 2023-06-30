@@ -445,6 +445,7 @@ class Q_Dispatcher
 			$ob = new Q_OutputBuffer($handler);
 		}
 		
+		// Set cookies from GET parameters, if they were set
 		if (!empty($_GET['Q_ct'])) {
 			Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
 		}
