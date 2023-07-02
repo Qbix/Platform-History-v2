@@ -1408,6 +1408,42 @@
 		},
 		CommunityCoins: {
 			Pools: {
+				Factory: {
+					Get: function(communityCoinAddress, abiPaths, chainId) {
+						const defaultAbi = {
+							abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
+							abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
+						};
+						var abi = {};
+						if (Q.isEmpty(abiPaths)) {
+							abi = defaultAbi;
+						} else if (Q.isEmpty(abiPaths.abiPathCommunityCoin)) {
+							abi.abiPathCommunityCoin = defaultAbi.abiPathCommunityCoin;
+						} else if (Q.isEmpty(abiPaths.abiPathStakingPoolF)) {
+							abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
+						}
+					
+						return Q.Users.Web3.getContract(
+							abi.abiPathCommunityCoin, 
+							{
+								contractAddress: communityCoinAddress,
+								readOnly: true,
+								chainId: chainId
+							}
+						).then(function (contract) {
+							return contract.instanceManagment();
+						}).then(function (stakingPoolFactory) {
+							return Q.Users.Web3.getContract(
+								abi.abiPathStakingPoolF, 
+								{
+									contractAddress: stakingPoolFactory,
+									readOnly: true,
+									chainId: chainId
+								});
+						})
+					}
+					
+				},
 				/**
 				 * Get pool instances from blockchain
 				 * @method getAll
@@ -1419,7 +1455,94 @@
 				 * @param {function} callback
 				 * @param {object} options
 				 */
-				getAll: function(communityCoinAddress, abiPaths, chainId, callback) {
+				getAll: function Assets_CommunityCoins_Pools_getAll(communityCoinAddress, abiPaths, chainId, callback) {
+					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId).then(function (instanceInfos) {
+						Q.handle(callback, null, [null, instanceInfos]);
+					}).catch(function(err){
+						Q.handle(callback, null, [err.reason]);
+					});	
+				},
+				/**
+				 * Get pool instances from blockchain and additionally get token info name/symbol/user/balance
+				 * @method getAll
+				 * @param {Object} poolsList pool list from blockchain. can be obtained from server side(php) or form client side (js) by `Assets.CommunityCoins.Pools._getAll`
+				 * @param {String} communityCoinAddress address of communitycoin contract
+				 * @param {Object} abiPaths optional parameter
+				 * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
+				 * @param {String} abiPaths.abiPathStakingPoolF  path in config to CommunityStakingPoolFactory's ABI
+				 * @param {String} chainId
+				 * @param {String} userAddress
+				 * @param {function} callback
+				 * @param {object} options
+				 */
+				getAllExtended: function Assets_CommunityCoins_Pools_getAllExtended(poolsList, communityCoinAddress, abiPaths, chainId, userAddress, callback){
+					var m;
+					if (Q.isEmpty(poolsList)) {
+						//poolsList retrive from js
+						m = Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
+					} else {
+						//poolsList got from backend;
+						m = new Promise(function (resolve, reject) {resolve(poolsList)})
+					}
+					
+					m.then(function (instanceInfos) {
+						var p = [];
+						p.push(new Promise(function (resolve, reject) {resolve(instanceInfos)}));
+						
+						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(communityCoinAddress, userAddress, chainId));
+						
+						instanceInfos.forEach(function(i){
+							p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
+						});
+
+						return Promise.allSettled(p);
+					}).then(function (_ref) {
+
+						var instanceInfos = _ref.shift(0);
+						var communityCoinInfos = _ref.shift(0);
+
+						var ret = [];
+						_ref.forEach(function(i, index){
+							var t;
+							t = {...instanceInfos.value[index]};
+							for (var j in t) {
+								if (
+								(typeof t[j] == 'object') && 
+								(typeof t.duration._isBigNumber == 'boolean') &&
+								(t.duration._isBigNumber == true)
+								) {
+									t[j] = t[j].toNumber();
+								}
+							}
+							
+							ret.push(
+								$.extend(
+									{}, 
+									//instanceInfos.value[index], 
+									t, 
+									{
+										"erc20TokenInfo": i.status == 'rejected' ? 
+														{name:"", symbol:"", balance:""} : 
+														{name:i.value[0], symbol:i.value[1], balance:i.value[2]}
+									},
+									{
+										"communityCoinInfo": communityCoinInfos.status == 'rejected' ? 
+														{name:"", symbol:"", balance:""} : 
+														{name:communityCoinInfos.value[0], symbol:communityCoinInfos.value[1], balance:communityCoinInfos.value[2]}
+									}
+								)
+							); 
+						});
+
+						Q.handle(callback, null, [null, ret]);
+						
+					}).catch(function(err){
+						console.warn(err);
+						Q.handle(callback, null, [err.reason]);
+					});
+				},
+				
+				_getAll: function(communityCoinAddress, abiPaths, chainId) {
 					const defaultAbi = {
 						abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
 						abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
@@ -1433,47 +1556,71 @@
 						abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
 					}
 					
-					var contractPoolF;
-					
-					Q.Users.Web3.getContract(
-						abi.abiPathCommunityCoin, 
-						{
-							contractAddress: communityCoinAddress,
-							readOnly: true,
-							chainId: chainId
-						}
-					).then(function (contract) {
-						return contract.instanceManagment();
-					}).then(function (stakingPoolFactory) {
-						return Q.Users.Web3.getContract(
-							abi.abiPathStakingPoolF, 
-							{
-								contractAddress: stakingPoolFactory,
-								readOnly: true,
-								chainId: chainId
-							});
-					}).then(function (_contractPoolF) {
-						contractPoolF = _contractPoolF
+					return Assets.CommunityCoins.Pools.Factory.Get(
+						communityCoinAddress, 
+						abiPaths, 
+						chainId
+					).then(function (_contractPoolF) {
+						contractPoolF = _contractPoolF;
 						return contractPoolF.instances();
 					}).then(function (instanceAddresses) {
-
 						if (Q.isEmpty(instanceAddresses)) {
 							return instanceAddresses;
 						} else {
 							var p = [];
+							
+							p.push(new Promise(function (resolve, reject) {resolve(instanceAddresses)}));
+							
 							instanceAddresses.forEach(function(i){
 								p.push(contractPoolF.getInstanceInfoByPoolAddress(i));
 							});
-							return Promise.all(p);
+							return Promise.allSettled(p);
 						}
-					}).then(function (instanceInfos) {	
-						Q.handle(callback, null, [null, instanceInfos]);
-					}).catch(function(err){
-						Q.handle(callback, null, [err.reason]);
-					});	
+					}).then(function (_ref) {
+
+						var instanceAddresses = _ref.shift(0);
+
+						var ret = [];
+						_ref.forEach(function(i, index){
+							ret.push(
+								$.extend(
+									{}, 
+									//instanceInfos.value[index], 
+									//t, 
+									{...i.value},
+									{
+										"communityPoolAddress": instanceAddresses.value[index]
+									}
+								)
+							); 
+						});
+
+						return new Promise(function (resolve, reject) {resolve(ret)});
+					});
 				},
+				_getERC20TokenInfo: function(contract, userAddress, chainId){
+
+					return Q.Users.Web3.getContract(
+						"Assets/templates/ERC20", 
+						{
+							contractAddress: contract,
+							readOnly: true,
+							chainId: chainId
+						}
+					).then(function (contract) {
+						var p = [];
+						p.push(contract.name());
+						p.push(contract.symbol());
+						p.push(contract.balanceOf(userAddress));
+						
+						return Promise.all(p);
+					})
+						
+						
+				}
 			},
 		},
+		
 		Web3: {
 			/**
 			 * Generates a link for opening a coin
@@ -1624,6 +1771,14 @@
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
 			css: "{{Assets}}/css/tools/web3/coin/admin.css"
+		},
+		"Assets/web3/coin/staking/start": {
+			js: "{{Assets}}/js/tools/web3/coin/staking/start.js",
+			css: "{{Assets}}/css/tools/web3/coin/staking/start.css"
+		},
+		"Assets/web3/coin/staking/history": {
+			js: "{{Assets}}/js/tools/web3/coin/staking/history.js",
+			css: "{{Assets}}/css/tools/web3/coin/staking/history.css"
 		}
 	});
     
