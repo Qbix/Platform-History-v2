@@ -74,6 +74,13 @@ function Db_Mysql(connName, dsn) {
 			database: database,
 			multipleStatements: true
 		}, options);
+		var del = connection._protocol._delegateError;
+		connection._protocol._delegateError = function(err, sequence){
+			if (err.fatal) {
+				console.trace('fatal error: ' + err.message);
+			}
+			return del.call(this, err, sequence);
+		};
 		return connections[key] = require('mysql').createConnection(o);
 	}
 
