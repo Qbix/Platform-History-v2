@@ -99,7 +99,7 @@ class Users_Web3 extends Base_Users_Web3 {
 				$value = reset($results);
 				if (is_array($value)) {
 					foreach ($value as $result) {
-						$data[] = $result->toString();
+						$data[] = (int)method_exists($result, 'toString') == 1 ? $result->toString() : $result;
 					}
 				} else {
 					$data = $value;

@@ -601,6 +601,31 @@
         }
     },
 	"coin": {
+		"staking": {
+			"start": {
+				"form": {
+					"labels": {
+						"reserveToken": "reserveToken",
+						"amount": "Amount"
+					},
+					"small": {
+						"reserveToken": "reserveToken",
+						"amount": "Amount"
+					}
+				},
+				"placeholders": {
+					"amount": "amount"
+				},
+				"errmsgs": {
+					
+				},
+				"btns":{
+					"stake": "Stake"
+				},
+				"stake": "Stake",
+				"loading": "Loading"
+			}
+		},
 		"admin": {
 			"form": {
 				"labels": {
