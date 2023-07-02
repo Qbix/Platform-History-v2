@@ -108,6 +108,8 @@ function Q_combine($process)
 	if (empty($filters)) {
 		return "Config field 'Q'/'environments'/'$environment'/filters is empty";
 	}
+	$already = array();
+	$firstLine = "/**** QBIX MINIFICATION RESULT";
 	foreach ($files as $src => $dest) {
 		$df = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest));
 		if (!Q_Valid::url($src) or Q::startsWith($src, $baseUrl)) {
@@ -130,38 +132,77 @@ function Q_combine($process)
 			echo "Downloading: $src" . PHP_EOL;
 			$content = file_get_contents($src);
 		}
+		$hash = sha1($content);
+		$previous = file_get_contents($df);
+		if ($previous !== false) {
+			$pos = strpos($previous, $firstLine . PHP_EOL . "SHA1: $hash");
+			if ($pos !== false) {
+				// we already processed this file, just get the result
+				$posEnd = strpos($previous, $firstLine, $pos + 1);
+				if ($posEnd === false) {
+					$posEnd = strlen($previous);
+				}
+				$already[$src] = substr($previous, $pos, $posEnd - $pos);
+			}
+		}
 		$combined[$dest][$src] = $content;
 	}
 	foreach ($combined as $dest => $parts) {
 		$df = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest));
 		$ext = strtolower(pathinfo($df, PATHINFO_EXTENSION));
-		echo "Writing $df\n";
+		echo "Compiling $df\n";
+		$content = '';
+		$info = array();
+		$printProgress = true;
 		if (!empty($filters)) {
-			foreach ($filters as $e => $filter) {
-				if (!isset($process[$e]) and !isset($process['all'])) {
-					continue;
+			$params = @compact('dest', 'parts', 'ext', 'printProgress');
+			foreach ($already as $k => $v) {
+				unset($params['parts'][$k]); // no need to process it
+			}
+			if (!empty($params['parts'])) {
+				foreach ($filters as $e => $filter) {
+					if (!isset($process[$e]) and !isset($process['all'])) {
+						continue;
+					}
+					if ($ext !== $e) {
+						continue;
+					}
+					$p = !empty($filter['params']) ? Q::json_encode($filter['params']) : '';
+					echo "\t".$filter['handler']."$p\n";
+					$p = empty($filter['params'])
+						? $params
+						: array_merge($params, $filter['params']);
+					$p['info'] = &$info;
+					if ($ext === 'css') {
+						Q_combine_preprocessCss($p);
+					}
+					Q::event($filter['handler'], $p);
 				}
-				if ($ext !== $e) {
-					continue;
-				}
-				$p = !empty($filter['params']) ? Q::json_encode($filter['params']) : '';
-				echo "\t".$filter['handler']."$p\n";
-				foreach ($parts as $src => $part) {
-					echo "\t\t$src\n";
-				}
-				$printProgress = true;
-				$params = @compact('dest', 'parts', 'ext', 'printProgress');
-				if (!empty($filter['params'])) {
-					$params = array_merge($params, $filter['params']);
-				}
-				if ($ext === 'css') {
-					Q_combine_preprocessCss($params);
-				}
-				$content = Q::event($filter['handler'], $params);
+			}
+		}
+		$time = time();
+		$filter = isset($info['filter']) ? $info['filter'] : '';
+		foreach ($parts as $src => $v) {
+			if (!empty($info['results'][$src])) {
+				$hash = sha1($v);
+				$filter = $info['filters'][$src];
+				$prefix = implode(PHP_EOL, array( 
+					$firstLine,
+					"SHA1: $hash", 
+					"SOURCE: $src",
+					"FILTER: $filter",
+					"TIMESTAMP: $time",
+					"****/",
+					""
+				));
+				$content .= $prefix . $info['results'][$src] . PHP_EOL . PHP_EOL;
+			} else if (!empty($already[$src])) {
+				$content .= $already[$src];
 			}
 		}
 		file_put_contents($df, $content);
-		usleep(1); // garbage collection
+		echo Q_Utils::colored("Produced $df", 'white', 'green') . PHP_EOL;
+		gc_collect_cycles(); // garbage collection
 	}
 	echo "Success.";
 }
@@ -172,7 +213,9 @@ function Q_combine_preprocessCss(&$params)
 	$dest = $params['dest'];
 	$parts = $params['parts'];
 	$processed = array();
-	foreach ($parts as $src => $content) {
+	$baseUrl = Q_Request::baseUrl();
+	foreach ($parts as $k => $content) {
+		$src = $k;
 		if (strpos($src, '{{') === 0) {
 			$src = Q_Request::tail(Q_Uri::interpolateUrl($src), true);
 		}
@@ -181,7 +224,7 @@ function Q_combine_preprocessCss(&$params)
 			'Q_combine_preload',
 			$content
 		);
-		$processed[$src] = $content;
+		$processed[$k] = $content;
 		if (Q_Valid::url($src) and !Q::startsWith($src, $baseUrl)) {
 			continue;
 		}
@@ -206,7 +249,7 @@ function Q_combine_preprocessCss(&$params)
 			'url($1'.$relative,
 			$content
 		);
-		$processed[$src] = $content;
+		$processed[$k] = $content;
 	}
 	$params['processed'] = $processed;
 	
@@ -221,6 +264,10 @@ function Q_combine_preload($matches)
 {
 	global $combined, $src, $dest, $preload, $baseUrl;
 	$url = $matches[1];
+	if (($url[0] === '"' && substr($url, -1) === '"')
+	||  ($url[0] === "'" && substr($url, -1) === "'")) {
+		$url = substr($url, 1, -1);
+	}
 	if (strpos($url, '{{') === 0) {
 		$url = Q_Request::tail(Q_Uri::interpolateUrl($url), true);
 	}
@@ -234,17 +281,29 @@ function Q_combine_preload($matches)
 	$dirname = $info['dirname'] . DS . $info['filename'];
 	@mkdir($dirname);
 	$info = parse_url($url);
-	$path = $info['path'];
+	$subdirname = Q_Utils::normalize($info['host']);
+	if (!is_dir($dirname . DS . $subdirname)) {
+		mkdir($dirname . DS . $subdirname);
+	}
+	$path = substr($info['path'], 1);
 	$parts = explode('.', $path);
-	$ext = array_pop($parts);
+	$ext = (count($parts) > 1) ? array_pop($parts) : false;
 	$path2 = implode('.', $parts);
-	$basename = Q_Utils::normalize($path2) . ".$ext";
-	$contents = $combined[$dest][$src];
-	$filename = $dirname . DS . $basename;
-	file_put_contents($filename, $contents);
-	echo "\t Saving $basename\n";
+	$basename = $subdirname . DS . Q_Utils::normalize($path2);
+	if ($ext) {
+		$basename .= ".$ext";
+	}
+	$contents = file_get_contents($url); // $combined[$dest][$src];
+	if ($contents !== false) {
+		$filename = $dirname . DS . $basename;
+		file_put_contents($filename, $contents);
+		echo "\t\t-> Saving $basename";
+	} else {
+		echo "\t\t-> Couldn't download $basename";
+	}
+	echo PHP_EOL;
 	$preloadUrl = substr($dirname, strlen(APP_WEB_DIR)+1) . '/'
 		. str_replace(DS, '/', $basename);
 	$preload[$dest][] = $preloadUrl;
-	return $filename;
+	return $basename;
 }

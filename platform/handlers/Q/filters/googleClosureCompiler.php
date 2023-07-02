@@ -2,17 +2,19 @@
 
 function Q_filters_googleClosureCompiler($params)
 {
-	$results = array();
+	$results = $filters = array();
 	$printProgress = Q::ifset($params, 'printProgress', false);
-	foreach ($params['parts'] as $filename => $part) {
+	foreach ($params['parts'] as $src => $part) {
 		$compilation_level = isset($params['compilation_level'])
 			? $params['compilation_level']
 			: 'SIMPLE_OPTIMIZATIONS';
 
-		echo "\tGoogle Closure Compiler: $filename" . PHP_EOL;
+		if ($printProgress) {
+			echo "\tQ_filters_googleClosureCompiler: $src" . PHP_EOL;
+		}
 
-		if (Q::endsWith($filename, '.min.js')) {
-			$results[] = $part; // already minified
+		if (Q::endsWith($src, '.min.js')) {
+			$results[$src] = $part . PHP_EOL; // already minified
 			continue;
 		}
 
@@ -42,7 +44,7 @@ function Q_filters_googleClosureCompiler($params)
 			? $config['timeout']
 			: Q_Config::get('Q', 'environments', '*', 'js', 'timeout', 600);
 		$compiled = Q_Utils::post($service_url, $options, null, array(), null, $timeout);
-		if ($error = substr($compiled, 0, 5) === 'Error') {
+		if (substr($compiled, 0, 5) === 'Error') {
 			throw new Q_Exception(
 				"Google Closure Compiler:\n" . $compiled
 			);
@@ -53,7 +55,15 @@ function Q_filters_googleClosureCompiler($params)
 				"Google Closure Compiler:\n" . Q_Utils::post($service_url, $options)
 			);
 		}
-		$results[] = $compiled;
+
+		$results[$src] = $compiled;
+		$filters[$src] = 'Q/filters/googleClosureCompiler';
 	}
-	return implode("\n\n", $results);
+	
+	$output = implode("\n\n", $results);
+	$params['info']['output'] = $output;
+	$params['info']['results'] = $results;
+	$params['info']['filters'] = $filters;
+
+	return $output;
 }

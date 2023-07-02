@@ -1628,7 +1628,8 @@ class Q_Utils
 			'blue' => '44',
 			'magenta' => '45',
 			'cyan' => '46',
-			'light_gray' => '47'
+			'light_gray' => '47',
+			'gray' => '100'
 		);
 		$colored_string = "";
 		if (isset($foreground_colors[$foreground_color])) {

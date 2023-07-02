@@ -1,20 +1,27 @@
 <?php
 
-function Q_filters_cssminifier($params)
+function Q_filters_cssminifier($params, &$info = array())
 {
-	$parts = $params['parts'];
-	$dest = $params['dest'];
-	$processed = $params['processed'];
-	
 	$service_url = "http://cssminifier.com/raw";
-	$options = array(
-		'input' => implode("\n\n", $processed)
-	);
-	$result = Q_Utils::post($service_url, $options);
-	if ($error = substr($result, 0, 5) === 'Error') {
-		throw new Q_Exception(
-			"Reducisaurus:\n" . $result
-		);
+
+	$processed = $params['processed'];
+	$results = array();
+	$printProgress = Q::ifset($params, 'printProgress', false);
+	$filters = array();
+	foreach ($processed as $src => $part) {
+		if ($printProgress) {
+			echo "\Q_filters_cssminifier: $src" . PHP_EOL;
+		}
+		$results[$src] = Q_Utils::post($service_url, array(
+			'input' => $part
+		));
+		$filters[$src] = 'Q/filters/cssminifier';
 	}
-	return $result;
+
+	$output = implode("\n\n", $results);
+	$params['info']['output'] = $output;
+	$params['info']['results'] = $results;
+	$params['info']['filters'] = $filters;
+
+	return $output;
 }
