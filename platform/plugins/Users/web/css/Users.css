@@ -36,7 +36,7 @@
 	top: 0;
 	width: 22px;
 	height: 19px;
-	background: url("http://static.ak.fbcdn.net/rsrc.php/v1/yF/r/pYIwMweSQ7D.png") no-repeat -81px 0;
+	background: url("../img/search-friends.png") no-repeat -81px 0;
 }
 
 .Users_friendSelector_tool ul
@@ -174,7 +174,6 @@
 	margin-left: 7px;
   padding: 3px 5px;
   background-color: #EEEEEE;
-  background-image: url("https://s-static.ak.facebook.com/rsrc.php/v1/yA/r/N8T_oGDfkMw.png");
   background-position: 0 -49px;
   background-repeat: no-repeat;
   border: solid 1px #999;
@@ -194,7 +193,6 @@
   color: white;
   border: solid 1px #29447E;
   background-color: #637BAD;
-  background-image: url("https://s-static.ak.facebook.com/rsrc.php/v1/yA/r/N8T_oGDfkMw.png");
   background-position: 0 -98px;
 }
 

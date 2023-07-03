@@ -549,7 +549,7 @@ img[data-lazyload-src],
 
 /* more Q styles, and Q/actions */
 
-.basic16 { background: url('../img/icons/basic16.png'); background-repeat: no-repeat; background-attachment: scroll; height: 16px; padding-left: 17px; text-align: left; font-size: 12px !important; box-sizing: border-box; }
+.basic16 { background: url(../img/icons/basic16.png); background-repeat: no-repeat; background-attachment: scroll; height: 16px; padding-left: 17px; text-align: left; font-size: 12px !important; box-sizing: border-box; }
 button.basic16 { height: 20px; border: solid 1px transparent; cursor: pointer; font-weight: bold; color: black; }
 .Q_notTouchscreen button.basic16:hover { border: outset 1px #889; cursor: pointer;  }
 .Q_notTouchscreen button.basic16:active { border: inset 1px #889; cursor: pointer; background-color: #CCC; }
@@ -596,7 +596,7 @@ button.basic16 { height: 20px; border: solid 1px transparent; cursor: pointer; f
 .basic16_exclaim { background-position: 0 -762px; }
 .basic16_exclaim2 { background-position: 0 -782px; }
 
-.basic32 { background: url('../img/icons/basic32.png'); background-repeat: no-repeat; background-attachment: scroll; height: 32px; padding-left: 34px; text-align: left; font-size: 18px; box-sizing: border-box; }
+.basic32 { background: url(../img/icons/basic32.png); background-repeat: no-repeat; background-attachment: scroll; height: 32px; padding-left: 34px; text-align: left; font-size: 18px; box-sizing: border-box; }
 button.basic32 { height: 40px; border: solid 1px transparent; cursor: pointer; font-weight: bold; }
 .Q_notTouchscreen button.basic32:hover { border: outset 1px #889; cursor: pointer; }
 .Q_notTouchscreen button.basic32:active { border: inset 1px #889; cursor: pointer; background-color: #CCC; }
@@ -795,7 +795,7 @@ html.Q_scanning body > .Q_scanning_code {
 	text-align: center;
 	color: #FFFFE5;
 	font-weight: bold;
-	background: url('../img/ui/circle_trans_small.png') no-repeat;
+	background: url(../img/ui/circle_trans_small.png) no-repeat;
 }
 #notices_slot ul li .Q_close {
 	position: absolute;
@@ -805,7 +805,7 @@ html.Q_scanning body > .Q_scanning_code {
 	width: 26px;
 	height: 26px;
 	cursor: pointer;
-	background: url('../img/icons/basic16.png') 5px -477px no-repeat;
+	background: url(../img/icons/basic16.png) 5px -477px no-repeat;
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 #notices_slot ul li a:link,

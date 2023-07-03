@@ -109,7 +109,7 @@ function Q_combine($process)
 		return "Config field 'Q'/'environments'/'$environment'/filters is empty";
 	}
 	$already = array();
-	$firstLine = "/**** QBIX MINIFICATION RESULT";
+	$firstLine = "/**** Qbix: produced by scripts/Q/combine.php";
 	foreach ($files as $src => $dest) {
 		$df = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest));
 		if (!Q_Valid::url($src) or Q::startsWith($src, $baseUrl)) {
@@ -135,7 +135,7 @@ function Q_combine($process)
 		$hash = sha1($content);
 		$previous = file_get_contents($df);
 		if ($previous !== false) {
-			$pos = strpos($previous, $firstLine . PHP_EOL . "SHA1: $hash");
+			$pos = strpos($previous, $firstLine . PHP_EOL . "* SHA1: $hash");
 			if ($pos !== false) {
 				// we already processed this file, just get the result
 				$posEnd = strpos($previous, $firstLine, $pos + 1);
@@ -188,10 +188,10 @@ function Q_combine($process)
 				$filter = $info['filters'][$src];
 				$prefix = implode(PHP_EOL, array( 
 					$firstLine,
-					"SHA1: $hash", 
-					"SOURCE: $src",
-					"FILTER: $filter",
-					"TIMESTAMP: $time",
+					"* SHA1: $hash", 
+					"* SOURCE: $src",
+					"* FILTER: $filter",
+					"* TIMESTAMP: $time",
 					"****/",
 					""
 				));
@@ -228,27 +228,7 @@ function Q_combine_preprocessCss(&$params)
 		if (Q_Valid::url($src) and !Q::startsWith($src, $baseUrl)) {
 			continue;
 		}
-		$dest_parts = explode('/', $dest);
-		$src_parts = explode('/', $src);
-		$j = 0;
-		foreach ($dest_parts as $i => $p) {
-			if (!isset($src_parts[$i]) or $src_parts[$i] !== $dest_parts[$i]) {
-				break;
-			}
-			$j = $i+1;
-		}
-		$dc = count($dest_parts);
-		$sc = count($src_parts);
-		$relative = str_repeat("../", $dc-$j-1)
-			. implode('/', array_slice($src_parts, $j, $sc-$j-1));
-		if ($relative) {
-			$relative .= '/';
-		}
-		$content = preg_replace(
-			"/url\((\'){0,1}(?!http\:\/\/|https\:\/\/)/",
-			'url($1'.$relative,
-			$content
-		);
+		$content = Q_Utils::adjustRelativePaths($content, $src, $dest);
 		$processed[$k] = $content;
 	}
 	$params['processed'] = $processed;
@@ -277,15 +257,15 @@ function Q_combine_preload($matches)
 	$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest, array(
 		'ignoreEnvironment' => true
 	)));
-	$info = pathinfo($f);
-	$dirname = $info['dirname'] . DS . $info['filename'];
+	$pathinfo = pathinfo($f);
+	$dirname = $pathinfo['dirname'] . DS . $pathinfo['filename'];
 	@mkdir($dirname);
-	$info = parse_url($url);
-	$subdirname = Q_Utils::normalize($info['host']);
+	$urlinfo = parse_url($url);
+	$subdirname = Q_Utils::normalize($urlinfo['host']);
 	if (!is_dir($dirname . DS . $subdirname)) {
 		mkdir($dirname . DS . $subdirname);
 	}
-	$path = substr($info['path'], 1);
+	$path = substr($urlinfo['path'], 1);
 	$parts = explode('.', $path);
 	$ext = (count($parts) > 1) ? array_pop($parts) : false;
 	$path2 = implode('.', $parts);
@@ -300,10 +280,11 @@ function Q_combine_preload($matches)
 		echo "\t\t-> Saving $basename";
 	} else {
 		echo "\t\t-> Couldn't download $basename";
+		return "url($url)";
 	}
 	echo PHP_EOL;
 	$preloadUrl = substr($dirname, strlen(APP_WEB_DIR)+1) . '/'
 		. str_replace(DS, '/', $basename);
 	$preload[$dest][] = $preloadUrl;
-	return $basename;
+	return "url($pathinfo[filename]/$basename)";
 }

@@ -139,12 +139,14 @@
 				"{{Q}}/js/handlebars-v4.0.10.min.js": true,
 				"{{Q}}/js/Q.js": true
 			},
-			"prettyPrintData": true
+			"prettyPrintData": true,
+			"inline": null
 		},
 		"stylesheets": {
 			"responseExtras": {
 				"{{Q}}/css/Q.css": true
-			}
+			},
+			"inline": null
 		},
 		"environments": {
 			"*": {

@@ -4650,8 +4650,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		}
 		ctors[name] = ctor;
 	}
-	Q.each(ctors, function (name) {
-		var ctor = this;
+	Q.each(ctors, function (name, ctor) {
 		var n = Q.normalize(name);
 		if (!overwrite && typeof _qtc[n] === 'function') {
 			return;
@@ -5940,7 +5939,10 @@ Q.Response.processScriptDataAndLines = function (response) {
 	if (response.scriptLines) {
 		for (var i in response.scriptLines) {
 			if (response.scriptLines[i]) {
-				eval(response.scriptLines[i]);
+				(function () {
+					eval("var Q = window.Q;"); // needed after some minification
+					eval(response.scriptLines[i]);
+				})();
 			}
 		}
 	}
@@ -9096,9 +9098,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		return ret;
 	}
 
-	var o = Q.extend({}, Q.addScript.options, options),
-		firstScript = document.scripts ? document.scripts[0] : document.getElementsByTagName('script')[0],
-		container = o.container || document.head  || document.getElementsByTagName('head')[0];
+	var o = Q.extend({}, Q.addScript.options, options);
+	var firstScript = document.scripts ? document.scripts[0] : document.getElementsByTagName('script')[0];
+	var container = o.container || document.head  || document.getElementsByTagName('head')[0];
 		
 	if (!onload) {
 		onload = function() { };
@@ -9114,7 +9116,11 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	options.info = {};
 	src = Q.url(src, null, options);
 	
-	if (!o || !o.duplicate) {
+	if (!o.duplicate) {
+		if (Q.addScript.loaded[src]) {
+			_onload();
+			return o.returnAll ? null : false;
+		}
 		var scripts = document.getElementsByTagName('script');
 		var ieStyle = _pendingIEScripts.length;
 		if (ieStyle) {
@@ -9259,19 +9265,23 @@ Q.findScript = function (src) {
  * @return {Object} object with properties "src", "path" and "file"
  */
 Q.currentScript = function (stackLevels) {
-	var result = '', index = 0, lines, parts, i, l;
-	try {
-		throw new Error();
-	} catch (e) {
-		lines = e.stack.split('\n');
-	}
-	for (i=0, l=lines.length; i<l; ++i) {
-		if (lines[i].match(/http[s]?:\/\//)) {
-			index = i + 1 + (stackLevels || 0);
-			break;
+	var src = Q.currentScript.src || Q.getObject('document.currentScript.src');
+	if (!src) {
+		var index = 0, lines, i, l;
+		try {
+			throw new Error();
+		} catch (e) {
+			lines = e.stack.split('\n');
 		}
+		for (i=0, l=lines.length; i<l; ++i) {
+			if (lines[i].match(/http[s]?:\/\//)) {
+				index = i + 1 + (stackLevels || 0);
+				break;
+			}
+		}
+		src = lines[index];
 	}
-	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*?)):/);
+	var parts = src.match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*))(?!:)/);
 	return {
 		src: parts[1].split('?')[0],
 		srcWithQuerystring: parts[1],
@@ -9387,6 +9397,10 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	var container = options.container || document.getElementsByTagName('head')[0];
 
+	if (Q.addStylesheet.loaded[href]) {
+		onload();
+		return options.returnAll ? null : false;
+	}
 	if (!href) {
 		onload(false);
 		return false;
@@ -16097,6 +16111,7 @@ Q.globalNamesAdded = function () {
 
 /**
  * This function is useful for debugging, e.g. calling it in breakpoint conditions
+ * But you can also use console.trace()
  * @method stackTrack
  * @static
  */

@@ -636,7 +636,7 @@ class Q_Response
 	/**
 	 * Sets some data for the script
 	 * @method setScriptData
-	 * @param {string|array} $path The path to the variable where the data will be saved, such as "Q.info" or "MyApp.foo.bar".
+	 * @param {string} $path The path to the variable where the data will be saved, such as "Q.info" or "MyApp.foo.bar".
 	 * @param {array} $data The data to set. It will be JSON-encoded and stored in the specified variable.
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned first by Q_Response::scriptLines.
@@ -1182,34 +1182,50 @@ class Q_Response
 	 * @param {string} [$slotName=null] If provided, returns only the scripts added while filling this slot.
 	 * @return {string} the script tags and their contents inline
 	 */
-	static function scriptsInline ($slotName = null)
+	static function scriptsInline ($slotName = null, $setLoaded = false)
 	{
 		$scripts = self::scriptsArray($slotName, false);
 		if (empty($scripts))
 			return '';
 
 		$scripts_for_slots = array();
+		$loaded = array();
 		foreach ($scripts as $script) {
 			$src = '';
 			extract($script, EXTR_IF_EXISTS);
 
 			$ob = new Q_OutputBuffer();
-			if (Q_Valid::url($src)) {
-				try {
-					include($src);
-				} catch (Exception $e) {}
+			if (Q_Valid::url($src) and !Q::startsWith($src, $baseUrl)) {
+				$remote_scripts_for_slots[$script['slot']][] = $src;
 			} else {
 				list ($src, $filename) = Q_Html::themedUrlFilenameAndHash($src);
+				if (!empty($loaded[$src])) {
+					continue;
+				}
+				$loaded[$src] = true;
 				try {
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
+				$src_json = json_encode($src);
+				$currentScriptCode = <<<EOT
+				if (window.Q && Q.currentScript) {
+					Q.currentScript.src = $src_json;
+				}
+EOT;
+				$scripts_for_slots[$script['slot']][] = "\n/* Included inline from $src */\n"
+					. $currentScriptCode
+			 		. $ob->getClean();
 			}
-			$scripts_for_slots[$script['slot']][] = "\n/* Included inline from $src */\n"
-			 . $ob->getClean();
 		}
 		$parts = array();
+		foreach ($remote_scripts_for_slots as $slot => $src) {
+			$parts[] = Q_Html::script('', array('src' => $src, 'data-slot' => $slot));
+		}
 		foreach ($scripts_for_slots as $slot => $texts) {
 			$parts[] = Q_Html::script(implode("\n\n", $texts), array('data-slot' => $slot));
+		}
+		if ($setLoaded) {
+			self::setScriptData('Q.addScript.loaded', $loaded);
 		}
  		return implode("", $parts);
 	}
@@ -1226,8 +1242,16 @@ class Q_Response
 	static function scripts ($slotName = null, $between = "\n")
 	{
 		$scripts = self::scriptsArray($slotName);
-		if (empty($scripts))
+		if (empty($scripts)) {
 			return '';
+		}
+
+		if (!Q_Request::isAjax()) {
+			$inline = Q_Config::get('Q', 'javascript', 'inline', false);
+			if ($inline == 'page') {
+				return self::scriptsInline($slotName, true);
+			}
+		}
 
 		$tags = array();
 		foreach ($scripts as $script) {
@@ -1363,19 +1387,21 @@ class Q_Response
 	 * Returns a &lt;style&gt; tag with the content of all the stylesheets included inline
 	 * @method stylesheetsInline
 	 * @static
-	 * @param {array} [$styles=array()] If not empty, this associative array contains styles which will be
-	 * included at the end of the generated &lt;style&gt; tag.
 	 * @param {string} [$slotName=null] If provided, returns only the stylesheets added while filling this slot.
 	 * @return {string} the style tags and their contents inline
 	 */
-	static function stylesheetsInline ($styles = array(), $slotName = null)
+	static function stylesheetsInline ($slotName = null, $setLoaded = false)
 	{
 		if (empty(self::$stylesheets)) {
 			return '';
 		}
 
+		$baseUrl = Q_Request::baseUrl();
+		$dest = parse_url(Q_Request::url(), PHP_URL_PATH);
+
 		$sheets = self::stylesheetsArray($slotName, false);
 		$sheets_for_slots = array();
+		$loaded = array();
 		if (!empty($sheets)) {
 			foreach ($sheets as $stylesheet) {
 				$href = '';
@@ -1384,24 +1410,34 @@ class Q_Response
 				extract($stylesheet, EXTR_IF_EXISTS);
 
 				$ob = new Q_OutputBuffer();
-				if (Q_Valid::url($href)) {
-					try {
-						include($href);
-					} catch (Exception $e) {}
+				if (Q_Valid::url($href) and !Q::startsWith($href, $baseUrl)) {
+					$imported_for_slots[$stylesheet['slot']][] = "@import url($href);";
 				} else {
 					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
+					if (!empty($loaded[$href])) {
+						continue;
+					}
+					$loaded[$href] = true;
 					try {
 						Q::includeFile($filename);
 					} catch (Exception $e) {}
+					$src = parse_url($href, PHP_URL_PATH);
+					$content = $ob->getClean();
+					$content = Q_Utils::adjustRelativePaths($content, $src, $dest);
+					$sheets_for_slots[$stylesheet['slot']][] = "\n/* Rewritten and included inline from $href */\n$content";
 				}
-				$sheets_for_slots[$stylesheet['slot']][] = "\n/* Included inline from $href */\n"
-				 . $ob->getClean();
 			}
 		}
 		$parts = array();
+		foreach ($imported_for_slots as $slot => $imported) {
+			$parts[] = Q_Html::tag('style', array('data-slot' => $slot), implode("\n\n", $imported));
+		}
 		foreach ($sheets_for_slots as $slot => $texts) {
 			$parts[] = Q_Html::tag('style', array('data-slot' => $slot), implode("\n\n", $texts));
 		}
+		// if ($setLoaded) {
+		// 	self::setScriptData('Q.addStylesheet.loaded', $loaded);
+		// }
  		return implode("", $parts);
 	}
 
@@ -1419,8 +1455,15 @@ class Q_Response
 	static function stylesheets ($slotName = null, $between = "\n", $skipPreloads = false)
 	{
 		$stylesheets = self::stylesheetsArray($slotName);
-		if (empty($stylesheets))
+		if (empty($stylesheets)) {
 			return '';
+		}
+		if (!Q_Request::isAjax()) {
+			$inline = Q_Config::get('Q', 'stylesheets', 'inline', false);
+			if ($inline == 'page') {
+				return self::stylesheetsInline($slotName, true);
+			}
+		}
 		$baseUrl = Q_Request::baseUrl();
 		$tags = array();
 		foreach ($stylesheets as $stylesheet) {

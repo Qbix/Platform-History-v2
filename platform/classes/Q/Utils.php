@@ -1792,6 +1792,60 @@ class Q_Utils
 	}
 
 	/**
+	 * Adjusts paths with ../foo from content in src file to
+	 * generate content meant for dest file.
+	 * Currently works with CSS files.
+	 * @method adjustRelativePaths
+	 * @static
+	 * @param {string} $content The content in which to adust url(paths)
+	 * @param {string} $src The path at which the old file was
+	 * @param {string} $dest The path at which the new file will be
+	 * @param {string} [$fileType] The only supported file type is "css" for now
+	 */
+	static function adjustRelativePaths($content, $src, $dest, $fileType = 'css')
+	{
+		if (Q_Valid::url($src)) {
+			$src = parse_url($src, PHP_URL_PATH);
+		}
+		$dest_parts = explode('/', $dest);
+		$src_parts = explode('/', $src);
+		$j = 0;
+		foreach ($dest_parts as $i => $p) {
+			if (!isset($src_parts[$i]) or $src_parts[$i] !== $dest_parts[$i]) {
+				break;
+			}
+			$j = $i+1;
+		}
+		$dc = count($dest_parts);
+		$sc = count($src_parts);
+		$relative = str_repeat("../", $dc-$j-1)
+			. implode('/', array_slice($src_parts, $j, $sc-$j-1));
+		if ($relative) {
+			$relative .= '/';
+		}
+		if ($fileType !== 'css') {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'fileType',
+				'range' => 'css',
+				'value' => $fileType
+			));
+		}
+		return preg_replace(
+			array(
+				"/url\((\'|\\\")+(?!data\:|http\:\/\/|https\:\/\/|\'|\\\")/",
+				"/@import[\s]url\((\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/",
+				"/@import[\s](?!url\()(\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/"
+			),
+			array(
+				'url($1'.$relative,
+				'@import url($1'.$relative,
+				'@import $1'.$relative
+			),
+			$content
+		);
+	}
+
+	/**
 	 * Normalize paths to use DS, used mostly on Windows
 	 * @method normalizePath
 	 * @static
