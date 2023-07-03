@@ -2183,80 +2183,6 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 };
 
 /**
- * Use this to ensure that a property exists before running some javascript code.
- * If something is undefined, loads a script or executes a function,
- * calling the callback on success.
- * The callback is called only after the Q.onInit event has executed, so functions
- * like Q.url() and Q.addScript can be expected to work properly.
- * @static
- * @method ensure
- * @param {String} property
- *  Path to the property to test whether Q.getObject() will return undefined.
- * @param {Function} callback
- *  The callback to call when the loader has been executed.
- *  The first parameter should be the property (object, string, etc.) that's now defined.
- *  This is where you would put the code that relies on the property being defined.
- */
-Q.ensure = function _Q_ensure(property, callback) {
-	if (Q.getObject(property, root) !== undefined) {
-		Q.handle(callback, null, [property]);
-		return;
-	}
-	var loader = Q.ensure.loaders[property];
-	if (!loader) {
-		throw new Q.Error("Q.ensure: missing loader for " + property);
-	}
-	Q.onInit.addOnce(function () {
-		if (typeof loader === 'string') {
-			Q.require(loader, callback);
-		} else if (typeof loader === 'function') {
-			loader(property, callback);
-		} else if (loader instanceof Q.Event) {
-			loader.add(property, function _loaded() {
-				callback(property);
-			});
-		}
-	});
-};
-
-/**
- * Whether a page is currently being loaded
- * @property {Object} ensure.loaders
- *  Something to execute if the property was undefined and needs to be loaded.
- *  The key is the property. The value can be one of several things.
- *  If a string, this is interpreted as the URL of a javascript to load.
- *  If a function, this is called with the property and callback as arguments.
- *  If an event, the callback is added to it.
- *  The loader must call the callback and pass the property as the first parameter.
- */
-Q.ensure.loaders = {
-	'Handlebars': '{{Q}}/js/handlebars-v4.0.10.min.js',
-	'jQuery': '{{Q}}/js/jquery-3.2.1.min.js',
-	'Q.PHPJS': "{{Q}}/js/phpjs.js",
-	'IntersectionObserver': function (property, callback) {
-		if ('IntersectionObserver' in window
-		&& 'IntersectionObserverEntry' in window
-		&& 'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
-			// Minimal polyfill for Edge 15's lack of `isIntersecting`
-			// See: https://github.com/w3c/IntersectionObserver/issues/211
-			if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
-   				  Object.defineProperty(window.IntersectionObserverEntry.prototype,
-   					  'isIntersecting', {
-   						  get: function () {
-   							  return this.intersectionRatio > 0;
-   						  }
-   					  }
-   				  );
-			}
-			return callback && callback(property);
-	 	}
-		Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', function () {
-			callback && callback(property);
-		});
-	}
-};
-
-/**
  * Used to prevent overwriting the latest results on the client with older ones.
  * Typically, you would call this function before making some sort of request,
  * save the ordinal in a variable, and then pass it to the function again inside
@@ -3588,6 +3514,81 @@ Q.onVisibilityChange = new Q.Event();
  * @event beforeReplace
  */
 Q.beforeReplace = new Q.Event();
+
+/**
+ * Use this to ensure that a property exists before running some javascript code.
+ * If something is undefined, loads a script or executes a function,
+ * calling the callback on success.
+ * The callback is called only after the Q.onInit event has executed, so functions
+ * like Q.url() and Q.addScript can be expected to work properly.
+ * @static
+ * @method ensure
+ * @param {String} property
+ *  Path to the property to test whether Q.getObject() will return undefined.
+ * @param {Function} callback
+ *  The callback to call when the loader has been executed.
+ *  The first parameter should be the property (object, string, etc.) that's now defined.
+ *  This is where you would put the code that relies on the property being defined.
+ */
+Q.ensure = function _Q_ensure(property, callback) {
+	if (Q.getObject(property, root) !== undefined) {
+		Q.handle(callback, null, [property]);
+		return;
+	}
+	var loader = Q.ensure.loaders[property];
+	if (!loader) {
+		throw new Q.Error("Q.ensure: missing loader for " + property);
+	}
+	Q.onInit.addOnce(function () {
+		if (typeof loader === 'string') {
+			Q.require(loader, callback);
+		} else if (typeof loader === 'function') {
+			loader(property, callback);
+		} else if (loader instanceof Q.Event) {
+			loader.addOnce(property, function _loaded() {
+				callback(property);
+			});
+		}
+	});
+};
+
+/**
+ * Whether a page is currently being loaded
+ * @property {Object} ensure.loaders
+ *  Something to execute if the property was undefined and needs to be loaded.
+ *  The key is the property. The value can be one of several things.
+ *  If a string, this is interpreted as the URL of a javascript to load.
+ *  If a function, this is called with the property and callback as arguments.
+ *  If an event, the callback is added to it.
+ *  The loader must call the callback and pass the property as the first parameter.
+ */
+Q.ensure.loaders = {
+	'Handlebars': '{{Q}}/js/handlebars-v4.0.10.min.js',
+	'jQuery': '{{Q}}/js/jquery-3.2.1.min.js',
+	'Q.PHPJS': "{{Q}}/js/phpjs.js",
+	'Q.info.baseUrl': Q.onInit,
+	'IntersectionObserver': function (property, callback) {
+		if ('IntersectionObserver' in window
+		&& 'IntersectionObserverEntry' in window
+		&& 'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+			// Minimal polyfill for Edge 15's lack of `isIntersecting`
+			// See: https://github.com/w3c/IntersectionObserver/issues/211
+			if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+   				  Object.defineProperty(window.IntersectionObserverEntry.prototype,
+   					  'isIntersecting', {
+   						  get: function () {
+   							  return this.intersectionRatio > 0;
+   						  }
+   					  }
+   				  );
+			}
+			return callback && callback(property);
+	 	}
+		Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', function () {
+			callback && callback(property);
+		});
+	}
+};
 
 /**
  * Sets up control flows involving multiple callbacks and dependencies
@@ -11251,7 +11252,7 @@ Q.Text = {
 					reject(errors);
 				}
 			});
-			Q.onInit.addOnce(function () {
+			Q.ensure('Q.info.baseUrl', function () {
 				Q.each(names, function (i, name) {
 					var url = Q.url(dir + '/' + name + '/' + lls + '.json');
 					return func(name, url, pipe.fill(name), options);
