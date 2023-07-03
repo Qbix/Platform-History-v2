@@ -11237,11 +11237,9 @@ Q.Text = {
 					reject(errors);
 				}
 			});
-			Q.onInit.addOnce(function () {
-				Q.each(names, function (i, name) {
-					var url = Q.url(dir + '/' + name + '/' + lls + '.json');
-					return func(name, url, pipe.fill(name), options);
-				});	
+			Q.each(names, function (i, name) {
+				var url = Q.url(dir + '/' + name + '/' + lls + '.json');
+				return func(name, url, pipe.fill(name), options);
 			});
 		});
 	},
