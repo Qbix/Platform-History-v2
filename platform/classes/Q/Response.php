@@ -1185,9 +1185,11 @@ class Q_Response
 	static function scriptsInline ($slotName = null, $setLoaded = false)
 	{
 		$scripts = self::scriptsArray($slotName, false);
-		if (empty($scripts))
+		if (empty($scripts)) {
 			return '';
-
+		}
+		
+		$baseUrl = Q_Request::baseUrl();
 		$scripts_for_slots = array();
 		$loaded = array();
 		foreach ($scripts as $script) {
