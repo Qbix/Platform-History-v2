@@ -9411,13 +9411,14 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (!media) {
 		media = 'screen,print';
 	}
-	var links = document.getElementsByTagName('link');
+	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');;
 	var i, e, h, m;
 	var href2 = href.split('?')[0];
-	for (i=0; i<links.length; ++i) {
-		e = links[i];
+	for (i=0; i<elements.length; ++i) {
+		e = elements[i];
 		m = e.getAttribute('media');
-		h = e.getAttribute('href');
+		h = elements[i].getAttribute('href')
+		 || elements[i].getAttribute('data-href');
 		if ((m && m !== media) || !h || h.split('?')[0] !== href2) {
 			continue;
 		}
@@ -9469,7 +9470,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.onload = onload2;
 	link.onreadystatechange = onload2; // for IE
 	link.setAttribute('href', href);
-	links = document.getElementsByTagName('link');
+	var links = document.getElementsByTagName('link');
 	var insertBefore = null;
 	if (Q.allSlotNames && options.slotName) {
 		link.setAttribute('data-slot', options.slotName);
@@ -14951,15 +14952,12 @@ function processStylesheets() {
 		var warning = "Q.js must be included before prefixfree in order to work properly";
 		console.warn(warning);
 	}
-	var links = document.getElementsByTagName('link');
+	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');
 	var slots = processStylesheets.slots;
-	for (var i=0; i<links.length; ++i) {
-		var rel = links[i].getAttribute('rel');
-		if (!rel || rel.toLowerCase() !== 'stylesheet') {
-			continue;
-		}
-		var href = links[i].getAttribute('href');
-		slots[href] = links[i].getAttribute('data-slot') || null;
+	for (var i=0; i<elements.length; ++i) {
+		var href = elements[i].getAttribute('href')
+			|| elements[i].getAttribute('data-href');
+		slots[href] = elements[i].getAttribute('data-slot') || null;
 	}
 }
 processStylesheets.slots = {};
