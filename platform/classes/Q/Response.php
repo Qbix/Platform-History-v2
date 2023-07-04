@@ -1188,7 +1188,7 @@ class Q_Response
 		if (empty($scripts)) {
 			return '';
 		}
-		
+
 		$baseUrl = Q_Request::baseUrl();
 		$scripts_for_slots = array();
 		$loaded = array();
@@ -1220,8 +1220,10 @@ EOT;
 			}
 		}
 		$parts = array();
-		foreach ($remote_scripts_for_slots as $slot => $src) {
-			$parts[] = Q_Html::script('', array('src' => $src, 'data-slot' => $slot));
+		foreach ($remote_scripts_for_slots as $slot => $srcs) {
+			foreach ($srcs as $src) {
+				$parts[] = Q_Html::script('', array('src' => $src, 'data-slot' => $slot));
+			}
 		}
 		foreach ($scripts_for_slots as $slot => $texts) {
 			$parts[] = Q_Html::script(implode("\n\n", $texts), array('data-slot' => $slot));
