@@ -37,6 +37,8 @@ platform/plugins/Cards/
 platform/plugins/Calendars/
 platform/plugins/Catalogs/
 platform/plugins/Media/
+platform/plugins/AI/
+platform/plugins/Metrics/
 platform/node_modules
 platform/vendor
 MyApp/local/*

@@ -40,4 +40,8 @@ vendor/
 .+\.js\.inc$
 
 # Custom plugins
+platform/plugins/Calendars
 platform/plugins/Communities
+platform/plugins/Travel
+platform/plugins/AI
+platform/plugins/Metrics
