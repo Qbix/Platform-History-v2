@@ -1622,10 +1622,14 @@ abstract class Streams extends Base_Streams
 
 		$displayName = array();
 		try {
-			$displayName['firstName'] = Streams::fetchOne(null, $userId, "Streams/user/firstName")->content;
+			if ($fnStream = Streams::fetchOne(null, $userId, "Streams/user/firstName")) {
+				$displayName['firstName'] = $fnStream->content;
+			}
 		} catch (Exception $e) {}
 		try {
-			$displayName['lastName'] = Streams::fetchOne(null, $userId, "Streams/user/lastName")->content;
+			if ($lnStream = Streams::fetchOne(null, $userId, "Streams/user/lastName")) {
+				$displayName['lastName'] = $lnStream->content;
+			}
 		} catch (Exception $e) {}
 
 		return empty($displayName) ? $fallback : implode(' ', $displayName);
