@@ -1209,14 +1209,12 @@ class Q_Response
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
 				$src_json = json_encode($src);
-				$currentScriptCode = <<<EOT
-				if (window.Q && Q.currentScript) {
-					Q.currentScript.src = $src_json;
-				}
-EOT;
+				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);";
+				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);";
 				$scripts_for_slots[$script['slot']][] = "\n/* Included inline from $src */\n"
 					. $currentScriptCode
-			 		. $ob->getClean();
+			 		. $ob->getClean()
+					. $currentScriptEndCode;
 			}
 		}
 		$parts = array();
