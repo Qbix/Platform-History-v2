@@ -1190,7 +1190,7 @@ class Q_Response
 		}
 
 		$baseUrl = Q_Request::baseUrl();
-		$scripts_for_slots = array();
+		$scripts_for_slots = $remote_scripts_for_slots = array();
 		$loaded = array();
 		foreach ($scripts as $script) {
 			$src = '';
