@@ -1402,7 +1402,7 @@ class Q_Response
 		$dest = parse_url(Q_Request::url(), PHP_URL_PATH);
 
 		$sheets = self::stylesheetsArray($slotName, false);
-		$sheets_for_slots = array();
+		$sheets_for_slots = $imported_for_slots = array();
 		$loaded = array();
 		if (!empty($sheets)) {
 			foreach ($sheets as $stylesheet) {
