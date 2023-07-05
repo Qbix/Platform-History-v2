@@ -140,13 +140,13 @@
 				"{{Q}}/js/Q.js": true
 			},
 			"prettyPrintData": true,
-			"inline": "page"
+			"inline": null
 		},
 		"stylesheets": {
 			"responseExtras": {
 				"{{Q}}/css/Q.css": true
 			},
-			"inline": "page"
+			"inline": null
 		},
 		"environments": {
 			"*": {
