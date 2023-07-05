@@ -537,7 +537,11 @@ class Q_Dispatcher
 			}
 			self::$handlingErrors = true;
 			
-			$header = isset($exception->header) ? $exception->header : 412;
+			$header = isset($exception->header)
+				? $exception->header
+				: (isset($exception->httpResponseCode)
+					? $exception->httpResponseCode
+					: 412);
 			if (is_numeric($header)) {
 				http_response_code($header);
 			} else if (is_string($header)) {
