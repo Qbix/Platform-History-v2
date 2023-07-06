@@ -17,8 +17,7 @@
 		"nodemailer-smtp-transport": "2.7.x",
 		"twilio": "0.4.x",
 		"web-push": "^3.2.2",
-		"wns": "^0.5.3",
-		"yuidocjs": "^0.10.2"
+		"wns": "^0.5.3"
 	},
 	"repository": {
 		"type": "git",
