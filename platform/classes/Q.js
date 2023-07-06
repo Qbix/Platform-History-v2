@@ -3890,19 +3890,19 @@ Q.globalNamesAdded = function () {
 	return Q.diff(Object.keys(root), Q.globalNames);
 };
 
-Q.on('init', function () {
-	[
-		Object,
-		Object.prototype,
-		Function,
-		Function.prototype,
-		Array,
-		Array.prototype,
-		String,
-		String.prototype,
-		Number,
-		Number.prototype,
-		Boolean,
-		Boolean.prototype,
-	].forEach(Object.freeze);
-});
+// Q.on('init', function () {
+// 	[
+// 		Object,
+// 		Object.prototype,
+// 		Function,
+// 		Function.prototype,
+// 		Array,
+// 		Array.prototype,
+// 		String,
+// 		String.prototype,
+// 		Number,
+// 		Number.prototype,
+// 		Boolean,
+// 		Boolean.prototype,
+// 	].forEach(Object.freeze);
+// });

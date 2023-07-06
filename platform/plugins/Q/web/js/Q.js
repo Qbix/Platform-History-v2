@@ -16140,20 +16140,20 @@ Q.removeCurrentScript = function() {
 var _udid = location.search.queryField('Q.udid');
 var _appId = location.search.queryField('Q.appId');
 
-[
-    Object,
-    Object.prototype,
-    Function,
-    Function.prototype,
-    Array,
-    Array.prototype,
-    String,
-    String.prototype,
-    Number,
-    Number.prototype,
-    Boolean,
-    Boolean.prototype,
-].forEach(Object.freeze);
+// [
+//     Object,
+//     Object.prototype,
+//     Function,
+//     Function.prototype,
+//     Array,
+//     Array.prototype,
+//     String,
+//     String.prototype,
+//     Number,
+//     Number.prototype,
+//     Boolean,
+//     Boolean.prototype,
+// ].forEach(Object.freeze);
 
 return Q;
 
