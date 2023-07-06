@@ -23,8 +23,8 @@
         "No": "No",
         "OK": "OK",
         "Alert": "Alert",
-        "Confirm": "Confirmation",
-        "Prompt": "Enter Text"
+        "Confirm": "Confirm",
+        "Prompt": "Prompt"
     },
     "months": {
         "1": "January",
@@ -102,8 +102,8 @@
         "cancel": "No"
     },
     "prompt": {
-        "title": "Enter Text",
-        "ok": "Forward"
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
         "more": "more",
