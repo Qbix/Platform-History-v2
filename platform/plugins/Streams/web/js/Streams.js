@@ -6435,8 +6435,8 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 
-		Users.Socket.onEvent('Streams/post').set(function (message) {
-			message = Streams.Message.construct(message);
+		Q.Streams.onMessage('', '')
+		.set(function (stream, message) {
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
 			var noticeOptions = notificationsAsNotice[messageType];
