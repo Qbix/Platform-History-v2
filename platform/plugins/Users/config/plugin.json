@@ -277,38 +277,45 @@
 				"Users/owners": {
 					"title": "Owner",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
-					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
-					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
-					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"],
+					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
+					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canManageLabels": ["Users/"]
 				},
 				"Users/admins": {
 					"title": "Admin",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
-					"canGrant": ["Users/members", "Users/guests", "Users/testers"],
-					"canRevoke": ["Users/members", "Users/guests", "Users/testers"],
-					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"]
+					"canGrant": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
+					"canRevoke": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"]
 				},
 				"Users/members": {
 					"title": "Member",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
 					"canGrant": ["Users/guests"],
 					"canRevoke": [],
-					"canSee": ["Users/members", "Users/guests"]
+					"canSee": ["Users/members", "Users/guests" ,"Users/speakers"]
 				},
 				"Users/guests": {
 					"title": "Guest",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/guests",
 					"canGrant": [],
 					"canRevoke": [],
-					"canSee": []
+					"canSee": ["Users/speakers"]
 				},
 				"Users/testers": {
 					"title": "Tester",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/testers",
 					"canGrant": [],
 					"canRevoke": [],
-					"canSee": []
+					"canSee": ["Users/speakers"]
+				},
+				"Users/speakers": {
+					"title": "Speaker",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/speakers",
+					"canAdd": ["Users/members", "Users/guests"],
+					"canRemove": ["Users/members", "Users/guests"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/speakers"]
 				}
 			},
 			"admins": ["Users/owners", "Users/admins"]
