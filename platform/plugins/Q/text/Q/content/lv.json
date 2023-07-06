@@ -23,8 +23,8 @@
         "No": "Nē",
         "OK": "labi",
         "Alert": "Brīdinājums",
-        "Confirm": "Apstiprināt",
-        "Prompt": "Pamudināt"
+        "Confirm": "Apstiprinājums",
+        "Prompt": "Ievadiet tekstu"
     },
     "months": {
         "1": "janvārī",
@@ -99,8 +99,8 @@
         "cancel": "Nē"
     },
     "prompt": {
-        "title": "Pamudināt",
-        "ok": "Aiziet"
+        "title": "Ievadiet tekstu",
+        "ok": "Uz priekšu"
     },
     "tabs": {
         "more": "vairāk",

@@ -23,8 +23,8 @@
         "No": "Nu",
         "OK": "Bine",
         "Alert": "Alerta",
-        "Confirm": "A confirma",
-        "Prompt": "Prompt"
+        "Confirm": "Confirmare",
+        "Prompt": "Introduceți text"
     },
     "months": {
         "1": "ianuarie",
@@ -99,8 +99,8 @@
         "cancel": "Nu"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Merge"
+        "title": "Introduceți text",
+        "ok": "Redirecţiona"
     },
     "tabs": {
         "more": "Mai mult",

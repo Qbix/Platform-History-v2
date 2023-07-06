@@ -23,8 +23,8 @@
         "No": "Ne",
         "OK": "u redu",
         "Alert": "uzbuna",
-        "Confirm": "Potvrdi",
-        "Prompt": "Potaknuti"
+        "Confirm": "Potvrda",
+        "Prompt": "Unesite tekst"
     },
     "months": {
         "1": "siječnja",
@@ -63,8 +63,8 @@
         "cancel": "Ne"
     },
     "prompt": {
-        "title": "Potaknuti",
-        "ok": "Ići"
+        "title": "Unesite tekst",
+        "ok": "Naprijed"
     },
     "imagepicker": {
         "errorReadingFile": "Pogreška pri čitanju datoteke",

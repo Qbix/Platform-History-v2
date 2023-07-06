@@ -23,8 +23,8 @@
         "No": "Yox",
         "OK": "tamam",
         "Alert": "Xəbərdarlıq",
-        "Confirm": "Təsdiq edin",
-        "Prompt": "Tələb"
+        "Confirm": "Təsdiq",
+        "Prompt": "Mətni daxil edin"
     },
     "months": {
         "1": "yanvar",
@@ -63,8 +63,8 @@
         "cancel": "Yox"
     },
     "prompt": {
-        "title": "Tələb",
-        "ok": "Get"
+        "title": "Mətni daxil edin",
+        "ok": "İrəli"
     },
     "imagepicker": {
         "errorReadingFile": "Faylın oxunması xətası",

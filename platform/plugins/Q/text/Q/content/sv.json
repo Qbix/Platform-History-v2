@@ -23,8 +23,8 @@
         "No": "Nej",
         "OK": "OK",
         "Alert": "Varna",
-        "Confirm": "Bekräfta",
-        "Prompt": "Prompt"
+        "Confirm": "Bekräftelse",
+        "Prompt": "Skriv text"
     },
     "months": {
         "1": "januari",
@@ -99,8 +99,8 @@
         "cancel": "Nej"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Gå"
+        "title": "Skriv text",
+        "ok": "Fram"
     },
     "tabs": {
         "more": "Mer",

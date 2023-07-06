@@ -23,8 +23,8 @@
         "No": "No",
         "OK": "DE ACUERDO",
         "Alert": "Alerta",
-        "Confirm": "Confirmar",
-        "Prompt": "Inmediato"
+        "Confirm": "Confirmación",
+        "Prompt": "Ingrese texto"
     },
     "months": {
         "1": "enero",
@@ -99,8 +99,8 @@
         "cancel": "No"
     },
     "prompt": {
-        "title": "Inmediato",
-        "ok": "Vamos"
+        "title": "Ingrese texto",
+        "ok": "Adelante"
     },
     "tabs": {
         "more": "más",

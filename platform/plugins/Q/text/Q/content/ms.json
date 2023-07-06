@@ -23,8 +23,8 @@
         "No": "Tidak",
         "OK": "okey",
         "Alert": "Amaran",
-        "Confirm": "sahkan",
-        "Prompt": "Prompt"
+        "Confirm": "Pengesahan",
+        "Prompt": "Masukkan Teks"
     },
     "months": {
         "1": "Januari",
@@ -99,8 +99,8 @@
         "cancel": "Tidak"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Pergi"
+        "title": "Masukkan Teks",
+        "ok": "ke hadapan"
     },
     "tabs": {
         "more": "lebih",

@@ -23,8 +23,8 @@
         "No": "Nru",
         "OK": "kollox sew",
         "Alert": "Twissija",
-        "Confirm": "Ikkonferma",
-        "Prompt": "Pront"
+        "Confirm": "Konferma",
+        "Prompt": "Daħħal it-Test"
     },
     "months": {
         "1": "Jannar",
@@ -99,8 +99,8 @@
         "cancel": "Nru"
     },
     "prompt": {
-        "title": "Pront",
-        "ok": "Mur"
+        "title": "Daħħal it-Test",
+        "ok": "Quddiem"
     },
     "tabs": {
         "more": "aktar",

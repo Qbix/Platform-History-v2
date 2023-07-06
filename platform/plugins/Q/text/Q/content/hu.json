@@ -23,8 +23,8 @@
         "No": "Nem",
         "OK": "rendben",
         "Alert": "Éber",
-        "Confirm": "megerősít",
-        "Prompt": "Gyors"
+        "Confirm": "Megerősítés",
+        "Prompt": "Írja be a szöveget"
     },
     "months": {
         "1": "január",
@@ -99,8 +99,8 @@
         "cancel": "Nem"
     },
     "prompt": {
-        "title": "Gyors",
-        "ok": "Megy"
+        "title": "Írja be a szöveget",
+        "ok": "Előre"
     },
     "tabs": {
         "more": "több",

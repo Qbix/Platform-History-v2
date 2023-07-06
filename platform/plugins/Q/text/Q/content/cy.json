@@ -23,8 +23,8 @@
         "No": "Nac ydw",
         "OK": "iawn",
         "Alert": "Rhybudd",
-        "Confirm": "Cadarnhau",
-        "Prompt": "Yn brydlon"
+        "Confirm": "Cadarnhad",
+        "Prompt": "Rhowch Testun"
     },
     "months": {
         "1": "Ionawr",
@@ -99,8 +99,8 @@
         "cancel": "Nac ydw"
     },
     "prompt": {
-        "title": "Yn brydlon",
-        "ok": "Ewch"
+        "title": "Rhowch Testun",
+        "ok": "Ymlaen"
     },
     "tabs": {
         "more": "mwy",

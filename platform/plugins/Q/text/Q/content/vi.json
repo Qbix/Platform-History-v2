@@ -23,8 +23,8 @@
         "No": "Không",
         "OK": "ĐƯỢC RỒI",
         "Alert": "Báo động",
-        "Confirm": "Xác nhận",
-        "Prompt": "Lời nhắc"
+        "Confirm": "xác nhận",
+        "Prompt": "Nhập văn bản"
     },
     "months": {
         "1": "Tháng một",
@@ -99,8 +99,8 @@
         "cancel": "Không"
     },
     "prompt": {
-        "title": "Lời nhắc",
-        "ok": "Đi"
+        "title": "Nhập văn bản",
+        "ok": "Phía trước"
     },
     "tabs": {
         "more": "hơn",

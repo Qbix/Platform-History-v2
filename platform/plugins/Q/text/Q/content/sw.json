@@ -23,8 +23,8 @@
         "No": "Hapana",
         "OK": "sawa",
         "Alert": "Tahadhari",
-        "Confirm": "Thibitisha",
-        "Prompt": "Haraka"
+        "Confirm": "Uthibitisho",
+        "Prompt": "Ingiza Maandishi"
     },
     "months": {
         "1": "Januari",
@@ -99,8 +99,8 @@
         "cancel": "Hapana"
     },
     "prompt": {
-        "title": "Haraka",
-        "ok": "Nenda"
+        "title": "Ingiza Maandishi",
+        "ok": "Mbele"
     },
     "tabs": {
         "more": "zaidi",

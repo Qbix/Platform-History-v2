@@ -23,8 +23,8 @@
         "No": "Non",
         "OK": "Ok",
         "Alert": "Alerta",
-        "Confirm": "Confirmar",
-        "Prompt": "Aviso"
+        "Confirm": "Confirmación",
+        "Prompt": "Introduce texto"
     },
     "months": {
         "1": "xaneiro",
@@ -99,8 +99,8 @@
         "cancel": "Non"
     },
     "prompt": {
-        "title": "Aviso",
-        "ok": "Vaia"
+        "title": "Introduce texto",
+        "ok": "Adiante"
     },
     "tabs": {
         "more": "máis",

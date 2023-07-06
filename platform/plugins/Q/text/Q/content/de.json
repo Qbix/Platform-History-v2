@@ -23,8 +23,8 @@
         "No": "Nein",
         "OK": "OK",
         "Alert": "Alarm",
-        "Confirm": "Bestätigen",
-        "Prompt": "Prompt"
+        "Confirm": "Bestätigung",
+        "Prompt": "Text eingeben"
     },
     "months": {
         "1": "Januar",
@@ -99,8 +99,8 @@
         "cancel": "Nein"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "gehen"
+        "title": "Text eingeben",
+        "ok": "Nach vorne"
     },
     "tabs": {
         "more": "mehr",

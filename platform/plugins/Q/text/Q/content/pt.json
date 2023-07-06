@@ -23,8 +23,8 @@
         "No": "Não",
         "OK": "OK",
         "Alert": "Alerta",
-        "Confirm": "confirme",
-        "Prompt": "Incitar"
+        "Confirm": "Confirmação",
+        "Prompt": "Digite o texto"
     },
     "months": {
         "1": "Janeiro",
@@ -99,8 +99,8 @@
         "cancel": "Não"
     },
     "prompt": {
-        "title": "Mensagem",
-        "ok": "Vai"
+        "title": "Digite o texto",
+        "ok": "Avançar"
     },
     "tabs": {
         "more": "mais",

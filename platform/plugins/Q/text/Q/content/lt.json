@@ -23,8 +23,8 @@
         "No": "Nr",
         "OK": "Gerai",
         "Alert": "Budrus",
-        "Confirm": "Patvirtinti",
-        "Prompt": "Raginimas"
+        "Confirm": "Patvirtinimas",
+        "Prompt": "Įveskite tekstą"
     },
     "months": {
         "1": "sausio mėn",
@@ -99,8 +99,8 @@
         "cancel": "Nr"
     },
     "prompt": {
-        "title": "Raginimas",
-        "ok": "Eik"
+        "title": "Įveskite tekstą",
+        "ok": "Persiųsti"
     },
     "tabs": {
         "more": "daugiau",

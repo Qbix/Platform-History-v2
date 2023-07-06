@@ -23,8 +23,8 @@
         "No": "Ez",
         "OK": "Ados",
         "Alert": "Alerta",
-        "Confirm": "Berretsi",
-        "Prompt": "Galdera"
+        "Confirm": "Berrespena",
+        "Prompt": "Sartu testua"
     },
     "months": {
         "1": "Urtarrila",
@@ -63,8 +63,8 @@
         "cancel": "Ez"
     },
     "prompt": {
-        "title": "Galdera",
-        "ok": "Zoaz"
+        "title": "Sartu testua",
+        "ok": "Aurrera"
     },
     "imagepicker": {
         "errorReadingFile": "Errore bat gertatu da fitxategia irakurtzean",

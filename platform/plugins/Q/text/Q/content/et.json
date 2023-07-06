@@ -23,8 +23,8 @@
         "No": "Ei",
         "OK": "Okei",
         "Alert": "Hoiatus",
-        "Confirm": "Kinnita",
-        "Prompt": "Viip"
+        "Confirm": "Kinnitamine",
+        "Prompt": "Sisesta tekst"
     },
     "months": {
         "1": "jaanuaril",
@@ -99,8 +99,8 @@
         "cancel": "Ei"
     },
     "prompt": {
-        "title": "Viip",
-        "ok": "Mine"
+        "title": "Sisesta tekst",
+        "ok": "Edasi"
     },
     "tabs": {
         "more": "rohkem",

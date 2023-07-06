@@ -23,8 +23,8 @@
         "No": "No",
         "OK": "D&#39;acord",
         "Alert": "Alerta",
-        "Confirm": "Confirmeu",
-        "Prompt": "Avís"
+        "Confirm": "Confirmació",
+        "Prompt": "Introduïu text"
     },
     "months": {
         "1": "gener",
@@ -63,8 +63,8 @@
         "cancel": "No"
     },
     "prompt": {
-        "title": "Avís",
-        "ok": "Vés"
+        "title": "Introduïu text",
+        "ok": "Endavant"
     },
     "imagepicker": {
         "errorReadingFile": "S&#39;ha produït un error en llegir el fitxer",

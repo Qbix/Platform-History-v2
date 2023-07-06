@@ -23,8 +23,8 @@
         "No": "nie",
         "OK": "OK",
         "Alert": "Upozornenie",
-        "Confirm": "Potvrďte",
-        "Prompt": "Prompt"
+        "Confirm": "Potvrdenie",
+        "Prompt": "Zadajte text"
     },
     "months": {
         "1": "januára",
@@ -99,8 +99,8 @@
         "cancel": "nie"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Choď"
+        "title": "Zadajte text",
+        "ok": "Vpred"
     },
     "tabs": {
         "more": "viac",

@@ -23,8 +23,8 @@
         "No": "št",
         "OK": "v redu",
         "Alert": "Opozorilo",
-        "Confirm": "Potrdi",
-        "Prompt": "Poziv"
+        "Confirm": "Potrditev",
+        "Prompt": "Vnesite besedilo"
     },
     "months": {
         "1": "januarja",
@@ -99,8 +99,8 @@
         "cancel": "št"
     },
     "prompt": {
-        "title": "Poziv",
-        "ok": "Pojdi"
+        "title": "Vnesite besedilo",
+        "ok": "Naprej"
     },
     "tabs": {
         "more": "več",

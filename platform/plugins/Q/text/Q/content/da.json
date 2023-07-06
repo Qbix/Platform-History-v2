@@ -23,8 +23,8 @@
         "No": "Ingen",
         "OK": "Okay",
         "Alert": "Alert",
-        "Confirm": "Bekræfte",
-        "Prompt": "Hurtig"
+        "Confirm": "Bekræftelse",
+        "Prompt": "Indtast tekst"
     },
     "months": {
         "1": "januar",
@@ -63,8 +63,8 @@
         "cancel": "Ingen"
     },
     "prompt": {
-        "title": "Hurtig",
-        "ok": "Gå"
+        "title": "Indtast tekst",
+        "ok": "Frem"
     },
     "imagepicker": {
         "errorReadingFile": "Fejl ved læsning af fil",

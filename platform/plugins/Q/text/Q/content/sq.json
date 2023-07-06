@@ -23,8 +23,8 @@
         "No": "Nr",
         "OK": "Ne rregull",
         "Alert": "Alarmi",
-        "Confirm": "Konfirmo",
-        "Prompt": "Prompt"
+        "Confirm": "Konfirmimi",
+        "Prompt": "Futni Tekstin"
     },
     "months": {
         "1": "janar",
@@ -63,8 +63,8 @@
         "cancel": "Nr"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Shkoni"
+        "title": "Futni Tekstin",
+        "ok": "Përpara"
     },
     "imagepicker": {
         "errorReadingFile": "Gabim gjatë leximit të skedarit",

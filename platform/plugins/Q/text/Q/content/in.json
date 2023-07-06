@@ -23,8 +23,8 @@
         "No": "Tidak",
         "OK": "OKE",
         "Alert": "Peringatan",
-        "Confirm": "Mengonfirmasi",
-        "Prompt": "Mengingatkan"
+        "Confirm": "Konfirmasi",
+        "Prompt": "Masukkan teks"
     },
     "months": {
         "1": "Januari",
@@ -63,8 +63,8 @@
         "cancel": "Tidak"
     },
     "prompt": {
-        "title": "Cepat",
-        "ok": "Pergi"
+        "title": "Masukkan teks",
+        "ok": "Maju"
     },
     "imagepicker": {
         "errorReadingFile": "Kesalahan membaca file",

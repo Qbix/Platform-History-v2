@@ -23,8 +23,8 @@
         "No": "Geen",
         "OK": "OK",
         "Alert": "Waarskuwing",
-        "Confirm": "Bevestig",
-        "Prompt": "Prompt"
+        "Confirm": "Bevestiging",
+        "Prompt": "Voer teks in"
     },
     "months": {
         "1": "Januarie",
@@ -63,8 +63,8 @@
         "cancel": "Geen"
     },
     "prompt": {
-        "title": "Vinnig",
-        "ok": "Gaan"
+        "title": "Voer teks in",
+        "ok": "Vorentoe"
     },
     "imagepicker": {
         "errorReadingFile": "Kon nie lêer lees nie",

@@ -23,8 +23,8 @@
         "No": "Ne",
         "OK": "OK",
         "Alert": "Upozornění",
-        "Confirm": "Potvrdit",
-        "Prompt": "Výzva"
+        "Confirm": "potvrzení",
+        "Prompt": "Zadejte text"
     },
     "months": {
         "1": "leden",
@@ -63,8 +63,8 @@
         "cancel": "Ne"
     },
     "prompt": {
-        "title": "Výzva",
-        "ok": "Jít"
+        "title": "Zadejte text",
+        "ok": "Vpřed"
     },
     "imagepicker": {
         "errorReadingFile": "Chyba při čtení souboru",

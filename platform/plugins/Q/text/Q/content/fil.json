@@ -23,8 +23,8 @@
         "No": "Hindi",
         "OK": "OK",
         "Alert": "Alerto",
-        "Confirm": "Kumpirmahin",
-        "Prompt": "Prompt"
+        "Confirm": "Kumpirmasyon",
+        "Prompt": "Ipasok ang Teksto"
     },
     "months": {
         "1": "Enero",
@@ -63,8 +63,8 @@
         "cancel": "Hindi"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Pumunta"
+        "title": "Ipasok ang Teksto",
+        "ok": "Pasulong"
     },
     "imagepicker": {
         "errorReadingFile": "Error sa pagbabasa ng file",

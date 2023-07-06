@@ -23,8 +23,8 @@
         "No": "Níl",
         "OK": "ceart go leor",
         "Alert": "Airdeall",
-        "Confirm": "Deimhnigh",
-        "Prompt": "Leid"
+        "Confirm": "Daingniú",
+        "Prompt": "Iontráil Téacs"
     },
     "months": {
         "1": "Eanáir",
@@ -99,8 +99,8 @@
         "cancel": "Níl"
     },
     "prompt": {
-        "title": "Leid",
-        "ok": "Téigh"
+        "title": "Iontráil Téacs",
+        "ok": "Ar aghaidh"
     },
     "tabs": {
         "more": "níos mó",

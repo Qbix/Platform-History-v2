@@ -23,8 +23,8 @@
         "No": "Nee",
         "OK": "OK",
         "Alert": "Alarm",
-        "Confirm": "Bevestigen",
-        "Prompt": "Snel"
+        "Confirm": "Bevestiging",
+        "Prompt": "Tekst invoeren"
     },
     "months": {
         "1": "januari",
@@ -63,8 +63,8 @@
         "cancel": "Nee"
     },
     "prompt": {
-        "title": "Snel",
-        "ok": "Gaan"
+        "title": "Tekst invoeren",
+        "ok": "Vooruit"
     },
     "imagepicker": {
         "errorReadingFile": "Fout bij lezen bestand",

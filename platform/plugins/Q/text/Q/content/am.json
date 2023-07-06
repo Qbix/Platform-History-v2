@@ -23,8 +23,8 @@
         "No": "አይ",
         "OK": "እሺ",
         "Alert": "ማንቂያ",
-        "Confirm": "አረጋግጥ",
-        "Prompt": "አፋጣኝ"
+        "Confirm": "ማረጋገጫ",
+        "Prompt": "ጽሑፍ ያስገቡ"
     },
     "months": {
         "1": "ጥር",
@@ -63,8 +63,8 @@
         "cancel": "አይ"
     },
     "prompt": {
-        "title": "አፋጣኝ",
-        "ok": "ሂድ"
+        "title": "ጽሑፍ ያስገቡ",
+        "ok": "ወደፊት"
     },
     "imagepicker": {
         "errorReadingFile": "ፋይል ማንበብ ላይ ስህተት",

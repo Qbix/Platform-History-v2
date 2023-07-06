@@ -23,8 +23,8 @@
         "No": "Numara",
         "OK": "TAMAM",
         "Alert": "Uyarı",
-        "Confirm": "Onaylamak",
-        "Prompt": "Çabuk"
+        "Confirm": "Onayla",
+        "Prompt": "Metni Girin"
     },
     "months": {
         "1": "Ocak ayı",
@@ -99,8 +99,8 @@
         "cancel": "Numara"
     },
     "prompt": {
-        "title": "Çabuk",
-        "ok": "Gitmek"
+        "title": "Metni Girin",
+        "ok": "İleri"
     },
     "tabs": {
         "more": "daha fazla",

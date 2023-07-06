@@ -23,8 +23,8 @@
         "No": "Ei",
         "OK": "OK",
         "Alert": "Varoitus",
-        "Confirm": "Vahvistaa",
-        "Prompt": "Kehote"
+        "Confirm": "Vahvistus",
+        "Prompt": "Kirjoita teksti"
     },
     "months": {
         "1": "tammikuu",
@@ -99,8 +99,8 @@
         "cancel": "Ei"
     },
     "prompt": {
-        "title": "Kehote",
-        "ok": "Mennä"
+        "title": "Kirjoita teksti",
+        "ok": "Eteenpäin"
     },
     "tabs": {
         "more": "lisää",

@@ -23,8 +23,8 @@
         "No": "Nei",
         "OK": "Allt í lagi",
         "Alert": "Viðvörun",
-        "Confirm": "Staðfesta",
-        "Prompt": "Hvetja"
+        "Confirm": "Staðfesting",
+        "Prompt": "Sláðu inn texta"
     },
     "months": {
         "1": "janúar",
@@ -99,8 +99,8 @@
         "cancel": "Nei"
     },
     "prompt": {
-        "title": "Hvetja",
-        "ok": "Farðu"
+        "title": "Sláðu inn texta",
+        "ok": "Áfram"
     },
     "tabs": {
         "more": "meira",
