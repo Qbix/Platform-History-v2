@@ -9,7 +9,6 @@
 		"node": ">= 0.6.0"
 	},
 	"dependencies": {
-		"nopp": "^1.0.2",
 		"@tensorflow-models/face-landmarks-detection": "0.0.2",
 		"@tensorflow/tfjs-backend-webgl": "^2.6.0",
 		"@tensorflow/tfjs-core": "^2.6.0",
