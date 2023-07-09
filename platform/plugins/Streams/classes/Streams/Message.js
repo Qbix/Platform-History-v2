@@ -218,8 +218,8 @@ Streams_Message.post = function (fields, callback)
 		var results = params[""][1];
 		var stream = Streams.Stream.construct(results[5][0], true);
 		var message = Streams.Message.construct(results[6][0]);
-		Streams.Stream.emit('post', stream, f.byUserId, message, stream);
-		callback && callback.call(stream, null, f.byUserId, message);
+		Streams.Stream.emit('post', stream, message, stream);
+		callback && callback.call(stream, null, message);
 	});
 };
 
