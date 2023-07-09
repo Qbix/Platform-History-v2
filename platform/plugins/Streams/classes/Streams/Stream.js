@@ -1461,7 +1461,7 @@ Sp.post = function (byUserId, fields, callback) {
 		publisherId: this.fields.publisherId,
 		streamName: this.fields.name,
 		byUserId: byUserId
-	}, fields), byUserId);
+	}, fields));
 };
 
 /**
