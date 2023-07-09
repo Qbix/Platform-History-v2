@@ -1449,7 +1449,7 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
  * @param callback=null {function}
  */
 Sp.post = function (byUserId, fields, callback) {
-	if (typeof asUserId !== 'string') {
+	if (typeof byUserId !== 'string') {
 		callback = fields;
 		fields = byUserId;
 		asUserId = fields && fields.byUserId;
