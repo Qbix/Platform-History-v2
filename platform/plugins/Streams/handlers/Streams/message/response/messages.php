@@ -2,6 +2,9 @@
 
 function Streams_message_response_messages()
 {
+	if (isset(Streams::$cache['extras'])) {
+		Q_Response::setSlot('extras', Streams::$cache['extras']);
+	}
 	if (isset(Streams::$cache['message'])) {
 		$message = Streams::$cache['message'];
 		return Db::exportArray(array($message->ordinal => $message));

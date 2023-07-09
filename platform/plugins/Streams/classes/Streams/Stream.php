@@ -2041,12 +2041,15 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {integer} [options.max] Maximum ordinal of the message to select to (inclusive). Defaults to maximum ordinal of existing messages (if any).
 	 *   Can also be negative, then the value will be substracted from maximum number of existing messages and +1 will be added
 	 *   to guarantee that $max = -1 means highest message ordinal.
-	 * @param {integer} [options.limit=100] Number of the messages to be selected.
+	 * @param {integer} [options.limit=100] Maximum number of messages to select and return.
+	 *   If min + limit < (max || messageCount) then the whole range of messages won't be returned.
+	 *   If ascending, messages with ordinals closer to min are returned, otherwise closer to max.
 	 * @param {integer} [options.ascending] Sorting of fetched messages by ordinal. If true, sorting is ascending, if false - descending.
-	 *   Defaults to true, but in case if 'min' option not given and only 'max' and 'limit' are given, we assuming
+	 *   Defaults to true, but in case if 'min' option not given and only 'max' and 'limit' are given, we are assuming
 	 *   fetching in reverse order, so 'ascending' will default to false.
 	 * @param {integer} [options.type] Optional string specifying the particular type of messages to get
-	 * @param {boolean} [$options.skipLimiting=false] Pass true here to not cut the limit off by the getMessagesLimit from config. It's here to protect against excessively large queries.
+	 * @param {boolean} [$options.skipLimiting=false] Pass true here to not cut the limit off by the getMessagesLimit from config.
+	 *   Be careful! The global limit is usually enforced to protect against excessively large queries.
 	 * @param {boolean} [$options.updateSeen=false] Pass true here to update the streams_participant.seenOrdinal, if any, with the latest ordinal
 	 * @return {array} Returns an array of ($ordinal => Streams_Message) pairs.
 	 */

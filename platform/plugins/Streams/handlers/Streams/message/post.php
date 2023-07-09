@@ -20,6 +20,12 @@
  */
 
 function Streams_message_post () {
+
+	if (empty($_REQUEST['type'])) {
+		throw new Q_Exception_RequiredField(array('field' => 'type'), 'type');
+	}
+	$type = $_REQUEST['type'];
+
 	$user        = Users::loggedInUser(true);
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName  = Streams::requestedName(true);
@@ -48,11 +54,6 @@ function Streams_message_post () {
 		throw new Streams_Exception_NoSuchStream();
 	}
 	$stream = reset($streams);
-	if (empty($_REQUEST['type'])) {
-		throw new Q_Exception_RequiredField(array('field' => 'type'), 'type');
-	}
-
-	$type = $_REQUEST['type'];
 	if (!Streams_Stream::getConfigField($stream->type, "messages", $type, false)) {
 		throw new Q_Exception("This app doesn't support directly posting messages of type '$type' for streams of type '{$stream->type}'");
 	}
@@ -67,6 +68,13 @@ function Streams_message_post () {
 		$streamName,
 		$_REQUEST
 	);
+	
+	$streamType = $stream->type;
+	$messageCount = $stream->messageCount;
+	Streams::$cache['extras'] = compact(
+		'publisherId', 'streamName', 'streamType', 'messageCount'
+	);
+
 	if (is_array($result)) {
 		Streams::$cache['messages'] = $result;		
 	} else {

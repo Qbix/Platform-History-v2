@@ -164,6 +164,7 @@ class Streams_Message extends Base_Streams_Message
 		}
 		
 		// Start posting messages, publisher by publisher
+		$dbtime = Db::toDateTime(Streams::db()->getCurrentTimestamp());
 		$eventParams = array();
 		$posted = array();
 		$streams = array();
@@ -218,8 +219,8 @@ class Streams_Message extends Base_Streams_Message
 					$message = new Streams_Message();
 					$message->publisherId = $publisherId;
 					$message->streamName = $streamName;
-					$message->insertedTime = new Db_Expression("CURRENT_TIMESTAMP");
-					$message->sentTime = new Db_Expression("CURRENT_TIMESTAMP");
+					$message->insertedTime = $dbtime;
+					$message->sentTime = $dbtime;
 					$message->byUserId = $asUserId;
 					$message->byClientId = $byClientId ? substr($byClientId, 0, 31) : '';
 					$message->type = $type;
@@ -366,7 +367,7 @@ class Streams_Message extends Base_Streams_Message
 				"streams" => Q::json_encode(Db::exportArray($streams, array("skipAccess" => true)))
 			));
 		}
-		
+
 		return array($posted, $streams);
 	}
 	
