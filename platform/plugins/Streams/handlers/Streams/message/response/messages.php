@@ -12,7 +12,7 @@ function Streams_message_response_messages()
 	
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
-	$streamType = Streams::requestedMessageType();
+	$messageType = Streams::requestedMessageType();
 	$withMessageTotals = Q::ifset($_REQUEST, 'withMessageTotals', null);
 	if ($withMessageTotals and !is_array($withMessageTotals)) {
 		throw new Q_Exception_WrongType(array('withMessageTotals' => 'array'));
@@ -24,7 +24,7 @@ function Streams_message_response_messages()
 	if (!$stream->testReadLevel('messages')) {
 		throw new Users_Exception_NotAuthorized();
 	}
-	$maxLimit = Streams_Stream::getConfigField($streamType, 'getMessagesLimit', 100);
+	$maxLimit = Streams_Stream::getConfigField($messageType, 'getMessagesLimit', 100);
 	$limit = min($maxLimit, Q::ifset($_REQUEST, 'limit', $maxLimit));
 	if (isset($_REQUEST['ordinal'])) {
 		$min = $_REQUEST['ordinal'];
@@ -42,6 +42,7 @@ function Streams_message_response_messages()
 	if ($withMessageTotals) {
 		Q_Response::setSlot('messageTotals', $stream->get('messageTotals'));
 	}
+	$streamType = $stream->type;
 	Q_Response::setSlot('extras', compact(
 		'publisherId', 'streamName', 'streamType', 'messageCount'
 	));
