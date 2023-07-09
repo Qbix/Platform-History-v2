@@ -408,7 +408,7 @@ Streams.listen = function (options, servers) {
 	}
 
 	// Handle messages being posted to streams
-	Streams.Stream.on('post', function (stream, byUserId, msg, clientId) {
+	Streams.Stream.on('post', function (stream, msg, clientId) {
 		if (!stream) {
 			return console.error("Streams.Stream.on POST: invalid stream!!!");
 		}
@@ -417,8 +417,8 @@ Streams.listen = function (options, servers) {
 			_messageHandlers[msg.fields.type].call(this, msg);
 		}
 
-		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg);
-		stream.notifyParticipants('Streams/post', byUserId, msg);
+		Streams.Stream.emit('post/'+msg.fields.type, stream, msg);
+		stream.notifyParticipants('Streams/post', msg);
 	});
 
 	/**
@@ -529,7 +529,7 @@ Streams.listen = function (options, servers) {
 				}
 				var ephemeral = new Streams.Ephemeral(payload, Date.now() / 1000);
 				this.notifyParticipants(
-					'Streams/ephemeral', byUserId, ephemeral, dontNotifyObservers, fn
+					'Streams/ephemeral', ephemeral, dontNotifyObservers, fn
 				);
 			});
 		});
@@ -671,7 +671,7 @@ function Streams_request_handler (req, res, next) {
 					+ '"}'
 				);
 			}
-			Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
+			Streams.Stream.emit('post', stream, msg, clientId);
 			break;
 		case 'Streams/Message/postMessages':
 			posted = JSON.parse(parsed.posted);
@@ -691,7 +691,7 @@ function Streams_request_handler (req, res, next) {
 						+ '"}'
 					);
 				}
-				Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
+				Streams.Stream.emit('post', stream, msg, clientId);
 			}
 			break;
 		case 'Streams/Stream/invite':

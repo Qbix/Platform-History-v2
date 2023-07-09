@@ -416,13 +416,12 @@ Sp.ephemeral = function _Stream_ephemeral (
  * Also sends it to observers unless dontNotifyObservers is true.
  * @method notifyParticipants
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {String} byUserId User who posted the event or ephemeral
  * @param {Streams.Message|Streams.Ephemeral} messageOrEphemeral can be a Streams.Message or an Streams.Ephemeral
  * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
  * @param {Function} [callback] Optional, receives receives (err, participants)
  * @return {Boolean} Whether the system went on to get and notify participants
  */
-Sp.notifyParticipants = function (event, byUserId, messageOrEphemeral, dontNotifyObservers, callback) {
+Sp.notifyParticipants = function (event, messageOrEphemeral, dontNotifyObservers, callback) {
 	var fields = this.fields;
 	var stream = this;
 
@@ -430,16 +429,10 @@ Sp.notifyParticipants = function (event, byUserId, messageOrEphemeral, dontNotif
 	
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		var userIds = Object.keys(participants) || [];
-		if (byUserId) {
-			var index = userIds.indexOf(byUserId);
-			if (index > 0) {
-				userIds = userIds.splice(index, 1).concat(userIds);
-			}
-		}
 		for (var i = 0; i < userIds.length; i++) {
 			var userId = userIds[i];
 			var participant = participants[userId];
-			stream.notify(participant, event, messageOrEphemeral, byUserId, function(err) {
+			stream.notify(participant, event, messageOrEphemeral, function(err) {
 				callback && callback(err, participants);
 				if (!err) return;
 				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
@@ -450,7 +443,7 @@ Sp.notifyParticipants = function (event, byUserId, messageOrEphemeral, dontNotif
 			});
 		}
 		if (!dontNotifyObservers) {
-			stream.notifyObservers(event, byUserId, messageOrEphemeral);
+			stream.notifyObservers(event, messageOrEphemeral);
 		}
 	});
 	return true;
@@ -462,17 +455,16 @@ Sp.notifyParticipants = function (event, byUserId, messageOrEphemeral, dontNotif
  * This can include socket clients that are not associated to any user.
  * @method notifyObservers
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {String} byUserId User who initiated the event
  * @param {Streams_Message|Steams_Ephemeral} messageOrEphemeral pass a message with instructions or ephemeral with payload
  */
-Sp.notifyObservers = function (event, byUserId, messageOrEphemeral) {
+Sp.notifyObservers = function (event, messageOrEphemeral) {
 	var stream = this;
 	var fields = this.fields;
 	Streams.getObservers(fields.publisherId, fields.name, function (observers) {
 		var p = Object.getPrototypeOf(messageOrEphemeral);
 		var f;
 		for (var clientId in observers) {
-			observers[clientId].emit(event, messageOrEphemeral.getFields(), byUserId, {
+			observers[clientId].emit(event, messageOrEphemeral.getFields(), {
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
 				streamType: stream.fields.type,
@@ -1245,11 +1237,10 @@ Sp.unsubscribe = function(options, callback) {
  * @method notify
  * @param {Streams_Participant} participant The stream participant to notify
  * @param {String} event The type of Streams event, such as "post" or "remove"
- * @param {String} byUserId The user who initiated the message
  * @param {Streams_Message|Steams_Ephemeral} messageOrEphemeral pass a message with instructions or ephemeral with payload
  * @param {Function} [callback] This would be called after all the notifying was done
  */
-Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback) {
+Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 	var stream = this;
 	var userId = participant.fields.userId;
 	function _notify(err, access) {
@@ -1280,7 +1271,7 @@ Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback)
 			var p = Object.getPrototypeOf(messageOrEphemeral);
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
-				Users.Socket.emitToUser(userId, event, messageOrEphemeral.getFields(), byUserId, {
+				Users.Socket.emitToUser(userId, event, messageOrEphemeral.getFields(), {
 					publisherId: stream.fields.publisherId,
 					streamName: stream.fields.name,
 					streamType: stream.fields.type,
@@ -1452,25 +1443,25 @@ Sp.notify = function(participant, event, messageOrEphemeral, byUserId, callback)
  * Currently this is not nearly as robust as the PHP method,
  * and doesn't perform any access checks, so it is only
  * meant to be called internally.
- * @param {String} asUserId
+ * @param {String} byUserId
  *  The user to post as
  * @param fields {Object}
  * @param callback=null {function}
  */
-Sp.post = function (asUserId, fields, callback) {
+Sp.post = function (byUserId, fields, callback) {
 	if (typeof asUserId !== 'string') {
 		callback = fields;
-		fields = asUserId;
-		asUserId = Q.getObject('byUserId', fields);
-		if (!asUserId) {
-			throw new Q.Exception("Streams.Stream.prototype.post needs asUserId");
+		fields = byUserId;
+		asUserId = fields && fields.byUserId;
+		if (!byUserId) {
+			throw new Q.Exception("Streams.Stream.prototype.post needs byUserId");
 		}
 	}
 	Streams.Message.post(Q.extend({
 		publisherId: this.fields.publisherId,
 		streamName: this.fields.name,
-		byUserId: asUserId
-	}, fields), callback);
+		byUserId: byUserId
+	}, fields), byUserId);
 };
 
 /**

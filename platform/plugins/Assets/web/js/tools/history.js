@@ -46,12 +46,13 @@ Q.Tool.define("Assets/history", function (options) {
 
 	// listen Assets/user/credits stream to update history online
 	Q.Streams.get(Q.Users.loggedInUser.id, "Assets/user/credits", function () {
-		this.onMessage('Assets/credits/bought').set(tool.refresh.bind(tool), tool);
-		this.onMessage('Assets/credits/received').set(tool.refresh.bind(tool), tool);
-		this.onMessage('Assets/credits/sent').set(tool.refresh.bind(tool), tool);
-		this.onMessage('Assets/credits/spent').set(tool.refresh.bind(tool), tool);
-		this.onMessage('Assets/credits/granted').set(tool.refresh.bind(tool), tool);
-		this.onMessage('Assets/credits/bonus').set(tool.refresh.bind(tool), tool);
+		var refresh = tool.refresh.bind(tool);
+		this.onMessage('Assets/credits/bought').set(refresh, tool);
+		this.onMessage('Assets/credits/received').set(refresh, tool);
+		this.onMessage('Assets/credits/sent').set(refresh, tool);
+		this.onMessage('Assets/credits/spent').set(refresh, tool);
+		this.onMessage('Assets/credits/granted').set(refresh, tool);
+		this.onMessage('Assets/credits/bonus').set(refresh, tool);
 	});
 
 	// generate table

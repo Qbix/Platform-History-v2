@@ -455,8 +455,10 @@
                 });
 
                 // set onMessage Streams/changed to change image or video or audio
-                stream.onMessage("Streams/changed").set(function (updatedStream, message) {
-                    tool.renderFromStream(updatedStream);
+                stream.onMessage("Streams/changed").set(function (message) {
+                    Q.Streams.get(message.publisherId, message.streamName, function () {
+                        tool.renderFromStream(this);
+                    });
                 }, [tool.id, Q.normalize(publisherId), Q.normalize(streamName.split("/").pop())].join("_"));
 
                 Q.handle(state.onRefresh, tool);

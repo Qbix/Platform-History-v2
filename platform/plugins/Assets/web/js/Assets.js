@@ -787,7 +787,8 @@
 							}
 
 							// listen Assets/user/credits stream for message
-							Streams.Stream.onMessage(Users.loggedInUser.id, 'Assets/user/credits', 'Assets/credits/bought').set(function(stream, message) {
+							Streams.Stream.onMessage(Users.loggedInUser.id, 'Assets/user/credits', 'Assets/credits/bought')
+							.set(function(message) {
 								if (token !== message.getInstruction('token')) {
 									return;
 								}
@@ -1818,7 +1819,7 @@
 					} catch (e) {}
 				}, 'Assets');
 
-				var _createNotice = function (stream, message) {
+				var _createNotice = function (message) {
 					// check if message already displayed
 					var messageId = message.getInstruction('messageId') || message.getInstruction('token');
 					if (Q.isEmpty(this.usedIds)) {

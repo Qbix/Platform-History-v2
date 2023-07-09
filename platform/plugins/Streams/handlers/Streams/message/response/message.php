@@ -32,5 +32,10 @@ function Streams_message_response_message()
 		throw new Users_Exception_NotAuthorized();
 	}
 	$messages = $stream->getMessages(@compact('type', 'min', 'limit'));
+	$streamType = $stream->type;
+	$messageCount = $stream->messageCount;
+	Q_Response::setSlot('extras', compact(
+		'publisherId', 'streamName', 'streamType', 'messageCount'
+	));
 	return !empty($messages) ? reset($messages)->exportArray() : null;
 }

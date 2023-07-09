@@ -56,7 +56,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		Q.Streams.retainWith(tool).get(publisherId, streamName);
 
 		// process message Streams/extra/changed
-		stream.onMessage('Streams/extra/changed').set(function (updatedStream, message) {
+		stream.onMessage('Streams/extra/changed').set(function (message) {
 			tool.updateContent(message.byUserId, message.content);
 		}, tool);
 

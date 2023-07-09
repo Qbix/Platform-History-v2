@@ -800,20 +800,26 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// new message arrived
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/chat/message')
-		.set(function (stream, message) {
-			state.stream = stream;
+		.set(function (message) {
+			Q.Streams.get(message.publisherId, message.streamName, function () {
+				state.stream = this;
+			});
 			tool.renderMessage(message);
 		}, tool);
 		// a new stream was related (including a call)
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
-		.set(function(stream, message) {
-			state.stream = stream;
+		.set(function(message) {
+			Q.Streams.get(message.publisherId, message.streamName, function () {
+				state.stream = this;
+			});
 			tool.renderMessage(message);
 		}, tool);
 		// a new stream was related (including a call)
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/unrelatedTo')
-		.set(function(stream, message) {
-			state.stream = stream;
+		.set(function(message) {
+			Q.Streams.get(message.publisherId, message.streamName, function () {
+				state.stream = this;
+			});
 			var instructions = JSON.parse(message.instructions);
 			var fromPublisherId = Q.getObject("fromPublisherId", instructions);
 			var fromStreamName = Q.getObject("fromStreamName", instructions);
@@ -833,23 +839,29 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// new user joined
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/joined')
-		.set(function(stream, message) {
-			state.stream = stream;
+		.set(function(message) {
+			Q.Streams.get(message.publisherId, message.streamName, function () {
+				state.stream = this;
+			});
 			var messages = tool.prepareMessages(message, 'join');
 			tool.renderNotification(Q.first(messages));
 		}, tool);
 
 		// new user left
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/left')
-		.set(function(stream, message) {
-			state.stream = stream;
+		.set(function(message) {
+			Q.Streams.get(message.publisherId, message.streamName, function () {
+				state.stream = this;
+			});
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
 		}, tool);
 
 		// new user left
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribed').set(function(stream, message) {
-			state.stream = stream;
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribed').set(function(message) {
+			Q.Streams.get(message.publisherId, message.streamName, function () {
+				state.stream = this;
+			});
 			$te.find('.Streams_chat_subscription').attr({
 				'data-subscribed': 'true'
 			})

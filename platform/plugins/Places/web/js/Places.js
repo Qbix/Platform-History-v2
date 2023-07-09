@@ -395,7 +395,7 @@ Places.Coordinates.from = function (data, callback) {
 		Q.extend(c, this.getAllAttributes());
 		if (data.updatedKey) {
 			this.onMessage('Places/location/updated')
-			.set(function (stream, message) {
+			.set(function (message) {
 				var instructions = message.getAllInstructions();
 				Q.extend(c, instructions);
 				Q.handle(c.onUpdated, c, arguments);

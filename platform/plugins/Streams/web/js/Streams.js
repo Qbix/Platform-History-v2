@@ -3287,7 +3287,7 @@ Sp.release = function _Stream_prototype_release () {
  * Retrieves a Streams.Message object, by using Message.get
  *
  * @method getMessage
- * @param {Number} ordinal the ordinal of the message
+ * @param {Number|Object} ordinal see Streams.Message.get documentation
  * @param {Function} callback arguments = (err) and this = the Streams.Message
  */
 Sp.getMessage = function _Stream_prototype_getMessage (ordinal, callback) {
@@ -3513,13 +3513,10 @@ Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
 /**
  * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
  * @event onEphemeral
- * @static
- * @param {String} [publisherId] id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [ephemeral] type of the ephemeral, pass "" for all types
+ * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
-Sp.onEphemeral = function _Stream_prototype_onEphemeral (messageType) {
-	return Stream.onEphemeral(this.fields.publisherId, this.fields.name, messageType);
+Sp.onEphemeral = function _Stream_prototype_onEphemeral (ephemeralType) {
+	return Stream.onEphemeral(this.fields.publisherId, this.fields.name, ephemeralType);
 };
 
 /**
@@ -4583,14 +4580,17 @@ Mp.seen = function _Message_seen (messageTotal) {
  * @param {Number} [ordinal.limit] Change the max number of messages to retrieve. If only max and limit are specified, messages are sorted by decreasing ordinal.
  * @param {String} [ordinal.type] the type of the messages, if you only need a specific type
  * @param {Boolean} [ordinal.ascending=false] whether to sort by ascending weight, otherwise sorts by descrending weight.
- * @param {Function} callback This receives two parameters. The first is the error.
+ * @param {Function} callback This receives three parameters. The first is the error.
  *   If ordinal was a Number, then the second parameter is the Streams.Message, as well as the "this" object.
  *   If ordinal was an Object, then the second parameter is a hash of { ordinal: Streams.Message } pairs
+ *   The third parameter is an object that contains publisherId, streamName, streamType, messageCount
  */
 Message.get = function _Message_get (publisherId, streamName, ordinal, callback) {
 	var slotName, criteria = {};
 	if (Q.typeOf(ordinal) === 'object') {
-		slotName = ordinal.withMessageTotals ? ['messages', 'messageTotals'] : ['messages'];
+		slotName = ordinal.withMessageTotals
+			? ['messages', 'messageTotals', 'extras']
+			: ['messages', 'extras'];
 		if (ordinal.min) {
 			criteria.min = parseInt(ordinal.min);
 		}
@@ -4602,7 +4602,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 		if ('type' in ordinal) criteria.type = ordinal.type;
 		if ('ascending' in ordinal) criteria.ascending = ordinal.ascending;
 	} else {
-		slotName = ['message'];
+		slotName = ['message', 'extras'];
 		criteria = parseInt(ordinal);
 	}
 
@@ -4635,10 +4635,10 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 				messages[ordinal] = message;
 			});
 			if (Q.isPlainObject(ordinal)) {
-				callback && callback.call(this, err, messages || null);
+				callback && callback.call(this, err, messages, data.extras);
 			} else {
 				var message = Q.first(messages);
-				callback && callback.call(message, err, message || null);
+				callback && callback.call(message, err, message || null, data.extras);
 			}
 		});
 	return true;
@@ -4829,7 +4829,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			Streams.get(publisherId, streamName);
 		}
 
-		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal}, function (err, messages) {
+		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
+		function (err, messages, extras) {
 			if (err) {
 				return Q.handle(callback, this, [null, err]);
 			}
@@ -4840,7 +4841,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			// until things settle down on the screen
 			ordinal = parseInt(ordinal);
 			Q.each(messages, function (ordinal, message) {
-				Users.Socket.onEvent('Streams/post').handle(message, messages);
+				Users.Socket.onEvent('Streams/post').handle(message, extras);
 			}, {ascending: true, numeric: true});
 
 			// if any new messages were encountered, updateMessageCache removed all the cached
@@ -6436,7 +6437,7 @@ Q.onInit.add(function _Streams_onInit() {
 		}
 
 		Q.Streams.onMessage('', '')
-		.set(function (stream, message) {
+		.set(function (message) {
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
 			var noticeOptions = notificationsAsNotice[messageType];
@@ -6747,8 +6748,8 @@ Q.onInit.add(function _Streams_onInit() {
 		);
 	});
 	
-	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, byUserId, streamInfo) {
-		Streams.get(streamInfo.publisherId, streamInfo.streamName, function (err) {
+	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, extras) {
+		Streams.get(extras.publisherId, extras.streamName, function (err) {
 			if (err) {
 				console.warn(Q.firstErrorMessage(err));
 				return;
@@ -6756,16 +6757,33 @@ Q.onInit.add(function _Streams_onInit() {
 
 			var stream = this;
 			var streamType = stream.fields.type;
-			var event = Streams.onEphemeral(streamType, ephemeral.type);
-			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
-			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, '');
-			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
-			event = Streams.Stream.onEphemeral(stream.fields.publisherId, stream.fields.name, ephemeral.type);
-			Q.handle(event, stream, [ephemeral, byUserId, streamInfo]);
+			var event = Q.getObject([streamType, ephemeral.type], _ephemeralHandlers);
+			var params = [ephemeral, extras];
+			Q.handle(event, Streams, params);
+			Q.each([ephemeral.publisherId, ''], function (i, publisherId) {
+				Q.each([ephemeral.streamName, ''], function (ordinal, streamName) {
+					Q.handle(
+						Q.getObject([publisherId, streamName, ordinal], _streamEphemeralHandlers),
+						Streams,
+						params
+					);
+					Q.handle(
+						Q.getObject([publisherId, streamName, ephemeral.type], _streamEphemeralHandlers),
+						Streams,
+						params
+					);
+					Q.handle(
+						Q.getObject([publisherId, streamName, ''], _streamEphemeralHandlers),
+						Streams,
+						params
+					);
+				});
+			});
 		});
 	});
 
-	Users.Socket.onEvent('Streams/post').set(function _Streams_post_handler (msg, messages) {
+	Users.Socket.onEvent('Streams/post')
+	.set(function _Streams_post_handler (msg, extras) {
 		if (!msg) {
 			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
 		}
@@ -6777,6 +6795,14 @@ Q.onInit.add(function _Streams_onInit() {
 		// Will return immediately if previous message is already cached
 		// (e.g. from a post or retrieving a stream, or because there was no cache yet)
 		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message);
+		if (ret == null) {
+			// there was no cache yet for the stream, so let's get it
+			// but what about latest message in order?
+			// and refreshing the stream that wasn't in cache?
+			// like in chat.js?
+			// THAT IS FOR TOMORROW!
+			Q.Streams.get(msg.publisherId, msg.streamName, _message);
+		}
 		function _message() {
 			var ptn = msg.publisherId+"\t"+msg.streamName;
 			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
@@ -6795,9 +6821,6 @@ Q.onInit.add(function _Streams_onInit() {
 				: Message.construct(msg, true);
 
 			Message.latest[ptn] = parseInt(msg.ordinal);
-			var cached = Streams.get.cache.get(
-				[msg.publisherId, msg.streamName]
-			);
 
 			// update fields.messageCount of cached stream
 			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
@@ -6827,7 +6850,7 @@ Q.onInit.add(function _Streams_onInit() {
 				_updateMessageCache(msg);
 
 				var latest = MTotal.latest(msg.publisherId, msg.streamName, msg.type);
-				var params = [stream, message, messages, latest];
+				var params = [message, extras, latest];
 
 				// Handlers for below events might call message.seen() to update latest messageTotals.
 				// Otherwise, if no one updated them, synchronously, fire an event.
@@ -6931,8 +6954,8 @@ Q.onInit.add(function _Streams_onInit() {
 				}
 
 				function _relationHandlers(handlers, msg, stream, fields) {
-					Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
-						Q.each([msg.streamName, ''], function (ordinal, streamName) {
+					Q.each([msg.publisherId, ''], function (i, publisherId) {
+						Q.each([msg.streamName, ''], function (j, streamName) {
 							if (handlers[publisherId] && handlers[publisherId][streamName]) {
 								Q.handle(
 									handlers[publisherId][streamName],
@@ -6948,23 +6971,10 @@ Q.onInit.add(function _Streams_onInit() {
 	}, 'Streams');
 	
 	function _handlers(streamType, msg, params) {
-		_messageHandlers[streamType] &&
-		_messageHandlers[streamType][msg.type] &&
-		Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
-
-		_messageHandlers[''] &&
-		_messageHandlers[''][msg.type] &&
-		Q.handle(_messageHandlers[''][msg.type], Streams, params);
-
-		_messageHandlers[streamType] &&
-		_messageHandlers[streamType][''] &&
-		Q.handle(_messageHandlers[streamType][''], Streams, params);
-
-		_messageHandlers[''] &&
-		_messageHandlers[''][''] &&
-		Q.handle(_messageHandlers[''][''], Streams, params);
-
-		Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
+		Q.handle(Q.getObject([streamType, msg.type], _messageHandlers), Streams, params);
+		Q.handle(Q.getObject(['', msg.type], _messageHandlers), Streams, params);
+		Q.handle(Q.getObject([streamType, ''], _messageHandlers), Streams, params);
+		Q.each([msg.publisherId, ''], function (i, publisherId) {
 			Q.each([msg.streamName, ''], function (ordinal, streamName) {
 				Q.handle(
 					Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
