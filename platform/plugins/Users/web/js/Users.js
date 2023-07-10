@@ -4262,10 +4262,11 @@
 		getWeb3Modal: function (appId) {
 			appId = appId || Q.info.app;
 			var wcOptions = {};
-			var rpc, infuraId;
-			if (rpc = Q.getObject(['web3', appId, 'providers', 'walletconnect', 'rpc'], Users.apps)) {
+			var rpc = Q.getObject(['web3', appId, 'providers', 'walletconnect', 'rpc'], Users.apps);
+			var infuraId = Q.getObject(['web3', appId, 'providers', 'walletconnect', 'infura', 'projectId'], Users.apps);
+			if (rpc) {
 				wcOptions.rpc = rpc;
-			} else if (infuraId = Q.getObject(['web3', appId, 'providers', 'walletconnect', 'infura', 'projectId'], Users.apps)) {
+			} else if (infuraId) {
 				wcOptions.infuraId = infuraId;
 			}
 			var providerOptions = {};
