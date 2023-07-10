@@ -45,6 +45,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
         send: function () {
             var tool = this;
             var state = this.state;
+            var $toolElement = $(tool.element);
 
             Q.Template.render("Assets/web3/transfer/send", {
                 recipientUserId: state.recipientUserId,
@@ -128,7 +129,11 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
                 tool.assetsWeb3BalanceTool = null;
                 if (!state.tokenInfo) {
+                    $toolElement.addClass("Q_disabled");
                     $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance").activate(function () {
+                        this.state.onRefresh.add(function () {
+                            $toolElement.removeClass("Q_disabled");
+                        }, tool);
                         tool.assetsWeb3BalanceTool = this;
                     });
                 }

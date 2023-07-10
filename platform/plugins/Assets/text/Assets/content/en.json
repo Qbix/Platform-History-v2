@@ -105,7 +105,7 @@
         "To": "to",
         "From": "from",
         "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
+        "HistoryEmpty": "No transactions yet",
         "PaymentFor": "Sent {{amount}} credits",
         "PaymentTo": "Sent {{amount}} credits",
         "PaymentToUser": "Sent {{amount}} credits",
