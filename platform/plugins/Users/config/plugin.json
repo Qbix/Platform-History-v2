@@ -361,19 +361,6 @@
 				"0x3": {
 					"name": "Ropsten"
 				},
-				"0x4": {
-					"name": "Rinkeby",
-					"publicRPC": "https://main-light.eth.linkpool.io/",
-					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
-					"rpcUrl": "https://rinkeby.infura.io/v3/{{infuraId}}",
-					"blockExplorerUrl": "https://rinkeby.etherscan.io/",
-					"abiUrl": "https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}",
-					"currency": {
-						"name": "Rinkeby Ethereum",
-						"symbol": "ETH",
-						"decimals": 18
-					}
-				},
 				"0x5": {
 					"name": "Goerli",
 					"publicRPC": "https://goerli-light.eth.linkpool.io/",
