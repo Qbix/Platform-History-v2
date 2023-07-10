@@ -15,11 +15,16 @@ var Users = Q.Users;
  */
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
+	tool.usingWeb3 = Q.getObject("apps.web3", Users);
 
-	Users.Web3.connect(function () {
-		Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
+	if (tool.usingWeb3) {
+		Users.Web3.connect(function () {
+			Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
+			tool.refresh();
+		});
+	} else {
 		tool.refresh();
-	});
+	}
 },
 
 { // default options here
@@ -44,12 +49,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				return Q.handle(callback, null, [address]);
 			});
 		};
-
-		_getWalletAddress(function (walletAddress) {
-			if (!ethers.utils.isAddress(walletAddress)) {
-				return Q.alert(tool.text.errors.WalletInvalid);
-			}
-
+		var _renderTemplate = function (walletAddress) {
 			Q.Template.render("Assets/web3/balance", {
 				chainId: state.chainId,
 				chains: Assets.Web3.chains
@@ -66,7 +66,19 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 					}).trigger("change");
 				}
 			});
-		});
+		};
+
+		if (tool.usingWeb3) {
+			_getWalletAddress(function (walletAddress) {
+				if (!ethers.utils.isAddress(walletAddress)) {
+					return Q.alert(tool.text.errors.WalletInvalid);
+				}
+
+				_renderTemplate(walletAddress);
+			});
+		} else {
+			_renderTemplate();
+		}
 	},
 	balanceOf: function (walletAddress, chainId) {
 		var tool = this;
