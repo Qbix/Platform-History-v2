@@ -10116,6 +10116,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									}
 								}
 								if (!found) {
+									Q.addStylesheet.loaded[e.href] = false;
 									Q.removeElement(e);
 								}
 							}
