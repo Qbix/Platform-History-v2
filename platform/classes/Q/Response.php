@@ -701,7 +701,7 @@ class Q_Response
 					}
 					$e = $v;
 				}
-				$options = Q_Config::get('Q', 'javascript', 'prettyPrintData', true)
+				$options = Q_Config::get('Q', 'javascripts', 'prettyPrintData', true)
 					? JSON_PRETTY_PRINT
 					: 0;
 				if (!empty($extend['Q'])) {
@@ -924,14 +924,15 @@ class Q_Response
 	 * @method addScript
 	 * @static
 	 * @param {string} $src
-
 	 * @param {string} [$slotName=null]
 	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.dontPreload=false]
 	 * @param {string} [$options.type='text/javascript']
 	 * @return {boolean} returns false if script was already added, else returns true
 	 */
 	static function addScript ($src, $slotName = null, $options = array())
 	{
+		$preload = isset($options['dontPreload']) ? !$options['dontPreload'] : true;
 		$type = isset($options['array']) ? $options['array'] : 'text/javascript';
 		/**
 		 * @event Q/response/addScript {before}
@@ -964,6 +965,14 @@ class Q_Response
 				return false; // already added
 		}
 		self::$scriptsForSlot[$slotName][] = @compact('src', 'type');
+
+		$src = Q_Html::themedUrl($src);
+		if (!Q_Request::isAjax()
+		and $preload and Q_Config::get('Q', 'javascripts', 'preload', null) === 'push'
+		and (!Q_Valid::url($src) || Q::startsWith($src, Q_Request::baseUrl()))) {
+			// the command below may fail because response body already started
+			@header("Link: $src; as=script; rel=preload", false);
+		}
 
 		return true;
 	}
@@ -1252,8 +1261,8 @@ class Q_Response
 		}
 
 		if (!Q_Request::isAjax()) {
-			$inline = Q_Config::get('Q', 'javascript', 'inline', false);
-			if ($inline == 'page') {
+			$preload = Q_Config::get('Q', 'javascripts', 'preload]', null);
+			if ($preload === 'inline') {
 				return self::scriptsInline($slotName, true);
 			}
 		}
@@ -1282,12 +1291,14 @@ class Q_Response
 	 * @param {string} $href
 	 * @param {string} [$slotName=null]
 	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.dontPreload=false]
 	 * @param {string} [$options.media='screen,print']
 	 * @param {string} [$options.type='text/css']
 	 * @return {boolean} returns false if a stylesheet with exactly the same parameters has already been added, else true.
 	 */
 	static function addStylesheet ($href, $slotName = null, $options = array())
 	{
+		$preload = isset($options['dontPreload']) ? !$options['dontPreload'] : true;
 		$media = isset($options['media']) ? $options['media'] : 'screen,print';
 		$type = isset($options['type']) ? $options['type'] : 'text/css';
 		/**
@@ -1327,7 +1338,14 @@ class Q_Response
 				return false;
 			}
 		}
+		$href = Q_Html::themedUrl($href);
 		self::$stylesheetsForSlot[$slotName][] = @compact('href', 'media', 'type');
+		if (!Q_Request::isAjax()
+		and $preload and Q_Config::get('Q', 'stylesheets', 'preload', null) === 'push'
+		and (!Q_Valid::url($href) || Q::startsWith($href, Q_Request::baseUrl()))) {
+			// the command below may fail because response body already started
+			@header("Link: $href; as=style; rel=preload", false);
+		}
 		return true;
 	}
 
@@ -1479,8 +1497,8 @@ class Q_Response
 			return '';
 		}
 		if (!Q_Request::isAjax()) {
-			$inline = Q_Config::get('Q', 'stylesheets', 'inline', false);
-			if ($inline == 'page') {
+			$preload = Q_Config::get('Q', 'stylesheets', 'preload', null);
+			if ($preload === 'inline') {
 				return self::stylesheetsInline($slotName, true);
 			}
 		}

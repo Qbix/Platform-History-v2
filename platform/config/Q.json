@@ -133,20 +133,20 @@
 			"userAgentInfo": ["formFactor", "platform", "version"],
 			"allowHijack": true
 		},
-		"javascript": {
+		"javascripts": {
 			"responseExtras": {
 				"{{Q}}/js/jquery-3.2.1.min.js": true,
 				"{{Q}}/js/handlebars-v4.0.10.min.js": true,
 				"{{Q}}/js/Q.js": true
 			},
 			"prettyPrintData": true,
-			"inline": null
+			"preload": "push" /* can be "inline", "push" or null */
 		},
 		"stylesheets": {
 			"responseExtras": {
 				"{{Q}}/css/Q.css": true
 			},
-			"inline": null
+			"preload": "push" /* can be "inline", "push" or null */
 		},
 		"environments": {
 			"*": {
