@@ -76,7 +76,7 @@ function Q_before_Q_responseExtras()
 		if ($media === true) {
 			$media = 'screen,print';
 		}
-		Q_Response::addStylesheet($src, 'Q', $media);
+		Q_Response::addStylesheet($src, 'Q', compact('media'));
 	}
 	
 	// Language and texts

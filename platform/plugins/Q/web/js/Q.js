@@ -16126,10 +16126,18 @@ Q.stackTrace = function() {
 
 /**
  * Call this inside a script element in the HTML when you don't want
- * some other scripts on the page to get its contents.
+ * some other untrusted scripts on the page to be able to read its contents.
+ * Typically, the secret contents would be enclosed in an IIFE of the corm
+ * ( function () { code here, that uses some secret JSON-encoded info } )();
  * SECURITY: Watch out. If your website allows scripts to be loaded synchronously
  * before the script which calls this method, then they can register a
  * MutationObserver to get at the textContent of the script before it's executed.
+ * Also, service workers may be able to intercept the script contents as well,
+ * so make sure they only contain trusted code.
+ * CONSIDER: If you want better security, consider using iframes with an "integrity"
+ * attribute, whose "src" attribute points to a URL on a trusted third-party
+ * domain whose CORS headers do not include access-control-allow-origin.
+ * Then use postMessage() to communicate with scripts loaded in that iframe.
  */
 Q.removeCurrentScript = function() {
 	var cs;

@@ -924,12 +924,15 @@ class Q_Response
 	 * @method addScript
 	 * @static
 	 * @param {string} $src
+
 	 * @param {string} [$slotName=null]
-	 * @param {string} [$type='text/javascript']
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.type='text/javascript']
 	 * @return {boolean} returns false if script was already added, else returns true
 	 */
-	static function addScript ($src, $slotName = null, $type = 'text/javascript')
+	static function addScript ($src, $slotName = null, $options = array())
 	{
+		$type = isset($options['array']) ? $options['array'] : 'text/javascript';
 		/**
 		 * @event Q/response/addScript {before}
 		 * @param {string} src
@@ -1278,12 +1281,15 @@ class Q_Response
 	 * @static
 	 * @param {string} $href
 	 * @param {string} [$slotName=null]
-	 * @param {string} [$media='screen,print']
-	 * @param {string} [$type='text/css']
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.media='screen,print']
+	 * @param {string} [$options.type='text/css']
 	 * @return {boolean} returns false if a stylesheet with exactly the same parameters has already been added, else true.
 	 */
-	static function addStylesheet ($href, $slotName = null, $media = 'screen,print', $type = 'text/css')
+	static function addStylesheet ($href, $slotName = null, $options = array())
 	{
+		$media = isset($options['media']) ? $options['media'] : 'screen,print';
+		$type = isset($options['type']) ? $options['type'] : 'text/css';
 		/**
 		 * @event Q/response/addStylesheet {before}
 		 * @param {string} href
