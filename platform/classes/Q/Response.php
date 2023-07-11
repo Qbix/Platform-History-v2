@@ -1174,7 +1174,9 @@ class Q_Response
 		$result = array();
 		foreach ($scripts as $k => $b) {
 			if ($urls) {
-				list($src, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['src']);
+				list($src, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['src'], array(
+					'skipFilename' => true
+				));
 				$b['src'] = $src;
 				$b['hash'] = $hash;
 			}
@@ -1395,7 +1397,9 @@ class Q_Response
 		$saw = array();
 		foreach ($sheets as $b)  {
 			if ($urls) {
-				list($href, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['href']);
+				list($href, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['href'], array(
+					'skipFilename' => true
+				));
 				$b['href'] = $href;
 				$b['hash'] = $hash;
 			}

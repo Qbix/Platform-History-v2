@@ -1227,6 +1227,7 @@ class Q_Html
 					$isUrl = true;
 					break;
 				case 'src': // Automatically prefixes theme url if any
+					$options['skipFilename'] = true;
 					list ($value, $filename, $hash) = self::themedUrlFilenameAndHash($value, $options);
 					$isUrl = true;
 					break;
@@ -1392,6 +1393,7 @@ class Q_Html
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
 	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndHash, set hash here to avoid calling it again
+	 * @param {string} [$options.skipFilename] Set to true, to return null for the filename and skip calling filenameFromUrl
 	 * @param {boolean} [$options.baseUrlPlaceholder=false] Pass true to have {{baseUrl}} placeholder instead of base URL in the string
 	 * @return {array} A three-element array containing the url, filename, hash
 	 */
@@ -1464,7 +1466,8 @@ class Q_Html
 		if (!empty($options['hash'])) {
 			$hash = $options['hash'];
 		} else {
-			if (empty($filename)) {
+			if (empty($options['skipFilename'])
+			and empty($filename)) {
 				try {
 					$filename = Q_Uri::filenameFromUrl($url);	
 				} catch (Exception $e) {
@@ -1493,6 +1496,7 @@ class Q_Html
 		if ($options === true) { // for backwards compatibility
 			$options = array('ignoreEnvironment' => true);
 		}
+		$options['skipFilename'] = true;
 		list($url, $filename) = self::themedUrlFilenameAndHash($filePath, $options);
 		return $url;
 	}
