@@ -1231,5 +1231,10 @@ class Q_Uri
 // trying to get caching $urls
 if (empty(Q_Uri::$urls)) {
 	$urlsFile = implode(DS, array(APP_CONFIG_DIR, "Q", "urls.php"));
-	is_file($urlsFile) && require_once($urlsFile);
+	if (is_file($urlsFile)) {
+		$result = require_once($urlsFile);
+		if (is_array($result)) {
+			Q_Uri::$urls = $result;
+		}
+	}
 }

@@ -88,7 +88,7 @@ $time = time();
 $urls_export = Q::var_export($result);
 file_put_contents(
 	$dir_to_save.DS.'urls.php',
-	"<?php\nQ_Uri::\$urls = $urls_export;"
+	"<?php\nreturn $urls_export;"
 );
 echo PHP_EOL;
 file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
