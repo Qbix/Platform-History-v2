@@ -4658,7 +4658,7 @@ Message.get.onError = new Q.Event();
  * @param {Function} callback Receives (err, message, messages, extras) as parameters, where messages is an object of {ordina; Streams.Message} pairs
  * @param {Function} callbackAfterHandled Same parameters as callback, but is called after all new messages were handled
  */
-Message.post = function _Message_post (msg, callback) {
+Message.post = function _Message_post (msg, callback, callbackAfterHandled) {
 	var baseUrl = Q.baseUrl({
 		publisherId: msg.publisherId,
 		streamName: msg.streamName
@@ -4692,9 +4692,9 @@ Message.post = function _Message_post (msg, callback) {
 		}, {ascending: true, numeric: true});
 
 		var extras = data.slots.extras;
-		callback && callback.call(Message, err, message, messages, extras);
+		Q.handle(callback, Message, [err, message, messages, extras]);
 		_simulatePosting(messages, extras);
-		callbackAfterHandled && callbackAfterHandled.call(Message, err, message, messages, extras);
+		Q.handle(callbackAfterHandled, Message, [err, message, messages, extras]);
 
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
