@@ -6985,6 +6985,7 @@ Q.onInit.add(function _Streams_onInit() {
 	}, 'Streams');
 	
 	function _handlers(streamType, msg, params) {
+		Q.handle(Q.getObject(['', ''], _messageHandlers), Streams, params);
 		Q.handle(Q.getObject([streamType, msg.type], _messageHandlers), Streams, params);
 		Q.handle(Q.getObject(['', msg.type], _messageHandlers), Streams, params);
 		Q.handle(Q.getObject([streamType, ''], _messageHandlers), Streams, params);
