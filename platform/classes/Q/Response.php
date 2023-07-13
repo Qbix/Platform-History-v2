@@ -971,7 +971,8 @@ class Q_Response
 		and $preload and Q_Config::get('Q', 'javascripts', 'preload', null) === 'push'
 		and (!Q_Valid::url($src) || Q::startsWith($src, Q_Request::baseUrl()))) {
 			// the command below may fail because response body already started
-			@header("Link: $src; as=script; rel=preload", false);
+			$src_encoded = Q_Utils::urlencodeNonAscii($src);
+			@header("Link: <$src_encoded>; as=script; rel=preload", false);
 		}
 
 		return true;
@@ -1346,7 +1347,8 @@ class Q_Response
 		and $preload and Q_Config::get('Q', 'stylesheets', 'preload', null) === 'push'
 		and (!Q_Valid::url($href) || Q::startsWith($href, Q_Request::baseUrl()))) {
 			// the command below may fail because response body already started
-			@header("Link: $href; as=style; rel=preload", false);
+			$href_encoded = Q_Utils::urlencodeNonAscii($href);
+			@header("Link: <$href_encoded>; as=style; rel=preload", false);
 		}
 		return true;
 	}

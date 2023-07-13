@@ -219,6 +219,16 @@ class Q_Utils
 		}
 		return base64_decode($result);
 	}
+
+	static function urlencodeNonAscii($text) {
+		$arr = preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY);
+		foreach ($arr as $k => $c) {
+			if (mb_ord($c) > 255) {
+				$arr[$k] = urlencode($c);
+			}
+		}
+		return implode('', $arr);
+	}
 	
 	static function explodeEscaped($delimiter, $str, $escapeChar = '\\')
 	{
