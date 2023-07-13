@@ -9470,13 +9470,13 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.onload = onload2;
 	link.onreadystatechange = onload2; // for IE
 	link.setAttribute('href', href);
-	var links = document.getElementsByTagName('link');
+	var elements = document.querySelectorAll('link[data-slot], style[data-slot]');
 	var insertBefore = null;
 	if (Q.allSlotNames && options.slotName) {
 		link.setAttribute('data-slot', options.slotName);
 		var slotIndex = Q.allSlotNames.indexOf(options.slotName);
-		for (var j=0; j<links.length; ++j) {
-			e = links[j];
+		for (var j=0; j<elements.length; ++j) {
+			e = elements[j];
 			var slotName = e.getAttribute('data-slot');
 			if (Q.allSlotNames.indexOf(slotName) > slotIndex) {
 				insertBefore = e;
