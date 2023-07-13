@@ -12,13 +12,19 @@ var Users = Q.Users;
  * @class Assets web3/balance
  * @constructor
  * @param {Object} options Override various options for this tool
+ * @param {Q.Event} [options.onChainChange] - on chain start to change
+ * @param {Q.Event} [options.onChainChanged] - on chain changed
  */
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
-	tool.usingWeb3 = Q.getObject("apps.web3", Users);
+	tool.usingWeb3 = !Q.isEmpty(Q.getObject("Web3.chains", Users));
 
 	if (tool.usingWeb3) {
-		Users.Web3.connect(function () {
+		Users.Web3.connect(function (err, provider) {
+			if (err) {
+				// some error occur during Web3.connect or user closed modal
+				tool.usingWeb3 = false;
+			}
 			Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
 			tool.refresh();
 		});
@@ -32,12 +38,15 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	chainId: null,
 	tokenAddresses: null,
 	template: "Assets/web3/balance/select",
-	onRefresh: new Q.Event()
+	onRefresh: new Q.Event(),
+	onChainChange: new Q.Event(),
+	onChainChanged: new Q.Event()
 },
 
 { // methods go here
 	refresh: function () {
 		var tool = this;
+		var $toolElement = $(tool.element);
 		var state = tool.state;
 		var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
 		var _getWalletAddress = function (callback) {
@@ -51,8 +60,8 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		};
 		var _renderTemplate = function (walletAddress) {
 			Q.Template.render("Assets/web3/balance", {
-				chainId: state.chainId,
-				chains: Assets.Web3.chains
+				chainId: walletAddress ? state.chainId : null,
+				chains: walletAddress ? Users.Web3.chains : []
 			}, function (err, html) {
 				Q.replace(tool.element, html);
 
@@ -61,7 +70,8 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				} else {
 					$("select[name=chains]", tool.element).on("change", function () {
 						var chainId = $(this).val();
-						$("select[name=tokens]", tool.element).addClass("Q_disabled");
+						$toolElement.addClass("Q_disabled");
+						Q.handle(state.onChainChange, tool, [chainId]);
 						tool.balanceOf(walletAddress, chainId);
 					}).trigger("change");
 				}
@@ -70,10 +80,6 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 
 		if (tool.usingWeb3) {
 			_getWalletAddress(function (walletAddress) {
-				if (!ethers.utils.isAddress(walletAddress)) {
-					return Q.alert(tool.text.errors.WalletInvalid);
-				}
-
 				_renderTemplate(walletAddress);
 			});
 		} else {
@@ -82,12 +88,15 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	},
 	balanceOf: function (walletAddress, chainId) {
 		var tool = this;
+		var $toolElement = $(tool.element);
 		var state = this.state;
 		var _parseAmount = function (amount) {
 			return parseFloat(parseFloat(ethers.utils.formatUnits(amount)).toFixed(12));
 		};
 
 		if (!chainId) {
+			$toolElement.removeClass("Q_disabled");
+			Q.handle(state.onChainChanged, tool, [chainId]);
 			return Q.Template.render("Assets/web3/balance/credits", {}, function (err, html) {
 				if (err) {
 					return;
@@ -101,6 +110,9 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 
 		Users.init.web3(function () { // to load ethers.js
 			Q.handle(Assets.Currencies.balanceOf, tool, [walletAddress, chainId, function (err, balance) {
+				$toolElement.removeClass("Q_disabled");
+				Q.handle(state.onChainChanged, tool, [chainId]);
+
 				if (err) {
 					return console.warn(err);
 				}

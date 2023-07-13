@@ -131,7 +131,10 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 if (!state.tokenInfo) {
                     $toolElement.addClass("Q_disabled");
                     $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance").activate(function () {
-                        this.state.onRefresh.add(function () {
+                        this.state.onChainChange.add(function () {
+                            $toolElement.addClass("Q_disabled");
+                        }, tool);
+                        this.state.onChainChanged.add(function () {
                             $toolElement.removeClass("Q_disabled");
                         }, tool);
                         tool.assetsWeb3BalanceTool = this;
