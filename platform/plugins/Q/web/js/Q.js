@@ -9210,7 +9210,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	Q.addScript.onLoadCallbacks[src2] = [_onload];
 	Q.addScript.onErrorCallbacks[src2] = [];
 	if (o.onError) {
-		Q.addScript.onErrorCallbacks[sr2c].push(o.onError);
+		Q.addScript.onErrorCallbacks[src2].push(o.onError);
 	}
 	Q.addEventListener(script, 'load', onload2);
 	Q.addEventListener(script, 'error', onerror2);
