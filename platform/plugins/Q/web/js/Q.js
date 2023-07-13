@@ -9041,7 +9041,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		} else if (onload2.executed) {
 			return;
 		}
-		var targetsrc = e.target.getAttribute('src');
+		var targetsrc = e.target.getAttribute('src').split('?')[0];
 		Q.addScript.loaded[targetsrc] = true;
 		while ((cb = Q.addScript.onLoadCallbacks[targetsrc].shift())) {
 			Q.nonce = Q.nonce || Q.cookie('Q_nonce');
@@ -9059,9 +9059,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			return;
 		}
 		var cb;
-		Q.addScript.loaded[src] = false;
-		if (Q.addScript.onErrorCallbacks[src]) {
-			while ((cb = Q.addScript.onErrorCallbacks[src].shift())) {
+		Q.addScript.loaded[src2] = false;
+		if (Q.addScript.onErrorCallbacks[src2]) {
+			while ((cb = Q.addScript.onErrorCallbacks[src2].shift())) {
 				cb.call(this);
 			}
 		}
@@ -9069,7 +9069,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	}
 
 	function _onload() {
-		Q.addScript.loaded[src] = true;
+		Q.addScript.loaded[src2] = true;
 		if (root.jQuery && !Q.onJQuery.occurred) {
 			Q.onJQuery.handle(jQuery, [jQuery]);
 		}
@@ -9116,9 +9116,10 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	options = options || {};
 	options.info = {};
 	src = Q.url(src, null, options);
+	var src2 = src.split('?')[0];
 	
 	if (!o.duplicate) {
-		if (Q.addScript.loaded[src]) {
+		if (Q.addScript.loaded[src2]) {
 			_onload();
 			return o.returnAll ? null : false;
 		}
@@ -9131,7 +9132,6 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			}
 			scripts = arr;
 		}
-		var src2 = src.split('?')[0];
 		for (i=0; i<scripts.length; ++i) {
 			script = scripts[i];
 			var s = script.getAttribute('src');
@@ -9152,12 +9152,12 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				container.appendChild(script);
 			}
 			// the script already exists in the document
-			if (Q.addScript.loaded[src] || Q.addScript.loaded[src2]) {
+			if (Q.addScript.loaded[src2] || Q.addScript.loaded[src2]) {
 				// the script was already loaded successfully
 				_onload();
 				return o.returnAll ? script : false;
 			}
-			if (Q.addScript.loaded[src] === false) {
+			if (Q.addScript.loaded[src2] === false) {
 				// the script had an error when loading
 				if (o.ignoreLoadingErrors) {
 					_onload();
@@ -9166,7 +9166,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				}
 				return o.returnAll ? script : false;
 			}
-			if (!Q.addScript.added[src]
+			if (!Q.addScript.added[src2]
 			&& !script.wasProcessedByQ
 			&& (!('readyState' in script)
 			|| (script.readyState !== 'complete'
@@ -9178,15 +9178,15 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				return o.returnAll ? script : false;
 			}
 			// this is our script, the script hasn't yet loaded, so register onload2 and onerror2 callbacks
-			if (!Q.addScript.onLoadCallbacks[src]) {
-				Q.addScript.onLoadCallbacks[src] = [];
+			if (!Q.addScript.onLoadCallbacks[src2]) {
+				Q.addScript.onLoadCallbacks[src2] = [];
 			}
-			if (!Q.addScript.onErrorCallbacks[src]) {
-				Q.addScript.onErrorCallbacks[src] = [];
+			if (!Q.addScript.onErrorCallbacks[src2]) {
+				Q.addScript.onErrorCallbacks[src2] = [];
 			}
-			Q.addScript.onLoadCallbacks[src].push(onload);
+			Q.addScript.onLoadCallbacks[src2].push(onload);
 			if (o.onError) {
-				Q.addScript.onErrorCallbacks[src].push(o.onError);
+				Q.addScript.onErrorCallbacks[src2].push(o.onError);
 			}
 			if (!script.wasProcessedByQ) {
 				script.onload = onload2;
@@ -9206,11 +9206,11 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			script.setAttribute('integrity', 'sha256-' + options.info.h);
 		}
 	}
-	Q.addScript.added[src] = true;
-	Q.addScript.onLoadCallbacks[src] = [_onload];
-	Q.addScript.onErrorCallbacks[src] = [];
+	Q.addScript.added[src2] = true;
+	Q.addScript.onLoadCallbacks[src2] = [_onload];
+	Q.addScript.onErrorCallbacks[src2] = [];
 	if (o.onError) {
-		Q.addScript.onErrorCallbacks[src].push(o.onError);
+		Q.addScript.onErrorCallbacks[sr2c].push(o.onError);
 	}
 	Q.addEventListener(script, 'load', onload2);
 	Q.addEventListener(script, 'error', onerror2);
