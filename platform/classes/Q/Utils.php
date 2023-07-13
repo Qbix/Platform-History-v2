@@ -1842,7 +1842,7 @@ class Q_Utils
 		}
 		return preg_replace(
 			array(
-				"/url\((\'|\\\")+(?!data\:|http\:\/\/|https\:\/\/|\'|\\\")/",
+				"/url\((\'|\\\")*(?!data\:|http\:\/\/|https\:\/\/|\'|\\\")/",
 				"/@import[\s]url\((\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/",
 				"/@import[\s](?!url\()(\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/"
 			),
