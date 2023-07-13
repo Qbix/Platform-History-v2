@@ -12,18 +12,21 @@ var Users = Q.Users;
  * @class Assets web3/balance
  * @constructor
  * @param {Object} options Override various options for this tool
+ * @param {Boolean} [skipWeb3=false] - if true don't request users crypto balance, means only credits transfer
  * @param {Q.Event} [options.onChainChange] - on chain start to change
  * @param {Q.Event} [options.onChainChanged] - on chain changed
  */
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
-	tool.usingWeb3 = !Q.isEmpty(Q.getObject("Web3.chains", Users));
+	var state = this.state;
 
-	if (tool.usingWeb3) {
+	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users));
+
+	if (!state.skipWeb3) {
 		Users.Web3.connect(function (err, provider) {
 			if (err) {
 				// some error occur during Web3.connect or user closed modal
-				tool.usingWeb3 = false;
+				state.skipWeb3 = true;
 			}
 			Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
 			tool.refresh();
@@ -36,6 +39,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 { // default options here
 	walletAddress: null,
 	chainId: null,
+	skipWeb3: false,
 	tokenAddresses: null,
 	template: "Assets/web3/balance/select",
 	onRefresh: new Q.Event(),
@@ -49,6 +53,10 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var $toolElement = $(tool.element);
 		var state = tool.state;
 		var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
+		// if logged in user have no wallet registered, skip Web3
+		if (!loggedInWalletAddress) {
+			state.skipWeb3 = true;
+		}
 		var _getWalletAddress = function (callback) {
 			if (state.walletAddress) {
 				return Q.handle(callback, null, [state.walletAddress]);
@@ -78,7 +86,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 			});
 		};
 
-		if (tool.usingWeb3) {
+		if (!state.skipWeb3) {
 			_getWalletAddress(function (walletAddress) {
 				_renderTemplate(walletAddress);
 			});

@@ -62,6 +62,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 var userSelected = null;
                 var $send = $("button[name=send]", tool.element);
                 var $userSelected = $(".Assets_transfer_userSelected", tool.element);
+                tool.assetsWeb3BalanceTool = null;
                 var _transactionSuccess = function () {
                     Q.Dialogs.pop();
                     Q.alert(tool.text.transfer.TransactionSuccess);
@@ -82,6 +83,21 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             } else if (!ethers.utils.isAddress(wallet)) {
                                 walletError = tool.text.errors.TheWalletOfThisUserInvalid;
                             }
+                        }
+
+                        if (!state.tokenInfo) {
+                            $toolElement.addClass("Q_disabled");
+                            $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance", {
+                                skipWeb3: !(wallet && !walletError)
+                            }).activate(function () {
+                                this.state.onChainChange.add(function () {
+                                    $toolElement.addClass("Q_disabled");
+                                }, tool);
+                                this.state.onChainChanged.add(function () {
+                                    $toolElement.removeClass("Q_disabled");
+                                }, tool);
+                                tool.assetsWeb3BalanceTool = this;
+                            });
                         }
 
                         userSelected = null;
@@ -127,19 +143,6 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     _getSelectedUser(state.recipientUserId);
                 }
 
-                tool.assetsWeb3BalanceTool = null;
-                if (!state.tokenInfo) {
-                    $toolElement.addClass("Q_disabled");
-                    $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance").activate(function () {
-                        this.state.onChainChange.add(function () {
-                            $toolElement.addClass("Q_disabled");
-                        }, tool);
-                        this.state.onChainChanged.add(function () {
-                            $toolElement.removeClass("Q_disabled");
-                        }, tool);
-                        tool.assetsWeb3BalanceTool = this;
-                    });
-                }
                 var $amount = $("input[name=amount]", tool.element);
                 $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
