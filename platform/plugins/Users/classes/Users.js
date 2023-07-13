@@ -498,14 +498,15 @@ Users.Socket = {
 	 * @param {Object} data Any data to accompany this event name
 	 * @return {Boolean} Whether any socket clients were connected at all
 	 */
-	emitToUser: function(userId, event, data) {
+	emitToUser: function(userId, event) {
+		var args = Array.prototype.slice.call(arguments, 1);
 		var clients = Users.User.clientsOnline(userId);
 		if (Q.isEmpty(clients)) {
 			return false;
 		}
 		for (var cid in clients) {
 			var client = clients[cid];
-			client && client.emit(event, data);
+			client && client.emit.apply(client, args);
 		}
 		return true;
 	}
