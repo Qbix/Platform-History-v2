@@ -13298,7 +13298,7 @@ Q.Visual = Q.Pointer = {
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
-		Q.addEventListener(element, 'pointerstart pointermove', function (e) {
+		Q.addEventListener(element, 'pointerdown pointermove', function (e) {
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
