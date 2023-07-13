@@ -116,6 +116,22 @@ class Q_Session
 	}
 
 	/**
+	 * The ID of the session that came with the request
+	 * in $_GET or $_COOKIE.
+	 */
+	static function requestedId()
+	{
+		$name = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
+		return (!empty($_GET[$name])
+			? $_GET[$name]
+			: (!empty($_COOKIE[$name])
+				? $_COOKIE[$name]
+				: Q_Response::cookie($name)
+			)
+		);
+	}
+
+	/**
 	 * Get or set the session id
 	 * @method id
 	 * @static
@@ -262,9 +278,12 @@ class Q_Session
 		$name = Q_Session::name();
 		$id = $setId
 			? $setId
-			: (isset($_REQUEST[$name])
-				? $_REQUEST[$name]
-				: Q_Response::cookie($name)
+			: (!empty($_GET[$name])
+				? $_GET[$name]
+				: (!empty($_COOKIE[$name])
+					? $_COOKIE[$name]
+					: Q_Response::cookie($name)
+				)
 			);
 
 		$isNew = false;

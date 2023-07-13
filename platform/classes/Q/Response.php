@@ -967,7 +967,7 @@ class Q_Response
 		self::$scriptsForSlot[$slotName][] = @compact('src', 'type');
 
 		$src = Q_Html::themedUrl($src);
-		if (!Q_Request::isAjax()
+		if (!Q_Request::isAjax() and !Q_Session::requestedId()
 		and $preload and Q_Config::get('Q', 'javascripts', 'preload', null) === 'push'
 		and (!Q_Valid::url($src) || Q::startsWith($src, Q_Request::baseUrl()))) {
 			// the command below may fail because response body already started
@@ -1262,7 +1262,7 @@ class Q_Response
 			return '';
 		}
 
-		if (!Q_Request::isAjax()) {
+		if (!Q_Request::isAjax() and !Q_Session::requestedId()) {
 			$preload = Q_Config::get('Q', 'javascripts', 'preload]', null);
 			if ($preload === 'inline') {
 				return self::scriptsInline($slotName, true);
@@ -1342,7 +1342,7 @@ class Q_Response
 		}
 		$href = Q_Html::themedUrl($href);
 		self::$stylesheetsForSlot[$slotName][] = @compact('href', 'media', 'type');
-		if (!Q_Request::isAjax()
+		if (!Q_Request::isAjax() and !Q_Session::requestedId()
 		and $preload and Q_Config::get('Q', 'stylesheets', 'preload', null) === 'push'
 		and (!Q_Valid::url($href) || Q::startsWith($href, Q_Request::baseUrl()))) {
 			// the command below may fail because response body already started
@@ -1500,7 +1500,7 @@ class Q_Response
 		if (empty($stylesheets)) {
 			return '';
 		}
-		if (!Q_Request::isAjax()) {
+		if (!Q_Request::isAjax() and !Q_Session::requestedId()) {
 			$preload = Q_Config::get('Q', 'stylesheets', 'preload', null);
 			if ($preload === 'inline') {
 				return self::stylesheetsInline($slotName, true);
