@@ -119,7 +119,7 @@ Q_Bootstrap::configure();
 Q_Bootstrap::registerAutoload();
 Q_Bootstrap::registerExceptionHandler();
 Q_Bootstrap::registerErrorHandler();
-Q_Bootstrap::validateEarly();
+// Q_Bootstrap::validateEarly();
 Q_Bootstrap::revertSlashes();
 Q_Bootstrap::alertAboutLocalConfiguration();
 Q_Bootstrap::setDefaultTimezone();
