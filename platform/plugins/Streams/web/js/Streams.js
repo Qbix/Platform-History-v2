@@ -6936,7 +6936,18 @@ Q.onInit.add(function _Streams_onInit() {
 					break;
 			}
 
-			_handlers(extras.streamType, msg, params);
+			var streamType = Q.getObject("streamType", extras);
+			if (streamType) {
+				_handlers(streamType, msg, params);
+			} else {
+				Q.Streams.get(msg.publisherId, msg.streamName, function (err) {
+					if (err) {
+						return;
+					}
+
+					_handlers(this.fields.type, msg, params);
+				});
+			}
 
 			if (usingCached && _messageShouldRefreshStream[msg.type]) {
 				_debouncedRefresh(
