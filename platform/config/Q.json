@@ -133,7 +133,7 @@
 			"userAgentInfo": ["formFactor", "platform", "version"],
 			"allowHijack": true
 		},
-		"javascripts": {
+		"javascript": {
 			"responseExtras": {
 				"{{Q}}/js/jquery-3.2.1.min.js": true,
 				"{{Q}}/js/handlebars-v4.0.10.min.js": true,
