@@ -256,7 +256,6 @@
 	border-bottom-right-radius: 5px;
 	font-size: 14px;
 	background: rgba(50, 50, 50, 0.4);
-	color: white;
 	font-weight: 100;
 	margin-top: 10px;
 	text-align: center;
@@ -421,7 +420,7 @@
 	overflow-x: hidden; text-overflow: ellipsis; white-space: nowrap; 
 }
 .Streams_preview .Streams_preview_title,
-.Streams_preview .Streams_preview_preamble { margin: 0; padding: 0px; line-height: 24px; font-size: 16px; font-weight: normal; }
+.Streams_preview .Streams_preview_preamble { margin: 0; padding: 0; line-height: 24px; font-size: 16px; font-weight: normal; }
 .Streams_preview .Streams_preview_preamble { font-weight: bold; }
 .Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
 .Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; }
@@ -440,7 +439,7 @@
 
 .Streams_file_preview_tool .Streams_inplace_tool,
 .Streams_pdf_preview_tool .Streams_inplace_tool {
-	height: 40p;
+	height: 40px;
 	line-height: 40px;
 }
 
@@ -549,9 +548,9 @@
 .Streams_closed { opacity: 0.75; -webkit-transition: opacity 1s; transition: opacity 1s; }
 
 .Streams_task_progress { border: 1px solid #555; }
-.Streams_task_progress_bar { background: 1px solid #555; width: 0; height: 40px; }
+.Streams_task_progress_bar { border: 1px solid #555; width: 0; height: 40px; }
 
-.Streams_invitation { font-size: 20px; text-align: center; padding: 50px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }
+.Streams_invitation { font-size: 20px; text-align: center; padding: 50px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
 .Streams_invitation ul,
 .Streams_invitation ol { text-align: left; }
 .Streams_invitation li { margin-bottom: 15px; }

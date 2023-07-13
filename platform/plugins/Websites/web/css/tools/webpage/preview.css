@@ -49,7 +49,11 @@
 .Websites_webpage_preview_tool .Streams_preview_contents > .Users_pile_tool {
 	overflow: visible;
 }
+.Q_columns_title_container .Websites_webpage_preview_tool h3.Streams_preview_title,
 .Websites_webpage_preview_tool h3.Streams_preview_title {
+	position: unset;
+	top: unset;
+	transform: unset;
 	font-size: 16px;
 	height: 24px;
 }
