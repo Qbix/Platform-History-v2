@@ -701,7 +701,7 @@ class Q_Response
 					}
 					$e = $v;
 				}
-				$options = Q_Config::get('Q', 'javascripts', 'prettyPrintData', true)
+				$options = Q_Config::get('Q', 'javascript', 'prettyPrintData', true)
 					? JSON_PRETTY_PRINT
 					: 0;
 				if (!empty($extend['Q'])) {
@@ -935,7 +935,7 @@ class Q_Response
 		$srcThemed = Q_Html::themedUrl($src);
 		self::$preload[$srcThemed] = isset($options['dontPreload'])
 			? !$options['dontPreload']
-			: Q_Config::get('Q', 'javascripts', 'preload', null);
+			: Q_Config::get('Q', 'javascript', 'preload', null);
 		$type = isset($options['array']) ? $options['array'] : 'text/javascript';
 		/**
 		 * @event Q/response/addScript {before}
@@ -1256,7 +1256,7 @@ class Q_Response
 			return '';
 		}
 
-		$preload = Q_Config::get('Q', 'javascripts', 'preload', null);
+		$preload = Q_Config::get('Q', 'javascript', 'preload', null);
 		if ($preload === 'inline'
 		and !Q_Request::isAjax()
 		and !Q_Session::requestedId()) {
