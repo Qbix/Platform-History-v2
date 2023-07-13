@@ -6978,7 +6978,7 @@ Q.onInit.add(function _Streams_onInit() {
 					if (fem) {
 						throw new Q.Exception("Streams.update: " + fem);
 					}
-					Streams.update(this, fields, onlyChangedFields);
+					Stream.update(this, fields, onlyChangedFields);
 				});
 			}
 		}
