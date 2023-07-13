@@ -2952,7 +2952,7 @@ Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
  * Like "add" method, but removes the handler right after it has executed.
  * @method addOnce
  * @param {mixed} handler Any kind of callable which Q.handle can invoke
- * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
+ * @param {String|Boolean|Q.Tool} key optional key to associate with the handler.
  *  Used to replace handlers previously added under the same key.
  *  If the key is not provided, a unique one is computed.
  *  Pass a Q.Tool object here to associate the handler to the tool,

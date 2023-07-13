@@ -4756,6 +4756,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
  *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached and user is a participant in the stream
  *   @param {Boolean} [options.evenIfNotRetained] Set this to true to wait for messages posted to the stream, in the event that it wasn't cached or retained.
+ *   @param {Boolean} [options.checkMessageCache] Set this to true to also the message cache 
  * @return {Boolean|null|Q.Pipe}
  *   Returns false if the cached stream already got this message.
  *   Returns true if we decided to send a request for the messages.
@@ -4764,20 +4765,20 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  *   In this last case, the callback is not called.
  */
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
+	var o = Q.extend({}, Message.wait.options, options);
 	var alreadyCalled = false, handlerKey;
-	var latest = Message.latestOrdinal(publisherId, streamName);
+	var latest = Message.latestOrdinal(publisherId, streamName, o.checkMessageCache);
 	var ps = Streams.key(publisherId, streamName);
 	var wasRetained = _retainedStreams[ps];
-	if (!latest && !wasRetained && (!options || !options.evenIfNotRetained)) {
+	if (!latest && !wasRetained && !o.evenIfNotRetained) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
 	}
 	if (ordinal >= 0 &&  ordinal <= latest && latest > 0) {
-		// The cached stream already got this message
+		// The cached stream already got this message, or the message arrived on the client
 		Q.handle(callback, this, [[]]);
 		return false;
 	}
-	var o = Q.extend({}, Message.wait.options, options);
 	var waiting = {};
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
@@ -4813,7 +4814,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	Q.each(latest+1, ordinal, 1, function (ord) {
 		ordinals.push(ord);
 		var event = Stream.onMessage(publisherId, streamName, ord);
-		handlerKey = event.add(function () {
+		handlerKey = event.addOnce(function () {
 			p.fill(ord)();
 			event.remove(handlerKey);
 			handlerKey = null;
@@ -4823,7 +4824,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	if (latest < ordinal) {
 		p.add(ordinals, 1, function () {
 			if (!alreadyCalled) {
-				Q.handle(callback, this, [true, ordinals]);
+				Q.handle(callback, this, [ordinals]);
 			}
 			clearTimeout(t);
 			alreadyCalled = true;
@@ -4846,9 +4847,9 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 
 		// Check if stream cached and if not then retrieve it for next time.
 		// The batching mechanism will ensure it's constructed before any returned messages are processed.
-		if (!Streams.get.cache.get([publisherId, streamName])) {
-			Streams.get(publisherId, streamName);
-		}
+		// if (!Streams.get.cache.get([publisherId, streamName])) {
+		// 	Streams.get(publisherId, streamName);
+		// }
 
 		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
 		function (err, messages, extras) {
@@ -6763,35 +6764,26 @@ Q.onInit.add(function _Streams_onInit() {
 	});
 	
 	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, extras) {
-		Streams.get(extras.publisherId, extras.streamName, function (err) {
-			if (err) {
-				console.warn(Q.firstErrorMessage(err));
-				return;
-			}
-
-			var stream = this;
-			var streamType = stream.fields.type;
-			var event = Q.getObject([streamType, ephemeral.type], _ephemeralHandlers);
-			var params = [ephemeral, extras];
-			Q.handle(event, Streams, params);
-			Q.each([ephemeral.publisherId, ''], function (i, publisherId) {
-				Q.each([ephemeral.streamName, ''], function (ordinal, streamName) {
-					Q.handle(
-						Q.getObject([publisherId, streamName, ordinal], _streamEphemeralHandlers),
-						Streams,
-						params
-					);
-					Q.handle(
-						Q.getObject([publisherId, streamName, ephemeral.type], _streamEphemeralHandlers),
-						Streams,
-						params
-					);
-					Q.handle(
-						Q.getObject([publisherId, streamName, ''], _streamEphemeralHandlers),
-						Streams,
-						params
-					);
-				});
+		var event = Q.getObject([extras.streamType, ephemeral.type], _ephemeralHandlers);
+		var params = [ephemeral, extras];
+		Q.handle(event, Streams, params);
+		Q.each([ephemeral.publisherId, ''], function (i, publisherId) {
+			Q.each([ephemeral.streamName, ''], function (ordinal, streamName) {
+				Q.handle(
+					Q.getObject([publisherId, streamName, ordinal], _streamEphemeralHandlers),
+					Streams,
+					params
+				);
+				Q.handle(
+					Q.getObject([publisherId, streamName, ephemeral.type], _streamEphemeralHandlers),
+					Streams,
+					params
+				);
+				Q.handle(
+					Q.getObject([publisherId, streamName, ''], _streamEphemeralHandlers),
+					Streams,
+					params
+				);
 			});
 		});
 	});
@@ -6808,14 +6800,15 @@ Q.onInit.add(function _Streams_onInit() {
 		// Wait until the previous message has been posted, then process this one.
 		// Will return immediately if previous message is already cached
 		// (e.g. from a post or retrieving a stream, or because there was no cache yet)
-		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message);
+		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message, {
+			checkMessageCache: true
+		});
 		if (ret == null) {
-			// there was no cache yet for the stream, so let's get it
-			// but what about latest message in order?
-			// and refreshing the stream that wasn't in cache?
-			// like in chat.js?
-			// THAT IS FOR TOMORROW!
-			Q.Streams.get(msg.publisherId, msg.streamName, _message);
+			// There was no retained stream or message cache.
+			// Let's just call this anyway, and it will update the message cache.
+			// So next time latestOrdinal will be nonzero and we will only
+			// process messages in order of increasing ordinal.
+			_message();
 		}
 		function _message() {
 			var ptn = msg.publisherId+"\t"+msg.streamName;
@@ -6826,7 +6819,6 @@ Q.onInit.add(function _Streams_onInit() {
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
-
 			
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
@@ -6836,7 +6828,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 			Message.latest[ptn] = parseInt(msg.ordinal);
 
-			// update fields.messageCount of cached stream
+			// update fields.messageCount of cached stream across caches
 			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
 				if (!cached) {
 					return;
@@ -6846,141 +6838,138 @@ Q.onInit.add(function _Streams_onInit() {
 				Streams.get.cache.set([msg.publisherId, msg.streamName], cached.cbpos, cached.subject, cached.params);
 			});
 
-			Streams.get(msg.publisherId, msg.streamName, function (err) {
-				if (err) {
-					console.warn(Q.firstErrorMessage(err));
-					console.log(err);
-					return;
-				}
+			var usingCached = Q.getter.usingCached;
 
-				var stream = this;
-				var usingCached = Q.getter.usingCached;
+			// update the Streams.Message.Total.get.cache first
+			_updateMessageTotalsCache(msg);
+			// now update the message cache
+			_updateMessageCache(msg);
 
-				// update the stream
-				stream.fields.messageCount = msg.ordinal;
-				// update the Streams.Message.Total.get.cache first
-				_updateMessageTotalsCache(msg);
-				// now update the message cache
-				_updateMessageCache(msg);
+			var latest = MTotal.latest(msg.publisherId, msg.streamName, msg.type);
+			var params = [message, extras, latest];
 
-				var latest = MTotal.latest(msg.publisherId, msg.streamName, msg.type);
-				var params = [message, extras, latest];
+			// Handlers for below events might call message.seen() to update latest messageTotals.
+			// Otherwise, if no one updated them, synchronously, fire an event.
+			var unseen = MTotal.unseen(msg.publisherId, msg.streamName, msg.type);
+			if (unseen) {
+				setTimeout(function () {
+					params.push(unseen);
+					Q.handle(Streams.onMessageUnseen, Streams, params);
+				}, 0);
+			}
 
-				// Handlers for below events might call message.seen() to update latest messageTotals.
-				// Otherwise, if no one updated them, synchronously, fire an event.
-				var unseen = MTotal.unseen(msg.publisherId, msg.streamName, msg.type);
-				if (unseen) {
-					setTimeout(function () {
-						params.push(unseen);
-						Q.handle(Streams.onMessageUnseen, Streams, params);
-					}, 0);
-				}
-
-				var streamType = stream.fields.type;
-				var instructions = msg.instructions && JSON.parse(msg.instructions);
-				var updatedParticipants = true;
-				var prevState;
-				switch (msg.type) {
-					case 'Streams/joined':
-						prevState = message.getInstruction('prevState');
-						_updateParticipantCache(msg, 'participating', prevState, usingCached);
-						break;
-					case 'Streams/left':
-						prevState = message.getInstruction('prevState');
-						_updateParticipantCache(msg, 'left', prevState, usingCached);
-						break;
-					case 'Streams/changed':
-						if (Q.isEmpty(instructions.changes)) {
-							return;
+			var instructions = msg.instructions && JSON.parse(msg.instructions);
+			var updatedParticipants = true;
+			var prevState;
+			switch (msg.type) {
+				case 'Streams/joined':
+					prevState = message.getInstruction('prevState');
+					_updateParticipantCache(msg, 'participating', prevState, usingCached);
+					break;
+				case 'Streams/left':
+					prevState = message.getInstruction('prevState');
+					_updateParticipantCache(msg, 'left', prevState, usingCached);
+					break;
+				case 'Streams/changed':
+					if (Q.isEmpty(instructions.changes)) {
+						return;
+					}
+					var doRefresh = false;
+					for (var f in instructions.changes) {
+						if (instructions.changes[f] == null) {
+							// One of the extended fields has changed, but we don't
+							// know the new value.
+							doRefresh = true;
+							break;
 						}
-						var doRefresh = false;
-						for (var f in instructions.changes) {
-							if (instructions.changes[f] == null) {
-								// One of the extended fields has changed, but we don't
-								// know the new value.
-								doRefresh = true;
-								break;
-							}
-						}
-						if (doRefresh) {
-							// Refresh the stream, this will trigger Stream.update on success
-							Stream.refresh(stream.fields.publisherId, stream.fields.name, null, {
-								evenIfNotRetained: true
-							});
-						} else {
-							Stream.update(stream, instructions.changes, null);
-						}
-						break;
-					case 'Streams/progress':
-						Stream.update(stream, instructions, null);
-						break;
-					case 'Streams/relatedFrom':
-						_updateRelatedCache(msg, instructions);
-						_updateRelatedTotalsCache(msg, instructions, 'From', 1);
-						_relationHandlers(_streamRelatedFromHandlers, msg, stream, instructions);
-						break;
-					case 'Streams/relatedTo':
-						_updateRelatedCache(msg, instructions);
-						_updateRelatedTotalsCache(msg, instructions, 'To', 1);
-						_relationHandlers(_streamRelatedToHandlers, msg, stream, instructions);
-						break;
-					case 'Streams/unrelatedFrom':
-						_updateRelatedCache(msg, instructions);
-						_updateRelatedTotalsCache(msg, instructions, 'From', -1);
-						_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, instructions);
-						break;
-					case 'Streams/unrelatedTo':
-						_updateRelatedCache(msg, instructions);
-						_updateRelatedTotalsCache(msg, instructions, 'To', -1);
-						_relationHandlers(_streamUnrelatedToHandlers, msg, stream, instructions);
-						break;
-					case 'Streams/updatedRelateFrom':
-						_updateRelatedCache(msg, instructions);
-						_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, instructions);
-						break;
-					case 'Streams/updatedRelateTo':
-						_updateRelatedCache(msg, instructions);
-						_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, instructions);
-						break;
-					case 'Streams/closed':
-						Stream.update(stream, instructions, null);
-						var sf = stream.fields;
-						var Qh = Q.handle;
-						var Qgo = Q.getObject;
-						Qh(Qgo([sf.publisherId, sf.name], _streamClosedHandlers), stream, [instructions]);
-						Qh(Qgo([sf.publisherId, ''], _streamClosedHandlers), stream, [instructions]);
-						Qh(Qgo(['', sf.name], _streamClosedHandlers), stream, [instructions]);
-						Qh(Qgo(['', ''], _streamClosedHandlers), stream, [instructions]);
-						break;
-					default:
-						break;
-				}
-
-				_handlers(streamType, msg, params);
-
-				if (usingCached && _messageShouldRefreshStream[msg.type]) {
-					_debouncedRefresh(
-						stream.fields.publisherId,
-						stream.fields.name,
-						null,
-						{evenIfNotRetained: true}
-					);
-				}
-
-				function _relationHandlers(handlers, msg, stream, fields) {
-					Q.each([msg.publisherId, ''], function (i, publisherId) {
-						Q.each([msg.streamName, ''], function (j, streamName) {
-							if (handlers[publisherId] && handlers[publisherId][streamName]) {
-								Q.handle(
-									handlers[publisherId][streamName],
-									stream,
-									[msg, fields]
-								);
-							}
+					}
+					if (doRefresh) {
+						// Refresh the stream, this will trigger Stream.update on success
+						Stream.refresh(msg.publisherId, msg.streamName, null, {
+							evenIfNotRetained: true
 						});
+					} else {
+						_update(msg.publisherId, msg.streamName, instructions.changes, null);
+					}
+					break;
+				case 'Streams/progress':
+					_update(msg.publisherId, msg.streamName, instructions, null);
+					break;
+				case 'Streams/relatedFrom':
+					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'From', 1);
+					_relationHandlers(_streamRelatedFromHandlers, msg, instructions);
+					break;
+				case 'Streams/relatedTo':
+					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'To', 1);
+					_relationHandlers(_streamRelatedToHandlers, msg, instructions);
+					break;
+				case 'Streams/unrelatedFrom':
+					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'From', -1);
+					_relationHandlers(_streamUnrelatedFromHandlers, msg, instructions);
+					break;
+				case 'Streams/unrelatedTo':
+					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'To', -1);
+					_relationHandlers(_streamUnrelatedToHandlers, msg, instructions);
+					break;
+				case 'Streams/updatedRelateFrom':
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, instructions);
+					break;
+				case 'Streams/updatedRelateTo':
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamUpdatedRelateToHandlers, msg, instructions);
+					break;
+				case 'Streams/closed':
+					_update(msg.publisherId, msg.streamName, instructions, null);
+					var Qh = Q.handle;
+					var Qgo = Q.getObject;
+					Qh(Qgo([msg.publisherId, msg.streamName], _streamClosedHandlers), [instructions]);
+					Qh(Qgo([msg.publisherId, ''], _streamClosedHandlers), [instructions]);
+					Qh(Qgo(['', msg.streamName], _streamClosedHandlers), [instructions]);
+					Qh(Qgo(['', ''], _streamClosedHandlers), [instructions]);
+					break;
+				default:
+					break;
+			}
+
+			_handlers(extras.streamType, msg, params);
+
+			if (usingCached && _messageShouldRefreshStream[msg.type]) {
+				_debouncedRefresh(
+					msg.publisherId,
+					msg.streamName,
+					null,
+					{evenIfNotRetained: true}
+				);
+			}
+
+			function _relationHandlers(handlers, msg, instructions) {
+				Q.each([msg.publisherId, ''], function (i, publisherId) {
+					Q.each([msg.streamName, ''], function (j, streamName) {
+						if (handlers[publisherId] && handlers[publisherId][streamName]) {
+							Q.handle(
+								handlers[publisherId][streamName],
+								Streams,
+								[msg, instructions]
+							);
+						}
 					});
-				}
-			});
+				});
+			}
+
+			function _update(publisherId, streamName, fields, onlyChangedFields) {
+				Q.Streams.get(publisherId, streamName, function (err) {
+					var fem = Q.firstErrorMessage(err);
+					if (fem) {
+						throw new Q.Exception("Streams.update: " + fem);
+					}
+					Streams.update(this, fields, onlyChangedFields);
+				});
+			}
 		}
 	}, 'Streams');
 	
