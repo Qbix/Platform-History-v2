@@ -481,6 +481,27 @@ class Q_Bootstrap
 	}
 
 	/**
+	 * Used to validate script input early, and exit early if it's not valid.
+	 */
+	static function validateEarly()
+	{
+		if (false === Q::event('Q/validateEarly', compact('sessionId'), 'before')) {
+			return;
+		}
+		$sessionName = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
+		$sessionId = !empty($_GET[$sessionName])
+			? $_GET[$sessionName]
+			: (!empty($_COOKIE[$sessionName]) ? $_COOKIE[$sessionName] : null);
+		if ($sessionId and !Q_Session::isValidId($sessionId)) {
+			throw new Q_Exception_FailedValidation(array(
+				'message' => "$sessionName failed validation"
+			));
+		}
+		return true;
+	}
+
+
+	/**
 	 * Loads and executes arbitrary signed PHP code, e.g. from a secure database.
 	 * This function requires at least two signatures corresponding to two publicKeys
 	 * that are found whitelisted on Q/code/publicKeys config.
