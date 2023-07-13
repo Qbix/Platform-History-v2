@@ -241,7 +241,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						.append($unlisted1)
 						.appendTo(tool.container)
 						.hide();
-					if (state.canAd) {
+					if (state.canAdd) {
 						$unlistedTitle = $('<span id="Streams_new_interest_title" />')
 							.addClass('Streams_new_interest_title');
 						var $select = $('<select class="Streams_new_interest_categories" />')
