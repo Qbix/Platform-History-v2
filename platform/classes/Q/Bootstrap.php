@@ -485,13 +485,13 @@ class Q_Bootstrap
 	 */
 	static function validateEarly()
 	{
-		if (false === Q::event('Q/validateEarly', compact('sessionId'), 'before')) {
-			return;
-		}
 		$sessionName = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
 		$sessionId = !empty($_GET[$sessionName])
 			? $_GET[$sessionName]
 			: (!empty($_COOKIE[$sessionName]) ? $_COOKIE[$sessionName] : null);
+		if (false === Q::event('Q/validateEarly', compact('sessionId'), 'before')) {
+			return;
+		}
 		if ($sessionId and !Q_Session::isValidId($sessionId)) {
 			throw new Q_Exception_FailedValidation(array(
 				'message' => "$sessionName failed validation"

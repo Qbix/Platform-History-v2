@@ -1649,7 +1649,9 @@ class Q_Html
 		'wmv' => 'video',
 		'mov' => 'video',
 		'avi' => 'video',
-		'flv' => 'video'
+		'flv' => 'video',
+		'js' => 'script',
+		'css' => 'stylesheet'
 	);
 
 }

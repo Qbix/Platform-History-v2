@@ -233,11 +233,11 @@ function Q_combine_preprocessCss(&$params)
 	}
 	$params['processed'] = $processed;
 	
-	$preload_export = Q::var_export($preload, true);
-	file_put_contents(
-		$dir_to_save.DS.'preload.php',
-		"<?php\nQ_Uri::\$preload = $preload_export;"
-	);
+	// $preload_export = Q::var_export($preload, true);
+	// file_put_contents(
+	// 	$dir_to_save.DS.'preload.php',
+	// 	"<?php\nQ_Uri::\$preload = $preload_export;"
+	// );
 }
 
 function Q_combine_preload($matches)
