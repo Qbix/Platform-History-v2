@@ -4279,8 +4279,13 @@ abstract class Streams extends Base_Streams
 					$parts[$k] = Q_Utils::ucfirst($v);
 				}
 			}
-			$last = join(' ', array_slice($parts, 1));
-			$first = $parts[0];
+			if (count($parts) >= 3) {
+				$last = join(' ', array_slice($parts, 2));
+				$first = join(' ', array_slice($parts, 0, 2));
+			} else {
+				$last = join(' ', array_slice($parts, 1));
+				$first = $parts[0];
+			}
 		} else {
 			$first = $fullName;
 			$last = '';
