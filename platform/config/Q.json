@@ -140,13 +140,13 @@
 				"{{Q}}/js/Q.js": true
 			},
 			"prettyPrintData": true,
-			"preload": null /* can be "inline", "push" or null */
+			"preload": null /* can be "inline", "header" or null */
 		},
 		"stylesheets": {
 			"responseExtras": {
 				"{{Q}}/css/Q.css": true
 			},
-			"preload": "inline" /* can be "inline", "push" or null */
+			"preload": "header" /* can be "inline", "header" or null */
 		},
 		"environments": {
 			"*": {

@@ -1278,7 +1278,7 @@ class Q_Response
 			) . '</script>';
 
 			if (!Q_Request::isAjax() && !Q_Session::requestedId()
-			&& $preload === 'push' && Q::ifset(self::$preload, $src, null)
+			&& $preload === 'header' && Q::ifset(self::$preload, $src, null)
 			&& (!Q_Valid::url($src) || Q::startsWith($src, $baseUrl))) {
 				// the command below may fail because response body already started
 				$src_encoded = Q_Utils::urlencodeNonAscii($src);
@@ -1519,7 +1519,7 @@ class Q_Response
 			$tags[] = Q_Html::tag('link', $attributes, null, @compact('hash'));
 
 			if (!Q_Request::isAjax() && !Q_Session::requestedId()
-			&& $preload === 'push' && Q::ifset(self::$preload, $href, null)
+			&& $preload === 'header' && Q::ifset(self::$preload, $href, null)
 			&& (!Q_Valid::url($href) || Q::startsWith($href, $baseUrl))) {
 				// the command below may fail because response body already started
 				$href_encoded = Q_Utils::urlencodeNonAscii($href);
