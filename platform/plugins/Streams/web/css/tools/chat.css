@@ -101,7 +101,7 @@
 .Streams_chat_preview_tool .Users_pile_tool {
 	position: absolute;
 	right: 10px;
-	top: 2px;
+	top: auto;
 }
 .Streams_chat_preview_tool[data-participants] .Streams_chat_unseen {
 	top: 23px;

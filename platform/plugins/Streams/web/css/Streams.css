@@ -826,7 +826,9 @@
 }
 
 .Streams_chat_preview_tool {
-	height: 50px;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons {
