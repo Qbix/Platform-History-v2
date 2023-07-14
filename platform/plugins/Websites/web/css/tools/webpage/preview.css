@@ -23,7 +23,8 @@
 .Websites_webpage_preview_tool .Users_pile_tool {
 	position: absolute;
 	right: 10px;
-	top: 2px;
+	top: 50%;
+	transform: translate(0, -50%);
 }
 .Websites_webpage_preview_tool {
 	cursor: pointer;
