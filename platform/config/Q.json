@@ -139,6 +139,13 @@
 				"{{Q}}/js/handlebars-v4.0.10.min.js": true,
 				"{{Q}}/js/Q.js": true
 			},
+			"serviceWorker": {
+				"latest": {
+					"Q": {
+						"timestamp": 1689521256
+					}
+				}
+			},
 			"prettyPrintData": true,
 			"preload": null /* can be "inline", "header" or null */
 		},

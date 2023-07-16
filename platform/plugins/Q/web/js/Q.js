@@ -9529,6 +9529,9 @@ Q.ServiceWorker = {
 		navigator.serviceWorker.register(src)
 		.then(function (registration) {
 			log("Q.ServiceWorker.register", registration);
+			registration.addEventListener("updatefound", () => {
+				Q.handle(Q.ServiceWorker.onUpdateFound, Q.ServiceWorker, [registration]);
+			  });
 			var worker;
 			if (registration.active) {
 				worker = registration.active;
@@ -9539,7 +9542,7 @@ Q.ServiceWorker = {
 			} 
 			if (worker) {
 				Q.handle(callback);
-				Q.handle(Q.ServiceWorker.onActive);
+				Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [registration]);
 			}
 		}).catch(function (error) {
 			debugger;
@@ -9548,6 +9551,7 @@ Q.ServiceWorker = {
 	}
 }
 Q.ServiceWorker.onActive = new Q.Event();
+Q.ServiceWorker.onUpdateFound = new Q.Event();
 
 /**
  * Gets, sets or a deletes a cookie

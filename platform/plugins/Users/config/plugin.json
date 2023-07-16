@@ -67,6 +67,15 @@
 				"exclude": ["Users/login", "Users/authenticate", "Users/activate"]
 			}
 		},
+		"javascript": {
+			"serviceWorker": {
+				"latest": {
+					"Users": {
+						"timestamp": 1689521256
+					}
+				}
+			}
+		},
 		"socket": {
 			"disconnectTimeout": 1500
 		},
