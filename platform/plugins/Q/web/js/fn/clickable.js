@@ -134,8 +134,9 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			$container.addClass(state.className);
 		}
 		$this.hide(); // to get percentage values, if any, for margins & padding
+		var cs = $this[0].computedStyle();
 		Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
-			$container.css('margin-'+pos, $this.css('margin-'+pos));
+			$this[0].style['margin-'+pos] = cs['margin-'+pos];
 		});
 		$this.show();
 		$this.css('margin', 0);
