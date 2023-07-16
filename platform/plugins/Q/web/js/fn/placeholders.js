@@ -16,7 +16,11 @@ Q.Tool.jQuery('Q/placeholders',
 
 function () {
 	
-	return this.plugin('Q/placeholders', 'setup');
+	setTimeout(function () {
+		// Sadly, iOS safar doesn't always update computedStyle() correctly
+		// on just-inserted HTML, until you give it a tick to process it.
+		this.plugin('Q/placeholders', 'setup');
+	}, 0);
 },
 
 {
