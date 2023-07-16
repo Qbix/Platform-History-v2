@@ -4131,6 +4131,10 @@ Q.getter = function _Q_getter(original, options) {
 				// callbacks in position pos, and then decrement
 				// the throttle
 				return function _Q_getter_callback() {
+					// save the results in the cache
+					if (gw.cache && !ret.dontCache) {
+						gw.cache.set(arguments2, cbpos, this, arguments);
+					}
 					// process waiting callbacks
 					var wk = _waiting[key];
 					delete _waiting[key];
@@ -4142,10 +4146,6 @@ Q.getter = function _Q_getter(original, options) {
 								console.warn(e);
 							}
 						}
-					}
-					// save the results in the cache
-					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(arguments2, cbpos, this, arguments);
 					}
 					// tell throttle to execute the next function, if any
 					if (gw.throttle && gw.throttle.throttleNext) {
