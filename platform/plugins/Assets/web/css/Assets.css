@@ -32,7 +32,7 @@
 }
 .Assets_stripe_payment .Q_dialog_content button[name=pay] {
 	display: block;
-	margin: 10px auto 0;
+	margin: 10px auto;
 	width: 100%;
 }
 .Assets_stripe_payment .Assets_Stripe_requestButton {
