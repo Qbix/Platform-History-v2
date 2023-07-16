@@ -889,8 +889,8 @@
 	display: block;
 }
 .Streams_preview_tool .Streams_chat_unseen {
-	bottom: 5px;
-	right: 5px;
+	bottom: -5px;
+	right: -5px;
 	z-index: 99999;
 	display: none;
 	position: absolute;

@@ -38,11 +38,11 @@
 
 .Streams_chat_preview_tool {
 	position: relative;
-	overflow: hidden;
 	cursor: pointer;
-}
-.Streams_chat_preview_tool {
 	border-radius: 5px;
+}
+.Streams_chat_preview_tool .Streams_preview_contents {
+	overflow: hidden;
 }
 .Streams_chat_preview_tool .Streams_chat_preview_info {
 	position: relative;
@@ -92,8 +92,18 @@
 	line-height: 30px;
 	vertical-align: middle;
 	background-color: #cc5555;
-	top: 10px;
+	top: 10px; 
 	right: 10px;
+}
+.Streams_chat_preview_tool[data-participants] .Streams_chat_unseen {
+	left: auto;
+	top: auto;
+	right: -5px;
+	bottom: -5px;
+	height: 25px;
+	min-width: 25px;
+	line-height: 25px;
+	font-size: 14px;
 }
 .Streams_chat_preview_tool .Streams_chat_unseen.Streams_preview_nonzero {
 	display: block;
@@ -103,15 +113,6 @@
 	right: 10px;
 	top: 50%;
 	transform: translate(0, -50%);
-}
-.Streams_chat_preview_tool[data-participants] .Streams_chat_unseen {
-	top: 23px;
-	right: 2px;
-	height: 25px;
-	min-width: 25px;
-	line-height: 25px;
-	font-size: 14px;
-	font-weight: normal;
 }
 .Streams_chat_preview_tool .Streams_preview_contents {
 	position: relative;
