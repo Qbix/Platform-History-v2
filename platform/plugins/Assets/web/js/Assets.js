@@ -1625,6 +1625,45 @@
 				}
 			},
 		},
+		Funds: {
+			getAll: function(fundFactoryAddress, abiPath, chainId, callback) {
+
+				if (Q.isEmpty(abiPath)) {
+					abiPath = "Assets/templates/R1/Fund/factory";
+				}
+				
+				var fundFactory;
+				
+				Q.Users.Web3.getContract(
+					abiPath, 
+					{
+						contractAddress: fundFactoryAddress,
+						readOnly: true,
+						chainId: chainId
+					}
+				).then(function (contract) {
+					fundFactory = contract;
+					return contract.instancesCount();
+					
+				}).then(function (amount) {
+
+					if (amount == 0) {
+						return new Promise(function (resolve, reject) {resolve([])});
+					}
+				
+					var p = [];
+					for(var i = 0; i < amount; i++) {
+						p.push(fundFactory.instances(i));
+					}
+					return Promise.allSettled(p);
+				}).then(function (instances) {
+					Q.handle(callback, null, [null, instances]);	
+				}).catch(function(err){
+					Q.handle(callback, null, [err.reason]);
+				})
+				
+			}
+		},
 		
 		Web3: {
 			/**
@@ -1772,6 +1811,10 @@
 		"Assets/credits/balance": {
 			js: "{{Assets}}/js/tools/credits/balance.js",
 			css: "{{Assets}}/css/tools/credits/balance.css"
+		},
+		"Assets/web3/coin/presale/admin": {
+			js: "{{Assets}}/js/tools/web3/coin/presale/admin.js",
+			css: "{{Assets}}/css/tools/web3/coin/presale/admin.css"
 		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",

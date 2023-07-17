@@ -626,6 +626,61 @@
 				"loading": "Loading"
 			}
 		},
+		"presale": {
+			"admin": {
+				"form": {
+					"labels": {
+						"sellingToken": "Selling Token",
+						"timestamps": "Timestamps",
+						"prices": "Prices",
+						"endTime": "End Time",
+						"thresholds": "Thresholds",
+						"bonuses": "Bonuses",
+						"ownerCanWithdraw": "Owner Can Withdraw",
+						"whitelistData": "whitelist Data"
+					},
+					"small": {
+						"sellingToken": "Selling Token",
+						"timestamps": "Timestamps",
+						"prices": "Prices",
+						"endTime": "End Time",
+						"thresholds": "Thresholds",
+						"bonuses": "Bonuses",
+						"ownerCanWithdraw": "Owner Can Withdraw",
+						"whitelistData": "whitelist Data"
+					}
+				},
+				"placeholders": {
+					"optional": "(optional)",
+					"tuple": "tuple[]",
+					"number": "number",
+					"address": "address",
+					"addresses": "address[]",
+					"fraction": "fraction",
+					"integer": "integer",
+					"uint256s": "uint256[]",
+					"seconds": "seconds",
+					"days": "days",
+					"uint256": "uint256",
+					"uint192": "uint192",
+					"uint64": "uint64",
+					"uint32": "uint32",
+					"uint16": "uint16"
+				},
+				"errmsgs": {
+					"ThereAreNoFunds": "There are no funds"
+				},
+				"btns":{
+					"createFund": "Create Fund",
+					"createFundInForm": "Create"
+				},
+				"fundAddress": "Fund address",
+				"createFund": "Create Fund",
+				"produce": "Produce",
+				"loading": "Loading",
+				"viewInstancesList": "Refresh List"
+			}
+		},
 		"admin": {
 			"form": {
 				"labels": {
