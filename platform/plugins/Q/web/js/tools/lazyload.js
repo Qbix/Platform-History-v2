@@ -206,10 +206,12 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (element.hasAttribute('data-q-lazyload')
 				&& element.Q.tool) {
 					// backup inline width, height styles and set them to real element size
-					element.Q_lazyload_inlineWidth = element.style.width;
-					element.Q_lazyload_inlineHeight = element.style.height;
-					element.style.width = element.offsetWidth + 'px';
-					element.style.height = element.offsetHeight + 'px';
+					if (element.getAttribute('data-q-preservedimensions')) {
+						element.Q_lazyload_inlineWidth = element.style.width;
+						element.Q_lazyload_inlineHeight = element.style.height;
+						element.style.width = element.offsetWidth + 'px';
+						element.style.height = element.offsetHeight + 'px';
+					}
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
 					element.removeClass('Q_lazy_loaded');
