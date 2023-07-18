@@ -1,4 +1,95 @@
 (function (window, Q, $, undefined) {
+	
+	
+	if (Q.isEmpty(Q.grabMetamaskError)) {
+
+        // see https://github.com/MetaMask/eth-rpc-errors/blob/main/src/error-constants.ts
+        // TODO need to handle most of them
+        Q.grabMetamaskError = function _Q_grabMetamaskError(err, contracts) {
+
+            if (err.code == '-32603') {
+                if (!Q.isEmpty(err.data)) {
+                    if (err.data.code == 3) {
+                        //'execution reverted'
+
+                        var str = '';
+                        contracts.every(function (contract) {
+                            try {
+                                var customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
+                                if (customErrorDescription) {
+
+                                    var decodedStr = ethers.utils.defaultAbiCoder.decode(
+                                        customErrorDescription.inputs.map(obj => obj.type),
+                                        ethers.utils.hexDataSlice(err.data.data, 4)
+                                    );
+                                    str = `${customErrorDescription.name}(${(decodedStr.length > 0) ? '"' + decodedStr.join('","') + '"' : ''})`;
+                                    return false;
+                                }
+                                return true;
+                            } catch (error) {
+                                return true;
+                            }
+
+                        });
+
+                        if (Q.isEmpty(str)) {
+                            // handle: revert("here string message")
+                            return (err.data.message)
+                        } else {
+                            return (str);
+                        }
+                    } else {
+                        //handle "Internal JSON-RPC error."
+                        return (err.data.message);
+                    }
+                }
+            }
+
+            // handle revert and grab custom error
+            return (err.message);
+        }
+    }
+	
+	if (Q.isEmpty(Q.isAddress)) {
+		Q.isAddress = function _Q_isAddress(address) {
+			// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
+			if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+				// check if it has the basic requirements of an address
+				return false;
+			} else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+				// If it's all small caps or all all caps, return true
+				return true;
+			} else {
+				// Otherwise check each case
+	//            address = address.replace('0x','');
+	//            var addressHash = Web3.utils.sha3(address.toLowerCase());
+	//            for (var i = 0; i < 40; i++ ) {
+	//                // the nth letter should be uppercase if the nth digit of casemap is 1
+	//                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+	//                    return false;
+	//                }
+	//            }
+				return true;
+			}
+
+		}
+	}
+
+	if (Q.isEmpty(Q.validate)) {
+		Q.validate = function _Q_validate(address) {
+
+		}
+		Q.validate.notEmpty = function _Q_validate_notEmpty(input) {
+			return !Q.isEmpty(input)
+		}
+		Q.validate.integer = function _Q_validate_integer(input) {
+			return Q.isInteger(input)
+		}
+		Q.validate.address = function _Q_validate_address(input) {
+			return Q.isAddress(input)
+		}
+	}
+	
 	/**
 	 * @module Assets
 	 */
@@ -63,10 +154,61 @@
 			return console.warn("chainId required!");
 		}
 		
+		var defaultsValidate = {
+            notEmpty: "<b>%key%</b> cannot be empty", 
+            integer: "<b>%key%</b> must be an integer", 
+            address: "<b>%key%</b> invalid"
+        };
+		
+		// fill missed attr fields
+        for (var i in state.fields) {
+            
+            if (typeof(state.fields[i]) === "string") {
+                state.fields[i] = {
+                    value: state.fields[i],
+                    hide: false
+                }
+            } else if (typeof(state.fields[i]) === "object") {
+                let arr;
+                if (Q.isEmpty(state.fields[i]["value"])) {
+                    state.fields[i].value = "";
+                }
+                if (Q.isEmpty(state.fields[i]["hide"])) {
+                    state.fields[i].hide = false;
+                }
+                
+                if (Q.isEmpty(state.fields[i]["validate"])) {
+                    state.fields[i]["validate"] = {};
+                } else if (Array.isArray(state.fields[i]["validate"])) {
+                    
+                    arr = {};
+                    for (var j in state.fields[i]["validate"]) {
+                        let k = state.fields[i]["validate"][j];
+                        if (Q.isEmpty(defaultsValidate[k])) {
+                            console.warn(`validate expr "${k}" have not supported yet`);
+                        } else {
+                            arr[k] = defaultsValidate[k];
+                        }
+                    }
+                    state.fields[i]["validate"] = Object.assign({}, arr);
+                    
+                } else if (typeof(state.fields[i]["validate"]) === "object") {
+                    for (var j in state.fields[i]["validate"]) {
+                        if (Q.isEmpty(defaultsValidate[j])) {
+                            console.warn(`validate expr "${j}" have not supported yet`);
+                        } else {
+                            state.fields[i]["validate"][j] = state.fields[i]["validate"][j];
+                        }
+                    }
+                }
+            }
+        }
+
+		
 		tool.refresh();
 	},
 	{ // default options here
-		abiPath: "Assets/templates/R1/Fund/contract",
+		//abiPath: "Assets/templates/R1/Fund/contract",
 		abiPathF: "Assets/templates/R1/Fund/factory",
 		chainId: null,
 		fundFactoryAddress: null,
@@ -83,7 +225,7 @@
 			prices: {value: "", hide: false, validate: ["notEmpty"]},
 			endTime: {value: "", hide: false, validate: ["notEmpty", "integer"]},
 			thresholds: {value: "", hide: false, validate: ["notEmpty"]},
-			bonuses: {value: "", hide: false, validate: ["notEmpty", "integer"]},
+			bonuses: {value: "", hide: false, validate: ["notEmpty"]},
 			ownerCanWithdraw: {value: "", hide: false, validate: ["notEmpty", "integer"]},
 			whitelistData: {value: "", hide: false, validate: ["notEmpty"]}
 		},
@@ -101,8 +243,11 @@
 				
 				tool.refreshFundList();
 				
-				$('.Assets_web3_coin_presale_admin_produce', tool.element).off(Q.Pointer.click).on(Q.Pointer.fastclick, function(){
+				$('.Assets_web3_coin_presale_admin_produce', tool.element).off(Q.Pointer.click).on(Q.Pointer.fastclick, function(e){
+					e.preventDefault();
+					e.stopPropagation();
 					
+console.log("Assets_web3_coin_presale_admin_produce");
 					var invokeObj = Q.invoke({
 						title: tool.text.coin.presale.admin.createFund,
 						template: {
@@ -138,6 +283,7 @@
 
 							// creation funds
 							$("button[name=create]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
+console.log("button[name=create]");
 								e.preventDefault();
 								e.stopPropagation();
 
@@ -172,12 +318,12 @@
 								
 								if (validated) {
 									
-									/*
+									
 									var contract;
 									Q.Users.Web3.getContract(
-										state.abiPath, 
+										state.abiPathF, 
 										{
-											contractAddress: state.communityCoinAddress,
+											contractAddress: state.fundFactoryAddress,
 											chainId: state.chainId
 										}
 									).then(function (_contract) {
@@ -186,19 +332,42 @@
 										// we cant by pass in etherjs value like "[]". is not array ,because -  Array.isArray("[]") => false
 										// so need to convert to array "[]".split(',')
 										//vals.donations = "[]" == vals.donations ?[]:vals.donations.split(',');
-										fields.donations.userValue = "[]" == fields.donations.userValue ?[]:fields.donations.userValue.split(',');
+										var f = function(input) {
+											if (input == '[]') {
+												return [];
+											}
+											var match = /(?<=\[).+?(?=\])/.exec(input);
+											if (match != null) {
+												return match[0].split(',');
+											}
+											return input;
+										}
+										fields.timestamps.userValue		= f(fields.timestamps.userValue);
+										fields.prices.userValue			= f(fields.prices.userValue);
+										fields.thresholds.userValue		= f(fields.thresholds.userValue);
+										fields.bonuses.userValue		= f(fields.bonuses.userValue);
+										fields.whitelistData.userValue	= f(fields.whitelistData.userValue);
+
+//console.log(fields.sellingToken.userValue);
+//console.log(fields.timestamps.userValue);
+//console.log(fields.prices.userValue);
+//console.log(fields.endTime.userValue);
+//console.log(fields.thresholds.userValue);
+//console.log(fields.bonuses.userValue);
+//console.log(fields.ownerCanWithdraw.userValue);
+//console.log(fields.whitelistData.userValue);
 
 										return contract.produce(
-											fields.tokenErc20.userValue, //address tokenErc20,
-											fields.duration.userValue, //uint64 duration,
-											fields.bonusTokenFraction.userValue, //uint64 bonusTokenFraction,
-											fields.popularToken.userValue, //address popularToken,
-											fields.donations.userValue, //IStructs.StructAddrUint256[] memory donations,
-											fields.rewardsRateFraction.userValue, //uint64 rewardsRateFraction,
-											fields.numerator.userValue, //uint64 numerator,
-											fields.denominator.userValue //uint64 denominator
+											fields.sellingToken.userValue,
+											fields.timestamps.userValue,
+											fields.prices.userValue,
+											fields.endTime.userValue,
+											fields.thresholds.userValue,
+											fields.bonuses.userValue,
+											fields.ownerCanWithdraw.userValue,
+											fields.whitelistData.userValue
 										);
-
+	
 									}).then(function (tx) {
 										return tx.wait();
 									}).then(function (receipt) {
@@ -206,7 +375,7 @@
 										if (receipt.status == 0) {
 											throw 'Smth unexpected';
 										}
-										tool.refreshPoolList();	
+										tool.refreshFundList();	
 
 									}).catch(function (err) {
 
@@ -221,7 +390,7 @@
 										$element.removeClass("Q_working");
 										invokeObj.close();
 									});
-									*/
+									
 								} else {
 									$element.removeClass("Q_working");
 									invokeObj.close();
@@ -258,6 +427,7 @@
 					} else {
 						
 						instances.forEach(function(i, index){
+
 							Q.Template.render('Assets/web3/coin/presale/admin/funds/row', {index: index+1, i:i}, function(err, html){
 								$tbody.append(html);
 							});
@@ -371,7 +541,7 @@
 	`
 	<tr>
 		<th scope="row">{{index}}</th>
-		<td>{{i.address}}</td>
+		<td>{{i.value}}</td>
 	</tr>
 	`,
 	{text: ["Assets/content"]});
