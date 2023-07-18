@@ -1634,14 +1634,15 @@
 				
 				var fundFactory;
 				
-				Q.Users.Web3.getContract(
+				Q.Users.Web3.getFactory(
 					abiPath, 
+
 					{
-						contractAddress: fundFactoryAddress,
-						readOnly: true,
-						chainId: chainId
+						chainId: chainId,
+						readOnly: true
 					}
 				).then(function (contract) {
+
 					fundFactory = contract;
 					return contract.instancesCount();
 					
