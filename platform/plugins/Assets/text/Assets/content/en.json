@@ -636,21 +636,34 @@
 						"endTime": "End Time",
 						"thresholds": "Thresholds",
 						"bonuses": "Bonuses",
-						"ownerCanWithdraw": "Owner Can Withdraw",
-						"whitelistData": "whitelist Data"
+						"ownerCanWithdraw": "Withdraw possibility",
+						"whitelistData": "whitelist Data",
+						"communityAddress": "Community address",
+						"methodkeccack": "Keccak256 hash function",
+						"roleId": "Role id"
 					},
 					"small": {
 						"sellingToken": "Selling Token",
-						"timestamps": "Timestamps",
-						"prices": "Prices",
+						"timestamps": "Untiltime",
+						"prices": "ETH, Price",
 						"endTime": "End Time",
-						"thresholds": "Thresholds",
-						"bonuses": "Bonuses",
+						"thresholds": "token, Threshold",
+						"bonuses": "% Bonus",
 						"ownerCanWithdraw": "Owner Can Withdraw",
-						"whitelistData": "whitelist Data"
+						"whitelistData": "whitelist Data",
+						"communityAddress": "Community address",
+						"methodkeccack": "4bytes hash of method to check",
+						"roleId": "index of role id"
 					}
 				},
 				"placeholders": {
+					"communityAddress": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324",
+					"roleId": "4",
+					"methodkeccack": "0x95a8c58d",
+					"sellingToken": "Selling Token",
+					"prices": "1.2",
+					"thresholds": "12.5",
+					"bonuses": "10",
 					"optional": "(optional)",
 					"tuple": "tuple[]",
 					"number": "number",

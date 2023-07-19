@@ -1626,21 +1626,29 @@
 			},
 		},
 		Funds: {
-			getAll: function(fundFactoryAddress, abiPath, chainId, callback) {
-
+			getFactory: function(chainId, readonly, abiPath) {
 				if (Q.isEmpty(abiPath)) {
 					abiPath = "Assets/templates/R1/Fund/factory";
 				}
-				
-				var fundFactory;
-				
-				Q.Users.Web3.getFactory(
+				return Q.Users.Web3.getFactory(
 					abiPath, 
-
+					readonly == true 
+					?
 					{
 						chainId: chainId,
 						readOnly: true
 					}
+					:
+					chainId
+				);
+			},
+			getAll: function(chainId, abiPath, callback) {
+				var fundFactory;
+				
+				Assets.Funds.getFactory(
+					chainId, 
+					true,
+					abiPath
 				).then(function (contract) {
 
 					fundFactory = contract;
@@ -1814,8 +1822,16 @@
 			css: "{{Assets}}/css/tools/credits/balance.css"
 		},
 		"Assets/web3/coin/presale/admin": {
-			js: "{{Assets}}/js/tools/web3/coin/presale/admin.js",
-			css: "{{Assets}}/css/tools/web3/coin/presale/admin.css"
+			js: [
+				"{{Assets}}/js/tools/web3/coin/presale/admin.js",
+				'{{Q}}/pickadate/picker.js',
+				'{{Q}}/pickadate/picker.date.js'
+			],
+			css: [
+				"{{Assets}}/css/tools/web3/coin/presale/admin.css",
+				'{{Q}}/pickadate/themes/default.css',
+				'{{Q}}/pickadate/themes/default.date.css'
+			]
 		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
