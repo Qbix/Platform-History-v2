@@ -181,17 +181,19 @@ Q.Tool.define('Q/lazyload', function (options) {
 				var tool = this;
 				var ep = tool.frozen.get(element);
 				var c = element.parentElement;
-				var r = c.getBoundingClientRect();
-				if (!ep) {
+				if (!ep || !c) {
 					// element didn't exit before, so its dimensions weren't frozen
-				} else if (!ep.containerRect || ep.containerRect.width !== r.width) {
-					// container was resized, so throw away the frozen dimensions
-					// because a reflow should happen anyway
-					tool.unfreezeDimensions(element);
 				} else {
-					// inform tools that their element has frozen dimensions,
-					// so the tools may want to revert the frozen dimensions
-					element.addClass('Q_frozen_dimensions');
+					var r = c.getBoundingClientRect();
+					if (!ep.containerRect || ep.containerRect.width !== r.width) {
+						// container was resized, so throw away the frozen dimensions
+						// because a reflow should happen anyway
+						tool.unfreezeDimensions(element);
+					} else {
+						// inform tools that their element has frozen dimensions,
+						// so the tools may want to revert the frozen dimensions
+						element.addClass('Q_frozen_dimensions');
+					}
 				}
 				this.timeouts.set(element, setTimeout(function () {
 					if (element.hasAttribute('data-q-lazyload')
