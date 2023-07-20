@@ -1404,7 +1404,7 @@ class Q_Html
 		 * @param {string} file_path
 		 * @return {array}
 		 */
-		$result = Q::event('Q/themedUrlFilenameAndHash', @compact('file_path'), 'before');
+		$result = Q::event('Q/themedUrlFilenameAndHash', @compact('filePath'), 'before');
 		if ($result) {
 			return $result;
 		}
