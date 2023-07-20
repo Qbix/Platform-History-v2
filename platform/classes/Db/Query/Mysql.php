@@ -1186,6 +1186,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$c_arr = array();
 		$was_empty = true;
 		foreach ($args as $arg) {
+			if (!isset($arg)) {
+				continue;
+			}
 			$c = $this->criteria_internal($arg);
 			if (! is_string($c)) {
 				throw new Exception("The WHERE criteria need to be specified correctly.", -1);
@@ -1249,6 +1252,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$c_arr = array();
 		$was_empty = true;
 		foreach ($args as $arg) {
+			if (!isset($arg)) {
+				continue;
+			}
 			$c = $this->criteria_internal($arg);
 			if (! is_string($c)) {
 				throw new Exception("The WHERE criteria need to be specified correctly.", -1);

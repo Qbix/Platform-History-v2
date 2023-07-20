@@ -25,10 +25,13 @@ function Q_after_Q_tool_render($params, &$result)
 				. implode('_', explode('/', $name)) . '_tool';
 		$options = Q_Response::getToolOptions($name);
 		if (isset($options)) {
+			$o = Q_Config::get('Q', 'javascript', 'prettyPrintData', true)
+					? JSON_PRETTY_PRINT
+					: 0;
 			$friendly_options = str_replace(
 				array('&quot;', '\/'),
 				array('"', '/'),
-				Q_Html::text(Q::json_encode($options))
+				Q_Html::text(Q::json_encode($options, $o))
 			);
 		} else {
 			$friendly_options = '';

@@ -15,7 +15,7 @@ class Db_Range
 	 * @param {boolean} $includeMax Whether the range extends to include the maximum value
 	 * @param {mixed} $max Maximal value of the range. Pass null to skip the max.
 	 *  If boolean true is passed here, then $max is set to $min with the last character
-	 *  incremented to the next ASCII value.
+	 *  incremented to the next character value (used for string prefixes).
 	 */
 	function __construct ($min, $includeMin, $includeMax, $max)
 	{

@@ -13707,9 +13707,10 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 		return;
 	}
 	var ccd = Q.Pointer.options.cancelClickDistance;
-	if (event.button || _pos
-	&& ((_pos.x && Math.abs(_pos.x - screenX) > ccd)
-	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd))) {
+	if (_pos && (
+		(_pos.x && Math.abs(_pos.x - screenX) > ccd)
+	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd)
+	)) {
 		// finger moved more than the threshhold
 		if (false !== Q.Pointer.cancelClick(true, evt, {
 			fromX: _pos.x,
