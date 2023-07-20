@@ -2589,6 +2589,11 @@ Q.zIndexTopmost = function (container, filter) {
 		}
 		var z = parseInt(this.computedStyle().zIndex);
 		if (!isNaN(z)) {
+			// if z-index is max allowed, skip this element
+			if (z >= 2147483647) {
+				return;
+			}
+
 			topZ = Math.max(topZ, z)
 		}
 	});
@@ -9006,6 +9011,7 @@ Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.lskey) || "{}")
  * @param {Function} onload
  * @param {Object} [options]
  *  Optional. A hash of options, including options for Q.url() and these:
+ * @param {String} [options.type='text/javascript'] Type attribute of script tag
  * @param {Boolean} [options.duplicate] if true, adds script even if one with that src was already loaded
  * @param {Boolean} [options.skipIntegrity] if true, skips adding "integrity" attribute even if one can be calculated
  * @param {Boolean} [options.onError] optional function that may be called in newer browsers if the script fails to load. Its this object is the script tag.
@@ -9200,7 +9206,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 
 	// Create the script tag and insert it into the document
 	script = document.createElement('script');
-	script.setAttribute('type', 'text/javascript');
+	script.setAttribute('type', Q.getObject("type", options) || 'text/javascript');
 	if (options.info.h && !options.skipIntegrity) {
 		if (Q.info.urls && Q.info.urls.integrity) {
 			script.setAttribute('integrity', 'sha256-' + options.info.h);
@@ -13624,7 +13630,7 @@ Q.Pointer.hint.options = {
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",
-	zIndex: 2147483647,
+	zIndex: Q.zIndexTopmost(),
 	neverRemove: false,
 	dontRemove: false,
 	show: {
