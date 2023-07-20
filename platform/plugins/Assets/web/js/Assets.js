@@ -1464,7 +1464,7 @@
 					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId).then(function (instanceInfos) {
 						Q.handle(callback, null, [null, instanceInfos]);
 					}).catch(function(err){
-						Q.handle(callback, null, [err.reason]);
+						console.warn(err);
 					});	
 				},
 				/**
@@ -1543,7 +1543,6 @@
 						
 					}).catch(function(err){
 						console.warn(err);
-						Q.handle(callback, null, [err.reason]);
 					});
 				},
 				
@@ -1668,7 +1667,25 @@
 				}).then(function (instances) {
 					Q.handle(callback, null, [null, instances]);	
 				}).catch(function(err){
-					Q.handle(callback, null, [err.reason]);
+					console.warn(err);
+				})
+				
+			},
+			getFundConfig: function(contractAddress, chainId, callback) {
+				
+				Q.Users.Web3.getContract(
+					'Assets/templates/R1/Fund/contract', {
+						chainId: chainId,
+						contractAddress: contractAddress,
+						readOnly: true
+					}
+				).then(function (contract) {
+					return contract.getConfig();
+
+				}).then(function (instances) {
+					Q.handle(callback, null, [null, instances]);	
+				}).catch(function(err){
+					console.warn(err);
 				})
 				
 			}

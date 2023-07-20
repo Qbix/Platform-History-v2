@@ -21,3 +21,7 @@ and open the template in the editor.
 	margin-bottom:10px;
 	border-bottom: 1px solid #eee;
 }
+
+.Assets_web3_coin_presale_admin_fund_info table tbody tr:first-child td {
+	border-top:none;
+}

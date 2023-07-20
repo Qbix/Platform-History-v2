@@ -126,14 +126,72 @@
 			//  validate: ["isEmpty", "isInteger", ...] and try to call Q methods: Q.isEmpty, Q.isInteger ...
 			// - object  like {key => errormessage}
 			//  validate: {"isEmpty": "err msg here to key %key%, "isInteger": "invalid key %key%, ...} and try to call Q methods: Q.isEmpty, Q.isInteger ...
-			sellingToken: {value: "", hide: false, validate: ["notEmpty", "address"]},
-			timestamps: {value: "", hide: false, validate: ["notEmpty"]},
-			prices: {value: "", hide: false, validate: ["notEmpty"]},
-			endTime: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-			thresholds: {value: "", hide: false, validate: ["notEmpty"]},
-			bonuses: {value: "", hide: false, validate: ["notEmpty"]},
-			ownerCanWithdraw: {value: "", hide: false, validate: ["notEmpty", "integer"]},
-			whitelistData: {value: "", hide: false, validate: ["notEmpty"]}
+			sellingToken: {
+				value: "", 
+				hide: false, 
+				validate: ["notEmpty", "address"], 
+				output: function(v) {return v}
+			},
+			timestamps: {
+				value: "", 
+				hide: false, 
+				validate: ["notEmpty"],
+				output: function(v) {
+					return Math.floor(new Date(v + ' GMT+00:00').getTime()/1000)
+				}, 
+				emptyValue:[]
+			},
+			prices: {
+				value: "", 
+				hide: false, 
+				validate: ["notEmpty"],
+				output: function(v, dpl) {
+					return ethers.utils.parseUnits(
+						v.toString(), 
+						Q.isEmpty(dpl) ? dpl : 18
+					)
+				}, 
+				emptyValue:[]
+			},
+			endTime: {
+				value: "", 
+				hide: false, 
+				validate: ["notEmpty"],
+				output: function(v) {
+					return Math.floor(new Date(v + ' GMT+00:00').getTime()/1000)
+				}
+			},
+			thresholds: {
+				value: "", 
+				hide: false, 
+				validate: [],
+				output: function(v, dpl) {
+					return ethers.utils.parseUnits(
+						v.toString(), 
+						Q.isEmpty(dpl) ? dpl : 18
+					)
+				}, 
+				emptyValue:[]
+			},
+			bonuses: {
+				value: "", 
+				hide: false, 
+				validate: [],
+				output: function(v) {return v}, 
+				emptyValue:[]
+			},
+			ownerCanWithdraw: {
+				value: "", 
+				hide: false, 
+				validate: ["notEmpty", "integer"],
+				output: function(v) {return v}
+			},
+			whitelistData: {
+				value: "", 
+				hide: false, 
+				validate: ["notEmpty"],
+				output: function(v) {return v}
+			}
 		},
 	},
 	{ // methods go here
@@ -141,32 +199,23 @@
 			var tool = this;
 			var state = tool.state;
 
-			Q.Template.render("Assets/web3/coin/presale/admin", {
-				chainId: state.chainId,
-				chains: Assets.Web3.chains
-			}, function (err, html) {
+			Q.Template.render("Assets/web3/coin/presale/admin", {}, function (err, html) {
 				Q.replace(tool.element, html);
 				
 				tool.refreshFundList();
 				
-				$('.Assets_web3_coin_presale_admin_produce', tool.element).off('click').on('click', function(e){
-					
-					console.log("Assets_web3_coin_presale_admin_produce");
+				$('.Assets_web3_coin_presale_admin_produce', tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 					
 					var invokeObj = Q.invoke({
 						title: tool.text.coin.presale.admin.createFund,
 						template: {
-							
 							fields: {
 								objfields: state.fields,
 								ownerCanWithdrawOptions: [
-
-									[0,"Owner can not withdraw"],
-									[1,"Owner can withdraw tokens only after endTime passed"],
-									[2,"Owner can withdraw tokens anytime"]
+									[0,tool.text.coin.presale.admin.form.fields.ownerWithdrawOptions.option0],
+									[1,tool.text.coin.presale.admin.form.fields.ownerWithdrawOptions.option1],
+									[2,tool.text.coin.presale.admin.form.fields.ownerWithdrawOptions.option2]
 								]
-	
-	
 							},
 							name: 'Assets/web3/coin/presale/admin/create'
 						},
@@ -188,42 +237,24 @@
 							}();
 							
 							$element.find('input[name=endTime]').pickadate({
-										showMonthsShort: true,
-										format: 'ddd, mmm d, yyyy',
-										formatSubmit: 'yyyy/mm/dd',
-										hiddenName: true,
-										min: new Date(),
-										container: $element,
-										onStart: function () {
-											this.set('select', nextDayDate);
-										}
-									});
-									
-									
-							/*
-							for (var fieldName in state.fields) {
-								var $input = $element.find("input[name="+fieldName+"]");
-								if (state.fields[fieldName].hide) {
-									var $formGroup = $input.closest('.form-group');
-									$formGroup.add($formGroup.prev('label'))
-										.remove();
-								} else {
-									$input.val(
-										state.fields[fieldName].value
-									);
+								showMonthsShort: true,
+								format: 'ddd, mmm d, yyyy',
+								formatSubmit: 'yyyy/mm/dd',
+								hiddenName: true,
+								min: new Date(),
+								container: $element,
+								onStart: function () {
+									this.set('select', nextDayDate);
 								}
-							}
-							*/
+							});
+							
 							var removeBtnsHandler = function($btn) {
-
 								var ident = $btn.data('ident');
-								console.log("removeBtnsHandler ident =",ident);				
 								$btn.closest('div[data-ident="'+ident+'"]').remove();
 							}
 
-							$('button[name=timestamps_and_prices_add_row]', $element).off('click').on('click', function(e){
-								console.log("button[name=timestamps_and_prices_add_row]");	
-
+							$('button[name=timestamps_and_prices_add_row]', $element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
+								
 								Q.Template.render("Assets/web3/coin/presale/admin/create/fields/timestamps_and_prices/row", {
 									ident: (Math.random() + 1).toString(36).substring(2)
 								}, function (err, html) {
@@ -247,15 +278,14 @@
 									
 									$($element).find('.timestamps_and_prices_rows_container').append($html);
 
-									$('button[name=timestamps_and_prices_remove_row]', $element).off('click').on('click', function(e){
+									$('button[name=timestamps_and_prices_remove_row]', $html).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 										removeBtnsHandler($(this));
 									});
 								});
 
 							});
 							
-							$('button[name=thresholds_and_bonuses_add_row]', $element).off('click').on('click', function(e){
-								console.log("button[name=thresholds_and_bonuses_add_row]");	
+							$('button[name=thresholds_and_bonuses_add_row]', $element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 
 								Q.Template.render("Assets/web3/coin/presale/admin/create/fields/thresholds_and_bonuses/row", {
 									ident: (Math.random() + 1).toString(36).substring(2)
@@ -265,7 +295,7 @@
 									//$html.find('input[name=timestamps]').datepicker();
 									$($element).find('.thresholds_and_bonuses_rows_container').append($html);
 
-									$('button[name=thresholds_and_bonuses_remove_row]', $element).off('click').on('click', function(e){
+									$('button[name=thresholds_and_bonuses_remove_row]', $html).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 										removeBtnsHandler($(this));
 									});
 								});
@@ -281,8 +311,7 @@
 							}).trigger('change');
 							
 							// creation funds
-							$("button[name=create]", $element).off('click').on('click', function (e) {
-//console.log("button[name=create]");
+							$("button[name=create]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
 
 								$element.addClass("Q_working");
 								
@@ -290,14 +319,54 @@
 								let fields = Object.assign({}, state.fields);
 								//collect form
 								for (let key in fields) {
-									// get field values
-									fields[key].userValue = $element.find(`[name='${key}']`).val();
-									// use default values if present
-									fields[key].userValue = fields[key].userValue || fields[key].value;
+									// use default values if present and if 'hide' key present
+									if (fields[key].hide) {
+										fields[key].userValue = fields[key].value;
+										continue;
+									}
+									
+									//custom for whitelist structure
+									if (key == 'whitelistData') {
+
+										if ($('#useWhiteList').is(":checked")) {
+											fields[key].userValue = [];
+											fields[key].userValue[0] = $($element).find('input[name=whitelistData_communityAddress]').val();
+											fields[key].userValue[1] = $($element).find('input[name=whitelistData_methodkeccack]').val();
+											fields[key].userValue[2] = $($element).find('input[name=whitelistData_roleId]').val();
+											fields[key].userValue[3] = 1;
+
+											//fields[key].userValue = '['+ (fields[key].userValue).join(',')+']';
+										} else {
+											fields[key].userValue = ['0x0000000000000000000000000000000000000000','0x95a8c58d','1','0'];
+										}
+
+									} else	{				
+										// get field values
+										var tmp;
+										var $fieldSelector = $element.find(`[name='${key}']`);
+										if ($fieldSelector.length == 0) {
+											fields[key].userValue = (fields[key].emptyValue) ? fields[key].emptyValue : '';
+											continue;
+										} else if ($fieldSelector.length == 1) {
+											fields[key].userValue = fields[key].output($fieldSelector.val());
+										} else {
+											tmp = [];
+											$fieldSelector.each(function(i, v){
+												var val = $(v).val();
+												if (!Q.isEmpty(val)) {
+													tmp[tmp.length] = fields[key].output(val);	
+												}
+											});
+											//fields[key].userValue = '['+tmp.join(',')+']';
+											fields[key].userValue = tmp;
+										}
+									}
+									//fields[key].userValue = (fields[key].hide) ? fields[key].value : fields[key].userValue;
 								}
 	
 								// validate (after user input and applied defaults value)
 								var validated = true;
+
 								for (let key in fields) {
 									for (let validateMethod in fields[key].validate) {
 										if (!Q.Users.Web3.validate[validateMethod](fields[key].userValue)) {
@@ -316,7 +385,7 @@
 								}
 								
 								if (validated) {
-									
+
 									var contract;
 									Assets.Funds.getFactory(
 										state.chainId, 
@@ -324,35 +393,7 @@
 										state.abiPathF
 									).then(function (_contract) {
 										contract = _contract;
-										// stupid thing
-										// we cant by pass in etherjs value like "[]". is not array ,because -  Array.isArray("[]") => false
-										// so need to convert to array "[]".split(',')
-										//vals.donations = "[]" == vals.donations ?[]:vals.donations.split(',');
-										var f = function(input) {
-											if (input == '[]') {
-												return [];
-											}
-											var match = /(?<=\[).+?(?=\])/.exec(input);
-											if (match != null) {
-												return match[0].split(',');
-											}
-											return input;
-										}
-										fields.timestamps.userValue		= f(fields.timestamps.userValue);
-										fields.prices.userValue			= f(fields.prices.userValue);
-										fields.thresholds.userValue		= f(fields.thresholds.userValue);
-										fields.bonuses.userValue		= f(fields.bonuses.userValue);
-										fields.whitelistData.userValue	= f(fields.whitelistData.userValue);
-
-//console.log(fields.sellingToken.userValue);
-//console.log(fields.timestamps.userValue);
-//console.log(fields.prices.userValue);
-//console.log(fields.endTime.userValue);
-//console.log(fields.thresholds.userValue);
-//console.log(fields.bonuses.userValue);
-//console.log(fields.ownerCanWithdraw.userValue);
-//console.log(fields.whitelistData.userValue);
-
+										
 										return contract.produce(
 											fields.sellingToken.userValue,
 											fields.timestamps.userValue,
@@ -380,8 +421,6 @@
 											timeout: 5
 										});
 
-
-
 									}).finally(function(){
 										$element.removeClass("Q_working");
 										invokeObj.close();
@@ -396,7 +435,6 @@
 					});
 
 				});
-				
 				
 			});
 		},
@@ -423,10 +461,59 @@
 						
 						instances.forEach(function(i, index){
 
-							Q.Template.render('Assets/web3/coin/presale/admin/funds/row', {index: index+1, i:i}, function(err, html){
+							Q.Template.render('Assets/web3/coin/presale/admin/funds/row', {index: index+1, i:i, chainId:state.chainId}, function(err, html){
 								$tbody.append(html);
 							});
 
+						});
+						
+						$("button[name=fundInfo]", $fundsListContainer).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
+							$fundsListContainer.addClass("Q_working");
+							var data = $(this).data();
+							
+							if (Q.Users.Web3.validate.address(data.addr) && !Q.isEmpty(data.chainid)) {
+								
+								Assets.Funds.getFundConfig( data.addr, data.chainid, function(err, infoConfig){
+
+									if (err) {
+										$fundsListContainer.removeClass("Q_working");
+										return;
+									}
+
+									//make output data an userfriendly
+									var infoConfigAdjusted = Object.assign({}, infoConfig);
+
+									infoConfigAdjusted._endTs = new Date(parseInt(infoConfig._endTs) * 1000).toDateString();
+									infoConfigAdjusted._prices = infoConfig._prices.map(x => ethers.utils.formatUnits(x.toString(), 18));
+									infoConfigAdjusted._thresholds = infoConfig._thresholds.map(x => ethers.utils.formatUnits(x.toString(), 18));
+									infoConfigAdjusted._timestamps = infoConfig._timestamps.map(x => new Date(parseInt(x) * 1000).toDateString());
+									//-----
+
+									Q.invoke({
+										title: tool.text.coin.presale.admin.fundInfo,
+										template: {
+
+											fields: {
+												objfields: state.fields,
+												data: infoConfigAdjusted
+											},
+											name: 'Assets/web3/coin/presale/admin/fund/info'
+										},
+										className: 'Assets_web3_coin_presale_admin_fund_info',
+
+										trigger: tool.element,
+										onActivate: function ($element) {
+											$fundsListContainer.removeClass("Q_working");
+										}
+									});
+
+								});
+									
+							} else {
+								console.warn('incorrect address or chainId')
+								$fundsListContainer.removeClass("Q_working");
+							}
+							
 						});
 					}
 					
@@ -448,6 +535,7 @@
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">{{coin.presale.admin.fundAddress}}</th>
+				<th scope="col"></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -462,7 +550,6 @@
 	`,
 		{text: ["Assets/content"]}
 	);
-
 
 	Q.Template.set("Assets/web3/coin/presale/admin/create/fields/timestamps_and_prices/row", `
 		<div class="timestamps_and_prices_row_container" data-ident='{{ident}}'>
@@ -484,8 +571,6 @@
 				</div>
 			</div>
 		</div>
-				
-		
 	`,
 		{text: ["Assets/content"]}
 	);
@@ -510,72 +595,68 @@
 				</div>
 			</div>
 		</div>
-				
-		
 	`,
 		{text: ["Assets/content"]}
 	);
 
 	Q.Template.set("Assets/web3/coin/presale/admin/create",
 	`
-		<div class="form Assets_web3_coin_presale_admin_produceContainer">
-	
-	
-	{{#unless objfields.sellingToken.hide}}
-			<div class="form-group">
-				<label>{{coin.presale.admin.form.labels.sellingToken}}</label>
-				<input name="sellingToken" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.address}}" value="{{objfields.sellingToken.value}}">
-				<small class="form-text text-muted">{{coin.presale.admin.form.small.sellingToken}}</small>
-			</div>
-	{{/unless}} 
-	
-	<button class='Q_button' type='button' name='timestamps_and_prices_add_row'>Add</button>
-	<div class="row">
-		<div class="col-xs-4">
-			<div class="form-group">
-				<label>{{coin.presale.admin.form.labels.timestamps}}</label>
-			</div>
+	<div class="form Assets_web3_coin_presale_admin_produceContainer">
+		{{#unless objfields.sellingToken.hide}}
+		<div class="form-group">
+			<label>{{coin.presale.admin.form.labels.sellingToken}}</label>
+			<input name="sellingToken" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.address}}" value="{{objfields.sellingToken.value}}">
+			<small class="form-text text-muted">{{coin.presale.admin.form.small.sellingToken}}</small>
 		</div>
-		<div class="col-xs-5">
-			<div class="form-group">
-				<label>{{coin.presale.admin.form.labels.prices}}</label>
+		{{/unless}} 
+
+		<button class='Q_button' type='button' name='timestamps_and_prices_add_row'>Add</button>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="form-group">
+					<label>{{coin.presale.admin.form.labels.timestamps}}</label>
+				</div>
 			</div>
-		</div>
-		<div class="col-xs-3">
-			&nbsp;
-		</div>
-	</div>
-	<div class="timestamps_and_prices_rows_container">
-	</div>
-	
-	{{#unless objfields.endTime.hide}}
-			<div class="form-group">
-				<label>{{coin.presale.admin.form.labels.endTime}}</label>
-				<input name="endTime" type="text" class="form-control" value="{{objfields.endTime.value}}">
-				<small class="form-text text-muted">{{coin.presale.admin.form.small.endTime}}</small>
+			<div class="col-xs-5">
+				<div class="form-group">
+					<label>{{coin.presale.admin.form.labels.prices}}</label>
+				</div>
 			</div>
-	{{/unless}} 
-													 
-	<button class='Q_button' type='button' name='thresholds_and_bonuses_add_row'>Add</button>
-	<div class="row">
-		<div class="col-xs-4">
-			<div class="form-group">
-				<label>{{coin.presale.admin.form.labels.thresholds}}</label>
+			<div class="col-xs-3">
+				&nbsp;
 			</div>
 		</div>
-		<div class="col-xs-5">
-			<div class="form-group">
-				<label>{{coin.presale.admin.form.labels.bonuses}}</label>
+		<div class="timestamps_and_prices_rows_container">
+		</div>
+
+		{{#unless objfields.endTime.hide}}
+		<div class="form-group">
+			<label>{{coin.presale.admin.form.labels.endTime}}</label>
+			<input name="endTime" type="text" class="form-control" value="{{objfields.endTime.value}}">
+			<small class="form-text text-muted">{{coin.presale.admin.form.small.endTime}}</small>
+		</div>
+		{{/unless}} 
+
+		<button class='Q_button' type='button' name='thresholds_and_bonuses_add_row'>Add</button>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="form-group">
+					<label>{{coin.presale.admin.form.labels.thresholds}}</label>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="form-group">
+					<label>{{coin.presale.admin.form.labels.bonuses}}</label>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				&nbsp;
 			</div>
 		</div>
-		<div class="col-xs-3">
-			&nbsp;
+		<div class="thresholds_and_bonuses_rows_container">
 		</div>
-	</div>
-	<div class="thresholds_and_bonuses_rows_container">
-	</div>
-	
-	{{#unless objfields.ownerCanWithdraw.hide}}
+
+		{{#unless objfields.ownerCanWithdraw.hide}}
 		<div class="form-group">
 			<label>{{coin.presale.admin.form.labels.ownerCanWithdraw}}</label>
 			<select name="ownerCanWithdraw" class="form-control">
@@ -584,8 +665,8 @@
 			{{/each}}
 			</select>
 		</div>
-	{{/unless}} 
-	{{#unless objfields.whitelistData.hide}}
+		{{/unless}} 
+		{{#unless objfields.whitelistData.hide}}
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" value="" id="useWhiteList" name="useWhiteList">
 			<label class="form-check-label" for="useWhiteList">
@@ -609,10 +690,9 @@
 				<small class="form-text text-muted">{{coin.presale.admin.form.small.roleId}}</small>
 			</div>
 		</div>
-	{{/unless}} 
-			<button name="create" class="Assets_web3_coin_presale_admin_produce Q_button">{{coin.presale.admin.btns.createFundInForm}}</button>	
-
-		</div>
+		{{/unless}} 
+		<button name="create" class="Assets_web3_coin_presale_admin_produce Q_button">{{coin.presale.admin.btns.createFundInForm}}</button>	
+	</div>
 	`,
 	{text: ["Assets/content"]}
 	);
@@ -622,7 +702,67 @@
 	<tr>
 		<th scope="row">{{index}}</th>
 		<td>{{i.value}}</td>
+		<td><button name="fundInfo" class="Q_button" data-addr='{{i.value}}' data-chainid='{{chainId}}'>info</button></td>
 	</tr>
+	`,
+	{text: ["Assets/content"]});
+
+	Q.Template.set("Assets/web3/coin/presale/admin/fund/info",
+	`
+	<table class="table table-row">
+		<tbody>
+		<tr>
+			<td>{{coin.presale.admin.form.labels.sellingToken}}</td>
+			<td>{{data._sellingToken}}</td>
+		</tr>
+		<tr>
+			<td>{{coin.presale.admin.form.labels.timestamps}} && {{coin.presale.admin.form.labels.prices}}</td>
+			<td>
+				<div class="row">
+					<div class="col-xs-6">
+						<table class="table table-striped">
+						{{#each data._timestamps}}
+							<tr><td>{{this}}</td></tr>
+						{{/each}}
+						</table>
+					</div>
+					<div class="col-xs-6">
+						<table class="table ">
+						{{#each data._prices}}
+							<tr><td>{{this}}</td></tr>
+						{{/each}}
+						</table>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>{{coin.presale.admin.form.labels.endTime}}</td>
+			<td>{{data._endTs}}</td>
+		</tr>
+		<tr>
+			<td>{{coin.presale.admin.form.labels.thresholds}} && {{coin.presale.admin.form.labels.bonuses}}</td>
+			<td>
+				<div class="row">
+					<div class="col-xs-6">
+						<table class="table ">
+						{{#each data._thresholds}}
+							<tr><td>{{this}}</td></tr>
+						{{/each}}
+						</table>
+					</div>
+					<div class="col-xs-6">
+						<table class="table table-striped">
+						{{#each data._bonuses}}
+							<tr><td>{{this}}</td></tr>
+						{{/each}}
+						</table>
+					</div>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
 	`,
 	{text: ["Assets/content"]});
 })(window, Q, jQuery);

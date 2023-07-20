@@ -654,7 +654,15 @@
 						"communityAddress": "Community address",
 						"methodkeccack": "4bytes hash of method to check",
 						"roleId": "index of role id"
+					},
+					"fields": {
+						"ownerWithdrawOptions": {
+							"option0":"Owner can not withdraw",
+							"option1":"Owner can withdraw tokens only after endTime passed",
+							"option2":"Owner can withdraw tokens anytime"
+						}
 					}
+					
 				},
 				"placeholders": {
 					"communityAddress": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324",
@@ -689,6 +697,7 @@
 				},
 				"fundAddress": "Fund address",
 				"createFund": "Create Fund",
+				"fundInfo": "Info",
 				"produce": "Produce",
 				"loading": "Loading",
 				"viewInstancesList": "Refresh List"
