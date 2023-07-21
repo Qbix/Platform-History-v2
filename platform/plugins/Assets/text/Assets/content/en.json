@@ -627,6 +627,21 @@
 			}
 		},
 		"presale": {
+			"buy": {
+				"form": {
+					"labels": {
+						"amount": "Amount"
+					},
+					"small": {
+						"amount": "Amount"
+					}
+				},
+				"btns": {
+					"buy": "Buy",
+					"execute": "Execute"
+				},
+				"executeTitle": "Buy"
+			},
 			"admin": {
 				"form": {
 					"labels": {

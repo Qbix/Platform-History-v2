@@ -480,22 +480,13 @@
 										return;
 									}
 
-									//make output data an userfriendly
-									var infoConfigAdjusted = Object.assign({}, infoConfig);
-
-									infoConfigAdjusted._endTs = new Date(parseInt(infoConfig._endTs) * 1000).toDateString();
-									infoConfigAdjusted._prices = infoConfig._prices.map(x => ethers.utils.formatUnits(x.toString(), 18));
-									infoConfigAdjusted._thresholds = infoConfig._thresholds.map(x => ethers.utils.formatUnits(x.toString(), 18));
-									infoConfigAdjusted._timestamps = infoConfig._timestamps.map(x => new Date(parseInt(x) * 1000).toDateString());
-									//-----
-
 									Q.invoke({
 										title: tool.text.coin.presale.admin.fundInfo,
 										template: {
 
 											fields: {
 												objfields: state.fields,
-												data: infoConfigAdjusted
+												data: Assets.Funds.adjustFundConfig(infoConfig)
 											},
 											name: 'Assets/web3/coin/presale/admin/fund/info'
 										},

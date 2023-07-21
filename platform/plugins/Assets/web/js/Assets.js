@@ -1642,9 +1642,33 @@
 				);
 			},
 			getAll: function(chainId, abiPath, callback) {
+				
+				Assets.Funds._getAll(
+					chainId, 
+					abiPath
+				).then(function (instances) {
+					Q.handle(callback, null, [null, instances]);	
+				}).catch(function(err){
+					console.warn(err);
+				})
+				
+			},
+			getFundConfig: function(contractAddress, chainId, callback) {
+				Assets.Funds._getFundConfig(
+					contractAddress, 
+					chainId,
+					false
+				).then(function (instances) {
+					Q.handle(callback, null, [null, instances]);	
+				}).catch(function(err){
+					console.warn(err);
+				})
+				
+			},
+			_getAll: function(chainId, abiPath) {
 				var fundFactory;
 				
-				Assets.Funds.getFactory(
+				return Assets.Funds.getFactory(
 					chainId, 
 					true,
 					abiPath
@@ -1664,16 +1688,12 @@
 						p.push(fundFactory.instances(i));
 					}
 					return Promise.allSettled(p);
-				}).then(function (instances) {
-					Q.handle(callback, null, [null, instances]);	
-				}).catch(function(err){
-					console.warn(err);
-				})
+				});
 				
 			},
-			getFundConfig: function(contractAddress, chainId, callback) {
-				
-				Q.Users.Web3.getContract(
+			_getFundConfig: function(contractAddress, chainId, userAddress) {
+
+				return Q.Users.Web3.getContract(
 					'Assets/templates/R1/Fund/contract', {
 						chainId: chainId,
 						contractAddress: contractAddress,
@@ -1681,13 +1701,74 @@
 					}
 				).then(function (contract) {
 					return contract.getConfig();
+				}).then(function (configs) {	
+					
+					var p = [];
+					p.push(new Promise(function (resolve, reject) {resolve(configs)}));
 
-				}).then(function (instances) {
-					Q.handle(callback, null, [null, instances]);	
-				}).catch(function(err){
-					console.warn(err);
-				})
+					if (Q.isEmpty(userAddress)) {
+						p.push(new Promise(function (resolve, reject) {resolve([])}));	
+					} else {
+						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(configs._sellingToken, userAddress, chainId));
+					}
+					
+					return Promise.allSettled(p);
+				}).then(function (_ref) {
+
+					var ret = {..._ref[0].value};
+
+					ret = $.extend(
+						{}, 
+						//instanceInfos.value[index], 
+						ret, 
+						{	"fundContract": contractAddress,
+							"erc20TokenInfo": _ref[1].value[1].status == 'rejected' ? 
+											{name:"", symbol:"", balance:""} : 
+											{name:_ref[1].value[0], symbol:_ref[1].value[1], balance:_ref[1].value[2]}
+						}
+					);				
+
+					return (new Promise(function (resolve, reject) {resolve(ret)}));
+				});
 				
+			},
+			adjustFundConfig: function(infoConfig) {
+				//make output data an userfriendly
+				var infoConfigAdjusted = Object.assign({}, infoConfig);
+
+				infoConfigAdjusted._endTs = new Date(parseInt(infoConfig._endTs) * 1000).toDateString();
+				infoConfigAdjusted._prices = infoConfig._prices.map(x => ethers.utils.formatUnits(x.toString(), 18));
+				infoConfigAdjusted._thresholds = infoConfig._thresholds.map(x => ethers.utils.formatUnits(x.toString(), 18));
+				infoConfigAdjusted._timestamps = infoConfig._timestamps.map(x => new Date(parseInt(x) * 1000).toDateString());
+				
+				var currentDate = Math.floor(new Date().getTime()/1000);
+				//currentDate = Math.floor(new Date('2023/07/24  GMT+00:00').getTime()/1000);
+				var index = -1;
+				
+				if (infoConfig._timestamps.length == 1) {
+					index = (infoConfig._timestamps[0] > currentDate) ? 1 : -1;
+				} else if (infoConfig._timestamps.length > 1) {
+
+					var cur = currentDate;
+					for (var i = 0; i < infoConfig._timestamps.length; i++) {
+						var tsInt = parseInt(infoConfig._timestamps[i]);
+						if (
+								tsInt <= currentDate &&
+								(
+									index == -1 ||
+									cur <= tsInt
+								)
+							) {
+							index = i;
+							cur = tsInt;
+						}
+					}
+					
+				}
+				
+				infoConfigAdjusted.currentPrice = (index != -1) ? infoConfigAdjusted._prices[index] : 0;
+				
+				return infoConfigAdjusted;
 			}
 		},
 		
@@ -1849,6 +1930,10 @@
 				'{{Q}}/pickadate/themes/default.css',
 				'{{Q}}/pickadate/themes/default.date.css'
 			]
+		},
+		"Assets/web3/coin/presale/buy": {
+			js: "{{Assets}}/js/tools/web3/coin/presale/buy.js",
+			css: "{{Assets}}/css/tools/web3/coin/presale/buy.css"
 		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
