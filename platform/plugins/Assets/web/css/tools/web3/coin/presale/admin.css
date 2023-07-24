@@ -18,8 +18,6 @@ and open the template in the editor.
 .Assets_web3_coin_presale_admin_produceContainer .timestamps_and_prices_rows_container .timestamps_and_prices_row_container,
 .Assets_web3_coin_presale_admin_produceContainer .thresholds_and_bonuses_rows_container .thresholds_and_bonuses_row_container {
 	padding: 0 10px;
-	margin-bottom:10px;
-	border-bottom: 1px solid #eee;
 }
 
 .Assets_web3_coin_presale_admin_fund_info table tbody tr:first-child td {

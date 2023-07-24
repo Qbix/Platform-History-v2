@@ -13,12 +13,16 @@
 		var tool = this;
 		var state = this.state;
 		
+		
+		
 		var loggedInUser = Q.Users.loggedInUser;
 		if (!loggedInUser) {
 			return console.warn("user not logged in");
 		}
 
 		tool.loggedInUserXid = Q.Users.Web3.getLoggedInUserXid();
+		// really strange thing in contract. especially for ratio ETH/token when 1 ETH is a 10**18
+		tool.priceDenom = 100000000; //1*10**8;
 
 		if (Q.isEmpty(tool.loggedInUserXid)) {
 			return console.warn("user not found");
@@ -33,6 +37,8 @@
 	{ // default options here
 		abiPathF: "Assets/templates/R1/Fund/factory",
 		abiPath: "Assets/templates/R1/Fund/contract",
+		fund: null,
+		showShortInfo: false,
 		chainId: null,
 	},
 	{ // methods go here
@@ -51,18 +57,41 @@
 				return Promise.allSettled(p);
 			}).then(function(configsData){
 				var adjustFundConfig = [];
-				
+
 				for (var i in configsData) {
-					adjustFundConfig.push(Assets.Funds.adjustFundConfig(configsData[i].value));
+					adjustFundConfig.push(Assets.Funds.adjustFundConfig(configsData[i].value, {priceDenom: tool.priceDenom}));
 				}
 				
-				Q.Template.render("Assets/web3/coin/presale/buy", {data: adjustFundConfig}, function (err, html) {
+				var isShortVersion = Q.isEmpty(state.fund) ? false: true;
+				
+				Q.Template.render("Assets/web3/coin/presale/buy", {
+					data: adjustFundConfig,
+					short: isShortVersion
+				}, function (err, html) {
 					Q.replace(tool.element, html);
+
+						
+					if (isShortVersion) {
+						$('select[name=funds]', tool.element).val(state.fund);
+						if (state.showShortInfo) {
+							var opt = $('select[name=funds] option[value='+state.fund+']', tool.element);
+							Q.Template.render("Assets/web3/coin/presale/buy_short", {
+								fundContract: opt.data('erc20token'),
+								sellingToken: state.fund,
+								sellingToken_name: opt.data('erc20token_name'),
+								sellingToken_symbol: opt.data('erc20token_symbol'),
+								currentPrice: opt.data('currentprice'),
+								inWhitelist: opt.data('inwhitelist')
+							}, function (err_shortInfo, html_shortInfo) {
+								Q.replace($('.Assets_web3_coin_presale_buy_shortInfo', tool.element)[0], html_shortInfo);
+							});
+						}
+					}
 					
 					$("button[name=buy]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
 									
 						var invokeObj = Q.invoke({
-							title: tool.text.coin.staking.start.stake,
+							title: tool.text.coin.presale.buy.executeTitle,
 							template: {
 								name: "Assets/web3/coin/presale/buyForm",
 							},
@@ -75,10 +104,12 @@
 								}
 								
 								$("button[name=execute]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {		
+									
+									$element.addClass("Q_working");
+									
 									var fundSelected = $('select[name=funds]', tool.element).val();
 									var sellingERC20 = $('select[name=funds] option[value='+fundSelected+']', tool.element).data('erc20token');
 									var amount = $('input[name=amount]', $element).val();
-									alert(amount);
 									
 									var validated = true;
 
@@ -119,62 +150,48 @@
 										validated = false;
 									}
 									
-									if (validated) {
-										
-										var fundContract;
-												
-										Q.Users.Web3.getContract(
-											state.abiPath, 
-											{
-												contractAddress: fundSelected,
-												chainId: state.chainId
-											}
-										).then(function (fund) {
-											fundContract = fund;
-
-											return fund.buy({value: ethers.utils.parseUnits(amount)});
-										}).then(function (tx) {
-											return tx.wait();
-										}).then(function (receipt) {
-											if (receipt.status == 0) {
-												throw 'Smth unexpected when approve';
-											}
-										}).catch(function (err) {
-
-											Q.Notices.add({
-												content: Q.Users.Web3.parseMetamaskError(err, [fundContract]),
-												timeout: 5
-											});
-										}).finally(function(){
-
-											invokeObj.close();
-										});
-										
-									} else {
+									var closeHandler = function(){
+										$element.removeClass("Q_working");
 										invokeObj.close();
 									}
+									
+									if (!validated) {
+										closeHandler();
+									}
+									
+									var fundContract;
+
+									Q.Users.Web3.getContract(
+										state.abiPath, 
+										{
+											contractAddress: fundSelected,
+											chainId: state.chainId
+										}
+									).then(function (fund) {
+										fundContract = fund;
+
+										return fund.buy({value: ethers.utils.parseUnits(amount)});
+									}).then(function (tx) {
+										return tx.wait();
+									}).then(function (receipt) {
+										if (receipt.status == 0) {
+											throw 'Smth unexpected when approve';
+										}
+									}).catch(function (err) {
+
+										Q.Notices.add({
+											content: Q.Users.Web3.parseMetamaskError(err, [fundContract]),
+											timeout: 5
+										});
+									}).finally(function(){
+										closeHandler();
+									});
+									
 								});
 								
 							}
 							
 						});
-//						
-//						
-//						
-//						Users.Web3.transaction(contractSelected, 0.00014, function (err, transactionRequest, transactionReceipt) {
-//                            //Q.handle(state.onSubmitted, tool, [err, transactionRequest, transactionReceipt]);
-//
-//                            if (err) {
-//                                Q.alert(Users.Web3.parseMetamaskError(err));
-//                                
-//                            }
-//
-//                          //  _transactionSuccess();
-//                        }, {
-//                            wait: 1,
-//                            chainId: state.chainId
-//                        });
-//                        return;
 						
 					});
 					
@@ -189,11 +206,34 @@
 	Q.Template.set("Assets/web3/coin/presale/buy",
 	`
 	<div>
+	
+	{{#if this.short}}
+	<div style="display:none">
+	{{/if}}
+	
 	<select name="funds">
 	{{#each data}}
-	<option value="{{this.fundContract}}" data-erc20token="{{this._sellingToken}}">{{this.erc20TokenInfo.name}}({{this.erc20TokenInfo.symbol}}) Price = ({{this.currentPrice}})</option>
+	{{#unless this.isOutOfDate}}
+	<option value="{{this.fundContract}}" 
+		data-erc20token="{{this._sellingToken}}"
+		data-erc20token_name="{{this.erc20TokenInfo.name}}"
+		data-erc20token_symbol="{{this.erc20TokenInfo.symbol}}"
+		data-currentprice="{{this.currentPrice}}"
+		data-inwhitelist="{{this.inWhitelist}}"
+	>
+		{{this.erc20TokenInfo.name}}({{this.erc20TokenInfo.symbol}}) 
+		Price = ({{this.currentPrice}}) 
+		{{#if this.inWhitelist}}(W){{/if}}
+	</option>
+	{{/unless}}
 	{{/each}}
 	</select>
+	
+	{{#if this.short}}
+	</div>
+	<div class="Assets_web3_coin_presale_buy_shortInfo">
+	</div>
+	{{/if}}
 	
 	<button class="Q_button" name="buy">{{coin.presale.buy.btns.buy}}</button>
 	</div>
@@ -201,14 +241,32 @@
 		{text: ["Assets/content"]}
 	);
 	
+	Q.Template.set("Assets/web3/coin/presale/buy_short",
+	`
+	<table class="table table-striped">
+	<tr><td>fundContract</td><td>{{this.fundContract}}</td></tr>
+	<tr><td>SellingToken</td><td>
+		<table class="table">
+			<tr><td>Address</td><td>{{this.sellingToken}}</td></tr>
+			<tr><td>Name</td><td>{{this.sellingToken_name}}</td></tr>
+			<tr><td>Symbol</td><td>{{this.sellingToken_symbol}}</td></tr>
+		</table>
+	</td></tr>
+	<tr><td>Price</td><td>{{this.currentPrice}}</td></tr>
+	<tr><td>inWhitelist</td><td>{{#if this.inWhitelist}}(W){{/if}}</td></tr>
+	</table>
+	
+	`,
+		{text: ["Assets/content"]}
+	);
 	Q.Template.set("Assets/web3/coin/presale/buyForm",
 	`
 	<div class="form">
 	
 		<div class="form-group">
 			<label>{{coin.presale.buy.form.labels.amount}}</label>
-			<input name="amount" type="text" class="form-control" value="">
-			<small class="form-text text-muted">{{coin.presale.buy.form.small.amount}}</small>
+			<input name="amount" type="text" class="form-control" value="" placeholder="{{coin.presale.buy.form.placeholders.amount}}">
+			<small class="form-text text-muted"></small>
 		</div>
 	
 		<button class="Q_button" name="execute">{{coin.presale.buy.btns.execute}}</button>

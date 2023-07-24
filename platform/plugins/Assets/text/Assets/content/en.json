@@ -630,10 +630,10 @@
 			"buy": {
 				"form": {
 					"labels": {
-						"amount": "Amount"
+						"amount": "How much to spend?"
 					},
-					"small": {
-						"amount": "Amount"
+					"placeholders": {
+						"amount": "Amount of ETH"
 					}
 				},
 				"btns": {
@@ -683,10 +683,10 @@
 					"communityAddress": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324",
 					"roleId": "4",
 					"methodkeccack": "0x95a8c58d",
-					"sellingToken": "Selling Token",
-					"prices": "1.2",
-					"thresholds": "12.5",
-					"bonuses": "10",
+					"sellingToken": "Selling Token address",
+					"prices": "ETH, Price",
+					"thresholds": "# of tokens",
+					"bonuses": "Bonus %",
 					"optional": "(optional)",
 					"tuple": "tuple[]",
 					"number": "number",

@@ -1616,7 +1616,7 @@
 						p.push(contract.name());
 						p.push(contract.symbol());
 						p.push(contract.balanceOf(userAddress));
-						
+
 						return Promise.all(p);
 					})
 						
@@ -1653,11 +1653,11 @@
 				})
 				
 			},
-			getFundConfig: function(contractAddress, chainId, callback) {
+			getFundConfig: function(contractAddress, chainId, userAddress, callback) {
 				Assets.Funds._getFundConfig(
 					contractAddress, 
 					chainId,
-					false
+					userAddress
 				).then(function (instances) {
 					Q.handle(callback, null, [null, instances]);	
 				}).catch(function(err){
@@ -1708,10 +1708,12 @@
 
 					if (Q.isEmpty(userAddress)) {
 						p.push(new Promise(function (resolve, reject) {resolve([])}));	
+						p.push(new Promise(function (resolve, reject) {resolve([])}));	
 					} else {
 						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(configs._sellingToken, userAddress, chainId));
+						p.push(Assets.Funds._getWhitelisted(contractAddress, userAddress, chainId));
 					}
-					
+
 					return Promise.allSettled(p);
 				}).then(function (_ref) {
 
@@ -1722,9 +1724,20 @@
 						//instanceInfos.value[index], 
 						ret, 
 						{	"fundContract": contractAddress,
-							"erc20TokenInfo": _ref[1].value[1].status == 'rejected' ? 
+							"erc20TokenInfo": _ref[1].status == 'rejected' ? 
 											{name:"", symbol:"", balance:""} : 
-											{name:_ref[1].value[0], symbol:_ref[1].value[1], balance:_ref[1].value[2]}
+											{name:_ref[1].value[0], symbol:_ref[1].value[1], balance:_ref[1].value[2]},
+							"inWhitelist": (
+									_ref[2].status == 'rejected' 
+									? 
+									// can be in several cases:
+									// 1. whitelist address == address(0), but use whitelist == true. script will try to get data from ZERO address and will fail
+									// 2. whitelist address != address(0), whitelist == true, but contract didnot support whitelist interface.
+									// 3. smth really unexpected
+									false
+									:
+									_ref[2].value
+									)
 						}
 					);				
 
@@ -1732,12 +1745,28 @@
 				});
 				
 			},
-			adjustFundConfig: function(infoConfig) {
+			_getWhitelisted: function(contract, userAddress, chainId){
+				return Q.Users.Web3.getContract(
+					'Assets/templates/R1/Fund/contract', 
+					{
+						contractAddress: contract,
+						readOnly: true,
+						chainId: chainId
+					}
+				).then(function (contract) {
+					return contract.whitelisted(userAddress);
+				});
+			},
+			adjustFundConfig: function(infoConfig, options) {
 				//make output data an userfriendly
 				var infoConfigAdjusted = Object.assign({}, infoConfig);
 
 				infoConfigAdjusted._endTs = new Date(parseInt(infoConfig._endTs) * 1000).toDateString();
-				infoConfigAdjusted._prices = infoConfig._prices.map(x => ethers.utils.formatUnits(x.toString(), 18));
+				infoConfigAdjusted._prices = infoConfig._prices.map(
+						x => ethers.utils.formatUnits(
+							x.toString(), 
+							Q.isEmpty(options.priceDenom)?18:Math.log10(options.priceDenom)
+						));
 				infoConfigAdjusted._thresholds = infoConfig._thresholds.map(x => ethers.utils.formatUnits(x.toString(), 18));
 				infoConfigAdjusted._timestamps = infoConfig._timestamps.map(x => new Date(parseInt(x) * 1000).toDateString());
 				
@@ -1767,6 +1796,7 @@
 				}
 				
 				infoConfigAdjusted.currentPrice = (index != -1) ? infoConfigAdjusted._prices[index] : 0;
+				infoConfigAdjusted.isOutOfDate = (currentDate > infoConfig._endTs) ? true : false;
 				
 				return infoConfigAdjusted;
 			}

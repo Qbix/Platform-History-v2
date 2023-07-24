@@ -36,6 +36,9 @@
 		var tool = this;
 		var state = this.state;
 		
+		// really strange thing in contract. especially for ratio ETH/token when 1 ETH is a 10**18
+		tool.priceDenom = 100000000; //1*10**8;
+		
 		var loggedInUser = Q.Users.loggedInUser;
 		if (!loggedInUser) {
 			return console.warn("user not logged in");
@@ -137,7 +140,7 @@
 				hide: false, 
 				validate: ["notEmpty"],
 				output: function(v) {
-					return Math.floor(new Date(v + ' GMT+00:00').getTime()/1000)
+					return Math.floor(new Date(v).getTime()/1000)
 				}, 
 				emptyValue:[]
 			},
@@ -146,9 +149,10 @@
 				hide: false, 
 				validate: ["notEmpty"],
 				output: function(v, dpl) {
+
 					return ethers.utils.parseUnits(
 						v.toString(), 
-						Q.isEmpty(dpl) ? dpl : 18
+						Q.isEmpty(dpl) ? 18 : dpl
 					)
 				}, 
 				emptyValue:[]
@@ -158,7 +162,7 @@
 				hide: false, 
 				validate: ["notEmpty"],
 				output: function(v) {
-					return Math.floor(new Date(v + ' GMT+00:00').getTime()/1000)
+					return Math.floor(new Date(v).getTime()/1000)
 				}
 			},
 			thresholds: {
@@ -168,7 +172,7 @@
 				output: function(v, dpl) {
 					return ethers.utils.parseUnits(
 						v.toString(), 
-						Q.isEmpty(dpl) ? dpl : 18
+						Q.isEmpty(dpl) ? 18 : dpl
 					)
 				}, 
 				emptyValue:[]
@@ -227,27 +231,7 @@
 							if (!($element instanceof $)) {
 								$element = $(arguments[2]);
 							}
-							
-							var nextDayDate = function() {
-								var date = new Date( Date.now() + 1000 * 60 * 60 * 24 );
-								var y = date.getFullYear();
-								var m = date.getMonth();
-								var d = date.getDate();
-								return new Date(y, m, d);
-							}();
-							
-							$element.find('input[name=endTime]').pickadate({
-								showMonthsShort: true,
-								format: 'ddd, mmm d, yyyy',
-								formatSubmit: 'yyyy/mm/dd',
-								hiddenName: true,
-								min: new Date(),
-								container: $element,
-								onStart: function () {
-									this.set('select', nextDayDate);
-								}
-							});
-							
+													
 							var removeBtnsHandler = function($btn) {
 								var ident = $btn.data('ident');
 								$btn.closest('div[data-ident="'+ident+'"]').remove();
@@ -260,21 +244,6 @@
 								}, function (err, html) {
 
 									var $html = $(html);
-									
-									$html.find('input[name=timestamps]').pickadate({
-										showMonthsShort: true,
-										format: 'ddd, mmm d, yyyy',
-										formatSubmit: 'yyyy/mm/dd',
-										hiddenName: true,
-										min: new Date(),
-										container: $html,
-										onStart: function () {
-											this.set('select', nextDayDate);
-										}
-									}).on('change', function () {
-										//console.log('endTime = ', $element.find('input[name=endTime]').pickadate().pickadate('picker').get());
-										//_hideEarlierTimes(tool.$date, tool.$time);
-									});
 									
 									$($element).find('.timestamps_and_prices_rows_container').append($html);
 
@@ -333,11 +302,11 @@
 											fields[key].userValue[0] = $($element).find('input[name=whitelistData_communityAddress]').val();
 											fields[key].userValue[1] = $($element).find('input[name=whitelistData_methodkeccack]').val();
 											fields[key].userValue[2] = $($element).find('input[name=whitelistData_roleId]').val();
-											fields[key].userValue[3] = 1;
+											fields[key].userValue[3] = true;
 
 											//fields[key].userValue = '['+ (fields[key].userValue).join(',')+']';
 										} else {
-											fields[key].userValue = ['0x0000000000000000000000000000000000000000','0x95a8c58d','1','0'];
+											fields[key].userValue = ['0x0000000000000000000000000000000000000000','0x95a8c58d','1',false];
 										}
 
 									} else	{				
@@ -354,10 +323,10 @@
 											$fieldSelector.each(function(i, v){
 												var val = $(v).val();
 												if (!Q.isEmpty(val)) {
-													tmp[tmp.length] = fields[key].output(val);	
+													tmp[tmp.length] = fields[key].output(val, (key == 'prices' ? Math.log10(tool.priceDenom):null) );	
 												}
 											});
-											//fields[key].userValue = '['+tmp.join(',')+']';
+											
 											fields[key].userValue = tmp;
 										}
 									}
@@ -473,7 +442,7 @@
 							
 							if (Q.Users.Web3.validate.address(data.addr) && !Q.isEmpty(data.chainid)) {
 								
-								Assets.Funds.getFundConfig( data.addr, data.chainid, function(err, infoConfig){
+								Assets.Funds.getFundConfig( data.addr, data.chainid, ethers.utils.getAddress(tool.loggedInUserXid), function(err, infoConfig){
 
 									if (err) {
 										$fundsListContainer.removeClass("Q_working");
@@ -486,7 +455,7 @@
 
 											fields: {
 												objfields: state.fields,
-												data: Assets.Funds.adjustFundConfig(infoConfig)
+												data: Assets.Funds.adjustFundConfig(infoConfig, {priceDenom: tool.priceDenom})
 											},
 											name: 'Assets/web3/coin/presale/admin/fund/info'
 										},
@@ -547,14 +516,12 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<div class="form-group">
-						<input name="timestamps" type="text" class="form-control" value="{{objfields.timestamps.value}}">
-						<small class="form-text text-muted">{{coin.presale.admin.form.small.timestamps}}</small>
+						<input name="timestamps" type="datetime-local" class="form-control" value="{{objfields.timestamps.value}}">
 					</div>
 				</div>
 				<div class="col-xs-5">
 					<div class="form-group">
 						<input name="prices" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.prices}}" value="{{objfields.prices.value}}">
-						<small class="form-text text-muted">{{coin.presale.admin.form.small.prices}}</small>
 					</div>
 				</div>
 				<div class="col-xs-3">
@@ -572,13 +539,11 @@
 				<div class="col-xs-4">
 					<div class="form-group">
 						<input name="thresholds" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.thresholds}}" value="{{objfields.thresholds.value}}">
-						<small class="form-text text-muted">{{coin.presale.admin.form.small.thresholds}}</small>
 					</div>
 				</div>
 				<div class="col-xs-5">
 					<div class="form-group">
 						<input name="bonuses" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.bonuses}}" value="{{objfields.bonuses.value}}">
-						<small class="form-text text-muted">{{coin.presale.admin.form.small.bonuses}}</small>
 					</div>
 				</div>
 				<div class="col-xs-3">
@@ -595,9 +560,7 @@
 	<div class="form Assets_web3_coin_presale_admin_produceContainer">
 		{{#unless objfields.sellingToken.hide}}
 		<div class="form-group">
-			<label>{{coin.presale.admin.form.labels.sellingToken}}</label>
-			<input name="sellingToken" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.address}}" value="{{objfields.sellingToken.value}}">
-			<small class="form-text text-muted">{{coin.presale.admin.form.small.sellingToken}}</small>
+			<input name="sellingToken" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.sellingToken}}" value="{{objfields.sellingToken.value}}">
 		</div>
 		{{/unless}} 
 
@@ -623,8 +586,7 @@
 		{{#unless objfields.endTime.hide}}
 		<div class="form-group">
 			<label>{{coin.presale.admin.form.labels.endTime}}</label>
-			<input name="endTime" type="text" class="form-control" value="{{objfields.endTime.value}}">
-			<small class="form-text text-muted">{{coin.presale.admin.form.small.endTime}}</small>
+			<input name="endTime" type="datetime-local" class="form-control" value="{{objfields.endTime.value}}">
 		</div>
 		{{/unless}} 
 
@@ -649,7 +611,6 @@
 
 		{{#unless objfields.ownerCanWithdraw.hide}}
 		<div class="form-group">
-			<label>{{coin.presale.admin.form.labels.ownerCanWithdraw}}</label>
 			<select name="ownerCanWithdraw" class="form-control">
 			{{#each ownerCanWithdrawOptions}}
 			<option value="{{this.[0]}}">{{this.[1]}}</option>
