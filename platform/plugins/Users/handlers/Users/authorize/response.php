@@ -75,6 +75,9 @@ function Users_authorize_response()
 		if (!empty($req['Q.Users.deviceId'])) {
 			$p['Q.Users.deviceId'] = $req['Q.Users.deviceId'];
 		}
+		if (!empty($req['withSessionIdPrefix'])) {
+			$p['Q.Users.sessionIdPrefix'] = substr(Q_Session::id(), 0, 16);
+		}
 		$p = Q_Utils::sign($p, 'Q.Users.oAuth');
 		// the redirect uri could be a native app url scheme
 		$redirect_uri = Q_Uri::fixUrl($redirect_uri.'#'.http_build_query($p));
