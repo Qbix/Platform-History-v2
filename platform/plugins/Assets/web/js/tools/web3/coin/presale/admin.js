@@ -14,11 +14,8 @@
 	* @class Assets FundContract Admin
 	* @constructor
 	* @param {Object} options Override various options for this tool
-	* 
-	* @param {String} [options.abiPath] ABI path for FundContract contract
 	* @param {String} [options.abiPathF] ABI path for FundContractFactory contract
 	* @param {String} [options.chainId] chainId
-	* @param {String} [options.communityCoinAddress] address od CommunityCoin contract
 	* @param {String} [options.fields] array of defaults for the values
 	*  @param {String} [options.fields.sellingToken]
 	*  @param {String} [options.fields.timestamps] array of timestamps
@@ -118,7 +115,6 @@
 		tool.refresh();
 	},
 	{ // default options here
-		//abiPath: "Assets/templates/R1/Fund/contract",
 		abiPathF: "Assets/templates/R1/Fund/factory",
 		chainId: null,
 		fields: {
@@ -203,6 +199,10 @@
 		},
 	},
 	{ // methods go here
+		// generate random string like that `g3ynh3ss4b`
+		getRndIdent: function(){
+			return (Math.random() + 1).toString(36).substring(2);
+		},
 		refresh: function() {
 			var tool = this;
 			var state = tool.state;
@@ -240,41 +240,34 @@
 								var ident = $btn.data('ident');
 								$btn.closest('div[data-ident="'+ident+'"]').remove();
 							}
-
+							
+							// handler for adding `timestamps_and_prices` group fields
 							$('button[name=timestamps_and_prices_add_row]', $element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
-								
 								Q.Template.render("Assets/web3/coin/presale/admin/create/fields/timestamps_and_prices/row", {
-									ident: (Math.random() + 1).toString(36).substring(2)
+									ident: tool.getRndIdent()
 								}, function (err, html) {
-
 									var $html = $(html);
-									
 									$($element).find('.timestamps_and_prices_rows_container').append($html);
-
 									$('button[name=timestamps_and_prices_remove_row]', $html).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 										removeBtnsHandler($(this));
 									});
 								});
-
 							});
 							
+							// handler for adding `thresholds_and_bonuse` group fields
 							$('button[name=thresholds_and_bonuses_add_row]', $element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
-
 								Q.Template.render("Assets/web3/coin/presale/admin/create/fields/thresholds_and_bonuses/row", {
-									ident: (Math.random() + 1).toString(36).substring(2)
+									ident: tool.getRndIdent()
 								}, function (err, html) {
-
 									var $html = $(html);
-									//$html.find('input[name=timestamps]').datepicker();
 									$($element).find('.thresholds_and_bonuses_rows_container').append($html);
-
 									$('button[name=thresholds_and_bonuses_remove_row]', $html).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 										removeBtnsHandler($(this));
 									});
 								});
-
 							});
 							
+							// handler for weitchin `usewhitelist` block
 							$("#useWhiteList", $element).off('change').on('change', function (e) {
 								if($(this).is(":checked")) {
 									$('.useWhiteListContainer').show(300);
@@ -285,9 +278,7 @@
 							
 							// creation funds
 							$("button[name=create]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-
 								$element.addClass("Q_working");
-								
 								// clone state fields
 								let fields = Object.assign({}, state.fields);
 								//collect form
@@ -300,7 +291,6 @@
 									
 									//custom for whitelist structure
 									if (key == 'whitelistData') {
-
 										if ($('#useWhiteList').is(":checked")) {
 											fields[key].userValue = [];
 											fields[key].userValue[0] = $($element).find('input[name=whitelistData_communityAddress]').val();
@@ -313,7 +303,7 @@
 											fields[key].userValue = ['0x0000000000000000000000000000000000000000','0x95a8c58d','1',false];
 										}
 
-									} else	{				
+									} else { // for other fields collect but code need to be moved outside)
 										// get field values
 										var tmp;
 										var $fieldSelector = $element.find(`[name='${key}']`);
@@ -334,85 +324,71 @@
 													tmp[tmp.length] = fields[key].output(val, (key == 'prices' ? Math.log10(tool.priceDenom):null) );	
 												}
 											});
-											
 											fields[key].userValue = tmp;
 										}
 									}
-									//fields[key].userValue = (fields[key].hide) ? fields[key].value : fields[key].userValue;
 								}
 	
 								// validate (after user input and applied defaults value)
 								var validated = true;
-
 								for (let key in fields) {
 									for (let validateMethod in fields[key].validate) {
 										if (!Q.Users.Web3.validate[validateMethod](fields[key].userValue)) {
-
 											validated = false;
 											Q.Notices.add({
 												content: fields[key].validate[validateMethod].replace('%key%', key),
 												timeout: 5
 											});
-//											var $input = $element.find("input[name="+key+"]");
-//											$input.closest('.form-group').find('label').after(fields[key].validate[validateMethod].replace('%key%', key));
 											break;
-
 										}
 									}
 								}
 								
-								if (validated) {
-
-									var contract;
-									Assets.Funds.getFactory(
-										state.chainId, 
-										false,
-										state.abiPathF
-									).then(function (_contract) {
-										contract = _contract;
-										
-										return contract.produce(
-											fields.sellingToken.userValue,
-											fields.timestamps.userValue,
-											fields.prices.userValue,
-											fields.endTime.userValue,
-											fields.thresholds.userValue,
-											fields.bonuses.userValue,
-											fields.ownerCanWithdraw.userValue,
-											fields.whitelistData.userValue
-										);
-	
-									}).then(function (tx) {
-										return tx.wait();
-									}).then(function (receipt) {
-
-										if (receipt.status == 0) {
-											throw 'Smth unexpected';
-										}
-										tool.refreshFundList();	
-
-									}).catch(function (err) {
-
-										Q.Notices.add({
-											content: Q.Users.Web3.parseMetamaskError(err, [contract]),
-											timeout: 5
-										});
-
-									}).finally(function(){
-										$element.removeClass("Q_working");
-										invokeObj.close();
-									});
-									
-								} else {
+								var closeHandler = function(){
 									$element.removeClass("Q_working");
 									invokeObj.close();
 								}
+
+								if (!validated) {
+									closeHandler();
+								}
+								
+								var contract;
+								Assets.Funds.getFactory(
+									state.chainId, 
+									false,
+									state.abiPathF
+								).then(function (_contract) {
+									contract = _contract;
+									return contract.produce(
+										fields.sellingToken.userValue,
+										fields.timestamps.userValue,
+										fields.prices.userValue,
+										fields.endTime.userValue,
+										fields.thresholds.userValue,
+										fields.bonuses.userValue,
+										fields.ownerCanWithdraw.userValue,
+										fields.whitelistData.userValue
+									);
+								}).then(function (tx) {
+									return tx.wait();
+								}).then(function (receipt) {
+									if (receipt.status == 0) {
+										throw 'Smth unexpected';
+									}
+									tool.refreshFundList();	
+								}).catch(function (err) {
+									Q.Notices.add({
+										content: Q.Users.Web3.parseMetamaskError(err, [contract]),
+										timeout: 5
+									});
+								}).finally(function(){
+									closeHandler();
+								});
 							});
 						}
 					});
-
 				});
-				
 			});
 		},
 		refreshFundList: function(){
@@ -434,58 +410,54 @@
 
 					if (Q.isEmpty(instances)) {
 						$tbody.html('<tr><td>'+tool.text.coin.presale.admin.errmsgs.ThereAreNoFunds+'</td></tr>');
-					} else {
-						
-						instances.forEach(function(i, index){
+						$fundsListContainer.removeClass("Q_working");
+						return;
+					}
+					// else filling table
+					instances.forEach(function(i, index){
+						Q.Template.render('Assets/web3/coin/presale/admin/funds/row', {index: index+1, i:i, chainId:state.chainId}, function(err, html){
+							$tbody.append(html);
+						});
+					});
+					
+					$fundsListContainer.removeClass("Q_working");
 
-							Q.Template.render('Assets/web3/coin/presale/admin/funds/row', {index: index+1, i:i, chainId:state.chainId}, function(err, html){
-								$tbody.append(html);
+					//and handle fund info btns
+					$("button[name=fundInfo]", $fundsListContainer).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
+						$fundsListContainer.addClass("Q_working");
+						var data = $(this).data();
+						
+						if (!Q.Users.Web3.validate.address(data.addr) || Q.isEmpty(data.chainid)) {
+							console.warn('incorrect address or chainId')
+							$fundsListContainer.removeClass("Q_working");
+							return;
+						}
+						
+						Assets.Funds.getFundConfig( data.addr, data.chainid, ethers.utils.getAddress(tool.loggedInUserXid), function(err, infoConfig){
+							if (err) {
+								$fundsListContainer.removeClass("Q_working");
+								return;
+							}
+							Q.invoke({
+								title: tool.text.coin.presale.admin.fundInfo,
+								template: {
+
+									fields: {
+										objfields: state.fields,
+										data: Assets.Funds.adjustFundConfig(infoConfig, {priceDenom: tool.priceDenom})
+									},
+									name: 'Assets/web3/coin/presale/admin/fund/info'
+								},
+								className: 'Assets_web3_coin_presale_admin_fund_info',
+
+								trigger: tool.element,
+								onActivate: function ($element) {
+									$fundsListContainer.removeClass("Q_working");
+								}
 							});
 
 						});
-						
-						$("button[name=fundInfo]", $fundsListContainer).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-							$fundsListContainer.addClass("Q_working");
-							var data = $(this).data();
-							
-							if (Q.Users.Web3.validate.address(data.addr) && !Q.isEmpty(data.chainid)) {
-								
-								Assets.Funds.getFundConfig( data.addr, data.chainid, ethers.utils.getAddress(tool.loggedInUserXid), function(err, infoConfig){
-
-									if (err) {
-										$fundsListContainer.removeClass("Q_working");
-										return;
-									}
-
-									Q.invoke({
-										title: tool.text.coin.presale.admin.fundInfo,
-										template: {
-
-											fields: {
-												objfields: state.fields,
-												data: Assets.Funds.adjustFundConfig(infoConfig, {priceDenom: tool.priceDenom})
-											},
-											name: 'Assets/web3/coin/presale/admin/fund/info'
-										},
-										className: 'Assets_web3_coin_presale_admin_fund_info',
-
-										trigger: tool.element,
-										onActivate: function ($element) {
-											$fundsListContainer.removeClass("Q_working");
-										}
-									});
-
-								});
-									
-							} else {
-								console.warn('incorrect address or chainId')
-								$fundsListContainer.removeClass("Q_working");
-							}
-							
-						});
-					}
-					
-					$fundsListContainer.removeClass("Q_working");
+					});
 				}
 			);
 		}

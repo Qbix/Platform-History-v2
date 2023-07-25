@@ -9,6 +9,18 @@
 	 */
 	var Users = Q.Users;
 	
+	/**
+	* buying tokens via fundContract
+	* @constructor
+	* @param {Object} options Override various options for this tool
+	* @param {String} [options.abiPathF] optional(see default value) ABI path for FundContractFactory contract
+	* @param {String} [options.abiPath] optional(see default value) ABI path for FundContract contract
+	* @param {String} [options.chainId] chainId
+	* @param {String} [options.fund] optional. FundContract's address 
+	*	if present tool render input field and button buy
+	*	if not - tool rednder select with all available fund for this App (all in Fund contract linked with this App)
+	* @param {bool} [options.showShortInfo] showing short info about choosen fund
+	*/
 	Q.Tool.define("Assets/web3/coin/presale/buy", function (options) {
 		var tool = this;
 		var state = this.state;
@@ -37,11 +49,39 @@
 	{ // default options here
 		abiPathF: "Assets/templates/R1/Fund/factory",
 		abiPath: "Assets/templates/R1/Fund/contract",
+		chainId: null,
 		fund: null,
 		showShortInfo: false,
-		chainId: null,
 	},
 	{ // methods go here
+		renderShortInfo: function($selectOption){
+			var tool = this;
+			var state = tool.state;
+			
+			var nativeCoin;
+
+			Q.each(Assets.currencies.tokens, function () {
+				var addr = this[state.chainId];
+				if (addr && addr == Assets.Web3.constants.zeroAddress) {
+					nativeCoin = this['symbol'];
+					return;
+				}
+			});
+
+			Q.Template.render("Assets/web3/coin/presale/buy_short", {
+				fundContract: $selectOption.val(),
+				sellingToken: $selectOption.data('erc20token'),
+				sellingToken_name: $selectOption.data('erc20token_name'),
+				sellingToken_symbol: $selectOption.data('erc20token_symbol'),
+				nativeCoin: nativeCoin,
+				//nativeCoinBalance
+				currentPrice: $selectOption.data('currentprice'),
+				inWhitelist: $selectOption.data('inwhitelist')
+			}, function (err_shortInfo, html_shortInfo) {
+				Q.replace($('.Assets_web3_coin_presale_buy_shortInfo', tool.element)[0], html_shortInfo);
+			});
+			
+		},
 		refresh: function() {
 			var tool = this;
 			var state = tool.state;
@@ -82,44 +122,27 @@
 						//nativeCoinPlaceholder: tool.text.coin.presale.buy.form.placeholders.amount.interpolate({nativeCoin: nativeCoin}),
 						nativeCoin: nativeCoin,
 						nativeCoinBalance: parseFloat(parseFloat(ethers.utils.formatUnits(moralisBalance[0].balance)).toFixed(12)),
-						short: isShortVersion
+						short: isShortVersion,
+						showShortInfo: state.showShortInfo
 					}, function (err, html) {
 						Q.replace(tool.element, html);
 
 
 						if (isShortVersion) {
 							$('select[name=funds]', tool.element).val(state.fund);
-							if (state.showShortInfo) {
-								var opt = $('select[name=funds] option[value='+state.fund+']', tool.element);
-
-								var nativeCoin;
-
-								Q.each(Assets.currencies.tokens, function (address) {
-									var addr = this[state.chainId];
-									if (addr && addr == Assets.Web3.constants.zeroAddress) {
-										nativeCoin = this['symbol'];
-										return;
-									}
-								});
-
-
-								Q.Template.render("Assets/web3/coin/presale/buy_short", {
-									fundContract: opt.data('erc20token'),
-									sellingToken: state.fund,
-									sellingToken_name: opt.data('erc20token_name'),
-									sellingToken_symbol: opt.data('erc20token_symbol'),
-									nativeCoin: nativeCoin,
-									//nativeCoinBalance
-									currentPrice: opt.data('currentprice'),
-									inWhitelist: opt.data('inwhitelist')
-								}, function (err_shortInfo, html_shortInfo) {
-									Q.replace($('.Assets_web3_coin_presale_buy_shortInfo', tool.element)[0], html_shortInfo);
-								});
-							}
 						}
+						
+						if (state.showShortInfo) {
+							var $opt = $('select[name=funds] option[value='+state.fund+']', tool.element);
+							tool.renderShortInfo($opt);
+						}
+						
+						$("select[name=funds]", tool.element).off('change').on('change', function (e) {
+							var $selectedOption = $("option:selected", this);
+							tool.renderShortInfo($selectedOption);
+						}).trigger('change');
 
 						$("button[name=buy]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-										//tool.element,
 
 							tool.element.addClass("Q_working");
 
@@ -218,34 +241,30 @@
 	Q.Template.set("Assets/web3/coin/presale/buy",
 	`
 	<div>
-	
-	{{#if this.short}}
-	<div style="display:none">
-	{{/if}}
-	
-	<select name="funds">
-	{{#each data}}
-	{{#unless this.isOutOfDate}}
-	<option value="{{this.fundContract}}" 
-		data-erc20token="{{this._sellingToken}}"
-		data-erc20token_name="{{this.erc20TokenInfo.name}}"
-		data-erc20token_symbol="{{this.erc20TokenInfo.symbol}}"
-		data-currentprice="{{this.currentPrice}}"
-		data-inwhitelist="{{this.inWhitelist}}"
-	>
-		{{this.erc20TokenInfo.name}}({{this.erc20TokenInfo.symbol}}) 
-		Price = ({{this.currentPrice}}) 
-		{{#if this.inWhitelist}}(W){{/if}}
-	</option>
-	{{/unless}}
-	{{/each}}
-	</select>
-	
-	{{#if this.short}}
-	</div>
+		<div style="margin-bottom:20px; {{#if this.short}}display:none{{/if}}">
+			<select name="funds">
+			{{#each data}}
+			{{#unless this.isOutOfDate}}
+			<option value="{{this.fundContract}}" 
+				data-erc20token="{{this._sellingToken}}"
+				data-erc20token_name="{{this.erc20TokenInfo.name}}"
+				data-erc20token_symbol="{{this.erc20TokenInfo.symbol}}"
+				data-currentprice="{{this.currentPrice}}"
+				data-inwhitelist="{{this.inWhitelist}}"
+			>
+				{{this.erc20TokenInfo.name}}({{this.erc20TokenInfo.symbol}}) 
+				Price = ({{this.currentPrice}}) 
+				{{#if this.inWhitelist}}(W){{/if}}
+			</option>
+			{{/unless}}
+			{{/each}}
+			</select>
+		</div>
+	{{#if this.showShortInfo}}
 	<div class="Assets_web3_coin_presale_buy_shortInfo">
 	</div>
 	{{/if}}
+	
 	
 	<div class="form-inline">
 		<div class="form-group">
