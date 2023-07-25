@@ -630,23 +630,24 @@
 			"buy": {
 				"form": {
 					"labels": {
-						"amount": "How much to spend?"
+						"amount": "How much to invest?"
 					},
 					"placeholders": {
-						"amount": "Amount of ETH"
+						"amount": "Amount of {{nativeCoin}}",
+						"max": "Max: {{nativeCoinBalance}}"
+			
 					}
 				},
 				"btns": {
 					"buy": "Buy",
 					"execute": "Execute"
-				},
-				"executeTitle": "Buy"
+				}
 			},
 			"admin": {
 				"form": {
 					"labels": {
 						"sellingToken": "Selling Token",
-						"timestamps": "Timestamps",
+						"timestamps": "Times",
 						"prices": "Prices",
 						"endTime": "End Time",
 						"thresholds": "Thresholds",

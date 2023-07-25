@@ -64,139 +64,151 @@
 				
 				var isShortVersion = Q.isEmpty(state.fund) ? false: true;
 				
-				Q.Template.render("Assets/web3/coin/presale/buy", {
-					data: adjustFundConfig,
-					short: isShortVersion
-				}, function (err, html) {
-					Q.replace(tool.element, html);
+				var nativeCoin;
 
-						
-					if (isShortVersion) {
-						$('select[name=funds]', tool.element).val(state.fund);
-						if (state.showShortInfo) {
-							var opt = $('select[name=funds] option[value='+state.fund+']', tool.element);
-							Q.Template.render("Assets/web3/coin/presale/buy_short", {
-								fundContract: opt.data('erc20token'),
-								sellingToken: state.fund,
-								sellingToken_name: opt.data('erc20token_name'),
-								sellingToken_symbol: opt.data('erc20token_symbol'),
-								currentPrice: opt.data('currentprice'),
-								inWhitelist: opt.data('inwhitelist')
-							}, function (err_shortInfo, html_shortInfo) {
-								Q.replace($('.Assets_web3_coin_presale_buy_shortInfo', tool.element)[0], html_shortInfo);
-							});
-						}
+				Q.each(Assets.currencies.tokens, function (address) {
+					var addr = this[state.chainId];
+					if (addr && addr == Assets.Web3.constants.zeroAddress) {
+						nativeCoin = this['symbol'];
+						return;
 					}
-					
-					$("button[name=buy]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-									
-						var invokeObj = Q.invoke({
-							title: tool.text.coin.presale.buy.executeTitle,
-							template: {
-								name: "Assets/web3/coin/presale/buyForm",
-							},
-							className: 'Assets_web3_coin_presale_buyform',
-
-							trigger: tool.element,
-							onActivate: function ($element) {
-								if (!($element instanceof $)) {
-									$element = $(arguments[2]);
-								}
-								
-								$("button[name=execute]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {		
-									
-									$element.addClass("Q_working");
-									
-									var fundSelected = $('select[name=funds]', tool.element).val();
-									var sellingERC20 = $('select[name=funds] option[value='+fundSelected+']', tool.element).data('erc20token');
-									var amount = $('input[name=amount]', $element).val();
-									
-									var validated = true;
-
-									if (
-										Q.Users.Web3.validate.notEmpty(fundSelected) && 
-										Q.Users.Web3.validate.address(fundSelected)
-									) {
-									//
-									} else {
-										Q.Notices.add({
-											content: "Fund invalid",
-											timeout: 5
-										});
-										validated = false;
-									}
-									if (
-										Q.Users.Web3.validate.notEmpty(sellingERC20) && 
-										Q.Users.Web3.validate.address(sellingERC20)
-									) {
-									//
-									} else {
-										Q.Notices.add({
-											content: "Token invalid",
-											timeout: 5
-										});
-										validated = false;
-									}
-
-									if (
-										Q.Users.Web3.validate.notEmpty(amount)
-									) {
-									//
-									} else {
-										Q.Notices.add({
-											content: "Amount invalid",
-											timeout: 5
-										});
-										validated = false;
-									}
-									
-									var closeHandler = function(){
-										$element.removeClass("Q_working");
-										invokeObj.close();
-									}
-									
-									if (!validated) {
-										closeHandler();
-									}
-									
-									var fundContract;
-
-									Q.Users.Web3.getContract(
-										state.abiPath, 
-										{
-											contractAddress: fundSelected,
-											chainId: state.chainId
-										}
-									).then(function (fund) {
-										fundContract = fund;
-
-										return fund.buy({value: ethers.utils.parseUnits(amount)});
-									}).then(function (tx) {
-										return tx.wait();
-									}).then(function (receipt) {
-										if (receipt.status == 0) {
-											throw 'Smth unexpected when approve';
-										}
-									}).catch(function (err) {
-
-										Q.Notices.add({
-											content: Q.Users.Web3.parseMetamaskError(err, [fundContract]),
-											timeout: 5
-										});
-									}).finally(function(){
-										closeHandler();
-									});
-									
-								});
-								
-							}
-							
-						});
-						
-					});
-					
-						
 				});
+							
+				Assets.Currencies.balanceOf(tool.loggedInUserXid, state.chainId, function (err, moralisBalance) {
+					
+				
+					Q.Template.render("Assets/web3/coin/presale/buy", {
+						data: adjustFundConfig,
+						//nativeCoinPlaceholder: tool.text.coin.presale.buy.form.placeholders.amount.interpolate({nativeCoin: nativeCoin}),
+						nativeCoin: nativeCoin,
+						nativeCoinBalance: parseFloat(parseFloat(ethers.utils.formatUnits(moralisBalance[0].balance)).toFixed(12)),
+						short: isShortVersion
+					}, function (err, html) {
+						Q.replace(tool.element, html);
+
+
+						if (isShortVersion) {
+							$('select[name=funds]', tool.element).val(state.fund);
+							if (state.showShortInfo) {
+								var opt = $('select[name=funds] option[value='+state.fund+']', tool.element);
+
+								var nativeCoin;
+
+								Q.each(Assets.currencies.tokens, function (address) {
+									var addr = this[state.chainId];
+									if (addr && addr == Assets.Web3.constants.zeroAddress) {
+										nativeCoin = this['symbol'];
+										return;
+									}
+								});
+
+
+								Q.Template.render("Assets/web3/coin/presale/buy_short", {
+									fundContract: opt.data('erc20token'),
+									sellingToken: state.fund,
+									sellingToken_name: opt.data('erc20token_name'),
+									sellingToken_symbol: opt.data('erc20token_symbol'),
+									nativeCoin: nativeCoin,
+									//nativeCoinBalance
+									currentPrice: opt.data('currentprice'),
+									inWhitelist: opt.data('inwhitelist')
+								}, function (err_shortInfo, html_shortInfo) {
+									Q.replace($('.Assets_web3_coin_presale_buy_shortInfo', tool.element)[0], html_shortInfo);
+								});
+							}
+						}
+
+						$("button[name=buy]", tool.element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
+										//tool.element,
+
+							tool.element.addClass("Q_working");
+
+							var fundSelected = $('select[name=funds]', tool.element).val();
+							var sellingERC20 = $('select[name=funds] option[value='+fundSelected+']', tool.element).data('erc20token');
+							var amount = $('input[name=amount]', tool.element).val();
+
+							var validated = true;
+
+							if (
+								Q.Users.Web3.validate.notEmpty(fundSelected) && 
+								Q.Users.Web3.validate.address(fundSelected)
+							) {
+							//
+							} else {
+								Q.Notices.add({
+									content: "Fund invalid",
+									timeout: 5
+								});
+								validated = false;
+							}
+							if (
+								Q.Users.Web3.validate.notEmpty(sellingERC20) && 
+								Q.Users.Web3.validate.address(sellingERC20)
+							) {
+							//
+							} else {
+								Q.Notices.add({
+									content: "Token invalid",
+									timeout: 5
+								});
+								validated = false;
+							}
+
+							if (
+								Q.Users.Web3.validate.notEmpty(amount)
+							) {
+							//
+							} else {
+								Q.Notices.add({
+									content: "Amount invalid",
+									timeout: 5
+								});
+								validated = false;
+							}
+
+							var closeHandler = function(){
+								tool.element.removeClass("Q_working");
+
+							}
+
+							if (!validated) {
+								closeHandler();
+							}
+
+							var fundContract;
+
+							Q.Users.Web3.getContract(
+								state.abiPath, 
+								{
+									contractAddress: fundSelected,
+									chainId: state.chainId
+								}
+							).then(function (fund) {
+								fundContract = fund;
+
+								return fund.buy({value: ethers.utils.parseUnits(amount)});
+							}).then(function (tx) {
+								return tx.wait();
+							}).then(function (receipt) {
+								if (receipt.status == 0) {
+									throw 'Smth unexpected when approve';
+								}
+							}).catch(function (err) {
+
+								Q.Notices.add({
+									content: Q.Users.Web3.parseMetamaskError(err, [fundContract]),
+									timeout: 5
+								});
+							}).finally(function(){
+								closeHandler();
+							});
+
+
+						});
+
+
+					});
+				},{tokenAddresses: null});
 			});
 	
 
@@ -235,7 +247,18 @@
 	</div>
 	{{/if}}
 	
-	<button class="Q_button" name="buy">{{coin.presale.buy.btns.buy}}</button>
+	<div class="form-inline">
+		<div class="form-group">
+			<input name="amount" type="text" class="form-control" value="" placeholder="{{interpolate coin.presale.buy.form.placeholders.amount nativeCoin}}">
+		</div>
+		<button class="Q_button" name="buy">{{coin.presale.buy.btns.buy}}</button>
+	</div>
+	<div class="form">
+		<div class="form-group">	
+			{{interpolate coin.presale.buy.form.placeholders.max nativeCoinBalance}}
+		</div>
+	</div>
+	
 	</div>
 	`,
 		{text: ["Assets/content"]}
@@ -249,31 +272,31 @@
 		<table class="table">
 			<tr><td>Address</td><td>{{this.sellingToken}}</td></tr>
 			<tr><td>Name</td><td>{{this.sellingToken_name}}</td></tr>
-			<tr><td>Symbol</td><td>{{this.sellingToken_symbol}}</td></tr>
+			<tr><td>The Symbol</td><td>{{this.sellingToken_symbol}}</td></tr>
 		</table>
 	</td></tr>
-	<tr><td>Price</td><td>{{this.currentPrice}}</td></tr>
+	<tr><td>Price in {{this.nativeCoin}}</td><td>{{this.currentPrice}}</td></tr>
 	<tr><td>inWhitelist</td><td>{{#if this.inWhitelist}}(W){{/if}}</td></tr>
 	</table>
 	
 	`,
 		{text: ["Assets/content"]}
 	);
-	Q.Template.set("Assets/web3/coin/presale/buyForm",
-	`
-	<div class="form">
-	
-		<div class="form-group">
-			<label>{{coin.presale.buy.form.labels.amount}}</label>
-			<input name="amount" type="text" class="form-control" value="" placeholder="{{coin.presale.buy.form.placeholders.amount}}">
-			<small class="form-text text-muted"></small>
-		</div>
-	
-		<button class="Q_button" name="execute">{{coin.presale.buy.btns.execute}}</button>
-	</div>
-	`,
-		{text: ["Assets/content"]}
-	);
+//Q.Template.set("Assets/web3/coin/presale/buyForm",
+//`
+//<div class="form">
+//
+//	<div class="form-group">
+//		<label>{{coin.presale.buy.form.labels.amount}}</label>
+//		<input name="amount" type="text" class="form-control" value="" placeholder="{{coin.presale.buy.form.placeholders.amount}}">
+//		<small class="form-text text-muted"></small>
+//	</div>
+//
+//	<button class="Q_button" name="execute">{{coin.presale.buy.btns.execute}}</button>
+//</div>
+//`,
+//	{text: ["Assets/content"]}
+//);
 	
 	Q.Template.set("Assets/web3/coin/presale/buy/interface",
 	`

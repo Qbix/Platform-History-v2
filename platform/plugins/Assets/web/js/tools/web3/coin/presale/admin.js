@@ -142,6 +142,7 @@
 				output: function(v) {
 					return Math.floor(new Date(v).getTime()/1000)
 				}, 
+				expectArray:true,
 				emptyValue:[]
 			},
 			prices: {
@@ -154,7 +155,8 @@
 						v.toString(), 
 						Q.isEmpty(dpl) ? 18 : dpl
 					)
-				}, 
+				},
+				expectArray:true,
 				emptyValue:[]
 			},
 			endTime: {
@@ -175,6 +177,7 @@
 						Q.isEmpty(dpl) ? 18 : dpl
 					)
 				}, 
+				expectArray:true,
 				emptyValue:[]
 			},
 			bonuses: {
@@ -182,6 +185,7 @@
 				hide: false, 
 				validate: [],
 				output: function(v) {return v}, 
+				expectArray:true,
 				emptyValue:[]
 			},
 			ownerCanWithdraw: {
@@ -317,7 +321,11 @@
 											fields[key].userValue = (fields[key].emptyValue) ? fields[key].emptyValue : '';
 											continue;
 										} else if ($fieldSelector.length == 1) {
-											fields[key].userValue = fields[key].output($fieldSelector.val());
+											fields[key].userValue = fields[key].output($fieldSelector.val(), (key == 'prices' ? Math.log10(tool.priceDenom):null));
+											
+											if (fields[key].expectArray) {
+												fields[key].userValue = [fields[key].userValue];
+											}
 										} else {
 											tmp = [];
 											$fieldSelector.each(function(i, v){

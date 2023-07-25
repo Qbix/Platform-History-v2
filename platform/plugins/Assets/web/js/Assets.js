@@ -1803,6 +1803,9 @@
 		},
 		
 		Web3: {
+			constants: {
+				zeroAddress: '0x0000000000000000000000000000000000000000'
+			},
 			/**
 			 * Generates a link for opening a coin
 			 * @static
