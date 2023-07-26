@@ -12,36 +12,27 @@ var Users = Q.Users;
  * @class Assets web3/balance
  * @constructor
  * @param {Object} options Override various options for this tool
+ * @param {String} [chainId] - if defined there will no chains select created, will be use this chain
+ * @param {String} [tokenAddresses] - if defined there will no tokens select created, will be use this tokenAddresses
  * @param {Boolean} [skipWeb3=false] - if true don't request users crypto balance, means only credits transfer
+ * @param {Q.Event} [options.onRefresh] - on chain start to change
  * @param {Q.Event} [options.onChainChange] - on chain start to change
  * @param {Q.Event} [options.onChainChanged] - on chain changed
  */
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
 	var state = this.state;
+	var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
 
-	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users));
+	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users)) || !loggedInWalletAddress;
 
-	if (!state.skipWeb3) {
-		Users.Web3.connect(function (err, provider) {
-			if (err) {
-				// some error occur during Web3.connect or user closed modal
-				state.skipWeb3 = true;
-			}
-			Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
-			tool.refresh();
-		});
-	} else {
-		tool.refresh();
-	}
+	tool.refresh();
 },
 
 { // default options here
-	walletAddress: null,
 	chainId: null,
 	skipWeb3: false,
 	tokenAddresses: null,
-	template: "Assets/web3/balance/select",
 	onRefresh: new Q.Event(),
 	onChainChange: new Q.Event(),
 	onChainChanged: new Q.Event()
@@ -52,71 +43,52 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 		var tool = this;
 		var $toolElement = $(tool.element);
 		var state = tool.state;
-		var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
-		// if logged in user have no wallet registered, skip Web3
-		if (!loggedInWalletAddress) {
-			state.skipWeb3 = true;
-		}
-		var _getWalletAddress = function (callback) {
-			if (state.walletAddress) {
-				return Q.handle(callback, null, [state.walletAddress]);
+
+		Q.Template.render("Assets/web3/balance", {
+			chainId: state.skipWeb3 ? null : state.chainId,
+			chains: state.skipWeb3 ? [] : Users.Web3.chains
+		}, function (err, html) {
+			Q.replace(tool.element, html);
+
+			if (state.chainId) {
+				tool.balanceOf(state.chainId);
+			} else {
+				$("select[name=chains]", tool.element).on("change", function () {
+					var chainId = $(this).val();
+					Q.handle(state.onChainChange, tool, [chainId]);
+					tool.balanceOf(chainId);
+				}).trigger("change");
 			}
-
-			Users.Web3.getWalletAddress().then(function (address) {
-				return Q.handle(callback, null, [address]);
-			});
-		};
-		var _renderTemplate = function (walletAddress) {
-			Q.Template.render("Assets/web3/balance", {
-				chainId: walletAddress ? state.chainId : null,
-				chains: walletAddress ? Users.Web3.chains : []
-			}, function (err, html) {
-				Q.replace(tool.element, html);
-
-				if (state.chainId) {
-					tool.balanceOf(walletAddress, state.chainId);
-				} else {
-					$("select[name=chains]", tool.element).on("change", function () {
-						var chainId = $(this).val();
-						$toolElement.addClass("Q_disabled");
-						Q.handle(state.onChainChange, tool, [chainId]);
-						tool.balanceOf(walletAddress, chainId);
-					}).trigger("change");
-				}
-			});
-		};
-
-		if (!state.skipWeb3) {
-			_getWalletAddress(function (walletAddress) {
-				_renderTemplate(walletAddress);
-			});
-		} else {
-			_renderTemplate();
-		}
+		});
 	},
-	balanceOf: function (walletAddress, chainId) {
+	balanceOf: function (chainId) {
 		var tool = this;
 		var $toolElement = $(tool.element);
 		var state = this.state;
+
+		$toolElement.addClass("Q_disabled");
+
 		var _parseAmount = function (amount) {
 			return parseFloat(parseFloat(ethers.utils.formatUnits(amount)).toFixed(12));
 		};
 
 		if (!chainId) {
-			$toolElement.removeClass("Q_disabled");
 			Q.handle(state.onChainChanged, tool, [chainId]);
 			return Q.Template.render("Assets/web3/balance/credits", {}, function (err, html) {
 				if (err) {
 					return;
 				}
 
+				$toolElement.removeClass("Q_disabled");
 				Q.replace($(".Assets_web3_balance_select", tool.element)[0], html);
 				Q.activate(tool.element);
 				Q.handle(state.onRefresh, tool);
 			});
 		}
 
-		Users.init.web3(function () { // to load ethers.js
+		Users.Web3.onAccountsChanged.set(tool.balanceOf.bind(tool, chainId), tool);
+
+		Users.Web3.getWalletAddress().then(function (walletAddress) {
 			Q.handle(Assets.Currencies.balanceOf, tool, [walletAddress, chainId, function (err, balance) {
 				$toolElement.removeClass("Q_disabled");
 				Q.handle(state.onChainChanged, tool, [chainId]);
@@ -124,7 +96,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				if (err) {
 					return console.warn(err);
 				}
-	
+
 				var results = [];
 				Q.each(balance, function (i, item) {
 					var amount = _parseAmount(item.balance);
@@ -153,12 +125,12 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 										.attr("data-amount", balance)
 										.text(balance + " " + item.name)
 								}, function (err) {
-	
+
 								});
 							});
 						});
 					}*/
-	
+
 					results.push({
 						tokenAmount: amount,
 						tokenName: item.name,
@@ -167,7 +139,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 					});
 				});
 
-				Q.Template.render(state.template, {
+				Q.Template.render("Assets/web3/balance/select", {
 					results: results
 				}, function (err, html) {
 					if (err) {
@@ -219,14 +191,9 @@ Q.Template.set('Assets/web3/balance',
 	{{#each chains}}
 		<option value="{{this.chainId}}">{{this.name}}</option>
 	{{/each}}
-	<option value="">{{transfer.AppCredits}}</option>
+	<option selected value="">{{transfer.AppCredits}}</option>
 </select>{{/if}}
 <div class="Assets_web3_balance_select"></div>`, {text: ['Assets/content']});
-
-Q.Template.set('Assets/web3/balance/list',
-`{{#each results}}
-	<div data-amount="{{this.tokenAmount}}" data-name="{{this.tokenName}}" data-address="{{this.tokenAddress}}">{{this.tokenName}} {{this.tokenAmount}}</div>
-{{/each}}`);
 
 Q.Template.set('Assets/web3/balance/credits',
 `{{credits.Credits}} {{&tool "Assets/credits/balance"}}`, {text: ['Assets/content']});

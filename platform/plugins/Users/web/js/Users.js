@@ -237,22 +237,17 @@
 		var scriptsToLoad = [
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
-			'{{Users}}/js/web3/walletconnect.min.js',
-			'{{Users}}/js/web3/web3.min.js',
-			'{{Users}}/js/web3/web3modal.js'
+			//'{{Users}}/js/web3/walletconnect.min.js',
+			//'{{Users}}/js/web3/web3.min.js',
+			//'{{Users}}/js/web3/web3modal.js'
 		];
-		var o = options || {};
-		var appId = o.appId || Q.info.app;
-		if (Q.getObject(['web3', appId, 'providers', 'fortmatic'], Users.apps)) {
-			scriptsToLoad.push('{{Users}}/js/web3/fortmatic.js');
-		}
-		if (Q.getObject(['web3', appId, 'providers', 'portis'], Users.apps)) {
-			scriptsToLoad.push('{{Users}}/js/web3/portis.js');
-		}
 		Q.addScript(scriptsToLoad, function () {
 			Users.init.web3.complete = true;
 			callback && callback();
 		}, options);
+		Q.addScript("{{Users}}/js/web3/import.js", null, {
+			type: "module"
+		});
 	};
 
 	Users.init.web3 = Q.getter(Users.init.web3);
@@ -4298,7 +4293,7 @@
 			}
 
 			var disableInjectedProvider = Q.getObject(['web3', appId, 'disableInjectedProvider'], Users.apps);
-			Web3.web3Modal = new window.Web3Modal.default({
+			Web3.web3Modal = new window.Web3Modal({
 				// chain: options.chain,
 				cacheProvider: false, // optional
 				providerOptions: providerOptions, // required
@@ -4333,12 +4328,7 @@
 						throw new Error(ex);
 					});
 				} else {
-					// TODO: have direct deeplinks into wallet browsers
-					var web3Modal = Web3.web3Modal || Web3.getWeb3Modal();
-					document.getElementById('WEB3_CONNECT_MODAL_ID').style.zIndex = Q.zIndexTopmost();
-					web3Modal.clearCachedProvider();
-					web3Modal.resetState();
-					web3Modal.connect().then(function (provider) {
+					Web3.web3Modal.openModal().then(function (provider) {
 						_subscribeToEvents(provider);
 						Web3.provider = provider;
 						Q.handle(callback, null, [null, provider]);
@@ -4347,8 +4337,6 @@
 						throw new Error(ex);
 					});
 				}
-
-
 			});
 		}),
 

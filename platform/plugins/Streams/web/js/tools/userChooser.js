@@ -17,6 +17,7 @@
  *   @param {Boolean} [options.initialList.hide] set to true to not use the initialList
  *   @param {String} [options.initialList.key=""] the key under which to store this list, by default it's ""
  *   @param {Number} [options.initialList.limit=10] how many recent users show when the focus is placed in the textbox
+ *   @param {String} [options.placeholder] Any placeholder text
  *   @param {Number} [options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
  *   @param {bool} [options.communitiesOnly=false] If true, search communities instead regular users
@@ -38,8 +39,15 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	tool.exclude = o.exclude;
 	tool.lastChooseTime = 0;
 
-	var element = $(this.element);
-	this.$input = $('input', element);
+	var $te = $(this.element);
+	this.$input = $('input', $te);
+	if (!this.$input.length) {
+		this.$input = $('<input />', {
+			"class": "text Streams_userChooser_input",
+			placeholder: state.placeholder,
+			autocomplete: 'off'
+		}).appendTo($te);
+	}
 	var offset = this.$input && this.$input.offset();
 	if (!offset) {
 		return; // some error
@@ -255,6 +263,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 {
 	onChoose: new Q.Event(),
 	delay: 500,
+	placeholder: Q.text.Q.input.Placeholder,
 	communitiesOnly: false,
 	resultsHeight: "auto",
 	exclude: {},

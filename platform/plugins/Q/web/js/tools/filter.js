@@ -156,7 +156,7 @@ Q.Tool.define('Q/filter', function (options) {
 }, {
 	name: 'filter',
 	value: '',
-	placeholder: 'Start typing...',
+	placeholder: Q.text.Q.input.Placeholder,
 	placeholders: {},
 	results: null,
 	begun: false,
