@@ -82,14 +82,7 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 	contextual.append(listingWrapper.append(listing));
 
 	// set contextual max z-index
-	var highestZ = 0;
-	Q.each($('div'), function () {
-		var z = parseInt($(this).css("z-index"), 10);
-		if(z > highestZ) {
-			highestZ = z;
-		}
-	});
-	contextual.css("z-index", highestZ);
+	contextual.css("z-index", Q.zIndexTopmost());
 
 	$(document.body).append(contextual);
 

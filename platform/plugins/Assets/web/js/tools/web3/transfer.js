@@ -90,13 +90,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance", {
                                 skipWeb3: !(wallet && !walletError)
                             }).activate(function () {
+                                tool.assetsWeb3BalanceTool = this;
                                 this.state.onChainChange.add(function () {
                                     $toolElement.addClass("Q_disabled");
                                 }, tool);
                                 this.state.onChainChanged.add(function () {
                                     $toolElement.removeClass("Q_disabled");
                                 }, tool);
-                                tool.assetsWeb3BalanceTool = this;
                             });
                         }
 
