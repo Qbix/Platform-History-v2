@@ -22,8 +22,8 @@
  */
 function Streams_userChooser_tool($options)
 {
-	$maxResults = Q_Config::get('Streams', 'userChooser', 'maxResults', 3);
-	$placeholder = "Start typing...";
+	$text = Q_Text::get('Q/content');
+	$placeholder = Q::ifset($text, 'input', 'Placeholder', 'Start typing...');
 	extract($options);
 	
 	if (!isset($exclude) and $user = Users::loggedInUser()) {

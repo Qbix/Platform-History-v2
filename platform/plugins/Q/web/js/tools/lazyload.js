@@ -35,6 +35,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 	var state = this.state;
 	state.root = state.root || this.element;
 
+	tool.timeouts = new WeakMap();
+	tool.frozen = new WeakMap();
+
 	var Elp = Element.prototype;
 	
 	Q.ensure('IntersectionObserver', function () {
@@ -125,7 +128,8 @@ Q.Tool.define('Q/lazyload', function (options) {
 				function _loaded() {
 					img.addClass('Q_lazy_loaded');
 				}
-				img.Q_lazyload_timeout = setTimeout(function () {
+				var tool = this;
+				tool.timeouts.set(img, setTimeout(function () {
 					var src = img.getAttribute('data-lazyload-src');
 					if (src) {
 						img.setAttribute('src', Q.url(src));
@@ -136,15 +140,17 @@ Q.Tool.define('Q/lazyload', function (options) {
 						}
 						img.addEventListener('load', _loaded);
 					}
-					clearTimeout(img.Q_lazyload_timeout);
-					delete img.Q_lazyload_timeout;
-				}, this.state.debounce.milliseconds);
+					if (tool.timeouts.get(img)) {
+						clearTimeout(tool.timeouts.get(img));
+					}
+					tool.timeouts.delete(img);
+				}, this.state.debounce.milliseconds));
 				return true;
 			},
 			exiting: function (img) {
-				if (img.Q_lazyload_timeout) {
-					clearTimeout(img.Q_lazyload_timeout);
-					delete img.Q_lazyload_timeout;
+				if (this.timeouts.get(img)) {
+					clearTimeout(this.timeouts.get(img));
+					this.timeouts.delete(img);
 				}
 				return true; // no need to do anything else
 			},
@@ -172,46 +178,56 @@ Q.Tool.define('Q/lazyload', function (options) {
 		tool: {
 			selector: '.Q_tool',
 			entering: function (element, entry) {
-				element.Q_lazyload_timeout = setTimeout(function () {
+				var tool = this;
+				var ep = tool.frozen.get(element);
+				var c = element.parentElement;
+				if (!ep || !c) {
+					// element didn't exit before, so its dimensions weren't frozen
+				} else {
+					var r = c.getBoundingClientRect();
+					if (!ep.containerRect || ep.containerRect.width !== r.width) {
+						// container was resized, so throw away the frozen dimensions
+						// because a reflow should happen anyway
+						tool.unfreezeDimensions(element);
+					} else {
+						// inform tools that their element has frozen dimensions,
+						// so the tools may want to revert the frozen dimensions
+						element.addClass('Q_frozen_dimensions');
+					}
+				}
+				this.timeouts.set(element, setTimeout(function () {
 					if (element.hasAttribute('data-q-lazyload')
 					&& (!element.Q || !element.Q.tool)) {
 						element.addClass('Q_lazy_load');
 						element.setAttribute('data-q-lazyload', 'activating');
-						// restore inline width, height styles or remove them
-						var inlineWidth = element.Q_lazyload_inlineWidth;
-						var inlineHeight = element.Q_lazyload_inlineHeight;
 						Q.activate(element, function () {
 							element.setAttribute('data-q-lazyload', 'activated');
 							element.addClass('Q_lazy_loaded');
-							setTimeout(function () {
-								if (inlineWidth) {
-									element.style.width = inlineWidth;
-								} else {
-									element.style.removeProperty('width');
-								}
-								if (inlineHeight) {
-									element.style.height = inlineHeight;
-								} else {
-									element.style.removeProperty('height');
-								}
-							}, 1000);
 						}, {}, {lazyload: true});
 					}
-					clearTimeout(element.Q_lazyload_timeout);
-					delete element.Q_lazyload_timeout;
-				}, this.state.debounce.milliseconds);
+					if (tool.timeouts.get(element)) {
+						clearTimeout(tool.timeouts.get(element));
+						tool.timeouts.delete(element);
+					}
+				}, this.state.debounce.milliseconds));
 				return true;
 			},
 			exiting: function (element, entry) {
+				var tool = this;
 				if (element.hasAttribute('data-q-lazyload')
 				&& element.Q.tool) {
-					// backup inline width, height styles and set them to real element size
-					if (element.getAttribute('data-q-preservedimensions')) {
-						element.Q_lazyload_inlineWidth = element.style.width;
-						element.Q_lazyload_inlineHeight = element.style.height;
-						element.style.width = element.offsetWidth + 'px';
-						element.style.height = element.offsetHeight + 'px';
-					}
+					// Take a snapshot of the current width and height of the element,
+					// to restore it when it's later inserted back into the container,
+					// and prevent all the elements shifting. However, if the container
+					// itself is resizing, then we will remove this snapshot since things
+					// will shift anyway.
+					tool.frozen.set(element, {
+						width: element.style.width,
+						height: element.style.height,
+						containerRect: element.container.getBoundingClientRect()
+					});
+					element.style.width = element.offsetWidth + 'px';
+					element.style.height = element.offsetHeight + 'px';
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
 					element.removeClass('Q_lazy_loaded');
@@ -220,9 +236,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 						element.innerHTML = '';
 					}
 				}
-				if (element.Q_lazyload_timeout) {
-					clearTimeout(element.Q_lazyload_timeout);
-					delete element.Q_lazyload_timeout;
+				if (this.timeouts.get(element)) {
+					clearTimeout(this.timeouts.get(element));
+					this.timeouts.delete(element);
 				}
 				return true;
 			},
@@ -273,6 +289,19 @@ Q.Tool.define('Q/lazyload', function (options) {
 		tool.observer && Q.each(elements, function (i, element) {
 			tool.observer.unobserve(element);
 		});
+	},
+	unfreezeDimensions: function(element) {
+		var ep = this.frozen.get(element);
+		if (ep.width) {
+			element.style.width = ep.width;
+		} else {
+			element.style.removeProperty('width');
+		}
+		if (ep.height) {
+			element.style.height = ep.height;
+		} else {
+			element.style.removeProperty('height');
+		}
 	},
 	Q: {
 		beforeRemove: function () {
