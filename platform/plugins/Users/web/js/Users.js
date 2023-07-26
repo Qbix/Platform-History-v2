@@ -4911,6 +4911,9 @@
 			integer: function _validate_integer(input) {
 				return Q.isInteger(input)
 			},
+			numeric: function _validate_numeric(input) {
+				return !isNaN(parseFloat(input)) && isFinite(input);
+			},
 			address: function _validate_address(input) {
 				// here two ways: simple and custom;
 				// since we have a ethers lib we will use it
