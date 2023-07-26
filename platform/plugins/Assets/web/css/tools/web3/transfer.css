@@ -1,3 +1,8 @@
+.Assets_web3_transfer_tool input,
+.Assets_web3_transfer_tool select,
+.Assets_web3_transfer_tool button {
+    height: 40px;
+}
 .Assets_web3_transfer_tool .Assets_web3_transfer_send {
     white-space: nowrap;
     margin: 10px 0 20px 0;
@@ -7,11 +12,12 @@
 }
 .Assets_web3_transfer_tool select {
     width: 310px;
-    height: 40px;
+}
+.Assets_web3_transfer_tool .Assets_transfer_send {
+    display: flex;
 }
 .Assets_web3_transfer_tool input[name=amount],
 .Assets_web3_transfer_tool input[name=wallet] {
-    height: 40px;
     width: 100%;
     font-size: 20px;
     vertical-align: middle;
@@ -19,13 +25,6 @@
 .Assets_web3_transfer_tool input[name=wallet] {
     display: block;
     margin-bottom: 10px;
-}
-.Assets_web3_transfer_tool input[name=amount] {
-    width: 250px;
-}
-.Assets_web3_transfer_tool button[name=send] {
-    height: 40px;
-    vertical-align: middle;
 }
 .Assets_web3_transfer_tool .Assets_transfer_userChooser.Streams_userChooser_tool {
     margin-bottom: 10px;
