@@ -95,167 +95,122 @@
 	"Users": {
 		"web3": {
 			"contracts": {
-				"R1": {
-					"Auction": {
-						"factory": {
-							"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
-						}
-					},
-					"AuctionCommunity": {
-						"factory": {
-							"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
-						}
-					},
-					"AuctionNFT": {
-						"factory": {
-							"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
-						}
-					},
-					"AuctionSubscription": {
-						"factory": {
-							"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
-							"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
-						}
-					},
-					"AuthorizedInviteManager": {
-						"factory": {
-							"0x38": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
-							"0x89": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
-							"0x13881": "0x1E84e70D6614F4848aEfDcC358f9776a76B81A85"
-						},
-						"contract": {
-							"0x38": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
-							"0x89": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
-							"0x13881": "0xce080378825C79CB0668c47C03f63d65020973A1"
-						}
-					},
-					"ClaimManager": {
-						"factory": {
-							"0x38": "0x130101007bA13B731669bdF23819924F3213f1B8",
-							"0x89": "0x130101007bA13B731669bdF23819924F3213f1B8",
-							"0x13881": "0x27771453Ab75d3CD6f7Aa90b2D68609F055811A2"
-						}
-					},
-					"CommunityCoin": {
-						"factory": {
-							"0x38": "0x03010100a373cDEEaF08cebA6130e21d191d9962",
-							"0x89": "0x03010100a373cDEEaF08cebA6130e21d191d9962",
-							"0x13881": "0x1207394326FEF47066E35d6C267445a3F7511ECC"
-						}
-					},
-					"Contest": {
-						"factory": {
-							"all": "0x07010100806783309eD30F1E1F157F239a010545",
-							"0x89": "0x07010100806783309eD30F1E1F157F239a010545",
-							"0x13881": "0x25c850F82A54c83776Aaaf8a1AB4EE244939BC99"
-						}
-					},
-					"ContestETHOnly": {
-						"factory": {
-							"all": "0x07010100806783309eD30F1E1F157F239a010545",
-							"0x89": "0x07010100806783309eD30F1E1F157F239a010545",
-							"0x13881": "0x25c850F82A54c83776Aaaf8a1AB4EE244939BC99"
-						}
-					},
-					"Control": {
-						"factory": {
-							"all": "0x11010100A4CEb22C0a9E035CB650CebAc290c3B3",
-							"0x89": "0x11010100A4CEb22C0a9E035CB650CebAc290c3B3",
-							"0x13881": "0x97b0bcdC4677bC2db7c93786E7BE6420193848A2"
-						}
-					},
-					"Escrow": {
-						"factory": {
-							"all": "0x10010100E97280E4ef42EFb0834402F9f2d4c1b5",
-							"0x89": "0x10010100E97280E4ef42EFb0834402F9f2d4c1b5",
-							"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
-						}
-					},
-					"Fund": {
-						"factory": {
-							"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
-							"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
-							"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
-						}
-					},
-					"FundAggregator": {
-						"factory": {
-							"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
-							"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
-							"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
-						}
-					},
-					"FundToken": {
-						"factory": {
-							"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
-							"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
-							"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
-						}
-					},
-					"Income": {
-						"factory": {
-							"all": "<put address here>",
-							"0x89": "<put address here>",
-							"0x13881": "<put address here>"
-						}
-					},
-					"IncomeUBI": {
-						"factory": {
-							"all": "<put address here>",
-							"0x89": "<put address here>",
-							"0x13881": "<put address here>"
-						}
-					},
-					"IncomeUBILinear": {
-						"factory": {
-							"all": "<put address here>",
-							"0x89": "<put address here>",
-							"0x13881": "<put address here>"
-						}
-					},
-					"NFT": {
-						"factory": {
-							"0x38": "0x0201010079282290a2b0d2E4cbc2a688c029db63",
-							"0x89": "0x0201010079282290a2b0d2E4cbc2a688c029db63",
-							"0x13881": "0x0b2200D3db4A70774Af2304B83F08F3Dd0A18a3A"
-						},
-						"sales": {
-							"factory": {
-								"0x38": "0x020201008CefCC7bE7627cb6C767988F413B0Db1",
-								"0x89": "0x020201008CefCC7bE7627cb6C767988F413B0Db1",
-								"0x13881": "0x282856296DEd09d8630f011Ac7797556a2b99414"
-							},
-						},
-						"locked": {
-							"contract": {
-								"0x1": "0x50c8a01f1ab285d4341ab99d2b1965add4f52d1e",
-								"0x38": "0x300d5f5a3227f75551bf050fb2debcf3a8034dd4",
-								"0x89": "0xb9216ebe3a42da670c484a064bb5a93d8122e421",
-								"0x13881": "0x6BbB0ccD3acCFE3CA4CBc799041b4FC9598859c7"
-							}
-						}
-					},
-					"Rewards": {
-						"factory": {
-							"all": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
-							"0x89": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
-							"0x13881": "0x8BDa578c81589aB58c757F3b395b58b45a51197B"
-						}
-					},
-					"Subscription": {
-						"factory": {
-							"all": "0x04010100099d18Da3d85886Ad297e8F654797d99",
-							"0x89": "0x04010100099d18Da3d85886Ad297e8F654797d99",
-							"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
-						}
-					}
+				"Assets/templates/R1/Auction/factory": {
+					"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+				},
+				"Assets/templates/R1/AuctionCommunity/factory": {
+					"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+				},
+				"Assets/templates/R1/AuctionNFT/factory": {
+					"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+				},
+				"Assets/templates/R1/AuctionSubscription/factory":{
+					"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
+					"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
+				}, 
+				"Assets/templates/R1/AuthorizedInviteManager/factory": {
+					"0x38": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
+					"0x89": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
+					"0x13881": "0x1E84e70D6614F4848aEfDcC358f9776a76B81A85"
+				},
+				"Assets/templates/R1/AuthorizedInviteManager/contract": {
+					"0x38": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
+					"0x89": "0xB6bC20e0Bc7DACb47D01BaFAae602FDd8e33E336",
+					"0x13881": "0xce080378825C79CB0668c47C03f63d65020973A1"
+				},
+				"Assets/templates/R1/ClaimManager/factory": {
+					"0x38": "0x130101007bA13B731669bdF23819924F3213f1B8",
+					"0x89": "0x130101007bA13B731669bdF23819924F3213f1B8",
+					"0x13881": "0x27771453Ab75d3CD6f7Aa90b2D68609F055811A2"
+				},
+				"Assets/templates/R1/CommunityCoin/factory": {
+					"0x38": "0x03010100a373cDEEaF08cebA6130e21d191d9962",
+					"0x89": "0x03010100a373cDEEaF08cebA6130e21d191d9962",
+					"0x13881": "0x1207394326FEF47066E35d6C267445a3F7511ECC"
+				},
+				"Assets/templates/R1/Contest/factory": {
+					"all": "0x07010100806783309eD30F1E1F157F239a010545",
+					"0x89": "0x07010100806783309eD30F1E1F157F239a010545",
+					"0x13881": "0x25c850F82A54c83776Aaaf8a1AB4EE244939BC99"
+				},
+				"Assets/templates/R1/ContestETHOnly/factory": {
+					"all": "0x07010100806783309eD30F1E1F157F239a010545",
+					"0x89": "0x07010100806783309eD30F1E1F157F239a010545",
+					"0x13881": "0x25c850F82A54c83776Aaaf8a1AB4EE244939BC99"
+				},
+				"Assets/templates/R1/Control/factory": {
+					"all": "0x11010100A4CEb22C0a9E035CB650CebAc290c3B3",
+					"0x89": "0x11010100A4CEb22C0a9E035CB650CebAc290c3B3",
+					"0x13881": "0x97b0bcdC4677bC2db7c93786E7BE6420193848A2"
+				},
+				"Assets/templates/R1/Escrow/factory": {
+					"all": "0x10010100E97280E4ef42EFb0834402F9f2d4c1b5",
+					"0x89": "0x10010100E97280E4ef42EFb0834402F9f2d4c1b5",
+					"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
+				},
+				"Assets/templates/R1/Fund/factory": {
+					"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+					"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				},
+				"Assets/templates/R1/FundAggregator/factory": {
+					"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+					"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				},
+				"Assets/templates/R1/FundToken/factory": {
+					"all": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+					"0x89": "0x08010100Dd75bB67a2A00D19bC2052104fDE53E0",
+					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				},
+				"Assets/templates/R1/Income/factory": {
+					"all": "<put address here>",
+					"0x89": "<put address here>",
+					"0x13881": "<put address here>"
+				},
+				"Assets/templates/R1/IncomeUBI/factory": {
+					"all": "<put address here>",
+					"0x89": "<put address here>",
+					"0x13881": "<put address here>"
+				},
+				"Assets/templates/R1/IncomeUBILinear/factory": {
+					"all": "<put address here>",
+					"0x89": "<put address here>",
+					"0x13881": "<put address here>"
+				},
+				"Assets/templates/R1/NFT/factory": {
+					"0x38": "0x0201010079282290a2b0d2E4cbc2a688c029db63",
+					"0x89": "0x0201010079282290a2b0d2E4cbc2a688c029db63",
+					"0x13881": "0x0b2200D3db4A70774Af2304B83F08F3Dd0A18a3A"
+				},
+				"Assets/templates/R1/NFT/sales/factory": {
+					"0x38": "0x020201008CefCC7bE7627cb6C767988F413B0Db1",
+					"0x89": "0x020201008CefCC7bE7627cb6C767988F413B0Db1",
+					"0x13881": "0x282856296DEd09d8630f011Ac7797556a2b99414"
+				},
+				"Assets/templates/R1/NFT/locked/contract": {
+					"0x1": "0x50c8a01f1ab285d4341ab99d2b1965add4f52d1e",
+					"0x38": "0x300d5f5a3227f75551bf050fb2debcf3a8034dd4",
+					"0x89": "0xb9216ebe3a42da670c484a064bb5a93d8122e421",
+					"0x13881": "0x6BbB0ccD3acCFE3CA4CBc799041b4FC9598859c7"
+				},
+						
+				"Assets/templates/R1/Rewards/factory": {
+					"all": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
+					"0x89": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
+					"0x13881": "0x8BDa578c81589aB58c757F3b395b58b45a51197B"
+				},
+				"Assets/templates/R1/Subscription/factory": {
+					"all": "0x04010100099d18Da3d85886Ad297e8F654797d99",
+					"0x89": "0x04010100099d18Da3d85886Ad297e8F654797d99",
+					"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
 				}
 			}
 		}

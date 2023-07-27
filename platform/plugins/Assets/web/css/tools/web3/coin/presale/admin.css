@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 17, 2023, 7:06:37 PM
+    Author     : Artem Subbotin
+*/
+
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.Assets_web3_coin_presale_admin_produceContainer {
+	padding: 20px;
+}
+
+.Assets_web3_coin_presale_admin_produceContainer .timestamps_and_prices_rows_container .timestamps_and_prices_row_container,
+.Assets_web3_coin_presale_admin_produceContainer .thresholds_and_bonuses_rows_container .thresholds_and_bonuses_row_container {
+	padding: 0 10px;
+}
+
+.Assets_web3_coin_presale_admin_fund_info table tbody tr:first-child td {
+	border-top:none;
+}

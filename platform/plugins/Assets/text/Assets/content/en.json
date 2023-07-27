@@ -626,6 +626,65 @@
 				"loading": "Loading"
 			}
 		},
+		"presale": {
+			"buy": {
+				"form": {
+					"labels": {
+						"amount": "How much to invest?"
+					},
+					"placeholders": {
+						"amount": "Amount of {{nativeCoin}}",
+						"max": "Max: {{nativeCoinBalance}}"
+			
+					}
+				},
+				"btns": {
+					"buy": "Buy",
+					"execute": "Execute"
+				}
+			},
+			"admin": {
+				"form": {
+					"labels": {
+						"sellingToken": "Selling Token",
+						"timestamps": "Times",
+						"prices": "Prices",
+						"endTime": "End Time",
+						"thresholds": "Thresholds",
+						"bonuses": "Bonuses"
+					},
+					"fields": {
+						"ownerWithdrawOptions": {
+							"option0":"Owner can't withdraw",
+							"option1":"Owner can withdraw tokens only after endTime passed",
+							"option2":"Owner can withdraw tokens anytime"
+						}
+					}
+				},
+				"placeholders": {
+					"communityAddress": "Community address",
+					"methodkeccack": "Keccak256 hash function",
+					"roleId": "Role ID",
+					"sellingToken": "Selling Token address",
+					"prices": "ETH, Price",
+					"thresholds": "# of tokens",
+					"bonuses": "Bonus %"
+				},
+				"errmsgs": {
+					"ThereAreNoFunds": "There are no funds"
+				},
+				"btns":{
+					"createFund": "Create Fund",
+					"createFundInForm": "Create"
+				},
+				"fundAddress": "Fund address",
+				"createFund": "Create Fund",
+				"fundInfo": "Info",
+				"produce": "Produce",
+				"loading": "Loading",
+				"viewInstancesList": "Refresh List"
+			}
+		},
 		"admin": {
 			"form": {
 				"labels": {
