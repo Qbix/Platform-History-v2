@@ -1,4 +1,4 @@
-.Assets_history_tool[data-empty] {
+.Assets_history_tool[data-empty=true] {
 	padding: 10px 20px;
 	text-align: center;
 	color: #979797;
