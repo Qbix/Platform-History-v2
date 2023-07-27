@@ -213,6 +213,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				return true;
 			},
 			exiting: function (element, entry) {
+				var tool = this;
 				if (element.hasAttribute('data-q-lazyload')
 				&& element.Q.tool) {
 					// Take a snapshot of the current width and height of the element,
@@ -223,7 +224,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					tool.frozen.set(element, {
 						width: element.style.width,
 						height: element.style.height,
-						containerRect: element.container.getBoundingClientRect()
+						containerRect: element.parentElement.getBoundingClientRect()
 					});
 					element.style.width = element.offsetWidth + 'px';
 					element.style.height = element.offsetHeight + 'px';

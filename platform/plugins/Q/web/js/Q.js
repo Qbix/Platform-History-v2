@@ -129,6 +129,9 @@ Q.text = {
 		},
 		"scan": {
 			"QR": "Scan QR codes"
+		},
+		"input": {
+			"Placeholder": "Start typing..."
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo

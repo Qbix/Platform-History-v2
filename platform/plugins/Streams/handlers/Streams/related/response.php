@@ -101,7 +101,7 @@ function Streams_related_response()
 
 	if ($nodeUrls_requested) {
 		$nodeUrls = array();
-		foreach ($rel as $r) {
+		foreach ($rel as $r2) {
 			$far = $isCategory ? 'from' : 'to';
 			$farPublisherId = $far . 'PublisherId';
 			$farStreamName = $far . 'StreamName';

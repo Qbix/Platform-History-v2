@@ -40,7 +40,7 @@
 		platforms: null,
 		debounce: 300,
 		filter: {
-			placeholder: "Start typing..."
+			placeholder: Q.text.Q.input.Placeholder
 		},
 		onResults: null,
 		onChoose: new Q.Event(),
