@@ -5,46 +5,6 @@
  */
 
 (function (window, Q, $, undefined) {
-
-	if (Q.isEmpty(Q.isAddress)) {
-		Q.isAddress = function _Q_isAddress(address) {
-			// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
-			if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-				// check if it has the basic requirements of an address
-				return false;
-			} else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
-				// If it's all small caps or all all caps, return true
-				return true;
-			} else {
-				// Otherwise check each case
-	//            address = address.replace('0x','');
-	//            var addressHash = Web3.utils.sha3(address.toLowerCase());
-	//            for (var i = 0; i < 40; i++ ) {
-	//                // the nth letter should be uppercase if the nth digit of casemap is 1
-	//                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
-	//                    return false;
-	//                }
-	//            }
-				return true;
-			}
-
-		}
-	}
-
-	if (Q.isEmpty(Q.validate)) {
-		Q.validate = function _Q_validate(address) {
-
-		}
-		Q.validate.notEmpty = function _Q_validate_notEmpty(input) {
-			return !Q.isEmpty(input)
-		}
-		Q.validate.integer = function _Q_validate_integer(input) {
-			return Q.isInteger(input)
-		}
-		Q.validate.address = function _Q_validate_address(input) {
-			return Q.isAddress(input)
-		}
-	}
 	
 	/**
 	 * @module Assets
@@ -254,7 +214,7 @@
 								var validated = true;
 								for (let key in fields) {
 									for (let validateMethod in fields[key].validate) {
-										if (!Q.validate[validateMethod](fields[key].userValue)) {
+										if (!Q.Users.Web3.validate[validateMethod](fields[key].userValue)) {
 											validated = false;
 											Q.Notices.add({
 												content: fields[key].validate[validateMethod].replace('%key%', key),
