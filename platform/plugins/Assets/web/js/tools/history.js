@@ -97,6 +97,8 @@ Q.Tool.define("Assets/history", function (options) {
 				return $toolElement.html(tool.text.history.HistoryEmpty);
 			}
 
+			$toolElement.attr('data-empty', false);
+
 			Q.each(rows, function (i, row) {
 				// skip duplicated requests for same message
 				if ($("tr#" + row.id, $table).length) {

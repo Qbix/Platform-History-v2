@@ -234,18 +234,19 @@
 			return;
 		}
 
-		var scriptsToLoad = [
-			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
-			'{{Users}}/js/web3/evm-chains.min.js',
-			//'{{Users}}/js/web3/walletconnect.min.js',
-			//'{{Users}}/js/web3/web3.min.js',
-			//'{{Users}}/js/web3/web3modal.js'
-		];
-		Q.addScript(scriptsToLoad, function () {
-			Users.init.web3.complete = true;
-			callback && callback();
-		}, options);
-		Q.addScript("{{Users}}/js/web3/import.js", null, {
+		Q.addScript("{{Users}}/js/web3/import.js", function () {
+			var scriptsToLoad = [
+				'{{Users}}/js/web3/ethers-5.2.umd.min.js',
+				'{{Users}}/js/web3/evm-chains.min.js',
+				//'{{Users}}/js/web3/walletconnect.min.js',
+				'{{Users}}/js/web3/web3.min.js',
+				//'{{Users}}/js/web3/web3modal.js'
+			];
+			Q.addScript(scriptsToLoad, function () {
+				Users.init.web3.complete = true;
+				callback && callback();
+			}, options);
+		}, {
 			type: "module"
 		});
 	};
@@ -396,7 +397,7 @@
 	
 	Users.authenticate.web3 = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = Q.extend(Users.authenticate.web3.options, options);
-		Users.init.web3(function () {
+		Users.Web3.connect(function () {
 			try {
 				var xid, w3sr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
 				if (w3sr_json) {
@@ -4210,11 +4211,8 @@
 			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			Users.disconnect.web3.occurring = true;
 			var p = Web3.provider;
-			if (window.Web3Modal && Web3Modal.default) {
-				var w = new window.Web3Modal.default;
-				if (w.clearCachedProvider) {
-					w.clearCachedProvider();
-				}
+			if (Web3.web3Modal) {
+				Web3.web3Modal.closeModal();
 			}
 			if (!p) {
 				Q.handle(callback);
@@ -4250,60 +4248,6 @@
 		},
 
 		/**
-		 * Get web3Modal instance
-		 * @method getWeb3Modal
-		 * @static
-		 */
-		getWeb3Modal: function (appId) {
-			appId = appId || Q.info.app;
-			var wcOptions = {};
-			var rpc = Q.getObject(['web3', appId, 'providers', 'walletconnect', 'rpc'], Users.apps);
-			var infuraId = Q.getObject(['web3', appId, 'providers', 'walletconnect', 'infura', 'projectId'], Users.apps);
-			if (rpc) {
-				wcOptions.rpc = rpc;
-			} else if (infuraId) {
-				wcOptions.infuraId = infuraId;
-			}
-			var providerOptions = {};
-			providerOptions.walletconnect = {
-				package: window.WalletConnectProvider.default,
-				options: wcOptions
-			};
-			var fortmatic_key = Q.getObject(['web3', appId, 'providers', 'fortmatic', 'key'], Users.apps);
-			if (fortmatic_key) {
-				providerOptions.fortmatic = {
-					package: window.Fortmatic, // required
-					options: {
-						key: fortmatic_key // required
-					}
-				};
-			} else {
-				console.warn("key required for Fortmatic wallet");
-			}
-			var portis_id = Q.getObject(['web3', appId, 'providers', 'portis', 'id'], Users.apps);
-			if (portis_id) {
-				providerOptions.portis = {
-					package: window.Portis, // required
-					options: {
-						id: portis_id // required
-					}
-				};
-			} else {
-				console.warn("id required for Portis wallet");
-			}
-
-			var disableInjectedProvider = Q.getObject(['web3', appId, 'disableInjectedProvider'], Users.apps);
-			Web3.web3Modal = new window.Web3Modal({
-				// chain: options.chain,
-				cacheProvider: false, // optional
-				providerOptions: providerOptions, // required
-				disableInjectedProvider: disableInjectedProvider // optional. For MetaMask / Brave / Opera.
-			});
-
-			return Web3.web3Modal;
-		},
-
-		/**
 		 * Connect web3 wallet session
 		 * @method connect
 		 * @param {Function} callback
@@ -4315,7 +4259,6 @@
 			}
 
 			Users.init.web3(function () {
-				
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
 					return ethereum.request({ method: 'eth_requestAccounts' })
@@ -4327,16 +4270,26 @@
 						Q.handle(callback, null, [ex]);
 						throw new Error(ex);
 					});
-				} else {
-					Web3.web3Modal.openModal().then(function (provider) {
-						_subscribeToEvents(provider);
-						Web3.provider = provider;
-						Q.handle(callback, null, [null, provider]);
-					}).catch(function (ex) {
-						Q.handle(callback, null, [ex]);
-						throw new Error(ex);
-					});
 				}
+
+				$("w3m-modal").css({
+					position: "fixed",
+					"z-index": Q.zIndexTopmost() + 1
+				});
+				Web3.web3Modal.openModal();
+				/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
+					ok: "Ok",
+					cancel: null
+				});*/
+				/*Q.Users.Web3.ethereumProvider.on('connect', function () {
+					debugger;
+				});*/
+				/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
+					if(newState.open === false) {
+						Q.handle(callback, null, [true]);
+						unsubscribe();
+					}
+				})*/
 			});
 		}),
 
@@ -4658,9 +4611,7 @@
 				});
 
 				function _continue() {
-					provider.once("chainChanged", function (chainId) {
-						Q.handle(callback, null, [null, chainId]);
-					});
+					Q.handle(callback, null, [null, provider.chainId]);
 				}
 			});
 		}),
@@ -4715,7 +4666,7 @@
 				try {
 					var signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
-						from: Q.Users.Web3.getLoggedInUserXid(),
+						from: Q.Users.Web3.getSelectedXid(),
 						to: recipient,
 						value: ethers.utils.parseEther(String(amount))
 					})).then(function (transactionRequest) {
@@ -4763,7 +4714,7 @@
 		 */
 		getContract: Q.promisify(Q.getter(
 		function(contractABIName, contractAddress, callback) {
-			Users.init.web3(function () {
+			Users.Web3.connect(function () {
 				var chainId, address, readOnly;
 				if (Q.isPlainObject(contractAddress)) {
 					chainId = contractAddress.chainId;
