@@ -5,56 +5,7 @@
  */
 
 (function (window, Q, $, undefined) {
-	
-	if (Q.isEmpty(Q.grabMetamaskError)) {
 
-        // see https://github.com/MetaMask/eth-rpc-errors/blob/main/src/error-constants.ts
-        // TODO need to handle most of them
-        Q.grabMetamaskError = function _Q_grabMetamaskError(err, contracts) {
-
-            if (err.code == '-32603') {
-                if (!Q.isEmpty(err.data)) {
-                    if (err.data.code == 3) {
-                        //'execution reverted'
-
-                        var str = '';
-                        contracts.every(function (contract) {
-                            try {
-                                var customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
-                                if (customErrorDescription) {
-
-                                    var decodedStr = ethers.utils.defaultAbiCoder.decode(
-                                        customErrorDescription.inputs.map(obj => obj.type),
-                                        ethers.utils.hexDataSlice(err.data.data, 4)
-                                    );
-                                    str = `${customErrorDescription.name}(${(decodedStr.length > 0) ? '"' + decodedStr.join('","') + '"' : ''})`;
-                                    return false;
-                                }
-                                return true;
-                            } catch (error) {
-                                return true;
-                            }
-
-                        });
-
-                        if (Q.isEmpty(str)) {
-                            // handle: revert("here string message")
-                            return (err.data.message)
-                        } else {
-                            return (str);
-                        }
-                    } else {
-                        //handle "Internal JSON-RPC error."
-                        return (err.data.message);
-                    }
-                }
-            }
-
-            // handle revert and grab custom error
-            return (err.message);
-        }
-    }
-	
 	if (Q.isEmpty(Q.isAddress)) {
 		Q.isAddress = function _Q_isAddress(address) {
 			// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
@@ -355,7 +306,7 @@
 									}).catch(function (err) {
 
 										Q.Notices.add({
-											content: Q.grabMetamaskError(err, [contract]),
+											content: Q.Users.Web3.parseMetamaskError(err, [contract]),
 											timeout: 5
 										});
 
