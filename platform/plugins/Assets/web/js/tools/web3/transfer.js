@@ -68,6 +68,15 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     Q.alert(tool.text.transfer.TransactionSuccess);
                 };
                 var _getSelectedUser = function (userId) {
+                    var $history = $(".Assets_transfer_history", tool.element);
+                    if ($history.length) {
+                        Q.Tool.remove($history[0], true, false);
+                        $history.tool("Assets/history", {
+                            type: "credits",
+                            withUserId: userId
+                        }).activate();
+                    }
+
                     Q.Streams.get(userId, "Streams/user/xid/web3", function (err) {
                         if (err) {
                             return;
@@ -123,8 +132,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 };
 
                 if (Q.isEmpty(state.recipientUserId)) {
-                    $(".Assets_transfer_userChooser", tool.element)
-                    .tool("Streams/userChooser").activate(function () {
+                    $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
                         this.state.onChoose.set(function (userId, avatar) {
                             _getSelectedUser(userId);
                         }, tool);
@@ -240,7 +248,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
 Q.Template.set("Assets/web3/transfer/send",
 `{{#if recipientUserId}}{{else}}
-        {{{tool "Streams/userChooser" class="Assets_transfer_userChooser" placeholder=transfer.SelectRecipient}}}
+        <div class="Assets_transfer_userChooser"><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{transfer.SelectRecipient}}" autocomplete="off"></div>
         <div class="Assets_transfer_usersList"></div>
     {{/if}}
     {{#if tokenInfo}}{{else}}
@@ -255,7 +263,7 @@ Q.Template.set("Assets/web3/transfer/send",
         <button class="Q_button" name="send">{{payment.Send}}</button>
     </div>
     {{#if withHistory}}
-        {{&tool "Assets/history" type="credits" withUserId=recipientUserId}}
+        <div class="Assets_transfer_history"></div>
     {{/if}}`,
     {text: ['Assets/content']}
 );
