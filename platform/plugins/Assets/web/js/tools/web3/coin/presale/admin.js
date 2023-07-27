@@ -24,7 +24,7 @@
 	*  @param {String} [options.fields.thresholds] array of thresholds
 	*  @param {String} [options.fields.bonuses] array of bonuses
 	*  @param {Integer} [options.fields.ownerCanWithdraw    
-	*	0 -owner can not withdraw tokens
+	*	0 -owner can't withdraw tokens
     *	1 -owner can withdraw tokens only after endTimePassed
     *	2 -owner can withdraw tokens anytime
 	*  @param {String} [options.fields.whitelistData] array of tuple like [address, bytes4, uint8, bool] as [contractAddress, method, role, useWhitelist]
@@ -607,19 +607,13 @@
 		</div>
 		<div class="useWhiteListContainer" >
 			<div class="form-group" >
-				<label>{{coin.presale.admin.form.labels.communityAddress}}</label>
 				<input name="whitelistData_communityAddress" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.communityAddress}}" value="">
-				<small class="form-text text-muted">{{coin.presale.admin.form.small.communityAddress}}</small>
 			</div>
 			<div class="form-group" >
-				<label>{{coin.presale.admin.form.labels.methodkeccack}}</label>
 				<input name="whitelistData_methodkeccack" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.methodkeccack}}" value="">
-				<small class="form-text text-muted">{{coin.presale.admin.form.small.whitelistData}}</small>
 			</div>
 			<div class="form-group" >
-				<label>{{coin.presale.admin.form.labels.roleId}}</label>
 				<input name="whitelistData_roleId" type="text" class="form-control" placeholder="{{coin.presale.admin.placeholders.roleId}}" value="">
-				<small class="form-text text-muted">{{coin.presale.admin.form.small.roleId}}</small>
 			</div>
 		</div>
 		{{/unless}} 
