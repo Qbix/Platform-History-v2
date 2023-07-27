@@ -362,6 +362,36 @@ class Q_Valid
 		}
 		return false;
 	}
+
+	/**
+	 * Validates a capability signed by our own server's secret key.
+	 * The capability must have "startTime", "endTime" in milliseconds since UNIX epoch,
+	 * and must also be signed with Q_Utils::sign() or equivalent implementation.
+	 * @method capability
+	 * @static
+	 * @param {array|string} $permissions
+	 * @return {bool}
+	 */
+	static function capability($capability, $permissions)
+	{
+		$now = time();
+		if (!$capability || !Q_Valid::signature($capability)
+		|| empty(Q::ifset($capability, 'permissions', array()))
+		|| Q::ifset($capability, 'startTime', 0) > $now
+		|| Q::ifset($capability, 'endTime', 33226225269) < $now) {
+			return false;
+		}
+		if (is_string($permissions)) {
+			$permissions = [$permissions];
+		}
+		$cp = Q::ifset($capability, 'permissions', array());
+		foreach ($permissions as $p) {
+			if (!in_array($p, $cp)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	/**
 	 * Convenience method to require certain fields to be present in an array,

@@ -90,13 +90,13 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance", {
                                 skipWeb3: !(wallet && !walletError)
                             }).activate(function () {
+                                tool.assetsWeb3BalanceTool = this;
                                 this.state.onChainChange.add(function () {
                                     $toolElement.addClass("Q_disabled");
                                 }, tool);
                                 this.state.onChainChanged.add(function () {
                                     $toolElement.removeClass("Q_disabled");
                                 }, tool);
-                                tool.assetsWeb3BalanceTool = this;
                             });
                         }
 
@@ -123,7 +123,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 };
 
                 if (Q.isEmpty(state.recipientUserId)) {
-                    $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
+                    $(".Assets_transfer_userChooser", tool.element)
+                    .tool("Streams/userChooser").activate(function () {
                         this.state.onChoose.set(function (userId, avatar) {
                             _getSelectedUser(userId);
                         }, tool);
@@ -239,7 +240,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
 
 Q.Template.set("Assets/web3/transfer/send",
 `{{#if recipientUserId}}{{else}}
-        <div class="Assets_transfer_userChooser"><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{transfer.SelectRecipient}}" autocomplete="off"></div>
+        {{{tool "Streams/userChooser" class="Assets_transfer_userChooser" placeholder=transfer.SelectRecipient}}}
         <div class="Assets_transfer_usersList"></div>
     {{/if}}
     {{#if tokenInfo}}{{else}}

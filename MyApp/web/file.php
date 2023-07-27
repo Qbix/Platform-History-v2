@@ -2,7 +2,7 @@
 
 include('Q.inc.php');
 
-$uri = str_replace('/Q/uploads/Streams', '/internal', $_SERVER['REQUEST_URI']);
+$uri = str_replace('/Q/uploads/Streams', '/Q/internal', $_SERVER['REQUEST_URI']);
 
 $filename = Q::realPath(Q_Html::themedFilename(Q_Request::tail()));
 $can = Q_Utils::canReadFromPath($filename);
