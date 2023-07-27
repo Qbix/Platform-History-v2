@@ -2,27 +2,22 @@
 
 function Streams_avatar_response()
 {
-	$prefix = $userIds = $batch = $public = null;
+	$prefix = $userIds = $batch = $public = $communities = $platform = null;
 	$limit = 10;
 	extract($_REQUEST, EXTR_IF_EXISTS);
 	$user = Users::loggedInUser();
 	$asUserId = $user ? $user->id : "";
 
 	if (isset($prefix)) {
+		$options = @compact('limit', 'public', 'communities', 'platform');
 		if ($prefix or !$asUserId) {
 			$avatars = Streams_Avatar::fetchByPrefix(
 				$asUserId, 
 				$prefix, 
-				@compact('limit', 'public')
+				$options
 			);
 		} else {
-			$userIds = Users_Contact::select('contactUserId')
-			->where(array(
-				'userId' => $asUserId
-			))->groupBy('contactUserId')
-			->limit($limit)
-			->execute()
-			->fetchAll(PDO::FETCH_COLUMN, 0);
+			$userIds = Users_Contact::fetchUserIds($options);
 			$avatars = Streams_Avatar::fetch($asUserId, $userIds);
 			$count = count($userIds);
 			if ($count < $limit) {
@@ -30,7 +25,7 @@ function Streams_avatar_response()
 				$moreAvatars = Streams_Avatar::fetchByPrefix(
 					$asUserId, 
 					$prefix, 
-					@compact('limit', 'public')
+					$options
 				);
 				$avatars = array_merge($avatars, $moreAvatars);
 			}

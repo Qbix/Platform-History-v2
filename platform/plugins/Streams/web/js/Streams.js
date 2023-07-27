@@ -70,6 +70,11 @@ Q.text.Streams = {
 			title: 'Follow up'
 		}
 	},
+
+	userChooser: {
+		Placeholder: "Name of a user..."
+	},
+
 	identifier: {
 		privacySettings: "Privacy Settings"
 	},
@@ -5257,12 +5262,14 @@ Avatar.get.onError = new Q.Event();
  *   @param {Number} [options.limit] for paging
  *   @param {Number} [options.offset] for paging
  *   @param {Boolean} [options.public=false] If true, also gets publicly accessible names.
+ *   @param {String} [options.platform] You can pass the name of platform, such as "web3", to skip users who don't have an xid on this platform
+ *   @param {Boolean} [options.communities=false] If true, also gets avatars of communities
  */
 Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 	var userId = Q.plugins.Users.loggedInUser ? Users.loggedInUser.id : "";
 	// Query avatar as userId would see it, by requesting it from the right server.
 	// If userId is empty, then we query avatars on one of the public servers.
-	var fields = Q.take(options, ['limit', 'offset', 'public']);
+	var fields = Q.take(options, ['limit', 'offset', 'public', 'platform', 'communities']);
 	Q.extend(fields, {prefix: prefix});
 	Q.req('Streams/avatar', ['avatars'], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);

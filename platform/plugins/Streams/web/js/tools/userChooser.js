@@ -20,7 +20,9 @@
  *   @param {String} [options.placeholder] Any placeholder text
  *   @param {Number} [options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
- *   @param {bool} [options.communitiesOnly=false] If true, search communities instead regular users
+ *   @param {bool} [options.communitiesOnly=false] If true, search communities instead of regular users
+ *   @param {Boolean} [options.public=true] Set to false to only search private names, not publicly accessible ones
+ *   @param {string} [options.platform] You can pass the name of platform, such as "web3", to skip users who don't have an xid on this platform
  *   @param {Object} [options.exclude] hash of {userId: true},
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.
@@ -79,13 +81,21 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
 
+		var options = {'public': true};
+		if (state.communitiesOnly) {
+			options.communities = true;
+		}
+		if (state.platform) {
+			options.platform = state.platform;
+		}
+
 		if (!query && Date.now() - tool.lastChooseTime > 1000) {
 			var key = Q.Streams.userChooser.lsKey + "\t" + state.initialList.key;
 			var userIds = JSON.parse(localStorage.getItem(key)) || [];
 			Q.Streams.Avatar.get.all(userIds, function (params, subjects) {
 				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), function (err, avatars) {
 					onResponse(null, Q.extend({}, subjects, avatars));
-				}, {'public': true})
+				}, options)
 			});
 			lastQuery = query;
 		}
@@ -150,7 +160,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
 					'background-repeat': 'no-repeat'
 				});
-				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, {'public': true});
+				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
 		}
 
 		function onChoose (cur) {
@@ -190,7 +200,8 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					continue;
 				}
 
-				if ((state.communitiesOnly && !Q.Users.isCommunityId(k)) || (!state.communitiesOnly && Q.Users.isCommunityId(k))) {
+				if ((state.communitiesOnly && !Q.Users.isCommunityId(k))
+				|| (!state.communitiesOnly && Q.Users.isCommunityId(k))) {
 					continue;
 				}
 

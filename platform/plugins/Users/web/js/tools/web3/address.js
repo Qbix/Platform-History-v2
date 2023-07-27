@@ -15,10 +15,7 @@
      */
     
     Q.Tool.define("Users/web3/address", function (options) {
-        var tool = this;
-        var state = this.state;
-    
-        tool.refresh();
+        this.refresh();
     },
     
     { // default options here
@@ -62,7 +59,13 @@
                 });
             });
             
-            var ucElement = Q.Tool.prepare('div', 'Streams/userChooser', state.userChooser, 'userChooser');
+            var ucOptions = Q.extend({
+                platform: 'web3',
+                initialList: {
+                    key: 'Users/web3/address'
+                }
+            }, state.userChooser);
+            var ucElement = Q.Tool.prepare('div', 'Streams/userChooser', ucOptions, 'userChooser');
             tool.element.innerHTML = '';
             tool.element.appendChild(ucElement);
             tool.element.appendChild(button);
