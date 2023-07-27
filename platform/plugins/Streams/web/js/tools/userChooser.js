@@ -156,6 +156,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		function onChoose (cur) {
 			var userId = cur.data('userId');
 			var avatar = cur.data('avatar');
+			tool.state.chosen = {
+				userId: userId,
+				avatar: avatar
+			}
 			tool.$input.blur().val('');
 			var key = Q.Streams.userChooser.lsKey + "\t" + state.initialList.key;
 			var userIds = JSON.parse(localStorage.getItem(key)) || [];
@@ -262,8 +266,12 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 {
 	onChoose: new Q.Event(),
+	chosen: {
+		userId: null,
+		avatar: null
+	},
 	delay: 500,
-	placeholder: Q.text.Q.input.Placeholder,
+	placeholder: Q.text.Streams.userChooser.Placeholder,
 	communitiesOnly: false,
 	resultsHeight: "auto",
 	exclude: {},

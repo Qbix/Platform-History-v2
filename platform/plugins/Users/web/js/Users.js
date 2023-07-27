@@ -132,6 +132,10 @@
 			addToPhonebook: "Add To My Phone Contacts",
 			addLabel: "New Relationship",
 			"prompt": "Give it a name"
+		},
+
+		web3: {
+			PasteAddress: "Paste a valid Web3 address"
 		}
 
 	};
@@ -2963,6 +2967,10 @@
 		"Users/people": {
 			js: "{{Users}}/js/tools/people.js",
 			css: "{{Users}}/css/tools/people.css"
+		},
+		"Users/web3/address": {
+			js: "{{Users}}/js/tools/web3/address.js",
+			css: "{{Users}}/css/tools/web3/address.css"
 		},
 		"Users/web3/community": {
 			js: "{{Users}}/js/tools/web3/community.js",

@@ -1,0 +1,20 @@
+.Users_web3_address_tool {
+    display: flex;
+}
+
+.Users_web3_address_tool button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.Users_web3_address_tool input {
+    height: 40px;
+    font-size: 20px;
+}
+
+.Users_web3_address_tool button img {
+	width: 40px;
+	height: 40px;
+}
