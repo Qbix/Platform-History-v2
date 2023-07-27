@@ -4666,7 +4666,7 @@
 				try {
 					var signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
-						from: Q.Users.Web3.getLoggedInUserXid(),
+						from: Q.Users.Web3.getSelectedXid(),
 						to: recipient,
 						value: ethers.utils.parseEther(String(amount))
 					})).then(function (transactionRequest) {
