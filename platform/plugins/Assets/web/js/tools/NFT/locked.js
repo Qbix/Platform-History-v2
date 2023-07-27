@@ -1,58 +1,5 @@
 (function (window, Q, $, undefined) {
 
-    if (Q.isEmpty(Q["grabMetamaskError"])) {
-
-        // see https://github.com/MetaMask/eth-rpc-errors/blob/main/src/error-constants.ts
-        // TODO need to handle most of them
-        Q.grabMetamaskError = function _Q_grabMetamaskError(err, contracts) {
-
-            if (err.code == '-32603') {
-                if (!Q.isEmpty(err.data)) {
-                    if (err.data.code == 3) {
-                        //'execution reverted'
-
-                        var str = '';
-                        contracts.every(function (contract) {
-                            console.log(contract);
-                            try {
-                                var customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
-                                if (customErrorDescription) {
-
-                                    var decodedStr = ethers.utils.defaultAbiCoder.decode(
-                                        customErrorDescription.inputs.map(obj => obj.type),
-                                        ethers.utils.hexDataSlice(err.data.data, 4)
-                                    );
-                                    str = `${customErrorDescription.name}(${(decodedStr.length > 0) ? '"' + decodedStr.join('","') + '"' : ''})`;
-                                    return false;
-                                }
-                                return true;
-                            } catch (error) {
-                                return true;
-                            }
-
-                        });
-
-                        if (Q.isEmpty(str)) {
-                            // handle: revert("here string message")
-                            return (err.data.message)
-                        } else {
-                            return (str);
-                        }
-                    } else {
-                        //handle "Internal JSON-RPC error."
-                        return (err.data.message);
-                    }
-                }
-            }
-
-            // handle revert and grab custom error
-            return (err.message);
-        }
-    }
-    /**
-     * @module Assets
-     */
-
     /**
      * YUIDoc description goes here
      * @class Assets NFT locked
@@ -235,9 +182,8 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                         });
                                     }).catch(function (err) {
                                         Q.Dialogs.pop();
-                                        //alert(Q.grabMetamaskError(err, [nftContract,lockedContract]));
                                         Q.Notices.add({
-                                            content: Q.grabMetamaskError(err, [nftContract, lockedContract]),
+                                            content: Q.Users.Web3.parseMetamaskError(err, [nftContract, lockedContract]),
                                             timeout: 5
                                         });
                                         //Q.Dialogs.pop();
