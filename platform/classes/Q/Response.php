@@ -1209,6 +1209,8 @@ class Q_Response
 				$remote_scripts_for_slots[$script['slot']][] = $src;
 			} else {
 				list ($src, $filename) = Q_Html::themedUrlFilenameAndHash($src);
+				$scriptSrc= Q_Html::themedUrl($script['src'], array('ignoreEnvironment' => true));
+				$loaded[$scriptSrc] = true;
 				if (!empty($loaded[$src])) {
 					continue;
 				}
@@ -1443,7 +1445,7 @@ class Q_Response
 					$imported_for_slots[$stylesheet['slot']][$href] = "@import url($href);";
 				} else {
 					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
-					$stylesheetHref = Q_Html::themedUrl($stylesheet['href']);
+					$stylesheetHref = Q_Html::themedUrl($stylesheet['href'], array('ignoreEnvironment' => true));
 					$loaded[$stylesheetHref] = true;
 					if (!empty($loaded[$href])) {
 						continue;
