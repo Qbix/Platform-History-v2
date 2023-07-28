@@ -2,11 +2,10 @@
 
 function Q_filters_MatthiasMullie_js($params)
 {
-	$processed = $params['processed'];
 	$results = array();
 	$printProgress = Q::ifset($params, 'printProgress', false);
 	$filters = array();
-	foreach ($processed as $src => $part) {
+	foreach ($params['parts'] as $src => $part) {
 		if ($printProgress) {
 			echo "\tQ_filters_MatthiasMullie_js: $src" . PHP_EOL;
 		}

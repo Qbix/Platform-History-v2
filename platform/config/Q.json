@@ -162,8 +162,11 @@
 						"handler": "Q/filters/MatthiasMullie/css"
 					},
 					"js": {
-						"handler": "Q/filters/googleClosureCompiler",
-						"params": {"compilation_level": "SIMPLE_OPTIMIZATIONS"},
+						"handler": "Q/filters/MatthiasMullie/js",
+						"params": {
+							"compilation_level": "SIMPLE_OPTIMIZATIONS",
+							"installedLocally": true
+						},
 						"timeout": 600
 					}
 				}

@@ -1874,6 +1874,7 @@ class Q_Utils
 				}, $symbol);
 				break;
 		}
+		return $path;
 	}
 	
 	/**

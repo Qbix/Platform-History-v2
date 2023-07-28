@@ -80,6 +80,7 @@ if (empty($process)) {
 }
 
 $src = $dest = null;
+$prepared = array();
 $combined = array();
 $preload = array();
 $dir_to_save = APP_CONFIG_DIR.DS.'Q';
@@ -87,18 +88,58 @@ if (!file_exists($dir_to_save)) {
 	mkdir($dir_to_save);
 }
 $baseUrl = Q_Request::baseUrl();
+Q_prepare();
 echo Q_combine($process) . PHP_EOL;
+
+function Q_prepare()
+{
+	$environment = Q_Config::expect('Q', 'environment');
+	$prepare = Q_Config::get('Q', 'environments', $environment, 'prepare',
+		Q_Config::get('Q', 'environments', '*', 'prepare', false)
+	);
+	foreach ($prepare as $prefix => $extensions) {
+		if (strpos($prefix, '{{') === 0) {
+			$prefix = Q_Request::tail(Q_Uri::interpolateUrl($prefix), true);
+		}
+		$dir = Q_Html::themedFilename($prefix);
+		Q_traverse($dir, $extensions);
+	}
+}
+
+function Q_traverse($dir, $extensions)
+{
+	global $prepared;
+	foreach (scandir($dir) as $basename) {
+		if ($basename === '.' || $basename === '..') {
+			continue;
+		}
+		foreach ($extensions as $extension) {
+			$parts = explode('.', $basename);
+			if (count($parts) <= 1) {
+				continue;
+			}
+			$ext = array_pop($parts);
+			if ($ext === $extension
+			&& !str_contains($basename, '.min.')) {
+				$newname = $dir . DS . implode('.', $parts) . '.min.' . $ext;
+				$prepared[$dir . DS . $basename] = $newname;
+			}
+		}
+		$subdir = $dir . DS . $basename;
+		if (is_dir($subdir)) {
+			Q_traverse($subdir, $extensions);
+		}
+	}
+}
 
 function Q_combine($process)
 {
-	global $combined, $src, $dest, $baseUrl; // used inside called function
-	$environment = Q_Config::get('Q', 'environment', false);
-	if (!$environment) {
-		return "Config field 'Q'/'environment' is empty";
-	}
+	global $prepared, $combined, $src, $dest, $baseUrl; // used inside called function
+	$environment = Q_Config::expect('Q', 'environment');
 	$files = Q_Config::get('Q', 'environments', $environment, 'files', 
 		Q_Config::get('Q', 'environments', '*', 'files', false)
 	);
+	$files = array_merge($prepared, $files);
 	if (empty($files)) {
 		return "Config field 'Q'/'environments'/'$environment'/files is empty";
 	}
@@ -266,6 +307,8 @@ function Q_combine_preload($matches)
 		mkdir($dirname . DS . $subdirname);
 	}
 	$path = substr($urlinfo['path'], 1);
+	$temp = explode('?', $path);
+	$path = reset($temp);
 	$parts = explode('.', $path);
 	$ext = (count($parts) > 1) ? array_pop($parts) : false;
 	$path2 = implode('.', $parts);

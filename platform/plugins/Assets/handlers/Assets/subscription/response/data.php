@@ -11,7 +11,7 @@ function Assets_subscription_response_data ($params) {
 			'ss.type' => Assets_Subscription::$streamType,
 			'srt.type' => Assets_Subscription::$streamType
 		))
-		->join(Streams_RelatedTo::table() . ' srt', array(
+		->join(Streams_RelatedTo::table(true, 'srt'), array(
 			'srt.fromPublisherId' => 'ss.publisherId',
 			'srt.fromStreamName' => 'ss.name',
 	), 'LEFT')->fetchDbRows();

@@ -1404,7 +1404,7 @@ class Q_Html
 		 * @param {string} file_path
 		 * @return {array}
 		 */
-		$result = Q::event('Q/themedUrlFilenameAndHash', @compact('file_path'), 'before');
+		$result = Q::event('Q/themedUrlFilenameAndHash', @compact('filePath'), 'before');
 		if ($result) {
 			return $result;
 		}
@@ -1416,6 +1416,7 @@ class Q_Html
 			$filePath2 = substr($filePath2, strlen($baseUrl) + 1);
 		}
 		
+		$minFilePath = null;
 		if (empty($options['ignoreEnvironment'])
 		and $environment = Q_Config::get('Q', 'environment', '')) {
 			if ($info = Q_Config::get('Q', 'environments', $environment, false)) {
@@ -1423,6 +1424,28 @@ class Q_Html
 					$filePath2 = $info['files'][$filePath];
 				} else if (!empty($info['files'][$filePath2])) {
 					$filePath2 = $info['files'][$filePath2];
+				} else if (!empty($info['prepare'])) {
+					$temp = explode('?', $filePath);
+					$filePath = reset($temp);
+					$parts = explode('.', $filePath);
+					$ext = array_pop($parts);
+					foreach ($info['prepare'] as $prefix => $extensions) {
+						if (!in_array($ext, $extensions)) {
+							continue;
+						}
+						if (strpos($prefix, '{{') === 0) {
+							$prefix = Q_Request::tail(Q_Uri::interpolateUrl($prefix), true);
+						}
+						if (strpos($filePath, '{{') === 0) {
+							$filePath = Q_Request::tail(Q_Uri::interpolateUrl($filePath), true);
+						}
+						if (!Q::startsWith($filePath, $prefix)) {
+							continue;
+						}
+						$parts = explode('.', $filePath);
+						$ext = array_pop($parts);
+						$minFilePath = implode('.', $parts) . '.min.' . $ext;
+					}
 				}
 			}
 		}
@@ -1452,6 +1475,14 @@ class Q_Html
 						$theme = $themes[$i];
 						break;
 					}
+				}
+			}
+			if ($minFilePath) {
+				$minFilename = Q_Uri::filenameFromUrl($minFilePath);
+				if (file_exists($minFilename)
+				and filemtime($minFilename) >= filemtime($filename)) {
+					// point to the processed + minified file
+					$filePath2 = $minFilePath;
 				}
 			}
 			$url = $theme . ($filePath2 ? '/'.$filePath2 : '');
