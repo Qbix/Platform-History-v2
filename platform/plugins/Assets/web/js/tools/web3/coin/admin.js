@@ -6,95 +6,6 @@
 
 (function (window, Q, $, undefined) {
 	
-	if (Q.isEmpty(Q.grabMetamaskError)) {
-
-        // see https://github.com/MetaMask/eth-rpc-errors/blob/main/src/error-constants.ts
-        // TODO need to handle most of them
-        Q.grabMetamaskError = function _Q_grabMetamaskError(err, contracts) {
-
-            if (err.code == '-32603') {
-                if (!Q.isEmpty(err.data)) {
-                    if (err.data.code == 3) {
-                        //'execution reverted'
-
-                        var str = '';
-                        contracts.every(function (contract) {
-                            try {
-                                var customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
-                                if (customErrorDescription) {
-
-                                    var decodedStr = ethers.utils.defaultAbiCoder.decode(
-                                        customErrorDescription.inputs.map(obj => obj.type),
-                                        ethers.utils.hexDataSlice(err.data.data, 4)
-                                    );
-                                    str = `${customErrorDescription.name}(${(decodedStr.length > 0) ? '"' + decodedStr.join('","') + '"' : ''})`;
-                                    return false;
-                                }
-                                return true;
-                            } catch (error) {
-                                return true;
-                            }
-
-                        });
-
-                        if (Q.isEmpty(str)) {
-                            // handle: revert("here string message")
-                            return (err.data.message)
-                        } else {
-                            return (str);
-                        }
-                    } else {
-                        //handle "Internal JSON-RPC error."
-                        return (err.data.message);
-                    }
-                }
-            }
-
-            // handle revert and grab custom error
-            return (err.message);
-        }
-    }
-	
-	if (Q.isEmpty(Q.isAddress)) {
-		Q.isAddress = function _Q_isAddress(address) {
-			// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
-			if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-				// check if it has the basic requirements of an address
-				return false;
-			} else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
-				// If it's all small caps or all all caps, return true
-				return true;
-			} else {
-				// Otherwise check each case
-	//            address = address.replace('0x','');
-	//            var addressHash = Web3.utils.sha3(address.toLowerCase());
-	//            for (var i = 0; i < 40; i++ ) {
-	//                // the nth letter should be uppercase if the nth digit of casemap is 1
-	//                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
-	//                    return false;
-	//                }
-	//            }
-				return true;
-			}
-
-		}
-	}
-
-	if (Q.isEmpty(Q.validate)) {
-		Q.validate = function _Q_validate(address) {
-
-		}
-		Q.validate.notEmpty = function _Q_validate_notEmpty(input) {
-			return !Q.isEmpty(input)
-		}
-		Q.validate.integer = function _Q_validate_integer(input) {
-			return Q.isInteger(input)
-		}
-		Q.validate.address = function _Q_validate_address(input) {
-			return Q.isAddress(input)
-		}
-	}
-	
 	/**
 	 * @module Assets
 	 */
@@ -303,7 +214,7 @@
 								var validated = true;
 								for (let key in fields) {
 									for (let validateMethod in fields[key].validate) {
-										if (!Q.validate[validateMethod](fields[key].userValue)) {
+										if (!Q.Users.Web3.validate[validateMethod](fields[key].userValue)) {
 											validated = false;
 											Q.Notices.add({
 												content: fields[key].validate[validateMethod].replace('%key%', key),
@@ -355,7 +266,7 @@
 									}).catch(function (err) {
 
 										Q.Notices.add({
-											content: Q.grabMetamaskError(err, [contract]),
+											content: Q.Users.Web3.parseMetamaskError(err, [contract]),
 											timeout: 5
 										});
 

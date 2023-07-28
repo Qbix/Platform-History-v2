@@ -22,9 +22,10 @@ var Users = Q.Users;
 Q.Tool.define("Assets/web3/balance", function (options) {
 	var tool = this;
 	var state = this.state;
+	var loggedInUserId = Users.loggedInUserId();
 	var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
 
-	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users)) || !loggedInWalletAddress;
+	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users)) || (loggedInUserId && !loggedInWalletAddress);
 
 	tool.refresh();
 },
@@ -41,7 +42,6 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 { // methods go here
 	refresh: function () {
 		var tool = this;
-		var $toolElement = $(tool.element);
 		var state = tool.state;
 
 		Q.Template.render("Assets/web3/balance", {
