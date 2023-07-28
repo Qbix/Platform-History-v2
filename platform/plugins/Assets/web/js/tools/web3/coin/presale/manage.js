@@ -1,14 +1,4 @@
 (function (window, Q, $, undefined) {
-	
-	/**
-	 * @module Assets
-	 */
-	var Assets = Q.Assets;
-	/**
-	 * @module Users
-	 */
-	var Users = Q.Users;
-	
 	/**
 	* Adding user for group in FundContract.
 	* @constructor
@@ -63,46 +53,11 @@
 		fund: null
 	},
 	{ // methods go here
-//		
-//		getNativeCoin: function(){
-//			var tool = this;
-//			var state = tool.state;
-//			
-//			var nativeCoin;
-//
-//			Q.each(Assets.currencies.tokens, function () {
-//				var addr = this[state.chainId];
-//				if (addr && addr == Assets.Web3.constants.zeroAddress) {
-//					nativeCoin = this['symbol'];
-//					return;
-//				}
-//			});
-//			return nativeCoin;
-//		},
 		refresh: function() {
 			var tool = this;
 			var state = tool.state;
 			var $toolElement = $(this.element);
-			
-//			Q.Text.get('Assets/content', function (err, text) {
-//				var msg = Q.firstErrorMessage(err);
-//				if (msg) {
-//					return console.warn(msg);
-//				}
-//
-//				tool.text = text.NFT.list;
-//				pipe.fill("texts")();
-//			});
-			
-			
-		//	$toolElement.addClass("Q_working");
-			
-//			Q.Template.render("Assets/web3/coin/presale/buy/preloader", {
-//				src: Q.url("{{Q}}/img/throbbers/loading.gif")
-//			}, function (err, html) {
-//				Q.replace(tool.element, html);
-//			});
-			
+	
 			Q.Template.render("Assets/web3/coin/presale/manage", {
 				text: tool.text
 			}, function (err, html) {
@@ -175,14 +130,6 @@
                 });
 			});			
 
-
-//
-//						var fundContract;
-//
-
-//					});
-//			});
-//			
 		}
 	});
 	
@@ -202,16 +149,6 @@
 			text: ["Assets/content"]
 		}
 	);
-	
-	
-	
-	Q.Template.set("Assets/web3/coin/presale/manage/preloader",
-	`
-	<img src="{{src}}" alt="">
-	`,
-		{text: ["Assets/content"]}
-	);
-	
 
 })(window, Q, jQuery);
 		
