@@ -157,6 +157,7 @@
 		},
 		"environments": {
 			"*": {
+				"preparedPath": "Q/prepared",
 				"filters": {
 					"css": {
 						"handler": "Q/filters/MatthiasMullie/css"

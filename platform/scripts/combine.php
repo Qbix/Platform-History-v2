@@ -79,6 +79,13 @@ if (empty($process)) {
 	}
 }
 
+$baseUrl = Q_Request::baseUrl();
+$environment = Q_Config::expect('Q', 'environment');
+$preparedPath = Q_Config::get('Q', 'environments', $environment, 'preparedPath',
+	Q_Config::get('Q', 'environments', '*', 'preparedPath', false)
+);
+$prepared_dir = Q_Uri::filenameFromUrl($baseUrl . "/" . $preparedPath);
+
 $src = $dest = null;
 $prepared = array();
 $combined = array();
@@ -87,7 +94,6 @@ $dir_to_save = APP_CONFIG_DIR.DS.'Q';
 if (!file_exists($dir_to_save)) {
 	mkdir($dir_to_save);
 }
-$baseUrl = Q_Request::baseUrl();
 Q_prepare();
 echo Q_combine($process) . PHP_EOL;
 
@@ -108,7 +114,8 @@ function Q_prepare()
 
 function Q_traverse($dir, $extensions)
 {
-	global $prepared;
+	global $prepared, $prepared_dir;
+	$newdir = str_replace(APP_WEB_DIR, $prepared_dir, $dir);
 	foreach (scandir($dir) as $basename) {
 		if ($basename === '.' || $basename === '..') {
 			continue;
@@ -121,8 +128,9 @@ function Q_traverse($dir, $extensions)
 			$ext = array_pop($parts);
 			if ($ext === $extension
 			&& !str_contains($basename, '.min.')) {
-				$newname = $dir . DS . implode('.', $parts) . '.min.' . $ext;
+				$newname = $newdir . DS . implode('.', $parts) . '.min.' . $ext;
 				$prepared[$dir . DS . $basename] = $newname;
+				mkdir($newdir, 0755, true);
 			}
 		}
 		$subdir = $dir . DS . $basename;

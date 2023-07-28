@@ -1419,17 +1419,26 @@ class Q_Html
 		$minFilePath = null;
 		if (empty($options['ignoreEnvironment'])
 		and $environment = Q_Config::get('Q', 'environment', '')) {
+			$files = Q_Config::get('Q', 'environments', $environment, 'files', 
+				Q_Config::get('Q', 'environments', '*', 'files', false)
+			);
+			$prepare = Q_Config::get('Q', 'environments', $environment, 'prepare', 
+				Q_Config::get('Q', 'environments', '*', 'prepare', false)
+			);
+			$preparedPath = Q_Config::get('Q', 'environments', $environment, 'preparedPath', 
+				Q_Config::get('Q', 'environments', '*', 'preparedPath', false)
+			);
 			if ($info = Q_Config::get('Q', 'environments', $environment, false)) {
-				if (!empty($info['files'][$filePath])) {
-					$filePath2 = $info['files'][$filePath];
-				} else if (!empty($info['files'][$filePath2])) {
-					$filePath2 = $info['files'][$filePath2];
-				} else if (!empty($info['prepare'])) {
+				if (!empty($files[$filePath])) {
+					$filePath2 = $files[$filePath];
+				} else if (!empty($files[$filePath2])) {
+					$filePath2 = $files[$filePath2];
+				} else if (!empty($prepare)) {
 					$temp = explode('?', $filePath);
 					$filePath = reset($temp);
 					$parts = explode('.', $filePath);
 					$ext = array_pop($parts);
-					foreach ($info['prepare'] as $prefix => $extensions) {
+					foreach ($prepare as $prefix => $extensions) {
 						if (!in_array($ext, $extensions)) {
 							continue;
 						}
@@ -1444,7 +1453,7 @@ class Q_Html
 						}
 						$parts = explode('.', $filePath);
 						$ext = array_pop($parts);
-						$minFilePath = implode('.', $parts) . '.min.' . $ext;
+						$minFilePath = $preparedPath . '/' . implode('.', $parts) . '.min.' . $ext;
 					}
 				}
 			}
