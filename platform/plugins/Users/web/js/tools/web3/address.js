@@ -33,7 +33,7 @@
             if (!abbr) {
                 return Q.alert(Q.text.Users.errors.WalletInvalid);
             }
-            tool.$input.val(avatar ? avatar.displayName() : address);
+            tool.$input.val(avatar ? avatar.displayName() : abbr);
             var $te = $(this.element);
             $te.addClass('Users_web3_address_set');
             tool.$input.blur().on('focus', function () {
