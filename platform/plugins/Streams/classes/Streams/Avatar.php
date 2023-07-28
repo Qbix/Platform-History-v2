@@ -86,7 +86,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 		}
 		$communities = Q::ifset($options, 'communities', false);
 		$platform = Q::ifset($options, 'platform', null);
-		$toUserId = empty($options['public'])
+		$toUserId = empty($options['public']) && $toUserId
 			? $toUserId
 			: array($toUserId, '');
 		$fields = isset($options['fields'])

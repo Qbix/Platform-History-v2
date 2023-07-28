@@ -4206,9 +4206,17 @@
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
 
+		/**
+		 * Abbreviates a Web3 address
+		 * @param {String} address A string of the form "0x..."
+		 * @param {Number} len The number of digits on either side of the ...""
+		 * @return {String|null} Returns null if address is not valid
+		 */
 		abbreviateAddress: function (address, len) {
 			len = len || 5;
-			return address.substr(0, 2+len) + '...' + address.substr(-len);
+			return Users.Web3.validate.address(address)
+				? address.substr(0, 2+len) + '...' + address.substr(-len)
+				: null;
 		},
 
 		disconnect: function (appId, callback) {
@@ -4861,13 +4869,14 @@
 			numeric: function _validate_numeric(input) {
 				return !isNaN(parseFloat(input)) && isFinite(input);
 			},
-			address: function _validate_address(input) {
+			address: function _validate_address(address) {
 				// here two ways: simple and custom;
 				// since we have a ethers lib we will use it
-				return ethers.utils.isAddress(input);
+				if (window.ethers) {
+					return ethers.utils.isAddress(address);
+				}
 				
 				//overwise
-				/*
 				// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
 				if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
 					// check if it has the basic requirements of an address
@@ -4887,7 +4896,6 @@
 		            // }
 					return true;
 				}
-				*/
 			}
 		}
 	};

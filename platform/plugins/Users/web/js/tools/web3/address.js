@@ -27,7 +27,20 @@
             onChoose: new Q.Event()
         },
         onRefresh: new Q.Event(),
-        onAddress: new Q.Event() // receives the web3 address as first parameter
+        onAddress: new Q.Event(function (address) {
+            var tool = this;
+            var abbr = Q.Users.Web3.abbreviateAddress(address);
+            if (!abbr) {
+                return Q.alert(Q.text.Users.errors.WalletInvalid);
+            }
+            tool.$input.val(abbr);
+            var $te = $(this.element);
+            $te.addClass('Users_web3_address_set');
+            tool.$input.blur().on('focus', function () {
+                tool.$input.val('')
+                $te.removeClass('Users_web3_address_set');
+            });
+        }, 'Users/web3/address')
     },
     
     { // methods go here
@@ -45,8 +58,9 @@
                     if (err) {
                         return Q.alert(err);
                     }
-                    Q.handle(state.onAddress, tool, [xid]);
-                    state.chosen.address = xid;
+                    if (false !== Q.handle(state.onAddress, tool, [xid])) {
+                        state.chosen.address = xid;
+                    }
                 });
             }, tool);
     
@@ -70,7 +84,14 @@
             tool.element.appendChild(ucElement);
             tool.element.appendChild(button);
     
-            Q.activate(tool.element, tool.state.userChooser);
+            Q.activate(ucElement, tool.state.userChooser, function () {
+                tool.$input = this.$input;
+                tool.$input.on('input paste', function (event) {
+                    if (Q.Users.Web3.validate.address(event.target.value)) {
+                        Q.handle(state.onAddress, tool, [event.target.value]);
+                    }
+                });
+            });
         }
     });
     
