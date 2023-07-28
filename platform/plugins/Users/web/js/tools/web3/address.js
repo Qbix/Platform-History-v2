@@ -27,13 +27,13 @@
             onChoose: new Q.Event()
         },
         onRefresh: new Q.Event(),
-        onAddress: new Q.Event(function (address) {
+        onAddress: new Q.Event(function (address, userId, avatar) {
             var tool = this;
             var abbr = Q.Users.Web3.abbreviateAddress(address);
             if (!abbr) {
                 return Q.alert(Q.text.Users.errors.WalletInvalid);
             }
-            tool.$input.val(abbr);
+            tool.$input.val(avatar ? avatar.displayName() : address);
             var $te = $(this.element);
             $te.addClass('Users_web3_address_set');
             tool.$input.blur().on('focus', function () {
@@ -58,7 +58,7 @@
                     if (err) {
                         return Q.alert(err);
                     }
-                    if (false !== Q.handle(state.onAddress, tool, [xid])) {
+                    if (false !== Q.handle(state.onAddress, tool, [xid, userId, avatar])) {
                         state.chosen.address = xid;
                     }
                 });
