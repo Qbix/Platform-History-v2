@@ -70,13 +70,14 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 * 
 	 * @method fetchByPrefix
 	 * @static
-	 * @param $toUserId {User_User|string} The id of the user to which this would be displayed
-	 * @param $prefix {string} The prefix for the firstName
-	 * @param {array} $options=array()
-	 *	'limit' => number of records to fetch
-	 *  'fields' => defaults to array('username', 'firstName', 'lastName') 
-	 *  'public' => defaults to false. If true, also gets publicly accessible names.
-	 *  'communities' => defaults to false. If true, also gets communities.
+	 * @param {User_User|string}$toUserId The id of the user to which this would be displayed
+	 * @param {string} $prefix The prefix for the firstName
+	 * @param {array} [$options=array()]
+	 * @param {integer} [$options.limit] number of records to fetch
+	 * @param {array} [$options.fields] defaults to array('username', 'firstName', 'lastName') 
+	 * @param {boolean} [$options.public] defaults to false. If true, also gets publicly accessible names.
+	 * @param {boolean} [$options.communities] defaults to false. If true, also gets communities.
+	 * @param {string} [$options.platform] You can pass the name of a platform to skip users who don't have an xid on this platform
 	 * @return {array}
 	 */
 	static function fetchByPrefix($toUserId, $prefix, $options = array()) {
@@ -84,7 +85,8 @@ class Streams_Avatar extends Base_Streams_Avatar
 			$toUserId = $toUserId->id;
 		}
 		$communities = Q::ifset($options, 'communities', false);
-		$toUserId = empty($options['public'])
+		$platform = Q::ifset($options, 'platform', null);
+		$toUserId = empty($options['public']) && $toUserId
 			? $toUserId
 			: array($toUserId, '');
 		$fields = isset($options['fields'])
@@ -123,15 +125,33 @@ class Streams_Avatar extends Base_Streams_Avatar
 		$count = count($criteria);
 		for ($i=0; $i<$count; ++$i) {
 			// NOTE: sharding should be done on toUserId only, not publisherId
-			$q = Streams_Avatar::select()
-				->where(array(
-					'toUserId' => $toUserId
-				))->andWhere($criteria[$i])
-				->orderBy('firstName');
-			$rows = $q->limit($max)->fetchDbRows();
+			if ($platform) {
+				$q = Streams_Avatar::select(null, 'a')
+				->select('e.xid')
+				->join(Users_ExternalTo::table(true, 'e'), array(
+					'e.userId' => 'a.publisherId'
+				), 'INNER')->where(array(
+					'e.platform' => $platform
+				));
+			} else {
+				$q = Streams_Avatar::select();
+			}
+			$q = $q->where(array(
+				'toUserId' => $toUserId
+			))->andWhere($criteria[$i])
+			->orderBy('firstName');
+			$rows = $q->limit($max)->fetchDbRows('Streams_Avatar');
 			foreach ($rows as $r) {
 				if (!$communities and Users::isCommunityId($r->publisherId)) {
 					continue;
+				}
+				if ($platform) {
+					$xids = isset($avatars[$r->publisherId])
+						? $avatars[$r->publisherId]->get('xids')
+						: array();
+					array_push($xids, $r->xid);
+					$r->set('xids', $xids);
+					unset($r->xid);
 				}
 				if (!isset($avatars[$r->publisherId])
 				or $r->toUserId !== '') {
@@ -144,6 +164,18 @@ class Streams_Avatar extends Base_Streams_Avatar
 			}
 		}
 		return $avatars;
+	}
+
+	/**
+	 * Returns the fields and values we can export to clients.
+	 * Can also contain "messageTotals", "relatedToTotals" and "relatedFromTotals".
+	 * @method exportArray
+	 * @return {array}
+	 */
+	function exportArray($options = null)
+	{
+		$fields = $this->toArray();
+		return $fields;
 	}
 	
 	/**

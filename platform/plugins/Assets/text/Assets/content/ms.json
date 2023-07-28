@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Tidak cukup kebenaran untuk membaca dompet pengguna ini",
         "ThisUserHaveNoWallet": "Pengguna ini tidak mempunyai dompet yang diberikan",
         "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak sah",
-        "WalletInvalid": "Alamat dompet tidak sah"
+        "WalletInvalid": "Alamat dompet tidak sah",
+        "CantManageFrozenSeries": "Anda tidak boleh mengurus siri beku"
     },
     "admin": {
         "Title": "Pentadbiran aset",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Mendapat {{amount}} kredit",
         "Places_user_location": "Mendapat {{amount}} kredit",
         "Streams_greeting": "Mendapat {{amount}} kredit",
-        "YouHaveCreditsToStart": "Mendapat {{amount}} kredit"
+        "YouHaveCreditsToStart": "Mendapat {{amount}} kredit",
+        "InvitedUserFilledStream": "Mendapat {{amount}} kredit",
+        "ForFillingStream": "Mendapat {{amount}} kredit",
+        "CreatePrivateChat": "Menghabiskan {{amount}} kredit"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Maklumat Pembayaran",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Pilih penerima",
         "TransactionSuccess": "Kejayaan Transaksi",
-        "OrTypeWalletAddress": "ATAU taip alamat dompet penerima"
+        "OrTypeWalletAddress": "ATAU taip alamat dompet penerima",
+        "AppCredits": "Kredit Apl"
     },
     "NFT": {
         "Title": "Tajuk",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; telah dituntut",
             "TokenWasLocked": "Token &quot; {{title}} &quot; telah dikunci",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; telah dibuka kuncinya"
+        },
+        "GenerateDescription": "atau jana automatik",
+        "collections": {
+            "Title": "Koleksi",
+            "EnterTitle": "masukkan tajuk",
+            "EnterDescription": "masukkan penerangan",
+            "NewCollection": "Koleksi baru",
+            "Name": "Nama",
+            "Icon": "ikon",
+            "Description": "Penerangan",
+            "Author": "Pengarang",
+            "SelectCollection": "Pilih koleksi",
+            "Value": "Nilai",
+            "AreYouSure": "Adakah anda pasti?",
+            "AuthorInvalid": "Alamat pengarang tidak sah!",
+            "Address": "Alamat",
+            "CoverImage": "Gambar muka depan",
+            "UploadIcon": "Ikon muat naik",
+            "CommissionAddressInvalid": "Alamat komisen tidak sah",
+            "OnSale": "dijual",
+            "OffSale": "tidak dijual",
+            "CreateCollection": "Buat Koleksi",
+            "UpdateCollection": "Kemas kini Koleksi",
+            "CollectionInfo": "Maklumat Koleksi",
+            "SelectAuthor": "Pilih pengarang",
+            "NewItem": "Koleksi NFT Baharu",
+            "NamePlaceholder": "Masukkan nama koleksi",
+            "DescPlaceholder": "Masukkan perihalan koleksi",
+            "EndingIn": "Berakhir Dalam",
+            "SubmitSeries": "Hantar Siri"
         }
     },
     "currencies": {
         "choose": "Pilih mata wang"
+    },
+    "connectedAccount": {
+        "Title": "Sambung akaun",
+        "Success": "Kejayaan",
+        "YourAccountCreated": "Akaun anda berjaya dibuat!",
+        "YourAccountAlreadyCreated": "Akaun anda telah dibuat dan sedia untuk digunakan"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Jumlah"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Jumlah"
+                    }
+                },
+                "placeholders": {
+                    "amount": "jumlah"
+                },
+                "btns": {
+                    "stake": "pancang"
+                },
+                "stake": "pancang",
+                "loading": "Memuatkan"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tempoh",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "derma",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "pengangka",
+                    "denominator": "penyebut"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tempoh dalam hari",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "derma",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "pengangka",
+                    "denominator": "penyebut"
+                }
+            },
+            "placeholders": {
+                "optional": "(pilihan)",
+                "tuple": "tupel[]",
+                "number": "nombor",
+                "address": "alamat",
+                "fraction": "pecahan",
+                "integer": "integer",
+                "seconds": "detik",
+                "days": "hari",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Tiada kolam"
+            },
+            "btns": {
+                "createPool": "Buat Kolam",
+                "createPoolInForm": "Buat"
+            },
+            "createPool": "Buat Kolam",
+            "produce": "Menghasilkan",
+            "loading": "Memuatkan",
+            "viewInstancesList": "Muat semula Senarai"
+        }
     }
 }

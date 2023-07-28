@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Ekki nægar heimildir til að lesa veski þessa notanda",
         "ThisUserHaveNoWallet": "Þessi notandi hefur ekkert veski úthlutað",
         "TheWalletOfThisUserInvalid": "Veski þessa notanda ógilt",
-        "WalletInvalid": "Veski heimilisfang ógilt"
+        "WalletInvalid": "Veski heimilisfang ógilt",
+        "CantManageFrozenSeries": "Þú getur ekki stjórnað frystum seríum"
     },
     "admin": {
         "Title": "Umsýslu eigna",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Hlaut {{amount}} einingar",
         "Places_user_location": "Hlaut {{amount}} einingar",
         "Streams_greeting": "Hlaut {{amount}} einingar",
-        "YouHaveCreditsToStart": "Hlaut {{amount}} einingar"
+        "YouHaveCreditsToStart": "Hlaut {{amount}} einingar",
+        "InvitedUserFilledStream": "Hlaut {{amount}} einingar",
+        "ForFillingStream": "Hlaut {{amount}} einingar",
+        "CreatePrivateChat": "Eyddi {{amount}} einingum"
     },
     "subscriptions": {
         "infoTitle": "Stilltu greiðsluupplýsingar",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Veldu viðtakanda",
         "TransactionSuccess": "Viðskiptaárangur",
-        "OrTypeWalletAddress": "EÐA sláðu inn veskis heimilisfang viðtakanda"
+        "OrTypeWalletAddress": "EÐA sláðu inn veskis heimilisfang viðtakanda",
+        "AppCredits": "App inneign"
     },
     "NFT": {
         "Title": "Titill",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Tákn &quot; {{title}} &quot; var krafist",
             "TokenWasLocked": "Tákn &quot; {{title}} &quot; var læst",
             "TokenWasUnlocked": "Táknið &quot; {{title}} &quot; var opnað"
+        },
+        "GenerateDescription": "eða búa til sjálfvirkt",
+        "collections": {
+            "Title": "Söfn",
+            "EnterTitle": "sláðu inn titil",
+            "EnterDescription": "sláðu inn lýsingu",
+            "NewCollection": "Nýtt safn",
+            "Name": "Nafn",
+            "Icon": "Táknmynd",
+            "Description": "Lýsing",
+            "Author": "Höfundur",
+            "SelectCollection": "Veldu safn",
+            "Value": "Gildi",
+            "AreYouSure": "Ertu viss?",
+            "AuthorInvalid": "Heimilisfang höfundar ógilt!",
+            "Address": "Heimilisfang",
+            "CoverImage": "Forsíðumynd",
+            "UploadIcon": "Hlaða upp táknmynd",
+            "CommissionAddressInvalid": "Heimilisfang framkvæmdastjórnar ógilt",
+            "OnSale": "á útsölu",
+            "OffSale": "útsölu",
+            "CreateCollection": "Búðu til safn",
+            "UpdateCollection": "Uppfæra safn",
+            "CollectionInfo": "Safnupplýsingar",
+            "SelectAuthor": "Veldu höfund",
+            "NewItem": "Nýtt NFT safn",
+            "NamePlaceholder": "Sláðu inn nafn safns",
+            "DescPlaceholder": "Sláðu inn safnlýsingu",
+            "EndingIn": "Endar í",
+            "SubmitSeries": "Sendu inn röð"
         }
     },
     "currencies": {
         "choose": "Veldu gjaldmiðil"
+    },
+    "connectedAccount": {
+        "Title": "Tengdu reikning",
+        "Success": "Árangur",
+        "YourAccountCreated": "Reikningurinn þinn var búinn til!",
+        "YourAccountAlreadyCreated": "Reikningurinn þinn er þegar búinn til og tilbúinn til notkunar"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Magn"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Magn"
+                    }
+                },
+                "placeholders": {
+                    "amount": "magn"
+                },
+                "btns": {
+                    "stake": "Hlutur"
+                },
+                "stake": "Hlutur",
+                "loading": "Hleðsla"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Lengd",
+                    "bonusTokenFraction": "bónusTokenFraction",
+                    "popularToken": "vinsælt Token",
+                    "donations": "framlög",
+                    "rewardsRateFraction": "verðlaunRateFraction",
+                    "numerator": "teljara",
+                    "denominator": "nefnara"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Lengd í dögum",
+                    "bonusTokenFraction": "bónusTokenFraction",
+                    "popularToken": "vinsælt Token",
+                    "donations": "framlög",
+                    "rewardsRateFraction": "verðlaunRateFraction",
+                    "numerator": "teljara",
+                    "denominator": "nefnara"
+                }
+            },
+            "placeholders": {
+                "optional": "(valfrjálst)",
+                "tuple": "tuple[]",
+                "number": "númer",
+                "address": "heimilisfang",
+                "fraction": "brot",
+                "integer": "heiltala",
+                "seconds": "sekúndur",
+                "days": "daga",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Það eru engar sundlaugar"
+            },
+            "btns": {
+                "createPool": "Búðu til sundlaug",
+                "createPoolInForm": "Búa til"
+            },
+            "createPool": "Búðu til sundlaug",
+            "produce": "Framleiða",
+            "loading": "Hleðsla",
+            "viewInstancesList": "Endurnýja lista"
+        }
     }
 }

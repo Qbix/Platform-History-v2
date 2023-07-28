@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "没有足够的权限读取该用户的钱包",
         "ThisUserHaveNoWallet": "该用户没有分配钱包",
         "TheWalletOfThisUserInvalid": "该用户钱包无效",
-        "WalletInvalid": "钱包地址无效"
+        "WalletInvalid": "钱包地址无效",
+        "CantManageFrozenSeries": "你无法管理《冰雪奇缘》系列"
     },
     "admin": {
         "Title": "资产管理",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "获得{{amount}}学分",
         "Places_user_location": "获得{{amount}}学分",
         "Streams_greeting": "获得{{amount}}学分",
-        "YouHaveCreditsToStart": "获得{{amount}}学分"
+        "YouHaveCreditsToStart": "获得{{amount}}学分",
+        "InvitedUserFilledStream": "获得{{amount}}学分",
+        "ForFillingStream": "获得{{amount}}学分",
+        "CreatePrivateChat": "已花费{{amount}}积分"
     },
     "subscriptions": {
         "infoTitle": "设置支付信息",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "选择收件人",
         "TransactionSuccess": "交易成功",
-        "OrTypeWalletAddress": "或输入收件人钱包地址"
+        "OrTypeWalletAddress": "或输入收件人钱包地址",
+        "AppCredits": "应用积分"
     },
     "NFT": {
         "Title": "标题",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "令牌“ {{title}} ”已被认领",
             "TokenWasLocked": "令牌“ {{title}} ”被锁定",
             "TokenWasUnlocked": "令牌“ {{title}} ”已解锁"
+        },
+        "GenerateDescription": "或自动生成",
+        "collections": {
+            "Title": "收藏",
+            "EnterTitle": "输入标题",
+            "EnterDescription": "输入描述",
+            "NewCollection": "新系列",
+            "Name": "姓名",
+            "Icon": "图标",
+            "Description": "描述",
+            "Author": "作者",
+            "SelectCollection": "选择收藏",
+            "Value": "价值",
+            "AreYouSure": "你确定吗？",
+            "AuthorInvalid": "作者地址无效！",
+            "Address": "地址",
+            "CoverImage": "封面图片",
+            "UploadIcon": "上传图标",
+            "CommissionAddressInvalid": "委托地址无效",
+            "OnSale": "出售",
+            "OffSale": "下架",
+            "CreateCollection": "创建收藏",
+            "UpdateCollection": "更新集合",
+            "CollectionInfo": "收藏信息",
+            "SelectAuthor": "选择作者",
+            "NewItem": "新 NFT 系列",
+            "NamePlaceholder": "输入集合名称",
+            "DescPlaceholder": "输入集合描述",
+            "EndingIn": "结束于",
+            "SubmitSeries": "提交系列"
         }
     },
     "currencies": {
         "choose": "选择货币"
+    },
+    "connectedAccount": {
+        "Title": "连接账户",
+        "Success": "成功",
+        "YourAccountCreated": "您的帐户创建成功！",
+        "YourAccountAlreadyCreated": "您的帐户已创建并可以使用"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "储备代币",
+                        "amount": "数量"
+                    },
+                    "small": {
+                        "reserveToken": "储备代币",
+                        "amount": "数量"
+                    }
+                },
+                "placeholders": {
+                    "amount": "数量"
+                },
+                "btns": {
+                    "stake": "赌注"
+                },
+                "stake": "赌注",
+                "loading": "加载中"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "代币Erc20",
+                    "duration": "期间",
+                    "bonusTokenFraction": "奖金代币分数",
+                    "popularToken": "流行代币",
+                    "donations": "捐款",
+                    "rewardsRateFraction": "奖励率分数",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                },
+                "small": {
+                    "tokenErc20": "代币Erc20",
+                    "duration": "持续时间（天）",
+                    "bonusTokenFraction": "奖金代币分数",
+                    "popularToken": "流行代币",
+                    "donations": "捐款",
+                    "rewardsRateFraction": "奖励率分数",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                }
+            },
+            "placeholders": {
+                "optional": "（选修的）",
+                "tuple": "元组[]",
+                "number": "数字",
+                "address": "地址",
+                "fraction": "分数",
+                "integer": "整数",
+                "seconds": "秒",
+                "days": "天",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "没有泳池"
+            },
+            "btns": {
+                "createPool": "创建池",
+                "createPoolInForm": "创造"
+            },
+            "createPool": "创建池",
+            "produce": "生产",
+            "loading": "加载中",
+            "viewInstancesList": "刷新列表"
+        }
     }
 }

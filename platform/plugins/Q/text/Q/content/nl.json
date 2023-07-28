@@ -153,5 +153,8 @@
     },
     "scan": {
         "QR": "QR-codes scannen"
+    },
+    "input": {
+        "Placeholder": "Beginnen met typen..."
     }
 }

@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Jūs nesate prisijungęs. <a href='#login' data-users-login>Norėdami prisijungti, spustelėkite čia<\/a>"
+    "NotLoggedIn": "Jūs nesate prisijungęs. <a href='#login' data-users-login>Norėdami prisijungti, spustelėkite čia<\/a>",
+    "InvalidLanguage": "Neteisinga kalba {{language}}"
 }

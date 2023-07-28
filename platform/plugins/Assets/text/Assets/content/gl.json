@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Non hai permisos suficientes para ler a carteira deste usuario",
         "ThisUserHaveNoWallet": "Este usuario non ten ningunha carteira asignada",
         "TheWalletOfThisUserInvalid": "A carteira deste usuario non é válida",
-        "WalletInvalid": "O enderezo da carteira non é válido"
+        "WalletInvalid": "O enderezo da carteira non é válido",
+        "CantManageFrozenSeries": "Non podes xestionar series conxeladas"
     },
     "admin": {
         "Title": "Administrativo de activos",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Obtivo {{amount}} créditos",
         "Places_user_location": "Obtivo {{amount}} créditos",
         "Streams_greeting": "Obtivo {{amount}} créditos",
-        "YouHaveCreditsToStart": "Obtivo {{amount}} créditos"
+        "YouHaveCreditsToStart": "Obtivo {{amount}} créditos",
+        "InvitedUserFilledStream": "Obtivo {{amount}} créditos",
+        "ForFillingStream": "Obtivo {{amount}} créditos",
+        "CreatePrivateChat": "Gastos {{amount}} créditos"
     },
     "subscriptions": {
         "infoTitle": "Establecer información de pago",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Seleccione o destinatario",
         "TransactionSuccess": "Éxito da transacción",
-        "OrTypeWalletAddress": "OU escriba o enderezo da carteira do destinatario"
+        "OrTypeWalletAddress": "OU escriba o enderezo da carteira do destinatario",
+        "AppCredits": "Créditos da aplicación"
     },
     "NFT": {
         "Title": "Título",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Reclamouse o token &quot; {{title}} &quot;",
             "TokenWasLocked": "O token &quot; {{title}} &quot; bloqueouse",
             "TokenWasUnlocked": "O token &quot; {{title}} &quot; foi desbloqueado"
+        },
+        "GenerateDescription": "ou xerar automaticamente",
+        "collections": {
+            "Title": "Coleccións",
+            "EnterTitle": "introducir título",
+            "EnterDescription": "introduza descrición",
+            "NewCollection": "Nova Colección",
+            "Name": "Nome",
+            "Icon": "Ícona",
+            "Description": "Descrición",
+            "Author": "Autor",
+            "SelectCollection": "Seleccione colección",
+            "Value": "Valor",
+            "AreYouSure": "Estás seguro?",
+            "AuthorInvalid": "Enderezo do autor non válido!",
+            "Address": "Enderezo",
+            "CoverImage": "Imaxe de portada",
+            "UploadIcon": "Icona de carga",
+            "CommissionAddressInvalid": "O enderezo da comisión non é válido",
+            "OnSale": "en venta",
+            "OffSale": "fóra de venda",
+            "CreateCollection": "Crear colección",
+            "UpdateCollection": "Actualizar a colección",
+            "CollectionInfo": "Información da colección",
+            "SelectAuthor": "Seleccione o autor",
+            "NewItem": "Nova colección NFT",
+            "NamePlaceholder": "Introduza o nome da colección",
+            "DescPlaceholder": "Introduce a descrición da colección",
+            "EndingIn": "Rematando en",
+            "SubmitSeries": "Enviar unha serie"
         }
     },
     "currencies": {
         "choose": "Escolle unha moeda"
+    },
+    "connectedAccount": {
+        "Title": "Conectar conta",
+        "Success": "Éxito",
+        "YourAccountCreated": "A túa conta creouse correctamente!",
+        "YourAccountAlreadyCreated": "A túa conta xa está creada e está lista para usar"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Cantidade"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Cantidade"
+                    }
+                },
+                "placeholders": {
+                    "amount": "cantidade"
+                },
+                "btns": {
+                    "stake": "Estaca"
+                },
+                "stake": "Estaca",
+                "loading": "Cargando"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duración",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "token popular",
+                    "donations": "doazóns",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duración en días",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "token popular",
+                    "donations": "doazóns",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tuple": "tupla[]",
+                "number": "número",
+                "address": "enderezo",
+                "fraction": "fracción",
+                "integer": "enteiro",
+                "seconds": "segundos",
+                "days": "días",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Non hai piscinas"
+            },
+            "btns": {
+                "createPool": "Crear piscina",
+                "createPoolInForm": "Crear"
+            },
+            "createPool": "Crear piscina",
+            "produce": "Producir",
+            "loading": "Cargando",
+            "viewInstancesList": "Lista de actualización"
+        }
     }
 }

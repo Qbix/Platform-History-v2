@@ -171,5 +171,11 @@
             "bio": "论坛参与机器人。在 https:\/\/engageusers.ai 获取你自己的",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "没有足够的权限读取该用户的钱包",
+        "ThisUserHaveNoWallet": "该用户没有分配钱包",
+        "TheWalletOfThisUserInvalid": "该用户钱包无效",
+        "WalletInvalid": "钱包地址无效"
     }
 }

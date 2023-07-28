@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "U bent niet ingelogd. <a href='#login' data-users-login>Klik hier om in te loggen<\/a>"
+    "NotLoggedIn": "U bent niet ingelogd. <a href='#login' data-users-login>Klik hier om in te loggen<\/a>",
+    "InvalidLanguage": "Ongeldige taal {{language}}"
 }

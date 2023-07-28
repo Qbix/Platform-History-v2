@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Mhux biżżejjed permessi biex taqra l-kartiera ta&#39; dan l-utent",
         "ThisUserHaveNoWallet": "Dan l-utent m&#39;għandux kartiera assenjat",
         "TheWalletOfThisUserInvalid": "Il-kartiera ta&#39; dan l-utent invalida",
-        "WalletInvalid": "Indirizz tal-kartiera mhux validu"
+        "WalletInvalid": "Indirizz tal-kartiera mhux validu",
+        "CantManageFrozenSeries": "Ma tistax tmexxi serje ffriżata"
     },
     "admin": {
         "Title": "Assi amministrattivi",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Kiseb {{amount}} kredtu",
         "Places_user_location": "Kiseb {{amount}} kredtu",
         "Streams_greeting": "Kiseb {{amount}} kredtu",
-        "YouHaveCreditsToStart": "Kiseb {{amount}} kredtu"
+        "YouHaveCreditsToStart": "Kiseb {{amount}} kredtu",
+        "InvitedUserFilledStream": "Kiseb {{amount}} kredtu",
+        "ForFillingStream": "Kiseb {{amount}} kredtu",
+        "CreatePrivateChat": "Nefqa {{amount}} kredtu"
     },
     "subscriptions": {
         "infoTitle": "Issettja l-Informazzjoni dwar il-Ħlas",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Agħżel ir-riċevitur",
         "TransactionSuccess": "Suċċess tat-Tranżazzjoni",
-        "OrTypeWalletAddress": "JEW ittajpja l-indirizz tal-kartiera tar-riċevitur"
+        "OrTypeWalletAddress": "JEW ittajpja l-indirizz tal-kartiera tar-riċevitur",
+        "AppCredits": "Krediti tal-App"
     },
     "NFT": {
         "Title": "Titolu",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Ġie mitlub token &quot; {{title}} &quot;",
             "TokenWasLocked": "It-token &quot; {{title}} &quot; kien imsakkar",
             "TokenWasUnlocked": "It-token &quot; {{title}} &quot; infetaħ"
+        },
+        "GenerateDescription": "jew awto-iġġenerat",
+        "collections": {
+            "Title": "Kollezzjonijiet",
+            "EnterTitle": "daħħal it-titlu",
+            "EnterDescription": "daħħal id-deskrizzjoni",
+            "NewCollection": "Ġabra Ġdida",
+            "Name": "Isem",
+            "Icon": "Ikona",
+            "Description": "Deskrizzjoni",
+            "Author": "Awtur",
+            "SelectCollection": "Agħżel il-ġbir",
+            "Value": "Valur",
+            "AreYouSure": "Żgur?",
+            "AuthorInvalid": "Indirizz tal-awtur mhux validu!",
+            "Address": "Indirizz",
+            "CoverImage": "Dehra tal-qoxra",
+            "UploadIcon": "Tella ikona",
+            "CommissionAddressInvalid": "Indirizz tal-Kummissjoni mhux validu",
+            "OnSale": "għall-bejgħ",
+            "OffSale": "barra mill-bejgħ",
+            "CreateCollection": "Oħloq Ġbir",
+            "UpdateCollection": "Ġbir ta’ Aġġornament",
+            "CollectionInfo": "Informazzjoni dwar il-Ġbir",
+            "SelectAuthor": "Agħżel l-awtur",
+            "NewItem": "Ġbir NFT ġdid",
+            "NamePlaceholder": "Daħħal l-isem tal-ġbir",
+            "DescPlaceholder": "Daħħal id-deskrizzjoni tal-ġbir",
+            "EndingIn": "Tispiċċa Fi",
+            "SubmitSeries": "Ibgħat Serje"
         }
     },
     "currencies": {
         "choose": "Agħżel munita"
+    },
+    "connectedAccount": {
+        "Title": "Qabbad kont",
+        "Success": "Suċċess",
+        "YourAccountCreated": "Il-kont tiegħek maħluq b&#39;suċċess!",
+        "YourAccountAlreadyCreated": "Il-kont tiegħek diġà maħluq u lest biex jintuża"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Ammont"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Ammont"
+                    }
+                },
+                "placeholders": {
+                    "amount": "ammont"
+                },
+                "btns": {
+                    "stake": "Stake"
+                },
+                "stake": "Stake",
+                "loading": "Tagħbija"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tul ta&#39; żmien",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donazzjonijiet",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numeratur",
+                    "denominator": "denominatur"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tul f&#39;jiem",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donazzjonijiet",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numeratur",
+                    "denominator": "denominatur"
+                }
+            },
+            "placeholders": {
+                "optional": "(mhux obbligatorju)",
+                "tuple": "tuppju[]",
+                "number": "numru",
+                "address": "indirizz",
+                "fraction": "frazzjoni",
+                "integer": "numru sħiħ",
+                "seconds": "sekondi",
+                "days": "jiem",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "M&#39;hemm l-ebda pools"
+            },
+            "btns": {
+                "createPool": "Oħloq Pool",
+                "createPoolInForm": "Oħloq"
+            },
+            "createPool": "Oħloq Pool",
+            "produce": "Ipproduċi",
+            "loading": "Tagħbija",
+            "viewInstancesList": "Aġġorna l-Lista"
+        }
     }
 }

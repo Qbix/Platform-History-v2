@@ -171,5 +171,11 @@
             "bio": "Bot di coinvolgimento del forum. Ottieni il tuo su https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Autorizzazioni insufficienti per leggere il portafoglio di questo utente",
+        "ThisUserHaveNoWallet": "A questo utente non è assegnato alcun portafoglio",
+        "TheWalletOfThisUserInvalid": "Il portafoglio di questo utente non è valido",
+        "WalletInvalid": "Indirizzo del portafoglio non valido"
     }
 }

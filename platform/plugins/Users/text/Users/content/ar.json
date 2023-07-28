@@ -171,5 +171,11 @@
             "bio": "منتدى المشاركة بوت. احصل على الخاص بك على https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "لا توجد أذونات كافية لقراءة محفظة هذا المستخدم",
+        "ThisUserHaveNoWallet": "لم يتم تخصيص محفظة لهذا المستخدم",
+        "TheWalletOfThisUserInvalid": "محفظة هذا المستخدم غير صالحة",
+        "WalletInvalid": "عنوان المحفظة غير صالح"
     }
 }

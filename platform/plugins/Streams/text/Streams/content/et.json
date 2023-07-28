@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Lisage {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Kasutaja nimi..."
     }
 }

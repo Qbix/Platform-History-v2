@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Scanați coduri QR"
+    },
+    "input": {
+        "Placeholder": "Începe să tastezi..."
     }
 }

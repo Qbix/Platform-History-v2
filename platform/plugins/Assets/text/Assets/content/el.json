@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Δεν υπάρχουν αρκετά δικαιώματα για την ανάγνωση του πορτοφολιού αυτού του χρήστη",
         "ThisUserHaveNoWallet": "Σε αυτόν τον χρήστη δεν έχει εκχωρηθεί πορτοφόλι",
         "TheWalletOfThisUserInvalid": "Το πορτοφόλι αυτού του χρήστη δεν είναι έγκυρο",
-        "WalletInvalid": "Μη έγκυρη διεύθυνση πορτοφολιού"
+        "WalletInvalid": "Μη έγκυρη διεύθυνση πορτοφολιού",
+        "CantManageFrozenSeries": "Δεν μπορείς να διαχειριστείς παγωμένη σειρά"
     },
     "admin": {
         "Title": "Περιουσιακά στοιχεία διοικητικά",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Κέρδισε {{amount}} μονάδες",
         "Places_user_location": "Κέρδισε {{amount}} μονάδες",
         "Streams_greeting": "Κέρδισε {{amount}} μονάδες",
-        "YouHaveCreditsToStart": "Κέρδισε {{amount}} μονάδες"
+        "YouHaveCreditsToStart": "Κέρδισε {{amount}} μονάδες",
+        "InvitedUserFilledStream": "Κέρδισε {{amount}} μονάδες",
+        "ForFillingStream": "Κέρδισε {{amount}} μονάδες",
+        "CreatePrivateChat": "Δαπάνησε {{amount}} μονάδες"
     },
     "subscriptions": {
         "infoTitle": "Ορισμός πληροφοριών πληρωμής",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Επιλέξτε παραλήπτη",
         "TransactionSuccess": "Επιτυχία συναλλαγής",
-        "OrTypeWalletAddress": "Ή πληκτρολογήστε διεύθυνση πορτοφολιού παραλήπτη"
+        "OrTypeWalletAddress": "Ή πληκτρολογήστε διεύθυνση πορτοφολιού παραλήπτη",
+        "AppCredits": "Πιστώσεις εφαρμογών"
     },
     "NFT": {
         "Title": "Τίτλος",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Το διακριτικό &quot; {{title}} &quot; αξιώθηκε",
             "TokenWasLocked": "Token &quot; {{title}} &quot; ήταν κλειδωμένο",
             "TokenWasUnlocked": "Το Token &quot; {{title}} &quot; ξεκλειδώθηκε"
+        },
+        "GenerateDescription": "ή αυτόματη δημιουργία",
+        "collections": {
+            "Title": "Συλλογές",
+            "EnterTitle": "εισάγετε τίτλο",
+            "EnterDescription": "εισάγετε περιγραφή",
+            "NewCollection": "Νέα συλλογή",
+            "Name": "Ονομα",
+            "Icon": "Εικόνισμα",
+            "Description": "Περιγραφή",
+            "Author": "Συγγραφέας",
+            "SelectCollection": "Επιλέξτε συλλογή",
+            "Value": "αξία",
+            "AreYouSure": "Είσαι σίγουρος?",
+            "AuthorInvalid": "Μη έγκυρη διεύθυνση συντάκτη!",
+            "Address": "Διεύθυνση",
+            "CoverImage": "Εικόνα εξωφύλλου",
+            "UploadIcon": "Μεταφόρτωση εικονίδιο",
+            "CommissionAddressInvalid": "Η διεύθυνση της Επιτροπής δεν είναι έγκυρη",
+            "OnSale": "σε έκπτωση",
+            "OffSale": "εκτός πώλησης",
+            "CreateCollection": "Δημιουργία συλλογής",
+            "UpdateCollection": "Ενημέρωση συλλογής",
+            "CollectionInfo": "Πληροφορίες συλλογής",
+            "SelectAuthor": "Επιλέξτε συγγραφέα",
+            "NewItem": "Νέα συλλογή NFT",
+            "NamePlaceholder": "Εισαγάγετε το όνομα της συλλογής",
+            "DescPlaceholder": "Εισαγάγετε την περιγραφή της συλλογής",
+            "EndingIn": "Τελειωνει σε",
+            "SubmitSeries": "Υποβάλετε μια σειρά"
         }
     },
     "currencies": {
         "choose": "Επιλέξτε ένα νόμισμα"
+    },
+    "connectedAccount": {
+        "Title": "Σύνδεση λογαριασμού",
+        "Success": "Επιτυχία",
+        "YourAccountCreated": "Ο λογαριασμός σας δημιουργήθηκε με επιτυχία!",
+        "YourAccountAlreadyCreated": "Ο λογαριασμός σας έχει ήδη δημιουργηθεί και είναι έτοιμος για χρήση"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervToken",
+                        "amount": "Ποσό"
+                    },
+                    "small": {
+                        "reserveToken": "rezervToken",
+                        "amount": "Ποσό"
+                    }
+                },
+                "placeholders": {
+                    "amount": "ποσό"
+                },
+                "btns": {
+                    "stake": "Στοίχημα"
+                },
+                "stake": "Στοίχημα",
+                "loading": "Φόρτωση"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Διάρκεια",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "δημοφιλέςToken",
+                    "donations": "δωρεές",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "αριθμητής",
+                    "denominator": "παρονομαστής"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Διάρκεια σε ημέρες",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "δημοφιλέςToken",
+                    "donations": "δωρεές",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "αριθμητής",
+                    "denominator": "παρονομαστής"
+                }
+            },
+            "placeholders": {
+                "optional": "(προαιρετικός)",
+                "tuple": "πλειάδα[]",
+                "number": "αριθμός",
+                "address": "διεύθυνση",
+                "fraction": "κλάσμα",
+                "integer": "ακέραιος αριθμός",
+                "seconds": "δευτερόλεπτα",
+                "days": "ημέρες",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Δεν υπάρχουν πισίνες"
+            },
+            "btns": {
+                "createPool": "Δημιουργία πισίνας",
+                "createPoolInForm": "Δημιουργώ"
+            },
+            "createPool": "Δημιουργία πισίνας",
+            "produce": "Παράγω",
+            "loading": "Φόρτωση",
+            "viewInstancesList": "Ανανέωση λίστας"
+        }
     }
 }

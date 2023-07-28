@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Hujaingia. <a href='#login' data-users-login>Bofya hapa ili kuingia<\/a>"
+    "NotLoggedIn": "Hujaingia. <a href='#login' data-users-login>Bofya hapa ili kuingia<\/a>",
+    "InvalidLanguage": "Lugha Batili {{language}}"
 }

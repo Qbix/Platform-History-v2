@@ -1874,16 +1874,18 @@ class Q_Utils
 				}, $symbol);
 				break;
 		}
+		return $path;
 	}
 	
 	/**
 	 * Take a URL that starts with baseURL and normalize it in a consistent way
 	 * to something that can be stored as a filename.
 	 * @method normalizeUrlToPath
+	 * @static
 	 * @param {string} $url
 	 * @param {string} $suffix such as ".html"
-	 * @static
-	 * @param {string} $filename A relative filename that can be stored or appended to
+	 * @param {string} [$baseUrl] to override the default request baseUrl
+	 * @return $filename A relative filename that can be stored or appended to
 	 */
 	static function normalizeUrlToPath ($url, $suffix, $baseUrl = null)
 	{

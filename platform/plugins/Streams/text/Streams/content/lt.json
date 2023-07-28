@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Pridėkite {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Vartotojo vardas..."
     }
 }

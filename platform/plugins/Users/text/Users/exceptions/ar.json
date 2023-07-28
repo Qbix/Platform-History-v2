@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "أنت لم تسجل الدخول. <a href='#login' data-users-login>انقر هنا لتسجيل الدخول<\/a>"
+    "NotLoggedIn": "أنت لم تسجل الدخول. <a href='#login' data-users-login>انقر هنا لتسجيل الدخول<\/a>",
+    "InvalidLanguage": "لغة غير صالحة {{language}}"
 }

@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Không đủ quyền để đọc ví của người dùng này",
         "ThisUserHaveNoWallet": "Người dùng này không có ví được chỉ định",
         "TheWalletOfThisUserInvalid": "Ví của người dùng này không hợp lệ",
-        "WalletInvalid": "Địa chỉ ví không hợp lệ"
+        "WalletInvalid": "Địa chỉ ví không hợp lệ",
+        "CantManageFrozenSeries": "Bạn không thể quản lý sê-ri bị đóng băng"
     },
     "admin": {
         "Title": "quản lý tài sản",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Kiếm được {{amount}} tín dụng",
         "Places_user_location": "Kiếm được {{amount}} tín dụng",
         "Streams_greeting": "Kiếm được {{amount}} tín dụng",
-        "YouHaveCreditsToStart": "Kiếm được {{amount}} tín dụng"
+        "YouHaveCreditsToStart": "Kiếm được {{amount}} tín dụng",
+        "InvitedUserFilledStream": "Kiếm được {{amount}} tín dụng",
+        "ForFillingStream": "Kiếm được {{amount}} tín dụng",
+        "CreatePrivateChat": "Đã chi {{amount}} tín dụng"
     },
     "subscriptions": {
         "infoTitle": "Đặt thông tin thanh toán",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Chọn người nhận",
         "TransactionSuccess": "Giao dịch thành công",
-        "OrTypeWalletAddress": "HOẶC nhập địa chỉ ví của người nhận"
+        "OrTypeWalletAddress": "HOẶC nhập địa chỉ ví của người nhận",
+        "AppCredits": "Tín dụng ứng dụng"
     },
     "NFT": {
         "Title": "Tiêu đề",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Mã thông báo &quot; {{title}} &quot; đã được yêu cầu",
             "TokenWasLocked": "Token &quot; {{title}} &quot; đã bị khóa",
             "TokenWasUnlocked": "Mã thông báo &quot; {{title}} &quot; đã được mở khóa"
+        },
+        "GenerateDescription": "hoặc tự động tạo",
+        "collections": {
+            "Title": "bộ sưu tập",
+            "EnterTitle": "nhập tiêu đề",
+            "EnterDescription": "Nhập mô tả",
+            "NewCollection": "Bộ sưu tập mới",
+            "Name": "Tên",
+            "Icon": "Biểu tượng",
+            "Description": "Sự miêu tả",
+            "Author": "Tác giả",
+            "SelectCollection": "Chọn bộ sưu tập",
+            "Value": "Giá trị",
+            "AreYouSure": "Bạn có chắc không?",
+            "AuthorInvalid": "Địa chỉ tác giả không hợp lệ!",
+            "Address": "Địa chỉ",
+            "CoverImage": "ảnh bìa",
+            "UploadIcon": "Biểu tượng tải lên",
+            "CommissionAddressInvalid": "Địa chỉ hoa hồng không hợp lệ",
+            "OnSale": "giảm giá",
+            "OffSale": "giảm giá",
+            "CreateCollection": "Tạo bộ sưu tập",
+            "UpdateCollection": "Cập nhật bộ sưu tập",
+            "CollectionInfo": "Thông tin bộ sưu tập",
+            "SelectAuthor": "Chọn tác giả",
+            "NewItem": "Bộ sưu tập NFT mới",
+            "NamePlaceholder": "Nhập tên bộ sưu tập",
+            "DescPlaceholder": "Nhập mô tả bộ sưu tập",
+            "EndingIn": "kết thúc trong",
+            "SubmitSeries": "Gửi một sê-ri"
         }
     },
     "currencies": {
         "choose": "Chọn một loại tiền tệ"
+    },
+    "connectedAccount": {
+        "Title": "Kết nối tài khoản",
+        "Success": "Thành công",
+        "YourAccountCreated": "Tài khoản của bạn được tạo thành công!",
+        "YourAccountAlreadyCreated": "Tài khoản của bạn đã được tạo và sẵn sàng để sử dụng"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "dự trữToken",
+                        "amount": "Số lượng"
+                    },
+                    "small": {
+                        "reserveToken": "dự trữToken",
+                        "amount": "Số lượng"
+                    }
+                },
+                "placeholders": {
+                    "amount": "số lượng"
+                },
+                "btns": {
+                    "stake": "Cổ phần"
+                },
+                "stake": "Cổ phần",
+                "loading": "Đang tải"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "mã thông báoErc20",
+                    "duration": "Khoảng thời gian",
+                    "bonusTokenFraction": "tiền thưởngTokenPhân số",
+                    "popularToken": "phổ biếnToken",
+                    "donations": "Quyên góp",
+                    "rewardsRateFraction": "phần thưởngTỷ lệPhân số",
+                    "numerator": "tử số",
+                    "denominator": "mẫu số"
+                },
+                "small": {
+                    "tokenErc20": "mã thông báoErc20",
+                    "duration": "Thời lượng tính bằng ngày",
+                    "bonusTokenFraction": "tiền thưởngTokenPhân số",
+                    "popularToken": "phổ biếnToken",
+                    "donations": "Quyên góp",
+                    "rewardsRateFraction": "phần thưởngTỷ lệPhân số",
+                    "numerator": "tử số",
+                    "denominator": "mẫu số"
+                }
+            },
+            "placeholders": {
+                "optional": "(không bắt buộc)",
+                "tuple": "bộ []",
+                "number": "con số",
+                "address": "Địa chỉ",
+                "fraction": "phân số",
+                "integer": "số nguyên",
+                "seconds": "giây",
+                "days": "ngày",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Không có hồ bơi"
+            },
+            "btns": {
+                "createPool": "Tạo hồ bơi",
+                "createPoolInForm": "Tạo nên"
+            },
+            "createPool": "Tạo hồ bơi",
+            "produce": "Sản xuất",
+            "loading": "Đang tải",
+            "viewInstancesList": "Làm mới danh sách"
+        }
     }
 }

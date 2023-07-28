@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "ఈ వినియోగదారు వాలెట్‌ని చదవడానికి తగినన్ని అనుమతులు లేవు",
         "ThisUserHaveNoWallet": "ఈ వినియోగదారుకు వాలెట్ కేటాయించబడలేదు",
         "TheWalletOfThisUserInvalid": "ఈ వినియోగదారు యొక్క వాలెట్ చెల్లదు",
-        "WalletInvalid": "వాలెట్ చిరునామా చెల్లదు"
+        "WalletInvalid": "వాలెట్ చిరునామా చెల్లదు",
+        "CantManageFrozenSeries": "మీరు స్తంభింపచేసిన సిరీస్‌లను నిర్వహించలేరు"
     },
     "admin": {
         "Title": "ఆస్తులు అడ్మినిస్ట్రేటివ్",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
         "Places_user_location": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
         "Streams_greeting": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
-        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను సంపాదించారు"
+        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
+        "InvitedUserFilledStream": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
+        "ForFillingStream": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
+        "CreatePrivateChat": "{{amount}} క్రెడిట్‌లను వెచ్చించారు"
     },
     "subscriptions": {
         "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "గ్రహీతను ఎంచుకోండి",
         "TransactionSuccess": "లావాదేవీ విజయం",
-        "OrTypeWalletAddress": "లేదా గ్రహీత వాలెట్ చిరునామాను టైప్ చేయండి"
+        "OrTypeWalletAddress": "లేదా గ్రహీత వాలెట్ చిరునామాను టైప్ చేయండి",
+        "AppCredits": "యాప్ క్రెడిట్‌లు"
     },
     "NFT": {
         "Title": "శీర్షిక",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "టోకెన్ &quot; {{title}} &quot; దావా వేయబడింది",
             "TokenWasLocked": "టోకెన్ &quot; {{title}} &quot; లాక్ చేయబడింది",
             "TokenWasUnlocked": "టోకెన్ &quot; {{title}} &quot; అన్‌లాక్ చేయబడింది"
+        },
+        "GenerateDescription": "లేదా స్వీయ-ఉత్పత్తి",
+        "collections": {
+            "Title": "సేకరణలు",
+            "EnterTitle": "శీర్షికను నమోదు చేయండి",
+            "EnterDescription": "వివరణను నమోదు చేయండి",
+            "NewCollection": "సరికొత్త సేకరణ",
+            "Name": "పేరు",
+            "Icon": "చిహ్నం",
+            "Description": "వివరణ",
+            "Author": "రచయిత",
+            "SelectCollection": "సేకరణను ఎంచుకోండి",
+            "Value": "విలువ",
+            "AreYouSure": "మీరు చెప్పేది నిజమా?",
+            "AuthorInvalid": "రచయిత చిరునామా చెల్లదు!",
+            "Address": "చిరునామా",
+            "CoverImage": "కవర్ చిత్రం",
+            "UploadIcon": "అప్‌లోడ్ చిహ్నం",
+            "CommissionAddressInvalid": "కమిషన్ చిరునామా చెల్లదు",
+            "OnSale": "అమ్మకానికి",
+            "OffSale": "ఆఫ్ సేల్",
+            "CreateCollection": "సేకరణను సృష్టించండి",
+            "UpdateCollection": "సేకరణను నవీకరించండి",
+            "CollectionInfo": "సేకరణ సమాచారం",
+            "SelectAuthor": "రచయితను ఎంచుకోండి",
+            "NewItem": "కొత్త NFT సేకరణ",
+            "NamePlaceholder": "సేకరణ పేరును నమోదు చేయండి",
+            "DescPlaceholder": "సేకరణ వివరణను నమోదు చేయండి",
+            "EndingIn": "ముగుస్తుంది",
+            "SubmitSeries": "శ్రేణిని సమర్పించండి"
         }
     },
     "currencies": {
         "choose": "కరెన్సీని ఎంచుకోండి"
+    },
+    "connectedAccount": {
+        "Title": "ఖాతాను కనెక్ట్ చేయండి",
+        "Success": "విజయం",
+        "YourAccountCreated": "మీ ఖాతా విజయవంతంగా సృష్టించబడింది!",
+        "YourAccountAlreadyCreated": "మీ ఖాతా ఇప్పటికే సృష్టించబడింది మరియు ఉపయోగించడానికి సిద్ధంగా ఉంది"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "రిజర్వ్ టోకెన్",
+                        "amount": "మొత్తం"
+                    },
+                    "small": {
+                        "reserveToken": "రిజర్వ్ టోకెన్",
+                        "amount": "మొత్తం"
+                    }
+                },
+                "placeholders": {
+                    "amount": "మొత్తం"
+                },
+                "btns": {
+                    "stake": "వాటాను"
+                },
+                "stake": "వాటాను",
+                "loading": "లోడ్"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "టోకెన్Erc20",
+                    "duration": "వ్యవధి",
+                    "bonusTokenFraction": "బోనస్ టోకెన్ ఫ్రాక్షన్",
+                    "popularToken": "ప్రముఖ టోకెన్",
+                    "donations": "విరాళాలు",
+                    "rewardsRateFraction": "రివార్డ్స్ రేటు భిన్నం",
+                    "numerator": "న్యూమరేటర్",
+                    "denominator": "హారం"
+                },
+                "small": {
+                    "tokenErc20": "టోకెన్Erc20",
+                    "duration": "రోజులలో వ్యవధి",
+                    "bonusTokenFraction": "బోనస్ టోకెన్ ఫ్రాక్షన్",
+                    "popularToken": "ప్రముఖ టోకెన్",
+                    "donations": "విరాళాలు",
+                    "rewardsRateFraction": "రివార్డ్స్ రేటు భిన్నం",
+                    "numerator": "న్యూమరేటర్",
+                    "denominator": "హారం"
+                }
+            },
+            "placeholders": {
+                "optional": "(ఐచ్ఛికం)",
+                "tuple": "టుపుల్[]",
+                "number": "సంఖ్య",
+                "address": "చిరునామా",
+                "fraction": "భిన్నం",
+                "integer": "పూర్ణ సంఖ్య",
+                "seconds": "సెకన్లు",
+                "days": "రోజులు",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "కొలనులు లేవు"
+            },
+            "btns": {
+                "createPool": "పూల్ సృష్టించండి",
+                "createPoolInForm": "సృష్టించు"
+            },
+            "createPool": "పూల్ సృష్టించండి",
+            "produce": "ఉత్పత్తి",
+            "loading": "లోడ్",
+            "viewInstancesList": "జాబితాను రిఫ్రెష్ చేయండి"
+        }
     }
 }

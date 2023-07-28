@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "QR-kódok beolvasása"
+    },
+    "input": {
+        "Placeholder": "Kezdj el gépelni..."
     }
 }

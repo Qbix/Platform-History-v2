@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nincs elegendő engedély a felhasználó pénztárcájának olvasásához",
         "ThisUserHaveNoWallet": "Ehhez a felhasználóhoz nincs hozzárendelve pénztárca",
         "TheWalletOfThisUserInvalid": "A felhasználó pénztárcája érvénytelen",
-        "WalletInvalid": "A Wallet-cím érvénytelen"
+        "WalletInvalid": "A Wallet-cím érvénytelen",
+        "CantManageFrozenSeries": "A fagyasztott sorozatokat nem tudod kezelni"
     },
     "admin": {
         "Title": "Vagyonkezelés",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} kreditet szerzett",
         "Places_user_location": "{{amount}} kreditet szerzett",
         "Streams_greeting": "{{amount}} kreditet szerzett",
-        "YouHaveCreditsToStart": "{{amount}} kreditet szerzett"
+        "YouHaveCreditsToStart": "{{amount}} kreditet szerzett",
+        "InvitedUserFilledStream": "{{amount}} kreditet szerzett",
+        "ForFillingStream": "{{amount}} kreditet szerzett",
+        "CreatePrivateChat": "{{amount}} kreditet költött el"
     },
     "subscriptions": {
         "infoTitle": "Állítsa be a fizetési információkat",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Válassza ki a címzettet",
         "TransactionSuccess": "A tranzakció sikere",
-        "OrTypeWalletAddress": "VAGY írja be a címzett pénztárca címét"
+        "OrTypeWalletAddress": "VAGY írja be a címzett pénztárca címét",
+        "AppCredits": "Alkalmazás kreditek"
     },
     "NFT": {
         "Title": "Cím",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "A „ {{title}} ” tokent igényelték",
             "TokenWasLocked": "A „ {{title}} ” token zárolva volt",
             "TokenWasUnlocked": "A „ {{title}} ” token feloldva"
+        },
+        "GenerateDescription": "vagy automatikusan generál",
+        "collections": {
+            "Title": "Gyűjtemények",
+            "EnterTitle": "írja be a címet",
+            "EnterDescription": "írja be a leírást",
+            "NewCollection": "Új kollekció",
+            "Name": "Név",
+            "Icon": "Ikon",
+            "Description": "Leírás",
+            "Author": "Szerző",
+            "SelectCollection": "Válassza ki a gyűjteményt",
+            "Value": "Érték",
+            "AreYouSure": "biztos vagy ebben?",
+            "AuthorInvalid": "A szerző címe érvénytelen!",
+            "Address": "Cím",
+            "CoverImage": "Borítókép",
+            "UploadIcon": "Feltöltés ikon",
+            "CommissionAddressInvalid": "A megbízási cím érvénytelen",
+            "OnSale": "eladó",
+            "OffSale": "végkiárusítás",
+            "CreateCollection": "Gyűjtemény létrehozása",
+            "UpdateCollection": "Gyűjtemény frissítése",
+            "CollectionInfo": "Gyűjtemény Info",
+            "SelectAuthor": "Válasszon szerzőt",
+            "NewItem": "Új NFT kollekció",
+            "NamePlaceholder": "Adja meg a gyűjtemény nevét",
+            "DescPlaceholder": "Adja meg a gyűjtemény leírását",
+            "EndingIn": "Befejeződik",
+            "SubmitSeries": "Sorozat benyújtása"
         }
     },
     "currencies": {
         "choose": "Válasszon pénznemet"
+    },
+    "connectedAccount": {
+        "Title": "Csatlakoztassa a fiókot",
+        "Success": "Siker",
+        "YourAccountCreated": "Fiókja sikeresen létrejött!",
+        "YourAccountAlreadyCreated": "Fiókja már létrejött és használatra kész"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "tartalékToken",
+                        "amount": "Összeg"
+                    },
+                    "small": {
+                        "reserveToken": "tartalékToken",
+                        "amount": "Összeg"
+                    }
+                },
+                "placeholders": {
+                    "amount": "összeg"
+                },
+                "btns": {
+                    "stake": "Tét"
+                },
+                "stake": "Tét",
+                "loading": "Betöltés"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Időtartam",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "népszerűToken",
+                    "donations": "adományokat",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "számláló",
+                    "denominator": "névadó"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Időtartam napokban",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "népszerűToken",
+                    "donations": "adományokat",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "számláló",
+                    "denominator": "névadó"
+                }
+            },
+            "placeholders": {
+                "optional": "(választható)",
+                "tuple": "tuple[]",
+                "number": "szám",
+                "address": "cím",
+                "fraction": "töredék",
+                "integer": "egész szám",
+                "seconds": "másodpercig",
+                "days": "napok",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nincsenek medencék"
+            },
+            "btns": {
+                "createPool": "Pool létrehozása",
+                "createPoolInForm": "Teremt"
+            },
+            "createPool": "Pool létrehozása",
+            "produce": "Gyárt",
+            "loading": "Betöltés",
+            "viewInstancesList": "Lista frissítése"
+        }
     }
 }

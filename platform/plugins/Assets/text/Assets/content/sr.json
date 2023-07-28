@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Нема довољно дозвола за читање новчаника овог корисника",
         "ThisUserHaveNoWallet": "Овом кориснику није додељен новчаник",
         "TheWalletOfThisUserInvalid": "Новчаник овог корисника је неважећи",
-        "WalletInvalid": "Адреса новчаника је неважећа"
+        "WalletInvalid": "Адреса новчаника је неважећа",
+        "CantManageFrozenSeries": "Не можете управљати замрзнутим серијама"
     },
     "admin": {
         "Title": "Средства административна",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Зарадио {{amount}} кредита",
         "Places_user_location": "Зарадио {{amount}} кредита",
         "Streams_greeting": "Зарадио {{amount}} кредита",
-        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита"
+        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита",
+        "InvitedUserFilledStream": "Зарадио {{amount}} кредита",
+        "ForFillingStream": "Зарадио {{amount}} кредита",
+        "CreatePrivateChat": "Потрошено {{amount}} кредита"
     },
     "subscriptions": {
         "infoTitle": "Подесите информације о плаћању",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Изаберите примаоца",
         "TransactionSuccess": "Трансацтион Суццесс",
-        "OrTypeWalletAddress": "ИЛИ унесите адресу новчаника примаоца"
+        "OrTypeWalletAddress": "ИЛИ унесите адресу новчаника примаоца",
+        "AppCredits": "Апп Цредитс"
     },
     "NFT": {
         "Title": "Наслов",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Токен &quot; {{title}} &quot; је заузет",
             "TokenWasLocked": "Токен &quot; {{title}} &quot; је закључан",
             "TokenWasUnlocked": "Токен &quot; {{title}} &quot; је откључан"
+        },
+        "GenerateDescription": "или аутоматски генерисати",
+        "collections": {
+            "Title": "Збирке",
+            "EnterTitle": "унесите наслов",
+            "EnterDescription": "унесите опис",
+            "NewCollection": "Нова колекција",
+            "Name": "Име",
+            "Icon": "Икона",
+            "Description": "Опис",
+            "Author": "Аутор",
+            "SelectCollection": "Изаберите колекцију",
+            "Value": "Валуе",
+            "AreYouSure": "Јеси ли сигуран?",
+            "AuthorInvalid": "Адреса аутора је неважећа!",
+            "Address": "Адреса",
+            "CoverImage": "Насловна слика",
+            "UploadIcon": "Икона за отпремање",
+            "CommissionAddressInvalid": "Адреса комисије неважећа",
+            "OnSale": "на распродаји",
+            "OffSale": "офф сале",
+            "CreateCollection": "Направите колекцију",
+            "UpdateCollection": "Упдате Цоллецтион",
+            "CollectionInfo": "Информације о колекцији",
+            "SelectAuthor": "Изаберите аутора",
+            "NewItem": "Нова НФТ колекција",
+            "NamePlaceholder": "Унесите назив колекције",
+            "DescPlaceholder": "Унесите опис колекције",
+            "EndingIn": "Завршава",
+            "SubmitSeries": "Пошаљите серију"
         }
     },
     "currencies": {
         "choose": "Изаберите валуту"
+    },
+    "connectedAccount": {
+        "Title": "Повежите налог",
+        "Success": "Успех",
+        "YourAccountCreated": "Ваш налог је успешно направљен!",
+        "YourAccountAlreadyCreated": "Ваш налог је већ креиран и спреман за употребу"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ресервеТокен",
+                        "amount": "Износ"
+                    },
+                    "small": {
+                        "reserveToken": "ресервеТокен",
+                        "amount": "Износ"
+                    }
+                },
+                "placeholders": {
+                    "amount": "износ"
+                },
+                "btns": {
+                    "stake": "Улог"
+                },
+                "stake": "Улог",
+                "loading": "Лоадинг"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенЕрц20",
+                    "duration": "Трајање",
+                    "bonusTokenFraction": "бонусТокенФрацтион",
+                    "popularToken": "популарТокен",
+                    "donations": "донације",
+                    "rewardsRateFraction": "ревардсРатеФрацтион",
+                    "numerator": "бројилац",
+                    "denominator": "именилац"
+                },
+                "small": {
+                    "tokenErc20": "токенЕрц20",
+                    "duration": "Трајање у данима",
+                    "bonusTokenFraction": "бонусТокенФрацтион",
+                    "popularToken": "популарТокен",
+                    "donations": "донације",
+                    "rewardsRateFraction": "ревардсРатеФрацтион",
+                    "numerator": "бројилац",
+                    "denominator": "именилац"
+                }
+            },
+            "placeholders": {
+                "optional": "(опционо)",
+                "tuple": "тупле[]",
+                "number": "број",
+                "address": "адреса",
+                "fraction": "фракција",
+                "integer": "цео број",
+                "seconds": "секунди",
+                "days": "дана",
+                "uint256": "уинт256",
+                "uint192": "уинт192",
+                "uint64": "уинт64",
+                "uint32": "уинт32",
+                "uint16": "уинт16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Нема базена"
+            },
+            "btns": {
+                "createPool": "Цреате Поол",
+                "createPoolInForm": "Креирај"
+            },
+            "createPool": "Цреате Поол",
+            "produce": "Производити",
+            "loading": "Лоадинг",
+            "viewInstancesList": "Освежи листу"
+        }
     }
 }

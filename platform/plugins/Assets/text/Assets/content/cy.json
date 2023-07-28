@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Dim digon o ganiatadau i ddarllen waled y defnyddiwr hwn",
         "ThisUserHaveNoWallet": "Nid oes gan y defnyddiwr hwn waled wedi&#39;i neilltuo",
         "TheWalletOfThisUserInvalid": "Mae waled y defnyddiwr hwn yn annilys",
-        "WalletInvalid": "Cyfeiriad waled yn annilys"
+        "WalletInvalid": "Cyfeiriad waled yn annilys",
+        "CantManageFrozenSeries": "Ni allwch reoli cyfresi wedi&#39;u rhewi"
     },
     "admin": {
         "Title": "Gweinyddol asedau",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Wedi ennill {{amount}} credyd",
         "Places_user_location": "Wedi ennill {{amount}} credyd",
         "Streams_greeting": "Wedi ennill {{amount}} credyd",
-        "YouHaveCreditsToStart": "Wedi ennill {{amount}} credyd"
+        "YouHaveCreditsToStart": "Wedi ennill {{amount}} credyd",
+        "InvitedUserFilledStream": "Wedi ennill {{amount}} credyd",
+        "ForFillingStream": "Wedi ennill {{amount}} credyd",
+        "CreatePrivateChat": "Wedi gwario {{amount}} credyd"
     },
     "subscriptions": {
         "infoTitle": "Gosod Gwybodaeth Taliad",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Dewiswch dderbynnydd",
         "TransactionSuccess": "Llwyddiant Trafodiad",
-        "OrTypeWalletAddress": "NEU teipiwch gyfeiriad waled derbynnydd"
+        "OrTypeWalletAddress": "NEU teipiwch gyfeiriad waled derbynnydd",
+        "AppCredits": "Credydau Ap"
     },
     "NFT": {
         "Title": "Teitl",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Hawliwyd tocyn &quot; {{title}} &quot;",
             "TokenWasLocked": "Cafodd tocyn &quot; {{title}} &quot; ei gloi",
             "TokenWasUnlocked": "Datglowyd tocyn &quot; {{title}} &quot;"
+        },
+        "GenerateDescription": "neu gynhyrchu&#39;n awtomatig",
+        "collections": {
+            "Title": "Casgliadau",
+            "EnterTitle": "rhowch y teitl",
+            "EnterDescription": "rhowch y disgrifiad",
+            "NewCollection": "Casgliad Newydd",
+            "Name": "Enw",
+            "Icon": "Eicon",
+            "Description": "Disgrifiad",
+            "Author": "Awdur",
+            "SelectCollection": "Dewiswch gasgliad",
+            "Value": "Gwerth",
+            "AreYouSure": "Wyt ti&#39;n siwr?",
+            "AuthorInvalid": "Cyfeiriad yr awdur yn annilys!",
+            "Address": "Cyfeiriad",
+            "CoverImage": "Delwedd clawr",
+            "UploadIcon": "Uwchlwytho eicon",
+            "CommissionAddressInvalid": "Cyfeiriad y Comisiwn yn annilys",
+            "OnSale": "ar Werth",
+            "OffSale": "oddi ar werth",
+            "CreateCollection": "Creu Casgliad",
+            "UpdateCollection": "Casgliad Diweddaru",
+            "CollectionInfo": "Gwybodaeth Casgliad",
+            "SelectAuthor": "Dewiswch awdur",
+            "NewItem": "Casgliad Newydd yr NFT",
+            "NamePlaceholder": "Rhowch enw&#39;r casgliad",
+            "DescPlaceholder": "Rhowch ddisgrifiad o&#39;r casgliad",
+            "EndingIn": "Yn Diweddu Mewn",
+            "SubmitSeries": "Cyflwyno Cyfres"
         }
     },
     "currencies": {
         "choose": "Dewiswch arian cyfred"
+    },
+    "connectedAccount": {
+        "Title": "Cysylltu cyfrif",
+        "Success": "Llwyddiant",
+        "YourAccountCreated": "Crëwyd eich cyfrif yn llwyddiannus!",
+        "YourAccountAlreadyCreated": "Eich cyfrif eisoes wedi&#39;i greu ac yn barod i&#39;w ddefnyddio"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "tocyn cadw",
+                        "amount": "Swm"
+                    },
+                    "small": {
+                        "reserveToken": "tocyn cadw",
+                        "amount": "Swm"
+                    }
+                },
+                "placeholders": {
+                    "amount": "swm"
+                },
+                "btns": {
+                    "stake": "stanc"
+                },
+                "stake": "stanc",
+                "loading": "Llwytho"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tocynErc20",
+                    "duration": "Hyd",
+                    "bonusTokenFraction": "bonwsTokenFfraction",
+                    "popularToken": "poblogaiddToken",
+                    "donations": "rhoddion",
+                    "rewardsRateFraction": "gwobrauRateFfraction",
+                    "numerator": "rhifiadur",
+                    "denominator": "enwadur"
+                },
+                "small": {
+                    "tokenErc20": "tocynErc20",
+                    "duration": "Hyd mewn dyddiau",
+                    "bonusTokenFraction": "bonwsTokenFfraction",
+                    "popularToken": "poblogaiddToken",
+                    "donations": "rhoddion",
+                    "rewardsRateFraction": "gwobrauRateFfraction",
+                    "numerator": "rhifiadur",
+                    "denominator": "enwadur"
+                }
+            },
+            "placeholders": {
+                "optional": "(dewisol)",
+                "tuple": "tuple[]",
+                "number": "rhif",
+                "address": "cyfeiriad",
+                "fraction": "ffracsiwn",
+                "integer": "cyfanrif",
+                "seconds": "eiliadau",
+                "days": "dyddiau",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nid oes pyllau"
+            },
+            "btns": {
+                "createPool": "Creu Pwll",
+                "createPoolInForm": "Creu"
+            },
+            "createPool": "Creu Pwll",
+            "produce": "Cynnyrch",
+            "loading": "Llwytho",
+            "viewInstancesList": "Rhestr Adnewyddu"
+        }
     }
 }

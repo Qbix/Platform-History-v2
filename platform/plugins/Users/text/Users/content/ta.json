@@ -171,5 +171,11 @@
             "bio": "மன்ற நிச்சயதார்த்த போட். https:\/\/engageusers.ai இல் உங்கள் சொந்தத்தைப் பெறுங்கள்",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "இந்தப் பயனரின் வாலட்டைப் படிக்க போதுமான அனுமதிகள் இல்லை",
+        "ThisUserHaveNoWallet": "இந்தப் பயனருக்கு வாலட் எதுவும் ஒதுக்கப்படவில்லை",
+        "TheWalletOfThisUserInvalid": "இந்த பயனரின் பணப்பை தவறானது",
+        "WalletInvalid": "வாலட் முகவரி தவறானது"
     }
 }

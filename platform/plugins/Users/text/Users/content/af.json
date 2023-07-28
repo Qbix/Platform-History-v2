@@ -171,5 +171,11 @@
             "bio": "Forum betrokkenheid bot. Kry jou eie by https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Nie genoeg toestemmings om beursie van hierdie gebruiker te lees nie",
+        "ThisUserHaveNoWallet": "Hierdie gebruiker het geen beursie toegewys nie",
+        "TheWalletOfThisUserInvalid": "Die beursie van hierdie gebruiker is ongeldig",
+        "WalletInvalid": "Wallet-adres ongeldig"
     }
 }

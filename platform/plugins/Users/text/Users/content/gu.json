@@ -171,5 +171,11 @@
             "bio": "ફોરમ સગાઈ બોટ. https:\/\/engageusers.ai પર તમારું પોતાનું મેળવો",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "આ વપરાશકર્તાનું વૉલેટ વાંચવા માટે પૂરતી પરવાનગીઓ નથી",
+        "ThisUserHaveNoWallet": "આ વપરાશકર્તાને કોઈ વૉલેટ અસાઇન કરેલ નથી",
+        "TheWalletOfThisUserInvalid": "આ વપરાશકર્તાનું વૉલેટ અમાન્ય છે",
+        "WalletInvalid": "વૉલેટ સરનામું અમાન્ય"
     }
 }

@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Zeskanuj kody QR"
+    },
+    "input": {
+        "Placeholder": "Zacznij pisać..."
     }
 }

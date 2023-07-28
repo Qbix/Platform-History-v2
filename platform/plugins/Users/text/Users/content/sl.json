@@ -171,5 +171,11 @@
             "bio": "Bot za sodelovanje na forumu. Zagotovite si svojega na https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Ni dovolj dovoljenj za branje denarnice tega uporabnika",
+        "ThisUserHaveNoWallet": "Ta uporabnik nima dodeljene denarnice",
+        "TheWalletOfThisUserInvalid": "Denarnica tega uporabnika je neveljavna",
+        "WalletInvalid": "Naslov denarnice ni veljaven"
     }
 }

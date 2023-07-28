@@ -197,6 +197,9 @@
             "CheckYourEmail": "Please check your email and follow instructions!"
         }
     },
+    "userChooser": {
+        "Placeholder": "Name of a user..."
+    },
     "identifier": {
         "privacySettings": "Privacy Settings"
     },

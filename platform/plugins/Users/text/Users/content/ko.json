@@ -171,5 +171,11 @@
             "bio": "포럼 참여 봇. https:\/\/engageusers.ai에서 나만의 것을 얻으십시오.",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "이 사용자의 지갑을 읽을 수 있는 권한이 없습니다.",
+        "ThisUserHaveNoWallet": "이 사용자에게는 할당된 지갑이 없습니다.",
+        "TheWalletOfThisUserInvalid": "이 사용자의 지갑이 유효하지 않습니다",
+        "WalletInvalid": "지갑 주소가 잘못되었습니다."
     }
 }

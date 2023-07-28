@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "이 사용자의 지갑을 읽을 수 있는 권한이 없습니다.",
         "ThisUserHaveNoWallet": "이 사용자에게는 할당된 지갑이 없습니다.",
         "TheWalletOfThisUserInvalid": "이 사용자의 지갑이 유효하지 않습니다",
-        "WalletInvalid": "지갑 주소가 잘못되었습니다."
+        "WalletInvalid": "지갑 주소가 잘못되었습니다.",
+        "CantManageFrozenSeries": "정지된 시리즈를 관리할 수 없습니다."
     },
     "admin": {
         "Title": "자산 관리",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} 학점 취득",
         "Places_user_location": "{{amount}} 학점 취득",
         "Streams_greeting": "{{amount}} 학점 취득",
-        "YouHaveCreditsToStart": "{{amount}} 학점 취득"
+        "YouHaveCreditsToStart": "{{amount}} 학점 취득",
+        "InvitedUserFilledStream": "{{amount}} 학점 취득",
+        "ForFillingStream": "{{amount}} 학점 취득",
+        "CreatePrivateChat": "{{amount}} 크레딧 사용"
     },
     "subscriptions": {
         "infoTitle": "결제 정보 설정",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "수신자 선택",
         "TransactionSuccess": "거래 성공",
-        "OrTypeWalletAddress": "또는 받는 사람의 지갑 주소를 입력하세요."
+        "OrTypeWalletAddress": "또는 받는 사람의 지갑 주소를 입력하세요.",
+        "AppCredits": "앱 크레딧"
     },
     "NFT": {
         "Title": "제목",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "토큰 &quot; {{title}} &quot;가 청구되었습니다.",
             "TokenWasLocked": "토큰 &quot; {{title}} &quot;가 잠겼습니다.",
             "TokenWasUnlocked": "토큰 &quot; {{title}} &quot;가 잠금 해제되었습니다"
+        },
+        "GenerateDescription": "또는 자동 생성",
+        "collections": {
+            "Title": "컬렉션",
+            "EnterTitle": "제목 입력",
+            "EnterDescription": "설명 입력",
+            "NewCollection": "새 컬렉션",
+            "Name": "이름",
+            "Icon": "상",
+            "Description": "설명",
+            "Author": "작가",
+            "SelectCollection": "컬렉션 선택",
+            "Value": "값",
+            "AreYouSure": "확실합니까?",
+            "AuthorInvalid": "작성자 주소가 잘못되었습니다!",
+            "Address": "주소",
+            "CoverImage": "표지 이미지",
+            "UploadIcon": "업로드 아이콘",
+            "CommissionAddressInvalid": "커미션 주소가 유효하지 않음",
+            "OnSale": "판매 중",
+            "OffSale": "할인",
+            "CreateCollection": "컬렉션 만들기",
+            "UpdateCollection": "컬렉션 업데이트",
+            "CollectionInfo": "컬렉션 정보",
+            "SelectAuthor": "작성자 선택",
+            "NewItem": "새로운 NFT 컬렉션",
+            "NamePlaceholder": "컬렉션 이름 입력",
+            "DescPlaceholder": "컬렉션 설명 입력",
+            "EndingIn": "종료",
+            "SubmitSeries": "시리즈 제출"
         }
     },
     "currencies": {
         "choose": "통화를 선택하세요"
+    },
+    "connectedAccount": {
+        "Title": "계정 연결",
+        "Success": "성공",
+        "YourAccountCreated": "귀하의 계정이 성공적으로 생성되었습니다!",
+        "YourAccountAlreadyCreated": "귀하의 계정은 이미 생성되어 사용할 준비가 되었습니다."
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "예비토큰",
+                        "amount": "양"
+                    },
+                    "small": {
+                        "reserveToken": "예비토큰",
+                        "amount": "양"
+                    }
+                },
+                "placeholders": {
+                    "amount": "양"
+                },
+                "btns": {
+                    "stake": "말뚝"
+                },
+                "stake": "말뚝",
+                "loading": "로드 중"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "토큰Erc20",
+                    "duration": "지속",
+                    "bonusTokenFraction": "보너스 토큰 분수",
+                    "popularToken": "popularToken",
+                    "donations": "기부금",
+                    "rewardsRateFraction": "rewardRateFraction",
+                    "numerator": "분자",
+                    "denominator": "분모"
+                },
+                "small": {
+                    "tokenErc20": "토큰Erc20",
+                    "duration": "기간(일)",
+                    "bonusTokenFraction": "보너스 토큰 분수",
+                    "popularToken": "popularToken",
+                    "donations": "기부금",
+                    "rewardsRateFraction": "rewardRateFraction",
+                    "numerator": "분자",
+                    "denominator": "분모"
+                }
+            },
+            "placeholders": {
+                "optional": "(선택 과목)",
+                "tuple": "튜플[]",
+                "number": "숫자",
+                "address": "주소",
+                "fraction": "분수",
+                "integer": "정수",
+                "seconds": "초",
+                "days": "날",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "수영장이 없습니다"
+            },
+            "btns": {
+                "createPool": "풀 만들기",
+                "createPoolInForm": "만들다"
+            },
+            "createPool": "풀 만들기",
+            "produce": "생산하다",
+            "loading": "로드 중",
+            "viewInstancesList": "새로 고침 목록"
+        }
     }
 }

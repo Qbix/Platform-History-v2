@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Ongeza {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Jina la mtumiaji..."
     }
 }

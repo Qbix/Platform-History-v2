@@ -171,5 +171,11 @@
             "bio": "Bot de engajamento do fórum. Obtenha o seu em https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Não há permissões suficientes para ler a carteira deste usuário",
+        "ThisUserHaveNoWallet": "Este usuário não tem carteira atribuída",
+        "TheWalletOfThisUserInvalid": "A carteira deste usuário é inválida",
+        "WalletInvalid": "Endereço da carteira inválido"
     }
 }

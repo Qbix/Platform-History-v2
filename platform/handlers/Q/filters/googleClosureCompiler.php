@@ -5,9 +5,7 @@ function Q_filters_googleClosureCompiler($params)
 	$results = $filters = array();
 	$printProgress = Q::ifset($params, 'printProgress', false);
 	foreach ($params['parts'] as $src => $part) {
-		$compilation_level = isset($params['compilation_level'])
-			? $params['compilation_level']
-			: 'SIMPLE_OPTIMIZATIONS';
+		$compilation_level = Q::ifset($params, 'compilation_level', 'SIMPLE_OPTIMIZATIONS');
 
 		if ($printProgress) {
 			echo "\tQ_filters_googleClosureCompiler: $src" . PHP_EOL;
@@ -18,17 +16,19 @@ function Q_filters_googleClosureCompiler($params)
 			continue;
 		}
 
-		// $in = APP_FILES_DIR.'_combine_temporary_in.js';
-		// $out = APP_FILES_DIR.'_combine_temporary_out.js';
-		// file_put_contents($in, $content);
-		// $js = Q_SCRIPTS_DIR . DS . 'googleClosureCompiler.js';
-		// exec("node $js $in $out $compilation_level");
-		// $result = file_get_contents($out);
-		// unlink($in);
-		// unlink($out);
-		// if (!$in or $out) {
-		// 	continue;
-		// }
+		if (Q::ifset($params, 'installedLocally', false)) {
+			$in = APP_FILES_DIR.'_combine_temporary_in.js';
+			$out = APP_FILES_DIR.'_combine_temporary_out.js';
+			file_put_contents($in, $part);
+			$js = Q_SCRIPTS_DIR . DS . 'googleClosureCompiler.js';
+			exec("node $js $in $out $compilation_level");
+			$results[$src] = file_get_contents($out);
+			unlink($in);
+			unlink($out);
+			if (!$in or $out) {
+				continue;
+			}
+		}
 	
 		// fall back to using Google's online service
 		$service_url = "https://closure-compiler.appspot.com/compile";

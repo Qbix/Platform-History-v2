@@ -171,5 +171,11 @@
             "bio": "فورم کی منگنی بوٹ۔ https:\/\/engageusers.ai پر اپنا حاصل کریں۔",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "اس صارف کے بٹوے کو پڑھنے کے لیے کافی اجازتیں نہیں ہیں۔",
+        "ThisUserHaveNoWallet": "اس صارف کو کوئی والیٹ تفویض نہیں کیا گیا ہے۔",
+        "TheWalletOfThisUserInvalid": "اس صارف کا پرس غلط ہے۔",
+        "WalletInvalid": "والیٹ کا پتہ غلط ہے۔"
     }
 }

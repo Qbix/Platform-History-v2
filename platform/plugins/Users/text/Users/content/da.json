@@ -171,5 +171,11 @@
             "bio": "Forum engagement bot. Få din egen på https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Ikke nok tilladelser til at læse denne brugers tegnebog",
+        "ThisUserHaveNoWallet": "Denne bruger har ingen tegnebog tildelt",
+        "TheWalletOfThisUserInvalid": "Denne brugers tegnebog er ugyldig",
+        "WalletInvalid": "Wallet-adressen er ugyldig"
     }
 }

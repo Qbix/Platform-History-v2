@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nie genoeg toestemmings om beursie van hierdie gebruiker te lees nie",
         "ThisUserHaveNoWallet": "Hierdie gebruiker het geen beursie toegewys nie",
         "TheWalletOfThisUserInvalid": "Die beursie van hierdie gebruiker is ongeldig",
-        "WalletInvalid": "Wallet-adres ongeldig"
+        "WalletInvalid": "Wallet-adres ongeldig",
+        "CantManageFrozenSeries": "Jy kan nie bevrore reekse bestuur nie"
     },
     "admin": {
         "Title": "Bates administratief",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Verdien {{amount}} krediete",
         "Places_user_location": "Verdien {{amount}} krediete",
         "Streams_greeting": "Verdien {{amount}} krediete",
-        "YouHaveCreditsToStart": "Verdien {{amount}} krediete"
+        "YouHaveCreditsToStart": "Verdien {{amount}} krediete",
+        "InvitedUserFilledStream": "Verdien {{amount}} krediete",
+        "ForFillingStream": "Verdien {{amount}} krediete",
+        "CreatePrivateChat": "Het {{amount}} krediete bestee"
     },
     "subscriptions": {
         "infoTitle": "Stel betalingsinligting",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Kies ontvanger",
         "TransactionSuccess": "Transaksiesukses",
-        "OrTypeWalletAddress": "OF tik die adres van die ontvanger se beursie in"
+        "OrTypeWalletAddress": "OF tik die adres van die ontvanger se beursie in",
+        "AppCredits": "App Krediete"
     },
     "NFT": {
         "Title": "Titel",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Teken &quot; {{title}} &quot; is geëis",
             "TokenWasLocked": "Teken &quot; {{title}} &quot; was gesluit",
             "TokenWasUnlocked": "Teken &quot; {{title}} &quot; is ontsluit"
+        },
+        "GenerateDescription": "of outomaties genereer",
+        "collections": {
+            "Title": "Versamelings",
+            "EnterTitle": "voer titel in",
+            "EnterDescription": "voer beskrywing in",
+            "NewCollection": "Nuwe versameling",
+            "Name": "Naam",
+            "Icon": "Ikoon",
+            "Description": "Beskrywing",
+            "Author": "Skrywer",
+            "SelectCollection": "Kies versameling",
+            "Value": "Waarde",
+            "AreYouSure": "Is jy seker?",
+            "AuthorInvalid": "Skryweradres ongeldig!",
+            "Address": "Adres",
+            "CoverImage": "Omslagprent",
+            "UploadIcon": "Oplaai-ikoon",
+            "CommissionAddressInvalid": "Kommissie-adres ongeldig",
+            "OnSale": "te koop",
+            "OffSale": "uitverkoping",
+            "CreateCollection": "Skep versameling",
+            "UpdateCollection": "Dateer versameling op",
+            "CollectionInfo": "Versameling inligting",
+            "SelectAuthor": "Kies skrywer",
+            "NewItem": "Nuwe NFT-versameling",
+            "NamePlaceholder": "Voer versameling naam in",
+            "DescPlaceholder": "Voer versamelingbeskrywing in",
+            "EndingIn": "Eindig in",
+            "SubmitSeries": "Dien &#39;n reeks in"
         }
     },
     "currencies": {
         "choose": "Kies &#39;n geldeenheid"
+    },
+    "connectedAccount": {
+        "Title": "Koppel rekening",
+        "Success": "Sukses",
+        "YourAccountCreated": "Jou rekening is suksesvol geskep!",
+        "YourAccountAlreadyCreated": "Jou rekening is reeds geskep en gereed om te gebruik"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Bedrag"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Bedrag"
+                    }
+                },
+                "placeholders": {
+                    "amount": "bedrag"
+                },
+                "btns": {
+                    "stake": "Stake"
+                },
+                "stake": "Stake",
+                "loading": "Laai tans"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "gewilde Token",
+                    "donations": "skenkings",
+                    "rewardsRateFraction": "beloningsRateFraksie",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur in dae",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "gewilde Token",
+                    "donations": "skenkings",
+                    "rewardsRateFraction": "beloningsRateFraksie",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                }
+            },
+            "placeholders": {
+                "optional": "(opsioneel)",
+                "tuple": "tupel[]",
+                "number": "nommer",
+                "address": "adres",
+                "fraction": "breuk",
+                "integer": "heelgetal",
+                "seconds": "sekondes",
+                "days": "dae",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Daar is geen swembaddens nie"
+            },
+            "btns": {
+                "createPool": "Skep swembad",
+                "createPoolInForm": "Skep"
+            },
+            "createPool": "Skep swembad",
+            "produce": "Produseer",
+            "loading": "Laai tans",
+            "viewInstancesList": "Herlaai lys"
+        }
     }
 }

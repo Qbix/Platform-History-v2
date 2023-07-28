@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "თქვენ არ ხართ შესული. <a href='#login' data-users-login>დააწკაპუნეთ აქ შესასვლელად<\/a>"
+    "NotLoggedIn": "თქვენ არ ხართ შესული. <a href='#login' data-users-login>დააწკაპუნეთ აქ შესასვლელად<\/a>",
+    "InvalidLanguage": "არასწორი ენა {{language}}"
 }

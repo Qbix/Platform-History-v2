@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "இந்தப் பயனரின் வாலட்டைப் படிக்க போதுமான அனுமதிகள் இல்லை",
         "ThisUserHaveNoWallet": "இந்தப் பயனருக்கு வாலட் எதுவும் ஒதுக்கப்படவில்லை",
         "TheWalletOfThisUserInvalid": "இந்தப் பயனரின் பணப்பை தவறானது",
-        "WalletInvalid": "வாலட் முகவரி தவறானது"
+        "WalletInvalid": "வாலட் முகவரி தவறானது",
+        "CantManageFrozenSeries": "உறைந்த தொடர்களை உங்களால் நிர்வகிக்க முடியாது"
     },
     "admin": {
         "Title": "சொத்துக்கள் நிர்வாக",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
         "Places_user_location": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
         "Streams_greeting": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
-        "YouHaveCreditsToStart": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது"
+        "YouHaveCreditsToStart": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "InvitedUserFilledStream": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "ForFillingStream": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "CreatePrivateChat": "{{amount}} கிரெடிட்களை செலவழித்தது"
     },
     "subscriptions": {
         "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "பெறுநரைத் தேர்ந்தெடுக்கவும்",
         "TransactionSuccess": "பரிவர்த்தனை வெற்றி",
-        "OrTypeWalletAddress": "அல்லது பெறுநரின் பணப்பை முகவரியை உள்ளிடவும்"
+        "OrTypeWalletAddress": "அல்லது பெறுநரின் பணப்பை முகவரியை உள்ளிடவும்",
+        "AppCredits": "பயன்பாட்டு வரவுகள்"
     },
     "NFT": {
         "Title": "தலைப்பு",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "டோக்கன் &quot; {{title}} &quot; கோரப்பட்டது",
             "TokenWasLocked": "டோக்கன் &quot; {{title}} &quot; பூட்டப்பட்டது",
             "TokenWasUnlocked": "டோக்கன் &quot; {{title}} &quot; திறக்கப்பட்டது"
+        },
+        "GenerateDescription": "அல்லது தானாக உருவாக்கவும்",
+        "collections": {
+            "Title": "தொகுப்புகள்",
+            "EnterTitle": "தலைப்பை உள்ளிடவும்",
+            "EnterDescription": "விளக்கத்தை உள்ளிடவும்",
+            "NewCollection": "புதிய தொகுப்பு",
+            "Name": "பெயர்",
+            "Icon": "ஐகான்",
+            "Description": "விளக்கம்",
+            "Author": "நூலாசிரியர்",
+            "SelectCollection": "சேகரிப்பைத் தேர்ந்தெடுக்கவும்",
+            "Value": "மதிப்பு",
+            "AreYouSure": "நீ சொல்வது உறுதியா?",
+            "AuthorInvalid": "ஆசிரியர் முகவரி தவறானது!",
+            "Address": "முகவரி",
+            "CoverImage": "அட்டைப் படம்",
+            "UploadIcon": "பதிவேற்ற ஐகான்",
+            "CommissionAddressInvalid": "கமிஷன் முகவரி தவறானது",
+            "OnSale": "விற்பனைக்கு",
+            "OffSale": "விற்பனையிலிருந்து",
+            "CreateCollection": "சேகரிப்பை உருவாக்கவும்",
+            "UpdateCollection": "புதுப்பிப்பு சேகரிப்பு",
+            "CollectionInfo": "சேகரிப்பு தகவல்",
+            "SelectAuthor": "ஆசிரியரைத் தேர்ந்தெடுக்கவும்",
+            "NewItem": "புதிய NFT சேகரிப்பு",
+            "NamePlaceholder": "சேகரிப்பு பெயரை உள்ளிடவும்",
+            "DescPlaceholder": "சேகரிப்பு விளக்கத்தை உள்ளிடவும்",
+            "EndingIn": "முடிவடைகிறது",
+            "SubmitSeries": "ஒரு தொடரைச் சமர்ப்பிக்கவும்"
         }
     },
     "currencies": {
         "choose": "நாணயத்தைத் தேர்ந்தெடுக்கவும்"
+    },
+    "connectedAccount": {
+        "Title": "கணக்கை இணைக்கவும்",
+        "Success": "வெற்றி",
+        "YourAccountCreated": "உங்கள் கணக்கு வெற்றிகரமாக உருவாக்கப்பட்டது!",
+        "YourAccountAlreadyCreated": "உங்கள் கணக்கு ஏற்கனவே உருவாக்கப்பட்டது மற்றும் பயன்படுத்த தயாராக உள்ளது"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ரிசர்வ் டோக்கன்",
+                        "amount": "தொகை"
+                    },
+                    "small": {
+                        "reserveToken": "ரிசர்வ் டோக்கன்",
+                        "amount": "தொகை"
+                    }
+                },
+                "placeholders": {
+                    "amount": "தொகை"
+                },
+                "btns": {
+                    "stake": "பங்கு"
+                },
+                "stake": "பங்கு",
+                "loading": "ஏற்றுகிறது"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "டோக்கன்Erc20",
+                    "duration": "கால அளவு",
+                    "bonusTokenFraction": "போனஸ்TokenFraction",
+                    "popularToken": "பிரபலமான டோக்கன்",
+                    "donations": "நன்கொடைகள்",
+                    "rewardsRateFraction": "வெகுமதி விகிதம்",
+                    "numerator": "எண்",
+                    "denominator": "வகுக்கும்"
+                },
+                "small": {
+                    "tokenErc20": "டோக்கன்Erc20",
+                    "duration": "நாட்களில் கால அளவு",
+                    "bonusTokenFraction": "போனஸ்TokenFraction",
+                    "popularToken": "பிரபலமான டோக்கன்",
+                    "donations": "நன்கொடைகள்",
+                    "rewardsRateFraction": "வெகுமதி விகிதம்",
+                    "numerator": "எண்",
+                    "denominator": "வகுக்கும்"
+                }
+            },
+            "placeholders": {
+                "optional": "(விரும்பினால்)",
+                "tuple": "டூப்பிள்[]",
+                "number": "எண்",
+                "address": "முகவரி",
+                "fraction": "பின்னம்",
+                "integer": "முழு",
+                "seconds": "வினாடிகள்",
+                "days": "நாட்களில்",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "குளங்கள் இல்லை"
+            },
+            "btns": {
+                "createPool": "குளத்தை உருவாக்கவும்",
+                "createPoolInForm": "உருவாக்கு"
+            },
+            "createPool": "குளத்தை உருவாக்கவும்",
+            "produce": "உற்பத்தி செய்",
+            "loading": "ஏற்றுகிறது",
+            "viewInstancesList": "பட்டியலைப் புதுப்பிக்கவும்"
+        }
     }
 }

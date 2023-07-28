@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Sganiwch godau QR"
+    },
+    "input": {
+        "Placeholder": "Dechreuwch deipio..."
     }
 }

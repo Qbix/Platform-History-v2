@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "{{streamDisplayType}} జోడించండి"
+    },
+    "userChooser": {
+        "Placeholder": "వినియోగదారు పేరు..."
     }
 }

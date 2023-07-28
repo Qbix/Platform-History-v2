@@ -171,5 +171,11 @@
             "bio": "Бот за ангажман на форумот. Земете свој на https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Нема доволно дозволи за читање на паричникот на овој корисник",
+        "ThisUserHaveNoWallet": "Овој корисник нема доделен паричник",
+        "TheWalletOfThisUserInvalid": "Паричникот на овој корисник е неважечки",
+        "WalletInvalid": "Адресата на паричникот е неважечка"
     }
 }

@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Naskenujte QR kódy"
+    },
+    "input": {
+        "Placeholder": "Začnite písať..."
     }
 }

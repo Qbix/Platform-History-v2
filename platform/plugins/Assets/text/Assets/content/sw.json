@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Hakuna ruhusa za kutosha kusoma pochi ya mtumiaji huyu",
         "ThisUserHaveNoWallet": "Mtumiaji huyu hajakabidhiwa pochi",
         "TheWalletOfThisUserInvalid": "Pochi ya mtumiaji huyu ni batili",
-        "WalletInvalid": "Anwani ya Wallet si sahihi"
+        "WalletInvalid": "Anwani ya Wallet si sahihi",
+        "CantManageFrozenSeries": "Huwezi kudhibiti mfululizo uliogandishwa"
     },
     "admin": {
         "Title": "Utawala wa mali",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Alipata mikopo {{amount}}",
         "Places_user_location": "Alipata mikopo {{amount}}",
         "Streams_greeting": "Alipata mikopo {{amount}}",
-        "YouHaveCreditsToStart": "Alipata mikopo {{amount}}"
+        "YouHaveCreditsToStart": "Alipata mikopo {{amount}}",
+        "InvitedUserFilledStream": "Alipata mikopo {{amount}}",
+        "ForFillingStream": "Alipata mikopo {{amount}}",
+        "CreatePrivateChat": "Alitumia mikopo {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Weka Taarifa ya Malipo",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Chagua mpokeaji",
         "TransactionSuccess": "Mafanikio ya Muamala",
-        "OrTypeWalletAddress": "AU andika anwani ya pochi ya mpokeaji"
+        "OrTypeWalletAddress": "AU andika anwani ya pochi ya mpokeaji",
+        "AppCredits": "Mikopo ya Programu"
     },
     "NFT": {
         "Title": "Kichwa",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Tokeni &quot; {{title}} &quot; ilidaiwa",
             "TokenWasLocked": "Tokeni &quot; {{title}} &quot; ilikuwa imefungwa",
             "TokenWasUnlocked": "Tokeni &quot; {{title}} &quot; ilifunguliwa"
+        },
+        "GenerateDescription": "au tengeneza kiotomatiki",
+        "collections": {
+            "Title": "Mikusanyiko",
+            "EnterTitle": "ingiza kichwa",
+            "EnterDescription": "ingiza maelezo",
+            "NewCollection": "Mkusanyiko Mpya",
+            "Name": "Jina",
+            "Icon": "Aikoni",
+            "Description": "Maelezo",
+            "Author": "Mwandishi",
+            "SelectCollection": "Chagua mkusanyiko",
+            "Value": "Thamani",
+            "AreYouSure": "Una uhakika?",
+            "AuthorInvalid": "Anwani ya mwandishi si sahihi!",
+            "Address": "Anwani",
+            "CoverImage": "Picha ya jalada",
+            "UploadIcon": "Pakia ikoni",
+            "CommissionAddressInvalid": "Anwani ya tume ni batili",
+            "OnSale": "inauzwa",
+            "OffSale": "nje ya mauzo",
+            "CreateCollection": "Unda Mkusanyiko",
+            "UpdateCollection": "Sasisha Mkusanyiko",
+            "CollectionInfo": "Maelezo ya Mkusanyiko",
+            "SelectAuthor": "Chagua mwandishi",
+            "NewItem": "Mkusanyiko Mpya wa NFT",
+            "NamePlaceholder": "Weka jina la mkusanyiko",
+            "DescPlaceholder": "Weka maelezo ya mkusanyiko",
+            "EndingIn": "Kumalizia Katika",
+            "SubmitSeries": "Wasilisha Msururu"
         }
     },
     "currencies": {
         "choose": "Chagua sarafu"
+    },
+    "connectedAccount": {
+        "Title": "Unganisha akaunti",
+        "Success": "Mafanikio",
+        "YourAccountCreated": "Akaunti yako imeundwa!",
+        "YourAccountAlreadyCreated": "Akaunti yako tayari imeundwa na iko tayari kutumika"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Kiasi"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Kiasi"
+                    }
+                },
+                "placeholders": {
+                    "amount": "kiasi"
+                },
+                "btns": {
+                    "stake": "Wadau"
+                },
+                "stake": "Wadau",
+                "loading": "Inapakia"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "isharaErc20",
+                    "duration": "Muda",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "maarufuToken",
+                    "donations": "michango",
+                    "rewardsRateFraction": "tuzoRateFraction",
+                    "numerator": "namba",
+                    "denominator": "dhehebu"
+                },
+                "small": {
+                    "tokenErc20": "isharaErc20",
+                    "duration": "Muda katika siku",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "maarufuToken",
+                    "donations": "michango",
+                    "rewardsRateFraction": "tuzoRateFraction",
+                    "numerator": "namba",
+                    "denominator": "dhehebu"
+                }
+            },
+            "placeholders": {
+                "optional": "(si lazima)",
+                "tuple": "tuple[]",
+                "number": "nambari",
+                "address": "anwani",
+                "fraction": "sehemu",
+                "integer": "nambari kamili",
+                "seconds": "sekunde",
+                "days": "siku",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Hakuna mabwawa"
+            },
+            "btns": {
+                "createPool": "Unda Dimbwi",
+                "createPoolInForm": "Unda"
+            },
+            "createPool": "Unda Dimbwi",
+            "produce": "Kuzalisha",
+            "loading": "Inapakia",
+            "viewInstancesList": "Onyesha upya Orodha"
+        }
     }
 }

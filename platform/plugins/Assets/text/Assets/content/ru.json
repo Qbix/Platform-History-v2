@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Недостаточно прав для чтения кошелька этого пользователя",
         "ThisUserHaveNoWallet": "Этому пользователю не назначен кошелек",
         "TheWalletOfThisUserInvalid": "Кошелек этого пользователя недействителен",
-        "WalletInvalid": "Неверный адрес кошелька"
+        "WalletInvalid": "Неверный адрес кошелька",
+        "CantManageFrozenSeries": "Вы не можете управлять замороженными сериями"
     },
     "admin": {
         "Title": "Активы административные",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Заработано {{amount}} кредитов",
         "Places_user_location": "Заработано {{amount}} кредитов",
         "Streams_greeting": "Заработано {{amount}} кредитов",
-        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов"
+        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов",
+        "InvitedUserFilledStream": "Заработано {{amount}} кредитов",
+        "ForFillingStream": "Заработано {{amount}} кредитов",
+        "CreatePrivateChat": "Потрачено {{amount}} кредитов"
     },
     "subscriptions": {
         "infoTitle": "Установить платежную информацию",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Выберите получателя",
         "TransactionSuccess": "Успешная транзакция",
-        "OrTypeWalletAddress": "ИЛИ введите адрес кошелька получателя"
+        "OrTypeWalletAddress": "ИЛИ введите адрес кошелька получателя",
+        "AppCredits": "Кредиты приложений"
     },
     "NFT": {
         "Title": "Заголовок",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Токен &quot; {{title}} &quot; был востребован",
             "TokenWasLocked": "Токен &quot; {{title}} &quot; заблокирован",
             "TokenWasUnlocked": "Токен &quot; {{title}} &quot; был разблокирован"
+        },
+        "GenerateDescription": "или автоматически сгенерировать",
+        "collections": {
+            "Title": "Коллекции",
+            "EnterTitle": "введите название",
+            "EnterDescription": "введите описание",
+            "NewCollection": "Новая коллекция",
+            "Name": "Имя",
+            "Icon": "Икона",
+            "Description": "Описание",
+            "Author": "Автор",
+            "SelectCollection": "Выбрать коллекцию",
+            "Value": "Ценить",
+            "AreYouSure": "Вы уверены?",
+            "AuthorInvalid": "Адрес автора недействителен!",
+            "Address": "Адрес",
+            "CoverImage": "Изображение обложки",
+            "UploadIcon": "Значок загрузки",
+            "CommissionAddressInvalid": "Неверный адрес комиссии",
+            "OnSale": "в продаже",
+            "OffSale": "снято с продажи",
+            "CreateCollection": "Создать коллекцию",
+            "UpdateCollection": "Коллекция обновлений",
+            "CollectionInfo": "Информация о коллекции",
+            "SelectAuthor": "Выберите автора",
+            "NewItem": "Новая коллекция NFT",
+            "NamePlaceholder": "Введите название коллекции",
+            "DescPlaceholder": "Введите описание коллекции",
+            "EndingIn": "Кончающийся на",
+            "SubmitSeries": "Отправить серию"
         }
     },
     "currencies": {
         "choose": "Выберите валюту"
+    },
+    "connectedAccount": {
+        "Title": "Подключить аккаунт",
+        "Success": "Успех",
+        "YourAccountCreated": "Ваша учетная запись успешно создана!",
+        "YourAccountAlreadyCreated": "Ваша учетная запись уже создана и готова к использованию"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "резервToken",
+                        "amount": "Количество"
+                    },
+                    "small": {
+                        "reserveToken": "резервToken",
+                        "amount": "Количество"
+                    }
+                },
+                "placeholders": {
+                    "amount": "количество"
+                },
+                "btns": {
+                    "stake": "Ставка"
+                },
+                "stake": "Ставка",
+                "loading": "Загрузка"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Продолжительность",
+                    "bonusTokenFraction": "бонусTokenFraction",
+                    "popularToken": "популярныйToken",
+                    "donations": "пожертвования",
+                    "rewardsRateFraction": "наградыRateFraction",
+                    "numerator": "числитель",
+                    "denominator": "знаменатель"
+                },
+                "small": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Продолжительность в днях",
+                    "bonusTokenFraction": "бонусTokenFraction",
+                    "popularToken": "популярныйToken",
+                    "donations": "пожертвования",
+                    "rewardsRateFraction": "наградыRateFraction",
+                    "numerator": "числитель",
+                    "denominator": "знаменатель"
+                }
+            },
+            "placeholders": {
+                "optional": "(необязательный)",
+                "tuple": "кортеж []",
+                "number": "число",
+                "address": "адрес",
+                "fraction": "доля",
+                "integer": "целое число",
+                "seconds": "секунды",
+                "days": "дни",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "бассейнов нет"
+            },
+            "btns": {
+                "createPool": "Создать пул",
+                "createPoolInForm": "Создавать"
+            },
+            "createPool": "Создать пул",
+            "produce": "Производить",
+            "loading": "Загрузка",
+            "viewInstancesList": "Обновить список"
+        }
     }
 }

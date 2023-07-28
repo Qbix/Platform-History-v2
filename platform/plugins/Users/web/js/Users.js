@@ -132,6 +132,10 @@
 			addToPhonebook: "Add To My Phone Contacts",
 			addLabel: "New Relationship",
 			"prompt": "Give it a name"
+		},
+
+		web3: {
+			PasteAddress: "Paste a valid Web3 address"
 		}
 
 	};
@@ -2978,6 +2982,10 @@
 			js: "{{Users}}/js/tools/people.js",
 			css: "{{Users}}/css/tools/people.css"
 		},
+		"Users/web3/address": {
+			js: "{{Users}}/js/tools/web3/address.js",
+			css: "{{Users}}/css/tools/web3/address.css"
+		},
 		"Users/web3/community": {
 			js: "{{Users}}/js/tools/web3/community.js",
 			css: "{{Users}}/css/tools/web3/community.css"
@@ -4216,9 +4224,17 @@
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
 
+		/**
+		 * Abbreviates a Web3 address
+		 * @param {String} address A string of the form "0x..."
+		 * @param {Number} len The number of digits on either side of the ...""
+		 * @return {String|null} Returns null if address is not valid
+		 */
 		abbreviateAddress: function (address, len) {
 			len = len || 5;
-			return address.substr(0, 2+len) + '...' + address.substr(-len);
+			return Users.Web3.validate.address(address)
+				? address.substr(0, 2+len) + '...' + address.substr(-len)
+				: null;
 		},
 
 		disconnect: function (appId, callback) {
@@ -4864,7 +4880,46 @@
 				return (err.data.message)
 			}
 			return (str);
-        }
+        },
+		validate: {
+			notEmpty: function _validate_notEmpty(input) {
+				return !Q.isEmpty(input);
+			},
+			integer: function _validate_integer(input) {
+				return Q.isInteger(input)
+			},
+			numeric: function _validate_numeric(input) {
+				return !isNaN(parseFloat(input)) && isFinite(input);
+			},
+			address: function _validate_address(address) {
+				// here two ways: simple and custom;
+				// since we have a ethers lib we will use it
+				if (window.ethers) {
+					return ethers.utils.isAddress(address);
+				}
+				
+				//overwise
+				// https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
+				if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+					// check if it has the basic requirements of an address
+					return false;
+				} else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+					// If it's all small caps or all all caps, return true
+					return true;
+				} else {
+					// Otherwise check each case
+		            // var address = address.replace('0x','');
+		            // var addressHash = Web3.utils.sha3(address.toLowerCase());
+		            // for (var i = 0; i < 40; i++ ) {
+		            //     // the nth letter should be uppercase if the nth digit of casemap is 1
+		            //     if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+		            //         return false;
+		            //     }
+		            // }
+					return true;
+				}
+			}
+		}
 	};
 
 	/**

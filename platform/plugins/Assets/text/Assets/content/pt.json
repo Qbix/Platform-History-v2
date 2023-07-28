@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Não há permissões suficientes para ler a carteira deste usuário",
         "ThisUserHaveNoWallet": "Este usuário não tem carteira atribuída",
         "TheWalletOfThisUserInvalid": "A carteira deste usuário é inválida",
-        "WalletInvalid": "Endereço da carteira inválido"
+        "WalletInvalid": "Endereço da carteira inválido",
+        "CantManageFrozenSeries": "Você não pode gerenciar séries congeladas"
     },
     "admin": {
         "Title": "Ativos administrativos",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Ganhou {{amount}} créditos",
         "Places_user_location": "Ganhou {{amount}} créditos",
         "Streams_greeting": "Ganhou {{amount}} créditos",
-        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos"
+        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos",
+        "InvitedUserFilledStream": "Ganhou {{amount}} créditos",
+        "ForFillingStream": "Ganhou {{amount}} créditos",
+        "CreatePrivateChat": "Gastou {{amount}} créditos"
     },
     "subscriptions": {
         "infoTitle": "Definir informações de pagamento",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Selecione o destinatário",
         "TransactionSuccess": "Sucesso da Transação",
-        "OrTypeWalletAddress": "OU digite o endereço da carteira do destinatário"
+        "OrTypeWalletAddress": "OU digite o endereço da carteira do destinatário",
+        "AppCredits": "Créditos do aplicativo"
     },
     "NFT": {
         "Title": "Título",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "O token &quot; {{title}} &quot; foi reivindicado",
             "TokenWasLocked": "O token &quot; {{title}} &quot; foi bloqueado",
             "TokenWasUnlocked": "O token &quot; {{title}} &quot; foi desbloqueado"
+        },
+        "GenerateDescription": "ou gerar automaticamente",
+        "collections": {
+            "Title": "Coleções",
+            "EnterTitle": "digite o título",
+            "EnterDescription": "insira a descrição",
+            "NewCollection": "Nova coleção",
+            "Name": "Nome",
+            "Icon": "Ícone",
+            "Description": "Descrição",
+            "Author": "Autor",
+            "SelectCollection": "Selecione a coleção",
+            "Value": "Valor",
+            "AreYouSure": "Tem certeza?",
+            "AuthorInvalid": "Endereço do autor inválido!",
+            "Address": "Endereço",
+            "CoverImage": "Imagem de capa",
+            "UploadIcon": "Carregar ícone",
+            "CommissionAddressInvalid": "Endereço da comissão inválido",
+            "OnSale": "à venda",
+            "OffSale": "fora de venda",
+            "CreateCollection": "Criar coleção",
+            "UpdateCollection": "Atualizar coleção",
+            "CollectionInfo": "Informações da coleção",
+            "SelectAuthor": "Selecione o autor",
+            "NewItem": "Nova Coleção NFT",
+            "NamePlaceholder": "Insira o nome da coleção",
+            "DescPlaceholder": "Digite a descrição da coleção",
+            "EndingIn": "Acabando",
+            "SubmitSeries": "Envie uma série"
         }
     },
     "currencies": {
         "choose": "Escolha uma moeda"
+    },
+    "connectedAccount": {
+        "Title": "Conectar conta",
+        "Success": "Sucesso",
+        "YourAccountCreated": "Sua conta criada com sucesso!",
+        "YourAccountAlreadyCreated": "Sua conta já criada e pronta para uso"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reservaToken",
+                        "amount": "Quantia"
+                    },
+                    "small": {
+                        "reserveToken": "reservaToken",
+                        "amount": "Quantia"
+                    }
+                },
+                "placeholders": {
+                    "amount": "quantia"
+                },
+                "btns": {
+                    "stake": "Estaca"
+                },
+                "stake": "Estaca",
+                "loading": "Carregando"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duração",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "doações",
+                    "rewardsRateFraction": "recompensasRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duração em dias",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "doações",
+                    "rewardsRateFraction": "recompensasRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tuple": "tupla[]",
+                "number": "número",
+                "address": "endereço",
+                "fraction": "fração",
+                "integer": "inteiro",
+                "seconds": "segundos",
+                "days": "dias",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Não há piscinas"
+            },
+            "btns": {
+                "createPool": "Criar pool",
+                "createPoolInForm": "Criar"
+            },
+            "createPool": "Criar pool",
+            "produce": "Produzir",
+            "loading": "Carregando",
+            "viewInstancesList": "Atualizar lista"
+        }
     }
 }

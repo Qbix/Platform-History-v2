@@ -171,5 +171,11 @@
             "bio": "መድረክ ተሳትፎ bot. https:\/\/engageusers.ai ላይ የራስዎን ያግኙ",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "የዚህን ተጠቃሚ ቦርሳ ለማንበብ በቂ ፍቃዶች የሉም",
+        "ThisUserHaveNoWallet": "ይህ ተጠቃሚ የተመደበ የኪስ ቦርሳ የለውም",
+        "TheWalletOfThisUserInvalid": "የዚህ ተጠቃሚ የኪስ ቦርሳ ልክ ያልሆነ ነው።",
+        "WalletInvalid": "የኪስ ቦርሳ አድራሻ ልክ አይደለም።"
     }
 }

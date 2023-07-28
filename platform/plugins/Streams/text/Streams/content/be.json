@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Дадайце {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Імя карыстальніка..."
     }
 }

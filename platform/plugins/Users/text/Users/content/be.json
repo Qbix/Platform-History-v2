@@ -171,5 +171,11 @@
             "bio": "Бот для ўдзелу ў форуме. Атрымайце свой уласны на https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Недастаткова правоў для чытання кашалька гэтага карыстальніка",
+        "ThisUserHaveNoWallet": "Гэтаму карыстальніку не прызначаны кашалёк",
+        "TheWalletOfThisUserInvalid": "Кашалёк гэтага карыстальніка несапраўдны",
+        "WalletInvalid": "Несапраўдны адрас кашалька"
     }
 }

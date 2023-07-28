@@ -171,5 +171,11 @@
             "bio": "Форумен бот за ангажиране. Вземете своя на https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Няма достатъчно разрешения за четене на портфейла на този потребител",
+        "ThisUserHaveNoWallet": "Този потребител няма присвоен портфейл",
+        "TheWalletOfThisUserInvalid": "Портфейлът на този потребител е невалиден",
+        "WalletInvalid": "Адресът на портфейла е невалиден"
     }
 }

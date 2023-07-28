@@ -1464,7 +1464,7 @@
 					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId).then(function (instanceInfos) {
 						Q.handle(callback, null, [null, instanceInfos]);
 					}).catch(function(err){
-						Q.handle(callback, null, [err.reason]);
+						console.warn(err);
 					});	
 				},
 				/**
@@ -1543,7 +1543,6 @@
 						
 					}).catch(function(err){
 						console.warn(err);
-						Q.handle(callback, null, [err.reason]);
 					});
 				},
 				
@@ -1617,7 +1616,7 @@
 						p.push(contract.name());
 						p.push(contract.symbol());
 						p.push(contract.balanceOf(userAddress));
-						
+
 						return Promise.all(p);
 					})
 						
@@ -1625,8 +1624,188 @@
 				}
 			},
 		},
+		Funds: {
+			getFactory: function(chainId, readonly, abiPath) {
+				if (Q.isEmpty(abiPath)) {
+					abiPath = "Assets/templates/R1/Fund/factory";
+				}
+				return Q.Users.Web3.getFactory(
+					abiPath, 
+					readonly == true 
+					?
+					{
+						chainId: chainId,
+						readOnly: true
+					}
+					:
+					chainId
+				);
+			},
+			getAll: function(chainId, abiPath, callback) {
+				
+				Assets.Funds._getAll(
+					chainId, 
+					abiPath
+				).then(function (instances) {
+					Q.handle(callback, null, [null, instances]);	
+				}).catch(function(err){
+					console.warn(err);
+				})
+				
+			},
+			getFundConfig: function(contractAddress, chainId, userAddress, callback) {
+				Assets.Funds._getFundConfig(
+					contractAddress, 
+					chainId,
+					userAddress
+				).then(function (instances) {
+					Q.handle(callback, null, [null, instances]);	
+				}).catch(function(err){
+					console.warn(err);
+				})
+				
+			},
+			_getAll: function(chainId, abiPath) {
+				var fundFactory;
+				
+				return Assets.Funds.getFactory(
+					chainId, 
+					true,
+					abiPath
+				).then(function (contract) {
+
+					fundFactory = contract;
+					return contract.instancesCount();
+					
+				}).then(function (amount) {
+
+					if (amount == 0) {
+						return new Promise(function (resolve, reject) {resolve([])});
+					}
+				
+					var p = [];
+					for(var i = 0; i < amount; i++) {
+						p.push(fundFactory.instances(i));
+					}
+					return Promise.allSettled(p);
+				});
+				
+			},
+			_getFundConfig: function(contractAddress, chainId, userAddress) {
+
+				return Q.Users.Web3.getContract(
+					'Assets/templates/R1/Fund/contract', {
+						chainId: chainId,
+						contractAddress: contractAddress,
+						readOnly: true
+					}
+				).then(function (contract) {
+					return contract.getConfig();
+				}).then(function (configs) {	
+					
+					var p = [];
+					p.push(new Promise(function (resolve, reject) {resolve(configs)}));
+
+					if (Q.isEmpty(userAddress)) {
+						p.push(new Promise(function (resolve, reject) {resolve([])}));	
+						p.push(new Promise(function (resolve, reject) {resolve([])}));	
+					} else {
+						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(configs._sellingToken, userAddress, chainId));
+						p.push(Assets.Funds._getWhitelisted(contractAddress, userAddress, chainId));
+					}
+
+					return Promise.allSettled(p);
+				}).then(function (_ref) {
+
+					var ret = {..._ref[0].value};
+
+					ret = $.extend(
+						{}, 
+						//instanceInfos.value[index], 
+						ret, 
+						{	"fundContract": contractAddress,
+							"erc20TokenInfo": _ref[1].status == 'rejected' ? 
+											{name:"", symbol:"", balance:""} : 
+											{name:_ref[1].value[0], symbol:_ref[1].value[1], balance:_ref[1].value[2]},
+							"inWhitelist": (
+									_ref[2].status == 'rejected' 
+									? 
+									// can be in several cases:
+									// 1. whitelist address == address(0), but use whitelist == true. script will try to get data from ZERO address and will fail
+									// 2. whitelist address != address(0), whitelist == true, but contract didnot support whitelist interface.
+									// 3. smth really unexpected
+									false
+									:
+									_ref[2].value
+									)
+						}
+					);				
+
+					return (new Promise(function (resolve, reject) {resolve(ret)}));
+				});
+				
+			},
+			_getWhitelisted: function(contract, userAddress, chainId){
+				return Q.Users.Web3.getContract(
+					'Assets/templates/R1/Fund/contract', 
+					{
+						contractAddress: contract,
+						readOnly: true,
+						chainId: chainId
+					}
+				).then(function (contract) {
+					return contract.whitelisted(userAddress);
+				});
+			},
+			adjustFundConfig: function(infoConfig, options) {
+				//make output data an userfriendly
+				var infoConfigAdjusted = Object.assign({}, infoConfig);
+
+				infoConfigAdjusted._endTs = new Date(parseInt(infoConfig._endTs) * 1000).toDateString();
+				infoConfigAdjusted._prices = infoConfig._prices.map(
+						x => ethers.utils.formatUnits(
+							x.toString(), 
+							Q.isEmpty(options.priceDenom)?18:Math.log10(options.priceDenom)
+						));
+				infoConfigAdjusted._thresholds = infoConfig._thresholds.map(x => ethers.utils.formatUnits(x.toString(), 18));
+				infoConfigAdjusted._timestamps = infoConfig._timestamps.map(x => new Date(parseInt(x) * 1000).toDateString());
+				
+				var currentDate = Math.floor(new Date().getTime()/1000);
+				//currentDate = Math.floor(new Date('2023/07/24  GMT+00:00').getTime()/1000);
+				var index = -1;
+				
+				if (infoConfig._timestamps.length == 1) {
+					index = (infoConfig._timestamps[0] > currentDate) ? 1 : -1;
+				} else if (infoConfig._timestamps.length > 1) {
+
+					var cur = currentDate;
+					for (var i = 0; i < infoConfig._timestamps.length; i++) {
+						var tsInt = parseInt(infoConfig._timestamps[i]);
+						if (
+								tsInt <= currentDate &&
+								(
+									index == -1 ||
+									cur <= tsInt
+								)
+							) {
+							index = i;
+							cur = tsInt;
+						}
+					}
+					
+				}
+				
+				infoConfigAdjusted.currentPrice = (index != -1) ? infoConfigAdjusted._prices[index] : 0;
+				infoConfigAdjusted.isOutOfDate = (currentDate > infoConfig._endTs) ? true : false;
+				
+				return infoConfigAdjusted;
+			}
+		},
 		
 		Web3: {
+			constants: {
+				zeroAddress: '0x0000000000000000000000000000000000000000'
+			},
 			/**
 			 * Generates a link for opening a coin
 			 * @static
@@ -1772,6 +1951,22 @@
 		"Assets/credits/balance": {
 			js: "{{Assets}}/js/tools/credits/balance.js",
 			css: "{{Assets}}/css/tools/credits/balance.css"
+		},
+		"Assets/web3/coin/presale/admin": {
+			js: [
+				"{{Assets}}/js/tools/web3/coin/presale/admin.js",
+				'{{Q}}/pickadate/picker.js',
+				'{{Q}}/pickadate/picker.date.js'
+			],
+			css: [
+				"{{Assets}}/css/tools/web3/coin/presale/admin.css",
+				'{{Q}}/pickadate/themes/default.css',
+				'{{Q}}/pickadate/themes/default.date.css'
+			]
+		},
+		"Assets/web3/coin/presale/buy": {
+			js: "{{Assets}}/js/tools/web3/coin/presale/buy.js",
+			css: "{{Assets}}/css/tools/web3/coin/presale/buy.css"
 		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",

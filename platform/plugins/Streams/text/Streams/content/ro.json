@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Adăugați {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Numele unui utilizator..."
     }
 }

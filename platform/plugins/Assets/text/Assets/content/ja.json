@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "このユーザーのウォレットを読み取るための十分な権限がありません",
         "ThisUserHaveNoWallet": "このユーザーにはウォレットが割り当てられていません",
         "TheWalletOfThisUserInvalid": "このユーザーのウォレットは無効です",
-        "WalletInvalid": "ウォレットのアドレスが無効です"
+        "WalletInvalid": "ウォレットのアドレスが無効です",
+        "CantManageFrozenSeries": "凍結されたシリーズは管理できません"
     },
     "admin": {
         "Title": "資産管理",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}}クレジットを獲得した",
         "Places_user_location": "{{amount}}クレジットを獲得した",
         "Streams_greeting": "{{amount}}クレジットを獲得した",
-        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得した"
+        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得した",
+        "InvitedUserFilledStream": "{{amount}}クレジットを獲得しました",
+        "ForFillingStream": "{{amount}}クレジットを獲得しました",
+        "CreatePrivateChat": "{{amount}}クレジットを消費しました"
     },
     "subscriptions": {
         "infoTitle": "お支払い情報の設定",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "受信者を選択",
         "TransactionSuccess": "取引成功",
-        "OrTypeWalletAddress": "OR 受信者のウォレットアドレスを入力"
+        "OrTypeWalletAddress": "OR 受信者のウォレットアドレスを入力",
+        "AppCredits": "アプリクレジット"
     },
     "NFT": {
         "Title": "タイトル",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "トークン &quot; {{title}} &quot; が要求されました",
             "TokenWasLocked": "トークン「 {{title}} 」がロックされました",
             "TokenWasUnlocked": "トークン「 {{title}} 」がアンロックされました"
+        },
+        "GenerateDescription": "または自動生成",
+        "collections": {
+            "Title": "コレクション",
+            "EnterTitle": "タイトルを入力してください",
+            "EnterDescription": "説明を入力してください",
+            "NewCollection": "新しいコレクション",
+            "Name": "名前",
+            "Icon": "アイコン",
+            "Description": "説明",
+            "Author": "著者",
+            "SelectCollection": "コレクションを選択する",
+            "Value": "価値",
+            "AreYouSure": "本気ですか？",
+            "AuthorInvalid": "著者のアドレスが無効です!",
+            "Address": "住所",
+            "CoverImage": "表紙画像",
+            "UploadIcon": "アップロードアイコン",
+            "CommissionAddressInvalid": "コミッションアドレスが無効です",
+            "OnSale": "発売中",
+            "OffSale": "オフセール",
+            "CreateCollection": "コレクションの作成",
+            "UpdateCollection": "コレクションを更新する",
+            "CollectionInfo": "コレクション情報",
+            "SelectAuthor": "著者を選択してください",
+            "NewItem": "新しいNFTコレクション",
+            "NamePlaceholder": "コレクション名を入力してください",
+            "DescPlaceholder": "コレクションの説明を入力してください",
+            "EndingIn": "で終わります",
+            "SubmitSeries": "シリーズを投稿する"
         }
     },
     "currencies": {
         "choose": "通貨を選択"
+    },
+    "connectedAccount": {
+        "Title": "アカウントを接続する",
+        "Success": "成功",
+        "YourAccountCreated": "アカウントが正常に作成されました。",
+        "YourAccountAlreadyCreated": "アカウントはすでに作成されており、使用する準備ができています"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "リザーブトークン",
+                        "amount": "額"
+                    },
+                    "small": {
+                        "reserveToken": "リザーブトークン",
+                        "amount": "額"
+                    }
+                },
+                "placeholders": {
+                    "amount": "額"
+                },
+                "btns": {
+                    "stake": "ステーク"
+                },
+                "stake": "ステーク",
+                "loading": "読み込み中"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "トークンErc20",
+                    "duration": "間隔",
+                    "bonusTokenFraction": "ボーナストークン端数",
+                    "popularToken": "人気トークン",
+                    "donations": "寄付",
+                    "rewardsRateFraction": "報酬率端数",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                },
+                "small": {
+                    "tokenErc20": "トークンErc20",
+                    "duration": "期間（日）",
+                    "bonusTokenFraction": "ボーナストークン端数",
+                    "popularToken": "人気トークン",
+                    "donations": "寄付",
+                    "rewardsRateFraction": "報酬率端数",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                }
+            },
+            "placeholders": {
+                "optional": "(オプション)",
+                "tuple": "タプル[]",
+                "number": "番号",
+                "address": "住所",
+                "fraction": "分数",
+                "integer": "整数",
+                "seconds": "秒",
+                "days": "日々",
+                "uint256": "単位256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "プールはありません"
+            },
+            "btns": {
+                "createPool": "プールの作成",
+                "createPoolInForm": "作成"
+            },
+            "createPool": "プールの作成",
+            "produce": "生産",
+            "loading": "読み込み中",
+            "viewInstancesList": "リストを更新"
+        }
     }
 }

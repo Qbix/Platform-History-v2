@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Bættu við {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Nafn notanda..."
     }
 }

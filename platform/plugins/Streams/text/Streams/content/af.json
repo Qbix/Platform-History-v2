@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Voeg {{streamDisplayType}} by"
+    },
+    "userChooser": {
+        "Placeholder": "Naam van &#39;n gebruiker..."
     }
 }

@@ -2,6 +2,9 @@
 /**
  * @module Users
  */
+
+use Google\Service\ShoppingContent\ReturnAddress;
+
 /**
  * Class representing 'Contact' rows in the 'Users' database
  * You can create an object of this class either to
@@ -200,7 +203,7 @@ class Users_Contact extends Base_Users_Contact
 				: Users::loggedInUser(true)->id;
 			Users::canManageContacts($asUserId, $userId, $label, true, true);
 		}
-		$limit = isset($options['limit']) ? $options['limit'] : false;
+		$limit = isset($options['limit']) ? $options['limit'] : null;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
 		
 		$criteria = compact('userId');
@@ -288,6 +291,40 @@ class Users_Contact extends Base_Users_Contact
 			));
 		}
 		return $result;
+	}
+
+	/**
+	 * Retrieve user IDs for contacts
+	 * 
+	 * @method fetchUserIds
+	 * @static
+	 * @param {string} $userId The userId to which the contacts are related
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.platform] You can pass the name of a platform to skip users who don't have an xid on this platform
+	 * @return {array}
+	 */
+	static function fetchUserIds($userId, $options = array())
+	{
+		$limit = isset($options['limit']) ? $options['limit'] : null;
+		$platform = isset($options['platform']) ? $options['platform'] : null;
+		if ($platform) {
+			$q = Users_Contact::select('contactUserId', 'c')
+			->select('e.xid')
+			->join(Users_ExternalTo::table(true, 'e'), array(
+				'e.userId' => 'c.contactUserId'
+			), 'INNER')->where(array(
+				'e.platform' => $platform
+			));
+		} else {
+			$q = Users_Contact::select('contactUserId');
+		}
+		$userIds = $q->where(array(
+				'userId' => $userId
+			))->groupBy('contactUserId')
+			->limit($limit)
+			->execute()
+			->fetchAll(PDO::FETCH_COLUMN, 0);
+		return $userIds;
 	}
 
 	/**

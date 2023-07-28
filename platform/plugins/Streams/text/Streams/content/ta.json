@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "{{streamDisplayType}} சேர்க்கவும்"
+    },
+    "userChooser": {
+        "Placeholder": "ஒரு பயனரின் பெயர்..."
     }
 }

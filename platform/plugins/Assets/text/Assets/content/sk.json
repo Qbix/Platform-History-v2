@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nemáte dostatočné povolenia na čítanie peňaženky tohto používateľa",
         "ThisUserHaveNoWallet": "Tento používateľ nemá priradenú žiadnu peňaženku",
         "TheWalletOfThisUserInvalid": "Peňaženka tohto používateľa je neplatná",
-        "WalletInvalid": "Adresa peňaženky je neplatná"
+        "WalletInvalid": "Adresa peňaženky je neplatná",
+        "CantManageFrozenSeries": "Nemôžete spravovať zmrazené série"
     },
     "admin": {
         "Title": "Správa majetku",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Získal {{amount}} kreditov",
         "Places_user_location": "Získal {{amount}} kreditov",
         "Streams_greeting": "Získal {{amount}} kreditov",
-        "YouHaveCreditsToStart": "Získal {{amount}} kreditov"
+        "YouHaveCreditsToStart": "Získal {{amount}} kreditov",
+        "InvitedUserFilledStream": "Získal {{amount}} kreditov",
+        "ForFillingStream": "Získal {{amount}} kreditov",
+        "CreatePrivateChat": "Využili ste {{amount}} kreditov"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informácie o platbe",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Vyberte príjemcu",
         "TransactionSuccess": "Úspech transakcie",
-        "OrTypeWalletAddress": "ALEBO zadajte adresu peňaženky príjemcu"
+        "OrTypeWalletAddress": "ALEBO zadajte adresu peňaženky príjemcu",
+        "AppCredits": "Kredity aplikácií"
     },
     "NFT": {
         "Title": "Názov",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Bol nárokovaný token „ {{title}} “.",
             "TokenWasLocked": "Token &quot; {{title}} &quot; bol uzamknutý",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; bol odomknutý"
+        },
+        "GenerateDescription": "alebo automaticky vygenerovať",
+        "collections": {
+            "Title": "zbierky",
+            "EnterTitle": "zadajte názov",
+            "EnterDescription": "zadajte popis",
+            "NewCollection": "Nová kolekcia",
+            "Name": "názov",
+            "Icon": "Ikona",
+            "Description": "Popis",
+            "Author": "Autor",
+            "SelectCollection": "Vyberte kolekciu",
+            "Value": "Hodnota",
+            "AreYouSure": "Si si istý?",
+            "AuthorInvalid": "Adresa autora je neplatná!",
+            "Address": "Adresa",
+            "CoverImage": "Titulný obrázok",
+            "UploadIcon": "Ikona nahrávania",
+            "CommissionAddressInvalid": "Adresa provízie je neplatná",
+            "OnSale": "na predaj",
+            "OffSale": "mimo predaj",
+            "CreateCollection": "Vytvoriť zbierku",
+            "UpdateCollection": "Aktualizovať kolekciu",
+            "CollectionInfo": "Informácie o zbierke",
+            "SelectAuthor": "Vyberte autora",
+            "NewItem": "Nová kolekcia NFT",
+            "NamePlaceholder": "Zadajte názov zbierky",
+            "DescPlaceholder": "Zadajte popis zbierky",
+            "EndingIn": "Koniec v",
+            "SubmitSeries": "Odoslať sériu"
         }
     },
     "currencies": {
         "choose": "Vyberte menu"
+    },
+    "connectedAccount": {
+        "Title": "Pripojiť účet",
+        "Success": "Úspech",
+        "YourAccountCreated": "Váš účet bol úspešne vytvorený!",
+        "YourAccountAlreadyCreated": "Váš účet je už vytvorený a pripravený na použitie"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervný token",
+                        "amount": "Suma"
+                    },
+                    "small": {
+                        "reserveToken": "rezervný token",
+                        "amount": "Suma"
+                    }
+                },
+                "placeholders": {
+                    "amount": "čiastka"
+                },
+                "btns": {
+                    "stake": "Kôl"
+                },
+                "stake": "Kôl",
+                "loading": "Načítava"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trvanie",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populárnyToken",
+                    "donations": "darov",
+                    "rewardsRateFraction": "odmenyRateFraction",
+                    "numerator": "čitateľ",
+                    "denominator": "menovateľ"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trvanie v dňoch",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populárnyToken",
+                    "donations": "darov",
+                    "rewardsRateFraction": "odmenyRateFraction",
+                    "numerator": "čitateľ",
+                    "denominator": "menovateľ"
+                }
+            },
+            "placeholders": {
+                "optional": "(voliteľné)",
+                "tuple": "násobný[]",
+                "number": "číslo",
+                "address": "adresu",
+                "fraction": "zlomok",
+                "integer": "celé číslo",
+                "seconds": "sekúnd",
+                "days": "dni",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nie sú tam žiadne bazény"
+            },
+            "btns": {
+                "createPool": "Vytvoriť fond",
+                "createPoolInForm": "Vytvorte"
+            },
+            "createPool": "Vytvoriť fond",
+            "produce": "Produkovať",
+            "loading": "Načítava",
+            "viewInstancesList": "Obnoviť zoznam"
+        }
     }
 }

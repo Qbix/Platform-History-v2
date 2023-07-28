@@ -32,7 +32,7 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 	typeIconsSize: {},
 	multiple: false,
 	filter: {
-		placeholder: "Start typing..."
+		
 	},
 	onRefresh: new Q.Event(),
 	onChoose: new Q.Event()

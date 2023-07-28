@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nema dovoljno dozvola za čitanje novčanika ovog korisnika",
         "ThisUserHaveNoWallet": "Ovaj korisnik nema dodijeljen novčanik",
         "TheWalletOfThisUserInvalid": "Novčanik ovog korisnika nije valjan",
-        "WalletInvalid": "Adresa novčanika nije važeća"
+        "WalletInvalid": "Adresa novčanika nije važeća",
+        "CantManageFrozenSeries": "Ne možete upravljati zamrznutim serijama"
     },
     "admin": {
         "Title": "Sredstva administrativna",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Zaradio {{amount}} bodova",
         "Places_user_location": "Zaradio {{amount}} bodova",
         "Streams_greeting": "Zaradio {{amount}} bodova",
-        "YouHaveCreditsToStart": "Zaradio {{amount}} bodova"
+        "YouHaveCreditsToStart": "Zaradio {{amount}} bodova",
+        "InvitedUserFilledStream": "Zaradio {{amount}} bodova",
+        "ForFillingStream": "Zaradio {{amount}} bodova",
+        "CreatePrivateChat": "Potrošeno {{amount}} kredita"
     },
     "subscriptions": {
         "infoTitle": "Postavite podatke o plaćanju",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Odaberite primatelja",
         "TransactionSuccess": "Uspjeh transakcije",
-        "OrTypeWalletAddress": "ILI upišite adresu novčanika primatelja"
+        "OrTypeWalletAddress": "ILI upišite adresu novčanika primatelja",
+        "AppCredits": "Zasluge za aplikaciju"
     },
     "NFT": {
         "Title": "Titula",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Preuzet je token &quot; {{title}} &quot;",
             "TokenWasLocked": "Token &quot; {{title}} &quot; je zaključan",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; je otključan"
+        },
+        "GenerateDescription": "ili automatski generirati",
+        "collections": {
+            "Title": "Zbirke",
+            "EnterTitle": "unesite naslov",
+            "EnterDescription": "unesite opis",
+            "NewCollection": "Nova kolekcija",
+            "Name": "Ime",
+            "Icon": "Ikona",
+            "Description": "Opis",
+            "Author": "Autor",
+            "SelectCollection": "Odaberite zbirku",
+            "Value": "Vrijednost",
+            "AreYouSure": "Jesi li siguran?",
+            "AuthorInvalid": "Adresa autora nije važeća!",
+            "Address": "Adresa",
+            "CoverImage": "Naslovna slika",
+            "UploadIcon": "Ikona za prijenos",
+            "CommissionAddressInvalid": "Adresa komisije nije važeća",
+            "OnSale": "na prodaju",
+            "OffSale": "izvan prodaje",
+            "CreateCollection": "Stvori zbirku",
+            "UpdateCollection": "Ažuriraj zbirku",
+            "CollectionInfo": "Informacije o zbirci",
+            "SelectAuthor": "Odaberite autora",
+            "NewItem": "Nova NFT kolekcija",
+            "NamePlaceholder": "Unesite naziv zbirke",
+            "DescPlaceholder": "Unesite opis zbirke",
+            "EndingIn": "Završava u",
+            "SubmitSeries": "Pošaljite seriju"
         }
     },
     "currencies": {
         "choose": "Odaberite valutu"
+    },
+    "connectedAccount": {
+        "Title": "Poveži račun",
+        "Success": "Uspjeh",
+        "YourAccountCreated": "Vaš račun je uspješno kreiran!",
+        "YourAccountAlreadyCreated": "Vaš račun je već kreiran i spreman za korištenje"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Iznos"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Iznos"
+                    }
+                },
+                "placeholders": {
+                    "amount": "iznos"
+                },
+                "btns": {
+                    "stake": "Ulog"
+                },
+                "stake": "Ulog",
+                "loading": "Učitavam"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trajanje",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacije",
+                    "rewardsRateFraction": "nagradeRateFraction",
+                    "numerator": "brojnik",
+                    "denominator": "nazivnik"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trajanje u danima",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacije",
+                    "rewardsRateFraction": "nagradeRateFraction",
+                    "numerator": "brojnik",
+                    "denominator": "nazivnik"
+                }
+            },
+            "placeholders": {
+                "optional": "(neobavezno)",
+                "tuple": "tuple[]",
+                "number": "broj",
+                "address": "adresa",
+                "fraction": "frakcija",
+                "integer": "cijeli broj",
+                "seconds": "sekundi",
+                "days": "dana",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nema bazena"
+            },
+            "btns": {
+                "createPool": "Stvori bazen",
+                "createPoolInForm": "Stvoriti"
+            },
+            "createPool": "Stvori bazen",
+            "produce": "Proizvoditi",
+            "loading": "Učitavam",
+            "viewInstancesList": "Osvježi popis"
+        }
     }
 }

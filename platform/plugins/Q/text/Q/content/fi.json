@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Skannaa QR-koodit"
+    },
+    "input": {
+        "Placeholder": "Aloita kirjoittaminen..."
     }
 }

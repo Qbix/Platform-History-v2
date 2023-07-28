@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "የዚህን ተጠቃሚ ቦርሳ ለማንበብ በቂ ፍቃዶች የሉም",
         "ThisUserHaveNoWallet": "ይህ ተጠቃሚ የተመደበ የኪስ ቦርሳ የለውም",
         "TheWalletOfThisUserInvalid": "የዚህ ተጠቃሚ ቦርሳ ልክ ያልሆነ ነው።",
-        "WalletInvalid": "የኪስ ቦርሳ አድራሻ ልክ አይደለም።"
+        "WalletInvalid": "የኪስ ቦርሳ አድራሻ ልክ አይደለም።",
+        "CantManageFrozenSeries": "የታሰሩ ተከታታይን ማስተዳደር አይችሉም"
     },
     "admin": {
         "Title": "ንብረቶች አስተዳደራዊ",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} ክሬዲት አግኝቷል",
         "Places_user_location": "{{amount}} ክሬዲት አግኝቷል",
         "Streams_greeting": "{{amount}} ክሬዲት አግኝቷል",
-        "YouHaveCreditsToStart": "{{amount}} ክሬዲት አግኝቷል"
+        "YouHaveCreditsToStart": "{{amount}} ክሬዲት አግኝቷል",
+        "InvitedUserFilledStream": "{{amount}} ክሬዲት አግኝቷል",
+        "ForFillingStream": "{{amount}} ክሬዲት አግኝቷል",
+        "CreatePrivateChat": "{{amount}} ክሬዲት አውጥቷል።"
     },
     "subscriptions": {
         "infoTitle": "የክፍያ መረጃ ያቀናብሩ",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "ተቀባይ ይምረጡ",
         "TransactionSuccess": "የግብይት ስኬት",
-        "OrTypeWalletAddress": "ወይም የተቀባይ ቦርሳ አድራሻ ይተይቡ"
+        "OrTypeWalletAddress": "ወይም የተቀባይ ቦርሳ አድራሻ ይተይቡ",
+        "AppCredits": "የመተግበሪያ ምስጋናዎች"
     },
     "NFT": {
         "Title": "ርዕስ",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "ማስመሰያ &quot; {{title}} &quot; ተብሏል",
             "TokenWasLocked": "ማስመሰያ &quot; {{title}} &quot; ተቆልፏል",
             "TokenWasUnlocked": "ማስመሰያ &quot; {{title}} &quot; ተከፍቷል።"
+        },
+        "GenerateDescription": "ወይም በራስ-አመንጭ",
+        "collections": {
+            "Title": "ስብስቦች",
+            "EnterTitle": "ርዕስ አስገባ",
+            "EnterDescription": "መግለጫ አስገባ",
+            "NewCollection": "አዲስ ስብስብ",
+            "Name": "ስም",
+            "Icon": "አዶ",
+            "Description": "መግለጫ",
+            "Author": "ደራሲ",
+            "SelectCollection": "ስብስብ ይምረጡ",
+            "Value": "ዋጋ",
+            "AreYouSure": "ኧረ",
+            "AuthorInvalid": "የደራሲ አድራሻ ልክ አይደለም!",
+            "Address": "አድራሻ",
+            "CoverImage": "የሽፋን ምስል",
+            "UploadIcon": "የመስቀል አዶ",
+            "CommissionAddressInvalid": "የኮሚሽኑ አድራሻ ልክ ያልሆነ ነው።",
+            "OnSale": "በሽያጭ ላይ",
+            "OffSale": "ከሽያጭ ውጪ",
+            "CreateCollection": "ስብስብ ይፍጠሩ",
+            "UpdateCollection": "ስብስብ አዘምን",
+            "CollectionInfo": "የስብስብ መረጃ",
+            "SelectAuthor": "ደራሲ ይምረጡ",
+            "NewItem": "አዲስ NFT ስብስብ",
+            "NamePlaceholder": "የስብስብ ስም አስገባ",
+            "DescPlaceholder": "የስብስብ መግለጫ አስገባ",
+            "EndingIn": "በማጠናቀቅ ላይ",
+            "SubmitSeries": "ተከታታይ አስገባ"
         }
     },
     "currencies": {
         "choose": "ምንዛሬ ይምረጡ"
+    },
+    "connectedAccount": {
+        "Title": "መለያ አገናኝ",
+        "Success": "ስኬት",
+        "YourAccountCreated": "መለያዎ በተሳካ ሁኔታ ተፈጥሯል!",
+        "YourAccountAlreadyCreated": "መለያዎ አስቀድሞ ተፈጥሯል እና ለመጠቀም ዝግጁ ነው።"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "መጠን"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "መጠን"
+                    }
+                },
+                "placeholders": {
+                    "amount": "መጠን"
+                },
+                "btns": {
+                    "stake": "ካስማ"
+                },
+                "stake": "ካስማ",
+                "loading": "በመጫን ላይ"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "ቆይታ",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "ታዋቂ ማስመሰያ",
+                    "donations": "ልገሳዎች",
+                    "rewardsRateFraction": "ሽልማቶችRateFraction",
+                    "numerator": "አሃዛዊ",
+                    "denominator": "አካታች"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "የሚቆይበት ጊዜ በቀናት ውስጥ",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "ታዋቂ ማስመሰያ",
+                    "donations": "ልገሳዎች",
+                    "rewardsRateFraction": "ሽልማቶችRateFraction",
+                    "numerator": "አሃዛዊ",
+                    "denominator": "አካታች"
+                }
+            },
+            "placeholders": {
+                "optional": "(አማራጭ)",
+                "tuple": "tuple[]",
+                "number": "ቁጥር",
+                "address": "አድራሻ",
+                "fraction": "ክፍልፋይ",
+                "integer": "ኢንቲጀር",
+                "seconds": "ሰከንዶች",
+                "days": "ቀናት",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ገንዳዎች የሉም"
+            },
+            "btns": {
+                "createPool": "ገንዳ ይፍጠሩ",
+                "createPoolInForm": "ፍጠር"
+            },
+            "createPool": "ገንዳ ይፍጠሩ",
+            "produce": "ማምረት",
+            "loading": "በመጫን ላይ",
+            "viewInstancesList": "ዝርዝር አድስ"
+        }
     }
 }

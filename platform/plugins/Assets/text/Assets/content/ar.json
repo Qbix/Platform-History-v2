@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "لا توجد أذونات كافية لقراءة محفظة هذا المستخدم",
         "ThisUserHaveNoWallet": "لم يتم تخصيص محفظة لهذا المستخدم",
         "TheWalletOfThisUserInvalid": "محفظة هذا المستخدم غير صالحة",
-        "WalletInvalid": "عنوان المحفظة غير صالح"
+        "WalletInvalid": "عنوان المحفظة غير صالح",
+        "CantManageFrozenSeries": "لا يمكنك إدارة المسلسلات المجمدة"
     },
     "admin": {
         "Title": "الأصول الإدارية",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "حصلت على {{amount}} نقطة",
         "Places_user_location": "حصلت على {{amount}} نقطة",
         "Streams_greeting": "حصلت على {{amount}} نقطة",
-        "YouHaveCreditsToStart": "حصلت على {{amount}} نقطة"
+        "YouHaveCreditsToStart": "حصلت على {{amount}} نقطة",
+        "InvitedUserFilledStream": "حصلت على {{amount}} نقطة",
+        "ForFillingStream": "حصلت على {{amount}} نقطة",
+        "CreatePrivateChat": "أنفق {{amount}} نقطة"
     },
     "subscriptions": {
         "infoTitle": "قم بتعيين معلومات الدفع",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "حدد المستلم",
         "TransactionSuccess": "نجاح الصفقة",
-        "OrTypeWalletAddress": "أو اكتب عنوان محفظة المستلم"
+        "OrTypeWalletAddress": "أو اكتب عنوان محفظة المستلم",
+        "AppCredits": "اعتمادات التطبيق"
     },
     "NFT": {
         "Title": "عنوان",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "تمت المطالبة بالرمز &quot; {{title}} &quot;",
             "TokenWasLocked": "تم قفل الرمز &quot; {{title}} &quot;",
             "TokenWasUnlocked": "تم إلغاء تأمين الرمز &quot; {{title}} &quot;"
+        },
+        "GenerateDescription": "أو إنشاء تلقائي",
+        "collections": {
+            "Title": "المجموعات",
+            "EnterTitle": "أدخل العنوان",
+            "EnterDescription": "أدخل الوصف",
+            "NewCollection": "مجموعة جديدة",
+            "Name": "اسم",
+            "Icon": "أيقونة",
+            "Description": "وصف",
+            "Author": "مؤلف",
+            "SelectCollection": "حدد المجموعة",
+            "Value": "قيمة",
+            "AreYouSure": "هل أنت متأكد؟",
+            "AuthorInvalid": "عنوان المؤلف غير صحيح!",
+            "Address": "عنوان",
+            "CoverImage": "صورة الغلاف",
+            "UploadIcon": "أيقونة التحميل",
+            "CommissionAddressInvalid": "عنوان العمولة غير صحيح",
+            "OnSale": "للبيع",
+            "OffSale": "بيع",
+            "CreateCollection": "إنشاء مجموعة",
+            "UpdateCollection": "تحديث المجموعة",
+            "CollectionInfo": "معلومات المجموعة",
+            "SelectAuthor": "حدد المؤلف",
+            "NewItem": "مجموعة NFT الجديدة",
+            "NamePlaceholder": "أدخل اسم المجموعة",
+            "DescPlaceholder": "أدخل وصف المجموعة",
+            "EndingIn": "تنتهي في",
+            "SubmitSeries": "إرسال سلسلة"
         }
     },
     "currencies": {
         "choose": "اختر عملة"
+    },
+    "connectedAccount": {
+        "Title": "ربط الحساب",
+        "Success": "نجاح",
+        "YourAccountCreated": "تم إنشاء حسابك بنجاح!",
+        "YourAccountAlreadyCreated": "تم إنشاء حسابك بالفعل وجاهز للاستخدام"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "amount": "كمية"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "amount": "كمية"
+                    }
+                },
+                "placeholders": {
+                    "amount": "كمية"
+                },
+                "btns": {
+                    "stake": "حصة"
+                },
+                "stake": "حصة",
+                "loading": "تحميل"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "الرمز المميز",
+                    "duration": "مدة",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "شعبي",
+                    "donations": "التبرعات",
+                    "rewardsRateFraction": "المكافآتالمعدل الكسر",
+                    "numerator": "البسط",
+                    "denominator": "المقام - صفة مشتركة - حالة"
+                },
+                "small": {
+                    "tokenErc20": "الرمز المميز",
+                    "duration": "المدة بالأيام",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "شعبي",
+                    "donations": "التبرعات",
+                    "rewardsRateFraction": "المكافآتالمعدل الكسر",
+                    "numerator": "البسط",
+                    "denominator": "المقام - صفة مشتركة - حالة"
+                }
+            },
+            "placeholders": {
+                "optional": "(خياري)",
+                "tuple": "مترابطة بيانية[]",
+                "number": "رقم",
+                "address": "عنوان",
+                "fraction": "جزء",
+                "integer": "عدد صحيح",
+                "seconds": "ثواني",
+                "days": "أيام",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "لا توجد حمامات سباحة"
+            },
+            "btns": {
+                "createPool": "إنشاء تجمع",
+                "createPoolInForm": "يخلق"
+            },
+            "createPool": "إنشاء تجمع",
+            "produce": "ينتج",
+            "loading": "تحميل",
+            "viewInstancesList": "تحديث القائمة"
+        }
     }
 }
