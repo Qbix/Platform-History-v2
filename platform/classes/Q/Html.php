@@ -1395,6 +1395,7 @@ class Q_Html
 	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndHash, set hash here to avoid calling it again
 	 * @param {string} [$options.skipFilename] Set to true, to return null for the filename and skip calling filenameFromUrl
 	 * @param {boolean} [$options.baseUrlPlaceholder=false] Pass true to have {{baseUrl}} placeholder instead of base URL in the string
+	 * @param {boolean} [$options.fullUrlForPlugin=false] Whether a PluginName placeholder resolves to a full URL
 	 * @return {array} A three-element array containing the url, filename, hash
 	 */
 	static function themedUrlFilenameAndHash ($filePath, $options = array())
@@ -1409,7 +1410,7 @@ class Q_Html
 			return $result;
 		}
 
-		$filePath2 = Q_Uri::interpolateUrl($filePath);
+		$filePath2 = Q_Uri::interpolateUrl($filePath, Q::ifset($options, 'fullUrlForPlugins'));
 		
 		$baseUrl = Q_Request::baseUrl();
 		if (Q::startsWith($filePath2, $baseUrl)) {

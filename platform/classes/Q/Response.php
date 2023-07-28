@@ -1443,6 +1443,8 @@ class Q_Response
 					$imported_for_slots[$stylesheet['slot']][$href] = "@import url($href);";
 				} else {
 					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
+					$stylesheetHref = Q_Html::themedUrl($stylesheet['href']);
+					$loaded[$stylesheetHref] = true;
 					if (!empty($loaded[$href])) {
 						continue;
 					}
