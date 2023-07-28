@@ -1209,19 +1209,19 @@ class Q_Response
 				$remote_scripts_for_slots[$script['slot']][] = $src;
 			} else {
 				list ($src, $filename) = Q_Html::themedUrlFilenameAndHash($src);
-				$scriptSrc= Q_Html::themedUrl($script['src'], array('ignoreEnvironment' => true));
-				$loaded[$scriptSrc] = true;
 				if (!empty($loaded[$src])) {
 					continue;
 				}
+				$scriptSrc = Q_Html::themedUrl($script['src'], array('ignoreEnvironment' => true));
+				$loaded[$scriptSrc] = true;
 				$loaded[$src] = true;
 				try {
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
-				$src_json = json_encode($src);
-				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);";
-				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);";
-				$scripts_for_slots[$script['slot']][] = "\n/* Included inline from $src */\n"
+				$src_json = json_encode($src, JSON_UNESCAPED_SLASHES);
+				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);\n\n";
+				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);\n\n";
+				$scripts_for_slots[$script['slot']][$src] = ''
 					. $currentScriptCode
 			 		. $ob->getClean()
 					. $currentScriptEndCode;
@@ -1230,11 +1230,19 @@ class Q_Response
 		$parts = array();
 		foreach ($remote_scripts_for_slots as $slot => $srcs) {
 			foreach ($srcs as $src) {
-				$parts[] = Q_Html::script('', array('src' => $src, 'data-slot' => $slot));
+				$parts[] = Q_Html::script('', array(
+					'src' => $src, 
+					'data-slot' => $slot
+				));
 			}
 		}
 		foreach ($scripts_for_slots as $slot => $texts) {
-			$parts[] = Q_Html::script(implode("\n\n", $texts), array('data-slot' => $slot));
+			foreach ($texts as $src => $text) {
+				$parts[] = Q_Html::script($text, array(
+					'data-src' => $src,
+					'data-slot' => $slot
+				));
+			}
 		}
 		if ($setLoaded) {
 			self::setScriptData('Q.addScript.loaded', $loaded);
@@ -1445,11 +1453,11 @@ class Q_Response
 					$imported_for_slots[$stylesheet['slot']][$href] = "@import url($href);";
 				} else {
 					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
-					$stylesheetHref = Q_Html::themedUrl($stylesheet['href'], array('ignoreEnvironment' => true));
-					$loaded[$stylesheetHref] = true;
 					if (!empty($loaded[$href])) {
 						continue;
 					}
+					$stylesheetHref = Q_Html::themedUrl($stylesheet['href'], array('ignoreEnvironment' => true));
+					$loaded[$stylesheetHref] = true;
 					$loaded[$href] = true;
 					try {
 						Q::includeFile($filename);
