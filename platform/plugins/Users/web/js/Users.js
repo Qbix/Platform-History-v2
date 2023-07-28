@@ -234,21 +234,39 @@
 			return;
 		}
 
-		Q.addScript("{{Users}}/js/web3/import.js", function () {
-			var scriptsToLoad = [
-				'{{Users}}/js/web3/ethers-5.2.umd.min.js',
-				'{{Users}}/js/web3/evm-chains.min.js',
-				//'{{Users}}/js/web3/walletconnect.min.js',
-				'{{Users}}/js/web3/web3.min.js',
-				//'{{Users}}/js/web3/web3modal.js'
-			];
-			Q.addScript(scriptsToLoad, function () {
-				Users.init.web3.complete = true;
+		var scriptsToLoad = [
+			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
+			'{{Users}}/js/web3/evm-chains.min.js',
+			'{{Users}}/js/web3/web3.min.js',
+			'https://unpkg.com/@walletconnect/ethereum-provider'
+		];
+		Q.addScript(scriptsToLoad, function () {
+			Users.init.web3.complete = true;
+
+			if (Users.Web3.ethereumProvider) {
 				callback && callback();
-			}, options);
-		}, {
-			type: "module"
-		});
+			} else {
+				window['@walletconnect/ethereum-provider'].EthereumProvider.init({
+					projectId: Q.getObject(['web3', Users.communityId, 'providers', 'walletconnect', 'projectId'], Q.Users.apps), // REQUIRED your projectId
+					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
+					qrModalOptions: { themeMode: "light" },
+					chains: [1], // REQUIRED chain ids
+					methods: ["eth_sendTransaction", "eth_requestAccounts", "personal_sign"],
+					events: ["chainChanged", "accountsChanged", "connect", "disconnect"],
+					metadata: {
+						name: Q.info.app,
+						//description: 'Demo Client as Wallet/Peer',
+						url: Q.info.baseUrl,
+						icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
+					},
+				}).then(function (ethereumProvider) {
+					Users.Web3.ethereumProvider = ethereumProvider;
+					callback && callback();
+				});
+			}
+
+
+		}, options);
 	};
 
 	Users.init.web3 = Q.getter(Users.init.web3);
@@ -4276,7 +4294,11 @@
 					position: "fixed",
 					"z-index": Q.zIndexTopmost() + 1
 				});
-				Web3.web3Modal.openModal();
+				Users.Web3.ethereumProvider.on("connect", function () {
+					Web3.provider = Users.Web3.ethereumProvider;
+					Q.handle(callback, null, [null, Web3.provider]);
+				});
+				Users.Web3.ethereumProvider.connect();
 				/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
 					ok: "Ok",
 					cancel: null
