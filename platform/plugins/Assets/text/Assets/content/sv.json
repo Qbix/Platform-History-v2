@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Inte tillräckliga behörigheter för att läsa plånbok för denna användare",
         "ThisUserHaveNoWallet": "Denna användare har ingen plånbok tilldelad",
         "TheWalletOfThisUserInvalid": "Den här användarens plånbok är ogiltig",
-        "WalletInvalid": "Ogiltig plånboksadress"
+        "WalletInvalid": "Ogiltig plånboksadress",
+        "CantManageFrozenSeries": "Du kan inte hantera frysta serier"
     },
     "admin": {
         "Title": "Tillgångar administrativa",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Fick {{amount}} poäng",
         "Places_user_location": "Fick {{amount}} poäng",
         "Streams_greeting": "Fick {{amount}} poäng",
-        "YouHaveCreditsToStart": "Fick {{amount}} poäng"
+        "YouHaveCreditsToStart": "Fick {{amount}} poäng",
+        "InvitedUserFilledStream": "Fick {{amount}} poäng",
+        "ForFillingStream": "Fick {{amount}} poäng",
+        "CreatePrivateChat": "Tillbringade {{amount}} poäng"
     },
     "subscriptions": {
         "infoTitle": "Ställ in betalningsinformation",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Välj mottagare",
         "TransactionSuccess": "Transaktionen lyckades",
-        "OrTypeWalletAddress": "ELLER skriv mottagarens plånboksadress"
+        "OrTypeWalletAddress": "ELLER skriv mottagarens plånboksadress",
+        "AppCredits": "Appkrediter"
     },
     "NFT": {
         "Title": "Titel",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; gjordes anspråk på",
             "TokenWasLocked": "Token &quot; {{title}} &quot; var låst",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; låstes upp"
+        },
+        "GenerateDescription": "eller automatiskt generera",
+        "collections": {
+            "Title": "Samlingar",
+            "EnterTitle": "ange titel",
+            "EnterDescription": "ange beskrivning",
+            "NewCollection": "Ny kollektion",
+            "Name": "namn",
+            "Icon": "Ikon",
+            "Description": "Beskrivning",
+            "Author": "Författare",
+            "SelectCollection": "Välj samling",
+            "Value": "Värde",
+            "AreYouSure": "Är du säker?",
+            "AuthorInvalid": "Författaradress ogiltig!",
+            "Address": "Adress",
+            "CoverImage": "Omslagsbild",
+            "UploadIcon": "Ladda upp ikon",
+            "CommissionAddressInvalid": "Kommissionens adress ogiltig",
+            "OnSale": "till salu",
+            "OffSale": "på rea",
+            "CreateCollection": "Skapa samling",
+            "UpdateCollection": "Uppdatera samling",
+            "CollectionInfo": "Samlingsinfo",
+            "SelectAuthor": "Välj författare",
+            "NewItem": "Ny NFT-kollektion",
+            "NamePlaceholder": "Ange samlingens namn",
+            "DescPlaceholder": "Ange samlingsbeskrivning",
+            "EndingIn": "Slutar i",
+            "SubmitSeries": "Skicka in en serie"
         }
     },
     "currencies": {
         "choose": "Välj en valuta"
+    },
+    "connectedAccount": {
+        "Title": "Anslut konto",
+        "Success": "Framgång",
+        "YourAccountCreated": "Ditt konto har skapats framgångsrikt!",
+        "YourAccountAlreadyCreated": "Ditt konto redan skapat och redo att användas"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Belopp"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Belopp"
+                    }
+                },
+                "placeholders": {
+                    "amount": "belopp"
+                },
+                "btns": {
+                    "stake": "Insats"
+                },
+                "stake": "Insats",
+                "loading": "Läser in"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varaktighet",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populär Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belöningarRateFraction",
+                    "numerator": "täljare",
+                    "denominator": "nämnare"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varaktighet i dagar",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populär Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belöningarRateFraction",
+                    "numerator": "täljare",
+                    "denominator": "nämnare"
+                }
+            },
+            "placeholders": {
+                "optional": "(frivillig)",
+                "tuple": "tuppel[]",
+                "number": "siffra",
+                "address": "adress",
+                "fraction": "fraktion",
+                "integer": "heltal",
+                "seconds": "sekunder",
+                "days": "dagar",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Det finns inga pooler"
+            },
+            "btns": {
+                "createPool": "Skapa pool",
+                "createPoolInForm": "Skapa"
+            },
+            "createPool": "Skapa pool",
+            "produce": "Producera",
+            "loading": "Läser in",
+            "viewInstancesList": "Uppdatera listan"
+        }
     }
 }

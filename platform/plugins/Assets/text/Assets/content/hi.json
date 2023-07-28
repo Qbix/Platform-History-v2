@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "इस उपयोगकर्ता के बटुए को पढ़ने के लिए पर्याप्त अनुमतियां नहीं हैं",
         "ThisUserHaveNoWallet": "इस उपयोगकर्ता को कोई वॉलेट असाइन नहीं किया गया है",
         "TheWalletOfThisUserInvalid": "इस उपयोगकर्ता का बटुआ अमान्य है",
-        "WalletInvalid": "बटुआ पता अमान्य"
+        "WalletInvalid": "बटुआ पता अमान्य",
+        "CantManageFrozenSeries": "आप जमे हुए श्रृंखला का प्रबंधन नहीं कर सकते"
     },
     "admin": {
         "Title": "संपत्ति प्रशासनिक",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} क्रेडिट अर्जित किए",
         "Places_user_location": "{{amount}} क्रेडिट अर्जित किए",
         "Streams_greeting": "{{amount}} क्रेडिट अर्जित किए",
-        "YouHaveCreditsToStart": "{{amount}} क्रेडिट अर्जित किए"
+        "YouHaveCreditsToStart": "{{amount}} क्रेडिट अर्जित किए",
+        "InvitedUserFilledStream": "{{amount}} क्रेडिट अर्जित किये",
+        "ForFillingStream": "{{amount}} क्रेडिट अर्जित किये",
+        "CreatePrivateChat": "{{amount}} क्रेडिट खर्च किये"
     },
     "subscriptions": {
         "infoTitle": "भुगतान जानकारी सेट करें",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "प्राप्तकर्ता का चयन करें",
         "TransactionSuccess": "लेन-देन की सफलता",
-        "OrTypeWalletAddress": "या प्राप्तकर्ता वॉलेट पता टाइप करें"
+        "OrTypeWalletAddress": "या प्राप्तकर्ता वॉलेट पता टाइप करें",
+        "AppCredits": "ऐप क्रेडिट"
     },
     "NFT": {
         "Title": "शीर्षक",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "टोकन &quot; {{title}} &quot; का दावा किया गया था",
             "TokenWasLocked": "टोकन &quot; {{title}} &quot; बंद कर दिया गया था",
             "TokenWasUnlocked": "टोकन &quot; {{title}} &quot; अनलॉक किया गया था"
+        },
+        "GenerateDescription": "या स्वतः उत्पन्न",
+        "collections": {
+            "Title": "संग्रह",
+            "EnterTitle": "शीर्षक दर्ज करें",
+            "EnterDescription": "विवरण दर्ज करें",
+            "NewCollection": "नया संग्रह",
+            "Name": "नाम",
+            "Icon": "आइकन",
+            "Description": "विवरण",
+            "Author": "लेखक",
+            "SelectCollection": "संग्रह का चयन करें",
+            "Value": "कीमत",
+            "AreYouSure": "क्या आपको यकीन है?",
+            "AuthorInvalid": "लेखक का पता अमान्य!",
+            "Address": "पता",
+            "CoverImage": "कवर छवि",
+            "UploadIcon": "अपलोड आइकन",
+            "CommissionAddressInvalid": "आयोग का पता अमान्य",
+            "OnSale": "बिक्री पर",
+            "OffSale": "सेल बंद",
+            "CreateCollection": "संग्रह बनाएँ",
+            "UpdateCollection": "अद्यतन संग्रह",
+            "CollectionInfo": "संग्रह जानकारी",
+            "SelectAuthor": "लेखक का चयन करें",
+            "NewItem": "नया एनएफटी संग्रह",
+            "NamePlaceholder": "संग्रह का नाम दर्ज करें",
+            "DescPlaceholder": "संग्रह विवरण दर्ज करें",
+            "EndingIn": "समाप्त हो रहा है",
+            "SubmitSeries": "एक शृंखला सबमिट करें"
         }
     },
     "currencies": {
         "choose": "एक मुद्रा चुनें"
+    },
+    "connectedAccount": {
+        "Title": "खाता कनेक्ट करें",
+        "Success": "सफलता",
+        "YourAccountCreated": "आपका खाता सफलतापूर्वक बन गया!",
+        "YourAccountAlreadyCreated": "आपका खाता पहले ही बन चुका है और उपयोग के लिए तैयार है"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "रिज़र्वटोकन",
+                        "amount": "मात्रा"
+                    },
+                    "small": {
+                        "reserveToken": "रिज़र्वटोकन",
+                        "amount": "मात्रा"
+                    }
+                },
+                "placeholders": {
+                    "amount": "मात्रा"
+                },
+                "btns": {
+                    "stake": "दांव लगाना"
+                },
+                "stake": "दांव लगाना",
+                "loading": "लोड हो रहा है"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "टोकनErc20",
+                    "duration": "अवधि",
+                    "bonusTokenFraction": "बोनसटोकनफ्रैक्शन",
+                    "popularToken": "लोकप्रिय टोकन",
+                    "donations": "दान",
+                    "rewardsRateFraction": "पुरस्कार दर अंश",
+                    "numerator": "मीटर",
+                    "denominator": "भाजक"
+                },
+                "small": {
+                    "tokenErc20": "टोकनErc20",
+                    "duration": "अवधि दिनों में",
+                    "bonusTokenFraction": "बोनसटोकनफ्रैक्शन",
+                    "popularToken": "लोकप्रिय टोकन",
+                    "donations": "दान",
+                    "rewardsRateFraction": "पुरस्कार दर अंश",
+                    "numerator": "मीटर",
+                    "denominator": "भाजक"
+                }
+            },
+            "placeholders": {
+                "optional": "(वैकल्पिक)",
+                "tuple": "टपल[]",
+                "number": "संख्या",
+                "address": "पता",
+                "fraction": "अंश",
+                "integer": "पूर्णांक",
+                "seconds": "सेकंड",
+                "days": "दिन",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "कोई पूल नहीं हैं"
+            },
+            "btns": {
+                "createPool": "पूल बनाएं",
+                "createPoolInForm": "बनाएं"
+            },
+            "createPool": "पूल बनाएं",
+            "produce": "उत्पाद",
+            "loading": "लोड हो रहा है",
+            "viewInstancesList": "सूची रीफ़्रेश करें"
+        }
     }
 }

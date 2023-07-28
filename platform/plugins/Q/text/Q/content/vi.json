@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Quét mã QR"
+    },
+    "input": {
+        "Placeholder": "Bắt đầu gõ..."
     }
 }

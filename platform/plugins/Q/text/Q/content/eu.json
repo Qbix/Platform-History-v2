@@ -153,5 +153,8 @@
     },
     "scan": {
         "QR": "Eskaneatu QR kodeak"
+    },
+    "input": {
+        "Placeholder": "Hasi idazten..."
     }
 }

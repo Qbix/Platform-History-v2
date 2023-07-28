@@ -153,5 +153,8 @@
     },
     "scan": {
         "QR": "I-scan ang mga QR code"
+    },
+    "input": {
+        "Placeholder": "Magsimulang mag-type..."
     }
 }

@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Niewystarczające uprawnienia do odczytu portfela tego użytkownika",
         "ThisUserHaveNoWallet": "Ten użytkownik nie ma przypisanego portfela",
         "TheWalletOfThisUserInvalid": "Portfel tego użytkownika jest nieprawidłowy",
-        "WalletInvalid": "Adres portfela jest nieprawidłowy"
+        "WalletInvalid": "Adres portfela jest nieprawidłowy",
+        "CantManageFrozenSeries": "Nie możesz zarządzać zamrożonymi seriami"
     },
     "admin": {
         "Title": "Majątek administracyjny",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Zdobyto {{amount}} kredytów",
         "Places_user_location": "Zdobyto {{amount}} kredytów",
         "Streams_greeting": "Zdobyto {{amount}} kredytów",
-        "YouHaveCreditsToStart": "Zdobyto {{amount}} kredytów"
+        "YouHaveCreditsToStart": "Zdobyto {{amount}} kredytów",
+        "InvitedUserFilledStream": "Zdobyto {{amount}} kredytów",
+        "ForFillingStream": "Zdobyto {{amount}} kredytów",
+        "CreatePrivateChat": "Wydano {{amount}} kredytów"
     },
     "subscriptions": {
         "infoTitle": "Ustaw informacje o płatności",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Wybierz odbiorcę",
         "TransactionSuccess": "Sukces transakcji",
-        "OrTypeWalletAddress": "LUB wpisz adres portfela odbiorcy"
+        "OrTypeWalletAddress": "LUB wpisz adres portfela odbiorcy",
+        "AppCredits": "Kredyty aplikacji"
     },
     "NFT": {
         "Title": "Tytuł",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Odebrano token „ {{title}} ”.",
             "TokenWasLocked": "Token „ {{title}} ” został zablokowany",
             "TokenWasUnlocked": "Token „ {{title}} ” został odblokowany"
+        },
+        "GenerateDescription": "lub wygenerować automatycznie",
+        "collections": {
+            "Title": "Kolekcje",
+            "EnterTitle": "wprowadź tytuł",
+            "EnterDescription": "wprowadź opis",
+            "NewCollection": "Nowa kolekcja",
+            "Name": "Nazwa",
+            "Icon": "Ikona",
+            "Description": "Opis",
+            "Author": "Autor",
+            "SelectCollection": "Wybierz kolekcję",
+            "Value": "Wartość",
+            "AreYouSure": "Jesteś pewny?",
+            "AuthorInvalid": "Nieprawidłowy adres autora!",
+            "Address": "Adres",
+            "CoverImage": "Okładka",
+            "UploadIcon": "Prześlij ikonę",
+            "CommissionAddressInvalid": "Adres komisji jest nieprawidłowy",
+            "OnSale": "na wyprzedaży",
+            "OffSale": "wyprzedane",
+            "CreateCollection": "Utwórz kolekcję",
+            "UpdateCollection": "Zaktualizuj kolekcję",
+            "CollectionInfo": "Informacje o kolekcji",
+            "SelectAuthor": "Wybierz autora",
+            "NewItem": "Nowa kolekcja NFT",
+            "NamePlaceholder": "Wpisz nazwę kolekcji",
+            "DescPlaceholder": "Wprowadź opis kolekcji",
+            "EndingIn": "Zakończenie w",
+            "SubmitSeries": "Prześlij serię"
         }
     },
     "currencies": {
         "choose": "Wybierz walutę"
+    },
+    "connectedAccount": {
+        "Title": "Połącz konto",
+        "Success": "Powodzenie",
+        "YourAccountCreated": "Twoje konto zostało pomyślnie utworzone!",
+        "YourAccountAlreadyCreated": "Twoje konto jest już utworzone i gotowe do użycia"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "amount": "Kwota"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "amount": "Kwota"
+                    }
+                },
+                "placeholders": {
+                    "amount": "kwota"
+                },
+                "btns": {
+                    "stake": "Stawka"
+                },
+                "stake": "Stawka",
+                "loading": "Ładowanie"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Czas trwania",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularnyToken",
+                    "donations": "darowizny",
+                    "rewardsRateFraction": "nagrodyUłamek stawki",
+                    "numerator": "licznik ułamka",
+                    "denominator": "mianownik"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Czas trwania w dniach",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularnyToken",
+                    "donations": "darowizny",
+                    "rewardsRateFraction": "nagrodyUłamek stawki",
+                    "numerator": "licznik ułamka",
+                    "denominator": "mianownik"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcjonalny)",
+                "tuple": "krotka []",
+                "number": "numer",
+                "address": "adres",
+                "fraction": "frakcja",
+                "integer": "liczba całkowita",
+                "seconds": "sekundy",
+                "days": "dni",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nie ma basenów"
+            },
+            "btns": {
+                "createPool": "Utwórz pulę",
+                "createPoolInForm": "Tworzyć"
+            },
+            "createPool": "Utwórz pulę",
+            "produce": "Produkować",
+            "loading": "Ładowanie",
+            "viewInstancesList": "Odśwież listę"
+        }
     }
 }

@@ -171,5 +171,11 @@
             "bio": "ఫోరమ్ ఎంగేజ్‌మెంట్ బాట్. https:\/\/engageusers.aiలో మీ స్వంతం చేసుకోండి",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "ఈ వినియోగదారు వాలెట్‌ని చదవడానికి తగినన్ని అనుమతులు లేవు",
+        "ThisUserHaveNoWallet": "ఈ వినియోగదారుకు వాలెట్ కేటాయించబడలేదు",
+        "TheWalletOfThisUserInvalid": "ఈ వినియోగదారు యొక్క వాలెట్ చెల్లదు",
+        "WalletInvalid": "వాలెట్ చిరునామా చెల్లదు"
     }
 }

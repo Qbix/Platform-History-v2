@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Lisää {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Käyttäjän nimi..."
     }
 }

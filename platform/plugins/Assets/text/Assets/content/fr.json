@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Autorisations insuffisantes pour lire le portefeuille de cet utilisateur",
         "ThisUserHaveNoWallet": "Cet utilisateur n&#39;a pas de portefeuille attribué",
         "TheWalletOfThisUserInvalid": "Le portefeuille de cet utilisateur n&#39;est pas valide",
-        "WalletInvalid": "Adresse de portefeuille invalide"
+        "WalletInvalid": "Adresse de portefeuille invalide",
+        "CantManageFrozenSeries": "Vous ne pouvez pas gérer les séries figées"
     },
     "admin": {
         "Title": "Actifs administratifs",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "A obtenu {{amount}} crédits",
         "Places_user_location": "A obtenu {{amount}} crédits",
         "Streams_greeting": "A obtenu {{amount}} crédits",
-        "YouHaveCreditsToStart": "A obtenu {{amount}} crédits"
+        "YouHaveCreditsToStart": "A obtenu {{amount}} crédits",
+        "InvitedUserFilledStream": "A obtenu {{amount}} crédits",
+        "ForFillingStream": "A obtenu {{amount}} crédits",
+        "CreatePrivateChat": "A dépensé {{amount}} crédits"
     },
     "subscriptions": {
         "infoTitle": "Définir les informations de paiement",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Sélectionnez le destinataire",
         "TransactionSuccess": "Succès de la transaction",
-        "OrTypeWalletAddress": "OU tapez l&#39;adresse du portefeuille du destinataire"
+        "OrTypeWalletAddress": "OU tapez l&#39;adresse du portefeuille du destinataire",
+        "AppCredits": "Crédits d&#39;application"
     },
     "NFT": {
         "Title": "Titre",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Le jeton &quot; {{title}} &quot; a été réclamé",
             "TokenWasLocked": "Le jeton &quot; {{title}} &quot; était verrouillé",
             "TokenWasUnlocked": "Le jeton &quot; {{title}} &quot; a été déverrouillé"
+        },
+        "GenerateDescription": "ou générer automatiquement",
+        "collections": {
+            "Title": "Collections",
+            "EnterTitle": "entrez le titre",
+            "EnterDescription": "entrez la description",
+            "NewCollection": "Nouvelle collection",
+            "Name": "Nom",
+            "Icon": "Icône",
+            "Description": "Description",
+            "Author": "Auteur",
+            "SelectCollection": "Sélectionner la collection",
+            "Value": "Valeur",
+            "AreYouSure": "Es-tu sûr?",
+            "AuthorInvalid": "Adresse de l&#39;auteur invalide !",
+            "Address": "Adresse",
+            "CoverImage": "Image de couverture",
+            "UploadIcon": "Icône de téléchargement",
+            "CommissionAddressInvalid": "Adresse de commission invalide",
+            "OnSale": "en soldes",
+            "OffSale": "hors vente",
+            "CreateCollection": "Créer une collection",
+            "UpdateCollection": "Mettre à jour la collecte",
+            "CollectionInfo": "Informations sur la collecte",
+            "SelectAuthor": "Sélectionnez l&#39;auteur",
+            "NewItem": "Nouvelle collection NFT",
+            "NamePlaceholder": "Entrez le nom de la collection",
+            "DescPlaceholder": "Entrez la description de la collection",
+            "EndingIn": "Se terminant en",
+            "SubmitSeries": "Soumettre une série"
         }
     },
     "currencies": {
         "choose": "Choisissez une devise"
+    },
+    "connectedAccount": {
+        "Title": "Connecter le compte",
+        "Success": "Succès",
+        "YourAccountCreated": "Votre compte a été créé avec succès !",
+        "YourAccountAlreadyCreated": "Votre compte déjà créé et prêt à être utilisé"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Montant"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Montant"
+                    }
+                },
+                "placeholders": {
+                    "amount": "montant"
+                },
+                "btns": {
+                    "stake": "Miser"
+                },
+                "stake": "Miser",
+                "loading": "Chargement"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "jetonErc20",
+                    "duration": "Durée",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "des dons",
+                    "rewardsRateFraction": "récompensesRateFraction",
+                    "numerator": "numérateur",
+                    "denominator": "dénominateur"
+                },
+                "small": {
+                    "tokenErc20": "jetonErc20",
+                    "duration": "Durée en jours",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "des dons",
+                    "rewardsRateFraction": "récompensesRateFraction",
+                    "numerator": "numérateur",
+                    "denominator": "dénominateur"
+                }
+            },
+            "placeholders": {
+                "optional": "(facultatif)",
+                "tuple": "tuple[]",
+                "number": "nombre",
+                "address": "adresse",
+                "fraction": "fraction",
+                "integer": "entier",
+                "seconds": "secondes",
+                "days": "jours",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Il n&#39;y a pas de piscines"
+            },
+            "btns": {
+                "createPool": "Créer un pool",
+                "createPoolInForm": "Créer"
+            },
+            "createPool": "Créer un pool",
+            "produce": "Produire",
+            "loading": "Chargement",
+            "viewInstancesList": "Rafraîchir la liste"
+        }
     }
 }

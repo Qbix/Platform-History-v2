@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Selle kasutaja rahakoti lugemiseks pole piisavalt õigusi",
         "ThisUserHaveNoWallet": "Sellele kasutajale pole rahakotti määratud",
         "TheWalletOfThisUserInvalid": "Selle kasutaja rahakott on kehtetu",
-        "WalletInvalid": "Rahakoti aadress on kehtetu"
+        "WalletInvalid": "Rahakoti aadress on kehtetu",
+        "CantManageFrozenSeries": "Sa ei saa hallata külmutatud seeriaid"
     },
     "admin": {
         "Title": "Varade haldus",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Teeniti {{amount}} ainepunkti",
         "Places_user_location": "Teeniti {{amount}} ainepunkti",
         "Streams_greeting": "Teeniti {{amount}} ainepunkti",
-        "YouHaveCreditsToStart": "Teeniti {{amount}} ainepunkti"
+        "YouHaveCreditsToStart": "Teeniti {{amount}} ainepunkti",
+        "InvitedUserFilledStream": "Teeniti {{amount}} ainepunkti",
+        "ForFillingStream": "Teeniti {{amount}} ainepunkti",
+        "CreatePrivateChat": "Kulutas {{amount}} krediiti"
     },
     "subscriptions": {
         "infoTitle": "Määra makseteave",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Valige adressaat",
         "TransactionSuccess": "Tehingu õnnestumine",
-        "OrTypeWalletAddress": "VÕI sisestage saaja rahakoti aadress"
+        "OrTypeWalletAddress": "VÕI sisestage saaja rahakoti aadress",
+        "AppCredits": "Rakenduse krediidid"
     },
     "NFT": {
         "Title": "Pealkiri",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; on nõutud",
             "TokenWasLocked": "Token &quot; {{title}} &quot; oli lukus",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; avati"
+        },
+        "GenerateDescription": "või automaatselt genereerida",
+        "collections": {
+            "Title": "Kollektsioonid",
+            "EnterTitle": "sisestage pealkiri",
+            "EnterDescription": "sisesta kirjeldus",
+            "NewCollection": "Uus kollektsioon",
+            "Name": "Nimi",
+            "Icon": "Ikoon",
+            "Description": "Kirjeldus",
+            "Author": "Autor",
+            "SelectCollection": "Valige kollektsioon",
+            "Value": "Väärtus",
+            "AreYouSure": "Oled sa kindel?",
+            "AuthorInvalid": "Autori aadress on kehtetu!",
+            "Address": "Aadress",
+            "CoverImage": "Kaanepilt",
+            "UploadIcon": "Üleslaadimise ikoon",
+            "CommissionAddressInvalid": "Komisjoni aadress on kehtetu",
+            "OnSale": "müügil",
+            "OffSale": "müügist maha",
+            "CreateCollection": "Loo kollektsioon",
+            "UpdateCollection": "Uuenda kollektsiooni",
+            "CollectionInfo": "Kogumise teave",
+            "SelectAuthor": "Valige autor",
+            "NewItem": "Uus NFT kollektsioon",
+            "NamePlaceholder": "Sisestage kogu nimi",
+            "DescPlaceholder": "Sisestage kollektsiooni kirjeldus",
+            "EndingIn": "Lõpetades",
+            "SubmitSeries": "Esitage seeria"
         }
     },
     "currencies": {
         "choose": "Valige valuuta"
+    },
+    "connectedAccount": {
+        "Title": "Ühendage konto",
+        "Success": "Edu",
+        "YourAccountCreated": "Teie konto loomine õnnestus!",
+        "YourAccountAlreadyCreated": "Teie konto on juba loodud ja kasutamiseks valmis"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Summa"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Summa"
+                    }
+                },
+                "placeholders": {
+                    "amount": "summa"
+                },
+                "btns": {
+                    "stake": "Panus"
+                },
+                "stake": "Panus",
+                "loading": "Laadimine"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kestus",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populaarne Token",
+                    "donations": "annetused",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "lugeja",
+                    "denominator": "nimetaja"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kestus päevades",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populaarne Token",
+                    "donations": "annetused",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "lugeja",
+                    "denominator": "nimetaja"
+                }
+            },
+            "placeholders": {
+                "optional": "(valikuline)",
+                "tuple": "mitmekordne[]",
+                "number": "number",
+                "address": "aadress",
+                "fraction": "murdosa",
+                "integer": "täisarv",
+                "seconds": "sekundit",
+                "days": "päevadel",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "unint64",
+                "uint32": "uint32",
+                "uint16": "unint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Basseine ei ole"
+            },
+            "btns": {
+                "createPool": "Loo bassein",
+                "createPoolInForm": "Loo"
+            },
+            "createPool": "Loo bassein",
+            "produce": "Toota",
+            "loading": "Laadimine",
+            "viewInstancesList": "Värskenda loendit"
+        }
     }
 }

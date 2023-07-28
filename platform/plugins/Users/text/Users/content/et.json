@@ -171,5 +171,11 @@
             "bio": "Foorumi kaasamisbot. Hankige oma aadressil https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Selle kasutaja rahakoti lugemiseks pole piisavalt õigusi",
+        "ThisUserHaveNoWallet": "Sellele kasutajale pole rahakotti määratud",
+        "TheWalletOfThisUserInvalid": "Selle kasutaja rahakott on kehtetu",
+        "WalletInvalid": "Rahakoti aadress on kehtetu"
     }
 }

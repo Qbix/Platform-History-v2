@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Scan cóid QR"
+    },
+    "input": {
+        "Placeholder": "Tosaigh ag clóscríobh..."
     }
 }

@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "אין מספיק הרשאות לקרוא את הארנק של המשתמש הזה",
         "ThisUserHaveNoWallet": "למשתמש זה לא הוקצה ארנק",
         "TheWalletOfThisUserInvalid": "הארנק של משתמש זה לא חוקי",
-        "WalletInvalid": "כתובת הארנק לא חוקית"
+        "WalletInvalid": "כתובת הארנק לא חוקית",
+        "CantManageFrozenSeries": "אי אפשר לנהל סדרות קפואות"
     },
     "admin": {
         "Title": "ניהול נכסים",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "זכה ב {{amount}} נקודות זכות",
         "Places_user_location": "זכה ב {{amount}} נקודות זכות",
         "Streams_greeting": "זכה ב {{amount}} נקודות זכות",
-        "YouHaveCreditsToStart": "זכה ב {{amount}} נקודות זכות"
+        "YouHaveCreditsToStart": "זכה ב {{amount}} נקודות זכות",
+        "InvitedUserFilledStream": "זכה ב {{amount}} נקודות זכות",
+        "ForFillingStream": "זכה ב {{amount}} נקודות זכות",
+        "CreatePrivateChat": "בזבז {{amount}} קרדיטים"
     },
     "subscriptions": {
         "infoTitle": "הגדר פרטי תשלום",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "בחר נמען",
         "TransactionSuccess": "הצלחת העסקה",
-        "OrTypeWalletAddress": "או הקלד את כתובת ארנק הנמען"
+        "OrTypeWalletAddress": "או הקלד את כתובת ארנק הנמען",
+        "AppCredits": "קרדיטים לאפליקציה"
     },
     "NFT": {
         "Title": "כותרת",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "האסימון &quot; {{title}} &quot; נתבע",
             "TokenWasLocked": "האסימון &quot; {{title}} &quot; ננעל",
             "TokenWasUnlocked": "האסימון &quot; {{title}} &quot; לא נעול"
+        },
+        "GenerateDescription": "או יצירה אוטומטית",
+        "collections": {
+            "Title": "אוספים",
+            "EnterTitle": "הזן כותרת",
+            "EnterDescription": "הזן תיאור",
+            "NewCollection": "קולקציה חדשה",
+            "Name": "שֵׁם",
+            "Icon": "סמל",
+            "Description": "תיאור",
+            "Author": "מְחַבֵּר",
+            "SelectCollection": "בחר אוסף",
+            "Value": "ערך",
+            "AreYouSure": "האם אתה בטוח?",
+            "AuthorInvalid": "כתובת המחבר לא חוקית!",
+            "Address": "כתובת",
+            "CoverImage": "תמונת שער",
+            "UploadIcon": "סמל העלאה",
+            "CommissionAddressInvalid": "כתובת הוועדה לא חוקית",
+            "OnSale": "במבצע",
+            "OffSale": "מחוץ למכירה",
+            "CreateCollection": "צור אוסף",
+            "UpdateCollection": "עדכן את האוסף",
+            "CollectionInfo": "מידע על אוסף",
+            "SelectAuthor": "בחר מחבר",
+            "NewItem": "קולקציית NFT חדשה",
+            "NamePlaceholder": "הזן את שם האוסף",
+            "DescPlaceholder": "הזן את תיאור האוסף",
+            "EndingIn": "מסתיים ב",
+            "SubmitSeries": "שלח סדרה"
         }
     },
     "currencies": {
         "choose": "בחר מטבע"
+    },
+    "connectedAccount": {
+        "Title": "חבר חשבון",
+        "Success": "הַצלָחָה",
+        "YourAccountCreated": "החשבון שלך נוצר בהצלחה!",
+        "YourAccountAlreadyCreated": "החשבון שלך כבר נוצר ומוכן לשימוש"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "כמות"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "כמות"
+                    }
+                },
+                "placeholders": {
+                    "amount": "כמות"
+                },
+                "btns": {
+                    "stake": "לְהַמֵר"
+                },
+                "stake": "לְהַמֵר",
+                "loading": "טוען"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "מֶשֶׁך",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "פופולריToken",
+                    "donations": "תרומות",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "מוֹנֶה",
+                    "denominator": "מְכַנֶה"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "משך ימים",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "פופולריToken",
+                    "donations": "תרומות",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "מוֹנֶה",
+                    "denominator": "מְכַנֶה"
+                }
+            },
+            "placeholders": {
+                "optional": "(אופציונאלי)",
+                "tuple": "tuple[]",
+                "number": "מספר",
+                "address": "כתובת",
+                "fraction": "שבריר",
+                "integer": "מספר שלם",
+                "seconds": "שניות",
+                "days": "ימים",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "אין בריכות"
+            },
+            "btns": {
+                "createPool": "צור מאגר",
+                "createPoolInForm": "לִיצוֹר"
+            },
+            "createPool": "צור מאגר",
+            "produce": "ליצר",
+            "loading": "טוען",
+            "viewInstancesList": "רשימת רענון"
+        }
     }
 }

@@ -171,5 +171,11 @@
             "bio": "ಫೋರಮ್ ಎಂಗೇಜ್‌ಮೆಂಟ್ ಬೋಟ್. https:\/\/engageusers.ai ನಲ್ಲಿ ನಿಮ್ಮದೇ ಆದದನ್ನು ಪಡೆಯಿರಿ",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "ಈ ಬಳಕೆದಾರರ ವಾಲೆಟ್ ಅನ್ನು ಓದಲು ಸಾಕಷ್ಟು ಅನುಮತಿಗಳಿಲ್ಲ",
+        "ThisUserHaveNoWallet": "ಈ ಬಳಕೆದಾರರಿಗೆ ಯಾವುದೇ ವ್ಯಾಲೆಟ್ ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
+        "TheWalletOfThisUserInvalid": "ಈ ಬಳಕೆದಾರರ ವಾಲೆಟ್ ಅಮಾನ್ಯವಾಗಿದೆ",
+        "WalletInvalid": "ವಾಲೆಟ್ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ"
     }
 }

@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nepakanka leidimų skaityti šio naudotojo piniginę",
         "ThisUserHaveNoWallet": "Šiam vartotojui nepriskirta piniginė",
         "TheWalletOfThisUserInvalid": "Šio naudotojo piniginė negalioja",
-        "WalletInvalid": "Netinkamas piniginės adresas"
+        "WalletInvalid": "Netinkamas piniginės adresas",
+        "CantManageFrozenSeries": "Negalite valdyti šaldytų serijų"
     },
     "admin": {
         "Title": "Turtas administracinis",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Uždirbo {{amount}} kreditus",
         "Places_user_location": "Uždirbo {{amount}} kreditus",
         "Streams_greeting": "Uždirbo {{amount}} kreditus",
-        "YouHaveCreditsToStart": "Uždirbo {{amount}} kreditus"
+        "YouHaveCreditsToStart": "Uždirbo {{amount}} kreditus",
+        "InvitedUserFilledStream": "Uždirbo {{amount}} kreditus",
+        "ForFillingStream": "Uždirbo {{amount}} kreditus",
+        "CreatePrivateChat": "Išleido {{amount}} kreditus"
     },
     "subscriptions": {
         "infoTitle": "Nustatykite mokėjimo informaciją",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Pasirinkite gavėją",
         "TransactionSuccess": "Sandorio sėkmė",
-        "OrTypeWalletAddress": "ARBA įveskite gavėjo piniginės adresą"
+        "OrTypeWalletAddress": "ARBA įveskite gavėjo piniginės adresą",
+        "AppCredits": "Programos kreditai"
     },
     "NFT": {
         "Title": "Pavadinimas",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Žetonas „ {{title}} “ buvo paimtas",
             "TokenWasLocked": "Žetonas „ {{title}} “ buvo užrakintas",
             "TokenWasUnlocked": "Žetonas „ {{title}} “ buvo atrakintas"
+        },
+        "GenerateDescription": "arba generuoti automatiškai",
+        "collections": {
+            "Title": "Kolekcijos",
+            "EnterTitle": "įveskite pavadinimą",
+            "EnterDescription": "įveskite aprašymą",
+            "NewCollection": "Nauja kolekcija",
+            "Name": "vardas",
+            "Icon": "Piktograma",
+            "Description": "apibūdinimas",
+            "Author": "Autorius",
+            "SelectCollection": "Pasirinkite kolekciją",
+            "Value": "Vertė",
+            "AreYouSure": "Ar tu tuo tikras?",
+            "AuthorInvalid": "Neteisingas autoriaus adresas!",
+            "Address": "Adresas",
+            "CoverImage": "Viršelio vaizdas",
+            "UploadIcon": "Įkėlimo piktograma",
+            "CommissionAddressInvalid": "Komisijos adresas neteisingas",
+            "OnSale": "Išpardavimas",
+            "OffSale": "išpardavimas",
+            "CreateCollection": "Sukurti kolekciją",
+            "UpdateCollection": "Atnaujinti kolekciją",
+            "CollectionInfo": "Kolekcijos informacija",
+            "SelectAuthor": "Pasirinkite autorių",
+            "NewItem": "Nauja NFT kolekcija",
+            "NamePlaceholder": "Įveskite kolekcijos pavadinimą",
+            "DescPlaceholder": "Įveskite kolekcijos aprašymą",
+            "EndingIn": "Baigiasi",
+            "SubmitSeries": "Pateikite seriją"
         }
     },
     "currencies": {
         "choose": "Pasirinkite valiutą"
+    },
+    "connectedAccount": {
+        "Title": "Susieti paskyrą",
+        "Success": "Sėkmė",
+        "YourAccountCreated": "Jūsų paskyra sėkmingai sukurta!",
+        "YourAccountAlreadyCreated": "Jūsų paskyra jau sukurta ir paruošta naudoti"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervo ženklas",
+                        "amount": "Suma"
+                    },
+                    "small": {
+                        "reserveToken": "rezervo ženklas",
+                        "amount": "Suma"
+                    }
+                },
+                "placeholders": {
+                    "amount": "suma"
+                },
+                "btns": {
+                    "stake": "Stalas"
+                },
+                "stake": "Stalas",
+                "loading": "Įkeliama"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trukmė",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populiarus Tokenas",
+                    "donations": "aukos",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitiklis",
+                    "denominator": "vardiklis"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trukmė dienomis",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populiarus Tokenas",
+                    "donations": "aukos",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitiklis",
+                    "denominator": "vardiklis"
+                }
+            },
+            "placeholders": {
+                "optional": "(neprivaloma)",
+                "tuple": "rinkinys[]",
+                "number": "numerį",
+                "address": "adresu",
+                "fraction": "trupmena",
+                "integer": "sveikasis skaičius",
+                "seconds": "sekundžių",
+                "days": "dienų",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Baseinų nėra"
+            },
+            "btns": {
+                "createPool": "Sukurti baseiną",
+                "createPoolInForm": "Sukurti"
+            },
+            "createPool": "Sukurti baseiną",
+            "produce": "Gaminti",
+            "loading": "Įkeliama",
+            "viewInstancesList": "Atnaujinti sąrašą"
+        }
     }
 }

@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "สิทธิ์ไม่เพียงพอที่จะอ่านกระเป๋าเงินของผู้ใช้รายนี้",
         "ThisUserHaveNoWallet": "ผู้ใช้รายนี้ไม่ได้กำหนดกระเป๋าเงิน",
         "TheWalletOfThisUserInvalid": "กระเป๋าเงินของผู้ใช้รายนี้ไม่ถูกต้อง",
-        "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง"
+        "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง",
+        "CantManageFrozenSeries": "คุณไม่สามารถจัดการซีรีส์แช่แข็งได้"
     },
     "admin": {
         "Title": "การบริหารสินทรัพย์",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "ได้รับ {{amount}} เครดิต",
         "Places_user_location": "ได้รับ {{amount}} เครดิต",
         "Streams_greeting": "ได้รับ {{amount}} เครดิต",
-        "YouHaveCreditsToStart": "ได้รับ {{amount}} เครดิต"
+        "YouHaveCreditsToStart": "ได้รับ {{amount}} เครดิต",
+        "InvitedUserFilledStream": "ได้รับ {{amount}} เครดิต",
+        "ForFillingStream": "ได้รับ {{amount}} เครดิต",
+        "CreatePrivateChat": "ใช้จ่าย {{amount}} เครดิต"
     },
     "subscriptions": {
         "infoTitle": "กำหนดข้อมูลการชำระเงิน",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "เลือกผู้รับ",
         "TransactionSuccess": "ความสำเร็จของการทำธุรกรรม",
-        "OrTypeWalletAddress": "หรือพิมพ์ที่อยู่กระเป๋าสตางค์ของผู้รับ"
+        "OrTypeWalletAddress": "หรือพิมพ์ที่อยู่กระเป๋าสตางค์ของผู้รับ",
+        "AppCredits": "เครดิตแอป"
     },
     "NFT": {
         "Title": "ชื่อ",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "โทเค็น &quot; {{title}} &quot; ถูกอ้างสิทธิ์",
             "TokenWasLocked": "โทเค็น &quot; {{title}} &quot; ถูกล็อค",
             "TokenWasUnlocked": "โทเค็น &quot; {{title}} &quot; ถูกปลดล็อค"
+        },
+        "GenerateDescription": "หรือสร้างอัตโนมัติ",
+        "collections": {
+            "Title": "คอลเลกชัน",
+            "EnterTitle": "ใส่ชื่อเรื่อง",
+            "EnterDescription": "ป้อนคำอธิบาย",
+            "NewCollection": "คอลเลกชันใหม่",
+            "Name": "ชื่อ",
+            "Icon": "ไอคอน",
+            "Description": "คำอธิบาย",
+            "Author": "ผู้เขียน",
+            "SelectCollection": "เลือกคอลเลกชัน",
+            "Value": "ค่า",
+            "AreYouSure": "คุณแน่ใจไหม?",
+            "AuthorInvalid": "ที่อยู่ผู้เขียนไม่ถูกต้อง!",
+            "Address": "ที่อยู่",
+            "CoverImage": "ภาพหน้าปก",
+            "UploadIcon": "ไอคอนอัปโหลด",
+            "CommissionAddressInvalid": "ที่อยู่ค่าคอมมิชชันไม่ถูกต้อง",
+            "OnSale": "ลดราคา",
+            "OffSale": "ปิดการขาย",
+            "CreateCollection": "สร้างคอลเลกชัน",
+            "UpdateCollection": "อัปเดตคอลเลกชัน",
+            "CollectionInfo": "ข้อมูลคอลเลกชัน",
+            "SelectAuthor": "เลือกผู้เขียน",
+            "NewItem": "คอลเลกชันใหม่ของ NFT",
+            "NamePlaceholder": "ป้อนชื่อคอลเลกชัน",
+            "DescPlaceholder": "ป้อนคำอธิบายคอลเลกชัน",
+            "EndingIn": "สิ้นสุดใน",
+            "SubmitSeries": "ส่งซีรีส์"
         }
     },
     "currencies": {
         "choose": "เลือกสกุลเงิน"
+    },
+    "connectedAccount": {
+        "Title": "เชื่อมต่อบัญชี",
+        "Success": "ความสำเร็จ",
+        "YourAccountCreated": "สร้างบัญชีของคุณสำเร็จแล้ว!",
+        "YourAccountAlreadyCreated": "บัญชีของคุณสร้างแล้วและพร้อมใช้งาน"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "โทเค็นสำรอง",
+                        "amount": "จำนวน"
+                    },
+                    "small": {
+                        "reserveToken": "โทเค็นสำรอง",
+                        "amount": "จำนวน"
+                    }
+                },
+                "placeholders": {
+                    "amount": "จำนวน"
+                },
+                "btns": {
+                    "stake": "เงินเดิมพัน"
+                },
+                "stake": "เงินเดิมพัน",
+                "loading": "กำลังโหลด"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "โทเค็นErc20",
+                    "duration": "ระยะเวลา",
+                    "bonusTokenFraction": "โบนัสโทเค็นเศษส่วน",
+                    "popularToken": "โทเค็นยอดนิยม",
+                    "donations": "การบริจาค",
+                    "rewardsRateFraction": "รางวัลอัตราเศษส่วน",
+                    "numerator": "เศษ",
+                    "denominator": "ตัวส่วน"
+                },
+                "small": {
+                    "tokenErc20": "โทเค็นErc20",
+                    "duration": "ระยะเวลาเป็นวัน",
+                    "bonusTokenFraction": "โบนัสโทเค็นเศษส่วน",
+                    "popularToken": "โทเค็นยอดนิยม",
+                    "donations": "การบริจาค",
+                    "rewardsRateFraction": "รางวัลอัตราเศษส่วน",
+                    "numerator": "เศษ",
+                    "denominator": "ตัวส่วน"
+                }
+            },
+            "placeholders": {
+                "optional": "(ไม่จำเป็น)",
+                "tuple": "ทูเพิล[]",
+                "number": "ตัวเลข",
+                "address": "ที่อยู่",
+                "fraction": "เศษส่วน",
+                "integer": "จำนวนเต็ม",
+                "seconds": "วินาที",
+                "days": "วัน",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ไม่มีสระว่ายน้ำ"
+            },
+            "btns": {
+                "createPool": "สร้างพูล",
+                "createPoolInForm": "สร้าง"
+            },
+            "createPool": "สร้างพูล",
+            "produce": "ผลิต",
+            "loading": "กำลังโหลด",
+            "viewInstancesList": "รีเฟรชรายการ"
+        }
     }
 }

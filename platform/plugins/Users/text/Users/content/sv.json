@@ -171,5 +171,11 @@
             "bio": "Forum engagemang bot. Skaffa din egen på https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Inte tillräckliga behörigheter för att läsa plånbok för denna användare",
+        "ThisUserHaveNoWallet": "Denna användare har ingen plånbok tilldelad",
+        "TheWalletOfThisUserInvalid": "Den här användarens plånbok är ogiltig",
+        "WalletInvalid": "Ogiltig plånboksadress"
     }
 }

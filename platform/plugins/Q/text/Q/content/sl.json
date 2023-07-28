@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Skenirajte kode QR"
+    },
+    "input": {
+        "Placeholder": "Začni tipkati ..."
     }
 }

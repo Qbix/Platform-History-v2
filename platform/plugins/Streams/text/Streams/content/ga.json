@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Cuir {{streamDisplayType}} leis"
+    },
+    "userChooser": {
+        "Placeholder": "Ainm úsáideora..."
     }
 }

@@ -171,5 +171,11 @@
             "bio": "Forum-Engagement-Bot. Holen Sie sich Ihre eigene unter https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Nicht genügend Berechtigungen zum Lesen der Wallet dieses Benutzers",
+        "ThisUserHaveNoWallet": "Diesem Benutzer ist kein Wallet zugewiesen",
+        "TheWalletOfThisUserInvalid": "Das Wallet dieses Benutzers ist ungültig",
+        "WalletInvalid": "Wallet-Adresse ungültig"
     }
 }

@@ -171,5 +171,11 @@
             "bio": "Robot na zapojenie fóra. Získajte svoj vlastný na https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Nemáte dostatočné povolenia na čítanie peňaženky tohto používateľa",
+        "ThisUserHaveNoWallet": "Tento používateľ nemá priradenú žiadnu peňaženku",
+        "TheWalletOfThisUserInvalid": "Peňaženka tohto používateľa je neplatná",
+        "WalletInvalid": "Adresa peňaženky je neplatná"
     }
 }

@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Skanna QR-koder"
+    },
+    "input": {
+        "Placeholder": "Börja skriva..."
     }
 }

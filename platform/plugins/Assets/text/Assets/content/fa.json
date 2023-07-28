@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "مجوزهای کافی برای خواندن کیف پول این کاربر وجود ندارد",
         "ThisUserHaveNoWallet": "این کاربر هیچ کیف پولی اختصاص ندارد",
         "TheWalletOfThisUserInvalid": "کیف پول این کاربر نامعتبر است",
-        "WalletInvalid": "آدرس کیف پول نامعتبر است"
+        "WalletInvalid": "آدرس کیف پول نامعتبر است",
+        "CantManageFrozenSeries": "شما نمی توانید سریال های فریز شده را مدیریت کنید"
     },
     "admin": {
         "Title": "اداری دارایی ها",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} اعتبار کسب کرد",
         "Places_user_location": "{{amount}} اعتبار کسب کرد",
         "Streams_greeting": "{{amount}} اعتبار کسب کرد",
-        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد"
+        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد",
+        "InvitedUserFilledStream": "{{amount}} اعتبار کسب کرد",
+        "ForFillingStream": "{{amount}} اعتبار کسب کرد",
+        "CreatePrivateChat": "{{amount}} اعتبار هزینه کرد"
     },
     "subscriptions": {
         "infoTitle": "تنظیم اطلاعات پرداخت",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "گیرنده را انتخاب کنید",
         "TransactionSuccess": "موفقیت در معامله",
-        "OrTypeWalletAddress": "یا آدرس کیف پول گیرنده را تایپ کنید"
+        "OrTypeWalletAddress": "یا آدرس کیف پول گیرنده را تایپ کنید",
+        "AppCredits": "اعتبار برنامه"
     },
     "NFT": {
         "Title": "عنوان",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "توکن &quot; {{title}} &quot; ادعا شد",
             "TokenWasLocked": "توکن &quot; {{title}} &quot; قفل شد",
             "TokenWasUnlocked": "رمز &quot; {{title}} &quot; باز شد"
+        },
+        "GenerateDescription": "یا تولید خودکار",
+        "collections": {
+            "Title": "مجموعه ها",
+            "EnterTitle": "عنوان را وارد کنید",
+            "EnterDescription": "توضیحات را وارد کنید",
+            "NewCollection": "مجموعه جدید",
+            "Name": "نام",
+            "Icon": "آیکون",
+            "Description": "شرح",
+            "Author": "نویسنده",
+            "SelectCollection": "مجموعه را انتخاب کنید",
+            "Value": "ارزش",
+            "AreYouSure": "مطمئنی؟",
+            "AuthorInvalid": "آدرس نویسنده نامعتبر است!",
+            "Address": "نشانی",
+            "CoverImage": "تصویر روی جلد",
+            "UploadIcon": "نماد آپلود",
+            "CommissionAddressInvalid": "آدرس کمیسیون نامعتبر است",
+            "OnSale": "حراج",
+            "OffSale": "حراج",
+            "CreateCollection": "ایجاد مجموعه",
+            "UpdateCollection": "به روز رسانی مجموعه",
+            "CollectionInfo": "اطلاعات مجموعه",
+            "SelectAuthor": "نویسنده را انتخاب کنید",
+            "NewItem": "مجموعه جدید NFT",
+            "NamePlaceholder": "نام مجموعه را وارد کنید",
+            "DescPlaceholder": "توضیحات مجموعه را وارد کنید",
+            "EndingIn": "پایان در",
+            "SubmitSeries": "یک سری ارسال کنید"
         }
     },
     "currencies": {
         "choose": "یک ارز را انتخاب کنید"
+    },
+    "connectedAccount": {
+        "Title": "اتصال حساب",
+        "Success": "موفقیت",
+        "YourAccountCreated": "حساب شما با موفقیت ایجاد شد!",
+        "YourAccountAlreadyCreated": "حساب شما قبلا ایجاد شده و آماده استفاده است"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "رزرو توکن",
+                        "amount": "میزان"
+                    },
+                    "small": {
+                        "reserveToken": "رزرو توکن",
+                        "amount": "میزان"
+                    }
+                },
+                "placeholders": {
+                    "amount": "میزان"
+                },
+                "btns": {
+                    "stake": "سهام"
+                },
+                "stake": "سهام",
+                "loading": "بارگذاری"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "مدت زمان",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "محبوب توکن",
+                    "donations": "کمک های مالی",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "صورت کسر",
+                    "denominator": "مخرج"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "مدت زمان بر حسب روز",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "محبوب توکن",
+                    "donations": "کمک های مالی",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "صورت کسر",
+                    "denominator": "مخرج"
+                }
+            },
+            "placeholders": {
+                "optional": "(اختیاری)",
+                "tuple": "چندتایی[]",
+                "number": "عدد",
+                "address": "نشانی",
+                "fraction": "کسر",
+                "integer": "عدد صحیح",
+                "seconds": "ثانیه",
+                "days": "روزها",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "هیچ استخری وجود ندارد"
+            },
+            "btns": {
+                "createPool": "استخر ایجاد کنید",
+                "createPoolInForm": "ايجاد كردن"
+            },
+            "createPool": "استخر ایجاد کنید",
+            "produce": "تولید کردن",
+            "loading": "بارگذاری",
+            "viewInstancesList": "فهرست بازخوانی کنید"
+        }
     }
 }

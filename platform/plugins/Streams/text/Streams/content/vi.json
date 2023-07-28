@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Thêm {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Tên người dùng..."
     }
 }

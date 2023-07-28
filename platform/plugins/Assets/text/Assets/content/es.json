@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "No hay suficientes permisos para leer la billetera de este usuario",
         "ThisUserHaveNoWallet": "Este usuario no tiene billetera asignada",
         "TheWalletOfThisUserInvalid": "La billetera de este usuario no es válida",
-        "WalletInvalid": "Dirección de billetera no válida"
+        "WalletInvalid": "Dirección de billetera no válida",
+        "CantManageFrozenSeries": "No puedes gestionar series congeladas"
     },
     "admin": {
         "Title": "Administrativo de bienes",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Obtuvo {{amount}} créditos",
         "Places_user_location": "Obtuvo {{amount}} créditos",
         "Streams_greeting": "Obtuvo {{amount}} créditos",
-        "YouHaveCreditsToStart": "Obtuvo {{amount}} créditos"
+        "YouHaveCreditsToStart": "Obtuvo {{amount}} créditos",
+        "InvitedUserFilledStream": "Obtuvo {{amount}} créditos",
+        "ForFillingStream": "Obtuvo {{amount}} créditos",
+        "CreatePrivateChat": "Gastó {{amount}} créditos"
     },
     "subscriptions": {
         "infoTitle": "Establecer información de pago",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Seleccionar destinatario",
         "TransactionSuccess": "Éxito de la transacción",
-        "OrTypeWalletAddress": "O escriba la dirección de la billetera del destinatario"
+        "OrTypeWalletAddress": "O escriba la dirección de la billetera del destinatario",
+        "AppCredits": "Créditos de la aplicación"
     },
     "NFT": {
         "Title": "Título",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Se reclamó el token &quot; {{title}} &quot;",
             "TokenWasLocked": "El token &quot; {{title}} &quot; estaba bloqueado",
             "TokenWasUnlocked": "Se desbloqueó el token &quot; {{title}} &quot;"
+        },
+        "GenerateDescription": "o generar automáticamente",
+        "collections": {
+            "Title": "Colecciones",
+            "EnterTitle": "ingrese el título",
+            "EnterDescription": "ingrese la descripción",
+            "NewCollection": "Nueva colección",
+            "Name": "Nombre",
+            "Icon": "Icono",
+            "Description": "Descripción",
+            "Author": "Autor",
+            "SelectCollection": "Seleccionar colección",
+            "Value": "Valor",
+            "AreYouSure": "¿Está seguro?",
+            "AuthorInvalid": "¡La dirección del autor no es válida!",
+            "Address": "DIRECCIÓN",
+            "CoverImage": "Imagen de portada",
+            "UploadIcon": "Subir icono",
+            "CommissionAddressInvalid": "Dirección de la comisión inválida",
+            "OnSale": "en venta",
+            "OffSale": "en descuento",
+            "CreateCollection": "Crear colección",
+            "UpdateCollection": "Actualizar colección",
+            "CollectionInfo": "Información de la colección",
+            "SelectAuthor": "Seleccionar autor",
+            "NewItem": "Nueva colección NFT",
+            "NamePlaceholder": "Introduce el nombre de la colección",
+            "DescPlaceholder": "Ingrese la descripción de la colección",
+            "EndingIn": "terminando en",
+            "SubmitSeries": "Enviar una serie"
         }
     },
     "currencies": {
         "choose": "Elige una moneda"
+    },
+    "connectedAccount": {
+        "Title": "Conectar cuenta",
+        "Success": "Éxito",
+        "YourAccountCreated": "Tu cuenta creada con éxito!",
+        "YourAccountAlreadyCreated": "Tu cuenta ya creada y lista para usar"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "token de reserva",
+                        "amount": "Cantidad"
+                    },
+                    "small": {
+                        "reserveToken": "token de reserva",
+                        "amount": "Cantidad"
+                    }
+                },
+                "placeholders": {
+                    "amount": "cantidad"
+                },
+                "btns": {
+                    "stake": "Apostar"
+                },
+                "stake": "Apostar",
+                "loading": "Cargando"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duración",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "ficha popular",
+                    "donations": "donaciones",
+                    "rewardsRateFraction": "recompensasTasaFracción",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duración en días",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "ficha popular",
+                    "donations": "donaciones",
+                    "rewardsRateFraction": "recompensasTasaFracción",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tuple": "tupla[]",
+                "number": "número",
+                "address": "DIRECCIÓN",
+                "fraction": "fracción",
+                "integer": "entero",
+                "seconds": "segundos",
+                "days": "días",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "no hay piscinas"
+            },
+            "btns": {
+                "createPool": "Crear grupo",
+                "createPoolInForm": "Crear"
+            },
+            "createPool": "Crear grupo",
+            "produce": "Producir",
+            "loading": "Cargando",
+            "viewInstancesList": "Actualizar lista"
+        }
     }
 }

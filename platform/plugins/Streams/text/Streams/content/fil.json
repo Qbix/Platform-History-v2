@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Magdagdag ng {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Pangalan ng isang gumagamit..."
     }
 }

@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nicht genügend Berechtigungen zum Lesen der Brieftasche dieses Benutzers",
         "ThisUserHaveNoWallet": "Diesem Benutzer ist kein Wallet zugewiesen",
         "TheWalletOfThisUserInvalid": "Die Brieftasche dieses Benutzers ist ungültig",
-        "WalletInvalid": "Wallet-Adresse ungültig"
+        "WalletInvalid": "Wallet-Adresse ungültig",
+        "CantManageFrozenSeries": "Sie können keine eingefrorenen Serien verwalten"
     },
     "admin": {
         "Title": "Vermögen administrativ",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} Credits verdient",
         "Places_user_location": "{{amount}} Credits verdient",
         "Streams_greeting": "{{amount}} Credits verdient",
-        "YouHaveCreditsToStart": "{{amount}} Credits verdient"
+        "YouHaveCreditsToStart": "{{amount}} Credits verdient",
+        "InvitedUserFilledStream": "{{amount}} Credits verdient",
+        "ForFillingStream": "{{amount}} Credits verdient",
+        "CreatePrivateChat": "{{amount}} Credits ausgegeben"
     },
     "subscriptions": {
         "infoTitle": "Zahlungsinformationen festlegen",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Empfänger auswählen",
         "TransactionSuccess": "Transaktionserfolg",
-        "OrTypeWalletAddress": "ODER geben Sie die Wallet-Adresse des Empfängers ein"
+        "OrTypeWalletAddress": "ODER geben Sie die Wallet-Adresse des Empfängers ein",
+        "AppCredits": "App-Credits"
     },
     "NFT": {
         "Title": "Titel",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Der Token „ {{title}} “ wurde beansprucht",
             "TokenWasLocked": "Token „ {{title}} “ wurde gesperrt",
             "TokenWasUnlocked": "Token „ {{title}} “ wurde freigeschaltet"
+        },
+        "GenerateDescription": "oder automatisch generieren",
+        "collections": {
+            "Title": "Sammlungen",
+            "EnterTitle": "Titel eingeben",
+            "EnterDescription": "Beschreibung eingeben",
+            "NewCollection": "Neue Kollektion",
+            "Name": "Name",
+            "Icon": "Symbol",
+            "Description": "Beschreibung",
+            "Author": "Autor",
+            "SelectCollection": "Sammlung auswählen",
+            "Value": "Wert",
+            "AreYouSure": "Bist du dir sicher?",
+            "AuthorInvalid": "Autorenadresse ungültig!",
+            "Address": "Adresse",
+            "CoverImage": "Titelbild",
+            "UploadIcon": "Hochladen-Symbol",
+            "CommissionAddressInvalid": "Provisionsadresse ungültig",
+            "OnSale": "im Angebot",
+            "OffSale": "Ausverkauf",
+            "CreateCollection": "Sammlung erstellen",
+            "UpdateCollection": "Sammlung aktualisieren",
+            "CollectionInfo": "Sammlungsinformationen",
+            "SelectAuthor": "Autor auswählen",
+            "NewItem": "Neue NFT-Kollektion",
+            "NamePlaceholder": "Geben Sie den Sammlungsnamen ein",
+            "DescPlaceholder": "Geben Sie eine Beschreibung der Sammlung ein",
+            "EndingIn": "Endet in",
+            "SubmitSeries": "Reichen Sie eine Serie ein"
         }
     },
     "currencies": {
         "choose": "Wählen Sie eine Währung"
+    },
+    "connectedAccount": {
+        "Title": "Konto verbinden",
+        "Success": "Erfolg",
+        "YourAccountCreated": "Ihr Konto wurde erfolgreich erstellt!",
+        "YourAccountAlreadyCreated": "Ihr Konto ist bereits erstellt und einsatzbereit"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "amount": "Menge"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "amount": "Menge"
+                    }
+                },
+                "placeholders": {
+                    "amount": "Menge"
+                },
+                "btns": {
+                    "stake": "Einsatz"
+                },
+                "stake": "Einsatz",
+                "loading": "Wird geladen"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Dauer",
+                    "bonusTokenFraction": "BonusTokenFraction",
+                    "popularToken": "beliebtToken",
+                    "donations": "Spenden",
+                    "rewardsRateFraction": "BelohnungenRateFraktion",
+                    "numerator": "Zähler",
+                    "denominator": "Nenner"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Dauer in Tagen",
+                    "bonusTokenFraction": "BonusTokenFraction",
+                    "popularToken": "beliebtToken",
+                    "donations": "Spenden",
+                    "rewardsRateFraction": "BelohnungenRateFraktion",
+                    "numerator": "Zähler",
+                    "denominator": "Nenner"
+                }
+            },
+            "placeholders": {
+                "optional": "(Optional)",
+                "tuple": "Tupel[]",
+                "number": "Nummer",
+                "address": "Adresse",
+                "fraction": "Fraktion",
+                "integer": "ganze Zahl",
+                "seconds": "Sekunden",
+                "days": "Tage",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Es gibt keine Pools"
+            },
+            "btns": {
+                "createPool": "Pool erstellen",
+                "createPoolInForm": "Erstellen"
+            },
+            "createPool": "Pool erstellen",
+            "produce": "Produzieren",
+            "loading": "Wird geladen",
+            "viewInstancesList": "Liste aktualisieren"
+        }
     }
 }

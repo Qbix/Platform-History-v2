@@ -171,5 +171,11 @@
             "bio": "Forum katılım botu. https:\/\/engageusers.ai adresinde kendinizinkini edinin",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Bu kullanıcının cüzdanını okumak için yeterli izin yok",
+        "ThisUserHaveNoWallet": "Bu kullanıcıya atanmış cüzdan yok",
+        "TheWalletOfThisUserInvalid": "Bu kullanıcının cüzdanı geçersiz",
+        "WalletInvalid": "Cüzdan adresi geçersiz"
     }
 }

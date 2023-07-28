@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Żid {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Isem ta&#39; utent..."
     }
 }

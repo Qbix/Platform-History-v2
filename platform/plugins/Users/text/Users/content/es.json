@@ -171,5 +171,11 @@
             "bio": "Bot de participación en el foro. Consigue el tuyo en https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "No hay suficientes permisos para leer la billetera de este usuario",
+        "ThisUserHaveNoWallet": "Este usuario no tiene billetera asignada",
+        "TheWalletOfThisUserInvalid": "La billetera de este usuario no es válida",
+        "WalletInvalid": "Dirección de billetera no válida"
     }
 }

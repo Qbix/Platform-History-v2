@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "{{streamDisplayType}} যোগ করুন"
+    },
+    "userChooser": {
+        "Placeholder": "একজন ব্যবহারকারীর নাম..."
     }
 }

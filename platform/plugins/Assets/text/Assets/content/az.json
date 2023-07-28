@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Bu istifadəçinin pul kisəsini oxumaq üçün kifayət qədər icazə yoxdur",
         "ThisUserHaveNoWallet": "Bu istifadəçiyə pul kisəsi təyin edilməyib",
         "TheWalletOfThisUserInvalid": "Bu istifadəçinin pul kisəsi etibarsızdır",
-        "WalletInvalid": "Pulqabı ünvanı yanlışdır"
+        "WalletInvalid": "Pulqabı ünvanı yanlışdır",
+        "CantManageFrozenSeries": "Dondurulmuş serialları idarə edə bilməzsiniz"
     },
     "admin": {
         "Title": "İnzibati aktivlər",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} kredit qazandı",
         "Places_user_location": "{{amount}} kredit qazandı",
         "Streams_greeting": "{{amount}} kredit qazandı",
-        "YouHaveCreditsToStart": "{{amount}} kredit qazandı"
+        "YouHaveCreditsToStart": "{{amount}} kredit qazandı",
+        "InvitedUserFilledStream": "{{amount}} kredit qazandı",
+        "ForFillingStream": "{{amount}} kredit qazandı",
+        "CreatePrivateChat": "{{amount}} kredit xərclədi"
     },
     "subscriptions": {
         "infoTitle": "Ödəniş məlumatını təyin edin",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Alıcı seçin",
         "TransactionSuccess": "Tranzaksiya Uğurlu",
-        "OrTypeWalletAddress": "VEYA alıcı pul kisəsinin ünvanını yazın"
+        "OrTypeWalletAddress": "VEYA alıcı pul kisəsinin ünvanını yazın",
+        "AppCredits": "Tətbiq Kreditləri"
     },
     "NFT": {
         "Title": "Başlıq",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; iddia edildi",
             "TokenWasLocked": "Token &quot; {{title}} &quot; kilidləndi",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; kilidi açıldı"
+        },
+        "GenerateDescription": "və ya avtomatik yaratmaq",
+        "collections": {
+            "Title": "Kolleksiyalar",
+            "EnterTitle": "başlığı daxil edin",
+            "EnterDescription": "təsviri daxil edin",
+            "NewCollection": "Yeni Kolleksiya",
+            "Name": "ad",
+            "Icon": "İkon",
+            "Description": "Təsvir",
+            "Author": "Müəllif",
+            "SelectCollection": "Kolleksiya seçin",
+            "Value": "Dəyər",
+            "AreYouSure": "Sən əminsən?",
+            "AuthorInvalid": "Müəllif ünvanı etibarsızdır!",
+            "Address": "Ünvan",
+            "CoverImage": "Qapaq şəkli",
+            "UploadIcon": "Yükləmə ikonu",
+            "CommissionAddressInvalid": "Komissiya ünvanı etibarsızdır",
+            "OnSale": "Endirimdə",
+            "OffSale": "satışdan kənar",
+            "CreateCollection": "Kolleksiya yaradın",
+            "UpdateCollection": "Kolleksiyanı yeniləyin",
+            "CollectionInfo": "Kolleksiya məlumatı",
+            "SelectAuthor": "Müəllif seçin",
+            "NewItem": "Yeni NFT Kolleksiyası",
+            "NamePlaceholder": "Kolleksiya adını daxil edin",
+            "DescPlaceholder": "Kolleksiya təsvirini daxil edin",
+            "EndingIn": "Sonda",
+            "SubmitSeries": "Seriya təqdim edin"
         }
     },
     "currencies": {
         "choose": "Valyuta seçin"
+    },
+    "connectedAccount": {
+        "Title": "Hesabı birləşdirin",
+        "Success": "Uğur",
+        "YourAccountCreated": "Hesabınız uğurla yaradıldı!",
+        "YourAccountAlreadyCreated": "Hesabınız artıq yaradılıb və istifadəyə hazırdır"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ehtiyat Token",
+                        "amount": "Məbləğ"
+                    },
+                    "small": {
+                        "reserveToken": "ehtiyat Token",
+                        "amount": "Məbləğ"
+                    }
+                },
+                "placeholders": {
+                    "amount": "məbləğ"
+                },
+                "btns": {
+                    "stake": "Pay"
+                },
+                "stake": "Pay",
+                "loading": "Yüklənir"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Müddət",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populyar Token",
+                    "donations": "ianələr",
+                    "rewardsRateFraction": "mükafatlarRateFraction",
+                    "numerator": "hesablayıcı",
+                    "denominator": "məxrəc"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Müddət günlərlə",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populyar Token",
+                    "donations": "ianələr",
+                    "rewardsRateFraction": "mükafatlarRateFraction",
+                    "numerator": "hesablayıcı",
+                    "denominator": "məxrəc"
+                }
+            },
+            "placeholders": {
+                "optional": "(isteğe bağlı)",
+                "tuple": "tuple[]",
+                "number": "nömrə",
+                "address": "ünvanı",
+                "fraction": "kəsr",
+                "integer": "tam",
+                "seconds": "saniyə",
+                "days": "günlər",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Hovuzlar yoxdur"
+            },
+            "btns": {
+                "createPool": "Hovuz yaradın",
+                "createPoolInForm": "Yaradın"
+            },
+            "createPool": "Hovuz yaradın",
+            "produce": "istehsal",
+            "loading": "Yüklənir",
+            "viewInstancesList": "Siyahını yeniləyin"
+        }
     }
 }

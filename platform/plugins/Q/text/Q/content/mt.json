@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Skennja l-kodiċijiet QR"
+    },
+    "input": {
+        "Placeholder": "Ibda ittajpja..."
     }
 }

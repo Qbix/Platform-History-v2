@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "أضف {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "اسم المستخدم ..."
     }
 }

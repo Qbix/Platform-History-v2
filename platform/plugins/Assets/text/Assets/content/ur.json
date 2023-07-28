@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "اس صارف کے بٹوے کو پڑھنے کے لیے کافی اجازتیں نہیں ہیں۔",
         "ThisUserHaveNoWallet": "اس صارف کو کوئی والیٹ تفویض نہیں کیا گیا ہے۔",
         "TheWalletOfThisUserInvalid": "اس صارف کا پرس غلط ہے۔",
-        "WalletInvalid": "والیٹ کا پتہ غلط ہے۔"
+        "WalletInvalid": "والیٹ کا پتہ غلط ہے۔",
+        "CantManageFrozenSeries": "آپ منجمد سیریز کا نظم نہیں کر سکتے"
     },
     "admin": {
         "Title": "انتظامی اثاثے۔",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} کریڈٹس حاصل کئے",
         "Places_user_location": "{{amount}} کریڈٹس حاصل کئے",
         "Streams_greeting": "{{amount}} کریڈٹس حاصل کئے",
-        "YouHaveCreditsToStart": "{{amount}} کریڈٹس حاصل کئے"
+        "YouHaveCreditsToStart": "{{amount}} کریڈٹس حاصل کئے",
+        "InvitedUserFilledStream": "{{amount}} کریڈٹس حاصل کئے",
+        "ForFillingStream": "{{amount}} کریڈٹس حاصل کئے",
+        "CreatePrivateChat": "{{amount}} کریڈٹ خرچ ہوئے۔"
     },
     "subscriptions": {
         "infoTitle": "ادائیگی کی معلومات سیٹ کریں۔",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "وصول کنندہ کو منتخب کریں۔",
         "TransactionSuccess": "لین دین کی کامیابی",
-        "OrTypeWalletAddress": "یا وصول کنندہ والیٹ کا پتہ ٹائپ کریں۔"
+        "OrTypeWalletAddress": "یا وصول کنندہ والیٹ کا پتہ ٹائپ کریں۔",
+        "AppCredits": "ایپ کریڈٹس"
     },
     "NFT": {
         "Title": "عنوان",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "ٹوکن &quot; {{title}} &quot; کا دعوی کیا گیا تھا۔",
             "TokenWasLocked": "ٹوکن &quot; {{title}} &quot; مقفل تھا۔",
             "TokenWasUnlocked": "ٹوکن &quot; {{title}} &quot; غیر مقفل تھا۔"
+        },
+        "GenerateDescription": "یا خود بخود پیدا کریں۔",
+        "collections": {
+            "Title": "مجموعے",
+            "EnterTitle": "عنوان درج کریں",
+            "EnterDescription": "تفصیل درج کریں",
+            "NewCollection": "نئی کلیکشن",
+            "Name": "نام",
+            "Icon": "آئیکن",
+            "Description": "تفصیل",
+            "Author": "مصنف",
+            "SelectCollection": "مجموعہ منتخب کریں۔",
+            "Value": "قدر",
+            "AreYouSure": "کیا تمہیں یقین ہے؟",
+            "AuthorInvalid": "مصنف کا پتہ غلط ہے!",
+            "Address": "پتہ",
+            "CoverImage": "کور تصویر",
+            "UploadIcon": "اپ لوڈ کا آئیکن",
+            "CommissionAddressInvalid": "کمیشن کا پتہ غلط ہے۔",
+            "OnSale": "برائے فروخت",
+            "OffSale": "فروخت سے دور",
+            "CreateCollection": "مجموعہ بنائیں",
+            "UpdateCollection": "اپ ڈیٹ کلیکشن",
+            "CollectionInfo": "جمع کرنے کی معلومات",
+            "SelectAuthor": "مصنف کا انتخاب کریں۔",
+            "NewItem": "نیا NFT مجموعہ",
+            "NamePlaceholder": "مجموعہ کا نام درج کریں۔",
+            "DescPlaceholder": "مجموعہ کی تفصیل درج کریں۔",
+            "EndingIn": "میں ختم ہو رہا ہے۔",
+            "SubmitSeries": "ایک سیریز جمع کروائیں۔"
         }
     },
     "currencies": {
         "choose": "ایک کرنسی کا انتخاب کریں۔"
+    },
+    "connectedAccount": {
+        "Title": "اکاؤنٹ جوڑیں۔",
+        "Success": "کامیابی",
+        "YourAccountCreated": "آپ کا اکاؤنٹ کامیابی سے بن گیا!",
+        "YourAccountAlreadyCreated": "آپ کا اکاؤنٹ پہلے ہی بنا ہوا ہے اور استعمال کے لیے تیار ہے۔"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ریزرو ٹوکن",
+                        "amount": "رقم"
+                    },
+                    "small": {
+                        "reserveToken": "ریزرو ٹوکن",
+                        "amount": "رقم"
+                    }
+                },
+                "placeholders": {
+                    "amount": "رقم"
+                },
+                "btns": {
+                    "stake": "داؤ"
+                },
+                "stake": "داؤ",
+                "loading": "لوڈ ہو رہا ہے۔"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "دورانیہ",
+                    "bonusTokenFraction": "بونس ٹوکن فریکشن",
+                    "popularToken": "مقبول ٹوکن",
+                    "donations": "عطیات",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "عدد",
+                    "denominator": "فرق"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "دنوں میں دورانیہ",
+                    "bonusTokenFraction": "بونس ٹوکن فریکشن",
+                    "popularToken": "مقبول ٹوکن",
+                    "donations": "عطیات",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "عدد",
+                    "denominator": "فرق"
+                }
+            },
+            "placeholders": {
+                "optional": "(اختیاری)",
+                "tuple": "ٹپل[]",
+                "number": "نمبر",
+                "address": "پتہ",
+                "fraction": "حصہ",
+                "integer": "عدد",
+                "seconds": "سیکنڈ",
+                "days": "دن",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "کوئی تالاب نہیں ہیں۔"
+            },
+            "btns": {
+                "createPool": "پول بنائیں",
+                "createPoolInForm": "بنانا"
+            },
+            "createPool": "پول بنائیں",
+            "produce": "پیدا کرنا",
+            "loading": "لوڈ ہو رہا ہے۔",
+            "viewInstancesList": "فہرست کو تازہ کریں۔"
+        }
     }
 }

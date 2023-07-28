@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Anda belum log masuk. <a href='#login' data-users-login>Klik di sini untuk log masuk<\/a>"
+    "NotLoggedIn": "Anda belum log masuk. <a href='#login' data-users-login>Klik di sini untuk log masuk<\/a>",
+    "InvalidLanguage": "Bahasa Tidak Sah {{language}}"
 }

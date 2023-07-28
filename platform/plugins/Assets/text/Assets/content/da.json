@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Ikke nok tilladelser til at læse denne brugers tegnebog",
         "ThisUserHaveNoWallet": "Denne bruger har ingen tegnebog tildelt",
         "TheWalletOfThisUserInvalid": "Denne brugers tegnebog er ugyldig",
-        "WalletInvalid": "Wallet-adressen er ugyldig"
+        "WalletInvalid": "Wallet-adressen er ugyldig",
+        "CantManageFrozenSeries": "Du kan ikke administrere frosne serier"
     },
     "admin": {
         "Title": "Administrative aktiver",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Optjent {{amount}} kreditter",
         "Places_user_location": "Optjent {{amount}} kreditter",
         "Streams_greeting": "Optjent {{amount}} kreditter",
-        "YouHaveCreditsToStart": "Optjent {{amount}} kreditter"
+        "YouHaveCreditsToStart": "Optjent {{amount}} kreditter",
+        "InvitedUserFilledStream": "Optjent {{amount}} kreditter",
+        "ForFillingStream": "Optjent {{amount}} kreditter",
+        "CreatePrivateChat": "Brugte {{amount}} kreditter"
     },
     "subscriptions": {
         "infoTitle": "Indstil betalingsoplysninger",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Vælg modtager",
         "TransactionSuccess": "Transaktionssucces",
-        "OrTypeWalletAddress": "ELLER indtast modtagerens tegnebogsadresse"
+        "OrTypeWalletAddress": "ELLER indtast modtagerens tegnebogsadresse",
+        "AppCredits": "App-kreditter"
     },
     "NFT": {
         "Title": "Titel",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; blev gjort krav på",
             "TokenWasLocked": "Token &quot; {{title}} &quot; var låst",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; blev låst op"
+        },
+        "GenerateDescription": "eller autogenerer",
+        "collections": {
+            "Title": "Samlinger",
+            "EnterTitle": "indtast titel",
+            "EnterDescription": "indtast beskrivelse",
+            "NewCollection": "Ny kollektion",
+            "Name": "Navn",
+            "Icon": "Ikon",
+            "Description": "Beskrivelse",
+            "Author": "Forfatter",
+            "SelectCollection": "Vælg samling",
+            "Value": "Værdi",
+            "AreYouSure": "Er du sikker?",
+            "AuthorInvalid": "Forfatteradressen er ugyldig!",
+            "Address": "Adresse",
+            "CoverImage": "Forsidebillede",
+            "UploadIcon": "Upload ikon",
+            "CommissionAddressInvalid": "Kommissionens adresse er ugyldig",
+            "OnSale": "på udsalg",
+            "OffSale": "udsalg",
+            "CreateCollection": "Opret samling",
+            "UpdateCollection": "Opdater samling",
+            "CollectionInfo": "Samling info",
+            "SelectAuthor": "Vælg forfatter",
+            "NewItem": "Ny NFT-kollektion",
+            "NamePlaceholder": "Indtast samlingens navn",
+            "DescPlaceholder": "Indtast samlingsbeskrivelse",
+            "EndingIn": "Ender i",
+            "SubmitSeries": "Indsend en serie"
         }
     },
     "currencies": {
         "choose": "Vælg en valuta"
+    },
+    "connectedAccount": {
+        "Title": "Tilslut konto",
+        "Success": "Succes",
+        "YourAccountCreated": "Din konto blev oprettet!",
+        "YourAccountAlreadyCreated": "Din konto er allerede oprettet og klar til brug"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Beløb"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Beløb"
+                    }
+                },
+                "placeholders": {
+                    "amount": "beløb"
+                },
+                "btns": {
+                    "stake": "Indsats"
+                },
+                "stake": "Indsats",
+                "loading": "Indlæser"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varighed",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populær Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belønningerRateFraction",
+                    "numerator": "tæller",
+                    "denominator": "nævner"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varighed i dage",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populær Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belønningerRateFraction",
+                    "numerator": "tæller",
+                    "denominator": "nævner"
+                }
+            },
+            "placeholders": {
+                "optional": "(valgfri)",
+                "tuple": "tuple[]",
+                "number": "nummer",
+                "address": "adresse",
+                "fraction": "brøkdel",
+                "integer": "heltal",
+                "seconds": "sekunder",
+                "days": "dage",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Der er ingen pools"
+            },
+            "btns": {
+                "createPool": "Opret pool",
+                "createPoolInForm": "skab"
+            },
+            "createPool": "Opret pool",
+            "produce": "Fremstille",
+            "loading": "Indlæser",
+            "viewInstancesList": "Opdater liste"
+        }
     }
 }

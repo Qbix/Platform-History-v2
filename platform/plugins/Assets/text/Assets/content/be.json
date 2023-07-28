@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Недастаткова правоў для чытання кашалька гэтага карыстальніка",
         "ThisUserHaveNoWallet": "Гэтаму карыстальніку не прызначаны кашалёк",
         "TheWalletOfThisUserInvalid": "Кашалёк гэтага карыстальніка несапраўдны",
-        "WalletInvalid": "Несапраўдны адрас кашалька"
+        "WalletInvalid": "Несапраўдны адрас кашалька",
+        "CantManageFrozenSeries": "Вы не можаце кіраваць замарожанымі серыяламі"
     },
     "admin": {
         "Title": "Актывы адміністрацыйныя",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Зарабіў {{amount}} крэдытаў",
         "Places_user_location": "Зарабіў {{amount}} крэдытаў",
         "Streams_greeting": "Зарабіў {{amount}} крэдытаў",
-        "YouHaveCreditsToStart": "Зарабіў {{amount}} крэдытаў"
+        "YouHaveCreditsToStart": "Зарабіў {{amount}} крэдытаў",
+        "InvitedUserFilledStream": "Зарабіў {{amount}} крэдытаў",
+        "ForFillingStream": "Зарабіў {{amount}} крэдытаў",
+        "CreatePrivateChat": "Выдаткавана {{amount}} крэдытаў"
     },
     "subscriptions": {
         "infoTitle": "Усталюйце плацежную інфармацыю",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Выберыце атрымальніка",
         "TransactionSuccess": "Поспех транзакцыі",
-        "OrTypeWalletAddress": "АБО ўвядзіце адрас кашалька атрымальніка"
+        "OrTypeWalletAddress": "АБО ўвядзіце адрас кашалька атрымальніка",
+        "AppCredits": "Крэдыты праграмы"
     },
     "NFT": {
         "Title": "Назва",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Быў запатрабаваны токен &quot; {{title}} &quot;",
             "TokenWasLocked": "Токен &quot; {{title}} &quot; быў заблакаваны",
             "TokenWasUnlocked": "Токен &quot; {{title}} &quot; быў разблакіраваны"
+        },
+        "GenerateDescription": "або аўтаматычна генераваць",
+        "collections": {
+            "Title": "Зборнікі",
+            "EnterTitle": "увядзіце назву",
+            "EnterDescription": "увядзіце апісанне",
+            "NewCollection": "Новая калекцыя",
+            "Name": "Імя",
+            "Icon": "Значок",
+            "Description": "Апісанне",
+            "Author": "Аўтар",
+            "SelectCollection": "Выберыце калекцыю",
+            "Value": "Каштоўнасць",
+            "AreYouSure": "Вы ўпэўнены?",
+            "AuthorInvalid": "Адрас аўтара няправільны!",
+            "Address": "Адрас",
+            "CoverImage": "Малюнак вокладкі",
+            "UploadIcon": "Значок загрузкі",
+            "CommissionAddressInvalid": "Несапраўдны адрас камісіі",
+            "OnSale": "у продажы",
+            "OffSale": "з продажу",
+            "CreateCollection": "Стварыць калекцыю",
+            "UpdateCollection": "Абнаўленне калекцыі",
+            "CollectionInfo": "Інфармацыя аб калекцыі",
+            "SelectAuthor": "Выберыце аўтара",
+            "NewItem": "Новая калекцыя NFT",
+            "NamePlaceholder": "Увядзіце назву калекцыі",
+            "DescPlaceholder": "Увядзіце апісанне калекцыі",
+            "EndingIn": "Канчатак на",
+            "SubmitSeries": "Адправіць серыю"
         }
     },
     "currencies": {
         "choose": "Выберыце валюту"
+    },
+    "connectedAccount": {
+        "Title": "Падключыць уліковы запіс",
+        "Success": "Поспех",
+        "YourAccountCreated": "Ваш уліковы запіс паспяхова створаны!",
+        "YourAccountAlreadyCreated": "Ваш уліковы запіс ужо створаны і гатовы да выкарыстання"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Сума"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Сума"
+                    }
+                },
+                "placeholders": {
+                    "amount": "колькасць"
+                },
+                "btns": {
+                    "stake": "Стаўка"
+                },
+                "stake": "Стаўка",
+                "loading": "Загрузка"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Працягласць",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ахвяраванні",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "лічнік",
+                    "denominator": "назоўнік"
+                },
+                "small": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Працягласць у днях",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ахвяраванні",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "лічнік",
+                    "denominator": "назоўнік"
+                }
+            },
+            "placeholders": {
+                "optional": "(неабавязкова)",
+                "tuple": "картэж []",
+                "number": "лік",
+                "address": "адрас",
+                "fraction": "доля",
+                "integer": "цэлы лік",
+                "seconds": "секунд",
+                "days": "дзён",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Басейнаў няма"
+            },
+            "btns": {
+                "createPool": "Стварыць пул",
+                "createPoolInForm": "Ствараць"
+            },
+            "createPool": "Стварыць пул",
+            "produce": "Прадукцыя",
+            "loading": "Загрузка",
+            "viewInstancesList": "Абнавіць спіс"
+        }
     }
 }

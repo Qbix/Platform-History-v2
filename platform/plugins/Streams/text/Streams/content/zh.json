@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "加{{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "用户名..."
     }
 }

@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Voeg {{streamDisplayType}} toe"
+    },
+    "userChooser": {
+        "Placeholder": "Naam van een gebruiker..."
     }
 }

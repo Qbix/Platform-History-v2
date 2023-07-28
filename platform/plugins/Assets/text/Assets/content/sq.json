@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nuk ka leje të mjaftueshme për të lexuar portofolin e këtij përdoruesi",
         "ThisUserHaveNoWallet": "Ky përdorues nuk ka një portofol të caktuar",
         "TheWalletOfThisUserInvalid": "Portofoli i këtij përdoruesi është i pavlefshëm",
-        "WalletInvalid": "Adresa e portofolit është e pavlefshme"
+        "WalletInvalid": "Adresa e portofolit është e pavlefshme",
+        "CantManageFrozenSeries": "Nuk mund të menaxhosh seritë e ngrira"
     },
     "admin": {
         "Title": "Asetet administrative",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Fitoi {{amount}} kredite",
         "Places_user_location": "Fitoi {{amount}} kredite",
         "Streams_greeting": "Fitoi {{amount}} kredite",
-        "YouHaveCreditsToStart": "Fitoi {{amount}} kredite"
+        "YouHaveCreditsToStart": "Fitoi {{amount}} kredite",
+        "InvitedUserFilledStream": "Fitoi {{amount}} kredite",
+        "ForFillingStream": "Fitoi {{amount}} kredite",
+        "CreatePrivateChat": "Shpenzuan {{amount}} kredite"
     },
     "subscriptions": {
         "infoTitle": "Vendosni informacionin e pagesës",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Zgjidhni marrësin",
         "TransactionSuccess": "Suksesi i transaksionit",
-        "OrTypeWalletAddress": "OSE shkruani adresën e portofolit të marrësit"
+        "OrTypeWalletAddress": "OSE shkruani adresën e portofolit të marrësit",
+        "AppCredits": "Kreditë e aplikacionit"
     },
     "NFT": {
         "Title": "Titulli",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; u pretendua",
             "TokenWasLocked": "Token &quot; {{title}} &quot; ishte i kyçur",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; u shkyç"
+        },
+        "GenerateDescription": "ose të gjenerojë automatikisht",
+        "collections": {
+            "Title": "Koleksionet",
+            "EnterTitle": "shkruani titullin",
+            "EnterDescription": "shkruani përshkrimin",
+            "NewCollection": "Koleksion i ri",
+            "Name": "Emri",
+            "Icon": "Ikona",
+            "Description": "Përshkrim",
+            "Author": "Autori",
+            "SelectCollection": "Zgjidhni koleksionin",
+            "Value": "Vlera",
+            "AreYouSure": "A je i sigurt?",
+            "AuthorInvalid": "Adresa e autorit është e pavlefshme!",
+            "Address": "Adresë",
+            "CoverImage": "Imazhi i kopertinës",
+            "UploadIcon": "Ikona e ngarkimit",
+            "CommissionAddressInvalid": "Adresa e komisionit është e pavlefshme",
+            "OnSale": "ne shitje",
+            "OffSale": "jashtë shitjes",
+            "CreateCollection": "Krijo Koleksion",
+            "UpdateCollection": "Përditëso koleksionin",
+            "CollectionInfo": "Informacioni i Koleksionit",
+            "SelectAuthor": "Zgjidhni autorin",
+            "NewItem": "Koleksioni i ri NFT",
+            "NamePlaceholder": "Fut emrin e koleksionit",
+            "DescPlaceholder": "Fut përshkrimin e koleksionit",
+            "EndingIn": "Duke përfunduar në",
+            "SubmitSeries": "Dërgo një seri"
         }
     },
     "currencies": {
         "choose": "Zgjidhni një monedhë"
+    },
+    "connectedAccount": {
+        "Title": "Lidh llogarinë",
+        "Success": "Sukses",
+        "YourAccountCreated": "Llogaria juaj u krijua me sukses!",
+        "YourAccountAlreadyCreated": "Llogaria juaj tashmë është krijuar dhe gati për t&#39;u përdorur"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervëToken",
+                        "amount": "Shuma"
+                    },
+                    "small": {
+                        "reserveToken": "rezervëToken",
+                        "amount": "Shuma"
+                    }
+                },
+                "placeholders": {
+                    "amount": "shuma"
+                },
+                "btns": {
+                    "stake": "Kunj"
+                },
+                "stake": "Kunj",
+                "loading": "Po ngarkohet"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kohëzgjatja",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popullorToken",
+                    "donations": "donacionet",
+                    "rewardsRateFraction": "shpërblimetRateFraction",
+                    "numerator": "numërues",
+                    "denominator": "emërues"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kohëzgjatja në ditë",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popullorToken",
+                    "donations": "donacionet",
+                    "rewardsRateFraction": "shpërblimetRateFraction",
+                    "numerator": "numërues",
+                    "denominator": "emërues"
+                }
+            },
+            "placeholders": {
+                "optional": "(opsionale)",
+                "tuple": "dyfish[]",
+                "number": "numri",
+                "address": "adresë",
+                "fraction": "fraksioni",
+                "integer": "numër i plotë",
+                "seconds": "sekonda",
+                "days": "ditë",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nuk ka pishina"
+            },
+            "btns": {
+                "createPool": "Krijo Pool",
+                "createPoolInForm": "Krijo"
+            },
+            "createPool": "Krijo Pool",
+            "produce": "Prodhoni",
+            "loading": "Po ngarkohet",
+            "viewInstancesList": "Rifresko listën"
+        }
     }
 }

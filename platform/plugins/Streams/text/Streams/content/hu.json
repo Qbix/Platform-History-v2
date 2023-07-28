@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Adjunk hozzá {{streamDisplayType}} et"
+    },
+    "userChooser": {
+        "Placeholder": "Egy felhasználó neve..."
     }
 }

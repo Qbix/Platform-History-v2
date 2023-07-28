@@ -171,5 +171,11 @@
             "bio": "फोरम सगाई बॉट। https:\/\/engageusers.ai पर अपना प्राप्त करें",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "इस उपयोगकर्ता के वॉलेट को पढ़ने के लिए पर्याप्त अनुमतियाँ नहीं हैं",
+        "ThisUserHaveNoWallet": "इस उपयोगकर्ता को कोई वॉलेट असाइन नहीं किया गया है",
+        "TheWalletOfThisUserInvalid": "इस उपयोगकर्ता का बटुआ अमान्य है",
+        "WalletInvalid": "बटुआ पता अमान्य"
     }
 }

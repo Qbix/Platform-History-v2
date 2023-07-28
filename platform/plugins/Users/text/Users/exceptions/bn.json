@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "আপনি লগ ইন করেননি৷ <a href='#login' data-users-login>লগ ইন করতে এখানে ক্লিক করুন<\/a> ৷"
+    "NotLoggedIn": "আপনি লগ ইন করেননি৷ <a href='#login' data-users-login>লগ ইন করতে এখানে ক্লিক করুন<\/a> ৷",
+    "InvalidLanguage": "অবৈধ ভাষা {{language}}"
 }

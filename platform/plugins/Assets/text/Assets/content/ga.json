@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Níl go leor ceadanna chun sparán an úsáideora seo a léamh",
         "ThisUserHaveNoWallet": "Níl aon sparán sannta don úsáideoir seo",
         "TheWalletOfThisUserInvalid": "Tá sparán an úsáideora seo neamhbhailí",
-        "WalletInvalid": "Seoladh sparán neamhbhailí"
+        "WalletInvalid": "Seoladh sparán neamhbhailí",
+        "CantManageFrozenSeries": "Ní féidir leat sraith reoite a bhainistiú"
     },
     "admin": {
         "Title": "Sócmhainní riaracháin",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Ghnóthaigh {{amount}} creidmheas",
         "Places_user_location": "Ghnóthaigh {{amount}} creidmheas",
         "Streams_greeting": "Ghnóthaigh {{amount}} creidmheas",
-        "YouHaveCreditsToStart": "Ghnóthaigh {{amount}} creidmheas"
+        "YouHaveCreditsToStart": "Ghnóthaigh {{amount}} creidmheas",
+        "InvitedUserFilledStream": "Ghnóthaigh {{amount}} creidmheas",
+        "ForFillingStream": "Ghnóthaigh {{amount}} creidmheas",
+        "CreatePrivateChat": "{{amount}} creidmheasanna caite"
     },
     "subscriptions": {
         "infoTitle": "Socraigh Faisnéis Íocaíochta",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Roghnaigh faighteoir",
         "TransactionSuccess": "Rath Idirbheart",
-        "OrTypeWalletAddress": "NÓ cineál seoladh sparán an fhaighteora"
+        "OrTypeWalletAddress": "NÓ cineál seoladh sparán an fhaighteora",
+        "AppCredits": "Creidmheasanna App"
     },
     "NFT": {
         "Title": "Teideal",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Éilíodh comhartha &quot; {{title}} &quot;",
             "TokenWasLocked": "Cuireadh glas ar Chomhartha &quot; {{title}} &quot;",
             "TokenWasUnlocked": "Díghlasáladh Token &quot; {{title}} &quot;"
+        },
+        "GenerateDescription": "nó uathghin",
+        "collections": {
+            "Title": "Bailiúcháin",
+            "EnterTitle": "cuir isteach teideal",
+            "EnterDescription": "isteach cur síos",
+            "NewCollection": "Bailiúchán Nua",
+            "Name": "Ainm",
+            "Icon": "Deilbhín",
+            "Description": "Cur síos",
+            "Author": "Údar",
+            "SelectCollection": "Roghnaigh bailiúchán",
+            "Value": "Luach",
+            "AreYouSure": "An bhfuil tú cinnte?",
+            "AuthorInvalid": "Seoladh an údair neamhbhailí!",
+            "Address": "Seoladh",
+            "CoverImage": "Íomhá chlúdaigh",
+            "UploadIcon": "Uaslódáil deilbhín",
+            "CommissionAddressInvalid": "Seoladh an Choimisiúin neamhbhailí",
+            "OnSale": "Ar díol",
+            "OffSale": "as díol",
+            "CreateCollection": "Cruthaigh Bailiúchán",
+            "UpdateCollection": "Bailiúchán Nuashonraithe",
+            "CollectionInfo": "Eolas Bailiúchán",
+            "SelectAuthor": "Roghnaigh údar",
+            "NewItem": "Bailiúchán nua de NFT saor in aisce,",
+            "NamePlaceholder": "Cuir isteach ainm an bhailiúcháin",
+            "DescPlaceholder": "Cuir isteach cur síos ar an mbailiúchán",
+            "EndingIn": "Ag críochnú I",
+            "SubmitSeries": "Cuir Sraith isteach"
         }
     },
     "currencies": {
         "choose": "Roghnaigh airgeadra"
+    },
+    "connectedAccount": {
+        "Title": "Ceangail cuntas",
+        "Success": "Rath",
+        "YourAccountCreated": "D&#39;éirigh le cruthú do chuntas!",
+        "YourAccountAlreadyCreated": "Do chuntas cruthaithe cheana agus réidh le húsáid"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "cúlchiste",
+                        "amount": "Méid"
+                    },
+                    "small": {
+                        "reserveToken": "cúlchiste",
+                        "amount": "Méid"
+                    }
+                },
+                "placeholders": {
+                    "amount": "méid"
+                },
+                "btns": {
+                    "stake": "Geall"
+                },
+                "stake": "Geall",
+                "loading": "Ag lódáil"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "comharthaErc20",
+                    "duration": "Fad",
+                    "bonusTokenFraction": "bónasTokenFraction",
+                    "popularToken": "tóirToken",
+                    "donations": "tabhartais",
+                    "rewardsRateFraction": "luach saothairRateFraction",
+                    "numerator": "uimhreoir",
+                    "denominator": "ainmneoir"
+                },
+                "small": {
+                    "tokenErc20": "comharthaErc20",
+                    "duration": "Fad i laethanta",
+                    "bonusTokenFraction": "bónasTokenFraction",
+                    "popularToken": "tóirToken",
+                    "donations": "tabhartais",
+                    "rewardsRateFraction": "luach saothairRateFraction",
+                    "numerator": "uimhreoir",
+                    "denominator": "ainmneoir"
+                }
+            },
+            "placeholders": {
+                "optional": "(roghnach)",
+                "tuple": "tuple[]",
+                "number": "uimhir",
+                "address": "seoladh",
+                "fraction": "codán",
+                "integer": "slánuimhir",
+                "seconds": "soicind",
+                "days": "laethanta",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Níl aon linnte"
+            },
+            "btns": {
+                "createPool": "Cruthaigh Linn",
+                "createPoolInForm": "Cruthaigh"
+            },
+            "createPool": "Cruthaigh Linn",
+            "produce": "Tháirgeadh",
+            "loading": "Ag lódáil",
+            "viewInstancesList": "Liosta Athnuaigh"
+        }
     }
 }

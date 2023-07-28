@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Bu kullanıcının cüzdanını okumak için yeterli izin yok",
         "ThisUserHaveNoWallet": "Bu kullanıcıya atanmış bir cüzdan yok",
         "TheWalletOfThisUserInvalid": "Bu kullanıcının cüzdanı geçersiz",
-        "WalletInvalid": "Cüzdan adresi geçersiz"
+        "WalletInvalid": "Cüzdan adresi geçersiz",
+        "CantManageFrozenSeries": "Dondurulmuş dizileri yönetemezsin"
     },
     "admin": {
         "Title": "Yönetimsel varlıklar",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} kredi kazandı",
         "Places_user_location": "{{amount}} kredi kazandı",
         "Streams_greeting": "{{amount}} kredi kazandı",
-        "YouHaveCreditsToStart": "{{amount}} kredi kazandı"
+        "YouHaveCreditsToStart": "{{amount}} kredi kazandı",
+        "InvitedUserFilledStream": "{{amount}} kredi kazandı",
+        "ForFillingStream": "{{amount}} kredi kazandı",
+        "CreatePrivateChat": "{{amount}} kredi harcadı"
     },
     "subscriptions": {
         "infoTitle": "Ödeme Bilgilerini Ayarla",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "alıcı seç",
         "TransactionSuccess": "İşlem Başarısı",
-        "OrTypeWalletAddress": "VEYA alıcının cüzdan adresini yazın"
+        "OrTypeWalletAddress": "VEYA alıcının cüzdan adresini yazın",
+        "AppCredits": "Uygulama Kredileri"
     },
     "NFT": {
         "Title": "Başlık",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; talep edildi",
             "TokenWasLocked": "&quot; {{title}} &quot; belirteci kilitlendi",
             "TokenWasUnlocked": "&quot; {{title}} &quot; jetonunun kilidi açıldı"
+        },
+        "GenerateDescription": "veya otomatik oluştur",
+        "collections": {
+            "Title": "Koleksiyonlar",
+            "EnterTitle": "başlığı girin",
+            "EnterDescription": "açıklamayı girin",
+            "NewCollection": "Yeni koleksiyon",
+            "Name": "İsim",
+            "Icon": "simge",
+            "Description": "Tanım",
+            "Author": "Yazar",
+            "SelectCollection": "koleksiyon seç",
+            "Value": "Değer",
+            "AreYouSure": "Emin misin?",
+            "AuthorInvalid": "Yazar adresi geçersiz!",
+            "Address": "Adres",
+            "CoverImage": "Kapak resmi",
+            "UploadIcon": "yükleme simgesi",
+            "CommissionAddressInvalid": "Komisyon adresi geçersiz",
+            "OnSale": "satılık",
+            "OffSale": "indirimli",
+            "CreateCollection": "Koleksiyon Oluştur",
+            "UpdateCollection": "Koleksiyonu Güncelle",
+            "CollectionInfo": "Koleksiyon Bilgisi",
+            "SelectAuthor": "yazar seç",
+            "NewItem": "Yeni NFT Koleksiyonu",
+            "NamePlaceholder": "Koleksiyon adını girin",
+            "DescPlaceholder": "Koleksiyon açıklamasını girin",
+            "EndingIn": "Biten",
+            "SubmitSeries": "Bir Seri Gönder"
         }
     },
     "currencies": {
         "choose": "Bir para birimi seçin"
+    },
+    "connectedAccount": {
+        "Title": "Hesabı bağla",
+        "Success": "Başarı",
+        "YourAccountCreated": "Hesabınız başarıyla oluşturuldu!",
+        "YourAccountAlreadyCreated": "Hesabınız zaten oluşturuldu ve kullanıma hazır"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezerv belirteci",
+                        "amount": "Miktar"
+                    },
+                    "small": {
+                        "reserveToken": "rezerv belirteci",
+                        "amount": "Miktar"
+                    }
+                },
+                "placeholders": {
+                    "amount": "miktar"
+                },
+                "btns": {
+                    "stake": "kazık"
+                },
+                "stake": "kazık",
+                "loading": "Yükleniyor"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "belirteçErc20",
+                    "duration": "Süre",
+                    "bonusTokenFraction": "bonusTokenKesiri",
+                    "popularToken": "popüler belirteç",
+                    "donations": "bağışlar",
+                    "rewardsRateFraction": "ödüllerRateFraction",
+                    "numerator": "pay",
+                    "denominator": "payda"
+                },
+                "small": {
+                    "tokenErc20": "belirteçErc20",
+                    "duration": "Gün cinsinden süre",
+                    "bonusTokenFraction": "bonusTokenKesiri",
+                    "popularToken": "popüler belirteç",
+                    "donations": "bağışlar",
+                    "rewardsRateFraction": "ödüllerRateFraction",
+                    "numerator": "pay",
+                    "denominator": "payda"
+                }
+            },
+            "placeholders": {
+                "optional": "(isteğe bağlı)",
+                "tuple": "demet[]",
+                "number": "sayı",
+                "address": "adres",
+                "fraction": "kesir",
+                "integer": "tamsayı",
+                "seconds": "saniye",
+                "days": "günler",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "havuz yok"
+            },
+            "btns": {
+                "createPool": "Havuz Oluştur",
+                "createPoolInForm": "Yaratmak"
+            },
+            "createPool": "Havuz Oluştur",
+            "produce": "Üretmek",
+            "loading": "Yükleniyor",
+            "viewInstancesList": "Listeyi Yenile"
+        }
     }
 }

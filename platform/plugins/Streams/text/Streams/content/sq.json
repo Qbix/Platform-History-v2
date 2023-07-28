@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Shto {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Emri i një përdoruesi..."
     }
 }

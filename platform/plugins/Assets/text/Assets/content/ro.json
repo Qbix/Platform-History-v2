@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nu există suficiente permisiuni pentru a citi portofelul acestui utilizator",
         "ThisUserHaveNoWallet": "Acest utilizator nu are portofel alocat",
         "TheWalletOfThisUserInvalid": "Portofelul acestui utilizator este invalid",
-        "WalletInvalid": "Adresa portofel nevalidă"
+        "WalletInvalid": "Adresa portofel nevalidă",
+        "CantManageFrozenSeries": "Nu poți gestiona seriale înghețate"
     },
     "admin": {
         "Title": "Active administrative",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "A câștigat {{amount}} de credite",
         "Places_user_location": "A câștigat {{amount}} de credite",
         "Streams_greeting": "A câștigat {{amount}} de credite",
-        "YouHaveCreditsToStart": "A câștigat {{amount}} de credite"
+        "YouHaveCreditsToStart": "A câștigat {{amount}} de credite",
+        "InvitedUserFilledStream": "A câștigat {{amount}} de credite",
+        "ForFillingStream": "A câștigat {{amount}} de credite",
+        "CreatePrivateChat": "A cheltuit {{amount}} de credite"
     },
     "subscriptions": {
         "infoTitle": "Setați informațiile de plată",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Selectați destinatarul",
         "TransactionSuccess": "Tranzacție de succes",
-        "OrTypeWalletAddress": "SAU introduceți adresa portofelului destinatarului"
+        "OrTypeWalletAddress": "SAU introduceți adresa portofelului destinatarului",
+        "AppCredits": "Credite pentru aplicații"
     },
     "NFT": {
         "Title": "Titlu",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Jetonul „ {{title}} ” a fost revendicat",
             "TokenWasLocked": "Jetonul „ {{title}} ” a fost blocat",
             "TokenWasUnlocked": "Tokenul „ {{title}} ” a fost deblocat"
+        },
+        "GenerateDescription": "sau auto-generare",
+        "collections": {
+            "Title": "Colecții",
+            "EnterTitle": "introduceți titlul",
+            "EnterDescription": "introduceți descrierea",
+            "NewCollection": "Colecție nouă",
+            "Name": "Nume",
+            "Icon": "Pictogramă",
+            "Description": "Descriere",
+            "Author": "Autor",
+            "SelectCollection": "Selectați colecția",
+            "Value": "Valoare",
+            "AreYouSure": "Esti sigur?",
+            "AuthorInvalid": "Adresa autorului este nevalidă!",
+            "Address": "Abordare",
+            "CoverImage": "Imagine de copertă",
+            "UploadIcon": "Pictograma de încărcare",
+            "CommissionAddressInvalid": "Adresa comisiei este nevalidă",
+            "OnSale": "de vanzare",
+            "OffSale": "din vânzare",
+            "CreateCollection": "Creați o colecție",
+            "UpdateCollection": "Actualizați colecția",
+            "CollectionInfo": "Informații de colecție",
+            "SelectAuthor": "Selectați autorul",
+            "NewItem": "Noua colecție NFT",
+            "NamePlaceholder": "Introduceți numele colecției",
+            "DescPlaceholder": "Introduceți descrierea colecției",
+            "EndingIn": "Se termina in",
+            "SubmitSeries": "Trimiteți o serie"
         }
     },
     "currencies": {
         "choose": "Alegeți o monedă"
+    },
+    "connectedAccount": {
+        "Title": "Conectați contul",
+        "Success": "Succes",
+        "YourAccountCreated": "Contul dvs. a fost creat cu succes!",
+        "YourAccountAlreadyCreated": "Contul dvs. este deja creat și gata de utilizare"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Cantitate"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Cantitate"
+                    }
+                },
+                "placeholders": {
+                    "amount": "Cantitate"
+                },
+                "btns": {
+                    "stake": "Miză"
+                },
+                "stake": "Miză",
+                "loading": "Se încarcă"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durată",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donatii",
+                    "rewardsRateFraction": "recompenseRateFracție",
+                    "numerator": "numărător",
+                    "denominator": "numitor"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durata in zile",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donatii",
+                    "rewardsRateFraction": "recompenseRateFracție",
+                    "numerator": "numărător",
+                    "denominator": "numitor"
+                }
+            },
+            "placeholders": {
+                "optional": "(optional)",
+                "tuple": "tuplu[]",
+                "number": "număr",
+                "address": "abordare",
+                "fraction": "fracțiune",
+                "integer": "întreg",
+                "seconds": "secunde",
+                "days": "zile",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nu există piscine"
+            },
+            "btns": {
+                "createPool": "Creați pool",
+                "createPoolInForm": "Crea"
+            },
+            "createPool": "Creați pool",
+            "produce": "Legume şi fructe",
+            "loading": "Se încarcă",
+            "viewInstancesList": "Actualizează lista"
+        }
     }
 }

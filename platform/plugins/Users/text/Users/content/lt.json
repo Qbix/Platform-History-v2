@@ -171,5 +171,11 @@
             "bio": "Forumo įtraukimo botas. Gaukite savo adresu https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Nepakanka leidimų skaityti šio naudotojo piniginę",
+        "ThisUserHaveNoWallet": "Šiam vartotojui nepriskirta piniginė",
+        "TheWalletOfThisUserInvalid": "Šio vartotojo piniginė negalioja",
+        "WalletInvalid": "Netinkamas piniginės adresas"
     }
 }

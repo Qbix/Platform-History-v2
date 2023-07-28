@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Walang sapat na pahintulot na basahin ang wallet ng user na ito",
         "ThisUserHaveNoWallet": "Walang nakatalagang wallet ang user na ito",
         "TheWalletOfThisUserInvalid": "Di-wasto ang wallet ng user na ito",
-        "WalletInvalid": "Di-wasto ang address ng pitaka"
+        "WalletInvalid": "Di-wasto ang address ng pitaka",
+        "CantManageFrozenSeries": "Hindi mo mapamahalaan ang mga nakapirming serye"
     },
     "admin": {
         "Title": "Administratibo ng mga asset",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Nakakuha ng {{amount}} credits",
         "Places_user_location": "Nakakuha ng {{amount}} credits",
         "Streams_greeting": "Nakakuha ng {{amount}} credits",
-        "YouHaveCreditsToStart": "Nakakuha ng {{amount}} credits"
+        "YouHaveCreditsToStart": "Nakakuha ng {{amount}} credits",
+        "InvitedUserFilledStream": "Nakakuha ng {{amount}} credits",
+        "ForFillingStream": "Nakakuha ng {{amount}} credits",
+        "CreatePrivateChat": "Gumastos ng {{amount}} credits"
     },
     "subscriptions": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Pumili ng tatanggap",
         "TransactionSuccess": "Tagumpay ng Transaksyon",
-        "OrTypeWalletAddress": "O i-type ang address ng wallet ng tatanggap"
+        "OrTypeWalletAddress": "O i-type ang address ng wallet ng tatanggap",
+        "AppCredits": "Mga Kredito sa App"
     },
     "NFT": {
         "Title": "Pamagat",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Na-claim ang Token na &quot; {{title}} &quot;.",
             "TokenWasLocked": "Na-lock ang Token &quot; {{title}} &quot;.",
             "TokenWasUnlocked": "Na-unlock ang Token &quot; {{title}} &quot;."
+        },
+        "GenerateDescription": "o auto-generate",
+        "collections": {
+            "Title": "Mga koleksyon",
+            "EnterTitle": "ilagay ang pamagat",
+            "EnterDescription": "ilagay ang paglalarawan",
+            "NewCollection": "Bagong Koleksyon",
+            "Name": "Pangalan",
+            "Icon": "Icon",
+            "Description": "Paglalarawan",
+            "Author": "May-akda",
+            "SelectCollection": "Pumili ng koleksyon",
+            "Value": "Halaga",
+            "AreYouSure": "Sigurado ka ba?",
+            "AuthorInvalid": "Di-wasto ang address ng may-akda!",
+            "Address": "Address",
+            "CoverImage": "Larawan sa pabalat",
+            "UploadIcon": "Icon ng pag-upload",
+            "CommissionAddressInvalid": "Di-wasto ang address ng komisyon",
+            "OnSale": "sa pagbebenta",
+            "OffSale": "off sale",
+            "CreateCollection": "Lumikha ng Koleksyon",
+            "UpdateCollection": "I-update ang Koleksyon",
+            "CollectionInfo": "Impormasyon sa Koleksyon",
+            "SelectAuthor": "Pumili ng may-akda",
+            "NewItem": "Bagong Koleksyon ng NFT",
+            "NamePlaceholder": "Ilagay ang pangalan ng koleksyon",
+            "DescPlaceholder": "Ilagay ang paglalarawan ng koleksyon",
+            "EndingIn": "Nagtatapos Sa",
+            "SubmitSeries": "Magsumite ng Serye"
         }
     },
     "currencies": {
         "choose": "Pumili ng pera"
+    },
+    "connectedAccount": {
+        "Title": "Ikonekta ang account",
+        "Success": "Tagumpay",
+        "YourAccountCreated": "Matagumpay na nagawa ang iyong account!",
+        "YourAccountAlreadyCreated": "Nagawa na ang iyong account at handa nang gamitin"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Halaga"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Halaga"
+                    }
+                },
+                "placeholders": {
+                    "amount": "halaga"
+                },
+                "btns": {
+                    "stake": "istaka"
+                },
+                "stake": "istaka",
+                "loading": "Naglo-load"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tagal",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "mga donasyon",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerator",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tagal sa mga araw",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "mga donasyon",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerator",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opsyonal)",
+                "tuple": "tuple []",
+                "number": "numero",
+                "address": "address",
+                "fraction": "maliit na bahagi",
+                "integer": "integer",
+                "seconds": "segundo",
+                "days": "araw",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Walang mga pool"
+            },
+            "btns": {
+                "createPool": "Lumikha ng Pool",
+                "createPoolInForm": "Lumikha"
+            },
+            "createPool": "Lumikha ng Pool",
+            "produce": "Gumawa",
+            "loading": "Naglo-load",
+            "viewInstancesList": "I-refresh ang Listahan"
+        }
     }
 }

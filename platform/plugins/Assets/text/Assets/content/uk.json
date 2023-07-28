@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Недостатньо прав для читання гаманця цього користувача",
         "ThisUserHaveNoWallet": "Цьому користувачеві не призначено гаманця",
         "TheWalletOfThisUserInvalid": "Гаманець цього користувача недійсний",
-        "WalletInvalid": "Недійсна адреса гаманця"
+        "WalletInvalid": "Недійсна адреса гаманця",
+        "CantManageFrozenSeries": "Ви не можете керувати замороженими серіями"
     },
     "admin": {
         "Title": "Активи адміністративні",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Отримано {{amount}} кредитів",
         "Places_user_location": "Отримано {{amount}} кредитів",
         "Streams_greeting": "Отримано {{amount}} кредитів",
-        "YouHaveCreditsToStart": "Отримано {{amount}} кредитів"
+        "YouHaveCreditsToStart": "Отримано {{amount}} кредитів",
+        "InvitedUserFilledStream": "Отримано {{amount}} кредитів",
+        "ForFillingStream": "Отримано {{amount}} кредитів",
+        "CreatePrivateChat": "Витрачено {{amount}} кредитів"
     },
     "subscriptions": {
         "infoTitle": "Встановіть платіжну інформацію",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Виберіть одержувача",
         "TransactionSuccess": "Успіх транзакції",
-        "OrTypeWalletAddress": "АБО введіть адресу гаманця одержувача"
+        "OrTypeWalletAddress": "АБО введіть адресу гаманця одержувача",
+        "AppCredits": "Кредити програми"
     },
     "NFT": {
         "Title": "Назва",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Токен &quot; {{title}} &quot; було заявлено",
             "TokenWasLocked": "Маркер &quot; {{title}} &quot; було заблоковано",
             "TokenWasUnlocked": "Токен &quot; {{title}} &quot; розблоковано"
+        },
+        "GenerateDescription": "або автоматично згенерувати",
+        "collections": {
+            "Title": "Колекції",
+            "EnterTitle": "введіть назву",
+            "EnterDescription": "введіть опис",
+            "NewCollection": "Нова колекція",
+            "Name": "Ім&#39;я",
+            "Icon": "значок",
+            "Description": "опис",
+            "Author": "Автор",
+            "SelectCollection": "Виберіть колекцію",
+            "Value": "Значення",
+            "AreYouSure": "Ти впевнений?",
+            "AuthorInvalid": "Адреса автора недійсна!",
+            "Address": "Адреса",
+            "CoverImage": "Зображення обкладинки",
+            "UploadIcon": "Завантажити значок",
+            "CommissionAddressInvalid": "Адреса комісії недійсна",
+            "OnSale": "продається",
+            "OffSale": "з продажу",
+            "CreateCollection": "Створити колекцію",
+            "UpdateCollection": "Оновити колекцію",
+            "CollectionInfo": "Інформація про колекцію",
+            "SelectAuthor": "Виберіть автора",
+            "NewItem": "Нова колекція NFT",
+            "NamePlaceholder": "Введіть назву колекції",
+            "DescPlaceholder": "Введіть опис колекції",
+            "EndingIn": "Закінчується на",
+            "SubmitSeries": "Надіслати серію"
         }
     },
     "currencies": {
         "choose": "Виберіть валюту"
+    },
+    "connectedAccount": {
+        "Title": "Підключити обліковий запис",
+        "Success": "Успіх",
+        "YourAccountCreated": "Ваш обліковий запис успішно створено!",
+        "YourAccountAlreadyCreated": "Ваш обліковий запис уже створено та готовий до використання"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Сума"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Сума"
+                    }
+                },
+                "placeholders": {
+                    "amount": "сума"
+                },
+                "btns": {
+                    "stake": "Ставка"
+                },
+                "stake": "Ставка",
+                "loading": "Завантаження"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Тривалість",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "пожертвування",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "чисельник",
+                    "denominator": "знаменник"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Тривалість в днях",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "пожертвування",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "чисельник",
+                    "denominator": "знаменник"
+                }
+            },
+            "placeholders": {
+                "optional": "(необов&#39;язково)",
+                "tuple": "кортеж[]",
+                "number": "номер",
+                "address": "адресу",
+                "fraction": "дріб",
+                "integer": "ціле число",
+                "seconds": "секунд",
+                "days": "днів",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Басейнів немає"
+            },
+            "btns": {
+                "createPool": "Створити пул",
+                "createPoolInForm": "Створити"
+            },
+            "createPool": "Створити пул",
+            "produce": "Виробляти",
+            "loading": "Завантаження",
+            "viewInstancesList": "Оновити список"
+        }
     }
 }

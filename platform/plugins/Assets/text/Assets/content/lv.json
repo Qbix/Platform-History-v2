@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Nav pietiekami daudz atļauju, lai lasītu šī lietotāja maku",
         "ThisUserHaveNoWallet": "Šim lietotājam nav piešķirts maks",
         "TheWalletOfThisUserInvalid": "Šī lietotāja maks nav derīgs",
-        "WalletInvalid": "Maka adrese nav derīga"
+        "WalletInvalid": "Maka adrese nav derīga",
+        "CantManageFrozenSeries": "Jūs nevarat pārvaldīt iesaldētas sērijas"
     },
     "admin": {
         "Title": "Aktīvi administratīvi",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Nopelnīti {{amount}} kredītpunkti",
         "Places_user_location": "Nopelnīti {{amount}} kredītpunkti",
         "Streams_greeting": "Nopelnīti {{amount}} kredītpunkti",
-        "YouHaveCreditsToStart": "Nopelnīti {{amount}} kredītpunkti"
+        "YouHaveCreditsToStart": "Nopelnīti {{amount}} kredītpunkti",
+        "InvitedUserFilledStream": "Nopelnīti {{amount}} kredītpunkti",
+        "ForFillingStream": "Nopelnīti {{amount}} kredītpunkti",
+        "CreatePrivateChat": "Iztērēti {{amount}} kredīti"
     },
     "subscriptions": {
         "infoTitle": "Iestatiet maksājuma informāciju",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Izvēlieties adresātu",
         "TransactionSuccess": "Darījuma veiksme",
-        "OrTypeWalletAddress": "VAI ierakstiet adresāta maka adresi"
+        "OrTypeWalletAddress": "VAI ierakstiet adresāta maka adresi",
+        "AppCredits": "Lietotņu kredīti"
     },
     "NFT": {
         "Title": "Nosaukums",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Tika pieprasīts marķieris &quot; {{title}} &quot;.",
             "TokenWasLocked": "Tokens &quot; {{title}} &quot; tika bloķēts",
             "TokenWasUnlocked": "Tokens &quot; {{title}} &quot; tika atbloķēts"
+        },
+        "GenerateDescription": "vai automātiski ģenerēt",
+        "collections": {
+            "Title": "Kolekcijas",
+            "EnterTitle": "ievadiet virsrakstu",
+            "EnterDescription": "ievadiet aprakstu",
+            "NewCollection": "Jauna kolekcija",
+            "Name": "Vārds",
+            "Icon": "Ikona",
+            "Description": "Apraksts",
+            "Author": "Autors",
+            "SelectCollection": "Izvēlieties kolekciju",
+            "Value": "Vērtība",
+            "AreYouSure": "Vai tu esi pārliecināts?",
+            "AuthorInvalid": "Autora adrese nav derīga!",
+            "Address": "Adrese",
+            "CoverImage": "Vāka attēls",
+            "UploadIcon": "Augšupielādes ikona",
+            "CommissionAddressInvalid": "Komisijas adrese nav derīga",
+            "OnSale": "izpārdošanā",
+            "OffSale": "izpārdošana",
+            "CreateCollection": "Izveidot kolekciju",
+            "UpdateCollection": "Atjaunināt kolekciju",
+            "CollectionInfo": "Informācija par kolekciju",
+            "SelectAuthor": "Izvēlieties autoru",
+            "NewItem": "Jauna NFT kolekcija",
+            "NamePlaceholder": "Ievadiet kolekcijas nosaukumu",
+            "DescPlaceholder": "Ievadiet kolekcijas aprakstu",
+            "EndingIn": "Beidzas",
+            "SubmitSeries": "Iesniedziet sēriju"
         }
     },
     "currencies": {
         "choose": "Izvēlieties valūtu"
+    },
+    "connectedAccount": {
+        "Title": "Pievienojiet kontu",
+        "Success": "Panākumi",
+        "YourAccountCreated": "Jūsu konts ir veiksmīgi izveidots!",
+        "YourAccountAlreadyCreated": "Jūsu konts jau ir izveidots un gatavs lietošanai"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervesToken",
+                        "amount": "Summa"
+                    },
+                    "small": {
+                        "reserveToken": "rezervesToken",
+                        "amount": "Summa"
+                    }
+                },
+                "placeholders": {
+                    "amount": "summa"
+                },
+                "btns": {
+                    "stake": "Miets"
+                },
+                "stake": "Miets",
+                "loading": "Notiek ielāde"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Ilgums",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ziedojumi",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitītājs",
+                    "denominator": "saucējs"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Ilgums dienās",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ziedojumi",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitītājs",
+                    "denominator": "saucējs"
+                }
+            },
+            "placeholders": {
+                "optional": "(neobligāti)",
+                "tuple": "tuple[]",
+                "number": "numuru",
+                "address": "adrese",
+                "fraction": "frakcija",
+                "integer": "vesels skaitlis",
+                "seconds": "sekundes",
+                "days": "dienas",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nav baseinu"
+            },
+            "btns": {
+                "createPool": "Izveidojiet baseinu",
+                "createPoolInForm": "Izveidot"
+            },
+            "createPool": "Izveidojiet baseinu",
+            "produce": "Ražot",
+            "loading": "Notiek ielāde",
+            "viewInstancesList": "Atsvaidzināt sarakstu"
+        }
     }
 }

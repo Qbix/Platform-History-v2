@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Nejste přihlášeni. <a href='#login' data-users-login>Přihlaste se kliknutím sem<\/a>"
+    "NotLoggedIn": "Nejste přihlášeni. <a href='#login' data-users-login>Přihlaste se kliknutím sem<\/a>",
+    "InvalidLanguage": "Neplatný jazyk {{language}}"
 }

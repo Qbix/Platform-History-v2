@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Ei tarpeeksi oikeuksia tämän käyttäjän lompakon lukemiseen",
         "ThisUserHaveNoWallet": "Tälle käyttäjälle ei ole määritetty lompakkoa",
         "TheWalletOfThisUserInvalid": "Tämän käyttäjän lompakko on virheellinen",
-        "WalletInvalid": "Lompakon osoite on virheellinen"
+        "WalletInvalid": "Lompakon osoite on virheellinen",
+        "CantManageFrozenSeries": "Et voi hallita jäädytettyjä sarjoja"
     },
     "admin": {
         "Title": "Omaisuuden hallinto",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Ansaittu {{amount}} opintopistettä",
         "Places_user_location": "Ansaittu {{amount}} opintopistettä",
         "Streams_greeting": "Ansaittu {{amount}} opintopistettä",
-        "YouHaveCreditsToStart": "Ansaittu {{amount}} opintopistettä"
+        "YouHaveCreditsToStart": "Ansaittu {{amount}} opintopistettä",
+        "InvitedUserFilledStream": "Ansaittu {{amount}} opintopistettä",
+        "ForFillingStream": "Ansaittu {{amount}} opintopistettä",
+        "CreatePrivateChat": "Käytti {{amount}} krediittiä"
     },
     "subscriptions": {
         "infoTitle": "Aseta maksutiedot",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Valitse vastaanottaja",
         "TransactionSuccess": "Kaupan onnistuminen",
-        "OrTypeWalletAddress": "TAI kirjoita vastaanottajan lompakon osoite"
+        "OrTypeWalletAddress": "TAI kirjoita vastaanottajan lompakon osoite",
+        "AppCredits": "Sovellushyvitykset"
     },
     "NFT": {
         "Title": "Otsikko",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Tunnus &quot; {{title}} &quot; lunastettiin",
             "TokenWasLocked": "Tunnus &quot; {{title}} &quot; lukittiin",
             "TokenWasUnlocked": "Tunnus &quot; {{title}} &quot; avattiin"
+        },
+        "GenerateDescription": "tai luo automaattisesti",
+        "collections": {
+            "Title": "Kokoelmat",
+            "EnterTitle": "syötä otsikko",
+            "EnterDescription": "syötä kuvaus",
+            "NewCollection": "Uusi kokoelma",
+            "Name": "Nimi",
+            "Icon": "Kuvake",
+            "Description": "Kuvaus",
+            "Author": "Tekijä",
+            "SelectCollection": "Valitse kokoelma",
+            "Value": "Arvo",
+            "AreYouSure": "Oletko varma?",
+            "AuthorInvalid": "Tekijän osoite on virheellinen!",
+            "Address": "Osoite",
+            "CoverImage": "Kansikuva",
+            "UploadIcon": "Latauskuvake",
+            "CommissionAddressInvalid": "Komission osoite on virheellinen",
+            "OnSale": "alennuksessa",
+            "OffSale": "pois myynnistä",
+            "CreateCollection": "Luo kokoelma",
+            "UpdateCollection": "Päivitä kokoelma",
+            "CollectionInfo": "Kokoelman tiedot",
+            "SelectAuthor": "Valitse kirjoittaja",
+            "NewItem": "Uusi NFT-kokoelma",
+            "NamePlaceholder": "Anna kokoelman nimi",
+            "DescPlaceholder": "Anna kokoelman kuvaus",
+            "EndingIn": "Päättyy sisään",
+            "SubmitSeries": "Lähetä sarja"
         }
     },
     "currencies": {
         "choose": "Valitse valuutta"
+    },
+    "connectedAccount": {
+        "Title": "Yhdistä tili",
+        "Success": "Menestys",
+        "YourAccountCreated": "Tilisi luominen onnistui!",
+        "YourAccountAlreadyCreated": "Tilisi on jo luotu ja valmis käytettäväksi"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "varataToken",
+                        "amount": "Määrä"
+                    },
+                    "small": {
+                        "reserveToken": "varataToken",
+                        "amount": "Määrä"
+                    }
+                },
+                "placeholders": {
+                    "amount": "määrä"
+                },
+                "btns": {
+                    "stake": "Panos"
+                },
+                "stake": "Panos",
+                "loading": "Ladataan"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kesto",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "suosittu Token",
+                    "donations": "lahjoituksia",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "osoittaja",
+                    "denominator": "nimittäjä"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kesto päivinä",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "suosittu Token",
+                    "donations": "lahjoituksia",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "osoittaja",
+                    "denominator": "nimittäjä"
+                }
+            },
+            "placeholders": {
+                "optional": "(valinnainen)",
+                "tuple": "monikko[]",
+                "number": "määrä",
+                "address": "osoite",
+                "fraction": "murto-osa",
+                "integer": "kokonaisluku",
+                "seconds": "sekuntia",
+                "days": "päivää",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Ei ole uima-altaita"
+            },
+            "btns": {
+                "createPool": "Luo allas",
+                "createPoolInForm": "Luoda"
+            },
+            "createPool": "Luo allas",
+            "produce": "Tuottaa",
+            "loading": "Ladataan",
+            "viewInstancesList": "Päivitä lista"
+        }
     }
 }

@@ -171,5 +171,11 @@
             "bio": "ফোরাম ব্যস্ততা বট. https:\/\/engageusers.ai-এ আপনার নিজের পান",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "এই ব্যবহারকারীর ওয়ালেট পড়ার জন্য পর্যাপ্ত অনুমতি নেই৷",
+        "ThisUserHaveNoWallet": "এই ব্যবহারকারীর কোনো ওয়ালেট বরাদ্দ নেই৷",
+        "TheWalletOfThisUserInvalid": "এই ব্যবহারকারীর ওয়ালেট অবৈধ৷",
+        "WalletInvalid": "ওয়ালেট ঠিকানা অবৈধ৷"
     }
 }

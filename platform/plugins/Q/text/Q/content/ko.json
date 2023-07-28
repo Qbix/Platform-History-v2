@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "QR 코드 스캔"
+    },
+    "input": {
+        "Placeholder": "입력 시작..."
     }
 }

@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Вы не ўвайшлі ў сістэму. <a href='#login' data-users-login>Націсніце тут, каб увайсці<\/a>"
+    "NotLoggedIn": "Вы не ўвайшлі ў сістэму. <a href='#login' data-users-login>Націсніце тут, каб увайсці<\/a>",
+    "InvalidLanguage": "Няправільная мова {{language}}"
 }

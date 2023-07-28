@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Няма достатъчно разрешения за четене на портфейла на този потребител",
         "ThisUserHaveNoWallet": "Този потребител няма присвоен портфейл",
         "TheWalletOfThisUserInvalid": "Портфейлът на този потребител е невалиден",
-        "WalletInvalid": "Адресът на портфейла е невалиден"
+        "WalletInvalid": "Адресът на портфейла е невалиден",
+        "CantManageFrozenSeries": "Не можете да управлявате замразени серии"
     },
     "admin": {
         "Title": "Административни активи",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Спечелени {{amount}} кредита",
         "Places_user_location": "Спечелени {{amount}} кредита",
         "Streams_greeting": "Спечелени {{amount}} кредита",
-        "YouHaveCreditsToStart": "Спечелени {{amount}} кредита"
+        "YouHaveCreditsToStart": "Спечелени {{amount}} кредита",
+        "InvitedUserFilledStream": "Спечелени {{amount}} кредита",
+        "ForFillingStream": "Спечелени {{amount}} кредита",
+        "CreatePrivateChat": "Похарчени {{amount}} кредита"
     },
     "subscriptions": {
         "infoTitle": "Задайте информация за плащане",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Изберете получател",
         "TransactionSuccess": "Успех на транзакцията",
-        "OrTypeWalletAddress": "ИЛИ въведете адреса на портфейла на получателя"
+        "OrTypeWalletAddress": "ИЛИ въведете адреса на портфейла на получателя",
+        "AppCredits": "Кредити за приложения"
     },
     "NFT": {
         "Title": "Заглавие",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Токенът „ {{title}} “ беше поискан",
             "TokenWasLocked": "Токенът &quot; {{title}} &quot; беше заключен",
             "TokenWasUnlocked": "Токенът &quot; {{title}} &quot; беше отключен"
+        },
+        "GenerateDescription": "или автоматично генериране",
+        "collections": {
+            "Title": "Колекции",
+            "EnterTitle": "въведете заглавие",
+            "EnterDescription": "въведете описание",
+            "NewCollection": "Нова колекция",
+            "Name": "Име",
+            "Icon": "Икона",
+            "Description": "Описание",
+            "Author": "Автор",
+            "SelectCollection": "Изберете колекция",
+            "Value": "Стойност",
+            "AreYouSure": "Сигурен ли си?",
+            "AuthorInvalid": "Адресът на автора е невалиден!",
+            "Address": "Адрес",
+            "CoverImage": "Изображение на корицата",
+            "UploadIcon": "Икона за качване",
+            "CommissionAddressInvalid": "Адресът на комисията е невалиден",
+            "OnSale": "продава се",
+            "OffSale": "извън продажба",
+            "CreateCollection": "Създаване на колекция",
+            "UpdateCollection": "Актуализиране на колекция",
+            "CollectionInfo": "Информация за колекцията",
+            "SelectAuthor": "Изберете автор",
+            "NewItem": "Нова NFT колекция",
+            "NamePlaceholder": "Въведете име на колекция",
+            "DescPlaceholder": "Въведете описание на колекцията",
+            "EndingIn": "Свършва след",
+            "SubmitSeries": "Изпратете серия"
         }
     },
     "currencies": {
         "choose": "Изберете валута"
+    },
+    "connectedAccount": {
+        "Title": "Свързване на акаунт",
+        "Success": "Успех",
+        "YourAccountCreated": "Вашият акаунт е създаден успешно!",
+        "YourAccountAlreadyCreated": "Вашият акаунт вече е създаден и готов за използване"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Количество"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Количество"
+                    }
+                },
+                "placeholders": {
+                    "amount": "количество"
+                },
+                "btns": {
+                    "stake": "Залог"
+                },
+                "stake": "Залог",
+                "loading": "Зареждане"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Продължителност",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "дарения",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "числител",
+                    "denominator": "знаменател"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Продължителност в дни",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "дарения",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "числител",
+                    "denominator": "знаменател"
+                }
+            },
+            "placeholders": {
+                "optional": "(по избор)",
+                "tuple": "кортеж[]",
+                "number": "номер",
+                "address": "адрес",
+                "fraction": "фракция",
+                "integer": "цяло число",
+                "seconds": "секунди",
+                "days": "дни",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Няма басейни"
+            },
+            "btns": {
+                "createPool": "Създаване на басейн",
+                "createPoolInForm": "Създавайте"
+            },
+            "createPool": "Създаване на басейн",
+            "produce": "Продукция",
+            "loading": "Зареждане",
+            "viewInstancesList": "Опресняване на списъка"
+        }
     }
 }

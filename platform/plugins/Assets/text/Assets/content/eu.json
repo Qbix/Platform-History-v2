@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Ez dago nahikoa baimen erabiltzailearen zorroa irakurtzeko",
         "ThisUserHaveNoWallet": "Erabiltzaile honek ez du diru-zorrorik esleitu",
         "TheWalletOfThisUserInvalid": "Erabiltzaile honen zorroa baliogabea",
-        "WalletInvalid": "Diru-zorroaren helbidea baliogabea"
+        "WalletInvalid": "Diru-zorroaren helbidea baliogabea",
+        "CantManageFrozenSeries": "Ezin dituzu kudeatu izoztutako serieak"
     },
     "admin": {
         "Title": "Ondasunen administrazioa",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} kreditu lortu ditu",
         "Places_user_location": "{{amount}} kreditu lortu ditu",
         "Streams_greeting": "{{amount}} kreditu lortu ditu",
-        "YouHaveCreditsToStart": "{{amount}} kreditu lortu ditu"
+        "YouHaveCreditsToStart": "{{amount}} kreditu lortu ditu",
+        "InvitedUserFilledStream": "{{amount}} kreditu lortu ditu",
+        "ForFillingStream": "{{amount}} kreditu lortu ditu",
+        "CreatePrivateChat": "{{amount}} kreditu gastatu"
     },
     "subscriptions": {
         "infoTitle": "Ezarri ordainketa-informazioa",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Hautatu hartzailea",
         "TransactionSuccess": "Transakzio arrakastatsua",
-        "OrTypeWalletAddress": "EDO idatzi hartzailearen zorroaren helbidea"
+        "OrTypeWalletAddress": "EDO idatzi hartzailearen zorroaren helbidea",
+        "AppCredits": "Aplikazio-kredituak"
     },
     "NFT": {
         "Title": "Izenburua",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "&quot; {{title}} &quot; tokena erreklamatu zen",
             "TokenWasLocked": "&quot; {{title}} &quot; tokena blokeatu zen",
             "TokenWasUnlocked": "&quot; {{title}} &quot; tokena desblokeatu zen"
+        },
+        "GenerateDescription": "edo sortu automatikoki",
+        "collections": {
+            "Title": "Bildumak",
+            "EnterTitle": "sartu izenburua",
+            "EnterDescription": "idatzi deskribapena",
+            "NewCollection": "Bilduma Berria",
+            "Name": "Izena",
+            "Icon": "Ikonoa",
+            "Description": "Deskribapena",
+            "Author": "Egilea",
+            "SelectCollection": "Hautatu bilduma",
+            "Value": "Balioa",
+            "AreYouSure": "Ziur zaude?",
+            "AuthorInvalid": "Egilearen helbidea baliogabea!",
+            "Address": "Helbidea",
+            "CoverImage": "Azaleko irudia",
+            "UploadIcon": "Kargatu ikonoa",
+            "CommissionAddressInvalid": "Batzordearen helbidea baliogabea",
+            "OnSale": "salgai",
+            "OffSale": "salmentatik kanpo",
+            "CreateCollection": "Sortu bilduma",
+            "UpdateCollection": "Eguneratu bilduma",
+            "CollectionInfo": "Bildumaren informazioa",
+            "SelectAuthor": "Hautatu egilea",
+            "NewItem": "NFT bilduma berria",
+            "NamePlaceholder": "Sartu bildumaren izena",
+            "DescPlaceholder": "Sartu bildumaren deskribapena",
+            "EndingIn": "Amaitzen",
+            "SubmitSeries": "Bidali serie bat"
         }
     },
     "currencies": {
         "choose": "Aukeratu moneta bat"
+    },
+    "connectedAccount": {
+        "Title": "Konektatu kontua",
+        "Success": "Arrakasta",
+        "YourAccountCreated": "Zure kontua behar bezala sortu da!",
+        "YourAccountAlreadyCreated": "Zure kontua dagoeneko sortua eta erabiltzeko prest"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "erreserbaToken",
+                        "amount": "Zenbatekoa"
+                    },
+                    "small": {
+                        "reserveToken": "erreserbaToken",
+                        "amount": "Zenbatekoa"
+                    }
+                },
+                "placeholders": {
+                    "amount": "zenbatekoa"
+                },
+                "btns": {
+                    "stake": "Partaidetza"
+                },
+                "stake": "Partaidetza",
+                "loading": "Kargatzen"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Iraupena",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "dohaintzak",
+                    "rewardsRateFraction": "sariakBalorazioaFrakzioa",
+                    "numerator": "zenbatzailea",
+                    "denominator": "izendatzailea"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Iraupena egunetan",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "dohaintzak",
+                    "rewardsRateFraction": "sariakBalorazioaFrakzioa",
+                    "numerator": "zenbatzailea",
+                    "denominator": "izendatzailea"
+                }
+            },
+            "placeholders": {
+                "optional": "(aukerakoa)",
+                "tuple": "tupla[]",
+                "number": "zenbakia",
+                "address": "helbidea",
+                "fraction": "zatikia",
+                "integer": "osokoa",
+                "seconds": "segundoak",
+                "days": "egunak",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Ez dago igerilekurik"
+            },
+            "btns": {
+                "createPool": "Sortu igerilekua",
+                "createPoolInForm": "Sortu"
+            },
+            "createPool": "Sortu igerilekua",
+            "produce": "Ekoiztu",
+            "loading": "Kargatzen",
+            "viewInstancesList": "Freskatu zerrenda"
+        }
     }
 }

@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Níl tú logáilte isteach. <a href='#login' data-users-login>Cliceáil anseo chun logáil isteach<\/a>"
+    "NotLoggedIn": "Níl tú logáilte isteach. <a href='#login' data-users-login>Cliceáil anseo chun logáil isteach<\/a>",
+    "InvalidLanguage": "Teanga Neamhbhailí {{language}}"
 }

@@ -171,5 +171,11 @@
             "bio": "Bot keterlibatan forum. Dapatkan sendiri di https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "Izin tidak cukup untuk membaca dompet pengguna ini",
+        "ThisUserHaveNoWallet": "Pengguna ini tidak memiliki dompet yang ditetapkan",
+        "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak valid",
+        "WalletInvalid": "Alamat dompet tidak valid"
     }
 }

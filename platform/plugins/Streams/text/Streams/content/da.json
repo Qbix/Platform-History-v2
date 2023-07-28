@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Tilføj {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Navn på en bruger..."
     }
 }

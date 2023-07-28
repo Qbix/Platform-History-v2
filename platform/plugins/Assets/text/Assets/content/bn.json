@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "এই ব্যবহারকারীর ওয়ালেট পড়ার জন্য পর্যাপ্ত অনুমতি নেই৷",
         "ThisUserHaveNoWallet": "এই ব্যবহারকারীর কোন ওয়ালেট বরাদ্দ নেই",
         "TheWalletOfThisUserInvalid": "এই ব্যবহারকারীর ওয়ালেট অবৈধ৷",
-        "WalletInvalid": "ওয়ালেট ঠিকানা অবৈধ৷"
+        "WalletInvalid": "ওয়ালেট ঠিকানা অবৈধ৷",
+        "CantManageFrozenSeries": "আপনি হিমায়িত সিরিজ পরিচালনা করতে পারবেন না"
     },
     "admin": {
         "Title": "সম্পদ প্রশাসনিক",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} ক্রেডিট অর্জন করেছে",
         "Places_user_location": "{{amount}} ক্রেডিট অর্জন করেছে",
         "Streams_greeting": "{{amount}} ক্রেডিট অর্জন করেছে",
-        "YouHaveCreditsToStart": "{{amount}} ক্রেডিট অর্জন করেছে"
+        "YouHaveCreditsToStart": "{{amount}} ক্রেডিট অর্জন করেছে",
+        "InvitedUserFilledStream": "{{amount}} ক্রেডিট অর্জন করেছে",
+        "ForFillingStream": "{{amount}} ক্রেডিট অর্জন করেছে",
+        "CreatePrivateChat": "{{amount}} ক্রেডিট খরচ হয়েছে"
     },
     "subscriptions": {
         "infoTitle": "পেমেন্ট তথ্য সেট করুন",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "প্রাপক নির্বাচন করুন",
         "TransactionSuccess": "লেনদেন সাফল্য",
-        "OrTypeWalletAddress": "অথবা প্রাপকের ওয়ালেট ঠিকানা টাইপ করুন"
+        "OrTypeWalletAddress": "অথবা প্রাপকের ওয়ালেট ঠিকানা টাইপ করুন",
+        "AppCredits": "অ্যাপ ক্রেডিট"
     },
     "NFT": {
         "Title": "শিরোনাম",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "টোকেন &quot; {{title}} &quot; দাবি করা হয়েছে",
             "TokenWasLocked": "টোকেন &quot; {{title}} &quot; লক করা হয়েছে৷",
             "TokenWasUnlocked": "টোকেন &quot; {{title}} &quot; আনলক করা হয়েছে৷"
+        },
+        "GenerateDescription": "অথবা স্বয়ংক্রিয় উৎপন্ন হয়",
+        "collections": {
+            "Title": "সংগ্রহ",
+            "EnterTitle": "শিরোনাম লিখুন",
+            "EnterDescription": "বর্ণনা লিখুন",
+            "NewCollection": "নতুন সংগ্রহ",
+            "Name": "নাম",
+            "Icon": "আইকন",
+            "Description": "বর্ণনা",
+            "Author": "লেখক",
+            "SelectCollection": "সংগ্রহ নির্বাচন করুন",
+            "Value": "মান",
+            "AreYouSure": "তুমি কি নিশ্চিত?",
+            "AuthorInvalid": "লেখকের ঠিকানা অবৈধ!",
+            "Address": "ঠিকানা",
+            "CoverImage": "কভার ইমেজ",
+            "UploadIcon": "আপলোড আইকন",
+            "CommissionAddressInvalid": "কমিশন ঠিকানা অবৈধ",
+            "OnSale": "বিক্রিতে",
+            "OffSale": "বিক্রয় বন্ধ",
+            "CreateCollection": "সংগ্রহ তৈরি করুন",
+            "UpdateCollection": "সংগ্রহ আপডেট করুন",
+            "CollectionInfo": "সংগ্রহের তথ্য",
+            "SelectAuthor": "লেখক নির্বাচন করুন",
+            "NewItem": "নতুন NFT সংগ্রহ",
+            "NamePlaceholder": "সংগ্রহের নাম লিখুন",
+            "DescPlaceholder": "সংগ্রহের বিবরণ লিখুন",
+            "EndingIn": "শেষ",
+            "SubmitSeries": "একটি সিরিজ জমা দিন"
         }
     },
     "currencies": {
         "choose": "একটি মুদ্রা চয়ন করুন"
+    },
+    "connectedAccount": {
+        "Title": "অ্যাকাউন্ট সংযুক্ত করুন",
+        "Success": "সফলতা",
+        "YourAccountCreated": "আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!",
+        "YourAccountAlreadyCreated": "আপনার অ্যাকাউন্ট ইতিমধ্যে তৈরি এবং ব্যবহারের জন্য প্রস্তুত"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "রিজার্ভ টোকেন",
+                        "amount": "পরিমাণ"
+                    },
+                    "small": {
+                        "reserveToken": "রিজার্ভ টোকেন",
+                        "amount": "পরিমাণ"
+                    }
+                },
+                "placeholders": {
+                    "amount": "পরিমাণ"
+                },
+                "btns": {
+                    "stake": "বাজি"
+                },
+                "stake": "বাজি",
+                "loading": "লোড হচ্ছে"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "সময়কাল",
+                    "bonusTokenFraction": "বোনাস টোকেনফ্রাকশন",
+                    "popularToken": "জনপ্রিয় টোকেন",
+                    "donations": "অনুদান",
+                    "rewardsRateFraction": "পুরস্কারের হার ভগ্নাংশ",
+                    "numerator": "অংক",
+                    "denominator": "হর"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "দিনের মধ্যে সময়কাল",
+                    "bonusTokenFraction": "বোনাস টোকেনফ্রাকশন",
+                    "popularToken": "জনপ্রিয় টোকেন",
+                    "donations": "অনুদান",
+                    "rewardsRateFraction": "পুরস্কারের হার ভগ্নাংশ",
+                    "numerator": "অংক",
+                    "denominator": "হর"
+                }
+            },
+            "placeholders": {
+                "optional": "(ঐচ্ছিক)",
+                "tuple": "টিপল",
+                "number": "সংখ্যা",
+                "address": "ঠিকানা",
+                "fraction": "ভগ্নাংশ",
+                "integer": "পূর্ণসংখ্যা",
+                "seconds": "সেকেন্ড",
+                "days": "দিন",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "কোন পুল আছে"
+            },
+            "btns": {
+                "createPool": "পুল তৈরি করুন",
+                "createPoolInForm": "সৃষ্টি"
+            },
+            "createPool": "পুল তৈরি করুন",
+            "produce": "উৎপাদন করা",
+            "loading": "লোড হচ্ছে",
+            "viewInstancesList": "তালিকা পুনরুজ্জীবিত করা"
+        }
     }
 }

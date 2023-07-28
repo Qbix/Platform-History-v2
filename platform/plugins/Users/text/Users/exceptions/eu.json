@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Ez zara saioa hasi. <a href='#login' data-users-login>Egin klik hemen saioa hasteko<\/a>"
+    "NotLoggedIn": "Ez zara saioa hasi. <a href='#login' data-users-login>Egin klik hemen saioa hasteko<\/a>",
+    "InvalidLanguage": "Hizkuntza baliogabea {{language}}"
 }

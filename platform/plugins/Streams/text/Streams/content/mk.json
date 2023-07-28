@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Додадете {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Име на корисник..."
     }
 }

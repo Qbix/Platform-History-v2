@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "Onvoldoende rechten om portemonnee van deze gebruiker te lezen",
         "ThisUserHaveNoWallet": "Deze gebruiker heeft geen portemonnee toegewezen",
         "TheWalletOfThisUserInvalid": "De portemonnee van deze gebruiker is ongeldig",
-        "WalletInvalid": "Wallet-adres ongeldig"
+        "WalletInvalid": "Wallet-adres ongeldig",
+        "CantManageFrozenSeries": "U kunt geen bevroren series beheren"
     },
     "admin": {
         "Title": "Activa administratief",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} punten verdiend",
         "Places_user_location": "{{amount}} punten verdiend",
         "Streams_greeting": "{{amount}} punten verdiend",
-        "YouHaveCreditsToStart": "{{amount}} punten verdiend"
+        "YouHaveCreditsToStart": "{{amount}} punten verdiend",
+        "InvitedUserFilledStream": "{{amount}} punten verdiend",
+        "ForFillingStream": "{{amount}} punten verdiend",
+        "CreatePrivateChat": "{{amount}} credits uitgegeven"
     },
     "subscriptions": {
         "infoTitle": "Betalingsinformatie instellen",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Selecteer ontvanger",
         "TransactionSuccess": "Transactie succes",
-        "OrTypeWalletAddress": "OF typ het adres van de portemonnee van de ontvanger"
+        "OrTypeWalletAddress": "OF typ het adres van de portemonnee van de ontvanger",
+        "AppCredits": "App-tegoeden"
     },
     "NFT": {
         "Title": "Titel",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "Token &quot; {{title}} &quot; werd geclaimd",
             "TokenWasLocked": "Token &quot; {{title}} &quot; was vergrendeld",
             "TokenWasUnlocked": "Token &quot; {{title}} &quot; is ontgrendeld"
+        },
+        "GenerateDescription": "of automatisch genereren",
+        "collections": {
+            "Title": "Collecties",
+            "EnterTitle": "titel invoeren",
+            "EnterDescription": "voer beschrijving in",
+            "NewCollection": "Nieuwe collectie",
+            "Name": "Naam",
+            "Icon": "Icoon",
+            "Description": "Beschrijving",
+            "Author": "Auteur",
+            "SelectCollection": "Selecteer collectie",
+            "Value": "Waarde",
+            "AreYouSure": "Weet je het zeker?",
+            "AuthorInvalid": "Auteursadres ongeldig!",
+            "Address": "Adres",
+            "CoverImage": "Omslagfoto",
+            "UploadIcon": "Upload icoon",
+            "CommissionAddressInvalid": "Commissieadres ongeldig",
+            "OnSale": "te koop",
+            "OffSale": "uit de verkoop",
+            "CreateCollection": "Verzameling maken",
+            "UpdateCollection": "Collectie bijwerken",
+            "CollectionInfo": "Collectie-info",
+            "SelectAuthor": "Selecteer auteur",
+            "NewItem": "Nieuwe NFT-collectie",
+            "NamePlaceholder": "Voer de naam van de collectie in",
+            "DescPlaceholder": "Voer een collectiebeschrijving in",
+            "EndingIn": "Eindigend in",
+            "SubmitSeries": "Dien een serie in"
         }
     },
     "currencies": {
         "choose": "Kies een valuta"
+    },
+    "connectedAccount": {
+        "Title": "Account koppelen",
+        "Success": "Succes",
+        "YourAccountCreated": "Uw account is succesvol aangemaakt!",
+        "YourAccountAlreadyCreated": "Uw account is al aangemaakt en klaar voor gebruik"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Hoeveelheid"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Hoeveelheid"
+                    }
+                },
+                "placeholders": {
+                    "amount": "hoeveelheid"
+                },
+                "btns": {
+                    "stake": "Inzet"
+                },
+                "stake": "Inzet",
+                "loading": "Bezig met laden"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur",
+                    "bonusTokenFraction": "bonusTokenFractie",
+                    "popularToken": "populairToken",
+                    "donations": "donaties",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur in dagen",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populairToken",
+                    "donations": "donaties",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                }
+            },
+            "placeholders": {
+                "optional": "(optioneel)",
+                "tuple": "tupel[]",
+                "number": "nummer",
+                "address": "adres",
+                "fraction": "fractie",
+                "integer": "geheel getal",
+                "seconds": "seconden",
+                "days": "dagen",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Er zijn geen zwembaden"
+            },
+            "btns": {
+                "createPool": "Zwembad maken",
+                "createPoolInForm": "Creëren"
+            },
+            "createPool": "Zwembad maken",
+            "produce": "Produceren",
+            "loading": "Bezig met laden",
+            "viewInstancesList": "Ververs lijst"
+        }
     }
 }

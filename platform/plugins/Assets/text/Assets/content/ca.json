@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "No hi ha prou permisos per llegir la cartera d&#39;aquest usuari",
         "ThisUserHaveNoWallet": "Aquest usuari no té assignada cap cartera",
         "TheWalletOfThisUserInvalid": "La cartera d&#39;aquest usuari no és vàlida",
-        "WalletInvalid": "L&#39;adreça de la cartera no és vàlida"
+        "WalletInvalid": "L&#39;adreça de la cartera no és vàlida",
+        "CantManageFrozenSeries": "No pots gestionar sèries congelades"
     },
     "admin": {
         "Title": "Administratiu patrimonial",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "Ha obtingut {{amount}} crèdits",
         "Places_user_location": "Ha obtingut {{amount}} crèdits",
         "Streams_greeting": "Ha obtingut {{amount}} crèdits",
-        "YouHaveCreditsToStart": "Ha obtingut {{amount}} crèdits"
+        "YouHaveCreditsToStart": "Ha obtingut {{amount}} crèdits",
+        "InvitedUserFilledStream": "Ha obtingut {{amount}} crèdits",
+        "ForFillingStream": "Ha obtingut {{amount}} crèdits",
+        "CreatePrivateChat": "S&#39;han gastat {{amount}} crèdits"
     },
     "subscriptions": {
         "infoTitle": "Estableix la informació de pagament",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "Seleccioneu el destinatari",
         "TransactionSuccess": "Èxit de la transacció",
-        "OrTypeWalletAddress": "O escriviu l&#39;adreça de la cartera del destinatari"
+        "OrTypeWalletAddress": "O escriviu l&#39;adreça de la cartera del destinatari",
+        "AppCredits": "Crèdits de l&#39;aplicació"
     },
     "NFT": {
         "Title": "Títol",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "S&#39;ha reclamat el testimoni &quot; {{title}} &quot;.",
             "TokenWasLocked": "El testimoni &quot; {{title}} &quot; s&#39;ha bloquejat",
             "TokenWasUnlocked": "S&#39;ha desbloquejat el testimoni &quot; {{title}} &quot;."
+        },
+        "GenerateDescription": "o generar automàticament",
+        "collections": {
+            "Title": "Col·leccions",
+            "EnterTitle": "introduïu el títol",
+            "EnterDescription": "introduïu la descripció",
+            "NewCollection": "Nova col · lecció",
+            "Name": "Nom",
+            "Icon": "Icona",
+            "Description": "Descripció",
+            "Author": "Autor",
+            "SelectCollection": "Seleccioneu la col·lecció",
+            "Value": "Valor",
+            "AreYouSure": "Estàs segur?",
+            "AuthorInvalid": "L&#39;adreça de l&#39;autor no és vàlida!",
+            "Address": "adreça",
+            "CoverImage": "Imatge de portada",
+            "UploadIcon": "Icona de càrrega",
+            "CommissionAddressInvalid": "L&#39;adreça de la comissió no és vàlida",
+            "OnSale": "en venda",
+            "OffSale": "fora de venda",
+            "CreateCollection": "Crea col·lecció",
+            "UpdateCollection": "Actualitzar la col·lecció",
+            "CollectionInfo": "Informació de la col·lecció",
+            "SelectAuthor": "Seleccioneu l&#39;autor",
+            "NewItem": "Nova col·lecció NFT",
+            "NamePlaceholder": "Introduïu el nom de la col·lecció",
+            "DescPlaceholder": "Introduïu la descripció de la col·lecció",
+            "EndingIn": "Acaba en",
+            "SubmitSeries": "Envia una sèrie"
         }
     },
     "currencies": {
         "choose": "Trieu una moneda"
+    },
+    "connectedAccount": {
+        "Title": "Connecta el compte",
+        "Success": "Èxit",
+        "YourAccountCreated": "El vostre compte s&#39;ha creat correctament!",
+        "YourAccountAlreadyCreated": "El vostre compte ja està creat i llest per utilitzar"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Import"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "amount": "Import"
+                    }
+                },
+                "placeholders": {
+                    "amount": "quantitat"
+                },
+                "btns": {
+                    "stake": "Estaca"
+                },
+                "stake": "Estaca",
+                "loading": "Carregant"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durada",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacions",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durada en dies",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacions",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tuple": "tupla[]",
+                "number": "nombre",
+                "address": "adreça",
+                "fraction": "fracció",
+                "integer": "enter",
+                "seconds": "segons",
+                "days": "dies",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "No hi ha piscines"
+            },
+            "btns": {
+                "createPool": "Crea una piscina",
+                "createPoolInForm": "Crear"
+            },
+            "createPool": "Crea una piscina",
+            "produce": "Produir",
+            "loading": "Carregant",
+            "viewInstancesList": "Actualitza la llista"
+        }
     }
 }

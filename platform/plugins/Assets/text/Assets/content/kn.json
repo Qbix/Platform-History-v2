@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "ಈ ಬಳಕೆದಾರರ ವ್ಯಾಲೆಟ್ ಅನ್ನು ಓದಲು ಸಾಕಷ್ಟು ಅನುಮತಿಗಳಿಲ್ಲ",
         "ThisUserHaveNoWallet": "ಈ ಬಳಕೆದಾರರಿಗೆ ಯಾವುದೇ ವ್ಯಾಲೆಟ್ ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
         "TheWalletOfThisUserInvalid": "ಈ ಬಳಕೆದಾರರ ವಾಲೆಟ್ ಅಮಾನ್ಯವಾಗಿದೆ",
-        "WalletInvalid": "ವಾಲೆಟ್ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ"
+        "WalletInvalid": "ವಾಲೆಟ್ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ",
+        "CantManageFrozenSeries": "ನೀವು ಫ್ರೋಜನ್ ಸರಣಿಯನ್ನು ನಿರ್ವಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
     },
     "admin": {
         "Title": "ಸ್ವತ್ತುಗಳು ಆಡಳಿತಾತ್ಮಕ",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ",
         "Places_user_location": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ",
         "Streams_greeting": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ",
-        "YouHaveCreditsToStart": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ"
+        "YouHaveCreditsToStart": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ",
+        "InvitedUserFilledStream": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ",
+        "ForFillingStream": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಗಳಿಸಿದೆ",
+        "CreatePrivateChat": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರ್ಚು ಮಾಡಿದೆ"
     },
     "subscriptions": {
         "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "ಸ್ವೀಕರಿಸುವವರನ್ನು ಆಯ್ಕೆಮಾಡಿ",
         "TransactionSuccess": "ವಹಿವಾಟು ಯಶಸ್ಸು",
-        "OrTypeWalletAddress": "ಅಥವಾ ಸ್ವೀಕರಿಸುವವರ ವ್ಯಾಲೆಟ್ ವಿಳಾಸವನ್ನು ಟೈಪ್ ಮಾಡಿ"
+        "OrTypeWalletAddress": "ಅಥವಾ ಸ್ವೀಕರಿಸುವವರ ವ್ಯಾಲೆಟ್ ವಿಳಾಸವನ್ನು ಟೈಪ್ ಮಾಡಿ",
+        "AppCredits": "ಅಪ್ಲಿಕೇಶನ್ ಕ್ರೆಡಿಟ್‌ಗಳು"
     },
     "NFT": {
         "Title": "ಶೀರ್ಷಿಕೆ",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "ಟೋಕನ್ &quot; {{title}} &quot; ಅನ್ನು ಕ್ಲೈಮ್ ಮಾಡಲಾಗಿದೆ",
             "TokenWasLocked": "ಟೋಕನ್ &quot; {{title}} &quot; ಅನ್ನು ಲಾಕ್ ಮಾಡಲಾಗಿದೆ",
             "TokenWasUnlocked": "ಟೋಕನ್ &quot; {{title}} &quot; ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲಾಗಿದೆ"
+        },
+        "GenerateDescription": "ಅಥವಾ ಸ್ವಯಂ-ಉತ್ಪಾದನೆ",
+        "collections": {
+            "Title": "ಸಂಗ್ರಹಣೆಗಳು",
+            "EnterTitle": "ಶೀರ್ಷಿಕೆ ನಮೂದಿಸಿ",
+            "EnterDescription": "ವಿವರಣೆಯನ್ನು ನಮೂದಿಸಿ",
+            "NewCollection": "ಹೊಸ ಸಂಗ್ರಹ",
+            "Name": "ಹೆಸರು",
+            "Icon": "ಐಕಾನ್",
+            "Description": "ವಿವರಣೆ",
+            "Author": "ಲೇಖಕ",
+            "SelectCollection": "ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "Value": "ಮೌಲ್ಯ",
+            "AreYouSure": "ನೀವು ಖಚಿತವಾಗಿರುವಿರಾ?",
+            "AuthorInvalid": "ಲೇಖಕರ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ!",
+            "Address": "ವಿಳಾಸ",
+            "CoverImage": "ಕವರ್ ಚಿತ್ರ",
+            "UploadIcon": "ಅಪ್‌ಲೋಡ್ ಐಕಾನ್",
+            "CommissionAddressInvalid": "ಆಯೋಗದ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ",
+            "OnSale": "ಮಾರಾಟಕ್ಕೆ",
+            "OffSale": "ಮಾರಾಟವಿಲ್ಲ",
+            "CreateCollection": "ಸಂಗ್ರಹವನ್ನು ರಚಿಸಿ",
+            "UpdateCollection": "ಸಂಗ್ರಹವನ್ನು ನವೀಕರಿಸಿ",
+            "CollectionInfo": "ಸಂಗ್ರಹ ಮಾಹಿತಿ",
+            "SelectAuthor": "ಲೇಖಕರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+            "NewItem": "ಹೊಸ NFT ಸಂಗ್ರಹ",
+            "NamePlaceholder": "ಸಂಗ್ರಹದ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+            "DescPlaceholder": "ಸಂಗ್ರಹ ವಿವರಣೆಯನ್ನು ನಮೂದಿಸಿ",
+            "EndingIn": "ಅಂತ್ಯಗೊಳ್ಳುತ್ತಿದೆ",
+            "SubmitSeries": "ಒಂದು ಸರಣಿಯನ್ನು ಸಲ್ಲಿಸಿ"
         }
     },
     "currencies": {
         "choose": "ಕರೆನ್ಸಿ ಆಯ್ಕೆಮಾಡಿ"
+    },
+    "connectedAccount": {
+        "Title": "ಖಾತೆಯನ್ನು ಸಂಪರ್ಕಿಸಿ",
+        "Success": "ಯಶಸ್ಸು",
+        "YourAccountCreated": "ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ!",
+        "YourAccountAlreadyCreated": "ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಈಗಾಗಲೇ ರಚಿಸಲಾಗಿದೆ ಮತ್ತು ಬಳಸಲು ಸಿದ್ಧವಾಗಿದೆ"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ಮೀಸಲು ಟೋಕನ್",
+                        "amount": "ಮೊತ್ತ"
+                    },
+                    "small": {
+                        "reserveToken": "ಮೀಸಲು ಟೋಕನ್",
+                        "amount": "ಮೊತ್ತ"
+                    }
+                },
+                "placeholders": {
+                    "amount": "ಮೊತ್ತ"
+                },
+                "btns": {
+                    "stake": "ಪಾಲು"
+                },
+                "stake": "ಪಾಲು",
+                "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "ಟೋಕನ್Erc20",
+                    "duration": "ಅವಧಿ",
+                    "bonusTokenFraction": "ಬೋನಸ್ ಟೋಕನ್ಫ್ರಾಕ್ಷನ್",
+                    "popularToken": "ಜನಪ್ರಿಯ ಟೋಕನ್",
+                    "donations": "ದೇಣಿಗೆಗಳು",
+                    "rewardsRateFraction": "ಪ್ರತಿಫಲಗಳು ದರ ಭಿನ್ನರಾಶಿ",
+                    "numerator": "ಸಂಖ್ಯಾಕಾರಕ",
+                    "denominator": "ಛೇದಕ"
+                },
+                "small": {
+                    "tokenErc20": "ಟೋಕನ್Erc20",
+                    "duration": "ದಿನಗಳಲ್ಲಿ ಅವಧಿ",
+                    "bonusTokenFraction": "ಬೋನಸ್ ಟೋಕನ್ಫ್ರಾಕ್ಷನ್",
+                    "popularToken": "ಜನಪ್ರಿಯ ಟೋಕನ್",
+                    "donations": "ದೇಣಿಗೆಗಳು",
+                    "rewardsRateFraction": "ಪ್ರತಿಫಲಗಳು ದರ ಭಿನ್ನರಾಶಿ",
+                    "numerator": "ಸಂಖ್ಯಾಕಾರಕ",
+                    "denominator": "ಛೇದಕ"
+                }
+            },
+            "placeholders": {
+                "optional": "(ಐಚ್ಛಿಕ)",
+                "tuple": "ಟುಪಲ್[]",
+                "number": "ಸಂಖ್ಯೆ",
+                "address": "ವಿಳಾಸ",
+                "fraction": "ಭಿನ್ನರಾಶಿ",
+                "integer": "ಪೂರ್ಣಾಂಕ",
+                "seconds": "ಸೆಕೆಂಡುಗಳು",
+                "days": "ದಿನಗಳು",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ಯಾವುದೇ ಕೊಳಗಳಿಲ್ಲ"
+            },
+            "btns": {
+                "createPool": "ಪೂಲ್ ರಚಿಸಿ",
+                "createPoolInForm": "ರಚಿಸಿ"
+            },
+            "createPool": "ಪೂಲ್ ರಚಿಸಿ",
+            "produce": "ಉತ್ಪಾದಿಸು",
+            "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+            "viewInstancesList": "ಪಟ್ಟಿಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+        }
     }
 }

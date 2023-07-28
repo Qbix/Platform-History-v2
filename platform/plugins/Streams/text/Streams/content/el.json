@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Προσθέστε {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Όνομα χρήστη..."
     }
 }

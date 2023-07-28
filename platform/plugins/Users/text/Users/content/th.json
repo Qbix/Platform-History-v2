@@ -171,5 +171,11 @@
             "bio": "บอทการมีส่วนร่วมในฟอรัม ของคุณเองได้ที่ https:\/\/engageusers.ai",
             "website": "https:\/\/engageusers.ai"
         }
+    },
+    "errors": {
+        "NotEnoughPermissionsWallet": "สิทธิ์ไม่เพียงพอที่จะอ่านกระเป๋าเงินของผู้ใช้รายนี้",
+        "ThisUserHaveNoWallet": "ผู้ใช้รายนี้ไม่ได้กำหนดกระเป๋าเงิน",
+        "TheWalletOfThisUserInvalid": "กระเป๋าเงินของผู้ใช้รายนี้ไม่ถูกต้อง",
+        "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง"
     }
 }

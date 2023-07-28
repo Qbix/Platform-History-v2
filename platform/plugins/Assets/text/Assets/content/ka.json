@@ -17,7 +17,8 @@
         "NotEnoughPermissionsWallet": "არ არის საკმარისი ნებართვები ამ მომხმარებლის საფულის წასაკითხად",
         "ThisUserHaveNoWallet": "ამ მომხმარებელს არ აქვს მინიჭებული საფულე",
         "TheWalletOfThisUserInvalid": "ამ მომხმარებლის საფულე არასწორია",
-        "WalletInvalid": "საფულის მისამართი არასწორია"
+        "WalletInvalid": "საფულის მისამართი არასწორია",
+        "CantManageFrozenSeries": "გაყინულ სერიებს ვერ მართავ"
     },
     "admin": {
         "Title": "აქტივების ადმინისტრაციული",
@@ -124,7 +125,10 @@
         "Streams_user_icon": "დაიმსახურა {{amount}} კრედიტი",
         "Places_user_location": "დაიმსახურა {{amount}} კრედიტი",
         "Streams_greeting": "დაიმსახურა {{amount}} კრედიტი",
-        "YouHaveCreditsToStart": "დაიმსახურა {{amount}} კრედიტი"
+        "YouHaveCreditsToStart": "დაიმსახურა {{amount}} კრედიტი",
+        "InvitedUserFilledStream": "დაიმსახურა {{amount}} კრედიტი",
+        "ForFillingStream": "დაიმსახურა {{amount}} კრედიტი",
+        "CreatePrivateChat": "დახარჯა {{amount}} კრედიტი"
     },
     "subscriptions": {
         "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
@@ -250,7 +254,8 @@
     "transfer": {
         "SelectRecipient": "აირჩიეთ მიმღები",
         "TransactionSuccess": "გარიგების წარმატება",
-        "OrTypeWalletAddress": "ან აკრიფეთ მიმღების საფულის მისამართი"
+        "OrTypeWalletAddress": "ან აკრიფეთ მიმღების საფულის მისამართი",
+        "AppCredits": "აპლიკაციის კრედიტები"
     },
     "NFT": {
         "Title": "სათაური",
@@ -557,9 +562,119 @@
             "TokenWasClaimed": "ჟეტონი &quot; {{title}} &quot; მოითხოვა",
             "TokenWasLocked": "ჟეტონი &quot; {{title}} &quot; დაბლოკილია",
             "TokenWasUnlocked": "ჟეტონი &quot; {{title}} &quot; განბლოკილია"
+        },
+        "GenerateDescription": "ან ავტომატურად გენერირება",
+        "collections": {
+            "Title": "კოლექციები",
+            "EnterTitle": "შეიყვანეთ სათაური",
+            "EnterDescription": "შეიყვანეთ აღწერა",
+            "NewCollection": "Ახალი კოლექცია",
+            "Name": "სახელი",
+            "Icon": "Ხატი",
+            "Description": "აღწერა",
+            "Author": "ავტორი",
+            "SelectCollection": "აირჩიეთ კოლექცია",
+            "Value": "ღირებულება",
+            "AreYouSure": "Დარწმუნებული ხარ?",
+            "AuthorInvalid": "ავტორის მისამართი არასწორია!",
+            "Address": "მისამართი",
+            "CoverImage": "ყდის სურათი",
+            "UploadIcon": "ატვირთვის ხატულა",
+            "CommissionAddressInvalid": "კომისიის მისამართი არასწორია",
+            "OnSale": "იყიდება",
+            "OffSale": "გასაყიდად",
+            "CreateCollection": "შექმენით კოლექცია",
+            "UpdateCollection": "კოლექციის განახლება",
+            "CollectionInfo": "კოლექციის ინფორმაცია",
+            "SelectAuthor": "აირჩიეთ ავტორი",
+            "NewItem": "ახალი NFT კოლექცია",
+            "NamePlaceholder": "შეიყვანეთ კოლექციის სახელი",
+            "DescPlaceholder": "შეიყვანეთ კოლექციის აღწერა",
+            "EndingIn": "დამთავრებული In",
+            "SubmitSeries": "სერიის გაგზავნა"
         }
     },
     "currencies": {
         "choose": "აირჩიეთ ვალუტა"
+    },
+    "connectedAccount": {
+        "Title": "ანგარიშის დაკავშირება",
+        "Success": "წარმატებები",
+        "YourAccountCreated": "თქვენი ანგარიში წარმატებით შეიქმნა!",
+        "YourAccountAlreadyCreated": "თქვენი ანგარიში უკვე შექმნილია და მზად არის გამოსაყენებლად"
+    },
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervToken",
+                        "amount": "თანხა"
+                    },
+                    "small": {
+                        "reserveToken": "rezervToken",
+                        "amount": "თანხა"
+                    }
+                },
+                "placeholders": {
+                    "amount": "თანხა"
+                },
+                "btns": {
+                    "stake": "ფსონი"
+                },
+                "stake": "ფსონი",
+                "loading": "Ჩატვირთვა"
+            }
+        },
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "ხანგრძლივობა",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "პოპულარული ტოკენი",
+                    "donations": "შემოწირულობები",
+                    "rewardsRateFraction": "ჯილდოებიRateFraction",
+                    "numerator": "მრიცხველი",
+                    "denominator": "მნიშვნელი"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "ხანგრძლივობა დღეებში",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "პოპულარული ტოკენი",
+                    "donations": "შემოწირულობები",
+                    "rewardsRateFraction": "ჯილდოებიRateFraction",
+                    "numerator": "მრიცხველი",
+                    "denominator": "მნიშვნელი"
+                }
+            },
+            "placeholders": {
+                "optional": "(სურვილისამებრ)",
+                "tuple": "ტუპი[]",
+                "number": "ნომერი",
+                "address": "მისამართი",
+                "fraction": "წილადი",
+                "integer": "მთელი რიცხვი",
+                "seconds": "წამი",
+                "days": "დღეები",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "აუზები არ არის"
+            },
+            "btns": {
+                "createPool": "აუზის შექმნა",
+                "createPoolInForm": "Შექმნა"
+            },
+            "createPool": "აუზის შექმნა",
+            "produce": "აწარმოე",
+            "loading": "Ჩატვირთვა",
+            "viewInstancesList": "Განახლებული სია"
+        }
     }
 }

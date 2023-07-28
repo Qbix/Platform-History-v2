@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "Skenējiet QR kodus"
+    },
+    "input": {
+        "Placeholder": "Sāciet rakstīt..."
     }
 }

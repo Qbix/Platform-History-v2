@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Gehitu {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Erabiltzaile baten izena..."
     }
 }

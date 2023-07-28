@@ -151,5 +151,8 @@
     },
     "scan": {
         "QR": "QR kodlarını tarayın"
+    },
+    "input": {
+        "Placeholder": "Yazmaya başlayın..."
     }
 }

@@ -1,3 +1,4 @@
 {
-    "NotLoggedIn": "Nid ydych chi wedi mewngofnodi. <a href='#login' data-users-login>Cliciwch yma i fewngofnodi<\/a>"
+    "NotLoggedIn": "Nid ydych chi wedi mewngofnodi. <a href='#login' data-users-login>Cliciwch yma i fewngofnodi<\/a>",
+    "InvalidLanguage": "Iaith Annilys {{language}}"
 }

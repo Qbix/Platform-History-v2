@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "{{streamDisplayType}} ጨምር"
+    },
+    "userChooser": {
+        "Placeholder": "የተጠቃሚ ስም..."
     }
 }

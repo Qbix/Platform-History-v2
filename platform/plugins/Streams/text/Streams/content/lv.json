@@ -461,5 +461,8 @@
     },
     "relate": {
         "Add": "Pievienojiet {{streamDisplayType}}"
+    },
+    "userChooser": {
+        "Placeholder": "Lietotāja vārds..."
     }
 }
