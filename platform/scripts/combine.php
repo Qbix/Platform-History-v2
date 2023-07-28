@@ -94,7 +94,9 @@ $dir_to_save = APP_CONFIG_DIR.DS.'Q';
 if (!file_exists($dir_to_save)) {
 	mkdir($dir_to_save);
 }
+echo "Scanning and preparing files";
 Q_prepare();
+echo PHP_EOL;
 echo Q_combine($process) . PHP_EOL;
 
 function Q_prepare()
@@ -115,6 +117,7 @@ function Q_prepare()
 function Q_traverse($dir, $extensions)
 {
 	global $prepared, $prepared_dir;
+	echo '.';
 	$newdir = str_replace(APP_WEB_DIR, $prepared_dir, $dir);
 	foreach (scandir($dir) as $basename) {
 		if ($basename === '.' || $basename === '..') {
@@ -199,7 +202,6 @@ function Q_combine($process)
 	foreach ($combined as $dest => $parts) {
 		$df = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest));
 		$ext = strtolower(pathinfo($df, PATHINFO_EXTENSION));
-		echo "Compiling $df\n";
 		$content = '';
 		$info = array();
 		$printProgress = true;
