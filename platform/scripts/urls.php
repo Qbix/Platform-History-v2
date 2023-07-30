@@ -67,6 +67,7 @@ $filter = array(
 	// "/.*\.html/", "/.*\.javascript/"
 );
 $array = array();
+$result = null;
 Q_script_urls_glob(APP_WEB_DIR, $ignore, 'sha256', null, $result);
 $dir_to_save = APP_CONFIG_DIR.DS.'Q';
 $parent_dir = $dir_to_save.DS.'urls';
@@ -107,6 +108,7 @@ function Q_script_urls_glob(
 	&$result = null,
 	$levels = 0
 ) {
+	global $options;
 	if ($options['i'] or $options['integrity']) {
 		$calculateHashes = true;
 	} else if ($environment = Q_Config::get('Q', 'environment', '')) {
@@ -132,6 +134,9 @@ function Q_script_urls_glob(
 			continue;
 		}
 		$ext = pathinfo($u, PATHINFO_EXTENSION);
+		if ($ext === 'php') {
+			continue;
+		}
 		if (!is_dir($f)) {
 			if (is_array($ignore) and in_array($ext, $ignore)) {
 				continue;

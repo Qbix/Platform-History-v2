@@ -1287,13 +1287,13 @@ class Q_Response
 				@compact('hash')
 			) . '</script>';
 
-			if (!Q_Request::isAjax() && !Q_Session::requestedId()
-			&& $preload === 'header' && Q::ifset(self::$preload, $src, null)
-			&& (!Q_Valid::url($src) || Q::startsWith($src, $baseUrl))) {
-				// the command below may fail because response body already started
-				$src_encoded = Q_Utils::urlencodeNonAscii($src);
-				@header("Link: <$src_encoded>; as=script; rel=preload", false);
-			}
+			// if (!Q_Request::isAjax() && !Q_Session::requestedId()
+			// && $preload === 'header' && Q::ifset(self::$preload, $src, null)
+			// && (!Q_Valid::url($src) || Q::startsWith($src, $baseUrl))) {
+			// 	// the command below may fail because response body already started
+			// 	$src_encoded = Q_Utils::urlencodeNonAscii($src);
+			// 	@header("Link: <$src_encoded>; as=script; rel=preload", false);
+			// }
 
 		}
 		return implode($between, $tags);

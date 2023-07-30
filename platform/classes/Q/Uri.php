@@ -1030,7 +1030,7 @@ class Q_Uri
 			return array(self::$cacheBaseUrl . $urlRelativeToBase, $fileSHA1);
 		}
 		if ($fileTimestamp) {
-			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cacheBust');
+			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.ct');
 			Q::parse_str($tail, $fields);
 			$fields[$field] = $fileTimestamp;
 			$qs = http_build_query($fields);

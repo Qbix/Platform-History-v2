@@ -33,6 +33,9 @@
 .Q_mobile .Users_labels_tool .Users_labels_action {
     width: 30%;
 }
+.Q_mobile .Users_labels_tool .Users_labels_action.Users_labels_add_phonebook {
+    width: 60%;
+}
 .Users_labels_tool .Users_labels_icon {
     display: inline-block;
     width: 80px;
