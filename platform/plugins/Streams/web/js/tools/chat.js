@@ -640,7 +640,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}, message);
 		Q.Streams.Avatar.get(message.byUserId, function (err, avatar) {
 			m.displayName = avatar.displayName();
-			m.notificationHTML = m.notificationTemplate.interpolate(m);
+			m.notificationHTML = notificationTemplate.interpolate(m);
 			Q.Template.render(
 				state.templates.message.notification.name,
 				m,
