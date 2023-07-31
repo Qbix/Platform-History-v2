@@ -242,7 +242,8 @@
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
 			'{{Users}}/js/web3/web3.min.js',
-			'https://unpkg.com/@walletconnect/ethereum-provider'
+			//'https://unpkg.com/@walletconnect/ethereum-provider'
+			'{{Users}}/js/web3/ethereumProvider.2.9.1.min.js'
 		];
 		Q.addScript(scriptsToLoad, function () {
 			Users.init.web3.complete = true;
@@ -255,11 +256,14 @@
 					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
 					qrModalOptions: { themeMode: "light" },
 					chains: [1], // REQUIRED chain ids
-					methods: ["eth_sendTransaction", "eth_requestAccounts", "personal_sign"],
-					events: ["chainChanged", "accountsChanged", "connect", "disconnect"],
+					//optionalChains: [97,137,80001],
+					methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
+					//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
+					events: ["chainChanged", "accountsChanged"],
+					optionalEvents: ["message","disconnect","connect"],
 					metadata: {
 						name: Q.info.app,
-						//description: 'Demo Client as Wallet/Peer',
+						description: 'Demo Client as Wallet/Peer',
 						url: Q.info.baseUrl,
 						icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
 					},
@@ -4292,18 +4296,21 @@
 				return Q.handle(callback, null, [null, Web3.provider]);
 			}
 
+			var _getProvider = function (provider) {
+				provider.request({ method: 'eth_requestAccounts' }).then(function () {
+					_subscribeToEvents(provider);
+					Web3.provider = provider;
+					return Q.handle(callback, null, [null, Web3.provider]);
+				}).catch(function (ex) {
+					Q.handle(callback, null, [ex]);
+					throw new Error(ex);
+				});
+			};
+
 			Users.init.web3(function () {
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
-					return ethereum.request({ method: 'eth_requestAccounts' })
-					.then(function () {
-						_subscribeToEvents(ethereum);
-						Web3.provider = ethereum;
-						return Q.handle(callback, null, [null, Web3.provider]);
-					}).catch(function (ex) {
-						Q.handle(callback, null, [ex]);
-						throw new Error(ex);
-					});
+					return _getProvider(ethereum);
 				}
 
 				$("w3m-modal").css({
@@ -4311,16 +4318,14 @@
 					"z-index": Q.zIndexTopmost() + 1
 				});
 				Users.Web3.ethereumProvider.on("connect", function () {
-					Web3.provider = Users.Web3.ethereumProvider;
-					Q.handle(callback, null, [null, Web3.provider]);
+					_getProvider(Users.Web3.ethereumProvider);
 				});
-				Users.Web3.ethereumProvider.connect();
+				Users.Web3.ethereumProvider.connect().catch(function (e) {
+					Q.handle(callback, null, [e.message]);
+				});
 				/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
 					ok: "Ok",
 					cancel: null
-				});*/
-				/*Q.Users.Web3.ethereumProvider.on('connect', function () {
-					debugger;
 				});*/
 				/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
 					if(newState.open === false) {
