@@ -905,9 +905,10 @@ class Q_Uri
 	 * @method interpolateUrl
 	 * @param {string} $url
 	 * @param {array} [$additional=array()] Any additional substitutions
+	 * @param {boolean} [$fullUrlForPlugin=false] Whether a PluginName placeholder resolves to a full URL
 	 * @return {string} url with substitutions applied
 	 */
-	static function interpolateUrl($url, $additional = array())
+	static function interpolateUrl($url, $additional = array(), $fullUrlForPlugins = false)
 	{
 		if (strpos($url, '{{') === false) {
 			return $url;
@@ -920,8 +921,9 @@ class Q_Uri
 		);
 		$plugins = Q_Config::expect('Q', 'plugins');
 		$plugins[] = 'Q';
+		$prefix = $fullUrlForPlugins ? $baseUrl . '/' : '';
 		foreach ($plugins as $plugin) {
-			$substitutions[$plugin] = Q_Uri::pluginBaseUrl($plugin);
+			$substitutions[$plugin] = $prefix . Q_Uri::pluginBaseUrl($plugin);
 		}
 		$url = Q::interpolate($url, $substitutions);
 		if ($additional) {
@@ -1028,7 +1030,7 @@ class Q_Uri
 			return array(self::$cacheBaseUrl . $urlRelativeToBase, $fileSHA1);
 		}
 		if ($fileTimestamp) {
-			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cacheBust');
+			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.ct');
 			Q::parse_str($tail, $fields);
 			$fields[$field] = $fileTimestamp;
 			$qs = http_build_query($fields);

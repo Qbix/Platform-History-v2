@@ -1212,14 +1212,16 @@ class Q_Response
 				if (!empty($loaded[$src])) {
 					continue;
 				}
+				$scriptSrc = Q_Html::themedUrl($script['src'], array('ignoreEnvironment' => true));
+				$loaded[$scriptSrc] = true;
 				$loaded[$src] = true;
 				try {
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
-				$src_json = json_encode($src);
-				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);";
-				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);";
-				$scripts_for_slots[$script['slot']][] = "\n/* Included inline from $src */\n"
+				$src_json = json_encode($src, JSON_UNESCAPED_SLASHES);
+				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);\n\n";
+				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);\n\n";
+				$scripts_for_slots[$script['slot']][$src] = ''
 					. $currentScriptCode
 			 		. $ob->getClean()
 					. $currentScriptEndCode;
@@ -1228,11 +1230,19 @@ class Q_Response
 		$parts = array();
 		foreach ($remote_scripts_for_slots as $slot => $srcs) {
 			foreach ($srcs as $src) {
-				$parts[] = Q_Html::script('', array('src' => $src, 'data-slot' => $slot));
+				$parts[] = Q_Html::script('', array(
+					'src' => $src, 
+					'data-slot' => $slot
+				));
 			}
 		}
 		foreach ($scripts_for_slots as $slot => $texts) {
-			$parts[] = Q_Html::script(implode("\n\n", $texts), array('data-slot' => $slot));
+			foreach ($texts as $src => $text) {
+				$parts[] = Q_Html::script($text, array(
+					'data-src' => $src,
+					'data-slot' => $slot
+				));
+			}
 		}
 		if ($setLoaded) {
 			self::setScriptData('Q.addScript.loaded', $loaded);
@@ -1277,13 +1287,13 @@ class Q_Response
 				@compact('hash')
 			) . '</script>';
 
-			if (!Q_Request::isAjax() && !Q_Session::requestedId()
-			&& $preload === 'header' && Q::ifset(self::$preload, $src, null)
-			&& (!Q_Valid::url($src) || Q::startsWith($src, $baseUrl))) {
-				// the command below may fail because response body already started
-				$src_encoded = Q_Utils::urlencodeNonAscii($src);
-				@header("Link: <$src_encoded>; as=script; rel=preload", false);
-			}
+			// if (!Q_Request::isAjax() && !Q_Session::requestedId()
+			// && $preload === 'header' && Q::ifset(self::$preload, $src, null)
+			// && (!Q_Valid::url($src) || Q::startsWith($src, $baseUrl))) {
+			// 	// the command below may fail because response body already started
+			// 	$src_encoded = Q_Utils::urlencodeNonAscii($src);
+			// 	@header("Link: <$src_encoded>; as=script; rel=preload", false);
+			// }
 
 		}
 		return implode($between, $tags);
@@ -1446,6 +1456,8 @@ class Q_Response
 					if (!empty($loaded[$href])) {
 						continue;
 					}
+					$stylesheetHref = Q_Html::themedUrl($stylesheet['href'], array('ignoreEnvironment' => true));
+					$loaded[$stylesheetHref] = true;
 					$loaded[$href] = true;
 					try {
 						Q::includeFile($filename);

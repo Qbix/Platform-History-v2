@@ -8078,10 +8078,10 @@ Q.url = function _Q_url(what, fields, options) {
 		if (Q.info.urls && Q.info.urls.caching && info.t) {
 			parts = what3.split('?');
 			if (parts.length > 1) {
-				parts[1] = parts[1].queryField('Q.cacheBust', info.t);
+				parts[1] = parts[1].queryField('Q.ct', info.t);
 				what3 = parts[0] + '?' + parts[1];	
 			} else {
-				what3 = parts[0] + '?Q.cacheBust=' + info.t;
+				what3 = parts[0] + '?Q.ct=' + info.t;
 			}
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
@@ -8092,7 +8092,7 @@ Q.url = function _Q_url(what, fields, options) {
 		}
 	} else if (options && options.cacheBust) {
 		cb = options.cacheBust;
-		what3 += "?Q.cacheBust=" + Math.floor(Date.now()/cb)*cb;
+		what3 += "?Q.ct=" + Math.floor(Date.now()/cb)*cb;
 	}
 	parts = what3.split('?');
 	if (parts.length > 2) {
