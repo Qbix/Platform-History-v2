@@ -79,54 +79,52 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             return;
                         }
 
-                        Q.Text.get('Users/content', function (err, text) {
-                            var wallet, walletError;
-                            if (!this.testReadLevel("content")) {
-                                walletError = text.errors.NotEnoughPermissionsWallet;
-                            } else {
-                                wallet = this.fields.content;
-                                if (!wallet) {
-                                    walletError = text.errors.ThisUserHaveNoWallet;
-                                } else if (!ethers.utils.isAddress(wallet)) {
-                                    walletError = text.errors.TheWalletOfThisUserInvalid;
-                                }
+                        var wallet, walletError;
+                        if (!this.testReadLevel("content")) {
+                            walletError = tool.text.errors.NotEnoughPermissionsWallet;
+                        } else {
+                            wallet = this.fields.content;
+                            if (!wallet) {
+                                walletError = tool.text.errors.ThisUserHaveNoWallet;
+                            } else if (!ethers.utils.isAddress(wallet)) {
+                                walletError = tool.text.errors.TheWalletOfThisUserInvalid;
                             }
-    
-                            if (!state.tokenInfo) {
-                                $toolElement.addClass("Q_disabled");
-                                $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance", {
-                                    skipWeb3: !(wallet && !walletError)
-                                }).activate(function () {
-                                    this.state.onChainChange.add(function () {
-                                        $toolElement.addClass("Q_disabled");
-                                    }, tool);
-                                    this.state.onChainChanged.add(function () {
-                                        $toolElement.removeClass("Q_disabled");
-                                    }, tool);
-                                    tool.assetsWeb3BalanceTool = this;
-                                });
-                            }
-    
-                            userSelected = null;
-                            $(".Users_avatar_tool", $userSelected).each(function () {
-                                Q.Tool.remove(this, true, true);
+                        }
+
+                        if (!state.tokenInfo) {
+                            $toolElement.addClass("Q_disabled");
+                            $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance", {
+                                skipWeb3: !(wallet && !walletError)
+                            }).activate(function () {
+                                this.state.onChainChange.add(function () {
+                                    $toolElement.addClass("Q_disabled");
+                                }, tool);
+                                this.state.onChainChanged.add(function () {
+                                    $toolElement.removeClass("Q_disabled");
+                                }, tool);
+                                tool.assetsWeb3BalanceTool = this;
                             });
-    
-                            $("<div>").appendTo($userSelected).tool("Users/avatar", {
-                                userId: userId,
-                                icon: 50,
-                                contents: true,
-                                editable: false
-                            }).activate();
-    
-                            userSelected = {
-                                userId: userId,
-                                wallet: this.fields.content,
-                                walletError: walletError
-                            };
-    
-                            $send.removeClass("Q_disabled");
+                        }
+
+                        userSelected = null;
+                        $(".Users_avatar_tool", $userSelected).each(function () {
+                            Q.Tool.remove(this, true, true);
                         });
+
+                        $("<div>").appendTo($userSelected).tool("Users/avatar", {
+                            userId: userId,
+                            icon: 50,
+                            contents: true,
+                            editable: false
+                        }).activate();
+
+                        userSelected = {
+                            userId: userId,
+                            wallet: this.fields.content,
+                            walletError: walletError
+                        };
+
+                        $send.removeClass("Q_disabled");
                     });
                 };
 
