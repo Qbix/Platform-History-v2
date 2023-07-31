@@ -1,12 +1,14 @@
 <?php
 require_once USERS_PLUGIN_DIR.'/vendor/autoload.php';
-use Web3\Web3;
-use Web3\Contract;
-use Crypto\Keccak;
-use Web3p\EthereumTx\Transaction;
-use Web3\Providers\HttpProvider;
-use Web3\RequestManagers\HttpRequestManager;
-
+//use Web3\Web3;
+//use Web3\Contract;
+//use Crypto\Keccak;
+//use Web3p\EthereumTx\Transaction;
+//use Web3\Providers\HttpProvider;
+//use Web3\RequestManagers\HttpRequestManager;
+use SWeb3\SWeb3; 
+use SWeb3\SWeb3_Contract;
+//use SWeb3\ABI; //uncomment when will ordering output p;arams
 /**
  * @module Users
  */
@@ -33,7 +35,6 @@ class Users_Web3 extends Base_Users_Web3 {
 	 *  Set to null to cache any truthy result while not caching falsy results.
 	 *  Or set to a callable function, to be passed the data as JSON, and return boolean indicating whether to cache or not.
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
-	 * @param {string} [$defaultBlock='latest'] Can be one of 'latest', 'earliest', 'pending'
 	 * @param {integer} [$delay=0] If not found in cache, set how many microseconds to delay before querying the blockchain
 	 * @param {array} [$transaction=array()] Additional information for transaction, with possible keys 'from', 'gas', 'gasPrice', 'value', 'nonce'
 	 * @param {string} [$privateKey=null] Optionally pass an ECDSA private key here, to sign the transaction with (e.g. to change blockchain state).
@@ -47,12 +48,11 @@ class Users_Web3 extends Base_Users_Web3 {
 		$appId = null,
 		$caching = true,
 		$cacheDuration = null,
-		$defaultBlock = 'latest',
 		$delay = 0,
 		$transaction = array(),
 		$privateKey = null)
 	{
-		list($appInfo, $provider) = self::objects($appId);
+		list($appInfo, $provider, $rpcUrl) = self::objects($appId);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
@@ -66,135 +66,123 @@ class Users_Web3 extends Base_Users_Web3 {
 			$params = array($params);
 		}
 		$from = Q::ifset($transaction, 'from', null);
-		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
-		if ($caching !== false && $cacheDuration && $cache->wasRetrieved()) {
-			return Q::json_decode($cache->result, true);
+		
+		if ($caching !== false && $cacheDuration) {
+			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
+			if ($cache->wasRetrieved()) {
+				return Q::json_decode($cache->result, true);
+			}
 		}
-		if ($delay) {
+		if (is_numeric($delay) and $delay > 0) {
 			usleep($delay);
 		}
-
-		$contractABI = self::getABI($contractABI, $chainId);
+		
+		$contractABI_json = self::getABI($contractABI, $chainId);
+		$contractABI = Q::json_encode($contractABI_json);
+		
 		$data = array();
-		$arguments = array($methodName);
-		foreach ($params as $param) {
-			$arguments[] = $param;
-		}
-		$callback = function ($err, $results) use (&$data) {
-			if ($err) {
-				$errMessage = Q::ifset($err, "message", null);
-				if (!$errMessage) {
-					$errMessage = $err->getMessage();
-				}
-				if ($errMessage) {
-					throw new Exception($errMessage);
-				}
+		
+		$provider->chainId = $chainId;
+		
+		if (!isset($transaction['value'])) {
+				$transaction['value'] = ''; // '0x0';
 			}
-
-			if (empty($results)) {
-				$data = $results;
-				return;
-			}
-			if (sizeof($results) == 1) {
-				$value = reset($results);
-				if (is_array($value)) {
-					foreach ($value as $result) {
-						$data[] = (int)method_exists($result, 'toString') == 1 ? $result->toString() : $result;
-					}
-				} else {
-					$data = $value;
-				}
-			} else {
-				$data = $results;
-			}
-		};
-
-		$contract = (new Contract($provider, $contractABI, $defaultBlock))
-			->at($contractAddress);
+			
 		if ($privateKey) {
 			if (empty($transaction['from'])) {
 				throw new Q_Exception_MissingObject(array(
 					'name' => 'transaction.from'
 				));
 			}
-			$eth = $contract->getEth();
-			$rawTransactionData = '0x' . 
-				call_user_func_array([$contract, "getData"], $arguments);
-			$transactionCount = null;
-			$eth->getTransactionCount($transaction['from'],
-			function ($err, $count) use(&$transactionCount) {
-				if ($err) { 
-					throw new Q_Exception('transaction count error: ' . $err->getMessage());
-				}
-				$transactionCount = $count;
-			});
-			if (!isset($transactionCount)) {
-				return null;
+			
+			$provider->setPersonalData($transaction['from'], $privateKey);
+			if (!isset($transaction['nonce'])) {
+				$transaction['nonce'] = $provider->personal->getNonce();
 			}
-			$transactionParams = array_merge(array(
-				'nonce' => "0x" . dechex($transactionCount->toString()),
-				'from' => $transaction['from'],
-				'to' =>  $contractAddress,
-				// 'gas' =>  '0x' . dechex(8000000),
-				'value' => '0x0',
-				'data' => $rawTransactionData
-			), $transaction);
-			if (empty($transactionParams['gas'])) {
-				$estimatedGas = null;
-				$contract->estimateGas($transactionParams,
-				function ($err, $gas) use (&$estimatedGas) {
-					if ($err) {
-						throw new Q_Exception('estimate gas error: ' . $err->getMessage());
-					}
-					$estimatedGas = $gas;
-				});
-				$transactionParams['gas'] = $estimatedGas;
+			
+			if (!isset($transaction['value'])) {
+				$transaction['value'] = ''; // '0x0';
 			}
-			$tx = new Transaction($transactionParams);
-			$signedTx = '0x' . $tx->sign($privateKey);
-			$transactionHash = null;
-			$eth->sendRawTransaction($signedTx,
-			function ($err, $txHash) use (&$transactionHash) {
-				if ($err) { 
-					throw new Q_Exception('transaction error: ' . $err->getMessage());
-				} else {
-					$transactionHash = $txHash;
-				}
-			});
+			
+			$contract = new SWeb3_contract($provider, $contractAddress, $contractABI);
+			$contract->send($methodName, $params, $transaction); // estimates gas
+			$encodedData = $provider->ABI->EncodeData($methodName, $params);
+			$tx = new Transaction (
+				$transaction['nonce'],
+				Q::ifset($transaction, 'gasPrice', ''),
+				Q::ifset($transaction, 'gasLimit', ''),
+				$contractAddress,
+				$transaction['value'],
+				$encodedData
+			);
+			$signedTx = '0x' . $tx->getRaw ($provider->personal->privateKey, $chainId);
+			
 			// NOTE: This hasn't been tested yet
-			return $transactionHash;
+			return $signedTx;
+			
+			
 		}
-		$arguments[] = $transaction;
-		$arguments[] = $defaultBlock;
-		$arguments[] = $callback;
-		// call contract function
 		
-		call_user_func_array([$contract, "call"], $arguments);
+		$contract = new SWeb3_Contract($provider, $contractAddress, $contractABI);
+		if (is_array(self::$batching[$appId])) {
+			if (is_callable($delay)) {
+				$callback = $delay;
+			} else {
+				$callback = null;
+			}
+			array_push(self::$batching[$appId], array($contract, $callback));
+			array_push(self::$batching[$appId], array($contract, $callback));
+		}
+		$result = $contract->call($methodName, $params);
+		if (is_array(self::$batching[$appId])) {
+			return count(self::$batching[$appId]) - 1;
+		}
+		
+		if (count($result) == 0) {
+			return null;
+		}
+		//$data = Q::ifset($result, 'result', null);
+		$data = Q::json_decode(Q::json_encode($result), true);
+		
+		//fast way is a convert outputs values as-is and forgot for order variables
+		$data = array_values($data);
+		if ((count($data)) == 1) {
+			$data = $data[0];
+		}
+		
+		//another way to look at the abi
+		//$abi = new ABI();
+		//$abi->Init($contractABI);
+		//print_r($abi->functions[$methodName]);
+		//$abi->functions[$methodName]['output']
+		//----------------------------
 
-		if ($data instanceof \phpseclib\Math\BigInteger) {
+		
+		/*
+		if ($data instanceof BigInteger) {
 			$data = $data->toString();
 		} elseif (is_array($data)) {
 			foreach ($data as $key => $item) {
-				if ($item instanceof \phpseclib\Math\BigInteger) {
+				if ($item instanceof BigInteger) {
 					$data[$key] = $item->toString();
 				}
 			}
 		}
-
-		if ($cache) {
-			if ((
-				is_callable($caching)
-				and call_user_func_array($caching, array($data))
-			) or (
-				($data && $caching !== false)
-				or (!$data && $caching === true)
-			)) {
+		*/
+		if ((
+			is_callable($caching)
+			and call_user_func_array($caching, array($data))
+		) or (
+			($data && $caching !== false)
+			or (!$data && $caching === true)
+		)) {
+			if (!$cache->wasRetrieved()) {
 				$cache->result = Q::json_encode($data);
-				$cache->save(true);
 			}
+			$cache->save(true); // each time it updates updatedTime
 		}
-
 		return $data;
+
 	}
 
 	/**
@@ -206,8 +194,9 @@ class Users_Web3 extends Base_Users_Web3 {
 	 */
 	static function batchStart($appId = null)
 	{
-		list($appInfo, $provider) = self::objects($appId);
+		list($appInfo, $provider, $rpcUrl) = self::objects($appId);
 		$provider->batch(true);
+		self::$batching[$appId] = array();
 	}
 
 	/**
@@ -215,14 +204,25 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * and finally call batchExecute($appId)
 	 * @method batchExecute
 	 * @static
-	 * @param {callable} $callback
 	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
 	 */
-	static function batchExecute($callback, $appId = null)
+	static function batchExecute($appId = null)
 	{
-		list($appInfo, $provider) = self::objects($appId);
-		$provider->execute($callback);
-		$provider->batch(false);
+		$err = null;
+		$data = null;
+		list($appInfo, $provider, $rpcUrl) = self::objects($appId);
+		$results = $provider->executeBatch();
+		foreach ($results as $result) {
+			list($contract, $callable) = self::$batching[$appId][$result->id];
+			$data = $contract->DecodeData('pending', $results[0]->result);
+			call_user_func($callable, $data, $result->id);
+		}
+		self::$batching[$appId] = null;
+		self::$providers[$rpcUrl] = new SWeb3($rpcUrl);
+		if ($err) {
+			throw new Q_Exception($err);
+		}
+		return $results;
 	}
 
 	/**
@@ -230,7 +230,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method objects
 	 * @static
 	 * @param
-	 * @return {array} array($appInfo, $provider)
+	 * @return {array} array($appInfo, $provider, $rpcUrl)
 	 */
 	static function objects($appId = null)
 	{
@@ -258,16 +258,13 @@ class Users_Web3 extends Base_Users_Web3 {
 		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId', 'infuraKey'));
 		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
 			if (empty(self::$providers[$rpcUrl])) {
-				$requestManager = new HttpRequestManager($rpcUrl);
-				$provider = new HttpProvider($requestManager);
-				self::$providers[$rpcUrl] = $provider;
-			} else {
-				$provider = self::$providers[$rpcUrl];
+				self::$providers[$rpcUrl] = new SWeb3($rpcUrl);
 			}
+			$provider = self::$providers[$rpcUrl];
 		} else {
 			$provider = null;
 		}
-		return array($appInfo, $provider);
+		return array($appInfo, $provider, $rpcUrl);
 	}
 
 	/**
@@ -548,4 +545,5 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	public static $providers = array();
+	public static $batching = array();
 };
