@@ -255,12 +255,12 @@
 					projectId: Q.getObject(['web3', Users.communityId, 'providers', 'walletconnect', 'projectId'], Q.Users.apps), // REQUIRED your projectId
 					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
 					qrModalOptions: { themeMode: "light" },
-					chains: [1], // REQUIRED chain ids
-					//optionalChains: [97,137,80001],
+					chains: [1,56,137], // REQUIRED chain ids
+					optionalChains: [5,97,80001],
 					methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
 					//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
-					events: ["chainChanged", "accountsChanged"],
-					optionalEvents: ["message","disconnect","connect"],
+					events: ["chainChanged", "accountsChanged","disconnect","connect"],
+					optionalEvents: ["message"],
 					metadata: {
 						name: Q.info.app,
 						description: 'Demo Client as Wallet/Peer',
@@ -1138,7 +1138,7 @@
 			}
 			if (o.using.indexOf('web3') >= 0) {
 				loggedOutOf.web3 = true;
-				Users.disconnect.web3(appId, p.fill('web3'));
+				Users.disconnect.web3(p.fill('web3'));
 			}
 			if (o.using.indexOf('native') >= 0) {
 				if (Q.isEmpty(loggedOutOf)) {
@@ -4241,24 +4241,23 @@
 				: null;
 		},
 
-		disconnect: function (appId, callback) {
+		disconnect: function (callback) {
 			if (Users.disconnect.web3.occurring) {
 				return false;
 			}
 			localStorage.removeItem('walletconnect');
 			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			Users.disconnect.web3.occurring = true;
-			var p = Web3.provider;
 			if (Web3.web3Modal) {
 				Web3.web3Modal.closeModal();
 			}
-			if (!p) {
+			if (!Web3.provider) {
 				Q.handle(callback);
 				Users.disconnect.web3.occurring = false;
 				return false;
 			}
-			if (p.close) {
-				p.close().then(function (result) {
+			if (Web3.provider.close) {
+				Web3.provider.close().then(function (result) {
 					delete Users.connected.web3;
 					Web3.provider = null;
 					setTimeout(function () {
@@ -4274,8 +4273,8 @@
 				setTimeout(function () {
 					Users.logout.occurring = false;
 				}, 0);
-				if (p._handleDisconnect) {
-					p._handleDisconnect();
+				if (Web3.provider._handleDisconnect) {
+					Web3.provider._handleDisconnect();
 				}
 				delete Users.connected.web3;
 				Web3.provider = null;
@@ -4298,7 +4297,6 @@
 
 			var _getProvider = function (provider) {
 				provider.request({ method: 'eth_requestAccounts' }).then(function () {
-					_subscribeToEvents(provider);
 					Web3.provider = provider;
 					return Q.handle(callback, null, [null, Web3.provider]);
 				}).catch(function (ex) {
@@ -4310,29 +4308,37 @@
 			Users.init.web3(function () {
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
-					return _getProvider(ethereum);
-				}
-
-				$("w3m-modal").css({
-					position: "fixed",
-					"z-index": Q.zIndexTopmost() + 1
-				});
-				Users.Web3.ethereumProvider.on("connect", function () {
-					_getProvider(Users.Web3.ethereumProvider);
-				});
-				Users.Web3.ethereumProvider.connect().catch(function (e) {
-					Q.handle(callback, null, [e.message]);
-				});
-				/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
-					ok: "Ok",
-					cancel: null
-				});*/
-				/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
-					if(newState.open === false) {
-						Q.handle(callback, null, [true]);
-						unsubscribe();
+					_subscribeToEvents(ethereum);
+					_getProvider(ethereum);
+				} else if (Web3.ethereumProvider) {
+					_subscribeToEvents(Web3.ethereumProvider);
+					if (Web3.ethereumProvider.session) {
+						_getProvider(Web3.ethereumProvider);
+					} else {
+						$("w3m-modal").css({
+							position: "fixed",
+							"z-index": Q.zIndexTopmost() + 1
+						});
+						Web3.ethereumProvider.once("connect", function () {
+							_getProvider(Web3.ethereumProvider);
+						});
+						Web3.ethereumProvider.connect().then(function () {
+							debugger
+						}).catch(function (e) {
+							Q.handle(callback, null, [e.message]);
+						});
 					}
-				})*/
+					/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
+                        ok: "Ok",
+                        cancel: null
+                    });*/
+					/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
+                        if(newState.open === false) {
+                            Q.handle(callback, null, [true]);
+                            unsubscribe();
+                        }
+                    })*/
+				}
 			});
 		}),
 
@@ -4936,7 +4942,7 @@
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
-		_subscribeToEvents(window.ethereum);
+		_subscribeToEvents(window.ethereum || Web3.ethereumProvider);
 	}, 'Users');
 
 	function _subscribeToEvents(provider) {
@@ -4952,6 +4958,10 @@
 		});
 		provider.on("connect", function (info) {
 			Q.handle(Web3.onConnect, this, [info]);
+		});
+		provider.on("disconnect", function (info) {
+			Web3.disconnect();
+			Q.handle(Web3.onDisconnect, this, [info]);
 		});
 		provider.subscribedToEvents = true;
 	}
