@@ -1969,6 +1969,10 @@
 			js: "{{Assets}}/js/tools/web3/coin/presale/buy.js",
 			css: "{{Assets}}/css/tools/web3/coin/presale/buy.css"
 		},
+		"Assets/web3/coin/presale/manage": {
+			js: "{{Assets}}/js/tools/web3/coin/presale/manage.js",
+			css: "{{Assets}}/css/tools/web3/coin/presale/manage.css"
+		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
 			css: "{{Assets}}/css/tools/web3/coin/admin.css"
