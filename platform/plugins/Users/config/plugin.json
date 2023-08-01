@@ -65,6 +65,9 @@
 			"requireValidNonce": {
 				"include": ["Users"],
 				"exclude": ["Users/login", "Users/authenticate", "Users/activate"]
+			},
+			"contentSecurityPolicy": {
+				"script": ["https://connect.facebook.net"]
 			}
 		},
 		"javascript": {

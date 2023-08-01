@@ -55,6 +55,10 @@
 			"statusBarOverlapped": false,
 			"static": {
 				"dir": "{{web}}"
+			},
+			"contentSecurityPolicy": {
+				"script": ["'unsafe-inline'", "{{host}}", "*.{{host}}", "https://w.soundcloud.com"],
+				"worker": ["'self'"]
 			}
 		},
 		"response": {
