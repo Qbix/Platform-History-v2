@@ -527,7 +527,7 @@ class Q_Uri
 			if (!isset($routes[$route])) {
 				$url = null;
 			} else {
-				$url = self::matchRoute($route, $routes[$route], $controller);
+				$url = $this->matchRoute($route, $routes[$route], $controller);
 			}
 		} else {
 			foreach ($routes as $pattern => $fields) {

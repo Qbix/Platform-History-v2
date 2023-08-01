@@ -56,6 +56,13 @@
 				"Assets": ["img"]
 			}
 		},
+		"environments": {
+			"live": {
+				"prepare": {
+					"{{Assets}}": ["js", "css"]
+				}
+			}
+		},
 		"text": {
 			"Assets": {
 				"*": ["Assets/content"]

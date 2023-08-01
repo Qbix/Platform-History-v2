@@ -67,6 +67,13 @@
 				"Streams": ["img/icons/Streams/interest", "img/icons/files"]
 			}
 		},
+		"environments": {
+			"live": {
+				"prepare": {
+					"{{Streams}}": ["js", "css"]
+				}
+			}
+		},
 		"images": {
 			"Streams/image": {
 				"sizes": ["40", "50", "80", "200", "400", "x400", "400x"],

@@ -64,25 +64,46 @@ if (isset($options['help'])) {
 	echo $help;
 	exit;
 }
-$out = !empty($options['out']) ? $options['out'] : APP_WEB_DIR;
+$out = !empty($options['out'])
+	? $options['out']
+	: Q_Uri::interpolateUrl(Q_Config::get(
+		'Q', 'web', 'static', 'dir', APP_WEB_DIR
+	), array('web' => APP_WEB_DIR));
 $baseUrl = !empty($options['baseUrl']) ? $options['baseUrl'] : Q_Request::baseUrl(true, true);
 
 $config = Q_Config::expect('Q', 'static');
 foreach ($config as $suffix => $info) {
+	$headers = array();
+	if (!empty($info['@cookies'])) {
+		$headers['Cookie'] = http_build_query($info['@cookies'], '', '; ');
+	}
+	if (!empty($info['@headers'])) {
+		$headers = array_merge($headers, $info['@headers']);
+	}
+	unset($info['@cookies']);
+	unset($info['@headers']);
 	foreach ($info as $route => $value) {
 		if (is_string($value)) {
 			$combinations = call_user_func(explode('::', $value));
 		} else if (is_array($value)) {
 			$combinations = Q_Utils::cartesianProduct($value);
 		}
+		$paramsArray = array();
+		$c = count($combinations);
+		echo "Requesting $c URLs for suffix $suffix and route $route" . PHP_EOL;
 		foreach ($combinations as $fields) {
 			$url = Q_Uri::url($fields, $route);
 			$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
-			$body = Q_Utils::get($urlToFetch);
+			$paramsArray[$url] = array('GET', $url, null, null, array(), $headers);
+			// $body = Q_Utils::get($urlToFetch, null, array(), $headers);
+			echo "-> $url" . PHP_EOL;
+		}
+		$bodies = Q_Utils::requestMulti($paramsArray);
+		foreach ($bodies as $url => $body) {
 			$filename = $out . DS . Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
 			$dirname = dirname($filename);
 			if (!file_exists($dirname)) {
-				@mkdir($dirname);
+				@mkdir($dirname, 0755, true);
 				if (!is_dir($dirname)) {
 					echo "Couldn't create directory $dirname" . PHP_EOL;
 					continue;
