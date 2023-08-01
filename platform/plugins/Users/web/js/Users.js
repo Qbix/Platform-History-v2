@@ -4322,9 +4322,7 @@
 						Web3.ethereumProvider.once("connect", function () {
 							_getProvider(Web3.ethereumProvider);
 						});
-						Web3.ethereumProvider.connect().then(function () {
-							debugger
-						}).catch(function (e) {
+						Web3.ethereumProvider.connect().catch(function (e) {
 							Q.handle(callback, null, [e.message]);
 						});
 					}
