@@ -238,21 +238,43 @@
 			return;
 		}
 
-		Q.addScript("{{Users}}/js/web3/import.js", function () {
-			var scriptsToLoad = [
-				'{{Users}}/js/web3/ethers-5.2.umd.min.js',
-				'{{Users}}/js/web3/evm-chains.min.js',
-				//'{{Users}}/js/web3/walletconnect.min.js',
-				'{{Users}}/js/web3/web3.min.js',
-				//'{{Users}}/js/web3/web3modal.js'
-			];
-			Q.addScript(scriptsToLoad, function () {
-				Users.init.web3.complete = true;
+		var scriptsToLoad = [
+			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
+			'{{Users}}/js/web3/evm-chains.min.js',
+			'{{Users}}/js/web3/web3.min.js',
+			//'https://unpkg.com/@walletconnect/ethereum-provider'
+			'{{Users}}/js/web3/ethereumProvider.2.9.1.min.js'
+		];
+		Q.addScript(scriptsToLoad, function () {
+			Users.init.web3.complete = true;
+
+			if (Users.Web3.ethereumProvider) {
 				callback && callback();
-			}, options);
-		}, {
-			type: "module"
-		});
+			} else {
+				window['@walletconnect/ethereum-provider'].EthereumProvider.init({
+					projectId: Q.getObject(['web3', Users.communityId, 'providers', 'walletconnect', 'projectId'], Q.Users.apps), // REQUIRED your projectId
+					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
+					qrModalOptions: { themeMode: "light" },
+					chains: [1,56,137], // REQUIRED chain ids
+					optionalChains: [5,97,80001],
+					methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
+					//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
+					events: ["chainChanged", "accountsChanged","disconnect","connect"],
+					optionalEvents: ["message"],
+					metadata: {
+						name: Q.info.app,
+						description: 'Demo Client as Wallet/Peer',
+						url: Q.info.baseUrl,
+						icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
+					},
+				}).then(function (ethereumProvider) {
+					Users.Web3.ethereumProvider = ethereumProvider;
+					callback && callback();
+				});
+			}
+
+
+		}, options);
 	};
 
 	Users.init.web3 = Q.getter(Users.init.web3);
@@ -1116,7 +1138,7 @@
 			}
 			if (o.using.indexOf('web3') >= 0) {
 				loggedOutOf.web3 = true;
-				Users.disconnect.web3(appId, p.fill('web3'));
+				Users.disconnect.web3(p.fill('web3'));
 			}
 			if (o.using.indexOf('native') >= 0) {
 				if (Q.isEmpty(loggedOutOf)) {
@@ -4219,24 +4241,23 @@
 				: null;
 		},
 
-		disconnect: function (appId, callback) {
+		disconnect: function (callback) {
 			if (Users.disconnect.web3.occurring) {
 				return false;
 			}
 			localStorage.removeItem('walletconnect');
 			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			Users.disconnect.web3.occurring = true;
-			var p = Web3.provider;
 			if (Web3.web3Modal) {
 				Web3.web3Modal.closeModal();
 			}
-			if (!p) {
+			if (!Web3.provider) {
 				Q.handle(callback);
 				Users.disconnect.web3.occurring = false;
 				return false;
 			}
-			if (p.close) {
-				p.close().then(function (result) {
+			if (Web3.provider.close) {
+				Web3.provider.close().then(function (result) {
 					delete Users.connected.web3;
 					Web3.provider = null;
 					setTimeout(function () {
@@ -4252,8 +4273,8 @@
 				setTimeout(function () {
 					Users.logout.occurring = false;
 				}, 0);
-				if (p._handleDisconnect) {
-					p._handleDisconnect();
+				if (Web3.provider._handleDisconnect) {
+					Web3.provider._handleDisconnect();
 				}
 				delete Users.connected.web3;
 				Web3.provider = null;
@@ -4274,38 +4295,48 @@
 				return Q.handle(callback, null, [null, Web3.provider]);
 			}
 
+			var _getProvider = function (provider) {
+				provider.request({ method: 'eth_requestAccounts' }).then(function () {
+					Web3.provider = provider;
+					return Q.handle(callback, null, [null, Web3.provider]);
+				}).catch(function (ex) {
+					Q.handle(callback, null, [ex]);
+					throw new Error(ex);
+				});
+			};
+
 			Users.init.web3(function () {
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
-					return ethereum.request({ method: 'eth_requestAccounts' })
-					.then(function () {
-						_subscribeToEvents(ethereum);
-						Web3.provider = ethereum;
-						return Q.handle(callback, null, [null, Web3.provider]);
-					}).catch(function (ex) {
-						Q.handle(callback, null, [ex]);
-						throw new Error(ex);
-					});
-				}
-
-				$("w3m-modal").css({
-					position: "fixed",
-					"z-index": Q.zIndexTopmost() + 1
-				});
-				Web3.web3Modal.openModal();
-				/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
-					ok: "Ok",
-					cancel: null
-				});*/
-				/*Q.Users.Web3.ethereumProvider.on('connect', function () {
-					debugger;
-				});*/
-				/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
-					if(newState.open === false) {
-						Q.handle(callback, null, [true]);
-						unsubscribe();
+					_subscribeToEvents(ethereum);
+					_getProvider(ethereum);
+				} else if (Web3.ethereumProvider) {
+					_subscribeToEvents(Web3.ethereumProvider);
+					if (Web3.ethereumProvider.session) {
+						_getProvider(Web3.ethereumProvider);
+					} else {
+						$("w3m-modal").css({
+							position: "fixed",
+							"z-index": Q.zIndexTopmost() + 1
+						});
+						Web3.ethereumProvider.once("connect", function () {
+							_getProvider(Web3.ethereumProvider);
+						});
+						Web3.ethereumProvider.connect().catch(function (e) {
+							Q.handle(callback, null, [e.message]);
+						});
 					}
-				})*/
+					/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
+                        ok: "Ok",
+                        cancel: null
+                    });*/
+					/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
+                        if(newState.open === false) {
+                            Q.handle(callback, null, [true]);
+                            unsubscribe();
+                        }
+                    })*/
+				}
 			});
 		}),
 
@@ -4364,7 +4395,7 @@
 							_proceed();
 						}
 					}
-					if (provider.wc) {
+					if (provider.wc || provider.modal) {
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
@@ -4909,7 +4940,7 @@
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
-		_subscribeToEvents(window.ethereum);
+		_subscribeToEvents(window.ethereum || Web3.ethereumProvider);
 	}, 'Users');
 
 	function _subscribeToEvents(provider) {
@@ -4925,6 +4956,10 @@
 		});
 		provider.on("connect", function (info) {
 			Q.handle(Web3.onConnect, this, [info]);
+		});
+		provider.on("disconnect", function (info) {
+			Web3.disconnect();
+			Q.handle(Web3.onDisconnect, this, [info]);
 		});
 		provider.subscribedToEvents = true;
 	}
