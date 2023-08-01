@@ -4395,7 +4395,7 @@
 							_proceed();
 						}
 					}
-					if (provider.wc) {
+					if (provider.wc || provider.modal) {
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
