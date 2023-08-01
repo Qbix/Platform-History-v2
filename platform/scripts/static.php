@@ -73,6 +73,15 @@ $baseUrl = !empty($options['baseUrl']) ? $options['baseUrl'] : Q_Request::baseUr
 
 $config = Q_Config::expect('Q', 'static');
 foreach ($config as $suffix => $info) {
+	$headers = array();
+	if (!empty($info['@cookies'])) {
+		$headers['Cookie'] = http_build_query($info['@cookies'], '', '; ');
+	}
+	if (!empty($info['@headers'])) {
+		$headers = array_merge($headers, $info['@headers']);
+	}
+	unset($config['@cookies']);
+	unset($config['@headers']);
 	foreach ($info as $route => $value) {
 		if (is_string($value)) {
 			$combinations = call_user_func(explode('::', $value));
@@ -82,7 +91,7 @@ foreach ($config as $suffix => $info) {
 		foreach ($combinations as $fields) {
 			$url = Q_Uri::url($fields, $route);
 			$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
-			$body = Q_Utils::get($urlToFetch);
+			$body = Q_Utils::get($urlToFetch, null, array(), $headers);
 			$filename = $out . DS . Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
 			$dirname = dirname($filename);
 			if (!file_exists($dirname)) {
