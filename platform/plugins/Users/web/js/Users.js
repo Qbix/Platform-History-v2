@@ -2951,6 +2951,10 @@
 			js: "{{Users}}/js/tools/labels.js",
 			css: "{{Users}}/css/tools/labels.css"
 		},
+		"Users/roles": {
+			js: "{{Users}}/js/tools/roles.js",
+			css: "{{Users}}/css/tools/roles.css"
+		},
 		"Users/contacts": {
 			js: "{{Users}}/js/tools/contacts.js",
 			css: "{{Users}}/css/tools/contacts.css"
