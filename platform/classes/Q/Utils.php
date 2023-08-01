@@ -974,20 +974,40 @@ class Q_Utils
 		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $timeout);
 	}
 	/**
-	 * Issues multiple GET requests via HTTP/2, and returns the response
-	 * @method getMulti
+	 * Issues multiple HTTP requests via HTTP/2, and returns the response
+	 * @method requestMulti
 	 * @static
 	 * @param {array} $paramsArray An array where each each entry is an array of parameters to ::request
-	 * @return {array} The array of results from curl_multi_getcontent
+	 *   Can be an associative array, in which case the results will match by key.
+	 * @return {array} The array of results from curl_multi_getcontent, with keys matching the $paramsArray if it was associative.
 	 */
 	static function requestMulti($paramsArray)
 	{
 		$mh = curl_multi_init();
 		curl_multi_setopt($mh, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
 		$handles = array();
-		foreach ($paramsArray as $params) {
+		foreach ($paramsArray as $k => $params) {
+			$c = count($params);
+			if ($c == 2) {
+				$params[$c++] = null;
+			}
+			if ($c == 3) {
+				$params[$c++] = null;
+			}
+			if ($c == 4) {
+				$params[$c++] = array();
+			}
+			if ($c == 5) {
+				$params[$c++] = null;
+			}
+			if ($c == 6) {
+				$params[$c++] = Q_UTILS_CONNECTION_TIMEOUT;
+			}
+			if ($c == 7) {
+				$params[$c++] = null;
+			}
 			$params[] = $mh;
-			$handles[] = $ch = call_user_func_array(array('Q_Utils', 'request'), $params);
+			$handles[$k] = $ch = call_user_func_array(array('Q_Utils', 'request'), $params);
 			curl_multi_add_handle($mh, $ch);
 		}
 		//execute the multi handle
@@ -999,8 +1019,8 @@ class Q_Utils
 			}
 		} while ($active && $status == CURLM_OK);
 		$results = array();
-		foreach ($handles as $ch) {
-			$results[] = curl_multi_getcontent($ch);
+		foreach ($handles as $k => $ch) {
+			$results[$k] = curl_multi_getcontent($ch);
 			curl_multi_remove_handle($mh, $ch);
 		}
 		curl_multi_close($mh);

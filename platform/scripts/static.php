@@ -80,18 +80,26 @@ foreach ($config as $suffix => $info) {
 	if (!empty($info['@headers'])) {
 		$headers = array_merge($headers, $info['@headers']);
 	}
-	unset($config['@cookies']);
-	unset($config['@headers']);
+	unset($info['@cookies']);
+	unset($info['@headers']);
 	foreach ($info as $route => $value) {
 		if (is_string($value)) {
 			$combinations = call_user_func(explode('::', $value));
 		} else if (is_array($value)) {
 			$combinations = Q_Utils::cartesianProduct($value);
 		}
+		$paramsArray = array();
+		$c = count($combinations);
+		echo "Requesting $c URLs for suffix $suffix and route $route" . PHP_EOL;
 		foreach ($combinations as $fields) {
 			$url = Q_Uri::url($fields, $route);
 			$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
-			$body = Q_Utils::get($urlToFetch, null, array(), $headers);
+			$paramsArray[$url] = array('GET', $url, null, null, array(), $headers);
+			// $body = Q_Utils::get($urlToFetch, null, array(), $headers);
+			echo "-> $url" . PHP_EOL;
+		}
+		$bodies = Q_Utils::requestMulti($paramsArray);
+		foreach ($bodies as $url => $body) {
 			$filename = $out . DS . Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
 			$dirname = dirname($filename);
 			if (!file_exists($dirname)) {
