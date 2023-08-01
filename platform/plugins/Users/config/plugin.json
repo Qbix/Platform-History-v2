@@ -76,6 +76,13 @@
 				}
 			}
 		},
+		"environments": {
+			"live": {
+				"prepare": {
+					"{{Users}}": ["js", "css"]
+				}
+			}
+		},
 		"socket": {
 			"disconnectTimeout": 1500
 		},

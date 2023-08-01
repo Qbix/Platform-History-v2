@@ -27,6 +27,13 @@
 			"exclude": {
 				"Places": ["img/squareflags"]
 			}
+		},
+		"environments": {
+			"live": {
+				"prepare": {
+					"{{Places}}": ["js", "css"]
+				}
+			}
 		}
 	},
 	"Streams": {

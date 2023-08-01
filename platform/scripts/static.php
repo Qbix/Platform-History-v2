@@ -64,7 +64,11 @@ if (isset($options['help'])) {
 	echo $help;
 	exit;
 }
-$out = !empty($options['out']) ? $options['out'] : APP_WEB_DIR;
+$out = !empty($options['out'])
+	? $options['out']
+	: Q_Uri::interpolateUrl(Q_Config::get(
+		'Q', 'web', 'static', 'dir', APP_WEB_DIR
+	), array('web' => APP_WEB_DIR));
 $baseUrl = !empty($options['baseUrl']) ? $options['baseUrl'] : Q_Request::baseUrl(true, true);
 
 $config = Q_Config::expect('Q', 'static');
@@ -82,7 +86,7 @@ foreach ($config as $suffix => $info) {
 			$filename = $out . DS . Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
 			$dirname = dirname($filename);
 			if (!file_exists($dirname)) {
-				@mkdir($dirname);
+				@mkdir($dirname, 0755, true);
 				if (!is_dir($dirname)) {
 					echo "Couldn't create directory $dirname" . PHP_EOL;
 					continue;
