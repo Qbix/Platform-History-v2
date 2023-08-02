@@ -155,6 +155,7 @@
     "web3": {
         "WrongMethod": "Wrong contract method {{methodName}}",
         "ChangeWallet": "Change Wallet",
+        "ConnectWallet": "Connect Wallet",
         "AfterWalletConnectedPleaseRefresh": "After wallet connected please refresh this page to recognize the wallet"
     },
     "labels": {
