@@ -115,6 +115,19 @@
                 }
             }
         }
+        
+        var pipe = Q.pipe(["text"], function () {});
+        Q.Text.get('Assets/web3/coin/admin', function(err, text) {
+            //console.log(tool.text);
+            tool.text = {
+                ...tool.text,
+                ...text
+            }
+            // "Assets/web3/coin/admin" have priority of "Assets/content"
+            pipe.fill('text')();
+        }, {
+            ignoreCache: true
+        });
 
 		tool.refresh();
 
@@ -366,7 +379,7 @@
 
 	Q.Template.set("Assets/web3/coin/admin",
 	`
-	<div>
+	<div>{{coin.admin.qwerty}}
 		<button class="Assets_web3_coin_admin_produce Q_button">{{coin.admin.btns.createPool}}</button>	
 
 		<div class="Assets_web3_coin_admin_poolsContainer">
@@ -395,7 +408,7 @@
 
 	</div>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/admin"]}
 	);
 
 	Q.Template.set("Assets/web3/coin/admin/create",
@@ -461,14 +474,14 @@
 
 		</div>
 	`,
-	{text: ["Assets/content"]});
+	{text: ["Assets/content", "Assets/web3/coin/admin"]});
 
 	Q.Template.set("Assets/web3/coin/admin/pools",
 	`
 	Template: Assets/web3/coin/admin/pools
 
 	`,
-	{text: ["Assets/content"]});
+	{text: ["Assets/content", "Assets/web3/coin/admin"]});
 
 	Q.Template.set("Assets/web3/coin/admin/pools/row",
 	`
@@ -484,6 +497,6 @@
 		<td>{{i.denominator}}</td>
 	</tr>
 	`,
-	{text: ["Assets/content"]});
+	{text: ["Assets/content", "Assets/web3/coin/admin"]});
 
 })(window, Q, jQuery);

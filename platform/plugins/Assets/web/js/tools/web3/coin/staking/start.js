@@ -46,6 +46,18 @@
 			return console.warn("chainId required!");
 		}
 
+        var pipe = Q.pipe(["text"], function () {});
+        Q.Text.get('Assets/web3/coin/staking/start', function(err, text) {
+            tool.text = {
+                ...tool.text,
+                ...text
+            }
+            // "Assets/web3/coin/staking/start" have priority of "Assets/content"
+            pipe.fill('text')();
+        }, {
+            ignoreCache: true
+        });
+        
 		tool.refresh();
 
 	},
@@ -366,7 +378,7 @@
 	</div>
 	`,
 		{
-			text: ["Assets/content"]
+			text: ["Assets/content", "Assets/web3/coin/staking/start"]
 		}
 	);
 	
@@ -380,7 +392,7 @@
 		Staking pool duration: {{data.duration}}:<br>
 		{{stake_amount}} {{stake_amount_max}}
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/staking/start"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/staking/start/stake/interface",
@@ -403,7 +415,7 @@
 		</table>
 	`,
 		{
-			text: ["Assets/content"],
+			text: ["Assets/content", "Assets/web3/coin/staking/start"],
 			partials:[
 				"Assets/web3/coin/staking/start/stake/interface/check",
 				"Assets/web3/coin/staking/start/stake/interface/asterisk"
@@ -417,7 +429,7 @@
 			<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
 		</svg>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/staking/start"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/staking/start/stake/interface/asterisk",
@@ -426,7 +438,7 @@
 			<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
 		</svg>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/staking/start"]}
 	);
 
 })(window, Q, jQuery);

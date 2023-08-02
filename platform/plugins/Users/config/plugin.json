@@ -446,6 +446,27 @@
 						"decimals": 18
 					}
 				}
+			},
+			"wallets": {
+				"walletconnect": {
+					"name": "WalletConnect"
+				},
+				"metamask": {
+					"name": "Metamask",
+					"url": "https://metamask.app.link/dapp/{{domain}}"
+				},
+				"trustwallet": {
+					"name": "Trust Wallet",
+					"url": "https://link.trustwallet.com/open_url?url={{baseUrl}}"
+				},
+				"kaikas": {
+					"name": "Kaikas",
+					"url": "https://app.kaikas.io/u/{{domain}}"
+				},
+				"phantom": {
+					"name": "Phantom",
+					"url": "https://phantom.app/ul/browse/{{baseUrlEncoded}}"
+				}
 			}
 		},
 		"people": {

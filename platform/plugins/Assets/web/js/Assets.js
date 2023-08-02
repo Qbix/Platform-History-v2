@@ -1942,7 +1942,8 @@
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
 		"Assets/web3/transfer": {
 			js: "{{Assets}}/js/tools/web3/transfer.js",
-			css: "{{Assets}}/css/tools/web3/transfer.css"
+			css: "{{Assets}}/css/tools/web3/transfer.css",
+			text: ["Assets/content", "Users/content"]
 		},
 		"Assets/web3/balance": {
 			js: "{{Assets}}/js/tools/web3/balance.js",
@@ -1967,6 +1968,10 @@
 		"Assets/web3/coin/presale/buy": {
 			js: "{{Assets}}/js/tools/web3/coin/presale/buy.js",
 			css: "{{Assets}}/css/tools/web3/coin/presale/buy.css"
+		},
+		"Assets/web3/coin/presale/manage": {
+			js: "{{Assets}}/js/tools/web3/coin/presale/manage.js",
+			css: "{{Assets}}/css/tools/web3/coin/presale/manage.css"
 		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
