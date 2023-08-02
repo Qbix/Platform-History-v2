@@ -110,8 +110,18 @@
             }
         }
 		
-		//tool.mybestvar = '123123213213';
-		
+        var pipe = Q.pipe(["text"], function () {});
+        Q.Text.get('Assets/web3/coin/presale/admin', function(err, text) {
+            tool.text = {
+                ...tool.text,
+                ...text
+            }
+            // "Assets/web3/coin/presale/admin" have priority of "Assets/content"
+            pipe.fill('text')();
+        }, {
+            ignoreCache: true
+        });
+        
 		tool.refresh();
 	},
 	{ // default options here
@@ -488,7 +498,7 @@
 
 	</div>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/presale/admin"]}
 	);
 
 	Q.Template.set("Assets/web3/coin/presale/admin/create/fields/timestamps_and_prices/row", `
@@ -510,7 +520,7 @@
 			</div>
 		</div>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/presale/admin"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/presale/admin/create/fields/thresholds_and_bonuses/row", `
@@ -532,7 +542,7 @@
 			</div>
 		</div>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/presale/admin"]}
 	);
 
 	Q.Template.set("Assets/web3/coin/presale/admin/create",
@@ -620,7 +630,7 @@
 		<button name="create" class="Assets_web3_coin_presale_admin_produce Q_button">{{coin.presale.admin.btns.createFundInForm}}</button>	
 	</div>
 	`,
-	{text: ["Assets/content"]}
+	{text: ["Assets/content", "Assets/web3/coin/presale/admin"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/presale/admin/funds/row",
@@ -631,7 +641,7 @@
 		<td><button name="fundInfo" class="Q_button" data-addr='{{i.value}}' data-chainid='{{chainId}}'>info</button></td>
 	</tr>
 	`,
-	{text: ["Assets/content"]});
+	{text: ["Assets/content", "Assets/web3/coin/presale/admin"]});
 
 	Q.Template.set("Assets/web3/coin/presale/admin/fund/info",
 	`
@@ -690,5 +700,5 @@
 		</tbody>
 	</table>
 	`,
-	{text: ["Assets/content"]});
+	{text: ["Assets/content", "Assets/web3/coin/presale/admin"]});
 })(window, Q, jQuery);

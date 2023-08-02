@@ -42,6 +42,18 @@
 			return console.warn("chainId required!");
 		}
 		
+        var pipe = Q.pipe(["text"], function () {});
+        Q.Text.get('Assets/web3/coin/presale/buy', function(err, text) {
+            tool.text = {
+                ...tool.text,
+                ...text
+            }
+            // "Assets/web3/coin/presale/buy" have priority of "Assets/content"
+            pipe.fill('text')();
+        }, {
+            ignoreCache: true
+        });
+        
 		tool.refresh();
 	},
 	{ // default options here
@@ -285,7 +297,7 @@
 	
 	`,
 		{
-			text: ["Assets/content"]
+			text: ["Assets/content", "Assets/web3/coin/presale/buy"]
 		}
 	);
 	
@@ -293,14 +305,14 @@
 	`
 	{{interpolate coin.presale.buy.form.placeholders.max nativeCoinBalance}}
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/presale/buy"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/presale/buy/preloader",
 	`
 	<img src="{{src}}" alt="">
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/presale/buy"]}
 	);
 	
 	Q.Template.set("Assets/web3/coin/presale/buy/legend",
@@ -329,7 +341,7 @@
 		</tr>
 	</table>
 	`,
-		{text: ["Assets/content"]}
+		{text: ["Assets/content", "Assets/web3/coin/presale/buy"]}
 	);
 
 })(window, Q, jQuery);
