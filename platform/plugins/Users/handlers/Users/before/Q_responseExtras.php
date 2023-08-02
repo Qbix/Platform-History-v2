@@ -99,4 +99,5 @@ function Users_before_Q_responseExtras()
 	
 	
 	Q_Response::setScriptData('Q.Users.web3.contracts', Q_Config::get("Users", "web3", "contracts", "R1",  array()));
+	Q_Response::setScriptData("Q.Users.web3.wallets", Q_Config::get("Users", "web3", "wallets", array()));
 }
