@@ -35,3 +35,6 @@
     display: inline-block;
     margin-left: 10px;
 }
+.Assets_web3_balance_tool button[name=connect] {
+    width: 100%;
+}

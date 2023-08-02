@@ -153,7 +153,9 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 				tokenAddresses: state.tokenAddresses
 			}]);
 		}).catch(function (e) {
-			tool.refresh();
+			if (!state.chainId) {
+				tool.refresh();
+			}
 		});
 	},
 	getValue: function () {

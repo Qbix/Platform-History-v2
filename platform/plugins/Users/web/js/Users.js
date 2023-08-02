@@ -4287,7 +4287,7 @@
 		/**
 		 * Connect web3 wallet session
 		 * @method connect
-		 * @param {Function} callback
+		 * @param {Function} [callback]
 		 * @return {Promise} to be used instead of callback
 		 */
 		connect: Q.promisify(function (callback) {
@@ -4304,38 +4304,77 @@
 					throw new Error(ex);
 				});
 			};
-
+			var _w3m = function () {
+				$("w3m-modal").css({
+					position: "fixed",
+					"z-index": Q.zIndexTopmost() + 1
+				});
+				Web3.ethereumProvider.once("connect", function () {
+					_getProvider(Web3.ethereumProvider);
+				});
+				Web3.ethereumProvider.connect().catch(function (e) {
+					Q.handle(callback, null, [e.message]);
+				});
+				return false;
+			};
 			Users.init.web3(function () {
+				var wallets = Q.getObject("web3.wallets", Users);
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
 					_subscribeToEvents(ethereum);
 					_getProvider(ethereum);
+				} else if (wallets) {
+					Q.Template.set("Users/connect/wallet", `<ul>
+						{{#each wallets}}
+							<li style="background-image: url({{img}})" data-url="{{url}}">{{name}}</li>
+						{{/each}}
+					</ul>`);
+					var urlParams = {
+						baseUrl: Q.info.baseUrl,
+						domain: Q.info.baseUrl.replace(/.+:\/\//, ''),
+						baseUrlEncoded: encodeURIComponent(Q.info.baseUrl)
+					};
+					Q.each(wallets, function (i, val) {
+						wallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
+						if (val.url) {
+							wallets[i]["url"] = val.url.interpolate(urlParams);
+						} else {
+							wallets[i]["url"] = i;
+						}
+					})
+					Q.Dialogs.push({
+						title: "Connect wallet",
+						className: "Users_connect_wallets",
+						template: {
+							name: "Users/connect/wallet",
+							fields: {
+								wallets
+							}
+						},
+						stylesheet: '{{Users}}/css/Users/wallets.css',
+						onActivate: function (dialog) {
+							$("li", dialog).on(Q.Pointer.fastclick, function (e) {
+								e.preventDefault();
+								var url = this.getAttribute("data-url");
+								if (url === "walletconnect") {
+									_w3m();
+								} else {
+									location.href = url;
+								}
+								return false;
+							});
+						},
+						onClose: function () {
+							Q.handle(callback, null, [true]);
+						}
+					});
 				} else if (Web3.ethereumProvider) {
 					_subscribeToEvents(Web3.ethereumProvider);
 					if (Web3.ethereumProvider.session) {
 						_getProvider(Web3.ethereumProvider);
 					} else {
-						$("w3m-modal").css({
-							position: "fixed",
-							"z-index": Q.zIndexTopmost() + 1
-						});
-						Web3.ethereumProvider.once("connect", function () {
-							_getProvider(Web3.ethereumProvider);
-						});
-						Web3.ethereumProvider.connect().catch(function (e) {
-							Q.handle(callback, null, [e.message]);
-						});
+						_w3m();
 					}
-					/*Q.confirm(Q.text.Users.web3.AfterWalletConnectedPleaseRefresh, null, {
-                        ok: "Ok",
-                        cancel: null
-                    });*/
-					/*const unsubscribe = Web3.web3Modal.subscribeModal(newState => {
-                        if(newState.open === false) {
-                            Q.handle(callback, null, [true]);
-                            unsubscribe();
-                        }
-                    })*/
 				}
 			});
 		}),
