@@ -10,12 +10,18 @@ var Users = Q.Users;
 
 /**
  * Tool for viewing, and possibly managing, a community's roles
- * @class Users roless
+ * @class Users roles
  * @constructor
  * @param {Object} [options] options for the tool
- *   @param {String} [options.userId=Q.Users.loggedInUserId()] You can set the user id whose labels are being edited, instead of the logged-in user
+ * @param {String} [options.userId=Q.Users.loggedInUserId()]
+ * @param {String} [options.chainId]
+ * @param {String} [options.communityAddress]
+ * @param {Boolean} [options.canAddWeb2] able to add Web2 role.
+ * @param {Boolean} [options.canAddWeb3] able to add Web3 role. just pre-check option. if user can add role, tx will reject and inform in a error msg
+ * @param {String} [options.abiPath] able to add Web3 role.
+ * @param {Boolean} [options.updateCache] caching
  */
-Q.Tool.define("Users/Roles", function Users_labels_tool(options) {
+Q.Tool.define("Users/roles", function Users_labels_tool(options) {
 	var tool = this
 	var state = tool.state;
 	if (state.userId == null) {
@@ -38,7 +44,10 @@ Q.Tool.define("Users/Roles", function Users_labels_tool(options) {
 	userId: null,
     chainId: null,
     communityAddress: null,
-
+    canAddWeb2: null, 
+    canAddWeb3: null,
+    abiPath: "Users/templates/R1/Community/contract",
+    updateCache: null,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
 },
@@ -66,12 +75,15 @@ Q.Tool.define("Users/Roles", function Users_labels_tool(options) {
 			
 			Q.Template.render("Users/Roles", {
                 addIcon: Q.url('{{Q}}/img/actions/add.png'),
-				roles: roles
+				roles: roles,
+                canAddWeb2: state.canAddWeb2,
+                canAddWeb3: state.canAddWeb3
+                
 			}, function (err, html) {
 				tool.loading(false);
 				Q.replace(tool.element, html);
                 
-                $('.Users_roles_add').on(Q.Pointer.fastclick, function () {
+                $('.Users_roles_addweb3').on(Q.Pointer.fastclick, function () {
                     tool.loading(true);
 					Q.prompt(Q.text.Communities.roles.prompt, function (title) {
 						if (!title) return;
@@ -99,13 +111,8 @@ Q.Tool.define("Users/Roles", function Users_labels_tool(options) {
     }
 });
 
-Q.Template.set('Users/Roles', 
+Q.Template.set('Users/roles', 
 `
-<!--
-roleId: data[0][i],
-name: data[1][i],
-uri: data[2][i]
--->
 <ul>
 {{#each roles}}
     <li class="Users_roles_role" data-roleid="{{this.roleId}}">
@@ -115,14 +122,21 @@ uri: data[2][i]
         <div class="Users_roles_title">{{this.name}}</div>
     </li>
 {{/each}}
-    
-
-    <li class="Users_roles_action Users_roles_add">
+{{#if canAddWeb2}}
+    <li class="Users_roles_action Users_roles_addweb2">
         <img class="Users_roles_icon" src="{{addIcon}}">
-        <div class="Users_roles_title">{{canAdd}}</div>
+        <div class="Users_roles_title">{{btns.web2Role}}</div>
     </li>
-
+{{/if}}
+{{#if canAddWeb3}}
+    <li class="Users_roles_action Users_roles_addweb3">
+        <img class="Users_roles_icon" src="{{addIcon}}">
+        <div class="Users_roles_title">{{btns.web3Role}}</div>
+    </li>
+{{/if}}
 </ul>
-`);
+`,
+{text: ["Users/roles"]}
+);
 
 })(Q, Q.$, window);
