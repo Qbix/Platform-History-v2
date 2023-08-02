@@ -348,10 +348,12 @@
 	vertical-align: middle;
 }
 
+.Streams_login_explanation td {
+	border: solid 0 transparent;
+	padding: 0;
+}
 .Streams_login_explanation td:first-child {
 	width: 60px;
-	padding: 0;
-	border: solid 0 transparent;
 }
 .Streams_login_explanation td:first-child img {
 	border-radius: 5px;
