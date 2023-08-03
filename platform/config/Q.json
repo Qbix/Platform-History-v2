@@ -57,7 +57,7 @@
 				"dir": "{{web}}"
 			},
 			"contentSecurityPolicy": {
-				"script": ["'unsafe-inline'", "'unsafe-eval'", "{{host}}", "*.{{host}}", "https://w.soundcloud.com"],
+				"script": ["'unsafe-inline'", "'unsafe-eval'", "{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*", "https://w.soundcloud.com"],
 				"worker": ["'self'"]
 			}
 		},
