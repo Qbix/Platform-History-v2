@@ -47,6 +47,9 @@
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
+			"contentSecurityPolicy": {
+				"script": ["https://js.stripe.com"]
+			},
 			"requireValidNonce": {
 				"include": ["Assets"]
 			}
