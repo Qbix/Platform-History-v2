@@ -18,7 +18,7 @@ var Users = Q.Users;
  * @param {String} [options.communityAddress]
  * @param {Boolean} [options.canAddWeb2] able to add Web2 role.
  * @param {Boolean} [options.canAddWeb3] able to add Web3 role. just pre-check option. if user can add role, tx will reject and inform in a error msg
- * @param {String} [options.abiPath] able to add Web3 role.
+ * @param {String} [options.abiPath='Users/templates/R1/Community/contract'] abi path to CommunityContract
  * @param {Boolean} [options.updateCache] caching
  */
 Q.Tool.define("Users/roles", function Users_labels_tool(options) {
