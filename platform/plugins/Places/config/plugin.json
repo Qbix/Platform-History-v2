@@ -19,6 +19,9 @@
 			"Streams/interest/remove": ["Places/after/Streams_interest_remove"]
 		},
 		"web": {
+			"contentSecurityPolicy": {
+				"script": ["https://maps.googleapis.com"]
+			},
 			"requireValidNonce": {
 				"include": ["Places"]
 			}
