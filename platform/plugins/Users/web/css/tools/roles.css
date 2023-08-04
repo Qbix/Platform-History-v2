@@ -1,0 +1,59 @@
+.Users_roles_tool .Users_roles_title,
+.Users_roles_tool .Users_roles_role {
+    white-space: nowrap;
+}
+.Users_roles_action { white-space: nowrap; }
+.Users_roles_active .Users_roles_role,
+.Users_roles_active .Users_roles_action.Users_roles_add,
+.Users_roles_action button { margin-top: 10px; }
+.Users_roles_tool ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+.Users_roles_tool .Users_roles_action,
+.Users_roles_tool .Users_roles_role {
+    display: inline-block;
+    margin-top: 0;
+    vertical-align: top;
+    width: 120px;
+    height: 144px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0;
+    border: 1px solid transparent;
+}
+.Q_mobile .Users_roles_tool .Users_roles_role,
+.Q_mobile .Users_roles_tool .Users_roles_action {
+    width: 30%;
+}
+.Q_mobile .Users_roles_tool .Users_roles_action.Users_roles_add_phonebook {
+    width: 60%;
+}
+.Users_roles_tool .Users_roles_icon {
+    display: inline-block;
+    width: 80px;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+.Users_roles_tool .Users_roles_title {
+    display: block;
+    white-space: normal;
+    text-align: center;
+    padding: 0;
+}
+.Users_roles_add_phonebook {
+    box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
+    border-radius: 5px;
+    background: rgb(128 128 128 / 20%);
+}
+.Users_roles_tool .Users_roles_role:hover {
+    text-shadow: 0 0 2px black;
+    box-shadow: 0 0 4px black;
+}
