@@ -1212,7 +1212,7 @@ class Q_Response
 				if (!empty($loaded[$src])) {
 					continue;
 				}
-				$scriptSrc = Q_Html::themedUrl($script['src'], array('ignoreEnvironment' => true));
+				$scriptSrc = Q_Html::themedUrl($script['src'], array('ignoreEnvironment' => true, 'noQuerystring' => true));
 				$loaded[$scriptSrc] = true;
 				$loaded[$src] = true;
 				try {
@@ -1238,9 +1238,8 @@ class Q_Response
 		}
 		foreach ($scripts_for_slots as $slot => $texts) {
 			foreach ($texts as $src => $text) {
-				$srcParts = explode('?', $src);
 				$parts[] = Q_Html::script($text, array(
-					'data-src' => $srcParts[0],
+					'data-src' => $src,
 					'data-slot' => $slot
 				));
 			}
@@ -1457,7 +1456,7 @@ class Q_Response
 					if (!empty($loaded[$href])) {
 						continue;
 					}
-					$stylesheetHref = Q_Html::themedUrl($stylesheet['href'], array('ignoreEnvironment' => true));
+					$stylesheetHref = Q_Html::themedUrl($stylesheet['href'], array('ignoreEnvironment' => true, 'noQuerystring' => true));
 					$loaded[$stylesheetHref] = true;
 					$loaded[$href] = true;
 					try {
