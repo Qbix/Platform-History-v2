@@ -8,6 +8,8 @@ require_once USERS_PLUGIN_DIR.'/vendor/autoload.php';
 //use Web3\RequestManagers\HttpRequestManager;
 use SWeb3\SWeb3; 
 use SWeb3\SWeb3_Contract;
+use phpseclib\Math\BigInteger as BigNumber;
+
 //use SWeb3\ABI; //uncomment when will ordering output p;arams
 /**
  * @module Users
@@ -57,6 +59,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
+
 		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "'Users/apps/$appId/chainId'"
@@ -124,51 +127,31 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		
 		$contract = new SWeb3_Contract($provider, $contractAddress, $contractABI);
-		if (is_array(self::$batching[$appId])) {
-			if (is_callable($delay)) {
-				$callback = $delay;
-			} else {
-				$callback = null;
-			}
-			array_push(self::$batching[$appId], array($contract, $callback));
-			array_push(self::$batching[$appId], array($contract, $callback));
+
+		if (is_array(self::$batching[$appInfo['appId']])) {
+            
+//			if (is_callable($delay)) {
+//				$callback = $delay;
+//			} else {
+//				$callback = null;
+//			}
+
+			array_push(self::$batching[$appInfo['appId']], array($contract, $methodName, $callback));
+            
+			//array_push(self::$batching[$appId], array($contract, $callback));
 		}
 		$result = $contract->call($methodName, $params);
-		if (is_array(self::$batching[$appId])) {
-			return count(self::$batching[$appId]) - 1;
+
+		if (is_array(self::$batching[$appInfo['appId']])) {
+			return count(self::$batching[$appInfo['appId']]) - 1;
 		}
 		
 		if (count($result) == 0) {
 			return null;
 		}
-		//$data = Q::ifset($result, 'result', null);
-		$data = Q::json_decode(Q::json_encode($result), true);
-		
-		//fast way is a convert outputs values as-is and forgot for order variables
-		$data = array_values($data);
-		if ((count($data)) == 1) {
-			$data = $data[0];
-		}
-		
-		//another way to look at the abi
-		//$abi = new ABI();
-		//$abi->Init($contractABI);
-		//print_r($abi->functions[$methodName]);
-		//$abi->functions[$methodName]['output']
-		//----------------------------
 
-		
-		/*
-		if ($data instanceof BigInteger) {
-			$data = $data->toString();
-		} elseif (is_array($data)) {
-			foreach ($data as $key => $item) {
-				if ($item instanceof BigInteger) {
-					$data[$key] = $item->toString();
-				}
-			}
-		}
-		*/
+        $data = self::adjust($result);
+        
 		if ((
 			is_callable($caching)
 			and call_user_func_array($caching, array($data))
@@ -194,9 +177,12 @@ class Users_Web3 extends Base_Users_Web3 {
 	 */
 	static function batchStart($appId = null)
 	{
+        
 		list($appInfo, $provider, $rpcUrl) = self::objects($appId);
 		$provider->batch(true);
-		self::$batching[$appId] = array();
+         // [appId] => 0x13881
+		self::$batching[$appInfo['appId']] = array();
+        
 	}
 
 	/**
@@ -208,22 +194,61 @@ class Users_Web3 extends Base_Users_Web3 {
 	 */
 	static function batchExecute($appId = null)
 	{
+
 		$err = null;
-		$data = null;
+		$data = [];
 		list($appInfo, $provider, $rpcUrl) = self::objects($appId);
+
 		$results = $provider->executeBatch();
-		foreach ($results as $result) {
-			list($contract, $callable) = self::$batching[$appId][$result->id];
-			$data = $contract->DecodeData('pending', $results[0]->result);
-			call_user_func($callable, $data, $result->id);
+
+		foreach ($results as $index=>$result) {
+            // !!! not $result->id
+            // id in rpc reseponce is the same for all reqeuests on batch request. because batch request the single 
+			list($contract, $methodName, $callable) = self::$batching[$appInfo['appId']][$index];
+			$data[$index] = self::adjust($contract->DecodeData($methodName, $results[$index]->result));
+			//call_user_func($callable, $data[$index], $index);
 		}
-		self::$batching[$appId] = null;
+		self::$batching[$appInfo['appId']] = null;
 		self::$providers[$rpcUrl] = new SWeb3($rpcUrl);
+        $provider->batch(false);
 		if ($err) {
 			throw new Q_Exception($err);
 		}
-		return $results;
+		return $data;
 	}
+    
+    //function getGasPrice(bool $force_refresh = false) : BigNumber 
+        
+    static function _adjust($in) 
+    {
+        if ($in instanceof phpseclib\Math\BigInteger) {
+            return $in->toString();
+        } else if (is_string($in) && $in == '0x') {
+            return '0x0000000000000000000000000000000000000000';
+        } else {
+            return $in;
+        }
+    }
+    static function adjust($in)
+    {
+        $out = null;
+        if ($in instanceof stdClass) {
+            $out = [];
+            foreach ($in as $k => $v) {
+                if (is_string($k) && substr($k, 0, 5) == 'tuple') {
+                    $out[$k] = self::adjust($v);
+                }  else {
+                    $out[$k] = self::_adjust($v);
+                } 
+            }
+            if (count($out) == 1) {
+                $out = $out[array_key_first($out)];
+            }
+            return $out;
+        } else {
+            return self::_adjust($in);
+        }
+    }
 
 	/**
 	 * Get existing provider object, or create a new one
@@ -238,6 +263,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			$appId = Q::app();
 		}
 		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
+
 		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
 		$appInfo = array_merge($usersWeb3Config, $appInfo);
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
