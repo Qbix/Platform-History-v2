@@ -1997,9 +1997,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         return _request();
     }
     Q.Text.get('Streams/content', function (err, text) {
-
-		var addLabel = o.addLabel;
-		if (addLabel !== true) {
+		if (o.addLabel === false) {
+			return _continueAfterRoles();
+		} else if (o.addLabel !== true) {
 			if (!Q.isArrayLike(o.addLabel)) {
 				o.addLabel = [o.addLabel];
 			}
@@ -2063,8 +2063,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		});
 
 		function _continueAfterRoles() {
-			var addMyLabel = o.addMyLabel;
-			if (addMyLabel !== true) {
+			if (o.addMyLabel === false) {
+				o.addMyLabel = [];
+				return _showInviteDialog();
+			} else if (o.addMyLabel !== true) {
 				if (!Q.isArrayLike(o.addMyLabel)) {
 					o.addMyLabel = [o.addMyLabel];
 				}
