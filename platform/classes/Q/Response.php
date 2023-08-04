@@ -1238,8 +1238,9 @@ class Q_Response
 		}
 		foreach ($scripts_for_slots as $slot => $texts) {
 			foreach ($texts as $src => $text) {
+				$srcParts = explode('?', $src);
 				$parts[] = Q_Html::script($text, array(
-					'data-src' => $src,
+					'data-src' => $srcParts[0],
 					'data-slot' => $slot
 				));
 			}
