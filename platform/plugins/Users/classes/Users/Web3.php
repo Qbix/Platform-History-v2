@@ -80,17 +80,30 @@ class Users_Web3 extends Base_Users_Web3 {
 			usleep($delay);
 		}
 		
-		$contractABI_json = self::getABI($contractABI, $chainId);
-		$contractABI = Q::json_encode($contractABI_json);
+        try {
+			Q::json_decode($contractABI, true);
+            // $contractABI already decoded into string
+		} catch (Exception $e) {
+            // else try by default: 
+            //  get name of file; 
+            //  get content
+            //  try to decode
+			$contractABI_json = self::getABI($contractABI, $chainId);
+            $contractABI = Q::json_encode($contractABI_json);
+		}
+        
+		
 		
 		$data = array();
 		
 		$provider->chainId = $chainId;
 		
 		if (!isset($transaction['value'])) {
-				$transaction['value'] = ''; // '0x0';
-			}
+            $transaction['value'] = ''; // '0x0';
+        }
 			
+        $contract = new SWeb3_contract($provider, $contractAddress, $contractABI);
+        
 		if ($privateKey) {
 			if (empty($transaction['from'])) {
 				throw new Q_Exception_MissingObject(array(
@@ -107,51 +120,44 @@ class Users_Web3 extends Base_Users_Web3 {
 				$transaction['value'] = ''; // '0x0';
 			}
 			
-			$contract = new SWeb3_contract($provider, $contractAddress, $contractABI);
-			$contract->send($methodName, $params, $transaction); // estimates gas
-			$encodedData = $provider->ABI->EncodeData($methodName, $params);
-			$tx = new Transaction (
-				$transaction['nonce'],
-				Q::ifset($transaction, 'gasPrice', ''),
-				Q::ifset($transaction, 'gasLimit', ''),
-				$contractAddress,
-				$transaction['value'],
-				$encodedData
-			);
-			$signedTx = '0x' . $tx->getRaw ($provider->personal->privateKey, $chainId);
 			
-			// NOTE: This hasn't been tested yet
-			return $signedTx;
-			
-			
-		}
-		
-		$contract = new SWeb3_Contract($provider, $contractAddress, $contractABI);
-
-		if (is_array(self::$batching[$appInfo['appId']])) {
-            
-//			if (is_callable($delay)) {
-//				$callback = $delay;
-//			} else {
-//				$callback = null;
-//			}
-
-			array_push(self::$batching[$appInfo['appId']], array($contract, $methodName, $callback));
-            
-			//array_push(self::$batching[$appId], array($contract, $callback));
-		}
-		$result = $contract->call($methodName, $params);
-
-		if (is_array(self::$batching[$appInfo['appId']])) {
-			return count(self::$batching[$appInfo['appId']]) - 1;
-		}
-		
-		if (count($result) == 0) {
+			$result = $contract->send($methodName, $params, $transaction); // estimates gas
+//			$encodedData = $provider->ABI->EncodeData($methodName, $params);
+//			$tx = new Transaction (
+//				$transaction['nonce'],
+//				Q::ifset($transaction, 'gasPrice', ''),
+//				Q::ifset($transaction, 'gasLimit', ''),
+//				$contractAddress,
+//				$transaction['value'],
+//				$encodedData
+//			);
+//			$signedTx = '0x' . $tx->getRaw ($provider->personal->privateKey, $chainId);
+//			
+//			// NOTE: This hasn't been tested yet
+//			return $signedTx;
+//			
+//			
+		} else {
+            $result = $contract->call($methodName, $params);
+        }
+        
+        if (count($result) == 0) {
 			return null;
 		}
+        
+        // if in batching mode, we just push into queue list (self::$batching)
+        // and return number of transaction of our list.
+		if (is_array(self::$batching[$appInfo['appId']])) {
+			array_push(self::$batching[$appInfo['appId']], array($contract, $methodName, $callback));
+			return count(self::$batching[$appInfo['appId']]) - 1;
+		}
+        
+        // if not batch then we expect a result
+        // so just need to adjust returned data
 
         $data = self::adjust($result);
         
+        // cache manipulation
 		if ((
 			is_callable($caching)
 			and call_user_func_array($caching, array($data))
@@ -164,6 +170,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 			$cache->save(true); // each time it updates updatedTime
 		}
+        
 		return $data;
 
 	}
@@ -209,7 +216,9 @@ class Users_Web3 extends Base_Users_Web3 {
 			//call_user_func($callable, $data[$index], $index);
 		}
 		self::$batching[$appInfo['appId']] = null;
-		self::$providers[$rpcUrl] = new SWeb3($rpcUrl);
+        $extra_curl_params = [];
+        $extra_header_params = [];
+		self::$providers[$rpcUrl] = new SWeb3($rpcUrl, $extra_curl_params, $extra_header_params);
         $provider->batch(false);
 		if ($err) {
 			throw new Q_Exception($err);
@@ -232,12 +241,27 @@ class Users_Web3 extends Base_Users_Web3 {
     static function adjust($in)
     {
         $out = null;
+//echo 'static function adjust($in)' . PHP_EOL;
+//print_r($in);
         if ($in instanceof stdClass) {
+            
             $out = [];
             foreach ($in as $k => $v) {
-                if (is_string($k) && substr($k, 0, 5) == 'tuple') {
+                
+//echo "k = $k" . PHP_EOL;
+                if ((is_string($k) && substr($k, 0, 5) == 'tuple') || ($v instanceof stdClass)) {
+//
+//echo "if (is_string(k) && substr(k, 0, 5) == 'tuple') {" . PHP_EOL;
+//print_r($v);
                     $out[$k] = self::adjust($v);
-                }  else {
+                } else if (is_array($v)) {
+                    $tmp2 = [];
+                    foreach ($v as $k2 => $v2) {
+                        $tmp2[$k2] = self::adjust($v2);
+                    }
+                    $out[$k] = $tmp2;
+                } else {
+                    
                     $out[$k] = self::_adjust($v);
                 } 
             }
@@ -245,6 +269,7 @@ class Users_Web3 extends Base_Users_Web3 {
                 $out = $out[array_key_first($out)];
             }
             return $out;
+        
         } else {
             return self::_adjust($in);
         }
@@ -284,7 +309,11 @@ class Users_Web3 extends Base_Users_Web3 {
 		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId', 'infuraKey'));
 		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
 			if (empty(self::$providers[$rpcUrl])) {
-				self::$providers[$rpcUrl] = new SWeb3($rpcUrl);
+                // extra curl params
+                $extra_curl_params = [];
+                // $extra_curl_params[CURLOPT_USERPWD] = ':'.INFURA_PROJECT_SECRET;                
+                $extra_header_params = [];
+				self::$providers[$rpcUrl] = new SWeb3($rpcUrl,$extra_curl_params, $extra_header_params);
 			}
 			$provider = self::$providers[$rpcUrl];
 		} else {
