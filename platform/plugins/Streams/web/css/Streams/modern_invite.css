@@ -246,3 +246,41 @@ Twitter
 .Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text {
 	display: none;
 }
+
+/*start: add roles buttons*/
+.Streams_invite_label_buttons {
+	margin-top: 15px;
+    display: flex;
+}
+.Streams_invite_label_buttons button {
+	position: relative;
+    background: #555555;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    height: 40px;
+}
+.Streams_invite_label_buttons button span {
+	background-color: red;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 35%;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Streams_invite_label_buttons .Streams_invite_button_add-roles{
+	white-space: nowrap;
+    margin-right: 5px;
+	z-index: 9;
+}
+.Streams_invite_label_buttons .Streams_invite_button_add_rels{
+    flex-basis: 100%;
+}
+/*end: add roles buttons*/

@@ -1377,6 +1377,9 @@ Streams.Dialogs = {
                         fields: {
                             isContactsPicker: isContactsPicker,
                             userChooser: options.userChooser,
+                            showGrantRolesButton: options.showGrantRolesButton,
+                            communityRolesNum:options.addLabel ? options.addLabel.length : false,
+                            myLabelsNum:options.addMyLabel ? options.addMyLabel.length : false,
                             text: text,
                             photo: (options.photo)? text.photo: options.photo,
                             to: text.to.interpolate({"Stream Title": stream.fields.title}),
@@ -1559,6 +1562,19 @@ Streams.Dialogs = {
                             Q.Dialogs.pop(); // close the Dialog
                             Q.handle(callback, Streams, [result]);
                         });
+
+						$('.Streams_invite_button_add-roles', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								Q.Dialogs.pop();
+								options.showGrantRolesDialog();
+							});
+
+						$('.Streams_invite_button_add_rels', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								Q.Dialogs.pop();
+								options.showGiveRelationshipLabelDialog();
+							});
+
                     }
                 });
             }
@@ -1997,136 +2013,188 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         return _request();
     }
     Q.Text.get('Streams/content', function (err, text) {
-		if (o.addLabel === false) {
-			return _continueAfterRoles();
-		} else if (o.addLabel !== true) {
-			if (!Q.isArrayLike(o.addLabel)) {
-				o.addLabel = [o.addLabel];
-			}
-			return _continueAfterRoles();
-		}
-		o.addLabel = [];
-
-		// Commented out because now we check the server every time
-		// var canGrantRoles = Q.getObject('Q.plugins.Users.Label.canGrant') || [];
-		// var canRevokeRoles = Q.getObject('Q.plugins.Users.Label.canRevoke') || [];
-		// var canHandleRoles = Array.from(new Set(canGrantRoles.concat(canRevokeRoles))); // get unique array from merged arrays
-		// if (!canHandleRoles.length) {
-		// 	_showInviteDialog();
-		// }
-
-		Q.req('Users/roles', ['canGrant', 'canRevoke', 'canSee'], function (err, response) {
+		_getCanGrantRoles().then(function (response) {
 			var canGrantRoles = Q.getObject('slots.canGrant', response);
 			var canRevokeRoles = Q.getObject('slots.canRevoke', response);
+
+			o.showGrantRolesButton = true;
 			if (Q.isEmpty(canGrantRoles)) {
+				//o.showGrantRolesButton = false;
+			}
+
+			var addLabel = o.addLabel;
+			if (addLabel !== true) {
+				if (!Q.isArrayLike(o.addLabel)) {
+					o.addLabel = [o.addLabel];
+				}
 				return _continueAfterRoles();
+			} else {
+				o.addLabel = [];
+				_showGrantRolesDialog(_continueAfterRoles);
 			}
-			Q.Dialogs.push({
-				title: text.invite.roles.title,
-				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
-					userId: Q.Users.communityId,
-					filter: canGrantRoles
-				}),
-				className: 'Streams_invite_labels_dialog',
-				apply: true,
-				onClose: _continueAfterRoles,
-				onActivate: function (dialog) {
-					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
-					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
-						return;
-					}
-					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						if (!wasSelected && !canGrantRoles.includes(label)) {
-							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
-								title: text.invite.roles.NotAuthorizedToGrantRole.title
-							})
-							return false;
-						}
-						if (wasSelected && !canRevokeRoles.includes(label)) {
-							Q.alert(text.invite.roles.NotAuthorizedToRemovetRole.alert, {
-								title: text.invite.roles.NotAuthorizedToRemoveRole.title
-							})
-							return false;
-						}
 
-						if(wasSelected) {
-							var index = o.addLabel.indexOf(label);
-							if(index > -1) {
-								o.addLabel.splice(index, 1)
-							}
-						} else {
-							o.addLabel.push(label);
-						}
-					}, labelsTool);
+			// Commented out because now we check the server every time
+			// var canGrantRoles = Q.getObject('Q.plugins.Users.Label.canGrant') || [];
+			// var canRevokeRoles = Q.getObject('Q.plugins.Users.Label.canRevoke') || [];
+			// var canHandleRoles = Array.from(new Set(canGrantRoles.concat(canRevokeRoles))); // get unique array from merged arrays
+			// if (!canHandleRoles.length) {
+			// 	_showInviteDialog();
+			// }
+
+			function _showGrantRolesDialog(callback) {
+				if (Q.isEmpty(canGrantRoles)) {
+					return _continueAfterRoles();
 				}
-			});
-		});
+				Q.Dialogs.push({
+					title: text.invite.roles.title,
+					content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+						userId: Q.Users.communityId,
+						filter: canGrantRoles
+					}),
+					className: 'Streams_invite_labels_dialog',
+					apply: true,
+					onClose: callback,
+					onActivate: function (dialog) {
+						var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+						if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+							return;
+						}
 
-		function _continueAfterRoles() {
-			if (o.addMyLabel === false) {
+						if(o.addLabel && o.addLabel.length != 0) {
+							labelsTool.state.onRefresh.add(function () {
+								for(var i in o.addLabel) {
+									var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addLabel[i] + '"]');
+									if(lavelEl) {
+										lavelEl.classList.add('Q_selected');
+									}
+								}
+							});
+						}
+						labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+							if (!wasSelected && !canGrantRoles.includes(label)) {
+								Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
+									title: text.invite.roles.NotAuthorizedToGrantRole.title
+								})
+								return false;
+							}
+							if (wasSelected && !canRevokeRoles.includes(label)) {
+								Q.alert(text.invite.roles.NotAuthorizedToRemovetRole.alert, {
+									title: text.invite.roles.NotAuthorizedToRemoveRole.title
+								})
+								return false;
+							}
+
+							if (wasSelected) {
+								var index = o.addLabel.indexOf(label);
+								if (index > -1) {
+									o.addLabel.splice(index, 1)
+								}
+							} else {
+								o.addLabel.push(label);
+							}
+						}, labelsTool);
+					}
+				});
+			}
+
+			function _continueAfterRoles() {
+				var addMyLabel = o.addMyLabel;
+				if (addMyLabel !== true) {
+					if (!Q.isArrayLike(o.addMyLabel)) {
+						o.addMyLabel = [o.addMyLabel];
+					}
+					return _showInviteDialog();
+				}
 				o.addMyLabel = [];
-				return _showInviteDialog();
-			} else if (o.addMyLabel !== true) {
-				if (!Q.isArrayLike(o.addMyLabel)) {
-					o.addMyLabel = [o.addMyLabel];
-				}
-				return _showInviteDialog();
+				_showGiveRelationshipLabelDialog(_showInviteDialog);
 			}
-			o.addMyLabel = [];
-			Q.Dialogs.push({
-				title: text.invite.labels.title,
-				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
-					userId: Q.Users.loggedInUserId(),
-					filter: 'Users/',
-					canAdd: true
-				}),
-				className: 'Streams_invite_labels_dialog',
-				apply: true,
-				onClose: _showInviteDialog,
-				onActivate: function (dialog) {
-					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
-					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+
+			function _showGiveRelationshipLabelDialog(callback) {
+				Q.Dialogs.push({
+					title: text.invite.labels.title,
+					content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+						userId: Q.Users.loggedInUserId(),
+						filter: 'Users/',
+						canAdd: true
+					}),
+					className: 'Streams_invite_labels_dialog',
+					apply: true,
+					onClose: callback,
+					onActivate: function (dialog) {
+						var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+						if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+							return;
+						}
+
+						if(o.addMyLabel && o.addMyLabel.length != 0) {
+							labelsTool.state.onRefresh.add(function () {
+								for(var i in o.addMyLabel) {
+									var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addMyLabel[i] + '"]');
+									if(lavelEl) {
+										lavelEl.classList.add('Q_selected');
+									}
+								}
+							});
+						}
+
+						labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+							if (wasSelected) {
+								var index = o.addMyLabel.indexOf(label);
+								if (index > -1) {
+									o.addMyLabel.splice(index, 1)
+								}
+							} else {
+								o.addMyLabel.push(label);
+							}
+						}, labelsTool);
+					}
+				});
+			}
+
+			function _showInviteDialog() {
+				var options = {
+					title: o.title,
+					identifierTypes: o.identifierTypes,
+					userChooser: o.userChooser,
+					appUrl: o.appUrl,
+					showGrantRolesButton: o.showGrantRolesButton,
+					addLabel: o.addLabel,
+					addMyLabel: o.addMyLabel,
+					showGrantRolesDialog: function() {
+						_showGrantRolesDialog(_showInviteDialog);
+					},
+					showGiveRelationshipLabelDialog: function() {
+						_showGiveRelationshipLabelDialog(_showInviteDialog);
+					}
+
+				};
+				if (o.templateName) {
+					options.templateName = o.templateName;
+				}
+				Streams.Dialogs.invite(publisherId, streamName, function (r) {
+					if (Q.isEmpty(r)) {
 						return;
 					}
-					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-						if(wasSelected) {
-							var index = o.addMyLabel.indexOf(label);
-							if(index > -1) {
-								o.addMyLabel.splice(index, 1)
-							}
-						} else {
-							o.addMyLabel.push(label);
-						}
-					}, labelsTool);
-				}
+					for (var option in r) {
+						o[option] = r[option];
+					}
+					if (r.sendBy) {
+						_sendBy(r, text);
+					} else {
+						_request();
+					}
+				}, options);
+			}
+
+		});
+		
+		function _getCanGrantRoles() {
+			return new Promise(function (resolve, reject) {
+				Q.req('Users/roles', ['canGrant', 'canRevoke', 'canSee'], function (err, response) {
+					resolve(response);
+				})
 			});
 		}
-
-		function _showInviteDialog() {
-			var options = {
-				title: o.title,
-				identifierTypes: o.identifierTypes,
-				userChooser: o.userChooser,
-				appUrl: o.appUrl
-			};
-			if(o.templateName) {
-				options.templateName = o.templateName;
-			}
-			Streams.Dialogs.invite(publisherId, streamName, function (r) {
-				if (Q.isEmpty(r)) {
-					return;
-				}
-				for (var option in r) {
-					o[option] = r[option];
-				}
-				if (r.sendBy) {
-					_sendBy(r, text);
-				} else {
-					_request();
-				}
-			}, options);
-		}
-
 
     });
     return null;

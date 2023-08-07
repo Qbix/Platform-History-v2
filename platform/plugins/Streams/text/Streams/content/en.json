@@ -138,7 +138,9 @@
             "scanQRCode": "Scan QR Code",
             "shareLink": "Share a link",
             "chooseFromRegistered": "Choose from registered users",
-            "inviteViaEmailOrSms": "Invite via email or SMS"
+            "inviteViaEmailOrSms": "Invite via email or SMS",
+            "addRoles": "Add Roles",
+            "addPersonalRoles": "Add Personal Relationships"
         },
         "complete": {
             "WelcomeToCommunity": "Welcome to {{communityName}}",

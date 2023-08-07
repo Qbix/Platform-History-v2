@@ -46,4 +46,16 @@
             <div class="Streams_invite_social_labels">{{text.twitter}}</div>
         </button>
     </div>
+    <div class="Streams_invite_label_buttons">
+        {{#if showGrantRolesButton}}
+            <button class="Streams_invite_button_add-roles">
+                {{text.addRoles}}
+                {{#if communityRolesNum}}<span>{{ communityRolesNum }}</span>{{/if}}
+                </button>
+        {{/if}}
+        <button class="Streams_invite_button_add_rels">
+            {{text.addPersonalRoles}}
+            {{#if myLabelsNum}}<span>{{ myLabelsNum }}</span>{{/if}}
+        </button>
+    </div>
 </div>
