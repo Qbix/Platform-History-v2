@@ -3684,7 +3684,7 @@ abstract class Streams extends Base_Streams
 		$options = Q::take($options, array(
 			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId', 'html',
 			'addLabel', 'addMyLabel', 'name', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
-			'templateDir', 'icon'
+			'templateDir', 'icon', 'userId'
 		));
 		
 		if (isset($options['asUserId'])) {
@@ -3812,7 +3812,7 @@ abstract class Streams extends Base_Streams
 			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
 		
-		$alwaysSend = Q::ifset($options, 'alwaysSend', false);
+		$alwaysSend = filter_var(Q::ifset($options, 'alwaysSend', false), FILTER_VALIDATE_BOOLEAN);
 
 		// remove already participating users if alwaysSend=false
 		if (!$alwaysSend) {

@@ -1396,6 +1396,7 @@ class Q_Html
 	 * @param {string} [$options.skipFilename] Set to true, to return null for the filename and skip calling filenameFromUrl
 	 * @param {boolean} [$options.baseUrlPlaceholder=false] Pass true to have {{baseUrl}} placeholder instead of base URL in the string
 	 * @param {boolean} [$options.fullUrlForPlugin=false] Whether a PluginName placeholder resolves to a full URL
+	 * @param {boolean} [$options.noQuerystring=false] Set to true to have the returned URL contain only the part before the question mark
 	 * @return {array} A three-element array containing the url, filename, hash
 	 */
 	static function themedUrlFilenameAndHash ($filePath, $options = array())
@@ -1518,6 +1519,10 @@ class Q_Html
 			list($url, $hash) = Q_Uri::cachedUrlAndHash($url);
 		}
 		$url = Q_Uri::proxySource($url);
+		if ($url && !empty($options['noQuerystring'])) {
+			$parts = explode('?', $url);
+			$url = $parts[0];
+		}
 		return array($url, $filename, $hash);
 	}
 	
@@ -1530,6 +1535,7 @@ class Q_Html
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
 	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
 	 * @param {boolean} [$options.baseUrlPlaceholder=false] Pass true to have {{baseUrl}} placeholder instead of base URL in the string
+	 * @param {boolean} [$options.noQuerystring=false] Set to true to have the returned URL contain only the part before the question mark
 	 * @return {string} The themed url.
 	 */
 	static function themedUrl($filePath, $options = array())

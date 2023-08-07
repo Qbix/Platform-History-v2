@@ -392,6 +392,7 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 .Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
 .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
 	display: block;
+	width: 100%;
 	overflow: hidden;
 	text-align: left;
 	white-space: nowrap;

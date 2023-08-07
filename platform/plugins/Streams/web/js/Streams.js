@@ -2013,7 +2013,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         return _request();
     }
     Q.Text.get('Streams/content', function (err, text) {
-
 		_getCanGrantRoles().then(function (response) {
 			var canGrantRoles = Q.getObject('slots.canGrant', response);
 			var canRevokeRoles = Q.getObject('slots.canRevoke', response);
@@ -2188,7 +2187,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 
 		});
-
+		
 		function _getCanGrantRoles() {
 			return new Promise(function (resolve, reject) {
 				Q.req('Users/roles', ['canGrant', 'canRevoke', 'canSee'], function (err, response) {

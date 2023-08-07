@@ -1,4 +1,3 @@
-<h2><?php echo $text['services']['ManageServices'] ?></h2>
 <?php
 echo Q::tool("Streams/related", array(
 	"publisherId" => $communityId,

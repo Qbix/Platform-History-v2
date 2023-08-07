@@ -116,7 +116,7 @@
 }
 .Streams_chat_preview_tool .Streams_preview_contents {
 	position: relative;
-	width: 63%;
+	width: calc(100% - 50px);
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
