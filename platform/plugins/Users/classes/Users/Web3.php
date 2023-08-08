@@ -65,10 +65,25 @@ class Users_Web3 extends Base_Users_Web3 {
 				'fieldpath' => "'Users/apps/$appId/chainId'"
 			));
 		}
+        	
+        // another stupid thing 
+        //      chainId should be an interger.
+        //      if chainId is a hex, then in getRaw
+        //      `public function getRaw(string $privateKey, int $chainId = 0):` 
+        //      will transform to zero and rpc return an error with code = -32000
+        //      With message: "only replay-protected (EIP-155) transactions allowed over RPC"
+        if (substr($chainId, 0, 2) === '0x') {
+            $chainId = hexdec($chainId);
+        }
+
+        
 		if (!is_array($params)) {
 			$params = array($params);
 		}
 		$from = Q::ifset($transaction, 'from', null);
+        if ($privateKey && substr($privateKey, 0, 2) === '0x') {
+            $privateKey = str_replace('0x', '', $privateKey);
+        }
 		
 		if ($caching !== false && $cacheDuration) {
 			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
@@ -80,6 +95,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			usleep($delay);
 		}
 		
+        // ability to put already decoded string like "{'a':b, ...}"
         try {
 			Q::json_decode($contractABI, true);
             // $contractABI already decoded into string
@@ -92,51 +108,42 @@ class Users_Web3 extends Base_Users_Web3 {
             $contractABI = Q::json_encode($contractABI_json);
 		}
         
-		
-		
 		$data = array();
-		
+	
 		$provider->chainId = $chainId;
 		
 		if (!isset($transaction['value'])) {
             $transaction['value'] = ''; // '0x0';
         }
+        
+        if ($privateKey) {
+            $provider->setPersonalData($from, $privateKey);
+        }
 			
         $contract = new SWeb3_contract($provider, $contractAddress, $contractABI);
         
 		if ($privateKey) {
-			if (empty($transaction['from'])) {
-				throw new Q_Exception_MissingObject(array(
-					'name' => 'transaction.from'
-				));
-			}
-			
-			$provider->setPersonalData($transaction['from'], $privateKey);
-			if (!isset($transaction['nonce'])) {
-				$transaction['nonce'] = $provider->personal->getNonce();
-			}
-			
-			if (!isset($transaction['value'])) {
-				$transaction['value'] = ''; // '0x0';
-			}
-			
-			
-			$result = $contract->send($methodName, $params, $transaction); // estimates gas
-//			$encodedData = $provider->ABI->EncodeData($methodName, $params);
-//			$tx = new Transaction (
-//				$transaction['nonce'],
-//				Q::ifset($transaction, 'gasPrice', ''),
-//				Q::ifset($transaction, 'gasLimit', ''),
-//				$contractAddress,
-//				$transaction['value'],
-//				$encodedData
-//			);
-//			$signedTx = '0x' . $tx->getRaw ($provider->personal->privateKey, $chainId);
-//			
-//			// NOTE: This hasn't been tested yet
-//			return $signedTx;
-//			
-//			
+            if (is_array(self::$batching[$appInfo['appId']])) {
+                throw new Exception("Batching signed transactions has not been supported yet.");
+            }
+			$extra_data = [];
+            
+            if (!isset($transaction['nonce'])) {
+
+                $extra_data['nonce'] = $provider->personal->getNonce();
+
+                // another stupid thing 
+                //      Web3Contract can not understand phpseclib\Math\BigInteger with value 0x
+                //      so If the value is 0 or (0x), then tx.value must be 0x0..
+                $extra_data['nonce'] = self::adjustZeroHexValue($extra_data['nonce']); 
+            }    
+            
+//			if (isset($transaction['value'])) {
+//				$extra_data['value'] = ''; // '0x0';
+//			}
+
+			$result = $contract->send($methodName, $params, $extra_data);
+            
 		} else {
             $result = $contract->call($methodName, $params);
         }
@@ -148,7 +155,7 @@ class Users_Web3 extends Base_Users_Web3 {
         // if in batching mode, we just push into queue list (self::$batching)
         // and return number of transaction of our list.
 		if (is_array(self::$batching[$appInfo['appId']])) {
-			array_push(self::$batching[$appInfo['appId']], array($contract, $methodName, $callback));
+			array_push(self::$batching[$appInfo['appId']], array($contract, $methodName, ($privateKey ? true : false), $callback));
 			return count(self::$batching[$appInfo['appId']]) - 1;
 		}
         
@@ -174,6 +181,58 @@ class Users_Web3 extends Base_Users_Web3 {
 		return $data;
 
 	}
+    
+    /**
+	 * getTransactionReceipt
+	 * @method getTransactionReceipt
+	 * @static
+     * @param appId
+	 * @param {string|array} transaction hash or response that returned by execute
+     * @param attempts maximum attempt to get receipt
+     * @param delay delay in microseconds between attempts
+	 */
+    static function getTransactionReceipt($appId, $response, $attempts, $delay)
+    {  
+        list($appInfo, $provider, $rpcUrl) = self::objects($appId);
+        $transaction_hash = (is_array($response) && isset($response['result']))
+            ?
+            $response['result']
+            :
+            $response
+            ;
+        $result = null;
+        $count = 0;
+        while ($count < $attempts) {
+            if ($count != 0) {usleep($delay);}
+            try {
+                $result = $provider->getTransactionReceipt($transaction_hash);
+                break;
+            } catch (Exception $ex) {
+
+            }
+        }
+        return $result;
+//        $result = $this->call('eth_getTransactionReceipt', [$transaction_hash]); 
+// 
+//        if(!isset($result->result)) {
+//            throw new Exception('getTransactionReceipt error: ' . json_encode($result));   
+//        }
+//
+//        return $result;
+    }
+    
+    static function isTransactionMined($receipt) {
+        $receipt = (($receipt instanceof stdClass) && isset($receipt->result))
+            ?
+            $receipt->result
+            :
+            $receipt
+            ;
+        if ($receipt->status == '0x1') {
+            return true;
+        }
+        return false;
+    }
 
 	/**
 	 * Start a batch, then call execute() method multiple times with same $appId,
@@ -199,7 +258,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @static
 	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
 	 */
-	static function batchExecute($appId = null)
+	static function batchExecute($appId = null, &$batchResults = null)
 	{
 
 		$err = null;
@@ -207,12 +266,21 @@ class Users_Web3 extends Base_Users_Web3 {
 		list($appInfo, $provider, $rpcUrl) = self::objects($appId);
 
 		$results = $provider->executeBatch();
-
+        if (count($results) == 0) {
+			throw new Q_Exception($err);
+		}
+        $batchResults = $results;
+        
 		foreach ($results as $index=>$result) {
             // !!! not $result->id
             // id in rpc reseponce is the same for all reqeuests on batch request. because batch request the single 
-			list($contract, $methodName, $callable) = self::$batching[$appInfo['appId']][$index];
-			$data[$index] = self::adjust($contract->DecodeData($methodName, $results[$index]->result));
+			list($contract, $methodName, $signedTx, $callable) = self::$batching[$appInfo['appId']][$index];
+            if ($signedTx) {
+                $data[$index] = $results[$index]->result;
+            } else {
+                $data[$index] = self::adjust($contract->DecodeData($methodName, $results[$index]->result));
+            }
+			
 			//call_user_func($callable, $data[$index], $index);
 		}
 		self::$batching[$appInfo['appId']] = null;
@@ -598,6 +666,18 @@ class Users_Web3 extends Base_Users_Web3 {
 		$normalized = $address;
 		return true;
 	}
+    
+    /**
+	 * Used to transform '0' or '0x' values to 0x0.
+	 
+	 * @method adjustZeroHexValue
+	 * @static
+	 * @param {string|object} $in 
+	 * @return {string} 
+	 */
+    static function adjustZeroHexValue($in) {
+        return (in_array($in.'', array('0', '0x'))) ? '0x0' : $in; 
+    }
 
 	public static $providers = array();
 	public static $batching = array();
