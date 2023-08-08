@@ -347,8 +347,14 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					Q.setObject("options.streams_preview.related.weight", this.state.related.weight, element);
 					element.setAttribute('data-weight', this.state.related.weight);
 
-					// place new preview to the valid place in the list
-					_placeRelatedTool(element);
+					// check if such preview already exists before place
+					if (Q.handle(state.beforeRenderPreview, tool, [Q.extend({}, tff, {name: stream.fields.name}), element]) === false) {
+						element.remove();
+					} else {
+						// place new preview to the valid place in the list
+						_placeRelatedTool(element);
+					}
+
 
 					addComposer(streamType, params);
 				}, tool);

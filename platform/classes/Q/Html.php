@@ -1065,7 +1065,8 @@ class Q_Html
 		if (!is_array($convert)) {
 			$convert = array();
 		}
-		$result = htmlentities(Q::t($content) ?? '', ENT_QUOTES, 'UTF-8');
+		$t = Q::t($content);
+		$result = htmlentities(isset($t) ? $t : '', ENT_QUOTES, 'UTF-8');
 		if ($convert or $unconvert) {
 			$conversions = array(
 				"\n" => "<br>",

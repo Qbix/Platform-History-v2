@@ -282,7 +282,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			fields,
 			function (err, html) {
 				if (err) return;
-				Q.replace(tool.element, html);;
+				Q.replace(tool.element, html);
 				tool.element.removeClass('Streams_preview_create');
 				_setWidthHeight(tool, tool.$('.Streams_preview_add'));
 				var container = tool.$('.Streams_preview_container');
