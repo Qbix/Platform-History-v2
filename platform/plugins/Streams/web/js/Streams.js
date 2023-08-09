@@ -1377,7 +1377,9 @@ Streams.Dialogs = {
                         fields: {
                             isContactsPicker: isContactsPicker,
                             userChooser: options.userChooser,
+                            showLabelsButtons: options.showGrantRolesButton || options.showGiveMyLabelButton,
                             showGrantRolesButton: options.showGrantRolesButton,
+                            showGiveMyLabelButton: options.showGiveMyLabelButton,
                             communityRolesNum:options.addLabel ? options.addLabel.length : false,
                             myLabelsNum:options.addMyLabel ? options.addMyLabel.length : false,
                             text: text,
@@ -2016,22 +2018,38 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		_getCanGrantRoles().then(function (response) {
 			var canGrantRoles = Q.getObject('slots.canGrant', response);
 			var canRevokeRoles = Q.getObject('slots.canRevoke', response);
-
-			o.showGrantRolesButton = true;
-			if (Q.isEmpty(canGrantRoles)) {
-				//o.showGrantRolesButton = false;
-			}
-
+			
 			var addLabel = o.addLabel;
-			if (addLabel !== true) {
+			if(!Q.isEmpty(canGrantRoles) && addLabel !== false) {
+				//show button if user has any grant permissions
+				if(o.addLabel === true) {
+					o.addLabel = [];
+				}
 				if (!Q.isArrayLike(o.addLabel)) {
 					o.addLabel = [o.addLabel];
 				}
-				return _continueAfterRoles();
+				o.showGrantRolesButton = true;
 			} else {
+				//do not show button if o.addLabel: false OR user has no grant permissions
+				o.showGrantRolesButton = false;
 				o.addLabel = [];
-				_showGrantRolesDialog(_continueAfterRoles);
 			}
+
+			var addMyLabel = o.addMyLabel;
+			if (addMyLabel !== false) {
+				if(o.addMyLabel === true) {
+					o.addMyLabel = [];
+				}
+				if (!Q.isArrayLike(o.addMyLabel) && typeof o.addMyLabel != 'boolean') {
+					o.addMyLabel = [o.addMyLabel];
+				}
+				o.showGiveMyLabelButton = true;
+			} else {
+				o.showGiveMyLabelButton = false;
+				o.addMyLabel = [];
+			}
+			
+			_showInviteDialog();
 
 			// Commented out because now we check the server every time
 			// var canGrantRoles = Q.getObject('Q.plugins.Users.Label.canGrant') || [];
@@ -2042,9 +2060,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			// }
 
 			function _showGrantRolesDialog(callback) {
-				if (Q.isEmpty(canGrantRoles)) {
-					return _continueAfterRoles();
-				}
 				Q.Dialogs.push({
 					title: text.invite.roles.title,
 					content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
@@ -2097,18 +2112,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				});
 			}
 
-			function _continueAfterRoles() {
-				var addMyLabel = o.addMyLabel;
-				if (addMyLabel !== true) {
-					if (!Q.isArrayLike(o.addMyLabel)) {
-						o.addMyLabel = [o.addMyLabel];
-					}
-					return _showInviteDialog();
-				}
-				o.addMyLabel = [];
-				_showGiveRelationshipLabelDialog(_showInviteDialog);
-			}
-
 			function _showGiveRelationshipLabelDialog(callback) {
 				Q.Dialogs.push({
 					title: text.invite.labels.title,
@@ -2158,6 +2161,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					userChooser: o.userChooser,
 					appUrl: o.appUrl,
 					showGrantRolesButton: o.showGrantRolesButton,
+					showGiveMyLabelButton: o.showGiveMyLabelButton,
 					addLabel: o.addLabel,
 					addMyLabel: o.addMyLabel,
 					showGrantRolesDialog: function() {
@@ -2187,7 +2191,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 
 		});
-		
+
 		function _getCanGrantRoles() {
 			return new Promise(function (resolve, reject) {
 				Q.req('Users/roles', ['canGrant', 'canRevoke', 'canSee'], function (err, response) {
