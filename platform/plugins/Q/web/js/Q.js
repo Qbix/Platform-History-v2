@@ -10119,8 +10119,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										var href1 = Q.getObject("href", stylesheet);
-										var href2 = Q.getObject("href", e);
+										var href1 = stylesheet && stylesheet.href;
+										var href2 = e && (e.href || e.getAttribute('data-href'));
 										if (href1 && href2 && href1.split("?")[0] === href2.split("?")[0]
 										&& (!stylesheet.media || stylesheet.media === e.media)) {
 											found = true;
