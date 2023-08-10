@@ -251,17 +251,26 @@ Twitter
 .Streams_invite_label_buttons {
 	margin-top: 15px;
     display: flex;
+	column-gap: 20px;
+}
+.Streams_invite_label_buttons:empty{
+	margin-top: 0;
 }
 .Streams_invite_label_buttons button {
+	background: -webkit-linear-gradient(top, #8d8d8d, #6c6c6c);
+    border-radius: var(--button-border-radius);
 	position: relative;
-    background: #555555;
     color: white;
     border: 0;
     cursor: pointer;
     height: 40px;
 }
+.Streams_invite_label_buttons button:hover {
+	background: -webkit-linear-gradient(top, #6c6c6c, #8d8d8d);
+}
 .Streams_invite_label_buttons button span {
-	background-color: red;
+	background-color: #04AA6D;
+	box-shadow: rgb(0 114 28) 0px 1px 4px -1px;
     font-size: 12px;
     color: white;
     text-align: center;
@@ -277,10 +286,10 @@ Twitter
 }
 .Streams_invite_label_buttons .Streams_invite_button_add-roles{
 	white-space: nowrap;
-    margin-right: 5px;
 	z-index: 9;
+	flex: 1;
 }
 .Streams_invite_label_buttons .Streams_invite_button_add_rels{
-    flex-basis: 100%;
+	flex: 2;
 }
 /*end: add roles buttons*/
