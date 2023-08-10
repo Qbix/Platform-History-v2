@@ -10122,7 +10122,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 										var href1 = stylesheet && stylesheet.href;
 										var href2 = e && (e.href || e.getAttribute('data-href'));
 										if (href1 && href2 && href1.split("?")[0] === href2.split("?")[0]
-										&& (!stylesheet.media || stylesheet.media === e.media)) {
+										&& (!stylesheet.media || !e.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
 										}
