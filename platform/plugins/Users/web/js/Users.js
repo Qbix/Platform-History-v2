@@ -2881,6 +2881,10 @@
 	};
 	var Lp = Label.prototype;
 
+	Label.isExternal = function (label) {
+		return label.startsWith(Label.externalPrefix);
+	};
+
 	/**
 	 * Labels batch getter.
 	 * @method get
