@@ -1,8 +1,9 @@
 (function () {
 
+var Users = Q.Users;
+var Streams = Q.Streams;
+
 Streams.Dialogs.invite._dialog = function (options) {
-    var Users = Q.Users;
-    var Streams = Q.Streams;
 
     var stream = null;
     var text = null;
