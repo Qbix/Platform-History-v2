@@ -5973,9 +5973,6 @@ Q.Response.processStylesheets = function Q_Response_loadStylesheets(response, ca
 		var stylesheets = [];
 		for (var j in response.stylesheets[slotName]) {
 			var stylesheet = response.stylesheets[slotName][j];
-			if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
-				continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
-			}
 			var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
 			var elem = Q.addStylesheet(
 				stylesheet.href, stylesheet.media,
@@ -10119,10 +10116,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										var href1 = Q.getObject("href", stylesheet);
-										var href2 = Q.getObject("href", e);
+										var href1 = stylesheet && stylesheet.href;
+										var href2 = e && (e.href || e.getAttribute('data-href'));
 										if (href1 && href2 && href1.split("?")[0] === href2.split("?")[0]
-										&& (!stylesheet.media || stylesheet.media === e.media)) {
+										&& (!stylesheet.media || !e.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
 										}
@@ -10131,15 +10128,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 								if (!found) {
 									Q.addStylesheet.loaded[e.href] = false;
 									Q.removeElement(e);
-								}
-							}
-
-							// now let's deal with style tags inserted by prefixfree
-							if (tag === 'style') {
-								var href = e.getAttribute('data-href');
-								if (slotNames.indexOf(processStylesheets.slots[href]) >= 0) {
-									Q.removeElement(e);
-									delete processStylesheets.slots[href];
 								}
 							}
 						});
@@ -10222,11 +10210,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							if (!element) return;
 							// domElements[slotName].appendChild(element);
 							element.setAttribute('data-slot', slotName);
-							
-							// save some info before prefixfree mangles stuff
-							if (element.tagName && element.tagName.toUpperCase() === 'LINK') {
-								processStylesheets.slots[element.getAttribute('href')] = slotName;
-							}
 						});
 					});
 				});
@@ -10247,10 +10230,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 						Q.Page.beingActivated = false;
 						throw e;
 					}
-				}
-				// Invoke prefixfree again if it was loaded
-				if (root.StyleFix) {
-					root.StyleFix.process();
 				}
 
 				Q.handle(o.onRequestProcessed, this, [err, response]);
@@ -14954,29 +14933,6 @@ root.console.log.unregister = function (name) {
 	root.console.log[name] = function () { }
 };
 var log = root.console.log.register('Q');
-
-/**
- * This function is just here in case prefixfree.js is included
- * because that library removes the <link> elements and puts <style> instead of them.
- * We don't know if prefixfree will be included but we have to save some information
- * about the stylesheets before it arrives on the scene.
- */
-function processStylesheets() {
-	// Complain about some other libraries if necessary
-	if (Q.findScript('{{Q}}/js/prefixfree.min.js')) {
-		var warning = "Q.js must be included before prefixfree in order to work properly";
-		console.warn(warning);
-	}
-	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');
-	var slots = processStylesheets.slots;
-	for (var i=0; i<elements.length; ++i) {
-		var href = elements[i].getAttribute('href')
-			|| elements[i].getAttribute('data-href');
-		slots[href] = elements[i].getAttribute('data-slot') || null;
-	}
-}
-processStylesheets.slots = {};
-processStylesheets(); // NOTE: the above works only for stylesheets included before Q.js and prefixfree.js
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {

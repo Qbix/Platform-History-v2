@@ -18,6 +18,7 @@ function Users_before_Q_responseExtras()
 		$rl_array[Q_Uri::url($rl)] = $value;
 	}
 	if (!Q_Request::isAjax()) {
+		Q_Response::setScriptData('Q.plugins.Users.Label.externalPrefix', Users_Label::$externalPrefix);
 		Q_Response::setScriptData('Q.plugins.Users.requireLogin', $rl_array);
 		$successUrl = Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home");
 		$afterActivate = Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl);
