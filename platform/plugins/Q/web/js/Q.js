@@ -9930,9 +9930,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		var arr = [], i, l = slotNames.length;
 		for (i=0; i<l; ++i) {
 			var slotName = slotNames[i];
-			if (!o.retainSlots[slotName]
-			|| !Q.loadUrl.retainedSlots[slotName]) {
+			if (!o.retainSlots[slotName] || !Q.loadUrl.retainedSlots[slotName]) {
 				arr.push(slotName);
+			} else {
+				Q.loadUrl.retainedSlots[slotName] = document.getElementById(slotName + '_slot');
 			}
 		}
 		slotNames = arr;
@@ -10012,6 +10013,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			_reject && _reject(e);
 			return Q.handle(onError, this, [e]);
 		}
+
 		Q.handle(o.onLoad, this, [response]);
 		var unloadedUrl = o.unloadedUrl || location.href;
 		Q.handle(o.beforeUnloadUrl, this, [unloadedUrl, url, response]);
@@ -10044,6 +10046,11 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			// WARNING: This function may not be called if one of the scripts is missing or returns an error
 			// So the existing page will not be unloaded and the new page will not be loaded, in this case,
 			// but some of the new scripts will be added.
+
+			if (Q.Notices.toRemove) {
+				Q.handle(Q.Notice.sremove(Q.Notice.toRemove));
+				delete Q.Notices.toRemove;
+			}
 
 			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action; // old page going out
 			var i, newStylesheets, newStyles;

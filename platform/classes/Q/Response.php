@@ -885,9 +885,6 @@ class Q_Response
 			''
 		);
 		$slotName = self::$slotName;
-		self::addScriptLine(
-			"Q.loadUrl.retainedSlots.$slotName = document.getElementById('{$slotName}_slot');"
-		);
 		self::$retainSlot[self::$slotName] = $toRetain;
 	}
 	

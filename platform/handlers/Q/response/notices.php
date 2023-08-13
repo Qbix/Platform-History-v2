@@ -48,7 +48,7 @@ function Q_response_notices()
 	$removed_notices = Q_Response::getRemovedNotices();
 	if (!empty($removed_notices)) {
 		$json = Q::json_encode(array_keys($removed_notices));
-		Q_Response::addScriptLine("if (Q.Notice) Q.handle(Q.Notice.remove($json));");
+		Q_Response::setScriptData('Q.Notices.toRemove', $json);
 	}
 
 	return $result ? "<div id='notices'>$result</div>" : '';
