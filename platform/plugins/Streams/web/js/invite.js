@@ -3,7 +3,7 @@
 var Users = Q.Users;
 var Streams = Q.Streams;
 
-Streams.Dialogs.invite._dialog = function (options) {
+Streams.Dialogs.invite._dialog = function (publisherId, streamName, callback, options) {
 
     var stream = null;
     var text = null;
