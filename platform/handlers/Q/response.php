@@ -204,20 +204,32 @@ EOT;
 		Q_Response::setScriptData("Q.info.startServiceWorker", true);
 		Q_Response::addScriptLine("
 // Start a service worker
-Q.ServiceWorker.start($cookieJarId);", null, '@end');	
+Q.ServiceWorker.start($cookieJarId);", '@end');	
 	}
 
 	if (!$added_Q_init) {
 		Q_Response::addScriptLine("
 // Now, initialize Q
 Q.init();
-", null, '@end');
+", '@end');
 		$added_Q_init = true;
 	}
 
 	// Content security policy, if any
 	$csp = Q_Config::get('Q', 'web', 'contentSecurityPolicy', array());
 	$header = 'Content-Security-Policy: ';
+	if (isset($csp['hashes'])) {
+		foreach ($csp['hashes'] as $h) {
+			$header .= "sha256-$h";
+		}
+		unset($csp['hashes']);
+	}
+	if (isset($csp['nonces'])) {
+		foreach ($nonces as $n) {
+			$header .= "nonce-$n";
+		}
+		unset($csp['nonces']);
+	}
 	foreach ($csp as $type => $values) {
 		$header .= " $type-src " . implode(' ', $values) . ';';
 	}

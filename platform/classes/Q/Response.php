@@ -606,13 +606,11 @@ class Q_Response
 	 * @method addScriptLine
 	 * @static
 	 * @param {string} $line The line of script
-	 * @param {array} [$replace=array()] Keys in this array are globally replaced in the $line
-	 *  with the json_encoded values, before the line is added.
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned nearly last by Q_Response::scriptLines.
 	 *  The other special value, "Q", is intended for internal use.
 	 */
-	static function addScriptLine($line, $replace = array(), $slotName = null)
+	static function addScriptLine($line, $slotName = null)
 	{
 		if (is_string($replace)) {
 			$slotName = $replace;
@@ -625,9 +623,6 @@ class Q_Response
 		}
 		if (!isset(self::$scriptLinesForSlot[$slotName])) {
 			self::$scriptLinesForSlot[$slotName] = array();
-		}
-		foreach ($replace as $k => $v) {
-			$line = str_replace($k, Q::json_encode($v), $line);
 		}
 		self::$scriptLinesForSlot[$slotName][] = $line;
 		self::$scriptLines[] = $line;

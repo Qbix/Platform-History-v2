@@ -57,8 +57,13 @@
 				"dir": "{{web}}"
 			},
 			"contentSecurityPolicy": {
-				"script": ["'unsafe-inline'", "'unsafe-eval'", "{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*", "https://w.soundcloud.com"],
-				"worker": ["'self'"]
+				"script": ["{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*", "https://w.soundcloud.com"],
+				"worker": ["'self'"],
+				"hashes": [
+					"64ef57d358b0a2c4226c70e8d11ce01519a4b508c6f7d492168eda5c7212a347", /* Q.init() code */
+					"f45285d77f63ea775833814d573c2c53ae1f6900cfffc7b3722bc3f8c4a9e589"  /* var Q = window.Q; from Q.js */
+				],
+				"nonces": []
 			}
 		},
 		"response": {
