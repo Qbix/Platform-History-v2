@@ -286,7 +286,9 @@
 			
 			//get from cache or retrieve
 			var poolsList;
+			console.log("state.cache = ", state.cache);
 			if (!Q.isEmpty(state.cache) && !Q.isEmpty(state.cache.poolsList)) {
+				console.log("gettting from cache");
 				poolsList = state.cache.poolsList;
 			}
 			

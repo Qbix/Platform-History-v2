@@ -15,7 +15,7 @@ function Assets_web3_coin_staking_start_tool($options) {
 	//	- and through into tool "Assets/web3/coin/staking/start"  preventing doing the same for each clients
 	// and THIS CODE DOESNOT WORK with current lib "sc0vu/web3.php" and crashed (cant handle "tuple[]" structure in responces)
 	// so uncomment the code below after fix that
-	/*
+	/**/
 	$updateCache = Q::ifset($options, 'updateCache', false);
 	if ($updateCache) {
 		$caching = null;
@@ -24,6 +24,7 @@ function Assets_web3_coin_staking_start_tool($options) {
 		$caching = true;
 		$cacheDuration = null;
 	}
+//$caching = false;
 	$longDuration = 31104000;// year
 	$middleDuration = 86400;// day
 	$shortDuration = 600;// 10 min
@@ -34,8 +35,14 @@ function Assets_web3_coin_staking_start_tool($options) {
 	$abiPathCommunityStakingPoolFactory = Q::ifset($options, "abiPathCommunityStakingPool", "Assets/templates/R1/CommunityStakingPool/factory");
 	
 	$stakingPoolFactory = Users_Web3::execute($abiPathCommunityCoin, $communityCoinAddress, "instanceManagment", array(), $chainId, $caching, $longDuration);
+//print_r($stakingPoolFactory);
+//Array ( [result] => 0x7da8275d454e7acd195d1097b5798c38b93a8bf8 )
+
+//$stakingPoolFactory = "0x7da8275d454e7acd195d1097b5798c38b93a8bf8";
 	$poolsInstances = Users_Web3::execute($abiPathCommunityStakingPoolFactory, $stakingPoolFactory, "instances", array(), $chainId, $caching, $shortDuration);
 	
+//print_r($poolsInstances );
+//die();
 	$poolList = [];
 	
 	foreach ($poolsInstances as $poolAddress) {
@@ -56,8 +63,11 @@ function Assets_web3_coin_staking_start_tool($options) {
 		);
 		
 	}
+	
+//	print_r($poolList);
+//	exit;
 	$options["cache"]["poolsList"] = $poolList;
-	*/
+	/**/
 
 	Q_Response::setToolOptions($options);
 	

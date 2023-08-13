@@ -8,8 +8,7 @@
 	"require": {
 		"lordelph/icofileloader": "1.*",
 		"google/apiclient": "^2.8.1",
-		"sc0vu/web3.php": "dev-master",
-		"web3p/ethereum-tx": "dev-master",
+		"drlecks/simple-web3-php": "dev-master",
 		"minishlink/web-push": "^6.0.0",
 		"aws/aws-sdk-php": "3.*",
 		"twilio/sdk": "^7.4"
