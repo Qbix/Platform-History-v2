@@ -3657,6 +3657,7 @@ abstract class Streams extends Base_Streams
 	 *  @param {string|integer} [$options.writeLevel] the write level to grant those who are invited
 	 *  @param {string|integer} [$options.adminLevel] the admin level to grant those who are invited
 	 *  @param {array} [$options.permissions] array of additional permissions to grant
+	 *  @param {timestamp} [$_REQUEST.expires] you can pass a timestamp that takes place in the future
 	 *	@param {string} [$options.displayName] the display name to use to represent the inviting user
 	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
@@ -3682,7 +3683,7 @@ abstract class Streams extends Base_Streams
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
 		$options = Q::take($options, array(
-			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId', 'html',
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'expires', 'asUserId', 'html',
 			'addLabel', 'addMyLabel', 'name', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
 			'templateDir', 'icon', 'userId'
 		));
@@ -3701,6 +3702,10 @@ abstract class Streams extends Base_Streams
 		// Do we have enough admin rights to invite others to this stream?
 		if (!$stream->testAdminLevel('invite') || !$stream->testWriteLevel('join')) {
 			throw new Users_Exception_NotAuthorized();
+		}
+
+		if (!empty($options['expires']) and $options['expires'] > time()) {
+			throw new Streams_Exception_InviteExpired();
 		}
 
 		if (isset($options['templateDir'])) {

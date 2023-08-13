@@ -24,6 +24,8 @@
  * @param {string} [$_REQUEST.readLevel] the read level to grant those who are invited
  * @param {string} [$_REQUEST.writeLevel] the write level to grant those who are invited
  * @param {string} [$_REQUEST.adminLevel] the admin level to grant those who are invited
+ * @param {array} [$options.permissions] array of additional permissions to grant
+ * @param {timestamp} [$_REQUEST.expires] you can pass a timestamp that takes place in the future
  * @param {string} [$_REQUEST.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  */
 function Streams_invite_post()
@@ -32,7 +34,7 @@ function Streams_invite_post()
 	$streamName = Streams::requestedName(true);
 	
 	$r = Q::take($_REQUEST, array(
-		'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+		'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'expires',
 		'addLabel', 'addMyLabel', 'appUrl', 'alwaysSend', 'name', 'icon',
 		'userId', 'xid', 'platform', 'label', 'identifier', 'token'
 	));

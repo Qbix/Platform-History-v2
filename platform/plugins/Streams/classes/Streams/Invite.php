@@ -117,6 +117,8 @@ class Streams_Invite extends Base_Streams_Invite
 	 *  If the subscribe() call throws an exception, it is swallowed.
 	 * @param {boolean} [$options.access=true]
 	 *  Whether to upgrade the user's access to the stream, based on the invite
+	 * @param {boolean} [$options.skipExpires=false]
+	 *  Whether to skip checking the "expires" extra in the invite, for a timestamp in the past
 	 * @return {Streams_Participant|false|null}
 	 * @throws {Users_Exception_NotLoggedIn}
 	 *  If the $this->userId is false and user is not logged in
@@ -129,6 +131,13 @@ class Streams_Invite extends Base_Streams_Invite
 
 		$saved = false;
 		$userId = $this->userId ? $this->userId : Users::loggedInUser(true)->id;
+
+		if (!empty($options['skipExpires'])) {
+			$expires = $this->getExtra('expires');
+			if ($expires and $expires <= time()) {
+				throw new Streams_Exception_InviteExpired();
+			}
+		}
 		
 		$invited = new Streams_Invited();
 		$invited->token = $this->token;
