@@ -3219,7 +3219,9 @@
 	});
 
 	Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler() {
-		Users.loggedInUser = new Users.User(Users.loggedInUser);
+		if (Users.loggedInUser) {
+			Users.loggedInUser = new Users.User(Users.loggedInUser);
+		}
 		$.fn.plugin.load('Q/placeholders');
 		$('#notices_set_email, #notices_set_mobile')
 			.on(Q.Pointer.fastclick, function () {

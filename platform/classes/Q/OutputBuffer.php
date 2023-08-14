@@ -118,6 +118,12 @@ class Q_OutputBuffer
 	}
 
 	/**
+	 * @property $locales
+	 * @type array
+	 */
+	public $locales;
+
+	/**
 	 * @property $level
 	 * @type integer
 	 */
