@@ -218,18 +218,6 @@ Q.init();
 	// Content security policy, if any
 	$csp = Q_Config::get('Q', 'web', 'contentSecurityPolicy', array());
 	$header = 'Content-Security-Policy: ';
-	if (isset($csp['hashes'])) {
-		foreach ($csp['hashes'] as $h) {
-			$header .= "sha256-$h";
-		}
-		unset($csp['hashes']);
-	}
-	if (isset($csp['nonces'])) {
-		foreach ($nonces as $n) {
-			$header .= "nonce-$n";
-		}
-		unset($csp['nonces']);
-	}
 	foreach ($csp as $type => $values) {
 		$header .= " $type-src " . implode(' ', $values) . ';';
 	}
