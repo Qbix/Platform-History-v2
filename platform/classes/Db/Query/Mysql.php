@@ -2041,5 +2041,5 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	protected $transactionKey = null;
 
 	protected static $nestedTransactions = array();
-	protected $nestedTransactionCount = 0;
+	public $nestedTransactionCount = 0;
 }
