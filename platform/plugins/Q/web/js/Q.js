@@ -14977,18 +14977,6 @@ Q.onInit.add(function () {
 		}
 	}, 'Q.Socket');
 
-	if (Q.info.languages && Q.info.languages.length) {
-		var found = false;
-		Q.each(Q.info.languages, function (i, entry) {
-			if (entry[0] === language) {
-				found = true;
-			}
-		});
-		if (!found) {
-			Q.Text.setLanguage(Q.info.languages[0][0], Q.info.languages[0][1]);
-		}
-	}
-
 	var QtQw = Q.text.Q.words;
 	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
 	Q.Pointer.clickOrTap = QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
@@ -16050,6 +16038,18 @@ Q.beforeInit.addOnce(function () {
 					e.removeClass('Q_fixed_top').addClass('Q_fixed_bottom');
 				}
 			}
+		}
+	}
+
+	if (Q.info.languages && Q.info.languages.length) {
+		var found = false;
+		Q.each(Q.info.languages, function (i, entry) {
+			if (entry[0] === language) {
+				found = true;
+			}
+		});
+		if (!found) {
+			Q.Text.setLanguage(Q.info.languages[0][0], Q.info.languages[0][1]);
 		}
 	}
 
