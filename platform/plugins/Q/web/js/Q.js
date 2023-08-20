@@ -11325,7 +11325,8 @@ Q.Text.addFor.defined = {};
 Q.Text.loadBeforeInit = [];
 
 // Set the initial language, but this can be overridden after Q.onInit
-Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
+var language = location.search.queryField('Q.language') || navigator.language;
+Q.Text.setLanguage.apply(Q.Text, language.split('-'));
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
@@ -14979,6 +14980,18 @@ Q.onInit.add(function () {
 			navigator.splashscreen.hide();
 		}
 	}, 'Q.Socket');
+
+	if (Q.info.languages && Q.info.languages.length) {
+		var found = false;
+		Q.each(Q.info.languages, function (i, entry) {
+			if (entry[0] === language) {
+				found = true;
+			}
+		});
+		if (!found) {
+			Q.Text.setLanguage(Q.info.languages[0][0], Q.info.languages[0][1]);
+		}
+	}
 
 	var QtQw = Q.text.Q.words;
 	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;

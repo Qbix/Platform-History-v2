@@ -180,6 +180,7 @@ class Q_Translate
 		}
 	}
 
+	public $options;
 	public $locales;
 
 }
