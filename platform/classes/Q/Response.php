@@ -612,12 +612,6 @@ class Q_Response
 	 */
 	static function addScriptLine($line, $slotName = null)
 	{
-		if (is_string($replace)) {
-			$slotName = $replace;
-			$replace = array();
-		} else if (empty($replace)) {
-			$replace = array();
-		}
 		if (!isset($slotName)) {
 			$slotName = isset(self::$slotName) ? self::$slotName : '';
 		}
