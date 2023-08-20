@@ -9980,6 +9980,12 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			_resolve && _resolve(response);
 			return; // it was just a redirect
 		}
+		for (var tag in Q.loadUrl.elementsToRemove) {
+			Q.each(Q.loadUrl.elementsToRemove[tag], function () {
+				Q.removeElement(this);
+			});
+		}
+		Q.loadUrl.elementsToRemove = {};
 		if (loadingUrlObject &&
 		_loadUrlObject != loadingUrlObject) {
 			var sn1 = loadingUrlObject.options && loadingUrlObject.options.slotNames || [];
@@ -10101,12 +10107,13 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
 			
-				if (!o.ignorePage) {
+				if (!o.ignorePage) {					
 					// Remove various elements belonging to the slots that are being reloaded
 					Q.each(['link', 'style', 'script'], function (i, tag) {
 						if (tag !== 'style' && !o.loadExtras) {
 							return;
 						}
+						Q.loadUrl.elementsToRemove[tag] = [];
 						Q.each(document.getElementsByTagName(tag), function (k, e) {
 							if (tag === 'link' && e.getAttribute('rel').toLowerCase() !== 'stylesheet') {
 								return;
@@ -10130,7 +10137,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 								}
 								if (!found) {
 									Q.addStylesheet.loaded[e.href] = false;
-									Q.removeElement(e);
+									Q.loadUrl.elementsToRemove[tag].push(e);
 								}
 							}
 						});
@@ -10245,6 +10252,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 };
 
 Q.loadUrl.retainedSlots = {};
+Q.loadUrl.elementsToRemove = {};
 
 Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 	var slotNames = Q.info.slotNames, l, elem, i;
