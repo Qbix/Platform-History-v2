@@ -10107,7 +10107,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
 			
-				if (!o.ignorePage) {					
+				if (!o.ignorePage && !response.redirect) {					
 					// Remove various elements belonging to the slots that are being reloaded
 					Q.each(['link', 'style', 'script'], function (i, tag) {
 						if (tag !== 'style' && !o.loadExtras) {
