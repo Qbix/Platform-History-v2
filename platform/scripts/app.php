@@ -99,6 +99,9 @@ try {
 	die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
 }
 
+ini_set('mysql.connect_timeout', 600);
+ini_set('default_socket_timeout', 600); 
+
 #Parse secondary arguments -sql, -sql-user-pass, -auto-install-prerequisites
 $auto_plugins = $do_app = false;
 $sql_array = $plugins = array();
