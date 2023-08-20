@@ -13223,7 +13223,7 @@ Q.Visual = Q.Pointer = {
                 Q.Visual.hint.addedListeners = true;
                 setTimeout(function () {
                     delete Q.Visual.stopHintsIgnore;
-                }, 0);
+                }, 300);
             }
             if (options.waitForEvents) {
                 return;
