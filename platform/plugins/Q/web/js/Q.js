@@ -7020,10 +7020,6 @@ Q.init = function _Q_init(options) {
 		Q.Text.get(Q.Text.loadBeforeInit, p2.fill('Q.Text.loadBeforeInit'));
 	}
 	p2.add(waitFor, 1, function () {
-		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
-		if (preferredLanguage) {
-			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
-		}
 		p.fill('init')();
 		Q.handle(Q.onInit, Q);
 	}).run();

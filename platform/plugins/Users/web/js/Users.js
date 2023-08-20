@@ -3008,6 +3008,11 @@
 
 		var where = Q.getObject("cache.where", Users) || 'document';
 
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		if (preferredLanguage) {
+			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
+		}
+
 		if (Q.Frames) {
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
 		}
