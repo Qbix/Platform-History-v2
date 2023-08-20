@@ -8411,7 +8411,7 @@ Q.request = function (url, slotNames, callback, options) {
 					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}
-			var ret = callback && callback.call(this, err, response);
+			var ret = callback && callback.call(this, err, response, response.redirect && response.redirect.url);
 			Q.handle(o.onProcessed, this, [err, response]);
 			if (ret === false) {
 				return; // don't redirect
