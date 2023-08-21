@@ -65,6 +65,7 @@
 				],
 				"style": [
 					"'unsafe-inline'",
+					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
 					"https://fonts.googleapis.com"
 				],
 				"worker": ["'self'"]
