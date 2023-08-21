@@ -3339,6 +3339,8 @@
 		Web3.getContract.cache.clear();
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
+		var language = location.search.queryField('Q.language') || navigator.language;
+		Q.Text.setLanguage.apply(Q.Text, language.split('-'));
 	}, 'Users');
 	Users.onLoginLost = new Q.Event(function () {
 		console.warn("Call to server was made which normally requires user login.");
