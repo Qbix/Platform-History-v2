@@ -10091,26 +10091,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 					Q.Event.jQueryForPage = [];
 				}
-
-				// now we can finally yank things out of the slots
-				for (var tag in Q.loadUrl.elementsToRemove) {
-					Q.each(Q.loadUrl.elementsToRemove[tag], function () {
-						Q.removeElement(this);
-					});
-				}
-				Q.loadUrl.elementsToRemove = {};
-
-				// this is where we fill all the slots
-				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
-				domElements = handler(response, url, o);
-				Q.handle(o.onFillSlots, Q, [domElements, response, url, o]);
-
-				if (!o.ignoreHistory) {
-					Q.Page.push(url, Q.getObject('slots.title', response));
-				}
 			
 				if (!o.ignorePage && !response.redirect) {					
-					// Remove various elements belonging to the slots that are being reloaded
+					// Mark for removal sundry elements belonging to the slots that are being reloaded
 					Q.each(['link', 'style', 'script'], function (i, tag) {
 						if (tag !== 'style' && !o.loadExtras) {
 							return;
@@ -10144,6 +10127,23 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							}
 						});
 					});
+				}
+
+				// now we can finally yank things out of the slots
+				for (var tag in Q.loadUrl.elementsToRemove) {
+					Q.each(Q.loadUrl.elementsToRemove[tag], function () {
+						Q.removeElement(this);
+					});
+				}
+				Q.loadUrl.elementsToRemove = {};
+
+				// this is where we fill all the slots
+				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
+				domElements = handler(response, url, o);
+				Q.handle(o.onFillSlots, Q, [domElements, response, url, o]);
+
+				if (!o.ignoreHistory) {
+					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
 			
 				if (!o.ignorePage && Q.info && Q.info.uri) {
