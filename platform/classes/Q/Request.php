@@ -1125,13 +1125,13 @@ class Q_Request
 	}
 
 	/**
-	 * Used by the system to find out the last timestamp an update of urls
-	 * was loaded by the client.
+	 * Used by the system to find out the last timestamp
+	 * that the client loaded an update from urls.php
 	 * @method updateTimestamp
 	 * @static
 	 * @return {boolean}
 	 */
-	static function updateTimestamp()
+	static function lastUpdateTimestamp()
 	{
 		return self::special('ut', null);
 	}

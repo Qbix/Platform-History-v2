@@ -1911,19 +1911,23 @@ class Q_Response
 	 * Get the latest timestamp one of the inputs to a resource has.
 	 * Used to find out the latest time the resource changed, and thus
 	 * whether to reload it (e.g. with Q.ServiceWorker.start())
-	 * @param {integer} [$what=Q_Response::SERVICE_WORKER]
+	 * @param {integer} [$what=Q_Response::URLS] Can be Q_Response::URLS or Q_Response::SERVICE_WORKER
 	 * @return {integer} the latest timestamp
 	 */
-	static function latestTimestamp($what = self::SERVICE_WORKER)
+	static function latestTimestamp($what = self::URLS)
 	{
 		$latest = 0;
-		$arr = Q_Config::get('Q', 'javascript', 'serviceWorker', 'latest', array());
-		foreach ($arr as $plugin => $info) {
-			if (empty($info['timestamp'])) {
-				$fieldpath = "Q/javascript/serviceWorker/latest/$plugin/timestamp";
-				throw new Q_Exception_MissingConfig(compact('fieldpath'));
+		if ($what === self::URLS) {
+			$latest = Q::ifset(Q_Uri::$urls, '@timestamp', null);
+		} else if ($what === self::SERVICE_WORKER) {
+			$arr = Q_Config::get('Q', 'javascript', 'serviceWorker', 'latest', array());
+			foreach ($arr as $plugin => $info) {
+				if (empty($info['timestamp'])) {
+					$fieldpath = "Q/javascript/serviceWorker/latest/$plugin/timestamp";
+					throw new Q_Exception_MissingConfig(compact('fieldpath'));
+				}
+				$latest = max($latest, $info['timestamp']);
 			}
-			$latest = max($latest, $info['timestamp']);
 		}
 		return $latest;
 	}
@@ -2382,7 +2386,8 @@ class Q_Response
 	static public $sessionDataPaths = array();
 
 	// resource types for methods like latestTimestamp
-	const SERVICE_WORKER = 1;
+	const URLS = 1;
+	const SERVICE_WORKER = 2;
 }
 
 
