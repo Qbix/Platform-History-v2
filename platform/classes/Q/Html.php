@@ -1061,7 +1061,7 @@ class Q_Html
 			$return = "<$tag $attributes>$content</$tag>";
 			if (($tag === 'script' or $tag === 'style')
 			and !empty(self::$hashesAggregate)) {
-				$hash = base64_encode(hash(self::$hashesAggregate, $content, true));
+				$hash = base64_encode(hash(self::$hashesAggregate, str_replace("\r", '', $content), true));
 				self::$hashes[$tag][$hash] = array($content, $attributes);
 			}
 		} else if ($content === true) {
