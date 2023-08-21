@@ -86,15 +86,15 @@ if (is_dir($parent_dir)) {
 	}
 }
 $time = time();
+file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
+$result['@timestamp'] = $time;
+file_put_contents($urls_dir.DS."latest.json", Q::json_encode($result));
 $urls_export = Q::var_export($result);
 file_put_contents(
 	$dir_to_save.DS.'urls.php',
 	"<?php\nreturn $urls_export;"
 );
 echo PHP_EOL;
-file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
-$result['@timestamp'] = $time;
-file_put_contents($urls_dir.DS."latest.json", Q::json_encode($result));
 $tree = new Q_Tree($result);
 //file_put_contents($arrays_dir.DS."$time.json", Q::json_encode($array));
 $diffs = Q_script_urls_diffs($tree, $urls_dir, $diffs_dir, $time);
