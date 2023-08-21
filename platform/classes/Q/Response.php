@@ -684,7 +684,12 @@ class Q_Response
 	 */
 	static function addContentSecurityPolicy($type, $value)
 	{
-		self::$contentSecurityPolicy[$type][] = $value;
+		if (!isset(self::$contentSecurityPolicy[$type])) {
+			self::$contentSecurityPolicy[$type] = array();
+		}
+		if (!in_array($value, self::$contentSecurityPolicy[$type])) {
+			self::$contentSecurityPolicy[$type][] = $value;
+		}
 	}
 
 	/**
