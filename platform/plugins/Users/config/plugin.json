@@ -341,34 +341,26 @@
 		},
 		"web3": {
 			"contracts": {
-				"R1": {
-					"Community": {
-						"factory": {
-							"0x38": "0x01010100521733fb2Df131535B7E5063276d22C5",
-							"0x89": "0x01010100521733fb2Df131535B7E5063276d22C5",
-							"0x13881": "0xB9216Ebe3a42Da670C484A064BB5A93D8122E421"
-						}
-					},
-					"ReleaseManager": {
-						"factory": {
-							"0x38": "0x00010100597b8c232656D76a319b6FF696Ed3293",
-							"0x89": "0x00010100597b8c232656D76a319b6FF696Ed3293",
-							"0x13881": "0xc0037d875762b980704A136D5f82671e22fda3E0"
-						},
-						"contract": {
-							"0x38": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671",
-							"0x89": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671",
-							"0x13881": "0x7d86f9a019e80a8a928bfc3bf65f993955bb0152"
-						}
-					},
-					"Voting": {
-						"factory": {
-							"all": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
-							"0x89": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
-							"0x13881": "0xd0b63cdB328F313060c2d022603Edde429f5AdeD"
-						}
-					}
-				}
+                "Users/templates/R1/Community/factory": {
+                    "0x38": "0x01010100521733fb2Df131535B7E5063276d22C5",
+                    "0x89": "0x01010100521733fb2Df131535B7E5063276d22C5",
+                    "0x13881": "0xB9216Ebe3a42Da670C484A064BB5A93D8122E421"
+                },
+                "Users/templates/R1/ReleaseManager/factory": {
+                    "0x38": "0x00010100597b8c232656D76a319b6FF696Ed3293",
+                    "0x89": "0x00010100597b8c232656D76a319b6FF696Ed3293",
+                    "0x13881": "0xc0037d875762b980704A136D5f82671e22fda3E0"
+                },
+                "Users/templates/R1/ReleaseManager/contract": {
+                    "0x38": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671",
+                    "0x89": "0xccfefc930c5960d195f04a5a9a1bf6a155fcd671",
+                    "0x13881": "0x7d86f9a019e80a8a928bfc3bf65f993955bb0152"
+                },
+                "Users/templates/R1/Voting/factory": {
+                    "0x38": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
+                    "0x89": "0x1201010070C4138729F77ABfc86F2c4DA12D0234",
+                    "0x13881": "0xd0b63cdB328F313060c2d022603Edde429f5AdeD"
+                }
 			},
 			"chains": {
 				"0x1": {
