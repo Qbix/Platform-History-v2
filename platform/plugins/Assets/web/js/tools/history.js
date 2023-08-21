@@ -83,6 +83,9 @@ Q.Tool.define("Assets/history", function (options) {
 		var $table = $("table.Assets_history tbody", tool.element);
 		var operation = $table.is(':empty') ? "append" : "prepend";
 		var $toolElement = $(tool.element);
+		var _replaceAmount = function ($siblingAmount, newAmount) {
+			$siblingAmount.html($siblingAmount.html().replace(/\d+(\.\d+)?/, newAmount));
+		};
 
 		Q.req('Assets/history', ['tool'], function (err, data) {
 			var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
@@ -121,7 +124,7 @@ Q.Tool.define("Assets/history", function (options) {
 				Q.Template.render("Assets/row/" + state.type, row, function (err, html) {
 					if (err) return;
 
-					var $tr = $(html).attr("id", row.id).addClass("Q_newsflash");
+					var $tr = $(html).prop("id", row.id).attr("data-amount", row.amount).addClass("Q_newsflash");
 
 					$tr.on("webkitAnimationEnd oanimationend msAnimationEnd animationend transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd", function() {
 						$tr.removeClass("Q_newsflash");
@@ -147,8 +150,11 @@ Q.Tool.define("Assets/history", function (options) {
 					if (state.mergeRows) {
 						var $rows = $("tr:not([data-category])", $table);
 						var $sibling = operation === "append" ? $rows.last() : $rows.first();
-						if ($sibling.length && $(".Assets_history_amount", $sibling).html() === row.operation) {
-							$tr.removeClass("Q_newsflash").attr("data-category", $sibling.attr("id")).hide();
+						var $siblingAmount = $(".Assets_history_amount", $sibling);
+						if ($sibling.length && $(".Assets_history_description", $sibling).html() === row.reason) {
+							$sibling.attr("data-summ", (parseFloat($sibling.attr("data-summ") || $sibling.attr("data-amount")) + row.amount).toFixed(2));
+							_replaceAmount($siblingAmount, $sibling.attr("data-summ"));
+							$tr.removeClass("Q_newsflash").attr("data-category", $sibling.prop("id")).hide();
 							$sibling.addClass("Q_newsflash");
 
 							var $bookmark = $(".bookmark div", $sibling);
@@ -162,11 +168,13 @@ Q.Tool.define("Assets/history", function (options) {
 
 									$this.attr("data-status", status === "0" ? "1" : "0");
 
-									var $nested = $("tr[data-category=" + $sibling.attr("id") + "]", $table);
+									var $nested = $("tr[data-category=" + $sibling.prop("id") + "]", $table);
 									if (status === "0") {
 										$nested.show();
+										_replaceAmount($siblingAmount, $sibling.attr("data-amount"));
 									} else {
 										$nested.hide();
+										_replaceAmount($siblingAmount, $sibling.attr("data-summ"));
 									}
 								})
 								.appendTo($sibling);
