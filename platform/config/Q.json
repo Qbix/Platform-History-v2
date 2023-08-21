@@ -60,6 +60,7 @@
 				"script": [
 					"'unsafe-eval'",
 					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
+					"'sha256-j+mDsMQypTNMfPMoGyHKaKeCYQSiTREPgaW5KPaDSy4='",
 					"https://w.soundcloud.com"
 				],
 				"worker": ["'self'"]
