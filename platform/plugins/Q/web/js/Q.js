@@ -9980,12 +9980,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			_resolve && _resolve(response);
 			return; // it was just a redirect
 		}
-		for (var tag in Q.loadUrl.elementsToRemove) {
-			Q.each(Q.loadUrl.elementsToRemove[tag], function () {
-				Q.removeElement(this);
-			});
-		}
-		Q.loadUrl.elementsToRemove = {};
 		if (loadingUrlObject &&
 		_loadUrlObject != loadingUrlObject) {
 			var sn1 = loadingUrlObject.options && loadingUrlObject.options.slotNames || [];
@@ -10097,6 +10091,14 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 					Q.Event.jQueryForPage = [];
 				}
+
+				// now we can finally yank things out of the slots
+				for (var tag in Q.loadUrl.elementsToRemove) {
+					Q.each(Q.loadUrl.elementsToRemove[tag], function () {
+						Q.removeElement(this);
+					});
+				}
+				Q.loadUrl.elementsToRemove = {};
 
 				// this is where we fill all the slots
 				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
