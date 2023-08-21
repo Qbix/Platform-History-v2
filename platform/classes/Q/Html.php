@@ -759,6 +759,24 @@ class Q_Html
 	}
 
 	/**
+	 * Start or stop aggregating hashes
+	 * @param {string} $algorithm Pass "sha256" here, or false to stop
+	 */
+	static function hashesAggregate($algorithm)
+	{
+		self::$hashesAggregate = $algorithm;
+	}
+
+	/**
+	 * Retrieve the hashes that were aggregated
+	 * @return {array} pairs of hash => array(contents, attributes)
+	 */
+	static function hashes()
+	{
+		return self::$hashes;
+	}
+
+	/**
 	 * Renders a different tag based on what you specified.
 	 * @method smartTag
 	 * @static
@@ -951,10 +969,10 @@ class Q_Html
 	 * @static
 	 * @param {string} $script The actual script, as text
 	 * @param {array} [$attributes=null] Any additional attributes. Also can include:
-	 *  "cdata" => Defaults to true. Whether to enclose in CDATA tags.
-	 *  "comment" => Whether to enclose in HTML comments
-	 *  "raw" => Set to true to skip HTML encoding even if cdata and comment are false
-	 *  "cacheBust" => milliseconds, to use Q_Uri::cacheBust on the src.
+	 * @param {boolean} [$attributes.cdata] Defaults to true. Whether to enclose in CDATA tags.
+	 * @param {string} [$attributes.comment]  Whether to enclose in HTML comments
+	 * @param {boolean} [$attributes.raw]  Set to true to skip HTML encoding even if cdata and comment are false
+ 	 * @param {integer} [$attributes.cacheBust] Milliseconds, to use Q_Uri::cacheBust on the src.
 	 * @return {string} The generated markup.
 	 */
 	static function script (
@@ -973,28 +991,30 @@ class Q_Html
 		unset($attributes['comment']);
 		$raw = !empty($attributes['raw']);
 		unset($attributes['raw']);
-		$return = "\n".self::tag('script', $attributes);
+		$content = '';
 		if ($cdata) {
-			$return .= "\n// <![CDATA[\n";
+			$content .= "\n// <![CDATA[\n";
 		} else if ($comment) {
-			$return .= "<!-- \n"; 
+			$content .= "<!-- \n"; 
 		} else {
-			$return .= "\n";
+			$content .= "\n";
 			if (!$raw) {
 				$script = self::text($script);
 			}
 		}
-		$return .= $script;
+		$content .= $script;
 		if ($cdata) {
-			$return .= "\n// ]]> \n"; 
+			$content .= "\n// ]]> \n"; 
 		} else if ($comment) {
-			$return .= "\n//-->";
+			$content .= "\n//-->";
 		} else {
-			$return .= "\n";
+			$content .= "\n";
 		}
-		$return .= "</script>\n";
-		
-		return $return;
+		if (!empty(self::$hashesAggregate)) {
+			$hash = hash(self::$hashesAggregate, $content, true);
+			self::$hashes['script'][$hash] = array($content, $attributes);
+		}
+		return "\n".self::tag('script', $attributes).$content."</script>\n";
 	}
 	
 	/**
@@ -1004,9 +1024,9 @@ class Q_Html
 	 * @param {string} $tag The tag name of the element
 	 * @param {array} [$attributes=array()] An array of additional attributes to render. Consists of name => value pairs.
 	 *  Can also contain "cacheBust" => milliseconds, to use Q_Uri::cacheBust on the src.
-	 * @param {string} [$contents=null] If null, only the opening tag is generated. 
-	 *  If a string, also inserts the contents and generates a closing tag.
-	 *  If you want to do escaping on the contents, you must do it yourself.
+	 * @param {string} [$content=null] If null, only the opening tag is generated. 
+	 *  If a string, also inserts the content and generates a closing tag.
+	 *  If you want to do escaping on the content, you must do it yourself.
 	 *  If true, auto-closes the tag.
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
@@ -1016,7 +1036,7 @@ class Q_Html
 	static function tag (
 		$tag, 
 		$attributes = array(), 
-		$contents = null,
+		$content = null,
 		$options = array())
 	{
 		if (!is_string($tag)) {
@@ -1025,7 +1045,7 @@ class Q_Html
 
 		if (!is_array($attributes)) {
 			if (isset($attributes)) {
-				$contents = $attributes;
+				$content = $attributes;
 			}
 			$attributes = array();
 		}
@@ -1033,17 +1053,23 @@ class Q_Html
 		$attributes = self::attributes(
 			$attributes, ' ', true, $tag, $options
 		);
-		if (is_numeric($contents)) {
-			$contents = (string)$contents;
+		if (is_numeric($content)) {
+			$content = (string)$content;
 		}
-		if (is_string($contents)) {
-			$contents = Q::t($contents);
-			$return = "<$tag $attributes>$contents</$tag>";
-		} else if ($contents === true) {
+		if (is_string($content)) {
+			$content = Q::t($content);
+			$return = "<$tag $attributes>$content</$tag>";
+			if (($tag === 'script' or $tag === 'style')
+			and !empty(self::$hashesAggregate)) {
+				$hash = hash(self::$hashesAggregate, $content, true);
+				self::$hashes[$tag][$hash] = array($content, $attributes);
+			}
+		} else if ($content === true) {
 			$return = "<$tag $attributes />";
 		} else {
 			$return = "<$tag $attributes>";
 		}
+
 		return $return;
 	}
 	
@@ -1679,7 +1705,7 @@ class Q_Html
 	 */
 	protected static $tool_ids = array(null);
 	
-	static $preloadAs = array(
+	public static $preloadAs = array(
 		'ttf' => 'font',
 		'ottf' => 'font',
 		'woff' => 'font',
@@ -1701,5 +1727,8 @@ class Q_Html
 		'js' => 'script',
 		'css' => 'stylesheet'
 	);
+
+	protected static $hashesAggregate = false;
+	protected static $hashes = array();
 
 }

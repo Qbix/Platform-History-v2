@@ -14951,8 +14951,8 @@ var log = root.console.log.register('Q');
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
 	console.log("%c"+Q.info.app+" - powered by Qbix", "color: blue; font-size: 20px");
-	console.log("%c"+"Visit https://qbix.com/platform to learn how this open source platform works.", "color: black; font-size: 12px; font-weight: bold;");
-	console.log("%c"+"You too can build apps for communities, and make money from clients worldwide.", "color: black; font-size: 12px; font-weight: bold;");
+	console.log("%c"+"Visit https://qbix.com/platform to learn how this open source platform works.", "color: gray; font-size: 12px; font-weight: bold;");
+	console.log("%c"+"You too can build apps for communities, and make money from clients worldwide.", "color: gray; font-size: 12px; font-weight: bold;");
 	de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
 	de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 	de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');

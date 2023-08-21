@@ -58,7 +58,7 @@
 			},
 			"contentSecurityPolicy": {
 				"script": [
-					"'unsafe-inline'", "'unsafe-eval'",
+					"'unsafe-eval'",
 					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
 					"https://w.soundcloud.com"
 				],

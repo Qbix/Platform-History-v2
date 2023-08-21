@@ -285,9 +285,10 @@ class Q_Response
 	 * @method layoutView
 	 * @static
 	 * @param {string} $newView optionally set the new view, or unset it by passing false
+	 * @param {boolean} [$skipContentSecurityPolicy=false] set to true to skip calculating hashes for CSP
 	 * @return {string}
 	 */
-	static function layoutView($newView = null)
+	static function layoutView($newView = null, $skipContentSecurityPolicy = false)
 	{
 		if (isset($newView)) {
 			return Q_Response::$layoutView = $newView;
@@ -295,6 +296,27 @@ class Q_Response
 		if (Q_Response::$layoutView) {
 			return Q_Response::$layoutView;
 		}
+
+		if (empty($skipContentSecurityPolicy)) {
+			Q_Html::hashesAggregate('sha256');
+			Q_Response::scripts(); // may call scriptsInline
+			Q_Response::scriptLines();
+			Q_Response::stylesheets(); // may call stylesheetsInline
+			Q_Response::styles();
+			Q_Html::hashesAggregate(false);
+			foreach (Q_Html::hashes() as $type => $arr) {
+				foreach ($arr as $hash => $info) {
+					Q_Response::addContentSecurityPolicy($type, "'sha256-$hash'");
+				}
+			}
+			// set the meta-tag for content security policy
+			Q_Response::setMeta(array(
+				'name' => 'http-equiv',
+				'value' => 'Content-Security-Policy',
+				'content' => Q_Response::contentSecurityPolicy()
+			));
+		}
+
 		$app = Q::app();
 		$layout_view = Q_Config::get('Q', 'response', 'layout', 'html', "$app/layout/html.php");
 		$desktop_layout_view = Q_Config::get('Q', 'response', 'layout', 'desktop', false);
@@ -412,6 +434,13 @@ class Q_Response
 	 */
 	static function styles($slotName = null, $between = '', $tags = true)
 	{
+		if ($slotName === true) {
+			$slotName = null; // for backward compatibility
+		}
+		static $consistent = null;
+		if (!isset($slotName) and $consistent) {
+			return $consistent;
+		}
 		$styles = self::stylesArray($slotName);
 		if (!is_array($styles)) {
 			return '';
@@ -450,7 +479,11 @@ class Q_Response
 		foreach ($texts as $sn => $text) {
 			$tags[] = Q_Html::tag('style', array('type' => 'text/css', 'data-slot' => $sn), $texts[$sn]);
 		}
-		return implode($between, $tags);
+		$result = implode($between, $tags);
+		if (!isset($slotName)) {
+			$consistent = $result;
+		}
+		return $result;
 	}
 
 	/**
@@ -551,7 +584,7 @@ class Q_Response
 	 * @param {string} [$urls=true] If true, transforms all the 'src' values into URLs before returning.
 	 * @return {array} if $slotName is an array or true, returns array of $slotName => $metas, otherwise returns $metas
 	 */
-	static function metasArray ($slotName = null, $urls = true)
+	static function metasArray ($slotName = null, $urls = true, $withoutContentSecurityPolicy = false)
 	{
 		if ($slotName === false) {
 			return is_array(self::$metas) ? self::$metas : array();
@@ -644,18 +677,61 @@ class Q_Response
 	}
 
 	/**
+	 * Add an entry at runtime to the content security policy.
+	 * It is merged over the config by contentSecurityPolicyArray() function
+	 * @param {string} $type The type of resource, such as "script-src"
+	 * @param {string} $value Something of the form "protocol://hostname.tld:port" or "'unsafe-eval'"
+	 */
+	static function addContentSecurityPolicy($type, $value)
+	{
+		self::$contentSecurityPolicy[$type][] = $value;
+	}
+
+	/**
+	 * Get the content security policy entries from config,
+	 * on top of which we merge entries added with Q_Response::addContentSecurityPolicy
+	 * @return {array} Returns an array containing pairs of (type => arrayOfValues)
+	 */
+	static function contentSecurityPolicyArray()
+	{
+		$csp = Q_Config::get('Q', 'web', 'contentSecurityPolicy', array());
+		$tree = new Q_Tree($csp);
+		$tree->merge(self::$contentSecurityPolicy);
+		return $tree->getAll();
+	}
+
+	/**
+	 * Get the value to be put into the Content-Security-Policy header
+	 * or http-equiv meta tag.
+	 * @return {string} Returns the Q_Response::contentSecurityPolicyArray
+	 *  rendered into a string
+	 */
+	static function contentSecurityPolicy()
+	{
+		$csp = self::contentSecurityPolicyArray();
+		$content = '';
+		foreach ($csp as $type => $values) {
+			$content .= "$type-src " . implode(' ', $values) . '; ';
+		}
+		$baseUrl = Q_Request::baseUrl();
+		$parts = parse_url($baseUrl);
+		$content = Q::interpolate($content, $parts);
+		return $content;
+	}
+
+	/**
 	 * Return the array of script lines added so far
 	 * @method scriptLinesArray
 	 * @static
 	 * @param {string|array} [$slotName=null] Pass a slot name here to return only the script lines added while filling this slot.
 	 *  You can also pass an array of slot names here.
 	 *  Pass false here to return the script lines in the order they were added.
-	 * @param {boolean} [$without_script_data=false] By default, a few script lines are prepended
+	 * @param {boolean} [$withoutScriptData=false] By default, a few script lines are prepended
 	 *  to insert the script data, for backward compatibility with apps that were built before
 	 *  scriptData was introduced. Pass true here if you don't want to include them in the result.
 	 * @return {array} if $slotName is an array or true, returns array of $slotName => $lines, otherwise returns $lines
 	 */
-	static function scriptLinesArray ($slotName = null, $without_script_data = false)
+	static function scriptLinesArray ($slotName = null, $withoutScriptData = false)
 	{
 		if ($slotName === false) {
 			return is_array(self::$scriptLines) ? self::$scriptLines : array();
@@ -666,7 +742,7 @@ class Q_Response
 		if (is_array($slotName)) {
 			$scriptLines = array();
 			foreach ($slotName as $sn) {
-				$scriptLines[$sn] = self::scriptLinesArray($sn, $without_script_data);
+				$scriptLines[$sn] = self::scriptLinesArray($sn, $withoutScriptData);
 			}
 			$json = Q::json_encode(self::$sessionDataPaths);
 			array_unshift(
@@ -679,7 +755,7 @@ class Q_Response
 			? self::$scriptLinesForSlot[$slotName]
 			: array();
 		$scriptDataLines = array();
-		if (!$without_script_data) {
+		if (!$withoutScriptData) {
 			if ($data = self::scriptData($slotName)) {
 				$extend = array();
 				foreach ($data as $k => $v) {
@@ -712,34 +788,38 @@ class Q_Response
 	}
 
 	/**
-	 * Returns text describing all the scripts lines that have been added,
+	 * Returns text with script tags containing all the scripts lines that have been added,
 	 * to be included between &lt;script&gt;&lt;/script&gt; tags.
 	 * @method scriptLines
 	 * @static
 	 * @param {string} [$slotName=null] By default, returns all the lines in their intended order.
 	 *  Pass a slot name here to return only the script lines added while filling this slot.
 	 *  Pass false here to return the script lines in the order they were added.
-	 * @param {boolean} [$without_script_data=false] By default, a few script lines are prepended
+	 * @param {boolean} [$withoutScriptData=false] By default, a few script lines are prepended
 	 *  to insert the script data, for backward compatibility with apps that were built before
 	 *  scriptData was introduced. Pass true here if you don't want to include them in the result.
 	 * @param {string} [$between=''] Optional text to insert between the &lt;style&gt; tags or blocks of text.
 	 * @param {boolean} [$tags=true] Whether to return the text already wrapped in <style> tags. Defaults to true.
 	 * @return {string}
 	 */
-	static function scriptLines($slotName = null, $without_script_data = false, $between = "\n", $tags = true)
+	static function scriptLines($slotName = null, $withoutScriptData = false, $between = "\n", $tags = true)
 	{
 		if ($slotName === true) {
 			$slotName = null; // for backward compatibility
 		}
+		static $consistent = null;
+		if (!isset($slotName) and $consistent) {
+			return $consistent;
+		}
 
-		$lines = self::scriptLinesArray($slotName, $without_script_data);
+		$lines = self::scriptLinesArray($slotName, $withoutScriptData);
 		if (!$lines or !is_array($lines)) {
 			return '';
 		}
 		if (!$tags) {
 			$parts = array();
 			foreach ($lines as $sn => $ls) {
-				$parts[] = is_array($ls) ? implode($between, $ls) : $ls;
+				$parts[] = is_array($ls) ? implode("\n", $ls) : $ls;
 			}
 			return "\n".implode($between, $parts)."\n";
 		}
@@ -747,11 +827,15 @@ class Q_Response
 		foreach ($lines as $sn => $ls) {
 			if (!$ls) continue;
 			$tags[] = Q_Html::script(
-				is_array($ls) ? implode($between, $ls) : $ls, 
+				is_array($ls) ? implode("\n", $ls) : $ls, 
 				array('data-slot' => $sn)
 			);
 		}
-		return implode($between, $tags);
+		$result = implode($between, $tags);
+		if (!isset($slotName)) {
+			$consistent = $result;
+		}
+		return $result;
 	}
 
 	/**
@@ -1170,7 +1254,7 @@ class Q_Response
 	}
 
 	/**
-	 * Returns markup for referencing all the scripts added so far
+	 * Returns HTML markup for inlining all the scripts added so far
 	 * @method scriptsInline
 	 * @static
 	 * @param {string} [$slotName=null] If provided, returns only the scripts added while filling this slot.
@@ -1230,9 +1314,6 @@ class Q_Response
 				));
 			}
 		}
-		if ($setLoaded) {
-			self::setScriptData('Q.addScript.loaded', $loaded);
-		}
  		return implode("", $parts);
 	}
 
@@ -1240,13 +1321,21 @@ class Q_Response
 	 * Returns the HTML markup for referencing all the scripts added so far
 	 * @method scripts
 	 * @static
-	 * @param {string} [$between=''] Optional text to insert between the &lt;link&gt; tags.
 	 * @param {string} [$slotName=null] If provided, returns only the scripts added while filling this slot.
 	 *  If you pass the boolean constant true here, slotName is set to Q_Request::slotNames(true)
+	 * @param {string} [$between=''] Optional text to insert between the &lt;link&gt; tags.
 	 * @return {string} the HTML markup for referencing all the scripts added so far
 	 */
 	static function scripts ($slotName = null, $between = "\n")
 	{
+		if ($slotName === true) {
+			$slotName = null; // for backward compatibility
+		}
+		static $consistent = null;
+		if (!isset($slotName) and $consistent) {
+			return $consistent;
+		}
+
 		$scripts = self::scriptsArray($slotName);
 		if (empty($scripts)) {
 			return '';
@@ -1266,9 +1355,13 @@ class Q_Response
 			$type = 'text/css';
 			$hash = null;
 			extract($script, EXTR_IF_EXISTS);
+			$attributes = compact('type', 'src');
+			if ($script['slot']) {
+				$attributes['data-slot'] = $script['slot'];
+			}
 			$tags[] = Q_Html::tag(
 				'script',
-				array('type' => $type, 'src' => $src, 'data-slot' => $script['slot']),
+				$attributes,
 				null,
 				@compact('hash')
 			) . '</script>';
@@ -1282,7 +1375,11 @@ class Q_Response
 			// }
 
 		}
-		return implode($between, $tags);
+		$result = implode($between, $tags);
+		if (!isset($slotName)) {
+			$consistent = $result;
+		}
+		return $result;
 	}
 
 	/**
@@ -1493,6 +1590,13 @@ class Q_Response
 	 */
 	static function stylesheets ($slotName = null, $between = "\n", $skipPreloads = false)
 	{
+		if ($slotName === true) {
+			$slotName = null; // for backward compatibility
+		}
+		static $consistent = null;
+		if (!isset($slotName) and $consistent) {
+			return $consistent;
+		}
 		$stylesheets = self::stylesheetsArray($slotName);
 		if (empty($stylesheets)) {
 			return '';
@@ -1524,7 +1628,11 @@ class Q_Response
 				@header("Link: <$href_encoded>; as=style; rel=preload", false);
 			}
 		}
-		return implode($between, $tags);
+		$result = implode($between, $tags);
+		if (!isset($slotName)) {
+			$consistent = $result;
+		}
+		return $result;
 	}
 	
 	/**
@@ -2301,6 +2409,10 @@ class Q_Response
 	 * @type array
 	 */
 	protected static $linksForSlot = array();
+	/**
+	 * @property 
+	 */
+	protected static $contentSecurityPolicy = array();
 	/**
 	 * @property $toolOptions
 	 * @static

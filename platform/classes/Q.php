@@ -189,12 +189,19 @@ class Q
 		if ($sinceEpoch) {
 			return $result;
 		}
+		return $result - self::millisecondsStarted();
+	}
 
-		static $microtime_start;
-		if (empty($microtime_start)) {
-			$microtime_start = $result;
+	/**
+	 * The microtime when the script first started executing
+	 */
+	static function millisecondsStarted()
+	{
+		static $microtime_start = null;
+		if (!isset($microtime_start)) {
+			$microtime_start = microtime(true)*1000;
 		}
-		return $result - $microtime_start;
+		return $microtime_start;
 	}
 
 	/**
