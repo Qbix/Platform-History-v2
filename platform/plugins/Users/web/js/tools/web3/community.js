@@ -44,6 +44,7 @@ var Users = Q.Users;
  *   @param {String} options.communityId communityId
  *   @param {Object} options.contractParams fields that describe community.
  *     @param {String} [options.contractParams.hook] hook address. can be zero-address. if value present, form will hide input field
+ *     @param {String} [options.contractParams.invitedHook] invitedHook address. can be zero-address. if value present, form will hide input field
  *     @param {String} [options.contractParams.name] community nft name. if value present, form will hide input field
  *     @param {String} [options.contractParams.symbol] community nft symbol. if value present, form will hide input field
  *     @param {String} [options.contractParams.contractURI] community contract URI. if value present, form will hide input field
@@ -63,6 +64,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 	communityId: null,
 	contractParams: {
 	    hook: null,
+        invitedHook: null,
 	    name: null,
 	    symbol: null,
 	    contractURI: null,
@@ -94,6 +96,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				var $fields = {
 					selectedChainId: $toolElement.find('select[name=chain]'),
 					hook: $toolElement.find('input[name=hook]'),
+                    invitedHook: $toolElement.find('input[name=invitedHook]'),
 					name: $toolElement.find('input[name=name]'),
 					symbol: $toolElement.find('input[name=symbol]'),
 					contractURI: $toolElement.find('input[name=contractURI]')
@@ -101,25 +104,32 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				var userParams = {
 					selectedChainId: $fields.selectedChainId.val(),
 					hook: state.contractParams.hook || $fields.hook.val(),
+                    invitedHook: state.contractParams.invitedHook || $fields.invitedHook.val(),
 					name: state.contractParams.name || $fields.name.val(),
 					symbol: state.contractParams.symbol || $fields.symbol.val(),
 					contractURI: state.contractParams.contractURI || $fields.contractURI.val()
 				};
-
-				var factoryAddress = Users.web3.contracts.Community.factory[userParams.selectedChainId];
+                
+                var factoryAddress = Q.Users.Web3.contracts['Users/templates/R1/Community/factory'][userParams.selectedChainId];
 				if (typeof factoryAddress === 'undefined') {
 					throw new Q.Error('Cant find factoryAddress');
 				}
-
+                
 				// simple validation.
 				// if error send notice and add class Q_error to input field
 				var validated = true;
 				if (Q.isEmpty(userParams.hook) || !Q.isAddress(userParams.hook)) {
 					validated = false;
-//					Q.Notices.add({
-//						content: '<b>Hook</b> invalid',
-//						timeout: 5
-//					});
+
+					$("<span/>").addClass('error').html('<b>Hook</b> invalid').insertBefore($fields.hook);
+					$fields.hook.addClass('Q_error').addClass('fieldErrorBox');
+				} else {
+					$fields.hook.removeClass('Q_error').removeClass('fieldErrorBox');
+				}
+                
+                if (Q.isEmpty(userParams.invitedHook) || !Q.isAddress(userParams.invitedHook)) {
+					validated = false;
+
 					$("<span/>").addClass('error').html('<b>Hook</b> invalid').insertBefore($fields.hook);
 					$fields.hook.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
@@ -128,10 +138,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				
 				if (Q.isEmpty(userParams.name)) {
 					validated = false;
-//					Q.Notices.add({
-//						content: '<b>Name</b> invalid',
-//						timeout: 500
-//					});
+
 					$("<span/>").addClass('error').html('<b>Name</b> invalid').insertBefore($fields.name);
 					$fields.name.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
@@ -140,10 +147,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				
 				if (Q.isEmpty(userParams.symbol)) {
 					validated = false;
-//					Q.Notices.add({
-//						content: '<b>Symbol</b> invalid',
-//						timeout: 500
-//					});
+
 					$("<span/>").addClass('error').html('<b>Symbol</b> invalid').insertBefore($fields.symbol);
 					$fields.symbol.addClass('Q_error').addClass('fieldErrorBox');
 				} else {
@@ -152,10 +156,6 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 				if (Q.isEmpty(userParams.contractURI)) {
 					validated = false;
 					
-//					Q.Notices.add({
-//						content: '<b>contractURI</b> invalid',
-//						timeout: 5000
-//					});
 					$("<span/>").addClass('error').html('<b>contractURI</b> invalid').insertBefore($fields.contractURI);
 
 					$fields.contractURI.addClass('Q_error').addClass('fieldErrorBox');
@@ -168,16 +168,17 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 
 					var txData = {};
 					$this.addClass("Q_working");
-					Q.Users.Web3.getContract(
+					Q.Users.Web3.getFactory(
 						'Users/templates/R1/Community/factory',
 						{
 						chainId: userParams.selectedChainId,
-						contractAddress: factoryAddress,
+						//contractAddress: factoryAddress,
 						readOnly: false
 						}
 					).then(function (communityFactory) {
 						return communityFactory.produce(
 							userParams.hook,
+                            userParams.invitedHook,
 							userParams.name,
 							userParams.symbol,
 							userParams.contractURI
@@ -186,6 +187,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 
 						var produceParams = { ...userParams };
 						delete produceParams['selectedChainId'];
+
 
 						Q.req("Users/transaction", ["result"], function (err, response) {
 
@@ -279,6 +281,16 @@ Q.Template.set('Users/web3/community/composer',
 		    <div class="col-sm-9">
 			<input type="text" class="form-control" name="hook" placeholder="0x0000000000000000000000000000000000000000">
 			<small>hook address of contract implemented ICommunityHook interface. Can be address(0)</small>
+		    </div>
+		</div>
+	{{/if}}
+    {{#if contractParams.invitedHook}}
+	{{else}}
+		<div class="form-group row">
+		    <label class="col-sm-3 col-form-label">invitedHook</label>
+		    <div class="col-sm-9">
+			<input type="text" class="form-control" name="invitedHook" placeholder="0x0000000000000000000000000000000000000000">
+			<small>invitedHook address of contract implemented ICommunityInvite interface. Can be address(0)</small>
 		    </div>
 		</div>
 	{{/if}}
