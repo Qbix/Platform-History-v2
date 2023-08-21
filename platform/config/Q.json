@@ -63,6 +63,9 @@
 					"'sha256-+DLpYKpOowitqzgnHlbJ6domBEfO5iS3HhNhDTrZ0f0='",
 					"https://w.soundcloud.com"
 				],
+				"style": [
+					"https://fonts.googleapis.com"
+				],
 				"worker": ["'self'"]
 			}
 		},
