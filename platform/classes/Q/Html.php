@@ -1011,7 +1011,7 @@ class Q_Html
 			$content .= "\n";
 		}
 		if (!empty(self::$hashesAggregate)) {
-			$hash = base64_encode(hash(self::$hashesAggregate, $content, true));
+			$hash = base64_encode(hash(self::$hashesAggregate, str_replace("\r", '', $content), true));
 			self::$hashes['script'][$hash] = array($content, $attributes);
 		}
 		return "\n".self::tag('script', $attributes).$content."</script>\n";
