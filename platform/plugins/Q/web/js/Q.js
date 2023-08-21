@@ -9926,7 +9926,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		var arr = [], i, l = slotNames.length;
 		for (i=0; i<l; ++i) {
 			var slotName = slotNames[i];
-			if (!o.retainSlots[slotName] || !Q.loadUrl.retainedSlots[slotName]) {
+			if (!o.retainSlots[slotName] || Q.loadUrl.retainedSlots[slotName]) {
 				arr.push(slotName);
 			} else {
 				Q.loadUrl.retainedSlots[slotName] = document.getElementById(slotName + '_slot');
