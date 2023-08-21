@@ -148,8 +148,8 @@ function Q_script_urls_glob(
 			}
 			if ($calculateHashes) {
 				$c = file_get_contents($f);
-				$hash = hash($algo, $c);
-				$enchash = base64_encode(hex2bin($hash));
+				$hash = hash($algo, $c, true);
+				$enchash = base64_encode($hash);
 				$value = array('t' => filemtime($f), 'h' => $enchash);
 			} else {
 				$value = array('t' => filemtime($f));

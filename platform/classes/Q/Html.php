@@ -1011,7 +1011,7 @@ class Q_Html
 			$content .= "\n";
 		}
 		if (!empty(self::$hashesAggregate)) {
-			$hash = hash(self::$hashesAggregate, $content, true);
+			$hash = base64_encode(hash(self::$hashesAggregate, $content, true));
 			self::$hashes['script'][$hash] = array($content, $attributes);
 		}
 		return "\n".self::tag('script', $attributes).$content."</script>\n";
@@ -1061,7 +1061,7 @@ class Q_Html
 			$return = "<$tag $attributes>$content</$tag>";
 			if (($tag === 'script' or $tag === 'style')
 			and !empty(self::$hashesAggregate)) {
-				$hash = hash(self::$hashesAggregate, $content, true);
+				$hash = base64_encode(hash(self::$hashesAggregate, $content, true));
 				self::$hashes[$tag][$hash] = array($content, $attributes);
 			}
 		} else if ($content === true) {
