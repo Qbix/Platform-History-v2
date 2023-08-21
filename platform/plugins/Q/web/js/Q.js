@@ -15294,8 +15294,14 @@ Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 		};
 	}
 	for (name in res.slots) {
-		// res.slots will simply not contain the slots that have
-		// already been "cached"
+		// res.slots should not contain the slots that have
+		// already been "cached", but even the server sends them,
+		// we won't use them -- the client is the boss in this case!
+		if (Q.loadUrl.retainedSlots[name]) {
+			// Slots, unlike tools, won't have the equivalent of data-Q-replace
+			// PS: this is especially needed after handling response.redirect
+			continue;
+		}
 
 		if (name.toUpperCase() === 'TITLE') {
 			document.title = res.slots[name];
