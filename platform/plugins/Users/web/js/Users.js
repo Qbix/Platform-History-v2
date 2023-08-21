@@ -251,8 +251,13 @@
 			if (Users.Web3.ethereumProvider) {
 				callback && callback();
 			} else {
+				var projectId = Q.getObject(['web3', Users.communityId, 'providers', 'walletconnect', 'projectId'], Q.Users.apps);
+				if (!projectId) {
+					return;
+				}
+
 				window['@walletconnect/ethereum-provider'].EthereumProvider.init({
-					projectId: Q.getObject(['web3', Users.communityId, 'providers', 'walletconnect', 'projectId'], Q.Users.apps), // REQUIRED your projectId
+					projectId: projectId, // REQUIRED your projectId
 					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
 					qrModalOptions: { themeMode: "light" },
 					chains: [1,56,137], // REQUIRED chain ids
