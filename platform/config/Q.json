@@ -61,12 +61,14 @@
 					"'unsafe-eval'",
 					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
 					"'sha256-+DLpYKpOowitqzgnHlbJ6domBEfO5iS3HhNhDTrZ0f0='",
-					"https://w.soundcloud.com"
+					"https://w.soundcloud.com",
+					"https://cdnjs.cloudflare.com"
 				],
 				"style": [
 					"'unsafe-inline'",
 					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
-					"https://fonts.googleapis.com"
+					"https://fonts.googleapis.com",
+					"https://cdnjs.cloudflare.com"
 				],
 				"worker": ["'self'"]
 			}
