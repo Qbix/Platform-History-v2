@@ -48,7 +48,8 @@
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
 			"e/:emailAddress": { "module": "Users", "action": "activate" },
-			"Users/contractMetadata/:communityId.json": { "module": "Users", "action": "contractMetadata" }
+			"Users/contractMetadata/:communityId.json": { "module": "Users", "action": "contractMetadata" },
+            "URI/:userId/:chainId/:roleId.json": { "module": "Users", "action": "labels" }
 		},
 		"session": {
 			"db": {
@@ -108,6 +109,12 @@
 		},
 		"images": {
 			"Users/icon": {
+				"sizes": ["40", "50", "80", "200", "400"],
+				"defaultSize": "40",
+				"defaultCacheBust": 1000,
+				"maxStretch": 3
+			},
+            "Users/labels": {
 				"sizes": ["40", "50", "80", "200", "400"],
 				"defaultSize": "40",
 				"defaultCacheBust": 1000,
@@ -299,7 +306,7 @@
 					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-					"canManageLabels": ["Users/"]
+					"canManageLabels": ["Users/","<<< web"]
 				},
 				"Users/admins": {
 					"title": "Admin",

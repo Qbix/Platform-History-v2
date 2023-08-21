@@ -2925,17 +2925,28 @@
 	 * @method add
 	 * @param {String} userId The user's id
 	 * @param {String} title The contact label's title
+     * @param {String} label The contact label. used when need to set custom
 	 * @param {Function} callback
 	 *    if there were errors, first parameter is an array of errors
 	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
 	 */
-	Label.add = function (userId, title, callback) {
+	Label.add = function (userId, title, label, callback) {
 		return _Users_manage('Users/label', 'post', {
 			userId: userId,
-			title: title
+			title: title,
+            label: label,
 		}, 'label', Label, Users.getLabels, callback);
 	};
 
+    Label.update = function (userId, label, title, icon, description, callback) {
+		return _Users_manage('Users/label', 'put', {
+			userId,
+            label,
+			title,
+            icon, 
+            description,
+		}, 'label', Label, Users.getLabels, callback);
+	};
 	/**
 	 * Remove a label.
 	 * @method remove
@@ -2980,7 +2991,8 @@
 		},
 		"Users/labels": {
 			js: "{{Users}}/js/tools/labels.js",
-			css: "{{Users}}/css/tools/labels.css"
+			css: "{{Users}}/css/tools/labels.css",
+            text: ["Users/labels"]
 		},
 		"Users/roles": {
 			js: "{{Users}}/js/tools/roles.js",
