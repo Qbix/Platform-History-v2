@@ -64,6 +64,7 @@
 					"https://w.soundcloud.com"
 				],
 				"style": [
+					"'unsafe-inline'",
 					"https://fonts.googleapis.com"
 				],
 				"worker": ["'self'"]
