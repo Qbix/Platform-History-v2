@@ -1997,6 +1997,28 @@ class Q_Utils
 		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
 	}
 
+
+	/**
+	 * Returns true if running under windows
+	 * @return {boolean}
+	 */
+	static function osWindows()
+	{
+		return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+	}
+
+	/**
+	 * Replaces the line breaks from \r\n to \n if on Windows
+	 * @param {string}
+	 * @return {string}
+	 */
+	static function replaceLinebreaks($content)
+	{
+		return self::osWindows()
+			? str_replace("\r\n", "\n", $content)
+			: $content;
+	}
+
 	/**
 	 * Sorts keys such as "4x8x9" numerically by dimensions
 	 * @method sortKeysNumerically
