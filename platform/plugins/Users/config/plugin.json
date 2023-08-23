@@ -67,7 +67,7 @@
 				"exclude": ["Users/login", "Users/authenticate", "Users/activate"]
 			},
 			"contentSecurityPolicy": {
-				"script": ["https://connect.facebook.net", "https://query.yahooapis.com"]
+				"script": ["https://connect.facebook.net", "https://query.yahooapis.com", "https://appleid.cdn-apple.com/"]
 			}
 		},
 		"javascript": {
