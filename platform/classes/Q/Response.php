@@ -297,7 +297,8 @@ class Q_Response
 			return Q_Response::$layoutView;
 		}
 
-		if (empty($skipContentSecurityPolicy)) {
+		if (empty($skipContentSecurityPolicy)
+		and !Q_Config::get('Q', 'web', 'contentSecurityPolicy', 'ignore', false)) {
 			Q_Html::hashesAggregate('sha256');
 			Q_Response::scripts(); // may call scriptsInline
 			Q_Response::scriptLines();

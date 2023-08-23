@@ -4198,7 +4198,9 @@
 			switch (Users.Facebook.type) {
 				case 'web':
 					var timeout = 5000;
-					if (timeout) {
+					if (!window.FB) {
+						cb({});
+					} if (timeout) {
 						var t = setTimeout(function () {
 							// just in case, if FB is not responding let's still fire the callback
 							// FB ignores callback if:

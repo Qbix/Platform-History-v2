@@ -1010,8 +1010,9 @@ class Q_Html
 		} else {
 			$content .= "\n";
 		}
+		$content = Q_Utils::replaceLinebreaks($content);
 		if (!empty(self::$hashesAggregate)) {
-			$hash = base64_encode(hash(self::$hashesAggregate, str_replace("\r", '', $content), true));
+			$hash = base64_encode(hash(self::$hashesAggregate, $content, true));
 			self::$hashes['script'][$hash] = array($content, $attributes);
 		}
 		return "\n".self::tag('script', $attributes).$content."</script>\n";
@@ -1057,11 +1058,12 @@ class Q_Html
 			$content = (string)$content;
 		}
 		if (is_string($content)) {
+			$content = Q_Utils::replaceLinebreaks($content);
 			$content = Q::t($content);
 			$return = "<$tag $attributes>$content</$tag>";
 			if (($tag === 'script' or $tag === 'style')
 			and !empty(self::$hashesAggregate)) {
-				$hash = base64_encode(hash(self::$hashesAggregate, str_replace("\r", '', $content), true));
+				$hash = base64_encode(hash(self::$hashesAggregate, $content, true));
 				self::$hashes[$tag][$hash] = array($content, $attributes);
 			}
 		} else if ($content === true) {
