@@ -601,7 +601,7 @@ Q.Tool.define('Streams/chat', function(options) {
 									publisherId: stream.fields.publisherId,
 									streamName: stream.fields.name,
 									autoplay: true,
-									url: stream.fileUrl() || stream.iconUrl('200')
+									url: stream.fileUrl() || stream.iconUrl('400')
 								});
 
 								element = Q.Tool.setUpElement(element, toolName, fields);

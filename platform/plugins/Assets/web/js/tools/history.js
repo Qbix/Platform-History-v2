@@ -108,6 +108,8 @@ Q.Tool.define("Assets/history", function (options) {
 					return;
 				}
 
+				row.amount = row.amount.toFixed(2);
+
 				if (row.reason) {
 					var rowOperation = Q.getObject(["history", row.reason, row.sign], tool.text) || Q.getObject(["history", row.reason], tool.text);
 					if (rowOperation) {
@@ -152,7 +154,7 @@ Q.Tool.define("Assets/history", function (options) {
 						var $sibling = operation === "append" ? $rows.last() : $rows.first();
 						var $siblingAmount = $(".Assets_history_amount", $sibling);
 						if ($sibling.length && $(".Assets_history_description", $sibling).html() === row.reason) {
-							$sibling.attr("data-summ", (parseFloat($sibling.attr("data-summ") || $sibling.attr("data-amount")) + row.amount).toFixed(2));
+							$sibling.attr("data-summ", (parseFloat($sibling.attr("data-summ") || $sibling.attr("data-amount")) + parseFloat(row.amount)).toFixed(2));
 							_replaceAmount($siblingAmount, $sibling.attr("data-summ"));
 							$tr.removeClass("Q_newsflash").attr("data-category", $sibling.prop("id")).hide();
 							$sibling.addClass("Q_newsflash");
