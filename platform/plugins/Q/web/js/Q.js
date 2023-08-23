@@ -7668,12 +7668,12 @@ var _supportsPassive;
  *  You can also pass functions such as Q.Pointer.start here.
  * @param {Function} eventHandler
  *  A function to call when the event fires
- * @param {boolean|Object} useCapture
+ * @param {boolean|Object} [useCapture]
  *  Whether to use the capture instead of bubble phase. Ignored in IE8 and below.
  *  You can also pass {passive: true} and other such things here.
- * @param {boolean} hookStopPropagation
+ * @param {boolean} [hookStopPropagation]
  *  Whether to override Event.prototype.stopPropagation in order to capture the event even
- *  when a descendant of the element tries to prevent.
+ *  when a descendant of the element tries to stop propagation to its ancestors.
  * @return {Function} the wrapper function to pass to corresponding Q.removeEventListener
  */
 Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandler, useCapture, hookStopPropagation) {
@@ -12370,7 +12370,7 @@ function _setLayoutInterval(e) {
 	}
 	var w = Q.Visual.windowWidth();
 	var h = Q.Visual.windowHeight();
-	var interval = setInterval(function () {
+	setInterval(function () {
 		var ae = document.activeElement;
 		if (ae && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(ae.tagName.toUpperCase()) >= 0) {
 			return;
