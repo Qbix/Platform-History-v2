@@ -1320,6 +1320,9 @@ class Q_Response
 				));
 			}
 		}
+		if ($setLoaded) {
+			self::setScriptData('Q.addScript.loaded', $loaded);
+		}
  		return implode("", $parts);
 	}
 
@@ -1611,7 +1614,11 @@ class Q_Response
 		if ($preload === 'inline'
 		and !Q_Request::isAjax()
 		and !Q_Session::requestedId()) {
-			return self::stylesheetsInline($slotName, true);
+			$result = self::stylesheetsInline($slotName, true);
+			if (!isset($slotName)) {
+				$consistent = $result;
+			}
+			return $consistent;
 		}
 		$baseUrl = Q_Request::baseUrl();
 		$tags = array();
