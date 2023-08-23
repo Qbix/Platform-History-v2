@@ -4,7 +4,7 @@
 }
 html, body { height: 100%; height: -moz-available; height: -webkit-fill-available; height: fill-available; }
 table { border-spacing:0; border-collapse:collapse; }
-body { min-height: 100vh; position: relative; margin: 0; }	
+body { position: relative; margin: 0; }	
 
 /* Animations */
 @keyframes Q_rotateplane {
