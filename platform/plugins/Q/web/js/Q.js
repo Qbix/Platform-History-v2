@@ -2576,13 +2576,14 @@ Q.timeRemaining = function (timestamp) {
  * @method zIndexTopmost
  * @static
  * @param {Element} [container=document.body] 
- * @param {Function} [filter] By default, filters out elements with Q_click_mask
+ * @param {Function} [filter] By default, filters out elements with Q_click_mask and pointer-events:none
  * @returns Number
  */
 Q.zIndexTopmost = function (container, filter) {
 	container = container || document.body;
 	filter = filter || function (element) {
-		return !element.hasClass('Q_click_mask')
+		return element.computedStyle().pointerEvents !== 'none'
+			|| !element.hasClass('Q_click_mask')
 			|| element.getAttribute('id') !== 'notices_slot';
 	}
 	var topZ = -1;
