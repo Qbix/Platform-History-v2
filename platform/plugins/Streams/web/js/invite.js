@@ -282,7 +282,9 @@ Streams.Dialogs.invite._dialog = function (publisherId, streamName, callback, op
                     fields: {
                         isContactsPicker: isContactsPicker,
                         userChooser: options.userChooser,
+                        showLabelsButtons: options.showGrantRolesButton || options.showGiveMyLabelButton,
                         showGrantRolesButton: options.showGrantRolesButton,
+                        showGiveMyLabelButton: options.showGiveMyLabelButton,
                         communityRolesNum:options.addLabel ? options.addLabel.length : false,
                         myLabelsNum:options.addMyLabel ? options.addMyLabel.length : false,
                         text: text,
