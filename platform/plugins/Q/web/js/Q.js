@@ -2583,8 +2583,8 @@ Q.zIndexTopmost = function (container, filter) {
 	container = container || document.body;
 	filter = filter || function (element) {
 		return element.computedStyle().pointerEvents !== 'none'
-			|| !element.hasClass('Q_click_mask')
-			|| element.getAttribute('id') !== 'notices_slot';
+			&& !element.hasClass('Q_click_mask')
+			&& element.getAttribute('id') !== 'notices_slot';
 	}
 	var topZ = -1;
 	Q.each(container.children, function () {
