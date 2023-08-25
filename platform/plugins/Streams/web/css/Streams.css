@@ -301,7 +301,7 @@
 	display: inline-block;
 	width: 32px;
 	height: 32px;
-	background: url('../../Q/img/icons/basic32.png') 0 -999px no-repeat;
+	background: url(../../Q/img/icons/basic32.png) 0 -999px no-repeat;
 }
 
 .Streams_participant_list {

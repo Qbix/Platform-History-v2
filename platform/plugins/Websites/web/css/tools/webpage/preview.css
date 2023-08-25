@@ -160,14 +160,14 @@
 	padding-top: 40px;
 }
 .Websites_dialog_webpage .Websites_webpage_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit] {
-	background-image: url('../../../../Q/img/audio/edit/40.png');
+	background-image: url(../../../../Q/img/audio/edit/40.png);
 }
 .Websites_dialog_webpage .Websites_webpage_composer[data-composer=true] .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit],
 .Websites_dialog_webpage .Websites_webpage_composer[data-composer=true] .Q_tabbing_container .Q_tabbing_item[data-content=edit] {
 	display: none;
 }
 .Websites_dialog_webpage .Websites_webpage_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=link] {
-	background-image: url('../../../../Q/img/audio/link/40.png');
+	background-image: url(../../../../Q/img/audio/link/40.png);
 }
 
 .Websites_dialog_webpage .Websites_webpage_composer .Websites_webpage_composer_submit {

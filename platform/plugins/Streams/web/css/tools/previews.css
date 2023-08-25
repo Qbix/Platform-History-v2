@@ -119,7 +119,7 @@
 .Streams_dialog_audio .Streams_audio_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit],
 .Streams_dialog_video .Streams_video_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit],
 .Streams_dialog_pdf .Streams_pdf_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit] {
-	background-image: url('../../../Q/img/audio/edit/40.png');
+	background-image: url(../../../Q/img/audio/edit/40.png);
 }
 .Streams_dialog_audio .Streams_audio_composer[data-composer=true] .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit],
 .Streams_dialog_audio .Streams_audio_composer[data-composer=true] .Q_tabbing_container .Q_tabbing_item[data-content=edit],
@@ -140,17 +140,17 @@
 	margin-bottom: 5px;
 }
 .Streams_dialog_audio .Streams_audio_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=record] {
-	background-image: url('../../../Q/img/audio/microphone/40.png');
+	background-image: url(../../../Q/img/audio/microphone/40.png);
 }
 .Streams_dialog_audio .Streams_audio_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=upload],
 .Streams_dialog_video .Streams_video_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=upload],
 .Streams_dialog_pdf .Streams_pdf_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=upload] {
-	background-image: url('../../../Q/img/audio/upload/40.png');
+	background-image: url(../../../Q/img/audio/upload/40.png);
 }
 .Streams_dialog_audio .Streams_audio_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=link],
 .Streams_dialog_video .Streams_video_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=link],
 .Streams_dialog_pdf .Streams_pdf_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=link] {
-	background-image: url('../../../Q/img/audio/link/40.png');
+	background-image: url(../../../Q/img/audio/link/40.png);
 }
 
 .Streams_dialog_audio .Streams_audio_composer .Streams_audio_composer_submit,

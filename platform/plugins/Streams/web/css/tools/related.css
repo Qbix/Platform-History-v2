@@ -33,6 +33,6 @@
 	display: none !important;
 }
 .Q_badge.Streams_preview_close {
-	background: url('../../../Q/img/close.png') center center no-repeat;
+	background: url(../../../Q/img/close.png) center center no-repeat;
 	background-size: contain;
 }

@@ -60,17 +60,17 @@
     padding-top: 40px;
 }
 .Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit] {
-    background-image: url('../../img/audio/edit/40.png');
+    background-image: url(../../img/audio/edit/40.png);
 }
 .Q_pdf_composer[data-composer=true] .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit],
 .Q_pdf_composer[data-composer=true] .Q_tabbing_container .Q_tabbing_item[data-content=edit] {
     display: none;
 }
 .Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab[data-name=upload] {
-    background-image: url('../../img/audio/upload/40.png');
+    background-image: url(../../img/audio/upload/40.png);
 }
 .Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab[data-name=link] {
-    background-image: url('../../img/audio/link/40.png');
+    background-image: url(../../img/audio/link/40.png);
 }
 .Q_pdf_composer .Q_pdf_composer_submit {
     text-align: center;

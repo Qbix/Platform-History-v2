@@ -3,7 +3,7 @@
 }
 #page .Q_tool.Assets_payment_tool .Assets_gpay {
 	width: 100px;
-	background-image: url('../../img/gpay.png');
+	background-image: url(../../img/gpay.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 80%;
@@ -30,7 +30,7 @@
 	top: 0;
 	width: 70px;
 	height: 70px;
-	background-image: url('/img/icon/400.png');
+	background-image: url(/img/icon/400.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 80%;
@@ -54,7 +54,7 @@
 }
 .Assets_payment_Gpay_preload .ApGp_header .ApGp_header_url[data-secured=true] {
 	padding-left: 20px;
-	background-image: url('../../img/greenLock.png');
+	background-image: url(../../img/greenLock.png);
 	background-repeat: no-repeat;
 	background-position: center left;
 	background-size: contain;
@@ -67,7 +67,7 @@
 	height: 20px;
 	right: 0;
 	top: 0;
-	background-image: url('../../img/close.png');
+	background-image: url(../../img/close.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: contain;
@@ -106,7 +106,7 @@
 	width: 70%;
 }
 .Assets_payment_Gpay_preload .ApGp_methodInfo_name {
-	background-image: url('../../img/gpay.png');
+	background-image: url(../../img/gpay.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 	background-size: contain;
@@ -134,5 +134,5 @@
 /* preload some images */
 body::after{
 	position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-	content: url('../../img/gpay.png') url('/img/icon/400.png') url('../../img/greenLock.png') url('../../img/close.png');
+	content: url(../../img/gpay.png') url('/img/icon/400.png') url('../../img/greenLock.png') url('../../img/close.png);
 }

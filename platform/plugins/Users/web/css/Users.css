@@ -63,7 +63,7 @@
 
 .Users_friendSelector_tool ul li:hover
 {
-	background: url('../img/sel_friend_bg.png') repeat-x;
+	background: url(../img/sel_friend_bg.png) repeat-x;
   cursor: pointer;
 }
 

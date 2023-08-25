@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Artem Subbotin
 */
 
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+@import url(https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css);
 
 .Assets_web3_coin_admin_produceContainer {
 	padding: 20px;

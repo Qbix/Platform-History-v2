@@ -332,7 +332,7 @@
 }
 .Streams_chat_posting
 {
-	background: url('/Q/plugins/Q/img/throbbers/loading.gif') center no-repeat;
+	background: url(/Q/plugins/Q/img/throbbers/loading.gif) center no-repeat;
 }
 .Streams_chat_more {
 	cursor: pointer;
@@ -386,7 +386,7 @@
 }
 
 .Streams_chat_tick {
-	background: url('../../img/chat/message-tick.png');
+	background: url(../../img/chat/message-tick.png);
 	width: 9px;
 	height: 13px;
 }
