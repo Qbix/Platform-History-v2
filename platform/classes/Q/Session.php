@@ -341,7 +341,7 @@ class Q_Session
 					$sessionCookieParams = session_get_cookie_params();
 					Q_Response::setCookie(
 						self::name(), $id, $duration ? time()+$duration : 0, 
-						null, Q::ifset($sessionCookieParams, "domain", null), $secure, true, 'Lax'
+						null, Q::ifset($sessionCookieParams, "domain", null), $secure, false, 'Lax'
 					);
 				}
 			}
@@ -494,7 +494,7 @@ class Q_Session
 			$sessionCookieParams = session_get_cookie_params();
 			Q_Response::setCookie(
 				self::name(), $sid, $duration ? time()+$duration : 0,
-				null, Q::ifset($sessionCookieParams, "domain", null), $secure, true
+				null, Q::ifset($sessionCookieParams, "domain", null), $secure, false
 			);
 		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
