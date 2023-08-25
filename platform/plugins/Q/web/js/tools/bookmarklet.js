@@ -36,7 +36,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 		console.warn("Please provide 'usage' for bookmarklet.");
 	}
 	
-	Q.addStylesheet('{{Q}}/css/inplace.css');
+	Q.addStylesheet('{{Q}}/css/tools/inplace.css');
 	
 	var bookmarkletSettings = {
 		common: {

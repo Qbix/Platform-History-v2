@@ -19,7 +19,7 @@
 
             this.initTool();
 
-            Q.addStylesheet('{{Q}}/css/resize.css');
+            Q.addStylesheet('{{Q}}/css/rools/resize.css');
         },
 
         {

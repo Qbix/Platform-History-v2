@@ -18,7 +18,7 @@
 		var state = tool.state;
 		var $te = $(tool.element);
 
-		Q.addStylesheet('{{Q}}/css/infinitescroll.css', { slotName: 'Q' });
+		Q.addStylesheet('{{Q}}/css/tools/infinitescroll.css', { slotName: 'Q' });
 
 		state.lastScrollHeight = $te[0].scrollHeight;
 

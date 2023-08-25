@@ -91,7 +91,7 @@ function Q_ticker_tool($options = array())
 		}
 	}
 
-	Q_Response::addStylesheet('{{Q}}/css/ticker.css', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/tools/ticker.css', 'Q');
 	Q_Response::addScript('{{Q}}/js/tools/ticker.js', 'Q');
 	Q_Response::setToolOptions($fields2);
 

@@ -29,7 +29,7 @@
             var tool = this;
             tool.state = Q.extend({}, tool.state, options);
 
-            Q.addStylesheet('{{Q}}/css/3dcarousel.css');
+            Q.addStylesheet('{{Q}}/css/tools/carousel.css');
             tool.create();
         },
 

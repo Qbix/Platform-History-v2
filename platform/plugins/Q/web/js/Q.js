@@ -15044,7 +15044,7 @@ Q.Tool.define({
 	"Q/inplace": "{{Q}}/js/tools/inplace.js",
 	"Q/tabs": {
 		js: "{{Q}}/js/tools/tabs.js",
-		css: "{{Q}}/css/tabs.css"
+		css: "{{Q}}/css/tools/tabs.css"
 	},
 	"Q/form": "{{Q}}/js/tools/form.js",
 	"Q/panel": "{{Q}}/js/tools/panel.js",

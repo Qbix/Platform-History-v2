@@ -28,7 +28,7 @@
 */
 Q.Tool.define('Q/form', function(options) {
 
-	Q.addStylesheet('{{Q}}/css/form.css');
+	Q.addStylesheet('{{Q}}/css/tools/form.css');
 	this.refresh(options);
 
 },

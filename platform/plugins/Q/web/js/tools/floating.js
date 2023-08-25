@@ -17,7 +17,7 @@
 		var $body = $('body');
 		var dragging = false, dragged = false;
 
-		Q.addStylesheet('{{Q}}/css/floating.css');
+		Q.addStylesheet('{{Q}}/css/tools/floating.css');
 
 		var Q_floating_dragging = function(e) {
 			if (!dragging) {

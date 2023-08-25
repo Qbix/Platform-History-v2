@@ -2014,9 +2014,7 @@ class Q_Utils
 	 */
 	static function replaceLinebreaks($content)
 	{
-		return self::osWindows()
-			? str_replace("\r\n", "\n", $content)
-			: $content;
+		return str_replace("\r\n", "\n", $content);
 	}
 
 	/**

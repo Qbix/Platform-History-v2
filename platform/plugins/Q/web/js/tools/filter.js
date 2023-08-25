@@ -24,7 +24,7 @@ Q.Tool.define('Q/filter', function (options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('{{Q}}/css/filter.css');
+	Q.addStylesheet('{{Q}}/css/tools/filter.css');
 	
 	if (!$te.children().length) {
 		// set it up with javascript

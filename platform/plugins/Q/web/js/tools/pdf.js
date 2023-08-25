@@ -35,7 +35,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		tool.implement();
 	});
 
-	Q.addStylesheet(["{{Q}}/css/pdf.css"], p.fill('stylesheet'), { slotName: 'Q' });
+	Q.addStylesheet(["{{Q}}/css/tools/pdf.css"], p.fill('stylesheet'), { slotName: 'Q' });
 	// we specially don' wait pdfjs lib loading, because it too big
 	// it will load during user actions
 	Q.addScript("{{Q}}/js/pdfjs/build/pdf.js");

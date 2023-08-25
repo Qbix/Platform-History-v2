@@ -40,7 +40,7 @@ Q.Tool.define("Q/inplace", function (options) {
 		return _Q_inplace_tool_constructor.call(tool, this.element, state);
 	}
 	
-	Q.addStylesheet('{{Q}}/css/inplace.css');
+	Q.addStylesheet('{{Q}}/css/tools/inplace.css');
 	
 	// if activated with JS should have following options:
 	//	- action: required. the form action to save tool value

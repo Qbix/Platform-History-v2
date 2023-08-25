@@ -49,7 +49,7 @@ Q.Tool.define("Q/ticker", function(options) {
 		$children = $children.children();
 	}
 	
-	Q.addStylesheet('{{Q}}/css/Ticker.css', { slotName: 'Q' });
+	Q.addStylesheet('{{Q}}/css/tools/ticker.css', { slotName: 'Q' });
 
 	this.onHitStart = function() {}; // override this to handle this event
 	this.onHitEnd = function() {}; // override this to handle this event

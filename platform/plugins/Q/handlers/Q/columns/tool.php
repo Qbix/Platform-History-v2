@@ -47,7 +47,7 @@ function Q_columns_tool($options)
 		return '';
 	}
 	Q_Response::addScript('{{Q}}/js/tools/columns.js', 'Q');
-	Q_Response::addStylesheet('{{Q}}/css/columns.css', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/tools/columns.css', 'Q');
 	$result = '<div class="Q_columns_container Q_clearfix">';
 	$columns = array();
 	$i=0;

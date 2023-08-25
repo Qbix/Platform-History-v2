@@ -50,7 +50,7 @@
 			}
 			$this.before(state.input);
 			$this.addClass('Q_audio');
-			Q.addStylesheet('{{Q}}/css/audio.css');
+			Q.addStylesheet('{{Q}}/css/tools/audio.css');
 
 			// set audio
 			state.audio = new Q.Audio(state.audioUrl);

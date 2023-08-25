@@ -141,7 +141,7 @@ function Q_panel_tool($options)
 	if ($toggle === 'move') $panel_classes .= ' Q_panel_tool_toggle_move';
 	
 	Q_Response::addScript('{{Q}}/js/tools/panel.js', 'Q');
-	Q_Response::addStylesheet('{{Q}}/css/panel.css', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/tools/panel.css', 'Q');
 	
 	if (isset($setSlots)) {
 		Q_Response::setSlot('form', $form);

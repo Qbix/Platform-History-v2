@@ -125,7 +125,7 @@ function Q_tabs_tool($options)
 		'field', 'loader', 'beforeSwitch', 'beforeScripts', 'onActivate'
 	));
 	Q_Response::addScript('{{Q}}/js/tools/tabs.js', 'Q');
-	Q_Response::addStylesheet('{{Q}}/css/tabs.css', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/tools/tabs.css', 'Q');
 	$classes = empty($vertical) ? ' Q_tabs_horizontal' : ' Q_tabs_vertical';
 	if (!empty($compact)) {
 		$classes .= " Q_tabs_compact";

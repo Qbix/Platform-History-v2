@@ -65,7 +65,7 @@ Q.Tool.define("Q/columns", function(options) {
 		$toolElement.addClass("Q_columns_stretchFirstColumn");
 	}
 
-	Q.addStylesheet('{{Q}}/css/columns.css', function () {
+	Q.addStylesheet('{{Q}}/css/tools/columns.css', function () {
 		if (state.title === undefined) {
 			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
 				+ Q.info.imgLoading

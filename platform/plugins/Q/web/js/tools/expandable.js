@@ -25,7 +25,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('{{Q}}/css/expandable.css');
+	Q.addStylesheet('{{Q}}/css/tools/expandable.css');
 
 	if (state.evenIfFilled || !$te.children().length) {
 		// set it up with javascript

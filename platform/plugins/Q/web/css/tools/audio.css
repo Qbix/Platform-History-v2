@@ -19,10 +19,10 @@
 	margin: 5px 0;
 }
 .Q_audio_recorder .Q_tool.Q_pie_tool .Q_pie_box {
-	background-image: url(../img/audio/record.png);
+	background-image: url(../../img/audio/record.png);
 }
 .Q_audio_recorder[data-state=recording] .Q_tool.Q_pie_tool .Q_pie_box {
-	background-image: url(../img/audio/stop.png);
+	background-image: url(../../img/audio/stop.png);
 }
 .Q_audio_recorder[data-state=recorded] .Q_audio_encoding {
 	display: flex;
@@ -30,12 +30,12 @@
 
 .Q_audio_recorder[data-state=play] .Q_tool.Q_pie_tool .Q_pie_box,
 .Q_audio_tool[data-state=play] .Q_tool.Q_pie_tool .Q_pie_box {
-	background-image: url(../img/audio/play.png);
+	background-image: url(../../img/audio/play.png);
 }
 .Q_audio_recorder[data-state=playing] .Q_tool.Q_pie_tool .Q_pie_box,
 .Q_audio_recorder[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box,
 .Q_audio_tool[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
-	background-image: url(../img/audio/pause.png);
+	background-image: url(../../img/audio/pause.png);
 }
 
 .Q_audio_recorder .Q_audio_actions {
@@ -165,5 +165,5 @@
 /* preload images */
 body::after{
 	position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-	content: url(../img/audio/record.png) url(../img/audio/stop.png) url(../img/audio/play.png) url(../img/audio/pause.png);
+	content: url(../../img/audio/record.png) url(../../img/audio/stop.png) url(../../img/audio/play.png) url(../../img/audio/pause.png);
 }

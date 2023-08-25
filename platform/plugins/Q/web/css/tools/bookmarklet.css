@@ -19,7 +19,7 @@
   margin-right: 20px;
   padding-right: 30px;
   text-align: center;
-  background: url('../img/bookmarklet/drag_button_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/drag_button_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_sample_button_tip
@@ -78,13 +78,13 @@
 {
   width: 6px;
   height: 16px;
-  background: url('../img/bookmarklet/safari_mac_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/safari_mac_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_safari_mac .Q_bookmarklet_tool_button_middle
 {
   line-height: 16px;
-  background: url('../img/bookmarklet/safari_mac_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/safari_mac_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_safari_mac .Q_bookmarklet_tool_button_middle a
@@ -98,13 +98,13 @@
 {
   width: 6px;
   height: 16px;
-  background: url('../img/bookmarklet/safari_mac_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/safari_mac_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_safari_mac
 {
   height: 79px;
-  background: url('../img/bookmarklet/safari_mac.png') no-repeat;
+  background: url(../../img/bookmarklet/safari_mac.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_safari_mac .Q_bookmarklet_tool_sample_button
@@ -118,13 +118,13 @@
 {
   width: 4px;
   height: 19px;
-  background: url('../img/bookmarklet/safari_win_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/safari_win_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_safari_windows .Q_bookmarklet_tool_button_middle
 {
   line-height: 19px;
-  background: url('../img/bookmarklet/safari_win_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/safari_win_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_safari_windows .Q_bookmarklet_tool_button_middle a
@@ -136,13 +136,13 @@
 {
   width: 4px;
   height: 19px;
-  background: url('../img/bookmarklet/safari_win_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/safari_win_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_safari_windows
 {
   height: 79px;
-  background: url('../img/bookmarklet/safari_win.png') no-repeat;
+  background: url(../../img/bookmarklet/safari_win.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_safari_windows .Q_bookmarklet_tool_sample_button
@@ -156,26 +156,26 @@
 {
   width: 5px;
   height: 24px;
-  background: url('../img/bookmarklet/chrome_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_chrome_windows .Q_bookmarklet_tool_button_middle
 {
   line-height: 24px;
-  background: url('../img/bookmarklet/chrome_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/chrome_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_chrome_windows .Q_bookmarklet_tool_button_right
 {
   width: 5px;
   height: 24px;
-  background: url('../img/bookmarklet/chrome_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_chrome_windows
 {
   height: 85px;
-  background: url('../img/bookmarklet/chrome_win.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_win.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_chrome_windows .Q_bookmarklet_tool_sample_button
@@ -189,26 +189,26 @@
 {
   width: 5px;
   height: 24px;
-  background: url('../img/bookmarklet/chrome_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_chrome_mac .Q_bookmarklet_tool_button_middle
 {
   line-height: 24px;
-  background: url('../img/bookmarklet/chrome_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/chrome_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_chrome_mac .Q_bookmarklet_tool_button_right
 {
   width: 5px;
   height: 24px;
-  background: url('../img/bookmarklet/chrome_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_chrome_mac
 {
   height: 95px;
-  background: url('../img/bookmarklet/chrome_mac.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_mac.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_chrome_mac .Q_bookmarklet_tool_sample_button
@@ -222,13 +222,13 @@
 {
   width: 8px;
   height: 18px;
-  background: url('../img/bookmarklet/firefox_mac_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/firefox_mac_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_firefox_mac .Q_bookmarklet_tool_button_middle
 {
   line-height: 18px;
-  background: url('../img/bookmarklet/firefox_mac_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/firefox_mac_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_firefox_mac .Q_bookmarklet_tool_button_middle a
@@ -242,13 +242,13 @@
 {
   width: 8px;
   height: 18px;
-  background: url('../img/bookmarklet/firefox_mac_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/firefox_mac_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_firefox_mac
 {
   height: 108px;
-  background: url('../img/bookmarklet/firefox_mac.png') no-repeat;
+  background: url(../../img/bookmarklet/firefox_mac.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_firefox_mac .Q_bookmarklet_tool_sample_button
@@ -262,26 +262,26 @@
 {
   width: 3px;
   height: 24px;
-  background: url('../img/bookmarklet/firefox_win_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/firefox_win_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_firefox_windows .Q_bookmarklet_tool_button_middle
 {
   line-height: 24px;
-  background: url('../img/bookmarklet/firefox_win_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/firefox_win_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_firefox_windows .Q_bookmarklet_tool_button_right
 {
   width: 3px;
   height: 24px;
-  background: url('../img/bookmarklet/firefox_win_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/firefox_win_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_firefox_windows
 {
   height: 126px;
-  background: url('../img/bookmarklet/firefox_win.png') no-repeat;
+  background: url(../../img/bookmarklet/firefox_win.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_firefox_windows .Q_bookmarklet_tool_sample_button
@@ -295,26 +295,26 @@
 {
   width: 5px;
   height: 24px;
-  background: url('../img/bookmarklet/chrome_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_opera_mac .Q_bookmarklet_tool_button_middle
 {
   line-height: 24px;
-  background: url('../img/bookmarklet/chrome_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/chrome_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_opera_mac .Q_bookmarklet_tool_button_right
 {
   width: 5px;
   height: 24px;
-  background: url('../img/bookmarklet/chrome_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/chrome_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_opera_mac
 {
   height: 110px;
-  background: url('../img/bookmarklet/opera_mac.png') no-repeat;
+  background: url(../../img/bookmarklet/opera_mac.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_opera_mac .Q_bookmarklet_tool_sample_button
@@ -328,26 +328,26 @@
 {
   width: 3px;
   height: 24px;
-  background: url('../img/bookmarklet/ie_win_button_left_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/ie_win_button_left_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_button_explorer_windows .Q_bookmarklet_tool_button_middle
 {
   line-height: 24px;
-  background: url('../img/bookmarklet/ie_win_button_bg.png') repeat-x;
+  background: url(../../img/bookmarklet/ie_win_button_bg.png) repeat-x;
 }
 
 .Q_bookmarklet_tool_button_explorer_windows .Q_bookmarklet_tool_button_right
 {
   width: 3px;
   height: 24px;
-  background: url('../img/bookmarklet/ie_win_button_right_bg.png') no-repeat;
+  background: url(../../img/bookmarklet/ie_win_button_right_bg.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_explorer_windows
 {
   height: 82px;
-  background: url('../img/bookmarklet/ie_win.png') no-repeat;
+  background: url(../../img/bookmarklet/ie_win.png) no-repeat;
 }
 
 .Q_bookmarklet_tool_bar_screenshot_explorer_windows .Q_bookmarklet_tool_sample_button

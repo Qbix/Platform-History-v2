@@ -326,7 +326,7 @@ Q.Tool.define("Q/video", function (options) {
 		tool.refresh();
 	});
 
-	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
+	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/tools/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
 	Q.addScript("{{Q}}/js/videojs/lib.js", p.fill('scripts'));
 	Q.Text.get('Q/content', p.fill('text'));
 

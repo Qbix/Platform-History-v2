@@ -717,7 +717,7 @@ class Q_Response
 		$csp = self::contentSecurityPolicyArray();
 		$content = '';
 		foreach ($csp as $type => $values) {
-			$content .= "$type-src " . implode(' ', $values) . '; ';
+			$content .= "$type-src-elem " . implode(' ', $values) . '; ';
 		}
 		$baseUrl = Q_Request::baseUrl();
 		$parts = parse_url($baseUrl);

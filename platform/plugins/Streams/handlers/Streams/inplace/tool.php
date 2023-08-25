@@ -110,6 +110,6 @@ function Streams_inplace_tool($options)
 	$toolOptions['inplaceType'] = $inplaceType;
 	Q_Response::addScript('{{Streams}}/js/tools/inplace.js', 'Streams');
 	Q_Response::addScript('{{Q}}/js/tools/inplace.js', 'Streams');
-	Q_Response::addStylesheet('{{Q}}/css/inplace.css', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/tools/inplace.css', 'Q');
 	return Q::tool("Q/inplace", $inplace);
 }

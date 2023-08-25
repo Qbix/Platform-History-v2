@@ -74,7 +74,7 @@
 			$te.css("position", "relative");
 		}
 
-		Q.addStylesheet('{{Q}}/css/badge.css', function () {
+		Q.addStylesheet('{{Q}}/css/tools/badge.css', function () {
 			tool.refresh();
 		});
 

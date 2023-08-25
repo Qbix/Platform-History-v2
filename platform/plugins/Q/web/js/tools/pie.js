@@ -21,7 +21,7 @@
 			var state = tool.state;
 			options = options || {};
 
-			Q.addStylesheet('{{Q}}/css/pie.css');
+			Q.addStylesheet('{{Q}}/css/tools/pie.css');
 
 			// positioning tool box
 			tool.positionParent();
