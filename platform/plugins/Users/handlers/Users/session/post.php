@@ -21,7 +21,12 @@ function Users_session_post()
 
 	// Seems we just generated this signature.
 	// Set the session id to the newSessionId.
-	Q_Session::id($params['Q.Users.newSessionId']);
+	if (Q_Session::id() != $params['Q.Users.newSessionId']) {
+		session_commit();
+		Q_Session::id($params['Q.Users.newSessionId']);
+		session_start();
+	}
+
 
 	// Add a device, if any
 	if ($deviceId = Q::ifset($req, 'Q.Users.deviceId', null)) {
