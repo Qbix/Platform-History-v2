@@ -4351,42 +4351,59 @@
 				} else if (wallets) {
 					Q.Template.set("Users/connect/wallet", `<ul>
 						{{#each wallets}}
-							<li style="background-image: url({{img}})" data-url="{{url}}">{{name}}</li>
+							<li><a style="background-image: url({{img}})" href="{{url}}" {{#if data-url}}data-url="{{data-url}}"{{/if}}>{{name}}</a></li>
 						{{/each}}
 					</ul>`);
-					var urlParams = {
-						baseUrl: Q.info.baseUrl,
-						domain: Q.info.baseUrl.replace(/.+:\/\//, ''),
-						baseUrlEncoded: encodeURIComponent(Q.info.baseUrl)
-					};
-					Q.each(wallets, function (i, val) {
-						wallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
-						if (val.url) {
-							wallets[i]["url"] = val.url.interpolate(urlParams);
-						} else {
-							wallets[i]["url"] = i;
-						}
-					})
 					Q.Dialogs.push({
 						title: "Connect wallet",
 						className: "Users_connect_wallets",
-						template: {
-							name: "Users/connect/wallet",
-							fields: {
-								wallets
-							}
-						},
+						content: "",
 						stylesheet: '{{Users}}/css/Users/wallets.css',
-						onActivate: function (dialog) {
-							$("li", dialog).on(Q.Pointer.fastclick, function (e) {
-								e.preventDefault();
-								var url = this.getAttribute("data-url");
-								if (url === "walletconnect") {
-									_w3m();
-								} else {
-									location.href = url;
+						onActivate: function ($dialog) {
+							var url = location.href.split("#")[0];
+							var urlParams = {
+								baseUrl: url,
+								domain: url.replace(/.+:\/\//, ''),
+								baseUrlEncoded: encodeURIComponent(url)
+							};
+
+							var handOffParams = {
+								'Q.Users.appId': Q.Users.communityId,
+								'Q.Users.newSessionId': Q.sessionId(),
+								//'Q.Users.deviceId': localStorage.getItem("Q.Users.Device.deviceId") || Q.cookie("Q_udid"),
+							};
+							Q.req("Users/session", "signature", function (err, response) {
+								if (err) {
+									return;
 								}
-								return false;
+
+								handOffParams['Q.Users.signature'] = response.slots.signature;
+								Q.each(wallets, function (i, val) {
+									wallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
+									handOffParams['Q.Users.environment'] = i;
+									if (val.url) {
+										var href = val.url.interpolate(urlParams);
+										wallets[i]["url"] = href + '#' + new URLSearchParams(handOffParams).toString();
+									} else {
+										wallets[i]["data-url"] = i;
+									}
+								});
+
+								Q.Template.render("Users/connect/wallet", {wallets}, function (err, html) {
+									Q.replace($(".Q_dialog_content", $dialog)[0], html);
+
+									$("a[data-url]", $dialog).on(Q.Pointer.fastclick, function (e) {
+										e.preventDefault();
+										var url = this.getAttribute("data-url");
+										if (url === "walletconnect") {
+											_w3m();
+										}
+									});
+								});
+							}, {
+								fields: {
+									params: handOffParams
+								}
 							});
 						},
 						onClose: function () {
