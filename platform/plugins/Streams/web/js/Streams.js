@@ -1553,9 +1553,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				if (!Q.isArrayLike(o.addMyLabel) && typeof o.addMyLabel != 'boolean') {
 					o.addMyLabel = [o.addMyLabel];
 				}
-				o.showGiveMyLabelButton = true;
+				o.showGrantRelationshipsButtonButton = true;
 			} else {
-				o.showGiveMyLabelButton = false;
+				o.showGrantRelationshipsButtonButton = false;
 				o.addMyLabel = [];
 			}
 			
@@ -1671,7 +1671,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					userChooser: o.userChooser,
 					appUrl: o.appUrl,
 					showGrantRolesButton: o.showGrantRolesButton,
-					showGiveMyLabelButton: o.showGiveMyLabelButton,
+					showGrantRelationshipsButtonButton: o.showGrantRelationshipsButtonButton,
 					addLabel: o.addLabel,
 					addMyLabel: o.addMyLabel,
 					showGrantRolesDialog: function() {
