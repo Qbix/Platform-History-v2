@@ -163,6 +163,14 @@ body { position: relative; margin: 0; }
 .Q_w90{ width: 90%; }
 .Q_w100{ width: 100%; }
 
+.Q_noScrollbar::-webkit-scrollbar {
+	display: none;
+}
+.Q_noScrollbar {
+	-ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .Q_overflow {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
