@@ -4286,7 +4286,7 @@ abstract class Streams extends Base_Streams
 			}
 			$nonEmptyParts = array();
 			foreach ($parts as $k => $v) {
-				$v = trim($parts);
+				$v = trim($v);
 				if ($v) {
 					$nonEmptyParts[$k] = $v;
 				}
