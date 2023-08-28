@@ -116,19 +116,18 @@ class Q_Session
 	}
 
 	/**
-	 * The ID of the session that came with the request
-	 * in $_GET or $_COOKIE.
+	 * The ID of the session that came with the request in $_COOKIE.
+	 * @param {boolean} [$firstCheckGET]
 	 */
-	static function requestedId()
+	static function requestedId($firstCheckGET = false)
 	{
 		$name = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
-		return (!empty($_GET[$name])
+		return $firstCheckGET && !empty($_GET[$name])
 			? $_GET[$name]
 			: (!empty($_COOKIE[$name])
-				? $_COOKIE[$name]
-				: Q_Response::cookie($name)
-			)
-		);
+				? $_COOKIE[$name] // cookie that client sent
+				: Q_Response::cookie($name) // cookie that server set
+			);
 	}
 
 	/**
