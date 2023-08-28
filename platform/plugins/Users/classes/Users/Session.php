@@ -26,15 +26,17 @@ class Users_Session extends Base_Users_Session
 	/**
 	 * Saves a new Users_Session row with a copy of all the content from the current session.
 	 * Does not change the current session id.
-	 * @method copyToNewSesion
+	 * @method copyToNewSession
 	 * @static
 	 * @param {array} $sessionFields Pass an array with keys such as
 	 *   "platform", "appId", "version", "deviceId", "formFactor"
 	 * @param {string|integer} [$duration='year'] The key in the Q/session/durations config field
 	 *   or number of seconds. Pass 0 to expire at the end of browser session.
+	 * @param {string} [$sessionId] Pass an existing valid (signed) sessionId here
+	 *   otherwise this function will generate the ID.
 	 * @return {string} the id of the newly saved Users_Session row
 	 */
-	static function copyToNewSession($sessionFields, $duration = 'year')
+	static function copyToNewSession($sessionFields, $duration = 'year', $sessionId = null)
 	{
 		$id = Q_Session::id();
 		if (!$id) {
@@ -63,7 +65,7 @@ class Users_Session extends Base_Users_Session
 		}
 		$us2->content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
 		$us2->php = session_encode();
-		$us2->id = Q_Session::generateId();
+		$us2->id = $sessionId ? $sessionId : Q_Session::generateId();
 		$us2->duration = $seconds;
 		$us2->timeout = 0;
 		foreach ($sessionFields as $k => $v) {
