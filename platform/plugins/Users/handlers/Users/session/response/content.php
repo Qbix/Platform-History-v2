@@ -1,5 +1,8 @@
 <?php
-	
+
+/**
+ * Users/session page to be loaded in browsertab / AuthenticationSession
+ */
 function Users_session_response_content()
 {
 	$user = Users::loggedInUser();
@@ -17,9 +20,11 @@ function Users_session_response_content()
 	$scheme = Q::ifset($appInfo, 'scheme', null);
 	$paths = Q::ifset($appInfo, 'paths', false);
 	if (Q::startsWith($redirect, $baseUrl)) {
-		$path = substr($redirect, strlen($baseUrl)+1) ?: '/';
+		$path = substr($redirect, strlen($baseUrl)+1);
+		$path = $path ? $path : '/';
 	} else if (Q::startsWith($redirect, $scheme)) {
-		$path = substr($redirect, strlen($scheme)) ?: '/';
+		$path = substr($redirect, strlen($scheme));
+		$path = $path ? $path : '/';
 	} else {
 		throw new Users_Exception_Redirect(array('uri' => $redirect));
 	}
@@ -27,12 +32,7 @@ function Users_session_response_content()
 		throw new Users_Exception_Redirect(array('uri' => $req['redirectUri']));
 	}
 	
-	$duration_name = Q_Request::isMobile()
-		? 'mobile'
-		: (Q_Request::isTablet() 
-			? 'tablet' 
-			: 'session'
-		);
+	$duration_name = Q_Request::formFactor();
 	$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
 	$redirectFields = array();
 	$sessionFields = Q_Request::userAgentInfo();

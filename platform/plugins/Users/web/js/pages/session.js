@@ -2,7 +2,11 @@
 	
 	Q.page("Users/session", function () {
 	
-		document.location.href = Q.getObject("Q.Cordova.handoff.url");
+		var url = Q.getObject("Q.Cordova.handoff.url");
+		if (url) {
+			location.href = url;
+			return;
+		}
 	
 		_login();
 		$('#Users_login').plugin('Q/clickable')
