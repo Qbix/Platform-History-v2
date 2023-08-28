@@ -49,7 +49,20 @@
 			}
 		},
 		"web": {
-			"languages": {"en": 1}
+			"languages": {"en": 1},
+			"contentSecurityPolicy": {
+				"script": [
+					"https://maps.googleapis.com",
+					"https://www.google-analytics.com",
+					"https://www.gstatic.com",
+					"https://www.googletagmanager.com",
+					"https://www.google.com",
+					"https://s.ytimg.com",
+					"https://snap.licdn.com",
+					"https://calendly.com",
+					"https://cdn.ethers.io"
+				]
+			}
 		},
 		"bundle": {
 			"exclude": {
