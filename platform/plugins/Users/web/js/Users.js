@@ -4349,7 +4349,7 @@
 					_subscribeToEvents(ethereum);
 					_getProvider(ethereum);
 				} else if (wallets) {
-					Q.Template.set("Users/connect/wallet", `<ul>
+					Q.Template.set("Users/web3/connect/wallet", `<ul>
 						{{#each wallets}}
 							<li><a style="background-image: url({{img}})" href="{{url}}" {{#if data-url}}data-url="{{data-url}}"{{/if}}>{{name}}</a></li>
 						{{/each}}
@@ -4367,17 +4367,12 @@
 								baseUrlEncoded: encodeURIComponent(url)
 							};
 
-							var handOffParams = {
-								'Q.Users.appId': Q.Users.communityId,
-								'Q.Users.newSessionId': Q.sessionId(),
-								//'Q.Users.deviceId': localStorage.getItem("Q.Users.Device.deviceId") || Q.cookie("Q_udid"),
-							};
-							Q.req("Users/session", "signature", function (err, response) {
+							Q.req("Users/session", "handOff", function (err, response) {
 								if (err) {
 									return;
 								}
 
-								handOffParams['Q.Users.signature'] = response.slots.signature;
+								var handOffParams = response.slots.handOff;
 								Q.each(wallets, function (i, val) {
 									wallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
 									handOffParams['Q.Users.environment'] = i;
@@ -4388,8 +4383,7 @@
 										wallets[i]["data-url"] = i;
 									}
 								});
-
-								Q.Template.render("Users/connect/wallet", {wallets}, function (err, html) {
+								Q.Template.render("Users/web3/connect/wallet", {wallets}, function (err, html) {
 									Q.replace($(".Q_dialog_content", $dialog)[0], html);
 
 									$("a[data-url]", $dialog).on(Q.Pointer.fastclick, function (e) {
@@ -4400,14 +4394,14 @@
 										}
 									});
 								});
-							}, {
-								fields: {
-									params: handOffParams
-								}
+								$dialog.handOffTimeout = setTimeout(() => {
+									Q.Dialogs.close($dialog);
+								}, handOffParams['Q.timestamp']*1000 - Date.now());
 							});
 						},
-						onClose: function () {
+						onClose: function ($dialog) {
 							Q.handle(callback, null, [true]);
+							$dialog.handOffTimeout && clearTimeout($dialog.handOffTimeout);
 						}
 					});
 				} else if (Web3.ethereumProvider) {
