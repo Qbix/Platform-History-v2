@@ -923,9 +923,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
 			tool.scrollToBottom();
-			setTimeout(function () {
-				tool.scrollToBottom();
-			}, 500);
 		});
 
 		// submit button handler
