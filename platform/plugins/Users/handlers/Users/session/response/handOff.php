@@ -1,10 +1,10 @@
 <?php
 	
-function Users_web3_response_handOff () {
+function Users_session_response_handOff () {
 	Users::loggedInUser(true);
 	Q_Valid::nonce(true);
 
-	$duration = Q_Config::expect('Users', 'web3', 'capability', 'handoff');
+	$duration = Q_Config::expect('Users', 'web3', 'capability', 'handOff');
 	$result = array(
 		'Q.Users.appId' => Users::communityId(),
 		'Q.Users.newSessionId' => Q_Session::id(),

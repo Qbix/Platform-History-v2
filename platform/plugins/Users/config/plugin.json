@@ -459,6 +459,9 @@
 					"name": "Phantom",
 					"url": "https://phantom.app/ul/browse/{{baseUrlEncoded}}"
 				}
+			},
+			"capability": {
+				"handOff": 7200 /* seconds after handoff URL expired */
 			}
 		},
 		"people": {
