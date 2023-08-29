@@ -106,6 +106,47 @@ class Users_Session extends Base_Users_Session
 			$sessionFields, $duration, $payload['Q.Users.newSessionId']
 		);
 	}
+
+	/**
+	 * Get redirect URL from payload
+	 * @method getRedirectFromPayload
+	 * @static
+	 * @param {array} $payload the payload generated with
+	 *  Users_Session::generatePayload($source)
+	 * @param {array} [$source=$_REQUEST] expects it to contain
+	 *  the keys "redirect", "appId" and optionally "platform"
+	 * @return {string} the full redirect URL with query parameters
+	 */
+	static function getRedirectFromPayload($payload, $source = null)
+	{
+		if (!isset($source)) {
+			$source = $_REQUEST;
+		}
+		Q_Valid::requireFields(array('redirect', 'appId'), $source, true);
+		$req = Q::take($source, array(
+			'appId' => null, 
+			'platform' => 'qbix'
+		));
+		$redirect = $_REQUEST['redirect'];
+		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
+		$baseUrl = Q_Request::baseUrl();
+		$scheme = Q::ifset($appInfo, 'scheme', null);
+		$paths = Q::ifset($appInfo, 'paths', false);
+		if (Q::startsWith($redirect, $baseUrl)) {
+			$path = substr($redirect, strlen($baseUrl)+1);
+			$path = $path ? $path : '/';
+		} else if (Q::startsWith($redirect, $scheme)) {
+			$path = substr($redirect, strlen($scheme));
+			$path = $path ? $path : '/';
+		} else {
+			throw new Users_Exception_Redirect(array('uri' => $redirect));
+		}
+		if (is_array($paths) and !in_array($path, $paths)) {
+			throw new Users_Exception_Redirect(array('uri' => $redirect));
+		}
+		$qs = http_build_query($payload);
+		return Q_Uri::fixUrl("$redirect?$qs");
+	}
 	
 	/**
 	 * Saves a new Users_Session row with a copy of all the content from the current session.
