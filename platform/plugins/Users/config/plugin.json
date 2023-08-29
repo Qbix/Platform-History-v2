@@ -256,7 +256,8 @@
 			"delaySMS": 30000
 		},
 		"session": {
-			"redirectSecondsMax" : 300
+			"redirectSecondsMax" : 300,
+			"createSecondsMax": 0
 		},
 		"capability": {
 			"duration": 86400

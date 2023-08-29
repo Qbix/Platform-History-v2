@@ -22,10 +22,95 @@ class Users_Session extends Base_Users_Session
 	{
 		parent::setUp();
 	}
+
+	/**
+	 * Generates a valid session ID and the rest of a payload,
+	 * based on source parameters, signs and returns it
+	 * @method generatePayload
+	 * @static
+	 * @param {array} [$source=$_REQUEST] set this if you want to get the
+	 *  parameters from an array other than $_REQUEST. Should contain:
+	 * @param {string} 
+	 * @param {string} [$source.redirect] the URL to redirect to, the fields
+	 *  will be appended to the querystring of this URL.
+	 * @param {string} [$source.platform] defaults to "qbix",
+	 *  but can be "ios", "android", "web3", "facebook" etc.
+	 * @param {string} [$source.appId] the ID of the app on that platform,
+	 *  used to look up information from the config under "Users"/"apps"
+	 * @param {string} [$source.deviceId] Optionally pass the device ID,
+	 *  if notifications were enabled in this browser
+	 * @return {array} the payload, which can be pt into a redirect URL
+	 */
+	static function generatePayload($source = null)
+	{
+		if (!isset($source)) {
+			$source = $_REQUEST;
+		}
+		Q_Valid::requireFields(array('appId'), $source, true);
+		$req = Q::take($source, array(
+			'appId' => null, 
+			'deviceId' => null, 
+			'platform' => 'qbix'
+		));
+		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
+		
+		$payload = array();
+		$sessionFields = Q_Request::userAgentInfo();
+		$sessionFields['appId'] = $appInfo['appId'];
+		if (isset($req['deviceId'])) {
+			$sessionFields['deviceId'] = $req['deviceId'];
+			$payload['Q.Users.deviceId'] = $req['deviceId'];
+		}
+		$newSessionId = Q_Session::generateId();
+		$payload['Q.Users.newSessionId'] = $newSessionId;
+		$payload['Q.Users.appId'] = $appId;
+		$payload['Q.Users.platform'] = $platform;
+		$payload['Q.timestamp'] = time();
+		$payload = Q_Utils::sign($redirectFields, 'Q.Users.signature');
+		return $payload;
+	}
+
+	/**
+	 * Creates a session from a payload that was previously
+	 * generated with Q_Session::generatePayload(), copies
+	 * information from the current session into it, adds
+	 * ["Q"]["fromSessionId"] pointing to current session,
+	 * and saves it in the database.
+	 * @method createSessionFromPayload
+	 * @param {array} $payload contains the keys
+	 *  "Q.Users.platform", "Q.Users.appId", "Q.Users.newSessionId",
+	 *  and optionally "Q.Users.deviceId"
+	 */
+	static function createSessionFromPayload($payload)
+	{
+		if (!isset($source)) {
+			$source = $_REQUEST;
+		}
+		Q_Valid::requireFields(array('Q.Users.appId', 'Q.Users.newSessionId'), $payload, true);
+		$req = Q::take($payload, array(
+			'Q.Users.platform' => 'qbix',
+			'Q.Users.appId' => null, 
+			'Q.Users.newSessionId' => null, 
+			'Q.Users.deviceId' => null
+		));
+		list($appId, $appInfo) = Users::appInfo($req['Q.Users.platform'], $req['Q.Users.appId'], true);
+	
+		$sessionFields = Q_Request::userAgentInfo();
+		$sessionFields['appId'] = $appInfo['appId'];
+		if (isset($req['Q.Users.deviceId'])) {
+			$sessionFields['deviceId'] = $req['Q.Users.deviceId'];
+		}
+		$duration_name = Q_Request::formFactor();
+		$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
+		Users_Session::copyToNewSession(
+			$sessionFields, $duration, $payload['Q.Users.newSessionId']
+		);
+	}
 	
 	/**
 	 * Saves a new Users_Session row with a copy of all the content from the current session.
-	 * Does not change the current session id.
+	 * Also sets ["Q"]["fromSessionId"] in the new session's content.
+	 * Does not change the current session id or cookies.
 	 * @method copyToNewSession
 	 * @static
 	 * @param {array} $sessionFields Pass an array with keys such as
@@ -51,6 +136,7 @@ class Users_Session extends Base_Users_Session
 			$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
 			$_SESSION['Q'] = Q::take($sessionFields, $fields, $arr);
 		}
+		$_SESSION['Q']['fromSessionId'] = $id;
 
 		$us = new Users_Session();
 		$us->id = $id;
