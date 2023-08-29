@@ -1,10 +1,11 @@
 <?php
 	
-function Users_session_put()
+function Users_session_put($params, &$fieldsToClear)
 {
 	// Validate the inputs
 	$fields1 = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature');
-	$fields2 = array_merge($fields1, array('Q.Users.deviceId', 'Q.timestamp'));
+	$fields2 = array_merge($fields1, array('Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform'));
+	$fieldsToClear = $fields2;
 	$req = Q_Request::fromUnderscores($fields2);
 	Q_Valid::requireFields($fields1, $req, true);
 	$params = Q::take($req, $fields2);
@@ -21,7 +22,10 @@ function Users_session_put()
 
 	// Seems we just generated this signature.
 	// Set the session id to the newSessionId.
-	Q_Session::id($params['Q.Users.newSessionId']);
+	if (Q_Session::id() != $params['Q.Users.newSessionId']) {
+		Q_Session::destroy();
+		Q_Session::start(false, $params['Q.Users.newSessionId']);
+	}
 
 	// Add a device, if any
 	if ($deviceId = Q::ifset($req, 'Q.Users.deviceId', null)) {
