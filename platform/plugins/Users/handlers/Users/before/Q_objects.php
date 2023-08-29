@@ -103,4 +103,19 @@ function Users_before_Q_objects(&$params)
 			break;
 		}
 	}
+
+	if ($_GET['Q_Users_newSessionId']) {
+		try {
+			Q::event("Users/session/put", [], false, false, $fieldsToClear);
+		} catch (Exception $exception) {}
+		if (empty($fieldsToClear)) {
+			$fieldsToClear = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
+		}
+		$queryString = $_SERVER["QUERY_STRING"];
+		foreach ($fieldsToClear as $key) {
+			$queryString = preg_replace("/$key=?[^\&]*\&?/", "", $queryString);
+		}
+		$newUrl = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REDIRECT_URL]?".$queryString;
+		Q_Response::redirect($newUrl);
+	}
 }

@@ -43,30 +43,24 @@ class Users_Session extends Base_Users_Session
 	 */
 	static function generatePayload($source = null)
 	{
-		if (!isset($source)) {
-			$source = $_REQUEST;
-		}
-		Q_Valid::requireFields(array('appId'), $source, true);
+		$source = Q::ifset($source, $_REQUEST);
 		$req = Q::take($source, array(
-			'appId' => null, 
+			'appId' => Q::app(),
 			'deviceId' => null, 
 			'platform' => 'qbix'
 		));
 		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
 		
 		$payload = array();
-		$sessionFields = Q_Request::userAgentInfo();
-		$sessionFields['appId'] = $appInfo['appId'];
 		if (isset($req['deviceId'])) {
-			$sessionFields['deviceId'] = $req['deviceId'];
 			$payload['Q.Users.deviceId'] = $req['deviceId'];
 		}
 		$newSessionId = Q_Session::generateId();
 		$payload['Q.Users.newSessionId'] = $newSessionId;
 		$payload['Q.Users.appId'] = $appId;
-		$payload['Q.Users.platform'] = $platform;
-		$payload['Q.timestamp'] = time();
-		$payload = Q_Utils::sign($redirectFields, 'Q.Users.signature');
+		$payload['Q.Users.platform'] = $req['platform'];
+		$payload['Q.timestamp'] = time() + (int)Q_Config::get('Users', 'session', 'redirectSecondsMax', 300);
+		$payload = Q_Utils::sign($payload, 'Q.Users.signature');
 		return $payload;
 	}
 
@@ -83,14 +77,14 @@ class Users_Session extends Base_Users_Session
 	 */
 	static function createSessionFromPayload($payload)
 	{
-		if (!isset($source)) {
-			$source = $_REQUEST;
-		}
-		Q_Valid::requireFields(array('Q.Users.appId', 'Q.Users.newSessionId'), $payload, true);
+		$payload = Q::ifset($payload, $_REQUEST);
+		$fields = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
+		$payload = Q_Request::fromUnderscores($fields, $payload);
+		Q_Valid::requireFields(array('Q.Users.newSessionId'), $payload, true);
 		$req = Q::take($payload, array(
 			'Q.Users.platform' => 'qbix',
-			'Q.Users.appId' => null, 
-			'Q.Users.newSessionId' => null, 
+			'Q.Users.appId' => Q::app(),
+			'Q.Users.newSessionId' => null,
 			'Q.Users.deviceId' => null
 		));
 		list($appId, $appInfo) = Users::appInfo($req['Q.Users.platform'], $req['Q.Users.appId'], true);
@@ -119,28 +113,25 @@ class Users_Session extends Base_Users_Session
 	 */
 	static function getRedirectFromPayload($payload, $source = null)
 	{
-		if (!isset($source)) {
-			$source = $_REQUEST;
-		}
-		Q_Valid::requireFields(array('redirect', 'appId'), $source, true);
-		$req = Q::take($source, array(
-			'appId' => null, 
-			'platform' => 'qbix'
-		));
-		$redirect = $_REQUEST['redirect'];
-		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
+		$source = Q::ifset($source, $_REQUEST);
 		$baseUrl = Q_Request::baseUrl();
+		$req = Q::take($source, array(
+			'appId' => Q::app(),
+			'platform' => 'qbix',
+			'redirect' => $baseUrl
+		));
+		$redirect = $req['redirect'];
+		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
 		$scheme = Q::ifset($appInfo, 'scheme', null);
-		$paths = Q::ifset($appInfo, 'paths', false);
+		$paths = Q::ifset($appInfo, 'paths', null);
 		if (Q::startsWith($redirect, $baseUrl)) {
 			$path = substr($redirect, strlen($baseUrl)+1);
-			$path = $path ? $path : '/';
 		} else if (Q::startsWith($redirect, $scheme)) {
 			$path = substr($redirect, strlen($scheme));
-			$path = $path ? $path : '/';
 		} else {
 			throw new Users_Exception_Redirect(array('uri' => $redirect));
 		}
+		$path = $path ?: '/';
 		if (is_array($paths) and !in_array($path, $paths)) {
 			throw new Users_Exception_Redirect(array('uri' => $redirect));
 		}
