@@ -1,0 +1,12 @@
+{
+    "addToPhonebook": "Add To My Phone Contacts",
+	"addLabel": "New Relationship",
+	"prompt": "Give it a name",
+    "newLabel": "New Label",
+    "editLabel": "Edit Label",
+    "addBtn": "Add",
+    "editBtn": "Update",
+    "titlePlaceholder": "Title",
+    "selectOptionTitle_web2": "Native(Web2)",
+    "selectOptionTitle_web3": "Web3"
+}
