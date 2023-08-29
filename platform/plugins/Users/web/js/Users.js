@@ -391,15 +391,43 @@
 			|| Q.getObject([platform, '*', 'appIdForAuth'], Users.apps)
 			|| Q.getObject([platform, appId, 'appId'], Users.apps);
 	};
+
+	// opens a browsertab and authenticates using AuthenticationSession
+	Users.authenticate.qbix = function (platform, platformAppId, onSuccess, onCancel, options) {
+		Q.onReady.add(function () {
+			var browsertab = Q.getObject("cordova.plugins.browsertabs");
+			if (!browsertab) {
+				return console.warn('Users.authenticate: browsertab plugin not found!');
+			}
+			var appId = Q.cookie('Q_appId');
+			var redirect = Q.info.scheme;
+			var deviceId = Q.cookie('Q_udid');
+			if (!appId) {
+				return console.warn('Users.authenticate: appId undefined!');
+			}
+			var url = Q.action("Users/session", {
+				appId: appId,
+				redirect: redirect,
+				deviceId: deviceId,
+				handoff: 'yes'
+			});
+			browsertab.openUrl(url, {scheme: Q.info.scheme, authSession: true}, function(returnUrl) {
+				location.href = returnUrl;
+			}, function(err) {
+				console.error(err);
+			});
+		}, 'Users');
+	};
 	
+	// authenticates using platform, appId, udid provided in the WebView's initial querystring
 	Users.authenticate.ios = 
 	Users.authenticate.android = function (platform, platformAppId, onSuccess, onCancel, options) {
 		_doAuthenticate({
-			udid: Q.info.udid, // TODO: sign this with private key on cordova side
-			platform: platform
+			udid: Q.info.udid // TODO: sign this with private key on cordova side
 		}, platform, platformAppId, onSuccess, onCancel, options);
 	};
-	
+
+	// authenticates by opening facebook authentication flow
 	Users.authenticate.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = options || {};
 		var fields = {};
@@ -426,6 +454,7 @@
 		});
 	};
 	
+	// authenticates by opening a wallet and asking user to sign a payload
 	Users.authenticate.web3 = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = Q.extend(Users.authenticate.web3.options, options);
 		Users.Web3.connect(function () {
@@ -591,7 +620,7 @@
 		}, {
 			method: "post",
 			loadExtras: "session",
-			fields: Q.extend({ platform: platform }, fields)
+			fields: Q.extend({ platform: platform, appId: platformAppId }, fields)
 		});
 	}
 
@@ -3200,7 +3229,7 @@
 						location.href = href;
 					}
 				}, {
-					method: 'post',
+					method: 'put',
 					loadExtras: 'session',
 					fields: fields
 				});
@@ -3238,7 +3267,9 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		_setSessionFromQueryString(location.hash);
+
+		// 
+		_setSessionFromQueryString(location.search);
 
 		document.documentElement.removeClass(Users.loggedInUser ? 'Users_loggedOut' : 'Users_loggedIn');
 		document.documentElement.addClass(Users.loggedInUser ? 'Users_loggedIn' : 'Users_loggedOut');
@@ -3247,7 +3278,7 @@
 	// handoff action
 	Q.onHandleOpenUrl.set(function (url) {
 		window.cordova.plugins.browsertabs.close();
-		_setSessionFromQueryString(url.split('#')[1]);
+		_setSessionFromQueryString(url.split('?')[1]);
 	}, 'Users.handoff');
 
 	Q.beforeActivate.add(function (elem) {

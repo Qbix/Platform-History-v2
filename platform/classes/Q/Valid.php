@@ -364,6 +364,18 @@ class Q_Valid
 	}
 
 	/**
+	 * Alias for Q_Session::isValidId()
+	 * @method sessionId
+	 * @static
+	 * @param {string} $sessionId
+	 * @return {boolean}
+	 */
+	static function sessionId($sessionId)
+	{
+		return Q_Session::isValidId($sessionId);
+	}
+
+	/**
 	 * Validates a capability signed by our own server's secret key.
 	 * The capability must have "startTime", "endTime" in milliseconds since UNIX epoch,
 	 * and must also be signed with Q_Utils::sign() or equivalent implementation.

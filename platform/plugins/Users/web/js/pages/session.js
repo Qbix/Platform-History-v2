@@ -1,18 +1,14 @@
 (function () {
 	
 	Q.page("Users/session", function () {
-	
-		document.location.href = Q.getObject("Q.Cordova.handoff.url");
-	
+		var url = Q.getObject("Q.Cordova.handoff.url");
+		if (url) {
+			location.href = url;
+			return;
+		}
 		_login();
 		$('#Users_login').plugin('Q/clickable')
-		.on(Q.Pointer.click, function () {
-			_login();
-		});
-
-		return function () {
-			// code to execute before page starts unloading
-		};
+		.on(Q.Pointer.click, _login);
 	}, 'Users');
 	
 	function _login() {
