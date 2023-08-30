@@ -12658,8 +12658,8 @@ Q.Visual = Q.Pointer = {
 				}
 				Q.Pointer.touches = oe.touches || [];
 			}
-			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
-			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
+			// var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
+			var elem = e.target; // (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
 			if (!(elem instanceof Element)
 			|| !Q.Pointer.started) {
 				return; // the click may have been caused e.g. by Chrome on a button during form submit
