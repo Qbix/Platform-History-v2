@@ -2954,17 +2954,28 @@
 	 * @method add
 	 * @param {String} userId The user's id
 	 * @param {String} title The contact label's title
+     * @param {String} label The contact label. used when need to set custom
 	 * @param {Function} callback
 	 *    if there were errors, first parameter is an array of errors
 	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
 	 */
-	Label.add = function (userId, title, callback) {
+	Label.add = function (userId, title, label, callback) {
 		return _Users_manage('Users/label', 'post', {
 			userId: userId,
-			title: title
+			title: title,
+            label: label,
 		}, 'label', Label, Users.getLabels, callback);
 	};
 
+    Label.update = function (userId, label, title, icon, description, callback) {
+		return _Users_manage('Users/label', 'put', {
+			userId,
+            label,
+			title,
+            icon, 
+            description,
+		}, 'label', Label, Users.getLabels, callback);
+	};
 	/**
 	 * Remove a label.
 	 * @method remove
@@ -3009,7 +3020,8 @@
 		},
 		"Users/labels": {
 			js: "{{Users}}/js/tools/labels.js",
-			css: "{{Users}}/css/tools/labels.css"
+			css: "{{Users}}/css/tools/labels.css",
+            text: ["Users/labels"]
 		},
 		"Users/roles": {
 			js: "{{Users}}/js/tools/roles.js",
@@ -3213,7 +3225,7 @@
 		}
 		if (querystring.queryField('Q.Users.newSessionId')) {
 			var fieldNames = [
-				'Q.Users.appId', 'Q.Users.newSessionId',
+				'Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.platform',
 				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
 			];
 			var fields = querystring.queryField(fieldNames);
@@ -4380,48 +4392,78 @@
 					_subscribeToEvents(ethereum);
 					_getProvider(ethereum);
 				} else if (wallets) {
-					Q.Template.set("Users/connect/wallet", `<ul>
+					Q.Template.set("Users/web3/connect/wallet", `<ul>
 						{{#each wallets}}
-							<li style="background-image: url({{img}})" data-url="{{url}}">{{name}}</li>
+							<li><a style="background-image: url({{img}})" {{#if url}}href="{{url}}"{{/if}} {{#if data-url}}data-url="{{data-url}}"{{/if}}>{{name}}</a></li>
 						{{/each}}
 					</ul>`);
-					var urlParams = {
-						baseUrl: Q.info.baseUrl,
-						domain: Q.info.baseUrl.replace(/.+:\/\//, ''),
-						baseUrlEncoded: encodeURIComponent(Q.info.baseUrl)
-					};
-					Q.each(wallets, function (i, val) {
-						wallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
-						if (val.url) {
-							wallets[i]["url"] = val.url.interpolate(urlParams);
-						} else {
-							wallets[i]["url"] = i;
-						}
-					})
 					Q.Dialogs.push({
 						title: "Connect wallet",
 						className: "Users_connect_wallets",
-						template: {
-							name: "Users/connect/wallet",
-							fields: {
-								wallets
-							}
-						},
+						content: "",
 						stylesheet: '{{Users}}/css/Users/wallets.css',
-						onActivate: function (dialog) {
-							$("li", dialog).on(Q.Pointer.fastclick, function (e) {
-								e.preventDefault();
-								var url = this.getAttribute("data-url");
-								if (url === "walletconnect") {
-									_w3m();
-								} else {
-									location.href = url;
+						onActivate: function ($dialog) {
+							var url = new URL(location);
+							url = url.protocol + "://" + url.host + url.pathname;
+							var urlParams = {
+								baseUrl: url,
+								domain: url.replace(/.+:\/\//, ''),
+								baseUrlEncoded: encodeURIComponent(url)
+							};
+
+							Q.req("Users/session", ["payload"], function (err, response) {
+								if (err) {
+									return;
 								}
-								return false;
+
+								var payload = response.slots.payload.payload;
+								var cWallets = Q.extend({}, wallets);
+
+								Q.each(cWallets, function (i, val) {
+									cWallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
+									if (val.url) {
+										var href = val.url.interpolate(urlParams);
+										cWallets[i]["url"] = href + '?' + new URLSearchParams(Q.extend({}, payload, {'Q.Users.environment': i})).toString();
+									} else {
+										cWallets[i]["data-url"] = i;
+									}
+								});
+								Q.Template.render("Users/web3/connect/wallet", {wallets: cWallets}, function (err, html) {
+									Q.replace($(".Q_dialog_content", $dialog)[0], html);
+
+									$("a[href]", $dialog).on(Q.Pointer.start, function (e) {
+										Q.req("Users/session", ["result"], function (err, response) {
+											if (err) {
+												return;
+											}
+
+											debugger
+										}, {
+											method: "post",
+											fields: payload
+										});
+									});
+									$("a[data-url]", $dialog).on(Q.Pointer.fastclick, function (e) {
+										e.preventDefault();
+										var url = this.getAttribute("data-url");
+										if (url === "walletconnect") {
+											_w3m();
+										}
+									});
+								});
+								$dialog.handOffTimeout = setTimeout(() => {
+									Q.Dialogs.close($dialog);
+								}, payload['Q.timestamp']*1000 - Date.now());
+							}, {
+								fields: {
+									platform: "web3",
+									redirect: Q.info.baseUrl
+								}
 							});
 						},
-						onClose: function () {
+						onClose: function ($dialog) {
 							Q.handle(callback, null, [true]);
+							$dialog.handOffTimeout && clearTimeout($dialog.handOffTimeout);
 						}
 					});
 				} else if (Web3.ethereumProvider) {

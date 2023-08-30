@@ -2047,7 +2047,9 @@ abstract class Users extends Base_Users
 		}
 		$authorized = false;
 		$roles = Users::roles($userId);
+
 		foreach ($roles as $role) {
+
 			$prefixes = Q_Config::get('Users', 'communities', 'roles', $role, 'canManageLabels', array());
 			if ($prefixes) {
 				if (!$label) {

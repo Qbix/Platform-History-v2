@@ -12,6 +12,6 @@ function Users_session_response_payload()
 {
     $payload = Users_Session::generatePayload();
     $redirect = Users_Session::getRedirectFromPayload($payload);
-    Q_Response::setSlot('redirect', $redirect);
-    return $payload;
+
+    return compact("payload", "redirect");
 }
