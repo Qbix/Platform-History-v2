@@ -145,7 +145,7 @@ function Streams_after_Users_User_saveExecute($params)
 			continue;
 		}
 
-		// use try/catch to avoid crush of whole streams creation process because of error in some configs
+		// use try/catch to avoid crash of whole streams creation process because of error in some configs
 		try {
 			$s = array(
 				'publisherId' => $user->id,

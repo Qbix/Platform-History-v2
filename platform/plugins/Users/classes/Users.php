@@ -364,13 +364,6 @@ abstract class Users extends Base_Users
 			$appId = Q::app();
 		}
 		list($appId, $appInfo) = Users::appInfo($platform, $appId);
-		if (!isset($appInfo['appId'])) {
-			throw new Q_Exception_WrongType(array(
-				'field' => 'appId', 
-				'type' => "a valid $platform app id"
-			));
-		}
-		$appId = $appInfo['appId'];
 		
 		$authenticated = null;
 		$during = 'authenticate';
@@ -403,17 +396,18 @@ abstract class Users extends Base_Users
 		$authenticated = false;
 		$emailAddress = null;
 
+		$appIdForAuth = !empty($appInfo['appIdForAuth'])
+			? $appInfo['appIdForAuth']
+			: $appInfo['appId'];
+
 		// Try authenticating the user with the specified platform
-		$externalFrom = Users_ExternalFrom::authenticate($platform, $appId);
+		$externalFrom = Users_ExternalFrom::authenticate($platform, $appIdForAuth);
 		if (!$externalFrom) {
 			// no authentication happened
 			return $userWasLoggedIn ? $user : false;
 		}
 		$xid = $externalFrom->xid;
 		$authenticated = true;
-		$appIdForAuth = !empty($appInfo['appIdForAuth'])
-			? $appInfo['appIdForAuth']
-			: $appInfo['appId'];
 		$platformApp = $platform . '_' . $appIdForAuth;
 		if ($retrieved) {
 			$user_xid = $user->getXid($platformApp);

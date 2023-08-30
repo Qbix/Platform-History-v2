@@ -277,10 +277,6 @@
 				},
 				"participating": ["Streams/participating"]
 			},
-			"Media/calls": {
-				"create": false,
-				"edit": ["attributes"]
-			},
 			"Streams/invited": {
 				"create": false,
 				"subscriptions": {

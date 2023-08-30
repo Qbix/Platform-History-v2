@@ -19,7 +19,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 	 * It is your job to populate it with a user id and save it.
 	 * @method authenticate
 	 * @static
-	 * @param {string} [$appId=Q::app()] Can either be an interal appId or an Web3 appId.
+	 * @param {string} [$appId=Q::app()] Can either be an internal appId or an Web3 appId.
 	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
 	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
 	 * @return {Users_ExternalFrom_Web3|null}
@@ -28,20 +28,16 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 	static function authenticate($appId = null, $setCookie = true, $longLived = true)
 	{
 		list($appId, $appInfo) = Users::appInfo('web3', $appId);
-		$platformAppId = Q::ifset($appInfo, 'appId', 'all');
-		if (!$platformAppId) {
-			$platformAppId = Q::ifset($_REQUEST, 'chainId', 'all');
-		}
-		if ($platformAppId === 'all'
-		or substr($platformAppId, 0, 2) !== '0x') {
+		$appIdForAuth = !empty($appInfo['appIdForAuth'])
+			? $appInfo['appIdForAuth']
+			: $appInfo['appId'];
+		$platformAppId = Q::ifset($appInfo, 'appId', Q::ifset($_REQUEST, 'chainId', '(empty)'));
+		if (!$platformAppId or substr($platformAppId, 0, 2) !== '0x') {
 			throw new Q_Exception_BadValue(array(
 				'internal' => 'Users/apps config',
 				'problem' => "appId should be a string starting from 0x, not $platformAppId"
 			));
 		}
-		$appIdForAuth = !empty($appInfo['appIdForAuth'])
-			? $appInfo['appIdForAuth']
-			: $appInfo['appId'];
 		$xid = strtolower(Q::ifset($_REQUEST, 'xid', ''));
 		if (!is_callable('gmp_add') or !is_callable('gmp_mod')) {
 			throw new Q_Exception('Web3 authentication requires installing PHP gmp extensions');

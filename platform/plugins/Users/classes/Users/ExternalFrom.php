@@ -72,17 +72,17 @@ class Users_ExternalFrom extends Base_Users_ExternalFrom
 			$appId = Q::app();
 		}
 		list($appId, $appInfo) = Users::appInfo($platform, $appId);
-		if (!$appId) {
-			return null;
-		}
-		if (isset($result[$platform][$appId])) {
-			return $result[$platform][$appId];
+		$appIdForAuth = !empty($appInfo['appIdForAuth'])
+			? $appInfo['appIdForAuth']
+			: $appInfo['appId'];
+		if (isset($result[$platform][$appIdForAuth])) {
+			return $result[$platform][$appIdForAuth];
 		}
 		$className = "Users_ExternalFrom_".ucfirst(strtolower($platform));
 		if (!class_exists($className, true)) {
 			throw new Q_Exception_MissingClass(@compact('className'));
 		}
-		return call_user_func(array($className, 'authenticate'), $appId);
+		return $result[$platform][$appIdForAuth] = call_user_func(array($className, 'authenticate'), $appId);
 	}
 
 	/**
