@@ -1364,7 +1364,7 @@ class Q_Response
 		foreach ($scripts as $script) {
 			$src = '';
 			// $media = 'screen,print';
-			$type = 'text/css';
+			$type = 'text/javascript';
 			$hash = null;
 			extract($script, EXTR_IF_EXISTS);
 			$attributes = compact('type', 'src');
