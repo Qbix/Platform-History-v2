@@ -120,7 +120,7 @@ function (options, preview) {
 					Q.Dialogs.push({
 						title: text.advert.campaign.interests.Title,
 						className: 'Streams_dialog_interests',
-						stylesheet: '{{Q}}/css/expandable.css',
+						stylesheet: '{{Q}}/css/tools/expandable.css',
 						content: Q.Tool.setUpElement('div', 'Places/location', {
 							onChoose: function (coordinates) {
 								tool.$location.text(results, coordinates.latitude);
