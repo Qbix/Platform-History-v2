@@ -321,19 +321,12 @@ Q.Tool.define("Q/video", function (options) {
 
 	//tool.adapters.youtube = tool.adapters.vimeo = tool.adapters.mp4 = tool.adapters.webm = tool.adapters.general;
 
-	var p = Q.pipe(['stylesheet', 'text', 'scripts'], function (params, subjects) {
-		tool.text = params.text[1].video;
-		tool.refresh();
-	});
-
-	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/tools/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
-	Q.addScript("{{Q}}/js/videojs/lib.js", p.fill('scripts'));
-	Q.Text.get('Q/content', p.fill('text'));
-
 	$toolElement.on(Q.Pointer.fastclick, ".Q_video_close", function () {
 		tool.pause();
 		$toolElement.hide();
 	});
+
+	tool.refresh();
 },
 
 {
@@ -985,7 +978,7 @@ Q.Tool.define("Q/video", function (options) {
 								advTool.play();
 
 								Q.Template.render('Q/video/skip', {
-									text: tool.text,
+									text: tool.text.video,
 									timeOut: state.adsTimeOut
 								}, function (err, html) {
 									$(html).appendTo(advTool.element);
@@ -1003,7 +996,7 @@ Q.Tool.define("Q/video", function (options) {
 								var $timeToSkip = $(".Q_video_skip_time", $skipElement);
 								var timeToSkip = parseInt($timeToSkip.text());
 								if (!timeToSkip || timeToSkip <= 0) {
-									$(".Q_video_skip_after", $skipElement).html(tool.text.Skip);
+									$(".Q_video_skip_after", $skipElement).html(tool.text.video.Skip);
 									$(".Q_video_skip_time", $skipElement).html(">>");
 									$skipElement.on(Q.Pointer.fastclick, function () {
 										Q.handle(advTool.state.onEnded, advTool);
