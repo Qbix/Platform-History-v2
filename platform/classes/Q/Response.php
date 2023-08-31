@@ -303,7 +303,6 @@ class Q_Response
 			Q_Response::scripts(); // may call scriptsInline
 			Q_Response::scriptLines();
 			Q_Response::stylesheets(); // may call stylesheetsInline
-			Q_Response::styles();
 			Q_Html::hashesAggregate(false);
 			foreach (Q_Html::hashes() as $type => $arr) {
 				foreach ($arr as $hash => $info) {
