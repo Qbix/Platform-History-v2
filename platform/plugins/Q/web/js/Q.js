@@ -5898,12 +5898,12 @@ Q.Method = {
 	 * Assign this in place of any asynchronous method
 	 * that would have a callback and/or return a Promise.
 	 * Then call Q.Method.define() on the object containing these.
-	 * @property {boolean} shim
+	 * @property {boolean} stub
 	 */
-	shim: {},
+	stub: {},
 
 	/**
-	 * Call this on any object that contains Q.Method.shim
+	 * Call this on any object that contains Q.Method.stub
 	 * in place of some asynchronous methods. It will set up code to load
 	 * implementations of these methods on demand, from files found at URLs
 	 * of the form {{prefix}}/{{methodName}}.js . In those files, you can
@@ -5928,7 +5928,7 @@ Q.Method = {
 	define: function (o, prefix, closure) {
 
 		Q.each(o, function (k) {
-			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.shim) {
+			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.stub) {
 				return;
 			}
 			// method stub is still there
