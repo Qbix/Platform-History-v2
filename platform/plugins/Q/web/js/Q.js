@@ -15122,6 +15122,10 @@ Q.onInit.add(function () {
 	Q.Audio.speak.options.mute = !!Q.getObject("Audio.speak.mute", Q);
 }, 'Q');
 
+Q.Text.addFor(
+	['Q.Tool.define', 'Q.Template.set'],
+	'Q/', ["Q/content"]
+);
 Q.Tool.define({
 	"Q/inplace": "{{Q}}/js/tools/inplace.js",
 	"Q/tabs": {
@@ -15148,8 +15152,14 @@ Q.Tool.define({
 	"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
 	"Q/parallax": "{{Q}}/js/tools/parallax.js",
 	"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
-	"Q/audio": "{{Q}}/js/tools/audio.js",
-	"Q/video": "{{Q}}/js/tools/video.js",
+	"Q/audio": {
+		js: "{{Q}}/js/tools/audio.js",
+		css: "{{Q}}/css/tools/audio.css"
+	},
+	"Q/video": {
+		js: ["{{Q}}/js/videojs/lib.js", "{{Q}}/js/tools/video.js"],
+		css: ["{{Q}}/css/videojs.css", "{{Q}}/css/tools/video.css"]
+	},
 	"Q/pdf": "{{Q}}/js/tools/pdf.js",
 	"Q/image": "{{Q}}/js/tools/image.js",
 	"Q/clip": "{{Q}}/js/tools/clip.js",

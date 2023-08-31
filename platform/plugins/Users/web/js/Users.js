@@ -224,7 +224,7 @@
 	Users.init.facebook.options = {
 		frictionlessRequests: true
 	};
-	
+
 	/**
 	 * Initialize Web3
 	 * Ensures that this is done only once
@@ -234,6 +234,10 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.init.web3 = function (callback, options) {
+		if (Q.getObject("init.web3.complete", Users)) {
+			callback && callback();
+		}
+
 		if (!Q.getObject('web3', Users.apps)) {
 			return;
 		}
@@ -245,10 +249,11 @@
 			//'https://unpkg.com/@walletconnect/ethereum-provider'
 			'{{Users}}/js/web3/ethereumProvider.2.9.1.min.js'
 		];
+
 		Q.addScript(scriptsToLoad, function () {
 			Users.init.web3.complete = true;
 
-			if (Users.Web3.ethereumProvider) {
+			if (Users.Web3.ethereumProvider || Q.getObject("ethereum.request", window)) {
 				callback && callback();
 			} else {
 				var projectId = Q.getObject(['web3', Users.communityId, 'providers', 'walletconnect', 'projectId'], Q.Users.apps);
@@ -277,8 +282,6 @@
 					callback && callback();
 				});
 			}
-
-
 		}, options);
 	};
 
@@ -4397,6 +4400,7 @@
 							<li><a style="background-image: url({{img}})" {{#if url}}href="{{url}}"{{/if}} {{#if data-url}}data-url="{{data-url}}"{{/if}}>{{name}}</a></li>
 						{{/each}}
 					</ul>`);
+					var handOffTimeout;
 					Q.Dialogs.push({
 						title: "Connect wallet",
 						className: "Users_connect_wallets",
@@ -4432,13 +4436,7 @@
 									Q.replace($(".Q_dialog_content", $dialog)[0], html);
 
 									$("a[href]", $dialog).on(Q.Pointer.start, function (e) {
-										Q.req("Users/session", ["result"], function (err, response) {
-											if (err) {
-												return;
-											}
-
-											debugger
-										}, {
+										Q.req("Users/session", ["result"], function (err, response) {}, {
 											method: "post",
 											fields: payload
 										});
@@ -4451,7 +4449,7 @@
 										}
 									});
 								});
-								$dialog.handOffTimeout = setTimeout(() => {
+								handOffTimeout = setTimeout(() => {
 									Q.Dialogs.close($dialog);
 								}, payload['Q.timestamp']*1000 - Date.now());
 							}, {
@@ -4463,7 +4461,7 @@
 						},
 						onClose: function ($dialog) {
 							Q.handle(callback, null, [true]);
-							$dialog.handOffTimeout && clearTimeout($dialog.handOffTimeout);
+							handOffTimeout && clearTimeout(handOffTimeout);
 						}
 					});
 				} else if (Web3.ethereumProvider) {
