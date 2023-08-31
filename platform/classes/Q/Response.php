@@ -715,17 +715,17 @@ class Q_Response
 	static function contentSecurityPolicy()
 	{
 		$csp = self::contentSecurityPolicyArray();
-		$content = '';
+		$content = array();
 		foreach ($csp as $type => $values) {
 			$selector = ($type === 'script' || $type === 'style')
 				? "$type-src-elem"
 				: "$type-src";
-			$content .= "$selector " . implode(' ', $values) . '; ';
+			if (empty($values)) {
+				continue;
+			}
+			$content[] =  "$selector " . implode(' ', $values);
 		}
-		$baseUrl = Q_Request::baseUrl();
-		$parts = parse_url($baseUrl);
-		$content = Q::interpolate($content, $parts);
-		return $content;
+		return Q::interpolate(implode('; ', $content), parse_url(Q_Request::baseUrl()));
 	}
 
 	/**
