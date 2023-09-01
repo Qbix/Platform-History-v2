@@ -158,11 +158,6 @@
         "ConnectWallet": "Connect Wallet",
         "AfterWalletConnectedPleaseRefresh": "After wallet connected please refresh this page to recognize the wallet"
     },
-    "labels": {
-        "addToPhonebook": "Add To My Phone Contacts",
-        "addLabel": "New Relationship",
-        "prompt": "Give it a name"
-    },
     "people": {
         "People": "People"
     },
