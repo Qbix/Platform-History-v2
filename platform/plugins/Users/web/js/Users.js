@@ -3021,7 +3021,7 @@
 		"Users/labels": {
 			js: "{{Users}}/js/tools/labels.js",
 			css: "{{Users}}/css/tools/labels.css",
-            text: ["Users/labels"]
+            text: ["Users/content","Users/labels"]
 		},
 		"Users/roles": {
 			js: "{{Users}}/js/tools/roles.js",
@@ -3046,7 +3046,8 @@
 		},
 		"Users/web3/community": {
 			js: "{{Users}}/js/tools/web3/community.js",
-			css: "{{Users}}/css/tools/web3/community.css"
+			css: "{{Users}}/css/tools/web3/community.css",
+            text: ["Users/content", "Users/web3/community"]
 		}
 	});
 

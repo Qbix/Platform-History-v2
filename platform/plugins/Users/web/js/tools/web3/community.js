@@ -1,34 +1,6 @@
-
 (function (Q, $, window, undefined) {
 
-if (Q.isEmpty(Q["isAddress"])) {
-    Q.isAddress = function _Q_isAddress(address) {
-        // https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
-        if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-            // check if it has the basic requirements of an address
-            return false;
-        } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
-            // If it's all small caps or all all caps, return true
-            return true;
-        } else {
-            // Otherwise check each case
-//            address = address.replace('0x','');
-//            var addressHash = Web3.utils.sha3(address.toLowerCase());
-//            for (var i = 0; i < 40; i++ ) {
-//                // the nth letter should be uppercase if the nth digit of casemap is 1
-//                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
-//                    return false;
-//                }
-//            }
-            return true;
-        }
-        
-    }
-}
-
 var Users = Q.Users;
-
-
 
 /**
  * Users Tools
@@ -59,8 +31,9 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 },
 
 {
-	chains: null,
-	defaultChain: null,
+	chains: null, // filled on \Users\web3\community\tool.php
+    
+	//defaultChain: null,
 	communityId: null,
 	contractParams: {
 	    hook: null,
@@ -69,12 +42,10 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 	    symbol: null,
 	    contractURI: null,
 	}
-	
 },
-
 {
 	/**
-	 * Refresh the avatar's display
+	 * Refresh the list
 	 * @method refresh
 	 */
 	refresh: function () {
@@ -82,254 +53,391 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 		var state = this.state;
 		var $toolElement = $(tool.element);
 		
-		Q.Template.render('Users/web3/community/composer', {
+        Q.Template.render('Users/web3/community/list', {
 		    chains: state.chains,
-		    defaultChain: state.defaultChain,
-		    contractParams: state.contractParams
+            
+		    //defaultChain: state.defaultChain,
+		    //contractParams: state.contractParams
 		}, (err, html) => {
 		    
 		    Q.replace(tool.element, html);
-		
-		    $("button[name=produce]", $toolElement).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
-				var $this = $(this);
-
-				var $fields = {
-					selectedChainId: $toolElement.find('select[name=chain]'),
-					hook: $toolElement.find('input[name=hook]'),
-                    invitedHook: $toolElement.find('input[name=invitedHook]'),
-					name: $toolElement.find('input[name=name]'),
-					symbol: $toolElement.find('input[name=symbol]'),
-					contractURI: $toolElement.find('input[name=contractURI]')
-				}
-				var userParams = {
-					selectedChainId: $fields.selectedChainId.val(),
-					hook: state.contractParams.hook || $fields.hook.val(),
-                    invitedHook: state.contractParams.invitedHook || $fields.invitedHook.val(),
-					name: state.contractParams.name || $fields.name.val(),
-					symbol: state.contractParams.symbol || $fields.symbol.val(),
-					contractURI: state.contractParams.contractURI || $fields.contractURI.val()
-				};
+            
+            $("button[name=produce]", $toolElement).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
                 
-                var factoryAddress = Q.Users.Web3.contracts['Users/templates/R1/Community/factory'][userParams.selectedChainId];
-				if (typeof factoryAddress === 'undefined') {
-					throw new Q.Error('Cant find factoryAddress');
-				}
+                var selectedChainId = $(this).data('chainid');
+                var runImmediately;
+                // if all params defined just immediately send transaction with loading animation
+                if (!Q.isEmpty(state.contractParams.hook) &&
+                    !Q.isEmpty(state.contractParams.invitedHook) &&
+                    !Q.isEmpty(state.contractParams.name) &&
+                    !Q.isEmpty(state.contractParams.symbol) &&
+                    !Q.isEmpty(state.contractParams.contractURI)&&
+                    !Q.isEmpty(selectedChainId)
+                ){
+                    runImmediately = true;
+                } else {
+                    // overwise works as was before: popup, fields and pressing produce button
+                    runImmediately = false;
+                }
                 
-				// simple validation.
-				// if error send notice and add class Q_error to input field
-				var validated = true;
-				if (Q.isEmpty(userParams.hook) || !Q.isAddress(userParams.hook)) {
-					validated = false;
+                ///-----
+                if (runImmediately) {
+                    var factoryAddress = tool.getFactoryAddress(selectedChainId);
+                    if (typeof factoryAddress === 'undefined') {
+                        Q.alert(tool.text.err.cantFindFactoryAddress);
+                    } else {
+                        // here we didn't validate params and expect that dev know what he put in inititialize
+                        tool.proceedAndSend(
+                            {
+                                selectedChainId: selectedChainId,
+                                hook: state.contractParams.hook,
+                                invitedHook: state.contractParams.invitedHook,
+                                name: state.contractParams.name,
+                                symbol: state.contractParams.symbol,
+                                contractURI: state.contractParams.contractURI
+                            },
+                            factoryAddress,
+                            function(){
+                                $toolElement.addClass("Q_working");
+                            },
+                            function(err){
+                                $toolElement.removeClass("Q_working");
+                                if (err) {
+                                    Q.alert(err);
+                                }
+                            }
+                        );    
+                    }
+                } else {
+                    Q.Dialogs.push({
+                        title: tool.text.title.createCommunity,
+                        className: "Users_web3_community_composer",
+                        template: {
+                            name: "Users/web3/community/composer",
+                            fields: {
+                                chains: state.chains,
+                                //selectedChainId: selectedChainId,
+                                contractParams: state.contractParams            
+                            }
+                        },
+                        onActivate: function ($dialog) {
+                            $("button[name=sendtx]", $dialog).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
+                                var userParams, validated;
+                                [validated, userParams] = tool.validateOnForm($dialog);
+                                var factoryAddress = tool.getFactoryAddress(userParams.selectedChainId);
+                                if (typeof factoryAddress === 'undefined') {
+                                    validated = false;
+                                    Q.alert(tool.text.err.cantFindFactoryAddress);
+                                }
+                                if (validated) {
+                                    tool.proceedAndSend(
+                                        userParams,
+                                        factoryAddress,
+                                        function(){
+                                            $dialog.addClass("Q_working");
+                                        },
+                                        function(err){
+                                            $dialog.removeClass("Q_working");
+                                            if (err) {
+                                                Q.alert(err);
+                                            }
+                                            Q.Dialogs.pop();
+                                        }
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+	},
+    getFactoryAddress: function(selectedChainId){
+        return Q.Users.Web3.contracts['Users/templates/R1/Community/factory'][selectedChainId];
+    },
+    /**
+     * 
+     * @param {type} $elContainer
+     * @return {Array} [validated, userParams]
+     */
+    validateOnForm: function($elContainer){
+        var tool = this;
+		var state = this.state;
+        
+        var $fields = {
+            selectedChainId: $elContainer.find('select[name=chain]'),
+            hook: $elContainer.find('input[name=hook]'),
+            invitedHook: $elContainer.find('input[name=invitedHook]'),
+            name: $elContainer.find('input[name=name]'),
+            symbol: $elContainer.find('input[name=symbol]'),
+            contractURI: $elContainer.find('input[name=contractURI]')
+        }
+        var userParams = {
+            selectedChainId: $fields.selectedChainId.val(),
+            hook: state.contractParams.hook || $fields.hook.val(),
+            invitedHook: state.contractParams.invitedHook || $fields.invitedHook.val(),
+            name: state.contractParams.name || $fields.name.val(),
+            symbol: state.contractParams.symbol || $fields.symbol.val(),
+            contractURI: state.contractParams.contractURI || $fields.contractURI.val()
+        };
 
-					$("<span/>").addClass('error').html('<b>Hook</b> invalid').insertBefore($fields.hook);
-					$fields.hook.addClass('Q_error').addClass('fieldErrorBox');
-				} else {
-					$fields.hook.removeClass('Q_error').removeClass('fieldErrorBox');
-				}
-                
-                if (Q.isEmpty(userParams.invitedHook) || !Q.isAddress(userParams.invitedHook)) {
-					validated = false;
+        // simple validation.
+        // if error send notice and add class Q_error to input field
+        var validated = true;
+        
+        if (Q.isEmpty(userParams.hook) || !ethers.utils.isAddress(userParams.hook)) {
+            validated = false;
 
-					$("<span/>").addClass('error').html('<b>Hook</b> invalid').insertBefore($fields.hook);
-					$fields.hook.addClass('Q_error').addClass('fieldErrorBox');
-				} else {
-					$fields.hook.removeClass('Q_error').removeClass('fieldErrorBox');
-				}
-				
-				if (Q.isEmpty(userParams.name)) {
-					validated = false;
+            $("<span/>").addClass('error').html(tool.text.form.err.hook).insertBefore($fields.hook);
+            $fields.hook.addClass('Q_error').addClass('fieldErrorBox');
+        } else {
+            $fields.hook.removeClass('Q_error').removeClass('fieldErrorBox');
+        }
 
-					$("<span/>").addClass('error').html('<b>Name</b> invalid').insertBefore($fields.name);
-					$fields.name.addClass('Q_error').addClass('fieldErrorBox');
-				} else {
-					$fields.name.removeClass('Q_error').removeClass('fieldErrorBox');
-				}
-				
-				if (Q.isEmpty(userParams.symbol)) {
-					validated = false;
+        if (Q.isEmpty(userParams.invitedHook) || !ethers.utils.isAddress(userParams.invitedHook)) {
+            validated = false;
 
-					$("<span/>").addClass('error').html('<b>Symbol</b> invalid').insertBefore($fields.symbol);
-					$fields.symbol.addClass('Q_error').addClass('fieldErrorBox');
-				} else {
-					$fields.symbol.removeClass('Q_error').removeClass('fieldErrorBox');
-				}
-				if (Q.isEmpty(userParams.contractURI)) {
-					validated = false;
-					
-					$("<span/>").addClass('error').html('<b>contractURI</b> invalid').insertBefore($fields.contractURI);
+            $("<span/>").addClass('error').html(tool.text.form.err.invitedHook).insertBefore($fields.hook);
+            $fields.hook.addClass('Q_error').addClass('fieldErrorBox');
+        } else {
+            $fields.hook.removeClass('Q_error').removeClass('fieldErrorBox');
+        }
 
-					$fields.contractURI.addClass('Q_error').addClass('fieldErrorBox');
-				} else {
-					$fields.contractURI.removeClass('Q_error').removeClass('fieldErrorBox');
-					$fields.contractURI.find('.error');
-				}
+        if (Q.isEmpty(userParams.name)) {
+            validated = false;
 
-				if (validated) {
+            $("<span/>").addClass('error').html(tool.text.form.err.name).insertBefore($fields.name);
+            $fields.name.addClass('Q_error').addClass('fieldErrorBox');
+        } else {
+            $fields.name.removeClass('Q_error').removeClass('fieldErrorBox');
+        }
 
-					var txData = {};
-					$this.addClass("Q_working");
-					Q.Users.Web3.getFactory(
-						'Users/templates/R1/Community/factory',
-						{
-						chainId: userParams.selectedChainId,
-						//contractAddress: factoryAddress,
-						readOnly: false
-						}
-					).then(function (communityFactory) {
-						return communityFactory.produce(
-							userParams.hook,
-                            userParams.invitedHook,
-							userParams.name,
-							userParams.symbol,
-							userParams.contractURI
-						);
-					}).then(function (tx) {
+        if (Q.isEmpty(userParams.symbol)) {
+            validated = false;
 
-						var produceParams = { ...userParams };
-						delete produceParams['selectedChainId'];
+            $("<span/>").addClass('error').html(tool.text.form.err.symbol).insertBefore($fields.symbol);
+            $fields.symbol.addClass('Q_error').addClass('fieldErrorBox');
+        } else {
+            $fields.symbol.removeClass('Q_error').removeClass('fieldErrorBox');
+        }
+        if (Q.isEmpty(userParams.contractURI)) {
+            validated = false;
 
+            $("<span/>").addClass('error').html(tool.text.form.err.contracturi).insertBefore($fields.contractURI);
 
-						Q.req("Users/transaction", ["result"], function (err, response) {
+            $fields.contractURI.addClass('Q_error').addClass('fieldErrorBox');
+        } else {
+            $fields.contractURI.removeClass('Q_error').removeClass('fieldErrorBox');
+            $fields.contractURI.find('.error');
+        }
+        
+        return [validated, userParams];
+    },
+    /**
+     * 
+     * @param {type} userParams data to send
+     * @param {function} onProcessWorking, called when need to disable user interface
+     * @param {type} onProcessNotWorking, called when need to enable user interface after onProcessWorking
+     */
+    proceedAndSend: function(userParams, factoryAddress, onProcessWorking = function(){}, onProcessNotWorking = function(){}) {
+        var tool = this;
+		var state = this.state;
+		//var $toolElement = $(tool.element);
 
-							var fem = Q.firstErrorMessage(err, response);
-							if (fem) {return console.warn(fem);}
+        var txData = {};
+        Q.handle(onProcessWorking);
+        Q.Users.Web3.getFactory(
+            'Users/templates/R1/Community/factory',
+            {
+            chainId: userParams.selectedChainId,
+            //contractAddress: factoryAddress,
+            readOnly: false
+            }
+        ).then(function (communityFactory) {
+            return communityFactory.produce(
+                userParams.hook,
+                userParams.invitedHook,
+                userParams.name,
+                userParams.symbol,
+                userParams.contractURI
+            );
+        }).then(function (tx) {
 
-						}, {
-							method: "post",
-							fields: {
-								communityId: state.communityId,
-								chainId: tx.chainId == 0 ? userParams.selectedChainId : tx.chainId,
-								transactionId: tx.hash,
-								fromAddress: tx.from,
-								contract: factoryAddress,
-								methodName: "produce",
-								params: JSON.stringify(produceParams)
-							}
-						});
-						txData["tx"] = tx;
-
-						return tx.wait();
-					}).then(function (receipt) {
-
-						// additionally try to get instace address when transaction will be mine. 
-						// it can be processing by cron job
-						if (receipt.status == 1) {
-							let event = receipt.events.find(event => event.event === 'InstanceCreated');
-							let instance;
-							[instance, /*instancesCount*/] = event.args;
-							Q.req("Users/transaction", ["result"], function (err, response) {
-
-								var fem = Q.firstErrorMessage(err, response);
-								if (fem) {return console.warn(fem);}
-
-							}, {
-								method: "put",
-								fields: {
-									communityId: state.communityId,
-									chainId: txData["tx"].chainId == 0 ? userParams.selectedChainId : txData["tx"].chainId,
-									transactionId: txData["tx"].hash,
-									status: "mined",
-									contract: instance,
-									result: JSON.stringify(receipt)
-								}
-							});
-
-							Q.Dialogs.pop();
-						} else {
-							$this.removeClass("Q_working");
-							Q.alert("Transaction failed");
-						}
+            var produceParams = { ...userParams };
+            delete produceParams['selectedChainId'];
 
 
-					}).catch(function (err) {
-						var msg = Q.getObject("message", err);
+            Q.req("Users/transaction", ["result"], function (err, response) {
 
-						if (msg) {
-						Q.alert(msg);
-						} else {
-						Q.alert("Something went wrong");
-						}
+                var fem = Q.firstErrorMessage(err, response);
+                if (fem) {return console.warn(fem);}
 
-						$this.removeClass("Q_working");
-					});
-				}
+            }, {
+                method: "post",
+                fields: {
+                    communityId: state.communityId,
+                    chainId: tx.chainId == 0 ? userParams.selectedChainId : tx.chainId,
+                    transactionId: tx.hash,
+                    fromAddress: tx.from,
+                    contract: factoryAddress,
+                    methodName: "produce",
+                    params: JSON.stringify(produceParams)
+                }
+            });
+            txData["tx"] = tx;
 
-		    });
-		});
-		
-	}
+            return tx.wait();
+        }).then(function (receipt) {
+
+            // additionally try to get instace address when transaction will be mine. 
+            // it can be processing by cron job
+            if (receipt.status == 1) {
+                let event = receipt.events.find(event => event.event === 'InstanceCreated');
+                let instance;
+                [instance, /*instancesCount*/] = event.args;
+
+                var txChaindId = txData["tx"].chainId == 0 ? userParams.selectedChainId : txData["tx"].chainId;
+                Q.req("Users/transaction", ["result"], function (err, response) {
+
+                    var fem = Q.firstErrorMessage(err, response);
+                    if (fem) {return console.warn(fem);}
+
+                }, {
+                    method: "put",
+                    fields: {
+                        communityId: state.communityId,
+                        chainId: txChaindId,
+                        transactionId: txData["tx"].hash,
+                        status: "mined",
+                        contract: instance,
+                        result: JSON.stringify(receipt)
+                    }
+                });
+
+                //state.chains
+                //update xid in state.chains
+
+                state.chains.forEach(function(item, index) {
+                    if (item["chainId"] === txChaindId) {
+                        item["xid"] = instance;
+                    }
+
+                });
+
+                tool.refresh();
+                Q.handle(onProcessNotWorking);
+            } else {
+                Q.handle(onProcessNotWorking, null, [tool.text.err.transactionFailed]);
+            }
+
+
+        }).catch(function (err) {
+            var msg = Q.getObject("message", err);
+
+            Q.handle(onProcessNotWorking, null, [msg ? msg : tool.text.err.smthWentWrong]);
+            
+        });
+    }
 }
+);
 
+Q.Template.set('Users/web3/community/list',
+`
+<table class="table">
+    <tr>
+        <th>{{list.table.td0}}</th>
+        <th>{{list.table.td1}}</th>
+        <th>{{list.table.td2}}</th>
+    </tr>
+{{#each chains}}
+    <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.chainId}}</td>
+        <td>
+        {{#if this.xid}}
+            {{this.xid}}
+        {{else}}
+            <button class="Q_button" name="produce" data-chainId="{{this.chainId}}">{{../list.btnTitle}}</button>
+        {{/if}}
+        </td>
+    </tr>
+{{/each}}
+</table>
+`,
+    {text: ["Users/content", "Users/web3/community"]}
 );
 
 Q.Template.set('Users/web3/community/composer',
-	`<div class="form">
-		<div class="form-group row">
-		    <label class="col-sm-3 col-form-label">Chain:</label>
-		    <div class="col-sm-9">
-        		<select class="form-control" name="chain">
-        		{{#each chains}}
-        		    <option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>
-        		{{/each}}
-        		</select>
-		    </div>
-		</div>
-	{{#if contractParams.hook}}
-	{{else}}
-		<div class="form-group row">
-		    <label class="col-sm-3 col-form-label">Hook</label>
-		    <div class="col-sm-9">
-			<input type="text" class="form-control" name="hook" placeholder="0x0000000000000000000000000000000000000000">
-			<small>hook address of contract implemented ICommunityHook interface. Can be address(0)</small>
-		    </div>
-		</div>
-	{{/if}}
+	`
+    <div class="form">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{form.labels.chain}}</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="chain">
+                {{#each chains}}
+                    <option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+                </select>
+            </div>
+        </div>
+    {{#if contractParams.hook}}
+    {{else}}
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{form.labels.hook}}</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" name="hook" placeholder="{{form.placeholders.hook}}">
+            <small>{{form.small.hook}}</small>
+            </div>
+        </div>
+    {{/if}}
     {{#if contractParams.invitedHook}}
-	{{else}}
-		<div class="form-group row">
-		    <label class="col-sm-3 col-form-label">invitedHook</label>
-		    <div class="col-sm-9">
-			<input type="text" class="form-control" name="invitedHook" placeholder="0x0000000000000000000000000000000000000000">
-			<small>invitedHook address of contract implemented ICommunityInvite interface. Can be address(0)</small>
-		    </div>
-		</div>
-	{{/if}}
-	{{#if contractParams.name}}
-	{{else}}
-		<div class="form-group row">
-		    <label class="col-sm-3 col-form-label">Name</label>
-		    <div class="col-sm-9">
-			<input type="text" class="form-control" name="name" placeholder="erc721 name">
-			<small>erc721 name</small>
-		    </div>
-		</div>
-	{{/if}}
-	{{#if contractParams.symbol}}
-	{{else}}
-		<div class="form-group row">
-		    <label class="col-sm-3 col-form-label">Symbol</label>
-		    <div class="col-sm-9">
-			<input type="text" class="form-control" name="symbol" placeholder="erc721 symbol">
-			<small>erc721 symbol</small>
-		    </div>
-		</div>
-	{{/if}}
-	{{#if contractParams.contractURI}}
-	{{else}}
-		<div class="form-group row">
-		    <label class="col-sm-3 col-form-label">contractURI</label>
-		    <div class="col-sm-9">
-			<input type="text" class="form-control" name="contractURI" placeholder="contractURI">
-			<small>contract URI</small>
-		    </div>
-		</div>
-	{{/if}}
-		<div class="form-group row">
-		    <div class="col-sm-10">
-			<button type="submit" name="produce" class="Q_button">Produce</button>
-		    </div>
-		</div>
-	</div>`
+    {{else}}
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{form.labels.invitedHook}}</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" name="invitedHook" placeholder="{{form.placeholders.invitedHook}}">
+            <small>{{form.small.invitedHook}}</small>
+            </div>
+        </div>
+    {{/if}}
+    {{#if contractParams.name}}
+    {{else}}
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{form.labels.name}}</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" name="name" placeholder="{{form.placeholders.name}}">
+            <small>{{form.small.name}}</small>
+            </div>
+        </div>
+    {{/if}}
+    {{#if contractParams.symbol}}
+    {{else}}
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{form.labels.symbol}}</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" name="symbol" placeholder="{{form.placeholders.symbol}}">
+            <small>{{form.small.symbol}}</small>
+            </div>
+        </div>
+    {{/if}}
+    {{#if contractParams.contractURI}}
+    {{else}}
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{form.labels.contracturi}}</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" name="contractURI" placeholder="{{form.placeholders.contracturi}}">
+            <small>{{form.small.contracturi}}</small>
+            </div>
+        </div>
+    {{/if}}
+        <div class="form-group row">
+            <div class="col-sm-10">
+            <button type="submit" name="sendtx" class="Q_button">{{form.btnTitle}}</button>
+            </div>
+        </div>
+    </div>
+    `,
+    {text: ["Users/content", "Users/web3/community"]}
 );
 
 })(Q, Q.$, window);
