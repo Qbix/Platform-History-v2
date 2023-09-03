@@ -4393,7 +4393,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	var key = Q.calculateKey(this);
 
 	// options from data attribute
-	var dataOptions = element.getAttribute('data-' + Q.normalize(this.name, '-'));
+	var dataOptions = element.getAttribute('data-' + Q.normalize.memoized(this.name, '-'));
 	if (dataOptions) {
 		var parsed = null;
 		if (dataOptions[0] === '{') {
@@ -4415,7 +4415,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	this.options = this.options || {};
 	
 	// collect options from parent ids, inner overrides outer
-	var normalizedName = Q.normalize(this.name);
+	var normalizedName = Q.normalize.memoized(this.name);
 	var pids = this.parentIds();
 	var len = pids.length;
 	var o = len ? Q.extend({}, Q.Tool.options.levels, options) : options;
@@ -4436,7 +4436,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	// .Q_something
 	for (i = 0, l = classes.length; i < l; i++) {
 		var className = classes[i];
-		var cn = Q.normalize(className.substr(0, className.length-5));
+		var cn = Q.normalize.memoized(className.substr(0, className.length-5));
 		partial = o['.' + className];
 		if (partial && (className.substr(-5) !== '_tool' || cn === this.name)) {
 			Q.extend(this.options, Q.Tool.options.levels, partial, key);
@@ -4471,7 +4471,7 @@ Q.Tool = function _Q_Tool(element, options) {
 			if (!toolName) {
 				return (this.Q.tool || null);
 			}
-			return this.Q.tools[Q.normalize(toolName)] || null;
+			return this.Q.tools[Q.normalize.memoized(toolName)] || null;
 		};
 	}
 	
@@ -4535,7 +4535,7 @@ var _toolsWaitingForInit = {};
 
 function _toolEventFactoryNormalizeKey(key) {
 	var parts = key.split(':', 2);
-	parts[parts.length-1] = Q.normalize(parts[parts.length-1]);
+	parts[parts.length-1] = Q.normalize.memoized(parts[parts.length-1]);
 	return [parts.join(':')];
 }
 
@@ -4597,7 +4597,7 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
 		elem = tool.element;
 	}
 	if (typeof filter === 'string') {
-		filter = Q.normalize(filter);
+		filter = Q.normalize.memoized(filter);
 	}
 	Q.find(elem, true, null, function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
@@ -4680,7 +4680,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		ctors[name] = ctor;
 	}
 	Q.each(ctors, function (name, ctor) {
-		var n = Q.normalize(name);
+		var n = Q.normalize.memoized(name); 
 		if (!overwrite && typeof _qtc[n] === 'function') {
 			return;
 		}
@@ -4773,7 +4773,7 @@ Q.Tool.defined = function (toolName) {
 	if (!toolName) {
 		return undefined;
 	}
-	return Q.Tool.constructors[Q.normalize(toolName)];
+	return Q.Tool.constructors[Q.normalize.memoized(toolName)];
 };
 
 /**
@@ -4787,7 +4787,7 @@ Q.Tool.defined = function (toolName) {
  */
 Q.Tool.define.options = function (toolName, setOptions) {
 	var options;
-	toolName = Q.normalize(toolName);
+	toolName = Q.normalize.memoized(toolName);
 	if (typeof _qtc[toolName] === 'function') {
 		options = _qtc[toolName].options;
 	} else {
@@ -4818,7 +4818,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods, overwri
 		}
 		return;
 	}
-	n = Q.normalize(name);
+	n = Q.normalize.memoized(name);
 	Q.Tool.names[n] = name;
 	if (typeof ctor === 'string' || typeof ctor === 'object') {
 		if (root.jQuery
@@ -4916,7 +4916,7 @@ Q.Tool.jQuery.info = function (element) {
  */
 Q.Tool.jQuery.options = function (pluginName, setOptions) {
 	var options;
-	var pluginName = Q.normalize(pluginName);
+	var pluginName = Q.normalize.memoized(pluginName);
 	if (typeof _qtc[name] === 'function') {
 		options = root.jQuery.fn[pluginName].options;
 	} else {
@@ -5040,7 +5040,7 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
 	var result = {};
 	var prefix = this.prefix;
 	var id, n, i, ids;
-	name = name && Q.normalize(name);
+	name = name && Q.normalize.memoized(name);
 	for (id in Q.Tool.active) {
 		for (n in Q.Tool.active[id]) {
 			if ((name && name != n)
@@ -5074,7 +5074,7 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  * @return {Q.Tool|null}
  */
 Tp.child = function Q_Tool_prototype_child(append, name) {
-	name = name && Q.normalize(name);
+	name = name && Q.normalize.memoized(name);
 	var prefix2 = Q.normalize.memoized(this.prefix + (append || ""));
 	var id, ni, n;
 	for (id in Q.Tool.active) {
@@ -5545,7 +5545,7 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
  */
 Q.Tool.byId = function _Q_Tool_byId(id, name) {
 	if (name) {
-		name = Q.normalize(name);
+		name = Q.normalize.memoized(name);
 		return Q.Tool.active[id] ? Q.Tool.active[id][name] : null;
 	}
 	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
@@ -5567,10 +5567,10 @@ Q.Tool.byName = function _Q_Tool_byName(name) {
 	var result = {};
 	var isString = (typeof name === 'string');
 	if (isString) {
-		name = Q.normalize(name);
+		name = Q.normalize.memoized(name);
 	} else {
 		for (var i=0, l=name.length; i<l; ++i) {
-			name[i] = Q.normalize(name[i]);
+			name[i] = Q.normalize.memoized(name[i]);
 		}
 	}
 	for (var id in Q.Tool.active) {
@@ -5650,7 +5650,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		|| className.slice(-5) !== '_tool') {
 			continue;
 		}
-		toolNames.push(Q.normalize(className.substr(0, className.length-5)));
+		toolNames.push(Q.normalize.memoized(className.substr(0, className.length-5)));
 	}
 	var p = new Q.Pipe(toolNames, function (params) {
 		// now that all the tool scripts are loaded, activate the tools in the right order
@@ -5755,7 +5755,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			waitFor.push('html');
 			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
 		}
-		var n = Q.normalize(toolName);
+		var n = Q.normalize.memoized(toolName);
 		var text = Q.Text.addedFor('Q.Tool.define', n, toolConstructor);
 		if (text) {
 			waitFor.push('text');
@@ -5789,7 +5789,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 }
 
 Q.Tool.onLoadedConstructor = Q.Event.factory({}, ["", function (name) { 
-	return [Q.normalize(name)];
+	return [Q.normalize.memoized(name)];
 }]);
 Q.Tool.onMissingConstructor = new Q.Event();
 
@@ -7473,7 +7473,7 @@ Q.replace = function _Q_replace(container, source, options) {
 			incomingElement.parentElement.replaceChild(element, incomingElement);
 			for (var name in element.Q.tools) {
 				var tool = Q.Tool.from(element, name);
-				var attrName = 'data-' + Q.normalize(tool.name, '-');
+				var attrName = 'data-' + Q.normalize.memoized(tool.name, '-');
 				var newOptionsString = incomingElement.getAttribute(attrName);
 				element.setAttribute(attrName, newOptionsString);
 				retainedTools[id] = tool;
@@ -9772,8 +9772,8 @@ Q.clientId = function () {
 	var detected = Q.Browser.detect();
 	var code = Math.floor(Date.now()/1000)*1000 + Math.floor(Math.random()*1000);
 	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
-		+ "-" + Q.normalize(detected.OS.substr(0, 3))
-		+ "-" + Q.normalize(detected.name.substr(0, 3))
+		+ "-" + Q.normalize.memoized(detected.OS.substr(0, 3))
+		+ "-" + Q.normalize.memoized(detected.name.substr(0, 3))
 		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
 		+ "-" + code.toString(36);
 	storage.setItem("Q.clientId", ret);
@@ -9850,7 +9850,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 	if (!found && ('className' in elem) && typeof elem.className === "string" && elem.className) {
 		var classNames = elem.className.split(' ');
 		for (i=classNames.length-1; i>=0; --i) {
-			var className = Q.normalize(classNames[i]);
+			var className = Q.normalize.memoized(classNames[i]);
 			if (((typeof filter === 'string') && (filter === className))
 			|| ((filter instanceof RegExp) && filter.test(className))
 			|| ((typeof filter === 'function' && filter(className)))) {
@@ -10741,8 +10741,8 @@ function _activateTools(toolElement, options, shared) {
 					var prevTool = Q.Tool.beingActivated;
 					Q.Tool.beingActivated = this;
 					// Trigger events in some global event factories
-					var normalizedName = Q.normalize(this.name);
-					var normalizedId = Q.normalize(this.id);
+					var normalizedName = Q.normalize.memoized(this.name);
+					var normalizedId = Q.normalize.memoized(this.id);
 					_constructToolHandlers[""] &&
 					_constructToolHandlers[""].handle.call(this, this.options);
 					_constructToolHandlers[normalizedName] &&
@@ -10853,8 +10853,8 @@ function _initTools(toolElement, options, shared) {
 	
 	function _doInit() {
 		var tool = this;
-		var normalizedName = Q.normalize(tool.name);
-		var normalizedId = Q.normalize(tool.id);
+		var normalizedName = Q.normalize.memoized(tool.name);
+		var normalizedId = Q.normalize.memoized(tool.id);
 		var waiting = _toolsWaitingForInit[tool.id];
 		if (tool.initialized || waiting) {
 			return;
@@ -10979,7 +10979,7 @@ Q.Template.info = {};
  */
 Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	var T = Q.Template;
-	var n = Q.normalize(name);
+	var n = Q.normalize.memoized(name);
 	if (!overwriteEvenIfAlreadySet && T.info[n]) {
 		return false;
 	}
@@ -11002,7 +11002,7 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
  */
 Q.Template.remove = function (name) {
 	if (typeof name === 'string') {
-		delete Q.Template.collection[Q.normalize(name)];
+		delete Q.Template.collection[Q.normalize.memoized(name)];
 		Q.Template.load.cache.removeEach([name]);
 		return;
 	}
@@ -11097,7 +11097,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	_processTemplateElements(document);
 
 	// check if template is cached
-	var n = Q.normalize(name);
+	var n = Q.normalize.memoized(name);
 	var info = Q.Template.info[n];
 	if (tpl && typeof tpl[n] === 'string') {
 		var result = tpl[n];
@@ -11185,7 +11185,7 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
 		// load the template and its associated info
-		var n = Q.normalize(templateName);
+		var n = Q.normalize.memoized(templateName);
 		var info = Q.Template.info[n];
 		var p = Q.pipe(['template', 'partials', 'helpers', 'text'], function (params) {
 			if (params.template[0]) {
@@ -11397,7 +11397,7 @@ Q.Text = {
 		}
 		Q.each(methods, function (i, m) {
 			Q.Text.addFor.defined = Q.Text.addFor.defined || {};
-			var n = Q.normalize(namePrefix);
+			var n = Q.normalize.memoized(namePrefix);
 			var obj = {};
 			obj[m] = obj[m] || {};
 			obj[m][n] = textFileNames;
@@ -12090,7 +12090,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		}
 		var results = {};
 		Q.each(pluginNames, function _jQuery_plugin_loaded(i, pluginName) {
-			var pn = Q.normalize(pluginName);
+			var pn = Q.normalize.memoized(pluginName);
 			results[pn] = pluginName;
 			if ($.fn[pn]) return;
 			var src = ($.fn.plugin[pn] || 'Q/plugins/jQuery/'+pn+'.js');
@@ -12112,7 +12112,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 * @method state
 	 */
 	$.fn.state = function _jQuery_fn_state(pluginName) {
-		var key = Q.normalize(pluginName) + ' state';
+		var key = Q.normalize.memoized(pluginName) + ' state';
 		return $(this).data(key);
 	};
 	/**
