@@ -191,15 +191,7 @@ Q.Tool.define("Q/audio", function (options) {
 		}
 	};
 
-	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
-		tool.text = params.text[1].audio;
-
-		// run action
-		Q.handle(tool[state.action], tool);
-	});
-
-	Q.addStylesheet("{{Q}}/css/audio.css", p.fill('stylesheet'), { slotName: 'Q' });
-	Q.Text.get('Q/content', p.fill('text'));
+	Q.handle(tool[state.action], tool);
 
 	$toolElement.on(Q.Pointer.fastclick, ".Q_audio_close", function () {
 		tool.pause();
@@ -364,8 +356,8 @@ Q.Tool.define("Q/audio", function (options) {
 			if(tool.pieTool){
 				state.currentRecordTime = state.maxRecordTime;
 
-				$recordTextElement.html(tool.text.record);
-				$recordElapsedElement.html(tool.text.maximum);
+				$recordTextElement.html(tool.text.audio.record);
+				$recordElapsedElement.html(tool.text.audio.maximum);
 				$recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime));
 				tool.pieTool.initPos();
 			}
@@ -422,7 +414,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 		// play recorded track
 		if(newState === "playing"){
-			$recordTextElement.html(tool.text.playing);
+			$recordTextElement.html(tool.text.audio.playing);
 			tool.audioElement.play();
 		}else{
 			tool.audioElement.pause();
@@ -430,8 +422,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 		// ready to play
 		if(newState === "play"){
-			$recordTextElement.html(tool.text.recorded);
-			$recordElapsedElement.html(tool.text.clip);
+			$recordTextElement.html(tool.text.audio.recorded);
+			$recordElapsedElement.html(tool.text.audio.clip);
 			$recordTimeElement.html(tool.formatRecordTime(tool.audioElement.duration));
 		}
 
@@ -455,8 +447,8 @@ Q.Tool.define("Q/audio", function (options) {
 		state.recorder.start();
 
 		// set some elements text
-		$recordTextElement.html(tool.text.recording);
-		$recordElapsedElement.html(tool.text.remains);
+		$recordTextElement.html(tool.text.audio.recording);
+		$recordElapsedElement.html(tool.text.audio.remains);
 		$recordTimeElement.html(tool.formatRecordTime(state.maxRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
 
 		// start recorder timer to handle all recorder interface actions
@@ -590,7 +582,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 		Q.Template.render("Q/audio/recorder", {
 			maxRecordTime: tool.formatRecordTime(state.maxRecordTime),
-			text: tool.text,
+			text: tool.text.audio,
 			allowMicrophoneAccess: window.isSecureContext
 				? Q.text.Q.audio.allowMicrophoneAccess
 				: Q.text.Q.browser.insecureContext

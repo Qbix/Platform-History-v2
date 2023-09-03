@@ -154,7 +154,8 @@
 	overflow: auto;
 }
 
-html.Q_contextual_shown body {
+html.Q_mobile.Q_contextual_shown body,
+html.Q_tablet.Q_contextual_shown body {
 	overflow: hidden;
 }
 .Q_contextual_pulsate {

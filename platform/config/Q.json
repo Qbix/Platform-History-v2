@@ -60,19 +60,20 @@
 				"script": [
 					"'unsafe-eval'",
 					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
+					"'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='", /* hash of empty string */
 					"'sha256-+DLpYKpOowitqzgnHlbJ6domBEfO5iS3HhNhDTrZ0f0='",
 					"https://w.soundcloud.com",
 					"https://cdnjs.cloudflare.com",
-					"https://cdn.jsdelivr.net"
-                     
+					"https://cdn.jsdelivr.net"   
 				],
 				"style": [
-					"'unsafe-inline'",
+					"'unsafe-eval'", "'unsafe-inline'",
 					"{{host}}", "*.{{host}}", "*.{{host}}:*", "{{host}}:*",
 					"https://fonts.googleapis.com",
 					"https://cdnjs.cloudflare.com",
 					"https://cdn.jsdelivr.net"
 				],
+				"styleHashes": false,
 				"worker": ["'self'"]
 			}
 		},

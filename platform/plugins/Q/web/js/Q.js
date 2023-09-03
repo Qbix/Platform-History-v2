@@ -5910,12 +5910,12 @@ Q.Method = {
 	 * Assign this in place of any asynchronous method
 	 * that would have a callback and/or return a Promise.
 	 * Then call Q.Method.define() on the object containing these.
-	 * @property {boolean} shim
+	 * @property {boolean} stub
 	 */
-	shim: {},
+	stub: {},
 
 	/**
-	 * Call this on any object that contains Q.Method.shim
+	 * Call this on any object that contains Q.Method.stub
 	 * in place of some asynchronous methods. It will set up code to load
 	 * implementations of these methods on demand, from files found at URLs
 	 * of the form {{prefix}}/{{methodName}}.js . In those files, you can
@@ -5940,7 +5940,7 @@ Q.Method = {
 	define: function (o, prefix, closure) {
 
 		Q.each(o, function (k) {
-			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.shim) {
+			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.stub) {
 				return;
 			}
 			// method stub is still there
@@ -8503,7 +8503,7 @@ Q.request = function (url, slotNames, callback, options) {
 					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}
-			var ret = callback && callback.call(this, err, response, response.redirect && response.redirect.url);
+			var ret = callback && callback.call(this, err, response, response && response.redirect && response.redirect.url);
 			Q.handle(o.onProcessed, this, [err, response]);
 			if (ret === false) {
 				return; // don't redirect
@@ -10187,7 +10187,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					Q.Event.jQueryForPage = [];
 				}
 			
-				if (!o.ignorePage && !response.redirect) {					
+				if (!o.ignorePage && !(response && response.redirect)) {					
 					// Mark for removal sundry elements belonging to the slots that are being reloaded
 					Q.each(['link', 'style', 'script'], function (i, tag) {
 						if (tag !== 'style' && !o.loadExtras) {
@@ -15134,6 +15134,10 @@ Q.onInit.add(function () {
 	Q.Audio.speak.options.mute = !!Q.getObject("Audio.speak.mute", Q);
 }, 'Q');
 
+Q.Text.addFor(
+	['Q.Tool.define', 'Q.Template.set'],
+	'Q/', ["Q/content"]
+);
 Q.Tool.define({
 	"Q/inplace": "{{Q}}/js/tools/inplace.js",
 	"Q/tabs": {
@@ -15160,8 +15164,14 @@ Q.Tool.define({
 	"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
 	"Q/parallax": "{{Q}}/js/tools/parallax.js",
 	"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
-	"Q/audio": "{{Q}}/js/tools/audio.js",
-	"Q/video": "{{Q}}/js/tools/video.js",
+	"Q/audio": {
+		js: "{{Q}}/js/tools/audio.js",
+		css: "{{Q}}/css/tools/audio.css"
+	},
+	"Q/video": {
+		js: ["{{Q}}/js/videojs/lib.js", "{{Q}}/js/tools/video.js"],
+		css: ["{{Q}}/css/videojs.css", "{{Q}}/css/tools/video.css"]
+	},
 	"Q/pdf": "{{Q}}/js/tools/pdf.js",
 	"Q/image": "{{Q}}/js/tools/image.js",
 	"Q/clip": "{{Q}}/js/tools/clip.js",
