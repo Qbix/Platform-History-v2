@@ -492,7 +492,7 @@ Sp.startsWith = function _String_prototype_startsWith(prefix) {
 	if (prefix == null || this.length < prefix.length) {
 		return false;
 	}
-	return this.substr(0, prefix.length) === prefix;
+	return this.substring(0, prefix.length) === prefix;
 };
 
 /**
@@ -505,7 +505,7 @@ Sp.endsWith = function _String_prototype_endsWith(suffix) {
 	if (suffix == null || this.length < suffix.length) {
 		return false;
 	}
-	return this.substr(-suffix.length) === suffix;
+	return this.substring(this.length-suffix.length) === suffix;
 };
 
 /**
@@ -619,7 +619,7 @@ Sp.deobfuscate = function (key) {
  * @return {String}
  */
 Sp.hexToDecimal = function () {
-	var hex = this.substr(0, 2) == '0x' ? this : '0x' + this;
+	var hex = this.substring(0, 2) == '0x' ? this : '0x' + this;
 	return BigInt(hex).toString();
 };
 
@@ -1203,7 +1203,7 @@ if (!Elp.getElementsByClassName) {
 }
 
 function _parseFloat(value) {
-	return value.substr(value.length-2) == 'px' ? parseFloat(value) : 0;
+	return value.substring(value.length-2) == 'px' ? parseFloat(value) : 0;
 }
 	
 (function() {
@@ -1347,7 +1347,7 @@ Q.typeOf = function _Q_typeOf(value) {
 				return 'object';
 			}
 			return value.constructor.name;
-		} else if ((x = Object.prototype.toString.apply(value)).substr(0, 8) === "[object ") {
+		} else if ((x = Object.prototype.toString.apply(value)).substring(0, 8) === "[object ") {
 			return x.substring(8, x.length-1).toLowerCase();
 		} else {
 			return 'object';
@@ -2103,8 +2103,8 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
 	}
 	var result = text.replace(characters, replacement);
 	if (result.length > numChars) {
-		result = result.substr(0, numChars-11) + '_' 
-				 + Math.abs(result.substr(numChars-11).hashCode());
+		result = result.substring(0, numChars-11) + '_' 
+				 + Math.abs(result.substring(numChars-11).hashCode());
 	}
 	return result;
 };
@@ -4378,7 +4378,7 @@ Q.Tool = function _Q_Tool(element, options) {
 		Q.Tool.nextDefaultId %= 1000000;
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
-	this.id = this.prefix.substr(0, this.prefix.length-1);
+	this.id = this.prefix.substring(0, this.prefix.length-1);
 
 	var activeTool = null;
 	if (activeTool = Q.Tool.byId(this.id, this.name)) {
@@ -4400,8 +4400,8 @@ Q.Tool = function _Q_Tool(element, options) {
 			parsed = JSON.parse(dataOptions);
 		} else {
 			var ios = dataOptions.indexOf(' ');
-			this.id = dataOptions.substr(0, ios);
-			var tail = dataOptions.substr(ios+1);
+			this.id = dataOptions.substring(0, ios);
+			var tail = dataOptions.substring(ios+1);
 			parsed = tail && JSON.parse(tail);
 		}
 		if (parsed) {
@@ -4436,9 +4436,9 @@ Q.Tool = function _Q_Tool(element, options) {
 	// .Q_something
 	for (i = 0, l = classes.length; i < l; i++) {
 		var className = classes[i];
-		var cn = Q.normalize.memoized(className.substr(0, className.length-5));
+		var cn = Q.normalize.memoized(className.substring(0, className.length-5));
 		partial = o['.' + className];
-		if (partial && (className.substr(-5) !== '_tool' || cn === this.name)) {
+		if (partial && (className.substring(className.length-5) !== '_tool' || cn === this.name)) {
 			Q.extend(this.options, Q.Tool.options.levels, partial, key);
 		}
 	}
@@ -5083,8 +5083,8 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
 			if (name && name != n) {
 				break;
 			}
-			if (id.length >= prefix2.length + (append ? 0 : 1)
-			&& ni.substr(0, prefix2.length) == prefix2) {
+			if (id.length >= pl + (append ? 0 : 1)
+			&& id.substring(0, pl) == prefix) {
 				return Q.Tool.active[id][n];
 			}
 		}
@@ -5098,12 +5098,11 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
  * @return {Array|null}
  */
 Tp.parentIds = function Q_Tool_prototype_parentIds() {
-	var prefix2 = Q.normalize.memoized(this.prefix), ids = [], id, ni;
+	var prefix = this.prefix, ids = [], id, pl = prefix.length;
 	for (id in Q.Tool.active) {
-		ni = Q.normalize.memoized(id);
-		if (ni.length < prefix2.length-1
-		&& ni === prefix2.substr(0, ni.length)
-		&& prefix2[ni.length] === '_') {
+		if (id.length < pl-1
+		&& id === prefix.substring(0, id.length)
+		&& prefix[id.length] === '_') {
 			ids.push(id);
 		}
 	}
@@ -5595,7 +5594,7 @@ Q.Tool.byName = function _Q_Tool_byName(name) {
 Q.Tool.calculatePrefix = function _Q_Tool_calculatePrefix(id) {
 	if (id.match(/_tool$/)) {
 		return id.substring(0, id.length-4);
-	} else if (id.substr(id.lengh-1) === '_') {
+	} else if (id.substring(id.lengh-1) === '_') {
 		return id;
 	} else {
 		return id + "_";
@@ -5613,7 +5612,7 @@ Q.Tool.calculatePrefix = function _Q_Tool_calculatePrefix(id) {
 Q.Tool.calculateId = function _Q_Tool_calculatePrefix(id) {
 	if (id.match(/_tool$/)) {
 		return id.substring(0, id.length-5);
-	} else if (id.substr(id.length-1) === '_') {
+	} else if (id.substring(id.length-1) === '_') {
 		return id.substring(0, id.length-1);
 	} else {
 		return id;
@@ -5650,7 +5649,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		|| className.slice(-5) !== '_tool') {
 			continue;
 		}
-		toolNames.push(Q.normalize.memoized(className.substr(0, className.length-5)));
+		toolNames.push(Q.normalize.memoized(className.substring(0, className.length-5)));
 	}
 	var p = new Q.Pipe(toolNames, function (params) {
 		// now that all the tool scripts are loaded, activate the tools in the right order
@@ -5885,7 +5884,7 @@ Q.Links = {
 	 */
 	telegram: function (to, text, url) {
 		if (to && to[0] === '@') {
-			return 'tg://resolve?domain=' + to.substr(1);
+			return 'tg://resolve?domain=' + to.substring(1);
 		}
 		return (url
 			? 'tg://msg_url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text)
@@ -6868,7 +6867,7 @@ Q.Page.push = function (url, title) {
 		return false;
 	}
 	var parts = url.split('#');
-	var path = (url.substr(Q.baseUrl().length+1) || '');
+	var path = (url.substring(Q.baseUrl().length+1) || '');
 	if (history.pushState) {
 		if (typeof title === 'string') {
 			history.pushState({}, title, url);	
@@ -6896,7 +6895,7 @@ Q.Page.push = function (url, title) {
 	}
 	Q_hashChangeHandler.currentUrl = url.split('#')[0];
 	Q_hashChangeHandler.currentUrlTail = Q_hashChangeHandler.currentUrl
-		.substr(baseUrl.length + 1);
+		.substring(baseUrl.length + 1);
 	Q.info.url = url;
 	Q.handle(Q.Page.onPush, Q, [url, title, prevUrl]);
 };
@@ -8171,7 +8170,7 @@ Q.url = function _Q_url(what, fields, options) {
 	what3 = Q.interpolateUrl(what2);
 	if (what3.isUrl()) {
 		if (what3.startsWith(baseUrl)) {
-			tail = what3.substr(baseUrl.length+1);
+			tail = what3.substring(baseUrl.length+1);
 			tail = tail.split('?')[0];
 			info = Q.getObject(tail, Q.updateUrls.urls, '/');
 		}
@@ -8208,7 +8207,7 @@ Q.url = function _Q_url(what, fields, options) {
 	} else if (what3.isUrl()) {
 		result = what3;
 	} else {
-		result = baseUrl + ((what3.substr(0, 1) == '/') ? '' : '/') + what3;
+		result = baseUrl + ((what3.substring(0, 1) == '/') ? '' : '/') + what3;
 	}
 	if (Q.url.options.beforeResult) {
 		var params = {
@@ -8608,7 +8607,7 @@ Q.request = function (url, slotNames, callback, options) {
 						onSuccess.call(xmlhttp, xmlhttp.responseText);
 					} else {
 						log("Q.request xhr: " + xmlhttp.status + ' ' 
-							+ xmlhttp.responseText.substr(xmlhttp.responseText.indexOf('<body')));
+							+ xmlhttp.responseText.substring(xmlhttp.responseText.indexOf('<body')));
 						onCancel.call(xmlhttp, xmlhttp.status);
 					}
 				}
@@ -9771,9 +9770,9 @@ Q.clientId = function () {
 	}
 	var detected = Q.Browser.detect();
 	var code = Math.floor(Date.now()/1000)*1000 + Math.floor(Math.random()*1000);
-	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
-		+ "-" + Q.normalize.memoized(detected.OS.substr(0, 3))
-		+ "-" + Q.normalize.memoized(detected.name.substr(0, 3))
+	var ret = Q.clientId.value = (detected.device || "desktop").substring(0, 4)
+		+ "-" + Q.normalize.memoized(detected.OS.substring(0, 3))
+		+ "-" + Q.normalize.memoized(detected.name.substring(0, 3))
 		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
 		+ "-" + code.toString(36);
 	storage.setItem("Q.clientId", ret);
@@ -10618,7 +10617,7 @@ Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
 Q.parseQueryString = function Q_parseQueryString(queryString, keys) {
 	if (!queryString) return {};
 	if (queryString[0] === '?' || queryString[0] === '#') {
-		queryString = queryString.substr(1);
+		queryString = queryString.substring(1);
 	}
 	var result = {};
 	Q.each(queryString.split('&'), function (i, clause) {
@@ -10636,7 +10635,7 @@ function Q_hashChangeHandler() {
 	var baseUrl = Q.baseUrl();
 	var url = location.hash.queryField('url'), result = null;
 	if (url === undefined) {
-		url = root.location.href.split('#')[0].substr(baseUrl.length + 1);
+		url = root.location.href.split('#')[0].substring(baseUrl.length + 1);
 	}
 	if (Q_hashChangeHandler.ignore) {
 		Q_hashChangeHandler.ignore = false;
@@ -10647,7 +10646,7 @@ function Q_hashChangeHandler() {
 	}
 	Q_hashChangeHandler.currentUrl = url.split('#')[0];
 	Q_hashChangeHandler.currentUrlTail = Q_hashChangeHandler.currentUrl
-		.substr(baseUrl.length + 1);
+		.substring(baseUrl.length + 1);
 	return result;
 }
 
@@ -10657,7 +10656,7 @@ function Q_popStateHandler() {
 	if (Q.info.url === url) {
 		return; // we are already at this url
 	}
-	var urlTail = url.substr(baseUrl.length + 1);
+	var urlTail = url.substring(baseUrl.length + 1);
 	if (urlTail != Q_hashChangeHandler.currentUrlTail) {
 		Q.handle(
 			url.indexOf(baseUrl) === 0 ? url : baseUrl + '/' + url,
@@ -11541,7 +11540,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var host = parsed.scheme + '://' + parsed.host 
 			+ (parsed.port ? ':'+parsed.port : '');
 		if (url.startsWith(host+'/')) {
-			o.path = url.substr(host.length) + Q.getObject('Q.info.socketPath');
+			o.path = url.substring(host.length) + Q.getObject('Q.info.socketPath');
 		}
 		_qsockets[ns][url] = qs = new Q.Socket({
 			socket: root.io.connect(host+ns, o),
@@ -15086,7 +15085,7 @@ Q.onInit.add(function () {
 	}
 	Q_hashChangeHandler.currentUrl = root.location.href.split('#')[0];
 	Q_hashChangeHandler.currentUrlTail = Q_hashChangeHandler.currentUrl
-		.substr(Q.baseUrl().length + 1);
+		.substring(Q.baseUrl().length + 1);
 	if (window.history.pushState) {
 		Q.onPopState.set(Q_popStateHandler, 'Q.loadUrl');
 	} else {
