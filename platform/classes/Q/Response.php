@@ -302,7 +302,16 @@ class Q_Response
 			Q_Html::hashesAggregate('sha256');
 			Q_Response::scripts(); // may call scriptsInline
 			Q_Response::scriptLines();
-			Q_Response::stylesheets(); // may call stylesheetsInline
+			if (Q_Config::get('Q', 'web', 'contentSecurityPolicy', 'styleHashes', false)) {
+				// By default, we don't include styleHashes because that will
+				// make the browser ignore unsafe-inline and unsafe-eval.
+				// But many sites include scripts from external servers they don't control,
+				// which might add more <style> elements into the document, or call insertRule().
+				// In this case, we have bigger problems, but browsers don't have a good way
+				// to allow that in CSP, that's better than unsafe-inline and unsafe-eval.
+				Q_Response::stylesheets(); // may call stylesheetsInline
+				Q_Response::styles();
+			}
 			Q_Html::hashesAggregate(false);
 			foreach (Q_Html::hashes() as $type => $arr) {
 				foreach ($arr as $hash => $info) {
