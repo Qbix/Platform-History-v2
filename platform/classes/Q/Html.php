@@ -1089,7 +1089,7 @@ class Q_Html
 	 $content,
 	 $convert = array(),
 	 $unconvert = array(),
-	 int $flags = ENT_QUOTES)
+	 $flags = ENT_QUOTES)
 	{
 		if (!is_array($convert)) {
 			$convert = array();
