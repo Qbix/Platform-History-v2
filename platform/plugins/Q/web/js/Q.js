@@ -5338,7 +5338,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  */
 Tp.updateElementOptions = function _Q_Tool_updateElementOptions(options) {
 	var attrName = 'data-' + this.name.replace('_', '-');
-	this.element.setAttribute(attrName, JSON.encode(options));
+	this.element.setAttribute(attrName, JSON.stringify(options));
 };
 
 /**
