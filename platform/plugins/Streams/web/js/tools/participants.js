@@ -354,7 +354,7 @@ function _Streams_participants(options) {
 				}
 				state.overflowed = overflowed;
 			}
-		}, tool);
+		}, tool); 
 
 		state.rendered = true;
 		tool.updateElementOptions(Q.extend(tool.options, { rendered: true }));
