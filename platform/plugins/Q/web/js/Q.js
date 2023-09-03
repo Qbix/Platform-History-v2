@@ -2117,7 +2117,7 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
  * @param {String} text
  * @return {String}
  */
-Q.normalize.memoized = function (text) {
+Q.normalize.memoized = function _Q_normalize_memoized (text) {
 	if (!(text in Q.normalize.memoized.collection)) {
 		Q.normalize.memoized.collection[text] = Q.normalize(text);
 	}
@@ -4393,7 +4393,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	var key = Q.calculateKey(this);
 
 	// options from data attribute
-	var dataOptions = element.getAttribute('data-' + Q.normalize.memoized(this.name, '-'));
+	var dataOptions = element.getAttribute('data-' + Q.normalize(this.name, '-'));
 	if (dataOptions) {
 		var parsed = null;
 		if (dataOptions[0] === '{') {
@@ -7473,7 +7473,7 @@ Q.replace = function _Q_replace(container, source, options) {
 			incomingElement.parentElement.replaceChild(element, incomingElement);
 			for (var name in element.Q.tools) {
 				var tool = Q.Tool.from(element, name);
-				var attrName = 'data-' + Q.normalize.memoized(tool.name, '-');
+				var attrName = 'data-' + Q.normalize(tool.name, '-');
 				var newOptionsString = incomingElement.getAttribute(attrName);
 				element.setAttribute(attrName, newOptionsString);
 				retainedTools[id] = tool;

@@ -2207,7 +2207,7 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
  * @param {String} text
  * @return {String}
  */
-Q.normalize.memoized = function (text) {
+Q.normalize.memoized = function _Q_normalize_memoized (text) {
 	if (!(text in Q.normalize.memoized.collection)) {
 		Q.normalize.memoized.collection[text] = Q.normalize(text);
 	}
