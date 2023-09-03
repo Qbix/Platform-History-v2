@@ -477,7 +477,7 @@ class Q_Utils
 			throw new Q_Exception_RequiredField(array('field' => 'text'));
 		}
 		if (!isset($characters)) {
-			$characters = '/[^\p{L}0-9]+/u';
+			$characters = '/[^A-Za-z0-9]+/';
 			if (class_exists('Q_Config')) {
 				$characters = Q_Config::get('Db', 'normalize', 'characters', $characters);
 			}
