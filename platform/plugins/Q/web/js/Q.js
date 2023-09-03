@@ -5212,9 +5212,8 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 
 	// give the tool a chance to clean up after itself
 	var normalizedName = Q.normalize.memoized(this.name);
-	var normalizedId = Q.normalize.memoized(this.id);
-	_beforeRemoveToolHandlers["id:"+normalizedId] &&
-	_beforeRemoveToolHandlers["id:"+normalizedId].handle.call(this);
+	_beforeRemoveToolHandlers["id:"+this.id] &&
+	_beforeRemoveToolHandlers["id:"+this.id].handle.call(this);
 	_beforeRemoveToolHandlers[normalizedName] &&
 	_beforeRemoveToolHandlers[normalizedName].handle.call(this);
 	_beforeRemoveToolHandlers[""] &&
