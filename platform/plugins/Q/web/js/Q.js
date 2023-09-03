@@ -8491,7 +8491,7 @@ Q.request = function (url, slotNames, callback, options) {
 					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}
-			var ret = callback && callback.call(this, err, response, response.redirect && response.redirect.url);
+			var ret = callback && callback.call(this, err, response, response && response.redirect && response.redirect.url);
 			Q.handle(o.onProcessed, this, [err, response]);
 			if (ret === false) {
 				return; // don't redirect
@@ -10175,7 +10175,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					Q.Event.jQueryForPage = [];
 				}
 			
-				if (!o.ignorePage && !response.redirect) {					
+				if (!o.ignorePage && !(response && response.redirect)) {					
 					// Mark for removal sundry elements belonging to the slots that are being reloaded
 					Q.each(['link', 'style', 'script'], function (i, tag) {
 						if (tag !== 'style' && !o.loadExtras) {
