@@ -416,7 +416,7 @@ class Q_Html
 			$blankCaption = is_string($includeBlank) ? $includeBlank : '';
 			if (! isset($selected) or $selected === '') {
 				$blank_option_html = '<option value="" selected="selected" disabled="disabled">' 
-				 . self::text($blankCaption) .
+				 . self::text($blankCaption, array(), array(), ENT_NOQUOTES) .
 				 '</option>';
 			} else {
 				$blank_option_html = '<option value="" disabled="disabled">' . $blankCaption . '</option>';
@@ -478,7 +478,7 @@ class Q_Html
 				$attributes2['checked'] = 'checked';
 			}
 			$html_parts[] = self::tag('input', $attributes2, true)
-				. self::tag('label', array('for' => $id), self::text($value));
+				. self::tag('label', array('for' => $id), self::text($value, array(), array(), ENT_NOQUOTES));
 			++ $i;
 		}
 		return implode($between, $html_parts);
@@ -1088,13 +1088,14 @@ class Q_Html
 	static function text(
 	 $content,
 	 $convert = array(),
-	 $unconvert = array())
+	 $unconvert = array(),
+	 int $flags = ENT_QUOTES)
 	{
 		if (!is_array($convert)) {
 			$convert = array();
 		}
 		$t = Q::t($content);
-		$result = htmlentities(isset($t) ? $t : '', ENT_QUOTES, 'UTF-8');
+		$result = htmlentities(isset($t) ? $t : '', $flags, 'UTF-8');
 		if ($convert or $unconvert) {
 			$conversions = array(
 				"\n" => "<br>",
@@ -1273,7 +1274,7 @@ class Q_Html
 			}
 			if ($escape) {
 				$name = self::text($name);
-				$value = self::text($value);
+				$value = self::text($value, array(), array(), ENT_COMPAT);
 			}
 			$result .= ($i > 0 ? $between : '') . $name . '="' . $value . '"';
 			++ $i;
