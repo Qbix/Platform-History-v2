@@ -10740,13 +10740,12 @@ function _activateTools(toolElement, options, shared) {
 					Q.Tool.beingActivated = this;
 					// Trigger events in some global event factories
 					var normalizedName = Q.normalize.memoized(this.name);
-					var normalizedId = Q.normalize.memoized(this.id);
 					_constructToolHandlers[""] &&
 					_constructToolHandlers[""].handle.call(this, this.options);
 					_constructToolHandlers[normalizedName] &&
 					_constructToolHandlers[normalizedName].handle.call(this, this.options);
-					_constructToolHandlers["id:"+normalizedId] &&
-					_constructToolHandlers["id:"+normalizedId].handle.call(this, this.options);
+					_constructToolHandlers["id:"+this.id] &&
+					_constructToolHandlers["id:"+this.id].handle.call(this, this.options);
 					var args = [this.options];
 					Q.each(toolConstructor.require, function (i, n) {
 						var req = Q.Tool.from(element, n);
@@ -10761,8 +10760,8 @@ function _activateTools(toolElement, options, shared) {
 					_activateToolHandlers[""].handle.call(this, this.options);
 					_activateToolHandlers[normalizedName] &&
 					_activateToolHandlers[normalizedName].handle.call(this, this.options);
-					_activateToolHandlers["id:"+normalizedId] &&
-					_activateToolHandlers["id:"+normalizedId].handle.call(this, this.options);
+					_activateToolHandlers["id:"+this.id] &&
+					_activateToolHandlers["id:"+this.id].handle.call(this, this.options);
 					Q.Tool.beingActivated = prevTool;
 				} catch (e) {
 					debugger; // pause here if debugging
@@ -10852,7 +10851,6 @@ function _initTools(toolElement, options, shared) {
 	function _doInit() {
 		var tool = this;
 		var normalizedName = Q.normalize.memoized(tool.name);
-		var normalizedId = Q.normalize.memoized(tool.id);
 		var waiting = _toolsWaitingForInit[tool.id];
 		if (tool.initialized || waiting) {
 			return;
@@ -10863,8 +10861,8 @@ function _initTools(toolElement, options, shared) {
 		_initToolHandlers[""].handle.call(tool, tool.options);
 		_initToolHandlers[normalizedName] &&
 		_initToolHandlers[normalizedName].handle.call(tool, tool.options);
-		_initToolHandlers["id:"+normalizedId] &&
-		_initToolHandlers["id:"+normalizedId].handle.call(tool, tool.options);
+		_initToolHandlers["id:"+this.id] &&
+		_initToolHandlers["id:"+this.id].handle.call(tool, tool.options);
 		setTimeout(function () {
 			// Let Q.find traverse the rest of the tree first,
 			// to make sure that it finds and constructs all the tools,
