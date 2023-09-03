@@ -1910,6 +1910,9 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 				ttk = (k in target) && Q.typeOf(target[k]);
 				tak = Q.typeOf(argk);
 				if (ttk === 'Q.Event') {
+					if (argk && argk.typename === 'Q.Event') {
+						argk = argk.handlers; // happens if event was serialized to JSON before
+					}
 					if (argk && argk.constructor === Object) {
 						for (m in argk) {
 							target[k].set(argk[m], m);
