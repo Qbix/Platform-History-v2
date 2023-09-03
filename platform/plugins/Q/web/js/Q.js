@@ -2109,6 +2109,22 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
 	return result;
 };
 
+/**
+ * A simplified version of Q.normalize that remembers results, to avoid
+ * doing the same operation multiple times.
+ * @static
+ * @method normalize.memoized
+ * @param {String} text
+ * @return {String}
+ */
+Q.normalize.memoized = function (text) {
+	if (!(text in Q.normalize.memoized.collection)) {
+		Q.normalize.memoized.collection[text] = Q.normalize(text);
+	}
+	return Q.normalize.memoized.collection[text]
+};
+Q.normalize.memoized.collection = {};
+
 function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	var p, i = 0;
 	if (context === null) return undefined;
@@ -5059,10 +5075,10 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  */
 Tp.child = function Q_Tool_prototype_child(append, name) {
 	name = name && Q.normalize(name);
-	var prefix2 = Q.normalize(this.prefix + (append || ""));
+	var prefix2 = Q.normalize.memoized(this.prefix + (append || ""));
 	var id, ni, n;
 	for (id in Q.Tool.active) {
-		ni = Q.normalize(id);
+		ni = Q.normalize.memoized(id);
 		for (n in Q.Tool.active[id]) {
 			if (name && name != n) {
 				break;
@@ -5082,9 +5098,9 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
  * @return {Array|null}
  */
 Tp.parentIds = function Q_Tool_prototype_parentIds() {
-	var prefix2 = Q.normalize(this.prefix), ids = [], id, ni;
+	var prefix2 = Q.normalize.memoized(this.prefix), ids = [], id, ni;
 	for (id in Q.Tool.active) {
-		ni = Q.normalize(id);
+		ni = Q.normalize.memoized(id);
 		if (ni.length < prefix2.length-1
 		&& ni === prefix2.substr(0, ni.length)
 		&& prefix2[ni.length] === '_') {
@@ -5138,7 +5154,7 @@ Tp.parent = function Q_Tool_prototype_parent() {
  * @return {Q.Tool|null}
  */
 Tp.ancestor = function Q_Tool_prototype_parent(name) {
-	name = Q.normalize(name);
+	name = Q.normalize.memoized(name);
 	var parents = this.parents();
 	for (var id in parents) {
 		for (var n in parents[id]) {
@@ -5196,8 +5212,8 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	}
 
 	// give the tool a chance to clean up after itself
-	var normalizedName = Q.normalize(this.name);
-	var normalizedId = Q.normalize(this.id);
+	var normalizedName = Q.normalize.memoized(this.name);
+	var normalizedId = Q.normalize.memoized(this.id);
 	_beforeRemoveToolHandlers["id:"+normalizedId] &&
 	_beforeRemoveToolHandlers["id:"+normalizedId].handle.call(this);
 	_beforeRemoveToolHandlers[normalizedName] &&
@@ -5215,7 +5231,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 		}
 	}
 	
-	var nn = Q.normalize(this.name);
+	var nn = Q.normalize.memoized(this.name);
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
 	var tools = Q.Tool.active[this.id];
@@ -5226,7 +5242,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 		this.element.Q.tool = null;
 		delete Q.Tool.active[this.id];
 	} else if (this.element.Q.tool
-	&& Q.normalize(this.element.Q.tool.name) === nn) {
+	&& Q.normalize.memoized(this.element.Q.tool.name) === nn) {
 		this.element.Q.tool = Q.Tool.byId(this.id);
 	}
 
@@ -5293,7 +5309,7 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSibl
 		callback = withSiblings;
 		withSiblings = false;
 	}
-	name = name && Q.normalize(name);
+	name = name && Q.normalize.memoized(name);
 	var id, n;
 	var tool = this;
 	var children = tool.children(name, levels);
@@ -5390,7 +5406,7 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 		element.addClass('Q_tool '+ntt+'_tool');
 		if (toolOptions && toolOptions[i]) {
 			element.options = element.options || {};
-			element.options[Q.normalize(tn)] = toolOptions[i];
+			element.options[Q.normalize.memoized(tn)] = toolOptions[i];
 		}
 		if (!element.getAttribute('id')) {
 			if (typeof id === 'function') {
@@ -11031,7 +11047,7 @@ function _processTemplateElements(container) {
 		var element = this;
 		var id = this.id || this.getAttribute('data-name');
 		var type = this.getAttribute('data-type') || 'handlebars';
-		var n = Q.normalize(id);
+		var n = Q.normalize.memoized(id);
 		tpl[n] = this.innerHTML.decodeHTML().trim();
 		tpi[n] = {type: type};
 		Q.each(['partials', 'helpers', 'text'], function (i, aspect) {

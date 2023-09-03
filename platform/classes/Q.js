@@ -2199,6 +2199,22 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
 	return result;
 };
 
+/**
+ * A simplified version of Q.normalize that remembers results, to avoid
+ * doing the same operation multiple times.
+ * @static
+ * @method normalize.memoized
+ * @param {String} text
+ * @return {String}
+ */
+Q.normalize.memoized = function (text) {
+	if (!(text in Q.normalize.memoized.collection)) {
+		Q.normalize.memoized.collection[text] = Q.normalize(text);
+	}
+	return Q.normalize.memoized.collection[text]
+};
+Q.normalize.memoized.collection = {};
+
 /*
  * A collection of HTTP servers started with Q.listen
  * @property servers
