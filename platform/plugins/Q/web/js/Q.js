@@ -5326,7 +5326,19 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSibl
  * @return {String}
  */
 Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
-	var json = JSON.stringify(options).encodeHTML().replaceAll({"&quot;": '"'});
+	return JSON.stringify(options).encodeHTML().replaceAll({"&quot;": '"'});
+};
+
+/**
+ * Sets the options on the element, for example before it is retained
+ * for Q/tabs switchTo, for Q.loadUrl, or another transition.
+ * That way, the options are retained and the tool can refer to them
+ * when it's activated again, which may help skip some steps in tool.refresh()
+ * @param {Object} options You may want to do Q.extend(tool.options, newStuff) here
+ */
+Tp.updateElementOptions = function _Q_Tool_updateElementOptions(options) {
+	var attrName = 'data-' + this.name.replace('_', '-');
+	this.element.setAttribute(attrName, Q.Tool.encodeOptions(this.state));
 };
 
 /**

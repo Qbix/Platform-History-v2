@@ -357,6 +357,7 @@ function _Streams_participants(options) {
 		}, tool);
 
 		state.rendered = true;
+		tool.updateElementOptions(Q.extend(tool.options, { rendered: true }));
 	},
 	/**
 	 * Check if avatar exists

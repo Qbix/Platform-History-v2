@@ -357,6 +357,7 @@
 								Q.activate(element);
 								elements.push(element);
 							});
+							// elements have already been activated, so return empty
 							return;
 						}
 					}
