@@ -5075,16 +5075,15 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  */
 Tp.child = function Q_Tool_prototype_child(append, name) {
 	name = name && Q.normalize.memoized(name);
-	var prefix2 = Q.normalize.memoized(this.prefix + (append || ""));
-	var id, ni, n;
+	var prefix2 = this.prefix + (append || "");
+	var id, n, pl = prefix2.length;
 	for (id in Q.Tool.active) {
-		ni = Q.normalize.memoized(id);
 		for (n in Q.Tool.active[id]) {
 			if (name && name != n) {
 				break;
 			}
 			if (id.length >= pl + (append ? 0 : 1)
-			&& id.substring(0, pl) == prefix) {
+			&& id.substring(0, pl) == prefix2) {
 				return Q.Tool.active[id][n];
 			}
 		}
