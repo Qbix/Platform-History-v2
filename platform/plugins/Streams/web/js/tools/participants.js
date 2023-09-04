@@ -154,15 +154,6 @@ function _Streams_participants(options) {
 		tool.$blanks = $('.Streams_participants_blanks', $te);
 		
 		if (tool.element.toolWasRendered) {
-			tool.$count = $('.Streams_participants_count', $te);
-			tool.$max = $('.Streams_participants_max', $te);
-			tool.$summary = $('.Streams_participants_summary', $te);
-			tool.$controls = $('.Streams_participants_controls', $te);
-			tool.$pei = $('.Streams_participants_expand_img', $te);
-			tool.$pet = $('.Streams_participants_expand_text', $te);
-			tool.$pc = $('.Streams_participants_container', $te);
-			tool.$avatars = $('.Streams_participants_avatars', $te);
-			tool.$blanks = $('.Streams_participants_blanks', $te);
 			_continue(tool, callback);
 			return false;
 		}
