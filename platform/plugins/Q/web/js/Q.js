@@ -4534,9 +4534,7 @@ var _toolsToInit = {};
 var _toolsWaitingForInit = {};
 
 function _toolEventFactoryNormalizeKey(key) {
-	var parts = key.split(':', 2);
-	parts[parts.length-1] = Q.normalize.memoized(parts[parts.length-1]);
-	return [parts.join(':')];
+	return key;
 }
 
 /**
