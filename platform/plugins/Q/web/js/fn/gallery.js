@@ -155,7 +155,6 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	}
 	if (!parseInt($this.css('height'))) {
 		$this.css('height', '100%');
-		console.log("gallery height");
 	}
 	$this.css(css);
 	
