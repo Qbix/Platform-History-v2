@@ -130,7 +130,7 @@ function _Streams_participants(options) {
 		},
 		onRetain: function (options) {
 			// for now just refresh it and add the event handlers
-			tool.refresh();
+			this.refresh();
 		}
 	},
 	/**
