@@ -7439,9 +7439,8 @@ Q.replace = function _Q_replace(container, source, options) {
 		source = s;
 	}
 	
-	var replaceElements;
+	var replaceElements = [];
 	if (options.replaceElements) {
-		replaceElements = [];
 		Q.each(options.replaceElements, function (i, e) {
 			replaceElements.push(
 				typeof e === 'string' ? document.getElementById(e) : e
