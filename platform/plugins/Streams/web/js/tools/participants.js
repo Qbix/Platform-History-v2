@@ -128,8 +128,39 @@ function _Streams_participants(options) {
 		beforeRemove: function () {
 
 		},
-		onRetain: function (options, incomingElement) {
-			debugger;
+		onRetain: function (options) {
+			var tool = this, state = tool.state;
+			Q.Streams.get(state.publisherId, state.streamName, function (err, stream, extra) {
+				var fem = Q.firstErrorMessage(err);
+				if (fem) {
+					return console.warn("Streams/participants: " + fem);
+				}
+				tool.stream = this;
+				Q.Streams.Stream.onRefresh(state.publisherId, state.streamName)
+				.set(tool.refresh.bind(tool), tool);
+				var i = 0, c = 0;
+				Q.Tool.clear(tool.$avatars[0]);
+				Q.Tool.clear(tool.$blanks[0]);
+				tool.$avatars.empty();
+				tool.$blanks.empty();
+				Q.each(extra && extra.participants, function (userId, participant) {
+					if (participant.state !== 'participating') {
+						return;
+					}
+					++c;
+					if (!state.maxShow || ++i <= state.maxShow) {
+						tool.addAvatar(userId);
+					}
+				}, { sort: 'insertedTime', ascending: false });
+				state.count = c;
+				if (state.showBlanks) {
+					Q.each(c, state.maxShow-1, 1, function () {
+						tool.addAvatar('');
+					});
+				}
+				_continue(tool);
+	
+			}, {participants: state.maxLoad});
 		}
 	},
 	/**
@@ -152,7 +183,7 @@ function _Streams_participants(options) {
 			tool.$pc = $('.Streams_participants_container', $te);
 			tool.$avatars = $('.Streams_participants_avatars', $te);
 			tool.$blanks = $('.Streams_participants_blanks', $te);
-			_continue();
+			_continue(tool);
 			return false;
 		}
 		
@@ -237,106 +268,9 @@ function _Streams_participants(options) {
 					tool.addAvatar('');
 				});
 			}
-			_continue();
+			_continue(tool);
 
 		}, {participants: state.maxLoad});
-
-		function _continue() {
-			tool.stateChanged('count');
-
-			if (state.max) {
-				tool.$max.text('/' + state.max);
-			}
-			
-			Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function () {
-				var stream = this;
-				stream.onMessage("Streams/joined")
-				.set(function (message) {
-					if (tool.avatarExists(message.byUserId)) {
-						return;
-					}
-
-					tool.addAvatar(message.byUserId, true);
-					++tool.state.count;
-					tool.stateChanged('count');
-				}, tool);
-				stream.onMessage("Streams/left")
-				.set(function (message) {
-					if (!tool.avatarExists(message.byUserId)) {
-						return;
-					}
-
-					tool.removeAvatar(message.byUserId);
-					--tool.state.count;
-					tool.stateChanged('count');
-				}, tool);
-				var si = state.invite;
-				if (!si || !stream.testAdminLevel('invite')) {
-					Q.handle(callback, tool, []);
-					return Q.handle(state.onRefresh, tool, []);
-				}
-				if (tool.$('.Streams_inviteTrigger').length) {
-					return; // the invite button already rendered
-				}
-				Q.Text.get("Streams/content", function (err, result) {
-					var text = result && result.invite;
-					if (result && result.invite[state.templates.invite.fields.alt]) {
-						state.templates.invite.fields.alt = text[state.templates.invite.fields.alt];
-					} else {
-                        state.templates.invite.fields.alt = text.command;
-					}
-					if (result && result.invite[state.templates.invite.fields.title]) {
-						state.templates.invite.fields.title = text[state.templates.invite.fields.title];
-					} else {
-                        state.templates.invite.fields.title = text.command;
-					}
-
-					Q.Template.render(
-						'Streams/participants/invite',
-						state.templates.invite.fields,
-						function (err, html) {
-							if (err) return;
-							var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
-							var filter = '.Streams_inviteTrigger';
-							$te.on(Q.Pointer.fastclick, filter, function () {
-								var options = Q.extend({
-									identifier: si.identifier
-								}, si);
-								Q.Streams.invite(
-									state.publisherId, 
-									state.streamName, 
-									options,
-									function (err, data) {
-										state.onInvited.handle.call(tool, err, data);
-									}
-								);
-								return false;
-							}).on(Q.Pointer.click, filter, function () {
-								return false;
-							}).on(Q.Pointer.start.eventName, filter, function () {
-								$te.addClass('Q_discouragePointerEvents');
-								function _pointerEndHandler() {
-									$te.removeClass('Q_discouragePointerEvents');
-									$(window).off(Q.Pointer.end, _pointerEndHandler);
-								}
-								$(window).on(Q.Pointer.end, _pointerEndHandler);
-							});
-
-							if (si.clickable) {
-								$('img', $element).plugin(
-									'Q/clickable', Q.extend({
-										triggers: $element
-									}, si.clickable)
-								);
-							}
-							Q.handle(callback, tool, []);
-							Q.handle(state.onRefresh, tool, []);
-						},
-						state.templates.invite
-					);
-				});
-			});
-		}
 
 		// adjust Streams_participants_container on tool width changed
 		Q.onLayout(tool.$pc[0]).set(function () {
@@ -470,6 +404,104 @@ function _Streams_participants(options) {
 		});
 	}
 });
+
+function _continue(tool) {
+	var state = tool.state;
+	tool.stateChanged('count');
+
+	if (state.max) {
+		tool.$max.text('/' + state.max);
+	}
+	
+	Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function () {
+		var stream = this;
+		stream.onMessage("Streams/joined")
+		.set(function (message) {
+			if (tool.avatarExists(message.byUserId)) {
+				return;
+			}
+
+			tool.addAvatar(message.byUserId, true);
+			++tool.state.count;
+			tool.stateChanged('count');
+		}, tool);
+		stream.onMessage("Streams/left")
+		.set(function (message) {
+			if (!tool.avatarExists(message.byUserId)) {
+				return;
+			}
+
+			tool.removeAvatar(message.byUserId);
+			--tool.state.count;
+			tool.stateChanged('count');
+		}, tool);
+		var si = state.invite;
+		if (!si || !stream.testAdminLevel('invite')) {
+			Q.handle(callback, tool, []);
+			return Q.handle(state.onRefresh, tool, []);
+		}
+		if (tool.$('.Streams_inviteTrigger').length) {
+			return; // the invite button already rendered
+		}
+		Q.Text.get("Streams/content", function (err, result) {
+			var text = result && result.invite;
+			if (result && result.invite[state.templates.invite.fields.alt]) {
+				state.templates.invite.fields.alt = text[state.templates.invite.fields.alt];
+			} else {
+				state.templates.invite.fields.alt = text.command;
+			}
+			if (result && result.invite[state.templates.invite.fields.title]) {
+				state.templates.invite.fields.title = text[state.templates.invite.fields.title];
+			} else {
+				state.templates.invite.fields.title = text.command;
+			}
+
+			Q.Template.render(
+				'Streams/participants/invite',
+				state.templates.invite.fields,
+				function (err, html) {
+					if (err) return;
+					var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
+					var filter = '.Streams_inviteTrigger';
+					$te.on(Q.Pointer.fastclick, filter, function () {
+						var options = Q.extend({
+							identifier: si.identifier
+						}, si);
+						Q.Streams.invite(
+							state.publisherId, 
+							state.streamName, 
+							options,
+							function (err, data) {
+								state.onInvited.handle.call(tool, err, data);
+							}
+						);
+						return false;
+					}).on(Q.Pointer.click, filter, function () {
+						return false;
+					}).on(Q.Pointer.start.eventName, filter, function () {
+						$te.addClass('Q_discouragePointerEvents');
+						function _pointerEndHandler() {
+							$te.removeClass('Q_discouragePointerEvents');
+							$(window).off(Q.Pointer.end, _pointerEndHandler);
+						}
+						$(window).on(Q.Pointer.end, _pointerEndHandler);
+					});
+
+					if (si.clickable) {
+						$('img', $element).plugin(
+							'Q/clickable', Q.extend({
+								triggers: $element
+							}, si.clickable)
+						);
+					}
+					Q.handle(callback, tool, []);
+					Q.handle(state.onRefresh, tool, []);
+				},
+				state.templates.invite
+			);
+		});
+	});
+}
 
 Q.Template.set('Streams/participants/invite',
 	'<div class="Streams_participants_invite Streams_inviteTrigger">' +
