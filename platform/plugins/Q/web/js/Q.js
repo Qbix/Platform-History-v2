@@ -10015,6 +10015,7 @@ Q.activate = function _Q_activate(elem, options, callback, internal) {
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
  * @param {Q.Event} [options.onLoadStart] handlers of this event will be called after the request is initiated, if "quiet" option is false they can add some visual indicators
  * @param {Q.Event} [options.onLoadEnd] handlers called after the request is fully completed, if "quiet" option is false they can add some visual indicators
+ * @param {Q.Event} [options.beforeTransition] handler called before starting to mess with styles, this is where you can save some settings
  * @param {Q.Event} [options.beforeFillSlots] handler called before filling slots with new content
  * @param {Q.Event} [options.onFillSlots] use this handler to do things with elements as soon as they are filled into the slots
  * @param {Q.Event} [options.beforeUnloadUrl] opportunity to save state around current url, such as scroll positions of displayed slots
@@ -10158,6 +10159,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 
 			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action; // old page going out
 			var i, newStylesheets, newStyles;
+
+			Q.handle(o.beforeTransition, Q, [response, url, o]);
 			
 			var domElements = null;
 			if (o.ignorePage) {

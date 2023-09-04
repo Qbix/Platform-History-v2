@@ -205,7 +205,7 @@
 					ignorePage: tool.isInDialog(),
 					ignoreHistory: tool.isInDialog(),
 					slotContainer: slotContainer,
-					beforeFillSlots: beforeFillSlots,
+					beforeTransition: beforeTransition,
 					loader: loader,
 					handler: handler
 				}, 10, state.loaderOptions, 10, loaderOptions);
@@ -228,7 +228,7 @@
 					return container || document.getElementById(slotName+"_slot");
 				}
 				
-				function beforeFillSlots(response, url, options) {
+				function beforeTransition(response, url, options) {
 					// retain contents of existing slots
 					if (state.retain === true
 					|| (state.retain && state.retain[fromTabName])) {
