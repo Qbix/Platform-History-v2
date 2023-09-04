@@ -378,6 +378,7 @@ function _Streams_participants(options) {
 });
 
 function _continue(tool, callback) {
+	var $te = $(tool.element);
 	var state = tool.state;
 	tool.stateChanged('count');
 
