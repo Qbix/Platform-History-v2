@@ -129,38 +129,8 @@ function _Streams_participants(options) {
 
 		},
 		onRetain: function (options) {
-			var tool = this, state = tool.state;
-			Q.Streams.get(state.publisherId, state.streamName, function (err, stream, extra) {
-				var fem = Q.firstErrorMessage(err);
-				if (fem) {
-					return console.warn("Streams/participants: " + fem);
-				}
-				tool.stream = this;
-				Q.Streams.Stream.onRefresh(state.publisherId, state.streamName)
-				.set(tool.refresh.bind(tool), tool);
-				var i = 0, c = 0;
-				Q.Tool.clear(tool.$avatars[0]);
-				Q.Tool.clear(tool.$blanks[0]);
-				tool.$avatars.empty();
-				tool.$blanks.empty();
-				Q.each(extra && extra.participants, function (userId, participant) {
-					if (participant.state !== 'participating') {
-						return;
-					}
-					++c;
-					if (!state.maxShow || ++i <= state.maxShow) {
-						tool.addAvatar(userId);
-					}
-				}, { sort: 'insertedTime', ascending: false });
-				state.count = c;
-				if (state.showBlanks) {
-					Q.each(c, state.maxShow-1, 1, function () {
-						tool.addAvatar('');
-					});
-				}
-				_continue(tool);
-	
-			}, {participants: state.maxLoad});
+			// for now just refresh it and add the event handlers
+			tool.refresh();
 		}
 	},
 	/**
@@ -173,6 +143,16 @@ function _Streams_participants(options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 
+		tool.$count = $('.Streams_participants_count', $te);
+		tool.$max = $('.Streams_participants_max', $te);
+		tool.$summary = $('.Streams_participants_summary', $te);
+		tool.$controls = $('.Streams_participants_controls', $te);
+		tool.$pei = $('.Streams_participants_expand_img', $te);
+		tool.$pet = $('.Streams_participants_expand_text', $te);
+		tool.$pc = $('.Streams_participants_container', $te);
+		tool.$avatars = $('.Streams_participants_avatars', $te);
+		tool.$blanks = $('.Streams_participants_blanks', $te);
+		
 		if (tool.element.toolWasRendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
@@ -187,53 +167,45 @@ function _Streams_participants(options) {
 			return false;
 		}
 		
-		tool.$count = $("<span class='Streams_participants_count'></span>");
-		tool.$max = $("<span class='Streams_participants_max'></span>");
-		tool.$pet = $("<span class='Streams_participants_expand_text'>See All</span>");
-		tool.$pei = $('<img class="Streams_participants_expand_img" />').attr({
-			src: Q.url('{{Q}}/img/expand.png'),
-			alt: "expand"
-		});
-		tool.$controls = $("<div class='Streams_participants_controls' />")
+		if (!tool.$count.length) {
+			tool.$count = $("<span class='Streams_participants_count'></span>");
+		}
+		if (!tool.$max.length) {
+			tool.$max = $("<span class='Streams_participants_max'></span>");
+		}
+		if (!tool.$pet.length) {
+			tool.$pet = $("<span class='Streams_participants_expand_text'>See All</span>");
+		}
+		if (!tool.$pei.length) {
+			tool.$pei = $('<img class="Streams_participants_expand_img" />').attr({
+				src: Q.url('{{Q}}/img/expand.png'),
+				alt: "expand"
+			});
+		}
+		if (!tool.$pei.length) {
+			tool.$controls = $("<div class='Streams_participants_controls' />")
 			.append(
 				$("<div class='Streams_participants_expand' />")
 				.append(tool.$pei, tool.$pet)
 			).appendTo($te);
-		tool.$summary = $("<div class='Streams_participants_summary' />")
+		}
+		if (!tool.$summary.length) {
+			tool.$summary = $("<div class='Streams_participants_summary' />")
 			.append($('<span />').append(tool.$count, tool.$max))
 			.appendTo($te);
-		tool.$pc = $("<div class='Streams_participants_container' />")
+		}
+		if (!tool.$pc.length) {
+			tool.$pc = $("<div class='Streams_participants_container' />")
 			.appendTo($te);
-		tool.$avatars = $("<span class='Streams_participants_avatars' />")
+		}
+		if (!tool.$avatars.length) {
+			tool.$avatars = $("<span class='Streams_participants_avatars' />")
 			.appendTo(tool.$pc);
-		tool.$blanks = $("<span class='Streams_participants_blanks' />")
+		}
+		if (!tool.$blanks.length) {
+			tool.$blanks = $("<span class='Streams_participants_blanks' />")
 			.appendTo(tool.$pc);
-
-		// set expand icon click event
-		tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
-			if (state.expanded) {
-				tool.$blanks.show();
-				$te.animate({height: state.originalHeight}, function () {
-					state.expanded = false;
-				});
-				tool.$pei.attr({
-					src: Q.url('{{Q}}/img/expand.png'),
-					alt: 'expand'
-				});
-				tool.$pet.html('See All');
-			} else {
-				state.originalHeight = $te.height();
-				tool.$blanks.hide();
-				$te.animate({height: tool.$pc.height()}, function () {
-					state.expanded = true;
-				});
-				tool.$pei.attr({
-					src: Q.url('{{Q}}/img/collapse.png'),
-					alt: 'collapse'
-				});
-				tool.$pet.html('Fewer');
-			}
-		});
+		}
 
 		$te.addClass('Streams_participants_loading');
 		Q.Streams.get(state.publisherId, state.streamName, function (err, stream, extra) {
@@ -413,6 +385,32 @@ function _continue(tool) {
 		tool.$max.text('/' + state.max);
 	}
 	
+	// set expand icon click event
+	tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
+		if (state.expanded) {
+			tool.$blanks.show();
+			$te.animate({height: state.originalHeight}, function () {
+				state.expanded = false;
+			});
+			tool.$pei.attr({
+				src: Q.url('{{Q}}/img/expand.png'),
+				alt: 'expand'
+			});
+			tool.$pet.html('See All');
+		} else {
+			state.originalHeight = $te.height();
+			tool.$blanks.hide();
+			$te.animate({height: tool.$pc.height()}, function () {
+				state.expanded = true;
+			});
+			tool.$pei.attr({
+				src: Q.url('{{Q}}/img/collapse.png'),
+				alt: 'collapse'
+			});
+			tool.$pet.html('Fewer');
+		}
+	});
+
 	Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function () {
 		var stream = this;
 		stream.onMessage("Streams/joined")
