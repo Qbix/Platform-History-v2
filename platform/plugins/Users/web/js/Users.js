@@ -3024,7 +3024,7 @@
 		"Users/labels": {
 			js: "{{Users}}/js/tools/labels.js",
 			css: "{{Users}}/css/tools/labels.css",
-            text: ["Users/labels"]
+            text: ["Users/content","Users/labels"]
 		},
 		"Users/roles": {
 			js: "{{Users}}/js/tools/roles.js",
@@ -3049,7 +3049,8 @@
 		},
 		"Users/web3/community": {
 			js: "{{Users}}/js/tools/web3/community.js",
-			css: "{{Users}}/css/tools/web3/community.css"
+			css: "{{Users}}/css/tools/web3/community.css",
+            text: ["Users/content", "Users/web3/community"]
 		}
 	});
 
@@ -4298,7 +4299,15 @@
 		onChainChanged: new Q.Event(),
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
-
+        
+        getExplorerLink: function(address, chainId, partPrepend = 'token/') {
+            if (Q.isEmpty(Q.Users.Web3.chains[chainId].blockExplorerUrls)) {
+                return address;
+            }
+            let t = Q.Users.Web3.chains[chainId].blockExplorerUrls;
+            t = Q.isArrayLike(t) ? t[0] : t;
+            return t + partPrepend + address;
+        },
 		/**
 		 * Abbreviates a Web3 address
 		 * @param {String} address A string of the form "0x..."

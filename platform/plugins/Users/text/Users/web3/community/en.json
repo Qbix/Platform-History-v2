@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity" : "Create Community"
+    },
+    "list": {
+        "table": {
+            "td0":"Chain Name",
+            "td1":"Chain Id",
+            "td2":"Community address"
+        },
+        "btnTitle": "Produce"
+    },
+    "form": {
+        "labels": {
+            "chain": "Chain",
+            "hook": "Hook",
+            "invitedHook": "InvitedHook",
+            "name": "Name",
+            "symbol": "Symbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "ERC721 Name",
+            "symbol": "ERC721 Symbol",
+            "contracturi": "contract URI"
+        },
+        "small": {
+            "hook": "hook address of contract implemented ICommunityHook interface. Can be address(0)",
+            "invitedHook": "invitedHook address of contract implemented ICommunityInvite interface. Can be address(0)",
+            "name": "ERC721 Name",
+            "symbol": "ERC721 Symbol",
+            "contracturi": "contract URI"
+        },
+        "err": {
+            "hook": "<b>Hook</b> invalid",
+            "invitedHook": "<b>invitedHook</b> invalid",
+            "name": "<b>Name</b> invalid",
+            "symbol": "<b>Symbol</b> invalid",
+            "contracturi": "<b>contractURI</b> invalid"
+        },
+        "btnTitle": "Produce"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Can't find factoryAddress",
+        "transactionFailed": "Transaction failed",
+        "smthWentWrong": "Something went wrong"
+    },
+    "foo": "bar"
+}

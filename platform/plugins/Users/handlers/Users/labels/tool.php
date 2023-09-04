@@ -19,9 +19,8 @@ function Users_labels_tool($options) {
     // ------------------------------
     $user = Users::loggedInUser(true);
     $userWallet = null;
-    $userWallet = $user->getXid("web3_{$options['chainId']}");
-    $userWallet = !isset($userWallet) ? $user->getXid("web3_all") : $userWallet;
-    $options["userWallet"] = $userWallet;
+    
+    
 
 //    $updateCache = Q::ifset($options, 'updateCache', false);
 //	if ($updateCache) {
@@ -39,10 +38,11 @@ function Users_labels_tool($options) {
     //$web3Roles = Users_Web3::execute($abiPathCommunity, $communityAddress, "getRoles", array(), $chainId, $caching, $cacheDuration);
     if (
         isset($chainId) &&
-        isset($communityAddress) &&
-        isset($userWallet)
+        isset($communityAddress)
     ) {
-
+        $userWallet = null;
+        $userWallet = $user->getXid("web3_{$options['chainId']}");
+        $userWallet = !isset($userWallet) ? $user->getXid("web3_all") : $userWallet;
         if ($userWallet) {
             try {
 
@@ -56,11 +56,58 @@ function Users_labels_tool($options) {
         }
     }
     
+    
+    
+//if (!Users::isCommunityId($user->id)) {
+    $canAddWeb3 = array();
+    
+    $user_apps_chains = Q_Config::get("Users", "apps", "web3", array());
+                
+
+    foreach($user_apps_chains as &$chain) {
+        if (!$chain['appId'] || $chain['appIdForAuth'] == 'all') {
+            continue;
+        }
+        
+        $tmp = new Users_ExternalTo();
+        $tmp->platform = 'web3';
+        $tmp->userId = $userId;
+        $tmp->appId = $chain['appId'];
+
+        $ret = $tmp->retrieve();
+        
+        $userWallet = null;
+        $userWallet = $user->getXid("web3_{$chain['appId']}");
+        $userWallet = !isset($userWallet) ? $user->getXid("web3_all") : $userWallet;
+        
+        if ($ret && $ret->xid && $userWallet) {
+            array_push($canAddWeb3,
+                array(
+                    'communityAddress' => $ret->xid,
+                    'userWallet' => $userWallet,
+                    'name' => $chain['name'],
+                    'chainId' => $chain['appId'],
+                    'userId' => $userId,
+//                    'platform' => 'web3',
+
+                )
+            );
+        }
+
+    }
+    unset($chain);
+    
+    // or maybe will be better just to get all xids with a single query
+
+    //$options["chains"] = $chains;
+    
+    
+    
+    
     //These options are used just to pre-check, draw the button, 
     //and prevent unnecessary attempts to send a transaction on the blockchain. 
     //The transaction cannot be mined if the sender is not in the owners' role.
     $options["canAddWeb3"] = $canAddWeb3;
-//var_dump($canAddWeb3);
 
 	Q_Response::setToolOptions($options);
 }
