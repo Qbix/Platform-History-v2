@@ -52,7 +52,7 @@
 Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	
 	o = o || {};
-	var $this = this, i, image, imgs=[], caps=[], current, tm, gallery;
+	var $this = this, i, imgs=[], caps=[], current, tm, gallery;
 	var animTransition, animInterval, animPreviousInterval;
 	var intervals = {
 		"": function (x, y, params) {
@@ -154,7 +154,8 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 		css.position = 'relative';
 	}
 	if (!parseInt($this.css('height'))) {
-		$this.css('height', $this.parent().innerHeight());
+		$this.css('height', '100%');
+		console.log("gallery height");
 	}
 	$this.css(css);
 	
@@ -215,7 +216,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 		}
 	}
 	
-	var gallery = {
+	gallery = {
 		options: o,
 		onLoad: o.onLoad,
 		play: function () {
