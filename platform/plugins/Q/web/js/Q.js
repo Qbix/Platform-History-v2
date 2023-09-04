@@ -4534,7 +4534,10 @@ var _toolsToInit = {};
 var _toolsWaitingForInit = {};
 
 function _toolEventFactoryNormalizeKey(key) {
-	return key;
+	if (key.indexOf(':') >= 0) {
+		return key;
+	}
+	return Q.normalize.memoized(key);
 }
 
 /**
