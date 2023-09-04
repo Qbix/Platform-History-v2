@@ -127,6 +127,9 @@ function _Streams_participants(options) {
 	Q: {
 		beforeRemove: function () {
 
+		},
+		onRetain: function (options, incomingElement) {
+			debugger;
 		}
 	},
 	/**
@@ -139,7 +142,7 @@ function _Streams_participants(options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 
-		if (state.rendered) {
+		if (tool.element.toolWasRendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
 			tool.$summary = $('.Streams_participants_summary', $te);
@@ -356,7 +359,10 @@ function _Streams_participants(options) {
 			}
 		}, tool); 
 
-		state.rendered = true;
+		// We will leave this even after tool is removed,
+		// so that when its element is retained, we don't refresh it.
+		// To remove pollution we could have used a WeakMap.
+		tool.element.toolWasRendered = true;
 	},
 	/**
 	 * Check if avatar exists
