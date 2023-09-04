@@ -120,7 +120,7 @@ class Users_Web3 extends Base_Users_Web3 {
             $provider->setPersonalData($from, $privateKey);
         }
 			
-        $contract = new SWeb3_contract($provider, $contractAddress, $contractABI);
+        $contract = new SWeb3_Contract($provider, $contractAddress, $contractABI);
         
 		if ($privateKey) {
             if (is_array(self::$batching[$appInfo['appId']])) {
