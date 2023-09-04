@@ -163,7 +163,7 @@ function _Streams_participants(options) {
 			tool.$pc = $('.Streams_participants_container', $te);
 			tool.$avatars = $('.Streams_participants_avatars', $te);
 			tool.$blanks = $('.Streams_participants_blanks', $te);
-			_continue(tool);
+			_continue(tool, callback);
 			return false;
 		}
 		
@@ -240,7 +240,7 @@ function _Streams_participants(options) {
 					tool.addAvatar('');
 				});
 			}
-			_continue(tool);
+			_continue(tool, callback);
 
 		}, {participants: state.maxLoad});
 
@@ -377,7 +377,7 @@ function _Streams_participants(options) {
 	}
 });
 
-function _continue(tool) {
+function _continue(tool, callback) {
 	var state = tool.state;
 	tool.stateChanged('count');
 
