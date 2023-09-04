@@ -20,7 +20,6 @@ var Users = Q.Users;
  *   @param {String} [options.contactUserId] Pass a user id here to var the tool add/remove contacts with the various labels, between userId and contactUserId
  *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
- *   @param {String} options.chainId chainId chain id in which tool try to create(and view) new web3 roles
  *   @param {String} options.abiPath="Users/templates/R1/Community/contract". 
  *      ABI for community contract
  *   @param {String} options.addToPhonebook true if run from mobile 
@@ -47,7 +46,13 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 		state.userId = Users.loggedInUserId();
 	}
 	if (state.canAdd === true) {
-		state.canAdd = Q.text.Users.labels.addLabel;
+        //state.canAdd = tool.text.addLabel2;
+        state.canAdd = Users.isCommunityId(state.userId) ?
+            tool.text.newRole
+            :
+            tool.text.addLabel
+            ;    
+        
 	}
     
 	if (Users.isCommunityId(state.userId)) {
@@ -99,8 +104,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	contactUserId: null,
 	canAdd: false,
     //web3: {
-    chainId: null,
     abiPath: "Users/templates/R1/Community/contract",
+    canAddWeb3: null, // filled on backend side
     //},
 	addToPhonebook: Q.info.isMobile,
     icon: 200,
@@ -136,6 +141,24 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             });
         });
     },
+    _getCommunityAddress: function(chainId) {
+        var tool = this;
+        var state = tool.state;
+
+        var status = false;
+        var communityAddress = false;
+        
+        Q.each(state.canAddWeb3, function (i, item) {
+            
+            if (item["chainId"] == chainId && item["userId"] == state.userId) {
+                status = true;
+                communityAddress = item['communityAddress'];
+            }
+            //delete(labels[label]);
+        });
+            
+        return [status, communityAddress];
+    },
     /**
      * if first argument is present and isntance of $  - it's editing
      * overwise - add new label
@@ -157,18 +180,21 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                         template: {
                             name: "Users/labels/manage/edit",
                             fields: {
+                                editable: state.editable,
                                 src: Users.iconUrl($item.data('icon'), 200),
                                 title: $item.data('title'),
                                 description:$item.data('description')
+                                
                             }
                         }
                     }
                 :
                     {
-                        title: tool.text.newLabel,
+                        title: state.canAdd ? state.canAdd : tool.text.newLabel,
                         template: {
                             name: "Users/labels/manage/add",
                             fields: {
+                                editable: state.editable,
                                 src: Q.url("{{Users}}/img/icons/default/200.png"),
                                 canAddWeb3: state.canAddWeb3,
                             }
@@ -193,16 +219,22 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                                 var title = $inputTitle.val();
                                 if (!title) return;
-                                var valRolePlace = $rolePlace.val();
+                                var chainId = $rolePlace.val();
                                 tool.element.addClass('Q_loading');
                                 Q.Dialogs.pop();
-                                if (valRolePlace == 'native') {
+                                if (chainId == 'native') {
                                     tool._addWeb2(title, null, function(){
                                         tool.element.removeClass('Q_loading');
                                     })
 
-                                } else if (valRolePlace == 'web3') {
-                                    Q.Communities.Web3.Roles.add(state.communityAddress, state.chainId, null, title, function (err, status) {
+                                } else {
+                                    
+                                    let st, communityAddress;
+                                    [st, communityAddress] = tool._getCommunityAddress(chainId);
+                                    if (!st) return;
+                                    
+        
+                                    Q.Communities.Web3.Roles.add(communityAddress, chainId, null, title, function (err, status) {
 
                                         if (err) {
                                             tool.element.removeClass('Q_loading');
@@ -210,8 +242,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                             return;
                                         }
 
-                                        Q.Communities.Web3.Roles.getIndex(state.communityAddress, state.chainId, null, title, function (err, index) {
-                                            var web3Label = Q.Communities.Web3.Roles.labelPattern(state.chainId, index);
+                                        Q.Communities.Web3.Roles.getIndex(communityAddress, chainId, null, title, function (err, index) {
+                                            var web3Label = Q.Communities.Web3.Roles.labelPattern(chainId, index);
                                             tool._addWeb2(title, web3Label, function(){
                                                 tool.element.removeClass('Q_loading');
                                             })
@@ -219,8 +251,6 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                                     });
 
-                                } else {
-                                    console.warn('nothing todo');
                                 }
 
                             });
@@ -249,10 +279,15 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                     if (iconUrlBeforeEdit == 'labels/default') {
                                         // then try to set URI json 
 
-                                        var roleIndex = Q.Communities.Web3.Roles.getRoleIdByPattern(label);
+                                        var chainId, roleIndex;
+                                        
+                                        [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
                                         // http://itr.localhost/URI/ITR/0x13881/19.json
-                                        var uri = Q.url("{{baseUrl}}/URI/"+state.userId+"/"+state.chainId+"/"+roleIndex+".json");
-                                        Q.Communities.Web3.Roles.setRoleURI(state.communityAddress, state.chainId, null, roleIndex, uri, function (err, status) {
+                                        var uri = Q.url("{{baseUrl}}/URI/"+state.userId+"/"+chainId+"/"+roleIndex+".json");
+                                        let st, communityAddress;
+                                        [st, communityAddress] = tool._getCommunityAddress(chainId);
+                                        if (!st) return;
+                                        Q.Communities.Web3.Roles.setRoleURI(communityAddress, chainId, null, roleIndex, uri, function (err, status) {
 
                                             if (err) {
                                                 tool.element.removeClass('Q_loading');
@@ -335,11 +370,6 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			selectedLabels.push($(this).attr('data-label'));
 		});
         
-        // uncomments if need to synch
-//        Q.Communities.Web3.Roles.getAll(state.communityAddress, state.chainId, null, function (err, roles) {
-//            console.log("roles");
-//            console.log(roles);
-//        });
 		Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
 
 			// exclude labels if state.exclude not empty
@@ -353,7 +383,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				canAdd: Q.Users.loggedInUser && state.canAdd,
 				canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
 				phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
-                addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
+                addToPhonebook: state.contactUserId && state.addToPhonebook && tool.text.addToPhonebook
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
 				Q.replace(tool.element, html);
@@ -483,14 +513,18 @@ Q.Template.set('Users/labels/manage/add', `
     <div class="form-group">
         <input name="title" type="text" placeholder="{{titlePlaceholder}}" class="form-control">
     </div>
+    {{#if editable}}
     <div class="form-group">
         <select name="rolePlace" class="form-control">
             <option value="native">{{selectOptionTitle_web2}}</option>
             {{#if canAddWeb3}}
-            <option value="web3">{{selectOptionTitle_web3}}</option>
+            {{#each canAddWeb3}}
+            <option value="{{this.chainId}}">{{this.name}}</option>
+            {{/each}}
             {{/if}}
         </select>
     </div>
+    {{/if}}
     <button name="addLabel" class="Q_button">{{addBtn}}</button>
 </div>
 `,
