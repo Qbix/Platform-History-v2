@@ -7500,8 +7500,8 @@ Q.replace = function _Q_replace(container, source, options) {
 		// attached jQuery data and events, and more.
 		// However, the element's data-TOOL-NAME attribute now contains
 		// the new options.
-		Q.handle(tool.Q.onRetain, tool, [newOptions, incomingElements[id]]);
-		Q.extend(tool.state, 10, newOptions);
+		Q.handle(tool.Q.onRetain, tool, [newOpt, incomingElements[id]]);
+		Q.extend(tool.state, 10, newOpt);
 	}
 	
 	return container;
