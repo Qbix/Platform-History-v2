@@ -4417,7 +4417,7 @@
 						stylesheet: '{{Users}}/css/Users/wallets.css',
 						onActivate: function ($dialog) {
 							var url = new URL(location);
-							url = url.protocol + "://" + url.host + url.pathname;
+							url = url.protocol + "//" + url.host + url.pathname;
 							var urlParams = {
 								baseUrl: url,
 								domain: url.replace(/.+:\/\//, ''),
