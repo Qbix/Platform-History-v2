@@ -2083,8 +2083,8 @@ Q.mixin = function _Q_mixin(A /*, B, ... */) {
  * @param {String} [replacement='_']
  *  Defaults to '_'. A string to replace one or more unacceptable characters.
  *  You can also change this default using the config Db/normalize/replacement
- * @param {RegExp|Boolean} [$characters=null] Defaults to /[^A-Za-z0-9]+/g. 
- *  You can pass true here to allow international letters too, i.e. /[^\p{L}0-9]+/gu.
+ * @param {RegExp|Boolean} [$characters=null] Defaults to alphanumerics across most languages /[^\p{L}0-9]+/gu. 
+ *  You can pass true here to allow only ASCII alphanumerics, i.e. /[^A-Za-z0-9]+/g.
  *  Or pass a RegExp identifying regexp characters that are not acceptable.
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
