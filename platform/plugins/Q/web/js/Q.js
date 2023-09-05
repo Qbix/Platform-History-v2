@@ -1424,6 +1424,7 @@ Q.each = function _Q_each(container, callback, options) {
 			}
 			break;
 		case 'object':
+		case 'function':
 			if (!container || !callback) return;
 			if (options && ('ascending' in options || 'sort' in options)) {
 				var keys = [], key;
@@ -1515,7 +1516,6 @@ Q.each = function _Q_each(container, callback, options) {
 				}
 			}
 			break;
-		case 'function':
 		case 'boolean':
 			if (container === false) break;
 			throw new Q.Error("Q.each: does not support iterating a " + t);
