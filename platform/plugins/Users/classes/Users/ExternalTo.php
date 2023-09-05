@@ -308,7 +308,7 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 	 */
 	function afterSaveExecute($result)
 	{
-		if (empty($this->xid)) {
+		if (!empty($this->xid)) {
 			// don't save it if xid is empty
 			Users_ExternalFrom::insert($this->fields)
 				->onDuplicateKeyUpdate($this->fields)
