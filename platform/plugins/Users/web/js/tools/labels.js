@@ -519,7 +519,14 @@ Q.Template.set('Users/labels/manage/add', `
             <option value="native">{{selectOptionTitle_web2}}</option>
             {{#if canAddWeb3}}
             {{#each canAddWeb3}}
-            <option value="{{this.chainId}}">{{this.name}}</option>
+            <option 
+                value="{{this.chainId}}" 
+                {{#if this.isOwner}}{{else}}disabled{{/if}}
+                class="{{#if this.isOwner}}{{else}}Q_disabled{{/if}}"
+            >
+            {{this.name}}
+    {{this.communityAddress}}|{{this.userWallet}}
+            </option>
             {{/each}}
             {{/if}}
         </select>
