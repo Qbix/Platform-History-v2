@@ -8,7 +8,7 @@
 
 /* jshint -W014 */
 (function (Q, $) {
-
+    
 	var Users = Q.Users = Q.plugins.Users = {
 		info: {}, // this gets filled when a user logs in
 		apps: {}, // this info gets added by the server, on the page
@@ -388,7 +388,7 @@
 		options.appId = appId;
 		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
 	};
-
+    
 	Users.getPlatformAppId = function (platform, appId) {
 		return Q.getObject([platform, appId, 'appIdForAuth'], Users.apps)
 			|| Q.getObject([platform, '*', 'appIdForAuth'], Users.apps)
@@ -458,50 +458,16 @@
 	};
 	
 	// authenticates by opening a wallet and asking user to sign a payload
-	Users.authenticate.web3 = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = Q.extend(Users.authenticate.web3.options, options);
-		Users.Web3.connect(function () {
-			try {
-				var xid, w3sr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
-				if (w3sr_json) {
-					var w3sr = JSON.parse(w3sr_json);	
-					var hash = ethers.utils.hashMessage(w3sr[0]);
-					xid = ethers.utils.recoverAddress(hash, w3sr[1]);
-					if (xid) {
-						var matches = w3sr[0].match(/[\d]{8,12}/);
-						if (!matches) {
-							throw new Q.Exception("Users.authenticate: w3sr cookie missing timestamp");
-						}
-						if (Users.authenticate.expires
-						&& matches[0] < Date.now() / 1000 - Users.authenticate.expires) {
-							throw new Q.Exception("Users.authenticate: web3 token expired");
-						}
-					}
-				}
-
-				xid = xid || Q.getObject("Web3.authResponse.xid", Users);
-				if (xid) {
-					return _handleXid(
-						platform, platformAppId, xid,
-						onSuccess, onCancel, options
-					);
-				}
-			} catch (e) {
-				console.warn(e);
-				// wasn't able to get the current authenticated xid from cookie
-				// so let's sign another authenticated message
-				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
-				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				Web3.authResponse = null;
-			}
-		});
-	};
-	
-	Users.authenticate.web3.options = {
-		chain: 'ETH',
-		network: 'mainnet'
-	};
-	
+	Users.authenticate.web3 = Q.Method.stub;
+    
+    Q.Method.define(
+        Users.authenticate, 
+        '{{Users}}/js/methods/Users/authenticate', 
+        function() {
+            return [Users, Web3, _doCancel, _handleXid];
+        }
+    );
+    
 	function _authenticate(platform) {
 		Users.authenticate(platform, function (user) {
 			priv.login_onConnect(user);
