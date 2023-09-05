@@ -459,8 +459,10 @@ class Q_Utils
 	 * @param {string} $text The text to normalize
 	 * @param {string} [$replacement='_'] A string to replace one or more unacceptable characters.
 	 *  You can also change this default using the config Db/normalize/replacement
-	 * @param {string} [$characters=null] Defaults to '/[^A-Za-z0-9]+/'. A regexp characters that are not acceptable.
+	 * @param {string|boolean} [$characters=null] Defaults to '/[^A-Za-z0-9]+/'. 
 	 *  You can also change this default using the config Db/normalize/characters
+	 *  You can pass true here to allow international letters too i.e. '/[^\p{L}0-9]+/u'
+	 *  Or pass a string identifying regexp characters that are not acceptable.
 	 * @param {integer} [$numChars=200] Defaults to 200, maximum length of normalized string
 	 * @param {boolean} [$keepCaseIntact=false] If true, doesn't convert to lowercase
 	 * @return {string}
