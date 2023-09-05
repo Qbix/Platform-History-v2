@@ -1424,6 +1424,7 @@ Q.each = function _Q_each(container, callback, options) {
 			}
 			break;
 		case 'object':
+        case 'function':
 			if (!container || !callback) return;
 			if (options && ('ascending' in options || 'sort' in options)) {
 				var keys = [], key;
@@ -1515,7 +1516,7 @@ Q.each = function _Q_each(container, callback, options) {
 				}
 			}
 			break;
-		case 'function':
+		
 		case 'boolean':
 			if (container === false) break;
 			throw new Q.Error("Q.each: does not support iterating a " + t);
@@ -5952,7 +5953,6 @@ Q.Method = {
 	 *  should never change between invocations of the method. 
 	 */
 	define: function (o, prefix, closure) {
-
 		Q.each(o, function (k) {
 			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.stub) {
 				return;
