@@ -2227,13 +2227,14 @@
 			})).val(options.userId);
 		}
 		step1_form.plugin('Q/validator');
-
+		var classNames = ['Users_setIdentifier_dialog'];
+		options.className && classNames.push(options.className);
+		identifierType === 'web3' && classNames.push('Users_setIdentifier_web3');
 		setIdentifier_setupDialog.dialog = Q.Dialogs.push({
 			title: options.title || Q.text.Users.setIdentifier.title,
 			content: $(step1_div),
 			elementId: 'Users_setIdentifier_dialog',
-			className: 'Users_setIdentifier_dialog ' + options.className
-				+ (identifierType === 'web3' ? 'Users_setIdentifier_web3' : ''),
+			className: classNames.join(' '),
 			fullscreen: !!options.fullscreen,
 			noClose: !!options.noClose,
 			closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
