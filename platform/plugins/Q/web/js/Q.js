@@ -1424,7 +1424,7 @@ Q.each = function _Q_each(container, callback, options) {
 			}
 			break;
 		case 'object':
-        case 'function':
+		case 'function':
 			if (!container || !callback) return;
 			if (options && ('ascending' in options || 'sort' in options)) {
 				var keys = [], key;
@@ -1516,7 +1516,6 @@ Q.each = function _Q_each(container, callback, options) {
 				}
 			}
 			break;
-		
 		case 'boolean':
 			if (container === false) break;
 			throw new Q.Error("Q.each: does not support iterating a " + t);
@@ -2081,12 +2080,12 @@ Q.mixin = function _Q_mixin(A /*, B, ... */) {
  * @method normalize
  * @param {String} text
  *  The text to normalize
- * @param {String} replacement
+ * @param {String} [replacement='_']
  *  Defaults to '_'. A string to replace one or more unacceptable characters.
  *  You can also change this default using the config Db/normalize/replacement
- * @param {String} characters
- *  Defaults to '/[^A-Za-z0-9]+/g'. A regexp characters that are not acceptable.
- *  You can also change this default using the config Db/normalize/characters
+ * @param {RegExp|Boolean} [$characters=null] Defaults to alphanumerics across most languages /[^\p{L}0-9]+/gu. 
+ *  You can pass true here to allow only ASCII alphanumerics, i.e. /[^A-Za-z0-9]+/g.
+ *  Or pass a RegExp identifying regexp characters that are not acceptable.
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
  * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
@@ -2095,7 +2094,9 @@ Q.mixin = function _Q_mixin(A /*, B, ... */) {
 Q.normalize = function _Q_normalize(text, replacement, characters, numChars, keepCaseIntact) {
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
-	characters = characters || /[^A-Za-z0-9]+/g;
+	characters = characters || (
+		characters === true ? /[^A-Za-z0-9]+/g : /[^\p{L}0-9]+/gu
+	);
 	if (text === undefined) {
 		debugger; // pause here if debugging
 	}
