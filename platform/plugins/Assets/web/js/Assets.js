@@ -7,7 +7,7 @@
 
 	var Users = Q.Users;
 	var Streams = Q.Streams;
-	var Assets = Q.Assets = Q.plugins.Assets = {
+	var Assets = Q.Assets = Q.plugins.Assets = Q.Method.define({
 
 		/**
 		 * Operates with credits.
@@ -850,68 +850,10 @@
 		 * For dealing with currencies
 		 * @class Assets.Currencies
 		 */
-		Currencies: {
-			
-			/**
-			 * Use this to load currency data into Q.Assets.Currencies.symbols and Q.Assets.Currencies.names
-			 * @method load
-			 * @static
-			 * @param {Function} callback Once the callback is called,
-			 *   Q.Assets.Currencies.symbols and Q.Assets.Currencies.names is accessible
-			 */
-			load: Q.getter(function (callback) {
-				Q.req('Assets/currencies', 'load', function (err, data) {
-					var msg = Q.firstErrorMessage(err, data && data.errors);
-					if (msg) {
-						return alert(msg);
-					}
-
-					Assets.Currencies.symbols = data.slots.load.symbols;
-					Assets.Currencies.names = data.slots.load.names;
-
-					Q.handle(callback, Assets.Currencies, [null, Assets.Currencies.symbols, Assets.Currencies.names]);
-				});
-			}),
-			/**
-			 * Use this to get symbol for currency
-			 * @method getSymbol
-			 * @static
-			 * @param {String} currency Currency in ISO 4217 (USD, EUR,...)
-			 * @param {Function} callback
-			 */
-			getSymbol: function (currency, callback) {
-				Assets.Currencies.load(function (err, symbols, names) {
-					if (err) {
-						return;
-					}
-					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
-				});
-			},
-			/**
-			 * Get amount of tokens by wallet and chain
-			 * @method balanceOf
-			 * @param {String} walletAddress
-			 * @param {String} chainId
-			 * @param {function} callback
-			 * @param {object} [options] - some options pass to getContract method
-			 * @param {string} [options.tokenAddress] - filter tokens with this contract address
-			 */
-			balanceOf: function (walletAddress, chainId, callback, options) {
-				Q.req("Assets/balances", "balance", function (err, response) {
-					if (err) {
-						return;
-					}
-
-					var balance = response.slots.balance;
-					Q.handle(callback, null, [null, balance]);
-				}, {
-					fields: {
-						walletAddress: walletAddress,
-						chainId: chainId,
-						tokenAddresses: Q.getObject("tokenAddresses", options)
-					}
-				});
-			},
+		Currencies: Q.Method.define({
+            load: Q.Method.stub,
+			getSymbol: Q.Method.stub,
+			balanceOf: Q.Method.stub,
 			Web3: {
 				/**
 				 * @method getTokens
@@ -970,7 +912,7 @@
 					return null;
 				}
 			}
-		},
+		}, '{{Assets}}/js/methods/Assets/Currencies'),
 
 		/**
 		 * Create batcher
@@ -1411,352 +1353,25 @@
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
-		CommunityCoins: {
-			Pools: {
-				Factory: {
-					Get: function(communityCoinAddress, abiPaths, chainId) {
-						const defaultAbi = {
-							abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
-							abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
-						};
-						var abi = {};
-						if (Q.isEmpty(abiPaths)) {
-							abi = defaultAbi;
-						} else if (Q.isEmpty(abiPaths.abiPathCommunityCoin)) {
-							abi.abiPathCommunityCoin = defaultAbi.abiPathCommunityCoin;
-						} else if (Q.isEmpty(abiPaths.abiPathStakingPoolF)) {
-							abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
-						}
-					
-						return Q.Users.Web3.getContract(
-							abi.abiPathCommunityCoin, 
-							{
-								contractAddress: communityCoinAddress,
-								readOnly: true,
-								chainId: chainId
-							}
-						).then(function (contract) {
-							return contract.instanceManagment();
-						}).then(function (stakingPoolFactory) {
-							return Q.Users.Web3.getContract(
-								abi.abiPathStakingPoolF, 
-								{
-									contractAddress: stakingPoolFactory,
-									readOnly: true,
-									chainId: chainId
-								});
-						})
-					}
-					
-				},
-				/**
-				 * Get pool instances from blockchain
-				 * @method getAll
-				 * @param {String} communityCoinAddress address of communitycoin contract
-				 * @param {Object} abiPaths optional parameter
-				 * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
-				 * @param {String} abiPaths.abiPathStakingPoolF  path in config to CommunityStakingPoolFactory's ABI
-				 * @param {String} chainId
-				 * @param {function} callback
-				 * @param {object} options
-				 */
-				getAll: function Assets_CommunityCoins_Pools_getAll(communityCoinAddress, abiPaths, chainId, callback) {
-					Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId).then(function (instanceInfos) {
-						Q.handle(callback, null, [null, instanceInfos]);
-					}).catch(function(err){
-						console.warn(err);
-					});	
-				},
-				/**
-				 * Get pool instances from blockchain and additionally get token info name/symbol/user/balance
-				 * @method getAll
-				 * @param {Object} poolsList pool list from blockchain. can be obtained from server side(php) or form client side (js) by `Assets.CommunityCoins.Pools._getAll`
-				 * @param {String} communityCoinAddress address of communitycoin contract
-				 * @param {Object} abiPaths optional parameter
-				 * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
-				 * @param {String} abiPaths.abiPathStakingPoolF  path in config to CommunityStakingPoolFactory's ABI
-				 * @param {String} chainId
-				 * @param {String} userAddress
-				 * @param {function} callback
-				 * @param {object} options
-				 */
-				getAllExtended: function Assets_CommunityCoins_Pools_getAllExtended(poolsList, communityCoinAddress, abiPaths, chainId, userAddress, callback){
-					var m;
-					if (Q.isEmpty(poolsList)) {
-						//poolsList retrive from js
-						m = Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
-					} else {
-						//poolsList got from backend;
-						m = new Promise(function (resolve, reject) {resolve(poolsList)})
-					}
-					
-					m.then(function (instanceInfos) {
-						var p = [];
-						p.push(new Promise(function (resolve, reject) {resolve(instanceInfos)}));
-						
-						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(communityCoinAddress, userAddress, chainId));
-						
-						instanceInfos.forEach(function(i){
-							p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
-						});
-
-						return Promise.allSettled(p);
-					}).then(function (_ref) {
-
-						var instanceInfos = _ref.shift(0);
-						var communityCoinInfos = _ref.shift(0);
-
-						var ret = [];
-						_ref.forEach(function(i, index){
-							var t;
-							t = {...instanceInfos.value[index]};
-							for (var j in t) {
-								if (
-								(typeof t[j] == 'object') && 
-								(typeof t.duration._isBigNumber == 'boolean') &&
-								(t.duration._isBigNumber == true)
-								) {
-									t[j] = t[j].toNumber();
-								}
-							}
-							
-							ret.push(
-								$.extend(
-									{}, 
-									//instanceInfos.value[index], 
-									t, 
-									{
-										"erc20TokenInfo": i.status == 'rejected' ? 
-														{name:"", symbol:"", balance:""} : 
-														{name:i.value[0], symbol:i.value[1], balance:i.value[2]}
-									},
-									{
-										"communityCoinInfo": communityCoinInfos.status == 'rejected' ? 
-														{name:"", symbol:"", balance:""} : 
-														{name:communityCoinInfos.value[0], symbol:communityCoinInfos.value[1], balance:communityCoinInfos.value[2]}
-									}
-								)
-							); 
-						});
-
-						Q.handle(callback, null, [null, ret]);
-						
-					}).catch(function(err){
-						console.warn(err);
-					});
-				},
+		CommunityCoins: Q.Method.define({
+			Pools: Q.Method.define({
+				Factory: Q.Method.define({
+					Get: Q.Method.stub
+				}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory'),
+				getAll: Q.Method.stub,
+				getAllExtended: Q.Method.stub,
 				
-				_getAll: function(communityCoinAddress, abiPaths, chainId) {
-					const defaultAbi = {
-						abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",	
-						abiPathStakingPoolF: "Assets/templates/R1/CommunityStakingPool/factory"
-					};
-					var abi = {};
-					if (Q.isEmpty(abiPaths)) {
-						abi = defaultAbi;
-					} else if (Q.isEmpty(abiPaths.abiPathCommunityCoin)) {
-						abi.abiPathCommunityCoin = defaultAbi.abiPathCommunityCoin;
-					} else if (Q.isEmpty(abiPaths.abiPathStakingPoolF)) {
-						abi.abiPathStakingPoolF = defaultAbi.abiPathStakingPoolF;
-					}
-					
-					return Assets.CommunityCoins.Pools.Factory.Get(
-						communityCoinAddress, 
-						abiPaths, 
-						chainId
-					).then(function (_contractPoolF) {
-						contractPoolF = _contractPoolF;
-						return contractPoolF.instances();
-					}).then(function (instanceAddresses) {
-						if (Q.isEmpty(instanceAddresses)) {
-							return instanceAddresses;
-						} else {
-							var p = [];
-							
-							p.push(new Promise(function (resolve, reject) {resolve(instanceAddresses)}));
-							
-							instanceAddresses.forEach(function(i){
-								p.push(contractPoolF.getInstanceInfoByPoolAddress(i));
-							});
-							return Promise.allSettled(p);
-						}
-					}).then(function (_ref) {
-
-						var instanceAddresses = _ref.shift(0);
-
-						var ret = [];
-						_ref.forEach(function(i, index){
-							ret.push(
-								$.extend(
-									{}, 
-									//instanceInfos.value[index], 
-									//t, 
-									{...i.value},
-									{
-										"communityPoolAddress": instanceAddresses.value[index]
-									}
-								)
-							); 
-						});
-
-						return new Promise(function (resolve, reject) {resolve(ret)});
-					});
-				},
-				_getERC20TokenInfo: function(contract, userAddress, chainId){
-
-					return Q.Users.Web3.getContract(
-						"Assets/templates/ERC20", 
-						{
-							contractAddress: contract,
-							readOnly: true,
-							chainId: chainId
-						}
-					).then(function (contract) {
-						var p = [];
-						p.push(contract.name());
-						p.push(contract.symbol());
-						p.push(contract.balanceOf(userAddress));
-
-						return Promise.all(p);
-					})
-						
-						
-				}
-			},
-		},
-		Funds: {
-			getFactory: function(chainId, readonly, abiPath) {
-				if (Q.isEmpty(abiPath)) {
-					abiPath = "Assets/templates/R1/Fund/factory";
-				}
-				return Q.Users.Web3.getFactory(
-					abiPath, 
-					readonly == true 
-					?
-					{
-						chainId: chainId,
-						readOnly: true
-					}
-					:
-					chainId
-				);
-			},
-			getAll: function(chainId, abiPath, callback) {
-				
-				Assets.Funds._getAll(
-					chainId, 
-					abiPath
-				).then(function (instances) {
-					Q.handle(callback, null, [null, instances]);	
-				}).catch(function(err){
-					console.warn(err);
-				})
-				
-			},
-			getFundConfig: function(contractAddress, chainId, userAddress, callback) {
-				Assets.Funds._getFundConfig(
-					contractAddress, 
-					chainId,
-					userAddress
-				).then(function (instances) {
-					Q.handle(callback, null, [null, instances]);	
-				}).catch(function(err){
-					console.warn(err);
-				})
-				
-			},
-			_getAll: function(chainId, abiPath) {
-				var fundFactory;
-				
-				return Assets.Funds.getFactory(
-					chainId, 
-					true,
-					abiPath
-				).then(function (contract) {
-
-					fundFactory = contract;
-					return contract.instancesCount();
-					
-				}).then(function (amount) {
-
-					if (amount == 0) {
-						return new Promise(function (resolve, reject) {resolve([])});
-					}
-				
-					var p = [];
-					for(var i = 0; i < amount; i++) {
-						p.push(fundFactory.instances(i));
-					}
-					return Promise.allSettled(p);
-				});
-				
-			},
-			_getFundConfig: function(contractAddress, chainId, userAddress) {
-
-				return Q.Users.Web3.getContract(
-					'Assets/templates/R1/Fund/contract', {
-						chainId: chainId,
-						contractAddress: contractAddress,
-						readOnly: true
-					}
-				).then(function (contract) {
-					return contract.getConfig();
-				}).then(function (configs) {	
-					
-					var p = [];
-					p.push(new Promise(function (resolve, reject) {resolve(configs)}));
-
-					if (Q.isEmpty(userAddress)) {
-						p.push(new Promise(function (resolve, reject) {resolve([])}));	
-						p.push(new Promise(function (resolve, reject) {resolve([])}));	
-					} else {
-						p.push(Assets.CommunityCoins.Pools._getERC20TokenInfo(configs._sellingToken, userAddress, chainId));
-						p.push(Assets.Funds._getWhitelisted(contractAddress, userAddress, chainId));
-					}
-
-					return Promise.allSettled(p);
-				}).then(function (_ref) {
-
-					var ret = {..._ref[0].value};
-
-					ret = $.extend(
-						{}, 
-						//instanceInfos.value[index], 
-						ret, 
-						{	"fundContract": contractAddress,
-							"erc20TokenInfo": _ref[1].status == 'rejected' ? 
-											{name:"", symbol:"", balance:""} : 
-											{name:_ref[1].value[0], symbol:_ref[1].value[1], balance:_ref[1].value[2]},
-							"inWhitelist": (
-									_ref[2].status == 'rejected' 
-									? 
-									// can be in several cases:
-									// 1. whitelist address == address(0), but use whitelist == true. script will try to get data from ZERO address and will fail
-									// 2. whitelist address != address(0), whitelist == true, but contract didnot support whitelist interface.
-									// 3. smth really unexpected
-									false
-									:
-									_ref[2].value
-									)
-						}
-					);				
-
-					return (new Promise(function (resolve, reject) {resolve(ret)}));
-				});
-				
-			},
-			_getWhitelisted: function(contract, userAddress, chainId){
-				return Q.Users.Web3.getContract(
-					'Assets/templates/R1/Fund/contract', 
-					{
-						contractAddress: contract,
-						readOnly: true,
-						chainId: chainId
-					}
-				).then(function (contract) {
-					return contract.whitelisted(userAddress);
-				});
-			},
+				_getAll: Q.Method.stub,
+				_getERC20TokenInfo: Q.Method.stub
+			}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools'),
+		}, '{{Assets}}/js/methods/Assets/CommunityCoins'),
+		Funds: Q.Method.define({
+			getFactory: Q.Method.stub,
+			getAll: Q.Method.stub,
+			getFundConfig: Q.Method.stub,
+			_getAll: Q.Method.stub,
+			_getFundConfig: Q.Method.stub,
+			_getWhitelisted: Q.Method.stub,
 			adjustFundConfig: function(infoConfig, options) {
 				//make output data an userfriendly
 				var infoConfigAdjusted = Object.assign({}, infoConfig);
@@ -1800,7 +1415,7 @@
 				
 				return infoConfigAdjusted;
 			}
-		},
+		}, '{{Assets}}/js/methods/Assets/Funds'),
 		
 		Web3: {
 			constants: {
@@ -1891,7 +1506,7 @@
 					}}
 			}
 		}
-	};
+	}, '{{Assets}}/js/methods/Assets');
 
 	Assets.Subscriptions.authnet.options = {
 		name: Users.communityName
