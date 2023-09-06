@@ -5955,7 +5955,6 @@ Q.Method = {
 	 *  should never change between invocations of the method. 
 	 */
 	define: function (o, prefix, closure) {
-
 		Q.each(o, function (k) {
 			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.stub) {
 				return;
