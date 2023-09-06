@@ -1,4 +1,4 @@
-Q.exports(function (Users, Web3, _doCancel, _handleXid) {
+Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
     /**
 	 * Authenticates this session with a given platform,
 	 * if the user was already connected to it.
@@ -19,8 +19,8 @@ Q.exports(function (Users, Web3, _doCancel, _handleXid) {
 	 */
     function web3(platform, platformAppId, onSuccess, onCancel, options) {
 
-        options = Q.extend(Users.authenticate.web3.options, options);
-		Users.Web3.connect(function () {
+        options = Q.extend(Q.Users.authenticate.web3.options, options);
+		Q.Users.Web3.connect(function () {
 			try {
 				var xid, w3sr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
 				if (w3sr_json) {
@@ -32,14 +32,14 @@ Q.exports(function (Users, Web3, _doCancel, _handleXid) {
 						if (!matches) {
 							throw new Q.Exception("Users.authenticate: w3sr cookie missing timestamp");
 						}
-						if (Users.authenticate.expires
-						&& matches[0] < Date.now() / 1000 - Users.authenticate.expires) {
+						if (Q.Users.authenticate.expires
+						&& matches[0] < Date.now() / 1000 - Q.Users.authenticate.expires) {
 							throw new Q.Exception("Users.authenticate: web3 token expired");
 						}
 					}
 				}
 
-				xid = xid || Q.getObject("Web3.authResponse.xid", Users);
+				xid = xid || Q.getObject("Web3.authResponse.xid", Q.Users);
 				if (xid) {
 					return _handleXid(
 						platform, platformAppId, xid,
@@ -52,7 +52,7 @@ Q.exports(function (Users, Web3, _doCancel, _handleXid) {
 				// so let's sign another authenticated message
 				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
 				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				Web3.authResponse = null;
+				Q.Web3.authResponse = null;
 			}
 		});
     };

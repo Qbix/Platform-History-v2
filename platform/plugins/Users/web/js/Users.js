@@ -423,13 +423,9 @@
 	};
 	
 	// authenticates using platform, appId, udid provided in the WebView's initial querystring
-	Users.authenticate.ios = 
-	Users.authenticate.android = function (platform, platformAppId, onSuccess, onCancel, options) {
-		_doAuthenticate({
-			udid: Q.info.udid // TODO: sign this with private key on cordova side
-		}, platform, platformAppId, onSuccess, onCancel, options);
-	};
-
+	Users.authenticate.ios = Q.Method.stub;
+	Users.authenticate.android = Q.Method.stub;
+        
 	// authenticates by opening facebook authentication flow
     Users.authenticate.facebook = Q.Method.stub;
    	
@@ -440,7 +436,7 @@
         Users.authenticate, 
         '{{Users}}/js/methods/Users/authenticate', 
         function() {
-            return [Users, Web3, _doCancel, _handleXid];
+            return [_doCancel, _handleXid, _doAuthenticate];
         }
     );
     

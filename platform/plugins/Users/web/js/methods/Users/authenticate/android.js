@@ -5,7 +5,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 	 * if the user was already connected to it.
 	 * It tries to do so by checking a cookie that would have been set by the server.
 	 * @method authenticate
-	 * @param {String} platform Currently it's `facebook`
+	 * @param {String} platform Currently it's `android`
      * @param {String} platformAppId platformAppId
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
 	 *  It is passed the user information if the user changed.
@@ -18,30 +18,10 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 	 *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-    function facebook(platform, platformAppId, onSuccess, onCancel, options) {
-		options = options || {};
-		
-		// make sure facebook is initialized
-		Q.Users.init.facebook(function () {
-			// check if user is connected to facebook
-			Q.Users.Facebook.getLoginStatus(function (response) {
-				if (response.status === 'connected') {
-					_handleXid(
-						platform, platformAppId, response.authResponse.userID,
-						onSuccess, onCancel, Q.extend({response: response}, options)
-					);
-				} else if (platformAppId) {
-					// let's delete any stale facebook cookies there might be
-					// otherwise they might confuse our server-side authentication.
-					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				}
-			}, options.force ? true : false);
-		}, {
-			appId: options.appId
-		});
-	};
-    
-    return facebook;
+    function android(platform, platformAppId, onSuccess, onCancel, options) {
+		_doAuthenticate({
+			udid: Q.info.udid // TODO: sign this with private key on cordova side
+		}, platform, platformAppId, onSuccess, onCancel, options);
+    }
+    return android;
 });
