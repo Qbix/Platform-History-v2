@@ -19,7 +19,7 @@
 		},
 		roles: {}
 	};
-
+    
 	var dc = Q.extend.dontCopy;
 	dc["Q.Users.User"] = true;
 
@@ -365,6 +365,7 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.authenticate = function (platform, onSuccess, onCancel, options) {
+
 		options = options || {};
 		var handler = Users.authenticate[platform];
 		if (!handler) {
@@ -396,31 +397,7 @@
 	};
 
 	// opens a browsertab and authenticates using AuthenticationSession
-	Users.authenticate.qbix = function (platform, platformAppId, onSuccess, onCancel, options) {
-		Q.onReady.add(function () {
-			var browsertab = Q.getObject("cordova.plugins.browsertabs");
-			if (!browsertab) {
-				return console.warn('Users.authenticate: browsertab plugin not found!');
-			}
-			var appId = Q.cookie('Q_appId');
-			var redirect = Q.info.scheme;
-			var deviceId = Q.cookie('Q_udid');
-			if (!appId) {
-				return console.warn('Users.authenticate: appId undefined!');
-			}
-			var url = Q.action("Users/session", {
-				appId: appId,
-				redirect: redirect,
-				deviceId: deviceId,
-				handoff: 'yes'
-			});
-			browsertab.openUrl(url, {scheme: Q.info.scheme, authSession: true}, function(returnUrl) {
-				location.href = returnUrl;
-			}, function(err) {
-				console.error(err);
-			});
-		}, 'Users');
-	};
+    Users.authenticate.qbix = Q.Method.stub;
 	
 	// authenticates using platform, appId, udid provided in the WebView's initial querystring
 	Users.authenticate.ios = Q.Method.stub;
