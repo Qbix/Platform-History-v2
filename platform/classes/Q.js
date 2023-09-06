@@ -2178,14 +2178,15 @@ Q.dir = function _Q_dir(start, callback) {
  * @return {String} the normalized string
  */
 Q.normalize = function _Q_normalize(text, replacement, characters, numChars, keepCaseIntact) {
+	if (text === undefined || typeof text !== 'string') {
+		debugger; // pause here if debugging
+		return text;
+	}
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
 	characters = characters || (
 		characters === true ? /[^A-Za-z0-9]+/g : /[^\p{L}0-9]+/gu
 	);
-	if (text === undefined) {
-		debugger; // pause here if debugging
-	}
 	if (!keepCaseIntact) {
 		text = text.toLowerCase();
 	}
