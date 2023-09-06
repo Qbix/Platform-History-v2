@@ -364,31 +364,8 @@
 	 *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-	Users.authenticate = function (platform, onSuccess, onCancel, options) {
-
-		options = options || {};
-		var handler = Users.authenticate[platform];
-		if (!handler) {
-			var handlers = Object.keys(Users.authenticate).filter(function (k) {
-				return Users.authenticate.hasOwnProperty(k);
-			});
-			throw new Q.Error(
-				"Users.authenticate: platform must be one of " + handlers.join(', ')
-			);
-		}
-		Users.authenticate.occurring = true;
-		var appId = options.appId || Q.info.app;
-		var platformAppId = Users.getPlatformAppId(platform, appId);
-		if (!platformAppId) {
-			console.warn(
-				"Users.authenticate: missing " + 
-				["Users", "apps", platform, appId, "appId"].join('.')
-			);
-			return;
-		}
-		options.appId = appId;
-		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
-	};
+    Users.authenticate = Q.Method.stub;
+        
     
 	Users.getPlatformAppId = function (platform, appId) {
 		return Q.getObject([platform, appId, 'appIdForAuth'], Users.apps)
@@ -396,27 +373,7 @@
 			|| Q.getObject([platform, appId, 'appId'], Users.apps);
 	};
 
-	// opens a browsertab and authenticates using AuthenticationSession
-    Users.authenticate.qbix = Q.Method.stub;
 	
-	// authenticates using platform, appId, udid provided in the WebView's initial querystring
-	Users.authenticate.ios = Q.Method.stub;
-	Users.authenticate.android = Q.Method.stub;
-        
-	// authenticates by opening facebook authentication flow
-    Users.authenticate.facebook = Q.Method.stub;
-   	
-	// authenticates by opening a wallet and asking user to sign a payload
-	Users.authenticate.web3 = Q.Method.stub;
-    
-    Q.Method.define(
-        Users.authenticate, 
-        '{{Users}}/js/methods/Users/authenticate', 
-        function() {
-            return [_doCancel, _handleXid, _doAuthenticate];
-        }
-    );
-    
 	function _authenticate(platform) {
 		Users.authenticate(platform, function (user) {
 			priv.login_onConnect(user);
@@ -5037,5 +4994,26 @@
 	Users.cache = Users.cache || {};
 	
 	Q.ensure.loaders['Q.Users.Faces'] = '{{Users}}/js/Faces.js';
+    
+    // define methods for Users to replace method stubs
+    Q.Method.define(
+        Users, 
+        '{{Users}}/js/methods/Users', 
+        function() {
+            // need to pass all func that will use outside
+            return [_doCancel, _handleXid, _doAuthenticate];
+            
+            /*
+             * or mb to pass object like this and use inside that needed only
+            return {
+                _doCancel : _doCancel, 
+                _handleXid :_handleXid, 
+                _doAuthenticate :_doAuthenticate
+            };
+            */
+            
+        }
+    );
+	
 
 })(Q, jQuery);
