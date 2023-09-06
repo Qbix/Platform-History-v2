@@ -431,32 +431,8 @@
 	};
 
 	// authenticates by opening facebook authentication flow
-	Users.authenticate.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = options || {};
-		var fields = {};
-
-		// make sure facebook is initialized
-		Users.init.facebook(function () {
-			// check if user is connected to facebook
-			Users.Facebook.getLoginStatus(function (response) {
-				if (response.status === 'connected') {
-					_handleXid(
-						platform, platformAppId, response.authResponse.userID,
-						onSuccess, onCancel, Q.extend({response: response}, options)
-					);
-				} else if (platformAppId) {
-					// let's delete any stale facebook cookies there might be
-					// otherwise they might confuse our server-side authentication.
-					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				}
-			}, options.force ? true : false);
-		}, {
-			appId: options.appId
-		});
-	};
-	
+    Users.authenticate.facebook = Q.Method.stub;
+   	
 	// authenticates by opening a wallet and asking user to sign a payload
 	Users.authenticate.web3 = Q.Method.stub;
     
