@@ -2968,20 +2968,6 @@
 			}
 		});
 
-		Users.getLabels = Q.getter(Users.getLabels, {
-			cache: Q.Cache[where]("Users.getLabels", 100),
-			throttle: 'Users.getLabels',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Label(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
 		Contact.get = Q.getter(Contact.get, {
 			cache: Q.Cache[where]("Users.Contact.get", 100),
 			throttle: 'Users.Contact.get',
