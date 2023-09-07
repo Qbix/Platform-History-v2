@@ -1208,7 +1208,7 @@ Q.Cache.key = function _Cache_key(args, functions) {
 			if (functions && functions.push) {
 				functions.push(args[i]);
 			}
-		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i])) {
+		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i]) || args[i] instanceof Array) {
 			keys.push(args[i]);
 		}
 	}
