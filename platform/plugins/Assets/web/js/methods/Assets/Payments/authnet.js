@@ -68,5 +68,12 @@ Q.exports(function(_redirectToBrowserTab){
         }));
     }
     
+    
+	authnet.options = {
+		name: Q.Users.communityName,
+		description: 'a product or service'
+	};
+	
+    
     return authnet
 })

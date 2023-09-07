@@ -64,5 +64,9 @@ Q.exports(function(){
         });
     }
     
+	authnet.options = {
+		name: Q.Users.communityName
+	};
+    
     return authnet;
 })

@@ -418,24 +418,6 @@
 		}
 	}, '{{Assets}}/js/methods/Assets');
 
-	Assets.Subscriptions.authnet.options = {
-		name: Users.communityName
-	};
-	Assets.Subscriptions.stripe.options = {
-		name: Users.communityName,
-		email: Q.getObject("loggedInUser.email", Users),
-		currency: 'USD'
-	};
-	Assets.Payments.authnet.options = {
-		name: Users.communityName,
-		description: 'a product or service'
-	};
-	Assets.Payments.stripe.options = {
-		description: 'a product or service',
-		javascript: 'https://checkout.stripe.com/checkout.js',
-		name: Users.communityName
-	};
-
 	Q.Text.addFor(
 		['Q.Tool.define', 'Q.Template.set'],
 		'Assets/', ["Assets/content"]

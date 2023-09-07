@@ -42,5 +42,12 @@ Q.exports(function(_redirectToBrowserTab){
         }
     }
     
+    stripe.options = {
+		description: 'a product or service',
+		javascript: 'https://checkout.stripe.com/checkout.js',
+		name: Q.Users.communityName
+	};
+
+    
     return stripe;
 })

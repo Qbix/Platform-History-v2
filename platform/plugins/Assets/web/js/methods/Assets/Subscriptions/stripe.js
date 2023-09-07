@@ -77,5 +77,11 @@ Q.exports(function(){
         });
     }
 
+	stripe.options = {
+		name: Q.Users.communityName,
+		email: Q.getObject("loggedInUser.email", Users),
+		currency: 'USD'
+	};
+    
     return stripe;
 })
