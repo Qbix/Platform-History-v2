@@ -5966,9 +5966,6 @@ Q.Method = {
 				return new Promise(function (resolve, reject) {
 					Q.require(url, function (exported) {
 						var method, args;
-						if (this === Q.Exception) {
-							return reject(exported);
-						}
 						if (exported) {
 							args = closure ? closure() : [];
 							var method = exported.apply(o, args);
@@ -5980,7 +5977,6 @@ Q.Method = {
 							return reject("Q.Method.define: Must override method '" + k + "'");
 						}
 						try {
-							// invoke it manually this first time
 							resolve(method.apply(t, a));
 						} catch (e) {
 							reject(e);
@@ -9423,7 +9419,7 @@ Q.exports = function () {
  * @method require
  * @static
  * @param {String} src The src of the script to load
- * @param {Function} callback Always called asynchronously
+ * @param {Function} callback Always called asynchronously.
  */
 Q.require = function (src, callback) {
 	src = Q.url(src);
