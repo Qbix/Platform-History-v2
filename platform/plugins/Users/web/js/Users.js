@@ -8,7 +8,7 @@
 
 /* jshint -W014 */
 (function (Q, $) {
-
+    
 	var Users = Q.Users = Q.plugins.Users = {
 		info: {}, // this gets filled when a user logs in
 		apps: {}, // this info gets added by the server, on the page
@@ -19,7 +19,7 @@
 		},
 		roles: {}
 	};
-
+    
 	var dc = Q.extend.dontCopy;
 	dc["Q.Users.User"] = true;
 
@@ -364,143 +364,15 @@
 	 *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-	Users.authenticate = function (platform, onSuccess, onCancel, options) {
-		options = options || {};
-		var handler = Users.authenticate[platform];
-		if (!handler) {
-			var handlers = Object.keys(Users.authenticate).filter(function (k) {
-				return Users.authenticate.hasOwnProperty(k);
-			});
-			throw new Q.Error(
-				"Users.authenticate: platform must be one of " + handlers.join(', ')
-			);
-		}
-		Users.authenticate.occurring = true;
-		var appId = options.appId || Q.info.app;
-		var platformAppId = Users.getPlatformAppId(platform, appId);
-		if (!platformAppId) {
-			console.warn(
-				"Users.authenticate: missing " + 
-				["Users", "apps", platform, appId, "appId"].join('.')
-			);
-			return;
-		}
-		options.appId = appId;
-		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
-	};
-
+    Users.authenticate = Q.Method.stub;
+        
+    
 	Users.getPlatformAppId = function (platform, appId) {
 		return Q.getObject([platform, appId, 'appIdForAuth'], Users.apps)
 			|| Q.getObject([platform, '*', 'appIdForAuth'], Users.apps)
 			|| Q.getObject([platform, appId, 'appId'], Users.apps);
 	};
 
-	// opens a browsertab and authenticates using AuthenticationSession
-	Users.authenticate.qbix = function (platform, platformAppId, onSuccess, onCancel, options) {
-		Q.onReady.add(function () {
-			var browsertab = Q.getObject("cordova.plugins.browsertabs");
-			if (!browsertab) {
-				return console.warn('Users.authenticate: browsertab plugin not found!');
-			}
-			var appId = Q.cookie('Q_appId');
-			var redirect = Q.info.scheme;
-			var deviceId = Q.cookie('Q_udid');
-			if (!appId) {
-				return console.warn('Users.authenticate: appId undefined!');
-			}
-			var url = Q.action("Users/session", {
-				appId: appId,
-				redirect: redirect,
-				deviceId: deviceId,
-				handoff: 'yes'
-			});
-			browsertab.openUrl(url, {scheme: Q.info.scheme, authSession: true}, function(returnUrl) {
-				location.href = returnUrl;
-			}, function(err) {
-				console.error(err);
-			});
-		}, 'Users');
-	};
-	
-	// authenticates using platform, appId, udid provided in the WebView's initial querystring
-	Users.authenticate.ios = 
-	Users.authenticate.android = function (platform, platformAppId, onSuccess, onCancel, options) {
-		_doAuthenticate({
-			udid: Q.info.udid // TODO: sign this with private key on cordova side
-		}, platform, platformAppId, onSuccess, onCancel, options);
-	};
-
-	// authenticates by opening facebook authentication flow
-	Users.authenticate.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = options || {};
-		var fields = {};
-
-		// make sure facebook is initialized
-		Users.init.facebook(function () {
-			// check if user is connected to facebook
-			Users.Facebook.getLoginStatus(function (response) {
-				if (response.status === 'connected') {
-					_handleXid(
-						platform, platformAppId, response.authResponse.userID,
-						onSuccess, onCancel, Q.extend({response: response}, options)
-					);
-				} else if (platformAppId) {
-					// let's delete any stale facebook cookies there might be
-					// otherwise they might confuse our server-side authentication.
-					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				}
-			}, options.force ? true : false);
-		}, {
-			appId: options.appId
-		});
-	};
-	
-	// authenticates by opening a wallet and asking user to sign a payload
-	Users.authenticate.web3 = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = Q.extend(Users.authenticate.web3.options, options);
-		Users.Web3.connect(function () {
-			try {
-				var xid, w3sr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
-				if (w3sr_json) {
-					var w3sr = JSON.parse(w3sr_json);	
-					var hash = ethers.utils.hashMessage(w3sr[0]);
-					xid = ethers.utils.recoverAddress(hash, w3sr[1]);
-					if (xid) {
-						var matches = w3sr[0].match(/[\d]{8,12}/);
-						if (!matches) {
-							throw new Q.Exception("Users.authenticate: w3sr cookie missing timestamp");
-						}
-						if (Users.authenticate.expires
-						&& matches[0] < Date.now() / 1000 - Users.authenticate.expires) {
-							throw new Q.Exception("Users.authenticate: web3 token expired");
-						}
-					}
-				}
-
-				xid = xid || Q.getObject("Web3.authResponse.xid", Users);
-				if (xid) {
-					return _handleXid(
-						platform, platformAppId, xid,
-						onSuccess, onCancel, options
-					);
-				}
-			} catch (e) {
-				console.warn(e);
-				// wasn't able to get the current authenticated xid from cookie
-				// so let's sign another authenticated message
-				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
-				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				Web3.authResponse = null;
-			}
-		});
-	};
-	
-	Users.authenticate.web3.options = {
-		chain: 'ETH',
-		network: 'mainnet'
-	};
 	
 	function _authenticate(platform) {
 		Users.authenticate(platform, function (user) {
@@ -2227,13 +2099,14 @@
 			})).val(options.userId);
 		}
 		step1_form.plugin('Q/validator');
-
+		var classNames = ['Users_setIdentifier_dialog'];
+		options.className && classNames.push(options.className);
+		identifierType === 'web3' && classNames.push('Users_setIdentifier_web3');
 		setIdentifier_setupDialog.dialog = Q.Dialogs.push({
 			title: options.title || Q.text.Users.setIdentifier.title,
 			content: $(step1_div),
 			elementId: 'Users_setIdentifier_dialog',
-			className: 'Users_setIdentifier_dialog ' + options.className
-				+ (identifierType === 'web3' ? 'Users_setIdentifier_web3' : ''),
+			className: classNames.join(' '),
 			fullscreen: !!options.fullscreen,
 			noClose: !!options.noClose,
 			closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
@@ -4417,7 +4290,7 @@
 						stylesheet: '{{Users}}/css/Users/wallets.css',
 						onActivate: function ($dialog) {
 							var url = new URL(location);
-							url = url.protocol + "://" + url.host + url.pathname;
+							url = url.protocol + "//" + url.host + url.pathname;
 							var urlParams = {
 								baseUrl: url,
 								domain: url.replace(/.+:\/\//, ''),
@@ -5122,5 +4995,26 @@
 	Users.cache = Users.cache || {};
 	
 	Q.ensure.loaders['Q.Users.Faces'] = '{{Users}}/js/Faces.js';
+    
+    // define methods for Users to replace method stubs
+    Q.Method.define(
+        Users, 
+        '{{Users}}/js/methods/Users', 
+        function() {
+            // need to pass all func that will use outside
+            return [_doCancel, _handleXid, _doAuthenticate];
+            
+            /*
+             * or mb to pass object like this and use inside that needed only
+            return {
+                _doCancel : _doCancel, 
+                _handleXid :_handleXid, 
+                _doAuthenticate :_doAuthenticate
+            };
+            */
+            
+        }
+    );
+	
 
 })(Q, jQuery);
