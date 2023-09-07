@@ -928,7 +928,7 @@
 			 * For dealing with NFTs on web3 (EVM-compatible) blockchains
 			 * @class Assets.NFT.Web3
 			 */
-			Web3: {
+			Web3: Q.Method.define({
 				onTokenRemovedFromSale: new Q.Event(),
 				onTokenPutOnSale: new Q.Event(),
 				onTransfer: new Q.Event(),
@@ -937,382 +937,26 @@
 				onSeriesPutOnSale: new Q.Event(),
 				onSeriesRemovedFromSale: new Q.Event(),
 
-				Sales: {
-					getFactory: function (chainId) {
-						return Users.Web3.getFactory(
-							'Assets/templates/R1/NFT/sales/factory',
-							chainId
-						);
-					},
+				Sales: Q.Method.define({
+					getFactory: Q.Method.stub,
+					getContract: Q.Method.stub,
+				}, '{{Assets}}/js/methods/Assets/NFT/Web3/Sales'),
 
-					getContract: function (contractAddress) {
-						return Users.Web3.getContract(
-							'Assets/templates/R1/NFT/sales/contract',
-							contractAddress
-						);
-					}
-				},
+				Locked: Q.Method.define({
+					getContract: Q.Method.stub
+				}, '{{Assets}}/js/methods/Assets/NFT/Web3/Locked'),
 
-				Locked: {
-					getContract: function (contractAddress) {
-						return Users.Web3.getContract(
-							'Assets/templates/R1/NFT/locked',
-							contractAddress
-						);
-					}
-				},
-
-				/**
-				 * Set the info for a series
-				 * @method setSeriesInfo
-				 * @param {String} contractAddress
-				 * @param {String} seriesId
-				 * @param {Object} info Only info.price is really required
-				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
-				 * @param {String} info.fixedPointPrice The fixed-point large integer price (in currency) that minting the NFTs would cost.
-				 * @param {String} [info.currency] Set the ERC20 contract address, otherwise price would be in the native coin (ETH, BNB, MATIC, etc.)
-				 * @param {String} [info.decimals=18] set number of decimals for currencies
-				 * @param {String} [info.authorAddress] Give rights to this address to mintAndDistribute
-				 * @param {String} [info.limit] maximum number that can be minted
-				 * @param {String} [info.onSaleUntil] timestamp in seconds since Unix epoch
-				 * @param {String} [info.duration] can be used instead of onSaleUntil
-				 * @param {Object} [info.commission] information about commissions
-				 * @param {Number} [info.commission.fraction] fraction between 0 and 1
-				 * @param {Address} [info.commission.address] where to send commissions to
-				 * @param {String} [info.baseURI] to override global baseURI, if necessary
-				 * @param {String} [info.suffix] to override global suffix, if necessary
-				 * @return {Promise} promise from ethers.Contract call transaction
-				 */
-				 setSeriesInfo: function (contractAddress, seriesId, info, callback) {
-					if (typeof contractAddress !== 'string'
-					&& !(contractAddress instanceof String)) {
-						throw new Q.Error("contractAddress must be a string");
-					}
-					if (seriesId.toString().substr(0, 2) !== '0x') {
-						throw new Q.Error("seriesId must be a string starting with 0x");
-					}
-					var FRACTION = 100000;
-					info = info || {};
-					var authorAddress = info.authorAddress || Q.Users.Web3.getSelectedXid();
-					var limit = info.limit || 0;
-					var onSaleUntil = info.onSaleUntil
-						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
-					var currency = info.currency || "0x0000000000000000000000000000000000000000";
-                                        var decimals = ("decimals" in info) ? info.decimals : 18;
-					var price = ("fixedPointPrice" in info)
-						? String(info.fixedPointPrice)
-						: ethers.utils.parseUnits(String(info.price), decimals);
-					info.commission = info.commission || {};
-					var commissionFraction = Math.floor((info.commission.fraction || 0) * FRACTION);
-					var commissionAddress = info.commission.address || authorAddress;
-					var baseURI = info.baseURI || ''; // default
-					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.execute(
-						'Assets/templates/R1/NFT/contract',
-						contractAddress, 
-						"setSeriesInfo", 
-						[
-							seriesId,
-							[
-								authorAddress, 
-								limit, 
-								[onSaleUntil, currency, price], 
-								[commissionFraction, commissionAddress], 
-								baseURI, 
-								suffix
-							], 
-						],
-						callback
-					);
-				},
-				/**
-				 * Get NFT contract factory
-				 * @method getFactory
-				 * @param {Object} chainId
-				 * @return {Promise} to be used instead of callback
-				 */
-				getFactory: function (chainId) {
-					return Users.Web3.getFactory(
-						'Assets/templates/R1/NFT/factory',
-						chainId
-					).then(function () {
-						// commented becasue contract.on send infinite requests to publicRPC url
-						//TODO: need to use some third party API to listen contract event
-						/*var events = {
-							InstanceCreated: "onInstanceCreated",
-							OwnershipTransferred: "onInstanceOwnershipTransferred"
-						};
-						Q.each(contract.ABI, function (index, obj) {
-							Q.each(events, function (event1, event2) {
-								if (obj.type === "event" && obj.name === event1) {
-									contract.on(event1, function () {
-										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-									});
-								}
-							});
-						});*/
-						return contract;
-						//Q.handle(callback, null, [err, contract]);
-					});
-				},
-				/**
-				 * Get NFT contract instance
-				 * @method getContract
-				 * @param {Object} chainId
-				 * @param {object} [options]
-				 * @param {string} [options.contractAddress] - if defined override default chain contract address
-				 * @param {string} [options.abiPath] - if defined override default abi path
-				 * @param {function} [callback]
-				 * @return {Q.Promise} instead of callback
-				 */
-				getContract: function (chainId, options, callback) {
-					var address = Q.getObject("contractAddress", options) || chainId.contract;
-					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
-					return Q.Users.Web3.getContract(abiPath, {
-						chainId: chainId,
-						contractAddress: address,
-						readOnly: !!Q.getObject("readOnly", options)
-					}, function (err, contract) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-
-						// commented becasue contract.on send infinite requests to publicRPC url
-						//TODO: need to use some third party API to listen contract event
-						/*var events = {
-							TokenRemovedFromSale: "onTokenRemovedFromSale",
-							TokenPutOnSale: "onTokenAddedToSale",
-							Transfer: "onTransfer",
-							OwnershipTransferred: "onTransferOwnership",
-							TokenBought: "onTokenBought",
-							SeriesPutOnSale: "onSeriesPutOnSale",
-							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-						};
-						Q.each(contract.ABI, function (index, obj) {
-							Q.each(events, function (event1, event2) {
-								if (obj.type === "event" && obj.name === event1) {
-									contract.on(event1, function () {
-										Q.handle(Assets.NFT.Web3[event2], contract, Array.from(arguments))
-									});
-								}
-							});
-						});*/
-
-						Q.handle(callback, null, [null, contract]);
-					});
-				},
-				/**
-				 * Get metadata
-				 * @method metadata
-				 * @param {String} tokenId - NFT tokenId
-				 * @param {String} chainId
-				 * @param {String} contractAddress
-				 * @param {function} callback
-				 */
-				metadata: function (tokenId, chainId, contractAddress, callback) {
-					Q.handle(Assets.batchFunction(), null, ["NFT", "fetchMetadata", tokenId, chainId, contractAddress, function (err) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-
-						Q.handle(callback, null, [null, this]);
-					}]);
-				},
-				/**
-				 * Get amount of tokens by wallet and chain
-				 * @method balanceOf
-				 * @param {String} address
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} [options] - some options pass to getContract method
-				 */
-				balanceOf: function (address, chain, callback, options) {
-					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
-						if (err) {
-							Q.handle(callback, null, [err]);
-						}
-
-						Promise.all([contract.balanceOf(address), contract.name()]).then(function ([tokenAmount, tokenName]) {
-							if (Q.getObject("_isBigNumber", tokenAmount)) {
-								tokenAmount = ethers.utils.formatUnits(tokenAmount);
-							}
-
-							Q.handle(callback, null, [null, tokenAmount, tokenName, contract]);
-						}).catch(function (e) {
-							Q.handle(callback, null, [e]);
-						});
-					});
-				},
-				/**
-				 * Get author of NFT by tokenId and chain.
-				 * If wrong chain selected, suggest to switch chain.
-				 * @method getAuthor
-				 * @param {String} tokenId NFT tokenId
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} options
-				 */
-				getAuthor: function (tokenId, chain, callback, options) {
-					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
-						if (err) {
-							Q.handle(callback, null, [err]);
-						}
-
-						contract.authorOf(tokenId).then(function (address) {
-							Q.handle(callback, null, [null, address, contract]);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
-						});
-					});
-				},
-				/**
-				 * Get owner of NFT by tokenId and chain.
-				 * If wrong chain selected, suggest to switch chain.
-				 * @method getOwner
-				 * @param {String} tokenId NFT tokenId
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} options
-				 */
-				getOwner: function (tokenId, chain, callback, options) {
-					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}),function (err, contract) {
-						if (err) {
-							Q.handle(callback, null, [err]);
-						}
-
-						contract.ownerOf(tokenId).then(function (address) {
-							Q.handle(callback, null, [null, address, contract]);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
-						});
-					});
-				},
-				/**
-				 * Get commissionInfo of NFT by tokenId and chain.
-				 * If wrong chain selected, suggest to switch chain.
-				 * @method commissionInfo
-				 * @param {String} tokenId NFT tokenId
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} options
-				 */
-				commissionInfo: function (tokenId, chain, callback, options) {
-					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
-						if (err) {
-							Q.handle(callback, null, [err]);
-						}
-
-						contract.getCommission(tokenId).then(function (info) {
-							Q.handle(callback, null, [null, info, contract]);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
-						});
-					});
-				},
-				/**
-				 * Get saleInfo of NFT by tokenId and chain.
-				 * If wrong chain selected, suggest to switch chain.
-				 * @method saleInfo
-				 * @param {String} tokenId NFT tokenId
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} options
-				 */
-				saleInfo: function (tokenId, chain, callback, options) {
-					Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract) {
-						if (err) {
-							Q.handle(callback, null, [err]);
-						}
-
-						contract.saleInfo(tokenId).then(function (info) {
-							var price = Q.getObject("1._hex", info);
-							Q.handle(callback, null, [null, {
-								price: price,
-								priceDecimal: parseInt((price || 0), 16)/1e18,
-								currencyToken: Q.getObject("0", info) || null,
-								isSale: !!Q.getObject("2", info)
-							}, contract]);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
-						});
-					});
-				},
-				/**
-				 * Transfer NFT from one address to another.
-				 * @method transferFrom
-				 * @param {String} tokenId NFT tokenId
-				 * @param {Object} chain
-				 * @param {String} recipient address to transfer to
-				 * @param {function} callback
-				 */
-				transferFrom: function (tokenId, chain, recipient, callback) {
-					Q.handle(Assets.NFT.Web3.getOwner, this, [tokenId, chain, function (err, owner, contract) {
-						if (err) {
-							return Q.alert(err);
-						}
-
-						contract.transferFrom(owner, recipient, tokenId).then(function (info) {
-							Q.handle(callback, null, [null, info]);
-						}, function (err) {
-							Q.handle(callback, null, [err.reason]);
-						});
-					}]);
-				},
-				/**
-				 * Buy NFT.
-				 * If wrong chain selected, suggest to switch chain.
-				 * @method buy
-				 * @param {String} tokenId NFT tokenId
-				 * @param {Object} chain Blockchain chain where the tokenId was created
-				 * @param {String} currency currency of NFT
-				 * @param {function} callback
-				 */
-				buy: function (tokenId, chain, currency, callback) {
-					if (window.ethereum.chainId !== chain.chainId) {
-						Q.handle(callback, null, [true]);
-						return Q.alert(Assets.texts.NFT.WrongChain.interpolate({chain: chain.name}), {
-							title: texts.errors.Error
-						});
-					}
-					var _waitTransaction = function (transactionRequest) {
-						if (!Q.getObject("wait", transactionRequest)) {
-							Q.handle(callback, null, [true])
-							return Q.alert("Transaction request invalid!");
-						}
-
-						transactionRequest.wait(1).then(function (TransactionReceipt) {
-							if (Assets.NFT.Web3.isSuccessfulTransaction(TransactionReceipt)) {
-								Q.handle(callback, null, [null, TransactionReceipt]);
-							} else {
-								Q.handle(callback, null, ["transaction failed"]);
-							}
-						}, function (err) {
-							Q.alert(err.reason, {
-								title: texts.errors.Error
-							});
-							Q.handle(callback, null, [err.reason]);
-						});
-					};
-
-					Assets.NFT.Web3.saleInfo(tokenId, chain, function (err, price) {
-						if (err) {
-							return console.warn(err);
-						}
-
-						Assets.NFT.Web3.getContract(chain, function (err, contract) {
-							if (err) {
-								return;
-							}
-
-							/*contract.estimateGas.buy(tokenId, {value: price.price, from: window.ethereum.selectedAddress}).then(function (gasAmount) {
-                                contract.buy(tokenId, {value: price.price, gasLimit: parseInt(gasAmount._hex, 16)}).then(_waitTransaction);
-                            }).catch(function (err) {
-                                debugger;
-                            });*/
-							contract.buy(tokenId, {value: price.price, gasLimit: 10000000}).then(_waitTransaction);
-						});
-					});
-				},
+				setSeriesInfo: Q.Method.stub,
+				getFactory: Q.Method.stub,
+				getContract: Q.Method.stub,
+				metadata: Q.Method.stub,
+				balanceOf: Q.Method.stub,
+				getAuthor: Q.Method.stub,
+				getOwner: Q.Method.stub,
+				commissionInfo: Q.Method.stub,
+				saleInfo: Q.Method.stub,
+				transferFrom: Q.Method.stub,
+				buy: Q.Method.stub,
 				/**
 				 * Get long string and minimize to fixed length with some chars at the end and dots in the middle
 				 * @method minimizeAddress
@@ -1342,7 +986,7 @@
 					var status = Q.getObject("status", receipt);
 					return status === '0x1' || status === 1;
 				}
-			},
+			}, '{{Assets}}/js/methods/Assets/NFT/Web3'),
 
 			/**
 			 * Calculate seriesId from tokenId
