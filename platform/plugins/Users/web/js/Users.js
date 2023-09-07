@@ -364,7 +364,7 @@
 	 *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-    Users.authenticate = Q.Method.stub;
+    Users.authenticate = new Q.Method();
         
     
 	Users.getPlatformAppId = function (platform, appId) {

@@ -5918,76 +5918,83 @@ Q.Links = {
 
 /**
  * For defining method stubs that will be replaced with methods on demand.
+ * Assign this in place of any asynchronous method
+ * that would have a callback and/or return a Promise.
+ * Then call Q.Method.define() on the object containing these.
  * @class Q.Method
+ * @constructor
+ * @param {Object} Pass an object with any properties to assign to the
+ * method function, such as { options: { a: "b" , c: "d" }}
  */
+Q.Method = function (properties) {
+	this.properties = properties || {};
+};
 
-Q.Method = {
+Q.Method.stub = new Q.Method(); // for backwards compatibility
 
-	/**
-	 * Assign this in place of any asynchronous method
-	 * that would have a callback and/or return a Promise.
-	 * Then call Q.Method.define() on the object containing these.
-	 * @property {boolean} stub
-	 */
-	stub: {},
-
-	/**
-	 * Call this on any object that contains Q.Method.stub
-	 * in place of some asynchronous methods. It will set up code to load
-	 * implementations of these methods on demand, from files found at URLs
-	 * of the form {{prefix}}/{{methodName}}.js . In those files, you can
-	 * write code such as the following, using constant objects:
-	 * Q.exports(function (Users, _private) { 
-	 *   return function myCoolMethod(options, callback) {
-	 *     return new Promise(...);
-	 *   }
-	 * });
-	 * When the method is first called, it loads the implementation, and
-	 * returns a promise that resolves to whatever the implementation returns.
-	 * Subsequent calls to the method would simply invoke the implementation.
-	 * @param {Object} o The object which contains some asynchronous methods
-	 * @param {String} prefix The part of the URL before "/{{methodName}}.js".
-	 *  It is passed through Q.url() so it can look like "{{Users}}/js/Users/Web3"
-	 * @param {Function} closure Optional, this function could reference some
-	 *  constants in a closure, and return array of these constants, to be used
-	 *  inside the method implementation in a separate file. The closure constants
-	 *  can be objects, whose contents are dynamic, but the constants themselves
-	 *  should never change between invocations of the method. 
-	 */
-	define: function (o, prefix, closure) {
-		Q.each(o, function (k) {
-			if (!o.hasOwnProperty(k) || o[k] !== Q.Method.stub) {
-				return;
-			}
-			// method stub is still there
-			o[k] = function _Q_Method_shim () {
-				var url = Q.url(prefix + '/' + k + '.js');
-				var t = this, a = arguments;
-				return new Promise(function (resolve, reject) {
-					Q.require(url, function (exported) {
-						var method, args;
-						if (exported) {
-							args = closure ? closure() : [];
-							var method = exported.apply(o, args);
-							if (typeof method === 'function') {
-								o[k] = method;
+/**
+ * Call this on any object that contains new Q.Method()
+ * in place of some asynchronous methods. It will set up code to load
+ * implementations of these methods on demand, from files found at URLs
+ * of the form {{prefix}}/{{methodName}}.js . In those files, you can
+ * write code such as the following, using constant objects:
+ * Q.exports(function (Users, _private) { 
+ *   return function myCoolMethod(options, callback) {
+ *     return new Promise(...);
+ *   }
+ * });
+ * When the method is first called, it loads the implementation, and
+ * returns a promise that resolves to whatever the implementation returns.
+ * Subsequent calls to the method would simply invoke the implementation.
+ * @param {Object} o The object which contains some asynchronous methods
+ * @param {String} prefix The part of the URL before "/{{methodName}}.js".
+ *  It is passed through Q.url() so it can look like "{{Users}}/js/Users/Web3"
+ * @param {Function} closure Optional, this function could reference some
+ *  constants in a closure, and return array of these constants, to be used
+ *  inside the method implementation in a separate file. The closure constants
+ *  can be objects, whose contents are dynamic, but the constants themselves
+ *  should never change between invocations of the method. 
+ */
+Q.Method.define = function (o, prefix, closure) {
+	if (!prefix) {
+		prefix = Q.currentScript().src.split('/').slice(0, -1).join('/')
+			+'/'+Q.Method.define.options.siblingFolder;
+	}
+	Q.each(o, function (k) {
+		if (!o.hasOwnProperty(k) || !(o[k] instanceof Q.Method)) {
+			return;
+		}
+		// method stub is still there
+		var method = o[k];
+		o[k] = function _Q_Method_shim () {
+			var url = Q.url(prefix + '/' + k + '.js');
+			var t = this, a = arguments;
+			return new Promise(function (resolve, reject) {
+				Q.require(url, function (exported) {
+					var m, args;
+					if (exported) {
+						args = closure ? closure() : [];
+						var m = exported.apply(o, args);
+						if (typeof m === 'function') {
+							o[k] = m;
+							for (var property in method.properties) {
+								m[property] = method.properties[property];
 							}
 						}
-						if (o[k] === _Q_Method_shim) {
-							return reject("Q.Method.define: Must override method '" + k + "'");
-						}
-						try {
-							resolve(method.apply(t, a));
-						} catch (e) {
-							reject(e);
-						}
-					});
+					}
+					if (o[k] === _Q_Method_shim) {
+						return reject("Q.Method.define: Must override method '" + k + "'");
+					}
+					try {
+						resolve(m.apply(t, a));
+					} catch (e) {
+						reject(e);
+					}
 				});
-			}
-		});
-		return o;
-	}
-
+			});
+		}
+	});
+	return o;
 };
 
 /**
@@ -6012,6 +6019,10 @@ Q.Session = {
 		});
 		return true;
 	}
+};
+
+Q.Method.define.options = {
+	siblingFolder: 'methods'
 };
 
 /**

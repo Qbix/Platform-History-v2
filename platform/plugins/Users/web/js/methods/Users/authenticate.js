@@ -44,17 +44,17 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
     }
     
     // opens a browsertab and authenticates using AuthenticationSession
-    authenticate.qbix = Q.Method.stub;
+    authenticate.qbix = new Q.Method();
 	
 	// authenticates using platform, appId, udid provided in the WebView's initial querystring
-	authenticate.ios = Q.Method.stub;
-	authenticate.android = Q.Method.stub;
+	authenticate.ios = new Q.Method();
+	authenticate.android = new Q.Method();
         
 	// authenticates by opening facebook authentication flow
-    authenticate.facebook = Q.Method.stub;
+    authenticate.facebook = new Q.Method();
    	
 	// authenticates by opening a wallet and asking user to sign a payload
-	authenticate.web3 = Q.Method.stub;
+	authenticate.web3 = new Q.Method();
     
     Q.Method.define(
         authenticate, 
