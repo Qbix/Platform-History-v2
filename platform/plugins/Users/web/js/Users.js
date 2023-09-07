@@ -2791,8 +2791,8 @@
 	};
 	var Lp = Label.prototype;
 
-	Label.isExternal = function (label) {
-		return label.startsWith(Label.externalPrefix);
+	Label.isExternal = function (label, platform) {
+		return label.startsWith(Label.externalPrefix + (platform || ''));
 	};
 
 	/**
@@ -2963,6 +2963,20 @@
 				}
 				for (var i in params[1]) {
 					params[1][i] = new Users.Contact(params[1][i]);
+				}
+				return callback(subject, params);
+			}
+		});
+
+		Users.getLabels = Q.getter(Users.getLabels, {
+			cache: Q.Cache[where]("Users.getLabels", 100),
+			throttle: 'Users.getLabels',
+			prepare: function (subject, params, callback) {
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				for (var i in params[1]) {
+					params[1][i] = new Users.Label(params[1][i]);
 				}
 				return callback(subject, params);
 			}
