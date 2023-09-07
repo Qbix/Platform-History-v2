@@ -320,7 +320,7 @@
 					"title": "Member",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
 					"canGrant": ["Users/guests"],
-					"canRevoke": [],
+					"canRevoke": ["Users/guests"],
 					"canSee": ["Users/members", "Users/guests" ,"Users/speakers"]
 				},
 				"Users/guests": {
@@ -340,8 +340,8 @@
 				"Users/speakers": {
 					"title": "Speaker",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/speakers",
-					"canAdd": ["Users/members", "Users/guests"],
-					"canRemove": ["Users/members", "Users/guests"],
+					"canGrant": ["Users/members", "Users/guests"],
+					"canRevoke": ["Users/members", "Users/guests"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/speakers"]
 				}
 			},
