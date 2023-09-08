@@ -415,10 +415,11 @@ class Users_Web3 extends Base_Users_Web3 {
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
 			$infuraId = Q::ifset(
 				$chain, "providers", "walletconnect", "infura", "projectId",
-				Q::ifset($chain,"infura", "projectId", null)
+				Q::ifset($chain,"infura", "projectId", Q::ifset($chain,"providers", "walletconnect", "projectId", null))
 			);
 			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", Q::ifset($usersWeb3Config, "blockExplorerUrl", null));
 			$abiUrl = Q::ifset($chain, "abiUrl", Q::ifset($usersWeb3Config, "abiUrl", null));
+			$currency = Q::ifset($chain, "currency", Q::ifset($usersWeb3Config, "currency", array()));
 
 			if (!$rpcUrl) {
 				continue;
@@ -426,7 +427,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
 			$blockExplorerUrls = array($blockExplorerUrl);
-			$temp = compact("name", "chainId", "default", "rpcUrls", "blockExplorerUrls", "abiUrl");
+			$temp = compact("name", "chainId", "default", "rpcUrls", "blockExplorerUrls", "abiUrl", "currency");
 			if ($needChainId && $chainId == $needChainId) {
 				return $temp;
 			}
