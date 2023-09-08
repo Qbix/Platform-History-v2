@@ -436,8 +436,8 @@
 				},
 				"0x13881": {
 					"name": "Polygon MUMBAI",
-					"publicRPC": "https://matic-mumbai.chainstacklabs.com",
-					"rpcUrl": "https://matic-mumbai.chainstacklabs.com",
+					"publicRPC": "https://rpc-mumbai.maticvigil.com",
+					"rpcUrl": "https://rpc-mumbai.maticvigil.com",
 					"blockExplorerUrl": "https://mumbai.polygonscan.com/",
 					"abiUrl": "https://api-testnet.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
 					"currency": {
