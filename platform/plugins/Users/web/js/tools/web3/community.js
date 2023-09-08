@@ -14,6 +14,7 @@ var Users = Q.Users;
  *   @param {Object} options.chains list of chains in which toll will trying to create community
  *   @param {String} options.defaultChain default chain in hexstring (will be choosen in select field)
  *   @param {String} options.communityId communityId
+ *   @param {String} options.showSelectChainId force show user select with chainId, even if it predefined
  *   @param {Object} options.contractParams fields that describe community.
  *     @param {String} [options.contractParams.hook] hook address. can be zero-address. if value present, form will hide input field
  *     @param {String} [options.contractParams.invitedHook] invitedHook address. can be zero-address. if value present, form will hide input field
@@ -36,6 +37,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
     
 	//defaultChain: null,
 	communityId: null,
+    showSelectChainId: false,
 	contractParams: {
 	    hook: null,
         invitedHook: null,
@@ -66,6 +68,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             $("button[name=produce]", $toolElement).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
                 
                 var selectedChainId = $(this).data('chainid');
+                
                 var runImmediately;
                 // if all params defined just immediately send transaction with loading animation
                 if (!Q.isEmpty(state.contractParams.hook) &&
@@ -117,7 +120,8 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                             name: "Users/web3/community/composer",
                             fields: {
                                 chains: state.chains,
-                                //selectedChainId: selectedChainId,
+                                selectedChainId: selectedChainId,
+                                hideSelectChainIdContent: (state.showSelectChainId == false) && selectedChainId,
                                 contractParams: state.contractParams            
                             }
                         },
@@ -125,6 +129,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                             $("button[name=sendtx]", $dialog).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
                                 var userParams, validated;
                                 [validated, userParams] = tool.validateOnForm($dialog);
+                                userParams.selectedChainId = selectedChainId || userParams.selectedChainId;
                                 var factoryAddress = tool.getFactoryAddress(userParams.selectedChainId);
                                 if (typeof factoryAddress === 'undefined') {
                                     validated = false;
@@ -244,7 +249,20 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
         var tool = this;
 		var state = this.state;
 		//var $toolElement = $(tool.element);
-
+        
+        
+        // pre-check to creation when xid alrteady exists
+        // second validation on backend side. tx will be mined but backend will not update xid in DB
+        var xidAlreadyExists=false;
+        state.chains.forEach(function(item, index) {
+            if (item["chainId"] === userParams.selectedChainId && item["xid"]) {
+                xidAlreadyExists = true;
+            }
+        });
+        if (xidAlreadyExists) {return;}
+        //----------------
+                
+        
         var txData = {};
         Q.handle(onProcessWorking);
         Q.Users.Web3.getFactory(
@@ -373,16 +391,20 @@ Q.Template.set('Users/web3/community/list',
 Q.Template.set('Users/web3/community/composer',
 	`
     <div class="form">
+    {{#if hideSelectChainIdContent}}
+    {{else}}
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">{{form.labels.chain}}</label>
             <div class="col-sm-9">
                 <select class="form-control" name="chain">
                 {{#each chains}}
-                    <option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{this.name}}</option>
+                    <option value="{{this.chainId}}" {{#ifEquals ../selectedChainId this.chainId}}selected{{/ifEquals}}>{{this.name}}</option>
                 {{/each}}
                 </select>
             </div>
         </div>
+    
+    {{/if}}
     {{#if contractParams.hook}}
     {{else}}
         <div class="form-group row">

@@ -16,21 +16,31 @@ function Users_transaction_response_mined($params)
     
     // try to check is request was from owner or cron-job
     if (empty($params) && empty(Users::roles($request['communityId'], array('Users/owners')))) {
-	throw new Users_Exception_NotAuthorized();
+        throw new Users_Exception_NotAuthorized();
     }
     
     $user = Users::fetch($request['communityId'], true);
     $chainId = $request['chainId'];
+    $appId = $request['chainId'];
     $contract = $request['contract'];
+    $platform = 'web3';
+            
+    $externalTo = new Users_ExternalTo();
+    $externalTo->userId   = $user->id;
+    $externalTo->platform = $platform;
+    $externalTo->appId    = $appId;
+    $data = $externalTo->retrieve();
     
-    $user->setXid($platform, $contract);
-    $user->save();
-    $externalFrom = new Users_ExternalFrom();
-    $externalFrom->userId   = $user->id;
-    $externalFrom->xid	    = $contract;
-    $externalFrom->platform = "web3";
-    $externalFrom->appId    = $chainId;
-    $externalFrom->save(true);
+    if ($data->xid) {
+    } else {
+        $user->setXid($platform."_".$appId, $contract);
+        $user->save();
+        
+        $externalTo->xid	    = $contract;
+        $externalTo->save(true);
+    }
+         
+    
     // also saves externalTo,
     // because it triggered afterSaveExecute
 
