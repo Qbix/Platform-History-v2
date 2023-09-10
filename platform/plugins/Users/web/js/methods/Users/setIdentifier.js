@@ -204,6 +204,6 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 				setIdentifier_setupDialog.dialog = null;
 			}
 		});
-	}
+	};
 
 });

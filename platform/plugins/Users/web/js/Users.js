@@ -554,220 +554,13 @@
 		}
 	};
 
-	/**
-	 * Copies and signs a given payload using Users.signature (see that function).
-	 * Inserts the signature, publilc key and field under the field whose name is
-	 * stored in Users.signatures.sigField
-	 * @param {Object} payload 
-	 * @param {Function} callback Receives err, fields with the signed payload,
-	 *  expanded with a field named after Users.signature.sigField, containing the keys
-	 *  "signature", "publicKey" and "fieldNames".
-	 * @param {Object} options
-	 * @param {Object} [options.key] Set the key to use, to sign the payload with
-	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
-	 */
-	Users.sign = function (payload, callback, options) {
-		var fields = Q.copy(payload);
-		Users.signature(fields, function (err, signature, key) {
-			if (err) {
-				return callback && callback(err);
-			}
-			if (options.key) {
-				crypto.subtle.exportKey('spki', key.publicKey)
-				.then(function (pk) {
-					var key_hex = Array.prototype.slice.call(
-						new Uint8Array(pk), 0
-					).toHex();
-					_proceed(key_hex);
-				});
-			} else if (Users.Session.publicKey) {
-				_proceed(Users.Session.publicKey);
-			} else {
-				return callback("Users.sign: User.Session.publicKey missing");
-			}
-			function _proceed(publicKeyString) {
-				fields[Users.signatures.sigField] = {
-					signature: signature,
-					publicKey: publicKeyString,
-					fieldNames: options.fieldNames || null
-				};
-				return callback && callback(null, fields);
-			}
-		}, options);
-	};
-
-	/**
-	 * Used when platform user is logged in to platform but not to app.
-	 * Shows prompt asking if user wants to log in to the app as platform user.
-	 * @method prompt
-	 * @param {String} platform For now, only "facebook" is supported
-	 * @param {String} xid The platform xid
-	 * @param {Function} authCallback , this function will be called after user authentication
-	 * @param {Function} cancelCallback , this function will be called if user closed social platform login window
-	 * @param {object} options
-	 *     @param {DOMElement} [options.dialogContainer=document.body] param with jQuery identifier of dialog container
-	 * @param {Object} options
-	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
-	 */
-	Users.prompt = function (platform, xid, authCallback, cancelCallback, options) {
-		if (platform !== 'facebook') {
-			throw new Q.Error("Users.authenticate prompt: The only supported platform for now is facebook");
+	Users.prompt = new Q.Method({
+		options: {
+			dialogContainer: 'body'
 		}
-
-		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Users.getPlatformAppId(appId);
-		var platformCapitalized = platform.toCapitalized();
-
-		if (!Users.prompt.overlay) {
-			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
-			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var caption;
-			var tookAction = false;
-
-			var content_div = $('<div />');
-			var xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users);
-			var queries = ['me'];
-			if (xid2) {
-				queries.push('xid')
-			}
-			var pipe = new Q.Pipe(queries, function (params, subjects) {
-				var meName = Q.getObject(['me', 0, 'name'], params);
-				var mePicture = Q.getObject(['me', 0, 'picture', 'data', 'url'], params);
-				var xidName = Q.getObject(['xid', 0, 'name'], params);
-				var xidPicture = Q.getObject(['xid', 0, 'picture', 'data', 'url'], params);
-				if (xidName) {
-					content_div.append(_usingInformation(xidPicture, xidName, noLongerUsing));
-					caption = Q.text.Users.prompt.doSwitch.interpolate({
-						'platform': platform,
-						'Platform': platformCapitalized
-					});
-				} else {
-					caption = Q.text.Users.prompt.doAuth.interpolate({
-						'platform': platform,
-						'Platform': platformCapitalized
-					});
-				}
-				content_div.append(_usingInformation(mePicture, meName, areUsing))
-					.append(_authenticateActions(caption));
-			});
-			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
-			if (xid2) {
-				FB.api("/"+xid2+"?fields=name,picture.width(50).height(50)", pipe.fill('xid'));;
-			}
-
-			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
-			var titleSlot = $('<div class="Q_title_slot" />');
-			titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(title));
-			var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
-			dialogSlot.append(content_div);
-			Users.prompt.overlay.append(titleSlot).append(dialogSlot)
-				.prependTo(o.dialogContainer);
-		}
-		Q.Dialogs.push({
-			dialog: Users.prompt.overlay,
-			doNotRemove: true,
-			onActivate: function () {
-				Users.init.facebook(function () {
-					FB.XFBML.parse(content_div.get(0));
-				}, {
-					appId: appId
-				});
-			},
-			onClose: function () {
-				if (!tookAction) {
-					if (cancelCallback) cancelCallback(xid);
-				}
-				tookAction = false;
-			}
-		});
-
-		function _usingInformation(icon, name, explanation) {
-			return $("<table />").append(
-				$("<tr />").append(
-					$("<td class='Users_profile_pic' />").append(
-						$('<img />', {src: icon})
-					)
-				).append(
-					$("<td class='Users_explanation_name' />").append(
-						$("<div class='Users_explanation' />").html(explanation)
-					).append(
-						name
-					)
-				)
-			);
-		}
-
-		function _authenticateActions(caption) {
-			return $("<div class='Users_actions Q_big_prompt' />").append(
-				$('<button type="submit" class="Q_button Q_main_button" />').html(caption)
-					.click(function () {
-						tookAction = true;
-						Users.prompt.overlay.data('Q/overlay').close();
-						authCallback();
-					})
-			);
-		}
-	};
-
-
-	/**
-	 * Check permissions granted by platform.
-	 * Currently only facebook is supported.
-	 * @method scope
-	 * @param {String} platform For now, only "facebook" is supported
-	 * @param {Function} callback this function will be called after getting permissions
-	 *   from the external platform. The first parameter is the raw data returned.
-	 *   The second parameter is an array of Boolean corresponding to the scope names in
-	 *   options.check, indicating whether they were granted.
-	 * Callback parameter could be null or response object from social platform
-	 * @param {Object} options
-	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
-	 *   @param {Array} [options.check=[]] Scopes to check.
-	 */
-	Users.scope = function (platform, callback, options) {
-		if (platform !== 'facebook') {
-			throw new Q.Error("Users.scope: The only supported platform for now is facebook");
-		}
-		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Users.getPlatformAppId(appId);
-		Users.init.facebook(function () {
-			if (!Users.Facebook.getAuthResponse()) {
-				callback(null);
-			}
-			FB.api('/me/permissions', function (response) {
-				if (response && response.data) {
-					var checked = [];
-					Q.each(options && options.check, function (a, s) {
-						var granted = false;
-						for (var i = 0, l = response.data.length; i < l; ++i) {
-							if (response.data[i].permission === s
-								&& response.data[i].status) {
-								granted = true;
-							}
-						}
-						checked.push(granted);
-					});
-					callback(response.data, checked);
-				} else {
-					callback(null);
-				}
-			});
-		}, {
-			appId: platformAppId
-		});
-	};
+	});
+	Users.scope = new Q.Method();
+	Users.sign = new Q.Method();
 
 	Users.login = new Q.Method({
 		options: {
@@ -828,7 +621,7 @@
 
 	/**
 	 * Users batch getter.
-	 * @method getgetc
+	 * @method get
 	 * @param {String} userId The user's id
 	 * @param {Function} callback
 	 *    if there were errors, first parameter is an array of errors
@@ -993,29 +786,7 @@
 		return false;
 	}
 
-	/**
-	 * Votes for something
-	 * @static
-	 * @method vote
-	 * @param {String} forType The type of thing to vote for
-	 * @param {String} forId The id of thing to vote for
-	 * @param {Number} [value=1] the value the user has voted for, such as a rating etc.
-	 */
-	Users.vote = function (forType, forId, value) {
-		var fields = {
-			forType: forType,
-			forId: forId
-		};
-		if (value !== undefined) {
-			fields.value = value;
-		}
-		Q.req('Users/vote', ['vote'], function (err, result) {
-			var msg = Q.firstErrorMessage(err, result && result.errors);
-			if (msg) {
-				return console.warn(msg);
-			}
-		}, {method: 'POST', fields: fields});
-	};
+	Users.vote = new Q.Method();
 
 	/**
 	 * Places a hint to click or tap on the screen
@@ -1104,160 +875,11 @@
 		}
 	};
 
-	/**
-	 * Makes a dialog that resembles a facebook dialog
-	 * @method facebookDialog
-	 * @param {Object} [options] A hash of options, that can include:
-	 *  @param {String} [options.title] Dialog title.
-	 *  @required
-	 *  @param {String} [options.content] Dialog content, can be plain text or some html.
-	 *  @required
-	 *  @param {Array} [options.buttons] Array of object containing fields:
-	 *  @required
-	 *    @param {String} [options.buttons.label] is the label of the button
-	 *    @param {Function} [options.buttons.handler] is a click handler for the button
-	 *    @param {Boolean} [options.buttons.default] is a boolean which makes this button styled as default.
-	 *  @param {Object} [options.position] Hash of x/y coordinates. By default (or if null) dialog is centered on the screen.
-	 *  @optional
-	 *  @param {Boolean} [options.shadow]
-	 *  Whether to make a full screen shadow behind the dialog, making other elements on the page inaccessible.
-	 *  @default false
-	 */
-	Users.facebookDialog = function (options) {
-		$('.Users_facebookDialog').remove();
-		$('.Users_facebookDialog_shadow').remove();
+	Users.facebookDialog = new Q.Method();
 
-		var o = $.extend({
-			'position': null,
-			'shadow': false,
-			'title': 'Needs a title',
-			'content': 'Needs content',
-			'buttons': {}
-		}, options);
+	Users.getContacts = new Q.Method();
 
-		if (o.shadow) {
-			var shadow = $('<div class="Users_facebookDialog_shadow" />');
-			$('body').append(shadow);
-		}
-		var dialog = $('<div class="Users_facebookDialog">' +
-			'<div class="Users_facebookDialog_title">' + o.title + '</div>' +
-			'<div class="Users_facebookDialog_content">' + o.content + '</div>' +
-			'</div>');
-		var buttonsBlock = $('<div class="Users_facebookDialog_buttons" />');
-		Q.each(o.buttons, function (k, b) {
-			function _buttonHandler(handler) {
-				return function () {
-					if (handler) {
-						handler(dialog);
-					} else {
-						alert("Users.facebookDialog has no click handler for this button");
-						dialog.close();
-					}
-				};
-			}
-
-			var button = $('<button />')
-				.html(b.label || 'Needs a label')
-				.click(_buttonHandler(b.handler))
-				.appendTo(buttonsBlock);
-			if (b['default']) {
-				button.addClass('Q_button Users_facebookDialog_default_button');
-			}
-		});
-		dialog.append(buttonsBlock);
-		$('body').append(dialog);
-		if (o.position) {
-			dialog.css({
-				left: o.position.x + 'px',
-				top: o.position.y + 'px'
-			});
-		} else {
-			dialog.css({
-				left: ((Q.Pointer.windowHeight() - dialog.width()) / 2) + 'px',
-				top: ((Q.Pointer.windowHeight() - dialog.height()) / 2) + 'px'
-			});
-		}
-		dialog.show();
-
-		dialog.close = function () {
-			dialog.remove();
-			if (typeof(shadow) != 'undefined') {
-				shadow.remove();
-			}
-		};
-	};
-
-	/**
-	 * Get a user's contacts
-	 * @method getContacts
-	 * @static
-	 * @param {String} userId
-	 * @param {Array|String} [labels]
-	 * @param {String|Array} [contactUserIds]
-	 * @param {Function} callback
-	 */
-	Users.getContacts = function (userId, labels, contactUserIds, callback) {
-		if (typeof labels === 'function') {
-			callback = labels;
-			labels = contactUserIds = undefined;
-		} else if (typeof contactUserIds === 'function') {
-			callback = contactUserIds;
-			contactUserIds = undefined;
-		}
-		Q.req('Users/contact', 'contacts', function (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (msg) {
-				Users.onError.handle.call(this, msg, err, data.contacts);
-				Users.get.onError.handle.call(this, msg, err, data.contacts);
-				return callback && callback.call(this, msg);
-			}
-			Q.each(data.slots.contacts, function (i) {
-				data.slots.contacts[i] = new Users.Contact(data.slots.contacts[i]);
-			});
-			Q.handle(callback, data, [err, data.slots.contacts]);
-		}, {
-			fields: {
-				userId: userId,
-				labels: labels,
-				contactUserIds: contactUserIds
-			},
-			method: 'post'
-		});
-	};
-
-	/**
-	 * Get a user's contact labels
-	 * @method getLabels
-	 * @static
-	 * @param {String} userId
-	 * @param {String|Array} [filter] Pass a string prefix here, to filter labels by this prefix.
-	 *  Or pass an array of label names, to filter by.
-	 * @param {Function} callback
-	 */
-	Users.getLabels = function (userId, filter, callback) {
-		if (typeof filter === 'function') {
-			callback = filter;
-			filter = undefined;
-		}
-		Q.req('Users/label', 'labels', function (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (msg) {
-				Users.onError.handle.call(this, msg, err, data.labels);
-				Users.get.onError.handle.call(this, msg, err, data.labels);
-				return callback && callback.call(this, msg);
-			}
-			Q.each(data.slots.labels, function (i) {
-				data.slots.labels[i] = new Users.Label(data.slots.labels[i]);
-			});
-			Q.handle(callback, data, [err, data.slots.labels]);
-		}, {
-			fields: {
-				userId: userId,
-				filter: filter
-			},
-			method: 'post'
-		});
-	};
+	Users.getLabels = new Q.Method();
 
 	/**
 	 * Methods for setting up common user interface elements
@@ -1300,95 +922,19 @@
 	 * Methods for user sessions
 	 * @class Users.Session
 	 */
-	var Session = Users.Session = {
+	Users.Session = Q.Method.define({
 		key: {
 			generateOnLogin: true,
 			name: 'ECDSA', 
 			namedCurve: 'P-384',
 			hash: 'SHA-256'
 		},
-		/**
-		 * Get (or get again) the (non-extractable) cryptographic key from IndexedDB.
-		 * Saves this key also as Users.Session.key.loaded and then calls the callback.
-		 * @method getKey
-		 * @static
-		 * @param {Function} callback Receives (err, key)
-		 */
-		getKey: function (callback) {
-			Q.IndexedDB.open(Q.info.baseUrl, 'Q.Users.keys', 'id', function (err, store) {
-				if (err) {
-					return Q.handle(callback, null, [err]);
-				}
-				var request = store.get('Users.Session');
-				request.onsuccess = function (event) {
-					var key = Users.Session.key.loaded = event.target.result.key;
-					Q.handle(callback, null, [null, key]);
-				};
-				request.onerror = function (event) {
-					Q.handle(callback, null, [event]);
-				};
-			});
-		},
-		/**
-		 * Generates a non-extractable private key, saves it in IndexedDB.
-		 * Then tells the server to save it.
-		 * @method generateKey
-		 * @static
-		 * @param {Function} callback Receives (err, event)
-		 * @return {Boolean} returns false if the key is already set or
-		 *  crypt.subtle is undefined because the page is in insecure context
-		 */
-		generateKey: function (callback) {
-			if (!crypto || !crypto.subtle) {
-				return false;
-			}
-			if (Users.Session.publicKey) {
-				Q.handle(callback, null, ["Users.Session.publicKey was already set"]);
-				return false;
-			}
-			var info = Users.Session.key;
-			return crypto.subtle.generateKey({
-				name: info.name,
-				namedCurve: info.namedCurve
-			}, false, ['sign', 'verify'])
-			.then(function (key) {
-				Q.IndexedDB.open(Q.info.baseUrl, 'Q.Users.keys', 'id', function (err, store) {
-					var request = store.put({
-						id: 'Users.Session',
-						key: key
-					});
-					request.onsuccess = function (event) {
-						// if successfully saved on the client,
-						// then tell the server the exported public key
-						_save(key, function () {
-							Q.handle(callback, null, [null, event, key]);
-						});
-					};
-					request.onerror = function (event) {
-						Q.handle(callback, null, [null, event, key]);
-					}
-				});
-				function _save (key, callback) {
-					var fields =  {
-						info: info
-					};
-					Q.Users.sign(fields, function (err, fields) {
-						Q.req('Users/key', ['saved'], function (err) {
-							// from now on, the server will use it
-							// for validating requests in this session
-							Q.handle(this, arguments);
-						}, {
-							method: 'post',
-							fields: fields
-						});
-					}, {
-						key: key,
-						fieldNames: ['info']
-					});
-				}
-			});
-		}
-	};
+		getKey: new Q.Method(),
+		generateKey: new Q.Method()
+	}, "{{Users}}/js/methods/Users/Session",
+	function() {
+		return [Users, priv];
+	});
 	
 	/**
 	 * Methods for OAuth
@@ -1396,7 +942,7 @@
 	 * @constructor
 	 * @param {Object} fields
 	 */
-	var OAuth = Users.OAuth = {
+	var OAuth = Users.OAuth = Q.Method.define({
 		/**
 		 * Generate a URL based on the oAuth spec, with a redirect back to our
 		 * own endpoint hosted by the Users plugin, to save the information in the database
@@ -1434,126 +980,13 @@
 				scope: scope
 			});
 		},
-		/**
-		 * Start an oAuth flow, and let the Users plugin handle it
-		 * @method start
-		 * @static
-		 * @param {String} platform The name of an external platform under Q.plugins.Users.apps
-		 * @param {String} scope The scopes to request from the platform. See their docs.
-		 * @param {Function} [callback] This function is called after the oAuth flow ends,
-		 *    unless options.openWindow === false, because then the redirect would happen.
-		 * @param {Object} [options={}]
-		 * @param {Object|String} [openWindow={closeUrlRegExp:Q.url("Users/oauthed")+".*"}] 
-		 *    Set to false to start the oAuth flow in the
-		 *    current window. Otherwise, this object can be used to set window features
-		 *    passed to window.open() as a string.
-		 * @param {Object|String} [finalRedirect=location.href] If openWindow === false,
-		 *    this can be used to specify the url to redirect to after Users plugin has
-		 *    handled the oAuth redirect. Defaults to current window location.
-		 * @param {String} [appId=Q.info.app] Override appId to under Q.Users.apps[platform]
-		 * @param {String} [options.redirect_uri] You can override the redirect URI.
-		 *    Often this has to be added to a whitelist on the platform's side.
-		 * @param {String} [options.response_type='code']
-		 * @param {String} [options.state=Math.random()] If state was not provided, this
-		 *    method also modifies the passed options object and sets options.state on it
-		 * @return {String}
-		 */
-		start: function (platform, scope, callback, options) {
-			options = options || {};
-			var finalRedirect = options.finalRedirect || location.href;
-			var appId = options.appId || Q.info.appId;
-			var appInfo = Q.getObject([platform, appId], Users.apps)
-			var authorizeUri = options.authorizeUri || appInfo.authorizeUri;
-			var client_id = options.client_id || appInfo.client_id || appInfo.appId;
-			if (!authorizeUri) {
-				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
-			}
-			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
-			var responseType = options.responseType || 'code';
-			if (!options.state) {
-				options.state = String(Math.random());
-			}
-			if (!('openWindow' in options)) {
-				options.openWindow = {};
-			}
-			// this cookie will be sent on the next request, probably to Users/oauthed action
-			Q.cookie('Q_Users_oAuth', JSON.stringify({
-				platform: platform,
-				appId: appId,
-				scope: scope,
-				state: options.state,
-				finalRedirect: finalRedirect
-			}));
-			var url = OAuth.url(authorizeUri, appId, scope, options);
-			if (options.openWindow === false) {
-				location.href = url;
-			} else {
-				var w = window.open(url, 'Q_Users_oAuth', options.openWindow);
-				var ival = setInterval(function () {
-					var regexp = new RegExp(
-						options.openWindow.closeUrlRegExp
-						|| Q.url("Users/close") + ".*"
-					);
-					if (w.name === 'Q_Users_oAuth_success'
-					|| w.location.href.match(regexp)) {
-						w.close();
-						callback(w.url);
-						clearInterval(ival);
-					}
-					if (w.name === 'Q_Users_oAuth_error') {
-						w.close();
-						callback(false);
-						clearInterval(ival);
-					}
-				}, 300);
-			}
-		}
-	};
-	
-	/**
-	 * Constructs a contact from fields, which are typically returned from the server.
-	 * @class Users.Contact
-	 * @constructor
-	 * @param {Object} fields
-	 */
-	var Contact = Users.Contact = function Users_Contact(fields) {
-		Q.extend(this, fields);
-		this.typename = 'Q.Users.Contact';
-	};
+		start: new Q.Method()
+	}, "{{Users}}/js/methods/Users/OAuth",
+	function() {
+		return [Users, priv];
+	});
 
-	/**
-	 * Contacts batch getter.
-	 * @method get
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact's label
-	 * @param {String} contactUserId The contact user's id
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Contact.get = function (userId, label, contactUserId, callback) {
-		var func = Users.batchFunction(Q.baseUrl({
-			userIds: userId,
-			label: label,
-			contactUserId: contactUserId
-		}), 'contact', ['userIds', 'labels', 'contactUserIds']);
-		func.call(this, userId, label, contactUserId,
-			function Users_Contact_get_response_handler(err, data) {
-				var msg = Q.firstErrorMessage(err, data);
-				if (!msg && !data.contact) {
-					msg = "Users.Contact.get: no such contact";
-				}
-				if (msg) {
-					Users.onError.handle.call(this, msg, err, data.contact);
-					Users.get.onError.handle.call(this, msg, err, data.contact);
-					return callback && callback.call(this, msg);
-				}
-				var contact = new Users.Contact(data.contact);
-				callback.call(contact, err, contact);
-			});
-	};
-
-	function _Users_manage(action, method, fields, field, Constructor, getter, callback) {
+	priv._Users_manage = function(action, method, fields, field, Constructor, getter, callback) {
 		if (getter) {
 			getter.cache.clear();
 		}
@@ -1571,42 +1004,26 @@
 			fields: fields
 		});
 	}
-
+	
 	/**
-	 * Adds a contact.
-	 * @method add
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact's label
-	 * @param {String} contactUserId The contact user's id
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
+	 * Constructs a contact from fields, which are typically returned from the server.
+	 * @class Users.Contact
+	 * @constructor
+	 * @param {Object} fields
 	 */
-	Contact.add = function (userId, label, contactUserId, callback) {
-		return _Users_manage('Users/contact', 'post', {
-			userId: userId,
-			label: label,
-			contactUserId: contactUserId
-		}, 'contact', Contact, Users.getContacts, callback);
+	var Contact = Users.Contact = function Users_Contact(fields) {
+		Q.extend(this, fields);
+		this.typename = 'Q.Users.Contact';
 	};
-
-	/**
-	 * Remove a contact.
-	 * @method remove
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact's label
-	 * @param {String} contactUserId The contact user's id
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Contact.remove = function (userId, label, contactUserId, callback) {
-		return _Users_manage('Users/contact', 'delete', {
-			userId: userId,
-			label: label,
-			contactUserId: contactUserId
-		}, null, Contact, Users.getContacts, callback);
-	};
+	Contact.get = new Q.Method();
+	Contact.add = new Q.Method();
+	Contact.remove = new Q.Method();
+	Q.Method.define(Contact,
+		"{{Users}}/js/methods/Users/Contact", 
+		function() {
+			return [Users, priv];
+		}
+	);
 
 	/**
 	 * Constructs a label from fields, which are typically returned from the server.
@@ -1619,95 +1036,33 @@
 		this.typename = 'Q.Users.Label';
 	};
 	var Lp = Label.prototype;
-
-	Label.isExternal = function (label) {
-		return label.startsWith(Label.externalPrefix);
-	};
-
-	/**
-	 * Labels batch getter.
-	 * @method get
-	 * @param {String} userId The user's id
-	 * @param {String} label The label's internal name
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Label object
-	 */
-	Label.get = function (userId, label, callback) {
-		var func = Users.batchFunction(Q.baseUrl({
-			userIds: userId,
-			label: label
-		}), 'label', ['userIds', 'labels']);
-		func.call(this, userId, label,
-			function Users_Label_get_response_handler(err, data) {
-				var msg = Q.firstErrorMessage(err, data);
-				if (!msg && !data.label) {
-					msg = "Users.Label.get: no such label";
-				}
-				if (msg) {
-					Users.onError.handle.call(this, msg, err, data.label);
-					Users.get.onError.handle.call(this, msg, err, data.label);
-					return callback && callback.call(this, msg);
-				}
-				var label = new Users.Label(data.label);
-				callback.call(label, err, label);
-			});
-	};
-
-	/**
-	 * Adds a label.
-	 * @method add
-	 * @param {String} userId The user's id
-	 * @param {String} title The contact label's title
-     * @param {String} label The contact label. used when need to set custom
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Label.add = function (userId, title, label, callback) {
-		return _Users_manage('Users/label', 'post', {
-			userId: userId,
-			title: title,
-            label: label,
-		}, 'label', Label, Users.getLabels, callback);
-	};
-
-    Label.update = function (userId, label, title, icon, description, callback) {
-		return _Users_manage('Users/label', 'put', {
-			userId,
-            label,
-			title,
-            icon, 
-            description,
-		}, 'label', Label, Users.getLabels, callback);
-	};
-	/**
-	 * Remove a label.
-	 * @method remove
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact label's label
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Label.remove = function (userId, label, callback) {
-		return _Users_manage('Users/label', 'delete', {
-			userId: userId,
-			label: label
-		}, null, Label, Users.getLabels, callback);
-	};
-
 	/**
 	 * Calculate the url of a label's icon
 	 * @method
 	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/size"
 	 * @return {String} the url
 	 */
-	Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
+	Lp.iconUrl = function Users_User_iconUrl(size) {
 		return Users.iconUrl(this.icon.interpolate({
 			userId: this.userId.splitId()
 		}), size);
 	};
+
+	Label.isExternal = function (label) {
+		return label.startsWith(Label.externalPrefix);
+	};
+
+	Label.get = new Q.Method();
+	Label.add = new Q.Method();
+	Label.update = new Q.Method();
+	Label.remove = new Q.Method();
+
+	Q.Method.define(Label,
+		"{{Users}}/js/methods/Users/Label", 
+		function() {
+			return [Users, priv];
+		}
+	);
 
 	Q.Text.addFor(
 		['Q.Tool.define', 'Q.Template.set'],
@@ -1846,10 +1201,7 @@
 		Q.extend(Users.login.options, Users.login.serverOptions);
 		Q.extend(Users.logout.options, Users.logout.serverOptions);
 		Q.extend(Users.setIdentifier.options, Users.setIdentifier.serverOptions);
-
-		Users.prompt.options = Q.extend({
-			dialogContainer: 'body'
-		}, Users.prompt.options, Users.prompt.serverOptions);
+		Q.extend(Users.prompt.options, Users.prompt.serverOptions);
 
 	}, 'Users');
 

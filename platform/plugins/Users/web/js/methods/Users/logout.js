@@ -1,4 +1,4 @@
-Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
 
     /**
      * Users plugin's front end code
