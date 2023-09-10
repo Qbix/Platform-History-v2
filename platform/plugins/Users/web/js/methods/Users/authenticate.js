@@ -1,4 +1,4 @@
-Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
     
     /**
 	 * Authenticates this session with a given platform,
@@ -20,18 +20,18 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
     function authenticate(platform, onSuccess, onCancel, options) {
 
 		options = options || {};
-		var handler = Q.Users.authenticate[platform];
+		var handler = Users.authenticate[platform];
 		if (!handler) {
-			var handlers = Object.keys(Q.Users.authenticate).filter(function (k) {
-				return Q.Users.authenticate.hasOwnProperty(k);
+			var handlers = Object.keys(Users.authenticate).filter(function (k) {
+				return Users.authenticate.hasOwnProperty(k);
 			});
 			throw new Q.Error(
 				"Users.authenticate: platform must be one of " + handlers.join(', ')
 			);
 		}
-		Q.Users.authenticate.occurring = true;
+		Users.authenticate.occurring = true;
 		var appId = options.appId || Q.info.app;
-		var platformAppId = Q.Users.getPlatformAppId(platform, appId);
+		var platformAppId = Users.getPlatformAppId(platform, appId);
 		if (!platformAppId) {
 			console.warn(
 				"Users.authenticate: missing " + 
@@ -60,7 +60,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
         authenticate, 
         '{{Users}}/js/methods/Users/authenticate', 
         function() {
-            return [_doCancel, _handleXid, _doAuthenticate];
+            return [Users, priv];
         }
     );
 });

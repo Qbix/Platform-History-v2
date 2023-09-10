@@ -5977,9 +5977,10 @@ Q.Method.define = function (o, prefix, closure) {
 						args = closure ? closure() : [];
 						var m = exported.apply(o, args);
 						if (typeof m === 'function') {
+							var p = o[k];
 							o[k] = m;
-							for (var property in method) {
-								m[property] = method[property];
+							for (var property in p) {
+								m[property] = p[property];
 							}
 						}
 					}
@@ -5994,6 +5995,7 @@ Q.Method.define = function (o, prefix, closure) {
 				});
 			});
 		}
+		Q.extend(o[k], method);
 	});
 	return o;
 };
