@@ -9,6 +9,7 @@ Q.exports(function (Users, priv) {
 	/**
 	 * Log the user in
 	 * @method login
+	 * @static
 	 * @param {Object} [options] You can pass several options here
 	 *  @param {Q.Event} [options.onSuccess] event that occurs when login or authentication "using" a platform is successful. It is passed (user, options, result, used) where user is the Users.User object (null if it was unchanged),
 	 * options were the options used in the call to Users.login, result is one of "registered", "adopted", "connected" or "authorized" (see Users::authenticate)

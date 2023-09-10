@@ -11,6 +11,7 @@ Q.exports(function (Users, priv) {
 	 * if the user was already connected to it.
 	 * It tries to do so by checking a cookie that would have been set by the server.
 	 * @method authenticate
+	 * @static
 	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
 	 *  It is passed the user information if the user changed.

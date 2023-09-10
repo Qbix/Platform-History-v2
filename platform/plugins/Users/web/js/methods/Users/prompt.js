@@ -10,6 +10,7 @@ Q.exports(function (Users, priv) {
 	 * Used when platform user is logged in to platform but not to app.
 	 * Shows prompt asking if user wants to log in to the app as platform user.
 	 * @method prompt
+     * @static
 	 * @param {String} platform For now, only "facebook" is supported
 	 * @param {String} xid The platform xid
 	 * @param {Function} authCallback , this function will be called after user authentication

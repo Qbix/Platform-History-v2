@@ -8,6 +8,7 @@ Q.exports(function (Users, priv) {
 	/**
 	 * Remove a label.
 	 * @method remove
+     * @static
 	 * @param {String} userId The user's id
 	 * @param {String} label The contact label's label
 	 * @param {Function} callback

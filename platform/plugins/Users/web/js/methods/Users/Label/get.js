@@ -7,6 +7,7 @@ Q.exports(function (Users, priv) {
 	/**
 	 * Labels batch getter.
 	 * @method get
+     * @static
 	 * @param {String} userId The user's id
 	 * @param {String} label The label's internal name
 	 * @param {Function} callback

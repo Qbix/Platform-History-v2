@@ -8,6 +8,7 @@ Q.exports(function (Users, priv) {
 	/**
 	 * Adds a label.
 	 * @method add
+     * @static
 	 * @param {String} userId The user's id
 	 * @param {String} title The contact label's title
      * @param {String} label The contact label. used when need to set custom

@@ -9,6 +9,7 @@ Q.exports(function (Users, priv) {
 	/**
 	 * Makes a dialog that resembles a facebook dialog
 	 * @method facebookDialog
+     * @static
 	 * @param {Object} [options] A hash of options, that can include:
 	 *  @param {String} [options.title] Dialog title.
 	 *  @required

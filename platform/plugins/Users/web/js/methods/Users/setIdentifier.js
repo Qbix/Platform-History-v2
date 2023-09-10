@@ -10,6 +10,7 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 	 * Displays a dialog allowing the user to set a different identifier
 	 * (email address, mobile number, etc.) as their primary login method
 	 * @method setIdentifier
+     * @static
 	 * @param {Object} [options] You can pass several options here
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile" or "web3"

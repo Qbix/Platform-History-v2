@@ -9,6 +9,7 @@ Q.exports(function (Users, priv) {
     /**
 	 * Log the user out
 	 * @method logout
+     * @static
 	 * @param {Object} [options] You can pass several options here
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.url] the URL to hit to log out. You should usually not change this.

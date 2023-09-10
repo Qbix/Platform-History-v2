@@ -8,6 +8,7 @@ Q.exports(function (Users, priv) {
 	/**
 	 * Remove a contact.
 	 * @method remove
+     * @static
 	 * @param {String} userId The user's id
 	 * @param {String} label The contact's label
 	 * @param {String} contactUserId The contact user's id

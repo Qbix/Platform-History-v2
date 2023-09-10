@@ -11,6 +11,7 @@ Q.exports(function (Users, priv) {
 	 * Check permissions granted by platform.
 	 * Currently only facebook is supported.
 	 * @method scope
+     * @static
 	 * @param {String} platform For now, only "facebook" is supported
 	 * @param {Function} callback this function will be called after getting permissions
 	 *   from the external platform. The first parameter is the raw data returned.
