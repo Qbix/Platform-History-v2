@@ -56,13 +56,11 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 	// authenticates by opening a wallet and asking user to sign a payload
 	authenticate.web3 = new Q.Method();
     
-    Q.Method.define(
+	return Q.Method.define(
         authenticate, 
         '{{Users}}/js/methods/Users/authenticate', 
         function() {
             return [_doCancel, _handleXid, _doAuthenticate];
         }
     );
-    
-    return authenticate;
 });

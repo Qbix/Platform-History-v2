@@ -5927,7 +5927,7 @@ Q.Links = {
  * method function, such as { options: { a: "b" , c: "d" }}
  */
 Q.Method = function (properties) {
-	this.properties = properties || {};
+	Q.extend(this, properties);
 };
 
 Q.Method.stub = new Q.Method(); // for backwards compatibility
@@ -5954,6 +5954,7 @@ Q.Method.stub = new Q.Method(); // for backwards compatibility
  *  inside the method implementation in a separate file. The closure constants
  *  can be objects, whose contents are dynamic, but the constants themselves
  *  should never change between invocations of the method. 
+ * @return {Object} the object sent in the first parameter
  */
 Q.Method.define = function (o, prefix, closure) {
 	if (!prefix) {
@@ -5977,8 +5978,8 @@ Q.Method.define = function (o, prefix, closure) {
 						var m = exported.apply(o, args);
 						if (typeof m === 'function') {
 							o[k] = m;
-							for (var property in method.properties) {
-								m[property] = method.properties[property];
+							for (var property in method) {
+								m[property] = method[property];
 							}
 						}
 					}
