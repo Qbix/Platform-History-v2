@@ -5972,9 +5972,8 @@ Q.Method.define = function (o, prefix, closure) {
 			var t = this, a = arguments;
 			return new Promise(function (resolve, reject) {
 				Q.require(url, function (exported) {
-					var m, args;
 					if (exported) {
-						args = closure ? closure() : [];
+						var args = closure ? closure() : [];
 						var m = exported.apply(o, args);
 						if (typeof m === 'function') {
 							var p = o[k];
@@ -5988,7 +5987,7 @@ Q.Method.define = function (o, prefix, closure) {
 						return reject("Q.Method.define: Must override method '" + k + "'");
 					}
 					try {
-						resolve(m.apply(t, a));
+						resolve(o[k].apply(t, a));
 					} catch (e) {
 						reject(e);
 					}

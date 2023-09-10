@@ -1,5 +1,11 @@
 Q.exports(function (Users, priv) {
     
+	/**
+     * Users plugin's front end code
+     *
+     * @module Users
+     * @class Users
+     */
     /**
 	 * Authenticates this session with a given platform,
 	 * if the user was already connected to it.

@@ -140,7 +140,7 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 					appId: appId
 				});
 			} else if (o.using[0] === 'web3') { // only web3 used. Open web3 login right away
-				Web3.login(function (result) {
+				Users.Web3.login(function (result) {
 					if (!result) {
 						_onCancel();
 					} else {
@@ -820,7 +820,7 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 						if (login_setupDialog.dialog) {
 							Q.Dialogs.pop();
 						}
-						Web3.login(function (result) {
+						Users.Web3.login(function (result) {
 							if (!result) {
 								_onCancel();
 							} else {
