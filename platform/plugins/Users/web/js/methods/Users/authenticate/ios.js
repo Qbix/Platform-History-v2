@@ -1,4 +1,4 @@
-Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
     
     /**
 	 * Authenticates this session with a given platform,
@@ -19,7 +19,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
     function ios(platform, platformAppId, onSuccess, onCancel, options) {
-		_doAuthenticate({
+		priv._doAuthenticate({
 			udid: Q.info.udid // TODO: sign this with private key on cordova side
 		}, platform, platformAppId, onSuccess, onCancel, options);
     }
