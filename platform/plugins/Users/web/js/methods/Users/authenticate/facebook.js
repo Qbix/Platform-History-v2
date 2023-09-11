@@ -1,4 +1,4 @@
-Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
     
     /**
 	 * Authenticates this session with a given platform,
@@ -26,7 +26,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 			// check if user is connected to facebook
 			Q.Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
-					_handleXid(
+					priv._handleXid(
 						platform, platformAppId, response.authResponse.userID,
 						onSuccess, onCancel, Q.extend({response: response}, options)
 					);
@@ -35,7 +35,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 					// otherwise they might confuse our server-side authentication.
 					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
+					priv._doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 				}
 			}, options.force ? true : false);
 		}, {
