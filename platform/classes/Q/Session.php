@@ -244,6 +244,13 @@ class Q_Session
 	 *   going to make, and return the exception to the client.
 	 *   The session may be missing, for example, if we had recently deleted it.
 	 *   Sessions
+	 * @param {string} [$setId] You can specify a valid session ID string here,
+	 *   otherwise it will be read from the $_COOKIE superglobal, or if it's not there
+	 *   then the $_GET superglobal (which is checked after cookies to avoid malicious GET
+	 *   changing an existing session surreptitiously).
+	 *   If neither is there then we check whether a cookie with the Q_Session::name()
+	 *   was set by the currently executing script, and use that. If none of these
+	 *   contain a valid ID, then we start a new session.
 	 * @return {boolean} Whether a new session was started or not.
 	 */
 	static function start($throwIfMissingOrInvalid = false, $setId = null)
@@ -277,10 +284,10 @@ class Q_Session
 		$name = Q_Session::name();
 		$id = $setId
 			? $setId
-			: (!empty($_GET[$name])
-				? $_GET[$name]
-				: (!empty($_COOKIE[$name])
-					? $_COOKIE[$name]
+			: (!empty($_COOKIE[$name])
+				? $_COOKIE[$name]
+				: (!empty($_GET[$name])
+					? $_GET[$name]
 					: Q_Response::cookie($name)
 				)
 			);
