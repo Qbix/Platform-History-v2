@@ -1915,8 +1915,10 @@
 					position: "fixed",
 					"z-index": Q.zIndexTopmost() + 1
 				});
-				Web3.ethereumProvider.on("connect", function () {
+				Web3.ethereumProvider.on("connect", function _w3mConnect (info) {
 					_getProvider(Web3.ethereumProvider);
+					_subscribeToEvents(Web3.ethereumProvider);
+					Q.handle(Web3.onConnect, Web3.ethereumProvider, [info]);
 				});
 				Web3.ethereumProvider.connect();
 				return false;
@@ -1982,6 +1984,15 @@
 										}
 									});
 								});
+
+								// close dialog on provider connected
+								Web3.onConnect.set(function () {
+									setTimeout(function () {
+										Q.Dialogs.close($dialog);
+									}, 1000);
+								}, 'Users_connect_wallets');
+
+								// close dialog on timeout
 								handOffTimeout = setTimeout(() => {
 									Q.Dialogs.close($dialog);
 								}, payload['Q.timestamp']*1000 - Date.now());
