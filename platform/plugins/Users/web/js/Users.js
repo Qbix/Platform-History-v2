@@ -1122,7 +1122,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Q.getObject("cache.where", Users) || 'document';
+		Q.Users.cacheWhere = Q.getObject("cache.where", Users) || 'document';
 
 		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
 		if (preferredLanguage) {
@@ -1133,7 +1133,7 @@
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
 		}
 		Users.get = Q.getter(Users.get, {
-			cache: Q.Cache[where]("Users.get", 100),
+			cache: Q.Cache[Users.cacheWhere]("Users.get", 100),
 			throttle: 'Users.get',
 			prepare: function (subject, params, callback) {
 				if (subject instanceof User) {
@@ -1147,64 +1147,6 @@
 			}
 		});
 		
-		Users.getContacts = Q.getter(Users.getContacts, {
-			cache: Q.Cache[where]("Users.getContacts", 100),
-			throttle: 'Users.getContacts',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Contact(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
-		Users.getLabels = Q.getter(Users.getLabels, {
-			cache: Q.Cache[where]("Users.getLabels", 100),
-			throttle: 'Users.getLabels',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Label(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
-		Contact.get = Q.getter(Contact.get, {
-			cache: Q.Cache[where]("Users.Contact.get", 100),
-			throttle: 'Users.Contact.get',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Contact) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var contact = params[1] = new Contact(subject);
-				return callback(contact, params);
-			}
-		});
-		
-		Label.get = Q.getter(Label.get, {
-			cache: Q.Cache[where]("Users.Label.get", 100),
-			throttle: 'Users.Label.get',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Contact) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var contact = params[1] = new Label(subject);
-				return callback(contact, params);
-			}
-		});
-
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
 		Q.extend(Users.login.options, Users.login.serverOptions);
