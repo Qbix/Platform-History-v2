@@ -71,18 +71,28 @@ $out = !empty($options['out'])
 	), array('web' => APP_WEB_DIR));
 $baseUrl = !empty($options['baseUrl']) ? $options['baseUrl'] : Q_Request::baseUrl(true, true);
 
-$config = Q_Config::expect('Q', 'static');
+$config = Q_Config::expect('Q', 'static', 'generate');
 foreach ($config as $suffix => $info) {
+	if (empty($info['routes'])) {
+		continue;
+	}
 	$headers = array();
-	if (!empty($info['@cookies'])) {
-		$headers['Cookie'] = http_build_query($info['@cookies'], '', '; ');
+	if (!empty($info['session'])) {
+		if (!isset($info['cookies'])) {
+			$info['cookies'] = array();
+		}
+		$sessionName = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
+		$info['cookies'][$sessionName] = is_string($info['session'])
+			? $info['session']
+			: Q_Session::generateId();
 	}
-	if (!empty($info['@headers'])) {
-		$headers = array_merge($headers, $info['@headers']);
+	if (!empty($info['cookies'])) {
+		$headers['Cookie'] = http_build_query($info['cookies'], '', '; ');
 	}
-	unset($info['@cookies']);
-	unset($info['@headers']);
-	foreach ($info as $route => $value) {
+	if (!empty($info['headers'])) {
+		$headers = array_merge($headers, $info['headers']);
+	}
+	foreach ($info['routes'] as $route => $value) {
 		if (is_string($value)) {
 			$combinations = call_user_func(explode('::', $value));
 		} else if (is_array($value)) {
