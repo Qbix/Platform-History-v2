@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.16",
+				"version": "1.0.17",
 				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -35,7 +35,8 @@
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"],
 			"Q/request/languages": ["Users/after/Q_request_languages"],
-			"Q/analytics": ["Users/after/Q_analytics"]
+			"Q/analytics": ["Users/after/Q_analytics"],
+			"Users/transaction/mined/Users/templates/R1/community/factory/produce": ["Users/after/Users_transaction_mined/Users_templates_R1_community_factory/produce"]
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},
@@ -125,6 +126,14 @@
 				"defaultSize": "1200x315",
 				"defaultCacheBust": 1000,
 				"maxStretch": 3
+			}
+		},
+		"quotas": {
+			"Users/web3/transaction": {
+				"60": {
+					"": 10,
+					"Users/admins": 100
+				}
 			}
 		}
 	},
@@ -320,7 +329,7 @@
 					"title": "Member",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
 					"canGrant": ["Users/guests"],
-					"canRevoke": [],
+					"canRevoke": ["Users/guests"],
 					"canSee": ["Users/members", "Users/guests" ,"Users/speakers"]
 				},
 				"Users/guests": {
@@ -340,8 +349,8 @@
 				"Users/speakers": {
 					"title": "Speaker",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/speakers",
-					"canAdd": ["Users/members", "Users/guests"],
-					"canRemove": ["Users/members", "Users/guests"],
+					"canGrant": ["Users/members", "Users/guests"],
+					"canRevoke": ["Users/members", "Users/guests"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/speakers"]
 				}
 			},
@@ -436,8 +445,8 @@
 				},
 				"0x13881": {
 					"name": "Polygon MUMBAI",
-					"publicRPC": "https://matic-mumbai.chainstacklabs.com",
-					"rpcUrl": "https://matic-mumbai.chainstacklabs.com",
+					"publicRPC": "https://rpc-mumbai.maticvigil.com",
+					"rpcUrl": "https://rpc-mumbai.maticvigil.com",
 					"blockExplorerUrl": "https://mumbai.polygonscan.com/",
 					"abiUrl": "https://api-testnet.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
 					"currency": {

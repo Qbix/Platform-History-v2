@@ -41,7 +41,7 @@ Q.exports(function (Users, priv) {
 
 				xid = xid || Q.getObject("Web3.authResponse.xid", Q.Users);
 				if (xid) {
-					return priv._handleXid(
+					return priv.handleXid(
 						platform, platformAppId, xid,
 						onSuccess, onCancel, options
 					);

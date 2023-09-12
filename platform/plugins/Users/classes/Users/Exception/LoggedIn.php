@@ -6,7 +6,7 @@
 class Users_Exception_LoggedIn extends Q_Exception
 {
 	/**
-	 * An exception is raised if user is logged in
+	 * Thrown when the user is required to be logged in, but they aren't
 	 * @class Users_Exception_LoggedIn
 	 * @constructor
 	 * @extends Q_Exception

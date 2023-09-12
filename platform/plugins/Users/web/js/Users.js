@@ -246,8 +246,7 @@
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
 			'{{Users}}/js/web3/web3.min.js',
-			//'https://unpkg.com/@walletconnect/ethereum-provider'
-			'{{Users}}/js/web3/ethereumProvider.2.9.1.min.js'
+			'{{Users}}/js/web3/ethereumProvider.2.10.0.min.js' //'https://unpkg.com/@walletconnect/ethereum-provider'
 		];
 
 		Q.addScript(scriptsToLoad, function () {
@@ -261,12 +260,22 @@
 					return;
 				}
 
+				var optionalChains = [];
+				if (typeof Users.Web3.chains === "object") {
+					Q.each(Object.keys(Users.Web3.chains), function (i, chainId) {
+						if (chainId === '0x1') {
+							return;
+						}
+
+						optionalChains.push(parseInt(chainId));
+					});
+				}
 				window['@walletconnect/ethereum-provider'].EthereumProvider.init({
 					projectId: projectId, // REQUIRED your projectId
 					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
 					qrModalOptions: { themeMode: "light" },
-					chains: [1,56,137], // REQUIRED chain ids
-					optionalChains: [5,97,80001],
+					chains: [1], // REQUIRED chain ids
+					optionalChains: optionalChains,
 					methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
 					//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
 					events: ["chainChanged", "accountsChanged","disconnect","connect"],
@@ -1113,7 +1122,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Q.getObject("cache.where", Users) || 'document';
+		Q.Users.cacheWhere = Q.getObject("cache.where", Users) || 'document';
 
 		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
 		if (preferredLanguage) {
@@ -1124,7 +1133,7 @@
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
 		}
 		Users.get = Q.getter(Users.get, {
-			cache: Q.Cache[where]("Users.get", 100),
+			cache: Q.Cache[Users.cacheWhere]("Users.get", 100),
 			throttle: 'Users.get',
 			prepare: function (subject, params, callback) {
 				if (subject instanceof User) {
@@ -1138,64 +1147,6 @@
 			}
 		});
 		
-		Users.getContacts = Q.getter(Users.getContacts, {
-			cache: Q.Cache[where]("Users.getContacts", 100),
-			throttle: 'Users.getContacts',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Contact(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
-		Users.getLabels = Q.getter(Users.getLabels, {
-			cache: Q.Cache[where]("Users.getLabels", 100),
-			throttle: 'Users.getLabels',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Label(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
-		Contact.get = Q.getter(Contact.get, {
-			cache: Q.Cache[where]("Users.Contact.get", 100),
-			throttle: 'Users.Contact.get',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Contact) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var contact = params[1] = new Contact(subject);
-				return callback(contact, params);
-			}
-		});
-		
-		Label.get = Q.getter(Label.get, {
-			cache: Q.Cache[where]("Users.Label.get", 100),
-			throttle: 'Users.Label.get',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Contact) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var contact = params[1] = new Label(subject);
-				return callback(contact, params);
-			}
-		});
-
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
 		Q.extend(Users.login.options, Users.login.serverOptions);
@@ -1960,16 +1911,16 @@
 				});
 			};
 			var _w3m = function () {
-				$("w3m-modal").css({
+				$("w3m-modal").addClass("Q_floatAboveDocument").css({
 					position: "fixed",
 					"z-index": Q.zIndexTopmost() + 1
 				});
-				Web3.ethereumProvider.once("connect", function () {
+				Web3.ethereumProvider.on("connect", function _w3mConnect (info) {
 					_getProvider(Web3.ethereumProvider);
+					_subscribeToEvents(Web3.ethereumProvider);
+					Q.handle(Web3.onConnect, Web3.ethereumProvider, [info]);
 				});
-				Web3.ethereumProvider.connect().catch(function (e) {
-					Q.handle(callback, null, [e.message]);
-				});
+				Web3.ethereumProvider.connect();
 				return false;
 			};
 			Users.init.web3(function () {
@@ -2033,6 +1984,15 @@
 										}
 									});
 								});
+
+								// close dialog on provider connected
+								Web3.onConnect.set(function () {
+									setTimeout(function () {
+										Q.Dialogs.close($dialog);
+									}, 1000);
+								}, 'Users_connect_wallets');
+
+								// close dialog on timeout
 								handOffTimeout = setTimeout(() => {
 									Q.Dialogs.close($dialog);
 								}, payload['Q.timestamp']*1000 - Date.now());
@@ -2350,6 +2310,11 @@
 					params: [{ chainId: info.chainId }],
 				}).then(_continue)
 				.catch(function (switchError) {
+					// check if error message is json
+					if (JSON.isValid(switchError.message)) {
+						switchError = JSON.parse(switchError.message);
+					}
+
 					// This error code indicates that the chain has not been added to MetaMask.
 					if (switchError.code !== 4902
 					&& switchError.code !== -32603) {

@@ -20,6 +20,7 @@
  * @param {string} [$fields.transactionId] defaults to ""
  * @param {string} [$fields.status] defaults to "pending"
  * @param {string} [$fields.contract] defaults to ""
+ * @param {string} [$fields.contractABIName] defaults to ""
  * @param {string} [$fields.methodName] defaults to ""
  * @param {string} [$fields.params] defaults to ""
  * @param {string} [$fields.fromAddress] defaults to ""
@@ -51,6 +52,12 @@ abstract class Base_Users_Web3Transaction extends Db_Row
 	 */
 	/**
 	 * @property $contract
+	 * @type string
+	 * @default ""
+	 * 
+	 */
+	/**
+	 * @property $contractABIName
 	 * @type string
 	 * @default ""
 	 * 
@@ -524,6 +531,61 @@ return array (
   array (
     0 => 'varchar',
     1 => '42',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_contractABIName
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_contractABIName($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('contract', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".contract");
+		if (strlen($value) > 42)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".contract");
+		return array('contractABIName', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the contract field
+	 * @return {integer}
+	 */
+	function maxSize_contractABIName()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for contractABIName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_contractABIName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
     2 => '',
     3 => false,
   ),

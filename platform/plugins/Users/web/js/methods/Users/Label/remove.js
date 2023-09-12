@@ -19,7 +19,7 @@ Q.exports(function (Users, priv) {
 		return priv._Users_manage('Users/label', 'delete', {
 			userId: userId,
 			label: label
-		}, null, Label, Users.getLabels, callback);
+		}, null, Users.Label, Users.getLabels, callback);
 	};
 
 });
