@@ -15,7 +15,7 @@ Q.exports(function (Users, priv) {
 	 * @param {Number} [value=1] the value the user has voted for, such as a rating etc.
 	 * @param {Function} [callback] receives err, result
 	 */
-    return function Users_vote(forType, forId, value) {
+    return function Users_vote(forType, forId, value, callback) {
         var fields = {
             forType: forType,
             forId: forId
@@ -28,6 +28,7 @@ Q.exports(function (Users, priv) {
             if (msg) {
                 return console.warn(msg);
             }
+            Q.handle(callback, Users, [err, result]);
         }, {method: 'POST', fields: fields});
     };
 
