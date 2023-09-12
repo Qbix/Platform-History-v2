@@ -1,10 +1,10 @@
 <?php
 
-function Users_after_Users_transaction_mined_Users_templates_R1_community_factory($params)
+function Users_after_Users_transaction_mined_Users_templates_R1_community_factory_produce($params)
 {
     $transaction = $params['transaction'];
     $communityId = $transaction->getExtra('communityId');
-    $contract = $request['contract'];
+    $contract = $params['contract'];
             
     $externalTo = new Users_ExternalTo();
     $externalTo->userId   = $communityId;
