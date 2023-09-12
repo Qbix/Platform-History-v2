@@ -132,6 +132,7 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
+            "byTelegram": "Telegram",
             "title2": "Invite People",
             "chooseMethod": "Choose a method:",
             "selectContacts": "Select Contacts",
