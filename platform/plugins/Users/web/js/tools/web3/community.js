@@ -286,7 +286,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             delete produceParams['selectedChainId'];
 
 
-            Q.req("Users/external", ["result"], function (err, response) {
+            Q.req("Users/transaction", ["result"], function (err, response) {
 
                 var fem = Q.firstErrorMessage(err, response);
                 if (fem) {return console.warn(fem);}
@@ -303,7 +303,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                     params: JSON.stringify(produceParams)
                 }
             });
-            txData["tx"] = tx;
+            txData.tx = tx;
 
             return tx.wait();
         }).then(function (receipt) {
