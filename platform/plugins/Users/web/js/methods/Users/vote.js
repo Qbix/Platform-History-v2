@@ -28,7 +28,6 @@ Q.exports(function (Users, priv) {
             if (msg) {
                 return console.warn(msg);
             }
-            Q.handle(callback, Users, [err, result]);
         }, {method: 'POST', fields: fields});
     };
 
