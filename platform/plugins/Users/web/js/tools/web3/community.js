@@ -61,7 +61,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             
 		    //defaultChain: state.defaultChain,
 		    //contractParams: state.contractParams
-		}, (err, html) => {
+		}, function (err, html) {
 		    
 		    Q.replace(tool.element, html);
             
@@ -282,7 +282,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             );
         }).then(function (tx) {
 
-            var produceParams = { ...userParams };
+            var produceParams = Q.copy(userParams);
             delete produceParams['selectedChainId'];
 
 
@@ -311,7 +311,9 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             // additionally try to get instace address when transaction will be mine. 
             // it can be processing by cron job
             if (receipt.status == 1) {
-                var event = receipt.events.find(event => event.event === 'InstanceCreated');
+                var event = receipt.events.find(function (event) {
+                    event.event === 'InstanceCreated'
+                });
                 var instance;
                 [instance, /*instancesCount*/] = event.args;
 
