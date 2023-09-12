@@ -181,58 +181,6 @@ class Users_Web3 extends Base_Users_Web3 {
 		return $data;
 
 	}
-    
-    /**
-	 * getTransactionReceipt
-	 * @method getTransactionReceipt
-	 * @static
-     * @param appId
-	 * @param {string|array} transaction hash or response that returned by execute
-     * @param attempts maximum attempt to get receipt
-     * @param delay delay in microseconds between attempts
-	 */
-    static function getTransactionReceipt($appId, $response, $attempts, $delay)
-    {  
-        list($appInfo, $provider, $rpcUrl) = self::objects($appId);
-        $transaction_hash = (is_array($response) && isset($response['result']))
-            ?
-            $response['result']
-            :
-            $response
-            ;
-        $result = null;
-        $count = 0;
-        while ($count < $attempts) {
-            if ($count != 0) {usleep($delay);}
-            try {
-                $result = $provider->getTransactionReceipt($transaction_hash);
-                break;
-            } catch (Exception $ex) {
-
-            }
-        }
-        return $result;
-//        $result = $this->call('eth_getTransactionReceipt', [$transaction_hash]); 
-// 
-//        if(!isset($result->result)) {
-//            throw new Exception('getTransactionReceipt error: ' . json_encode($result));   
-//        }
-//
-//        return $result;
-    }
-    
-    static function isTransactionMined($receipt) {
-        $receipt = (($receipt instanceof stdClass) && isset($receipt->result))
-            ?
-            $receipt->result
-            :
-            $receipt
-            ;
-        if ($receipt->status == '0x1') {
-            return true;
-        }
-        return false;
-    }
 
 	/**
 	 * Start a batch, then call execute() method multiple times with same $appId,
@@ -570,7 +518,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			return $usersExternalTo->xid;
 		}
 		if ($throwIfNotFound) {
-			throw new Exception("Wallet address not found");
+			throw new Q_Exception_(array('name' => 'wallet address'));
 		}
 		return null;
 	}

@@ -262,11 +262,11 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
         if (xidAlreadyExists) {return;}
         //----------------
                 
-        
+        var contractABIName = 'Users/templates/R1/Community/factory';
         var txData = {};
         Q.handle(onProcessWorking);
         Q.Users.Web3.getFactory(
-            'Users/templates/R1/Community/factory',
+            contractABIName,
             {
             chainId: userParams.selectedChainId,
             //contractAddress: factoryAddress,
@@ -299,6 +299,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                     transactionId: tx.hash,
                     fromAddress: tx.from,
                     contract: factoryAddress,
+                    contractABIName: contractABIName,
                     methodName: "produce",
                     params: JSON.stringify(produceParams)
                 }
