@@ -1,10 +1,17 @@
-Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
     
+	/**
+     * Users plugin's front end code
+     *
+     * @module Users
+     * @class Users
+     */
     /**
 	 * Authenticates this session with a given platform,
 	 * if the user was already connected to it.
 	 * It tries to do so by checking a cookie that would have been set by the server.
 	 * @method authenticate
+	 * @static
 	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
 	 *  It is passed the user information if the user changed.
@@ -20,18 +27,18 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
     function authenticate(platform, onSuccess, onCancel, options) {
 
 		options = options || {};
-		var handler = Q.Users.authenticate[platform];
+		var handler = Users.authenticate[platform];
 		if (!handler) {
-			var handlers = Object.keys(Q.Users.authenticate).filter(function (k) {
-				return Q.Users.authenticate.hasOwnProperty(k);
+			var handlers = Object.keys(Users.authenticate).filter(function (k) {
+				return Users.authenticate.hasOwnProperty(k);
 			});
 			throw new Q.Error(
 				"Users.authenticate: platform must be one of " + handlers.join(', ')
 			);
 		}
-		Q.Users.authenticate.occurring = true;
+		Users.authenticate.occurring = true;
 		var appId = options.appId || Q.info.app;
-		var platformAppId = Q.Users.getPlatformAppId(platform, appId);
+		var platformAppId = Users.getPlatformAppId(platform, appId);
 		if (!platformAppId) {
 			console.warn(
 				"Users.authenticate: missing " + 
@@ -56,13 +63,11 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 	// authenticates by opening a wallet and asking user to sign a payload
 	authenticate.web3 = new Q.Method();
     
-    Q.Method.define(
+	return Q.Method.define(
         authenticate, 
         '{{Users}}/js/methods/Users/authenticate', 
         function() {
-            return [_doCancel, _handleXid, _doAuthenticate];
+            return [Users, priv];
         }
     );
-    
-    return authenticate;
 });

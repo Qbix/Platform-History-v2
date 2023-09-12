@@ -1,4 +1,4 @@
-Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
     
     /**
 	 * Authenticates this session with a given platform,

@@ -1,4 +1,4 @@
-Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
+Q.exports(function (Users, priv) {
     /**
 	 * Authenticates this session with a given platform,
 	 * if the user was already connected to it.
@@ -41,7 +41,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 
 				xid = xid || Q.getObject("Web3.authResponse.xid", Q.Users);
 				if (xid) {
-					return _handleXid(
+					return priv.handleXid(
 						platform, platformAppId, xid,
 						onSuccess, onCancel, options
 					);
@@ -51,7 +51,7 @@ Q.exports(function (_doCancel, _handleXid, _doAuthenticate) {
 				// wasn't able to get the current authenticated xid from cookie
 				// so let's sign another authenticated message
 				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
-				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
+				priv._doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 				Q.Web3.authResponse = null;
 			}
 		});
