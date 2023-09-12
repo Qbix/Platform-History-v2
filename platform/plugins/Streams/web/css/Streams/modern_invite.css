@@ -213,18 +213,18 @@ telegram
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_telegram {
 	background-color: #26a4e3; /* fallback color */
-	background: -moz-linear-gradient(top, #2aabee, #229ed9);
-	background: -ms-linear-gradient(top, #2aabee, #229ed9);
-	background: -webkit-linear-gradient(top, #2aabee, #229ed9);
+	background: -moz-linear-gradient(top, #2aabee, #1e8dc0);
+	background: -ms-linear-gradient(top, #2aabee, #1e8dc0);
+	background: -webkit-linear-gradient(top, #2aabee, #1e8dc0);
 	border: 1px solid #0081ce;
 	text-shadow: 0 -1px -1px #005ea3;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_telegram:hover {
 	background-color: #1d8ec7; /* fallback color */
-	background: -moz-linear-gradient(top, #229ed9, #2aabee);
-	background: -ms-linear-gradient(top, #229ed9, #2aabee);
-	background: -webkit-linear-gradient(top, #229ed9, #2aabee);
+	background: -moz-linear-gradient(top, #1e8dc0, #2aabee);
+	background: -ms-linear-gradient(top, #1e8dc0, #2aabee);
+	background: -webkit-linear-gradient(top, #1e8dc0, #2aabee);
 }
 
 .Streams_invite_dialog .Streams_invite_button_telegram .Streams_invite_social_icons {
