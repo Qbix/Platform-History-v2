@@ -293,10 +293,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 // web3 processing
                                 if (Q.Users.Label.isExternal(label)) {
                                     if (iconUrlBeforeEdit == 'labels/default') {
-                                        // then try to set URI json 
-
+                                        // then try to set URI json
                                         var chainId, roleIndex;
-                                        
                                         [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
                                         // http://itr.localhost/URI/ITR/0x13881/19.json
                                         var uri = Q.url("{{baseUrl}}/URI/"+state.userId+"/"+chainId+"/"+roleIndex+".json");
@@ -304,29 +302,14 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         [st, communityAddress] = tool._getCommunityAddress(chainId);
                                         if (!st) return;
                                         Q.Communities.Web3.Roles.setRoleURI(communityAddress, chainId, null, roleIndex, uri, function (err, status) {
-
                                             if (err) {
                                                 tool.element.removeClass('Q_loading');
                                                 Q.alert(err);
                                                 return;
                                             }
-
                                             _labelUpdate(label, title, iconUrl, description);
-
-                                    [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
-                                    // http://itr.localhost/URI/ITR/0x13881/19.json
-                                    var uri = Q.url("{{baseUrl}}/URI/"+state.userId+"/"+chainId+"/"+roleIndex+".json");
-                                    let st, communityAddress;
-                                    [st, communityAddress] = tool._getCommunityAddress(chainId);
-                                    if (!st) return;
-                                    Q.Communities.Web3.Roles.setRoleURI(communityAddress, chainId, null, roleIndex, uri, function (err, status) {
-
-                                        if (err) {
-                                            tool.element.removeClass('Q_loading');
-                                            Q.alert(err);
-                                            return;
-                                        }
-
+                                        });
+                                    } else {
                                         _labelUpdate(label, title, iconUrl, description);
                                     }
                                 } else {
