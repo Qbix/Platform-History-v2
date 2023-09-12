@@ -1370,6 +1370,7 @@ class Q
 	 * @param {string} $key=null
 	 *  The name of log file. Defaults to "$app_name.log"
 	 * @param {array} $options
+	 * @param {integer} [$options.dontRemoveOldLogs] Pass true to skip removing old logs	
 	 * @param {integer} [$options.maxLength=ini_get('log_errors_max_len')]
 	 * @param {integer} [$options.maxDepth=3]
 	 * @param {bool} [$options.timestamp=true] whether to prepend the current timestamp
@@ -1446,8 +1447,10 @@ class Q
 				file_put_contents($realPath, $tooLargeString, FILE_APPEND);
 			}
 		} else {
-			// about to create a new file, remove any old logs
-			self::removeOldLogs();
+			if (empty($options['dontRemoveOldLogs'])) {
+				// about to create a new file, remove any old logs
+				self::removeOldLogs();
+			}
 			file_put_contents($realPath, $toSave, FILE_APPEND);
 		}
 		umask($mask);
