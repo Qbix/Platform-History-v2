@@ -104,15 +104,15 @@ function Users_before_Q_objects(&$params)
 		}
 	}
 
-	if ($_GET['Q_Users_newSessionId']) {
+	if (!empty($_GET['Q_Users_Session_capability'])) {
 		try {
 			Q::event("Users/session/put", [], false, false, $fieldsToClear);
 		} catch (Exception $exception) {}
 		if (empty($fieldsToClear)) {
-			$fieldsToClear = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
+			$fieldsToClear = array('Q_Users_Session_capability');
 		}
 		$queryString = $_SERVER["QUERY_STRING"];
-		$request_uri = explode('?', $_SERVER[REQUEST_URI])[0];
+		$request_uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 		foreach ($fieldsToClear as $key) {
 			$queryString = preg_replace("/$key=?[^\&]*\&?/", "", $queryString);
 		}

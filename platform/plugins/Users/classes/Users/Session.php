@@ -26,7 +26,7 @@ class Users_Session extends Base_Users_Session
 	/**
 	 * Generates a valid session ID and the rest of a payload,
 	 * based on source parameters, signs and returns it
-	 * @method generatePayload
+	 * @method generateCapability
 	 * @static
 	 * @param {array} [$source=$_REQUEST] set this if you want to get the
 	 *  parameters from an array other than $_REQUEST. Should contain:
@@ -41,101 +41,97 @@ class Users_Session extends Base_Users_Session
 	 *  if notifications were enabled in this browser
 	 * @return {array} the payload, which can be pt into a redirect URL
 	 */
-	static function generatePayload($source = null)
+	static function generateCapability($source = null)
 	{
-		$source = Q::ifset($source, $_REQUEST);
-		$req = Q::take($source, array(
-			'appId' => Q::app(),
+		if (!isset($source)) {
+			$source = $_REQUEST;
+		}
+		Q_Valid::requireFields(array('appId'), $source, true);
+		$data = Q::take($source, array(
+			'appId' => Q::app(), 
 			'deviceId' => null, 
-			'platform' => 'qbix'
+			'platform' => 'browser'
 		));
-		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
+		list($appId, $appInfo) = Users::appInfo($data['platform'], $data['appId'], true);
 		
 		$payload = array();
-		if (isset($req['deviceId'])) {
-			$payload['Q.Users.deviceId'] = $req['deviceId'];
-		}
-		$newSessionId = Q_Session::generateId();
-		$payload['Q.Users.newSessionId'] = $newSessionId;
-		$payload['Q.Users.appId'] = $appId;
-		$payload['Q.Users.platform'] = $req['platform'];
-		$payload['Q.timestamp'] = time() + (int)Q_Config::get('Users', 'session', 'redirectSecondsMax', 300);
-		$payload = Q_Utils::sign($payload, 'Q.Users.signature');
-		return $payload;
+		$data = array_merge($data, Q_Request::userAgentInfo());
+		$data['appId'] = $appInfo['appId'];
+		$data['newSessionId'] = Q_Session::generateId();
+
+		$duration = Q_Config::get('Users', 'session', 'capabilityDuration', 300);
+		return new Q_Capability(array('Q/Users/Session/capability'), 0, time() + $duration);
 	}
 
 	/**
 	 * Creates a session from a payload that was previously
-	 * generated with Q_Session::generatePayload(), copies
+	 * generated with Q_Session::generateCapability(), copies
 	 * information from the current session into it, adds
 	 * ["Q"]["fromSessionId"] pointing to current session,
 	 * and saves it in the database.
-	 * @method createSessionFromPayload
-	 * @param {array} $payload contains the keys
-	 *  "Q.Users.platform", "Q.Users.appId", "Q.Users.newSessionId",
-	 *  and optionally "Q.Users.deviceId"
+	 * @method createSessionFromCapability
+	 * @param {array} $catability contains the data keys
+	 *  "platform", "appId", "newSessionId" and optionally "deviceId"
 	 */
-	static function createSessionFromPayload($payload)
+	static function createSessionFromCapability($capability)
 	{
-		$payload = Q::ifset($payload, $_REQUEST);
-		$fields = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
-		$payload = Q_Request::fromUnderscores($fields, $payload);
-		Q_Valid::requireFields(array('Q.Users.newSessionId'), $payload, true);
-		$req = Q::take($payload, array(
-			'Q.Users.platform' => 'qbix',
-			'Q.Users.appId' => Q::app(),
-			'Q.Users.newSessionId' => null,
-			'Q.Users.deviceId' => null
+		Q_Valid::requireFields(array('appId', 'newSessionId'), $capability->data, true);
+		$req = Q::take($capability->data, array(
+			'platform' => 'browser',
+			'appId' => null, 
+			'newSessionId' => null, 
+			'deviceId' => null
 		));
-		list($appId, $appInfo) = Users::appInfo($req['Q.Users.platform'], $req['Q.Users.appId'], true);
+		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
 	
 		$sessionFields = Q_Request::userAgentInfo();
 		$sessionFields['appId'] = $appInfo['appId'];
-		if (isset($req['Q.Users.deviceId'])) {
-			$sessionFields['deviceId'] = $req['Q.Users.deviceId'];
+		if (isset($req['deviceId'])) {
+			$sessionFields['deviceId'] = $req['deviceId'];
 		}
 		$duration_name = Q_Request::formFactor();
 		$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
 		Users_Session::copyToNewSession(
-			$sessionFields, $duration, $payload['Q.Users.newSessionId']
+			$sessionFields, $duration, $req['newSessionId']
 		);
 	}
 
 	/**
-	 * Get redirect URL from payload
-	 * @method getRedirectFromPayload
+	 * Get redirect URL from capability
+	 * @method getRedirectFromCapability
 	 * @static
-	 * @param {array} $payload the payload generated with
-	 *  Users_Session::generatePayload($source)
+	 * @param {array} $capability a catability generated with
+	 *  Users_Session::generateCapability($source), or with
+	 *  Users_Capabilithy::unserialize($text)
 	 * @param {array} [$source=$_REQUEST] expects it to contain
 	 *  the keys "redirect", "appId" and optionally "platform"
 	 * @return {string} the full redirect URL with query parameters
 	 */
-	static function getRedirectFromPayload($payload, $source = null)
+	static function getRedirectFromCapability($capability)
 	{
-		$source = Q::ifset($source, $_REQUEST);
-		$baseUrl = Q_Request::baseUrl();
+		Q_Valid::requireFields(array('redirect', 'appId'), $capability->data, true);
 		$req = Q::take($source, array(
-			'appId' => Q::app(),
-			'platform' => 'qbix',
-			'redirect' => $baseUrl
+			'appId' => null, 
+			'platform' => 'browser'
 		));
-		$redirect = $req['redirect'];
+		$redirect = $_REQUEST['redirect'];
 		list($appId, $appInfo) = Users::appInfo($req['platform'], $req['appId'], true);
+		$baseUrl = Q_Request::baseUrl();
 		$scheme = Q::ifset($appInfo, 'scheme', null);
-		$paths = Q::ifset($appInfo, 'paths', null);
+		$paths = Q::ifset($appInfo, 'paths', false);
 		if (Q::startsWith($redirect, $baseUrl)) {
 			$path = substr($redirect, strlen($baseUrl)+1);
+			$path = $path ? $path : '/';
 		} else if (Q::startsWith($redirect, $scheme)) {
 			$path = substr($redirect, strlen($scheme));
+			$path = $path ? $path : '/';
 		} else {
 			throw new Users_Exception_Redirect(array('uri' => $redirect));
 		}
-		$path = $path ?: '/';
 		if (is_array($paths) and !in_array($path, $paths)) {
 			throw new Users_Exception_Redirect(array('uri' => $redirect));
 		}
-		$qs = http_build_query($payload);
+		$qs = http_build_query(array('capability' => $capability->serialize()));
 		return Q_Uri::fixUrl("$redirect?$qs");
 	}
 	

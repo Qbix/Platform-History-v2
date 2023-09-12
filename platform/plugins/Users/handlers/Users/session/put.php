@@ -3,37 +3,28 @@
 function Users_session_put($params, &$fieldsToClear)
 {
 	// Validate the inputs
-	$fields1 = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature');
-	$fields2 = array_merge($fields1, array('Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform'));
-	$fieldsToClear = $fields2;
-	$req = Q_Request::fromUnderscores($fields2);
-	Q_Valid::requireFields($fields1, $req, true);
-	$params = Q::take($req, $fields2);
-	$platform = Q_Request::platform();
-	//list($appId, $info) = Users::appInfo($platform, $params['Q.Users.appId']);
-	Q_Valid::signature(true, $params, array('Q.Users.signature'));
-	if (isset($params['Q.timestamp'])) {
-		$secondsMax = (int)Q_Config::get('Users', 'session', 'redirectSecondsMax', 300);
-		if ((int)$params['Q.timestamp'] < time() - $secondsMax) {
-			// this is some weird situation where redirect took too long
-			throw new Q_Exception("Users/session: $secondsMax exceeded, try again");
-		}
-	}
+	$field = 'Q_Users_Session_capability';
+	Q_Request::requireFields(array($field), true);
+	$fieldsToClear = array($field);
 
-	// Seems we just generated this signature.
+	// The following can throw an exception
+	$capability = Q_Capability::unserialize($_REQUEST[$field]);
+	Q_Valid::requireFields($capability->data, array('newSessionId'), true);
+
+	// Seems our server recently signed this capability.
 	// Set the session id to the newSessionId.
-	if (Q_Session::id() != $params['Q.Users.newSessionId']) {
+	if (Q_Session::id() != $capability->data['newSessionId']) {
 		Q_Session::destroy();
-		Q_Session::start(false, $params['Q.Users.newSessionId']);
+		Q_Session::start(false, $capability->data['newSessionId']);
 	}
 
 	// Add a device, if any
-	if ($deviceId = Q::ifset($req, 'Q.Users.deviceId', null)) {
+	if ($deviceId = Q::ifset($capability->data, 'deviceId', null)) {
 		$user = Users::loggedInUser(true); // throw an exception if user isn't logged in
 		$device = Q_Request::userAgentInfo();
 		$device['deviceId'] = $deviceId;
 		$device['userId'] = $user->id;
-		$device['appId'] = Q::ifset($req, 'Q.Users.appId', Q::app());
+		$device['appId'] = Q::ifset($capability->data, 'appId', Q::app());
 		Users_Device::add($device);
 	}
 	

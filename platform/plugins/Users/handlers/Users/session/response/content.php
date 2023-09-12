@@ -10,9 +10,9 @@ function Users_session_response_content()
 		return Q::view('Users/content/session.php');
 	}
 
-	$payload = Users_Session::generatePayload();
-	Users_Session::createSessionFromPayload($payload);
-	$url = Users_Session::getRedirectFromPayload($payload);
+	$capability = Users_Session::generateCapability();
+	Users_Session::createSessionFromCapability($capability);
+	$url = Users_Session::getRedirectFromCapability($capability);
 
 	Q_Response::addScript('{{Users}}/js/pages/session.js', 'Users');
 	Q_Response::setScriptData("Q.Cordova.handoff.url", $url);

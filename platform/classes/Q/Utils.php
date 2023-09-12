@@ -294,7 +294,7 @@ class Q_Utils
 	 * Generates signature for the data
 	 * @method signature
 	 * @static
-	 * @param {array|string} $data
+	 * @param {array|string} $data A possibly multi-dimensional array, or a string
 	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {string}
 	 */

@@ -120,7 +120,8 @@ Utils.validateRequest = function (req, res, next) {
  * and must also be signed with Q.Utils.sign() or equivalent implementation.
  * @method validateCapability
  * @static
- * @param {Array|String} permissions
+ * @param {Object} capability the capability to test
+ * @param {Array|String} permissions the permissions to require, if any
  * @return {boolean} Whether the signature is valid. Returns true if secret is empty.
  */
 Utils.validateCapability = function (capability, permissions) {
@@ -128,7 +129,7 @@ Utils.validateCapability = function (capability, permissions) {
 	if (!capability || !Utils.validate(capability)
 	|| Q.isEmpty(capability.permissions)
 	|| capability.startTime > now
-	|| capability.endTime < now) {
+	|| (capability.endTime && capability.endTime < now)) {
 		return false;
 	}
 	if (typeof permissions === 'string') {

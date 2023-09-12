@@ -381,20 +381,25 @@ class Q_Valid
 	 * and must also be signed with Q_Utils::sign() or equivalent implementation.
 	 * @method capability
 	 * @static
-	 * @param {array|string} $permissions
-	 * @return {bool}
+	 * @param {Q_Capability|array} $capability The capability to test
+	 * @param {array|string} [$permissions] The permissions to require, if any
+	 * @return {bool} Returns true if it's a valid capability with all required permissions
 	 */
-	static function capability($capability, $permissions)
+	static function capability($capability, $permissions = array())
 	{
 		$now = time();
+		$startTime = Q::ifset($capability, 'startTime', 0);
+		$endTime = Q::ifset($capability, 'endTime', 33226225269);
 		if (!$capability || !Q_Valid::signature($capability)
 		|| empty(Q::ifset($capability, 'permissions', array()))
-		|| Q::ifset($capability, 'startTime', 0) > $now
-		|| Q::ifset($capability, 'endTime', 33226225269) < $now) {
+		|| $startTime > $now
+		|| ($endTime && $endTime < $now)) {
 			return false;
 		}
 		if (is_string($permissions)) {
-			$permissions = [$permissions];
+			$permissions = array($permissions);
+		} else if (!isset($permissions)) {
+			$permissions = array();
 		}
 		$cp = Q::ifset($capability, 'permissions', array());
 		foreach ($permissions as $p) {
