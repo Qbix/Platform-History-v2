@@ -26,7 +26,7 @@ Q.exports(function (Users, priv) {
 			// check if user is connected to facebook
 			Q.Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
-					priv._handleXid(
+					priv.handleXid(
 						platform, platformAppId, response.authResponse.userID,
 						onSuccess, onCancel, Q.extend({response: response}, options)
 					);

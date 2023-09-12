@@ -21,7 +21,7 @@ Q.exports(function (Users, priv) {
 			userId: userId,
 			title: title,
             label: label,
-		}, 'label', Label, Users.getLabels, callback);
+		}, 'label', Users.Label, Users.getLabels, callback);
 	};
 
 });

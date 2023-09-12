@@ -15,7 +15,7 @@ Q.exports(function (Users, priv) {
 	 * @param {String|Array} [contactUserIds]
 	 * @param {Function} callback
 	 */
-	return function Users_getContacts(userId, labels, contactUserIds, callback) {
+	return Q.getter(function Users_getContacts(userId, labels, contactUserIds, callback) {
 		if (typeof labels === 'function') {
 			callback = labels;
 			labels = contactUserIds = undefined;
@@ -42,6 +42,17 @@ Q.exports(function (Users, priv) {
 			},
 			method: 'post'
 		});
-	};
-
+	}, {
+		cache: Q.Cache[Users.cacheWhere]("Users.getContacts", 100),
+		throttle: 'Users.getContacts',
+		prepare: function (subject, params, callback) {
+			if (params[0]) {
+				return callback(subject, params);
+			}
+			for (var i in params[1]) {
+				params[1][i] = new Users.Contact(params[1][i]);
+			}
+			return callback(subject, params);
+		}
+	});
 });

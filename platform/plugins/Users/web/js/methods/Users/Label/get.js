@@ -14,7 +14,7 @@ Q.exports(function (Users, priv) {
 	 *    if there were errors, first parameter is an array of errors
 	 *  otherwise, first parameter is null and second parameter is a Users.Label object
 	 */
-	return function Users_Label_get(userId, label, callback) {
+	return Q.getter(function Users_Label_get(userId, label, callback) {
 		var func = Users.batchFunction(Q.baseUrl({
 			userIds: userId,
 			label: label
@@ -33,6 +33,18 @@ Q.exports(function (Users, priv) {
 				var label = new Users.Label(data.label);
 				callback.call(label, err, label);
 			});
-	};
-
+	}, {
+		cache: Q.Cache[Users.cacheWhere]("Users.Label.get", 100),
+		throttle: 'Users.Label.get',
+		prepare: function (subject, params, callback) {
+			if (subject instanceof Contact) {
+				return callback(subject, params);
+			}
+			if (params[0]) {
+				return callback(subject, params);
+			}
+			var contact = params[1] = new Label(subject);
+			return callback(contact, params);
+		}
+	})
 });

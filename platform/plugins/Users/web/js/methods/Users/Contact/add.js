@@ -16,12 +16,11 @@ Q.exports(function (Users, priv) {
 	 *  if there were errors, first parameter is an array of errors
 	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
 	 */
-	function Users_Contact_add(userId, label, contactUserId, callback) {
+	return function Users_Contact_add(userId, label, contactUserId, callback) {
 		return priv._Users_manage('Users/contact', 'post', {
 			userId: userId,
 			label: label,
 			contactUserId: contactUserId
-		}, 'contact', Contact, Users.getContacts, callback);
+		}, 'contact', Users.Contact, Users.getContacts, callback);
 	};
-
 });

@@ -15,7 +15,7 @@ Q.exports(function (Users, priv) {
 	 *  Or pass an array of label names, to filter by.
 	 * @param {Function} callback
 	 */
-	Users.getLabels = function (userId, filter, callback) {
+	Users.getLabels = Q.getter(function (userId, filter, callback) {
 		if (typeof filter === 'function') {
 			callback = filter;
 			filter = undefined;
@@ -38,6 +38,17 @@ Q.exports(function (Users, priv) {
 			},
 			method: 'post'
 		});
-	};
-
+	}, {
+		cache: Q.Cache[Users.cacheWhere]("Users.getLabels", 100),
+		throttle: 'Users.getLabels',
+		prepare: function (subject, params, callback) {
+			if (params[0]) {
+				return callback(subject, params);
+			}
+			for (var i in params[1]) {
+				params[1][i] = new Users.Label(params[1][i]);
+			}
+			return callback(subject, params);
+		}
+	});
 });

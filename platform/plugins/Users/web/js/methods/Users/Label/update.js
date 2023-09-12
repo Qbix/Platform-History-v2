@@ -24,6 +24,6 @@ Q.exports(function (Users, priv) {
             title,
             icon, 
             description,
-        }, 'label', Label, Users.getLabels, callback);
+        }, 'label', Users.Label, Users.getLabels, callback);
     };
 });

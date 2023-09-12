@@ -21,7 +21,7 @@ Q.exports(function (Users, priv) {
 			userId: userId,
 			label: label,
 			contactUserId: contactUserId
-		}, null, Contact, Users.getContacts, callback);
+		}, null, Users.Contact, Users.getContacts, callback);
 	};
 
 });

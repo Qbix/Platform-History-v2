@@ -16,7 +16,7 @@ Q.exports(function (Users, priv) {
 	 *    if there were errors, first parameter is an array of errors
 	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
 	 */
-	return function Users_Contact_get(userId, label, contactUserId, callback) {
+	return Q.getter(function Users_Contact_get(userId, label, contactUserId, callback) {
 		var func = Users.batchFunction(Q.baseUrl({
 			userIds: userId,
 			label: label,
@@ -37,6 +37,18 @@ Q.exports(function (Users, priv) {
 				callback.call(contact, err, contact);
 			}
 		);
-	};
-
+	}, {
+		cache: Q.Cache[Users.cacheWhere]("Users.Contact.get", 100),
+		throttle: 'Users.Contact.get',
+		prepare: function (subject, params, callback) {
+			if (subject instanceof Contact) {
+				return callback(subject, params);
+			}
+			if (params[0]) {
+				return callback(subject, params);
+			}
+			var contact = params[1] = new Contact(subject);
+			return callback(contact, params);
+		}
+	});
 });

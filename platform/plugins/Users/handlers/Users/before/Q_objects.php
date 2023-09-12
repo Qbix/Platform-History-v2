@@ -112,10 +112,11 @@ function Users_before_Q_objects(&$params)
 			$fieldsToClear = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
 		}
 		$queryString = $_SERVER["QUERY_STRING"];
+		$request_uri = explode('?', $_SERVER[REQUEST_URI])[0];
 		foreach ($fieldsToClear as $key) {
 			$queryString = preg_replace("/$key=?[^\&]*\&?/", "", $queryString);
 		}
-		$newUrl = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REDIRECT_URL]?".$queryString;
+		$newUrl = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$request_uri?".$queryString;
 		Q_Response::redirect($newUrl);
 	}
 }
