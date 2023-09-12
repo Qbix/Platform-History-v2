@@ -222,12 +222,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 var chainId = $rolePlace.val();
                                 tool.element.addClass('Q_loading');
                                 Q.Dialogs.pop();
-                                if (!chainId || chainId === 'native') {
+                                if (chainId === undefined || chainId == 'native') {
                                     tool._addWeb2(title, null, function(){
                                         tool.element.removeClass('Q_loading');
                                     })
 
-                                } else {
+                                } else if (chainId.substring(0,2) === '0x') {
                                     
                                     let st, communityAddress;
                                     [st, communityAddress] = tool._getCommunityAddress(chainId);
@@ -250,7 +250,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         });
 
                                     });
-
+                                } else {
+                                    console.warn('unknown format `chainId`');
                                 }
 
                             });
@@ -273,12 +274,44 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 } else {
                                     iconUrl = iconUrlBeforeEdit;
                                 }
+                                
+                                // web2 update callback
+                                function _labelUpdate(label, title, iconUrl, description) {
+                                    Users.Label.update(state.userId, label, title, iconUrl, description, function (err, obj) {
+                                        if (err) {
+                                            tool.element.removeClass('Q_loading');
+                                            Q.alert(err);
+                                            return;
+                                        }
 
+                                        Q.Dialogs.pop();
+                                        tool.element.removeClass('Q_loading');
+                                        tool.refresh();
+                                    });
+                                }
+                                
                                 // web3 processing
-                                if (Users.Label.isExternal(label, "web3") && iconUrlBeforeEdit === 'labels/default') {
-                                    // then try to set URI json
+                                if (Q.Users.Label.isExternal(label)) {
+                                    if (iconUrlBeforeEdit == 'labels/default') {
+                                        // then try to set URI json 
 
-                                    var chainId, roleIndex;
+                                        var chainId, roleIndex;
+                                        
+                                        [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
+                                        // http://itr.localhost/URI/ITR/0x13881/19.json
+                                        var uri = Q.url("{{baseUrl}}/URI/"+state.userId+"/"+chainId+"/"+roleIndex+".json");
+                                        let st, communityAddress;
+                                        [st, communityAddress] = tool._getCommunityAddress(chainId);
+                                        if (!st) return;
+                                        Q.Communities.Web3.Roles.setRoleURI(communityAddress, chainId, null, roleIndex, uri, function (err, status) {
+
+                                            if (err) {
+                                                tool.element.removeClass('Q_loading');
+                                                Q.alert(err);
+                                                return;
+                                            }
+
+                                            _labelUpdate(label, title, iconUrl, description);
 
                                     [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
                                     // http://itr.localhost/URI/ITR/0x13881/19.json
@@ -294,27 +327,11 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                             return;
                                         }
 
-                                        Users.Label.update(state.userId, label, title, iconUrl, description, function (err, obj) {
-                                            Q.Dialogs.pop();
-                                            tool.element.removeClass('Q_loading');
-                                            tool.refresh();
-                                        });
-
-                                    });
-
+                                        _labelUpdate(label, title, iconUrl, description);
+                                    }
                                 } else {
-
-                                    Users.Label.update(state.userId, label, title, iconUrl, description, function (err, obj) {
-                                        if (err) {
-                                            tool.element.removeClass('Q_loading');
-                                            Q.alert(err);
-                                            return;
-                                        }
-
-                                        Q.Dialogs.pop();
-                                        tool.element.removeClass('Q_loading');
-                                        tool.refresh();
-                                    });
+                                    // else web2 processsing
+                                    _labelUpdate(label, title, iconUrl, description);
                                 }
                             });
 
