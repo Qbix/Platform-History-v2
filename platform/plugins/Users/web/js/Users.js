@@ -246,8 +246,7 @@
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
 			'{{Users}}/js/web3/web3.min.js',
-			//'https://unpkg.com/@walletconnect/ethereum-provider'
-			'{{Users}}/js/web3/ethereumProvider.2.9.1.min.js'
+			'{{Users}}/js/web3/ethereumProvider.2.10.0.min.js' //'https://unpkg.com/@walletconnect/ethereum-provider'
 		];
 
 		Q.addScript(scriptsToLoad, function () {
@@ -261,12 +260,22 @@
 					return;
 				}
 
+				var optionalChains = [];
+				if (typeof Users.Web3.chains === "object") {
+					Q.each(Object.keys(Users.Web3.chains), function (i, chainId) {
+						if (chainId === '0x1') {
+							return;
+						}
+
+						optionalChains.push(parseInt(chainId));
+					});
+				}
 				window['@walletconnect/ethereum-provider'].EthereumProvider.init({
 					projectId: projectId, // REQUIRED your projectId
 					showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
 					qrModalOptions: { themeMode: "light" },
-					chains: [1,56,137], // REQUIRED chain ids
-					optionalChains: [5,97,80001],
+					chains: [1], // REQUIRED chain ids
+					optionalChains: optionalChains,
 					methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
 					//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
 					events: ["chainChanged", "accountsChanged","disconnect","connect"],
@@ -347,23 +356,6 @@
 		}
 	};
 
-	/**
-	 * Authenticates this session with a given platform,
-	 * if the user was already connected to it.
-	 * It tries to do so by checking a cookie that would have been set by the server.
-	 * @method authenticate
-	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
-	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
-	 *  It is passed the user information if the user changed.
-	 * @param {Function} onCancel Called if the authentication was canceled. Receives err, options
-	 * @param {Object} [options] object of parameters for authentication function
-	 *   @param {Function|Boolean} [options.prompt=null] which shows the usual prompt unless it was already rejected once.
-	 *     Can be false, in which case the user is never prompted and the authentication just happens.
-	 *     Can be true, in which case the usual prompt is shown even if it was rejected before.
-	 *     Can be a function with an onSuccess and onCancel callback, in which case it's used as a prompt.
-	 *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
-	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
-	 */
     Users.authenticate = new Q.Method();
         
     
@@ -382,7 +374,7 @@
 		}, {"prompt": false});
 	}
 	
-	function _handleXid(platform, platformAppId, xid, onSuccess, onCancel, options) {
+	priv.handleXid = function _handleXid(platform, platformAppId, xid, onSuccess, onCancel, options) {
 		var ignoreXid = Q.cookie('Users_ignorePlatformXids_'+platform+"_"+platformAppId);
 
 		// the following line prevents multiple prompts for the same user,
@@ -394,13 +386,13 @@
 		if (Users.loggedInUser && Users.loggedInUser.xids[key] == xid) {
 			// The correct user is already logged in.
 			// Call onSuccess but do not pass a user object -- the user didn't change.
-			_doSuccess(null, platform, platformAppId, onSuccess, onCancel, options);
+			priv._doSuccess(null, platform, platformAppId, onSuccess, onCancel, options);
 			return;
 		}
 		if (options.prompt === undefined || options.prompt === null) {
 			// show prompt only if we aren't ignoring this platform xid
 			if (xid == ignoreXid) {
-				_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+				priv._doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
 			} else {
 				Users.prompt(platform, xid, __doAuthenticate, __doCancel);
 			}
@@ -419,7 +411,7 @@
 		}
 		
 		function __doCancel(x) {
-			_doCancel.call(this, platform, platformAppId, x, onSuccess, onCancel, options);
+			priv._doCancel.call(this, platform, platformAppId, x, onSuccess, onCancel, options);
 		}
 
 		function __doAuthenticate() {
@@ -433,7 +425,7 @@
 					// facebook authResponse. In this case, even though they want
 					// to authenticate, we must cancel it.
 					alert("Connection to facebook was lost. Try connecting again.");
-					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
+					priv._doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 					return;
 				}
 				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
@@ -444,11 +436,11 @@
 				Q.extend(fields, Web3.authResponse);
 				fields.updateXid = !!Q.getObject("updateXid", options);
 			}
-			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
+			priv._doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
 		}
 	}
 	
-	function _doSuccess(user, platform, platformAppId, onSuccess, onCancel, options) {
+	priv._doSuccess = function _doSuccess(user, platform, platformAppId, onSuccess, onCancel, options) {
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
 		Users.onConnected.handle.call(Users, platform, user, options);
@@ -456,7 +448,7 @@
 		Users.authenticate.occurring = false;
 	}
 
-	function _doCancel(platform, platformAppId, xid, onSuccess, onCancel, options) {
+	priv._doCancel = function _doCancel(platform, platformAppId, xid, onSuccess, onCancel, options) {
 		if (xid) {
 			// NOTE: the following line makes us ignore this xid
 			// until the user explicitly wants to connect.
@@ -474,12 +466,12 @@
 		Users.authenticate.occurring = false;
 	}
 	
-	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
+	priv._doAuthenticate = function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
 		Q.req('Users/authenticate', 'data', function (err, response) {
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
-				return _doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
+				return priv._doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
 			}
 			Q.Response.processScriptDataAndLines(response);
 			var user = response.slots.data;
@@ -491,7 +483,7 @@
 			user.used = platform;
 			Users.loggedInUser = new Users.User(user);
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-			_doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
+			priv._doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
 		}, {
 			method: "post",
 			loadExtras: "session",
@@ -571,519 +563,60 @@
 		}
 	};
 
-	/**
-	 * Copies and signs a given payload using Users.signature (see that function).
-	 * Inserts the signature, publilc key and field under the field whose name is
-	 * stored in Users.signatures.sigField
-	 * @param {Object} payload 
-	 * @param {Function} callback Receives err, fields with the signed payload,
-	 *  expanded with a field named after Users.signature.sigField, containing the keys
-	 *  "signature", "publicKey" and "fieldNames".
-	 * @param {Object} options
-	 * @param {Object} [options.key] Set the key to use, to sign the payload with
-	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
-	 */
-	Users.sign = function (payload, callback, options) {
-		var fields = Q.copy(payload);
-		Users.signature(fields, function (err, signature, key) {
-			if (err) {
-				return callback && callback(err);
-			}
-			if (options.key) {
-				crypto.subtle.exportKey('spki', key.publicKey)
-				.then(function (pk) {
-					var key_hex = Array.prototype.slice.call(
-						new Uint8Array(pk), 0
-					).toHex();
-					_proceed(key_hex);
-				});
-			} else if (Users.Session.publicKey) {
-				_proceed(Users.Session.publicKey);
-			} else {
-				return callback("Users.sign: User.Session.publicKey missing");
-			}
-			function _proceed(publicKeyString) {
-				fields[Users.signatures.sigField] = {
-					signature: signature,
-					publicKey: publicKeyString,
-					fieldNames: options.fieldNames || null
-				};
-				return callback && callback(null, fields);
-			}
-		}, options);
-	};
-
-	/**
-	 * Used when platform user is logged in to platform but not to app.
-	 * Shows prompt asking if user wants to log in to the app as platform user.
-	 * @method prompt
-	 * @param {String} platform For now, only "facebook" is supported
-	 * @param {String} xid The platform xid
-	 * @param {Function} authCallback , this function will be called after user authentication
-	 * @param {Function} cancelCallback , this function will be called if user closed social platform login window
-	 * @param {object} options
-	 *     @param {DOMElement} [options.dialogContainer=document.body] param with jQuery identifier of dialog container
-	 * @param {Object} options
-	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
-	 */
-	Users.prompt = function (platform, xid, authCallback, cancelCallback, options) {
-		if (platform !== 'facebook') {
-			throw new Q.Error("Users.authenticate prompt: The only supported platform for now is facebook");
+	Users.prompt = new Q.Method({
+		options: {
+			dialogContainer: 'body'
 		}
+	});
+	Users.scope = new Q.Method();
+	Users.sign = new Q.Method();
 
-		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Users.getPlatformAppId(appId);
-		var platformCapitalized = platform.toCapitalized();
-
-		if (!Users.prompt.overlay) {
-			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
-			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var caption;
-			var tookAction = false;
-
-			var content_div = $('<div />');
-			var xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users);
-			var queries = ['me'];
-			if (xid2) {
-				queries.push('xid')
-			}
-			var pipe = new Q.Pipe(queries, function (params, subjects) {
-				var meName = Q.getObject(['me', 0, 'name'], params);
-				var mePicture = Q.getObject(['me', 0, 'picture', 'data', 'url'], params);
-				var xidName = Q.getObject(['xid', 0, 'name'], params);
-				var xidPicture = Q.getObject(['xid', 0, 'picture', 'data', 'url'], params);
-				if (xidName) {
-					content_div.append(_usingInformation(xidPicture, xidName, noLongerUsing));
-					caption = Q.text.Users.prompt.doSwitch.interpolate({
-						'platform': platform,
-						'Platform': platformCapitalized
-					});
-				} else {
-					caption = Q.text.Users.prompt.doAuth.interpolate({
-						'platform': platform,
-						'Platform': platformCapitalized
-					});
-				}
-				content_div.append(_usingInformation(mePicture, meName, areUsing))
-					.append(_authenticateActions(caption));
-			});
-			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
-			if (xid2) {
-				FB.api("/"+xid2+"?fields=name,picture.width(50).height(50)", pipe.fill('xid'));;
-			}
-
-			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
-			var titleSlot = $('<div class="Q_title_slot" />');
-			titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(title));
-			var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
-			dialogSlot.append(content_div);
-			Users.prompt.overlay.append(titleSlot).append(dialogSlot)
-				.prependTo(o.dialogContainer);
-		}
-		Q.Dialogs.push({
-			dialog: Users.prompt.overlay,
-			doNotRemove: true,
-			onActivate: function () {
-				Users.init.facebook(function () {
-					FB.XFBML.parse(content_div.get(0));
-				}, {
-					appId: appId
-				});
-			},
-			onClose: function () {
-				if (!tookAction) {
-					if (cancelCallback) cancelCallback(xid);
-				}
-				tookAction = false;
-			}
-		});
-
-		function _usingInformation(icon, name, explanation) {
-			return $("<table />").append(
-				$("<tr />").append(
-					$("<td class='Users_profile_pic' />").append(
-						$('<img />', {src: icon})
-					)
-				).append(
-					$("<td class='Users_explanation_name' />").append(
-						$("<div class='Users_explanation' />").html(explanation)
-					).append(
-						name
-					)
-				)
-			);
-		}
-
-		function _authenticateActions(caption) {
-			return $("<div class='Users_actions Q_big_prompt' />").append(
-				$('<button type="submit" class="Q_button Q_main_button" />').html(caption)
-					.click(function () {
-						tookAction = true;
-						Users.prompt.overlay.data('Q/overlay').close();
-						authCallback();
-					})
-			);
-		}
-	};
-
-
-	/**
-	 * Check permissions granted by platform.
-	 * Currently only facebook is supported.
-	 * @method scope
-	 * @param {String} platform For now, only "facebook" is supported
-	 * @param {Function} callback this function will be called after getting permissions
-	 *   from the external platform. The first parameter is the raw data returned.
-	 *   The second parameter is an array of Boolean corresponding to the scope names in
-	 *   options.check, indicating whether they were granted.
-	 * Callback parameter could be null or response object from social platform
-	 * @param {Object} options
-	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
-	 *   @param {Array} [options.check=[]] Scopes to check.
-	 */
-	Users.scope = function (platform, callback, options) {
-		if (platform !== 'facebook') {
-			throw new Q.Error("Users.scope: The only supported platform for now is facebook");
-		}
-		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Users.getPlatformAppId(appId);
-		Users.init.facebook(function () {
-			if (!Users.Facebook.getAuthResponse()) {
-				callback(null);
-			}
-			FB.api('/me/permissions', function (response) {
-				if (response && response.data) {
-					var checked = [];
-					Q.each(options && options.check, function (a, s) {
-						var granted = false;
-						for (var i = 0, l = response.data.length; i < l; ++i) {
-							if (response.data[i].permission === s
-								&& response.data[i].status) {
-								granted = true;
-							}
-						}
-						checked.push(granted);
-					});
-					callback(response.data, checked);
-				} else {
-					callback(null);
-				}
-			});
-		}, {
-			appId: platformAppId
-		});
-	};
-
-	/**
-	 * Log the user in
-	 * @method login
-	 * @param {Object} [options] You can pass several options here
-	 *  @param {Q.Event} [options.onSuccess] event that occurs when login or authentication "using" a platform is successful. It is passed (user, options, result, used) where user is the Users.User object (null if it was unchanged),
-	 options were the options used in the call to Users.login, result is one of "registered", "adopted", "connected" or "authorized" (see Users::authenticate)
-	 and 'used' is "native", "web3", or the name of the platform used, such as "facebook"
-	 *  @param {Function} [options.onCancel] event that occurs when login or authentication "using" a platform was canceled.
-	 *  @param {Function} [options.onResult] event that occurs before either onSuccess, onCancel, or onRequireComplete
-	 *  @param {String} [options.successUrl] If the default onSuccess implementation is used, the browser is redirected here. Defaults to Q.uris[Q.info.app+'/home']
-	 *  @param  {String} [options.accountStatusURL] if passed, this URL is hit to determine if the account is complete
-	 *  @param {Function} [options.onRequireComplete] function to call if the user logged in but account is incomplete.
-	 *  It is passed the user information as well as the response from hitting accountStatusURL
-	 *  @param {String|Element} [options.explanation] Explanation to prepend to the dialog, inside a container with class Users_login_explanation
-	 *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
-	 *  @param {Boolean} [options.skipHint] pass true here to skip calling Users.Pointer.hint when login dialog appears without textbox focus
-	 *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
-	 *  @param {Boolean} [options.unlessLoggedIn] if true, this only proceeds with the login flow if the user isn't already logged in. Can be combined with tryQuietly option.
-	 *  @param {Array} [options.scope=['email'] permissions to request from the authentication platform
-	 *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
-	 *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
-	 *  @param {String} [options.identifier] If passed, automatically enters this identifier and clicks the Go button
-	 *  @return {Boolean} Whether a login flow has started
-	 */
-	Users.login = function (options) {
-
-		var o = Q.extend({}, Users.login.options, options);
-		if (o.unlessLoggedIn && Users.loggedInUser) {
-			var pn = priv.used || 'native';
-			var ret = Q.handle(o.onResult, this, [
-				Users.loggedInUser, options, priv.result, pn
-			]);
-			if (false !== ret) {
-				Q.handle(o.onSuccess, this, [
-					Users.loggedInUser, options, priv.result, pn
-				]);
-			}
-			return false;
-		}
-
-		if (typeof options === 'function') {
-			options = {onSuccess: {'options': options}};
-			if (arguments.length > 1) {
-				options.onRequireComplete = {'Users.login.options': arguments[1]};
-			}
-		}
-
-		if (typeof o.using === 'string') {
-			o.using = o.using.split(',');
-		}
-
-		Users.login.occurring = true;
-
-		_doLogin();
-
-		return true;
-
-		function _doLogin() {
-			// try quietly, possible only with one of "facebook" or "web3"
-			if (o.tryQuietly) {
-				var platform = (typeof o.tryQuietly === 'string') ? o.tryQuietly : '';
-				if (!platform) {
-					var using = (typeof o.using === 'string') ? [o.using] : o.using;
-					Q.each(['facebook', 'web3'], function (i, k) {
-						if (!using || using.indexOf(k) >= 0) {
-							platform = k;
-							return;
-						}
-					});
-				}
-				Users.authenticate(platform, function (user) {
-					_onConnect(user);
-				}, function () {
-					_onCancel();
-				}, o);
-				return false;
-			}
-
-			priv.result = null;
-			priv.used = null;
-			priv.login_onConnect = _onConnect;
-			priv.login_onCancel = _onCancel;
-
-			// perform actual login
-			if (o.using.indexOf('native') >= 0) {
-				var usingPlatforms = {};
-				Q.each(['web3', 'facebook'], function (i, platform) {
-					var appId = (o.appIds && o.appIds[platform]) || Q.info.app;
-					if ((o.using.indexOf(platform) >= 0)) {
-						usingPlatforms[platform] = appId;	
-					}
-				});
-				// set up dialog
-				login_setupDialog(usingPlatforms, o);
-				priv.linkToken = null;
-				priv.scope = o.scope;
-				priv.activation = o.activation;
-				$('#Users_login_step1').show();
-				$('#Users_login_usingPlatforms').show();
-				$('#Users_login_step1_form *').removeAttr('disabled');
-				$('#Users_login_identifierType').val(o.identifierType);
-			} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
-				var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
-				Users.init.facebook(function () {
-					Users.Facebook.login(function (response) {
-						if (!response.authResponse) {
-							_onCancel();
-							return;
-						}
-						if (Q.isEmpty(o.scope)) {
-							_authenticate('facebook');
-							return;
-						}
-						// some permissions were requested
-						Users.scope('facebook', function (scope, checked) {
-							if (!scope) {
-								_onCancel(null);
-								return;
-							}
-							for (var i = 0; i < checked.length; ++i) {
-								if (!checked[i]) {
-									_onCancel(scope); // at least some permission was not granted
-									return;
-								}
-							}
-							_authenticate('facebook');
-						}, {
-							check: o.scope
-						});
-					});
-				}, {
-					appId: appId
-				});
-			} else if (o.using[0] === 'web3') { // only web3 used. Open web3 login right away
-				Web3.login(function (result) {
-					if (!result) {
-						_onCancel();
-					} else {
-						// do nothing, since we already executed this:
-						// _authenticate('web3');
-					}
-				});
-			}
-
-			delete priv.login_connected; // if we connect, it will be filled
-
-		}
-
-		function _onConnect(user) {
-			if (user) {
-				user.result = priv.result;
-				user.used = priv.used;
-				user.activateLink = priv.activateLink;
-				Users.loggedInUser = new Users.User(user);
-				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-			}
-			if (priv.activateLink) {
-				Users.Dialogs.activate(priv.activateLink, {
-					onSuccess: _activationComplete
-				});
-			} else {
-				_activationComplete();
-			}
-			function _activationComplete(data) {
-				user = Q.getObject('slots.user', data) || user;
-				if (!o.accountStatusURL) {
-					_onComplete(user, Q.copy(priv));
-					return;
-				}
-				Q.request(o.accountStatusURL, 'accountStatus', function (err, response2) {
-					var fem = Q.firstErrorMessage(err, response2);
-					if (fem) {
-						return alert(fem);
-					}
-					// DEBUGGING: For debugging purposes
-					Users.login.occurring = false;
-					if (!o.onRequireComplete
-					|| response2.slots.accountStatus === 'complete') {
-						_onComplete(user, Q.copy(priv));
-					} else if (response2.slots.accountStatus === 'refresh') {
-						// we are logged in, refresh the page
-						Q.handle(window.location.href);
-						return;
-					} else {
-						// take the user to the profile page which will ask
-						// the user to complete their registration process
-						// by entering additional information
-						if (false !== Q.handle(o.onResult, this, [user, response2, o])) {
-							Q.handle(o.onRequireComplete, this, [user, response2, o]);
+	Users.login = new Q.Method({
+		options: {
+			onCancel: new Q.Event(),
+			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
+				// default implementation
+				if (user) {
+					// the user changed, redirect to their home page
+					var urls = Q.urls || {};
+					var nextUrl = options.successUrl;
+					if (priv.result === 'register') {
+						if (options.onboardingUrl) {
+							nextUrl = options.onboardingUrl;
 						}
 					}
-				});
-			}
-		}
-
-		// User clicked "cancel" or closed login dialog
-		function _onCancel(scope) {
-			if (false !== Q.handle(o.onResult, this, [scope, o])) {
-				Q.handle(o.onCancel, this, [scope, o]);
-			}
-			Users.login.occurring = false;
-		}
-
-		// login complete - run onSuccess handler
-		function _onComplete(user) {
-			var pn = priv.used || 'native';
-			var ret = Q.handle(o.onResult, this, [user, o, priv, pn]);
-			if (false !== ret) {
-				Q.handle(o.onSuccess, this, [user, o, priv, pn]);
-			}
-			Users.onLogin.handle(user);
-			Users.login.occurring = false;
-		}
-	};
-
-	/**
-	 * Log the user out
-	 * @method logout
-	 * @param {Object} [options] You can pass several options here
-	 *  It is passed the user information if the user changed.
-	 *  @param {String} [options.url] the URL to hit to log out. You should usually not change this.
-	 *  @param {String} [options.using] can be "native", "facebook", "web3", or "native,facebook,web3"
-	 *   to log out of multiple platforms in addition to logging out natively
-	 *  @param {Q.Event} [options.onSuccess] event that occurs when logout is successful.
-	 *  @param {String} [options.welcomeUrl] the URL of the page to show on a successful logout
-	 */
-	Users.logout = function (options) {
-		options = options || {};
-		if (typeof options === 'function') {
-			options = {onSuccess: {'options': options}};
-		}
-		var o = Q.extend({}, Users.logout.options, options);
-		if (!o.using || o.using === '*') {
-			o.using = Q.getObject('login.options.using', Users) || ['native'];
-		}
-		if (typeof o.using === 'string') {
-			o.using = o.using.split(',');
-		}
-
-		Users.logout.occurring = true;
-
-		function callback(err, response) {
-			if (response && response.slots && response.slots.script) {
-				// This script is coming from our server - it's safe.
-				try {
-					eval(response.slots.script);
-				} catch (e) {
-					alert(e);
+					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
+					Q.handle(url);
 				}
-			}
-			Users.lastSeenNonce = Q.cookie('Q_nonce');
-			Users.roles = {};
-			var appId = o.appId || Q.info.app;
-			var p = new Q.Pipe();
-			var loggedOutOf = {};
-			if (appId && o.using.indexOf('facebook') >= 0) {
-				loggedOutOf.facebook = true;
-				Users.disconnect.facebook(appId, p.fill('facebook'));
-			}
-			if (o.using.indexOf('web3') >= 0) {
-				loggedOutOf.web3 = true;
-				Users.disconnect.web3(p.fill('web3'));
-			}
-			if (o.using.indexOf('native') >= 0) {
-				if (Q.isEmpty(loggedOutOf)) {
-					// if we log out natively without disconnecting others,
-					// then we should ignore the logged-in user's xid
-					// when authenticating, until it is forced
-					var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
-					for (var key in xids) {
-						var parts = key.split("_");
-						Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
-					}
-					setTimeout(function () {
-						Users.logout.occurring = false;
-					}, 0);
-				}
-				Users.loggedInUser = null;
-				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-				loggedOutOf.native = true;
-				p.fill('native')();
-			}
-			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
-				Users.logout.occurring = false;
-				Users.onLogout.handle.call(Users, loggedOutOf, o);
-				Q.handle(options.onSuccess, Users, [loggedOutOf, o]);
-			}).run();
+			}, 'Users'),
+			onResult: new Q.Event(),
+			onRequireComplete: new Q.Event(),
+			onboardingUrl: null,
+			successUrl: null,
+			accountStatusURL: null,
+			tryQuietly: false,
+			using: 'native', // can also be a platform name like 'facebook'
+			scope: ['email'], // the permissions to ask for
+			linkToken: null,
+			dialogContainer: 'body',
+			setupRegisterForm: null,
+			identifierType: 'email,mobile',
+			activation: 'activation'
 		}
+	});
 
-		if (!o.url) {
-			callback();
-			return false;
+	Users.logout = new Q.Method({
+		options: {
+			url: Q.action('Users/logout'),
+			using: '*',
+			onSuccess: new Q.Event(function (options) {
+				var urls = Q.urls || {};
+				Q.handle(options.welcomeUrl
+					|| urls[Q.info.app + '/welcome']
+					|| Q.url(''));
+			}, 'Users')
 		}
-
-		var url = o.url + (o.url.indexOf('?') < 0 ? '?' : '') + '&logout=1';
-		Q.request(url, 'script', callback, {"method": "post"});
-		return true;
-	};
+	});
 
 	/**
 	 * A shorthand way to get the id of the logged-in user, if any
@@ -1097,7 +630,7 @@
 
 	/**
 	 * Users batch getter.
-	 * @method getgetc
+	 * @method get
 	 * @param {String} userId The user's id
 	 * @param {Function} callback
 	 *    if there were errors, first parameter is an array of errors
@@ -1243,950 +776,26 @@
 		window.open(Q.action("Users/importContacts?platform=" + platform), "import_contacts", "scrollbars,resizable,width=700,height=500");
 	};
 
-	/**
-	 * Displays a dialog allowing the user to set a different identifier
-	 * (email address, mobile number, etc.) as their primary login method
-	 * @method setIdentifier
-	 * @param {Object} [options] You can pass several options here
-	 *  It is passed the user information if the user changed.
-	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile" or "web3"
-	 *  @param {String} [options.userId] You can set this to the id of a user in the database who doesn't have any email or mobile number set yet. This can happen if the user was e.g. invited via a printed invitation and lost it, and allows someone to help set up the first identifier for that user.
-	 *  @param {Q.Event} [options.onActivate] event that occurs right after dialog is shown
-	 *  @param {Q.Event} [options.onSuccess] event that occurs on success, you can pass a URL to redirect to here
-	 *  @param {Q.Event} [options.onCancel] event that occurs if the dialog is canceled
-	 *  @param {Function} [options.onResult] event that occurs before either onSuccess or onCancel
-	 */
-	Users.setIdentifier = function (options) {
-		options = Q.extend({}, Users.setIdentifier.options, options);
-		var identifierType = Q.getObject("identifierType", options).toLowerCase();
-
-		function onSuccess() {
-			if (false !== Q.handle(options.onResult, this, [])) {
-				Q.handle(options.onSuccess, this, []);
-			}
+	Users.setIdentifier = new Q.Method({
+		options: {
+			onCancel: null,
+			onSuccess: null, // gets passed session
+			identifierType: 'email,mobile',
+			dialogContainer: 'body'
 		}
+	});
 
-		function onCancel() {
-			if (false !== Q.handle(options.onResult, this, [])) {
-				Q.handle(options.onCancel, this, []);
-			}
-		}
-
-		priv.setIdentifier_onSuccess = onSuccess;
-		priv.setIdentifier_onCancel = onCancel;
-
-		var xid = Web3.getLoggedInUserXid();
-		if (identifierType === 'web3' && !xid) {
-			Web3.login(null, onSuccess);
-		} else {
-			setIdentifier_setupDialog(identifierType, options);
-		}
-	};
-
-	/*
-	 * Private functions
-	 */
-	function login_callback(err, response) {
-		var identifier_input = $('#Users_login_identifier');
-		var form = $('#Users_login_step1_form');
-		identifier_input.attr('tabindex', 1000)
-			.css('background-image', 'none');
-
-		if (response.errors) {
-			// There were errors
-			form.plugin('Q/validator', 'invalidate',
-				Q.ajaxErrors(response.errors, ['identifier'])
-			);
-			identifier_input.plugin('Q/clickfocus');
-			return;
-		}
-
-		// Remove any errors we may have displayed
-		form.plugin('Q/validator', 'reset');
-		identifier_input.blur();
-
-		var data = response.slots.data;
-		var step2_form;
-		var autologin = false;
-		var setupRegisterForm = Users.login.options.setupRegisterForm || defaultSetupRegisterForm;
-		if (form.data('used') === 'facebook') {
-			// logged in with FB
-			autologin = true;
-			// auto-login by authenticating with facebook
-			Users.authenticate('facebook', function (user) {
-				var msg = user && user.username ? 'Welcome, ' + user.username + '!' : 'Success!';
-
-				if (step2_form !== undefined) {
-					$('button', step2_form).html(msg).attr('disabled', 'disabled');
-				}
-
-				if (priv.login_onConnect) {
-					priv.login_connected = true;
-					priv.activateLink = data && data.activateLink;
-					if (login_setupDialog.dialog) {
-						Q.Dialogs.pop();
-					}
-					priv.login_onConnect(user);
-				}
-			}, function () {
-				alert("Could not authenticate with facebook. Try again.");
-				Q.Dialogs.pop();
-			}, {"prompt": false});
-		} else if (!data.exists) {
-			// this identifier is available. This user has no password set yet and will activate later
-			var identifier = identifier_input.val();
-			step2_form = setupResendButton(setupRegisterForm(
-				identifier, data, priv, $(login_setupDialog.dialog).data('Q/dialog')
-			), identifier);
-		} else if (data.passphrase_set) {
-			// check password
-			step2_form = setupLoginForm();
-		} else if (data.verified) {
-			// allow the user to gain access by resending an activation message
-			step2_form = setupResendForm(true);
-		} else {
-			// remind to activate -- this is probably a futureUser created using an invite
-			step2_form = setupResendForm(false);
-		}
-
-		var salt = response.slots.data.salt;
-
-		function onFormSubmit(event) {
-			var $this = $(this);
-			event.preventDefault();
-			if ($this.data('cancelSubmit')) {
-				return;
-			}
-			if (!$this.is(':visible')) {
-				return;
-			}
-			var first_input = $('input:not([type=hidden])', $this)
-				.add('button', $this).eq(0);
-			var h = $('#Users_login_identifier').outerHeight() - 5;
-			$('input', $this).css({
-				'background-image': 'url(' + Q.info.imgLoading + ')',
-				'background-repeat': 'no-repeat',
-				'background-size': 'auto ' + first_input.height() + 'px',
-				'background-position': 'right center'
-			});
-			if (window.CryptoJS) {
-				var p = $('#current-password');
-				var v = p.val();
-				var h = $('#hashed-password');
-				if (h.length) {
-					h.val(CryptoJS.SHA1(p.val() + "\t" + salt));
-					if (!Users.login.options.alsoSendUnhashedPassphrase) {
-						p.val('');
-					}
-				}
-			}
-			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, 'data', function (err, response) {
-
-				Q.Response.processScriptDataAndLines(response);
-
-				$('#current-password').attr('value', '').trigger('change');
-				$('#hashed-password').attr('value', '');
-
-				$('input', $this).css('background-image', 'none');
-				if (err || (response && response.errors)) {
-					// there were errors
-					if (response && response.errors) {
-						$this.plugin('Q/validator', 'invalidate',
-							Q.ajaxErrors(response.errors, [first_input.attr('name')]
-						));
-					}
-					$('button', $this).removeClass('Q_working').removeAttr('disabled');
-					$('#Users_login_identifier').blur();
-					first_input.plugin('Q/clickfocus');
-					return;
-				}
-
-				// success!
-				localStorage.setItem(_register_localStorageKey, identifier_input.val());
-				priv.activateLink = Q.getObject('slots.data.activateLink', response);
-				Users.lastSeenNonce = Q.cookie('Q_nonce');
-				Users.roles = response.slots.data.roles || {};
-				switch ($this.attr('data-form-type')) {
-					case 'resend':
-						priv.result = 'resend';
-						$('button', $this).html('Sent').attr('disabled', 'disabled');
-						Q.Dialogs.pop();
-						Users.Dialogs.activate(priv.activateLink);
-						return;
-					case 'register':
-						priv.result = 'register';
-						break;
-				}
-				priv.used = $('#Users_login_step1_form').data('used');
-				var msg = 'Success!';
-				var u;
-				if (u = response.slots.data.user) {
-					msg = 'Welcome, ' + (u.displayName || u.username) + '!';
-				}
-				$('button', $this).html(msg).attr('disabled', 'disabled');
-
-				if (priv.login_onConnect) {
-					priv.login_connected = true;
-					if (login_setupDialog.dialog) {
-						Q.Dialogs.pop();
-					}
-					priv.login_onConnect(u);
-				}
-			}, {
-				method: "post",
-				loadExtras: "session"
-			});
-			return false;
-		}
-
-		function setupLoginForm() {
-			var passphrase_input = $('<input type="password" name="passphrase" id="current-password" class="Q_password" />')
-				.attr('tabindex', 1010)
-				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
-				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
-				.attr('autocomplete', 'current-password')
-				.on('change keyup input', function () {
-					$('#Users_login_passphrase_forgot')
-						.css('display', $(this).val() ? 'none' : 'inline');
-				});
-			var passphrase_hashed_input = $('<input type="hidden" name="passphrase_hashed" id="hashed-password" />');
-			var $b = $('<a class="Q_button Users_login_start Q_main_button" />')
-				.html(Q.text.Users.login.loginButton)
-				.on(Q.Pointer.click, function () {
-					Users.submitClosestForm.apply(this, arguments);
-					return false;
-				});
-			var login_form = $('<form method="post" />')
-				.attr('action', Q.action("Users/login"))
-				.attr('data-form-type', 'login')
-				.append($("<div id='Users_login_label_div'>").append(
-					$('<label for="Users_login_passphrase" />').html(Q.text.Users.login.passphrase)
-				)).append(
-					$("<div id='Users_login_passphrase_div' >").append(
-						passphrase_input,
-						passphrase_hashed_input,
-						$('<a id="Users_login_passphrase_forgot" href="#forgot"/>')
-							.html(Q.text.Users.login.forgot)
-							.on(Q.Pointer.touchclick, function () {
-								if (Q.text.Users.login.resendConfirm) {
-									if (confirm(Q.text.Users.login.resendConfirm)) {
-										_resend();
-									}
-								} else {
-									_resend();
-								}
-
-								function _resend() {
-									Q.req('Users/resend', 'data', function (err, response) {
-										Q.Response.processScriptDataAndLines(response);
-										$('#Users_login_step1').hide();
-										$('#Users_login_step2').empty().append(
-											$('<div id="Users_login_resend_success" />').append(
-												$('<p />').html(Q.text.Users.login.resendSuccess),
-												$('<button class="Q_button Q_main_button" />')
-													.html(Q.text.Users.login.resendClose)
-													.click(function () {
-														$('form', login_setupDialog.dialog)
-															.each(function () {
-																$(this).plugin('Q/validator', 'reset');
-															});
-														Q.Dialogs.pop();
-														Q.handle(Q.getObject('slots.data.activateLink', response));
-													})
-											)
-										);
-									}, {
-										method: 'post',
-										fields: {identifier: identifier_input.val()}
-									});
-								};
-								return false;
-							})
-					)
-				).append(
-					$('<input type="hidden" name="identifier" />').val(identifier_input.val())
-				).append(
-					$('<div class="Q_buttons"></div>').append($b)
-				); // .append($('<input type="hidden" name="isHashed" id="Users_login_isHashed" value="0" />'));
-			return login_form;
-		}
-
-		function setupResendForm(verified) {
-			var reason = verified
-				? $('<p id="Users_login_noPassphrase"></p>').html(Q.text.Users.login.noPassphrase)
-				: $('<p id="Users_login_notVerified"></p>').html(Q.text.Users.login.notVerified);
-			var identifier_form = $('<form method="post" />')
-				.attr('action', Q.action("Users/resend"))
-				.attr('data-form-type', 'resend')
-				.append(reason)
-				.append($('<div class="Q_buttons"></div>').append(
-					$('<button id="Users_login_resend" class="Q_button Users_login_start Q_main_button" />')
-						.html(Q.text.Users.login.resendButton)
-						.attr('name', 'resend')
-						.click(submitClosestForm)
-				)).append($('<input type="hidden" name="identifier" />').val(identifier_input.val()));
-			return identifier_form;
-		}
-
-		function defaultSetupRegisterForm(identifier, data, priv) {
-			var src = data.entry[0].photos && data.entry[0].photos.length ? data.entry[0].photos[0].value : data.entry[0].thumbnailUrl;
-			var src40 = src, src50 = src, src80 = src;
-			var username = data.entry[0].preferredUsername || data.entry[0].displayName;
-			if (priv.registerInfo) {
-				if (priv.registerInfo.username) {
-					username = priv.registerInfo.username;
-				}
-				if (priv.registerInfo.pic) {
-					src40 = src50 = src = src80 = priv.registerInfo.pic;
-				}
-			}
-			var $img = $('<img />').attr('src', src)
-				.attr('title', Q.text.Streams.login.picTooltip);
-			var $formContent = $('<div class="Users_login_username_block" />').append(
-				$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
-			).append(
-				$('<input id="Users_login_username" name="username" type="text" class="text" />')
-					.attr('maxlength', Q.text.Users.login.maxlengths.username)
-					.attr('placeholder', Q.text.Users.login.placeholders.username)
-					.val(username)
-			);
-			var $b = $('<button />', {
-				"type": "submit",
-				"class": "Q_button Q_main_button Users_login_start "
-			}).html(Q.text.Users.login.registerButton)
-			.on(Q.Pointer.touchclick, function (e) {
-				Users.submitClosestForm.apply(this, arguments);
-			}).on(Q.Pointer.click, function (e) {
-				e.preventDefault(); // prevent automatic submit on click
-			});
-			var _registering = false;
-			var $register_form = $('<form method="post" class="Users_register_form" />')
-				.attr('action', Q.action("Users/register"))
-				.attr('data-form-type', 'register')
-				.append($formContent)
-				.append($('<input type="hidden" name="identifier" />').val(identifier))
-				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
-				.append($('<input type="hidden" name="icon[50.png]" />').val(src50))
-				.append($('<input type="hidden" name="icon[80.png]" />').val(src80))
-				.append(
-					$('<div class="Users_login_get_started"></div>')
-					.append($b)
-				).submit(Q.throttle(function () {
-					if (_registering) {
-						return false;
-					}
-					var $this = $(this);
-					$this.removeData('cancelSubmit');
-					$b.addClass('Q_working')[0].disabled = true;
-					document.activeElement.blur();
-					if (!$('#Users_agree').length || $('#Users_agree').is(':checked')) {
-						$this.submit();
-						return false;
-					}
-					setTimeout(function () {
-						Q.confirm(Q.text.Users.login.confirmTerms, function (result) {
-							if (result) {
-								$usersAgree.attr('checked', 'checked');
-								$usersAgree[0].checked = true;
-								$b.addClass('Q_working')[0].disabled = true;
-								$this.submit();
-							} else {
-								$b.removeClass('Q_working')[0].disabled = false;
-							}
-						});
-					}, 300);
-					$this.data('cancelSubmit', true);
-					return false;
-				}, 1000, false, false));
-
-			if (priv.activation) {
-				$register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
-			}
-
-			if (data.termsLabel) {
-				$formContent.append(
-					$('<div />').attr("id", "Users_register_terms")
-						.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
-						.append($('<label for="Users_agree" />').html(data.termsLabel))
-				);
-			}
-
-			var authResponse;
-			var $form = $('#Users_login_step1_form');
-			if ($form.data('used') === 'facebook') {
-				var platforms = $form.data('platforms');
-				var appId = platforms.facebook || Q.info.app;
-				var platformAppId = Users.getPlatformAppId('facebook', appId);
-				if (!platformAppId) {
-					console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook." + appId + ".appId");
-				}
-				Users.init.facebook(function () {
-					var k;
-					if ((authResponse = Users.Facebook.getAuthResponse())) {
-						authResponse.appId = appId;
-						authResponse.fbAppId = platformAppId;
-						for (k in authResponse) {
-							$register_form.append(
-								$('<input type="hidden" />')
-									.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-									.attr('value', authResponse[k])
-							);
-						}
-					}
-				}, {
-					appId: appId
-				});
-				$register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
-			}
-			return $register_form[0];
-		}
-
-		function setupResendButton(form, identifier) {
-			if (!data.emailExists && !data.mobileExists) {
-				return form;
-			}
-			var $p = $('<p id="Users_login_identifierExists" />').html(
-				data.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
-			);
-			$('a', $p).plugin('Q/clickable', {
-				onInvoke: function () {
-					$(this).addClass('Q_working');
-					Q.request({identifier: identifier}, Q.action("Users/resend"), 'data',
-					function (err, response) {
-						priv.login_resent = true;
-						Q.Dialogs.pop();
-						var activateUrl = Q.getObject('slots.data.activateLink', response);
-						Users.Dialogs.activate(activateUrl);
-					}, {"method": "post"});
-				}
-			}).attr('tabindex', 1002);
-			if (Q.text.Users.login.newUser) {
-				$p.append($('<div />').html(Q.text.Streams.login.newUser));
-			}
-			$p.prependTo(form);
-			return form;
-		}
-
-		$('#Users_login_usingPlatforms').hide();
-		if (form.data('used')) {
-			$('*', form).attr('disabled', 'disabled');
-		}
-		if (!autologin) {
-			var step2 = $('#Users_login_step2').empty().append(step2_form);
-			var $dc = step2.closest('.Q_dialog_content');
-			$(login_setupDialog.dialog).addClass('Users_login_expanded');
-			if (Q.info && Q.info.isTouchscreen) {
-				step2.show();
-				$(step2_form).plugin('Q/placeholders');
-				$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
-				_centerIt();
-			} else {
-				if (localStorage.getItem(_register_localStorageKey)) {
-					$('.Streams_login_fullname_block, .Streams_login_get_started', step2).hide();
-				}
-				step2.slideDown('fast', function () {
-					$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
-					_centerIt();
-					$(step2_form).plugin('Q/placeholders');
-					if ($(step2_form).attr('data-form-type') === 'resend') {
-						$('.Q_main_button', step2_form).focus();
-					} else if (!Q.info.isTouchscreen) {
-						$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
-					}
-				});
-			}
-			Q.activate($('#Users_login_step2').get(0));
-		}
-		$('#Users_login_step1').animate({"opacity": 0.5}, 'fast');
-		$('#Users_login_step1 .Q_button').attr('disabled', 'disabled');
-		if (!autologin) {
-			$(step2_form).plugin('Q/validator').submit(function (e) {
-				e.preventDefault();
-			}).submit(Q.throttle(onFormSubmit, 1000, false, false));
-			$('input', step2_form).add('select', step2_form).on('input', function () {
-				$(step2_form).plugin('Q/validator', 'reset', this);
-			});
-		}
-		if (priv.linkToken) {
-			$('#Users_login_step1').hide();
-		}
-
-		function _centerIt() {
-			var $d = $('#Users_login_passphrase_div');
-			var $f = $('#Users_login_passphrase_forgot');
-			$f.css('bottom', ($d.outerHeight(true) - $f.outerHeight(true)) / 2 + 'px');
-		}
-	}
-
-	/*
-	 * Set up login dialog.
-	 * login_setupDialog.dialog will contain the dialog
-	 */
-	function login_setupDialog(usingPlatforms, options) {
-		options = options || {};
-		$('#Users_login_step1_form').data('used', null);
-		if (login_setupDialog.dialog) {
-			return;
-		}
-		var step1_form = $('<form id="Users_login_step1_form" method="post" autocomplete="on" />');
-		var step1_div = $('<div id="Users_login_step1" class="Q_big_prompt" />').html(step1_form);
-		var step2_div = $('<div id="Users_login_step2" class="Q_big_prompt" />');
-		// step1_form request identifier
-		var placeholder = Q.text.Users.login.placeholders.identifier;
-		var type = Q.info.useTouchEvents ? 'email' : 'text';
-		var parts = options.identifierType ? options.identifierType.split(',') : [];
-		if (parts.length === 1) {
-			if (parts[0] == 'email') {
-				type = 'email';
-				placeholder = Q.text.Users.login.placeholders.email;
-			} else if (parts[0] == 'mobile') {
-				type = 'tel';
-				placeholder = Q.text.Users.login.placeholders.mobile;
-			}
-		} else if (Q.info.isMobile && parts.indexOf('mobile') >= 0
-		&& parts.indexOf('email') < 0) {
-			type = 'tel';
-			placeholder = Q.text.Users.login.placeholders.mobile;
-		}
-		var autocomplete = (type === 'text') ? 'on' : type;
-		Q.addScript("{{Q}}/js/sha1.js");
-		var identifierInput = $('<input id="Users_login_identifier" />').attr({
-			name: 'identifier',
-			autocomplete: autocomplete,
-			type: type
-		}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
-		.attr('placeholder', placeholder)
-		.focus(hideForm2);
-
-		if (type === 'email') {
-			identifierInput.attr('name', 'email');
-		} else if (type === 'mobile') {
-			identifierInput.attr('name', 'phone');
-		}
-
-		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
-			.append(
-				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
-			).on(Q.Pointer.click, function (e) {
-				e.preventDefault(); // prevent automatic submit on click
-				submitClosestForm.apply($a, arguments);
-			});
-
-		var d = Q.text.Users.login.directions;
-		var directions = options.wasInvited
-			? d.WasInvited : (options.noRegister ? d.NoRegister : d.GetStarted);
-		step1_form.html(
-			$('<label for="Users_login_identifier" />').html(directions)
-		).append('<br />').append(
-			identifierInput
-		).append(
-			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
-			.val(options.identifierType)
-		).append($a)
-		.submit(function (event) {
-			$('#Users_login_identifier').attr('name', 'identifier');
-			if (!$(this).is(':visible')) {
-				event.preventDefault();
-				return;
-			}
-			$('.Q_button', $(this)).focus();
-			var h = $('#Users_login_identifier').outerHeight() - 5;
-			$('#Users_login_identifier').css({
-				'background-image': 'url(' + Q.info.imgLoading + ')',
-				'background-repeat': 'no-repeat',
-				'background-position': 'right center',
-				'background-size': 'auto ' + h + 'px'
-			}).trigger('Q_refresh');
-			var url = Q.action(Users.login.options.userQueryUri) + '?' + $(this).serialize();
-			Q.request(url, ['data'], login_callback, {
-				xhr: Q.info.useTouchEvents ? 'sync' : {}
-			});
-			event.preventDefault();
-			return;
-		}).on('keydown change click input', hideForm2);
-
-		if (Q.info.isTouchscreen) {
-			identifierInput.on('keyup', function () {
-				var i, found = 0, val = $(this).val();
-				if (val.length === 0) return;
-
-				var number = val.replace(/[^0-9]/g, '');
-				if ((number[0] === '1' && number.length === 11)
-					|| (number[0] !== '1' && number.length === 10)) {
-					$(this).blur(); // prepare user to press Go button
-					return;
-				}
-
-				if (val.indexOf('@') >= 0) {
-					var ext = val.split('.').pop();
-					var exts = ["com", "net", "org", "edu", "gov", "info", "mil"];
-					if (exts.indexOf(ext) >= 0) {
-						$(this).blur();
-						return;
-					}
-				}
-			});
-		}
-
-		step1_form.plugin('Q/validator');
-		var step1_usingPlatforms_div = $('<div id="Users_login_usingPlatforms" />');
-		var $buttons = $([]);
-		for (var platform in usingPlatforms) {
-			var appId = usingPlatforms[platform];
-			var platformAppId = Users.getPlatformAppId(platform, appId);
-			var $button = null;
-			switch (platform) {
-				case 'facebook':
-					if (!platformAppId) {
-						console.warn("Users.login: missing Users.apps.facebook." + appId + ".appId");
-						break;
-					}
-					$button = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
-						$('<img />').attr({
-							alt: Q.text.Users.login.facebook.alt,
-							src: Q.text.Users.login.facebook.src || Q.url('{{Users}}/img/platforms/facebook.png')
-						}),
-						$('<div />').text('Facebook')
-					).attr('tabindex', 1002)
-					.css({'display': 'inline-block', 'vertical-align': 'middle'})
-					.click(function () {
-						if (location.search.includes('handoff=yes')) {
-							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
-							location.href = scheme + '#facebookLogin=1';
-						} else {
-							Users.init.facebook(function () {
-								Users.Facebook.usingPlatforms = usingPlatforms;
-								Users.Facebook.scope = options.scope;
-								Users.Facebook.login();
-							}, {
-								appId: appId
-							});
-						}
-						return false;
-					});
-					// Load the facebook script now, so clicking on the facebook button
-					// can trigger a popup directly, otherwise popup blockers may complain:
-					Q.addScript('https://connect.facebook.net/en_US/sdk.js');
-					break;
-				case 'web3':
-					$button = $('<a href="#login_web3" id="Users_login_with_web3" />').append(
-						$('<img />').attr({
-							alt: Q.text.Users.login.web3.alt,
-							src: Q.text.Users.login.web3Src || Q.url('{{Users}}/img/platforms/web3.png')
-						}),
-						$('<div />').text(Q.text.Users.platforms.Wallet)
-					).attr('tabindex', '1001')
-					.css({'display': 'inline-block', 'vertical-align': 'middle'})
-					.click(function () {
-						if (login_setupDialog.dialog) {
-							Q.Dialogs.pop();
-						}
-						Web3.login(function (result) {
-							if (!result) {
-								_onCancel();
-							} else {
-								// do nothing, since we already executed this:
-								// _authenticate('web3');
-							}
-						});
-						return false;
-					});
-					break;
-			}
-			$buttons = $buttons.add($button);
-		}
-		if ($buttons.length > 0) {
-			step1_usingPlatforms_div.append(
-				$("<div class='Users_login_connectPlatforms'> />")
-				.text(Q.text.Users.login.connectPlatforms)
-			);
-			$buttons.each(function () {
-				step1_usingPlatforms_div.append(this);
-			});
-			step1_div.append(step1_usingPlatforms_div);
-		}
-		setTimeout(function () {
-			$('img', step1_usingPlatforms_div).plugin('Q/clickable');
-		}, 500);
-
-		$('input', step1_form).add('select', step1_form).on('input', function () {
-			step1_form.plugin('Q/validator', 'reset', this);
-		});
-		
-		var $explanation = options.explanation
-			? $('<div class="Users_login_explanation" />').append(options.explanation)
-			: null;
-
-		login_setupDialog.dialog = Q.Dialogs.push({
-			title: Q.text.Users.login.title,
-			content: $('<div />').append($explanation, step1_div, step2_div),
-			elementId: 'Users_login_dialog',
-			className: 'Users_login_dialog Q_scrollToBottom ' + options.className,
-			fullscreen: !!options.fullscreen,
-			noClose: !!options.noClose,
-			closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
-			beforeLoad: function () {
-				$('#Users_login_step1').css('opacity', 1).nextAll().hide();
-				setTimeout(function () {
-					$('input[type!=hidden]', this).val('').trigger('change');
-				}, 0);
-			},
-			onActivate: function () {
-				var $input = $('input[type!=hidden]', this)
-				$(this).plugin('Q/placeholders');
-				if (Q.info.platform === 'ios') {
-					$input.eq(0).plugin('Q/clickfocus');
-				}
-				setTimeout(function () {
-					var registeredIdentifier = localStorage.getItem(_register_localStorageKey) || '';
-					if (options.identifier) {
-						$input.val(options.identifier).trigger('change');
-					} else if (registeredIdentifier) {
-						$input.val(registeredIdentifier).trigger('change').eq(0).plugin('Q/clickfocus');
-						setTimeout(function () {
-							Q.Pointer.hint($('#Users_login_go'));
-						}, 500);
-					} else if (Q.info.isTouchscreen) {
-						setTimeout(function () {
-							Q.Pointer.hint($input[0]);
-						}, 500);
-					} else {
-						$input.plugin('Q/clickfocus');
-					}
-				}, 0);
-			},
-			onClose: function () {
-				$('#Users_login_step1 .Q_button').removeAttr('disabled');
-				$('form', this).each(function () {
-					$(this).plugin('Q/validator', 'reset');
-				});
-				$('#Users_login_step1').nextAll().hide();
-				if (!priv.login_connected
-				&& !priv.login_resent
-				&& priv.login_onCancel) {
-					priv.login_onCancel();
-				}
-				$(this).remove();
-				login_setupDialog.dialog = null;
-			}
-		});
-		function hideForm2() {
-			if (_submitting) {
-				return;
-			}
-			if ($('#Users_login_step1').next().is(':visible')) {
-				$('#Users_login_step1').animate({"opacity": 1}, 'fast');
-				$('#Users_login_step1 *').removeAttr('disabled');
-			}
-			priv.registerInfo = null;
-			var $nextAll = $('#Users_login_step1').nextAll();
-			if ($nextAll.is(':visible')) {
-				$nextAll.slideUp('fast').each(function () {
-					$('form', $(this)).plugin('Q/validator', 'reset');
-				});
-			}
-			if ($('#Users_login_usingPlatforms').css('display') === 'none') {
-				$('#Users_login_usingPlatforms').css({opacity: 0}).show()
-					.animate({opacity: 1}, 'fast');
-			}
-			$(login_setupDialog.dialog).removeClass('Users_login_expanded');
-		}
-	}
-
-	function setIdentifier_callback(err, response) {
-		var identifier_input = $('#Users_setIdentifier_identifier')
-			.css('background-image', 'none');
-		var form = $('#Users_setIdentifier_step1_form');
-
-		var msg = Q.firstErrorMessage(err, response);
-		if (msg) {
-			// There were errors
-			Q.handle(priv.setIdentifier_onCancel, this, [err, response]);
-			if (identifier_input.is(":visible")) {
-				form.plugin('Q/validator', 'invalidate',
-					Q.ajaxErrors(response.errors, 'identifier')
-				);
-				identifier_input.plugin('Q/clickfocus');
-			} else {
-				Q.Notices.add({
-					key: 'Users.setIdentifier',
-					content: msg,
-					type: 'error',
-					timeout: 2
-				});
-			}
-			return;
-		}
-
-		// Remove any errors we may have displayed
-		form.plugin('Q/validator', 'reset');
-
-		Q.handle(priv.setIdentifier_onSuccess, response);
-
-		Q.Dialogs.pop();
-	}
-
-	function setIdentifier_setupDialog(identifierType, options) {
-		options = options || {};
-		var placeholder = Q.text.Users.setIdentifier.placeholders.identifier;
-		var type = Q.info.useTouchEvents ? 'email' : 'text';
-		var parts = identifierType ? identifierType.split(',') : [];
-		if (parts.length === 1) {
-			if (parts[0] === 'email') {
-				type = 'email';
-				placeholder = Q.text.Users.setIdentifier.placeholders.email;
-			} else if (parts[0] === 'mobile') {
-				type = 'tel';
-				placeholder = Q.text.Users.setIdentifier.placeholders.mobile;
-			}
-		}
-		if (identifierType === 'web3') {
-			type = 'hidden';
-		}
-
-		var step1_form = $('<form id="Users_setIdentifier_step1_form" />');
-		var step1_div = $('<div id="Users_setIdentifier_step1" class="Q_big_prompt" />').html(step1_form);
-
-		var autocomplete = (type === 'text') ? 'on' : type;
-		var identifier = (identifierType === "web3")
-			? Web3.getLoggedInUserXid()
-			: Q.getObject("Q.Users.loggedInUser." + identifierType);
-		var $identifierInput = $('<input />', {
-			id: 'Users_setIdentifier_identifier',
-			name: 'identifier',
-			autocomplete: autocomplete,
-			type: type,
-			maxlength: Q.text.Users.login.maxlengths.identifier,
-			placeholder: placeholder,
-			value: identifier
-		});
-		var $identifierTypeInput = $('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />')
-			.val(identifierType);
-
-		var $button = (identifierType === 'web3')
-		? $("<button class='Q_button' />")
-			.text(Q.text.Users.web3.ChangeWallet)
-			.on(Q.Pointer.fastclick, function () {
-				Q.Users.Web3.login(null, function (user) {
-					setIdentifier_callback(null, user);
-				}, null, {
-					updateXid: true
-				});
-				return false;
-			})
-		: $('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
-			.html(Q.text.Users.setIdentifier.sendMessage) 
-
-		step1_form.empty().append(
-			$identifierInput, $identifierTypeInput, $button
-		).submit(function (event) {
-			var h = $identifierInput.outerHeight() - 5;
-			$identifierInput.css({
-				'background-image': 'url(' + Q.info.imgLoading + ')',
-				'background-repeat': 'no-repeat',
-				'background-position': 'right center',
-				'background-size': 'auto ' + h + 'px'
-			});
-			var url = Q.action('Users/identifier') + '?' + $(this).serialize();
-			Q.request(url, 'data', setIdentifier_callback, {"method": "post"});
-			event.preventDefault();
-		});
-		if (options.userId) {
-			step1_form.append($('<input />', {
-				type: "hidden",
-				name: "userId"
-			})).val(options.userId);
-		}
-		step1_form.plugin('Q/validator');
-		var classNames = ['Users_setIdentifier_dialog'];
-		options.className && classNames.push(options.className);
-		identifierType === 'web3' && classNames.push('Users_setIdentifier_web3');
-		setIdentifier_setupDialog.dialog = Q.Dialogs.push({
-			title: options.title || Q.text.Users.setIdentifier.title,
-			content: $(step1_div),
-			elementId: 'Users_setIdentifier_dialog',
-			className: classNames.join(' '),
-			fullscreen: !!options.fullscreen,
-			noClose: !!options.noClose,
-			closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
-			beforeLoad: function () {
-				setTimeout(function () {
-					$('input[type!=hidden]', this).val('').trigger('change');
-				}, 0);
-			},
-			onActivate: function () {
-				var dialog = this;
-				if (options.identifierType === 'web3') {
-					var xid = Web3.getLoggedInUserXid();
-					$("<div class='Users_identifier_web3 Q_pop'>")
-						.insertBefore($identifierTypeInput)
-						.html(Web3.abbreviateAddress(xid))
-						.on('click', function () {
-							Q.Dialogs.pop();
-							navigator.clipboard.writeText(xid);
-							Q.Notices.add({
-								key: 'Users.setIdentifier.copied',
-								content: Q.text.Users.clipboard.Copied,
-								timeout: 2
-							});
-						});
-				} else {
-					$(dialog).plugin('Q/placeholders');
-					var $firstInput = $('input[type!=hidden]', dialog)
-						.eq(0).plugin('Q/clickfocus');
-					setTimeout(function () {
-						$firstInput[0].select();
-					}, 10);
-				}
-				Q.handle(options.onActivate, dialog, [options]);
-			},
-			onClose: function () {
-				$('form', this).each(function () {
-					$(this).plugin('Q/validator', 'reset');
-				});
-				if (priv.setIdentifier_onCancel) {
-					priv.setIdentifier_onCancel();
-				}
-				$(this).remove();
-				setIdentifier_setupDialog.dialog = null;
-			}
-		});
-	}
-
-	var _submitting = false;
-	var submitClosestForm = Users.submitClosestForm = function submitClosestForm() {
-		_submitting = true;
+	priv._submitting = false;
+	Users.submitClosestForm = function submitClosestForm() {
+		priv._submitting = true;
 		$(this).closest('form').submit();
 		setTimeout(function () {
-			_submitting = false;
+			priv._submitting = false;
 		}, 500);
 		return false;
 	}
 
-	/**
-	 * Votes for something
-	 * @static
-	 * @method vote
-	 * @param {String} forType The type of thing to vote for
-	 * @param {String} forId The id of thing to vote for
-	 * @param {Number} [value=1] the value the user has voted for, such as a rating etc.
-	 */
-	Users.vote = function (forType, forId, value) {
-		var fields = {
-			forType: forType,
-			forId: forId
-		};
-		if (value !== undefined) {
-			fields.value = value;
-		}
-		Q.req('Users/vote', ['vote'], function (err, result) {
-			var msg = Q.firstErrorMessage(err, result && result.errors);
-			if (msg) {
-				return console.warn(msg);
-			}
-		}, {method: 'POST', fields: fields});
-	};
+	Users.vote = new Q.Method();
 
 	/**
 	 * Places a hint to click or tap on the screen
@@ -2275,160 +884,11 @@
 		}
 	};
 
-	/**
-	 * Makes a dialog that resembles a facebook dialog
-	 * @method facebookDialog
-	 * @param {Object} [options] A hash of options, that can include:
-	 *  @param {String} [options.title] Dialog title.
-	 *  @required
-	 *  @param {String} [options.content] Dialog content, can be plain text or some html.
-	 *  @required
-	 *  @param {Array} [options.buttons] Array of object containing fields:
-	 *  @required
-	 *    @param {String} [options.buttons.label] is the label of the button
-	 *    @param {Function} [options.buttons.handler] is a click handler for the button
-	 *    @param {Boolean} [options.buttons.default] is a boolean which makes this button styled as default.
-	 *  @param {Object} [options.position] Hash of x/y coordinates. By default (or if null) dialog is centered on the screen.
-	 *  @optional
-	 *  @param {Boolean} [options.shadow]
-	 *  Whether to make a full screen shadow behind the dialog, making other elements on the page inaccessible.
-	 *  @default false
-	 */
-	Users.facebookDialog = function (options) {
-		$('.Users_facebookDialog').remove();
-		$('.Users_facebookDialog_shadow').remove();
+	Users.facebookDialog = new Q.Method();
 
-		var o = $.extend({
-			'position': null,
-			'shadow': false,
-			'title': 'Needs a title',
-			'content': 'Needs content',
-			'buttons': {}
-		}, options);
+	Users.getContacts = new Q.Method();
 
-		if (o.shadow) {
-			var shadow = $('<div class="Users_facebookDialog_shadow" />');
-			$('body').append(shadow);
-		}
-		var dialog = $('<div class="Users_facebookDialog">' +
-			'<div class="Users_facebookDialog_title">' + o.title + '</div>' +
-			'<div class="Users_facebookDialog_content">' + o.content + '</div>' +
-			'</div>');
-		var buttonsBlock = $('<div class="Users_facebookDialog_buttons" />');
-		Q.each(o.buttons, function (k, b) {
-			function _buttonHandler(handler) {
-				return function () {
-					if (handler) {
-						handler(dialog);
-					} else {
-						alert("Users.facebookDialog has no click handler for this button");
-						dialog.close();
-					}
-				};
-			}
-
-			var button = $('<button />')
-				.html(b.label || 'Needs a label')
-				.click(_buttonHandler(b.handler))
-				.appendTo(buttonsBlock);
-			if (b['default']) {
-				button.addClass('Q_button Users_facebookDialog_default_button');
-			}
-		});
-		dialog.append(buttonsBlock);
-		$('body').append(dialog);
-		if (o.position) {
-			dialog.css({
-				left: o.position.x + 'px',
-				top: o.position.y + 'px'
-			});
-		} else {
-			dialog.css({
-				left: ((Q.Pointer.windowHeight() - dialog.width()) / 2) + 'px',
-				top: ((Q.Pointer.windowHeight() - dialog.height()) / 2) + 'px'
-			});
-		}
-		dialog.show();
-
-		dialog.close = function () {
-			dialog.remove();
-			if (typeof(shadow) != 'undefined') {
-				shadow.remove();
-			}
-		};
-	};
-
-	/**
-	 * Get a user's contacts
-	 * @method getContacts
-	 * @static
-	 * @param {String} userId
-	 * @param {Array|String} [labels]
-	 * @param {String|Array} [contactUserIds]
-	 * @param {Function} callback
-	 */
-	Users.getContacts = function (userId, labels, contactUserIds, callback) {
-		if (typeof labels === 'function') {
-			callback = labels;
-			labels = contactUserIds = undefined;
-		} else if (typeof contactUserIds === 'function') {
-			callback = contactUserIds;
-			contactUserIds = undefined;
-		}
-		Q.req('Users/contact', 'contacts', function (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (msg) {
-				Users.onError.handle.call(this, msg, err, data.contacts);
-				Users.get.onError.handle.call(this, msg, err, data.contacts);
-				return callback && callback.call(this, msg);
-			}
-			Q.each(data.slots.contacts, function (i) {
-				data.slots.contacts[i] = new Users.Contact(data.slots.contacts[i]);
-			});
-			Q.handle(callback, data, [err, data.slots.contacts]);
-		}, {
-			fields: {
-				userId: userId,
-				labels: labels,
-				contactUserIds: contactUserIds
-			},
-			method: 'post'
-		});
-	};
-
-	/**
-	 * Get a user's contact labels
-	 * @method getLabels
-	 * @static
-	 * @param {String} userId
-	 * @param {String|Array} [filter] Pass a string prefix here, to filter labels by this prefix.
-	 *  Or pass an array of label names, to filter by.
-	 * @param {Function} callback
-	 */
-	Users.getLabels = function (userId, filter, callback) {
-		if (typeof filter === 'function') {
-			callback = filter;
-			filter = undefined;
-		}
-		Q.req('Users/label', 'labels', function (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (msg) {
-				Users.onError.handle.call(this, msg, err, data.labels);
-				Users.get.onError.handle.call(this, msg, err, data.labels);
-				return callback && callback.call(this, msg);
-			}
-			Q.each(data.slots.labels, function (i) {
-				data.slots.labels[i] = new Users.Label(data.slots.labels[i]);
-			});
-			Q.handle(callback, data, [err, data.slots.labels]);
-		}, {
-			fields: {
-				userId: userId,
-				filter: filter
-			},
-			method: 'post'
-		});
-	};
+	Users.getLabels = new Q.Method();
 
 	/**
 	 * Methods for setting up common user interface elements
@@ -2471,95 +931,19 @@
 	 * Methods for user sessions
 	 * @class Users.Session
 	 */
-	var Session = Users.Session = {
+	Users.Session = Q.Method.define({
 		key: {
 			generateOnLogin: true,
 			name: 'ECDSA', 
 			namedCurve: 'P-384',
 			hash: 'SHA-256'
 		},
-		/**
-		 * Get (or get again) the (non-extractable) cryptographic key from IndexedDB.
-		 * Saves this key also as Users.Session.key.loaded and then calls the callback.
-		 * @method getKey
-		 * @static
-		 * @param {Function} callback Receives (err, key)
-		 */
-		getKey: function (callback) {
-			Q.IndexedDB.open(Q.info.baseUrl, 'Q.Users.keys', 'id', function (err, store) {
-				if (err) {
-					return Q.handle(callback, null, [err]);
-				}
-				var request = store.get('Users.Session');
-				request.onsuccess = function (event) {
-					var key = Users.Session.key.loaded = event.target.result.key;
-					Q.handle(callback, null, [null, key]);
-				};
-				request.onerror = function (event) {
-					Q.handle(callback, null, [event]);
-				};
-			});
-		},
-		/**
-		 * Generates a non-extractable private key, saves it in IndexedDB.
-		 * Then tells the server to save it.
-		 * @method generateKey
-		 * @static
-		 * @param {Function} callback Receives (err, event)
-		 * @return {Boolean} returns false if the key is already set or
-		 *  crypt.subtle is undefined because the page is in insecure context
-		 */
-		generateKey: function (callback) {
-			if (!crypto || !crypto.subtle) {
-				return false;
-			}
-			if (Users.Session.publicKey) {
-				Q.handle(callback, null, ["Users.Session.publicKey was already set"]);
-				return false;
-			}
-			var info = Users.Session.key;
-			return crypto.subtle.generateKey({
-				name: info.name,
-				namedCurve: info.namedCurve
-			}, false, ['sign', 'verify'])
-			.then(function (key) {
-				Q.IndexedDB.open(Q.info.baseUrl, 'Q.Users.keys', 'id', function (err, store) {
-					var request = store.put({
-						id: 'Users.Session',
-						key: key
-					});
-					request.onsuccess = function (event) {
-						// if successfully saved on the client,
-						// then tell the server the exported public key
-						_save(key, function () {
-							Q.handle(callback, null, [null, event, key]);
-						});
-					};
-					request.onerror = function (event) {
-						Q.handle(callback, null, [null, event, key]);
-					}
-				});
-				function _save (key, callback) {
-					var fields =  {
-						info: info
-					};
-					Q.Users.sign(fields, function (err, fields) {
-						Q.req('Users/key', ['saved'], function (err) {
-							// from now on, the server will use it
-							// for validating requests in this session
-							Q.handle(this, arguments);
-						}, {
-							method: 'post',
-							fields: fields
-						});
-					}, {
-						key: key,
-						fieldNames: ['info']
-					});
-				}
-			});
-		}
-	};
+		getKey: new Q.Method(),
+		generateKey: new Q.Method()
+	}, "{{Users}}/js/methods/Users/Session",
+	function() {
+		return [Users, priv];
+	});
 	
 	/**
 	 * Methods for OAuth
@@ -2567,7 +951,7 @@
 	 * @constructor
 	 * @param {Object} fields
 	 */
-	var OAuth = Users.OAuth = {
+	var OAuth = Users.OAuth = Q.Method.define({
 		/**
 		 * Generate a URL based on the oAuth spec, with a redirect back to our
 		 * own endpoint hosted by the Users plugin, to save the information in the database
@@ -2605,126 +989,13 @@
 				scope: scope
 			});
 		},
-		/**
-		 * Start an oAuth flow, and let the Users plugin handle it
-		 * @method start
-		 * @static
-		 * @param {String} platform The name of an external platform under Q.plugins.Users.apps
-		 * @param {String} scope The scopes to request from the platform. See their docs.
-		 * @param {Function} [callback] This function is called after the oAuth flow ends,
-		 *    unless options.openWindow === false, because then the redirect would happen.
-		 * @param {Object} [options={}]
-		 * @param {Object|String} [openWindow={closeUrlRegExp:Q.url("Users/oauthed")+".*"}] 
-		 *    Set to false to start the oAuth flow in the
-		 *    current window. Otherwise, this object can be used to set window features
-		 *    passed to window.open() as a string.
-		 * @param {Object|String} [finalRedirect=location.href] If openWindow === false,
-		 *    this can be used to specify the url to redirect to after Users plugin has
-		 *    handled the oAuth redirect. Defaults to current window location.
-		 * @param {String} [appId=Q.info.app] Override appId to under Q.Users.apps[platform]
-		 * @param {String} [options.redirect_uri] You can override the redirect URI.
-		 *    Often this has to be added to a whitelist on the platform's side.
-		 * @param {String} [options.response_type='code']
-		 * @param {String} [options.state=Math.random()] If state was not provided, this
-		 *    method also modifies the passed options object and sets options.state on it
-		 * @return {String}
-		 */
-		start: function (platform, scope, callback, options) {
-			options = options || {};
-			var finalRedirect = options.finalRedirect || location.href;
-			var appId = options.appId || Q.info.appId;
-			var appInfo = Q.getObject([platform, appId], Users.apps)
-			var authorizeUri = options.authorizeUri || appInfo.authorizeUri;
-			var client_id = options.client_id || appInfo.client_id || appInfo.appId;
-			if (!authorizeUri) {
-				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
-			}
-			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
-			var responseType = options.responseType || 'code';
-			if (!options.state) {
-				options.state = String(Math.random());
-			}
-			if (!('openWindow' in options)) {
-				options.openWindow = {};
-			}
-			// this cookie will be sent on the next request, probably to Users/oauthed action
-			Q.cookie('Q_Users_oAuth', JSON.stringify({
-				platform: platform,
-				appId: appId,
-				scope: scope,
-				state: options.state,
-				finalRedirect: finalRedirect
-			}));
-			var url = OAuth.url(authorizeUri, appId, scope, options);
-			if (options.openWindow === false) {
-				location.href = url;
-			} else {
-				var w = window.open(url, 'Q_Users_oAuth', options.openWindow);
-				var ival = setInterval(function () {
-					var regexp = new RegExp(
-						options.openWindow.closeUrlRegExp
-						|| Q.url("Users/close") + ".*"
-					);
-					if (w.name === 'Q_Users_oAuth_success'
-					|| w.location.href.match(regexp)) {
-						w.close();
-						callback(w.url);
-						clearInterval(ival);
-					}
-					if (w.name === 'Q_Users_oAuth_error') {
-						w.close();
-						callback(false);
-						clearInterval(ival);
-					}
-				}, 300);
-			}
-		}
-	};
-	
-	/**
-	 * Constructs a contact from fields, which are typically returned from the server.
-	 * @class Users.Contact
-	 * @constructor
-	 * @param {Object} fields
-	 */
-	var Contact = Users.Contact = function Users_Contact(fields) {
-		Q.extend(this, fields);
-		this.typename = 'Q.Users.Contact';
-	};
+		start: new Q.Method()
+	}, "{{Users}}/js/methods/Users/OAuth",
+	function() {
+		return [Users, priv];
+	});
 
-	/**
-	 * Contacts batch getter.
-	 * @method get
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact's label
-	 * @param {String} contactUserId The contact user's id
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Contact.get = function (userId, label, contactUserId, callback) {
-		var func = Users.batchFunction(Q.baseUrl({
-			userIds: userId,
-			label: label,
-			contactUserId: contactUserId
-		}), 'contact', ['userIds', 'labels', 'contactUserIds']);
-		func.call(this, userId, label, contactUserId,
-			function Users_Contact_get_response_handler(err, data) {
-				var msg = Q.firstErrorMessage(err, data);
-				if (!msg && !data.contact) {
-					msg = "Users.Contact.get: no such contact";
-				}
-				if (msg) {
-					Users.onError.handle.call(this, msg, err, data.contact);
-					Users.get.onError.handle.call(this, msg, err, data.contact);
-					return callback && callback.call(this, msg);
-				}
-				var contact = new Users.Contact(data.contact);
-				callback.call(contact, err, contact);
-			});
-	};
-
-	function _Users_manage(action, method, fields, field, Constructor, getter, callback) {
+	priv._Users_manage = function(action, method, fields, field, Constructor, getter, callback) {
 		if (getter) {
 			getter.cache.clear();
 		}
@@ -2742,42 +1013,26 @@
 			fields: fields
 		});
 	}
-
+	
 	/**
-	 * Adds a contact.
-	 * @method add
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact's label
-	 * @param {String} contactUserId The contact user's id
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
+	 * Constructs a contact from fields, which are typically returned from the server.
+	 * @class Users.Contact
+	 * @constructor
+	 * @param {Object} fields
 	 */
-	Contact.add = function (userId, label, contactUserId, callback) {
-		return _Users_manage('Users/contact', 'post', {
-			userId: userId,
-			label: label,
-			contactUserId: contactUserId
-		}, 'contact', Contact, Users.getContacts, callback);
+	var Contact = Users.Contact = function Users_Contact(fields) {
+		Q.extend(this, fields);
+		this.typename = 'Q.Users.Contact';
 	};
-
-	/**
-	 * Remove a contact.
-	 * @method remove
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact's label
-	 * @param {String} contactUserId The contact user's id
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Contact.remove = function (userId, label, contactUserId, callback) {
-		return _Users_manage('Users/contact', 'delete', {
-			userId: userId,
-			label: label,
-			contactUserId: contactUserId
-		}, null, Contact, Users.getContacts, callback);
-	};
+	Contact.get = new Q.Method();
+	Contact.add = new Q.Method();
+	Contact.remove = new Q.Method();
+	Q.Method.define(Contact,
+		"{{Users}}/js/methods/Users/Contact", 
+		function() {
+			return [Users, priv];
+		}
+	);
 
 	/**
 	 * Constructs a label from fields, which are typically returned from the server.
@@ -2790,95 +1045,33 @@
 		this.typename = 'Q.Users.Label';
 	};
 	var Lp = Label.prototype;
-
-	Label.isExternal = function (label) {
-		return label.startsWith(Label.externalPrefix);
-	};
-
-	/**
-	 * Labels batch getter.
-	 * @method get
-	 * @param {String} userId The user's id
-	 * @param {String} label The label's internal name
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Label object
-	 */
-	Label.get = function (userId, label, callback) {
-		var func = Users.batchFunction(Q.baseUrl({
-			userIds: userId,
-			label: label
-		}), 'label', ['userIds', 'labels']);
-		func.call(this, userId, label,
-			function Users_Label_get_response_handler(err, data) {
-				var msg = Q.firstErrorMessage(err, data);
-				if (!msg && !data.label) {
-					msg = "Users.Label.get: no such label";
-				}
-				if (msg) {
-					Users.onError.handle.call(this, msg, err, data.label);
-					Users.get.onError.handle.call(this, msg, err, data.label);
-					return callback && callback.call(this, msg);
-				}
-				var label = new Users.Label(data.label);
-				callback.call(label, err, label);
-			});
-	};
-
-	/**
-	 * Adds a label.
-	 * @method add
-	 * @param {String} userId The user's id
-	 * @param {String} title The contact label's title
-     * @param {String} label The contact label. used when need to set custom
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Label.add = function (userId, title, label, callback) {
-		return _Users_manage('Users/label', 'post', {
-			userId: userId,
-			title: title,
-            label: label,
-		}, 'label', Label, Users.getLabels, callback);
-	};
-
-    Label.update = function (userId, label, title, icon, description, callback) {
-		return _Users_manage('Users/label', 'put', {
-			userId,
-            label,
-			title,
-            icon, 
-            description,
-		}, 'label', Label, Users.getLabels, callback);
-	};
-	/**
-	 * Remove a label.
-	 * @method remove
-	 * @param {String} userId The user's id
-	 * @param {String} label The contact label's label
-	 * @param {Function} callback
-	 *    if there were errors, first parameter is an array of errors
-	 *  otherwise, first parameter is null and second parameter is a Users.Contact object
-	 */
-	Label.remove = function (userId, label, callback) {
-		return _Users_manage('Users/label', 'delete', {
-			userId: userId,
-			label: label
-		}, null, Label, Users.getLabels, callback);
-	};
-
 	/**
 	 * Calculate the url of a label's icon
 	 * @method
 	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/size"
 	 * @return {String} the url
 	 */
-	Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
+	Lp.iconUrl = function Users_User_iconUrl(size) {
 		return Users.iconUrl(this.icon.interpolate({
 			userId: this.userId.splitId()
 		}), size);
 	};
+
+	Label.isExternal = function (label) {
+		return label.startsWith(Label.externalPrefix);
+	};
+
+	Label.get = new Q.Method();
+	Label.add = new Q.Method();
+	Label.update = new Q.Method();
+	Label.remove = new Q.Method();
+
+	Q.Method.define(Label,
+		"{{Users}}/js/methods/Users/Label", 
+		function() {
+			return [Users, priv];
+		}
+	);
 
 	Q.Text.addFor(
 		['Q.Tool.define', 'Q.Template.set'],
@@ -2929,7 +1122,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Q.getObject("cache.where", Users) || 'document';
+		Q.Users.cacheWhere = Q.getObject("cache.where", Users) || 'document';
 
 		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
 		if (preferredLanguage) {
@@ -2940,7 +1133,7 @@
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
 		}
 		Users.get = Q.getter(Users.get, {
-			cache: Q.Cache[where]("Users.get", 100),
+			cache: Q.Cache[Users.cacheWhere]("Users.get", 100),
 			throttle: 'Users.get',
 			prepare: function (subject, params, callback) {
 				if (subject instanceof User) {
@@ -2954,125 +1147,17 @@
 			}
 		});
 		
-		Users.getContacts = Q.getter(Users.getContacts, {
-			cache: Q.Cache[where]("Users.getContacts", 100),
-			throttle: 'Users.getContacts',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Contact(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
-		Users.getLabels = Q.getter(Users.getLabels, {
-			cache: Q.Cache[where]("Users.getLabels", 100),
-			throttle: 'Users.getLabels',
-			prepare: function (subject, params, callback) {
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				for (var i in params[1]) {
-					params[1][i] = new Users.Label(params[1][i]);
-				}
-				return callback(subject, params);
-			}
-		});
-
-		Contact.get = Q.getter(Contact.get, {
-			cache: Q.Cache[where]("Users.Contact.get", 100),
-			throttle: 'Users.Contact.get',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Contact) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var contact = params[1] = new Contact(subject);
-				return callback(contact, params);
-			}
-		});
-		
-		Label.get = Q.getter(Label.get, {
-			cache: Q.Cache[where]("Users.Label.get", 100),
-			throttle: 'Users.Label.get',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Contact) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var contact = params[1] = new Label(subject);
-				return callback(contact, params);
-			}
-		});
-
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
-		Users.login.options = Q.extend({
-			onCancel: new Q.Event(),
-			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
-				// default implementation
-				if (user) {
-					// the user changed, redirect to their home page
-					var urls = Q.urls || {};
-					var nextUrl = options.successUrl;
-					if (priv.result === 'register') {
-						if (options.onboardingUrl) {
-							nextUrl = options.onboardingUrl;
-						}
-					}
-					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
-					Q.handle(url);
-				}
-			}, 'Users'),
-			onResult: new Q.Event(),
-			onRequireComplete: new Q.Event(),
-			onboardingUrl: null,
-			successUrl: null,
-			accountStatusURL: null,
-			tryQuietly: false,
-			using: 'native', // can also be a platform name like 'facebook'
-			scope: ['email'], // the permissions to ask for
-			linkToken: null,
-			dialogContainer: 'body',
-			setupRegisterForm: null,
-			identifierType: 'email,mobile',
-			activation: 'activation'
-		}, Users.login.options, Users.login.serverOptions);
-
-		Users.logout.options = Q.extend({
-			url: Q.action('Users/logout'),
-			using: '*',
-			onSuccess: new Q.Event(function (options) {
-				var urls = Q.urls || {};
-				Q.handle(options.welcomeUrl
-					|| urls[Q.info.app + '/welcome']
-					|| Q.url(''));
-			}, 'Users')
-		}, Users.logout.options, Users.logout.serverOptions);
-
-		Users.setIdentifier.options = Q.extend({
-			onCancel: null,
-			onSuccess: null, // gets passed session
-			identifierType: 'email,mobile',
-			dialogContainer: 'body'
-		}, Users.setIdentifier.options, Users.setIdentifier.serverOptions);
-
-		Users.prompt.options = Q.extend({
-			dialogContainer: 'body'
-		}, Users.prompt.options, Users.prompt.serverOptions);
+		Q.extend(Users.login.options, Users.login.serverOptions);
+		Q.extend(Users.logout.options, Users.logout.serverOptions);
+		Q.extend(Users.setIdentifier.options, Users.setIdentifier.serverOptions);
+		Q.extend(Users.prompt.options, Users.prompt.serverOptions);
 
 	}, 'Users');
 
-	var _register_localStorageKey;
 	Q.onInit.add(function () {
-		_register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
+		priv._register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
 		Q.Text.get('Users/content', function (err, text) {
 			if (!text) {
 				return;
@@ -3400,454 +1485,22 @@
 	 * Operates with dialogs.
 	 * @class Users.Dialogs
 	 */
-	Users.Dialogs = {
-		/**
-	 	* Show a dialog with contacts.
-	 	* @static
-	 	* @method contacts
-		 * @param {object} [options]
-	 	* @param {Function} [callback] The function to call after dialog is activated
-	 	*/
-		contacts: function(options, callback) {
-			var allOptions = Q.extend({}, Users.Dialogs.contacts.options, options);
-			var selectedContacts = allOptions.data || {};
-
-			Q.addStylesheet('{{Users}}/css/Users/contacts.css', {slotName: 'Users'});
-
-			var _addContact = function (options) {
-				var c = {
-					id: options.id,
-					name: options.name,
-					icon: options.icon,
-					prefix: options.contactType
-				};
-				c[options.contactType] = options.contact;
-				selectedContacts[options.id] = c;
-			};
-			var _removeContact = function (id, dialog) {
-				$('.tr[data-rawid="'+ id +'"] .Users_contacts_dialog_' + selectedContacts[id].prefix, dialog)
-					.removeClass("checked");
-				delete selectedContacts[id];
-
-				return false;
-			};
-			var _prepareContacts = function (dialog) {
-				var $parent = $(".Q_dialog_content", dialog);
-				var $sticky = $(".Users_contacts_sticky", $parent);
-
-				for(var i in selectedContacts) {
-					$('.tr[data-rawid="'+ selectedContacts[i].id +'"] .Users_contacts_dialog_' + selectedContacts[i].prefix, dialog)
-						.addClass("checked");
-				}
-
-				// adjust letters size to fit all letters to column
-				var _adjustHeight = function () {
-					var $letters = $("div", $sticky);
-					var totalHeight = 0;
-
-					$sticky.height($parent.height());
-
-					Q.each($letters, function (i, element) {
-						totalHeight += $(element).height();
-					});
-
-					if (totalHeight > $parent.height()) {
-						$letters.css('font-size', parseInt($letters.css('font-size')) - 1 + 'px');
-						setTimeout(_adjustHeight, 100);
-					}
-				};
-				setTimeout(_adjustHeight, 1000);
-			};
-			var _rowClick = function ($row, dialog, text) {
-				var $email = $row.find(".Users_contacts_dialog_email");
-				var $phone = $row.find(".Users_contacts_dialog_phone");
-				var emailContact = $email.closest(".td").data("email");
-				var phoneContact = $phone.closest(".td").data("phone");
-				var name = $row.find(".Users_contacts_dialog_name").text();
-				var rawid = $row.data("rawid");
-
-				$row.addClass("Users_contacts_flash");
-				setTimeout(function () {
-					$row.removeClass("Users_contacts_flash");
-				}, 1000);
-
-				if ($row.find(".checked").length) {
-					return _removeContact(rawid, dialog);
-				}
-
-				if (Q.getObject('length', emailContact)) {
-					if (emailContact.length > 1) {
-						Users.Dialogs.select({
-							displayName: name,
-							contacts: emailContact,
-							prefix: "email",
-							text: text
-						}, function (data) {
-							if (!data) {
-								return;
-							}
-							$email.addClass("checked");
-							_addContact({id: rawid, name: name, icon: icon, contact: data, contactType:"email"});
-						})
-					} else if (emailContact.length === 1) {
-						$email.addClass("checked");
-						_addContact({id: rawid, name: name, icon: icon, contact: emailContact[0], contactType:"email"});
-					}
-				} else if (Q.getObject('length', phoneContact)) {
-					if (phoneContact.length > 1) {
-						Users.Dialogs.select({
-							displayName: name,
-							contacts: phoneContact,
-							prefix: "phone",
-							text: text
-						}, function (data) {
-							if (!data) {
-								return;
-							}
-							$phone.addClass("checked");
-							_addContact({id: rawid, name: name, icon: icon, contact: data, contactType: "phone"});
-						})
-					} else if (phoneContact.length === 1) {
-						$phone.addClass("checked");
-						_addContact({id: rawid, name: name, icon: icon, contact: phoneContact[0], contactType: "phone"});
-					}
-				}
-			};
-
-			var _groupContacts = function (contacts) {
-				var contactsAlphabet = {};
-
-				// construct contactsAlphabet object: contacts grouped by first name letter
-				Q.each(contacts, function (i, contact) {
-					var firstLetter = contact.displayName.charAt(0).toUpperCase();
-
-					if (!contactsAlphabet[firstLetter]) {
-						contactsAlphabet[firstLetter] = [];
-					}
-
-					contactsAlphabet[firstLetter].push(contact);
-				});
-
-				// sort contacts letters alphabet
-				contactsAlphabet = Object.keys(contactsAlphabet).sort().reduce(function (acc, key) {
-					acc[key] = contactsAlphabet[key];
-					return acc;
-				}, {});
-
-				return contactsAlphabet;
-			};
-
-			var pipe = Q.pipe(['contacts', 'text'], function (params) {
-				var contacts = params.contacts[0];
-				var text = params.text[0];
-
-				Q.Dialogs.push({
-					title: text.title,
-					template: {
-						name: allOptions.templateName,
-						fields: {
-							contacts: _groupContacts(contacts),
-							isCordova: Q.info.isCordova,
-							text: text
-						}
-					},
-					apply: true,
-					onActivate: function (dialog) {
-						var $parent = $(".Q_dialog_content", dialog);
-
-						$($parent).on(Q.Pointer.fastclick, function (e) {
-							if (!$(e.target).hasClass("Users_contacts_input")) {
-								$(".Users_contacts_input", $parent).trigger('blur');
-							}
-						});
-
-						$(dialog).on(Q.Pointer.fastclick, '.Users_contacts_dialog_buttons', function () {
-							var $this = $(this);
-							var $row = $this.closest(".tr");
-							var rawid = $row.data("rawid");
-							var name = $row.find(".Users_contacts_dialog_name").text();
-							var contact = $this.closest(".td").data();
-							var contactType = Object.keys(contact)[0];
-							contact = Q.getObject(contactType, contact);
-							if (!contact || $this.hasClass("checked")) {
-								return _removeContact(rawid, dialog);
-							}
-
-							$row.find(".checked").removeClass("checked");
-							$this.addClass("checked");
-
-							if (contact.length > 1) {
-								Users.Dialogs.select({
-									displayName: name,
-									contacts: contact,
-									prefix: contactType,
-									text: text
-								}, function (data) {
-									if (!data) {
-										$this.removeClass("checked");
-										return;
-									}
-									_addContact({id: rawid, name: name, contact: data, contactType: contactType});
-								})
-							} else {
-								_addContact({id: rawid, name: name, contact: contact[0], contactType: contactType});
-							}
-
-							return false;
-						});
-
-						$(dialog).on(Q.Pointer.fastclick, '.tr[data-rawid]', function () {
-							var $row = $(this);
-
-							_rowClick($row, dialog, text);
-						});
-
-						// scroll to letter
-						$(dialog).on(Q.Pointer.fastclick, ".Users_contacts_sticky > div", function () {
-							var $offsetElement = $(".Users_contacts_dialog_letter .td:contains(" + $(this).text() + ")", $parent);
-							var $header = $(".Users_contacts_header", $parent);
-
-							$parent.animate({
-								scrollTop: $parent.scrollTop() - $header.outerHeight() + $offsetElement.position().top
-							}, 1000);
-						});
-
-						// filter users by name
-						$(dialog).on('change keyup input paste', ".Users_contacts_input", function () {
-							var filter = $(this).val();
-							if (filter) {
-								$parent.addClass('Users_contacts_filtering');
-							} else {
-								$parent.removeClass('Users_contacts_filtering');
-							}
-
-							Q.each($(".tr[data-rawId]", $parent), function () {
-								var $name = $(".td.Users_contacts_dialog_name", this);
-								var text = $name.html().replace(/\<(\/)?b\>/gi, '');
-
-								$name.html(text);
-
-								if (!filter) {
-									return;
-								}
-
-								if (text.toUpperCase().indexOf(filter.toUpperCase()) >= 0) {
-									$name.html(text.replace(new RegExp(filter,'gi'), function(match) {
-										return '<b>' + match + '</b>'
-									}));
-									$(this).addClass('Users_contacts_filter_match');
-								} else {
-									$(this).removeClass('Users_contacts_filter_match');
-								}
-							});
-						});
-
-						// create new contact
-						$(dialog).on(Q.Pointer.fastclick, ".Users_contacts_create", function () {
-							var method = Q.getObject("Cordova.UI.create", Users);
-
-							if (!method) {
-								return Q.alert(text.CreateAccountNotFound);
-							}
-
-							method(function(contactId){
-								Users.chooseContacts(function () {
-									Q.Template.render(allOptions.templateName, {
-										contacts: _groupContacts(this),
-										text: text
-									}, function (err, html) {
-										if (err) {
-											return;
-										}
-
-										$parent.html(html);
-										_prepareContacts(dialog);
-
-										setTimeout(function () {
-											var $row = $(".tr[data-rawid='" + contactId + "']", $parent);
-											var $header = $(".Users_contacts_header", $parent);
-
-											_rowClick($row, dialog, text);
-
-											$parent.animate({
-												scrollTop: $parent.scrollTop() - $header.outerHeight() + $row.position().top
-											}, 1000);
-										}, 100);
-									});
-								});
-							}, function(err){
-								console.warn(err);
-							});
-						});
-
-						_prepareContacts(dialog);
-					},
-					onClose: function () {
-						Q.handle(callback, Users, [selectedContacts]);
-					}
-				});
-			});
-
-			Q.Text.get("Users/content", function (err, result) {
-				pipe.fill('text')(Q.getObject(["contacts", "dialog"], result));
-			});
-
-			Users.chooseContacts(function (dataType) {
-				var identifierTypes = Q.getObject("identifierTypes", options);
-				var contacts = this;
-
-				// clear contacts from objects in email and phoneNumbers
-				$.each(contacts, function (i, contact) {
-					if (!contact || typeof contact !== "object") {
-						return;
-					}
-
-					$.each(contact, function (j, obj) {
-						if (!obj || typeof obj !== "object" || (j !== "emails" && j !== "phoneNumbers")) {
-							return;
-						}
-
-						var cleared = [];
-						$.each(obj, function (k, element) {
-							if (typeof element === "string") {
-								cleared.push(element);
-							}
-						});
-						contact[j] = cleared;
-					});
-				});
-
-				if (!Q.isEmpty(identifierTypes) && dataType === 'browser') {
-					Q.each(contacts, function (i, contact) {
-						var added = false;
-
-						Q.each(identifierTypes, function (j, type) {
-							if (added) {
-								return;
-							}
-
-							if (type === 'email' && !Q.isEmpty(contact.emails)) {
-								added = true;
-								return _addContact({
-									id: contact.id,
-									name: contact.displayName,
-									icon: contact.icon,
-									contact: contact.emails[0],
-									contactType:'email'
-								});
-							}
-
-							if (type === 'mobile' && !Q.isEmpty(contact.phoneNumbers)) {
-								added = true;
-								return _addContact({
-									id: contact.id,
-									name: contact.displayName,
-									icon: contact.icon,
-									contact: contact.phoneNumbers[0],
-									contactType:'phone'
-								});
-							}
-						});
-					});
-
-					return Q.handle(callback, Users, [selectedContacts]);
-				}
-
-				pipe.fill('contacts')(contacts);
-			});
-		},
-		/**
-		 * Show a select dialog with several emails/phones.
-		 * @static
-		 * @method contacts
-		 * @param {object} options
-		 * @param {Function} [callback] The function to call after dialog is activated
-		 */
-		select: function (options, callback) {
-			var allOptions = Q.extend({}, Users.Dialogs.select.options, options);
-			if (!allOptions.contacts) {
-				return;
+	Users.Dialogs = Q.Method.define({
+		contacts: new Q.Method({
+			options: {
+				templateName: "Users/templates/contacts/dialog",
+				filter: "Users/"
 			}
-
-			var selectedContact = null;
-			Q.Dialogs.push({
-				title: allOptions.text.title.interpolate({
-					displayName: allOptions.displayName
-				}),
-				template: {
-					name: allOptions.templateName,
-					fields: {
-						contacts: allOptions.contacts,
-						prefix: allOptions.prefix
-					}
-				},
-				stylesheet: '{{Users}}/css/Users/contacts.css',
-				apply: true,
-				onActivate: function (dialog) {
-					$('td', dialog).on(Q.Pointer.fastclick, function () {
-							var $tr = $(this).closest("tr");
-							var $icon = $(".Users_contacts_dialog_buttons", $tr);
-
-							if($icon.hasClass('checked')) {
-								return;
-							}
-
-							$(dialog).find(".checked").removeClass("checked");
-							$icon.addClass("checked");
-							selectedContact = $icon.closest("td").data("contact");
-						});
-				},
-				onClose: function () {
-					Q.handle(callback, Users, [selectedContact]);
-				}
-			});
-		},
-		activate: function (activateLink, options) {
-			if (!activateLink) {
-				return false;
+		}),
+		select: new Q.Method({
+			options: {
+				templateName: "Users/templates/contacts/select"
 			}
-			Q.Dialogs.push(Q.extend(options, {
-				url: activateLink,
-				className: 'Users_activate_dialog',
-				onActivate: {"Users.Dialogs.activate": function () {
-					var dialog = this;
-					var form = Q.Tool.byId('Q_form-Users_activate');
-					form.state.loader.options.onRedirect = null;
-					form.state.onResponse.set(function (err, data) {
-						var fem = Q.firstErrorMessage(err, data);
-						if (fem) {
-							alert(fem);
-						} else {
-							priv.login_connected = true;
-							Q.Dialogs.close(dialog);
-							Q.handle(options && options.onSuccess, Users, [data]);
-						}
-						return false; // we handled it
-					});
-					$('#new-password').plugin('Q/clickfocus');
-					document.documentElement.addClass('Users_activate_dialog_showing');
-					// priv.login_connected = true;
-					// priv.login_onConnect && priv.login_onConnect(user);
-				}},
-				onClose: {"Users.Dialogs.activate": function () {
-					if (!priv.login_connected
-					&& !priv.login_resent
-					&& priv.login_onCancel) {
-						priv.login_onCancel && priv.login_onCancel();	
-					}
-					document.documentElement.removeClass('Users_activate_dialog_showing');
-				}}
-			}));
-		}
-	};
-	Users.Dialogs.contacts.options = {
-		templateName: "Users/templates/contacts/dialog",
-		filter: "Users/"
-	};
-
-	Users.Dialogs.select.options = {
-		templateName: "Users/templates/contacts/select"
-	}
+		}),
+		activate: new Q.Method()
+	}, "{{Users}}/js/methods/Users/Dialogs", function() {
+		return [Users, priv];
+	});
 
 	/**
 	 * Some replacements for Q.Socket methods, use these instead.
@@ -4258,16 +1911,16 @@
 				});
 			};
 			var _w3m = function () {
-				$("w3m-modal").css({
+				$("w3m-modal").addClass("Q_floatAboveDocument").css({
 					position: "fixed",
 					"z-index": Q.zIndexTopmost() + 1
 				});
-				Web3.ethereumProvider.once("connect", function () {
+				Web3.ethereumProvider.on("connect", function _w3mConnect (info) {
 					_getProvider(Web3.ethereumProvider);
+					_subscribeToEvents(Web3.ethereumProvider);
+					Q.handle(Web3.onConnect, Web3.ethereumProvider, [info]);
 				});
-				Web3.ethereumProvider.connect().catch(function (e) {
-					Q.handle(callback, null, [e.message]);
-				});
+				Web3.ethereumProvider.connect();
 				return false;
 			};
 			Users.init.web3(function () {
@@ -4331,6 +1984,15 @@
 										}
 									});
 								});
+
+								// close dialog on provider connected
+								Web3.onConnect.set(function () {
+									setTimeout(function () {
+										Q.Dialogs.close($dialog);
+									}, 1000);
+								}, 'Users_connect_wallets');
+
+								// close dialog on timeout
 								handOffTimeout = setTimeout(() => {
 									Q.Dialogs.close($dialog);
 								}, payload['Q.timestamp']*1000 - Date.now());
@@ -4648,6 +2310,11 @@
 					params: [{ chainId: info.chainId }],
 				}).then(_continue)
 				.catch(function (switchError) {
+					// check if error message is json
+					if (JSON.isValid(switchError.message)) {
+						switchError = JSON.parse(switchError.message);
+					}
+
 					// This error code indicates that the chain has not been added to MetaMask.
 					if (switchError.code !== 4902
 					&& switchError.code !== -32603) {
@@ -5001,18 +2668,7 @@
         Users, 
         '{{Users}}/js/methods/Users', 
         function() {
-            // need to pass all func that will use outside
-            return [_doCancel, _handleXid, _doAuthenticate];
-            
-            /*
-             * or mb to pass object like this and use inside that needed only
-            return {
-                _doCancel : _doCancel, 
-                _handleXid :_handleXid, 
-                _doAuthenticate :_doAuthenticate
-            };
-            */
-            
+            return [Users, priv];
         }
     );
 	

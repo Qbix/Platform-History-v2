@@ -538,12 +538,12 @@ img[data-lazyload-src],
 [data-q-lazyload="waiting"],
 [data-q-lazyload="removed"] {
 	opacity: 0.1;
-	transition: opacity 1s;
+	transition: opacity 0.3s;
 }
 
 [data-q-lazyload="activated"] {
 	opacity: 1;
-	transition: opacity 1s;
+	transition: opacity 0.3s;
 }
 
 #dialogs_slot { display: none; }

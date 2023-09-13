@@ -15,7 +15,7 @@
  *  @param {Number} [this.state.pause=2000]
  *  @param {Boolean} [this.state.scrollbars=true]
  *  @param {Number} [this.state.scrollbarsPause=500]
- *  @param {Number} [this.state.frameRate = 100]
+ *  @param {Number} [this.state.frameRate = 50]
  */
 
 Q.Tool.define("Q/ticker", function() {
@@ -51,7 +51,7 @@ Q.Tool.define("Q/ticker", function() {
 	pause: 2000,
 	scrollbars: true,
 	scrollbarsPause: 500,
-	frameRate: 100,
+	frameRate: 50,
 	threshold: 5,
 	onHitStart: new Q.Event(),
 	onHitEnd: new Q.Event()

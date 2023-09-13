@@ -237,8 +237,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 var chainId = $rolePlace.val();
                                 tool.element.addClass('Q_loading');
                                 Q.Dialogs.pop();
-                                
-                                if ((typeof(chainId) === 'undefined') || chainId == 'native') {
+                                if (chainId === undefined || chainId == 'native') {
                                     tool._addWeb2(title, null, function(){
                                         tool.element.removeClass('Q_loading');
                                     })
@@ -292,7 +291,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 }
                                 
                                 // web2 update callback
-                                var _labelUpdate = function(label, title, iconUrl, description) {
+                                function _labelUpdate(label, title, iconUrl, description) {
                                     Users.Label.update(state.userId, label, title, iconUrl, description, function (err, obj) {
                                         if (err) {
                                             tool.element.removeClass('Q_loading');
@@ -329,9 +328,19 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                                             _labelUpdate(label, title, iconUrl, description);
 
-                                        });
+                                    [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
+                                    // http://itr.localhost/URI/ITR/0x13881/19.json
+                                    var uri = Q.url("{{baseUrl}}/URI/"+state.userId+"/"+chainId+"/"+roleIndex+".json");
+                                    let st, communityAddress;
+                                    [st, communityAddress] = tool._getCommunityAddress(chainId);
+                                    if (!st) return;
+                                    Q.Communities.Web3.Roles.setRoleURI(communityAddress, chainId, null, roleIndex, uri, function (err, status) {
 
-                                    } else {
+                                        if (err) {
+                                            tool.element.removeClass('Q_loading');
+                                            Q.alert(err);
+                                            return;
+                                        }
 
                                         _labelUpdate(label, title, iconUrl, description);
                                     }
@@ -353,7 +362,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             showSize: state.icon || $img.width(),
                             path: 'Q/uploads/Users',
                             preprocess: function (callback) {
-                                subpath = state.userId.splitId()+'/icon/'+Math.floor(Date.now()/1000);
+                                subpath = state.userId.splitId()+'/labels/'+ Math.floor(Date.now()/1000);
                                 callback({
                                     subpath: subpath,
                                     save: "Users/labels"

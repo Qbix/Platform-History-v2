@@ -61,7 +61,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             
 		    //defaultChain: state.defaultChain,
 		    //contractParams: state.contractParams
-		}, (err, html) => {
+		}, function (err, html) {
 		    
 		    Q.replace(tool.element, html);
             
@@ -262,11 +262,11 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
         if (xidAlreadyExists) {return;}
         //----------------
                 
-        
+        var contractABIName = 'Users/templates/R1/Community/factory';
         var txData = {};
         Q.handle(onProcessWorking);
         Q.Users.Web3.getFactory(
-            'Users/templates/R1/Community/factory',
+            contractABIName,
             {
             chainId: userParams.selectedChainId,
             //contractAddress: factoryAddress,
@@ -282,7 +282,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             );
         }).then(function (tx) {
 
-            var produceParams = { ...userParams };
+            var produceParams = Q.copy(userParams);
             delete produceParams['selectedChainId'];
 
 
@@ -292,18 +292,19 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                 if (fem) {return console.warn(fem);}
 
             }, {
-                method: "post",
+                method: "put",
                 fields: {
                     communityId: state.communityId,
                     chainId: tx.chainId == 0 ? userParams.selectedChainId : tx.chainId,
                     transactionId: tx.hash,
                     fromAddress: tx.from,
                     contract: factoryAddress,
+                    contractABIName: contractABIName,
                     methodName: "produce",
                     params: JSON.stringify(produceParams)
                 }
             });
-            txData["tx"] = tx;
+            txData.tx = tx;
 
             return tx.wait();
         }).then(function (receipt) {
@@ -311,8 +312,10 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             // additionally try to get instace address when transaction will be mine. 
             // it can be processing by cron job
             if (receipt.status == 1) {
-                let event = receipt.events.find(event => event.event === 'InstanceCreated');
-                let instance;
+                var event = receipt.events.find(function (event) {
+                    event.event === 'InstanceCreated'
+                });
+                var instance;
                 [instance, /*instancesCount*/] = event.args;
 
                 var txChaindId = txData["tx"].chainId == 0 ? userParams.selectedChainId : txData["tx"].chainId;
