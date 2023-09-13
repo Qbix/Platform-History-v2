@@ -1,7 +1,7 @@
 <?php
 function Users_labels_tool($options) {
     //Q_Valid::requireFields(array('chainId', 'communityAddress'), $options, true);
-    
+  
     $userId = $options['userId'];
     $abiPathCommunity = Q::ifset($options, "abiPath", "Users/templates/R1/Community/contract");
     

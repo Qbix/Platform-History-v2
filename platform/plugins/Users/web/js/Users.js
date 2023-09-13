@@ -2736,7 +2736,7 @@
 				return callback && callback.call(this, msg);
 			}
 			var obj = field && data.slots[field] ? new Constructor(data.slots[field]) : null;
-			Q.handle(callback, obj, [err, obj]);
+			Q.handle(callback, obj, [err, obj, method, fields]);
 		}, {
 			method: method,
 			fields: fields

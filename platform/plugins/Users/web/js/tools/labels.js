@@ -59,15 +59,18 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 		tool.element.addClass('Users_labels_communityRoles');
 		state.addToPhonebook = false;
 	}
+
+    if (state.contactUserId){
+        Q.Streams.get(state.contactUserId, 'Streams/user/xid/web3', function(err, stream){
+            if (!Q.isEmpty(stream.fields.content)) {
+                state.contactUserId_xid = stream.fields.content;
+            }
+            tool.refresh();    
+        });
+    } else {
+        tool.refresh();            
+    }
     
-	tool.refresh();
-
-	var _callback = function(err, res){
-		if (err) {
-			return Q.alert(err);
-		}
-	};
-
 	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
 
 		var $this = $(this);
@@ -81,17 +84,24 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             if (false === Q.handle(state.onClick, tool, [this, label, title, wasSelected])) {
                 return;
             }
-            if (wasSelected) {
-                $this.removeClass('Q_selected');
-                if (state.contactUserId) {
-                    Users.Contact.remove(state.userId, label, state.contactUserId, _callback);
+            tool.element.addClass('Q_loading');        
+            tool.onSelect(wasSelected, label, function(err, ret, develop_error){
+                tool.element.removeClass('Q_loading');        
+                if (develop_error) {
+                    console.warn(develop_error);
+                    return;
                 }
-            } else {
-                $this.addClass('Q_selected');
-                if (state.contactUserId) {
-                    Users.Contact.add(state.userId, label, state.contactUserId, _callback);
+                if (err) {
+                    Q.alert(err);
+                    return;
                 }
-            }
+                if (wasSelected) {
+                    $this.removeClass('Q_selected');    
+                } else {
+                    $this.addClass('Q_selected');    
+                }
+            });
+                
         
         }
 	});
@@ -102,6 +112,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	filter: ['Users/'],
 	exclude: null,
 	contactUserId: null,
+    contactUserId_xid: null,
 	canAdd: false,
     //web3: {
     abiPath: "Users/templates/R1/Community/contract",
@@ -147,15 +158,19 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
         var status = false;
         var communityAddress = false;
-        
-        Q.each(state.canAddWeb3, function (i, item) {
-            
-            if (item["chainId"] == chainId && item["userId"] == state.userId) {
-                status = true;
-                communityAddress = item['communityAddress'];
-            }
-            //delete(labels[label]);
-        });
+        //Q.Users.web3.communityContracts[chainId]
+        if (!Q.isEmpty(Q.Users.web3.communityContracts[chainId])) {
+            status = true;
+            communityAddress = Q.Users.web3.communityContracts[chainId];
+        }
+//        Q.each(state.canAddWeb3, function (i, item) {
+//            
+//            if (item["chainId"] == chainId && item["userId"] == state.userId) {
+//                status = true;
+//                communityAddress = item['communityAddress'];
+//            }
+//            //delete(labels[label]);
+//        });
             
         return [status, communityAddress];
     },
@@ -357,6 +372,63 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
         
     },
 	/**
+     * Handler happens when user clicking by label when editable option == false
+     * @param {type} wasSelected was select or no before user click
+     * @param {type} label label
+     * @param {type} _callback
+     */
+    onSelect: function(wasSelected, label, _callback){
+        var tool = this;
+		var state = this.state;
+        
+        if (Q.isEmpty(state.contactUserId)) {
+            return;
+        }
+        
+        if (Q.Users.Label.isExternal(label)) {
+            
+            // web3
+            if (Q.isEmpty(state.contactUserId_xid)) {
+                return Q.handle(_callback, tool, [null, null, 'contactUserId_xid is empty']);
+            }
+            
+            var web3validated = $(tool.element)
+                                    .find('.Users_labels_label[data-label="'+label+'"]')
+                                    .data('web3validated');
+            if (Q.isEmpty(web3validated)) {
+                return Q.handle(_callback, tool, [null, null, 'this web3 label was not find in that community']);
+            }
+            
+            var chainId, roleIndex, st, communityAddress;
+            //<<< web3_0x123123/24
+            //<<< web3_0x123/24
+            [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
+            if (Q.isEmpty(chainId) || Q.isEmpty(roleIndex)) {
+                return Q.handle(_callback, tool, [null, null, 'chainId and/or roleIndex are empty']);
+            }
+            
+            [st, communityAddress] = tool._getCommunityAddress(chainId);
+            if (!st || !communityAddress) {
+                return Q.handle(_callback, tool, [null, null, 'communityAddress is empty']);
+            }
+
+            // users (not communities) have only web3_all xid, their private key can sign on any chain
+            if (wasSelected) {
+                Q.Communities.Web3.Roles.revokeRole(communityAddress, chainId, null, state.contactUserId_xid, roleIndex, _callback);
+            } else {
+                Q.Communities.Web3.Roles.grantRole(communityAddress, chainId, null, state.contactUserId_xid, roleIndex, _callback);
+            }
+        } else {
+            // web2
+            if (wasSelected) {
+                Users.Contact.remove(state.userId, label, state.contactUserId, _callback);
+            } else {
+                Users.Contact.add(state.userId, label, state.contactUserId, _callback);
+            }
+        }
+        
+    },
+    /**
 	 * Refresh the tool's contents
 	 * @method refresh
 	 */
@@ -405,6 +477,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                 }
             
                 if (state.userId && state.contactUserId) {
+                    // selecting web2 labels
                     $(tool.element)
                     .addClass('Users_labels_active')
                     .find('.Users_labels_label')
@@ -424,6 +497,52 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             });
                         });
                     });
+                    
+                    // checks and selecting web3 labels
+                    if (!Q.isEmpty(state.contactUserId_xid)) {
+                        
+                        var configChains = Q.Users.apps.web3;
+                        var communityAddress, st;
+                        for(var chain in configChains){
+
+                            if (!configChains[chain]['appId'] || configChains[chain]['appIdForAuth'] == 'all') {
+                                continue;
+                            }
+
+                            [st, communityAddress] = tool._getCommunityAddress(configChains[chain]['appId']);
+
+                            if (!st) {
+                                continue;
+                            }
+                            
+                            Q.Communities.Web3.Roles.getAll(communityAddress, configChains[chain]['appId'], null, function (err, response) {
+
+                                if (err) {return;}
+                                var allWeb3RoleIds = response.indexes;
+
+                                // additional valdiation preventing adding nonexistion role
+                                // happens when label exists in base but contract produce from the scratch.
+                                // ideal way delete labels when reinstall contract(community)
+                                for(var index in allWeb3RoleIds){
+                                    $(tool.element)
+                                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIds[index])+'"]')
+                                    .data('web3validated', true);
+                                }        
+                            });
+                            Q.Communities.Web3.Roles.byUser(communityAddress, configChains[chain]['appId'], null, state.contactUserId_xid, function (err, ret) {
+                                for(var i in ret) {
+                                    $(tool.element)
+                                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], ret[i])+'"]')
+                                    .addClass('Q_selected');
+                                }
+
+                            });
+                        };
+                        
+                    }
+
+                    
+                    
                 }
                 if (state.canAdd) {
 
