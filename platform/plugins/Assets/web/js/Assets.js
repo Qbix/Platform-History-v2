@@ -7,15 +7,16 @@
 
 	var Users = Q.Users;
 	var Streams = Q.Streams;
-	var Assets = Q.Assets = Q.plugins.Assets = Q.Method.define({
+	var Assets = Q.Assets = Q.plugins.Assets = {
 
 		/**
 		 * Operates with credits.
 		 * @class Assets.Credits
 		 */
+        
 		Credits: Q.Method.define({
 			
-			userStream: Q.Method.stub,
+			userStream: new Q.Method(),
 			buy: Q.Method.stub,
 			pay: Q.Method.stub,
 			/**
@@ -270,18 +271,14 @@
 				}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory'),
 				getAll: Q.Method.stub,
 				getAllExtended: Q.Method.stub,
-				
-				_getAll: Q.Method.stub,
-				_getERC20TokenInfo: Q.Method.stub
+                getERC20TokenInfo: Q.Method.stub
 			}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools'),
 		}, '{{Assets}}/js/methods/Assets/CommunityCoins'),
 		Funds: Q.Method.define({
 			getFactory: Q.Method.stub,
 			getAll: Q.Method.stub,
 			getFundConfig: Q.Method.stub,
-			_getAll: Q.Method.stub,
-			_getFundConfig: Q.Method.stub,
-			_getWhitelisted: Q.Method.stub,
+			getWhitelisted: Q.Method.stub,
 			adjustFundConfig: function(infoConfig, options) {
 				//make output data an userfriendly
 				var infoConfigAdjusted = Object.assign({}, infoConfig);
@@ -416,7 +413,33 @@
 					}}
 			}
 		}
-	}, '{{Assets}}/js/methods/Assets');
+	};
+    
+    var priv = {};
+//    var priv = Q.Method.define({
+//    }, '{{Assets}}/js/methods/Assets/priv');
+//        
+    // define methods for Users to replace method stubs
+    Q.Method.define(
+        Assets, 
+        '{{Assets}}/js/methods/Assets', 
+        function() {
+            return [priv];
+        }
+    );
+    
+//     Assets   Q.Method({
+//            options: {...}
+//        })
+//        Users.setIdentifier = new Q.Method({
+//		options: {
+//			onCancel: null,
+//			onSuccess: null, // gets passed session
+//			identifierType: 'email,mobile',
+//			dialogContainer: 'body'
+//		}
+//	});
+
 
 	Q.Text.addFor(
 		['Q.Tool.define', 'Q.Template.set'],
