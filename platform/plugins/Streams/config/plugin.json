@@ -85,6 +85,11 @@
 				"defaultSize": "400",
 				"maxStretch": 2
 			},
+			"Streams/invite/groupPhoto": {
+				"sizes": ["1000x", "x1000"],
+				"defaultSize": "1000x",
+				"maxStretch": 3
+			},
 			"Streams/interest": {
 				"sizes": {
 					"40": "40.png",

@@ -11,6 +11,11 @@ function Streams_before_Q_responseExtras()
 			Q_Response::setScriptData('Q.plugins.Streams.image.sizes', $sizes);
 			Q_Response::setScriptData('Q.plugins.Streams.image.maxStretch', $maxStretch);
 		}
+		if ($sizes = Q_Image::getSizes('Streams/invite/groupPhoto', $maxStretch, $defaultSize)) {
+			Q_Response::setScriptData('Q.plugins.Streams.invite.groupPhoto.sizes', $sizes);
+			Q_Response::setScriptData('Q.plugins.Streams.invite.groupPhoto.maxStretch', $maxStretch);
+			Q_Response::setScriptData('Q.plugins.Streams.invite.groupPhoto.defaultSize', $defaultSize);
+		}
 		$defaults = array(
 			'readLevel' => Streams::$READ_LEVEL['messages'],
 			'writeLevel' => Streams::$WRITE_LEVEL['join'],
