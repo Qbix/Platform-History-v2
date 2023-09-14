@@ -15,7 +15,7 @@ Q.exports(function (Users, priv) {
 	 *  Or pass an array of label names, to filter by.
 	 * @param {Function} callback
 	 */
-	Users.getLabels = Q.getter(function (userId, filter, callback) {
+	return Q.getter(function (userId, filter, callback) {
 		if (typeof filter === 'function') {
 			callback = filter;
 			filter = undefined;
