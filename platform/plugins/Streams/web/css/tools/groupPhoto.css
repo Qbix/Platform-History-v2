@@ -1,12 +1,15 @@
-.StreamsGroupPhoto .Q_dialog_content img.Streams_groupPhoto {
+.Streams_groupPhoto_tool {
+    position: relative;
+}
+.Streams_groupPhoto_tool img.Streams_groupPhoto {
     width: 100%;
 }
-.StreamsGroupPhoto .Q_dialog_content canvas {
+.Streams_groupPhoto_tool canvas {
     position: absolute;
     left: 0;
     top: 0;
 }
-.StreamsGroupPhoto .Q_dialog_content .Streams_groupPhoto_loader {
+.Streams_groupPhoto_tool .Streams_groupPhoto_loader {
     position: absolute;
     left: 0;
     top: 0;
