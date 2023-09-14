@@ -33,6 +33,19 @@ function Users_before_Q_responseExtras()
 		Q_Response::setScriptData('Q.plugins.Users.login.serverOptions', $loginOptions);
 		$setIdentifierOptions = Q::take($loginOptions, array('identifierType'));
 		Q_Response::setScriptData('Q.plugins.Users.setIdentifier.serverOptions', $setIdentifierOptions);
+        
+        // get current community address
+        $ret = Users_ExternalTo::select()->where(array(
+            'userId' => Users::currentCommunityId(true),
+            'platform' => 'web3',
+            //'appId' => array($appId, $secondAppId)
+        ))->fetchDbRows();
+        $communityContracts=array();
+        foreach($ret as $k => $v) {
+            $communityContracts[$v->appId] = $v->xid;
+        }
+        Q_Response::setScriptData('Q.plugins.Users.web3.communityContracts', $communityContracts);
+        //------------
 	}
 	Q_Response::setScriptData('Q.plugins.Users.communityId', Users::communityId());
 	Q_Response::setScriptData('Q.plugins.Users.communityName', Users::communityName());
