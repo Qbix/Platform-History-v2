@@ -50,9 +50,19 @@
 		 * @class Assets.Subscriptions
 		 */
 		Subscriptions: Q.Method.define({
-            authnet: Q.Method.stub,
-            stripe: Q.Method.stub,
-            subscribe: Q.Method.stub
+            authnet: new Q.Method({
+                options: {
+                    name: Q.Users.communityName
+                }
+            }),
+            stripe: new Q.Method({
+                options: {
+                    name: Q.Users.communityName,
+                    email: Q.getObject("loggedInUser.email", Q.Users),
+                    currency: 'USD'
+                }
+            }),
+            subscribe: new Q.Method()
 		}, '{{Assets}}/js/methods/Assets/Subscriptions'),
 
 		/**

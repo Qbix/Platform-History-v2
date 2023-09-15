@@ -10,7 +10,7 @@ Q.exports(function(){
     *  @param {String} options.token the token obtained from the hosted forms
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
-    function subscribe(payments, options, callback) {
+    return function subscribe(payments, options, callback) {
         var fields = {
             payments: payments,
             planPublisherId: options.planPublisherId,
@@ -60,6 +60,4 @@ Q.exports(function(){
             fields: fields
         });
     }
-
-    return subscribe;
 })
