@@ -466,7 +466,15 @@ var priv = {
     _retainedByStream: {},
     _retainedStreams: {},
     _retainedNodes: {},
-    _connectedNodes: {}
+    _connectedNodes: {},
+    
+    // methods from scope
+    _refreshUnlessSocket: function priv_refreshUnlessSocket(publisherId, streamName, options) {
+        return Q.Streams.Stream.refresh(publisherId, streamName, null, Q.extend({
+            messages: true,
+            unlessSocket: true
+        }, options));
+    }
 }
 
 /**
@@ -878,98 +886,13 @@ var _Streams_batchFunction_options = {
  *	Your document is supposed to define this function if it wants to return results to the
  *	callback's second parameter, otherwise it will be undefined
  */
-Streams.create = function (fields, callback, related, options) {
-	var slotNames = ['stream'];
-	var options = options || {};
-	fields = Q.copy(fields);
-	if (options.fields) {
-		Q.extend(fields, 10, options.fields);
-	}
-	if (options.streamName) {
-		fields.name = options.streamName;
-	}
-	if (fields.icon) {
-		slotNames.push('icon');
-	}
-	if (fields.attributes && typeof fields.attributes === 'object') {
-		fields.attributes = JSON.stringify(fields.attributes);
-	}
-	if (related) {
-		if (!related.publisherId || !related.streamName) {
-			throw new Q.Error("Streams.create related needs publisherId and streamName");
-		}
-		fields['Q.Streams.related.publisherId'] = related.publisherId || related.publisherId;
-		fields['Q.Streams.related.streamName'] = related.streamName || related.streamName || related.name;
-		fields['Q.Streams.related.type'] = related.type;
-		fields['Q.Streams.related.weight'] = related.weight;
-		slotNames.push('messageTo');
-	}
-	var baseUrl = Q.baseUrl({
-		publisherId: fields.publisherId,
-		streamName: "" // NOTE: the request is routed to wherever the "" stream would have been hosted
-	});
-	fields["Q.clientId"] = Q.clientId();
-	if (options.form) {
-		fields["file"] = {
-			path: 'Q/uploads/Streams'
-		}
-	}
-	var _r = _retain;
-	Q.req('Streams/stream', slotNames, function Stream_create_response_handler(err, data) {
-		var msg = Q.firstErrorMessage(err, data);
-		if (msg) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			Streams.create.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
-		}
-		if (related) {
-			Streams.related.cache.removeEach([related.publisherId, related.streamName]);
-		}
-		Stream.construct(data.slots.stream, {},
-			function Stream_create_construct_handler (err, stream) {
-				var msg = Q.firstErrorMessage(err);
-				if (msg) {
-					return callback && callback.call(stream, msg, stream, data.slots.icon);
-				}
-				if (_r) {
-					stream.retain(_r);
-				}
-				var extra = {};
-				extra.icon = data.slots.icon;
-				if (related && data.slots.messageTo) {
-					var m = extra.messageTo = Streams.Message.construct(data.slots.messageTo, true);
-					extra.related = {
-						publisherId: related.publisherId,
-						streamName: related.streamName,
-						type: related.type,
-						weight: m.getInstruction('weight')
-					};
-				}
-				callback && callback.call(stream, null, stream, extra, data.slots);
-				// process various messages posted to Streams/participating
-				_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
-				if (related) {
-					// process possible relatedTo messages posted
-					_refreshUnlessSocket(related.publisherId, related.streamName);
-				}
-				return;
-			}, true);
-	}, {
-		method: 'post',
-		fields: fields,
-		baseUrl: baseUrl,
-		form: options.form,
-		resultFunction: options.resultFunction
-	});
-	_retain = undefined;
-};
-/**
- * Occurs when Streams.create encounters an error trying to create a stream on the server
- * @event create.onError
- */
-Streams.create.onError = new Q.Event();
-
+Streams.create = new Q.Method({
+    /**
+    * Occurs when Streams.create encounters an error trying to create a stream on the server
+    * @event create.onError
+    */
+    onError: new Q.Event()
+});
 function _toolInDialog(toolName, toolParams, options, classContainer) {
 	Q.Dialogs.push(Q.extend(options, {
 		url: Q.action(toolName, toolParams),
@@ -3514,7 +3437,7 @@ Stream.join = function _Stream_join (publisherId, streamName, callback) {
 			0, participant, [err, participant]
 		);
 		callback && callback.call(participant, err, participant || null);
-		_refreshUnlessSocket(publisherId, streamName);
+		priv._refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
 /**
@@ -3562,7 +3485,7 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 			0, participant, [err, participant]
 		);
 		callback && callback.call(this, err, participant || null);
-		_refreshUnlessSocket(publisherId, streamName);
+		priv._refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
 /**
@@ -3611,7 +3534,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 			0, participant, [err, participant]
 		);
 		callback && callback.call(participant, err, participant || null);
-		_refreshUnlessSocket(publisherId, streamName);
+		priv._refreshUnlessSocket(publisherId, streamName);
 
 		// check whether subscribe device and subscribe if yes
 		if (Q.getObject(["device"], options) === true) {
@@ -3683,7 +3606,7 @@ Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, call
 			0, participant, [err, participant]
 		);
 		callback && callback.call(this, err, participant || null);
-		_refreshUnlessSocket(publisherId, streamName);
+		priv._refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
 /**
@@ -3778,8 +3701,8 @@ Stream.close = function _Stream_remove (publisherId, streamName, callback) {
 		var stream = data.slots.stream;
 		if (stream) {
 			// process the Streams/closed message, if stream was retained
-			_refreshUnlessSocket(stream.publisherId, stream.name);
-			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
+			priv._refreshUnlessSocket(stream.publisherId, stream.name);
+			priv._refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
 		}
 		callback && callback.call(this, err, data.slots.result || null);
 	}, { method: 'delete', fields: fields, baseUrl: baseUrl });
@@ -3857,8 +3780,8 @@ Streams.relate = function _Streams_relate (publisherId, streamName, relationType
 	});
 	Q.req('Streams/related', [slotName], function (err, data) {
 		callback && callback.call(this, err, Q.getObject('slots.result', data) || null);
-		_refreshUnlessSocket(publisherId, streamName);
-		_refreshUnlessSocket(fromPublisherId, fromStreamName);
+		priv._refreshUnlessSocket(publisherId, streamName);
+		priv._refreshUnlessSocket(fromPublisherId, fromStreamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 	_retain = undefined;
 };
@@ -4936,7 +4859,7 @@ var Interests = Streams.Interests = {
 				Q.handle(callback, this, arguments);
 				var s = response && response.slots;
 				if (s) {
-					_refreshUnlessSocket(s.publisherId, s.streamName);
+					priv._refreshUnlessSocket(s.publisherId, s.streamName);
 				}
 			}, Q.extend({
 				method: 'post',
@@ -4969,7 +4892,7 @@ var Interests = Streams.Interests = {
 				Q.handle(callback, this, arguments);
 				var s = response && response.slots;
 				if (s) {
-					_refreshUnlessSocket(s.publisherId, s.streamName);
+					priv._refreshUnlessSocket(s.publisherId, s.streamName);
 				}
 			}, {
 				method: 'delete',
@@ -6740,12 +6663,6 @@ function _scheduleUpdate() {
 	}, ms);
 }
 
-function _refreshUnlessSocket(publisherId, streamName, options) {
-	return Stream.refresh(publisherId, streamName, null, Q.extend({
-		messages: true,
-		unlessSocket: true
-	}, options));
-}
 
 // Go through the messages and simulate the posting
 // NOTE: the messages will arrive a lot quicker than they were posted,
