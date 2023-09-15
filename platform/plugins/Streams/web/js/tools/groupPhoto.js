@@ -15,6 +15,7 @@
  * @param {string} options.faceDetector - neural network used to detect faces. Can be 'ssd_mobilenetv1' or 'tiny_face_detector'
  * ssd_mobilenetv1 - large and slowly, but high precision
  * tiny_face_detector - small and faster, but low precision
+ * @param {Q.Event} onChoose - event occur when user selected area
  */
 Q.Tool.define("Streams/groupPhoto", function (options) {
 		var tool = this;
@@ -30,9 +31,11 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 	{
 		photoUrl: null,
 		title: "Group photo",
-		scoreThreshold: 0.5,
+		scoreThreshold: 0.4,
+		rectCoefficient: 1.5,
 		inputSize: 512,
-		faceDetector: 'ssd_mobilenetv1'
+		faceDetector: 'ssd_mobilenetv1',
+		onChoose: new Q.Event()
 	},
 	{
 		refresh: function () {
@@ -40,6 +43,7 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 			var state = this.state;
 
 			Q.Template.render("Streams/groupPhoto", {
+				title: state.title,
 				photoUrl: state.photoUrl
 			}, function (err, html) {
 				if (err) {
@@ -74,19 +78,30 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 					return !!_getCurrentFaceDetectionNet().params
 				};
 				var _run = function () {
-					$(".Streams_groupPhoto_loader", tool.element).hide()
+					tool.hideLoader()
 					var $canvas = $("canvas", tool.element);
 					$canvas.css({
 						left: $input.position().left,
 						top: $input.position().top
 					});
 					var canvas = $canvas[0];
+					var canvasClientRect = canvas.getBoundingClientRect();
 					faceapi.detectAllFaces(input, _getFaceDetectorOptions()).then(function (results) {
 						faceapi.matchDimensions(canvas, input);
+						results = results.map(function (result) {
+							result._box._x -= (result._box._width*state.rectCoefficient - result._box._width)/2;
+							result._box._y -= (result._box._height*state.rectCoefficient - result._box._height)/2;
+							result._box._width *= state.rectCoefficient;
+							result._box._height *= state.rectCoefficient;
+
+							return result;
+						});
 						var resizedResults = faceapi.resizeResults(results, input);
 						faceapi.draw.drawDetections(canvas, resizedResults, {withScore: false});
 						$canvas.on(Q.Pointer.fastclick, function (event) {
 							resizedResults.forEach(function (result, i) {
+								event.offsetX = event.offsetX || Q.Pointer.getX(event) - canvasClientRect.x;
+								event.offsetY = event.offsetY || Q.Pointer.getY(event) - canvasClientRect.y;
 								if (
 									event.offsetX < result._box.left || event.offsetX > result._box.left + result._box.width ||
 									event.offsetY < result._box.top || event.offsetY > result._box.top + result._box.height
@@ -96,7 +111,8 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 
 								faceapi.extractFaces(input, [results[i]]).then(function (canvases) {
 									canvases.forEach(cnv => {
-										var outputImage = $("<img>").insertAfter(input).prop("src", cnv.toDataURL());
+										//var outputImage = $("<img>").insertAfter(input).prop("src", cnv.toDataURL());
+										Q.handle(state.onChoose, tool, [cnv.toDataURL()], results[i]._box);
 									})
 								});
 							});
@@ -107,7 +123,7 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 					if (_isFaceDetectionModelLoaded()) {
 						setTimeout(_run, 500);
 					} else {
-						$(".Streams_groupPhoto_loader", tool.element).show();
+						tool.showLoader();
 						setTimeout(() => _getCurrentFaceDetectionNet().load(Q.url('{{Streams}}/js/face-api/weights/')).then(_run), 500);
 					}
 				};
@@ -118,11 +134,18 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 					input.addEventListener('load', _inputLoaded, {once: true});
 				}
 			});
+		},
+		showLoader: function () {
+			$(".Streams_groupPhoto_loader", this.element).show();
+		},
+		hideLoader: function () {
+			$(".Streams_groupPhoto_loader", this.element).hide();
 		}
 	}
 );
 
 Q.Template.set("Streams/groupPhoto", `
+	<h2>{{title}}</h2>
 	<img alt="group photo" src="{{photoUrl}}" class="Streams_groupPhoto" />
 	<canvas></canvas>
 	<div class="Streams_groupPhoto_loader"></div>

@@ -21,3 +21,9 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.Streams_groupPhoto_tool h2 {
+    text-transform: capitalize;
+}
+.Streams_groupPhoto_tool h2:empty {
+    display: none;
+}
