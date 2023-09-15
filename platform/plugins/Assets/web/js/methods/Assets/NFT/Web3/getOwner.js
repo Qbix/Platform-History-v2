@@ -8,10 +8,10 @@ Q.exports(function(){
     * @param {function} callback
     * @param {object} options
     */
-    function getOwner(tokenId, chain, callback, options) {
+    return function Assets_NFT_Web3_getOwner(tokenId, chain, callback, options) {
         var contract;
         Q.Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}),function (err, contract_) {
-            contract = contract_
+            contract = contract_;
             if (err) {
                 Q.handle(callback, null, [err]);
             }
@@ -23,6 +23,4 @@ Q.exports(function(){
             });
         });
     }
-    
-    return getOwner;
 })

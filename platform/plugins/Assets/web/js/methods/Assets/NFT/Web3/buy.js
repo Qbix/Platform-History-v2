@@ -8,7 +8,7 @@ Q.exports(function(){
     * @param {String} currency currency of NFT
     * @param {function} callback
     */
-   	function buy(tokenId, chain, currency, callback) {
+   	return function Assets_NFT_Web3_buy(tokenId, chain, currency, callback) {
         if (window.ethereum.chainId !== chain.chainId) {
                 Q.handle(callback, null, [true]);
                 return Q.alert(Q.Assets.texts.NFT.WrongChain.interpolate({chain: chain.name}), {
@@ -54,5 +54,4 @@ Q.exports(function(){
                 });
             });
     }
-    return buy;
 });

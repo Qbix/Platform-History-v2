@@ -205,25 +205,25 @@
 				onSeriesRemovedFromSale: new Q.Event(),
 
 				Sales: Q.Method.define({
-					getFactory: Q.Method.stub,
-					getContract: Q.Method.stub,
+					getFactory: new Q.Method(),
+					getContract: new Q.Method(),
 				}, '{{Assets}}/js/methods/Assets/NFT/Web3/Sales'),
 
 				Locked: Q.Method.define({
-					getContract: Q.Method.stub
+					getContract: new Q.Method()
 				}, '{{Assets}}/js/methods/Assets/NFT/Web3/Locked'),
 
-				setSeriesInfo: Q.Method.stub,
-				getFactory: Q.Method.stub,
-				getContract: Q.Method.stub,
-				metadata: Q.Method.stub,
-				balanceOf: Q.Method.stub,
-				getAuthor: Q.Method.stub,
-				getOwner: Q.Method.stub,
-				commissionInfo: Q.Method.stub,
-				saleInfo: Q.Method.stub,
-				transferFrom: Q.Method.stub,
-				buy: Q.Method.stub,
+				setSeriesInfo: new Q.Method(),
+				getFactory: new Q.Method(),
+				getContract: new Q.Method(),
+				metadata: new Q.Method(),
+				balanceOf: new Q.Method(),
+				getAuthor: new Q.Method(),
+				getOwner: new Q.Method(),
+				commissionInfo: new Q.Method(),
+				saleInfo: new Q.Method(),
+				transferFrom: new Q.Method(),
+				buy: new Q.Method(),
 				/**
 				 * Get long string and minimize to fixed length with some chars at the end and dots in the middle
 				 * @method minimizeAddress
@@ -268,21 +268,12 @@
             Pools: Q.Method.define({
                 Factory: Q.Method.define({
                     Get: new Q.Method()
-                }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory', 
-                function() {
-                    return [priv];
-                }),
+                }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory'),
                 getAll: new Q.Method(),
                 getAllExtended: new Q.Method(),
                 getERC20TokenInfo: new Q.Method()
-            }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools', 
-            function() {
-                return [priv];
-            })
-        }, '{{Assets}}/js/methods/Assets/CommunityCoins', 
-        function() {
-            return [priv];
-        }),
+            }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools')
+        }, '{{Assets}}/js/methods/Assets/CommunityCoins'),
 		Funds: Q.Method.define({
 			getFactory: new Q.Method(),
 			getAll: new Q.Method(),
