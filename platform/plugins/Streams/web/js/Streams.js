@@ -907,64 +907,16 @@ function _toolInDialog(toolName, toolParams, options, classContainer) {
  * @class Streams.Dialogs
  */
 
-Streams.Dialogs = {
-
-	/**
-	 * Show a dialog to manage "subscription" related stuff in a stream.
-	 * @static
-	 * @method subscription
-	 * @param {String} publisherId id of publisher which is publishing the stream
-	 * @param {String} streamName the stream's name
-	 * @param {Object} options Some options to pass to the dialog
-	 */
-	subscription: function(publisherId, streamName, options) {
-		_toolInDialog('Streams/subscription', {
-			publisherId: publisherId,
-			streamName : streamName
-		}, options, 'Streams_subscription_tool_dialog_container');
-	},
-
-	/**
-	 * Show a dialog to manage "access" related stuff in a stream.
-	 * @static
-	 * @method access
-	 * @param {String} publisherId id of publisher which is publishing the stream
-	 * @param {String} streamName the stream's name
-	 * @param {Object} options Some options to pass to the dialog
-	 */
-	access: function(publisherId, streamName, options) {
-		_toolInDialog('Streams/access', {
-			publisherId: publisherId,
-			streamName: streamName
-		}, options, 'Streams_access_tool_dialog_container');
-	},
-
-	/**
-	 * Show a dialog to invite others to a stream.
-	 * @static
-	 * @method invite
-	 * @param {String} publisherId id of publisher which is publishing the stream
-	 * @param {String} streamName the stream's name
-	 * @param {Function} [callback] The function to call after dialog is activated.
-	 *  It is passed an object with keys "suggestion", "stream", "data"
-	 * @param {object} [options] Different options
-	 * @param {string} [options.title] Custom dialog title
-	 * @param {string} [options.token] Use to set the invite token, if you have enough permissions
-	 * @param {String} [options.userChooser=false] If true allow to invite registered users with Streams/userChooser tool.
-	 */
-    invite: function(publisherId, streamName, callback, options) {
-
-		Q.addScript('{{Streams}}/js/invite.js', function () {
-			Streams.Dialogs.invite._dialog(publisherId, streamName, callback, options);
-		});
-
-    }
-};
-
-Streams.Dialogs.invite.options = {
-	templateName: "Streams/templates/invite/dialog",
-	photo: true
-};
+Streams.Dialogs = Q.Method.define({
+	subscription: new Q.Method(),
+	access: new Q.Method(),
+    invite: new Q.Method({
+        options: {
+            templateName: "Streams/templates/invite/dialog",
+            photo: true
+        }       
+    }),
+}, '{{Streams}}/js/methods/Streams/Dialogs');
 
 /**
  * @class Streams
