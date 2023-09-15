@@ -87,7 +87,7 @@
 			},
 			"Streams/invite/groupPhoto": {
 				"sizes": ["1000x", "x1000"],
-				"defaultSize": "1000x",
+				"defaultSize": "x1000",
 				"maxStretch": 3
 			},
 			"Streams/interest": {
@@ -126,12 +126,14 @@
 			"Streams/invite": {
 				"86400": {
 					"": 10,
+					"Users/owners": 1000,
 					"Users/admins": 1000
 				}
 			},
 			"Streams/description": {
 				"86400": {
 					"": 10,
+					"Users/owners": 1000,
 					"Users/admins": 1000
 				}
 			}

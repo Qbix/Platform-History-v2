@@ -42,6 +42,7 @@
 			"Websites/webpage/conversation": {
 				"86400": {
 					"": 5,
+					"Users/owners": 1000,
 					"Users/admins": 1000
 				}
 			},
