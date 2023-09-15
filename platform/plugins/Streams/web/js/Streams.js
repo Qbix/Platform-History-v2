@@ -407,36 +407,6 @@ Streams.iconUrl = function(icon, size) {
 		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
-var _messageHandlers = {};
-var _ephemeralHandlers = {};
-var _seenHandlers = {};
-var _avatarHandlers = {};
-var _constructHandlers = {};
-var _refreshHandlers = {};
-var _beforeSetHandlers = {};
-var _beforeSetAttributeHandlers = {};
-var _streamMessageHandlers = {};
-var _streamEphemeralHandlers = {};
-var _streamFieldChangedHandlers = {};
-var _streamAttributeHandlers = {};
-var _streamClosedHandlers = {};
-var _streamRelatedFromHandlers = {};
-var _streamRelatedToHandlers = {};
-var _streamUnrelatedFromHandlers = {};
-var _streamUnrelatedToHandlers = {};
-var _streamUpdatedRelateFromHandlers = {};
-var _streamUpdatedRelateToHandlers = {};
-var _streamConstructHandlers = {};
-var _streamRefreshHandlers = {};
-var _streamRetainHandlers = {};
-var _streamReleaseHandlers = {};
-var _retain = undefined;
-var _retainedByKey = {};
-var _retainedByStream = {};
-var _retainedStreams = {};
-var _retainedNodes = {};
-var _connectedNodes = {};
-
 var priv = {
     _messageHandlers: {},
     _ephemeralHandlers: {},
@@ -513,7 +483,7 @@ Streams.onError = new Q.Event(function (err, data) {
  * @param {String} [streamType] id of publisher which is publishing the stream
  * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
-Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
+Streams.onEphemeral = Q.Event.factory(priv._ephemeralHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
@@ -527,7 +497,7 @@ Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
  * @param {String} messageType type of the message, pass "" for all types
  * @return {Q.Event}
  */
-Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
+Streams.onMessage = Q.Event.factory(priv._messageHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that occurs on a message coming in that hasn't been seen yet.
@@ -546,7 +516,7 @@ Streams.onMessageUnseen = new Q.Event();
  * @param {String} type type of the stream being constructed on the client side
  * @return {Q.Event}
  */
-Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
+Streams.onConstruct = Q.Event.factory(priv._constructHandlers, [""]);
 
 /**
  * Returns Q.Event that occurs when a stream is obtained via Streams.get()
@@ -558,7 +528,7 @@ Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
  * @param {String} type type of the stream being refreshed on the client side
  * @return {Q.Event}
  */
-Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
+Streams.onRefresh = Q.Event.factory(priv._refreshHandlers, [""]);
 
 /**
  * Returns Q.Event that occurs when a stream is first retained by the client
@@ -566,7 +536,7 @@ Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
  * @param {String} type type of the stream being retained on the client side
  * @return {Q.Event}
  */
- Streams.onRetain = Q.Event.factory(_refreshHandlers, [""]);
+ Streams.onRetain = Q.Event.factory(priv._refreshHandlers, [""]);
 
  /**
  * Returns Q.Event that occurs when a stream is finally released on the client
@@ -574,7 +544,7 @@ Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
  * @param {String} type type of the stream being released on the client side
  * @return {Q.Event}
  */
-Streams.onRelease = Q.Event.factory(_refreshHandlers, [""]);
+Streams.onRelease = Q.Event.factory(priv._refreshHandlers, [""]);
 
 /**
  * Returns Q.Event that occurs when an avatar has been returned, possibly
@@ -584,7 +554,7 @@ Streams.onRelease = Q.Event.factory(_refreshHandlers, [""]);
  * @param {String} userId the id of the user whose avatar it is
  * @return {Q.Event}
  */
-Streams.onAvatar = Q.Event.factory(_avatarHandlers, [""]);
+Streams.onAvatar = Q.Event.factory(priv._avatarHandlers, [""]);
 
 /**
  * This event is fired when a dialog is presented to a newly invited user.
@@ -632,9 +602,9 @@ function _connectSockets(refresh) {
 		}
 		for (var i=0, l = n.length; i < l; ++i) {
 			Users.Socket.connect(n[i], function (qs, ns, url) {
-				_connectedNodes[url] = qs;
+				priv._connectedNodes[url] = qs;
 			});
-			_connectedNodes[n[i]] = true;
+			priv._connectedNodes[n[i]] = true;
 		}
 	});
 }
@@ -951,13 +921,13 @@ Streams.refresh = function (callback, options) {
 		return false;
 	}
 	Streams.refresh.lastTime = now;
-	var p = new Q.Pipe(Object.keys(_retainedByStream), callback);
+	var p = new Q.Pipe(Object.keys(priv._retainedByStream), callback);
 	Streams.refresh.beforeRequest.handle(callback, Streams, options);
-	Q.each(_retainedByStream, function (ps) {
+	Q.each(priv._retainedByStream, function (ps) {
 		var parts = ps.split("\t");
 		Stream.refresh(parts[0], parts[1], p.fill(ps), options);
 	});
-	_retain = undefined;
+	priv._retain = undefined;
 	return true;
 };
 
@@ -979,7 +949,7 @@ Streams.refresh.beforeRequest = new Q.Event();
  * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Streams.retainWith = function (key) {
-	_retain = Q.calculateKey(key, _retainedByKey);
+	priv._retain = Q.calculateKey(key, priv._retainedByKey);
 	return Streams;
 };
 
@@ -994,20 +964,20 @@ Streams.retainWith = function (key) {
  */
 Streams.release = function (key) {
 	key = Q.calculateKey(key);
-	if (_retainedByKey[key]) {
-		for (var ps in _retainedByKey) {
-			if (Q.isEmpty(_retainedByStream[ps])) {
+	if (priv._retainedByKey[key]) {
+		for (var ps in priv._retainedByKey) {
+			if (Q.isEmpty(priv._retainedByStream[ps])) {
 				continue;
 			}
 			var parts = ps.split("\t");
 			var publisherId = parts[0];
 			var streamName = parts[1];
-			delete _retainedByStream[ps][key];
-			if (Q.isEmpty(_retainedByStream[ps])) {
+			delete priv._retainedByStream[ps][key];
+			if (Q.isEmpty(priv._retainedByStream[ps])) {
 				Streams.neglect(publisherId, streamName);
-				delete(_retainedByStream[ps]);
-				delete(_retainedStreams[ps]);
-				var stream = _retainedStreams[ps];
+				delete(priv._retainedByStream[ps]);
+				delete(priv._retainedStreams[ps]);
+				var stream = priv._retainedStreams[ps];
 				Q.handle([
 					Stream.onRelease.ifAny(publisherId, ""),
 					Stream.onRelease.ifAny(publisherId, streamName),
@@ -1017,7 +987,7 @@ Streams.release = function (key) {
 			_disconnectStreamNode(publisherId, streamName, ps);
 		}
 	}
-	delete _retainedByKey[key];
+	delete priv._retainedByKey[key];
 };
 
 /**
@@ -1818,7 +1788,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 			}
 		}
 	}, { fields: fields, baseUrl: baseUrl });
-	_retain = undefined;
+	priv._retain = undefined;
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
@@ -2012,13 +1982,13 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 				}
 
 				// call any onConstruct handlers
-				Q.handle(_constructHandlers[f.type], this, []);
-				Q.handle(_constructHandlers[''], this, []);
+				Q.handle(priv._constructHandlers[f.type], this, []);
+				Q.handle(priv._constructHandlers[''], this, []);
 				if (f.publisherId && f.name) {
-					Q.handle(Q.getObject([f.publisherId, f.name], _streamConstructHandlers), this, []);
-					Q.handle(Q.getObject([f.publisherId, ''], _streamConstructHandlers), this, []);
-					Q.handle(Q.getObject(['', f.name], _streamConstructHandlers), this, []);
-					Q.handle(Q.getObject(['', ''], _streamConstructHandlers), this, []);
+					Q.handle(Q.getObject([f.publisherId, f.name], priv._streamConstructHandlers), this, []);
+					Q.handle(Q.getObject([f.publisherId, ''], priv._streamConstructHandlers), this, []);
+					Q.handle(Q.getObject(['', f.name], priv._streamConstructHandlers), this, []);
+					Q.handle(Q.getObject(['', ''], priv._streamConstructHandlers), this, []);
 				}
 			};
 			Q.mixin(streamFunc, Streams.Stream);
@@ -2140,7 +2110,7 @@ Stream.retain = function _Stream_retain (publisherId, streamName, key, callback)
 	var ps = Streams.key(publisherId, streamName);
 	Streams.get(publisherId, streamName, function (err) {
 		if (err) {
-			_retainedStreams[ps] = null;
+			priv._retainedStreams[ps] = null;
 		} else {
 			this.retain(key);
 		}
@@ -2161,19 +2131,19 @@ Stream.retain = function _Stream_retain (publisherId, streamName, key, callback)
  */
 Stream.release = function _Stream_release (publisherId, streamName) {
 	var ps = Streams.key(publisherId, streamName);
-	if (_retainedByStream[ps]) {
-		for (var key in _retainedByStream[ps]) {
-			if (_retainedByKey[key]) {
-				delete _retainedByKey[key][ps];
+	if (priv._retainedByStream[ps]) {
+		for (var key in priv._retainedByStream[ps]) {
+			if (priv._retainedByKey[key]) {
+				delete priv._retainedByKey[key][ps];
 			}
-			if (Q.isEmpty(_retainedByKey[key])) {
-				delete _retainedByKey[key];
+			if (Q.isEmpty(priv._retainedByKey[key])) {
+				delete priv._retainedByKey[key];
 			}
 			_disconnectStreamNode(publisherId, streamName, ps);
 		}
 	}
-	delete _retainedByStream[ps];
-	delete _retainedStreams[ps];
+	delete priv._retainedByStream[ps];
+	delete priv._retainedStreams[ps];
 };
 
 /**
@@ -2198,7 +2168,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  * @return {boolean} Returns false if refresh was canceled because stream was not retained
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
-	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
+	var notRetained = !priv._retainedByStream[Streams.key(publisherId, streamName)];
 	var callbackCalled = false;
 
 	if ((notRetained && !(options && options.evenIfNotRetained))) {
@@ -2236,10 +2206,10 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	Streams.get.force(publisherId, streamName, function (err, stream) {
 		if (!err) {
 			var ps = Streams.key(publisherId, streamName);
-			if (_retainedStreams[ps]) {
+			if (priv._retainedStreams[ps]) {
 				var changed = (o.changed) || {};
-				Stream.update(_retainedStreams[ps], this.fields, changed || {});
-				_retainedStreams[ps] = this;
+				Stream.update(priv._retainedStreams[ps], this.fields, changed || {});
+				priv._retainedStreams[ps] = this;
 			}
 		}
 		if (callback) {
@@ -2280,14 +2250,14 @@ function _disconnectStreamNode(publisherId, streamName, ps) {
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var hadNode = !Q.isEmpty(_retainedNodes[nodeUrl]);
-	delete _retainedNodes[nodeUrl][ps];
-	if (!hadNode || !Q.isEmpty(_retainedNodes[nodeUrl])
-	|| !_connectedNodes[nodeUrl]) {
+	var hadNode = !Q.isEmpty(priv._retainedNodes[nodeUrl]);
+	delete priv._retainedNodes[nodeUrl][ps];
+	if (!hadNode || !Q.isEmpty(priv._retainedNodes[nodeUrl])
+	|| !priv._connectedNodes[nodeUrl]) {
 		return false;
 	}
 	// we can disconnect the node
-	delete(_retainedNodes[nodeUrl]);
+	delete(priv._retainedNodes[nodeUrl]);
 	var socket = Users.Socket.get(nodeUrl);
 	socket && socket.disconnect();
 	return true;
@@ -2363,12 +2333,12 @@ Sp.get = function _Stream_prototype_get (fieldName, usePending) {
 Sp.set = function _Stream_prototype_set (fieldName, value) {
 	var t = this.fields.type;
 	Q.handle(
-		Q.getObject([t, fieldName], _beforeSetHandlers),
+		Q.getObject([t, fieldName], priv._beforeSetHandlers),
 		this,
 		[value]
 	);
 	Q.handle(
-		Q.getObject([t, ''], _beforeSetHandlers),
+		Q.getObject([t, ''], priv._beforeSetHandlers),
 		this,
 		[value]
 	);
@@ -2420,12 +2390,12 @@ Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePen
 Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value) {
 	var t = this.fields.type;
 	Q.handle(
-		Q.getObject([t, attributeName], _beforeSetAttributeHandlers),
+		Q.getObject([t, attributeName], priv._beforeSetAttributeHandlers),
 		this,
 		[value]
 	);
 	Q.handle(
-		Q.getObject([t, ''], _beforeSetAttributeHandlers),
+		Q.getObject([t, ''], priv._beforeSetAttributeHandlers),
 		this,
 		[value]
 	);
@@ -2632,8 +2602,8 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 	var streamName = this.fields.name;
 	var ps = Streams.key(publisherId, streamName);
 	key = Q.calculateKey(key);
-	var wasRetained = !!_retainedStreams[ps];
-	var stream = _retainedStreams[ps] = this;
+	var wasRetained = !!priv._retainedStreams[ps];
+	var stream = priv._retainedStreams[ps] = this;
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
@@ -2649,11 +2619,11 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 				}
 			});
 			// set the node to disconnect after last stream is released
-			Q.setObject([nodeUrl, ps], true, _retainedNodes);	
+			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
 		}
 	}
-	Q.setObject([ps, key], true, _retainedByStream);
-	Q.setObject([key, ps], true, _retainedByKey);
+	Q.setObject([ps, key], true, priv._retainedByStream);
+	Q.setObject([key, ps], true, priv._retainedByKey);
 	if (!wasRetained) {
 		Q.handle([
 			Stream.onRetain.ifAny(publisherId, ""),
@@ -2709,7 +2679,7 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
  * @param {String} [streamName] name of stream which the message is posted to
  * @param {String} [ephemeralType] type of the ephemeral, pass "" for all types
  */
-Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
+Stream.onEphemeral = Q.Event.factory(priv._streamEphemeralHandlers, ["", "", ""]);
 
 /**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
@@ -2724,7 +2694,7 @@ Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
  * @param {String} [streamName] name of stream which the message is posted to
  * @param {String} [messageType] type of the message, or its ordinal, pass "" for all types
  */
-Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
+Stream.onMessage = Q.Event.factory(priv._streamMessageHandlers, ["", "", ""]);
 
 /**
  * Returns Q.Event which occurs when fields of the stream officially changed
@@ -2743,7 +2713,7 @@ Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
  * @param {String} [streamName] name of stream which the message is posted to
  * @param {String} [fieldName]  name of the field to listen for, or "" for all fields
  */
-Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""]);
+Stream.onFieldChanged = Q.Event.factory(priv._streamFieldChangedHandlers, ["", "", ""]);
 
 /**
  * Event factory for validation hooks that run when setting stream fields.
@@ -2753,7 +2723,7 @@ Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""
  * @param {String} streamType type of the stream
  * @param {String} [attributeName] name of the field being set
  */
-Stream.beforeSet = Q.Event.factory(_beforeSetHandlers, ["", ""]);
+Stream.beforeSet = Q.Event.factory(priv._beforeSetHandlers, ["", ""]);
 
 /**
  * Event factory for validation hooks that run when setting stream attributes.
@@ -2763,7 +2733,7 @@ Stream.beforeSet = Q.Event.factory(_beforeSetHandlers, ["", ""]);
  * @param {String} streamType type of the stream
  * @param {String} [attributeName] name of the attribute being set
  */
-Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""]);
+Stream.beforeSetAttribute = Q.Event.factory(priv._beforeSetAttributeHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when attributes of the stream officially updated
@@ -2773,7 +2743,7 @@ Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""
  * @param {String} [streamName] name of stream which the message is posted to, "" for all
  * @param {String} [attributeName] name of the attribute to listen for, or "" for all
  */
-Stream.onAttribute = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
+Stream.onAttribute = Q.Event.factory(priv._streamAttributeHandlers, ["", "", ""]);
 
 /**
  * Alias for onAttribute for backward compatibility
@@ -2783,7 +2753,7 @@ Stream.onAttribute = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
  * @param {String} [streamName] name of stream which the message is posted to
  * @param {String} [attributeName] name of the attribute to listen for
  */
-Stream.onUpdated = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
+Stream.onUpdated = Q.Event.factory(priv._streamAttributeHandlers, ["", "", ""]);
 
 /**
  * Returns Q.Event which occurs when a stream has been closed
@@ -2793,7 +2763,7 @@ Stream.onUpdated = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
+Stream.onClosed = Q.Event.factory(priv._streamClosedHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when another stream has been related to this stream.
@@ -2803,7 +2773,7 @@ Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
+Stream.onRelatedTo = Q.Event.factory(priv._streamRelatedToHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when this stream was related to a category stream.
@@ -2813,7 +2783,7 @@ Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
+Stream.onRelatedFrom = Q.Event.factory(priv._streamRelatedFromHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when another stream has been unrelated to this stream
@@ -2823,7 +2793,7 @@ Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
+Stream.onUnrelatedTo = Q.Event.factory(priv._streamUnrelatedToHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when this stream was unrelated to a category stream
@@ -2833,7 +2803,7 @@ Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onUnrelatedFrom = Q.Event.factory(_streamUnrelatedFromHandlers, ["", ""]);
+Stream.onUnrelatedFrom = Q.Event.factory(priv._streamUnrelatedFromHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when another stream has been related to this stream
@@ -2842,7 +2812,7 @@ Stream.onUnrelatedFrom = Q.Event.factory(_streamUnrelatedFromHandlers, ["", ""])
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onUpdatedRelateTo = Q.Event.factory(_streamUpdatedRelateToHandlers, ["", ""]);
+Stream.onUpdatedRelateTo = Q.Event.factory(priv._streamUpdatedRelateToHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when this stream was related to a category stream
@@ -2851,7 +2821,7 @@ Stream.onUpdatedRelateTo = Q.Event.factory(_streamUpdatedRelateToHandlers, ["", 
  * @param {String} publisherId id of publisher which is publishing this stream
  * @param {String} [streamName] name of this stream
  */
-Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, ["", ""]);
+Stream.onUpdatedRelateFrom = Q.Event.factory(priv._streamUpdatedRelateFromHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs after a stream is constructed on the client side
@@ -2860,7 +2830,7 @@ Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, [
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which is being constructed on the client side
  */
-Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
+Stream.onConstruct = Q.Event.factory(priv._streamConstructHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that you can use update any of your stream representations.
@@ -2872,7 +2842,7 @@ Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
  * @param {String} [streamName] name of stream which is being refreshed
  * @return {Q.Event}
  */
-Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
+Stream.onRefresh = Q.Event.factory(priv._streamRefreshHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that occurs when a stream is first retained by the client
@@ -2881,7 +2851,7 @@ Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
  * @param {String} [streamName] name of stream which is being retained
  * @return {Q.Event}
  */
- Stream.onRetain = Q.Event.factory(_streamRetainHandlers, ["", ""]);
+ Stream.onRetain = Q.Event.factory(priv._streamRetainHandlers, ["", ""]);
 
  /**
  * Returns Q.Event that occurs when a stream is finally released by the client
@@ -2890,7 +2860,7 @@ Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
  * @param {String} [streamName] name of stream which is being retained
  * @return {Q.Event}
  */
-Stream.onRelease = Q.Event.factory(_streamReleaseHandlers, ["", ""]);
+Stream.onRelease = Q.Event.factory(priv._streamReleaseHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
@@ -3735,7 +3705,7 @@ Streams.relate = function _Streams_relate (publisherId, streamName, relationType
 		priv._refreshUnlessSocket(publisherId, streamName);
 		priv._refreshUnlessSocket(fromPublisherId, fromStreamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
-	_retain = undefined;
+	priv._retain = undefined;
 };
 
 /**
@@ -3773,7 +3743,7 @@ Streams.unrelate = function _Stream_prototype_unrelate (publisherId, streamName,
 	Q.req('Streams/related', [slotName], function (err, data) {
 		callback && callback.call(this, err, Q.getObject('slots.result', data) || null);
 	}, { method: 'delete', fields: fields, baseUrl: baseUrl });
-	_retain = undefined;
+	priv._retain = undefined;
 };
 
 /**
@@ -3823,7 +3793,7 @@ Streams.updateRelation = function(
 		var message = Q.getObject('slots.result.message', data);
 		callback && callback.call(this, err, Q.getObject('slots.result', data) || null);
 	}, { method: 'put', fields: fields, baseUrl: baseUrl });
-	_retain = undefined;
+	priv._retain = undefined;
 };
 
 /**
@@ -4165,7 +4135,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	var alreadyCalled = false, handlerKey;
 	var latest = Message.latestOrdinal(publisherId, streamName, o.checkMessageCache);
 	var ps = Streams.key(publisherId, streamName);
-	var wasRetained = _retainedStreams[ps];
+	var wasRetained = priv._retainedStreams[ps];
 	if (!latest && !wasRetained && !o.evenIfNotRetained) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
@@ -4393,10 +4363,10 @@ var MTotal = Streams.Message.Total = {
 			tsc.set([publisherId, streamName, messageType], 0, messageTotal);
 			// TODO: use websockets to do Streams.seen, then call callback
 			Q.handle(callback, MTotal, [null, messageTotal]);
-			_seenHandlers[publisherId] &&
-			_seenHandlers[publisherId][streamName] &&
-			_seenHandlers[publisherId][streamName][messageType] &&
-			Q.handle(_seenHandlers[publisherId][streamName][messageType], MTotal, [t]);
+			priv._seenHandlers[publisherId] &&
+			priv._seenHandlers[publisherId][streamName] &&
+			priv._seenHandlers[publisherId][streamName][messageType] &&
+			Q.handle(priv._seenHandlers[publisherId][streamName][messageType], MTotal, [t]);
 			return messageTotal;
 		}
 		var t = Q.getObject([publisherId, streamName, messageType], _seen);
@@ -4454,7 +4424,7 @@ var MTotal = Streams.Message.Total = {
 	 * @param {String} messageType
 	 * @return {Q.Event}
 	 */
-	onSeen: Q.Event.factory(_seenHandlers, ["", "", ""])
+	onSeen: Q.Event.factory(priv._seenHandlers, ["", "", ""])
 };
 var _seen = {};
 /**
@@ -4630,7 +4600,7 @@ Avatar.get = function _Avatar_get (userId, callback) {
 		}
 		var avatar = data.avatar ? new Avatar(data.avatar) : null;
 		callback && callback.call(avatar, null, avatar);
-		Q.handle(Q.getObject([userId], _avatarHandlers), avatar, [null, avatar]);
+		Q.handle(Q.getObject([userId], priv._avatarHandlers), avatar, [null, avatar]);
 	});
 };
 /**
@@ -5245,7 +5215,7 @@ Streams.showNoticeIfSubscribed = function (options) {
 
 		// if stream retained - don't show notice
 		var ps = Streams.key(publisherId, streamName);
-		if (_retainedStreams[ps]) {
+		if (priv._retainedStreams[ps]) {
 			return;
 		}
 
@@ -5488,17 +5458,17 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			continue;
 		}
 		Q.handle(
-			Q.getObject([publisherId, streamName, k], _streamFieldChangedHandlers),
+			Q.getObject([publisherId, streamName, k], priv._streamFieldChangedHandlers),
 			stream,
 			[fields, k, onlyChangedFields]
 		);
 		Q.handle(
-			Q.getObject([publisherId, '', k], _streamFieldChangedHandlers),
+			Q.getObject([publisherId, '', k], priv._streamFieldChangedHandlers),
 			stream,
 			[fields, k, onlyChangedFields]
 		);
 		Q.handle(
-			Q.getObject(['', streamName, k], _streamFieldChangedHandlers),
+			Q.getObject(['', streamName, k], priv._streamFieldChangedHandlers),
 			stream,
 			[fields, k, onlyChangedFields]
 		);
@@ -5506,17 +5476,17 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	}
 	if (!onlyChangedFields || !Q.isEmpty(updated)) {
 		Q.handle(
-			Q.getObject([publisherId, streamName, ''], _streamFieldChangedHandlers),
+			Q.getObject([publisherId, streamName, ''], priv._streamFieldChangedHandlers),
 			stream,
 			[fields, updated, onlyChangedFields]
 		);
 		Q.handle(
-			Q.getObject([publisherId, '', ''], _streamFieldChangedHandlers),
+			Q.getObject([publisherId, '', ''], priv._streamFieldChangedHandlers),
 			stream,
 			[fields, updated, onlyChangedFields]
 		);
 		Q.handle(
-			Q.getObject(['', streamName, ''], _streamFieldChangedHandlers),
+			Q.getObject(['', streamName, ''], priv._streamFieldChangedHandlers),
 			stream,
 			[fields, updated, onlyChangedFields]
 		);
@@ -5537,7 +5507,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			obj = {};
 			obj[k] = undefined;
 			Q.handle(
-				Q.getObject([publisherId, streamName, k], _streamAttributeHandlers),
+				Q.getObject([publisherId, streamName, k], priv._streamAttributeHandlers),
 				stream,
 				[fields, obj, [k], onlyChangedFields]
 			);
@@ -5554,19 +5524,19 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			obj = {};
 			obj[k] = attributes[k];
 			Q.handle(
-				Q.getObject([publisherId, streamName, k], _streamAttributeHandlers),
+				Q.getObject([publisherId, streamName, k], priv._streamAttributeHandlers),
 				stream,
 				[attributes, k, onlyChangedFields]
 			);
 			updated[k] = attributes[k];
 		}
 		Q.handle(
-			Q.getObject([publisherId, streamName, ''], _streamAttributeHandlers),
+			Q.getObject([publisherId, streamName, ''], priv._streamAttributeHandlers),
 			stream,
 			[attributes, updated, cleared, onlyChangedFields]
 		);
 		Q.handle(
-			Q.getObject([publisherId, '', ''], _streamAttributeHandlers),
+			Q.getObject([publisherId, '', ''], priv._streamAttributeHandlers),
 			stream,
 			[attributes, updated, cleared, onlyChangedFields]
 		);
@@ -5617,8 +5587,8 @@ function prepareStream(stream) {
 }
 
 function _onCalledHandler(args, shared) {
-	shared.retainUnderKey = _retain;
-	_retain = undefined;
+	shared.retainUnderKey = priv._retain;
+	priv._retain = undefined;
 }
 
 function _onResultHandler(subject, params, args, shared, original) {
@@ -5655,7 +5625,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 					var streamName = Q.getObject('subject.fields.name', item);
 					if (publisherId && streamName) {
 						var ps = Streams.key(publisherId, streamName);
-						if (_retainedByStream[ps]) {
+						if (priv._retainedByStream[ps]) {
 							return false; // don't evict retained streams from cache
 						}
 					}
@@ -6162,23 +6132,23 @@ Q.onInit.add(function _Streams_onInit() {
 	});
 	
 	Users.Socket.onEvent('Streams/ephemeral').set(function (ephemeral, extras) {
-		var event = Q.getObject([extras.streamType, ephemeral.type], _ephemeralHandlers);
+		var event = Q.getObject([extras.streamType, ephemeral.type], priv._ephemeralHandlers);
 		var params = [ephemeral, extras];
 		Q.handle(event, Streams, params);
 		Q.each([ephemeral.publisherId, ''], function (i, publisherId) {
 			Q.each([ephemeral.streamName, ''], function (ordinal, streamName) {
 				Q.handle(
-					Q.getObject([publisherId, streamName, ordinal], _streamEphemeralHandlers),
+					Q.getObject([publisherId, streamName, ordinal], priv._streamEphemeralHandlers),
 					Streams,
 					params
 				);
 				Q.handle(
-					Q.getObject([publisherId, streamName, ephemeral.type], _streamEphemeralHandlers),
+					Q.getObject([publisherId, streamName, ephemeral.type], priv._streamEphemeralHandlers),
 					Streams,
 					params
 				);
 				Q.handle(
-					Q.getObject([publisherId, streamName, ''], _streamEphemeralHandlers),
+					Q.getObject([publisherId, streamName, ''], priv._streamEphemeralHandlers),
 					Streams,
 					params
 				);
@@ -6296,39 +6266,39 @@ Q.onInit.add(function _Streams_onInit() {
 				case 'Streams/relatedFrom':
 					_updateRelatedCache(msg, instructions);
 					_updateRelatedTotalsCache(msg, instructions, 'From', 1);
-					_relationHandlers(_streamRelatedFromHandlers, msg, instructions);
+					_relationHandlers(priv._streamRelatedFromHandlers, msg, instructions);
 					break;
 				case 'Streams/relatedTo':
 					_updateRelatedCache(msg, instructions);
 					_updateRelatedTotalsCache(msg, instructions, 'To', 1);
-					_relationHandlers(_streamRelatedToHandlers, msg, instructions);
+					_relationHandlers(priv._streamRelatedToHandlers, msg, instructions);
 					break;
 				case 'Streams/unrelatedFrom':
 					_updateRelatedCache(msg, instructions);
 					_updateRelatedTotalsCache(msg, instructions, 'From', -1);
-					_relationHandlers(_streamUnrelatedFromHandlers, msg, instructions);
+					_relationHandlers(priv._streamUnrelatedFromHandlers, msg, instructions);
 					break;
 				case 'Streams/unrelatedTo':
 					_updateRelatedCache(msg, instructions);
 					_updateRelatedTotalsCache(msg, instructions, 'To', -1);
-					_relationHandlers(_streamUnrelatedToHandlers, msg, instructions);
+					_relationHandlers(priv._streamUnrelatedToHandlers, msg, instructions);
 					break;
 				case 'Streams/updatedRelateFrom':
 					_updateRelatedCache(msg, instructions);
-					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, instructions);
+					_relationHandlers(priv._streamUpdatedRelateFromHandlers, msg, instructions);
 					break;
 				case 'Streams/updatedRelateTo':
 					_updateRelatedCache(msg, instructions);
-					_relationHandlers(_streamUpdatedRelateToHandlers, msg, instructions);
+					_relationHandlers(priv._streamUpdatedRelateToHandlers, msg, instructions);
 					break;
 				case 'Streams/closed':
 					_update(msg.publisherId, msg.streamName, instructions, null);
 					var Qh = Q.handle;
 					var Qgo = Q.getObject;
-					Qh(Qgo([msg.publisherId, msg.streamName], _streamClosedHandlers), [instructions]);
-					Qh(Qgo([msg.publisherId, ''], _streamClosedHandlers), [instructions]);
-					Qh(Qgo(['', msg.streamName], _streamClosedHandlers), [instructions]);
-					Qh(Qgo(['', ''], _streamClosedHandlers), [instructions]);
+					Qh(Qgo([msg.publisherId, msg.streamName], priv._streamClosedHandlers), [instructions]);
+					Qh(Qgo([msg.publisherId, ''], priv._streamClosedHandlers), [instructions]);
+					Qh(Qgo(['', msg.streamName], priv._streamClosedHandlers), [instructions]);
+					Qh(Qgo(['', ''], priv._streamClosedHandlers), [instructions]);
 					break;
 				default:
 					break;
@@ -6383,24 +6353,24 @@ Q.onInit.add(function _Streams_onInit() {
 	}, 'Streams');
 	
 	function _handlers(streamType, msg, params) {
-		Q.handle(Q.getObject(['', ''], _messageHandlers), Streams, params);
-		Q.handle(Q.getObject([streamType, msg.type], _messageHandlers), Streams, params);
-		Q.handle(Q.getObject(['', msg.type], _messageHandlers), Streams, params);
-		Q.handle(Q.getObject([streamType, ''], _messageHandlers), Streams, params);
+		Q.handle(Q.getObject(['', ''], priv._messageHandlers), Streams, params);
+		Q.handle(Q.getObject([streamType, msg.type], priv._messageHandlers), Streams, params);
+		Q.handle(Q.getObject(['', msg.type], priv._messageHandlers), Streams, params);
+		Q.handle(Q.getObject([streamType, ''], priv._messageHandlers), Streams, params);
 		Q.each([msg.publisherId, ''], function (i, publisherId) {
 			Q.each([msg.streamName, ''], function (ordinal, streamName) {
 				Q.handle(
-					Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
+					Q.getObject([publisherId, streamName, ordinal], priv._streamMessageHandlers),
 					Streams,
 					params
 				);
 				Q.handle(
-					Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
+					Q.getObject([publisherId, streamName, msg.type], priv._streamMessageHandlers),
 					Streams,
 					params
 				);
 				Q.handle(
-					Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
+					Q.getObject([publisherId, streamName, ''], priv._streamMessageHandlers),
 					Streams,
 					params
 				);
@@ -6586,10 +6556,10 @@ function _clearCaches() {
 	Participant.get.cache.clear();
 	Avatar.get.cache.clear();
 	MTotal.seen.cache.clear();
-	_retainedByKey = {};
-	_retainedByStream = {};
-	_retainedStreams = {};
-	_retainedNodes = {};
+	priv._retainedByKey = {};
+	priv._retainedByStream = {};
+	priv._retainedStreams = {};
+	priv._retainedNodes = {};
 }
 
 function _scheduleUpdate() {
