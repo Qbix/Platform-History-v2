@@ -6,7 +6,7 @@ Q.exports(function(){
      * @param {String} currency Currency in ISO 4217 (USD, EUR,...)
      * @param {Function} callback
      */
-    function getSymbol(currency, callback) {
+    return function Assets_Currencies_getSymbol(currency, callback) {
         Q.Assets.Currencies.load(function (err, symbols, names) {
             if (err) {
                 return;
@@ -14,5 +14,4 @@ Q.exports(function(){
             Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
         });
     }
-    return getSymbol;
 })

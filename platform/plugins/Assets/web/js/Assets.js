@@ -118,9 +118,9 @@
 		 * @class Assets.Currencies
 		 */
 		Currencies: Q.Method.define({
-            load: Q.Method.stub,
-			getSymbol: Q.Method.stub,
-			balanceOf: Q.Method.stub,
+            load: new Q.Method(),
+			getSymbol: new Q.Method(),
+			balanceOf: new Q.Method(),
 			Web3: {
 				/**
 				 * @method getTokens
@@ -164,7 +164,7 @@
 						throw new Q.Exception("Assets.Currencies.Web3.getToken: token symbol or address required");
 					}
 					var tokens = Assets.Currencies.Web3.getTokens(chainId);
-					for (tokenSymbol in tokens) {
+					for (var tokenSymbol in tokens) {
 						var tokenInfo = tokens[tokenSymbol];
 						if (tokenSymbol === tokenSymbolOrAddress
 						|| tokenInfo[chainId] === tokenSymbolOrAddress) {
@@ -323,7 +323,6 @@
 				return infoConfigAdjusted;
 			}
 		}, '{{Assets}}/js/methods/Assets/Funds'),
-		
 		Web3: Q.Method.define({
 			constants: {
 				zeroAddress: '0x0000000000000000000000000000000000000000'

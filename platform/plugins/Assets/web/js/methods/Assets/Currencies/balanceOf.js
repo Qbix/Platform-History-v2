@@ -8,7 +8,7 @@ Q.exports(function(){
     * @param {object} [options] - some options pass to getContract method
     * @param {string} [options.tokenAddress] - filter tokens with this contract address
     */
-    function balanceOf(walletAddress, chainId, callback, options) {
+    return function Assets_Currencies_balanceOf(walletAddress, chainId, callback, options) {
         Q.req("Assets/balances", "balance", function (err, response) {
             if (err) {
                 return;
@@ -24,5 +24,5 @@ Q.exports(function(){
             }
         });
     }
-    return balanceOf;
+
 });
