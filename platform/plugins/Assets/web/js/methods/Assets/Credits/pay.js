@@ -14,7 +14,7 @@ Q.exports(function(){
     *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
     *  @param {function} [options.onFailure] Callback to run when payment failed.
     */
-    function pay(options) {
+    return function pay(options) {
         var stream = options.toStream;
         if (Q.Streams.isStream(stream)) {
             options.toStream = {
@@ -76,6 +76,4 @@ Q.exports(function(){
             }
         });
     }
-    
-    return pay;
 })

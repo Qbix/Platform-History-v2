@@ -10,7 +10,7 @@ Q.exports(function(){
     *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
     *  @param {function} [options.onFailure] Callback to run when payment failed.
     */
-    function buy(options) {
+    return function buy(options) {
         options = Q.extend({
             amount: 100,
             currency: 'USD',
@@ -100,6 +100,4 @@ Q.exports(function(){
             }
         });
     }
-    
-    return buy;
 })

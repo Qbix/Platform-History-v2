@@ -18,10 +18,9 @@
 		 */
         
 		Credits: Q.Method.define({
-			
 			userStream: new Q.Method(),
-			buy: Q.Method.stub,
-			pay: Q.Method.stub,
+			buy: new Q.Method(),
+			pay: new Q.Method(),
 			/**
 			 * Convert from currency to credits
 			 * @method convertToCredits
@@ -30,7 +29,7 @@
 			 *  @param {String} currency
 			 */
 			convertToCredits: function (amount, currency) {
-				var exchange = Q.getObject(["exchange", currency], Assets.Credits);
+				var exchange = Q.getObject(["exchange", currency], Q.Assets.Credits);
 
 				if (!exchange) {
 					return null;
