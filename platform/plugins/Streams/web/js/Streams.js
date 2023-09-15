@@ -407,7 +407,6 @@ Streams.iconUrl = function(icon, size) {
 		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
-var _socket = null;
 var _messageHandlers = {};
 var _ephemeralHandlers = {};
 var _seenHandlers = {};
@@ -437,6 +436,38 @@ var _retainedByStream = {};
 var _retainedStreams = {};
 var _retainedNodes = {};
 var _connectedNodes = {};
+
+var priv = {
+    _messageHandlers: {},
+    _ephemeralHandlers: {},
+    _seenHandlers: {},
+    _avatarHandlers: {},
+    _constructHandlers: {},
+    _refreshHandlers: {},
+    _beforeSetHandlers: {},
+    _beforeSetAttributeHandlers: {},
+    _streamMessageHandlers: {},
+    _streamEphemeralHandlers: {},
+    _streamFieldChangedHandlers: {},
+    _streamAttributeHandlers: {},
+    _streamClosedHandlers: {},
+    _streamRelatedFromHandlers: {},
+    _streamRelatedToHandlers: {},
+    _streamUnrelatedFromHandlers: {},
+    _streamUnrelatedToHandlers: {},
+    _streamUpdatedRelateFromHandlers: {},
+    _streamUpdatedRelateToHandlers: {},
+    _streamConstructHandlers: {},
+    _streamRefreshHandlers: {},
+    _streamRetainHandlers: {},
+    _streamReleaseHandlers: {},
+    _retain: undefined,
+    _retainedByKey: {},
+    _retainedByStream: {},
+    _retainedStreams: {},
+    _retainedNodes: {},
+    _connectedNodes: {}
+}
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
@@ -747,7 +778,8 @@ Streams.arePublic = function _Streams_Stream_isPublic (
 	}
 };
 
-var _publicStreams = Streams.arePublic.collection = {};
+//var _publicStreams = Streams.arePublic.collection = {};
+priv._publicStreams = Streams.arePublic.collection = {};
 
 /**
  * Streams batch getter.
@@ -771,121 +803,18 @@ var _publicStreams = Streams.arePublic.collection = {};
  *	if any fields named in this array are == null
  *   @param {Mixed} [extra."$Module_$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  */
-Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
-	var args = arguments;
-	var f;
-	var url = Q.action('Streams/stream?') +
-		Q.queryString({"publisherId": publisherId, "name": streamName});
-	var slotNames = ['stream'];
-	if (!publisherId) {
-		throw new Q.Error("Streams.get: publisherId is empty");
-	}
-	if (!streamName) {
-		throw new Q.Error("Streams.get: streamName is empty");
-	}
-	if (Q.getObject([publisherId, streamName], _publicStreams)) {
-		extra = extra || {};
-		extra.public = 1;
-	}
-	if (extra) {
-		if (extra.participants) {
-			url += '&'+$.param({"participants": extra.participants});
-			slotNames.push('participants');
-		}
-		if (extra.messages) {
-			url += '&'+$.param({messages: extra.messages});
-			slotNames.push('messages');
-		}
-		if (f = extra.fields) {
-			for (var i=0, l=f.length; i<l; ++i) {
-				var cached = Streams.get.cache.get([publisherId, streamName]);
-				if (cached && cached.subject.fields[f[i]] == null) {
-					Streams.get.forget(publisherId, streamName, null, extra);
-					break;
-				}
-			}
-		}
-	}
-	var func = Streams.batchFunction(Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	}));
-	func.call(this, 'stream', slotNames, publisherId, streamName,
-		function Streams_get_response_handler (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (!msg && (!data || !data.stream)) {
-				msg = "Streams.get: data.stream is missing";
-			}
-			if (msg) {
-				var forget = false;
-				if (err && err[0] && err[0].classname === "Q_Exception_MissingRow") {
-					if (!extra || !extra.cacheIfMissing) {
-						forget = true;
-					}
-				} else {
-					forget = true;
-				}
-				if (forget && Streams.get.forget) {
-					Streams.get.forget.apply(this, args);
-					setTimeout(function () {
-						Streams.get.forget.apply(this, args);
-					}, 0);
-				}
-				Streams.onError.handle.call(this, err, data);
-				Streams.get.onError.handle.call(this, err, data);
-				return callback && callback.call(this, err, data);
-			}
-			if (Q.isEmpty(data.stream)) {
-				var msg = "Stream " + publisherId + " " + streamName + " is not available";
-				var err = msg;
-				Streams.onError.handle(err, [err, data, null]);
-				return callback && callback.call(null, err, null, extra);
-			}
-			Stream.construct(
-				data.stream,
-				{
-					messages: data.messages,
-					participants: data.participants
-				},
-				function Streams_get_construct_handler(err, stream, extra) {
-					var msg;
-					if (msg = Q.firstErrorMessage(err)) {
-						Streams.onError.handle(msg, [err, data, stream]);
-					}
-					var ret = callback && callback.call(stream, err, stream, extra);
-					if (ret === false) {
-						return false;
-					}
-					if (msg) return;
-
-					// The onRefresh handlers occur after the other callbacks
-					var f = stream.fields;
-					var handler = Q.getObject([f.type], _refreshHandlers);
-					Q.handle(handler, stream, []);
-					handler = Q.getObject(
-						[f.publisherId, f.name],
-						_streamRefreshHandlers
-					);
-					Q.handle(handler, stream, []);
-					Streams.get.onStream.handle.call(stream);
-					return ret;
-				},
-				true // so the callback will already have the cache set
-			);
-		}, extra);
-	_retain = undefined;
-};
-
-/**
- * Occurs when Streams.get encounters an error loading a stream from the server
- * @event get.onError
- */
-Streams.get.onError = new Q.Event();
-/**
- * Occurs when Streams.get constructs a stream loaded from the server
- * @event get.onStream
- */
-Streams.get.onStream = new Q.Event();
+Streams.get = new Q.Method({
+    /**
+    * Occurs when Streams.get encounters an error loading a stream from the server
+    * @event get.onError
+    */
+    onError: new Q.Event(),
+    /**
+    * Occurs when Streams.get constructs a stream loaded from the server
+    * @event get.onStream
+    */
+    onStream: new Q.Event()
+});
 
 /**
  * @static
@@ -6833,4 +6762,13 @@ _scheduleUpdate.delay = 5000;
 
 Q.Streams.cache = Q.Streams.cache || {};
 
+    // define methods for Users to replace method stubs
+    Q.Method.define(
+        Streams, 
+        '{{Streams}}/js/methods/Streams', 
+        function() {
+            return [priv];
+        }
+    );
+    
 })(Q, jQuery);
