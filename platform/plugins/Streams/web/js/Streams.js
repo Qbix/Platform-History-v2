@@ -863,14 +863,6 @@ Streams.create = new Q.Method({
     */
     onError: new Q.Event()
 });
-function _toolInDialog(toolName, toolParams, options, classContainer) {
-	Q.Dialogs.push(Q.extend(options, {
-		url: Q.action(toolName, toolParams),
-		removeOnClose: true,
-		className: (classContainer || ''),
-		apply: true
-	}));
-}
 
 /**
  * Operates with dialogs.
