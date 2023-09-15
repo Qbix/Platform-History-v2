@@ -283,12 +283,11 @@
         function() {
             return [priv];
         }),
-        
 		Funds: Q.Method.define({
-			getFactory: Q.Method.stub,
-			getAll: Q.Method.stub,
-			getFundConfig: Q.Method.stub,
-			getWhitelisted: Q.Method.stub,
+			getFactory: new Q.Method(),
+			getAll: new Q.Method(),
+			getFundConfig: new Q.Method(),
+			getWhitelisted: new Q.Method(),
 			adjustFundConfig: function(infoConfig, options) {
 				//make output data an userfriendly
 				var infoConfigAdjusted = Object.assign({}, infoConfig);
