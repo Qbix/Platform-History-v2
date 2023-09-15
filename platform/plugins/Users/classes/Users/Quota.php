@@ -126,7 +126,7 @@ class Users_Quota extends Base_Users_Quota
 							'problem' => "must be an integer"
 						));
 					}
-					if (in_array($k, $privileges)) {
+					if (array_key_exists($k, $privileges)) {
 						$max = max($max, $v);
 					}
 				}
