@@ -333,7 +333,7 @@
 			}
 		}, '{{Assets}}/js/methods/Assets/Funds'),
 		
-		Web3: {
+		Web3: Q.Method.define({
 			constants: {
 				zeroAddress: '0x0000000000000000000000000000000000000000'
 			},
@@ -347,25 +347,10 @@
 			 * @param {String} [image] A string url of the token logo
 			 * @return {String}
 			 */
-			addAsset: {
-				metamask: function (asset, symbol, decimals, image) {
-					return ethereum.request({
-						method: 'wallet_watchAsset',
-						params: {
-							type: 'ERC20',
-							options: {
-								address: asset,
-								symbol: symbol,
-								decimals: decimals,
-								image: image
-							}
-						}
-					});
-				},
-				trustwallet: function (asset) {
-					window.open(Assets.Web3.Links.addAsset.trustwallet('c60_t'+asset));
-				}
-			},
+			addAsset: Q.Method.define({
+				metamask: new Q.Method(),
+				trustwallet: new Q.Method()
+			}, '{{Assets}}/js/methods/Assets/Web3/addAsset'),
 
 			Links: {
 				/**
@@ -421,7 +406,7 @@
 						});
 					}}
 			}
-		}
+		}, '{{Assets}}/js/methods/Assets/Web3'),
 	};
     
     
