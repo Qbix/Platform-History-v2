@@ -264,16 +264,26 @@
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
-		CommunityCoins: Q.Method.define({
-			Pools: Q.Method.define({
-				Factory: Q.Method.define({
-					Get: Q.Method.stub
-				}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory'),
-				getAll: Q.Method.stub,
-				getAllExtended: Q.Method.stub,
-                getERC20TokenInfo: Q.Method.stub
-			}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools'),
-		}, '{{Assets}}/js/methods/Assets/CommunityCoins'),
+        CommunityCoins: Q.Method.define({
+            Pools: Q.Method.define({
+                Factory: Q.Method.define({
+                    Get: new Q.Method()
+                }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory', 
+                function() {
+                    return [priv];
+                }),
+                getAll: new Q.Method(),
+                getAllExtended: new Q.Method(),
+                getERC20TokenInfo: new Q.Method()
+            }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools', 
+            function() {
+                return [priv];
+            })
+        }, '{{Assets}}/js/methods/Assets/CommunityCoins', 
+        function() {
+            return [priv];
+        }),
+        
 		Funds: Q.Method.define({
 			getFactory: Q.Method.stub,
 			getAll: Q.Method.stub,
@@ -415,10 +425,14 @@
 		}
 	};
     
+    
+    
     var priv = {};
 //    var priv = Q.Method.define({
 //    }, '{{Assets}}/js/methods/Assets/priv');
 //        
+//        
+    
     // define methods for Users to replace method stubs
     Q.Method.define(
         Assets, 
