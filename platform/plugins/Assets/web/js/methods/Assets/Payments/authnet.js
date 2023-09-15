@@ -1,4 +1,4 @@
-Q.exports(function(_redirectToBrowserTab){
+Q.exports(function(priv){
     /**
     * Show an authnet dialog where the user can choose their payment profile,
     * then show a confirmation box to make a payment, and then charge that
@@ -14,7 +14,7 @@ Q.exports(function(_redirectToBrowserTab){
     *  @param {String} [options.description] A short name or description of the product or service being purchased.
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
-    function authnet(options, callback) {
+    return function authnet(options, callback) {
         Q.Assets.Payments.checkLoaded();
 
         var o = Q.extend({},
@@ -67,13 +67,4 @@ Q.exports(function(_redirectToBrowserTab){
             content: html
         }));
     }
-    
-    
-	authnet.options = {
-		name: Q.Users.communityName,
-		description: 'a product or service'
-	};
-	
-    
-    return authnet
 })

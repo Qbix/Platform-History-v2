@@ -7,6 +7,9 @@
 
 	var Users = Q.Users;
 	var Streams = Q.Streams;
+    
+    var priv = {};
+    
 	var Assets = Q.Assets = Q.plugins.Assets = {
 
 		/**
@@ -70,10 +73,21 @@
 
 				throw new Q.Error("In order to use Assets.Payments methods need to call method Assets.Payments.load()");
 			},
-            authnet: Q.Method.stub,
-            stripe: Q.Method.stub,
-            load: Q.Method.stub,
-            standardStripe: Q.Method.stub,
+            authnet: new Q.Method({
+                options: {
+                    name: Q.Users.communityName,
+                    description: 'a product or service'
+                }
+            }),
+            stripe: new Q.Method({
+                options: {
+                    description: 'a product or service',
+                    javascript: 'https://checkout.stripe.com/checkout.js',
+                    name: Q.Users.communityName
+                }
+            }),
+            load: new Q.Method(),
+            standardStripe: new Q.Method(),
 			/**
 			 * Show message with payment status
 			 * @method stripePaymentResult
@@ -84,21 +98,21 @@
 				var message = "";
 				switch (paymentIntent.status) {
 					case "succeeded":
-						message = Assets.texts.payment.PaymentSucceeded;
+						message = Q.Assets.texts.payment.PaymentSucceeded;
 						break;
 					case "processing":
-						message = Assets.texts.payment.PaymentProcessing;
+						message = Q.Assets.texts.payment.PaymentProcessing;
 						break;
 					case "requires_payment_method":
-						message = Assets.texts.payment.FailTryAgain;
+						message = Q.Assets.texts.payment.FailTryAgain;
 						break;
 					default:
-						message = Assets.texts.payment.SomethingWrong;
+						message = Q.Assets.texts.payment.SomethingWrong;
 						break;
 				}
 
 				Q.Dialogs.push({
-					title: Assets.texts.payment.PaymentStatus,
+					title: Q.Assets.texts.payment.PaymentStatus,
 					className: "Assets_Payment_status",
 					content: message,
 					onActivate: function ($dialog) {
@@ -109,7 +123,7 @@
 		}, 
             '{{Assets}}/js/methods/Assets/Payments',
             function(){
-                return [_redirectToBrowserTab]
+                return [priv];
             }
         ),
 
@@ -399,13 +413,38 @@
 		}, '{{Assets}}/js/methods/Assets/Web3'),
 	};
     
-    
-    
-    var priv = {};
+
 //    var priv = Q.Method.define({
 //    }, '{{Assets}}/js/methods/Assets/priv');
 //        
 //        
+/**
+     * method will redirect if Cordova plugin
+     * TODO: mb move it to '{{Assets}}/js/methods/Assets/Payments/stripe.js',
+     * @param {type} options
+     * @returns {undefined}
+     */
+	priv._redirectToBrowserTab = function _redirectToBrowserTab(options) {
+		var url = new URL(document.location.href);
+		url.searchParams.set('browsertab', 'yes');
+		url.searchParams.set('scheme', Q.info.scheme);
+		url.searchParams.set('paymentOptions', JSON.stringify({
+			amount: options.amount,
+			email: options.email,
+			userId: Q.Users.loggedInUserId(),
+			currency: options.currency,
+			description: options.description,
+			metadata: options.metadata
+		}));
+		cordova.plugins.browsertabs.openUrl(url.toString(), {
+			scheme: Q.info.scheme
+		}, function(successResp) {
+			Q.handle(options.onSuccess, null, [successResp]);
+		}, function(err) {
+			Q.handle(options.onFailure, null, [err]);
+		});
+	}
+
     
     // define methods for Users to replace method stubs
     Q.Method.define(
@@ -604,33 +643,7 @@
 		return err;
 	}
     
-    /**
-     * method will redirect if Cordova plugin
-     * TODO: mb move it to '{{Assets}}/js/methods/Assets/Payments/stripe.js',
-     * @param {type} options
-     * @returns {undefined}
-     */
-	function _redirectToBrowserTab(options) {
-		var url = new URL(document.location.href);
-		url.searchParams.set('browsertab', 'yes');
-		url.searchParams.set('scheme', Q.info.scheme);
-		url.searchParams.set('paymentOptions', JSON.stringify({
-			amount: options.amount,
-			email: options.email,
-			userId: Q.Users.loggedInUserId(),
-			currency: options.currency,
-			description: options.description,
-			metadata: options.metadata
-		}));
-		cordova.plugins.browsertabs.openUrl(url.toString(), {
-			scheme: Q.info.scheme
-		}, function(successResp) {
-			Q.handle(options.onSuccess, null, [successResp]);
-		}, function(err) {
-			Q.handle(options.onFailure, null, [err]);
-		});
-	}
-
+    
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
 		window.onload = function() {
 			var params = new URLSearchParams(document.location.href);
