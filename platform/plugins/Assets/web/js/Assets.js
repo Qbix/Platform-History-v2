@@ -464,19 +464,6 @@
         }
     );
     
-//     Assets   Q.Method({
-//            options: {...}
-//        })
-//        Users.setIdentifier = new Q.Method({
-//		options: {
-//			onCancel: null,
-//			onSuccess: null, // gets passed session
-//			identifierType: 'email,mobile',
-//			dialogContainer: 'body'
-//		}
-//	});
-
-
 	Q.Text.addFor(
 		['Q.Tool.define', 'Q.Template.set'],
 		'Assets/', ["Assets/content"]
@@ -651,7 +638,6 @@
 		console.warn(err);
 		return err;
 	}
-    
     
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
 		window.onload = function() {
