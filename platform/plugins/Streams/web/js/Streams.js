@@ -9,6 +9,10 @@
 (function(Q, $) {
 
 var Users = Q.Users;
+
+/**
+ * @class Streams
+ */
 var Streams = Q.Streams = Q.plugins.Streams = {
 
 	cache: {
@@ -1065,6 +1069,437 @@ Streams.relate = new Q.Method();
 Streams.unrelate = new Q.Method();
 
 Streams.updateRelation = new Q.Method();
+/**
+ * Class with functionality to operate with Metrics
+ * @class Streams.Metrics
+ * @constructor
+ * @param {Object} params JSON object with necessary params
+ * @param {number} params.period Seconds period to send data to server
+ * @param {number} params.predefined Seconds period to send data to server
+ * @param {boolean|Object} params.useFaces If true, used Users.Faces with debounce=30. If false - don't use Users.Faces.
+ * If object - use this object as params for Users.Faces.
+ */
+Streams.Metrics = function (params) {
+	var that = this;
+
+	this.publisherId = Q.getObject("publisherId", params) || null;
+	this.streamName = Q.getObject("streamName", params) || null;
+
+	if (!this.publisherId) {
+		console.warn("Streams.Metrics: publisherId undefined");
+	}
+
+	if (!this.streamName) {
+		console.warn("Streams.Metrics: streamName undefined");
+	}
+
+	// set useFaces option
+	this.useFaces = Q.getObject("useFaces", params);
+	if (this.useFaces === true) {
+		this.useFaces = {
+			debounce: 30
+		};
+	}
+
+	/**
+	 * Seconds period to send data to server
+	 */
+	this.period = (Q.getObject("period", params) || 60) * 1000;
+
+	// min period to compare with prev value to decide if this continue of watching or seeked to new position
+	this.minPeriod = Q.getObject("minPeriod", params) || 2;
+
+	/**
+	 * Data saved before send to server
+	 */
+	this.predefined = Q.getObject("predefined", params) || [];
+
+	/**
+	 * Save time as metrics locally before save
+	 * @method add
+	 * @param {number} value
+	 */
+	this.add = function (value) {
+
+		// check active
+		if (Q.isDocumentHidden()) {
+			return;
+		}
+
+		// check faces
+		if (!that.face) {
+			return;
+		}
+
+		// iterate all periods and try to fing the period which continue value is
+		var sorted = false;
+		Q.each(that.predefined, function (i, period) {
+			if (sorted) {
+				return;
+			}
+
+			var start = period[0];
+			var end = period[1] || start;
+
+			if (value >= start && value <= end) {
+				sorted = true;
+			}
+			else if (value > end && value < end + that.minPeriod) {
+				period[1] = value;
+				sorted = true;
+			}
+			else if (value < start && value > start - that.minPeriod) {
+				period[0] = value;
+				sorted = true;
+			}
+		});
+
+		// if suitable period not found, create new priod
+		if (!sorted) {
+			that.predefined.push([value]);
+		}
+	};
+
+
+	/**
+	 * Stop timer interval
+	 * @method stop
+	 */
+	this.stop = function () {
+		that.timerId && clearInterval(that.timerId);
+		that.faces && that.faces.stop();
+	};
+
+	if (this.useFaces) {
+		Q.ensure('Q.Users.Faces', function () {
+			that.faces = new Q.Users.Faces(that.useFaces);
+			that.faces.start(function () {
+				that.faces.onEnter.add(function () {
+					that.face = true;
+				});
+				that.faces.onLeave.add(function () {
+					that.face = false;
+				});
+			});
+		});
+	}
+
+	/**
+	 * Start timer interval
+	 */
+	this.timerId = setInterval(function () {
+		if (!that.publisherId || !that.streamName) {
+			return;
+		}
+
+		if (Q.isEmpty(that.predefined)) {
+			return;
+		}
+
+		Q.req("Streams/metrics", [], function (err, response) {
+			var msg = Q.firstErrorMessage(err, response && response.errors);
+			if (msg) {
+				return console.warn(msg);
+			}
+
+			Q.handle(params.callback);
+		}, {
+			method: "post",
+			fields: {
+				publisherId: that.publisherId,
+				streamName: that.streamName,
+				metrics: that.predefined,
+				minPeriod: that.minPeriod
+			}
+		});
+
+		that.predefined = [];
+	}, this.period);
+};
+
+/**
+ * Returns the type name to display from a stream type.
+ * If none is set, try to figure out a displayable title from a stream's type.
+ * It expects all relevant text files to have already been loaded override anything in Q.text.Streams
+ * @method displayType
+ * @param {String} type
+ * @param {Object} [options] Options to use with Q.Text.get, and also
+ * @param {string} [options.plural=false] Whether to display plural, when available
+ * @return {String} the displayType
+ */
+Streams.displayType = function _Streams_displayType(type, options) {
+	var parts = type.split('/');
+	var module = parts.shift();
+	var ret = parts.pop();
+	options = options || {};
+	var field = 'displayType' + (options.plural ? 'Plural' : '');
+	var result = Q.getObject(['types', type, field], Q.text.Streams);
+	if (options.plural) {
+		result = Q.getObject(['types', type, 'displayTypePlural'], Q.text.Streams) || result;
+	}
+	return result || ret.toCapitalized();
+};
+
+/**
+ * Use this to check whether variable is a Q.Streams.Stream object
+ * @static
+ * @method isStream
+ * @param {mixed} value
+ * @return {boolean}
+ */
+Streams.isStream = function (value) {
+	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Stream';
+};
+
+/**
+ * Use this to check whether variable is a Q.Streams.Message object
+ * @static
+ * @method isMessage
+ * @param {mixed} value
+ * @return {boolean}
+ */
+Streams.isMessage = function (value) {
+	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Message';
+};
+
+/**
+ * Converts the publisherId and the first 24 characters of
+ * an ID that is typically used as the final segment in a streamName
+ * to a hex string starting with "0x" representing a uint256 type.
+ * Both inputs are padded by 0's on the right in the hex string.
+ * For example Streams::toHexString("abc", "def") returns
+ * 0x6162630000000000646566000000000000000000000000000000000000000000
+ * while Streams::toHexString("abc/123", "def") returns
+ * 0x616263000000007b646566000000000000000000000000000000000000000000
+ * @static
+ * @method toHexString
+ * @param {string} publisherId - Takes the first 8 ASCII characters
+ * @param {string|integer} [streamId] - Takes the first 24 ASCII characters, or an unsigned integer up to PHP_INT_MAX
+ *  If the $streamId contains a slash, then the first part is interpreted as an unsigned integer up to 255,
+ *  and determines the 15th and 16th hexit in the string. This is typically used for "seriesId" under a publisher.
+ * @param {boolean} [isNotNumeric] - Set to true to encode $streamId as an ASCII string, even if it is numeric
+ * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 24 hexits.
+ */
+Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
+	streamId = streamId || '';
+	var parts = publisherId.split("/");
+	var seriesId = null;
+	var hexFirstPart = publisherId.substring(0, 8).asc2hex().padEnd(16, 0);
+	if (parts.length > 1) {
+		seriesId = parseInt(parts[1]);
+		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
+			throw new Q.Exception('seriesId must be in range integer 0-255');
+		}
+		hexFirstPart = hexFirstPart.substring(0, 14) + seriesId.toString(16).padStart(2, '0');
+	}
+
+	var pad, streamHex;
+	if (isNotNumeric || isNaN(streamId)) {
+		streamHex = streamId.substring(0, 24).asc2hex();
+		pad = "padEnd";
+	} else {
+		streamHex = streamId.toString(16)
+		pad = "padStart";
+	}
+	var hexSecondPart = streamHex[pad](48, 0);
+	return "0x" + hexFirstPart + hexSecondPart;
+};
+
+/**
+ * Use this to check whether user subscribed to stream
+ * and also whether subscribed to message type (from streams_subscription_rule)
+ * @static
+ * @method showNoticeIfSubscribed
+ * @param {object} options
+ * @param {string} options.publisherId
+ * @param {string} options.streamName
+ * @param {string} options.messageType
+ * @param {string} [options.evenIfNotSubscribed=false] - If yes, show notice even if user not subscribed to stream.
+ * @param {function} options.callback Function which called to show notice if all fine.
+ */
+Streams.showNoticeIfSubscribed = function (options) {
+	var publisherId = options.publisherId;
+	var streamName = options.streamName;
+	var messageType = options.messageType;
+	var callback = options.callback;
+	var evenIfNotSubscribed = options.evenIfNotSubscribed;
+
+	Streams.get.force(publisherId, streamName, function () {
+		// return if user doesn't subscribed to stream
+		if (!evenIfNotSubscribed && Q.getObject("participant.subscribed", this) !== 'yes') {
+			return;
+		}
+
+		var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
+		if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
+			return;
+		}
+
+		// if stream retained - don't show notice
+		var ps = Streams.key(publisherId, streamName);
+		if (priv._retainedStreams[ps]) {
+			return;
+		}
+
+		Q.handle(callback, this);
+	}, {
+		withParticipant: true
+	});
+};
+Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
+	var src = Q.getObject(["entry", 0, "thumbnailUrl"], json);
+	var firstName = '', lastName = '';
+	if (priv.registerInfo) {
+		if (priv.registerInfo.firstName){
+			firstName = priv.registerInfo.firstName;
+		}
+		if (priv.registerInfo.lastName){
+			lastName = priv.registerInfo.lastName;
+		}
+		if (priv.registerInfo.pic) {
+			src = priv.registerInfo.pic;
+		}
+	}
+	var $formContent = $('<div class="Streams_login_fullname_block" />');
+	if (Q.text.Streams.login.prompt) {
+		$formContent.append(
+			$('<label for="Streams_login_fullname" />').html(Q.text.Streams.login.prompt),
+			'<br>'
+		);
+	}
+	$formContent.append(
+		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
+			.attr('autocomplete', 'name')
+			.attr('maxlength', Q.text.Streams.login.maxlengths.fullName)
+			.attr('placeholder', Q.text.Streams.login.placeholders.fullName)
+			.attr('tabindex', 1010)
+			.val(firstName+(lastName ? ' ' : '')+lastName)
+	)
+	var register_form = $('<form method="post" class="Users_register_form" />')
+		.attr('action', Q.action("Streams/register"))
+		.attr('data-form-type', 'register')
+		.append($('<div class="Streams_login_explanation" />'));
+
+	var $b = $('<button />', {
+		"type": "submit",
+		"class": "Q_button Q_main_button Streams_login_start "
+	}).html(Q.text.Users.login.registerButton)
+	.on(Q.Pointer.touchclick, function (e) {
+		Users.submitClosestForm.apply(this, arguments);
+	}).on(Q.Pointer.click, function (e) {
+		e.preventDefault(); // prevent automatic submit on click
+	});
+
+	register_form.append($formContent)
+		.append($('<input type="hidden" name="identifier" />').val(identifier))
+		.append($('<input type="hidden" name="icon" />'))
+		.append($('<input type="hidden" name="Q.method" />').val('post'))
+		.append(
+			$('<div class="Streams_login_get_started"></div>')
+			.append($b)
+		).submit(Q.throttle(function (e) {
+			var $this = $(this);
+			$this.removeData('cancelSubmit');
+			$b.addClass('Q_working')[0].disabled = true;
+			document.activeElement.blur();
+			var $usersAgree = $('#Users_agree', register_form);
+			if (!$usersAgree.length || $usersAgree.is(':checked')) {
+				$this.submit();
+				return false;
+			}
+			setTimeout(function () {
+				Q.confirm(Q.text.Users.login.confirmTerms, function (result) {
+					if (result) {
+						$usersAgree.attr('checked', 'checked');
+						$usersAgree[0].checked = true;
+						$b.addClass('Q_working')[0].disabled = true;
+						$this.submit();
+					} else {
+						$b.removeClass('Q_working')[0].disabled = false;
+					}
+				});
+			}, 300);
+			$this.data('cancelSubmit', true);
+			return false;
+		}, 1000, false, false))
+		.on('keydown', function (e) {
+			if ((e.keyCode || e.which) === 13) {
+				$(this).submit();
+				e.preventDefault();
+			}
+		});
+	if (priv.activation) {
+		register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
+	}
+
+	if (json.termsLabel) {
+		$formContent.append(
+			$('<div />').attr("id", "Users_register_terms")
+				.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
+				.append($('<label for="Users_agree" />').html(json.termsLabel))
+		);
+
+		Q.Text.get('Users/content', function(err, text) {
+			$("label[for=Users_agree] a", $formContent).on(Q.Pointer.fastclick, function () {
+				Q.Dialogs.push({
+					title: text.authorize.TermsTitle,
+					className: 'Users_authorize_terms',
+					url: this.href
+				});
+			});
+		});
+	}
+
+	var authResponse;
+	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
+		Users.init.facebook(function(err) {
+			if (err) {
+				return;
+			}
+
+			authResponse = FB.getAuthResponse();
+			if (!authResponse) {
+				return;
+			}
+
+			for (var k in authResponse) {
+				register_form.append(
+					$('<input type="hidden" />')
+						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+						.attr('value', authResponse[k])
+				);
+			}
+		});
+	}
+
+	var $form = $('#Streams_login_step1_form');
+	if ($form.data('used') === 'facebook') {
+		var platforms = $form.data('platforms');
+		var appId = platforms.facebook || Q.info.app;
+		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		if (!fbAppId) {
+			console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
+		}
+		Users.init.facebook(function() {
+			var k;
+			if ((authResponse = FB.getAuthResponse())) {
+				authResponse.appId = appId;
+				authResponse.fbAppId = fbAppId;
+				for (k in authResponse) {
+					register_form.append(
+						$('<input type="hidden" />')
+							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+							.attr('value', authResponse[k])
+					);
+				}
+			}
+		}, {
+			appId: appId
+		});
+		register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
+	}
+	return register_form;
+};
 
 /**
  * @class Streams.Stream
@@ -4005,441 +4440,6 @@ var Interests = Streams.Interests = {
 	my: null
 };
 
-/**
- * Class with functionality to operate with Metrics
- * @class Streams.Metrics
- * @constructor
- * @param {Object} params JSON object with necessary params
- * @param {number} params.period Seconds period to send data to server
- * @param {number} params.predefined Seconds period to send data to server
- * @param {boolean|Object} params.useFaces If true, used Users.Faces with debounce=30. If false - don't use Users.Faces.
- * If object - use this object as params for Users.Faces.
- */
-Streams.Metrics = function (params) {
-	var that = this;
-
-	this.publisherId = Q.getObject("publisherId", params) || null;
-	this.streamName = Q.getObject("streamName", params) || null;
-
-	if (!this.publisherId) {
-		console.warn("Streams.Metrics: publisherId undefined");
-	}
-
-	if (!this.streamName) {
-		console.warn("Streams.Metrics: streamName undefined");
-	}
-
-	// set useFaces option
-	this.useFaces = Q.getObject("useFaces", params);
-	if (this.useFaces === true) {
-		this.useFaces = {
-			debounce: 30
-		};
-	}
-
-	/**
-	 * Seconds period to send data to server
-	 */
-	this.period = (Q.getObject("period", params) || 60) * 1000;
-
-	// min period to compare with prev value to decide if this continue of watching or seeked to new position
-	this.minPeriod = Q.getObject("minPeriod", params) || 2;
-
-	/**
-	 * Data saved before send to server
-	 */
-	this.predefined = Q.getObject("predefined", params) || [];
-
-	/**
-	 * Save time as metrics locally before save
-	 * @method add
-	 * @param {number} value
-	 */
-	this.add = function (value) {
-
-		// check active
-		if (Q.isDocumentHidden()) {
-			return;
-		}
-
-		// check faces
-		if (!that.face) {
-			return;
-		}
-
-		// iterate all periods and try to fing the period which continue value is
-		var sorted = false;
-		Q.each(that.predefined, function (i, period) {
-			if (sorted) {
-				return;
-			}
-
-			var start = period[0];
-			var end = period[1] || start;
-
-			if (value >= start && value <= end) {
-				sorted = true;
-			}
-			else if (value > end && value < end + that.minPeriod) {
-				period[1] = value;
-				sorted = true;
-			}
-			else if (value < start && value > start - that.minPeriod) {
-				period[0] = value;
-				sorted = true;
-			}
-		});
-
-		// if suitable period not found, create new priod
-		if (!sorted) {
-			that.predefined.push([value]);
-		}
-	};
-
-
-	/**
-	 * Stop timer interval
-	 * @method stop
-	 */
-	this.stop = function () {
-		that.timerId && clearInterval(that.timerId);
-		that.faces && that.faces.stop();
-	};
-
-	if (this.useFaces) {
-		Q.ensure('Q.Users.Faces', function () {
-			that.faces = new Q.Users.Faces(that.useFaces);
-			that.faces.start(function () {
-				that.faces.onEnter.add(function () {
-					that.face = true;
-				});
-				that.faces.onLeave.add(function () {
-					that.face = false;
-				});
-			});
-		});
-	}
-
-	/**
-	 * Start timer interval
-	 */
-	this.timerId = setInterval(function () {
-		if (!that.publisherId || !that.streamName) {
-			return;
-		}
-
-		if (Q.isEmpty(that.predefined)) {
-			return;
-		}
-
-		Q.req("Streams/metrics", [], function (err, response) {
-			var msg = Q.firstErrorMessage(err, response && response.errors);
-			if (msg) {
-				return console.warn(msg);
-			}
-
-			Q.handle(params.callback);
-		}, {
-			method: "post",
-			fields: {
-				publisherId: that.publisherId,
-				streamName: that.streamName,
-				metrics: that.predefined,
-				minPeriod: that.minPeriod
-			}
-		});
-
-		that.predefined = [];
-	}, this.period);
-};
-
-/**
- * @class Streams
- */
-
-/**
- * Returns the type name to display from a stream type.
- * If none is set, try to figure out a displayable title from a stream's type.
- * It expects all relevant text files to have already been loaded override anything in Q.text.Streams
- * @method displayType
- * @param {String} type
- * @param {Object} [options] Options to use with Q.Text.get, and also
- * @param {string} [options.plural=false] Whether to display plural, when available
- * @return {String} the displayType
- */
-Streams.displayType = function _Streams_displayType(type, options) {
-	var parts = type.split('/');
-	var module = parts.shift();
-	var ret = parts.pop();
-	options = options || {};
-	var field = 'displayType' + (options.plural ? 'Plural' : '');
-	var result = Q.getObject(['types', type, field], Q.text.Streams);
-	if (options.plural) {
-		result = Q.getObject(['types', type, 'displayTypePlural'], Q.text.Streams) || result;
-	}
-	return result || ret.toCapitalized();
-};
-
-/**
- * Use this to check whether variable is a Q.Streams.Stream object
- * @static
- * @method isStream
- * @param {mixed} value
- * @return {boolean}
- */
-Streams.isStream = function (value) {
-	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Stream';
-};
-
-/**
- * Use this to check whether variable is a Q.Streams.Message object
- * @static
- * @method isMessage
- * @param {mixed} value
- * @return {boolean}
- */
-Streams.isMessage = function (value) {
-	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Message';
-};
-
-/**
- * Converts the publisherId and the first 24 characters of
- * an ID that is typically used as the final segment in a streamName
- * to a hex string starting with "0x" representing a uint256 type.
- * Both inputs are padded by 0's on the right in the hex string.
- * For example Streams::toHexString("abc", "def") returns
- * 0x6162630000000000646566000000000000000000000000000000000000000000
- * while Streams::toHexString("abc/123", "def") returns
- * 0x616263000000007b646566000000000000000000000000000000000000000000
- * @static
- * @method toHexString
- * @param {string} publisherId - Takes the first 8 ASCII characters
- * @param {string|integer} [streamId] - Takes the first 24 ASCII characters, or an unsigned integer up to PHP_INT_MAX
- *  If the $streamId contains a slash, then the first part is interpreted as an unsigned integer up to 255,
- *  and determines the 15th and 16th hexit in the string. This is typically used for "seriesId" under a publisher.
- * @param {boolean} [isNotNumeric] - Set to true to encode $streamId as an ASCII string, even if it is numeric
- * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 24 hexits.
- */
-Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
-	streamId = streamId || '';
-	var parts = publisherId.split("/");
-	var seriesId = null;
-	var hexFirstPart = publisherId.substring(0, 8).asc2hex().padEnd(16, 0);
-	if (parts.length > 1) {
-		seriesId = parseInt(parts[1]);
-		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
-			throw new Q.Exception('seriesId must be in range integer 0-255');
-		}
-		hexFirstPart = hexFirstPart.substring(0, 14) + seriesId.toString(16).padStart(2, '0');
-	}
-
-	var pad, streamHex;
-	if (isNotNumeric || isNaN(streamId)) {
-		streamHex = streamId.substring(0, 24).asc2hex();
-		pad = "padEnd";
-	} else {
-		streamHex = streamId.toString(16)
-		pad = "padStart";
-	}
-	var hexSecondPart = streamHex[pad](48, 0);
-	return "0x" + hexFirstPart + hexSecondPart;
-};
-
-/**
- * Use this to check whether user subscribed to stream
- * and also whether subscribed to message type (from streams_subscription_rule)
- * @static
- * @method showNoticeIfSubscribed
- * @param {object} options
- * @param {string} options.publisherId
- * @param {string} options.streamName
- * @param {string} options.messageType
- * @param {string} [options.evenIfNotSubscribed=false] - If yes, show notice even if user not subscribed to stream.
- * @param {function} options.callback Function which called to show notice if all fine.
- */
-Streams.showNoticeIfSubscribed = function (options) {
-	var publisherId = options.publisherId;
-	var streamName = options.streamName;
-	var messageType = options.messageType;
-	var callback = options.callback;
-	var evenIfNotSubscribed = options.evenIfNotSubscribed;
-
-	Streams.get.force(publisherId, streamName, function () {
-		// return if user doesn't subscribed to stream
-		if (!evenIfNotSubscribed && Q.getObject("participant.subscribed", this) !== 'yes') {
-			return;
-		}
-
-		var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
-		if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
-			return;
-		}
-
-		// if stream retained - don't show notice
-		var ps = Streams.key(publisherId, streamName);
-		if (priv._retainedStreams[ps]) {
-			return;
-		}
-
-		Q.handle(callback, this);
-	}, {
-		withParticipant: true
-	});
-};
-Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
-	var src = Q.getObject(["entry", 0, "thumbnailUrl"], json);
-	var firstName = '', lastName = '';
-	if (priv.registerInfo) {
-		if (priv.registerInfo.firstName){
-			firstName = priv.registerInfo.firstName;
-		}
-		if (priv.registerInfo.lastName){
-			lastName = priv.registerInfo.lastName;
-		}
-		if (priv.registerInfo.pic) {
-			src = priv.registerInfo.pic;
-		}
-	}
-	var $formContent = $('<div class="Streams_login_fullname_block" />');
-	if (Q.text.Streams.login.prompt) {
-		$formContent.append(
-			$('<label for="Streams_login_fullname" />').html(Q.text.Streams.login.prompt),
-			'<br>'
-		);
-	}
-	$formContent.append(
-		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
-			.attr('autocomplete', 'name')
-			.attr('maxlength', Q.text.Streams.login.maxlengths.fullName)
-			.attr('placeholder', Q.text.Streams.login.placeholders.fullName)
-			.attr('tabindex', 1010)
-			.val(firstName+(lastName ? ' ' : '')+lastName)
-	)
-	var register_form = $('<form method="post" class="Users_register_form" />')
-		.attr('action', Q.action("Streams/register"))
-		.attr('data-form-type', 'register')
-		.append($('<div class="Streams_login_explanation" />'));
-
-	var $b = $('<button />', {
-		"type": "submit",
-		"class": "Q_button Q_main_button Streams_login_start "
-	}).html(Q.text.Users.login.registerButton)
-	.on(Q.Pointer.touchclick, function (e) {
-		Users.submitClosestForm.apply(this, arguments);
-	}).on(Q.Pointer.click, function (e) {
-		e.preventDefault(); // prevent automatic submit on click
-	});
-
-	register_form.append($formContent)
-		.append($('<input type="hidden" name="identifier" />').val(identifier))
-		.append($('<input type="hidden" name="icon" />'))
-		.append($('<input type="hidden" name="Q.method" />').val('post'))
-		.append(
-			$('<div class="Streams_login_get_started"></div>')
-			.append($b)
-		).submit(Q.throttle(function (e) {
-			var $this = $(this);
-			$this.removeData('cancelSubmit');
-			$b.addClass('Q_working')[0].disabled = true;
-			document.activeElement.blur();
-			var $usersAgree = $('#Users_agree', register_form);
-			if (!$usersAgree.length || $usersAgree.is(':checked')) {
-				$this.submit();
-				return false;
-			}
-			setTimeout(function () {
-				Q.confirm(Q.text.Users.login.confirmTerms, function (result) {
-					if (result) {
-						$usersAgree.attr('checked', 'checked');
-						$usersAgree[0].checked = true;
-						$b.addClass('Q_working')[0].disabled = true;
-						$this.submit();
-					} else {
-						$b.removeClass('Q_working')[0].disabled = false;
-					}
-				});
-			}, 300);
-			$this.data('cancelSubmit', true);
-			return false;
-		}, 1000, false, false))
-		.on('keydown', function (e) {
-			if ((e.keyCode || e.which) === 13) {
-				$(this).submit();
-				e.preventDefault();
-			}
-		});
-	if (priv.activation) {
-		register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
-	}
-
-	if (json.termsLabel) {
-		$formContent.append(
-			$('<div />').attr("id", "Users_register_terms")
-				.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
-				.append($('<label for="Users_agree" />').html(json.termsLabel))
-		);
-
-		Q.Text.get('Users/content', function(err, text) {
-			$("label[for=Users_agree] a", $formContent).on(Q.Pointer.fastclick, function () {
-				Q.Dialogs.push({
-					title: text.authorize.TermsTitle,
-					className: 'Users_authorize_terms',
-					url: this.href
-				});
-			});
-		});
-	}
-
-	var authResponse;
-	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
-		Users.init.facebook(function(err) {
-			if (err) {
-				return;
-			}
-
-			authResponse = FB.getAuthResponse();
-			if (!authResponse) {
-				return;
-			}
-
-			for (var k in authResponse) {
-				register_form.append(
-					$('<input type="hidden" />')
-						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-						.attr('value', authResponse[k])
-				);
-			}
-		});
-	}
-
-	var $form = $('#Streams_login_step1_form');
-	if ($form.data('used') === 'facebook') {
-		var platforms = $form.data('platforms');
-		var appId = platforms.facebook || Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		if (!fbAppId) {
-			console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
-		}
-		Users.init.facebook(function() {
-			var k;
-			if ((authResponse = FB.getAuthResponse())) {
-				authResponse.appId = appId;
-				authResponse.fbAppId = fbAppId;
-				for (k in authResponse) {
-					register_form.append(
-						$('<input type="hidden" />')
-							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-							.attr('value', authResponse[k])
-					);
-				}
-			}
-		}, {
-			appId: appId
-		});
-		register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
-	}
-	return register_form;
-};
 
 function updateAvatarCache(stream) {
 	var avatarStreamNames = {
