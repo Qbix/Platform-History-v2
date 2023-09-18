@@ -235,7 +235,7 @@
 		}
 	},
 	"Streams/user/height": {
-		"type": "Streams/date/height",
+		"type": "Streams/number/length",
 		"title": "Height",
 		"icon": ""
 	},

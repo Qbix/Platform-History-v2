@@ -1926,7 +1926,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * taking note of toPublisherId and toStreamName
 	 * and for each one, it may unrelate / relate relations of the type "attribute/$attributeName=$value",
 	 * updating indexes used for searching by that attribute name and value (range).
-	 * @return {array} Multidimensional array detailing which relations were updated, if any
+	 * @return {array} Multidimensional array detailing which relations were removed and added, if any
 	 */
 	function updateRelations($asUserId = null)
 	{
