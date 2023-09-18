@@ -1537,6 +1537,14 @@ Stream.join = new Q.Method({
     onError: new Q.Event()
 })
 
+Stream.leave = new Q.Method({
+    /**
+    * Occurs when Stream.leave encounters an error leave a stream
+    * @event leave.onError
+    */
+    onError: new Q.Event()
+})
+
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
     Streams.Stream, 
@@ -2840,54 +2848,6 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
 Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, relationType, callback) {
 	return Streams.unrelate(fromPublisherId, fromStreamName, relationType, this.fields.publisherId, this.fields.name, callback);
 };
-
-/**
- * Leave a stream that you previously joined,
- * so that you don't get realtime socket messages for that stream anymore.
- * May call Stream.leave.onError if an error occurs.
- *
- * @static
- * @method leave
- * @param {String} publisherId
- * @param {String} streamName
- * @param {Function} callback Receives (err, participant) as parameters
- */
-Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
-	if (!Q.plugins.Users.loggedInUser) {
-		throw new Q.Error("Streams.Stream.leave: Not logged in.");
-	}
-	var slotName = "participant";
-	var fields = {
-		"publisherId": publisherId,
-		"name": streamName,
-		"Q.clientId": Q.clientId()
-	};
-	var baseUrl = Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	Q.req('Streams/leave', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data);
-		if (msg) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			Stream.leave.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
-		}
-		var participant = new Participant(data.slots.participant);
-		Participant.get.cache.set(
-			[participant.publisherId, participant.streamName, participant.userId],
-			0, participant, [err, participant]
-		);
-		callback && callback.call(this, err, participant || null);
-		priv._refreshUnlessSocket(publisherId, streamName);
-	}, { method: 'post', fields: fields, baseUrl: baseUrl });
-};
-/**
- * Occurs when Stream.leave encounters an error leave a stream
- * @event leave.onError
- */
-Stream.leave.onError = new Q.Event();
 
 /**
  * Subscribe to a stream, to start getting offline notifications
