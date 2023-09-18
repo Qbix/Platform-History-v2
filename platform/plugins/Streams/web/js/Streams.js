@@ -471,6 +471,80 @@ var priv = {
                 0, Streams.Message.Total, [null, messageTotals[type]]
             );
         }
+    },
+    prepareStream: function priv_prepareStream(stream) {
+        if (stream.fields.messageCount) {
+            stream.fields.messageCount = parseInt(stream.fields.messageCount);
+        }
+        if ('access' in stream.fields) {
+            stream.access = Q.copy(stream.fields.access);
+            delete stream.fields.access;
+        }
+        if ('participant' in stream.fields) {
+            stream.participant = new Q.Streams.Participant(stream.fields.participant);
+            delete stream.fields.participant;
+        }
+        if ('messageTotals' in stream.fields) {
+            stream.messageTotals = stream.fields.messageTotals;
+            delete stream.fields.messageTotals;
+        }
+        if ('relatedToTotals' in stream.fields) {
+            stream.relatedToTotals = stream.fields.relatedToTotals;
+            delete stream.fields.relatedToTotals;
+        }
+        if ('relatedFromTotals' in stream.fields) {
+            stream.relatedFromTotals = stream.fields.relatedFromTotals;
+            delete stream.fields.relatedFromTotals;
+        }
+        if ('isRequired' in stream.fields) {
+            stream.isRequired = stream.fields.isRequired;
+            delete stream.fields.isRequired;
+        }
+        try {
+            stream.pendingAttributes = stream.attributes
+                = stream.fields.attributes ? JSON.parse(stream.fields.attributes) : {};
+        } catch (e) {
+            stream.pendingAttributes = stream.attributes = {};
+        }
+        stream.pendingFields = {};
+    },
+    updateStreamCache: function priv_updateStreamCache(stream) {
+        Q.Streams.get.cache.each(
+            [stream.fields.publisherId, stream.fields.name],
+            function (k) {
+                var params = Q.Streams.get.cache.get(k).params;
+                this.set(k, 0, stream, [null, stream].concat(params.slice(2)));
+            }
+        );
+    },
+    updateAvatarCache: function priv_updateAvatarCache(stream) {
+        var avatarStreamNames = {
+            'Streams/user/firstName': true,
+            'Streams/user/lastName': true,
+            'Streams/user/username': true,
+            'Streams/user/icon': true
+        };
+        var sf = stream.fields;
+        var cache, item;
+        if (avatarStreamNames[sf.name]) {
+            var field = sf.name.split('/').pop();
+            var userId = sf.publisherId;
+            var isIcon = sf.name === 'Streams/user/icon';
+            var c = isIcon ? sf.icon : sf.content;
+            cache = Q.Streams.Avatar.get.cache;
+            if ((item = cache.get([userId])) && item.subject) {
+                item.subject[field] = c;
+                cache.set([userId], 0, item.subject, [null, item.subject]);
+            }
+            if (field === 'username' || field === 'icon') {
+                cache = Q.Users.get.cache;
+                if (item = cache.get([userId])) {
+                    var user = item.subject;
+                    user[field] = c;
+                    cache.set([userId], 0, item.subject, [null, item.subject]);
+                }
+            }
+        }
     }
 }
 
@@ -1524,7 +1598,7 @@ var Stream = Streams.Stream = function (fields) {
 		'participant'
 	]);
 	this.typename = 'Q.Streams.Stream';
-	prepareStream(this, fields);
+	priv.prepareStream(this, fields);
 };
 
 Stream.construct = new Q.Method();
@@ -1580,6 +1654,7 @@ Stream.close = new Q.Method({
 Stream.observe = new Q.Method();
 Stream.neglect = new Q.Method();
 Stream.ephemeral = new Q.Method();
+Stream.update = new Q.Method();
 
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
@@ -1785,7 +1860,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			}
 		}
 	});
-	_retain = undefined;
+	priv._retain = undefined;
 	return true;
 };
 
@@ -4037,193 +4112,6 @@ var Interests = Streams.Interests = {
 	my: null
 };
 
-
-function updateAvatarCache(stream) {
-	var avatarStreamNames = {
-		'Streams/user/firstName': true,
-		'Streams/user/lastName': true,
-		'Streams/user/username': true,
-		'Streams/user/icon': true
-	};
-	var sf = stream.fields;
-	var cache, item;
-	if (avatarStreamNames[sf.name]) {
-		var field = sf.name.split('/').pop();
-		var userId = sf.publisherId;
-		var isIcon = sf.name === 'Streams/user/icon';
-		var c = isIcon ? sf.icon : sf.content;
-		cache = Avatar.get.cache;
-		if ((item = cache.get([userId])) && item.subject) {
-			item.subject[field] = c;
-			cache.set([userId], 0, item.subject, [null, item.subject]);
-		}
-		if (field === 'username' || field === 'icon') {
-			cache = Users.get.cache;
-			if (item = cache.get([userId])) {
-				var user = item.subject;
-				user[field] = c;
-				cache.set([userId], 0, item.subject, [null, item.subject]);
-			}
-		}
-	}
-}
-
-
-
-function updateStreamCache(stream) {
-	Streams.get.cache.each(
-		[stream.fields.publisherId, stream.fields.name],
-		function (k) {
-			var params = Streams.get.cache.get(k).params;
-			this.set(k, 0, stream, [null, stream].concat(params.slice(2)));
-		}
-	);
-}
-
-Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedFields) {
-	if (!stream || !fields) {
-		return false;
-	}
-	var publisherId = stream.fields.publisherId;
-	var streamName = stream.fields.name;
-	var updated = {}, cleared = [], k;
-
-	// events about updated fields
-	for (k in fields) {
-		if (onlyChangedFields
-			&& fields[k] === stream.fields[k]
-			&& !Q.has(onlyChangedFields, k)) {
-			continue;
-		}
-		Q.handle(
-			Q.getObject([publisherId, streamName, k], priv._streamFieldChangedHandlers),
-			stream,
-			[fields, k, onlyChangedFields]
-		);
-		Q.handle(
-			Q.getObject([publisherId, '', k], priv._streamFieldChangedHandlers),
-			stream,
-			[fields, k, onlyChangedFields]
-		);
-		Q.handle(
-			Q.getObject(['', streamName, k], priv._streamFieldChangedHandlers),
-			stream,
-			[fields, k, onlyChangedFields]
-		);
-		updated[k] = fields[k];
-	}
-	if (!onlyChangedFields || !Q.isEmpty(updated)) {
-		Q.handle(
-			Q.getObject([publisherId, streamName, ''], priv._streamFieldChangedHandlers),
-			stream,
-			[fields, updated, onlyChangedFields]
-		);
-		Q.handle(
-			Q.getObject([publisherId, '', ''], priv._streamFieldChangedHandlers),
-			stream,
-			[fields, updated, onlyChangedFields]
-		);
-		Q.handle(
-			Q.getObject(['', streamName, ''], priv._streamFieldChangedHandlers),
-			stream,
-			[fields, updated, onlyChangedFields]
-		);
-	}
-	if (('attributes' in fields)
-		&& (!onlyChangedFields || fields.attributes != stream.fields.attributes)) {
-		var attributes = JSON.parse(fields.attributes || "{}");
-		var obj;
-		updated = {};
-		cleared = [];
-
-		// events about cleared attributes
-		var streamAttributes = stream.getAllAttributes();
-		for (k in streamAttributes) {
-			if (k in attributes) {
-				continue;
-			}
-			obj = {};
-			obj[k] = undefined;
-			Q.handle(
-				Q.getObject([publisherId, streamName, k], priv._streamAttributeHandlers),
-				stream,
-				[fields, obj, [k], onlyChangedFields]
-			);
-			updated[k] = undefined;
-			cleared.push(k);
-		}
-
-		// events about updated attributes
-		var currentAttributes = JSON.parse(stream.fields.attributes || "{}");
-		for (k in attributes) {
-			if (JSON.stringify(attributes[k]) === JSON.stringify(currentAttributes[k])) {
-				continue;
-			}
-			obj = {};
-			obj[k] = attributes[k];
-			Q.handle(
-				Q.getObject([publisherId, streamName, k], priv._streamAttributeHandlers),
-				stream,
-				[attributes, k, onlyChangedFields]
-			);
-			updated[k] = attributes[k];
-		}
-		Q.handle(
-			Q.getObject([publisherId, streamName, ''], priv._streamAttributeHandlers),
-			stream,
-			[attributes, updated, cleared, onlyChangedFields]
-		);
-		Q.handle(
-			Q.getObject([publisherId, '', ''], priv._streamAttributeHandlers),
-			stream,
-			[attributes, updated, cleared, onlyChangedFields]
-		);
-	}
-	// Now time to replace the fields in the stream with the incoming fields
-	Q.extend(stream.fields, fields);
-	prepareStream(stream);
-	priv.updateMessageTotalsCache(publisherId, streamName, stream.messageTotals);
-	updateStreamCache(stream);
-	updateAvatarCache(stream);
-}
-
-function prepareStream(stream) {
-	if (stream.fields.messageCount) {
-		stream.fields.messageCount = parseInt(stream.fields.messageCount);
-	}
-	if ('access' in stream.fields) {
-		stream.access = Q.copy(stream.fields.access);
-		delete stream.fields.access;
-	}
-	if ('participant' in stream.fields) {
-		stream.participant = new Streams.Participant(stream.fields.participant);
-		delete stream.fields.participant;
-	}
-	if ('messageTotals' in stream.fields) {
-		stream.messageTotals = stream.fields.messageTotals;
-		delete stream.fields.messageTotals;
-	}
-	if ('relatedToTotals' in stream.fields) {
-		stream.relatedToTotals = stream.fields.relatedToTotals;
-		delete stream.fields.relatedToTotals;
-	}
-	if ('relatedFromTotals' in stream.fields) {
-		stream.relatedFromTotals = stream.fields.relatedFromTotals;
-		delete stream.fields.relatedFromTotals;
-	}
-	if ('isRequired' in stream.fields) {
-		stream.isRequired = stream.fields.isRequired;
-		delete stream.fields.isRequired;
-	}
-	try {
-		stream.pendingAttributes = stream.attributes
-			= stream.fields.attributes ? JSON.parse(stream.fields.attributes) : {};
-	} catch (e) {
-		stream.pendingAttributes = stream.attributes = {};
-	}
-	stream.pendingFields = {};
-}
-
 function _onCalledHandler(args, shared) {
 	shared.retainUnderKey = priv._retain;
 	priv._retain = undefined;
@@ -4747,7 +4635,7 @@ Q.onInit.add(function _Streams_onInit() {
 		Streams.get.cache.each([msg.publisherId, msg.streamName],
 			function (k, v) {
 				this.remove(k);
-				updateAvatarCache(v.subject);
+				priv.updateAvatarCache(v.subject);
 			});
 	}, 'Streams');
 
