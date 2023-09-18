@@ -448,6 +448,29 @@ var priv = {
             messages: true,
             unlessSocket: true
         }, options));
+    },
+    
+    updateMessageTotalsCache: function priv_updateMessageTotalsCache(publisherId, streamName, messageTotals) {
+        if (!messageTotals) {
+            return;
+        }
+        for (var type in messageTotals) {
+            Streams.Message.Total.get.cache.each([publisherId, streamName, type],
+                function (k, v) {
+                    var args = JSON.parse(k);
+                    var result = v.params[1];
+                    if (Q.isInteger(result)) {
+                        v.params[1] = messageTotals[type];
+                    } else if (Q.isPlainObject[result] && (type in result)) {
+                        result[type] = messageTotals[type];
+                    }
+                }, {
+                    evenIfNoIndex: true
+                });
+            Streams.Message.Total.get.cache.set([publisherId, streamName, type],
+                0, Streams.Message.Total, [null, messageTotals[type]]
+            );
+        }
     }
 }
 
@@ -1504,141 +1527,16 @@ var Stream = Streams.Stream = function (fields) {
 	prepareStream(this, fields);
 };
 
-/**
- * This function is similar to _activateTools in Q.js
- * That one is to create "controllers" on the front end,
- * and this one is to create "models" on the front end.
- * They have very similar conventions.
- * @static
- * @method construct
- * @param {Object} fields Provide any stream fields here. Requires at least the "type" of the stream.
- * @param {Object} [extra={}] Can include "messages" and "participants"
- * @param {Function} [callback] The function to call when all constructors and event handlers have executed
- *  The first parameter is an error, in case something went wrong. The second one is the stream object.
- * @param {Boolean} [updateCache=false] Whether to update the Streams.get cache after constructing the stream
- * @return {Q.Stream}
- */
-Stream.construct = function _Stream_construct(fields, extra, callback, updateCache) {
+Stream.construct = new Q.Method();
 
-	if (typeof extra === 'function') {
-		callback = extra;
-		extra = null;
-	}
-
-	if (Q.typeOf(fields) === 'Q.Streams.Stream') {
-		fields = Q.extend({}, fields.fields, {
-			access: fields.access,
-			participant: fields.participant,
-			messageTotals: fields.messageTotals,
-			relatedToTotals: fields.relatedToTotals,
-			relatedFromTotals: fields.relatedFromTotals,
-			isRequired: fields.isRequired
-		});
-	}
-
-	if (Q.isEmpty(fields)) {
-		Q.handle(callback, this, ["Streams.Stream constructor: fields are missing"]);
-		return false;
-	}
-
-	var type = Q.normalize(fields.type);
-	var streamFunc = Streams.defined[type];
-	if (!streamFunc) {
-		streamFunc = Streams.defined[type] = function StreamConstructor(fields) {
-			streamFunc.constructors.apply(this, arguments);
-			// Default constructor. Copy any additional fields.
-			if (!fields) return;
-			for (var k in fields) {
-				if ((k in this.fields)
-					|| k === 'messageTotals'
-					|| k === 'relatedToTotals'
-					|| k === 'relatedFromTotals'
-					|| k === 'participant'
-					|| k === 'access'
-					|| k === 'isRequired') continue;
-				this.fields[k] = Q.copy(fields[k]);
-			}
-		};
-	}
-	if (typeof streamFunc === 'function') {
-		return _doConstruct();
-	} else if (typeof streamFunc === 'string') {
-		Q.addScript(streamFunc, function () {
-			streamFunc = Streams.defined[streamName];
-			if (typeof streamFunc !== 'function') {
-				throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
-			}
-			return _doConstruct();
-		});
-		return true;
-	} else if (typeof streamFunc !== 'undefined') {
-		throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
-	}
-	function _doConstruct() {
-		if (!streamFunc.streamConstructor) {
-			streamFunc.streamConstructor = function Streams_Stream(fields) {
-				// run any constructors
-				streamFunc.streamConstructor.constructors.apply(this, arguments);
-
-				var f = this.fields;
-				if (updateCache) { // update the Streams.get cache
-					if (f.publisherId && f.name) {
-						Streams.get.cache
-							.removeEach([f.publisherId, f.name])
-							.set(
-								[f.publisherId, f.name], 0,
-								this, [null, this]
-							);
-					}
-				}
-
-				// call any onConstruct handlers
-				Q.handle(priv._constructHandlers[f.type], this, []);
-				Q.handle(priv._constructHandlers[''], this, []);
-				if (f.publisherId && f.name) {
-					Q.handle(Q.getObject([f.publisherId, f.name], priv._streamConstructHandlers), this, []);
-					Q.handle(Q.getObject([f.publisherId, ''], priv._streamConstructHandlers), this, []);
-					Q.handle(Q.getObject(['', f.name], priv._streamConstructHandlers), this, []);
-					Q.handle(Q.getObject(['', ''], priv._streamConstructHandlers), this, []);
-				}
-			};
-			Q.mixin(streamFunc, Streams.Stream);
-			Q.mixin(streamFunc.streamConstructor, streamFunc);
-			streamFunc.streamConstructor.isConstructorOf = 'Q.Streams.Stream';
-		}
-		var stream = new streamFunc.streamConstructor(fields);
-		var messages = {}, participants = {};
-
-		updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
-
-		if (extra && extra.messages) {
-			Q.each(extra.messages, function (ordinal, message) {
-				if (!(message instanceof Message)) {
-					message = Message.construct(message, true);
-				}
-				messages[ordinal] = message;
-			});
-		}
-		if (extra && extra.participants) {
-			Q.each(extra.participants, function (userId, participant) {
-				if (!(participant instanceof Participant)) {
-					participant = new Participant(participant);
-				}
-				participants[userId] = participant;
-				Participant.get.cache.set(
-					[fields.publisherId, fields.name, participant.userId], 0,
-					participant, [null, participant]
-				);
-			});
-		}
-
-		Q.handle(callback, stream, [null, stream, {
-			messages: messages,
-			participants: participants
-		}]);
-		return stream;
-	}
-};
+// define methods for Streams.Stream to replace method stubs
+Q.Method.define(
+    Streams.Stream, 
+    '{{Streams}}/js/methods/Streams/Stream', 
+    function() {
+        return [priv];
+    }
+);
 
 /**
  * Returns the canonical url of the stream, if any
@@ -3444,7 +3342,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 			if ('messages' in data) {
 				messages = data.messages;
 				if (data.messageTotals) {
-					updateMessageTotalsCache(publisherId, streamName, data.messageTotals);
+					priv.updateMessageTotalsCache(publisherId, streamName, data.messageTotals);
 				}
 			} else if ('message' in data) {
 				messages[ordinal] = data.message;
@@ -4429,28 +4327,7 @@ function updateAvatarCache(stream) {
 	}
 }
 
-function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
-	if (!messageTotals) {
-		return;
-	}
-	for (var type in messageTotals) {
-		MTotal.get.cache.each([publisherId, streamName, type],
-			function (k, v) {
-				var args = JSON.parse(k);
-				var result = v.params[1];
-				if (Q.isInteger(result)) {
-					v.params[1] = messageTotals[type];
-				} else if (Q.isPlainObject[result] && (type in result)) {
-					result[type] = messageTotals[type];
-				}
-			}, {
-				evenIfNoIndex: true
-			});
-		MTotal.get.cache.set([publisherId, streamName, type],
-			0, MTotal, [null, messageTotals[type]]
-		);
-	}
-}
+
 
 function updateStreamCache(stream) {
 	Streams.get.cache.each(
@@ -4564,7 +4441,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// Now time to replace the fields in the stream with the incoming fields
 	Q.extend(stream.fields, fields);
 	prepareStream(stream);
-	updateMessageTotalsCache(publisherId, streamName, stream.messageTotals);
+	priv.updateMessageTotalsCache(publisherId, streamName, stream.messageTotals);
 	updateStreamCache(stream);
 	updateAvatarCache(stream);
 }
@@ -5621,7 +5498,7 @@ _scheduleUpdate.delay = 5000;
 
 Q.Streams.cache = Q.Streams.cache || {};
 
-    // define methods for Users to replace method stubs
+    // define methods for Streams to replace method stubs
     Q.Method.define(
         Streams, 
         '{{Streams}}/js/methods/Streams', 
