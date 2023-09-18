@@ -1561,6 +1561,14 @@ Stream.subscribe = new Q.Method({
     }
 })
 
+Stream.subscribe = new Q.Method({
+    /**
+    * Occurs when Stream.unsubscribe encounters an error trying to unsubscribe from a stream
+    * @event unsubscribe.onError
+    */
+    onError: new Q.Event()
+})
+
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
     Streams.Stream, 
@@ -2864,53 +2872,6 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
 Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, relationType, callback) {
 	return Streams.unrelate(fromPublisherId, fromStreamName, relationType, this.fields.publisherId, this.fields.name, callback);
 };
-
-/**
- * Unsubscribe from a stream you previously subscribed to
- * May call Stream.unsubscribe.onError if an error occurs.
- *
- * @static
- * @method unsubscribe
- * @param {String} publisherId
- * @param {String} streamName
- * @param {Function} callback Receives (err, participant) as parameters
- */
-Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, callback) {
-	if (!Q.plugins.Users.loggedInUser) {
-		throw new Q.Error("Streams.Stream.unsubscribe: Not logged in.");
-	}
-	var slotName = "participant";
-	var fields = {
-		"publisherId": publisherId,
-		"name": streamName,
-		"Q.clientId": Q.clientId()
-	};
-	var baseUrl = Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	Q.req('Streams/unsubscribe', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data);
-		if (msg) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			Stream.unsubscribe.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
-		}
-		var participant = new Participant(data.slots.participant);
-		Participant.get.cache.set(
-			[participant.publisherId, participant.streamName, participant.userId],
-			0, participant, [err, participant]
-		);
-		callback && callback.call(this, err, participant || null);
-		priv._refreshUnlessSocket(publisherId, streamName);
-	}, { method: 'post', fields: fields, baseUrl: baseUrl });
-};
-/**
- * Occurs when Stream.unsubscribe encounters an error trying to unsubscribe from a stream
- * @event unsubscribe.onError
- */
-Stream.unsubscribe.onError = new Q.Event();
 
 /**
  * Start observing a stream, to get realtime messages through socket events.
