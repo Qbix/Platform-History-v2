@@ -1919,20 +1919,21 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 
 	/**
-	 * Updates relations after a stream was inserted or updated.
+	 * Updates relations after a stream of a certain type was inserted or updated.
 	 * Checks the "updateRelations" config first, which is an array that can contain "to", "from" or both.
-	 * @return {array} Consists of ("to" => array(Streams_RelatedTo), "from" => array(Streams_RelatedFrom))
+	 * The direction "from" refers to relations from the current stream, to another stream.
+	 * Then it fetches relations from the template of this stream type, with relation types "attribute/$attributeName",
+	 * taking note of toPublisherId and toStreamName
+	 * and for each one, it may unrelate / relate relations of the type "attribute/$attributeName=$value",
+	 * updating indexes used for searching by that attribute name and value (range).
+	 * @return {array} Multidimensional array detailing which relations were updated, if any
 	 */
 	function updateRelations($asUserId = null)
 	{
-		$didntTry = array("to" => array(), "from" => array());
 		$changes = $this->changedFields();
-		if (!$changes) {
-			return $didntTry;
-		}
 		$updateRelations = self::getConfigField($this->type, 'updateRelations', array());
-		if (!$updateRelations) {
-			return $didntTry;
+		if (!$changes || !$updateRelations) {
+			return array();
 		}
 		$relationTypes = array();
 		$attributesChanged = $attributesAdded = array();
@@ -1942,14 +1943,14 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!empty($changes['attributes'])) {
 			// see what attributes have changed
 			$orig = $this->getAllAttributes(true);
-			$attr = $this->getAttributes(false);
+			$attr = $this->getAllAttributes(false);
 			foreach ($orig as $k => $v) {
 				if (!isset($orig[$k]) and !isset($attr[$k])) {
 					continue;
 				}
 				if ((!isset($attr[$k]) && isset($v))
 				|| ($attr[$k] !== $v)) { // was removed or changed
-					$attributesChanged[] = $k;
+					$attributesChanged[$k] = $v;
 					$relationTypes[] = "attribute/$k";
 				}
 			}
@@ -1966,25 +1967,30 @@ class Streams_Stream extends Base_Streams_Stream
 			if ($direction !== 'from') {
 				continue;
 			}
-			$relationTypes = array_merge($relationTypes, array_keys($this->fields));
+			// $relationTypes = array_merge($relationTypes, array_keys($this->fields));
 			$rfroms = Streams_RelatedFrom::select()->where(array(
 				'fromPublisherId' => array('', $this->publisherId),
 				'fromStreamName' => $this->type . '/',
 				'type' => $relationTypes
-			))->fetchDbRows(null, '', 'type');
+			))->fetchDbRows();
 			$weight = time(); // is_numeric($attr[$k]) ? $attr[$k] : 1;
 			$removeRelationTypes = array();
 			foreach ($attributesChanged as $ak => $av) {
+				$found = false;
+				foreach ($rfroms as $rf) {
+					if ($rf->type === "attribute/$ak") {
+						$found = true;
+					}
+				}
+				if (!$found) {
+					continue; // nothing to remove
+				}
 				if (is_numeric($av)) {
 					// this form for numbers makes lexicographical comparisons agree with numeric ones
 					$av = sprintf("%+015.2f", $av);
 				}
-				if (empty($rfroms["attribute/$ak"])) {
-					continue; // nothing to remove
-				}
-				$rfrom = $rfroms["attribute/$ak"];
 				if (is_array($av)) {
-					$toRemove = array_diff($av, $attr[$ak]);
+					$toRemove = array_diff($orig[$ak], $av);
 					foreach ($toRemove as $r) {
 						$removeRelationTypes[] = "attribute/$ak=" . json_encode($r);
 					}
@@ -1995,6 +2001,15 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 			$addRelationTypes = array();
 			foreach ($attributesAdded as $ak => $av) {
+				$found = false;
+				foreach ($rfroms as $rf) {
+					if ($rf->type === "attribute/$ak") {
+						$found = true;
+					}
+				}
+				if (!$found) {
+					continue; // nothing to remove
+				}
 				if (is_array($av)) {
 					$toAdd = array_diff($av, $orig[$ak]);
 					foreach ($toAdd as $a) {
@@ -2013,24 +2028,46 @@ class Streams_Stream extends Base_Streams_Stream
 					$addRelationTypes[] = "attribute/$ak=" . json_encode($av);
 				}
 			}
-			Streams::unrelate(
-				$asUserId, 
-				$rfrom->fromPublisherId,
-				$rfrom->fromStreamName,
-				$removeRelationTypes,
-				$this->publisherId, $this->name,
-				array('skipAccess' => true, 'adjustWeights' => true)
-			);
-			Streams::relate(
-				$asUserId, 
-				$rfrom->fromPublisherId,
-				$rfrom->fromStreamName,
-				$addRelationTypes,
-				$this->publisherId, $this->name,
-				array('skipAccess' => true, 'weight' => $weight)
-			);
+			$toStreams = array();
+			foreach ($froms as $rf) {
+				$toStreams[$rf->type][$rf->toPublisherId][] = $rf->toStreamName;
+			}
+			foreach ($toStreams as $relationType => $info) {
+				$toStreams[$relationType]['unrelateTypes']
+				= $unrelateRelationTypes = array();
+				foreach ($removeRelationTypes as $rrt) {
+					if (Q::startsWith($rrt, $relationType)) {
+						$unrelateRelationTypes[] = $rrt;
+					}
+				}
+				$toStreams[$relationType]['relateTypes']
+			 	= $relateRelationTypes = array();
+				foreach ($addRelationTypes as $art) {
+					if (Q::startsWith($art, $relationType)) {
+						$relateRelationTypes[] = $art;
+					}
+				}
+				foreach ($info as $toPublisherId => $toStreamNames) {
+					Streams::unrelate(
+						$asUserId, 
+						$toPublisherId,
+						$toStreamNames,
+						$unrelateRelationTypes,
+						$this->publisherId, $this->name,
+						array('skipAccess' => true)
+					);
+					Streams::relate(
+						$asUserId, 
+						$rfrom->fromPublisherId,
+						$rfrom->fromStreamName,
+						$relateRelationTypes,
+						$this->publisherId, $this->name,
+						array('skipAccess' => true, 'weight' => $weight)
+					);
+				}
+			}
 		}
-		return true;
+		return $toStreams;
 	}
 	
 	/**
