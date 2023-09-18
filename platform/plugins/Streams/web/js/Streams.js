@@ -1569,6 +1569,14 @@ Stream.subscribe = new Q.Method({
     onError: new Q.Event()
 })
 
+Stream.close = new Q.Method({
+    /**
+    * Occurs when Stream.close encounters an error trying to close a stream
+    * @event close.onError
+    */
+    onError: new Q.Event()
+})
+
 Stream.observe = new Q.Method();
 Stream.neglect = new Q.Method();
 Stream.ephemeral = new Q.Method();
@@ -2876,47 +2884,6 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
 Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, relationType, callback) {
 	return Streams.unrelate(fromPublisherId, fromStreamName, relationType, this.fields.publisherId, this.fields.name, callback);
 };
-
-
-
-/**
- * Closes a stream in the database, and marks it for removal unless it is required.
- *
- * @static
- * @method close
- * @param {String} publisherId
- * @param {String} streamName
- * @param {Function} callback Receives (err, result) as parameters
- */
-Stream.close = function _Stream_remove (publisherId, streamName, callback) {
-	var slotName = "result,stream";
-	var fields = {"publisherId": publisherId, "name": streamName};
-	var baseUrl = Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	Q.req('Streams/stream', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data);
-		if (msg) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			Stream.close.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
-		}
-		var stream = data.slots.stream;
-		if (stream) {
-			// process the Streams/closed message, if stream was retained
-			priv._refreshUnlessSocket(stream.publisherId, stream.name);
-			priv._refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
-		}
-		callback && callback.call(this, err, data.slots.result || null);
-	}, { method: 'delete', fields: fields, baseUrl: baseUrl });
-};
-/**
- * Occurs when Stream.close encounters an error trying to close a stream
- * @event close.onError
- */
-Stream.close.onError = new Q.Event();
 
 /**
  * @class Streams
