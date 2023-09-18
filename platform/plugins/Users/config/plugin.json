@@ -132,6 +132,7 @@
 			"Users/web3/transaction": {
 				"60": {
 					"": 10,
+					"Users/owners": 100,
 					"Users/admins": 100
 				}
 			}
