@@ -1569,6 +1569,10 @@ Stream.subscribe = new Q.Method({
     onError: new Q.Event()
 })
 
+Stream.observe = new Q.Method();
+Stream.neglect = new Q.Method();
+Stream.ephemeral = new Q.Method();
+
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
     Streams.Stream, 
@@ -2873,64 +2877,7 @@ Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPub
 	return Streams.unrelate(fromPublisherId, fromStreamName, relationType, this.fields.publisherId, this.fields.name, callback);
 };
 
-/**
- * Start observing a stream, to get realtime messages through socket events.
- * You can do this either as a logged-in user or as an anonymous observer.
- *
- * @static
- * @method observe
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} streamName name of stream to observe
- * @param {Function} [callback] receives (err, result) as parameters
- */
-Stream.observe = function _Stream_observe (publisherId, streamName, callback) {
-	var nodeUrl = Q.nodeUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	Q.Socket.onConnect('Users', nodeUrl).add(function () {
-		Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
-	}, 'Streams.Stream.observe');
-};
 
-/**
- * Stop observing a stream which you previously started observing,
- * so that you don't get realtime messages anymore.
- *
- * @static
- * @method neglect
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} streamName name of stream to stop observing
- * @param {Function} [callback] receives (err, result) as parameters
- */
-Stream.neglect = function _Stream_neglect (publisherId, streamName, callback) {
-	Streams.socketRequest('Streams/neglect', publisherId, streamName, callback);
-};
-
-/**
- * Send some payload which is not saved as a message in the stream's history,
- * but is broadcast to everyone curently connected by a socket and participating
- * or observing the stream.
- * This can be used for read receipts, "typing..." indicators, cursor movements and more.
- * Ephemerals payloads are generated on clients, and clients can lie.
- * Ephemeral payloads can reference stream state hashes, to prove that the client
- * saw a certain state of the stream (i.e. messages up to a certain ordinal)
- * and the server also adds "Streams.messageCount" to the ephemeral payload when sending it out,
- * so others know what the messageCount was on the server when it was sent out.
- * These two things can help localize the ephemeral message in time.
- * @static
- * @method ephemeral
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} streamName name of stream to observe
- * @param {Object} payload the payload to send. It must have "type" set at least.
- * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
- * @param {Function} [callback] receives (err, result) as parameters
- */
-Stream.ephemeral = function _Stream_ephemeral (
-	publisherId, streamName, payload, dontNotifyObservers, callback
-) {
-	Streams.socketRequest('Streams/ephemeral', publisherId, streamName, payload, dontNotifyObservers, callback);
-};
 
 /**
  * Closes a stream in the database, and marks it for removal unless it is required.
