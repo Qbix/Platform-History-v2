@@ -1009,38 +1009,6 @@ Streams.followup = new Q.Method({
     }
 });
 
-/**
- * Get streams related to a given stream.
- * @static
- * @method related
- * @param {String} publisherId
- *  Publisher's user id
- * @param {String} streamName
- *	Name of the stream to/from which the others are related
- * @param {String|Array|null} relationType the type of the relation
- * @param {boolean|String} [isCategory=true]
- *  If false, returns the categories that this stream is related to.
- *  If true, returns all the streams this related to this category.
- *  If a string, returns all the streams related to this category with names prefixed by this string.
- * @param {Object} [options] optional object that can include:
- *   @param {Number} [options.limit] the maximum number of results to return
- *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
- *   @param {Number} [options.min] the minimum weight (inclusive) to filter by, if any
- *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
- *   @param {String} [options.prefix] optional prefix to filter the streams by
- *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
- *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream and ignore the cache.
- *   @param {Mixed} [options.participants]  Pass a limit here to fetch that many participants and ignore cache.
- *   @param {Boolean} [options.relationsOnly=false] Return only the relations, not the streams
- *   @param {Boolean} [options.messages] Pass a limit here to fetch that many recent messages and ignore cache.
- *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
- *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
- *   @param {Object} [options."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
- * @param{function} callback
- *	if there were errors, first parameter is an array of errors
- *  otherwise, first parameter is null and the "this" object is the data containing "stream", "relations" and "streams"
- */
 Streams.related = new Q.Method({
     options: {
         withParticipant: true
@@ -1090,6 +1058,8 @@ Streams.related = new Q.Method({
     onError: new Q.Event()
 });
 
+Streams.socketRequest = new Q.Method();
+        
 /**
  * @class Streams.Stream
  */
@@ -2880,36 +2850,6 @@ Stream.close.onError = new Q.Event();
 /**
  * @class Streams
  */
-
-/**
- * Issues a request via a socket, if one is open.
- * The request is sent to the node responsible for the stream,
- * whose url is calculated by calling Q.nodeUrl().
- * The first three parameters are documented, but you can pass more,
- * and they will be sent to the node.
- * @param {String} event the name of the socket.io event, such as "Streams/observe"
- * @param {String} publisherId the id of the stream's publisher
- * @param {String} streamName the name of the stream. Put any additional parameters after this.
- * @param {Function} [callback] Comes at the end. Any socket.io acknowledgement callback
- * @return {Q.Socket} returns null if request wasn't sent, otherwise returns the socket
- */
-Streams.socketRequest = function (event, publisherId, streamName, callback) {
-	// if (!Q.sessionId()) {
-	// 	throw new Q.Error("Stream.observe: a valid session is required");
-	// }
-	var nodeUrl = Q.nodeUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	var socket = Users.Socket.get(nodeUrl);
-	if (!socket) {
-		return null;
-	}
-	var args = Array.prototype.slice.call(arguments, 0);
-	args.splice(1, 0, Q.clientId(), Q.getObject('Q.Users.capability'));
-	socket.socket.emit.apply(socket.socket, args);
-	return socket;
-};
 
 /**
  * Relates streams to one another
