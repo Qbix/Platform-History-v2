@@ -547,7 +547,19 @@ var priv = {
                 }
             }
         }
+    },
+    
+    // Go through the messages and simulate the posting
+    // NOTE: the messages will arrive a lot quicker than they were posted,
+    // and moreover without browser refresh cycles in between,
+    // which may cause confusion in some visual representations
+    // until things settle down on the screen
+    _simulatePosting: function priv_simulatePosting(messages, extras) {
+        Q.each(messages, function () {
+            Q.Users.Socket.onEvent('Streams/post').handle(this, extras);
+        }, {ascending: true, numeric: true});
     }
+
 }
 
 /**
@@ -3060,6 +3072,8 @@ Message.define = function (type, ctor, methods) {
 	return Message.defined[type] = CustomMessageConstructor;
 };
 
+Stream.define = Streams.define;
+
 var Mp = Message.prototype;
 
 /**
@@ -3103,145 +3117,6 @@ Mp.seen = function _Message_seen (messageTotal) {
 };
 
 /**
- * Get one or more messages, which may result in batch requests to the server.
- * May call Message.get.onError if an error occurs.
- *
- * @static
- * @method get
- * @param {String} publisherId
- * @param {String} streamName
- * @param {Number|Object} ordinal Can be the ordinal, or an object containing one or more of:
- * @param {Array} [ordinal.withMessageTotals] Highly encouraged if ordinal is an object. All the possible message types to automatically update messageTotals for.
- * @param {Number} [ordinal.min] The minimum ordinal in the range. If omitted, uses limit.
- * @param {Number} [ordinal.max] The maximum ordinal in the range. If omitted, gets the latest messages.
- * @param {Number} [ordinal.limit] Change the max number of messages to retrieve. If only max and limit are specified, messages are sorted by decreasing ordinal.
- * @param {String} [ordinal.type] the type of the messages, if you only need a specific type
- * @param {Boolean} [ordinal.ascending=false] whether to sort by ascending weight, otherwise sorts by descrending weight.
- * @param {Function} callback This receives three parameters. The first is the error.
- *   If ordinal was a Number, then the second parameter is the Streams.Message, as well as the "this" object.
- *   If ordinal was an Object, then the second parameter is a hash of { ordinal: Streams.Message } pairs
- *   The third parameter is an object that contains publisherId, streamName, streamType, messageCount
- */
-Message.get = function _Message_get (publisherId, streamName, ordinal, callback) {
-	var slotName, criteria = {};
-	if (Q.typeOf(ordinal) === 'object') {
-		slotName = ordinal.withMessageTotals
-			? ['messages', 'messageTotals', 'extras']
-			: ['messages', 'extras'];
-		if (ordinal.min) {
-			criteria.min = parseInt(ordinal.min);
-		}
-		criteria.max = parseInt(ordinal.max);
-		criteria.limit = parseInt(ordinal.limit);
-		if (ordinal.withMessageTotals) {
-			criteria.withMessageTotals = ordinal.withMessageTotals;
-		}
-		if ('type' in ordinal) criteria.type = ordinal.type;
-		if ('ascending' in ordinal) criteria.ascending = ordinal.ascending;
-	} else {
-		slotName = ['message', 'extras'];
-		criteria = parseInt(ordinal);
-	}
-
-	var func = Streams.batchFunction(Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	}));
-	func.call(this, 'message', slotName, publisherId, streamName, criteria,
-		function (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (msg) {
-				var args = [err, data];
-				Streams.onError.handle.call(this, msg, args);
-				Message.get.onError.handle.call(this, msg, args);
-				return callback && callback.call(this, msg, args);
-			}
-			var messages = {};
-			if ('messages' in data) {
-				messages = data.messages;
-				if (data.messageTotals) {
-					priv.updateMessageTotalsCache(publisherId, streamName, data.messageTotals);
-				}
-			} else if ('message' in data) {
-				messages[ordinal] = data.message;
-			}
-			Q.each(messages, function (ordinal, message) {
-				if (!(message instanceof Message)) {
-					message = Message.construct(message, true);
-				}
-				messages[ordinal] = message;
-			});
-			if (Q.isPlainObject(ordinal)) {
-				callback && callback.call(this, err, messages, data.extras);
-			} else {
-				var message = Q.first(messages);
-				callback && callback.call(message, err, message || null, data.extras);
-			}
-		});
-	return true;
-};
-/**
- * Occurs when Message.get encounters an error loading a message from the server
- * @event get.onError
- */
-Message.get.onError = new Q.Event();
-
-/**
- * Post a message to a stream, so it can be broadcast to all participants, sent to all subscribers, etc.
- * May call Message.post.onError if an error occurs.
- * @static
- * @method post
- * @param {Object} msg A Streams.Message object or a hash of fields to post. Must include publisherId and streamName.
- * @param {Function} callback Receives (err, message, messages, extras) as parameters, where messages is an object of {ordina; Streams.Message} pairs
- * @param {Function} callbackAfterHandled Same parameters as callback, but is called after all new messages were handled
- */
-Message.post = function _Message_post (msg, callback, callbackAfterHandled) {
-	var baseUrl = Q.baseUrl({
-		publisherId: msg.publisherId,
-		streamName: msg.streamName
-	});
-	var fields = Q.copy(msg);
-	fields["Q.clientId"] = Q.clientId();
-	fields["min"] = Message.latestOrdinal(msg.publisherId, msg.streamName) || 0;
-	Q.req('Streams/message', ['messages', 'extras'], function (err, data) {
-		var fem = Q.firstErrorMessage(err, data);
-		if (!fem) {
-			if (!data.slots || !data.slots.messages) {
-				fem = "Message.post: messages slot is missing";
-			}
-		}
-		if (fem) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, fem, args);
-			Message.post.onError.handle.call(this, fem, args);
-			return callback && callback.call(this, fem, args);
-		}
-		var messages = {};
-		var latest = 0;
-		var message = null;
-		Q.each(data.slots.messages, function (ordinal) {
-			var ordi = parseInt(ordinal);
-			if (ordi > latest) {
-				latest = ordi;
-				message = this;
-			}
-			messages[ordinal] = Message.construct(this, false);
-		}, {ascending: true, numeric: true});
-
-		var extras = data.slots.extras;
-		Q.handle(callback, Message, [err, message, messages, extras]);
-		_simulatePosting(messages, extras);
-		Q.handle(callbackAfterHandled, Message, [err, message, messages, extras]);
-
-	}, { method: 'post', fields: fields, baseUrl: baseUrl });
-};
-/**
- * Occurs when Message.post encounters an error posting a message to the server
- * @event post.onError
- */
-Message.post.onError = new Q.Event();
-
-/**
  * Gets the latest ordinal as long as there is a cache for that stream or that stream's messages.
  * Otherwise it returns 0.
  *
@@ -3276,149 +3151,6 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
 };
 
 /**
- * Wait until a particular message is posted.
- * Used by Streams plugin to make sure messages arrive in order.
- * Call this with ordinal = -1 to load the latest messages.
- *
- * @static
- * @method wait
- * @param {String} publisherId
- * @param {String} streamName
- * @param {Number} ordinal The ordinal of the message to wait for, or -1 to load latest messages
- * @param {Function} callback Called whenever all the previous messages have been processed.
- *   The first parameter is [arrayOfOrdinals] that were processed,
- *   where latest < ordinals <= ordinal.
- * @param {Object} [options] A hash of options which can include:
- *   @param {Number} [options.max=5] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
- *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
- *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached and user is a participant in the stream
- *   @param {Boolean} [options.evenIfNotRetained] Set this to true to wait for messages posted to the stream, in the event that it wasn't cached or retained.
- *   @param {Boolean} [options.checkMessageCache] Set this to true to also the message cache 
- * @return {Boolean|null|Q.Pipe}
- *   Returns false if the cached stream already got this message.
- *   Returns true if we decided to send a request for the messages.
- *   Returns new Q.Promise if we decided to wait for messages to arrive via socket.
- *   Returns null if no attempt was made because ordinal=-1 and stream wasn't cached.
- *   In this last case, the callback is not called.
- */
-Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
-	var o = Q.extend({}, Message.wait.options, options);
-	var alreadyCalled = false, handlerKey;
-	var latest = Message.latestOrdinal(publisherId, streamName, o.checkMessageCache);
-	var ps = Streams.key(publisherId, streamName);
-	var wasRetained = priv._retainedStreams[ps];
-	if (!latest && !wasRetained && !o.evenIfNotRetained) {
-		// There is no cache for this stream, so we won't wait for previous messages.
-		return null;
-	}
-	if (ordinal >= 0 &&  ordinal <= latest && latest > 0) {
-		// The cached stream already got this message, or the message arrived on the client
-		Q.handle(callback, this, [[]]);
-		return false;
-	}
-	var waiting = {};
-	var nodeUrl = Q.nodeUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	var socket = Users.Socket.get(nodeUrl);
-	if (!socket || ordinal - o.max > latest) {
-		return _tryLoading();
-	}
-	// If we are here, then socket is available
-	if (ordinal < 0) {
-		// Requested to wait for the latest messages
-		var participant;
-		if (o.unlessSocket) {
-			Streams.get.cache.each([publisherId, streamName], function (key, info) {
-				var p = Q.getObject("subject.participant", info);
-				if (p && p.state === 'participating'
-				&& info.subject.readLevel >= 40) {
-					participant = p;
-					return false;
-				}
-			});
-		}
-		if (!participant) {
-			return _tryLoading();
-		}
-	}
-	// Wait for messages to arrive via the socket,
-	// and if they don't all arrive, try loading them via an http request.
-	var t = setTimeout(_tryLoading, o.timeout);
-	var ordinals = [];
-	var p = new Q.Pipe();
-	Q.each(latest+1, ordinal, 1, function (ord) {
-		ordinals.push(ord);
-		var event = Stream.onMessage(publisherId, streamName, ord);
-		handlerKey = event.addOnce(function () {
-			p.fill(ord)();
-			event.remove(handlerKey);
-			handlerKey = null;
-		});
-		waiting[ord] = [event, handlerKey];
-	});
-	if (latest < ordinal) {
-		p.add(ordinals, 1, function () {
-			if (!alreadyCalled) {
-				Q.handle(callback, this, [ordinals]);
-			}
-			clearTimeout(t);
-			alreadyCalled = true;
-			return true;
-		}).run();
-	}
-	return p;
-
-	function _tryLoading() {
-		// forget waiting, we'll request them again
-
-		// We could have requested just the remaining ones, like this:
-		// var filled = Q.Object(pipe.subjects),
-		//	 remaining = Q.diff(ordinals, filled);
-		// but we are going to request the entire range.
-
-		if (ordinal < 0) {
-			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
-		}
-
-		// Check if stream cached and if not then retrieve it for next time.
-		// The batching mechanism will ensure it's constructed before any returned messages are processed.
-		// if (!Streams.get.cache.get([publisherId, streamName])) {
-		// 	Streams.get(publisherId, streamName);
-		// }
-
-		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
-		function (err, messages, extras) {
-			if (err) {
-				return Q.handle(callback, this, [null, err]);
-			}
-			_simulatePosting(messages, extras);
-			ordinal = parseInt(ordinal);
-
-			// if any new messages were encountered, updateMessageCache removed all the cached
-			// results where max < 0, so future calls to Streams.Message.get with max < 0 will
-			// make a request to the server
-
-			// Do we have this message now?
-			if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
-				// remove any event handlers still waiting for the event to be posted
-				Q.each(waiting, function (i, w) {
-					w[0].remove(w[1]);
-				});
-				if (!alreadyCalled) {
-					Q.handle(callback, this, [Object.keys(messages)]);
-				}
-				alreadyCalled = true;
-			}
-		});
-	}
-};
-Message.wait.options = {
-	max: 5, // maximum number of messages we'll actually wait for, if there's a socket
-	timeout: 1000 // maximum number of milliseconds we'll actually wait for, if there's a socket
-};
-/**
  * This affects how the Streams plugin handles the posting of this message
  * on the front end. If true for a particular message type, the stream is
  * refreshed (if it was cached before) after all the message handlers have run.
@@ -3431,48 +3163,40 @@ Message.shouldRefreshStream = function (type, should) {
 	priv._messageShouldRefreshStream[type] = should;
 };
 
+Message.get = new Q.Method({
+    onError: new Q.Event()
+})
+
+Message.post = new Q.Method({
+    onError: new Q.Event()
+})
+
+Message.wait = new Q.Method({
+    options: {
+        max: 5, // maximum number of messages we'll actually wait for, if there's a socket
+        timeout: 1000 // maximum number of milliseconds we'll actually wait for, if there's a socket
+    }
+})
+
+// define methods for Streams.Message to replace method stubs
+Q.Method.define(
+    Streams.Message, 
+    '{{Streams}}/js/methods/Streams/Message', 
+    function() {
+        return [priv];
+    }
+);
+
 /**
  * Methods related to working with messageTotals of different message types in a stream
  * @class Streams.Message.Total
  */
 var MTotal = Streams.Message.Total = {
-	/**
-	 * Get one or more messageTotals, which may result in batch requests to the server.
-	 * May call Streams.Message.Total.get.onError if an error occurs.
-	 *
-	 * @static
-	 * @method get
-	 * @param {String} publisherId
-	 * @param {String} streamName
-	 * @param {String|Array} messageType can be the message type, or an array of them
-	 * @param {Function} callback This receives two parameters. The first is the error.
-	 *   If messageType was a String, then the second parameter is the messageTotal.
-	 *   If messageType was an Array, then the second parameter is a hash of {messageType: messageTotal} pairs
-	 */
-	get: function _Total_get (publisherId, streamName, messageType, callback) {
-		var func = Streams.batchFunction(Q.baseUrl({
-			publisherId: publisherId,
-			streamName: streamName
-		}));
-		func.call(this, 'messageTotal', 'messageTotals', publisherId, streamName, messageType,
-			function (err, data) {
-				var msg = Q.firstErrorMessage(err, data);
-				if (msg) {
-					var args = [err, data];
-					Streams.onError.handle.call(this, msg, args);
-					MTotal.get.onError.handle.call(this, msg, args);
-					return callback && callback.call(this, msg, args);
-				}
-
-				var messageTotals = 0;
-				if (data.messageTotals) {
-					messageTotals = Q.isArrayLike(messageType)
-						? Q.copy(data.messageTotals)
-						: data.messageTotals[messageType];
-				}
-				callback && callback.call(MTotal, err, messageTotals || 0);
-			});
-	},
+    
+    get: new Q.Method({
+        onError: new Q.Event()
+    }),
+	
 	/**
 	 * Returns the latest total number of messages (of a certain type) posted to the stream
 	 * @method latest
@@ -3599,8 +3323,16 @@ var _seen = {};
  * Occurs when MTotal.get encounters an error loading a messageTotal from the server
  * @event get.onError
  */
-MTotal.get.onError = new Q.Event();
+
 MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 100);
+
+Q.Method.define(
+    Streams.Message.Total, 
+    '{{Streams}}/js/methods/Streams/Message/Total', 
+    function() {
+        return [priv];
+    }
+);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -5110,17 +4842,6 @@ function _scheduleUpdate() {
 	}, ms);
 }
 
-
-// Go through the messages and simulate the posting
-// NOTE: the messages will arrive a lot quicker than they were posted,
-// and moreover without browser refresh cycles in between,
-// which may cause confusion in some visual representations
-// until things settle down on the screen
-function _simulatePosting(messages, extras) {
-	Q.each(messages, function () {
-		Users.Socket.onEvent('Streams/post').handle(this, extras);
-	}, {ascending: true, numeric: true});
-}
 
 _scheduleUpdate.delay = 5000;
 
