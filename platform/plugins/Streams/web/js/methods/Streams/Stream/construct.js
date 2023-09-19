@@ -59,8 +59,7 @@ Q.exports(function(priv){
            return _doConstruct();
        } else if (typeof streamFunc === 'string') {
            Q.addScript(streamFunc, function () {
-               // TODO 0: `streamName` undefiend. How it should be?
-               streamFunc = Q.Streams.defined[streamName];
+               streamFunc = Q.Streams.defined[type];
                if (typeof streamFunc !== 'function') {
                    throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
                }
