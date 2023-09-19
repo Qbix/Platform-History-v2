@@ -442,6 +442,8 @@ var priv = {
     _retainedNodes: {},
     _connectedNodes: {},
     
+    _messageShouldRefreshStream: {},
+    
     // methods from scope
     _refreshUnlessSocket: function priv_refreshUnlessSocket(publisherId, streamName, options) {
         return Q.Streams.Stream.refresh(publisherId, streamName, null, Q.extend({
@@ -1656,6 +1658,10 @@ Stream.neglect = new Q.Method();
 Stream.ephemeral = new Q.Method();
 Stream.update = new Q.Method();
 
+Stream.get = Streams.get;
+Stream.create = Streams.create;
+Stream.define = Streams.define;
+
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
     Streams.Stream, 
@@ -1705,10 +1711,6 @@ Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseU
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
 	return Q.url(urlString + qs);
 };
-
-Stream.get = Streams.get;
-Stream.create = Streams.create;
-Stream.define = Streams.define;
 
 /**
  * Call this function to retain a particular stream, under a key.
@@ -3416,9 +3418,6 @@ Message.wait.options = {
 	max: 5, // maximum number of messages we'll actually wait for, if there's a socket
 	timeout: 1000 // maximum number of milliseconds we'll actually wait for, if there's a socket
 };
-
-var _messageShouldRefreshStream = {};
-
 /**
  * This affects how the Streams plugin handles the posting of this message
  * on the front end. If true for a particular message type, the stream is
@@ -3429,7 +3428,7 @@ var _messageShouldRefreshStream = {};
  * @param {Boolean} should Whether the stream should be refreshed. Defaults to false.
  */
 Message.shouldRefreshStream = function (type, should) {
-	_messageShouldRefreshStream[type] = should;
+	priv._messageShouldRefreshStream[type] = should;
 };
 
 /**
@@ -4843,7 +4842,7 @@ Q.onInit.add(function _Streams_onInit() {
 				});
 			}
 
-			if (usingCached && _messageShouldRefreshStream[msg.type]) {
+			if (usingCached && priv._messageShouldRefreshStream[msg.type]) {
 				_debouncedRefresh(
 					msg.publisherId,
 					msg.streamName,
