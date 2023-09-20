@@ -129,6 +129,7 @@ class Streams_Invite extends Base_Streams_Invite
 			$options['access'] = true;
 		}
 
+		$invite = $this;
 		$saved = false;
 		$userId = $this->userId ? $this->userId : Users::loggedInUser(true)->id;
 
@@ -151,8 +152,8 @@ class Streams_Invite extends Base_Streams_Invite
 			$saved = true;
 		} else if (!$invited->retrieve() or $invited->state !== 'accepted') {
 			$quotaName = "Streams/invite";
-			$roles = Users::roles($this->publisherId, null, null, $userId);
-			$quota = Users_Quota::check("", $this->token, $quotaName, true, 1, $roles);
+			$roles = Users::roles($this->publisherId, null, null, $invite->invitingUserId);
+			$quota = Users_Quota::check($invite->invitingUserId, $this->token, $quotaName, true, 1, array_keys($roles));
 
 			$invited2 = new Streams_Invited();
 			$invited2->token = $invited->token;
@@ -177,7 +178,6 @@ class Streams_Invite extends Base_Streams_Invite
 		 * @param {Streams_Invite} stream
 		 * @param {Users_User} user
 		 */
-		$invite = $this;
 		if (Q::event("Streams/invite/accept", @compact('invite', 'userId'), 'before') === false) {
 			return false;
 		}

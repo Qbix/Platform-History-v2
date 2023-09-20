@@ -788,7 +788,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		if (!$skipAccess) {
 			// check quota
 			$roles = Users::roles();
-			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
+			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, array_keys($roles));
 		}
 
 		$streamsStream = new Streams_Stream();

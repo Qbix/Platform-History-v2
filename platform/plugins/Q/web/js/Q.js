@@ -9072,7 +9072,18 @@ Q.formPost.counter = 0;
  */
 Q.updateUrls = function(callback) {
 	var timestamp, url, json, ut = Q.cookie('Q_ut');
-	if (ut) {
+	if (!ut) {
+		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
+			Q.updateUrls.urls = result;
+			json = JSON.stringify(Q.updateUrls.urls);
+			localStorage.setItem(Q.updateUrls.urlsKey, json);
+			if (timestamp = result['@timestamp']) {
+				localStorage.setItem(Q.updateUrls.timestampKey, timestamp);
+				Q.cookie('Q_ut', timestamp);
+			}
+			Q.handle(callback, null, [result, timestamp]);
+		}, {extend: false, cacheBust: 1000});
+	} else if (ut !== localStorage.getItem(Q.updateUrls.timestampKey)) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
 			if (err) {
@@ -9092,28 +9103,22 @@ Q.updateUrls = function(callback) {
 					Q.extend(Q.updateUrls.urls, 100, result);
 				}
 				json = JSON.stringify(Q.updateUrls.urls);
-				localStorage.setItem(Q.updateUrls.lskey, json);
+				localStorage.setItem(Q.updateUrls.urlsKey, json);
 				if (timestamp = result['@timestamp']) {
+					localStorage.setItem(Q.updateUrls.timestampKey, timestamp);
 					Q.cookie('Q_ut', timestamp);
 				}
 				Q.handle(callback, null, [result, timestamp]);
 			}
 		}, { extend: false, cacheBust: 1000 });
 	} else {
-		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
-			Q.updateUrls.urls = result;
-			json = JSON.stringify(Q.updateUrls.urls);
-			localStorage.setItem(Q.updateUrls.lskey, json);
-			if (timestamp = result['@timestamp']) {
-				Q.cookie('Q_ut', timestamp);
-			}
-			Q.handle(callback, null, [result, timestamp]);
-		}, {extend: false, cacheBust: 1000});
+		Q.handle(callback, null, [{}, timestamp]);
 	}
 };
 
-Q.updateUrls.lskey = 'Q.updateUrls.urls';
-Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.lskey) || "{}");
+Q.updateUrls.urlsKey = 'Q.updateUrls.urls';
+Q.updateUrls.timestampKey = 'Q.updateUrls.timestamp';
+Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.urlsKey) || "{}");
 
 /**
  * Adds a reference to a javascript, if it's not already there

@@ -36,13 +36,15 @@ class Q_Image
 	 * @param {string} $type The type of image
 	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
 	 *   with a number from the config, or 1 if nothing is found
+	 * @param {number} [$defaultSize=null] Set to default size from config
 	 * @return {array} The sizes, sorted by key (e.g. "30" comes before "20x80")
 	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
 	 */
-	static function getSizes($type, &$maxStretch = null)
+	static function getSizes($type, &$maxStretch = null, &$defaultSize = null)
 	{
 		$sizes = Q_Config::expect("Q", "images", $type, 'sizes');
 		$maxStretch = Q_Config::get("Q", "images", $type, 'maxStretch', 1);
+		$defaultSize = Q_Config::get("Q", "images", $type, 'defaultSize', 40);
 		if (Q::isAssociative($sizes)) {
 			Q_Utils::sortKeysNumerically($sizes);
 			return $sizes;
