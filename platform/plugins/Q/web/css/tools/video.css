@@ -112,11 +112,13 @@
 .Q_dialog_video .Q_video_composer_submit button[name=reset] {
     display: none;
 }
-.Q_video_twitch {
+.Q_video_twitch,
+.Q_video_odysee {
     overflow: hidden;
     position: relative;
 }
-.Q_video_twitch iframe {
+.Q_video_twitch iframe,
+.Q_video_odysee iframe {
     border: 0;
     width: 100%;
     height: 100%;
