@@ -69,7 +69,7 @@ class Websites_File extends Base_Websites_Webpage
 		if (!$skipAccess) {
 			// check quota
 			$roles = Users::roles();
-			$quota = Users_Quota::check($asUserId, '', "Websites/cache", true, 1, $roles);
+			$quota = Users_Quota::check($asUserId, '', "Websites/cache", true, 1, array_keys($roles));
 		}
 
 		$headers = get_headers($url, 1);
@@ -322,7 +322,7 @@ class Websites_File extends Base_Websites_Webpage
 		if (!$skipAccess) {
 			// check quota
 			$roles = Users::roles();
-			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
+			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, array_keys($roles));
 		}
 
 		$streamsStream = new Streams_Stream();
