@@ -1072,7 +1072,7 @@ Streams.retainWith = function (key) {
 Streams.release = function (key) {
 	key = Q.calculateKey(key);
 	if (priv._retainedByKey[key]) {
-		for (var ps in priv._retainedByKey) {
+		for (var ps in priv._retainedByKey[key]) {
 			if (Q.isEmpty(priv._retainedByStream[ps])) {
 				continue;
 			}
@@ -1081,10 +1081,10 @@ Streams.release = function (key) {
 			var streamName = parts[1];
 			delete priv._retainedByStream[ps][key];
 			if (Q.isEmpty(priv._retainedByStream[ps])) {
-				Streams.neglect(publisherId, streamName);
+				Q.Streams.Stream.neglect(publisherId, streamName);
+				var stream = priv._retainedStreams[ps];
 				delete(priv._retainedByStream[ps]);
 				delete(priv._retainedStreams[ps]);
-				var stream = priv._retainedStreams[ps];
 				Q.handle([
 					Stream.onRelease.ifAny(publisherId, ""),
 					Stream.onRelease.ifAny(publisherId, streamName),
