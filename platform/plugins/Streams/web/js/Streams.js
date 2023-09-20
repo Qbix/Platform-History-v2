@@ -828,7 +828,11 @@ Q.Tool.define({
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
 	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
-	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js"
+	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
+	"Streams/groupPhoto" : {
+		js: ["{{Streams}}/js/face-api/dist/face-api.js", "{{Streams}}/js/tools/groupPhoto.js"],
+		css: "{{Streams}}/css/tools/groupPhoto.css"
+	}
 });
 
 Streams.Chat = {
@@ -1079,6 +1083,7 @@ Streams.release = function (key) {
 			var parts = ps.split("\t");
 			var publisherId = parts[0];
 			var streamName = parts[1];
+
 			delete priv._retainedByStream[ps][key];
 			if (Q.isEmpty(priv._retainedByStream[ps])) {
 				Q.Streams.Stream.neglect(publisherId, streamName);
@@ -4294,61 +4299,61 @@ Q.onInit.add(function _Streams_onInit() {
 						}
 					},
 					onActivate: {'Streams.completeInvited': function _Streams_completeInvited() {
-							Streams.onInvitedDialog.handle.call(Streams, [dialog]);
-							var l = Q.text.Users.login;
-							dialog.find('#Streams_login_fullname')
-								.attr('maxlength', l.maxlengths.fullName)
-								.attr('placeholder', l.placeholders.fullName)
-								.plugin('Q/placeholders');
-							if (!Q.info.isTouchscreen) {
-								var $input = $('input', dialog).eq(0);
+						Streams.onInvitedDialog.handle.call(Streams, [dialog]);
+						var l = Q.text.Users.login;
+						dialog.find('#Streams_login_fullname')
+							.attr('maxlength', l.maxlengths.fullName)
+							.attr('placeholder', l.placeholders.fullName)
+							.plugin('Q/placeholders');
+						if (!Q.info.isTouchscreen) {
+							var $input = $('input', dialog).eq(0);
+							$input.plugin('Q/clickfocus');
+							interval = setInterval(function () {
+								if ($input.val() || $input[0] === document.activeElement) {
+									return clearInterval(interval);
+								}
 								$input.plugin('Q/clickfocus');
-								interval = setInterval(function () {
-									if ($input.val() || $input[0] === document.activeElement) {
-										return clearInterval(interval);
-									}
-									$input.plugin('Q/clickfocus');
-								}, 100);
-							}
-							var $complete_form = dialog.find('form')
-								.plugin('Q/validator')
-								.submit(function(e) {
-									e.preventDefault();
-									var baseUrl = Q.baseUrl({
-										publisherId: Q.plugins.Users.loggedInUser.id,
-										streamName: "Streams/user/firstName"
-									});
-									var url = 'Streams/basic?' + $(this).serialize();
-									Q.req(url, ['data'], function _Streams_basic(err, data) {
-										var msg = Q.firstErrorMessage(err, data);
-										if (data && data.errors) {
-											$complete_form.plugin('validator', 'invalidate',
-												Q.ajaxErrors(data.errors, ['fullName'])
-											);
-											$('input', $complete_form).eq(0)
-												.plugin('Q/clickfocus');
-											return;
-										} else if (msg) {
-											return alert(msg);
-										}
-										$complete_form.plugin('Q/validator', 'reset');
-										dialog.data('Q/dialog').close();
-										_inviteComplete();
-									}, {method: "post", quietly: true, baseUrl: baseUrl});
-								}).on('submit keydown', Q.debounce(function (e) {
-									if (e.type === 'keydown'
-										&& (e.keyCode || e.which) !== 13) {
+							}, 100);
+						}
+						var $complete_form = dialog.find('form')
+							.plugin('Q/validator')
+							.submit(function(e) {
+								e.preventDefault();
+								var baseUrl = Q.baseUrl({
+									publisherId: Q.plugins.Users.loggedInUser.id,
+									streamName: "Streams/user/firstName"
+								});
+								var url = 'Streams/basic?' + $(this).serialize();
+								Q.req(url, ['data'], function _Streams_basic(err, data) {
+									var msg = Q.firstErrorMessage(err, data);
+									if (data && data.errors) {
+										$complete_form.plugin('validator', 'invalidate',
+											Q.ajaxErrors(data.errors, ['fullName'])
+										);
+										$('input', $complete_form).eq(0)
+											.plugin('Q/clickfocus');
 										return;
+									} else if (msg) {
+										return alert(msg);
 									}
-									var val = dialog.find('#Streams_login_fullname').val();
-									Streams.onInvitedUserAction.handle.call(
-										[val, dialog]
-									);
-								}, 0));
-							$('button', $complete_form).on('touchstart', function () {
-								$(this).submit();
-							});
-						}}
+									$complete_form.plugin('Q/validator', 'reset');
+									dialog.data('Q/dialog').close();
+									_inviteComplete();
+								}, {method: "post", quietly: true, baseUrl: baseUrl});
+							}).on('submit keydown', Q.debounce(function (e) {
+								if (e.type === 'keydown'
+									&& (e.keyCode || e.which) !== 13) {
+									return;
+								}
+								var val = dialog.find('#Streams_login_fullname').val();
+								Streams.onInvitedUserAction.handle.call(
+									[val, dialog]
+								);
+							}, 0));
+						$('button', $complete_form).on('touchstart', function () {
+							$(this).submit();
+						});
+					}}
 				});
 			});
 		}
