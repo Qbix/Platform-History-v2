@@ -15186,7 +15186,14 @@ Q.Tool.define({
 	"Q/filter": "{{Q}}/js/tools/filter.js",
 	"Q/rating": "{{Q}}/js/tools/rating.js",
 	"Q/paging": "{{Q}}/js/tools/paging.js",
-	"Q/pie": "{{Q}}/js/tools/pie.js",
+	"Q/pie": {
+		js: "{{Q}}/js/tools/pie.js",
+		css: "{{Q}}/css/tools/pie.css"
+	},
+	"Q/progress": {
+		js: "{{Q}}/js/tools/progress.js",
+		css: "{{Q}}/css/tools/progress.css"
+	},
 	"Q/badge": "{{Q}}/js/tools/badge.js",
 	"Q/resize": "{{Q}}/js/tools/resize.js",
 	"Q/layouts": "{{Q}}/js/tools/layouts.js",
