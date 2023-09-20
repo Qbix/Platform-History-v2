@@ -173,7 +173,7 @@ function _Streams_participants(options) {
 				alt: "expand"
 			});
 		}
-		if (!tool.$pei.length) {
+		if (!tool.$controls.length) {
 			tool.$controls = $("<div class='Streams_participants_controls' />")
 			.append(
 				$("<div class='Streams_participants_expand' />")
