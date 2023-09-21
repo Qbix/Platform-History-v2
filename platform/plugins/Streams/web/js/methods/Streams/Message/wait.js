@@ -25,7 +25,7 @@ Q.exports(function(priv){
     *   Returns null if no attempt was made because ordinal=-1 and stream wasn't cached.
     *   In this last case, the callback is not called.
     */
-    function _Streams_Message_wait (publisherId, streamName, ordinal, callback, options) {
+    return function _Streams_Message_wait (publisherId, streamName, ordinal, callback, options) {
         var o = Q.extend({}, Q.Streams.Message.wait.options, options);
         var alreadyCalled = false, handlerKey;
         var latest = Q.Streams.Message.latestOrdinal(publisherId, streamName, o.checkMessageCache);
