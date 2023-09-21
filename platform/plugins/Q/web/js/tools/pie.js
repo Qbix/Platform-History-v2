@@ -26,6 +26,10 @@
 
 			// rotate arcs according to fraction
 			tool.Q.onStateChanged('fraction').set(function () {
+				state.fraction = parseFloat(state.fraction);
+				if (state.fraction > 1) {
+					state.fraction = state.fraction/100;
+				}
 				var angle = 360/(100/parseFloat(state.fraction));
 
 				var arcLeftAngle = angle > 180 ? angle - 180 + 45 : 45;
