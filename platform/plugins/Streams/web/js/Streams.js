@@ -834,7 +834,8 @@ Q.Tool.define({
 		css: "{{Streams}}/css/tools/groupPhoto.css"
 	},
 	"Streams/task/preview": {
-		js: "{{Streams}}/js/tools/task/preview.js"
+		js: "{{Streams}}/js/tools/task/preview.js",
+		css: "{{Streams}}/css/tools/previewTask.css"
 	}
 });
 
