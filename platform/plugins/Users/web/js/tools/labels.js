@@ -40,25 +40,25 @@ var Users = Q.Users;
  *      Also keep in mind that if editable = true, tool disabled this handler and do `onClickHandler` instead
  */
 Q.Tool.define("Users/labels", function Users_labels_tool(options) {
-	var tool = this
-	var state = tool.state;
-	if (state.userId == null) {
-		state.userId = Users.loggedInUserId();
-	}
-	if (state.canAdd === true) {
-        //state.canAdd = tool.text.addLabel2;
-        state.canAdd = Users.isCommunityId(state.userId) ?
-            tool.text.newRole
-            :
-            tool.text.addLabel
-            ;    
-        
-	}
-    
-	if (Users.isCommunityId(state.userId)) {
-		tool.element.addClass('Users_labels_communityRoles');
-		state.addToPhonebook = false;
-	}
+    var tool = this
+    var state = tool.state;
+    if (state.userId == null) {
+            state.userId = Users.loggedInUserId();
+    }
+    if (state.canAdd === true) {
+    //state.canAdd = tool.text.addLabel2;
+    state.canAdd = Users.isCommunityId(state.userId) ?
+        tool.text.newRole
+        :
+        tool.text.addLabel
+        ;    
+
+    }
+
+    if (Users.isCommunityId(state.userId)) {
+            tool.element.addClass('Users_labels_communityRoles');
+            state.addToPhonebook = false;
+    }
 
     if (state.contactUserId){
         Q.Streams.get(state.contactUserId, 'Streams/user/xid/web3', function(err, stream){
@@ -70,17 +70,16 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
     } else {
         tool.refresh();            
     }
-    
-	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
 
-		var $this = $(this);
-		var label = $this.attr('data-label');
-		var wasSelected = $this.hasClass('Q_selected');
-		var title = $this.text();
+    $(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
+        var $this = $(this);
+        var label = $this.attr('data-label');
+        var wasSelected = $this.hasClass('Q_selected');
+        var title = $this.text();
         if (state.editable) {
             tool.onClickHandler($this);
         } else {
-            
+
             if (false === Q.handle(state.onClick, tool, [this, label, title, wasSelected])) {
                 return;
             }
@@ -101,31 +100,30 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                     $this.addClass('Q_selected');    
                 }
             });
-                
-        
+
         }
-	});
+    });
 },
 
 {
-	userId: null,
-	filter: ['Users/'],
-	exclude: null,
-	contactUserId: null,
+    userId: null,
+    filter: ['Users/'],
+    exclude: null,
+    contactUserId: null,
     contactUserId_xid: null,
-	canAdd: false,
+    canAdd: false,
     //web3: {
     abiPath: "Users/templates/R1/Community/contract",
     canAddWeb3: null, // filled on backend side
     //},
-	addToPhonebook: Q.info.isMobile,
+    addToPhonebook: Q.info.isMobile,
     icon: 200,
     editable: false,
     imagepicker: {},
-	cacheBust: null,
-	cacheBustOnUpdate: 1000,
-	onRefresh: new Q.Event(),
-	onClick: new Q.Event()
+    cacheBust: null,
+    cacheBustOnUpdate: 1000,
+    onRefresh: new Q.Event(),
+    onClick: new Q.Event()
 },
 
 {
@@ -421,53 +419,54 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
         
     },
     /**
-	 * Refresh the tool's contents
-	 * @method refresh
-	 */
-	refresh: function (callback) {
-		var tool = this;
-		var state = this.state;
-		tool.element.addClass('Q_loading');
-		var all = state.all;
-		if (typeof all === 'string') {
-			all = {
-				title: all,
-				icon: Q.url("{{Users}}/img/icons/labels/all/200.png")
-			};
-		}
-		var selectedLabels = [];
-		tool.$('li.Q_selected').each(function () {
-			selectedLabels.push($(this).attr('data-label'));
-		});
-        
-		Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
+    * Refresh the tool's contents
+    * @method refresh
+    */
+    refresh: function (callback) {
+        var tool = this;
+        var state = this.state;
+        tool.element.addClass('Q_loading');
+        var all = state.all;
+        if (typeof all === 'string') {
+            all = {
+                title: all,
+                icon: Q.url("{{Users}}/img/icons/labels/all/200.png")
+            };
+        }
+        var selectedLabels = [];
+        tool.$('li.Q_selected').each(function () {
+            selectedLabels.push($(this).attr('data-label'));
+        });
 
-			// exclude labels if state.exclude not empty
-			Q.each(state.exclude, function (i, label) {
-				delete(labels[label]);
-			})
+        Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
 
-			Q.Template.render("Users/labels", {
-				labels: labels,
-				all: all,
-				canAdd: Q.Users.loggedInUser && state.canAdd,
-				canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
-				phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
+            // exclude labels if state.exclude not empty
+            Q.each(state.exclude, function (i, label) {
+                    delete(labels[label]);
+            })
+
+            Q.Template.render("Users/labels", {
+                labels: labels,
+                all: all,
+                canAdd: Q.Users.loggedInUser && state.canAdd,
+                canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
+                phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
                 addToPhonebook: state.contactUserId && state.addToPhonebook && tool.text.addToPhonebook
-			}, function (err, html) {
-				tool.element.removeClass('Q_loading');
-				Q.replace(tool.element, html);
+            }, function (err, html) {
+                tool.element.removeClass('Q_loading');
+                Q.replace(tool.element, html);
+
+                tool.$('li').each(function () {
+                    if (selectedLabels.indexOf($(this).attr('data-label')) >= 0) {
+                        $(this).addClass('Q_selected');
+                    }
+                });
+                Q.handle(state.onRefresh, tool, []);
                 
-				tool.$('li').each(function () {
-					if (selectedLabels.indexOf($(this).attr('data-label')) >= 0) {
-						$(this).addClass('Q_selected');
-					}
-				});
-				Q.handle(state.onRefresh, tool, []);
                 if (typeof callback !== 'undefined') {
                     Q.handle(callback, tool, []);    
                 }
-            
+
                 if (state.userId && state.contactUserId) {
                     // selecting web2 labels
                     $(tool.element)
@@ -489,10 +488,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             });
                         });
                     });
-                    
+
                     // checks and selecting web3 labels
                     if (!Q.isEmpty(state.contactUserId_xid)) {
-                        
+
                         var configChains = Q.Users.apps.web3;
                         var communityAddress, st;
                         for(var chain in configChains){
@@ -506,7 +505,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             if (!st) {
                                 continue;
                             }
-                            
+
                             Q.Communities.Web3.Roles.getAll(communityAddress, configChains[chain]['appId'], null, function (err, response) {
 
                                 if (err) {return;}
@@ -530,12 +529,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                             });
                         };
-                        
-                    }
 
-                    
-                    
+                    }
                 }
+
                 if (state.canAdd) {
 
                     $(tool.element)
@@ -545,7 +542,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             tool.onClickHandler();
                         });
                 }
-                
+
                 var $addToPhonebook = tool.$('.Users_labels_add_phonebook');
                 if (state.addToPhonebook) {
                     $addToPhonebook
@@ -589,8 +586,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                     })
                 })
             });
-		});
-	}
+        });
+    }
 });
 
 Q.Template.set('Users/labels', `
