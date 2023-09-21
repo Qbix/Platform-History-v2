@@ -8,7 +8,7 @@
 	 * @class Q progress
 	 * @constructor
 	 * @param {Object} [options] Override various options for this tool
-	 * @param {Number} [options.percents] - process percents
+	 * @param {Number} [options.fraction] - process percents
 	 * @param {String} [options.color] - progress bar color
 	 * @param {Boolean} [options.showProgress] - whether to show percents
 	 * @return {Q.Tool}
@@ -17,10 +17,14 @@
 		var tool = this;
 		var state = tool.state;
 
-		tool.Q.onStateChanged('percents').set(function () {
-			var percents = parseInt(state.percents) + '%';
-			tool.$(".Q_progress_bar").width(percents);
-			tool.$(".Q_progress_text").html(percents);
+		tool.Q.onStateChanged('fraction').set(function () {
+			var fraction = parseInt(state.fraction) + '%';
+			tool.$(".Q_progress_bar").width(fraction);
+			tool.$(".Q_progress_text").html(fraction);
+		}, tool);
+
+		tool.Q.onStateChanged('color').set(function () {
+			tool.$(".Q_progress_bar").css("background", state.color);
 		}, tool);
 
 		tool.Q.onStateChanged('showProgress').set(function () {
@@ -31,10 +35,11 @@
 	},
 
 	{
-		percents: 0,
+		fraction: 0,
 		showProgress: false,
+		color: 'red',
 		clickPos: {
-			percents: 0
+			fraction: 0
 		}
 	},
 
@@ -49,8 +54,9 @@
 
 				$toolElement.html(html);
 
-				tool.stateChanged('percents');
+				tool.stateChanged('fraction');
 				tool.stateChanged('showProgress');
+				tool.stateChanged('color');
 
 				var lastEvent = {};
 				$toolElement.on('touchstart touchmove', function (event) {
@@ -71,8 +77,8 @@
 		 * @method initPos
 		 */
 		initPos: function () {
-			this.state.percents = 0;
-			this.stateChanged('percents');
+			this.state.fraction = 0;
+			this.stateChanged('fraction');
 		}
 	});
 

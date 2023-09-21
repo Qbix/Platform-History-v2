@@ -1,12 +1,11 @@
 .Q_progress_tool {
 	position: relative;
 	border: 1px solid #555;
-	height: 40px;
 }
 .Q_progress_tool .Q_progress_bar {
 	background: #555;
 	width: 0;
-	height: 100%;
+	height: 40px;
 }
 .Q_progress_tool .Q_progress_text {
 	display: none;
@@ -21,4 +20,5 @@
 }
 .Q_progress_tool[data-showProgress=true] .Q_progress_text {
 	display: block;
+	line-height: 40px;
 }
