@@ -216,6 +216,7 @@ function _Streams_participants(options) {
 			Q.Tool.clear(tool.$blanks[0]);
 			tool.$avatars.empty();
 			tool.$blanks.empty();
+			tool.$elements = {};
 			Q.each(extra && extra.participants, function (userId, participant) {
 				if (participant.state !== 'participating') {
 					return;

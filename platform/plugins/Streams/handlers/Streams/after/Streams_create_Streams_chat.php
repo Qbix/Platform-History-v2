@@ -5,7 +5,7 @@ function Streams_after_Streams_create_Streams_chat($params)
 	$stream = $params['stream'];
 	$weight = time();
 
-	// if chat is private - don't relate it to experience categories
+	// if chat is private - don't relate it to category "Streams/chat/$experience"
 	if (Q::ifset($stream->getAttribute('Streams'), "private", false)) {
 		return;
 	}
