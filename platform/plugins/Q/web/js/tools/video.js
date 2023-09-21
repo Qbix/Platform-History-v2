@@ -130,6 +130,27 @@ Q.Tool.define("Q/video", function (options) {
 			});
 		}
 	};
+	tool.adapters.odysee = { //plays livestream from odysee in iframe
+		init: function () {
+			Q.addScript("https://cdn.embed.ly/player-0.1.0.min.js", function () {
+				const iframe = document.createElement('iframe');
+				iframe.src = state.url;
+				tool.element.appendChild(iframe);
+				tool.element.classList.add('Q_video_odysee');
+
+				state.player = new playerjs.Player(iframe);
+				state.player.on('play', function () {
+					Q.handle(state.onPlay, tool);
+				});
+				state.player.on('pause', function () {
+					Q.handle(state.onPause, tool);
+				});
+				state.player.on('ended', function () {
+					Q.handle(state.onEnded, tool);
+				});
+			});
+		}
+	};
 	tool.adapters.muse = {
 		init: function () {
 			Q.addScript("https://muse.ai/static/js/embed-player.min.js", function () {
@@ -1115,6 +1136,8 @@ Q.Tool.define("Q/video", function (options) {
 			return 'vimeo';
 		} else if (host.includes("twitch")) {
 			return 'twitch';
+		} else if (host.includes("odysee")) {
+			return 'odysee';
 		} else if (host.includes("muse.ai")) {
 			return 'muse';
 		}
