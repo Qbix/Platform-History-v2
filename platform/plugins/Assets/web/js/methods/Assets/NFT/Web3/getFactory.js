@@ -5,7 +5,7 @@ Q.exports(function(){
     * @param {Object} chainId
     * @return {Promise} to be used instead of callback
     */
-    function getFactory(chainId) {
+    return function Assets_NFT_Web3_getFactory(chainId) {
         return Q.Users.Web3.getFactory(
             'Assets/templates/R1/NFT/factory',
             chainId
@@ -29,6 +29,4 @@ Q.exports(function(){
             //Q.handle(callback, null, [err, contract]);
         });
     }
-    
-    return getFactory;
 })

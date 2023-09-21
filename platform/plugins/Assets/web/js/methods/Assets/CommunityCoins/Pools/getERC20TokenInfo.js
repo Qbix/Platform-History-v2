@@ -1,5 +1,5 @@
 Q.exports(function () {
-    function _getERC20TokenInfo(contract, userAddress, chainId){
+    function getERC20TokenInfo(contract, userAddress, chainId){
         return Q.Users.Web3.getContract(
             "Assets/templates/ERC20", 
             {
@@ -16,5 +16,5 @@ Q.exports(function () {
             return Promise.all(p);
         })
     }
-    return _getERC20TokenInfo;
+    return getERC20TokenInfo;
 });

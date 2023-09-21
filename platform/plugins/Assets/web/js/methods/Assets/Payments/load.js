@@ -1,4 +1,4 @@
-Q.exports(function(_redirectToBrowserTab){
+Q.exports(function(priv){
     /**
     * Load js libs and do some needed actions.
     * @method load

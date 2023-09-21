@@ -8,7 +8,7 @@ Q.exports(function(){
     * @param {function} callback
     * @param {object} options
     */
-    function commissionInfo(tokenId, chain, callback, options) {
+    return function Assets_NFT_Web3_commissionInfo(tokenId, chain, callback, options) {
         var contract;
         Q.Assets.NFT.Web3.getContract(chain, Q.extend({}, options, {readOnly: true}), function (err, contract_) {
             contract = contract_;
@@ -23,6 +23,4 @@ Q.exports(function(){
             });
         });
     }
-    
-    return commissionInfo;
 })

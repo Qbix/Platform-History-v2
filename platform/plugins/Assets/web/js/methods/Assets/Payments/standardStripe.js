@@ -1,4 +1,4 @@
-Q.exports(function(_redirectToBrowserTab){
+Q.exports(function(priv){
     /**
     * This method use to pay with standard stripe payment
     * @method standardStripe
@@ -10,7 +10,7 @@ Q.exports(function(_redirectToBrowserTab){
     *  @param {String} [options.currency="usd"] the currency to pay in.
     *  @param {Function} [callback]
     */
-    function standardStripe(options, callback) {
+    return function standardStripe(options, callback) {
         Q.Assets.Payments.checkLoaded();
 
         Q.Template.set('Assets/stripe/payment',
@@ -207,6 +207,4 @@ Q.exports(function(_redirectToBrowserTab){
             }
         });
     }
-    
-    return standardStripe;
 })

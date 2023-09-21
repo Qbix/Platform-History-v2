@@ -2,7 +2,7 @@ Q.exports(function () {
     /**
     * Get pool instances from blockchain and additionally get token info name/symbol/user/balance
     * @method getAll
-    * @param {Object} poolsList pool list from blockchain. can be obtained from server side(php) or form client side (js) by `Assets.CommunityCoins.Pools._getAll`
+    * @param {Object} poolsList pool list from blockchain. can be obtained from server side(php) or form client side (js) by `Assets.CommunityCoins.Pools.getAll`
     * @param {String} communityCoinAddress address of communitycoin contract
     * @param {Object} abiPaths optional parameter
     * @param {String} abiPaths.abiPathCommunityCoin path in config to CommunityCoin's ABI
@@ -16,7 +16,7 @@ Q.exports(function () {
         var m;
         if (Q.isEmpty(poolsList)) {
             //poolsList retrive from js
-            m = Q.Assets.CommunityCoins.Pools._getAll(communityCoinAddress, abiPaths, chainId)
+            m = Q.Assets.CommunityCoins.Pools.getAll(communityCoinAddress, abiPaths, chainId)
         } else {
             //poolsList got from backend;
             m = new Promise(function (resolve, reject) {resolve(poolsList)})
@@ -26,10 +26,10 @@ Q.exports(function () {
             var p = [];
             p.push(new Promise(function (resolve, reject) {resolve(instanceInfos)}));
 
-            p.push(Q.Assets.CommunityCoins.Pools._getERC20TokenInfo(communityCoinAddress, userAddress, chainId));
+            p.push(Q.Assets.CommunityCoins.Pools.getERC20TokenInfo(communityCoinAddress, userAddress, chainId));
 
             instanceInfos.forEach(function(i){
-                p.push(Q.Assets.CommunityCoins.Pools._getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
+                p.push(Q.Assets.CommunityCoins.Pools.getERC20TokenInfo(i.tokenErc20, userAddress, chainId));
             });
 
             return Promise.allSettled(p);

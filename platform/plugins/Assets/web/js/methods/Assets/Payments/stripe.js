@@ -1,4 +1,4 @@
-Q.exports(function(_redirectToBrowserTab){
+Q.exports(function(priv){
     /**
     * Show a stripe dialog where the user can choose their payment profile
     * and then charge that payment profile.
@@ -11,7 +11,7 @@ Q.exports(function(_redirectToBrowserTab){
     *  @param {object} [options.metadata] Data to pass to payment gateway to get them back and save to message instructions
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
-    function stripe(options, callback) {
+    return function stripe(options, callback) {
         Q.Assets.Payments.checkLoaded();
 
         options = Q.extend({},
@@ -36,18 +36,10 @@ Q.exports(function(_redirectToBrowserTab){
         options.currency = (options.currency || 'USD').toUpperCase();
 
         if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-            _redirectToBrowserTab(options);
+            priv._redirectToBrowserTab(options);
         } else {
             Q.Assets.Payments.standardStripe(options, callback);
         }
     }
-    
-    stripe.options = {
-		description: 'a product or service',
-		javascript: 'https://checkout.stripe.com/checkout.js',
-		name: Q.Users.communityName
-	};
 
-    
-    return stripe;
 })

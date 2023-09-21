@@ -129,13 +129,13 @@
 				Q.replace(tool.element, html);
 			});
 			
-			Assets.Funds._getAll(
+			Assets.Funds.getAll(
 				state.chainId, 
 				state.abiPathF, 
 			).then(function(instances){
 				var p = [];
 				for (var i in instances) {
-					p.push(Assets.Funds._getFundConfig(instances[i].value, state.chainId, ethers.utils.getAddress(tool.loggedInUserXid)));
+					p.push(Assets.Funds.getFundConfig(instances[i].value, state.chainId, ethers.utils.getAddress(tool.loggedInUserXid)));
 				}
 				return Promise.allSettled(p);
 			}).then(function(configsData){

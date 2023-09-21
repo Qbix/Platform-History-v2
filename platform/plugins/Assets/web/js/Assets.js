@@ -7,17 +7,20 @@
 
 	var Users = Q.Users;
 	var Streams = Q.Streams;
-	var Assets = Q.Assets = Q.plugins.Assets = Q.Method.define({
+    
+    var priv = {};
+    
+	var Assets = Q.Assets = Q.plugins.Assets = {
 
 		/**
 		 * Operates with credits.
 		 * @class Assets.Credits
 		 */
+        
 		Credits: Q.Method.define({
-			
-			userStream: Q.Method.stub,
-			buy: Q.Method.stub,
-			pay: Q.Method.stub,
+			userStream: new Q.Method(),
+			buy: new Q.Method(),
+			pay: new Q.Method(),
 			/**
 			 * Convert from currency to credits
 			 * @method convertToCredits
@@ -26,7 +29,7 @@
 			 *  @param {String} currency
 			 */
 			convertToCredits: function (amount, currency) {
-				var exchange = Q.getObject(["exchange", currency], Assets.Credits);
+				var exchange = Q.getObject(["exchange", currency], Q.Assets.Credits);
 
 				if (!exchange) {
 					return null;
@@ -46,9 +49,19 @@
 		 * @class Assets.Subscriptions
 		 */
 		Subscriptions: Q.Method.define({
-            authnet: Q.Method.stub,
-            stripe: Q.Method.stub,
-            subscribe: Q.Method.stub
+            authnet: new Q.Method({
+                options: {
+                    name: Q.Users.communityName
+                }
+            }),
+            stripe: new Q.Method({
+                options: {
+                    name: Q.Users.communityName,
+                    email: Q.getObject("loggedInUser.email", Q.Users),
+                    currency: 'USD'
+                }
+            }),
+            subscribe: new Q.Method()
 		}, '{{Assets}}/js/methods/Assets/Subscriptions'),
 
 		/**
@@ -69,10 +82,21 @@
 
 				throw new Q.Error("In order to use Assets.Payments methods need to call method Assets.Payments.load()");
 			},
-            authnet: Q.Method.stub,
-            stripe: Q.Method.stub,
-            load: Q.Method.stub,
-            standardStripe: Q.Method.stub,
+            authnet: new Q.Method({
+                options: {
+                    name: Q.Users.communityName,
+                    description: 'a product or service'
+                }
+            }),
+            stripe: new Q.Method({
+                options: {
+                    description: 'a product or service',
+                    javascript: 'https://checkout.stripe.com/checkout.js',
+                    name: Q.Users.communityName
+                }
+            }),
+            load: new Q.Method(),
+            standardStripe: new Q.Method(),
 			/**
 			 * Show message with payment status
 			 * @method stripePaymentResult
@@ -83,21 +107,21 @@
 				var message = "";
 				switch (paymentIntent.status) {
 					case "succeeded":
-						message = Assets.texts.payment.PaymentSucceeded;
+						message = Q.Assets.texts.payment.PaymentSucceeded;
 						break;
 					case "processing":
-						message = Assets.texts.payment.PaymentProcessing;
+						message = Q.Assets.texts.payment.PaymentProcessing;
 						break;
 					case "requires_payment_method":
-						message = Assets.texts.payment.FailTryAgain;
+						message = Q.Assets.texts.payment.FailTryAgain;
 						break;
 					default:
-						message = Assets.texts.payment.SomethingWrong;
+						message = Q.Assets.texts.payment.SomethingWrong;
 						break;
 				}
 
 				Q.Dialogs.push({
-					title: Assets.texts.payment.PaymentStatus,
+					title: Q.Assets.texts.payment.PaymentStatus,
 					className: "Assets_Payment_status",
 					content: message,
 					onActivate: function ($dialog) {
@@ -108,7 +132,7 @@
 		}, 
             '{{Assets}}/js/methods/Assets/Payments',
             function(){
-                return [_redirectToBrowserTab]
+                return [priv];
             }
         ),
 
@@ -117,9 +141,9 @@
 		 * @class Assets.Currencies
 		 */
 		Currencies: Q.Method.define({
-            load: Q.Method.stub,
-			getSymbol: Q.Method.stub,
-			balanceOf: Q.Method.stub,
+            load: new Q.Method(),
+			getSymbol: new Q.Method(),
+			balanceOf: new Q.Method(),
 			Web3: {
 				/**
 				 * @method getTokens
@@ -163,7 +187,7 @@
 						throw new Q.Exception("Assets.Currencies.Web3.getToken: token symbol or address required");
 					}
 					var tokens = Assets.Currencies.Web3.getTokens(chainId);
-					for (tokenSymbol in tokens) {
+					for (var tokenSymbol in tokens) {
 						var tokenInfo = tokens[tokenSymbol];
 						if (tokenSymbol === tokenSymbolOrAddress
 						|| tokenInfo[chainId] === tokenSymbolOrAddress) {
@@ -204,25 +228,25 @@
 				onSeriesRemovedFromSale: new Q.Event(),
 
 				Sales: Q.Method.define({
-					getFactory: Q.Method.stub,
-					getContract: Q.Method.stub,
+					getFactory: new Q.Method(),
+					getContract: new Q.Method(),
 				}, '{{Assets}}/js/methods/Assets/NFT/Web3/Sales'),
 
 				Locked: Q.Method.define({
-					getContract: Q.Method.stub
+					getContract: new Q.Method()
 				}, '{{Assets}}/js/methods/Assets/NFT/Web3/Locked'),
 
-				setSeriesInfo: Q.Method.stub,
-				getFactory: Q.Method.stub,
-				getContract: Q.Method.stub,
-				metadata: Q.Method.stub,
-				balanceOf: Q.Method.stub,
-				getAuthor: Q.Method.stub,
-				getOwner: Q.Method.stub,
-				commissionInfo: Q.Method.stub,
-				saleInfo: Q.Method.stub,
-				transferFrom: Q.Method.stub,
-				buy: Q.Method.stub,
+				setSeriesInfo: new Q.Method(),
+				getFactory: new Q.Method(),
+				getContract: new Q.Method(),
+				metadata: new Q.Method(),
+				balanceOf: new Q.Method(),
+				getAuthor: new Q.Method(),
+				getOwner: new Q.Method(),
+				commissionInfo: new Q.Method(),
+				saleInfo: new Q.Method(),
+				transferFrom: new Q.Method(),
+				buy: new Q.Method(),
 				/**
 				 * Get long string and minimize to fixed length with some chars at the end and dots in the middle
 				 * @method minimizeAddress
@@ -263,25 +287,21 @@
 				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
-		CommunityCoins: Q.Method.define({
-			Pools: Q.Method.define({
-				Factory: Q.Method.define({
-					Get: Q.Method.stub
-				}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory'),
-				getAll: Q.Method.stub,
-				getAllExtended: Q.Method.stub,
-				
-				_getAll: Q.Method.stub,
-				_getERC20TokenInfo: Q.Method.stub
-			}, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools'),
-		}, '{{Assets}}/js/methods/Assets/CommunityCoins'),
+        CommunityCoins: Q.Method.define({
+            Pools: Q.Method.define({
+                Factory: Q.Method.define({
+                    Get: new Q.Method()
+                }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools/Factory'),
+                getAll: new Q.Method(),
+                getAllExtended: new Q.Method(),
+                getERC20TokenInfo: new Q.Method()
+            }, '{{Assets}}/js/methods/Assets/CommunityCoins/Pools')
+        }, '{{Assets}}/js/methods/Assets/CommunityCoins'),
 		Funds: Q.Method.define({
-			getFactory: Q.Method.stub,
-			getAll: Q.Method.stub,
-			getFundConfig: Q.Method.stub,
-			_getAll: Q.Method.stub,
-			_getFundConfig: Q.Method.stub,
-			_getWhitelisted: Q.Method.stub,
+			getFactory: new Q.Method(),
+			getAll: new Q.Method(),
+			getFundConfig: new Q.Method(),
+			getWhitelisted: new Q.Method(),
 			adjustFundConfig: function(infoConfig, options) {
 				//make output data an userfriendly
 				var infoConfigAdjusted = Object.assign({}, infoConfig);
@@ -326,8 +346,7 @@
 				return infoConfigAdjusted;
 			}
 		}, '{{Assets}}/js/methods/Assets/Funds'),
-		
-		Web3: {
+		Web3: Q.Method.define({
 			constants: {
 				zeroAddress: '0x0000000000000000000000000000000000000000'
 			},
@@ -341,25 +360,10 @@
 			 * @param {String} [image] A string url of the token logo
 			 * @return {String}
 			 */
-			addAsset: {
-				metamask: function (asset, symbol, decimals, image) {
-					return ethereum.request({
-						method: 'wallet_watchAsset',
-						params: {
-							type: 'ERC20',
-							options: {
-								address: asset,
-								symbol: symbol,
-								decimals: decimals,
-								image: image
-							}
-						}
-					});
-				},
-				trustwallet: function (asset) {
-					window.open(Assets.Web3.Links.addAsset.trustwallet('c60_t'+asset));
-				}
-			},
+			addAsset: Q.Method.define({
+				metamask: new Q.Method(),
+				trustwallet: new Q.Method()
+			}, '{{Assets}}/js/methods/Assets/Web3/addAsset'),
 
 			Links: {
 				/**
@@ -415,9 +419,51 @@
 						});
 					}}
 			}
-		}
-	}, '{{Assets}}/js/methods/Assets');
+		}, '{{Assets}}/js/methods/Assets/Web3'),
+	};
+    
 
+//    var priv = Q.Method.define({
+//    }, '{{Assets}}/js/methods/Assets/priv');
+//        
+//        
+/**
+     * method will redirect if Cordova plugin
+     * TODO: mb move it to '{{Assets}}/js/methods/Assets/Payments/stripe.js',
+     * @param {type} options
+     * @returns {undefined}
+     */
+	priv._redirectToBrowserTab = function _redirectToBrowserTab(options) {
+		var url = new URL(document.location.href);
+		url.searchParams.set('browsertab', 'yes');
+		url.searchParams.set('scheme', Q.info.scheme);
+		url.searchParams.set('paymentOptions', JSON.stringify({
+			amount: options.amount,
+			email: options.email,
+			userId: Q.Users.loggedInUserId(),
+			currency: options.currency,
+			description: options.description,
+			metadata: options.metadata
+		}));
+		cordova.plugins.browsertabs.openUrl(url.toString(), {
+			scheme: Q.info.scheme
+		}, function(successResp) {
+			Q.handle(options.onSuccess, null, [successResp]);
+		}, function(err) {
+			Q.handle(options.onFailure, null, [err]);
+		});
+	}
+
+    
+    // define methods for Users to replace method stubs
+    Q.Method.define(
+        Assets, 
+        '{{Assets}}/js/methods/Assets', 
+        function() {
+            return [priv];
+        }
+    );
+    
 	Q.Text.addFor(
 		['Q.Tool.define', 'Q.Template.set'],
 		'Assets/', ["Assets/content"]
@@ -593,33 +639,6 @@
 		return err;
 	}
     
-    /**
-     * method will redirect if Cordova plugin
-     * TODO: mb move it to '{{Assets}}/js/methods/Assets/Payments/stripe.js',
-     * @param {type} options
-     * @returns {undefined}
-     */
-	function _redirectToBrowserTab(options) {
-		var url = new URL(document.location.href);
-		url.searchParams.set('browsertab', 'yes');
-		url.searchParams.set('scheme', Q.info.scheme);
-		url.searchParams.set('paymentOptions', JSON.stringify({
-			amount: options.amount,
-			email: options.email,
-			userId: Q.Users.loggedInUserId(),
-			currency: options.currency,
-			description: options.description,
-			metadata: options.metadata
-		}));
-		cordova.plugins.browsertabs.openUrl(url.toString(), {
-			scheme: Q.info.scheme
-		}, function(successResp) {
-			Q.handle(options.onSuccess, null, [successResp]);
-		}, function(err) {
-			Q.handle(options.onFailure, null, [err]);
-		});
-	}
-
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
 		window.onload = function() {
 			var params = new URLSearchParams(document.location.href);

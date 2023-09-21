@@ -10,7 +10,7 @@ Q.exports(function(){
     *  @param {Boolean} [option.immediatePayment=false] - If true, try to charge funds using stripe customer id.
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
-    function stripe(options, callback) {
+    return function stripe(options, callback) {
         // load payment lib and set required params
         Q.Assets.Payments.load(function () {
             Q.Streams.get(options.planPublisherId, options.planStreamName, function (err) {
@@ -76,12 +76,4 @@ Q.exports(function(){
             });
         });
     }
-
-	stripe.options = {
-		name: Q.Users.communityName,
-		email: Q.getObject("loggedInUser.email", Users),
-		currency: 'USD'
-	};
-    
-    return stripe;
 })

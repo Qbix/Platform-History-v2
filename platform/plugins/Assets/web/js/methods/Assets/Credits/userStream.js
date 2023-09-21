@@ -7,7 +7,7 @@ Q.exports(function(){
     * @param {Object} [options]
     * @param {String|true} [options.retainWith] key to retain the stream with, if any
     */
-    function userStream(callback, options) {
+    return function userStream(callback, options) {
         if (!Q.Users.loggedInUser) {
             callback(new Q.Error("Credits/userStream: not logged in"), null);
             return false;
@@ -18,5 +18,4 @@ Q.exports(function(){
         }
         S.get(Q.Users.loggedInUser.id, "Assets/user/credits", callback);
     }
-    return userStream;
 })

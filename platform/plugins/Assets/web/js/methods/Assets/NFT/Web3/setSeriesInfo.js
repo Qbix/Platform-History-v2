@@ -20,7 +20,7 @@ Q.exports(function(){
     * @param {String} [info.suffix] to override global suffix, if necessary
     * @return {Promise} promise from ethers.Contract call transaction
     */
-    function setSeriesInfo(contractAddress, seriesId, info, callback) {
+    return function Assets_NFT_Web3_setSeriesInfo(contractAddress, seriesId, info, callback) {
         if (typeof contractAddress !== 'string'
         && !(contractAddress instanceof String)) {
             throw new Q.Error("contractAddress must be a string");
@@ -62,6 +62,4 @@ Q.exports(function(){
             callback
         );
     }
-    
-    return setSeriesInfo;
 })

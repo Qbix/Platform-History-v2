@@ -9,7 +9,7 @@ Q.exports(function(){
     * @param {function} [callback]
     * @return {Q.Promise} instead of callback
     */
-    function getContract(chainId, options, callback) {
+    return function Assets_NFT_Web3_getContract(chainId, options, callback) {
         var address = Q.getObject("contractAddress", options) || chainId.contract;
         var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
         return Q.Users.Web3.getContract(abiPath, {
@@ -45,6 +45,4 @@ Q.exports(function(){
             Q.handle(callback, null, [null, contract]);
         });
     }
-    
-    return getContract;
 })
