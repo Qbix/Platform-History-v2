@@ -832,6 +832,9 @@ Q.Tool.define({
 	"Streams/groupPhoto" : {
 		js: ["{{Streams}}/js/face-api/dist/face-api.js", "{{Streams}}/js/tools/groupPhoto.js"],
 		css: "{{Streams}}/css/tools/groupPhoto.css"
+	},
+	"Streams/task/preview": {
+		js: "{{Streams}}/js/tools/task/preview.js"
 	}
 });
 
