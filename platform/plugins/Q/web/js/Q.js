@@ -5893,7 +5893,7 @@ Q.Links = {
 	telegram: function (to, text, url, inviteToken) {
 		if(!to && url) { //share URL with some users to select in telegram
 			var link = 'tg://msg_url?url=' + url;
-			if(text) link += '&text=' + text;
+			if(text) link += '&text=' + encodeURIComponent(text);
 			return link;
 		}
 
