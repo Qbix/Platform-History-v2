@@ -1497,8 +1497,9 @@
           var box = det instanceof FaceDetection
               ? det.box
               : (isWithFaceDetection(det) ? det.detection.box : new Box(det));
-          var label = options.withScore && score ? "" + round(score) : undefined;
-          new DrawBox(box, { label: label }).draw(canvasArg);
+          options.label = options.withScore && score ? "" + round(score) : undefined;
+          delete(options.withScore);
+          new DrawBox(box, options).draw(canvasArg);
       });
   }
 
