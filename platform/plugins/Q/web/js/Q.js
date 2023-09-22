@@ -5883,32 +5883,37 @@ Q.Links = {
 	 * @method telegram
 	 * @param {String} [to] Phone number with country code e.g. "+1", or username starting with "@".
 	 *  If a username, then don't supply text or url, it can only open a window to chat.
-	 *  Set this to false and supply text (and optional url) to open Telegram and let the user
+	 *  Or pass null here and supply text (and optional url) to open Telegram and let the user
 	 *  choose Telegram users, channels and groups to share to.
-	 * @param {String} [text] The text to share, can contain a URL, so need to include the next parameter.
-	 * @param {String} [url] Optionally put a URL to share here, which will appear ahead of the text
-	 * @param {String} [inviteToken] “start” phrase for a bot
+	 * @param {String} [text] The text to share. Although it can contain a URL, try using options.url
+	 * @param {Object} [options]
+	 * @param {String} [options.url] Optionally put a URL to share here, which will appear ahead of the text
+	 * @param {String} [options.start] “start” parameter for a bot
+	 * @param {String} [options.startgroup] “startgroup” parameter for a bot
 	 * @return {String}
 	 */
-	telegram: function (to, text, url, inviteToken) {
-		if(!to && url) { //share URL with some users to select in telegram
-			var link = 'tg://msg_url?url=' + url;
-			if(text) link += '&text=' + encodeURIComponent(text);
+	telegram: function (to, text, options) {
+		if (!to) { //share URL with some users to select in telegram
+			var link = 'tg://msg_url';
+			if (options && options.url) {
+				link += 'url=' + options.url + '&';
+			}
+			if (text) {
+				link += '&text=' + encodeURIComponent(text);
+			}
 			return link;
 		}
-
 		var urlParams = [];
-
-		if (to) {
-			urlParams.push('to=' + to);
-			if (to.toLowerCase().indexOf('bot') != -1 && inviteToken) {
-				urlParams.push('start=' + encodeURIComponent(inviteToken));
-			}
-		}
+		urlParams.push('to=' + to);
 		if (text) {
 			urlParams.push('text=' + encodeURIComponent(text));
 		}
-
+		if (options.start) {
+			urlParams.push('start=' + encodeURIComponent(options.start));
+		}
+		if (options.startgroup) {
+			urlParams.push('startgroup=' + encodeURIComponent(options.startgroup));
+		}
 		return 'tg://msg?' + urlParams.join('&');
 	},
 	/**
