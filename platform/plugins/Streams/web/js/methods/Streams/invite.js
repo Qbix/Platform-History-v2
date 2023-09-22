@@ -220,11 +220,10 @@ Q.exports(function() {
                         className: 'Streams_invite_QR',
                         title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
                         content: '<div class="Streams_invite_QR_content"></div>'
-                        + '<div class="Q_buttons">'
-                        + '<button class="Q_button">'
-                        + text.invite.dialog.scannedQR.interpolate(Q.text.Q.words)
-                        + '</button>'
-                        + '</div>',
+                            + '<div class="Q_buttons">'
+                            //+ '<button class="Q_button Streams_invite_QR_scanned">' + text.invite.dialog.scannedQR.interpolate(Q.text.Q.words) + '</button>'
+                            + '<button class="Q_button Streams_invite_QR_groupPhoto">' + text.invite.dialog.TakeGroupPhoto + '<i class="streams-icon-checkmark-outline"></i></button>'
+                            + '</div>',
                         onActivate: function (dialog) {
                             // fill QR code
                             Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
@@ -244,20 +243,20 @@ Q.exports(function() {
                                     var invitedUserId = data.invitedUserId;
                                     if (invitedUserId && data.displayName) {
                                         title = Q.getObject(['invite', 'dialog', 'photoOf'], text)
-                                        .interpolate({"name": data.displayName});
+                                            .interpolate({"name": data.displayName});
                                     }
                                     var subpath = loggedUserId.splitId() + '/invited/' + rsd.invite.token;
                                     if (invitedUserId) {
                                         subpath = invitedUserId.splitId() + '/icon/' + Math.floor(Date.now()/1000);
                                     }
-    
+
                                     if (Q.Dialogs.dialogs.length) {
                                         var $lastDialog = Q.Dialogs.dialogs[Q.Dialogs.dialogs.length-1];
                                         if ($lastDialog instanceof jQuery && !$lastDialog.hasClass(dialogClassName)) {
                                             Q.Dialogs.pop();
                                         }
                                     }
-    
+
                                     Q.Dialogs.push({
                                         title: title,
                                         apply: true,
@@ -285,13 +284,13 @@ Q.exports(function() {
                                                     Q.Dialogs.close(dialog);
                                                 }
                                             });
-    
+
                                             if (invitedUserId) {
                                                 Q.Streams.get(invitedUserId, "Streams/user/icon", function (err) {
                                                     if (err) {
                                                         return;
                                                     }
-    
+
                                                     var userIconStream = this;
                                                     userIconStream.observe();
                                                     var eventKey = "invite_icon_changed_" + invitedUserId;
@@ -306,15 +305,50 @@ Q.exports(function() {
                                         }
                                     });
                                 };
-    
-                                $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
-                                Users.Socket.onEvent('Streams/invite/accept')
-                                .set(function _Streams_invite_accept_handler (data) {
-                                    console.log('Users.Socket.onEvent("Streams/invite/accept")');
-                                    if (!Users.isCustomIcon(data.icon, true)) {
-                                        _setPhoto(data);
+
+                                var inviteAcceptKey = 'Streams_invite_QR_content';
+                                var igpStreamName = "Streams/image/invite/" + rsd.invite.token;
+                                var subpath = `invitations/${loggedUserId.splitId()}/${igpStreamName}`;
+                                //$('.Q_button.Streams_invite_QR_scanned', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
+                                var $groupPhotoButton = $('.Q_button.Streams_invite_QR_groupPhoto', dialog);
+                                $groupPhotoButton.plugin('Q/imagepicker', {
+                                    saveSizeName: Q.Streams.invite.groupPhoto.sizes,
+                                    maxStretch: Q.Streams.invite.groupPhoto.maxStretch,
+                                    //showSize: state.icon || $img.width(),
+                                    path: 'Q/uploads/Streams',
+                                    subpath: subpath,
+                                    save: "Streams/invite/groupPhoto",
+                                    onSuccess: function (data, key, file) {
+                                        $groupPhotoButton.attr("data-loaded", true);
+                                        Q.req("Streams/invite", ["groupPhoto"], function () {
+
+                                        }, {
+                                            method: "put",
+                                            fields: {
+                                                publisherId: loggedUserId,
+                                                streamName: igpStreamName,
+                                                subpath: subpath,
+                                                relate: {
+                                                    publisherId: o.publisherId,
+                                                    streamName: o.streamName
+                                                }
+                                            }
+                                        });
+                                    },
+                                    onFinish: function () {
+                                        // as we toke group photo no need to listen for accept to take individual photo
+                                        Q.Users.Socket.onEvent('Streams/invite/accept').remove(inviteAcceptKey);
                                     }
-                                }, 'Streams_invite_QR_content');
+                                });
+
+                                // listen for Streams/invite/accept event to show imagepicker
+                                Q.Users.Socket.onEvent('Streams/invite/accept')
+                                    .set(function _Streams_invite_accept_handler (data) {
+                                        console.log('Users.Socket.onEvent("Streams/invite/accept")');
+                                        if (!Q.Users.isCustomIcon(data.icon, true)) {
+                                            _setPhoto(data);
+                                        }
+                                    }, inviteAcceptKey);
                             });
                         }
                     });

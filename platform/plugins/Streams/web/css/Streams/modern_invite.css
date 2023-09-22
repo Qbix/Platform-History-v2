@@ -343,3 +343,21 @@ telegram
 	flex: 2;
 }
 /*end: add roles buttons*/
+.Streams_invite_QR .Q_dialog_content .Streams_invite_QR_groupPhoto {
+	position: relative;
+}
+.Streams_invite_QR .Q_dialog_content .Streams_invite_QR_groupPhoto i.streams-icon-checkmark-outline {
+	display: none;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	font-size: 24px;
+	color: #00ad00;
+	line-height: 30px;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 5px;
+}
+.Streams_invite_QR .Q_dialog_content .Streams_invite_QR_groupPhoto[data-loaded=true] i.streams-icon-checkmark-outline {
+	display: block;
+}

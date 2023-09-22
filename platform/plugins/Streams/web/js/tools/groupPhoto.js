@@ -88,16 +88,32 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 					var canvasClientRect = canvas.getBoundingClientRect();
 					faceapi.detectAllFaces(input, _getFaceDetectorOptions()).then(function (results) {
 						faceapi.matchDimensions(canvas, input);
+						// increase detected rectangles to state.rectCoefficient
 						results = results.map(function (result) {
 							result._box._x -= (result._box._width*state.rectCoefficient - result._box._width)/2;
 							result._box._y -= (result._box._height*state.rectCoefficient - result._box._height)/2;
 							result._box._width *= state.rectCoefficient;
 							result._box._height *= state.rectCoefficient;
-
 							return result;
 						});
+						var drawDetectionsOptions = {
+							withScore: false,
+							boxColor: "rgba(255, 255, 255, 1)",
+							lineWidth: 1
+						};
 						var resizedResults = faceapi.resizeResults(results, input);
-						faceapi.draw.drawDetections(canvas, resizedResults, {withScore: false});
+						faceapi.draw.drawDetections(canvas, resizedResults, drawDetectionsOptions);
+
+						// draw black box around white
+						drawDetectionsOptions.boxColor = "rgba(0, 0, 0, 1)";
+						faceapi.draw.drawDetections(canvas, faceapi.resizeResults(resizedResults.map(function (result) {
+							result._box._x -= drawDetectionsOptions.lineWidth;
+							result._box._y -= drawDetectionsOptions.lineWidth;
+							result._box._width += 2*drawDetectionsOptions.lineWidth;
+							result._box._height += 2*drawDetectionsOptions.lineWidth;
+							return result;
+						}), input), drawDetectionsOptions);
+
 						$canvas.on(Q.Pointer.fastclick, function (event) {
 							resizedResults.forEach(function (result, i) {
 								event.offsetX = event.offsetX || Q.Pointer.getX(event) - canvasClientRect.x;

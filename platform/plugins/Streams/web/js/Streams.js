@@ -873,8 +873,8 @@ Streams.arePublic = function _Streams_Stream_isPublic (
 ) {
 	for (var publisherId in publishersAndNames) {
 		for (var name in publishersAndNames[publisherId]) {
-			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
-			_publicStreams[publisherId][name] = true;
+			priv._publicStreams[publisherId] = priv._publicStreams[publisherId] || {};
+			priv._publicStreams[publisherId][name] = true;
 		}
 	}
 };
