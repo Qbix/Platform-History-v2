@@ -108,7 +108,7 @@ Q.Tool.define("Assets/history", function (options) {
 					return;
 				}
 
-				row.amount = row.amount.toFixed(2);
+				row.amount = typeof row.amount === "number" ? row.amount.toFixed(2) : row.amount;
 
 				if (row.reason) {
 					var rowOperation = Q.getObject(["history", row.reason, row.sign], tool.text) || Q.getObject(["history", row.reason], tool.text);

@@ -21,8 +21,6 @@
 			var state = tool.state;
 			options = options || {};
 
-			Q.addStylesheet('{{Q}}/css/tools/pie.css');
-
 			// positioning tool box
 			tool.positionParent();
 
@@ -39,14 +37,14 @@
 
 				$(".Q_pie_arc.Q_pie_arcLeft", $toolElement).css({transform: "rotate(" + arcLeftAngle + "deg)", display: arcLeftDisplay}); // Chrome incorrect calculate positions
 				$(".Q_pie_arc.Q_pie_arcRight", $toolElement).css("transform", "rotate(" + arcRightAngle + "deg)");
-			}, "Q/pie");
+			}, tool);
 
 			// set new size
 			tool.Q.onStateChanged('size').set(function () {
 				var size = state.size;
 
 				$(".Q_pie_box", $toolElement).css({width: size, height: size});
-			}, "Q/pie");
+			}, tool);
 
 			// set new Arc color
 			tool.Q.onStateChanged('color').set(function () {
@@ -54,14 +52,14 @@
 
 				$(".Q_pie_arc.Q_pie_arcLeft", $toolElement).css("border-color", color + " " + color + " transparent transparent");
 				$(".Q_pie_arc.Q_pie_arcRight", $toolElement).css("border-color", "transparent transparent " + color + " " + color);
-			}, "Q/pie");
+			}, tool);
 
 			// set new Arc borderSize
 			tool.Q.onStateChanged('borderSize').set(function () {
 				var borderSize = state.borderSize;
 
 				$(".Q_pie_arc, .Q_pie_shield", $toolElement).css("border-width", borderSize);
-			}, "Q/pie");
+			}, tool);
 
 			tool.refresh();
 		},

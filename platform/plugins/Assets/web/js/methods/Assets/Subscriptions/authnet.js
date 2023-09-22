@@ -12,7 +12,7 @@ Q.exports(function(){
     *  @param {String} [options.token] Required. Should be generated with Assets/subscription tool.
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
-    function authnet(options, callback) {
+    return function authnet(options, callback) {
         var o = Q.extend({},
             Q.Assets.texts.subscriptions,
             Q.Assets.Subscriptions.authnet.options,
@@ -63,10 +63,4 @@ Q.exports(function(){
             }));
         });
     }
-    
-	authnet.options = {
-		name: Q.Users.communityName
-	};
-    
-    return authnet;
 })

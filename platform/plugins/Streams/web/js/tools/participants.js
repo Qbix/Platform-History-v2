@@ -173,7 +173,7 @@ function _Streams_participants(options) {
 				alt: "expand"
 			});
 		}
-		if (!tool.$pei.length) {
+		if (!tool.$controls.length) {
 			tool.$controls = $("<div class='Streams_participants_controls' />")
 			.append(
 				$("<div class='Streams_participants_expand' />")
@@ -216,6 +216,7 @@ function _Streams_participants(options) {
 			Q.Tool.clear(tool.$blanks[0]);
 			tool.$avatars.empty();
 			tool.$blanks.empty();
+			tool.$elements = {};
 			Q.each(extra && extra.participants, function (userId, participant) {
 				if (participant.state !== 'participating') {
 					return;

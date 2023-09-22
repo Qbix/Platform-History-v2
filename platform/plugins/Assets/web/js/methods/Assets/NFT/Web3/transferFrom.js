@@ -7,7 +7,7 @@ Q.exports(function(){
     * @param {String} recipient address to transfer to
     * @param {function} callback
     */
-    function transferFrom(tokenId, chain, recipient, callback) {
+    return function Assets_NFT_Web3_transferFrom(tokenId, chain, recipient, callback) {
         Q.handle(Q.Assets.NFT.Web3.getOwner, this, [tokenId, chain, function (err, owner, contract) {
             if (err) {
                 return Q.alert(err);
@@ -19,5 +19,4 @@ Q.exports(function(){
             });
         }]);
     }
-    return transferFrom;
 })
