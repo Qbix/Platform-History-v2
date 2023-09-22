@@ -38,10 +38,10 @@ function _Streams_participants(options) {
 	tool.$elements = {};
 
 	if (!state.publisherId) {
-		throw new Q.Error("Streams/chat: missing publisherId option");
+		throw new Q.Error("Streams/participants: missing publisherId option");
 	}
 	if (!state.streamName) {
-		throw new Q.Error("Streams/chat: missing streamName option");
+		throw new Q.Error("Streams/participants: missing streamName option");
 	}
 	
 	if (state.hideIfNoParticipants) {
