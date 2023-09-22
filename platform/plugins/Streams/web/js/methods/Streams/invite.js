@@ -222,7 +222,7 @@ Q.exports(function() {
                         content: '<div class="Streams_invite_QR_content"></div>'
                             + '<div class="Q_buttons">'
                             //+ '<button class="Q_button Streams_invite_QR_scanned">' + text.invite.dialog.scannedQR.interpolate(Q.text.Q.words) + '</button>'
-                            + '<button class="Q_button Streams_invite_QR_groupPhoto">' + text.invite.dialog.TakeGroupPhoto + '</button>'
+                            + '<button class="Q_button Streams_invite_QR_groupPhoto">' + text.invite.dialog.TakeGroupPhoto + '<i class="streams-icon-checkmark-outline"></i></button>'
                             + '</div>',
                         onActivate: function (dialog) {
                             // fill QR code
@@ -310,7 +310,8 @@ Q.exports(function() {
                                 var igpStreamName = "Streams/image/invite/" + rsd.invite.token;
                                 var subpath = `invitations/${loggedUserId.splitId()}/${igpStreamName}`;
                                 //$('.Q_button.Streams_invite_QR_scanned', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
-                                $('.Q_button.Streams_invite_QR_groupPhoto', dialog).plugin('Q/imagepicker', {
+                                var $groupPhotoButton = $('.Q_button.Streams_invite_QR_groupPhoto', dialog);
+                                $groupPhotoButton.plugin('Q/imagepicker', {
                                     saveSizeName: Q.Streams.invite.groupPhoto.sizes,
                                     maxStretch: Q.Streams.invite.groupPhoto.maxStretch,
                                     //showSize: state.icon || $img.width(),
@@ -318,6 +319,7 @@ Q.exports(function() {
                                     subpath: subpath,
                                     save: "Streams/invite/groupPhoto",
                                     onSuccess: function (data, key, file) {
+                                        $groupPhotoButton.attr("data-loaded", true);
                                         Q.req("Streams/invite", ["groupPhoto"], function () {
 
                                         }, {
