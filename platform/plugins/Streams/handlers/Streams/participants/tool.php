@@ -64,7 +64,14 @@ function Streams_participants_tool($options)
 		));
 	}
 	if (!$stream->testReadLevel('participants')) {
-		throw new Users_Exception_NotAuthorized();
+		if ($_REQUEST["Q_Streams_token"]) {
+			$invite = Streams_Invite::fromToken($_REQUEST["Q_Streams_token"]);
+			if ($invite->publisherId != $publisherId || $invite->streamName != $streamName) {
+				throw new Users_Exception_NotAuthorized();
+			}
+		} else {
+			throw new Users_Exception_NotAuthorized();
+		}
 	}
 	$participants = $stream->getParticipants(@compact('limit', 'offset', 'state'));
 	
