@@ -12,11 +12,11 @@ Q.exports(function(priv){
     *   @param {bool} [options.device] Whether to subscribe device when user subscribed to some stream
     */
     return function _Stream_subscribe (publisherId, streamName, callback, options) {
-       if (!Q.plugins.Users.loggedInUser) {
+       if (!Q.Users.loggedInUser) {
            throw new Q.Error("Streams.Stream.subscribe: Not logged in.");
        }
 
-       options = Q.extend({}, Stream.subscribe.options, options);
+       options = Q.extend({}, Q.Streams.Stream.subscribe.options, options);
 
        var slotName = "participant";
        var fields = {"publisherId": publisherId, "name": streamName};

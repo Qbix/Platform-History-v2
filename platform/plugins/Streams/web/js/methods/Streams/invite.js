@@ -308,10 +308,10 @@ Q.exports(function() {
                                 };
     
                                 $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
-                                Users.Socket.onEvent('Streams/invite/accept')
+                                Q.Users.Socket.onEvent('Streams/invite/accept')
                                 .set(function _Streams_invite_accept_handler (data) {
                                     console.log('Users.Socket.onEvent("Streams/invite/accept")');
-                                    if (!Users.isCustomIcon(data.icon, true)) {
+                                    if (!Q.Users.isCustomIcon(data.icon, true)) {
                                         _setPhoto(data);
                                     }
                                 }, 'Streams_invite_QR_content');
