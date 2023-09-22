@@ -5978,6 +5978,33 @@ Q.Method = function (properties) {
 
 Q.Method.stub = new Q.Method(); // for backwards compatibility
 
+Q.Method.load = function (o, k, url, closure, callback) {
+	var original = o[k];
+	return new Promise(function (resolve, reject) {
+		Q.require(url, function (exported) {
+			if (exported) {
+				var args = closure ? closure() : [];
+				var m = exported.apply(o, args);
+				if (typeof m === 'function') {
+					var p = o[k];
+					o[k] = m;
+					for (var property in p) {
+						m[property] = p[property];
+					}
+				}
+			}
+			if (o[k] === original) {
+				return reject("Q.Method.define: Must override method '" + k + "'");
+			}
+			try {
+				resolve(callback(o[k]));
+			} catch (e) {
+				reject(e);
+			}
+		}, true);
+	});
+}
+
 /**
  * Call this on any object that contains new Q.Method()
  * in place of some asynchronous methods. It will set up code to load
@@ -6016,28 +6043,8 @@ Q.Method.define = function (o, prefix, closure) {
 		o[k] = function _Q_Method_shim () {
 			var url = Q.url(prefix + '/' + k + '.js');
 			var t = this, a = arguments;
-			return new Promise(function (resolve, reject) {
-				Q.require(url, function (exported) {
-					if (exported) {
-						var args = closure ? closure() : [];
-						var m = exported.apply(o, args);
-						if (typeof m === 'function') {
-							var p = o[k];
-							o[k] = m;
-							for (var property in p) {
-								m[property] = p[property];
-							}
-						}
-					}
-					if (o[k] === _Q_Method_shim) {
-						return reject("Q.Method.define: Must override method '" + k + "'");
-					}
-					try {
-						resolve(o[k].apply(t, a));
-					} catch (e) {
-						reject(e);
-					}
-				});
+			return Q.Method.load(o, k, url, closure, function (f) {
+				return f.apply(t, a);
 			});
 		}
 		Q.extend(o[k], method);
@@ -9484,13 +9491,18 @@ Q.exports = function () {
  * @static
  * @param {String} src The src of the script to load
  * @param {Function} callback Always called asynchronously.
+ * @param {Boolean} synchronously Whether to call the callback synchronously when src was already loaded
  */
-Q.require = function (src, callback) {
+Q.require = function (src, callback, synchronously) {
 	src = Q.url(src);
 	if (_exports[src]) {
-		setTimeout(function () {
+		if (synchronously) {
 			Q.handle(callback, Q, _exports[src]);
-		}, 0);
+		} else {
+			setTimeout(function () {
+				Q.handle(callback, Q, _exports[src]);
+			}, 0);
+		}
 	} else {
 		Q.addScript(src, function _Q_require_callback(err) {
 			if (err) {
