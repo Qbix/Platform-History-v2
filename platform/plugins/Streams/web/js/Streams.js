@@ -1396,11 +1396,24 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             case "facebook":
                 window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
                 break;
+            case "whatsapp":
+				var content = Q.getObject(['invite', 'sms', 'content'], text)
+                    .interpolate({
+                        url: rsd.url,
+                        title: rss.fields.title
+                    });
+                window.open(Q.Links.whatsApp(null, content), "_blank");
+                break;
             case "twitter":
                 window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
                 break;
             case "telegram":
-                window.open("tg://msg_url?url=" + rsd.url, "_blank");
+				var content = Q.getObject(['invite', 'sms', 'content'], text)
+                    .interpolate({
+                        url: rsd.url,
+                        title: rss.fields.title
+                    });
+                window.open(Q.Links.telegram(null, content, rsd.url), "_blank");
                 break;
             case "copyLink":
                 if (Q.getObject("share", navigator)) {
