@@ -5866,29 +5866,70 @@ Q.Links = {
 	 * @return {String}
 	 */
 	whatsApp: function (phoneNumber, message) {
-		return 'whatsapp://send/?phone=' + phoneNumber
-			+ (message ? '&text=' + encodeURIComponent(message) : '');
+		var urlParams = [];
+
+		if (phoneNumber != null) {
+			urlParams.push('phone=' + phoneNumber);
+		}
+		if (message != null) {
+			urlParams.push('text=' + encodeURIComponent(message));
+		}
+
+		return 'whatsapp://send/?' + urlParams.join('&');;
 	},
 	/**
 	 * Generates a link for sharing a link in Telegram
 	 * @static
-	 * @method telegramShare
+	 * @method telegram
 	 * @param {String} [to] Phone number with country code e.g. "+1", or username starting with "@".
 	 *  If a username, then don't supply text or url, it can only open a window to chat.
 	 *  Set this to false and supply text (and optional url) to open Telegram and let the user
 	 *  choose Telegram users, channels and groups to share to.
 	 * @param {String} [text] The text to share, can contain a URL, so need to include the next parameter.
 	 * @param {String} [url] Optionally put a URL to share here, which will appear ahead of the text
+	 * @param {String} [inviteToken] “start” phrase for a bot
 	 * @return {String}
 	 */
-	telegram: function (to, text, url) {
-		if (to && to[0] === '@') {
-			return 'tg://resolve?domain=' + to.substring(1);
+	telegram: function (to, text, url, inviteToken) {
+		if(!to && url) { //share URL with some users to select in telegram
+			var link = 'tg://msg_url?url=' + url;
+			if(text) link += '&text=' + encodeURIComponent(text);
+			return link;
 		}
-		return (url
-			? 'tg://msg_url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text)
-			: 'tg://msg?text=' + encodeURIComponent(text)
-		) + (to ? '&to=' + to : '');
+
+		var urlParams = [];
+
+		if (to) {
+			urlParams.push('to=' + to);
+			if (to.toLowerCase().indexOf('bot') != -1 && inviteToken) {
+				urlParams.push('start=' + encodeURIComponent(inviteToken));
+			}
+		}
+		if (text) {
+			urlParams.push('text=' + encodeURIComponent(text));
+		}
+
+		return 'tg://msg?' + urlParams.join('&');
+	},
+	/**
+	 * Generates a link for opening Linkedin profile in native app
+	 * @static
+	 * @method linkedin
+	 * @param {String} [username] Username of profile to open
+	 * @return {String}
+	 */
+	linkedin: function (username) {
+		return 'linkedin://profile/' + username;
+	},
+	/**
+	 * Generates a link for opening chat with User in WeChat app
+	 * @static
+	 * @method wechat
+	 * @param {String} [username] Username to chat with
+	 * @return {String}
+	 */
+	wechat: function (username) {
+		return 'weixin://dl/chat?' + username;
 	},
 	/**
 	 * Generates a link for sharing a link in Skype

@@ -99,7 +99,8 @@
 	/*margin-right: 1%;*/
 }
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_break {
-	flex:100%
+	flex:100%;
+	margin-top: 1%;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons img {
@@ -119,7 +120,6 @@
 Email
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email {
-	margin-bottom:1%;
 	background-color: #8a5900;
 	background: -moz-linear-gradient(top, #b57500, #8a5900);
 	background: -webkit-linear-gradient(top, #b57500, #8a5900);
@@ -142,7 +142,6 @@ Email
 Text
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text {
-	margin-bottom:1%;
 	background: #227722;
 	background: -ms-linear-gradient(top, #449944, #227722);
 	background: -moz-linear-gradient(top, #449944, #227722);
@@ -160,6 +159,29 @@ Text
 
 .Streams_invite_dialog .Streams_invite_button_text .Streams_invite_social_icons {
 	background-image: url("../../img/invitations/text.svg");
+}
+
+/*
+WhatsApp
+------------------------------------------------------------ */
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_whatsapp {
+	background-color: #2ebc1e; /* fallback color */
+	background: -moz-linear-gradient(top, #35db23, #27a11a);
+	background: -ms-linear-gradient(top, #35db23, #27a11a);
+	background: -webkit-linear-gradient(top, #35db23, #27a11a);
+	border: 1px solid #218d16;
+	text-shadow: 0 -1px -1px #1f2f52;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_whatsapp:hover {
+	background-color: #2ebc1e; /* fallback color */
+	background: -moz-linear-gradient(top, #27a11a, #35db23);
+	background: -ms-linear-gradient(top, #27a11a, #35db23);
+	background: -webkit-linear-gradient(top, #27a11a, #35db23);
+}
+
+.Streams_invite_dialog .Streams_invite_button_whatsapp .Streams_invite_social_icons {
+	background-image: url("../../img/invitations/whatsapp.svg");
 }
 
 /*

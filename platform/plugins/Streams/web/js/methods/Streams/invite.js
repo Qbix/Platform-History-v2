@@ -169,18 +169,31 @@ Q.exports(function() {
                         if (err) {
                             return;
                         }
-
+    
                         window.location = Q.Links.sms(text);
                     });
                     break;
                 case "facebook":
                     window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
                     break;
+                case "whatsapp":
+                    var content = Q.getObject(['invite', 'sms', 'content'], text)
+                        .interpolate({
+                            url: rsd.url,
+                            title: rss.fields.title
+                        });
+                    window.open(Q.Links.whatsApp(null, content), "_blank");
+                    break;
                 case "twitter":
                     window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
                     break;
                 case "telegram":
-                    window.open("tg://msg_url?url=" + rsd.url, "_blank");
+                    var content = Q.getObject(['invite', 'sms', 'content'], text)
+                        .interpolate({
+                            url: rsd.url,
+                            title: rss.fields.title
+                        });
+                    window.open(Q.Links.telegram(null, content, rsd.url), "_blank");
                     break;
                 case "copyLink":
                     if (Q.getObject("share", navigator)) {
@@ -210,7 +223,7 @@ Q.exports(function() {
                         + '<div class="Q_buttons">'
                         + '<button class="Q_button">'
                         + text.invite.dialog.scannedQR.interpolate(Q.text.Q.words)
-                        +'</button>'
+                        + '</button>'
                         + '</div>',
                         onActivate: function (dialog) {
                             // fill QR code
@@ -237,14 +250,14 @@ Q.exports(function() {
                                     if (invitedUserId) {
                                         subpath = invitedUserId.splitId() + '/icon/' + Math.floor(Date.now()/1000);
                                     }
-
+    
                                     if (Q.Dialogs.dialogs.length) {
                                         var $lastDialog = Q.Dialogs.dialogs[Q.Dialogs.dialogs.length-1];
                                         if ($lastDialog instanceof jQuery && !$lastDialog.hasClass(dialogClassName)) {
                                             Q.Dialogs.pop();
                                         }
                                     }
-
+    
                                     Q.Dialogs.push({
                                         title: title,
                                         apply: true,
@@ -272,13 +285,13 @@ Q.exports(function() {
                                                     Q.Dialogs.close(dialog);
                                                 }
                                             });
-
+    
                                             if (invitedUserId) {
                                                 Q.Streams.get(invitedUserId, "Streams/user/icon", function (err) {
                                                     if (err) {
                                                         return;
                                                     }
-
+    
                                                     var userIconStream = this;
                                                     userIconStream.observe();
                                                     var eventKey = "invite_icon_changed_" + invitedUserId;
@@ -293,8 +306,9 @@ Q.exports(function() {
                                         }
                                     });
                                 };
+    
                                 $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
-                                Q.Users.Socket.onEvent('Streams/invite/accept')
+                                Users.Socket.onEvent('Streams/invite/accept')
                                 .set(function _Streams_invite_accept_handler (data) {
                                     console.log('Users.Socket.onEvent("Streams/invite/accept")');
                                     if (!Users.isCustomIcon(data.icon, true)) {
