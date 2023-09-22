@@ -1,0 +1,16 @@
+.Streams_task_errors .Q_dialog_content {
+    padding: 5px;
+}
+.Streams_task_errors tr:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+.Streams_task_errors tr td:first-child {
+    white-space: nowrap;
+    vertical-align: top;
+    font-weight: bold;
+    padding-right: 5px;
+}
+.Q_tool.Streams_task_preview_tool.Q_pie_tool {
+    position: unset;
+    transform: unset;
+}

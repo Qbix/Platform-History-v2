@@ -469,5 +469,8 @@
         "endCall": "End Call",
         "interview": "Interview",
         "markApproved": "Mark Approved"
+    },
+    "task": {
+        "errorsTitle": "Errors occurred"
     }
 }
