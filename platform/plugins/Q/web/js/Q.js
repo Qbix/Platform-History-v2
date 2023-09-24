@@ -5978,7 +5978,7 @@ Q.Method = function (properties) {
 
 Q.Method.stub = new Q.Method(); // for backwards compatibility
 
-Q.Method.load = function (o, k, url, closure, callback) {
+Q.Method.load = function (o, k, url, closure) {
 	var original = o[k];
 	return new Promise(function (resolve, reject) {
 		Q.require(url, function (exported) {
@@ -5996,14 +5996,13 @@ Q.Method.load = function (o, k, url, closure, callback) {
 			if (o[k] === original) {
 				return reject("Q.Method.define: Must override method '" + k + "'");
 			}
-			try {
-				resolve(callback(o[k]));
-			} catch (e) {
-				reject(e);
-			}
+			resolve(o[k]);
+			Q.Method.onLoad.handle(o, k, o[k], closure);
 		}, true);
 	});
-}
+};
+
+Q.Method.onLoad = new Q.Event();
 
 /**
  * Call this on any object that contains new Q.Method()
@@ -6043,7 +6042,8 @@ Q.Method.define = function (o, prefix, closure) {
 		o[k] = function _Q_Method_shim () {
 			var url = Q.url(prefix + '/' + k + '.js');
 			var t = this, a = arguments;
-			return Q.Method.load(o, k, url, closure, function (f) {
+			return Q.Method.load(o, k, url, closure)
+			.then(function (f) {
 				return f.apply(t, a);
 			});
 		}

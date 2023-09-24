@@ -1688,7 +1688,7 @@ Q.Method.define(
     Streams.Stream, 
     '{{Streams}}/js/methods/Streams/Stream', 
     function() {
-        return [priv];
+        return [priv, Streams, Streams.Stream];
     }
 );
 
@@ -3192,7 +3192,7 @@ Q.Method.define(
     Streams.Message, 
     '{{Streams}}/js/methods/Streams/Message', 
     function() {
-        return [priv];
+        return [priv, Streams, Streams.Stream, Streams.Message];
     }
 );
 
@@ -3339,7 +3339,7 @@ Q.Method.define(
     Streams.Message.Total, 
     '{{Streams}}/js/methods/Streams/Message/Total', 
     function() {
-        return [priv];
+        return [priv, Streams, Streams.Stream, Streams.Message.Total];
     }
 );
 
@@ -4861,7 +4861,7 @@ Q.Streams.cache = Q.Streams.cache || {};
         Streams, 
         '{{Streams}}/js/methods/Streams', 
         function() {
-            return [priv];
+            return [priv, Streams, Streams.Stream];
         }
     );
     

@@ -1,4 +1,7 @@
-Q.exports(function(priv) {
+Q.exports(function(priv, Streams, Stream) {
+
+    var where = Streams.cache.where || 'document';
+
     /**
     * Streams batch getter.
     * @static
@@ -21,7 +24,7 @@ Q.exports(function(priv) {
     *	if any fields named in this array are == null
     *   @param {Mixed} [extra."$Module_$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
     */
-    return function _Streams_get(publisherId, streamName, callback, extra) {
+    return Q.getter(function _Streams_get(publisherId, streamName, callback, extra) {
         var args = arguments;
         var f;
         var url = Q.action('Streams/stream?') +
@@ -124,5 +127,33 @@ Q.exports(function(priv) {
                 );
             }, extra);
         priv._retain = undefined;
-    };
+    }, {
+		cache: Q.Cache[where]("Streams.get", 100, {
+			beforeEvict: {
+				Streams: function (item) {
+					var publisherId = Q.getObject('subject.fields.publisherId', item);
+					var streamName = Q.getObject('subject.fields.name', item);
+					if (publisherId && streamName) {
+						var ps = Streams.key(publisherId, streamName);
+						if (priv._retainedByStream[ps]) {
+							return false; // don't evict retained streams from cache
+						}
+					}
+				}
+			}
+		}),
+		throttle: 'Streams.get',
+		prepare: function (subject, params, callback) {
+			if (Streams.isStream(subject)) {
+				return callback(subject, params);
+			}
+			if (params[0]) {
+				return callback(subject, params);
+			}
+			Stream.construct(subject, {}, function () {
+				params[1] = this;
+				callback(this, params);
+			});
+		}
+	});
 });
