@@ -1542,7 +1542,8 @@ class Q_Response
 		$dest = parse_url(Q_Request::url(), PHP_URL_PATH);
 
 		$sheets = self::stylesheetsArray($slotName, false);
-		$sheets_for_slots = $imported_for_slots = array();
+		$sheets_for_slots = $imported_for_slots
+		= $relativePathPrefixes_for_slots = array();
 		$loaded = array();
 		if (!empty($sheets)) {
 			foreach ($sheets as $stylesheet) {
@@ -1567,8 +1568,10 @@ class Q_Response
 					} catch (Exception $e) {}
 					$src = parse_url($href, PHP_URL_PATH);
 					$content = $ob->getClean();
-					$content = Q_Utils::adjustRelativePaths($content, $src, $dest);
+					$relativePathPrefix = null;
+					$content = Q_Utils::adjustRelativePaths($content, $src, $dest, 'css', $relativePathPrefix);
 					$sheets_for_slots[$stylesheet['slot']][$href] = "\n$content";
+					$relativePathPrefixes_for_slots[$stylesheet['slot']][$href] = $relativePathPrefix;
 				}
 			}
 		}
@@ -1584,9 +1587,14 @@ class Q_Response
 		}
 		foreach ($sheets_for_slots as $slot => $sheets) {
 			foreach ($sheets as $href => $sheet) {
+				$relativePathPrefix = $relativePathPrefixes_for_slots[$slot][$href];
 				$parts[] = Q_Html::tag(
 					'style', 
-					array('data-slot' => $slot, 'data-href' => $href),
+					array(
+						'data-slot' => $slot, 
+						'data-href' => $href,
+						'data-path-prefix' => $relativePathPrefix
+					),
 					$sheet
 				);
 			}

@@ -1833,8 +1833,10 @@ class Q_Utils
 	 * @param {string} $src The path at which the old file was
 	 * @param {string} $dest The path at which the new file will be
 	 * @param {string} [$fileType] The only supported file type is "css" for now
+	 * @param {string&} [$relativePathPrefix] Pass a variable to be filled with the relative
+	 *   prefix that is prepended to all URLs
 	 */
-	static function adjustRelativePaths($content, $src, $dest, $fileType = 'css')
+	static function adjustRelativePaths($content, $src, $dest, $fileType = 'css', &$relativePathPrefix = null)
 	{
 		if (Q_Valid::url($src)) {
 			$src = parse_url($src, PHP_URL_PATH);
@@ -1850,10 +1852,10 @@ class Q_Utils
 		}
 		$dc = count($dest_parts);
 		$sc = count($src_parts);
-		$relative = str_repeat("../", $dc-$j-1)
+		$relativePathPrefix = str_repeat("../", $dc-$j-1)
 			. implode('/', array_slice($src_parts, $j, $sc-$j-1));
-		if ($relative) {
-			$relative .= '/';
+		if ($relativePathPrefix) {
+			$relativePathPrefix .= '/';
 		}
 		if ($fileType !== 'css') {
 			throw new Q_Exception_WrongValue(array(
@@ -1869,9 +1871,9 @@ class Q_Utils
 				"/@import[\s](?!url\()(\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/"
 			),
 			array(
-				'url($1'.$relative,
-				'@import url($1'.$relative,
-				'@import $1'.$relative
+				'url($1'.$relativePathPrefix,
+				'@import url($1'.$relativePathPrefix,
+				'@import $1'.$relativePathPrefix
 			),
 			$content
 		);
