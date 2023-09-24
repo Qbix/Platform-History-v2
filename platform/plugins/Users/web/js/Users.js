@@ -1181,7 +1181,7 @@
 
 		var sessionId = Q.cookie(Q.info.sessionName);
 		var prefix = Q.getObject('Q.info.sessionIdPrefixes.authenticated');
-		if (prefix && sessionId.startsWith(prefix)
+		if (prefix && sessionId && sessionId.startsWith(prefix)
 		&& !Q.Users.loggedInUser) {
 			// happens for instance when webserver loads a pre-rendered
 			// static file instead of the latest result of a PHP script
