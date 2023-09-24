@@ -3491,71 +3491,13 @@ var Participant = Streams.Participant = function Streams_Participant(fields) {
 	this.typename = 'Q.Streams.Participant';
 };
 
-/**
- * Get one or more participants, sorted by insertedTime
- *
- * @static
- * @method get
- * @param {String} publisherId
- * @param {String} streamName
- * @param {String|Object} userId Can be the id of the participant user, or an object containing one or more of:
- *   "limit": The maximum number of participants to retrieve.
- *   "offset": The offset of the participants to retrieve. If it is -1 or lower, then participants are sorted by descending insertedTime.
- *   "state": The state of the participants to filter by, if any. Can be one of ('invited', 'participating', 'left')
- * @param {Function} callback This receives two parameters. The first is the error.
- *   If userId was a String, then the second parameter is the Streams.Participant, as well as the "this" object.
- *   If userId was an Object, then the second parameter is a hash of { userId: Streams.Participant } pairs
- */
-Participant.get = function _Participant_get(publisherId, streamName, userId, callback) {
-	var slotName, criteria = {"publisherId": publisherId, "name": streamName};
-	if (Q.typeOf(userId) === 'object') {
-		slotName = 'participants';
-		criteria.limit = userId.limit;
-		criteria.offset = userId.offset;
-		if ('state' in userId) criteria.state = userId.state;
-		if ('userId' in userId) criteria.userId = userId.userId;
-	} else {
-		slotName = 'participant';
-		criteria.userId = userId;
-	}
-	var func = Streams.batchFunction(Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	}));
-	func.call(this, 'participant', slotName, publisherId, streamName, criteria, function (err, data) {
-		var participants = {};
-		var msg = Q.firstErrorMessage(err, data);
-		if (msg) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			Participant.get.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
-		}
-		if ('participants' in data) {
-			participants = data.participants;
-		} else if ('participant' in data) {
-			participants[userId] = data.participant;
-		}
-		Q.each(participants, function (userId, p) {
-			var participant = participants[userId] = p && new Participant(p);
-			Participant.get.cache.set(
-				[publisherId, streamName, userId],
-				0, participant, [err, participant]
-			);
-		});
-		if (Q.isPlainObject(userId)) {
-			callback && callback.call(this, err, participants || null);
-		} else {
-			var participant = Q.first(participants);;
-			callback && callback.call(participant, err, participant || null);
-		}
-	});
-};
-/**
- * Occurs when Participant.get encounters an error loading a participant from the server
- * @event get.onError
- */
-Participant.get.onError = new Q.Event();
+Participant.get = new Q.Method({
+	/**
+ 	 * Occurs when Participant.get encounters an error loading a participant from the server
+ 	 * @event get.onError
+ 	 */
+	onError = new Q.Event()
+});
 
 var Pp = Participant.prototype;
 
