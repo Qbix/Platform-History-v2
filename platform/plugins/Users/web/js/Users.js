@@ -1178,6 +1178,16 @@
 			}
 		}
 		OAuth.redirectUri = Q.action('Users/oauthed');
+
+		var sessionId = Q.cookie(Q.info.sessionName);
+		var prefix = Q.getObject('Q.info.sessionIdPrefixes.authenticated');
+		if (prefix && sessionId.startsWith(prefix)
+		&& !Q.Users.loggedInUser) {
+			// happens for instance when webserver loads a pre-rendered
+			// static file instead of the latest result of a PHP script
+			_fetchUserData();
+		}
+		Q.request.options.onProcessed.set(_fetchUserData, 'Users');
 	}, 'Users');
 	
 	function _setSessionFromQueryString(querystring)
@@ -1264,7 +1274,7 @@
 		Users.preloaded = null;
 	}, 'Users');
 
-	Q.request.options.onProcessed.set(function (err, response) {
+	function _fetchUserData(err, response) {
 		Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		if (Users.lastSeenNonce 
 		&& Users.lastSeenNonce !== Q.nonce
@@ -1316,7 +1326,7 @@
 			Q.Session.clear();
 			Users.hinted = [];
 		}
-	}, 'Users');
+	}
 
 	Users.init.facebook.onInit = new Q.Event();
 	var ddc = document.documentElement;

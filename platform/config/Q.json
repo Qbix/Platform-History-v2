@@ -136,7 +136,10 @@
 				"secure": true
 			},
 			"id": {
-				"prefix": "sessionId_"
+				"prefixes" {
+					"": "sessionId_",
+					"authenticated": "sessionId_authenticated_"
+				}
 			},
 			"startBefore": "Q/objects",
 			"appendSuffix": false,

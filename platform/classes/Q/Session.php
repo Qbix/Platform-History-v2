@@ -251,9 +251,11 @@ class Q_Session
 	 *   If neither is there then we check whether a cookie with the Q_Session::name()
 	 *   was set by the currently executing script, and use that. If none of these
 	 *   contain a valid ID, then we start a new session.
+	 * @param {string} [$prefixType=""]
+	 *   specify a different key from Q/session/id/prefixes config such as "authenticated"
 	 * @return {boolean} Whether a new session was started or not.
 	 */
-	static function start($throwIfMissingOrInvalid = false, $setId = null)
+	static function start($throwIfMissingOrInvalid = false, $setId = null, $prefixType = '')
 	{
 		if (self::id() and !$setId) {
 			// Session has already started
@@ -320,7 +322,7 @@ class Q_Session
 			// change the public key. In many browsers this happens anyway due to
 			// the 7-day cap on script-writable storage, such as IndexedDB:
 			// https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/
-			$id = self::generateId(true);
+			$id = self::generateId(true, $prefixType);
 			$isNew = true;
 		}
 
@@ -441,6 +443,11 @@ class Q_Session
 		$_SESSION = array();
 	}
 
+	/**
+	 * Destroy the session and remove the session and nonce cookies
+	 * @method destroy
+	 * @static
+	 */
 	static function destroy()
 	{
 		if (is_callable('session_status') and session_status() === PHP_SESSION_ACTIVE) {
@@ -858,6 +865,7 @@ class Q_Session
 	}
 
 	/**
+	 * Removes the session information from database or file system
 	 * @method destroyHandler
 	 * @static
 	 * @param {string} $id
@@ -1146,9 +1154,11 @@ class Q_Session
 	 *   of the publicKey found in the Q_Users_sig, if it is provided.
 	 *   Or pass a string here, to set your own seed.
 	 *   Otherwise, the seed will be a string of 32 random bytes.
+	 * @param {string} [$prefixType=""]
+	 *   specify a different key from Q/session/id/prefixes config such as "authenticated"
 	 * @return {string}
 	 */
-	static function generateId($seed = null)
+	static function generateId($seed = null, $prefixType = '')
 	{
 		if ($seed === true) {
 			$seed = null;
@@ -1173,7 +1183,7 @@ class Q_Session
 			$sig = Q_Utils::signature($id, "$secret");
 			$id .= substr($sig, 0, 32);
 		}
-		$prefix = Q_Config::get('Q', 'session', 'id', 'prefix', '');
+		$prefix = Q_Config::get('Q', 'session', 'id', 'prefixes', $prefixType);
 		return $prefix . Q_Utils::toBase64($id);
 	}
 	
@@ -1203,7 +1213,7 @@ class Q_Session
 	 * so that the web server won't have to deal with session ids we haven't issued.
 	 * This verification can also be done at the edge (e.g. CDN) without bothering our network.
 	 * Now this function strips prefixes separated by "_" or specified in Q/session/id/prefix config,
-	 * for example for a session ID like "sessionId_abc123" it can strip "sessionId_"
+	 * for example for a session ID like "sessionId_authenticated_abc123" it can strip "sessionId_authenticated_"
 	 * @param {string} $id
 	 * @return {boolean}
 	 */
@@ -1214,11 +1224,14 @@ class Q_Session
 		}
 		$parts = explode('_', $id);
 		if (count($parts) > 1) {
-			$id = $parts[1];
+			$id = end($parts);
 		} else {
-			$prefix = Q_Config::get('Q', 'session', 'id', 'prefix', '');
-			if (Q::startsWith($id, $prefix)) {
-				$id = substr($id, strlen($prefix));
+			$prefixes = Q_Config::get('Q', 'session', 'id', 'prefixes', array());
+			foreach ($prefixes as $prefix) {
+				if (Q::startsWith($id, $prefix)) {
+					$id = substr($id, strlen($prefix));
+					break;
+				}
 			}
 		}
 		$results = self::decodeId($id);

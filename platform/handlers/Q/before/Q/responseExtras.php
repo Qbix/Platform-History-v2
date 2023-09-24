@@ -38,6 +38,7 @@ function Q_before_Q_responseExtras()
 				'proxyUrl' => Q_Uri::url($url),
 				'text' => $text,
 				'sessionName' => Q_Session::name(),
+				'sessionIdPrefixes' => Q_Config::get('Q', 'session', 'id', 'prefixes', array()),
 				'nodeUrl' => Q_Utils::nodeUrl(),
 				'socketPath' => Q_Utils::socketPath(),
 				'maxUploadSize' => Q_Utils::maxUploadSize(),
