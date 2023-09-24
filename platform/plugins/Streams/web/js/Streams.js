@@ -3496,8 +3496,16 @@ Participant.get = new Q.Method({
  	 * Occurs when Participant.get encounters an error loading a participant from the server
  	 * @event get.onError
  	 */
-	onError = new Q.Event()
+	onError: new Q.Event()
 });
+
+Q.Method.define(
+	Participant,
+	'{{Streams}}/js/methods/Participant', 
+	function() {
+		return [priv, Streams, Stream, Participant];
+	}
+);
 
 var Pp = Participant.prototype;
 
@@ -3961,26 +3969,6 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized, result) {
 Q.beforeInit.add(function _Streams_beforeInit() {
 
 	var where = Streams.cache.where || 'document';
-
-	Participant.get = Q.getter(Participant.get, {
-		cache: Q.Cache[where]("Streams.Participant.get", 100),
-		throttle: 'Streams.Participant.get',
-		prepare: function (subject, params, callback, args) {
-			if (params[0]) {
-				return callback(this, params);
-			}
-			if (Q.isPlainObject(args[2])) {
-				var p1 = params[1];
-				Q.each(p1, function (userId, participant) {
-					participant = participant && new Participant(participant);
-					p1[userId] = participant;
-				});
-			} else {
-				params[1] = subject && new Participant(subject);
-			}
-			callback(params[1], params);
-		}
-	});
 
 	Avatar.get = Q.getter(Avatar.get, {
 		cache: Q.Cache[where]("Streams.Avatar.get", 1000),
@@ -4860,7 +4848,7 @@ Q.Streams.cache = Q.Streams.cache || {};
         Streams, 
         '{{Streams}}/js/methods/Streams', 
         function() {
-            return [priv, Streams, Streams.Stream];
+            return [priv, Streams, Stream];
         }
     );
     
