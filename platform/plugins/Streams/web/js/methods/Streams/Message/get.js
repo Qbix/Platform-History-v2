@@ -1,4 +1,4 @@
-Q.exports(function(priv){
+Q.exports(function(priv, Streams, Stream, Message){
 
     var where = Streams.cache.where || 'document';
 
