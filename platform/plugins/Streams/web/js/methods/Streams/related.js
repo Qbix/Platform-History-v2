@@ -34,7 +34,7 @@ Q.exports(function(priv, Streams, Stream){
     *	if there were errors, first parameter is an array of errors
     *  otherwise, first parameter is null and the "this" object is the data containing "stream", "relations" and "streams"
     */
-    return Q.getter(function Streams_related(publisherId, streamName, relationType, isCategory, options, callback) {
+    Q.Streams.related = Q.getter(function Streams_related(publisherId, streamName, relationType, isCategory, options, callback) {
         if (!publisherId || !streamName) {
             throw new Q.Error("Streams.related is expecting publisherId and streamName to be non-empty");
         }
@@ -240,5 +240,7 @@ Q.exports(function(priv, Streams, Stream){
 			pipe.fill('nodeUrls')(subject.nodeUrls);
 		}
 	});
-    
+
+    Q.Streams.related.onCalled.set(priv.onCalledHandler, 'Streams');  
+    Q.Streams.related.onResult.set(priv.onResultHandler, 'Streams');  
 })

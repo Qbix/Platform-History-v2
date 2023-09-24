@@ -24,7 +24,7 @@ Q.exports(function(priv, Streams, Stream) {
     *	if any fields named in this array are == null
     *   @param {Mixed} [extra."$Module_$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
     */
-    return Q.getter(function _Streams_get(publisherId, streamName, callback, extra) {
+    Streams.get = Q.getter(function _Streams_get(publisherId, streamName, callback, extra) {
         var args = arguments;
         var f;
         var url = Q.action('Streams/stream?') +
@@ -156,4 +156,7 @@ Q.exports(function(priv, Streams, Stream) {
 			});
 		}
 	});
+
+    Q.Streams.get.onCalled.set(priv.onCalledHandler, 'Streams');
+    Q.Streams.get.onResult.set(priv.onResultHandler, 'Streams');
 });

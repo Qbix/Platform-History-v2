@@ -915,7 +915,7 @@ Streams.get = new Q.Method({
     * @event get.onStream
     */
     onStream: new Q.Event()
-});
+}, { isGetter: true });
 
 /**
  * @static
@@ -1180,7 +1180,7 @@ Streams.related = new Q.Method({
     * @event related.onError
     */
     onError: new Q.Event()
-});
+}, { isGetter: true });
 
 Streams.socketRequest = new Q.Method();
 
@@ -1679,9 +1679,15 @@ Stream.neglect = new Q.Method();
 Stream.ephemeral = new Q.Method();
 Stream.update = new Q.Method();
 
-Stream.get = Streams.get;
-Stream.create = Streams.create;
-Stream.define = Streams.define;
+Stream.get = function () {
+	Streams.get.apply(this, arguments);
+};
+Stream.create = function () {
+	Streams.create.apply(this, arguments);
+};;
+Stream.define = function () {
+	Streams.define.apply(this, arguments);
+};;
 
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
@@ -3174,11 +3180,11 @@ Message.shouldRefreshStream = function (type, should) {
 
 Message.get = new Q.Method({
     onError: new Q.Event()
-})
+}, { isGetter: true });
 
 Message.post = new Q.Method({
     onError: new Q.Event()
-})
+});
 
 /**
  * Wait until a particular message is posted.
@@ -3497,7 +3503,7 @@ Participant.get = new Q.Method({
  	 * @event get.onError
  	 */
 	onError: new Q.Event()
-});
+}, { isGetter: true });
 
 Q.Method.define(
 	Participant,
@@ -3939,12 +3945,12 @@ var Interests = Streams.Interests = {
 	my: null
 };
 
-function _onCalledHandler(args, shared) {
+priv.onCalledHandler = function _onCalledHandler(args, shared) {
 	shared.retainUnderKey = priv._retain;
 	priv._retain = undefined;
 }
 
-function _onResultHandler(subject, params, args, shared, original) {
+priv.onResultHandler = function _onResultHandler(subject, params, args, shared, original) {
 	var key = shared.retainUnderKey;
 	if (key == undefined || params[0] || !subject) {
 		return; // either retainWith was not called or an error occurred during the request
@@ -3985,11 +3991,6 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	Avatar.byPrefix = Q.getter(Avatar.byPrefix, {
 		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 100),
 		throttle: 'Streams.Avatar.byPrefix'
-	});
-
-	Q.each([Streams.get, Streams.related], function () {
-		this.onCalled.set(_onCalledHandler, 'Streams');
-		this.onResult.set(_onResultHandler, 'Streams');
 	});
 
 }, 'Streams');
@@ -4843,13 +4844,13 @@ _scheduleUpdate.delay = 5000;
 
 Q.Streams.cache = Q.Streams.cache || {};
 
-    // define methods for Streams to replace method stubs
-    Q.Method.define(
-        Streams, 
-        '{{Streams}}/js/methods/Streams', 
-        function() {
-            return [priv, Streams, Stream];
-        }
-    );
+// define methods for Streams to replace method stubs
+Q.Method.define(
+	Streams, 
+	'{{Streams}}/js/methods/Streams', 
+	function() {
+		return [priv, Streams, Stream];
+	}
+);
     
 })(Q, jQuery);
