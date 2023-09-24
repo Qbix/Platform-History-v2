@@ -136,7 +136,7 @@
 				"secure": true
 			},
 			"id": {
-				"prefixes" {
+				"prefixes": {
 					"": "sessionId_",
 					"authenticated": "sessionId_authenticated_"
 				}
