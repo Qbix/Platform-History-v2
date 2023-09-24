@@ -1,5 +1,40 @@
-Q.exports(function(priv){
-    return function Streams_related(publisherId, streamName, relationType, isCategory, options, callback) {
+Q.exports(function(priv, Streams, Stream){
+
+    var where = Streams.cache.where || 'document';
+
+    /**
+     * Get streams related to a given stream.
+     * @static
+     * @method related
+     * @param {String} publisherId
+     *  Publisher's user id
+     * @param {String} streamName
+     *	Name of the stream to/from which the others are related
+    * @param {String|Array|null} relationType the type of the relation
+    * @param {boolean|String} [isCategory=true]
+    *  If false, returns the categories that this stream is related to.
+    *  If true, returns all the streams this related to this category.
+    *  If a string, returns all the streams related to this category with names prefixed by this string.
+    * @param {Object} [options] optional object that can include:
+    *   @param {Number} [options.limit] the maximum number of results to return
+    *   @param {Number} [options.offset] the page offset that goes with the limit
+    *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
+    *   @param {Number} [options.min] the minimum weight (inclusive) to filter by, if any
+    *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
+    *   @param {String} [options.prefix] optional prefix to filter the streams by
+    *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
+    *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream and ignore the cache.
+    *   @param {Mixed} [options.participants]  Pass a limit here to fetch that many participants and ignore cache.
+    *   @param {Boolean} [options.relationsOnly=false] Return only the relations, not the streams
+    *   @param {Boolean} [options.messages] Pass a limit here to fetch that many recent messages and ignore cache.
+    *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
+    *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
+    *   @param {Object} [options."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
+    * @param{function} callback
+    *	if there were errors, first parameter is an array of errors
+    *  otherwise, first parameter is null and the "this" object is the data containing "stream", "relations" and "streams"
+    */
+    return Q.getter(function Streams_related(publisherId, streamName, relationType, isCategory, options, callback) {
         if (!publisherId || !streamName) {
             throw new Q.Error("Streams.related is expecting publisherId and streamName to be non-empty");
         }
@@ -181,6 +216,29 @@ Q.exports(function(priv){
             // since they may come to be out of date
             return false;
         }
-    }
+    }, {
+		cache: Q.Cache[where]("Streams.related", 100),
+		throttle: 'Streams.related',
+		prepare: function (subject, params, callback) {
+			if (params[0] || !Q.isEmpty(subject.errors)) { // some error
+				return callback(subject, params);
+			}
+			var keys = Object.keys(subject.relatedStreams).concat(['stream', 'nodeUrls']);
+			var pipe = Q.pipe(keys, function () {
+				callback(subject, params);
+			});
+			Stream.construct(subject.stream, {}, function () {
+				subject.stream = this;
+				pipe.fill('stream')();
+			});
+			Q.each(subject.relatedStreams, function (i) {
+				Stream.construct(this, function () {
+					subject.relatedStreams[i] = this;
+					pipe.fill(i)();
+				});
+			});
+			pipe.fill('nodeUrls')(subject.nodeUrls);
+		}
+	});
     
 })

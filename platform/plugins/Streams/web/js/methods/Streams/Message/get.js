@@ -1,4 +1,13 @@
 Q.exports(function(priv){
+
+    var where = Streams.cache.where || 'document';
+
+    /**
+     * Streams plugin's front end code
+     *
+     * @module Streams
+     * @class Streams
+     */
     /**
      * Get one or more messages, which may result in batch requests to the server.
      * May call Message.get.onError if an error occurs.
@@ -19,7 +28,7 @@ Q.exports(function(priv){
      *   If ordinal was an Object, then the second parameter is a hash of { ordinal: Streams.Message } pairs
      *   The third parameter is an object that contains publisherId, streamName, streamType, messageCount
      */
-    return function _Streams_Message_get (publisherId, streamName, ordinal, callback) {
+    return Q.getter(function _Streams_Message_get (publisherId, streamName, ordinal, callback) {
         var slotName, criteria = {};
         if (Q.typeOf(ordinal) === 'object') {
             slotName = ordinal.withMessageTotals
@@ -76,6 +85,24 @@ Q.exports(function(priv){
                 }
             });
         return true;
-    };
+    }, {
+		cache: Q.Cache[where]("Streams.Message.get", 100),
+		throttle: 'Streams.Message.get',
+		prepare: function (subject, params, callback, args) {
+			if (params[0]) {
+				return callback(this, params);
+			}
+			if (Q.isPlainObject(args[2])) {
+				var p1 = params[1];
+				Q.each(p1, function (ordinal, message) {
+					message = message && Message.construct(message, true);
+					p1[ordinal] = message;
+				});
+			} else {
+				params[1] = message && Message.construct(message, true);
+			}
+			callback(params[1], params);
+		}
+	});
 
 })

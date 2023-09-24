@@ -1,4 +1,13 @@
 Q.exports(function(priv){
+
+	var where = Streams.cache.where || 'document';
+
+	/**
+     * Streams plugin's front end code
+     *
+     * @module Streams
+     * @class Streams
+     */
     /**
 	 * Get one or more messageTotals, which may result in batch requests to the server.
 	 * May call Streams.Message.Total.get.onError if an error occurs.
@@ -12,7 +21,7 @@ Q.exports(function(priv){
 	 *   If messageType was a String, then the second parameter is the messageTotal.
 	 *   If messageType was an Array, then the second parameter is a hash of {messageType: messageTotal} pairs
 	 */
-	return function _Streams_Message_Total_get (publisherId, streamName, messageType, callback) {
+	return Q.getter(function _Streams_Message_Total_get (publisherId, streamName, messageType, callback) {
 		var func = Q.Streams.batchFunction(Q.baseUrl({
 			publisherId: publisherId,
 			streamName: streamName
@@ -35,5 +44,8 @@ Q.exports(function(priv){
 				}
 				callback && callback.call(Q.Streams.Message.Total, err, messageTotals || 0);
 			});
-	}
+	}, {
+		cache: Q.Cache[where]("Streams.Message.Total.get", 100),
+		throttle: 'Streams.Message.Total.get'
+	});
 })

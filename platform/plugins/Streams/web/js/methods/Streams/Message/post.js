@@ -1,5 +1,11 @@
 Q.exports(function(priv){
     /**
+     * Streams plugin's front end code
+     *
+     * @module Streams
+     * @class Streams
+     */
+    /**
      * Post a message to a stream, so it can be broadcast to all participants, sent to all subscribers, etc.
      * May call Message.post.onError if an error occurs.
      * @static
