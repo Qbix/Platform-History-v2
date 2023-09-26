@@ -1183,8 +1183,8 @@ class Q_Session
 			$sig = Q_Utils::signature($id, "$secret");
 			$id .= substr($sig, 0, 32);
 		}
-		$prefixes = Q_Config::expect('Q', 'session', 'id', 'prefixes');
-		return $prefixes[$prefixType] . Q_Utils::toBase64($id);
+		$prefix = Q_Config::expect('Q', 'session', 'id', 'prefixes', $prefixType);
+		return $prefix . Q_Utils::toBase64($id);
 	}
 	
 	/**
