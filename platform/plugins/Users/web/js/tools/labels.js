@@ -512,9 +512,23 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				if (msg) {
 					return console.error(msg);
 				}
-console.log(response);
+console.log(response.slots);
 				//var results = response.slots.results;
-
+                var allWeb3RoleIds = response.slots.labels.allRoles.array_1;
+                for(var index in allWeb3RoleIds){
+                    $(tool.element)
+                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIds[index])+'"]')
+                    .data('web3validated', true);
+                }   
+                
+                var allWeb3RoleIdsByUser = response.slots.labels.userRoles;
+                for(var i in allWeb3RoleIdsByUser) {
+                    $(tool.element)
+                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIdsByUser[i])+'"]')
+                    .addClass('Q_selected');
+                }
+                console.log(allWeb3RoleIds);
+                console.log(allWeb3RoleIdsByUser);
 			}, {
 				method: "get",
 				fields: {

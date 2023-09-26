@@ -48,7 +48,16 @@ function Users_web3_response_labels($params = array())
     }
     
     try {
-        $ret['userRoles'] = Users_Web3::execute($abiPathCommunity, $communityAddress, "getRoles(address[])", array($walletAddress), $chainId, $caching, $cacheDuration);
+        
+        $tmp = Users_Web3::execute($abiPathCommunity, $communityAddress, "getRoles(address[])", array($walletAddress), $chainId, false/*$caching*/, $cacheDuration);
+        // stupid thing. need force toString() to convert object BigInt to number
+        foreach($tmp[0] as &$tmp2) {
+            $tmp2 = $tmp2 . '';
+        }
+        unset($tmp2);
+        
+        $ret['userRoles'] = $tmp[0];
+        
     } catch (Exception $e) {
         die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
     }
