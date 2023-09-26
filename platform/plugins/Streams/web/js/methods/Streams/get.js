@@ -1,7 +1,4 @@
 Q.exports(function(priv, Streams, Stream) {
-
-    var where = Streams.cache.where || 'document';
-
     /**
     * Streams batch getter.
     * @static
@@ -128,20 +125,6 @@ Q.exports(function(priv, Streams, Stream) {
             }, extra);
         priv._retain = undefined;
     }, {
-		cache: Q.Cache[where]("Streams.get", 100, {
-			beforeEvict: {
-				Streams: function (item) {
-					var publisherId = Q.getObject('subject.fields.publisherId', item);
-					var streamName = Q.getObject('subject.fields.name', item);
-					if (publisherId && streamName) {
-						var ps = Streams.key(publisherId, streamName);
-						if (priv._retainedByStream[ps]) {
-							return false; // don't evict retained streams from cache
-						}
-					}
-				}
-			}
-		}),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Streams.isStream(subject)) {

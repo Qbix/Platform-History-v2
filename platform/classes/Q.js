@@ -2169,7 +2169,7 @@ Q.dir = function _Q_dir(start, callback) {
  * @param {String} text The text to normalize
  * @param {String} [replacement='_']
  *  Defaults to '_'. A string to replace one or more unacceptable characters.
- * @param {RegExp|Boolean} [$characters=null] Defaults to allow alphanumerics across most languages /[^\p{L}0-9]+/gu. 
+ * @param {RegExp|Boolean} [characters=null] Defaults to allow alphanumerics across most languages /[^\p{L}0-9]+/gu.
  *  You can pass true here to allow only ASCII alphanumerics, i.e. /[^A-Za-z0-9]+/g.
  *  Or pass a RegExp identifying regexp characters that are not acceptable.
  * @param {number} numChars

@@ -915,7 +915,23 @@ Streams.get = new Q.Method({
     * @event get.onStream
     */
     onStream: new Q.Event()
-}, { isGetter: true });
+}, {
+	isGetter: true,
+	cache: Q.Cache[Streams.cache.where || 'document']("Streams.get", 100, {
+		beforeEvict: {
+			Streams: function (item) {
+				var publisherId = Q.getObject('subject.fields.publisherId', item);
+				var streamName = Q.getObject('subject.fields.name', item);
+				if (publisherId && streamName) {
+					var ps = Streams.key(publisherId, streamName);
+					if (priv._retainedByStream[ps]) {
+						return false; // don't evict retained streams from cache
+					}
+				}
+			}
+		}
+	})
+});
 
 /**
  * @static
@@ -1180,7 +1196,10 @@ Streams.related = new Q.Method({
     * @event related.onError
     */
     onError: new Q.Event()
-}, { isGetter: true });
+}, {
+	isGetter: true,
+	cache: Q.Cache[Streams.cache.where || 'document']("Streams.related", 100)
+});
 
 Streams.socketRequest = new Q.Method();
 
@@ -3180,7 +3199,10 @@ Message.shouldRefreshStream = function (type, should) {
 
 Message.get = new Q.Method({
     onError: new Q.Event()
-}, { isGetter: true });
+}, {
+	isGetter: true,
+	cache: Q.Cache[Streams.cache.where || 'document']("Streams.Message.get", 100)
+});
 
 Message.post = new Q.Method({
     onError: new Q.Event()
@@ -3344,10 +3366,12 @@ Q.Method.define(
  * @class Streams.Message.Total
  */
 var MTotal = Streams.Message.Total = {
-    
     get: new Q.Method({
         onError: new Q.Event()
-    }),
+    }, {
+		isGetter: true,
+		cache: Q.Cache[Streams.cache.where || 'document']("Streams.Message.Total.get", 100)
+	}),
 	
 	/**
 	 * Returns the latest total number of messages (of a certain type) posted to the stream
@@ -3503,11 +3527,14 @@ Participant.get = new Q.Method({
  	 * @event get.onError
  	 */
 	onError: new Q.Event()
-}, { isGetter: true });
+}, {
+	isGetter: true,
+	cache: Q.Cache[Streams.cache.where || 'document']("Streams.Participant.get", 100)
+});
 
 Q.Method.define(
 	Participant,
-	'{{Streams}}/js/methods/Participant', 
+	'{{Streams}}/js/methods/Streams/Participant',
 	function() {
 		return [priv, Streams, Stream, Participant];
 	}

@@ -1,7 +1,4 @@
 Q.exports(function(priv, Streams, Stream){
-
-    var where = Streams.cache.where || 'document';
-
     /**
      * Get streams related to a given stream.
      * @static
@@ -217,7 +214,6 @@ Q.exports(function(priv, Streams, Stream){
             return false;
         }
     }, {
-		cache: Q.Cache[where]("Streams.related", 100),
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
 			if (params[0] || !Q.isEmpty(subject.errors)) { // some error

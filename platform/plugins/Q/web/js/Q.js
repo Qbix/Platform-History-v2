@@ -6062,6 +6062,17 @@ Q.Method.define = function (o, prefix, closure) {
 					return f.force.apply(t, a);
 				});
 			};
+			o[k].forget = function _Q_Method_forget_shim () {
+				var url = Q.url(prefix + '/' + k + '.js');
+				var t = this, a = arguments;
+				return Q.Method.load(o, k, url, closure)
+					.then(function (f) {
+						return f.forget.apply(t, a);
+					});
+			};
+		}
+		if (method.__options.cache) {
+			o[k].cache = method.__options.cache;
 		}
 	});
 	return o;
