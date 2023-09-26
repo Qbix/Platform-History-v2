@@ -1,4 +1,4 @@
-Q.exports(function(priv, Streams, Stream, Participant)) {
+Q.exports(function(priv, Streams, Stream, Participant) {
 
     var where = Streams.cache.where || 'document';
 
@@ -88,4 +88,4 @@ Q.exports(function(priv, Streams, Stream, Participant)) {
         }
     });
 
-};
+});

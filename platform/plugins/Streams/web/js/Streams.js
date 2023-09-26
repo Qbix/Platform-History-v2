@@ -3507,7 +3507,7 @@ Participant.get = new Q.Method({
 
 Q.Method.define(
 	Participant,
-	'{{Streams}}/js/methods/Participant', 
+	'{{Streams}}/js/methods/Streams/Participant',
 	function() {
 		return [priv, Streams, Stream, Participant];
 	}
