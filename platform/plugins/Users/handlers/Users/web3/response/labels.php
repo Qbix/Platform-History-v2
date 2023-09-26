@@ -49,7 +49,7 @@ function Users_web3_response_labels($params = array())
     
     try {
         
-        $tmp = Users_Web3::execute($abiPathCommunity, $communityAddress, "getRoles(address[])", array($walletAddress), $chainId, false/*$caching*/, $cacheDuration);
+        $tmp = Users_Web3::execute($abiPathCommunity, $communityAddress, "getRoles(address[])", array($walletAddress), $chainId, $caching, $cacheDuration);
         // stupid thing. need force toString() to convert object BigInt to number
         foreach($tmp[0] as &$tmp2) {
             $tmp2 = $tmp2 . '';

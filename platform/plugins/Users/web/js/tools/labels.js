@@ -505,39 +505,39 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             if (!st) {
                                 continue;
                             }
+                            ///-------------------
+                            Q.req("Users/web3", ["labels"], function (err, response) {
+                                $this.removeClass("Q_working");
+                                var msg = Q.firstErrorMessage(err, response && response.errors);
+                                if (msg) {
+                                    return console.error(msg);
+                                }
 
-            Q.req("Users/web3", ["labels"], function (err, response) {
-//				$this.removeClass("Q_working");
-				var msg = Q.firstErrorMessage(err, response && response.errors);
-				if (msg) {
-					return console.error(msg);
-				}
-console.log(response.slots);
-				//var results = response.slots.results;
-                var allWeb3RoleIds = response.slots.labels.allRoles.array_1;
-                for(var index in allWeb3RoleIds){
-                    $(tool.element)
-                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIds[index])+'"]')
-                    .data('web3validated', true);
-                }   
-                
-                var allWeb3RoleIdsByUser = response.slots.labels.userRoles;
-                for(var i in allWeb3RoleIdsByUser) {
-                    $(tool.element)
-                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIdsByUser[i])+'"]')
-                    .addClass('Q_selected');
-                }
-                console.log(allWeb3RoleIds);
-                console.log(allWeb3RoleIdsByUser);
-			}, {
-				method: "get",
-				fields: {
-                    communityAddress: communityAddress,
-                    chainId: configChains[chain]['appId'],
-                    walletAddress: state.contactUserId_xid
-				}
-			})
-            /*
+                                // mark all web3 roles as validated(means exists on contract)
+                                var allWeb3RoleIds = response.slots.labels.allRoles.array_1;
+                                for(var index in allWeb3RoleIds){
+                                    $(tool.element)
+                                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIds[index])+'"]')
+                                    .data('web3validated', true);
+                                }   
+                                // mark as selected if user belong to roles
+                                var allWeb3RoleIdsByUser = response.slots.labels.userRoles;
+                                for(var i in allWeb3RoleIdsByUser) {
+                                    $(tool.element)
+                                    .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIdsByUser[i])+'"]')
+                                    .addClass('Q_selected');
+                                }
+                                
+                            }, {
+                                method: "get",
+                                fields: {
+                                    communityAddress: communityAddress,
+                                    chainId: configChains[chain]['appId'],
+                                    walletAddress: state.contactUserId_xid
+                                }
+                            })
+                            /*
+                            // left for way that need to check on frontend side
                             Q.Communities.Web3.Roles.getAll(communityAddress, configChains[chain]['appId'], null, function (err, response) {
 
                                 if (err) {return;}
