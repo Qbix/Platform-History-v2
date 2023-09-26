@@ -1,7 +1,4 @@
 Q.exports(function(priv, Streams, Stream, Participant) {
-
-    var where = Streams.cache.where || 'document';
-
     /**
      * Constructs a participant from fields, which are typically returned from the server.
      * @class Streams.Participant
@@ -69,7 +66,6 @@ Q.exports(function(priv, Streams, Stream, Participant) {
             }
         });
     }, {
-        cache: Q.Cache[where]("Streams.Participant.get", 100),
         throttle: 'Streams.Participant.get',
         prepare: function (subject, params, callback, args) {
             if (params[0]) {

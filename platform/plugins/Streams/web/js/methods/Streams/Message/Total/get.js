@@ -1,7 +1,4 @@
 Q.exports(function(priv, Streams, Stream, Total){
-
-	var where = Streams.cache.where || 'document';
-
 	/**
      * Streams plugin's front end code
      *
@@ -45,7 +42,6 @@ Q.exports(function(priv, Streams, Stream, Total){
 				callback && callback.call(Q.Streams.Message.Total, err, messageTotals || 0);
 			});
 	}, {
-		cache: Q.Cache[where]("Streams.Message.Total.get", 100),
 		throttle: 'Streams.Message.Total.get'
 	});
 })

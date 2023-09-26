@@ -1,7 +1,4 @@
 Q.exports(function(priv, Streams, Stream, Message){
-
-    var where = Streams.cache.where || 'document';
-
     /**
      * Streams plugin's front end code
      *
@@ -86,7 +83,6 @@ Q.exports(function(priv, Streams, Stream, Message){
             });
         return true;
     }, {
-		cache: Q.Cache[where]("Streams.Message.get", 100),
 		throttle: 'Streams.Message.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
