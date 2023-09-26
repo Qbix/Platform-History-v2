@@ -506,6 +506,24 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 continue;
                             }
 
+            Q.req("Users/web3", ["labels"], function (err, response) {
+//				$this.removeClass("Q_working");
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+				if (msg) {
+					return console.error(msg);
+				}
+console.log(response);
+				//var results = response.slots.results;
+
+			}, {
+				method: "get",
+				fields: {
+                    communityAddress: communityAddress,
+                    chainId: configChains[chain]['appId'],
+                    walletAddress: state.contactUserId_xid
+				}
+			})
+            /*
                             Q.Communities.Web3.Roles.getAll(communityAddress, configChains[chain]['appId'], null, function (err, response) {
 
                                 if (err) {return;}
@@ -528,6 +546,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 }
 
                             });
+                            */
                         };
 
                     }
