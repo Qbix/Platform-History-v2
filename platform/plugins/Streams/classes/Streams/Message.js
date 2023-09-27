@@ -274,12 +274,24 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			'Please set config "Streams"/"types"/"*"/"messages"/"*"/"subject"'
 		)
 	);
+	var fetchAvatar = Streams.Stream.getConfigField(
+		stream.fields.type,
+		['messages', this.fields.type, 'fetchAvatar'],
+		Q.Config.get(
+			['Streams', 'types', '*', 'messages', '*', 'fetchAvatar'],
+			'Please set config "Streams"/"types"/"*"/"messages"/"*"/"fetchAvatar"'
+		)
+	);
 	if (typeof deliver === 'string') {
 		deliver = {to: deliver};
 	}
 
 	var p = new Q.Pipe();
-	Streams.Avatar.fetch(toUserId, toUserId, p.fill('avatar'));
+	if (fetchAvatar) {
+		Streams.Avatar.fetch(toUserId, toUserId, p.fill('avatar'));	
+	} else {
+		p.fill('avatar')(null, null);
+	}
 	Users.fetch(toUserId, p.fill('user'));
 	p.add(['user', 'avatar'], 1, function (params, subjects) {
 		fields.toUser = subjects.user;
