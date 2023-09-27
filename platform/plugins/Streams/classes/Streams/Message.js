@@ -278,12 +278,17 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		deliver = {to: deliver};
 	}
 
-	Users.fetch(toUserId, function (err) {
+	var p = new Q.Pipe();
+	Streams.Avatar.fetch(toUserId, toUserId, p.fill('avatar'));
+	Users.fetch(toUserId, p.fill('user'));
+	p.add(['user', 'avatar'], 1, function (params, subjects) {
+		fields.toUser = subjects.user;
+		fields.toAvatar = subjects.avatar;
 		var to = Q.Config.get(
 			['Streams', 'rules', 'deliver', deliver.to],
 			['devices', 'email', 'mobile']
 		);
-		var uf = this.fields;
+		var uf = subjects.user.fields;
 		var p1 = new Q.Pipe();
 		var streamUrl = stream.url(message.fields.ordinal);
 		var o = {
@@ -295,7 +300,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			message: message,
 			url: message.getInstruction("url") || streamUrl,
 			icon: Q.url(stream.iconUrl(80)),
-			user: this,
+			user: subjects.user,
 			avatar: avatar,
 			callback: callback
 		};
