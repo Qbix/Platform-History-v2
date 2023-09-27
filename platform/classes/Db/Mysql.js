@@ -149,7 +149,7 @@ function Db_Mysql(connName, dsn) {
 								}
 							}
 						}
-						return found ? next() : field.toString();
+						return found ? next() : field.string();
 					};
 					connection = mysqlConnection(
 						info.host,
