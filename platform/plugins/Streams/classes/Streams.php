@@ -3892,7 +3892,7 @@ abstract class Streams extends Base_Streams
 
 		$asUserDisplayName = Streams::displayName($asUser);
 		
-		$displayName = Q::ifset($options, 'displayName', Q::ifset($options, 'name', null));
+		$displayName = Q::ifset($options, 'displayName', Q::ifset($options, 'name', $asUserDisplayName));
 		$icon = Q::ifset($options, 'icon', null);
 
 		foreach ($raw_userIds as $userId) {
@@ -3948,7 +3948,7 @@ abstract class Streams extends Base_Streams
 			"writeLevel" => $writeLevel,
 			"adminLevel" => $adminLevel,
 			"permissions" => $permissions,
-			"displayName" => $asUserDisplayName,
+			"displayName" => $displayName,
 			"expireTime" => $expireTime
 		);
 		
