@@ -80,6 +80,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 *    You can pass a string here, which will be used to run the query
 	 *    on this shard. Or pass an array of shard names. Or you can 
 	 *    specify custom query objects as {shardName: query}.
+	 * @param {Array} [options.leaveBuffer]
+	 *    Pass the names of fields which should remain of type Buffer,
+	 *    otherwise the fields of type Buffer will be turned toString().
 	 */
 	mq.execute = function(callback, options) {
 		var shardName, connection = this.db.connName;
@@ -153,7 +156,14 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 			var fields = Object.keys(temp);
 			if (self.className) {
 				rowClass = Q.require( self.className.split('_').join('/') );
+				var leaveBuffer = options.leaveBuffer;
 				for (i=0; i<results.length; ++i) {
+					for (var k in results[i]) {
+						if (results[i] instanceof Buffer
+						&& leaveBuffer.indexOf(k) < 0) {
+							results[i] = results[i].toString();
+						}
+					}
 					if (options.plain) {
 						results2.push(results[i]);
 					} else {
