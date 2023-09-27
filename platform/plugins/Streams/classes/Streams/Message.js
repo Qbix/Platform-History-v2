@@ -294,8 +294,8 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	}
 	Users.fetch(toUserId, p.fill('user'));
 	p.add(['user', 'avatar'], 1, function (params, subjects) {
-		fields.toUser = subjects.user;
-		fields.toAvatar = subjects.avatar;
+		fields.toUser = params.user[1];
+		fields.toAvatar = params.avatar[1];
 		var to = Q.Config.get(
 			['Streams', 'rules', 'deliver', deliver.to],
 			['devices', 'email', 'mobile']

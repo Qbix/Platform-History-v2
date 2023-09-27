@@ -216,7 +216,8 @@
 					"Streams/invite": {
 						"description": "You were invited",
 						"subject": ["Streams/content", ["notifications", "Streams/invite"]],
-						"evenIfOnline": true
+						"evenIfOnline": true,
+						"fetchAvatar": true
 					},
 					"Streams/announcement": {
 						"description": "Announcement for everyone in the stream",
