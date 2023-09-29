@@ -77,11 +77,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		throw new Q.Error("Streams/preview tool: missing options.imagepicker.showSize");
 	}
 	if (!si.saveSizeName) {
-		si.saveSizeName = {};
-		si.saveSizeName[si.showSize] = si.showSize;
-		Q.each(state.sizes || Q.Streams.image.sizes, function (i, size) {
-			si.saveSizeName[size] = size;
-		});
+		si.saveSizeName = Q.extend({}, state.sizes || Q.Streams.image.sizes);
 	}
 	if (!si.maxStretch) {
 		si.maxStretch = Q.Streams.image.maxStretch;
