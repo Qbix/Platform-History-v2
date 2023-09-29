@@ -212,7 +212,7 @@ html[xmlns] .Q_clearfix { display: block; }
 
 /* more Q styles */
 
-.Q_overlay { background: #EEEEF3; border-radius: 5px; border-radius: 5px; }
+.Q_overlay { background: #EEEEF3; border-radius: 5px; }
 .Q_overlay .Q_title { background-color: #55A; color: white; margin: 0; padding: 5px 10px 5px 10px; font-size: 18px; font-weight: bold; border-radius: 5px 5px 0 0; }
 .Q_document_surface { background: white; padding: 10px; }
 .Q_chrome_surface { background: gray; }
@@ -223,7 +223,7 @@ html[xmlns] .Q_clearfix { display: block; }
 
 /* the overlayed element */
 .Q_overlay { background: url(../img/bg/overlay.png); display:none; text-align:left; padding: 0; border: 2px solid #444; z-index: 9000;
- opacity: 1; border-radius: 7px; border-radius: 7px; box-shadow: 0 0 20px #333; }
+ opacity: 1; border-radius: 7px; box-shadow: 0 0 20px #333; }
 
 .Q_notMobile .Q_overlay { max-width: 500px; }
 .Q_mobile .Q_overlay { max-width: 95%; }
@@ -235,13 +235,13 @@ body.Q_preventScroll {
 	min-height: 100%;
 }
 .Q_dialog_title {
-	padding: 0px 10px;
+	padding: 0 10px;
 	vertical-align: middle;
 	min-height: 40px;
 	max-height: 80px;
 	line-height: 40px;
 	box-sizing: content-box;
-	margin:0px;
+	margin:0;
 	border-bottom: 1px solid #333;
 	font-size: 20px;
 	min-width: 200px;
@@ -350,7 +350,7 @@ body.Q_preventScroll {
 .Q_button {
 	white-space: nowrap;
 	border-width:1px; font-size:1em; padding: 1px 5px 1px 5px; color: #fff; cursor:pointer; border-radius: 0.3em;
-	border-radius: 0.3em; border-color: rgba(200,2050,200,50.5); border-bottom-color: rgba(0,50,200,50.2); border-right-color: rgba(0,50,200,50.2);
+	border-color: rgba(200,2050,200,50.5); border-bottom-color: rgba(0,50,200,50.2); border-right-color: rgba(0,50,200,50.2);
 	box-sizing: border-box;
 	
 	box-shadow: 0 0 1px rgba(50,50,50,0.5); 
@@ -366,7 +366,7 @@ body.Q_preventScroll {
 .Q_button img { vertical-align: middle; margin-right: 5px; }
 
 .Q_button:focus,
-.Q_notTouchscreen .Q_button:hover
+.Q_notTouchscreen .Q_button:hover,
 .Q_notTouchscreen .Q_button.focus {
 	box-shadow: 0 2px 10px rgba(40,40,40,0.8);
 	outline: solid 2px rgba(150, 150, 150, 0.5);
@@ -507,7 +507,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_clickable_container .Q_clickable_shadow { display: none; pointer-events: none; }
 .Q_clickable_stretcher.Q_clickable_sized>* { width: 100% !important; height: 100% !important; max-width: 100% !important; max-height: 100% !important;  box-sizing: border-box !important; }
 .Q_notTouchscreen .Q_clickable_container.Q_hover .Q_clickable_shadow,
-.Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
+.Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow,
 .Q_notTouchscreen .Q_clickable_container:active .Q_clickable_shadow
  { display: block; max-width: none !important; }
 .Q_inplace_tool { display: none; visibility: hidden; }
@@ -856,11 +856,10 @@ html.Q_scanning body > .Q_scanning_code {
 	background-image: linear-gradient(45deg, #c2c2c2 25%, #ebebeb 25%, #ebebeb 50%, #c2c2c2 50%, #c2c2c2 75%, #ebebeb 75%, #ebebeb 100%);
 	background-size: 5.66px 5.66px;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-	filter: alpha(opacity=80);
+	filter: alpha(opacity=80) blur(1px);
 	-moz-opacity: 0.5;
 	opacity: 0.5;
 	pointer-events: none;
-	filter: blur(1px);
 	transition: all 300ms linear;
 }
 .Q_disabled_2 {
@@ -927,14 +926,13 @@ input[type=password] {
     background: #f6f7f8;
     background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
     background-size: 800px 104px;
-	background-position: fixed;
     height: 96px;
     position: relative;
 }
 
 .Q_hint {
 	border-radius: 50%;
-	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.35);
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.35);
 	text-align: center;
 	z-index: 1000000002;
 }
@@ -946,7 +944,7 @@ input[type=password] {
 	font-weight: bold;
 	padding: 10px;
 	text-align: center;
-	box-shadow: 2px 2px 10px rgb(0, 0, 0, 50%);
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
 	backdrop-filter: blur(2px);
 	-webkit-backdrop-filter: blur(2px);
 	z-index: 1000000001;
@@ -996,7 +994,7 @@ input[type=password] {
 
 .Q_shadow_round {
     position:relative;
-    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
 	z-index: 0;
 }
 .Q_shadow_round:after{
@@ -1004,7 +1002,7 @@ input[type=password] {
     position:absolute;
     z-index:-1;
     box-shadow:0 0 40px rgba(0,0,0,0.8);
-    bottom:0px;
+    bottom:0;
     left:10%;
     right:10%;
     width:80%;
