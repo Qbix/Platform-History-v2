@@ -506,8 +506,9 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 continue;
                             }
                             ///-------------------
+                            tool.element.addClass('Q_loading');
                             Q.req("Users/web3", ["labels"], function (err, response) {
-                                $this.removeClass("Q_working");
+                                tool.element.removeClass('Q_loading');
                                 var msg = Q.firstErrorMessage(err, response && response.errors);
                                 if (msg) {
                                     return console.error(msg);
