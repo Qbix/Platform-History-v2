@@ -20,6 +20,9 @@ Q.exports(function (Users, priv) {
 			callback = filter;
 			filter = undefined;
 		}
+		if (Q.isEmpty(userId)) {
+			return Q.handle(callback, null, []);
+		}
 		Q.req('Users/label', 'labels', function (err, data) {
 			var msg = Q.firstErrorMessage(err, data);
 			if (msg) {
