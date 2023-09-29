@@ -304,7 +304,7 @@
 	 * @return {boolean}
 	 */
 	Users.isCommunityId = function (id) {
-		if (id[0] !== id[0].toUpperCase()) {
+		if (!id || id[0] !== id[0].toUpperCase()) {
 			return false;
 		}
 
