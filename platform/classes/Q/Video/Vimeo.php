@@ -13,7 +13,7 @@ class Q_Video_Vimeo extends Q_Video {
 	 * @throws {Q_Exception_Upload}
 	 * @return {array} the response from the server, may contain errors
 	 */
-	function create($params)
+	function doCreate($params)
 	{
 		// TODO: Q_Utils::post() to Vimeo thenreturn results
         // Basically, Streams/video/post.php should have
@@ -30,7 +30,7 @@ class Q_Video_Vimeo extends Q_Video {
 	 * @param {array} [$params] The parameters to send
 	 * @return {array}
 	 */
-	function upload($filename, $params = array())
+	function doUpload($filename, $params = array())
 	{
         throw new Q_Exception_Upload(); // make clients upload, for now
         // otherwise Q_Utils::request() with method: PATCH from PHP etc.

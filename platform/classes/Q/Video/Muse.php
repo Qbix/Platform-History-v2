@@ -9,24 +9,25 @@ class Q_Video_Muse extends Q_Video {
 
 	/**
 	 * Create a video resource on the cloud provider
+	 * @method doCreate
 	 * @param {array} $params
 	 * @throws {Q_Exception_MissingFile}
 	 * @return {array} the response from the server, may contain errors
 	 */
-	function create($params)
+	function doCreate($params)
 	{
 		throw new Q_Exception_MissingFile(array('filename' => 'video'));
 	}
 
 	/**
 	 * Upload file to muse.ai
-	 * @method upload
+	 * @method doUpload
 	 * @static
 	 * @param {string} $filename Filename of the file to upload
 	 * @param {array} [$params] The parameters to send
 	 * @return {array}
 	 */
-	function upload($filename, $params = array())
+	function doUpload($filename, $params = array())
 	{
 		$uploadEndPoint = Q_Config::expect("Q", "video", "cloudUpload", "muse", "uploadEndPoint");
 		$museApiKey = Q_Config::expect("Q", "video", "cloudUpload", "muse", "key");

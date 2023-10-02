@@ -26,8 +26,7 @@ class Q_Video_CloudConvert extends Q_Video {
 
 	/**
 	 * Upload file to CloudConvert
-	 * @method convert
-	 * @static
+	 * @method doConvert
 	 * @param {string} $src Can be URL or local path
 	 * @param {array} [$params] Array with additional params
 	 * @param {string} [$params.tag] Some local param which will need to identify this process with some local ID.
@@ -36,7 +35,7 @@ class Q_Video_CloudConvert extends Q_Video {
 	 * @param {array} [$params.export] Array with additional params pass to "export" task
 	 * @return {array}
 	 */
-	static function convert ($src, $params=array())	{
+	function doConvert ($src, $params=array())	{
 		$taskKey = self::getTaskKey();
 		$cloudConvert = self::setup();
 

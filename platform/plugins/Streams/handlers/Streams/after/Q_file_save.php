@@ -12,8 +12,8 @@ function Streams_after_Q_file_save($params)
 		return;
 	}
 
-	$filePath = $writePath.$name;
-	$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filePath);
+	$filename = $writePath.$name;
+	$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filename);
 
 	$url = Q_Valid::url($tailUrl) ? $tailUrl : '{{baseUrl}}/'.$tailUrl;
 	$url = str_replace('\\', '/', $url);
@@ -22,7 +22,7 @@ function Streams_after_Q_file_save($params)
 	if ($audio) {
 		include_once(Q_CLASSES_DIR.DS.'Audio'.DS.'getid3'.DS.'getid3.php');
 		$getID3 = new getID3;
-		$meta = $getID3->analyze($filePath);
+		$meta = $getID3->analyze($filename);
 		$bitrate = Q::ifset($meta, 'audio', 'bitrate', 128000);
 		$bits = $size * 8;
 		$duration = $bits / $bitrate;
@@ -52,58 +52,13 @@ function Streams_after_Q_file_save($params)
 	// video files handler
 	if (preg_match("/^video/", $mimeType)) {
 		// copy Q.file.save attribute to videoUrl attribute to know that video
-		$stream->setAttribute("videoUrl", $url);
+		$stream->setAttribute("Streams.videoUrl", $url);
 		$stream->changed();
-
-		$environment = Q_Config::get("Q", "environment", null);
-		$environments = Q_Config::get("Q", "video", "cloud", "environments", array('live'));
-		if (!in_array($environment, $environments)) {
-			return; // wrong environment, webhooks may not work etc.
-		}
-
-		// Try to upload to cloud provider, if defined in config
-		$uploadedToProvider = false;
-		$cloudUpload = Q_Config::get("Q", "video", "cloud", "upload", array());
-		$provider = Q::ifset($_REQUEST, 'provider', array_key_first($cloudUpload));
-		if ($cloudUpload and $provider) {
-			$className = "Q_Video_".ucfirst($provider);
-			try {
-				$adapter = new $className($filePath);
-				$result = $adapter->upload($filePath);
-			} catch (Exception $e) {
-				$result = null;
-			}
-
-			if (Q::isAssociative($result)) {
-				$stream->setAttribute("Streams/cloud/provider", $provider);
-				$stream->setAttribute("Streams/cloud/videoId", $result["videoId"]);
-				$stream->setAttribute("Streams/cloud/videoUrl", $result["videoUrl"]);
-				$stream->clearAttribute("Q.file.url");
-				$stream->changed();
-				$uploadedToProvider = true;
-			}
-		}
-
-		// May use converter to process video and set stream icon to animated GIF
-		$cloudConvert = Q_Config::get("Q", "video", "cloud", "convert", array());
-		$converter = Q::ifset($_REQUEST, 'converter', array_key_first($cloudConvert));
-		if ($cloudConvert and $converter) {
-			$options['tag'] = json_encode(array(
-				"publisherId" => $stream->publisherId,
-				"streamName" => $stream->name
-			));
-			$className = "Q_Video_".ucfirst($converter);
-			try {
-				$adapter = new $className($filePath);
-				$adapter->convert($filePath, $options);
-			} catch (Exception $e) {
-				// stream icon will silently remain as-is
-			}
-		}
-
-		// remove local uploaded file if uploaded to video provider
-		if ($uploadedToProvider) {
-			@unlink($filePath);
+		Q_Video::convert($stream, $filename);
+		if (Q_Video::upload($stream, $filename)) {
+			// remove local uploaded file if uploaded to video provider
+			// and stream url has been updated
+			@unlink($filename);
 		}
 	}
 }

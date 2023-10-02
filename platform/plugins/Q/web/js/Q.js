@@ -14954,9 +14954,13 @@ Q.Video = function (url, container, attributes) {
  */
 Q.Video.upload = function (params, provider) {
 	provider = provider || Q.getObject('Q.videos.provider');
-	Q.require(Q.Video.upload[provider], function (exported) {
-		exported.apply(params);
-	});
+	if (typeof Q.Video.upload[provider] === 'function') {
+		Q.Video.upload[provider].apply(params);
+	} else {
+		Q.require(Q.Video.upload[provider], function (exported) {
+			exported.apply(params);
+		});
+	}
 };
 
 /**
