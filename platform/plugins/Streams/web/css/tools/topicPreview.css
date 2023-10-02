@@ -1,11 +1,10 @@
 .Streams_topic_preview_tool {
     display: inline-block;
     position: relative;
-    max-width: 350px;
     width: 100%;
 }
 /* <create nft form css> */
-.Streams_topic_preview_composer form {
+.Streams_topic_preview_composer form.Streams_topic_composer {
     padding: 20px;
     background: #fff;
     font-size: 20px;
@@ -16,10 +15,15 @@
 }
 
 .Streams_topic_preview_composer .Streams_topic_composer_form_group {
-    float: left;
+    display: inline-block;
     width: 100%;
     margin-bottom: 20px;
     position: relative;
+}
+.Streams_topic_preview_composer .Streams_topic_composer_form_group[data-type=icon] {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_form_control {
     background: transparent;
@@ -38,18 +42,16 @@
     border-style: solid !important;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_container {
+    display: inline-block;
     text-align: center;
     border: 2px dashed rgba(4, 4, 5, 0.1);
-    min-height: 115px;
+    min-height: 80px;
     position: relative;
     border-radius: 16px;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 20px;
     padding: 5px;
+}
+.Streams_topic_preview_composer .Streams_topic_composer_container .Streams_topic_preview_icon {
+    display: block;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_container .NFT_preview_icon {
     max-width: 100%;
@@ -82,9 +84,12 @@
 /* </create nft form css> */
 
 .Streams_topic_preview_tool {
-    padding: 10px;
+    padding: 0 10px;
     position: relative;
     cursor: pointer;
+}
+.Streams_topic_composer_form_relations .Streams_topic_preview_tool {
+    padding: 0;
 }
 .Streams_topic_preview_tool .Streams_topic_preview_title {
     font-weight: normal;

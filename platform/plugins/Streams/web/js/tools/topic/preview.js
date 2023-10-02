@@ -25,15 +25,14 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         });
     }
 },
-
 {
     imagepicker: {
-        showSize: "200"
+        showSize: "200",
+        fullSize: "400",
     },
     completed: false,
     onInvoke: new Q.Event()
 },
-
 {
     refresh: function (stream) {
         var tool = this;
@@ -96,8 +95,10 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
      */
     composer: function () {
         var tool = this;
+        var $toolElement = $(this.element);
         var previewState = tool.preview.state;
 
+        $toolElement.addClass("Q_working");
         Q.req("Streams/topic", "newItem", function (err, response) {
             if (err) {
                 return;
@@ -111,6 +112,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     return;
                 }
 
+                $toolElement.removeClass("Q_working");
                 tool.stream = this;
                 tool.update();
             });
@@ -158,6 +160,21 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 // apply Streams/preview icon behavior
                 tool.preview.icon($icon[0]);
 
+                // relations
+                $(".Streams_topic_composer_form_relations", $dialog).tool("Streams/related", {
+                    publisherId,
+                    streamName,
+                    relationType: "Streams/subtopic",
+                    sortable: true,
+                    creatable: {
+                        'Streams/video': {title: "Add video"},
+                        'Streams/audio': {title: "Add audio"},
+                        'Streams/pdf': {title: "Add PDF"},
+                        'Streams/topic': {title: "Add topic"}
+                    }
+
+                }).activate();
+
                 // create topic
                 $save.on(Q.Pointer.fastclick, function (event) {
                     event.preventDefault();
@@ -202,19 +219,20 @@ Q.Template.set('Streams/topic/preview',
 );
 
 Q.Template.set('Streams/topic/composer',
-`<form>
+`<form class="Streams_topic_composer">
         <div class="Streams_topic_composer_form_group">
             <input type="text" name="title" value="{{title}}" class="Streams_topic_composer_form_control" placeholder="{{topic.TitlePlaceholder}}">
         </div>
         <div class="Streams_topic_composer_form_group">
             <textarea name="description" class="Streams_topic_composer_form_control" placeholder="{{topic.DescribeTopic}}">{{content}}</textarea>
         </div>
-        <div class="Streams_topic_composer_form_group">
+        <div class="Streams_topic_composer_form_group" data-type="icon">
             <label>{{topic.TopicIcon}}:</label>
             <div class="Streams_topic_composer_container">
                 <img class="Streams_topic_preview_icon">
             </div>
         </div>
+        <div class="Streams_topic_composer_form_relations"></div>
         <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
     </form>`, {text: ['Streams/content']});
 
