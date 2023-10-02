@@ -175,7 +175,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 },
 
 {
-	publisherId: Q.info.app,
+	publisherId: Users.communityId,
 	isCategory: true,
 	relationType: null,
 	realtime: false,
@@ -229,7 +229,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	},
 	beforeRenderPreview: new Q.Event(function (tff) {
 		var alreadyExists = false;
-		$(".Streams_preview_tool", this.element).each(function () {
+		$(".Streams_preview_tool" + (tff.name ? ":not(.Streams_preview_composer)" : ""), this.element).each(function () {
 			var publisherId = this.getAttribute("data-publisherId");
 			var streamName = this.getAttribute("data-streamName");
 			var streamType = this.getAttribute("data-streamType");
@@ -354,7 +354,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						// place new preview to the valid place in the list
 						_placeRelatedTool(element);
 					}
-
 
 					addComposer(streamType, params);
 				}, tool);
