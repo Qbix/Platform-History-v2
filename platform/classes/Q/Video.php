@@ -32,7 +32,6 @@ interface Q_Video_Interface
 	/**
 	 * Upload file to cloud provider
 	 * @method doUpload
-	 * @static
 	 * @param {string} $filename Filename of the file to upload
 	 * @param {array} [$params] The parameters to send
      * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
@@ -44,7 +43,6 @@ interface Q_Video_Interface
 	 * Upload file to cloud provider to initiate a conversion job.
      * A webhook should be implemented for when the job is done.
 	 * @method doConvert
-	 * @static
 	 * @param {string} $src Can be URL or local path
 	 * @param {array} [$params] Array with additional params
      * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}

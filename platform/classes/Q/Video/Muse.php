@@ -11,7 +11,7 @@ class Q_Video_Muse extends Q_Video {
 	 * Create a video resource on the cloud provider
 	 * @method doCreate
 	 * @param {array} $params
-	 * @throws {Q_Exception_MissingFile}
+	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
 	 * @return {array} the response from the server, may contain errors
 	 */
 	function doCreate($params)
@@ -22,9 +22,9 @@ class Q_Video_Muse extends Q_Video {
 	/**
 	 * Upload file to muse.ai
 	 * @method doUpload
-	 * @static
 	 * @param {string} $filename Filename of the file to upload
 	 * @param {array} [$params] The parameters to send
+	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
 	 * @return {array}
 	 */
 	function doUpload($filename, $params = array())
