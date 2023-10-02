@@ -120,6 +120,14 @@ function Q_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.info.cookies', array('Q_cordova', 'Q_nonce', 'Q_dpr'));
 	Q_Response::setScriptData('Q.images.lazyload', $lazyload);
 
+	$providers = array_keys(Q_Config::get("Q", "video", "cloud", "upload", array()));
+	Q_Response::setScriptData('Q.videos.providers', $providers);
+	Q_Response::setScriptData('Q.videos.provider', array_key_first($providers));
+
+	$converters = array_keys(Q_Config::get("Q", "video", "cloud", "convert", array()));
+	Q_Response::setScriptData('Q.videos.converters', $converters);
+	Q_Response::setScriptData('Q.videos.converter', array_key_first($converters));
+
 	// pass videos data to client
 	$videoConfig = Q_Config::get("Q", "video", "cloudUpload", array());
 	foreach ($videoConfig as $provider => $data) {

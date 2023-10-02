@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * TODO:
+ * PLEASE document Streams/video/post.php handler properly, see how I did it
+ * in other handlers.
+ * Right now, Streams/video/post takes existing videos from youtube/vimeo
+ * but please call Q::handle("Streams/video/create/$provider") with $_REQUEST params
+ * if $_REQUEST['create'] is set, otherwise call
+ * Q::handle("Streams/video/import/$provider") and move below handlers in files
+ * for youtube, vimeo, etc.
+ */
 function Streams_video_post($params)
 {
 	$streamParams = Q::ifset($params, 'streamParams', array());

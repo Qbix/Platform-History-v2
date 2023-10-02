@@ -55,20 +55,27 @@ function Streams_after_Q_file_save($params)
 		$stream->setAttribute("videoUrl", $url);
 		$stream->changed();
 
-		// try to use video provider, if defined in config
-		$cloudUpload = Q_Config::get("Q", "video", "cloudUpload", null);
+		$environment = Q_Config::get("Q", "environment", null);
+		$environments = Q_Config::get("Q", "video", "cloud", "environments", array('live'));
+		if (!in_array($environment, $environments)) {
+			return; // wrong environment, webhooks may not work etc.
+		}
+
+		// Try to upload to cloud provider, if defined in config
 		$uploadedToProvider = false;
-		if (!empty($cloudUpload)) {
-			$cloudUploadName = array_key_first($cloudUpload);
-			$className = "Q_Video_".ucfirst($cloudUploadName);
+		$cloudUpload = Q_Config::get("Q", "video", "cloud", "upload", array());
+		$provider = Q::ifset($_REQUEST, 'provider', array_key_first($cloudUpload));
+		if ($cloudUpload and $provider) {
+			$className = "Q_Video_".ucfirst($provider);
 			try {
-				$result = $className::upload($filePath);
+				$adapter = new $className($filePath);
+				$result = $adapter->upload($filePath);
 			} catch (Exception $e) {
 				$result = null;
 			}
 
 			if (Q::isAssociative($result)) {
-				$stream->setAttribute("uploadProvider", $cloudUpload);
+				$stream->setAttribute("provider", $provider);
 				$stream->setAttribute("videoId", $result["videoId"]);
 				$stream->setAttribute("videoUrl", $result["videoUrl"]);
 				$stream->clearAttribute("Q.file.url");
@@ -77,20 +84,20 @@ function Streams_after_Q_file_save($params)
 			}
 		}
 
-		// convert to animated gif
-		if (Q_Config::get("Q", "environment", null) != "local") { // if send request from local env, the webhook failed and lead to disable on CoudConvert profile.
-			$options = Q_Config::get("Q", "video", "cloudConvert", "options", null);
-			if ($options) {
-				$tag = json_encode(array(
-					"publisherId" => $stream->publisherId,
-					"streamName" => $stream->name
-				));
-
-				try {
-					Q_Video_CloudConvert::convert($filePath, $tag, "gif", $options);
-				} catch (Exception $e) {
-
-				}
+		// May use converter to process video and set stream icon to animated GIF
+		$cloudConvert = Q_Config::get("Q", "video", "cloud", "convert", array());
+		$converter = Q::ifset($_REQUEST, 'converter', array_key_first($cloudConvert));
+		if ($cloudConvert and $converter) {
+			$options['tag'] = json_encode(array(
+				"publisherId" => $stream->publisherId,
+				"streamName" => $stream->name
+			));
+			$className = "Q_Video_".ucfirst($converter);
+			try {
+				$adapter = new $className($filePath);
+				$adapter->convert($filePath, $options);
+			} catch (Exception $e) {
+				// stream icon will silently remain as-is
 			}
 		}
 
