@@ -472,5 +472,32 @@
     },
     "task": {
         "errorsTitle": "Errors occurred"
+    },
+    "courses": {
+        "Title": "Courses",
+        "Description": "",
+        "NewCourse": "+ New Course",
+        "NoneYet": "No courses yet.",
+        "filterCourses": "filter courses by name"
+    },
+    "course": {
+        "Title": "Courses",
+        "Description": "",
+        "Enroll": "Enroll in Course"
+    },
+    "newCourse": {
+        "Title": "New Course",
+        "StartFromScratch": "Start from scratch",
+        "TitlePlaceholder": "Course title"
+    },
+    "topic": {
+        "NewTopic": "New Topic",
+        "UpdateTopic": "Update Topic",
+        "CreateTopic": "Create Topic",
+        "AreYouSureDeleteVideo": "Are you sure you want to delete this video",
+        "TitlePlaceholder": "topic title...",
+        "DescribeTopic": "describe topic...",
+        "TopicIcon": "Topic Icon",
+        "UploadIcon": "Upload Icon"
     }
 }

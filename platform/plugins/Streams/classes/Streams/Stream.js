@@ -1282,13 +1282,10 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 					return callback && callback();
 				}
 			}
-			if (p.className !== 'Streams_Ephemeral') {
-				return callback && callback();
-			}
 			var p = Object.getPrototypeOf(messageOrEphemeral);
-			if (p.className !== 'Streams_Message') { // a Streams_Ephemeral
-				return false;
-			}		
+			if (p.className === 'Streams_Ephemeral') { // a Streams_Ephemeral
+				return callback && callback(null, false);
+			}
 			// 3) if user has no socket connected, send offline notifications
 			//      to users who subscribed and filters match
 			/*
@@ -1311,6 +1308,7 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 			Streams.Subscription.test(userId, stream, messageOrEphemeral.getType(), _continue2);
 		}
 		function _continue2(err, deliveries) {
+			var message = messageOrEphemeral;
 			if (err || !deliveries.length) {
 				return callback && callback(err);
 			}

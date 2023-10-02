@@ -570,6 +570,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		}, 50);
 	});
 	cancel_button.blur(function() {
+		if (this.__ignoreBlur) {
+			return;
+		}
 		focusedOn = null;
 		setTimeout(onBlur, 100); 
 	});

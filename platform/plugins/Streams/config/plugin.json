@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.1.9",
+				"version": "1.2",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -216,7 +216,8 @@
 					"Streams/invite": {
 						"description": "You were invited",
 						"subject": ["Streams/content", ["notifications", "Streams/invite"]],
-						"evenIfOnline": true
+						"evenIfOnline": true,
+						"fetchAvatar": true
 					},
 					"Streams/announcement": {
 						"description": "Announcement for everyone in the stream",
@@ -381,7 +382,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Untitled topic",
-					"icon": "Streams/category"
+					"icon": "Streams/topic"
 				}
 			},
 			"Streams/text": {
@@ -680,7 +681,6 @@
 		"possibleUserStreams": {
 			"Streams/questions": true,
 			"Streams/answer": true,
-			"Streams/topic": true,
 			"Streams/user/birthday": true,
 			"Streams/user/gender": true,
 			"Streams/user/height": true,

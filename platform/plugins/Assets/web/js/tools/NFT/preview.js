@@ -797,13 +797,11 @@
                 onActivate: function (dialog) {
                     var $icon = $("img.NFT_preview_icon", dialog);
                     var $imageContainer = $icon.closest(".Assets_nft_container");
-                    var o = Q.extend({},previewState, {editable: true});
 
-                    var $button = $('.Assets_nft_generate_description')
-                    var $description = $button.prev('[name="description"]')
-                    .plugin('Q/autogrow');
+                    var $button = $('.Assets_nft_generate_description', dialog);
+                    var $description = $button.prev('[name="description"]').plugin('Q/autogrow');
 
-                    $('input[name="title"]').on('change', function () {
+                    $('input[name="title"]', dialog).on('change', function () {
                         var $this = $(this);
                         if (!$this.val()) {
                             return;
@@ -824,8 +822,7 @@
                     });
 
                     // create new Streams/preview tool to set icon behavior to $icon element
-                    $("<div>").tool("Streams/preview", o)
-                    .activate(function () {
+                    $("<div>").tool("Streams/preview", Q.extend({},previewState, {editable: true})).activate(function () {
                         this.icon($icon[0], function (element) {
                             var src = element.src;
 
