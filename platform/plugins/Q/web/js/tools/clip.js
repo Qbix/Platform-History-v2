@@ -19,7 +19,7 @@ Q.Tool.define("Q/clip", function (options) {
 
 	var p = Q.pipe(['stylesheet', 'text'], tool.refresh.bind(tool));
 	
-	Q.addStylesheet("{{Q}}/css/clip.css", p.fill('stylesheet'), { slotName: 'Q' });
+	Q.addStylesheet("{{Q}}/css/tools/clip.css", p.fill('stylesheet'), { slotName: 'Q' });
 	Q.Text.get('Q/content', function (err, text) {
 		tool.text = text.clip;
 		p.fill('text')();
