@@ -219,7 +219,7 @@ Q.Template.set('Streams/topic/preview',
 );
 
 Q.Template.set('Streams/topic/composer',
-`<form>
+`<form class="Streams_topic_composer">
         <div class="Streams_topic_composer_form_group">
             <input type="text" name="title" value="{{title}}" class="Streams_topic_composer_form_control" placeholder="{{topic.TitlePlaceholder}}">
         </div>
