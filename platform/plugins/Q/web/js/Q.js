@@ -16341,7 +16341,7 @@ Q.globalNamesAdded = function () {
 /**
  * This function is useful for debugging, e.g. calling it in breakpoint conditions
  * But you can also use console.trace()
- * @method stackTrack
+ * @method stackTrace
  * @static
  */
 Q.stackTrace = function() {
@@ -16352,6 +16352,26 @@ Q.stackTrace = function() {
 		obj = new Error();
 	}
 	return obj.stack.replace('Error', 'Stack Trace');
+};
+
+/**
+ * Use it like this: foo.bar = Q.hook(foo.bar, console.trace);
+ * @method hook
+ * @static
+ * @param {Function} original 
+ * @param {Function} [hookBefore] 
+ * @param {Function} [hookAfter] 
+ * @return {Function} the function with before/after hooks applied
+ */
+Q.hook = function (original, hookBefore, hookAfter)  {
+	var hooked = function _Q_hook () {
+		hookBefore && hookBefore.apply(this, arguments);
+		var result = original.apply(this, arguments);
+		hookAfter && hookAfter.apply(this, arguments);
+		return result;
+	};
+	hooked.original = original;
+	return hooked;
 };
 
 /**
