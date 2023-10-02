@@ -75,9 +75,9 @@ function Streams_after_Q_file_save($params)
 			}
 
 			if (Q::isAssociative($result)) {
-				$stream->setAttribute("provider", $provider);
-				$stream->setAttribute("videoId", $result["videoId"]);
-				$stream->setAttribute("videoUrl", $result["videoUrl"]);
+				$stream->setAttribute("Streams/cloud/provider", $provider);
+				$stream->setAttribute("Streams/cloud/videoId", $result["videoId"]);
+				$stream->setAttribute("Streams/cloud/videoUrl", $result["videoUrl"]);
 				$stream->clearAttribute("Q.file.url");
 				$stream->changed();
 				$uploadedToProvider = true;

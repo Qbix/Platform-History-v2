@@ -4,14 +4,21 @@
  * TODO:
  * PLEASE document Streams/video/post.php handler properly, see how I did it
  * in other handlers.
- * Right now, Streams/video/post takes existing videos from youtube/vimeo
- * but please call Q::handle("Streams/video/create/$provider") with $_REQUEST params
- * if $_REQUEST['create'] is set, otherwise call
- * Q::handle("Streams/video/import/$provider") and move below handlers in files
- * for youtube, vimeo, etc.
  */
 function Streams_video_post($params)
 {
+    // TODO: please make VIMEO UPLOADS BY FOLLOWING
+    // https://developer.vimeo.com/api/upload/videos
+    
+    // Right now, Streams/video/post takes existing videos from youtube/vimeo
+    // but please call Q::handle("Streams/video/create/$provider") with $_REQUEST params
+    // if $_REQUEST['create'] is set, otherwise call
+    // Q::handle("Streams/video/import/$provider") and move below handlers in files
+    // for youtube, vimeo, etc.
+
+    // The handlers would make for example an instance of Q_Video_Vimeo
+    // and call ->create() on it, and then return info "create" slot to the client
+
 	$streamParams = Q::ifset($params, 'streamParams', array());
 	$relatedParams = Q::ifset($params, 'relatedParams', array());
 
