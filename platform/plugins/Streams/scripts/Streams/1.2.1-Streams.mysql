@@ -1,0 +1,1 @@
+ALTER TABLE {{prefix}}stream MODIFY content varbinary(4095) NOT NULL COMMENT 'this content can be indexable, such as the description of a long article';
