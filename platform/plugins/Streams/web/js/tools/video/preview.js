@@ -120,7 +120,7 @@
 	{
 		url: null,
 		isComposer: true,
-		fileUploadUHandler: Q.action("Streams/stream"),
+		fileUploadHandler: Q.action("Streams/stream"),
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
@@ -323,7 +323,7 @@
 							}
 
 							if (window.FileReader) {
-								Q.request(state.fileUploadUHandler, 'data', function (err, res) {
+								Q.request(state.fileUploadHandler, 'data', function (err, res) {
 									//console.log(this);
 									var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
 									if (msg) {
@@ -346,7 +346,7 @@
                                 delete params.data;
                                 state.input.wrap('<form />', {
                                     method: "put",
-                                    action: Q.url(state.fileUploadUHandler, params)
+                                    action: Q.url(state.fileUploadHandler, params)
                                 }).parent().submit();
                                 state.input.unwrap();
                                 */

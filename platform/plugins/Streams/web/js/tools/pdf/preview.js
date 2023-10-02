@@ -297,7 +297,7 @@
 							}
 
 							if (window.FileReader) {
-								Q.request(state.fileUploadUHandler, 'data', function (err, res) {
+								Q.request(state.fileUploadHandler, 'data', function (err, res) {
 									//console.log(this);
 									var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
 									if (msg) {
