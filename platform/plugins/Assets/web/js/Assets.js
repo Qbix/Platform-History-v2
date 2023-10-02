@@ -485,8 +485,14 @@
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
 		"Assets/plan": "{{Assets}}/js/tools/plan.js",
-		"Assets/NFT/sales/factory": "{{Assets}}/js/tools/NFT/sales/factory.js",
-		"Assets/NFT/sales": "{{Assets}}/js/tools/NFT/sales.js",
+		"Assets/NFT/sales/factory": {
+            js:"{{Assets}}/js/tools/NFT/sales/factory.js",
+            css: "{{Q}}/css/bootstrap-custom/bootstrap.css"
+        },
+		"Assets/NFT/sales": {
+            js:"{{Assets}}/js/tools/NFT/sales.js",
+            css: "{{Q}}/css/bootstrap-custom/bootstrap.css"
+        },
 		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
 		"Assets/NFT/locked": {
 		    js: "{{Assets}}/js/tools/NFT/locked.js",
@@ -513,26 +519,27 @@
 				'{{Q}}/pickadate/picker.date.js'
 			],
 			css: [
-				"{{Assets}}/css/tools/web3/coin/presale/admin.css",
+				"{{Assets}}/css/tools/web3/coin/presale/admin.css", 
+                "{{Q}}/css/bootstrap-custom/bootstrap.css",
 				'{{Q}}/pickadate/themes/default.css',
 				'{{Q}}/pickadate/themes/default.date.css'
 			]
 		},
 		"Assets/web3/coin/presale/buy": {
 			js: "{{Assets}}/js/tools/web3/coin/presale/buy.js",
-			css: "{{Assets}}/css/tools/web3/coin/presale/buy.css"
+			css: ["{{Assets}}/css/tools/web3/coin/presale/buy.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"]
 		},
 		"Assets/web3/coin/presale/manage": {
 			js: "{{Assets}}/js/tools/web3/coin/presale/manage.js",
-			css: "{{Assets}}/css/tools/web3/coin/presale/manage.css"
+			css: ["{{Q}}/css/bootstrap-custom/bootstrap.css"]
 		},
 		"Assets/web3/coin/admin": {
 			js: "{{Assets}}/js/tools/web3/coin/admin.js",
-			css: "{{Assets}}/css/tools/web3/coin/admin.css"
+			css: ["{{Assets}}/css/tools/web3/coin/admin.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"]
 		},
 		"Assets/web3/coin/staking/start": {
 			js: "{{Assets}}/js/tools/web3/coin/staking/start.js",
-			css: "{{Assets}}/css/tools/web3/coin/staking/start.css"
+			css: ["{{Assets}}/css/tools/web3/coin/staking/start.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"]
 		},
 		"Assets/web3/coin/staking/history": {
 			js: "{{Assets}}/js/tools/web3/coin/staking/history.js",
