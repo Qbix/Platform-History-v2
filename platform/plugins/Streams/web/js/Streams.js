@@ -763,6 +763,9 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 	}
 };
 
+Q.Video.upload.muse = '{{Streams}}/js/methods/Streams/video/upload/muse.js';
+Q.Video.upload.vimeo = '{{Streams}}/js/methods/Streams/video/upload/vimeo.js';
+
 Q.Text.addFor(
 	['Q.Tool.define', 'Q.Template.set'],
 	'Streams/', ["Streams/content"]
@@ -827,7 +830,10 @@ Q.Tool.define({
 	},
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
-	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
+	"Streams/topic/preview": {
+		js: "{{Streams}}/js/tools/topic/preview.js",
+		css: "{{Streams}}/css/tools/topicPreview.css"
+	},
 	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
 	"Streams/groupPhoto" : {
 		js: ["{{Streams}}/js/face-api/dist/face-api.js", "{{Streams}}/js/tools/groupPhoto.js"],

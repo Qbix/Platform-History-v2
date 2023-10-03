@@ -138,7 +138,7 @@ function Db_Mysql(connName, dsn) {
 						info.username,
 						info.password,
 						info.dbname,
-						info.options,
+						options,
 						true
 					);
 					connection.connect(function (err) {
@@ -165,13 +165,33 @@ function Db_Mysql(connName, dsn) {
 		}
 		
 		info = this.info(shardName, modifications);
+		var options = info.options || {};
+		options.typeCast = function (field, next) {
+			if (field.type !== 'VARBINARY'
+			 && field.type !== 'VAR_STRING') {
+				return next();
+			}
+			var found = false;
+			if (options.leaveBuffer) {
+				for (var tableExpression in options.leaveBuffer) {
+					var tableName = options.prefix
+						? tableExpression.replace('{{prefix}}', options.prefix)
+						: tableExpression;
+					if (tableName === field.table
+					&& options.leaveBuffer[tableExpression][field.name]) {
+						found = true;
+					}
+				}
+			}
+			return found ? next() : field.string();
+		};
 		var connection = mysqlConnection(
 			info.host,
 			info.port || 3306,
 			info.username,
 			info.password,
 			info.dbname,
-			info.options
+			options
 		);
 		if (!dbm.connected) {
 			_setUpConnection();

@@ -48,48 +48,45 @@ Q.Tool.define("Q/inplace", function (options) {
 	//	- method: request method, defaults to 'PUT'
 	//	- type: type of the input - 'text' or 'textarea', defaults to 'textarea'
 
-	var o = state;
-	if (!o || !o.action) {
-		return console.error("Q/inplace tool: missing option 'action'", o);
+	if (!state.action) {
+		return console.error("Q/inplace tool: missing option 'action'", state);
 	}
-	if (!o.field) {
-		return console.error("Q/inplace tool: missing option 'field'", o);
+	if (!state.field) {
+		return console.error("Q/inplace tool: missing option 'field'", state);
 	}
-	var staticHtml = o.staticHtml || $te.html();
-	var staticClass = o.type === 'textarea' 
+	var staticHtml = state.staticHtml || $te.html();
+	var staticClass = state.type === 'textarea'
 		? 'Q_inplace_tool_blockstatic' 
 		: 'Q_inplace_tool_static';
-	if (o.type !== 'textarea' && o.type !== 'text' && o.type !== 'select') {
+	if (state.type !== 'textarea' && state.type !== 'text' && state.type !== 'select') {
 		throw new Q.Exception("Q/inplace: type must be textarea, text or select");
 	}
 	Q.Template.render(
 		'Q/inplace/tool',
 		{
-			'classes': function () { 
-				return o.editing ? 'Q_editing Q_nocancel' : '';
-			},
+			'classes': state.editing ? 'Q_editing Q_nocancel' : '',
 			staticClass: staticClass,
-			staticHtml: staticHtml
-				|| '<span class="Q_placeholder">'
-					+state.placeholder.encodeHTML()
-					+'</div>',
-			method: o.method || 'put',
-			action: o.action,
-			field: o.field,
-			isText: (o.type === 'text'),
-			isTextarea: (o.type === 'textarea'),
-			isSelect: (o.type === 'select'),
-			options: o.options,
+			staticHtml: staticHtml || '<span class="Q_placeholder">state.placeholder.encodeHTML()</div>',
+			method: state.method || 'put',
+			action: state.action,
+			field: state.field,
+			isText: (state.type === 'text'),
+			isTextarea: (state.type === 'textarea'),
+			isSelect: (state.type === 'select'),
+			options: state.options,
 			placeholder: state.placeholder,
 			text: staticHtml.decodeHTML(),
-			type: o.type || 'text'
+			type: state.type || 'text'
 		},
 		function (err, html) {
-			if (!html) return;
-			$te.html(html);
-			return _Q_inplace_tool_constructor.call(tool, this.element, state, staticHtml);
-		}, 
-		o.template
+			if (err) {
+				return;
+			}
+			Q.replace(tool.element, html);
+
+			return _Q_inplace_tool_constructor.call(tool, tool.element, state, staticHtml);
+		},
+		state.template
 	);
 },
 
@@ -570,6 +567,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		}, 50);
 	});
 	cancel_button.blur(function() {
+		if (this.__ignoreBlur) {
+			return;
+		}
 		focusedOn = null;
 		setTimeout(onBlur, 100); 
 	});

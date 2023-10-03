@@ -104,7 +104,7 @@ function () {
 				span.css('margin-'+pos, props['margin-'+pos]);
 			});
 			$this.show();
-			$this.wrap(span).css('margin', '0');
+			$this.wrap(span).css('margin', '0').focus();
 			span = $this.parent();
 			span.on(Q.Pointer.fastclick, function() {
 				$this.trigger('focus');

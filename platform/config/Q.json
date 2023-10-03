@@ -253,10 +253,14 @@
 			"google": null
 		},
 		"video": {
-			"cloudUpload": {
-				"muse": {
-					"url": "https://muse.ai/v/{{videoId}}",
-					"uploadEndPoint": "https://muse.ai/api/files/upload"
+			"cloud": {
+				"upload": {
+					"muse": {
+						"url": "https://muse.ai/v/{{videoId}}",
+						"uploadEndPoint": "https://muse.ai/api/files/upload"
+					}
+				},
+				"convert": {
 				}
 			}
 		},
