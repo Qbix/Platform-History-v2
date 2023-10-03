@@ -20,6 +20,7 @@ class Q_File
 	 * @param {string} [$params.subpath=""] subpath that should follow the path, to save the image under
 	 * @param {string} [$params.name] override the name of the file, after the subpath
 	 * @param {string} [$params.skipAccess=false] if true, skips the check for authorization to write files there
+	 * @param {boolean} [$params.video] set this to true if the file is an video file
 	 * @param {boolean} [$params.audio] set this to true if the file is an audio file
 	 * @return {array} Returns array containing ($name => $tailUrl) pair
 	 */

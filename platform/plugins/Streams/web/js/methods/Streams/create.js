@@ -49,8 +49,8 @@ Q.exports(function(priv){
             if (!related.publisherId || !related.streamName) {
                 throw new Q.Error("Streams.create related needs publisherId and streamName");
             }
-            fields['Q.Streams.related.publisherId'] = related.publisherId || related.publisherId;
-            fields['Q.Streams.related.streamName'] = related.streamName || related.streamName || related.name;
+            fields['Q.Streams.related.publisherId'] = related.publisherId;
+            fields['Q.Streams.related.streamName'] = related.streamName || related.name;
             fields['Q.Streams.related.type'] = related.type;
             fields['Q.Streams.related.weight'] = related.weight;
             slotNames.push('messageTo');

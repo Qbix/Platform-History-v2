@@ -170,7 +170,8 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                         'Streams/video': {title: "Add video"},
                         'Streams/audio': {title: "Add audio"},
                         'Streams/pdf': {title: "Add PDF"},
-                        'Streams/topic': {title: "Add topic"}
+                        //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic
+                        //'Streams/topic': {title: "Add topic"}
                     }
 
                 }).activate();
