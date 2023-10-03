@@ -12,8 +12,8 @@ function Streams_after_Q_file_save($params)
 		return;
 	}
 
-	$filePath = $writePath.$name;
-	$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filePath);
+	$filename = $writePath.$name;
+	$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filename);
 
 	$url = Q_Valid::url($tailUrl) ? $tailUrl : '{{baseUrl}}/'.$tailUrl;
 	$url = str_replace('\\', '/', $url);
@@ -22,7 +22,7 @@ function Streams_after_Q_file_save($params)
 	if ($audio) {
 		include_once(Q_CLASSES_DIR.DS.'Audio'.DS.'getid3'.DS.'getid3.php');
 		$getID3 = new getID3;
-		$meta = $getID3->analyze($filePath);
+		$meta = $getID3->analyze($filename);
 		$bitrate = Q::ifset($meta, 'audio', 'bitrate', 128000);
 		$bits = $size * 8;
 		$duration = $bits / $bitrate;
@@ -52,51 +52,13 @@ function Streams_after_Q_file_save($params)
 	// video files handler
 	if (preg_match("/^video/", $mimeType)) {
 		// copy Q.file.save attribute to videoUrl attribute to know that video
-		$stream->setAttribute("videoUrl", $url);
+		$stream->setAttribute("Streams.videoUrl", $url);
 		$stream->changed();
-
-		// try to use video provider, if defined in config
-		$cloudUpload = Q_Config::get("Q", "video", "cloudUpload", null);
-		$uploadedToProvider = false;
-		if (!empty($cloudUpload)) {
-			$cloudUploadName = array_key_first($cloudUpload);
-			$className = "Q_Video_".ucfirst($cloudUploadName);
-			try {
-				$result = $className::upload($filePath);
-			} catch (Exception $e) {
-				$result = null;
-			}
-
-			if (Q::isAssociative($result)) {
-				$stream->setAttribute("uploadProvider", $cloudUpload);
-				$stream->setAttribute("videoId", $result["videoId"]);
-				$stream->setAttribute("videoUrl", $result["videoUrl"]);
-				$stream->clearAttribute("Q.file.url");
-				$stream->changed();
-				$uploadedToProvider = true;
-			}
-		}
-
-		// convert to animated gif
-		if (Q_Config::get("Q", "environment", null) != "local") { // if send request from local env, the webhook failed and lead to disable on CoudConvert profile.
-			$options = Q_Config::get("Q", "video", "cloudConvert", "options", null);
-			if ($options) {
-				$tag = json_encode(array(
-					"publisherId" => $stream->publisherId,
-					"streamName" => $stream->name
-				));
-
-				try {
-					Q_Video_CloudConvert::convert($filePath, $tag, "gif", $options);
-				} catch (Exception $e) {
-
-				}
-			}
-		}
-
-		// remove local uploaded file if uploaded to video provider
-		if ($uploadedToProvider) {
-			@unlink($filePath);
+		Q_Video::convert($stream, $filename);
+		if (Q_Video::upload($stream, $filename)) {
+			// remove local uploaded file if uploaded to video provider
+			// and stream url has been updated
+			@unlink($filename);
 		}
 	}
 }

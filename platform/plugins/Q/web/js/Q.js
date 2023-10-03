@@ -9520,6 +9520,9 @@ Q.exports = function () {
  * @param {Boolean} synchronously Whether to call the callback synchronously when src was already loaded
  */
 Q.require = function (src, callback, synchronously) {
+	if (!src || typeof src !== 'string') {
+		throw new Q.Exception("Q.require: invalid script src");
+	}
 	src = Q.url(src);
 	if (_exports[src]) {
 		if (synchronously) {
@@ -14927,6 +14930,36 @@ Q.Audio.stopSpeaking = function () {
 		root.TTS.stop();
 	} else if (root.speechSynthesis) {
 		root.speechSynthesis.pause();
+	}
+};
+
+/**
+ * Q.Video objects facilitate video functionality on various browsers.
+ * Please do not create them directly, but use the Q.Video functions.
+ * @class Q.Video
+ * @constructor
+ * @param {String} url the url of the video to load
+ * @param {HTMLElement} container html element to insert video to
+ * @param {object} attributes json object with attributes to apply to video element
+ */
+Q.Video = function (url, container, attributes) {
+
+};
+
+/**
+ * Uses an adapter to upload a video to a cloud service provider.
+ * Qbix plugins can define their own adapters to Q.Video.upload.adapters
+ * @param {Object} params 
+ * @param {String} [provider] You can override the default cloud service provider here
+ */
+Q.Video.upload = function (params, provider) {
+	provider = provider || Q.getObject('Q.videos.provider');
+	if (typeof Q.Video.upload[provider] === 'function') {
+		Q.Video.upload[provider].apply(params);
+	} else {
+		Q.require(Q.Video.upload[provider], function (exported) {
+			exported.apply(params);
+		});
 	}
 };
 

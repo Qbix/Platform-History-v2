@@ -23,8 +23,7 @@ interface Db_Interface
 	 * @constructor
 	 * @param {string} $conn_name
 	 *  The name of the connection
-	 * @param {PDO} $pdo
-	 * @optional null
+	 * @param {PDO} [$pdo]
 	 */
 	//function __construct ($conn_name, PDO $pdo = null);
 

@@ -3,24 +3,38 @@
  * @module Q
  */
 /**
- * @class Q_Muse
+ * @class Q_Video_Muse
  */
-class Q_Video_Muse {
+class Q_Video_Muse extends Q_Video {
+
+	/**
+	 * Create a video resource on the cloud provider
+	 * @method doCreate
+	 * @param {array} $params
+	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
+	 * @return {array} the response from the server, may contain errors
+	 */
+	function doCreate($params)
+	{
+		throw new Q_Exception_MissingFile(array('filename' => 'video'));
+	}
+
 	/**
 	 * Upload file to muse.ai
-	 * @method upload
-	 * @static
-	 * @param {string} $filePath
+	 * @method doUpload
+	 * @param {string} $filename Filename of the file to upload
+	 * @param {array} [$params] The parameters to send
+	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
 	 * @return {array}
 	 */
-	static function upload($filePath)
+	function doUpload($filename, $params = array())
 	{
 		$uploadEndPoint = Q_Config::expect("Q", "video", "cloudUpload", "muse", "uploadEndPoint");
 		$museApiKey = Q_Config::expect("Q", "video", "cloudUpload", "muse", "key");
 
-		$fileName = basename($filePath);
-		$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filePath);
-		$cFile = curl_file_create($filePath, $mimeType, $fileName);
+		$basename = basename($filename);
+		$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filename);
+		$cFile = curl_file_create($filename, $mimeType, $basename);
 		$headers = array(
 			"Content-type: multipart/form-data",
 			"Key: $museApiKey"

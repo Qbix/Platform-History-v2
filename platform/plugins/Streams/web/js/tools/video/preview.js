@@ -295,6 +295,10 @@
 						return Q.alert(tool.text.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
 					}
 
+					if (!window.FileReader) {
+						throw new Q.Exception("FileReader undefined");
+					}
+
 					var reader = new FileReader();
 					reader.onload = function (event) {
 						var params = {
@@ -322,35 +326,20 @@
 								tool.stream.save();
 							}
 
-							if (window.FileReader) {
-								Q.request(state.fileUploadHandler, 'data', function (err, res) {
-									//console.log(this);
-									var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
-									if (msg) {
-										if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
-										return Q.handle([state.onError, state.onFinish], tool, [msg]);
-									}
+							Q.Video.upload(params, function (err, res) {
+								//console.log(this);
+								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
+								if (msg) {
+									if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
+									return Q.handle([state.onError, state.onFinish], tool, [msg]);
+								}
 
-									// by default set src equal to first element of the response
-									var key = Q.firstKey(res.slots.data, {nonEmpty: true});
+								// by default set src equal to first element of the response
+								var key = Q.firstKey(res.slots.data, {nonEmpty: true});
 
-									Q.handle(callback, tool, [res.slots.data, key, file || null]);
-									tool.closeComposer();
-								}, {
-									fields: params,
-									method: "put"
-								});
-							} else {
-								Q.alert('FileReader undefined');
-								/*
-                                delete params.data;
-                                state.input.wrap('<form />', {
-                                    method: "put",
-                                    action: Q.url(state.fileUploadHandler, params)
-                                }).parent().submit();
-                                state.input.unwrap();
-                                */
-							}
+								Q.handle(callback, tool, [res.slots.data, key, file || null]);
+								tool.closeComposer();
+							});
 						} else { // if new stream
 							Q.handle(callback, tool, [params]);
 							tool.closeComposer();
