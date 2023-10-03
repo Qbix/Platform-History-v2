@@ -10,7 +10,7 @@
     top: 0;
     left: 0;
     background: #ffffff;
-    z-index: 999999;
+    z-index: 900;
 }
 .Streams_fileManager_con {
     height: 100%;
@@ -177,20 +177,7 @@
 
 }
 
-.Streams_fileManager_dialogue {
-    z-index: 9999999 !important;
-    width: 500%;
-}
 
-.Streams_fileManager_dialogue_con {
-    width:100%;
-    height:100%;
-    position: fixed;
-    top:0;
-    left:0;
-    background: #ffffff;
-    z-index: 999999999999999;
-}
 /*
 .Streams_fileManager_uploadFile {
     z-index: 9999999999999999999 !important;

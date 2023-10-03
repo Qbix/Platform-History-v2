@@ -459,7 +459,7 @@
 
                 dialogInner.appendChild(tool.fileManagerEl);
                 dialogCon.appendChild(dialogInner);
-                document.body.appendChild(dialogCon);
+                document.body.insertBefore(dialogCon, document.body.firstChild);
                 tool.refresh();
             },
             closeDialog: function () {
