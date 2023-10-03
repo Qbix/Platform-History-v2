@@ -144,7 +144,7 @@
                         doubleBlink: true,
                         onConstruct: function (contextual, cid) {
                             tool.addonsContextual = contextual;
-                            console.log('tool.addonsContextual', tool.addonsContextual);
+                            //console.log('tool.addonsContextual', tool.addonsContextual);
                             contextualToolLoadHandler();
                         }
                     });
@@ -291,7 +291,7 @@
             },
             addMenuItem: function (params) {
                 var tool = this;
-                console.log('addMenuItem params', params)
+                //console.log('addMenuItem params', params)
 
                 var $element = $("<li class='Streams_fileManager_add_item'></li>");
 
@@ -310,7 +310,7 @@
                 if (Q.typeOf(params.handler) === "function") {
                     $element.data("handler", params.handler);
                 }
-                console.log('addMenuItem', $element)
+                //console.log('addMenuItem', $element)
                 $("ul.Q_listing", tool.addonsContextual).append($element);
 
                 return $element;
