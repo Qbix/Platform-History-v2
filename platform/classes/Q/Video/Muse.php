@@ -14,7 +14,7 @@ class Q_Video_Muse extends Q_Video {
 	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
 	 * @return {array} the response from the server, may contain errors
 	 */
-	function doCreate($params)
+	function doCreate($params = array())
 	{
 		throw new Q_Exception_MissingFile(array('filename' => 'video'));
 	}
@@ -29,8 +29,8 @@ class Q_Video_Muse extends Q_Video {
 	 */
 	function doUpload($filename, $params = array())
 	{
-		$uploadEndPoint = Q_Config::expect("Q", "video", "cloudUpload", "muse", "uploadEndPoint");
-		$museApiKey = Q_Config::expect("Q", "video", "cloudUpload", "muse", "key");
+		$uploadEndPoint = Q_Config::expect("Q", "video", "cloud", "upload", "muse", "uploadEndPoint");
+		$museApiKey = Q_Config::expect("Q", "video", "cloud", "upload", "muse", "key");
 
 		$basename = basename($filename);
 		$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filename);

@@ -763,8 +763,8 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 	}
 };
 
-Q.Video.upload.muse = '{{Streams}}/js/methods/video/upload/muse.js';
-Q.Video.upload.vimeo = '{{Streams}}/js/methods/video/upload/vimeo.js';
+Q.Video.upload.muse = '{{Streams}}/js/methods/Streams/video/upload/muse.js';
+Q.Video.upload.vimeo = '{{Streams}}/js/methods/Streams/video/upload/vimeo.js';
 
 Q.Text.addFor(
 	['Q.Tool.define', 'Q.Template.set'],

@@ -2765,8 +2765,8 @@ Q.Daystamp = {
 	 */
 	age: function(daystampBirth, daystampNow)
 	{
-		ymdBirth = Q.Daystamp.toYMD(daystampBirth);
-		ymdNow = Q.Daystamp.toYMD(daystampNow);
+		var ymdBirth = Q.Daystamp.toYMD(daystampBirth);
+		var ymdNow = Q.Daystamp.toYMD(daystampNow);
 		var years = ymdNow[0] - ymdBirth[0];
 		return (ymdNow[1] < ymdBirth[1]
 			|| (ymdNow[1] === ymdBirth[1] && ymdNow[2] < ymdBirth[2]))
@@ -14951,14 +14951,15 @@ Q.Video = function (url, container, attributes) {
  * Qbix plugins can define their own adapters to Q.Video.upload.adapters
  * @param {Object} params 
  * @param {String} [provider] You can override the default cloud service provider here
+ * @param {Function} [callback]
  */
-Q.Video.upload = function (params, provider) {
+Q.Video.upload = function (params, provider, callback) {
 	provider = provider || Q.getObject('Q.videos.provider');
 	if (typeof Q.Video.upload[provider] === 'function') {
-		Q.Video.upload[provider].apply(params);
+		Q.Video.upload[provider].call(this, params, callback);
 	} else {
 		Q.require(Q.Video.upload[provider], function (exported) {
-			exported.apply(params);
+			exported.call(this, params, callback);
 		});
 	}
 };

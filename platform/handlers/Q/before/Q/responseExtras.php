@@ -122,11 +122,11 @@ function Q_before_Q_responseExtras()
 
 	$providers = array_keys(Q_Config::get("Q", "video", "cloud", "upload", array()));
 	Q_Response::setScriptData('Q.videos.providers', $providers);
-	Q_Response::setScriptData('Q.videos.provider', array_key_first($providers));
+	Q_Response::setScriptData('Q.videos.provider', $providers[0]);
 
 	$converters = array_keys(Q_Config::get("Q", "video", "cloud", "convert", array()));
 	Q_Response::setScriptData('Q.videos.converters', $converters);
-	Q_Response::setScriptData('Q.videos.converter', array_key_first($converters));
+	Q_Response::setScriptData('Q.videos.converter', $converters[0]);
 
 	// pass videos data to client
 	$videoConfig = Q_Config::get("Q", "video", "cloudUpload", array());
