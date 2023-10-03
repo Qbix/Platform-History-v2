@@ -457,7 +457,7 @@
 
                 dialogInner.appendChild(tool.fileManagerEl);
                 dialogCon.appendChild(dialogInner);
-                (elementToShowIn || document.body).insertBefore(dialogCon, (elementToShowIn || document.body).firstChild);
+                (elementToShowIn || document.body).appendChild(dialogCon);
                 tool.refresh();
             },
             closeDialog: function () {
