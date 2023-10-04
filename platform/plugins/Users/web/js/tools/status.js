@@ -70,8 +70,9 @@ Q.Tool.define("Users/status", function(options) {
 			if (state.clickable) {
 				$status.plugin('Q/clickable');
 			}
-			$status.on(Q.Pointer.click, tool, function () {
-				Q.Users.login()
+			$status.on(Q.Pointer.fastclick, tool, function () {
+				Q.Users.login();
+				return false;
 			})
 		}
 	}
