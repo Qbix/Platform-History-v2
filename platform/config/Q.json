@@ -261,6 +261,16 @@
 					}
 				},
 				"convert": {
+					"CloudConvert": {
+						"options": {
+							"convert": {
+								"fps": 8,
+								"trim_start": "00:00:00",
+								"trim_end": "00:00:10"
+							},
+							"format": "gif"
+						}
+					}
 				}
 			}
 		},
