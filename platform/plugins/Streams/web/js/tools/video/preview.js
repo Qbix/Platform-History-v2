@@ -120,7 +120,6 @@
 	{
 		url: null,
 		isComposer: true,
-		fileUploadHandler: Q.action("Streams/stream"),
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
@@ -210,7 +209,7 @@
 			 * Process composer submitting
 			 * @method _process
 			 */
-			var _process = function() {
+			var _process = function () {
 				var _error = function (err) {
 					state.mainDialog.removeClass('Q_uploading');
 					Q.alert(err);
@@ -232,6 +231,10 @@
 
 				state.mainDialog.addClass('Q_uploading');
 
+				var params = {
+					type: "Streams/video",
+				};
+
 				if (action === "link") {
 					// url defined
 					var url = $("input[name=url]", $currentContent).val();
@@ -248,7 +251,7 @@
 
 						var siteData = response.slots.result;
 
-						var params = {
+						params = Q.extend(params, {
 							title: siteData.title,
 							content: siteData.description,
 							icon: siteData.iconBig,
@@ -261,7 +264,7 @@
 								clipStart: clipStart,
 								clipEnd: clipEnd
 							}
-						};
+						});
 
 						// edit stream
 						if (tool.stream) {
@@ -295,9 +298,13 @@
 						return Q.alert(tool.text.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
 					}
 
+					if (!window.FileReader) {
+						throw new Q.Exception("FileReader undefined");
+					}
+
 					var reader = new FileReader();
 					reader.onload = function (event) {
-						var params = {
+						params = Q.extend(params, {
 							title: file.name,
 							attributes: {
 								clipStart: clipStart,
@@ -307,7 +314,7 @@
 								data: this.result,
 								video: true
 							}
-						};
+						});
 
 						if(state.publisherId && state.streamName) { // if edit existent stream
 							params.publisherId = state.publisherId;
@@ -321,39 +328,36 @@
 								tool.stream.setAttribute("clipEnd", clipEnd);
 								tool.stream.save();
 							}
+						}
 
-							if (window.FileReader) {
-								Q.request(state.fileUploadHandler, 'data', function (err, res) {
-									//console.log(this);
-									var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
-									if (msg) {
-										if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
-										return Q.handle([state.onError, state.onFinish], tool, [msg]);
-									}
+						/**
+						 * Upload with Q.Video.upload if provider defined, and use default uploader otherwise
+						 */
+						if (Q.videos.provider) {
+							var previewState = tool.preview.state;
+							params['Q.Streams.related.publisherId'] = previewState.related.publisherId;
+							params['Q.Streams.related.streamName'] = previewState.related.streamName || previewState.related.name;
+							params['Q.Streams.related.type'] = previewState.related.type;
+							params['Q.Streams.related.weight'] = previewState.related.weight;
 
-									// by default set src equal to first element of the response
-									var key = Q.firstKey(res.slots.data, {nonEmpty: true});
+							Q.Video.upload(params, Q.videos.provider, function (err, res) {
+								//console.log(this);
+								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
+								if (msg) {
+									if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
+									return Q.handle([state.onError, state.onFinish], tool, [msg]);
+								}
 
-									Q.handle(callback, tool, [res.slots.data, key, file || null]);
-									tool.closeComposer();
-								}, {
-									fields: params,
-									method: "put"
-								});
-							} else {
-								Q.alert('FileReader undefined');
-								/*
-                                delete params.data;
-                                state.input.wrap('<form />', {
-                                    method: "put",
-                                    action: Q.url(state.fileUploadHandler, params)
-                                }).parent().submit();
-                                state.input.unwrap();
-                                */
-							}
-						} else { // if new stream
-							Q.handle(callback, tool, [params]);
+								// by default set src equal to first element of the response
+								var key = Q.firstKey(res.slots.data, {nonEmpty: true});
+
+								//Q.handle(callback, tool, [params]);
+								Q.handle(callback, tool, [res.slots.data, key, file || null]);
+								tool.closeComposer();
+							});
+						} else {
 							tool.closeComposer();
+							return Q.handle(callback, tool, [params]);
 						}
 					};
 					reader.readAsDataURL(file);

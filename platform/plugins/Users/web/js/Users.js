@@ -1089,7 +1089,7 @@
 		},
 		"Users/labels": {
 			js: "{{Users}}/js/tools/labels.js",
-			css: "{{Users}}/css/tools/labels.css",
+			css: ["{{Users}}/css/tools/labels.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"],
             text: ["Users/content","Users/labels"]
 		},
 		"Users/roles": {
@@ -1115,7 +1115,7 @@
 		},
 		"Users/web3/community": {
 			js: "{{Users}}/js/tools/web3/community.js",
-			css: "{{Users}}/css/tools/web3/community.css",
+			css: ["{{Users}}/css/tools/web3/community.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"],
             text: ["Users/content", "Users/web3/community"]
 		}
 	});

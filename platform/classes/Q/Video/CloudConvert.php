@@ -8,12 +8,12 @@ use \CloudConvert\Models\Task;
  * @module Q
  */
 /**
- * @class Q_CloudConvert
+ * @class Q_Video_CloudConvert
  */
-class Q_Video_CloudConvert {
+class Q_Video_CloudConvert extends Q_Video {
 	static function setup () {
 		$cloudConvert = new CloudConvert([
-			'api_key' => Q_Config::expect("Q", "video", "cloudConvert", "key"),
+			'api_key' => Q_Config::expect("Q", "video", "cloud", "convert", "cloudConvert", "key"),
 			'sandbox' => false
 		]);
 
@@ -21,30 +21,34 @@ class Q_Video_CloudConvert {
 	}
 
 	static function getTaskKey () {
-		return Q_Config::get("Q", "video", "cloudConvert", "taskKey", "uploadedFile");
+		return Q_Config::get("Q", "video", "cloud", "convert", "cloudConvert", "taskKey", "uploadedFile");
 	}
 
 	/**
 	 * Upload file to CloudConvert
-	 * @method convert
-	 * @static
-	 * @param {string} $inputFile Can be URL or local path
-	 * @param {string} [$tag] Some local param which will need to identify this process with some local ID.
-	 * @param {string} [$format="gif"]
-	 * @param {array} [$options] Array with additional options
-	 * @param {array} [$options.convert] Array with additional options pass to "convert" task
-	 * @param {array} [$options.export] Array with additional options pass to "export" task
+	 * @method doConvert
+	 * @param {string} $src Can be URL or local path
+	 * @param {array} [$params] Array with additional params
+	 * @param {string} [$params.tag] Some local param which will need to identify this process with some local ID.
+	 * @param {string} [$params.format="gif"]
+	 * @param {array} [$params.convert] Array with additional params pass to "convert" task
+	 * @param {array} [$params.export] Array with additional params pass to "export" task
 	 * @return {array}
 	 */
-	static function convert ($inputFile, $tag=null, $format="gif", $options=array())	{
+	function doConvert ($src, $params=array())	{
 		$taskKey = self::getTaskKey();
 		$cloudConvert = self::setup();
 
-		if (filter_var($inputFile, FILTER_VALIDATE_URL)) {
+		$convert = Q::ifset($params, "convert", array());
+		$export = Q::ifset($params, "export", array());
+		$tag = Q::ifset($params, 'tag', null);
+		$format = strtolower(Q::ifset($params, 'format', 'gif'));
+
+		if (filter_var($src, FILTER_VALIDATE_URL)) {
 			$job = (new Job())
 				->addTask(
 				(new Task('import/url', 'import-'.$taskKey))
-					->set('url', $inputFile)
+					->set('url', $src)
 				);
 		} else {
 			$job = (new Job())
@@ -56,28 +60,24 @@ class Q_Video_CloudConvert {
 		$taskConvert = new Task('convert', 'convert-'.$taskKey);
 		$taskConvert->set('input', 'import-'.$taskKey);
 		$taskConvert->set('output_format', $format);
-		foreach (Q::ifset($options, "convert", array()) as $key => $value) {
+		foreach ($convert as $key => $value) {
 			$taskConvert->set($key, $value);
 		}
 		$job->addTask($taskConvert);
 
 		$taskExport = new Task('export/url', 'export-'.$taskKey);
 		$taskExport->set('input', 'convert-'.$taskKey);
-		foreach (Q::ifset($options, "export", array()) as $key => $value) {
+		foreach ($export as $key => $value) {
 			$taskConvert->set($key, $value);
 		}
 		$job->addTask($taskExport);
-
 		$job->setTag($tag);
-
 		$cloudConvert->jobs()->create($job);
-
-		// if local path, start uploading
-		if (!filter_var($inputFile, FILTER_VALIDATE_URL)) {
+		if (!filter_var($src, FILTER_VALIDATE_URL)) {
+			// if local path, start uploading
 			$uploadTask = $job->getTasks()->whereName('import-'.$taskKey)[0];
-			$cloudConvert->tasks()->upload($uploadTask, fopen($inputFile, 'r'), basename($inputFile));
+			$cloudConvert->tasks()->upload($uploadTask, fopen($src, 'r'), basename($src));
 		}
-
 		return compact("cloudConvert", "job");
 	}
 };
