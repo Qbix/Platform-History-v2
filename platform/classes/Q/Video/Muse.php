@@ -29,6 +29,12 @@ class Q_Video_Muse extends Q_Video {
 	 */
 	function doUpload($filename, $params = array())
 	{
+		$environment = Q_Config::get("Q", "environment", null);
+		$environments = Q_Config::get("Q", "video", "cloud", "environments", array('live'));
+		if (!in_array($environment, $environments)) {
+			return false; // wrong environment, webhooks may not work etc.
+		}
+
 		$uploadEndPoint = Q_Config::expect("Q", "video", "cloud", "upload", "muse", "uploadEndPoint");
 		$museApiKey = Q_Config::expect("Q", "video", "cloud", "upload", "muse", "key");
 
@@ -53,7 +59,13 @@ class Q_Video_Muse extends Q_Video {
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		$result = Q::json_decode(curl_exec($ch), true);
+
+		try {
+			$result = Q::json_decode(curl_exec($ch), true);
+		} catch (Exception $exception) {
+			return false;
+		}
+
 		curl_close($ch);
 
 		if ($error = Q::ifset($result, "error", null)) {
@@ -64,7 +76,7 @@ class Q_Video_Muse extends Q_Video {
 		$result["videoUrl"] = Q::ifset($result, "mp4", preg_replace("/\/data$/", "/videos/video.mp4", $result["url"]));
 
 		if (!$result["videoUrl"]) {
-			return null;
+			return false;
 		}
 
 		return $result;
