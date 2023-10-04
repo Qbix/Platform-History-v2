@@ -107,7 +107,7 @@ function Streams_stream_post($params = array())
 	// Check if client can set the name of this stream
 	if (isset($req['name'])) {
 		$possible = Q_Config::get('Streams', 'possibleUserStreams', $req['name'], false);
-		if (!$asOwner or !$possible) {
+		if (!$asOwner && !$possible) {
 			throw new Users_Exception_NotAuthorized();
 		}
 	}
