@@ -34,7 +34,7 @@
 
         {
             onSelect: new Q.Event(),
-            openInDialog: true,
+            //openInDialog: true,
             currentDirStreamName: 'Streams/fileManager/main',
             history: {streams:[], currentIndex:0}
         },
@@ -87,7 +87,8 @@
 
                 var fileManagerControlsCloseDialog = document.createElement('DIV');
                 fileManagerControlsCloseDialog.className = 'Streams_fileManager_controls_close';
-                if(tool.state.openInDialog) fileManagerControlsInner.appendChild(fileManagerControlsCloseDialog);
+                fileManagerControlsInner.appendChild(fileManagerControlsCloseDialog);
+                //if(tool.state.openInDialog) fileManagerControlsInner.appendChild(fileManagerControlsCloseDialog);
 
                 fileManagerControlsCon.appendChild(fileManagerControlsInner);
                 fileManagerInner.appendChild(fileManagerControlsCon);
@@ -100,7 +101,7 @@
                 fileManagerExplorerCon.appendChild(fileManagerExplorerInner);
                 fileManagerInner.appendChild(fileManagerExplorerCon);
 
-                if(!tool.state.openInDialog) tool.element.appendChild(fileManagerCon);
+                //if(!tool.state.openInDialog) tool.element.appendChild(fileManagerCon);
 
                 fileManagerControlsCloseDialog.addEventListener('click', function () {
                     tool.closeDialog();
@@ -142,7 +143,7 @@
                         fadeTime: 300,
                         doubleBlink: true,
                         onConstruct: function (contextual, cid) {
-                            tool.addonsContextual = this;
+                            tool.addonsContextual = contextual;
                             contextualToolLoadHandler();
                         }
                     });
@@ -150,7 +151,7 @@
 
                 function contextualToolLoadHandler() {
                     var title = Q.getObject(["types", "Streams/image", "newItem"], tool.text) || "Add Image";
-                    tool.addMenuItem('image', {
+                    tool.addMenuItem({
                         title: title,
                         icon: '{{Streams}}/img/icons/Streams/image/40.png',
                         className: "Streams_image_chat",
@@ -191,7 +192,7 @@
                     });
 
                     var title = Q.getObject(["types", "Streams/video", "newItem"], tool.text) || "Add Video";
-                    tool.addMenuItem('video', {
+                    tool.addMenuItem({
                         title: title,
                         icon: '{{Streams}}/img/icons/Streams/video/40.png',
                         className: "Streams_video_chat",
@@ -229,7 +230,7 @@
                     });
 
                     var title = Q.getObject(["types", "Streams/audio", "newItem"], tool.text) || "Add Audio";
-                    tool.addMenuItem('audio', {
+                    tool.addMenuItem({
                         title: title,
                         icon: "{{Streams}}/img/icons/Streams/audio/40.png",
                         className: "Streams_audio_chat",
@@ -262,7 +263,7 @@
                     });
 
                     var title = Q.getObject(["types", "Streams/category", "newItem"], tool.text) || "Add Folder";
-                    tool.addMenuItem('category', {
+                    tool.addMenuItem({
                         title: title,
                         icon: "{{Streams}}/img/icons/Streams/category/40.png",
                         className: "Streams_category_chat",
@@ -289,6 +290,7 @@
             },
             addMenuItem: function (params) {
                 var tool = this;
+
                 var $element = $("<li class='Streams_fileManager_add_item'></li>");
 
                 $("<div class='Streams_chat_addon_icon'><img src='" + Q.url(params.icon) + "' /></div>").appendTo($element);
@@ -306,7 +308,6 @@
                 if (Q.typeOf(params.handler) === "function") {
                     $element.data("handler", params.handler);
                 }
-
                 $("ul.Q_listing", tool.addonsContextual).append($element);
 
                 return $element;
@@ -422,12 +423,14 @@
                             categoryPreview.state.templates.edit.name = 'Streams/fileManager/category/preview/edit';
                             categoryPreview.preview.options.actions.position = 'tr';
                             categoryPreview.preview.options.actions.size = '16';
+                            categoryPreview.state.invoke = false;
                         });
                     }
 
                     tool.explorerEl.appendChild(fileItem);
 
-                    fileItem.addEventListener('click', function (e) {
+                    //fileItem.addEventListener('click', function (e) {
+                    Q.addEventListener(fileItem, Q.Pointer.fastclick, function (e) {
                         if(fileStream.fields.type == 'Streams/category') {
                             tool.state.currentDirStreamName = fileStream.fields.name;
                            // tool.state.history.streams.push(fileStream.fields.name);
@@ -444,16 +447,17 @@
                     })
                 }
             },
-            showDialog: function () {
+            showDialog: function (elementToShowIn) {
                 var tool = this;
                 var dialogCon = tool.fileManagerDialog = document.createElement('DIV');
                 dialogCon.className = 'Streams_fileManager_dialog_con';
+                dialogCon.style.position = tool.state.position || 'fixed';
                 var dialogInner = document.createElement('DIV');
                 dialogInner.className = 'Streams_fileManager_dialog_inner';
 
                 dialogInner.appendChild(tool.fileManagerEl);
                 dialogCon.appendChild(dialogInner);
-                tool.element.appendChild(dialogCon);
+                (elementToShowIn || document.body).insertBefore(dialogCon, (elementToShowIn || document.body).firstChild);
                 tool.refresh();
             },
             closeDialog: function () {
