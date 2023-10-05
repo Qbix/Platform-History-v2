@@ -12286,7 +12286,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 * @method decrementClass
 	 * @param {String} className the CSS class that was incremented
 	 */
-	$.fn.decrementClass = function _jQuery_fn_incrementClass(className) {		
+	$.fn.decrementClass = function _jQuery_fn_decrementClass(className) {		
 		return this.each(function () {
 			var k = '$.fn.incrementClass\t'+className;
 			var $t = $(this), d = ($(this).data(k) || 0);
@@ -15345,7 +15345,10 @@ Q.Tool.define({
 		js: "{{Q}}/js/tools/progress.js",
 		css: "{{Q}}/css/tools/progress.css"
 	},
-	"Q/badge": "{{Q}}/js/tools/badge.js",
+	"Q/badge": {
+		js: "{{Q}}/js/tools/badge.js",
+		css: "{{Q}}/css/tools/badge.css"
+	},
 	"Q/resize": "{{Q}}/js/tools/resize.js",
 	"Q/layouts": "{{Q}}/js/tools/layouts.js",
 	"Q/carousel": "{{Q}}/js/tools/carousel.js",

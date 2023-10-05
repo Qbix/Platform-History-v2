@@ -6,4 +6,9 @@
 	background-size: contain;
 	text-align: center;
 	pointer-events: none;
+	overflow: hidden;
+}
+
+.Q_badge_parent_overlapped {
+	overflow: visible !important;
 }
