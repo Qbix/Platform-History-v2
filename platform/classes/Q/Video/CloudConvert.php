@@ -48,7 +48,7 @@ class Q_Video_CloudConvert extends Q_Video {
 
 		$convert = Q::ifset($params, "convert", array());
 		$export = Q::ifset($params, "export", array());
-		$stream = Q::ifset($options, "stream", null);
+		$stream = Q::ifset($params, "stream", null);
 		$tag = null;
 		if ($stream instanceof Streams_Stream) {
 			$tag = json_encode(array(
