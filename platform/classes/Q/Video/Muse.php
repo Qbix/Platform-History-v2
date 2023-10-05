@@ -73,9 +73,9 @@ class Q_Video_Muse extends Q_Video {
 		}
 
 		$result["videoId"] = $result["svid"];
-		$result["Streams.videoUrl"] = Q::ifset($result, "mp4", preg_replace("/\/data$/", "/videos/video.mp4", $result["url"]));
+		$result["videoUrl"] = Q::ifset($result, "mp4", preg_replace("/\/data$/", "/videos/video.mp4", $result["url"]));
 
-		if (!$result["Streams.videoUrl"]) {
+		if (!$result["videoUrl"]) {
 			return false;
 		}
 
