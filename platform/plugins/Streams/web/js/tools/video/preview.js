@@ -154,6 +154,9 @@
 					icon = stream.iconUrl(40);
 					iconCustom = false;
 				}
+				if (icon.match(/converted\.gif/)) {
+					iconCustom = false;
+				}
 
 				// render a template
 				Q.Template.render('Streams/video/preview/view', {
