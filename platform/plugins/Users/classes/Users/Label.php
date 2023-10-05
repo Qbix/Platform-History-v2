@@ -369,7 +369,18 @@ class Users_Label extends Base_Users_Label
 		$roles = Q_Config::expect("Users", "communities", "roles");
 		return array_keys($roles);
 	}
-
+    
+    static function ofCommunity($communityId) 
+    {
+		$labelsFromConfig = self::ofCommunities();
+        
+        $fromDb = Users_Permission::select('distinct label')->where(array('userId' => $communityId))->fetchDbRows();
+        $labelsFromDb = array();
+        foreach($fromDb as $row) {
+            array_merge($labelsFromDb, $row->getExtra());
+        }
+		return array_unique(array_merge($labelsFromConfig, $labelsFromDb));
+    }
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
