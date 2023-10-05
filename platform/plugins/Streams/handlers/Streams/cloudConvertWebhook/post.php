@@ -14,8 +14,8 @@ function Streams_cloudConvertWebhook_post()
 {
 	$taskKey = Q_Video_CloudConvert::getTaskKey();
 	$cloudConvert = Q_Video_CloudConvert::setup();
-	$signingSecretFinished = Q_Config::expect("Q", "video", "cloudConvert", "webhooks", "finished");
-	$signingSecretFailed = Q_Config::expect("Q", "video", "cloudConvert", "webhooks", "failed");
+	$signingSecretFinished = Q_Config::expect("Q", "video", "cloud", "convert", "cloudConvert", "webhooks", "finished");
+	$signingSecretFailed = Q_Config::expect("Q", "video", "cloud", "convert", "cloudConvert", "webhooks", "failed");
 
 	$payload = @file_get_contents('php://input');
 	$signature = $_SERVER['HTTP_CLOUDCONVERT_SIGNATURE'];
