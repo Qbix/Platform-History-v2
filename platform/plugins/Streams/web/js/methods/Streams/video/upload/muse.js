@@ -1,8 +1,12 @@
 Q.exports(function (params, callback) {
 
-    Q.req('Streams/stream', 'data', callback, {
-        fields: params,
-        method: params.streamName ? "put" : "post"
-    });
+    if (params.streamName) {
+        return Q.req('Streams/stream', 'data', callback, {
+            fields: params,
+            method: "put"
+        });
+    }
+
+    Q.handle(callback, null, [null, params]);
 
 });
