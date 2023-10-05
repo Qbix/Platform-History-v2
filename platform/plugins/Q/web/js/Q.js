@@ -12259,9 +12259,42 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 			Q.handle(callback, null, options, []);
 			return this;
 		}
-		return this.each(function _jQuery_fn_activate_each(index, element) {
-			Q.activate(element, options, callback, internal);
+		return this.each(function () {
+			Q.activate(this, options, callback, internal);
 		});
+	};
+	/**
+	 * Votes for a CSS class to be added to an element.
+	 * @static
+	 * @method incrementClass
+	 * @param {String} className the CSS class to add
+	 */
+	$.fn.incrementClass = function _jQuery_fn_incrementClass(className) {
+		return this.each(function () {
+			var k = '$.fn.incrementClass\t'+className;
+			var $t = $(this), d = ($(this).data(k) || 0);
+			if (d == 0) {
+				$t.addClass(className);
+			}
+			$t.data(k, d+1);
+		})
+	};
+	/**
+	 * Stops voting for a CSS class to be added to an element.
+	 * It's removed only when votes reach zero.
+	 * @static
+	 * @method decrementClass
+	 * @param {String} className the CSS class that was incremented
+	 */
+	$.fn.decrementClass = function _jQuery_fn_incrementClass(className) {		
+		return this.each(function () {
+			var k = '$.fn.incrementClass\t'+className;
+			var $t = $(this), d = ($(this).data(k) || 0);
+			if (d <= 1) {
+				$t.removeClass(className);
+			}
+			$t.data(k, d-1);
+		})
 	};
 	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;
 
