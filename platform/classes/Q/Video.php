@@ -72,12 +72,11 @@ abstract class Q_Video implements Q_Video_Interface {
 	 * Upload video to cloud provider for streaming etc.
 	 * @method upload
 	 * @static
-	 * @param {Streams_Stream} $stream
 	 * @param {string} $filename
 	 * @param {array} [$options]
 	 * @param {string} [$options.converter]
 	 */
-	static function upload($stream, $filename, $options = array())
+	static function upload($filename, $options = array())
 	{
 		$cloudUpload = Q_Config::get("Q", "video", "cloud", "upload", array());
 		$provider = Q::ifset($options, 'provider', array_key_first($cloudUpload));
@@ -89,17 +88,20 @@ abstract class Q_Video implements Q_Video_Interface {
 			$adapter = new $className($filename);
 			$result = $adapter->doUpload($filename);
 		} catch (Exception $e) {
-			$result = null;
+			return false;
 		}
 
 		if (!Q::isAssociative($result)) {
 			return false;
 		}
-		$stream->setAttribute("provider", $provider);
-		$stream->setAttribute("videoId", $result["videoId"]);
-		$stream->setAttribute("videoUrl", $result["videoUrl"]);
-		$stream->clearAttribute("Q.file.url");
-		$stream->changed();
+		$stream = Q::ifset($options, "stream", null);
+		if ($stream instanceof Streams_Stream) {
+			$stream->setAttribute("provider", $provider);
+			$stream->setAttribute("videoId", $result["videoId"]);
+			$stream->setAttribute("videoUrl", $result["videoUrl"]);
+			$stream->clearAttribute("Q.file.url");
+			$stream->changed();
+		}
 		return true;
 	}
 
@@ -108,22 +110,20 @@ abstract class Q_Video implements Q_Video_Interface {
 	 * webhook will eventually update the stream's icon.
 	 * @method convert
 	 * @static
-	 * @param {Streams_Stream} $stream
 	 * @param {string} $filename
 	 * @param {array} [$options]
 	 * @param {string} [$options.converter]
 	 */
-	static function convert($stream, $filename, $params = array())
+	static function convert($filename, $options = array())
 	{
 		$cloudConvert = Q_Config::get("Q", "video", "cloud", "convert", array());
 		$converter = Q::ifset($options, 'converter', array_key_first($cloudConvert));
 		if (!$cloudConvert or !$converter) {
 			return false;
 		}
-		$options['tag'] = json_encode(array(
-			"publisherId" => $stream->publisherId,
-			"streamName" => $stream->name
-		));
+
+		$options = array_merge($options, Q_Config::get("Q", "video", "cloud", "convert", $converter, "options", array()));
+
 		$className = "Q_Video_".ucfirst($converter);
 		try {
 			$adapter = new $className($filename);
