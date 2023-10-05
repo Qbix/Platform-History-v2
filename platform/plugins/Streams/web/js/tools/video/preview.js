@@ -381,7 +381,7 @@
 							var $clipElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_clip", state.mainDialog);
 
 							$videoElement.tool("Q/video", {
-								url: tool.stream.fileUrl(),
+								url: tool.stream.videoUrl() || tool.stream.fileUrl(),
 								clipStart: tool.stream.getAttribute('clipStart'),
 								clipEnd: tool.stream.getAttribute('clipEnd')
 							}).activate(function () {
