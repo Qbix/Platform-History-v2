@@ -31,18 +31,13 @@ function Users_roles_tool($options) {
     $userId = $options['userId'];
     $abiPathCommunity = Q::ifset($options, "abiPath", "Users/templates/R1/Community/contract");
     
-	
     // getting userWallet
     $userWallet = null;
     if ($user) {
         $options['userId'] = $user->id;
         $xids = $user->getAllXids();
         if ($xids) {
-            $keys = array(
-                "web3_{$options['chainId']}",
-                "web3_all",
-            );
-
+            $keys = array('web3_all');
             foreach($keys as $k) {
                 if (isset($xids[$k])) {
                     $userWallet = $xids[$k];
