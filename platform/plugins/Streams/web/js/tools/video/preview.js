@@ -120,7 +120,7 @@
 						tool.preview.actions();
 					}
 
-					videoUrl = stream.fileUrl();
+					videoUrl =  stream.videoUrl() || stream.fileUrl();
 					// set up the inplace options
 					if (state.inplace) {
 						var inplaceOptions = Q.extend({

@@ -1990,6 +1990,22 @@ Sp.fileUrl = function() {
 };
 
 /**
+ * Calculate the url of a stream's video
+ * @method videoUrl
+ * @return {String|null} the url, or null if no url
+ */
+Sp.videoUrl = function() {
+	var url = this.getAttribute("Q.Streams.videoUrl")
+		|| this.getAttribute("Streams.videoUrl")
+		|| this.getAttribute("videoUrl");
+
+	if (!url) {
+		return null;
+	}
+	return url.interpolate({ "baseUrl": Q.info.baseUrl });
+};
+
+/**
  * Get all stream fields
  *
  * @method getAll
