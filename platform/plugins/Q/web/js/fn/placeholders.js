@@ -104,7 +104,10 @@ function () {
 				span.css('margin-'+pos, props['margin-'+pos]);
 			});
 			$this.show();
-			$this.wrap(span).css('margin', '0').focus();
+			var isFocus = $this.is(":focus");
+			$this.wrap(span).css('margin', '0');
+			// if $this has focus before wrap set focus after wrap, because wrap lose focus
+			if (isFocus) { $this.focus(); }
 			span = $this.parent();
 			span.on(Q.Pointer.fastclick, function() {
 				$this.trigger('focus');
