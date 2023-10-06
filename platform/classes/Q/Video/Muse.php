@@ -29,12 +29,6 @@ class Q_Video_Muse extends Q_Video {
 	 */
 	function doUpload($filename, $params = array())
 	{
-		$environment = Q_Config::get("Q", "environment", null);
-		$environments = Q_Config::get("Q", "video", "cloud", "environments", array('live'));
-		if (!in_array($environment, $environments)) {
-			return false; // wrong environment, webhooks may not work etc.
-		}
-
 		$uploadEndPoint = Q_Config::expect("Q", "video", "cloud", "upload", "muse", "uploadEndPoint");
 		$museApiKey = Q_Config::expect("Q", "video", "cloud", "upload", "muse", "key");
 
