@@ -241,7 +241,8 @@
 					|| badgeRect.right > parentRect.right
 					|| badgeRect.top < parentRect.top
 					|| badgeRect.bottom > parentRect.bottom)
-					&& $(e).css('overflow') == 'hidden';
+					&& ($(e).css('overflow-x') == 'hidden'
+						|| $(e).css('overflow-y') == 'hidden');
 				}).incrementClass('Q_badge_parent_overlapped');
 				$te.data('Q_badge incrementedClass', $jq);
 			});
