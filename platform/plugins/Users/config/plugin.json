@@ -317,7 +317,7 @@
 					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-					"canManageLabels": ["Users/","<<< web"]
+					"canManageLabels": ["Users/","<<< web3/"]
 				},
 				"Users/admins": {
 					"title": "Admin",

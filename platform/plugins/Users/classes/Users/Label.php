@@ -139,6 +139,18 @@ class Users_Label extends Base_Users_Label
 		$l->title = $title;
 		$l->icon = $icon;
 		$l->save(true); 
+        
+        // update permissions if external 
+        if (strpos($label, self::$externalPrefix) !== false) {
+            $perm = new Users_Permission();
+//            $perm->userId = $userId;
+//            $perm->label
+//            $perm->label
+//            $perm->permission
+//            $perm->extra
+        }
+        // ---------------
+        
 		return $l;
 	}
 	
@@ -373,8 +385,9 @@ class Users_Label extends Base_Users_Label
     static function ofCommunity($communityId) 
     {
 		$labelsFromConfig = self::ofCommunities();
-        
+//return $labelsFromConfig;
         $fromDb = Users_Permission::select('distinct label')->where(array('userId' => $communityId))->fetchDbRows();
+        
         $labelsFromDb = array();
         foreach($fromDb as $row) {
             array_merge($labelsFromDb, $row->getExtra());
