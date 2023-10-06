@@ -345,6 +345,15 @@
 					"title": "",
 					"icon": "Streams/category"
 				}
+			},
+			"Assets/fundraise": {
+				"create": true,
+				"close": true,
+				"edit": ["content", "icon"],
+				"defaults": {
+					"title": "fundraise",
+					"icon": "Assets/product"
+				}
 			}
 		},
 		"possibleUserStreams": {

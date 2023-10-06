@@ -261,7 +261,7 @@
 
 				interval && clearInterval(interval);
 
-				$(this).data('Q_badge incrementedClass')
+				$(this.element).data('Q_badge incrementedClass')
 				.decrementClass('Q_badge_parent_overlapped');
 			}
 		}

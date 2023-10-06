@@ -596,7 +596,9 @@
             "TokenWasUnlocked": "Token \"{{title}}\" was unlocked"
         }
     },
-	
+	"fundrise": {
+        "placeholder": "type something about this contribution..."
+    },
     "currencies": {
         "choose": "Choose a currency"
     }
