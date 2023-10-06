@@ -77,7 +77,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	var lastQuery = null;
 	
 	tool.interval = setInterval(function () {
-		if ($te.is(':visible') &&) {
+		if ($te.is(':visible')) {
 			tool.$results.removeClass('Streams_userChooser_hidden');
 		} else {
 			tool.$results.addClass('Streams_userChooser_hidden');
