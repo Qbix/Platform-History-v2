@@ -107,7 +107,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
 {
     userId: null,
-    filter: ['Users/'],
+    filter: ['Users/', '<<< web3/'],
     exclude: null,
     contactUserId: null,
     contactUserId_xid: null,
