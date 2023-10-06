@@ -81,7 +81,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
 
-		if ($te.is(':visible')) {
+		if (!$te.is(':visible')) {
 			return false;
 		}
 
@@ -98,7 +98,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			var userIds = JSON.parse(localStorage.getItem(key)) || [];
 			Q.Streams.Avatar.get.all(userIds, function (params, subjects) {
 				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), function (err, avatars) {
-					if ($te.is(':visible')) {
+					if (!$te.is(':visible')) {
 						return false;
 					}
 					onResponse(null, Q.extend({}, subjects, avatars));
