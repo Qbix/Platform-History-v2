@@ -557,7 +557,7 @@
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(this);
 				} else {
-					tool.element.addClass('Q_horizontal');
+					tool.element.addClass('Q_tabs_horizontal');
 				}
 				if (state.compact) {
 					index = 0;
