@@ -37,9 +37,7 @@ class Q_Video_CloudConvert extends Q_Video {
 	 * @return {array}
 	 */
 	function doConvert ($src, $params=array())	{
-		$environment = Q_Config::get("Q", "environment", null);
-		$environments = Q_Config::get("Q", "video", "cloud", "environments", array('live'));
-		if (!in_array($environment, $environments)) {
+		if (Q_Config::get("Q", "environment", null) == "local") {
 			return false; // wrong environment, webhooks may not work etc.
 		}
 
