@@ -98,6 +98,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			var userIds = JSON.parse(localStorage.getItem(key)) || [];
 			Q.Streams.Avatar.get.all(userIds, function (params, subjects) {
 				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), function (err, avatars) {
+					if ($te.is(':visible')) {
+						return false;
+					}
 					onResponse(null, Q.extend({}, subjects, avatars));
 				}, options)
 			});
