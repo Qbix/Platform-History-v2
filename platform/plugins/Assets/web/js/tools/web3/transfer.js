@@ -170,7 +170,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             },
                             onFailure: function (err) {
                                 Q.Dialogs.pop();
-                                Q.alert(err);
+                                console.warn(err);
+                                $this.removeClass("Q_working");
                             }
                         });
                     }
