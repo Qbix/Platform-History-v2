@@ -81,6 +81,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
 
+		if ($te.is(':visible')) {
+			return false;
+		}
+
 		var options = {'public': true};
 		if (state.communitiesOnly) {
 			options.communities = true;
