@@ -483,6 +483,7 @@
 .Streams_userChooser_tool input { width: 100%; }
 .Streams_userChooser_results { overflow-y: auto; max-height: 500px; overflow-x: hidden;}
 .Streams_userChooser_results a { cursor: pointer; }
+.Streams_userChooser_hidden { display: none; }
 
 /* Streams subcription tool */
 .streams_subscription_container { width: 347px; }

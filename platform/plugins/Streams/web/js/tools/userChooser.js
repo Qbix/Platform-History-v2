@@ -75,15 +75,19 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	}, tool);
 	
 	var lastQuery = null;
+	
+	tool.interval = setInterval(function () {
+		if ($te.is(':visible') &&) {
+			tool.$results.removeClass('Streams_userChooser_hidden');
+		} else {
+			tool.$results.addClass('Streams_userChooser_hidden');
+		}
+	}, 300);
 
 	var doQuery = Q.debounce(function (event) {
 
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
-
-		if (!$te.is(':visible')) {
-			return false;
-		}
 
 		var options = {'public': true};
 		if (state.communitiesOnly) {
@@ -307,6 +311,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		if (this.$results) {
 			this.$results.remove();	
 		}
+		clearInterval(this.interval);
 	},
 	Q: {
 		beforeRemove: function () {
