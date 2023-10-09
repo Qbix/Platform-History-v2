@@ -43,15 +43,12 @@ Q.Tool.define("Assets/fundraise", function(options) {
 			Q.replace(tool.element, html);
 
 			if (stream.fields.content || stream.testWriteLevel("edit")) {
-				$(".Assets_fundraise_description", tool.element).tool("Streams/inplace", {
-					editable: true,
+				$(".Assets_fundraise_description", tool.element).tool("Streams/html", {
 					field: "content",
-					inplaceType: "textarea",
+					editor: "ckeditor",
 					publisherId: state.publisherId,
 					streamName: state.streamName,
-					inplace: {
-						placeholder: tool.text.fundrise.placeholder
-					}
+					placeholder: tool.text.fundrise.placeholder
 				}).activate();
 			}
 
