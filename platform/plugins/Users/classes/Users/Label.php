@@ -261,27 +261,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canGrantLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Users", "communities", "roles");
-		$keyRoles = array_keys($roles);
-
-		// check whether label exist
-		if (!in_array($label_1, $keyRoles)) {
-			return false;
-		}
-
-		if (gettype($label_2) == 'string') {
-			$label_2 = array($label_2);
-		}
-
-		$rolesCanGrant = Q::ifset($roles, $label_1, "canGrant", array());
-
-		foreach ($label_2 as $label) {
-			if (!in_array($label, $rolesCanGrant)) {
-				return false;
-			}
-		}
-
-		return true;
+        return self::operateLabelAction($label_1, $label_2, 'canGrant');
 	}
 
 	/**
@@ -294,27 +274,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canRevokeLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Users", "communities", "roles");
-		$keyRoles = array_keys($roles);
-
-		// check whether label exist
-		if (!in_array($label_1, $keyRoles)) {
-			return false;
-		}
-
-		if (gettype($label_2) == 'string') {
-			$label_2 = array($label_2);
-		}
-
-		$rolesCanRevoke = Q::ifset($roles, $label_1, "canRevoke", array());
-
-		foreach ($label_2 as $label) {
-			if (!in_array($label, $rolesCanRevoke)) {
-				return false;
-			}
-		}
-
-		return true;
+        return self::operateLabelAction($label_1, $label_2, 'canRevoke');
 	}
 
 	/**
@@ -327,7 +287,19 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canSeeLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Users", "communities", "roles");
+        return self::operateLabelAction($label_1, $label_2, 'canSee');
+	}
+    /**
+	 * Whether $label_1 can "action" $label_2
+     * "action" - can be "see", "revoke", "grant", etc.
+	 * @param {string} $label_1 - Label which request permission for action
+	 * @param {string|array} $label_2 - Label need to do action with
+	 * @throws Exception
+	 * @return {bool}
+	 */
+    static function operateLabelAction($label_1, $label_2, $actionKey)
+    {
+        $roles = Q_Config::expect("Users", "communities", "roles");
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
@@ -338,17 +310,17 @@ class Users_Label extends Base_Users_Label
 		if (gettype($label_2) == 'string') {
 			$label_2 = array($label_2);
 		}
-
-		$rolesCanSee = Q::ifset($roles, $label_1, "canSee", array());
+        
+		$rolesCanOperate = Q::ifset($roles, $label_1, $actionKey, array());
 
 		foreach ($label_2 as $label) {
-			if (!in_array($label, $rolesCanSee)) {
+			if (!in_array($label, $rolesCanOperate)) {
 				return false;
 			}
 		}
 
 		return true;
-	}
+    }
 
 
 	/**
