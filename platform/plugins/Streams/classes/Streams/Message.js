@@ -238,7 +238,7 @@ Streams_Message.prototype.getType = function () {
  * 'email.handlebars' or 'mobile.handlebars' or 'device.handlebars' depending on delivery
  * @method deliver
  * @param {Streams.Stream} stream
- * @param {function} toUserId the id of the user to whom to deliver
+ * @param {function} toUserId the id of the user to whom to deliver notification
  * @param {String|Object} deliver can be any key under "Streams"/"rules"/"deliver" config,
  *   such as "default" or "invited". The value in the config should be an array of entries,
  *   each of which can be a string or an array itself.
@@ -247,7 +247,7 @@ Streams_Message.prototype.getType = function () {
  *   is found to deliver to.
  *   Or, it can be an object with "to" property
  *   as this key, or "emailAddress", "mobileNumber" or "deviceId" specified directly.
- * @param {Streams.Avatar} avatar the avatar for getting the displayName
+ * @param {Streams.Avatar} avatar the avatar for getting the displayName of user who posted the message
  * @param {function} callback
  *	Callback reports errors and response from delivery systems
  */
@@ -327,7 +327,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				messageType: message.fields.type,
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
-				displayName: avatar.displayName(),
+				displayName: avatar && avatar.displayName(),
 				subject: subject
 			}, logfile);
 		}

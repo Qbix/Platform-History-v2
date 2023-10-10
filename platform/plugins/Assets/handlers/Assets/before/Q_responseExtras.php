@@ -12,6 +12,7 @@ function Assets_before_Q_responseExtras() {
 			Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.jsLibrary', $jsLibrary);
 		}
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.publishableKey', $publishableKey);
+		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.appearance', Q_Config::get('Assets', 'payments', 'stripe', 'appearance', null));
 
 		$applPayMerchantId = Q_Config::get('Assets', 'payments', 'applePay', 'merchantIdentifier', null);
 		if ($applPayMerchantId) {

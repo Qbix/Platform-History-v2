@@ -369,7 +369,10 @@
 	"Assets": {
 		"payments": {
 			"stripe": {
-				"jsLibrary": "https://js.stripe.com/v3/"
+				"jsLibrary": "https://js.stripe.com/v3/",
+				"appearance": { /* stripe param allow to change themes and styles of stripe content */
+					"theme": "stripe"
+				}
 			}
 		},
 		"credits": {
