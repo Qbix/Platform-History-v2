@@ -60,7 +60,17 @@ class Users_Permission extends Base_Users_Permission
 		$attr = $this->getAllExtras();
 		if (is_array($extraName)) {
 			foreach ($extraName as $k => $v) {
-				$attr[$k] = $v;
+                if (is_array($v)) {
+                    // second level
+                    foreach ($v as $k2 => $v2) {
+                        if (empty($attr[$k])) {
+                            $attr[$k] = array();
+                        }
+                        $attr[$k][$k2] = $v2;
+                    }
+                } else {
+                    $attr[$k] = $v;
+                }
 			}
 		} else {
 			$attr[$extraName] = $value;
@@ -103,4 +113,23 @@ class Users_Permission extends Base_Users_Permission
 			$result->$k = $v;
 		return $result;
 	}
+    
+    /**
+     * 
+     * @param type $userId
+     * @param type $label
+     * @param type $permission
+     */
+    static function getPermissions($userId, $label, $permission)
+    {
+        $perm = new Users_Permission();
+		$perm->userId = $userId;
+		$perm->label = $label;
+		$perm->permission = $permission;
+		$result = $perm->retrieve();
+        
+        return $perm->getAllExtras();
+        
+    }
+    
 };

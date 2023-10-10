@@ -141,13 +141,44 @@ class Users_Label extends Base_Users_Label
 		$l->save(true); 
         
         // update permissions if external 
+        // we've create similar structure as in platform\plugins\Users\config\plugin.json
+        // and add new label under 
+        //      "Users/owners" -> "canManageLabels"
+        //      "Users/admins" -> "canManageLabels"
+		//		"Users/owners": {
+		//			"canGrant": [....],
+		//			"canRevoke": [...],
+		//			"canSee": [...],
+		//			"canManageLabels": [...,"<<< web3/"]
+		//		},
+		//		"Users/admins": {
+		//			"canGrant": [....],
+		//			"canRevoke": [...],
+		//			"canSee": [...],
+        //          "canManageLabels": [...,"<<< web3/"]
+		//		},
+        
         if (strpos($label, self::$externalPrefix) !== false) {
             $perm = new Users_Permission();
-//            $perm->userId = $userId;
-//            $perm->label
-//            $perm->label
-//            $perm->permission
-//            $perm->extra
+            $perm->userId = $userId;
+            $perm->label = $label;
+            $perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+            $result = $perm->retrieve();
+            
+            // set extras
+            $perm->setExtra('Users/owners', array(
+                'canManageLabels' => array($label),
+                'canGrant' => array($label),
+                'canRevoke' => array($label)
+            ));
+            
+            $perm->setExtra('Users/admins', array(
+                'canManageLabels' => array($label),
+                'canGrant' => array($label),
+                'canRevoke' => array($label)
+            ));
+            
+            $perm->save();
         }
         // ---------------
         
@@ -337,7 +368,8 @@ class Users_Label extends Base_Users_Label
 			$userId = $user->id;
 		}
 		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
-		$communityRoles = self::ofCommunities();
+		//$communityRoles = self::ofCommunities();
+        $communityRoles = self::ofCommunity($communityId);
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
 		$result = array(
 			"manageIcon" => false,
@@ -386,13 +418,20 @@ class Users_Label extends Base_Users_Label
     {
 		$labelsFromConfig = self::ofCommunities();
 //return $labelsFromConfig;
-        $fromDb = Users_Permission::select('distinct label')->where(array('userId' => $communityId))->fetchDbRows();
+//        $fromDb = Users_Permission::select('distinct label')->where(array(
+//            'userId' => $communityId,
+//            'permission' => 'Users/communities/roles'
+//        ))->fetchDbRows();
+        $q = 'select';
+        $q .= '  distinct up.label';
+        $q .= '  FROM users_permission as up';
+        $q .= ' WHERE';
+        $q .= '  up.userId= "'.$communityId.'"';
+        $q .= '  AND up.permission = "Users/communities/roles"';
         
-        $labelsFromDb = array();
-        foreach($fromDb as $row) {
-            array_merge($labelsFromDb, $row->getExtra());
-        }
-		return array_unique(array_merge($labelsFromConfig, $labelsFromDb));
+        $labelsFromDb = Users_Permission::db()->rawQuery($q)->fetchDbRows(null, null, 'label'); 
+        
+		return array_unique(array_merge($labelsFromConfig, array_keys($labelsFromDb)));
     }
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
