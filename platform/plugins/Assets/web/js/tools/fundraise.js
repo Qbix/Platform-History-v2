@@ -52,6 +52,12 @@ Q.Tool.define("Assets/fundraise", function(options) {
 				}).activate();
 			}
 
+			tool.element.forEachTool("Assets/web3/balance", function () {
+				$("<button class='Q_button Assets_fundraise_buyCredits'>" + tool.text.credits.BuyCredits + "</button>").on(Q.Pointer.fastclick, function () {
+					Q.Assets.Credits.buy();
+				}).appendTo($(".Assets_web3_balance_select", this.element));
+			});
+
 			$(".Assets_fundraise_transfer", tool.element).tool("Assets/web3/transfer", {
 				recipientUserId: state.publisherId,
 				withHistory: true
