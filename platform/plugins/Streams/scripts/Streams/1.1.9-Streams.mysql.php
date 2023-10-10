@@ -10,7 +10,7 @@ function Streams_1_1_9_Users()
 	$stream->name = 'Streams/labels';
 	if ($stream->retrieve()) {
 		$prefixes = $stream->getAttribute('prefixes', array());
-		$prefixes[] = '<<< web3_';
+		$prefixes[] = '<<< web3/';
 		$stream->setAttribute('prefixes', $prefixes);
 		$stream->save();
 	}

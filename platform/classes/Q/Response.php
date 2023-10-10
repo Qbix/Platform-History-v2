@@ -1376,7 +1376,7 @@ class Q_Response
 			$hash = null;
 			extract($script, EXTR_IF_EXISTS);
 			$attributes = compact('type', 'src');
-			if ($script['slot']) {
+			if (!empty($script['slot'])) {
 				$attributes['data-slot'] = $script['slot'];
 			}
 			$tags[] = Q_Html::tag(

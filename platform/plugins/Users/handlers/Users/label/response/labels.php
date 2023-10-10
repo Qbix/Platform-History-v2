@@ -35,10 +35,7 @@ function Users_label_response_labels($params = array())
 	if (isset($req['batch'])) {
 		// expects batch format, i.e. $userIds and $filter arrays
 		foreach ($userIds as $i => $userId) {
-			$row = new Users_Label();
-			$row->userId = $userId;
-			$row->label = $filter[$i];
-			$rows[] = $row->retrieve() ? $row : null;
+			$rows = array_merge($rows, Users_Label::fetch($userId, $filter[$i]));
 		}
 	} else {
 		foreach ($userIds as $i => $userId) {

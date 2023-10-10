@@ -74,9 +74,7 @@
 			$te.css("position", "relative");
 		}
 
-		Q.addStylesheet('{{Q}}/css/tools/badge.css', function () {
-			tool.refresh();
-		});
+		tool.refresh();
 
 		// observe tool childs removed
 		(new MutationObserver(function (mutations) {
@@ -106,7 +104,6 @@
 			var state = tool.state;
 			var $te = $(tool.element);
 			var corners = ['tl', 'tr', 'br', 'bl'];
-			var id = $te.attr("id");
 
 			Q.each(corners, function(i, corner){
 				var badgeStyle = Q.getObject(corner, state);
@@ -235,6 +232,19 @@
 
 				// remove old styles and apply new
 				$badgeElement.removeProp("style").css(style);
+
+				var badgeRect = $badgeElement[0].getBoundingClientRect();
+				var $jq = $te.parents().addBack()
+				.filter(function (i, e) {
+					var parentRect = e.getBoundingClientRect();
+					return (badgeRect.left < parentRect.left
+					|| badgeRect.right > parentRect.right
+					|| badgeRect.top < parentRect.top
+					|| badgeRect.bottom > parentRect.bottom)
+					&& ($(e).css('overflow-x') == 'hidden'
+						|| $(e).css('overflow-y') == 'hidden');
+				}).incrementClass('Q_badge_parent_overlapped');
+				$te.data('Q_badge incrementedClass', $jq);
 			});
 
 			// remove copied elements
@@ -251,6 +261,9 @@
 				var interval = Q.getObject(["state", "interval"], this);
 
 				interval && clearInterval(interval);
+
+				$(this.element).data('Q_badge incrementedClass')
+				.decrementClass('Q_badge_parent_overlapped');
 			}
 		}
 	}

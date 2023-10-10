@@ -30,18 +30,31 @@ class Q_Video_CloudConvert extends Q_Video {
 	 * @param {string} $src Can be URL or local path
 	 * @param {array} [$params] Array with additional params
 	 * @param {string} [$params.tag] Some local param which will need to identify this process with some local ID.
+	 * @param {Streams_Stream} [$params.stream]
 	 * @param {string} [$params.format="gif"]
 	 * @param {array} [$params.convert] Array with additional params pass to "convert" task
 	 * @param {array} [$params.export] Array with additional params pass to "export" task
 	 * @return {array}
 	 */
 	function doConvert ($src, $params=array())	{
+		if (Q_Config::get("Q", "environment", null) == "local") {
+			return false; // wrong environment, webhooks may not work etc.
+		}
+
 		$taskKey = self::getTaskKey();
 		$cloudConvert = self::setup();
 
 		$convert = Q::ifset($params, "convert", array());
 		$export = Q::ifset($params, "export", array());
-		$tag = Q::ifset($params, 'tag', null);
+		$stream = Q::ifset($params, "stream", null);
+		$tag = null;
+		if ($stream instanceof Streams_Stream) {
+			$tag = json_encode(array(
+				"publisherId" => $stream->publisherId,
+				"streamName" => $stream->name
+			));
+		}
+
 		$format = strtolower(Q::ifset($params, 'format', 'gif'));
 
 		if (filter_var($src, FILTER_VALIDATE_URL)) {

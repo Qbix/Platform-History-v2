@@ -17,7 +17,7 @@ function Users_labels_response($params = array())
     // make hex if integer present
     $chainId = (substr($chainId, 0, 2) === '0x') ? $chainId : '0x' . dechex($chainId);
 
-    $label = '<<< web3_'.$chainId.'/'.$roleId;
+    $label = "<<< web3/$chainId/$roleId";
     
     $l = new Users_Label();
     $l->label = $label;

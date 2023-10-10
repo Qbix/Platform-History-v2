@@ -345,6 +345,15 @@
 					"title": "",
 					"icon": "Streams/category"
 				}
+			},
+			"Assets/fundraise": {
+				"create": true,
+				"close": true,
+				"edit": ["content", "icon"],
+				"defaults": {
+					"title": "fundraise",
+					"icon": "Assets/product"
+				}
 			}
 		},
 		"possibleUserStreams": {
@@ -360,7 +369,10 @@
 	"Assets": {
 		"payments": {
 			"stripe": {
-				"jsLibrary": "https://js.stripe.com/v3/"
+				"jsLibrary": "https://js.stripe.com/v3/",
+				"appearance": { /* stripe param allow to change themes and styles of stripe content */
+					"theme": "stripe"
+				}
 			}
 		},
 		"credits": {
@@ -401,7 +413,7 @@
 			},
 			"exchange": {
 				"credits": 1,
-				"USD": 10
+				"USD": 1
 			},
 			"bonus": {
 				"bought": {
