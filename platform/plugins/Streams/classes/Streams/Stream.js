@@ -1332,6 +1332,10 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 			// actually notify according to the deliveriy rules
 			var byUserId = message.fields.byUserId;
 			Streams.Avatar.fetch(userId, byUserId, function (err, avatar) {
+				if (Q.isEmpty(avatar)) {
+					return;
+				}
+
 				var logfile = Q.Config.get(
 					['Streams', 'types', '*', 'messages', '*', 'log'],
 					false
