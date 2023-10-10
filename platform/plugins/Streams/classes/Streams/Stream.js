@@ -1332,10 +1332,6 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 			// actually notify according to the deliveriy rules
 			var byUserId = message.fields.byUserId;
 			Streams.Avatar.fetch(userId, byUserId, function (err, avatar) {
-				if (Q.isEmpty(avatar)) {
-					return;
-				}
-
 				var logfile = Q.Config.get(
 					['Streams', 'types', '*', 'messages', '*', 'log'],
 					false
@@ -1346,7 +1342,7 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 						publisherId: stream.fields.publisherId,
 						streamName: stream.fields.name,
 						deliveries: deliveries,
-						displayName: avatar.displayName()
+						displayName: avatar && avatar.displayName()
 					}, logfile);
 				}
 				if (message.fields.type !== "Streams/invite") {
