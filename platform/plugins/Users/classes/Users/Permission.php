@@ -26,6 +26,27 @@ class Users_Permission extends Base_Users_Permission
 	}
 	
 	/**
+	 * Gets permissions of community, in the form of Users_Permissions rows
+	 * @method ofCommunity
+	 * @static
+	 * @param {string} $communityId
+	 * @param {boolean} [$skipGlobalPermissions=false]
+	 *   Set to false to not also return the permissions for "" community
+	 * @return {array} of Users_Permission rows
+	 */
+	static function ofCommunity($communityId, $skipGlobalPermissions = false)
+	{
+		return Users_Permission::select()
+        ->where(array(
+            'userId' => $skipGlobalPermissions
+				? $communityId
+				: array('', $communityId),
+            'permission' => 'Users/communities/roles'
+        ))->orderBy('label')
+		->fetchDbRows();
+	}
+	
+	/**
 	 * @method getAllExtras
 	 * @return {array} The array of all extras set in the stream
 	 */
@@ -60,17 +81,7 @@ class Users_Permission extends Base_Users_Permission
 		$attr = $this->getAllExtras();
 		if (is_array($extraName)) {
 			foreach ($extraName as $k => $v) {
-                if (is_array($v)) {
-                    // second level
-                    foreach ($v as $k2 => $v2) {
-                        if (empty($attr[$k])) {
-                            $attr[$k] = array();
-                        }
-                        $attr[$k][$k2] = $v2;
-                    }
-                } else {
-                    $attr[$k] = $v;
-                }
+				$attr[$k] = $v;
 			}
 		} else {
 			$attr[$extraName] = $value;

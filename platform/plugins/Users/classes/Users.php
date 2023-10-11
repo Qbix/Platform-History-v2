@@ -2043,7 +2043,6 @@ abstract class Users extends Base_Users
 		$roles = Users::roles($userId);
         
         $permissions = Users_Label::ofCommunity($userId);
-$permissionsFromDB = Users_Permission::getPermissions($userId, $label, ['Users', 'communities', 'roles'].join('/'));
 		foreach ($roles as $role) {
 
 			$prefixes = Q_Config::get('Users', 'communities', 'roles', $role->label, 'canManageLabels', array());

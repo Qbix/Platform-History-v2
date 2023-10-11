@@ -161,23 +161,28 @@ class Users_Label extends Base_Users_Label
         if (strpos($label, self::$externalPrefix) !== false) {
             $perm = new Users_Permission();
             $perm->userId = $userId;
-            $perm->label = $label;
+            $perm->label = 'Users/owners';
             $perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
             $result = $perm->retrieve();
-            
             // set extras
-            $perm->setExtra('Users/owners', array(
+            $perm->setExtra(array(
                 'canManageLabels' => array($label),
                 'canGrant' => array($label),
                 'canRevoke' => array($label)
             ));
-            
-            $perm->setExtra('Users/admins', array(
+            $perm->save();
+			///
+			$perm = new Users_Permission();
+            $perm->userId = $userId;
+            $perm->label = 'Users/admins';
+            $perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+            $result = $perm->retrieve();
+            // set extras
+            $perm->setExtra(array(
                 'canManageLabels' => array($label),
                 'canGrant' => array($label),
                 'canRevoke' => array($label)
             ));
-            
             $perm->save();
         }
         // ---------------
@@ -256,12 +261,13 @@ class Users_Label extends Base_Users_Label
 	 * @method canGrantLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
+	 * @param {array} $roles, if empty used from config "Users/communities/roles"
 	 * @throws Exception
 	 * @return {bool}
 	 */
-	static function canGrantLabel($label_1, $label_2)
+	static function canGrantLabel($label_1, $label_2, $roles)
 	{
-        return self::operateLabelAction($label_1, $label_2, 'canGrant');
+        return self::operateLabelAction($label_1, $label_2, 'canGrant', $roles);
 	}
 
 	/**
@@ -269,12 +275,13 @@ class Users_Label extends Base_Users_Label
 	 * @method canRevokeLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
+	 * @param {array} $roles, if empty used from config "Users/communities/roles"
 	 * @throws Exception
 	 * @return {bool}
 	 */
-	static function canRevokeLabel($label_1, $label_2)
+	static function canRevokeLabel($label_1, $label_2, $roles)
 	{
-        return self::operateLabelAction($label_1, $label_2, 'canRevoke');
+        return self::operateLabelAction($label_1, $label_2, 'canRevoke', $roles);
 	}
 
 	/**
@@ -282,26 +289,31 @@ class Users_Label extends Base_Users_Label
 	 * @method canSeeLabel
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
+	 * @param {array} $roles, if empty used from config "Users/communities/roles"
 	 * @throws Exception
 	 * @return {bool}
 	 */
-	static function canSeeLabel($label_1, $label_2)
+	static function canSeeLabel($label_1, $label_2, $roles)
 	{
-        return self::operateLabelAction($label_1, $label_2, 'canSee');
+        return self::operateLabelAction($label_1, $label_2, 'canSee', $roles);
 	}
     /**
 	 * Whether $label_1 can "action" $label_2
      * "action" - can be "see", "revoke", "grant", etc.
 	 * @param {string} $label_1 - Label which request permission for action
 	 * @param {string|array} $label_2 - Label need to do action with
+	 * @param {string} $actionKey - key that identify data from $roles[$label_2]
+	 * @param {array} $roles, if empty used from config "Users/communities/roles"
 	 * @throws Exception
 	 * @return {bool}
 	 */
-    static function operateLabelAction($label_1, $label_2, $actionKey)
+    static function operateLabelAction($label_1, $label_2, $actionKey, $roles)
     {
-        $roles = Q_Config::expect("Users", "communities", "roles");
-		$keyRoles = array_keys($roles);
-
+		if (empty($roles)) {
+			$roles = Q_Config::expect("Users", "communities", "roles");
+		}
+        $keyRoles = array_keys($roles);
+		
 		// check whether label exist
 		if (!in_array($label_1, $keyRoles)) {
 			return false;
@@ -340,8 +352,8 @@ class Users_Label extends Base_Users_Label
 			$userId = $user->id;
 		}
 		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
-		//$communityRoles = self::ofCommunities();
         $communityRoles = self::ofCommunity($communityId);
+		$communityLabels = Users_Label::fetch($communityId);
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
 		$result = array(
 			"manageIcon" => false,
@@ -350,17 +362,21 @@ class Users_Label extends Base_Users_Label
 			"revoke" => array(),
 			"see" => array()
 		);
+        
+        
 		foreach ($userCommunityRoles as $role => $row) {
 			$result["roles"][] = $role;
-			foreach ($communityRoles as $label) {
-				if (Users_Label::canGrantLabel($role, $label)) {
-					$result["grant"][] = $label;
+			//foreach ($communityRoles as $keyLabel => $label) {
+			foreach ($communityLabels as $keyLabel => $label) {
+
+				if (Users_Label::canGrantLabel($role, $keyLabel, $communityRoles)) {
+					$result["grant"][] = $keyLabel;
 				}
-				if (Users_Label::canRevokeLabel($role, $label)) {
-					$result["revoke"][] = $label;
+				if (Users_Label::canRevokeLabel($role, $keyLabel, $communityRoles)) {
+					$result["revoke"][] = $keyLabel;
 				}
-				if (Users_Label::canSeeLabel($role, $label)) {
-					$result["see"][] = $label;
+				if (Users_Label::canSeeLabel($role, $keyLabel, $communityRoles)) {
+					$result["see"][] = $keyLabel;
 				}
 			}
 
@@ -386,24 +402,36 @@ class Users_Label extends Base_Users_Label
 		return array_keys($roles);
 	}
     
+	/**
+	 * Merges the extras from each dynamic role in the database,
+	 * over the information found in Users/communities/roles config.
+	 * @param {string} $communityId The user ID of the community
+	 * @return {array} the merged array of the form [ $label => ["canSee": [...], ["canGrant": ...]]
+	 */
     static function ofCommunity($communityId) 
     {
-		$labelsFromConfig = self::ofCommunities();
-//return $labelsFromConfig;
-//        $fromDb = Users_Permission::select('distinct label')->where(array(
-//            'userId' => $communityId,
-//            'permission' => 'Users/communities/roles'
-//        ))->fetchDbRows();
-        $q = 'select';
-        $q .= '  distinct up.label';
-        $q .= '  FROM users_permission as up';
-        $q .= ' WHERE';
-        $q .= '  up.userId= "'.$communityId.'"';
-        $q .= '  AND up.permission = "Users/communities/roles"';
-        
-        $labelsFromDb = Users_Permission::db()->rawQuery($q)->fetchDbRows(null, null, 'label'); 
-        
-		return array_unique(array_merge($labelsFromConfig, array_keys($labelsFromDb)));
+		$roles = Q_Config::get('Users', 'communities', 'roles', array());
+        $rows = Users_Permission::ofCommunity($communityId);
+		$tree = new Q_Tree($roles);
+		foreach ($rows as $row) {
+			if ($row->userId !== '') {
+				continue;
+			}
+			$label = $row->label;
+			$tree->merge(array(
+				$label => $row->getAllExtras()
+			));
+		}
+		foreach ($rows as $row) {
+			if ($row->userId === '') {
+				continue;
+			}
+			$label = $row->label;
+			$tree->merge(array(
+				$label => $row->getAllExtras()
+			));
+		}
+		return $tree->getAll();
     }
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.

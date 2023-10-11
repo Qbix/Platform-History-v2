@@ -541,7 +541,9 @@ Q.exports(function() {
                 return new Promise(function (resolve, reject) {
                     Q.req('Users/roles', ['canGrant', 'canRevoke', 'canSee'], function (err, response) {
                         resolve(response);
-                    })
+                    }, {
+                        communityId: Q.Users.communityId
+                    });
                 });
             }
 
