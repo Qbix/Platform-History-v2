@@ -130,6 +130,39 @@ class Users_Label extends Base_Users_Label
 		if ($l->retrieve() and !$updateIfExists) {
 			return $l;
 		}
+		if (!$l->retrieve()) {
+			// update permissions if external 
+			// we've create similar structure as in platform\plugins\Users\config\plugin.json
+			if (strpos($label, self::$externalPrefix) !== false) {
+				$perm = new Users_Permission();
+				$perm->userId = $userId;
+				$perm->label = 'Users/owners';
+				$perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+				$result = $perm->retrieve();
+				// set extras
+				$perm->setExtra(array(
+					'canManageLabels' => array($label),
+					'canGrant' => array($label),
+					'canRevoke' => array($label)
+				));
+				$perm->save();
+				///
+				$perm = new Users_Permission();
+				$perm->userId = $userId;
+				$perm->label = 'Users/admins';
+				$perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+				$result = $perm->retrieve();
+				// set extras
+				$perm->setExtra(array(
+					'canManageLabels' => array($label),
+					'canGrant' => array($label),
+					'canRevoke' => array($label)
+				));
+				$perm->save();
+			}
+			// ---------------
+		}
+		
 		Users::canManageLabels($asUserId, $userId, $label, true);
 		if (empty($title)) {
 			$parts = explode("/", $label);
@@ -140,52 +173,6 @@ class Users_Label extends Base_Users_Label
 		$l->icon = $icon;
 		$l->save(true); 
         
-        // update permissions if external 
-        // we've create similar structure as in platform\plugins\Users\config\plugin.json
-        // and add new label under 
-        //      "Users/owners" -> "canManageLabels"
-        //      "Users/admins" -> "canManageLabels"
-		//		"Users/owners": {
-		//			"canGrant": [....],
-		//			"canRevoke": [...],
-		//			"canSee": [...],
-		//			"canManageLabels": [...,"<<< web3/"]
-		//		},
-		//		"Users/admins": {
-		//			"canGrant": [....],
-		//			"canRevoke": [...],
-		//			"canSee": [...],
-        //          "canManageLabels": [...,"<<< web3/"]
-		//		},
-        
-        if (strpos($label, self::$externalPrefix) !== false) {
-            $perm = new Users_Permission();
-            $perm->userId = $userId;
-            $perm->label = 'Users/owners';
-            $perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
-            $result = $perm->retrieve();
-            // set extras
-            $perm->setExtra(array(
-                'canManageLabels' => array($label),
-                'canGrant' => array($label),
-                'canRevoke' => array($label)
-            ));
-            $perm->save();
-			///
-			$perm = new Users_Permission();
-            $perm->userId = $userId;
-            $perm->label = 'Users/admins';
-            $perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
-            $result = $perm->retrieve();
-            // set extras
-            $perm->setExtra(array(
-                'canManageLabels' => array($label),
-                'canGrant' => array($label),
-                'canRevoke' => array($label)
-            ));
-            $perm->save();
-        }
-        // ---------------
         
 		return $l;
 	}
