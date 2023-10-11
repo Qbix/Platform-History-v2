@@ -59,10 +59,6 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                 var $send = $("button[name=send]", tool.element);
                 var $userSelected = $(".Assets_transfer_userSelected", tool.element);
                 tool.assetsWeb3BalanceTool = null;
-                var _transactionSuccess = function () {
-                    Q.Dialogs.pop();
-                    Q.alert(tool.text.transfer.TransactionSuccess);
-                };
 
                 var _getSelectedUser = function (userId) {
                     var $history = $(".Assets_transfer_history", tool.element);
@@ -157,6 +153,11 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         tokenInfo = tool.assetsWeb3BalanceTool.getValue();
                     }
                     var amount = parseFloat($amount.val());
+                    var _transactionSuccess = function () {
+                        $this.removeClass("Q_working");
+                        Q.Dialogs.pop();
+                        Q.alert(tool.text.transfer.TransactionSuccess);
+                    };
 
                     $this.addClass("Q_working");
 
@@ -170,7 +171,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             },
                             onFailure: function (err) {
                                 Q.Dialogs.pop();
-                                Q.alert(err);
+                                console.warn(err);
+                                $this.removeClass("Q_working");
                             }
                         });
                     }

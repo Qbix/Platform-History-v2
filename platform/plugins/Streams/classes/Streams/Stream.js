@@ -1342,7 +1342,7 @@ Sp.notify = function(participant, event, messageOrEphemeral, callback) {
 						publisherId: stream.fields.publisherId,
 						streamName: stream.fields.name,
 						deliveries: deliveries,
-						displayName: avatar.displayName()
+						displayName: avatar && avatar.displayName()
 					}, logfile);
 				}
 				if (message.fields.type !== "Streams/invite") {

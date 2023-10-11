@@ -222,6 +222,9 @@
 	background-image: url(../../img/translucent_play.png);
 	opacity: 0.6;
 }
+.Streams_video_preview_tool .Streams_preview_icon {
+	width: auto;
+}
 /* </Streams_video_preview> */
 
 /* <Streams_pdf_preview> */

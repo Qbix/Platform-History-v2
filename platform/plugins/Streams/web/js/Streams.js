@@ -817,7 +817,10 @@ Q.Tool.define({
 		js: "{{Streams}}/js/tools/audio/chat.js",
 		css: "{{Streams}}/css/tools/previews.css"
 	},
-	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
+	"Streams/video/preview" : {
+		js :"{{Streams}}/js/tools/video/preview.js",
+		css: "{{Streams}}/css/tools/previews.css"
+	},
 	"Streams/video/chat" : {
 		js: "{{Streams}}/js/tools/video/chat.js",
 		css: "{{Streams}}/css/tools/previews.css"
@@ -1979,6 +1982,22 @@ Sp.fileUrl = function() {
 	var url = this.getAttribute("Q.file.url")
 		|| this.getAttribute("file.url")
 		|| this.getAttribute("url");
+
+	if (!url) {
+		return null;
+	}
+	return url.interpolate({ "baseUrl": Q.info.baseUrl });
+};
+
+/**
+ * Calculate the url of a stream's video
+ * @method videoUrl
+ * @return {String|null} the url, or null if no url
+ */
+Sp.videoUrl = function() {
+	var url = this.getAttribute("Q.Streams.videoUrl")
+		|| this.getAttribute("Streams.videoUrl")
+		|| this.getAttribute("videoUrl");
 
 	if (!url) {
 		return null;
