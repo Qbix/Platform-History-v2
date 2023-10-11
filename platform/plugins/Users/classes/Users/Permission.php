@@ -81,7 +81,8 @@ class Users_Permission extends Base_Users_Permission
 		$attr = $this->getAllExtras();
 		if (is_array($extraName)) {
 			foreach ($extraName as $k => $v) {
-				$attr[$k] = $v;
+				$tmp = (!is_array($v)) ? array($v) : $v;
+				$attr[$k] = array_unique(array_merge($attr[$k], $tmp));
 			}
 		} else {
 			$attr[$extraName] = $value;
