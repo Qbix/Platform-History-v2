@@ -673,7 +673,6 @@ Q.Template.set('Users/labels/manage/add', `
                 class="{{#if this.isOwner}}{{else}}Q_disabled{{/if}}"
             >
             {{this.name}}
-    {{this.communityAddress}}|{{this.userWallet}}
             </option>
             {{/each}}
             {{/if}}
