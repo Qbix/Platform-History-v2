@@ -101,9 +101,6 @@
     position: relative;
     cursor: pointer;
 }
-.Streams_topic_composer_form_relations .Streams_topic_preview_tool {
-    padding: 0;
-}
 .Streams_topic_preview_tool .Streams_topic_preview_title {
     font-weight: normal;
     font-size: 20px;

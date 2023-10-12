@@ -21,7 +21,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 
     if (preview.state.streamName) {
         $(tool.element).on(Q.Pointer.fastclick, function () {
-            Q.handle(state.onInvoke, tool);
+            Q.handle(state.onInvoke, tool, [tool.stream]);
         });
     }
 },
@@ -159,22 +159,6 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 
                 // apply Streams/preview icon behavior
                 tool.preview.icon($icon[0]);
-
-                // relations
-                /*$(".Streams_topic_composer_form_relations", $dialog).tool("Streams/related", {
-                    publisherId,
-                    streamName,
-                    relationType: "Streams/subtopic",
-                    sortable: true,
-                    creatable: {
-                        'Streams/video': {title: "Add video"},
-                        'Streams/audio': {title: "Add audio"},
-                        'Streams/pdf': {title: "Add PDF"},
-                        //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic
-                        //'Streams/topic': {title: "Add topic"}
-                    }
-
-                }).activate();*/
 
                 // create topic
                 $save.on(Q.Pointer.fastclick, function (event) {
