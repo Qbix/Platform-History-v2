@@ -27,7 +27,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 },
 {
     imagepicker: {
-        showSize: "200",
+        showSize: "400",
         fullSize: "400",
     },
     completed: false,
@@ -161,7 +161,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 tool.preview.icon($icon[0]);
 
                 // relations
-                $(".Streams_topic_composer_form_relations", $dialog).tool("Streams/related", {
+                /*$(".Streams_topic_composer_form_relations", $dialog).tool("Streams/related", {
                     publisherId,
                     streamName,
                     relationType: "Streams/subtopic",
@@ -174,7 +174,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                         //'Streams/topic': {title: "Add topic"}
                     }
 
-                }).activate();
+                }).activate();*/
 
                 // create topic
                 $save.on(Q.Pointer.fastclick, function (event) {
@@ -228,12 +228,11 @@ Q.Template.set('Streams/topic/composer',
             <textarea name="description" class="Streams_topic_composer_form_control" placeholder="{{topic.DescribeTopic}}">{{content}}</textarea>
         </div>
         <div class="Streams_topic_composer_form_group" data-type="icon">
-            <label>{{topic.TopicIcon}}:</label>
             <div class="Streams_topic_composer_container">
                 <img class="Streams_topic_preview_icon">
             </div>
+            <label>{{topic.TopicIcon}}</label>
         </div>
-        <div class="Streams_topic_composer_form_relations"></div>
         <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
     </form>`, {text: ['Streams/content']});
 

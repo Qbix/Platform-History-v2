@@ -497,7 +497,7 @@
         "AreYouSureDeleteVideo": "Are you sure you want to delete this video",
         "TitlePlaceholder": "topic title...",
         "DescribeTopic": "describe topic...",
-        "TopicIcon": "Topic Icon",
+        "TopicIcon": "Topic picture",
         "UploadIcon": "Upload Icon"
     }
 }
