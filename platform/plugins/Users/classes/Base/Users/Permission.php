@@ -452,60 +452,6 @@ return array (
 );			
 	}
 
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_extra
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_extra($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression
-               or $value instanceof Db_Range) {
-			return array('extra', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".extra");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".extra");
-		return array('extra', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the extra field
-	 * @return {integer}
-	 */
-	function maxSize_extra()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for extra column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_extra()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '',
-);			
-	}
 
 	/**
 	 * Method is called before setting the field and normalize the DateTime string

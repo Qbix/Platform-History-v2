@@ -28,8 +28,10 @@ function Users_labels_tool($options) {
         $ret = $tmp->retrieve();
         
         $userWallet = null;
-        $userWallet = $user->getXid("web3_{$chain['appId']}");
-        $userWallet = !isset($userWallet) ? $user->getXid("web3_all") : $userWallet;
+        
+//        $userWallet = $user->getXid("web3_{$chain['appId']}");
+//        $userWallet = !isset($userWallet) ? $user->getXid("web3_all") : $userWallet;
+        $userWallet = $user->getXid("web3_all");
         
         if ($ret && $ret->xid && $userWallet) {
             $communityAddress = $ret->xid;

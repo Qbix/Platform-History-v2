@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.17",
+				"version": "1.0.18",
 				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -317,7 +317,7 @@
 					"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-					"canManageLabels": ["Users/","<<< web"]
+					"canManageLabels": ["Users/"]
 				},
 				"Users/admins": {
 					"title": "Admin",
