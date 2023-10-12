@@ -383,14 +383,14 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
      * Handler happens when user clicking by label when editable option == false
      * @param {type} wasSelected was select or no before user click
      * @param {type} label label
-     * @param {type} _callback
+     * @param {type} _callback Expects err, ret, develop_error
      */
     onSelect: function(wasSelected, label, _callback){
         var tool = this;
 		var state = this.state;
         
         if (Q.isEmpty(state.contactUserId)) {
-            return;
+            return Q.handle(_callback, tool, [null, null, null]);
         }
         
         if (Q.Users.Label.isExternal(label)) {
