@@ -498,6 +498,7 @@
         "TitlePlaceholder": "topic title...",
         "DescribeTopic": "describe topic...",
         "TopicIcon": "Topic picture",
-        "UploadIcon": "Upload Icon"
+        "UploadIcon": "Upload Icon",
+        "Conversation": "Conversation"
     }
 }
