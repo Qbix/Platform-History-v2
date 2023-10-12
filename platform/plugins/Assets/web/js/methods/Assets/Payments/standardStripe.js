@@ -117,7 +117,10 @@ Q.exports(function(priv){
                     // </create payment request button>
 
                     // <create stripe "payment" element>
-                    var elements = Q.Assets.Payments.stripeObject.elements({clientSecret});
+                    var elements = Q.Assets.Payments.stripeObject.elements({
+                        clientSecret,
+                        appearance: Q.Assets.Payments.stripe.appearance || {}
+                    });
                     paymentElement = elements.create('payment', {
                         wallets: {
                             applePay: 'never',

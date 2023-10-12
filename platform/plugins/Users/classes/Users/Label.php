@@ -35,7 +35,7 @@ class Users_Label extends Base_Users_Label
 	{
 		$result = self::$externalPrefix . $platform;
 		if ($appId) {
-			$result .= '_' . $appId;
+			$result .= '/' . $appId;
 		}
 		if ($roleId) {
 			$result .= '/' . $roleId;
@@ -56,7 +56,7 @@ class Users_Label extends Base_Users_Label
 			return array(null, null, null);
 		}
 		$externalLabel = substr($externalLabel, strlen(self::$externalPrefix));
-		$parts1 = explode('_', $externalLabel);
+		$parts1 = explode('/', $externalLabel);
 		if (!isset($parts1[1])) {
 			return array($parts1[0], null, null);
 		}

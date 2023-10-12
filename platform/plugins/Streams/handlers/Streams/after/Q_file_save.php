@@ -55,14 +55,8 @@ function Streams_after_Q_file_save($params)
 		$stream->setAttribute("Streams.videoUrl", $url);
 		$stream->changed();
 
-		$environment = Q_Config::get("Q", "environment", null);
-		$environments = Q_Config::get("Q", "video", "cloud", "environments", array('live'));
-		if (!in_array($environment, $environments)) {
-			return; // wrong environment, webhooks may not work etc.
-		}
-
-		Q_Video::convert($stream, $filename);
-		if (Q_Video::upload($stream, $filename)) {
+		Q_Video::convert($filename, compact("stream"));
+		if (Q_Video::upload($filename, compact("stream"))) {
 			// remove local uploaded file if uploaded to video provider
 			// and stream url has been updated
 			@unlink($filename);

@@ -3,6 +3,7 @@
 .Q_tabs_tab::before { line-height: 100%; }
 .Q_tabs_title { position: relative; display: inline; }
 .Q_tabs_vertical>.Q_tabs_tab { display: block; float: none; }
+.Q_tabs_horizontal { overflow-y: hidden; }
 
 .Q_tabs_contextual .Q_tabs_tab { display: block; float: none; line-height: 40px; border: 0; } 
 

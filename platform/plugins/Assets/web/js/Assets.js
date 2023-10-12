@@ -544,6 +544,10 @@
 		"Assets/web3/coin/staking/history": {
 			js: "{{Assets}}/js/tools/web3/coin/staking/history.js",
 			css: "{{Assets}}/css/tools/web3/coin/staking/history.css"
+		},
+		"Assets/fundraise": {
+			js: "{{Assets}}/js/tools/fundraise.js",
+			css: "{{Assets}}/css/tools/AssetsFundraise.css"
 		}
 	});
     

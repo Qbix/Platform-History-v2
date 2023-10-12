@@ -104,7 +104,7 @@ function Users_before_Q_objects(&$params)
 		}
 	}
 
-	if ($_GET['Q_Users_newSessionId']) {
+	if (!empty($_GET['Q_Users_newSessionId'])) {
 		try {
 			Q::event("Users/session/put", [], false, false, $fieldsToClear);
 		} catch (Exception $exception) {}
