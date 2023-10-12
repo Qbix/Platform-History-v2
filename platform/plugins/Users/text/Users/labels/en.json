@@ -7,6 +7,7 @@
     "editLabel": "Edit Label",
     "addBtn": "Add",
     "editBtn": "Update",
+    "canManageBtn": "Can manage",
     "titlePlaceholder": "Title",
     "selectOptionTitle_web2": "Native",
     "selectOptionTitle_web3": "Web3"
