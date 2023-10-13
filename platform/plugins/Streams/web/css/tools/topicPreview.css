@@ -4,6 +4,9 @@
     width: 100%;
 }
 /* <create nft form css> */
+.Q_notMobile .Streams_topic_preview_composer.Q_overlay {
+    max-width: 460px;
+}
 .Streams_topic_preview_composer form.Streams_topic_composer {
     padding: 20px;
     background: #fff;
@@ -11,6 +14,14 @@
 }
 
 .Streams_topic_preview_composer label {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(195, 195, 195, .7);
+    padding: 5px 10px;
+    border-radius: 5px;
     color: #000;
 }
 
@@ -21,9 +32,8 @@
     position: relative;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_form_group[data-type=icon] {
-    display: flex;
-    align-items: center;
-    column-gap: 20px;
+    position: relative;
+    text-align: center;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_form_control {
     background: transparent;
@@ -45,10 +55,13 @@
     display: inline-block;
     text-align: center;
     border: 2px dashed rgba(4, 4, 5, 0.1);
-    min-height: 80px;
+    width: 100%;
     position: relative;
     border-radius: 16px;
     padding: 5px;
+}
+.Streams_topic_preview_composer .Streams_topic_composer_container .Streams_topic_preview_icon {
+    width: 100%;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_container .Streams_topic_preview_icon {
     display: block;
@@ -87,9 +100,6 @@
     padding: 0 10px;
     position: relative;
     cursor: pointer;
-}
-.Streams_topic_composer_form_relations .Streams_topic_preview_tool {
-    padding: 0;
 }
 .Streams_topic_preview_tool .Streams_topic_preview_title {
     font-weight: normal;

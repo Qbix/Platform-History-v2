@@ -1,0 +1,111 @@
+.Streams_topic_tool .Streams_topic_bg, .Streams_topic_tool .Streams_topic_image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.Streams_topic_tool .Streams_topic_bg {
+    height: 150px;
+    background-image: url(../../img/courses/Pre-Calculus-Trigonometry.jpg);
+}
+.Streams_topic_tool .Streams_topic_image {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 5px;
+}
+.Streams_topic_tool .Streams_topic_text {
+    width: calc(100% - 120px);
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+    overflow-y: auto;
+    text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000;
+}
+.Streams_topic_tool .Streams_topic_front {
+    height: 150px;
+    color: #fff;
+    padding: 15px 10px 10px 10px;
+    background-color: rgba(0, 0, 0, .6);
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.Q_tool.Streams_topic_tool .Streams_topic_conversation {
+    padding-left: 55px;
+    min-height: 50px;
+}
+.Q_tool.Streams_topic_tool .Streams_topic_conversation:before {
+    font-family: 'qplatform-calendars' !important;
+    font-size: 38px;
+    content: "\e901";
+    height: 40px;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+.Streams_topic_tool .Streams_preview_tool,
+.Streams_topic_tool .Streams_topic_conversation {
+    border-bottom: 1px solid #e8ebee;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.Streams_topic_tool .Streams_preview_tool h2,
+.Streams_topic_tool .Streams_topic_conversation h2 {
+    font-weight: normal;
+    font-size: 20px;
+}
+.Streams_topic_tool .Streams_preview_tool_image {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.Streams_topic_tool .Streams_preview_tool_image:before {
+
+}
+.Streams_topic_tool .Streams_preview_tool_right {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 5px;
+    top: 10px;
+    text-align: center;
+}
+.Streams_topic_tool .Streams_preview_tool_right .Streams_preview_tool_amount {
+    display: none;
+    color: blue;
+}
+.Streams_topic_tool .Streams_preview_tool[data-selected=true] .Streams_preview_tool_amount {
+    display: block;
+}
+.Streams_topic_tool .Streams_preview_tool_right .Streams_preview_tool_check {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #d5dadf;
+    border-radius: 50%;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.Streams_topic_tool .Streams_preview_tool[data-selected=true] .Streams_preview_tool_check {
+    background-image: url(../../img/icon_selected.png);
+}
+.Streams_topic_tool .Streams_preview_tool_content {
+    width: calc(100% - 85px);
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.Streams_topic_relations .Streams_preview_tool {
+    padding: 0;
+}
