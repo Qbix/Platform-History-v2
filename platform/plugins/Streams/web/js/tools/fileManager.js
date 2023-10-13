@@ -35,6 +35,10 @@
         {
             onSelect: new Q.Event(),
             //openInDialog: true,
+            filter: {
+                streamTypes:  null, //array or string
+                relationTypes: null,
+            },
             currentDirStreamName: 'Streams/fileManager/main',
             history: {streams:[], currentIndex:0}
         },
@@ -326,7 +330,9 @@
                 }, {
                     method: 'get',
                     fields: {
-                        currentDirStreamName: tool.state.currentDirStreamName
+                        currentDirStreamName: tool.state.currentDirStreamName,
+                        relationTypes: tool.state.filter.streamTypes,
+                        streamTypes: tool.state.filter.relationTypes
                     }
                 });
             },
@@ -457,7 +463,7 @@
 
                 dialogInner.appendChild(tool.fileManagerEl);
                 dialogCon.appendChild(dialogInner);
-                (elementToShowIn || document.body).insertBefore(dialogCon, (elementToShowIn || document.body).firstChild);
+                (elementToShowIn || document.body).appendChild(dialogCon);
                 tool.refresh();
             },
             closeDialog: function () {
