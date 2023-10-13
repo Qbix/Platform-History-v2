@@ -188,7 +188,11 @@ Q.exports(function(Users, Streams) {
 							userChooserTool.stateChanged("resultsHeight");
 							userChooserTool.state.onChoose.set(function (userId, avatar) {
 								var contacts = $eContacts.data("contacts") || {};
-								contacts[userId] = {id: userId, name: avatar.displayName(), prefix: "user"}
+								contacts[userId] = {
+									id: userId, 
+									name: avatar.displayName(),
+									prefix: "user"
+								};
 	
 								_renderInviteList(contacts, $eContacts);
 	
@@ -211,7 +215,7 @@ Q.exports(function(Users, Streams) {
 	
 							var params = {
 								filter: "Users",
-								data: $eContacts.data("contacts") || null,
+								contacts: $eContacts.data("contacts") || null,
 								identifierTypes: options.identifierTypes
 							};
 	
@@ -336,7 +340,7 @@ Q.exports(function(Users, Streams) {
 	
 											var params = {
 												prefix: "Users",
-												data: $eContacts.data("contacts") || null,
+												contacts: $eContacts.data("contacts") || null,
 												identifierTypes: Streams.invite.options.identifierTypes
 											};
 	
@@ -422,7 +426,11 @@ Q.exports(function(Users, Streams) {
 											userChooserTool.stateChanged("resultsHeight");
 											userChooserTool.state.onChoose.set(function (userId, avatar) {
 												var contacts = $eContacts.data("contacts") || {};
-												contacts[userId] = {id: userId, name: avatar.displayName(), prefix: "user"}
+												contacts[userId] = {
+													id: userId,
+													name: avatar.displayName(),
+													prefix: "user"
+												}
 	
 												_renderInviteList(contacts, $eContacts);
 	

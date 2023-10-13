@@ -5,15 +5,16 @@ Q.exports(function (Users, priv) {
 	 * @class Users.Dialogs
 	 */
     /**
-     * Show a dialog with contacts.
+     * Show a dialog to select contacts in native contact picker
      * @static
      * @method contacts
      * @param {object} [options]
+     * @param {String} [options.contacts]
      * @param {Function} [callback] The function to call after dialog is activated
      */
     return function Users_Dialogs_contacts(options, callback) {
-        var allOptions = Q.extend({}, Users.Dialogs.contacts.options, options);
-        var selectedContacts = allOptions.data || {};
+        var o = Q.extend({}, Users.Dialogs.contacts.options, options);
+        var selectedContacts = o.contacts || {};
 
         Q.addStylesheet('{{Users}}/css/Users/contacts.css', {slotName: 'Users'});
 
@@ -147,7 +148,7 @@ Q.exports(function (Users, priv) {
             Q.Dialogs.push({
                 title: text.title,
                 template: {
-                    name: allOptions.templateName,
+                    name: o.templateName,
                     fields: {
                         contacts: _groupContacts(contacts),
                         isCordova: Q.info.isCordova,
@@ -255,7 +256,7 @@ Q.exports(function (Users, priv) {
 
                         method(function(contactId){
                             Users.chooseContacts(function () {
-                                Q.Template.render(allOptions.templateName, {
+                                Q.Template.render(o.templateName, {
                                     contacts: _groupContacts(this),
                                     text: text
                                 }, function (err, html) {

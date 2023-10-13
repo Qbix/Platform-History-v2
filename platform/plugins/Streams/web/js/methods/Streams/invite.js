@@ -524,9 +524,7 @@ Q.exports(function() {
                         if (Q.isEmpty(r)) {
                             return;
                         }
-                        for (var option in r) {
-                            o[option] = r[option];
-                        }
+                        o.assign = r;
                         if (r.sendBy) {
                             _sendBy(r, text);
                         } else {
