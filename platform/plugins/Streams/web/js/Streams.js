@@ -1026,7 +1026,9 @@ Streams.Dialogs = Q.Method.define({
             photo: true
         }       
     }),
-}, '{{Streams}}/js/methods/Streams/Dialogs');
+}, '{{Streams}}/js/methods/Streams/Dialogs', function () {
+	return [Users, Streams];
+});
 
 /**
  * @class Streams
