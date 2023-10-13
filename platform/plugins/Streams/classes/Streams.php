@@ -3895,7 +3895,7 @@ abstract class Streams extends Base_Streams
 
 		$asUserDisplayName = Streams::displayName($asUser);
 		
-		$displayName = Q::ifset($options, 'displayName', Q::ifset($options, 'name', $asUserDisplayName));
+		$displayName = Q::ifset($options, 'displayName', $asUserDisplayName);
 		$icon = Q::ifset($options, 'icon', null);
 
 		foreach ($raw_userIds as $userId) {
