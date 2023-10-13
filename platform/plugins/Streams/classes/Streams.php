@@ -3659,6 +3659,9 @@ abstract class Streams extends Base_Streams
 	 *  @param {array} [$options.permissions] array of additional permissions to grant
 	 *  @param {timestamp} [$_REQUEST.expires] you can pass a timestamp that takes place in the future
 	 *	@param {string} [$options.displayName] the display name to use to represent the inviting user
+	 *	@param {array} [$options.assign] optionally use this to assign fields to the invited user
+	 *  @param {string} [$options.assign.firstName] the first name to assign to the invited user
+	 *  @param {string} [$options.assign.lastName] the last name to assign to the invited user
 	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
 	 *	@param {array} [$options.template] Directory for custom templates (email.handlebars, mobile.handlebars, device.handlebars).
@@ -3684,7 +3687,7 @@ abstract class Streams extends Base_Streams
 	{
 		$options = Q::take($options, array(
 			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'expires', 'asUserId', 'html',
-			'addLabel', 'addMyLabel', 'name', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
+			'addLabel', 'addMyLabel', 'assign', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
 			'templateDir', 'icon', 'userId'
 		));
 		
@@ -3910,12 +3913,11 @@ abstract class Streams extends Base_Streams
 				Users_Contact::addContact($asUserId, $myLabels, $userId, null, $asUserId2, true);
 			}
 
-			if ($displayName) {
+			$assign = Q::ifset($options, 'assign', array());
+			if ($assign) {
 				try {
-					Q::event("Streams/basic/post", array(
-						"userId" => $userId,
-						"fullName" => $displayName
-					));
+					$assign['userId'] = $userId;
+					Q::event("Streams/basic/post", $assign);
 				} catch (Exception $e) {}
 			}
 			if ($icon) {
