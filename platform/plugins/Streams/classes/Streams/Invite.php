@@ -308,9 +308,9 @@ class Streams_Invite extends Base_Streams_Invite
 			$participant->publisherId = $stream->publisherId;
 			$participant->streamName = $stream->name;
 			$participant->userId = $userId;
-			$participant->state = "participating";
-			$participant->subscribed = "yes";
-			if (!$participant->retrieve()) {
+			if (!$participant->retrieve()
+			|| $participant->state != "participating"
+			|| $participant->subscribed != "yes") {
 				try {
 					$extra = Q::ifset($options, 'extra', array());
 					$configExtra = Streams_Stream::getConfigField($stream->type, array(

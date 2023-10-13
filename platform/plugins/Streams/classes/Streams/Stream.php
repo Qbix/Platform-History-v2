@@ -1151,6 +1151,8 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * If the user is subscribed, get the Streams_Subscription object.
 	 * Otherwise, returns false, or null if the user isn't logged in.
+	 * Note that the Streams_Participant->subscribed of the user might be "no",
+	 * in which case the subscription would be currently inactive.
 	 * @param {string} $ofUserId Defaults to logged-in user's id, if any.
 	 * @return {Streams_Subscription|false|null}
 	 */
