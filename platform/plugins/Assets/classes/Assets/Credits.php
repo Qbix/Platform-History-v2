@@ -228,7 +228,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => $content,
-			'byClientId' => Q::ifset($more, 'publisherId', null),
 			'instructions' => $instructions_json
 		));
 	}
@@ -289,7 +288,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, @compact('amount')),
-			'byClientId' => Q::ifset($instructions, 'publisherId', null),
 			'instructions' => Q::json_encode($instructions)
 		));
 
@@ -384,7 +382,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$content = Q::ifset($text, 'messages', $type, 'content', "Sent {{amount}} credits");
 		$from_stream->post($fromUserId, array(
 			'type' => $type,
-			'byClientId' => $toUserId,
 			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
 		));
@@ -401,7 +398,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$content = Q::ifset($text, 'messages', $type, 'content', "Received {{amount}} credits");
 		$to_stream->post($toUserId, array(
 			'type' => $type,
-			'byClientId' => $fromUserId,
 			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
 		));

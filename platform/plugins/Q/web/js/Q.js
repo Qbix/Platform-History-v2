@@ -7613,15 +7613,15 @@ Q.Browser = {
 	 */
 	detect: function() {
 		var data = this.searchData(this.dataBrowser);
-		var browser = (data && data.identity) || "An unknown browser";
+		var browser = (data && data.identity) || "unknownBrowser";
 		
 		var version = (this.searchVersion(navigator.userAgent)
 			|| this.searchVersion(navigator.appVersion)
-			|| "an unknown version").toString();
+			|| "?").toString();
 		var dotIndex = version.indexOf('.');
 		var mainVersion = version.substring(0, dotIndex != -1 ? dotIndex : version.length);
 		var OSdata = this.searchData(this.dataOS);
-		var OS = (OSdata && OSdata.identity) || "an unknown OS";
+		var OS = (OSdata && OSdata.identity) || "unknownOS";
 		var engine = '', ua = navigator.userAgent.toLowerCase();
 		if (ua.indexOf('webkit') != -1) {
 			engine = 'webkit';
@@ -7630,8 +7630,7 @@ Q.Browser = {
 		} else if (ua.indexOf('presto') != -1) {
 			engine = 'presto';
 		}
-		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
-			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
+		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent);
 		var isStandalone = navigator.standalone
 			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
 			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
@@ -9871,7 +9870,9 @@ Q.clientId = function () {
 	var ret = Q.clientId.value = (detected.device || "desktop").substring(0, 4)
 		+ "-" + Q.normalize.memoized(detected.OS.substring(0, 3))
 		+ "-" + Q.normalize.memoized(detected.name.substring(0, 3))
-		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
+		+ "-" + detected.mainVersion + (
+			detected.isWebView ? "n": (detected.isStandalone ? "s" : "w"
+		))
 		+ "-" + code.toString(36);
 	storage.setItem("Q.clientId", ret);
 	return ret;
