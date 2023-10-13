@@ -3,12 +3,12 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: baseline;
-    row-gap: 20px;
-    column-gap: 20px;
-}
-.Q_mobile .Users_list_tool {
     row-gap: 10px;
     column-gap: 10px;
+}
+.Q_mobile .Users_list_tool {
+    row-gap: 5px;
+    column-gap: 5px;
 }
 .Users_list_tool .Users_avatar_name {
     display: block;
