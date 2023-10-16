@@ -9,6 +9,7 @@
  */
 Q.Tool.define("Streams/topic", function(options) {
 	var tool = this;
+	var $toolElement = $(tool.element);
 	var state = this.state;
 
 	Q.Streams.get(state.publisherId, state.streamName, function (err) {
@@ -17,15 +18,100 @@ Q.Tool.define("Streams/topic", function(options) {
 			return;
 		}
 
-		Q.handle(tool.refresh, tool, [this]);
+		var stream = this;
+
+		$toolElement.on(Q.Pointer.fastclick, ".Streams_topic_conversation", function () {
+			Q.invoke({
+				title: tool.text.topic.Conversation,
+				content: $("<div>").tool("Streams/chat", {
+					publisherId: stream.fields.publisherId,
+					streamName: stream.fields.name
+				}),
+				trigger: tool.element,
+				onActivate: function (options, index, div, data) {
+
+				}
+			});
+		});
+
+		Q.handle(tool.refresh, tool, [stream]);
 	});
 
+	Q.each(state.creatable, function (index, streamType) {
+		var toolName = streamType + "/preview";
+		tool.element.forEachTool(toolName, function () {
+			this.state.onInvoke.set(function () {
+				var previewTool = this;
+				var streamsPreviewTool = Q.Tool.from(this.element, "Streams/preview");
+				if (!previewTool) {
+					return console.warn(toolName + ": preview tool not found");
+				}
+
+				// if composer
+				if (!streamsPreviewTool.state.streamName) {
+					return;
+				}
+
+				Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
+					if (err) {
+						return;
+					}
+
+					var stream = this;
+					var toolName, toolOptions;
+					switch(streamType) {
+						case "Streams/video":
+							toolName = "Q/video";
+							toolOptions = {
+								url: stream.videoUrl() || stream.fileUrl(),
+								clipStart: stream.getAttribute('clipStart'),
+								clipEnd: stream.getAttribute('clipEnd')
+							};
+							break;
+						case "Streams/audio":
+							toolName = "Q/audio";
+							toolOptions = {
+								action: "player",
+								url: stream.fileUrl(),
+								clipStart: stream.getAttribute('clipStart'),
+								clipEnd: stream.getAttribute('clipEnd')
+							};
+							break;
+						case "Streams/pdf":
+							toolName = "Q/pdf";
+							toolOptions = {
+								url: stream.fileUrl(),
+								clipStart: stream.getAttribute('clipStart'),
+								clipEnd: stream.getAttribute('clipEnd')
+							};
+							break;
+						case "Streams/topic":
+							toolName = "Streams/topic";
+							toolOptions = {};
+							break;
+						default:
+							throw new Q.Exception(streamType + " not recognised");
+					}
+
+					Q.invoke({
+						title: stream.fields.title,
+						content: $("<div>").tool(toolName, toolOptions),
+						trigger: tool.element,
+						onActivate: function (options, index, div, data) {
+
+						}
+					});
+				});
+			}, tool);
+		});
+	});
 },
 
 {
 	publisherId: null,
 	streamName: null,
-	onConversation: new Q.Event()
+	creatable: ["Streams/video", "Streams/audio", "Streams/pdf"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
+
 },
 
 {
@@ -35,7 +121,7 @@ Q.Tool.define("Streams/topic", function(options) {
 		var $te = $(this.element);
 
 		Q.Template.render('Streams/topic/tool', {
-				src: stream.iconUrl(50),
+				src: stream.iconUrl(200),
 				title: stream.fields.title,
 				content: stream.fields.content
 		}, function (err, html) {
@@ -51,14 +137,13 @@ Q.Tool.define("Streams/topic", function(options) {
 				streamName: stream.fields.name,
 				relationType: "Streams/subtopic",
 				sortable: true,
-				creatable: {
-					'Streams/video': {title: "Add video"},
-					'Streams/audio': {title: "Add audio"},
-					'Streams/pdf': {title: "Add PDF"},
-					//TODO: make topics browser in topic preview tool and use it instead composer to select already created topic
-					//'Streams/topic': {title: "Add topic"}
-				}
-
+				creatable: (function () {
+					var creatable = {};
+					Q.each(state.creatable, function (i, streamType) {
+						creatable[streamType] = {title: Q.getObject([streamType, "newItem"], tool.text.types) || "New " + streamType};
+					});
+					return creatable;
+				})()
 			}).activate();
 		});
 	}

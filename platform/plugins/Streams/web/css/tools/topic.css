@@ -3,17 +3,12 @@
     background-size: cover;
     background-position: center;
 }
-.Streams_topic_tool .Streams_topic_bg {
-    height: 150px;
-    background-image: url(../../img/courses/Pre-Calculus-Trigonometry.jpg);
-}
 .Streams_topic_tool .Streams_topic_image {
     width: 100px;
     height: 100px;
     margin-right: 10px;
     display: inline-block;
     vertical-align: top;
-    background-color: rgba(255,255,255,.5);
     border-radius: 5px;
 }
 .Streams_topic_tool .Streams_topic_text {
