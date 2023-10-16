@@ -81,6 +81,7 @@
 				field: 'title',
 				inplaceType: 'text'
 			},
+			onInvoke: new Q.Event(),
 			onRefresh: new Q.Event()
 		},
 
@@ -99,13 +100,17 @@
 				var inplace = null;
 				var icon = null;
 
+				$toolElement.on(Q.Pointer.fastclick, function () {
+					Q.handle(state.onInvoke, tool, [stream]);
+				});
+
 				if (Q.Streams.isStream(stream)) {
 					tool.stream = stream;
 
 					stream.onAttribute().set(function (fields, k) {
-						Q.Streams.Stream.refresh(previewState.publisherId, previewState.streamName, function () {
+						stream.refresh(function () {
 							tool.refresh(this);
-						});
+						}, {messages: true});
 					}, tool);
 
 					// set edit action
@@ -114,7 +119,7 @@
 						state.isComposer = false;
 						previewState.actions.actions.edit = function () {
 							tool.composer(function () {
-								Q.Streams.Stream.refresh(previewState.publisherId, previewState.streamName, null, {messages: true});
+								stream.refresh(null, {messages: true});
 							});
 						};
 						tool.preview.actions();
