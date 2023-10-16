@@ -1,8 +1,4 @@
 (function (Q, $, window, undefined) {
-
-var Users = Q.Users;
-var Streams = Q.Streams;
-
 /**
  * Streams/topic/preview tool.
  * Renders a tool to preview topic
@@ -12,6 +8,7 @@ var Streams = Q.Streams;
  */
 Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, preview) {
     var tool = this;
+    var $toolElement = $(tool.element);
     var state = this.state;
     tool.preview = preview;
 
@@ -20,8 +17,8 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
     preview.state.creatable.preprocess = tool.composer.bind(tool);
 
     if (preview.state.streamName) {
-        $(tool.element).on(Q.Pointer.fastclick, function () {
-            Q.handle(state.onInvoke, tool, [tool.stream]);
+        $toolElement.on(Q.Pointer.fastclick, function () {
+            Q.handle(state.onInvoke, tool, [tool.stream, $(".Streams_course_image", $toolElement.closest(".Streams_course_tool")).css("background-image")]);
         });
     }
 },
@@ -31,7 +28,18 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         fullSize: "400",
     },
     completed: false,
-    onInvoke: new Q.Event()
+    onInvoke: new Q.Event(function (stream, courseIcon) {
+        var tool = this;
+        Q.invoke({
+            title: stream.fields.title,
+            url: Q.url('topic/' + stream.fields.publisherId + '/' + stream.fields.name.split('/').pop()),
+            columnClass: 'JGR_column_topic',
+            trigger: tool.element,
+            onActivate: function (options, index, div, data) {
+                $(".Streams_topic_bg", div).css("background-image", courseIcon);
+            }
+        });
+    })
 },
 {
     refresh: function (stream) {
@@ -41,6 +49,8 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         var previewState = tool.preview.state;
         tool.stream = stream;
 
+        // this makes visible green checkpoint and progress
+        // TODO: make it work
         $toolElement.attr("data-selected", state.completed);
 
         var fields = {
@@ -60,7 +70,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 inplaceType: "text",
                 publisherId: previewState.publisherId,
                 streamName: previewState.streamName,
-            }, "topic_preview_title_" + tool.stream.fields.name.split("/").pop())
+            }, "topic_preview_title_" + stream.fields.name.split("/").pop())
             .activate();
             $(".Streams_topic_preview_content", tool.element).tool("Streams/inplace", {
                 editable: false,
@@ -68,15 +78,15 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 inplaceType: "text",
                 publisherId: previewState.publisherId,
                 streamName: previewState.streamName,
-            }, "topic_preview_description_" + tool.stream.fields.name.split("/").pop())
-                .activate();
+            }, "topic_preview_description_" + stream.fields.name.split("/").pop())
+            .activate();
 
             if (stream.testWriteLevel('edit')) {
                 previewState.actions.actions = previewState.actions.actions || {};
                 if (!previewState.actions.actions.edit) {
                     previewState.actions.actions.edit = function () {
                         tool.update(function () {
-                            Q.Streams.Stream.refresh(previewState.publisherId, previewState.streamName, function () {
+                            stream.refresh(function () {
                                 tool.preview.icon($("img.Streams_topic_preview_icon", tool.element)[0]);
                             }, {
                                 changed: {icon: true},
@@ -107,7 +117,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
             var newItem = response.slots.newItem;
             previewState.publisherId = newItem.publisherId;
             previewState.streamName = newItem.streamName;
-            Streams.get(previewState.publisherId, previewState.streamName, function (err) {
+            Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
                 if (err) {
                     return;
                 }
@@ -138,7 +148,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 
         // need to update tool.stream
         // actually on this stage stream should be cached, so Streams.get is just reading stream from cache, hence it can be used as synchronous
-        Streams.get(publisherId, streamName, function () {
+        Q.Streams.get(publisherId, streamName, function () {
             tool.stream = this;
         });
 
