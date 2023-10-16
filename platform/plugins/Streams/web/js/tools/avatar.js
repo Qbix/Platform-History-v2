@@ -350,9 +350,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}, tool);
 		}
 	}
-}
-
-);
+});
 
 Q.Template.set('Users/avatar/loading', '{{#if state.icon}}<img src="{{{src}}}" alt="{{alt}}" class="Users_avatar_loading Users_avatar_icon Users_avatar_icon_{{size}}">{{else}}...{{/if}}');
 Q.Template.set('Users/avatar/icon', '<img src="{{{src}}}" alt="{{alt}}" class="Users_avatar_icon Users_avatar_icon_{{size}}">');
