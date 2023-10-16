@@ -140,7 +140,7 @@ Q.exports(function() {
             var rsd = r.data;
             var rss = r.stream;
             var t;
-            switch (o.sendBy) {
+            switch (r.sendBy) {
                 case "email":
                     t = Q.extend({
                         url: rsd.url,
@@ -524,7 +524,9 @@ Q.exports(function() {
                         if (Q.isEmpty(r)) {
                             return;
                         }
-                        o.assign = r;
+                        for (var option in r) {
+                            o[option] = r[option];
+                        }
                         if (r.sendBy) {
                             _sendBy(r, text);
                         } else {
