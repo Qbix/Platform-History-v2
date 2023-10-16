@@ -59,7 +59,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             tool.element.addClass('Users_labels_communityRoles');
             state.addToPhonebook = false;
     }
-
+    
     if (state.contactUserId){
         Q.Streams.get(state.contactUserId, 'Streams/user/xid/web3', function(err, stream){
             if (!Q.isEmpty(stream.fields.content)) {
@@ -68,7 +68,14 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             tool.refresh();    
         });
     } else {
-        tool.refresh();            
+        tool.refresh();
+//        
+//        if (state.editable) {
+//            tool.refresh();
+//        } else {
+//            
+//        }
+        
     }
 
     $(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
@@ -195,6 +202,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             fields: {
                                 editable: state.editable,
                                 src: Users.iconUrl($item.data('icon'), 200),
+                                label: $item.data('label'),
                                 title: $item.data('title'),
                                 description:$item.data('description')
                                 
@@ -336,14 +344,84 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                         
                         if ($canManageButton.length == 1) {
                             $canManageButton.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                                tool.element.addClass('Q_loading');
+                                tool.element.addClass('Q_working');
                                 
                                 Q.Dialogs.push({
                                     title: "Can Manage Roles",
                                     apply: true,
-                                    content: "TBD",
-                                    onActivate: function (dialog) {
-                                        tool.element.removeClass('Q_loading');
+                                    content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+                                        userId: state.userId,
+                                        contactUserId: false,
+                                        editable: false,
+                                        filter: {"replace": ['<<< web3/']}
+                                    }),
+                                    onClose: function ($dialog2) {
+                                        return;
+                                        //var selected = dialog.find('li.Q_selected');
+                                        //alert("was selected " + selected.length +"closed");
+                                        // do manageRoles of selected labels
+                                    },
+                                    onActivate: function ($dialog2) {
+                                        tool.element.removeClass('Q_working');
+                                        return;
+                                        // the coide below left as is until fixes simpleweb3 for twodimensional output
+                                        /*
+                                        var configChains = Q.Users.apps.web3;
+                                        var communityAddress, st;
+                                        for(var chain in configChains){
+
+                                            if (!configChains[chain]['appId'] || configChains[chain]['appIdForAuth'] == 'all') {
+                                                continue;
+                                            }
+
+                                            [st, communityAddress] = tool._getCommunityAddress(configChains[chain]['appId']);
+
+                                            if (!st) {
+                                                continue;
+                                            }
+                                            ///-------------------
+                                            Q.req("Users/web3", ["allLabels"], function (err, response) {    
+                                                console.log("tool.state.allRoles");
+                                                console.log(response.slots.allLabels);
+                                                
+                                                var label = $canManageButton.data('label'),
+                                                    chainId, 
+                                                    roleIndex;
+                                                [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
+                                
+                                                var duplicate = {};
+                                                var iRolesIndex;
+                                                iRolesIndex = parseInt(roleIndex) - 1; // short way
+                                                iRolesIndex = response.slots.allLabels.array_1.findIndex(function(x){return x == roleIndex}); //correct way
+                                                
+                                                for(var iGrant in response.slots.allLabels.array_4[iRolesIndex]) {
+                                                    if (Q.isEmpty(duplicate[iGrant])) { 
+                                                        duplicate[iGrant] = 0;
+                                                    }
+                                                    duplicate[iGrant] +=1;
+                                                }
+                                                for(var iRevoke in response.slots.allLabels.array_5[iRolesIndex]) {
+                                                    if (Q.isEmpty(duplicate[iRevoke])) { 
+                                                        duplicate[iRevoke] = 0;
+                                                    }
+                                                    duplicate[iRevoke] +=1;
+                                                }
+                                                for (var i in duplicate) {
+                                                    if (duplicate[i] >=2) {
+                                                        $dialog2.find("[data-label='"+Q.Communities.Web3.Roles.labelPattern(chainId, i)+"']").addClass('Q_selected');
+                                                    }
+                                                }
+                                            }, {
+                                                method: "get",
+                                                fields: {
+                                                    communityAddress: communityAddress,
+                                                    chainId: configChains[chain]['appId']
+                                                }
+                                            });
+                                        }
+                                        */
+                                        
+                                        
                                     }
                                 })
                                 
@@ -534,6 +612,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                                 // mark all web3 roles as validated(means exists on contract)
                                 var allWeb3RoleIds = response.slots.labels.allRoles.array_1;
+                                
                                 for(var index in allWeb3RoleIds){
                                     $(tool.element)
                                     .find('.Users_labels_label[data-label="'+Q.Communities.Web3.Roles.labelPattern(configChains[chain]['appId'], allWeb3RoleIds[index])+'"]')
@@ -715,7 +794,7 @@ Q.Template.set('Users/labels/manage/edit', `
         <input name="title" type="text" value="{{title}}" placeholder="{{titlePlaceholder}}" class="form-control">
     </div>
     <div class="form-group">
-        <button name="canManageLabel" class="Q_button">{{canManageBtn}}</button>
+        <button name="canManageLabel" data-label="{{label}}" class="Q_button">{{canManageBtn}}</button>
     </div>
     <button name="editLabel" class="Q_button">{{editBtn}}</button>
 </div>

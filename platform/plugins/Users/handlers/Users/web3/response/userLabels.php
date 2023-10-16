@@ -13,7 +13,7 @@
  *   @param {string|array} [$params.filter] Optionally filter by specific labels, or label prefixes ending in "/". Can be a comma-separated string
  * @return {array} An array of Users_Label objects.
  */
-function Users_web3_response_labels($params = array())
+function Users_web3_response_userLabels($params = array())
 {
     
 	$req = array_merge($_REQUEST, $params);
@@ -40,16 +40,7 @@ function Users_web3_response_labels($params = array())
     $ret = array();
     $caching = false;
     $cacheDuration = 0;    
-    try {
-
-        $ret['allRoles'] = Users_Web3::execute($abiPathCommunity, $communityAddress, "allRoles()", array(), $chainId, $caching, $cacheDuration);
-		//if ($ret['allRoles']->error) {
-		//	die('[ERROR] from blockchain response' . PHP_EOL);	
-		//}
-    } catch (Exception $e) {
-        die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
-    }
-    
+   
     try {
         
         $tmp = Users_Web3::execute($abiPathCommunity, $communityAddress, "getRoles(address[])", array($walletAddress), $chainId, $caching, $cacheDuration);
