@@ -18,51 +18,22 @@
 	Q.Tool.define("Streams/pdf/preview", "Streams/preview", function (options, preview) {
 		var tool = this;
 		tool.preview = preview;
-		var ps = preview.state;
+		var previewState = preview.state;
 		var state = this.state;
 
-		// set edit action
-		ps.actions.actions = ps.actions.actions || {};
-
-		// only for exist streams set onFieldChanged event - which refresh tool
-		if (ps.streamName) {
-			Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function (err) {
-				if (err) {
-					return;
-				}
-
-				this.onAttribute().set(function (fields, k) {
-					Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
-						tool.refresh(this);
-					});
-				}, tool);
-
-				if (ps.editable && this.testWriteLevel('edit')) {
-					state.isComposer = false;
-					tool.stream = this;
-
-					ps.actions.actions.edit = function () {
-						tool.composer(function () {
-							Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
-						});
-					};
-				}
-			});
-		}
-
-		if (ps.creatable) {
-			if (ps.creatable.clickable) {
-				ps.creatable.clickable.preventDefault = false;
+		if (previewState.creatable) {
+			if (previewState.creatable.clickable) {
+				previewState.creatable.clickable.preventDefault = false;
 			}
 
 			if (state.url) {
-				ps.creatable.options = Q.extend({}, ps.creatable.options, {
+				previewState.creatable.options = Q.extend({}, previewState.creatable.options, {
 					skipComposer: true
 				});
 			}
 
 			// rewrite Streams/preview composer
-			ps.creatable.preprocess = function (_proceed) {
+			previewState.creatable.preprocess = function (_proceed) {
 				// if url specified, just call refresh to build Q/pdf with url
 				if (state.url) {
 					Q.req('Websites/scrape', ['result'], function (err, response) {
@@ -98,7 +69,7 @@
 
 		var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 			tool.text = params.text[1].pdf;
-			ps.onRefresh.add(tool.refresh.bind(tool), tool);
+			previewState.onRefresh.add(tool.refresh.bind(tool), tool);
 		});
 
 		Q.Text.get('Streams/content', p.fill('text'));
@@ -113,7 +84,8 @@
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
-		}
+		},
+		onInvoke: new Q.Event()
 	},
 
 	{
@@ -125,12 +97,17 @@
 		refresh: function (stream) {
 			var tool = this;
 			var state = tool.state;
-			var ps = tool.preview.state;
-			var $te = $(tool.element);
+			var previewState = tool.preview.state;
+			var $toolElement = $(tool.element);
 			var pdfUrl = state.url;
 			var inplace = null;
 
+			$toolElement.on(Q.Pointer.fastclick, function () {
+				Q.handle(state.onInvoke, tool, [stream]);
+			});
+
 			if (Q.Streams.isStream(stream)) {
+				tool.stream = stream;
 				pdfUrl = stream.fileUrl();
 				// set up the inplace options
 				if (state.inplace) {
@@ -138,13 +115,31 @@
 						publisherId: stream.fields.publisherId,
 						streamName: stream.fields.name
 					}, state.inplace);
-					var se = ps.editable;
+					var se = previewState.editable;
 					if (!se || (se !== true && se.indexOf('title') < 0)) {
 						inplaceOptions.editable = false;
 					} else {
-						$te.addClass('Streams_editable_title');
+						$toolElement.addClass('Streams_editable_title');
 					}
 					inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
+				}
+
+				stream.onAttribute().set(function (fields, k) {
+					stream.refresh(function () {
+						tool.refresh(this);
+					}, {messages: true});
+				}, tool);
+
+				// set edit action
+				previewState.actions.actions = previewState.actions.actions || {};
+				if (previewState.editable && stream.testWriteLevel('edit')) {
+					state.isComposer = false;
+					previewState.actions.actions.edit = function () {
+						tool.composer(function () {
+							stream.refresh(null, {messages: true});
+						});
+					};
+					tool.preview.actions();
 				}
 			} else {
 				inplace = state.title;
@@ -154,7 +149,7 @@
 				throw new Q.Error("Streams/pdf/preview: URL undefined");
 			}
 
-			$te.removeClass('Q_uploading');
+			$toolElement.removeClass('Q_uploading');
 
 			var icon = stream.fields.icon;
 			if (!icon.matchTypes('url').length || !icon.match(/\.[png|jpg|gif]/g)) {
@@ -168,9 +163,8 @@
 			}, function (err, html) {
 				if (err) return;
 
-				$te.html(html);
-
-				Q.activate($te);
+				Q.replace(tool.element, html);
+				Q.activate($toolElement);
 			});
 		},
 		/**

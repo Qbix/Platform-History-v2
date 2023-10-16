@@ -23,37 +23,8 @@
 			var ps = preview.state;
 			var state = this.state;
 
-			// set edit action
-			ps.actions.actions = ps.actions.actions || {};
-
 			// if false added tab "Edit" to composer where user can edit stream
 			state.isComposer = true;
-
-			// only for exist streams set onFieldChanged event - which refresh tool
-			if (ps.streamName) {
-				Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function (err) {
-					if (err) {
-						return;
-					}
-
-					this.onAttribute().set(function (fields, k) {
-						Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
-							tool.refresh(this);
-						});
-					}, tool);
-
-					if (ps.editable && this.testWriteLevel('edit')) {
-						state.isComposer = false;
-						tool.stream = this;
-
-						ps.actions.actions.edit = function () {
-							tool.composer(function () {
-								Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
-							});
-						};
-					}
-				});
-			}
 
 			if (ps.creatable) {
 				if (ps.creatable.clickable) {
@@ -133,7 +104,8 @@
 			onLoad: new Q.Event(function () {
 				this.preview.state.onRefresh.add(this.refresh.bind(this), this);
 			}, "Streams/audio"),
-			onRefresh: new Q.Event()
+			onRefresh: new Q.Event(),
+			onInvoke: new Q.Event()
 		},
 
 		{
@@ -145,12 +117,17 @@
 			refresh: function (stream, onLoad) {
 				var tool = this;
 				var state = tool.state;
-				var ps = tool.preview.state;
-				var $te = $(tool.element);
+				var previewState = tool.preview.state;
+				var $toolElement = $(tool.element);
 				var audioUrl = state.url;
 				var inplace = null;
 
+				$toolElement.on(Q.Pointer.fastclick, function () {
+					Q.handle(state.onInvoke, tool, [stream]);
+				});
+
 				if (Q.Streams.isStream(stream)) {
+					tool.stream = stream;
 					audioUrl = stream.fileUrl();
 					// set up the inplace options
 					if (state.inplace) {
@@ -158,13 +135,31 @@
 							publisherId: stream.fields.publisherId,
 							streamName: stream.fields.name
 						}, state.inplace);
-						var se = ps.editable;
+						var se = previewState.editable;
 						if (!se || (se !== true && se.indexOf('title') < 0)) {
 							inplaceOptions.editable = false;
 						} else {
-							$te.addClass('Streams_editable_title');
+							$toolElement.addClass('Streams_editable_title');
 						}
 						inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
+					}
+
+					stream.onAttribute().set(function (fields, k) {
+						stream.refresh(function () {
+							tool.refresh(this);
+						}, {messages: true});
+					}, tool);
+
+					// set edit action
+					previewState.actions.actions = previewState.actions.actions || {};
+					if (previewState.editable && stream.testWriteLevel('edit')) {
+						state.isComposer = false;
+						previewState.actions.actions.edit = function () {
+							tool.composer(function () {
+								stream.refresh(null, {messages: true});
+							});
+						};
+						tool.preview.actions();
 					}
 				} else {
 					inplace = state.title;
@@ -176,7 +171,7 @@
 					//throw new Q.Error("Streams/audio/preview: URL undefined");
 				}
 
-				$te.removeClass('Q_uploading');
+				$toolElement.removeClass('Q_uploading');
 
 				// render a template
 				Q.Template.render('Streams/audio/preview/view', {
@@ -184,12 +179,12 @@
 				}, function (err, html) {
 					if (err) return;
 
-					$te.html(html);
+					Q.replace(tool.element, html);
 
 					Q.activate(tool, function () {
-						var playerBox = state.playerBox = $(".Streams_preview_audio_player", $te);
+						var playerBox = state.playerBox = $(".Streams_preview_audio_player", $toolElement);
 						playerBox.empty();
-						var $durationBox = $(".Streams_preview_audio_duration", $te);
+						var $durationBox = $(".Streams_preview_audio_duration", $toolElement);
 						var pieOptions = state.pie;
 
 						// assign Q/audio player to playerBox
