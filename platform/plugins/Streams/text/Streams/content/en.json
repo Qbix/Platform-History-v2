@@ -481,20 +481,21 @@
         "filterCourses": "filter courses by name"
     },
     "course": {
-        "Title": "Courses",
-        "Description": "",
-        "Enroll": "Enroll in Course"
-    },
-    "newCourse": {
-        "Title": "New Course",
-        "StartFromScratch": "Start from scratch",
-        "TitlePlaceholder": "Course title"
+        "NewCourse": "New Course",
+        "UpdateCourse": "Update Course",
+        "CreateCourse": "Create Course",
+        "AreYouSureDeleteCourse": "Are you sure you want to delete this course",
+        "TitlePlaceholder": "course title...",
+        "DescribeCourse": "describe course...",
+        "CourseIcon": "Course picture",
+        "UploadIcon": "Upload Icon",
+        "Conversation": "Conversation"
     },
     "topic": {
         "NewTopic": "New Topic",
         "UpdateTopic": "Update Topic",
         "CreateTopic": "Create Topic",
-        "AreYouSureDeleteVideo": "Are you sure you want to delete this video",
+        "AreYouSureDeleteTopic": "Are you sure you want to delete this topic",
         "TitlePlaceholder": "topic title...",
         "DescribeTopic": "describe topic...",
         "TopicIcon": "Topic picture",
