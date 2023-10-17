@@ -134,7 +134,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 					if (src) {
 						img.setAttribute('src', Q.url(src));
 						img.removeAttribute('data-lazyload-src');
-						img.addClass('Q_lazy_load');
+						if (!_loaded[src]) {
+							img.addClass('Q_lazy_load');
+						}
+						_loaded[src] = true;
 						if (img.complete) {
 							_loaded();
 						}
@@ -333,5 +336,7 @@ function _createObserver(tool, container) {
 		});
 	}, o);
 }
+
+var _loaded = {};
 
 })(Q, jQuery);
