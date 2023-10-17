@@ -36,10 +36,10 @@ class Users_Web3Transaction extends Base_Users_Web3Transaction
 	 */
 	function updateFromBlockchainReceipt($options = array())
 	{
-		$result = self::fetchBlockchainReceipt($this->chainId, $this->transactionId, $options);
-		if (Web3_Transaction::isMined($receipt)) {
+		$receipt = self::fetchBlockchainReceipt($this->chainId, $this->transactionId, $options);
+		if (Users_Web3Transaction::isMined($receipt)) {
 			$this->status = 'mined';
-			$this->result = $receipt->result;
+			$this->result = json_encode($receipt);
 			return true;
 		}
 		return false;
@@ -58,7 +58,7 @@ class Users_Web3Transaction extends Base_Users_Web3Transaction
 	 */
     static function fetchBlockchainReceipt($appId, $transactionId, $options = array())
     {  
-        list($appInfo, $provider, $rpcUrl) = self::objects($appId);
+        list($appInfo, $provider, $rpcUrl) = Users_Web3::objects($appId);
         $result = null;
 		$attempts = Q::ifset($options, 'attempts', 1);
 		$delay = Q::ifset($options, 'delay', 1);

@@ -28,7 +28,7 @@ function Users_transaction_put($params)
 		'result'
 	), true);
 
-	$fields = Q::take($params, compact('chainId', 'transactionId'));
+	$fields = Q::take($params, array('chainId', 'transactionId'));
 	$web3Transaction = new Users_Web3Transaction($fields);
     if (!$web3Transaction->retrieve()) {
 		throw new Q_Exception_MissingObject(array('name' => 'transaction'));
@@ -42,12 +42,42 @@ function Users_transaction_put($params)
 		if ($web3Transaction->updateFromBlockchainReceipt(compact('attempts'))) {
 			$web3Transaction->save(true);
 		}
-		if (empty($web3Transaction->contract)) {
-			throw new Q_Exception_MissingObject(array('name' => 'transaction->contract'));
+//		if (empty($web3Transaction->contract)) {
+//			throw new Q_Exception_MissingObject(array('name' => 'transaction->contract'));
+//		}
+		
+		// the code below are fixes on Greg's changes
+		// 1. $transaction->contract != $params['contract'] 
+		//	the first is about contract that we initiated transaction,
+		//  but the second is what we need. it's address of instsance which created after calling produce and grab from solidity event
+		// 2. 
+		if (empty($params["contract"])) {
+			throw new Q_Exception(array('name' => 'contract'));
+		} else {
+//			$transaction = $params['transaction'];
+//			$communityId = $transaction->getExtra('communityId');
+//			$contract = $params['contract'];
+
+			$externalTo = new Users_ExternalTo();
+			$externalTo->userId   = $params['communityId'];
+			$externalTo->platform = 'web3';
+			$externalTo->appId    = $params['chainId'];
+			$data = $externalTo->retrieve();
+
+			if (!$data->xid) {
+				$user = Users::fetch($params['communityId'], true);
+				$user->setXid("web3_{$params['chainId']}", $params['contract']);
+				$user->save();
+
+				$externalTo->xid = $params['contract'];
+				$externalTo->save(true); // this also saves externalTo
+			}
 		}
-		Q::event("Users/transaction/mined", array(
-			'transaction' => $web3Transaction
-		));
+		// ask Greg why and how we wil be descrypt instance address from event 
+		//		inside transaction_mined and update ExternalTo
+//		Q::event("Users/transaction/mined", array(
+//			'transaction' => $web3Transaction
+//		));
     }
     
     Q_Response::setSlot("result", true);

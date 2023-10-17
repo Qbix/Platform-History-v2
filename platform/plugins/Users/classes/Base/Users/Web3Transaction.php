@@ -1048,13 +1048,13 @@ return array (
 	 * Retrieves field names for class table
 	 * @method fieldNames
 	 * @static
-	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
+	 * @param {string} [$table_alias=null] If set, the alias is added to each field
 	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('chainId', 'transactionId', 'status', 'contract', 'methodName', 'params', 'fromAddress', 'userId', 'extra', 'result', 'insertedTime', 'updatedTime');
+		$field_names = array('chainId', 'transactionId', 'status', 'contract', 'contractABIName', 'methodName', 'params', 'fromAddress', 'userId', 'extra', 'result', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
