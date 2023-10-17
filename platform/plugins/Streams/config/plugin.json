@@ -80,11 +80,6 @@
 				"defaultSize": "400",
 				"maxStretch": 2
 			},
-			"Streams/course": {
-				"sizes": ["x400", "400x"],
-				"defaultSize": "x400",
-				"maxStretch": 2
-			},
 			"Streams/album": {
 				"sizes": ["40", "50", "80", "200", "400"],
 				"defaultSize": "400",
@@ -380,14 +375,6 @@
 				},
 				"messages": {
 					"Streams/extra/changed": {}
-				}
-			},
-			"Streams/course": {
-				"create": true,
-				"edit": true,
-				"defaults": {
-					"title": "",
-					"icon": "Streams/course"
 				}
 			},
 			"Streams/topic": {
