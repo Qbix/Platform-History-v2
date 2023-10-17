@@ -37,7 +37,7 @@ function Users_transaction_post($params)
 	);
 	Q_Request::requireFields($requiredFields, true);
 
-	$fields = Q::take($params, compact('chainId', 'transactionId'));
+	$fields = Q::take($request, compact('chainId', 'transactionId'));
 	$web3Transaction = new Users_Web3Transaction($fields);
     if ($web3Transaction->retrieve()) {
 		throw new Q_Exception_AlreadyExists(array('source' => 'transaction'));
@@ -46,7 +46,10 @@ function Users_transaction_post($params)
 	foreach ($requiredFields as $f) {
 		$web3Transaction->$f = $request[$f];
 	}
-	$web3Transaction->extra = Q::ifset($request, 'extra', '');
+	
+	if ($request['communityId']) {
+		$web3Transaction->setExtra('communityId', $request['communityId']);
+	}
 	$web3Transaction->userId = $user->id;
     
 	$web3Transaction->status = 'pending';

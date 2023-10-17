@@ -140,7 +140,7 @@ Q.exports(function() {
             var rsd = r.data;
             var rss = r.stream;
             var t;
-            switch (o.sendBy) {
+            switch (r.sendBy) {
                 case "email":
                     t = Q.extend({
                         url: rsd.url,

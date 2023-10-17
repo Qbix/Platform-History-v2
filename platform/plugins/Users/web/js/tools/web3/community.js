@@ -292,7 +292,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                 if (fem) {return console.warn(fem);}
 
             }, {
-                method: "put",
+                method: "post",
                 fields: {
                     communityId: state.communityId,
                     chainId: tx.chainId == 0 ? userParams.selectedChainId : tx.chainId,
@@ -313,7 +313,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
             // it can be processing by cron job
             if (receipt.status == 1) {
                 var event = receipt.events.find(function (event) {
-                    event.event === 'InstanceCreated'
+                    return event.event === 'InstanceCreated'
                 });
                 var instance;
                 [instance, /*instancesCount*/] = event.args;

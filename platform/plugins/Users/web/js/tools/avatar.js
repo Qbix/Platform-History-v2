@@ -70,7 +70,9 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	if (state.className) {
 		$(tool.element).addClass(state.className);
 	}
-	tool.refresh();
+	if (!tool.element.innerHTML) {
+		tool.refresh();
+	}
 },
 
 {
