@@ -18,7 +18,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 
     if (preview.state.streamName) {
         $toolElement.on(Q.Pointer.fastclick, function () {
-            Q.handle(state.onInvoke, tool, [tool.stream, $(".Streams_course_image", $toolElement.closest(".Streams_course_tool")).css("background-image")]);
+            Q.handle(state.onInvoke, tool, [tool.stream, $(".Teaching_course_image", $toolElement.closest(".Teaching_course_tool")).css("background-image")]);
         });
     }
 },
@@ -32,8 +32,12 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         var tool = this;
         Q.invoke({
             title: stream.fields.title,
-            url: Q.url('topic/' + stream.fields.publisherId + '/' + stream.fields.name.split('/').pop()),
-            columnClass: 'JGR_column_topic',
+            name: "topic",
+            content: $("<div>").tool("Streams/topic", {
+                publisherId: stream.fields.publisherId,
+                streamName: stream.fields.name
+            }),
+            columnClass: 'Streams_column_topic',
             trigger: tool.element,
             onActivate: function (options, index, div, data) {
                 $(".Streams_topic_bg", div).css("background-image", courseIcon);
