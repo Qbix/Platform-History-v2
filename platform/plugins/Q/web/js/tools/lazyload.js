@@ -136,14 +136,14 @@ Q.Tool.define('Q/lazyload', function (options) {
 						img.removeAttribute('data-lazyload-src');
 						setTimeout(function () {
 							if (!_loadedImages[src]
-								&& !img.complete) {
-									img.addClass('Q_lazy_load');
-								}
-								_loadedImages[src] = true;
-								if (img.complete) {
-									_loaded();
-								}
-								img.addEventListener('load', _loaded);
+							&& !img.complete) {
+								img.addClass('Q_lazy_load');
+							}
+							_loadedImages[src] = true;
+							if (img.complete) {
+								_loaded();
+							}
+							img.addEventListener('load', _loaded);
 						}, 0);
 					}
 					if (tool.timeouts.get(img)) {
