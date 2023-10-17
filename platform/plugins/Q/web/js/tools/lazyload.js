@@ -134,14 +134,17 @@ Q.Tool.define('Q/lazyload', function (options) {
 					if (src) {
 						img.setAttribute('src', Q.url(src));
 						img.removeAttribute('data-lazyload-src');
-						if (!_loaded[src]) {
-							img.addClass('Q_lazy_load');
-						}
-						_loaded[src] = true;
-						if (img.complete) {
-							_loaded();
-						}
-						img.addEventListener('load', _loaded);
+						setTimeout(function () {
+							if (!_loadedImages[src]
+								&& !img.complete) {
+									img.addClass('Q_lazy_load');
+								}
+								_loadedImages[src] = true;
+								if (img.complete) {
+									_loaded();
+								}
+								img.addEventListener('load', _loaded);
+						}, 0);
 					}
 					if (tool.timeouts.get(img)) {
 						clearTimeout(tool.timeouts.get(img));
@@ -337,6 +340,7 @@ function _createObserver(tool, container) {
 	}, o);
 }
 
-var _loaded = {};
+Q.lazyload = Q.lazyload || {};
+var _loadedImages = Q.lazyload.loadedImages = {};
 
 })(Q, jQuery);
