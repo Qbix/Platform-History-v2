@@ -32,6 +32,7 @@ platform/plugins/Streams/web/img/icons/*
 !platform/plugins/Streams/files/Streams/icons/labels
 platform/plugins/Awards/classes/Composer/vendor
 platform/plugins/Communities/
+platform/plugins/Teaching/
 platform/plugins/Cards/
 platform/plugins/Calendars/
 platform/plugins/Catalogs/
@@ -61,6 +62,7 @@ node_modules/
 platform/plugins/Communities
 platform/plugins/Streams/web/img/icons.lnk
 platform/plugins/Travel
+platform/plugins/Teaching
 
 !composer.json
 composer.lock
