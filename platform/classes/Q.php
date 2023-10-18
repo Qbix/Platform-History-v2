@@ -1615,9 +1615,10 @@ class Q
 	
 	private static function toArrays($value)
 	{
-		$result = (is_object($value) and method_exists($value, 'toArray'))
-			? $value->toArray()
-			: $value;
+		$result = Q::event('Q/json_encode/toArrays', compact('value'), 'before', false, $value);
+		$result = (is_object($result) and method_exists($result, 'toArray'))
+			? $result->toArray()
+			: $result;
 		if (is_array($result)) {
 			foreach ($result as $k => &$v) {
 				$v = self::toArrays($v);

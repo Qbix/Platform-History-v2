@@ -17,6 +17,7 @@
 			}
 		},
 		"handlersBeforeEvent": {
+			"Q/json_encode/toArrays": ["Users/before/Q_json_encode_toArrays"],
 			"Q/objects": ["Users/before/Q_objects"],
 			"Q/responseExtras": ["Users/before/Q_responseExtras"],
 			"Q/sessionExtras": ["Users/before/Q_sessionExtras"],

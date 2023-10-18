@@ -8,7 +8,7 @@ require_once USERS_PLUGIN_DIR.'/vendor/autoload.php';
 //use Web3\RequestManagers\HttpRequestManager;
 use SWeb3\SWeb3; 
 use SWeb3\SWeb3_Contract;
-use phpseclib\Math\BigInteger as BigNumber;
+use phpseclib\Math\BigInteger;
 
 //use SWeb3\ABI; //uncomment when will ordering output p;arams
 /**
@@ -241,12 +241,10 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		return $data;
 	}
-    
-    //function getGasPrice(bool $force_refresh = false) : BigNumber 
         
-    static function _adjust($in) 
+    static function adjustValue($in) 
     {
-        if ($in instanceof phpseclib\Math\BigInteger) {
+        if ($in instanceof BigInteger) {
             return $in->toString();
         } else if (is_string($in) && $in == '0x') {
             return '0x0000000000000000000000000000000000000000';
@@ -254,41 +252,31 @@ class Users_Web3 extends Base_Users_Web3 {
             return $in;
         }
     }
+
     static function adjust($in)
     {
         $out = null;
-//echo 'static function adjust($in)' . PHP_EOL;
-//print_r($in);
-        if ($in instanceof stdClass) {
-            
-            $out = [];
-            foreach ($in as $k => $v) {
-                
-//echo "k = $k" . PHP_EOL;
-                if ((is_string($k) && substr($k, 0, 5) == 'tuple') || ($v instanceof stdClass)) {
-//
-//echo "if (is_string(k) && substr(k, 0, 5) == 'tuple') {" . PHP_EOL;
-//print_r($v);
-                    $out[$k] = self::adjust($v);
-                } else if (is_array($v)) {
-                    $tmp2 = [];
-                    foreach ($v as $k2 => $v2) {
-                        $tmp2[$k2] = self::adjust($v2);
-                    }
-                    $out[$k] = $tmp2;
-                } else {
-                    
-                    $out[$k] = self::_adjust($v);
-                } 
-            }
-            if (count($out) == 1) {
-                $out = $out[array_key_first($out)];
-            }
-            return $out;
-        
-        } else {
-            return self::_adjust($in);
-        }
+        if (!($in instanceof stdClass)) {
+			return self::adjustValue($in);
+		}
+		$out = array();
+		foreach ($in as $k => $v) {
+			if ((is_string($k) && substr($k, 0, 5) == 'tuple') || ($v instanceof stdClass)) {
+				$out[$k] = self::adjust($v);
+			} else if (is_array($v)) {
+				$tmp2 = array();
+				foreach ($v as $k2 => $v2) {
+					$tmp2[$k2] = self::adjust($v2);
+				}
+				$out[$k] = $tmp2;
+			} else {
+				$out[$k] = self::adjustValue($v);
+			} 
+		}
+		if (count($out) == 1) {
+			$out = $out[array_key_first($out)];
+		}
+		return $out;
     }
 
 	/**
