@@ -3876,7 +3876,7 @@ abstract class Streams extends Base_Streams
 		}
 
 		// calculate expireTime
-		$duration = Q_Config::get("Streams", "types", $stream->type, "invite", "duration", false);
+		$duration = Streams_Stream::getConfigField($stream->type, array("invite", "duration"), false);
 		$expireTime = $duration ? strtotime("+$duration seconds") : null;
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
@@ -4107,7 +4107,7 @@ abstract class Streams extends Base_Streams
 		$request->permissions = Q::json_encode($permissions);
 
 		// calculate expireTime
-		$duration = Q_Config::get("Streams", "types", $stream->type, "request", "duration", false);
+		$duration = Streams_Stream::getConfigField($stream->type, array("request", "duration"), false);
 		$request->expireTime = $duration ? strtotime("+$duration seconds") : null;
 		
 		// fill out the rest of the fields
@@ -4561,7 +4561,7 @@ abstract class Streams extends Base_Streams
 		if (isset($result[$type])) {
 			return $result[$type];
 		}
-		$extend = Q_Config::get('Streams', 'types', $type, 'extend', null);
+		$extend = Streams_Stream::getConfigField($type, 'extend', null);
 		if (is_string($extend)) {
 			$extend = array($extend);
 		}

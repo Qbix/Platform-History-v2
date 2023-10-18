@@ -18,7 +18,7 @@ function Assets_NFT_delete ($params) {
 	if (Q_Request::slotName("image")) {
 		$directoryToClear = $stream->iconDirectory();
 		$slotName = "image";
-		$stream->icon = Q_Config::get("Streams", "types", "Assets/NFT", "defaults", "icon", null);
+		$stream->icon = Streams_Stream::getConfigField("Assets/NFT", "defaults", "icon", null);
 		$stream->changed();
 	} elseif (Q_Request::slotName("video")) {
 		$directoryToClear = $stream->uploadsDirectory().DS."video";
