@@ -28,13 +28,13 @@ function Streams_subscription_put($params) {
 		'streamName'  => $streamName
 	))->fetchDbRows(null, '', 'ordinal');
 
-	$types = Q_Config::get('Streams', 'types', $stream->type, 'messages', array());
+	$messages = Streams_Stream::getConfigField($stream->type, 'messages', array());
 
 	if ($subscribed !== 'no') {
 		// update rules
 		while ($item = array_pop($items)) {
 			// join "grouped" message types to $items
-			foreach ($types as $type => $msg) {
+			foreach ($messages as $type => $msg) {
 				if ($msg['title'] == $item['filter']->labels
 				and $type != $item['filter']->types) {
 					$items[] = (object) array(

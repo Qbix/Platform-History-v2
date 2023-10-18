@@ -37,7 +37,7 @@ function Streams_subscription_tool($options) {
 		$subscribed = $streams_participant->subscribed;
 	}
 
-	$types = Q_Config::get('Streams', 'types', $stream->type, 'messages', array());
+	$types = Streams_Stream::getConfigField($stream->type, 'extend', null);
 
 	$messageTypes = array();
 	foreach($types as $type => $msg) {
