@@ -1615,7 +1615,7 @@ class Q
 	
 	private static function toArrays($value)
 	{
-		$result = Q::event('Q/json_encode/toArrays', compact('value'), 'before');
+		$result = Q::event('Q/json_encode/toArrays', compact('value'), 'before', false, $value);
 		$result = (is_object($result) and method_exists($result, 'toArray'))
 			? $result->toArray()
 			: $result;
