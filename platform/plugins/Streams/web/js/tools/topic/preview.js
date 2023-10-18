@@ -24,7 +24,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 },
 {
     imagepicker: {
-        showSize: "400",
+        showSize: "80",
         fullSize: "400",
     },
     completed: false,
@@ -172,7 +172,11 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 var $save = $("button[name=save]", $dialog);
 
                 // apply Streams/preview icon behavior
-                tool.preview.icon($icon[0]);
+                tool.preview.icon($icon[0], null, {
+                    overrideShowSize: {
+                        "": "400.png"
+                    }
+                });
 
                 // create topic
                 $save.on(Q.Pointer.fastclick, function (event) {

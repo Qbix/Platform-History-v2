@@ -2,6 +2,7 @@
     display: inline-block;
     position: relative;
     width: 100%;
+    margin: 5px 0;
 }
 /* <create topic css> */
 .Q_notMobile .Streams_topic_preview_composer.Q_overlay {
@@ -107,8 +108,8 @@
     font-size: 20px;
 }
 .Streams_topic_preview_tool .Streams_topic_preview_icon {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     display: inline-block;
     float: left;
     margin-right: 10px;
