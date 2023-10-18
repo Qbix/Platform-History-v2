@@ -37,10 +37,10 @@ function Streams_subscription_tool($options) {
 		$subscribed = $streams_participant->subscribed;
 	}
 
-	$types = Streams_Stream::getConfigField($stream->type, 'extend', null);
+	$messages = Streams_Stream::getConfigField($stream->type, 'messages', null);
 
 	$messageTypes = array();
-	foreach($types as $type => $msg) {
+	foreach($messages as $type => $msg) {
 		$name = Q::ifset($msg, 'title', $type);
 
 		/*
