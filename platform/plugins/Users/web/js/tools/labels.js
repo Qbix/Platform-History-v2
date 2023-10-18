@@ -356,7 +356,43 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         filter: {"replace": ['<<< web3/']}
                                     }),
                                     onClose: function ($dialog2) {
-                                        return;
+                                        
+                                        //$dialog2.addClass('Q_working');
+                                        var chainId, 
+                                            roleIndex, 
+                                            iChainId, 
+                                            iRoleIndex,
+                                            iLabel,
+                                            label = $canManageButton.data('label');
+                                        [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
+                                        tool.getSelectedLabels(chainId, roleIndex, function (err, ret, opt){
+
+                                            var itWas = Object.keys(ret);
+                                            var selected = $dialog2.find('li.Q_selected'); 
+                                            var itBecame = [];
+                                            for(var i of selected) {
+                                                iLabel = $(i).data('label');
+                                                [iChainId, iRoleIndex] = Q.Communities.Web3.Roles.parsePattern(iLabel);
+                                                if (!itBecame.includes(iRoleIndex)) { 
+                                                    itBecame.push(iRoleIndex);
+                                                }
+                                            }
+                                            
+                                            var togrant = itBecame.filter( function( el ) {return !itWas.includes(el);});
+                                            var torevoke = itWas.filter( function( el ) {return !itBecame.includes(el);});
+                                            
+                                            if (Q.isEmpty(togrant) && Q.isEmpty(torevoke))  {
+                                                //$dialog2.removeClass('Q_working');
+                                                return; //no need to send transaction. 
+                                            }
+                                            Q.Communities.Web3.Roles.manage(opt['communityAddress'], opt['chainId'], null, roleIndex, togrant, torevoke, function(err, ret){
+                                                
+                                                //$dialog2.removeClass('Q_working');
+                                                
+                                            });
+                                            
+                                        });
+                                        
                                         //var selected = dialog.find('li.Q_selected');
                                         //alert("was selected " + selected.length +"closed");
                                         // do manageRoles of selected labels
@@ -364,65 +400,18 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                     onActivate: function ($dialog2) {
                                         tool.element.removeClass('Q_working');
                                         
-                                        var configChains = Q.Users.apps.web3;
-                                        var communityAddress, st;
-                                        
-                                        var label = $canManageButton.data('label'),
-                                            chainId, 
-                                            roleIndex;
+                                        var chainId, 
+                                            roleIndex, 
+                                            label = $canManageButton.data('label');
                                         [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
-                                        for(var chain in configChains){
-
-                                            if (!configChains[chain]['appId'] || configChains[chain]['appIdForAuth'] == 'all') {
-                                                continue;
-                                            }
-
-                                            [st, communityAddress] = tool._getCommunityAddress(configChains[chain]['appId']);
-
-                                            if (!st || chainId != configChains[chain]['appId']) {
-                                                continue;
-                                            }
-                                            ///-------------------
-                                            Q.req("Users/web3", ["allLabels"], function (err, response) {    
-
-                                
-                                                var duplicate = {};
-                                                var iRolesIndex;
-                                                
-                                                iRolesIndex = response.slots.allLabels.array_1.findIndex(function(x){return x == roleIndex}); //correct way
-                                                if (iRolesIndex == -1) {
-                                                    // happens when clicked for old external label after changing contract
-                                                    return;
-                                                }
-
-                                                for(var iGrant of response.slots.allLabels.array_4[iRolesIndex]) {
-                                                    if (Q.isEmpty(duplicate[iGrant])) { 
-                                                        duplicate[iGrant] = 0;
-                                                    }
-                                                    duplicate[iGrant] +=1;
-                                                }
-                                                for(var iRevoke of response.slots.allLabels.array_5[iRolesIndex]) {
-                                                    if (Q.isEmpty(duplicate[iRevoke])) { 
-                                                        duplicate[iRevoke] = 0;
-                                                    }
-                                                    duplicate[iRevoke] +=1;
-                                                }
-                                                for (var i in duplicate) {
-                                                    if (duplicate[i] >=2) {
+                                        
+                                        tool.getSelectedLabels(chainId, roleIndex, function (err, ret){
+                                            for (var i in ret) {
+                                                    if (ret[i] >=2) {
                                                         $dialog2.find("[data-label='"+Q.Communities.Web3.Roles.labelPattern(chainId, i)+"']").addClass('Q_selected');
                                                     }
                                                 }
-                                                
-                                            }, {
-                                                method: "get",
-                                                fields: {
-                                                    communityAddress: communityAddress,
-                                                    chainId: configChains[chain]['appId']
-                                                }
-                                            });
-                                        }
-                                        
-                                        
+                                        });
                                         
                                     }
                                 })
@@ -458,6 +447,59 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             )
         );
         
+    },
+    getSelectedLabels: function(chainId, roleIndex, callback) {
+        var tool = this,
+            st, 
+            communityAddress,
+            configChains = Q.Users.apps.web3,
+            ret = {};
+        for(var chain in configChains){
+
+            if (!configChains[chain]['appId'] || configChains[chain]['appIdForAuth'] == 'all') {
+                continue;
+            }
+
+            [st, communityAddress] = tool._getCommunityAddress(configChains[chain]['appId']);
+
+            if (!st || chainId != configChains[chain]['appId']) {
+                continue;
+            }
+            ///-------------------
+            Q.req("Users/web3", ["allLabels"], function (err, response) {    
+
+                var iRolesIndex;
+
+                iRolesIndex = response.slots.allLabels.array_1.findIndex(function(x){return x == roleIndex}); //correct way
+                if (iRolesIndex == -1) {
+                    // happens when clicked for old external label after changing contract
+                    Q.handle(callback, null, ['role index not found']);
+                    
+                }
+
+                for(var iGrant of response.slots.allLabels.array_4[iRolesIndex]) {
+                    if (Q.isEmpty(ret[iGrant])) { 
+                        ret[iGrant] = 0;
+                    }
+                    ret[iGrant] +=1;
+                }
+                for(var iRevoke of response.slots.allLabels.array_5[iRolesIndex]) {
+                    if (Q.isEmpty(ret[iRevoke])) { 
+                        ret[iRevoke] = 0;
+                    }
+                    ret[iRevoke] +=1;
+                }
+                
+                Q.handle(callback, null, [err, ret, {'communityAddress': communityAddress, 'chainId': chainId}]);
+                
+            }, {
+                method: "get",
+                fields: {
+                    communityAddress: communityAddress,
+                    chainId: configChains[chain]['appId']
+                }
+            });
+        }        
     },
 	/**
      * Handler happens when user clicking by label when editable option == false
