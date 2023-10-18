@@ -366,6 +366,11 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         
                                         var configChains = Q.Users.apps.web3;
                                         var communityAddress, st;
+                                        
+                                        var label = $canManageButton.data('label'),
+                                            chainId, 
+                                            roleIndex;
+                                        [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
                                         for(var chain in configChains){
 
                                             if (!configChains[chain]['appId'] || configChains[chain]['appIdForAuth'] == 'all') {
@@ -374,16 +379,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                                             [st, communityAddress] = tool._getCommunityAddress(configChains[chain]['appId']);
 
-                                            if (!st) {
+                                            if (!st || chainId != configChains[chain]['appId']) {
                                                 continue;
                                             }
                                             ///-------------------
                                             Q.req("Users/web3", ["allLabels"], function (err, response) {    
 
-                                                var label = $canManageButton.data('label'),
-                                                    chainId, 
-                                                    roleIndex;
-                                                [chainId, roleIndex] = Q.Communities.Web3.Roles.parsePattern(label);
                                 
                                                 var duplicate = {};
                                                 var iRolesIndex;
