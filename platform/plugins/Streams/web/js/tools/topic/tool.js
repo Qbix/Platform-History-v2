@@ -110,6 +110,10 @@ Q.Tool.define("Streams/topic", function(options) {
 {
 	publisherId: null,
 	streamName: null,
+	imagepicker: {
+		showSize: "200",
+		fullSize: "400"
+	},
 	creatable: ["Streams/video", "Streams/audio", "Streams/pdf"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
 
 },
@@ -118,10 +122,28 @@ Q.Tool.define("Streams/topic", function(options) {
 	refresh: function (stream) {
 		var tool = this;
 		var state = tool.state;
-		var $te = $(this.element);
+
+		stream.onFieldChanged("icon").set(function (modFields, field) {
+			stream.refresh(function () {
+				stream = this;
+				$(".Streams_topic_image", tool.element).css("background-image", "url("+stream.iconUrl(state.imagepicker.showSize)+")");
+			}, {
+				messages: true,
+				evenIfNotRetained: true
+			});
+		}, tool);
+		stream.onFieldChanged("content").set(function (modFields, field) {
+			stream.refresh(function () {
+				stream = this;
+				Q.replace($(".Streams_topic_text", tool.element)[0], stream.fields.content);
+			}, {
+				messages: true,
+				evenIfNotRetained: true
+			});
+		}, tool);
 
 		Q.Template.render('Streams/topic/tool', {
-				src: stream.iconUrl(200),
+				src: stream.iconUrl(state.imagepicker.showSize),
 				title: stream.fields.title,
 				content: stream.fields.content
 		}, function (err, html) {
