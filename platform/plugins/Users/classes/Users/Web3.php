@@ -143,7 +143,7 @@ class Users_Web3 extends Base_Users_Web3 {
 //			}
 
 			$result = $contract->send($methodName, $params, $extra_data);
-            
+			// TODO 0: create the same as  transaction/post       
 		} else {
             $result = $contract->call($methodName, $params);
         }
@@ -244,7 +244,7 @@ class Users_Web3 extends Base_Users_Web3 {
         
     static function adjustValue($in) 
     {
-        if ($in instanceof BigInteger) {
+        if ($in instanceof phpseclib\Math\BigInteger) {
             return $in->toString();
         } else if (is_string($in) && $in == '0x') {
             return '0x0000000000000000000000000000000000000000';
@@ -256,7 +256,7 @@ class Users_Web3 extends Base_Users_Web3 {
     static function adjust($in)
     {
         $out = null;
-        if (!($in instanceof stdClass)) {
+        if ((!$in instanceof stdClass) && (!is_array($in))) {
 			return self::adjustValue($in);
 		}
 		$out = array();

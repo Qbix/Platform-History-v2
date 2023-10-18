@@ -39,7 +39,8 @@ class Users_Web3Transaction extends Base_Users_Web3Transaction
 		$receipt = self::fetchBlockchainReceipt($this->chainId, $this->transactionId, $options);
 		if (Users_Web3Transaction::isMined($receipt)) {
 			$this->status = 'mined';
-			$this->result = json_encode($receipt);
+			$this->result = Q::json_encode($receipt);
+			//TODO 0: extract reverted from receipt and save $this->reverted
 			return true;
 		}
 		return false;

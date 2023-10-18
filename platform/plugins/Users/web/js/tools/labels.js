@@ -363,9 +363,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                     },
                                     onActivate: function ($dialog2) {
                                         tool.element.removeClass('Q_working');
-                                        return;
-                                        // the coide below left as is until fixes simpleweb3 for twodimensional output
-                                        /*
+                                        
                                         var configChains = Q.Users.apps.web3;
                                         var communityAddress, st;
                                         for(var chain in configChains){
@@ -381,9 +379,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                             }
                                             ///-------------------
                                             Q.req("Users/web3", ["allLabels"], function (err, response) {    
-                                                console.log("tool.state.allRoles");
-                                                console.log(response.slots.allLabels);
-                                                
+
                                                 var label = $canManageButton.data('label'),
                                                     chainId, 
                                                     roleIndex;
@@ -391,16 +387,16 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 
                                                 var duplicate = {};
                                                 var iRolesIndex;
-                                                iRolesIndex = parseInt(roleIndex) - 1; // short way
+                                                
                                                 iRolesIndex = response.slots.allLabels.array_1.findIndex(function(x){return x == roleIndex}); //correct way
                                                 
-                                                for(var iGrant in response.slots.allLabels.array_4[iRolesIndex]) {
+                                                for(var iGrant of response.slots.allLabels.array_4[iRolesIndex]) {
                                                     if (Q.isEmpty(duplicate[iGrant])) { 
                                                         duplicate[iGrant] = 0;
                                                     }
                                                     duplicate[iGrant] +=1;
                                                 }
-                                                for(var iRevoke in response.slots.allLabels.array_5[iRolesIndex]) {
+                                                for(var iRevoke of response.slots.allLabels.array_5[iRolesIndex]) {
                                                     if (Q.isEmpty(duplicate[iRevoke])) { 
                                                         duplicate[iRevoke] = 0;
                                                     }
@@ -411,6 +407,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                         $dialog2.find("[data-label='"+Q.Communities.Web3.Roles.labelPattern(chainId, i)+"']").addClass('Q_selected');
                                                     }
                                                 }
+                                                
                                             }, {
                                                 method: "get",
                                                 fields: {
@@ -419,7 +416,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                 }
                                             });
                                         }
-                                        */
+                                        
                                         
                                         
                                     }

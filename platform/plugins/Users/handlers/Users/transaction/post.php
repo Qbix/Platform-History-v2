@@ -28,7 +28,7 @@ function Users_transaction_post($params)
     $user = Users::loggedInUser(true);
     $request = array_merge($params, $_REQUEST);
     
-	$quota = Users_Quota::check($user->id, '', 'Users/transaction/post');
+	$quota = Users_Quota::check($user->id, '', 'Users/web3/transaction');
 
 	$requiredFields = array(
 		'chainId', 'transactionId', 
