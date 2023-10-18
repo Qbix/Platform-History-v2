@@ -389,7 +389,11 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                 var iRolesIndex;
                                                 
                                                 iRolesIndex = response.slots.allLabels.array_1.findIndex(function(x){return x == roleIndex}); //correct way
-                                                
+                                                if (iRolesIndex == -1) {
+                                                    // happens when clicked for old external label after changing contract
+                                                    return;
+                                                }
+
                                                 for(var iGrant of response.slots.allLabels.array_4[iRolesIndex]) {
                                                     if (Q.isEmpty(duplicate[iGrant])) { 
                                                         duplicate[iGrant] = 0;
