@@ -5,7 +5,6 @@
 /**
  *
  * @class Streams_Topic
- * @extends Base_Streams_Topic
  */
 class Streams_Topic {
 	/**

@@ -835,7 +835,7 @@ Q.Tool.define({
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
 	"Streams/topic/preview": {
 		js: "{{Streams}}/js/tools/topic/preview.js",
-		css: "{{Streams}}/css/tools/topicPreview.css"
+		css: "{{Streams}}/css/tools/previewTopic.css"
 	},
 	"Streams/topic": {
 		js: "{{Streams}}/js/tools/topic/tool.js",

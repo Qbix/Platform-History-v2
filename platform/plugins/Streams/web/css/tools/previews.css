@@ -79,7 +79,6 @@
 .Streams_dialog_pdf .Q_tabbing_container .Q_tabbing_item[data-content=link] label {
 	display: block;
 	margin: 0 auto;
-	width: 90%;
 	white-space: nowrap;
 }
 .Streams_dialog_audio .Q_tabbing_container .Streams_audio_composer_upload_limit,
@@ -173,12 +172,6 @@
 .Streams_dialog_pdf button,
 .Streams_dialog_pdf input{
 	height: 40px;
-}
-.Streams_dialog_audio input,
-.Streams_dialog_video input,
-.Streams_dialog_pdf input{
-	height: 30px;
-	width: 60%;
 }
 .Streams_dialog_audio .Streams_audio_composer_submit button[name=reset],
 .Streams_dialog_video .Streams_video_composer_submit button[name=reset],
