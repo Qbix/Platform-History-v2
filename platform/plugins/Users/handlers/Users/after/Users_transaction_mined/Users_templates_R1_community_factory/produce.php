@@ -1,8 +1,9 @@
 <?php
-function Users_after_Users_transaction_mined_Users_templates_R1_community_factory_produce($params)
+function Users_after_Users_transaction_mined_Users_templates_R1_Community_factory_produce($params)
 {
- 	
-	//TODO 0: additionally need to get cdontract address from transaction receipt (`event InstanceCreated`)
+	//TODO 0: additionally need to get contract address from transaction receipt (`event InstanceCreated`)
+	//		if not present in params contract
+	//		main goal is to update Users_externalTo table and setup address for community user
 	$externalTo = new Users_ExternalTo();
 	$externalTo->userId   = $params['communityId'];
 	$externalTo->platform = 'web3';

@@ -37,7 +37,7 @@
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"],
 			"Q/request/languages": ["Users/after/Q_request_languages"],
 			"Q/analytics": ["Users/after/Q_analytics"],
-			"Users/transaction/mined/Users/templates/R1/community/factory/produce": ["Users/after/Users_transaction_mined/Users_templates_R1_community_factory/produce"]
+			"Users/transaction/mined/Users/templates/R1/Community/factory/produce": ["Users/after/Users_transaction_mined/Users_templates_R1_Community_factory/produce"]
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},

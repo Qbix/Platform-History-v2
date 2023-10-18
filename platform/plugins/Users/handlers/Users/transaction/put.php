@@ -40,34 +40,38 @@ function Users_transaction_put($params)
 	
     if ($transaction->status == "pending"
 	&& $params["status"] == 'mined') {
+		
 		// double-check that it was actually mined
 		// using up to 3 attempts separated by 1 second
 		$attempts = Q_Config::get('Users', 'web3', 'transactions', 'receipt', 'attempts', 3);
-		if ($transaction->updateFromBlockchainReceipt(compact('attempts'))) {
-			$transaction->save(true);
+		if (!$transaction->updateFromBlockchainReceipt(compact('attempts'))) {
+			throw new Q_Exception_AttemptsExceeded();
 		}
+		$transaction->save(true);
 //		if (empty($transaction->contract)) {
 //			throw new Q_Exception_MissingObject(array('name' => 'transaction->contract'));
 //		}
 		$contract = $params['contract'];
+		$chainId = $params['chainId'];
+		$communityId = $params['communityId'];
 		// ask Greg why and how we wil be descrypt instance address from event 
 		//		inside transaction_mined and update ExternalTo
 		if (!empty($transaction->contractABIName)) {
 			Q::event("Users/transaction/mined/"
 				. $transaction->contractABIName . '/'
-				. $transaction->method,
-				compact('transaction', 'contract'),
+				. $transaction->methodName,
+				compact('transaction', 'contract', 'chainId', 'communityId'),
 				'after'
 			);
 		}
 		// WARNING: not recommended to add hooks with these names,
 		// since the same method name might be shared
 		// among multiple types of smart contracts
-		Q::event("Users/transaction/mined/"
-			. $transaction->method,
-			compact('transaction', 'contract'),
-			'after'
-		);
+//		Q::event("Users/transaction/mined/"
+//			. $transaction->methodName,
+//			compact('transaction', 'contract'),
+//			'after'
+//		);
 		
     }
     
