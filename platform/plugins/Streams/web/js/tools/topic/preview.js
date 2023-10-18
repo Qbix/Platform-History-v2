@@ -53,6 +53,8 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         var previewState = tool.preview.state;
         tool.stream = stream;
 
+        stream.observe();
+
         // this makes visible green checkpoint and progress
         // TODO: make it work
         $toolElement.attr("data-selected", state.completed);

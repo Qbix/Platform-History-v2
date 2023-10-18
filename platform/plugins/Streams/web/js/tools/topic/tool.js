@@ -123,6 +123,8 @@ Q.Tool.define("Streams/topic", function(options) {
 		var tool = this;
 		var state = tool.state;
 
+		stream.observe();
+
 		stream.onFieldChanged("icon").set(function (modFields, field) {
 			stream.refresh(function () {
 				stream = this;
