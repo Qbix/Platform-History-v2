@@ -53,7 +53,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         var previewState = tool.preview.state;
         tool.stream = stream;
 
-        stream.observe();
+        stream.retain(tool);
 
         // this makes visible green checkpoint and progress
         // TODO: make it work
@@ -93,7 +93,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     previewState.actions.actions.edit = function () {
                         tool.update(function () {
                             stream.refresh(function () {
-                                tool.preview.icon($("img.Streams_topic_preview_icon", tool.element)[0]);
+
                             }, {
                                 changed: {icon: true},
                                 messages: true,
@@ -174,10 +174,15 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 var $save = $("button[name=save]", $dialog);
 
                 // apply Streams/preview icon behavior
-                tool.preview.icon($icon[0], null, {
-                    overrideShowSize: {
-                        "": "400.png"
-                    }
+                $("<div>").tool("Streams/preview", {
+                    publisherId: tool.stream.fields.publisherId,
+                    streamName: tool.stream.fields.name
+                }).activate(function () {
+                    this.icon($icon[0], null, {
+                        overrideShowSize: {
+                            "": "400.png"
+                        }
+                    });
                 });
 
                 // create topic
