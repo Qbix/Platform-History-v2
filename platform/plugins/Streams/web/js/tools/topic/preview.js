@@ -18,7 +18,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 
     if (preview.state.streamName) {
         $toolElement.on(Q.Pointer.fastclick, function () {
-            Q.handle(state.onInvoke, tool, [tool.stream, $(".Teaching_course_image", $toolElement.closest(".Teaching_course_tool")).css("background-image")]);
+            Q.handle(state.onInvoke, tool, [tool.stream]);
         });
     }
 },
@@ -28,7 +28,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
         fullSize: "400",
     },
     completed: false,
-    onInvoke: new Q.Event(function (stream, courseIcon) {
+    onInvoke: new Q.Event(function (stream) {
         var tool = this;
         Q.invoke({
             title: stream.fields.title,
@@ -40,7 +40,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
             columnClass: 'Streams_column_topic',
             trigger: tool.element,
             onActivate: function (options, index, div, data) {
-                $(".Streams_topic_bg", div).css("background-image", courseIcon);
+                
             }
         });
     })
