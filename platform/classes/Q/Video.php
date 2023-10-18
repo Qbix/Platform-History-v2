@@ -119,7 +119,7 @@ abstract class Q_Video implements Q_Video_Interface {
 		$stream = Q::ifset($options, "stream", null);
 		$cloudConvert = Q_Config::get("Q", "video", "cloud", "convert", array());
 		if ($stream) {
-			$cloudConvert = Q_Config::get("Streams", "types", $stream->type, "video", "cloud", "convert", $cloudConvert);
+			$cloudConvert = Streams_Stream::getConfigField($stream->type, array("video", "cloud", "convert"), $cloudConvert);
 		}
 
 		$converter = Q::ifset($options, 'converter', array_key_first($cloudConvert));
@@ -129,7 +129,7 @@ abstract class Q_Video implements Q_Video_Interface {
 
 		$convertOptions = Q_Config::get("Q", "video", "cloud", "convert", $converter, "options", array());
 		if ($stream) {
-			$convertOptions = Q_Config::get("Streams", "types", $stream->type, "video", "cloud", "convert", $converter, "options", $convertOptions);
+			$convertOptions = Streams_Stream::getConfigField($stream->type, array("video", "cloud", "convert", $converter, "options"), $convertOptions);
 		}
 
 		$options = array_merge($options, $convertOptions);
