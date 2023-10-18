@@ -116,13 +116,23 @@ abstract class Q_Video implements Q_Video_Interface {
 	 */
 	static function convert($filename, $options = array())
 	{
+		$stream = Q::ifset($options, "stream", null);
 		$cloudConvert = Q_Config::get("Q", "video", "cloud", "convert", array());
+		if ($stream) {
+			$cloudConvert = Q_Config::get("Streams", "types", $stream->type, "video", "cloud", "convert", $cloudConvert);
+		}
+
 		$converter = Q::ifset($options, 'converter', array_key_first($cloudConvert));
 		if (!$cloudConvert or !$converter) {
 			return false;
 		}
 
-		$options = array_merge($options, Q_Config::get("Q", "video", "cloud", "convert", $converter, "options", array()));
+		$convertOptions = Q_Config::get("Q", "video", "cloud", "convert", $converter, "options", array());
+		if ($stream) {
+			$convertOptions = Q_Config::get("Streams", "types", $stream->type, "video", "cloud", "convert", $converter, "options", $convertOptions);
+		}
+
+		$options = array_merge($options, $convertOptions);
 
 		$className = "Q_Video_".ucfirst($converter);
 		try {
