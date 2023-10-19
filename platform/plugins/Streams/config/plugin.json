@@ -383,27 +383,6 @@
 				"defaults": {
 					"title": "",
 					"icon": "Streams/topic"
-				},
-				"video": {
-					"cloud": {
-						"convert": {
-							"CloudConvert": {
-								"options": {
-									"convert": {
-										"fps": 0.16,
-										"width": 100,
-										"height": 100,
-										"output_format": "gif",
-										"video_codec": "gif",
-										"engine": "ffmpeg",
-										"fit": "pad", /* Sets the mode of sizing the video. "Max" resizes the video to fit within the width and height, but will not increase the size of the image if it is smaller than width or height. "Crop" resizes the video to fill the width and height dimensions and crops any excess video data. "Scale" enforces the video width and height by scaling. "Pad" resizes the video to the width and height dimensions and keeps the aspect ratio by adding black bars if necessary. */
-										"trim_start": "00:00:00",
-										"trim_end": "00:30:00"
-									}
-								}
-							}
-						}
-					}
 				}
 			},
 			"Streams/text": {
