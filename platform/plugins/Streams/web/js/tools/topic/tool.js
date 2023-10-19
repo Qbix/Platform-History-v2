@@ -160,6 +160,10 @@ Q.Tool.define("Streams/topic", function(options) {
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
 				relationType: "Streams/subtopic",
+				composerPosition: "last",
+				relatedOptions: {
+					ascending: true
+				},
 				sortable: true,
 				creatable: (function () {
 					var creatable = {};
