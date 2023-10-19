@@ -13,6 +13,8 @@
  */
 class Users_Web3Transaction extends Base_Users_Web3Transaction
 {
+	public static $receiptStatusMined = '0x1';
+	public static $receiptStatusReverted = '0x0';
 	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
@@ -37,13 +39,17 @@ class Users_Web3Transaction extends Base_Users_Web3Transaction
 	function updateFromBlockchainReceipt($options = array())
 	{
 		$receipt = self::fetchBlockchainReceipt($this->chainId, $this->transactionId, $options);
-		if (Users_Web3Transaction::isMined($receipt)) {
-			$this->status = 'mined';
-			$this->result = Q::json_encode($receipt);
-			//TODO 0: extract reverted from receipt and save $this->reverted
-			return true;
+		$status = Users_Web3Transaction::getStatus($receipt);
+		if (empty($receipt) || empty($status)) { //pending or smth unexpected
+			return false;
 		}
-		return false;
+		if ($status == self::$receiptStatusMined) {
+			$this->status = 'mined';
+		} else if ($status == self::$receiptStatusReverted) {
+			$this->status = 'rejected';
+		}
+		$this->result = Q::json_encode($receipt);	
+		return true;
 	}
 
 	/**
@@ -83,14 +89,29 @@ class Users_Web3Transaction extends Base_Users_Web3Transaction
      * @param {array} receipt
 	 * @return {boolean}
 	 */
-    static function isMined($receipt) {
+    static function isMined($receipt) 
+	{
         $receipt = (($receipt instanceof stdClass) && isset($receipt->result))
             ? $receipt->result
             : $receipt;
-        return ($receipt->status == '0x1');
+        return ($receipt->status == self::$receiptStatusMined);
     }
-
-		/**
+	/**
+	 * Gets the transaction status
+	 * @method getStatus
+	 * @static
+     * @param {array} receipt
+	 * @return {mixed} 
+	 */
+    static function getStatus($receipt) 
+	{
+        $receipt = (($receipt instanceof stdClass) && isset($receipt->result))
+            ? $receipt->result
+            : $receipt;
+        return $receipt->status ? $receipt->status : null;
+    }
+	
+	/**
 	 * @method getAllExtras
 	 * @return {array} The array of all extras set in the stream
 	 */
