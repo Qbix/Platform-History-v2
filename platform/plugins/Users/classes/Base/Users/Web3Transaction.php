@@ -459,7 +459,7 @@ return array (
                or $value instanceof Db_Range) {
 			return array('status', $value);
 		}
-		if (!in_array($value, array('pending','mined')))
+		if (!in_array($value, array('pending','mined','signed','rejected')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".status");
 		return array('status', $value);			
 	}
@@ -475,7 +475,7 @@ return array (
   0 => 
   array (
     0 => 'enum',
-    1 => '\'pending\',\'mined\'',
+    1 => '\'pending\',\'mined\',\'signed\',\'rejected\'',
     2 => '',
     3 => false,
   ),

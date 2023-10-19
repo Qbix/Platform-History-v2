@@ -59,13 +59,13 @@ class Users_Web3 extends Base_Users_Web3 {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
-
+		
 		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "'Users/apps/$appId/chainId'"
 			));
 		}
-        	
+        $chainIdHex = $chainId;
         // another stupid thing 
         //      chainId should be an interger.
         //      if chainId is a hex, then in getRaw
@@ -98,8 +98,10 @@ class Users_Web3 extends Base_Users_Web3 {
         // ability to put already decoded string like "{'a':b, ...}"
         try {
 			Q::json_decode($contractABI, true);
+			$contractABIName = 'already in json';
             // $contractABI already decoded into string
 		} catch (Exception $e) {
+			$contractABIName = $contractABI;
             // else try by default: 
             //  get name of file; 
             //  get content
@@ -117,6 +119,11 @@ class Users_Web3 extends Base_Users_Web3 {
         }
         
         if ($privateKey) {
+			// need to validate privateKey
+			// privateKey should correct extract to public
+			// otherwise provider will return shit like this 
+			// "Provider return error with code: "-32000" and message "insufficient funds for gas * price + value"
+			// despite the fact that there are enough funds in the wallet and options: "gasPrice", "gasLimit"
             $provider->setPersonalData($from, $privateKey);
         }
 			
@@ -143,7 +150,30 @@ class Users_Web3 extends Base_Users_Web3 {
 //			}
 
 			$result = $contract->send($methodName, $params, $extra_data);
-			// TODO 0: create the same as  transaction/post       
+			// TODO 0: create the same as  transaction/post      
+			if ($result->error) {
+				throw new Q_Exception_ProviderErrors(array('code' => $result->error->code, 'message' => $result->error->message));
+				
+			}
+
+			$web3Transaction = new Users_Web3Transaction(array(
+				'chainId' => $chainIdHex, 
+				'transactionId' => $result->result
+			));
+			if ($web3Transaction->retrieve()) {
+				throw new Q_Exception_AlreadyExists(array('source' => 'transaction'));
+			}
+			$web3Transaction->userId = ''; // no user 
+			$web3Transaction->fromAddress = $from;
+			$web3Transaction->status = 'signed';
+			$web3Transaction->methodName = $methodName;
+			$web3Transaction->contractABIName = $contractABIName;
+			$web3Transaction->contract = $contractAddress;
+			$web3Transaction->params = Q::json_encode($params);
+			$web3Transaction->extra = '';
+			$web3Transaction->result = Q::json_encode($result);
+			$web3Transaction->save();
+	
 		} else {
             $result = $contract->call($methodName, $params);
         }
