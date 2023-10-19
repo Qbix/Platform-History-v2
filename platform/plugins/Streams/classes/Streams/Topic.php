@@ -35,7 +35,7 @@ class Streams_Topic {
 			"streamName" => $category->name,
 			"type" => "new"
 		));
-		$stream->join(compact("userId"));
+
 		return $stream;
 	}
 };

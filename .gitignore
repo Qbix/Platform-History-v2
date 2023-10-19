@@ -30,6 +30,8 @@ platform/plugins/Streams/files/Streams/icons/*
 platform/plugins/Streams/web/img/icons/*
 !platform/plugins/Streams/files/Streams/icons/default
 !platform/plugins/Streams/files/Streams/icons/labels
+!platform/plugins/Streams/files/Streams/icons/Streams/topic
+!platform/plugins/Streams/files/Streams/icons/Teaching
 platform/plugins/Awards/classes/Composer/vendor
 platform/plugins/Communities/
 platform/plugins/Teaching/
