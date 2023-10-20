@@ -48,16 +48,16 @@ Q.exports(function() {
             publisherId: publisherId,
             streamName: streamName
         });
-        var o = Q.extend({
+        options = Q.extend({
             uri: 'Streams/invite'
         }, Q.Streams.invite.options, options);
-        o.publisherId = publisherId;
-        o.streamName = streamName;
-        if (typeof o.appUrl === 'function') {
-            o.appUrl = o.appUrl();
+        options.publisherId = publisherId;
+        options.streamName = streamName;
+        if (typeof options.appUrl === 'function') {
+            options.appUrl = options.appUrl();
         }
         function _request() {
-            return Q.req(o.uri, ['data'], function (err, response) {
+            return Q.req(options.uri, ['data'], function (err, response) {
                 var msg = Q.firstErrorMessage(err, response && response.errors);
                 if (msg) {
                     alert(msg);
@@ -67,7 +67,7 @@ Q.exports(function() {
                 Q.Streams.Participant.get.cache.removeEach([publisherId, streamName]);
                 Q.Streams.get.cache.removeEach([publisherId, streamName]);
                 var rsd = response.slots.data;
-                Q.handle(o && o.callback, null, [err, rsd]);
+                Q.handle(options && options.callback, null, [err, rsd]);
                 Q.handle(callback, null, [err, rsd]);
                 var emailAddresses = [];
                 var mobileNumbers = [];
@@ -82,8 +82,8 @@ Q.exports(function() {
                     // if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
                     // 	return;
                     // }
-                    var shouldFollowup = (o.followup === true)
-                        || (o.followup !== false && s === 'future');
+                    var shouldFollowup = (options.followup === true)
+                        || (options.followup !== false && s === 'future');
                     if (!shouldFollowup) {
                         return; // next one
                     }
@@ -115,27 +115,27 @@ Q.exports(function() {
                         xids: fb_xids
                     }
                 }, callback);
-            }, { method: 'post', fields: o, baseUrl: baseUrl });
+            }, { method: 'post', fields: options, baseUrl: baseUrl });
         }
         function _sendBy(r, text) {
             // Send a request to create the actual invite
-            Q.req(o.uri, ['data', 'stream'], function (err, response) {
+            Q.req(options.uri, ['data', 'stream'], function (err, response) {
                 var msg = Q.firstErrorMessage(err, response && response.errors);
                 if (msg) {
                     alert(msg);
                     var args = [err, response];
                     return Q.Streams.onError.handle.call(this, msg, args);
                 }
-                Q.handle(o && o.callback, null, [err, rsd]);
+                Q.handle(options && options.callback, null, [err, rsd]);
                 Q.handle(callback, null, [err, rsd]);
             }, {
                 method: 'post',
-                fields: o, 
+                fields: options,
                 baseUrl: baseUrl
             });
-            if (o.photo) {
-                var photo = o.photo;
-                delete o.photo;
+            if (options.photo) {
+                var photo = options.photo;
+                delete options.photo;
             }
             var rsd = r.data;
             var rss = r.stream;
@@ -329,8 +329,8 @@ Q.exports(function() {
                                                 streamName: igpStreamName,
                                                 subpath: subpath,
                                                 relate: {
-                                                    publisherId: o.publisherId,
-                                                    streamName: o.streamName
+                                                    publisherId: options.publisherId,
+                                                    streamName: options.streamName
                                                 }
                                             }
                                         });
@@ -356,7 +356,7 @@ Q.exports(function() {
             }
             return true;
         }
-        if (o.identifier || o.token || o.xids || o.userIds || o.label) {
+        if (options.identifier || options.token || options.xids || options.userIds || options.label) {
             return _request();
         }
         Q.Text.get('Streams/content', function (err, text) {
@@ -364,34 +364,34 @@ Q.exports(function() {
                 var canGrantRoles = Q.getObject('slots.canGrant', response);
                 var canRevokeRoles = Q.getObject('slots.canRevoke', response);
 
-                var addLabel = o.addLabel;
+                var addLabel = options.addLabel;
                 if(!Q.isEmpty(canGrantRoles) && addLabel !== false) {
                     //show button if user has any grant permissions
-                    if(o.addLabel === true) {
-                        o.addLabel = [];
+                    if(options.addLabel === true) {
+                        options.addLabel = [];
                     }
-                    if (!Q.isArrayLike(o.addLabel)) {
-                        o.addLabel = [o.addLabel];
+                    if (!Q.isArrayLike(options.addLabel)) {
+                        options.addLabel = [options.addLabel];
                     }
-                    o.showGrantRolesButton = true;
+                    options.showGrantRolesButton = true;
                 } else {
                     //do not show button if o.addLabel: false OR user has no grant permissions
-                    o.showGrantRolesButton = false;
-                    o.addLabel = [];
+                    options.showGrantRolesButton = false;
+                    options.addLabel = [];
                 }
 
-                var addMyLabel = o.addMyLabel;
+                var addMyLabel = options.addMyLabel;
                 if (addMyLabel !== false) {
-                    if(o.addMyLabel === true) {
-                        o.addMyLabel = [];
+                    if(options.addMyLabel === true) {
+                        options.addMyLabel = [];
                     }
-                    if (!Q.isArrayLike(o.addMyLabel) && typeof o.addMyLabel != 'boolean') {
-                        o.addMyLabel = [o.addMyLabel];
+                    if (!Q.isArrayLike(options.addMyLabel) && typeof options.addMyLabel != 'boolean') {
+                        options.addMyLabel = [options.addMyLabel];
                     }
-                    o.showGrantRelationshipsButtonButton = true;
+                    options.showGrantRelationshipsButtonButton = true;
                 } else {
-                    o.showGrantRelationshipsButtonButton = false;
-                    o.addMyLabel = [];
+                    options.showGrantRelationshipsButtonButton = false;
+                    options.addMyLabel = [];
                 }
 
                 _showInviteDialog();
@@ -420,10 +420,10 @@ Q.exports(function() {
                                 return;
                             }
 
-                            if(o.addLabel && o.addLabel.length != 0) {
+                            if(options.addLabel && options.addLabel.length != 0) {
                                 labelsTool.state.onRefresh.add(function () {
-                                    for(var i in o.addLabel) {
-                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addLabel[i] + '"]');
+                                    for(var i in options.addLabel) {
+                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + options.addLabel[i] + '"]');
                                         if(lavelEl) {
                                             lavelEl.classList.add('Q_selected');
                                         }
@@ -445,12 +445,12 @@ Q.exports(function() {
                                 }
 
                                 if (wasSelected) {
-                                    var index = o.addLabel.indexOf(label);
+                                    var index = options.addLabel.indexOf(label);
                                     if (index > -1) {
-                                        o.addLabel.splice(index, 1)
+                                        options.addLabel.splice(index, 1)
                                     }
                                 } else {
-                                    o.addLabel.push(label);
+                                    options.addLabel.push(label);
                                 }
                             }, labelsTool);
                         }
@@ -474,10 +474,10 @@ Q.exports(function() {
                                 return;
                             }
 
-                            if(o.addMyLabel && o.addMyLabel.length != 0) {
+                            if(options.addMyLabel && options.addMyLabel.length != 0) {
                                 labelsTool.state.onRefresh.add(function () {
-                                    for(var i in o.addMyLabel) {
-                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addMyLabel[i] + '"]');
+                                    for(var i in options.addMyLabel) {
+                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + options.addMyLabel[i] + '"]');
                                         if(lavelEl) {
                                             lavelEl.classList.add('Q_selected');
                                         }
@@ -487,12 +487,12 @@ Q.exports(function() {
 
                             labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
                                 if (wasSelected) {
-                                    var index = o.addMyLabel.indexOf(label);
+                                    var index = options.addMyLabel.indexOf(label);
                                     if (index > -1) {
-                                        o.addMyLabel.splice(index, 1)
+                                        options.addMyLabel.splice(index, 1)
                                     }
                                 } else {
-                                    o.addMyLabel.push(label);
+                                    options.addMyLabel.push(label);
                                 }
                             }, labelsTool);
                         }
@@ -500,15 +500,15 @@ Q.exports(function() {
                 }
 
                 function _showInviteDialog() {
-                    var options = {
-                        title: o.title,
-                        identifierTypes: o.identifierTypes,
-                        userChooser: o.userChooser,
-                        appUrl: o.appUrl,
-                        showGrantRolesButton: o.showGrantRolesButton,
-                        showGrantRelationshipsButtonButton: o.showGrantRelationshipsButtonButton,
-                        addLabel: o.addLabel,
-                        addMyLabel: o.addMyLabel,
+                    var fields = {
+                        title: options.title,
+                        identifierTypes: options.identifierTypes,
+                        userChooser: options.userChooser,
+                        appUrl: options.appUrl,
+                        showGrantRolesButton: options.showGrantRolesButton,
+                        showGrantRelationshipsButtonButton: options.showGrantRelationshipsButtonButton,
+                        addLabel: options.addLabel,
+                        addMyLabel: options.addMyLabel,
                         showGrantRolesDialog: function() {
                             _showGrantRolesDialog(_showInviteDialog);
                         },
@@ -517,20 +517,20 @@ Q.exports(function() {
                         }
 
                     };
-                    if (o.templateName) {
-                        options.templateName = o.templateName;
+                    if (options.templateName) {
+                        fields.templateName = options.templateName;
                     }
-                    Q.Streams.Dialogs.invite(publisherId, streamName, function (r) {
-                        if (Q.isEmpty(r)) {
+                    Q.Streams.Dialogs.invite(publisherId, streamName, function (inviteParams) {
+                        if (Q.isEmpty(inviteParams)) {
                             return;
                         }
-                        o.assign = r;
-                        if (r.sendBy) {
-                            _sendBy(r, text);
+                        options.assign = inviteParams;
+                        if (inviteParams.sendBy) {
+                            _sendBy(inviteParams, text);
                         } else {
                             _request();
                         }
-                    }, options);
+                    }, fields);
                 }
 
             });
