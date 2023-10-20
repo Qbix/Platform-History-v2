@@ -71,7 +71,7 @@ Q.Tool.define("Streams/topic", function(options) {
 						case "Streams/audio":
 							toolName = "Q/audio";
 							toolOptions = {
-								action: "player",
+								action: "implement",
 								url: stream.fileUrl(),
 								clipStart: stream.getAttribute('clipStart'),
 								clipEnd: stream.getAttribute('clipEnd')
@@ -95,10 +95,10 @@ Q.Tool.define("Streams/topic", function(options) {
 
 					Q.invoke({
 						title: stream.fields.title,
-						content: $("<div>").tool(toolName, toolOptions),
+						content: "",
 						trigger: tool.element,
 						onActivate: function (options, index, div, data) {
-
+							$("<div>").appendTo($(".Q_column_slot", div)).tool(toolName, toolOptions).activate();
 						}
 					});
 				});
