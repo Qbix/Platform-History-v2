@@ -102,10 +102,12 @@
 .Streams_topic_preview_tool {
     position: relative;
     cursor: pointer;
+    white-space: nowrap;
 }
 .Streams_topic_preview_tool .Streams_topic_preview_title {
     font-weight: normal;
     font-size: 20px;
+    white-space: normal;
 }
 .Streams_topic_preview_tool .Streams_topic_preview_icon {
     height: 50px;
