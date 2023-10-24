@@ -338,6 +338,9 @@ class Users_Label extends Base_Users_Label
 			}
 			$userId = $user->id;
 		}
+		if (!Users::isCommunityId($communityId)) {
+			throw new Users_Exception_NoSuchUser();
+		}
 		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
         $communityRoles = self::ofCommunity($communityId);
 		$communityLabels = Users_Label::fetch($communityId, "", array("skipAccess" => true));
