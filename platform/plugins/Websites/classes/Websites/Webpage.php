@@ -626,7 +626,7 @@ class Websites_Webpage extends Base_Websites_Webpage
      * @param {integer} [$dataLimit=65536] Limit data length (bites) to download. Default 64Kb.
 	 * @param {boolean} [$closeFile=true] Whether to remove temp file after method executed
      * @throws Q_Exception
-     * @return array
+     * @return {array} Array of "name", "comments", "fileHandler"
      */
     static function getRemoteFileInfo ($url, $dataLimit = 65536, $closeFile = true) {
         if (!$urlp = fopen($url, "r")) {
