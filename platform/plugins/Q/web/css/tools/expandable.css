@@ -1,4 +1,4 @@
-.Q_expandable_tool h2 { 
+.Q_expandable_tool h2.Q_expandable_title {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     cursor: pointer;
@@ -12,25 +12,25 @@
     margin: 10px 0 5px 0;
 }
 
-.Q_expandable_tool h2.Q_hover,
-.Q_expandable_tool h2.Q_expanded {
+.Q_expandable_tool h2.Q_expandable_title.Q_hover,
+.Q_expandable_tool h2.Q_expandable_title.Q_expanded {
 	background: rgba(180, 200, 220, 0.7);	
 }
 
-.Q_expandable_tool h2.Q_pressed {
+.Q_expandable_tool h2.Q_expandable_title.Q_pressed {
 	background: rgba(180, 200, 220, 0.8);	
 }
 
 
-.Q_expandable_tool h2 img {
+.Q_expandable_tool h2.Q_expandable_title img {
 	width:25px; height:25px; vertical-align: middle; margin-left: 5px; margin-right: 5px;
 }
 
-.Q_expandable_tool h2 span {
+.Q_expandable_tool h2.Q_expandable_title span {
 	vertical-align: middle;
 }
 
-.Q_expandable_tool h2.Q_expanded .Q_expandable_count {
+.Q_expandable_tool h2.Q_expandable_title.Q_expanded .Q_expandable_count {
 	display: none;
 }
 
