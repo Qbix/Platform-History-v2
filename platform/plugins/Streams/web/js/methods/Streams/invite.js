@@ -48,16 +48,22 @@ Q.exports(function() {
             publisherId: publisherId,
             streamName: streamName
         });
-        options = Q.extend({
+        var o = Q.extend({
             uri: 'Streams/invite'
         }, Q.Streams.invite.options, options);
-        options.publisherId = publisherId;
-        options.streamName = streamName;
-        if (typeof options.appUrl === 'function') {
-            options.appUrl = options.appUrl();
+        var fields = Q.take(o, [
+            'appUrl', 'identifier', 
+            'platform', 'xid', 
+            'label', 'addLabel', 'addMyLabel',
+            'readLevel', 'writeLevel', 'adminLevel'
+        ]);
+        fields.publisherId = publisherId;
+        fields.streamName = streamName;
+        if (typeof fields.appUrl === 'function') {
+            fields.appUrl = fields.appUrl();
         }
         function _request() {
-            return Q.req(options.uri, ['data'], function (err, response) {
+            return Q.req(o.uri, ['data'], function (err, response) {
                 var msg = Q.firstErrorMessage(err, response && response.errors);
                 if (msg) {
                     alert(msg);
@@ -67,7 +73,7 @@ Q.exports(function() {
                 Q.Streams.Participant.get.cache.removeEach([publisherId, streamName]);
                 Q.Streams.get.cache.removeEach([publisherId, streamName]);
                 var rsd = response.slots.data;
-                Q.handle(options && options.callback, null, [err, rsd]);
+                Q.handle(o && o.callback, null, [err, rsd]);
                 Q.handle(callback, null, [err, rsd]);
                 var emailAddresses = [];
                 var mobileNumbers = [];
@@ -82,8 +88,8 @@ Q.exports(function() {
                     // if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
                     // 	return;
                     // }
-                    var shouldFollowup = (options.followup === true)
-                        || (options.followup !== false && s === 'future');
+                    var shouldFollowup = (o.followup === true)
+                        || (o.followup !== false && s === 'future');
                     if (!shouldFollowup) {
                         return; // next one
                     }
@@ -115,28 +121,24 @@ Q.exports(function() {
                         xids: fb_xids
                     }
                 }, callback);
-            }, { method: 'post', fields: options, baseUrl: baseUrl });
+            }, { method: 'post', fields: fields, baseUrl: baseUrl });
         }
         function _sendBy(r, text) {
             // Send a request to create the actual invite
-            Q.req(options.uri, ['data', 'stream'], function (err, response) {
+            Q.req(o.uri, ['data', 'stream'], function (err, response) {
                 var msg = Q.firstErrorMessage(err, response && response.errors);
                 if (msg) {
                     alert(msg);
                     var args = [err, response];
                     return Q.Streams.onError.handle.call(this, msg, args);
                 }
-                Q.handle(options && options.callback, null, [err, rsd]);
+                Q.handle(o && o.callback, null, [err, rsd]);
                 Q.handle(callback, null, [err, rsd]);
             }, {
                 method: 'post',
-                fields: options,
+                fields: fields,
                 baseUrl: baseUrl
             });
-            if (options.photo) {
-                var photo = options.photo;
-                delete options.photo;
-            }
             var rsd = r.data;
             var rss = r.stream;
             var t;
@@ -329,8 +331,8 @@ Q.exports(function() {
                                                 streamName: igpStreamName,
                                                 subpath: subpath,
                                                 relate: {
-                                                    publisherId: options.publisherId,
-                                                    streamName: options.streamName
+                                                    publisherId: fields.publisherId,
+                                                    streamName: fields.streamName
                                                 }
                                             }
                                         });
@@ -356,7 +358,7 @@ Q.exports(function() {
             }
             return true;
         }
-        if (options.identifier || options.token || options.xids || options.userIds || options.label) {
+        if (o.identifier || o.token || o.xids || o.userIds || o.label) {
             return _request();
         }
         Q.Text.get('Streams/content', function (err, text) {
@@ -364,34 +366,34 @@ Q.exports(function() {
                 var canGrantRoles = Q.getObject('slots.canGrant', response);
                 var canRevokeRoles = Q.getObject('slots.canRevoke', response);
 
-                var addLabel = options.addLabel;
+                var addLabel = o.addLabel;
                 if(!Q.isEmpty(canGrantRoles) && addLabel !== false) {
                     //show button if user has any grant permissions
-                    if(options.addLabel === true) {
-                        options.addLabel = [];
+                    if(o.addLabel === true) {
+                        o.addLabel = [];
                     }
-                    if (!Q.isArrayLike(options.addLabel)) {
-                        options.addLabel = [options.addLabel];
+                    if (!Q.isArrayLike(o.addLabel)) {
+                        o.addLabel = [o.addLabel];
                     }
-                    options.showGrantRolesButton = true;
+                    o.showGrantRolesButton = true;
                 } else {
                     //do not show button if o.addLabel: false OR user has no grant permissions
-                    options.showGrantRolesButton = false;
-                    options.addLabel = [];
+                    o.showGrantRolesButton = false;
+                    o.addLabel = [];
                 }
 
-                var addMyLabel = options.addMyLabel;
+                var addMyLabel = o.addMyLabel;
                 if (addMyLabel !== false) {
-                    if(options.addMyLabel === true) {
-                        options.addMyLabel = [];
+                    if(o.addMyLabel === true) {
+                        o.addMyLabel = [];
                     }
-                    if (!Q.isArrayLike(options.addMyLabel) && typeof options.addMyLabel != 'boolean') {
-                        options.addMyLabel = [options.addMyLabel];
+                    if (!Q.isArrayLike(o.addMyLabel) && typeof o.addMyLabel != 'boolean') {
+                        o.addMyLabel = [o.addMyLabel];
                     }
-                    options.showGrantRelationshipsButtonButton = true;
+                    o.showGrantRelationshipsButtonButton = true;
                 } else {
-                    options.showGrantRelationshipsButtonButton = false;
-                    options.addMyLabel = [];
+                    o.showGrantRelationshipsButtonButton = false;
+                    o.addMyLabel = [];
                 }
 
                 _showInviteDialog();
@@ -420,10 +422,10 @@ Q.exports(function() {
                                 return;
                             }
 
-                            if(options.addLabel && options.addLabel.length != 0) {
+                            if(o.addLabel && o.addLabel.length != 0) {
                                 labelsTool.state.onRefresh.add(function () {
-                                    for(var i in options.addLabel) {
-                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + options.addLabel[i] + '"]');
+                                    for(var i in o.addLabel) {
+                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addLabel[i] + '"]');
                                         if(lavelEl) {
                                             lavelEl.classList.add('Q_selected');
                                         }
@@ -445,12 +447,12 @@ Q.exports(function() {
                                 }
 
                                 if (wasSelected) {
-                                    var index = options.addLabel.indexOf(label);
+                                    var index = o.addLabel.indexOf(label);
                                     if (index > -1) {
-                                        options.addLabel.splice(index, 1)
+                                        o.addLabel.splice(index, 1)
                                     }
                                 } else {
-                                    options.addLabel.push(label);
+                                    o.addLabel.push(label);
                                 }
                             }, labelsTool);
                         }
@@ -474,10 +476,10 @@ Q.exports(function() {
                                 return;
                             }
 
-                            if(options.addMyLabel && options.addMyLabel.length != 0) {
+                            if(o.addMyLabel && o.addMyLabel.length != 0) {
                                 labelsTool.state.onRefresh.add(function () {
-                                    for(var i in options.addMyLabel) {
-                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + options.addMyLabel[i] + '"]');
+                                    for(var i in o.addMyLabel) {
+                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addMyLabel[i] + '"]');
                                         if(lavelEl) {
                                             lavelEl.classList.add('Q_selected');
                                         }
@@ -487,12 +489,12 @@ Q.exports(function() {
 
                             labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
                                 if (wasSelected) {
-                                    var index = options.addMyLabel.indexOf(label);
+                                    var index = o.addMyLabel.indexOf(label);
                                     if (index > -1) {
-                                        options.addMyLabel.splice(index, 1)
+                                        o.addMyLabel.splice(index, 1)
                                     }
                                 } else {
-                                    options.addMyLabel.push(label);
+                                    o.addMyLabel.push(label);
                                 }
                             }, labelsTool);
                         }
@@ -500,33 +502,29 @@ Q.exports(function() {
                 }
 
                 function _showInviteDialog() {
-                    var fields = {
-                        title: options.title,
-                        identifierTypes: options.identifierTypes,
-                        userChooser: options.userChooser,
-                        appUrl: options.appUrl,
-                        showGrantRolesButton: options.showGrantRolesButton,
-                        showGrantRelationshipsButtonButton: options.showGrantRelationshipsButtonButton,
-                        addLabel: options.addLabel,
-                        addMyLabel: options.addMyLabel,
-                        showGrantRolesDialog: function() {
-                            _showGrantRolesDialog(_showInviteDialog);
-                        },
-                        showGiveRelationshipLabelDialog: function() {
-                            _showGiveRelationshipLabelDialog(_showInviteDialog);
-                        }
-
+                    var fields = Q.take(o, [
+                        'title', 'identifierTypes', 'userChooser',
+                        'appUrl', 'showGrantRolesButton', 'showGrantRelationshipsButton',
+                        'addLabel', 'addMyLabel'
+                    ]);
+                    fields.showGrantRolesDialog = function() {
+                        _showGrantRolesDialog(_showInviteDialog);
                     };
-                    if (options.templateName) {
-                        fields.templateName = options.templateName;
+                    fields.showGiveRelationshipLabelDialog = function() {
+                        _showGiveRelationshipLabelDialog(_showInviteDialog);
+                    };
+                    if (o.templateName) {
+                        fields.templateName = o.templateName;
                     }
-                    Q.Streams.Dialogs.invite(publisherId, streamName, function (inviteParams) {
-                        if (Q.isEmpty(inviteParams)) {
+                    Q.Streams.Dialogs.invite(publisherId, streamName, function (r) {
+                        if (Q.isEmpty(r)) {
                             return;
                         }
-                        options.assign = inviteParams;
-                        if (inviteParams.sendBy) {
-                            _sendBy(inviteParams, text);
+                        for (var f in r) {
+                            fields[f] = r[f];
+                        }
+                        if (r.sendBy) {
+                            _sendBy(r, text);
                         } else {
                             _request();
                         }
