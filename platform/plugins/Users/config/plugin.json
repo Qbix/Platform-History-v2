@@ -354,6 +354,9 @@
 					"canGrant": ["Users/members", "Users/guests"],
 					"canRevoke": ["Users/members", "Users/guests"],
 					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/speakers"]
+				},
+				"": {
+					"canSee": ["Users/admins"]
 				}
 			},
 			"admins": ["Users/owners", "Users/admins"]
