@@ -41,7 +41,7 @@ function Q_expandable_tool($options)
 	Q_Response::addStylesheet('{{Q}}/css/tools/expandable.css', 'Q');
 	$count = Q::ifset($options, 'count', '');
 	$style = empty($options['expanded']) ? '' : 'style="display:block"';
-	$h2 = "<h2>\n\t<span class='Q_expandable_count'>$count</span>\n\t$options[title]\n</h2>";
+	$h2 = "<h2 class='Q_clearfix Q_expandable_title'>\n\t<span class='Q_expandable_count'>$count</span>\n\t$options[title]\n</h2>";
 	$div = "<div class='Q_expandable_container' $style><div class='Q_expandable_content'>\n\t$options[content]\n</div></div>";
 	Q_Response::setToolOptions($options);
 	return $h2.$div;

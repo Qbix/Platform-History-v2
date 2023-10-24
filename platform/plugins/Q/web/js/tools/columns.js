@@ -1131,7 +1131,7 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 			- paddingTop
 			- parseInt($cs.css('padding-bottom'))
 			- $controls.height();
-		$cs.add($div).css('height', 'auto');
+		$cs.add($column).css('height', 'auto');
 		$cs.css('min-height', heightToBottom);
 	} else {
 		$column.css('min-height', tool.oldMinHeight);

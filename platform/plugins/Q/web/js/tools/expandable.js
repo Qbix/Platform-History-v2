@@ -30,7 +30,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	if (state.evenIfFilled || !$te.children().length) {
 		// set it up with javascript
 		var count = options.count || '';
-		var h2 = "<h2 class='Q_clearfix'>"
+		var h2 = "<h2 class='Q_clearfix Q_expandable_title'>"
 			+"<span class='Q_expandable_count '>"+count+"</span>"
 			+options.title
 			+"</h2>";
