@@ -158,7 +158,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	afterPost: new Q.Event(),
 	preprocess: [],
 	openInSameColumn: [],
-	handleTheirOwnClicks: ["Streams/question", "Streams/answer"],
+	handleTheirOwnClicks: ["Streams/question", "Streams/answer", "Media/webrtc"],
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -612,7 +612,7 @@ Q.Tool.define('Streams/chat', function(options) {
 									columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
 								});
 							});
-						}, false);
+						});
 					});
 				}, tool);
 
