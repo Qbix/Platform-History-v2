@@ -1210,19 +1210,25 @@ class Q_Request
 		return Q::take($info, $fields);
 	}
 
+	/**
+	 * Automatically called from Q_Dispatcher to handle input
+	 * such as JSON payloads to be merged into $_REQUEST array.
+	 * @method handleInput
+	 * @static
+	 */
 	static function handleInput()
 	{
-		if (Q_Request::method() != 'POST') {
-			return;
-		}
 		$contentType = Q::ifset($_SERVER, 'HTTP_CONTENT_TYPE', null);
 		if (strpos($contentType, 'application/json') !== false) {
 			// body of request is in JSON format
 			$inputJSON = file_get_contents('php://input');
 			$input = Q::json_decode($inputJSON, true);
+			$isPost = (Q_Request::method() == 'POST');
 			foreach ($input as $k => $v) {
-				$_POST[$k] = $v;
 				$_REQUEST[$k] = $v;
+				if ($isPost) {
+					$_POST[$k] = $v;
+				}
 			}
 		}
 	}
