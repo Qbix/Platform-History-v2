@@ -337,14 +337,14 @@ class Users_Contact extends Base_Users_Contact
 	function exportArray($options = null)
 	{
 		$loggedInUser = Users::loggedInUser(false, false);
+		$loggedInUserId = Q::ifset($loggedInUser, "id", null);
 		$authorized = false;
-		if ($loggedInUser) {
-			if (in_array($loggedInUser->id, [$this->userId, $this->contactUserId])) {
-				$authorized = true;
-			} elseif (Users::isCommunityId($this->userId)) {
-				$can = Users_Label::can($this->userId, $loggedInUser->id);
-				$authorized = in_array($this->label, $can['see']);
-			}
+
+		if (in_array($loggedInUserId, [$this->userId, $this->contactUserId])) {
+			$authorized = true;
+		} elseif (Users::isCommunityId($this->userId)) {
+			$can = Users_Label::can($this->userId, $loggedInUserId);
+			$authorized = in_array($this->label, $can['see']);
 		}
 
 		return $authorized ? $this->fields : array();
