@@ -338,9 +338,12 @@ class Users_Label extends Base_Users_Label
 			}
 			$userId = $user->id;
 		}
+		if (!Users::isCommunityId($communityId)) {
+			throw new Users_Exception_NoSuchUser();
+		}
 		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
         $communityRoles = self::ofCommunity($communityId);
-		$communityLabels = Users_Label::fetch($communityId, "", array("skipException" => true));
+		$communityLabels = Users_Label::fetch($communityId, "", array("skipAccess" => true));
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
 		$result = array(
 			"manageIcon" => false,
@@ -428,7 +431,6 @@ class Users_Label extends Base_Users_Label
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
 	 * @param {string} [$options.asUserId] the user to do access checks as
-	 * @param {string} [$options.skipException] if true don't throw exception
 	 * @param {boolean} [$options.checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
 	 * @return {array} An array of array(label => Users_Label) pairs
 	 */
@@ -438,12 +440,11 @@ class Users_Label extends Base_Users_Label
 			$user = Users::loggedInUser(true);
 			$userId = $user->id;
 		}
-		$skipException = Q::ifset($options, "skipException", false);
 		if (empty($options['skipAccess'])) {
 			$asUserId = isset($options['asUserId'])
 				? $options['asUserId']
-				: Users::loggedInUser(!$skipException)->id;
-			Users::canManageLabels($asUserId, $userId, null, !$skipException, true);
+				: Users::loggedInUser(true)->id;
+			Users::canManageLabels($asUserId, $userId, null, true, true);
 		}
 		$prefixes = $labelNames = array();
 		$criteria = @compact('userId');

@@ -75,6 +75,7 @@ Q.exports(function(Users, Streams) {
 								Q.handle(callback, Streams, [inviteParams]);
 							});
 	
+							inviteParams.assign = inviteParams.assign || {};
 							Q.each(obj, function (key, value) {
 								if (Q.isArrayLike(value)) {
 									value = value[0];
@@ -84,13 +85,13 @@ Q.exports(function(Users, Streams) {
 									var reader = new FileReader();
 									reader.readAsDataURL(value);
 									reader.onloadend = function() {
-										inviteParams[key] = reader.result;
+										inviteParams.assign[key] = reader.result;
 										pipe.fill(key)();
 									}
 									return;
 								}
 	
-								inviteParams[key] = value;
+								inviteParams.assign[key] = value;
 								pipe.fill(key)();
 							});
 						});

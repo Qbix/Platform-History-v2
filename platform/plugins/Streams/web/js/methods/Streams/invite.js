@@ -51,10 +51,16 @@ Q.exports(function() {
         var o = Q.extend({
             uri: 'Streams/invite'
         }, Q.Streams.invite.options, options);
-        o.publisherId = publisherId;
-        o.streamName = streamName;
-        if (typeof o.appUrl === 'function') {
-            o.appUrl = o.appUrl();
+        var fields = Q.take(o, [
+            'appUrl', 'identifier', 
+            'platform', 'xid', 
+            'label', 'addLabel', 'addMyLabel',
+            'readLevel', 'writeLevel', 'adminLevel'
+        ]);
+        fields.publisherId = publisherId;
+        fields.streamName = streamName;
+        if (typeof fields.appUrl === 'function') {
+            fields.appUrl = fields.appUrl();
         }
         function _request() {
             return Q.req(o.uri, ['data'], function (err, response) {
@@ -115,7 +121,7 @@ Q.exports(function() {
                         xids: fb_xids
                     }
                 }, callback);
-            }, { method: 'post', fields: o, baseUrl: baseUrl });
+            }, { method: 'post', fields: fields, baseUrl: baseUrl });
         }
         function _sendBy(r, text) {
             // Send a request to create the actual invite
@@ -130,13 +136,9 @@ Q.exports(function() {
                 Q.handle(callback, null, [err, rsd]);
             }, {
                 method: 'post',
-                fields: o, 
+                fields: fields,
                 baseUrl: baseUrl
             });
-            if (o.photo) {
-                var photo = o.photo;
-                delete o.photo;
-            }
             var rsd = r.data;
             var rss = r.stream;
             var t;
@@ -329,8 +331,8 @@ Q.exports(function() {
                                                 streamName: igpStreamName,
                                                 subpath: subpath,
                                                 relate: {
-                                                    publisherId: o.publisherId,
-                                                    streamName: o.streamName
+                                                    publisherId: fields.publisherId,
+                                                    streamName: fields.streamName
                                                 }
                                             }
                                         });
@@ -500,37 +502,33 @@ Q.exports(function() {
                 }
 
                 function _showInviteDialog() {
-                    var options = {
-                        title: o.title,
-                        identifierTypes: o.identifierTypes,
-                        userChooser: o.userChooser,
-                        appUrl: o.appUrl,
-                        showGrantRolesButton: o.showGrantRolesButton,
-                        showGrantRelationshipsButtonButton: o.showGrantRelationshipsButtonButton,
-                        addLabel: o.addLabel,
-                        addMyLabel: o.addMyLabel,
-                        showGrantRolesDialog: function() {
-                            _showGrantRolesDialog(_showInviteDialog);
-                        },
-                        showGiveRelationshipLabelDialog: function() {
-                            _showGiveRelationshipLabelDialog(_showInviteDialog);
-                        }
-
+                    var fields = Q.take(o, [
+                        'title', 'identifierTypes', 'userChooser',
+                        'appUrl', 'showGrantRolesButton', 'showGrantRelationshipsButton',
+                        'addLabel', 'addMyLabel'
+                    ]);
+                    fields.showGrantRolesDialog = function() {
+                        _showGrantRolesDialog(_showInviteDialog);
+                    };
+                    fields.showGiveRelationshipLabelDialog = function() {
+                        _showGiveRelationshipLabelDialog(_showInviteDialog);
                     };
                     if (o.templateName) {
-                        options.templateName = o.templateName;
+                        fields.templateName = o.templateName;
                     }
                     Q.Streams.Dialogs.invite(publisherId, streamName, function (r) {
                         if (Q.isEmpty(r)) {
                             return;
                         }
-                        o.assign = r;
+                        for (var f in r) {
+                            fields[f] = r[f];
+                        }
                         if (r.sendBy) {
                             _sendBy(r, text);
                         } else {
                             _request();
                         }
-                    }, options);
+                    }, fields);
                 }
 
             });
