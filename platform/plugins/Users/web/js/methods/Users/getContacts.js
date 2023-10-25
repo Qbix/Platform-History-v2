@@ -39,8 +39,7 @@ Q.exports(function (Users, priv) {
 				userId: userId,
 				labels: labels,
 				contactUserIds: contactUserIds
-			},
-			method: 'post'
+			}
 		});
 	}, {
 		cache: Q.Cache[Users.cacheWhere]("Users.getContacts", 100),
