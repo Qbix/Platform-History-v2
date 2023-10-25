@@ -30,6 +30,10 @@
 }
 .Streams_invite_option:hover {
 	background: #e3e3e3;
+	color: black;
+}
+.Streams_invite_option:hover svg {
+	fill: black;
 }
 .Streams_invite_share_link{
 	margin-right:0;

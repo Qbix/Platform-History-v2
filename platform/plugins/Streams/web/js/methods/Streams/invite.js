@@ -137,6 +137,7 @@ Q.exports(function() {
             }, {
                 method: 'post',
                 fields: fields,
+                asJSON: true,
                 baseUrl: baseUrl
             });
             var rsd = r.data;
@@ -369,26 +370,26 @@ Q.exports(function() {
                 var addLabel = o.addLabel;
                 if(!Q.isEmpty(canGrantRoles) && addLabel !== false) {
                     //show button if user has any grant permissions
-                    if(o.addLabel === true) {
-                        o.addLabel = [];
+                    if(fields.addLabel === true) {
+                        fields.addLabel = [];
                     }
-                    if (!Q.isArrayLike(o.addLabel)) {
-                        o.addLabel = [o.addLabel];
+                    if (!Q.isArrayLike(fields.addLabel)) {
+                        fields.addLabel = [fields.addLabel];
                     }
                     o.showGrantRolesButton = true;
                 } else {
                     //do not show button if o.addLabel: false OR user has no grant permissions
                     o.showGrantRolesButton = false;
-                    o.addLabel = [];
+                    fields.addLabel = [];
                 }
 
                 var addMyLabel = o.addMyLabel;
                 if (addMyLabel !== false) {
-                    if(o.addMyLabel === true) {
-                        o.addMyLabel = [];
+                    if(fields.addMyLabel === true) {
+                        fields.addMyLabel = [];
                     }
                     if (!Q.isArrayLike(o.addMyLabel) && typeof o.addMyLabel != 'boolean') {
-                        o.addMyLabel = [o.addMyLabel];
+                        fields.addMyLabel = [o.addMyLabel];
                     }
                     o.showGrantRelationshipsButtonButton = true;
                 } else {
@@ -422,10 +423,10 @@ Q.exports(function() {
                                 return;
                             }
 
-                            if(o.addLabel && o.addLabel.length != 0) {
+                            if(fields.addLabel && fields.addLabel.length != 0) {
                                 labelsTool.state.onRefresh.add(function () {
-                                    for(var i in o.addLabel) {
-                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + o.addLabel[i] + '"]');
+                                    for(var i in fields.addLabel) {
+                                        var lavelEl = labelsTool.element.querySelector('[data-label="' + fields.addLabel[i] + '"]');
                                         if(lavelEl) {
                                             lavelEl.classList.add('Q_selected');
                                         }
@@ -447,12 +448,12 @@ Q.exports(function() {
                                 }
 
                                 if (wasSelected) {
-                                    var index = o.addLabel.indexOf(label);
+                                    var index = fields.addLabel.indexOf(label);
                                     if (index > -1) {
-                                        o.addLabel.splice(index, 1)
+                                        fields.addLabel.splice(index, 1)
                                     }
                                 } else {
-                                    o.addLabel.push(label);
+                                    fields.addLabel.push(label);
                                 }
                             }, labelsTool);
                         }
