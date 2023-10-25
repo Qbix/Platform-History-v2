@@ -420,6 +420,36 @@ class Users_Label extends Base_Users_Label
 		}
 		return $tree->getAll();
     }
+	static function canManage($communityId, $label) 
+	{
+		$ret = array();
+		$labels = Users_Label::ofCommunity($communityId);
+		$roles = Q_Config::get('Users', 'communities', 'roles', array());	
+		
+		$ret['labels'] = Users_Label::_canManage($labels, $label);
+		$ret['locked'] = Users_Label::_canManage($roles, $label);
+		return $ret;
+	}
+	/**
+	 * return array of labels which contain labels in both array `canGrant` and `canRevoke`
+	 */
+	static function _canManage($labels, $label) 
+	{
+		$ret = array();
+		if (!empty($labels[$label])) {
+			$arrCanGrant = (empty($labels[$label]['canGrant'])) ? array() : $labels[$label]['canGrant'];
+			$arrCanRevoke = (empty($labels[$label]['canRevoke'])) ? array() : $labels[$label]['canRevoke'];
+
+			$t = array_unique(array_merge(array_values($arrCanGrant), array_values($arrCanRevoke)));
+			foreach($t as $ilabel) {
+				if (in_array($ilabel, $arrCanGrant) && in_array($ilabel, $arrCanRevoke)) {
+					array_push($ret, $ilabel);
+				}
+			}
+		}
+		return $ret;
+	}
+	
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch

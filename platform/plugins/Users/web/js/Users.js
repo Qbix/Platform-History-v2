@@ -889,6 +889,10 @@
 	Users.getContacts = new Q.Method();
 
 	Users.getLabels = new Q.Method();
+    
+    Users.getPermissions = new Q.Method();
+    
+    Users.managePermissions = new Q.Method();
 
 	/**
 	 * Methods for setting up common user interface elements
