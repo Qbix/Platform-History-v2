@@ -137,7 +137,7 @@ Q.exports(function() {
             }, {
                 method: 'post',
                 fields: fields,
-                useJSON: true,
+                asJSON: true,
                 baseUrl: baseUrl
             });
             var rsd = r.data;
