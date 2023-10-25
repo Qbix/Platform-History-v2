@@ -8531,6 +8531,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *	 Or pass a function which will be run before .send() is executed. First parameter is the xhr object, second is the options.
  * @param {Function} [options.preprocess] an optional function that takes the xhr object before the .send() is invoked on it
  * @param {boolean} [options.parse] set to false to pass the unparsed string to the callback
+ * @param {boolean} [options.asJSON] set to true to have the payload be encoded as JSON, if method is not "GET"
  * @param {boolean} [options.extend=true] if false, the URL is not extended with Q fields.
  * @param {String} [options.loadExtras=null] if "all", asks the server to load any extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {boolean} [options.query=false] if true simply returns the query url without issuing the request
@@ -8711,7 +8712,10 @@ Q.request = function (url, slotNames, callback, options) {
 				xmlhttp.send();
 			} else {
 				xmlhttp.open(verb, url, !sync);
-				if (!o.formdata) {
+				if (o.asJSON) {
+					content = JSON.stringify(o.fields);
+					xmlhttp.setRequestHeader("Content-Type", "application/json");
+				} else if (!o.formdata) {
 					xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
 				}
 				//xmlhttp.setRequestHeader("Content-length", content.length);
@@ -15649,6 +15653,7 @@ Q.loadUrl.options = {
 Q.request.options = {
 	duplicate: true,
 	quiet: true,
+	asJSON: false,
 	parse: 'json',
 	timeout: 5000,
 	onRedirect: new Q.Event(function (url) {

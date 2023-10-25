@@ -1209,6 +1209,23 @@ class Q_Request
 		$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
 		return Q::take($info, $fields);
 	}
+
+	static function handleInput()
+	{
+		if (Q_Request::method() != 'POST') {
+			return;
+		}
+		$contentType = Q::ifset($_SERVER, 'HTTP_CONTENT_TYPE', null);
+		if (strpos($contentType, 'application/json') !== false) {
+			// body of request is in JSON format
+			$inputJSON = file_get_contents('php://input');
+			$input = Q::json_decode($inputJSON, true);
+			foreach ($input as $k => $v) {
+				$_POST[$k] = $v;
+				$_REQUEST[$k] = $v;
+			}
+		}
+	}
 	
 	/**
 	 * Get access to more browser capabilities
