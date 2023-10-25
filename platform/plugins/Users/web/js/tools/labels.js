@@ -554,7 +554,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
     getWeb3Permissions: Q.promisify(function _getWeb3Permissions(label, callback) {
 
         if (!Users.Label.isExternal(label)) {
-            console.warn('label is not external');
+            //console.warn('label is not external');
             return Q.handle(callback, null, [null, {status: false, ret:{}, opt:{}}]);
         }
         
