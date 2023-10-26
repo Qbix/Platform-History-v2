@@ -38,8 +38,7 @@ Q.exports(function (Users, priv) {
 			fields: {
 				userId: userId,
 				filter: filter
-			},
-			method: 'post'
+			}
 		});
 	}, {
 		cache: Q.Cache[Users.cacheWhere]("Users.getLabels", 100),
