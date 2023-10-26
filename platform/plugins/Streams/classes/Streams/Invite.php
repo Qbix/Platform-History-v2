@@ -298,7 +298,7 @@ class Streams_Invite extends Base_Streams_Invite
 		Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $this->invitingUserId, null, false, true);
 
 		// subscribe or join, if needed
-		$onInviteAccepted = Q_Config::get("Streams", "types", $stream->type, "onInviteAccepted", null);
+		$onInviteAccepted = Streams_Stream::getConfigField($stream->type, "onInviteAccepted", null);
 		if ($onInviteAccepted) {
 			$options["subscribe"] = $onInviteAccepted == "subscribe";
 			$options["join"] = $onInviteAccepted == "join";

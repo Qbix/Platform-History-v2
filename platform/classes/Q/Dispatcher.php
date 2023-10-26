@@ -153,6 +153,8 @@ class Q_Dispatcher
 			$request_uri = Q_Request::uri();
 			self::$uri = clone($request_uri);
 		}
+
+		Q_Request::handleInput();
 		
 		Q_Text::setLanguageFromRequest();
 
