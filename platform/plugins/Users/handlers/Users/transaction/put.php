@@ -18,66 +18,61 @@ function Users_transaction_put($params)
     if (empty($params) && empty(Users::roles(null, array('Users/owners')))) {
 		throw new Users_Exception_NotAuthorized();
     }
-    
+	$user = Users::loggedInUser(true);
+    $quota = Users_Quota::check($user->id, '', 'Users/web3/transaction');
+	
     $params = array_merge($params, $_REQUEST);
     
-	Q_Request::requireFields(array(
+	Q_Valid::requireFields(array(
 		'chainId', 
 		'transactionId',
 		'status',
-		'result'
-	), true);
+		'contract'
+	), $params, true);
 
 	$fields = Q::take($params, array('chainId', 'transactionId'));
-	$web3Transaction = new Users_Web3Transaction($fields);
-    if (!$web3Transaction->retrieve()) {
+	$transaction = new Users_Web3Transaction($fields);
+    if (!$transaction->retrieve()) {
 		throw new Q_Exception_MissingObject(array('name' => 'transaction'));
 	}
-    
-    if ($web3Transaction->status == "pending"
+	
+    $quota->used(1);
+	
+    if ($transaction->status == "pending"
 	&& $params["status"] == 'mined') {
+		
 		// double-check that it was actually mined
 		// using up to 3 attempts separated by 1 second
 		$attempts = Q_Config::get('Users', 'web3', 'transactions', 'receipt', 'attempts', 3);
-		if ($web3Transaction->updateFromBlockchainReceipt(compact('attempts'))) {
-			$web3Transaction->save(true);
+		if (!$transaction->updateFromBlockchainReceipt(compact('attempts'))) {
+			throw new Q_Exception_AttemptsExceeded();
 		}
-//		if (empty($web3Transaction->contract)) {
+		$transaction->save(true);
+//		if (empty($transaction->contract)) {
 //			throw new Q_Exception_MissingObject(array('name' => 'transaction->contract'));
 //		}
-		
-		// the code below are fixes on Greg's changes
-		// 1. $transaction->contract != $params['contract'] 
-		//	the first is about contract that we initiated transaction,
-		//  but the second is what we need. it's address of instsance which created after calling produce and grab from solidity event
-		// 2. 
-		if (empty($params["contract"])) {
-			throw new Q_Exception(array('name' => 'contract'));
-		} else {
-//			$transaction = $params['transaction'];
-//			$communityId = $transaction->getExtra('communityId');
-//			$contract = $params['contract'];
-
-			$externalTo = new Users_ExternalTo();
-			$externalTo->userId   = $params['communityId'];
-			$externalTo->platform = 'web3';
-			$externalTo->appId    = $params['chainId'];
-			$data = $externalTo->retrieve();
-
-			if (!$data->xid) {
-				$user = Users::fetch($params['communityId'], true);
-				$user->setXid("web3_{$params['chainId']}", $params['contract']);
-				$user->save();
-
-				$externalTo->xid = $params['contract'];
-				$externalTo->save(true); // this also saves externalTo
-			}
-		}
+		$contract = $params['contract'];
+		$chainId = $params['chainId'];
+		$communityId = $params['communityId'];
 		// ask Greg why and how we wil be descrypt instance address from event 
 		//		inside transaction_mined and update ExternalTo
-//		Q::event("Users/transaction/mined", array(
-//			'transaction' => $web3Transaction
-//		));
+		if (!empty($transaction->contractABIName)) {
+			Q::event("Users/transaction/mined/"
+				. $transaction->contractABIName . '/'
+				. $transaction->methodName,
+				compact('transaction', 'contract', 'chainId', 'communityId'),
+				'after'
+			);
+		}
+		// WARNING: not recommended to add hooks with these names,
+		// since the same method name might be shared
+		// among multiple types of smart contracts
+//		Q::event("Users/transaction/mined/"
+//			. $transaction->methodName,
+//			compact('transaction', 'contract'),
+//			'after'
+//		);
+		
     }
     
     Q_Response::setSlot("result", true);

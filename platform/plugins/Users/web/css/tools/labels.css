@@ -54,7 +54,18 @@
     border-radius: 5px;
     background: rgb(128 128 128 / 20%);
 }
-.Users_labels_tool .Users_labels_label:hover {
+.Users_labels_tool .Users_labels_label:hover:not(.Q_selected_permanently) {
     text-shadow: 0 0 2px black;
     box-shadow: 0 0 4px black;
 }
+.Q_selected_permanently {
+    background-color: rgba(150,150,150,0.5);
+}
+.Users_labels_tool .Users_labels_label.Q_selected_permanently {
+    cursor: default;
+}
+.Users_labels_editdialog .Q_button {
+    width:100%;
+    margin-bottom:10px;
+}
+

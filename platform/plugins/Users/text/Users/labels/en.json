@@ -7,7 +7,8 @@
     "editLabel": "Edit Label",
     "addBtn": "Add",
     "editBtn": "Update",
-    "canManageBtn": "Can manage",
+    "canManageDialogTitle": "Can Manage Roles",
+    "canManageBtn": "Can Manage ...",
     "titlePlaceholder": "Title",
     "selectOptionTitle_web2": "Native",
     "selectOptionTitle_web3": "Web3"
