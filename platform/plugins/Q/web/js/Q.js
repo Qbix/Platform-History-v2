@@ -14673,9 +14673,7 @@ Aup.onEnded = new Q.Event();
  */
 Q.Audio.load = Q.getter(function _Q_audio(url, handler, options) {
 	url = Q.url(url);
-	var audio = Q.Audio.collection[url]
-		? Q.Audio.collection[url]
-		: new Q.Audio(url);
+	var audio = Q.Audio.collection[url] || new Q.Audio(url);
 	if (options && options.canPlayThrough === false) {
 		audio.onCanPlay.add(handler);
 	} else {

@@ -696,10 +696,9 @@ Q.Tool.define("Q/audio", function (options) {
 
 		var $recordTimeElement = $(".Q_audio_record_recordTime", this.element);
 
-		tool.audio = new Q.Audio(state.url);
+		tool.audio = new Q.Audio(state.url, tool.element);
 		tool.audioElement = tool.audio.audio;
 		tool.$audioElement = $(tool.audioElement);
-		tool.$audioElement.appendTo(tool.element);
 
 		$toolElement.append($('<div class="Q_audio_close"></div>'));
 

@@ -333,15 +333,12 @@ class Users_Label extends Base_Users_Label
 	{
 		if (!$userId) {
 			$user = Users::loggedInUser();
-			if (!$user) {
-				return array();
-			}
-			$userId = $user->id;
+			$userId = Q::ifset($user, "id", null);
 		}
 		if (!Users::isCommunityId($communityId)) {
 			throw new Users_Exception_NoSuchUser();
 		}
-		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
+		$userCommunityRoles = array_merge(array(""), array_keys(Users::roles($communityId, null, array(), $userId)));
         $communityRoles = self::ofCommunity($communityId);
 		$communityLabels = Users_Label::fetch($communityId, "", array("skipAccess" => true));
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
@@ -354,7 +351,7 @@ class Users_Label extends Base_Users_Label
 		);
         
         
-		foreach ($userCommunityRoles as $role => $row) {
+		foreach ($userCommunityRoles as $role) {
 			$result["roles"][] = $role;
 			//foreach ($communityRoles as $keyLabel => $label) {
 			foreach ($communityLabels as $keyLabel => $label) {
@@ -412,15 +409,6 @@ class Users_Label extends Base_Users_Label
 				$label => $row->getAllExtras()
 			));
 		}
-		foreach ($rows as $row) {
-			if ($row->userId === '') {
-				continue;
-			}
-			$label = $row->label;
-			$tree->merge(array(
-				$label => $row->getAllExtras()
-			));
-		}
 		return $tree->getAll();
     }
 	static function canManage($communityId, $label) 
@@ -459,7 +447,6 @@ class Users_Label extends Base_Users_Label
 	 * @param {string|array} [$userId=null] The id of the user whose contact labels should be fetched. Can be an array of userIds.
 	 * @param {string|array|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some array or db expression, to get only a particular subset of labels.
 	 * @param {array} [$options=array()]
-	 * @param {boolean} [$options.skipAccess] whether to skip access checks
 	 * @param {string} [$options.asUserId] the user to do access checks as
 	 * @param {boolean} [$options.checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
 	 * @return {array} An array of array(label => Users_Label) pairs
@@ -469,12 +456,6 @@ class Users_Label extends Base_Users_Label
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(true);
 			$userId = $user->id;
-		}
-		if (empty($options['skipAccess'])) {
-			$asUserId = isset($options['asUserId'])
-				? $options['asUserId']
-				: Users::loggedInUser(true)->id;
-			Users::canManageLabels($asUserId, $userId, null, true, true);
 		}
 		$prefixes = $labelNames = array();
 		$criteria = @compact('userId');
