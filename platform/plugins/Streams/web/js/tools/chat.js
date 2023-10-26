@@ -158,7 +158,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	afterPost: new Q.Event(),
 	preprocess: [],
 	openInSameColumn: [],
-	handleTheirOwnClicks: ["Streams/question", "Streams/answer"],
+	handleTheirOwnClicks: ["Streams/question", "Streams/answer", "Media/webrtc"],
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -1217,7 +1217,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				}, 300);
 			}
 			$scrolling.off('scroll.Streams_chat')
-			.on('scroll.Streams_chat', function (event) {
+			.on('scroll.Streams_chat', function () {
 				var t = event.target;
 				if (t.scrollTop + 1 < t.scrollHeight - t.clientHeight) {
 					// user started scrolling manually
@@ -1270,7 +1270,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					// all message bubbles should have stabilized
 					// their height at this point
 					Q.Visual.waitUntilAnimationsEnd(function () {
-						tool.scrollToBottom(null);
+						tool.scrollToBottom(null, true);
 					});
 				});
 			});
