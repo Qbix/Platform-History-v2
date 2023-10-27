@@ -503,15 +503,15 @@ Q.exports(function() {
                 }
 
                 function _showInviteDialog() {
-                    var fields = Q.take(o, [
+                    var dialogOptions = Q.take(o, [
                         'title', 'identifierTypes', 'userChooser',
                         'appUrl', 'showGrantRolesButton', 'showGrantRelationshipsButton',
                         'addLabel', 'addMyLabel'
                     ]);
-                    fields.showGrantRolesDialog = function() {
+                    dialogOptions.showGrantRolesDialog = function() {
                         _showGrantRolesDialog(_showInviteDialog);
                     };
-                    fields.showGiveRelationshipLabelDialog = function() {
+                    dialogOptions.showGiveRelationshipLabelDialog = function() {
                         _showGiveRelationshipLabelDialog(_showInviteDialog);
                     };
                     if (o.templateName) {
@@ -529,7 +529,7 @@ Q.exports(function() {
                         } else {
                             _request();
                         }
-                    }, fields);
+                    }, dialogOptions);
                 }
 
             });
