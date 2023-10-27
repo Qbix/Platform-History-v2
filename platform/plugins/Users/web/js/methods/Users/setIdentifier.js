@@ -1,16 +1,16 @@
 Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 
-    /**
-     * Users plugin's front end code
-     *
-     * @module Users
-     * @class Users
-     */
+	/**
+	 * Users plugin's front end code
+	 *
+	 * @module Users
+	 * @class Users
+	 */
 	/**
 	 * Displays a dialog allowing the user to set a different identifier
 	 * (email address, mobile number, etc.) as their primary login method
 	 * @method setIdentifier
-     * @static
+	 * @static
 	 * @param {Object} [options] You can pass several options here
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile" or "web3"
@@ -117,8 +117,9 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 		var $identifierTypeInput = $('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />')
 			.val(identifierType);
 
-		var $button = (identifierType === 'web3')
-		? $("<button class='Q_button' />")
+		var $button;
+		if (identifierType === 'web3') {
+			$button = $("<button class='Q_button' />")
 			.text(Q.text.Users.web3.ChangeWallet)
 			.on(Q.Pointer.fastclick, function () {
 				Users.Web3.login(null, function (user) {
@@ -127,24 +128,25 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 					updateXid: true
 				});
 				return false;
-			})
-		: $('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
-			.html(Q.text.Users.setIdentifier.sendMessage) 
-
-		step1_form.empty().append(
-			$identifierInput, $identifierTypeInput, $button
-		).submit(function (event) {
-			var h = $identifierInput.outerHeight() - 5;
-			$identifierInput.css({
-				'background-image': 'url(' + Q.info.imgLoading + ')',
-				'background-repeat': 'no-repeat',
-				'background-position': 'right center',
-				'background-size': 'auto ' + h + 'px'
 			});
-			var url = Q.action('Users/identifier') + '?' + $(this).serialize();
-			Q.request(url, 'data', setIdentifier_callback, {"method": "post"});
-			event.preventDefault();
-		});
+		} else {
+			$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
+			.html(Q.text.Users.setIdentifier.sendMessage);
+			step1_form.empty().append(
+				$identifierInput, $identifierTypeInput, $button
+			).submit(function (event) {
+				var h = $identifierInput.outerHeight() - 5;
+				$identifierInput.css({
+					'background-image': 'url(' + Q.info.imgLoading + ')',
+					'background-repeat': 'no-repeat',
+					'background-position': 'right center',
+					'background-size': 'auto ' + h + 'px'
+				});
+				var url = Q.action('Users/identifier') + '?' + $(this).serialize();
+				Q.request(url, 'data', setIdentifier_callback, {"method": "post"});
+				event.preventDefault();
+			});
+		}
 		if (options.userId) {
 			step1_form.append($('<input />', {
 				type: "hidden",
