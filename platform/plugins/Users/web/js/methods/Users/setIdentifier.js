@@ -132,9 +132,7 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 		} else {
 			$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
 			.html(Q.text.Users.setIdentifier.sendMessage);
-			step1_form.empty().append(
-				$identifierInput, $identifierTypeInput, $button
-			).submit(function (event) {
+			step1_form.submit(function (event) {
 				var h = $identifierInput.outerHeight() - 5;
 				$identifierInput.css({
 					'background-image': 'url(' + Q.info.imgLoading + ')',
@@ -147,6 +145,9 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 				event.preventDefault();
 			});
 		}
+		step1_form.empty().append(
+			$identifierInput, $identifierTypeInput, $button
+		);
 		if (options.userId) {
 			step1_form.append($('<input />', {
 				type: "hidden",
