@@ -1245,7 +1245,9 @@ abstract class Users extends Base_Users
 					if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
 						$p['delay'] = $delay;
 					}
-					$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
+					$sms = Q_Config::get('Users', 'transactional', $activation, "mobile", 
+						Q_Config::get('Users', 'transactional', 'charge', 'sms', null)
+					);
 					$user->addMobile($mobileNumber, $sms, array(), $p);
 				}
 			} else {

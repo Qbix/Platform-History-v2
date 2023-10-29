@@ -53,7 +53,9 @@ function Assets_after_Assets_startSubscription($params)
 		$mobile = new Users_Mobile();
 		$mobile->number = $user->mobileNumber;
 		$mobile->retrieve(true);
-		if ($mobileView = Q_Config::get('Assets', 'transactional', 'startedSubscription', 'sms', false)) {
+		if ($mobileView = Q_Config::get('Assets', 'transactional', 'startedSubscription', 'mobile', 
+			Q_Config::get('Assets', 'transactional', 'charge', 'sms', false)
+		)) {
 			$mobile->sendMessage($mobileView, $fields);
 		}
 	}
@@ -71,7 +73,9 @@ function Assets_after_Assets_startSubscription($params)
 		$mobile = new Users_Mobile();
 		$mobile->number = $publisher->mobileNumber;
 		$mobile->retrieve(true);
-		if ($mobileView = Q_Config::get('Assets', 'transactional', 'startSubscription', 'sms', false)) {
+		if ($mobileView = Q_Config::get('Assets', 'transactional', 'startSubscription', 'mobile', 
+			Q_Config::get('Assets', 'transactional', 'charge', 'sms', false)
+		)) {
 			$mobile->sendMessage($mobileView, $fields);
 		}
 	}

@@ -59,7 +59,7 @@ function Assets_after_Assets_charge($params)
 		$mobile = new Users_Mobile();
 		$mobile->number = $user->mobileNumber;
 		$mobile->retrieve(true);
-		if ($mobileView = Q_Config::get('Assets', 'transactional', 'charged', 'sms', false)) {
+		if ($mobileView = Q_Config::get('Assets', 'transactional', 'charged', 'mobile', false)) {
 			try {
 				$mobile->sendMessage($mobileView, $fields);
 			} catch (Exception $e) {}
@@ -81,7 +81,9 @@ function Assets_after_Assets_charge($params)
 		$mobile = new Users_Mobile();
 		$mobile->number = $publisher->mobileNumber;
 		$mobile->retrieve(true);
-		if ($mobileView = Q_Config::get('Assets', 'transactional', 'charge', 'sms', false)) {
+		if ($mobileView = Q_Config::get('Assets', 'transactional', 'charge', 'mobile', 
+			Q_Config::get('Assets', 'transactional', 'charge', 'sms', false)
+		)) {
 			try {
 				$mobile->sendMessage($mobileView, $fields);
 			} catch (Exception $e) {}
