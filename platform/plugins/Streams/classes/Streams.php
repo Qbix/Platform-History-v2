@@ -541,8 +541,9 @@ abstract class Streams extends Base_Streams
 	/**
 	 * Fetches public streams from the database, even from multiple publishers.
 	 * Unlike Streams::fetch(), this method doesn't check the access control,
-	 * because the streams should be accessible to be read by anybody.
-	 * It simply returns the Streams_Stream rows with their own read/write/admin levels.
+	 * because the stream content should be accessible to be read by anybody,
+	 * i.e. at least testReadLevel('content').
+	 * It simply returns the Streams_Stream rows with their own public read/write/admin levels.
 	 * Also, it skips any sort of template and mutable stuff.
 	 * @method fetchPublicStreams
 	 * @static
@@ -574,8 +575,8 @@ abstract class Streams extends Base_Streams
 		))->fetchDbRows();
 		$streams = array();
 		foreach ($rows as $row) {
-			// make sure the stream really has max read level
-			if ($row->readLevel === Streams::$READ_LEVEL['max']) {
+			// make sure the stream really has testReadLevel('content')
+			if ($row->readLevel >= Streams::$READ_LEVEL['content']) {
 				$row->set('public', true);
 				$streams[$row->publisherId][$row->name] = $row;
 			}
