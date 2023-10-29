@@ -33,7 +33,9 @@ function Users_identifier_post()
 		);
 	} else if ($type === 'mobile') {
 		$view = Q_Config::get(
-			'Users', 'transactional', 'identifier', 'mobile', 'Users/mobile/addMobile.php'
+			'Users', 'transactional', 'identifier', 'mobile', Q_Config::get(
+				'Users', 'transactional', 'identifier', 'sms', 'Users/mobile/activation.php'
+			)
 		);
 		$user->addMobile(
 			$identifier,
