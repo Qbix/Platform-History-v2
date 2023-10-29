@@ -517,7 +517,7 @@ abstract class Streams extends Base_Streams
 			 * @param {string} fields
 			 * @param {array} options also contains "duringInternal", may want to return early in that case
 			 */
-			Q::event("Streams/fetch/$type", $params, 'after', false, $streams);
+			Q::event("Streams/fetch/$type", $params, 'after', false);
 		}
 
 		if (!self::$dontCache and empty($options['dontCache'])) {
@@ -558,8 +558,7 @@ abstract class Streams extends Base_Streams
 	static function fetchPublicStreams(
 		$publishersAndNames,
 		$fields = '*',
-		$options = array(),
-		&$results = array())
+		$options = array())
 	{
 		if ($fields === '*') {
 			$fields = join(',', Streams_Stream::fieldNames());
