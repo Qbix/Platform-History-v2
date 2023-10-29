@@ -894,7 +894,7 @@ class Db_Row
 	 * This can be called even if the Db_Row was not retrieved,
 	 * and typically is used for caching purposes.
 	 * @method calculatePKValue
-	 * @param {boolean|array} [$useIndex=true] If there is no primary key on this table,
+	 * @param {boolean|array} [$useIndex=false] If there is no primary key on this table,
 	 *  then pass an array of field names to use, corresponding to a key.
 	 * @return {array|false} An associative array naming all the fields that comprise the
 	 *  primary key index, in the order they appear in the key.<br/>
@@ -903,7 +903,8 @@ class Db_Row
 	function calculatePKValue ($useIndex = false)
 	{
 		$return = array();
-		$pk = $useIndex ? $useIndex : $this->getPrimaryKey();
+		$pk = is_array($useIndex) ? $useIndex : 
+			($useIndex ? $this->getPrimaryKey() : array());
 		foreach ($pk as $fieldName) {
 			if (!array_key_exists($fieldName, $this->fields)) {
 				return false;
@@ -1431,7 +1432,7 @@ class Db_Row
 	}
 
 	/**
-	 * Extra shortcuts when calling methods
+	 * Default implementations when calling methods
 	 * @method __call
 	 * @param {string} $name
 	 * @param {array} $args

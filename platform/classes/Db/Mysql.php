@@ -2595,20 +2595,44 @@ $field_hints
 	static function insertManyAndExecute(\$rows = array(), \$options = array())
 	{
 		// simulate beforeSave on all rows
+		\$rowObjects = array();
 		foreach (\$rows as \$row) {
-			if (is_array(\$row)) {
-				\$rowObject = new $class_name(\$row);
-			} else {
-				\$rowObject = \$row;
-				\$row = \$row->fields;
+			try {
+				if (is_array(\$row)) {
+					\$rowObjects[] = \$rowObject = new $class_name(\$row);
+				} else {
+					\$rowObjects[] = \$rowObject = \$row;
+					\$row = \$row->fields;
+				}
+				\$rowObject->set('Db/insertManyAndExecute', true);
+				\$rowObject->beforeSave(\$row);
+				\$row = \$rowObject->fields;
+			} catch (Exception \$e) {
+				// swallow errors and continue the simulation
 			}
-			\$rowObject->beforeSave(\$row);
-			\$row = \$rowObject->fields;
 		}
 		self::db()->insertManyAndExecute(
 			self::table(), \$rows,
 			array_merge(\$options, array('className' => $class_name_var))
 		);
+		// simulate afterSaveExecute on all rows
+		foreach (\$rows as \$i => \$row) {
+			try {
+				\$rowObject = \$rowObjects[\$i];
+				\$rowObject->wasModified(false);
+				\$query = self::insert(\$rowObject->fields);
+				\$q = \$query->build();
+				\$stmt = null;
+				\$result = new Db_Result(\$stmt, \$query);
+				\$rowObject->afterSaveExecute(
+					\$result, \$query, \$rowObject->fields,
+					\$rowObject->calculatePKValue(true)
+				);
+				\$row = \$rowObject->fields;
+			} catch (Exception \$e) {
+				// swallow errors and continue the simulation
+			}
+		}
 	}
 	
 	$dc

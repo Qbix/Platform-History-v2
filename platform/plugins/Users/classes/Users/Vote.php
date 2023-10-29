@@ -176,6 +176,7 @@ class Users_Vote extends Base_Users_Vote
 		$day = 60 * 60 * 24;
 		$week = $day * 7;
 		$month = date("t") * $day;
+		$rows = array();
 		foreach (@compact("day", "week", "month") as $period => $duration) {
 			switch ($period) {
 				case "day":
@@ -193,6 +194,12 @@ class Users_Vote extends Base_Users_Vote
 
 			$forId = "Users/activity/$n/$duration/$timestamp";
 
+			$rows[] = array(
+				'userId' => $user->id,
+				'forType' => $type,
+				'forId' => $forId,
+				'value' => 1
+			);
 			$usersVote = new Users_Vote();
 			$usersVote->userId = $user->id;
 			$usersVote->forType = $type;
@@ -204,6 +211,9 @@ class Users_Vote extends Base_Users_Vote
 				} catch (Exception $e) {}
 			}
 		}
+		// Users_Vote::insertManyAndExecute($rows, array(
+		// 	'onDuplicateKeyUpdate' => array('value' => 1)
+		// ));
 	}
 
 	/**
