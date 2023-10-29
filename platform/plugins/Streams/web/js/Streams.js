@@ -1950,7 +1950,9 @@ function _disconnectStreamNode(publisherId, streamName, ps) {
 		streamName: streamName
 	});
 	var hadNode = !Q.isEmpty(priv._retainedNodes[nodeUrl]);
-	delete priv._retainedNodes[nodeUrl][ps];
+	if (hadNode) {
+		delete priv._retainedNodes[nodeUrl][ps];
+	}
 	if (!hadNode || !Q.isEmpty(priv._retainedNodes[nodeUrl])
 	|| !priv._connectedNodes[nodeUrl]) {
 		return false;
