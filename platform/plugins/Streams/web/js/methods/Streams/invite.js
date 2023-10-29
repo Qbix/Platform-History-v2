@@ -168,7 +168,7 @@ Q.exports(function() {
                         url: rsd.url,
                         title: streamName
                     }, 10, text);
-                    Q.Template.render("Streams/templates/invite/sms", t,function (err, text) {
+                    Q.Template.render("Streams/templates/invite/mobile", t,function (err, text) {
                         if (err) {
                             return;
                         }

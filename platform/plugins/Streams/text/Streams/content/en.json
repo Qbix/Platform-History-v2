@@ -161,7 +161,7 @@
             "YOUAREINVITED": "YOU ARE INVITED!",
             "AcceptInvite": "Accept Invite"
         },
-        "sms": {
+        "mobile": {
             "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {

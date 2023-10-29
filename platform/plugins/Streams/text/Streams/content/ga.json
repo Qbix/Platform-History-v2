@@ -153,7 +153,7 @@
             "YOUAREINVITED": "TUGTAR CUIREADH DUIT!",
             "AcceptInvite": "Glac le Cuireadh"
         },
-        "sms": {
+        "mobile": {
             "content": "Tugadh cuireadh duit chuig {{title}} . Tapáil {{url}} le do thoil"
         },
         "notice": {

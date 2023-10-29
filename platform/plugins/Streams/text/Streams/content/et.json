@@ -153,7 +153,7 @@
             "YOUAREINVITED": "TE OLETE KUTSUTUD!",
             "AcceptInvite": "Nõustu kutsega"
         },
-        "sms": {
+        "mobile": {
             "content": "Teid on kutsutud numbrile {{title}} . Puudutage {{url}}"
         },
         "notice": {

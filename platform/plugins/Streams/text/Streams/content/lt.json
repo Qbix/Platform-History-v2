@@ -153,7 +153,7 @@
             "YOUAREINVITED": "ESATE KVIEČIAMI!",
             "AcceptInvite": "Priimti kvietimą"
         },
-        "sms": {
+        "mobile": {
             "content": "Buvote pakviesti į {{title}} . Palieskite {{url}}"
         },
         "notice": {

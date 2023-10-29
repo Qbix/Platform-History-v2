@@ -153,7 +153,7 @@
             "YOUAREINVITED": "GONBIDATUTA ZAUDE!",
             "AcceptInvite": "Onartu Gonbidapena"
         },
-        "sms": {
+        "mobile": {
             "content": "{{title}} gonbidatu zaituzte. Mesedez, sakatu {{url}}"
         },
         "notice": {

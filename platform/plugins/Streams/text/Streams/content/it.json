@@ -153,7 +153,7 @@
             "YOUAREINVITED": "SEI INVITATO!",
             "AcceptInvite": "Accettare l&#39;invito"
         },
-        "sms": {
+        "mobile": {
             "content": "Sei stato invitato a {{title}} . Tocca {{url}}"
         },
         "notice": {

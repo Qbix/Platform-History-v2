@@ -153,7 +153,7 @@
             "YOUAREINVITED": "U WORD UITGENOOI!",
             "AcceptInvite": "Aanvaar uitnodiging"
         },
-        "sms": {
+        "mobile": {
             "content": "Jy is genooi na {{title}} . Tik asseblief {{url}}"
         },
         "notice": {

@@ -153,7 +153,7 @@
             "YOUAREINVITED": "DU ER INVITERET!",
             "AcceptInvite": "Accepter invitation"
         },
-        "sms": {
+        "mobile": {
             "content": "Du er blevet inviteret til {{title}} . Tryk venligst på {{url}}"
         },
         "notice": {

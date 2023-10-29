@@ -153,7 +153,7 @@
             "YOUAREINVITED": "IKAW AY INIIMBITAHAN!",
             "AcceptInvite": "Tanggapin ang Imbitasyon"
         },
-        "sms": {
+        "mobile": {
             "content": "Inimbitahan ka sa {{title}} . Paki-tap {{url}}"
         },
         "notice": {

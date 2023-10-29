@@ -153,7 +153,7 @@
             "YOUAREINVITED": "INTI MISTIEDNA!",
             "AcceptInvite": "Aċċetta Stieden"
         },
-        "sms": {
+        "mobile": {
             "content": "Ġejt mistieden għal {{title}} . Jekk jogħġbok tektek {{url}}"
         },
         "notice": {

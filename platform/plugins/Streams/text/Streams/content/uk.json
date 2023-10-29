@@ -153,7 +153,7 @@
             "YOUAREINVITED": "ВИ ЗАПРОШЕНІ!",
             "AcceptInvite": "Прийняти запрошення"
         },
-        "sms": {
+        "mobile": {
             "content": "Вас запросили на {{title}} . Будь ласка, торкніться {{url}}"
         },
         "notice": {

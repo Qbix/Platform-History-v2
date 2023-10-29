@@ -98,8 +98,8 @@
 				"email": {
 					"*": ["Users/email"]
 				},
-				"sms": {
-					"*": ["Users/sms"]
+				"mobile": {
+					"*": ["Users/mobile"]
 				}
 			}
 		},
@@ -207,7 +207,7 @@
 			"resend": {
 				"subject": ["Users/content", ["notifications", "ForgetPass"]],
 				"body": "Users/email/resend.php",
-				"sms": "Users/mobile/resend.php"
+				"mobile": "Users/mobile/resend.php"
 			},
 			"authenticated": {
 				"subject": false,

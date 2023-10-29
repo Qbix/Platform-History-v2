@@ -153,7 +153,7 @@
             "YOUAREINVITED": "ΚΑΛΕΙΣΤΕ!",
             "AcceptInvite": "Αποδοχή πρόσκλησης"
         },
-        "sms": {
+        "mobile": {
             "content": "Έχετε προσκληθεί στο {{title}} . Πατήστε {{url}}"
         },
         "notice": {

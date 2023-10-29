@@ -153,7 +153,7 @@
             "YOUAREINVITED": "JE BENT UITGENODIGD!",
             "AcceptInvite": "Uitnodiging accepteren"
         },
-        "sms": {
+        "mobile": {
             "content": "U bent uitgenodigd voor {{title}} . Tik op {{url}}"
         },
         "notice": {
