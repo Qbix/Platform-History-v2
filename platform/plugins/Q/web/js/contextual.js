@@ -521,7 +521,7 @@
 					{
 						return;
 					}
-					Q.handle(handler, contextual, [li]);
+					Q.handle(handler, contextual, [li, event]);
 
 					Q.Contextual.hide();
 				};
