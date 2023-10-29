@@ -154,6 +154,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
 	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
 	 *   and save a new cache if necessary.
+	 *  @param {boolean} [$options.cacheEmptyAlso] Pass true to cache even an empty result
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
 	 *   fetching the streams
 	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)

@@ -339,6 +339,7 @@ abstract class Streams extends Base_Streams
 	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
 	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
 	 *   and save a new cache if necessary.
+	 *  @param {boolean} [$options.cacheEmptyAlso] Pass true to cache even an empty result
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
 	 *   fetching the streams
 	 *  @param {boolean} [$options.withParticipant=false]
@@ -398,7 +399,9 @@ abstract class Streams extends Base_Streams
 			$namesToFetch = array();
 			foreach ($arr as $n) {
 				if (isset(self::$fetch[$asUserId][$publisherId][$n][$fields])) {
-					$allCached[$n] = self::$fetch[$asUserId][$publisherId][$n][$fields];
+					if (self::$fetch[$asUserId][$publisherId][$n][$fields] !== false) {
+						$allCached[$n] = self::$fetch[$asUserId][$publisherId][$n][$fields];
+					}
 				} else {
 					$namesToFetch[] = $n;
 				}
@@ -521,6 +524,13 @@ abstract class Streams extends Base_Streams
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
+			if (!empty($options['cacheEmptyAlso'])) {
+				foreach ($namesToFetch as $n) {
+					if (!isset($streams[$n])) {
+						self::$fetch[$asUserId][$publisherId][$n][$fields] = false;
+					}
+				}
+			}
 		}
 		if ($restoreCaching) {
 			Db::allowCaching($prevCaching);
@@ -538,6 +548,7 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {array} $publishersAndNames
 	 *  Array of ($publisherId => $namesArray) pairs
+	 * @param {string} [$fields="*"]
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects indexed by
 	 *  $publisherId => $name => $stream
@@ -563,9 +574,9 @@ abstract class Streams extends Base_Streams
 		))->fetchDbRows();
 		$streams = array();
 		foreach ($rows as $row) {
-			$row->set('public', true);
+			// make sure the stream really has max read level
 			if ($row->readLevel === Streams::$READ_LEVEL['max']) {
-				// make sure the stream really has max read level
+				$row->set('public', true);
 				$streams[$row->publisherId][$row->name] = $row;
 			}
 		}

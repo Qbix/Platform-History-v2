@@ -7,7 +7,9 @@ function Websites_before_Q_responseExtras()
 	$websitesUserId = Users::communityId();
 	$sha1 = sha1(Q_Dispatcher::uri());
 	$metadataStreamName = "Websites/metadata/$sha1";
-	$stream = Streams_Stream::fetch($userId, $websitesUserId, $metadataStreamName);
+	$stream = Streams_Stream::fetch($userId, $websitesUserId, $metadataStreamName, '*', array(
+		'cacheEmptyAlso' => true
+	));
 	if ($stream) {
 		$fields = Q::take(
 			$stream->getAllAttributes(),
