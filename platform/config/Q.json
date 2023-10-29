@@ -295,6 +295,9 @@
 		},
 		"survive": {
 			"mysql": true
+		},
+		"node": {
+			"mysql2": true
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-function Websites_after_Streams_fetch_Websites_webpage($params, &$result)
+function Websites_after_Streams_fetch_Websites_webpage($params)
 {
 	$streams = $params['streams'];
 	if (!empty($params['options']['duringInternal'])) {

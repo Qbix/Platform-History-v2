@@ -74,14 +74,20 @@ function Db_Mysql(connName, dsn) {
 			database: database,
 			multipleStatements: true
 		}, options);
-		var connection = require('mysql').createConnection(o);
-		var del = connection._protocol._delegateError;
-		connection._protocol._delegateError = function(err, sequence){
-			if (err.fatal) {
-				console.trace('fatal error: ' + err.message);
-			}
-			return del.call(this, err, sequence);
-		};
+		var connection;
+		var mysql2 = Q.Config.get(['Db', 'node', 'mysql2'], false);
+		if (mysql2) {
+			connection = require('mysql2').createConnection(o);
+		} else {
+			connection = require('mysql').createConnection(o);
+			var del = connection._protocol._delegateError;
+			connection._protocol._delegateError = function(err, sequence){
+				if (err.fatal) {
+					console.trace('fatal error: ' + err.message);
+				}
+				return del.call(this, err, sequence);
+			};
+		}
 		return connections[key] = connection;
 	}
 
