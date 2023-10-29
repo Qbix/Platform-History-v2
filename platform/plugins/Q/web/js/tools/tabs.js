@@ -55,7 +55,9 @@
 			if (state.contextualHandler == null) {
 				state.contextualHandler = function ($jq, event) {
 					var element = $jq[0];
-					tool.switchTo([element.getAttribute('data-name'), element, event]);
+					tool.switchTo([element.getAttribute('data-name'), element], {
+						event: event
+					});
 				}
 			}
 
