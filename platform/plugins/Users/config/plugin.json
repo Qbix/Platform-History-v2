@@ -197,17 +197,17 @@
 			"activation": {
 				"subject": ["Users/content", ["notifications", "WelcomePleaseVerifyEmail"]],
 				"body": "Users/email/activation.php",
-				"sms": "Users/sms/activation.php"
+				"mobile": "Users/mobile/activation.php"
 			},
 			"identifier": {
 				"subject": ["Users/content", ["notifications", "WelcomeVerifyEmail"]],
 				"body": "Users/email/addEmail.php",
-				"sms": "Users/sms/addMobile.php"
+				"mobile": "Users/mobile/addMobile.php"
 			},
 			"resend": {
 				"subject": ["Users/content", ["notifications", "ForgetPass"]],
 				"body": "Users/email/resend.php",
-				"sms": "Users/sms/resend.php"
+				"sms": "Users/mobile/resend.php"
 			},
 			"authenticated": {
 				"subject": false,

@@ -509,22 +509,22 @@
 			"charge": {
 				"subject": ["Assets/content", ["charge", "Subject"]],
 				"body": "Assets/email/charge.php",
-				"sms": "Assets/sms/charge.php"
+				"sms": "Assets/mobile/charge.php"
 			},
 			"charged": {
 				"subject": ["Assets/content", ["charged", "Subject"]],
 				"body": "Assets/email/charged.php",
-				"sms": "Assets/sms/charged.php"
+				"sms": "Assets/mobile/charged.php"
 			},
 			"startSubscription": {
 				"subject": ["Assets/content", ["notifications", "SubscribedTo"]],
 				"body": "Assets/email/startSubscription.php",
-				"sms": "Assets/sms/startSubscription.php"
+				"sms": "Assets/mobile/startSubscription.php"
 			},
 			"startedSubscription": {
 				"subject": ["Assets/content", ["notifications", "YouSubscribedTo"]],
 				"body": "Assets/email/startedSubscription.php",
-				"sms": "Assets/sms/startedSubscription.php"
+				"sms": "Assets/mobile/startedSubscription.php"
 			}
 		},
 		"browsertab": {

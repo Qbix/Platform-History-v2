@@ -214,8 +214,8 @@ class Users_Mobile extends Base_Users_Mobile
 		$options = array())
 	{
 		if (!isset($view)) {
-			$view = Q_Config::get('Users', 'transactional', 'resend', 'sms', Q_Config::get(
-				'Users', 'transactional', 'resend', 'sms', 'Users/sms/activation.php'
+			$view = Q_Config::get('Users', 'transactional', 'resend', 'mobile', Q_Config::get(
+				'Users', 'transactional', 'resend', 'mobile', 'Users/mobile/activation.php'
 			));
 		}
 		$user = $this->get('user', null);

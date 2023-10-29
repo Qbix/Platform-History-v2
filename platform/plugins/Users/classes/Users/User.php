@@ -846,7 +846,7 @@ class Users_User extends Base_Users_User
 		if ($activation = Q::ifset($options, 'activation', 'activation')) {
 			if (!isset($activationMessageView)) {
 				$activationMessageView = Q_Config::get(
-					'Users', 'transactional', $activation, 'sms', 'Users/sms/activation.php'
+					'Users', 'transactional', $activation, 'mobile', 'Users/mobile/activation.php'
 				);
 			}
 			$baseUrl = Q_Request::baseUrl();
