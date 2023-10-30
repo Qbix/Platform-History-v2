@@ -21,7 +21,7 @@ JS;
 /************************************************
  * Below, Qbix Platform plugins have a chance to 
  * add their own code to this service worker by
- * adding hooks after the "Q/serviceWorker" event.
+ * adding hooks after  "Q/serviceWorker/response"
  ************************************************/
 JS;
 			
