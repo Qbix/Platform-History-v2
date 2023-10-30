@@ -1202,27 +1202,29 @@ Q.Tool.define('Streams/chat', function(options) {
 			s.addClass('Q_forceDisplayBlock');
 			var scrollHeight = s.scrollHeight;
 			s.removeClass('Q_forceDisplayBlock');
-			var c = $composer[0] && $composer[0];
-			var m = c.scrollIntoViewIfNeeded ||  c.scrollIntoView;
-			if (recursive) {
-				m.call(c, {
-					behavior: "instant",
-					block: "nearest",
-					inline: "nearest"
-				});
-				s.scrollTop = scrollHeight;
-				_stayAtComposer();
-			} else {
-				m.call(c, {
-					behavior: "smooth",
-					block: "nearest",
-					inline: "nearest"
-				});
-				setTimeout(function () {
-					stopScrollingToComposer = false;
+			var c = $composer[0];
+			if (c) {
+				var m = c.scrollIntoViewIfNeeded ||  c.scrollIntoView;
+				if (recursive) {
+					m.call(c, {
+						behavior: "instant",
+						block: "nearest",
+						inline: "nearest"
+					});
+					s.scrollTop = scrollHeight;
 					_stayAtComposer();
-					Q.handle(callback, null, [s]);
-				}, 500);
+				} else {
+					m.call(c, {
+						behavior: "smooth",
+						block: "nearest",
+						inline: "nearest"
+					});
+					setTimeout(function () {
+						stopScrollingToComposer = false;
+						_stayAtComposer();
+						Q.handle(callback, null, [s]);
+					}, 500);
+				}
 			}
 			return $scrolling;
 		}
