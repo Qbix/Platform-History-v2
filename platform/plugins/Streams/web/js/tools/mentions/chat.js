@@ -123,7 +123,7 @@
 					}
 				}).on('focus', "input", function () {
 					setTimeout(function () {
-						state.chatTool.scrollToBottom();
+						state.chatTool.scrollToComposer();
 					}, 500);
 				}).on('blur', "input", function () {
 					setTimeout(function () {
