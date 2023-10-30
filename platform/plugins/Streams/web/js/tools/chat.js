@@ -1202,8 +1202,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			s.addClass('Q_forceDisplayBlock');
 			var scrollHeight = s.scrollHeight;
 			s.removeClass('Q_forceDisplayBlock');
+			var c = $composer[0] && $composer[0];
+			var m = c.scrollIntoViewIfNeeded ||  c.scrollIntoView;
 			if (recursive) {
-				$composer[0] && $composer[0].scrollIntoView({
+				m.call(c, {
 					behavior: "instant",
 					block: "nearest",
 					inline: "nearest"
@@ -1211,7 +1213,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				s.scrollTop = scrollHeight;
 				_stayAtComposer();
 			} else {
-				$composer[0] && $composer[0].scrollIntoView({
+				m.call(c, {
 					behavior: "smooth",
 					block: "nearest",
 					inline: "nearest"
