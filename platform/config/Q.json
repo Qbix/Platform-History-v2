@@ -10,8 +10,7 @@
 			"Q/autoload": ["Q/before/Q_autoload"]
 		},
 		"handlersAfterEvent": {
-			"Q/tool/render": ["Q/after/Q_tool_render"],
-			"Q/serviceWorker/response": ["Q/after/Q_serviceWorker_response"]
+			"Q/tool/render": ["Q/after/Q_tool_render"]
 		},
 		"autoload": {
 			"requires": {
