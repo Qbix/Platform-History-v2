@@ -1162,7 +1162,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 	scrollToComposer: function _scrollToComposer(callback, stayAtComposerUntilUserScroll) {
 		var $composer = this.$('.Streams_chat_composer');
-		var isTextarea = (state.inputType === 'textarea');
+		var isTextarea = (this.state.inputType === 'textarea');
 		var sel1 = '.Streams_chat_composer textarea';
 		var sel2 = '.Streams_chat_composer input[type=text]';
 		var $input = this.$(isTextarea ? sel1: sel2);
