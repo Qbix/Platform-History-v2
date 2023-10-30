@@ -350,8 +350,6 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                         
                         if ($canManageButton.length == 1) {
                             $canManageButton.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                                tool.element.addClass('Q_working');
-                                
                                 var label = $canManageButton.data('label')
                                 
                                 Q.Dialogs.push({
@@ -452,13 +450,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                     function(err, ret){}
                                                 )
                                                 )
-                                            ]).then(function(resp){
-                                                tool.element.removeClass('Q_working');
-
-                                            }).catch(function(err){
+                                            ]).finally(function(resp){
                                                 tool.element.removeClass('Q_working');
                                             });
-                                        }).catch(function(err){
+                                        }).finally(function(err){
                                             tool.element.removeClass('Q_working');
                                         });;
 
