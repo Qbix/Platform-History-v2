@@ -1,20 +1,5 @@
-<?php
-
-function Q_serviceWorker_response_js()
-{
-    header("Content-Type: text/javascript");
-
-	$cookies_json = Q::json_encode(Q_Response::$cookies);
-
-    echo <<<JAVASCRIPT
-
-/**
- * Qbix Platform ServiceWorker script.
- * This script is rendered by all plugins on the server by PHP.
- */
-
 (function () {
-    // This anonymous closure is not accessible from outside.
+	// This anonymous closure is not accessible from outside.
 	// It contains code to read, store and attach cookie-like
 	// Cookie-JS request headers, and Set-Cookie-JS response headers.
 
@@ -97,27 +82,3 @@ Q.IndexedDB = {
 		request.onError = onError;
 	}
 };
-
-/************************************************
- * Below, Qbix Platform plugins have a chance to 
- * add their own code to this service worker by
- * adding hooks after the "Q/serviceWorker" event.
- ************************************************/
-
-JAVASCRIPT;
-
-	// Give a chance for other hooks to output some code.
-	Q::event("Q/serviceWorker", array(), 'after');
-
-	// TODO: output the other service worker code here from plugins
-	// TODO: output the httponly cookies in the service worker, inside a closure
-	// and use it to sign things.
-	// TODO: also send the httponly cookies again on every request,
-	// TODO: listen to Set-Cookie-JS headers and update cookies
-	// Every time the script is reloaded, it will get the latest cookies.
-	// And then Set-Cookie-JS will set the cookies there.
-	// Notice that other sites won't be able to get this,
-	// make sure that CORS headers do NOT include access-control-allow-origin
-
-    return false;
-}

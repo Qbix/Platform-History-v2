@@ -9,11 +9,12 @@
  */
 class Q_ServiceWorker
 {
-    function inlineCode()
+    static function inlineCode()
     {
-        $config = Q_Config::get('Q', 'serviceWorkers', 'modules', array());
+        $config = Q_Config::get('Q', 'javascript', 'serviceWorker', 'modules', array());
         $js = array();
         foreach ($config as $plugin => $filename) {
+            $filename = Q::pluginDir($plugin, 'SCRIPTS') . DS . $filename;
             if (!file_exists($filename)) {
                 throw new Q_Exception_MissingFile(compact('filename'));
             }

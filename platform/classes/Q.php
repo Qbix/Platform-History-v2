@@ -1932,6 +1932,23 @@ class Q
 	}
 
 	/**
+	 * Call this function to get a certain directory of a plugin.
+	 * @method pluginDir
+	 * @static
+	 * @param {string} $plugin can be "Users", "Streams", etc.
+	 * @param {string} $type can be "WEB", "SCRIPTS", etc.
+	 * @return {string} the full directory path
+	 */
+	static function pluginDir($plugin, $type)
+	{
+		$cn = strtoupper($plugin) . '_PLUGIN_' . $type . '_DIR';
+		if (!defined($cn)) {
+			return null;
+		}
+		return constant($cn);
+	}
+
+	/**
 	 * @method do_dump
 	 * @static
 	 * @private

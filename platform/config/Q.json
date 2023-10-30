@@ -3,14 +3,15 @@
 		"defaultTimezone": "UTC",
 		"handlersBeforeEvent": {
 			"Q/reroute": ["Q/before/Q_reroute"],
-			"Q/responseExtras": ["Q/before/Q/responseExtras"],
-			"Q/sessionExtras": ["Q/before/Q/sessionExtras"],
-			"Q/tool/render": ["Q/before/Q/tool/render"],
-			"Q/view": ["Q/before/Q/view"],
-			"Q/autoload": ["Q/before/Q/autoload"]
+			"Q/responseExtras": ["Q/before/Q_responseExtras"],
+			"Q/sessionExtras": ["Q/before/Q_sessionExtras"],
+			"Q/tool/render": ["Q/before/Q_tool_render"],
+			"Q/view": ["Q/before/Q_view"],
+			"Q/autoload": ["Q/before/Q_autoload"]
 		},
 		"handlersAfterEvent": {
-			"Q/tool/render": ["Q/after/Q/tool/render"]
+			"Q/tool/render": ["Q/after/Q_tool_render"],
+			"Q/serviceWorker/response": ["Q/after/Q_serviceWorker_response"]
 		},
 		"autoload": {
 			"requires": {
@@ -167,6 +168,9 @@
 				"{{Q}}/js/Q.js": true
 			},
 			"serviceWorker": {
+				"modules": {
+					"Q": "Q/serviceWorker.js"
+				},
 				"latest": {
 					"Q": {
 						"timestamp": 1689521256
