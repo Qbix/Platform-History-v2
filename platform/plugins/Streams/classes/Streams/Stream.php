@@ -878,6 +878,34 @@ class Streams_Stream extends Base_Streams_Stream
 		);
 		return $user->id;
 	}
+
+	/**
+	 * Get or set the lock status of an attribute
+	 * @method attributesLock
+	 * @param {array} $attributeNames for now it only takes an array of strings
+	 * @param {boolean} [$status] Pass the new status here if changing it
+	 * @return {boolean} the lock status of the attribute
+	 */
+	function attributesLock(array $attributeNames, $status = null)
+	{
+		$n = self::ATTRIBUTE_ATTRIBUTES_LOCKED;
+		$a = $this->getAttribute($n, array());
+		$results = array();
+		foreach ($attributeNames as $an) {
+			$i = array_search($an, $a);
+			if (!isset($status)) {
+				if ($i !== false) {
+					$results[] = $an;
+				}
+			} else if (!$status) {
+				$a[] = $an;
+			} else {
+				array_splice($a, $i, 1);
+			}
+		}
+		$this->setAttribute($a, $value);
+		return $results;
+	}
 	
 	/**
 	 * @method getAllAttributes
@@ -910,7 +938,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string|array} $attributeName The name of the attribute to set,
 	 *  or an array of $attributeName => $attributeValue pairs
 	 * @param {mixed} $value The value to set the attribute to
-	 * @return Streams_Stream
+	 * @return {Streams_Stream}
 	 */
 	function setAttribute($attributeName, $value = null)
 	{
@@ -994,8 +1022,8 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Method is called before setting the field and verifies that, if it is a string,
-	 * it contains a JSON array.
+	 * Method is called before setting the field and can convert an array to
+	 * a JSON string.
 	 * @method beforeSet_attributes
 	 * @param {string|array} $value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
@@ -1003,9 +1031,39 @@ class Streams_Stream extends Base_Streams_Stream
 	function beforeSet_attributes($value)
 	{
 		if (is_array($value)) {
-			$value = Q::json_encode($value);
+			$str = $value;
+			$arr = Q::json_decode($value, true); // may throw an exception
+		} else if (is_array($value)) {
+			$arr = $value;
+			$str = Q::json_encode($value);
 		}
-		return parent::beforeSet_attributes($value);
+		if ($a = $this->getAttribute(self::ATTRIBUTE_ATTRIBUTES_LOCKED, array())) {
+			// assume that $arr is an array of strings for now
+			$locked = array();
+			$changed = $this->changedAttributes($arr);
+			foreach ($a as $an) {
+				if (!empty($changed[$an])) {
+					$locked[] = $an;
+				}
+			}
+			if ($locked) {
+				throw new Streams_Exception_AttributesLocked(
+					array('attributes' => implode(', ', $locked))
+				);
+			}
+		}
+		return parent::beforeSet_attributes($str);
+	}
+
+	private function changedAttributes(array $arr) {
+		$changed = array();
+		$aa = $this->getAllAttributes();
+		foreach ($arr as $k => $v) {
+			if (!isset($aa[$k]) or $aa[$k] !== $v) {
+				$changed[$k] = true;
+			}
+		}
+		return $changed;
 	}
 	
 	/**
@@ -2700,6 +2758,8 @@ class Streams_Stream extends Base_Streams_Stream
 		->execute()
 		->fetch(PDO::FETCH_NUM);
 	}
+
+	public const ATTRIBUTE_ATTRIBUTES_LOCKED = 'Streams/attributes/locked';
 	
 	/**
 	 * Any fetched database rows that extend the stream
