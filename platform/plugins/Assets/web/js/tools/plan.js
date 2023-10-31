@@ -9,45 +9,36 @@ Q.Tool.define("Assets/plan", function(options) {
 	var tool = this;
 	var state = this.state;
 
-	var pipe = new Q.Pipe(["style", "script", "text", "stream"], tool.refresh.bind(tool));
-
-	Q.addStylesheet('{{Assets}}/css/tools/Plan.css', { slotName: 'Assets' }, pipe.fill("style"));
-	Q.addScript('{{Q}}/js/datejs/date.js', pipe.fill("script"));
-
-	Q.Text.get('Assets/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text;
-		pipe.fill("text")();
-	});
-
+	var pipe = new Q.pipe(["planStream", "subscriptionStream"], tool.refresh.bind(tool));
 	Q.Streams.get(state.publisherId, state.streamName, function (err) {
 		if (err) {
 			return;
 		}
 
 		tool.planStream = this;
+		pipe.fill("planStream")();
 
 		Q.req('Assets/subscription', 'data', function (err, response) {
 			if (err) {
 				return;
 			}
 
-			var publisherId = Q.getObject(["subscribed", tool.planStream.fields.publisherId, tool.planStream.fields.name, "publisherId"], response.slots.data);
-			var streamName = Q.getObject(["subscribed", tool.planStream.fields.publisherId, tool.planStream.fields.name, "streamName"], response.slots.data);
+			var publisherId = Q.getObject([tool.planStream.fields.publisherId, tool.planStream.fields.name, "publisherId"], response.slots.data.subscribed);
+			var streamName = Q.getObject([tool.planStream.fields.publisherId, tool.planStream.fields.name, "streamName"], response.slots.data.subscribed);
 
-			Q.Streams.get(publisherId, streamName, function (err) {
-				if (err) {
-					return;
-				}
+			if (publisherId && streamName) {
+				Q.Streams.get(publisherId, streamName, function (err) {
+					if (err) {
+						return;
+					}
 
-				tool.subscriptionStream = this;
-				pipe.fill("stream")();
-			});
-
+					tool.subscriptionStream = this;
+					pipe.fill("subscriptionStream")();
+				});
+			} else {
+				tool.subscriptionStream = null;
+				pipe.fill("subscriptionStream")();
+			}
 		}, {
 
 		});
@@ -57,9 +48,11 @@ Q.Tool.define("Assets/plan", function(options) {
 {
 	publisherId: null,
 	streamName: null,
+	payments: "stripe",
 	icon: {
 		defaultSize: 200
-	}
+	},
+	onSubscribe: new Q.Event()
 },
 
 {
@@ -68,33 +61,44 @@ Q.Tool.define("Assets/plan", function(options) {
 		var state = this.state;
 		var $toolElement = $(tool.element);
 
-		var period = tool.subscriptionStream.getAttribute("period");
-		var lastChargeTime = parseInt(tool.subscriptionStream.getAttribute("lastChargeTime"));
-		var endsIn = new Date(lastChargeTime * 1000);
-		switch (period) {
-			case "monthly":
-				endsIn.addMonths(1);
-				break;
-			case "weekly":
-				endsIn.addWeeks(1);
-				break;
-			case "daily":
-				endsIn.addDays(1);
-				break;
+		var period = tool.planStream.getAttribute("period");
+		var price = tool.planStream.getAttribute('amount');
+		var currency = tool.planStream.getAttribute('currency');
+		var lastChargeTime = null;
+		var started = null;
+		var subscribed = false;
+		var endsIn = null;
+		if (tool.subscriptionStream) {
+			subscribed = !tool.subscriptionStream.getAttribute("stopped");
+			period = tool.subscriptionStream.getAttribute("period");
+			lastChargeTime = parseInt(tool.subscriptionStream.getAttribute("lastChargeTime"));
+			started = tool.subscriptionStream.getAttribute("startDate");
+			price = tool.subscriptionStream.getAttribute('amount');
+			endsIn = new Date(lastChargeTime * 1000);
+			switch (period) {
+				case "monthly":
+					endsIn.addMonths(1);
+					break;
+				case "weekly":
+					endsIn.addWeeks(1);
+					break;
+				case "daily":
+					endsIn.addDays(1);
+					break;
+			}
 		}
 
-		var subscribed = !tool.subscriptionStream.getAttribute("stopped");
 		$toolElement.attr("data-status", subscribed);
 		Q.Template.render('Assets/plan', {
 			text: tool.text,
 			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,
-			started: tool.subscriptionStream.getAttribute("startDate"),
+			started: started,
 			endsIn: {
 				text: subscribed ? tool.text.subscriptions.NextPay : tool.text.subscriptions.EndsIn,
 				date: endsIn
 			},
-			period: tool.subscriptionStream.getAttribute("period"),
-			price: '$' + parseFloat(tool.subscriptionStream.getAttribute('amount')).toFixed(2),
+			period: period,
+			price: (currency === "USD" ? '$' : currency) + parseFloat(price).toFixed(2),
 			iconUrl: tool.planStream.iconUrl(state.icon.defaultSize)
 		}, function (err, html) {
 			if (err) {
@@ -105,26 +109,40 @@ Q.Tool.define("Assets/plan", function(options) {
 			$toolElement.activate();
 
 			$("button[name=subscribe]", tool.element).on(Q.Pointer.fastclick, function () {
-				Q.req("Assets/subscription", ["subscribe"], function (err, response) {
-					var msg = Q.firstErrorMessage(err);
-					if (msg) {
-						return Q.alert(msg);
-					}
-
-					Q.Streams.get.force(tool.subscriptionStream.fields.publisherId, tool.subscriptionStream.fields.name, function (err) {
-						if (err) {
-							return;
+				if (tool.subscriptionStream) {
+					return Q.req("Assets/subscription", ["subscribe"], function (err, response) {
+						var msg = Q.firstErrorMessage(err);
+						if (msg) {
+							return Q.alert(msg);
 						}
 
-						tool.subscriptionStream = this;
-						tool.refresh();
+						Q.Streams.get.force(tool.subscriptionStream.fields.publisherId, tool.subscriptionStream.fields.name, function (err) {
+							if (err) {
+								return;
+							}
+
+							tool.subscriptionStream = this;
+							tool.refresh();
+						});
+					}, {
+						method: "put",
+						fields: {
+							publisherId: tool.planStream.fields.publisherId,
+							streamName: tool.planStream.fields.name
+						}
 					});
-				}, {
-					method: "put",
-					fields: {
-						publisherId: tool.planStream.fields.publisherId,
-						streamName: tool.planStream.fields.name
+				}
+
+				Q.Assets.Subscriptions.subscribe(state.payments, {
+					planPublisherId: tool.planStream.fields.publisherId,
+					planStreamName: tool.planStream.fields.name,
+					immediatePayment: state.immediatePayment
+				}, function (err, data) {
+					if (err) {
+						return;
 					}
+
+					Q.handle(state.onSubscribe, tool, data);
 				});
 			});
 			$("button[name=unsubscribe]", tool.element).on(Q.Pointer.fastclick, function () {

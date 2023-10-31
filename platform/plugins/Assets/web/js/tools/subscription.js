@@ -20,27 +20,13 @@ Q.Tool.define("Assets/subscription", function (options) {
 	var tool = this;
 	var state = tool.state;
 
-	var pipe = Q.pipe(['styles', 'texts', 'data'], function () {
-		tool.refresh();
-	});
-
-	Q.addStylesheet('{{Assets}}/css/tools/AssetsSubscription.css', {slotName: 'Assets'}, pipe.fill('styles'));
-	Q.Text.get('Assets/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text.subscriptions;
-		pipe.fill('texts')();
-	});
 	Q.req('Assets/subscription', 'data', function (err, response) {
 		if (err) {
 			return;
 		}
 
 		tool.subscriptionData = response.slots.data;
-		pipe.fill('data')();
+		tool.refresh();
 	}, {
 
 	});
@@ -94,54 +80,30 @@ Q.Tool.define("Assets/subscription", function (options) {
 						});
 					}
 
-					if ($planPreviewElement.hasClass("Q_selected")) {
-						Q.invoke({
-							title: stream.fields.title,
-							trigger: tool.element,
-							content: Q.Tool.setUpElement('div', 'Assets/plan', {
-								publisherId: publisherId,
-								streamName: streamName
-							}),
-							className: 'Assets_subscription_plan'
-						});
-						return;
-					}
+					Q.invoke({
+						title: stream.fields.title,
+						trigger: tool.element,
+						content: $("<div>").tool('Assets/plan', {
+							publisherId: publisherId,
+							streamName: streamName,
+							payments: state.payments,
+							immediatePayment: state.immediatePayment
+						}),
+						className: 'Assets_subscription_plan',
+						callback: function ($element) {
+							if (!($element instanceof $)) {
+								$element = $(arguments[2]);
+							}
 
-					Q.confirm(tool.text.confirm.message.interpolate({ "title": stream.fields.title }), function (response) {
-						if (!response) {
-							return;
+							var assetsPlanTool = Q.Tool.from($element[0], "Assets/plan");
+							if (assetsPlanTool) {
+								assetsPlanTool.state.onSubscribe.set(function () {
+									$toolElement.addClass("Q_selected");
+								}, tool);
+								Q.handle(state.onSubscribe, tool);
+							}
 						}
-
-						Q.Assets.Subscriptions.subscribe(state.payments, {
-							planPublisherId: stream.fields.publisherId,
-							planStreamName: stream.fields.name,
-							immediatePayment: state.immediatePayment
-						}, function (err, data) {
-							if (err) {
-								return;
-							}
-
-							$planPreviewElement.addClass("Q_selected");
-
-							Q.handle(state.onSubscribe, tool, data);
-						});
-
-						/*Q.Assets.Subscriptions[state.payments]({
-							planPublisherId: stream.fields.publisherId,
-							planStreamName: stream.fields.name,
-							immediatePayment: state.immediatePayment
-						}, function (err, data) {
-							if (err) {
-								return;
-							}
-
-							$planPreviewElement.addClass("Q_selected");
-
-							Q.handle(state.onSubscribe, tool, data);
-						});*/
-					}, {
-						title: tool.text.confirm.title
-					})
+					});
 				}, tool);
 			});
 		};
@@ -153,11 +115,9 @@ Q.Tool.define("Assets/subscription", function (options) {
 			streamName: "Assets/plans",
 			relationType: "Assets/plan",
 			creatable: {
-				'Assets/plan': {title: tool.text.plan.NewPlan}
+				'Assets/plan': {title: tool.text.subscriptions.plan.NewPlan}
 			}
 		}).activate();
-
-
 	}
 });
 

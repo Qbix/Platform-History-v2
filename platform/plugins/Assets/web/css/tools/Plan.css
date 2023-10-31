@@ -4,7 +4,6 @@
 }
 .Assets_plan_tool .Assets_plan_period,
 .Assets_plan_tool .Assets_plan_price,
-.Assets_plan_tool .Streams_preview_icon,
 .Assets_plan_tool .Assets_plan_started,
 .Assets_plan_tool .Assets_plan_endsIn {
     margin: 0 0 10px 0;
@@ -26,6 +25,8 @@
 .Assets_plan_tool[data-status=false] .Assets_plan_status {
     color: red;
 }
+.Assets_plan_tool[data-status=false] .Assets_plan_started,
+.Assets_plan_tool[data-status=false] .Assets_plan_endsIn,
 .Assets_plan_tool button[name=subscribe],
 .Assets_plan_tool button[name=unsubscribe] {
     display: none;

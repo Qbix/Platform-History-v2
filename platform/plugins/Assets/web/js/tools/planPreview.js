@@ -66,13 +66,13 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 {
 	refresh: function (stream, callback) {
-		// track stream changes online
-		stream.observe();
-
 		var tool = this;
 		tool.stream = stream;
 		var state = this.state;
 		var ps = tool.preview.state;
+
+		// track stream changes online
+		stream.retain(tool);
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
@@ -149,13 +149,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				Q.handle(closeCallback, dialog, [dialog]);
 			}
 		});
-	},
-	Q: {
-		beforeRemove: function () {
-			if (this.stream) {
-				this.stream.neglect();
-			}
-		}
 	}
 });
 

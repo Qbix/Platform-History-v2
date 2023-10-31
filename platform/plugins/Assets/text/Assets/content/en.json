@@ -160,7 +160,10 @@
         "plan": {
             "TitlePlaceholder": "plan title",
             "PricePlaceholder": "price",
+            "SubscriptionTitle": "Subscription plans",
             "DescriptionPlaceholder": "subscription plan description",
+            "Duration": "Duration",
+            "Discount": "Discount",
             "SavePlan": "Save Plan",
             "NewPlan": "New Plan"
         }
