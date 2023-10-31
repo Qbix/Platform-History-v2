@@ -565,14 +565,16 @@ Sp.matchTypes.adapters = {
 	url: function (options) {
 		var parts = this.split(' ');
 		var res = [];
-		var regexp = (options && options.requireScheme)
+		var fileRegExp = /^(file:\/\/\/)/gim;
+		var urlRegExp = (options && options.requireScheme)
 			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
 			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
-			if (!parts[i].match(regexp)) {
-				continue;
+			if ((!options.excludeLocalFiles && parts[i].match(fileRegExp))
+			|| parts[i].match(urlRegExp)) {
+				res.push(parts[i]);
 			}
-			res.push(parts[i]);
+			
 		}
 		return res;
 	},
@@ -8252,13 +8254,11 @@ Q.url = function _Q_url(what, fields, options) {
 	}
 	var baseUrl = (options && options.baseUrl) || Q.baseUrl() || "";
 	what3 = Q.interpolateUrl(what2);
-	if (what3.isUrl()) {
-		if (what3.startsWith(baseUrl)) {
-			tail = what3.substring(baseUrl.length+1);
-			tail = tail.split('?')[0];
-			info = Q.getObject(tail, Q.updateUrls.urls, '/');
-		}
-	} else {
+	if (what3.startsWith(baseUrl)) {
+		tail = what3.substring(baseUrl.length+1);
+		tail = tail.split('?')[0];
+		info = Q.getObject(tail, Q.updateUrls.urls, '/');
+	} else if (!what3.isUrl()) {
 		info = Q.getObject(what3, Q.updateUrls.urls, '/');
 	}
 	if (info) {
@@ -9164,7 +9164,7 @@ Q.updateUrls = function(callback) {
 				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
-		}, {extend: false, cacheBust: 1000});
+		}, {extend: false, cacheBust: 1000, skipNonce: true});
 	} else if (ut !== localStorage.getItem(Q.updateUrls.timestampKey)) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
@@ -9192,7 +9192,7 @@ Q.updateUrls = function(callback) {
 				}
 				Q.handle(callback, null, [result, timestamp]);
 			}
-		}, { extend: false, cacheBust: 1000 });
+		}, { extend: false, cacheBust: 1000, skipNonce: true });
 	} else {
 		Q.handle(callback, null, [{}, timestamp]);
 	}
@@ -11229,7 +11229,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	var type = (info && info.type) || o.type;
 	var url = Q.url(dir + '/' + name + '.' + type);
 
-	Q.request(url, _callback, {parse: false, extend: false});
+	Q.request(url, _callback, {parse: false, extend: false, skipNonce: true});
 	return true;
 }, {
 	cache: Q.Cache.document('Q.Template.load', 100),
@@ -11479,7 +11479,9 @@ Q.Text = {
 			Q.ensure('Q.info.baseUrl', function () {
 				Q.each(names, function (i, name) {
 					var url = Q.url(dir + '/' + name + '/' + lls + '.json');
-					return func(name, url, pipe.fill(name), options);
+					return func(name, url, pipe.fill(name), 
+						Q.extend({skipNonce: true}, options)
+					);
 				});	
 			});
 		});
@@ -11552,7 +11554,7 @@ var language = location.search.queryField('Q.language') || navigator.language;
 Q.Text.setLanguage.apply(Q.Text, language.split('-'));
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
-	var o = Q.extend({extend: false}, options);
+	var o = Q.extend({extend: false, skipNonce: true}, options);
 	return Q.request(url, function (err, content) {
 		if (err && !url.endsWith("en.json")) {
 			url = url.replace(/[^\/]{2,5}\.json$/, "en.json");
@@ -14802,7 +14804,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
 			}
 		}
 		callback.call(this, err, voices);
-	});
+	}, {skipNonce: true});
 }, {
 	cache: Q.Cache.document('Q.Audio.speak.loadVoices', 1)
 });
