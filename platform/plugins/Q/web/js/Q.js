@@ -7211,9 +7211,9 @@ Q.init = function _Q_init(options) {
 		waitFor.push('Q.info.urls.updateBeforeInit');
 		Q.updateUrls(p2.fill('Q.info.urls.updateBeforeInit'));
 	}
-	if (!Q.isEmpty(Q.Text.loadBeforeInit)) {
-		waitFor.push('Q.Text.loadBeforeInit');
-		Q.Text.get(Q.Text.loadBeforeInit, p2.fill('Q.Text.loadBeforeInit'));
+	if (!Q.isEmpty(Q.getObject('Q.info.text.loadBeforeInit'))) {
+		waitFor.push('loadBeforeInit');
+		Q.Text.get(Q.info.text.loadBeforeInit, p2.fill('loadBeforeInit'));
 	}
 	p2.add(waitFor, 1, function () {
 		p.fill('init')();
@@ -16368,6 +16368,11 @@ Q.beforeInit.addOnce(function () {
 		if (!found) {
 			Q.Text.setLanguage(Q.info.languages[0][0], Q.info.languages[0][1]);
 		}
+	}
+
+	if (Q.info.text) {
+		Q.Text.loadBeforeInit = Q.info.text.loadBeforeInit || Q.Text.loadBeforeInit;
+		Q.Text.useLocale = Q.info.text.useLocale || Q.Text.useLocale;
 	}
 
 	Q.ensure('Promise');
