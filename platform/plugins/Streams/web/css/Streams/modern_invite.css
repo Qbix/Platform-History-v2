@@ -50,8 +50,6 @@
 }
 
 /*Contacts picker dialog*/
-.Streams_invite_contacts {
-}
 .Streams_invite_contacts button {
 	margin-bottom: 10px;
 }
@@ -99,9 +97,6 @@
 	font-size: 70%;
 }
 
-.Streams_invite_dialog .Streams_invite_social_buttons .Q_button:not(:last-child) {
-	/*margin-right: 1%;*/
-}
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_break {
 	flex:100%;
 	margin-top: 1%;
