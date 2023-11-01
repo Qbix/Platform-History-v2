@@ -105,6 +105,30 @@ Q.Tool.define("Assets/plan", function(options) {
 				tool.refresh();
 			});
 		};
+		var _subscribe = function ($button) {
+			Q.Assets.Subscriptions.subscribe(state.payments, {
+				planPublisherId: tool.planStream.fields.publisherId,
+				planStreamName: tool.planStream.fields.name,
+				immediatePayment: state.immediatePayment
+			}, function (err, status, subscriptionStream) {
+				$button.removeClass("Q_working");
+				if (err) {
+					return;
+				}
+
+				if (status) {
+					Q.Streams.get(subscriptionStream.publisherId, subscriptionStream.streamName, function (err) {
+						if (err) {
+							return;
+						}
+
+						tool.subscriptionStream = this;
+						_refreshSubscriptionAndTool();
+						Q.handle(state.onSubscribe, tool);
+					});
+				}
+			});
+		};
 
 		$toolElement.attr("data-subscribed", subscribed);
 		$toolElement.attr("data-stopped", stopped);
@@ -130,48 +154,31 @@ Q.Tool.define("Assets/plan", function(options) {
 			$("button[name=subscribe]", tool.element).on(Q.Pointer.fastclick, function () {
 				var $this = $(this);
 				$this.addClass("Q_working");
-				if (tool.subscriptionStream) {
-					return Q.req("Assets/subscription", ["subscribe"], function (err, response) {
-						$this.removeClass("Q_working");
-						var msg = Q.firstErrorMessage(err);
-						if (msg) {
-							return Q.alert(msg);
-						}
 
-						if (response.slots.subscribe) {
-							return _refreshSubscriptionAndTool();
-						}
-
-
-					}, {
-						method: "put",
-						fields: {
-							publisherId: tool.planStream.fields.publisherId,
-							streamName: tool.planStream.fields.name
-						}
-					});
+				// if user never was subscribed, just subscribe
+				if (Q.isEmpty(tool.subscriptionStream)) {
+					return _subscribe();
 				}
 
-				Q.Assets.Subscriptions.subscribe(state.payments, {
-					planPublisherId: tool.planStream.fields.publisherId,
-					planStreamName: tool.planStream.fields.name,
-					immediatePayment: state.immediatePayment
-				}, function (err, status, subscriptionStream) {
+				// if user was already subscribed, check if subscription is active, and if yes just update attr stopped
+				Q.req("Assets/subscription", ["subscribe"], function (err, response) {
 					$this.removeClass("Q_working");
-					if (err) {
-						return;
+					var msg = Q.firstErrorMessage(err);
+					if (msg) {
+						return Q.alert(msg);
 					}
 
-					if (status) {
-						Q.Streams.get(subscriptionStream.publisherId, subscriptionStream.streamName, function (err) {
-							if (err) {
-								return;
-							}
+					if (response.slots.subscribe) {
+						return _refreshSubscriptionAndTool();
+					}
 
-							tool.subscriptionStream = this;
-							_refreshSubscriptionAndTool();
-							Q.handle(state.onSubscribe, tool);
-						});
+					// if subscription is not active already, just call subscribe where charge funds again
+					_subscribe();
+				}, {
+					method: "put",
+					fields: {
+						publisherId: tool.planStream.fields.publisherId,
+						streamName: tool.planStream.fields.name
 					}
 				});
 			});
