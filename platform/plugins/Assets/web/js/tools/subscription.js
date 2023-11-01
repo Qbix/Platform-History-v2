@@ -9,11 +9,8 @@
  * @class Assets subscription
  * @constructor
  * @param {Object} options Override various options for this tool
- *  @param {String} options.payments can be "authnet" or "stripe"
  *  @param {String} options.planStreamName the name of the subscription plan's stream
  *  @param {String} [options.planPublisherId=Q.Users.communityId] the publisher of the subscription plan's stream
- *  @param {String} [params.token] If payments is "authnet" then tool must be rendered server-side
- *  @param {String} [params.action] If payments is "authnet" then tool must be rendered server-side
  */
 
 Q.Tool.define("Assets/subscription", function (options) {
@@ -33,8 +30,6 @@ Q.Tool.define("Assets/subscription", function (options) {
 },
 
 { // default options here
-	payments: "stripe",
-	immediatePayment: true,
 	onSubscribe: new Q.Event()
 },
 
@@ -83,24 +78,28 @@ Q.Tool.define("Assets/subscription", function (options) {
 					Q.invoke({
 						title: stream.fields.title,
 						trigger: tool.element,
-						content: $("<div>").tool('Assets/plan', {
-							publisherId: publisherId,
-							streamName: streamName,
-							payments: state.payments,
-							immediatePayment: state.immediatePayment
-						}),
+						name: 'Assets/plan',
+						url: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop()),
 						className: 'Assets_subscription_plan',
-						callback: function ($element) {
+						onActivate: function ($element) {
 							if (!($element instanceof $)) {
 								$element = $(arguments[2]);
 							}
 
-							var assetsPlanTool = Q.Tool.from($element[0], "Assets/plan");
-							if (assetsPlanTool) {
+							var pipe = new Q.Pipe(['assetsPlanTool'], function (params, subject) {
+								var assetsPlanTool = params.assetsPlanTool[0];
 								assetsPlanTool.state.onSubscribe.set(function () {
 									$toolElement.addClass("Q_selected");
+									Q.handle(state.onSubscribe, tool, [assetsPlanTool]);
 								}, tool);
-								Q.handle(state.onSubscribe, tool);
+							});
+							var assetsPlanTool = Q.Tool.from($element[0], "Assets/plan");
+							if (assetsPlanTool) {
+								pipe.fill('assetsPlanTool')(assetsPlanTool);
+							} else {
+								$element[0].forEachTool("Assets/plan", function () {
+									pipe.fill('assetsPlanTool')(this);
+								}, tool);
 							}
 						}
 					});

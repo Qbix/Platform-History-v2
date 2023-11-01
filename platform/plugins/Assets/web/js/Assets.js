@@ -725,6 +725,7 @@
 		handlers: {
 			billing: "{{Assets}}/js/columns/billing.js",
 			subscription: "{{Assets}}/js/columns/subscription.js",
+			plan: "{{Assets}}/js/columns/plan.js",
 			services: "{{Assets}}/js/columns/services.js"
 		}
 	};
