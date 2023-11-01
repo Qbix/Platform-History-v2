@@ -22,8 +22,6 @@ abstract class Assets_Subscription
  	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to subscribe
 	 * @return {Streams_Stream} A stream of type 'Assets/subscription' representing this subscription
 	 * @param {array} [$options=array()] - Options for the subscription
-	 * @param {date} [$options.startDate=today] - The start date of the subscription
-	 * @param {date} [$options.endDate=today+year] - The end date of the subscription
 	 */
 	static function start($plan, $user=null, $options=array())
 	{
@@ -42,23 +40,9 @@ abstract class Assets_Subscription
 		$stream = self::getStream($plan, $user);
 
 		if (!$stream) {
-			$startDate = Q::ifset($options, 'startDate', date("Y-m-d"));
-			$startDate = date('Y-m-d', strtotime($startDate));
-			if ($months = $plan->getAttribute('months', null)) {
-				$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$months month", strtotime($startDate))));
-			} else if ($weeks = $plan->getAttribute('weeks', null)) {
-				$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$weeks week", strtotime($startDate))));
-			} else if ($days = $plan->getAttribute('days', null)) {
-				$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$days day", strtotime($startDate))));
-			} else {
-				$endDate = date("Y-m-d", strtotime("+1 year", strtotime($startDate)));
-			}
-
 			$attributes = Q::json_encode(array(
 				'planPublisherId' => $plan->publisherId,
 				'planStreamName' => $plan->name,
-				'startDate' => $startDate,
-				'endDate' => $endDate,
 				'period' => $plan->getAttribute("period"),
 				'amount' => $plan->getAttribute('amount'), // lock it in, in case plan changes later
 				'currency' => $currency
@@ -85,13 +69,9 @@ abstract class Assets_Subscription
 		 * @event Assets/startSubscription {before}
 		 * @param {Streams_Stream} plan
 		 * @param {Streams_Stream} subscription
-		 * @param {string} startDate
-		 * @param {string} endDate
 		 * @return {Users_User}
 		 */
-		Q::event('Assets/startSubscription', @compact(
-			'plan', 'user', 'publisher', 'stream', 'startDate', 'endDate', 'months', 'currency'
-		), 'after');
+		Q::event('Assets/startSubscription', @compact('plan', 'user', 'publisher', 'stream', 'months', 'currency'), 'after');
 
 		return $stream;
 	}
@@ -174,7 +154,7 @@ abstract class Assets_Subscription
 
 	/**
 	 * Check if user subscribed to plan
-	 * @method getStream
+	 * @method isSubscribed
 	 * @static
 	 * @param {array|Streams_Stream} $plan - The subscription plan stream. Can be array with "publisherId", "streamsName" indexes.
 	 * @param {String|Users_User} [$user] - User or user id. Null - means currently logged in user.
@@ -204,18 +184,15 @@ abstract class Assets_Subscription
 	 * Check if subscription is currently valid
 	 * @method isCurrent
 	 * @param {Streams_Stream} $stream The subscription stream
-	 * @param {boolean} [$compareByDate=false] Whether to compare by date, rather than seconds
 	 * @return {boolean}
 	 */
-	static function isCurrent($stream, $compareByDate = false)
+	static function isCurrent($stream)
 	{
 		$lastChargeTime = $stream->getAttribute('lastChargeTime');
 		if (!$lastChargeTime) {
 			return false;
 		}
 		$plan = self::getPlan($stream);
-		$endDate = $stream->getAttribute('endDate');
-		$endTime = strtotime($endDate);
 		$time = time();
 		$period = $plan->getAttribute('period', null);
 		switch ($period) {
@@ -234,11 +211,6 @@ abstract class Assets_Subscription
 			default:
 				throw new Q_Exception_RequiredField(array('field' => 'annually, months, weeks, days'));
 		}
-		if ($compareByDate) {
-			return (date("Y-m-d", $lastChargeTime) >= date("Y-m-d", $earliestTime))
-			and (date("Y-m-d", $time) <= $endDate);
-		} else {
-			return ($lastChargeTime >= $earliestTime and $time <= $endTime);
-		}
+		return $lastChargeTime >= $earliestTime;
 	}
 };
