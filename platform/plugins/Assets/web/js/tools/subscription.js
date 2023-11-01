@@ -30,7 +30,7 @@ Q.Tool.define("Assets/subscription", function (options) {
 },
 
 { // default options here
-	onSubscribe: new Q.Event()
+
 },
 
 {
@@ -89,8 +89,7 @@ Q.Tool.define("Assets/subscription", function (options) {
 							var pipe = new Q.Pipe(['assetsPlanTool'], function (params, subject) {
 								var assetsPlanTool = params.assetsPlanTool[0];
 								assetsPlanTool.state.onSubscribe.set(function () {
-									$toolElement.addClass("Q_selected");
-									Q.handle(state.onSubscribe, tool, [assetsPlanTool]);
+									$planPreviewElement.addClass("Q_selected");
 								}, tool);
 							});
 							var assetsPlanTool = Q.Tool.from($element[0], "Assets/plan");
