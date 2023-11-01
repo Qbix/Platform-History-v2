@@ -39,6 +39,16 @@ function Assets_subscription_post($params = array())
 		"forcePayment" => $forcePayment
 	));
 
+	$subscriptionStream = Assets_Subscription::getStream($plan);
+	if ($subscriptionStream) {
+		Q_Response::setSlot("subscriptionStream", array(
+			"publisherId" => $subscriptionStream->publisherId,
+			"streamName" => $subscriptionStream->name
+		));
+	} else {
+		Q_Response::setSlot("subscriptionStream", false);
+	}
+
 	// try to charge funds
 	// if charge fail it will lead to start payment flow on client
 	/*$subscription = Q::event('Assets/payment/post', array(
