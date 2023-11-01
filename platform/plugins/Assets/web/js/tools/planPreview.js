@@ -168,9 +168,9 @@ Q.Template.set("Assets/plan/composer",
 `<form>
 	<input type="text" name="title" required placeholder="{{text.subscriptions.plan.TitlePlaceholder}}" value="{{title}}">
 	<label for="price"><input type="text" name="amount" required placeholder="{{text.subscriptions.plan.PricePlaceholder}}" value="{{amount}}"></label>
-	<select name="period"><option>daily</option><option>weekly</option><option>monthly</option></select>
+	<select name="period"><option>annually</option><option>monthly</option><option>weekly</option><option>daily</option></select>
 	<textarea name="description" placeholder="{{text.subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
-	<button name="save" class="Q_button">{{text.subscriptions.plan.SavePlan}}</button>
+	<button name="save" class="Q_button" type="button">{{text.subscriptions.plan.SavePlan}}</button>
 </form>`
 );
 

@@ -218,14 +218,21 @@ abstract class Assets_Subscription
 		$endTime = strtotime($endDate);
 		$time = time();
 		$period = $plan->getAttribute('period', null);
-		if ($period == "monthly") {
-			$earliestTime = strtotime("-1 month", $time);
-		} else if ($period == "weekly") {
-			$earliestTime = strtotime("-1 week", $time);
-		} else if ($period == "daily") {
-			$earliestTime = strtotime("-1 day", $time);
-		} else {
-			throw new Q_Exception_RequiredField(array('field' => 'months or weeks or days'));
+		switch ($period) {
+			case "annually":
+				$earliestTime = strtotime("-1 year", $time);
+				break;
+			case "monthly":
+				$earliestTime = strtotime("-1 month", $time);
+				break;
+			case "weekly":
+				$earliestTime = strtotime("-1 week", $time);
+				break;
+			case "daily":
+				$earliestTime = strtotime("-1 day", $time);
+				break;
+			default:
+				throw new Q_Exception_RequiredField(array('field' => 'annually, months, weeks, days'));
 		}
 		if ($compareByDate) {
 			return (date("Y-m-d", $lastChargeTime) >= date("Y-m-d", $earliestTime))

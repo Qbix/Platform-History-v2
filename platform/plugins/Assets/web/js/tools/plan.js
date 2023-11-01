@@ -76,6 +76,9 @@ Q.Tool.define("Assets/plan", function(options) {
 			price = tool.subscriptionStream.getAttribute('amount');
 			endsIn = new Date(lastChargeTime * 1000);
 			switch (period) {
+				case "annually":
+					endsIn.addYears(1);
+					break;
 				case "monthly":
 					endsIn.addMonths(1);
 					break;
@@ -187,8 +190,7 @@ Q.Tool.define("Assets/plan", function(options) {
 });
 
 Q.Template.set('Assets/plan',
-`<img class="Streams_preview_icon" src="{{iconUrl}}">
-	<h2 class="Assets_plan_status">{{status}}</h2>
+`<h2 class="Assets_plan_status">{{status}}</h2>
 	<div class="Assets_plan_period">{{text.subscriptions.Period}}: {{period}}</div>
 	<div class="Assets_plan_price">{{text.subscriptions.Price}}: {{price}}</div>
 	<div class="Assets_plan_started">{{text.subscriptions.Started}}: {{started}}</div>
