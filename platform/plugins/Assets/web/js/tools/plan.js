@@ -4,6 +4,7 @@
  * @class Assets/plan
  * @constructor
  * @param {Object} [options] options to pass
+ *  @param {String} options.payments Payment gateway, can be "authnet" or "stripe"
  */
 Q.Tool.define("Assets/plan", function(options) {
 	var tool = this;
@@ -49,6 +50,7 @@ Q.Tool.define("Assets/plan", function(options) {
 	publisherId: null,
 	streamName: null,
 	payments: "stripe",
+	immediatePayment: true,
 	icon: {
 		defaultSize: 200
 	},
@@ -68,8 +70,10 @@ Q.Tool.define("Assets/plan", function(options) {
 		var started = null;
 		var subscribed = false;
 		var endsIn = null;
+		var stopped = false;
 		if (tool.subscriptionStream) {
-			subscribed = !tool.subscriptionStream.getAttribute("stopped");
+			stopped = tool.subscriptionStream.getAttribute("stopped");
+			subscribed = !stopped;
 			period = tool.subscriptionStream.getAttribute("period");
 			lastChargeTime = parseInt(tool.subscriptionStream.getAttribute("lastChargeTime"));
 			started = tool.subscriptionStream.getAttribute("startDate");
@@ -91,7 +95,8 @@ Q.Tool.define("Assets/plan", function(options) {
 			}
 		}
 
-		$toolElement.attr("data-status", subscribed);
+		$toolElement.attr("data-subscribed", subscribed);
+		$toolElement.attr("data-stopped", stopped);
 		Q.Template.render('Assets/plan', {
 			text: tool.text,
 			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,

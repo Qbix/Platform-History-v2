@@ -19,21 +19,21 @@
     text-align: center;
     margin: 10px 0;
 }
-.Assets_plan_tool[data-status=true] .Assets_plan_status {
+.Assets_plan_tool[data-subscribed=true] .Assets_plan_status {
     color: green;
 }
-.Assets_plan_tool[data-status=false] .Assets_plan_status {
+.Assets_plan_tool[data-subscribed=false] .Assets_plan_status {
     color: red;
 }
-.Assets_plan_tool[data-status=false] .Assets_plan_started,
-.Assets_plan_tool[data-status=false] .Assets_plan_endsIn,
+.Assets_plan_tool[data-stopped=false] .Assets_plan_started,
+.Assets_plan_tool[data-stopped=false] .Assets_plan_endsIn,
 .Assets_plan_tool button[name=subscribe],
 .Assets_plan_tool button[name=unsubscribe] {
     display: none;
 }
-.Assets_plan_tool[data-status=true] button[name=unsubscribe] {
+.Assets_plan_tool[data-subscribed=true] button[name=unsubscribe] {
     display: block;
 }
-.Assets_plan_tool[data-status=false] button[name=subscribe] {
+.Assets_plan_tool[data-subscribed=false] button[name=subscribe] {
     display: block;
 }
