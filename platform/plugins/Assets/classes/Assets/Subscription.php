@@ -214,4 +214,79 @@ abstract class Assets_Subscription
 		}
 		return $lastChargeTime >= $earliestTime;
 	}
+
+	/**
+	 * Check if stream related to some subscription plans
+	 * @method checkStreamRelated
+	 * @param {Streams_Stream} $stream The stream need to check
+	 * @return {boolean|Array}
+	 */
+	static function checkStreamRelated ($stream) {
+		$relations = Streams_RelatedTo::select()->where(array(
+			'type' => self::$relationType,
+			'fromPublisherId' => $stream->publisherId,
+			'fromStreamName' => $stream->name
+		))->fetchDbRows();
+
+		if (empty($relations)) {
+			return false;
+		}
+
+		$assetsPlans = [];
+		foreach ($relations as $relation) {
+			$assetsPlans[] = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName, true);
+		}
+
+		return $assetsPlans;
+	}
+
+	/**
+	 * Check if stream under some subscription plans and paid by user
+	 * @method checkStreamPaid
+	 * @param {Streams_Stream} $stream The stream need to check
+	 * @param {Users_User|String} [$user] User which need to check. If null use logged in user.
+	 * @param {Boolean} [$throwIfNotPaid] If true throw exception if stream under some subscription plan and didn't paid
+	 * @return {Boolean}
+	 * @throws Exception
+	 */
+	static function checkStreamPaid ($stream, $user, $throwIfNotPaid=false) {
+		if ($user) {
+			if (is_string($user)) {
+				$user = Users_User::fetch($user, true);
+			}
+		} else {
+			$user = Users::loggedInUser(true);
+		}
+
+		// admins have access
+		$adminLabels = Q_Config::get("Streams", "types", "Assets/plan", "canCreate", null);
+		if ((bool)Users::roles(null, $adminLabels, array(), $user->id)) {
+			return true;
+		}
+
+		$assetsPlans = self::checkStreamRelated($stream);
+		if (!(boolean)$assetsPlans) {
+			return true;
+		}
+
+		foreach ($assetsPlans as $assetsPlan) {
+			$subscriptionStream = self::getStream($assetsPlan, $user);
+			if (!$subscriptionStream) {
+				continue;
+			}
+
+			if (self::isCurrent($subscriptionStream)) {
+				return true;
+			}
+		}
+
+		if ($throwIfNotPaid) {
+			$text = Q_Text::get("Assets/content");
+			throw new Exception(Q::interpolate($text['errors']['SubscriptionStreamNotPaid'], array(
+				"subscriptionUrl" => '<a href="'.Q_Uri::url("Assets/subscription").'">here</a>'
+			)));
+		}
+
+		return false;
+	}
 };

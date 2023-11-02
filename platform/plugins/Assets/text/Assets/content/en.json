@@ -14,7 +14,8 @@
         "CurrencyNotFound": "Currency not found",
         "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
         "NoRecipientSelected": "No recipient selected",
-        "CantManageFrozenSeries": "You can't manage frozen series"
+        "CantManageFrozenSeries": "You can't manage frozen series",
+        "SubscriptionStreamNotPaid": "You didn't pay to view this content. Please click {{subscriptionUrl}} and subscribe to appropriate plan"
     },
     "admin": {
         "Title": "Assets administrative",
