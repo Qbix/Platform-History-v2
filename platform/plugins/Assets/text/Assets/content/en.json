@@ -165,7 +165,8 @@
             "Duration": "Duration",
             "Discount": "Discount",
             "SavePlan": "Save Plan",
-            "NewPlan": "New Plan"
+            "NewPlan": "New Plan",
+            "SelectDisplayType": "Select {{displayType}}"
         }
     },
     "payments": {

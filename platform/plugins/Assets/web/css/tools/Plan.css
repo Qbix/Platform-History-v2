@@ -37,3 +37,27 @@
 .Assets_plan_tool[data-subscribed=false] button[name=subscribe] {
     display: block;
 }
+.Assets_plan_tool .Assets_plan_related_streams:empty {
+    display: none;
+}
+.Assets_plan_tool .Assets_plan_related_streams {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin: 5px 0;
+    padding: 5px 0;
+}
+.Assets_plan_tool .Assets_plan_related_streams .Streams_participants_tool {
+    display: none;
+}
+.Assets_plan_select_stream {
+    width: 500px;
+}
+.Q_mobile .Assets_plan_select_stream {
+    width: 350px;
+}
+.Assets_plan_select_stream .Q_dialog_content {
+    padding: 5px;
+}
+.Assets_plan_select_stream .Streams_participants_tool {
+    display: none;
+}

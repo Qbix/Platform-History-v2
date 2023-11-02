@@ -5,6 +5,8 @@
  * @constructor
  * @param {Object} [options] options to pass
  *  @param {String} options.payments Payment gateway, can be "authnet" or "stripe"
+ *  @param {Object} [relatedStreamTypes] Streams types of streams can be related to this subscription plan.
+ *  Better to define this option in app main js
  */
 Q.Tool.define("Assets/plan", function(options) {
 	var tool = this;
@@ -24,8 +26,8 @@ Q.Tool.define("Assets/plan", function(options) {
 				return;
 			}
 
-			var publisherId = Q.getObject([tool.planStream.fields.publisherId, tool.planStream.fields.name, "publisherId"], response.slots.data.subscribed);
-			var streamName = Q.getObject([tool.planStream.fields.publisherId, tool.planStream.fields.name, "streamName"], response.slots.data.subscribed);
+			var publisherId = Q.getObject([state.publisherId, state.streamName, "publisherId"], response.slots.data.subscribed);
+			var streamName = Q.getObject([state.publisherId, state.streamName, "streamName"], response.slots.data.subscribed);
 
 			if (publisherId && streamName) {
 				Q.Streams.get(publisherId, streamName, function (err) {
@@ -54,6 +56,7 @@ Q.Tool.define("Assets/plan", function(options) {
 	icon: {
 		defaultSize: 200
 	},
+	relatedStreamTypes: {},
 	onSubscribe: new Q.Event()
 },
 
@@ -107,8 +110,8 @@ Q.Tool.define("Assets/plan", function(options) {
 		};
 		var _subscribe = function ($button) {
 			Q.Assets.Subscriptions.subscribe(state.payments, {
-				planPublisherId: tool.planStream.fields.publisherId,
-				planStreamName: tool.planStream.fields.name,
+				planPublisherId: state.publisherId,
+				planStreamName: state.streamName,
 				immediatePayment: state.immediatePayment
 			}, function (err, status, subscriptionStream) {
 				$button.removeClass("Q_working");
@@ -151,6 +154,109 @@ Q.Tool.define("Assets/plan", function(options) {
 			Q.replace(tool.element, html);
 			$toolElement.activate();
 
+			if (!Q.isEmpty(state.relatedStreamTypes)) {
+				var creatable = {};
+				var $relatedStreams = $(".Assets_plan_related_streams", tool.element);
+				$relatedStreams[0].forEachTool("", function () {
+					if (this.name.split("_").pop() !== "preview" || this.name === "streams_preview") {
+						return;
+					}
+
+					var thisPreview = this;
+					var $thisPreviewElement = $(this.element);
+					var thisStreamsPreview = Q.Tool.from(this.element, "Streams/preview");
+					if (!thisStreamsPreview) {
+						return console.warn("Streams/preview tool not found on " + this.name + " tool");
+					}
+					thisStreamsPreview.state.beforeClose = function (_delete) {
+						thisStreamsPreview.element.addClass('Q_working');
+						Q.Streams.unrelate(
+							state.publisherId,
+							state.streamName,
+							Q.Assets.Subscriptions.plan.relationType,
+							thisStreamsPreview.state.publisherId,
+							thisStreamsPreview.state.streamName
+						);
+					};
+					var streamType = thisStreamsPreview.state.creatable.streamType;
+					if ($thisPreviewElement.hasClass("Streams_related_composer")) {
+						thisStreamsPreview.state.creatable.preprocess = function (_proceed) {
+							Q.Dialogs.push({
+								title: tool.text.subscriptions.plan.SelectDisplayType.interpolate(tool.text.types[streamType]),
+								className: "Assets_plan_select_stream",
+								content: $("<div>").tool("Streams/related", {
+									publisherId: state.relatedStreamTypes[streamType].categoryStream.publisherId,
+									streamName: state.relatedStreamTypes[streamType].categoryStream.streamName,
+									relationType: state.relatedStreamTypes[streamType].categoryStream.relationType,
+									editable: false,
+									closeable: false,
+									realtime: true,
+									sortable: false,
+									relatedOptions: {
+										withParticipant: false,
+										ascending: true
+									},
+								}),
+								onActivate: function ($dialog) {
+									$dialog[0].forEachTool(streamType + "/preview", function () {
+										var streamsPreview = Q.Tool.from(this.element, "Streams/preview");
+										this.state.onInvoke = function () {
+											var relatedTool = Q.Tool.from($relatedStreams[0], "Streams/related");
+											if (!relatedTool) {
+												return Q.alert("Related tool not found!");
+											}
+											if (Q.getObject([streamsPreview.state.publisherId, streamsPreview.state.streamName], relatedTool.previewElements)) {
+												return Q.alert("This stream already added");
+											}
+											streamsPreview.element.addClass("Q_working");
+											Q.Streams.relate(
+												state.publisherId,
+												state.streamName,
+												Q.Assets.Subscriptions.plan.relationType,
+												streamsPreview.state.publisherId,
+												streamsPreview.state.streamName,
+												function () {
+													streamsPreview.element.removeClass("Q_working");
+												}
+											);
+										};
+									});
+								}
+							});
+							return false;
+						};
+					} else {
+
+					}
+				}, tool);
+				var streamTypes = Object.keys(state.relatedStreamTypes);
+				var streamTypesPipe = new Q.Pipe(streamTypes, function () {
+					$relatedStreams.tool("Streams/related", {
+						publisherId: state.publisherId,
+						streamName: state.streamName,
+						relationType: Q.Assets.Subscriptions.plan.relationType,
+						editable: false,
+						closeable: true,
+						realtime: true,
+						sortable: false,
+						composerPosition: "last",
+						relatedOptions: {
+							withParticipant: false,
+							ascending: true
+						},
+						creatable
+					}).activate();
+				});
+				streamTypes.forEach(function (streamType) {
+					var pluginName = streamType.split("/")[0];
+					Q.Text.get(pluginName + '/content', function (err, text) {
+						Q.extend(tool.text, text);
+						creatable[streamType] = {title: text.types[streamType].displayType};
+						streamTypesPipe.fill(streamType)();
+					});
+				});
+			}
+
 			$("button[name=subscribe]", tool.element).on(Q.Pointer.fastclick, function () {
 				var $this = $(this);
 				$this.addClass("Q_working");
@@ -177,8 +283,8 @@ Q.Tool.define("Assets/plan", function(options) {
 				}, {
 					method: "put",
 					fields: {
-						publisherId: tool.planStream.fields.publisherId,
-						streamName: tool.planStream.fields.name
+						publisherId: state.publisherId,
+						streamName: state.streamName
 					}
 				});
 			});
@@ -213,8 +319,8 @@ Q.Tool.define("Assets/plan", function(options) {
 					}, {
 						method: "put",
 						fields: {
-							publisherId: tool.planStream.fields.publisherId,
-							streamName: tool.planStream.fields.name
+							publisherId: state.publisherId,
+							streamName: state.streamName
 						}
 					});
 				});
@@ -229,6 +335,7 @@ Q.Template.set('Assets/plan',
 	<div class="Assets_plan_price">{{text.subscriptions.Price}}: {{price}}</div>
 	<div class="Assets_plan_started">{{text.subscriptions.Started}}: {{started}}</div>
 	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{&tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}</div>
+	<div class="Assets_plan_related_streams"></div>
 	<button class="Q_button" name="unsubscribe">{{text.subscriptions.Unsubscribe}}</button>
 	<button class="Q_button" name="subscribe">{{text.subscriptions.Subscribe}}</button>`
 );
