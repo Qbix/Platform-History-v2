@@ -57,7 +57,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 },
 
 {
-	editable: true,
 	icon: {
 		defaultSize: 200
 	},

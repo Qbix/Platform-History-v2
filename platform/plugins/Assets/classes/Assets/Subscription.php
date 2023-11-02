@@ -12,6 +12,7 @@
 abstract class Assets_Subscription
 {
 	public static $streamType = "Assets/subscription";
+	public static $relationType = "Assets/subscription/related";
 
 	/**
 	 * Starts a recurring subscription
