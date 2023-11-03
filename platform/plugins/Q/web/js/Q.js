@@ -7095,8 +7095,8 @@ Q.page = function _Q_page(page, handler, key) {
  * @static
  * @method init
  * @param {Object} options
- *  Supports the following options:
- *  "isLocalFile": defaults to false. Set this to true if you are calling Q.init from local file:/// context.
+ * @param {boolean} [options.isLocalFile] set this to true if you are calling Q.init from local file:/// context.
+ * @param {boolean} [options.isCordova] set this to true if you're loading this inside a Cordova environment
  */
 Q.init = function _Q_init(options) {
 	if (Q.init.called) {
@@ -7104,6 +7104,7 @@ Q.init = function _Q_init(options) {
 	}
 	Q.init.called = true;
 	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
+	Q.info.baseUrl = Q.info.baseUrl || location.href.split('/').slice(0, -1).join('/');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
