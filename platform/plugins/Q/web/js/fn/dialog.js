@@ -33,10 +33,10 @@ var _htmlClassCount = {};
  */
 Q.Tool.jQuery('Q/overlay',
 
-	function _Q_overlay(o) {
+	function _Q_overlay(options) {
 		function calculatePosition($this) {
 			var data = $this.data('Q/overlay');
-			o = (data && data.options) || o;
+			var o = (data && data.options) || options;
 			if (o.noCalculatePosition) {
 				return;
 			}
@@ -98,6 +98,7 @@ Q.Tool.jQuery('Q/overlay',
 			}
 		}
 
+		var o = options;
 		var $this = this;
 		var ap = o.alignParent && (o.alignParent[0] || o.alignParent);
 		$this.hide().css('visibility', 'hidden').addClass('Q_overlay');
@@ -115,10 +116,11 @@ Q.Tool.jQuery('Q/overlay',
 
 		var $body = $('body');
 		$this.data('Q/overlay', {
-			options: o,
+			options: options,
 			load: function()
 			{
 				var data = $this.data('Q/overlay');
+				var o = (data && data.options) || options;
 				if ($this.hasClass('Q_overlay_open')) {
 					return;
 				}
@@ -130,7 +132,7 @@ Q.Tool.jQuery('Q/overlay',
 				}
 				var topZ = Q.zIndexTopmost();
 				$this.css('z-index', topZ + 1);
-				Q.handle(data.options.beforeLoad, $this, [$this]);
+				Q.handle(o.beforeLoad, $this, [$this]);
 				calculatePosition($this);
 				$this.show();
 				dialogs.push($this[0]);
@@ -167,9 +169,9 @@ Q.Tool.jQuery('Q/overlay',
 				}, 100);
 				var oom = data.options.mask;
 				var mcn = (typeof oom === 'string') ? ' ' + oom : '';
-				if (data.options.fadeInOut) {
-					if (typeof data.options.fadeInOut === 'function') {
-						data.options.fadeInOut(_doFade);
+				if (o.fadeInOut) {
+					if (typeof o.fadeInOut === 'function') {
+						o.fadeInOut(_doFade);
 					} else {
 						_doFade();
 					}
@@ -186,21 +188,21 @@ Q.Tool.jQuery('Q/overlay',
 				} else {
 					_doShow();
 				}
-				var htmlClass = data.options.htmlClass;
+				var htmlClass = o.htmlClass;
 				if (htmlClass) {
 					_htmlClassCount[htmlClass] = (_htmlClassCount[htmlClass] || 0) + 1;
-					$('html').addClass(data.options.htmlClass);
+					$('html').addClass(o.htmlClass);
 				}
 				Q.Visual.clearSelection();
 				Q.Visual.cancelClick(false, null, null, 300);
 
-				if (data.options.mask) {
+				if (o.mask) {
 					var mask = Q.Masks.show('Q.dialog.mask', {
 						fadeTime: o.fadeTime,
 						className: 'Q_dialog_mask' + mcn,
 						zIndex: topZ - 1
 					});
-					if (data.options.closeOnMask) {
+					if (o.closeOnMask) {
 						$(mask.element).on(Q.Visual.click, function () {
 							$this.data('Q/overlay').close();
 						});
@@ -212,10 +214,10 @@ Q.Tool.jQuery('Q/overlay',
 					setTimeout(function () {
 						$this.addClass('Q_overlay_open');
 					}, 0);
-					if (!data.options.noClose && data.options.closeOnEsc) {
+					if (!o.noClose && o.closeOnEsc) {
 						$(document).on('keydown.Q_dialog', closeThisOverlayOnEsc);
 					}
-					Q.handle(data.options.onLoad, $this, [$this]);
+					Q.handle(o.onLoad, $this, [$this]);
 				}
 			},
 			close: function(e)
@@ -227,20 +229,21 @@ Q.Tool.jQuery('Q/overlay',
 				Q.Visual.cancelClick();
 				dialogs.pop();
 				var data = $this.data('Q/overlay');
+				var o = (data && data.options) || options;
 				setTimeout(function () {
 					$body.removeClass('Q_preventScroll').css(data.bodyStyle);
 					window.scrollTo(data.windowParams.scrollLeft, data.windowParams.scrollTop);
 				}, 500);
-				if (!data.options.noClose) {
+				if (!o.noClose) {
 					$(document).off('keydown', closeThisOverlayOnEsc);
 				}
 				$this.find('input, select, textarea').trigger('blur');
 
-				if (false === Q.handle(data.options.beforeClose, $this, [$this])) {
+				if (false === Q.handle(o.beforeClose, $this, [$this])) {
 					return false;
 				}
 				$this.removeClass('Q_overlay_open');
-				if (data.options.fadeInOut) {
+				if (o.fadeInOut) {
 					Q.Visual.animationStarted(o.fadeTime);
 					Q.Animation.play(function (x, y) {
 						if (x === 1) {
@@ -255,14 +258,14 @@ Q.Tool.jQuery('Q/overlay',
 
 				function _doClose() {
 					$this.hide();
-					var htmlClass = data.options.htmlClass;
+					var htmlClass = o.htmlClass;
 					if (htmlClass) {
 						if (--_htmlClassCount[htmlClass] == 0) {
 							$('html').removeClass(htmlClass);
 						}
 					}
-					Q.handle(data.options.onClose, $this, []);
-					if (data.options.mask) {
+					Q.handle(o.onClose, $this, []);
+					if (o.mask) {
 						Q.Masks.hide('Q.dialog.mask');
 					}
 				}
