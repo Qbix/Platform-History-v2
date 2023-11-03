@@ -7103,8 +7103,8 @@ Q.init = function _Q_init(options) {
 		return false;
 	}
 	Q.init.called = true;
-	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.info.baseUrl = Q.info.baseUrl || location.href.split('/').slice(0, -1).join('/');
+	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
@@ -7120,6 +7120,43 @@ Q.init = function _Q_init(options) {
 	}
 	if (_isCordova) {
 		checks.push("device");
+		Q.Visual.preventRubberBand(); // call it by default
+	
+		Q.onReady.set(function _Q_handleOpenUrl() {
+			root.handleOpenURL = function (url) {
+				Q.handle(Q.onHandleOpenUrl, Q, [url]);
+			};
+		}, 'Q.handleOpenUrl');
+	
+		Q.onReady.set(function _Q_browsertab() {
+			if (!(cordova.plugins && cordova.plugins.browsertabs)) {
+				return;
+			}
+			cordova.plugins.browsertabs.isAvailable(function(result) {
+				var a = root.open;
+				delete root.open;
+				root.open = function (url, target, options) {
+					var noopener = options && options.noopener;
+					var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
+					if (!target || w) {
+						Q.handle(url);
+						return root;
+					}
+					if (result) {
+						cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
+					} else if (cordova.InAppBrowser) {
+						cordova.InAppBrowser.open(url, '_system', options);
+					}
+				};
+				root.close = function (url, target, options) {
+					if (result) {
+						cordova.plugins.browsertabs.close(options);
+					} else if (cordova.InAppBrowser) {
+						cordova.InAppBrowser.close();
+					}
+				};
+			}, function () {});
+		}, 'Q.browsertabs');
 	}
 	var p = Q.pipe(checks, 1, function _Q_init_pipe_callback() {
 		if (!Q.info) Q.info = {};
@@ -15697,45 +15734,6 @@ Q.onReady.set(function _Q_masks() {
 	Q.layout();
 }, 'Q.Masks');
 
-if (_isCordova) {
-	Q.Visual.preventRubberBand(); // call it by default
-	Q.onReady.set(function _Q_handleOpenUrl() {
-		root.handleOpenURL = function (url) {
-			Q.handle(Q.onHandleOpenUrl, Q, [url]);
-		};
-	}, 'Q.handleOpenUrl');
-
-	Q.onReady.set(function _Q_browsertab() {
-		if (!(cordova.plugins && cordova.plugins.browsertabs)) {
-			return;
-		}
-		cordova.plugins.browsertabs.isAvailable(function(result) {
-			var a = root.open;
-			delete root.open;
-			root.open = function (url, target, options) {
-				var noopener = options && options.noopener;
-				var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
-				if (!target || w) {
-					Q.handle(url);
-					return root;
-				}
-				if (result) {
-					cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
-				} else if (cordova.InAppBrowser) {
-					cordova.InAppBrowser.open(url, '_system', options);
-				}
-			};
-			root.close = function (url, target, options) {
-				if (result) {
-					cordova.plugins.browsertabs.close(options);
-				} else if (cordova.InAppBrowser) {
-					cordova.InAppBrowser.close();
-				}
-			};
-		}, function () {});
-	}, 'Q.browsertabs');
-}
-
 /**
  * Class to do things with cameras.
  * @class Camera
@@ -16489,3 +16487,4 @@ var _appId = location.search.queryField('Q.appId');
 return Q;
 
 }).call(this);
+
