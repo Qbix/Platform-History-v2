@@ -570,8 +570,10 @@ Sp.matchTypes.adapters = {
 			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
 			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
-			if ((!options.excludeLocalFiles && parts[i].match(fileRegExp))
-			|| parts[i].match(urlRegExp)) {
+			if ((
+				(!options || !options.excludeLocalFiles)
+				&& parts[i].match(fileRegExp)
+			) || parts[i].match(urlRegExp)) {
 				res.push(parts[i]);
 			}
 			
@@ -7112,6 +7114,9 @@ Q.init = function _Q_init(options) {
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
+	if (options.isCordova) {
+		_isCordova = options.isCordova;
+	}
 	if (_isCordova) {
 		checks.push("device");
 	}
@@ -7134,11 +7139,11 @@ Q.init = function _Q_init(options) {
 		}
 
 		var baseUrl = Q.baseUrl();
-		if (options && options.isLocalFile) {
+		if (options && options.isLocalFile
+		&& !baseUrl.startsWith('file://')) {
 			Q.loadUrl(baseUrl, {
 				ignoreHistory: true,
 				skipNonce: true,
-				onActivate: _getJSON,
 				handler: function () {},
 				slotNames: ["cordova"]
 			});
@@ -7229,10 +7234,13 @@ Q.init = function _Q_init(options) {
  * @method ready
  */
 Q.ready = function _Q_ready() {
-	Q.loadNonce(function readyWithNonce() {
+	var loader = Q.ready.options.skipNonce
+		? function (callback) { callback() }
+		: Q.loadNonce;
+	loader(function readyWithNonce() {
 		var baseUrl = Q.baseUrl();
 		_isReady = true;
-		if (Q.info.isLocalFile) {
+		if (Q.info.isLocalFile && !baseUrl.startsWith('file://')) {
 			// This is an HTML file loaded from the local filesystem
 			var url = location.hash.queryField('url');
 			if (url === undefined) {
@@ -7309,6 +7317,7 @@ Q.ready = function _Q_ready() {
 		});
 	});
 };
+Q.ready.options = {};
 
 /**
  * This function is called by Q to make sure that we've loaded the session nonce.
@@ -8682,46 +8691,25 @@ Q.request = function (url, slotNames, callback, options) {
 		function xhr(onSuccess, onCancel) {
 			if (o.extend !== false) {
 				url = Q.ajaxExtend(url, slotNames, overrides);
-			}			
-			var xmlhttp;
-			xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && !xmlhttp.handled) {
-					xmlhttp.handled = true;
-					if (xmlhttp.status == 200) {
-						onSuccess.call(xmlhttp, xmlhttp.responseText);
-					} else {
-						log("Q.request xhr: " + xmlhttp.status + ' ' 
-							+ xmlhttp.responseText.substring(xmlhttp.responseText.indexOf('<body')));
-						onCancel.call(xmlhttp, xmlhttp.status);
-					}
-				}
-			};
-			if (typeof o.xhr === 'function') {
-				o.xhr.call(xmlhttp, xmlhttp, options);
-			}
-			var sync = (o.xhr === 'sync');
-			if (Q.isPlainObject(o.xhr)) {
-				Q.extend(xmlhttp, o.xhr);
-				sync = sync || xmlhttp.sync;
 			}
 			var content = o.formdata ? o.formdata : Q.queryString(o.fields);
-			request.xmlhttp = xmlhttp;
-			if (verb === 'GET') {
-				xmlhttp.open('GET', url + (content ? '&' + content : ''), !sync);
-				xmlhttp.send();
-			} else {
-				xmlhttp.open(verb, url, !sync);
-				if (o.asJSON) {
-					content = JSON.stringify(o.fields);
-					xmlhttp.setRequestHeader("Content-Type", "application/json");
-				} else if (!o.formdata) {
-					xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
-				}
-				//xmlhttp.setRequestHeader("Content-length", content.length);
-				//xmlhttp.setRequestHeader("Connection", "close");
-				xmlhttp.send(content);
+			var headers = {};
+			if (o.asJSON) {
+				content = JSON.stringify(o.fields);
+				headers["Content-Type"] = "application/json";
+			} else if (!o.formdata) {
+				headers["Content-Type"] = 'application/x-www-form-urlencoded';
 			}
+			fetch(url, {
+				method: verb,
+				headers: headers
+			}).then(function (response) {
+				return response.text();
+			}).then(function (text) {
+				onSuccess.call(Q.request, text);
+			}).catch(function (error) {
+				onCancel.call(Q.request, error);
+			});
 			return url;
 		}
 		
