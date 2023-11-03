@@ -61,3 +61,6 @@
 .Assets_plan_select_stream .Streams_participants_tool {
     display: none;
 }
+.Assets_plan_select_stream .Q_dialog_content > .Streams_preview_tool:not(:last-child) {
+    margin-bottom: 5px;
+}
