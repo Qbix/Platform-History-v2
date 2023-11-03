@@ -263,7 +263,7 @@ Q.Tool.define("Assets/plan", function(options) {
 
 				// if user never was subscribed, just subscribe
 				if (Q.isEmpty(tool.subscriptionStream)) {
-					return _subscribe();
+					return _subscribe($this);
 				}
 
 				// if user was already subscribed, check if subscription is active, and if yes just update attr stopped
@@ -279,7 +279,7 @@ Q.Tool.define("Assets/plan", function(options) {
 					}
 
 					// if subscription is not active already, just call subscribe where charge funds again
-					_subscribe();
+					_subscribe($this);
 				}, {
 					method: "put",
 					fields: {

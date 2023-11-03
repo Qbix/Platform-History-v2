@@ -51,7 +51,8 @@ abstract class Assets_Subscription
 			$stream = Streams::create($user->id, $user->id, self::$streamType,
 				array(
 					'title' => $plan->title,
-					'attributes' => $attributes
+					'attributes' => $attributes,
+					'skipAccess' => true
 				),
 				array(
 					'publisherId' => $plan->publisherId,
