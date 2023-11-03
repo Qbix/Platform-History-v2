@@ -13671,13 +13671,14 @@ Q.Visual = Q.Pointer = {
 	 * @method preventRubberBand
 	 */
 	preventRubberBand: function (options) {
-		if (Q.info.platform === 'ios') {
-			this.restoreRubberBand(); // remove existing one if any
-			Q.extend(_touchScrollingHandler.options, options);
-			Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
-				passive: false
-			}, true);
+		if (Q.info.platform !== 'ios') {
+			return;
 		}
+		this.restoreRubberBand(); // remove existing one if any
+		Q.extend(_touchScrollingHandler.options, options);
+		Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
+			passive: false
+		}, true);
 	},
 	/**
 	 * Can restore touch scrolling after preventRubberBand() was called
@@ -15697,7 +15698,7 @@ Q.onReady.set(function _Q_masks() {
 }, 'Q.Masks');
 
 if (_isCordova) {
-	Q.Visual.preventRubberBand();
+	Q.Visual.preventRubberBand(); // call it by default
 	Q.onReady.set(function _Q_handleOpenUrl() {
 		root.handleOpenURL = function (url) {
 			Q.handle(Q.onHandleOpenUrl, Q, [url]);
