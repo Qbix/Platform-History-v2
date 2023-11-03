@@ -13672,6 +13672,7 @@ Q.Visual = Q.Pointer = {
 	 */
 	preventRubberBand: function (options) {
 		if (Q.info.platform === 'ios') {
+			this.restoreRubberBand(); // remove existing one if any
 			Q.extend(_touchScrollingHandler.options, options);
 			Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
 				passive: false
@@ -15696,6 +15697,7 @@ Q.onReady.set(function _Q_masks() {
 }, 'Q.Masks');
 
 if (_isCordova) {
+	Q.Visual.preventRubberBand();
 	Q.onReady.set(function _Q_handleOpenUrl() {
 		root.handleOpenURL = function (url) {
 			Q.handle(Q.onHandleOpenUrl, Q, [url]);
