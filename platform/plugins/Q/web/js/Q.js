@@ -5402,13 +5402,14 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 	}
 	for (var i=0, l=toolName.length; i<l; ++i) {
 		var tn = toolName[i];
+		var tnn = Q.normalize.memoized(tn);
 		var ntt = tn.split('/').join('_');
 		var ba = Q.Tool.beingActivated;
 		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
 		if (toolOptions && toolOptions[i]) {
 			element.options = element.options || {};
-			element.options[Q.normalize.memoized(tn)] = toolOptions[i];
+			element.options[tnn] = toolOptions[i];
 		}
 		if (!element.getAttribute('id')) {
 			if (typeof id === 'function') {
@@ -5429,6 +5430,7 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 			}
 			element.setAttribute('id', id);
 		}
+		_insertPlaceholderHTML(element, tnn);
 	}
 	if (lazyload) {
 		element.setAttribute('data-Q-lazyload', 'waiting');
@@ -5663,7 +5665,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	});
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
-		var toolPlaceholder = _qtp[toolName];
 		function _loadToolScript_loaded(params) {
 			// in this function, toolConstructor starts as a string
 			// and we expect the script to call Q.Tool.define()
@@ -5705,24 +5706,8 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				shared.waitingForTools.push(uniqueToolId);
 			}
 		}
-		if (options && options.placeholder && toolPlaceholder) {
-			// Insert placeholder HTML from one of the tools.
-			// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
-			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			if (!tool && !toolElement.innerHTML) {
-				function _insertHTML(err, html) {
-					toolElement.innerHTML = html;
-				}
-				if (toolPlaceholder.html) {
-					_insertHTML(null, toolPlaceholder.html);
-				} else if (toolPlaceholder.template) {
-					if (Q.isPlainObject(toolPlaceholder.template)) {
-						Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
-					} else {
-						Q.Template.render(toolPlaceholder.template, _insertHTML);
-					}
-				}
-			}
+		if (options && options.placeholder) {
+			_insertPlaceholderHTML(toolElement, toolName);
 		}
 		if (typeof toolConstructor === 'function') {
 			return p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
@@ -5788,6 +5773,33 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 		}
 	});
+}
+
+function _insertPlaceholderHTML(toolElement, toolName) {
+	var toolPlaceholder = _qtp[toolName];
+	if (!toolPlaceholder || toolElement.Q_insertedPlaceholderHTML) {
+		return false;
+	}
+	// Insert placeholder HTML from one of the tools.
+	// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
+	var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
+	if (tool && !toolElement.innerHTML) {
+		return false;
+	}
+	function _insertHTML(err, html) {
+		toolElement.Q_insertedPlaceholderHTML = true;
+		toolElement.innerHTML = html;
+	}
+	if (toolPlaceholder.html) {
+		_insertHTML(null, toolPlaceholder.html);
+	} else if (toolPlaceholder.template) {
+		if (Q.isPlainObject(toolPlaceholder.template)) {
+			Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
+		} else {
+			Q.Template.render(toolPlaceholder.template, _insertHTML);
+		}
+	}
+	return true;
 }
 
 Q.Tool.onLoadedConstructor = Q.Event.factory({}, ["", function (name) { 
@@ -16487,4 +16499,3 @@ var _appId = location.search.queryField('Q.appId');
 return Q;
 
 }).call(this);
-
