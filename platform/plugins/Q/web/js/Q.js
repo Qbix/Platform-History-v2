@@ -570,8 +570,10 @@ Sp.matchTypes.adapters = {
 			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
 			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
-			if ((!options.excludeLocalFiles && parts[i].match(fileRegExp))
-			|| parts[i].match(urlRegExp)) {
+			if (( 
+				(!options || !options.excludeLocalFiles)
+				&& parts[i].match(fileRegExp)
+			) || parts[i].match(urlRegExp)) {
 				res.push(parts[i]);
 			}
 			
@@ -5400,13 +5402,14 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 	}
 	for (var i=0, l=toolName.length; i<l; ++i) {
 		var tn = toolName[i];
+		var tnn = Q.normalize.memoized(tn);
 		var ntt = tn.split('/').join('_');
 		var ba = Q.Tool.beingActivated;
 		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
 		if (toolOptions && toolOptions[i]) {
 			element.options = element.options || {};
-			element.options[Q.normalize.memoized(tn)] = toolOptions[i];
+			element.options[tnn] = toolOptions[i];
 		}
 		if (!element.getAttribute('id')) {
 			if (typeof id === 'function') {
@@ -5427,6 +5430,7 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 			}
 			element.setAttribute('id', id);
 		}
+		_insertPlaceholderHTML(element, tnn);
 	}
 	if (lazyload) {
 		element.setAttribute('data-Q-lazyload', 'waiting');
@@ -5661,7 +5665,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	});
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
-		var toolPlaceholder = _qtp[toolName];
 		function _loadToolScript_loaded(params) {
 			// in this function, toolConstructor starts as a string
 			// and we expect the script to call Q.Tool.define()
@@ -5703,24 +5706,8 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				shared.waitingForTools.push(uniqueToolId);
 			}
 		}
-		if (options && options.placeholder && toolPlaceholder) {
-			// Insert placeholder HTML from one of the tools.
-			// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
-			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			if (!tool && !toolElement.innerHTML) {
-				function _insertHTML(err, html) {
-					toolElement.innerHTML = html;
-				}
-				if (toolPlaceholder.html) {
-					_insertHTML(null, toolPlaceholder.html);
-				} else if (toolPlaceholder.template) {
-					if (Q.isPlainObject(toolPlaceholder.template)) {
-						Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
-					} else {
-						Q.Template.render(toolPlaceholder.template, _insertHTML);
-					}
-				}
-			}
+		if (options && options.placeholder) {
+			_insertPlaceholderHTML(toolElement, toolName);
 		}
 		if (typeof toolConstructor === 'function') {
 			return p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
@@ -5786,6 +5773,33 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 		}
 	});
+}
+
+function _insertPlaceholderHTML(toolElement, toolName) {
+	var toolPlaceholder = _qtp[toolName];
+	if (!toolPlaceholder || toolElement.Q_insertedPlaceholderHTML) {
+		return false;
+	}
+	// Insert placeholder HTML from one of the tools.
+	// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
+	var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
+	if (tool && !toolElement.innerHTML) {
+		return false;
+	}
+	function _insertHTML(err, html) {
+		toolElement.Q_insertedPlaceholderHTML = true;
+		toolElement.innerHTML = html;
+	}
+	if (toolPlaceholder.html) {
+		_insertHTML(null, toolPlaceholder.html);
+	} else if (toolPlaceholder.template) {
+		if (Q.isPlainObject(toolPlaceholder.template)) {
+			Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
+		} else {
+			Q.Template.render(toolPlaceholder.template, _insertHTML);
+		}
+	}
+	return true;
 }
 
 Q.Tool.onLoadedConstructor = Q.Event.factory({}, ["", function (name) { 
@@ -7093,14 +7107,15 @@ Q.page = function _Q_page(page, handler, key) {
  * @static
  * @method init
  * @param {Object} options
- *  Supports the following options:
- *  "isLocalFile": defaults to false. Set this to true if you are calling Q.init from local file:/// context.
+ * @param {boolean} [options.isLocalFile] set this to true if you are calling Q.init from local file:/// context.
+ * @param {boolean} [options.isCordova] set this to true if you're loading this inside a Cordova environment
  */
 Q.init = function _Q_init(options) {
 	if (Q.init.called) {
 		return false;
 	}
 	Q.init.called = true;
+	Q.info.baseUrl = Q.info.baseUrl || location.href.split('/').slice(0, -1).join('/');
 	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
@@ -7112,8 +7127,48 @@ Q.init = function _Q_init(options) {
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
+	if (options && options.isCordova) {
+		_isCordova = options.isCordova;
+	}
 	if (_isCordova) {
 		checks.push("device");
+		Q.Visual.preventRubberBand(); // call it by default
+	
+		Q.onReady.set(function _Q_handleOpenUrl() {
+			root.handleOpenURL = function (url) {
+				Q.handle(Q.onHandleOpenUrl, Q, [url]);
+			};
+		}, 'Q.handleOpenUrl');
+	
+		Q.onReady.set(function _Q_browsertab() {
+			if (!(cordova.plugins && cordova.plugins.browsertabs)) {
+				return;
+			}
+			cordova.plugins.browsertabs.isAvailable(function(result) {
+				var a = root.open;
+				delete root.open;
+				root.open = function (url, target, options) {
+					var noopener = options && options.noopener;
+					var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
+					if (!target || w) {
+						Q.handle(url);
+						return root;
+					}
+					if (result) {
+						cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
+					} else if (cordova.InAppBrowser) {
+						cordova.InAppBrowser.open(url, '_system', options);
+					}
+				};
+				root.close = function (url, target, options) {
+					if (result) {
+						cordova.plugins.browsertabs.close(options);
+					} else if (cordova.InAppBrowser) {
+						cordova.InAppBrowser.close();
+					}
+				};
+			}, function () {});
+		}, 'Q.browsertabs');
 	}
 	var p = Q.pipe(checks, 1, function _Q_init_pipe_callback() {
 		if (!Q.info) Q.info = {};
@@ -7134,11 +7189,11 @@ Q.init = function _Q_init(options) {
 		}
 
 		var baseUrl = Q.baseUrl();
-		if (options && options.isLocalFile) {
+		if (options && options.isLocalFile
+		&& !baseUrl.startsWith('file://')) {
 			Q.loadUrl(baseUrl, {
 				ignoreHistory: true,
 				skipNonce: true,
-				onActivate: _getJSON,
 				handler: function () {},
 				slotNames: ["cordova"]
 			});
@@ -7229,10 +7284,13 @@ Q.init = function _Q_init(options) {
  * @method ready
  */
 Q.ready = function _Q_ready() {
-	Q.loadNonce(function readyWithNonce() {
+	var loader = Q.ready.options.skipNonce
+		? function (callback) { callback() }
+		: Q.loadNonce;
+	loader(function readyWithNonce() {
 		var baseUrl = Q.baseUrl();
 		_isReady = true;
-		if (Q.info.isLocalFile) {
+		if (Q.info.isLocalFile && !baseUrl.startsWith('file://')) {
 			// This is an HTML file loaded from the local filesystem
 			var url = location.hash.queryField('url');
 			if (url === undefined) {
@@ -7309,6 +7367,7 @@ Q.ready = function _Q_ready() {
 		});
 	});
 };
+Q.ready.options = {};
 
 /**
  * This function is called by Q to make sure that we've loaded the session nonce.
@@ -13682,12 +13741,14 @@ Q.Visual = Q.Pointer = {
 	 * @method preventRubberBand
 	 */
 	preventRubberBand: function (options) {
-		if (Q.info.platform === 'ios') {
-			Q.extend(_touchScrollingHandler.options, options);
-			Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
-				passive: false
-			}, true);
+		if (Q.info.platform !== 'ios') {
+			return;
 		}
+		this.restoreRubberBand(); // remove existing one if any
+		Q.extend(_touchScrollingHandler.options, options);
+		Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
+			passive: false
+		}, true);
 	},
 	/**
 	 * Can restore touch scrolling after preventRubberBand() was called
@@ -15705,44 +15766,6 @@ Q.onReady.set(function _Q_masks() {
 	}, 'Q.request.load.mask');
 	Q.layout();
 }, 'Q.Masks');
-
-if (_isCordova) {
-	Q.onReady.set(function _Q_handleOpenUrl() {
-		root.handleOpenURL = function (url) {
-			Q.handle(Q.onHandleOpenUrl, Q, [url]);
-		};
-	}, 'Q.handleOpenUrl');
-
-	Q.onReady.set(function _Q_browsertab() {
-		if (!(cordova.plugins && cordova.plugins.browsertabs)) {
-			return;
-		}
-		cordova.plugins.browsertabs.isAvailable(function(result) {
-			var a = root.open;
-			delete root.open;
-			root.open = function (url, target, options) {
-				var noopener = options && options.noopener;
-				var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
-				if (!target || w) {
-					Q.handle(url);
-					return root;
-				}
-				if (result) {
-					cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
-				} else if (cordova.InAppBrowser) {
-					cordova.InAppBrowser.open(url, '_system', options);
-				}
-			};
-			root.close = function (url, target, options) {
-				if (result) {
-					cordova.plugins.browsertabs.close(options);
-				} else if (cordova.InAppBrowser) {
-					cordova.InAppBrowser.close();
-				}
-			};
-		}, function () {});
-	}, 'Q.browsertabs');
-}
 
 /**
  * Class to do things with cameras.
