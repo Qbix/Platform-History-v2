@@ -40,16 +40,7 @@ Q.exports(function(){
                 };
 
                 if (options.immediatePayment) {
-                    // just dummy dialog with throbber to show user that payment processing
-                    Q.Dialogs.push({
-                        title: Q.Assets.texts.subscriptions.ImmediatePayment,
-                        className: "Assets_stripe_payment Assets_stripe_payment_loading",
-                        content: null
-                    });
                     Q.req("Assets/subscription", ["subscription"], function (err, response) {
-                        // close dummy dialog
-                        Q.Dialogs.pop();
-
                         var msg = Q.firstErrorMessage(err, response && response.errors);
                         if (msg) {
                             return Q.alert(msg);

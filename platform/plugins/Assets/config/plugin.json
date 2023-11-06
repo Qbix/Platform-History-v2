@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.15",
+				"version": "1.0.16",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -29,6 +29,7 @@
 			"Streams/updateStreamNames": ["Assets/after/Streams_updateStreamNames"]
 		},
 		"routes@start": {
+			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Assets/services": { "module": "Assets", "action": "services" },
@@ -40,11 +41,11 @@
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"assetsIcons": { "module": "Assets", "action": "icons" },
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
+			"Assets/plan/:publisherId/:planId": { "module": "Assets", "action": "plan" },
 			"Assets/subscription": {"module": "Assets", "action": "subscription"},
 			"Assets/connected": {"module": "Assets", "action": "connected"},
 			"Assets/connected/:payments": {"module": "Assets", "action": "connected"},
-			"Assets/connected/:payments/:method": {"module": "Assets", "action": "connected"},
-			"Q/plugins/Assets/:action": {"module": "Assets"}
+			"Assets/connected/:payments/:method": {"module": "Assets", "action": "connected"}
 		},
 		"web": {
 			"contentSecurityPolicy": {
@@ -255,7 +256,7 @@
 				"defaults": {
 					"title": "Subscription plan",
 					"readLevel": 40,
-					"writeLevel": 23,
+					"writeLevel": 10,
 					"adminLevel": 0
 				}
 			},
