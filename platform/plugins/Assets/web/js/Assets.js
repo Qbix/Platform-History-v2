@@ -723,6 +723,7 @@
 		}, 'Assets');
 	}, 'Assets');
 
+	// columns settings
 	var co = {
 		scrollbarsAutoHide: false,
 		handlers: {
@@ -736,4 +737,35 @@
 		co.back = {src: "Q/plugins/Q/img/x.png"};
 	}
 	Q.Tool.define.options('Q/columns', co);
+
+	// selectors
+	$('body').off(Q.Pointer.fastclick, ".Assets_plan_preview_tool[data-onInvoke=openTool]").on(Q.Pointer.fastclick, ".Assets_plan_preview_tool[data-onInvoke=openTool]", function () {
+		var tool = Q.Tool.from(this, "Assets/plan/preview");
+		if (!tool) {
+			return console.warn("Assets/plan/preview tool not found");
+		}
+		var stream = tool.stream;
+		var publisherId = stream.fields.publisherId;
+		var streamName = stream.fields.name;
+
+		if (!Q.Users.loggedInUser) {
+			return Q.Users.login({
+				onSuccess: function () {
+					Q.handle(window.location.href);
+				}
+			});
+		}
+
+		Q.invoke({
+			title: stream.fields.title,
+			trigger: tool.element,
+			name: 'Assets/plan',
+			url: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop()),
+			className: 'Assets_subscription_plan',
+			onActivate: function ($element) {
+
+			}
+		});
+	});
+
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);
