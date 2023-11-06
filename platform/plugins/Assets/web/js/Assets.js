@@ -486,7 +486,10 @@
 			css: "{{Assets}}/css/tools/NFT/owned.css"
 		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
-		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
+		"Assets/plan/preview": {
+			js: "{{Assets}}/js/tools/planPreview.js",
+			css: "{{Assets}}/css/tools/PlanPreview.css"
+		},
 		"Assets/plan": {
 			js: ["{{Assets}}/js/tools/plan.js", "{{Q}}/js/datejs/date.js"],
 			css: "{{Assets}}/css/tools/Plan.css"
