@@ -565,14 +565,18 @@ Sp.matchTypes.adapters = {
 	url: function (options) {
 		var parts = this.split(' ');
 		var res = [];
-		var regexp = (options && options.requireScheme)
+		var fileRegExp = /^(file:\/\/\/)/gim;
+		var urlRegExp = (options && options.requireScheme)
 			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
 			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
-			if (!parts[i].match(regexp)) {
-				continue;
+			if (( 
+				(!options || !options.excludeLocalFiles)
+				&& parts[i].match(fileRegExp)
+			) || parts[i].match(urlRegExp)) {
+				res.push(parts[i]);
 			}
-			res.push(parts[i]);
+			
 		}
 		return res;
 	},
@@ -2765,8 +2769,8 @@ Q.Daystamp = {
 	 */
 	age: function(daystampBirth, daystampNow)
 	{
-		ymdBirth = Q.Daystamp.toYMD(daystampBirth);
-		ymdNow = Q.Daystamp.toYMD(daystampNow);
+		var ymdBirth = Q.Daystamp.toYMD(daystampBirth);
+		var ymdNow = Q.Daystamp.toYMD(daystampNow);
 		var years = ymdNow[0] - ymdBirth[0];
 		return (ymdNow[1] < ymdBirth[1]
 			|| (ymdNow[1] === ymdBirth[1] && ymdNow[2] < ymdBirth[2]))
@@ -5398,13 +5402,14 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 	}
 	for (var i=0, l=toolName.length; i<l; ++i) {
 		var tn = toolName[i];
+		var tnn = Q.normalize.memoized(tn);
 		var ntt = tn.split('/').join('_');
 		var ba = Q.Tool.beingActivated;
 		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
 		if (toolOptions && toolOptions[i]) {
 			element.options = element.options || {};
-			element.options[Q.normalize.memoized(tn)] = toolOptions[i];
+			element.options[tnn] = toolOptions[i];
 		}
 		if (!element.getAttribute('id')) {
 			if (typeof id === 'function') {
@@ -5425,6 +5430,7 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 			}
 			element.setAttribute('id', id);
 		}
+		_insertPlaceholderHTML(element, tnn);
 	}
 	if (lazyload) {
 		element.setAttribute('data-Q-lazyload', 'waiting');
@@ -5659,7 +5665,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	});
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
-		var toolPlaceholder = _qtp[toolName];
 		function _loadToolScript_loaded(params) {
 			// in this function, toolConstructor starts as a string
 			// and we expect the script to call Q.Tool.define()
@@ -5701,24 +5706,8 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				shared.waitingForTools.push(uniqueToolId);
 			}
 		}
-		if (options && options.placeholder && toolPlaceholder) {
-			// Insert placeholder HTML from one of the tools.
-			// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
-			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			if (!tool && !toolElement.innerHTML) {
-				function _insertHTML(err, html) {
-					toolElement.innerHTML = html;
-				}
-				if (toolPlaceholder.html) {
-					_insertHTML(null, toolPlaceholder.html);
-				} else if (toolPlaceholder.template) {
-					if (Q.isPlainObject(toolPlaceholder.template)) {
-						Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
-					} else {
-						Q.Template.render(toolPlaceholder.template, _insertHTML);
-					}
-				}
-			}
+		if (options && options.placeholder) {
+			_insertPlaceholderHTML(toolElement, toolName);
 		}
 		if (typeof toolConstructor === 'function') {
 			return p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
@@ -5784,6 +5773,33 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 		}
 	});
+}
+
+function _insertPlaceholderHTML(toolElement, toolName) {
+	var toolPlaceholder = _qtp[toolName];
+	if (!toolPlaceholder || toolElement.Q_insertedPlaceholderHTML) {
+		return false;
+	}
+	// Insert placeholder HTML from one of the tools.
+	// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
+	var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
+	if (tool && !toolElement.innerHTML) {
+		return false;
+	}
+	function _insertHTML(err, html) {
+		toolElement.Q_insertedPlaceholderHTML = true;
+		toolElement.innerHTML = html;
+	}
+	if (toolPlaceholder.html) {
+		_insertHTML(null, toolPlaceholder.html);
+	} else if (toolPlaceholder.template) {
+		if (Q.isPlainObject(toolPlaceholder.template)) {
+			Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
+		} else {
+			Q.Template.render(toolPlaceholder.template, _insertHTML);
+		}
+	}
+	return true;
 }
 
 Q.Tool.onLoadedConstructor = Q.Event.factory({}, ["", function (name) { 
@@ -7091,14 +7107,15 @@ Q.page = function _Q_page(page, handler, key) {
  * @static
  * @method init
  * @param {Object} options
- *  Supports the following options:
- *  "isLocalFile": defaults to false. Set this to true if you are calling Q.init from local file:/// context.
+ * @param {boolean} [options.isLocalFile] set this to true if you are calling Q.init from local file:/// context.
+ * @param {boolean} [options.isCordova] set this to true if you're loading this inside a Cordova environment
  */
 Q.init = function _Q_init(options) {
 	if (Q.init.called) {
 		return false;
 	}
 	Q.init.called = true;
+	Q.info.baseUrl = Q.info.baseUrl || location.href.split('/').slice(0, -1).join('/');
 	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
@@ -7110,8 +7127,48 @@ Q.init = function _Q_init(options) {
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
+	if (options.isCordova) {
+		_isCordova = options.isCordova;
+	}
 	if (_isCordova) {
 		checks.push("device");
+		Q.Visual.preventRubberBand(); // call it by default
+	
+		Q.onReady.set(function _Q_handleOpenUrl() {
+			root.handleOpenURL = function (url) {
+				Q.handle(Q.onHandleOpenUrl, Q, [url]);
+			};
+		}, 'Q.handleOpenUrl');
+	
+		Q.onReady.set(function _Q_browsertab() {
+			if (!(cordova.plugins && cordova.plugins.browsertabs)) {
+				return;
+			}
+			cordova.plugins.browsertabs.isAvailable(function(result) {
+				var a = root.open;
+				delete root.open;
+				root.open = function (url, target, options) {
+					var noopener = options && options.noopener;
+					var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
+					if (!target || w) {
+						Q.handle(url);
+						return root;
+					}
+					if (result) {
+						cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
+					} else if (cordova.InAppBrowser) {
+						cordova.InAppBrowser.open(url, '_system', options);
+					}
+				};
+				root.close = function (url, target, options) {
+					if (result) {
+						cordova.plugins.browsertabs.close(options);
+					} else if (cordova.InAppBrowser) {
+						cordova.InAppBrowser.close();
+					}
+				};
+			}, function () {});
+		}, 'Q.browsertabs');
 	}
 	var p = Q.pipe(checks, 1, function _Q_init_pipe_callback() {
 		if (!Q.info) Q.info = {};
@@ -7132,11 +7189,11 @@ Q.init = function _Q_init(options) {
 		}
 
 		var baseUrl = Q.baseUrl();
-		if (options && options.isLocalFile) {
+		if (options && options.isLocalFile
+		&& !baseUrl.startsWith('file://')) {
 			Q.loadUrl(baseUrl, {
 				ignoreHistory: true,
 				skipNonce: true,
-				onActivate: _getJSON,
 				handler: function () {},
 				slotNames: ["cordova"]
 			});
@@ -7211,9 +7268,9 @@ Q.init = function _Q_init(options) {
 		waitFor.push('Q.info.urls.updateBeforeInit');
 		Q.updateUrls(p2.fill('Q.info.urls.updateBeforeInit'));
 	}
-	if (!Q.isEmpty(Q.Text.loadBeforeInit)) {
-		waitFor.push('Q.Text.loadBeforeInit');
-		Q.Text.get(Q.Text.loadBeforeInit, p2.fill('Q.Text.loadBeforeInit'));
+	if (!Q.isEmpty(Q.getObject('Q.info.text.loadBeforeInit'))) {
+		waitFor.push('loadBeforeInit');
+		Q.Text.get(Q.info.text.loadBeforeInit, p2.fill('loadBeforeInit'));
 	}
 	p2.add(waitFor, 1, function () {
 		p.fill('init')();
@@ -7227,10 +7284,13 @@ Q.init = function _Q_init(options) {
  * @method ready
  */
 Q.ready = function _Q_ready() {
-	Q.loadNonce(function readyWithNonce() {
+	var loader = Q.ready.options.skipNonce
+		? function (callback) { callback() }
+		: Q.loadNonce;
+	loader(function readyWithNonce() {
 		var baseUrl = Q.baseUrl();
 		_isReady = true;
-		if (Q.info.isLocalFile) {
+		if (Q.info.isLocalFile && !baseUrl.startsWith('file://')) {
 			// This is an HTML file loaded from the local filesystem
 			var url = location.hash.queryField('url');
 			if (url === undefined) {
@@ -7307,6 +7367,7 @@ Q.ready = function _Q_ready() {
 		});
 	});
 };
+Q.ready.options = {};
 
 /**
  * This function is called by Q to make sure that we've loaded the session nonce.
@@ -7613,15 +7674,15 @@ Q.Browser = {
 	 */
 	detect: function() {
 		var data = this.searchData(this.dataBrowser);
-		var browser = (data && data.identity) || "An unknown browser";
+		var browser = (data && data.identity) || "unknownBrowser";
 		
 		var version = (this.searchVersion(navigator.userAgent)
 			|| this.searchVersion(navigator.appVersion)
-			|| "an unknown version").toString();
+			|| "?").toString();
 		var dotIndex = version.indexOf('.');
 		var mainVersion = version.substring(0, dotIndex != -1 ? dotIndex : version.length);
 		var OSdata = this.searchData(this.dataOS);
-		var OS = (OSdata && OSdata.identity) || "an unknown OS";
+		var OS = (OSdata && OSdata.identity) || "unknownOS";
 		var engine = '', ua = navigator.userAgent.toLowerCase();
 		if (ua.indexOf('webkit') != -1) {
 			engine = 'webkit';
@@ -7630,8 +7691,7 @@ Q.Browser = {
 		} else if (ua.indexOf('presto') != -1) {
 			engine = 'presto';
 		}
-		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
-			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
+		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent);
 		var isStandalone = navigator.standalone
 			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
 			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
@@ -8253,13 +8313,11 @@ Q.url = function _Q_url(what, fields, options) {
 	}
 	var baseUrl = (options && options.baseUrl) || Q.baseUrl() || "";
 	what3 = Q.interpolateUrl(what2);
-	if (what3.isUrl()) {
-		if (what3.startsWith(baseUrl)) {
-			tail = what3.substring(baseUrl.length+1);
-			tail = tail.split('?')[0];
-			info = Q.getObject(tail, Q.updateUrls.urls, '/');
-		}
-	} else {
+	if (what3.startsWith(baseUrl)) {
+		tail = what3.substring(baseUrl.length+1);
+		tail = tail.split('?')[0];
+		info = Q.getObject(tail, Q.updateUrls.urls, '/');
+	} else if (!what3.isUrl()) {
 		info = Q.getObject(what3, Q.updateUrls.urls, '/');
 	}
 	if (info) {
@@ -8532,6 +8590,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *	 Or pass a function which will be run before .send() is executed. First parameter is the xhr object, second is the options.
  * @param {Function} [options.preprocess] an optional function that takes the xhr object before the .send() is invoked on it
  * @param {boolean} [options.parse] set to false to pass the unparsed string to the callback
+ * @param {boolean} [options.asJSON] set to true to have the payload be encoded as JSON, if method is not "GET"
  * @param {boolean} [options.extend=true] if false, the URL is not extended with Q fields.
  * @param {String} [options.loadExtras=null] if "all", asks the server to load any extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {boolean} [options.query=false] if true simply returns the query url without issuing the request
@@ -8712,7 +8771,10 @@ Q.request = function (url, slotNames, callback, options) {
 				xmlhttp.send();
 			} else {
 				xmlhttp.open(verb, url, !sync);
-				if (!o.formdata) {
+				if (o.asJSON) {
+					content = JSON.stringify(o.fields);
+					xmlhttp.setRequestHeader("Content-Type", "application/json");
+				} else if (!o.formdata) {
 					xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
 				}
 				//xmlhttp.setRequestHeader("Content-length", content.length);
@@ -9161,7 +9223,7 @@ Q.updateUrls = function(callback) {
 				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
-		}, {extend: false, cacheBust: 1000});
+		}, {extend: false, cacheBust: 1000, skipNonce: true});
 	} else if (ut !== localStorage.getItem(Q.updateUrls.timestampKey)) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
@@ -9189,7 +9251,7 @@ Q.updateUrls = function(callback) {
 				}
 				Q.handle(callback, null, [result, timestamp]);
 			}
-		}, { extend: false, cacheBust: 1000 });
+		}, { extend: false, cacheBust: 1000, skipNonce: true });
 	} else {
 		Q.handle(callback, null, [{}, timestamp]);
 	}
@@ -9871,7 +9933,9 @@ Q.clientId = function () {
 	var ret = Q.clientId.value = (detected.device || "desktop").substring(0, 4)
 		+ "-" + Q.normalize.memoized(detected.OS.substring(0, 3))
 		+ "-" + Q.normalize.memoized(detected.name.substring(0, 3))
-		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
+		+ "-" + detected.mainVersion + (
+			detected.isWebView ? "n": (detected.isStandalone ? "s" : "w"
+		))
 		+ "-" + code.toString(36);
 	storage.setItem("Q.clientId", ret);
 	return ret;
@@ -11224,7 +11288,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	var type = (info && info.type) || o.type;
 	var url = Q.url(dir + '/' + name + '.' + type);
 
-	Q.request(url, _callback, {parse: false, extend: false});
+	Q.request(url, _callback, {parse: false, extend: false, skipNonce: true});
 	return true;
 }, {
 	cache: Q.Cache.document('Q.Template.load', 100),
@@ -11474,7 +11538,9 @@ Q.Text = {
 			Q.ensure('Q.info.baseUrl', function () {
 				Q.each(names, function (i, name) {
 					var url = Q.url(dir + '/' + name + '/' + lls + '.json');
-					return func(name, url, pipe.fill(name), options);
+					return func(name, url, pipe.fill(name), 
+						Q.extend({skipNonce: true}, options)
+					);
 				});	
 			});
 		});
@@ -11547,7 +11613,7 @@ var language = location.search.queryField('Q.language') || navigator.language;
 Q.Text.setLanguage.apply(Q.Text, language.split('-'));
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
-	var o = Q.extend({extend: false}, options);
+	var o = Q.extend({extend: false, skipNonce: true}, options);
 	return Q.request(url, function (err, content) {
 		if (err && !url.endsWith("en.json")) {
 			url = url.replace(/[^\/]{2,5}\.json$/, "en.json");
@@ -12259,9 +12325,42 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 			Q.handle(callback, null, options, []);
 			return this;
 		}
-		return this.each(function _jQuery_fn_activate_each(index, element) {
-			Q.activate(element, options, callback, internal);
+		return this.each(function () {
+			Q.activate(this, options, callback, internal);
 		});
+	};
+	/**
+	 * Votes for a CSS class to be added to an element.
+	 * @static
+	 * @method incrementClass
+	 * @param {String} className the CSS class to add
+	 */
+	$.fn.incrementClass = function _jQuery_fn_incrementClass(className) {
+		return this.each(function () {
+			var k = '$.fn.incrementClass\t'+className;
+			var $t = $(this), d = ($(this).data(k) || 0);
+			if (d == 0) {
+				$t.addClass(className);
+			}
+			$t.data(k, d+1);
+		})
+	};
+	/**
+	 * Stops voting for a CSS class to be added to an element.
+	 * It's removed only when votes reach zero.
+	 * @static
+	 * @method decrementClass
+	 * @param {String} className the CSS class that was incremented
+	 */
+	$.fn.decrementClass = function _jQuery_fn_decrementClass(className) {		
+		return this.each(function () {
+			var k = '$.fn.incrementClass\t'+className;
+			var $t = $(this), d = ($(this).data(k) || 0);
+			if (d <= 1) {
+				$t.removeClass(className);
+			}
+			$t.data(k, d-1);
+		})
 	};
 	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;
 
@@ -13642,12 +13741,14 @@ Q.Visual = Q.Pointer = {
 	 * @method preventRubberBand
 	 */
 	preventRubberBand: function (options) {
-		if (Q.info.platform === 'ios') {
-			Q.extend(_touchScrollingHandler.options, options);
-			Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
-				passive: false
-			}, true);
+		if (Q.info.platform !== 'ios') {
+			return;
 		}
+		this.restoreRubberBand(); // remove existing one if any
+		Q.extend(_touchScrollingHandler.options, options);
+		Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
+			passive: false
+		}, true);
 	},
 	/**
 	 * Can restore touch scrolling after preventRubberBand() was called
@@ -14635,9 +14736,7 @@ Aup.onEnded = new Q.Event();
  */
 Q.Audio.load = Q.getter(function _Q_audio(url, handler, options) {
 	url = Q.url(url);
-	var audio = Q.Audio.collection[url]
-		? Q.Audio.collection[url]
-		: new Q.Audio(url);
+	var audio = Q.Audio.collection[url] || new Q.Audio(url);
 	if (options && options.canPlayThrough === false) {
 		audio.onCanPlay.add(handler);
 	} else {
@@ -14766,7 +14865,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
 			}
 		}
 		callback.call(this, err, voices);
-	});
+	}, {skipNonce: true});
 }, {
 	cache: Q.Cache.document('Q.Audio.speak.loadVoices', 1)
 });
@@ -14951,14 +15050,15 @@ Q.Video = function (url, container, attributes) {
  * Qbix plugins can define their own adapters to Q.Video.upload.adapters
  * @param {Object} params 
  * @param {String} [provider] You can override the default cloud service provider here
+ * @param {Function} [callback]
  */
-Q.Video.upload = function (params, provider) {
+Q.Video.upload = function (params, provider, callback) {
 	provider = provider || Q.getObject('Q.videos.provider');
 	if (typeof Q.Video.upload[provider] === 'function') {
-		Q.Video.upload[provider].apply(params);
+		Q.Video.upload[provider].call(this, params, callback);
 	} else {
 		Q.require(Q.Video.upload[provider], function (exported) {
-			exported.apply(params);
+			exported.call(this, params, callback);
 		});
 	}
 };
@@ -15311,7 +15411,10 @@ Q.Tool.define({
 		js: "{{Q}}/js/tools/progress.js",
 		css: "{{Q}}/css/tools/progress.css"
 	},
-	"Q/badge": "{{Q}}/js/tools/badge.js",
+	"Q/badge": {
+		js: "{{Q}}/js/tools/badge.js",
+		css: "{{Q}}/css/tools/badge.css"
+	},
 	"Q/resize": "{{Q}}/js/tools/resize.js",
 	"Q/layouts": "{{Q}}/js/tools/layouts.js",
 	"Q/carousel": "{{Q}}/js/tools/carousel.js",
@@ -15611,6 +15714,7 @@ Q.loadUrl.options = {
 Q.request.options = {
 	duplicate: true,
 	quiet: true,
+	asJSON: false,
 	parse: 'json',
 	timeout: 5000,
 	onRedirect: new Q.Event(function (url) {
@@ -15662,44 +15766,6 @@ Q.onReady.set(function _Q_masks() {
 	}, 'Q.request.load.mask');
 	Q.layout();
 }, 'Q.Masks');
-
-if (_isCordova) {
-	Q.onReady.set(function _Q_handleOpenUrl() {
-		root.handleOpenURL = function (url) {
-			Q.handle(Q.onHandleOpenUrl, Q, [url]);
-		};
-	}, 'Q.handleOpenUrl');
-
-	Q.onReady.set(function _Q_browsertab() {
-		if (!(cordova.plugins && cordova.plugins.browsertabs)) {
-			return;
-		}
-		cordova.plugins.browsertabs.isAvailable(function(result) {
-			var a = root.open;
-			delete root.open;
-			root.open = function (url, target, options) {
-				var noopener = options && options.noopener;
-				var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
-				if (!target || w) {
-					Q.handle(url);
-					return root;
-				}
-				if (result) {
-					cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
-				} else if (cordova.InAppBrowser) {
-					cordova.InAppBrowser.open(url, '_system', options);
-				}
-			};
-			root.close = function (url, target, options) {
-				if (result) {
-					cordova.plugins.browsertabs.close(options);
-				} else if (cordova.InAppBrowser) {
-					cordova.InAppBrowser.close();
-				}
-			};
-		}, function () {});
-	}, 'Q.browsertabs');
-}
 
 /**
  * Class to do things with cameras.
@@ -16327,6 +16393,11 @@ Q.beforeInit.addOnce(function () {
 		if (!found) {
 			Q.Text.setLanguage(Q.info.languages[0][0], Q.info.languages[0][1]);
 		}
+	}
+
+	if (Q.info.text) {
+		Q.Text.loadBeforeInit = Q.info.text.loadBeforeInit || Q.Text.loadBeforeInit;
+		Q.Text.useLocale = Q.info.text.useLocale || Q.Text.useLocale;
 	}
 
 	Q.ensure('Promise');
