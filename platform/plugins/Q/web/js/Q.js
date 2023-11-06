@@ -8741,25 +8741,46 @@ Q.request = function (url, slotNames, callback, options) {
 		function xhr(onSuccess, onCancel) {
 			if (o.extend !== false) {
 				url = Q.ajaxExtend(url, slotNames, overrides);
+			}			
+			var xmlhttp;
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && !xmlhttp.handled) {
+					xmlhttp.handled = true;
+					if (xmlhttp.status == 200) {
+						onSuccess.call(xmlhttp, xmlhttp.responseText);
+					} else {
+						log("Q.request xhr: " + xmlhttp.status + ' ' 
+							+ xmlhttp.responseText.substring(xmlhttp.responseText.indexOf('<body')));
+						onCancel.call(xmlhttp, xmlhttp.status);
+					}
+				}
+			};
+			if (typeof o.xhr === 'function') {
+				o.xhr.call(xmlhttp, xmlhttp, options);
+			}
+			var sync = (o.xhr === 'sync');
+			if (Q.isPlainObject(o.xhr)) {
+				Q.extend(xmlhttp, o.xhr);
+				sync = sync || xmlhttp.sync;
 			}
 			var content = o.formdata ? o.formdata : Q.queryString(o.fields);
-			var headers = {};
-			if (o.asJSON) {
-				content = JSON.stringify(o.fields);
-				headers["Content-Type"] = "application/json";
-			} else if (!o.formdata) {
-				headers["Content-Type"] = 'application/x-www-form-urlencoded';
+			request.xmlhttp = xmlhttp;
+			if (verb === 'GET') {
+				xmlhttp.open('GET', url + (content ? '&' + content : ''), !sync);
+				xmlhttp.send();
+			} else {
+				xmlhttp.open(verb, url, !sync);
+				if (o.asJSON) {
+					content = JSON.stringify(o.fields);
+					xmlhttp.setRequestHeader("Content-Type", "application/json");
+				} else if (!o.formdata) {
+					xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
+				}
+				//xmlhttp.setRequestHeader("Content-length", content.length);
+				//xmlhttp.setRequestHeader("Connection", "close");
+				xmlhttp.send(content);
 			}
-			fetch(url, {
-				method: verb,
-				headers: headers
-			}).then(function (response) {
-				return response.text();
-			}).then(function (text) {
-				onSuccess.call(Q.request, text);
-			}).catch(function (error) {
-				onCancel.call(Q.request, error);
-			});
 			return url;
 		}
 		
