@@ -7127,7 +7127,7 @@ Q.init = function _Q_init(options) {
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
-	if (options.isCordova) {
+	if (options && options.isCordova) {
 		_isCordova = options.isCordova;
 	}
 	if (_isCordova) {
