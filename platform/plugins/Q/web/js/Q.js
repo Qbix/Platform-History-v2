@@ -1082,8 +1082,8 @@ Elp.addClass = function (className) {
  * @method setClassIf
  * @chainable
  * @param {Boolean} condition
- * @param {String} classNameIfTrue
- * @param {String} classNameIfFalse
+ * @param {String} [classNameIfTrue]
+ * @param {String} [classNameIfFalse]
  * @return {Element} returns this, for chaining
  */
 Elp.setClassIf = function (condition, classNameIfTrue, classNameIfFalse) {
@@ -6564,7 +6564,10 @@ Q.Cache.key = function _Cache_key(args, functions) {
 			if (functions && functions.push) {
 				functions.push(args[i]);
 			}
-		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i]) || args[i] instanceof Array) {
+		} else if (typeof args[i] !== 'object'
+		|| args[i] === null
+		|| Q.isPlainObject(args[i])
+		|| args[i] instanceof Array) {
 			keys.push(args[i]);
 		}
 	}
@@ -11135,7 +11138,7 @@ Q.Template.info = {};
  *   To avoid setting the content (so the template will be loaded on demand later), pass undefined here.
  * @param {Object|String} info You can also pass a string "type" here.
  * @param {String} [info.type="handlebars"] The type of template.
- * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
+ * @param {Array} [info.text] Array naming sources for text translations, to be sent to Q.Text.get()
  * @param {Array} [info.partials] Relative urls of .js scripts for registering partials.
  *   Can also be names of templates for partials (in which case they shouldn't end in .js)
  * @param {Array} [info.helpers] Relative urls of .js scripts for registering helpers
@@ -11157,6 +11160,7 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
 	Q.loadHandlebars();
+	return true;
 };
 
 /**
@@ -11365,12 +11369,19 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			var pbaOld = Q.Page.beingActivated;
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
+			var err;
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				callback(null, compiled(fields, options));
+				var result = compiled(fields, options);
 			} catch (e) {
+				err = e;
 				console.warn(e);
+			}
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, result);
 			}
 			Q.Tool.beingActivated = tbaOld;
 			Q.Page.beingActivated = pbaOld;
