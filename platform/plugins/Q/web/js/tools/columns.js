@@ -108,7 +108,7 @@ Q.Tool.define("Q/columns", function(options) {
 				if (($controlsSlot[0] && isContained)
 					|| $controlsSlot[0] === element) {
 					var html = $controlsSlot.html();
-					column.setClass('Q_columns_hasControls', html)
+					column.setClassIf(html, 'Q_columns_hasControls')
 					presentColumn(tool);
 				}
 			}
@@ -308,7 +308,7 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 			setTimeout(function () {
 				// give the browser a chance to calculate dimensions of elements
-				div.setClass('Q_columns_hasControls', controlsSlot.innerHTML)
+				div.setClassIf(controlsSlot.innerHTML, 'Q_columns_hasControls')
 				presentColumn(tool, $div, o.fullscreen);
 			});
 		} else {
@@ -578,7 +578,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$mask.remove();
 					$div.removeClass('Q_columns_loading');
 				}
-				div.setClass('Q_columns_hasControls', $controlsSlot[0] && !!$controlsSlot[0].innerHTML);
+				div.setClassIf($controlsSlot[0] && !!$controlsSlot[0].innerHTML, 'Q_columns_hasControls');
 				Q.layout(tool.element);
 				if (o.focusAfterActivate) {
 					$('input[type=text],textarea', $columnSlot)

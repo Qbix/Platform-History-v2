@@ -1079,17 +1079,20 @@ Elp.addClass = function (className) {
 
 /**
  * Adds or removes an element according to whether a condition is truthy
- * @method setClass
+ * @method setClassIf
  * @chainable
- * @param {String} className
  * @param {Boolean} condition
+ * @param {String} classNameIfTrue
+ * @param {String} classNameIfFalse
  * @return {Element} returns this, for chaining
  */
-Elp.setClass = function (className, condition) {
+Elp.setClassIf = function (condition, classNameIfTrue, classNameIfFalse) {
 	if (condition) {
-		this.addClass(className);
+		classNameIfTrue && this.addClass(classNameIfTrue);
+		classNameIfFalse && this.removeClass(classNameIfFalse);
 	} else {
-		this.removeClass(className);
+		classNameIfFalse && this.addClass(classNameIfFalse);
+		classNameIfTrue && this.removeClass(classNameIfTrue);
 	}
 	return this;
 };
