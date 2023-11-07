@@ -20,13 +20,14 @@
  *    Function "exiting" receives (element, intersectionObserverEntry)
  *    Function "preparing" receives (element) and is used the first time to prepare the element
  *    Both functions must return true if the element was modified.
- * @param {Element} [root=tool.element] The container inside which to watch for intesections
- * @param {Object} [debounce]
- * @param {Number} [debounce.milliseconds] How many milliseconds to wait before starting the lazyload, to avoid loading during fast scrolling
- * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
- * @param {Element} [observerOptions.root=tool.element.scrollingParent(true)]
- * @param {String} [observerOptions.rootMargin='0px']
- * @param {String} [observerOptions.threshold=0]
+ * @param {Element} [options.root=tool.element] The container inside which to watch for intesections
+ * @param {Object} [options.debounce]
+ * @param {Number} [options.debounce.milliseconds] How many milliseconds to wait before starting the lazyload, to avoid loading during fast scrolling
+ * @param {Object} [options.observerOptions] Override any options to pass to IntersectionObserver
+ * @param {Element} [options.observerOptions.root=tool.element.scrollingParent(true)]
+ * @param {String} [options.observerOptions.rootMargin='0px']
+ * @param {String} [options.observerOptions.threshold=0]
+ * @param {Boolean} [options.dontFreezeDimensions=false] Pass true to skip freezing dimensions when tools are removed
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/lazyload', function (options) {
@@ -232,8 +233,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 						height: element.style.height,
 						containerRect: element.parentElement.getBoundingClientRect()
 					});
-					element.style.width = element.offsetWidth + 'px';
-					element.style.height = element.offsetHeight + 'px';
+					if (tool.state.dontFreezeDimensions) {
+						element.style.width = element.offsetWidth + 'px';
+						element.style.height = element.offsetHeight + 'px';
+					}
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
 					element.removeClass('Q_lazy_loaded');
@@ -262,7 +265,8 @@ Q.Tool.define('Q/lazyload', function (options) {
 	},
 	debounce: {
 		milliseconds: 300
-	}
+	},
+	dontFreezeDimensions: false
 }, 
 
 {
