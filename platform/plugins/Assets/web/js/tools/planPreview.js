@@ -57,7 +57,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 },
 
 {
-	editable: true,
 	icon: {
 		defaultSize: 200
 	},
@@ -66,13 +65,13 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 {
 	refresh: function (stream, callback) {
-		// track stream changes online
-		stream.observe();
-
 		var tool = this;
 		tool.stream = stream;
 		var state = this.state;
 		var ps = tool.preview.state;
+
+		// track stream changes online
+		stream.retain(tool);
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
@@ -149,13 +148,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				Q.handle(closeCallback, dialog, [dialog]);
 			}
 		});
-	},
-	Q: {
-		beforeRemove: function () {
-			if (this.stream) {
-				this.stream.neglect();
-			}
-		}
 	}
 });
 
@@ -175,9 +167,9 @@ Q.Template.set("Assets/plan/composer",
 `<form>
 	<input type="text" name="title" required placeholder="{{text.subscriptions.plan.TitlePlaceholder}}" value="{{title}}">
 	<label for="price"><input type="text" name="amount" required placeholder="{{text.subscriptions.plan.PricePlaceholder}}" value="{{amount}}"></label>
-	<select name="period"><option>daily</option><option>weekly</option><option>monthly</option></select>
+	<select name="period"><option>annually</option><option>monthly</option><option>weekly</option><option>daily</option></select>
 	<textarea name="description" placeholder="{{text.subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
-	<button name="save" class="Q_button">{{text.subscriptions.plan.SavePlan}}</button>
+	<button name="save" class="Q_button" type="button">{{text.subscriptions.plan.SavePlan}}</button>
 </form>`
 );
 

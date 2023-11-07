@@ -2,6 +2,9 @@
 	cursor: pointer;
 	max-width: 200px;
 }
+.Assets_plan_preview_tool .Streams_preview_container {
+	flex-flow: column;
+}
 .Assets_plan_preview_tool:not(.Streams_preview_composer) {
 	border: 1px solid silver;
 	border-radius: 5px;

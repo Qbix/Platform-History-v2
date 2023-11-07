@@ -27,7 +27,9 @@ function Assets_subscription_put($params = array())
 
 	// check if subscription already paid
 	if (!($subscriptionStream instanceof Streams_Stream) || !Assets_Subscription::isCurrent($subscriptionStream)) {
-		throw new Exception($text["subscriptions"]["SubscriptionNotActive"]);
+		if (Q_Request::slotName("subscribe")) {
+			return Q_Response::setSlot('subscribe', false);
+		}
 	}
 
 	// unsubscribe from assets plan

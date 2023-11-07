@@ -485,7 +485,7 @@ Q.Tool.define("Q/columns", function(options) {
 					ignorePage: true,
 					onError: {"Q/columns": _suddenClose},
 					onRedirect: {"Q": _suddenClose}
-				}, o);
+				}, 10, o);
 				params.handler = function _handler(response) {
 					var elementsToActivate = {};
 					if ('title' in response.slots) {

@@ -469,7 +469,10 @@
 		'Assets/', ["Assets/content"]
 	);
 	Q.Tool.define({
-		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
+		"Assets/subscription": {
+			js: "{{Assets}}/js/tools/subscription.js",
+			css: "{{Assets}}/css/tools/AssetsSubscription.css"
+		},
 		"Assets/payment": "{{Assets}}/js/tools/payment.js",
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
@@ -484,7 +487,10 @@
 		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
-		"Assets/plan": "{{Assets}}/js/tools/plan.js",
+		"Assets/plan": {
+			js: ["{{Assets}}/js/tools/plan.js", "{{Q}}/js/datejs/date.js"],
+			css: "{{Assets}}/css/tools/Plan.css"
+		},
 		"Assets/NFT/sales/factory": {
             js:"{{Assets}}/js/tools/NFT/sales/factory.js",
             css: "{{Q}}/css/bootstrap-custom/bootstrap.css"
@@ -719,6 +725,7 @@
 		handlers: {
 			billing: "{{Assets}}/js/columns/billing.js",
 			subscription: "{{Assets}}/js/columns/subscription.js",
+			plan: "{{Assets}}/js/columns/plan.js",
 			services: "{{Assets}}/js/columns/services.js"
 		}
 	};

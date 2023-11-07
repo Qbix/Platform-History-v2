@@ -19,15 +19,7 @@ Q.exports(function(){
             token: options.token
         };
 
-        // just dummy dialog with throbber to show user that payment processing
-        Q.Dialogs.push({
-            title: Q.Assets.texts.subscriptions.ProcessingPayment,
-            className: "Assets_stripe_payment Assets_stripe_payment_loading",
-            content: null
-        });
-
-        Q.req('Assets/subscription', ['status', 'details'], function (err, response) {
-            Q.Dialogs.pop();
+        Q.req('Assets/subscription', ['status', 'details', 'subscriptionStream'], function (err, response) {
             var msg = Q.firstErrorMessage(err, response && response.errors);
             if (msg) {
                 return callback(msg, null);
@@ -54,7 +46,7 @@ Q.exports(function(){
                 return;
             }
 
-            Q.handle(callback, this, [null, response.slots.details]);
+            Q.handle(callback, this, [null, response.slots.status, response.slots.subscriptionStream]);
         }, {
             method: 'post',
             fields: fields
