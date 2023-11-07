@@ -6564,10 +6564,7 @@ Q.Cache.key = function _Cache_key(args, functions) {
 			if (functions && functions.push) {
 				functions.push(args[i]);
 			}
-		} else if (typeof args[i] !== 'object'
-		|| args[i] === null
-		|| Q.isPlainObject(args[i])
-		|| args[i] instanceof Array) {
+		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i]) || args[i] instanceof Array) {
 			keys.push(args[i]);
 		}
 	}
@@ -11369,19 +11366,14 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			var pbaOld = Q.Page.beingActivated;
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
-			var err;
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				var result = compiled(fields, options);
+				var result = 
+				callback(null, );
 			} catch (e) {
-				err = e;
-				console.warn(e);
-			}
-			if (err) {
 				callback(err);
-			} else {
-				callback(null, result);
+				console.warn(e);
 			}
 			Q.Tool.beingActivated = tbaOld;
 			Q.Page.beingActivated = pbaOld;
@@ -15540,6 +15532,17 @@ function _addHandlebarsHelpers() {
 		/* helper to compare two arguemnts for equal: {{#ifEquals arg1 arg2}} */
 		Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+		});
+	}
+	if (!Handlebars.helpers.getObject) {
+		Handlebars.registerHelper('getObject', function() {
+			var result = null;
+			Q.each(arguments, function (i, key) {
+				if (typeof key === 'string' || typeof key === 'number') {
+					result = result[key];
+				}
+			});
+			return result;
 		});
 	}
 	if (!Handlebars.helpers.tool) {
