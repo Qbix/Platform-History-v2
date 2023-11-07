@@ -27,7 +27,8 @@
  * @param {Element} [options.observerOptions.root=tool.element.scrollingParent(true)]
  * @param {String} [options.observerOptions.rootMargin='0px']
  * @param {String} [options.observerOptions.threshold=0]
- * @param {Boolean} [options.dontFreezeDimensions=false] Pass true to skip freezing dimensions when tools are removed
+ * @param {Boolean} [options.dontFreezeDimensions=false] Pass true to skip freezing dimensions when tools are removed.
+ *    Do this when the tools have the dimensions explicitly set in some style or CSS, so we lazyload doesn't fight it.
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/lazyload', function (options) {
@@ -190,7 +191,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				var c = element.parentElement;
 				if (!ep || !c) {
 					// element didn't exit before, so its dimensions weren't frozen
-				} else {
+				} else if (!this.state.dontFreezeDimensions) {
 					var r = c.getBoundingClientRect();
 					if (!ep.containerRect || ep.containerRect.width !== r.width) {
 						// container was resized, so throw away the frozen dimensions
@@ -233,7 +234,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 						height: element.style.height,
 						containerRect: element.parentElement.getBoundingClientRect()
 					});
-					if (tool.state.dontFreezeDimensions) {
+					if (!tool.state.dontFreezeDimensions) {
 						element.style.width = element.offsetWidth + 'px';
 						element.style.height = element.offsetHeight + 'px';
 					}
@@ -301,6 +302,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 		});
 	},
 	unfreezeDimensions: function(element) {
+		if (this.style.dontFreezeDimensions) {
+			return;
+		}
 		var ep = this.frozen.get(element);
 		if (ep.width) {
 			element.style.width = ep.width;
