@@ -67,6 +67,9 @@ abstract class Assets_Subscription
 		$stream->setAttribute('lastChargeTime', time());
 		$stream->changed();
 
+		// apply label to user
+		Users_Contact::addContact($plan->publisherId, $plan->name, $user->id, '', null, false, true);
+
 		/**
 		 * @event Assets/startSubscription {before}
 		 * @param {Streams_Stream} plan
