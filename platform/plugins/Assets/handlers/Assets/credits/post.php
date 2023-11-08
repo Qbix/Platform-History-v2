@@ -9,16 +9,17 @@
  * @param {String} [$_REQUEST.toUserId] - if of user to send to
  * @param {Array} [$_REQUEST.items] - array of items to pay to
  * @param {String} [$_REQUEST.reason] - reason of payment
+ * @param {String} [$options.userId]
  */
 function Assets_credits_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('amount', 'currency'), $req, true);
 
-	$loggedUserId = Users::loggedInUser(true)->id;
-	$user = Users::fetch($loggedUserId);
+	$userId = Q::ifset($params, "userId", null) ?: $userId = Users::loggedInUser(true)->id;
+	$user = Users::fetch($userId);
 	$amount = floatval($req['amount']);
-	$credits = Assets_Credits::amount($loggedUserId);
+	$credits = Assets_Credits::amount($userId);
 	$currency = $req['currency'];
 	$needCredits = Assets_Credits::convert($amount, $currency, "credits");
 	$payments = Q::ifset($req, "payments", "stripe");
@@ -60,12 +61,12 @@ function Assets_credits_post($params = array())
 
 	if ($toPublisherId && $toStreamName) {
 		$reason = Q::ifset($req, 'reason', Assets::JOINED_PAID_STREAM);
-		Assets_Credits::spend($needCredits, $reason, $loggedUserId, @compact(
+		Assets_Credits::spend($needCredits, $reason, $userId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	} elseif ($toUserId) {
 		$reason = Q::ifset($req, 'reason', Assets::PAYMENT_TO_USER);
-		Assets_Credits::transfer($needCredits, $reason, $toUserId, $loggedUserId, @compact(
+		Assets_Credits::transfer($needCredits, $reason, $toUserId, $userId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	}
