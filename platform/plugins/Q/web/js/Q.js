@@ -1079,17 +1079,20 @@ Elp.addClass = function (className) {
 
 /**
  * Adds or removes an element according to whether a condition is truthy
- * @method setClass
+ * @method setClassIf
  * @chainable
- * @param {String} className
  * @param {Boolean} condition
+ * @param {String} [classNameIfTrue]
+ * @param {String} [classNameIfFalse]
  * @return {Element} returns this, for chaining
  */
-Elp.setClass = function (className, condition) {
+Elp.setClassIf = function (condition, classNameIfTrue, classNameIfFalse) {
 	if (condition) {
-		this.addClass(className);
+		classNameIfTrue && this.addClass(classNameIfTrue);
+		classNameIfFalse && this.removeClass(classNameIfFalse);
 	} else {
-		this.removeClass(className);
+		classNameIfFalse && this.addClass(classNameIfFalse);
+		classNameIfTrue && this.removeClass(classNameIfTrue);
 	}
 	return this;
 };
@@ -11132,7 +11135,7 @@ Q.Template.info = {};
  *   To avoid setting the content (so the template will be loaded on demand later), pass undefined here.
  * @param {Object|String} info You can also pass a string "type" here.
  * @param {String} [info.type="handlebars"] The type of template.
- * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
+ * @param {Array} [info.text] Array naming sources for text translations, to be sent to Q.Text.get()
  * @param {Array} [info.partials] Relative urls of .js scripts for registering partials.
  *   Can also be names of templates for partials (in which case they shouldn't end in .js)
  * @param {Array} [info.helpers] Relative urls of .js scripts for registering helpers
@@ -11154,6 +11157,7 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
 	Q.loadHandlebars();
+	return true;
 };
 
 /**
@@ -11365,8 +11369,10 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				callback(null, compiled(fields, options));
+				var result = 
+				callback(null, );
 			} catch (e) {
+				callback(err);
 				console.warn(e);
 			}
 			Q.Tool.beingActivated = tbaOld;
@@ -15526,6 +15532,17 @@ function _addHandlebarsHelpers() {
 		/* helper to compare two arguemnts for equal: {{#ifEquals arg1 arg2}} */
 		Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+		});
+	}
+	if (!Handlebars.helpers.getObject) {
+		Handlebars.registerHelper('getObject', function() {
+			var result = null;
+			Q.each(arguments, function (i, key) {
+				if (typeof key === 'string' || typeof key === 'number') {
+					result = result[key];
+				}
+			});
+			return result;
 		});
 	}
 	if (!Handlebars.helpers.tool) {

@@ -98,6 +98,16 @@ handlebars.registerHelper('call', function(path) {
 	return "{{call "+path+" not found}}";
 });
 
+handlebars.registerHelper('getObject', function() {
+	var result = null;
+	Q.each(arguments, function (i, key) {
+		if (typeof key === 'string' || typeof key === 'number') {
+			result = result[key];
+		}
+	});
+	return result;
+});
+
 handlebars.registerHelper('toUrl', function(url) {
 	if (Q.isPlainObject(url)) {
 		// we meant to pass a variable, not call a helper

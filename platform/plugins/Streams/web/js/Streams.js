@@ -3512,7 +3512,7 @@ var MTotal = Streams.Message.Total = {
 			var c = MTotal.unseen(p, n, m);
 			var unseenClass = (options && options.unseenClass) || 'Streams_unseen_nonzero';
 			element.innerHTML = c;
-			element.setClass(unseenClass, c);
+			element.setClassIf(c, unseenClass);
 		}
 	},
 
