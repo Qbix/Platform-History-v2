@@ -228,19 +228,22 @@ class Users_Label extends Base_Users_Label
 	 *   The user whose label is to be removed
 	 * @param {string} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
+	 * @param {boolean} [$skipAccess=false] If true skip checking permissions
 	 * @return {Db_Query_MySql}
 	 */
-	static function removeLabel($label, $userId = null, $asUserId = null)
+	static function removeLabel($label, $userId = null, $asUserId = null, $skipAccess = false)
 	{
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(true);
 			$userId = $user->id;
 		}
-		Users::canManageLabels($asUserId, $userId, $label, true);
-		$label = new Users_Label();
-		$label->userId = $userId;
-		$label->label = $label;
-		$label->remove();
+		if (!$skipAccess) {
+			Users::canManageLabels($asUserId, $userId, $label, true);
+		}
+		$usersLabel = new Users_Label();
+		$usersLabel->userId = $userId;
+		$usersLabel->label = $label;
+		$usersLabel->remove();
 	}
 
 	/**
