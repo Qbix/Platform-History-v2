@@ -11366,14 +11366,19 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			var pbaOld = Q.Page.beingActivated;
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
+			var err;
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				var result = 
-				callback(null, );
+				var result = compiled(fields, options);
 			} catch (e) {
-				callback(err);
+				err = e;
 				console.warn(e);
+			}
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, result);
 			}
 			Q.Tool.beingActivated = tbaOld;
 			Q.Page.beingActivated = pbaOld;
