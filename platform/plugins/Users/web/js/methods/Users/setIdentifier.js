@@ -119,7 +119,7 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 
 		var $button;
 		if (identifierType === 'web3') {
-			$button = $("<button class='Q_button' />")
+			$button = $("<button class='Q_button' type='button' />")
 			.text(Q.text.Users.web3.ChangeWallet)
 			.on(Q.Pointer.fastclick, function () {
 				Users.Web3.login(null, function (user) {
