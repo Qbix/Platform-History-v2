@@ -57,25 +57,17 @@ class Users_Contact extends Base_Users_Contact
 		$unlessExists = false,
 		$skipAccess = false)
 	{
-		$canAddContact = Q::event('Users/Contact/addContact',
-			@compact('userId', 'asUserId', 'contactUserId', 'label'),
-			'before'
-		);
-
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
 				throw new Q_Exception_RequiredField($field);
 			}
 		}
-		if (!isset($userId)) {
-			$user = Users::loggedInUser(true);
-			$userId = $user->id;
-		}
-		if (!isset($asUserId)) {
-			$user = Users::loggedInUser(true);
-			$asUserId = $user->id;
-		}
-		if ($canAddContact !== true && !$skipAccess) {
+		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$canAddContact = Q::event('Users/Contact/addContact',
+			@compact('userId', 'asUserId', 'contactUserId', 'label', 'skipAccess'),
+			'before'
+		);
+		if (!$skipAccess && $canAddContact !== true) {
 			Users::canManageContacts($asUserId, $userId, $label, true);
 		}
 		Users_User::fetch($userId, true);
@@ -162,11 +154,6 @@ class Users_Contact extends Base_Users_Contact
 	 */
 	static function removeContact($userId, $label, $contactUserId, $asUserId = null, $skipAccess = false)
 	{
-		$canRemoveContact = Q::event('Users/Contact/removeContact',
-			@compact('userId', 'contactUserId', 'label'),
-			'before'
-		);
-
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
 				throw new Q_Exception_RequiredField(array(
@@ -174,7 +161,11 @@ class Users_Contact extends Base_Users_Contact
 				));
 			}
 		}
-		if ($canRemoveContact !== true && !$skipAccess) {
+		$canRemoveContact = Q::event('Users/Contact/removeContact',
+			@compact('userId', 'contactUserId', 'label', 'asUserId', 'skipAccess'),
+			'before'
+		);
+		if (!$skipAccess && $canRemoveContact !== true) {
 			Users::canManageContacts($asUserId, $userId, $label, true);
 		}
 		$contact = new Users_Contact();
@@ -205,9 +196,7 @@ class Users_Contact extends Base_Users_Contact
 			throw new Q_Exception_RequiredField(array('field' => 'userId'));
 		}
 		if (empty($options['skipAccess']) and $label) {
-			$asUserId = isset($options['asUserId'])
-				? $options['asUserId']
-				: Users::loggedInUser(true)->id;
+			$asUserId = Q::ifset($options, 'asUserId', null) ?: Users::loggedInUser(true)->id;
 			Users::canManageContacts($asUserId, $userId, $label, true, true);
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : null;
