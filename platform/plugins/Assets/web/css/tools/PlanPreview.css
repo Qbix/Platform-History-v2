@@ -80,6 +80,8 @@
 .Assets_plan_preview_tool .Assets_plan_preview_description {
 	border-top: 1px solid silver;
 	margin-top: 10px;
+	text-align: left;
+	white-space: normal;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_description:empty {
 	display: none;
