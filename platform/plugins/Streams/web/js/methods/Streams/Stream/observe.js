@@ -15,7 +15,11 @@ Q.exports(function(priv){
             streamName: streamName
         });
         Q.Socket.onConnect('Users', nodeUrl).add(function () {
-            Q.Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
+            Q.Streams.socketRequest('Streams/observe', publisherId, streamName, function () {
+				var ps = Streams.key(publisherId, streamName);
+				priv._observedByStream[ps] = true;
+            	Q.handle(callback);
+            });
         }, 'Streams.Stream.observe');
     };
 })

@@ -10,6 +10,10 @@ Q.exports(function(priv){
     * @param {Function} [callback] receives (err, result) as parameters
     */
     return function _Stream_neglect (publisherId, streamName, callback) {
-        Q.Streams.socketRequest('Streams/neglect', publisherId, streamName, callback);
+        Q.Streams.socketRequest('Streams/neglect', publisherId, streamName, function () {
+        	var ps = Streams.key(publisherId, streamName);
+			priv._observedByStream[ps] = false;
+			Q.handle(callback);
+        });
     };
 })
