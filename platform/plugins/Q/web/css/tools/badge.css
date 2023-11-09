@@ -10,5 +10,6 @@
 }
 
 .Q_badge_parent_overlapped {
-	overflow: visible !important;
+	overflow: clip !important;
+	overflow-clip-margin: 25px;
 }
