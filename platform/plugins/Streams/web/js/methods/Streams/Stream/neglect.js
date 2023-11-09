@@ -1,4 +1,4 @@
-Q.exports(function(priv){
+Q.exports(function(priv, Streams, Stream){
     /**
     * Stop observing a stream which you previously started observing,
     * so that you don't get realtime messages anymore.

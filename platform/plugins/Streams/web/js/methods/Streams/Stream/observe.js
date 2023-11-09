@@ -1,4 +1,4 @@
-Q.exports(function(priv){
+Q.exports(function(priv, Streams, Stream){
     /**
     * Start observing a stream, to get realtime messages through socket events.
     * You can do this either as a logged-in user or as an anonymous observer.
