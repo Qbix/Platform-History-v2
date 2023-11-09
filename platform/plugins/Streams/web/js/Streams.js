@@ -1126,13 +1126,13 @@ Streams.release = function (key) {
 				var stream = priv._retainedStreams[ps];
 				delete(priv._retainedByStream[ps]);
 				delete(priv._retainedStreams[ps]);
+				_disconnectStreamNode(publisherId, streamName, ps);
 				Q.handle([
 					Stream.onRelease.ifAny(publisherId, ""),
 					Stream.onRelease.ifAny(publisherId, streamName),
 					Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
 				], stream, [key]);
 			}
-			_disconnectStreamNode(publisherId, streamName, ps);
 		}
 	}
 	delete priv._retainedByKey[key];
@@ -2329,15 +2329,18 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 	if (!wasRetained) {
 		var sp = stream.participant;
 		var participating = (sp && sp.state === 'participating');
-		if (participating || !options.dontObserve) {
+		if (participating) {
+			// set the node to disconnect after last stream is released
+			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
+		} else if (!options.dontObserve) {
 			// If the socket already connected, this will just call the callback:
 			Users.Socket.connect(nodeUrl, function () {
 				if (!participating && !options.dontObserve) {
-					stream.observe();
+					stream.observe(function () {
+						Q.setObject([nodeUrl, ps], true, priv._retainedNodes);
+					});
 				}
 			});
-			// set the node to disconnect after last stream is released
-			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
 		}
 	}
 	Q.setObject([ps, key], true, priv._retainedByStream);
