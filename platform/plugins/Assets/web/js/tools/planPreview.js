@@ -38,7 +38,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 	};
 
 
-		$(tool.element).on(Q.Pointer.fastclick, function () {
+	$(tool.element).on(Q.Pointer.fastclick, function () {
 		Q.handle(tool.state.onInvoke, tool);
 	});
 
