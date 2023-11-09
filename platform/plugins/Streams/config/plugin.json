@@ -382,7 +382,10 @@
 				"edit": true,
 				"defaults": {
 					"title": "",
-					"icon": "Streams/topic"
+					"icon": "Streams/topic",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				}
 			},
 			"Streams/text": {

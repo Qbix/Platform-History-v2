@@ -43,6 +43,7 @@ class Users_Contact extends Base_Users_Contact
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
 	 * @param boolean [$unlessExists=false] If true, skips adding contact if it already exists
 	 *   in the database.
+	 * @param boolean [$skipAccess=false] If true skip check canManageContacts
 	 * @throws {Q_Exception_RequiredField}
 	 *	if $label is missing
 	 * @return {array} Array of contacts that are saved
@@ -53,27 +54,22 @@ class Users_Contact extends Base_Users_Contact
 		$contactUserId, 
 		$nickname = '', 
 		$asUserId = null,
-		$unlessExists = false)
+		$unlessExists = false,
+		$skipAccess = false)
 	{
-		$canAddContact = Q::event('Users/Contact/addContact',
-			@compact('userId', 'asUserId', 'contactUserId', 'label'),
-			'before'
-		);
-
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
 				throw new Q_Exception_RequiredField($field);
 			}
 		}
-		if (!isset($userId)) {
-			$user = Users::loggedInUser(true);
-			$userId = $user->id;
+		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$canAddContact = Q::event('Users/Contact/addContact',
+			@compact('userId', 'asUserId', 'contactUserId', 'label', 'skipAccess'),
+			'before'
+		);
+		if (!$skipAccess && $canAddContact !== true) {
+			Users::canManageContacts($asUserId, $userId, $label, true);
 		}
-		if (!isset($asUserId)) {
-			$user = Users::loggedInUser(true);
-			$asUserId = $user->id;
-		}
-		$canAddContact !== true && Users::canManageContacts($asUserId, $userId, $label, true);
 		Users_User::fetch($userId, true);
 		Users_User::fetch($contactUserId, true);
 		$labels = is_array($label) ? $label : array($label);
@@ -152,16 +148,12 @@ class Users_Contact extends Base_Users_Contact
 	 * @param {string} $contactUserId
 	 * @param {string} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
+	 * @param {boolean} [$skipAccess=false] If true skip check canManageContacts
 	 * @throws {Users_Exception_NotAuthorized}
 	 * @return {Db_Query_Mysql}
 	 */
-	static function removeContact($userId, $label, $contactUserId, $asUserId = null)
+	static function removeContact($userId, $label, $contactUserId, $asUserId = null, $skipAccess = false)
 	{
-		$canRemoveContact = Q::event('Users/Contact/removeContact',
-			@compact('userId', 'contactUserId', 'label'),
-			'before'
-		);
-
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
 				throw new Q_Exception_RequiredField(array(
@@ -169,7 +161,13 @@ class Users_Contact extends Base_Users_Contact
 				));
 			}
 		}
-		$canRemoveContact !== true && Users::canManageContacts($asUserId, $userId, $label, true);
+		$canRemoveContact = Q::event('Users/Contact/removeContact',
+			@compact('userId', 'contactUserId', 'label', 'asUserId', 'skipAccess'),
+			'before'
+		);
+		if (!$skipAccess && $canRemoveContact !== true) {
+			Users::canManageContacts($asUserId, $userId, $label, true);
+		}
 		$contact = new Users_Contact();
 		$contact->userId = $userId;
 		$contact->label = $label;
@@ -198,9 +196,7 @@ class Users_Contact extends Base_Users_Contact
 			throw new Q_Exception_RequiredField(array('field' => 'userId'));
 		}
 		if (empty($options['skipAccess']) and $label) {
-			$asUserId = isset($options['asUserId'])
-				? $options['asUserId']
-				: Users::loggedInUser(true)->id;
+			$asUserId = Q::ifset($options, 'asUserId', null) ?: Users::loggedInUser(true)->id;
 			Users::canManageContacts($asUserId, $userId, $label, true, true);
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : null;

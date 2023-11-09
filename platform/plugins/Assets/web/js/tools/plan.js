@@ -112,7 +112,10 @@ Q.Tool.define("Assets/plan", function(options) {
 			Q.Assets.Subscriptions.subscribe(state.payments, {
 				planPublisherId: state.publisherId,
 				planStreamName: state.streamName,
-				immediatePayment: state.immediatePayment
+				immediatePayment: state.immediatePayment,
+				onFailure: function () {
+					$button.removeClass("Q_working");
+				}
 			}, function (err, status, subscriptionStream) {
 				$button.removeClass("Q_working");
 				if (err) {

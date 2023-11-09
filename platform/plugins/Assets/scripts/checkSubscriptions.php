@@ -17,7 +17,7 @@ while (1) {
 		"closedTime" => null
 	))->limit($limit, $offset)->fetchDbRows();
 
-	if (!$subscriptionStreams) {
+	if (empty($subscriptionStreams)) {
 		break;
 	}
 
@@ -29,25 +29,40 @@ while (1) {
 		echo ++$i.". Processing user: ".$subscriptionStream->publisherId.PHP_EOL;
 
 		try {
-			if (Assets_Subscription::isStopped($subscriptionStream)) {
-				echo "subscription stopped".PHP_EOL;
+			$user = Users::fetch($subscriptionStream->publisherId, true);
+			$plan = Assets_Subscription::getPlan($subscriptionStream);
+			if ($plan->closedTime) {
+				echo $plan->title." subscription plan closed ".PHP_EOL;
+
+				// if Assets/plan closed, subscription stream should be closed too
+				$subscriptionStream->close($subscriptionStream->publisherId);
 				continue;
 			}
+
+			if (Assets_Subscription::isAdmin($subscriptionStream->publisherId)) {
+				echo "subscription stream publisher is admin".PHP_EOL;
+				continue;
+			}
+
 			if (Assets_Subscription::isCurrent($subscriptionStream)) {
 				echo "subscription is active".PHP_EOL;
 				continue;
 			}
 
-			$user = Users::fetch($subscriptionStream->publisherId, true);
-			$plan = Assets_Subscription::getPlan($subscriptionStream);
+			if (Assets_Subscription::isStopped($subscriptionStream)) {
+				echo "subscription stopped".PHP_EOL;
 
-			if ($plan->closedTime) {
-				echo $plan->title." subscription plan closed ".PHP_EOL;
+				// if subscription outdated (!Assets_Subscription::isCurrent) remove permission for this plan
+				Users_Contact::delete()->where(array(
+					"userId" => $plan->publisherId,
+					"label" => $plan->name,
+					"contactUserId" => $subscriptionStream->publisherId
+				))->execute();
 				continue;
 			}
 
-			Users::setLoggedInUser($user);
 			Q::event("Assets/credits/post", array(
+				"userId" => $user->id,
 				"amount" => $plan->getAttribute('amount'),
 				"currency" => $plan->getAttribute('currency', 'USD'),
 				"toStream" => $plan,
@@ -62,6 +77,16 @@ while (1) {
 			} else {
 				echo "charge failed".PHP_EOL;
 				echo "need {$details["needCredits"]} credits".PHP_EOL;
+
+				// if payment failed, remove permission for this plan
+				Users_Contact::delete()->where(array(
+					"userId" => $plan->publisherId,
+					"label" => $plan->name,
+					"contactUserId" => $subscriptionStream->publisherId
+				))->execute();
+
+				// and also mark subscription stream as stopped
+				Assets_Subscription::stop($subscriptionStream);
 			}
 		} catch (Exception $e) {
 			echo $e->getMessage();

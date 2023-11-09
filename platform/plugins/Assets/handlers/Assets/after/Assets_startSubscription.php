@@ -2,8 +2,10 @@
 	
 function Assets_after_Assets_startSubscription($params)
 {
-	$plan = $user = $publisher = $stream = $startDate = $endDate = $months = $currency = null;
-	extract($params, EXTR_OVERWRITE);
+	$user = $params["user"];
+	$plan = $params["plan"];
+	$stream = $params["stream"];
+	$currency = $params["currency"];
 
 	$description = $stream->title;
 	$publisherId = $stream->publisherId;
@@ -27,9 +29,6 @@ function Assets_after_Assets_startSubscription($params)
 	//TODO: need to fix below code
 
 	$amount = $stream->getAttribute('amount');
-	$months = $stream->getAttribute('months');
-	$weeks = $stream->getAttribute('weeks');
-	$days = $stream->getAttribute('days');
 	$link = Q_Request::baseUrl('action.php') . "/Assets/payment"
 			. "?publisherId=" . urlencode($publisherId)
 			. "&userId=" . urlencode($user->id);

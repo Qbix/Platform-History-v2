@@ -9,8 +9,7 @@
  * @class Assets_Subscription
  */
 
-abstract class Assets_Subscription
-{
+class Assets_Subscription {
 	public static $streamType = "Assets/subscription";
 	public static $relationType = "Assets/subscription/related";
 
@@ -67,13 +66,16 @@ abstract class Assets_Subscription
 		$stream->setAttribute('lastChargeTime', time());
 		$stream->changed();
 
+		// apply label to user
+		Users_Contact::addContact($plan->publisherId, $plan->name, $user->id, '', null, false, true);
+
 		/**
 		 * @event Assets/startSubscription {before}
 		 * @param {Streams_Stream} plan
 		 * @param {Streams_Stream} subscription
 		 * @return {Users_User}
 		 */
-		Q::event('Assets/startSubscription', @compact('plan', 'user', 'publisher', 'stream', 'months', 'currency'), 'after');
+		Q::event('Assets/startSubscription', @compact('plan', 'user', 'stream', 'currency'), 'after');
 
 		return $stream;
 	}
@@ -211,7 +213,7 @@ abstract class Assets_Subscription
 				$earliestTime = strtotime("-1 day", $time);
 				break;
 			default:
-				throw new Q_Exception_RequiredField(array('field' => 'annually, months, weeks, days'));
+				throw new Q_Exception_RequiredField(array('field' => 'annually, monthly, weekly, daily'));
 		}
 		return $lastChargeTime >= $earliestTime;
 	}
@@ -260,8 +262,7 @@ abstract class Assets_Subscription
 		}
 
 		// admins have access
-		$adminLabels = Q_Config::get("Streams", "types", "Assets/plan", "canCreate", null);
-		if ((bool)Users::roles(null, $adminLabels, array(), $user->id)) {
+		if (self::isAdmin($user->id)) {
 			return true;
 		}
 
@@ -289,5 +290,20 @@ abstract class Assets_Subscription
 		}
 
 		return false;
+	}
+	/**
+	 * Check if user is admin
+	 * @method isAdmin
+	 * @param {Users_User|String} [$user] User which need to check. If null use logged in user.
+	 * @return {Boolean}
+	 */
+	static function isAdmin ($userId = null) {
+		if (empty($userId)) {
+			$userId = Users::loggedInUser(true)->id;
+		} elseif (is_object($userId)) {
+			$userId = Q::ifset($userId, "id", null);
+		}
+
+		return (bool)Users::roles(null, Q_Config::get("Streams", "types", "Assets/plan", "canCreate", null), array(), $userId);
 	}
 };
