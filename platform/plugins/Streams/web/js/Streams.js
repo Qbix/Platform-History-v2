@@ -436,6 +436,7 @@ var priv = {
     _streamRetainHandlers: {},
     _streamReleaseHandlers: {},
     _retain: undefined,
+	_observedByStream: {},
     _retainedByKey: {},
     _retainedByStream: {},
     _retainedStreams: {},
@@ -1125,13 +1126,13 @@ Streams.release = function (key) {
 				var stream = priv._retainedStreams[ps];
 				delete(priv._retainedByStream[ps]);
 				delete(priv._retainedStreams[ps]);
+				_disconnectStreamNode(publisherId, streamName, ps);
 				Q.handle([
 					Stream.onRelease.ifAny(publisherId, ""),
 					Stream.onRelease.ifAny(publisherId, streamName),
 					Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
 				], stream, [key]);
 			}
-			_disconnectStreamNode(publisherId, streamName, ps);
 		}
 	}
 	delete priv._retainedByKey[key];
@@ -2328,15 +2329,18 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 	if (!wasRetained) {
 		var sp = stream.participant;
 		var participating = (sp && sp.state === 'participating');
-		if (participating || !options.dontObserve) {
+		if (participating) {
+			// set the node to disconnect after last stream is released
+			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
+		} else if (!options.dontObserve) {
 			// If the socket already connected, this will just call the callback:
 			Users.Socket.connect(nodeUrl, function () {
 				if (!participating && !options.dontObserve) {
-					stream.observe();
+					stream.observe(function () {
+						Q.setObject([nodeUrl, ps], true, priv._retainedNodes);
+					});
 				}
 			});
-			// set the node to disconnect after last stream is released
-			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
 		}
 	}
 	Q.setObject([ps, key], true, priv._retainedByStream);
@@ -3294,18 +3298,23 @@ Message.wait = function _Streams_Message_wait (publisherId, streamName, ordinal,
    // If we are here, then socket is available
    if (ordinal < 0) {
 	   // Requested to wait for the latest messages
-	   var participant;
+	   var participatingOrObserving;
 	   if (o.unlessSocket) {
-		   Q.Streams.get.cache.each([publisherId, streamName], function (key, info) {
-			   var p = Q.getObject("subject.participant", info);
-			   if (p && p.state === 'participating'
-			   && info.subject.readLevel >= 40) {
-				   participant = p;
-				   return false;
-			   }
-		   });
+		   var ps = Streams.key(publisherId, streamName);
+		   if (priv._observedByStream[ps]) {
+			   participatingOrObserving = true;
+		   } else {
+			   Q.Streams.get.cache.each([publisherId, streamName], function (key, info) {
+				   var p = Q.getObject("subject.participant", info);
+				   if (p && p.state === 'participating'
+				   && info.subject.readLevel >= 40) {
+					   participant = p;
+					   return false;
+				   }
+			   });
+		   }
 	   }
-	   if (!participant) {
+	   if (!participatingOrObserving) {
 		   return _tryLoading();
 	   }
    }
@@ -3382,7 +3391,8 @@ Message.wait = function _Streams_Message_wait (publisherId, streamName, ordinal,
 };
 Message.wait.options = {
 	max: 5, // maximum number of messages we'll actually wait for, if there's a socket
-	timeout: 1000 // maximum number of milliseconds we'll actually wait for, if there's a socket
+	timeout: 1000, // maximum number of milliseconds we'll actually wait for, if there's a socket
+	unlessSocket: true // don't tryLoading if socket && (participant || observing)
 };
 
 // define methods for Streams.Message to replace method stubs

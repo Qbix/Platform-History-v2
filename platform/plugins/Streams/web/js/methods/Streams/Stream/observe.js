@@ -1,4 +1,4 @@
-Q.exports(function(priv){
+Q.exports(function(priv, Streams, Stream){
     /**
     * Start observing a stream, to get realtime messages through socket events.
     * You can do this either as a logged-in user or as an anonymous observer.
@@ -15,7 +15,11 @@ Q.exports(function(priv){
             streamName: streamName
         });
         Q.Socket.onConnect('Users', nodeUrl).add(function () {
-            Q.Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
+            Q.Streams.socketRequest('Streams/observe', publisherId, streamName, function () {
+				var ps = Streams.key(publisherId, streamName);
+				priv._observedByStream[ps] = true;
+            	Q.handle(callback);
+            });
         }, 'Streams.Stream.observe');
     };
 })
