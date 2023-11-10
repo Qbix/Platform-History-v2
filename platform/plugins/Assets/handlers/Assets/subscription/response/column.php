@@ -13,7 +13,7 @@ function Assets_subscription_response_column ($params) {
 	}*/
 
 	Q_Response::addStylesheet("{{Assets}}/css/columns/subscription.css");
-	Q_Response::addStylesheet("{{Assets}}/js/columns/subscription.js");
+	Q_Response::addScript("{{Assets}}/js/columns/subscription.js");
 
 	$column = Q::view('Assets/column/subscription.php', compact("communityId"));
 	$title = $texts["admin"]["SubscriptionTitle"];
