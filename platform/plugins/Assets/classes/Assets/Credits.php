@@ -151,7 +151,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function spend($amount, $reason, $userId = null, $more = array())
 	{
 		$amount = (int)$amount;
-		if ($amount <= 0) {
+		if ($amount < 0) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'amount',
 				'type' => 'positive integer'
@@ -311,7 +311,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function transfer($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
 		$amount = floatval($amount);
-		if ($amount <= 0) {
+		if ($amount < 0) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'amount',
 				'type' => 'positive number'
