@@ -1,7 +1,8 @@
 .Assets_subscription_tool {
 	display: flex;
-	gap: 20px;
 	flex-wrap: wrap;
+	row-gap: 5px;
+	justify-content: space-between;
 }
 .Assets_subscription_stripe {
 	width: 337px;
