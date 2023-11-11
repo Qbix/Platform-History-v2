@@ -11705,8 +11705,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var o = forceNew ? {
 			forceNew: true
 		} : {};
-		if (!qs || qs.socket ||
-		(!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting))) {
+		if (!qs || qs.socket) {
 			// If we have a disconnected socket that is not connecting.
 			// Forget this socket manager, we must connect another one
 			// because g doesn't reconnect normally otherwise
@@ -11723,6 +11722,8 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 			// remember actual socket - for disconnecting
 			var socket = qs.socket;
+
+			earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
 			
 			Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
 			_ioOn(socket, 'connect', _connected);
@@ -11737,7 +11738,6 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 		}
 
-		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
 		
 		function _Q_Socket_register(qs) {
 			Q.each(_socketRegister, function (i, item) {
