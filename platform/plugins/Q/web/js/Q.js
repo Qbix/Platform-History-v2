@@ -11705,38 +11705,37 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var o = forceNew ? {
 			forceNew: true
 		} : {};
-		if (qs && qs.socket &&
-		(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
-			return;
+		if (!qs || qs.socket ||
+		(!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting))) {
+			// If we have a disconnected socket that is not connecting.
+			// Forget this socket manager, we must connect another one
+			// because g doesn't reconnect normally otherwise
+			var parsed = url.parseUrl();
+			var host = parsed.scheme + '://' + parsed.host 
+				+ (parsed.port ? ':'+parsed.port : '');
+			if (url.startsWith(host+'/')) {
+				o.path = url.substring(host.length) + Q.getObject('Q.info.socketPath');
+			}
+			_qsockets[ns][url] = qs = new Q.Socket({
+				socket: root.io.connect(host+ns, o),
+				url: url,
+				ns: ns
+			});
+			// remember actual socket - for disconnecting
+			var socket = qs.socket;
+			
+			Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
+			_ioOn(socket, 'connect', _connected);
+			_ioOn(socket, 'connect_error', function (error) {
+				log('Failed to connect to '+url, error);
+			});
+			_ioOn(socket.io, 'close', function () {
+				log('Socket ' + ns + ' disconnected from '+url);
+			});
+			_ioOn(socket, 'error', function (error) {
+				log('Error on connection '+url+' ('+error+')');
+			});
 		}
-		// If we have a disconnected socket that is not connecting.
-		// Forget this socket manager, we must connect another one
-		// because g doesn't reconnect normally otherwise
-		var parsed = url.parseUrl();
-		var host = parsed.scheme + '://' + parsed.host 
-			+ (parsed.port ? ':'+parsed.port : '');
-		if (url.startsWith(host+'/')) {
-			o.path = url.substring(host.length) + Q.getObject('Q.info.socketPath');
-		}
-		_qsockets[ns][url] = qs = new Q.Socket({
-			socket: root.io.connect(host+ns, o),
-			url: url,
-			ns: ns
-		});
-		// remember actual socket - for disconnecting
-		var socket = qs.socket;
-		
-		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
-		_ioOn(socket, 'connect', _connected);
-		_ioOn(socket, 'connect_error', function (error) {
-			log('Failed to connect to '+url, error);
-		});
-		_ioOn(socket.io, 'close', function () {
-			log('Socket ' + ns + ' disconnected from '+url);
-		});
-		_ioOn(socket, 'error', function (error) {
-			log('Error on connection '+url+' ('+error+')');
-		});
 
 		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
 		
