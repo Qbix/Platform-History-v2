@@ -11722,8 +11722,6 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 			// remember actual socket - for disconnecting
 			var socket = qs.socket;
-
-			earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
 			
 			Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
 			_ioOn(socket, 'connect', _connected);
@@ -11738,6 +11736,9 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 		}
 
+		// if (!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting)) {
+		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
+		callback && Q.Socket.onConnect(ns, url).addOnce(callback);
 		
 		function _Q_Socket_register(qs) {
 			Q.each(_socketRegister, function (i, item) {
@@ -11755,7 +11756,6 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			Q.Socket.onConnect().handle(qs, ns, url);
 			Q.Socket.onConnect(ns).handle(qs, ns, url);
 			Q.Socket.onConnect(ns, url).handle(qs, ns, url);
-			callback && callback(qs, ns, url);
 			
 			log('Socket connected to '+url);
 		}
