@@ -1882,16 +1882,25 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		// and replay their being "posted" to trigger the right events
 		var result = Message.wait(publisherId, streamName, -1,
 			function (ordinals) {
-				_doCallback();
+				Q.Streams.get(publisherId, streamName, function (err) {
+					if (!callbackCalled) {
+						Q.handle(callback, this, [err, ordinals]);
+						callbackCalled = true;
+					}
+				});
 			}, options);
 		if (result === null || result instanceof Q.Pipe) {
 			// We didn't even try to wait for messages,
 			// The socket will deliver them.
 			// (But we still need to fetch the stream from cache or server.)
-			_doCallback();
+			Q.Streams.get(publisherId, streamName, function (err) {
+				if (!callbackCalled) {
+					Q.handle(callback, this, [err, null]);
+					callbackCalled = true;
+				}
+			});
 		}
 		return result;
-
 	}
 
 	// We sent a request to get the latest messages.
@@ -1920,15 +1929,6 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	});
 	priv._retain = undefined;
 	return true;
-
-	function _doCallback() {
-		Q.Streams.get(publisherId, streamName, function (err) {
-			if (!callbackCalled) {
-				Q.handle(callback, this, [err, null]);
-				callbackCalled = true;
-			}
-		});
-	}
 };
 
 Stream.refresh.ms = 75;
