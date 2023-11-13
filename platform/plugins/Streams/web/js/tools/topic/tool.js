@@ -96,6 +96,7 @@ Q.Tool.define("Streams/topic", function(options) {
 					Q.invoke({
 						title: stream.fields.title,
 						content: "",
+						className: "Streams_topic_" + Q.normalize(streamType),
 						trigger: tool.element,
 						onActivate: function (options, index, div, data) {
 							$("<div>").appendTo($(".Q_column_slot", div)).tool(toolName, toolOptions).activate();

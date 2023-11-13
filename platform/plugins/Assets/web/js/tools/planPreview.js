@@ -29,6 +29,14 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			Q.handle(_proceed, preview, [false]);
 		});
 	};
+	preview.state.beforeClose = function (_delete) {
+		Q.confirm(tool.text.subscriptions.plan.AreYouSureDeletePlan, function (result) {
+			if (result){
+				_delete();
+			}
+		});
+	};
+
 
 	$(tool.element).on(Q.Pointer.fastclick, function () {
 		Q.handle(tool.state.onInvoke, tool);

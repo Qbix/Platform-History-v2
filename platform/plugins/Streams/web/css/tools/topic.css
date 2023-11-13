@@ -104,3 +104,13 @@
 .Streams_topic_relations .Streams_preview_tool {
     padding: 0;
 }
+.Q_notMobile .Q_columns_column.Streams_topic_streams_video,
+.Q_notMobile .Q_columns_column.Streams_topic_streams_pdf {
+    width: 60%;
+}
+.Q_notMobile .Q_columns_column.Streams_topic_streams_video .Q_video_tool {
+    height: 100%;
+}
+.Q_notMobile .Q_columns_column.Streams_topic_streams_pdf .Q_pdf_tool {
+    height: 100%;
+}
