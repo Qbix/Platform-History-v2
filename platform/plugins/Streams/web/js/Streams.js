@@ -1892,10 +1892,13 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		if (result === null || result instanceof Q.Pipe) {
 			// We didn't even try to wait for messages,
 			// The socket will deliver them.
-			if (!callbackCalled) {
-				Q.handle(callback, this, [null]);
-				callbackCalled = true;
-			}
+			// (But we still need to fetch the stream from cache or server.)
+			Q.Streams.get(publisherId, streamName, function (err) {
+				if (!callbackCalled) {
+					Q.handle(callback, this, [err, null]);
+					callbackCalled = true;
+				}
+			});
 		}
 		return result;
 	}
