@@ -81,6 +81,7 @@
 	{
 		url: null,
 		isComposer: true,
+		fileUploadHandler: Q.action("Streams/stream"),
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
@@ -174,6 +175,7 @@
 		composer: function (callback) {
 			var tool = this;
 			var state = this.state;
+			var previewState = tool.preview.state;
 
 			/**
 			 * Process composer submitting
@@ -277,9 +279,9 @@
 							}
 						};
 
-						if(state.publisherId && state.streamName) { // if edit existent stream
-							params.publisherId = state.publisherId;
-							params.streamName = state.streamName;
+						if(previewState.publisherId && previewState.streamName) { // if edit existent stream
+							params.publisherId = previewState.publisherId;
+							params.streamName = previewState.streamName;
 							params.file.name = file.name;
 
 							// for some reason attributes with null values doesn't send to backend in request
