@@ -41,6 +41,7 @@ while (1) {
 
 			if (Assets_Subscription::isAdmin($subscriptionStream->publisherId)) {
 				echo "subscription stream publisher is admin".PHP_EOL;
+				Assets_Subscription::start($plan, $user);
 				continue;
 			}
 
@@ -73,6 +74,7 @@ while (1) {
 			$details = Q_response::getSlot('details');
 
 			if ($status) {
+				Assets_Subscription::start($plan, $user);
 				echo "charged successfully".PHP_EOL;
 			} else {
 				echo "charge failed".PHP_EOL;
