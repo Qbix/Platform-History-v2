@@ -39,6 +39,11 @@ while (1) {
 				continue;
 			}
 
+			if ($plan->getAttribute("interrupted")) {
+				echo "Plan ".$plan->title." interrupted";
+				continue;
+			}
+
 			if (Assets_Subscription::isAdmin($subscriptionStream->publisherId)) {
 				echo "subscription stream publisher is admin".PHP_EOL;
 				Assets_Subscription::start($plan, $user);
@@ -50,7 +55,7 @@ while (1) {
 				continue;
 			}
 
-			if (Assets_Subscription::isStopped($subscriptionStream)) {
+			if (Assets_Subscription::isUnsubscribe($subscriptionStream)) {
 				echo "subscription stopped".PHP_EOL;
 
 				// if subscription outdated (!Assets_Subscription::isCurrent) remove permission for this plan
@@ -88,7 +93,7 @@ while (1) {
 				))->execute();
 
 				// and also mark subscription stream as stopped
-				Assets_Subscription::stop($subscriptionStream);
+				Assets_Subscription::unsubscribe($subscriptionStream);
 			}
 		} catch (Exception $e) {
 			echo $e->getMessage();

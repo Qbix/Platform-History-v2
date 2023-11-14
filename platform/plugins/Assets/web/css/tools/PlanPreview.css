@@ -2,6 +2,9 @@
 	cursor: pointer;
 	max-width: 200px;
 }
+.Assets_plan_preview_tool[data-interrupted=true] {
+	opacity: .5;
+}
 .Assets_plan_preview_tool .Streams_preview_container {
 	flex-flow: column;
 }
@@ -61,8 +64,18 @@
 	height: 80px;
 	margin-bottom: 10px;
 }
-.Assets_plan_composer .Q_dialog_content button {
-	margin: 0 auto;
+.Assets_plan_composer .Q_dialog_content .Assets_plan_composer_buttons {
+	text-align: center;
+}
+.Assets_plan_composer .Q_dialog_content .Assets_plan_composer_buttons button {
+	display: inline-block;
+}
+.Assets_plan_composer .Q_dialog_content .Assets_plan_composer_buttons button[name=continue],
+.Assets_plan_composer[data-interrupted=true] .Q_dialog_content .Assets_plan_composer_buttons button[name=interrupt] {
+	display: none;
+}
+.Assets_plan_composer[data-interrupted=true] .Q_dialog_content .Assets_plan_composer_buttons button[name=continue] {
+	display: inline-block;
 }
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_title {
 	font-size: 1.2em;

@@ -82,11 +82,11 @@ class Assets_Subscription {
 
 	/**
 	 * Stops a recurring subscription
-	 * @method stop
+	 * @method unsubscribe
 	 * @static
 	 * @param {Streams_Stream} $stream
 	 */
-	static function stop($stream)
+	static function unsubscribe($stream)
 	{
 		// call this if we learn that a subscription has stopped, so we mark it as inactive.
 		// the customer could use the credit card info to start a new subscription.
@@ -96,11 +96,11 @@ class Assets_Subscription {
 
 	/**
 	 * Check if subscription stopped
-	 * @method isStopped
+	 * @method isUnsubscribe
 	 * @static
 	 * @param {Streams_Stream} $stream
 	 */
-	static function isStopped($stream)
+	static function isUnsubscribe($stream)
 	{
 		return $stream->getAttribute('stopped');
 	}
@@ -305,5 +305,73 @@ class Assets_Subscription {
 		}
 
 		return (bool)Users::roles(null, Q_Config::get("Streams", "types", "Assets/plan", "canCreate", null), array(), $userId);
+	}
+	/**
+	 * Interrupt subscription plan
+	 * @method interrupt
+	 * @param {Streams_Stream} [$plan] Assets/plan
+	 */
+	static function interrupt ($plan) {
+		if (!self::isAdmin()) {
+			throw new Users_Exception_NotAuthorized();
+		}
+
+		Streams_Access::delete()->where(array('ofContactLabel' => $plan->name))->execute();
+
+		$plan->setAttribute("interrupted", true);
+		$plan->changed();
+	}
+
+	/**
+	 * Check if Assets/plan interrupted
+	 * @method interrupted
+	 * @param {Streams_Stream} [$plan] Assets/plan
+	 * @return {Boolean}
+	 */
+	static function interrupted ($plan) {
+		return $plan->getAttribute("interrupted");
+	}
+
+	/**
+	 * Add row to Streams_Access for related stream
+	 * @method addAccess
+	 * @param {Streams_Stream} [$plan] Assets/plan stream
+	 * @param {Streams_Stream} [$stream] Stream related to plan
+	 * @return {Boolean}
+	 */
+	static function addAccess ($plan, $stream) {
+		$access = new Streams_Access();
+		$access->publisherId = "";
+		$access->streamName = $stream->name;
+		$access->ofUserId = '';
+		$access->ofContactLabel = $plan->name;
+		$access->readLevel = 40;
+		$access->save(true);
+	}
+
+	/**
+	 * Continue to use plan (opposite to method interrupt)
+	 * @method continue
+	 * @param {Streams_Stream} [$plan] Assets/plan
+	 */
+	static function continue ($plan) {
+		if (!self::isAdmin()) {
+			throw new Users_Exception_NotAuthorized();
+		}
+
+		$relations = Streams_RelatedTo::select()->where(array(
+			'type' => self::$relationType,
+			'toPublisherId' => $plan->publisherId,
+			'toStreamName' => $plan->name
+		))->fetchDbRows();
+
+		if (!empty($relations)) {
+			foreach ($relations as $relation) {
+				self::addAccess((object)array("name" => $relation->toStreamName), (object)array("name" => $relation->fromStreamName));
+			}
+		}
+
+		$plan->setAttribute("interrupted", false);
+		$plan->changed();
 	}
 };

@@ -66,9 +66,16 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		tool.stream = stream;
 		var state = this.state;
 		var previewState = tool.preview.state;
+		var interrupted = stream.getAttribute("interrupted");
+
+		if (interrupted && !stream.testWriteLevel(40)) {
+			return Q.Tool.remove(tool.element, true, true);
+		}
 
 		// track stream changes online
 		stream.retain(tool);
+
+		$(tool.element).attr("data-interrupted", interrupted);
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
@@ -116,6 +123,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 	},
 	openDialog: function (saveCallback, closeCallback, fields) {
 		var tool = this;
+		var $toolElement = $(this.element);
 		var state = this.state;
 
 		Q.Dialogs.push({
@@ -128,6 +136,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			},
 			className: "Assets_plan_composer",
 			onActivate: function ($dialog) {
+				$dialog.attr("data-interrupted", tool.stream.getAttribute("interrupted"));
+
 				$("input,textarea", $dialog).plugin('Q/placeholders');
 
 				var $price = $("label[for=amount]", $dialog);
@@ -155,6 +165,69 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 					Q.Dialogs.pop();
 					return false;
 				});
+
+				$("button[name=interrupt]", $dialog).on(Q.Pointer.fastclick, function () {
+					var $this = $(this);
+					$this.addClass("Q_working");
+
+					Q.req("Assets/plan", ["interrupt"],function (err, response) {
+						$this.removeClass("Q_working");
+						var result = response.slots.interrupt;
+						if (err || !result) {
+							return;
+						}
+
+						$toolElement.add($dialog).attr("data-interrupted", true);
+						tool.stream.refresh(function () {
+							tool.stream = this;
+						}, {
+							messages: true,
+							evenIfNotRetained: true
+						});
+
+						Q.Dialogs.pop();
+					}, {
+						method: "put",
+						fields: {
+							publisherId: tool.stream.fields.publisherId,
+							streamName: tool.stream.fields.name
+						}
+					});
+
+					return false;
+				});
+
+				$("button[name=continue]", $dialog).on(Q.Pointer.fastclick, function () {
+					var $this = $(this);
+					$this.addClass("Q_working");
+
+					Q.req("Assets/plan", ["continue"],function (err, response) {
+						$this.removeClass("Q_working");
+						var result = response.slots.continue;
+						if (err || !result) {
+							return;
+						}
+
+						$toolElement.add($dialog).attr("data-interrupted", false);
+						tool.stream.refresh(function () {
+							tool.stream = this;
+						}, {
+							messages: true,
+							evenIfNotRetained: true
+						});
+
+						Q.Dialogs.pop();
+					}, {
+						method: "put",
+						fields: {
+							publisherId: tool.stream.fields.publisherId,
+							streamName: tool.stream.fields.name
+						}
+					});
+
+					return false;
+				});
+
 			},
 			onClose: function ($dialog) {
 				Q.handle(closeCallback, $dialog, [$dialog]);
@@ -185,7 +258,11 @@ Q.Template.set("Assets/plan/composer",
 	{{/each}}
 	</select>
 	<textarea name="description" placeholder="{{subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
-	<button name="save" class="Q_button" type="button">{{subscriptions.plan.SavePlan}}</button>
+	<div class="Assets_plan_composer_buttons">
+		<button name="save" class="Q_button" type="button">{{subscriptions.plan.SavePlan}}</button>
+		<button name="interrupt" class="Q_button" type="button">{{subscriptions.plan.Interrupt}}</button>
+		<button name="continue" class="Q_button" type="button">{{subscriptions.plan.Continue}}</button>
+	</div>
 </form>`, {text:["Assets/content"]}
 );
 
