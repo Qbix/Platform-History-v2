@@ -16,13 +16,17 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 	preview.state.creatable.preprocess = function (_proceed) {
 		tool.openDialog(function (dialog) {
+			var endDate = $("input[name=endDate]", dialog).val();
+			endDate = endDate ? Date.parse(endDate) : null;
+			endDate = Number.isInteger(endDate) ? endDate/1000 : null;
 			Q.handle(_proceed, preview, [{
 				title: $("input[name=title]", dialog).val(),
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
 					amount: $("input[name=amount]", dialog).val(),
 					currency: 'USD',
-					period: $("select[name=period]", dialog).val()
+					period: $("select[name=period]", dialog).val(),
+					endDate: endDate
 				}
 			}]);
 		}, function () {
@@ -97,11 +101,18 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				previewState.actions.actions = previewState.actions.actions || {};
 				if (!previewState.actions.actions.edit) {
 					previewState.actions.actions.edit = function () {
+						var endDate = stream.getAttribute("endDate");
+						endDate = Number.isInteger(endDate) ? new Date(endDate*1000).toISOString().split('T')[0] : null;
 						tool.openDialog(function ($dialog) {
+							var endDate = $("input[name=endDate]", $dialog).val();
+							endDate = endDate ? Date.parse(endDate) : null;
+							endDate = Number.isInteger(endDate) ? endDate/1000 : null;
+
 							stream.set('title', $("input[name=title]", $dialog).val());
 							stream.set('content', $("textarea[name=description]", $dialog).val());
 							stream.setAttribute("amount", $("input[name=amount]", $dialog).val());
 							stream.setAttribute("period", $("select[name=period]", $dialog).val());
+							stream.setAttribute("endDate", endDate);
 							stream.save({
 								onSave: function () {
 									stream.refresh(tool.refresh.bind(tool, this), {
@@ -114,7 +125,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 							title: stream.fields.title,
 							description: stream.fields.content,
 							amount: stream.getAttribute("amount"),
-							period: stream.getAttribute("period")
+							period: stream.getAttribute("period"),
+							endDate: endDate
 						});
 					};
 				}
@@ -140,13 +152,11 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 				$("input,textarea", $dialog).plugin('Q/placeholders');
 
-				var $price = $("label[for=amount]", $dialog);
-
 				$("button[name=save]", $dialog).on(Q.Pointer.fastclick, function () {
 					var $form = $(this).closest("form");
 					var valid = true;
 
-					Q.each(['title', 'amount', 'description'], function (i, value) {
+					Q.each(['title', 'amount', 'description', 'endDate'], function (i, value) {
 						var $item = $("input[name=" + value + "]", $form);
 
 						if ($item.is(":visible") && $item.attr('required') && !$item.val()) {
@@ -257,6 +267,8 @@ Q.Template.set("Assets/plan/composer",
 		{{#option this this ../period}}{{/option}}
 	{{/each}}
 	</select>
+	
+	<label class="Assets_plan_endDate">{{subscriptions.plan.EndDate}} <input name="endDate" type="date" value="{{endDate}}"></label>
 	<textarea name="description" placeholder="{{subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
 	<div class="Assets_plan_composer_buttons">
 		<button name="save" class="Q_button" type="button">{{subscriptions.plan.SavePlan}}</button>

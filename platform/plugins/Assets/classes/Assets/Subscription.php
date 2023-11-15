@@ -310,9 +310,10 @@ class Assets_Subscription {
 	 * Interrupt subscription plan
 	 * @method interrupt
 	 * @param {Streams_Stream} [$plan] Assets/plan
+	 * @param {Boolean} [$skipAccess]
 	 */
-	static function interrupt ($plan) {
-		if (!self::isAdmin()) {
+	static function interrupt ($plan, $skipAccess = false) {
+		if (!$skipAccess && !self::isAdmin()) {
 			throw new Users_Exception_NotAuthorized();
 		}
 
@@ -353,9 +354,10 @@ class Assets_Subscription {
 	 * Continue to use plan (opposite to method interrupt)
 	 * @method continue
 	 * @param {Streams_Stream} [$plan] Assets/plan
+	 * @param {Boolean} [$skipAccess]
 	 */
-	static function continue ($plan) {
-		if (!self::isAdmin()) {
+	static function continue ($plan, $skipAccess = false) {
+		if (!$skipAccess && !self::isAdmin()) {
 			throw new Users_Exception_NotAuthorized();
 		}
 

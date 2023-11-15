@@ -77,6 +77,12 @@
 .Assets_plan_composer[data-interrupted=true] .Q_dialog_content .Assets_plan_composer_buttons button[name=continue] {
 	display: inline-block;
 }
+.Assets_plan_composer .Q_dialog_content .Assets_plan_endDate {
+	text-transform: capitalize;
+}
+.Assets_plan_composer .Q_dialog_content .Assets_plan_endDate input[name=endDate] {
+	width: auto;
+}
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_title {
 	font-size: 1.2em;
 	font-weight: bold;

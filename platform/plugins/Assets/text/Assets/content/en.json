@@ -170,7 +170,8 @@
             "Interrupt": "Interrupt",
             "Continue": "Continue",
             "NewPlan": "New Plan",
-            "SelectDisplayType": "Select {{displayType}}"
+            "SelectDisplayType": "Select {{displayType}}",
+            "EndDate":  "end date"
         }
     },
     "payments": {

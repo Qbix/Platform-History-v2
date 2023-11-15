@@ -39,8 +39,17 @@ while (1) {
 				continue;
 			}
 
+			$endTime = $plan->getAttribute("endDate");
+			if ($endTime && $endTime < time()) {
+				if (!Assets_Subscription::interrupted($plan)) {
+					Assets_Subscription::interrupt($plan, true);
+				}
+				echo "Plan ended because end date ".date("Y-m-d", $endTime).PHP_EOL;
+				continue;
+			}
+
 			if ($plan->getAttribute("interrupted")) {
-				echo "Plan ".$plan->title." interrupted";
+				echo "Plan ".$plan->title." interrupted".PHP_EOL;
 				continue;
 			}
 
