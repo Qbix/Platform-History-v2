@@ -469,7 +469,10 @@
 		'Assets/', ["Assets/content"]
 	);
 	Q.Tool.define({
-		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
+		"Assets/subscription": {
+			js: "{{Assets}}/js/tools/subscription.js",
+			css: "{{Assets}}/css/tools/AssetsSubscription.css"
+		},
 		"Assets/payment": "{{Assets}}/js/tools/payment.js",
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
@@ -483,8 +486,14 @@
 			css: "{{Assets}}/css/tools/NFT/owned.css"
 		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
-		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
-		"Assets/plan": "{{Assets}}/js/tools/plan.js",
+		"Assets/plan/preview": {
+			js: "{{Assets}}/js/tools/planPreview.js",
+			css: "{{Assets}}/css/tools/PlanPreview.css"
+		},
+		"Assets/plan": {
+			js: ["{{Assets}}/js/tools/plan.js", "{{Q}}/js/datejs/date.js"],
+			css: "{{Assets}}/css/tools/Plan.css"
+		},
 		"Assets/NFT/sales/factory": {
             js:"{{Assets}}/js/tools/NFT/sales/factory.js",
             css: "{{Q}}/css/bootstrap-custom/bootstrap.css"
@@ -714,11 +723,13 @@
 		}, 'Assets');
 	}, 'Assets');
 
+	// columns settings
 	var co = {
 		scrollbarsAutoHide: false,
 		handlers: {
 			billing: "{{Assets}}/js/columns/billing.js",
 			subscription: "{{Assets}}/js/columns/subscription.js",
+			plan: "{{Assets}}/js/columns/plan.js",
 			services: "{{Assets}}/js/columns/services.js"
 		}
 	};
@@ -726,4 +737,35 @@
 		co.back = {src: "Q/plugins/Q/img/x.png"};
 	}
 	Q.Tool.define.options('Q/columns', co);
+
+	// selectors
+	$('body').off(Q.Pointer.fastclick, ".Assets_plan_preview_tool[data-onInvoke=openTool]").on(Q.Pointer.fastclick, ".Assets_plan_preview_tool[data-onInvoke=openTool]", function () {
+		var tool = Q.Tool.from(this, "Assets/plan/preview");
+		if (!tool) {
+			return console.warn("Assets/plan/preview tool not found");
+		}
+		var stream = tool.stream;
+		var publisherId = stream.fields.publisherId;
+		var streamName = stream.fields.name;
+
+		if (!Q.Users.loggedInUser) {
+			return Q.Users.login({
+				onSuccess: function () {
+					Q.handle(window.location.href);
+				}
+			});
+		}
+
+		Q.invoke({
+			title: stream.fields.title,
+			trigger: tool.element,
+			name: 'Assets/plan',
+			url: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop()),
+			className: 'Assets_subscription_plan',
+			onActivate: function ($element) {
+
+			}
+		});
+	});
+
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

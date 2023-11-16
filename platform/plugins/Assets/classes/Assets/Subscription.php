@@ -9,9 +9,9 @@
  * @class Assets_Subscription
  */
 
-abstract class Assets_Subscription
-{
+class Assets_Subscription {
 	public static $streamType = "Assets/subscription";
+	public static $relationType = "Assets/subscription/related";
 
 	/**
 	 * Starts a recurring subscription
@@ -22,8 +22,6 @@ abstract class Assets_Subscription
  	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to subscribe
 	 * @return {Streams_Stream} A stream of type 'Assets/subscription' representing this subscription
 	 * @param {array} [$options=array()] - Options for the subscription
-	 * @param {date} [$options.startDate=today] - The start date of the subscription
-	 * @param {date} [$options.endDate=today+year] - The end date of the subscription
 	 */
 	static function start($plan, $user=null, $options=array())
 	{
@@ -42,23 +40,9 @@ abstract class Assets_Subscription
 		$stream = self::getStream($plan, $user);
 
 		if (!$stream) {
-			$startDate = Q::ifset($options, 'startDate', date("Y-m-d"));
-			$startDate = date('Y-m-d', strtotime($startDate));
-			if ($months = $plan->getAttribute('months', null)) {
-				$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$months month", strtotime($startDate))));
-			} else if ($weeks = $plan->getAttribute('weeks', null)) {
-				$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$weeks week", strtotime($startDate))));
-			} else if ($days = $plan->getAttribute('days', null)) {
-				$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$days day", strtotime($startDate))));
-			} else {
-				$endDate = date("Y-m-d", strtotime("+1 year", strtotime($startDate)));
-			}
-
 			$attributes = Q::json_encode(array(
 				'planPublisherId' => $plan->publisherId,
 				'planStreamName' => $plan->name,
-				'startDate' => $startDate,
-				'endDate' => $endDate,
 				'period' => $plan->getAttribute("period"),
 				'amount' => $plan->getAttribute('amount'), // lock it in, in case plan changes later
 				'currency' => $currency
@@ -66,7 +50,8 @@ abstract class Assets_Subscription
 			$stream = Streams::create($user->id, $user->id, self::$streamType,
 				array(
 					'title' => $plan->title,
-					'attributes' => $attributes
+					'attributes' => $attributes,
+					'skipAccess' => true
 				),
 				array(
 					'publisherId' => $plan->publisherId,
@@ -81,17 +66,16 @@ abstract class Assets_Subscription
 		$stream->setAttribute('lastChargeTime', time());
 		$stream->changed();
 
+		// apply label to user
+		Users_Contact::addContact($plan->publisherId, $plan->name, $user->id, '', null, false, true);
+
 		/**
 		 * @event Assets/startSubscription {before}
 		 * @param {Streams_Stream} plan
 		 * @param {Streams_Stream} subscription
-		 * @param {string} startDate
-		 * @param {string} endDate
 		 * @return {Users_User}
 		 */
-		Q::event('Assets/startSubscription', @compact(
-			'plan', 'user', 'publisher', 'stream', 'startDate', 'endDate', 'months', 'currency'
-		), 'after');
+		Q::event('Assets/startSubscription', @compact('plan', 'user', 'stream', 'currency'), 'after');
 
 		return $stream;
 	}
@@ -174,7 +158,7 @@ abstract class Assets_Subscription
 
 	/**
 	 * Check if user subscribed to plan
-	 * @method getStream
+	 * @method isSubscribed
 	 * @static
 	 * @param {array|Streams_Stream} $plan - The subscription plan stream. Can be array with "publisherId", "streamsName" indexes.
 	 * @param {String|Users_User} [$user] - User or user id. Null - means currently logged in user.
@@ -204,34 +188,122 @@ abstract class Assets_Subscription
 	 * Check if subscription is currently valid
 	 * @method isCurrent
 	 * @param {Streams_Stream} $stream The subscription stream
-	 * @param {boolean} [$compareByDate=false] Whether to compare by date, rather than seconds
 	 * @return {boolean}
 	 */
-	static function isCurrent($stream, $compareByDate = false)
+	static function isCurrent($stream)
 	{
 		$lastChargeTime = $stream->getAttribute('lastChargeTime');
 		if (!$lastChargeTime) {
 			return false;
 		}
 		$plan = self::getPlan($stream);
-		$endDate = $stream->getAttribute('endDate');
-		$endTime = strtotime($endDate);
 		$time = time();
 		$period = $plan->getAttribute('period', null);
-		if ($period == "monthly") {
-			$earliestTime = strtotime("-1 month", $time);
-		} else if ($period == "weekly") {
-			$earliestTime = strtotime("-1 week", $time);
-		} else if ($period == "daily") {
-			$earliestTime = strtotime("-1 day", $time);
-		} else {
-			throw new Q_Exception_RequiredField(array('field' => 'months or weeks or days'));
+		switch ($period) {
+			case "annually":
+				$earliestTime = strtotime("-1 year", $time);
+				break;
+			case "monthly":
+				$earliestTime = strtotime("-1 month", $time);
+				break;
+			case "weekly":
+				$earliestTime = strtotime("-1 week", $time);
+				break;
+			case "daily":
+				$earliestTime = strtotime("-1 day", $time);
+				break;
+			default:
+				throw new Q_Exception_RequiredField(array('field' => 'annually, monthly, weekly, daily'));
 		}
-		if ($compareByDate) {
-			return (date("Y-m-d", $lastChargeTime) >= date("Y-m-d", $earliestTime))
-			and (date("Y-m-d", $time) <= $endDate);
-		} else {
-			return ($lastChargeTime >= $earliestTime and $time <= $endTime);
+		return $lastChargeTime >= $earliestTime;
+	}
+
+	/**
+	 * Check if stream related to some subscription plans
+	 * @method checkStreamRelated
+	 * @param {Streams_Stream} $stream The stream need to check
+	 * @return {boolean|Array}
+	 */
+	static function checkStreamRelated ($stream) {
+		$relations = Streams_RelatedTo::select()->where(array(
+			'type' => self::$relationType,
+			'fromPublisherId' => $stream->publisherId,
+			'fromStreamName' => $stream->name
+		))->fetchDbRows();
+
+		if (empty($relations)) {
+			return false;
 		}
+
+		$assetsPlans = [];
+		foreach ($relations as $relation) {
+			$assetsPlans[] = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName, true);
+		}
+
+		return $assetsPlans;
+	}
+
+	/**
+	 * Check if stream under some subscription plans and paid by user
+	 * @method checkStreamPaid
+	 * @param {Streams_Stream} $stream The stream need to check
+	 * @param {Users_User|String} [$user] User which need to check. If null use logged in user.
+	 * @param {Boolean} [$throwIfNotPaid] If true throw exception if stream under some subscription plan and didn't paid
+	 * @return {Boolean}
+	 * @throws Exception
+	 */
+	static function checkStreamPaid ($stream, $user, $throwIfNotPaid=false) {
+		if ($user) {
+			if (is_string($user)) {
+				$user = Users_User::fetch($user, true);
+			}
+		} else {
+			$user = Users::loggedInUser(true);
+		}
+
+		// admins have access
+		if (self::isAdmin($user->id)) {
+			return true;
+		}
+
+		$assetsPlans = self::checkStreamRelated($stream);
+		if (!(boolean)$assetsPlans) {
+			return true;
+		}
+
+		foreach ($assetsPlans as $assetsPlan) {
+			$subscriptionStream = self::getStream($assetsPlan, $user);
+			if (!$subscriptionStream) {
+				continue;
+			}
+
+			if (self::isCurrent($subscriptionStream)) {
+				return true;
+			}
+		}
+
+		if ($throwIfNotPaid) {
+			$text = Q_Text::get("Assets/content");
+			throw new Exception(Q::interpolate($text['errors']['SubscriptionStreamNotPaid'], array(
+				"subscriptionUrl" => '<a href="'.Q_Uri::url("Assets/subscription").'">here</a>'
+			)));
+		}
+
+		return false;
+	}
+	/**
+	 * Check if user is admin
+	 * @method isAdmin
+	 * @param {Users_User|String} [$user] User which need to check. If null use logged in user.
+	 * @return {Boolean}
+	 */
+	static function isAdmin ($userId = null) {
+		if (empty($userId)) {
+			$userId = Users::loggedInUser(true)->id;
+		} elseif (is_object($userId)) {
+			$userId = Q::ifset($userId, "id", null);
+		}
+
+		return (bool)Users::roles(null, Q_Config::get("Streams", "types", "Assets/plan", "canCreate", null), array(), $userId);
 	}
 };

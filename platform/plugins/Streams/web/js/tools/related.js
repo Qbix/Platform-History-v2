@@ -430,11 +430,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 		var elements = [];
 		Q.each(result.relations, function (i) {
-			if (!this.from) {
+			var direction = state.isCategory ? this.from : this.to;
+			if (!direction) {
 				return;
 			}
 
-			var tff = this.from.fields;
+			var tff = direction.fields;
 
 			// skip if stream exists in exiting
 			if (Q.getObject(tff.publisherId+"\t"+tff.name, exiting)) {
@@ -558,7 +559,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (tool.state.realtime && !tool.stream) {
 			// join user to category stream to allow get messages
 			if (Q.getObject("participant.state", result.stream) !== 'participating') {
-				result.stream.observe();
+				result.stream.retain(tool);
 			}
 		}
 
@@ -854,9 +855,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 			if (this.intersetionObserver) {
 				this.intersectionObserver.disconnect();
-			}
-			if (this.stream) {
-				this.stream.neglect();
 			}
 		}
 	}

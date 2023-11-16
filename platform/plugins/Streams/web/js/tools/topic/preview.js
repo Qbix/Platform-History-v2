@@ -15,6 +15,14 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
     preview.state.imagepicker = Q.extend(preview.state.imagepicker, state.imagepicker);
     preview.state.onRefresh.add(tool.refresh.bind(tool));
     preview.state.creatable.preprocess = tool.composer.bind(tool);
+    preview.state.beforeClose = function (_delete) {
+        Q.confirm(tool.text.topic.AreYouSureDeleteTopic, function (result) {
+            if (result){
+                _delete();
+            }
+        });
+    };
+
 
     if (preview.state.streamName) {
         $toolElement.on(Q.Pointer.fastclick, function () {

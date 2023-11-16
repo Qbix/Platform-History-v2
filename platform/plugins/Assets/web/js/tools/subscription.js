@@ -9,47 +9,28 @@
  * @class Assets subscription
  * @constructor
  * @param {Object} options Override various options for this tool
- *  @param {String} options.payments can be "authnet" or "stripe"
  *  @param {String} options.planStreamName the name of the subscription plan's stream
  *  @param {String} [options.planPublisherId=Q.Users.communityId] the publisher of the subscription plan's stream
- *  @param {String} [params.token] If payments is "authnet" then tool must be rendered server-side
- *  @param {String} [params.action] If payments is "authnet" then tool must be rendered server-side
  */
 
 Q.Tool.define("Assets/subscription", function (options) {
 	var tool = this;
 	var state = tool.state;
 
-	var pipe = Q.pipe(['styles', 'texts', 'data'], function () {
-		tool.refresh();
-	});
-
-	Q.addStylesheet('{{Assets}}/css/tools/AssetsSubscription.css', {slotName: 'Assets'}, pipe.fill('styles'));
-	Q.Text.get('Assets/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text.subscriptions;
-		pipe.fill('texts')();
-	});
 	Q.req('Assets/subscription', 'data', function (err, response) {
 		if (err) {
 			return;
 		}
 
 		tool.subscriptionData = response.slots.data;
-		pipe.fill('data')();
+		tool.refresh();
 	}, {
 
 	});
 },
 
 { // default options here
-	payments: "stripe",
-	immediatePayment: true,
-	onSubscribe: new Q.Event()
+
 },
 
 {
@@ -94,54 +75,33 @@ Q.Tool.define("Assets/subscription", function (options) {
 						});
 					}
 
-					if ($planPreviewElement.hasClass("Q_selected")) {
-						Q.invoke({
-							title: stream.fields.title,
-							trigger: tool.element,
-							content: Q.Tool.setUpElement('div', 'Assets/plan', {
-								publisherId: publisherId,
-								streamName: streamName
-							}),
-							className: 'Assets_subscription_plan'
-						});
-						return;
-					}
+					Q.invoke({
+						title: stream.fields.title,
+						trigger: tool.element,
+						name: 'Assets/plan',
+						url: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop()),
+						className: 'Assets_subscription_plan',
+						onActivate: function ($element) {
+							if (!($element instanceof $)) {
+								$element = $(arguments[2]);
+							}
 
-					Q.confirm(tool.text.confirm.message.interpolate({ "title": stream.fields.title }), function (response) {
-						if (!response) {
-							return;
+							var pipe = new Q.Pipe(['assetsPlanTool'], function (params, subject) {
+								var assetsPlanTool = params.assetsPlanTool[0];
+								assetsPlanTool.state.onSubscribe.set(function () {
+									$planPreviewElement.addClass("Q_selected");
+								}, tool);
+							});
+							var assetsPlanTool = Q.Tool.from($element[0], "Assets/plan");
+							if (assetsPlanTool) {
+								pipe.fill('assetsPlanTool')(assetsPlanTool);
+							} else {
+								$element[0].forEachTool("Assets/plan", function () {
+									pipe.fill('assetsPlanTool')(this);
+								}, tool);
+							}
 						}
-
-						Q.Assets.Subscriptions.subscribe(state.payments, {
-							planPublisherId: stream.fields.publisherId,
-							planStreamName: stream.fields.name,
-							immediatePayment: state.immediatePayment
-						}, function (err, data) {
-							if (err) {
-								return;
-							}
-
-							$planPreviewElement.addClass("Q_selected");
-
-							Q.handle(state.onSubscribe, tool, data);
-						});
-
-						/*Q.Assets.Subscriptions[state.payments]({
-							planPublisherId: stream.fields.publisherId,
-							planStreamName: stream.fields.name,
-							immediatePayment: state.immediatePayment
-						}, function (err, data) {
-							if (err) {
-								return;
-							}
-
-							$planPreviewElement.addClass("Q_selected");
-
-							Q.handle(state.onSubscribe, tool, data);
-						});*/
-					}, {
-						title: tool.text.confirm.title
-					})
+					});
 				}, tool);
 			});
 		};
@@ -153,11 +113,9 @@ Q.Tool.define("Assets/subscription", function (options) {
 			streamName: "Assets/plans",
 			relationType: "Assets/plan",
 			creatable: {
-				'Assets/plan': {title: tool.text.plan.NewPlan}
+				'Assets/plan': {title: tool.text.subscriptions.plan.NewPlan}
 			}
 		}).activate();
-
-
 	}
 });
 

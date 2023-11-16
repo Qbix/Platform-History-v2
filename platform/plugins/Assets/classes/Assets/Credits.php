@@ -151,7 +151,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function spend($amount, $reason, $userId = null, $more = array())
 	{
 		$amount = (int)$amount;
-		if ($amount <= 0) {
+		if ($amount < 0) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'amount',
 				'type' => 'positive integer'
@@ -162,7 +162,7 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_RequiredField(array('field' => 'reason'));
 		}
 
-		$userId = Q::ifset($userId, Users::loggedInUser(true)->id);
+		$userId = $userId ?: Users::loggedInUser(true)->id;
 
 		$toPublisherId = Q::ifset($more, "toPublisherId", null);
 		$toStreamName = Q::ifset($more, "toStreamName", null);
@@ -257,9 +257,7 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_RequiredField(array('field' => 'reason'));
 		}
 
-		if (empty($userId)) {
-			$userId = Users::loggedInUser(true)->id;
-		}
+		$userId = $userId ?: Users::loggedInUser(true)->id;
 
 		$stream = self::userStream($userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
@@ -313,7 +311,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function transfer($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
 		$amount = floatval($amount);
-		if ($amount <= 0) {
+		if ($amount < 0) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'amount',
 				'type' => 'positive number'
@@ -324,7 +322,7 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_RequiredField(array('field' => 'reason'));
 		}
 
-		$fromUserId = Q::ifset($fromUserId, Users::loggedInUser(true)->id);
+		$fromUserId = $fromUserId ?: Users::loggedInUser(true)->id;
 
 		if ($toUserId == $fromUserId) {
 			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t transfer to yourself'));
@@ -615,9 +613,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function payBonus ($amount, $userId=null) {
 		$amount = (int)$amount;
 
-		if (!$userId) {
-			$userId = Users::loggedInUser(true)->id;
-		}
+		$userId = $userId ?: Users::loggedInUser(true)->id;
 
 		$bonuses = Q_Config::get("Assets", "credits", "bonus", "bought", null);
 		if (!is_array($bonuses) || empty($bonuses)) {

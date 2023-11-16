@@ -4214,12 +4214,12 @@ abstract class Streams extends Base_Streams
 		foreach ($relations as $r) {
 			try {
 				Streams::unrelate(
-					$asUserId, 
-					$r->fromPublisherId, 
-					$r->fromStreamName, 
-					$r->type, 
-					$stream->publisherId, 
+					$asUserId,
+					$stream->publisherId,
 					$stream->name,
+					$r->type,
+					$r->fromPublisherId,
+					$r->fromStreamName,
 					isset($options['unrelate']) ? $options['unrelate'] : array()
 				);
 			} catch (Exception $e) {}

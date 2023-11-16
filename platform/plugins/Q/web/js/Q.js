@@ -570,7 +570,7 @@ Sp.matchTypes.adapters = {
 			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
 			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
-			if ((
+			if (( 
 				(!options || !options.excludeLocalFiles)
 				&& parts[i].match(fileRegExp)
 			) || parts[i].match(urlRegExp)) {
@@ -1079,17 +1079,20 @@ Elp.addClass = function (className) {
 
 /**
  * Adds or removes an element according to whether a condition is truthy
- * @method setClass
+ * @method setClassIf
  * @chainable
- * @param {String} className
  * @param {Boolean} condition
+ * @param {String} [classNameIfTrue]
+ * @param {String} [classNameIfFalse]
  * @return {Element} returns this, for chaining
  */
-Elp.setClass = function (className, condition) {
+Elp.setClassIf = function (condition, classNameIfTrue, classNameIfFalse) {
 	if (condition) {
-		this.addClass(className);
+		classNameIfTrue && this.addClass(classNameIfTrue);
+		classNameIfFalse && this.removeClass(classNameIfFalse);
 	} else {
-		this.removeClass(className);
+		classNameIfFalse && this.addClass(classNameIfFalse);
+		classNameIfTrue && this.removeClass(classNameIfTrue);
 	}
 	return this;
 };
@@ -7127,7 +7130,7 @@ Q.init = function _Q_init(options) {
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
-	if (options.isCordova) {
+	if (options && options.isCordova) {
 		_isCordova = options.isCordova;
 	}
 	if (_isCordova) {
@@ -11132,7 +11135,7 @@ Q.Template.info = {};
  *   To avoid setting the content (so the template will be loaded on demand later), pass undefined here.
  * @param {Object|String} info You can also pass a string "type" here.
  * @param {String} [info.type="handlebars"] The type of template.
- * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
+ * @param {Array} [info.text] Array naming sources for text translations, to be sent to Q.Text.get()
  * @param {Array} [info.partials] Relative urls of .js scripts for registering partials.
  *   Can also be names of templates for partials (in which case they shouldn't end in .js)
  * @param {Array} [info.helpers] Relative urls of .js scripts for registering helpers
@@ -11154,6 +11157,7 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
 	Q.loadHandlebars();
+	return true;
 };
 
 /**
@@ -11362,12 +11366,19 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			var pbaOld = Q.Page.beingActivated;
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
+			var err;
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				callback(null, compiled(fields, options));
+				var result = compiled(fields, options);
 			} catch (e) {
+				err = e;
 				console.warn(e);
+			}
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, result);
 			}
 			Q.Tool.beingActivated = tbaOld;
 			Q.Page.beingActivated = pbaOld;
@@ -11694,40 +11705,37 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var o = forceNew ? {
 			forceNew: true
 		} : {};
-		if (qs && qs.socket &&
-		(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
-			return;
+		if (!qs) {
+			var parsed = url.parseUrl();
+			var host = parsed.scheme + '://' + parsed.host 
+				+ (parsed.port ? ':'+parsed.port : '');
+			if (url.startsWith(host+'/')) {
+				o.path = url.substring(host.length) + Q.getObject('Q.info.socketPath');
+			}
+			_qsockets[ns][url] = qs = new Q.Socket({
+				socket: root.io.connect(host+ns, o),
+				url: url,
+				ns: ns
+			});
+			// remember actual socket - for disconnecting
+			var socket = qs.socket;
+			
+			Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
+			_ioOn(socket, 'connect', _connected);
+			_ioOn(socket, 'connect_error', function (error) {
+				log('Failed to connect to '+url, error);
+			});
+			_ioOn(socket.io, 'close', function () {
+				log('Socket ' + ns + ' disconnected from '+url);
+			});
+			_ioOn(socket, 'error', function (error) {
+				log('Error on connection '+url+' ('+error+')');
+			});
 		}
-		// If we have a disconnected socket that is not connecting.
-		// Forget this socket manager, we must connect another one
-		// because g doesn't reconnect normally otherwise
-		var parsed = url.parseUrl();
-		var host = parsed.scheme + '://' + parsed.host 
-			+ (parsed.port ? ':'+parsed.port : '');
-		if (url.startsWith(host+'/')) {
-			o.path = url.substring(host.length) + Q.getObject('Q.info.socketPath');
-		}
-		_qsockets[ns][url] = qs = new Q.Socket({
-			socket: root.io.connect(host+ns, o),
-			url: url,
-			ns: ns
-		});
-		// remember actual socket - for disconnecting
-		var socket = qs.socket;
-		
-		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
-		_ioOn(socket, 'connect', _connected);
-		_ioOn(socket, 'connect_error', function (error) {
-			log('Failed to connect to '+url, error);
-		});
-		_ioOn(socket.io, 'close', function () {
-			log('Socket ' + ns + ' disconnected from '+url);
-		});
-		_ioOn(socket, 'error', function (error) {
-			log('Error on connection '+url+' ('+error+')');
-		});
 
+		// if (!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting)) {
 		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
+		callback && Q.Socket.onConnect(ns, url).addOnce(callback);
 		
 		function _Q_Socket_register(qs) {
 			Q.each(_socketRegister, function (i, item) {
@@ -11745,7 +11753,6 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			Q.Socket.onConnect().handle(qs, ns, url);
 			Q.Socket.onConnect(ns).handle(qs, ns, url);
 			Q.Socket.onConnect(ns, url).handle(qs, ns, url);
-			callback && callback(qs, ns, url);
 			
 			log('Socket connected to '+url);
 		}
@@ -15526,6 +15533,17 @@ function _addHandlebarsHelpers() {
 		/* helper to compare two arguemnts for equal: {{#ifEquals arg1 arg2}} */
 		Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+		});
+	}
+	if (!Handlebars.helpers.getObject) {
+		Handlebars.registerHelper('getObject', function() {
+			var result = null;
+			Q.each(arguments, function (i, key) {
+				if (typeof key === 'string' || typeof key === 'number') {
+					result = result[key];
+				}
+			});
+			return result;
 		});
 	}
 	if (!Handlebars.helpers.tool) {

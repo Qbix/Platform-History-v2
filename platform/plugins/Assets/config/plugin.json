@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.15",
+				"version": "1.0.16",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -24,11 +24,15 @@
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
-			"Streams/Stream/save/Streams/text/name": ["Assets/after/Streams_save"],
 			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"],
-			"Streams/updateStreamNames": ["Assets/after/Streams_updateStreamNames"]
+			"Streams/updateStreamNames": ["Assets/after/Streams_updateStreamNames"],
+			"Streams/create/Assets/plan": ["Assets/after/Streams_create_Assets_plan"],
+			"Streams/relateTo/Assets/plan": ["Assets/after/Streams_relateTo_Assets_plan"],
+			"Streams/unrelateTo/Assets/plan": ["Assets/after/Streams_unrelateTo_Assets_plan"],
+			"Streams/close/Assets/plan": ["Assets/after/Streams_close_Assets_plan"]
 		},
 		"routes@start": {
+			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Assets/services": { "module": "Assets", "action": "services" },
@@ -40,11 +44,11 @@
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"assetsIcons": { "module": "Assets", "action": "icons" },
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
+			"Assets/plan/:publisherId/:planId": { "module": "Assets", "action": "plan" },
 			"Assets/subscription": {"module": "Assets", "action": "subscription"},
 			"Assets/connected": {"module": "Assets", "action": "connected"},
 			"Assets/connected/:payments": {"module": "Assets", "action": "connected"},
-			"Assets/connected/:payments/:method": {"module": "Assets", "action": "connected"},
-			"Q/plugins/Assets/:action": {"module": "Assets"}
+			"Assets/connected/:payments/:method": {"module": "Assets", "action": "connected"}
 		},
 		"web": {
 			"contentSecurityPolicy": {
@@ -120,11 +124,11 @@
 					"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
 					"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
 				},
-				"Assets/templates/R1/AuctionSubscription/factory":{
+				"Assets/templates/R1/AuctionSubscription/factory": {
 					"0x38": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
 					"0x89": "0x090101003c69e3E3D777Db1EAb500BDC74469fA6",
 					"0x13881": "0x4ff8710f6b6e3CAac333d4AB44470F392F6b7D18"
-				}, 
+				},
 				"Assets/templates/R1/AuthorizedInviteManager/factory": {
 					"0x38": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
 					"0x89": "0x010201000BEf7a6CFeaB3cE5E3a8DD378B45Faf2",
@@ -211,7 +215,6 @@
 					"0x89": "0xb9216ebe3a42da670c484a064bb5a93d8122e421",
 					"0x13881": "0x6BbB0ccD3acCFE3CA4CBc799041b4FC9598859c7"
 				},
-						
 				"Assets/templates/R1/Rewards/factory": {
 					"all": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
 					"0x89": "0x03040100032A238C9E092E80A6dB1720AB16d2c9",
@@ -221,6 +224,20 @@
 					"all": "0x04010100099d18Da3d85886Ad297e8F654797d99",
 					"0x89": "0x04010100099d18Da3d85886Ad297e8F654797d99",
 					"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
+				}
+			}
+		},
+		"communities": {
+			"roles": {
+				"Users/owners": {
+					"canManageLabels": [
+						"Assets/"
+					]
+				},
+				"Users/admins": {
+					"canManageLabels": [
+						"Assets/"
+					]
 				}
 			}
 		}
@@ -255,7 +272,7 @@
 				"defaults": {
 					"title": "Subscription plan",
 					"readLevel": 40,
-					"writeLevel": 23,
+					"writeLevel": 10,
 					"adminLevel": 0
 				}
 			},
