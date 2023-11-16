@@ -302,7 +302,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		});
 	},
 	unfreezeDimensions: function(element) {
-		if (this.style.dontFreezeDimensions) {
+		if (this.state.dontFreezeDimensions) {
 			return;
 		}
 		var ep = this.frozen.get(element);
