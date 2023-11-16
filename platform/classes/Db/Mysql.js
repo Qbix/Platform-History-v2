@@ -4,6 +4,15 @@
 var Q = require('Q');
 var Db = Q.require('Db');
 var util = require('util');
+
+/**
+ * Cache of connections
+ * @property connections
+ * @type object
+ * @default {}
+ * @private
+ */
+var connections = {};
 	
 /**
  * MySQL connection class
@@ -51,15 +60,6 @@ function Db_Mysql(connName, dsn) {
 	 * @default false
 	 */
 	dbm.connected = false;
-	
-	/**
-	 * Cache of connections
-	 * @property connections
-	 * @type object
-	 * @default {}
-	 * @private
-	 */
-	var connections = {};
 
 	function mysqlConnection(host, port, user, password, database, options, ignoreExisting) {
 		var key = [host, port, user, password, database].join("\t");
@@ -72,11 +72,17 @@ function Db_Mysql(connName, dsn) {
 			user: user,
 			password: password,
 			database: database,
+			charsetNumber: 224,
 			multipleStatements: true
 		}, options);
 		var connection;
 		var mysql2 = Q.Config.get(['Db', 'node', 'mysql2'], false);
 		if (mysql2) {
+			try {
+				var path = Q.absoluteModulePath('mysql2');
+				var EncodingToCharset = require(path + '/lib/constants/encoding_charset');
+				EncodingToCharset.utf8mb3 = EncodingToCharset.utf8mb4;
+			} catch (e) {}
 			connection = require('mysql2').createConnection(o);
 		} else {
 			connection = require('mysql').createConnection(o);

@@ -3909,6 +3909,25 @@ Q.globalNamesAdded = function () {
 	return Q.diff(Object.keys(root), Q.globalNames);
 };
 
+/**
+ * Use this function as a last resort if you really need to require
+ * files inside a module that didn't export them.
+ * @method absoluteModulePath
+ * @param {String} name
+ * @static
+ * @throws {Error}
+ */
+Q.absoluteModulePath(name) {
+	const main_export = require.resolve(name);
+	const suffix = `/node_modules/${name}/`;
+	const idx = main_export.lastIndexOf(suffix);
+	if (idx == -1) {
+		throw new Error(`failed to parse module path from main export path ${main_export}`);
+	}
+	const end = idx + suffix.length - 1;
+	return main_export.slice(0, end);
+};
+
 // Q.on('init', function () {
 // 	[
 // 		Object,
