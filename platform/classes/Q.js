@@ -3917,7 +3917,7 @@ Q.globalNamesAdded = function () {
  * @static
  * @throws {Error}
  */
-Q.absoluteModulePath(name) {
+Q.absoluteModulePath = function (name) {
 	const main_export = require.resolve(name);
 	const suffix = `/node_modules/${name}/`;
 	const idx = main_export.lastIndexOf(suffix);
