@@ -11705,10 +11705,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var o = forceNew ? {
 			forceNew: true
 		} : {};
-		if (!qs || qs.socket) {
-			// If we have a disconnected socket that is not connecting.
-			// Forget this socket manager, we must connect another one
-			// because g doesn't reconnect normally otherwise
+		if (!qs) {
 			var parsed = url.parseUrl();
 			var host = parsed.scheme + '://' + parsed.host 
 				+ (parsed.port ? ':'+parsed.port : '');

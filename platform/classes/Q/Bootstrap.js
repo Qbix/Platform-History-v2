@@ -220,7 +220,11 @@ Bootstrap.loadPlugins = function (callback) {
 			continue;
 		}
 		var pluginName = plugins[i];
-		Q.plugins[pluginName] = Q.require(pluginName);
+		try {
+			Q.plugins[pluginName] = Q.require(pluginName);
+		} catch (e) {
+			Q.plugins[pluginName] = null; // fallback if class isn't defined
+		}
 	}
 	callback();
 };
