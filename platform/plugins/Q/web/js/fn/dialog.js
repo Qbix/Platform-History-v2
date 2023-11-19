@@ -11,7 +11,7 @@ var _htmlClassCount = {};
  * @param {Boolean} [options.apply] Set to true if the dialog should show the "apply" style button to close dialog
  *  @param {String} [options.elementId] an ID to set for dialog element, just use className if you aren't sure it's unique
  * @param {String} [options.className] Any CSS class to add to the dialog element
- * @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
+ * @param {String} [options.htmlClass="Q_dialog_shown"] Any class to add to the html element while the overlay is open
  * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
  * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
@@ -547,7 +547,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	},
 
 	{
-		htmlClass: null,
+		htmlClass: 'Q_dialog_shown',
 		mask: true,
 		fullscreen: Q.info.useFullscreen,
 		fadeInOut: !Q.info.isTouchscreen,
