@@ -2347,6 +2347,8 @@ Q.chain = function (callbacks, callback) {
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
  * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
  * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
+ *  For cordova-style functions pass an array of indexes for the
+ *  onSuccess, onFailure callbacks, respectively.
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
 Q.promisify = function (getter, useThis, callbackIndex) {
@@ -2374,13 +2376,22 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 			}
 		});
 		if (!found) {
-			var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
-			args[ci] = function _defaultCallback(err, second) {
-				if (err) {
-					return reject(err);
-				}
-				resolve(useThis ? this : second);
-			};
+			if (callbackIndex instanceof Array) {
+				callbackIndex[0] && (args[callbackIndex[0]] = function _onResolve(value) {
+					return resolve(value);
+				});
+				callbackIndex[1] && (args[callbackIndex[1]] = function _onReject(value) {
+					return reject(value);
+				});
+			} else {
+				var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
+				args[ci] = function _defaultCallback(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					resolve(useThis ? this : second);
+				};
+			}
 		}
 		var promise = new Q.Promise(function (r1, r2) {
 			resolve = r1;
@@ -4063,6 +4074,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
+ *  By default, it will set up a cache in the loaded webpage with default parameters.
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
@@ -4282,7 +4294,7 @@ Q.getter = function _Q_getter(original, options) {
 	if (gw.cache === false) {
 		// no cache
 		gw.cache = null;
-	} else if (gw.cache === true) {
+	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
 		gw.cache = Q.Cache.document(++_Q_getter_i);
 	} // else assume we were passed an Object that supports the cache interface
@@ -4300,9 +4312,19 @@ Q.getter = function _Q_getter(original, options) {
 	}
 
 	gw.forget = function _forget() {
-		if (gw.cache) {
-			return gw.cache.remove(Array.prototype.slice.call(arguments));
+		if (!gw.cache) {
+			return false;
 		}
+		return gw.cache.remove(Array.prototype.slice.call(arguments));
+	};
+
+	gw.forget.each = function _forget_each() {
+		if (!gw.cache) {
+			return false;
+		}
+		var args = Array.prototype.slice.call(arguments);
+		gw.cache.each(args, gw.cache.remove);
+		return true;
 	};
 	
 	var ignoreCache = false;
@@ -5958,7 +5980,7 @@ Q.Links = {
 	/**
 	 * Generates a link for sharing a link in Skype
 	 * @static
-	 * @method telegramShare
+	 * @method skype
 	 * @param {String} [text] The text to share, can contain a URL
 	 * @param {String} [url] The URL to share
 	 * @return {String}
@@ -11156,6 +11178,7 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	Q.Text.addedFor('Q.Template.set', n, info);
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
+	Q.Template.load.forget.each(name);
 	Q.loadHandlebars();
 	return true;
 };
