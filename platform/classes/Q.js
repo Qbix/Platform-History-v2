@@ -724,7 +724,7 @@ Q.getter = function _Q_getter(original, options) {
 					}
 					throw err;
 				}
-				_resolve(subject);
+				_resolve(subject !== undefined ? subject : params[1]);
 			}
 		}
 

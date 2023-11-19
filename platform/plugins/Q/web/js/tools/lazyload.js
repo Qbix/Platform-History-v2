@@ -208,10 +208,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 					&& (!element.Q || !element.Q.tool)) {
 						element.addClass('Q_lazy_load');
 						element.setAttribute('data-q-lazyload', 'activating');
-						Q.activate(element, function () {
+						Q.activate(element, {}, function () {
 							element.setAttribute('data-q-lazyload', 'activated');
 							element.addClass('Q_lazy_loaded');
-						}, {}, {lazyload: true});
+						}, {lazyload: true});
 					}
 					if (tool.timeouts.get(element)) {
 						clearTimeout(tool.timeouts.get(element));

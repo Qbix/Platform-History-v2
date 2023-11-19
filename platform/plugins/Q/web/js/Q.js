@@ -4128,7 +4128,7 @@ Q.getter = function _Q_getter(original, options) {
 					}
 					throw err;
 				}
-				_resolve(subject);
+				_resolve(subject !== undefined ? subject : params[1]);
 			}
 		}
 
@@ -11321,7 +11321,7 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String|Object} name The name of template (see Q.Template.load).
  *   You can also pass an object of {key: name}, and then the callback receives
  *   {key: arguments} of what the callback would get.
- * @param {Object} fields The fields to pass to the template when rendering it
+ * @param {Object} [fields] The fields to pass to the template when rendering it.
  * @param {Function} [callback] a callback - receives (error) or (error, html)
  * @param {Object} [options={}] Options for the template engine compiler. Also can include:
  * @param {String} [options.type='handlebars'] the type and extension of the template
@@ -14176,7 +14176,7 @@ Q.Dialogs = {
 	 *	@param {String|Element} [options.title='Dialog'] initial dialog title.
 	 *	@param {String|Element} [options.content] initial dialog content.
 	 *   If the url is not supplied, then this remains the HTML content of the dialog.
-	 *   By default displays an image of a throbber while the url is loading.
+	 *   For example you can show the image of a throbber while the url is loading.
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
