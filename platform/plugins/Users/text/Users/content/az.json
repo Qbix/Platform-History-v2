@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Yanlış müqavilə üsulu {{methodName}}",
-        "ChangeWallet": "Pul kisəsini dəyişdirin"
+        "ChangeWallet": "Pul kisəsini dəyişdirin",
+        "ConnectWallet": "Pul kisəsini birləşdirin",
+        "AfterWalletConnectedPleaseRefresh": "Pul kisəsi qoşulduqdan sonra pul kisəsini tanımaq üçün bu səhifəni yeniləyin"
     },
     "labels": {
         "addToPhonebook": "Telefon Əlaqələrimə əlavə et",

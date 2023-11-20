@@ -121,7 +121,7 @@ Q.text = {
 		},
 		"prompt": {
 			"title": "Prompt",
-			"ok": "Go"
+			"ok": "Done"
 		},
 		"tabs": {
 			"more": "more",
@@ -920,21 +920,6 @@ Elp.adjustScrolling = function() {
 		element.style['-webkit-overflow-scrolling'] = scrolling;
 	}, 0);
 	return this;
-};
-
-/**
- * Switch places with another element
- * @method swap
- * @param {Element} element
- */
-Elp.swap = function(element) {
-	var parent1, next1, parent2, next2;
-	parent1 = this.parentElement;
-	next1   = this.nextSibling;
-	parent2 = element.parentElement;
-	next2   = element.nextSibling;
-	parent1.insertBefore(element, next1);
-	parent2.insertBefore(this, next2);
 };
 
 /**
@@ -2347,6 +2332,8 @@ Q.chain = function (callbacks, callback) {
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
  * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
  * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
+ *  For cordova-style functions pass an array of indexes for the
+ *  onSuccess, onFailure callbacks, respectively.
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
 Q.promisify = function (getter, useThis, callbackIndex) {
@@ -2374,13 +2361,22 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 			}
 		});
 		if (!found) {
-			var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
-			args[ci] = function _defaultCallback(err, second) {
-				if (err) {
-					return reject(err);
-				}
-				resolve(useThis ? this : second);
-			};
+			if (callbackIndex instanceof Array) {
+				callbackIndex[0] && (args[callbackIndex[0]] = function _onResolve(value) {
+					return resolve(value);
+				});
+				callbackIndex[1] && (args[callbackIndex[1]] = function _onReject(value) {
+					return reject(value);
+				});
+			} else {
+				var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
+				args[ci] = function _defaultCallback(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					resolve(useThis ? this : second);
+				};
+			}
 		}
 		var promise = new Q.Promise(function (r1, r2) {
 			resolve = r1;
@@ -2631,6 +2627,37 @@ Q.zIndexTopmost = function (container, filter) {
 		}
 	});
 	return topZ;
+};
+
+/**
+ * Make two elements switch places
+ * @method swapElements
+ * @static
+ * @param {Element} element
+ */
+Q.swapElements = function(element1, element2) {
+	var parent1, next1, parent2, next2;
+	parent1 = element1.parentElement;
+	next1   = element1.nextSibling;
+	parent2 = element2.parentElement;
+	next2   = element2.nextSibling;
+	parent1.insertBefore(element2, next1);
+	parent2.insertBefore(element1, next2);
+};
+
+/**
+ * Return querySelectorAll entries() iterator for use in for loops
+ * @method $
+ * @static
+ * @param {String} selector Any selector passed to querySelectorAll
+ * @param {Element} [element=document] defaults to the entire document
+ * @param {Boolean} [toArray] whether to convert NodeList to a static array instead.
+ *   Note: in that case, the result won't be live anymore.
+ * @return {Iterator|Array}
+ */
+Q.$ = function (selector, element, toArray) {
+	var list = (element || document).querySelectorAll(selector);
+	return toArray ? Array.prototype.slice.call(list) : list.entries();
 };
 
 /**
@@ -4063,6 +4090,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
+ *  By default, it will set up a cache in the loaded webpage with default parameters.
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
@@ -4128,7 +4156,7 @@ Q.getter = function _Q_getter(original, options) {
 					}
 					throw err;
 				}
-				_resolve(subject);
+				_resolve(subject !== undefined ? subject : params[1]);
 			}
 		}
 
@@ -4282,7 +4310,7 @@ Q.getter = function _Q_getter(original, options) {
 	if (gw.cache === false) {
 		// no cache
 		gw.cache = null;
-	} else if (gw.cache === true) {
+	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
 		gw.cache = Q.Cache.document(++_Q_getter_i);
 	} // else assume we were passed an Object that supports the cache interface
@@ -4300,15 +4328,25 @@ Q.getter = function _Q_getter(original, options) {
 	}
 
 	gw.forget = function _forget() {
-		if (gw.cache) {
-			return gw.cache.remove(Array.prototype.slice.call(arguments));
+		if (!gw.cache) {
+			return false;
 		}
+		return gw.cache.remove(Array.prototype.slice.call(arguments));
+	};
+
+	gw.forget.each = function _forget_each() {
+		if (!gw.cache) {
+			return false;
+		}
+		var args = Array.prototype.slice.call(arguments);
+		gw.cache.each(args, gw.cache.remove);
+		return true;
 	};
 	
 	var ignoreCache = false;
 	gw.force = function _force() {
 		ignoreCache = true;
-		gw.apply(this, arguments);
+		return gw.apply(this, arguments);
 	};
 
 	if (original.batch) {
@@ -5958,7 +5996,7 @@ Q.Links = {
 	/**
 	 * Generates a link for sharing a link in Skype
 	 * @static
-	 * @method telegramShare
+	 * @method skype
 	 * @param {String} [text] The text to share, can contain a URL
 	 * @param {String} [url] The URL to share
 	 * @return {String}
@@ -7560,15 +7598,16 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
  * Replaces the contents of an element and does the right thing with all the tools in it
  * @static
  * @method replace
- * @param {HTMLElement} container
- *  A existing HTMLElement whose contents are to be replaced with the source
+ * @param {String|HTMLElement} container
+ *  Pass a tag name to create an HTMLElement with that tag. Or pass
+ *  an existing HTMLElement whose contents are to be replaced with the source
  *  Tools found in the existing DOM which have data-Q-retain attribute
  *  are actually retained unless the tool replacing them has a data-Q-replace attribute.
  *  You can update the tool by implementing a handler for
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
  * @param {Element|String|DocumentFragment} source
- *  An HTML string or a Element or DocumentFragment which is not part of the DOM.
+ *  An HTML string or an Element or DocumentFragment which is not part of the DOM.
  *  If an element, it is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
@@ -7578,6 +7617,13 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
  *  Returns the container element if successful
  */
 Q.replace = function _Q_replace(container, source, options) {
+	if (typeof container === 'string') {
+		container = document.createElement(container);
+	}
+	if (container.innerHTML == '' && typeof source == 'string') {
+		container.innerHTML = source;
+		return container;
+	}
 	if (!source) {
 		var c; while (c = container.lastChild) {
 			Q.removeElement(c, true);
@@ -11156,6 +11202,7 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	Q.Text.addedFor('Q.Template.set', n, info);
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
+	Q.Template.load.forget.each(name);
 	Q.loadHandlebars();
 	return true;
 };
@@ -11321,7 +11368,7 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String|Object} name The name of template (see Q.Template.load).
  *   You can also pass an object of {key: name}, and then the callback receives
  *   {key: arguments} of what the callback would get.
- * @param {Object} fields The fields to pass to the template when rendering it
+ * @param {Object} [fields] The fields to pass to the template when rendering it.
  * @param {Function} [callback] a callback - receives (error) or (error, html)
  * @param {Object} [options={}] Options for the template engine compiler. Also can include:
  * @param {String} [options.type='handlebars'] the type and extension of the template
@@ -14176,7 +14223,7 @@ Q.Dialogs = {
 	 *	@param {String|Element} [options.title='Dialog'] initial dialog title.
 	 *	@param {String|Element} [options.content] initial dialog content.
 	 *   If the url is not supplied, then this remains the HTML content of the dialog.
-	 *   By default displays an image of a throbber while the url is loading.
+	 *   For example you can show the image of a throbber while the url is loading.
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
@@ -14551,7 +14598,7 @@ Q.prompt = function(message, callback, options) {
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
 			$('<div class="Q_buttons" />').append(
-				$('<input type="text" enterkeyhint="go" />').attr(attr), ' ',
+				$('<input type="text" enterkeyhint="done" />').attr(attr), ' ',
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),

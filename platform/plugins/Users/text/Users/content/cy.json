@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Dull contract anghywir {{methodName}}",
-        "ChangeWallet": "Newid Waled"
+        "ChangeWallet": "Newid Waled",
+        "ConnectWallet": "Cyswllt Waled",
+        "AfterWalletConnectedPleaseRefresh": "Ar ôl cysylltu waled, adnewyddwch y dudalen hon i adnabod y waled"
     },
     "labels": {
         "addToPhonebook": "Ychwanegu at Fy Nghysylltiadau Ffôn",

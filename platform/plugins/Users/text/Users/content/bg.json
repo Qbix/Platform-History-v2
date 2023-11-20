@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Грешен договорен метод {{methodName}}",
-        "ChangeWallet": "Промяна на портфейла"
+        "ChangeWallet": "Промяна на портфейла",
+        "ConnectWallet": "Свържете Wallet",
+        "AfterWalletConnectedPleaseRefresh": "След свързване на портфейла, моля, опреснете тази страница, за да разпознаете портфейла"
     },
     "labels": {
         "addToPhonebook": "Добавяне към контактите в моя телефон",

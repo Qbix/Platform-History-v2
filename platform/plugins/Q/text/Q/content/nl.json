@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Tekst invoeren",
-        "ok": "Vooruit"
+        "ok": "OK"
     },
     "imagepicker": {
         "errorReadingFile": "Fout bij lezen bestand",

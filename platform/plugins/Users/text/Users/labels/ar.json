@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "أضف إلى جهات اتصال هاتفي",
+    "addLabel": "علاقة جديدة",
+    "newRole": "دور جديد",
+    "prompt": "أعطه إسما",
+    "newLabel": "تسمية جديدة",
+    "editLabel": "تحرير التسمية",
+    "addBtn": "يضيف",
+    "editBtn": "تحديث",
+    "canManageDialogTitle": "يمكن إدارة الأدوار",
+    "canManageBtn": "يمكن إدارة ...",
+    "titlePlaceholder": "عنوان",
+    "selectOptionTitle_web2": "محلي",
+    "selectOptionTitle_web3": "ويب3"
+}

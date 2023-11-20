@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Zadejte text",
-        "ok": "Vpřed"
+        "ok": "OK"
     },
     "imagepicker": {
         "errorReadingFile": "Chyba při čtení souboru",

@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Verkeerde kontrak metode {{methodName}}",
-        "ChangeWallet": "Verander beursie"
+        "ChangeWallet": "Verander beursie",
+        "ConnectWallet": "Koppel Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Nadat beursie gekoppel is, verfris asseblief hierdie bladsy om die beursie te herken"
     },
     "labels": {
         "addToPhonebook": "Voeg by my foon kontakte",

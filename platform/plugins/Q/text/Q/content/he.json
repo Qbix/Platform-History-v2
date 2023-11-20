@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "הזן טקסט",
-        "ok": "קָדִימָה"
+        "ok": "בסדר"
     },
     "imagepicker": {
         "errorReadingFile": "שגיאה בקריאת הקובץ",

@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Дадаць у кантакты майго тэлефона",
+    "addLabel": "Новыя адносіны",
+    "newRole": "Новая роля",
+    "prompt": "Дайце яму назву",
+    "newLabel": "Новая этыкетка",
+    "editLabel": "Рэдагаваць цэтлік",
+    "addBtn": "Дадаць",
+    "editBtn": "Абнаўленне",
+    "canManageDialogTitle": "Можа кіраваць ролямі",
+    "canManageBtn": "Можа кіраваць...",
+    "titlePlaceholder": "Назва",
+    "selectOptionTitle_web2": "Родны",
+    "selectOptionTitle_web3": "Web3"
+}

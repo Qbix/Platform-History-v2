@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Opret fællesskab"
+    },
+    "list": {
+        "table": {
+            "td0": "Kædenavn",
+            "td1": "Kæde-id",
+            "td2": "Fællesskabsadresse"
+        },
+        "btnTitle": "Fremstille"
+    },
+    "form": {
+        "labels": {
+            "chain": "Kæde",
+            "hook": "Krog",
+            "invitedHook": "InvitedHook",
+            "name": "Navn",
+            "symbol": "Symbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000000",
+            "name": "ERC721 navn",
+            "symbol": "ERC721 symbol",
+            "contracturi": "kontrakt URI"
+        },
+        "small": {
+            "hook": "hook adresse på kontrakt implementeret ICommunityHook interface. Kan være adresse(0)",
+            "invitedHook": "inviterede Hook-adresse på kontrakt implementeret ICommunityInvite-grænseflade. Kan være adresse(0)",
+            "name": "ERC721 navn",
+            "symbol": "ERC721 symbol",
+            "contracturi": "kontrakt URI"
+        },
+        "err": {
+            "hook": "<b>Krog<\/b> ugyldig",
+            "invitedHook": "<b>inviterede Hook<\/b> ugyldig",
+            "name": "<b>Navn<\/b> er ugyldigt",
+            "symbol": "<b>Symbolet<\/b> er ugyldigt",
+            "contracturi": "<b>contractURI<\/b> ugyldig"
+        },
+        "btnTitle": "Fremstille"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Kan ikke finde fabriksadresse",
+        "transactionFailed": "Transaktionen mislykkedes",
+        "smthWentWrong": "Noget gik galt"
+    },
+    "foo": "bar"
+}

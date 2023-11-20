@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Ipasok ang Teksto",
-        "ok": "Pasulong"
+        "ok": "OK"
     },
     "imagepicker": {
         "errorReadingFile": "Error sa pagbabasa ng file",

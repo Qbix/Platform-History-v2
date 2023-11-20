@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "İcma yaradın"
+    },
+    "list": {
+        "table": {
+            "td0": "Zəncir adı",
+            "td1": "Zəncir İD",
+            "td2": "İcma ünvanı"
+        },
+        "btnTitle": "istehsal"
+    },
+    "form": {
+        "labels": {
+            "chain": "Zəncir",
+            "hook": "Qarmaq",
+            "invitedHook": "InvitedHook",
+            "name": "ad",
+            "symbol": "Simvol",
+            "contracturi": "müqaviləURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "ERC721 Adı",
+            "symbol": "ERC721 Simvol",
+            "contracturi": "müqavilə URI"
+        },
+        "small": {
+            "hook": "ICommunityHook interfeysi həyata keçirilən müqavilənin çəngəl ünvanı. Ünvan ola bilər(0)",
+            "invitedHook": "ICommunityInvite interfeysi həyata keçirilən müqavilənin dəvətli Hook ünvanı. Ünvan ola bilər(0)",
+            "name": "ERC721 Adı",
+            "symbol": "ERC721 Simvol",
+            "contracturi": "müqavilə URI"
+        },
+        "err": {
+            "hook": "<b>Qarmaq<\/b> etibarsızdır",
+            "invitedHook": "<b>dəvətli Hook<\/b> etibarsızdır",
+            "name": "<b>Ad<\/b> etibarsızdır",
+            "symbol": "<b>Simvol<\/b> etibarsızdır",
+            "contracturi": "<b>müqaviləURI<\/b> etibarsızdır"
+        },
+        "btnTitle": "istehsal"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Fabrika Ünvanını tapmaq mümkün deyil",
+        "transactionFailed": "Tranzaksiya uğursuz oldu",
+        "smthWentWrong": "Nəsə xəta baş verdi"
+    },
+    "foo": "bar"
+}

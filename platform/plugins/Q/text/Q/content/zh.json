@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "输入文字",
-        "ok": "向前"
+        "ok": "好的"
     },
     "imagepicker": {
         "errorReadingFile": "读取文件时出错",

@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Indtast tekst",
-        "ok": "Frem"
+        "ok": "Okay"
     },
     "imagepicker": {
         "errorReadingFile": "Fejl ved læsning af fil",

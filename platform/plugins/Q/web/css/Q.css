@@ -895,6 +895,15 @@ input[type=password] {
     -moz-appearance: none;
 }
 
+html.Q_dialog_shown #page,
+html.Q_dialog_shown #dashboard_slot {
+	filter:blur(5px);
+	-o-filter:blur(5px);
+	-ms-filter:blur(5px);
+	-moz-filter:blur(5px);
+	-webkit-filter:blur(5px);
+}
+
 @keyframes Q_showAfterLoaded {
 	0% {
 		opacity: 0;

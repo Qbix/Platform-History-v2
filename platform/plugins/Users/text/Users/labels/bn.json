@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "আমার ফোন পরিচিতি যোগ করুন",
+    "addLabel": "নতুন সম্পর্ক",
+    "newRole": "নতুন ভূমিকা",
+    "prompt": "এটার একটি নাম দাও",
+    "newLabel": "নতুন লেবেল",
+    "editLabel": "লেবেল সম্পাদনা করুন",
+    "addBtn": "যোগ করুন",
+    "editBtn": "হালনাগাদ",
+    "canManageDialogTitle": "ভূমিকা পরিচালনা করতে পারেন",
+    "canManageBtn": "পরিচালনা করতে পারেন...",
+    "titlePlaceholder": "শিরোনাম",
+    "selectOptionTitle_web2": "স্থানীয়",
+    "selectOptionTitle_web3": "ওয়েব 3"
+}

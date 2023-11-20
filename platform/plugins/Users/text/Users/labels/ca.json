@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Afegeix als meus contactes del telèfon",
+    "addLabel": "Nova Relació",
+    "newRole": "Nou Rol",
+    "prompt": "Posa-li un nom",
+    "newLabel": "Nova etiqueta",
+    "editLabel": "Edita l&#39;etiqueta",
+    "addBtn": "Afegeix",
+    "editBtn": "Actualització",
+    "canManageDialogTitle": "Pot gestionar rols",
+    "canManageBtn": "Pot gestionar...",
+    "titlePlaceholder": "Títol",
+    "selectOptionTitle_web2": "Nadiu",
+    "selectOptionTitle_web3": "Web3"
+}

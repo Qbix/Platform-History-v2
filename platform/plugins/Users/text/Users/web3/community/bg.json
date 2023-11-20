@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Създаване на общност"
+    },
+    "list": {
+        "table": {
+            "td0": "Име на веригата",
+            "td1": "ID на веригата",
+            "td2": "Адрес на общността"
+        },
+        "btnTitle": "Продукция"
+    },
+    "form": {
+        "labels": {
+            "chain": "Верига",
+            "hook": "Кука",
+            "invitedHook": "InvitedHook",
+            "name": "Име",
+            "symbol": "Символ",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "Име ERC721",
+            "symbol": "ERC721 Символ",
+            "contracturi": "URI на договора"
+        },
+        "small": {
+            "hook": "адрес на кука на ICommunityHook интерфейс, реализиран по договор. Може да бъде адрес (0)",
+            "invitedHook": "Адресът на calledHook на ICommunityInvite интерфейс, внедрен в договора. Може да бъде адрес (0)",
+            "name": "Име ERC721",
+            "symbol": "ERC721 Символ",
+            "contracturi": "URI на договора"
+        },
+        "err": {
+            "hook": "<b>Куката<\/b> е невалидна",
+            "invitedHook": "<b>invitHook<\/b> е невалиден",
+            "name": "<b>Името<\/b> е невалидно",
+            "symbol": "<b>Символът<\/b> е невалиден",
+            "contracturi": "<b>contractURI<\/b> е невалиден"
+        },
+        "btnTitle": "Продукция"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Не мога да намеря фабричен адрес",
+        "transactionFailed": "Транзакцията е неуспешна",
+        "smthWentWrong": "Нещо се обърка"
+    },
+    "foo": "бар"
+}

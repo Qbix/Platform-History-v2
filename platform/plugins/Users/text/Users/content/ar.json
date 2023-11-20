@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "طريقة العقد الخاطئة {{methodName}}",
-        "ChangeWallet": "تغيير المحفظة"
+        "ChangeWallet": "تغيير المحفظة",
+        "ConnectWallet": "ربط المحفظة",
+        "AfterWalletConnectedPleaseRefresh": "بعد توصيل المحفظة، يرجى تحديث هذه الصفحة للتعرف على المحفظة"
     },
     "labels": {
         "addToPhonebook": "إضافة إلى جهات اتصال هاتفي",

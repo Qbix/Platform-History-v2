@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "ভুল চুক্তি পদ্ধতি {{methodName}}",
-        "ChangeWallet": "ওয়ালেট পরিবর্তন করুন"
+        "ChangeWallet": "ওয়ালেট পরিবর্তন করুন",
+        "ConnectWallet": "ওয়ালেট সংযুক্ত করুন",
+        "AfterWalletConnectedPleaseRefresh": "ওয়ালেট সংযুক্ত হওয়ার পর মানিব্যাগটি চিনতে এই পৃষ্ঠাটি রিফ্রেশ করুন"
     },
     "labels": {
         "addToPhonebook": "আমার ফোন পরিচিতি যোগ করুন",

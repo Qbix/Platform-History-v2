@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Føj til Min telefon-kontakter",
+    "addLabel": "Nyt forhold",
+    "newRole": "Ny rolle",
+    "prompt": "Giv det et navn",
+    "newLabel": "Ny etiket",
+    "editLabel": "Rediger etiket",
+    "addBtn": "Tilføje",
+    "editBtn": "Opdatering",
+    "canManageDialogTitle": "Kan styre roller",
+    "canManageBtn": "Kan administrere...",
+    "titlePlaceholder": "Titel",
+    "selectOptionTitle_web2": "Hjemmehørende",
+    "selectOptionTitle_web3": "Web3"
+}

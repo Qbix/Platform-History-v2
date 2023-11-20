@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Добавяне към контактите в моя телефон",
+    "addLabel": "Нова връзка",
+    "newRole": "Нова роля",
+    "prompt": "Дайте му име",
+    "newLabel": "Нов етикет",
+    "editLabel": "Редактиране на етикет",
+    "addBtn": "Добавете",
+    "editBtn": "Актуализация",
+    "canManageDialogTitle": "Може да управлява роли",
+    "canManageBtn": "Може да управлява...",
+    "titlePlaceholder": "Заглавие",
+    "selectOptionTitle_web2": "Местен",
+    "selectOptionTitle_web3": "Web3"
+}

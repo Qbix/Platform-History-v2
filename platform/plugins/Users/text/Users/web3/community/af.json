@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Skep gemeenskap"
+    },
+    "list": {
+        "table": {
+            "td0": "Ketting Naam",
+            "td1": "Ketting-ID",
+            "td2": "Gemeenskapsadres"
+        },
+        "btnTitle": "Produseer"
+    },
+    "form": {
+        "labels": {
+            "chain": "Ketting",
+            "hook": "Haak",
+            "invitedHook": "InvitedHook",
+            "name": "Naam",
+            "symbol": "Simbool",
+            "contracturi": "kontraktURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000",
+            "name": "ERC721 Naam",
+            "symbol": "ERC721-simbool",
+            "contracturi": "kontrak URI"
+        },
+        "small": {
+            "hook": "haak adres van kontrak geïmplementeer ICommunityHook koppelvlak. Kan adres wees (0)",
+            "invitedHook": "inviteHook adres van kontrak geïmplementeer ICommunityInvite koppelvlak. Kan adres wees (0)",
+            "name": "ERC721 Naam",
+            "symbol": "ERC721-simbool",
+            "contracturi": "kontrak URI"
+        },
+        "err": {
+            "hook": "<b>Haak<\/b> ongeldig",
+            "invitedHook": "<b>inviteHook<\/b> ongeldig",
+            "name": "<b>Naam<\/b> ongeldig",
+            "symbol": "<b>Simbool<\/b> ongeldig",
+            "contracturi": "<b>contractURI<\/b> ongeldig"
+        },
+        "btnTitle": "Produseer"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Kan nie fabrieksadres vind nie",
+        "transactionFailed": "Transaksie het misluk",
+        "smthWentWrong": "Iets het verkeerd geloop"
+    },
+    "foo": "kroeg"
+}
