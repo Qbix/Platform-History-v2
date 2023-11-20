@@ -25,7 +25,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 	var loggedInUserId = Users.loggedInUserId();
 	var loggedInWalletAddress = Users.Web3.getLoggedInUserXid();
 
-	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users)) || (loggedInUserId && !loggedInWalletAddress);
+	state.skipWeb3 = state.skipWeb3 || Q.isEmpty(Q.getObject("Web3.chains", Users)); // || (loggedInUserId && !loggedInWalletAddress)
 
 	tool.refresh();
 },
