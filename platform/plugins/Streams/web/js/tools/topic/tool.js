@@ -129,10 +129,6 @@ Q.Tool.define("Streams/topic", function(options) {
 						return;
 					}
 
-					if (!stream.testWriteLevel(30)) {
-						return;
-					}
-
 					streamsPreviewTool.state.actions.actions.metrics = function () {
 						Q.invoke({
 							title: tool.text.topic.Metrics,
