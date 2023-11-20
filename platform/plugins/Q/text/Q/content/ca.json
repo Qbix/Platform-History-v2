@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Introduïu text",
-        "ok": "Endavant"
+        "ok": "D&#39;acord"
     },
     "imagepicker": {
         "errorReadingFile": "S&#39;ha produït un error en llegir el fitxer",

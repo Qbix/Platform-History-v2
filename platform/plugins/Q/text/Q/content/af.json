@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Voer teks in",
-        "ok": "Vorentoe"
+        "ok": "OK"
     },
     "imagepicker": {
         "errorReadingFile": "Kon nie lêer lees nie",

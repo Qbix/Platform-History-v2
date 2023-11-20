@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "የተሳሳተ የውል ዘዴ {{methodName}}",
-        "ChangeWallet": "Wallet ቀይር"
+        "ChangeWallet": "Wallet ቀይር",
+        "ConnectWallet": "Walletን ያገናኙ",
+        "AfterWalletConnectedPleaseRefresh": "የኪስ ቦርሳ ከተገናኘ በኋላ የኪስ ቦርሳውን ለመለየት እባክዎ ይህን ገጽ ያድሱ"
     },
     "labels": {
         "addToPhonebook": "ወደ ስልኬ እውቂያዎች አክል",

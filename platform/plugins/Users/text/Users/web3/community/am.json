@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "ማህበረሰብ ፍጠር"
+    },
+    "list": {
+        "table": {
+            "td0": "ሰንሰለት ስም",
+            "td1": "ሰንሰለት መታወቂያ",
+            "td2": "የማህበረሰብ አድራሻ"
+        },
+        "btnTitle": "ማምረት"
+    },
+    "form": {
+        "labels": {
+            "chain": "ሰንሰለት",
+            "hook": "መንጠቆ",
+            "invitedHook": "የተጋበዙት መንጠቆ",
+            "name": "ስም",
+            "symbol": "ምልክት",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000",
+            "name": "ERC721 ስም",
+            "symbol": "ERC721 ምልክት",
+            "contracturi": "ውል URI"
+        },
+        "small": {
+            "hook": "የኮንትራት መንጠቆ አድራሻ የተተገበረ ICommunityHook በይነገጽ። አድራሻ (0) ሊሆን ይችላል",
+            "invitedHook": "የተጋበዘ የኮንትራት አድራሻ የተተገበረ ICommunityInvite በይነገጽ። አድራሻ (0) ሊሆን ይችላል",
+            "name": "ERC721 ስም",
+            "symbol": "ERC721 ምልክት",
+            "contracturi": "ውል URI"
+        },
+        "err": {
+            "hook": "<b>መንጠቆ<\/b> ልክ ያልሆነ",
+            "invitedHook": "<b>የተጋበዘ መንጠቆ<\/b> ልክ ያልሆነ",
+            "name": "<b>ስም<\/b> ልክ ያልሆነ",
+            "symbol": "<b>ምልክት<\/b> ልክ ያልሆነ",
+            "contracturi": "<b>contractURI<\/b> ልክ ያልሆነ"
+        },
+        "btnTitle": "ማምረት"
+    },
+    "err": {
+        "cantFindFactoryAddress": "የፋብሪካ አድራሻ ማግኘት አልተቻለም",
+        "transactionFailed": "ግብይት አልተሳካም።",
+        "smthWentWrong": "የሆነ ስህተት ተከስቷል"
+    },
+    "foo": "ባር"
+}

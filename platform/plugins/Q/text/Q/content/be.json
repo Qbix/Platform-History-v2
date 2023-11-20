@@ -65,7 +65,7 @@
     },
     "prompt": {
         "title": "Увядзіце тэкст",
-        "ok": "Наперад"
+        "ok": "добра"
     },
     "imagepicker": {
         "errorReadingFile": "Памылка чытання файла",

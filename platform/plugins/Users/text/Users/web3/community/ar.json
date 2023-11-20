@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "إنشاء مجتمع"
+    },
+    "list": {
+        "table": {
+            "td0": "اسم السلسلة",
+            "td1": "معرف السلسلة",
+            "td2": "عنوان المجتمع"
+        },
+        "btnTitle": "ينتج"
+    },
+    "form": {
+        "labels": {
+            "chain": "سلسلة",
+            "hook": "خطاف",
+            "invitedHook": "InvitedHook",
+            "name": "اسم",
+            "symbol": "رمز",
+            "contracturi": "com.contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000",
+            "name": "اسم ERC721",
+            "symbol": "رمز ERC721",
+            "contracturi": "URI للعقد"
+        },
+        "small": {
+            "hook": "عنوان ربط العقد المنفذ من واجهة ICommunityHook. يمكن أن يكون عنوان(0)",
+            "invitedHook": "تمت دعوة عنوان الخطاف للعقد من خلال واجهة ICommunityInvite. يمكن أن يكون عنوان(0)",
+            "name": "اسم ERC721",
+            "symbol": "رمز ERC721",
+            "contracturi": "URI للعقد"
+        },
+        "err": {
+            "hook": "<b>الخطاف<\/b> غير صالح",
+            "invitedHook": "<b>خطاف الدعوة<\/b> غير صالح",
+            "name": "<b>الاسم<\/b> غير صالح",
+            "symbol": "<b>الرمز<\/b> غير صالح",
+            "contracturi": "<b>ContractURI<\/b> غير صالح"
+        },
+        "btnTitle": "ينتج"
+    },
+    "err": {
+        "cantFindFactoryAddress": "لا يمكن العثور على عنوان المصنع",
+        "transactionFailed": "فشل الاجراء",
+        "smthWentWrong": "هناك خطأ ما"
+    },
+    "foo": "حاجِز"
+}

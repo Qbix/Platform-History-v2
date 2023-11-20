@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Přidat do kontaktů v mém telefonu",
+    "addLabel": "Nový vztah",
+    "newRole": "Nová Role",
+    "prompt": "Dejte tomu jméno",
+    "newLabel": "Nový štítek",
+    "editLabel": "Upravit štítek",
+    "addBtn": "Přidat",
+    "editBtn": "Aktualizace",
+    "canManageDialogTitle": "Může spravovat role",
+    "canManageBtn": "Lze spravovat...",
+    "titlePlaceholder": "Titul",
+    "selectOptionTitle_web2": "Rodák",
+    "selectOptionTitle_web3": "Web3"
+}

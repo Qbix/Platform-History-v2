@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Creu Cymuned"
+    },
+    "list": {
+        "table": {
+            "td0": "Enw Cadwyn",
+            "td1": "Id Cadwyn",
+            "td2": "Cyfeiriad cymunedol"
+        },
+        "btnTitle": "Cynnyrch"
+    },
+    "form": {
+        "labels": {
+            "chain": "Cadwyn",
+            "hook": "Bachyn",
+            "invitedHook": "GwahoddwydHook",
+            "name": "Enw",
+            "symbol": "Symbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000",
+            "name": "ERC721 Enw",
+            "symbol": "ERC721 Symbol",
+            "contracturi": "contract URI"
+        },
+        "small": {
+            "hook": "cyfeiriad bachyn y contract a weithredwyd rhyngwyneb ICommunityHook. Gall fod yn gyfeiriad(0)",
+            "invitedHook": "gwahoddHook cyfeiriad y contract a weithredwyd rhyngwyneb ICommunityInvite. Gall fod yn gyfeiriad(0)",
+            "name": "ERC721 Enw",
+            "symbol": "ERC721 Symbol",
+            "contracturi": "contract URI"
+        },
+        "err": {
+            "hook": "<b>Bachyn<\/b> yn annilys",
+            "invitedHook": "<b>gwahoddHook<\/b> annilys",
+            "name": "<b>Enw<\/b> annilys",
+            "symbol": "<b>Symbol<\/b> annilys",
+            "contracturi": "<b>contractURI<\/b> annilys"
+        },
+        "btnTitle": "Cynnyrch"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Methu dod o hyd i factoryAddress",
+        "transactionFailed": "Methodd y trafodyn",
+        "smthWentWrong": "Aeth rhywbeth o&#39;i le"
+    },
+    "foo": "bar"
+}

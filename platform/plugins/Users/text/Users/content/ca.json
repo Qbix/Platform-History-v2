@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Mètode de contracte incorrecte {{methodName}}",
-        "ChangeWallet": "Canvia Wallet"
+        "ChangeWallet": "Canvia Wallet",
+        "ConnectWallet": "Connecta Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Després de connectar la cartera, actualitzeu aquesta pàgina per reconèixer la cartera"
     },
     "labels": {
         "addToPhonebook": "Afegeix als meus contactes del telèfon",

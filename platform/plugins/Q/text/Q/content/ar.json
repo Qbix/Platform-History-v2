@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "أدخل النص",
-        "ok": "إلى الأمام"
+        "ok": "نعم"
     },
     "imagepicker": {
         "errorReadingFile": "خطأ في قراءة الملف",

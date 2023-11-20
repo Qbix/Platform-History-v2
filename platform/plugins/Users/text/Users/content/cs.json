@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Nesprávná metoda smlouvy {{methodName}}",
-        "ChangeWallet": "Změnit peněženku"
+        "ChangeWallet": "Změnit peněženku",
+        "ConnectWallet": "Připojte Peněženku",
+        "AfterWalletConnectedPleaseRefresh": "Po připojení peněženky obnovte tuto stránku, aby byla peněženka rozpoznána"
     },
     "labels": {
         "addToPhonebook": "Přidat do kontaktů v mém telefonu",

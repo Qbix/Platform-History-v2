@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Forkert kontraktmetode {{methodName}}",
-        "ChangeWallet": "Skift tegnebog"
+        "ChangeWallet": "Skift tegnebog",
+        "ConnectWallet": "Tilslut tegnebog",
+        "AfterWalletConnectedPleaseRefresh": "Når tegnebogen er tilsluttet, skal du opdatere denne side for at genkende tegnebogen"
     },
     "labels": {
         "addToPhonebook": "Føj til Min telefon-kontakter",

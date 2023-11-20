@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Crea comunitat"
+    },
+    "list": {
+        "table": {
+            "td0": "Nom de la cadena",
+            "td1": "Identificador de cadena",
+            "td2": "Adreça de la comunitat"
+        },
+        "btnTitle": "Produir"
+    },
+    "form": {
+        "labels": {
+            "chain": "Cadena",
+            "hook": "Ganxo",
+            "invitedHook": "Ganxo convidat",
+            "name": "Nom",
+            "symbol": "Símbol",
+            "contracturi": "contracteURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000000000000000000",
+            "name": "Nom ERC721",
+            "symbol": "Símbol ERC721",
+            "contracturi": "URI del contracte"
+        },
+        "small": {
+            "hook": "adreça de ganxo de la interfície ICommunityHook del contracte implementada. Pot ser l&#39;adreça (0)",
+            "invitedHook": "Adreça invitedHook de la interfície ICommunityInvite implementada per contracte. Pot ser l&#39;adreça (0)",
+            "name": "Nom ERC721",
+            "symbol": "Símbol ERC721",
+            "contracturi": "URI del contracte"
+        },
+        "err": {
+            "hook": "<b>Ganxo<\/b> no vàlid",
+            "invitedHook": "<b>invitedHook<\/b> no vàlid",
+            "name": "<b>Nom<\/b> no vàlid",
+            "symbol": "<b>Símbol<\/b> no vàlid",
+            "contracturi": "<b>contractURI<\/b> no vàlid"
+        },
+        "btnTitle": "Produir"
+    },
+    "err": {
+        "cantFindFactoryAddress": "No es pot trobar l&#39;adreça de la fàbrica",
+        "transactionFailed": "La transacció ha fallat",
+        "smthWentWrong": "Alguna cosa ha anat malament"
+    },
+    "foo": "bar"
+}

@@ -64,7 +64,7 @@
     },
     "prompt": {
         "title": "Mətni daxil edin",
-        "ok": "İrəli"
+        "ok": "tamam"
     },
     "imagepicker": {
         "errorReadingFile": "Faylın oxunması xətası",

@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Стварыць супольнасць"
+    },
+    "list": {
+        "table": {
+            "td0": "Назва ланцужка",
+            "td1": "Ідэнтыфікатар ланцуга",
+            "td2": "Адрас суполкі"
+        },
+        "btnTitle": "Прадукцыя"
+    },
+    "form": {
+        "labels": {
+            "chain": "Ланцужок",
+            "hook": "Кручок",
+            "invitedHook": "InvitedHook",
+            "name": "Імя",
+            "symbol": "Сімвал",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "Імя ERC721",
+            "symbol": "Сімвал ERC721",
+            "contracturi": "кантракт URI"
+        },
+        "small": {
+            "hook": "адрас перахопу кантрактнага рэалізаванага інтэрфейсу ICommunityHook. Можа быць адрас (0)",
+            "invitedHook": "приглашенныйХоок адрас кантракту рэалізаваны інтэрфейс ICommunityInvite. Можа быць адрас (0)",
+            "name": "Імя ERC721",
+            "symbol": "Сімвал ERC721",
+            "contracturi": "кантракт URI"
+        },
+        "err": {
+            "hook": "<b>Хук<\/b> несапраўдны",
+            "invitedHook": "няправільны <b>запрошаныХок<\/b>",
+            "name": "Несапраўднае <b>імя<\/b>",
+            "symbol": "Несапраўдны <b>сімвал<\/b>",
+            "contracturi": "<b>contractURI<\/b> несапраўдны"
+        },
+        "btnTitle": "Прадукцыя"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Не магу знайсці заводскі адрас",
+        "transactionFailed": "Транзакцыя не адбылася",
+        "smthWentWrong": "Нешта пайшло не так"
+    },
+    "foo": "бар"
+}

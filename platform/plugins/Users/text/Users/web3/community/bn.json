@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "সম্প্রদায় তৈরি করুন"
+    },
+    "list": {
+        "table": {
+            "td0": "চেইন নাম",
+            "td1": "চেইন আইডি",
+            "td2": "সম্প্রদায়ের ঠিকানা"
+        },
+        "btnTitle": "উৎপাদন করা"
+    },
+    "form": {
+        "labels": {
+            "chain": "চেইন",
+            "hook": "হুক",
+            "invitedHook": "আমন্ত্রিত হুক",
+            "name": "নাম",
+            "symbol": "প্রতীক",
+            "contracturi": "চুক্তি ইউআরআই"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000",
+            "name": "ERC721 নাম",
+            "symbol": "ERC721 প্রতীক",
+            "contracturi": "চুক্তি URI"
+        },
+        "small": {
+            "hook": "চুক্তির হুক ঠিকানা বাস্তবায়িত ICcommunityHook ইন্টারফেস। ঠিকানা হতে পারে(0)",
+            "invitedHook": "চুক্তি বাস্তবায়িত ICcommunityInvite ইন্টারফেসের আমন্ত্রিত হুক ঠিকানা। ঠিকানা হতে পারে(0)",
+            "name": "ERC721 নাম",
+            "symbol": "ERC721 প্রতীক",
+            "contracturi": "চুক্তি URI"
+        },
+        "err": {
+            "hook": "<b>হুক<\/b> অবৈধ",
+            "invitedHook": "<b>আমন্ত্রিত হুক<\/b> অবৈধ",
+            "name": "<b>নাম<\/b> অবৈধ",
+            "symbol": "<b>চিহ্ন<\/b> অবৈধ",
+            "contracturi": "<b>চুক্তিইউআরআই<\/b> অবৈধ"
+        },
+        "btnTitle": "উৎপাদন করা"
+    },
+    "err": {
+        "cantFindFactoryAddress": "কারখানার ঠিকানা খুঁজে পাচ্ছি না",
+        "transactionFailed": "লেনদেন ব্যর্থ হয়েছে",
+        "smthWentWrong": "কিছু ভুল হয়েছে"
+    },
+    "foo": "বার"
+}

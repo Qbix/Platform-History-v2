@@ -155,7 +155,9 @@
     },
     "web3": {
         "WrongMethod": "Няправільны кантрактны метад {{methodName}}",
-        "ChangeWallet": "Змяніць кашалёк"
+        "ChangeWallet": "Змяніць кашалёк",
+        "ConnectWallet": "Падключыць кашалёк",
+        "AfterWalletConnectedPleaseRefresh": "Пасля падключэння кашалька абнавіце старонку, каб распазнаць кашалёк"
     },
     "labels": {
         "addToPhonebook": "Дадаць у кантакты майго тэлефона",

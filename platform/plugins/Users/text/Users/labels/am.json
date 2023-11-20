@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "ወደ ስልኬ እውቂያዎች አክል",
+    "addLabel": "አዲስ ግንኙነት",
+    "newRole": "አዲስ ሚና",
+    "prompt": "ስም ስጠው",
+    "newLabel": "አዲስ መለያ",
+    "editLabel": "መለያ አርትዕ",
+    "addBtn": "አክል",
+    "editBtn": "አዘምን",
+    "canManageDialogTitle": "ሚናዎችን ማስተዳደር ይችላል።",
+    "canManageBtn": "ማስተዳደር ይችላል...",
+    "titlePlaceholder": "ርዕስ",
+    "selectOptionTitle_web2": "ቤተኛ",
+    "selectOptionTitle_web3": "ድር3"
+}
