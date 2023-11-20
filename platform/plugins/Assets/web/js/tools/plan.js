@@ -251,6 +251,10 @@ Q.Tool.define("Assets/plan", function(options) {
 					}).activate();
 				});
 				streamTypes.forEach(function (streamType) {
+					// if plan interrupted, don't create relations
+					if (tool.planStream.getAttribute("interrupted")) {
+						return streamTypesPipe.fill(streamType)();
+					}
 					var pluginName = streamType.split("/")[0];
 					Q.Text.get(pluginName + '/content', function (err, text) {
 						Q.extend(tool.text, text);

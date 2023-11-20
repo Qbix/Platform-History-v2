@@ -482,6 +482,7 @@
         "DescribeTopic": "describe topic...",
         "TopicIcon": "Topic picture",
         "UploadIcon": "Upload Icon",
-        "Conversation": "Conversation"
+        "Conversation": "Conversation",
+        "Metrics": "Metrics"
     }
 }

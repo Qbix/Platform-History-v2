@@ -40,24 +40,30 @@ Q.Tool.define("Streams/topic", function(options) {
 	Q.each(state.creatable, function (index, streamType) {
 		var toolName = streamType + "/preview";
 		tool.element.forEachTool(toolName, function () {
-			this.state.onInvoke.set(function () {
-				var previewTool = this;
-				var streamsPreviewTool = Q.Tool.from(this.element, "Streams/preview");
-				if (!previewTool) {
-					return console.warn(toolName + ": preview tool not found");
-				}
+			var previewTool = this;
+			var streamsPreviewTool = Q.Tool.from(previewTool.element, "Streams/preview");
+			// if composer
+			if (!streamsPreviewTool.state.streamName) {
+				return;
+			}
 
-				// if composer
-				if (!streamsPreviewTool.state.streamName) {
+			streamsPreviewTool.state.beforeClose = function (_delete) {
+				Q.confirm(tool.text.questions.AreYouSure, function (result) {
+					if (result){
+						_delete();
+					}
+				});
+			};
+
+			streamsPreviewTool.state.actions.actions = streamsPreviewTool.state.actions.actions || {};
+
+			Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
+				if (err) {
 					return;
 				}
 
-				Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
-					if (err) {
-						return;
-					}
-
-					var stream = this;
+				var stream = this;
+				previewTool.state.onInvoke.set(function () {
 					var toolName, toolOptions;
 					switch(streamType) {
 						case "Streams/video":
@@ -65,7 +71,12 @@ Q.Tool.define("Streams/topic", function(options) {
 							toolOptions = {
 								url: stream.videoUrl() || stream.fileUrl(),
 								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd')
+								clipEnd: stream.getAttribute('clipEnd'),
+								metrics: {
+									publisherId: stream.fields.publisherId,
+									streamName: stream.fields.name,
+									useFaces: true
+								}
 							};
 							break;
 						case "Streams/audio":
@@ -74,7 +85,11 @@ Q.Tool.define("Streams/topic", function(options) {
 								action: "implement",
 								url: stream.fileUrl(),
 								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd')
+								clipEnd: stream.getAttribute('clipEnd'),
+								metrics: {
+									publisherId: stream.fields.publisherId,
+									streamName: stream.fields.name
+								}
 							};
 							break;
 						case "Streams/pdf":
@@ -82,7 +97,11 @@ Q.Tool.define("Streams/topic", function(options) {
 							toolOptions = {
 								url: stream.fileUrl(),
 								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd')
+								clipEnd: stream.getAttribute('clipEnd'),
+								metrics: {
+									publisherId: stream.fields.publisherId,
+									streamName: stream.fields.name
+								}
 							};
 							break;
 						case "Streams/topic":
@@ -102,8 +121,35 @@ Q.Tool.define("Streams/topic", function(options) {
 							$("<div>").appendTo($(".Q_column_slot", div)).tool(toolName, toolOptions).activate();
 						}
 					});
-				});
-			}, tool);
+				}, tool);
+
+				// add metrics action to preview tools to open metrics column
+				if (["Streams/video", "Streams/audio", "Streams/pdf"].includes(streamType)) {
+					if (streamsPreviewTool.state.actions.actions.metrics) {
+						return;
+					}
+
+					if (!stream.testWriteLevel(30)) {
+						return;
+					}
+
+					streamsPreviewTool.state.actions.actions.metrics = function () {
+						Q.invoke({
+							title: tool.text.topic.Metrics,
+							content: "",
+							className: "Streams_topic_metrics",
+							trigger: tool.element,
+							onActivate: function (options, index, div, data) {
+								$("<div>").appendTo($(".Q_column_slot", div)).tool("Streams/metrics", {
+									publisherId: streamsPreviewTool.state.publisherId,
+									streamName: streamsPreviewTool.state.streamName
+								}).activate();
+							}
+						});
+					};
+					streamsPreviewTool.actions();
+				}
+			});
 		});
 	});
 },
