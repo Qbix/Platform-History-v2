@@ -2646,24 +2646,18 @@ Q.swapElements = function(element1, element2) {
 };
 
 /**
- * Return querySelectorAll entries() iterator for use in for loops.
- * Also can be used for querySelector by passing false as third parameter.
+ * Return querySelectorAll entries() iterator for use in for loops
  * @method $
  * @static
- * @param {String} selector Any selector passed to querySelector
+ * @param {String} selector Any selector passed to querySelectorAll
  * @param {Element} [element=document] defaults to the entire document
- * @param {Boolean} [toArray] By default, function calls querySelectorAll and returns
- *   entries() iterator. You can pass true here to convert NodeList to a static
- *   array instead, but note that the result won't be live anymore.
- *   You can also pass false to call querySelector() and return an element or null.
- * @return {Iterator|Array|Element}
+ * @param {Boolean} [toArray] whether to convert NodeList to a static array instead.
+ *   Note: in that case, the result won't be live anymore.
+ * @return {Iterator|Array}
  */
 Q.$ = function (selector, element, toArray) {
-	var method = (toArray === undefined) ? 'querySelector' : 'querySelectorAll';
-	var result = (element || document)[method](selector);
-	return toArray ? Array.prototype.slice.call(result) : (
-		toArray === undefined ? result.entries() : result
-	);
+	var list = (element || document).querySelectorAll(selector);
+	return toArray ? Array.prototype.slice.call(list) : list.entries();
 };
 
 /**
