@@ -852,7 +852,7 @@ Q.Tool.define({
 		css: "{{Streams}}/css/tools/previewTask.css"
 	},
 	"Streams/metrics": {
-		js: "{{Streams}}/js/tools/metrics.js",
+		js: ["https://cdn.canvasjs.com/jquery.canvasjs.min.js", "{{Streams}}/js/tools/metrics.js"],
 		css: "{{Streams}}/css/tools/metrics.css"
 	},
 
