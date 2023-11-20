@@ -919,7 +919,7 @@ Q.getter = function _Q_getter(original, options) {
 	var ignoreCache = false;
 	gw.force = function _force() {
 		ignoreCache = true;
-		gw.apply(this, arguments);
+		return gw.apply(this, arguments);
 	};
 	
 	if (original.batch) {

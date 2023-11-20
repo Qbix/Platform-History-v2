@@ -121,7 +121,7 @@ Q.text = {
 		},
 		"prompt": {
 			"title": "Prompt",
-			"ok": "Go"
+			"ok": "Done"
 		},
 		"tabs": {
 			"more": "more",
@@ -920,21 +920,6 @@ Elp.adjustScrolling = function() {
 		element.style['-webkit-overflow-scrolling'] = scrolling;
 	}, 0);
 	return this;
-};
-
-/**
- * Switch places with another element
- * @method swap
- * @param {Element} element
- */
-Elp.swap = function(element) {
-	var parent1, next1, parent2, next2;
-	parent1 = this.parentElement;
-	next1   = this.nextSibling;
-	parent2 = element.parentElement;
-	next2   = element.nextSibling;
-	parent1.insertBefore(element, next1);
-	parent2.insertBefore(this, next2);
 };
 
 /**
@@ -2645,6 +2630,43 @@ Q.zIndexTopmost = function (container, filter) {
 };
 
 /**
+ * Make two elements switch places
+ * @method swapElements
+ * @static
+ * @param {Element} element
+ */
+Q.swapElements = function(element1, element2) {
+	var parent1, next1, parent2, next2;
+	parent1 = element1.parentElement;
+	next1   = element1.nextSibling;
+	parent2 = element2.parentElement;
+	next2   = element2.nextSibling;
+	parent1.insertBefore(element2, next1);
+	parent2.insertBefore(element1, next2);
+};
+
+/**
+ * Return querySelectorAll entries() iterator for use in for loops.
+ * Also can be used for querySelector by passing false as third parameter.
+ * @method $
+ * @static
+ * @param {String} selector Any selector passed to querySelector
+ * @param {Element} [element=document] defaults to the entire document
+ * @param {Boolean} [toArray] By default, function calls querySelectorAll and returns
+ *   entries() iterator. You can pass true here to convert NodeList to a static
+ *   array instead, but note that the result won't be live anymore.
+ *   You can also pass false to call querySelector() and return an element or null.
+ * @return {Iterator|Array|Element}
+ */
+Q.$ = function (selector, element, toArray) {
+	var method = (toArray === undefined) ? 'querySelector' : 'querySelectorAll';
+	var result = (element || document)[method](selector);
+	return toArray ? Array.prototype.slice.call(result) : (
+		toArray === undefined ? result.entries() : result
+	);
+};
+
+/**
  * Like a timestamp, but works with number of Gregorian Calendar 
  * days since fictional epoch year=0, month=0, day=1.
  * You can store daystamps and do arithmetic with them.
@@ -4330,7 +4352,7 @@ Q.getter = function _Q_getter(original, options) {
 	var ignoreCache = false;
 	gw.force = function _force() {
 		ignoreCache = true;
-		gw.apply(this, arguments);
+		return gw.apply(this, arguments);
 	};
 
 	if (original.batch) {
@@ -7582,15 +7604,16 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
  * Replaces the contents of an element and does the right thing with all the tools in it
  * @static
  * @method replace
- * @param {HTMLElement} container
- *  A existing HTMLElement whose contents are to be replaced with the source
+ * @param {String|HTMLElement} container
+ *  Pass a tag name to create an HTMLElement with that tag. Or pass
+ *  an existing HTMLElement whose contents are to be replaced with the source
  *  Tools found in the existing DOM which have data-Q-retain attribute
  *  are actually retained unless the tool replacing them has a data-Q-replace attribute.
  *  You can update the tool by implementing a handler for
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
  * @param {Element|String|DocumentFragment} source
- *  An HTML string or a Element or DocumentFragment which is not part of the DOM.
+ *  An HTML string or an Element or DocumentFragment which is not part of the DOM.
  *  If an element, it is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
@@ -7600,6 +7623,13 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
  *  Returns the container element if successful
  */
 Q.replace = function _Q_replace(container, source, options) {
+	if (typeof container === 'string') {
+		container = document.createElement(container);
+	}
+	if (container.innerHTML == '' && typeof source == 'string') {
+		container.innerHTML = source;
+		return container;
+	}
 	if (!source) {
 		var c; while (c = container.lastChild) {
 			Q.removeElement(c, true);
@@ -14574,7 +14604,7 @@ Q.prompt = function(message, callback, options) {
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
 			$('<div class="Q_buttons" />').append(
-				$('<input type="text" enterkeyhint="go" />').attr(attr), ' ',
+				$('<input type="text" enterkeyhint="done" />').attr(attr), ' ',
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
