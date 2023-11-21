@@ -12807,7 +12807,7 @@ Q.Visual = Q.Pointer = {
 	awaitNaturalImageSize: function (img, callback, options) {
 		var wait = setInterval(function() {
 			if (img.getAttribute('data-lazyload-src')
-			&& !options.ignoreLazyload) {
+			&& (options && options.ignoreLazyload)) {
 				return; // the lazyloaded image isn't loaded yet
 			}
 			var w = img.naturalWidth;
