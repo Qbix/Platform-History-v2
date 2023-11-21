@@ -99,6 +99,10 @@ abstract class Q_Video implements Q_Video_Interface {
 			$stream->setAttribute("provider", $provider);
 			$stream->setAttribute("videoId", $result["videoId"]);
 			$stream->setAttribute("Streams.videoUrl", $result["videoUrl"]);
+			$stream->setAttribute("duration", $result["duration"]);
+			$stream->setAttribute("width", $result["width"]);
+			$stream->setAttribute("height", $result["height"]);
+			$stream->setAttribute("Q.file.size", $result["size"]);
 			$stream->clearAttribute("Q.file.url");
 			$stream->changed();
 		}

@@ -34,7 +34,7 @@ function Assets_subscription_put($params = array())
 
 	// unsubscribe from assets plan
 	if (Q_Request::slotName("unsubscribe")) {
-		Assets_Subscription::stop($subscriptionStream);
+		Assets_Subscription::unsubscribe($subscriptionStream);
 		Q_Response::setSlot('unsubscribe', true);
 	} elseif (Q_Request::slotName("subscribe")) {
 		$subscriptionStream->setAttribute("stopped", false);

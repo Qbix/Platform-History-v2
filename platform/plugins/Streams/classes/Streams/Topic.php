@@ -15,6 +15,7 @@ class Streams_Topic {
 	 * @return {Streams_Stream}
 	 */
 	static function getComposerStream ($publisherId = null, $category = null) {
+		$loggedInUserId = Users::loggedInUser(true)->id;
 		$publisherId = $publisherId ? $publisherId : Users::loggedInUser(true)->id;
 		if (!($category instanceof Streams_Stream)) {
 			$category = Streams_Stream::fetch(null, $category["publisherId"], $category["streamName"], true);
@@ -26,15 +27,29 @@ class Streams_Topic {
 			"ignoreCache" => true
 		));
 
-		if (!empty($streams)) {
-			return reset($streams);
+		foreach ($streams as $stream) {
+			$stream->calculateAccess($loggedInUserId);
+			if ($stream->testWriteLevel(40)) {
+				return $stream;
+			}
 		}
 
 		$stream = Streams::create(null, $publisherId, "Streams/topic", array(), array(
 			"publisherId" => $category->publisherId,
 			"streamName" => $category->name,
-			"type" => "new"
+			"type" => "new",
+			"inheritAccess" => false
 		));
+		if ($publisherId != $loggedInUserId) {
+			Streams_Access::insert(array(
+				"publisherId" => $publisherId,
+				"streamName" => $stream->name,
+				"ofUserId" => $loggedInUserId,
+				"readLevel" => 40,
+				"writeLevel" => 40,
+				"adminLevel" => 40
+			))->execute();
+		}
 
 		return $stream;
 	}

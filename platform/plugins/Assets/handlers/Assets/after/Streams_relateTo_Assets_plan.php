@@ -1,7 +1,7 @@
 <?php
 
 function Assets_after_Streams_relateTo_Assets_plan ($params) {
-	$category = $params['category'];
+	$plan = $params['category'];
 	$stream = $params['stream'];
 	$type = $params['type'];
 
@@ -9,11 +9,5 @@ function Assets_after_Streams_relateTo_Assets_plan ($params) {
 		return;
 	}
 
-	$access = new Streams_Access();
-	$access->publisherId = "";
-	$access->streamName = $stream->name;
-	$access->ofUserId = '';
-	$access->ofContactLabel = $category->name;
-	$access->readLevel = 40;
-	$access->save(true);
+	Assets_Subscription::addAccess($plan, $stream);
 }
