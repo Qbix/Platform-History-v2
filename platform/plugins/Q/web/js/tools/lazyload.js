@@ -129,6 +129,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 			entering: function (img, entry) {
 				function _loaded() {
 					img.addClass('Q_lazy_loaded');
+					img.dispatchEvent(new CustomEvent("Q_lazy_loaded", {
+						bubbles: true,
+						detail: {}
+					}))
 				}
 				var tool = this;
 				tool.timeouts.set(img, setTimeout(function () {
@@ -211,6 +215,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 						Q.activate(element, {}, function () {
 							element.setAttribute('data-q-lazyload', 'activated');
 							element.addClass('Q_lazy_loaded');
+							element.dispatchEvent(new CustomEvent("Q_lazy_loaded", {
+								bubbles: true,
+								detail: {}
+							}))
 						}, {lazyload: true});
 					}
 					if (tool.timeouts.get(element)) {
