@@ -315,4 +315,4 @@ Q.Template.set('Streams/file/preview/create',
 	+ '</div>'
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

@@ -138,4 +138,4 @@ Q.Template.set('Communities/announcement/preview/create',
 	+ '</div></div>'
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

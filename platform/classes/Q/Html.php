@@ -606,15 +606,18 @@ class Q_Html
 		if (!is_string($alt)) {
 			$alt = 'not a string';
 		}
-		$tag_params = array_merge(@compact('src', 'alt'), $attributes);
 		$lazyload = Q_Config::get('Q', 'images', 'lazyload', array());
 		$dontLazyload = Q::ifset($attributes, 'dontLazyload', null);
 		unset($attributes['dontLazyload']);
+		$tag_attributes = array_merge(@compact('src', 'alt'), $attributes);
+		if ($dontLazyload) {
+			$attributes['data-dontLazyload'] = 1;
+		}
 		if ($lazyload and !$dontLazyload
 		and !empty($tag_params['src'])) {
 			if (!self::$environmentWithoutJavascript
 			and !self::$lazyloadWithoutJavascript) {
-				$src = Q_Html::themedUrl($tag_params['src']);
+				$src = Q_Html::themedUrl($tag_attributes['src']);
 				$tag_params['data-lazyload-src'] = $src;
 				$tag_params['src'] = self::themedUrl(
 					!empty($lazyload['loadingSrc'])
@@ -625,7 +628,7 @@ class Q_Html
 				$tag_params['loading'] = 'lazy';
 			}
 		}
-		return self::tag('img', $tag_params);
+		return self::tag('img', $tag_attributes);
 	}
 	
 	/**

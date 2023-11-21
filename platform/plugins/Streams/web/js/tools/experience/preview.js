@@ -268,4 +268,4 @@ Q.Tool.define("Streams/topic/preview", "Streams/preview", function (options, pre
 	}
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

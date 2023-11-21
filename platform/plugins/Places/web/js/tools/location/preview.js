@@ -42,4 +42,4 @@
 		+ '<div class="Places_location_preview_address">{{address}}</div>'
 		+ '</div></div>'
 	);
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

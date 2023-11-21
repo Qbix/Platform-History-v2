@@ -358,4 +358,4 @@ Q.Template.set('Users/avatar/contents', '<{{tag}} class="Users_avatar_name">{{{n
 Q.Template.set('Users/avatar/blank/icon', '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>');
 Q.Template.set('Users/avatar/blank/contents', '<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>');
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

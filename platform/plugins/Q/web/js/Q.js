@@ -10,7 +10,7 @@
 (function _Q_setup(undefined, dontSetGlobals) {
 
 var root = this;
-var $ = Q.$ = root.jQuery;
+var $ = Q.jQuery = root.jQuery;
 
 // private properties
 var _isReady = false;
@@ -12796,8 +12796,20 @@ function _Q_Pointer_start_end_handler (e) {
  */
 Q.Visual = Q.Pointer = {
 
-	awaitNaturalImageSize: function (img, callback) {
+	/**
+	 * @method awaitNaturalImageSize
+	 * @static
+	 * @param {Element} img 
+	 * @param {Function} callback 
+	 * @param {Object} options 
+	 * @param {boolean} ignoreLazyload
+	 */
+	awaitNaturalImageSize: function (img, callback, options) {
 		var wait = setInterval(function() {
+			if (img.getAttribute('data-lazyload-src')
+			&& !(options && options.ignoreLazyload)) {
+				return; // the lazyloaded image isn't loaded yet
+			}
 			var w = img.naturalWidth;
 			var h = img.naturalHeight;
 			if (w && h) {
@@ -15517,7 +15529,7 @@ Q.Tool.jQuery({
 
 Q.onJQuery.add(function ($) {
 	
-	Q.$ = $;
+	Q.jQuery = $;
 	
 	Q.onLoad.add(function () {
 		// Start loading some plugins asynchronously after document loads.

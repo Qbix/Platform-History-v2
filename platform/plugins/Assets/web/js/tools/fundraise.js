@@ -72,4 +72,4 @@ Q.Template.set('Assets/fundraise',
 	{text: ["Assets/content"]}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

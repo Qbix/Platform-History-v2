@@ -126,4 +126,4 @@ function (o) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

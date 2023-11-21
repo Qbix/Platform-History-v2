@@ -138,4 +138,4 @@
 		'	<div class="Streams_chat_unseen"></div>' +
 		'</div>'
 	);
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

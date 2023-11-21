@@ -139,4 +139,4 @@ Q.Template.set('Users/roles',
 {text: ["Users/roles"]}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

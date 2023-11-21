@@ -56,4 +56,4 @@ function _Q_clickfocus(o) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

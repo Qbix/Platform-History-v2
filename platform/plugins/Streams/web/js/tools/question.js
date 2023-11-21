@@ -44,4 +44,4 @@ Q.Tool.define("Streams/question", function(options) {
 {
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

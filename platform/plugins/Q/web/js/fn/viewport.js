@@ -342,4 +342,4 @@ function _Q_viewport(options) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

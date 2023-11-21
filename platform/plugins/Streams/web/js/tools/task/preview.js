@@ -94,4 +94,4 @@ Q.Tool.define("Streams/task/preview", function (options) {
 	}
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

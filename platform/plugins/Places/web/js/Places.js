@@ -658,4 +658,4 @@ Q.Tool.define({
 	"Places/areas": "{{Places}}/js/tools/areas.js"
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

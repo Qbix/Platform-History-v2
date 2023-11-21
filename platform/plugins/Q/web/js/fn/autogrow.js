@@ -248,4 +248,4 @@ function _surroundPlaceholders() {
 	return $container;
 }
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

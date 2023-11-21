@@ -468,4 +468,4 @@ Q.Template.set('Users/web3/community/composer',
     {text: ["Users/content", "Users/web3/community"]}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

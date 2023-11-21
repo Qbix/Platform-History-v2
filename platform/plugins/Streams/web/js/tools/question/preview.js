@@ -331,4 +331,4 @@ Q.Template.set('Streams/question/composer',
 	{text: ['Streams/content']}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

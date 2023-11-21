@@ -246,4 +246,4 @@ Q.Template.set("Streams/answer/view",
 	<div class="Streams_answer_participants"></div>`,
 	{text: ['Streams/content']}
 );
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

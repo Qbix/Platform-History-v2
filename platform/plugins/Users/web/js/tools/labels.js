@@ -986,4 +986,4 @@ Q.Template.set('Users/labels/manage/edit', `
 {text: ["Users/content", "Users/labels"]}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

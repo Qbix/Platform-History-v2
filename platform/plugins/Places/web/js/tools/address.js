@@ -248,4 +248,4 @@ function _getResults(query, callback) {
 	}, { fields: { input: query }})
 }
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

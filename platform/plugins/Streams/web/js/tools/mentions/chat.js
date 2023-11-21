@@ -203,4 +203,4 @@
 		'	<a class="Q_close"></a>' +
 		'</div>'
 	);
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

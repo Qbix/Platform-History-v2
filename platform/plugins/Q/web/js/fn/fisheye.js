@@ -89,4 +89,4 @@ function _Q_actions(options) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

@@ -179,4 +179,4 @@ Q.Template.set("Websites/advert/campaign",
 	+ "<button class='Websites_advert_campaign_state Q_button'>Start</button>"
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

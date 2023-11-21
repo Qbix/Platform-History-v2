@@ -271,4 +271,4 @@ Q.Tool.define("Streams/comments", function(o) {
 
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

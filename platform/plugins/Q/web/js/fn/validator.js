@@ -111,4 +111,4 @@ Q.Tool.jQuery('Q/validator', function _Q_sortable(options) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

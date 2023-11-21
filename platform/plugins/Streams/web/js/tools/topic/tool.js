@@ -232,4 +232,4 @@ Q.Template.set('Streams/topic/tool',
 	{text: ['Streams/content']}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

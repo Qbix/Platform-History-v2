@@ -96,4 +96,4 @@ Q.Tool.define('Users/language', function () {
 	}
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

@@ -207,4 +207,4 @@ function _position($this, position, container) {
 	container.css('left', left);
 }
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

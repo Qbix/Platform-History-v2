@@ -104,4 +104,4 @@ Q.Tool.define('Users/pile', function () {
 	}
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

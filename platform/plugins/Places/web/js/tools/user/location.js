@@ -446,4 +446,4 @@ Q.Template.set('Places/user/location',
 	+ '</div>'
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);
