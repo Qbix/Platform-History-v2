@@ -123,4 +123,4 @@ Q.Template.set('Streams/metrics/tool',
 	{text: ['Streams/content']}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);
