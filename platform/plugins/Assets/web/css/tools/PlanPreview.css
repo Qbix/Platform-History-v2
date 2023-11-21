@@ -71,9 +71,10 @@
 	display: inline-block;
 }
 .Assets_plan_composer .Q_dialog_content .Assets_plan_composer_buttons button[name=continue],
-.Assets_plan_composer[data-interrupted=true] .Q_dialog_content .Assets_plan_composer_buttons button[name=interrupt] {
+.Assets_plan_composer .Q_dialog_content .Assets_plan_composer_buttons button[name=interrupt] {
 	display: none;
 }
+.Assets_plan_composer[data-interrupted=false] .Q_dialog_content .Assets_plan_composer_buttons button[name=interrupt],
 .Assets_plan_composer[data-interrupted=true] .Q_dialog_content .Assets_plan_composer_buttons button[name=continue] {
 	display: inline-block;
 }

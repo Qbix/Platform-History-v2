@@ -126,7 +126,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 							description: stream.fields.content,
 							amount: stream.getAttribute("amount"),
 							period: stream.getAttribute("period"),
-							endDate: endDate
+							endDate: endDate,
+							interrupted: stream.getAttribute("interrupted") || false
 						});
 					};
 				}
@@ -137,6 +138,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		var tool = this;
 		var $toolElement = $(this.element);
 		var state = this.state;
+		fields = fields || {};
 
 		Q.Dialogs.push({
 			title: "New Subscription Plan",
@@ -148,7 +150,9 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			},
 			className: "Assets_plan_composer",
 			onActivate: function ($dialog) {
-				$dialog.attr("data-interrupted", tool.stream.getAttribute("interrupted"));
+				if (typeof fields.interrupted !== 'undefined') {
+					$dialog.attr("data-interrupted", fields.interrupted.toString());
+				}
 
 				$("input,textarea", $dialog).plugin('Q/placeholders');
 
