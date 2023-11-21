@@ -2,5 +2,8 @@ html .Q_column_subscription.Q_column_0 .Q_columns_title {
     display: block;
 }
 .Assets_column_subscription .Q_column_slot {
-    padding: 15px;
+    padding: 5px;
+}
+.Q_column_subscription.Communities_column_facebook .Streams_related_tool .Streams_preview_tool.Streams_preview_composer {
+    display: none;
 }
