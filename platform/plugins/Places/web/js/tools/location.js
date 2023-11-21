@@ -480,4 +480,4 @@ Q.Template.set('Places/location/select',
 		'</div>' +
 	'{{/if}}'
 );
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

@@ -660,4 +660,4 @@
 		+ '  <div class="Websites_webpage_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
 		+ '</form></div>'
 	);
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

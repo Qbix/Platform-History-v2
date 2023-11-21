@@ -622,4 +622,4 @@ Q.Template.set('Streams/pdf/composer',
 	+ '</form></div>'
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

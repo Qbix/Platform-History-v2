@@ -670,4 +670,4 @@
 		{text: ['Streams/content']}
 	);
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

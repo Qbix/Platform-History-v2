@@ -703,4 +703,4 @@ var interval;
 var bgLoaded;
 var dialogs = [];
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

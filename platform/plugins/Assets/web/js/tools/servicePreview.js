@@ -301,4 +301,4 @@ Q.Template.set("Assets/service/composer",
 	</form>`
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

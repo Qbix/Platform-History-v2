@@ -325,4 +325,4 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

@@ -734,4 +734,4 @@ var $body = $('body');
 var body = $body[0];
 var dataLifted = 'Q/sortable dragging';
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

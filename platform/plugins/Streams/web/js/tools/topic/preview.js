@@ -253,4 +253,4 @@ Q.Template.set('Streams/topic/composer',
         <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
     </form>`, {text: ['Streams/content']});
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

@@ -77,4 +77,4 @@ Q.Tool.define("Streams/form", function (options) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

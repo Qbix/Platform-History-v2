@@ -499,4 +499,4 @@ function _getFeature(planet, countryCode) {
 	return feature;
 }
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

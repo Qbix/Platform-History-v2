@@ -189,4 +189,4 @@ Q.Template.set("Assets/plan/composer",
 </form>`, {text:["Assets/content"]}
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

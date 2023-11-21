@@ -366,4 +366,4 @@ $te.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
 	clickPrompt: 'This is a bookmarklet, drag it to your bookmarks bar.'
 });
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

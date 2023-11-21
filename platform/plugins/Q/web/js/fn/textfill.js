@@ -105,4 +105,4 @@ Q.Tool.jQuery('Q/textfill',
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

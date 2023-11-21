@@ -536,4 +536,4 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

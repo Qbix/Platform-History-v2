@@ -127,4 +127,4 @@ Q.Template.set('Users/contacts',
 	<button class="Q_button">{{canAddText}}</button>
 {{/if}}`);
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

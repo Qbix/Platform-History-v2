@@ -302,4 +302,4 @@
 		'</div>'
 	);
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

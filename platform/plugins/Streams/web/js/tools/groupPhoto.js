@@ -167,4 +167,4 @@ Q.Template.set("Streams/groupPhoto", `
 	<div class="Streams_groupPhoto_loader"></div>
 `);
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

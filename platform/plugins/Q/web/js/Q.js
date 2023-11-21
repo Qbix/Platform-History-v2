@@ -10,7 +10,7 @@
 (function _Q_setup(undefined, dontSetGlobals) {
 
 var root = this;
-var $ = Q.$ = root.jQuery;
+var $ = Q.jQuery = root.jQuery;
 
 // private properties
 var _isReady = false;
@@ -15517,7 +15517,7 @@ Q.Tool.jQuery({
 
 Q.onJQuery.add(function ($) {
 	
-	Q.$ = $;
+	Q.jQuery = $;
 	
 	Q.onLoad.add(function () {
 		// Start loading some plugins asynchronously after document loads.

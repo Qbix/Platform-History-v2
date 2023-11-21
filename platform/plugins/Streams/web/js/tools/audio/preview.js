@@ -726,4 +726,4 @@
 		+ '  <div class="Streams_audio_encoding">{{text.encoding}}</div>'
 		+ '</form></div>'
 	);
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

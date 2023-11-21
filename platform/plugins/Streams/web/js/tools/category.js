@@ -44,4 +44,4 @@ Q.Tool.define('Streams/category', function () {
 
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

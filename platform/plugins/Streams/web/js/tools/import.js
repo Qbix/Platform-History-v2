@@ -129,4 +129,4 @@ Q.Template.set('Streams/import/tool',
 	+ '</form>'
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

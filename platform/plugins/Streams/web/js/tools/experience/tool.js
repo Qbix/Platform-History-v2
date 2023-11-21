@@ -60,4 +60,4 @@ Q.Tool.define("Streams/experience", function (options) {
 	}
 });
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

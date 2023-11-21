@@ -156,4 +156,4 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 	
 });
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

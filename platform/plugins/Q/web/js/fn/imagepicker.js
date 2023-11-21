@@ -762,4 +762,4 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 
 var counter = 0;
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

@@ -343,4 +343,4 @@ Q.Template.set('Assets/plan',
 	<button class="Q_button" name="subscribe">{{text.subscriptions.Subscribe}}</button>`
 );
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

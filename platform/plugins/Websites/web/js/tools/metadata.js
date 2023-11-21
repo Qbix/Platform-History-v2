@@ -96,4 +96,4 @@ Q.Template.set("Websites/metadata",
 	"{{{url}}}{{{title}}}{{{keywords}}}{{{description}}}"
 );
 
-})(Q, Q.$, window, document);
+})(Q, Q.jQuery, window, document);

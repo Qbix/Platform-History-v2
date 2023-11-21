@@ -222,4 +222,4 @@
 		'<textarea name="message" class="Q_disabled" placeholder="{{text.composer.WriteToStartConversation}}"></textarea>' +
 		'<button name="startConversation" class="Q_button Q_disabled">{{text.composer.StartConversation}}</button>'
 	);
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);

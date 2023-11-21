@@ -584,4 +584,4 @@ function _setWidthHeight(tool, $img) {
 	}
 }
 
-})(Q, Q.$, window);
+})(Q, Q.jQuery, window);
