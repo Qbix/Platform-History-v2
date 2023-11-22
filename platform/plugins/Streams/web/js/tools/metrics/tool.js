@@ -1,4 +1,4 @@
-(function (Q, $, window, undefined) {
+(function (window, Q, $, undefined) {
 
 /**
  * Streams/metrics tool.
@@ -48,6 +48,7 @@ Q.Tool.define("Streams/metrics", function(options) {
 {
 	refresh: function () {
 		var tool = this;
+		var $toolElement = $(this.element);
 		var state = tool.state;
 
 		Q.req("Streams/metrics", "metrics", function (err, response) {
@@ -56,58 +57,73 @@ Q.Tool.define("Streams/metrics", function(options) {
 			}
 
 			Q.each(response.slots.metrics, function (index, metrics) {
-				$("<div>").tool("Users/avatar", {userId: metrics.fields.userId}).appendTo(tool.element).activate();
-				var dataJSON = JSON.parse(metrics.fields.metrics);
-				var results = [];
-				for (var i =0; i <= state.duration; i++) {
-					results[i] = 0;
-					Q.each(dataJSON, function (index, data) {
-						if (data[0] <= i && i <= data[1]) {
-							results[i] = 1;
-						}
-					});
-				}
+				Q.Template.render("Streams/metrics/iterative", {index}, function (err, html) {
+					if (err) {
+						return;
+					}
 
-				// CanvasJSChart
-				var chartOptions = {
-					animationEnabled: true,
-					title: {
-						text: ""
-					},
-					axisY: {
-						title: "",
-						suffix: "%"
-					},
-					axisX: {
-						title: "Minutes"
-					},
-					data: [{
-						type: "column",
-						color: "#546BC1",
-						//yValueFormatString: "#,##0.0#"%"",
-						dataPoints: (function () {
-							var groupSeconds = 60;
-							var res = Array(Math.ceil(state.duration/groupSeconds)).fill(0);
-							var i = 0;
-							Q.each(results, function (second, viewed) {
-								if (second > (i+1)*groupSeconds) {
-									i++;
-								}
+					if (index === 0) {
+						$toolElement.empty();
+					}
 
-								res[i] += viewed;
-							});
-							res = res.map(function (x) {
-								return Math.round(x/60*100);
-							});
-							var resObj = [];
-							Q.each(res, function (index, percents) {
-								resObj.push({label: index, y: percents});
-							});
-							return resObj;
-						})()
-					}]
-				};
-				$("<div class='Streams_metrics_chart'>").appendTo(tool.element).CanvasJSChart(chartOptions);
+					$toolElement.append(html);
+					var $avatar = $(".Streams_metrics_avatar[data-index="+index+"]", $toolElement);
+					var $chart = $(".Streams_metrics_chart[data-index="+index+"]", $toolElement);
+
+					$avatar.tool("Users/avatar", {userId: metrics.fields.userId}).activate();
+
+					var dataJSON = JSON.parse(metrics.fields.metrics);
+					var results = [];
+					for (var i =0; i <= state.duration; i++) {
+						results[i] = 0;
+						Q.each(dataJSON, function (index, data) {
+							if (data[0] <= i && i <= data[1]) {
+								results[i] = 1;
+							}
+						});
+					}
+
+					// CanvasJSChart
+					var chartOptions = {
+						animationEnabled: true,
+						title: {
+							text: ""
+						},
+						axisY: {
+							title: "",
+							suffix: "%"
+						},
+						axisX: {
+							title: "Minutes"
+						},
+						data: [{
+							type: "column",
+							color: "#546BC1",
+							//yValueFormatString: "#,##0.0#"%"",
+							dataPoints: (function () {
+								var groupSeconds = 60;
+								var res = Array(Math.ceil(state.duration/groupSeconds)).fill(0);
+								var i = 0;
+								Q.each(results, function (second, viewed) {
+									if (second > (i+1)*groupSeconds) {
+										i++;
+									}
+
+									res[i] += viewed;
+								});
+								res = res.map(function (x) {
+									return Math.round(x/60*100);
+								});
+								var resObj = [];
+								Q.each(res, function (index, percents) {
+									resObj.push({label: index, y: percents});
+								});
+								return resObj;
+							})()
+						}]
+					};
+					$chart.CanvasJSChart(chartOptions);
+				});
 			});
 		}, {
 			fields: {
@@ -118,9 +134,10 @@ Q.Tool.define("Streams/metrics", function(options) {
 	}
 });
 
-Q.Template.set('Streams/metrics/tool',
-``,
+Q.Template.set('Streams/metrics/iterative',
+`<div class="Streams_metrics_avatar" data-index="{{index}}"></div>
+<div class="Streams_metrics_chart" data-index="{{index}}"></div>`,
 	{text: ['Streams/content']}
 );
 
-})(Q, Q.$, window);
+})(window, Q, jQuery);
