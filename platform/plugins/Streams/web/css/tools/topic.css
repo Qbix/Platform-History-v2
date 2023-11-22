@@ -43,7 +43,7 @@
 }
 .Streams_topic_tool .Streams_preview_tool,
 .Streams_topic_tool .Streams_topic_conversation {
-    border-bottom: 1px solid #e8ebee;
+    border-bottom: 1px solid var(--separate-line-color);
     padding: 10px;
     position: relative;
     cursor: pointer;
