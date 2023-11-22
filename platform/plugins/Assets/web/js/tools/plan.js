@@ -77,10 +77,8 @@ Q.Tool.define("Assets/plan", function(options) {
 		if (tool.subscriptionStream) {
 			stopped = tool.subscriptionStream.getAttribute("stopped");
 			subscribed = !stopped;
-			period = tool.subscriptionStream.getAttribute("period");
 			lastChargeTime = parseInt(tool.subscriptionStream.getAttribute("lastChargeTime"));
 			started = new Date(lastChargeTime * 1000).toDateString().split(' ').slice(1).join(' ');
-			price = tool.subscriptionStream.getAttribute('amount');
 			endsIn = new Date(lastChargeTime * 1000);
 			switch (period) {
 				case "annually":
