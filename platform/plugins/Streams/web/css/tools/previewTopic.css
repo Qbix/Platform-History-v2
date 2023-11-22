@@ -149,6 +149,7 @@
     background-image: url(../../img/icon_selected.png);
 }
 .Streams_topic_preview_tool .Streams_topic_preview_content {
+    display: block;
     width: calc(100% - 85px);
     height: 20px;
     overflow: hidden;
