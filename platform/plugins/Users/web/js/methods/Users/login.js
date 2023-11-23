@@ -690,19 +690,13 @@ Q.exports(function (Users, priv) {
 		}
 		var autocomplete = (type === 'text') ? 'on' : type;
 		Q.addScript("{{Q}}/js/sha1.js");
-		var identifierInput = $('<input id="Users_login_identifier" />').attr({
+		var $identifierInput = $('<input id="Users_login_identifier" />').attr({
 			name: 'identifier',
 			autocomplete: autocomplete,
 			type: type
 		}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
 		.attr('placeholder', placeholder)
 		.focus(hideForm2);
-
-		if (type === 'email') {
-			identifierInput.attr('name', 'email');
-		} else if (type === 'mobile') {
-			identifierInput.attr('name', 'phone');
-		}
 
 		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
@@ -718,20 +712,19 @@ Q.exports(function (Users, priv) {
 		step1_form.html(
 			$('<label for="Users_login_identifier" />').html(directions)
 		).append('<br />').append(
-			identifierInput
+			$identifierInput
 		).append(
 			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
 			.val(options.identifierType)
 		).append($a)
 		.submit(function (event) {
-			$('#Users_login_identifier').attr('name', 'identifier');
 			if (!$(this).is(':visible')) {
 				event.preventDefault();
 				return;
 			}
 			$('.Q_button', $(this)).focus();
-			var h = $('#Users_login_identifier').outerHeight() - 5;
-			$('#Users_login_identifier').css({
+			var h = $identifierInput.outerHeight() - 5;
+			$identifierInput.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
 				'background-repeat': 'no-repeat',
 				'background-position': 'right center',
@@ -746,7 +739,7 @@ Q.exports(function (Users, priv) {
 		}).on('keydown change click input', hideForm2);
 
 		if (Q.info.isTouchscreen) {
-			identifierInput.on('keyup', function () {
+			$identifierInput.on('keyup', function () {
 				var i, found = 0, val = $(this).val();
 				if (val.length === 0) return;
 

@@ -2,3 +2,9 @@
     width: 100%;
     height: 200px;
 }
+.Streams_metrics_tool .Streams_metrics_avatar:not(:first-child) {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid var(--separate-line-color);
+    width: 100%;
+}
