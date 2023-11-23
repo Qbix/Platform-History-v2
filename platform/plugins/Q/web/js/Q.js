@@ -2657,7 +2657,7 @@ Q.swapElements = function(element1, element2) {
  */
 Q.$ = function (selector, element, toArray) {
 	var list = (element || document).querySelectorAll(selector);
-	return toArray ? Array.prototype.slice.call(list) : list.entries();
+	return toArray ? Array.prototype.slice.call(list) : list.values();
 };
 
 /**
