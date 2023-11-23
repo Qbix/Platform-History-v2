@@ -11781,8 +11781,15 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		}
 
 		// if (!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting)) {
-		earlyCallback && earlyCallback(_qsockets[ns][url], ns, url);
-		callback && Q.Socket.onConnect(ns, url).addOnce(callback);
+		earlyCallback(_qsockets[ns][url], ns, url);
+		var socket = Q.Socket.get(ns, url);
+		if (callback) {
+			if (socket && socket.connected) {
+				callback.call(qs, ns, url);
+			} else {
+				Q.Socket.onConnect(ns, url).setOnce(callback);
+			}
+		}
 		
 		function _Q_Socket_register(qs) {
 			Q.each(_socketRegister, function (i, item) {
