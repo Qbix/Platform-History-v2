@@ -18,6 +18,7 @@ Q.Tool.define("Assets/plan", function(options) {
 			return;
 		}
 
+		this.retain(tool);
 		tool.planStream = this;
 		pipe.fill("planStream")();
 
@@ -145,7 +146,8 @@ Q.Tool.define("Assets/plan", function(options) {
 				date: endsIn
 			},
 			period: period,
-			price: (currency === "USD" ? '$' : currency) + parseFloat(price).toFixed(2),
+			currency: currency === "USD" ? '$' : currency,
+			price: parseFloat(price).toFixed(2),
 			iconUrl: tool.planStream.iconUrl(state.icon.defaultSize)
 		}, function (err, html) {
 			if (err) {
@@ -154,6 +156,13 @@ Q.Tool.define("Assets/plan", function(options) {
 
 			Q.replace(tool.element, html);
 			$toolElement.activate();
+
+			tool.planStream.onAttribute("amount").set(function (attributes, name) {
+				$(".Assets_plan_amount", $toolElement).text(parseFloat(attributes[name]).toFixed(2));
+			}, tool);
+			tool.planStream.onAttribute("period").set(function (attributes, name) {
+				$(".Assets_plan_period span", $toolElement).text(attributes[name]);
+			}, tool);
 
 			if (!Q.isEmpty(state.relatedStreamTypes)) {
 				var creatable = {};
@@ -336,8 +345,8 @@ Q.Tool.define("Assets/plan", function(options) {
 
 Q.Template.set('Assets/plan',
 `<h2 class="Assets_plan_status">{{status}}</h2>
-	<div class="Assets_plan_period">{{text.subscriptions.Period}}: {{period}}</div>
-	<div class="Assets_plan_price">{{text.subscriptions.Price}}: {{price}}</div>
+	<div class="Assets_plan_period">{{text.subscriptions.Period}}: <span>{{period}}</span></div>
+	<div class="Assets_plan_price">{{text.subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount">{{price}}</span></div>
 	<div class="Assets_plan_started">{{text.subscriptions.Started}}: {{started}}</div>
 	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{&tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}</div>
 	<div class="Assets_plan_related_streams"></div>
