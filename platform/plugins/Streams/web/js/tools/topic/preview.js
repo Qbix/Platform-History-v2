@@ -189,6 +189,9 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                             "": "400.png"
                         }
                     });
+                    $(".Streams_topic_composer_form_group[data-type=icon] label", $dialog).on(Q.Pointer.fastclick, function () {
+                        $icon.click();
+                    });
                 });
 
                 // create topic
