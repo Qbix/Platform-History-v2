@@ -42,11 +42,6 @@ Q.Tool.define("Streams/topic", function(options) {
 		tool.element.forEachTool(toolName, function () {
 			var previewTool = this;
 			var streamsPreviewTool = Q.Tool.from(previewTool.element, "Streams/preview");
-			// if composer
-			if (!streamsPreviewTool.state.streamName) {
-				return;
-			}
-
 			streamsPreviewTool.state.beforeClose = function (_delete) {
 				Q.confirm(tool.text.questions.AreYouSure, function (result) {
 					if (result){
@@ -57,14 +52,19 @@ Q.Tool.define("Streams/topic", function(options) {
 
 			streamsPreviewTool.state.actions.actions = streamsPreviewTool.state.actions.actions || {};
 
-			Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
-				if (err) {
+			previewTool.state.onInvoke.set(function () {
+				// if composer
+				if (!streamsPreviewTool.state.streamName) {
 					return;
 				}
 
-				var stream = this;
-				previewTool.state.onInvoke.set(function () {
+				Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
+					if (err) {
+						return;
+					}
+
 					var toolName, toolOptions;
+					var stream = this;
 					switch(streamType) {
 						case "Streams/video":
 							toolName = "Q/video";
@@ -121,7 +121,18 @@ Q.Tool.define("Streams/topic", function(options) {
 							$("<div>").appendTo($(".Q_column_slot", div)).tool(toolName, toolOptions).activate();
 						}
 					});
-				}, tool);
+				});
+			}, tool);
+
+			// if composer
+			if (!streamsPreviewTool.state.streamName) {
+				return;
+			}
+
+			Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
+				if (err) {
+					return;
+				}
 
 				// add metrics action to preview tools to open metrics column
 				if (["Streams/video", "Streams/audio", "Streams/pdf"].includes(streamType)) {
