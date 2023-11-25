@@ -6952,14 +6952,14 @@ Q.IndexedDB = {
 			db.createObjectStore(storeName, {keyPath: keyPath});
 		};
 		open.onerror = function (error) {
-			callback && callback(error);
+			callback && callback.call(Q.IndexedDB, error);
 		};
 		open.onsuccess = function() {
 			// Start a new transaction
 			var db = open.result;
 			var tx = db.transaction(storeName, "readwrite");
 			var store = tx.objectStore(storeName);
-			callback && callback(null, store);
+			callback && callback.call(Q.IndexedDB, null, store);
 			// Close the db when the transaction is done
 			tx.oncomplete = function() {
 				db.close();
