@@ -2330,8 +2330,8 @@ Q.chain = function (callbacks, callback) {
  * @method promisify
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
- * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
- * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
+ * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument.
+ * @param {Number|Array} callbackIndex Which argument the getter is expecting the callback, if any.
  *  For cordova-style functions pass an array of indexes for the
  *  onSuccess, onFailure callbacks, respectively.
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
@@ -2382,7 +2382,12 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 			resolve = r1;
 			reject = r2;
 		});
-		return Q.extend(promise, getter.apply(this, args));
+		try {
+			return Q.extend(promise, getter.apply(this, args));
+		} catch (e) {
+			reject(e);
+			return promise;
+		}
 	}
 	return Q.extend(_promisifier, getter);
 };
@@ -6961,30 +6966,28 @@ Q.IndexedDB = {
 			};
 		}
 	},
-	put: function (store, value, onSuccess, onError) {
-		if (!onError) {
-			onError = function () {
-				throw new Q.Error("Q.IndexedDB.put error:" + request.errorCode);
-			}
-		}
+	put: function (store, value, callback) {
 		var request = store.put(value);
-		request.onsuccess = onSuccess;
-		request.onError = onError;
-	},
-	get: function (store, key, onSuccess, onError) {
-		if (!onError) {
-			onError = function () {
-				throw new Q.Error("Q.IndexedDB.get error:" + request.errorCode);
-			}
-		}
-		var request = store.get(key);
 		request.onsuccess = function (event) {
-			Q.handle(onSuccess, Q.IndexedDB, [event.target.result, event]);
+			callback && callback.call(store, null, event.target.result);
 		};
-		request.onError = onError;
+		request.onerror = function (errorEvent) {
+			callback && callback.call(store, errorEvent);
+		};
+	},
+	get: function (store, key, callback) {
+		var request = store.put(value);
+		request.onsuccess = function (event) {
+			callback && callback.call(store, null, event.target.result);
+		};
+		request.onerror = function (errorEvent) {
+			callback && callback.call(store, errorEvent);
+		};
 	}
 };
 Q.IndexedDB.open = Q.promisify(Q.IndexedDB.open);
+Q.IndexedDB.put = Q.promisify(Q.IndexedDB.put);
+Q.IndexedDB.get = Q.promisify(Q.IndexedDB.get);
 
 /**
  * A constructor to create Q.Page objects
