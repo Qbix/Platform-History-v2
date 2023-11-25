@@ -6930,55 +6930,52 @@ Q.Cache.session.caches = {};
  * @constructor
  * @param {String} uriString
  */
-Q.IndexedDB = {
-	/**
-	 * Creates or uses an existing database and object store name.
-	 * @static
-	 * @method open
-	 * @param {String} dbName The name of the database
-	 * @param {String} storeName The name of the object store name inside the database
-	 * @param {String} keyPath The key path inside the object store
-	 * @param {Function} callback Receives (error, ObjectStore)
-	 * @param {Number} [version=1] The version of the database to open
-	 * @return {Q.Promise}
-	 */
-	open: function (dbName, storeName, keyPath, callback, version) {
-		if (!root.indexedDB) {
-			return false;
-		}
-		var open = indexedDB.open(dbName, version || 1);
-		open.onupgradeneeded = function() {
-			var db = open.result;
-			db.createObjectStore(storeName, {keyPath: keyPath});
-		};
-		open.onerror = function (error) {
-			callback && callback.call(Q.IndexedDB, error);
-		};
-		open.onsuccess = function() {
-			// Start a new transaction
-			var db = open.result;
-			var tx = db.transaction(storeName, "readwrite");
-			var store = tx.objectStore(storeName);
-			callback && callback.call(Q.IndexedDB, null, store);
-			// Close the db when the transaction is done
-			tx.oncomplete = function() {
-				db.close();
-			};
-		}
-	},
-	get: function (store, key, callback) {
-		_DB_addEvents(store, store.get(key), callback);
-	},
-	put: function (store, value, callback) {
-		_DB_addEvents(store, store.put(value), callback);
-	},
-	delete: function (store, key, callback) {
-		_DB_addEvents(store, store.delete(key), callback);
+Q.IndexedDB = {};
+
+/**
+ * Creates or uses an existing database and object store name.
+ * @static
+ * @method open
+ * @param {String} dbName The name of the database
+ * @param {String} storeName The name of the object store name inside the database
+ * @param {String} keyPath The key path inside the object store
+ * @param {Function} callback Receives (error, ObjectStore)
+ * @param {Number} [version=1] The version of the database to open
+ * @return {Q.Promise}
+ */
+Q.IndexedDB.open = Q.promisify(function (dbName, storeName, keyPath, callback, version) {
+	if (!root.indexedDB) {
+		return false;
 	}
-};
-Q.IndexedDB.open = Q.promisify(Q.IndexedDB.open);
-Q.IndexedDB.put = Q.promisify(Q.IndexedDB.put);
-Q.IndexedDB.get = Q.promisify(Q.IndexedDB.get);
+	var open = indexedDB.open(dbName, version || 1);
+	open.onupgradeneeded = function() {
+		var db = open.result;
+		db.createObjectStore(storeName, {keyPath: keyPath});
+	};
+	open.onerror = function (error) {
+		callback && callback.call(Q.IndexedDB, error);
+	};
+	open.onsuccess = function() {
+		// Start a new transaction
+		var db = open.result;
+		var tx = db.transaction(storeName, "readwrite");
+		var store = tx.objectStore(storeName);
+		callback && callback.call(Q.IndexedDB, null, store);
+		// Close the db when the transaction is done
+		tx.oncomplete = function() {
+			db.close();
+		};
+	};
+});
+Q.IndexedDB.put = Q.promisify(function (store, value, callback) {
+	_DB_addEvents(store, store.put(value), callback);
+});
+Q.IndexedDB.get = Q.promisify(function (store, key, callback) {
+	_DB_addEvents(store, store.get(key), callback);
+});
+Q.IndexedDB['delete'] = Q.promisify(function (store, key, callback) {
+	_DB_addEvents(store, store.delete(key), callback);
+});
 
 function _DB_addEvents(store, request, callback) {
 	request.onsuccess = function (event) {
