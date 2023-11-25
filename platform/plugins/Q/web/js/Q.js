@@ -6976,7 +6976,7 @@ Q.IndexedDB = {
 		};
 	},
 	get: function (store, key, callback) {
-		var request = store.put(value);
+		var request = store.get(key);
 		request.onsuccess = function (event) {
 			callback && callback.call(store, null, event.target.result);
 		};
