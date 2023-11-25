@@ -6966,28 +6966,28 @@ Q.IndexedDB = {
 			};
 		}
 	},
-	put: function (store, value, callback) {
-		var request = store.put(value);
-		request.onsuccess = function (event) {
-			callback && callback.call(store, null, event.target.result);
-		};
-		request.onerror = function (errorEvent) {
-			callback && callback.call(store, errorEvent);
-		};
-	},
 	get: function (store, key, callback) {
-		var request = store.get(key);
-		request.onsuccess = function (event) {
-			callback && callback.call(store, null, event.target.result);
-		};
-		request.onerror = function (errorEvent) {
-			callback && callback.call(store, errorEvent);
-		};
+		_DB_addEvents(store, store.get(key), callback);
+	},
+	put: function (store, value, callback) {
+		_DB_addEvents(store, store.put(value), callback);
+	},
+	delete: function (store, key, callback) {
+		_DB_addEvents(store, store.delete(key), callback);
 	}
 };
 Q.IndexedDB.open = Q.promisify(Q.IndexedDB.open);
 Q.IndexedDB.put = Q.promisify(Q.IndexedDB.put);
 Q.IndexedDB.get = Q.promisify(Q.IndexedDB.get);
+
+function _DB_addEvents(store, request, callback) {
+	request.onsuccess = function (event) {
+		callback && callback.call(store, null, event.target.result);
+	};
+	request.onerror = function (errorEvent) {
+		callback && callback.call(store, errorEvent);
+	};
+};
 
 /**
  * A constructor to create Q.Page objects
