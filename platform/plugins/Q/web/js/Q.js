@@ -5568,14 +5568,20 @@ Tp.prepareHTML = Tp.setUpElementHTML = function (element, toolName, toolOptions,
  *   the root element of the desired tool
  * @param {String} [toolName]
  *   optional name of the tool attached to the element
+ * @param {Boolean} [useClosest]
+ *   pass true to check the closest parent of the element with that tooL
  * @return {Q.Tool|null}
  *   the tool corresponding to the given element, otherwise null
  */
-Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
+Q.Tool.from = function _Q_Tool_from(toolElement, toolName, useClosest) {
 	if (Q.isArrayLike(toolElement)) {
 		toolElement = toolElement[0];
 	} if (typeof toolElement === 'string') {
 		toolElement = document.getElementById(toolElement);
+	}
+	if (useClosest) {
+		var className = toolName.split('/').join('_')+'_tool';
+		toolElement = toolElement.closest('.'+className);
 	}
 	return toolElement && toolElement.Q ? toolElement.Q(toolName) : null;
 };
@@ -16408,7 +16414,7 @@ Q.Notices = {
 	process: function () {
 		var noticeElement = document.getElementById("notices_slot");
 		if (!(noticeElement instanceof HTMLElement)) {
-			return console.warn("Q.Notices.process: element with id=notices_slot not found");
+			return false;
 		}
 
 		var noticeElements = noticeElement.getElementsByTagName("li");
@@ -16432,6 +16438,7 @@ Q.Notices = {
 			this.remove(); // need to remove before adding because can be keys conflict
 			Q.Notices.add(options);
 		});
+		return true;
 	}
 };
 
