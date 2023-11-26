@@ -2050,14 +2050,19 @@ Q.mixin = function _Q_mixin(A, B) {
 
 /**
  * Copies a subset of the fields in an object
- * @method take
  * @static
- * @param {Object} source An Object from which to take things
- * @param {Array|Object} An array of fields to take or an object of fieldname: default pairs
- * @return {Object} a new Object
+ * @method take
+ * @param {Object} source
+ *  An Object from which to take things
+ * @param  {Array|Object} fields
+ *  An array of fields to take
+ *  Or an Object of fieldname: default pairs
+ * @param {Object} [result]
+ *  Optionally pass an object here as a destination
+ * @return {Object}
  */
-Q.take = function _Q_take(source, fields) {
-	var result = {};
+Q.take = function _Q_take(source, fields, result) {
+	result = result || {};
 	if (!source) return result;
 	if (Q.isArrayLike(fields)) {
 		for (var i = 0; i < fields.length; ++i) {
