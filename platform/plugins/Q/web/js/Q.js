@@ -1966,10 +1966,12 @@ Q.has = function _Q_has(obj, key) {
  * @param  {Array|Object} fields
  *  An array of fields to take
  *  Or an Object of fieldname: default pairs
+ * @param {Object} [result]
+ *  Optionally pass an object here as a destination
  * @return {Object}
  */
-Q.take = function _Q_take(source, fields) {
-	var result = {};
+Q.take = function _Q_take(source, fields, result) {
+	result = result || {};
 	if (!source) return result;
 	if (Q.isArrayLike(fields)) {
 		for (var i = 0; i < fields.length; ++i) {
@@ -6940,24 +6942,39 @@ Q.IndexedDB = {};
  * @param {String} storeName The name of the object store name inside the database
  * @param {String} keyPath The key path inside the object store
  * @param {Function} callback Receives (error, ObjectStore)
- * @param {Number} [version=1] The version of the database to open
  * @return {Q.Promise}
  */
-Q.IndexedDB.open = Q.promisify(function (dbName, storeName, keyPath, callback, version) {
+Q.IndexedDB.open = Q.promisify(function (dbName, storeName, keyPath, callback) {
 	if (!root.indexedDB) {
 		return false;
 	}
-	var open = indexedDB.open(dbName, version || 1);
+	var lskey = 'Q_IndexedDB_version';
+	var version = localStorage.getItem(lskey) || 1;
+	var open = indexedDB.open(dbName, version);
+	var _triedAddingObjectStore = false;
 	open.onupgradeneeded = function() {
-		var db = open.result;
-		db.createObjectStore(storeName, {keyPath: keyPath});
+		var db = this.result;
+		if (!db.objectStoreNames.contains(storeName)
+		&& !_triedAddingObjectStore) {
+			_triedAddingObjectStore = true;
+			db.createObjectStore(storeName, {keyPath: keyPath});
+		}
 	};
 	open.onerror = function (error) {
 		callback && callback.call(Q.IndexedDB, error);
 	};
 	open.onsuccess = function() {
+		var db = this.result;
+		if (!db.objectStoreNames.contains(storeName)) {
+			// need to upgrade version and add this store
+			++version;
+			localStorage.setItem(lskey, version);
+			db.close();
+			var o = indexedDB.open(dbName, version);
+			Q.take(open, ['onupgradeneeded', 'onerror', 'onsuccess'], o);
+			return;
+		}
 		// Start a new transaction
-		var db = open.result;
 		var tx = db.transaction(storeName, "readwrite");
 		var store = tx.objectStore(storeName);
 		callback && callback.call(Q.IndexedDB, null, store);
