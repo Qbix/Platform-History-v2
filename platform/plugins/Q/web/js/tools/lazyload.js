@@ -189,7 +189,7 @@
 				selector: '.Q_tool',
 				entering: function (element, entry) {
 					var tool = this;
-					if (Q.Visual.intersection(img, tool.state.root)) {
+					if (Q.Visual.intersection(element, tool.state.root)) {
 						return _load();
 					}
 					tool.timeout && clearTimeout(tool.timeout);
