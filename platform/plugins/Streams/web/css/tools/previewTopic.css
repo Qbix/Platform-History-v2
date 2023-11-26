@@ -13,19 +13,6 @@
     background: #fff;
     font-size: 20px;
 }
-
-.Streams_topic_preview_composer label {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(195, 195, 195, .7);
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #000;
-}
-
 .Streams_topic_preview_composer .Streams_topic_composer_form_group {
     display: inline-block;
     width: 100%;
@@ -35,6 +22,18 @@
 .Streams_topic_preview_composer .Streams_topic_composer_form_group[data-type=icon] {
     position: relative;
     text-align: center;
+}
+.Streams_topic_preview_composer .Streams_topic_composer_form_group[data-type=icon] label {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(195, 195, 195, .7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
 }
 .Streams_topic_preview_composer .Streams_topic_composer_form_control {
     background: transparent;
