@@ -11787,7 +11787,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		}
 
 		// if (!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting)) {
-		earlyCallback(_qsockets[ns][url], ns, url);
+		Q.handle(earlyCallback, this, [_qsockets[ns][url], ns, url]);
 		var socket = Q.Socket.get(ns, url);
 		if (callback) {
 			if (socket && socket.connected) {

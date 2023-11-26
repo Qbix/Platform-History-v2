@@ -114,7 +114,9 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 						stream.setAttribute("endDate", endDate);
 						stream.save({
 							onSave: function () {
-								stream.refresh(tool.refresh.bind(tool, this), {
+								stream.refresh(function () {
+									tool.refresh(this);
+								}, {
 									messages: true,
 									evenIfNotRetained: true
 								});
