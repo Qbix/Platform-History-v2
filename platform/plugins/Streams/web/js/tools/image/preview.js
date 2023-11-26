@@ -52,16 +52,8 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 		ps.creatable.title = ps.creatable.title || 'New Image';
 	}
 
-	Q.Text.get('Streams/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			console.warn(msg);
-		}
-
-		tool.text = text.image;
-		ps.onRefresh.add(tool.refresh.bind(tool), tool);
-		ps.onComposer.add(tool.composer.bind(tool), tool);
-	});
+	ps.onRefresh.add(tool.refresh.bind(tool), tool);
+	ps.onComposer.add(tool.composer.bind(tool), tool);
 },
 
 {
@@ -188,8 +180,8 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 				} else if (state.defineTitle) {
 					Q.Dialogs.push({
 						className: 'Q_dialog_stream_title',
-						title: tool.text.imageTitle,
-						content: "<input name='title' value='" + tool.text.uploadedImage + "'>",
+						title: tool.text.image.imageTitle,
+						content: "<input name='title' value='" + tool.text.image.uploadedImage + "'>",
 						destroyOnClose: true,
 						apply: true,
 						onActivate : {
