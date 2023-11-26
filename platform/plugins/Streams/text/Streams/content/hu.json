@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "kezelheti e-mail-feliratkozásait",
         "IfUnsubscribe": "Ha le szeretne iratkozni",
-        "*": "{{& stream.fields.title}} {{& message.fields.type}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} en csatlakoztak",
-        "Streams\/left": "{{&call 'avatar.displayName'}} maradt",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} azt mondta: {{& message.content}}",
+        "*": "{{{ stream.fields.title}} {{& message.fields.type}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} en csatlakoztak",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} maradt",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} azt mondta: {{& message.content}}}",
         "Streams\/changed": "Változások {{stream.fields.title}} -ben",
-        "Streams\/invite": "Meghívást kaptál {{& stream.fields.title}}",
-        "Streams\/announcement": "Bejelentés {{& stream.fields.title}} -ben",
-        "Streams\/access": "{{&call 'avatar.displayName'}} hozzáférést változtatott {{& stream.fields.title}} ben",
-        "Streams\/chat\/edit": "{{& stream.fields.title}} -ben szerkesztett csevegőüzenet",
-        "Streams\/chat\/remove": "A csevegőüzenet {{& stream.fields.title}} -ben eltávolítva",
+        "Streams\/invite": "Meghívást kaptál {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Bejelentés {{{ stream.fields.title}}} -ben",
+        "Streams\/access": "{{{call 'avatar.displayName'}} hozzáférést változtatott {{& stream.fields.title}}} ben",
+        "Streams\/chat\/edit": "{{{ stream.fields.title}}} -ben szerkesztett csevegőüzenet",
+        "Streams\/chat\/remove": "A csevegőüzenet {{{ stream.fields.title}}} -ben eltávolítva",
         "Streams\/closed": "{{stream.fields.title}} bezárva",
         "Streams\/task\/progress": "Előrelépés {{stream.fields.title}} -ben",
         "Streams\/task\/complete": "Feladat teljesítve: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Új felhívás {{toTitle}} -ben indult",
         "Streams\/relatedTo\/*": "Új {{relationDisplayType}} az {{toTitle}} -ben",
         "Streams\/relatedFrom\/*": "{{toTitle}} hez hozzáadva {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} megemlített egy megjegyzésben",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} megemlített egy megjegyzésben",
         "Streams\/call": "A {{displayName}} valós idejű hívást indított"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "kommentálta",
             "startedCallIn": "hívást indított",
             "in": "ban ben",
-            "body": "{{& url}} : {{& message.fields.content}} ben",
+            "body": "{{{ url}} : {{& message.fields.content}}} ben",
             "relatedFrom": {
                 "hasBeenPostedTo": "elküldve ide",
                 "byAvatar": "{{avatar.displayName}} -ig"

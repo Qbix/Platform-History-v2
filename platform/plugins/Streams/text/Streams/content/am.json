@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "የኢሜል ምዝገባዎችዎን ያስተዳድሩ",
         "IfUnsubscribe": "ከደንበኝነት ምዝገባ መውጣት ከፈለጉ",
-        "*": "መልእክት {{& message.fields.type}} እስከ {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} ተቀላቅሏል።",
-        "Streams\/left": "{{&call 'avatar.displayName'}} ቀርቷል።",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} አለ {{& message.content}}",
+        "*": "መልእክት {{{ message.fields.type}} እስከ {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} ተቀላቅሏል።",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} ቀርቷል።",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} አለ {{& message.content}}}",
         "Streams\/changed": "በ {{stream.fields.title}} ለውጦች",
-        "Streams\/invite": "ወደ {{& stream.fields.title}} ተጋብዘዋል",
-        "Streams\/announcement": "ማስታወቂያ በ {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} መዳረሻን በ {{& stream.fields.title}} ቀይሯል።",
-        "Streams\/chat\/edit": "የውይይት መልእክት በ {{& stream.fields.title}} ተስተካክሏል።",
-        "Streams\/chat\/remove": "የውይይት መልእክት በ {{& stream.fields.title}} ተወግዷል",
+        "Streams\/invite": "ወደ {{{ stream.fields.title}}} ተጋብዘዋል",
+        "Streams\/announcement": "ማስታወቂያ በ {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} መዳረሻን በ {{& stream.fields.title}}} ቀይሯል።",
+        "Streams\/chat\/edit": "የውይይት መልእክት በ {{{ stream.fields.title}}} ተስተካክሏል።",
+        "Streams\/chat\/remove": "የውይይት መልእክት በ {{{ stream.fields.title}}} ተወግዷል",
         "Streams\/closed": "{{stream.fields.title}} ተዘግቷል።",
         "Streams\/task\/progress": "በ {{stream.fields.title}} እድገት",
         "Streams\/task\/complete": "የተጠናቀቀው ተግባር {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "አዲስ ጥሪ በ {{toTitle}} ተጀመረ",
         "Streams\/relatedTo\/*": "አዲስ {{relationDisplayType}} በ {{toTitle}}",
         "Streams\/relatedFrom\/*": "ወደ {{toTitle}} {{relationDisplayType}} ተጨምሯል።",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} በአስተያየት ውስጥ ጠቅሶሃል",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} በአስተያየት ውስጥ ጠቅሶሃል",
         "Streams\/call": "{{displayName}} የእውነተኛ ጊዜ ጥሪ ጀምሯል።"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "ላይ አስተያየት ሰጥቷል",
             "startedCallIn": "ጥሪ ጀመረ",
             "in": "ውስጥ",
-            "body": "በ {{& url}} {{& message.fields.content}}",
+            "body": "በ {{{ url}} {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ላይ ተለጠፈ",
                 "byAvatar": "በ {{avatar.displayName}}"

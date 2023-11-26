@@ -152,7 +152,7 @@ class Mustache_Tokenizer
                             if ($this->ctag == '}}') {
                                 $i++;
                             } else {
-                                // Clean up `{{{ tripleStache }}}` style tokens.
+                                // Clean up `{{{tripleStache }}}` style tokens.
                                 $lastName = $this->tokens[count($this->tokens) - 1][self::NAME];
                                 if (substr($lastName, -1) === '}') {
                                     $this->tokens[count($this->tokens) - 1][self::NAME] = trim(substr($lastName, 0, -1));

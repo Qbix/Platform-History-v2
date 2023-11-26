@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "จัดการการสมัครอีเมลของคุณ",
         "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร",
-        "*": "ข้อความ {{& message.fields.type}} ถึง {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} เข้าร่วม",
-        "Streams\/left": "เหลือ {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} กล่าวว่า: {{& message.content}}",
+        "*": "ข้อความ {{{ message.fields.type}} ถึง {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} เข้าร่วม",
+        "Streams\/left": "เหลือ {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} กล่าวว่า: {{& message.content}}}",
         "Streams\/changed": "การเปลี่ยนแปลงใน {{stream.fields.title}}",
-        "Streams\/invite": "คุณได้รับเชิญให้ไปที่ {{& stream.fields.title}}",
-        "Streams\/announcement": "ประกาศใน {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} เปลี่ยนการเข้าถึงเป็น {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "ข้อความแชทแก้ไขใน {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "ข้อความแชทถูกลบใน {{& stream.fields.title}}",
+        "Streams\/invite": "คุณได้รับเชิญให้ไปที่ {{{ stream.fields.title}}}",
+        "Streams\/announcement": "ประกาศใน {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} เปลี่ยนการเข้าถึงเป็น {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "ข้อความแชทแก้ไขใน {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "ข้อความแชทถูกลบใน {{{ stream.fields.title}}}",
         "Streams\/closed": "ปิด {{stream.fields.title}} ครับ",
         "Streams\/task\/progress": "ความคืบหน้าเมื่อ {{stream.fields.title}}",
         "Streams\/task\/complete": "ภารกิจเสร็จสิ้น: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "การโทรใหม่เริ่มต้นใน {{toTitle}}",
         "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{toTitle}}",
         "Streams\/relatedFrom\/*": "เพิ่มเป็น {{toTitle}} เป็น {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} พูดถึงคุณในความคิดเห็น",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} พูดถึงคุณในความคิดเห็น",
         "Streams\/call": "{{displayName}} เริ่มการโทรตามเวลาจริง"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "แสดงความคิดเห็นใน",
             "startedCallIn": "เริ่มโทรเข้ามา",
             "in": "ใน",
-            "body": "ใน {{& url}} : {{& message.fields.content}}",
+            "body": "ใน {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ได้ถูกโพสต์ไปที่",
                 "byAvatar": "โดย {{avatar.displayName}}"

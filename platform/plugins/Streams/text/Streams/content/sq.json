@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "menaxhoni abonimet tuaja me email",
         "IfUnsubscribe": "Nëse dëshironi të çregjistroheni",
-        "*": "Mesazh {{& message.fields.type}} deri {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} u bashkuan",
-        "Streams\/left": "{{&call 'avatar.displayName'}} kanë mbetur",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} tha: {{& message.content}}",
+        "*": "Mesazh {{{ message.fields.type}} deri {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} u bashkuan",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} kanë mbetur",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} tha: {{& message.content}}}",
         "Streams\/changed": "Ndryshimet në {{stream.fields.title}}",
-        "Streams\/invite": "Jeni të ftuar në {{& stream.fields.title}}",
-        "Streams\/announcement": "Njoftimi në {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ndryshoi aksesin në {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Mesazhi i bisedës i modifikuar në {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Mesazhi i bisedës u hoq në {{& stream.fields.title}}",
+        "Streams\/invite": "Jeni të ftuar në {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Njoftimi në {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} ndryshoi aksesin në {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Mesazhi i bisedës i modifikuar në {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Mesazhi i bisedës u hoq në {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} është mbyllur",
         "Streams\/task\/progress": "Përparimi i bërë më {{stream.fields.title}}",
         "Streams\/task\/complete": "Detyra e përfunduar: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Thirrja e re filloi në {{toTitle}}",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} e re në {{toTitle}}",
         "Streams\/relatedFrom\/*": "Shtuar në {{toTitle}} si {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ju përmendi në një koment",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} ju përmendi në një koment",
         "Streams\/call": "{{displayName}} filloi një telefonatë në kohë reale"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "komentuar mbi",
             "startedCallIn": "filloi një telefonatë",
             "in": "në",
-            "body": "në {{& url}} : {{& message.fields.content}}",
+            "body": "në {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "është postuar në",
                 "byAvatar": "me {{avatar.displayName}}"

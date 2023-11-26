@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "spravovat své odběry e-mailů",
         "IfUnsubscribe": "Pokud se chcete odhlásit",
-        "*": "Zpráva {{& message.fields.type}} až {{& stream.fields.title}}",
-        "Streams\/joined": "Připojilo se {{&call 'avatar.displayName'}}",
-        "Streams\/left": "Zbývá {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} řekl: {{& message.content}}",
+        "*": "Zpráva {{{ message.fields.type}} až {{& stream.fields.title}}}",
+        "Streams\/joined": "Připojilo se {{{call 'avatar.displayName'}}}",
+        "Streams\/left": "Zbývá {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} řekl: {{& message.content}}}",
         "Streams\/changed": "Změny v {{stream.fields.title}}",
-        "Streams\/invite": "Byli jste pozváni na {{& stream.fields.title}}",
-        "Streams\/announcement": "Oznámení v {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} změnil přístup v {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chatová zpráva upravena v {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chatová zpráva odstraněna v {{& stream.fields.title}}",
+        "Streams\/invite": "Byli jste pozváni na {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Oznámení v {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} změnil přístup v {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Chatová zpráva upravena v {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Chatová zpráva odstraněna v {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} byla uzavřena",
         "Streams\/task\/progress": "Pokrok dosažen na {{stream.fields.title}}",
         "Streams\/task\/complete": "Úkol dokončen: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nový hovor byl zahájen v {{toTitle}}",
         "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} z {{toTitle}}",
         "Streams\/relatedFrom\/*": "Přidáno k {{toTitle}} jako {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} vás zmínil v komentáři",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} vás zmínil v komentáři",
         "Streams\/call": "{{displayName}} zahájilo hovor v reálném čase"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "komentoval",
             "startedCallIn": "zahájil hovor",
             "in": "v",
-            "body": "v {{& url}} : {{& message.fields.content}}",
+            "body": "v {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "byl odeslán do",
                 "byAvatar": "o {{avatar.displayName}}"

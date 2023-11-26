@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "dhibiti usajili wako wa barua pepe",
         "IfUnsubscribe": "Ukitaka kujiondoa",
-        "*": "Tuma ujumbe {{& message.fields.type}} hadi {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} walijiunga",
-        "Streams\/left": "{{&call 'avatar.displayName'}} wamebaki",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} walisema: {{& message.content}}",
+        "*": "Tuma ujumbe {{{ message.fields.type}} hadi {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} walijiunga",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} wamebaki",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} walisema: {{& message.content}}}",
         "Streams\/changed": "Mabadiliko ya {{stream.fields.title}}",
-        "Streams\/invite": "Ulialikwa kwenye {{& stream.fields.title}}",
-        "Streams\/announcement": "Tangazo la {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ilibadilisha ufikiaji mnamo {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Ujumbe wa gumzo ulihaririwa mnamo {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Ujumbe wa gumzo uliondolewa mnamo {{& stream.fields.title}}",
+        "Streams\/invite": "Ulialikwa kwenye {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Tangazo la {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} ilibadilisha ufikiaji mnamo {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Ujumbe wa gumzo ulihaririwa mnamo {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Ujumbe wa gumzo uliondolewa mnamo {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} imefungwa",
         "Streams\/task\/progress": "Maendeleo yaliyopatikana mnamo {{stream.fields.title}}",
         "Streams\/task\/complete": "Kazi iliyokamilishwa: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Simu Mpya Ilianza mnamo {{toTitle}}",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} mpya katika {{toTitle}}",
         "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} alikutaja kwenye maoni",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} alikutaja kwenye maoni",
         "Streams\/call": "{{displayName}} ilianzisha simu katika muda halisi"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "alitoa maoni",
             "startedCallIn": "akapiga simu",
             "in": "katika",
-            "body": "katika {{& url}} : {{& message.fields.content}}",
+            "body": "katika {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "imetumwa kwa",
                 "byAvatar": "kwa {{avatar.displayName}}"

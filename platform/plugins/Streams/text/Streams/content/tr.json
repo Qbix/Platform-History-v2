@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "e-posta aboneliklerinizi yönetin",
         "IfUnsubscribe": "Abonelikten çıkmak istiyorsanız",
-        "*": "Mesaj {{& message.fields.type}} - {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} katıldı",
-        "Streams\/left": "{{&call 'avatar.displayName'}} kaldı",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dedi ki: {{& message.content}}",
+        "*": "Mesaj {{{ message.fields.type}} - {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} katıldı",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} kaldı",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} dedi ki: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} değişiklikler",
-        "Streams\/invite": "{{& stream.fields.title}} davet edildin",
-        "Streams\/announcement": "{{& stream.fields.title}} Duyuru",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} erişimi değiştirdi",
-        "Streams\/chat\/edit": "Sohbet mesajı {{& stream.fields.title}} düzenlendi",
-        "Streams\/chat\/remove": "Sohbet mesajı {{& stream.fields.title}} kaldırıldı",
+        "Streams\/invite": "{{{ stream.fields.title}}} davet edildin",
+        "Streams\/announcement": "{{{ stream.fields.title}}} Duyuru",
+        "Streams\/access": "{{{call 'avatar.displayName'}} {{& stream.fields.title}}} erişimi değiştirdi",
+        "Streams\/chat\/edit": "Sohbet mesajı {{{ stream.fields.title}}} düzenlendi",
+        "Streams\/chat\/remove": "Sohbet mesajı {{{ stream.fields.title}}} kaldırıldı",
         "Streams\/closed": "{{stream.fields.title}} kapatıldı",
         "Streams\/task\/progress": "{{stream.fields.title}} kaydedilen ilerleme",
         "Streams\/task\/complete": "Görev tamamlandı: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}} Yeni Çağrı Başladı",
         "Streams\/relatedTo\/*": "{{toTitle}} yeni {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} olarak eklendi",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} bir yorumda sizden bahsetti",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} bir yorumda sizden bahsetti",
         "Streams\/call": "{{displayName}} gerçek zamanlı bir arama başlattı"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "yorum yaptı",
             "startedCallIn": "arama başlattı",
             "in": "içinde",
-            "body": "{{& url}} : {{& message.fields.content}}",
+            "body": "{{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "gönderildi",
                 "byAvatar": "{{avatar.displayName}} tarafından"

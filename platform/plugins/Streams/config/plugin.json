@@ -225,11 +225,11 @@
 					},
 					"Streams/relatedTo": {
 						"description": "Some other stream has been related to this one",
-						"subject": "{{&call 'message.getInstruction' 'description'}}"
+						"subject": "{{{call 'message.getInstruction' 'description'}}}"
 					},
 					"Streams/relatedFrom": {
 						"description": "This stream has been related to some other one",
-						"subject": "{{&call 'message.getInstruction' 'description'}}"
+						"subject": "{{{call 'message.getInstruction' 'description'}}}"
 					},
 					"Streams/access": {
 						"description": "Access to stream has changed",

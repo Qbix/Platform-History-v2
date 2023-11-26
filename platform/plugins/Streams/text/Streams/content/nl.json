@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "beheer uw e-mailabonnementen",
         "IfUnsubscribe": "Als u zich wilt afmelden",
-        "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} toegetreden",
-        "Streams\/left": "{{&call 'avatar.displayName'}} over",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} zei: {{& message.content}}",
+        "*": "Bericht {{{ message.fields.type}} tot {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} toegetreden",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} over",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} zei: {{& message.content}}}",
         "Streams\/changed": "Veranderingen in {{stream.fields.title}}",
-        "Streams\/invite": "Je bent uitgenodigd voor {{& stream.fields.title}}",
-        "Streams\/announcement": "Aankondiging in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} gewijzigde toegang in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chatbericht bewerkt in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chatbericht verwijderd in {{& stream.fields.title}}",
+        "Streams\/invite": "Je bent uitgenodigd voor {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Aankondiging in {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} gewijzigde toegang in {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Chatbericht bewerkt in {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Chatbericht verwijderd in {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} is gesloten",
         "Streams\/task\/progress": "Vooruitgang geboekt op {{stream.fields.title}}",
         "Streams\/task\/complete": "Taak voltooid: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nieuwe oproep gestart in {{toTitle}}",
         "Streams\/relatedTo\/*": "Nieuwe {{relationDisplayType}} op {{toTitle}}",
         "Streams\/relatedFrom\/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} noemde je in een reactie",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} noemde je in een reactie",
         "Streams\/call": "{{displayName}} startte een real-time oproep"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "Gereageerd op",
             "startedCallIn": "begon een inbelgesprek",
             "in": "in",
-            "body": "in {{& url}} : {{& message.fields.content}}",
+            "body": "in {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "is op geplaatst",
                 "byAvatar": "tegen {{avatar.displayName}}"

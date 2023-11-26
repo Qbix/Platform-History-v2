@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "اشتراک های ایمیل خود را مدیریت کنید",
         "IfUnsubscribe": "اگر می خواهید اشتراک خود را لغو کنید",
-        "*": "{{& message.fields.type}} به {{& stream.fields.title}} پیام دهید",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} پیوست",
-        "Streams\/left": "{{&call 'avatar.displayName'}} باقی مانده است",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} گفت: {{& message.content}}",
+        "*": "{{{ message.fields.type}} به {{& stream.fields.title}}} پیام دهید",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} پیوست",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} باقی مانده است",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} گفت: {{& message.content}}}",
         "Streams\/changed": "تغییرات در {{stream.fields.title}}",
-        "Streams\/invite": "شما به {{& stream.fields.title}} دعوت شده اید",
-        "Streams\/announcement": "اعلامیه در {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} تغییر دسترسی در {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "پیام چت ویرایش شده در {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "پیام چت در {{& stream.fields.title}} حذف شد",
+        "Streams\/invite": "شما به {{{ stream.fields.title}}} دعوت شده اید",
+        "Streams\/announcement": "اعلامیه در {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} تغییر دسترسی در {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "پیام چت ویرایش شده در {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "پیام چت در {{{ stream.fields.title}}} حذف شد",
         "Streams\/closed": "{{stream.fields.title}} بسته شده است",
         "Streams\/task\/progress": "پیشرفت در {{stream.fields.title}} انجام شد",
         "Streams\/task\/complete": "کار تکمیل شده: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "تماس جدید در {{toTitle}} شروع شد",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} جدید در {{toTitle}}",
         "Streams\/relatedFrom\/*": "به {{toTitle}} به عنوان {{relationDisplayType}} اضافه شد",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} از شما در یک نظر نام برده است",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} از شما در یک نظر نام برده است",
         "Streams\/call": "{{displayName}} یک تماس بلادرنگ شروع کرد"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "نظر داد",
             "startedCallIn": "تماسی را شروع کرد",
             "in": "که در",
-            "body": "در {{& url}} : {{& message.fields.content}}",
+            "body": "در {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ارسال شده است به",
                 "byAvatar": "توسط {{avatar.displayName}}"

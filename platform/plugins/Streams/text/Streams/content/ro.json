@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "gestionați-vă abonamentele de e-mail",
         "IfUnsubscribe": "Dacă doriți să vă dezabonați",
-        "*": "Mesaj {{& message.fields.type}} la {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} s-au alăturat",
-        "Streams\/left": "Au mai rămas {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a spus: {{& message.content}}",
+        "*": "Mesaj {{{ message.fields.type}} la {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} s-au alăturat",
+        "Streams\/left": "Au mai rămas {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} a spus: {{& message.content}}}",
         "Streams\/changed": "Modificări în {{stream.fields.title}}",
-        "Streams\/invite": "Ai fost invitat la {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunț din {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} a schimbat accesul în {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Mesaj de chat editat în {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Mesaj de chat eliminat în {{& stream.fields.title}}",
+        "Streams\/invite": "Ai fost invitat la {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Anunț din {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} a schimbat accesul în {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Mesaj de chat editat în {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Mesaj de chat eliminat în {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} a fost închis",
         "Streams\/task\/progress": "Progresul înregistrat în {{stream.fields.title}}",
         "Streams\/task\/complete": "Sarcina finalizată: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Apel nou început în {{toTitle}}",
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} în {{toTitle}}",
         "Streams\/relatedFrom\/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} te-a menționat într-un comentariu",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} te-a menționat într-un comentariu",
         "Streams\/call": "{{displayName}} a început un apel în timp real"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "comentat",
             "startedCallIn": "a început un apel",
             "in": "în",
-            "body": "în {{& url}} : {{& message.fields.content}}",
+            "body": "în {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "a fost postat pe",
                 "byAvatar": "prin {{avatar.displayName}}"

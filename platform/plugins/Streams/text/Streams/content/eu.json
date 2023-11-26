@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "kudeatu zure posta elektronikoko harpidetzak",
         "IfUnsubscribe": "Harpidetza kendu nahi baduzu",
-        "*": "{{& message.fields.type}} {{& stream.fields.title}} bitarteko mezua",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} batu ziren",
-        "Streams\/left": "{{&call 'avatar.displayName'}} geratzen dira",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} esan zuen: {{& message.content}}",
+        "*": "{{{ message.fields.type}} {{& stream.fields.title}}} bitarteko mezua",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} batu ziren",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} geratzen dira",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} esan zuen: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} aldaketak",
-        "Streams\/invite": "{{& stream.fields.title}} gonbidatu zaituzte",
-        "Streams\/announcement": "{{& stream.fields.title}} iragarkia",
-        "Streams\/access": "{{&call 'avatar.displayName'}} sarbidea aldatu zuen {{& stream.fields.title}} urtean",
-        "Streams\/chat\/edit": "{{& stream.fields.title}} urtean editatutako txat-mezua",
-        "Streams\/chat\/remove": "Txat-mezua kendu zen {{& stream.fields.title}} urtean",
+        "Streams\/invite": "{{{ stream.fields.title}}} gonbidatu zaituzte",
+        "Streams\/announcement": "{{{ stream.fields.title}}} iragarkia",
+        "Streams\/access": "{{{call 'avatar.displayName'}} sarbidea aldatu zuen {{& stream.fields.title}}} urtean",
+        "Streams\/chat\/edit": "{{{ stream.fields.title}}} urtean editatutako txat-mezua",
+        "Streams\/chat\/remove": "Txat-mezua kendu zen {{{ stream.fields.title}}} urtean",
         "Streams\/closed": "{{stream.fields.title}} itxi egin da",
         "Streams\/task\/progress": "{{stream.fields.title}} egindako aurrerapena",
         "Streams\/task\/complete": "Egindako zeregina: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Deialdi berria {{toTitle}} hasi zen",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} berria {{toTitle}} urtean",
         "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} gisa gehitu da",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} iruzkin batean aipatu zaitu",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} iruzkin batean aipatu zaitu",
         "Streams\/call": "{{displayName}} telefonoak denbora errealeko dei bat hasi zuen"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "komentatu zuen",
             "startedCallIn": "dei bat hasi zen",
             "in": "urtean",
-            "body": "{{& url}} : {{& message.fields.content}}",
+            "body": "{{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "helbidean argitaratu da",
                 "byAvatar": "{{avatar.displayName}}"

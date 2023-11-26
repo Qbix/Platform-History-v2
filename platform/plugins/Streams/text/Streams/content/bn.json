@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "আপনার ইমেল সদস্যতা পরিচালনা করুন",
         "IfUnsubscribe": "আপনি আনসাবস্ক্রাইব করতে চান",
-        "*": "{{& message.fields.type}} থেকে {{& stream.fields.title}} নম্বরে মেসেজ করুন",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} যোগদান করেছে",
-        "Streams\/left": "{{&call 'avatar.displayName'}} বাকি",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} বলেছেন: {{& message.content}}",
+        "*": "{{{ message.fields.type}} থেকে {{& stream.fields.title}}} নম্বরে মেসেজ করুন",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} যোগদান করেছে",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} বাকি",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} বলেছেন: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} সালে পরিবর্তন",
-        "Streams\/invite": "আপনাকে {{& stream.fields.title}} এ আমন্ত্রণ জানানো হয়েছে",
-        "Streams\/announcement": "{{& stream.fields.title}} সালে ঘোষণা",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} সালে অ্যাক্সেস পরিবর্তন করেছে",
-        "Streams\/chat\/edit": "চ্যাট বার্তা {{& stream.fields.title}} সালে সম্পাদিত",
-        "Streams\/chat\/remove": "{{& stream.fields.title}} সালে চ্যাট বার্তা সরানো হয়েছে",
+        "Streams\/invite": "আপনাকে {{{ stream.fields.title}}} এ আমন্ত্রণ জানানো হয়েছে",
+        "Streams\/announcement": "{{{ stream.fields.title}}} সালে ঘোষণা",
+        "Streams\/access": "{{{call 'avatar.displayName'}} {{& stream.fields.title}}} সালে অ্যাক্সেস পরিবর্তন করেছে",
+        "Streams\/chat\/edit": "চ্যাট বার্তা {{{ stream.fields.title}}} সালে সম্পাদিত",
+        "Streams\/chat\/remove": "{{{ stream.fields.title}}} সালে চ্যাট বার্তা সরানো হয়েছে",
         "Streams\/closed": "{{stream.fields.title}} বন্ধ করা হয়েছে",
         "Streams\/task\/progress": "{{stream.fields.title}} এ অগ্রগতি হয়েছে",
         "Streams\/task\/complete": "কাজ সম্পন্ন হয়েছে: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}} সালে নতুন কল শুরু হয়েছে",
         "Streams\/relatedTo\/*": "{{toTitle}} -এ নতুন {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}} হিসাবে {{toTitle}} এ যোগ করা হয়েছে",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} আপনাকে একটি মন্তব্যে উল্লেখ করেছে",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} আপনাকে একটি মন্তব্যে উল্লেখ করেছে",
         "Streams\/call": "{{displayName}} একটি রিয়েল-টাইম কল শুরু করেছে"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "মন্তব্য প্রদান করেছে",
             "startedCallIn": "একটি কল শুরু",
             "in": "ভিতরে",
-            "body": "{{& url}} : {{& message.fields.content}} সালে",
+            "body": "{{{ url}} : {{& message.fields.content}}} সালে",
             "relatedFrom": {
                 "hasBeenPostedTo": "পোস্ট করা হয়েছে",
                 "byAvatar": "{{avatar.displayName}} দ্বারা"

@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "bainistigh do shíntiúis ríomhphoist",
         "IfUnsubscribe": "Más mian leat díliostáil",
-        "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} isteach",
-        "Streams\/left": "{{&call 'avatar.displayName'}} fágtha",
-        "Streams\/chat\/message": "💬 dúirt {{&call 'avatar.displayName'}} : {{& message.content}}",
+        "*": "Teachtaireacht {{{ message.fields.type}} go {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} isteach",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} fágtha",
+        "Streams\/chat\/message": "💬 dúirt {{{call 'avatar.displayName'}} : {{& message.content}}}",
         "Streams\/changed": "Athruithe i {{stream.fields.title}}",
-        "Streams\/invite": "Tugadh cuireadh duit chuig {{& stream.fields.title}}",
-        "Streams\/announcement": "Fógra i {{& stream.fields.title}}",
-        "Streams\/access": "D’athraigh {{&call 'avatar.displayName'}} rochtain i {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Cuireadh an teachtaireacht chomhrá in eagar sa {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Baineadh an teachtaireacht chomhrá i {{& stream.fields.title}}",
+        "Streams\/invite": "Tugadh cuireadh duit chuig {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Fógra i {{{ stream.fields.title}}}",
+        "Streams\/access": "D’athraigh {{{call 'avatar.displayName'}} rochtain i {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Cuireadh an teachtaireacht chomhrá in eagar sa {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Baineadh an teachtaireacht chomhrá i {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} dúnta",
         "Streams\/task\/progress": "Dul chun cinn déanta ar {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasc críochnaithe: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Cuireadh tús le Glao Nua i {{toTitle}}",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} nua i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
-        "Streams\/mention": "Luaigh {{&call 'avatar.displayName'}} tú i dtrácht",
+        "Streams\/mention": "Luaigh {{{call 'avatar.displayName'}}} tú i dtrácht",
         "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "trácht ar",
             "startedCallIn": "thosaigh glao isteach",
             "in": "isteach",
-            "body": "ag {{& url}} : {{& message.fields.content}}",
+            "body": "ag {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "curtha sa phost chuig",
                 "byAvatar": "faoi {{avatar.displayName}}"

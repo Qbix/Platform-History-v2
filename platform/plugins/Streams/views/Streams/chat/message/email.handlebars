@@ -1,7 +1,7 @@
 <h2>{{communityName}}</h2>
 <div style="font-weight: bold; font-size: 14px;">
-	{{& call "avatar.displayName"}}
-	<a href="{{&call "stream.url" message.fields.ordinal}}">
+	{{{ call "avatar.displayName"}}}
+	<a href="{{{call "stream.url" message.fields.ordinal}}}">
 		{{messages.text.commentedOn}} <em>'{{stream.fields.title}}'</em>
 	</a>:
 </div>

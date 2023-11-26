@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "管理您的电子邮件订阅",
         "IfUnsubscribe": "如果你想退订",
-        "*": "留言{{& message.fields.type}}至{{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}}加入",
-        "Streams\/left": "还剩{{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}说： {{& message.content}}",
+        "*": "留言{{{ message.fields.type}}至{{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}}加入",
+        "Streams\/left": "还剩{{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "{{{call 'avatar.displayName'}}说： {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}}的变化",
-        "Streams\/invite": "你被邀请到{{& stream.fields.title}}",
-        "Streams\/announcement": "{{& stream.fields.title}}公告",
-        "Streams\/access": "{{&call 'avatar.displayName'}}在{{& stream.fields.title}}中更改了访问权限",
-        "Streams\/chat\/edit": "{{& stream.fields.title}}编辑的聊天信息",
-        "Streams\/chat\/remove": "聊天消息在{{& stream.fields.title}}中删除",
+        "Streams\/invite": "你被邀请到{{{ stream.fields.title}}}",
+        "Streams\/announcement": "{{{ stream.fields.title}}}公告",
+        "Streams\/access": "{{{call 'avatar.displayName'}}在{{& stream.fields.title}}}中更改了访问权限",
+        "Streams\/chat\/edit": "{{{ stream.fields.title}}}编辑的聊天信息",
+        "Streams\/chat\/remove": "聊天消息在{{{ stream.fields.title}}}中删除",
         "Streams\/closed": "{{stream.fields.title}}已关闭",
         "Streams\/task\/progress": "{{stream.fields.title}}取得进展",
         "Streams\/task\/complete": "任务完成： {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}}开始的新呼叫",
         "Streams\/relatedTo\/*": "新品{{toTitle}}中的{{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "添加到{{toTitle}}为{{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}}在评论中提到了你",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}}在评论中提到了你",
         "Streams\/call": "{{displayName}}开始实时通话"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "评论了",
             "startedCallIn": "开始通话",
             "in": "在",
-            "body": "在{{& url}} : {{& message.fields.content}}",
+            "body": "在{{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "已发布到",
                 "byAvatar": "通过{{avatar.displayName}}"

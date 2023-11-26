@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",
         "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký",
-        "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} đã tham gia",
-        "Streams\/left": "còn {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} đã nói: {{& message.content}}",
+        "*": "Tin nhắn {{{ message.fields.type}} đến {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} đã tham gia",
+        "Streams\/left": "còn {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} đã nói: {{& message.content}}}",
         "Streams\/changed": "Những thay đổi trong {{stream.fields.title}}",
-        "Streams\/invite": "Bạn đã được mời đến {{& stream.fields.title}}",
-        "Streams\/announcement": "Thông báo năm {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} thay đổi quyền truy cập trong {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Tin nhắn chat sửa năm {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Đã xóa tin nhắn trò chuyện vào {{& stream.fields.title}}",
+        "Streams\/invite": "Bạn đã được mời đến {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Thông báo năm {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} thay đổi quyền truy cập trong {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Tin nhắn chat sửa năm {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Đã xóa tin nhắn trò chuyện vào {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} đã bị đóng",
         "Streams\/task\/progress": "Tiến độ thực hiện trên {{stream.fields.title}}",
         "Streams\/task\/complete": "Nhiệm vụ đã hoàn thành: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Cuộc gọi mới bắt đầu trong {{toTitle}}",
         "Streams\/relatedTo\/*": "Mới {{relationDisplayType}} trong {{toTitle}}",
         "Streams\/relatedFrom\/*": "Cộng với {{toTitle}} thành {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} đã đề cập đến bạn trong một bình luận",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} đã đề cập đến bạn trong một bình luận",
         "Streams\/call": "{{displayName}} bắt đầu cuộc gọi theo thời gian thực"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "Bình luận về",
             "startedCallIn": "bắt đầu một cuộc gọi trong",
             "in": "TRONG",
-            "body": "năm {{& url}} : {{& message.fields.content}}",
+            "body": "năm {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "đã được đăng lên",
                 "byAvatar": "bởi {{avatar.displayName}}"

@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "إدارة اشتراكات البريد الإلكتروني الخاص بك",
         "IfUnsubscribe": "إذا كنت تريد إلغاء الاشتراك",
-        "*": "أرسل {{& message.fields.type}} إلى {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} انضموا",
-        "Streams\/left": "بقي {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} قال: {{& message.content}}",
+        "*": "أرسل {{{ message.fields.type}} إلى {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} انضموا",
+        "Streams\/left": "بقي {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} قال: {{& message.content}}}",
         "Streams\/changed": "التغييرات في {{stream.fields.title}}",
-        "Streams\/invite": "تمت دعوتك إلى {{& stream.fields.title}}",
-        "Streams\/announcement": "اعلان عام {{& stream.fields.title}}",
-        "Streams\/access": "تم تغيير {{&call 'avatar.displayName'}} وصول في {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "تم تحرير رسالة الدردشة في {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "تمت إزالة رسالة الدردشة في {{& stream.fields.title}}",
+        "Streams\/invite": "تمت دعوتك إلى {{{ stream.fields.title}}}",
+        "Streams\/announcement": "اعلان عام {{{ stream.fields.title}}}",
+        "Streams\/access": "تم تغيير {{{call 'avatar.displayName'}} وصول في {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "تم تحرير رسالة الدردشة في {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "تمت إزالة رسالة الدردشة في {{{ stream.fields.title}}}",
         "Streams\/closed": "تم إغلاق {{stream.fields.title}}",
         "Streams\/task\/progress": "تم إحراز تقدم على {{stream.fields.title}}",
         "Streams\/task\/complete": "أنجزت المهمة: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "بدأت مكالمة جديدة في {{toTitle}}",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} جديد في {{toTitle}}",
         "Streams\/relatedFrom\/*": "يضاف إلى {{toTitle}} كـ {{relationDisplayType}}",
-        "Streams\/mention": "ذكرك {{&call 'avatar.displayName'}} في تعليق",
+        "Streams\/mention": "ذكرك {{{call 'avatar.displayName'}}} في تعليق",
         "Streams\/call": "{{displayName}} بدأ مكالمة في الوقت الفعلي"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "علق على",
             "startedCallIn": "بدأ مكالمة في",
             "in": "في",
-            "body": "في {{& url}} : {{& message.fields.content}}",
+            "body": "في {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "تم نشره إلى",
                 "byAvatar": "بحلول {{avatar.displayName}}"

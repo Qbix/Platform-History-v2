@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "hantera dina e-postprenumerationer",
         "IfUnsubscribe": "Om du vill avsluta prenumerationen",
-        "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} anslöt sig",
-        "Streams\/left": "{{&call 'avatar.displayName'}} kvar",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sa: {{& message.content}}",
+        "*": "Meddelande {{{ message.fields.type}} till {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} anslöt sig",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} kvar",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} sa: {{& message.content}}}",
         "Streams\/changed": "Ändringar i {{stream.fields.title}}",
-        "Streams\/invite": "Du blev inbjuden till {{& stream.fields.title}}",
-        "Streams\/announcement": "Tillkännagivande {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ändrade åtkomst i {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chattmeddelande redigerat {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chattmeddelandet togs bort {{& stream.fields.title}}",
+        "Streams\/invite": "Du blev inbjuden till {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Tillkännagivande {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} ändrade åtkomst i {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Chattmeddelande redigerat {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Chattmeddelandet togs bort {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} har stängts",
         "Streams\/task\/progress": "Framsteg gjordes på {{stream.fields.title}}",
         "Streams\/task\/complete": "Uppgift genomförd: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nytt samtal startade {{toTitle}}",
         "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lades till {{toTitle}} som {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} nämnde dig i en kommentar",
         "Streams\/call": "{{displayName}} startade ett realtidssamtal"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "kommenterade",
             "startedCallIn": "startade ett samtal",
             "in": "i",
-            "body": "i {{& url}} : {{& message.fields.content}}",
+            "body": "i {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "har postats till",
                 "byAvatar": "med {{avatar.displayName}}"

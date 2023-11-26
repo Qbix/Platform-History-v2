@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "administrere dine e-mail-abonnementer",
         "IfUnsubscribe": "Hvis du vil afmelde",
-        "*": "Besked {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} tiltrådte",
-        "Streams\/left": "{{&call 'avatar.displayName'}} tilbage",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sagde: {{& message.content}}",
+        "*": "Besked {{{ message.fields.type}} til {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} tiltrådte",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} tilbage",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} sagde: {{& message.content}}}",
         "Streams\/changed": "Ændringer i {{stream.fields.title}}",
-        "Streams\/invite": "Du blev inviteret til {{& stream.fields.title}}",
-        "Streams\/announcement": "Annoncering i {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ændrede adgang i {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chatbesked redigeret i {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chatbeskeden blev fjernet i {{& stream.fields.title}}",
+        "Streams\/invite": "Du blev inviteret til {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Annoncering i {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} ændrede adgang i {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Chatbesked redigeret i {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Chatbeskeden blev fjernet i {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} er blevet lukket",
         "Streams\/task\/progress": "Fremskridt i {{stream.fields.title}}",
         "Streams\/task\/complete": "Udførte opgave: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nyt opkald startede i {{toTitle}}",
         "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Tilføjet til {{toTitle}} som {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} nævnte dig i en kommentar",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} nævnte dig i en kommentar",
         "Streams\/call": "{{displayName}} startede et opkald i realtid"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "kommenterede",
             "startedCallIn": "startede et opkald",
             "in": "i",
-            "body": "i {{& url}} : {{& message.fields.content}}",
+            "body": "i {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "er blevet sendt til",
                 "byAvatar": "med {{avatar.displayName}}"

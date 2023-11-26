@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "rheoli eich tanysgrifiadau e-bost",
         "IfUnsubscribe": "Os ydych am ddad-danysgrifio",
-        "*": "Anfon neges at {{& message.fields.type}} i {{& stream.fields.title}}",
-        "Streams\/joined": "Ymunodd {{&call 'avatar.displayName'}}",
-        "Streams\/left": "{{&call 'avatar.displayName'}} ar ôl",
-        "Streams\/chat\/message": "Dywedodd 💬 {{&call 'avatar.displayName'}} : {{& message.content}}",
+        "*": "Anfon neges at {{{ message.fields.type}} i {{& stream.fields.title}}}",
+        "Streams\/joined": "Ymunodd {{{call 'avatar.displayName'}}}",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} ar ôl",
+        "Streams\/chat\/message": "Dywedodd 💬 {{{call 'avatar.displayName'}} : {{& message.content}}}",
         "Streams\/changed": "Newidiadau yn {{stream.fields.title}}",
-        "Streams\/invite": "Fe&#39;ch gwahoddwyd i {{& stream.fields.title}}",
-        "Streams\/announcement": "Cyhoeddiad yn {{& stream.fields.title}}",
-        "Streams\/access": "Newidiodd {{&call 'avatar.displayName'}} fynediad yn {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Neges sgwrsio wedi&#39;i golygu yn {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Neges sgwrsio wedi&#39;i thynnu yn {{& stream.fields.title}}",
+        "Streams\/invite": "Fe&#39;ch gwahoddwyd i {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Cyhoeddiad yn {{{ stream.fields.title}}}",
+        "Streams\/access": "Newidiodd {{{call 'avatar.displayName'}} fynediad yn {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Neges sgwrsio wedi&#39;i golygu yn {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Neges sgwrsio wedi&#39;i thynnu yn {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} wedi cau",
         "Streams\/task\/progress": "Cynnydd a wnaed ar {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasg a gwblhawyd: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Dechreuwyd Galwad Newydd yn {{toTitle}}",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} newydd mewn {{toTitle}}",
         "Streams\/relatedFrom\/*": "Wedi&#39;i ychwanegu at {{toTitle}} fel {{relationDisplayType}}",
-        "Streams\/mention": "Soniodd {{&call 'avatar.displayName'}} amdanoch chi mewn sylw",
+        "Streams\/mention": "Soniodd {{{call 'avatar.displayName'}}} amdanoch chi mewn sylw",
         "Streams\/call": "Dechreuodd {{displayName}} alwad amser real"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "sylwadau ar",
             "startedCallIn": "dechrau galwad i mewn",
             "in": "mewn",
-            "body": "yn {{& url}} : {{& message.fields.content}}",
+            "body": "yn {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "wedi ei bostio i",
                 "byAvatar": "erbyn {{avatar.displayName}}"

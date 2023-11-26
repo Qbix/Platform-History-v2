@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "e-poçt abunəliyinizi idarə edin",
         "IfUnsubscribe": "Abunəni ləğv etmək istəyirsinizsə",
-        "*": "{{& message.fields.type}} dan {{& stream.fields.title}} ə qədər mesaj göndərin",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} qoşulub",
-        "Streams\/left": "{{&call 'avatar.displayName'}} qalıb",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dedi: {{& message.content}}",
+        "*": "{{{ message.fields.type}} dan {{& stream.fields.title}}} ə qədər mesaj göndərin",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} qoşulub",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} qalıb",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} dedi: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} -da dəyişikliklər",
-        "Streams\/invite": "Siz {{& stream.fields.title}} a dəvət olundunuz",
-        "Streams\/announcement": "{{& stream.fields.title}} -da elan",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} də girişi dəyişdi",
-        "Streams\/chat\/edit": "{{& stream.fields.title}} ildə redaktə edilmiş söhbət mesajı",
-        "Streams\/chat\/remove": "Çat mesajı {{& stream.fields.title}} -da silindi",
+        "Streams\/invite": "Siz {{{ stream.fields.title}}} a dəvət olundunuz",
+        "Streams\/announcement": "{{{ stream.fields.title}}} -da elan",
+        "Streams\/access": "{{{call 'avatar.displayName'}} {{& stream.fields.title}}} də girişi dəyişdi",
+        "Streams\/chat\/edit": "{{{ stream.fields.title}}} ildə redaktə edilmiş söhbət mesajı",
+        "Streams\/chat\/remove": "Çat mesajı {{{ stream.fields.title}}} -da silindi",
         "Streams\/closed": "{{stream.fields.title}} bağlandı",
         "Streams\/task\/progress": "{{stream.fields.title}} da irəliləyiş əldə edildi",
         "Streams\/task\/complete": "Tapşırıq tamamlandı: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Yeni Zəng {{toTitle}} ildə başladı",
         "Streams\/relatedTo\/*": "Yeni {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} kimi əlavə edildi",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} şərhdə sizi qeyd etdi",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} şərhdə sizi qeyd etdi",
         "Streams\/call": "{{displayName}} real vaxt zəng etməyə başladı"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "şərh etdi",
             "startedCallIn": "daxil zəng etməyə başladı",
             "in": "in",
-            "body": "{{& url}} -da: {{& message.fields.content}}",
+            "body": "{{{ url}} -da: {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ünvanına yerləşdirilib",
                 "byAvatar": "{{avatar.displayName}} ilə"

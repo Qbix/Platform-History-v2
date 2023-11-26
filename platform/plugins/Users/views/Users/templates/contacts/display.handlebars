@@ -3,7 +3,7 @@
 	<tr>
 		<td>
 		    {{#ifEquals this.prefix "user"}}
-		        {{&tool "Users/avatar" userId=this.id icon=40 contents=false}}
+		        {{{tool "Users/avatar" userId=this.id icon=40 contents=false}}}
 		    {{else}}
 		        <i class='qp-communities-{{this.prefix}}'></i>
 		    {{/ifEquals }}

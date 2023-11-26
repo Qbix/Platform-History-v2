@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "이메일 구독 관리",
         "IfUnsubscribe": "구독을 취소하려면",
-        "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} 가입",
-        "Streams\/left": "{{&call 'avatar.displayName'}} 개 남음",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} 가 말했다: {{& message.content}}",
+        "*": "메시지 {{{ message.fields.type}} ~ {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} 가입",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} 개 남음",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} 가 말했다: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} 의 변화",
-        "Streams\/invite": "당신은 {{& stream.fields.title}} 에 초대되었습니다",
-        "Streams\/announcement": "{{& stream.fields.title}} 발표",
-        "Streams\/access": "{{& stream.fields.title}} 에 {{&call 'avatar.displayName'}} 액세스 권한을 변경했습니다.",
-        "Streams\/chat\/edit": "{{& stream.fields.title}} 에서 수정된 채팅 메시지",
-        "Streams\/chat\/remove": "{{& stream.fields.title}} 에서 삭제된 채팅 메시지",
+        "Streams\/invite": "당신은 {{{ stream.fields.title}}} 에 초대되었습니다",
+        "Streams\/announcement": "{{{ stream.fields.title}}} 발표",
+        "Streams\/access": "{{{ stream.fields.title}} 에 {{&call 'avatar.displayName'}}} 액세스 권한을 변경했습니다.",
+        "Streams\/chat\/edit": "{{{ stream.fields.title}}} 에서 수정된 채팅 메시지",
+        "Streams\/chat\/remove": "{{{ stream.fields.title}}} 에서 삭제된 채팅 메시지",
         "Streams\/closed": "{{stream.fields.title}} 가 마감되었습니다.",
         "Streams\/task\/progress": "{{stream.fields.title}} 에서 진행",
         "Streams\/task\/complete": "작업 완료: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}} 에 시작된 새로운 부름",
         "Streams\/relatedTo\/*": "새로운 {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} 에 {{relationDisplayType}} 으로 추가",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} 댓글에서 당신을 언급했습니다",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} 댓글에서 당신을 언급했습니다",
         "Streams\/call": "{{displayName}} 실시간 통화 시작"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "댓글을 달았습니다",
             "startedCallIn": "전화를 걸었다",
             "in": "~에",
-            "body": "{{& url}} : {{& message.fields.content}}",
+            "body": "{{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "에 게시되었습니다",
                 "byAvatar": "{{avatar.displayName}} 까지"

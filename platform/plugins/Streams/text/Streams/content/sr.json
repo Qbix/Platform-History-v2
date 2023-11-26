@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "управљајте својим претплатама на е-пошту",
         "IfUnsubscribe": "Ако желите да се одјавите",
-        "*": "Порука {{& message.fields.type}} до {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} се придружило",
-        "Streams\/left": "{{&call 'avatar.displayName'}} остало",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} је рекао: {{& message.content}}",
+        "*": "Порука {{{ message.fields.type}} до {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} се придружило",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} остало",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} је рекао: {{& message.content}}}",
         "Streams\/changed": "Промене {{stream.fields.title}} године",
-        "Streams\/invite": "Позвани сте на {{& stream.fields.title}}",
-        "Streams\/announcement": "Саопштење {{& stream.fields.title}} године",
-        "Streams\/access": "{{&call 'avatar.displayName'}} је променио приступ {{& stream.fields.title}} године",
-        "Streams\/chat\/edit": "Порука за ћаскање измењена {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Порука ћаскања је уклоњена {{& stream.fields.title}}",
+        "Streams\/invite": "Позвани сте на {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Саопштење {{{ stream.fields.title}}} године",
+        "Streams\/access": "{{{call 'avatar.displayName'}} је променио приступ {{& stream.fields.title}}} године",
+        "Streams\/chat\/edit": "Порука за ћаскање измењена {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Порука ћаскања је уклоњена {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} је затворен",
         "Streams\/task\/progress": "Напредак остварен на {{stream.fields.title}}",
         "Streams\/task\/complete": "Извршен задатак: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Нови позив је почео {{toTitle}}",
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додато на {{toTitle}} као {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} вас је споменуо у коментару",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} вас је споменуо у коментару",
         "Streams\/call": "{{displayName}} је започео позив у реалном времену"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "коментарисао",
             "startedCallIn": "започео позив",
             "in": "ин",
-            "body": "у {{& url}} : {{& message.fields.content}}",
+            "body": "у {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "је објављено на",
                 "byAvatar": "до {{avatar.displayName}}"

@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "ನಿಮ್ಮ ಇಮೇಲ್ ಚಂದಾದಾರಿಕೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
         "IfUnsubscribe": "ನೀವು ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡಲು ಬಯಸಿದರೆ",
-        "*": "ಸಂದೇಶ {{& message.fields.type}} ರಿಂದ {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} ಸೇರಿದ್ದಾರೆ",
-        "Streams\/left": "{{&call 'avatar.displayName'}} ಉಳಿದಿದೆ",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ಹೇಳಿದರು: {{& message.content}}",
+        "*": "ಸಂದೇಶ {{{ message.fields.type}} ರಿಂದ {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} ಸೇರಿದ್ದಾರೆ",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} ಉಳಿದಿದೆ",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} ಹೇಳಿದರು: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} ರಲ್ಲಿ ಬದಲಾವಣೆಗಳು",
-        "Streams\/invite": "ನಿಮ್ಮನ್ನು {{& stream.fields.title}} ಗೆ ಆಹ್ವಾನಿಸಲಾಗಿದೆ",
-        "Streams\/announcement": "{{& stream.fields.title}} ರಲ್ಲಿ ಪ್ರಕಟಣೆ",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} ರಲ್ಲಿ ಪ್ರವೇಶವನ್ನು ಬದಲಾಯಿಸಿತು",
-        "Streams\/chat\/edit": "ಚಾಟ್ ಸಂದೇಶವನ್ನು {{& stream.fields.title}} ರಲ್ಲಿ ಸಂಪಾದಿಸಲಾಗಿದೆ",
-        "Streams\/chat\/remove": "{{& stream.fields.title}} ರಲ್ಲಿ ಚಾಟ್ ಸಂದೇಶವನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ",
+        "Streams\/invite": "ನಿಮ್ಮನ್ನು {{{ stream.fields.title}}} ಗೆ ಆಹ್ವಾನಿಸಲಾಗಿದೆ",
+        "Streams\/announcement": "{{{ stream.fields.title}}} ರಲ್ಲಿ ಪ್ರಕಟಣೆ",
+        "Streams\/access": "{{{call 'avatar.displayName'}} {{& stream.fields.title}}} ರಲ್ಲಿ ಪ್ರವೇಶವನ್ನು ಬದಲಾಯಿಸಿತು",
+        "Streams\/chat\/edit": "ಚಾಟ್ ಸಂದೇಶವನ್ನು {{{ stream.fields.title}}} ರಲ್ಲಿ ಸಂಪಾದಿಸಲಾಗಿದೆ",
+        "Streams\/chat\/remove": "{{{ stream.fields.title}}} ರಲ್ಲಿ ಚಾಟ್ ಸಂದೇಶವನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ",
         "Streams\/closed": "{{stream.fields.title}} ಮುಚ್ಚಲಾಗಿದೆ",
         "Streams\/task\/progress": "{{stream.fields.title}} ರಲ್ಲಿ ಪ್ರಗತಿ ಸಾಧಿಸಲಾಗಿದೆ",
         "Streams\/task\/complete": "ಕಾರ್ಯ ಪೂರ್ಣಗೊಂಡಿದೆ: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}} ರಲ್ಲಿ ಹೊಸ ಕರೆ ಪ್ರಾರಂಭವಾಯಿತು",
         "Streams\/relatedTo\/*": "{{toTitle}} ರಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} ಕ್ಕೆ {{relationDisplayType}} ಎಂದು ಸೇರಿಸಲಾಗಿದೆ",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ನಿಮ್ಮನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದಾರೆ",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ನಿಮ್ಮನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದಾರೆ",
         "Streams\/call": "{{displayName}} ನೈಜ-ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "ಕಾಮೆಂಟ್ ಮಾಡಿದ್ದಾರೆ",
             "startedCallIn": "ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದರು",
             "in": "ಒಳಗೆ",
-            "body": "{{& url}} : {{& message.fields.content}} ರಲ್ಲಿ",
+            "body": "{{{ url}} : {{& message.fields.content}}} ರಲ್ಲಿ",
             "relatedFrom": {
                 "hasBeenPostedTo": "ಗೆ ಪೋಸ್ಟ್ ಮಾಡಲಾಗಿದೆ",
                 "byAvatar": "{{avatar.displayName}} ಮೂಲಕ"

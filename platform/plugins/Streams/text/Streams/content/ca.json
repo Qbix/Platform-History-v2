@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "gestionar les vostres subscripcions de correu electrònic",
         "IfUnsubscribe": "Si vols donar-te de baixa",
-        "*": "Missatge {{& message.fields.type}} al {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} s&#39;han unit",
-        "Streams\/left": "Queden {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} va dir: {{& message.content}}",
+        "*": "Missatge {{{ message.fields.type}} al {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} s&#39;han unit",
+        "Streams\/left": "Queden {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} va dir: {{& message.content}}}",
         "Streams\/changed": "Canvis en {{stream.fields.title}}",
-        "Streams\/invite": "Et van convidar al {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunci l&#39;any {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} va canviar l&#39;accés el {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Missatge de xat editat el {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "El missatge de xat s&#39;ha eliminat el {{& stream.fields.title}}",
+        "Streams\/invite": "Et van convidar al {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Anunci l&#39;any {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} va canviar l&#39;accés el {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Missatge de xat editat el {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "El missatge de xat s&#39;ha eliminat el {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} ha estat tancat",
         "Streams\/task\/progress": "Avenços realitzats el {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasca completada: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nova convocatòria iniciada l&#39;any {{toTitle}}",
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "S&#39;ha afegit a {{toTitle}} com a {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} t&#39;ha esmentat en un comentari",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} t&#39;ha esmentat en un comentari",
         "Streams\/call": "{{displayName}} va iniciar una trucada en temps real"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "comentat",
             "startedCallIn": "va iniciar una trucada",
             "in": "en",
-            "body": "en {{& url}} : {{& message.fields.content}}",
+            "body": "en {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "s&#39;ha publicat a",
                 "byAvatar": "pel {{avatar.displayName}}"

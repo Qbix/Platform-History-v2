@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "მართეთ თქვენი ელ.ფოსტის გამოწერები",
         "IfUnsubscribe": "თუ გსურთ გამოწერის გაუქმება",
-        "*": "გაგზავნეთ {{& message.fields.type}} დან {{& stream.fields.title}} მდე",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} შემოუერთდა",
-        "Streams\/left": "დარჩა {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} თქვა: {{& message.content}}",
+        "*": "გაგზავნეთ {{{ message.fields.type}} დან {{& stream.fields.title}}} მდე",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} შემოუერთდა",
+        "Streams\/left": "დარჩა {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} თქვა: {{& message.content}}}",
         "Streams\/changed": "ცვლილებები {{stream.fields.title}} წელს",
-        "Streams\/invite": "{{& stream.fields.title}} ში მიგიწვიეს",
-        "Streams\/announcement": "განცხადება {{& stream.fields.title}} წელს",
-        "Streams\/access": "{{&call 'avatar.displayName'}} შეცვალა წვდომა {{& stream.fields.title}} წელს",
-        "Streams\/chat\/edit": "ჩატის შეტყობინება რედაქტირებულია {{& stream.fields.title}} წელს",
-        "Streams\/chat\/remove": "ჩატის შეტყობინება წაიშალა {{& stream.fields.title}} წელს",
+        "Streams\/invite": "{{{ stream.fields.title}}} ში მიგიწვიეს",
+        "Streams\/announcement": "განცხადება {{{ stream.fields.title}}} წელს",
+        "Streams\/access": "{{{call 'avatar.displayName'}} შეცვალა წვდომა {{& stream.fields.title}}} წელს",
+        "Streams\/chat\/edit": "ჩატის შეტყობინება რედაქტირებულია {{{ stream.fields.title}}} წელს",
+        "Streams\/chat\/remove": "ჩატის შეტყობინება წაიშალა {{{ stream.fields.title}}} წელს",
         "Streams\/closed": "{{stream.fields.title}} დაიხურა",
         "Streams\/task\/progress": "პროგრესი მიღწეულია {{stream.fields.title}} წელს",
         "Streams\/task\/complete": "დავალება შესრულებული: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "ახალი ზარი დაიწყო {{toTitle}} წელს",
         "Streams\/relatedTo\/*": "ახალი {{relationDisplayType}} {{toTitle}} -ში",
         "Streams\/relatedFrom\/*": "დაემატა {{toTitle}} {{relationDisplayType}} -ს",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} მოგახსენეთ კომენტარში",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} მოგახსენეთ კომენტარში",
         "Streams\/call": "{{displayName}} დაიწყო რეალურ დროში ზარი"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "დააკომენტარა",
             "startedCallIn": "დაიწყო ზარი",
             "in": "in",
-            "body": "{{& url}} წელს: {{& message.fields.content}}",
+            "body": "{{{ url}} წელს: {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "გამოქვეყნებულია",
                 "byAvatar": "{{avatar.displayName}} -ით"

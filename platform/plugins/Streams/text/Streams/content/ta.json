@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "உங்கள் மின்னஞ்சல் சந்தாக்களை நிர்வகிக்கவும்",
         "IfUnsubscribe": "நீங்கள் குழுவிலக விரும்பினால்",
-        "*": "செய்தி {{& message.fields.type}} க்கு {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} சேர்ந்தார்",
-        "Streams\/left": "{{&call 'avatar.displayName'}} மீதமுள்ளது",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} கூறியது: {{& message.content}}",
+        "*": "செய்தி {{{ message.fields.type}} க்கு {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} சேர்ந்தார்",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} மீதமுள்ளது",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} கூறியது: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} இல் மாற்றங்கள்",
-        "Streams\/invite": "நீங்கள் {{& stream.fields.title}} க்கு அழைக்கப்பட்டுள்ளீர்கள்",
-        "Streams\/announcement": "{{& stream.fields.title}} இல் அறிவிப்பு",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} இல் அணுகலை மாற்றியது",
-        "Streams\/chat\/edit": "அரட்டை செய்தி {{& stream.fields.title}} இல் திருத்தப்பட்டது",
-        "Streams\/chat\/remove": "{{& stream.fields.title}} இல் அரட்டை செய்தி அகற்றப்பட்டது",
+        "Streams\/invite": "நீங்கள் {{{ stream.fields.title}}} க்கு அழைக்கப்பட்டுள்ளீர்கள்",
+        "Streams\/announcement": "{{{ stream.fields.title}}} இல் அறிவிப்பு",
+        "Streams\/access": "{{{call 'avatar.displayName'}} {{& stream.fields.title}}} இல் அணுகலை மாற்றியது",
+        "Streams\/chat\/edit": "அரட்டை செய்தி {{{ stream.fields.title}}} இல் திருத்தப்பட்டது",
+        "Streams\/chat\/remove": "{{{ stream.fields.title}}} இல் அரட்டை செய்தி அகற்றப்பட்டது",
         "Streams\/closed": "{{stream.fields.title}} மூடப்பட்டுள்ளது",
         "Streams\/task\/progress": "{{stream.fields.title}} இல் முன்னேற்றம் ஏற்பட்டது",
         "Streams\/task\/complete": "பணி முடிந்தது: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "புதிய அழைப்பு {{toTitle}} இல் தொடங்கியது",
         "Streams\/relatedTo\/*": "{{toTitle}} இல் புதிய {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} உடன் {{relationDisplayType}} ஆக சேர்க்கப்பட்டது",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ஒரு கருத்தில் உங்களைக் குறிப்பிட்டுள்ளார்",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} ஒரு கருத்தில் உங்களைக் குறிப்பிட்டுள்ளார்",
         "Streams\/call": "{{displayName}} நிகழ்நேர அழைப்பைத் தொடங்கியது"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "கருத்துரைத்தார்",
             "startedCallIn": "ஒரு அழைப்பைத் தொடங்கினார்",
             "in": "உள்ளே",
-            "body": "{{& url}} : {{& message.fields.content}} இல்",
+            "body": "{{{ url}} : {{& message.fields.content}}} இல்",
             "relatedFrom": {
                 "hasBeenPostedTo": "க்கு இடுகையிடப்பட்டுள்ளது",
                 "byAvatar": "{{avatar.displayName}} மூலம்"

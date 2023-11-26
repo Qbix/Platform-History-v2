@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "upravljati svojim pretplatama na e-poštu",
         "IfUnsubscribe": "Ako želite odjaviti pretplatu",
-        "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} se pridružilo",
-        "Streams\/left": "{{&call 'avatar.displayName'}} ostalo",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} je rekao: {{& message.content}}",
+        "*": "Poruka {{{ message.fields.type}} do {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} se pridružilo",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} ostalo",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} je rekao: {{& message.content}}}",
         "Streams\/changed": "Promjene u {{stream.fields.title}}",
-        "Streams\/invite": "Pozvani ste na {{& stream.fields.title}}",
-        "Streams\/announcement": "Objava {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} promijenio pristup u {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Poruka u chatu uređena {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Poruka chata uklonjena {{& stream.fields.title}}",
+        "Streams\/invite": "Pozvani ste na {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Objava {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} promijenio pristup u {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Poruka u chatu uređena {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Poruka chata uklonjena {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} je zatvoren",
         "Streams\/task\/progress": "Napredak ostvaren {{stream.fields.title}}",
         "Streams\/task\/complete": "Zadatak obavljen: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Novi poziv započeo je {{toTitle}}",
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} u {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano {{toTitle}} kao {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} vas je spomenuo u komentaru",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} vas je spomenuo u komentaru",
         "Streams\/call": "{{displayName}} je započeo poziv u stvarnom vremenu"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "komentirao na",
             "startedCallIn": "započeo je poziv",
             "in": "u",
-            "body": "godine {{& url}} : {{& message.fields.content}}",
+            "body": "godine {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "je objavljen na",
                 "byAvatar": "do {{avatar.displayName}}"

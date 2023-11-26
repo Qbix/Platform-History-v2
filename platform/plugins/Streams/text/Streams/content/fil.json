@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "pamahalaan ang iyong mga subscription sa email",
         "IfUnsubscribe": "Kung gusto mong mag-unsubscribe",
-        "*": "Mensahe {{& message.fields.type}} hanggang {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} ang sumali",
-        "Streams\/left": "{{&call 'avatar.displayName'}} ang natitira",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ang nagsabi: {{& message.content}}",
+        "*": "Mensahe {{{ message.fields.type}} hanggang {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} ang sumali",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} ang natitira",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} ang nagsabi: {{& message.content}}}",
         "Streams\/changed": "Mga pagbabago noong {{stream.fields.title}}",
-        "Streams\/invite": "Inimbitahan ka sa {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunsyo noong {{& stream.fields.title}}",
-        "Streams\/access": "Binago {{&call 'avatar.displayName'}} ang access noong {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Na-edit ang mensahe ng chat noong {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Inalis ang mensahe sa chat noong {{& stream.fields.title}}",
+        "Streams\/invite": "Inimbitahan ka sa {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Anunsyo noong {{{ stream.fields.title}}}",
+        "Streams\/access": "Binago {{{call 'avatar.displayName'}} ang access noong {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Na-edit ang mensahe ng chat noong {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Inalis ang mensahe sa chat noong {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} ay sarado na",
         "Streams\/task\/progress": "Nagawa ang pag-unlad noong {{stream.fields.title}}",
         "Streams\/task\/complete": "Nakumpleto ang gawain: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nagsimula ang Bagong Tawag noong {{toTitle}}",
         "Streams\/relatedTo\/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}",
-        "Streams\/mention": "Binanggit ka {{&call 'avatar.displayName'}} sa isang komento",
+        "Streams\/mention": "Binanggit ka {{{call 'avatar.displayName'}}} sa isang komento",
         "Streams\/call": "Nagsimula ang {{displayName}} ng isang real-time na tawag"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "nagkomento sa",
             "startedCallIn": "nagsimula ng tawag",
             "in": "sa",
-            "body": "noong {{& url}} : {{& message.fields.content}}",
+            "body": "noong {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ay nai-post sa",
                 "byAvatar": "pagsapit ng {{avatar.displayName}}"

@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "メール購読を管理する",
         "IfUnsubscribe": "退会したい場合",
-        "*": "メッセージ{{& message.fields.type}} ～ {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}}が参加",
-        "Streams\/left": "{{&call 'avatar.displayName'}}残り",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}}が言った: {{& message.content}}",
+        "*": "メッセージ{{{ message.fields.type}} ～ {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}}が参加",
+        "Streams\/left": "{{{call 'avatar.displayName'}}}残り",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}}が言った: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}}の変化",
-        "Streams\/invite": "{{& stream.fields.title}}に招待されました",
-        "Streams\/announcement": "{{& stream.fields.title}}発表",
-        "Streams\/access": "{{& stream.fields.title}}に{{&call 'avatar.displayName'}}のアクセスが変更されました",
-        "Streams\/chat\/edit": "{{& stream.fields.title}}で編集されたチャットメッセージ",
-        "Streams\/chat\/remove": "チャット メッセージは{{& stream.fields.title}}で削除されました",
+        "Streams\/invite": "{{{ stream.fields.title}}}に招待されました",
+        "Streams\/announcement": "{{{ stream.fields.title}}}発表",
+        "Streams\/access": "{{{ stream.fields.title}}に{{&call 'avatar.displayName'}}}のアクセスが変更されました",
+        "Streams\/chat\/edit": "{{{ stream.fields.title}}}で編集されたチャットメッセージ",
+        "Streams\/chat\/remove": "チャット メッセージは{{{ stream.fields.title}}}で削除されました",
         "Streams\/closed": "{{stream.fields.title}}閉鎖されました",
         "Streams\/task\/progress": "{{stream.fields.title}}の進捗",
         "Streams\/task\/complete": "タスク完了: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}}に開始された新しい通話",
         "Streams\/relatedTo\/*": "{{toTitle}}の新しい{{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}}として{{toTitle}}に追加",
-        "Streams\/mention": "{{&call 'avatar.displayName'}}がコメントであなたをメンションしました",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}}がコメントであなたをメンションしました",
         "Streams\/call": "{{displayName}}リアルタイム通話を開始しました"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "コメントした",
             "startedCallIn": "で通話を開始しました",
             "in": "の",
-            "body": "{{& url}} ： {{& message.fields.content}}",
+            "body": "{{{ url}} ： {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "に投稿されました",
                 "byAvatar": "{{avatar.displayName}}まで"

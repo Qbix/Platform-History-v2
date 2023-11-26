@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "તમારા ઇમેઇલ સબ્સ્ક્રિપ્શન્સનું સંચાલન કરો",
         "IfUnsubscribe": "જો તમે અનસબ્સ્ક્રાઇબ કરવા માંગો છો",
-        "*": "{{& message.fields.type}} થી {{& stream.fields.title}} પર મેસેજ કરો",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} જોડાયા હતા",
-        "Streams\/left": "{{&call 'avatar.displayName'}} બાકી",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} એ કહ્યું: {{& message.content}}",
+        "*": "{{{ message.fields.type}} થી {{& stream.fields.title}}} પર મેસેજ કરો",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} જોડાયા હતા",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} બાકી",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} એ કહ્યું: {{& message.content}}}",
         "Streams\/changed": "{{stream.fields.title}} માં ફેરફારો",
-        "Streams\/invite": "તમને {{& stream.fields.title}} પર આમંત્રિત કરવામાં આવ્યા હતા",
-        "Streams\/announcement": "{{& stream.fields.title}} માં જાહેરાત",
-        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} માં એક્સેસ બદલ્યો",
-        "Streams\/chat\/edit": "ચેટ સંદેશ {{& stream.fields.title}} માં સંપાદિત",
-        "Streams\/chat\/remove": "{{& stream.fields.title}} માં ચેટ સંદેશ દૂર કરવામાં આવ્યો",
+        "Streams\/invite": "તમને {{{ stream.fields.title}}} પર આમંત્રિત કરવામાં આવ્યા હતા",
+        "Streams\/announcement": "{{{ stream.fields.title}}} માં જાહેરાત",
+        "Streams\/access": "{{{call 'avatar.displayName'}} {{& stream.fields.title}}} માં એક્સેસ બદલ્યો",
+        "Streams\/chat\/edit": "ચેટ સંદેશ {{{ stream.fields.title}}} માં સંપાદિત",
+        "Streams\/chat\/remove": "{{{ stream.fields.title}}} માં ચેટ સંદેશ દૂર કરવામાં આવ્યો",
         "Streams\/closed": "{{stream.fields.title}} બંધ કરવામાં આવ્યો છે",
         "Streams\/task\/progress": "{{stream.fields.title}} પર પ્રગતિ થઈ",
         "Streams\/task\/complete": "કાર્ય પૂર્ણ થયું: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "નવો કૉલ {{toTitle}} માં શરૂ થયો",
         "Streams\/relatedTo\/*": "{{toTitle}} માં નવું {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}} તરીકે {{toTitle}} માં ઉમેર્યું",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} એ ટિપ્પણીમાં તમારો ઉલ્લેખ કર્યો છે",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} એ ટિપ્પણીમાં તમારો ઉલ્લેખ કર્યો છે",
         "Streams\/call": "{{displayName}} એ રીઅલ-ટાઇમ કૉલ શરૂ કર્યો"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "પર ટિપ્પણી કરી",
             "startedCallIn": "માં કોલ શરૂ કર્યો",
             "in": "માં",
-            "body": "{{& url}} : {{& message.fields.content}} માં",
+            "body": "{{{ url}} : {{& message.fields.content}}} માં",
             "relatedFrom": {
                 "hasBeenPostedTo": "પર પોસ્ટ કરવામાં આવી છે",
                 "byAvatar": "{{avatar.displayName}} દ્વારા"

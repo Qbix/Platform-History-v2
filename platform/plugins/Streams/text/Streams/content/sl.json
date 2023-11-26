@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "upravljajte svoje naročnine na e-pošto",
         "IfUnsubscribe": "Če se želite odjaviti",
-        "*": "Sporočilo {{& message.fields.type}} do {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} se jih je pridružilo",
-        "Streams\/left": "{{&call 'avatar.displayName'}} ostalo",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} je rekel: {{& message.content}}",
+        "*": "Sporočilo {{{ message.fields.type}} do {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} se jih je pridružilo",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} ostalo",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} je rekel: {{& message.content}}}",
         "Streams\/changed": "Spremembe leta {{stream.fields.title}}",
-        "Streams\/invite": "Povabljeni ste bili na {{& stream.fields.title}}",
-        "Streams\/announcement": "Oznanilo leta {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} spremenilo dostop v {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Sporočilo klepeta urejeno leta {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Sporočilo v klepetu je bilo odstranjeno leta {{& stream.fields.title}}",
+        "Streams\/invite": "Povabljeni ste bili na {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Oznanilo leta {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} spremenilo dostop v {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Sporočilo klepeta urejeno leta {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Sporočilo v klepetu je bilo odstranjeno leta {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} je zaprt",
         "Streams\/task\/progress": "Napredek pri {{stream.fields.title}}",
         "Streams\/task\/complete": "Naloga opravljena: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nov klic se je začel leta {{toTitle}}",
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} v {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano k {{toTitle}} kot {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} vas je omenil v komentarju",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} vas je omenil v komentarju",
         "Streams\/call": "{{displayName}} je začel klic v realnem času"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "komentiral",
             "startedCallIn": "začel klic",
             "in": "v",
-            "body": "leta {{& url}} : {{& message.fields.content}}",
+            "body": "leta {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "je bil objavljen na",
                 "byAvatar": "z {{avatar.displayName}}"

@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "stjórna tölvupóstáskriftum þínum",
         "IfUnsubscribe": "Ef þú vilt segja upp áskrift",
-        "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} tóku þátt",
-        "Streams\/left": "{{&call 'avatar.displayName'}} eftir",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sögðu: {{& message.content}}",
+        "*": "Skilaboð {{{ message.fields.type}} til {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} tóku þátt",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} eftir",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} sögðu: {{& message.content}}}",
         "Streams\/changed": "Breytingar á {{stream.fields.title}}",
-        "Streams\/invite": "Þér var boðið í {{& stream.fields.title}}",
-        "Streams\/announcement": "Tilkynning í {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} breyttu aðgangi í {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Spjallskilaboðum breytt árið {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Spjallskilaboð fjarlægð árið {{& stream.fields.title}}",
+        "Streams\/invite": "Þér var boðið í {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Tilkynning í {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} breyttu aðgangi í {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Spjallskilaboðum breytt árið {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Spjallskilaboð fjarlægð árið {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} hefur verið lokað",
         "Streams\/task\/progress": "Framfarir á árinu {{stream.fields.title}}",
         "Streams\/task\/complete": "Verkefni lokið: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nýtt símtal byrjað árið {{toTitle}}",
         "Streams\/relatedTo\/*": "Nýtt {{relationDisplayType}} á {{toTitle}}",
         "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} minntist á þig í athugasemd",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} minntist á þig í athugasemd",
         "Streams\/call": "{{displayName}} hóf símtal í rauntíma"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "gerði athugasemd við",
             "startedCallIn": "byrjaði að hringja inn",
             "in": "inn",
-            "body": "í {{& url}} : {{& message.fields.content}}",
+            "body": "í {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "hefur verið sent til",
                 "byAvatar": "eftir {{avatar.displayName}}"

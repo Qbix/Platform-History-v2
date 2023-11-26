@@ -348,7 +348,7 @@ Q.Template.set('Assets/plan',
 	<div class="Assets_plan_period">{{text.subscriptions.Period}}: <span>{{period}}</span></div>
 	<div class="Assets_plan_price">{{text.subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount">{{price}}</span></div>
 	<div class="Assets_plan_started">{{text.subscriptions.Started}}: {{started}}</div>
-	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{&tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}</div>
+	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{{tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}}</div>
 	<div class="Assets_plan_related_streams"></div>
 	<button class="Q_button" name="unsubscribe">{{text.subscriptions.Unsubscribe}}</button>
 	<button class="Q_button" name="subscribe">{{text.subscriptions.Subscribe}}</button>`

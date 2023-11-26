@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "управлявайте имейл абонаментите си",
         "IfUnsubscribe": "Ако искате да се отпишете",
-        "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} се присъединиха",
-        "Streams\/left": "{{&call 'avatar.displayName'}} остават",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} каза: {{& message.content}}",
+        "*": "Съобщение {{{ message.fields.type}} до {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} се присъединиха",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} остават",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} каза: {{& message.content}}}",
         "Streams\/changed": "Промени в {{stream.fields.title}}",
-        "Streams\/invite": "Бяхте поканени на {{& stream.fields.title}}",
-        "Streams\/announcement": "Съобщение през {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} промени достъпа в {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Съобщението в чата е редактирано през {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Съобщението в чата е премахнато през {{& stream.fields.title}}",
+        "Streams\/invite": "Бяхте поканени на {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Съобщение през {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} промени достъпа в {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Съобщението в чата е редактирано през {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Съобщението в чата е премахнато през {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} е затворен",
         "Streams\/task\/progress": "Напредък, постигнат на {{stream.fields.title}}",
         "Streams\/task\/complete": "Изпълнена задача: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Ново обаждане започна през {{toTitle}}",
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Добавено към {{toTitle}} като {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ви споменаха в коментар",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} ви споменаха в коментар",
         "Streams\/call": "{{displayName}} започна обаждане в реално време"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "коментира",
             "startedCallIn": "започна обаждане",
             "in": "в",
-            "body": "през {{& url}} : {{& message.fields.content}}",
+            "body": "през {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "е публикуван в",
                 "byAvatar": "от {{avatar.displayName}}"

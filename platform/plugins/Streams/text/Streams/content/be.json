@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "кіраваць сваімі падпіскамі па электроннай пошце",
         "IfUnsubscribe": "Калі хочаце, адпішыцеся",
-        "*": "Паведамленне {{& message.fields.type}} па {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} далучыліся",
-        "Streams\/left": "{{&call 'avatar.displayName'}} засталося",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} сказалі: {{& message.content}}",
+        "*": "Паведамленне {{{ message.fields.type}} па {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} далучыліся",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} засталося",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} сказалі: {{& message.content}}}",
         "Streams\/changed": "Змены ў {{stream.fields.title}}",
-        "Streams\/invite": "Вас запрасілі ў {{& stream.fields.title}}",
-        "Streams\/announcement": "Аб&#39;ява ў {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} змяніў доступ у {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Паведамленне ў чаце адрэдагавана ў {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Паведамленне ў чаце выдалена ў {{& stream.fields.title}}",
+        "Streams\/invite": "Вас запрасілі ў {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Аб&#39;ява ў {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} змяніў доступ у {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Паведамленне ў чаце адрэдагавана ў {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Паведамленне ў чаце выдалена ў {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} закрыты",
         "Streams\/task\/progress": "Дасягнуты прагрэс на {{stream.fields.title}}",
         "Streams\/task\/complete": "Заданне выканана: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Новы выклік пачаўся ў {{toTitle}}",
         "Streams\/relatedTo\/*": "Новыя {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Дададзена да {{toTitle}} як {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} згадаў вас у каментарыі",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} згадаў вас у каментарыі",
         "Streams\/call": "{{displayName}} пачаў званок у рэжыме рэальнага часу"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "пракаментаваў",
             "startedCallIn": "пачаў тэлефанаваць",
             "in": "ст",
-            "body": "у {{& url}} : {{& message.fields.content}}",
+            "body": "у {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "быў размешчаны ў",
                 "byAvatar": "па {{avatar.displayName}}"

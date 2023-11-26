@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "tvarkyti savo el. pašto prenumeratas",
         "IfUnsubscribe": "Jei norite atsisakyti prenumeratos",
-        "*": "Žinutė {{& message.fields.type}} iki {{& stream.fields.title}}",
-        "Streams\/joined": "Prisijungė {{&call 'avatar.displayName'}}",
-        "Streams\/left": "Liko {{&call 'avatar.displayName'}}",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} pasakė: {{& message.content}}",
+        "*": "Žinutė {{{ message.fields.type}} iki {{& stream.fields.title}}}",
+        "Streams\/joined": "Prisijungė {{{call 'avatar.displayName'}}}",
+        "Streams\/left": "Liko {{{call 'avatar.displayName'}}}",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} pasakė: {{& message.content}}}",
         "Streams\/changed": "Pakeitimai {{stream.fields.title}} m",
-        "Streams\/invite": "Buvote pakviesti į {{& stream.fields.title}}",
-        "Streams\/announcement": "Skelbimas {{& stream.fields.title}} m",
-        "Streams\/access": "{{&call 'avatar.displayName'}} pakeitė prieigą {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Pokalbio pranešimas redaguotas {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Pokalbio pranešimas pašalintas {{& stream.fields.title}}",
+        "Streams\/invite": "Buvote pakviesti į {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Skelbimas {{{ stream.fields.title}}} m",
+        "Streams\/access": "{{{call 'avatar.displayName'}} pakeitė prieigą {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Pokalbio pranešimas redaguotas {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Pokalbio pranešimas pašalintas {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} buvo uždarytas",
         "Streams\/task\/progress": "Pažanga padaryta {{stream.fields.title}}",
         "Streams\/task\/complete": "Užduotis atlikta: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Naujas skambutis prasidėjo {{toTitle}}",
         "Streams\/relatedTo\/*": "Nauji {{relationDisplayType}} iš {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} paminėjo jus komentare",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} paminėjo jus komentare",
         "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "pakomentavo",
             "startedCallIn": "pradėjo skambinti",
             "in": "in",
-            "body": "{{& url}} : {{& message.fields.content}}",
+            "body": "{{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "buvo išsiųstas į",
                 "byAvatar": "iki {{avatar.displayName}}"

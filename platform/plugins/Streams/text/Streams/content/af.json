@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "bestuur jou e-posintekeninge",
         "IfUnsubscribe": "As jy wil uitteken",
-        "*": "Boodskap {{& message.fields.type}} tot {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} het aangesluit",
-        "Streams\/left": "{{&call 'avatar.displayName'}} oor",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} het gesê: {{& message.content}}",
+        "*": "Boodskap {{{ message.fields.type}} tot {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} het aangesluit",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} oor",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} het gesê: {{& message.content}}}",
         "Streams\/changed": "Die verandering in {{stream.fields.title}}",
-        "Streams\/invite": "Jy is genooi na {{& stream.fields.title}}",
-        "Streams\/announcement": "Aankondiging in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} het toegang in {{& stream.fields.title}} verander",
-        "Streams\/chat\/edit": "Kletsboodskap geredigeer in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Kletsboodskap verwyder in {{& stream.fields.title}}",
+        "Streams\/invite": "Jy is genooi na {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Aankondiging in {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} het toegang in {{& stream.fields.title}}} verander",
+        "Streams\/chat\/edit": "Kletsboodskap geredigeer in {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Kletsboodskap verwyder in {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} is gesluit",
         "Streams\/task\/progress": "Vordering gemaak op {{stream.fields.title}}",
         "Streams\/task\/complete": "Taak voltooi: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nuwe oproep het in {{toTitle}} begin",
         "Streams\/relatedTo\/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "By {{toTitle}} gevoeg as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} het jou in &#39;n opmerking genoem",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} het jou in &#39;n opmerking genoem",
         "Streams\/call": "{{displayName}} het &#39;n intydse oproep begin"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "kommentaar gelewer het",
             "startedCallIn": "begin &#39;n oproep in",
             "in": "in",
-            "body": "in {{& url}} : {{& message.fields.content}}",
+            "body": "in {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "gepos is aan",
                 "byAvatar": "teen {{avatar.displayName}}"

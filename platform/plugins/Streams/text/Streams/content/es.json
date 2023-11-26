@@ -64,16 +64,16 @@
     "notifications": {
         "ManageEmailSubscriptions": "administrar sus suscripciones de correo electrónico",
         "IfUnsubscribe": "Si quieres darte de baja",
-        "*": "Mensaje {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/joined": "{{&call 'avatar.displayName'}} se unió",
-        "Streams\/left": "{{&call 'avatar.displayName'}} izquierda",
-        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dijo: {{& message.content}}",
+        "*": "Mensaje {{{ message.fields.type}} a {{& stream.fields.title}}}",
+        "Streams\/joined": "{{{call 'avatar.displayName'}}} se unió",
+        "Streams\/left": "{{{call 'avatar.displayName'}}} izquierda",
+        "Streams\/chat\/message": "💬 {{{call 'avatar.displayName'}} dijo: {{& message.content}}}",
         "Streams\/changed": "Cambios en {{stream.fields.title}}",
-        "Streams\/invite": "Fuiste invitado a {{& stream.fields.title}}",
-        "Streams\/announcement": "Anuncio en {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} cambio de acceso en {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Mensaje de chat editado en {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Mensaje de chat eliminado en {{& stream.fields.title}}",
+        "Streams\/invite": "Fuiste invitado a {{{ stream.fields.title}}}",
+        "Streams\/announcement": "Anuncio en {{{ stream.fields.title}}}",
+        "Streams\/access": "{{{call 'avatar.displayName'}} cambio de acceso en {{& stream.fields.title}}}",
+        "Streams\/chat\/edit": "Mensaje de chat editado en {{{ stream.fields.title}}}",
+        "Streams\/chat\/remove": "Mensaje de chat eliminado en {{{ stream.fields.title}}}",
         "Streams\/closed": "{{stream.fields.title}} ha sido cerrado",
         "Streams\/task\/progress": "Progreso realizado en {{stream.fields.title}}",
         "Streams\/task\/complete": "Tarea completada: {{stream.fields.title}}",
@@ -82,7 +82,7 @@
         "Streams\/relatedTo\/Streams\/call": "Nueva llamada iniciada en {{toTitle}}",
         "Streams\/relatedTo\/*": "Nuevo {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agregado a {{toTitle}} como {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} te mencionó en un comentario",
+        "Streams\/mention": "{{{call 'avatar.displayName'}}} te mencionó en un comentario",
         "Streams\/call": "{{displayName}} inició una llamada en tiempo real"
     },
     "invite": {
@@ -168,7 +168,7 @@
             "commentedOn": "comentado",
             "startedCallIn": "comenzó una llamada en",
             "in": "en",
-            "body": "en {{& url}} : {{& message.fields.content}}",
+            "body": "en {{{ url}} : {{& message.fields.content}}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "ha sido publicado en",
                 "byAvatar": "por {{avatar.displayName}}"
