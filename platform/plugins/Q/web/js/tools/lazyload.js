@@ -190,7 +190,7 @@
 				entering: function (element, entry) {
 					var tool = this;
 					if (Q.Visual.intersection(element, tool.state.root)) {
-						return _load();
+						return _activate();
 					}
 					tool.timeout && clearTimeout(tool.timeout);
 					tool.timeout = setTimeout(function () {
