@@ -107,15 +107,14 @@ class   Q_Translate_Google {
 
 	private function replaceTagsByNumbers($data, $startNumber = 999) {
 		foreach ($data as $k => &$v) {
-			if (!preg_match_all("/{{(.*?)}}/", $v['value'], $matches)) {
+			if (!preg_match_all("/(?<=\{{)(?:.*?)(?!.\}})(?=}})/", $v['value'], $matches)) {
 				continue;
 			}
 			$j = 0;
 			foreach($matches[0] as $search) {
 				$index = $j + $startNumber;
 				$text = "<i translate='no'>$index</i>";
-				$v['value'] = str_replace($search, $text, $v['value']);
-				$v['value'];
+				$v['value'] = str_replace('{{'.$search.'}}', $text, $v['value']);
 				$j++;
 			}
 			$v['tags'] = $matches[0];
@@ -131,9 +130,7 @@ class   Q_Translate_Google {
 			$j = 0;
 			foreach($d['tags'] as $tag) {
 				$index = $j + $startNumber;
-				$text = "<i translate='no'>$index</i>";
-				$d['value'] = str_replace($text, $tag, $d['value']);
-				$d['value'] = str_replace($text, $tag, $d['value']);
+				$d['value'] = str_replace("<i translate='no'>$index</i>", '{{'.$tag.'}}', $d['value']);
 				$j++;
 			}
 		};
