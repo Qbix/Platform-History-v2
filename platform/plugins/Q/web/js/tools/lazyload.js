@@ -126,15 +126,18 @@
 			img: {
 				selector: 'img',
 				entering: function (img, entry) {
-					function _loaded() {
-						img.addClass('Q_lazy_loaded');
-					}
 					var tool = this;
+					if (Q.Visual.intersection(img, tool.state.root)) {
+						return _load();
+					}
 					tool.timeout && clearTimeout(tool.timeout);
 					tool.timeout = setTimeout(function () {
 						Q.handle(tool.onScrollingStopped, tool);
 					}, tool.state.waitUntilSlowerThan);
-					tool.onScrollingStopped.setOnce(function () {
+					tool.onScrollingStopped.setOnce(_load);
+					return true;
+
+					function _load() {
 						var src = img.getAttribute('data-lazyload-src');
 						if (!src) {
 							return;
@@ -152,8 +155,11 @@
 							}
 							img.addEventListener('load', _loaded);
 						}, 0);
-					});
-					return true;
+
+						function _loaded() {
+							img.addClass('Q_lazy_loaded');
+						}
+					}
 				},
 				exiting: function (img) {
 					return true; // no need to do anything else
@@ -183,27 +189,33 @@
 				selector: '.Q_tool',
 				entering: function (element, entry) {
 					var tool = this;
-					var ep = tool.frozen.get(element);
-					var c = element.parentElement;
-					if (!ep || !c) {
-						// element didn't exit before, so its dimensions weren't frozen
-					} else if (!this.state.dontFreezeDimensions) {
-						var r = c.getBoundingClientRect();
-						if (!ep.containerRect || ep.containerRect.width !== r.width) {
-							// container was resized, so throw away the frozen dimensions
-							// because a reflow should happen anyway
-							tool.unfreezeDimensions(element);
-						} else {
-							// inform tools that their element has frozen dimensions,
-							// so the tools may want to revert the frozen dimensions
-							element.addClass('Q_frozen_dimensions');
-						}
+					if (Q.Visual.intersection(img, tool.state.root)) {
+						return _load();
 					}
 					tool.timeout && clearTimeout(tool.timeout);
 					tool.timeout = setTimeout(function () {
 						Q.handle(tool.onScrollingStopped, tool);
 					}, tool.state.waitUntilSlowerThan);
-					tool.onScrollingStopped.setOnce(function () {
+					tool.onScrollingStopped.setOnce(_activate);
+					return true;
+					
+					function _activate() {
+						var ep = tool.frozen.get(element);
+						var c = element.parentElement;
+						if (!ep || !c) {
+							// element didn't exit before, so its dimensions weren't frozen
+						} else if (!tool.state.dontFreezeDimensions) {
+							var r = c.getBoundingClientRect();
+							if (!ep.containerRect || ep.containerRect.width !== r.width) {
+								// container width was resized, so throw away the frozen dimensions
+								// because a reflow should happen anyway
+								tool.unfreezeDimensions(element);
+							} else {
+								// inform tools that their element has frozen dimensions,
+								// so the tools may want to revert the frozen dimensions
+								element.addClass('Q_frozen_dimensions');
+							}
+						}
 						if (element.hasAttribute('data-q-lazyload')
 						&& (!element.Q || !element.Q.tool)) {
 							element.addClass('Q_lazy_load');
@@ -213,8 +225,7 @@
 								element.addClass('Q_lazy_loaded');
 							}, {lazyload: true});
 						}
-					});
-					return true;
+					}
 				},
 				exiting: function (element, entry) {
 					var tool = this;

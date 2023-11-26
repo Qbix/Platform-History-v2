@@ -12827,6 +12827,31 @@ function _Q_Pointer_start_end_handler (e) {
 Q.Visual = Q.Pointer = {
 
 	/**
+	 * Computes the intersection of two rectangles, if any.
+	 * Note that edge intersection may have 0 width or height.
+	 * @method intersection
+	 * @static
+	 * @param {Element|DOMRect} first 
+	 * @param {Element|DOMRect} second 
+	 * @return {DOMRect|null} The rectangle, or null if no intersection
+	 */
+	intersection: function (first, second) {
+		(first instanceof Element) && (first = first.getBoundingClientRect());
+		(second instanceof Element) && (second = second.getBoundingClientRect());
+		if (first.left > second.right || second.left > first.right
+		|| first.top > second.bottom || second.top > first.bottom) {
+			return null;
+		}
+		var x = Math.max(first.left, second.left);
+		var y = Math.max(first.top, second.top);
+		return new DOMRect(
+			x, y, 
+			Math.min(first.right, second.right) - x,
+			Math.max(first.bottom, second.bottom) - y
+		);
+	},
+
+	/**
 	 * @method awaitNaturalImageSize
 	 * @static
 	 * @param {Element} img 
