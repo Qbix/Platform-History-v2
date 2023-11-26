@@ -262,11 +262,11 @@
         {text: ['Assets/content']});
 
     Q.Template.set('Assets/NFT/collection/view',
-`{{&tool "Users/avatar" userId=stream.fields.publisherId icon=40}}
+`{{{tool "Users/avatar" userId=stream.fields.publisherId icon=40}}}
         <img class="Assets_NFT_collection_icon" />
         <div class="Assets_NFT_collection_info">
-            {{&tool "Streams/inplace" "title" field="title" inplaceType="text" editable=editable publisherId=stream.fields.publisherId streamName=stream.fields.name}}
-            {{&tool "Streams/inplace" "content" field="content" inplaceType="textarea" editable=editable publisherId=stream.fields.publisherId streamName=stream.fields.name}}
+            {{{tool "Streams/inplace" "title" field="title" inplaceType="text" editable=editable publisherId=stream.fields.publisherId streamName=stream.fields.name}}}
+            {{{tool "Streams/inplace" "content" field="content" inplaceType="textarea" editable=editable publisherId=stream.fields.publisherId streamName=stream.fields.name}}}
         </div>`,
         {text: ['Assets/content']}
     );

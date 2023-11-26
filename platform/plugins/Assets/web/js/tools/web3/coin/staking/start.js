@@ -374,7 +374,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12 Assets_web3_coin_staking_start_historyContainer">
-				{{&tool "Assets/web3/coin/staking/history" chainId=chainId communityCoinAddress=communityCoinAddress}}
+				{{{tool "Assets/web3/coin/staking/history" chainId=chainId communityCoinAddress=communityCoinAddress}}}
 			</div>
 		</div>
 	</div>

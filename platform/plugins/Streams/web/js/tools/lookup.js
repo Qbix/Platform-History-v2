@@ -152,7 +152,7 @@ Q.Template.set('Streams/lookup/tool',
 	+ '{{/each}}\n'
 	+ '</select>\n'
 	+ '{{/unless}}'
-	+ '{{&tool "Q/filter" ""}}'
+	+ '{{{tool "Q/filter" ""}}}'
 );
 
 })(Q, jQuery);

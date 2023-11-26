@@ -200,7 +200,7 @@ Q.Template.set('Assets/web3/balance',
 <div class="Assets_web3_balance_select"></div>`, {text: ['Assets/content']});
 
 Q.Template.set('Assets/web3/balance/credits',
-`{{credits.Credits}} {{&tool "Assets/credits/balance"}}`, {text: ['Assets/content']});
+`{{credits.Credits}} {{{tool "Assets/credits/balance"}}}`, {text: ['Assets/content']});
 
 Q.Template.set('Assets/web3/balance/select',
 `<select name="tokens" data-count="{{results.length}}">

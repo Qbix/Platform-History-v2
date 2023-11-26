@@ -309,7 +309,7 @@
     Q.Template.set('Assets/NFT/series/view',
 `<div class="Assets_NFT_series_icon"></div>
         <div class="Assets_NFT_series_info">
-            {{&tool "Streams/inplace" "title" field="title" inplaceType="text" editable=false publisherId=stream.fields.publisherId streamName=stream.fields.name}}
+            {{{tool "Streams/inplace" "title" field="title" inplaceType="text" editable=false publisherId=stream.fields.publisherId streamName=stream.fields.name}}}
         </div>`,
         {text: ['Assets/content']}
     );

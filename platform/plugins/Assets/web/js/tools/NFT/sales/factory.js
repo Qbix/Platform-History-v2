@@ -423,7 +423,7 @@ Q.Template.set("Assets/NFT/sales/factory",
                 <div class="col-sm-6">
                     <label>{{NFT.sales.factory.form.labels.currency}}</label>
                     <div class="form-group">
-                    {{&tool "Assets/web3/currencies" className="form-control" }}
+                    {{{tool "Assets/web3/currencies" className="form-control" }}}
                     </div>
                 </div>
             </div>

@@ -298,7 +298,7 @@ Q.Template.set("Assets/NFT/sales",
             <button class="Assets_sales_specialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
             
             <div class="form-group">
-                {{&tool "Assets/NFT/sales/whitelist" salesAddress=salesAddress abiPath=abiNFTSales}}
+                {{{tool "Assets/NFT/sales/whitelist" salesAddress=salesAddress abiPath=abiNFTSales}}}
             </div>
         </div>
     
