@@ -1957,30 +1957,28 @@
 						content: "",
 						stylesheet: '{{Users}}/css/Users/wallets.css',
 						onActivate: function ($dialog) {
-							var querystring = new URLSearchParams(Q.extend({}, payload, {
-								'Q.Users.environment': i
-							})).toString();
-							var u = new URL(location);
-							var url = u.protocol + "//" + u.host + u.pathname + '?' + querystring;
-							var urlParams = {
-								url: url,
-								urlEncoded: encodeURIComponent(url),
-								urlWithoutScheme: url.replace(/.+:\/\//, '')
-							};
-
 							Q.req("Users/session", ["payload"], function (err, response) {
 								if (err) {
 									return;
 								}
 
 								var payload = response.slots.payload.payload;
+								var querystring = new URLSearchParams(Q.extend({}, payload, {
+									'Q.Users.environment': i
+								})).toString();
+								var u = new URL(location);
+								var url = u.protocol + "//" + u.host + u.pathname + '?' + querystring;
+								var urlParams = {
+									url: url,
+									urlEncoded: encodeURIComponent(url),
+									urlWithoutScheme: url.replace(/.+:\/\//, '')
+								};
 								var cWallets = Q.extend({}, wallets);
 
 								Q.each(cWallets, function (i, val) {
 									cWallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
 									if (val.url) {
-										var href = val.url.interpolate(urlParams);
-										cWallets[i]["url"] = href;
+										cWallets[i]["url"] = val.url.interpolate(urlParams);
 									} else {
 										cWallets[i]["data-url"] = i;
 									}
