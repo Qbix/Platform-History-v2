@@ -1086,3 +1086,7 @@ body.Q_columns_animationFX {
 	opacity: 1;
 	transform: scale(1);
 }
+
+@media (prefers-color-scheme: dark) {
+	.Q_overlay { background: url(../img/bg/overlay-dark.png); }
+}
