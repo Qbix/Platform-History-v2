@@ -474,19 +474,19 @@
 				},
 				"metamask": {
 					"name": "Metamask",
-					"url": "dapp://{{domain}}"
+					"url": "dapp://{{url}}"
 				},
 				"trustwallet": {
 					"name": "Trust Wallet",
-					"url": "trust://open_url?url={{baseUrl}}"
+					"url": "trust://open_url?url={{urlEncoded}}"
 				},
 				"kaikas": {
 					"name": "Kaikas",
-					"url": "https://app.kaikas.io/u/{{domain}}"
+					"url": "https://app.kaikas.io/u/{{urlWithoutScheme}}"
 				},
 				"phantom": {
 					"name": "Phantom",
-					"url": "https://phantom.app/ul/browse/{{baseUrlEncoded}}"
+					"url": "https://phantom.app/ul/browse/{{urlEncoded}}"
 				}
 			}
 		},

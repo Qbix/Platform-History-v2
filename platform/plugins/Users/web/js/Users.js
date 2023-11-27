@@ -1957,12 +1957,15 @@
 						content: "",
 						stylesheet: '{{Users}}/css/Users/wallets.css',
 						onActivate: function ($dialog) {
-							var url = new URL(location);
-							url = url.protocol + "//" + url.host + url.pathname;
+							var querystring = new URLSearchParams(Q.extend({}, payload, {
+								'Q.Users.environment': i
+							})).toString();
+							var u = new URL(location);
+							var url = u.protocol + "//" + u.host + u.pathname + '?' + querystring;
 							var urlParams = {
-								baseUrl: url,
-								domain: url.replace(/.+:\/\//, ''),
-								baseUrlEncoded: encodeURIComponent(url)
+								url: url,
+								urlEncoded: encodeURIComponent(url),
+								urlWithoutScheme: url.replace(/.+:\/\//, '')
 							};
 
 							Q.req("Users/session", ["payload"], function (err, response) {
@@ -1977,7 +1980,7 @@
 									cWallets[i]["img"] = Q.url("{{Users}}/img/web3/wallet/"+i+".png");
 									if (val.url) {
 										var href = val.url.interpolate(urlParams);
-										cWallets[i]["url"] = href + '?' + new URLSearchParams(Q.extend({}, payload, {'Q.Users.environment': i})).toString();
+										cWallets[i]["url"] = href;
 									} else {
 										cWallets[i]["data-url"] = i;
 									}
