@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Izveidot kopienu"
+    },
+    "list": {
+        "table": {
+            "td0": "Ķēdes nosaukums",
+            "td1": "Ķēdes ID",
+            "td2": "Kopienas adrese"
+        },
+        "btnTitle": "Ražot"
+    },
+    "form": {
+        "labels": {
+            "chain": "Ķēde",
+            "hook": "Āķis",
+            "invitedHook": "InvitedHook",
+            "name": "Vārds",
+            "symbol": "Simbols",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000",
+            "name": "ERC721 nosaukums",
+            "symbol": "ERC721 Simbols",
+            "contracturi": "līguma URI"
+        },
+        "small": {
+            "hook": "līguma ieviestā ICommunityHook interfeisa āķa adrese. Var būt adrese (0)",
+            "invitedHook": "Ieviestā ICommunityInvite saskarnes līgumā ieviestā āķa adrese. Var būt adrese (0)",
+            "name": "ERC721 nosaukums",
+            "symbol": "ERC721 Simbols",
+            "contracturi": "līguma URI"
+        },
+        "err": {
+            "hook": "<b>Āķis<\/b> nederīgs",
+            "invitedHook": "<b>ielūgtsĀķis<\/b> nav derīgs",
+            "name": "<b>Nosaukums<\/b> nav derīgs",
+            "symbol": "<b>Simbols<\/b> nav derīgs",
+            "contracturi": "<b>contractURI<\/b> nav derīgs"
+        },
+        "btnTitle": "Ražot"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Nevar atrast rūpnīcas adresi",
+        "transactionFailed": "Darījums neizdevās",
+        "smthWentWrong": "Kaut kas nogāja greizi"
+    },
+    "foo": "bārs"
+}

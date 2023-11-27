@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Atreorú chuig Sparán",
                 "content": "Nuair a dhúnann tú an dialóg seo, tógfar chuig do sparán thú. Tar éis duit síniú isteach, fill ar an leathanach seo."
-            }
+            },
+            "ConnectWallet": "Ceangail Sparán"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Modh conartha mícheart {{methodName}} saor in aisce,",
-        "ChangeWallet": "Athraigh Sparán"
+        "ChangeWallet": "Athraigh Sparán",
+        "ConnectWallet": "Ceangail Sparán",
+        "AfterWalletConnectedPleaseRefresh": "Tar éis duit an sparán a nascadh, athnuaigh an leathanach seo chun an sparán a aithint"
     },
     "labels": {
         "addToPhonebook": "Cuir le Mo Theagmhálaithe Fón",

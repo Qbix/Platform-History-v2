@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Reindirizzamento a Wallet",
                 "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
-            }
+            },
+            "ConnectWallet": "Connetti il portafoglio"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Metodo contrattuale errato {{methodName}}",
-        "ChangeWallet": "Cambia portafoglio"
+        "ChangeWallet": "Cambia portafoglio",
+        "ConnectWallet": "Connetti il portafoglio",
+        "AfterWalletConnectedPleaseRefresh": "Dopo aver collegato il portafoglio, aggiorna questa pagina per riconoscere il portafoglio"
     },
     "labels": {
         "addToPhonebook": "Aggiungi ai contatti del mio telefono",

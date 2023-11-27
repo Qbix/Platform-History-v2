@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "커뮤니티 만들기"
+    },
+    "list": {
+        "table": {
+            "td0": "체인 이름",
+            "td1": "체인 ID",
+            "td2": "커뮤니티 주소"
+        },
+        "btnTitle": "생산하다"
+    },
+    "form": {
+        "labels": {
+            "chain": "체인",
+            "hook": "훅",
+            "invitedHook": "초대된 후크",
+            "name": "이름",
+            "symbol": "상징",
+            "contracturi": "계약URI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "ERC721 이름",
+            "symbol": "ERC721 기호",
+            "contracturi": "계약 URI"
+        },
+        "small": {
+            "hook": "ICommunityHook 인터페이스를 구현한 계약의 후크 주소입니다. 주소(0)일 수 있음",
+            "invitedHook": "ICommunityInvite 인터페이스를 구현한 계약의 InvitationHook 주소입니다. 주소(0)일 수 있음",
+            "name": "ERC721 이름",
+            "symbol": "ERC721 기호",
+            "contracturi": "계약 URI"
+        },
+        "err": {
+            "hook": "<b>후크가<\/b> 유효하지 않음",
+            "invitedHook": "<b>초대된 후크<\/b> 가 잘못되었습니다.",
+            "name": "<b>이름이<\/b> 잘못되었습니다.",
+            "symbol": "잘못된 <b>기호<\/b>",
+            "contracturi": "<b>contractURI가<\/b> 유효하지 않습니다."
+        },
+        "btnTitle": "생산하다"
+    },
+    "err": {
+        "cantFindFactoryAddress": "공장주소를 찾을 수 없습니다",
+        "transactionFailed": "거래 실패",
+        "smthWentWrong": "문제가 발생했습니다."
+    },
+    "foo": "술집"
+}

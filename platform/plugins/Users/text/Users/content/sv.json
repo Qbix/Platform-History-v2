@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Omdirigerar till Wallet",
                 "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
-            }
+            },
+            "ConnectWallet": "Anslut plånbok"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Fel kontraktsmetod {{methodName}}",
-        "ChangeWallet": "Byt plånbok"
+        "ChangeWallet": "Byt plånbok",
+        "ConnectWallet": "Anslut plånbok",
+        "AfterWalletConnectedPleaseRefresh": "När plånboken är ansluten, uppdatera den här sidan för att känna igen plånboken"
     },
     "labels": {
         "addToPhonebook": "Lägg till i mina telefonkontakter",

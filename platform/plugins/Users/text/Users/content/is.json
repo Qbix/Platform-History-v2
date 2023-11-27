@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Beinir áfram í veski",
                 "content": "Þegar þú lokar þessum glugga verðurðu færður í veskið þitt. Eftir að þú hefur skráð þig inn skaltu fara aftur á þessa síðu."
-            }
+            },
+            "ConnectWallet": "Tengdu veski"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Röng samningsaðferð {{methodName}}",
-        "ChangeWallet": "Breyta veski"
+        "ChangeWallet": "Breyta veski",
+        "ConnectWallet": "Tengdu veski",
+        "AfterWalletConnectedPleaseRefresh": "Eftir að veskið hefur verið tengt skaltu endurnýja þessa síðu til að þekkja veskið"
     },
     "labels": {
         "addToPhonebook": "Bæta við tengiliði í símanum mínum",

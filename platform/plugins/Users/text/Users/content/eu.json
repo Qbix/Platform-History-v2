@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Wallet-era birbideratzen",
                 "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
-            }
+            },
+            "ConnectWallet": "Konektatu Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Kontratu-metodo okerra {{methodName}}",
-        "ChangeWallet": "Aldatu zorroa"
+        "ChangeWallet": "Aldatu zorroa",
+        "ConnectWallet": "Konektatu Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Zorroa konektatu ondoren, freskatu orri hau zorroa ezagutzeko"
     },
     "labels": {
         "addToPhonebook": "Gehitu Nire telefonoko kontaktuetara",

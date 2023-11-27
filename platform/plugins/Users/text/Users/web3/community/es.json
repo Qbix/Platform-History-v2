@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Crear comunidad"
+    },
+    "list": {
+        "table": {
+            "td0": "Nombre de la cadena",
+            "td1": "Identificación de cadena",
+            "td2": "dirección de la comunidad"
+        },
+        "btnTitle": "Producir"
+    },
+    "form": {
+        "labels": {
+            "chain": "Cadena",
+            "hook": "Gancho",
+            "invitedHook": "Gancho invitado",
+            "name": "Nombre",
+            "symbol": "Símbolo",
+            "contracturi": "contratoURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "Nombre ERC721",
+            "symbol": "Símbolo ERC721",
+            "contracturi": "URI de contrato"
+        },
+        "small": {
+            "hook": "dirección de enlace del contrato implementada interfaz ICommunityHook. Puede ser dirección(0)",
+            "invitedHook": "La dirección de inviteHook del contrato implementó la interfaz ICommunityInvite. Puede ser dirección(0)",
+            "name": "Nombre ERC721",
+            "symbol": "Símbolo ERC721",
+            "contracturi": "URI de contrato"
+        },
+        "err": {
+            "hook": "<b>Gancho<\/b> inválido",
+            "invitedHook": "<b>invitadoGancho<\/b> no válido",
+            "name": "<b>Nombre<\/b> inválido",
+            "symbol": "<b>Símbolo<\/b> no válido",
+            "contracturi": "<b>contratoURI<\/b> no válido"
+        },
+        "btnTitle": "Producir"
+    },
+    "err": {
+        "cantFindFactoryAddress": "No puedo encontrar la dirección de fábrica",
+        "transactionFailed": "Transacción fallida",
+        "smthWentWrong": "Algo salió mal"
+    },
+    "foo": "bar"
+}

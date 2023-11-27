@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Lisa minu telefoni kontaktidesse",
+    "addLabel": "Uus suhe",
+    "newRole": "Uus roll",
+    "prompt": "Andke sellele nimi",
+    "newLabel": "Uus silt",
+    "editLabel": "Redigeeri silti",
+    "addBtn": "Lisama",
+    "editBtn": "Värskenda",
+    "canManageDialogTitle": "Oskab rolle hallata",
+    "canManageBtn": "Saab hallata...",
+    "titlePlaceholder": "Pealkiri",
+    "selectOptionTitle_web2": "Native",
+    "selectOptionTitle_web3": "Veeb3"
+}

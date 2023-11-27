@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Telefonumdaki Kişilere Ekle",
+    "addLabel": "Yeni ilişki",
+    "newRole": "Yeni rol",
+    "prompt": "Bir isim ver",
+    "newLabel": "Yeni etiket",
+    "editLabel": "Etiketi Düzenle",
+    "addBtn": "Eklemek",
+    "editBtn": "Güncelleme",
+    "canManageDialogTitle": "Rolleri Yönetebilir",
+    "canManageBtn": "Yönetebilir ...",
+    "titlePlaceholder": "Başlık",
+    "selectOptionTitle_web2": "Yerli",
+    "selectOptionTitle_web3": "Web3"
+}

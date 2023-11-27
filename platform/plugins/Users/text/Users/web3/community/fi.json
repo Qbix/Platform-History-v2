@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Luo yhteisö"
+    },
+    "list": {
+        "table": {
+            "td0": "Ketjun nimi",
+            "td1": "Ketjun tunnus",
+            "td2": "Yhteisön osoite"
+        },
+        "btnTitle": "Tuottaa"
+    },
+    "form": {
+        "labels": {
+            "chain": "Ketju",
+            "hook": "Koukku",
+            "invitedHook": "KutsuttuHook",
+            "name": "Nimi",
+            "symbol": "Symboli",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000",
+            "name": "ERC721 Nimi",
+            "symbol": "ERC721 -symboli",
+            "contracturi": "sopimuksen URI"
+        },
+        "small": {
+            "hook": "sopimuksen toteutetun ICommunityHook-liittymän koukkuosoite. Voi olla osoite (0)",
+            "invitedHook": "ICommunityInvite-käyttöliittymän kutsutun koukun osoite. Voi olla osoite (0)",
+            "name": "ERC721 Nimi",
+            "symbol": "ERC721 -symboli",
+            "contracturi": "sopimuksen URI"
+        },
+        "err": {
+            "hook": "<b>Koukku<\/b> ei kelpaa",
+            "invitedHook": "<b>KutsuttuHook<\/b> on virheellinen",
+            "name": "<b>Nimi<\/b> virheellinen",
+            "symbol": "<b>Symboli<\/b> virheellinen",
+            "contracturi": "<b>contractURI<\/b> virheellinen"
+        },
+        "btnTitle": "Tuottaa"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Tehdasosoitetta ei löydy",
+        "transactionFailed": "Tapahtuma epäonnistui",
+        "smthWentWrong": "Jotain meni pieleen"
+    },
+    "foo": "baari"
+}

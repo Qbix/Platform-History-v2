@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Omleiden naar Wallet",
                 "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee gebracht. Keer na het inloggen terug naar deze pagina."
-            }
+            },
+            "ConnectWallet": "Verbind portemonnee"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Verkeerde contractmethode {{methodName}}",
-        "ChangeWallet": "Portefeuille wijzigen"
+        "ChangeWallet": "Portefeuille wijzigen",
+        "ConnectWallet": "Verbind portemonnee",
+        "AfterWalletConnectedPleaseRefresh": "Nadat de portemonnee is verbonden, vernieuw dan deze pagina om de portemonnee te herkennen"
     },
     "labels": {
         "addToPhonebook": "Toevoegen aan Mijn telefooncontacten",

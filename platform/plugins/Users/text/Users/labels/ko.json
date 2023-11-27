@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "내 휴대폰 연락처에 추가",
+    "addLabel": "새로운 관계",
+    "newRole": "새로운 역할",
+    "prompt": "이름을 지어주세요",
+    "newLabel": "새 라벨",
+    "editLabel": "라벨 편집",
+    "addBtn": "추가하다",
+    "editBtn": "업데이트",
+    "canManageDialogTitle": "역할을 관리할 수 있음",
+    "canManageBtn": "관리할 수 있습니다...",
+    "titlePlaceholder": "제목",
+    "selectOptionTitle_web2": "토종의",
+    "selectOptionTitle_web3": "웹3"
+}

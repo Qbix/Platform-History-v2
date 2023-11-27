@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Toevoegen aan mijn telefooncontacten",
+    "addLabel": "Nieuwe relatie",
+    "newRole": "Nieuwe rol",
+    "prompt": "Geef het een naam",
+    "newLabel": "Nieuw label",
+    "editLabel": "Etiket bewerken",
+    "addBtn": "Toevoegen",
+    "editBtn": "Update",
+    "canManageDialogTitle": "Kan rollen beheren",
+    "canManageBtn": "Aankunnen ...",
+    "titlePlaceholder": "Titel",
+    "selectOptionTitle_web2": "Oorspronkelijk",
+    "selectOptionTitle_web3": "Web3"
+}

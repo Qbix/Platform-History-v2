@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Lumikha ng Komunidad"
+    },
+    "list": {
+        "table": {
+            "td0": "Pangalan ng Chain",
+            "td1": "Chain Id",
+            "td2": "Address ng komunidad"
+        },
+        "btnTitle": "Gumawa"
+    },
+    "form": {
+        "labels": {
+            "chain": "Kadena",
+            "hook": "Hook",
+            "invitedHook": "InvitedHook",
+            "name": "Pangalan",
+            "symbol": "Simbolo",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000",
+            "name": "ERC721 Pangalan",
+            "symbol": "Simbolo ng ERC721",
+            "contracturi": "kontrata URI"
+        },
+        "small": {
+            "hook": "hook address ng kontrata ipinatupad ICommunityHook interface. Maaaring address(0)",
+            "invitedHook": "invitedHook address ng kontrata na ipinatupad ICommunityInvite interface. Maaaring address(0)",
+            "name": "ERC721 Pangalan",
+            "symbol": "Simbolo ng ERC721",
+            "contracturi": "kontrata URI"
+        },
+        "err": {
+            "hook": "Di-wasto <b>ang hook<\/b>",
+            "invitedHook": "<b>invitedHook<\/b> invalid",
+            "name": "Di-wasto <b>ang pangalan<\/b>",
+            "symbol": "Di-wasto <b>ang simbolo<\/b>",
+            "contracturi": "hindi wasto <b>ang contractURI<\/b>"
+        },
+        "btnTitle": "Gumawa"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Hindi mahanap ang factoryAddress",
+        "transactionFailed": "Nabigo ang transaksyon",
+        "smthWentWrong": "Nagkaproblema"
+    },
+    "foo": "bar"
+}

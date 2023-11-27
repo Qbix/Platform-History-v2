@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Redirixindo a Wallet",
                 "content": "Unha vez que peches este diálogo, dirixirase á túa carteira. Despois de iniciar sesión, volve a esta páxina."
-            }
+            },
+            "ConnectWallet": "Conectar Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Método de contratación incorrecto {{methodName}}",
-        "ChangeWallet": "Cambiar carteira"
+        "ChangeWallet": "Cambiar carteira",
+        "ConnectWallet": "Conectar Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Despois de conectar a carteira, actualiza esta páxina para recoñecer a carteira"
     },
     "labels": {
         "addToPhonebook": "Engadir aos meus contactos do teléfono",

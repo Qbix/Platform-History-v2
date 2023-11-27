@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Tạo cộng đồng"
+    },
+    "list": {
+        "table": {
+            "td0": "Tên chuỗi",
+            "td1": "Mã chuỗi",
+            "td2": "Địa chỉ cộng đồng"
+        },
+        "btnTitle": "Sản xuất"
+    },
+    "form": {
+        "labels": {
+            "chain": "Xích",
+            "hook": "Cái móc",
+            "invitedHook": "MờiHook",
+            "name": "Tên",
+            "symbol": "Biểu tượng",
+            "contracturi": "hợp đồngURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000000",
+            "name": "Tên ERC721",
+            "symbol": "Biểu tượng ERC721",
+            "contracturi": "URI hợp đồng"
+        },
+        "small": {
+            "hook": "địa chỉ hook của hợp đồng đã triển khai giao diện ICommunityHook. Có thể là địa chỉ(0)",
+            "invitedHook": "được mờiHook địa chỉ của hợp đồng được triển khai giao diện ICommunityInvite. Có thể là địa chỉ(0)",
+            "name": "Tên ERC721",
+            "symbol": "Biểu tượng ERC721",
+            "contracturi": "URI hợp đồng"
+        },
+        "err": {
+            "hook": "<b>Móc<\/b> không hợp lệ",
+            "invitedHook": "<b>đã mờiHook<\/b> không hợp lệ",
+            "name": "<b>Tên<\/b> không hợp lệ",
+            "symbol": "<b>Biểu tượng<\/b> không hợp lệ",
+            "contracturi": "<b>URI hợp đồng<\/b> không hợp lệ"
+        },
+        "btnTitle": "Sản xuất"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Không thể tìm thấy địa chỉ nhà máy",
+        "transactionFailed": "Giao dịch thất bại",
+        "smthWentWrong": "Đã xảy ra lỗi"
+    },
+    "foo": "quán ba"
+}

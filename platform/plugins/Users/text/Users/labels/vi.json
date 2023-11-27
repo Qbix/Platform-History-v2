@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Thêm vào danh bạ điện thoại của tôi",
+    "addLabel": "Mối quan hệ mơi",
+    "newRole": "Vai trò mới",
+    "prompt": "Đặt tên cho nó",
+    "newLabel": "Nhãn mới",
+    "editLabel": "Chỉnh sửa nhãn",
+    "addBtn": "Thêm vào",
+    "editBtn": "Cập nhật",
+    "canManageDialogTitle": "Có thể quản lý vai trò",
+    "canManageBtn": "Có thể quản lý ...",
+    "titlePlaceholder": "Tiêu đề",
+    "selectOptionTitle_web2": "Tự nhiên",
+    "selectOptionTitle_web3": "Web3"
+}

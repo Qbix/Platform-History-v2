@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Wallet પર રીડાયરેક્ટ કરી રહ્યાં છીએ",
                 "content": "એકવાર તમે આ સંવાદ બંધ કરી દો, પછી તમને તમારા વૉલેટ પર લઈ જવામાં આવશે. તમે સાઇન ઇન કર્યા પછી, આ પૃષ્ઠ પર પાછા ફરો."
-            }
+            },
+            "ConnectWallet": "વૉલેટ કનેક્ટ કરો"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "ખોટી કરાર પદ્ધતિ {{methodName}}",
-        "ChangeWallet": "વૉલેટ બદલો"
+        "ChangeWallet": "વૉલેટ બદલો",
+        "ConnectWallet": "વૉલેટ કનેક્ટ કરો",
+        "AfterWalletConnectedPleaseRefresh": "વૉલેટ કનેક્ટ થયા પછી વૉલેટને ઓળખવા માટે કૃપા કરીને આ પેજ રિફ્રેશ કરો"
     },
     "labels": {
         "addToPhonebook": "મારા ફોન સંપર્કોમાં ઉમેરો",

@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Ustvari skupnost"
+    },
+    "list": {
+        "table": {
+            "td0": "Ime verige",
+            "td1": "ID verige",
+            "td2": "naslov skupnosti"
+        },
+        "btnTitle": "Proizvajaj"
+    },
+    "form": {
+        "labels": {
+            "chain": "Veriga",
+            "hook": "Kavelj",
+            "invitedHook": "InvitedHook",
+            "name": "Ime",
+            "symbol": "Simbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "Ime ERC721",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI pogodbe"
+        },
+        "small": {
+            "hook": "naslov kljuke pogodbeno implementiranega vmesnika ICommunityHook. Lahko je naslov (0)",
+            "invitedHook": "invitatedHook naslov pogodbeno implementiranega vmesnika ICommunityInvite. Lahko je naslov (0)",
+            "name": "Ime ERC721",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI pogodbe"
+        },
+        "err": {
+            "hook": "<b>Kavelj<\/b> neveljaven",
+            "invitedHook": "<b>vabljeniHook<\/b> neveljaven",
+            "name": "<b>Ime ni<\/b> veljavno",
+            "symbol": "<b>Simbol<\/b> ni veljaven",
+            "contracturi": "<b>contractURI<\/b> neveljaven"
+        },
+        "btnTitle": "Proizvajaj"
+    },
+    "err": {
+        "cantFindFactoryAddress": "FactoryAddress ni mogoče najti",
+        "transactionFailed": "Transakcija ni uspela",
+        "smthWentWrong": "Nekaj je šlo narobe"
+    },
+    "foo": "bar"
+}

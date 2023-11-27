@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Додај во контакти на мојот телефон",
+    "addLabel": "Нова врска",
+    "newRole": "Нова улога",
+    "prompt": "Дајте му име",
+    "newLabel": "Нова етикета",
+    "editLabel": "Уреди етикета",
+    "addBtn": "Додадете",
+    "editBtn": "Ажурирање",
+    "canManageDialogTitle": "Може да управува со улоги",
+    "canManageBtn": "Може да управува со ...",
+    "titlePlaceholder": "Наслов",
+    "selectOptionTitle_web2": "Мајчин",
+    "selectOptionTitle_web3": "Веб3"
+}

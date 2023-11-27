@@ -126,7 +126,8 @@
             "alert": {
                 "title": "월렛으로 리디렉션 중",
                 "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오십시오."
-            }
+            },
+            "ConnectWallet": "지갑 연결"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "잘못된 계약 방식 {{methodName}}",
-        "ChangeWallet": "지갑 변경"
+        "ChangeWallet": "지갑 변경",
+        "ConnectWallet": "지갑 연결",
+        "AfterWalletConnectedPleaseRefresh": "지갑이 연결된 후 이 페이지를 새로 고쳐 지갑을 인식하세요."
     },
     "labels": {
         "addToPhonebook": "내 전화 연락처에 추가",

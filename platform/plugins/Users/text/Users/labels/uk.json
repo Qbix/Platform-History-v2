@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Додати до контактів мого телефону",
+    "addLabel": "Нові стосунки",
+    "newRole": "Нова роль",
+    "prompt": "Дайте йому назву",
+    "newLabel": "Нова етикетка",
+    "editLabel": "Редагувати мітку",
+    "addBtn": "додати",
+    "editBtn": "оновлення",
+    "canManageDialogTitle": "Може керувати ролями",
+    "canManageBtn": "Може керувати...",
+    "titlePlaceholder": "Назва",
+    "selectOptionTitle_web2": "Рідна",
+    "selectOptionTitle_web3": "Web3"
+}

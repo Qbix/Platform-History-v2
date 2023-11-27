@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Oħloq Komunità"
+    },
+    "list": {
+        "table": {
+            "td0": "Isem tal-Katina",
+            "td1": "Katina Id",
+            "td2": "indirizz tal-Komunità"
+        },
+        "btnTitle": "Ipproduċi"
+    },
+    "form": {
+        "labels": {
+            "chain": "Katina",
+            "hook": "Ganċ",
+            "invitedHook": "InvitedHook",
+            "name": "Isem",
+            "symbol": "Simbolu",
+            "contracturi": "kuntrattURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "Isem ERC721",
+            "symbol": "Simbolu ERC721",
+            "contracturi": "URI tal-kuntratt"
+        },
+        "small": {
+            "hook": "indirizz tal-ganċ tal-kuntratt implimentat ICommunityHook interface. Jista&#39; jkun indirizz(0)",
+            "invitedHook": "invitedHook indirizz tal-kuntratt implimentat ICommunityInvite interface. Jista&#39; jkun indirizz(0)",
+            "name": "Isem ERC721",
+            "symbol": "Simbolu ERC721",
+            "contracturi": "URI tal-kuntratt"
+        },
+        "err": {
+            "hook": "<b>Ganċ<\/b> invalidu",
+            "invitedHook": "<b>invitedHook<\/b> invalidu",
+            "name": "<b>Isem<\/b> invalidu",
+            "symbol": "<b>Simbolu<\/b> invalidu",
+            "contracturi": "<b>kuntrattURI<\/b> invalidu"
+        },
+        "btnTitle": "Ipproduċi"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Ma tistax issib l-indirizz tal-fabbrika",
+        "transactionFailed": "It-tranżazzjoni falliet",
+        "smthWentWrong": "Xi ħaġa marret ħażin"
+    },
+    "foo": "bar"
+}

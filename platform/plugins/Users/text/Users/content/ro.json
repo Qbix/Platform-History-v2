@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Redirecționare către Wallet",
                 "content": "După ce închideți acest dialog, veți fi dus la portofel. După ce vă conectați, reveniți la această pagină."
-            }
+            },
+            "ConnectWallet": "Connect Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Metoda de contract greșită {{methodName}}",
-        "ChangeWallet": "Schimbați portofelul"
+        "ChangeWallet": "Schimbați portofelul",
+        "ConnectWallet": "Connect Wallet",
+        "AfterWalletConnectedPleaseRefresh": "După conectarea portofelului, reîmprospătați această pagină pentru a recunoaște portofelul"
     },
     "labels": {
         "addToPhonebook": "Adăugați la contactele mele din telefon",

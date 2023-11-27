@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "コミュニティの作成"
+    },
+    "list": {
+        "table": {
+            "td0": "チェーン名",
+            "td1": "チェーンID",
+            "td2": "コミュニティアドレス"
+        },
+        "btnTitle": "生産する"
+    },
+    "form": {
+        "labels": {
+            "chain": "鎖",
+            "hook": "針",
+            "invitedHook": "招待されたフック",
+            "name": "名前",
+            "symbol": "シンボル",
+            "contracturi": "契約URI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000",
+            "name": "ERC721 名",
+            "symbol": "ERC721記号",
+            "contracturi": "契約URI"
+        },
+        "small": {
+            "hook": "コントラクト実装された ICommunityHook インターフェイスのフック アドレス。アドレス(0)を指定できます",
+            "invitedHook": "ICommunityInvite インターフェイスを実装したコントラクトの InvitationHook アドレス。アドレス(0)を指定できます",
+            "name": "ERC721 名",
+            "symbol": "ERC721記号",
+            "contracturi": "契約URI"
+        },
+        "err": {
+            "hook": "<b>フックが<\/b>無効です",
+            "invitedHook": "<b>招待されたフック<\/b>が無効です",
+            "name": "<b>名前が<\/b>無効です",
+            "symbol": "<b>シンボルが<\/b>無効です",
+            "contracturi": "<b>契約URI<\/b>が無効です"
+        },
+        "btnTitle": "生産する"
+    },
+    "err": {
+        "cantFindFactoryAddress": "工場住所が見つかりません",
+        "transactionFailed": "処理に失敗しました",
+        "smthWentWrong": "何か問題が発生しました"
+    },
+    "foo": "バー"
+}

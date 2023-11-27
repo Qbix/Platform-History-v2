@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Uudelleenohjataan Walletiin",
                 "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Kun olet kirjautunut sisään, palaa tälle sivulle."
-            }
+            },
+            "ConnectWallet": "Yhdistä lompakko"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Väärä sopimustapa {{methodName}}",
-        "ChangeWallet": "Vaihda lompakko"
+        "ChangeWallet": "Vaihda lompakko",
+        "ConnectWallet": "Yhdistä lompakko",
+        "AfterWalletConnectedPleaseRefresh": "Kun lompakko on yhdistetty, päivitä tämä sivu tunnistaaksesi lompakon"
     },
     "labels": {
         "addToPhonebook": "Lisää puhelimeen yhteystietoihin",

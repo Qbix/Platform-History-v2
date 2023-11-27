@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Креирај заедница"
+    },
+    "list": {
+        "table": {
+            "td0": "Име на синџирот",
+            "td1": "Ид на синџир",
+            "td2": "Адреса на заедницата"
+        },
+        "btnTitle": "Производство"
+    },
+    "form": {
+        "labels": {
+            "chain": "Синџир",
+            "hook": "Кука",
+            "invitedHook": "Поканети Кука",
+            "name": "Име",
+            "symbol": "Симбол",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000000",
+            "name": "ERC721 Име",
+            "symbol": "Симбол ERC721",
+            "contracturi": "договор URI"
+        },
+        "small": {
+            "hook": "кука адреса на договорот имплементиран ICommunityHook интерфејс. Може да биде адреса (0)",
+            "invitedHook": "повикана адреса на договорот имплементиран интерфејс ICommunityInvite. Може да биде адреса (0)",
+            "name": "ERC721 Име",
+            "symbol": "Симбол ERC721",
+            "contracturi": "договор URI"
+        },
+        "err": {
+            "hook": "<b>Куката<\/b> е неважечка",
+            "invitedHook": "<b>поканети Кука<\/b> неважечки",
+            "name": "<b>Името<\/b> е неважечко",
+            "symbol": "<b>Симболот<\/b> е неважечки",
+            "contracturi": "<b>contractURI<\/b> неважечки"
+        },
+        "btnTitle": "Производство"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Не можам да најдам фабричка адреса",
+        "transactionFailed": "Трансакцијата не успеа",
+        "smthWentWrong": "Нешто тргна наопаку"
+    },
+    "foo": "бар"
+}

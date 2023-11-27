@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "मेरे फ़ोन संपर्कों में जोड़ें",
+    "addLabel": "नए रिश्ते",
+    "newRole": "नयी भूमिका",
+    "prompt": "उसे एक नाम दे दो",
+    "newLabel": "नया लेबल",
+    "editLabel": "लेबल संपादित करें",
+    "addBtn": "जोड़ना",
+    "editBtn": "अद्यतन",
+    "canManageDialogTitle": "भूमिकाएँ प्रबंधित कर सकते हैं",
+    "canManageBtn": "संभाल सकता है ...",
+    "titlePlaceholder": "शीर्षक",
+    "selectOptionTitle_web2": "देशी",
+    "selectOptionTitle_web3": "वेब3"
+}

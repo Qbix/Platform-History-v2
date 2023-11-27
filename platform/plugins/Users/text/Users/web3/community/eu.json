@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Komunitatea sortu"
+    },
+    "list": {
+        "table": {
+            "td0": "Katearen izena",
+            "td1": "Katearen Id",
+            "td2": "Komunitatearen helbidea"
+        },
+        "btnTitle": "Ekoiztu"
+    },
+    "form": {
+        "labels": {
+            "chain": "Katea",
+            "hook": "Amua",
+            "invitedHook": "Gonbidatua Hook",
+            "name": "Izena",
+            "symbol": "Ikurra",
+            "contracturi": "kontratuaURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000000000",
+            "name": "ERC721 Izena",
+            "symbol": "ERC721 ikurra",
+            "contracturi": "kontratuaren URI"
+        },
+        "small": {
+            "hook": "inplementatutako kontratuaren kako helbidea ICommunityHook interfazea. Helbidea izan daiteke (0)",
+            "invitedHook": "Inplementatutako kontratuaren ICommunityInvite interfazearen invitedHook helbidea. Helbidea izan daiteke (0)",
+            "name": "ERC721 Izena",
+            "symbol": "ERC721 ikurra",
+            "contracturi": "kontratuaren URI"
+        },
+        "err": {
+            "hook": "<b>Amua<\/b> baliogabea",
+            "invitedHook": "<b>invitedHook<\/b> baliogabea",
+            "name": "<b>Izena<\/b> baliogabea",
+            "symbol": "Ikurra <b>baliogabea<\/b>",
+            "contracturi": "<b>kontratuaURI<\/b> baliogabea"
+        },
+        "btnTitle": "Ekoiztu"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Ezin da fabrika helbidea aurkitu",
+        "transactionFailed": "Transakzioak huts egin du",
+        "smthWentWrong": "Zerbait gaizki joan da"
+    },
+    "foo": "taberna"
+}

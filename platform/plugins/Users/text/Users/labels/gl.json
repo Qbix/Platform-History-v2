@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Engadir aos meus contactos do teléfono",
+    "addLabel": "Nova Relación",
+    "newRole": "Novo Papel",
+    "prompt": "Ponlle un nome",
+    "newLabel": "Nova etiqueta",
+    "editLabel": "Editar etiqueta",
+    "addBtn": "Engadir",
+    "editBtn": "Actualizar",
+    "canManageDialogTitle": "Pode xestionar roles",
+    "canManageBtn": "Pode xestionar...",
+    "titlePlaceholder": "Título",
+    "selectOptionTitle_web2": "Nativo",
+    "selectOptionTitle_web3": "Web 3"
+}

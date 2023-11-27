@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Notiek novirzīšana uz maku",
                 "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
-            }
+            },
+            "ConnectWallet": "Savienojiet maku"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Nepareiza līguma metode {{methodName}}",
-        "ChangeWallet": "Mainīt maku"
+        "ChangeWallet": "Mainīt maku",
+        "ConnectWallet": "Savienojiet maku",
+        "AfterWalletConnectedPleaseRefresh": "Pēc seifa pievienošanas, lūdzu, atsvaidziniet šo lapu, lai atpazītu maku"
     },
     "labels": {
         "addToPhonebook": "Pievienot mana tālruņa kontaktpersonām",

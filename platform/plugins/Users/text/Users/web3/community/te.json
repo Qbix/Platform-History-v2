@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "సంఘాన్ని సృష్టించండి"
+    },
+    "list": {
+        "table": {
+            "td0": "గొలుసు పేరు",
+            "td1": "చైన్ ఐడి",
+            "td2": "సంఘం చిరునామా"
+        },
+        "btnTitle": "ఉత్పత్తి"
+    },
+    "form": {
+        "labels": {
+            "chain": "చైన్",
+            "hook": "హుక్",
+            "invitedHook": "ఆహ్వానించబడిన హుక్",
+            "name": "పేరు",
+            "symbol": "చిహ్నం",
+            "contracturi": "ఒప్పందము"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000",
+            "name": "ERC721 పేరు",
+            "symbol": "ERC721 చిహ్నం",
+            "contracturi": "ఒప్పందం URI"
+        },
+        "small": {
+            "hook": "కాంట్రాక్ట్ అమలు చేయబడిన ICommunityHook ఇంటర్‌ఫేస్ యొక్క హుక్ చిరునామా. చిరునామా (0) కావచ్చు",
+            "invitedHook": "అమలు చేయబడిన ICommunityInvite ఇంటర్‌ఫేస్ యొక్క హుక్ చిరునామా. చిరునామా (0) కావచ్చు",
+            "name": "ERC721 పేరు",
+            "symbol": "ERC721 చిహ్నం",
+            "contracturi": "ఒప్పందం URI"
+        },
+        "err": {
+            "hook": "<b>హుక్<\/b> చెల్లదు",
+            "invitedHook": "<b>ఆహ్వానించబడిన హుక్<\/b> చెల్లదు",
+            "name": "<b>పేరు<\/b> చెల్లదు",
+            "symbol": "<b>చిహ్నం<\/b> చెల్లదు",
+            "contracturi": "<b>contractURI<\/b> చెల్లదు"
+        },
+        "btnTitle": "ఉత్పత్తి"
+    },
+    "err": {
+        "cantFindFactoryAddress": "ఫ్యాక్టరీ చిరునామా కనుగొనబడలేదు",
+        "transactionFailed": "లావాదేవీ విఫలమైంది",
+        "smthWentWrong": "ఎక్కడో తేడ జరిగింది"
+    },
+    "foo": "బార్"
+}

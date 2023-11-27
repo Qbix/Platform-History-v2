@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Mengubah hala ke Wallet",
                 "content": "Sebaik sahaja anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
-            }
+            },
+            "ConnectWallet": "Sambung Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Kaedah kontrak yang salah {{methodName}}",
-        "ChangeWallet": "Tukar Wallet"
+        "ChangeWallet": "Tukar Wallet",
+        "ConnectWallet": "Sambung Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Selepas dompet disambungkan sila muat semula halaman ini untuk mengenali dompet"
     },
     "labels": {
         "addToPhonebook": "Tambahkan Pada Kenalan Telefon Saya",

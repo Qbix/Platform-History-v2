@@ -1,12 +1,12 @@
 {
     "title": {
-        "createCommunity" : "Create Community"
+        "createCommunity": "Create Community"
     },
     "list": {
         "table": {
-            "td0":"Chain Name",
-            "td1":"Chain Id",
-            "td2":"Community address"
+            "td0": "Chain Name",
+            "td1": "Chain Id",
+            "td2": "Community address"
         },
         "btnTitle": "Produce"
     },
@@ -34,11 +34,11 @@
             "contracturi": "contract URI"
         },
         "err": {
-            "hook": "<b>Hook</b> invalid",
-            "invitedHook": "<b>invitedHook</b> invalid",
-            "name": "<b>Name</b> invalid",
-            "symbol": "<b>Symbol</b> invalid",
-            "contracturi": "<b>contractURI</b> invalid"
+            "hook": "<b>Hook<\/b> invalid",
+            "invitedHook": "<b>invitedHook<\/b> invalid",
+            "name": "<b>Name<\/b> invalid",
+            "symbol": "<b>Symbol<\/b> invalid",
+            "contracturi": "<b>contractURI<\/b> invalid"
         },
         "btnTitle": "Produce"
     },

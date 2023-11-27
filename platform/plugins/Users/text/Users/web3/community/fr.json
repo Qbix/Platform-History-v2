@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Créer une communauté"
+    },
+    "list": {
+        "table": {
+            "td0": "Nom de la chaîne",
+            "td1": "Identifiant de la chaîne",
+            "td2": "Adresse de la communauté"
+        },
+        "btnTitle": "Produire"
+    },
+    "form": {
+        "labels": {
+            "chain": "Chaîne",
+            "hook": "Crochet",
+            "invitedHook": "InvitéHook",
+            "name": "Nom",
+            "symbol": "Symbole",
+            "contracturi": "contratURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "Nom ERC721",
+            "symbol": "Symbole ERC721",
+            "contracturi": "URI du contrat"
+        },
+        "small": {
+            "hook": "adresse de hook du contrat implémenté l’interface ICommunityHook. Peut être l&#39;adresse (0)",
+            "invitedHook": "InviteHook adresse du contrat implémenté l’interface ICommunityInvite. Peut être l&#39;adresse (0)",
+            "name": "Nom ERC721",
+            "symbol": "Symbole ERC721",
+            "contracturi": "URI du contrat"
+        },
+        "err": {
+            "hook": "<b>Crochet<\/b> invalide",
+            "invitedHook": "<b>InviteHook<\/b> invalide",
+            "name": "<b>Nom<\/b> invalide",
+            "symbol": "<b>Symbole<\/b> invalide",
+            "contracturi": "<b>contratURI<\/b> invalide"
+        },
+        "btnTitle": "Produire"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Impossible de trouver l&#39;adresse d&#39;usine",
+        "transactionFailed": "La transaction a échoué",
+        "smthWentWrong": "Quelque chose s&#39;est mal passé"
+    },
+    "foo": "bar"
+}

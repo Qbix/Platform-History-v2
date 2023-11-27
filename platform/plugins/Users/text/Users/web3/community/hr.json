@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Stvorite zajednicu"
+    },
+    "list": {
+        "table": {
+            "td0": "Naziv lanca",
+            "td1": "ID lanca",
+            "td2": "Adresa zajednice"
+        },
+        "btnTitle": "Proizvoditi"
+    },
+    "form": {
+        "labels": {
+            "chain": "Lanac",
+            "hook": "Kuka",
+            "invitedHook": "InvitedHook",
+            "name": "Ime",
+            "symbol": "Simbol",
+            "contracturi": "ugovorURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "ERC721 Naziv",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI ugovora"
+        },
+        "small": {
+            "hook": "kuka adresa ugovorno implementiranog sučelja ICommunityHook. Može biti adresa (0)",
+            "invitedHook": "calledHook adresa implementiranog ugovora ICommunityInvite sučelja. Može biti adresa (0)",
+            "name": "ERC721 Naziv",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI ugovora"
+        },
+        "err": {
+            "hook": "<b>Kuka<\/b> nije valjana",
+            "invitedHook": "<b>pozvaniHook<\/b> nije valjan",
+            "name": "<b>Ime<\/b> nije valjano",
+            "symbol": "<b>Simbol<\/b> nije valjan",
+            "contracturi": "<b>contractURI<\/b> nije valjan"
+        },
+        "btnTitle": "Proizvoditi"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Ne mogu pronaći adresu tvornice",
+        "transactionFailed": "Transakcija nije uspjela",
+        "smthWentWrong": "Nešto je pošlo po zlu"
+    },
+    "foo": "bar"
+}

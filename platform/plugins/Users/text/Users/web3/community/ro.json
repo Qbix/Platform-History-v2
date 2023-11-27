@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Creați o comunitate"
+    },
+    "list": {
+        "table": {
+            "td0": "Numele lanțului",
+            "td1": "ID lanț",
+            "td2": "adresa comunității"
+        },
+        "btnTitle": "Legume şi fructe"
+    },
+    "form": {
+        "labels": {
+            "chain": "Lanţ",
+            "hook": "Cârlig",
+            "invitedHook": "Invitat Hook",
+            "name": "Nume",
+            "symbol": "Simbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "Nume ERC721",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI contractului"
+        },
+        "small": {
+            "hook": "adresa hook a contractului implementat interfața ICommunityHook. Poate fi adresa(0)",
+            "invitedHook": "Adresa invitedHook a interfeței ICommunityInvite implementată prin contract. Poate fi adresa(0)",
+            "name": "Nume ERC721",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI contractului"
+        },
+        "err": {
+            "hook": "<b>Cârlig<\/b> invalid",
+            "invitedHook": "<b>invitatedHook<\/b> invalid",
+            "name": "<b>Nume<\/b> invalid",
+            "symbol": "<b>Simbol<\/b> invalid",
+            "contracturi": "<b>contractURI<\/b> invalid"
+        },
+        "btnTitle": "Legume şi fructe"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Nu se găsește adresa fabricii",
+        "transactionFailed": "tranzactie nereusita",
+        "smthWentWrong": "Ceva n-a mers bine"
+    },
+    "foo": "bar"
+}

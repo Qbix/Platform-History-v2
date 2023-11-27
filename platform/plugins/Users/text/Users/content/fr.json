@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Redirection vers Wallet",
                 "content": "Une fois que vous fermez cette boîte de dialogue, vous serez redirigé vers votre portefeuille. Après vous être connecté, revenez à cette page."
-            }
+            },
+            "ConnectWallet": "Connecter le portefeuille"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Mauvaise méthode de contrat {{methodName}}",
-        "ChangeWallet": "Changer de portefeuille"
+        "ChangeWallet": "Changer de portefeuille",
+        "ConnectWallet": "Connecter le portefeuille",
+        "AfterWalletConnectedPleaseRefresh": "Une fois le portefeuille connecté, veuillez actualiser cette page pour reconnaître le portefeuille"
     },
     "labels": {
         "addToPhonebook": "Ajouter à mes contacts téléphoniques",

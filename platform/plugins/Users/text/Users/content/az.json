@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Pulqabıya yönləndirilir",
                 "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
-            }
+            },
+            "ConnectWallet": "Pul kisəsini birləşdirin"
         }
     },
     "setIdentifier": {

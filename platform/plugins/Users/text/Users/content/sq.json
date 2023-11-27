@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Po ridrejtohet te Portofoli",
                 "content": "Pasi të mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të identifikoheni, kthehuni në këtë faqe."
-            }
+            },
+            "ConnectWallet": "Lidhni portofolin"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Metoda e gabuar e kontratës {{methodName}}",
-        "ChangeWallet": "Ndrysho portofolin"
+        "ChangeWallet": "Ndrysho portofolin",
+        "ConnectWallet": "Lidhni portofolin",
+        "AfterWalletConnectedPleaseRefresh": "Pas lidhjes së portofolit, ju lutemi rifreskoni këtë faqe për të njohur portofolin"
     },
     "labels": {
         "addToPhonebook": "Shto te kontaktet e telefonit tim",

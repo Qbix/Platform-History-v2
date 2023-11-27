@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Utwórz społeczność"
+    },
+    "list": {
+        "table": {
+            "td0": "Nazwa łańcucha",
+            "td1": "Identyfikator łańcucha",
+            "td2": "Adres Wspólnoty"
+        },
+        "btnTitle": "Produkować"
+    },
+    "form": {
+        "labels": {
+            "chain": "Łańcuch",
+            "hook": "Hak",
+            "invitedHook": "Zaproszony hak",
+            "name": "Nazwa",
+            "symbol": "Symbol",
+            "contracturi": "URI umowy"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "Nazwa ERC721",
+            "symbol": "Symbol ERC721",
+            "contracturi": "URI umowy"
+        },
+        "small": {
+            "hook": "adres haka kontraktu zaimplementowanego interfejsu ICommunityHook. Może być adresem(0)",
+            "invitedHook": "zaproszonyHook adres kontraktu zaimplementowany interfejs ICommunityInvite. Może być adresem(0)",
+            "name": "Nazwa ERC721",
+            "symbol": "Symbol ERC721",
+            "contracturi": "URI umowy"
+        },
+        "err": {
+            "hook": "<b>Hak<\/b> nieprawidłowy",
+            "invitedHook": "<b>zaproszonyHook<\/b> jest nieprawidłowy",
+            "name": "<b>Nazwa<\/b> nieprawidłowa",
+            "symbol": "<b>Symbol<\/b> nieprawidłowy",
+            "contracturi": "nieprawidłowy <b>URI kontraktu<\/b>"
+        },
+        "btnTitle": "Produkować"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Nie można znaleźć adresu fabrycznego",
+        "transactionFailed": "transakcja nieudana",
+        "smthWentWrong": "Coś poszło nie tak"
+    },
+    "foo": "bar"
+}

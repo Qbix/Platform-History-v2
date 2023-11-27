@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Přesměrování do Peněženky",
                 "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
-            }
+            },
+            "ConnectWallet": "Připojte Peněženku"
         }
     },
     "setIdentifier": {

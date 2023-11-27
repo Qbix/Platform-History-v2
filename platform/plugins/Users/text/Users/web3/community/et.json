@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Looge kogukond"
+    },
+    "list": {
+        "table": {
+            "td0": "Keti nimi",
+            "td1": "Keti ID",
+            "td2": "kogukonna aadress"
+        },
+        "btnTitle": "Toota"
+    },
+    "form": {
+        "labels": {
+            "chain": "Kett",
+            "hook": "Konks",
+            "invitedHook": "KutsutudHook",
+            "name": "Nimi",
+            "symbol": "Sümbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000",
+            "name": "ERC721 nimi",
+            "symbol": "ERC721 sümbol",
+            "contracturi": "lepingu URI"
+        },
+        "small": {
+            "hook": "lepingu rakendatud ICommunityHook liidese konksu aadress. Võib olla aadress (0)",
+            "invitedHook": "ICommunityInvite&#39;i liidese kutsutud konksu aadress. Võib olla aadress (0)",
+            "name": "ERC721 nimi",
+            "symbol": "ERC721 sümbol",
+            "contracturi": "lepingu URI"
+        },
+        "err": {
+            "hook": "<b>Konks<\/b> vigane",
+            "invitedHook": "<b>KutsutudHook<\/b> on kehtetu",
+            "name": "<b>Nimi<\/b> vigane",
+            "symbol": "<b>Sümbol<\/b> vigane",
+            "contracturi": "<b>contractURI<\/b> on kehtetu"
+        },
+        "btnTitle": "Toota"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Tehaseaadressi ei leia",
+        "transactionFailed": "Tehing ebaõnnestus",
+        "smthWentWrong": "Midagi läks valesti"
+    },
+    "foo": "baar"
+}

@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Inaelekeza kwenye Wallet",
                 "content": "Mara tu ukifunga kidirisha hiki, utachukuliwa hadi kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
-            }
+            },
+            "ConnectWallet": "Unganisha Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Mbinu mbaya ya mkataba {{methodName}}",
-        "ChangeWallet": "Badilisha Wallet"
+        "ChangeWallet": "Badilisha Wallet",
+        "ConnectWallet": "Unganisha Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Baada ya mkoba kuunganishwa tafadhali onyesha upya ukurasa huu ili kutambua pochi"
     },
     "labels": {
         "addToPhonebook": "Ongeza Kwenye Anwani Zangu za Simu",

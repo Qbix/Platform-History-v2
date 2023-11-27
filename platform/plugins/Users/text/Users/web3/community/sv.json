@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Skapa gemenskap"
+    },
+    "list": {
+        "table": {
+            "td0": "Kedjans namn",
+            "td1": "Kedje-ID",
+            "td2": "Gemenskapsadress"
+        },
+        "btnTitle": "Producera"
+    },
+    "form": {
+        "labels": {
+            "chain": "Kedja",
+            "hook": "Krok",
+            "invitedHook": "InvitedHook",
+            "name": "namn",
+            "symbol": "Symbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000",
+            "name": "ERC721 Namn",
+            "symbol": "ERC721 Symbol",
+            "contracturi": "kontrakts-URI"
+        },
+        "small": {
+            "hook": "hook-adress för kontrakt implementerat ICommunityHook-gränssnitt. Kan vara adress (0)",
+            "invitedHook": "inviteHook adress för kontrakt implementerat ICommunityInvite gränssnitt. Kan vara adress (0)",
+            "name": "ERC721 Namn",
+            "symbol": "ERC721 Symbol",
+            "contracturi": "kontrakts-URI"
+        },
+        "err": {
+            "hook": "<b>Kroken<\/b> ogiltig",
+            "invitedHook": "<b>inviteHook<\/b> ogiltig",
+            "name": "<b>Namnet<\/b> är ogiltigt",
+            "symbol": "<b>Symbol<\/b> ogiltig",
+            "contracturi": "<b>contractURI<\/b> ogiltigt"
+        },
+        "btnTitle": "Producera"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Kan inte hitta fabriksadress",
+        "transactionFailed": "Transaktionen misslyckades",
+        "smthWentWrong": "Något gick fel"
+    },
+    "foo": "bar"
+}

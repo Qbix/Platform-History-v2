@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Peradresuojama į Piniginę",
                 "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
-            }
+            },
+            "ConnectWallet": "Prijunkite Piniginę"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Neteisingas sutarties metodas {{methodName}}",
-        "ChangeWallet": "Keisti Piniginę"
+        "ChangeWallet": "Keisti Piniginę",
+        "ConnectWallet": "Prijunkite Piniginę",
+        "AfterWalletConnectedPleaseRefresh": "Prijungę piniginę atnaujinkite šį puslapį, kad atpažintumėte piniginę"
     },
     "labels": {
         "addToPhonebook": "Pridėti prie mano telefono kontaktų",

@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "შექმენით საზოგადოება"
+    },
+    "list": {
+        "table": {
+            "td0": "ჯაჭვის სახელი",
+            "td1": "ჯაჭვის ID",
+            "td2": "საზოგადოების მისამართი"
+        },
+        "btnTitle": "აწარმოე"
+    },
+    "form": {
+        "labels": {
+            "chain": "ჯაჭვი",
+            "hook": "ჰუკი",
+            "invitedHook": "მოწვეული ჰუკი",
+            "name": "სახელი",
+            "symbol": "სიმბოლო",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000000",
+            "name": "ERC721 დასახელება",
+            "symbol": "ERC721 სიმბოლო",
+            "contracturi": "კონტრაქტი URI"
+        },
+        "small": {
+            "hook": "განხორციელებული კონტრაქტის Hook მისამართი ICommunityHook ინტერფეისი. შეიძლება იყოს მისამართი (0)",
+            "invitedHook": "ICCommunityInvite ინტერფეისი. შეიძლება იყოს მისამართი (0)",
+            "name": "ERC721 დასახელება",
+            "symbol": "ERC721 სიმბოლო",
+            "contracturi": "კონტრაქტი URI"
+        },
+        "err": {
+            "hook": "<b>Hook<\/b> არასწორია",
+            "invitedHook": "<b>მოწვეული ჰუკი<\/b> არასწორია",
+            "name": "<b>სახელი<\/b> არასწორია",
+            "symbol": "<b>სიმბოლო<\/b> არასწორია",
+            "contracturi": "<b>contractURI<\/b> არასწორია"
+        },
+        "btnTitle": "აწარმოე"
+    },
+    "err": {
+        "cantFindFactoryAddress": "ქარხნის მისამართის პოვნა ვერ ხერხდება",
+        "transactionFailed": "ტრანზაქცია ვერ მოხერხდა",
+        "smthWentWrong": "Რაღაც არასწორად წავიდა"
+    },
+    "foo": "ბარი"
+}

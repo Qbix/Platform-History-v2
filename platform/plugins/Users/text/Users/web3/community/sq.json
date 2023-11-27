@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Krijo Komunitet"
+    },
+    "list": {
+        "table": {
+            "td0": "Emri i zinxhirit",
+            "td1": "Id i zinxhirit",
+            "td2": "Adresa e komunitetit"
+        },
+        "btnTitle": "Prodhoni"
+    },
+    "form": {
+        "labels": {
+            "chain": "Zinxhir",
+            "hook": "Hook",
+            "invitedHook": "Hook i ftuar",
+            "name": "Emri",
+            "symbol": "Simboli",
+            "contracturi": "kontrataURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000",
+            "name": "Emri ERC721",
+            "symbol": "Simboli ERC721",
+            "contracturi": "URI e kontratës"
+        },
+        "small": {
+            "hook": "Adresa e fiksimit të ndërfaqes së kontratës së zbatuar ICommunityHook. Mund të jetë adresa (0)",
+            "invitedHook": "Adresa e ftuarHook e kontratës së zbatuar ndërfaqja ICommunityInvite. Mund të jetë adresa (0)",
+            "name": "Emri ERC721",
+            "symbol": "Simboli ERC721",
+            "contracturi": "URI e kontratës"
+        },
+        "err": {
+            "hook": "<b>Hook<\/b> i pavlefshëm",
+            "invitedHook": "<b>ftuarHook<\/b> e pavlefshme",
+            "name": "<b>Emri<\/b> i pavlefshëm",
+            "symbol": "<b>Simboli<\/b> i pavlefshëm",
+            "contracturi": "<b>kontrataURI<\/b> e pavlefshme"
+        },
+        "btnTitle": "Prodhoni"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Nuk mund të gjendet adresa e fabrikës",
+        "transactionFailed": "Transaksioni dështoi",
+        "smthWentWrong": "Dicka shkoi keq"
+    },
+    "foo": "bar"
+}

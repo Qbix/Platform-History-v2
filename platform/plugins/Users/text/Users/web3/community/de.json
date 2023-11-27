@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Erstellen Sie eine Community"
+    },
+    "list": {
+        "table": {
+            "td0": "Kettenname",
+            "td1": "Ketten-ID",
+            "td2": "Community-Adresse"
+        },
+        "btnTitle": "Produzieren"
+    },
+    "form": {
+        "labels": {
+            "chain": "Kette",
+            "hook": "Haken",
+            "invitedHook": "InvitedHook",
+            "name": "Name",
+            "symbol": "Symbol",
+            "contracturi": "VertragsURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000",
+            "name": "ERC721-Name",
+            "symbol": "ERC721-Symbol",
+            "contracturi": "Vertrags-URI"
+        },
+        "small": {
+            "hook": "Hook-Adresse der im Vertrag implementierten ICommunityHook-Schnittstelle. Kann Adresse(0) sein",
+            "invitedHook": "„invitedHook“-Adresse der im Vertrag implementierten ICommunityInvite-Schnittstelle. Kann Adresse(0) sein",
+            "name": "ERC721-Name",
+            "symbol": "ERC721-Symbol",
+            "contracturi": "Vertrags-URI"
+        },
+        "err": {
+            "hook": "<b>Hook<\/b> ungültig",
+            "invitedHook": "<b>InvitedHook<\/b> ungültig",
+            "name": "<b>Name<\/b> ungültig",
+            "symbol": "<b>Symbol<\/b> ungültig",
+            "contracturi": "<b>ContractURI<\/b> ungültig"
+        },
+        "btnTitle": "Produzieren"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Fabrikadresse kann nicht gefunden werden",
+        "transactionFailed": "Transaktion fehlgeschlagen",
+        "smthWentWrong": "Etwas ist schief gelaufen"
+    },
+    "foo": "Bar"
+}

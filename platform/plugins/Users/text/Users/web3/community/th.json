@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "สร้างชุมชน"
+    },
+    "list": {
+        "table": {
+            "td0": "ชื่อลูกโซ่",
+            "td1": "รหัสลูกโซ่",
+            "td2": "ที่อยู่ชุมชน"
+        },
+        "btnTitle": "ผลิต"
+    },
+    "form": {
+        "labels": {
+            "chain": "โซ่",
+            "hook": "ตะขอ",
+            "invitedHook": "เชิญฮุก",
+            "name": "ชื่อ",
+            "symbol": "เครื่องหมาย",
+            "contracturi": "ContractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000000000000000000000000000000000000",
+            "name": "ชื่อ ERC721",
+            "symbol": "สัญลักษณ์ ERC721",
+            "contracturi": "URI สัญญา"
+        },
+        "small": {
+            "hook": "ที่อยู่เบ็ดของสัญญาดำเนินการอินเตอร์เฟซ ICommunityHook สามารถเป็นที่อยู่(0)",
+            "invitedHook": "เชิญที่อยู่ Hook ของสัญญาใช้งานอินเทอร์เฟซ ICommunityInvite สามารถเป็นที่อยู่(0)",
+            "name": "ชื่อ ERC721",
+            "symbol": "สัญลักษณ์ ERC721",
+            "contracturi": "URI สัญญา"
+        },
+        "err": {
+            "hook": "<b>ฮุค<\/b> ไม่ถูกต้อง",
+            "invitedHook": "<b>เชิญHook<\/b> ไม่ถูกต้อง",
+            "name": "<b>ชื่อ<\/b> ไม่ถูกต้อง",
+            "symbol": "<b>สัญลักษณ์<\/b> ไม่ถูกต้อง",
+            "contracturi": "<b>ContractURI<\/b> ไม่ถูกต้อง"
+        },
+        "btnTitle": "ผลิต"
+    },
+    "err": {
+        "cantFindFactoryAddress": "ไม่พบที่อยู่โรงงาน",
+        "transactionFailed": "การทำธุรกรรมล้มเหลว",
+        "smthWentWrong": "บางอย่างผิดพลาด"
+    },
+    "foo": "บาร์"
+}

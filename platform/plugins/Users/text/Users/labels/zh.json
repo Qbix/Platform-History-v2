@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "添加到我的手机联系人",
+    "addLabel": "新关系",
+    "newRole": "新角色",
+    "prompt": "给它起个名字",
+    "newLabel": "新标签",
+    "editLabel": "编辑标签",
+    "addBtn": "添加",
+    "editBtn": "更新",
+    "canManageDialogTitle": "可以管理角色",
+    "canManageBtn": "可以管理...",
+    "titlePlaceholder": "标题",
+    "selectOptionTitle_web2": "本国的",
+    "selectOptionTitle_web3": "网络3"
+}

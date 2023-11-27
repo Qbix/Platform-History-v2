@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Chuyển hướng đến Wallet",
                 "content": "Sau khi đóng hộp thoại này, bạn sẽ được đưa đến ví của mình. Sau khi bạn đăng nhập, quay lại trang này."
-            }
+            },
+            "ConnectWallet": "Kết nối ví"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Hợp đồng sai phương thức {{methodName}}",
-        "ChangeWallet": "Thay đổi ví"
+        "ChangeWallet": "Thay đổi ví",
+        "ConnectWallet": "Kết nối ví",
+        "AfterWalletConnectedPleaseRefresh": "Sau khi kết nối ví, vui lòng làm mới trang này để nhận dạng ví"
     },
     "labels": {
         "addToPhonebook": "Thêm vào danh bạ điện thoại của tôi",

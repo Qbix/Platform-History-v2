@@ -126,7 +126,8 @@
             "alert": {
                 "title": "重定向到钱包",
                 "content": "关闭此对话框后，您将被带到您的钱包。登录后，返回此页面。"
-            }
+            },
+            "ConnectWallet": "连接钱包"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "合约方式错误{{methodName}}",
-        "ChangeWallet": "换钱包"
+        "ChangeWallet": "换钱包",
+        "ConnectWallet": "连接钱包",
+        "AfterWalletConnectedPleaseRefresh": "钱包连接后请刷新此页面以识别钱包"
     },
     "labels": {
         "addToPhonebook": "添加到我的电话联系人",

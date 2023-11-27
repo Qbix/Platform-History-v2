@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Omdirigerer til Wallet",
                 "content": "Når du lukker denne dialog, vil du blive ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
-            }
+            },
+            "ConnectWallet": "Tilslut tegnebog"
         }
     },
     "setIdentifier": {

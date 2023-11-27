@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Sukurti bendruomenę"
+    },
+    "list": {
+        "table": {
+            "td0": "Grandinės pavadinimas",
+            "td1": "Grandinės ID",
+            "td2": "Bendrijos adresas"
+        },
+        "btnTitle": "Gaminti"
+    },
+    "form": {
+        "labels": {
+            "chain": "Grandinė",
+            "hook": "Kabliukas",
+            "invitedHook": "InvitedHook",
+            "name": "vardas",
+            "symbol": "Simbolis",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000000",
+            "name": "ERC721 pavadinimas",
+            "symbol": "ERC721 simbolis",
+            "contracturi": "sutarties URI"
+        },
+        "small": {
+            "hook": "Sutartyje įdiegtos ICommunityHook sąsajos kablio adresas. Gali būti adresas (0)",
+            "invitedHook": "„ICommunityInvite“ sąsajos sutartyje įdiegtos įkiškio adresas. Gali būti adresas (0)",
+            "name": "ERC721 pavadinimas",
+            "symbol": "ERC721 simbolis",
+            "contracturi": "sutarties URI"
+        },
+        "err": {
+            "hook": "<b>Kabliukas<\/b> negalioja",
+            "invitedHook": "<b>pakviestasKablys<\/b> negalioja",
+            "name": "Netinkamas <b>pavadinimas<\/b>",
+            "symbol": "Netinkamas <b>simbolis<\/b>",
+            "contracturi": "<b>contractURI<\/b> negalioja"
+        },
+        "btnTitle": "Gaminti"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Nepavyko rasti gamyklos adreso",
+        "transactionFailed": "Sandoris nepavyko",
+        "smthWentWrong": "Kažkas nutiko"
+    },
+    "foo": "baras"
+}

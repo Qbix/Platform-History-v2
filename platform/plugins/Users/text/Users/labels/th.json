@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "เพิ่มลงในรายชื่อติดต่อในโทรศัพท์ของฉัน",
+    "addLabel": "ความสัมพันธ์ใหม่",
+    "newRole": "บทบาทใหม่",
+    "prompt": "ตั้งชื่อให้มัน",
+    "newLabel": "ป้ายกำกับใหม่",
+    "editLabel": "แก้ไขป้ายกำกับ",
+    "addBtn": "เพิ่ม",
+    "editBtn": "อัปเดต",
+    "canManageDialogTitle": "สามารถจัดการบทบาทได้",
+    "canManageBtn": "จัดการได้...",
+    "titlePlaceholder": "ชื่อ",
+    "selectOptionTitle_web2": "พื้นเมือง",
+    "selectOptionTitle_web3": "เว็บ3"
+}

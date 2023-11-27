@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Cipta Komuniti"
+    },
+    "list": {
+        "table": {
+            "td0": "Nama Rantai",
+            "td1": "Id Rantaian",
+            "td2": "Alamat komuniti"
+        },
+        "btnTitle": "Menghasilkan"
+    },
+    "form": {
+        "labels": {
+            "chain": "rantai",
+            "hook": "cangkuk",
+            "invitedHook": "InvitedHook",
+            "name": "Nama",
+            "symbol": "Simbol",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000",
+            "name": "Nama ERC721",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI kontrak"
+        },
+        "small": {
+            "hook": "alamat cangkuk kontrak yang dilaksanakan antara muka ICommunityHook. Boleh alamat(0)",
+            "invitedHook": "invitedHook alamat kontrak yang dilaksanakan antara muka ICommunityInvite. Boleh alamat(0)",
+            "name": "Nama ERC721",
+            "symbol": "Simbol ERC721",
+            "contracturi": "URI kontrak"
+        },
+        "err": {
+            "hook": "<b>Cangkuk<\/b> tidak sah",
+            "invitedHook": "<b>invitedHook<\/b> tidak sah",
+            "name": "<b>Nama<\/b> tidak sah",
+            "symbol": "<b>Simbol<\/b> tidak sah",
+            "contracturi": "<b>contractURI<\/b> tidak sah"
+        },
+        "btnTitle": "Menghasilkan"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Tidak dapat mencari alamat kilang",
+        "transactionFailed": "transaksi gagal",
+        "smthWentWrong": "Sesuatu telah berlaku"
+    },
+    "foo": "bar"
+}

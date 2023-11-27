@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "افزودن به مخاطبین تلفن من",
+    "addLabel": "رابطه جدید",
+    "newRole": "نقش جدید",
+    "prompt": "اسمش را بگذار",
+    "newLabel": "برچسب جدید",
+    "editLabel": "ویرایش برچسب",
+    "addBtn": "اضافه کردن",
+    "editBtn": "به روز رسانی",
+    "canManageDialogTitle": "می تواند نقش ها را مدیریت کند",
+    "canManageBtn": "می تواند مدیریت ...",
+    "titlePlaceholder": "عنوان",
+    "selectOptionTitle_web2": "بومی",
+    "selectOptionTitle_web3": "وب 3"
+}

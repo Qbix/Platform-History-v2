@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "کمیونٹی بنائیں"
+    },
+    "list": {
+        "table": {
+            "td0": "سلسلہ کا نام",
+            "td1": "زنجیر کی شناخت",
+            "td2": "کمیونٹی کا پتہ"
+        },
+        "btnTitle": "پیدا کرنا"
+    },
+    "form": {
+        "labels": {
+            "chain": "زنجیر",
+            "hook": "کانٹا",
+            "invitedHook": "InvitedHook",
+            "name": "نام",
+            "symbol": "علامت",
+            "contracturi": "معاہدہ یو آر آئی"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000",
+            "name": "ERC721 نام",
+            "symbol": "ERC721 علامت",
+            "contracturi": "معاہدہ URI"
+        },
+        "small": {
+            "hook": "کنٹریکٹ کا ہک ایڈریس لاگو ICommunityHook انٹرفیس۔ پتہ (0) ہو سکتا ہے",
+            "invitedHook": "ICommunityInvite انٹرفیس کو لاگو کیا گیا معاہدہ کا مدعو ہک ایڈریس۔ پتہ (0) ہو سکتا ہے",
+            "name": "ERC721 نام",
+            "symbol": "ERC721 علامت",
+            "contracturi": "معاہدہ URI"
+        },
+        "err": {
+            "hook": "<b>ہک<\/b> غلط ہے۔",
+            "invitedHook": "<b>مدعو ہک<\/b> غلط ہے۔",
+            "name": "<b>نام<\/b> غلط ہے۔",
+            "symbol": "<b>علامت<\/b> غلط ہے۔",
+            "contracturi": "<b>معاہدہ یو آر آئی<\/b> غلط ہے۔"
+        },
+        "btnTitle": "پیدا کرنا"
+    },
+    "err": {
+        "cantFindFactoryAddress": "فیکٹری کا پتہ نہیں مل سکا",
+        "transactionFailed": "لین دین ناکام ہو گیا۔",
+        "smthWentWrong": "کچھ غلط ہو گیا"
+    },
+    "foo": "بار"
+}

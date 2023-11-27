@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Добавить в контакты моего телефона",
+    "addLabel": "Новые отношения",
+    "newRole": "Новая роль",
+    "prompt": "Дайте ему имя",
+    "newLabel": "Новый лейбл",
+    "editLabel": "Изменить ярлык",
+    "addBtn": "Добавлять",
+    "editBtn": "Обновлять",
+    "canManageDialogTitle": "Может управлять ролями",
+    "canManageBtn": "Может управлять...",
+    "titlePlaceholder": "Заголовок",
+    "selectOptionTitle_web2": "Родной",
+    "selectOptionTitle_web3": "Веб3"
+}

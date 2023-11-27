@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Hozzáadás a telefonhoz névjegyekhez",
+    "addLabel": "Új kapcsolat",
+    "newRole": "Új szerep",
+    "prompt": "Adj neki nevet",
+    "newLabel": "Új címke",
+    "editLabel": "Címke szerkesztése",
+    "addBtn": "Hozzáadás",
+    "editBtn": "Frissítés",
+    "canManageDialogTitle": "Kezelheti a szerepeket",
+    "canManageBtn": "Kezelheti...",
+    "titlePlaceholder": "Cím",
+    "selectOptionTitle_web2": "Anyanyelvi",
+    "selectOptionTitle_web3": "Web3"
+}

@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Herlei tans na Wallet",
                 "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
-            }
+            },
+            "ConnectWallet": "Koppel Wallet"
         }
     },
     "setIdentifier": {

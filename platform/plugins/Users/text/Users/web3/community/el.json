@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Δημιουργία Κοινότητας"
+    },
+    "list": {
+        "table": {
+            "td0": "Όνομα αλυσίδας",
+            "td1": "Αναγνωριστικό αλυσίδας",
+            "td2": "Διεύθυνση κοινότητας"
+        },
+        "btnTitle": "Παράγω"
+    },
+    "form": {
+        "labels": {
+            "chain": "Αλυσίδα",
+            "hook": "Αγκιστρο",
+            "invitedHook": "InvitedHook",
+            "name": "Ονομα",
+            "symbol": "Σύμβολο",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000000",
+            "name": "ERC721 Όνομα",
+            "symbol": "Σύμβολο ERC721",
+            "contracturi": "URI σύμβασης"
+        },
+        "small": {
+            "hook": "διεύθυνση αγκίστρου της διεπαφής ICommunityHook που υλοποιήθηκε με σύμβαση. Μπορεί να είναι διεύθυνση(0)",
+            "invitedHook": "Διεύθυνση guestsHook της σύμβασης που υλοποιήθηκε διεπαφή ICommunityInvite. Μπορεί να είναι διεύθυνση(0)",
+            "name": "ERC721 Όνομα",
+            "symbol": "Σύμβολο ERC721",
+            "contracturi": "URI σύμβασης"
+        },
+        "err": {
+            "hook": "Άκυρο <b>άγκιστρο<\/b>",
+            "invitedHook": "<b>προσκεκλημένοHook<\/b> μη έγκυρο",
+            "name": "Άκυρο <b>όνομα<\/b>",
+            "symbol": "<b>Το σύμβολο<\/b> δεν είναι έγκυρο",
+            "contracturi": "Μη έγκυρο <b>contractURI<\/b>"
+        },
+        "btnTitle": "Παράγω"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Δεν είναι δυνατή η εύρεση της εργοστασιακής διεύθυνσης",
+        "transactionFailed": "η συναλλαγή απέτυχε",
+        "smthWentWrong": "Κάτι πήγε στραβά"
+    },
+    "foo": "μπαρ"
+}

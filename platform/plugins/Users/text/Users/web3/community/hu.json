@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Közösség létrehozása"
+    },
+    "list": {
+        "table": {
+            "td0": "Lánc neve",
+            "td1": "Lánc Id",
+            "td2": "Közösségi cím"
+        },
+        "btnTitle": "előállítani"
+    },
+    "form": {
+        "labels": {
+            "chain": "Lánc",
+            "hook": "Horog",
+            "invitedHook": "InvitedHook",
+            "name": "Név",
+            "symbol": "Szimbólum",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000000",
+            "name": "ERC721 Név",
+            "symbol": "ERC721 Szimbólum",
+            "contracturi": "szerződés URI"
+        },
+        "small": {
+            "hook": "a szerződésben megvalósított ICommunityHook interfész horogcíme. Lehet cím(0)",
+            "invitedHook": "A szerződésben megvalósított ICommunityInvite felület meghívottHook címe. Lehet cím(0)",
+            "name": "ERC721 Név",
+            "symbol": "ERC721 Szimbólum",
+            "contracturi": "szerződés URI"
+        },
+        "err": {
+            "hook": "<b>A horog<\/b> érvénytelen",
+            "invitedHook": "<b>A meghívottHook<\/b> érvénytelen",
+            "name": "<b>A név<\/b> érvénytelen",
+            "symbol": "<b>A szimbólum<\/b> érvénytelen",
+            "contracturi": "<b>contractURI<\/b> érvénytelen"
+        },
+        "btnTitle": "előállítani"
+    },
+    "err": {
+        "cantFindFactoryAddress": "A gyári cím nem található",
+        "transactionFailed": "sikertelen tranzakció",
+        "smthWentWrong": "Valami elromlott"
+    },
+    "foo": "rúd"
+}

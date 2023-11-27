@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "समुदाय बनाएं"
+    },
+    "list": {
+        "table": {
+            "td0": "श्रृंखला का नाम",
+            "td1": "चेन आईडी",
+            "td2": "सामुदायिक पता"
+        },
+        "btnTitle": "उत्पादन करना"
+    },
+    "form": {
+        "labels": {
+            "chain": "जंजीर",
+            "hook": "अंकुश",
+            "invitedHook": "InvitedHook",
+            "name": "नाम",
+            "symbol": "प्रतीक",
+            "contracturi": "कॉन्ट्रैक्टुरि"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000",
+            "name": "ERC721 नाम",
+            "symbol": "ERC721 प्रतीक",
+            "contracturi": "अनुबंध यूआरआई"
+        },
+        "small": {
+            "hook": "अनुबंध कार्यान्वित ICcommunityHook इंटरफ़ेस का हुक पता। पता हो सकता है(0)",
+            "invitedHook": "अनुबंध कार्यान्वित ICmunityInvite इंटरफ़ेस का आमंत्रणहुक पता। पता हो सकता है(0)",
+            "name": "ERC721 नाम",
+            "symbol": "ERC721 प्रतीक",
+            "contracturi": "अनुबंध यूआरआई"
+        },
+        "err": {
+            "hook": "<b>हुक<\/b> अमान्य",
+            "invitedHook": "<b>आमंत्रितहुक<\/b> अमान्य",
+            "name": "<b>नाम<\/b> अमान्य",
+            "symbol": "<b>प्रतीक<\/b> अमान्य",
+            "contracturi": "<b>कॉन्ट्रैक्टयूआरआई<\/b> अमान्य"
+        },
+        "btnTitle": "उत्पादन करना"
+    },
+    "err": {
+        "cantFindFactoryAddress": "फ़ैक्टरी का पता नहीं मिल सका",
+        "transactionFailed": "लेन - देन विफल",
+        "smthWentWrong": "कुछ गलत हो गया"
+    },
+    "foo": "छड़"
+}

@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "ჩემი ტელეფონის კონტაქტებში დამატება",
+    "addLabel": "ახალი ურთიერთობა",
+    "newRole": "ახალი როლი",
+    "prompt": "დაარქვით სახელი",
+    "newLabel": "ახალი ლეიბლი",
+    "editLabel": "ლეიბლის რედაქტირება",
+    "addBtn": "დამატება",
+    "editBtn": "განახლება",
+    "canManageDialogTitle": "შეუძლია როლების მართვა",
+    "canManageBtn": "შეუძლია მართვა...",
+    "titlePlaceholder": "სათაური",
+    "selectOptionTitle_web2": "მშობლიური",
+    "selectOptionTitle_web3": "ვებ3"
+}

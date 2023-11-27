@@ -126,7 +126,8 @@
             "alert": {
                 "title": "ወደ Wallet በማዞር ላይ",
                 "content": "ይህን ንግግር አንዴ ከዘጉ፣ ወደ ቦርሳዎ ይወሰዳሉ። ከገቡ በኋላ ወደዚህ ገጽ ይመለሱ።"
-            }
+            },
+            "ConnectWallet": "Walletን ያገናኙ"
         }
     },
     "setIdentifier": {

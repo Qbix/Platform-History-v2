@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "创建社区"
+    },
+    "list": {
+        "table": {
+            "td0": "连锁名称",
+            "td1": "链号",
+            "td2": "社区地址"
+        },
+        "btnTitle": "生产"
+    },
+    "form": {
+        "labels": {
+            "chain": "链",
+            "hook": "钩",
+            "invitedHook": "邀请钩子",
+            "name": "姓名",
+            "symbol": "象征",
+            "contracturi": "合约URI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "ERC721名称",
+            "symbol": "ERC721符号",
+            "contracturi": "合约URI"
+        },
+        "small": {
+            "hook": "合约实现的 ICommunityHook 接口的钩子地址。可以是地址(0)",
+            "invitedHook": "合约实现的ICommunityInvite接口的invitedHook地址。可以是地址(0)",
+            "name": "ERC721名称",
+            "symbol": "ERC721符号",
+            "contracturi": "合约URI"
+        },
+        "err": {
+            "hook": "<b>挂钩<\/b>无效",
+            "invitedHook": "<b>邀请钩子<\/b>无效",
+            "name": "<b>名称<\/b>无效",
+            "symbol": "<b>符号<\/b>无效",
+            "contracturi": "<b>合约URI<\/b>无效"
+        },
+        "btnTitle": "生产"
+    },
+    "err": {
+        "cantFindFactoryAddress": "找不到工厂地址",
+        "transactionFailed": "交易失败",
+        "smthWentWrong": "出了些问题"
+    },
+    "foo": "酒吧"
+}

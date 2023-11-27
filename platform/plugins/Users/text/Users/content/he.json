@@ -126,7 +126,8 @@
             "alert": {
                 "title": "מפנה מחדש לארנק",
                 "content": "לאחר שתסגור את הדו-שיח הזה, תועבר לארנק שלך. לאחר הכניסה, חזור לדף זה."
-            }
+            },
+            "ConnectWallet": "חבר ארנק"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "שיטת חוזה שגויה {{methodName}}",
-        "ChangeWallet": "שנה ארנק"
+        "ChangeWallet": "שנה ארנק",
+        "ConnectWallet": "חבר ארנק",
+        "AfterWalletConnectedPleaseRefresh": "לאחר חיבור הארנק אנא רענן דף זה כדי לזהות את הארנק"
     },
     "labels": {
         "addToPhonebook": "הוסף לטלפון שלי אנשי קשר",

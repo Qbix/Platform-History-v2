@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "צור קהילה"
+    },
+    "list": {
+        "table": {
+            "td0": "שם שרשרת",
+            "td1": "מזהה שרשרת",
+            "td2": "כתובת קהילה"
+        },
+        "btnTitle": "ליצר"
+    },
+    "form": {
+        "labels": {
+            "chain": "שַׁרשֶׁרֶת",
+            "hook": "וו",
+            "invitedHook": "InvitedHook",
+            "name": "שֵׁם",
+            "symbol": "סֵמֶל",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000",
+            "name": "שם ERC721",
+            "symbol": "סמל ERC721",
+            "contracturi": "חוזה URI"
+        },
+        "small": {
+            "hook": "Hook כתובת של חוזה מיושם ממשק ICommunityHook. יכול להיות כתובת (0)",
+            "invitedHook": "הכתובת של inviteHook של החוזה מיושם ממשק ICommunityInvite. יכול להיות כתובת (0)",
+            "name": "שם ERC721",
+            "symbol": "סמל ERC721",
+            "contracturi": "חוזה URI"
+        },
+        "err": {
+            "hook": "<b>הוק<\/b> לא חוקי",
+            "invitedHook": "<b>inviteHook<\/b> לא חוקי",
+            "name": "<b>השם<\/b> לא חוקי",
+            "symbol": "<b>סמל<\/b> לא חוקי",
+            "contracturi": "<b>contractURI<\/b> אינו חוקי"
+        },
+        "btnTitle": "ליצר"
+    },
+    "err": {
+        "cantFindFactoryAddress": "לא מוצא את כתובת המפעל",
+        "transactionFailed": "העסקה נכשלה",
+        "smthWentWrong": "משהו השתבש"
+    },
+    "foo": "בַּר"
+}

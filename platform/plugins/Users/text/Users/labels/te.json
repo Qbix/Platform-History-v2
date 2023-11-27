@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "నా ఫోన్ పరిచయాలకు జోడించండి",
+    "addLabel": "కొత్త సంబంధం",
+    "newRole": "కొత్త పాత్ర",
+    "prompt": "దానికి ఒక పేరు పెట్టండి",
+    "newLabel": "కొత్త లేబుల్",
+    "editLabel": "లేబుల్‌ని సవరించండి",
+    "addBtn": "జోడించు",
+    "editBtn": "నవీకరించు",
+    "canManageDialogTitle": "పాత్రలను నిర్వహించగలరు",
+    "canManageBtn": "నిర్వహించగలరు...",
+    "titlePlaceholder": "శీర్షిక",
+    "selectOptionTitle_web2": "స్థానికుడు",
+    "selectOptionTitle_web3": "వెబ్3"
+}

@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Idagdag sa Aking Mga Contact sa Telepono",
+    "addLabel": "Bagong Relasyon",
+    "newRole": "Bagong Tungkulin",
+    "prompt": "Bigyan ito ng pangalan",
+    "newLabel": "Bagong Label",
+    "editLabel": "I-edit ang Label",
+    "addBtn": "Idagdag",
+    "editBtn": "Update",
+    "canManageDialogTitle": "Maaaring Pamahalaan ang Mga Tungkulin",
+    "canManageBtn": "Maaaring Pamahalaan...",
+    "titlePlaceholder": "Pamagat",
+    "selectOptionTitle_web2": "Katutubo",
+    "selectOptionTitle_web3": "Web3"
+}

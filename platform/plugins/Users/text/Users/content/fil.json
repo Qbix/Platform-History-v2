@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Nagre-redirect sa Wallet",
                 "content": "Sa sandaling isara mo ang dialog na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa page na ito."
-            }
+            },
+            "ConnectWallet": "Ikonekta ang Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Maling paraan ng kontrata {{methodName}}",
-        "ChangeWallet": "Baguhin ang Wallet"
+        "ChangeWallet": "Baguhin ang Wallet",
+        "ConnectWallet": "Ikonekta ang Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Pagkatapos makonekta ang wallet paki-refresh ang page na ito para makilala ang wallet"
     },
     "labels": {
         "addToPhonebook": "Idagdag sa Aking Mga Contact sa Telepono",

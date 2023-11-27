@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Przekierowanie do Portfela",
                 "content": "Po zamknięciu tego okna dialogowego zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
-            }
+            },
+            "ConnectWallet": "Połącz portfel"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Niewłaściwa metoda kontraktu {{methodName}}",
-        "ChangeWallet": "Zmień portfel"
+        "ChangeWallet": "Zmień portfel",
+        "ConnectWallet": "Połącz portfel",
+        "AfterWalletConnectedPleaseRefresh": "Po podłączeniu portfela odśwież tę stronę, aby rozpoznać portfel"
     },
     "labels": {
         "addToPhonebook": "Dodaj do moich kontaktów w telefonie",

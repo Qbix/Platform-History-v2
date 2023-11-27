@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Dodaj u kontakte mog telefona",
+    "addLabel": "Nova veza",
+    "newRole": "Nova uloga",
+    "prompt": "Daj mu ime",
+    "newLabel": "Nova etiketa",
+    "editLabel": "Uredi oznaku",
+    "addBtn": "Dodati",
+    "editBtn": "Ažuriraj",
+    "canManageDialogTitle": "Može upravljati ulogama",
+    "canManageBtn": "Može upravljati...",
+    "titlePlaceholder": "Titula",
+    "selectOptionTitle_web2": "Zavičajni",
+    "selectOptionTitle_web3": "Web3"
+}

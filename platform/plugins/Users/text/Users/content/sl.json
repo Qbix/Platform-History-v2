@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Preusmerjanje v denarnico",
                 "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v svojo denarnico. Ko se prijavite, se vrnite na to stran."
-            }
+            },
+            "ConnectWallet": "Povežite denarnico"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Napačna pogodbena metoda {{methodName}}",
-        "ChangeWallet": "Spremeni denarnico"
+        "ChangeWallet": "Spremeni denarnico",
+        "ConnectWallet": "Povežite denarnico",
+        "AfterWalletConnectedPleaseRefresh": "Ko je denarnica povezana, osvežite to stran, da prepoznate denarnico"
     },
     "labels": {
         "addToPhonebook": "Dodaj v moje stike v telefonu",

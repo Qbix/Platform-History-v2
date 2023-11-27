@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Redirigir a Wallet",
                 "content": "Una vez que cierre este cuadro de diálogo, será llevado a su billetera. Después de iniciar sesión, regrese a esta página."
-            }
+            },
+            "ConnectWallet": "Conectar billetera"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Método de contrato incorrecto {{methodName}}",
-        "ChangeWallet": "Cambiar billetera"
+        "ChangeWallet": "Cambiar billetera",
+        "ConnectWallet": "Conectar billetera",
+        "AfterWalletConnectedPleaseRefresh": "Después de conectar la billetera, actualice esta página para reconocer la billetera."
     },
     "labels": {
         "addToPhonebook": "Agregar a los contactos de mi teléfono",

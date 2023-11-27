@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Prebieha presmerovanie do Peňaženky",
                 "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
-            }
+            },
+            "ConnectWallet": "Pripojiť Peňaženku"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Nesprávna zmluvná metóda {{methodName}}",
-        "ChangeWallet": "Zmeniť Peňaženku"
+        "ChangeWallet": "Zmeniť Peňaženku",
+        "ConnectWallet": "Pripojiť Peňaženku",
+        "AfterWalletConnectedPleaseRefresh": "Po pripojení peňaženky obnovte túto stránku, aby ste peňaženku rozpoznali"
     },
     "labels": {
         "addToPhonebook": "Pridať do kontaktov v mojom telefóne",

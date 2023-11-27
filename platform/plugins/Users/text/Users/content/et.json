@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Ümbersuunamine Walleti",
                 "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
-            }
+            },
+            "ConnectWallet": "Ühendage Wallet"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Vale lepingumeetod {{methodName}}",
-        "ChangeWallet": "Vahetage rahakotti"
+        "ChangeWallet": "Vahetage rahakotti",
+        "ConnectWallet": "Ühendage Wallet",
+        "AfterWalletConnectedPleaseRefresh": "Pärast rahakoti ühendamist värskendage seda lehte rahakoti tuvastamiseks"
     },
     "labels": {
         "addToPhonebook": "Lisa minu telefoni kontaktidesse",

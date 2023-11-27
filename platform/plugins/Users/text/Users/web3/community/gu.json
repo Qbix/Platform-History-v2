@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "સમુદાય બનાવો"
+    },
+    "list": {
+        "table": {
+            "td0": "સાંકળનું નામ",
+            "td1": "સાંકળ આઈડી",
+            "td2": "સમુદાયનું સરનામું"
+        },
+        "btnTitle": "ઉત્પાદન"
+    },
+    "form": {
+        "labels": {
+            "chain": "સાંકળ",
+            "hook": "હૂક",
+            "invitedHook": "InvitedHook",
+            "name": "નામ",
+            "symbol": "પ્રતીક",
+            "contracturi": "કોન્ટ્રાક્ટયુઆરઆઈ"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000",
+            "name": "ERC721 નામ",
+            "symbol": "ERC721 પ્રતીક",
+            "contracturi": "કરાર URI"
+        },
+        "small": {
+            "hook": "કરારનું હૂક સરનામું અમલમાં મૂકાયેલ ICcommunityHook ઇન્ટરફેસ. સરનામું (0) હોઈ શકે છે",
+            "invitedHook": "કોન્ટ્રાક્ટનું આમંત્રિત હૂક સરનામું અમલીકૃત ICcommunityInvite ઈન્ટરફેસ. સરનામું (0) હોઈ શકે છે",
+            "name": "ERC721 નામ",
+            "symbol": "ERC721 પ્રતીક",
+            "contracturi": "કરાર URI"
+        },
+        "err": {
+            "hook": "<b>હૂક<\/b> અમાન્ય",
+            "invitedHook": "<b>આમંત્રિત હૂક<\/b> અમાન્ય",
+            "name": "<b>નામ<\/b> અમાન્ય",
+            "symbol": "<b>પ્રતીક<\/b> અમાન્ય",
+            "contracturi": "<b>કોન્ટ્રાક્ટયુઆરઆઈ<\/b> અમાન્ય"
+        },
+        "btnTitle": "ઉત્પાદન"
+    },
+    "err": {
+        "cantFindFactoryAddress": "ફેક્ટરી સરનામું શોધી શકાતું નથી",
+        "transactionFailed": "વ્યવહાર નિષ્ફળ ગયો",
+        "smthWentWrong": "કંઈક ખોટું થયું"
+    },
+    "foo": "બાર"
+}

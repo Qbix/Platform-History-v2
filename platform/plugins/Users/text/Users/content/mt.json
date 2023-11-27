@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Direzzjoni mill-ġdid lejn Wallet",
                 "content": "Ladarba tagħlaq dan id-djalogu, tittieħed fil-kartiera tiegħek. Wara li tidħol, erġa&#39; lura għal din il-paġna."
-            }
+            },
+            "ConnectWallet": "Qabbad Kartiera"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Metodu kuntrattwali ħażin {{methodName}}",
-        "ChangeWallet": "Bidla Kartiera"
+        "ChangeWallet": "Bidla Kartiera",
+        "ConnectWallet": "Qabbad Kartiera",
+        "AfterWalletConnectedPleaseRefresh": "Wara li l-kartiera tkun imqabbda jekk jogħġbok aġġorna din il-paġna biex tagħraf il-kartiera"
     },
     "labels": {
         "addToPhonebook": "Żid Mal-Kuntatti tat-Telefown Tiegħi",

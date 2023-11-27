@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Pievienot mana tālruņa kontaktpersonām",
+    "addLabel": "Jaunas attiecības",
+    "newRole": "Jauna loma",
+    "prompt": "Piešķiriet tai nosaukumu",
+    "newLabel": "Jauna etiķete",
+    "editLabel": "Rediģēt etiķeti",
+    "addBtn": "Pievienot",
+    "editBtn": "Atjaunināt",
+    "canManageDialogTitle": "Var pārvaldīt lomas",
+    "canManageBtn": "Var pārvaldīt...",
+    "titlePlaceholder": "Nosaukums",
+    "selectOptionTitle_web2": "Dzimtā",
+    "selectOptionTitle_web3": "Web3"
+}

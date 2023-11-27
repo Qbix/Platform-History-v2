@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Ailgyfeirio i Wallet",
                 "content": "Unwaith y byddwch chi&#39;n cau&#39;r deialog hwn, byddwch chi&#39;n cael eich tywys i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
-            }
+            },
+            "ConnectWallet": "Cyswllt Waled"
         }
     },
     "setIdentifier": {

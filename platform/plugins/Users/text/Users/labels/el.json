@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Προσθήκη στις Επαφές του τηλεφώνου μου",
+    "addLabel": "Νέα Σχέση",
+    "newRole": "Νέος Ρόλος",
+    "prompt": "Δώστε του ένα όνομα",
+    "newLabel": "Νέα ετικέτα",
+    "editLabel": "Επεξεργασία ετικέτας",
+    "addBtn": "Προσθήκη",
+    "editBtn": "Εκσυγχρονίζω",
+    "canManageDialogTitle": "Μπορεί να διαχειριστεί ρόλους",
+    "canManageBtn": "Μπορεί να διαχειριστεί...",
+    "titlePlaceholder": "Τίτλος",
+    "selectOptionTitle_web2": "Ντόπιος",
+    "selectOptionTitle_web3": "Web3"
+}

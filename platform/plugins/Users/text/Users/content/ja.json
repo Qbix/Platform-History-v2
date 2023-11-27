@@ -126,7 +126,8 @@
             "alert": {
                 "title": "ウォレットへのリダイレクト",
                 "content": "このダイアログを閉じると、ウォレットが表示されます。サインインしたら、このページに戻ります。"
-            }
+            },
+            "ConnectWallet": "ウォレットを接続する"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "契約方法を間違えた{{methodName}}",
-        "ChangeWallet": "ウォレットの変更"
+        "ChangeWallet": "ウォレットの変更",
+        "ConnectWallet": "ウォレットを接続する",
+        "AfterWalletConnectedPleaseRefresh": "ウォレットに接続したら、このページを更新してウォレットを認識してください"
     },
     "labels": {
         "addToPhonebook": "電話の連絡先に追加",

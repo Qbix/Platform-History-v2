@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Topluluk Oluştur"
+    },
+    "list": {
+        "table": {
+            "td0": "Zincir Adı",
+            "td1": "Zincir Kimliği",
+            "td2": "Topluluk adresi"
+        },
+        "btnTitle": "Üretmek"
+    },
+    "form": {
+        "labels": {
+            "chain": "Zincir",
+            "hook": "Kanca",
+            "invitedHook": "Davet Edilen Kanca",
+            "name": "İsim",
+            "symbol": "Sembol",
+            "contracturi": "sözleşmeURI"
+        },
+        "placeholders": {
+            "hook": "0x000000000000000000000000000000000000000000",
+            "invitedHook": "0x000000000000000000000000000000000000000000",
+            "name": "ERC721 Adı",
+            "symbol": "ERC721 Sembolü",
+            "contracturi": "sözleşme URI&#39;si"
+        },
+        "small": {
+            "hook": "uygulanan sözleşmenin kanca adresi ICommunityHook arayüzü. Adres(0) olabilir",
+            "invitedHook": "Uygulanan ICommunityInvite arayüzünün davet edilenHook adresi. Adres(0) olabilir",
+            "name": "ERC721 Adı",
+            "symbol": "ERC721 Sembolü",
+            "contracturi": "sözleşme URI&#39;si"
+        },
+        "err": {
+            "hook": "<b>Kanca<\/b> geçersiz",
+            "invitedHook": "<b>davet edildiHook<\/b> geçersiz",
+            "name": "<b>Ad<\/b> geçersiz",
+            "symbol": "<b>Sembol<\/b> geçersiz",
+            "contracturi": "<b>sözleşme URI&#39;si<\/b> geçersiz"
+        },
+        "btnTitle": "Üretmek"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Fabrika adresini bulamıyorum",
+        "transactionFailed": "İşlem başarısız",
+        "smthWentWrong": "Bir şeyler yanlış gitti"
+    },
+    "foo": "çubuk"
+}

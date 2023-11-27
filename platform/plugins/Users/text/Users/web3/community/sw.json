@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Unda Jumuiya"
+    },
+    "list": {
+        "table": {
+            "td0": "Jina la Chain",
+            "td1": "Kitambulisho cha mnyororo",
+            "td2": "Anwani ya jumuiya"
+        },
+        "btnTitle": "Kuzalisha"
+    },
+    "form": {
+        "labels": {
+            "chain": "Mnyororo",
+            "hook": "ndoano",
+            "invitedHook": "MwalikwaHook",
+            "name": "Jina",
+            "symbol": "Alama",
+            "contracturi": "mkatabaURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000000000",
+            "name": "Jina la ERC721",
+            "symbol": "Alama ya ERC721",
+            "contracturi": "mkataba wa URI"
+        },
+        "small": {
+            "hook": "anwani ya ndoano ya kiolesura cha mkataba kilichotekelezwa ICommunityHook. Inaweza kuwa anwani(0)",
+            "invitedHook": "inviteHook anwani ya mkataba kutekelezwa ICommunityInvite interface. Inaweza kuwa anwani(0)",
+            "name": "Jina la ERC721",
+            "symbol": "Alama ya ERC721",
+            "contracturi": "mkataba wa URI"
+        },
+        "err": {
+            "hook": "<b>ndoano<\/b> ni batili",
+            "invitedHook": "<b>Hook iliyoalikwa<\/b> ni batili",
+            "name": "<b>Jina ni<\/b> batili",
+            "symbol": "<b>Alama si<\/b> sahihi",
+            "contracturi": "<b>mkatabaURI<\/b> ni batili"
+        },
+        "btnTitle": "Kuzalisha"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Haiwezi kupata Anwani ya kiwanda",
+        "transactionFailed": "Muamala haukufaulu",
+        "smthWentWrong": "Hitilafu fulani imetokea"
+    },
+    "foo": "bar"
+}

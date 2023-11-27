@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "ایجاد انجمن"
+    },
+    "list": {
+        "table": {
+            "td0": "نام زنجیر",
+            "td1": "شناسه زنجیره",
+            "td2": "آدرس انجمن"
+        },
+        "btnTitle": "تولید کردن"
+    },
+    "form": {
+        "labels": {
+            "chain": "زنجیر",
+            "hook": "قلاب",
+            "invitedHook": "InvitedHook",
+            "name": "نام",
+            "symbol": "سمبل",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x0000000000000000000000000000000000000000",
+            "invitedHook": "0x0000000000000000000000000000000000000000",
+            "name": "نام ERC721",
+            "symbol": "نماد ERC721",
+            "contracturi": "URI قرارداد"
+        },
+        "small": {
+            "hook": "آدرس هوک قرارداد پیاده سازی شده رابط ICommunityHook. می تواند آدرس (0) باشد",
+            "invitedHook": "آدرس دعوت هوک قرارداد پیاده سازی شده رابط ICommunityInvite. می تواند آدرس (0) باشد",
+            "name": "نام ERC721",
+            "symbol": "نماد ERC721",
+            "contracturi": "URI قرارداد"
+        },
+        "err": {
+            "hook": "<b>قلاب<\/b> نامعتبر است",
+            "invitedHook": "<b>دعوت شده هوک<\/b> نامعتبر است",
+            "name": "<b>نام<\/b> نامعتبر است",
+            "symbol": "<b>نماد<\/b> نامعتبر است",
+            "contracturi": "<b>contractURI<\/b> نامعتبر است"
+        },
+        "btnTitle": "تولید کردن"
+    },
+    "err": {
+        "cantFindFactoryAddress": "آدرس کارخانه پیدا نمی شود",
+        "transactionFailed": "معامله ناموفق بود",
+        "smthWentWrong": "مشکلی پیش آمد"
+    },
+    "foo": "بار"
+}

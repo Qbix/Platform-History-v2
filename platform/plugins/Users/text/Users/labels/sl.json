@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Dodaj v moje stike v telefonu",
+    "addLabel": "Novo razmerje",
+    "newRole": "Nova vloga",
+    "prompt": "Daj mu ime",
+    "newLabel": "Nova etiketa",
+    "editLabel": "Uredi oznako",
+    "addBtn": "Dodaj",
+    "editBtn": "Nadgradnja",
+    "canManageDialogTitle": "Lahko upravlja vloge",
+    "canManageBtn": "Lahko upravlja ...",
+    "titlePlaceholder": "Naslov",
+    "selectOptionTitle_web2": "Native",
+    "selectOptionTitle_web3": "Splet3"
+}

@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Pridať do kontaktov v mojom telefóne",
+    "addLabel": "Nový vzťah",
+    "newRole": "Nová rola",
+    "prompt": "Daj tomu meno",
+    "newLabel": "Nový štítok",
+    "editLabel": "Upraviť štítok",
+    "addBtn": "Pridať",
+    "editBtn": "Aktualizovať",
+    "canManageDialogTitle": "Dokáže spravovať roly",
+    "canManageBtn": "Dá sa spravovať...",
+    "titlePlaceholder": "Názov",
+    "selectOptionTitle_web2": "Natívne",
+    "selectOptionTitle_web3": "Web3"
+}

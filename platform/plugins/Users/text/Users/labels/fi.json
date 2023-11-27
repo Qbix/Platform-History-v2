@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Lisää puhelimeen yhteystietoihin",
+    "addLabel": "Uusi suhde",
+    "newRole": "Uusi rooli",
+    "prompt": "Anna sille nimi",
+    "newLabel": "Uusi etiketti",
+    "editLabel": "Muokkaa etikettiä",
+    "addBtn": "Lisätä",
+    "editBtn": "Päivittää",
+    "canManageDialogTitle": "Voi hallita rooleja",
+    "canManageBtn": "Voi hallita...",
+    "titlePlaceholder": "Otsikko",
+    "selectOptionTitle_web2": "Alkuperäinen",
+    "selectOptionTitle_web3": "Web3"
+}

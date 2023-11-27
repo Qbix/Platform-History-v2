@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Adicionar aos contatos do meu telefone",
+    "addLabel": "Novo relacionamento",
+    "newRole": "Novo papel",
+    "prompt": "Dê um nome",
+    "newLabel": "Novo rótulo",
+    "editLabel": "Editar rótulo",
+    "addBtn": "Adicionar",
+    "editBtn": "Atualizar",
+    "canManageDialogTitle": "Pode gerenciar funções",
+    "canManageBtn": "Pode gerenciar ...",
+    "titlePlaceholder": "Título",
+    "selectOptionTitle_web2": "Nativo",
+    "selectOptionTitle_web3": "Web3"
+}

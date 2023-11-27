@@ -1,0 +1,51 @@
+{
+    "title": {
+        "createCommunity": "Створити спільноту"
+    },
+    "list": {
+        "table": {
+            "td0": "Назва ланцюга",
+            "td1": "Ідентифікатор ланцюга",
+            "td2": "Адреса спільноти"
+        },
+        "btnTitle": "Виробляти"
+    },
+    "form": {
+        "labels": {
+            "chain": "ланцюг",
+            "hook": "Гачок",
+            "invitedHook": "InvitedHook",
+            "name": "Ім&#39;я",
+            "symbol": "символ",
+            "contracturi": "contractURI"
+        },
+        "placeholders": {
+            "hook": "0x00000000000000000000000000000000000000000",
+            "invitedHook": "0x00000000000000000000000000000000000000000",
+            "name": "Ім&#39;я ERC721",
+            "symbol": "Символ ERC721",
+            "contracturi": "URI контракту"
+        },
+        "small": {
+            "hook": "адреса підключення контракту, реалізованого інтерфейсу ICommunityHook. Може бути адресою(0)",
+            "invitedHook": "адреса реалізованого контракту ICommunityInvite. Може бути адресою(0)",
+            "name": "Ім&#39;я ERC721",
+            "symbol": "Символ ERC721",
+            "contracturi": "URI контракту"
+        },
+        "err": {
+            "hook": "Недійсний <b>гачок<\/b>",
+            "invitedHook": "<b>запрошенийХок<\/b> недійсний",
+            "name": "<b>Ім&#39;я<\/b> недійсне",
+            "symbol": "Недійсний <b>символ<\/b>",
+            "contracturi": "<b>contractURI<\/b> недійсний"
+        },
+        "btnTitle": "Виробляти"
+    },
+    "err": {
+        "cantFindFactoryAddress": "Не вдається знайти заводську адресу",
+        "transactionFailed": "Помилка транзакції",
+        "smthWentWrong": "Щось пішло не так"
+    },
+    "foo": "бар"
+}

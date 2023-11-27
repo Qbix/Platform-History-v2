@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "הוסף לטלפון שלי אנשי קשר",
+    "addLabel": "מערכת יחסים חדשה",
+    "newRole": "תפקיד חדש",
+    "prompt": "תן לזה שם",
+    "newLabel": "תווית חדשה",
+    "editLabel": "ערוך תווית",
+    "addBtn": "לְהוֹסִיף",
+    "editBtn": "עדכון",
+    "canManageDialogTitle": "יכול לנהל תפקידים",
+    "canManageBtn": "יכול לנהל...",
+    "titlePlaceholder": "כותרת",
+    "selectOptionTitle_web2": "יָלִיד",
+    "selectOptionTitle_web3": "אינטרנט 3"
+}

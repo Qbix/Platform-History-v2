@@ -126,7 +126,8 @@
             "alert": {
                 "title": "Wallet&#39;a Yönlendirme",
                 "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
-            }
+            },
+            "ConnectWallet": "Cüzdanı Bağla"
         }
     },
     "setIdentifier": {
@@ -155,7 +156,9 @@
     },
     "web3": {
         "WrongMethod": "Yanlış sözleşme yöntemi {{methodName}}",
-        "ChangeWallet": "Cüzdanı Değiştir"
+        "ChangeWallet": "Cüzdanı Değiştir",
+        "ConnectWallet": "Cüzdanı Bağla",
+        "AfterWalletConnectedPleaseRefresh": "Cüzdan bağlandıktan sonra cüzdanı tanımak için lütfen bu sayfayı yenileyin"
     },
     "labels": {
         "addToPhonebook": "Telefon Kişilerime Ekle",

@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Додај у контакте мог телефона",
+    "addLabel": "Нев Релатионсхип",
+    "newRole": "Нова улога",
+    "prompt": "Дајте му име",
+    "newLabel": "Нев Лабел",
+    "editLabel": "Уреди ознаку",
+    "addBtn": "Додати",
+    "editBtn": "ажурирање",
+    "canManageDialogTitle": "Може да управља улогама",
+    "canManageBtn": "Може да управља...",
+    "titlePlaceholder": "Наслов",
+    "selectOptionTitle_web2": "Нативе",
+    "selectOptionTitle_web3": "Веб3"
+}

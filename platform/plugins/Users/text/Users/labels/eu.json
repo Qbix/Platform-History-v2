@@ -1,0 +1,15 @@
+{
+    "addToPhonebook": "Gehitu Nire telefonoko kontaktuetara",
+    "addLabel": "Harreman Berria",
+    "newRole": "Rol Berria",
+    "prompt": "Eman izena",
+    "newLabel": "Etiketa berria",
+    "editLabel": "Editatu etiketa",
+    "addBtn": "Gehitu",
+    "editBtn": "Eguneratu",
+    "canManageDialogTitle": "Rolak kudeatu ditzake",
+    "canManageBtn": "Kudeatu dezake...",
+    "titlePlaceholder": "Izenburua",
+    "selectOptionTitle_web2": "Bertakoa",
+    "selectOptionTitle_web3": "Web 3"
+}
