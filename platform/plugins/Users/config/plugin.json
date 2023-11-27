@@ -474,11 +474,11 @@
 				},
 				"metamask": {
 					"name": "Metamask",
-					"url": "https://metamask.app.link/dapp/{{domain}}"
+					"url": "dapp://{{domain}}"
 				},
 				"trustwallet": {
 					"name": "Trust Wallet",
-					"url": "https://link.trustwallet.com/open_url?url={{baseUrl}}"
+					"url": "trust://open_url?url={{baseUrl}}"
 				},
 				"kaikas": {
 					"name": "Kaikas",

@@ -25,7 +25,7 @@
 	 *    Set to 0 if you want to load continuously while scrolling -- but this might cause jitter.
 	 * @param {Object} [options.observerOptions] Override any options to pass to IntersectionObserver
 	 * @param {Element} [options.observerOptions.root=tool.element.scrollingParent(true)]
-	 * @param {String} [options.observerOptions.rootMargin='0px']
+	 * @param {String} [options.observerOptions.rootMargin='0px'] Put something like 1000px to preload items outside the viewport
 	 * @param {String} [options.observerOptions.threshold=0]
 	 * @param {Boolean} [options.dontFreezeDimensions=false] Pass true to skip freezing dimensions when tools are removed
 	 * @return {Q.Tool}

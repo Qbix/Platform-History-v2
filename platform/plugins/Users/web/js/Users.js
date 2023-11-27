@@ -92,6 +92,7 @@
 			confirmTerms: "Accept the Terms of Service?",
 			picTooltip: "You can change this picture later",
 			web3: {
+				ConnectWallet: "Connect Wallet",
 				alt: "log in with wallet",
 				payload: "Log into {{host}} at time {{timestamp}}",
 				alert: {
@@ -1951,7 +1952,7 @@
 					</ul>`);
 					var handOffTimeout;
 					Q.Dialogs.push({
-						title: "Connect wallet",
+						title: Q.text.Users.login.web3.ConnectWallet,
 						className: "Users_connect_wallets",
 						content: "",
 						stylesheet: '{{Users}}/css/Users/wallets.css',
@@ -2007,7 +2008,7 @@
 								}, 'Users_connect_wallets');
 
 								// close dialog on timeout
-								handOffTimeout = setTimeout(() => {
+								handOffTimeout = setTimeout(function () {
 									Q.Dialogs.close($dialog);
 								}, payload['Q.timestamp']*1000 - Date.now());
 							}, {
@@ -2572,7 +2573,7 @@
 					); // parsed
 					if (customErrorDescription) {
 						var decodedStr = ethers.utils.defaultAbiCoder.decode(
-							customErrorDescription.inputs.map(obj => obj.type),
+							customErrorDescription.inputs.map(function (obj) { return obj.type }),
 							ethers.utils.hexDataSlice(err.data.data, 4)
 						);
 						str = customErrorDescription.name +'('

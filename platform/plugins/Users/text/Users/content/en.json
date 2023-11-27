@@ -121,6 +121,7 @@
         "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
         "picTooltip": "You can change this picture later",
         "web3": {
+            "ConnectWallet": "Connect Wallet",
             "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
                 "title": "Redirecting to Wallet",
