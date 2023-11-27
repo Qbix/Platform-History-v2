@@ -474,7 +474,7 @@
 				},
 				"metamask": {
 					"name": "Metamask",
-					"url": "dapp://{{url}}"
+					"url": "dapp://{{urlWithoutScheme}}"
 				},
 				"trustwallet": {
 					"name": "Trust Wallet",
