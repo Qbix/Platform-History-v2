@@ -4,7 +4,7 @@
  * @link   http://www.phpied.com/rgb-color-parser-in-javascript/
  * @license Use it if you like it
  */
-Q.Color = function _Q_Color(color_string)
+Q.Color = Q.extend(function _Q_Color(color_string)
 {
     this.ok = false;
 
@@ -262,7 +262,7 @@ Q.Color = function _Q_Color(color_string)
         for (var i = 0; i < examples.length; i++) {
             try {
                 var list_item = document.createElement('li');
-                var list_color = new RGBColor(examples[i]);
+                var list_color = new Q.Color(examples[i]);
                 var example_div = document.createElement('div');
                 example_div.style.cssText =
                         'margin: 3px; '
@@ -284,4 +284,4 @@ Q.Color = function _Q_Color(color_string)
 
     }
 
-}
+}, Q.Color);

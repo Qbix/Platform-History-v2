@@ -7973,6 +7973,17 @@ Q.Browser = {
 
 	getScrollbarHeight: function() {
 		return this.getScrollbarWidth();
+	},
+
+	getDarkMode: function (callback) {
+		if (!window.matchMedia) {
+			return null;
+		}
+		var mm = window.matchMedia('(prefers-color-scheme: dark)');
+		if (callback) {
+			mm.addEventListener('change', callback);
+		}
+		return mm.matches;
 	}
 	
 };
@@ -8464,6 +8475,24 @@ Q.interpolateUrl = function (url, additional) {
 		url = url.interpolate(additional);
 	}
 	return url;
+};
+
+/**
+ * Interpolates between values e.g. color components of RGB, HSL, etc.
+ * @method interpolateArray
+ * @static
+ * @param {Array} start array of starting values in a range
+ * @param {Array} end array of ending values in a range
+ * @param {Number} fraction distance between 0 (start) and 1 (end)
+ * @returns {Array} interpolated values
+ */
+Q.interpolateArray = function (start, end, fraction) {
+	fraction = parseFloat(fraction) || 0.5;
+	var result = [];
+	for (var i=0; i<start.length; ++i) {
+		result.push(start[i] + fraction * (end[i] - start[i]));
+	}
+	return result;
 };
 
 /**
@@ -16150,9 +16179,9 @@ Q.Camera = {
 
 /**
  * Operates with colors.
- * @class Q.Colors
+ * @class Q.Color
  */
- Q.Color = {
+Q.Color = {
 	/**
 	 * Get a color somewhere between startColor and endColor
 	 * @method toHex
@@ -16190,10 +16219,11 @@ Q.Camera = {
 		var endRed = (endColor >> 16) & 0xFF;
 		var endGreen = (endColor >> 8) & 0xFF;
 		var endBlue = endColor & 0xFF;
-		var newRed = startRed + fraction * (endRed - startRed);
-		var newGreen = startGreen + fraction * (endGreen - startGreen);
-		var newBlue = startBlue + fraction * (endBlue - startBlue);
-		return Q.Color.toHex(newRed, newGreen, newBlue);
+		return Q.Color.toHex.apply(this, Q.interpolateArray(
+			[startRed, startGreen, startBlue],
+			[endRed, endGreen, endBlue],
+			fraction
+		));
 	},
 	/**
 	 * Sets a new theme-color on the window
