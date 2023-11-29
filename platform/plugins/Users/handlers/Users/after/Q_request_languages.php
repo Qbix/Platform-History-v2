@@ -7,6 +7,14 @@ function Users_after_Q_request_languages($params, &$result)
 		if (!is_array($result)) {
 			$result = array();
 		}
-		array_unshift($result, array($user->preferredLanguage, $user->preferredLanguage, 1));
+		$newEntry = array($user->preferredLanguage, null, 1);
+		foreach ($result as $i => $entry) {
+			if ($entry[0] === $user->preferredLanguage) {
+				$newEntry = $entry;
+				array_splice($result, $i, 1);
+				break;
+			}
+		}
+		array_unshift($result, $newEntry);
 	}
 }
