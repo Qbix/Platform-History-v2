@@ -555,11 +555,7 @@ Q.Tool.define("Q/columns", function(options) {
 					var url = $div.attr('data-url');
 					$div.attr('data-title', document.title);
 					if (o.pagePushUrl && createdNewDiv && url && url !== location.href) {
-						Q.Color.setWindowTheme.ignore = true;
 						Q.Page.push(url);
-						setTimeout(function () {
-							Q.Color.setWindowTheme.ignore = false;
-						}, 300);
 					}
 					Q.Pointer.clearSelection();
 
@@ -896,11 +892,7 @@ Q.Tool.define("Q/columns", function(options) {
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {
-				Q.Color.setWindowTheme.ignore = true;
 				Q.Page.push(url, title);
-				setTimeout(function () {
-					Q.Color.setWindowTheme.ignore = false;
-				}, 300);
 			}
 			Q.layout(tool.element);
 			Q.Visual.animationStarted(state.animation.duration);
@@ -1234,20 +1226,26 @@ Q.invoke.handlers.unshift(function (options, methods) {
 	}
 });
 
-var originalColor = Q.Color.getWindowTheme();
+var currentColor;
 function _updateThemeColor(fromIndex, toIndex, duration) {
-	if (fromIndex < 0 || !$('html').hasClass('Q_columns_animationFX')) {
-		return;
-	}
-	var black = '#000000';
-	var shades = [0, 0.36, 0.42, 0.47, 0.5];
-	var fromIndex = Math.min(shades.length-1, fromIndex);
-	var toIndex = Math.max(0, Math.min(shades.length-1, toIndex));
-	var fromColor = Q.Color.between(originalColor, black, shades[fromIndex]);
-	var toColor = Q.Color.between(originalColor, black, shades[toIndex]);
-	Q.Animation.play(function (x, y) {
-		Q.Color.setWindowTheme('#' + Q.Color.between(fromColor, toColor, y));
-	}, duration);
+	Q.addScript('{{Q}}/js/Color.js', function () {
+		currentColor = Q.Color.getWindowTheme();
+		if (fromIndex < 0 || !$('html').hasClass('Q_columns_animationFX')) {
+			return;
+		}
+		var black = '#000000';
+		var shades = [0, 0.36, 0.42, 0.47, 0.5];
+		fromIndex = Math.min(shades.length-1, fromIndex);
+		toIndex = Math.max(0, Math.min(shades.length-1, toIndex));
+		var fromColor = Q.Color.between(currentColor, black, shades[fromIndex]);
+		var toColor = Q.Color.between(currentColor, black, shades[toIndex]);
+		Q.Animation.play(function (x, y) {
+			Q.Color.setWindowTheme('#' + Q.Color.between(fromColor, toColor, y));
+			if (y === 1) {
+				currentColor = Q.Color.getWindowTheme();
+			}
+		}, duration);
+	});
 }
 
 })(Q, jQuery);

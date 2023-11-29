@@ -429,11 +429,11 @@
 				Q.handle(state.onCurrent, tool, [tab, state.tabName]);
 
 				var color = Q.getObject(['windowThemeColors', state.tabName], state);
-				tool.originalWindowThemeColor = tool.originalWindowThemeColor || Q.Color.getWindowTheme();
-				if (color) {
-					Q.Color.setWindowTheme(color);
-				}
-				Q.Color.setWindowTheme(tool.originalWindowThemeColor);
+				Q.addScript('{{Q}}/js/Color.js', function () {
+					// NOTE: if someone else changes color in the meantime, we still remember this one:
+					tool.originalWindowThemeColor = tool.originalWindowThemeColor || Q.Color.getWindowTheme();
+					Q.Color.setWindowTheme(color || tool.originalWindowThemeColor);
+				});
 			},
 
 			/**
