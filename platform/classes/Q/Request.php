@@ -1063,6 +1063,7 @@ class Q_Request
 		$parts = explode(',', $header);
 		$result = array();
 		foreach ($parts as $p) {
+			$p = trim($p);
 			$parts2 = explode(';', $p);
 			if (!$parts2) {
 				continue;
