@@ -505,6 +505,7 @@ class Q_Dispatcher
 		if (!empty($_SERVER['HTTP_HOST'])
 		and $startBeforeEventName === $eventName) {
 			Q_Session::setNonce();
+			Q_Text::setLanguageFromRequest(); // may update it
 		}
 		return true;
 	}
