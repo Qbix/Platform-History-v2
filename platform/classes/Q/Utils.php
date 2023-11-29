@@ -391,7 +391,7 @@ class Q_Utils
 	 */
 	static function hashCode($text)
 	{
-		$hash = 0;
+		$hash = 5381;
 		$len = strlen($text);
 		if (!$len) {
 			return $hash;
@@ -399,10 +399,10 @@ class Q_Utils
 		for ($i=0; $i<$len; ++$i) {
 			$c = ord($text[$i]);
 			$hash = $hash % 16777216;
-			$hash = (($hash<<5)-$hash)+$c;
+			$hash = (($hash<<5)-$hash)*c+$c;
 			$hash = $hash & $hash; // Convert to 32bit integer
 		}
-		return $hash;
+		return abs($hash);
 	}
 	
 	/**

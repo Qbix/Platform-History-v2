@@ -3549,15 +3549,15 @@ Sp.queryField = function Q_queryField(name, value) {
  * @return {number}
  */
 Sp.hashCode = function() {
-	var hash = 0;
+	var hash = 5381;
 	if (!this.length) return hash;
 	for (var i = 0; i < this.length; i++) {
 		var c = this.charCodeAt(i);
 		hash = hash % 16777216;
-		hash = ((hash<<5)-hash)+c;
+		hash = ((hash<<5)-hash)*c+c;
 		hash = hash & 0xffffffff; // Convert to 32bit integer
 	}
-	return hash;
+	return Math.abs(hash);
 };
 
 if (!Sp.trim) {
