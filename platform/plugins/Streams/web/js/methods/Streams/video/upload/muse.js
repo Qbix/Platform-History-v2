@@ -7,6 +7,8 @@ Q.exports(function (params, callback) {
         });
     }
 
-    Q.handle(callback, null, [null, params]);
-
+    params.fileReader(function () {
+        delete params.fileReader;
+        Q.handle(callback, null, [null, params]);
+    });
 });
