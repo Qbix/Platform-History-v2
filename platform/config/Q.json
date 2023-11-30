@@ -258,6 +258,7 @@
 		"video": {
 			"cloud": {
 				"upload": {
+					"providers": ["muse"],
 					"muse": {
 						"url": "https://muse.ai/v/{{videoId}}",
 						"uploadEndPoint": "https://muse.ai/api/files/upload"
