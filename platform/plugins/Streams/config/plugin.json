@@ -20,7 +20,8 @@
 			"Users/canManageContacts": ["Streams/before/Users_canManageContacts"],
 			"Users/canManageLabels": ["Streams/before/Users_canManageLabels"],
 			"Users/User/displayName": ["Streams/before/Users_User_displayName"],
-			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"]
+			"Streams/Stream/save/Streams/user/profile": ["Streams/before/Streams_Stream_save_Streams_user_profile"],
+			"Streams/Stream/save/Streams/video": ["Streams/before/Streams_save_Streams_video"]
 		},
 		"handlersAfterEvent": {
 			"Q/Plugin/install": ["Streams/after/Q_Plugin_install"],
@@ -44,7 +45,8 @@
 			"Streams/create/Streams/chat": ["Streams/after/Streams_create_Streams_chat"],
 			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"],
 			"Streams/relateTo/Streams/question": ["Streams/after/Streams_relateTo_Streams_question"],
-			"Streams/updateAvatars": ["Streams/after/Streams_updateAvatars"]
+			"Streams/updateAvatars": ["Streams/after/Streams_updateAvatars"],
+			"Streams/close/Streams/video": ["Streams/after/Streams_close_Streams_video"]
 		},
 		"routes@start": {
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
