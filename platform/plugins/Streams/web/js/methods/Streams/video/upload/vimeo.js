@@ -11,38 +11,70 @@ Q.exports(function (params, callback) {
     // the below code is to get you started
     // see https://developer.vimeo.com/api/upload/videos
     // and please extend Q.request() to handle "headers" option
-    var p = Q.extend({
-        approach: 'tus',
-        size: size
-    }, params);
-    Q.req('Streams/video', 'data', function (result) {
-        var fem = Q.firstErrorMessage(result);
-        if (fem) {
-            // wasn't able to create it
+
+    Q.req("Streams/vimeo", ["intent"], function (err, response) {
+        if (err) {
             return;
         }
-        var data = result.slots.data;
-        // then do Q.request({ url: data.upload_url, method: 'PATCH' })
-        Q.request(data.upload_link, {
-            extend: false,
+
+        var intent = response.slots.intent;
+        var uploadLink = intent.upload.upload_link;
+
+        fetch(uploadLink, {
             method: 'PATCH',
             headers: {
                 'Tus-Resumable': '1.0.0',
                 'Upload-Offset': 0,
                 'Content-Type': 'application/offset+octet-stream'
-            }
-        }, function () {
-            Q.request(data.upload_link, {
-                extend: false,
-                method: 'HEAD',
-                accept: 'application/vnd.vimeo.*+json;version=3.4'
-            }, function () {
-                // if not verified successfully, then callback(err)
-            });
-        });
-    }, {
-        fields: p,
-        method: "post"
-    });
+            },
+            body: params.file
+        }).then(function( response ){
+            var videoId = intent.uri.split('/').pop();
+            var videoUrl = 'https://vimeo.com/' + videoId;
+            params.attributes['Q.file.url'] = videoUrl;
+            params.attributes['Streams.videoUrl'] = videoUrl;
+            params.attributes['provider'] = 'vimeo';
+            params.attributes['videoId'] = videoId;
+            params.attributes['Q.file.size'] = params.file.size;
 
+            if (params.streamName) {
+                Q.req('Streams/stream', 'data', callback, {
+                    fields: params,
+                    method: "put"
+                });
+            } else {
+                Q.handle(callback, null, [null, params]);
+            }
+        }).catch(function (err) {
+            Q.handle(callback, null, [err]);
+        });
+
+        var timerId = setInterval(function () {
+            fetch(uploadLink, {
+                method: 'HEAD',
+                cache: "no-cache",
+                headers: {
+                    'Tus-Resumable': '1.0.0',
+                    'Accept': 'application/vnd.vimeo.*+json;version=3.4'
+                }
+            }).then(function (response) {
+                var length = parseInt(response.headers.get('Upload-Length'));
+                var offset = parseInt(response.headers.get('Upload-Offset'));
+                console.log(response.headers.get('Upload-Offset') + " : " + response.headers.get('Upload-Length'));
+                if (offset < length) {
+                    console.log(Math.round(offset/length*100) + "%");
+                    return;
+                }
+
+                clearInterval(timerId);
+            });
+        }, 2000);
+
+    }, {
+        method: "post",
+        fields: {
+            size: params.file.size,
+            name: params.file.name
+        }
+    });
 });
