@@ -1,17 +1,45 @@
 Q.exports(function (params, callback) {
+    class VimeoUploader {
+        constructor() {
+            var that = this;
+            Q.Dialogs.push({
+                className: "Vimeo_uploader",
+                content: "<div class='Vimeo_uploader_content'><div></div></div><div class='Vimeo_uploader_info'></div>",
+                onActivate: function ($dialog) {
+                    that.$dialog = $dialog;
+                },
+                onClose: function () {
+                    that.close();
+                }
+            });
+        };
+        update(bytesUploaded, bytesTotal) {
+            if (this.closed()) {
+                return;
+            }
 
-    // TODO: please implement it with a call to
-    // Streams/video POST and document Streams/video/post.php handler properly
-    // Right now, Streams/video/post takes existing videos from youtube/vimeo
-    // but please call Q::handle("Streams/video/create/$provider") with $_REQUEST params
-    // if $_REQUEST['create'] is set, otherwise call
-    // Q::handle("Streams/video/import/$provider") and put handlers in files
+            var percentage = (bytesUploaded / bytesTotal * 100).toFixed(2) + "%";
+            $(".Vimeo_uploader_content > div", this.$dialog).css("width", percentage);
+            $(".Vimeo_uploader_info", this.$dialog).html("Uploaded {{offset}} of {{length}} ({{percents}})".interpolate({
+                offset: Q.humanReadable(bytesUploaded, { bytes:true }),
+                length: Q.humanReadable(bytesTotal, { bytes:true }),
+                percents: percentage
+            }));
 
+            if (bytesUploaded >= bytesTotal) {
+                this.$dialog.plugin('Q/dialog', 'close');
+                this.close();
+            }
+        };
+        close () {
+            this.$dialog = false;
+        };
+        closed () {
+            return this.$dialog === false;
+        };
+    }
 
-    // the below code is to get you started
-    // see https://developer.vimeo.com/api/upload/videos
-    // and please extend Q.request() to handle "headers" option
-
+    Q.addStylesheet("{{Streams}}/css/tools/vimeo.css", {slotName: 'Streams'});
     Q.req("Streams/vimeo", ["intent"], function (err, response) {
         if (err) {
             return;
@@ -19,57 +47,41 @@ Q.exports(function (params, callback) {
 
         var intent = response.slots.intent;
         var uploadLink = intent.upload.upload_link;
+        var videoId = intent.uri.split('/').pop();
+        var videoUrl = 'https://vimeo.com/' + videoId;
 
-        fetch(uploadLink, {
-            method: 'PATCH',
-            headers: {
-                'Tus-Resumable': '1.0.0',
-                'Upload-Offset': 0,
-                'Content-Type': 'application/offset+octet-stream'
-            },
-            body: params.file
-        }).then(function( response ){
-            var videoId = intent.uri.split('/').pop();
-            var videoUrl = 'https://vimeo.com/' + videoId;
-            params.attributes['Q.file.url'] = videoUrl;
-            params.attributes['Streams.videoUrl'] = videoUrl;
-            params.attributes['provider'] = 'vimeo';
-            params.attributes['videoId'] = videoId;
-            params.attributes['Q.file.size'] = params.file.size;
+        Q.addScript("{{Q}}/js/tus.min.js", function () {
+            var preloader = new VimeoUploader();
+            var upload = new tus.Upload(params.file, {
+                uploadUrl: uploadLink,
+                onError: function(err) {
+                    Q.handle(callback, null, [err]);
+                },
+                onProgress: function(bytesUploaded, bytesTotal) {
+                    preloader.update(bytesUploaded, bytesTotal);
+                },
+                onSuccess: function() {
+                    //console.log("Download %s from %s", upload.file.path, upload.url)
+                    params.attributes['Q.file.url'] = videoUrl;
+                    params.attributes['Streams.videoUrl'] = videoUrl;
+                    params.attributes['provider'] = 'vimeo';
+                    params.attributes['videoId'] = videoId;
+                    params.attributes['Q.file.size'] = params.file.size;
 
-            if (params.streamName) {
-                Q.req('Streams/stream', 'data', callback, {
-                    fields: params,
-                    method: "put"
-                });
-            } else {
-                Q.handle(callback, null, [null, params]);
-            }
-        }).catch(function (err) {
-            Q.handle(callback, null, [err]);
-        });
-
-        var timerId = setInterval(function () {
-            fetch(uploadLink, {
-                method: 'HEAD',
-                cache: "no-cache",
-                headers: {
-                    'Tus-Resumable': '1.0.0',
-                    'Accept': 'application/vnd.vimeo.*+json;version=3.4'
+                    if (params.streamName) {
+                        Q.req('Streams/stream', 'data', callback, {
+                            fields: params,
+                            method: "put"
+                        });
+                    } else {
+                        Q.handle(callback, null, [null, params]);
+                    }
                 }
-            }).then(function (response) {
-                var length = parseInt(response.headers.get('Upload-Length'));
-                var offset = parseInt(response.headers.get('Upload-Offset'));
-                console.log(response.headers.get('Upload-Offset') + " : " + response.headers.get('Upload-Length'));
-                if (offset < length) {
-                    console.log(Math.round(offset/length*100) + "%");
-                    return;
-                }
-
-                clearInterval(timerId);
             });
-        }, 2000);
 
+            // Start the upload
+            upload.start()
+        });
     }, {
         method: "post",
         fields: {
