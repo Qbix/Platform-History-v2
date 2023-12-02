@@ -6,7 +6,15 @@
  * Operates with colors.
  * Also see http://www.phpied.com/rgb-color-parser-in-javascript/
  */
-Q.Color = function _Q_Color(color_string) {
+Q.Color = function _Q_Color(input) {
+    if (input instanceof Array) {
+        this.r = input[0];
+        this.g = input[1];
+        this.b = input[2];
+        return;
+    }
+    
+    let color_string = input;
     this.ok = false;
 
     // strip any leading #
@@ -227,63 +235,15 @@ Q.Color = function _Q_Color(color_string) {
     this.r = (this.r < 0 || isNaN(this.r)) ? 0 : ((this.r > 255) ? 255 : this.r);
     this.g = (this.g < 0 || isNaN(this.g)) ? 0 : ((this.g > 255) ? 255 : this.g);
     this.b = (this.b < 0 || isNaN(this.b)) ? 0 : ((this.b > 255) ? 255 : this.b);
+};
 
-    // some getters
-    this.toRGB = function () {
-        return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
-    }
-    this.toHex = function () {
-        var r = this.r.toString(16);
-        var g = this.g.toString(16);
-        var b = this.b.toString(16);
-        if (r.length == 1) r = '0' + r;
-        if (g.length == 1) g = '0' + g;
-        if (b.length == 1) b = '0' + b;
-        return '#' + r + g + b;
-    }
+// some getters
+Q.Color.prototype.toRGB = function () {
+    return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
+};
 
-    // help
-    this.getHelpXML = function () {
-
-        var examples = new Array();
-        // add regexps
-        for (var i = 0; i < color_defs.length; i++) {
-            var example = color_defs[i].example;
-            for (var j = 0; j < example.length; j++) {
-                examples[examples.length] = example[j];
-            }
-        }
-        // add type-in colors
-        for (var sc in simple_colors) {
-            examples[examples.length] = sc;
-        }
-
-        var xml = document.createElement('ul');
-        xml.setAttribute('id', 'rgbcolor-examples');
-        for (var i = 0; i < examples.length; i++) {
-            try {
-                var list_item = document.createElement('li');
-                var list_color = new Q.Color(examples[i]);
-                var example_div = document.createElement('div');
-                example_div.style.cssText =
-                        'margin: 3px; '
-                        + 'border: 1px solid black; '
-                        + 'background:' + list_color.toHex() + '; '
-                        + 'color:' + list_color.toHex()
-                ;
-                example_div.appendChild(document.createTextNode('test'));
-                var list_item_value = document.createTextNode(
-                    ' ' + examples[i] + ' -> ' + list_color.toRGB() + ' -> ' + list_color.toHex()
-                );
-                list_item.appendChild(example_div);
-                list_item.appendChild(list_item_value);
-                xml.appendChild(list_item);
-
-            } catch(e){}
-        }
-        return xml;
-
-    }
+Q.Color.prototype.toHex = function () {
+    return Q.Color.toHex(this.r, this.g, this.b);
 };
 
 /**
@@ -299,7 +259,7 @@ Q.Color.toHex = function (r, g, b) {
     return [r, g, b].map(x => {
         const hex = Math.round(x).toString(16)
         return hex.length === 1 ? '0' + hex : hex
-        }).join('');
+    }).join('');
 };
 /**
  * Get a color somewhere between startColor and endColor
@@ -364,4 +324,17 @@ Q.Color.setWindowTheme = function (color) {
 Q.Color.getWindowTheme = function () {
     var meta = document.querySelector('meta[name="theme-color"]');
     return meta ? meta.getAttribute('content') : null;
+};
+/**
+ * Generates 3 stable color components from a seed string
+ * @method Q.Color.fromSeed
+ * @static
+ * @param {String} seed some seed to generate a color
+ * @param {Object} options constraints
+ */
+Q.Color.fromSeed = function (seed) {
+    var r = (seed || '').toString().hashCode();
+    var g = r.toString().hashCode();
+    var b = g.toString().hashCode();
+    return [r % 256, g % 256, b % 256];
 };
