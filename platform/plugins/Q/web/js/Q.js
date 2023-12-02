@@ -4682,17 +4682,22 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
  * @method clear
  * @param {HTMLElement} elem 
  *  The container to traverse
- * @param {boolean} removeCached 
- *  Defaults to false. Whether the tools whose containing elements
- *  have the "data-Q-retain" attribute should be removed...
+ * @param {boolean} removeCached
+ *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
+ *  should be removed.
+ * @param {boolean} [removeElementAfterLastTool=false]
+ *  If true, removes the element if the last tool on it was removed
+ * @param {String|Function} [filter]
+ *  This is a string that would match the tool name exactly (after normalization) to remove it,
+ *  or a function that will take a tool name and return a boolean, false means don't remove tool.
  */
-Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
+Q.Tool.clear = function _Q_Tool_clear(elem, removeCached, removeElementAfterLastTool, filter) {
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
 		elem = tool.element;
 	}
-	Q.Tool.remove(elem.children || elem.childNodes);
+	Q.Tool.remove(elem.children || elem.childNodes, removeCached, removeElementAfterLastTool, filter);
 };
 
 /**
@@ -5471,7 +5476,6 @@ Q.Tool.prepare = Q.Tool.setUpElement = function _Q_Tool_prepare(element, toolNam
 				} while (Q.Tool.active[p2]);
 				id = p2 + 'tool';
 			} else {
-				id += '_tool';
 				if (p1) {
 					id = p1 + id;
 				}
@@ -12284,24 +12288,23 @@ function _listenForVisibilityChange() {
 		}
 	});
 	Q.addEventListener(document, visibilityChange, function () {
-		Q.onVisibilityChange.handle.call(document, [!document[hidden]]);
+		Q.onVisibilityChange.handle.call(document, !Q.isDocumentHidden());
 	}, false);
-	Q.isDocumentHidden = function () {
-		return document[hidden];
-	};
 }
 _listenForVisibilityChange();
 
-function _handleVisibilityChange() {
-	if (document.hidden || document.msHidden 
-	|| document.webkitHidden || document.oHidden) {
-		return;
-	}
-	for (var k in Q.Animation.playing) {
-		Q.Animation.playing[k].play();
+function _handleVisibilityChange(shown) {
+	if (shown) {
+		for (var k in Q.Animation.playing) {
+			Q.Animation.playing[k].play();
+		}
 	}
 }
 Q.onVisibilityChange.set(_handleVisibilityChange, 'Q.Animation');
+Q.isDocumentHidden = function () {
+	return document.hidden || document.msHidden 
+		|| document.webkitHidden || document.oHidden;
+};
 
 Q.Animation.playing = {};
 var _Q_Animation_index = 0;
@@ -14560,6 +14563,7 @@ Q.Dialogs.push.options = {
  * @param {Object} [options] An optional hash of options for Q.Dialogs.push and also:
  *   @param {String} [options.title="Alert"] Optional parameter to override alert dialog title. Defaults to 'Alert'.
  *   @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
+* @return {HTMLElement} The HTML element of the dialog that was just pushed.
  */
 Q.alert = function(message, options) {
 	if (options === undefined) options = {};
@@ -14599,6 +14603,7 @@ Q.extend(Q.alert.options, Q.text.Q.alert);
  * @param {String} [options.cancel='No'] to override confirm dialog 'No' button label, e.g. 'Cancel'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
+* @return {HTMLElement} The HTML element of the dialog that was just pushed.
  */
 Q.confirm = function(message, callback, options) {
 	var o = Q.extend({}, Q.confirm.options, options);
@@ -14669,6 +14674,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
+ * @return {HTMLElement} The HTML element of the dialog that was just pushed.
  */
 Q.prompt = function(message, callback, options) {
 	function _done() {
