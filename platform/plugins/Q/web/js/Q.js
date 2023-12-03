@@ -4101,7 +4101,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
- *  The promise resolves with the "this" object returned in the getter, or rejects on any errors.
+ *  After calling callbacks, the promise resolves with the "this" object returned in the getter, or rejects on any errors.
  *  This wrapper function also contains Q.Events called onCalled, onResult and onExecuted.
  */
 Q.getter = function _Q_getter(original, options) {
@@ -7684,6 +7684,7 @@ Q.replace = function _Q_replace(container, source, options) {
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
 		&& !incomingElement.getAttribute('data-Q-replace') !== null
+		&& element.Q && element.Q.tool
 		&& replaceElements.indexOf(element) < 0) {
 			// If a tool exists with this exact id and has "data-Q-retain",
 			// then re-use it and all its HTML elements, unless
@@ -7691,6 +7692,12 @@ Q.replace = function _Q_replace(container, source, options) {
 			// This way tools can avoid doing expensive operations each time
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
+			Q.replace.retainedElements[incomingElement.id] = element;
+			setTimeout(function () {
+				// give a chance for Q/lazyload tool to remove them,
+				// otherwise remove them automatically
+				delete Q.replace.retainedElements[incomingElement.id];
+			}, 1000);
 			incomingElement.parentElement.replaceChild(element, incomingElement);
 			for (var name in element.Q.tools) {
 				var tool = Q.Tool.from(element, name);
@@ -7731,6 +7738,8 @@ Q.replace = function _Q_replace(container, source, options) {
 	
 	return container;
 };
+
+Q.replace.retainedElements = {};
 
 /**
  * A class for detecting user browser parameters.
