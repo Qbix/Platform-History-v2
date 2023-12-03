@@ -1178,14 +1178,16 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachTool(name, callback, key) {
 };
 
 /**
- * Check if element instance od HTML.Element and exists in DOM.
- * @method exists
- * @chainable
+ * Return element if it's in the DOM, otherwise return
+ * the element of the DOM with the same ID as this element
+ * @method elementById
  * @param {Element} element
- * @return {Boolean}
+ * @return {Element|null}
  */
-Q.elementIsInDOM = function (element) {
-	return (element instanceof Element) && element.offsetParent;
+Q.elementById = function (element) {
+	return element.isConnected 
+		? element 
+		: (element.id ? document.getElementById(element.id) : null);
 };
 
 if (!Elp.getElementsByClassName) {
@@ -13574,7 +13576,7 @@ Q.Visual = Q.Pointer = {
                     if (Q.isArrayLike(targets)) {
                         img1.target = targets[0];
                         for (i=1, l=targets.length; i<l; ++i) {
-                            if (!Q.elementIsInDOM(targets[i])) {
+                            if (targets[i] && targets[i].isConnected) {
                                 continue;
                             }
                             var img2 = img1.cloneNode(false);
@@ -13588,7 +13590,7 @@ Q.Visual = Q.Pointer = {
                         }
                     } else {
                         img1.target = targets;
-                        if (!Q.elementIsInDOM(targets)) {
+                        if (targets && targets.isConnected) {
                             img1.remove();
                         }
                     }
