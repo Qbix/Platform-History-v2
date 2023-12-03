@@ -239,14 +239,15 @@ Q.Tool.define('Q/lazyload', function (options) {
 					// and prevent all the elements shifting. However, if the container
 					// itself is resizing, then we will remove this snapshot since things
 					// will shift anyway.
+					const cs = element.computedStyle();
 					tool.frozen.set(element, {
 						width: element.style.width,
 						height: element.style.height,
 						containerRect: element.parentElement.getBoundingClientRect()
 					});
 					if (!tool.state.dontFreezeDimensions) {
-						element.style.width = element.offsetWidth + 'px';
-						element.style.height = element.offsetHeight + 'px';
+						element.style.width = cs.width;
+						element.style.height = cs.height;
 					}
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
