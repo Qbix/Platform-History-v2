@@ -1,0 +1,36 @@
+.Vimeo_uploader .Q_title_slot {
+    display: none;
+}
+.Vimeo_uploader .Q_dialog_content {
+    padding: 10px;
+}
+.Vimeo_uploader .Vimeo_uploader_content {
+    width: 330px;
+    height: 40px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px #ededed inset;
+    overflow: hidden;
+}
+.Vimeo_uploader .Vimeo_uploader_content > div {
+    animation: vimeo-spin 2s linear infinite;
+    background-color: #48aa92;
+    background-image: linear-gradient(-45deg,hsla(0,0%,100%,.2) 25%,transparent 0,transparent 50%,hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 75%,transparent 0,transparent);
+    background-size: 40px 40px;
+    box-shadow: inset 0 1px 1px #0000000d;
+    height: 100%;
+    line-height: 2.5rem;
+    transition: width .25s ease,background-color .25s ease;
+}
+.Vimeo_uploader .Vimeo_uploader_info {
+    font-size: 14px;
+    margin-top: 5px;
+}
+@keyframes vimeo-spin {
+    0% {
+        background-position: -40px 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
