@@ -136,8 +136,9 @@ Q.exports(function() {
                 Q.handle(callback, null, [err, rsd]);
             }, {
                 method: 'post',
+                asJSON: true,
                 fields: fields,
-                asJSON: true
+                baseUrl: baseUrl
             });
             var rsd = r.data;
             var rss = r.stream;
