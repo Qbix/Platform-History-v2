@@ -1219,7 +1219,7 @@ class Q_Request
 	 */
 	static function handleInput()
 	{
-		$contentType = Q::ifset($_SERVER, 'HTTP_CONTENT_TYPE', null);
+		$contentType = Q::ifset($_SERVER, 'CONTENT_TYPE', null);
 		if ($contentType
 		&& strpos($contentType, 'application/json') !== false) {
 			// body of request is in JSON format
