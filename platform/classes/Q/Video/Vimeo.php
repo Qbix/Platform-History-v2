@@ -77,6 +77,26 @@ class Q_Video_Vimeo extends Q_Video {
 	}
 
 	/**
+	 * Get info about video
+	 * @method getInfo
+	 * @param {string} $videoId
+	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
+	 * @return {array} the response from the server, may contain errors
+	 */
+	function getInfo($videoId)
+	{
+		$vimeo = new Vimeo($this->clientId, $this->clientSecret, $this->accessToken);
+
+		$info = $vimeo->request('/videos/'.$videoId);
+		if ($info['status'] >= 400) {
+			$intent_error = !empty($intent['body']['error']) ? ' [' . $intent['body']['error'] . ']' : '';
+			throw new Exception($intent_error);
+		}
+
+		return $info['body'];
+	}
+
+	/**
 	 * Upload file to Vimeo
 	 * @method upload
 	 * @param {string} $filename Filename of the file to upload
