@@ -384,7 +384,8 @@
         "invalidFile": "Invalid File",
         "errorNoSource": "No video source",
         "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}",
+        "errorNotAvailable": "Sorry, but video is unavailable yet. Please try again later."
     },
     "pdf": {
         "reset": "Reset",
