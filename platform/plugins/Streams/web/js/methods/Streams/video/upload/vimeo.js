@@ -31,6 +31,25 @@ Q.exports(function (params, callback) {
                 this.close();
             }
         };
+        getInfo(videoId, callback) {
+            var i = 1;
+            var timerId = setInterval(function () {
+                //console.log("Vimeo get info attempt " + i++);
+                Q.req("Streams/vimeo", ["info"], function (err, response) {
+                    if (err) {
+                        return;
+                    }
+
+                    var duration = Q.getObject("slots.info.duration", response);
+                    if (duration) {
+                        clearInterval(timerId);
+                        Q.handle(callback, null, [response.slots.info]);
+                    }
+                }, {
+                    fields: {videoId}
+                });
+            }, 3000);
+        };
         close () {
             this.$dialog = false;
         };
@@ -61,21 +80,24 @@ Q.exports(function (params, callback) {
                     preloader.update(bytesUploaded, bytesTotal);
                 },
                 onSuccess: function() {
-                    //console.log("Download %s from %s", upload.file.path, upload.url)
                     params.attributes['Q.file.url'] = videoUrl;
                     params.attributes['Streams.videoUrl'] = videoUrl;
                     params.attributes['provider'] = 'vimeo';
                     params.attributes['videoId'] = videoId;
                     params.attributes['Q.file.size'] = params.file.size;
 
-                    if (params.streamName) {
-                        Q.req('Streams/stream', 'data', callback, {
-                            fields: params,
-                            method: "put"
-                        });
-                    } else {
-                        Q.handle(callback, null, [null, params]);
-                    }
+                    preloader.getInfo(videoId, function (info) {
+                        params.attributes['duration'] = info.duration;
+
+                        if (params.streamName) {
+                            Q.req('Streams/stream', 'data', callback, {
+                                fields: params,
+                                method: "put"
+                            });
+                        } else {
+                            Q.handle(callback, null, [null, params]);
+                        }
+                    });
                 }
             });
 

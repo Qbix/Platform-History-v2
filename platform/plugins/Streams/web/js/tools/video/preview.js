@@ -101,7 +101,29 @@
 				var icon = null;
 
 				$toolElement.on(Q.Pointer.fastclick, function () {
-					Q.handle(state.onInvoke, tool, [stream]);
+					// if vimeo check status
+					if (stream.getAttribute("provider") === "vimeo") {
+						$toolElement.addClass("Q_working");
+						Q.req("Streams/vimeo", ["info"], function (err, response) {
+							$toolElement.removeClass("Q_working");
+							if (err) {
+								return;
+							}
+
+							var status = Q.getObject("slots.info.status", response);
+							if (status !== "available") {
+								return Q.alert(tool.text.video.errorNotAvailable);
+							}
+
+							Q.handle(state.onInvoke, tool, [stream]);
+						}, {
+							fields: {
+								videoId: stream.getAttribute("videoId")
+							}
+						});
+					} else {
+						Q.handle(state.onInvoke, tool, [stream]);
+					}
 				});
 
 				if (Q.Streams.isStream(stream)) {
