@@ -435,7 +435,7 @@ class Db_Mysql implements Db_Interface
 					$rowObject = $row;
 					$row = $row->fields;
 				}
-				$rowObject->beforeSave($row);
+				$rowObjects[] = $rowObject->beforeSave($row);
 				$row = $rowObject->fields;
 			}
 		}
