@@ -117,7 +117,7 @@ function () {
 				: $this.height() + 'px';
 			var $placeholder = $('<div />').text(plch).css({
 				'position': 'absolute',
-				'left': 0
+				'left': 0,
 				'top': 0,
 				'margin': 0,
 				'padding-left': parseInt(props['padding-left'])+3+'px',
