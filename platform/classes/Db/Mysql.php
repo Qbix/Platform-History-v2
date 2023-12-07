@@ -564,9 +564,8 @@ class Db_Mysql implements Db_Interface
 
 		// simulate afterSaveExecute on all rows
 		if ($className) {
-			foreach ($rows as $i => $row) {
+			foreach ($rowObjects as $rowObject) {
 				try {
-					$rowObject = $rowObjects[$i];
 					$rowObject->wasModified(false);
 					$query = self::insert($rowObject->fields);
 					$q = $query->build();
@@ -576,7 +575,6 @@ class Db_Mysql implements Db_Interface
 						$result, $query, $rowObject->fields,
 						$rowObject->calculatePKValue(true)
 					);
-					$row = $rowObject->fields;
 				} catch (Exception $e) {
 					// swallow errors and continue the simulation
 				}
