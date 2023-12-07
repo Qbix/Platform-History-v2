@@ -16,6 +16,7 @@
  * ssd_mobilenetv1 - large and slowly, but high precision
  * tiny_face_detector - small and faster, but low precision
  * @param {Q.Event} onChoose - event occur when user selected area
+ * @param {Q.Event} onSkip - event occur when user click button "Skip"
  */
 Q.Tool.define("Streams/groupPhoto", function (options) {
 		var tool = this;
@@ -45,7 +46,8 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 				width: 1
 			}
 		},
-		onChoose: new Q.Event()
+		onChoose: new Q.Event(),
+		onSkip: new Q.Event()
 	},
 	{
 		refresh: function () {
@@ -61,6 +63,10 @@ Q.Tool.define("Streams/groupPhoto", function (options) {
 				}
 
 				Q.replace(tool.element, html);
+
+				$("button[name=skip]", tool.element).on(Q.Pointer.fastclick, function () {
+					Q.handle(state.onSkip, tool);
+				});
 
 				var $input = $("img.Streams_groupPhoto", tool.element);
 				var input = $input[0];
@@ -245,6 +251,7 @@ Q.Template.set("Streams/groupPhoto", `
 	<img alt="group photo" src="{{photoUrl}}" class="Streams_groupPhoto" />
 	<canvas></canvas>
 	<div class="Streams_groupPhoto_loader"></div>
-`);
+	<button class="Q_button" name="skip" type="button">{{invite.dialog.Skip}}</button>
+`, {text: ['Streams/content']});
 
 })(Q, Q.jQuery, window, document);
