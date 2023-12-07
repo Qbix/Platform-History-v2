@@ -4467,8 +4467,8 @@ Q.onInit.add(function _Streams_onInit() {
 		var event = Q.getObject([extras.streamType, ephemeral.type], priv._ephemeralHandlers);
 		var params = [ephemeral, extras];
 		Q.handle(event, Streams, params);
-		Q.each([ephemeral.publisherId, ''], function (i, publisherId) {
-			Q.each([ephemeral.streamName, ''], function (ordinal, streamName) {
+		Q.each([extras.publisherId, ''], function (i, publisherId) {
+			Q.each([extras.streamName, ''], function (ordinal, streamName) {
 				Q.handle(
 					Q.getObject([publisherId, streamName, ordinal], priv._streamEphemeralHandlers),
 					Streams,
