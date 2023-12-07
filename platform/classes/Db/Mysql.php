@@ -435,7 +435,8 @@ class Db_Mysql implements Db_Interface
 					$rowObject = $row;
 					$row = $row->fields;
 				}
-				$rowObjects[] = $rowObject->beforeSave($row);
+				$rowObjects[] = $rowObject;
+				$rowObject->beforeSave($row);
 				$row = $rowObject->fields;
 			}
 		}
@@ -569,7 +570,7 @@ class Db_Mysql implements Db_Interface
 					$rowObject->wasModified(false);
 					$query = self::insert($rowObject->fields);
 					$q = $query->build();
-				$stmt = null;
+					$stmt = null;
 					$result = new Db_Result($stmt, $query);
 					$rowObject->afterSaveExecute(
 						$result, $query, $rowObject->fields,
