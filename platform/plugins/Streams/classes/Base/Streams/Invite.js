@@ -658,7 +658,7 @@ Base.prototype.maxSize_readLevel = function () {
 	 */
 Base.column_readLevel = function () {
 
-return [["int","11","",false],true,"",null];
+return [["int",null,null,null],true,"",null];
 };
 
 /**
@@ -694,7 +694,7 @@ Base.prototype.maxSize_writeLevel = function () {
 	 */
 Base.column_writeLevel = function () {
 
-return [["int","11","",false],true,"",null];
+return [["int",null,null,null],true,"",null];
 };
 
 /**
@@ -730,7 +730,7 @@ Base.prototype.maxSize_adminLevel = function () {
 	 */
 Base.column_adminLevel = function () {
 
-return [["int","11","",false],true,"",null];
+return [["int",null,null,null],true,"",null];
 };
 
 /**
@@ -814,7 +814,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -840,7 +840,7 @@ Base.prototype.beforeSet_expireTime = function (value) {
 	 */
 Base.column_expireTime = function () {
 
-return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

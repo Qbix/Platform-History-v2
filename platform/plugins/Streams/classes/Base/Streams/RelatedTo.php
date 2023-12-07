@@ -231,17 +231,6 @@ abstract class Base_Streams_RelatedTo extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Streams_RelatedTo($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_RelatedTo'))
@@ -649,9 +638,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '14,4',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',

@@ -56,7 +56,7 @@ Q.mixin(Base, Row);
  * @property extra
  * @type String
  * @default ""
- * Can store extra JSON parameters here
+ * 
  */
 /**
  * @property insertedTime
@@ -417,7 +417,7 @@ Base.prototype.beforeSet_extra = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".extra");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 65535)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".extra");
 		return value;
 };
@@ -428,7 +428,7 @@ Base.prototype.beforeSet_extra = function (value) {
 	 */
 Base.prototype.maxSize_extra = function () {
 
-		return 255;
+		return 65535;
 };
 
 	/**
@@ -437,7 +437,7 @@ Base.prototype.maxSize_extra = function () {
 	 */
 Base.column_extra = function () {
 
-return [["varchar","255","",false],false,"",""];
+return [["text",65535,null,null],false,"",null];
 };
 
 /**
@@ -462,7 +462,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -488,7 +488,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

@@ -370,7 +370,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],true,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -396,7 +396,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["datetime","255","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {

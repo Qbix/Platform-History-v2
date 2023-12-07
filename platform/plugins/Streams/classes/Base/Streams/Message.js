@@ -23,7 +23,7 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {String|Buffer} [fields.publisherId] defaults to ""
  * @param {String|Buffer} [fields.streamName] defaults to ""
- * @param {Integer} [fields.ordinal] defaults to 0
+ * @param {mixed} [fields.ordinal] defaults to "0"
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.sentTime] defaults to null
  * @param {String|Buffer} [fields.byUserId] defaults to ""
@@ -53,8 +53,8 @@ Q.mixin(Base, Row);
  */
 /**
  * @property ordinal
- * @type Integer
- * @default 0
+ * @type mixed
+ * @default "0"
  * used for storing the order of messages in the stream
  */
 /**
@@ -405,39 +405,13 @@ Base.column_streamName = function () {
 return [["varbinary","255","",false],false,"PRI",null];
 };
 
-/**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_ordinal
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
- */
-Base.prototype.beforeSet_ordinal = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".ordinal");
-		if (value < 0 || value > 4294967295)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".ordinal");
-		return value;
-};
-
-/**
- * Returns the maximum integer that can be assigned to the ordinal field
- * @return {integer}
- */
-Base.prototype.maxSize_ordinal = function () {
-
-		return 4294967295;
-};
-
 	/**
 	 * Returns schema information for ordinal column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 Base.column_ordinal = function () {
 
-return [["int","10"," unsigned",true],false,"PRI","0"];
+return [["int unsigned",null,null,null],false,"PRI","0"];
 };
 
 /**
@@ -462,7 +436,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","10"," unsigned",true],false,"MUL","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"MUL","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -488,7 +462,7 @@ Base.prototype.beforeSet_sentTime = function (value) {
 	 */
 Base.column_sentTime = function () {
 
-return [["timestamp","10"," unsigned",true],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

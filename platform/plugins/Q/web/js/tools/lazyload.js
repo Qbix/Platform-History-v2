@@ -37,7 +37,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 	state.root = state.root || this.element;
 
 	tool.onScrollingStopped = new Q.Event();
-	tool.frozen = new WeakMap();
+	tool.frozenDimensions = new WeakMap();
 
 	var Elp = Element.prototype;
 	
@@ -201,8 +201,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 				return true;
 				
 				function _activate() {
-					var ep = tool.frozen.get(element);
+					var ep = tool.frozenDimensions.get(element);
 					var c = element.parentElement;
+					var unfreeze = false;
 					if (!ep || !c) {
 						// element didn't exit before, so its dimensions weren't frozen
 					} else if (!tool.state.dontFreezeDimensions) {
@@ -210,13 +211,14 @@ Q.Tool.define('Q/lazyload', function (options) {
 						if (!ep.containerRect || ep.containerRect.width !== r.width) {
 							// container width was resized, so throw away the frozen dimensions
 							// because a reflow should happen anyway
-							tool.frozen.delete(element);
+							tool.frozenDimensions.delete(element);
 							element.removeClass('Q_frozen_dimensions');
 						} else {
 							// inform tools that their element has frozen dimensions,
 							// so the tools may want to revert the frozen dimensions
-							tool.unfreezeDimensions(element);
 							element.addClass('Q_frozen_dimensions');
+							element.setAttribute('data-Q-frozenDimensions', ep);
+							unfreeze = true;
 						}
 					}
 					if (element.hasAttribute('data-q-lazyload')
@@ -226,6 +228,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 						Q.activate(element, {}, function () {
 							element.setAttribute('data-q-lazyload', 'activated');
 							element.addClass('Q_lazy_loaded');
+							if (unfreeze) {
+								tool.unfreezeDimensions(element);
+							}
 						}, {lazyload: true});
 					}
 				}
@@ -240,7 +245,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					// itself is resizing, then we will remove this snapshot since things
 					// will shift anyway.
 					const cs = element.computedStyle();
-					tool.frozen.set(element, {
+					tool.frozenDimensions.set(element, {
 						width: element.style.width,
 						height: element.style.height,
 						containerRect: element.parentElement.getBoundingClientRect()
@@ -311,10 +316,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		});
 	},
 	unfreezeDimensions: function(element) {
-		if (this.state.dontFreezeDimensions) {
-			return;
-		}
-		var ep = this.frozen.get(element);
+		var ep = this.frozenDimensions.get(element);
 		if (ep.width) {
 			element.style.width = ep.width;
 		} else {

@@ -460,7 +460,7 @@ Base.prototype.maxSize_messageOrdinal = function () {
 	 */
 Base.column_messageOrdinal = function () {
 
-return [["int","11","",false],false,"PRI","0"];
+return [["int",null,null,null],false,"PRI","0"];
 };
 
 /**
@@ -485,7 +485,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -547,7 +547,7 @@ Base.prototype.beforeSet_viewedTime = function (value) {
 	 */
 Base.column_viewedTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -573,7 +573,7 @@ Base.prototype.beforeSet_readTime = function (value) {
 	 */
 Base.column_readTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

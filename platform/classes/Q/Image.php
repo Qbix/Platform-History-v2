@@ -4,7 +4,7 @@
  * @module Q
  */
 
-define("Q_AVATAR_SIZE",		 80);
+define("Q_AVATAR_SIZE",		 400);
 define("Q_WAVATAR_BACKGROUNDS", 4);
 define("Q_WAVATAR_FACES",	   11);
 define("Q_WAVATAR_BROWS",	   8);
@@ -850,7 +850,7 @@ class Q_Image
 	 */
 	static private function buildWAvatar ($hash, $size)
 	{
-		if ($size > Q_AVATAR_SIZE) $size = Q_AVATAR_SIZE;
+		// if ($size > Q_AVATAR_SIZE) $size = Q_AVATAR_SIZE;
 		$face =		 1 + (hexdec (substr ($hash,  1, 2)) % (Q_WAVATAR_FACES));
 		$bg_color =		 (hexdec (substr ($hash,  3, 2)) % 240);
 		$fade =		 1 + (hexdec (substr ($hash,  5, 2)) % (Q_WAVATAR_BACKGROUNDS));

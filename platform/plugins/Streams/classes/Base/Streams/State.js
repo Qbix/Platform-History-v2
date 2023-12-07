@@ -370,7 +370,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -396,7 +396,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

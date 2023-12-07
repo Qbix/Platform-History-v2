@@ -208,17 +208,6 @@ abstract class Base_Users_Contact extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Users_Contact($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Contact'))
@@ -538,9 +527,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',

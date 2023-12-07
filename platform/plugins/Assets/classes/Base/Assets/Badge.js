@@ -515,7 +515,7 @@ Base.prototype.maxSize_description = function () {
 	 */
 Base.column_description = function () {
 
-return [["text",65535,"",false],true,"",null];
+return [["text",65535,null,null],true,"",null];
 };
 
 /**
@@ -550,7 +550,7 @@ Base.prototype.maxSize_points = function () {
 	 */
 Base.column_points = function () {
 
-return [["smallint","4","",false],false,"","0"];
+return [["smallint",null,null,null],false,"","0"];
 };
 
 /**

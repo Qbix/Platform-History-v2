@@ -27,8 +27,8 @@ var Row = Q.require('Db/Row');
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  * @param {String} [fields.type] defaults to ""
  * @param {String} [fields.title] defaults to ""
- * @param {String|Buffer} [fields.icon] defaults to "default"
- * @param {String} [fields.content] defaults to ""
+ * @param {String|Buffer} [fields.icon] defaults to "0x64656661756C74"
+ * @param {String|Buffer} [fields.content] defaults to ""
  * @param {String} [fields.attributes] defaults to null
  * @param {Integer} [fields.readLevel] defaults to 40
  * @param {Integer} [fields.writeLevel] defaults to 10
@@ -86,12 +86,12 @@ Q.mixin(Base, Row);
 /**
  * @property icon
  * @type String|Buffer
- * @default "default"
+ * @default "0x64656661756C74"
  * relative path to stream's icon folder, containing 48.png, 32.png and 16.png
  */
 /**
  * @property content
- * @type String
+ * @type String|Buffer
  * @default ""
  * this content can be indexable, such as the description of a long article
  */
@@ -111,7 +111,7 @@ Q.mixin(Base, Row);
  * @property writeLevel
  * @type Integer
  * @default 10
- * 0=self, 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+ * 0=self, 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 30=edit, 40=close
  */
 /**
  * @property adminLevel
@@ -490,7 +490,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -516,7 +516,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -630,7 +630,7 @@ Base.prototype.maxSize_icon = function () {
 	 */
 Base.column_icon = function () {
 
-return [["varbinary","255","",false],false,"","default"];
+return [["varbinary","255","",false],false,"","0x64656661756C74"];
 };
 
 /**
@@ -646,8 +646,8 @@ Base.prototype.beforeSet_content = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".content");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".content");
 		if (typeof value === "string" && value.length > 4095)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".content");
 		return value;
@@ -668,7 +668,7 @@ Base.prototype.maxSize_content = function () {
 	 */
 Base.column_content = function () {
 
-return [["varchar","4095","",false],false,"",null];
+return [["varbinary","4095","",false],false,"",null];
 };
 
 /**
@@ -739,7 +739,7 @@ Base.prototype.maxSize_readLevel = function () {
 	 */
 Base.column_readLevel = function () {
 
-return [["int","11","",false],false,"","40"];
+return [["int",null,null,null],false,"","40"];
 };
 
 /**
@@ -774,7 +774,7 @@ Base.prototype.maxSize_writeLevel = function () {
 	 */
 Base.column_writeLevel = function () {
 
-return [["int","11","",false],false,"","10"];
+return [["int",null,null,null],false,"","10"];
 };
 
 /**
@@ -809,7 +809,7 @@ Base.prototype.maxSize_adminLevel = function () {
 	 */
 Base.column_adminLevel = function () {
 
-return [["int","11","",false],false,"","20"];
+return [["int",null,null,null],false,"","20"];
 };
 
 /**
@@ -916,7 +916,7 @@ Base.prototype.maxSize_messageCount = function () {
 	 */
 Base.column_messageCount = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -951,7 +951,7 @@ Base.prototype.maxSize_invitedCount = function () {
 	 */
 Base.column_invitedCount = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -986,7 +986,7 @@ Base.prototype.maxSize_participatingCount = function () {
 	 */
 Base.column_participatingCount = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -1021,7 +1021,7 @@ Base.prototype.maxSize_leftCount = function () {
 	 */
 Base.column_leftCount = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -1047,7 +1047,7 @@ Base.prototype.beforeSet_closedTime = function (value) {
 	 */
 Base.column_closedTime = function () {
 
-return [["timestamp","11","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

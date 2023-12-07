@@ -307,6 +307,24 @@ Q.inherit = function _Q_inherit(Base, Constructor) {
 };
 
 /**
+ * Like a timestamp, but works with number of Gregorian Calendar 
+ * days since fictional epoch year=0, month=0, day=1.
+ * You can store daystamps and do arithmetic with them.
+ * @class Daystamp
+ */
+Q.RegExp = {
+	/**
+     * Returns RegExp to match letters in almost all languages
+     * @method letters
+     * @static
+     * @return {RegExp}
+     */
+	letters: function () {
+		return RegExp(/^\p{L}/,'u');
+	}
+};
+
+/**
  * Sets up control flows involving multiple callbacks and dependencies
  * Usage:
  * var p = Q.pipe(['user', 'stream], function (params, subjects) {

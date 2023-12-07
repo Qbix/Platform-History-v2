@@ -104,7 +104,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 	}
 
 	$originalContent = Q::ifset($stream, "fieldsOriginal", $appropriateName["field"], null);
-	if (
+	if ( 
 		($stream->name != "Streams/user/icon" && !empty($originalContent))
 		|| ($stream->name == "Streams/user/icon" && Users::isCustomIcon($originalContent, true))
 	) {

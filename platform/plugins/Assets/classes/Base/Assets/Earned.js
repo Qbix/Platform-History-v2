@@ -391,7 +391,7 @@ Base.prototype.beforeSet_earnedTime = function (value) {
 	 */
 Base.column_earnedTime = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

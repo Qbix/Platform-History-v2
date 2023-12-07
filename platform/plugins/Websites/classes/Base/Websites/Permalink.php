@@ -199,17 +199,6 @@ abstract class Base_Websites_Permalink extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Websites_Permalink($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Websites_Permalink'))
@@ -422,9 +411,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -471,10 +460,10 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'datetime',
-    1 => '255',
-    2 => '',
-    3 => false,
+    0 => 'timestamp',
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',

@@ -16,7 +16,7 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.id] defaults to "0"
+ * @param {string} [$fields.id] defaults to "0x30"
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.sessionId] defaults to null
@@ -40,7 +40,7 @@ abstract class Base_Users_User extends Db_Row
 	/**
 	 * @property $id
 	 * @type string
-	 * @default "0"
+	 * @default "0x30"
 	 * 
 	 */
 	/**
@@ -297,17 +297,6 @@ abstract class Base_Users_User extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Users_User($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_User'))
@@ -421,7 +410,7 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
-  3 => '0',
+  3 => '0x30',
 );			
 	}
 
@@ -462,9 +451,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -512,9 +501,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -622,9 +611,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',

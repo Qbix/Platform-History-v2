@@ -652,7 +652,7 @@ Base.prototype.beforeSet_latitude = function (value) {
 	 */
 Base.column_latitude = function () {
 
-return [["double","100","",false],false,"MUL",null];
+return [["double",null,null,null],false,"MUL",null];
 };
 
 /**
@@ -676,7 +676,7 @@ Base.prototype.beforeSet_longitude = function (value) {
 	 */
 Base.column_longitude = function () {
 
-return [["double","100","",false],false,"MUL",null];
+return [["double",null,null,null],false,"MUL",null];
 };
 
 /**
@@ -711,7 +711,7 @@ Base.prototype.maxSize_accuracy = function () {
 	 */
 Base.column_accuracy = function () {
 
-return [["int","11","",false],false,"",null];
+return [["int",null,null,null],false,"",null];
 };
 
 module.exports = Base;

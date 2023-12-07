@@ -48,7 +48,7 @@ Q.mixin(Base, Row);
  * @property streamName
  * @type String|Buffer
  * @default ""
- * the name of the stream, can be more than one
+ * the name of the stream
  */
 /**
  * @property insertedTime
@@ -407,7 +407,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 module.exports = Base;

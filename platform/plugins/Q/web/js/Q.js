@@ -2675,6 +2675,24 @@ Q.$ = function (selector, element, toArray) {
  * You can store daystamps and do arithmetic with them.
  * @class Daystamp
  */
+Q.RegExp = {
+	/**
+     * Returns RegExp to match letters in almost all languages
+     * @method letters
+     * @static
+     * @return {RegExp}
+     */
+	letters: function () {
+		return RegExp(/^\p{L}/,'u');
+	}
+};
+
+/**
+ * Like a timestamp, but works with number of Gregorian Calendar 
+ * days since fictional epoch year=0, month=0, day=1.
+ * You can store daystamps and do arithmetic with them.
+ * @class Daystamp
+ */
 Q.Daystamp = {
     /**
      * Get daystamp from a Javascript milliseconds-based timestamp

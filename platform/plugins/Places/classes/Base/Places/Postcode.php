@@ -247,17 +247,6 @@ abstract class Base_Places_Postcode extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Places_Postcode($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Places_Postcode'))
@@ -783,9 +772,9 @@ return array (
   0 => 
   array (
     0 => 'double',
-    1 => '100',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => 'MUL',
@@ -816,9 +805,9 @@ return array (
   0 => 
   array (
     0 => 'double',
-    1 => '100',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => 'MUL',
@@ -871,9 +860,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',

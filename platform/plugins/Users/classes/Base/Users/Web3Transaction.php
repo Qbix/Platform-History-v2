@@ -263,17 +263,6 @@ abstract class Base_Users_Web3Transaction extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Users_Web3Transaction($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Web3Transaction'))
@@ -459,7 +448,7 @@ return array (
                or $value instanceof Db_Range) {
 			return array('status', $value);
 		}
-		if (!in_array($value, array('pending','mined','signed','rejected')))
+		if (!in_array($value, array('signed','pending','mined','rejected')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".status");
 		return array('status', $value);			
 	}
@@ -475,7 +464,7 @@ return array (
   0 => 
   array (
     0 => 'enum',
-    1 => '\'pending\',\'mined\',\'signed\',\'rejected\'',
+    1 => '\'signed\',\'pending\',\'mined\',\'rejected\'',
     2 => '',
     3 => false,
   ),
@@ -555,17 +544,17 @@ return array (
 		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
-			return array('contract', $value);
+			return array('contractABIName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".contract");
-		if (strlen($value) > 42)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".contract");
+			throw new Exception('Must pass a string to '.$this->getTable().".contractABIName");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".contractABIName");
 		return array('contractABIName', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the contract field
+	 * Returns the maximum string length that can be assigned to the contractABIName field
 	 * @return {integer}
 	 */
 	function maxSize_contractABIName()
@@ -916,8 +905,8 @@ return array (
   array (
     0 => 'text',
     1 => 65535,
-    2 => '',
-    3 => false,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -962,9 +951,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1023',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1012,9 +1001,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1023',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -1048,7 +1037,7 @@ return array (
 	 * Retrieves field names for class table
 	 * @method fieldNames
 	 * @static
-	 * @param {string} [$table_alias=null] If set, the alias is added to each field
+	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
 	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */

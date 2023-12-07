@@ -18,7 +18,7 @@
  * an associative array of $column => $value pairs
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.label] defaults to ""
- * @param {string} [$fields.icon] defaults to "default"
+ * @param {string} [$fields.icon] defaults to "0x64656661756C74"
  * @param {string} [$fields.title] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -40,7 +40,7 @@ abstract class Base_Users_Label extends Db_Row
 	/**
 	 * @property $icon
 	 * @type string
-	 * @default "default"
+	 * @default "0x64656661756C74"
 	 * 
 	 */
 	/**
@@ -214,17 +214,6 @@ abstract class Base_Users_Label extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Users_Label($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Label'))
@@ -448,7 +437,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => 'default',
+  3 => '0x64656661756C74',
 );			
 	}
 
@@ -544,9 +533,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -594,9 +583,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',

@@ -419,7 +419,7 @@ Base.prototype.maxSize_messageCount = function () {
 	 */
 Base.column_messageCount = function () {
 
-return [["bigint","20","",false],false,"","0"];
+return [["bigint",null,null,null],false,"","0"];
 };
 
 /**

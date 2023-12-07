@@ -82,7 +82,7 @@ abstract class Base_Streams_Access extends Db_Row
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 0
-	 * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+	 * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 30=edit, 40=close
 	 */
 	/**
 	 * @property $adminLevel
@@ -251,17 +251,6 @@ abstract class Base_Streams_Access extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Streams_Access($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Access'))
@@ -636,9 +625,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -686,9 +675,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -741,9 +730,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -796,9 +785,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -851,9 +840,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',

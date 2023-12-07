@@ -441,7 +441,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -467,7 +467,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","31","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -493,7 +493,7 @@ Base.prototype.beforeSet_untilTime = function (value) {
 	 */
 Base.column_untilTime = function () {
 
-return [["timestamp","31","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -566,7 +566,7 @@ Base.prototype.maxSize_duration = function () {
 	 */
 Base.column_duration = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**

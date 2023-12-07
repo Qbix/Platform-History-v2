@@ -23,7 +23,7 @@
  * @param {string} [$fields.description] defaults to ""
  * @param {string} [$fields.attributes] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 abstract class Base_Assets_Charge extends Db_Row
 {
@@ -72,7 +72,7 @@ abstract class Base_Assets_Charge extends Db_Row
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
-	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * @default null
 	 * 
 	 */
 	/**
@@ -228,17 +228,6 @@ abstract class Base_Assets_Charge extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Assets_Charge($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Assets_Charge'))
@@ -668,9 +657,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1023',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -687,6 +676,9 @@ return array (
 	 */
 	function beforeSet_updatedTime($value)
 	{
+		if (!isset($value)) {
+			return array('updatedTime', $value);
+		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
@@ -715,13 +707,13 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1023',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => 'CURRENT_TIMESTAMP',
+  3 => NULL,
 );			
 	}
 

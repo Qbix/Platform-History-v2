@@ -408,7 +408,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -434,7 +434,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -460,7 +460,7 @@ Base.prototype.beforeSet_expireTime = function (value) {
 	 */
 Base.column_expireTime = function () {
 
-return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {
