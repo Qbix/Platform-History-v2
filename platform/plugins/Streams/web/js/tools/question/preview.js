@@ -149,7 +149,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							
 							answerTool.stream = this;
 							answerTool.setParticipants();
-						}, {messages: true, unlessSocket: true});
+						}, {messages: true, unlessSocket: true, evenIfNotRetained: true});
 					};
 
 					$("input[type=radio],input[type=checkbox]", answerTool.element).on('change', function () {
@@ -177,12 +177,25 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 							}
 						});
 
-						Q.req('Streams/answer', ["content"], _reqCallback.bind($this), {
-							method: 'put',
-							fields: Q.extend(reqOptions, {
-								content: $this.val()
-							})
-						});
+						var _req = function () {
+							Q.req('Streams/answer', ["content"], _reqCallback.bind($this), {
+								method: 'put',
+								fields: Q.extend(reqOptions, {
+									content: $this.val()
+								})
+							});
+						};
+
+						if (Q.Users.loggedInUser) {
+							_req();
+						} else {
+							Q.Users.login({
+								onSuccess: { // override default handler
+									Users: _req
+								}
+							});
+						}
+
 					});
 
 					$("form", answerTool.element).on('submit', function () {
