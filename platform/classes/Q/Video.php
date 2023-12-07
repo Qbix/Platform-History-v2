@@ -78,9 +78,9 @@ abstract class Q_Video implements Q_Video_Interface {
 	 */
 	static function upload($filename, $options = array())
 	{
-		$cloudUpload = Q_Config::get("Q", "video", "cloud", "upload", array());
-		$provider = Q::ifset($options, 'provider', array_key_first($cloudUpload));
-		if (empty($cloudUpload) or !$provider) {
+		$cloudUploads = Q_Config::get("Q", "video", "cloud", "upload", "providers", array());
+		$provider = Q::ifset($options, 'provider', $cloudUploads[0]);
+		if (!$provider) {
 			return false;
 		}
 		$className = "Q_Video_".ucfirst($provider);

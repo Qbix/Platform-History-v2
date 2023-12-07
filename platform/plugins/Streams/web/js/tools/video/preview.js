@@ -101,7 +101,29 @@
 				var icon = null;
 
 				$toolElement.on(Q.Pointer.fastclick, function () {
-					Q.handle(state.onInvoke, tool, [stream]);
+					// if vimeo check status
+					if (stream.getAttribute("provider") === "vimeo") {
+						$toolElement.addClass("Q_working");
+						Q.req("Streams/vimeo", ["info"], function (err, response) {
+							$toolElement.removeClass("Q_working");
+							if (err) {
+								return;
+							}
+
+							var status = Q.getObject("slots.info.status", response);
+							if (status !== "available") {
+								return Q.alert(tool.text.video.errorNotAvailable);
+							}
+
+							Q.handle(state.onInvoke, tool, [stream]);
+						}, {
+							fields: {
+								videoId: stream.getAttribute("videoId")
+							}
+						});
+					} else {
+						Q.handle(state.onInvoke, tool, [stream]);
+					}
 				});
 
 				if (Q.Streams.isStream(stream)) {
@@ -130,14 +152,9 @@
 					if (state.inplace) {
 						var inplaceOptions = Q.extend({
 							publisherId: stream.fields.publisherId,
-							streamName: stream.fields.name
+							streamName: stream.fields.name,
+							editable: false
 						}, state.inplace);
-						var se = previewState.editable;
-						if (!se || (se !== true && se.indexOf('title') < 0)) {
-							inplaceOptions.editable = false;
-						} else {
-							$toolElement.addClass('Streams_editable_title');
-						}
 						inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 					}
 					icon = stream.fields.icon;
@@ -239,9 +256,8 @@
 								attributes: {
 									host: siteData.host,
 									iconSmall: siteData.iconSmall,
-									url: url,
+									'Streams.videoUrl': url,
 									'Q.file.url': "",
-									'file.url': "",
 									clipStart: clipStart,
 									clipEnd: clipEnd
 								}
@@ -274,69 +290,74 @@
 						// state.file set in recorder OR html file element
 						var file = ($file.length && $file[0].files[0]) || null;
 
-						// check file size
-						if (file.size && file.size >= parseInt(Q.info.maxUploadSize)) {
-							return Q.alert(tool.text.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
+						params = Q.extend(params, {
+							file: file,
+							title: file.name,
+							attributes: {
+								clipStart: clipStart,
+								clipEnd: clipEnd
+							}
+						});
+						if (previewState.publisherId && previewState.streamName) { // if edit existent stream
+							params.publisherId = previewState.publisherId;
+							params.streamName = previewState.streamName;
+							params.file.name = file.name;
+
+							// for some reason attributes with null values doesn't send to backend in request
+							// so specially update attributes
+							if (Q.Streams.isStream(tool.stream)) {
+								tool.stream.setAttribute("clipStart", clipStart);
+								tool.stream.setAttribute("clipEnd", clipEnd);
+								tool.stream.save();
+							}
 						}
 
-						if (!window.FileReader) {
-							throw new Q.Exception("FileReader undefined");
-						}
+						params.fileReader = function (callback) {
+							if (!window.FileReader) {
+								throw new Q.Exception("FileReader undefined");
+							}
+							// check file size
+							if (params.file.size && params.file.size >= parseInt(Q.info.maxUploadSize)) {
+								return Q.alert(tool.text.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
+							}
 
-						var reader = new FileReader();
-						reader.onload = function (event) {
-							params = Q.extend(params, {
-								title: file.name,
-								attributes: {
-									clipStart: clipStart,
-									clipEnd: clipEnd
-								},
-								file: {
+							var reader = new FileReader();
+							reader.onload = function (event) {
+								params.file = {
 									data: this.result,
 									video: true
-								}
-							});
-
-							if(previewState.publisherId && previewState.streamName) { // if edit existent stream
-								params.publisherId = previewState.publisherId;
-								params.streamName = previewState.streamName;
-								params.file.name = file.name;
-
-								// for some reason attributes with null values doesn't send to backend in request
-								// so specially update attributes
-								if (Q.Streams.isStream(tool.stream)) {
-									tool.stream.setAttribute("clipStart", clipStart);
-									tool.stream.setAttribute("clipEnd", clipEnd);
-									tool.stream.save();
-								}
-							}
-
-							/**
-							 * Upload with Q.Video.upload if provider defined, and use default uploader otherwise
-							 */
-							if (Q.videos.provider) {
-								params['Q.Streams.related.publisherId'] = previewState.related.publisherId;
-								params['Q.Streams.related.streamName'] = previewState.related.streamName || previewState.related.name;
-								params['Q.Streams.related.type'] = previewState.related.type;
-								params['Q.Streams.related.weight'] = previewState.related.weight;
-
-								Q.Video.upload(params, Q.videos.provider, function (err, res) {
-									//console.log(this);
-									var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
-									if (msg) {
-										if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
-										return Q.handle([state.onError, state.onFinish], tool, [msg]);
-									}
-
-									tool.closeComposer();
-									return Q.handle(callback, tool, [res]);
-								});
-							} else {
+								};
 								tool.closeComposer();
-								return Q.handle(callback, tool, [params]);
-							}
-						};
-						reader.readAsDataURL(file);
+								delete params.fileReader;
+								Q.handle(callback, tool, [params]);
+							};
+							reader.readAsDataURL(file);
+						}
+						/**
+						 * Upload with Q.Video.upload if provider defined, and use default uploader otherwise
+						 */
+						if (Q.videos.provider) {
+							params['Q.Streams.related.publisherId'] = previewState.related.publisherId;
+							params['Q.Streams.related.streamName'] = previewState.related.streamName || previewState.related.name;
+							params['Q.Streams.related.type'] = previewState.related.type;
+							params['Q.Streams.related.weight'] = previewState.related.weight;
+
+							Q.Video.upload(params, Q.videos.provider, function (err, res) {
+								//console.log(this);
+								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
+								if (msg) {
+									if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
+									return Q.handle([state.onError, state.onFinish], tool, [msg]);
+								}
+
+								tool.closeComposer();
+								delete params.fileReader;
+								return Q.handle(callback, tool, [res]);
+							});
+						} else {
+							params.fileReader(callback);
+						}
+
 					} else if (action === "edit") {
 						// edit stream attributes
 						if (!Q.Streams.isStream(tool.stream)) {
@@ -509,10 +530,10 @@
 							var toolPreview = Q.Tool.from($videoElement, "Q/video");
 
 							// check file size
-							if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
+							/*if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
 								this.value = null;
 								return Q.alert(tool.text.video.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
-							}
+							}*/
 
 							// if video tool exists, clear url object
 							if (toolPreview) {
