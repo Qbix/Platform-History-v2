@@ -226,7 +226,7 @@ Q.Template.set('Streams/answer/composer',
 			<option value="text">{{questions.answerText}}</option>
 		</select>
 		<input name="value" enterkeyhint="send" placeholder="{{questions.ShortAnswer}}" />
-		<button type="submit" name="save" type="button" class="Q_button">{{questions.Save}}</button>
+		<button type="submit" name="save" class="Q_button">{{questions.Save}}</button>
 	</form>`,
 	{text: ['Streams/content']}
 );

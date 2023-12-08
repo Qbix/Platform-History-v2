@@ -74,8 +74,7 @@ Q.Tool.define("Streams/topic", function(options) {
 								clipEnd: stream.getAttribute('clipEnd'),
 								metrics: {
 									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name,
-									useFaces: true
+									streamName: stream.fields.name
 								}
 							};
 							break;
