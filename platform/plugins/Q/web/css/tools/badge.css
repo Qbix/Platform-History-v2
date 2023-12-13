@@ -17,5 +17,5 @@
 /* since Safari doesn't support the above, at least apply it to dashboard */
 
 #dashboard_slot .Q_badge_parent_overlapped {
-	overflow: visible;
+	overflow: visible !important;
 }
