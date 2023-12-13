@@ -35,7 +35,7 @@ abstract class Base_Streams_State extends Db_Row
 	 * @property $algorithm
 	 * @type string
 	 * @default "sha256"
-	 * the HMAC versions should use a secret key not storeed in this table
+	 * the HMAC versions should use a secret key not stored in this table
 	 */
 	/**
 	 * @property $insertedTime
@@ -212,17 +212,6 @@ abstract class Base_Streams_State extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Streams_State($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_State'))
@@ -416,9 +405,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'sha1\',\'sha256\',\'sha512\',\'hmac-sha1\',\'hmac-sha256\',\'hmac-sha512\'',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -466,9 +455,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'sha1\',\'sha256\',\'sha512\',\'hmac-sha1\',\'hmac-sha256\',\'hmac-sha512\'',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',

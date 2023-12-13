@@ -396,7 +396,7 @@ Base.prototype.maxSize_voteCount = function () {
 	 */
 Base.column_voteCount = function () {
 
-return [["bigint","20","",false],false,"","0"];
+return [["bigint",null,null,null],false,"","0"];
 };
 
 /**
@@ -470,7 +470,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","14,4","",false],true,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**

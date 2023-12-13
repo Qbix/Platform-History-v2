@@ -21,7 +21,7 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {String|Buffer} [fields.id] defaults to "0"
+ * @param {String|Buffer} [fields.id] defaults to "0x30"
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  * @param {String|Buffer} [fields.sessionId] defaults to null
@@ -49,7 +49,7 @@ Q.mixin(Base, Row);
 /**
  * @property id
  * @type String|Buffer
- * @default "0"
+ * @default "0x30"
  * 
  */
 /**
@@ -418,7 +418,7 @@ Base.prototype.maxSize_id = function () {
 	 */
 Base.column_id = function () {
 
-return [["varbinary","31","",false],false,"PRI","0"];
+return [["varbinary","31","",false],false,"PRI","0x30"];
 };
 
 /**
@@ -443,7 +443,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -469,7 +469,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","31","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -540,7 +540,7 @@ Base.prototype.maxSize_sessionCount = function () {
 	 */
 Base.column_sessionCount = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**

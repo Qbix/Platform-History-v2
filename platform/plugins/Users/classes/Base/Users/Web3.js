@@ -530,7 +530,7 @@ Base.prototype.maxSize_result = function () {
 	 */
 Base.column_result = function () {
 
-return [["text",65535,"",false],true,"",null];
+return [["text",65535,null,null],true,"",null];
 };
 
 /**
@@ -555,7 +555,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","42","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -581,7 +581,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","42","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

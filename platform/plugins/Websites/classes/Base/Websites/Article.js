@@ -429,7 +429,7 @@ Base.prototype.maxSize_article = function () {
 	 */
 Base.column_article = function () {
 
-return [["text",65535,"",false],false,"",null];
+return [["text",65535,null,null],false,"",null];
 };
 
 /**

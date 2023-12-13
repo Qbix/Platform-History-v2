@@ -25,6 +25,7 @@ var Row = Q.require('Db/Row');
  * @param {String} [fields.transactionId] defaults to ""
  * @param {String} [fields.status] defaults to "pending"
  * @param {String} [fields.contract] defaults to ""
+ * @param {String} [fields.contractABIName] defaults to ""
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
  * @param {String} [fields.fromAddress] defaults to ""
@@ -60,6 +61,12 @@ Q.mixin(Base, Row);
  */
 /**
  * @property contract
+ * @type String
+ * @default ""
+ * 
+ */
+/**
+ * @property contractABIName
  * @type String
  * @default ""
  * 
@@ -325,6 +332,7 @@ Base.fieldNames = function () {
 		"transactionId",
 		"status",
 		"contract",
+		"contractABIName",
 		"methodName",
 		"params",
 		"fromAddress",
@@ -421,7 +429,7 @@ return [["varchar","100","",false],false,"PRI",null];
  */
 Base.prototype.beforeSet_status = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (['pending','mined'].indexOf(value) < 0)
+		if (['signed','pending','mined','rejected'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".status");
 		return value;
 };
@@ -432,7 +440,7 @@ Base.prototype.beforeSet_status = function (value) {
 	 */
 Base.column_status = function () {
 
-return [["enum","'pending','mined'","",false],false,"MUL","pending"];
+return [["enum","'signed','pending','mined','rejected'","",false],false,"MUL","pending"];
 };
 
 /**
@@ -471,6 +479,44 @@ Base.prototype.maxSize_contract = function () {
 Base.column_contract = function () {
 
 return [["varchar","42","",false],false,"",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_contractABIName
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_contractABIName = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".contractABIName");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".contractABIName");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the contractABIName field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_contractABIName = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for contractABIName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_contractABIName = function () {
+
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -694,7 +740,7 @@ Base.prototype.maxSize_result = function () {
 	 */
 Base.column_result = function () {
 
-return [["text",65535,"",false],true,"",null];
+return [["text",65535,null,null],true,"",null];
 };
 
 /**
@@ -719,7 +765,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -745,7 +791,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","1023","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

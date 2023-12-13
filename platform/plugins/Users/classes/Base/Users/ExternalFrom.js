@@ -458,7 +458,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","200","",false],true,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -484,7 +484,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","200","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -608,7 +608,7 @@ Base.prototype.beforeSet_expires = function (value) {
 	 */
 Base.column_expires = function () {
 
-return [["timestamp","1023","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

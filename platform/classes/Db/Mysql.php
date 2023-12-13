@@ -423,6 +423,23 @@ class Db_Mysql implements Db_Interface
 			}
 			$odku_clause .= implode(",\n\t", $parts);
 		}
+
+		// simulate beforeSave on all rows
+		$className = Q::ifset($options, 'className', null);
+		$rowObjects = array();
+		if ($className) {
+			foreach ($rows as $row) {
+				if (is_array($row)) {
+					$rowObject = new $className($row);
+				} else {
+					$rowObject = $row;
+					$row = $row->fields;
+				}
+				$rowObjects[] = $rowObject;
+				$rowObject->beforeSave($row);
+				$row = $rowObject->fields;
+			}
+		}
 		
 		// Start filling
 		$queries = array();
@@ -542,6 +559,25 @@ class Db_Mysql implements Db_Interface
 			if ($row instanceof Db_Row) {
 				$row->wasInserted(true);
 				$row->wasRetrieved(true);
+			}
+		}
+
+		// simulate afterSaveExecute on all rows
+		if ($className) {
+			foreach ($rowObjects as $rowObject) {
+				try {
+					$rowObject->wasModified(false);
+					$query = self::insert($rowObject->fields);
+					$q = $query->build();
+					$stmt = null;
+					$result = new Db_Result($stmt, $query);
+					$rowObject->afterSaveExecute(
+						$result, $query, $rowObject->fields,
+						$rowObject->calculatePKValue(true)
+					);
+				} catch (Exception $e) {
+					// swallow errors and continue the simulation
+				}
 			}
 		}
 	}
@@ -1693,6 +1729,7 @@ EOT;
 			$auto_inc = (strpos($table_col['Extra'], 'auto_increment') !== false);
 			$type = $table_col['Type'];
 			$pieces = explode('(', $type);
+			$pieces2 = $type_display_range = $type_modifiers = $type_unsigned = null;
 			if (isset($pieces[1])) {
 				$pieces2 = explode(')', $pieces[1]);
 				$pieces2_count = count($pieces2);
@@ -2594,45 +2631,10 @@ $field_hints
 	 */
 	static function insertManyAndExecute(\$rows = array(), \$options = array())
 	{
-		// simulate beforeSave on all rows
-		\$rowObjects = array();
-		foreach (\$rows as \$row) {
-			try {
-				if (is_array(\$row)) {
-					\$rowObjects[] = \$rowObject = new $class_name(\$row);
-				} else {
-					\$rowObjects[] = \$rowObject = \$row;
-					\$row = \$row->fields;
-				}
-				\$rowObject->set('Db/insertManyAndExecute', true);
-				\$rowObject->beforeSave(\$row);
-				\$row = \$rowObject->fields;
-			} catch (Exception \$e) {
-				// swallow errors and continue the simulation
-			}
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), \$rows,
 			array_merge(\$options, array('className' => $class_name_var))
 		);
-		// simulate afterSaveExecute on all rows
-		foreach (\$rows as \$i => \$row) {
-			try {
-				\$rowObject = \$rowObjects[\$i];
-				\$rowObject->wasModified(false);
-				\$query = self::insert(\$rowObject->fields);
-				\$q = \$query->build();
-				\$stmt = null;
-				\$result = new Db_Result(\$stmt, \$query);
-				\$rowObject->afterSaveExecute(
-					\$result, \$query, \$rowObject->fields,
-					\$rowObject->calculatePKValue(true)
-				);
-				\$row = \$rowObject->fields;
-			} catch (Exception \$e) {
-				// swallow errors and continue the simulation
-			}
-		}
 	}
 	
 	$dc

@@ -381,7 +381,7 @@ Base.prototype.maxSize_instructions = function () {
 	 */
 Base.column_instructions = function () {
 
-return [["longblob",4294967296,"",false],true,"",null];
+return [["longblob",4294967296,null,null],true,"",null];
 };
 
 /**
@@ -417,7 +417,7 @@ Base.prototype.maxSize_errors = function () {
 	 */
 Base.column_errors = function () {
 
-return [["longblob",4294967296,"",false],true,"",null];
+return [["longblob",4294967296,null,null],true,"",null];
 };
 
 /**

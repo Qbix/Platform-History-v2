@@ -200,17 +200,6 @@ abstract class Base_Streams_Task extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Streams_Task($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Task'))
@@ -428,8 +417,8 @@ return array (
   array (
     0 => 'longblob',
     1 => 4294967296,
-    2 => '',
-    3 => false,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -482,8 +471,8 @@ return array (
   array (
     0 => 'longblob',
     1 => 4294967296,
-    2 => '',
-    3 => false,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',

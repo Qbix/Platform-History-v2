@@ -563,7 +563,7 @@ Base.prototype.maxSize_timeout = function () {
 	 */
 Base.column_timeout = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -598,7 +598,7 @@ Base.prototype.maxSize_duration = function () {
 	 */
 Base.column_duration = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -755,7 +755,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -781,7 +781,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],true,"MUL",null];
+return [["timestamp",null,null,null],true,"MUL",null];
 };
 
 /**

@@ -1676,7 +1676,7 @@ abstract class Users extends Base_Users
 				$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 				$gravatar = Q_Config::get('Users', 'login', 'gravatar', false);
 				$data = Q_Image::avatar($source['hash'], $source['size'], $type, $gravatar);
-				if ($gravatar) {
+				if (is_string($data)) {
 					file_put_contents($filename, $data); // downloaded				
 				} else {
 					imagepng($data, $filename); // locally generated

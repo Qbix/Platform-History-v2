@@ -460,7 +460,7 @@ Base.prototype.maxSize_ordinal = function () {
 	 */
 Base.column_ordinal = function () {
 
-return [["int","11","",false],false,"PRI",null];
+return [["int",null,null,null],false,"PRI",null];
 };
 
 /**
@@ -485,7 +485,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -511,7 +511,7 @@ Base.prototype.beforeSet_readyTime = function (value) {
 	 */
 Base.column_readyTime = function () {
 
-return [["timestamp","11","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

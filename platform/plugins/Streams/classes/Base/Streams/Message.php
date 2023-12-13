@@ -18,7 +18,7 @@
  * an associative array of $column => $value pairs
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
- * @param {integer} [$fields.ordinal] defaults to 0
+ * @param {mixed} [$fields.ordinal] defaults to "0"
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.sentTime] defaults to null
  * @param {string} [$fields.byUserId] defaults to ""
@@ -44,8 +44,8 @@ abstract class Base_Streams_Message extends Db_Row
 	 */
 	/**
 	 * @property $ordinal
-	 * @type integer
-	 * @default 0
+	 * @type mixed
+	 * @default "0"
 	 * used for storing the order of messages in the stream
 	 */
 	/**
@@ -250,17 +250,6 @@ abstract class Base_Streams_Message extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Streams_Message($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Message'))
@@ -434,40 +423,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_ordinal
-	 * @param {integer} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
-	 */
-	function beforeSet_ordinal($value)
-	{
-		if ($value instanceof Db_Expression
-               or $value instanceof Db_Range) {
-			return array('ordinal', $value);
-		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".ordinal");
-		$value = intval($value);
-		if ($value < 0 or $value > 4294967295) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".ordinal");
-		}
-		return array('ordinal', $value);			
-	}
-
-	/**
-	 * @method maxSize_ordinal
-	 * Returns the maximum integer that can be assigned to the ordinal field
-	 * @return {integer}
-	 */
-	function maxSize_ordinal()
-	{
-
-		return 4294967295;			
-	}
-
-	/**
 	 * Returns schema information for ordinal column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
@@ -477,10 +432,10 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'int',
-    1 => '10',
-    2 => ' unsigned',
-    3 => true,
+    0 => 'int unsigned',
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => 'PRI',
@@ -525,9 +480,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '10',
-    2 => ' unsigned',
-    3 => true,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => 'MUL',
@@ -575,9 +530,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '10',
-    2 => ' unsigned',
-    3 => true,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',

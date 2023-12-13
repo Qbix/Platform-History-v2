@@ -329,7 +329,7 @@ Base.prototype.beforeSet_day = function (value) {
 	 */
 Base.column_day = function () {
 
-return [["date","31","",false],false,"PRI",null];
+return [["date",null,null,null],false,"PRI",null];
 };
 
 /**
@@ -402,7 +402,7 @@ Base.prototype.maxSize_points = function () {
 	 */
 Base.column_points = function () {
 
-return [["smallint","4","",false],false,"","0"];
+return [["smallint",null,null,null],false,"","0"];
 };
 
 /**

@@ -403,7 +403,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","31","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

@@ -425,7 +425,7 @@ Base.prototype.maxSize_units = function () {
 	 */
 Base.column_units = function () {
 
-return [["int","11","",false],false,"","1"];
+return [["int",null,null,null],false,"","1"];
 };
 
 /**
@@ -450,7 +450,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 module.exports = Base;

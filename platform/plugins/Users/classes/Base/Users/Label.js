@@ -23,7 +23,7 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {String|Buffer} [fields.userId] defaults to ""
  * @param {String} [fields.label] defaults to ""
- * @param {String|Buffer} [fields.icon] defaults to "default"
+ * @param {String|Buffer} [fields.icon] defaults to "0x64656661756C74"
  * @param {String} [fields.title] defaults to ""
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
@@ -49,7 +49,7 @@ Q.mixin(Base, Row);
 /**
  * @property icon
  * @type String|Buffer
- * @default "default"
+ * @default "0x64656661756C74"
  * 
  */
 /**
@@ -399,7 +399,7 @@ Base.prototype.maxSize_icon = function () {
 	 */
 Base.column_icon = function () {
 
-return [["varbinary","255","",false],false,"","default"];
+return [["varbinary","255","",false],false,"","0x64656661756C74"];
 };
 
 /**
@@ -462,7 +462,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -488,7 +488,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**

@@ -22,7 +22,7 @@
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.type] defaults to ""
  * @param {string} [$fields.title] defaults to ""
- * @param {string} [$fields.icon] defaults to "default"
+ * @param {string} [$fields.icon] defaults to "0x64656661756C74"
  * @param {string} [$fields.content] defaults to ""
  * @param {string} [$fields.attributes] defaults to null
  * @param {integer} [$fields.readLevel] defaults to 40
@@ -77,7 +77,7 @@ abstract class Base_Streams_Stream extends Db_Row
 	/**
 	 * @property $icon
 	 * @type string
-	 * @default "default"
+	 * @default "0x64656661756C74"
 	 * relative path to stream's icon folder, containing 48.png, 32.png and 16.png
 	 */
 	/**
@@ -102,7 +102,7 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 10
-	 * 0=self, 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+	 * 0=self, 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 30=edit, 40=close
 	 */
 	/**
 	 * @property $adminLevel
@@ -305,17 +305,6 @@ abstract class Base_Streams_Stream extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
-		// simulate beforeSave on all rows
-		foreach ($rows as $row) {
-			if (is_array($row)) {
-				$rowObject = new Streams_Stream($row);
-			} else {
-				$rowObject = $row;
-				$row = $row->fields;
-			}
-			$rowObject->beforeSave($row);
-			$row = $rowObject->fields;
-		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Stream'))
@@ -525,9 +514,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -575,9 +564,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',
@@ -746,7 +735,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => 'default',
+  3 => '0x64656661756C74',
 );			
 	}
 
@@ -794,7 +783,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '4095',
     2 => '',
     3 => false,
@@ -905,9 +894,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -960,9 +949,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1015,9 +1004,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1180,9 +1169,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1235,9 +1224,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1290,9 +1279,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1345,9 +1334,9 @@ return array (
   0 => 
   array (
     0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => false,
   2 => '',
@@ -1395,9 +1384,9 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '11',
-    2 => '',
-    3 => false,
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
   ),
   1 => true,
   2 => '',

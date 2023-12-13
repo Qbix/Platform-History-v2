@@ -91,7 +91,7 @@ Q.mixin(Base, Row);
  * @property writeLevel
  * @type Integer
  * @default 0
- * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 18=contribute, 18=contribute, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
+ * <0=ignored, 0='none', 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate, 30=edit, 40=close
  */
 /**
  * @property adminLevel
@@ -540,7 +540,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp",null,null,null],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -566,7 +566,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","31","",false],true,"",null];
+return [["timestamp",null,null,null],true,"",null];
 };
 
 /**
@@ -601,7 +601,7 @@ Base.prototype.maxSize_readLevel = function () {
 	 */
 Base.column_readLevel = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -636,7 +636,7 @@ Base.prototype.maxSize_writeLevel = function () {
 	 */
 Base.column_writeLevel = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**
@@ -671,7 +671,7 @@ Base.prototype.maxSize_adminLevel = function () {
 	 */
 Base.column_adminLevel = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**

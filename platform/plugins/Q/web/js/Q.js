@@ -1703,7 +1703,7 @@ Q.isEmpty = function _Q_isEmpty(o) {
  */
 Q.isInteger = function _Q_isInteger(value, strictComparison) {
 	if (strictComparison) {
-		return value > 0 ? Math.floor(value) === value : Math.ceil(value) === value;
+		return Number.isInteger(value);
 	}
 	return value > 0 ? Math.floor(value) == value : Math.ceil(value) == value;
 };
@@ -2667,6 +2667,24 @@ Q.swapElements = function(element1, element2) {
 Q.$ = function (selector, element, toArray) {
 	var list = (element || document).querySelectorAll(selector);
 	return toArray ? Array.prototype.slice.call(list) : list.values();
+};
+
+/**
+ * Like a timestamp, but works with number of Gregorian Calendar 
+ * days since fictional epoch year=0, month=0, day=1.
+ * You can store daystamps and do arithmetic with them.
+ * @class Daystamp
+ */
+Q.RegExp = {
+	/**
+     * Returns RegExp to match letters in almost all languages
+     * @method letters
+     * @static
+     * @return {RegExp}
+     */
+	letters: function () {
+		return RegExp(/^\p{L}/,'u');
+	}
 };
 
 /**
