@@ -110,8 +110,9 @@ body { position: relative; margin: 0; }
 .Q_success { background: #e2ffee !important; }
 .Q_selectable { border: 1px solid transparent; }
 .Q_notTouchscreen .Q_selectable:hover { background: #aeaeae; background: rgba(175,175,175,0.5); }
-.Q_selected { background: #98bede; outline: 1px solid #5ca3df; color: black; }
-.Q_selectable.Q_selected:hover { background: #98bede; }
+.Q_selected { background: rgb(132, 184, 226, 0.8); outline: 1px solid #5ca3df; color: black; }
+.Q_selectable.Q_selected:hover { background: rgb(132, 184, 226, 0.5); }
+.Q_selected_partially { background: repeating-linear-gradient(45deg, rgb(132, 184, 226, 0.8),rgb(132, 184, 226, 0.8) 10px, rgba(63, 121, 168, 0.5) 10px, rgba(63, 121, 168, 0.5) 20px); }
 .Q_throb,
 .Q_throb input,
 .Q_throb textarea { background-image: url(../img/throbbers/loading.gif); background-repeat: no-repeat; background-position: center center; }

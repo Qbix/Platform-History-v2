@@ -1808,7 +1808,7 @@ Q.isEmpty = function _Q_isEmpty(o) {
  */
 Q.isInteger = function _Q_isInteger(value, strictComparison) {
 	if (strictComparison) {
-		return value > 0 ? Math.floor(value) === value : Math.ceil(value) === value;
+		return Number.isInteger(value);
 	}
 	return value > 0 ? Math.floor(value) == value : Math.ceil(value) == value;
 };
