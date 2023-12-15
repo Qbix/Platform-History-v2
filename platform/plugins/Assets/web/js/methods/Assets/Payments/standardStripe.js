@@ -8,6 +8,7 @@ Q.exports(function(priv){
     *  @param {String} options.description Payment description.
     *  @param {Object} options.metadata Data to pass to payment gateway to get them back and save to message instructions
     *  @param {String} [options.currency="usd"] the currency to pay in.
+    *  @param {String} [options.assetsPaymentsDialogClass] to add to dialog classes list
     *  @param {Function} [callback]
     */
     return function standardStripe(options, callback) {
@@ -20,10 +21,11 @@ Q.exports(function(priv){
         );
 
         var paymentRequestButton, paymentElement;
-
+        var customClassName = Q.getObject("assetsPaymentsDialogClass", options);
         Q.Dialogs.push({
             title: options.description,
-            className: "Assets_stripe_payment Assets_stripe_payment_loading",
+            className: "Assets_stripe_payment Assets_stripe_payment_loading " + customClassName,
+            mask: customClassName || true,
             template: {
                 name: 'Assets/stripe/payment',
                 fields: {

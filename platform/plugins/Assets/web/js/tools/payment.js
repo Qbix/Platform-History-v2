@@ -100,6 +100,32 @@ Q.Tool.define("Assets/payment", function (options) {
 			templateName = "Assets/payment/gpay";
 		}
 
+		// preload payment dialog
+		state.userId = Q.Users.loggedInUserId();
+		state.assetsPaymentsDialogClass = tool.prefix + "dialog";
+		var paymentDialogStyle = document.createElement("style");
+		document.head.appendChild(paymentDialogStyle);
+		paymentDialogStyle.sheet.insertRule('.' + state.assetsPaymentsDialogClass + '{display: none !important}');
+		paymentDialogStyle.sheet.insertRule('#page,#dashboard_slot{filter: none !important; -o-filter: unset !important; -ms-filter: unset !important; -moz-filter: unset !important; -webkit-filter: unset !important;}');
+		// remove Q.dialog.mask to recreate with necessary class names
+		var maskKey = 'Q.dialog.mask';
+		if (maskKey in Q.Masks.collection) {
+			Q.Masks.collection[maskKey].element.remove();
+			delete Q.Masks.collection[maskKey];
+		}
+
+		var _implementPayment = function () {
+			Q.Assets.Payments[payments.toLowerCase()](state, function (err) {
+				// after payment dialog closed, refresh tool to implement dialog preload again
+				tool.refresh(data);
+				if (err) {
+					return;
+				}
+				Q.handle(state.onPay, tool, arguments);
+			});
+		};
+		_implementPayment();
+
 		Q.Template.render(
 			templateName,
 			{
@@ -111,13 +137,11 @@ Q.Tool.define("Assets/payment", function (options) {
 				$te.html(html);
 
 				var _pay = function () {
-					state.userId = Q.Users.loggedInUserId();
-					Q.Assets.Payments[payments.toLowerCase()](state, function (err) {
-						if (err) {
-							return;
-						}
-						Q.handle(state.onPay, tool, arguments);
-					});
+					if ($(".Assets_stripe_payment." + state.assetsPaymentsDialogClass).length) {
+						return paymentDialogStyle.remove();
+					}
+
+					_implementPayment();
 				};
 
 				$('.Assets_pay', $te).on(Q.Pointer.click, _pay);
