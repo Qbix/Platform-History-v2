@@ -235,6 +235,20 @@ body.Q_preventScroll {
 	width: 100%;
 	min-height: 100%;
 }
+.Q_fullscreen_dialog .Q_title_slot {
+	position: fixed;
+	width: 100%;
+	z-index: 99;
+	padding-top: env(safe-area-inset-top, 0);
+}
+.Q_fullscreen_dialog .Q_title_slot,
+.Q_overlay .Q_title_slot {
+	color: white;
+	background: #444; /* for non-css3 browsers */
+	background: linear-gradient(top,  #444,  #111);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); /* for IE */
+	border-bottom: 1px solid #333;
+}
 .Q_dialog_title {
 	padding: 0 10px;
 	vertical-align: middle;
@@ -243,15 +257,10 @@ body.Q_preventScroll {
 	line-height: 40px;
 	box-sizing: content-box;
 	margin:0;
-	border-bottom: 1px solid #333;
 	font-size: 20px;
 	min-width: 200px;
 	font-weight: bold;
-	color: white;
 	cursor: default;
-	background: #444; /* for non-css3 browsers */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); /* for IE */
-	background: linear-gradient(top,  #444,  #111);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -289,11 +298,12 @@ body.Q_preventScroll {
 {
 	display: block;
 	position: fixed;
-	top: 2px;
+	top: env(safe-area-inset-top, 2px);
 	right: 2px;
 	height: 35px;
 	width: 35px;
 	background-image: url(../img/ui/close_big.png);
+	background-size: cover;
 	cursor: pointer;
 	z-index: 100;
 }
@@ -309,11 +319,6 @@ body.Q_preventScroll {
 	background-size: contain;
 	cursor: pointer;
 	z-index: 100;
-}
-.Q_fullscreen_dialog .Q_title_slot {
-	position: fixed;
-	width: 100%;
-	z-index: 99;
 }
 .Q_overlay .Q_close {
 	background-image:url(../img/close.png);

@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<?php echo Q_Response::metas(true, "\n\t") ?>
 	<meta name="HandheldFriendly" content="True" />
-	<meta name="viewport" content="minimal-ui, viewport-fit=cover, shrink-to-fit=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0<?php if (Q_Request::platform() == 'android'): ?>, target-densitydpi=medium-dpi<?php endif ?>" />
+	<meta name="viewport" content="viewport-fit=cover, shrink-to-fit=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0<?php if (Q_Request::platform() == 'android'): ?>, target-densitydpi=medium-dpi<?php endif ?>" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<link rel="manifest" href="<?php echo Q_Html::themedUrl('manifest.json') ?>">
 	<meta name="theme-color" content="#ffffff">

@@ -437,8 +437,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				var child = $(this);
 				if (child[0] !== $this[0] &&
 				child.css('display') !== 'none'
-				&& this.className.indexOf('mask') === -1) {
-					child.hide();
+				&& this.hasClass('Q_mask')) {
+					child.addClass('Q_hide')
 					hiddenChildren.push(child);
 				}
 			});
@@ -462,7 +462,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						'height': Q.Visual.windowHeight() + 'px'
 					});
 					for (var i = 0; i < hiddenChildren.length; i++) {
-						hiddenChildren[i].hide();
+						hiddenChildren[i].removeClass('Q_hide');
 					}
 					$this.show().css('opacity', 0);
 					ods.css('padding-top', ots.outerHeight());

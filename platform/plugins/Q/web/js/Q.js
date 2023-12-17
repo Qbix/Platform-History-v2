@@ -14460,7 +14460,11 @@ Q.Dialogs = {
 				Q.handle(o.onClose.original, $dialog, [$dialog]);
 			}, 'Q.Dialogs');
 			o.onClose.original = _onClose;
-			$dialog.plugin('Q/dialog', o);
+			try {
+				$dialog.plugin('Q/dialog', o);
+			} catch (e) {
+				console.warn(e);
+			}
 			var topDialog = null;
 			var dialogs = Q.Dialogs.dialogs;
 			$dialog.isFullscreen = o.fullscreen;
