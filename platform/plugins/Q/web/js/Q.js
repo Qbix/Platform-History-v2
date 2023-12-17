@@ -12629,7 +12629,7 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 var detected = Q.Browser.detect();
 var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
 var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
-var hasNoMouse = root.matchMedia ? !!root.matchMedia('(any-hover: none)') : null;
+var hasNoMouse = root.matchMedia ? !root.matchMedia('(any-hover: hover)').matches : null;
 var useTouchEvents = isTouchscreen && (hasNoMouse === true);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 	|| (useTouchEvents && !navigator.userAgent.match(/mobi/i));
@@ -12639,6 +12639,7 @@ var isTablet = navigator.userAgent.match(/tablet|ipad/i)
  */
 Q.info = {
 	useTouchEvents: useTouchEvents,
+	hasNoMouse: hasNoMouse,
 	isTouchscreen: isTouchscreen,
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
