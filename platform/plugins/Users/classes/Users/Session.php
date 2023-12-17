@@ -170,6 +170,9 @@ class Users_Session extends Base_Users_Session
 		}
 		$_SESSION['Q']['fromSessionId'] = $id;
 
+		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
+		$prefixType = $loggedInUserId ? 'authenticated' : '';
+
 		$us = new Users_Session();
 		$us->id = $id;
 		$us->retrieve(null, null, array('lock' => 'FOR UPDATE'));
@@ -183,7 +186,7 @@ class Users_Session extends Base_Users_Session
 		}
 		$us2->content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
 		$us2->php = session_encode();
-		$us2->id = $sessionId ? $sessionId : Q_Session::generateId();
+		$us2->id = $sessionId ? $sessionId : Q_Session::generateId(null, $prefixType);
 		$us2->duration = $seconds;
 		$us2->timeout = 0;
 		foreach ($sessionFields as $k => $v) {
