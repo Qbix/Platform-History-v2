@@ -337,10 +337,12 @@
 						 * Upload with Q.Video.upload if provider defined, and use default uploader otherwise
 						 */
 						if (Q.videos.provider) {
-							params['Q.Streams.related.publisherId'] = previewState.related.publisherId;
-							params['Q.Streams.related.streamName'] = previewState.related.streamName || previewState.related.name;
-							params['Q.Streams.related.type'] = previewState.related.type;
-							params['Q.Streams.related.weight'] = previewState.related.weight;
+							if (previewState.related) {
+								params['Q.Streams.related.publisherId'] = previewState.related.publisherId;
+								params['Q.Streams.related.streamName'] = previewState.related.streamName || previewState.related.name;
+								params['Q.Streams.related.type'] = previewState.related.type;
+								params['Q.Streams.related.weight'] = previewState.related.weight;
+							}
 
 							Q.Video.upload(params, Q.videos.provider, function (err, res) {
 								//console.log(this);
