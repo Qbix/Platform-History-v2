@@ -1620,7 +1620,7 @@ Q.largestSize = function (sizes, useHeight) {
  * @method diff
  * @param {Array|Object} container to subtract items from to form the result
  * @param {Array|Object} container whose items are subtracted in the result
- * @param {Function} [comparator] accepts item1, item2, index1, index2) and returns whether two items are equal
+ * @param {Function} [comparator] accepts item1, item2, index1, index2, isPlainObject, argumentIndex) and returns whether two items are equal
  * @return {Array|Object} a container of the same type as container1, but without elements of container2
  */
 Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
@@ -1631,8 +1631,8 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	var len = arguments.length;
 	var comparator = arguments[len-1];
 	if (typeof comparator !== 'function') {
-		comparator = function _Q_diff_default_comparator(v1, v2) {
-			return v1 === v2;
+		comparator = function _Q_diff_default_comparator(v1, v2, k, j, ipo) {
+			return v1 === v2 && (ipo ? (k == j) : true);
 		}
 		++len;
 	}
@@ -1641,8 +1641,9 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	Q.each(container1, function (k, v1) {
 		var found = false;
 		for (var i=1; i<len-1; ++i) {
+			var ipo = Q.isPlainObject(args[i]);
 			Q.each(args[i], function (j, v2) {
-				if (comparator(v1, v2, i, j)) {
+				if (comparator(v1, v2, k, j, ipo, i)) {
 					found = true;
 					return false;
 				}
@@ -7713,19 +7714,22 @@ Q.replace = function _Q_replace(container, source, options) {
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
 			Q.replace.retainedElements[incomingElement.id] = element;
-			setTimeout(function () {
-				// give a chance for Q/lazyload tool to remove them,
-				// otherwise remove them automatically
-				delete Q.replace.retainedElements[incomingElement.id];
-			}, 1000);
 			incomingElement.parentElement.replaceChild(element, incomingElement);
+			retainedTools[id] = retainedTools[id] || {};
+			newOptions[id] = newOptions[id] || {};
 			for (var name in element.Q.tools) {
 				var tool = Q.Tool.from(element, name);
-				var attrName = 'data-' + Q.normalize(tool.name, '-');
+				var attrName = 'data-' + Q.normalize.memoized(tool.name, '-');
+				var tn = Q.normalize.memoized(tool.name);
 				var newOptionsString = incomingElement.getAttribute(attrName);
-				element.setAttribute(attrName, newOptionsString);
-				retainedTools[id] = tool;
-				newOptions[id] = JSON.parse(newOptionsString);
+				if (newOptionsString) {
+					element.setAttribute(attrName, newOptionsString);
+					newOptions[id][tn] = JSON.parse(newOptionsString);
+				}
+				retainedTools[id][tn] = tool;
+			}
+			if (incomingElement.options) {
+				Q.extend(newOptions[id], incomingElement.options);
 			}
 		}
 	});
@@ -7743,17 +7747,20 @@ Q.replace = function _Q_replace(container, source, options) {
 	}
 	
 	for (var id in retainedTools) {
-		var tool = retainedTools[id];
-		var newOpt = newOptions[id];
-		// The tool's constructor not will be called again with the new options.
-		// Instead, implement Q.onRetain, from the tool we decided to retain.
-		// The Q.Tool object still contains all its old properties, options, state.
-		// Its element still contains DOM elements, 
-		// attached jQuery data and events, and more.
-		// However, the element's data-TOOL-NAME attribute now contains
-		// the new options.
-		Q.handle(tool.Q.onRetain, tool, [newOpt, incomingElements[id]]);
-		Q.extend(tool.state, 10, newOpt);
+		for (var toolName in retainedTools[id]) {
+			var tool = retainedTools[id][toolName];
+			var newOpt = newOptions[id][toolName];
+			// The tool's constructor not will be called again with the new options.
+			// Instead, implement Q.onRetain, from the tool we decided to retain.
+			// The Q.Tool object still contains all its old properties, options, state.
+			// Its element still contains DOM elements, 
+			// attached jQuery data and events, and more.
+			// However, the newOpt now contains the new options for the tool,
+			// and the element's data-TOOL-NAME attribute is a copy of the
+			// incoming element's data-TOOL-NAME attribute, if any.
+			Q.handle(tool.Q.onRetain, tool, [newOpt, incomingElements[id]]);
+			Q.extend(tool.state, 10, newOpt);
+		}
 	}
 	
 	return container;

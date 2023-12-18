@@ -1728,29 +1728,34 @@ Q.firstKey = function _Q_firstKey(container, options) {
 
 /**
  * Returns a container with the items in the first parameter that are not in the others
- * @method first
+ * @static
+ * @method diff
  * @param {Array|Object} container to subtract items from to form the result
  * @param {Array|Object} container whose items are subtracted in the result
- * @param {Function} comparator accepts item1, item2, index1, index2) and returns whether two items are equal
+ * @param {Function} [comparator] accepts item1, item2, index1, index2, isPlainObject, argumentIndex) and returns whether two items are equal
  * @return {Array|Object} a container of the same type as container1, but without elements of container2
  */
 Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	if (!container1 || !container2) {
 		return container1;
 	}
-	var len = arguments.length;
 	var args = arguments;
+	var len = arguments.length;
 	var comparator = arguments[len-1];
 	if (typeof comparator !== 'function') {
-		throw new Q.Exception("Q.diff: comparator must be a function");
+		comparator = function _Q_diff_default_comparator(v1, v2, k, j, ipo) {
+			return v1 === v2 && (ipo ? (k == j) : true);
+		}
+		++len;
 	}
 	var isArr = Q.isArrayLike(container1);
 	var result = isArr ? [] : {};
 	Q.each(container1, function (k, v1) {
 		var found = false;
 		for (var i=1; i<len-1; ++i) {
+			var ipo = Q.isPlainObject(args[i]);
 			Q.each(args[i], function (j, v2) {
-				if (comparator(v1, v2, i, j)) {
+				if (comparator(v1, v2, k, j, ipo, i)) {
 					found = true;
 					return false;
 				}
