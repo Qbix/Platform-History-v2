@@ -81,22 +81,18 @@ Q.Tool.define("Assets/subscription", function (options) {
 						name: 'Assets/plan',
 						url: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop()),
 						className: 'Assets_subscription_plan',
-						onActivate: function ($element) {
-							if (!($element instanceof $)) {
-								$element = $(arguments[2]);
-							}
-
+						onActivate: function (element) {
 							var pipe = new Q.Pipe(['assetsPlanTool'], function (params, subject) {
 								var assetsPlanTool = params.assetsPlanTool[0];
 								assetsPlanTool.state.onSubscribe.set(function () {
 									$planPreviewElement.addClass("Q_selected");
 								}, tool);
 							});
-							var assetsPlanTool = Q.Tool.from($element[0], "Assets/plan");
+							var assetsPlanTool = Q.Tool.from(element, "Assets/plan");
 							if (assetsPlanTool) {
 								pipe.fill('assetsPlanTool')(assetsPlanTool);
 							} else {
-								$element[0].forEachTool("Assets/plan", function () {
+								element.forEachTool("Assets/plan", function () {
 									pipe.fill('assetsPlanTool')(this);
 								}, tool);
 							}

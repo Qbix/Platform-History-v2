@@ -223,7 +223,7 @@ html[xmlns] .Q_clearfix { display: block; }
 .Q_forceDisplayNone { display: none !important; }
 
 /* the overlayed element */
-.Q_overlay { background: url(../img/bg/overlay.png); display:none; text-align:left; padding: 0; border: 2px solid #444; z-index: 9000;
+.Q_overlay { background: url(../img/bg/overlay.png); display:none; padding: 0; border: 2px solid #444; z-index: 9000;
  opacity: 1; border-radius: 7px; box-shadow: 0 0 20px #333; }
 
 .Q_notMobile .Q_overlay { max-width: 500px; }
@@ -236,7 +236,7 @@ body.Q_preventScroll {
 	min-height: 100%;
 }
 .Q_fullscreen_dialog .Q_title_slot {
-	position: fixed;
+	position: relative;
 	width: 100%;
 	z-index: 99;
 	padding-top: env(safe-area-inset-top, 0);

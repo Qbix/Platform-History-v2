@@ -125,10 +125,10 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                                 contractParams: state.contractParams            
                             }
                         },
-                        onActivate: function ($dialog) {
-                            $("button[name=sendtx]", $dialog).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
+                        onActivate: function (dialog) {
+                            $("button[name=sendtx]", dialog).off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function(){
                                 var userParams, validated;
-                                [validated, userParams] = tool.validateOnForm($dialog);
+                                [validated, userParams] = tool.validateOnForm(dialog);
                                 userParams.selectedChainId = selectedChainId || userParams.selectedChainId;
                                 var factoryAddress = tool.getFactoryAddress(userParams.selectedChainId);
                                 if (typeof factoryAddress === 'undefined') {
@@ -140,10 +140,10 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                                         userParams,
                                         factoryAddress,
                                         function(){
-                                            $dialog.addClass("Q_working");
+                                            dialog.addClass("Q_working");
                                         },
                                         function(err){
-                                            $dialog.removeClass("Q_working");
+                                            dialog.removeClass("Q_working");
                                             if (err) {
                                                 Q.alert(err);
                                             }

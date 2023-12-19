@@ -130,7 +130,7 @@ Q.Tool.jQuery('Q/overlay',
 				}
 				var topZ = Q.zIndexTopmost();
 				$this.css('z-index', topZ + 1);
-				Q.handle(data.options.beforeLoad, $this, [$this]);
+				Q.handle(data.options.beforeLoad, $this[0], [$this[0]]);
 				calculatePosition($this);
 				$this.show();
 				dialogs.push($this[0]);
@@ -215,7 +215,7 @@ Q.Tool.jQuery('Q/overlay',
 					if (!data.options.noClose && data.options.closeOnEsc) {
 						$(document).on('keydown.Q_dialog', closeThisOverlayOnEsc);
 					}
-					Q.handle(data.options.onLoad, $this, [$this]);
+					Q.handle(data.options.onLoad, $this[0], [$this[0]]);
 				}
 			},
 			close: function(e)
@@ -236,7 +236,7 @@ Q.Tool.jQuery('Q/overlay',
 				}
 				$this.find('input, select, textarea').trigger('blur');
 
-				if (false === Q.handle(data.options.beforeClose, $this, [$this])) {
+				if (false === Q.handle(data.options.beforeClose, $this[0], [$this[0]])) {
 					return false;
 				}
 				$this.removeClass('Q_overlay_open');
@@ -261,7 +261,7 @@ Q.Tool.jQuery('Q/overlay',
 							$('html').removeClass(htmlClass);
 						}
 					}
-					Q.handle(data.options.onClose, $this, []);
+					Q.handle(data.options.onClose, $this[0], []);
 					if (data.options.mask) {
 						Q.Masks.hide('Q.dialog.mask');
 					}
@@ -399,7 +399,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					function _onContent() {
 						Q.activate([ots, ods], {}, function() {
 							_handlePosAndScroll.call($this, o);
-							Q.handle(o.onActivate, $this, [$this, o]);
+							Q.handle(o.onActivate, $this[0], [$this, o]);
 							$this.css('opacity', 1);
 						});
 					}
@@ -417,7 +417,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					if (o.removeOnClose) {
 						Q.removeElement($this[0], true);
 					}
-					Q.handle(o.onClose, $this, [$this]);
+					Q.handle(o.onClose, $this[0], [$this[0]]);
 				}},
 				noCalculatePosition: o.noCalculatePosition,
 				alignParent: (o.alignByParent && !Q.info.isMobile ? $this.parent() : null),
@@ -431,7 +431,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				scrollLeft: Q.Visual.scrollLeft(),
 				scrollTop: Q.Visual.scrollTop()
 			};
-			Q.handle(o.beforeLoad, $this, [$this]);
+			Q.handle(o.beforeLoad, $this[0], [$this[0]]);
 			var hiddenChildren = [];
 			$(document.body).children().each(function() {
 				var child = $(this);
@@ -471,18 +471,18 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						_loadUrl.call($this, o, function() {
 							Q.activate(this, {}, function () {
 								$this.css('opacity', 1);
-								Q.handle(o.onActivate, $this, [$this]);
+								Q.handle(o.onActivate, $this[0], [$this[0]]);
 							});
 						});
 					} else {
 						Q.activate($this[0], {}, function () {
 							$this.css('opacity', 1);
-							Q.handle(o.onActivate, $this, [$this]);
+							Q.handle(o.onActivate, $this[0], [$this[0]]);
 						});
 					}
 				},
 				close: function(e) {
-					if (false === Q.handle(o.beforeClose, $this, [$this])) {
+					if (false === Q.handle(o.beforeClose, $this[0], [$this[0]])) {
 						return false;
 					}
 					for (var i = 0; i < hiddenChildren.length; i++) {
@@ -497,7 +497,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						$this.hide();
 					}
 
-					Q.handle(o.onClose, $this, [$this]);
+					Q.handle(o.onClose, $this[0], [$this[0]]);
 					if (e) $.Event(e).preventDefault();
 				},
 				windowParams: windowParams

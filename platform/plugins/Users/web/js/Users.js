@@ -1956,7 +1956,7 @@
 						className: "Users_connect_wallets",
 						content: "",
 						stylesheet: '{{Users}}/css/Users/wallets.css',
-						onActivate: function ($dialog) {
+						onActivate: function (dialog) {
 							Q.req("Users/session", ["payload"], function (err, response) {
 								if (err) {
 									return;
@@ -1984,15 +1984,15 @@
 									}
 								});
 								Q.Template.render("Users/web3/connect/wallet", {wallets: cWallets}, function (err, html) {
-									Q.replace($(".Q_dialog_content", $dialog)[0], html);
+									Q.replace($(".Q_dialog_content", dialog)[0], html);
 
-									$("a[href]", $dialog).on(Q.Pointer.start, function (e) {
+									$("a[href]", dialog).on(Q.Pointer.start, function (e) {
 										Q.req("Users/session", ["result"], function (err, response) {}, {
 											method: "post",
 											fields: payload
 										});
 									});
-									$("a[data-url]", $dialog).on(Q.Pointer.fastclick, function (e) {
+									$("a[data-url]", dialog).on(Q.Pointer.fastclick, function (e) {
 										e.preventDefault();
 										var url = this.getAttribute("data-url");
 										if (url === "walletconnect") {
@@ -2010,7 +2010,7 @@
 
 								// close dialog on timeout
 								handOffTimeout = setTimeout(function () {
-									Q.Dialogs.close($dialog);
+									Q.Dialogs.close(dialog);
 								}, payload['Q.timestamp']*1000 - Date.now());
 							}, {
 								fields: {
@@ -2019,7 +2019,7 @@
 								}
 							});
 						},
-						onClose: function ($dialog) {
+						onClose: function () {
 							Q.handle(callback, null, [true]);
 							handOffTimeout && clearTimeout(handOffTimeout);
 						}

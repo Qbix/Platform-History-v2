@@ -175,7 +175,7 @@ Q.Tool.define("Q/columns", function(options) {
 		setTimeout(_updateAttributes.bind(this), 0);
 	}, 'Q/columns'),
 	beforeClose: new Q.Event(),
-	onActivate: new Q.Event(function (options, index, div) {
+	onActivate: new Q.Event(function (div, options, index) {
 		var tool = this;
 		Q.Pointer.stopHints();
 		div.addEventListener('transitionend', function () {
@@ -188,7 +188,7 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.attr('data-width-range', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
-	onClose: new Q.Event(function (index, div, data, skipUpdateAttributes) {
+	onClose: new Q.Event(function (div, index, data, skipUpdateAttributes) {
 		if (!skipUpdateAttributes) {
 			setTimeout(_updateAttributes.bind(this), 0);
 		}
@@ -561,14 +561,14 @@ Q.Tool.define("Q/columns", function(options) {
 
 					// call the callback before the events,
 					// so something custom can be done first
-					Q.handle(callback, tool, [o, index, div, data]);
-					Q.handle(o.onActivate, tool, [o, index, div, data]);
-					state.onActivate.handle.call(tool, o, index, div, data);
+					Q.handle(callback, tool, [div, o, index, data]);
+					Q.handle(o.onActivate, tool, [div, o, index, data]);
+					state.onActivate.handle.call(tool, div, o, index, data);
 					setTimeout(function () {
 						$mask.remove();
 						$div.removeClass('Q_columns_loading');
-						Q.handle(o.afterDelay, tool, [o, index, div, data]);
-						Q.handle(state.afterDelay, tool, [o, index, div, data]);
+						Q.handle(o.afterDelay, tool, [div, o, index, data]);
+						Q.handle(state.afterDelay, tool, [div, o, index, data]);
 					}, o.delay.duration);
 				} else {
 					$mask.remove();
@@ -888,7 +888,7 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
-			state.onClose.handle.call(tool, index, div, data, skipUpdateAttributes);
+			state.onClose.handle.call(tool, index, data, skipUpdateAttributes);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {

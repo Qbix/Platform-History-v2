@@ -102,15 +102,15 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				previewState.actions.actions.edit = function () {
 					var endDate = stream.getAttribute("endDate");
 					endDate = Number.isInteger(endDate) ? new Date(endDate*1000).toISOString().split('T')[0] : null;
-					tool.openDialog(function ($dialog) {
-						var endDate = $("input[name=endDate]", $dialog).val();
+					tool.openDialog(function (dialog) {
+						var endDate = $("input[name=endDate]", dialog).val();
 						endDate = endDate ? Date.parse(endDate) : null;
 						endDate = Number.isInteger(endDate) ? endDate/1000 : null;
 
-						stream.set('title', $("input[name=title]", $dialog).val());
-						stream.set('content', $("textarea[name=description]", $dialog).val());
-						stream.setAttribute("amount", $("input[name=amount]", $dialog).val());
-						stream.setAttribute("period", $("select[name=period]", $dialog).val());
+						stream.set('title', $("input[name=title]", dialog).val());
+						stream.set('content', $("textarea[name=description]", dialog).val());
+						stream.setAttribute("amount", $("input[name=amount]", dialog).val());
+						stream.setAttribute("period", $("select[name=period]", dialog).val());
 						stream.setAttribute("endDate", endDate);
 						stream.save({
 							onSave: function () {
@@ -149,14 +149,14 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				}, fields)
 			},
 			className: "Assets_plan_composer",
-			onActivate: function ($dialog) {
+			onActivate: function (dialog) {
 				if (typeof fields.interrupted !== 'undefined') {
-					$dialog.attr("data-interrupted", fields.interrupted.toString());
+					$(dialog).attr("data-interrupted", fields.interrupted.toString());
 				}
 
-				$("input,textarea", $dialog).plugin('Q/placeholders');
+				$("input,textarea", dialog).plugin('Q/placeholders');
 
-				$("button[name=save]", $dialog).on(Q.Pointer.fastclick, function () {
+				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
 					var $form = $(this).closest("form");
 					var valid = true;
 
@@ -175,12 +175,12 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 						return false;
 					}
 
-					Q.handle(saveCallback, $dialog, [$dialog]);
+					Q.handle(saveCallback, dialog, [dialog]);
 					Q.Dialogs.pop();
 					return false;
 				});
 
-				$("button[name=interrupt]", $dialog).on(Q.Pointer.fastclick, function () {
+				$("button[name=interrupt]", dialog).on(Q.Pointer.fastclick, function () {
 					var $this = $(this);
 					$this.addClass("Q_working");
 
@@ -191,7 +191,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 							return;
 						}
 
-						$toolElement.add($dialog).attr("data-interrupted", true);
+						$toolElement.add(dialog).attr("data-interrupted", true);
 						tool.stream.refresh(function () {
 							tool.stream = this;
 						}, {
@@ -211,7 +211,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 					return false;
 				});
 
-				$("button[name=continue]", $dialog).on(Q.Pointer.fastclick, function () {
+				$("button[name=continue]", dialog).on(Q.Pointer.fastclick, function () {
 					var $this = $(this);
 					$this.addClass("Q_working");
 
@@ -222,7 +222,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 							return;
 						}
 
-						$toolElement.add($dialog).attr("data-interrupted", false);
+						$toolElement.add(dialog).attr("data-interrupted", false);
 						tool.stream.refresh(function () {
 							tool.stream = this;
 						}, {
@@ -243,8 +243,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				});
 
 			},
-			onClose: function ($dialog) {
-				Q.handle(closeCallback, $dialog, [$dialog]);
+			onClose: function (dialog) {
+				Q.handle(closeCallback, dialog, [dialog]);
 			}
 		});
 	}

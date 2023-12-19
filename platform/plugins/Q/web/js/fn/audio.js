@@ -345,7 +345,7 @@
 						noClose: true,
 						onActivate: function (dialog) {
 							$(".Q_mask").on(Q.Pointer.fastclick, hideOnMaskClick);
-							dialog.attr("data-state", state.playerBox.attr("data-state"));
+							$(dialog).attr("data-state", state.playerBox.attr("data-state"));
 
 							$(".Q_tool.Q_pie_tool", dialog).on(Q.Pointer.fastclick, function(event){
 								event.stopPropagation();

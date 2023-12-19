@@ -11580,6 +11580,18 @@ Q.Text = {
 	dir: 'Q/text',
 
 	/**
+	 * Tests whether the text (typically one or more sample characters)
+	 * is written in the alphabet of an RTL language.
+	 * @method isRTL
+	 * @static
+	 * @param {String} text 
+	 * @returns {boolean}
+	 */
+	isRTL: function (text) {
+		return /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(text);
+	},
+
+	/**
 	 * Sets the language and locale to use in Q.Text.get calls.
 	 * When Q is initialized, it is set by default from Q.first(Q.info.languages)
 	 * @method setLanguage

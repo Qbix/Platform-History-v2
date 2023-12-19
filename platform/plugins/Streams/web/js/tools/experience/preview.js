@@ -189,8 +189,8 @@ Q.Tool.define("Streams/topic/preview", "Streams/preview", function (options, pre
 				creatable: state.streamTypes
 			}),
 			trigger: tool.element,
-			onActivate: function (content) {
-				var relatedTool = Q.Tool.from($(".Streams_related_tool", content), "Streams/related");
+			onActivate: function (element) {
+				var relatedTool = Q.Tool.from($(".Streams_related_tool", element), "Streams/related");
 
 				/*$("<div class='Streams_experience_composer'>+</div>").appendTo(relatedTool.element).plugin('Q/contextual', {
 					className: "Streams_experience_addons",

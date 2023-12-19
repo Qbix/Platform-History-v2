@@ -47,7 +47,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
             }),
             columnClass: 'Streams_column_topic',
             trigger: tool.element,
-            onActivate: function (options, index, div, data) {
+            onActivate: function () {
                 
             }
         });

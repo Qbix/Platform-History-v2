@@ -229,13 +229,13 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 					className: 'Q_alert',
                     fullscreen: false,
                     hidePrevious: true, 
-                    onActivate: function ($dialog) {
-                        var $img = $('img', $dialog);
-                        var $addButton = $("button[name=addLabel]", $dialog);
-                        var $updateButton = $("button[name=editLabel]", $dialog);
-                        var $canManageButton = $("button[name=canManageLabel]", $dialog);
-                        var $inputTitle = $("input[name=title]", $dialog);
-                        var $rolePlace = $("select[name=rolePlace]", $dialog);
+                    onActivate: function (dialog) {
+                        var $img = $('img', dialog);
+                        var $addButton = $("button[name=addLabel]", dialog);
+                        var $updateButton = $("button[name=editLabel]", dialog);
+                        var $canManageButton = $("button[name=canManageLabel]", dialog);
+                        var $inputTitle = $("input[name=title]", dialog);
+                        var $rolePlace = $("select[name=rolePlace]", dialog);
 
                         var subpath;
 
@@ -364,7 +364,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         filter: Q.Users.Label.isExternal(label) ? {"replace": ['<<< web3/']} : {}
                                         //----
                                     }),
-                                    onClose: function ($dialog2) {
+                                    onClose: function (dialog2) {
                                         tool.element.addClass('Q_working');
                                         //$dialog2.addClass('Q_working');
                                         var iChainId, 
@@ -406,7 +406,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                 //itBecameWeb3 = [];
                                             }
 
-                                            var selected = $dialog2.find('li.Q_selected'); 
+                                            var selected = $('li.Q_selected', dialog2); 
                                             for(var i of selected) {
                                                 iLabel = $(i).data('label');
                                                 if (Q.Users.Label.isExternal(iLabel)) {
@@ -458,8 +458,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         });;
 
                                     },
-                                    onActivate: function ($dialog2) {
-                                        var labelsTool = Q.Tool.from($(".Users_labels_tool", $dialog2), "Users/labels");
+                                    onActivate: function (dialog2) {
+                                        var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog2), "Users/labels");
                                         if (Q.typeOf(labelsTool) !== 'Q.Tool') {
                                             return;
                                         }
@@ -476,11 +476,11 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                 
                                                 if (resp[0]['status'] == "fulfilled") {
                                                     for (var i of resp[0].value.labels) {
-                                                        $dialog2.find("[data-label='"+i+"']").addClass('Q_selected');
+                                                        $("[data-label='"+i+"']", dialog2).addClass('Q_selected');
                                                     }
 
                                                     for (var i of resp[0].value.locked) {
-                                                        $dialog2.find("[data-label='"+i+"']").removeClass('Q_selected').addClass('Q_selected_permanently');
+                                                        $("[data-label='"+i+"']", dialog2).removeClass('Q_selected').addClass('Q_selected_permanently');
                                                     }
                                                 }
                                                 if (resp[1]['status'] == "fulfilled") {
@@ -491,7 +491,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                     if (resp[1].value.status) {
                                                         for (var i in ret) {
                                                             if (ret[i] >=2) {
-                                                                $dialog2.find("[data-label='"+Q.Communities.Web3.Roles.labelPattern(opt['chainId'], i)+"']").addClass('Q_selected');
+                                                                $("[data-label='"+Q.Communities.Web3.Roles.labelPattern(opt['chainId'], i)+"']", dialog2)
+                                                                .addClass('Q_selected');
                                                             }
                                                         }
                                                     }
