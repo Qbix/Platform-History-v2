@@ -5970,7 +5970,7 @@ Q.Links = {
 			urlParams.push('text=' + encodeURIComponent(message));
 		}
 
-		return 'whatsapp://send/?' + urlParams.join('&');;
+		return 'whatsapp://send/?' + urlParams.join('&');
 	},
 	/**
 	 * Generates a link for sharing a link in Telegram
@@ -5998,6 +5998,7 @@ Q.Links = {
 			}
 			return link;
 		}
+		options = options || {};
 		var urlParams = [];
 		urlParams.push('to=' + to);
 		if (text) {
@@ -7700,7 +7701,7 @@ Q.replace = function _Q_replace(container, source, options) {
 	var retainedTools = {};
 	var newOptions = {};
 	var incomingElements = {};
-	Q.find(source.childNodes, null, function (incomingElement) {
+	for (const incomingElement of Q.$('.Q_tool', source)) {
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
@@ -7732,7 +7733,7 @@ Q.replace = function _Q_replace(container, source, options) {
 				Q.extend(newOptions[id], incomingElement.options);
 			}
 		}
-	});
+	};
 	
 	Q.beforeReplace.handle(container, source, options, newOptions, retainedTools);
 	
@@ -9827,7 +9828,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (!media) {
 		media = 'screen,print';
 	}
-	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');;
+	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');
 	var i, e, h, m;
 	var href2 = href.split('?')[0];
 	for (i=0; i<elements.length; ++i) {

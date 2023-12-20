@@ -1094,5 +1094,7 @@ body.Q_columns_animationFX {
 }
 
 @media (prefers-color-scheme: dark) {
-	.Q_overlay { background: url(../img/bg/overlay-dark.png); color: white; }
+	.Q_overlay, .Q_fullscreen_dialog {
+		background: url(../img/bg/overlay-dark.png);
+	}
 }
