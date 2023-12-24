@@ -30,17 +30,17 @@ Q.exports(function(priv){
                     text: Q.Assets.texts
                 }
             },
-            onActivate: function ($dialog) {
+            onActivate: function (dialog) {
                 var pipeDialog = new Q.Pipe(["currencySymbol", "paymentIntent"], function (params) {
                     var currencySymbol = params.currencySymbol[0];
                     var clientSecret = params.paymentIntent[0];
                     var amount = parseInt(options.amount);
-                    var $payButton = $("button[name=pay]", $dialog);
+                    var $payButton = $("button[name=pay]", dialog);
 
                     $payButton.text(Q.Assets.texts.payment.Pay + ' ' + currencySymbol + amount.toFixed(2));
 
                     var pipeElements = new Q.Pipe(['paymentRequest', 'payment'], function (params) {
-                        $dialog.removeClass("Assets_stripe_payment_loading");
+                        dialog.removeClass("Assets_stripe_payment_loading");
                     });
 
                     // <create payment request button>
@@ -105,7 +105,7 @@ Q.exports(function(priv){
 
                     // Check the availability of the Payment Request API first.
                     paymentRequest.canMakePayment().then(function(result) {
-                        var $paymentRequestButton = $(".Assets_Stripe_requestButton", $dialog);
+                        var $paymentRequestButton = $(".Assets_Stripe_requestButton", dialog);
 
                         if (result) {
                             paymentRequestButton.mount($paymentRequestButton[0]);
@@ -128,7 +128,7 @@ Q.exports(function(priv){
                         }
                     });
                     paymentElement.on('ready', pipeElements.fill('payment'));
-                    paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
+                    paymentElement.mount($(".Assets_Stripe_elements", dialog)[0]);
 
                     $payButton.on(Q.Pointer.fastclick, function () {
                         var $this = $(this);

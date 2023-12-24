@@ -124,8 +124,8 @@
 					title: Q.Assets.texts.payment.PaymentStatus,
 					className: "Assets_Payment_status",
 					content: message,
-					onActivate: function ($dialog) {
-						$dialog.attr('data-status', paymentIntent.status);
+					onActivate: function (dialog) {
+						dialog.setAttribute('data-status', paymentIntent.status);
 					}
 				});
 			}
@@ -762,7 +762,7 @@
 			name: 'Assets/plan',
 			url: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop()),
 			className: 'Assets_subscription_plan',
-			onActivate: function ($element) {
+			onActivate: function (element) {
 
 			}
 		});

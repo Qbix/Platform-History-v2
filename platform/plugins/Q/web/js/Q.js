@@ -2656,6 +2656,29 @@ Q.swapElements = function(element1, element2) {
 };
 
 /**
+ * Shorthand for creating a new element
+ * @param {String} type 
+ * @param {Object} [attributes] Pair of attributeName: attributeValue.
+ *  Names like "class" should be in quotation marks since they're JS keywords.
+ * @param {Array} [elementsToAppend] an array of elements to append, if any
+ * @return {Element}
+ */
+Q.element = function (type, attributes, elementsToAppend) {
+	var element = document.createElement(type);
+	if (attributes) {
+		for (var k in attributes) {
+			element.setAttribute(k, attributes[k]);
+		}
+	}
+	if (elementsToAppend) {
+		for (var i=0, l=elementsToAppend.length; i<l) {
+			element.append(elementsToAppend[i]);
+		}
+	}
+	return element;
+};
+
+/**
  * Return querySelectorAll entries() iterator for use in for loops
  * @method $
  * @static
@@ -14424,7 +14447,7 @@ Q.Dialogs = {
 			options
 		);
 		if (o.fullscreen) o.mask = false;
-		var $dialog = $(o.dialog);
+		var dialog = (o.dialog && o.dialog[0]) || o.dialog;
 		if (o.template) {
 			Q.Template.render(o.template.name, o.template.fields, function (err, html) {
 				if (!err) {
@@ -14434,7 +14457,7 @@ Q.Dialogs = {
 		} else {
 			_proceed1(o.content);
 		}
-		return $dialog && $dialog[0];
+		return dialog;
 		function _proceed1(content) {
 			if (o.stylesheet) {
 				Q.addStylesheet(o.stylesheet, function () { _proceed2(content); })
@@ -14443,41 +14466,42 @@ Q.Dialogs = {
 			}
 		}
 		function _proceed2(content) {
-			var $h2, $title, $content;
-			if (!$dialog.length) {
+			var h2, title, contentElement;
+			if (!dialog) {
 				// create this dialog element
-				$h2 = $('<h2 class="Q_dialog_title" />');
-				$title = $('<div class="Q_title_slot" />').append($h2);
-				$content = $('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />');
-				$dialog = $('<div />').append($title).append($content);
+				h2 = Q.element('h2', {"class": "Q_dialog_title"});
+				title = Q.element('div', {"class": "Q_title_slot"}, [h2]);
+				contentElement = Q.element('div', {"class": "Q_dialog_slot Q_dialog_content Q_overflow"});
+				dialog = Q.element('div', {}, [title, content]);
 				if (o.apply) {
-					$dialog.addClass('Q_overlay_apply');
+					dialog.addClass('Q_overlay_apply');
 				}
 				if (o.removeOnClose !== false) {
 					o.removeOnClose = true;
 				}
 			} else {
-				$h2 = $('.Q_dialog_title', $dialog);
-				$title = $('.Q_title_slot', $dialog)
-				$content = $('.Q_dialog_slot', $dialog);
+				h2 = dialog.querySelector('.Q_dialog_title');
+				title = dialog.querySelector('.Q_title_slot');
+				contentElement = dialog.querySelector('Q_dialog_slot');
 			}
+			var $dialog = $(dialog);
 			if (o.title) {
-				$h2.empty().append(o.title);
+				h2.innerHTML = '';
+				h2.append(title);
 			}
-			if (content) {
-				$content.empty().append(content);
+			if (contentElement) {
+				contentElement.innerHTML = '';
+				contentElement.append()
 			}
-			$dialog.hide();
-			//if ($dialog.parent().length == 0) {
-				$(o.appendTo || document.body).append($dialog);
-			//}
+			dialog.style.display = 'none';
+			(o.appendTo || document.body).append(dialog);
 			var _onClose = o.onClose;
 			o.onClose = new Q.Event(function() {
 				if (!Q.Dialogs.dontPopOnClose) {
 					Q.Dialogs.pop(true);
 				}
 				Q.Dialogs.dontPopOnClose = false;
-				Q.handle(o.onClose.original, $dialog, [$dialog]);
+				Q.handle(o.onClose.original, dialog, [dialog]);
 			}, 'Q.Dialogs');
 			o.onClose.original = _onClose;
 			try {
@@ -14487,12 +14511,12 @@ Q.Dialogs = {
 			}
 			var topDialog = null;
 			var dialogs = Q.Dialogs.dialogs;
-			$dialog.isFullscreen = o.fullscreen;
+			dialog.isFullscreen = o.fullscreen;
 			if (dialogs.length) {
 				topDialog = dialogs[dialogs.length - 1];
 			}
-			if (!topDialog || topDialog !== $dialog[0]) {
-				dialogs.push($dialog);
+			if (!topDialog || topDialog !== dialog) {
+				dialogs.push(dialog);
 				if (o.hidePrevious && topDialog) {
 					topDialog.addClass('Q_hide');
 				}
@@ -14517,8 +14541,8 @@ Q.Dialogs = {
 			dontTriggerClose = false;
 		}
 
-		var $dialog = this.dialogs[this.dialogs.length - 1];
-		$dialog = this.dialogs.pop();
+		var dialog = this.dialogs.pop();
+		var $dialog = $(dialog);
 
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].removeClass('Q_hide');
@@ -14532,7 +14556,7 @@ Q.Dialogs = {
 			}
 		}
 		Q.Pointer.cancelClick();
-		return $dialog && $dialog[0];
+		return $dialog[0];
 	},
 
 	/**
