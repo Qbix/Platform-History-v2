@@ -126,7 +126,7 @@
 				}
 			}
 			var current = col.splice(cid, 1)[0];
-			current.trigger.unbind('mouseenter.Q_contextual');
+			current.trigger.off('mouseenter.Q_contextual');
 			return current;
 		},
 	

@@ -69,7 +69,7 @@ function (o) {
 				$(moveTarget).addClass('Q_selected');
 				selectedAtStart = true;
 			}
-			eventReceiver.unbind(Q.Pointer.end, endEventHandler)
+			eventReceiver.off(Q.Pointer.end, endEventHandler)
 				.bind(Q.Pointer.end, endEventHandler);
 //			console.log('1bound ' + Q.Pointer.end, eventReceiver[0]);
 		}
@@ -110,7 +110,7 @@ function (o) {
 			{
 				listItems.removeClass('Q_selected');
 			}
-			eventReceiver.unbind('mouseleave', leaveEventHandler)
+			eventReceiver.off('mouseleave', leaveEventHandler)
 				.bind('mouseleave', leaveEventHandler);
 //			console.log('2bound mouseleave', eventReceiver[0]);
 		}
@@ -147,15 +147,15 @@ function (o) {
 		}
 		
 		if (o.ignoreStartEvent) {
-			eventReceiver.unbind(Q.Pointer.end, endEventHandler)
+			eventReceiver.off(Q.Pointer.end, endEventHandler)
 				.bind(Q.Pointer.end, endEventHandler);
 //				console.log('3bound ' + Q.Pointer.end, eventReceiver[0]);
 		} else {
-			eventReceiver.unbind(Q.Pointer.start, startEventHandler)
+			eventReceiver.off(Q.Pointer.start, startEventHandler)
 				.bind(Q.Pointer.start, startEventHandler);
 //				console.log('4bound ' + Q.Pointer.start, eventReceiver[0]);
 		}
-		eventReceiver.unbind(Q.Pointer.move, moveEventHandler)
+		eventReceiver.off(Q.Pointer.move, moveEventHandler)
 			.bind(Q.Pointer.move, moveEventHandler);
 //		console.log('bound ' + Q.Pointer.move, eventReceiver[0]);
 		
@@ -182,13 +182,13 @@ function (o) {
 			var data = $this.data('Q/listing objects');
 			if (data) {
 				if (data.startEventHandler) {
-					data.eventReceiver.unbind(Q.Pointer.start, data.startEventHandler);
+					data.eventReceiver.off(Q.Pointer.start, data.startEventHandler);
 				}
 				if (data.moveEventHandler) {
-					data.eventReceiver.unbind(Q.Pointer.move, data.moveEventHandler);
+					data.eventReceiver.off(Q.Pointer.move, data.moveEventHandler);
 				}
 				if (data.endEventHandler) {
-					data.eventReceiver.unbind(Q.Pointer.end, data.endEventHandler);
+					data.eventReceiver.off(Q.Pointer.end, data.endEventHandler);
 				}
 			}
 			$this.removeData('Q/listing objects');

@@ -2313,18 +2313,22 @@ Q.calculateKey.keys = [];
  * @param {Function} [callback] The final callback, if any, to call after the chain is done
  * @return {Function} The wrapper function
  */
-Q.chain = function (callbacks, callback) {
-	var result = callback;
+Q.chain = function (callbacks) {
+	var result = (callbacks && callbacks.pop()) || function () {
+		var args = Array.prototype.slice.call(arguments);
+		var cb = args.pop();
+		if (typeof cb === 'function') {
+			cb.apply(this, arguments);
+		}
+	};
 	Q.each(callbacks, function (i, cb) {
 		if (Q.typeOf(cb) !== 'function') {
 			return;
 		}
-
 		var prevResult = result;
 		result = function () {
-			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
-			return cb.apply(this, args);
+			return cb.apply(this, arguments);
 		};
 	}, {ascending: false, numeric: true});
 	return result;
@@ -14242,8 +14246,8 @@ function _Q_PointerStartHandler(e) {
 var _pointerMoveTimeout = null;
 function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/467460
 	clearTimeout(_pointerMoveTimeout);
-	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
-	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
+	var screenX = Q.Visual.getX(evt) - Q.Visual.scrollLeft();
+	var screenY = Q.Visual.getY(evt) - Q.Visual.scrollTop();
 	if (!screenX || !screenY || Q.Pointer.canceledClick
 	|| (!evt.button && (evt.touches && !evt.touches.length))) {
 		return;

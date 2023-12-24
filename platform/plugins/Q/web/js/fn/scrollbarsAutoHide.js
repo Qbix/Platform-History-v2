@@ -81,10 +81,10 @@
                     $this.css({ 'padding-bottom': marginDiffBottom + 'px' });
                 }
                 if (Q.Browser.detect().OS === 'mac') {
-                    var scrollTop = $this.scrollTop();
+                    var scrollTop = $this[0] && $this[0].scrollTop;
                     $this.scrollTop(0);
                     $this.scrollTop(scrollTop);
-                    var scrollLeft = $this.scrollLeft();
+                    var scrollLeft = $this[0] && $this[0].scrollLeft;
                     $this.scrollLeft(0);
                     $this.scrollLeft(scrollLeft);
                 }

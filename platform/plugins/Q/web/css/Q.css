@@ -244,10 +244,8 @@ body.Q_preventScroll {
 .Q_fullscreen_dialog .Q_title_slot,
 .Q_overlay .Q_title_slot {
 	color: white;
-	background: #444; /* for non-css3 browsers */
-	background: linear-gradient(top,  #444,  #111);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); /* for IE */
-	border-bottom: 1px solid #333;
+	background: transparent;
+	border: none;
 }
 .Q_dialog_title {
 	padding: 0 10px;
@@ -265,6 +263,10 @@ body.Q_preventScroll {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	z-index: 2;
+	background: #444; /* for non-css3 browsers */
+	background: linear-gradient(top,  #444,  #111);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); /* for IE */
+	border-bottom: 1px solid #333;
 }
 .Q_dialog_title img {
 	width: 40px;

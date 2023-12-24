@@ -414,7 +414,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 							Q.handle(o.afterRelease, $this, [evt, overElement]);
 							$this.trigger('afterRelease', $this, evt, overElement);
 							$container.css('z-index', zindex);
-							// $this.unbind('click.Q_clickable');
+							// $this.off('click.Q_clickable');
 							// $this.trigger('click');
 							state.animation = null;
 						});
