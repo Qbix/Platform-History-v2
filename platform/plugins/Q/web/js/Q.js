@@ -2671,7 +2671,7 @@ Q.element = function (type, attributes, elementsToAppend) {
 		}
 	}
 	if (elementsToAppend) {
-		for (var i=0, l=elementsToAppend.length; i<l) {
+		for (var i=0, l=elementsToAppend.length; i<l; ++i) {
 			element.append(elementsToAppend[i]);
 		}
 	}
