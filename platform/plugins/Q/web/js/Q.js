@@ -14482,7 +14482,7 @@ Q.Dialogs = {
 			} else {
 				h2 = dialog.querySelector('.Q_dialog_title');
 				title = dialog.querySelector('.Q_title_slot');
-				contentElement = dialog.querySelector('Q_dialog_slot');
+				contentElement = dialog.querySelector('.Q_dialog_slot');
 			}
 			var $dialog = $(dialog);
 			if (o.title) {
