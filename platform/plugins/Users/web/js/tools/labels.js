@@ -114,7 +114,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
 {
     userId: null,
-    filter: ['Users/', '<<< web3/' + Q.Assets.Web3.defaultChain.chainId + '/'],
+    filter: ['Users/', Users.Label.externalPrefix + 'web3/' + Q.Assets.Web3.defaultChain.chainId + '/'],
     exclude: null,
     excludeStartsWith: null,
     contactUserId: null,
@@ -360,8 +360,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                         contactUserId: false,
                                         editable: false,
                                          // web3 for web3, web2 for web2
-                                        excludeStartsWith: Q.Users.Label.isExternal(label) ? [] : ['<<< web3/'],
-                                        filter: Q.Users.Label.isExternal(label) ? {"replace": ['<<< web3/']} : {}
+                                        excludeStartsWith: Q.Users.Label.isExternal(label) ? [] : [Users.Label.externalPrefix + 'web3/'],
+                                        filter: Q.Users.Label.isExternal(label) ? {"replace": [Users.Label.externalPrefix + 'web3/']} : {}
                                         //----
                                     }),
                                     onClose: function (dialog2) {
@@ -392,10 +392,14 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                             
 
                                             if (resp[0]['status'] == "fulfilled") {
-                                                // labels that not include locked
-                                                itWasWeb2 = (resp[0].value.labels).filter(n => !(resp[0].value.locked).includes(n));
-                                                // also exclude external labels(but they shouldn't exist here )
-                                                itWasWeb2 = (itWasWeb2).filter(n => !(n.startsWith('<<< web3')));
+                                                // labels that don't include locked
+                                                itWasWeb2 = (resp[0].value.labels).filter(function (n) {
+                                                    return !(resp[0].value.locked).includes(n);
+                                                });
+                                                // also exclude external labels (although really they shouldn't exist here)
+                                                itWasWeb2 = (itWasWeb2).filter(function (n) {
+                                                    return !(n.startsWith(Label.externalPrefix+'web3'))
+                                                });
                                                 
                                                 // minus filter
                                                 //itBecameWeb2 = [];
@@ -434,12 +438,9 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                                             Promise.allSettled([
                                                 Q.Users.managePermissions(state.userId, label, tograntWeb2, torevokeWeb2, function (err, result) {}),
-                                                (
                                                 (Q.isEmpty(tograntWeb3) && Q.isEmpty(torevokeWeb3))
-                                                ?
-                                                new Promise(function(resolve, reject) {resolve(true)})
-                                                :
-                                                Q.Communities.Web3.Roles.manage(
+                                                ? new Promise(function(resolve, reject) {resolve(true)})
+                                                : Q.Communities.Web3.Roles.manage(
                                                     {
                                                         communityAddress: resp[1].value.opt['communityAddress'], 
                                                         chainId: resp[1].value.opt['chainId'], 
@@ -448,7 +449,6 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                                     tograntWeb3, 
                                                     torevokeWeb3, 
                                                     function(err, ret){}
-                                                )
                                                 )
                                             ]).finally(function(resp){
                                                 tool.element.removeClass('Q_working');
@@ -647,7 +647,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                     .find('.Users_labels_label[data-label="'+label+'"]')
                                     .data('web3validated');
             if (Q.isEmpty(web3validated)) {
-                return Q.handle(_callback, tool, [null, null, 'this web3 label was not find in that community']);
+                return Q.handle(_callback, tool, [null, null, 'this web3 label was not found in that community']);
             }
             
             var chainId, roleIndex, st, communityAddress, parsedData;
