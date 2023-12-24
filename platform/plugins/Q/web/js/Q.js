@@ -14487,11 +14487,11 @@ Q.Dialogs = {
 			var $dialog = $(dialog);
 			if (o.title) {
 				h2.innerHTML = '';
-				h2.append(title);
+				h2.append(o.title);
 			}
-			if (contentElement) {
+			if (content) {
 				contentElement.innerHTML = '';
-				contentElement.append()
+				contentElement.append(content);
 			}
 			dialog.style.display = 'none';
 			(o.appendTo || document.body).append(dialog);
