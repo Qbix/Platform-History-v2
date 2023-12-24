@@ -14472,7 +14472,7 @@ Q.Dialogs = {
 				h2 = Q.element('h2', {"class": "Q_dialog_title"});
 				title = Q.element('div', {"class": "Q_title_slot"}, [h2]);
 				contentElement = Q.element('div', {"class": "Q_dialog_slot Q_dialog_content Q_overflow"});
-				dialog = Q.element('div', {}, [title, content]);
+				dialog = Q.element('div', {}, [title, contentElement]);
 				if (o.apply) {
 					dialog.addClass('Q_overlay_apply');
 				}
