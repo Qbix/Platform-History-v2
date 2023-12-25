@@ -173,6 +173,46 @@
         };
 
         /**
+         * Detect faces on image
+         * @method Faces.detect
+         */
+        this.detect = function (element, callback) {
+            Q.addScript(['{{Users}}/js/tfjs.js', '{{Users}}/js/blazeface.js'], function () {
+                // Load the model.
+                blazeface.load().then(function (model) {
+                    model.estimateFaces(element).then(function (predictions) {
+                        Q.handle(callback, null, [predictions]);
+                    }).catch(function (err) {
+                        console.warn(err);
+                    });
+                }).catch(function (error) {
+                    console.warn(error);
+                });
+
+            });
+
+            /*Q.addScript([
+                '{{Users}}/js/tf-core.js',
+                '{{Users}}/js/tf-converter.js',
+                '{{Users}}/js/tf-backend-webgl.js',
+                '{{Users}}/js/face-landmarks-detection.js'
+            ], async function () {
+                const model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh, {
+                    maxFaces: 10
+                });
+
+                const predictions = await model.estimateFaces({
+                    input: element,
+                    returnTensors: false,
+                    flipHorizontal: false,
+                    predictIrises: false
+                });
+
+                Q.handle(callback, null, [predictions]);
+            });*/
+        };
+
+        /**
          * Make needed actions when face appear with camera
          * @method faceOn
          */
