@@ -240,11 +240,7 @@
 						className: 'Assets_web3_coin_presale_admin_create',
 						
 						trigger: tool.element,
-						onActivate: function ($element) {
-							
-							if (!($element instanceof $)) {
-								$element = $(arguments[2]);
-							}
+						onActivate: function (element) {
 													
 							var removeBtnsHandler = function($btn) {
 								var ident = $btn.data('ident');
@@ -252,12 +248,12 @@
 							}
 							
 							// handler for adding `timestamps_and_prices` group fields
-							$('button[name=timestamps_and_prices_add_row]', $element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
+							$('button[name=timestamps_and_prices_add_row]', element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 								Q.Template.render("Assets/web3/coin/presale/admin/create/fields/timestamps_and_prices/row", {
 									ident: tool.getRndIdent()
 								}, function (err, html) {
 									var $html = $(html);
-									$($element).find('.timestamps_and_prices_rows_container').append($html);
+									$('.timestamps_and_prices_rows_container', element).append($html);
 									$('button[name=timestamps_and_prices_remove_row]', $html).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 										removeBtnsHandler($(this));
 									});
@@ -265,12 +261,12 @@
 							});
 							
 							// handler for adding `thresholds_and_bonuse` group fields
-							$('button[name=thresholds_and_bonuses_add_row]', $element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
+							$('button[name=thresholds_and_bonuses_add_row]', element).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 								Q.Template.render("Assets/web3/coin/presale/admin/create/fields/thresholds_and_bonuses/row", {
 									ident: tool.getRndIdent()
 								}, function (err, html) {
 									var $html = $(html);
-									$($element).find('.thresholds_and_bonuses_rows_container').append($html);
+									$(element).find('.thresholds_and_bonuses_rows_container').append($html);
 									$('button[name=thresholds_and_bonuses_remove_row]', $html).off(Q.Pointer.click).on(Q.Pointer.click, function(e){
 										removeBtnsHandler($(this));
 									});
@@ -278,7 +274,7 @@
 							});
 							
 							// handler for weitchin `usewhitelist` block
-							$("#useWhiteList", $element).off('change').on('change', function (e) {
+							$("#useWhiteList", element).off('change').on('change', function (e) {
 								if($(this).is(":checked")) {
 									$('.useWhiteListContainer').show(300);
 								} else {
@@ -287,8 +283,8 @@
 							}).trigger('change');
 							
 							// creation funds
-							$("button[name=create]", $element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-								$element.addClass("Q_working");
+							$("button[name=create]", element).off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
+								element.addClass("Q_working");
 								// clone state fields
 								let fields = Object.assign({}, state.fields);
 								//collect form
@@ -303,9 +299,9 @@
 									if (key == 'whitelistData') {
 										if ($('#useWhiteList').is(":checked")) {
 											fields[key].userValue = [];
-											fields[key].userValue[0] = $($element).find('input[name=whitelistData_communityAddress]').val();
-											fields[key].userValue[1] = $($element).find('input[name=whitelistData_methodkeccack]').val();
-											fields[key].userValue[2] = $($element).find('input[name=whitelistData_roleId]').val();
+											fields[key].userValue[0] = $('input[name=whitelistData_communityAddress]', element).val();
+											fields[key].userValue[1] = $('input[name=whitelistData_methodkeccack]', element).val();
+											fields[key].userValue[2] = $('input[name=whitelistData_roleId]', element).val();
 											fields[key].userValue[3] = true;
 
 											//fields[key].userValue = '['+ (fields[key].userValue).join(',')+']';
@@ -316,7 +312,7 @@
 									} else { // for other fields collect but code need to be moved outside)
 										// get field values
 										var tmp;
-										var $fieldSelector = $element.find(`[name='${key}']`);
+										var $fieldSelector = $("[name='"+key+"]");
 										if ($fieldSelector.length == 0) {
 											fields[key].userValue = (fields[key].emptyValue) ? fields[key].emptyValue : '';
 											continue;
@@ -355,7 +351,7 @@
 								}
 								
 								var closeHandler = function(){
-									$element.removeClass("Q_working");
+									element.removeClass("Q_working");
 									invokeObj.close();
 								}
 
@@ -461,7 +457,7 @@
 								className: 'Assets_web3_coin_presale_admin_fund_info',
 
 								trigger: tool.element,
-								onActivate: function ($element) {
+								onActivate: function () {
 									$fundsListContainer.removeClass("Q_working");
 								}
 							});

@@ -103,10 +103,10 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                             template: {
                                 name: "Assets/NFT/sales/whitelist/add"
                             },
-                            onActivate: function ($dialog) {
-                                $("button[name=add]", $dialog).on(Q.Pointer.fastclick, function(){
+                            onActivate: function (dialog) {
+                                $("button[name=add]", dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
-                                    let account = $($dialog).find("[name='account']").val();
+                                    let account = $(dialog).find("[name='account']").val();
                                     if (!account) {
                                             Q.Dialogs.pop();
                                             return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
@@ -142,10 +142,10 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                             template: {
                                 name: "Assets/NFT/sales/whitelist/remove"
                             },
-                            onActivate: function ($dialog) {
-                                $("button[name=remove]", $dialog).on(Q.Pointer.fastclick, function(){
+                            onActivate: function (dialog) {
+                                $("button[name=remove]", dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
-                                    let account = $($dialog).find("[name='account']").val();
+                                    let account = $(dialog).find("[name='account']").val();
                                     if (!account) {
                                             Q.Dialogs.pop();
                                             return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);

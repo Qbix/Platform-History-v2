@@ -313,7 +313,7 @@ class Users_Label extends Base_Users_Label
 			return false;
 		}
 
-		if (gettype($label_2) == 'string') {
+		if (is_string($label_2)) {
 			$label_2 = array($label_2);
 		}
         
@@ -331,10 +331,12 @@ class Users_Label extends Base_Users_Label
 
 	/**
 	 * Get information as to which community roles a user can grant, revoke or see.
+	 * Any hooks for "Users/Label/can" event can also add additional info to the returned result
 	 * @method can
 	 * @param {string} $communityId The community for which we are checking labels
 	 * @param {string} [$userId=null] The user whose access we are checking. Defaults to logged-in user.
-	 * @return array Contains "grant", "revoke", "see", "roles", "manageIcon" arrays of labels
+	 * @return array Contains "grant", "revoke", "see" arrays of labels, as well as
+	 *  "roles", "manageIcon", "manageContacts" and any other information added by hooks
 	 */
 	static function can($communityId, $userId = null)
 	{
@@ -345,7 +347,7 @@ class Users_Label extends Base_Users_Label
 		if (!Users::isCommunityId($communityId)) {
 			throw new Users_Exception_NoSuchUser();
 		}
-		$userCommunityRoles = array_merge(array(""), array_keys(Users::roles($communityId, null, array(), $userId)));
+		$userCommunityRoles = array_merge(array("*"), array_keys(Users::roles($communityId, null, array(), $userId)));
         $communityRoles = self::ofCommunity($communityId);
 		$communityLabels = Users_Label::fetch($communityId, "", array("skipAccess" => true));
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
@@ -362,7 +364,6 @@ class Users_Label extends Base_Users_Label
 			$result["roles"][] = $role;
 			//foreach ($communityRoles as $keyLabel => $label) {
 			foreach ($communityLabels as $keyLabel => $label) {
-
 				if (Users_Label::canGrantLabel($role, $keyLabel, $communityRoles)) {
 					$result["grant"][] = $keyLabel;
 				}
@@ -400,7 +401,7 @@ class Users_Label extends Base_Users_Label
 	 * Merges the extras from each dynamic role in the database,
 	 * over the information found in Users/communities/roles config.
 	 * @param {string} $communityId The user ID of the community
-	 * @return {array} the merged array of the form [ $label => ["canSee": [...], ["canGrant": ...]]
+	 * @return {array} the merged array of the form [ $label => ["canSee": [...], "canGrant": [...], "canRevoke": [...], ]
 	 */
     static function ofCommunity($communityId) 
     {
@@ -431,7 +432,7 @@ class Users_Label extends Base_Users_Label
 	/**
 	 * return array of labels which contain labels in both array `canGrant` and `canRevoke`
 	 */
-	static function _canManage($labels, $label) 
+	protected static function _canManage($labels, $label) 
 	{
 		$ret = array();
 		if (!empty($labels[$label])) {
@@ -439,9 +440,9 @@ class Users_Label extends Base_Users_Label
 			$arrCanRevoke = (empty($labels[$label]['canRevoke'])) ? array() : $labels[$label]['canRevoke'];
 
 			$t = array_unique(array_merge(array_values($arrCanGrant), array_values($arrCanRevoke)));
-			foreach($t as $ilabel) {
+			foreach ($t as $ilabel) {
 				if (in_array($ilabel, $arrCanGrant) && in_array($ilabel, $arrCanRevoke)) {
-					array_push($ret, $ilabel);
+					$ret[] = $ilabel;
 				}
 			}
 		}

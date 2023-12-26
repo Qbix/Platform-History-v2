@@ -207,8 +207,8 @@ Q.Tool.define("Assets/plan", function(options) {
 										ascending: true
 									},
 								}),
-								onActivate: function ($dialog) {
-									$dialog[0].forEachTool(streamType + "/preview", function () {
+								onActivate: function (dialog) {
+									dialog.forEachTool(streamType + "/preview", function () {
 										var streamsPreview = Q.Tool.from(this.element, "Streams/preview");
 										this.state.onInvoke = function () {
 											var relatedTool = Q.Tool.from($relatedStreams[0], "Streams/related");

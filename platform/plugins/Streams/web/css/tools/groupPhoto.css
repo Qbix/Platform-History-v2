@@ -27,3 +27,6 @@
 .Streams_groupPhoto_tool h2:empty {
     display: none;
 }
+.Streams_groupPhoto_tool button[name=skip] {
+    margin: 10px 0;
+}

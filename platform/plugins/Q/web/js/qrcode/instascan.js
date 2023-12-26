@@ -27919,7 +27919,7 @@
 
 				var listener = self.change(function (e, state) {
 					if ( !self.hidden() ) {
-						self.unbind(listener);
+						self.off(listener);
 						callback();
 					}
 				});
@@ -27955,7 +27955,7 @@
 			//
 			//   var id = Visibility.change(function(e, state) {
 			//       firstChangeCallback();
-			//       Visibility.unbind(id);
+			//       Visibility.off(id);
 			//   });
 			unbind: function (id) {
 				delete self._callbacks[id];
@@ -27984,7 +27984,7 @@
 
 				var listener = self.change(function (e, state) {
 					if ( prerender != state ) {
-						self.unbind(listener);
+						self.off(listener);
 						callback();
 					}
 				});

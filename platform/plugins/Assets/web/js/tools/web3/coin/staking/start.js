@@ -139,12 +139,7 @@
 							className: 'Assets_web3_coin_staking_start_stake',
 
 							trigger: tool.element,
-							onActivate: function ($element) {
-								if (!($element instanceof $)) {
-									$element = $(arguments[2]);
-								}
-
-
+							onActivate: function (element) {
 								var erc20Contract;
 								var poolContract;
 								Q.Users.Web3.getContract(
@@ -155,7 +150,7 @@
 									}
 								).then(function (contract) {
 									erc20Contract = contract;
-									$($element).find('.step1 .bi-asterisk').addClass('animate');
+									$('.step1 .bi-asterisk', element).addClass('animate');
 
 									return contract.approve(
 										data.communityPoolAddress,
@@ -168,8 +163,8 @@
 										throw 'Smth unexpected when approve';
 									}
 									Q.Template.render("Assets/web3/coin/staking/start/stake/interface/check", {}, function (err, html) {
-										$($element).find('.step1').html(html);
-										$($element).find('.step2 .bi-asterisk').addClass('animate');
+										$('.step1', element).html(html);
+										$('.step2 .bi-asterisk', element).addClass('animate');
 									});
 								}).then(function () {	
 									return tool._getStakingPoolContract(data.communityPoolAddress);
@@ -187,7 +182,7 @@
 										throw 'Smth unexpected when stake';
 									}
 									Q.Template.render("Assets/web3/coin/staking/start/stake/interface/check", {}, function (err, html) {
-										$($element).find('.step2').html(html);
+										$('.step2', element).html(html);
 									});
 								}).catch(function (err) {
 

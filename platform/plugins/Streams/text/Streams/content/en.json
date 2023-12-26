@@ -129,6 +129,7 @@
             "QRscanned": "They scanned it!",
             "scannedQR": "{{ClickOrTap}} if the code was scanned",
             "TakeGroupPhoto": "Take a Group Photo",
+            "Skip": "Skip",
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",

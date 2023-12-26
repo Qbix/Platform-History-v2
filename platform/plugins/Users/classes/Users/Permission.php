@@ -34,14 +34,14 @@ class Users_Permission extends Base_Users_Permission
 	 *   Set to false to not also return the permissions for "" community
 	 * @return {array} of Users_Permission rows
 	 */
-	static function ofCommunity($communityId, $skipGlobalPermissions = false)
+	static function ofCommunity($communityId, $permission = 'Users/communities/roles', $skipGlobalPermissions = false)
 	{
 		return Users_Permission::select()
         ->where(array(
             'userId' => $skipGlobalPermissions
 				? $communityId
 				: array('', $communityId),
-            'permission' => 'Users/communities/roles'
+            'permission' => $permission
         ))->orderBy('label')
 		->fetchDbRows();
 	}

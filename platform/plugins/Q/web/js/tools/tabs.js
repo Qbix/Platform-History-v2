@@ -596,7 +596,8 @@
 					top: "-1000px",
 					left: "-1000px"
 				});
-				$clone.appendTo('body').find('*:not(:visible)').remove().end().remove();
+				$clone.appendTo('body').find('*:not(:visible)').remove();
+				$clone.remove();
 				var visibleCount = 0;
 				$tabs.each(function () {
 					if ($(this).css('display') !== 'none') {

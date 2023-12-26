@@ -467,12 +467,12 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 						);
 						Q.Dialogs.push({
 							className: 'Q_dialog_imagepicker',
-							title: $croppingTitle,
-							content: $croppingElement,
+							title: $croppingTitle[0],
+							content: $croppingElement[0],
 							destroyOnClose: true,
 							apply: true,
 							onActivate : {
-								"Q/imagepicker": function ($dialog) {
+								"Q/imagepicker": function (dialog) {
 									var kw = requiredSize.width / isw;
 									var kh = requiredSize.height / ish;
 									var rsw1, rsw2, rsh1, rsh2;
@@ -492,8 +492,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 										rsh1 = rsh2 = requiredSize.height;
 									}
 
-									var dw = this.width();
-									var dh = this.height();
+									var dw = this.clientWidth;
+									var dh = this.clientHeight;
 									if (rsw2 !== dw) {
 										rsh2 *= dw / rsw1;
 										rsw2 = dw;
@@ -515,9 +515,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 									}, function () {
 										$croppingElement.css({'visibility': 'visible'});
 										Q.handle(state.onCropping, $this, [
-											$dialog,
-											$croppingTitle,
-											$croppingElement
+											dialog,
+											$croppingTitle[0],
+											$croppingElement[0]
 										]);
 									});
 								}

@@ -1620,7 +1620,7 @@ Q.largestSize = function (sizes, useHeight) {
  * @method diff
  * @param {Array|Object} container to subtract items from to form the result
  * @param {Array|Object} container whose items are subtracted in the result
- * @param {Function} [comparator] accepts item1, item2, index1, index2) and returns whether two items are equal
+ * @param {Function} [comparator] accepts item1, item2, index1, index2, isPlainObject, argumentIndex) and returns whether two items are equal
  * @return {Array|Object} a container of the same type as container1, but without elements of container2
  */
 Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
@@ -1631,8 +1631,8 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	var len = arguments.length;
 	var comparator = arguments[len-1];
 	if (typeof comparator !== 'function') {
-		comparator = function _Q_diff_default_comparator(v1, v2) {
-			return v1 === v2;
+		comparator = function _Q_diff_default_comparator(v1, v2, k, j, ipo) {
+			return v1 === v2 && (ipo ? (k == j) : true);
 		}
 		++len;
 	}
@@ -1641,8 +1641,9 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	Q.each(container1, function (k, v1) {
 		var found = false;
 		for (var i=1; i<len-1; ++i) {
+			var ipo = Q.isPlainObject(args[i]);
 			Q.each(args[i], function (j, v2) {
-				if (comparator(v1, v2, i, j)) {
+				if (comparator(v1, v2, k, j, ipo, i)) {
 					found = true;
 					return false;
 				}
@@ -2312,18 +2313,22 @@ Q.calculateKey.keys = [];
  * @param {Function} [callback] The final callback, if any, to call after the chain is done
  * @return {Function} The wrapper function
  */
-Q.chain = function (callbacks, callback) {
-	var result = callback;
+Q.chain = function (callbacks) {
+	var result = (callbacks && callbacks.pop()) || function () {
+		var args = Array.prototype.slice.call(arguments);
+		var cb = args.pop();
+		if (typeof cb === 'function') {
+			cb.apply(this, arguments);
+		}
+	};
 	Q.each(callbacks, function (i, cb) {
 		if (Q.typeOf(cb) !== 'function') {
 			return;
 		}
-
 		var prevResult = result;
 		result = function () {
-			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
-			return cb.apply(this, args);
+			return cb.apply(this, arguments);
 		};
 	}, {ascending: false, numeric: true});
 	return result;
@@ -2652,6 +2657,29 @@ Q.swapElements = function(element1, element2) {
 	next2   = element2.nextSibling;
 	parent1.insertBefore(element2, next1);
 	parent2.insertBefore(element1, next2);
+};
+
+/**
+ * Shorthand for creating a new element
+ * @param {String} type 
+ * @param {Object} [attributes] Pair of attributeName: attributeValue.
+ *  Names like "class" should be in quotation marks since they're JS keywords.
+ * @param {Array} [elementsToAppend] an array of elements to append, if any
+ * @return {Element}
+ */
+Q.element = function (type, attributes, elementsToAppend) {
+	var element = document.createElement(type);
+	if (attributes) {
+		for (var k in attributes) {
+			element.setAttribute(k, attributes[k]);
+		}
+	}
+	if (elementsToAppend) {
+		for (var i=0, l=elementsToAppend.length; i<l; ++i) {
+			element.append(elementsToAppend[i]);
+		}
+	}
+	return element;
 };
 
 /**
@@ -4110,7 +4138,9 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  *  is supposed to execute the batched request without waiting any more.
  *  If the original function returns false, the caching is canceled for that call.
  * @param {Object} [options={}] An optional hash of possible options, which include:
- * @param {Function} [options.prepare] This is a function that is run to copy-construct objects from cached data. It gets (subject, parameters, callback) and is supposed to call callback(subject2, parameters2)
+ * @param {Function} [options.prepare] This is a function that is run to copy-construct objects from cached data.
+ *  It gets (subject, parameters, callback) and is supposed to call callback(subject2, parameters2)
+ *  This function can also set up auxiliary data structures in the web environment.
  * @param {String} [options.throttle] an id to throttle on, or an Object that supports the throttle interface:
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
@@ -5969,7 +5999,7 @@ Q.Links = {
 			urlParams.push('text=' + encodeURIComponent(message));
 		}
 
-		return 'whatsapp://send/?' + urlParams.join('&');;
+		return 'whatsapp://send/?' + urlParams.join('&');
 	},
 	/**
 	 * Generates a link for sharing a link in Telegram
@@ -5997,6 +6027,7 @@ Q.Links = {
 			}
 			return link;
 		}
+		options = options || {};
 		var urlParams = [];
 		urlParams.push('to=' + to);
 		if (text) {
@@ -7699,7 +7730,7 @@ Q.replace = function _Q_replace(container, source, options) {
 	var retainedTools = {};
 	var newOptions = {};
 	var incomingElements = {};
-	Q.find(source.childNodes, null, function (incomingElement) {
+	for (const incomingElement of Q.$('.Q_tool', source)) {
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
@@ -7713,22 +7744,25 @@ Q.replace = function _Q_replace(container, source, options) {
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
 			Q.replace.retainedElements[incomingElement.id] = element;
-			setTimeout(function () {
-				// give a chance for Q/lazyload tool to remove them,
-				// otherwise remove them automatically
-				delete Q.replace.retainedElements[incomingElement.id];
-			}, 1000);
 			incomingElement.parentElement.replaceChild(element, incomingElement);
+			retainedTools[id] = retainedTools[id] || {};
+			newOptions[id] = newOptions[id] || {};
 			for (var name in element.Q.tools) {
 				var tool = Q.Tool.from(element, name);
-				var attrName = 'data-' + Q.normalize(tool.name, '-');
+				var attrName = 'data-' + Q.normalize.memoized(tool.name, '-');
+				var tn = Q.normalize.memoized(tool.name);
 				var newOptionsString = incomingElement.getAttribute(attrName);
-				element.setAttribute(attrName, newOptionsString);
-				retainedTools[id] = tool;
-				newOptions[id] = JSON.parse(newOptionsString);
+				if (newOptionsString) {
+					element.setAttribute(attrName, newOptionsString);
+					newOptions[id][tn] = JSON.parse(newOptionsString);
+				}
+				retainedTools[id][tn] = tool;
+			}
+			if (incomingElement.options) {
+				Q.extend(newOptions[id], incomingElement.options);
 			}
 		}
-	});
+	};
 	
 	Q.beforeReplace.handle(container, source, options, newOptions, retainedTools);
 	
@@ -7743,17 +7777,20 @@ Q.replace = function _Q_replace(container, source, options) {
 	}
 	
 	for (var id in retainedTools) {
-		var tool = retainedTools[id];
-		var newOpt = newOptions[id];
-		// The tool's constructor not will be called again with the new options.
-		// Instead, implement Q.onRetain, from the tool we decided to retain.
-		// The Q.Tool object still contains all its old properties, options, state.
-		// Its element still contains DOM elements, 
-		// attached jQuery data and events, and more.
-		// However, the element's data-TOOL-NAME attribute now contains
-		// the new options.
-		Q.handle(tool.Q.onRetain, tool, [newOpt, incomingElements[id]]);
-		Q.extend(tool.state, 10, newOpt);
+		for (var toolName in retainedTools[id]) {
+			var tool = retainedTools[id][toolName];
+			var newOpt = newOptions[id][toolName];
+			// The tool's constructor not will be called again with the new options.
+			// Instead, implement Q.onRetain, from the tool we decided to retain.
+			// The Q.Tool object still contains all its old properties, options, state.
+			// Its element still contains DOM elements, 
+			// attached jQuery data and events, and more.
+			// However, the newOpt now contains the new options for the tool,
+			// and the element's data-TOOL-NAME attribute is a copy of the
+			// incoming element's data-TOOL-NAME attribute, if any.
+			Q.handle(tool.Q.onRetain, tool, [newOpt, incomingElements[id]]);
+			Q.extend(tool.state, 10, newOpt);
+		}
 	}
 	
 	return container;
@@ -9820,7 +9857,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (!media) {
 		media = 'screen,print';
 	}
-	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');;
+	var elements = document.querySelectorAll('link[rel=stylesheet],style[data-slot]');
 	var i, e, h, m;
 	var href2 = href.split('?')[0];
 	for (i=0; i<elements.length; ++i) {
@@ -11561,6 +11598,26 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 }, false, 2);
 
 /**
+ * Methods for treating data
+ * @class Q.Data
+ */
+Q.Data = Q.Method.define({
+	digest: new Q.Method(),
+	compress: new Q.Method(),
+	decompress: new Q.Method(),
+	toBase64: function (bytes) {
+		return btoa(String.fromCharCode.apply(String, new Uint8Array(bytes)));
+	},
+	fromBase64: function (base64) {
+		return Uint8Array.from(atob(base64), function(m) {
+			return m.codePointAt(0)
+		});
+	}
+}, "{{Q}}/js/methods/Q/Data", function() {
+	return [Q];
+});
+
+/**
  * Module for loading text from files.
  * Used for translations, A/B testing and more.
  * @class Q.Text
@@ -11571,6 +11628,18 @@ Q.Text = {
 	language: 'en',
 	locale: 'US',
 	dir: 'Q/text',
+
+	/**
+	 * Tests whether the text (typically one or more sample characters)
+	 * is written in the alphabet of an RTL language.
+	 * @method isRTL
+	 * @static
+	 * @param {String} text 
+	 * @returns {boolean}
+	 */
+	isRTL: function (text) {
+		return /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(text);
+	},
 
 	/**
 	 * Sets the language and locale to use in Q.Text.get calls.
@@ -12629,7 +12698,7 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 var detected = Q.Browser.detect();
 var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
 var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
-var hasNoMouse = root.matchMedia ? !!root.matchMedia('(any-hover: none)') : null;
+var hasNoMouse = root.matchMedia ? !root.matchMedia('(any-hover: hover)').matches : null;
 var useTouchEvents = isTouchscreen && (hasNoMouse === true);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 	|| (useTouchEvents && !navigator.userAgent.match(/mobi/i));
@@ -12639,6 +12708,7 @@ var isTablet = navigator.userAgent.match(/tablet|ipad/i)
  */
 Q.info = {
 	useTouchEvents: useTouchEvents,
+	hasNoMouse: hasNoMouse,
 	isTouchscreen: isTouchscreen,
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
@@ -14198,8 +14268,8 @@ function _Q_PointerStartHandler(e) {
 var _pointerMoveTimeout = null;
 function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/467460
 	clearTimeout(_pointerMoveTimeout);
-	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
-	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
+	var screenX = Q.Visual.getX(evt) - Q.Visual.scrollLeft();
+	var screenY = Q.Visual.getY(evt) - Q.Visual.scrollTop();
 	if (!screenX || !screenY || Q.Pointer.canceledClick
 	|| (!evt.button && (evt.touches && !evt.touches.length))) {
 		return;
@@ -14403,7 +14473,7 @@ Q.Dialogs = {
 			options
 		);
 		if (o.fullscreen) o.mask = false;
-		var $dialog = $(o.dialog);
+		var dialog = (o.dialog && o.dialog[0]) || o.dialog;
 		if (o.template) {
 			Q.Template.render(o.template.name, o.template.fields, function (err, html) {
 				if (!err) {
@@ -14413,7 +14483,7 @@ Q.Dialogs = {
 		} else {
 			_proceed1(o.content);
 		}
-		return $dialog && $dialog[0];
+		return dialog;
 		function _proceed1(content) {
 			if (o.stylesheet) {
 				Q.addStylesheet(o.stylesheet, function () { _proceed2(content); })
@@ -14422,52 +14492,55 @@ Q.Dialogs = {
 			}
 		}
 		function _proceed2(content) {
-			var $h2, $title, $content;
-			if (!$dialog.length) {
+			var h2, title, contentElement;
+			if (!dialog) {
 				// create this dialog element
-				$h2 = $('<h2 class="Q_dialog_title" />');
-				$title = $('<div class="Q_title_slot" />').append($h2);
-				$content = $('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />');
-				$dialog = $('<div />').append($title).append($content);
+				h2 = Q.element('h2', {"class": "Q_dialog_title"});
+				title = Q.element('div', {"class": "Q_title_slot"}, [h2]);
+				contentElement = Q.element('div', {"class": "Q_dialog_slot Q_dialog_content Q_overflow"});
+				dialog = Q.element('div', {}, [title, contentElement]);
 				if (o.apply) {
-					$dialog.addClass('Q_overlay_apply');
+					dialog.addClass('Q_overlay_apply');
 				}
 				if (o.removeOnClose !== false) {
 					o.removeOnClose = true;
 				}
 			} else {
-				$h2 = $('.Q_dialog_title', $dialog);
-				$title = $('.Q_title_slot', $dialog)
-				$content = $('.Q_dialog_slot', $dialog);
+				h2 = dialog.querySelector('.Q_dialog_title');
+				title = dialog.querySelector('.Q_title_slot');
+				contentElement = dialog.querySelector('.Q_dialog_slot');
 			}
+			var $dialog = $(dialog);
 			if (o.title) {
-				$h2.empty().append(o.title);
+				$(h2).empty().append(o.title);
 			}
 			if (content) {
-				$content.empty().append(content);
+				$(contentElement).empty().append(content);
 			}
-			$dialog.hide();
-			//if ($dialog.parent().length == 0) {
-				$(o.appendTo || document.body).append($dialog);
-			//}
+			dialog.style.display = 'none';
+			(o.appendTo || document.body).append(dialog);
 			var _onClose = o.onClose;
 			o.onClose = new Q.Event(function() {
 				if (!Q.Dialogs.dontPopOnClose) {
 					Q.Dialogs.pop(true);
 				}
 				Q.Dialogs.dontPopOnClose = false;
-				Q.handle(o.onClose.original, $dialog, [$dialog]);
+				Q.handle(o.onClose.original, dialog, [dialog]);
 			}, 'Q.Dialogs');
 			o.onClose.original = _onClose;
-			$dialog.plugin('Q/dialog', o);
+			try {
+				$dialog.plugin('Q/dialog', o);
+			} catch (e) {
+				console.warn(e);
+			}
 			var topDialog = null;
 			var dialogs = Q.Dialogs.dialogs;
-			$dialog.isFullscreen = o.fullscreen;
+			dialog.isFullscreen = o.fullscreen;
 			if (dialogs.length) {
 				topDialog = dialogs[dialogs.length - 1];
 			}
-			if (!topDialog || topDialog !== $dialog[0]) {
-				dialogs.push($dialog);
+			if (!topDialog || topDialog !== dialog) {
+				dialogs.push(dialog);
 				if (o.hidePrevious && topDialog) {
 					topDialog.addClass('Q_hide');
 				}
@@ -14492,8 +14565,8 @@ Q.Dialogs = {
 			dontTriggerClose = false;
 		}
 
-		var $dialog = this.dialogs[this.dialogs.length - 1];
-		$dialog = this.dialogs.pop();
+		var dialog = this.dialogs.pop();
+		var $dialog = $(dialog);
 
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].removeClass('Q_hide');
@@ -14507,7 +14580,7 @@ Q.Dialogs = {
 			}
 		}
 		Q.Pointer.cancelClick();
-		return $dialog && $dialog[0];
+		return $dialog[0];
 	},
 
 	/**

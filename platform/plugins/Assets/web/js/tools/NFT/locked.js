@@ -122,8 +122,8 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                     title: tool.text.NFT.locked.CustodianAddress,
                                     content: '<div class="Q_messagebox Q_big_prompt"><p>' + custodian + '</p></div>',
                                     className: 'Q_alert',
-                                    onActivate: function ($dialog) {
-                                        $(".Q_messagebox", $dialog).tool('Q/textfill').activate();
+                                    onActivate: function (dialog) {
+                                        $(".Q_messagebox", dialog).tool('Q/textfill').activate();
                                     },
                                     fullscreen: false,
                                     hidePrevious: true
@@ -144,11 +144,11 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                 noTokenId: !state.tokenId
                             }
                         },
-                        onActivate: function ($dialog) {
-                            $(".Assets_NFT_locked_dialogLock", $dialog).on(Q.Pointer.fastclick, function () {
+                        onActivate: function (dialog) {
+                            $(".Assets_NFT_locked_dialogLock", dialog).on(Q.Pointer.fastclick, function () {
                                 $(this).addClass('Q_loading');
-                                var tokenId = $($dialog).find("[name='tokenId']").val() || state.tokenId;
-                                var custodian = $($dialog).find("[name='custodian']").val();
+                                var tokenId = $(dialog).find("[name='tokenId']").val() || state.tokenId;
+                                var custodian = $(dialog).find("[name='custodian']").val();
                                 if (!tokenId) {
                                     Q.Dialogs.pop();
                                     return Q.alert(tool.text.NFT.locked.errors.invalidTokenId);
@@ -236,10 +236,10 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         template: {
                             name: 'Assets/NFT/unlock'
                         },
-                        onActivate: function ($dialog) {
-                            $(".Assets_NFT_locked_dialogUnlock", $dialog).on(Q.Pointer.fastclick, function () {
+                        onActivate: function (dialog) {
+                            $(".Assets_NFT_locked_dialogUnlock", dialog).on(Q.Pointer.fastclick, function () {
                                 $(this).addClass('Q_loading');
-                                var tokenId = $($dialog).find("[name='tokenId']").val();
+                                var tokenId = $(dialog).find("[name='tokenId']").val();
                                 if (!tokenId) {
                                     Q.Dialogs.pop();
                                     return Q.alert(tool.text.NFT.locked.errors.invalidTokenId);

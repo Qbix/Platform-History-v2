@@ -433,19 +433,19 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				return;
 			}
 			if (!$t.is('body') && $t.width()) {
-				if ($t.scrollLeft() > 0
+				if (t[0].scrollLeft > 0
 					&& x < $t.offset().left + $t.width() * state.scroll.distance) {
 					dx = -speed;
 					beyond = (x < $t.offset().left);
 				}
-				if ($t.scrollLeft() + $t.innerWidth() < this.scrollWidth
+				if ($t[0].scrollLeft + $t.innerWidth() < this.scrollWidth
 					&& x > $t.offset().left + $t.width() * (1-state.scroll.distance)) {
 					dx = speed;
 					beyond = (x > $t.offset().left + $t.width());
 				}
 			}
 			if (!$t.is('body') && $t.height()) {
-				if ($t.scrollTop() > 0
+				if ($t[0].scrollTop > 0
 					&& y < $t.offset().top + $t.height() * state.scroll.distance) {
 					dy = -speed;
 					beyond = (y < $t.offset().top);
@@ -471,8 +471,8 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			}
 			if (dx || dy) {
 				$scrolling = $t;
-				osl = (osl === null) ? $scrolling.scrollLeft() : osl;
-				ost = (ost === null) ? $scrolling.scrollTop() : ost;
+				osl = (osl === null) ? $scrolling[0].scrollLeft : osl;
+				ost = (ost === null) ? $scrolling[0].scrollTop : ost;
 				return false;
 			}
 		});
@@ -489,9 +489,9 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				scrolling.accel = scrolling.accel || 0;
 				scrolling.accel += state.scroll.acceleration;
 				scrolling.accel = Math.min(scrolling.accel, 1);
-				var $s = isWindow ? $(window) : $scrolling;
-				if (dx) $s.scrollLeft($s.scrollLeft()+dx*scrolling.accel);
-				if (dy) $s.scrollTop($s.scrollTop()+dy*scrolling.accel);
+				var $s = isWindow ? $(document.body) : $scrolling;
+				if (dx) $s[0].scrollLeft = $s[0].scrollLeft+dx*scrolling.accel;
+				if (dy) $s[0].scrollTop = $s[0].scrollTop+dy*scrolling.accel;
 				move($item, x, y);
 			}, 50);
 		}, beyond ? 0 : delay);
@@ -650,8 +650,8 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			it = offset.top;
 			ir = il + $item.width();
 			ib = it + $item.height();
-			ssl = $scrolling.scrollLeft();
-			sst = $scrolling.scrollTop();
+			ssl = $scrolling[0].scrollLeft;
+			sst = $scrolling[0].scrollTop;
 
 			var found = false;
 			$item.parents().each(function () {

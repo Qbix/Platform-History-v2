@@ -187,7 +187,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 		imgs[index] = img;
 		img.each(function () {
 			if (this.complete) {
-				$(this).unbind('load');
+				$(this).off('load');
 				onLoad();
 			}
 		});

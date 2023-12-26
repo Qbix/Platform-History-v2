@@ -185,11 +185,9 @@
 						className: 'Assets_web3_coin_admin_create',
 						
 						trigger: tool.element,
-						onActivate: function ($element) {
+						onActivate: function (element) {
 							
-							if (!($element instanceof $)) {
-								$element = $(arguments[2]);
-							}
+							var $element = $(element);
 							
 							/*
 							for (var fieldName in state.fields) {

@@ -47,7 +47,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
             }),
             columnClass: 'Streams_column_topic',
             trigger: tool.element,
-            onActivate: function (options, index, div, data) {
+            onActivate: function () {
                 
             }
         });
@@ -175,9 +175,9 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     saveButtonText: isNew ? tool.text.topic.CreateTopic : tool.text.topic.UpdateTopic
                 }
             },
-            onActivate: function ($dialog) {
-                var $icon = $("img.Streams_topic_preview_icon", $dialog);
-                var $save = $("button[name=save]", $dialog);
+            onActivate: function (dialog) {
+                var $icon = $("img.Streams_topic_preview_icon", dialog);
+                var $save = $("button[name=save]", dialog);
 
                 // apply Streams/preview icon behavior
                 $("<div>").tool("Streams/preview", {
@@ -189,7 +189,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                             "": "400.png"
                         }
                     });
-                    $(".Streams_topic_composer_form_group[data-type=icon] label", $dialog).on(Q.Pointer.fastclick, function () {
+                    $(".Streams_topic_composer_form_group[data-type=icon] label", dialog).on(Q.Pointer.fastclick, function () {
                         $icon.click();
                     });
                 });
@@ -208,8 +208,8 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                         $save.removeClass("Q_working");
                         Q.Dialogs.pop();
                     });
-                    tool.stream.set('title', $("input[name=title]", $dialog).val());
-                    tool.stream.set('content', $("textarea[name=description]", $dialog).val());
+                    tool.stream.set('title', $("input[name=title]", dialog).val());
+                    tool.stream.set('content', $("textarea[name=description]", dialog).val());
                     tool.stream.save({
                         onSave: pipe.fill("save")
                     });

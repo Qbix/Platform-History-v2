@@ -5,8 +5,8 @@ Q.exports(function (params, callback) {
             Q.Dialogs.push({
                 className: "Vimeo_uploader",
                 content: "<div class='Vimeo_uploader_content'><div></div></div><div class='Vimeo_uploader_info'></div>",
-                onActivate: function ($dialog) {
-                    that.$dialog = $dialog;
+                onActivate: function (dialog) {
+                    that.$dialog = $(dialog);
                 },
                 onClose: function () {
                     that.close();

@@ -861,11 +861,11 @@ Q.exports(function (Users, priv) {
 			beforeLoad: function () {
 				$('#Users_login_step1').css('opacity', 1).nextAll().hide();
 				setTimeout(function () {
-					$('input[type!=hidden]', this).val('').trigger('change');
+					$('input:not([type=hidden])', this).val('').trigger('change');
 				}, 0);
 			},
 			onActivate: function () {
-				var $input = $('input[type!=hidden]', this)
+				var $input = $('input:not([type=hidden])', this)
 				$(this).plugin('Q/placeholders');
 				if (Q.info.platform === 'ios') {
 					$input.eq(0).plugin('Q/clickfocus');
