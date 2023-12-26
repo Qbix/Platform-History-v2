@@ -31,21 +31,21 @@ Q.Tool.define("Assets/payment", function (options) {
 	state.payments = state.payments.charAt(0).toUpperCase() + state.payments.slice(1).toLocaleLowerCase();
 	var currency = state.currency.toLocaleLowerCase();
 
-	Q.Assets.Payments.load();
-
-	Q.addStylesheet('{{Assets}}/css/tools/AssetsPayment.css', { slotName: 'Assets' });
-
 	if (state.payments === 'Authnet' && currency !== 'usd') {
 		throw new Q.Error("Authnet doesn't support currencies other than USD", 'currency');
-	}
-
-	if (!state.userId) {
-		// throw new Q.Error("Assets/payment: Don't render tool when user is not logged in");
 	}
 
 	if (!state.amount) {
 		throw new Q.Error("Assets/payment: amount is required");
 	}
+
+	var pipe = new Q.pipe(["payments", "data"], function (params) {
+		tool.refresh(params["data"][0]);
+	});
+
+	Q.Assets.Payments.load(function () {
+		pipe.fill("payments")();
+	});
 
 	Q.req('Assets/payment', ["tool"], function (err, data) {
 		var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
@@ -53,7 +53,7 @@ Q.Tool.define("Assets/payment", function (options) {
 			return console.error("GET to Assets/payment: "+ msg);
 		}
 
-		tool.refresh(data.slots.tool);
+		pipe.fill("data")(data.slots.tool);
 	}, {
 		fields: {
 			payments: state.payments,
@@ -61,6 +61,7 @@ Q.Tool.define("Assets/payment", function (options) {
 		}
 	});
 
+	tool.Q.onStateChanged('amount').set(tool.implementPayment.bind(tool), tool);
 },
 
 { // default options here
@@ -100,114 +101,109 @@ Q.Tool.define("Assets/payment", function (options) {
 			templateName = "Assets/payment/gpay";
 		}
 
-		// preload payment dialog
-		state.userId = Q.Users.loggedInUserId();
-		state.assetsPaymentsDialogClass = tool.prefix + "dialog";
-		var paymentDialogStyle = document.createElement("style");
-		document.head.appendChild(paymentDialogStyle);
-		paymentDialogStyle.sheet.insertRule('.' + state.assetsPaymentsDialogClass + '{display: none !important}');
-		paymentDialogStyle.sheet.insertRule('#page,#dashboard_slot{filter: none !important; -o-filter: unset !important; -ms-filter: unset !important; -moz-filter: unset !important; -webkit-filter: unset !important;}');
-		// remove Q.dialog.mask to recreate with necessary class names
-		var maskKey = 'Q.dialog.mask';
-		if (maskKey in Q.Masks.collection) {
-			Q.Masks.collection[maskKey].element.remove();
-			delete Q.Masks.collection[maskKey];
-		}
+		Q.Template.render(templateName, {
+			text: data.text.payment
+		},
+		function (err, html) {
+			if (err) return;
 
-		var _implementPayment = function () {
-			Q.Assets.Payments[payments.toLowerCase()](state, function (err) {
-				// after payment dialog closed, refresh tool to implement dialog preload again
-				tool.refresh(data);
-				if (err) {
-					return;
-				}
-				Q.handle(state.onPay, tool, arguments);
-			});
-		};
-		_implementPayment();
+			$te.html(html);
 
-		Q.Template.render(
-			templateName,
-			{
-				text: data.text.payment
-			},
-			function (err, html) {
-				if (err) return;
-
-				$te.html(html);
-
-				var _pay = function () {
-					if ($(".Assets_stripe_payment." + state.assetsPaymentsDialogClass).length) {
-						return paymentDialogStyle.remove();
-					}
-
-					_implementPayment();
-				};
-
-				$('.Assets_pay', $te).on(Q.Pointer.click, _pay);
-
-				$('.Assets_gpay', $te).on(Q.Pointer.click, function () {
-					if (!state.showGPayPanel) {
-						return _pay();
-					}
-
-					if ($("body > .Assets_payment_Gpay_preload").length) {
+			tool.implementPayment();
+			var _pay = function () {
+				Q.Assets.Payments[payments.toLowerCase()](Q.extend({}, state, {preloadElement: false}), function (err) {
+					if (err) {
 						return;
 					}
 
-					var url = Q.info.baseUrl.split(':');
-					Q.Template.render(
-						'Assets/payment/Gpay/preload',
-						{
-							name: state.description,
-							amount: parseFloat(state.amount).toFixed(2),
-							url: ':' + url[1],
-							protocol: url[0],
-							secured: url[0] === 'https',
-							currency: state.currency,
-							symbol: data.symbol[1],
-							contact: Q.Users.loggedInUser.email || Q.Users.loggedInUser.mobile,
-							text: data.text.payment
-						},
-						function (err, html) {
-							if (err) return;
-
-							var $this = $(html);
-							var $preload = $($this[1]);
-							var $body = $("body");
-							var bodyOverflow = $body.css('overflow');
-							var _close = function () {
-								$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
-								setTimeout(function () {
-									$this.remove();
-									$body.css('overflow', bodyOverflow);
-								}, 1000);
-							}
-
-							// prevent body scroll
-							$body.css('overflow', 'hidden');
-
-							$(document).on('keyup',function(event) {
-								if (event.keyCode === 27) {
-									_close();
-								}
-							});
-
-							$(".ApGp_header_close", $preload).on(Q.Pointer.click, _close);
-
-							$("button[name=pay]", $preload).on(Q.Pointer.click, function () {
-								_close();
-								_pay();
-							});
-
-							$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
-							$this.appendTo("body");
-							$preload.css('top', $body.outerHeight() + $body[0].scrollTop - $preload.outerHeight());
-						}
-					);
+					// reimplement payment dialog because of payment success
+					tool.implementPayment();
+					Q.handle(state.onPay, tool, arguments);
 				});
+			};
+
+			$('.Assets_pay', $te).on(Q.Pointer.click, _pay);
+
+			$('.Assets_gpay', $te).on(Q.Pointer.click, function () {
+				if (!state.showGPayPanel) {
+					return _pay();
+				}
+
+				if ($("body > .Assets_payment_Gpay_preload").length) {
+					return;
+				}
+
+				var url = Q.info.baseUrl.split(':');
+				Q.Template.render(
+					'Assets/payment/Gpay/preload',
+					{
+						name: state.description,
+						amount: parseFloat(state.amount).toFixed(2),
+						url: ':' + url[1],
+						protocol: url[0],
+						secured: url[0] === 'https',
+						currency: state.currency,
+						symbol: data.symbol[1],
+						contact: Q.Users.loggedInUser.email || Q.Users.loggedInUser.mobile,
+						text: data.text.payment
+					},
+					function (err, html) {
+						if (err) return;
+
+						var $this = $(html);
+						var $preload = $($this[1]);
+						var $body = $("body");
+						var bodyOverflow = $body.css('overflow');
+						var _close = function () {
+							$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
+							setTimeout(function () {
+								$this.remove();
+								$body.css('overflow', bodyOverflow);
+							}, 1000);
+						}
+
+						// prevent body scroll
+						$body.css('overflow', 'hidden');
+
+						$(document).on('keyup',function(event) {
+							if (event.keyCode === 27) {
+								_close();
+							}
+						});
+
+						$(".ApGp_header_close", $preload).on(Q.Pointer.click, _close);
+
+						$("button[name=pay]", $preload).on(Q.Pointer.click, function () {
+							_close();
+							_pay();
+						});
+
+						$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
+						$this.appendTo("body");
+						$preload.css('top', $body.outerHeight() + $body[0].scrollTop - $preload.outerHeight());
+					}
+				);
+			});
+		});
+	},
+	implementPayment: function () {
+		var state = this.state;
+		var payments = state.payments;
+
+		Q.Assets.Payments[payments.toLowerCase()](Q.extend({}, state, {preloadElement: true}), function (err, element) {
+			if (err) {
+				return;
 			}
-		);
+
+			state.preloadedElement = element;
+		});
+	},
+	Q: {
+		beforeRemove: function () {
+			if (this.state.preloadedElement instanceof Element) {
+				this.state.preloadedElement.remove();
+			}
+		}
 	}
 });
 

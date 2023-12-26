@@ -473,7 +473,10 @@
 			js: "{{Assets}}/js/tools/subscription.js",
 			css: "{{Assets}}/css/tools/AssetsSubscription.css"
 		},
-		"Assets/payment": "{{Assets}}/js/tools/payment.js",
+		"Assets/payment": {
+			js: "{{Assets}}/js/tools/payment.js",
+			css: "{{Assets}}/css/tools/AssetsPayment.css"
+		},
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
