@@ -234,15 +234,20 @@
 				$badgeElement.removeProp("style").css(style);
 
 				var badgeRect = $badgeElement[0].getBoundingClientRect();
+				var scrolligParent = tool.element.scrollingParent(false, 'vertical', true);
 				var $jq = $te.parents().addBack()
 				.filter(function (i, e) {
+					if (e.isSameNode(scrolligParent) || e.contains(scrolligParent)) {
+						return false;
+					}
+
 					var parentRect = e.getBoundingClientRect();
 					return (badgeRect.left < parentRect.left
 					|| badgeRect.right > parentRect.right
 					|| badgeRect.top < parentRect.top
 					|| badgeRect.bottom > parentRect.bottom)
-					&& ($(e).css('overflow-x') == 'hidden'
-						|| $(e).css('overflow-y') == 'hidden');
+					&& ($(e).css('overflow-x').toLowerCase() === 'hidden'
+						|| $(e).css('overflow-y').toLowerCase() === 'hidden');
 				}).incrementClass('Q_badge_parent_overlapped');
 				$te.data('Q_badge incrementedClass', $jq);
 			});

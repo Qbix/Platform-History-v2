@@ -888,7 +888,7 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
-			state.onClose.handle.call(tool, index, data, skipUpdateAttributes);
+			state.onClose.handle.call(tool, index, div, skipUpdateAttributes);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {

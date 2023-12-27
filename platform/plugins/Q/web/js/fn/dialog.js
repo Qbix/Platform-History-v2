@@ -399,7 +399,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					function _onContent() {
 						Q.activate([ots, ods], {}, function() {
 							_handlePosAndScroll.call($this, o);
-							Q.handle(o.onActivate, $this[0], [$this, o]);
+							Q.handle(o.onActivate, $this[0], [$this[0], o]);
 							$this.css('opacity', 1);
 						});
 					}
