@@ -50,6 +50,7 @@ Q.exports(function(priv, Streams, Stream) {
                 for (var i=0, l=f.length; i<l; ++i) {
                     var cached = Q.Streams.get.cache.get([publisherId, streamName]);
                     if (cached && cached.subject.fields[f[i]] == null) {
+                        // get the stream again, since a field may have changed
                         Q.Streams.get.forget(publisherId, streamName, null, extra);
                         break;
                     }
@@ -107,6 +108,9 @@ Q.exports(function(priv, Streams, Stream) {
                             return false;
                         }
                         if (msg) return;
+
+                        // Trigger events such as onFieldChanged and onAttribute
+                        Stream.update(priv._retainedStreams[ps], stream.fields, onlyChangedFields);
 
                         // The onRefresh handlers occur after the other callbacks
                         var f = stream.fields;
