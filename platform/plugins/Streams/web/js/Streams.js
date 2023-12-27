@@ -1725,10 +1725,18 @@ Stream.get = function () {
 };
 Stream.create = function () {
 	Streams.create.apply(this, arguments);
-};;
+};
 Stream.define = function () {
 	Streams.define.apply(this, arguments);
-};;
+};
+Stream.isRetained = function (publisherId, streamName) {
+	var ps = Streams.key(publisherId, streamName);
+	return !!_retainedByStream[ps];
+};
+Stream.isObserved = function (publisherId, streamName) {
+	var ps = Streams.key(publisherId, streamName);
+	return !!_observedByStream[ps];
+};
 
 // define methods for Streams.Stream to replace method stubs
 Q.Method.define(
@@ -2239,6 +2247,31 @@ Sp.url = function (messageOrdinal, baseUrl) {
 		Q.extend({}, this, {attributes: this.getAllAttributes()})
 	);
 };
+
+/**
+ * Find out whether the stream is currently being retained
+ * @method isRetained
+ * @static
+ * @return {Boolean}
+ */
+Sp.isRetained = function () {
+	return Streams.Stream.isRetained(
+		this.fields.publisherId, this.fields.name
+	);
+};
+
+/**
+ * Find out whether the stream is currently being observed
+ * @method isObserved
+ * @static
+ * @return {Boolean}
+ */
+Sp.isObserved = function () {
+	return Streams.Stream.isRetained(
+		this.fields.publisherId, this.fields.name
+	);
+};
+
 /**
  * Save a stream to the server
  *

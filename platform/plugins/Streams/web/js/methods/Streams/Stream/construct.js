@@ -78,6 +78,12 @@ Q.exports(function(priv){
                    var f = this.fields;
                    if (updateCache) { // update the Streams.get cache
                        if (f.publisherId && f.name) {
+                            // Trigger events such as onFieldChanged and onAttribute
+                            var ps = Q.Streams.key(f.publisherId, f.name);
+                            if (priv._retainedStreams[ps]) {
+                                Q.Streams.Stream.update(priv._retainedStreams[ps], this.fields, {});
+                            }
+
                             Q.Streams.get.cache
                                .removeEach([f.publisherId, f.name])
                                .set(

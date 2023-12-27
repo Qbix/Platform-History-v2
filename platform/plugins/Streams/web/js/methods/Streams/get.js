@@ -109,10 +109,6 @@ Q.exports(function(priv, Streams, Stream) {
                         }
                         if (msg) return;
 
-                        // Trigger events such as onFieldChanged and onAttribute
-                        var ps = Q.Streams.key(publisherId, streamName);
-                        Stream.update(priv._retainedStreams[ps], stream.fields, true);
-
                         // The onRefresh handlers occur after the other callbacks
                         var f = stream.fields;
                         var handler = Q.getObject([f.type], priv._refreshHandlers);
@@ -130,6 +126,7 @@ Q.exports(function(priv, Streams, Stream) {
             }, extra);
         priv._retain = undefined;
     }, {
+        callbackIndex: 2,
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Streams.isStream(subject)) {
