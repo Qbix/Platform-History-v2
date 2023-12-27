@@ -4758,7 +4758,9 @@ function _preloaded(elem) {
 }
 
 function _updateMessageCache(msg) {
-	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+	if ((Streams.cache.where === 'local'
+	|| Streams.cache.where === 'session')
+	&& Q.Frames && !Q.Frames.isMain()) {
 		return false; // do nothing, this isn't the main frame
 	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],

@@ -931,7 +931,6 @@ html.Q_dialog_shown #dashboard_slot {
 }
 
 .Q_placeholder_shimmer {
-	animation: Q_loading 1s forwards linear alternate infinite;
 	background: rgba(247, 247, 247, 0.75);
 }
 
@@ -941,10 +940,9 @@ html.Q_dialog_shown #dashboard_slot {
     animation-iteration-count: infinite;
     animation-name: Q_placeholder_shimmer;
     animation-timing-function: linear;
-    background: #f6f7f8;
-    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-    background-size: 800px 104px;
-    height: 96px;
+    background: rgba(247, 247, 247, 0.75);
+    background: linear-gradient(to right, #e6e6e6 5%, #cccccc 25%, #e6e6e6 35%);
+    background-size: 1000px 100%;
     position: relative;
 }
 

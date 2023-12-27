@@ -69,9 +69,6 @@ Q.exports(function(priv, Streams, Stream, Message){
                     messages[ordinal] = data.message;
                 }
                 Q.each(messages, function (ordinal, message) {
-                    if (!(message instanceof Q.Streams.Message)) {
-                        message = Q.Streams.Message.construct(message, true);
-                    }
                     messages[ordinal] = message;
                 });
                 if (Q.isPlainObject(ordinal)) {
