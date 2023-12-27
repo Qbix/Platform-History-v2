@@ -4172,7 +4172,7 @@ Q.getter = function _Q_getter(original, options) {
 			var noop = function _noop() {} ;
 			callbacks.push(noop);
 			if (gw.callbackIndex !== undefined) {
-				arguments.splice(gw.callbackIndex, 0, noop);
+				arguments2.splice(gw.callbackIndex, 0, noop);
 			} else {
 				arguments2.push(noop);
 			}
