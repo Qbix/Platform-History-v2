@@ -110,6 +110,7 @@ Q.exports(function(priv, Streams, Stream) {
                         if (msg) return;
 
                         // Trigger events such as onFieldChanged and onAttribute
+                        var ps = Q.Streams.key(publisherId, streamName);
                         Stream.update(priv._retainedStreams[ps], stream.fields, onlyChangedFields);
 
                         // The onRefresh handlers occur after the other callbacks
