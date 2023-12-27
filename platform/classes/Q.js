@@ -676,6 +676,7 @@ Q.batcher.options = {
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
+ * @param {Number} [callbackIndex] use this to explicitly specify which argument number is expecting a callback function
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface.
  *  By default, it will set up a cache in the process with default parameters.
  * @return {Function}
@@ -696,8 +697,12 @@ Q.getter = function _Q_getter(original, options) {
 			// in case someone forgot to pass a callback
 			// pretend they added a callback at the end
 			var noop = function _noop() {} ;
-			arguments2.push(noop);
 			callbacks.push(noop);
+			if (gw.callbackIndex !== undefined) {
+				arguments.splice(gw.callbackIndex, 0, noop);
+			} else {
+				arguments2.push(noop);
+			}
 		}
 		
 		var _resolve, _reject;
