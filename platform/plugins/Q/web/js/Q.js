@@ -6120,9 +6120,12 @@ Q.Method.load = function (o, k, url, closure) {
 		Q.require(url, function (exported) {
 			if (exported) {
 				var args = closure ? closure() : [];
-				var m = exported.apply(o, args);
-				if (typeof m === 'function') {
-					o[k] = m;
+				if (!exported.Q_Method_load_executed) {
+					var m = exported.apply(o, args);
+					if (typeof m === 'function') {
+						o[k] = m;
+					}
+					exported.Q_Method_load_executed = true;
 				}
 			}
 			var v = o[k];
@@ -9760,34 +9763,34 @@ Q.exports = function () {
  * @method require
  * @static
  * @param {String} src The src of the script to load
- * @param {Function} callback Always called asynchronously.
+ * @param {Function} callback Called after the script loads
  * @param {Boolean} synchronously Whether to call the callback synchronously when src was already loaded
+ * @param {Boolean} memoized Set to true, to memoize return value and re-use it instead of calling it again
  */
-Q.require = function (src, callback, synchronously) {
+Q.require = function (src, callback, synchronously, once) {
 	if (!src || typeof src !== 'string') {
 		throw new Q.Exception("Q.require: invalid script src");
 	}
 	src = Q.url(src);
-	if (_exports[src]) {
+	var srcWithoutQuerystring = src.split('?')[0];
+	var value = _exports[src] || _exports[srcWithoutQuerystring];
+	if (value !== undefined) {
 		if (synchronously) {
-			Q.handle(callback, Q, _exports[src]);
+			Q.handle(callback, Q, value);
 		} else {
 			setTimeout(function () {
-				Q.handle(callback, Q, _exports[src]);
+				Q.handle(callback, Q, value);
 			}, 0);
 		}
-	} else {
-		Q.addScript(src, function _Q_require_callback(err) {
-			if (err) {
-				return Q.handle(callback, Q.Exception, [err]);
-			}
-			var srcWithoutQuerystring = src.split('?')[0];
-			var param = _exports[src]
-				|| _exports[srcWithoutQuerystring]
-				|| [];
-			Q.handle(callback, Q, param);
-		});
+		return;
 	}
+	Q.addScript(src, function _Q_require_callback(err) {
+		if (err) {
+			return Q.handle(callback, Q.Exception, [err]);
+		}
+		var value = _exports[src] || _exports[srcWithoutQuerystring];
+		Q.handle(callback, Q, value || []);
+	});
 };
 
 var _exports = {};
