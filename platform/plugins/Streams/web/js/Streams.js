@@ -3313,12 +3313,12 @@ Message.wait = function _Streams_Message_wait (publisherId, streamName, ordinal,
 			   participatingOrObserving = true;
 		   } else {
 			   Q.Streams.get.cache.each([publisherId, streamName], function (key, info) {
-				   var p = Q.getObject("subject.participant", info);
-				   if (p && p.state === 'participating'
-				   && info.subject.readLevel >= 40) {
-					   participant = p;
-					   return false;
-				   }
+					var p = Q.getObject("subject.participant", info);
+					if (p && p.state === 'participating'
+					&& info.subject.readLevel >= 40) {
+						participatingOrObserving = p;
+						return false;
+					}
 			   });
 		   }
 	   }
