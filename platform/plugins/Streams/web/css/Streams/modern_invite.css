@@ -360,3 +360,13 @@ telegram
 .Streams_invite_QR .Q_dialog_content .Streams_invite_QR_groupPhoto[data-loaded=true] i.streams-icon-checkmark-outline {
 	display: block;
 }
+
+@media (prefers-color-scheme: dark) {
+	.Streams_invite_option:hover {
+		background: black;
+		color: white;
+	}
+	.Streams_invite_option:hover svg {
+		fill: white;
+	}
+}

@@ -1097,5 +1097,6 @@ body.Q_columns_animationFX {
 	.Q_overlay, .Q_fullscreen_dialog {
 		background: url(../img/bg/overlay-dark.png);
 		color: white;
+		fill: white;
 	}
 }
