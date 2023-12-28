@@ -538,7 +538,7 @@ Q.Template.set('Streams/interests',
 + '{{/if}}'
 + '{{#if all}}'
 + '<div class="Streams_interests_all Q_expandable_tool">'
-+   '<h2>'
++   '<h2 class="Q_expandable_title">'
 +     '<img class="Streams_interests_icon" src="{{all.icon}}" alt="all">'
 + 	  '<span class="Streams_interests_category_title">{{all.title}}</span>'
 +	'</h2>'

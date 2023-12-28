@@ -4413,6 +4413,7 @@ Q.getter = function _Q_getter(original, options) {
 		ignoreCache = true;
 		return gw.apply(this, arguments);
 	};
+	
 
 	if (original.batch) {
 		gw.batch = original.batch;
