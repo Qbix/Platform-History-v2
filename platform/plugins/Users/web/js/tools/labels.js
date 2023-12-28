@@ -1,5 +1,5 @@
 (function (Q, $, window, undefined) {
-	
+
 var Users = Q.Users;
 
 var filter = ['Users/']

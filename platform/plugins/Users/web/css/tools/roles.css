@@ -9,7 +9,7 @@
 .Users_roles_tool ul {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     column-gap: 10px;
     row-gap: 10px;

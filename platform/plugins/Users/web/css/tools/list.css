@@ -1,14 +1,15 @@
 .Users_list_tool {
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: baseline;
-    row-gap: 10px;
-    column-gap: 10px;
+    row-gap: 30px;
+    column-gap: 20px;
 }
 .Q_mobile .Users_list_tool {
-    row-gap: 5px;
-    column-gap: 5px;
+    row-gap: 8px;
+    column-gap: 10px;
 }
 .Users_list_tool .Users_avatar_name {
     display: block;
@@ -16,20 +17,15 @@
     overflow: hidden;
     white-space: nowrap;
 }
-.Users_list_tool.Users_list_40 .Users_avatar_tool {
-    max-width: 40px;
+.Users_list_tool .Users_avatar_tool {
+    padding: 10px 20px;
+    border-radius: 15px;
 }
-.Users_list_tool.Users_list_50 .Users_avatar_tool {
-    max-width: 50px;
+.Users_list_tool .Users_avatar_icon {
+	border-radius: 15px;
 }
-.Users_list_tool.Users_list_80 .Users_avatar_tool {
-    max-width: 80px;
-}
-.Users_list_tool.Users_list_200 .Users_avatar_tool {
-    max-width: 200px;
-}
-.Users_list_tool.Users_list_400 .Users_avatar_tool {
-    max-width: 400px;
+.Users_list_tool.Users_list_80 .Users_avatar_tool:hover {
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.05);
 }
 .Users_list_tool .Users_avatar_name {
     text-overflow: ellipsis;
