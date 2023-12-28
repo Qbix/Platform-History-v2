@@ -30,13 +30,13 @@ function Streams_vcard_response ($params) {
     $vcr .= "item1.URL:$userUrl\n";
     $vcr .= "item1.X-ABLABEL: $communityName Profile\n";
 
-    $photo = Q_Uri::interpolateUrl($user->icon.'/400.png');
-    $type = pathinfo($photo, PATHINFO_EXTENSION);
-    $data = file_get_contents($photo);
+	list($photoUrl, $photoPath, $hash) = Q_Html::themedUrlFilenameAndHash($user->icon.'/400.png');
+    $type = pathinfo($photoPath, PATHINFO_EXTENSION);
+    $data = file_get_contents($photoPath);
     $base64 = base64_encode($data);
-    //$vcr .= "PHOTO;MEDIATYPE=image/png:$photo\n";
-    //$vcr .= "PHOTO;TYPE=PNG;VALUE=URI:$photo\n";
-    //$vcr .= "PHOTO;PNG;$photo\n";
+    //$vcr .= "PHOTO;MEDIATYPE=image/png:$photoUrl\n";
+    //$vcr .= "PHOTO;TYPE=PNG;VALUE=URI:$photoUrl\n";
+    //$vcr .= "PHOTO;PNG;$photoUrl\n";
     //$vcr .= "PHOTO;$type;ENCODING=BASE64:$base64\n"; //v 3.0
     $vcr .= "PHOTO;ENCODING=BASE64;$type:$base64\n";
 
