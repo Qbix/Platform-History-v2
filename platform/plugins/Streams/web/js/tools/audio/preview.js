@@ -94,7 +94,8 @@
 			url: null,
 			inplace: {
 				field: 'title',
-				inplaceType: 'text'
+				inplaceType: 'text',
+				editable: false
 			},
 			fileUploadHandler: Q.action("Streams/stream"),
 			pie: {
@@ -133,12 +134,10 @@
 					if (state.inplace) {
 						var inplaceOptions = Q.extend({
 							publisherId: stream.fields.publisherId,
-							streamName: stream.fields.name
+							streamName: stream.fields.name,
+							editable: state.inplace.editable
 						}, state.inplace);
-						var se = previewState.editable;
-						if (!se || (se !== true && se.indexOf('title') < 0)) {
-							inplaceOptions.editable = false;
-						} else {
+						if (state.inplace.editable) {
 							$toolElement.addClass('Streams_editable_title');
 						}
 						inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
@@ -413,7 +412,7 @@
 					},
 					destroyOnClose: true,
 					onActivate: function (mainDialog) {
-						state.mainDialog = mainDialog;
+						state.mainDialog = mainDialog = mainDialog instanceof $ ? mainDialog : $(mainDialog);
 
 						var pieBox = tool.pieBox = $(".Streams_audio_pie", mainDialog);
 						state.recorder = null;

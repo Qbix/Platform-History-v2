@@ -269,7 +269,7 @@ class Q_Uri
 		 * @param {string} plugin
 		 * @return {string}
 		 */
-		if ($url = Q::event('Q/Uri/pluginUrl', @compact('url'), 'before')) {
+		if ($url = Q::event('Q/Uri/pluginUrl', @compact('plugin'), 'before')) {
 			return;
 		}
 		return "Q/plugins/$plugin";

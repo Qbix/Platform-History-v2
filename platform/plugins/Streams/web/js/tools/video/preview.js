@@ -79,7 +79,8 @@
 			isComposer: true,
 			inplace: {
 				field: 'title',
-				inplaceType: 'text'
+				inplaceType: 'text',
+				editable: false
 			},
 			onInvoke: new Q.Event(),
 			onRefresh: new Q.Event()
@@ -102,7 +103,7 @@
 
 				$toolElement.on(Q.Pointer.fastclick, function () {
 					// if vimeo check status
-					if (stream.getAttribute("provider") === "vimeo") {
+					if (stream.getAttribute("provider") === "vimeo" && !stream.getAttribute("available")) {
 						$toolElement.addClass("Q_working");
 						Q.req("Streams/vimeo", ["info"], function (err, response) {
 							$toolElement.removeClass("Q_working");
@@ -118,7 +119,9 @@
 							Q.handle(state.onInvoke, tool, [stream]);
 						}, {
 							fields: {
-								videoId: stream.getAttribute("videoId")
+								videoId: stream.getAttribute("videoId"),
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name
 							}
 						});
 					} else {
@@ -153,8 +156,11 @@
 						var inplaceOptions = Q.extend({
 							publisherId: stream.fields.publisherId,
 							streamName: stream.fields.name,
-							editable: false
+							editable: state.inplace.editable
 						}, state.inplace);
+						if (state.inplace.editable) {
+							$toolElement.addClass('Streams_editable_title');
+						}
 						inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 					}
 					icon = stream.fields.icon;

@@ -433,7 +433,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				return;
 			}
 			if (!$t.is('body') && $t.width()) {
-				if (t[0].scrollLeft > 0
+				if ($t[0].scrollLeft > 0
 					&& x < $t.offset().left + $t.width() * state.scroll.distance) {
 					dx = -speed;
 					beyond = (x < $t.offset().left);

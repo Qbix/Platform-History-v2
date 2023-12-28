@@ -460,7 +460,8 @@ Streams.listen = function (options, servers) {
 			if (observer) {
 				return fn && fn(null, true);
 			}
-			Streams.fetchOne('', publisherId, streamName, function (err, stream) {
+			var byUserId = capability.userId;
+			Streams.fetchOne(byUserId || '', publisherId, streamName, function (err, stream) {
 				if (err || !stream) {
 					return fn && fn({
 						type: 'Users.Exception.NotAuthorized',
