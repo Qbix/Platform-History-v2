@@ -95,6 +95,7 @@
 .Streams_invite_dialog .Streams_invite_social_buttons .Q_button {
 	width: 24%;
 	font-size: 70%;
+	margin: 3px;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_break {
@@ -365,6 +366,9 @@ telegram
 	.Streams_invite_option:hover {
 		background: black;
 		color: white;
+	}
+	.Streams_invite_option {
+		border-color: white;
 	}
 	.Streams_invite_option:hover svg {
 		fill: white;
