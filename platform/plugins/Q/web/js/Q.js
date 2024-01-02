@@ -2664,7 +2664,7 @@ Q.swapElements = function(element1, element2) {
  * @param {String} type 
  * @param {Object} [attributes] Pair of attributeName: attributeValue.
  *  Names like "class" should be in quotation marks since they're JS keywords.
- * @param {Array} [elementsToAppend] an array of elements to append, if any
+ * @param {Array|String} [elementsToAppend] either an HTML string or an array of elements to append, if any
  * @return {Element}
  */
 Q.element = function (type, attributes, elementsToAppend) {
@@ -2675,8 +2675,12 @@ Q.element = function (type, attributes, elementsToAppend) {
 		}
 	}
 	if (elementsToAppend) {
-		for (var i=0, l=elementsToAppend.length; i<l; ++i) {
-			element.append(elementsToAppend[i]);
+		if (typeof elementToAppend === 'string') {
+			element.innerHTML = elementsToAppend
+		} else {
+			for (var i=0, l=elementsToAppend.length; i<l; ++i) {
+				element.append(elementsToAppend[i]);
+			}
 		}
 	}
 	return element;
@@ -2996,23 +3000,30 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
 			return null;
 		}
 	}
-	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	if (key === true || (key === undefined
 	&& Q.Page && Q.Page.beingActivated)) {
 		Q.Event.forPage.push(this);
+	} else if (key === undefined) {
+		key = Q.Tool.beingActivated;
 	}
+	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	key = Q.calculateKey(key, this.handlers, this.keys.length);
-	this.handlers[key] = handler; // can be a function, string, Q.Event, etc.
 	if (this.keys.indexOf(key) < 0) {
 		if (prepend) {
 			this.keys.unshift(key);
 		} else {
 			this.keys.push(key);
 		}
-		if (isTool) {
-			Q.Event.forTool[key] = Q.Event.forTool[key] || [];
-			Q.Event.forTool[key].push(this);
-		}
+	}
+	if (isTool) {
+		Q.Event.forTool[key] = Q.Event.forTool[key] || [];
+		Q.Event.forTool[key].push(this);
+	}
+	if (isTool || key === true) {
+		this.handlers[key] = this.handlers[key] || [];
+		this.handlers[key].push(handler);
+	} else {
+		this.handlers[key] = handler; // can be a function, string, Q.Event, etc.
 	}
 	if (this.keys.length === 1 && this._onFirst) {
 		this._onFirst.handle.call(this, handler, key, prepend);
@@ -3411,9 +3422,7 @@ Evp.onStop = function () {
  *  that was either already stored under those index fields or newly created.
  */
 Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
-	if (!collection) {
-		collection = {};
-	}
+	collection = collection || {};
 	defaults = defaults || [];
 	function _remove() {
 		var delimiter = "\t";
@@ -5368,6 +5377,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 		// keep removing the first element of the array until it is empty
 		arr[0].remove(tool);
 	}
+	delete Q.Event.forTool[key];
 	
 	var p = Q.Event.jQueryForTool[key];
 	if (p) {
@@ -5375,7 +5385,8 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 			var off = p[i][0];
 			root.jQuery.fn[off].call(p[i][1], p[i][2], p[i][3]);
 		}
-		Q.Event.jQueryForTool[key] = [];
+		// Q.Event.jQueryForTool[key] = [];
+		delete Q.Event.jQueryForTool[key];
 	}
 	
 	return this.removed = true;
@@ -10786,127 +10797,135 @@ Q.loadUrl.loading = {};
  *  @param {String} [options.target] the name of a window or iframe to use as the target. In this case callables is treated as a url.
  *  @param {String|Array} [options.slotNames] a comma-separated list of slot names, or an array of slot names
  *  @param {boolean} [options.quiet] defaults to false. If true, allows visual indications that the request is going to take place.
+ *  @param {Function} [options.handleException] pass a function here to handle thrown exceptions instead of rethrowing them
  * @return {number}
  *  The number of handlers executed
  */
-Q.handle = function _Q_handle(callables, /* callback, */ context, args, options) {
-	if (!callables) {
-		return 0;
-	}
-	if (!context) context = root;
-	if (!args) args = [];
-	var i=0, count=0, k, result;
-	if (callables === location) callables = location.href;
-	switch (Q.typeOf(callables)) {
-		case 'function':
-			result = callables.apply(context, args);
-			if (result === false) return false;
-			return 1;
-		case 'array':
-			for (i=0; i<callables.length; ++i) {
-				result = Q.handle(callables[i], context, args);
-				if (result === false) return false;
-				count += result;
-			}
-			return count;
-		case 'Q.Event':
-			return callables.handle.apply(context, args);
-		case 'object':
-			for (k in callables) {
-				result = Q.handle(callables[k], context, args);
-				if (result === false) return false;
-				count += result;
-			}
-			return count;
-		case 'string':
-			var o = Q.extend({}, Q.handle.options, options);
-			if (!callables.isUrl()
-			&& (callables[0] != '#')
-			&& (!o.target || o.target.toLowerCase() === '_self')) {
-				// Assume this is not a URL.
-				// Try to evaluate the expression, and execute the resulting function
-				var c = Q.getObject(callables, context) || Q.getObject(callables);
-				return Q.handle(c, context, args);
-			}
-			// Assume callables is a URL
-			if (o.dontReload && Q.info && Q.info.url === callables) {
-				return 0;
-			}
-			var callback = null;
-			if (typeof arguments[1] === 'function') {
-				// Some syntactic sugar: (url, callback) omitting context, args, options
-				callback = arguments[1];
-				o = Q.handle.options;
-			} else if (arguments[1] && (arguments[3] === undefined)) {
-				// Some more syntactic sugar: (url, options, callback) omitting context, args, options
-				o = Q.extend({}, Q.handle.options, arguments[1]);
-				if (typeof arguments[2] === 'function') {
-					callback = arguments[2];
-				}
-			} else {
-				o = Q.extend({}, Q.handle.options, options);
-				if (o.callback) {
-					callback = o.callback;
-				}
-			}
-			var baseUrl = Q.baseUrl();
-			var sameDomain = callables.sameDomain(baseUrl);
-			if (callables[0] === '#') {
-				root.location.hash = callables;
-			} else if (o.loadUsingAjax && sameDomain
-			&& (!o.target || o.target === true || o.target === '_self')) {
-				if (callables.search(baseUrl) === 0) {
-					// Use AJAX to refresh the page whenever the request is for a local page
-					Q.loadUrl(callables, Q.extend({
-						loadExtras: 'all',
-						ignoreHistory: false,
-						onActivate: function () {
-							if (callback) callback();
-						}
-					}, o)).then(function (a) {
-						
-					}, function (err) {
-						debugger; // pause here if debugging
-					});
-				} else if (o.externalLoader) {
-					o.externalLoader.apply(this, arguments);
-				} else {
-					root.location = callables;
-				}
-			} else {
-				if (Q.typeOf(o.fields) === 'object') {
-					var method = 'POST';
-					if (o.method) {
-						switch (o.method.toUpperCase()) {
-							case "GET":
-							case "POST":
-								method = o.method;
-								break;
-							default:
-								method = 'POST'; // sadly HTML forms don't support other methods
-								break;
-						}
-					}
-					Q.formPost(callables, o.fields, method, {onLoad: o.callback, target: o.target});
-				} else {
-					if (Q.info && callables === baseUrl) {
-						callables+= '/';
-					}
-					if (!o.target || o.target === true || o.target === '_self') {
-						if (root.location.href == callables) {
-							root.location.reload(true);
-						} else {
-							root.location = callables;
-						}
-					} else {
-						root.open(callables, o.target);
-					}
-				}
-			}
-			Q.handle.onUrl.handle(callables, o);
-			return 1;
-		default:
+ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options) {
+	try {
+		if (!callables) {
 			return 0;
+		}
+		if (!context) context = root;
+		if (!args) args = [];
+		var i=0, count=0, k, result;
+		if (callables === location) callables = location.href;
+		switch (Q.typeOf(callables)) {
+			case 'function':
+				result = callables.apply(context, args);
+				if (result === false) return false;
+				return 1;
+			case 'array':
+				for (i=0; i<callables.length; ++i) {
+					result = Q.handle(callables[i], context, args);
+					if (result === false) return false;
+					count += result;
+				}
+				return count;
+			case 'Q.Event':
+				return callables.handle.apply(context, args);
+			case 'object':
+				for (k in callables) {
+					result = Q.handle(callables[k], context, args);
+					if (result === false) return false;
+					count += result;
+				}
+				return count;
+			case 'string':
+				var o = Q.extend({}, Q.handle.options, options);
+				if (!callables.isUrl()
+				&& (callables[0] != '#')
+				&& (!o.target || o.target.toLowerCase() === '_self')) {
+					// Assume this is not a URL.
+					// Try to evaluate the expression, and execute the resulting function
+					var c = Q.getObject(callables, context) || Q.getObject(callables);
+					return Q.handle(c, context, args);
+				}
+				// Assume callables is a URL
+				if (o.dontReload && Q.info && Q.info.url === callables) {
+					return 0;
+				}
+				var callback = null;
+				if (typeof arguments[1] === 'function') {
+					// Some syntactic sugar: (url, callback) omitting context, args, options
+					callback = arguments[1];
+					o = Q.handle.options;
+				} else if (arguments[1] && (arguments[3] === undefined)) {
+					// Some more syntactic sugar: (url, options, callback) omitting context, args, options
+					o = Q.extend({}, Q.handle.options, arguments[1]);
+					if (typeof arguments[2] === 'function') {
+						callback = arguments[2];
+					}
+				} else {
+					o = Q.extend({}, Q.handle.options, options);
+					if (o.callback) {
+						callback = o.callback;
+					}
+				}
+				var baseUrl = Q.baseUrl();
+				var sameDomain = callables.sameDomain(baseUrl);
+				if (callables[0] === '#') {
+					root.location.hash = callables;
+				} else if (o.loadUsingAjax && sameDomain
+				&& (!o.target || o.target === true || o.target === '_self')) {
+					if (callables.search(baseUrl) === 0) {
+						// Use AJAX to refresh the page whenever the request is for a local page
+						Q.loadUrl(callables, Q.extend({
+							loadExtras: 'all',
+							ignoreHistory: false,
+							onActivate: function () {
+								if (callback) callback();
+							}
+						}, o)).then(function (a) {
+							
+						}, function (err) {
+							debugger; // pause here if debugging
+						});
+					} else if (o.externalLoader) {
+						o.externalLoader.apply(this, arguments);
+					} else {
+						root.location = callables;
+					}
+				} else {
+					if (Q.typeOf(o.fields) === 'object') {
+						var method = 'POST';
+						if (o.method) {
+							switch (o.method.toUpperCase()) {
+								case "GET":
+								case "POST":
+									method = o.method;
+									break;
+								default:
+									method = 'POST'; // sadly HTML forms don't support other methods
+									break;
+							}
+						}
+						Q.formPost(callables, o.fields, method, {onLoad: o.callback, target: o.target});
+					} else {
+						if (Q.info && callables === baseUrl) {
+							callables+= '/';
+						}
+						if (!o.target || o.target === true || o.target === '_self') {
+							if (root.location.href == callables) {
+								root.location.reload(true);
+							} else {
+								root.location = callables;
+							}
+						} else {
+							root.open(callables, o.target);
+						}
+					}
+				}
+				Q.handle.onUrl.handle(callables, o);
+				return 1;
+			default:
+				return 0;
+		}
+	} catch (exception) {
+		if (options && options.handleException) {
+			return options.handleException(exception);
+		}
+		throw exception;
 	}
 };
 Q.handle.options = {
@@ -14594,7 +14613,6 @@ Q.Dialogs = {
 				$dialog.data('Q/dialog').close();
 			}
 		}
-		Q.Pointer.cancelClick();
 		return $dialog[0];
 	},
 
@@ -15803,8 +15821,9 @@ function _addHandlebarsHelpers() {
 	}
 	if (!Handlebars.helpers.getObject) {
 		Handlebars.registerHelper('getObject', function() {
-			var result = null;
-			Q.each(arguments, function (i, key) {
+			var args = Array.prototype.slice.call(arguments);
+			var result = args.pop().data.root;
+			Q.each(args, function (i, key) {
 				if (typeof key === 'string' || typeof key === 'number') {
 					result = result[key];
 				}

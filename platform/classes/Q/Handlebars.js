@@ -99,8 +99,9 @@ handlebars.registerHelper('call', function(path) {
 });
 
 handlebars.registerHelper('getObject', function() {
-	var result = null;
-	Q.each(arguments, function (i, key) {
+	var args = Array.prototype.slice.call(arguments);
+	var result = args.pop().data.root;
+	Q.each(args, function (i, key) {
 		if (typeof key === 'string' || typeof key === 'number') {
 			result = result[key];
 		}
