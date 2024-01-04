@@ -36,7 +36,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 	var state = this.state;
 	state.root = state.root || this.element;
 
-	tool.onScrollingStopped = new Q.Event();
+	tool.onEnteringStopped = new Q.Event();
 	tool.frozenDimensions = new WeakMap();
 
 	var Elp = Element.prototype;
@@ -133,9 +133,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 				}
 				tool.timeout && clearTimeout(tool.timeout);
 				tool.timeout = setTimeout(function () {
-					Q.handle(tool.onScrollingStopped, tool);
+					Q.handle(tool.onEnteringStopped, tool);
 				}, tool.state.waitUntilSlowerThan);
-				tool.onScrollingStopped.setOnce(_load);
+				tool.onEnteringStopped.setOnce(_load);
 				return true;
 
 				function _load() {
@@ -195,9 +195,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 				}
 				tool.timeout && clearTimeout(tool.timeout);
 				tool.timeout = setTimeout(function () {
-					Q.handle(tool.onScrollingStopped, tool);
+					Q.handle(tool.onEnteringStopped, tool);
 				}, tool.state.waitUntilSlowerThan);
-				tool.onScrollingStopped.setOnce(_activate);
+				tool.onEnteringStopped.setOnce(_activate);
 				return true;
 				
 				function _activate() {

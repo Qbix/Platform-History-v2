@@ -5898,6 +5898,8 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				toolConstructor = function () {
 					log("Missing tool constructor for " + toolName);
 				}; 
+				Q.Tool.onLoadedConstructor(toolName)
+				.handle.call(Q.Tool, toolName, toolConstructor);
 			}
 		}
 	});
@@ -14500,6 +14502,7 @@ Q.Dialogs = {
 				maskDefault = false;
 			}
 		}
+		document.activeElement && document.activeElement.blur();
 		var o = Q.extend(
 			{mask: maskDefault}, 
 			Q.Dialogs.options, 
