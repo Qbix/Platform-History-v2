@@ -12446,8 +12446,10 @@ function _listenForVisibilityChange() {
 			return false;
 		}
 	});
-	Q.addEventListener(document, visibilityChange, function () {
-		Q.onVisibilityChange.handle.call(document, !Q.isDocumentHidden());
+	Q.addEventListener(document, [visibilityChange, 'pause', 'resume', 'resign', 'active'], function () {
+		setTimeout(function () {
+			Q.onVisibilityChange.handle.call(document, !Q.isDocumentHidden());
+		}, 0);
 	}, false);
 }
 _listenForVisibilityChange();
@@ -12460,10 +12462,19 @@ function _handleVisibilityChange(shown) {
 	}
 }
 Q.onVisibilityChange.set(_handleVisibilityChange, 'Q.Animation');
-Q.isDocumentHidden = function () {
-	return document.hidden || document.msHidden 
-		|| document.webkitHidden || document.oHidden;
+Q.isDocumentHidden = function (event) {
+	if (event) {
+		if (event.type == 'pause' || event.type == 'resign') {
+			return true;
+		}
+		if (event.type == 'resume' || event.type == 'active') {
+			return false;
+		}
+	}
+	return !!(document.hidden || document.msHidden 
+		|| document.webkitHidden || document.oHidden);
 };
+
 
 Q.Animation.playing = {};
 var _Q_Animation_index = 0;
@@ -13931,7 +13942,7 @@ Q.Visual = Q.Pointer = {
 		document.body.appendChild(div);
 		var _scrollLeft, _scrollTop;
 		Q.addEventListener(element, 'pointerdown pointermove', function (e) {
-			var p = e.target.scrollingParent();
+			var p = e.target.scrollingParent() || document.body;
 			if (e.type === 'pointerdown') {
 				_scrollLeft = p.scrollLeft;
 				_scrollTop = p.scrollTop;
