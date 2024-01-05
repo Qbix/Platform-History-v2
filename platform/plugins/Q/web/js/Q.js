@@ -2205,6 +2205,31 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 };
 
 /**
+ * Traverse all the leaves and optionally modify the values
+ * @static
+ * @method leaves
+ * @param {Object|Array|mixed} structure 
+ * @param {Function} callback This will be called for every leaf. 
+ *   It receives the current value of the leaf, and must return a value
+ *   that will be set there (to skip changes, simply return the current value)
+ * @returns 
+ */
+Q.leaves = function _Q_leaves(structure, callback) {
+	if (Q.isArrayLike(structure)) {
+		for (var i=0, l=structure.length; i<l; ++i) {
+			structure[i] = Q.leaves(structure[i], callback);
+		}
+	} else if (typeof structure === 'object') {
+		for (var k in structure) {
+			structure[k] = Q.leaves(structure[k], callback);
+		}
+	} else { // we found a scalar leaf
+		structure = callback(structure);
+	}
+	return structure;
+};
+
+/**
  * Used to prevent overwriting the latest results on the client with older ones.
  * Typically, you would call this function before making some sort of request,
  * save the ordinal in a variable, and then pass it to the function again inside
@@ -2691,13 +2716,13 @@ Q.element = function (type, attributes, elementsToAppend) {
  * @method $
  * @static
  * @param {String} selector Any selector passed to querySelectorAll
- * @param {Element} [element=document] defaults to the entire document
+ * @param {Element} [container=document] defaults to the entire document
  * @param {Boolean} [toArray] whether to convert NodeList to a static array instead.
  *   Note: in that case, the result won't be live anymore.
  * @return {Iterator|Array}
  */
-Q.$ = function (selector, element, toArray) {
-	var list = (element || document).querySelectorAll(selector);
+Q.$ = function (selector, container, toArray) {
+	var list = (container || document).querySelectorAll(selector);
 	return toArray ? Array.prototype.slice.call(list) : list.values();
 };
 
@@ -13904,7 +13929,17 @@ Q.Visual = Q.Pointer = {
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
+		var _scrollLeft, _scrollTop;
 		Q.addEventListener(element, 'pointerdown pointermove', function (e) {
+			var p = e.target.scrollingParent();
+			if (e.type === 'pointerdown') {
+				_scrollLeft = p.scrollLeft;
+				_scrollTop = p.scrollTop;
+			} else if (_scrollLeft !== p.scrollLeft
+			        || _scrollTop !== p.scrollTop) {
+				div.removeClass('Q_touchlabel_show');
+				return;
+			}
 			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
