@@ -12,6 +12,10 @@
 var root = this;
 var $ = Q.jQuery = root.jQuery;
 
+// fallback for old Javascript versions
+Symbol = Symbol || {};
+Symbol.iterator = Symbol.iterator || 'nonexistent symbol';
+
 // private properties
 var _isReady = false;
 var _isOnline = null;
@@ -1332,8 +1336,9 @@ Q.typeOf = function _Q_typeOf(value) {
 			s = 'window';
 		} else if (typeof value.typename != 'undefined' ) {
 			return value.typename;
-		} else if (typeof (l=value.length) == 'number' && (l%1==0)
-		&& (l > 0 && ((l-1) in value))) {
+		} else if (value[Symbol.iterator] === 'function'
+		|| (typeof (l=value.length) == 'number' && (l%1==0)
+		&& (l > 0 && ((l-1) in value)))) {
 			return 'array';
 		} else if (typeof value.constructor != 'undefined'
 		&& typeof value.constructor.name != 'undefined') {
@@ -7048,14 +7053,18 @@ Q.IndexedDB = {};
  * @method open
  * @param {String} dbName The name of the database
  * @param {String} storeName The name of the object store name inside the database
- * @param {String} keyPath The key path inside the object store
+ * @param {String|Object} params Parameters for creating the key store.
+ *   You can also pass a string here, if you're just specifying the keyPath.
+ * @param {String} params.keyPath The key path inside the object store.
+ * @param {Array} params.indexes Array of arrays for createIndex consisting of [indexName, keyPath, options]
  * @param {Function} callback Receives (error, ObjectStore)
  * @return {Q.Promise}
  */
-Q.IndexedDB.open = Q.promisify(function (dbName, storeName, keyPath, callback) {
+Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 	if (!root.indexedDB) {
 		return false;
 	}
+	var keyPath = (typeof params === 'string' ? params : params.keyPath);
 	var lskey = 'Q_IndexedDB_version';
 	var version = localStorage.getItem(lskey) || 1;
 	var open = indexedDB.open(dbName, version);
@@ -7065,7 +7074,13 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, keyPath, callback) {
 		if (!db.objectStoreNames.contains(storeName)
 		&& !_triedAddingObjectStore) {
 			_triedAddingObjectStore = true;
-			db.createObjectStore(storeName, {keyPath: keyPath});
+			var store = db.createObjectStore(storeName, {keyPath: keyPath});
+			var idxs = params.indexes;
+			if (idxs) {
+				for (var i=0, l=idxs.length; i<l; ++i) {
+					store.createIndex(idxs[i][0], idxs[i][1], idxs[0][2]);
+				}
+			}
 		}
 	};
 	open.onerror = function (error) {
@@ -8120,8 +8135,9 @@ var _supportsPassive;
  * in calls to Q.removeEventListener().
  * @static
  * @method addEventListener
- * @param {HTMLElement} element
+ * @param {HTMLElement|Array|NodeList} element
  *  An HTML element, window or other element that supports listening to events
+ *  You can also pass an Array or NodeList of elements here.
  * @param {String|Array|Object|Function} eventName
  *  A space-delimited string of event names, or an array of event names.
  *  You can also pass an object of { eventName: eventHandler } pairs, in which csae
@@ -8138,7 +8154,16 @@ var _supportsPassive;
  * @return {Function} the wrapper function to pass to corresponding Q.removeEventListener
  */
 Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandler, useCapture, hookStopPropagation) {
+	if (Q.isEmpty(element) || Q.isEmpty(eventHandler)) {
+		return false;
+	}
 	useCapture = useCapture || false;
+	if (Q.isArrayLike(element)) {
+		for (var i=0, l=element.length; i<l; ++i) {
+			Q.addEventListener(element[i], eventName, eventHandler, useCapture, hookStopPropagation);
+		}
+		return;
+	}
 	if (Q.isPlainObject(eventName)) {
 		for (var k in eventName) {
 			Q.addEventListener(element, k, eventName[k], eventHandler);
@@ -8256,19 +8281,26 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * Remove an event listener from an element
  * @static
  * @method removeEventListener
- * @param {HTMLElement} element
+ * @param {HTMLElement|Array|NodeList} element An element, or array or NodeList of elements, on which
+ *  Q.addEventListener was previously called.
  * @param {String|Array|Object|Function} eventName
  *  A space-delimited string of event names, or an array of event names.
  *  You can also pass an object of { eventName: eventHandler } pairs, in which csae
  *  the next parameter would be useCapture.
  *  You can also pass functions such as Q.Pointer.start here.
- * @param {Function} eventHandler
- * @param {boolean} useCapture
- * return {boolean} Should normally return true, unless listener could not be found or removed
+ * @param {Function} eventHandler Pass the same eventHandler as was passed to Q.addEventListener
+ * @param {boolean} useCapture Pass the same useCapture as was passed to Q.addEventListener
+ * @return {boolean} Should normally return true, unless listener could not be found or removed
  */
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
 	if (Q.isEmpty(element) || Q.isEmpty(eventHandler)) {
 		return false;
+	}
+	if (Q.isArrayLike(element)) {
+		for (var i=0, l=element.length; i<l; ++i) {
+			Q.removeEventListener(element[i], eventName, eventHandler, useCapture, hookStopPropagation);
+		}
+		return;
 	}
 
 	useCapture = useCapture || false;
@@ -10166,14 +10198,19 @@ Q.clientId = function () {
 };
 
 /**
- * Call this function to get an rfc4122 version 4 compliant id for the current client
+ * Call this function to generate an rfc4122 version 4 compliant uuid given a key.
+ * Repeated calls with the same key will yield the same result until the page is reloaded.
  * @static
  * @method uuid
+ * @param {String} [key=Q.clientId()]
  */
-Q.uuid = function () {
+Q.uuid = function (key) {
 	// TODO: consider replacing with
 	// https://github.com/broofa/node-uuid/blob/master/uuid.js
-	return Q.uuid.value = Q.uuid.value || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	if (!key) {
+		key = Q.clientId();
+	}
+	return Q.uuid[key] = Q.uuid[key] || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 		return v.toString(16);
 	});
@@ -13736,7 +13773,7 @@ Q.Visual = Q.Pointer = {
                     if (Q.isArrayLike(targets)) {
                         img1.target = targets[0];
                         for (i=1, l=targets.length; i<l; ++i) {
-                            if (targets[i] && targets[i].isConnected) {
+                            if (!targets[i] || !targets[i].isConnected) {
                                 continue;
                             }
                             var img2 = img1.cloneNode(false);
