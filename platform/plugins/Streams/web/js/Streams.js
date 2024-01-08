@@ -3701,6 +3701,8 @@ var Avatar = Streams.Avatar = function Streams_Avatar (fields) {
  *  otherwise, first parameter is null and second parameter is a Streams.Avatar object
  */
 Avatar.get = function _Avatar_get (userId, callback) {
+	var cached = Q.Streams.Avatar.get.cache.get([userId]);
+	var cachedAvatar = cached && cached.subject;
 	var func = Streams.batchFunction(Q.baseUrl({userId: userId}), 'avatar');
 	func.call(this, userId, function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
@@ -3712,7 +3714,9 @@ Avatar.get = function _Avatar_get (userId, callback) {
 		}
 		var avatar = data.avatar ? new Avatar(data.avatar) : null;
 		callback && callback.call(avatar, null, avatar);
-		Q.handle(Q.getObject([userId], priv._avatarHandlers), avatar, [null, avatar]);
+		if (avatar !== cachedAvatar) {
+			Q.handle(Q.getObject([userId], priv._avatarHandlers), avatar, [null, avatar]);
+		}
 	});
 };
 /**
