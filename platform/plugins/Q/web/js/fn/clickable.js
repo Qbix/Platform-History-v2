@@ -401,6 +401,9 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 				var factor = scale.factor || 1;
 				state.animation && state.animation.pause();
 				if (overElement) {
+					setTimeout(function () {
+						Q.Pointer.cancelClick();
+					}, 10); // give it a chance to handle clicks
 					state.animation = Q.Animation.play(function(x, y) {
 						scale(factor + y * (o.release.size-factor));
 						$this.css('opacity', o.press.opacity + y * (o.release.opacity-o.press.opacity));

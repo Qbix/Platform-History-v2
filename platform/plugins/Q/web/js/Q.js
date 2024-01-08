@@ -13,8 +13,12 @@ var root = this;
 var $ = Q.jQuery = root.jQuery;
 
 // fallback for old Javascript versions
-Symbol = Symbol || {};
-Symbol.iterator = Symbol.iterator || 'nonexistent symbol';
+try {
+	Symbol = Symbol || {};
+	Symbol.iterator = Symbol.iterator || 'nonexistent symbol';
+} catch(e) {
+	
+}
 
 // private properties
 var _isReady = false;
