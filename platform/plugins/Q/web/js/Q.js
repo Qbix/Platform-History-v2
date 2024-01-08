@@ -14,7 +14,9 @@ var $ = Q.jQuery = root.jQuery;
 
 // fallback for old Javascript versions
 Symbol = Symbol || {};
-Symbol.iterator = Symbol.iterator || 'nonexistent symbol';
+if (!Symbol.iterator) {
+	Symbol.iterator = Symbol.iterator || 'nonexistent symbol';
+}
 
 // private properties
 var _isReady = false;
