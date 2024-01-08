@@ -3023,6 +3023,7 @@ Evp.occurring = false;
  *  and it will be automatically removed when the current page is removed.
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
+ *  But note that passing the same tool on same event again will overwrite the previous handler.
  * @param {boolean} prepend If true, then prepends the handler to the chain
  * @return {String|null} The key under which the handler was set, or null if handler and key were both empty
  */
@@ -3042,6 +3043,7 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
 	}
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	key = Q.calculateKey(key, this.handlers, this.keys.length);
+	this.handlers[key] = handler; // can be a function, string, Q.Event, etc.
 	if (this.keys.indexOf(key) < 0) {
 		if (prepend) {
 			this.keys.unshift(key);
@@ -3052,12 +3054,6 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
 	if (isTool) {
 		Q.Event.forTool[key] = Q.Event.forTool[key] || [];
 		Q.Event.forTool[key].push(this);
-	}
-	if (isTool || key === true) {
-		this.handlers[key] = this.handlers[key] || [];
-		this.handlers[key].push(handler);
-	} else {
-		this.handlers[key] = handler; // can be a function, string, Q.Event, etc.
 	}
 	if (this.keys.length === 1 && this._onFirst) {
 		this._onFirst.handle.call(this, handler, key, prepend);
@@ -3080,6 +3076,7 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
  *  If the key is not provided, a unique one is computed.
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
+ *  But note that passing the same tool on same event again will overwrite the previous handler.
  * @param {boolean} prepend If true, then prepends the handler to the chain
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
