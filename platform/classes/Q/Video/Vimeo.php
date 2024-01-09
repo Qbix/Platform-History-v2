@@ -15,9 +15,10 @@ class Q_Video_Vimeo extends Q_Video {
 		if (!class_exists("Vimeo\Vimeo")) {
 			throw new Exception("Vimeo PHP SDK not installed!");
 		}
-		$this->clientId = Q_Config::expect("Q", "video", "cloud", "upload", "vimeo", "clientId");
-		$this->clientSecret = Q_Config::expect("Q", "video", "cloud", "upload", "vimeo", "clientSecret");
-		$this->accessToken = Q_Config::expect("Q", "video", "cloud", "upload", "vimeo", "accessToken");
+		$clientId = Q_Config::expect("Q", "video", "cloud", "upload", "vimeo", "clientId");
+		$clientSecret = Q_Config::expect("Q", "video", "cloud", "upload", "vimeo", "clientSecret");
+		$accessToken = Q_Config::expect("Q", "video", "cloud", "upload", "vimeo", "accessToken");
+		$this->vimeo = new Vimeo($clientId, $clientSecret, $accessToken);
 	}
 
 	/**
@@ -29,8 +30,6 @@ class Q_Video_Vimeo extends Q_Video {
 	 */
 	function doCreate($params = array())
 	{
-		$vimeo = new Vimeo($this->clientId, $this->clientSecret, $this->accessToken);
-
 		// Ignore any specified upload approach and size.
 		$options = [
 			'upload' => [
@@ -47,7 +46,7 @@ class Q_Video_Vimeo extends Q_Video {
 		// Use JSON filtering so we only receive the data that we need to make an upload happen.
 		$uri = '/me/videos?fields=uri,upload';
 
-		$intent = $vimeo->request($uri, $options, 'POST');
+		$intent = $this->vimeo->request($uri, $options, 'POST');
 		if ($intent['status'] !== 200) {
 			$intent_error = !empty($intent['body']['error']) ? ' [' . $intent['body']['error'] . ']' : '';
 			throw new VimeoUploadException('Unable to initiate an upload.' . $intent_error);
@@ -65,9 +64,7 @@ class Q_Video_Vimeo extends Q_Video {
 	 */
 	function doDelete($videoId)
 	{
-		$vimeo = new Vimeo($this->clientId, $this->clientSecret, $this->accessToken);
-
-		$intent = $vimeo->request('/videos/'.$videoId, [], 'DELETE');
+		$intent = $this->vimeo->request('/videos/'.$videoId, [], 'DELETE');
 		if ($intent['status'] >= 400) {
 			$intent_error = !empty($intent['body']['error']) ? ' [' . $intent['body']['error'] . ']' : '';
 			throw new Exception('Unable to delete.' . $intent_error);
@@ -85,9 +82,25 @@ class Q_Video_Vimeo extends Q_Video {
 	 */
 	function getInfo($videoId)
 	{
-		$vimeo = new Vimeo($this->clientId, $this->clientSecret, $this->accessToken);
+		$info = $this->vimeo->request('/videos/'.$videoId);
+		if ($info['status'] >= 400) {
+			$intent_error = !empty($intent['body']['error']) ? ' [' . $intent['body']['error'] . ']' : '';
+			throw new Exception($intent_error);
+		}
 
-		$info = $vimeo->request('/videos/'.$videoId);
+		return $info['body'];
+	}
+
+	/**
+	 * Get video thumbnails list by video id
+	 * @method getThumbnails
+	 * @param {string} $videoId
+	 * @throws {Q_Exception_MethodNotSupported|Q_Exception_Upload}
+	 * @return {array} the response from the server, may contain errors
+	 */
+	function getThumbnails($videoId)
+	{
+		$info = $this->vimeo->request('/videos/'.$videoId.'/pictures');
 		if ($info['status'] >= 400) {
 			$intent_error = !empty($intent['body']['error']) ? ' [' . $intent['body']['error'] . ']' : '';
 			throw new Exception($intent_error);
@@ -110,5 +123,15 @@ class Q_Video_Vimeo extends Q_Video {
         // otherwise Q_Utils::request() with method: PATCH from PHP etc.
         // followed by method: HEAD to verify it,
         // if we ever wanted to upload a file from server to Vimeo
+	}
+
+	/**
+	 * Actions need to do when video processed
+	 * @method processed
+	 * @param {Streams_Stream} $stream Streams/video stream
+	 */
+	function processed($stream)
+	{
+
 	}
 };
