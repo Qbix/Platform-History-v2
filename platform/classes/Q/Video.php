@@ -50,6 +50,12 @@ interface Q_Video_Interface
 	 */
 	function doConvert($filename, array $params = array());
 
+	/**
+	 * Delete video from provider cloud
+	 * @method doDelete
+	 * @param {string} $videoId
+	 */
+	function doDelete($videoId);
 }
 
 /**
@@ -57,7 +63,15 @@ interface Q_Video_Interface
  * @class Q_Video
  */
 
-abstract class Q_Video implements Q_Video_Interface {
+class Q_Video implements Q_Video_Interface {
+	function __construct($options=[])
+	{
+		$this->cloudUploads = Q_Config::get("Q", "video", "cloud", "upload", "providers", array())[0];
+		$this->provider = Q::ifset($options, 'provider', $this->cloudUploads);
+		$this->className = "Q_Video_".ucfirst($this->provider);
+		$this->adapter = new $this->className();
+	}
+
 	function doCreate(array $params = array()) {
 		throw Q_Exception_MethodNotImplemented();
 	}
@@ -65,6 +79,9 @@ abstract class Q_Video implements Q_Video_Interface {
 		throw Q_Exception_MethodNotImplemented();
 	}
 	function doConvert($filename, array $params = array()) {
+		throw Q_Exception_MethodNotImplemented();
+	}
+	function doDelete($videoId) {
 		throw Q_Exception_MethodNotImplemented();
 	}
 
@@ -76,17 +93,10 @@ abstract class Q_Video implements Q_Video_Interface {
 	 * @param {array} [$options]
 	 * @param {string} [$options.converter]
 	 */
-	static function upload($filename, $options = array())
+	function upload($filename, $options = array())
 	{
-		$cloudUploads = Q_Config::get("Q", "video", "cloud", "upload", "providers", array());
-		$provider = Q::ifset($options, 'provider', $cloudUploads[0]);
-		if (!$provider) {
-			return false;
-		}
-		$className = "Q_Video_".ucfirst($provider);
 		try {
-			$adapter = new $className($filename);
-			$result = $adapter->doUpload($filename);
+			$result = $this->adapter->doUpload($filename);
 		} catch (Exception $e) {
 			return false;
 		}
@@ -96,7 +106,7 @@ abstract class Q_Video implements Q_Video_Interface {
 		}
 		$stream = Q::ifset($options, "stream", null);
 		if ($stream instanceof Streams_Stream) {
-			$stream->setAttribute("provider", $provider);
+			$stream->setAttribute("provider", $this->provider);
 			$stream->setAttribute("videoId", $result["videoId"]);
 			$stream->setAttribute("Streams.videoUrl", $result["videoUrl"]);
 			$stream->setAttribute("duration", $result["duration"]);
@@ -118,7 +128,7 @@ abstract class Q_Video implements Q_Video_Interface {
 	 * @param {array} [$options]
 	 * @param {string} [$options.converter]
 	 */
-	static function convert($filename, $options = array())
+	function convert($filename, $options = array())
 	{
 		$stream = Q::ifset($options, "stream", null);
 		$cloudConvert = Q_Config::get("Q", "video", "cloud", "convert", array());
@@ -147,5 +157,33 @@ abstract class Q_Video implements Q_Video_Interface {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Actions need to do when video processed
+	 * @method processed
+	 * @param {Streams_Stream} $stream Streams/video stream
+	 */
+	function processed($stream)
+	{
+		try {
+			$this->adapter->processed($stream);
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Delete video from provider cloud
+	 * @method delete
+	 * @param {string} $videoId
+	 */
+	function delete($videoId)
+	{
+		try {
+			$this->adapter->doDelete($videoId);
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 }
