@@ -55,11 +55,15 @@ function Streams_after_Q_file_save($params)
 		$stream->setAttribute("Streams.videoUrl", $url);
 		$stream->changed();
 
-		Q_Video::convert($filename, compact("stream"));
-		if (Q_Video::upload($filename, compact("stream"))) {
+		$qVideo = new Q_Video();
+		//$qVideo->convert($filename, compact("stream"));
+		if ($qVideo->upload($filename, compact("stream"))) {
 			// remove local uploaded file if uploaded to video provider
 			// and stream url has been updated
 			@unlink($filename);
+
+			// make any actions after processed
+			$qVideo->processed($stream);
 		}
 	}
 }
