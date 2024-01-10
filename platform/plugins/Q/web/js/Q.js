@@ -7079,7 +7079,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 			var idxs = params.indexes;
 			if (idxs) {
 				for (var i=0, l=idxs.length; i<l; ++i) {
-					store.createIndex(idxs[i][0], idxs[i][1], idxs[0][2]);
+					store.createIndex(idxs[i][0], idxs[i][1], idxs[i][2]);
 				}
 			}
 		}
@@ -13849,7 +13849,7 @@ Q.Visual = Q.Pointer = {
 							Q.extend(tooltip.style, {
 								display: 'inline-block',
 								position: 'absolute',
-								zIndex: (zIndex in options.tooltip) ? options.tooltip.zIndex : zIndex,
+								zIndex: ('zIndex' in options.tooltip) ? options.tooltip.zIndex : zIndex,
 								pointerEvents: 'none'
 							});
 							var irect = img.getBoundingClientRect();
