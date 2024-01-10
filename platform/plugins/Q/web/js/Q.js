@@ -13849,7 +13849,7 @@ Q.Visual = Q.Pointer = {
 							Q.extend(tooltip.style, {
 								display: 'inline-block',
 								position: 'absolute',
-								zIndex: ('zIndex' in options.tooltip) ? options.tooltip.zIndex : zIndex,
+								zIndex: ('zIndex' in options.tooltip) ? options.tooltip.zIndex : tooltip.style.zIndex,
 								pointerEvents: 'none'
 							});
 							var irect = img.getBoundingClientRect();
