@@ -4,10 +4,10 @@ function Streams_after_Streams_close_Streams_video ($params) {
 	$provider = $stream->getAttribute("provider");
 	$videoId = $stream->getAttribute("videoId");
 
-	if ($provider == "vimeo" && $videoId) {
+	if ($videoId) {
 		try {
-			$video = new Q_Video_Vimeo();
-			$video->doDelete($videoId);
+			$video = new Q_Video(compact("provider"));
+			$video->delete($videoId);
 		} catch (Exception $e) {}
 	}
 }

@@ -95,9 +95,9 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             if (false === Q.handle(state.onClick, tool, [this, label, title, wasSelected])) {
                 return;
             }
-            tool.element.addClass('Q_loading');        
+            $this.addClass('Q_working');
             tool.onSelect(wasSelected, label, function(err, ret, develop_error){
-                tool.element.removeClass('Q_loading');        
+                $this.removeClass('Q_working');
                 if (develop_error) {
                     console.warn(develop_error);
                     return;
@@ -460,8 +460,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                             });
                                         }).finally(function(err){
                                             tool.element.removeClass('Q_working');
-                                        });;
-
+                                        });
                                     },
                                     onActivate: function (dialog2) {
                                         var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog2), "Users/labels");
