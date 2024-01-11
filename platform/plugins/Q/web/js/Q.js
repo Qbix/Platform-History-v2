@@ -2413,12 +2413,12 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 				});
 			} else {
 				var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
-				args[ci] = function _defaultCallback(err, second) {
+				args.splice(ci, 0, function _defaultCallback(err, second) {
 					if (err) {
 						return reject(err);
 					}
 					resolve(useThis ? this : second);
-				};
+				});
 			}
 		}
 		var promise = new Q.Promise(function (r1, r2) {
@@ -2695,14 +2695,14 @@ Q.swapElements = function(element1, element2) {
 
 /**
  * Shorthand for creating a new element
- * @param {String} type 
+ * @param {String} tagName The tag name of the element
  * @param {Object} [attributes] Pair of attributeName: attributeValue.
  *  Names like "class" should be in quotation marks since they're JS keywords.
  * @param {Array|String} [elementsToAppend] either an HTML string or an array of elements to append, if any
  * @return {Element}
  */
-Q.element = function (type, attributes, elementsToAppend) {
-	var element = document.createElement(type);
+Q.element = function (tagName, attributes, elementsToAppend) {
+	var element = document.createElement(tagName);
 	if (attributes) {
 		for (var k in attributes) {
 			element.setAttribute(k, attributes[k]);
@@ -2713,7 +2713,9 @@ Q.element = function (type, attributes, elementsToAppend) {
 			element.innerHTML = elementsToAppend
 		} else {
 			for (var i=0, l=elementsToAppend.length; i<l; ++i) {
-				element.append(elementsToAppend[i]);
+				if (elementsToAppend[i]) {
+					element.append(elementsToAppend[i]);
+				}
 			}
 		}
 	}
@@ -14580,20 +14582,13 @@ Q.Dialogs = {
 	 * @return {HTMLElement} The HTML element of the dialog that was just pushed.
 	 */
 	push: function(options) {
-		var maskDefault = true;
-		for (var i = 0; i < this.dialogs.length; i++) {
-			if (!this.dialogs[i].isFullscreen) {
-				maskDefault = false;
-			}
-		}
 		document.activeElement && document.activeElement.blur();
 		var o = Q.extend(
-			{mask: maskDefault}, 
+			{mask: true}, 
 			Q.Dialogs.options, 
 			Q.Dialogs.push.options, 
 			options
 		);
-		if (o.fullscreen) o.mask = false;
 		var dialog = (o.dialog && o.dialog[0]) || o.dialog;
 		if (o.template) {
 			Q.Template.render(o.template.name, o.template.fields, function (err, html) {
