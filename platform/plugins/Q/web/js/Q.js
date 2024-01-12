@@ -7801,11 +7801,13 @@ Q.replace = function _Q_replace(container, source, options) {
 	var retainedTools = {};
 	var newOptions = {};
 	var incomingElements = {};
-	for (const incomingElement of Q.$('.Q_tool', source)) {
+	var list = source.querySelectorAll('.Q_tool');
+	for (var i=0, l=list.length; i<l; ++i) {
+		var incomingElement = list[i];
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
-		&& !incomingElement.getAttribute('data-Q-replace') !== null
+		&& incomingElement.getAttribute('data-Q-replace') === null
 		&& element.Q && element.Q.tool
 		&& replaceElements.indexOf(element) < 0) {
 			// If a tool exists with this exact id and has "data-Q-retain",
@@ -14608,6 +14610,9 @@ Q.Dialogs = {
 			}
 		}
 		function _proceed2(content) {
+			if (document.activeElement !== document.body) {
+				document.activeElement.blur();
+			}
 			var h2, title, contentElement;
 			if (!dialog) {
 				// create this dialog element
@@ -15923,9 +15928,13 @@ function _addHandlebarsHelpers() {
 		        return options.fn(item);
 		    }).join(sep);
 		});
-		Handlebars.registerHelper('tool', function (name, id, tag, options) {
+		Handlebars.registerHelper('tool', function (name, id, tag, retain, options) {
 			if (!name) {
 				return "{{tool missing name}}";
+			}
+			if (Q.isPlainObject(retain)) {
+				options = retain;
+				retain = false;
 			}
 			if (Q.isPlainObject(tag)) {
 				options = tag;
@@ -15959,7 +15968,11 @@ function _addHandlebarsHelpers() {
 					Q.extend(o, this['id:'+id]);
 				}
 			}
-			return Q.Tool.prepareHTML(tag, name, o, id, prefix, {'class': className});
+			var attributes = {'class': className};
+			if (retain) {
+				attributes['data-Q-retain'] = true;
+			}
+			return Q.Tool.prepareHTML(tag, name, o, id, prefix, attributes);
 		});
 	}
 	if (!Handlebars.helpers.url) {
