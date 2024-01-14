@@ -11238,7 +11238,7 @@ function _activateTools(toolElement, options, shared) {
 				var result = new _constructor(toolElement, options);
 				var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
 				shared.tool = tool;
-				Q.setObject([toolId, toolName], tool, shared);
+				Q.setObject([toolId, toolName], tool, shared.tools);
 				if (uniqueToolId) {
 					if (uniqueToolId === shared.firstToolId) {
 						shared.firstTool = tool;
