@@ -92,7 +92,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (element instanceof DocumentFragment) {
 					var children = Array.from(element.children);
 					for (var i=0, l=children.length; i<l; i++) {
-						smartInsert.apply(this, [children[i]]);
+						smartInsert.apply(this, [children[i], arguments[1]]);
 					}
 					return;
 				}
