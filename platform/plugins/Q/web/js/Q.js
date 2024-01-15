@@ -14731,7 +14731,7 @@ Q.Dialogs = {
 		}
 		if (dialog instanceof Element) {
 			Q.each(this.dialogs, function (i, d) {
-				if (d[0] === dialog) {
+				if (d === dialog) {
 					index = i;
 					return false;
 				}
