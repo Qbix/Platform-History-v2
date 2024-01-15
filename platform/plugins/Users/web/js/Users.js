@@ -2002,7 +2002,7 @@
 								// close dialog on provider connected
 								Web3.onConnect.set(function () {
 									setTimeout(function () {
-										Q.Dialogs.close($dialog);
+										Q.Dialogs.close(dialog);
 									}, 1000);
 								}, 'Users_connect_wallets');
 
