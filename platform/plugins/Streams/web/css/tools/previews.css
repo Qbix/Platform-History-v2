@@ -59,6 +59,11 @@
 	width: 60%;
 	margin-right: 5px;
 }
+.Streams_video_composer button[name=animatedThumbnail] {
+	display: none;
+	margin-top: 10px;
+	width: 100%;
+}
 
 .Streams_dialog_audio,
 .Streams_dialog_video,

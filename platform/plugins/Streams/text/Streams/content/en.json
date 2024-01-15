@@ -380,6 +380,7 @@
         "link": "Link",
         "setUrl": "Set URL",
         "save": "Save",
+        "createAnimatedThumbnail": "Create animated thumbnail",
         "setClip": "Cut Out Clip",
         "invalidURL": "Invalid URL",
         "invalidFile": "Invalid File",
@@ -486,5 +487,8 @@
         "UploadIcon": "Upload Icon",
         "Conversation": "Conversation",
         "Metrics": "Metrics"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Create animated thumbnail"
     }
 }

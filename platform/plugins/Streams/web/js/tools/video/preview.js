@@ -417,6 +417,8 @@
 							var $videoElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_preview", state.mainDialog);
 							var $clipElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_clip", state.mainDialog);
 
+							$(".Q_tabbing_container [data-content=edit] button[name=animatedThumbnail]", state.mainDialog).show()
+
 							$videoElement.tool("Q/video", {
 								url: tool.stream.videoUrl() || tool.stream.fileUrl(),
 								clipStart: tool.stream.getAttribute('clipStart'),
@@ -532,10 +534,11 @@
 							if (!this.files.length) {
 								return;
 							}
-							var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_preview", state.mainDialog);
-							var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_clip", state.mainDialog);
+							var $videoElement = $(".Q_tabbing_container [data-content=upload] .Streams_video_composer_preview", state.mainDialog);
+							var $clipElement = $(".Q_tabbing_container [data-content=upload] .Streams_video_composer_clip", state.mainDialog);
 							var url = URL.createObjectURL(this.files[0]);
 							var toolPreview = Q.Tool.from($videoElement, "Q/video");
+							$(".Q_tabbing_container [data-content=upload] button[name=animatedThumbnail]", state.mainDialog).show()
 
 							// check file size
 							/*if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
@@ -632,6 +635,12 @@
 							});
 						});
 
+						$("button[name=animatedThumbnail]", state.mainDialog).on(Q.Pointer.fastclick, function () {
+							var $this = $(this);
+							var $videoElement = $this.closest(".Q_tabbing_item").find("video");
+							$videoElement.tool("Streams/video/animatedThumbnail").activate();
+						});
+
 						Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", state.mainDialog)[0]);
 					}
 				});
@@ -666,36 +675,38 @@
 	);
 
 	Q.Template.set('Streams/video/composer',
-		'<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>'
-		+ '  <div class="Q_tabbing_tabs">'
-		+ '  	<div data-name="edit" class="Q_tabbing_tab">{{video.edit}}</div>'
-		+ '  	<div data-name="upload" class="Q_tabbing_tab">{{video.upload}}</div>'
-		+ '  	<div data-name="link" class="Q_tabbing_tab">{{video.link}}</div>'
-		+ '  </div>'
-		+ '  <div class="Q_tabbing_container">'
-		+ '	 	<div class="Q_tabbing_item" data-content="edit">'
-		+ '			<input name="title" value="{{title}}">'
-		+ '			<textarea name="content">{{content}}</textarea>'
-		+ '			<div class="Streams_video_composer_preview"></div>'
-		+ '			<div class="Streams_video_composer_clip"></div>'
-		+ '  	</div>'
-		+ '  	<div class="Q_tabbing_item" data-content="upload">'
-		+ '	   		<input type="file" accept="video/*" class="Streams_video_file" />'
-		+ '			<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>'
-		+ '			<div class="Streams_video_composer_preview"></div>'
-		+ '			<div class="Streams_video_composer_clip"></div>'
-		+ '		</div>'
-		+ '  	<div class="Q_tabbing_item" data-content="link">'
-		+ '	   		<label>'
-		+ '				<input name="url" placeholder="{{video.setUrl}}" type="url">'
-		+ '				<button name="setClip" type="button" class="Q_button">{{video.setClip}}</button>'
-		+ '			</label>'
-		+ '			<div class="Streams_video_composer_preview"></div>'
-		+ '			<div class="Streams_video_composer_clip"></div>'
-		+ '		</div>'
-		+ '  </div>'
-		+ '  <div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{video.save}}</button><button name="reset" type="reset" class="Q_button">{{video.reset}}</button></div>'
-		+ '</form></div>',
+		`<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>
+		  <div class="Q_tabbing_tabs">
+		  	<div data-name="edit" class="Q_tabbing_tab">{{video.edit}}</div>
+		  	<div data-name="upload" class="Q_tabbing_tab">{{video.upload}}</div>
+		  	<div data-name="link" class="Q_tabbing_tab">{{video.link}}</div>
+		  </div>
+		  <div class="Q_tabbing_container">
+			 	<div class="Q_tabbing_item" data-content="edit">
+					<input name="title" value="{{title}}">
+					<textarea name="content">{{content}}</textarea>
+					<div class="Streams_video_composer_preview"></div>
+					<div class="Streams_video_composer_clip"></div>
+					<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
+		  	</div>
+		  	<div class="Q_tabbing_item" data-content="upload">
+			   		<input type="file" accept="video/*" class="Streams_video_file" />
+					<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>
+					<div class="Streams_video_composer_preview"></div>
+					<div class="Streams_video_composer_clip"></div>
+					<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
+				</div>
+		  	<div class="Q_tabbing_item" data-content="link">
+			   		<label>
+						<input name="url" placeholder="{{video.setUrl}}" type="url">
+						<button name="setClip" type="button" class="Q_button">{{video.setClip}}</button>
+					</label>
+					<div class="Streams_video_composer_preview"></div>
+					<div class="Streams_video_composer_clip"></div>
+				</div>
+		  </div>
+		  <div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{video.save}}</button><button name="reset" type="reset" class="Q_button">{{video.reset}}</button></div>
+		</form></div>`,
 		{text: ['Streams/content']}
 	);
 
