@@ -86,9 +86,15 @@ Q.Tool.define('Q/lazyload', function (options) {
 			get: originalGet
 		});
 
-		Q.each(['insertBefore', 'appendChild', 'append'], function (i, fn) {
+		Q.each(['insertBefore', 'appendChild', 'append', 'prepend'], function (i, fn) {
 			var orig = Elp[fn];
-			Elp[fn] = function (element) {
+			Elp[fn] = function smartInsert(element) {
+				if (element instanceof DocumentFragment) {
+					for (var i=0, l=element.children.length; i<l; ++i) {
+						smartInsert(element.children[i]);
+					}
+					return orig.apply(this, arguments);
+				}
 				if (!(element instanceof HTMLElement)
 				|| Q.replace.lazyloadDontPrepare) {
 					return orig.apply(this, arguments);

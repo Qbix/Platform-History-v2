@@ -5228,7 +5228,7 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  * Gets one child tool contained in the tool, which matches the prefix
  * based on the prefix of the tool.
  * @method child
- * @param {String} append The string to append to the tool prefix to find the child tool id
+ * @param {String} [append=""] The string to append to the tool prefix before finding the child tool id
  * @param {String} [name=""] Filter by tool name, such as "Q/inplace"
  * @return {Q.Tool|null}
  */
@@ -5236,6 +5236,12 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
 	name = name && Q.normalize.memoized(name);
 	var prefix2 = this.prefix + (append || "");
 	var id, n, pl = prefix2.length;
+	if (append && Q.Tool.active[prefix2]) {
+		if (name && Q.Tool.active[prefix2][name]) {
+			return Q.Tool.active[prefix2];
+		}
+		return Q.first(Q.Tool.active[prefix2]);
+	}
 	for (id in Q.Tool.active) {
 		for (n in Q.Tool.active[id]) {
 			if (name && name != n) {
@@ -7845,8 +7851,12 @@ Q.replace = function _Q_replace(container, source, options) {
 	} // Clear the container
 	
 	// Move the actual nodes from the source to existing container
-	while (c = source.childNodes[0]) {
-		container.appendChild(c);
+	if (source instanceof DocumentFragment) {
+		container.appendChild(source);
+	} else {
+		while (c = source.childNodes[0]) {
+			container.appendChild(c);
+		}
 	}
 	
 	for (var id in retainedTools) {
