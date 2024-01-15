@@ -53,7 +53,7 @@ Q.Tool.define("Assets/web3/balance", function (options) {
 			if (state.chainId) {
 				tool.balanceOf(state.chainId);
 			} else {
-				$("select[name=chains]", tool.element).on("change", function () {
+				$("select[name=chains]", tool.element).off("change").on("change", function () {
 					var chainId = $(this).val();
 					Q.handle(state.onChainChange, tool, [chainId]);
 					tool.balanceOf(chainId);
