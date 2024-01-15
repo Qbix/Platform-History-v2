@@ -856,7 +856,10 @@ Q.Tool.define({
 		js: ["{{Q}}/js/jquery.canvasjs.min.js", "{{Streams}}/js/tools/metrics/tool.js"],
 		css: "{{Streams}}/css/tools/metrics.css"
 	},
-
+	"Streams/video/animatedThumbnail": {
+		js: "{{Streams}}/js/tools/video/animatedThumbnail/tool.js",
+		css: "{{Streams}}/css/tools/animatedThumbnail.css"
+	},
 });
 
 Streams.Chat = {
