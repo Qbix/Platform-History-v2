@@ -90,10 +90,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 			var orig = Elp[fn];
 			Elp[fn] = function smartInsert(element) {
 				if (element instanceof DocumentFragment) {
-					for (var i=0, l=element.children.length; i<l; ++i) {
-						smartInsert(element.children[i]);
+					var children = Array.from(element.children);
+					for (var i=0, l=children.length; i<l; i++) {
+						smartInsert.apply(this, [children[i]]);
 					}
-					return orig.apply(this, arguments);
+					return;
 				}
 				if (!(element instanceof HTMLElement)
 				|| Q.replace.lazyloadDontPrepare) {
