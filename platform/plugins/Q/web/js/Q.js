@@ -14644,16 +14644,16 @@ Q.Dialogs = {
 			var $dialog = $(dialog);
 			if (o.title) {
 				if (typeof o.title === 'string') {
-					$h2.html(o.title);
+					$(h2).html(o.title);
 				} else {
-					$h2.empty().append(o.title);
+					$(h2).empty().append(o.title);
 				}
 			}
 			if (content) {
 				if (typeof o.title === 'string') {
-					$h2.html(o.content);
+					$(contentElement).html(o.content);
 				} else {
-					$h2.empty().append(o.content);
+					$(contentElement).empty().append(o.content);
 				}
 			}
 			dialog.style.display = 'none';
