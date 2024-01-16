@@ -14643,10 +14643,18 @@ Q.Dialogs = {
 			}
 			var $dialog = $(dialog);
 			if (o.title) {
-				$(h2).empty().append(o.title);
+				if (typeof o.title === 'string') {
+					$h2.html(o.title);
+				} else {
+					$h2.empty().append(o.title);
+				}
 			}
 			if (content) {
-				$(contentElement).empty().append(content);
+				if (typeof o.title === 'string') {
+					$h2.html(o.content);
+				} else {
+					$h2.empty().append(o.content);
+				}
 			}
 			dialog.style.display = 'none';
 			(o.appendTo || document.body).append(dialog);
