@@ -52,10 +52,13 @@
 			const $settings = $(".Streams_video_animatedThumbnail_settings", element);
 			const $width = $("input[name=width]", $settings);
 			const $height = $("input[name=height]", $settings);
+			const $start = $("input[name=start]", $settings);
+			const $end = $("input[name=end]", $settings);
 			const $fps = $("input[name=fps]", $settings);
 			const $delay = $("input[name=delay]", $settings);
 			const $quality = $("input[name=quality]", $settings);
 			const $result = $(".Streams_video_animatedThumbnail_result", element);
+			const getContextSettings = {willReadFrequently: true};
 			function encode64(input) {
 				var output = '', i = 0, l = input.length,
 					key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
@@ -76,10 +79,10 @@
 			}
 
 			function toggleImageSmoothing(_CANVAS, isEnabled) {
-				_CANVAS.getContext('2d').mozImageSmoothingEnabled = isEnabled;
-				_CANVAS.getContext('2d').webkitImageSmoothingEnabled = isEnabled;
-				_CANVAS.getContext('2d').msImageSmoothingEnabled = isEnabled;
-				_CANVAS.getContext('2d').imageSmoothingEnabled = isEnabled;
+				_CANVAS.getContext('2d', getContextSettings).mozImageSmoothingEnabled = isEnabled;
+				_CANVAS.getContext('2d', getContextSettings).webkitImageSmoothingEnabled = isEnabled;
+				_CANVAS.getContext('2d', getContextSettings).msImageSmoothingEnabled = isEnabled;
+				_CANVAS.getContext('2d', getContextSettings).imageSmoothingEnabled = isEnabled;
 			}
 
 			function scaleCanvas(_CANVAS, videoObj, vidHeight, vidWidth, scale) {
@@ -93,7 +96,7 @@
 				_CANVAS.height=cHeight;
 
 				toggleImageSmoothing(_CANVAS, true);
-				_CANVAS.getContext('2d').scale(scale, scale);
+				_CANVAS.getContext('2d', getContextSettings).scale(scale, scale);
 			}
 			var _canPlayHandler = function () {
 				let exactVideoDuration=videoObj.duration;
@@ -111,27 +114,26 @@
 						videoObj.removeEventListener('play', _step);
 						videoObj.pause();
 						videoObj.currentTime = 0;
-						const ratio =  vidWidth/vidHeight;
+						const ratio =  vidWidth > vidHeight ? vidWidth/vidHeight : vidHeight/vidWidth;
 						$width.on('input', function () {
-							$height.val(Math.round($(this).val() * ratio));
+							$height.val(Math.round($(this).val() / ratio));
 						}).val(vidWidth);
 						$height.on('input', function () {
-							$width.val(Math.round($(this).val() / ratio));
+							$width.val(Math.round($(this).val() * ratio));
 						}).val(vidHeight);
 						$fps.val(FPS);
+						$end.val(parseInt(exactVideoDuration));
 						$settings.show();
 						return;
 					}
 
 					frameIndex++;
-					console.log(frameIndex);
-					/*if (frameIndex === 1) {
+					if (frameIndex === 1) {
 						startTime = Date.now();
 					} else if (frameIndex === 50) {
 						var ms_elapsed = (Date.now()) - startTime;
 						FPS=(frameIndex / ms_elapsed)*1000.0;
-						console.log('FPS: '+FPS+' | Duration: '+exactVideoDuration);
-					}*/
+					}
 
 					videoObj.requestVideoFrameCallback(_step);
 				}
@@ -147,43 +149,42 @@
 
 				const width = parseInt($width.val());
 				const height = parseInt($height.val());
-				const FPS = parseInt($fps.val());
+				const FPS = parseFloat($fps.val());
 				const delay = parseInt($delay.val());
 				const quality = parseInt($quality.val());
-				var continueCallback=true;
+				const start = parseInt($start.val());
+				const end = parseInt($end.val());
+				var frames = [];
 
 				let _CANVAS = document.createElement('canvas');
 				scaleCanvas(_CANVAS, videoObj, height, width, scale);
 
-				var encoder = new GIFEncoder(width, height);
-				encoder.setRepeat(0); // 0 for repeat, -1 for no-repeat
-				encoder.setDelay(delay);  // frame delay in ms // 500
-				encoder.setQuality(quality); // [1,30] | Best=1 | >20 not much speed improvement. 10 is default.
-				//encoder.setFrameRate(FPS);
-
 				// Sets frame rate in frames per second
 				var frameIndex=0;
 
-				var _step = async function () {
-					_CANVAS.getContext('2d').drawImage(videoObj, 0, 0, width, height);
-					encoder.addFrame(_CANVAS.getContext('2d'));
-					console.log('encoder frame added');
+				var _step = function () {
+					_CANVAS.getContext('2d', getContextSettings).drawImage(videoObj, 0, 0, width, height);
+					frames.push(_CANVAS.getContext('2d', getContextSettings).getImageData(0, 0, width, height));
 					frameIndex++;
-					if(continueCallback) {
-						videoObj.requestVideoFrameCallback(_step);
+					setTimeout(() => videoObj.requestVideoFrameCallback(_step), parseInt(1000/FPS));
+					if (videoObj.currentTime >= end) {
+						videoObj.pause();
+						videoObj.currentTime = 0;
 					}
 				};
 				function _playHandler () {
-					encoder.start();
-					console.log('encoder started');
-					if(continueCallback) {
-						videoObj.requestVideoFrameCallback(_step);
-					}
+					videoObj.requestVideoFrameCallback(_step);
 				}
 				function _endedHandler () {
-					continueCallback=false;
+					var encoder = new GIFEncoder(width, height);
+					encoder.setRepeat(0); // 0 for repeat, -1 for no-repeat
+					encoder.setDelay(delay);  // frame delay in ms // 500
+					encoder.setQuality(quality); // [1,30] | Best=1 | >20 not much speed improvement. 10 is default.
+					encoder.start();
+					frames.forEach((frame, index) => {
+						encoder.addFrame(frame, true);
+					})
 					encoder.finish();
-					console.log('encoder finished');
 
 					var fileType='image/gif';
 					var readableStream=encoder.stream();
@@ -200,13 +201,16 @@
 					$result.show();
 					$startButton.removeClass("Q_disabled");
 					videoObj.removeEventListener('play', _playHandler);
-					videoObj.removeEventListener('ended', _endedHandler);
+					videoObj.removeEventListener('pause', _endedHandler);
 				}
 				videoObj.addEventListener('play', _playHandler, false);
-				videoObj.addEventListener('ended', _endedHandler, false);
+				videoObj.addEventListener('pause', _endedHandler, false);
 
-				videoObj.currentTime = 0;
+				videoObj.currentTime = start;
 				videoObj.play();
+			});
+			$("button[name=useThis]", element).on(Q.Pointer.fastclick, function () {
+				$("img.animatedThumbnail", element).before();
 			});
 		}
 	});
@@ -214,12 +218,11 @@
 	Q.Template.set("Streams/video/animatedThumbnail",
 `<video src="{{videoUrl}}" preload="auto" playsinline="playsinline" muted></video>
 	<table class="Streams_video_animatedThumbnail_settings">
-		<tr><td>Widh:</td><td><input name="width"> px</td></tr>
-		<tr><td>Height:</td><td><input name="height"> px</td></tr>
-		<tr><td>FPS:</td><td><input name="fps"></td></tr>
-		<tr><td>Delay:</td><td><input name="delay" value="0"> ms</td></tr>
-		<tr><td>Quality:</td><td><input name="quality" value="1"> (1-256)</td></tr>
-		<tr><td colspan="2"><button name="start">Start</button></td></tr>
+		<tr><td>Width <i>(px)</i>:</td><td><input name="width"></td><td>Height <i>(px)</i>:</td><td><input name="height"></td></tr>
+		<tr><td>Start <i>(sec)</i>:</td><td><input name="start" value="0"></td><td>End <i>(sec)</i>:</td><td><input name="end"></td></tr>
+		<tr><td>FPS:</td><td><input name="fps"></td><td>Delay <i>(ms)</i>:</td><td><input name="delay" value="0"></td></tr>
+		<tr><td>Quality <i>(1-256)</i>:</td><td><input name="quality" value="1"></td></tr>
+		<tr><td colspan="4"><button name="start">Start</button></td></tr>
 	</table>
 	<div class="Streams_video_animatedThumbnail_result">
 		<h2>Result GIF</h2>
@@ -227,7 +230,8 @@
 		<table>
 			<tr><td>Size:</td><td class="fileSize"><span></span> KB</td></tr>
 			<tr><td># of Frame(s):</td><td class="frames"></td></tr>
-			<tr><td>Frame (ᴡ ⨯ ʜ):</td><td class="frameSize"><span></span> px ⨯ <span></span> px</td></tr>
+			<tr><td>Frame (w ⨯ h):</td><td class="frameSize"><span></span> px ⨯ <span></span> px</td></tr>
+			<tr><td colspan="2"><button name="useThis">Use this</button></td></tr>
 		</table>
 	</div>`,{text: ['Streams/content']});
 })(Q, Q.jQuery, window);

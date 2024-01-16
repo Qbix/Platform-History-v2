@@ -46,10 +46,18 @@
     height: 30px;
 }
 .Streams_video_animatedThumbnail .Q_dialog_content table {
-    margin-left: 50px;
+    margin: 0 auto;
 }
-.Streams_video_animatedThumbnail .Q_dialog_content table td:first-child {
+.Streams_video_animatedThumbnail .Q_dialog_content table td {
+    white-space: nowrap;
+}
+.Streams_video_animatedThumbnail .Q_dialog_content table td:first-child,
+.Streams_video_animatedThumbnail .Q_dialog_content table td:nth-child(3) {
     text-align: right;
+}
+.Streams_video_animatedThumbnail .Q_dialog_content table td i {
+    font-style: unset;
+    font-size: 12px;
 }
 .Streams_video_animatedThumbnail .Q_dialog_content h2 {
     padding-left: 20px;
