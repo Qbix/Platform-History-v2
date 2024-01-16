@@ -1203,7 +1203,7 @@
 		if (querystring.queryField('Q.Users.newSessionId')) {
 			var fieldNames = [
 				'Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.platform',
-				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
+				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature', 'Q.environment'
 			];
 			var fields = querystring.queryField(fieldNames);
 			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
