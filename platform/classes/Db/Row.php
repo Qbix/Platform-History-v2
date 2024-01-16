@@ -2355,8 +2355,9 @@ class Db_Row
 		
 		foreach ($row->fields as $key => $value) {
 			if (!empty($stripPrefix)) {
-				if (strncmp($key, $stripPrefix, $prefix_len) != 0)
+				if (strncmp($key, $stripPrefix, $prefix_len) != 0) {
 					continue;
+				}
 				$stripped_key = substr($key, $prefix_len);
 			} else {
 				$stripped_key = $key;

@@ -173,13 +173,19 @@ class Users_Session extends Base_Users_Session
 
 		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
 		$prefixType = $loggedInUserId ? 'authenticated' : '';
+		$sessionId = $sessionId ?: Q_Session::generateId(null, $prefixType);
 
 		$us = new Users_Session();
 		$us->id = $id;
 		$us->retrieve(null, null, array('lock' => 'FOR UPDATE'));
 		$us2 = new Users_Session();
+		$us2->id = $sessionId;
+		if ($us2->retrieve()) {
+			return $us2->id;
+		}
 		if ($us->wasRetrieved()) {
 			$us2->copyFromRow($us, null, false, true);
+			$us2->id = $sessionId;
 			$us2->wasRetrieved(false);
 			$us2->insertedTime = new Db_Expression('CURRENT_TIMESTAMP');
 		} else {
@@ -187,7 +193,6 @@ class Users_Session extends Base_Users_Session
 		}
 		$us2->content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
 		$us2->php = session_encode();
-		$us2->id = $sessionId ? $sessionId : Q_Session::generateId(null, $prefixType);
 		$us2->duration = $seconds;
 		$us2->timeout = 0;
 		foreach ($sessionFields as $k => $v) {
