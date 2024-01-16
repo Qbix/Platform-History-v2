@@ -2413,12 +2413,12 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 				});
 			} else {
 				var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
-				args[ci] = function _defaultCallback(err, second) {
+				args.splice(ci, 0, function _defaultCallback(err, second) {
 					if (err) {
 						return reject(err);
 					}
 					resolve(useThis ? this : second);
-				};
+				});
 			}
 		}
 		var promise = new Q.Promise(function (r1, r2) {
@@ -2695,14 +2695,14 @@ Q.swapElements = function(element1, element2) {
 
 /**
  * Shorthand for creating a new element
- * @param {String} type 
+ * @param {String} tagName The tag name of the element
  * @param {Object} [attributes] Pair of attributeName: attributeValue.
  *  Names like "class" should be in quotation marks since they're JS keywords.
  * @param {Array|String} [elementsToAppend] either an HTML string or an array of elements to append, if any
  * @return {Element}
  */
-Q.element = function (type, attributes, elementsToAppend) {
-	var element = document.createElement(type);
+Q.element = function (tagName, attributes, elementsToAppend) {
+	var element = document.createElement(tagName);
 	if (attributes) {
 		for (var k in attributes) {
 			element.setAttribute(k, attributes[k]);
@@ -2713,7 +2713,9 @@ Q.element = function (type, attributes, elementsToAppend) {
 			element.innerHTML = elementsToAppend
 		} else {
 			for (var i=0, l=elementsToAppend.length; i<l; ++i) {
-				element.append(elementsToAppend[i]);
+				if (elementsToAppend[i]) {
+					element.append(elementsToAppend[i]);
+				}
 			}
 		}
 	}
@@ -5226,7 +5228,7 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  * Gets one child tool contained in the tool, which matches the prefix
  * based on the prefix of the tool.
  * @method child
- * @param {String} append The string to append to the tool prefix to find the child tool id
+ * @param {String} [append=""] The string to append to the tool prefix before finding the child tool id
  * @param {String} [name=""] Filter by tool name, such as "Q/inplace"
  * @return {Q.Tool|null}
  */
@@ -5234,6 +5236,12 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
 	name = name && Q.normalize.memoized(name);
 	var prefix2 = this.prefix + (append || "");
 	var id, n, pl = prefix2.length;
+	if (append && Q.Tool.active[prefix2]) {
+		if (name && Q.Tool.active[prefix2][name]) {
+			return Q.Tool.active[prefix2];
+		}
+		return Q.first(Q.Tool.active[prefix2]);
+	}
 	for (id in Q.Tool.active) {
 		for (n in Q.Tool.active[id]) {
 			if (name && name != n) {
@@ -7079,7 +7087,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 			var idxs = params.indexes;
 			if (idxs) {
 				for (var i=0, l=idxs.length; i<l; ++i) {
-					store.createIndex(idxs[i][0], idxs[i][1], idxs[0][2]);
+					store.createIndex(idxs[i][0], idxs[i][1], idxs[i][2]);
 				}
 			}
 		}
@@ -7799,11 +7807,13 @@ Q.replace = function _Q_replace(container, source, options) {
 	var retainedTools = {};
 	var newOptions = {};
 	var incomingElements = {};
-	for (const incomingElement of Q.$('.Q_tool', source)) {
+	var list = source.querySelectorAll('.Q_tool');
+	for (var i=0, l=list.length; i<l; ++i) {
+		var incomingElement = list[i];
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
-		&& !incomingElement.getAttribute('data-Q-replace') !== null
+		&& incomingElement.getAttribute('data-Q-replace') === null
 		&& element.Q && element.Q.tool
 		&& replaceElements.indexOf(element) < 0) {
 			// If a tool exists with this exact id and has "data-Q-retain",
@@ -7841,8 +7851,12 @@ Q.replace = function _Q_replace(container, source, options) {
 	} // Clear the container
 	
 	// Move the actual nodes from the source to existing container
-	while (c = source.childNodes[0]) {
-		container.appendChild(c);
+	if (source instanceof DocumentFragment) {
+		container.appendChild(source);
+	} else {
+		while (c = source.childNodes[0]) {
+			container.appendChild(c);
+		}
 	}
 	
 	for (var id in retainedTools) {
@@ -11234,7 +11248,7 @@ function _activateTools(toolElement, options, shared) {
 				var result = new _constructor(toolElement, options);
 				var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
 				shared.tool = tool;
-				Q.setObject([toolId, toolName], tool, shared);
+				Q.setObject([toolId, toolName], tool, shared.tools);
 				if (uniqueToolId) {
 					if (uniqueToolId === shared.firstToolId) {
 						shared.firstTool = tool;
@@ -13849,7 +13863,7 @@ Q.Visual = Q.Pointer = {
 							Q.extend(tooltip.style, {
 								display: 'inline-block',
 								position: 'absolute',
-								zIndex: (zIndex in options.tooltip) ? options.tooltip.zIndex : zIndex,
+								zIndex: ('zIndex' in options.tooltip) ? options.tooltip.zIndex : tooltip.style.zIndex,
 								pointerEvents: 'none'
 							});
 							var irect = img.getBoundingClientRect();
@@ -14580,20 +14594,13 @@ Q.Dialogs = {
 	 * @return {HTMLElement} The HTML element of the dialog that was just pushed.
 	 */
 	push: function(options) {
-		var maskDefault = true;
-		for (var i = 0; i < this.dialogs.length; i++) {
-			if (!this.dialogs[i].isFullscreen) {
-				maskDefault = false;
-			}
-		}
 		document.activeElement && document.activeElement.blur();
 		var o = Q.extend(
-			{mask: maskDefault}, 
+			{mask: true}, 
 			Q.Dialogs.options, 
 			Q.Dialogs.push.options, 
 			options
 		);
-		if (o.fullscreen) o.mask = false;
 		var dialog = (o.dialog && o.dialog[0]) || o.dialog;
 		if (o.template) {
 			Q.Template.render(o.template.name, o.template.fields, function (err, html) {
@@ -14613,6 +14620,9 @@ Q.Dialogs = {
 			}
 		}
 		function _proceed2(content) {
+			if (document.activeElement !== document.body) {
+				document.activeElement.blur();
+			}
 			var h2, title, contentElement;
 			if (!dialog) {
 				// create this dialog element
@@ -14633,10 +14643,18 @@ Q.Dialogs = {
 			}
 			var $dialog = $(dialog);
 			if (o.title) {
-				$(h2).empty().append(o.title);
+				if (typeof o.title === 'string') {
+					$(h2).html(o.title);
+				} else {
+					$(h2).empty().append(o.title);
+				}
 			}
 			if (content) {
-				$(contentElement).empty().append(content);
+				if (typeof o.title === 'string') {
+					$(contentElement).html(o.content);
+				} else {
+					$(contentElement).empty().append(o.content);
+				}
 			}
 			dialog.style.display = 'none';
 			(o.appendTo || document.body).append(dialog);
@@ -14721,7 +14739,7 @@ Q.Dialogs = {
 		}
 		if (dialog instanceof Element) {
 			Q.each(this.dialogs, function (i, d) {
-				if (d[0] === dialog) {
+				if (d === dialog) {
 					index = i;
 					return false;
 				}
@@ -15928,9 +15946,13 @@ function _addHandlebarsHelpers() {
 		        return options.fn(item);
 		    }).join(sep);
 		});
-		Handlebars.registerHelper('tool', function (name, id, tag, options) {
+		Handlebars.registerHelper('tool', function (name, id, tag, retain, options) {
 			if (!name) {
 				return "{{tool missing name}}";
+			}
+			if (Q.isPlainObject(retain)) {
+				options = retain;
+				retain = false;
 			}
 			if (Q.isPlainObject(tag)) {
 				options = tag;
@@ -15964,7 +15986,11 @@ function _addHandlebarsHelpers() {
 					Q.extend(o, this['id:'+id]);
 				}
 			}
-			return Q.Tool.prepareHTML(tag, name, o, id, prefix, {'class': className});
+			var attributes = {'class': className};
+			if (retain) {
+				attributes['data-Q-retain'] = true;
+			}
+			return Q.Tool.prepareHTML(tag, name, o, id, prefix, attributes);
 		});
 	}
 	if (!Handlebars.helpers.url) {

@@ -109,7 +109,7 @@ function Users_before_Q_objects(&$params)
 			Q::event("Users/session/put", [], false, false, $fieldsToClear);
 		} catch (Exception $exception) {}
 		if (empty($fieldsToClear)) {
-			$fieldsToClear = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
+			$fieldsToClear = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform', 'Q.environment');
 		}
 		$queryString = $_SERVER["QUERY_STRING"];
 		$request_uri = explode('?', $_SERVER[REQUEST_URI])[0];

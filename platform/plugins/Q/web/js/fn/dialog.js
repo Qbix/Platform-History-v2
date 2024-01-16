@@ -296,16 +296,7 @@ Q.Tool.jQuery('Q/overlay',
 		beforeLoad: new Q.Event(),
 		onLoad: new Q.Event(),
 		beforeClose: new Q.Event(),
-		onClose: new Q.Event(function () {
-			// set z-index of mask less than visible dialog element
-			var $lastDialog = $(dialogs[dialogs.length-1]);
-			if ($lastDialog.length) {
-				var zIndex = parseInt($lastDialog.css('z-index'));
-				if (zIndex) {
-					Q.Masks.mask('Q.dialog.mask', {'zIndex': zIndex - 1});
-				}
-			}
-		}, 'Q.Dialogs.updateMask')
+		onClose: new Q.Event()
 	},
 
 	{
@@ -413,12 +404,24 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					Q.handle(o.onLoad, this, [this]);
 				}},
 				beforeClose: o.beforeClose,
-				onClose: { "Q/dialog": function () {
-					if (o.removeOnClose) {
-						Q.removeElement($this[0], true);
+				onClose: { 
+					"Q/dialog": function () {
+						if (o.removeOnClose) {
+							Q.removeElement($this[0], true);
+						}
+						Q.handle(o.onClose, $this[0], [$this[0]]);
+					},
+					"Q.Dialogs.updateMask": function () {
+						// set z-index of mask less than visible dialog element
+						var $lastDialog = $(dialogs[dialogs.length-1]);
+						if ($lastDialog.length) {
+							var zIndex = parseInt($lastDialog.css('z-index'));
+							if (zIndex) {
+								Q.Masks.mask('Q.dialog.mask', {'zIndex': zIndex - 1});
+							}
+						}
 					}
-					Q.handle(o.onClose, $this[0], [$this[0]]);
-				}},
+				},
 				noCalculatePosition: o.noCalculatePosition,
 				alignParent: (o.alignByParent && !Q.info.isMobile ? $this.parent() : null),
 				fadeInOut: o.fadeInOut && function (callback) {
@@ -457,6 +460,9 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					if ($this.hasClass('Q_overlay_open')) {
 						return;
 					}
+					dialogs.push($this[0]);
+					var topZ = Q.zIndexTopmost();
+					$this.css('z-index', topZ + 1);
 					$this.css({
 						'width': Q.Visual.windowWidth() + 'px',
 						'height': Q.Visual.windowHeight() + 'px'
@@ -465,7 +471,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						hiddenChildren[i].removeClass('Q_hide');
 					}
 					$this.show().css('opacity', 0);
-					ods.css('padding-top', ots.outerHeight());
+					// ods.css('padding-top', ots.outerHeight());
 
 					if (o.url) {
 						_loadUrl.call($this, o, function() {
@@ -495,6 +501,15 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						Q.removeElement($this[0], true);
 					} else {
 						$this.hide();
+					}
+
+					// set z-index of mask less than visible dialog element
+					var $lastDialog = $(dialogs[dialogs.length-1]);
+					if ($lastDialog.length) {
+						var zIndex = parseInt($lastDialog.css('z-index'));
+						if (zIndex) {
+							Q.Masks.mask('Q.dialog.mask', {'zIndex': zIndex - 1});
+						}
 					}
 
 					Q.handle(o.onClose, $this[0], [$this[0]]);

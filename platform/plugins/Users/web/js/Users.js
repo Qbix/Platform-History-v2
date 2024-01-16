@@ -1963,9 +1963,7 @@
 								}
 
 								var payload = response.slots.payload.payload;
-								var querystring = new URLSearchParams(Q.extend({}, payload, {
-									'Q.Users.environment': i
-								})).toString();
+								var querystring = new URLSearchParams(payload).toString();
 								var u = new URL(location);
 								var url = u.protocol + "//" + u.host + u.pathname + '?' + querystring;
 								var urlParams = {
@@ -2004,7 +2002,7 @@
 								// close dialog on provider connected
 								Web3.onConnect.set(function () {
 									setTimeout(function () {
-										Q.Dialogs.close($dialog);
+										Q.Dialogs.close(dialog);
 									}, 1000);
 								}, 'Users_connect_wallets');
 
