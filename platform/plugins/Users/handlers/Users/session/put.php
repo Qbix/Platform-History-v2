@@ -4,7 +4,7 @@ function Users_session_put($params, &$fieldsToClear)
 {
 	// Validate the inputs
 	$fields1 = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature');
-	$fields2 = array_merge($fields1, array('Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform'));
+	$fields2 = array_merge($fields1, array('Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform', 'Q.environment'));
 	$fieldsToClear = $fields2;
 	$req = Q_Request::fromUnderscores($fields2);
 	Q_Valid::requireFields($fields1, $req, true);
