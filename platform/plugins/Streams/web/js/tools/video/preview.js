@@ -304,6 +304,12 @@
 								clipEnd: clipEnd
 							}
 						});
+
+						var $animatedThumbnail = $("img.animatedThumbnail", state.mainDialog);
+						if ($animatedThumbnail.length) {
+							params.animatedThumbnail = $animatedThumbnail.prop("src");
+						}
+
 						if (previewState.publisherId && previewState.streamName) { // if edit existent stream
 							params.publisherId = previewState.publisherId;
 							params.streamName = previewState.streamName;
@@ -638,7 +644,12 @@
 						$("button[name=animatedThumbnail]", state.mainDialog).on(Q.Pointer.fastclick, function () {
 							var $this = $(this);
 							var $videoElement = $this.closest(".Q_tabbing_item").find("video");
-							$videoElement.tool("Streams/video/animatedThumbnail").activate();
+							$videoElement.tool("Streams/video/animatedThumbnail").activate(function () {
+								this.state.onReady.set(function ($img) {
+									$this.siblings("img.animatedThumbnail").remove();
+									$this.before($img);
+								}, tool);
+							});
 						});
 
 						Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", state.mainDialog)[0]);
