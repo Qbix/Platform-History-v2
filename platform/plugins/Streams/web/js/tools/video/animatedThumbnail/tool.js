@@ -41,14 +41,16 @@
 	},
 
 	{
-		videoUrl: null
+		videoUrl: null,
+		onReady: new Q.Event()
 	},
 
 	{
 		process: function (element) {
+			var tool = this;
 			const byteToKBScale = 0.0009765625;
 			const scale = window.devicePixelRatio;
-			var videoObj = $("video", element)[0];
+			const videoObj = $("video", element)[0];
 			const $settings = $(".Streams_video_animatedThumbnail_settings", element);
 			const $width = $("input[name=width]", $settings);
 			const $height = $("input[name=height]", $settings);
@@ -210,7 +212,8 @@
 				videoObj.play();
 			});
 			$("button[name=useThis]", element).on(Q.Pointer.fastclick, function () {
-				$("img.animatedThumbnail", element).before();
+				Q.handle(tool.state.onReady, tool, [$("img.animatedThumbnail", element)]);
+				Q.Dialogs.close(element);
 			});
 		}
 	});
@@ -218,20 +221,20 @@
 	Q.Template.set("Streams/video/animatedThumbnail",
 `<video src="{{videoUrl}}" preload="auto" playsinline="playsinline" muted></video>
 	<table class="Streams_video_animatedThumbnail_settings">
-		<tr><td>Width <i>(px)</i>:</td><td><input name="width"></td><td>Height <i>(px)</i>:</td><td><input name="height"></td></tr>
-		<tr><td>Start <i>(sec)</i>:</td><td><input name="start" value="0"></td><td>End <i>(sec)</i>:</td><td><input name="end"></td></tr>
-		<tr><td>FPS:</td><td><input name="fps"></td><td>Delay <i>(ms)</i>:</td><td><input name="delay" value="0"></td></tr>
-		<tr><td>Quality <i>(1-256)</i>:</td><td><input name="quality" value="1"></td></tr>
-		<tr><td colspan="4"><button name="start">Start</button></td></tr>
+		<tr><td>{{animatedThumbnail.Width}} <i>(px)</i>:</td><td><input name="width"></td><td>{{animatedThumbnail.Height}} <i>(px)</i>:</td><td><input name="height"></td></tr>
+		<tr><td>{{animatedThumbnail.Start}} <i>(sec)</i>:</td><td><input name="start" value="0"></td><td>{{animatedThumbnail.End}} <i>(sec)</i>:</td><td><input name="end"></td></tr>
+		<tr><td>FPS:</td><td><input name="fps"></td><td>{{animatedThumbnail.Delay}} <i>(ms)</i>:</td><td><input name="delay" value="0"></td></tr>
+		<tr><td>{{animatedThumbnail.Quality}} <i>(1-256)</i>:</td><td><input name="quality" value="1"></td></tr>
+		<tr><td colspan="4"><button name="start">{{animatedThumbnail.Start}}</button></td></tr>
 	</table>
 	<div class="Streams_video_animatedThumbnail_result">
-		<h2>Result GIF</h2>
+		<h2>{{animatedThumbnail.ResultGIF}}</h2>
 		<img class="animatedThumbnail">
 		<table>
-			<tr><td>Size:</td><td class="fileSize"><span></span> KB</td></tr>
-			<tr><td># of Frame(s):</td><td class="frames"></td></tr>
-			<tr><td>Frame (w ⨯ h):</td><td class="frameSize"><span></span> px ⨯ <span></span> px</td></tr>
-			<tr><td colspan="2"><button name="useThis">Use this</button></td></tr>
+			<tr><td>{{animatedThumbnail.Size}}:</td><td class="fileSize"><span></span> KB</td></tr>
+			<tr><td># {{animatedThumbnail.OfFrames}}:</td><td class="frames"></td></tr>
+			<tr><td>{{animatedThumbnail.Frame}} (w ⨯ h):</td><td class="frameSize"><span></span> px ⨯ <span></span> px</td></tr>
+			<tr><td colspan="2"><button name="useThis">{{animatedThumbnail.UseThis}}</button></td></tr>
 		</table>
 	</div>`,{text: ['Streams/content']});
 })(Q, Q.jQuery, window);

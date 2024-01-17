@@ -489,6 +489,17 @@
         "Metrics": "Metrics"
     },
     "animatedThumbnail": {
-        "CreateAnimatedThumbnail": "Create animated thumbnail"
+        "CreateAnimatedThumbnail": "Create animated thumbnail",
+        "Width":  "Width",
+        "Height": "Height",
+        "Start": "Start",
+        "End": "End",
+        "Delay": "Delay",
+        "Quality": "Quality",
+        "Size": "Size",
+        "OfFrames": "of Frames",
+        "Frame": "Frame",
+        "UseThis": "Use this",
+        "ResultGIF": "Result GIF"
     }
 }
