@@ -93,7 +93,14 @@ function Streams_stream_post($params = array())
 		$icon = $req['icon'];
 		unset($req['icon']);
 	}
-	
+
+	// animated thumbnail
+	$animatedThumbnail = null;
+	if (!empty($req['animatedThumbnail'])) {
+		$animatedThumbnail = $req['animatedThumbnail'];
+		unset($req['animatedThumbnail']);
+	}
+
 	// Check if the user owns the stream
 	if ($user->id === $publisherId) {
 		$asOwner = true;
@@ -174,7 +181,26 @@ function Streams_stream_post($params = array())
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
 	}
-	
+
+	if ($animatedThumbnail) {
+		$animatedThumbnailData = base64_decode(chunk_split(substr($animatedThumbnail, strpos($animatedThumbnail, ',')+1)));
+		$animatedThumbnailDir = $stream->iconDirectory();
+		if (!is_dir($animatedThumbnailDir) && !@mkdir($animatedThumbnailDir, 0777, true)) {
+			throw new Q_Exception_FilePermissions(array(
+				'action' => 'create',
+				'filename' => $animatedThumbnailDir,
+				'recommendation' => ' Please set your files directory to be writable.'
+			));
+		}
+		$animatedThumbnailPath = $animatedThumbnailDir.DS."converted.gif";
+		file_put_contents($animatedThumbnailPath, $animatedThumbnailData);
+		$animatedThumbnailUrl = str_replace('/', DS, $animatedThumbnailPath);
+		$animatedThumbnailUrl = str_replace(APP_FILES_DIR.DS.Q::app(), '{{baseUrl}}/Q', $animatedThumbnailUrl);
+		$animatedThumbnailUrl = str_replace('\\', '/', $animatedThumbnailUrl);
+		$stream->icon = $animatedThumbnailUrl;
+		$stream->save();
+	}
+
 	// Hold on to any file that was posted
 	$file = null;
 	if (!empty($req['file']) and is_array($req['file'])) {
