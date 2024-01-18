@@ -50,7 +50,7 @@
 			var tool = this;
 			const byteToKBScale = 0.0009765625;
 			const scale = window.devicePixelRatio;
-			const videoObj = $("video", element)[0];
+			tool.videoObj = $("video", element)[0];
 			const $settings = $(".Streams_video_animatedThumbnail_settings", element);
 			const $width = $("input[name=width]", $settings);
 			const $height = $("input[name=height]", $settings);
@@ -87,7 +87,7 @@
 				_CANVAS.getContext('2d', getContextSettings).imageSmoothingEnabled = isEnabled;
 			}
 
-			function scaleCanvas(_CANVAS, videoObj, vidHeight, vidWidth, scale) {
+			function scaleCanvas(_CANVAS, vidHeight, vidWidth, scale) {
 				_CANVAS['style']['height'] = `${vidHeight}px`;
 				_CANVAS['style']['width'] = `${vidWidth}px`;
 
@@ -101,48 +101,21 @@
 				_CANVAS.getContext('2d', getContextSettings).scale(scale, scale);
 			}
 			var _canPlayHandler = function () {
-				let exactVideoDuration=videoObj.duration;
-
-				let vidHeight=videoObj.videoHeight;
-				let vidWidth=videoObj.videoWidth;
-
-				var startTime=0;
-				var frameIndex=0;
-				var FPS = 0;
-
-				var _step = () => {
-					if (FPS > 0) {
-						videoObj.removeEventListener('canplay', _canPlayHandler);
-						videoObj.removeEventListener('play', _step);
-						videoObj.pause();
-						videoObj.currentTime = 0;
-						const ratio =  vidWidth > vidHeight ? vidWidth/vidHeight : vidHeight/vidWidth;
-						$width.on('input', function () {
-							$height.val(Math.round($(this).val() / ratio));
-						}).val(vidWidth);
-						$height.on('input', function () {
-							$width.val(Math.round($(this).val() * ratio));
-						}).val(vidHeight);
-						$fps.val(FPS);
-						$end.val(parseInt(exactVideoDuration));
-						$settings.show();
-						return;
-					}
-
-					frameIndex++;
-					if (frameIndex === 1) {
-						startTime = Date.now();
-					} else if (frameIndex === 50) {
-						var ms_elapsed = (Date.now()) - startTime;
-						FPS=(frameIndex / ms_elapsed)*1000.0;
-					}
-
-					videoObj.requestVideoFrameCallback(_step);
-				}
-				videoObj.addEventListener('play', _step, false);
-				videoObj.play();
+				const exactVideoDuration = tool.videoObj.duration;
+				const vidHeight = tool.videoObj.videoHeight;
+				const vidWidth = tool.videoObj.videoWidth;
+				const ratio =  vidWidth > vidHeight ? vidWidth/vidHeight : vidHeight/vidWidth;
+				$width.on('input', function () {
+					$height.val(Math.round($(this).val() / ratio));
+				}).val(vidWidth);
+				$height.on('input', function () {
+					$width.val(Math.round($(this).val() * ratio));
+				}).val(vidHeight);
+				$end.val(parseInt(exactVideoDuration));
+				$settings.show();
+				tool.videoObj.removeEventListener('canplay', _canPlayHandler);
 			};
-			videoObj.addEventListener('canplay', _canPlayHandler);
+			tool.videoObj.addEventListener('canplay', _canPlayHandler);
 
 			$("button[name=start]", element).on(Q.Pointer.fastclick, function () {
 				const $startButton = $(this);
@@ -159,25 +132,28 @@
 				var frames = [];
 
 				let _CANVAS = document.createElement('canvas');
-				scaleCanvas(_CANVAS, videoObj, height, width, scale);
+				scaleCanvas(_CANVAS, height, width, scale);
 
 				// Sets frame rate in frames per second
 				var frameIndex=0;
 
 				var _step = function () {
-					_CANVAS.getContext('2d', getContextSettings).drawImage(videoObj, 0, 0, width, height);
+					_CANVAS.getContext('2d', getContextSettings).drawImage(tool.videoObj, 0, 0, width, height);
 					frames.push(_CANVAS.getContext('2d', getContextSettings).getImageData(0, 0, width, height));
 					frameIndex++;
-					setTimeout(() => videoObj.requestVideoFrameCallback(_step), parseInt(1000/FPS));
-					if (videoObj.currentTime >= end) {
-						videoObj.pause();
-						videoObj.currentTime = 0;
+					setTimeout(() => tool.videoObj.requestVideoFrameCallback(_step), parseInt(1000/FPS));
+					if (tool.videoObj.currentTime >= end) {
+						tool.videoObj.pause();
+						tool.videoObj.currentTime = 0;
 					}
 				};
 				function _playHandler () {
-					videoObj.requestVideoFrameCallback(_step);
+					tool.videoObj.requestVideoFrameCallback(_step);
 				}
 				function _endedHandler () {
+					if (tool.stop) {
+						return;
+					}
 					var encoder = new GIFEncoder(width, height);
 					encoder.setRepeat(0); // 0 for repeat, -1 for no-repeat
 					encoder.setDelay(delay);  // frame delay in ms // 500
@@ -202,28 +178,33 @@
 					$(".frameSize span:last-child", $result).text(height);
 					$result.show();
 					$startButton.removeClass("Q_disabled");
-					videoObj.removeEventListener('play', _playHandler);
-					videoObj.removeEventListener('pause', _endedHandler);
+					tool.videoObj.removeEventListener('play', _playHandler);
+					tool.videoObj.removeEventListener('pause', _endedHandler);
 				}
-				videoObj.addEventListener('play', _playHandler, false);
-				videoObj.addEventListener('pause', _endedHandler, false);
+				tool.videoObj.addEventListener('play', _playHandler, false);
+				tool.videoObj.addEventListener('pause', _endedHandler, false);
 
-				videoObj.currentTime = start;
-				videoObj.play();
+				tool.videoObj.currentTime = start;
+				tool.videoObj.play();
 			});
 			$("button[name=useThis]", element).on(Q.Pointer.fastclick, function () {
 				Q.handle(tool.state.onReady, tool, [$("img.animatedThumbnail", element)]);
 				Q.Dialogs.close(element);
 			});
+		}, Q: {
+			beforeRemove: function () {
+				this.videoObj.remove();
+				this.stop = true;
+			}
 		}
 	});
 
 	Q.Template.set("Streams/video/animatedThumbnail",
-`<video src="{{videoUrl}}" preload="auto" playsinline="playsinline" muted></video>
+`<video src="{{videoUrl}}" preload="auto" playsinline="playsinline" muted crossorigin="anonymous"></video>
 	<table class="Streams_video_animatedThumbnail_settings">
 		<tr><td>{{animatedThumbnail.Width}} <i>(px)</i>:</td><td><input name="width"></td><td>{{animatedThumbnail.Height}} <i>(px)</i>:</td><td><input name="height"></td></tr>
 		<tr><td>{{animatedThumbnail.Start}} <i>(sec)</i>:</td><td><input name="start" value="0"></td><td>{{animatedThumbnail.End}} <i>(sec)</i>:</td><td><input name="end"></td></tr>
-		<tr><td>FPS:</td><td><input name="fps"></td><td>{{animatedThumbnail.Delay}} <i>(ms)</i>:</td><td><input name="delay" value="0"></td></tr>
+		<tr><td>FPS:</td><td><input name="fps" value="10"></td><td>{{animatedThumbnail.Delay}} <i>(ms)</i>:</td><td><input name="delay" value="0"></td></tr>
 		<tr><td>{{animatedThumbnail.Quality}} <i>(1-256)</i>:</td><td><input name="quality" value="1"></td></tr>
 		<tr><td colspan="4"><button name="start">{{animatedThumbnail.Start}}</button></td></tr>
 	</table>

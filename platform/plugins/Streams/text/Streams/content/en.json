@@ -500,6 +500,7 @@
         "OfFrames": "of Frames",
         "Frame": "Frame",
         "UseThis": "Use this",
-        "ResultGIF": "Result GIF"
+        "ResultGIF": "Result GIF",
+        "VideoElementNotFound": "Video element not found"
     }
 }

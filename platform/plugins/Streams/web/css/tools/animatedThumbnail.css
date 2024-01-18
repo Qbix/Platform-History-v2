@@ -9,6 +9,7 @@
 .Streams_video_animatedThumbnail .Q_dialog_content video {
     margin: 0 auto 5px;
     display: block;
+    width: 100%;
 }
 .Streams_video_animatedThumbnail .Q_dialog_content .Streams_video_animatedThumbnail_result {
     display: none;
@@ -18,7 +19,8 @@
     display: block;
     margin: 0 auto;
 }
-.Streams_video_animatedThumbnail .Q_dialog_content .Streams_video_animatedThumbnail_settings {
+.Streams_video_animatedThumbnail .Q_dialog_content .Streams_video_animatedThumbnail_settings,
+.Streams_video_animatedThumbnail .Q_dialog_content .Streams_video_animatedThumbnail_process {
     display: none;
 }
 .Streams_video_animatedThumbnail .Q_dialog_content button {
@@ -37,9 +39,6 @@
 .Streams_video_animatedThumbnail .Q_dialog_content ul {
     margin: 0 auto;
     list-style: none;
-}
-.Streams_video_animatedThumbnail .Q_dialog_content .Streams_video_animatedThumbnail_process {
-    display: none;
 }
 .Streams_video_animatedThumbnail .Q_dialog_content input {
     width: 40px;
