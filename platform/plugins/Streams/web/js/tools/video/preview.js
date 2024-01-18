@@ -101,6 +101,8 @@
 				var inplace = null;
 				var icon = null;
 
+				stream.retain(tool);
+
 				$toolElement.on(Q.Pointer.fastclick, function () {
 					// if vimeo check status
 					if (stream.getAttribute("provider") === "vimeo" && !stream.getAttribute("available")) {
@@ -182,7 +184,7 @@
 					icon = stream.iconUrl(40);
 					iconCustom = false;
 				}
-				if (icon.match(/converted\.gif/)) {
+				if (icon.match(/animated/)) {
 					iconCustom = false;
 				}
 
@@ -219,8 +221,9 @@
 						Q.alert(err);
 					};
 
-					var action = state.mainDialog.attr('data-action');
-					var $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
+					const action = state.mainDialog.attr('data-action');
+					const $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
+					const $animatedThumbnail = $("img.animatedThumbnail", state.mainDialog);
 					if (!$currentContent.length) {
 						return _error("No action selected");
 					}
@@ -305,7 +308,6 @@
 							}
 						});
 
-						var $animatedThumbnail = $("img.animatedThumbnail", state.mainDialog);
 						if ($animatedThumbnail.length) {
 							params.animatedThumbnail = $animatedThumbnail.prop("src");
 						}
@@ -371,22 +373,31 @@
 						} else {
 							params.fileReader(callback);
 						}
-
 					} else if (action === "edit") {
 						// edit stream attributes
 						if (!Q.Streams.isStream(tool.stream)) {
 							return _error("Stream not found");
 						}
 
-						tool.stream.pendingFields.title = title;
-						tool.stream.pendingFields.content = content;
-						tool.stream.setAttribute("clipStart", clipStart);
-						tool.stream.setAttribute("clipEnd", clipEnd);
-						tool.stream.save({
-							onSave: function () {
-								Q.handle(callback, tool);
-								tool.closeComposer();
+						var fields = {
+							publisherId: previewState.publisherId,
+							streamName: previewState.streamName,
+							title, content,
+							attributes: {
+								clipStart, clipEnd
 							}
+						};
+
+						if ($animatedThumbnail.length) {
+							fields.animatedThumbnail = $animatedThumbnail.prop("src");
+						}
+
+						Q.req("Streams/stream", [], function () {
+							Q.handle(callback, tool);
+							tool.closeComposer();
+						}, {
+							method: "put",
+							fields
 						});
 					} else {
 						_error("Incorrect action " + action);
@@ -644,6 +655,9 @@
 						$("button[name=animatedThumbnail]", state.mainDialog).on(Q.Pointer.fastclick, function () {
 							var $this = $(this);
 							var $videoElement = $this.closest(".Q_tabbing_item").find("video");
+							if (!$videoElement.length) {
+								return Q.alert(tool.text.animatedThumbnail.VideoElementNotFound);
+							}
 							$videoElement.tool("Streams/video/animatedThumbnail").activate(function () {
 								this.state.onReady.set(function ($img) {
 									$this.siblings("img.animatedThumbnail").remove();
