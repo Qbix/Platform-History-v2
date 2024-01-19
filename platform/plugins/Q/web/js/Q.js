@@ -14654,9 +14654,9 @@ Q.Dialogs = {
 			}
 			if (content) {
 				if (typeof o.title === 'string') {
-					$(contentElement).html(o.content);
+					$(contentElement).html(content);
 				} else {
-					$(contentElement).empty().append(o.content);
+					$(contentElement).empty().append(content);
 				}
 			}
 			dialog.style.display = 'none';
