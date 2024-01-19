@@ -1193,9 +1193,12 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachTool(name, callback, key) {
  * @return {Element|null}
  */
 Q.elementById = function (element) {
-	return element.isConnected 
+	if (!element) {
+		return null;
+	}
+	return element.isConnected
 		? element 
-		: (element.id ? document.getElementById(element.id) : null);
+		: (element.id ? document.getElementById(element.id) : null) || null;
 };
 
 if (!Elp.getElementsByClassName) {

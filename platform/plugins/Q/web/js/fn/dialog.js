@@ -502,6 +502,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					} else {
 						$this.hide();
 					}
+					dialogs.pop();
 
 					// set z-index of mask less than visible dialog element
 					var $lastDialog = $(dialogs[dialogs.length-1]);
