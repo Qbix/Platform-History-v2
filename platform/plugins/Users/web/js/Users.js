@@ -1963,7 +1963,9 @@
 								}
 
 								var payload = response.slots.payload.payload;
-								var querystring = new URLSearchParams(payload).toString();
+								var querystring = new URLSearchParams(Q.extend({}, payload, {
+									'Q.Users.environment': 'web3'
+								})).toString();
 								var u = new URL(location);
 								var url = u.protocol + "//" + u.host + u.pathname + '?' + querystring;
 								var urlParams = {

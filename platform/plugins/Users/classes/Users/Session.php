@@ -59,7 +59,6 @@ class Users_Session extends Base_Users_Session
 		$payload['Q.Users.newSessionId'] = $newSessionId;
 		$payload['Q.Users.appId'] = $appId;
 		$payload['Q.Users.platform'] = $req['platform'];
-		$payload['Q.environment'] = Q_Config::get('Q', 'environment', '');
 		$payload['Q.timestamp'] = time() + (int)Q_Config::get('Users', 'session', 'redirectSecondsMax', 300);
 		$payload = Q_Utils::sign($payload, 'Q.Users.signature');
 		return $payload;
@@ -79,7 +78,7 @@ class Users_Session extends Base_Users_Session
 	static function createSessionFromPayload($payload)
 	{
 		$payload = Q::ifset($payload, $_REQUEST);
-		$fields = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform', 'Q.environment');
+		$fields = array('Q.Users.appId', 'Q.Users.newSessionId', 'Q.Users.signature', 'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.platform');
 		$payload = Q_Request::fromUnderscores($fields, $payload);
 		Q_Valid::requireFields(array('Q.Users.newSessionId'), $payload, true);
 		$req = Q::take($payload, array(
@@ -173,13 +172,19 @@ class Users_Session extends Base_Users_Session
 
 		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
 		$prefixType = $loggedInUserId ? 'authenticated' : '';
+		$sessionId = $sessionId ?: Q_Session::generateId(null, $prefixType);
 
 		$us = new Users_Session();
 		$us->id = $id;
 		$us->retrieve(null, null, array('lock' => 'FOR UPDATE'));
 		$us2 = new Users_Session();
+		$us2->id = $sessionId;
+		if ($us2->retrieve()) {
+			return $us2->id;
+		}
 		if ($us->wasRetrieved()) {
 			$us2->copyFromRow($us, null, false, true);
+			$us2->id = $sessionId;
 			$us2->wasRetrieved(false);
 			$us2->insertedTime = new Db_Expression('CURRENT_TIMESTAMP');
 		} else {
@@ -187,7 +192,6 @@ class Users_Session extends Base_Users_Session
 		}
 		$us2->content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
 		$us2->php = session_encode();
-		$us2->id = $sessionId ? $sessionId : Q_Session::generateId(null, $prefixType);
 		$us2->duration = $seconds;
 		$us2->timeout = 0;
 		foreach ($sessionFields as $k => $v) {
