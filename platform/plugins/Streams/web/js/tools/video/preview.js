@@ -101,6 +101,8 @@
 				var inplace = null;
 				var icon = null;
 
+				stream.retain(tool);
+
 				$toolElement.on(Q.Pointer.fastclick, function () {
 					// if vimeo check status
 					if (stream.getAttribute("provider") === "vimeo" && !stream.getAttribute("available")) {
@@ -182,7 +184,7 @@
 					icon = stream.iconUrl(40);
 					iconCustom = false;
 				}
-				if (icon.match(/converted\.gif/)) {
+				if (icon.match(/animated/)) {
 					iconCustom = false;
 				}
 
@@ -219,8 +221,9 @@
 						Q.alert(err);
 					};
 
-					var action = state.mainDialog.attr('data-action');
-					var $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
+					const action = state.mainDialog.attr('data-action');
+					const $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
+					const $animatedThumbnail = $("img.animatedThumbnail", state.mainDialog);
 					if (!$currentContent.length) {
 						return _error("No action selected");
 					}
@@ -304,6 +307,11 @@
 								clipEnd: clipEnd
 							}
 						});
+
+						if ($animatedThumbnail.length) {
+							params.animatedThumbnail = $animatedThumbnail.prop("src");
+						}
+
 						if (previewState.publisherId && previewState.streamName) { // if edit existent stream
 							params.publisherId = previewState.publisherId;
 							params.streamName = previewState.streamName;
@@ -365,22 +373,31 @@
 						} else {
 							params.fileReader(callback);
 						}
-
 					} else if (action === "edit") {
 						// edit stream attributes
 						if (!Q.Streams.isStream(tool.stream)) {
 							return _error("Stream not found");
 						}
 
-						tool.stream.pendingFields.title = title;
-						tool.stream.pendingFields.content = content;
-						tool.stream.setAttribute("clipStart", clipStart);
-						tool.stream.setAttribute("clipEnd", clipEnd);
-						tool.stream.save({
-							onSave: function () {
-								Q.handle(callback, tool);
-								tool.closeComposer();
+						var fields = {
+							publisherId: previewState.publisherId,
+							streamName: previewState.streamName,
+							title, content,
+							attributes: {
+								clipStart, clipEnd
 							}
+						};
+
+						if ($animatedThumbnail.length) {
+							fields.animatedThumbnail = $animatedThumbnail.prop("src");
+						}
+
+						Q.req("Streams/stream", [], function () {
+							Q.handle(callback, tool);
+							tool.closeComposer();
+						}, {
+							method: "put",
+							fields
 						});
 					} else {
 						_error("Incorrect action " + action);
@@ -416,6 +433,8 @@
 						if (tool.stream) {
 							var $videoElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_preview", state.mainDialog);
 							var $clipElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_clip", state.mainDialog);
+
+							$(".Q_tabbing_container [data-content=edit] button[name=animatedThumbnail]", state.mainDialog).show()
 
 							$videoElement.tool("Q/video", {
 								url: tool.stream.videoUrl() || tool.stream.fileUrl(),
@@ -532,10 +551,11 @@
 							if (!this.files.length) {
 								return;
 							}
-							var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_preview", state.mainDialog);
-							var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_clip", state.mainDialog);
+							var $videoElement = $(".Q_tabbing_container [data-content=upload] .Streams_video_composer_preview", state.mainDialog);
+							var $clipElement = $(".Q_tabbing_container [data-content=upload] .Streams_video_composer_clip", state.mainDialog);
 							var url = URL.createObjectURL(this.files[0]);
 							var toolPreview = Q.Tool.from($videoElement, "Q/video");
+							$(".Q_tabbing_container [data-content=upload] button[name=animatedThumbnail]", state.mainDialog).show()
 
 							// check file size
 							/*if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
@@ -632,6 +652,20 @@
 							});
 						});
 
+						$("button[name=animatedThumbnail]", state.mainDialog).on(Q.Pointer.fastclick, function () {
+							var $this = $(this);
+							var $videoElement = $this.closest(".Q_tabbing_item").find("video");
+							if (!$videoElement.length) {
+								return Q.alert(tool.text.animatedThumbnail.VideoElementNotFound);
+							}
+							$videoElement.tool("Streams/video/animatedThumbnail").activate(function () {
+								this.state.onReady.set(function ($img) {
+									$this.siblings("img.animatedThumbnail").remove();
+									$this.before($img);
+								}, tool);
+							});
+						});
+
 						Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", state.mainDialog)[0]);
 					}
 				});
@@ -666,36 +700,38 @@
 	);
 
 	Q.Template.set('Streams/video/composer',
-		'<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>'
-		+ '  <div class="Q_tabbing_tabs">'
-		+ '  	<div data-name="edit" class="Q_tabbing_tab">{{video.edit}}</div>'
-		+ '  	<div data-name="upload" class="Q_tabbing_tab">{{video.upload}}</div>'
-		+ '  	<div data-name="link" class="Q_tabbing_tab">{{video.link}}</div>'
-		+ '  </div>'
-		+ '  <div class="Q_tabbing_container">'
-		+ '	 	<div class="Q_tabbing_item" data-content="edit">'
-		+ '			<input name="title" value="{{title}}">'
-		+ '			<textarea name="content">{{content}}</textarea>'
-		+ '			<div class="Streams_video_composer_preview"></div>'
-		+ '			<div class="Streams_video_composer_clip"></div>'
-		+ '  	</div>'
-		+ '  	<div class="Q_tabbing_item" data-content="upload">'
-		+ '	   		<input type="file" accept="video/*" class="Streams_video_file" />'
-		+ '			<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>'
-		+ '			<div class="Streams_video_composer_preview"></div>'
-		+ '			<div class="Streams_video_composer_clip"></div>'
-		+ '		</div>'
-		+ '  	<div class="Q_tabbing_item" data-content="link">'
-		+ '	   		<label>'
-		+ '				<input name="url" placeholder="{{video.setUrl}}" type="url">'
-		+ '				<button name="setClip" type="button" class="Q_button">{{video.setClip}}</button>'
-		+ '			</label>'
-		+ '			<div class="Streams_video_composer_preview"></div>'
-		+ '			<div class="Streams_video_composer_clip"></div>'
-		+ '		</div>'
-		+ '  </div>'
-		+ '  <div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{video.save}}</button><button name="reset" type="reset" class="Q_button">{{video.reset}}</button></div>'
-		+ '</form></div>',
+		`<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>
+		  <div class="Q_tabbing_tabs">
+		  	<div data-name="edit" class="Q_tabbing_tab">{{video.edit}}</div>
+		  	<div data-name="upload" class="Q_tabbing_tab">{{video.upload}}</div>
+		  	<div data-name="link" class="Q_tabbing_tab">{{video.link}}</div>
+		  </div>
+		  <div class="Q_tabbing_container">
+			 	<div class="Q_tabbing_item" data-content="edit">
+					<input name="title" value="{{title}}">
+					<textarea name="content">{{content}}</textarea>
+					<div class="Streams_video_composer_preview"></div>
+					<div class="Streams_video_composer_clip"></div>
+					<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
+		  	</div>
+		  	<div class="Q_tabbing_item" data-content="upload">
+			   		<input type="file" accept="video/*" class="Streams_video_file" />
+					<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>
+					<div class="Streams_video_composer_preview"></div>
+					<div class="Streams_video_composer_clip"></div>
+					<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
+				</div>
+		  	<div class="Q_tabbing_item" data-content="link">
+			   		<label>
+						<input name="url" placeholder="{{video.setUrl}}" type="url">
+						<button name="setClip" type="button" class="Q_button">{{video.setClip}}</button>
+					</label>
+					<div class="Streams_video_composer_preview"></div>
+					<div class="Streams_video_composer_clip"></div>
+				</div>
+		  </div>
+		  <div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{video.save}}</button><button name="reset" type="reset" class="Q_button">{{video.reset}}</button></div>
+		</form></div>`,
 		{text: ['Streams/content']}
 	);
 

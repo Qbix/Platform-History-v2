@@ -52,6 +52,7 @@
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
 			"i/:token": {"module": "Streams", "action": "invited"},
 			"Streams/participating": {"module": "Streams", "action": "participating"},
+			"Streams/video": {"module": "Streams", "action": "video"},
 			"Streams/cloudConvertWebhook": {"module": "Streams", "action": "cloudConvertWebhook"},
 			"Streams/discourse-sso": {"module": "Streams", "action": "sso-discourse"},
 			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},

@@ -133,6 +133,12 @@ function Streams_stream_put($params) {
 		unset($req['attributes']);
 	}
 
+	// special handler for animated thumbnail
+	if (!empty($req['animatedThumbnail'])) {
+		$stream->saveAnimatedThumbnail($req['animatedThumbnail']);
+		unset($req['animatedThumbnail']);
+	}
+
 	// set other fields (if defined)
 	if (!empty($fieldNames)) {
 		foreach ($fieldNames as $f) {

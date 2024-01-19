@@ -93,7 +93,14 @@ function Streams_stream_post($params = array())
 		$icon = $req['icon'];
 		unset($req['icon']);
 	}
-	
+
+	// animated thumbnail
+	$animatedThumbnail = null;
+	if (!empty($req['animatedThumbnail'])) {
+		$animatedThumbnail = $req['animatedThumbnail'];
+		unset($req['animatedThumbnail']);
+	}
+
 	// Check if the user owns the stream
 	if ($user->id === $publisherId) {
 		$asOwner = true;
@@ -174,7 +181,11 @@ function Streams_stream_post($params = array())
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
 	}
-	
+
+	if ($animatedThumbnail) {
+		$stream->saveAnimatedThumbnail($animatedThumbnail);
+	}
+
 	// Hold on to any file that was posted
 	$file = null;
 	if (!empty($req['file']) and is_array($req['file'])) {
