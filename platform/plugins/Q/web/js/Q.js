@@ -9820,7 +9820,7 @@ Q.currentScript = function (stackLevels) {
 		}
 		src = lines[index];
 	}
-	var parts = src.match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*))(?!:)/);
+	var parts = src.match(/((http[s]?:\/\/.+\/|file:\/\/\/.+\/)([^\/]+\.js.*))(?!:)/);
 	return {
 		src: parts[1].split('?')[0],
 		srcWithQuerystring: parts[1],
@@ -11714,13 +11714,18 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 }, false, 2);
 
 /**
- * Methods for treating data
+ * Methods for working with data
  * @class Q.Data
  */
 Q.Data = Q.Method.define({
 	digest: new Q.Method(),
 	compress: new Q.Method(),
 	decompress: new Q.Method(),
+	sign: new Q.Method(),
+	verify: new Q.Method(),
+	all: function (a, b) {
+		return a && b;
+	},
 	toBase64: function (bytes) {
 		return btoa(String.fromCharCode.apply(String, new Uint8Array(bytes)));
 	},
