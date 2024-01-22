@@ -32,3 +32,12 @@
 .Q_gallery_tool .Q_gallery_item .Q_video_tool .vjs-paused .vjs-big-play-button, .Q_video_tool .vjs-has-started .vjs-big-play-button {
     display: none;
 }
+.Q_gallery_tool .Q_gallery_item button[name=volume] {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+.Q_gallery_tool .Q_gallery_item .Q_gallery_blob {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+}
