@@ -24422,7 +24422,7 @@
             });
             Object.keys(TECH_EVENTS_QUEUE).forEach(function (event) {
                 _this3.on(_this3.tech_, event, function (eventObj) {
-                    if (_this3.tech_.playbackRate() === 0 && _this3.tech_.seeking()) {
+                    if (_this3.tech_.playbackRate && _this3.tech_.playbackRate() === 0 && _this3.tech_.seeking()) {
                         _this3.queuedCallbacks_.push({
                             callback: _this3["handleTech" + TECH_EVENTS_QUEUE[event] + "_"].bind(_this3),
                             event: eventObj

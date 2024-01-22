@@ -1613,14 +1613,10 @@
                             title: false
                         };
 
-                        if (this.options_.autoplay) {
-                            vimeoOptions.autoplay = true;
-                        }
+                        vimeoOptions.autoplay = this.options_.autoplay;
                         vimeoOptions.muted = this.options_.muted;
-                        if (this.options_.muted) {
-                            vimeoOptions.volume=0;
-                        }
                         vimeoOptions.controls = this.options_.controls;
+                        vimeoOptions.loop = this.options_.loop;
                         if (this.options_.height) {
                             vimeoOptions.height = this.options_.height;
                         }
@@ -1632,9 +1628,6 @@
                         }
                         if (this.options_.maxwidth) {
                             vimeoOptions.maxwidth = this.options_.maxwidth;
-                        }
-                        if (this.options_.loop) {
-                            vimeoOptions.loop = this.options_.loop;
                         }
 
                         this._player = new _player2.default(this.el(), vimeoOptions);
