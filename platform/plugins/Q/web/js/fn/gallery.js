@@ -303,15 +303,22 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 					$(".Q_gallery_video", $videoItem).tool("Q/video", {
 						url: item.src,
 						controls: false,
-						autoplay: true,
-						muted: true,
-						playsinline: false
+						loop: false,
+						muted: true
 					}).activate(function () {
+						if (index === 0) {
+							var firstPlayer = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
+							var playTimerId = setInterval(function () {
+								firstPlayer.play()
+							}, 500);
+							firstPlayer.state.onPlay.set(function() {
+								clearInterval(playTimerId);
+							}, "Q/gallery");
+						}
+
 						this.state.onEnded.set(function () {
 							$videoItem.appendTo($this);
-							var $firstVideoElement = $this.find(".Q_gallery_item:first-child");
-							var videoTool = Q.Tool.from($(".Q_video_tool", $firstVideoElement)[0], "Q/video");
-							videoTool.play();
+							Q.Tool.from($(".Q_gallery_item:first-child .Q_video_tool", $this)[0], "Q/video").play();
 						}, "Q/gallery");
 					});
 				});
