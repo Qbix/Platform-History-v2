@@ -1,0 +1,31 @@
+.Q_gallery_tool .Q_gallery_caption {
+    position: absolute;
+    z-index: 201;
+    text-align: center;
+}
+.Q_gallery_tool .Q_gallery_caption_centered {
+    left: 50%;
+    transform: translate(-50%, 0);
+    white-space: nowrap;
+}
+.Q_gallery_tool .Q_lazy_load,
+.Q_gallery_tool .Q_lazy_loaded {
+    opacity: 1;
+    transition: none;
+}
+.Q_gallery_tool .Q_gallery_item {
+    display: none;
+    height: 100%;
+}
+.Q_gallery_tool .Q_gallery_item:first-of-type {
+    display: block;
+}
+.Q_gallery_tool .Q_gallery_item .Q_video_tool {
+    height: 100%;
+    opacity: .3;
+}
+.Q_gallery_tool .Q_gallery_item .Q_gallery_caption {
+    position: absolute;
+    top: 60%;
+    text-align: left;
+}
