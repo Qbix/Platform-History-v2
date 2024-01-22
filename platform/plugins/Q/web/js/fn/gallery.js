@@ -40,7 +40,8 @@
  *     @param {Number} [options.interval.to.top] top number for "to" object
  *     @param {Number} [options.interval.to.width] width number for "to" object
  *     @param {Number} [options.interval.to.height] height number for "to" object
- * @param {Boolean} [options.autoplay] autoplay for  whether to start playing the gallery when it loads.
+ * @param {Array} [options.videos] array of videos (transition and interval options are useless with videos)
+ * @param {Boolean} [options.autoplay] autoplay for whether to start playing the gallery when it loads.
  * @default true
  * @param {Boolean} [options.transitionToFirst] transitionToFirst for whether to use a transition to show the first image.
  * @default false
@@ -49,9 +50,9 @@
  * @param {Q.Event} [options.onLoad] onLoad event fires when an image loads, also passes all loaded images
  * @param {Q.Event} [options.onTransition] onTransition event fires when an image loads, also passes all loaded images
  */
-Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
-	
-	o = o || {};
+Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
+	state = state || {};
+	Q.addStylesheet("{{Q}}/css/tools/gallery.css");
 	var $this = this, i, imgs=[], caps=[], current, tm, gallery;
 	var animTransition, animInterval, animPreviousInterval;
 	var intervals = {
@@ -59,11 +60,11 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 
 		},
 		kenburns: function (x, y, params) {
-			var image = o.images[params.current];
+			var image = state.images[params.current];
 			var img = imgs[params.current];
 			var interval = image.interval || {};
-			var from = Q.extend({}, 2, o.interval.from, 2, interval.from);
-			var to = Q.extend({}, 2, o.interval.to, 2, interval.to);
+			var from = Q.extend({}, 2, state.interval.from, 2, interval.from);
+			var to = Q.extend({}, 2, state.interval.to, 2, interval.to);
 			var z = y;
 			var widthFactor = from.width + z*(to.width - from.width);
 			var heightFactor = from.height + z*(to.height - from.height);
@@ -141,7 +142,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	if (gallery = $this.data('gallery')) {
 		gallery.pause();
 		$this.empty();
-		if (o === null) {
+		if (state === null) {
 			return false;
 		}
 	}
@@ -163,7 +164,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 			if (callback) callback(index, imgs);
 			return;
 		}
-		var image = o.images[index];
+		var image = state.images[index];
 		if (!image) {
 			image = {};
 		}
@@ -210,61 +211,23 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 		}
 		function onLoad() {
 			imgs[index] = img;
-			Q.handle(o.onLoad, $this, [$(this), imgs, o]);
+			Q.handle(state.onLoad, $this, [$(this), imgs, state]);
 			if (callback) callback(index, imgs);
 		}
 	}
 	
 	gallery = {
-		options: o,
-		onLoad: o.onLoad,
+		options: state,
+		onLoad: state.onLoad,
 		play: function () {
 			this.next(true);
 		},
 		next: function (keepGoing) {
-			var previous = current;
-			++current;
-			if (current >= o.images.length) {
-				if (!o.loop) return;
-				current = 0;
+			if (state.images.length) {
+				this.images(keepGoing);
 			}
-			loadImage(current, function () {
-				beginTransition();
-			});
-			function beginTransition() {
-				var t = Q.extend({}, 2, o.transition, 2, o.images[current].transition);
-				var transition = transitions[o.transition.type || ""];
-				Q.handle(o.onTransition, $this, [current, imgs, o]);
-				if (!o.transitionToFirst && previous === -1) {
-					transition(1, 1, { current: current, previous: previous });
-					beginInterval();
-					return;
-				}
-				// animTransition && animTransition.pause();
-				animTransition = Q.Animation.play(
-					transition,
-					t.duration,
-					t.ease,
-					{ current: current, previous: previous }
-				);
-				beginInterval();
-			}
-			function beginInterval() {
-				var transition = Q.extend({}, 2, o.transition, 2, o.images[current].transition);
-				var interval = Q.extend({}, 2, o.interval, 2, o.images[current].interval);
-				animPreviousInterval = animInterval;
-				animInterval = Q.Animation.play(
-					intervals[interval.type || ""],
-					interval.duration,
-					interval.ease,
-					{ current: current, previous: previous }
-				);
-				loadImage((current+1) % o.images.length, null); // preload next image
-				if (keepGoing) {
-					tm = setTimeout(function () {
-						gallery.next(keepGoing);
-					}, interval.duration - transition.duration);
-				}
+			if (state.videos.length) {
+				this.videos(keepGoing);
 			}
 		},
 		pause: function () {
@@ -281,10 +244,89 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 			current = -1;
 			animTransition = null;
 			animInterval = null;
+		},
+		images: function (keepGoing) {
+			var previous = current;
+			++current;
+			if (current >= state.images.length) {
+				if (!state.loop) return;
+				current = 0;
+			}
+			loadImage(current, function () {
+				beginTransition();
+			});
+			function beginTransition() {
+				var t = Q.extend({}, 2, state.transition, 2, state.images[current].transition);
+				var transition = transitions[state.transition.type || ""];
+				Q.handle(state.onTransition, $this, [current, imgs, state]);
+				if (!state.transitionToFirst && previous === -1) {
+					transition(1, 1, { current: current, previous: previous });
+					beginInterval();
+					return;
+				}
+				// animTransition && animTransition.pause();
+				animTransition = Q.Animation.play(
+					transition,
+					t.duration,
+					t.ease,
+					{ current: current, previous: previous }
+				);
+				beginInterval();
+			}
+			function beginInterval() {
+				var transition = Q.extend({}, 2, state.transition, 2, state.images[current].transition);
+				var interval = Q.extend({}, 2, state.interval, 2, state.images[current].interval);
+				animPreviousInterval = animInterval;
+				animInterval = Q.Animation.play(
+					intervals[interval.type || ""],
+					interval.duration,
+					interval.ease,
+					{ current: current, previous: previous }
+				);
+				loadImage((current+1) % state.images.length, null); // preload next image
+				if (keepGoing) {
+					tm = setTimeout(function () {
+						gallery.next(keepGoing);
+					}, interval.duration - transition.duration);
+				}
+			}
+		},
+		videos: function () {
+			Q.each(state.videos, function (index, item) {
+				Q.Template.render("Q/gallery/video", item, function (err, html) {
+					if (err) {
+						return;
+					}
+
+					var $videoItem = $(html);
+					$this.append($videoItem);
+					$(".Q_gallery_video", $videoItem).tool("Q/video", {
+						url: item.src,
+						controls: false,
+						loop: false,
+						muted: true
+					}).activate(function () {
+						if (index === 0) {
+							var firstPlayer = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
+							var playTimerId = setInterval(function () {
+								firstPlayer.play()
+							}, 500);
+							firstPlayer.state.onPlay.set(function() {
+								clearInterval(playTimerId);
+							}, "Q/gallery");
+						}
+
+						this.state.onEnded.set(function () {
+							$videoItem.appendTo($this);
+							Q.Tool.from($(".Q_gallery_item:first-child .Q_video_tool", $this)[0], "Q/video").play();
+						}, "Q/gallery");
+					});
+				});
+			});
 		}
 	};
 	
-	if (o.autoplay) {
+	if (state.autoplay) {
 		gallery.play();
 	} else {
 		gallery.next(false);
@@ -298,6 +340,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 
 {
 	images: [],
+	videos: [],
 	transition: {
 		duration: 1000,
 		ease: "smooth",
@@ -323,6 +366,13 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	}
 }
 
+);
+
+Q.Template.set("Q/gallery/video",
+	`<div class="Q_gallery_item">
+		<div class="Q_gallery_video"></div>
+		<div class="Q_gallery_caption"><h2>{{title}}</h2><p>{{description}}</p></div>
+	</div>`
 );
 
 })(Q, Q.jQuery, window, document);

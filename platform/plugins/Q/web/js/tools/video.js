@@ -53,11 +53,14 @@ Q.Tool.define("Q/video", function (options) {
 	}
 
 	// extend videojsOptions with global options
-	state.videojsOptions = Q.extend(state.videojsOptions, {
+	state.videojsOptions = Q.extend({
 		autoplay: state.autoplay,
 		loop: state.loop,
-		muted: state.muted
-	});
+		muted: state.muted,
+		controls: state.controls,
+		ytControls: state.controls,
+		playsinline: state.playsinline
+	}, state.videojsOptions);
 
 	tool.adapters.mp4 = {
 		init: function () {
@@ -104,10 +107,7 @@ Q.Tool.define("Q/video", function (options) {
 						src: state.url,
 						type: 'video/youtube'
 					}],
-					youtube: {
-						ytControls: 0,
-						playsinline: 1
-					}
+					youtube: state.videojsOptions
 				};
 				tool.initVideojsPlayer(options);
 			});
@@ -122,9 +122,7 @@ Q.Tool.define("Q/video", function (options) {
 						src: state.url,
 						type: 'video/vimeo'
 					}],
-					vimeo: {
-						ytControls: 2
-					}
+					vimeo: state.videojsOptions
 				};
 				tool.initVideojsPlayer(options);
 			});
@@ -159,6 +157,8 @@ Q.Tool.define("Q/video", function (options) {
 					container: tool.element,
 					start: state.start || 0,
 					loop: state.loop,
+					muted: state.muted,
+					controls: state.controls,
 					autoplay: state.autoplay,
 					width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
 					height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
@@ -216,7 +216,8 @@ Q.Tool.define("Q/video", function (options) {
 			var options = {
 				autoplay: state.autoplay,
 				loop: state.loop,
-				muted: state.muted
+				muted: state.muted,
+				controls: state.controls,
 				//channel: "<channel ID>",
 				//video: "782042263",
 				//collection: "<collection ID>"
@@ -355,6 +356,8 @@ Q.Tool.define("Q/video", function (options) {
 	autoplay: false,
 	loop: false,
 	muted: false,
+	controls: true,
+	playsinline: true,
 	throttle: 10,
 	currentPosition: 0,
 	className: null,
@@ -397,7 +400,6 @@ Q.Tool.define("Q/video", function (options) {
 		useFaces: false
 	},
 	videojsOptions: {
-		controls: true,
 		inactivityTimeout: 2000,
 		userActive: true
 	},
@@ -597,15 +599,16 @@ Q.Tool.define("Q/video", function (options) {
 		var tool = this;
 		var state = this.state;
 		var throttle = state.throttle;
-
-		options = Q.extend(state.videojsOptions, options);
-
-		Q.Template.render('Q/video/videojs', {
+		var fields = {
 			autoplay: state.autoplay ? 'autoplay' : '',
 			loop: state.loop ? 'loop' : '',
+			controls: state.controls ? 'controls' : '',
 			poster: state.image ? 'poster="' + Q.url(state.image) + '"' : '',
+			muted: state.muted ? 'muted' : '',
+			playsinline: state.playsinline ? 'playsinline webkit-playsinline' : '',
 			timeOut: state.adsTimeOut
-		}, function (err, html) {
+		};
+		Q.Template.render('Q/video/videojs', fields, function (err, html) {
 			Q.replace(tool.element, html);
 
 			var onPlay = Q.throttle(function () {
@@ -1212,7 +1215,7 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set("Q/video/videojs",
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{{autoplay}}} {{{loop}}} {{{poster}}} playsinline webkit-playsinline /></video>' +
+	'<video preload="auto" class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{muted}} {{controls}} {{autoplay}} {{loop}} {{poster}} {{playsinline}} /></video>' +
 	'<div class="Q_video_close"></div>'
 );
 
