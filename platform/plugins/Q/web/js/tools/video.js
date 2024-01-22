@@ -58,7 +58,7 @@ Q.Tool.define("Q/video", function (options) {
 		loop: state.loop,
 		muted: state.muted,
 		controls: state.controls,
-		ytControls: state.controls,
+		ytControls: 0,
 		playsinline: state.playsinline
 	}, state.videojsOptions);
 
@@ -699,7 +699,6 @@ Q.Tool.define("Q/video", function (options) {
 					}
 
 					this.canplay = true;
-
 					Q.handle(state.onCanPlay, tool);
 				});
 

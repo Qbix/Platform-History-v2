@@ -24587,8 +24587,8 @@
         _proto.handleTechReady_ = function handleTechReady_() {
             this.triggerReady(); // Keep the same volume as before
 
-            if (this.cache_.volume && !this.tech_.options_.muted) {
-                this.techCall_('setVolume', this.cache_.volume);
+            if (this.cache_.volume) {
+                this.techCall_('setVolume', this.tech_.options_.muted ? 0 : this.cache_.volume);
             } // Look if the tech found a higher resolution poster while loading
 
 

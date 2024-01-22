@@ -321,6 +321,14 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 							Q.Tool.from($(".Q_gallery_item:first-child .Q_video_tool", $this)[0], "Q/video").play();
 						}, "Q/gallery");
 					});
+					$("button[name=volume]", $videoItem).on(Q.Pointer.fastclick, function () {
+						var videoTool = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
+						var volume = videoTool.player.muted() ? 1 : 0;
+						videoTool.player.volume(volume);
+						try {
+							videoTool.player.muted(!volume);
+						} catch (e) {}
+					});
 				});
 			});
 		}
@@ -371,7 +379,9 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 Q.Template.set("Q/gallery/video",
 	`<div class="Q_gallery_item">
 		<div class="Q_gallery_video"></div>
+		<div class="Q_gallery_blob"></div>
 		<div class="Q_gallery_caption"><h2>{{title}}</h2><p>{{description}}</p></div>
+		<button name="volume">Volume</button>
 	</div>`
 );
 
