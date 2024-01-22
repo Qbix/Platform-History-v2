@@ -29,3 +29,6 @@
     top: 60%;
     text-align: left;
 }
+.Q_gallery_tool .Q_gallery_item .Q_video_tool .vjs-paused .vjs-big-play-button, .Q_video_tool .vjs-has-started .vjs-big-play-button {
+    display: none;
+}
