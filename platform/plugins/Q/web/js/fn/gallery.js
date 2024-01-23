@@ -331,12 +331,12 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 					});
 					$(".Q_gallery_volume", $videoItem).on(Q.Pointer.fastclick, function () {
 						var videoTool = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
-						var volume = videoTool.player.muted() ? 1 : 0;
+						var volume = $(this).attr("data-type") === 'on' ? 0 : 1;
 						videoTool.player.volume(volume);
 						try {
 							videoTool.player.muted(!volume);
 						} catch (e) {}
-						$(this).attr("data-type", videoTool.player.muted() ? "on" : "off");
+						$(this).attr("data-type", volume ? "on" : "off");
 					});
 				});
 			});
