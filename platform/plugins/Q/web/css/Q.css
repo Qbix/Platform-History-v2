@@ -1,3 +1,5 @@
+@import "icons.css";
+
 :root {
 	--updated-color-from: rgba(255, 215, 0, 0.9);
 	--updated-color-to: rgba(255, 215, 0, 0.1);
