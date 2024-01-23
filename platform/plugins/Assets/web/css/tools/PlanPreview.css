@@ -1,6 +1,6 @@
 .Assets_plan_preview_tool {
 	cursor: pointer;
-	max-width: 250px;
+	max-width: 300px;
 }
 .Assets_plan_preview_tool[data-interrupted=true] {
 	opacity: .5;
@@ -12,7 +12,6 @@
 	box-shadow: 0 0 0.3em #aaa;
 	border-radius: 5px;
 	padding: 5px;
-	flex: 0 0 49%;
 }
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_icon {
 	width: 100%;
