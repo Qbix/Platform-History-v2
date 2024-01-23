@@ -1,7 +1,7 @@
 .Assets_subscription_tool {
 	display: flex;
 	flex-wrap: wrap;
-	row-gap: 5px;
+	row-gap: 10px;
 	justify-content: space-evenly;
 }
 .Q_mobile .Assets_subscription_tool {

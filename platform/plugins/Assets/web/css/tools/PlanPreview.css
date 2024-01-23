@@ -1,6 +1,6 @@
 .Assets_plan_preview_tool {
 	cursor: pointer;
-	max-width: 200px;
+	max-width: 250px;
 }
 .Assets_plan_preview_tool[data-interrupted=true] {
 	opacity: .5;
