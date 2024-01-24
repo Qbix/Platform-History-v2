@@ -389,8 +389,8 @@ Q.Template.set("Q/gallery/video",
 	`<div class="Q_gallery_item">
 		<div class="Q_gallery_video"></div>
 		<div class="Q_gallery_blob"></div>
-		<div class="Q_gallery_caption"><h2>{{title}}</h2><p>{{description}}</p></div>
 		<i class="Q_gallery_volume" data-type="off"></i>
+		<div class="Q_gallery_caption"><h2>{{title}}</h2><p>{{description}}</p></div>
 	</div>`
 );
 
