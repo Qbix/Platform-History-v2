@@ -309,7 +309,10 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 						if (index === 0) {
 							var firstPlayer = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
 							var playTimerId = setInterval(function () {
-								firstPlayer.play()
+								try {
+									firstPlayer.player.volume(0);
+									firstPlayer.play()
+								} catch (e) {}
 							}, 500);
 							firstPlayer.state.onPlay.set(function() {
 								clearInterval(playTimerId);
@@ -318,16 +321,22 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 
 						this.state.onEnded.set(function () {
 							$videoItem.appendTo($this);
-							Q.Tool.from($(".Q_gallery_item:first-child .Q_video_tool", $this)[0], "Q/video").play();
+							var videoTool = Q.Tool.from($(".Q_gallery_item:first-child .Q_video_tool", $this)[0], "Q/video");
+							videoTool.player.volume(0);
+							try {
+								videoTool.player.muted(true);
+							} catch (e) {}
+							videoTool.play();
 						}, "Q/gallery");
 					});
-					$("button[name=volume]", $videoItem).on(Q.Pointer.fastclick, function () {
+					$(".Q_gallery_volume", $videoItem).on(Q.Pointer.fastclick, function () {
 						var videoTool = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
-						var volume = videoTool.player.muted() ? 1 : 0;
+						var volume = $(this).attr("data-type") === 'on' ? 0 : 1;
 						videoTool.player.volume(volume);
 						try {
 							videoTool.player.muted(!volume);
 						} catch (e) {}
+						$(this).attr("data-type", volume ? "on" : "off");
 					});
 				});
 			});
@@ -381,7 +390,7 @@ Q.Template.set("Q/gallery/video",
 		<div class="Q_gallery_video"></div>
 		<div class="Q_gallery_blob"></div>
 		<div class="Q_gallery_caption"><h2>{{title}}</h2><p>{{description}}</p></div>
-		<button name="volume">Volume</button>
+		<i class="Q_gallery_volume" data-type="off"></i>
 	</div>`
 );
 

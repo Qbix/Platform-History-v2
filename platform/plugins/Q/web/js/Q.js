@@ -16386,7 +16386,7 @@ Q.Camera = {
 					var $title = $(".Q_title_slot", dialog);
 
 					// set max height
-					$element.height(dialog.height() - $title.height());
+					$element.height(dialog.offsetHeight - $title.height());
 
 					var elementHeight = $element.height();
 					var elementWidth = $element.width();

@@ -22,7 +22,7 @@
 }
 .Q_gallery_tool .Q_gallery_item .Q_video_tool {
     height: 100%;
-    opacity: .3;
+    opacity: .5;
 }
 .Q_gallery_tool .Q_gallery_item .Q_gallery_caption {
     position: absolute;
@@ -32,10 +32,35 @@
 .Q_gallery_tool .Q_gallery_item .Q_video_tool .vjs-paused .vjs-big-play-button, .Q_video_tool .vjs-has-started .vjs-big-play-button {
     display: none;
 }
-.Q_gallery_tool .Q_gallery_item button[name=volume] {
+.Q_gallery_tool .Q_gallery_item .Q_gallery_volume {
+    display: block;
     position: absolute;
     right: 5%;
-    top: 5%;
+    bottom: 35%;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    padding: 7px;
+    width: 36px;
+    height: 36px;
+}
+.Q_gallery_tool .Q_gallery_item .Q_gallery_volume:before {
+    font-family: 'qplatform-q';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px;
+    position: relative;
+    vertical-align: middle;
+}
+.Q_gallery_tool .Q_gallery_item .Q_gallery_volume[data-type=off]:before {
+    content: "\ea2a";
+}
+.Q_gallery_tool .Q_gallery_item .Q_gallery_volume[data-type=on]:before {
+    content: "\ea26";
 }
 .Q_gallery_tool .Q_gallery_item .Q_gallery_blob {
     position: absolute;
