@@ -1,6 +1,5 @@
 .Q_gallery_tool .Q_gallery_caption {
     position: absolute;
-    z-index: 201;
     text-align: center;
 }
 .Q_gallery_tool .Q_gallery_caption_centered {
@@ -25,7 +24,6 @@
     opacity: .5;
 }
 .Q_gallery_tool .Q_gallery_item .Q_gallery_caption {
-    position: absolute;
     top: 60%;
     text-align: left;
 }
@@ -36,12 +34,14 @@
     display: block;
     position: absolute;
     right: 5%;
-    bottom: 35%;
+    top: 40%;
     border: 1px solid #fff;
     border-radius: 50%;
     padding: 7px;
     width: 36px;
     height: 36px;
+    cursor: pointer;
+    background-color: var(--html-bg-color);
 }
 .Q_gallery_tool .Q_gallery_item .Q_gallery_volume:before {
     font-family: 'qplatform-q';
