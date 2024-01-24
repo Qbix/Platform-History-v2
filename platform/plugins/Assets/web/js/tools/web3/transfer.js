@@ -75,8 +75,10 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             return;
                         }
 
-                        var wallet, walletError;
-                        if (!this.testReadLevel("content")) {
+                        var wallet, walletError, ethersError;
+                        if (!window.ethers) {
+                            ethersError = true;
+                        } else if (!this.testReadLevel("content")) {
                             walletError = tool.text.errors.NotEnoughPermissionsWallet;
                         } else {
                             wallet = this.fields.content;
@@ -90,7 +92,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         if (!state.tokenInfo) {
                             $toolElement.addClass("Q_disabled");
                             $(".Assets_transfer_balance", tool.element).tool("Assets/web3/balance", {
-                                skipWeb3: !(wallet && !walletError)
+                                skipWeb3: ethersError || !(wallet && !walletError)
                             }).activate(function () {
                                 this.state.onChainChange.add(function () {
                                     $toolElement.addClass("Q_disabled");
