@@ -460,6 +460,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					if ($this.hasClass('Q_overlay_open')) {
 						return;
 					}
+					Q.Pointer.cancelClick();
 					dialogs.push($this[0]);
 					var topZ = Q.zIndexTopmost();
 					$this.css('z-index', topZ + 1);
@@ -491,6 +492,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					if (false === Q.handle(o.beforeClose, $this[0], [$this[0]])) {
 						return false;
 					}
+					Q.Pointer.cancelClick();
 					for (var i = 0; i < hiddenChildren.length; i++) {
 						hiddenChildren[i].show();
 					}
