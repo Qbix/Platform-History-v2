@@ -24422,7 +24422,7 @@
             });
             Object.keys(TECH_EVENTS_QUEUE).forEach(function (event) {
                 _this3.on(_this3.tech_, event, function (eventObj) {
-                    if (_this3.tech_.playbackRate() === 0 && _this3.tech_.seeking()) {
+                    if (_this3.tech_.playbackRate && _this3.tech_.playbackRate() === 0 && _this3.tech_.seeking()) {
                         _this3.queuedCallbacks_.push({
                             callback: _this3["handleTech" + TECH_EVENTS_QUEUE[event] + "_"].bind(_this3),
                             event: eventObj
@@ -24588,7 +24588,7 @@
             this.triggerReady(); // Keep the same volume as before
 
             if (this.cache_.volume) {
-                this.techCall_('setVolume', this.cache_.volume);
+                this.techCall_('setVolume', this.tech_.options_.muted ? 0 : this.cache_.volume);
             } // Look if the tech found a higher resolution poster while loading
 
 

@@ -511,39 +511,32 @@
 	font-size: 17px;
 	white-space: nowrap;
 	padding: 0 3px 0 3px;
-	margin: 0 -2px 0 -2px;
+	margin: 0 5px 5px 0;
     font-weight: 300;
 }
-
-.Streams_interest_title {
+.Streams_interests_tool .Streams_interest_title {
+	/* safari is slow at drawing rounded borders, so wait until animations are done */
+    border-radius: 5px;
 	cursor: pointer;
 	border: 1px dotted #ccc;
 }
-
-.Q_expanded .Streams_interest_title {
-	/* safari is slow at drawing rounded borders, so wait until animations are done */
-    border-radius: 5px;
+.Streams_interests_tool .Streams_interests_subcategory + .Streams_interest_title {
+	margin-left: 20px;
 }
-
 .Q_notTouchscreen .Streams_interest_title:hover {
 	text-decoration: underline;
 }
-
 .Streams_interest_title.Q_selected {
 	padding: 0 3px 0 3px;
 	margin: 0 -2px 0 -2px;
     border-radius: 5px;
     font-weight: 300;
 }
-
 .Streams_interests_unlisted { font-size: 11px; padding: 5px; }
-
 .Streams_related_tool .Q_tabs_overflow .Q_inplace_tool_editbuttons { display: none !important; list-style-type: none; padding: 0; }
-
 .Streams_related_tool .Streams_preview_tool {
 	cursor: pointer;
 }
-
 .Streams_interests_filter_input {
 	width: 100%;
 	box-sizing: border-box;
@@ -552,14 +545,10 @@
 	border-radius: 16px; -moz-border-radius: 16px; -webkit-border-radius: 16px;
 	background-color: transparent;
 }
-
 .Users_avatar_tool .Users_avatar_name>*{ position: relative; }
-
 .Streams_closed { opacity: 0.75; -webkit-transition: opacity 1s; transition: opacity 1s; }
-
 .Streams_task_progress { border: 1px solid #555; }
 .Streams_task_progress_bar { border: 1px solid #555; width: 0; height: 40px; }
-
 .Streams_invitation { font-size: 20px; text-align: center; padding: 50px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
 .Streams_invitation ul,
 .Streams_invitation ol { text-align: left; }
@@ -567,7 +556,6 @@
 .Streams_callToAction { padding: 10px; border: 1px solid #aaa; text-align: center; }
 .Streams_callToAction h2 { font-size: 25px; }
 .Streams_explanation { text-align: left; }
-
 .Streams_related_composer { display: inline-block; margin-right: 10px; width: 100%; text-align: left; border: none; }
 .Streams_file_preview_tool label { cursor: pointer; }
 .Streams_file_form,
@@ -580,15 +568,13 @@
 .Streams_preview_edit .Streams_file_form input {
 	width: 0; height: 0;
 }
-
-
 .Streams_interests_subcategory,
 .Streams_interests_other {
-	text-align: center;
 	opacity: 0.5;
 	font-weight: 200;
+	margin-bottom: 0;
+	margin-top: 5px;
 }
-
 .Streams_preview_error {
 	opacity: 0.8;
 	font-size: 12px;
@@ -606,52 +592,38 @@
 	text-align: center;
 	cursor: pointer
 }
-
 .Streams_file_preview_tool.Streams_related_stream { position: relative; cursor: pointer; }
 .Q_touchscreen .Streams_editable_title .Streams_preview_file_size { font-size: 80%; }
-
 .Streams_interests_tool.Streams_interests_anotherUser .Streams_interest_title { display: none; }
 .Streams_interests_tool.Streams_interests_anotherUser .Streams_interest_title.Streams_interests_anotherUser { display: inline; }
 .Streams_interests_anotherUserNone { display: none; }
-
 .Streams_category_preview_tool,
 .Streams_category_preview_tool .Q_inplace_noEditOnClick,
 .Streams_category_preview_tool .Q_inplace_noEditOnClick .Q_inplace_tool_static { cursor: pointer; }
 .Q_notMobile .Q_overlay.Streams_category_invoked { width: 60%; }
-
 .Q_notMobile .Q_overlay.Streams_completeInvited_dialog,
 .Q_notMobile .Q_overlay.Streams_access_tool_dialog,
 .Q_notMobile .Q_overlay.Streams_subscription_tool_dialog { width: 500px; }
-
 .Streams_inplace_tool.Q_editing { z-index: 99999; }
-
 .fr-toolbar.fr-inline { z-index: 10000; }
-
 .Q_tabs_tool.Streams_related_tool .Streams_preview_contents  { white-space: nowrap; overflow: visible; text-overflow: ellipsis; vertical-align: middle; }
-
 .Streams_participants_loading { background-image: url(../../Q/img/throbbers/balls2.gif); background-repeat: no-repeat; background-position: 5% 50%; }
-
 .Streams_participants_loading .Streams_participants_summary {
 	visibility: hidden;
 }
-
 .Streams_noResults { font-weight: 100; font-style: italic; color: #777; }
-
 .Streams_lookup_tool .Q_filter_tool input {
 	min-width: 200px;
 }
-
 .Streams_interests_all .Streams_interests_icon {
 	width: 25px; height: 25px;
 	vertical-align: middle;
 }
-
 .Streams_interests_all .Streams_interests_title {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 20px;
 }
-
 .Streams_import_tool .Streams_import_file {
 	width: 50%;
 }
