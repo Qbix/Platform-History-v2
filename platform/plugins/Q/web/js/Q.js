@@ -7718,6 +7718,9 @@ Q.fixedOffset = function (from, filter) {
  * @param {boolean} removeTools whether to properly remove the tools before removing the element
  */
 Q.removeElement = function _Q_removeElement(element, removeTools) {
+	if (!element) {
+		return;
+	}
 	if (Q.isArrayLike(element)) {
 		return Q.each(element, function () {
 			Q.removeElement(this, removeTools);

@@ -198,7 +198,7 @@ Q.Tool.jQuery('Q/overlay',
 					var mask = Q.Masks.show('Q.dialog.mask', {
 						fadeTime: o.fadeTime,
 						className: 'Q_dialog_mask' + mcn,
-						zIndex: topZ - 1
+						zIndex: topZ
 					});
 					if (data.options.closeOnMask) {
 						$(mask.element).on(Q.Visual.click, function () {
