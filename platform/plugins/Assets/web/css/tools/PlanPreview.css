@@ -21,6 +21,7 @@
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_contents {
 	display: block;
 	text-align: center;
+	width: 100%;
 }
 .Assets_plan_composer .Q_dialog_content {
 	padding: 5px;
@@ -98,11 +99,23 @@
 	margin: 10px 0;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_description {
-	border-top: 1px solid silver;
+	position: relative;
 	margin-top: 10px;
 	text-align: left;
 	white-space: normal;
 }
-.Assets_plan_preview_tool .Assets_plan_preview_description:empty {
+.Assets_plan_preview_tool .Assets_plan_preview_description span {
+	display: block;
+	text-align: justify;
+	border-top: 1px solid silver;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_description[data-state=minimised] span {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	white-space: pre-wrap;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_description span:empty {
 	display: none;
 }
