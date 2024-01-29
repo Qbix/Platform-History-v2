@@ -12,6 +12,7 @@
 	box-shadow: 0 0 0.3em #aaa;
 	border-radius: 5px;
 	padding: 5px;
+	flex-grow: 1;
 }
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_icon {
 	width: 100%;
