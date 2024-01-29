@@ -23,6 +23,7 @@
 	display: block;
 	text-align: center;
 	width: 100%;
+	white-space: normal;
 }
 .Assets_plan_composer .Q_dialog_content {
 	padding: 5px;
