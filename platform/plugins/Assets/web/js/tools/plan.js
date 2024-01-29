@@ -138,7 +138,6 @@ Q.Tool.define("Assets/plan", function(options) {
 		$toolElement.attr("data-subscribed", subscribed);
 		$toolElement.attr("data-stopped", stopped);
 		Q.Template.render('Assets/plan', {
-			text: tool.text,
 			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,
 			started: started,
 			endsIn: {
@@ -345,13 +344,13 @@ Q.Tool.define("Assets/plan", function(options) {
 
 Q.Template.set('Assets/plan',
 `<h2 class="Assets_plan_status">{{status}}</h2>
-	<div class="Assets_plan_period">{{text.subscriptions.Period}}: <span>{{period}}</span></div>
-	<div class="Assets_plan_price">{{text.subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount">{{price}}</span></div>
-	<div class="Assets_plan_started">{{text.subscriptions.Started}}: {{started}}</div>
+	<div class="Assets_plan_period">{{subscriptions.Period}}: <span>{{period}}</span></div>
+	<div class="Assets_plan_price">{{subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount">{{price}}</span></div>
+	<div class="Assets_plan_started">{{subscriptions.Started}}: {{started}}</div>
 	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{{tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}}</div>
 	<div class="Assets_plan_related_streams"></div>
-	<button class="Q_button" name="unsubscribe">{{text.subscriptions.Unsubscribe}}</button>
-	<button class="Q_button" name="subscribe">{{text.subscriptions.Subscribe}}</button>`
+	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
+	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>`, {text:["Assets/content"]}
 );
 
 })(Q, Q.jQuery, window);
