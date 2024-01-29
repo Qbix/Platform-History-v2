@@ -273,7 +273,7 @@
 				"title": ["Users/content", ["register", "TermsTitle"]]
 			},
 			"icon": {
-				"search": ["google", "facebook"], /* can be ["facebook", "google"] */
+				"search": [], /* can be ["facebook", "google"] */
 				"leaveDefault": false
 			},
 			"interposeActivateDialog": "mobile",
