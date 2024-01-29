@@ -4,9 +4,6 @@
 	row-gap: 10px;
 	justify-content: space-evenly;
 }
-.Q_mobile .Assets_subscription_tool {
-	justify-content: space-between;
-}
 .Assets_subscription_stripe {
 	width: 337px;
 }

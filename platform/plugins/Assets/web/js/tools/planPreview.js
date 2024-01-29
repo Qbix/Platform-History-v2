@@ -97,6 +97,18 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				}
 			});
 
+			$(".Assets_plan_preview_description", tool.element).on(Q.Pointer.fastclick, function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+				var $this = $(this);
+				if ($this.attr("data-state") === "minimised") {
+					$this.attr("data-state", "maximised");
+				} else {
+					$this.attr("data-state", "minimised");
+				}
+				return false;
+			});
+
 			if (previewState.editable && stream.testWriteLevel('edit')) {
 				previewState.actions.actions = previewState.actions.actions || {};
 				previewState.actions.actions.edit = function () {
@@ -241,7 +253,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 					return false;
 				});
-
 			},
 			onClose: function (dialog) {
 				Q.handle(closeCallback, dialog, [dialog]);
@@ -257,7 +268,7 @@ Q.Template.set('Assets/plan/preview',
 		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
 		<span class="Assets_plan_preview_price">{{price}}</span>
 		<span class="Assets_plan_preview_period">{{period}}</span>
-		<div class="Assets_plan_preview_description">{{description}}</div>
+		<div class="Assets_plan_preview_description" data-state=minimised><span>{{description}}</span></div>
 	</div>
 </div>`, {text:["Assets/content"]}
 );

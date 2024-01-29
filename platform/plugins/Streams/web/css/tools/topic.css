@@ -34,12 +34,12 @@
 }
 .Q_tool.Streams_topic_tool .Streams_topic_conversation:before {
     font-family: 'qplatform-calendars' !important;
-    font-size: 38px;
+    font-size: 50px;
     content: "\e901";
     height: 40px;
     position: absolute;
-    left: 10px;
-    top: 5px;
+    left: 0;
+    top: 0;
 }
 .Streams_topic_tool .Streams_preview_tool,
 .Streams_topic_tool .Streams_topic_conversation {
