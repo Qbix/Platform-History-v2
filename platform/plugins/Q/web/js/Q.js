@@ -7322,6 +7322,12 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Visual.focusout, _onPointerBlurHandler);
+	Q.addEventListener(document.body, 'focusin', function () {
+		document.documentElement.addClass('Q_keyboardFocus');
+	});
+	Q.addEventListener(document.body, 'focusout', function () {
+		document.documentElement.removeClass('Q_keyboardFocus');
+	});
 	var checks = ["init", "ready"];
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
