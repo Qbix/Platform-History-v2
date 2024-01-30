@@ -14003,6 +14003,13 @@ Q.Visual = Q.Pointer = {
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
+		Q.Masks.onShow.set(function (key, options, mask) {
+			if (mask.shouldCover
+			&& !mask.shouldCover.contains(Q.Visual.latestTouchlabelTarget)) {
+				return;
+			}
+			div.removeClass('Q_touchlabel_show');
+		}, 'Q.Visual.activateTouchlabels');
 		var _scrollLeft, _scrollTop;
 		Q.addEventListener(element, 'pointerdown pointermove', function (e) {
 			var p = e.target.scrollingParent() || document.body;
@@ -14034,6 +14041,7 @@ Q.Visual = Q.Pointer = {
 					t = t.parentElement
 					continue;
 				}
+				Q.Visual.lastTouchlabelTarget = t;
 				var content = t.getAttribute('data-touchlabel');
 				if (!content) {
 					return;
@@ -15571,6 +15579,7 @@ Q.Masks = {
 				Q.Masks.hide(key);
 			}, mask.duration);
 		}
+		Q.handle(Q.Masks.onShow, Q.Masks, [key, options, mask]);
 		return mask;
 	},
 	/**
@@ -15598,6 +15607,7 @@ Q.Masks = {
 				me.style.display='none';
 			}
 		}
+		Q.handle(Q.Masks.onHide, Q.Masks, [key, mask]);
 	},
 	/**
 	 * Updates size and appearance of all the masks. 
@@ -15650,7 +15660,9 @@ Q.Masks = {
 	{
 		key = Q.calculateKey(key);
 		return !!Q.getObject([key, 'counter'], Q.Masks.Collection);
-	}
+	},
+	onShow: new Q.Event(),
+	onHide: new Q.Event()
 };
 
 Q.Masks.options = {
