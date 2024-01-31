@@ -23,7 +23,7 @@
     padding: 20px;
 }
 .Q_notMobile .Users_list_tool .Users_avatar_tool {
-    padding: 10px 20px;
+    margin: 10px 20px;
     border-radius: 15px;
 }
 .Users_list_tool.Users_list_80 .Users_avatar_tool:hover {
