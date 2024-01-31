@@ -940,7 +940,7 @@
 		key: {
 			generateOnLogin: true,
 			name: 'ECDSA', 
-			namedCurve: 'P-384',
+			namedCurve: 'P-256',
 			hash: 'SHA-256'
 		},
 		getKey: new Q.Method(),

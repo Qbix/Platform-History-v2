@@ -4,8 +4,10 @@ require Q_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
 
 use Mdanter\Ecc\Crypto\Signature\SignHasher;
 use Mdanter\Ecc\EccFactory;
+use Mdanter\Ecc\Curves\CurveFactory;
 use Mdanter\Ecc\Crypto\Signature\Signer;
 use Mdanter\Ecc\Crypto\Signature\Signature;
+use Mdanter\Ecc\Crypto\Signature\SignHasher;
 use Mdanter\Ecc\Serializer\PublicKey\PemPublicKeySerializer;
 use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
 use Mdanter\Ecc\Serializer\Signature\DerSignatureSerializer;
@@ -26,16 +28,36 @@ class Q_Crypto {
      * @param {string} $serialized the serialized data
      * @param {string} $signature 192 characters, 96 r and 96 s
      * @param {string} $publicKey ECDSA
-     * @param {string} $algorithm for the hashing of serialized data
+     * @param {string} [$curve='P256'] the elliptic curve to use, can be "P256", "P384", "P521", 
+     *   or K256" for Koeblitz curve used in Bitcoin, Ethereum. Determines the hash algorithm.
      * @return {boolean} true if the signature is correct
      */ 
-    static function verify($serialized, $signature, $publicKey, $algorithm = 'sha256')
+    static function verify($serialized, $signature, $publicKey, $curve = 'P256')
     {
         if (empty($signature)) {
             return false;
         }
         $adapter = EccFactory::getAdapter();
-        $generator = EccFactory::getNistCurves()->generator384();
+        switch ($curve) {
+            case 'K256':
+                $generator = CurveFactory::getGeneratorByName('secp256k1');
+                $hasher = new SignHasher('sha256', $adapter);
+                break;
+            case 'P256':
+                $generator = EccFactory::getNistCurves()->generator256();
+                $hasher = new SignHasher('sha256', $adapter);
+                break;
+            case 'P384':
+                $generator = EccFactory::getNistCurves()->generator384();
+                $hasher = new SignHasher('sha384', $adapter);
+                break;
+            case 'P521':
+                $hashAlgo = 'sha512';
+                $hasher = new SignHasher('sha512', $adapter);
+                break;
+            default:
+                throw new Q_Exception_WrongType(array('field' => 'curve', 'type' => 'K256, P256, P384 or P521'));
+        }
 
         if (is_array($signature)) {
             $signature = new Signature(
@@ -62,7 +84,6 @@ class Q_Crypto {
         $pemSerializer = new PemPublicKeySerializer($derSerializer);
         $key = $pemSerializer->parse($key_PEM);
         
-        $hasher = new SignHasher($algorithm);
         $hash = $hasher->makeHash($serialized, $generator);
         
         $signer = new Signer($adapter);
