@@ -43,8 +43,15 @@
 .Assets_plan_tool .Assets_plan_related_streams {
     border-top: 1px solid;
     border-bottom: 1px solid;
-    margin: 5px 0;
-    padding: 5px 0;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+.Assets_plan_tool .Assets_plan_description {
+    max-height: 100px;
+    overflow: auto;
+}
+.Assets_plan_tool .Assets_plan_description:empty {
+    display: none;
 }
 .Assets_plan_tool .Assets_plan_related_streams .Streams_participants_tool {
     display: none;
