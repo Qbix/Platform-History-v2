@@ -33,8 +33,8 @@ Q.exports(function (Q) {
         }, algo);
         return Q.Promise.all(
             publicKeyRawStrings.map((pks, i) => 
-            crypto.subtle.importKey('raw', Q.Data.fromBase64(pks), algo, false, ['verify'])
-            .then(publicKey => crypto.subtle.verify(algo, publicKey, signatures[i], new TextEncoder().encode(data)))
+                crypto.subtle.importKey('raw', Q.Data.fromBase64(pks), algo, false, ['verify']
+            ).then(publicKey => crypto.subtle.verify(algo, publicKey, signatures[i], new TextEncoder().encode(data)))
         )
     );
   };

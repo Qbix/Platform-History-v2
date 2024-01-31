@@ -522,7 +522,7 @@
 	 * @method signature
 	 * @static
 	 * @param {Object} payload The payload to sign. It will be serialized with Q.serialize()
-	 * @param {Function} callback Receives err and then the signature, if one was computed
+	 * @param {Function} callback Receives err and then the signature, if one was computed, followed by the keypair
 	 * @param {Object} options
 	 * @param {Object} [options.key] Set the key to use, to sign the payload with
 	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
