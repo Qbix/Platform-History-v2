@@ -146,7 +146,7 @@ Q.Tool.define("Assets/plan", function(options) {
 			},
 			period: period,
 			currency: currency === "USD" ? '$' : currency,
-			description: tool.planStream.fields.content,
+			description: tool.planStream.fields.content.encodeHTML(),
 			price: parseFloat(price).toFixed(2),
 			iconUrl: tool.planStream.iconUrl(state.icon.defaultSize)
 		}, function (err, html) {
