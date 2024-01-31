@@ -146,7 +146,7 @@ Q.Tool.define("Assets/plan", function(options) {
 			},
 			period: period,
 			currency: currency === "USD" ? '$' : currency,
-			description: tool.planStream.fields.content,
+			description: tool.planStream.fields.content.encodeHTML(),
 			price: parseFloat(price).toFixed(2),
 			iconUrl: tool.planStream.iconUrl(state.icon.defaultSize)
 		}, function (err, html) {
@@ -349,7 +349,7 @@ Q.Template.set('Assets/plan',
 	<div class="Assets_plan_price">{{subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount">{{price}}</span></div>
 	<div class="Assets_plan_started">{{subscriptions.Started}}: {{started}}</div>
 	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{{tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}}</div>
-	<div class="Assets_plan_description">{{description}}</div>
+	<div class="Assets_plan_description">{{{description}}}</div>
 	<div class="Assets_plan_related_streams"></div>
 	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
 	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>`, {text:["Assets/content"]}
