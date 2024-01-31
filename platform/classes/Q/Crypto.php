@@ -7,7 +7,6 @@ use Mdanter\Ecc\EccFactory;
 use Mdanter\Ecc\Curves\CurveFactory;
 use Mdanter\Ecc\Crypto\Signature\Signer;
 use Mdanter\Ecc\Crypto\Signature\Signature;
-use Mdanter\Ecc\Crypto\Signature\SignHasher;
 use Mdanter\Ecc\Serializer\PublicKey\PemPublicKeySerializer;
 use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
 use Mdanter\Ecc\Serializer\Signature\DerSignatureSerializer;
@@ -51,8 +50,8 @@ class Q_Crypto {
                 $generator = EccFactory::getNistCurves()->generator384();
                 $hasher = new SignHasher('sha384', $adapter);
                 break;
-            case 'P512':
-                $hashAlgo = 'sha512';
+            case 'P521':
+                $generator = EccFactory::getNistCurves()->generator521();
                 $hasher = new SignHasher('sha512', $adapter);
                 break;
             default:
