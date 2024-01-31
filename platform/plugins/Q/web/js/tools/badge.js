@@ -136,6 +136,8 @@
 					style.display = badgeStyle.display;
 				}
 
+				var defaultPos = -parseInt(badgeStyle.size)/3;
+
 				// default position
 				switch (corner) {
 					case 'tl':
@@ -143,14 +145,14 @@
 							style.bottom = badgeStyle.bottom;
 							delete style.top;
 						} else {
-							style.top = badgeStyle.top || 0;
+							style.top = badgeStyle.top || defaultPos;
 						}
 
 						if (badgeStyle.right) {
 							style.right = badgeStyle.right;
 							delete style.left;
 						} else {
-							style.left = badgeStyle.left || 0;
+							style.left = badgeStyle.left || defaultPos;
 						}
 
 						break;
@@ -159,14 +161,14 @@
 							style.bottom = badgeStyle.bottom;
 							delete style.top;
 						} else {
-							style.top = badgeStyle.top || 0;
+							style.top = badgeStyle.top || defaultPos;
 						}
 
 						if (badgeStyle.left) {
 							style.left = badgeStyle.left;
 							delete style.right;
 						} else {
-							style.right = badgeStyle.right || 0;
+							style.right = badgeStyle.right || defaultPos;
 						}
 
 						break;
@@ -175,14 +177,14 @@
 							style.top = badgeStyle.top;
 							delete style.bottom;
 						} else {
-							style.bottom = badgeStyle.bottom || 0;
+							style.bottom = badgeStyle.bottom || -defaultPos;
 						}
 
 						if (badgeStyle.left) {
 							style.left = badgeStyle.left;
 							delete style.right;
 						} else {
-							style.right = badgeStyle.right || 0;
+							style.right = badgeStyle.right || defaultPos;
 						}
 
 						break;
@@ -191,14 +193,14 @@
 							style.top = badgeStyle.top;
 							delete style.bottom;
 						} else {
-							style.bottom = badgeStyle.bottom || 0;
+							style.bottom = badgeStyle.bottom || -defaultPos;
 						}
 
 						if (badgeStyle.right) {
 							style.right = badgeStyle.right;
 							delete style.left;
 						} else {
-							style.left = badgeStyle.left || 0;
+							style.left = badgeStyle.left || defaultPos;
 						}
 
 						break;
