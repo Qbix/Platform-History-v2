@@ -1230,13 +1230,15 @@ class Q_Uri
 	protected $Q_url = null;
 }
 
-// trying to get caching $urls
-if (empty(Q_Uri::$urls)) {
-	$urlsFile = implode(DS, array(APP_CONFIG_DIR, "Q", "urls.php"));
-	if (is_file($urlsFile)) {
-		$result = require_once($urlsFile);
-		if (is_array($result)) {
-			Q_Uri::$urls = $result;
+call_user_func(function () {
+	// trying to get caching $urls
+	if (empty(Q_Uri::$urls)) {
+		$urlsFile = implode(DS, array(APP_CONFIG_DIR, "Q", "urls.php"));
+		if (is_file($urlsFile)) {
+			$result = require_once($urlsFile);
+			if (is_array($result)) {
+				Q_Uri::$urls = $result;
+			}
 		}
 	}
-}
+});

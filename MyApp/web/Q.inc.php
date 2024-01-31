@@ -1,5 +1,7 @@
 <?php
 
+call_user_func(function () {
+
 //
 // Constants -- you might have to change these
 //
@@ -36,3 +38,4 @@ if (!file_exists($Q_filename)) {
 }
 
 include($Q_filename);
+});

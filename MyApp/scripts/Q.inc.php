@@ -4,6 +4,8 @@
  * For including Qbix in your scripts
  */
 
+call_user_func(function () {
+
 //
 // Constants -- you might have to change these
 //
@@ -38,3 +40,4 @@ if (!$Q_filename) {
 		"then run configure.php again\n");
 }
 include($Q_filename);
+});
