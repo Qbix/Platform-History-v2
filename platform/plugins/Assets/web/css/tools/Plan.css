@@ -49,6 +49,7 @@
 .Assets_plan_tool .Assets_plan_description {
     max-height: 100px;
     overflow: auto;
+    text-align: justify;
 }
 .Assets_plan_tool .Assets_plan_description:empty {
     display: none;
