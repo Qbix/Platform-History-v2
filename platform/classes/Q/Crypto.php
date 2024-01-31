@@ -51,7 +51,7 @@ class Q_Crypto {
                 $generator = EccFactory::getNistCurves()->generator384();
                 $hasher = new SignHasher('sha384', $adapter);
                 break;
-            case 'P521':
+            case 'P512':
                 $hashAlgo = 'sha512';
                 $hasher = new SignHasher('sha512', $adapter);
                 break;
