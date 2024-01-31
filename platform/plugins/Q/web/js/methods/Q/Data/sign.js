@@ -17,8 +17,8 @@ Q.exports(function (Q) {
      *   PKCS8 encodings of private keys
      * @param {Object} [algo] youc an specify a different algorithm
      * @param {String} [algo.name="ECDSA"]
-     * @param {String} [algo.namedCurve="P-384"]
-     * @param {String} [algo.hash="SHA-384"]
+     * @param {String} [algo.namedCurve="P-256"]
+     * @param {String} [algo.hash="SHA-256"]
      * @param {Function} callback receives (err, result)
      * @return {Q.Promise} Resolves an array of ArrayBuffers containing
      *   data signed with each of the corresponding public keys.
@@ -28,8 +28,8 @@ Q.exports(function (Q) {
     return function Q_Data_sign(data, privateKeyPKCS8Strings, algo) {
         algo = Q.extend({
             name: 'ECDSA',
-            namedCurve: 'P-384',
-            hash: { name: "SHA-384" }
+            namedCurve: 'P-256',
+            hash: { name: "SHA-256" }
         }, algo);
         return Q.Promise.all(
             privateKeyPKCS8Strings.map(pks => 
