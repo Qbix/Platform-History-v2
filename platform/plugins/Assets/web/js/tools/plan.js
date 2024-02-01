@@ -316,7 +316,7 @@ Q.Tool.define("Assets/plan", function(options) {
 
 						Q.alert(tool.text.subscriptions.YouUnsubscribedFromPlan.interpolate({
 							planTitle: tool.planStream.fields.title,
-							endsIn: Q.Tool.setUpElementHTML('div', 'Q/timestamp', {
+							endsIn: Q.Tool.setUpElementHTML('span', 'Q/timestamp', {
 								capitalized: true,
 								time: endsIn
 							}, 'Q_timestamp', tool.prefix)
