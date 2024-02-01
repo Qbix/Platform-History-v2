@@ -71,3 +71,9 @@
 .Assets_plan_tool .Assets_plan_related_streams > .Streams_preview_tool:not(.Streams_related_composer) {
     margin-bottom: 5px;
 }
+.Assets_plan_tool img.Assets_plan_image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 10px;
+}
