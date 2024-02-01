@@ -24,6 +24,8 @@
 }
 .Assets_plan_tool[data-subscribed=false] .Assets_plan_status {
     color: red;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
 }
 .Assets_plan_tool[data-stopped=false] .Assets_plan_started,
 .Assets_plan_tool[data-stopped=false] .Assets_plan_endsIn,
@@ -47,6 +49,8 @@
 }
 .Assets_plan_tool .Assets_plan_description {
     text-align: justify;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
 }
 .Assets_plan_tool .Assets_plan_description:empty {
     display: none;
