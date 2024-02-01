@@ -31,11 +31,10 @@
 .Assets_plan_tool button[name=unsubscribe] {
     display: none;
 }
+.Assets_plan_tool[data-subscribed=false] button[name=subscribe],
 .Assets_plan_tool[data-subscribed=true] button[name=unsubscribe] {
     display: block;
-}
-.Assets_plan_tool[data-subscribed=false] button[name=subscribe] {
-    display: block;
+    margin-bottom: 10px;
 }
 .Assets_plan_tool .Assets_plan_related_streams:empty {
     display: none;

@@ -386,15 +386,15 @@ Q.Tool.define("Assets/plan", function(options) {
 
 Q.Template.set('Assets/plan',
 `<img class="Assets_plan_image" />
+	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
+	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>
 	<div class="Assets_plan_period">{{subscriptions.Period}}: <span></span></div>
 	<div class="Assets_plan_price">{{subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount"></span></div>
 	<div class="Assets_plan_started">{{subscriptions.Started}}: {{started}}</div>
 	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{{tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}}</div>
 	<div class="Assets_plan_description"></div>
 	<h2 class="Assets_plan_status">{{status}}</h2>
-	<div class="Assets_plan_related_streams"></div>
-	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
-	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>`, {text:["Assets/content"]}
+	<div class="Assets_plan_related_streams"></div>`, {text:["Assets/content"]}
 );
 
 })(Q, Q.jQuery, window);
