@@ -48,6 +48,7 @@
     padding: 10px 0;
 }
 .Assets_plan_tool .Assets_plan_description {
+    width: 100%;
     text-align: justify;
     padding-top: 10px;
     border-top: 1px solid #fff;
