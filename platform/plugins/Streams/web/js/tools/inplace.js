@@ -90,7 +90,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 			var $e, html = (
 				(state.inplaceType === 'select')
 				? String(state.inplace.options[content] || '').encodeHTML()
-				: String(content || '').encodeHTML()
+				: String(content == null ? '' : content).encodeHTML()
 			) || '<span class="Q_placeholder">'+placeholder+'</div>';
 
 			// replace URLs with links
@@ -133,7 +133,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 			if (state.attribute) {
 				state.field = 'attributes['+encodeURIComponent(state.attribute)+']';
 				stream.onAttribute(state.attribute).set(function (attributes, k) {
-					if (attributes[k] !== null) {
+					if (attributes[k] != null) {
 						_setContent(attributes[k]);
 					} else {
 						Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
@@ -162,7 +162,10 @@ Q.Tool.define("Streams/inplace", function (options) {
 			field: state.field,
 			type: state.inplaceType
 		});
-		var value = (stream && (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field])) || state.fallback || "";
+		var value = stream && (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field]);
+		if (value == null) {
+			value = state.fallback || "";
+		}
 		switch (state.inplaceType) {
 			case 'text':
 				ipo.staticHtml = String(value).encodeHTML();
