@@ -70,5 +70,6 @@ function Assets_web3_coin_staking_start_tool($options) {
 	/**/
 
 	Q_Response::setToolOptions($options);
+    return $poolList;
 	
 }
