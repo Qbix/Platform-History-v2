@@ -83,7 +83,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
-			description: stream.fields.content,
+			description: stream.fields.content.encodeHTML(),
 			price: '$' + parseFloat(stream.getAttribute('amount')).toFixed(2),
 			periods: state.periods,
 			period: stream.getAttribute('period')
@@ -95,18 +95,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				overrideShowSize: {
 					'': state.icon.defaultSize
 				}
-			});
-
-			$(".Assets_plan_preview_description", tool.element).on(Q.Pointer.fastclick, function (e) {
-				e.preventDefault();
-				e.stopPropagation();
-				var $this = $(this);
-				if ($this.attr("data-state") === "minimised") {
-					$this.attr("data-state", "maximised");
-				} else {
-					$this.attr("data-state", "minimised");
-				}
-				return false;
 			});
 
 			if (previewState.editable && stream.testWriteLevel('edit')) {
@@ -268,7 +256,7 @@ Q.Template.set('Assets/plan/preview',
 		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
 		<span class="Assets_plan_preview_price">{{price}}</span>
 		<span class="Assets_plan_preview_period">{{period}}</span>
-		<div class="Assets_plan_preview_description" data-state=minimised><span>{{description}}</span></div>
+		<div class="Assets_plan_preview_description">{{{description}}}</div>
 	</div>
 </div>`, {text:["Assets/content"]}
 );

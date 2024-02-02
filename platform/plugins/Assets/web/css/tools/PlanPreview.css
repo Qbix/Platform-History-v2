@@ -105,19 +105,6 @@
 	margin-top: 10px;
 	text-align: left;
 	white-space: normal;
-}
-.Assets_plan_preview_tool .Assets_plan_preview_description span {
-	display: block;
 	text-align: justify;
 	border-top: 1px solid silver;
-}
-.Assets_plan_preview_tool .Assets_plan_preview_description[data-state=minimised] span {
-	overflow: hidden;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 1;
-	white-space: pre-wrap;
-}
-.Assets_plan_preview_tool .Assets_plan_preview_description span:empty {
-	display: none;
 }
