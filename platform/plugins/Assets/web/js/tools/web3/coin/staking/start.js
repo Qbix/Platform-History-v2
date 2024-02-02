@@ -87,6 +87,7 @@
 	{ // default options here
 		abiPathCommunityCoin: "Assets/templates/R1/CommunityCoin/contract",
 		abiPathCommunityStakingPool: "Assets/templates/R1/CommunityStakingPool/contract",
+        abiPathCommunityStakingPoolFactory: "Assets/templates/R1/CommunityStakingPool/factory",
 		chainId: null,
 		communityCoinAddress: null,
 	},
@@ -200,40 +201,48 @@
 				///
                 // allowing tokens for coontract. can be disable after allowing and if amount < then allowed before
                 tool.$btnAllow.off(Q.Pointer.click).on(Q.Pointer.click, function (e) {
-                    
                     e.preventDefault();
 					e.stopPropagation();
                     
+                    $(tool.element).addClass("Q_working");
+                    
                     var validated, userInputObj;
                     [validated, userInputObj] = tool._userInputValidate(true);
-
-                    if (validated) {
-                        var erc20Contract;
-                        Users.Web3.getContract(
-                            "Assets/templates/ERC20", 
-                            {
-                                contractAddress: userInputObj.tokenERC20Address,
-                                chainId: state.chainId
-                            }
-                        ).then(function (contract) {
-                            erc20Contract = contract;
-                            return contract.approve(
-                                userInputObj.poolAddress,
-                                ethers.utils.parseUnits(userInputObj.stake_amount)
-                            );
-                        }).then(function (tx) {
-                            return tx.wait();
-                        }).then(function (receipt) {
-                            if (receipt.status == 0) {
-                                throw 'Smth unexpected when approve';
-                            }
-                        }).catch(function (err) {
-                            Q.Notices.add({
-                                content: Users.Web3.parseMetamaskError(err, [erc20Contract]),
-                                timeout: 5
-                            });
-                        })
+                    
+                    if (!validated) {
+                        $(tool.element).removeClass("Q_working");
+                        return;
                     }
+
+                    var erc20Contract;
+                    Users.Web3.getContract(
+                        "Assets/templates/ERC20", 
+                        {
+                            contractAddress: userInputObj.tokenERC20Address,
+                            chainId: state.chainId
+                        }
+                    ).then(function (contract) {
+                        erc20Contract = contract;
+                        return contract.approve(
+                            userInputObj.poolAddress,
+                            ethers.utils.parseUnits(userInputObj.stake_amount)
+                        );
+                    }).then(function (tx) {
+                        return tx.wait();
+                    }).then(function (receipt) {
+                        if (receipt.status == 0) {
+                            throw 'Smth unexpected when approve';
+                        }
+                        tool._allowCheck();
+                    }).catch(function (err) {
+                        Q.Notices.add({
+                            content: Users.Web3.parseMetamaskError(err, [erc20Contract]),
+                            timeout: 5
+                        });
+                    }).finally(function(){
+                        $(tool.element).removeClass("Q_working");
+                    });
+
                 });
                 
                 // staking. 
@@ -241,46 +250,51 @@
                     e.preventDefault();
 					e.stopPropagation();
                     
+                    $(tool.element).addClass("Q_working");
+                    
                     var validated, userInputObj;
                     [validated, userInputObj] = tool._userInputValidate(true);
-
-                    if (validated) {
-                        var data = userInputObj.data.instancedata;
-                        var poolContract;
-                        tool._getStakingPoolContract(data.communityPoolAddress).then(function (pool) {
-                            poolContract = pool;    
-                            return pool.stake(
-                                ethers.utils.parseUnits(userInputObj.stake_amount),
-                                tool.loggedInUserXid
-                            );
-                        }).then(function (tx) {
-                            return tx.wait();
-                        }).then(function (receipt) {
-                            if (receipt.status == 0) {
-                                throw 'Smth unexpected when stake';
-                            }
-                        }).catch(function (err) {
-                            Q.Notices.add({
-                                content: Users.Web3.parseMetamaskError(err, [poolContract]),
-                                timeout: 5
-                            });
-                        })
+                    
+                    if (!validated) {
+                        $(tool.element).removeClass("Q_working");
+                        return;
                     }
+                    
+                    var poolContract;
+                    tool._getStakingPoolContract(userInputObj.poolAddress).then(function (pool) {
+                        poolContract = pool;    
+                        return pool.stake(
+                            ethers.utils.parseUnits(userInputObj.stake_amount),
+                            tool.loggedInUserXid
+                        );
+                    }).then(function (tx) {
+                        return tx.wait();
+                    }).then(function (receipt) {
+                        if (receipt.status == 0) {
+                            throw 'Smth unexpected when stake';
+                        }
+                    }).catch(function (err) {
+                        Q.Notices.add({
+                            content: Users.Web3.parseMetamaskError(err, [poolContract]),
+                            timeout: 5
+                        });
+                    }).finally(function(){
+                        $(tool.element).removeClass("Q_working");
+                    });
+                    
                 });
 			});
 		},
         // checks user allowance. if not successfull - we will disable continue button overwise transaction will revert
         _allowCheck: function() {
-
             var tool = this;
-            
             var validated, userInputObj;
             [validated, userInputObj] = tool._userInputValidate();
             if (!validated) {
                 tool.$btnContinue.attr('disabled','disabled').addClass('Q_disabled');    
+                return;
             }
             if (userInputObj.stake_amount) {
-                
                 tool.$btnContinue.attr('disabled','disabled').addClass('Q_disabled');    
                 var erc20contract;
                 Users.Web3.getContract(
@@ -296,20 +310,21 @@
                         userInputObj.poolAddress
                     );
                 }).then(function (allowance) {
-                    if (allowance.gt(ethers.utils.parseUnits(userInputObj.stake_amount))) {
+                    if (
+                            allowance.gte(ethers.utils.parseUnits(userInputObj.stake_amount))
+                        ) {
                         tool.$btnContinue.removeAttr('disabled').removeClass('Q_disabled');
                     } else {
                         tool.$btnContinue.attr('disabled','disabled').addClass('Q_disabled');
                     }
+                    
                 }).catch(function (err) {
                     Q.Notices.add({
                         content: Users.Web3.parseMetamaskError(err, [erc20contract]),
                         timeout: 5
                     });
-                    
                     tool.$btnContinue.removeAttr('disabled');
                 });
-                //ethers.utils.parseUnits(userInputObj.stake_amount)
             }
         },
         // validation user unput and if showNotices == true then show notices.
@@ -394,12 +409,24 @@
 
 			var optionSelected = $selectEl.find('option:selected');
 			var data = optionSelected.data();
+            
+            var durationVal = $durationEl.val();
 			//return [stake_amount, data, optionSelected];
+            
+            var obj;
+            tool.poolsList.forEach(function(i, index){
+                if (
+                    i.duration == durationVal &&
+                     i.tokenErc20.toLowerCase() == data.instancedata.tokenErc20.toLowerCase()
+                    ) {
+                        obj = i;
+                }
+            })
             return {
                 stake_amount: $inputEl.val() || 0,
                 stake_duration: $durationEl.val(),
-                tokenERC20Address: data.instancedata.tokenErc20,
-                poolAddress: data.instancedata.communityPoolAddress,
+                tokenERC20Address: obj.tokenErc20,
+                poolAddress: obj.communityPoolAddress,
                 optionSelected: optionSelected,
                 data: data
             }
@@ -541,6 +568,7 @@
                 var option = tool.$sliderDatalist.find('option[value="'+$(this).val()+'"]');
                 tool.$durationElement.val(option.attr('label'));
                 tool._renderPoolInfo();
+                tool._allowCheck();
             });
             tool.$durationElement.off("change").on("change", function(e){
                 var val = $(this).val();
@@ -553,6 +581,7 @@
                     $(this).val(tool.$sliderDatalist.find('option[value='+oldSliderIndex+']').text());
                 }
                 tool._renderPoolInfo();
+                tool._allowCheck();
             });
         },
         // filling select with pools after refresh of getting data from blockchain

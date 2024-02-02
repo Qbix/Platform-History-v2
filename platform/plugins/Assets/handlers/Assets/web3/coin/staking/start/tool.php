@@ -32,7 +32,7 @@ function Assets_web3_coin_staking_start_tool($options) {
 	$chainId = $options["chainId"];
 	
 	$abiPathCommunityCoin = Q::ifset($options, "abiPathCommunityCoin", "Assets/templates/R1/CommunityCoin/contract");
-	$abiPathCommunityStakingPoolFactory = Q::ifset($options, "abiPathCommunityStakingPool", "Assets/templates/R1/CommunityStakingPool/factory");
+    $abiPathCommunityStakingPoolFactory = Q::ifset($options, "abiPathCommunityStakingPoolFactory", "Assets/templates/R1/CommunityStakingPool/factory");
 	
 	$stakingPoolFactory = Users_Web3::execute($abiPathCommunityCoin, $communityCoinAddress, "instanceManagment", array(), $chainId, $caching, $longDuration);
 //print_r($stakingPoolFactory);
