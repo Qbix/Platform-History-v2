@@ -688,10 +688,17 @@ Streams.onInvitedUserAction = new Q.Event();
 
 /**
  * Event occurs when the user enters their full name after following an invite,
- * completing their registration
+ * completing their registration.
+ * The default handler for this event, added under "Streams" key, triggers Q.Users.onComplete event.
+ * Any plugin or app can override it by replacing the handler under the "Streams" key with
+ * their own handler, which implements a flow after invite is complete.
+ * That handler is responsible for triggering Q.Users.onComplete event
+ * when the flow is completed.
  * @event onInviteComplete
  */
-Streams.onInviteComplete = new Q.Event();
+Streams.onInviteComplete = new Q.Event(function () {
+	Q.handle(Q.Users.onComplete);
+}, 'Streams');
 
 /**
  * Connects or reconnects sockets for all participating streams

@@ -6164,7 +6164,7 @@ Q.Links = {
  * @param {boolean} [options.isGetter] set to true to indicate that the method will be wrapped with Q.getter()
  */
 Q.Method = function (properties, options) {
-	this.properties = Q.extend(this, properties);
+	Q.extend(this, properties);
 	this.__options = options || {};
 };
 
@@ -6244,7 +6244,7 @@ Q.Method.define = function (o, prefix, closure) {
 				return f.apply(t, a);
 			});
 		};
-		Q.extend(o[k], method.properties);
+		Q.extend(o[k], method);
 		if (method.__options.isGetter) {
 			o[k].force = function _Q_Method_force_shim () {
 				var url = Q.url(prefix + '/' + k + '.js');

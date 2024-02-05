@@ -12,8 +12,12 @@ Q.exports(function (Users, priv) {
 	 * @static
 	 * @param {Object} [options] You can pass several options here
 	 *  @param {Q.Event} [options.onSuccess] event that occurs when login or authentication "using" a platform is successful. It is passed (user, options, result, used) where user is the Users.User object (null if it was unchanged),
-	 * options were the options used in the call to Users.login, result is one of "registered", "adopted", "connected" or "authorized" (see Users::authenticate)
-	 * and 'used' is "native", "web3", or the name of the platform used, such as "facebook"
+	 *   options were the options used in the call to Users.login, result is one of "registered", "adopted", "connected" or "authorized" (see Users::authenticate)
+	 *   and 'used' is "native", "web3", or the name of the platform used, such as "facebook".
+	 *   The default handler for this event, added under "Users" key, redirects to a URL.
+	 *   Any plugin or app can override it by replacing the handler under the "Users" key with
+	 *   their own handler. That handler is responsible for triggering Q.Users.onComplete event
+	 *   when the flow is completed.
 	 *  @param {Function} [options.onCancel] event that occurs when login or authentication "using" a platform was canceled.
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess, onCancel, or onRequireComplete
 	 *  @param {String} [options.successUrl] If the default onSuccess implementation is used, the browser is redirected here. Defaults to Q.uris[Q.info.app+'/home']

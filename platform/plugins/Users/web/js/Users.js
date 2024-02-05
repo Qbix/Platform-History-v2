@@ -588,10 +588,12 @@
 					}
 					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
 					Q.handle(url);
+					Q.handle(Q.Users.onComplete);
 				}
 			}, 'Users'),
 			onResult: new Q.Event(),
 			onRequireComplete: new Q.Event(),
+			onComplete: new Q.Event(),
 			onboardingUrl: null,
 			successUrl: null,
 			accountStatusURL: null,
