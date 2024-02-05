@@ -15725,6 +15725,9 @@ Q.onInit.add(function () {
 	de.removeClass(Q.info.isAndroid() ? 'Q_notAndroid' : 'Q_android');
 	de.removeClass(Q.info.isStandalone ? 'Q_notStandalone' : 'Q_standalone');
 	de.removeClass(Q.info.isWebView ? 'Q_notWebView' : 'Q_webView');
+	if (Q.info.browser && Q.info.browser.device == 'iPad') {
+		de.addClass('Q_ipad');
+	}
 	if (Q.info.isAndroidStock) {
 		de.addClass('Q_androidStock');
 	}

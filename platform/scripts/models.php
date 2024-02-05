@@ -38,12 +38,13 @@ if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h
 
 $longopts = array('plugin:', 'all');
 $options = getopt('', $longopts);
+
 $plugins = array();
 if (isset($options['plugin'])) {
 	$plugins = is_array($options['plugin']) ? $options['plugin'] : array($options['plugin']);
 }
 
-// if plugins explicit defined
+// if plugin option is explicitly specified
 if (!empty($plugins)) {
 	foreach ($plugins as $plugin) {
 		createModels($plugin);
@@ -51,13 +52,11 @@ if (!empty($plugins)) {
 	exit;
 }
 
-$connections = array_keys(Q_Config::get('Db', 'connections', array()));
+$connections = !isset($options['all'])
+	? Q_Config::get('Q', 'appInfo', 'connections', array())
+	: array_keys(Q_Config::get('Db', 'connections', array()));
+
 $plugins = Q::plugins();
-
-if (!isset($argv[1]) or !empty($options['all'])) {
-	$connections = array_diff($connections, $plugins);
-}
-
 foreach($connections as $c) {
 	if ($c === '*') {
 		continue;

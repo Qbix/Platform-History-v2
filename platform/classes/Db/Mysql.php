@@ -370,6 +370,8 @@ class Db_Mysql implements Db_Interface
 	 * @param {array} [$options.onDuplicateKeyUpdate]
 	 *    You can put an array of fieldname => value pairs here,
 	 *    which will add an ON DUPLICATE KEY UPDATE clause to the query.
+	 *    Consider using new Db_Expression("VALUES(fieldName)") for the values
+	 *    that you'd want to update on existing rows.
 	 */
 	function insertManyAndExecute ($table_into, array $rows = array(), $options = array())
 	{

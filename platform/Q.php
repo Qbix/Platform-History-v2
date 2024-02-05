@@ -100,6 +100,7 @@ require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Text.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PHPError.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'JsonDecode.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'InvalidInput.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Uri.php');
 require_once(Q_CLASSES_DIR.DS.'Db.php');
 require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Expression.php');
