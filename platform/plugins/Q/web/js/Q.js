@@ -12522,7 +12522,7 @@ function _listenForVisibilityChange() {
 			if (_isDocumentHidden === null) {
 				_isDocumentHidden = Q.isDocumentHidden();
 			}
-			Q.onVisibilityChange.call(document, !_isDocumentHidden, event);
+			Q.onVisibilityChange.handle.call(document, !_isDocumentHidden, event);
 		}, 10)(event);
 	}, false);
 }
