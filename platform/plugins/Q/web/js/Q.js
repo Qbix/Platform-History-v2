@@ -12509,10 +12509,18 @@ function _listenForVisibilityChange() {
 			return false;
 		}
 	});
-	Q.addEventListener(document, [visibilityChange, 'pause', 'resume', 'resign', 'active'], function () {
-		setTimeout(function () {
-			Q.onVisibilityChange.handle.call(document, !Q.isDocumentHidden());
-		}, 0);
+	Q.addEventListener(document, [visibilityChange, 'pause', 'resume', 'resign', 'active'],
+	function (event) {
+		var _isDocumentHidden = null;
+		if (event.type !== 'visibilityChange') {
+			_isDocumentHidden = Q.isDocumentHidden(event);
+		}
+		Q.debounce(function (event) {
+			if (_isDocumentHidden === null) {
+				_isDocumentHidden = Q.isDocumentHidden();
+			}
+			Q.onVisibilityChange.call(document, !_isDocumentHidden, event);
+		}, 10)(event);
 	}, false);
 }
 _listenForVisibilityChange();
@@ -12534,8 +12542,7 @@ Q.isDocumentHidden = function (event) {
 			return false;
 		}
 	}
-	return !!(document.hidden || document.msHidden 
-		|| document.webkitHidden || document.oHidden);
+	return document.visibilityState === 'hidden';
 };
 
 
