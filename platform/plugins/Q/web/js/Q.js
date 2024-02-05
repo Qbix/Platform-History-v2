@@ -12509,11 +12509,14 @@ function _listenForVisibilityChange() {
 			return false;
 		}
 	});
+	var _isDocumentHidden = null;
 	Q.addEventListener(document, [visibilityChange, 'pause', 'resume', 'resign', 'active'],
 	function (event) {
-		var _isDocumentHidden = null;
-		if (event.type !== 'visibilityChange') {
+		if (event.type !== 'visibilityChange' && _isDocumentHidden === null) {
 			_isDocumentHidden = Q.isDocumentHidden(event);
+			setTimeout(function () {
+				_isDocumentHidden = null;
+			}, 100);
 		}
 		Q.debounce(function (event) {
 			if (_isDocumentHidden === null) {
