@@ -7,3 +7,53 @@
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.Assets_web3_coin_staking_start_continue {
+    width:100%;
+}
+.Assets_web3_coin_staking_start_allow {
+    width:100%;
+}
+.Assets_web3_coin_staking_start_infoContainer {
+    margin: 30px 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#Assets_web3_coin_staking_start_form_reserveToken,
+#Assets_web3_coin_staking_start_form_amount,
+#Assets_web3_coin_staking_start_form_duration {
+    height: 40px;
+}
+
+/*
+
+.Assets_web3_coin_staking_start_slider_markers {
+    display:block;
+    width:100%;
+}   
+.Assets_web3_coin_staking_start_slider_markers div {
+    float:left;
+}
+*/
+
+.Assets_web3_coin_staking_start_slider {
+    /*width:100%;*/
+}
+
+.sliderContainer datalist {
+    display: flex;
+    /*justify-content: space-between;*/
+    width: 100%;
+}
+.sliderContainer datalist option {
+    width: 100%;
+}
+.Assets_web3_coin_staking_start_btnsContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.Assets_web3_coin_staking_start_btnsContainer button {
+    width:100%;
+} 
