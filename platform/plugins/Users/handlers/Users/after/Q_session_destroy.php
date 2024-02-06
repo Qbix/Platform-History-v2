@@ -21,7 +21,7 @@ function Users_after_Q_session_destroy($params)
 	if (!$id) {
 		return;
 	}
-	$content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
+	$content = Q::json_encode((object)$_SESSION);
 
 	Q_Utils::sendToNode(array(
 		"Q/method" => "Users/session", 

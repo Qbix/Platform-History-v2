@@ -12,7 +12,7 @@ function Users_before_Q_session_save($params)
 		$row->userId = $userId;
 	}
 	$row->content = isset($_SESSION)
-		? Q::json_encode($_SESSION, JSON_FORCE_OBJECT)
+		? Q::json_encode((object)$_SESSION)
 		: "{}";
 	if (!$row->wasRetrieved()) {
 		$row->deviceId = "";
