@@ -300,8 +300,11 @@ class Streams_Invite extends Base_Streams_Invite
 		// subscribe or join, if needed
 		$onInviteAccepted = Streams_Stream::getConfigField($stream->type, "onInviteAccepted", null);
 		if ($onInviteAccepted) {
-			$options["subscribe"] = $onInviteAccepted == "subscribe";
-			$options["join"] = $onInviteAccepted == "join";
+			if (!is_array($onInviteAccepted)) {
+				$onInviteAccepted = [$onInviteAccepted];
+			}
+			$options["subscribe"] = in_array("subscribe", $onInviteAccepted);
+			$options["join"] = in_array("join", $onInviteAccepted);
 		}
 		if (Q::ifset($options, "subscribe", false)) {
 			$participant = new Streams_Participant();
@@ -312,12 +315,15 @@ class Streams_Invite extends Base_Streams_Invite
 			|| $participant->state != "participating"
 			|| $participant->subscribed != "yes") {
 				try {
-					$extra = Q::ifset($options, 'extra', array());
+					$participantExtra = Q::ifset($options, 'extra', array());
 					$configExtra = Streams_Stream::getConfigField($stream->type, array(
 						'invite', 'extra'
 					), array());
-					$extra = array_merge($configExtra, $extra);
-					$options['extra'] = $extra;
+					$participantExtra = array_merge($configExtra, $participantExtra);
+					if (Q::ifset($extra, 'addLabel', null)) {
+						$participantExtra["role"] = $extra['addLabel'];
+					}
+					$options['extra'] = $participantExtra;
 					$stream->subscribe($options);
 				} catch (Exception $e) {
 					// Swallow this exception. If the caller wanted to catch
