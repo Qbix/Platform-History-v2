@@ -123,6 +123,20 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	}
 
 	/**
+	 * Retrieve stripe customer object.
+	 * @method retrieveCustomer
+	 * @param {String} $stripeCustomerId
+	 * @return {object} The customer object
+	 */
+	function retrieveCustomer($stripeCustomerId)
+	{
+		$stripeClient = new \Stripe\StripeClient($this->options['secret']);
+		$stripeService = new Stripe\Service\CustomerService($stripeClient);
+		$data = $stripeService->retrieve($stripeCustomerId);
+		return $data;
+	}
+
+	/**
 	 * Create a payment intent
 	 * @method createPaymentIntent
 	 * @param {double} $amount specify the amount (optional cents after the decimal point)
