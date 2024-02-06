@@ -39,7 +39,7 @@
 	"Db": {
 		"connections": {
 			"*": {
-				"dsn": "mysql:host=127.0.0.1;dbname=MyApp",
+				"dsn": "mysql:host=127.0.0.1;charset=utf8mb4;dbname=MyApp",
 				"username": "MyApp",
 				"password": "somepassword",
 				"driver_options": { "3": 2 }	
