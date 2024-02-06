@@ -143,7 +143,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 		
 		var fields = Q.extend({}, state.templates.icon.fields, {
-			src: Users.iconUrl('loading', 40)
+			src: Users.iconUrl('loading', state.icon.size)
 		});
 		Q.Template.render(state.templates.loading.name, fields, function (err, html) {
 			Q.replace(tool.element, html);;
@@ -158,9 +158,17 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}
 			state.user = user;
 			if (state.icon) {
+				var icon = state.icon;
+				if (Q.isInteger(icon) && window.devicePixelRatio > 1) {
+					for (var k in Q.Users.icon.sizes) {
+						if (k >= icon * window.devicPixelRatio) {
+							icon = k;
+						}
+					}
+				}
 				var src = isNaN(state.icon)
-					? state.icon
-					: Q.url(avatar.iconUrl(state.icon), 40);
+					? icon
+					: Q.url(avatar.iconUrl(icon), 40);
 				fields = Q.extend({}, state.templates.icon.fields, {src: src});
 				Q.Template.render(state.templates.icon.name, fields, function (err, html) {
 					p.fill('icon')(html);

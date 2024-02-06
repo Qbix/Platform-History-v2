@@ -50,7 +50,7 @@ Q.Tool.define('Users/list', function () {
 	preload: 1,
 	avatar: {
 		"short": true,
-		icon: (window.devicePixelRatio > 1 ? '200' : '80'),
+		icon: 80,
 		reflectChanges: false
 	},
 	onRefresh: new Q.Event(),
