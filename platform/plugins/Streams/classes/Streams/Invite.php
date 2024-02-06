@@ -321,7 +321,7 @@ class Streams_Invite extends Base_Streams_Invite
 					), array());
 					$participantExtra = array_merge($configExtra, $participantExtra);
 					if (Q::ifset($extra, 'addLabel', null)) {
-						$participantExtra["role"] = $extra['addLabel'];
+						$participantExtra["roles"] = $extra['addLabel'];
 					}
 					$options['extra'] = $participantExtra;
 					$stream->subscribe($options);
