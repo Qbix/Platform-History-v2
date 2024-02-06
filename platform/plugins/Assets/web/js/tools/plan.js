@@ -146,8 +146,6 @@ Q.Tool.define("Assets/plan", function(options) {
 			},
 			period: period,
 			currency: currency === "USD" ? '$' : currency,
-			description: tool.planStream.fields.content.encodeHTML(),
-			price: parseFloat(price).toFixed(2),
 			iconUrl: tool.planStream.iconUrl(state.icon.defaultSize)
 		}, function (err, html) {
 			if (err) {
@@ -156,6 +154,42 @@ Q.Tool.define("Assets/plan", function(options) {
 
 			Q.replace(tool.element, html);
 			$toolElement.activate();
+
+			$("<div>").tool("Streams/preview", {
+				publisherId: state.publisherId,
+				streamName: state.streamName,
+				editable: true
+			}).activate(function () {
+				tool.preview = this;
+				tool.preview.icon($("img.Assets_plan_image", tool.element)[0], null, {
+					overrideShowSize: {
+						'': 400
+					}
+				});
+			});
+
+			$(".Assets_plan_description", tool.element).tool("Streams/inplace", {
+				stream: tool.planStream,
+				field: "content"
+			}).activate();
+			$(".Assets_plan_amount", tool.element).tool("Streams/inplace", {
+				stream: tool.planStream,
+				attribute: "amount",
+				editable: false
+			}).activate(function () {
+				var _formatPrice = function () {
+					this.$static.html(parseFloat(this.$static.html()).toFixed(2));
+				};
+				Q.handle(_formatPrice, this);
+				this.state.onUpdate.set(function () {
+					Q.handle(_formatPrice, this);
+				}, tool);
+			});
+			$(".Assets_plan_period span", tool.element).tool("Streams/inplace", {
+				stream: tool.planStream,
+				attribute: "period",
+				editable: false
+			}).activate();
 
 			tool.planStream.onAttribute("amount").set(function (attributes, name) {
 				$(".Assets_plan_amount", $toolElement).text(parseFloat(attributes[name]).toFixed(2));
@@ -316,7 +350,7 @@ Q.Tool.define("Assets/plan", function(options) {
 
 						Q.alert(tool.text.subscriptions.YouUnsubscribedFromPlan.interpolate({
 							planTitle: tool.planStream.fields.title,
-							endsIn: Q.Tool.setUpElementHTML('div', 'Q/timestamp', {
+							endsIn: Q.Tool.setUpElementHTML('span', 'Q/timestamp', {
 								capitalized: true,
 								time: endsIn
 							}, 'Q_timestamp', tool.prefix)
@@ -340,19 +374,27 @@ Q.Tool.define("Assets/plan", function(options) {
 				});
 			});
 		});
+	},
+	Q: {
+		beforeRemove: function () {
+			if (this.preview) {
+				Q.Tool.remove(this.preview.element, true, true);
+			}
+		}
 	}
 });
 
 Q.Template.set('Assets/plan',
-`<h2 class="Assets_plan_status">{{status}}</h2>
-	<div class="Assets_plan_period">{{subscriptions.Period}}: <span>{{period}}</span></div>
-	<div class="Assets_plan_price">{{subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount">{{price}}</span></div>
+`<img class="Assets_plan_image" />
+	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
+	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>
+	<div class="Assets_plan_period">{{subscriptions.Period}}: <span></span></div>
+	<div class="Assets_plan_price">{{subscriptions.Price}}: <span class="Assets_plan_currency">{{currency}}</span><span class="Assets_plan_amount"></span></div>
 	<div class="Assets_plan_started">{{subscriptions.Started}}: {{started}}</div>
 	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{{tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}}</div>
-	<div class="Assets_plan_description">{{{description}}}</div>
-	<div class="Assets_plan_related_streams"></div>
-	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
-	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>`, {text:["Assets/content"]}
+	<div class="Assets_plan_description"></div>
+	<h2 class="Assets_plan_status">{{status}}</h2>
+	<div class="Assets_plan_related_streams"></div>`, {text:["Assets/content"]}
 );
 
 })(Q, Q.jQuery, window);
