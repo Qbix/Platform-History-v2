@@ -220,7 +220,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 				if (!$href) {
 					$href = $element->getAttribute('value');
 				}
-				$items['image'] = self::normalizeHref($href, $url);
+				$result['image'] = self::normalizeHref($href, $url);
 			}
 		}
 

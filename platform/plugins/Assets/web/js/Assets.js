@@ -551,7 +551,8 @@
 		},
 		"Assets/web3/coin/staking/start": {
 			js: "{{Assets}}/js/tools/web3/coin/staking/start.js",
-			css: ["{{Assets}}/css/tools/web3/coin/staking/start.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"]
+			css: ["{{Assets}}/css/tools/web3/coin/staking/start.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"],
+            text: ["Assets/content", "Assets/web3/coin/staking/start"]
 		},
 		"Assets/web3/coin/staking/history": {
 			js: "{{Assets}}/js/tools/web3/coin/staking/history.js",

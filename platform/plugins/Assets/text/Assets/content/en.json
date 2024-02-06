@@ -1,21 +1,21 @@
 {
     "errors": {
         "Error": "Error",
-        "WalletAbsent": "The wallet not connected.",
+        "WalletAbsent": "The wallet is not connected.",
         "Rendering": "There were errors while rendering <span class='url'>{{1}}<\/span>",
         "PriceRequired": "Price required!",
         "NameRequired": "Name required!",
         "PriceInvalid": "Price invalid!",
         "AmountInvalid": "Amount invalid!",
-        "TransactionFailed": "Transaction Failed",
+        "TransactionFailed": "The transaction has failed",
         "ChainNotSupported": "The selected chain is not supported. Supported chain: {{supportedChain}}",
         "NeedMetaMaskConnected": "Need MetaMask connected to work with application",
         "UserNotLoggedInMetaMask": "User is not logged in to MetaMask",
         "CurrencyNotFound": "Currency not found",
         "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
-        "NoRecipientSelected": "No recipient selected",
+        "NoRecipientSelected": "No recipient has been selected",
         "CantManageFrozenSeries": "You can't manage frozen series",
-        "SubscriptionStreamNotPaid": "You didn't pay to view this content. Please click {{subscriptionUrl}} and subscribe to appropriate plan"
+        "SubscriptionStreamNotPaid": "You haven't paid to view this content. Please click {{subscriptionUrl}} and subscribe to the appropriate plan."
     },
     "admin": {
         "Title": "Assets administrative",
@@ -26,34 +26,34 @@
         "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: the charge has been processed for {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
         "YouSubscribedTo": "You have been subscribed to {{plan.title}}",
-        "Assets\/credits\/alert": "You have alert related to your account"
+        "Assets\/credits\/alert": "You have an alert related to your account"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "Subject": "You received a payment of {{displayAmount}} from {{call 'publisher.displayName'}} for the \"{{description}}\"",
         "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "Subject": "Thank you for your payment for the \"{{description}}\"",
         "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "connectedAccount": {
         "Title": "Connect account",
         "Success": "Success",
-        "YourAccountCreated": "Your account created successfully!",
-        "YourAccountAlreadyCreated": "Your account already created and ready to use"
+        "YourAccountCreated": "Your account has been created successfully!",
+        "YourAccountAlreadyCreated": "Your account has already been created and is ready to use"
     },
     "payment": {
         "AboutOrder": "Info about order",
         "PaymentMethod": "Payment method",
         "ContactInfo": "Contact info",
         "Pay": "Pay",
-        "PaymentSucceeded": "Payment succeeded",
-        "PaymentProcessing.": "Your payment is processing",
-        "FailTryAgain": "Your payment was not successful, please try again",
+        "PaymentSucceeded": "The payment has been successfully processed",
+        "PaymentProcessing.": "Your payment is being processed",
+        "FailTryAgain": "Your payment was not successful. Please try again.",
         "SomethingWrong": "Something went wrong",
         "PaymentStatus": "Payment status",
         "PayTo": "Pay {{displayName}}",
@@ -74,7 +74,7 @@
         "CreatePaidStream": "for creating {{toStreamName}}",
         "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
         "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{fromPublisherId}}' data-streamName='{{fromStreamName}}'>{{fromStreamTitle}}<\/a>\"",
+        "LeftPaidStream": "as a reservation refund in \"<a data-publisherId='{{fromPublisherId}}' data-streamName='{{fromStreamName}}'>{{fromStreamTitle}}<\/a>\"",
         "BoughtCredits": "Bought {{amount}} credits",
         "BonusCredits": "Bonus {{amount}} credits",
         "BuyAmountCredits": "Buy {{amount}} credits",
@@ -82,12 +82,12 @@
         "MissingCredits": "Missing Credits",
         "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "BuyBonus": "Purchasing {{amount}} credits at once will result in a bonus of {{bonus}} credits.",
         "Buy": "Buy",
         "PurchaseCredits": "Purchase Credits",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "ErrorInvalidCurrency": "Unfortunately, we do not yet support the currency {{currency}}",
         "forMessages": {
             "BoughtCredits": "{{amount}} credits",
             "BonusCredits": "{{amount}} credits"
@@ -134,7 +134,7 @@
         "CreatePrivateChat": "Spent {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Provide the Payment Information",
         "confirm": {
             "title": "Start Subscription",
             "message": "Start a recurring subscription to \"{{title}}\"?",
@@ -146,7 +146,7 @@
         "ImmediatePayment": "Immediate Payment",
         "ProcessingPayment": "Processing Payment",
         "SubscriptionAlreadyPaid": "This subscription already paid",
-        "SubscriptionNotActive": "This subscription is not active",
+        "SubscriptionNotActive": "The subscription is currently inactive",
         "Subscribed": "Subscribed",
         "Unsubscribed": "Unsubscribed",
         "Unsubscribe": "Unsubscribe",
@@ -156,8 +156,8 @@
         "NextPay": "Next payment",
         "Period": "Period",
         "Price": "Price",
-        "AreYouSureUnsubscribe": "Are you sure you want to unsubscribe this plan?",
-        "YouUnsubscribedFromPlan": "You unsubscribed from plan \"{{planTitle}}\". You will not charged, but your subscription will continue until {{endsIn}}",
+        "AreYouSureUnsubscribe": "Are you sure you want to unsubscribe from this plan?",
+        "YouUnsubscribedFromPlan": "You have unsubscribed from the plan \"{{planTitle}}\". You will not be charged, but your subscription will continue until {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "plan title",
             "PricePlaceholder": "price",
@@ -226,7 +226,7 @@
             "content": "Received {{amount}} credits from {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "You have little credits on your account. Please visit <a href='{{link}}'>this link<\/a> to buy more credits."
+            "content": "You have insufficient credits in your account. Please visit the following <a href='{{link}}'>link</a> to purchase more credits."
         }
     },
     "billing": {
@@ -236,8 +236,8 @@
         "Save": "Save",
         "ThisLink": "this link",
         "errors": {
-            "CreditsMinimumNegative": "Credits minimum can't be negative",
-            "CreditsToAddNegative": "Credits to add can't be negative"
+            "CreditsMinimumNegative": "The minimum credits cannot be negative",
+            "CreditsToAddNegative": "The credits to add cannot be negative"
         }
     },
     "services": {
@@ -260,7 +260,7 @@
         "OptionalContribution": "Optional contribution",
         "RequiredPayment": "Required payment",
         "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They will also be removed."
     },
     "transfer": {
         "SelectRecipient": "Select recipient",

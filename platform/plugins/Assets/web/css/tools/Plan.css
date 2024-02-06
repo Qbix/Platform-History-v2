@@ -24,6 +24,8 @@
 }
 .Assets_plan_tool[data-subscribed=false] .Assets_plan_status {
     color: red;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
 }
 .Assets_plan_tool[data-stopped=false] .Assets_plan_started,
 .Assets_plan_tool[data-stopped=false] .Assets_plan_endsIn,
@@ -31,11 +33,10 @@
 .Assets_plan_tool button[name=unsubscribe] {
     display: none;
 }
+.Assets_plan_tool[data-subscribed=false] button[name=subscribe],
 .Assets_plan_tool[data-subscribed=true] button[name=unsubscribe] {
     display: block;
-}
-.Assets_plan_tool[data-subscribed=false] button[name=subscribe] {
-    display: block;
+    margin-bottom: 10px;
 }
 .Assets_plan_tool .Assets_plan_related_streams:empty {
     display: none;
@@ -47,7 +48,10 @@
     padding: 10px 0;
 }
 .Assets_plan_tool .Assets_plan_description {
+    width: 100%;
     text-align: justify;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
 }
 .Assets_plan_tool .Assets_plan_description:empty {
     display: none;
@@ -70,4 +74,10 @@
 .Assets_plan_select_stream .Q_dialog_content > .Streams_related_tool > .Streams_preview_tool:not(:last-child),
 .Assets_plan_tool .Assets_plan_related_streams > .Streams_preview_tool:not(.Streams_related_composer) {
     margin-bottom: 5px;
+}
+.Assets_plan_tool img.Assets_plan_image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 10px;
 }
