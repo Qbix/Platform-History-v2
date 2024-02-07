@@ -26,7 +26,7 @@ function Users_after_Q_session_write($params)
 	}
 	$parts = explode('-', $id);
 	$duration = (count($parts) > 1) ? $parts[0] : 0;
-	$content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
+	$content = Q::json_encode((object)$_SESSION);
 
 	if (Users::$loggedOut) {
 		Q_Utils::sendToNode(array(

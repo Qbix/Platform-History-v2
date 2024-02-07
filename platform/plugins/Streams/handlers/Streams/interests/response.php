@@ -32,8 +32,8 @@ function Streams_interests_response()
 			unset($v['#']);
 		}
 	}
-	$all_json = Q::json_encode($interests, JSON_FORCE_OBJECT);
-	$info_json = Q::json_encode($info, JSON_FORCE_OBJECT);
+	$all_json = Q::json_encode((object)$interests);
+	$info_json = Q::json_encode((object)$info);
  	echo "Q.setObject(['Q', 'Streams', 'Interests', 'all', '$communityId'], $all_json);\n";
 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'info', '$communityId'], $info_json);";
 	return false;

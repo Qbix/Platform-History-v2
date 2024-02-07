@@ -190,7 +190,7 @@ class Users_Session extends Base_Users_Session
 		} else {
 			$us2->timeout = 0;
 		}
-		$us2->content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
+		$us2->content = Q::json_encode((object)$_SESSION);
 		$us2->php = session_encode();
 		$us2->duration = $seconds;
 		$us2->timeout = 0;

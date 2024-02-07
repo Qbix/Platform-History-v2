@@ -61,6 +61,7 @@
 	 *  	@param {string}  [options.bl.display] css "display" style for corner element.
 	 *		@param {Q.Event} [options.bl.onCreate] Event executed every time badge element created. Get tool as context and badge element, corner, style as arguments.
 	 *  @param {string}  [options.size="15px"] Default badge size.
+	 *  @param {boolean} [skipOverlapped=false] If true skip overflow:'clip' parents
 	 * @return {Q.Tool}
 	 */
 	Q.Tool.define("Q/badge", function () {
@@ -96,7 +97,8 @@
 		tr: null,
 		br: null,
 		bl: null,
-		size: "15px"
+		size: "15px",
+		skipOverlapped: false
 	},
 	{
 		refresh: function () {
@@ -235,23 +237,25 @@
 				// remove old styles and apply new
 				$badgeElement.removeProp("style").css(style);
 
-				var badgeRect = $badgeElement[0].getBoundingClientRect();
-				var scrolligParent = tool.element.scrollingParent(false, 'vertical', true);
-				var $jq = $te.parents().addBack()
-				.filter(function (i, e) {
-					if (e.isSameNode(scrolligParent) || e.contains(scrolligParent)) {
-						return false;
-					}
+				if (!state.skipOverlapped) {
+					var badgeRect = $badgeElement[0].getBoundingClientRect();
+					var scrolligParent = tool.element.scrollingParent(false, 'vertical', true);
+					var $jq = $te.parents().addBack()
+						.filter(function (i, e) {
+							if (e.isSameNode(scrolligParent) || e.contains(scrolligParent)) {
+								return false;
+							}
 
-					var parentRect = e.getBoundingClientRect();
-					return (badgeRect.left < parentRect.left
-					|| badgeRect.right > parentRect.right
-					|| badgeRect.top < parentRect.top
-					|| badgeRect.bottom > parentRect.bottom)
-					&& ($(e).css('overflow-x').toLowerCase() === 'hidden'
-						|| $(e).css('overflow-y').toLowerCase() === 'hidden');
-				}).incrementClass('Q_badge_parent_overlapped');
-				$te.data('Q_badge incrementedClass', $jq);
+							var parentRect = e.getBoundingClientRect();
+							return (badgeRect.left < parentRect.left
+								|| badgeRect.right > parentRect.right
+								|| badgeRect.top < parentRect.top
+								|| badgeRect.bottom > parentRect.bottom)
+								&& ($(e).css('overflow-x').toLowerCase() === 'hidden'
+									|| $(e).css('overflow-y').toLowerCase() === 'hidden');
+						}).incrementClass('Q_badge_parent_overlapped');
+					$te.data('Q_badge incrementedClass', $jq);
+				}
 			});
 
 			// remove copied elements
@@ -269,8 +273,9 @@
 
 				interval && clearInterval(interval);
 
-				$(this.element).data('Q_badge incrementedClass')
-				.decrementClass('Q_badge_parent_overlapped');
+				if (!this.state.skipOverlapped) {
+					$(this.element).data('Q_badge incrementedClass').decrementClass('Q_badge_parent_overlapped');
+				}
 			}
 		}
 	}
