@@ -4362,17 +4362,17 @@ abstract class Streams extends Base_Streams
 		$url = (Q_Valid::url($url) or mb_substr($stream->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
-		$baseUrl = Q_Request::baseUrl();
-		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl) && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
+		$themedUrl = Q_Html::themedUrl($url, array(
+			'baseUrlPlaceholder' => true
+		));
+		if ($basename !== false && Q::startsWith($themedUrl, '{{baseUrl}}') && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
 			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}
 			if (strpos($basename, '.') === false) {
 				$basename .= '.png';
 			}
-			$url .= "/$basename";
-			return Q_Html::themedUrl($url);
+			$themedUrl .= "/$basename";
 		}
 		return $themedUrl;
 	}
