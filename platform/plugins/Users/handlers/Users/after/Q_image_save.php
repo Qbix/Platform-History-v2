@@ -64,8 +64,6 @@ function Users_after_Q_image_save($params, &$return)
             return;
         }
 
-        $userIdentity = Users_Identify::select()->where(array("userId" => $anotherUserId))->fetchDbRow();
-
         // label can manage icons of other users
         $labelsCanManage = Q_Config::get("Users", "icon", "canManage", array());
 
