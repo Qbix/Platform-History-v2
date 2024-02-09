@@ -3696,8 +3696,9 @@ Q.beforeReplace = new Q.Event();
  *  This is where you would put the code that relies on the property being defined.
  */
 Q.ensure = function _Q_ensure(property, callback) {
-	if (Q.getObject(property, root) !== undefined) {
-		Q.handle(callback, null, [property]);
+	var value = Q.getObject(property, root);
+	if (value !== undefined) {
+		Q.handle(callback, null, [value]);
 		return;
 	}
 	var loader = Q.ensure.loaders[property];
@@ -3706,12 +3707,21 @@ Q.ensure = function _Q_ensure(property, callback) {
 	}
 	Q.onInit.addOnce(function () {
 		if (typeof loader === 'string') {
-			Q.require(loader, callback);
+			if (loader.substr(-3) === '.js') {
+				Q.require(loader, callback);
+			} else if (loader.substr(-5) === '.json') {
+				Q.request(loader, function (err, value) {
+					Q.setObject(property, value);
+					callback && callback(value);
+				}, {
+					extend: false
+				})
+			}
 		} else if (typeof loader === 'function') {
 			loader(property, callback);
 		} else if (loader instanceof Q.Event) {
 			loader.addOnce(property, function _loaded() {
-				callback(property);
+				callback && callback(property);
 			});
 		}
 	});

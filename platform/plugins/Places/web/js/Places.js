@@ -42,9 +42,7 @@ var Places = Q.Places = Q.plugins.Places = {
 	 *   Q.Places.countries and Q.Places.countries is accessible
 	 */
 	loadCountries: function (callback) {
-		Q.addScript('{{Places}}/js/lib/countries.js', function () {
-			callback && callback();
-		});
+		Q.ensure('Q.Places.countries', callback);
 	},
 	
 	/**
@@ -630,6 +628,8 @@ Q.beforeInit.set(function () {
 		+ (plk ? '&key='+encodeURIComponent(plk) : '')
 		+ '&callback=Q.Places.loadGoogleMaps.loaded';
 }, 'Places');
+
+Q.ensure.loaders['Q.Places.countries'] = '{{Places}}/js/lib/countries.json';
 
 Places.loadGoogleMaps.waitingCallbacks = [];
 Places.loadGoogleMaps.loaded = function _PLaces_loadGoogleMaps_loaded () {
