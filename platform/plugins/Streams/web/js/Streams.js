@@ -3680,6 +3680,10 @@ Pp.testRoles = function _Participant_prototype_testRoles (roles) {
 	if (!extras.roles) {
 		return false;
 	}
+	// convert to array if object
+	if (Q.typeOf(extras.roles) === "object") {
+		extras.roles = Object.values(extras.roles);
+	}
 	for (var i=0, l=roles.length; i<l; ++i) {
 		if (extras.roles.indexOf(roles[i]) < 0) {
 			return false;

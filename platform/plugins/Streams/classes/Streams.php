@@ -2940,7 +2940,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($participant->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$participant->extra = Q::json_encode($tree->getAll(), JSON_FORCE_OBJECT);
+				$participant->extra = Q::json_encode((object)$tree->getAll());
 				$participant->save();
 			}
 			$streamNamesUpdate[] = $sn;
@@ -3113,7 +3113,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($p->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$extra = $p->extra = Q::json_encode($tree->getAll(), JSON_FORCE_OBJECT);
+				$extra = $p->extra = Q::json_encode((object)$tree->getAll());
 			}
 			$streamNamesUpdate[] = $sn;
 			$updateCounts[$p->state][] = $sn;

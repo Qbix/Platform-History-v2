@@ -8,7 +8,10 @@
 	pointer-events: none;
 	overflow: hidden;
 }
-
+.Q_badge img {
+	width: 100%;
+	vertical-align: unset;
+}
 .Q_badge_parent_overlapped {
 	overflow: clip !important;
 	overflow-clip-margin: 25px;
