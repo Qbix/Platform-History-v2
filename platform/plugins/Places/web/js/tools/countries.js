@@ -14,7 +14,7 @@ var Places = Q.Places;
  * @param {Object} [options] used to pass options
  * @param {String} [options.flags="{{Places}}/img/squareflags"] the path for the flags, or set to false to omit the flag
  * @param {String} [options.countryCode='US'] the initial country to select in the list
- * @param {Array} [options.firstCountryCodes='US','GB'] array of country codes to place first in the list
+ * @param {Array} [options.firstCountryCodes='US'] array of country codes to place first in the list
  * @param {Boolean} [options.sort] if true, sorts the countries alphabetically
  * @param {Q.Tool} [options.globe] a reference to a "Places/globe" tool to synchronize
  * @param {Q.Event} [options.onReady] this event occurs when the countries selector is ready
@@ -85,7 +85,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 { // default options here
 	flags: "{{Places}}/img/squareflags",
 	countryCode: 'US',
-	firstCountryCodes: ['US','GB'],
+	firstCountryCodes: ['US'],
 	globe: null,
 	sort: false,
 	onChange: new Q.Event(),
