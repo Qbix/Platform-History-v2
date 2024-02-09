@@ -363,14 +363,10 @@ telegram
 }
 
 @media (prefers-color-scheme: dark) {
-	.Streams_invite_option:hover {
-		background: black;
-		color: white;
-	}
 	.Streams_invite_option {
-		border-color: white;
+		border-color: black;
 	}
-	.Streams_invite_option:hover svg {
-		fill: white;
+	.Streams_invite_option svg {
+		fill: black;
 	}
 }
