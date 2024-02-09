@@ -14,7 +14,7 @@ var Places = Q.Places;
  * @param {Object} [options] used to pass options
  * @param {String} [options.flags="{{Places}}/img/squareflags"] the path for the flags, or set to false to omit the flag
  * @param {String} [options.countryCode='US'] the initial country to select in the list
- * @param {Array} [options.firstCountryCodes='US','GB'] array of country codes to place first in the list
+ * @param {Array} [options.firstCountryCodes='US'] array of country codes to place first in the list
  * @param {Boolean} [options.sort] if true, sorts the countries alphabetically
  * @param {Q.Tool} [options.globe] a reference to a "Places/globe" tool to synchronize
  * @param {Q.Event} [options.onReady] this event occurs when the countries selector is ready
@@ -35,15 +35,17 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 		if (state.flags) {
 			tool.$flag = $('<img class="Places_countries_flag" />').attr({
 				src: Q.url(state.flags+'/'+state.countryCode+'.png')
-			}).appendTo(tool.element);
+			}).appendTo(tool.element).on('error', function () {
+				this.src = Q.url(state.flags+'/Unknown.png')
+			});
 			$te.addClass('Places_countries_flags');
 		}
 		var $select = tool.$select = 
 			$('<select class="Places_countries_select" />').appendTo($te);
 		if (!state.countries) {
 			state.countries = [];
-			for (var i=0, l=Places.countries.length; i<l; ++i) {
-				state.countries.push(Places.countries[i][1]);
+			for (var k in Places.countries) {
+				state.countries.push(k);
 			}
 		}
 		tool.refresh();
@@ -83,7 +85,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 { // default options here
 	flags: "{{Places}}/img/squareflags",
 	countryCode: 'US',
-	firstCountryCodes: ['US','GB'],
+	firstCountryCodes: ['US'],
 	globe: null,
 	sort: false,
 	onChange: new Q.Event(),
@@ -130,15 +132,15 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 			Q.each(state.firstCountryCodes, function (i, countryCode) {
 				var $option = $('<option />')
 					.attr('value', countryCode)
-					.text(Places.countriesByCode[countryCode][0])
+					.text(Places.countries[countryCode][0])
 					.appendTo(tool.$select);
 				tool.$options[countryCode] = $option;
 				codes[countryCode] = true;
 			});
 			if (state.sort) {
 				state.countries.sort(function (a, b) {
-					var a1 = Places.countriesByCode[a][0];
-					var b1 = Places.countriesByCode[b][0];
+					var a1 = Places.countries[a][0];
+					var b1 = Places.countries[b][0];
 					return a1 > b1 ? 1 : (a == b ? 0 : -1);
 				});
 			}
@@ -147,7 +149,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 				if (codes[countryCode]) return;
 				var $option = $('<option />')
 					.attr('value', countryCode)
-					.text(Places.countriesByCode[countryCode][0])
+					.text(Places.countries[countryCode][0])
 					.appendTo(tool.$select);
 				tool.$options[countryCode] = $option;
 			});
