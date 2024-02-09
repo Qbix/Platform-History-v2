@@ -37,19 +37,13 @@ var Places = Q.Places = Q.plugins.Places = {
 	/**
 	 * @method loadCountries
 	 * @static
-	 * Use this to load country data into Q.Places.countries and Q.Places.countriesByCode
+	 * Use this to load country data into Q.Places.countries and Q.Places.topo
 	 * @param {Function} callback Once the callback is called, 
 	 *   Q.Places.countries and Q.Places.countries is accessible
 	 */
 	loadCountries: function (callback) {
 		Q.addScript('{{Places}}/js/lib/countries.js', function () {
-			var pc = Places.countries;
-			var cbc = Places.countriesByCode = {};
-			for (var i=0, l = Places.countries.length; i < l; ++i) {
-				var pci = pc[i];
-				cbc[ pci[1] ] = pci;
-			}
-			callback();
+			callback && callback();
 		});
 	},
 	

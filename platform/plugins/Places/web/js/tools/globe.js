@@ -477,12 +477,12 @@ function _highlight(options) {
 // Gets the country's feature, if any
 function _getFeature(planet, countryCode) {
 	var countryName, lookup, tj, countries, features, feature;
-	var parts = Places.countriesByCode[countryCode];
+	var parts = Places.countries[countryCode];
 	if (!parts) {
 		return parts;
 	}
 	countryName = parts[0];
-	lookup = Places.countryLookupByCode[countryCode];
+	lookup = Places.countries[countryCode][2];
 	if (tj = planet.plugins.topojson) {
 		if (!tj.world) {
 			return null;
