@@ -84,5 +84,8 @@
             "description": "Kategooria asjadele, mis asuvad geohašist teatud kaugusel, mis vastab huvidele",
             "displayType": "Huvipakkuvad kohad"
         }
+    },
+    "countries": {
+        "SelectCountry": "Valige riik"
     }
 }

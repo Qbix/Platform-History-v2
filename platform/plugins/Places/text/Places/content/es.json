@@ -84,5 +84,8 @@
             "description": "Categoría para cosas dentro de una cierta distancia de un geohash, que coincida con un interés",
             "displayType": "Lugares de interés"
         }
+    },
+    "countries": {
+        "SelectCountry": "Seleccione un país"
     }
 }

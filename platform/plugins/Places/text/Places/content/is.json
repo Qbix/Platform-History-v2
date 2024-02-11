@@ -84,5 +84,8 @@
             "description": "Flokkur fyrir hluti sem eru innan ákveðinnar fjarlægðar frá geohash, sem passa við áhugamál",
             "displayType": "Áhugi á stöðum"
         }
+    },
+    "countries": {
+        "SelectCountry": "Veldu land"
     }
 }

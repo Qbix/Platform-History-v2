@@ -84,5 +84,8 @@
             "description": "Kategorija za stvari znotraj določene razdalje od geohasha, ki se ujema z zanimanjem",
             "displayType": "Kraji zanimajo"
         }
+    },
+    "countries": {
+        "SelectCountry": "Izberite državo"
     }
 }

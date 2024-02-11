@@ -84,5 +84,8 @@
             "description": "Kategorija għal affarijiet f&#39;ċerta distanza ta&#39; geohash, li taqbel ma&#39; interess",
             "displayType": "Postijiet ta&#39; interess"
         }
+    },
+    "countries": {
+        "SelectCountry": "Agħżel pajjiż"
     }
 }

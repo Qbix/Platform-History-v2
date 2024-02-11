@@ -84,5 +84,8 @@
             "description": "Aina ya vitu vilivyo umbali fulani wa geohash, vinavyolingana na mambo yanayokuvutia",
             "displayType": "Maeneo yanayovutia"
         }
+    },
+    "countries": {
+        "SelectCountry": "Chagua nchi"
     }
 }

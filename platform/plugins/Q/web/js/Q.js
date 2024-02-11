@@ -3686,6 +3686,7 @@ Q.beforeReplace = new Q.Event();
  * calling the callback on success.
  * The callback is called only after the Q.onInit event has executed, so functions
  * like Q.url() and Q.addScript can be expected to work properly.
+ * See Q.ensure.loaders
  * @static
  * @method ensure
  * @param {String} property
@@ -3714,7 +3715,8 @@ Q.ensure = function _Q_ensure(property, callback) {
 					Q.setObject(property, value);
 					callback && callback(value);
 				}, {
-					extend: false
+					extend: false,
+					skipNonce: true
 				})
 			}
 		} else if (typeof loader === 'function') {
@@ -3728,7 +3730,7 @@ Q.ensure = function _Q_ensure(property, callback) {
 };
 
 /**
- * Whether a page is currently being loaded
+ * Specifies the ways to load certain properties using Q.ensure()
  * @property {Object} ensure.loaders
  *  Something to execute if the property was undefined and needs to be loaded.
  *  The key is the property. The value can be one of several things.

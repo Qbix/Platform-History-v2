@@ -84,5 +84,8 @@
             "description": "Kategori for ting inden for en vis afstand fra en geohash, der matcher en interesse",
             "displayType": "Steder interesse"
         }
+    },
+    "countries": {
+        "SelectCountry": "Vælg et land"
     }
 }

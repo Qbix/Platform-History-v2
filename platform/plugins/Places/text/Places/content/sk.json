@@ -84,5 +84,8 @@
             "description": "Kategória pre veci v určitej vzdialenosti od geohash, zodpovedajúce záujmu",
             "displayType": "Záujem o miesta"
         }
+    },
+    "countries": {
+        "SelectCountry": "Vyberte krajinu"
     }
 }

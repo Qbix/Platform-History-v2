@@ -84,5 +84,8 @@
             "description": "geohash 一定距离内事物的类别，匹配兴趣",
             "displayType": "感兴趣的地方"
         }
+    },
+    "countries": {
+        "SelectCountry": "选择一个国家"
     }
 }

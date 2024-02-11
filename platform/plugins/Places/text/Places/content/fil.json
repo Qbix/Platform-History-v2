@@ -84,5 +84,8 @@
             "description": "Kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash, na tumutugma sa isang interes",
             "displayType": "Mga lugar na interes"
         }
+    },
+    "countries": {
+        "SelectCountry": "Pumili ng Bansa"
     }
 }

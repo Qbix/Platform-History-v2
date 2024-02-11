@@ -84,5 +84,8 @@
             "description": "Geohash batetik distantzia jakin bateko gauzen kategoria, interes batekin bat datorrena",
             "displayType": "Lekuen interesa"
         }
+    },
+    "countries": {
+        "SelectCountry": "Hautatu herrialde bat"
     }
 }

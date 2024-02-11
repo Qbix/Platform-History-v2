@@ -84,5 +84,8 @@
             "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash, sy&#39;n cyfateb i ddiddordeb",
             "displayType": "Yn rhoi diddordeb"
         }
+    },
+    "countries": {
+        "SelectCountry": "Dewiswch wlad"
     }
 }

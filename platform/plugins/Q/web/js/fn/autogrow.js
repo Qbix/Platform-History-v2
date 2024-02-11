@@ -14,7 +14,7 @@
  * @param {Number} [options.minWidth=0] minWidth The input won't get smaller than this
  * @param {Number} [options.minHeight=0] minHeight The textarea won't get smaller than this
  * @param {Number} [options.comfortZone=10] How many pixels of padding to allocate for typing ahead
- * @param [Q.Event] [options.onResize] Triggered during a size change, its "this" object is the jQuery selector of the plugin. If used with a text input, the first parameter is the new width.
+ * @param {Q.Event} [options.onResize] Triggered during a size change, its "this" object is the jQuery selector of the plugin. If used with a text input, the first parameter is the new width.
  * @default new Q.Event()
  */
 

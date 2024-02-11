@@ -84,5 +84,8 @@
             "description": "Kategorija daiktams, esantiems tam tikru atstumu nuo geohash, atitinkanti pomėgius",
             "displayType": "Įdomios vietos"
         }
+    },
+    "countries": {
+        "SelectCountry": "Pasirinkite šalį"
     }
 }

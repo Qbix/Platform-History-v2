@@ -84,5 +84,8 @@
             "description": "Kategorie pro věci v určité vzdálenosti od geohash, odpovídající zájmu",
             "displayType": "Zájem o místa"
         }
+    },
+    "countries": {
+        "SelectCountry": "Vyber zemi"
     }
 }

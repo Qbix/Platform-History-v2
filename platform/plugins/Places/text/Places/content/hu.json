@@ -84,5 +84,8 @@
             "description": "Kategória a geohash-tól bizonyos távolságon belüli dolgokhoz, érdeklődésnek megfelelő",
             "displayType": "Érdekes helyek"
         }
+    },
+    "countries": {
+        "SelectCountry": "Válassz egy országot"
     }
 }

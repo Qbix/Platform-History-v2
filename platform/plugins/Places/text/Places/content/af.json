@@ -84,5 +84,8 @@
             "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohasj, wat ooreenstem met &#39;n belangstelling",
             "displayType": "Plekke belangstelling"
         }
+    },
+    "countries": {
+        "SelectCountry": "Kies &#39;n land"
     }
 }

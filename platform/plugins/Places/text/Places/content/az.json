@@ -84,5 +84,8 @@
             "description": "Geohashdan müəyyən məsafədə olan, maraqlara uyğun olan şeylər üçün kateqoriya",
             "displayType": "Maraqlı yerlər"
         }
+    },
+    "countries": {
+        "SelectCountry": "Ölkə seçin"
     }
 }

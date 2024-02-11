@@ -84,5 +84,8 @@
             "description": "Kategori för saker inom ett visst avstånd från en geohash, som matchar ett intresse",
             "displayType": "Platser intresserar"
         }
+    },
+    "countries": {
+        "SelectCountry": "Välj ett land"
     }
 }

@@ -84,5 +84,8 @@
             "description": "Kategori untuk hal-hal dalam jarak tertentu dari geohash, cocok dengan minat",
             "displayType": "Tempat menarik"
         }
+    },
+    "countries": {
+        "SelectCountry": "Pilih negara"
     }
 }

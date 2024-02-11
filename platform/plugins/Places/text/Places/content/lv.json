@@ -84,5 +84,8 @@
             "description": "Kategorija lietām, kas atrodas noteiktā attālumā no ģeohašas, kas atbilst interesēm",
             "displayType": "Interesējošās vietas"
         }
+    },
+    "countries": {
+        "SelectCountry": "Izvēlieties valsti"
     }
 }
