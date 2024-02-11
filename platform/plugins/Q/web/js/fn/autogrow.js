@@ -10,14 +10,10 @@
  * @class Q autogrow
  * @constructor
  * @param {Object} [options] , object for an options
- * @param {Number|Element} [options.maxWidth] maxWidth The input won't get larger than this number or element
- * @default 1000
- * @param {Number} [options.minWidth] minWidth The input won't get smaller than this
- * @default 0
- * @param {Number} [options.minHeight] minHeight The textarea won't get smaller than this
- * @default 0
- * @param {Number} [options.comfortZone] How many pixels of padding to allocate for typing ahead
- * @default 10
+ * @param {Number|Element} [options.maxWidth=1000] maxWidth The input won't get larger than this number or element
+ * @param {Number} [options.minWidth=0] minWidth The input won't get smaller than this
+ * @param {Number} [options.minHeight=0] minHeight The textarea won't get smaller than this
+ * @param {Number} [options.comfortZone=10] How many pixels of padding to allocate for typing ahead
  * @param [Q.Event] [options.onResize] Triggered during a size change, its "this" object is the jQuery selector of the plugin. If used with a text input, the first parameter is the new width.
  * @default new Q.Event()
  */

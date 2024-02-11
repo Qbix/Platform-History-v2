@@ -4834,6 +4834,7 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached, removeElementAfterLast
  * @param {Object} [defaultOptions] An optional hash of default options for the tool
  * @param {Array} [stateKeys] An optional array of key names to copy from options to state
  * @param {Object} [methods] An optional hash of method functions to assign to the prototype
+ * @param {Boolean} [overwrite] Pass true here to overwrite the tool definition even if a constructor function was already loaded
  * @return {Function} The tool's constructor function
  */
 Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods, overwrite) {
@@ -4843,11 +4844,15 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	} else {
 		if (typeof arguments[1] !== 'function' && typeof arguments[2] === 'function') {
 			var require = arguments[1];
+			ctor = arguments[2];
+			defaultOptions = arguments[3];
+			stateKeys = arguments[4];
+			methods = arguments[5];
+			overwrite = arguments[6];
 			if (typeof require === 'string') {
 				require = [require];
 			}
-			ctor = arguments[2]; ctor.require = require; defaultOptions = arguments[3];
-			stateKeys = arguments[4]; methods = arguments[5];
+			ctor.require = require;
 		}
 		ctors[name] = ctor;
 	}
@@ -4928,6 +4933,38 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		});
 	});
 	return ctor;
+};
+
+/**
+ * A shorthand way to define multiple tools, by a name pattern RegExp,
+ * and use it to specify default names of js, css, etc. files for the tools.
+ * 
+ * @param {String|RegExp} regexp For example "{{First}}/(.*)". The pattern should contain a capture group.
+ * @param {Object} defaults For example {js: "{{First}}/js/$1.js", css: "{{First}}/css/$1.css"}
+ * @param {Object} tools Keys are tool names and values are {} or { overrides here } to extend defaults.
+ * @return {Object} pairs of { toolName: defined }
+ */
+Q.Tool.define.pattern = function (regexp, defaults, tools) {
+	if (typeof regexp === 'string') {
+		regexp = new RegExp(regexp);
+	}
+	if (!defaults || !tools) {
+		return;
+	}
+	var defined = {};
+	for (var toolName in tools) {
+		var match = toolName.match(regexp);
+		if (!match) {
+			console.warn("Q.Tool.define.pattern: doesn't match tool name " + toolName);
+			continue;
+		}
+		var info = {};
+		for (var k in defaults) {
+			info[k] = toolName.replace(regexp, defaults[k])
+		}
+		defined[toolName] = Q.Tool.define(toolName, Q.extend(info, tools[toolName]));
+	}
+	return defined;
 };
 
 Q.Tool.beingActivated = undefined;
