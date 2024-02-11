@@ -642,6 +642,11 @@ Q.text.Places = {
 
 };
 
+Q.Text.addFor(
+	['Q.Tool.define', 'Q.Template.set'],
+	'Places/', ["Places/content"]
+);
+
 Q.Tool.define({
 	"Places/address": "{{Places}}/js/tools/address.js",
 	"Places/globe": "{{Places}}/js/tools/globe.js",
