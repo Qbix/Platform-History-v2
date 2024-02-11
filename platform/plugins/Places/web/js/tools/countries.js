@@ -25,7 +25,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	state.countryCode = state.countryCode.toUpperCase();
+	state.countryCode = state.countryCode && state.countryCode.toUpperCase();
 	tool.$options = {};
 	
 	var position = $te.css('position');
