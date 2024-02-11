@@ -62,18 +62,6 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 			//     });
 			// }
 		}));
-		if (state.countryCode) {
-			$select.val(state.countryCode);
-		} else {
-			$('<option />')
-				.attr('disabled', 'disabled')
-				.attr('selected', 'selected')
-				.attr('value', '')
-				.text(tool.text.countries.SelectCountry)
-				.prependTo(tool.$select);
-			$select.val('');
-		}
-		$select.trigger('change');
 		Q.handle(state.onReady, tool);
 	});
 	
@@ -138,6 +126,18 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 			var tool = this;
 			var state = tool.state;
 			tool.$select.empty();
+			if (state.countryCode) {
+				tool.$select.val(state.countryCode);
+				tool.$select.trigger('change');
+			} else {
+				$('<option />')
+					.attr('disabled', 'disabled')
+					.attr('selected', 'selected')
+					.attr('value', '')
+					.text(tool.text.countries.SelectCountry)
+					.prependTo(tool.$select);
+				tool.$select.val('');
+			}
 			var codes = {};
 			Q.each(state.firstCountryCodes, function (i, countryCode) {
 				var text = Places.countries[countryCode][3]
