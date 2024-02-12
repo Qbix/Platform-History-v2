@@ -7127,7 +7127,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 	}
 	var keyPath = (typeof params === 'string' ? params : params.keyPath);
 	var lskey = 'Q_IndexedDB_version';
-	var version = localStorage.getItem(lskey) || 1;
+	var version = localStorage.getItem(lskey); // may be undefined
 	var open = indexedDB.open(dbName, version);
 	var _triedAddingObjectStore = false;
 	open.onupgradeneeded = function() {
@@ -11785,6 +11785,14 @@ Q.Data = Q.Method.define({
 		return Uint8Array.from(atob(base64), function(m) {
 			return m.codePointAt(0)
 		});
+	},
+	blobFromDataURL: function (dataURL) {
+		var arr = dataURL.split(','), mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new Blob([u8arr], {type:mime});
 	}
 }, "{{Q}}/js/methods/Q/Data", function() {
 	return [Q];
