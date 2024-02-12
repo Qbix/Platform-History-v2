@@ -7127,7 +7127,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 	}
 	var keyPath = (typeof params === 'string' ? params : params.keyPath);
 	var lskey = 'Q_IndexedDB_version';
-	var version = localStorage.getItem(lskey); // may be undefined
+	var version = localStorage.getItem(lskey) || undefined;
 	var open = indexedDB.open(dbName, version);
 	var _triedAddingObjectStore = false;
 	open.onupgradeneeded = function() {
