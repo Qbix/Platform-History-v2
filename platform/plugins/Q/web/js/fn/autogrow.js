@@ -29,7 +29,7 @@ function _Q_autogrow(o) {
 		+ ' paste.Q_autogrow'
 		+ ' autogrowCheck';
 		
-	this.addClass('Q_autogrow_resizing');	
+	this.addClass('Q_autogrow_resizing');
 
 	this.filter('textarea').each(function (i) {
 		var $t = $(this), t = this;
@@ -69,9 +69,9 @@ function _Q_autogrow(o) {
 		}
 
 		$t.on('focus', function(){
-			t.startUpdating()
+			t.startUpdating();
 		}).on('blur', function(){
-			t.stopUpdating()
+			t.stopUpdating();
 		});
 		
 		var prevH = 0;
@@ -106,6 +106,7 @@ function _Q_autogrow(o) {
 		};
 
 		this.stopUpdating = function(){
+			$(this).off(possibleEvents);
 			clearTimeout(t.timeout1);
 			clearTimeout(t.timeout2);
 		};
@@ -218,6 +219,14 @@ function _Q_autogrow(o) {
 	minHeight: 0,
 	comfortZone: 10,
 	onResize: new Q.Event(_surroundPlaceholders, 'Q/autogrow')
+},
+
+{
+	remove: function () {
+		this.filter('textarea').each(function () {
+			this.stopUpdating(); // clear timers
+		});
+	}
 }
 
 );
