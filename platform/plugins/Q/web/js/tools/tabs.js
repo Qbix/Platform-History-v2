@@ -418,9 +418,10 @@
 				}
 
 				tab = tool.getCurrentTab(tab);
-				var $tab = $(tab);
 				tool.$tabs.removeClass('Q_current Q_tabs_switchingTo Q_tabs_switchingFrom');
-				$tab.addClass('Q_current');
+				if (tab instanceof Element) {
+					tab.classList.add('Q_current');
+				}
 
 				_copyClassToOverflow(tool);
 				state.tab = tab;
@@ -467,8 +468,11 @@
 						var tu = tool.getUrl(t);
 
 						if ((tdn && tdn === name)
-						|| (!name && tu === url)
-						|| (!name && !state.field && tu === url.split('?')[0])) {
+						|| (!name && (
+							tu === url
+							|| tu === url.split('?')[0]
+							|| url.startsWith(tu)))
+						) {
 							tab = t;
 							return false;
 						}

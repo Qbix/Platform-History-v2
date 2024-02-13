@@ -1,5 +1,5 @@
 .Streams_invite_modern_dialog {
-	padding: 20px;
+	padding: 10px;
 }
 .Streams_invite_modern_dialog_title {
 	padding-bottom:15px;
@@ -18,10 +18,10 @@
 .Streams_invite_option {
 	flex-grow: 1;
 	flex-basis: 0;
-	padding:20px 10px;
+	padding: 10px;
 	border: 2px solid #000;
 	border-radius: 4px;
-	margin-right: 10px;
+	margin-right: 5px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -363,14 +363,10 @@ telegram
 }
 
 @media (prefers-color-scheme: dark) {
-	.Streams_invite_option:hover {
-		background: black;
-		color: white;
-	}
 	.Streams_invite_option {
-		border-color: white;
+		border-color: black;
 	}
-	.Streams_invite_option:hover svg {
-		fill: white;
+	.Streams_invite_option svg {
+		fill: black;
 	}
 }

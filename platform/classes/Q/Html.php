@@ -1532,12 +1532,6 @@ class Q_Html
 			$url = $theme . ($filePath2 ? '/'.$filePath2 : '');
 		}
 
-		if (!empty($options['baseUrlPlaceholder'])) {
-			if (Q::startsWith($url, $baseUrl)) {
-				$url = '{{baseUrl}}' . substr($url, strlen($baseUrl));
-			}
-		}
-		
 		if (!empty($options['hash'])) {
 			$hash = $options['hash'];
 		} else {
@@ -1556,6 +1550,13 @@ class Q_Html
 			$parts = explode('?', $url);
 			$url = $parts[0];
 		}
+
+		if (!empty($options['baseUrlPlaceholder'])) {
+			if (Q::startsWith($url, $baseUrl)) {
+				$url = '{{baseUrl}}' . substr($url, strlen($baseUrl));
+			}
+		}
+
 		return array($url, $filename, $hash);
 	}
 	

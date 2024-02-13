@@ -1040,7 +1040,7 @@ abstract class Users extends Base_Users
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message.
 	 *   Set to false to skip sending the activation message and automatically set the email or phone number as confirmed.
 	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
-	 * @param {boolean} [$options.leaveDefault=null] Set to true or false, to override what's in the config
+	 * @param {boolean} [$options.leaveDefaultIcon=null] Set to true or false, to override what's in the config
 	 * @param {string} [$options.passphraseHash] Set a custom passphrase hash, such as with hash_pbkdf2, but be careful where it comes from, as it could let someone impersonate this user
 	 * @param {string} [$options.salt] Set a custom passphrase salt, such as from other platforms, but be careful where it comes from, as it could let someone impersonate this user
 	 * @param {string} [$options.idPrefix] Set a prefix for the user ID, such as "bot-"
