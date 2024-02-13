@@ -10,15 +10,11 @@
  * @class Q autogrow
  * @constructor
  * @param {Object} [options] , object for an options
- * @param {Number|Element} [options.maxWidth] maxWidth The input won't get larger than this number or element
- * @default 1000
- * @param {Number} [options.minWidth] minWidth The input won't get smaller than this
- * @default 0
- * @param {Number} [options.minHeight] minHeight The textarea won't get smaller than this
- * @default 0
- * @param {Number} [options.comfortZone] How many pixels of padding to allocate for typing ahead
- * @default 10
- * @param [Q.Event] [options.onResize] Triggered during a size change, its "this" object is the jQuery selector of the plugin. If used with a text input, the first parameter is the new width.
+ * @param {Number|Element} [options.maxWidth=1000] maxWidth The input won't get larger than this number or element
+ * @param {Number} [options.minWidth=0] minWidth The input won't get smaller than this
+ * @param {Number} [options.minHeight=0] minHeight The textarea won't get smaller than this
+ * @param {Number} [options.comfortZone=10] How many pixels of padding to allocate for typing ahead
+ * @param {Q.Event} [options.onResize] Triggered during a size change, its "this" object is the jQuery selector of the plugin. If used with a text input, the first parameter is the new width.
  * @default new Q.Event()
  */
 
@@ -33,7 +29,7 @@ function _Q_autogrow(o) {
 		+ ' paste.Q_autogrow'
 		+ ' autogrowCheck';
 		
-	this.addClass('Q_autogrow_resizing');	
+	this.addClass('Q_autogrow_resizing');
 
 	this.filter('textarea').each(function (i) {
 		var $t = $(this), t = this;
@@ -73,9 +69,9 @@ function _Q_autogrow(o) {
 		}
 
 		$t.on('focus', function(){
-			t.startUpdating()
+			t.startUpdating();
 		}).on('blur', function(){
-			t.stopUpdating()
+			t.stopUpdating();
 		});
 		
 		var prevH = 0;
@@ -110,6 +106,7 @@ function _Q_autogrow(o) {
 		};
 
 		this.stopUpdating = function(){
+			$(this).off(possibleEvents);
 			clearTimeout(t.timeout1);
 			clearTimeout(t.timeout2);
 		};
@@ -222,6 +219,14 @@ function _Q_autogrow(o) {
 	minHeight: 0,
 	comfortZone: 10,
 	onResize: new Q.Event(_surroundPlaceholders, 'Q/autogrow')
+},
+
+{
+	remove: function () {
+		this.filter('textarea').each(function () {
+			this.stopUpdating(); // clear timers
+		});
+	}
 }
 
 );

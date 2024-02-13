@@ -84,5 +84,8 @@
             "description": "በጂኦሃሽ የተወሰነ ርቀት ውስጥ ያሉ ነገሮች፣ ከፍላጎት ጋር የሚዛመድ ምድብ",
             "displayType": "ቦታዎች ፍላጎት"
         }
+    },
+    "countries": {
+        "SelectCountry": "አገር ይምረጡ"
     }
 }

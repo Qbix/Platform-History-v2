@@ -84,5 +84,8 @@
             "description": "Bir ilgi alanıyla eşleşen, bir geohash&#39;ın belirli bir mesafesindeki şeyler için kategori",
             "displayType": "ilgi alanları"
         }
+    },
+    "countries": {
+        "SelectCountry": "Bir ülke seçin"
     }
 }

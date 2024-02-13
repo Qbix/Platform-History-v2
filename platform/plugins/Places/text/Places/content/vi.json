@@ -84,5 +84,8 @@
             "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash, phù hợp với sở thích",
             "displayType": "Địa điểm quan tâm"
         }
+    },
+    "countries": {
+        "SelectCountry": "Chọn một quốc gia"
     }
 }

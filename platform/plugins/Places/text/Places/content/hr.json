@@ -84,5 +84,8 @@
             "description": "Kategorija za stvari unutar određene udaljenosti od geohasha, koja odgovara interesu",
             "displayType": "Interes mjesta"
         }
+    },
+    "countries": {
+        "SelectCountry": "Odaberite zemlju"
     }
 }

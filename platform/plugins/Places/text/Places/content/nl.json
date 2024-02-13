@@ -84,5 +84,8 @@
             "description": "Categorie voor dingen binnen een bepaalde afstand van een geohash, overeenkomend met een interesse",
             "displayType": "Plaatst interesse"
         }
+    },
+    "countries": {
+        "SelectCountry": "Selecteer een land"
     }
 }

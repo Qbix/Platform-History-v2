@@ -84,5 +84,8 @@
             "description": "関心に一致する、ジオハッシュから一定の距離内にあるもののカテゴリ",
             "displayType": "興味のある場所"
         }
+    },
+    "countries": {
+        "SelectCountry": "国を選択"
     }
 }

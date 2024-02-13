@@ -84,5 +84,8 @@
             "description": "קטגוריה של דברים במרחק מסוים מגיאואש, תואמת עניין",
             "displayType": "מקומות עניין"
         }
+    },
+    "countries": {
+        "SelectCountry": "בחר ארץ"
     }
 }

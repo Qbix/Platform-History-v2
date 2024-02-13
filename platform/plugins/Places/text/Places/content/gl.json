@@ -84,5 +84,8 @@
             "description": "Categoría para cousas a unha certa distancia dun xeohash, que coincide cun interese",
             "displayType": "Lugares de interese"
         }
+    },
+    "countries": {
+        "SelectCountry": "Seleccione un país"
     }
 }

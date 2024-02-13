@@ -3686,6 +3686,7 @@ Q.beforeReplace = new Q.Event();
  * calling the callback on success.
  * The callback is called only after the Q.onInit event has executed, so functions
  * like Q.url() and Q.addScript can be expected to work properly.
+ * See Q.ensure.loaders
  * @static
  * @method ensure
  * @param {String} property
@@ -3696,8 +3697,9 @@ Q.beforeReplace = new Q.Event();
  *  This is where you would put the code that relies on the property being defined.
  */
 Q.ensure = function _Q_ensure(property, callback) {
-	if (Q.getObject(property, root) !== undefined) {
-		Q.handle(callback, null, [property]);
+	var value = Q.getObject(property, root);
+	if (value !== undefined) {
+		Q.handle(callback, null, [value]);
 		return;
 	}
 	var loader = Q.ensure.loaders[property];
@@ -3706,19 +3708,29 @@ Q.ensure = function _Q_ensure(property, callback) {
 	}
 	Q.onInit.addOnce(function () {
 		if (typeof loader === 'string') {
-			Q.require(loader, callback);
+			if (loader.substr(-3) === '.js') {
+				Q.require(loader, callback);
+			} else if (loader.substr(-5) === '.json') {
+				Q.request(loader, function (err, value) {
+					Q.setObject(property, value);
+					callback && callback(value);
+				}, {
+					extend: false,
+					skipNonce: true
+				})
+			}
 		} else if (typeof loader === 'function') {
 			loader(property, callback);
 		} else if (loader instanceof Q.Event) {
 			loader.addOnce(property, function _loaded() {
-				callback(property);
+				callback && callback(property);
 			});
 		}
 	});
 };
 
 /**
- * Whether a page is currently being loaded
+ * Specifies the ways to load certain properties using Q.ensure()
  * @property {Object} ensure.loaders
  *  Something to execute if the property was undefined and needs to be loaded.
  *  The key is the property. The value can be one of several things.
@@ -4824,6 +4836,7 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached, removeElementAfterLast
  * @param {Object} [defaultOptions] An optional hash of default options for the tool
  * @param {Array} [stateKeys] An optional array of key names to copy from options to state
  * @param {Object} [methods] An optional hash of method functions to assign to the prototype
+ * @param {Boolean} [overwrite] Pass true here to overwrite the tool definition even if a constructor function was already loaded
  * @return {Function} The tool's constructor function
  */
 Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods, overwrite) {
@@ -4833,11 +4846,15 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	} else {
 		if (typeof arguments[1] !== 'function' && typeof arguments[2] === 'function') {
 			var require = arguments[1];
+			ctor = arguments[2];
+			defaultOptions = arguments[3];
+			stateKeys = arguments[4];
+			methods = arguments[5];
+			overwrite = arguments[6];
 			if (typeof require === 'string') {
 				require = [require];
 			}
-			ctor = arguments[2]; ctor.require = require; defaultOptions = arguments[3];
-			stateKeys = arguments[4]; methods = arguments[5];
+			ctor.require = require;
 		}
 		ctors[name] = ctor;
 	}
@@ -4918,6 +4935,38 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		});
 	});
 	return ctor;
+};
+
+/**
+ * A shorthand way to define multiple tools, by a name pattern RegExp,
+ * and use it to specify default names of js, css, etc. files for the tools.
+ * 
+ * @param {String|RegExp} regexp For example "{{First}}/(.*)". The pattern should contain a capture group.
+ * @param {Object} defaults For example {js: "{{First}}/js/$1.js", css: "{{First}}/css/$1.css"}
+ * @param {Object} tools Keys are tool names and values are {} or { overrides here } to extend defaults.
+ * @return {Object} pairs of { toolName: defined }
+ */
+Q.Tool.define.pattern = function (regexp, defaults, tools) {
+	if (typeof regexp === 'string') {
+		regexp = new RegExp(regexp);
+	}
+	if (!defaults || !tools) {
+		return;
+	}
+	var defined = {};
+	for (var toolName in tools) {
+		var match = toolName.match(regexp);
+		if (!match) {
+			console.warn("Q.Tool.define.pattern: doesn't match tool name " + toolName);
+			continue;
+		}
+		var info = {};
+		for (var k in defaults) {
+			info[k] = toolName.replace(regexp, defaults[k])
+		}
+		defined[toolName] = Q.Tool.define(toolName, Q.extend(info, tools[toolName]));
+	}
+	return defined;
 };
 
 Q.Tool.beingActivated = undefined;
@@ -7078,7 +7127,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 	}
 	var keyPath = (typeof params === 'string' ? params : params.keyPath);
 	var lskey = 'Q_IndexedDB_version';
-	var version = localStorage.getItem(lskey) || 1;
+	var version = localStorage.getItem(lskey) || undefined;
 	var open = indexedDB.open(dbName, version);
 	var _triedAddingObjectStore = false;
 	open.onupgradeneeded = function() {
@@ -11736,6 +11785,14 @@ Q.Data = Q.Method.define({
 		return Uint8Array.from(atob(base64), function(m) {
 			return m.codePointAt(0)
 		});
+	},
+	blobFromDataURL: function (dataURL) {
+		var arr = dataURL.split(','), mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new Blob([u8arr], {type:mime});
 	}
 }, "{{Q}}/js/methods/Q/Data", function() {
 	return [Q];

@@ -84,5 +84,8 @@
             "description": "Catagóir le haghaidh rudaí laistigh d&#39;achar áirithe de geohash, a mheaitseáil leas",
             "displayType": "Áitíonn spéis"
         }
+    },
+    "countries": {
+        "SelectCountry": "Roghnaigh tír"
     }
 }

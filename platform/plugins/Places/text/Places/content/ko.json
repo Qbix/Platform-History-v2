@@ -84,5 +84,8 @@
             "description": "geohash의 특정 거리 내에 있는 사물에 대한 카테고리, 관심사 일치",
             "displayType": "관심 장소"
         }
+    },
+    "countries": {
+        "SelectCountry": "국가를 고르시 오"
     }
 }

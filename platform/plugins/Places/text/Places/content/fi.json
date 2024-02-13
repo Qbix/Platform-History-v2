@@ -84,5 +84,8 @@
             "description": "Luokka asioille, jotka sijaitsevat tietyllä etäisyydellä geohashista, mikä vastaa kiinnostusta",
             "displayType": "Kiinnostavia paikkoja"
         }
+    },
+    "countries": {
+        "SelectCountry": "Valitse maa"
     }
 }

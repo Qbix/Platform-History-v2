@@ -84,5 +84,8 @@
             "description": "Categorie pentru lucruri aflate la o anumită distanță de un geohash, care se potrivește cu un interes",
             "displayType": "Locuri de interes"
         }
+    },
+    "countries": {
+        "SelectCountry": "Selecteaza o tara"
     }
 }

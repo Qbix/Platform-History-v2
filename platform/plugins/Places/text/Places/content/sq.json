@@ -84,5 +84,8 @@
             "description": "Kategoria për gjërat brenda një distance të caktuar nga një gjeohash, që përputhet me një interes",
             "displayType": "Vende me interes"
         }
+    },
+    "countries": {
+        "SelectCountry": "Zgjidhni një shtet"
     }
 }
