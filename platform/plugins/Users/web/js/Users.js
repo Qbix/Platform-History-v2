@@ -588,7 +588,7 @@
 					}
 					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
 					Q.handle(url);
-					Q.handle(Q.Users.onComplete);
+					Q.handle(options.onComplete);
 				}
 			}, 'Users'),
 			onResult: new Q.Event(),
@@ -607,6 +607,7 @@
 			activation: 'activation'
 		}
 	});
+	Users.login.onComplete = new Q.Event();
 
 	Users.logout = new Q.Method({
 		options: {
