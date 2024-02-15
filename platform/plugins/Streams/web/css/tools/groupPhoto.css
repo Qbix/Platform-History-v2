@@ -30,3 +30,9 @@
 .Streams_groupPhoto_tool button[name=skip] {
     margin: 10px 0;
 }
+.Streams_groupPhoto_prediction {
+    position: absolute;
+    background: transparent;
+    border: 1px double #000;
+    outline: 1px solid #fff;
+}
