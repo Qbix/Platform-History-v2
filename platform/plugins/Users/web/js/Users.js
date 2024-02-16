@@ -607,7 +607,7 @@
 			activation: 'activation'
 		}
 	});
-	Users.login.onComplete = new Q.Event();
+	Users.onComplete = new Q.Event();
 
 	Users.logout = new Q.Method({
 		options: {
