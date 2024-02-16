@@ -867,16 +867,17 @@ class Q_Uri
 	 */
 	static function filenamefromUrl ($url)
 	{
-		if (Q_Valid::url($url)) {
+		$interpolatedUrl = self::interpolateUrl($url);
+		if (Q_Valid::url($interpolatedUrl)) {
 			// This is an absolute URL. Get only the part after the base URL
 			// Run it through proxies first
-			$url = self::proxyDestination($url);
-			$local_url = Q_Request::tail($url);
+			$interpolatedUrl = self::proxyDestination($interpolatedUrl);
+			$local_url = Q_Request::tail($interpolatedUrl);
 			if (!isset($local_url)) {
 				return null;
 			}
 		} else {
-			$local_url = str_replace('{{baseUrl}}', '', $url);
+			$local_url = $url;
 		}
 		$parts = explode('?', $local_url);
 		$local_url = $parts[0];
