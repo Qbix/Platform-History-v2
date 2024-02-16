@@ -876,7 +876,7 @@ class Q_Uri
 				return null;
 			}
 		} else {
-			$local_url = $url;
+			$local_url = str_replace('{{baseUrl}}', '', $url);
 		}
 		$parts = explode('?', $local_url);
 		$local_url = $parts[0];
