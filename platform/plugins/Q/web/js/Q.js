@@ -11707,7 +11707,7 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				var result = compiled(fields, options);
+				var result = compiled(fields, options || {});
 			} catch (e) {
 				err = e;
 				console.warn(e);
@@ -16454,7 +16454,8 @@ Q.Camera = {
 			 * @param {object} options object with options to replace default
 			 */
 			instascan: function (audio, callback, options) {
-				Q.addScript('{{Q}}/js/qrcode/instascan.js', function () {
+				Q.addStylesheet('{{Q}}/js/qrcode/html5-qrcode.css', {slotName: "Q"});
+				Q.addScript('{{Q}}/js/qrcode/html5-qrcode.min.js', function () {
 					Q.Dialogs.push({
 						title: options.dialog.title,
 						className: "Q_scanning",
@@ -16476,8 +16477,28 @@ Q.Camera = {
 					var elementHeight = $element.height();
 					var elementWidth = $element.width();
 
-					// create video element
-					var $videoElement = $("<video playsinline autoplay>").appendTo($element);
+					var elementId = "Q_instascan_" + Date.now();
+					$element.prop("id", elementId);
+					var html5QrcodeScanner = new Html5QrcodeScanner(elementId, { fps: 2, qrbox: {width: elementWidth-50, height: elementHeight-50}},
+						/* verbose= */ false);
+
+					html5QrcodeScanner.render(function onScanSuccess(decodedText, decodedResult) {
+						// Handle on success condition with the decoded text or result.
+						console.log(`Scan result: ${decodedText}`, decodedResult);
+						audio.play();
+						Q.handle(callback, null, [decodedText]);
+					}, function onScanFailure (error) {
+						console.warn(`Code scan error = ${error}`);
+					});
+
+					$("button", $element).add(".html5-qrcode-element", $element).addClass("Q_button");
+
+					Q.Camera.Scan.onClose.set(function(){
+						html5QrcodeScanner.clear();
+					});
+
+
+					/*var $videoElement = $("<video playsinline autoplay>").appendTo($element);
 
 					// set heigth/width of video element to stretch full screen
 					if (elementHeight > elementWidth) {
@@ -16485,9 +16506,6 @@ Q.Camera = {
 					} else {
 						$videoElement.height(elementHeight);
 					}
-					Q.Camera.Scan.onClose.set(function(){
-						scanner.stop();
-					});
 					var scanner = new Instascan.Scanner({
 						video: $videoElement[0],
 						scanPeriod: 5,
@@ -16504,8 +16522,8 @@ Q.Camera = {
 							console.error('No cameras found.');
 						}
 
-						// index of selected camera to last camera
-						var selectedCamera = camerasAmount - 1;
+						// index of selected camera to first camera
+						var selectedCamera = 0;
 
 						// if more than 1 camera - add swap icon
 						if (camerasAmount > 1) {
@@ -16518,7 +16536,7 @@ Q.Camera = {
 						scanner.start(cameras[selectedCamera]);
 					}).catch(function (e) {
 						console.error(e);
-					});
+					});*/
 				}
 			}
 		}
