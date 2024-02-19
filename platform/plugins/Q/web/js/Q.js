@@ -11707,7 +11707,7 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			try {
 				var type = (info && info.type) || (options && options.type);
 				var compiled = Q.Template.compile(params.template[1], type, options);
-				var result = compiled(fields, options);
+				var result = compiled(fields, options || {});
 			} catch (e) {
 				err = e;
 				console.warn(e);
