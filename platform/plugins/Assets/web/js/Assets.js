@@ -516,6 +516,11 @@
 			css: "{{Assets}}/css/tools/web3/transfer.css",
 			text: ["Assets/content", "Users/content"]
 		},
+        "Assets/web3/invoice": {
+			js: "{{Assets}}/js/tools/web3/invoice.js",
+			css: ["{{Assets}}/css/tools/web3/invoice.css", "{{Q}}/css/bootstrap-custom/bootstrap.css"],
+			text: ["Assets/content", "Assets/web3/invoice"]
+		},
 		"Assets/web3/balance": {
 			js: "{{Assets}}/js/tools/web3/balance.js",
 			css: "{{Assets}}/css/tools/web3/balance.css"
