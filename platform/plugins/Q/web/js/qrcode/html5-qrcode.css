@@ -1,0 +1,19 @@
+div[id^='Q_instascan_'] .Q_button {
+    height: 40px;
+    text-decoration: none;
+}
+div[id^='Q_instascan_'] span.Q_button {
+    display: inline-block;
+    text-decoration: none !important;
+    line-height: 40px;
+    padding: 0 10px;
+}
+div[id^='Q_instascan_'][id$='__scan_region'] img {
+    width: 30%;
+}
+div[id$='__dashboard_section_csr'] {
+    margin-bottom: 20px;
+}
+.Q_overlay.Q_scanning {
+    background: none;
+}

@@ -16454,7 +16454,8 @@ Q.Camera = {
 			 * @param {object} options object with options to replace default
 			 */
 			instascan: function (audio, callback, options) {
-				Q.addScript('{{Q}}/js/qrcode/instascan.js', function () {
+				Q.addStylesheet('{{Q}}/js/qrcode/html5-qrcode.css', {slotName: "Q"});
+				Q.addScript('{{Q}}/js/qrcode/html5-qrcode.min.js', function () {
 					Q.Dialogs.push({
 						title: options.dialog.title,
 						className: "Q_scanning",
@@ -16476,6 +16477,26 @@ Q.Camera = {
 					var elementHeight = $element.height();
 					var elementWidth = $element.width();
 
+					var elementId = "Q_instascan_" + Date.now();
+					$element.prop("id", elementId);
+					var html5QrcodeScanner = new Html5QrcodeScanner(elementId, { fps: 1, qrbox: {width: elementWidth-10, height: elementHeight-10}},
+						/* verbose= */ false);
+
+					html5QrcodeScanner.render(function onScanSuccess(decodedText, decodedResult) {
+						// Handle on success condition with the decoded text or result.
+						console.log(`Scan result: ${decodedText}`, decodedResult);
+					}, function onScanFailure (error) {
+						console.warn(`Code scan error = ${error}`);
+					});
+
+					$("button", $element).add(".html5-qrcode-element", $element).addClass("Q_button");
+
+					Q.Camera.Scan.onClose.set(function(){
+						html5QrcodeScanner.clear();
+					});
+
+
+					return;
 					// create video element
 					var $videoElement = $("<video playsinline autoplay>").appendTo($element);
 
@@ -16485,9 +16506,6 @@ Q.Camera = {
 					} else {
 						$videoElement.height(elementHeight);
 					}
-					Q.Camera.Scan.onClose.set(function(){
-						scanner.stop();
-					});
 					var scanner = new Instascan.Scanner({
 						video: $videoElement[0],
 						scanPeriod: 5,
@@ -16504,8 +16522,8 @@ Q.Camera = {
 							console.error('No cameras found.');
 						}
 
-						// index of selected camera to last camera
-						var selectedCamera = camerasAmount - 1;
+						// index of selected camera to first camera
+						var selectedCamera = 0;
 
 						// if more than 1 camera - add swap icon
 						if (camerasAmount > 1) {
