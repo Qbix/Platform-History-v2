@@ -47,5 +47,13 @@
     "readLevel": 40,
     "writeLevel": 23,
     "adminLevel": 0
+  },
+  "Assets/invoices": {
+    "type": "Streams/category",
+    "title": "Assets invoices",
+    "icon": "Streams/category",
+    "readLevel": 0,
+    "writeLevel": 23,
+    "adminLevel": 10
   }
 }
