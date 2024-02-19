@@ -16479,12 +16479,14 @@ Q.Camera = {
 
 					var elementId = "Q_instascan_" + Date.now();
 					$element.prop("id", elementId);
-					var html5QrcodeScanner = new Html5QrcodeScanner(elementId, { fps: 1, qrbox: {width: elementWidth-10, height: elementHeight-10}},
+					var html5QrcodeScanner = new Html5QrcodeScanner(elementId, { fps: 2, qrbox: {width: elementWidth-50, height: elementHeight-50}},
 						/* verbose= */ false);
 
 					html5QrcodeScanner.render(function onScanSuccess(decodedText, decodedResult) {
 						// Handle on success condition with the decoded text or result.
 						console.log(`Scan result: ${decodedText}`, decodedResult);
+						audio.play();
+						Q.handle(callback, null, [decodedText]);
 					}, function onScanFailure (error) {
 						console.warn(`Code scan error = ${error}`);
 					});
@@ -16496,9 +16498,7 @@ Q.Camera = {
 					});
 
 
-					return;
-					// create video element
-					var $videoElement = $("<video playsinline autoplay>").appendTo($element);
+					/*var $videoElement = $("<video playsinline autoplay>").appendTo($element);
 
 					// set heigth/width of video element to stretch full screen
 					if (elementHeight > elementWidth) {
@@ -16536,7 +16536,7 @@ Q.Camera = {
 						scanner.start(cameras[selectedCamera]);
 					}).catch(function (e) {
 						console.error(e);
-					});
+					});*/
 				}
 			}
 		}
