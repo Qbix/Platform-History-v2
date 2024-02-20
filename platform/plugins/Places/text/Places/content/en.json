@@ -18,7 +18,7 @@
         "inches": "inches"
     },
     "countries": {
-        "SelectCountry": "Select a country"
+        "SelectCountry": "Select Country"
     },
     "location": {
         "interested": "I'm interested in things taking place within {{select}} of",

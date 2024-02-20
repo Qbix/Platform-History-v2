@@ -254,8 +254,8 @@ Q.exports(function() {
                                     }
 
                                     if (Q.Dialogs.dialogs.length) {
-                                        var $lastDialog = Q.Dialogs.dialogs[Q.Dialogs.dialogs.length-1];
-                                        if ($lastDialog instanceof jQuery && !$lastDialog.hasClass(dialogClassName)) {
+                                        var lastDialog = Q.Dialogs.dialogs[Q.Dialogs.dialogs.length-1];
+                                        if (lastDialog.hasClas && lastDialog.hasClass(dialogClassName)) {
                                             Q.Dialogs.pop();
                                         }
                                     }
