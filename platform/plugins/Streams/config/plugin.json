@@ -478,6 +478,9 @@
 					"icon": "files/pdf",
 					"title": "Untitled PDF doc"
 				},
+				"ephemerals": {
+					"Streams/pdf": {}
+				},
 				"updateTitle": true
 			},
 			"Streams/live": {
