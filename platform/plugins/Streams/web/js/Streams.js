@@ -912,6 +912,15 @@ Streams.arePublic = function _Streams_Stream_isPublic (
 //var _publicStreams = Streams.arePublic.collection = {};
 priv._publicStreams = Streams.arePublic.collection = {};
 
+Streams.retainedStreams = function (key) {
+	return priv._retainedByKey[key];
+};
+
+Streams.retainingKeys = function (publisherId, streamName) {
+	var ps = Streams.key(publisherId, streamName);
+	return priv._retainedByStream[ps];
+};
+
 /**
  * Streams batch getter.
  * @static
@@ -2127,6 +2136,14 @@ Stream.refresh.ms = 75;
 var _debouncedRefresh = Q.debounce(Stream.refresh, Stream.refresh.ms);
 
 var Sp = Stream.prototype;
+
+Sp.retainingKeys = function () {
+	return Streams.retainingKeys(this.fields.publisherId, this.fields.streamName);
+};
+
+Sp.isRetained = function () {
+	return !!Streams.retainingKeys(this.fields.publisherId, this.fields.streamName);
+};
 
 /**
  * When a stream is retained, it is refreshed when Streams.refresh() or
