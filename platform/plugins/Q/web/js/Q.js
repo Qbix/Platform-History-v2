@@ -15918,7 +15918,10 @@ Q.Tool.define({
 		js: ["{{Q}}/js/videojs/lib.js", "{{Q}}/js/tools/video.js"],
 		css: ["{{Q}}/css/videojs.css", "{{Q}}/css/tools/video.css"]
 	},
-	"Q/pdf": "{{Q}}/js/tools/pdf.js",
+	"Q/pdf": {
+		js: ["{{Q}}/js/pdfjs/build/pdf.js", "{{Q}}/js/tools/pdf.js"],
+		css: "{{Q}}/css/tools/pdf.css"
+	},
 	"Q/image": "{{Q}}/js/tools/image.js",
 	"Q/clip": "{{Q}}/js/tools/clip.js",
 	"Q/floating": "{{Q}}/js/tools/floating.js"
