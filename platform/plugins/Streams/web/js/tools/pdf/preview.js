@@ -112,17 +112,11 @@
 				pdfUrl = stream.fileUrl();
 				// set up the inplace options
 				if (state.inplace) {
-					var inplaceOptions = Q.extend({
+					inplace = tool.setUpElementHTML('div', 'Streams/inplace', Q.extend({
 						publisherId: stream.fields.publisherId,
-						streamName: stream.fields.name
-					}, state.inplace);
-					var se = previewState.editable;
-					if (!se || (se !== true && se.indexOf('title') < 0)) {
-						inplaceOptions.editable = false;
-					} else {
-						$toolElement.addClass('Streams_editable_title');
-					}
-					inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
+						streamName: stream.fields.name,
+						editable: false
+					}, state.inplace));
 				}
 
 				stream.onAttribute().set(function (fields, k) {
@@ -389,7 +383,8 @@
 				},
 				destroyOnClose: true,
 				onActivate : function (mainDialog) {
-					state.mainDialog = mainDialog;
+					var $mainDialog = $(mainDialog);
+					state.mainDialog = $mainDialog;
 
 					// if stream defined, render player
 					if (tool.stream) {
@@ -428,13 +423,13 @@
 						e.preventDefault();
 						e.stopPropagation();
 
-						mainDialog.addClass('Q_uploading');
+						$mainDialog.addClass('Q_uploading');
 
 						var _error = function (err) {
-							mainDialog.removeClass('Q_uploading');
+							$mainDialog.removeClass('Q_uploading');
 							Q.alert(err);
 						};
-						var action = mainDialog.attr("data-action");
+						var action = $mainDialog.attr("data-action");
 
 						if (action === 'upload') {
 							if (!$("input[type=file]", mainDialog).val()) {
@@ -449,7 +444,7 @@
 							return _error(tool.text.errorNoSource);
 						}
 
-						Q.handle(_process, mainDialog);
+						Q.handle(_process);
 					});
 
 					// custom tabs implementation
@@ -457,7 +452,7 @@
 						var $this = $(this);
 						var action = $this.attr('data-name');
 
-						mainDialog.attr("data-action", action);
+						$mainDialog.attr("data-action", action);
 						$this.addClass('Q_current').siblings().removeClass('Q_current');
 						$(".Q_tabbing_container .Q_tabbing_item[data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
 					};

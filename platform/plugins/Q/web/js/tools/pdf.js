@@ -29,17 +29,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
-	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
-		tool.text = params.text[1].pdf;
-
-		tool.implement();
-	});
-
-	Q.addStylesheet(["{{Q}}/css/tools/pdf.css"], p.fill('stylesheet'), { slotName: 'Q' });
-	// we specially don' wait pdfjs lib loading, because it too big
-	// it will load during user actions
-	Q.addScript("{{Q}}/js/pdfjs/build/pdf.js");
-	Q.Text.get('Q/content', p.fill('text'));
+	tool.implement();
 
 	tool.Q.onStateChanged('clipStart').set(function () {
 		tool.setClip("start")
@@ -61,6 +51,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
+	onScroll: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
 	onRefresh: new Q.Event(function (numPages, element) {
 		// remove preloader
@@ -123,6 +114,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		// listen scroll event of preview element
 		$toolElement.on("scroll", function () {
 			state.currentPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
+			Q.handle(state.onScroll, tool, [state.currentPosition]);
 			tool.checkClip();
 		});
 
