@@ -1,12 +1,17 @@
-div[id^='Q_instascan_'] .Q_button {
-    height: 40px;
-    text-decoration: none;
-}
-div[id^='Q_instascan_'] span.Q_button {
+div[id^='Q_instascan_'] .Q_button,
+div[id^='Q_instascan_'] span.Q_button,
+div[id^='Q_instascan_'] button {
     display: inline-block;
     text-decoration: none !important;
-    line-height: 40px;
     padding: 0 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+}
+div[id^='Q_instascan_'] select {
+    border-radius: 5px;
+    font-size: 1em;
 }
 div[id^='Q_instascan_'][id$='__scan_region'] img {
     width: 30%;
@@ -14,6 +19,11 @@ div[id^='Q_instascan_'][id$='__scan_region'] img {
 div[id$='__dashboard_section_csr'] {
     margin-bottom: 20px;
 }
-.Q_overlay.Q_scanning {
-    background: none;
+div[id^='Q_instascan_'][id$='__dashboard_section_csr'] {
+    font-size: 1em;
+    color: #fff;
+}
+div[id^='Q_instascan_'][id$='__dashboard_section_csr'] > span {
+    display: block;
+    margin: 10px auto;
 }
