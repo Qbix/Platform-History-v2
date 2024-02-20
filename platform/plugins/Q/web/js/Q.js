@@ -16470,6 +16470,7 @@ Q.Camera = {
 				function _onActivate(dialog) {
 					var $element = $(".Q_dialog_slot", dialog);
 					var $title = $(".Q_title_slot", dialog);
+					var scannedText = [];
 
 					// set max height
 					$element.height(dialog.offsetHeight - $title.height());
@@ -16479,16 +16480,21 @@ Q.Camera = {
 
 					var elementId = "Q_instascan_" + Date.now();
 					$element.prop("id", elementId);
-					var html5QrcodeScanner = new Html5QrcodeScanner(elementId, { fps: 2, qrbox: {width: elementWidth-50, height: elementHeight-50}},
+					var html5QrcodeScanner = new Html5QrcodeScanner(elementId, { fps: 5, qrbox: {width: elementWidth-50, height: elementHeight-50}},
 						/* verbose= */ false);
 
 					html5QrcodeScanner.render(function onScanSuccess(decodedText, decodedResult) {
-						// Handle on success condition with the decoded text or result.
-						console.log(`Scan result: ${decodedText}`, decodedResult);
+						//console.log(`Scan result: ${decodedText}`, decodedResult);
+
+						if (scannedText.includes(decodedText)) {
+							return;
+						}
+
+						scannedText.push(decodedText);
 						audio.play();
 						Q.handle(callback, null, [decodedText]);
 					}, function onScanFailure (error) {
-						console.warn(`Code scan error = ${error}`);
+						//console.warn(`Code scan error = ${error}`);
 					});
 
 					$("button", $element).add(".html5-qrcode-element", $element).addClass("Q_button");
@@ -16496,47 +16502,6 @@ Q.Camera = {
 					Q.Camera.Scan.onClose.set(function(){
 						html5QrcodeScanner.clear();
 					});
-
-
-					/*var $videoElement = $("<video playsinline autoplay>").appendTo($element);
-
-					// set heigth/width of video element to stretch full screen
-					if (elementHeight > elementWidth) {
-						$videoElement.width(elementWidth);
-					} else {
-						$videoElement.height(elementHeight);
-					}
-					var scanner = new Instascan.Scanner({
-						video: $videoElement[0],
-						scanPeriod: 5,
-						mirror: false
-					});
-					scanner.addListener('scan', function (text, image) {
-						audio.play();
-						Q.handle(callback, null, [text]);
-					});
-
-					Instascan.Camera.getCameras().then(function (cameras) {
-						var camerasAmount = Q.getObject(['length'], cameras) || 0;
-						if (!camerasAmount || camerasAmount <= 0) {
-							console.error('No cameras found.');
-						}
-
-						// index of selected camera to first camera
-						var selectedCamera = 0;
-
-						// if more than 1 camera - add swap icon
-						if (camerasAmount > 1) {
-							$("<a class='Q_swap'>").on(Q.Pointer.fastclick, function(){
-								selectedCamera = (selectedCamera+1) % camerasAmount;
-								scanner.start(cameras[selectedCamera]);
-							}).appendTo(dialog);
-						}
-
-						scanner.start(cameras[selectedCamera]);
-					}).catch(function (e) {
-						console.error(e);
-					});*/
 				}
 			}
 		}
