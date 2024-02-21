@@ -1849,7 +1849,9 @@ class Streams_Stream extends Base_Streams_Stream
 				);
 			}
 		}
-		$result['icon'] = $this->iconUrl(false);
+		$result['icon'] = Q_Html::themedUrl($this->iconUrl(false), array(
+			'baseUrlPlaceholder' => true
+		));
 		$result['url'] = $this->url();
 		$classes = Streams::getExtendClasses($this->type);
 		
