@@ -155,6 +155,9 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                         tokenInfo = tool.assetsWeb3BalanceTool.getValue();
                     }
                     var amount = parseFloat($amount.val());
+                    if (Q.isEmpty(amount)) {
+                        return Q.alert(tool.text.errors.AmountInvalid);
+                    }
                     var _transactionSuccess = function () {
                         $this.removeClass("Q_working");
                         Q.Dialogs.pop();
