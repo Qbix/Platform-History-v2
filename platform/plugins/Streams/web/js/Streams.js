@@ -2202,6 +2202,7 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
 Sp.fileUrl = function() {
 	var url = this.getAttribute("Q.file.url")
 		|| this.getAttribute("file.url")
+		|| this.getAttribute("Streams.videoUrl")
 		|| this.getAttribute("url");
 
 	if (!url) {
