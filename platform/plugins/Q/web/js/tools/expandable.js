@@ -67,13 +67,6 @@ Q.Tool.define('Q/expandable', function (options) {
 		}
 		$(window).on(Q.Pointer.end, f);
 	});
-	if (!Q.info.isTouchscreen) {
-		$h2.on('mouseenter', function () {
-			$(this).addClass('Q_hover');
-		}).on('mouseleave', function () {
-			$(this).removeClass('Q_hover');
-		});
-	}
 	tool.Q.onStateChanged('count').set(function () {
 		$h2.find('.Q_expandable_count').html(state.count);
 	});

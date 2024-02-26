@@ -13,13 +13,16 @@
     margin: 5px;
 }
 
+.Q_expandable_tool h2.Q_expandable_title:hover,
 .Q_expandable_tool h2.Q_expandable_title.Q_hover,
 .Q_expandable_tool h2.Q_expandable_title.Q_expanded {
-	background: rgba(180, 200, 220, 0.7);
+    color: #333;
+    font-weight: 400;
+	background: rgba(180, 200, 220, .7);
 }
 
 .Q_expandable_tool h2.Q_expandable_title.Q_pressed {
-	background: rgba(180, 200, 220, 0.2);	
+    background: rgba(180, 200, 220, 0.2);
 }
 
 
