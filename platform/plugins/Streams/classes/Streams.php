@@ -5316,6 +5316,52 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Imports an icon and sets $stream->icon to the new icon's url.
+	 * @method importIcon
+	 * @static
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} $imageURL - URL or path to image
+	 * @param {string} [$save] - name of config under Q/image/sizes
+	 */
+	static function importIcon($publisherId, $streamName, $imageURL, $save="Streams/image")
+	{
+		if (!Q_Valid::url($imageURL) && !file_exists($imageURL)) {
+			return false;
+		}
+
+		$icon = file_get_contents($imageURL);
+
+		// if icon is valid image
+		if (!imagecreatefromstring($icon)) {
+			return false;
+		}
+
+		// upload image to stream
+		Q_Image::save(array(
+			'data' => $icon, // these frills, with base64 and comma, to format image data for Q/image/post handler.
+			'path' => "Q/uploads/Streams",
+			'subpath' => Q_Utils::splitId($publisherId, 3, '/')."/".$streamName."/icon/".time(),
+			'save' => $save
+		));
+		return true;
+	}
+
+	/**
+	 * Check if an icon is custom or whether it's been automatically generated
+	 * @method isCustomIcon
+	 * @static
+	 * @param {String} $icon
+	 * @return {boolean}
+	 */
+	static function isCustomIcon ($icon) {
+		if (!$icon) {
+			return false;
+		}
+		return strpos($icon, '/Q/uploads/Streams/') !== false;
+	}
+
+	/**
 	 * Call this method to update names of one or more streams.
 	 * This should update them in many tables of the Streams plugin.
 	 * Also, other plugins can add a hook to create their own updates.
