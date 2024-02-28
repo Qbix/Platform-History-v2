@@ -6,16 +6,5 @@ function Streams_after_Streams_create_Streams_video ($params) {
 		return;
 	}
 
-	$icon = file_get_contents($stream->icon);
-
-	// if icon is valid image
-	if (imagecreatefromstring($icon)) {
-		// upload image to stream
-		Q_Image::save(array(
-			'data' => $icon, // these frills, with base64 and comma, to format image data for Q/image/post handler.
-			'path' => "Q/uploads/Streams",
-			'subpath' => Q_Utils::splitId($stream->publisherId, 3, '/')."/".$stream->name."/icon/".time(),
-			'save' => "Streams/image"
-		));
-	}
+	Streams::importIcon($stream->publisherId, $stream->name, $stream->icon);
 }
