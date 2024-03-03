@@ -2260,10 +2260,8 @@
 		 getSelectedXid: function (provider) {
 			var result;
 			provider = provider || Web3.provider || window.ethereum;
-			result = provider.selectedAddress || provider.accounts[0];
-			if (result) {
-				return result;
-			}
+			result = provider.selectedAddress || (provider.accounts && provider.accounts[0]);
+			return result || null;
 		},
 
 		/**
