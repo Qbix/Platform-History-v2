@@ -2413,30 +2413,32 @@
 			Web3.withChain(options.chainId, function (provider) {
 				try {
 					var signer = new ethers.providers.Web3Provider(provider).getSigner();
-					signer.sendTransaction(Q.extend({}, options, {
-						from: Q.Users.Web3.getSelectedXid(provider),
-						to: recipient,
-						value: ethers.utils.parseEther(String(amount))
-					})).then(function (transactionRequest) {
-						if (!Q.getObject("wait", transactionRequest)) {
-							return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
-						}
-
-						if (!wait) {
-							return Q.handle(callback, null, [null, transactionRequest]);
-						}
-
-						transactionRequest.wait(wait).then(function (transactionReceipt) {
-							if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
-								return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
+					Q.Users.Web3.getWalletAddress(function (err, address) {
+						signer.sendTransaction(Q.extend({}, options, {
+							from: address,
+							to: recipient,
+							value: ethers.utils.parseEther(String(amount))
+						})).then(function (transactionRequest) {
+							if (!Q.getObject("wait", transactionRequest)) {
+								return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
 							}
-
-							Q.handle(callback, null, ["Transaction failed", transactionRequest, transactionReceipt]);
-						}, function (err) {
-							Q.handle(callback, null, [err, transactionRequest]);
+	
+							if (!wait) {
+								return Q.handle(callback, null, [null, transactionRequest]);
+							}
+	
+							transactionRequest.wait(wait).then(function (transactionReceipt) {
+								if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
+									return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
+								}
+	
+								Q.handle(callback, null, ["Transaction failed", transactionRequest, transactionReceipt]);
+							}, function (err) {
+								Q.handle(callback, null, [err, transactionRequest]);
+							});
+						}).catch(function (err) {
+							Q.handle(callback, null, [err]);
 						});
-					}).catch(function (err) {
-						Q.handle(callback, null, [err]);
 					});
 				} catch (err) {
 					Q.handle(callback, null, [err]);
