@@ -2257,9 +2257,9 @@
 		 * @static
 		 * @return {string} the currently selected address of the user in web3
 		 */
-		 getSelectedXid: function () {
-			var result, provider;
-			provider = Web3.provider || window.ethereum;
+		 getSelectedXid: function (provider) {
+			var result;
+			provider = provider || Web3.provider || window.ethereum;
 			result = provider.selectedAddress || provider.accounts[0];
 			if (result) {
 				return result;
@@ -2416,7 +2416,7 @@
 				try {
 					var signer = new ethers.providers.Web3Provider(provider).getSigner();
 					signer.sendTransaction(Q.extend({}, options, {
-						from: Q.Users.Web3.getSelectedXid(),
+						from: Q.Users.Web3.getSelectedXid(provider),
 						to: recipient,
 						value: ethers.utils.parseEther(String(amount))
 					})).then(function (transactionRequest) {
@@ -2658,6 +2658,7 @@
 			Q.handle(Web3.onChainChanged, this, [chainId]);
 		});
 		provider.on("connect", function (info) {
+			Web3.provider = provider;
 			Q.handle(Web3.onConnect, this, [info]);
 		});
 		provider.on("disconnect", function (info) {

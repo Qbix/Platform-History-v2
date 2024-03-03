@@ -2180,7 +2180,7 @@ function _disconnectStreamNode(publisherId, streamName, ps) {
 /**
  * Calculate the url of a stream's icon
  * @method iconUrl
- * @param {String|Number|false} [size=40] The last part after the slash, such as "50.png" or "50".
+ * @param {String|Number|false} [size=40] The last part after the slash, such as "original.png", "50.png", or "50".
  *  Setting it to false skips appending "/size".
  *  Setting it to "largestWidth"or "largestHeight" gets the size with largest explicit width or height, respectively,
  *  and in this method we use getAttribute("sizes") before falling back to the default Streams.icon.sizes
