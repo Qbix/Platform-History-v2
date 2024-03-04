@@ -200,7 +200,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     var parsedAmount = ethers.utils.parseUnits(String(amount), tokenInfo.decimals);
 
                     Users.Web3.withChain(tokenInfo.chainId, function () {
-                        if (parseInt(tokenInfo.tokenAddress) === 0) {
+                        if (tokenInfo.tokenAddress === Q.Users.Web3.zeroAddress) {
                             Users.Web3.transaction(walletSelected, amount, function (err, transactionRequest, transactionReceipt) {
                                 Q.handle(state.onSubmitted, tool, [err, transactionRequest, transactionReceipt]);
 

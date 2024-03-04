@@ -2257,13 +2257,11 @@
 		 * @static
 		 * @return {string} the currently selected address of the user in web3
 		 */
-		 getSelectedXid: function () {
-			var result, provider;
-			provider = Web3.provider || window.ethereum;
-			result = provider.selectedAddress || provider.accounts[0];
-			if (result) {
-				return result;
-			}
+		 getSelectedXid: function (provider) {
+			var result;
+			provider = provider || Web3.provider || window.ethereum;
+			result = provider.selectedAddress || (provider.accounts && provider.accounts[0]);
+			return result || null;
 		},
 
 		/**
@@ -2415,30 +2413,32 @@
 			Web3.withChain(options.chainId, function (provider) {
 				try {
 					var signer = new ethers.providers.Web3Provider(provider).getSigner();
-					signer.sendTransaction(Q.extend({}, options, {
-						from: Q.Users.Web3.getSelectedXid(),
-						to: recipient,
-						value: ethers.utils.parseEther(String(amount))
-					})).then(function (transactionRequest) {
-						if (!Q.getObject("wait", transactionRequest)) {
-							return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
-						}
-
-						if (!wait) {
-							return Q.handle(callback, null, [null, transactionRequest]);
-						}
-
-						transactionRequest.wait(wait).then(function (transactionReceipt) {
-							if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
-								return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
+					Q.Users.Web3.getWalletAddress(function (err, address) {
+						signer.sendTransaction(Q.extend({}, options, {
+							from: address,
+							to: recipient,
+							value: ethers.utils.parseEther(String(amount))
+						})).then(function (transactionRequest) {
+							if (!Q.getObject("wait", transactionRequest)) {
+								return Q.handle(callback, null, ["Transaction request invalid", transactionRequest]);
 							}
-
-							Q.handle(callback, null, ["Transaction failed", transactionRequest, transactionReceipt]);
-						}, function (err) {
-							Q.handle(callback, null, [err, transactionRequest]);
+	
+							if (!wait) {
+								return Q.handle(callback, null, [null, transactionRequest]);
+							}
+	
+							transactionRequest.wait(wait).then(function (transactionReceipt) {
+								if (parseInt(Q.getObject("status", transactionReceipt)) === 1) {
+									return Q.handle(callback, null, [null, transactionRequest, transactionReceipt]);
+								}
+	
+								Q.handle(callback, null, ["Transaction failed", transactionRequest, transactionReceipt]);
+							}, function (err) {
+								Q.handle(callback, null, [err, transactionRequest]);
+							});
+						}).catch(function (err) {
+							Q.handle(callback, null, [err]);
 						});
-					}).catch(function (err) {
-						Q.handle(callback, null, [err]);
 					});
 				} catch (err) {
 					Q.handle(callback, null, [err]);
@@ -2658,6 +2658,7 @@
 			Q.handle(Web3.onChainChanged, this, [chainId]);
 		});
 		provider.on("connect", function (info) {
+			Web3.provider = provider;
 			Q.handle(Web3.onConnect, this, [info]);
 		});
 		provider.on("disconnect", function (info) {
