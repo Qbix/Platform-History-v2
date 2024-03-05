@@ -470,6 +470,11 @@
 					"icon": "Streams/video",
 					"title": "Untitled Video Clip"
 				},
+				"ephemerals": {
+					"Streams/play": {},
+					"Streams/pause": {},
+					"Streams/seek": {}
+				},
 				"updateTitle": true
 			},
 			"Streams/pdf": {
