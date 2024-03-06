@@ -84,6 +84,10 @@ Q.Tool.define("Q/audio", function (options) {
 						console.log("Finished at position " + position + " milliseconds");
 						Q.handle(state.onEnded, tool, [position]);
 					}, 100);
+					var onSeek = Q.throttle(function (position) {
+						console.log("Seeked at position " + position + " milliseconds");
+						Q.handle(state.onSeek, tool, [position]);
+					}, 100);
 					state.audio.bind(SC.Widget.Events.READY, function() {
 						state.audio.bind(SC.Widget.Events.PLAY, function() {
 							// get current sound position in milliseconds
@@ -98,12 +102,12 @@ Q.Tool.define("Q/audio", function (options) {
 							// get current sound position in milliseconds
 							state.audio.getPosition(onFinish);
 						});
-						/*state.audio.bind(SC.Widget.Events.SEEK, function() {
+						state.audio.bind(SC.Widget.Events.SEEK, function() {
 							onPause(state.currentPosition);
 							// get current sound position in milliseconds
 							console.log("onSeek");
-							state.audio.getPosition(onPlay);
-						});*/
+							state.audio.getPosition(onSeek);
+						});
 						state.audio.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
 							state.audio.getPosition(function (position) {
 								state.currentPosition = Math.trunc(position);
@@ -706,6 +710,11 @@ Q.Tool.define("Q/audio", function (options) {
 			state.currentPosition = Math.trunc(this.currentTime * 1000);
 			console.log("Started at position " + state.currentPosition + " milliseconds");
 			Q.handle(state.onPlay, tool, [state.currentPosition]);
+		});
+
+		tool.audioElement.addEventListener('seeked', function () {
+			state.currentPosition = Math.trunc(this.currentTime * 1000);
+			Q.handle(state.onSeek, tool, [state.currentPosition]);
 		});
 
 		tool.audioElement.addEventListener("canplay", function(){
