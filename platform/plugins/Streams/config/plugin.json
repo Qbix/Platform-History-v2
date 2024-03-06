@@ -461,6 +461,11 @@
 					"icon": "Streams/audio",
 					"title": "Untitled Audio Clip"
 				},
+				"ephemerals": {
+					"Streams/play": {},
+					"Streams/pause": {},
+					"Streams/seek": {}
+				},
 				"updateTitle": true
 			},
 			"Streams/video": {
