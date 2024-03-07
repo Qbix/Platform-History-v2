@@ -68,6 +68,9 @@
 	margin: 10px auto;
 	width: 100%;
 	min-width: 300px;
+	top: 50%;
+	position: relative;
+	transform: translateY(-50%);
 }
 
 /**** <Q_audio_custom_player> *****/
