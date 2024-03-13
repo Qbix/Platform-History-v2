@@ -335,6 +335,9 @@ a.Users_activation_resend:active {
 #Users_authorize_act { text-align: center; }
 #Users_authorize_terms,
 #Users_authorize_terms * { font-size: 14px; }
+#Users_login_dialog #Users_register_terms {
+	margin: 10px auto;
+}
 #Users_login_dialog #Users_register_terms,
 #Users_login_dialog #Users_register_terms * { font-size: 14px; text-align: center; }
 #Users_authorize_buttons,
@@ -414,7 +417,15 @@ a.Users_activation_resend:active {
     min-width: 80%;
 }
 
-#Users_login_dialog #Users_agree { margin-right: 5px; -webkit-appearance: checkbox; }
+#Users_login_dialog #Users_agree {
+	margin-right: 15px;
+	-webkit-appearance: checkbox;
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	transform: scale(2);
+}
 
 .Q_notMobile .Q_overlay.Users_login_dialog,
 .Q_notMobile .Q_overlay.Users_setIdentifier_dialog { width: 350px; }
