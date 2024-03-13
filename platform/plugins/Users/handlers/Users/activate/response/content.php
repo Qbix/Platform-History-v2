@@ -32,7 +32,7 @@ function Users_activate_response_content()
 
 	if (!empty(Users::$cache['success'])
 	and Q_Request::method() === 'POST') {
-		if (Q_Request::isAjax()) {
+		if (!empty($_REQUEST['p'])) {
 			return true;
 		}
 		$afterActivate = Q_Uri::fixUrl(Q::interpolate($afterActivate, array(
