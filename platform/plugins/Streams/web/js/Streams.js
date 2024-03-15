@@ -853,7 +853,8 @@ Q.Tool.define({
 	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
 	"Streams/groupPhoto" : {
 		js: ["{{Streams}}/js/tools/groupPhoto.js"],
-		css: "{{Streams}}/css/tools/groupPhoto.css"
+		css: "{{Streams}}/css/tools/groupPhoto.css",
+		text: ["Streams/content", "Q/content"]
 	},
 	"Streams/task/preview": {
 		js: "{{Streams}}/js/tools/task/preview.js",
