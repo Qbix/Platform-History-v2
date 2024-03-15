@@ -237,7 +237,7 @@ function _Q_viewport(options) {
 			}
 			if (typeof e.deltaY === 'number' && !isNaN(e.deltaY)) {
 				scale(
-					state.scale - e.deltaY * 0.01,
+					state.scale - e.deltaY * 0.001,
 					Q.Pointer.getX(e),
 					Q.Pointer.getY(e)
 				);
