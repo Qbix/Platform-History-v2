@@ -734,16 +734,19 @@ class Q
 				'before', false, $filename
 			);
 
-			if (!empty(Q::$autoloadRequires[$className]['PHP'])) {
-				$version = Q::$autoloadRequires[$className]['PHP'];
-				if (version_compare(PHP_VERSION, $version, '<')) {
-					throw new Q_Exception_MissingPHPVersion(@compact('version'));
-				}
+			if (!Q::autoloadRequirementsMet($className)) {
+				throw new Q_Exception_MissingPHPVersion(@compact('version'));
 			}
 
 			// Now we can include the file
 			try {
 				self::includeFile($filename);
+				$classNameWithUnderscores = implode('_', $parts);
+				$classNameWithNamespaces = implode('\\', $parts);
+				if ($classNameWithUnderscores != $classNameWithNamespaces
+				&& class_exists($classNameWithUnderscores)) {
+					class_alias($classNameWithUnderscores, $classNameWithNamespaces);
+				}
 			} catch (Q_Exception_MissingFile $e) {
 				// the file doesn't exist
 				// and you will get an error if you try to use the class
