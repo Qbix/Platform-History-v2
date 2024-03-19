@@ -577,19 +577,19 @@
 			onCancel: new Q.Event(),
 			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
 				// default implementation
-				if (user) {
-					// the user changed, redirect to their home page
-					var urls = Q.urls || {};
-					var nextUrl = options.successUrl;
-					if (priv.result === 'register') {
-						if (options.onboardingUrl) {
-							nextUrl = options.onboardingUrl;
-						}
-					}
-					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
-					Q.handle(url);
-					Q.handle(options.onComplete);
+				if (Q.isEmpty(user)) {
+					return;
 				}
+
+				// the user changed, redirect to their home page
+				var urls = Q.urls || {};
+				var nextUrl = options.successUrl;
+				if (priv.result === 'register' && options.onboardingUrl) {
+					nextUrl = options.onboardingUrl;
+				}
+				var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
+				Q.handle(url);
+				Q.handle(options.onComplete);
 			}, 'Users'),
 			onResult: new Q.Event(),
 			onRequireComplete: new Q.Event(),

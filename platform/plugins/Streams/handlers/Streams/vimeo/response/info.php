@@ -10,8 +10,13 @@ function Streams_vimeo_response_info ($params=[]) {
 
 	if ($info['status'] == 'available' && $publisherId && $streamName) {
 		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
-		$stream->setAttribute('available', true);
-		$stream->changed();
+		if (!$stream->getAttribute('available')) {
+			if (!Streams::isCustomIcon($stream->icon)) {
+				Streams::importIcon($publisherId, $streamName, end($info['pictures']['sizes'])['link']);
+			}
+			$stream->setAttribute('available', true);
+			$stream->changed();
+		}
 	}
 	return Q::take($info, array("status", "duration", "width", "height", "type"));
 }

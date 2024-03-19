@@ -41,7 +41,8 @@ Q.Tool.define("Q/pdf", function (options) {
 
 {
 	url: null,
-	currentPosition: 0,
+	currentTopPosition: 0,
+	currentLeftPosition: 0,
 	clipStart: null,
 	clipEnd: null,
 	scale: 0.5,
@@ -58,6 +59,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		this.$preloader && this.$preloader.remove();
 
 		this.state.stuffHeight = this.element.scrollHeight;
+		this.state.stuffWidth = this.element.scrollWidth;
 
 		this.setClip("start");
 		this.setClip("end");
@@ -113,8 +115,9 @@ Q.Tool.define("Q/pdf", function (options) {
 
 		// listen scroll event of preview element
 		$toolElement.on("scroll", function () {
-			state.currentPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
-			Q.handle(state.onScroll, tool, [state.currentPosition]);
+			state.currentTopPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
+			state.currentLeftPosition = ($toolElement.scrollLeft()/state.stuffWidth * 100).toPrecision(3);
+			Q.handle(state.onScroll, tool, [state.currentTopPosition, state.currentLeftPosition]);
 			tool.checkClip();
 		});
 
@@ -182,11 +185,14 @@ Q.Tool.define("Q/pdf", function (options) {
 	},
 	/**
 	 * @method setCurrentPosition
-	 * @param {number} position in pixels related to top
+	 * @param {number} top
+	 * @param {number} left
 	 */
-	setCurrentPosition: function (position) {
+	setCurrentPosition: function (top, left) {
 		var element = this.element;
-		element.scrollTo(element.scrollLeft, position);
+		top = parseInt(top);
+		left = parseInt(left);
+		element.scrollTo(isNaN(left) ? element.scrollLeft : left, isNaN(top) ? element.scrollTop : top);
 	},
 	/**
 	 * @method setClip

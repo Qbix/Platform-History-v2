@@ -46,6 +46,7 @@
 }
 .Streams_video_animatedThumbnail .Q_dialog_content table {
     margin: 0 auto;
+    margin-bottom: 5px;
 }
 .Streams_video_animatedThumbnail .Q_dialog_content table td {
     white-space: nowrap;

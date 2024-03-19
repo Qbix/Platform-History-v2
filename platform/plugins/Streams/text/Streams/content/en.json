@@ -502,5 +502,9 @@
         "UseThis": "Use this",
         "ResultGIF": "Result GIF",
         "VideoElementNotFound": "Video element not found"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} On Your Face",
+        "AcceptIcon": "Accept selected area"
     }
 }

@@ -77,9 +77,8 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 		? Q.Handlebars.renderSource(view, fields)
 		: Q.view(view, fields, { language: options.language });
 	content = entities.decode(content);
-	
-	if (twilioClient
-	&& (from = options.from || Q.Config.get(['Users', 'mobile', 'from'], null))) {
+	var from = options.from || Q.Config.get(['Users', 'mobile', 'from'], null);
+	if (twilioClient && from) {
 		twilioClient.sendSms(from, number, content, {}, function (res) {
 			if (key) {
 				Q.log('sent mobile message (via twilio) to '+number+":\n"+content, key);

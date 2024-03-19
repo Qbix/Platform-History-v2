@@ -102,7 +102,7 @@
     white-space: nowrap;
 }
 .Streams_topic_relations .Streams_preview_tool {
-    padding: 0;
+    padding: 5px 0;
 }
 .Q_notMobile .Q_columns_column.Streams_topic_streams_video,
 .Q_notMobile .Q_columns_column.Streams_topic_streams_pdf {

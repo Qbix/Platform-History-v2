@@ -224,7 +224,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 							// inform tools that their element has frozen dimensions,
 							// so the tools may want to revert the frozen dimensions
 							element.addClass('Q_frozen_dimensions');
-							element.setAttribute('data-Q-frozenDimensions', ep);
+							element.setAttribute('data-Q-frozenDimensions', JSON.stringify(ep));
 							unfreeze = true;
 						}
 					}

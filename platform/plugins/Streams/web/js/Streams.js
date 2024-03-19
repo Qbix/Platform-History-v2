@@ -853,7 +853,8 @@ Q.Tool.define({
 	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
 	"Streams/groupPhoto" : {
 		js: ["{{Streams}}/js/tools/groupPhoto.js"],
-		css: "{{Streams}}/css/tools/groupPhoto.css"
+		css: "{{Streams}}/css/tools/groupPhoto.css",
+		text: ["Streams/content", "Q/content"]
 	},
 	"Streams/task/preview": {
 		js: "{{Streams}}/js/tools/task/preview.js",
@@ -2202,6 +2203,7 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
 Sp.fileUrl = function() {
 	var url = this.getAttribute("Q.file.url")
 		|| this.getAttribute("file.url")
+		|| this.getAttribute("Streams.videoUrl")
 		|| this.getAttribute("url");
 
 	if (!url) {
@@ -4383,7 +4385,7 @@ Q.onInit.add(function _Streams_onInit() {
 			}
 
 			// skip messages older than 24 hours
-			var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
+			var timeDiff = Math.abs(new Date(message.sentTime).getTime() - new Date().getTime())/1000;
 			if (timeDiff >= parseInt(Q.Streams.notifications.notices.expired)) {
 				return;
 			}
