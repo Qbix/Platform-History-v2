@@ -116,13 +116,24 @@ function Streams_vcard_response ($params) {
         $vcr .= "ROLE:$roles\n";
     }
 
-    $adrStream = Streams::fetchOne(null, $user->id, "Places/user/location/home");
-    if($adrStream) {
-        $adrStream->calculateAccess($loggedInUserId);
-        if ($adrStream->testReadLevel('content')) {
-            $adress = $adrStream->getAttribute('address');
-            if(!empty($adress)){
-                $vcr .= "ADR;TYPE=HOME;LABEL=\"$adress\":;;\n";
+    $addrStream = Streams::fetchOne(null, $user->id, "Places/user/location/home");
+    if($addrStream) {
+        $addrStream->calculateAccess($loggedInUserId);
+        if ($addrStream->testReadLevel('content')) {
+            $address = $addrStream->getAttribute('address');
+            if(!empty($address)){
+                $vcr .= "ADR;TYPE=HOME;LABEL=\"$address\":;;\n";
+            }
+        }
+    }
+
+    $addrStream = Streams::fetchOne(null, $user->id, "Places/user/location/work");
+    if($addrStream) {
+        $addrStream->calculateAccess($loggedInUserId);
+        if ($addrStream->testReadLevel('content')) {
+            $address = $addrStream->getAttribute('address');
+            if(!empty($address)){
+                $vcr .= "ADR;TYPE=WORK;LABEL=\"$address\":;;\n";
             }
         }
     }
@@ -186,6 +197,7 @@ function Streams_vcard_response ($params) {
             }
         }
     }
+
     $githubStream = Streams::fetchOne(null, $user->id, "Streams/user/github");
     if($githubStream) {
         $githubStream->calculateAccess($loggedInUserId);
