@@ -1007,8 +1007,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	function getAllPermissions()
 	{
-		if ($permissions = $this->permissions) {
-			return Q::json_decode($permissions, true);
+		if (!empty($this->permissions)) {
+			return Q::json_decode($this->permissions, true);
 		}
 		return array();
 	}

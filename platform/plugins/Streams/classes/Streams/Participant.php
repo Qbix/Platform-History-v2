@@ -197,16 +197,13 @@ class Streams_Participant extends Base_Streams_Participant
 		if ($this->state !== 'participating') {
 			return $result;
 		}
-		// Relate to participating streams
+		// Update the relations if something changed
 		$participatingNames = Streams_Stream::getConfigField(
 			$this->streamType, array('participating'), array()
 		);
-		if ($participatingNames) {
-			Streams_RelatedTo::updateRelated(
-				array('toPublisherId', 'toStreamName', 'fromPublisherId', 'fromStreamName'),
-				array('extra'),
-				$participants
-			)->where();
+		if ($participatingNames
+		and $this->wasRetrieved()
+		and !empty($modifiedFields['extra'])) {
 			Streams_RelatedTo::update()->set(array(
 				'extra' => $this->extra
 			))->where(array(
@@ -218,6 +215,7 @@ class Streams_Participant extends Base_Streams_Participant
 		}
 		return $result;
 	}
+
 	
 	/**
 	 * Get the names of the possible states

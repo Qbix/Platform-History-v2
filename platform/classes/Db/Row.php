@@ -1499,25 +1499,24 @@ class Db_Row
 			$fieldName = $pieces[1];
 			if (array_key_exists($fieldName, $this->fields)) {
 				return $this->fields[$fieldName];
-			} else {
-				$get_class = get_class($this);
-				$backtrace = debug_backtrace();
-				$function = $line = $class = null;
-				if (isset($backtrace[4]['function'])) {
-					$function = $backtrace[4]['function'];
-				}
-				if (isset($backtrace[3]['line'])) {
-					$line = $backtrace[3]['line'];
-				}
-				if (isset($backtrace[4]['class'])) {
-					$class = $backtrace[4]['class'];
-				}
-				throw new Exception(
-					"$get_class does not have $fieldName field set, "
-					. "called in $class::$function (line $line)."
-				);
-				return null;
 			}
+			$get_class = get_class($this);
+			$backtrace = debug_backtrace();
+			$function = $line = $class = null;
+			if (isset($backtrace[4]['function'])) {
+				$function = $backtrace[4]['function'];
+			}
+			if (isset($backtrace[3]['line'])) {
+				$line = $backtrace[3]['line'];
+			}
+			if (isset($backtrace[4]['class'])) {
+				$class = $backtrace[4]['class'];
+			}
+			throw new Exception(
+				"$get_class does not have $fieldName field set, "
+				. "called in $class::$function (line $line)."
+			);
+			return null;
 		}
 		if ($pieces[0] == 'isset') {
 			return isset($this->fields[$pieces[1]]);

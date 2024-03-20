@@ -352,7 +352,8 @@ class Db_Mysql implements Db_Interface
 
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
-	 * and executes all the queries.
+	 * and executes all the queries. It triggers beforeSave and afterSaveExecute
+	 * on the rows, unless it finds beforeInsertManyAndExecute and/or afterInsertManyAndExecute respectively.
 	 * @method insertManyAndExecute
 	 * @param {string} $table_into The name of the table to insert into
 	 * @param {array} [$rows=array()] The array of rows to insert. 
@@ -386,6 +387,7 @@ class Db_Mysql implements Db_Interface
 		if ($chunkSize < 0) {
 			return false;
 		}
+		$possibleMagicInsertFields = array('insertedTime', 'created_time');
 		$onDuplicateKeyUpdate = isset($options['onDuplicateKeyUpdate'])
 				? $options['onDuplicateKeyUpdate'] : null;
 		$className = isset($options['className']) ? $options['className'] : null;
@@ -430,7 +432,8 @@ class Db_Mysql implements Db_Interface
 		$className = Q::ifset($options, 'className', null);
 		$rowObjects = array();
 		if ($className) {
-			foreach ($rows as $row) {
+			$isCallable = is_callable(array($className, 'beforeInsertManyAndExecute'));
+			foreach ($rows as $k => $row) {
 				if (is_array($row)) {
 					$rowObject = new $className($row);
 				} else {
@@ -438,10 +441,16 @@ class Db_Mysql implements Db_Interface
 					$row = $row->fields;
 				}
 				$rowObjects[] = $rowObject;
-				$rowObject->beforeSave($row);
-				$row = $rowObject->fields;
+				if (!$isCallable) {
+					$rowObject->beforeSave($row);
+				}
+				$rows[$k] = $rowObject->fields;
+			}
+			if ($isCallable) {
+				call_user_func(array($className, 'beforeInsertManyAndExecute'), $rowObjects);
 			}
 		}
+		
 		
 		// Start filling
 		$queries = array();
@@ -470,6 +479,8 @@ class Db_Mysql implements Db_Interface
 					foreach ($fieldNames as $name) {
 						if (array_key_exists($name, $row->fields)) {
 							$record[$name] = $row->fields[$name];
+						} else if (in_array($name, $possibleMagicInsertFields)) {
+							$record[$field] = new Db_Expression('CURRENT_TIMESTAMP');
 						}
 					}
 				} else {
@@ -479,6 +490,15 @@ class Db_Mysql implements Db_Interface
 				}
 			} else {
 				$record = $row;
+				if ($className) {
+					$fieldNames = call_user_func(array($className, 'fieldNames'));
+					foreach ($fieldNames as $fn) {
+						if (in_array($fn, $possibleMagicInsertFields)) {
+							$record[$fn] = new Db_Expression('CURRENT_TIMESTAMP');
+							break;
+						}
+					}
+				}
 			}
 			$query = new Db_Query_Mysql($this, Db_Query::TYPE_INSERT);
 			// get shard, if any
@@ -566,19 +586,25 @@ class Db_Mysql implements Db_Interface
 
 		// simulate afterSaveExecute on all rows
 		if ($className) {
-			foreach ($rowObjects as $rowObject) {
-				try {
-					$rowObject->wasModified(false);
-					$query = self::insert($table_into, $rowObject->fields);
-					$q = $query->build();
-					$stmt = null;
-					$result = new Db_Result($stmt, $query);
-					$rowObject->afterSaveExecute(
-						$result, $query, $rowObject->fields,
-						$rowObject->calculatePKValue(true)
-					);
-				} catch (Exception $e) {
-					// swallow errors and continue the simulation
+			$callAfterInsertManyAndExecute = false;
+			$args = array();
+			if (is_callable(array($className, 'afterInsertManyAndExecute'))) {
+				call_user_func(array($className, 'afterInsertManyAndExecute'), $rowObjects);
+			} else {
+				foreach ($rowObjects as $rowObject) {
+					try {
+						$rowObject->wasModified(false);
+						$query = self::insert($table_into, $rowObject->fields);
+						$q = $query->build();
+						$stmt = null;
+						$result = new Db_Result($stmt, $query);
+						$rowObject->afterSaveExecute(
+							$result, $query, $rowObject->fields,
+							$rowObject->calculatePKValue(true)
+						);	
+					} catch (Exception $e) {
+						// swallow errors and continue the simulation
+					}
 				}
 			}
 		}

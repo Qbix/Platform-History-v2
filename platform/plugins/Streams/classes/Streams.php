@@ -1231,15 +1231,14 @@ abstract class Streams extends Base_Streams
 			$fieldNames = Streams::getExtendFieldNames($f['type']);
 			$fieldNames[] = 'name';
 			foreach ($fieldNames as $fn) {
-				if (isset($f[$fn])) {
+				if (isset($f[$fn])
+				&& $fn !== 'insertedTime'
+				&& $fn !== 'updatedTime') {
 					$tc[$fn] = $f[$fn];
 				}
 			}
 			
-			// simulate calls to beforeSave, to update avatars and do other stuff
 			$s = new Streams_Stream($tc);
-			$s->beforeSave($tc);
-			$s->fields['insertedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 			$toCreate[$s->name] = $s->fields;
 			$streams[$s->name] = $s;
 			
@@ -1250,6 +1249,7 @@ abstract class Streams extends Base_Streams
 			);
 		}
 
+		// this will simulate calls to beforeSave, to update avatars and do other stuff
 		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
 
 		if (!empty($messages)) {
@@ -3328,7 +3328,7 @@ abstract class Streams extends Base_Streams
 			foreach ($rows as $row) {
 				$name = $row['name'];
 				$type = $row['type'];
-				if ($o = $userStreamsTree->get($row->streamName, "subscribe", array())) {
+				if ($o = $userStreamsTree->get($name, "subscribe", array())) {
 					if (isset($o['filter'])) {
 						$filter = Q::json_encode($o['filter']);
 					}
