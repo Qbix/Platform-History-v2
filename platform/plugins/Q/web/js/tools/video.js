@@ -146,6 +146,9 @@ Q.Tool.define("Q/video", function (options) {
 				state.player.on('ended', function () {
 					Q.handle(state.onEnded, tool);
 				});
+				state.player.on('volumechange', function () {
+					Q.handle(state.onVolumechange, tool, [state.player.volume()]);
+				});
 			});
 		}
 	};
@@ -196,6 +199,9 @@ Q.Tool.define("Q/video", function (options) {
 				});
 				state.player.on('ended', function () {
 					Q.handle(state.onEnded, tool);
+				});
+				state.player.on('volumechange', function () {
+					Q.handle(state.onVolumechange, tool, [state.player.volume()]);
 				});
 				state.player.on('metadata', function () {
 
@@ -505,6 +511,7 @@ Q.Tool.define("Q/video", function (options) {
 	onSeek: new Q.Event(function (position) {
 		this.state.currentPosition = position;
 	}),
+	onVolumechange: new Q.Event(),
 	onEnded: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
@@ -627,6 +634,9 @@ Q.Tool.define("Q/video", function (options) {
 				//console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onSeek, tool, [position]);
 			}, throttle);
+			var onVolumechange = Q.throttle(function () {
+				Q.handle(state.onVolumechange, tool, [state.player.volume()]);
+			}, throttle);
 			var onEnded = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
 				//console.log("Seeked at position " + position + " milliseconds");
@@ -639,25 +649,19 @@ Q.Tool.define("Q/video", function (options) {
 
 				videojs.log('Your player is ready!');
 
-				this.on('play', function () {
-					onPlay();
-				});
+				this.on('play', onPlay);
 
-				this.on('pause', function () {
-					onPause();
-				});
+				this.on('pause', onPause);
+
+				this.on('volumechange', onVolumechange);
 
 				//this.on('waiting', function() {
 				//	onPause();
 				//});
 
-				this.on('seeked', function() {
-					onSeek();
-				});
+				this.on('seeked', onSeek);
 
-				this.on('ended', function() {
-					onEnded();
-				});
+				this.on('ended', onEnded);
 
 				// apply play button image
 				$(".vjs-big-play-button", this.el_).css("background-image", "url(" +Q.url(state.overlay.play.src) + ")");

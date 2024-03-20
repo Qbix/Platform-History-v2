@@ -4362,17 +4362,17 @@ abstract class Streams extends Base_Streams
 		$url = (Q_Valid::url($url) or mb_substr($stream->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
-		$themedUrl = Q_Html::themedUrl($url, array(
-			'baseUrlPlaceholder' => true
-		));
-		if ($basename !== false && Q::startsWith($themedUrl, '{{baseUrl}}') && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
+		$baseUrl = Q_Request::baseUrl();
+		$themedUrl = Q_Html::themedUrl($url);
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl) && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
 			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}
 			if (strpos($basename, '.') === false) {
 				$basename .= '.png';
 			}
-			$themedUrl .= "/$basename";
+			$url .= "/$basename";
+			return Q_Html::themedUrl($url);
 		}
 		return $themedUrl;
 	}
@@ -5313,6 +5313,52 @@ abstract class Streams extends Base_Streams
 			$publisherId = "$publisherId/$seriesId";
 		}
 		return array($publisherId, $streamIdPrefix);
+	}
+
+	/**
+	 * Imports an icon and sets $stream->icon to the new icon's url.
+	 * @method importIcon
+	 * @static
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} $imageURL - URL or path to image
+	 * @param {string} [$save] - name of config under Q/image/sizes
+	 */
+	static function importIcon($publisherId, $streamName, $imageURL, $save="Streams/image")
+	{
+		if (!Q_Valid::url($imageURL) && !file_exists($imageURL)) {
+			return false;
+		}
+
+		$icon = file_get_contents($imageURL);
+
+		// if icon is valid image
+		if (!imagecreatefromstring($icon)) {
+			return false;
+		}
+
+		// upload image to stream
+		Q_Image::save(array(
+			'data' => $icon, // these frills, with base64 and comma, to format image data for Q/image/post handler.
+			'path' => "Q/uploads/Streams",
+			'subpath' => Q_Utils::splitId($publisherId, 3, '/')."/".$streamName."/icon/".time(),
+			'save' => $save
+		));
+		return true;
+	}
+
+	/**
+	 * Check if an icon is custom or whether it's been automatically generated
+	 * @method isCustomIcon
+	 * @static
+	 * @param {String} $icon
+	 * @return {boolean}
+	 */
+	static function isCustomIcon ($icon) {
+		if (!$icon) {
+			return false;
+		}
+		return strpos($icon, '/Q/uploads/Streams/') !== false;
 	}
 
 	/**

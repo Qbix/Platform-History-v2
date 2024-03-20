@@ -161,7 +161,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 	
 	function loadImage(index, callback) {
 		if (imgs[index]) {
-			if (callback) callback(index, imgs);
+			Q.handle(callback, this, [index, imgs]);
 			return;
 		}
 		var image = state.images[index];
@@ -172,7 +172,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 			image.src = Q.url('{{Q}}/img/throbbers/transparent.gif');
 		}
 		var name = image.name ? Q.normalize(image.name) : '';
-		var img = $('<img />').attr({
+		var $img = $('<img />').attr({
 			alt: image.caption ? image.caption : 'image ' + index,
 			src: Q.url(image.src)
 		}).css({
@@ -183,15 +183,11 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 		}).appendTo($this)
 		.on('load', onLoad);
 		if (name) {
-			img.addClass('Q_gallery_caption_' + name);
+			$img.addClass('Q_gallery_caption_' + name);
 		}
-		imgs[index] = img;
-		img.each(function () {
-			if (this.complete) {
-				$(this).off('load');
-				onLoad();
-			}
-		});
+		if ($img[0].complete) {
+			onLoad();
+		}
 		if (image.caption) {
 			var css = image.style ? image.style : {};
 			css['visibility'] = 'hidden';
@@ -210,9 +206,10 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 			cap.addClass('Q_gallery_caption_' + name);
 		}
 		function onLoad() {
-			imgs[index] = img;
-			Q.handle(state.onLoad, $this, [$(this), imgs, state]);
-			if (callback) callback(index, imgs);
+			$img.off('load');
+			imgs[index] = $img;
+			Q.handle(state.onLoad, $this, [$img, imgs, state]);
+			Q.handle(callback, this, [index, imgs]);
 		}
 	}
 	

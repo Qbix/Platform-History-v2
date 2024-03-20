@@ -905,7 +905,7 @@ class Websites_Webpage extends Base_Websites_Webpage
         }
 
 		// try to import icon from $iconBig
-		self::importIcon($iconBig, $webpageStream);
+		Streams::importIcon($webpageStream->publisherId, $webpageStream->name, $iconBig, "Websites/image");
 
 		// grant access to this stream for logged user
 		$streamsAccess = new Streams_Access();
@@ -989,33 +989,5 @@ class Websites_Webpage extends Base_Websites_Webpage
 			->fetchDbRows();
 
 		return $rows;
-	}
-
-	/**
-	 * Import icon to stream
-	 * @method importIcon
-	 * @static
-	 * @param {String} $url image url
-	 * @param Streams_Stream $stream
-	 */
-	static function importIcon ($url, $stream) {
-		if (!Q_Valid::url($url)) {
-			return false;
-		}
-
-		$icon = file_get_contents($url);
-
-		// if icon is valid image
-		if ($icon && imagecreatefromstring($icon)) {
-			// upload image to stream
-			Q_Image::save(array(
-				'data' => $icon, // these frills, with base64 and comma, to format image data for Q/image/post handler.
-				'path' => "Q/uploads/Streams",
-				'subpath' => Q_Utils::splitId($stream->publisherId, 3, '/')."/".$stream->name."/icon/".time(),
-				'save' => "Websites/image"
-			));
-			return true;
-		}
-		return false;
 	}
 }

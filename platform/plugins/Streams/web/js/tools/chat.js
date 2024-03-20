@@ -600,7 +600,6 @@ Q.Tool.define('Streams/chat', function(options) {
 								var fields = Q.extend({}, stream.getAllAttributes(), {
 									publisherId: stream.fields.publisherId,
 									streamName: stream.fields.name,
-									autoplay: true,
 									url: stream.fileUrl() || stream.iconUrl('400')
 								});
 

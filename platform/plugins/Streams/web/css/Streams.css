@@ -702,10 +702,11 @@
 
 .Streams_dialog_interests {
 	min-width: 300px;
-	width: 90%;
 	background: url(../img/bg/overlay-interests.png);
 }
-
+.Q_notMobile .Streams_dialog_interests {
+	width: 500px;
+}
 .Streams_dialog_interests * {
 	color: white;
 }

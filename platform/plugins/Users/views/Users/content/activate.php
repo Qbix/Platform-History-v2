@@ -40,56 +40,52 @@
 		</div>
 	<?php else: ?>
 		<div class="Q_admin_pane">
-				<?php echo Q::tool('Users/avatar', array(
-					'icon' => true,
-					'userId' => $user->id
-				), 'admin') ?>
-				<div class='Q_big_prompt'>
-					<p style="max-width: 350px;">
-					<?php if (empty($_REQUEST['p'])): ?>
-						<?php echo Q::interpolate($activate['ChoosePassPhrase']) ?>
-					<?php else: ?>
-						<?php echo Q::interpolate($activate['ChoosePassPhraseSeeSuggestions']) ?>
-					<?php endif; ?>
-					</p>
-					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
-						<?php echo Q::tool('Q/form', array(
-							'slotsToRequest' => 'form,user',
-							'loader' => array(
-								'options' => array(
-									'loadExtras' => 'session'
-								)
-							)
-						), 'Users_activate') ?>
-						<?php echo Q_Html::formInfo(null) ?>
-						<input type="text" id="activate_identifier_hidden" name="<?php echo $autocompleteType ?>"
-							value="<?php echo Q_Html::text($identifier) ?>"
-							hidden="hidden"
-							autocomplete="username <?php echo $autocompleteType ?>">
-						<input type="text" id="activate_identifier_hidden" name="<?php echo $autocompleteType ?>"
-						value="<?php echo Q_Html::text($identifier) ?>"
-						hidden="hidden"
-						autocomplete="username <?php echo $autocompleteType ?>">
-						<input type="password" id='new-password' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
-						<input type="hidden" name="afterActivate" value="<?php echo $afterActivate ?>">
-						<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
-							value="<?php echo Q_Html::text($identifier) ?>"
-							autocomplete="username">
-						<input type="hidden" name="isHashed" value="0" id="Users_login_isHashed">
-						<?php if ($code): ?>
-							<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
-						<?php else: ?>
-							<?php echo Q::text($activate['OneTimeCode']) ?>
-							<input name="code" id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code"><br>
-						<?php endif; ?>
-						<div class="Q_buttons">
-							<button type="submit" class="Q_button"><?php echo Q_Html::text($activate['ActivateMyAccount']) ?></button>
-						</div>
-						<?php if (!empty($_REQUEST['p'])): ?>
-							<input type="hidden" name="p" value="1">
-						<?php endif; ?>
-					</form>
-				</div>
+            <?php echo Q::tool('Users/avatar', array(
+                'icon' => true,
+                'userId' => $user->id
+            ), 'admin') ?>
+            <div class='Q_big_prompt'>
+                <p style="max-width: 350px;">
+                <?php if (empty($_REQUEST['p'])): ?>
+                    <?php echo Q::interpolate($activate['ChoosePassPhrase']) ?>
+                <?php else: ?>
+                    <?php echo Q::interpolate($activate['ChoosePassPhraseSeeSuggestions']) ?>
+                <?php endif; ?>
+                </p>
+                <?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
+                    <?php echo Q::tool('Q/form', array(
+                        'slotsToRequest' => 'form,user',
+                        'loader' => array(
+                            'options' => array(
+                                'loadExtras' => 'session'
+                            )
+                        )
+                    ), 'Users_activate') ?>
+                    <?php echo Q_Html::formInfo(null) ?>
+                    <input type="text" id="activate_identifier_hidden" name="<?php echo $autocompleteType ?>"
+                        value="<?php echo Q_Html::text($identifier) ?>"
+                        hidden="hidden"
+                        autocomplete="username <?php echo $autocompleteType ?>">
+                    <input type="password" id='new-password' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
+                    <input type="hidden" name="afterActivate" value="<?php echo $afterActivate ?>">
+                    <input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
+                        value="<?php echo Q_Html::text($identifier) ?>"
+                        autocomplete="username">
+                    <input type="hidden" name="isHashed" value="0" id="Users_login_isHashed">
+                    <?php if ($code): ?>
+                        <input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
+                    <?php else: ?>
+                        <?php echo Q::text($activate['OneTimeCode']) ?>
+                        <input name="code" id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code"><br>
+                    <?php endif; ?>
+                    <div class="Q_buttons">
+                        <button type="submit" class="Q_button"><?php echo Q_Html::text($activate['ActivateMyAccount']) ?></button>
+                    </div>
+                    <?php if (!empty($_REQUEST['p'])): ?>
+                        <input type="hidden" name="p" value="1">
+                    <?php endif; ?>
+                </form>
+            </div>
 		</div>
 		<div class="Q_extra_pane">
 			<h2>Suggestions:</h2>

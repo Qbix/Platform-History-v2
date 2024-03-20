@@ -60,11 +60,12 @@ Q.Tool.jQuery('Q/textfill',
 			var fontSize = o.maxFontPixels || ($this.height() + 10);
 			var lastGoodFontSize = 0, lastBadFontSize = fontSize, jump;
 			var $c = o.fillParent ? $this.parent() : $this;
-			if (!$c) {
+			if (!$c.length) {
 				return false; // it's not part of the DOM yet
 			}
 			var maxHeight = Math.round(o.fillPadding ? $c.innerHeight() : $c.height());
 			var maxWidth = Math.round(o.fillPadding ? $c.innerWidth() : $c.width());
+			var lineHeight = parseInt(document.defaultView.getComputedStyle($c[0], null).getPropertyValue("line-height"));
 			var textHeight, textWidth, lines, tooBig;
 			ourElement.addClass('Q_textfill_resizing');
 			for (var i=0; i<100; ++i) {
@@ -72,7 +73,7 @@ Q.Tool.jQuery('Q/textfill',
 				textHeight = Math.round(ourElement.outerHeight(true));
 				textWidth = Math.round(ourElement.outerWidth(true));
 				if (o.maxLines) {
-					lines = textHeight / Math.floor(fontSize * 1.5);
+					lines = Math.round(textHeight/lineHeight);
 				}
 				tooBig = (textHeight > maxHeight || textWidth > maxWidth
 					|| (o.maxLines && lines > o.maxLines))
