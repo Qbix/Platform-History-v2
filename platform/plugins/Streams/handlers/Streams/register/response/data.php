@@ -7,7 +7,7 @@ function Streams_register_response_data()
 	));
 	if (Users::loggedInUser(false, false)) {
 		if (!empty($fields['user'])) {
-			$fields['user']['displayName'] = Streams::displayName($fields['user']->id);
+			$fields['user']['displayName'] = Streams::displayName($fields['user']['id']);
 		}
 	}
 	return $fields;

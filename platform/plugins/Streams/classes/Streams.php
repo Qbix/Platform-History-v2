@@ -1024,6 +1024,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {string} [$relate.inheritAccess=true] If false skip inherit access from category.
+	 * @param {array} [$relate.extra=array()] Any extra information to pass to Streams::relate()
 	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
 	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
@@ -1133,6 +1134,13 @@ abstract class Streams extends Base_Streams
 		// relate the stream to category stream, if any
 		if (!empty($relate['streamName'])) {
 			$relationType = isset($relate['type']) ? $relate['type'] : '';
+			$options = array(
+				'weight' => isset($relate['weight']) ? $relate['weight'] : null,
+				'skipAccess' => $skipAccess
+			);
+			if (isset($relate['extra'])) {
+				$options['extra'] = $relate['extra'];
+			}
 			$result = Streams::relate(
 				$asUserId,
 				$relate['publisherId'], 
@@ -1140,10 +1148,7 @@ abstract class Streams extends Base_Streams
 				$relationType,
 				$stream->publisherId, 
 				$stream->name,
-				array(
-					'weight' => isset($relate['weight']) ? $relate['weight'] : null,
-					'skipAccess' => $skipAccess
-				)
+				$options
 			);
 		}
 
@@ -3275,9 +3280,9 @@ abstract class Streams extends Base_Streams
 		}
 		$subscriptions = Streams_Subscription::select('*', 'a')
 		->where(array(
-				'a.publisherId' => $publisherId,
-				'a.streamName' => $streamNames,
-				'a.ofUserId' => $asUserId
+			'a.publisherId' => $publisherId,
+			'a.streamName' => $streamNames,
+			'a.ofUserId' => $asUserId
 		))->join(Streams_Stream::table(true, 'b'), array(
 			'a.publisherId' => 'b.publisherId',
 			'a.streamName' => 'b.name'
@@ -3312,10 +3317,18 @@ abstract class Streams extends Base_Streams
 				'publisherId' => $publisherId,
 				'name' => $streamNamesMissing
 			))->fetchAll(PDO::FETCH_ASSOC);
+			$streamTypes = array();
+			foreach ($rows as $row) {
+				$streamTypes[] = $row['type'];
+			}
+			$templateType = null; // get only one template per streamType
+			$templateRows = Streams_Stream::getStreamsTemplates($publisherId, $streamTypes, 'Streams_Subscription', $templateType, array(
+				'ofUserId' => array('', $asUserId)
+			));
 			foreach ($rows as $row) {
 				$name = $row['name'];
 				$type = $row['type'];
-				if ($o = $userStreamsTree->get($name, "subscribe", array())) {
+				if ($o = $userStreamsTree->get($row->streamName, "subscribe", array())) {
 					if (isset($o['filter'])) {
 						$filter = Q::json_encode($o['filter']);
 					}
@@ -3327,20 +3340,7 @@ abstract class Streams extends Base_Streams
 					}
 				}
 				if (!isset($filter) or !isset($untilTime)) {
-					$templates = Streams_Subscription::select()
-						->where(array(
-							'publisherId' => array('', $publisherId),
-							'streamName' => "$type/",
-							'ofUserId' => array('', $asUserId)
-						))->fetchAll(PDO::FETCH_ASSOC);
-					$template = null;
-					foreach ($templates as $t) {
-						if (!$template
-						or ($template['publisherId'] == '' and $t['publisherId'] !== '')
-						or ($template['userId'] == '' and $t['userId'] !== '')) {
-							$template = $t;
-						}
-					}
+					$template = Q::ifset($templateRows, $type.'/', null);
 				}
 				if (!isset($filter)) {
 					$filter = Q::json_encode($template
@@ -3359,8 +3359,8 @@ abstract class Streams extends Base_Streams
 					);
 				}
 				if (!isset($untilTime)) {
-					$untilTime = ($template and $template['duration'] > 0)
-						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $template[duration] SECOND")
+					$untilTime = ($template and $template->duration > 0)
+						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL ".$template->duration." SECOND")
 						: null;
 				}
 				if (!isset($rule)) {

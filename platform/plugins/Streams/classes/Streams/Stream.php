@@ -459,18 +459,71 @@ class Streams_Stream extends Base_Streams_Stream
 		$publisherId, 
 		$streamType, 
 		$className, 
-		&$templateType = null
+		&$templateType = null,
+		$extraCriteria = array()
 	) {
 		// fetch template for stream's PK - publisher & name
 		// if $templateType == true return all found templates sorted by type,
 		// otherwise return one template and its type
 		$field = ($className === 'Streams_Stream' ? 'name' : 'streamName');
+		$criteria = array(
+			'publisherId' => array('', $publisherId), // generic or specific publisher
+			$field => $streamType . '/'
+		);
+		if ($extraCriteria) {
+			$criteria = array_merge($criteria, $extraCriteria);
+		}
 		$rows = call_user_func(array($className, 'select'))
-			->where(array(
-				'publisherId' => array('', $publisherId), // generic or specific publisher
-				$field => $streamType.'/'
-			))->fetchDbRows();
+			->where($criteria)->fetchDbRows();
 		return self::sortTemplateTypes($rows, 'publisherId', $templateType, $field);
+	}
+
+	/**
+	 * @method getStreamsTemplates
+	 * @static
+	 * @param {string} $publisherId The publisher of the stream
+	 * @param {string} $streamTypes The types of the streams
+	 * @param {string} $className The class extending Db_Row to fetch from the database
+	 * @param {&integer} [$templateType=null] Gets filled with the template type 0-4. 
+	 *   Set to true to return all templates.
+	 * @return {Streams_Stream|array} Returns an array of arrays,
+	 *   with keys = templateStreamName and values = template stream, 
+	 *   or an array if $templateType is true
+	 */
+	static function getStreamsTemplates(
+		$publisherId, 
+		$streamTypes, 
+		$className, 
+		&$templateType = null,
+		$extraCriteria = array()
+	) {
+		$streamTypes = array_unique($streamTypes);
+		// fetch template for stream's PK - publisher & name
+		// if $templateType == true return all found templates sorted by type,
+		// otherwise return one template and its type
+		$field = ($className === 'Streams_Stream' ? 'name' : 'streamName');
+		$templateNames = array();
+		foreach ($streamTypes as $type) {
+			$templateNames[] = "$type/";
+		}
+		$criteria = array(
+			'publisherId' => array('', $publisherId), // generic or specific publisher
+			$field => $templateNames
+		);
+		if ($extraCriteria) {
+			$criteria = array_merge($criteria, $extraCriteria);
+		}
+		$rows = call_user_func(array($className, 'select'))
+			->where($criteria)
+			->fetchDbRows();
+		$results = array();
+		foreach ($rows as $row) {
+			$results[$row->$field][] = $row;
+		}
+		foreach ($results as $templateName => $templates) {
+			$results[$type] = self::sortTemplateTypes($templates, 'publisherId', $templateType, $field);
+		}
+		return $results;
 	}
 	
 	/**

@@ -1456,7 +1456,6 @@ class Q
 			}
 			file_put_contents($realPath, $toSave, FILE_APPEND);
 		}
-		umask($mask);
 	}
 	
 

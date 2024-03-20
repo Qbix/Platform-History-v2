@@ -1040,13 +1040,14 @@ class Q_Response
 				return false; // already added
 			}
 		}
-		self::$scripts[] = @compact('src', 'type');
 		// Now, for the slot
 		if (!isset($slotName)) {
 			// By default, scripts won't be added "to a slot"
 			// because it is more likely they should be executed only one time in the document.
 			$slotName = ''; // isset(self::$slotName) ? self::$slotName : '';
 		}
+		$slot = $slotName;
+		self::$scripts[] = @compact('src', 'type', 'slot');
 		if (!isset(self::$scriptsForSlot[$slotName])) {
 			self::$scriptsForSlot[$slotName] = array();
 		}
@@ -1290,10 +1291,11 @@ class Q_Response
 		foreach ($scripts as $script) {
 			$src = '';
 			extract($script, EXTR_IF_EXISTS);
+			$slot = isset($script['slot']) ? $script['slot'] : '';
 
 			$ob = new Q_OutputBuffer();
 			if (Q_Valid::url($src) and !Q::startsWith($src, $baseUrl)) {
-				$remote_scripts_for_slots[$script['slot']][] = $src;
+				$remote_scripts_for_slots[$slot][] = $src;
 			} else {
 				list ($src, $filename) = Q_Html::themedUrlFilenameAndHash($src);
 				if (!empty($loaded[$src])) {
@@ -1308,7 +1310,7 @@ class Q_Response
 				$src_json = json_encode($src, JSON_UNESCAPED_SLASHES);
 				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);\n\n";
 				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);\n\n";
-				$scripts_for_slots[$script['slot']][$src] = ''
+				$scripts_for_slots[$slot][$src] = ''
 					. $currentScriptCode
 			 		. $ob->getClean()
 					. $currentScriptEndCode;

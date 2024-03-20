@@ -202,6 +202,11 @@ class Streams_Participant extends Base_Streams_Participant
 			$this->streamType, array('participating'), array()
 		);
 		if ($participatingNames) {
+			Streams_RelatedTo::updateRelated(
+				array('toPublisherId', 'toStreamName', 'fromPublisherId', 'fromStreamName'),
+				array('extra'),
+				$participants
+			)->where();
 			Streams_RelatedTo::update()->set(array(
 				'extra' => $this->extra
 			))->where(array(

@@ -569,7 +569,7 @@ class Db_Mysql implements Db_Interface
 			foreach ($rowObjects as $rowObject) {
 				try {
 					$rowObject->wasModified(false);
-					$query = self::insert($rowObject->fields);
+					$query = self::insert($table_into, $rowObject->fields);
 					$q = $query->build();
 					$stmt = null;
 					$result = new Db_Result($stmt, $query);

@@ -5,8 +5,8 @@
  */
 
 /**
- * Interface that an adapter must support to extend the Users_ExternalFrom class.
- * @class Users_ExternalFrom_Interface
+ * Interface that an adapter must support to extend the Users_ExternalTo class.
+ * @class Users_ExternalTo_Interface
  * @static
  */
 
