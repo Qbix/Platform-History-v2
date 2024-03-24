@@ -744,8 +744,17 @@ class Q
 				$classNameWithUnderscores = implode('_', $parts);
 				$classNameWithNamespaces = implode('\\', $parts);
 				if ($classNameWithUnderscores != $classNameWithNamespaces
-				&& class_exists($classNameWithUnderscores)) {
-					class_alias($classNameWithUnderscores, $classNameWithNamespaces);
+				&& $classNameWithUnderscores === ucfirst($classNameWithUnderscores)
+				&& class_exists($classNameWithUnderscores)
+				) {
+					if (in_array(reset($parts), Q::plugins())) {
+						try {
+							// this is probably one of our plugins
+							class_alias($classNameWithUnderscores, $classNameWithNamespaces);
+						} catch (Exception $e) {
+							// class name is reserved, probably, for some reason
+						}
+					}
 				}
 			} catch (Q_Exception_MissingFile $e) {
 				// the file doesn't exist
