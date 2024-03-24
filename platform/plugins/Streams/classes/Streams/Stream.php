@@ -578,16 +578,20 @@ class Streams_Stream extends Base_Streams_Stream
 				$publisherId, $types, 'Streams_Access', $templateType
 			);
 			$streams = $r[$publisherId];
+			$accessRows = array();
 			foreach ($streams as $s) {
 				$tsn = $s->type.'/';
 				$streamTemplate = Q::ifset($bulkStreamTemplate, $tsn, false);
 				$accessTemplates = Q::ifset($bulkAccessTemplates, $tsn, array(
 					array(), array(), array(), array()
 				));
-				$s->beforeSave($s->fields, array(), compact(
-					'streamTemplate', 'accessTemplates'
+				$s->beforeSave($s->fields, array(), array(
+					'streamTemplate' => $streamTemplate,
+					'accessTemplates' => $accessTemplates,
+					'accessRows' => &$accessRows
 				));
 			}
+			Streams_Access::insertManyAndExecute($accessRows);
 		}
 	}
 
@@ -719,8 +723,13 @@ class Streams_Stream extends Base_Streams_Stream
 					$access->copyFrom($template->toArray());
 					$access->publisherId = $this->publisherId;
 					$access->streamName = $this->name;
-					if (!$access->save(true)) {
-						return false; // JUNK: this leaves junk in the database, but preserves consistency
+					if (isset($internal['accessRows'])) {
+						$key = implode("\t", array_values($access->calculatePKValue(true)));
+						$internal['accessRows'][$key] = $access;
+					} else {
+						if (!$access->save()) {
+							return false; // JUNK: this leaves junk in the database, but preserves consistency
+						}
 					}
 				}
 			}

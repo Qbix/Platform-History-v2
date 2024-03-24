@@ -198,9 +198,11 @@ function Streams_import_post()
 			$users[$userId] = $user = Users::fetch($userId, true);
 			if (isset($alsoAddEmail)) {
 				$user->addEmail($alsoAddEmail); // sends addEmail message
+				$user->save();
 			}
 			if (isset($alsoAddMobile)) {
 				$user->addMobile($alsoAddMobile); // sends addMobile message
+				$user->save();
 			}
 			$task->setAttribute('processed', $j);
 			$task->setAttribute('progress', min($j / $lineCount, 1));

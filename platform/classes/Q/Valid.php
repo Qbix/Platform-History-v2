@@ -423,6 +423,7 @@ class Q_Valid
 			$source = $_REQUEST;
 		}
 		$result = array();
+		$empty = false;
 		foreach ($fields as $fieldname) {
 			$missing = false;
 			$field = '';

@@ -37,9 +37,11 @@ function Users_resend_post()
 	}
 	if ($type === 'email') {
 		$existing = $user->addEmail($identifier);
+		$user->save();
 		Users::$cache['emailAddress'] = $identifier;
 	} else {
 		$existing = $user->addMobile($identifier);
+		$user->save();
 		Users::$cache['mobileNumber'] = $identifier;
 	}
 	if ($existing) {

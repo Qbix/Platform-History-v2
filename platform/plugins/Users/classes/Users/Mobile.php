@@ -51,7 +51,7 @@ class Users_Mobile extends Base_Users_Mobile
 
 		// set language if didn't defined yet
 		if (!isset($options['language'])) {
-			$options['language'] = isset($this->userId) ? Users::getLanguage($this->userId) : null;
+			$options['language'] = Q::ifset($this, 'preferredLanguage', null);
 		}
 
 		$app = Q::app();

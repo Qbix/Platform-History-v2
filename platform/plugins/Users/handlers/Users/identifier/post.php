@@ -31,6 +31,7 @@ function Users_identifier_post()
 		$user->addEmail(
 			$identifier, $subject, $view, array()
 		);
+		$user->save();
 	} else if ($type === 'mobile') {
 		$view = Q_Config::get(
 			'Users', 'transactional', 'identifier', 'mobile', Q_Config::get(
@@ -41,5 +42,6 @@ function Users_identifier_post()
 			$identifier,
 			$view
 		);
+		$user->save();
 	}
 }

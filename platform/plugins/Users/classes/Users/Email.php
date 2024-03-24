@@ -64,7 +64,7 @@ class Users_Email extends Base_Users_Email
 
 		// set language if didn't defined yet
 		if (!isset($options['language'])) {
-			$options['language'] = isset($this->userId) ? Users::getLanguage($this->userId) : null;
+			$options['language'] = Q::ifset($this, 'preferredLanguage', null);
 		}
 
 		if (is_array($subject)) {

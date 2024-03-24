@@ -1263,7 +1263,9 @@ abstract class Users extends Base_Users
 			Users_Device::add($device);
 		}
 
-		$user->save(); // saves the user with the id
+		// Save the user with the id!
+		// NOTE: This will trigger Users/User/afterSaveExecute handlers
+		$user->save();
 
 		/**
 		 * @event Users/insertUser {after}

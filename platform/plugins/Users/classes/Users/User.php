@@ -527,7 +527,6 @@ class Users_User extends Base_Users_User
 		$email->save();
 		
 		$this->emailAddressPending = $normalized;
-		$this->save();
 		
 		if ($activation = Q::ifset($options, 'activation', 'activation')) {
 			if (!isset($activationEmailView)) {
@@ -841,7 +840,6 @@ class Users_User extends Base_Users_User
 		$mobile->save();
 		
 		$this->mobileNumberPending = $normalized;
-		$this->save();
 		
 		if ($activation = Q::ifset($options, 'activation', 'activation')) {
 			if (!isset($activationMessageView)) {
