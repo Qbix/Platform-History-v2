@@ -1355,6 +1355,8 @@
 		if (Users.Session.key.generateOnLogin) {
 			Users.Session.generateKey();
 		}
+		Q.Socket.disconnectAll();
+		Q.Socket.reconnectAll(); // to trigger new onConnect
 	}, 'Users');
 	Users.onLogout = new Q.Event(function () {
 		Users.Session.key.loaded = null;
@@ -1369,8 +1371,12 @@
 		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
 		var language = location.search.queryField('Q.language') || navigator.language;
 		Q.Text.setLanguage.apply(Q.Text, language.split('-'));
+		Q.Socket.disconnectAll();
+		Q.Socket.reconnectAll(); // to trigger new onConnect
 	}, 'Users');
 	Users.onLoginLost = new Q.Event(function () {
+		Q.Socket.disconnectAll();
+		Q.Socket.reconnectAll(); // to trigger new onConnect
 		console.warn("Call to server was made which normally requires user login.");
 	});
 	Users.onConnected = new Q.Event();

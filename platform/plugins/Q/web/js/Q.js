@@ -12114,6 +12114,9 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 				log('Error on connection '+url+' ('+error+')');
 			});
 		}
+		if (!qs.connected && qs.socket) {
+			qs.socket.connect(); // connect it again
+		}
 
 		// if (!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting)) {
 		Q.handle(earlyCallback, this, [_qsockets[ns][url], ns, url]);
@@ -12238,7 +12241,8 @@ Q.Socket.disconnectAll = function _Q_Socket_disconnectAll(ns) {
 };
 
 /**
- * Reconnect all sockets that have been connected
+ * Reconnect all sockets that have been connected,
+ * and then disconnected with disconnect() or disconnectAll()
  * @static
  * @method reconnectAll
  */
