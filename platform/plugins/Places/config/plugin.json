@@ -148,8 +148,7 @@
 		"onInsert": {
 			"user": ["Places/user/locations"],
 			"person": [
-				"Places/participating",
-				"Places/user/location"
+				"Places/participating"
 			]
 		}
 	},

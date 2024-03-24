@@ -448,6 +448,10 @@ class Db_Mysql implements Db_Interface
 			}
 			if ($isCallable) {
 				call_user_func(array($className, 'beforeInsertManyAndExecute'), $rowObjects);
+				$rows = array();
+				foreach ($rowObjects as $k => $rowObject) {
+					$rows[$k] = $rowObject->fields;
+				}
 			}
 		}
 		

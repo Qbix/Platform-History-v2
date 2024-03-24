@@ -3344,7 +3344,7 @@ abstract class Streams extends Base_Streams
 				}
 				if (!isset($filter)) {
 					$filter = Q::json_encode($template
-						? Q::json_decode($template['filter'])
+						? Q::json_decode($template->filter)
 						: Streams_Stream::getConfigField($type, array(
 							'subscriptions', 'filter'
 						), array(

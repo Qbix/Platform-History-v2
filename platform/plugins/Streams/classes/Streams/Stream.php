@@ -487,8 +487,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {&integer} [$templateType=null] Gets filled with the template type 0-4. 
 	 *   Set to true to return all templates.
 	 * @return {Streams_Stream|array} Returns an array of arrays,
-	 *   with keys = templateStreamName and values = template stream, 
-	 *   or an array if $templateType is true
+	 *   with keys = templateStreamName and values are either
+	 *   template stream, or an array if $templateType is true
 	 */
 	static function getStreamsTemplates(
 		$publisherId, 
@@ -520,8 +520,8 @@ class Streams_Stream extends Base_Streams_Stream
 		foreach ($rows as $row) {
 			$results[$row->$field][] = $row;
 		}
-		foreach ($results as $templateName => $templates) {
-			$results[$type] = self::sortTemplateTypes($templates, 'publisherId', $templateType, $field);
+		foreach ($results as $templateStreamName => $templates) {
+			$results[$templateStreamName] = self::sortTemplateTypes($templates, 'publisherId', $templateType, $field);
 		}
 		return $results;
 	}
@@ -556,16 +556,59 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 
 	/**
+	 * Called by Db_Row_Mysql->insertManyAndExecute() instead of beforeSave()
+	 * to fetch templates in bulk. Calls ->beforeSave() internally on the rows.
+	 */
+	static function beforeInsertManyAndExecute($rows)
+	{
+		$a = array();
+		$r = array();
+		foreach ($rows as $row) {
+			$a[$row->publisherId][$row->type] = true;
+			$r[$row->publisherId][] = $row;
+		}
+		foreach ($a as $publisherId => $b) {
+			$types = array_keys($b);
+			$templateType = null;
+			$bulkStreamTemplate = self::getStreamsTemplates(
+				$publisherId, $types, 'Streams_Stream', $templateType
+			);
+			$templateType = true;
+			$bulkAccessTemplates = self::getStreamsTemplates(
+				$publisherId, $types, 'Streams_Access', $templateType
+			);
+			$streams = $r[$publisherId];
+			foreach ($streams as $s) {
+				$tsn = $s->type.'/';
+				$streamTemplate = Q::ifset($bulkStreamTemplate, $tsn, false);
+				$accessTemplates = Q::ifset($bulkAccessTemplates, $tsn, array(
+					array(), array(), array(), array()
+				));
+				$s->beforeSave($s->fields, array(), compact(
+					'streamTemplate', 'accessTemplates'
+				));
+			}
+		}
+	}
+
+	/**
 	 * Does necessary preparations for saving a stream in the database.
 	 * @method beforeSave
 	 * @param {array} $modifiedFields
 	 *	The array of fields
+	 * @param {array} $options
+	 *  Not used at the moment
+	 * @param {array} $internal
+	 *  Can be used to pass pre-fetched objects
 	 * @return {array}
 	 * @throws {Exception}
 	 *	If mandatory field is not set
 	 */
-	function beforeSave($modifiedFields)
-	{
+	function beforeSave(
+		$modifiedFields,
+		$options = array(),
+		$internal = array()
+	) {
 		if (empty($this->attributes)) {
 			$this->attributes = null;
 		}
@@ -621,7 +664,9 @@ class Streams_Stream extends Base_Streams_Stream
 			$magicFieldNames = array('insertedTime', 'updatedTime', 'name');
 			$privateFieldNames = array_diff($privateFieldNames, $magicFieldNames);
 
-			$streamTemplate = self::getStreamTemplate(
+			$streamTemplate = isset($internal['streamTemplate'])
+			? $internal['streamTemplate']
+			: self::getStreamTemplate(
 				$this->publisherId, $this->type, 'Streams_Stream'
 			);
 			$fieldNames = Streams_Stream::fieldNames();
@@ -663,7 +708,9 @@ class Streams_Stream extends Base_Streams_Stream
 
 			// Get all access templates and save corresponding access
 			$templateType = true;
-			$accessTemplates = self::getStreamTemplate(
+			$accessTemplates = isset($internal['accessTemplates'])
+			? $internal['accessTemplates']
+			: self::getStreamTemplate(
 				$this->publisherId, $this->type, 'Streams_Access', $templateType
 			);
 			for ($i=1; $i<=3; ++$i) {
