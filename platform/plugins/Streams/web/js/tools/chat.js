@@ -83,13 +83,13 @@ Q.Tool.define('Streams/chat', function(options) {
 		}
 	}, tool);
 	Q.Users.onLogin.set(function () {
-		this.refresh();
+		tool.refresh();
 	}, this);
 	Q.Users.onLogout.set(function () {
-		this.refresh();
+		tool.refresh();
 	}, this);
 	Q.Users.onLoginLost.set(function () {
-		this.refresh();
+		tool.refresh();
 	}, this);
 
 	// close chat button handler
