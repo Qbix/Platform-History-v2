@@ -511,7 +511,7 @@
 	font-size: 17px;
 	white-space: nowrap;
 	padding: 0 3px 0 3px;
-	margin: 0 5px 5px 0;
+	margin: 0 1px 5px 0;
     font-weight: 300;
 }
 .Streams_interests_tool .Streams_interest_title {
@@ -527,8 +527,6 @@
 	text-decoration: underline;
 }
 .Streams_interest_title.Q_selected {
-	padding: 0 3px 0 3px;
-	margin: 0 -2px 0 -2px;
     border-radius: 5px;
     font-weight: 300;
 }
