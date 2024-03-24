@@ -82,6 +82,15 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.stream.refresh(null, {messages: true});
 		}
 	}, tool);
+	Q.Users.onLogin.set(function () {
+		this.refresh();
+	}, this);
+	Q.Users.onLogout.set(function () {
+		this.refresh();
+	}, this);
+	Q.Users.onLoginLost.set(function () {
+		this.refresh();
+	}, this);
 
 	// close chat button handler
 	$(tool.element).on(Q.Pointer.fastclick, "button[name=close]", function (event) {
