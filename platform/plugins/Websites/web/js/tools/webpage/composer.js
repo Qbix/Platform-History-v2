@@ -117,8 +117,7 @@
 					var val = $message.val();
 					$url.addClass('Q_disabled');
 					$url.find('input').attr('disabled', 'disabled');
-					$message.removeClass("Q_disabled")
-						.plugin('Q/clickfocus');
+					$message.removeClass("Q_disabled").focus();
 					setTimeout(function () {
 						$message.val(val).trigger('Q_refresh');
 					}, 500); // sometimes the Return key affects the textbox
