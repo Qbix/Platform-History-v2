@@ -82,7 +82,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				var content = '';
 				var count = 0;
 				if (interests[""]) {
-					content += _listInterests(category, interests);
+					content += _listInterests(category, interests[""]);
 					count += Object.keys(interests[""]).length;
 				}
 				Q.each(interests, function (subcategory, list) {

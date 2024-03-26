@@ -20,7 +20,7 @@ function Streams_interests_response()
 		$ordering = array_keys($interests);
 	}
 	$o_json = Q::json_encode($ordering);
-	echo "Q.setObject(['Q', 'Streams', 'Interests', 'ordering', '$communityId'], $o_json);\n";
+	echo "Q.setObject(['Q', 'Streams', 'Interests', 'ordering', '$communityId'], $o_json);\n\n";
 	$info = array();
 	foreach ($interests as $k => &$v) {
 		if (!empty($v['@info'])) {
@@ -34,8 +34,7 @@ function Streams_interests_response()
 	}
 	$all_json = Q::json_encode((object)$interests);
 	$info_json = Q::json_encode((object)$info);
- 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'all', '$communityId'], $all_json);\n";
-	echo "\n";
+ 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'all', '$communityId'], $all_json);\n\n";
 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'info', '$communityId'], $info_json);";
 	return false;
 }
