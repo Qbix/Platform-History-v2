@@ -520,9 +520,6 @@
 	cursor: pointer;
 	border: 1px dotted #ccc;
 }
-.Streams_interests_tool .Streams_interests_subcategory + .Streams_interest_title {
-	margin-left: 20px;
-}
 .Q_notTouchscreen .Streams_interest_title:hover {
 	text-decoration: underline;
 }
@@ -570,8 +567,8 @@
 .Streams_interests_other {
 	opacity: 0.5;
 	font-weight: 200;
-	margin-bottom: 0;
-	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-top: 10px;
 }
 .Streams_preview_error {
 	opacity: 0.8;

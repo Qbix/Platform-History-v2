@@ -81,12 +81,14 @@ Q.Tool.define("Streams/interests", function (options) {
 				var info = Q.getObject([state.communityId, category], Streams.Interests.info) || {};
 				var content = '';
 				var count = 0;
-				Q.each(interests, function (subcategory, interests) {
-					var h3 = subcategory
-						? "<h3 class='Streams_interests_subcategory'>"+subcategory+"</h3>"
-						: '';
-					content += h3 + _listInterests(category, interests);
-					count += Object.keys(interests).length;
+				if (interests[""]) {
+					content += _listInterests(category, interests[""]);
+					count += Object.keys(interests[""]).length;
+				}
+				Q.each(interests, function (subcategory, list) {
+					var h3 = "<h3 class='Streams_interests_subcategory'>"+subcategory+"</h3>";
+					content += h3 + _listInterests(category, list);
+					count += Object.keys(list).length;
 				});
 				var title = "<span class='Streams_interests_category_title'>"+category+"</span>";
 				if (info.white) {
