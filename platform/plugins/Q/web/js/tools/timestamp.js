@@ -118,7 +118,7 @@ Q.Tool.define('Q/timestamp', function () {
 		var s, m, h;
 		if (diff < -dayLength || !state.relative) {
 			result = strftime(format, time);
-		} else if (diff < -3600 * 2) {
+		} else if (diff <= -3600 * 2) {
 			if (format.indexOf('{day') < 0 || diffToday >= 0) {
 				result = t.hoursAgo.interpolate({
 					h: Math.floor(-diff / 3600)
@@ -126,17 +126,17 @@ Q.Tool.define('Q/timestamp', function () {
 			} else {
 				result = strftime(format, time);
 			}
-		} else if (diff < -3600) {
+		} else if (diff <= -3600) {
 			result = t.hourAgo.interpolate({h: 1});
 		} else if (diff < -60 * 2) {
 			result = t.minutesAgo.interpolate({
 				m: Math.floor(-diff / 60)
 			});
 			refreshAfterSeconds = 60 - (-diff%60);
-		} else if (diff < -60) {
+		} else if (diff <= -60) {
 			result = t.minuteAgo.interpolate({ m: 1 });
 			refreshAfterSeconds = 60 - (-diff%60);
-		} else if (diff < -10) {
+		} else if (diff <= -10) {
 			result = t.secondsAgo.interpolate({ s: Math.floor(-diff) });
 			refreshAfterSeconds = 60 - (-diff%60);
 		} else if (diff < 0) {
