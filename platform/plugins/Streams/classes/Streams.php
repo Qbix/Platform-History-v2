@@ -4550,9 +4550,9 @@ abstract class Streams extends Base_Streams
 					continue;
 				}
 				$interestIndex = preg_replace("/".$category.":\s?/i", "", $interestsStream->title);
-				if (!array_key_exists($interestIndex, $v1[""])) {
-					$v1[""][$interestIndex] = array();
-				}
+				// if (!array_key_exists($interestIndex, $v1[""])) {
+				// 	$v1[""][$interestIndex] = array();
+				// }
 			}
 
 			foreach ($v1 as $k2 => &$v2) {
