@@ -1640,6 +1640,9 @@ class Q
 	
 	/**
 	 * A wrapper for json_encode
+	 * @method json_encode
+	 * @static
+	 * @throws Q_Exception_JsonEncode
 	 */
 	static function json_encode($value, $options = 0, $depth = 512)
 	{
@@ -1660,9 +1663,10 @@ class Q
 		return str_replace("\\/", '/', $result);
 	}
 
-	/* Use it for json_encode some corrupt UTF-8 chars
- 	* useful for = malformed utf-8 characters possibly incorrectly encoded by json_encode
-	*/
+	/**
+	 * Use it for json_encode some corrupt UTF-8 chars
+ 	 * useful for = malformed utf-8 characters possibly incorrectly encoded by json_encode
+	 */
 	static function utf8ize($mixed) {
 		if (is_array($mixed)) {
 			foreach ($mixed as $key => $value) {
@@ -1675,6 +1679,9 @@ class Q
 	}
 	/**
 	 * A wrapper for json_decode
+	 * @method json_decode
+	 * @static
+	 * @throws Q_Exception_JsonDecode
 	 */
 	static function json_decode()
 	{

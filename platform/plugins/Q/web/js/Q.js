@@ -8646,7 +8646,7 @@ Q.url = function _Q_url(what, fields, options) {
 		}
 	} else if (options && options.cacheBust) {
 		cb = options.cacheBust;
-		what3 += "?Q.ct=" + Math.floor(Date.now()/cb)*cb;
+		what3 += "?Q.cb=" + Math.floor(Date.now()/1000/cb)*cb;
 	}
 	parts = what3.split('?');
 	if (parts.length > 2) {
@@ -9538,7 +9538,7 @@ Q.formPost.counter = 0;
  * @param {Function} callback
  */
 Q.updateUrls = function(callback) {
-	var timestamp, url, json, ut = Q.cookie('Q_ut');
+	var timestamp, earliest, url, json, ut = Q.cookie('Q_ut');
 	if (!ut) {
 		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
 			Q.updateUrls.urls = result;
@@ -9547,6 +9547,9 @@ Q.updateUrls = function(callback) {
 			if (timestamp = result['@timestamp']) {
 				localStorage.setItem(Q.updateUrls.timestampKey, timestamp);
 				Q.cookie('Q_ut', timestamp);
+			}
+			if (earliest = result['@earliest']) {
+				localStorage.setItem(Q.updateUrls.earliestKey, earliest);
 			}
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000, skipNonce: true});
@@ -9559,7 +9562,6 @@ Q.updateUrls = function(callback) {
 					_update(result);
 				}, { extend: false, cacheBust: 1000 });
 				console.warn("Q.updateUrls couldn't load or parse " + url);
-				return Q.handle(callback, null, []);
 			} else {
 				_update(result);
 			}
@@ -9575,6 +9577,9 @@ Q.updateUrls = function(callback) {
 					localStorage.setItem(Q.updateUrls.timestampKey, timestamp);
 					Q.cookie('Q_ut', timestamp);
 				}
+				if (earliest = result['@earliest']) {
+					localStorage.setItem(Q.updateUrls.earliestKey, timestamp);
+				}
 				Q.handle(callback, null, [result, timestamp]);
 			}
 		}, { extend: false, cacheBust: 1000, skipNonce: true });
@@ -9584,6 +9589,7 @@ Q.updateUrls = function(callback) {
 };
 
 Q.updateUrls.urlsKey = 'Q.updateUrls.urls';
+Q.updateUrls.earliestKey = 'Q.updateUrls.earliest';
 Q.updateUrls.timestampKey = 'Q.updateUrls.timestamp';
 Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.urlsKey) || "{}");
 

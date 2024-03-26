@@ -37,8 +37,8 @@ if ($count < 1 or !$FROM_APP)
 #Read primary arguments
 $LOCAL_DIR = $FROM_APP ? APP_DIR : $argv[1];
 
-$longopts = array('integrity');
-$options = getopt('i', $longopts);
+$longopts = array('integrity', 'timestamps');
+$options = getopt('it', $longopts);
 if (isset($options['help'])) {
 	echo $help;
 	exit;
@@ -67,13 +67,23 @@ $filter = array(
 	// "/.*\.html/", "/.*\.javascript/"
 );
 $array = array();
-$result = null;
-Q_script_urls_glob(APP_WEB_DIR, $ignore, 'sha256', null, $result);
 $dir_to_save = APP_CONFIG_DIR.DS.'Q';
 $parent_dir = $dir_to_save.DS.'urls';
 $urls_dir = $parent_dir.DS.'urls';
 $trees_dir = $parent_dir.DS.'trees';
 $diffs_dir = $parent_dir.DS.'diffs';
+$result = null;
+$time = $earliest = time();
+$json = file_get_contents($urls_dir.DS.'latest.json');
+if ($json !== false) {
+	$latest = Q::json_decode($json, true);
+	if (!empty($latest['@earliest'])) {
+		$earliest = $latest['@earliest'];
+	}
+}
+Q_script_urls_glob(APP_WEB_DIR, $ignore, 'sha256', null, $result);
+$result['@timestamp'] = $time;
+$result['@earliest'] = $earliest;
 foreach (array($dir_to_save, $parent_dir, $urls_dir, $diffs_dir) as $dir) {
 	if (!file_exists($dir)) {
 		mkdir($dir);
@@ -85,15 +95,10 @@ if (is_dir($parent_dir)) {
 		Q_Utils::symlink($parent_dir, $web_urls_path);
 	}
 }
-$time = time();
 file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
-$result['@timestamp'] = $time;
 file_put_contents($urls_dir.DS."latest.json", Q::json_encode($result));
 $urls_export = Q::var_export($result);
-file_put_contents(
-	$dir_to_save.DS.'urls.php',
-	"<?php\nreturn $urls_export;"
-);
+file_put_contents($dir_to_save.DS.'urls.php', "<?php\nreturn $urls_export;");
 echo PHP_EOL;
 $tree = new Q_Tree($result);
 //file_put_contents($arrays_dir.DS."$time.json", Q::json_encode($array));
@@ -108,8 +113,8 @@ function Q_script_urls_glob(
 	&$result = null,
 	$levels = 0
 ) {
-	global $options;
-	if ($options['i'] or $options['integrity']) {
+	global $options, $earliest;
+	if (!empty($options['i']) or !empty($options['integrity'])) {
 		$calculateHashes = true;
 	} else if ($environment = Q_Config::get('Q', 'environment', '')) {
 		$calculateHashes = Q_Config::get(
@@ -117,6 +122,16 @@ function Q_script_urls_glob(
 		);
 	} else {
 		$calculateHashes = false;
+	}
+
+	global $urls_dir;
+	if (!$calculateHashes && !glob($urls_dir.DS.'*')) {
+		// the $urls_dir is empty
+		// this is the first time we're running this script
+		if (empty($options['t']) and empty($options['timestamps'])) {
+			// just store the first timestamp, for smaller files
+			return $result = array();
+		}
 	}
 
 	static $n = 0, $i = 0;
@@ -129,7 +144,7 @@ function Q_script_urls_glob(
 	foreach ($filenames as $f) {
 		$u = substr($f, $len+1);
 		$v = str_replace(DS, '/', $u);
-		$ignore = Q_Config::get('Q', 'urls', 'skip', array());
+		$ignore = Q_Config::get('Q', 'urls', 'ignore', array());
 		if (in_array($v, $ignore)) {
 			continue;
 		}
@@ -146,13 +161,16 @@ function Q_script_urls_glob(
 			)) { // file is too big to process
 				continue;
 			}
+			$t = filemtime($f);
 			if ($calculateHashes) {
 				$c = file_get_contents($f);
 				$hash = hash($algo, $c, true);
-				$enchash = base64_encode($hash);
-				$value = array('t' => filemtime($f), 'h' => $enchash);
+				$h = base64_encode($hash);
+				$value = compact('t', 'h');
+			} else if ($t <= $earliest) {
+				continue;;
 			} else {
-				$value = array('t' => filemtime($f));
+				$value = compact('t');
 			}
 			$parts = explode(DS, $u);
 			$parts[] = $value;

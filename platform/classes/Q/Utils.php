@@ -1866,14 +1866,14 @@ class Q_Utils
 		}
 		return preg_replace(
 			array(
-				"/url\((\'|\\\")*(?!data\:|http\:\/\/|https\:\/\/|\'|\\\")/",
-				"/@import[\s]url\((\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/",
-				"/@import[\s](?!url\()(\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/"
+				"/@import[\s](?!url\()(\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/",
+				// "/@import[\s]url\((\'|\\\"){0,1}(?!data|http\:\/\/|https\:\/\/|\'|\\\")/",
+				"/url\((\'|\\\")*(?!data\:|http\:\/\/|https\:\/\/|\'|\\\")/"
 			),
 			array(
+				'@import $1'.$relativePathPrefix,
+				// '@import url($1'.$relativePathPrefix,
 				'url($1'.$relativePathPrefix,
-				'@import url($1'.$relativePathPrefix,
-				'@import $1'.$relativePathPrefix
 			),
 			$content
 		);

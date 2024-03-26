@@ -290,7 +290,7 @@
 			"dontRandomize": false
 		},
 		"urls": {
-			"skip": ["Q/urls", "Q/uploads"]
+			"ignore": ["Q/urls", "Q/uploads"]
 		},
 		"composer": {
 			"autoload": "*"
