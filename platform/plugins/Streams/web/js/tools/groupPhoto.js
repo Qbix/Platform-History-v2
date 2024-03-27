@@ -81,7 +81,7 @@
 				tool.input = tool.$input[0];
 
 				var _imgLoaded = function () {
-					if (tool.input.naturalWidth < 10) {
+					if (tool.input.naturalWidth < 10 || tool.input.width < 10) {
 						return setTimeout(_imgLoaded, 300);
 					}
 

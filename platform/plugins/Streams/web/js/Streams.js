@@ -1887,7 +1887,7 @@ Stream.subscribe = new Q.Method({
     }
 })
 
-Stream.subscribe = new Q.Method({
+Stream.unsubscribe = new Q.Method({
     /**
     * Occurs when Stream.unsubscribe encounters an error trying to unsubscribe from a stream
     * @event unsubscribe.onError

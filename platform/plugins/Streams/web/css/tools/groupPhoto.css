@@ -2,7 +2,10 @@
     position: relative;
 }
 .Streams_groupPhoto_tool img.Streams_groupPhoto {
-    width: 100%;
+    max-width: 100%;
+    max-height: 45vh;
+    display: block;
+    margin: 0 auto;
 }
 .Streams_groupPhoto_tool canvas {
     position: absolute;
@@ -23,7 +26,10 @@
 }
 .Streams_groupPhoto_tool h2 {
     text-transform: capitalize;
+    font-size: 20px;
+    padding: 0 0 5px 0;
 }
+
 .Streams_groupPhoto_tool h2:empty {
     display: none;
 }
