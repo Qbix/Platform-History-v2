@@ -1218,7 +1218,7 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set("Q/video/videojs",
-	'<video preload="auto" class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{muted}} {{controls}} {{autoplay}} {{loop}} {{poster}} {{playsinline}} /></video>' +
+	'<video preload="auto" class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{{muted}}} {{{controls}}} {{{autoplay}}} {{{loop}}} {{{poster}}} {{{playsinline}}} /></video>' +
 	'<div class="Q_video_close"></div>'
 );
 
