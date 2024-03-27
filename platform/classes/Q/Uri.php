@@ -1022,7 +1022,7 @@ class Q_Uri
 		$fileTimestamp = null;
 		$fileSHA1 = null;
 		if ((!empty($config['caching']) or !empty($config['integrity']))) {
-			$ignoreUrls = Q_Config::get('Q', 'urls', 'ignore', array());
+			// $ignoreUrls = Q_Config::get('Q', 'urls', 'ignore', array());
 			$baseUrl = Q_Request::baseUrl(false);
 			if (Q::startsWith($url, $baseUrl)) {
 				$parts = explode('?', $url);
@@ -1030,22 +1030,14 @@ class Q_Uri
 				$tail = (count($parts) > 1 ? $parts[1] : '');
 				$urlRelativeToBase = substr($head, strlen($baseUrl)+1);
 				$parts = explode('/', $urlRelativeToBase);
-				$lastPart = end($parts);
-				$parts2 = explode('.', $lastPart);
-				if (count($parts2) < 2) {
-					$ignore = true;
+				$parts[] = null;
+				$tree = new Q_Tree(Q_Uri::$urls);
+				$info = call_user_func_array(array($tree, 'get'), $parts);
+				if (!empty($config['caching'])) {
+					$fileTimestamp = Q::ifset($info, 't', null);
 				}
-				if (!$ignore) {
-					$parts[] = null;
-					$tree = new Q_Tree(Q_Uri::$urls);
-					$earliest = $tree->get('@earliest', null);
-					$info = call_user_func_array(array($tree, 'get'), $parts);
-					if (!empty($config['caching'])) {
-						$fileTimestamp = Q::ifset($info, 't', $earliest);
-					}
-					if (!empty($config['integrity'])) {
-						$fileSHA1 = Q::ifset($info, 'h', null);
-					}
+				if (!empty($config['integrity'])) {
+					$fileSHA1 = Q::ifset($info, 'h', null);
 				}
 			}
 		}
