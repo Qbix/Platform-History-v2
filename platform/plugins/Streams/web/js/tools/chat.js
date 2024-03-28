@@ -1187,7 +1187,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
-		_doScrollToComposer(false);
+		setTimeout(_doScrollToComposer, 100);
 		function _doScrollToComposer (recursive) {
 			if (stopScrollingToComposer
 			|| !$(tool.element).is(':visible')) {
@@ -1221,7 +1221,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			s.removeClass('Q_forceDisplayBlock');
 			var c = $composer[0];
 			if (c) {
-				var m = c.scrollIntoViewIfNeeded ||  c.scrollIntoView;
+				var m = c.scrollIntoViewIfNeeded || c.scrollIntoView;
 				if (recursive) {
 					m.call(c, {
 						behavior: "instant",
