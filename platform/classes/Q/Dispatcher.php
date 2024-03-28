@@ -156,7 +156,8 @@ class Q_Dispatcher
 		$route = self::$uri->route();
 
 		$sessionId = Q_Session::requestedId();
-		if (!Q_Request::isAjax()) {
+		if (!Q_Request::isAjax()
+		and empty($_SERVER['HTTP_X_QBIX_REQUEST'])) {
 			$redirectKey = '';
 			if (empty($sessionId)) {
 				$redirectKey = 'landing';

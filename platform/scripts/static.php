@@ -90,6 +90,7 @@ foreach ($config as $suffix => $info) {
 	if (!empty($info['cookies'])) {
 		$headers['Cookie'] = http_build_query($info['cookies'], '', '; ');
 	}
+	$headers['X-Qbix-Request'] = 'static.php';
 	if (!empty($info['headers'])) {
 		$headers = array_merge($headers, $info['headers']);
 	}
