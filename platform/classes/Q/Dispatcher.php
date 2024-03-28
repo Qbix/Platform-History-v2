@@ -182,8 +182,10 @@ class Q_Dispatcher
 					}
 				}
 				if ($found) {
+					Q_Session::start(); // set session cookie
 					$redirectUrl = Q_Request::url() . $redirectSuffix;
 					header("Location: $redirectUrl");
+					self::response();
 					return true;
 				}
 			}
