@@ -896,9 +896,6 @@ Q.Tool.define('Streams/chat', function(options) {
 					maxWidth: $te.width()
 				});
 			}
-			if (!Q.info.isTouchscreen) {
-				this.plugin('Q/clickfocus');
-			}
 			Q.handle(state.onRefresh, tool);
 		}).on('keypress change input focus paste blur Q_refresh', Q.debounce(function(event) {
 			var $this = $(this);
