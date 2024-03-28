@@ -168,7 +168,7 @@ function Q_script_urls_glob(
 				$h = base64_encode($hash);
 				$value = compact('t', 'h');
 			} else if ($t <= $earliest) {
-				continue;;
+				continue;
 			} else {
 				$value = compact('t');
 			}

@@ -11060,7 +11060,9 @@ Q.loadUrl.loading = {};
 						}, o)).then(function (a) {
 							
 						}, function (err) {
-							debugger; // pause here if debugging
+							if (o && o.handleException) {
+								return o.handleException(err);
+							}
 						});
 					} else if (o.externalLoader) {
 						o.externalLoader.apply(this, arguments);
@@ -11214,7 +11216,10 @@ function Q_popStateHandler() {
 			{
 				ignoreHistory: true,
 				quiet: true,
-				unloadedUrl: Q_hashChangeHandler.currentUrl
+				unloadedUrl: Q_hashChangeHandler.currentUrl,
+				handleException: function () {
+					location.reload();
+				}
 			}
 		);
 		Q_hashChangeHandler.currentUrlTail = urlTail;
