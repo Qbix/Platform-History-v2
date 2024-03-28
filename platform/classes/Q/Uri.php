@@ -690,6 +690,7 @@ class Q_Uri
 		}
 		$segments = array();
 		$field_in_pattern = array();
+		$i = 0;
 		foreach ($rsegments as $rs) {			
 			$rs_parts = explode('.', $rs);
 			$rs_parts_count = count($rs_parts);
@@ -704,14 +705,19 @@ class Q_Uri
 				}
 				// otherwise, $variable
 				$field_name = substr($rs_parts[$j], 1);
-				if (!array_key_exists($field_name, $this->fields)) {
+				if (array_key_exists($field_name, $this->fields)) {
+					$value = $this->fields[$field_name];
+				} else if (isset($this->fields[$i])) {
+					$value = $this->fields[$i];
+				} else {
 					return false;
 				}
-				if (is_array($this->fields[$field_name])) {
+				if (is_array($value)) {
 					return false; // arrays can only come at the end
 				}
-				$segment_parts[] = urlencode($this->fields[$field_name]);
+				$segment_parts[] = urlencode($value);
 				$field_in_pattern[$field_name] = true;
+				++$i;
 			}
 			$segments[] = implode('.', $segment_parts);
 		}
@@ -732,15 +738,16 @@ class Q_Uri
 			$field_in_pattern[$field_name] = true;
 		}
 
-		// Then, test if all the fields match
+		// Then, test if all the non-variable fields match
 		foreach ($fields as $name => $value) {
 			if (!$name) {
 				continue;
 			}
 			if (isset($field_in_pattern[$name])) {
-				continue; // this is a regexp
+				continue; // this is a variable
 			}
-			if ((!isset($this->fields[$name])) or $this->fields[$name] != $value) {
+			if ((!isset($this->fields[$name]))
+			or $this->fields[$name] != $value) {
 				return false;
 			}
 		}
@@ -999,6 +1006,13 @@ class Q_Uri
 	 */
 	static function cachedUrlAndHash($url, $options = array())
 	{
+		if (Q::startsWith($url, self::$cacheBaseUrl)) {
+			$fileSHA1 = null;
+			if (!empty($config['integrity'])) {
+				$fileSHA1 = Q::ifset($info, 'h', null);
+			}
+			return array($url, $fileSHA1);
+		}
 		$cacheTimestamp = Q_Request::cacheTimestamp();
 		$environment = Q_Config::get('Q', 'environment', '');
 		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
@@ -1007,21 +1021,24 @@ class Q_Uri
 		}
 		$fileTimestamp = null;
 		$fileSHA1 = null;
-		if (!empty($config['caching']) or !empty($config['integrity'])) {
-			$parts = explode('?', $url);
-			$head = $parts[0];
-			$tail = (count($parts) > 1 ? $parts[1] : '');
-			$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
-			$parts = explode('/', $urlRelativeToBase);
-			array_shift($parts);
-			$parts[] = null;
-			$tree = new Q_Tree(Q_Uri::$urls);
-			$info = call_user_func_array(array($tree, 'get'), $parts);
-			if (!empty($config['caching'])) {
-				$fileTimestamp = Q::ifset($info, 't', null);
-			}
-			if (!empty($config['integrity'])) {
-				$fileSHA1 = Q::ifset($info, 'h', null);
+		if ((!empty($config['caching']) or !empty($config['integrity']))) {
+			// $ignoreUrls = Q_Config::get('Q', 'urls', 'ignore', array());
+			$baseUrl = Q_Request::baseUrl(false);
+			if (Q::startsWith($url, $baseUrl)) {
+				$parts = explode('?', $url);
+				$head = $parts[0];
+				$tail = (count($parts) > 1 ? $parts[1] : '');
+				$urlRelativeToBase = substr($head, strlen($baseUrl)+1);
+				$parts = explode('/', $urlRelativeToBase);
+				$parts[] = null;
+				$tree = new Q_Tree(Q_Uri::$urls);
+				$info = call_user_func_array(array($tree, 'get'), $parts);
+				if (!empty($config['caching'])) {
+					$fileTimestamp = Q::ifset($info, 't', null);
+				}
+				if (!empty($config['integrity'])) {
+					$fileSHA1 = Q::ifset($info, 'h', null);
+				}
 			}
 		}
 		if ($cacheTimestamp
@@ -1031,13 +1048,38 @@ class Q_Uri
 			return array(self::$cacheBaseUrl . $urlRelativeToBase, $fileSHA1);
 		}
 		if ($fileTimestamp) {
-			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.ct');
+			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cb');
 			Q::parse_str($tail, $fields);
 			$fields[$field] = $fileTimestamp;
 			$qs = http_build_query($fields);
 			return array(Q_Uri::fixUrl("$head?$qs"), $fileSHA1);
 		}
 		return array($url, $fileSHA1);
+	}
+
+	/**
+	 * @param {string} $route
+	 * @param {string|array} $generate
+	 *  An associative array of "uriFieldName" => ["values", "here"]
+	 *  to get a cartesian product of all combinations.
+	 *  Can be a string naming a function, or "Class::method"
+	 *  that returns the array of combinations, instead.
+	 *  Typically URI fields include at least "module" and "action"
+	 * @return {array} Array of URLs as keys, and the combination as values
+	 */
+	static function urlsFromCombinations($route, $generate)
+	{
+		if (is_string($generate)) {
+			$combinations = call_user_func(explode('::', $generate));
+		} else if (is_array($generate)) {
+			$combinations = Q_Utils::cartesianProduct($generate);
+		}
+		$result = array();
+		foreach ($combinations as $fields) {
+			$url = Q_Uri::url($fields, $route);
+			$result[$url] = array($fields, $route);
+		}
+		return $result;
 	}
 	
 	/**

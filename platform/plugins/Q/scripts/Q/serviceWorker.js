@@ -1,23 +1,3 @@
-(function () {
-	// This anonymous closure is not accessible from outside.
-	// It contains code to read, store and attach cookie-like
-	// Cookie-JS request headers, and Set-Cookie-JS response headers.
-
-	var cookies = $cookies_json;
-
-	self.addEventListener('fetch', function (event) {
-		// if request is not for same origin, then just send it
-		var url = new URL(event.request.url);
-		if (url.origin !== self.location.origin) {
-			return event.respondWith(fetch(event.request));
-		}
-		// otherwise, attach some headers
-		console.log(event.request.url);
-	});
-})();
-
-var Q = {};
-
 /**
  * Functions related to IndexedDB, when it is available
  * @class Q.IndexedDB
@@ -25,39 +5,48 @@ var Q = {};
  * @param {String} uriString
  */
 Q.IndexedDB = {
-	/**
-	 * Creates or uses an existing database and object store name.
-	 * @static
-	 * @method open
-	 * @param {String} dbName The name of the database
-	 * @param {String} storeName The name of the object store name inside the database
-	 * @param {String} keyPath The key path inside the object store
-	 * @param {Function} callback Receives (error, ObjectStore)
-	 * @param {Number} [version=1] The version of the database to open
-	 */
-	open: function (dbName, storeName, keyPath, callback, version) {
-		if (!root.indexedDB) {
-			return false;
-		}
-		var open = indexedDB.open(dbName, version || 1);
+	open: function (dbName, storeName, params, callback) {
+		var keyPath = (typeof params === 'string' ? params : params.keyPath);
+		var version = undefined;
+		var open = indexedDB.open(dbName, version);
+		var _triedAddingObjectStore = false;
 		open.onupgradeneeded = function() {
-			var db = open.result;
-			var store = db.createObjectStore(storeName, {keyPath: keyPath});
+			var db = this.result;
+			if (!db.objectStoreNames.contains(storeName)
+			&& !_triedAddingObjectStore) {
+				_triedAddingObjectStore = true;
+				var store = db.createObjectStore(storeName, {keyPath: keyPath});
+				var idxs = params.indexes;
+				if (idxs) {
+					for (var i=0, l=idxs.length; i<l; ++i) {
+						store.createIndex(idxs[i][0], idxs[i][1], idxs[i][2]);
+					}
+				}
+			}
 		};
-		open.onerror = function (event) {
-			callback && callback(event);
+		open.onerror = function (error) {
+			callback && callback.call(Q.IndexedDB, error);
 		};
 		open.onsuccess = function() {
+			var db = this.result;
+			version = db.version;
+			if (!db.objectStoreNames.contains(storeName)) {
+				// need to upgrade version and add this store
+				++version;
+				db.close();
+				var o = indexedDB.open(dbName, version);
+				Q.take(open, ['onupgradeneeded', 'onerror', 'onsuccess'], o);
+				return;
+			}
 			// Start a new transaction
-			var db = open.result;
 			var tx = db.transaction(storeName, "readwrite");
 			var store = tx.objectStore(storeName);
-			callback && callback(null, store);
+			callback && callback.call(Q.IndexedDB, null, store);
 			// Close the db when the transaction is done
 			tx.oncomplete = function() {
 				db.close();
 			};
-		}
+		};
 	},
 	put: function (store, value, onSuccess, onError) {
 		if (!onError) {

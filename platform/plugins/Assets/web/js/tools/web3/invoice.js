@@ -57,6 +57,17 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
 //            "amount": 2,
 //            "accept": ["0x2e5f9AC05b344095a94DfEb6f277770b8019a0c5"], //MPTK  on mumbai
 //            "uniswapRouter": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff"//<filled by backend>
+//        },
+//        {
+//            "chainId": "0x89", // supported:  polygon matic
+//            "wallet": "0x4aC71bd9f784fA6090E9dC3EE0e61dC085e22Ef4",
+//            "token": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", // usdt on polygon
+//            "amount": 2,
+//            "accept": [
+//            "0x2791bca1f2de4661ed88a30c99a7a9449aa84174", // USDC on polygon
+//            "0x692597b009d13c4049a947cab2239b7d6517875f"
+//            ], 
+//            "uniswapRouter": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff"//<filled by backend>
 //        }
 //    ];
     
@@ -88,12 +99,16 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
         }
     }),
     onChainChanged: new Q.Event(),
+    payTitle: null,
+    successfullMsg: "Transaction was successfully",
     // variables below used and filled when tool works
     swapDeadlineTs: '2524611661', // uint deadline (GMT): Saturday, January 1, 2050 1:01:01 AM
     allowToolInvoke: true,
     timeoutID: null,
-    needToPayAmount: null,
-    needToPayPath: null
+    needToPayAmount: null, // amount calculated already with decimal places
+    needToPayPath: null,
+    needToPayToken: null,
+    wrappedToken: null
 },
 
 { // methods go here
@@ -147,10 +162,12 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
         var state = this.state;
         var $info = $(".Assets_web3_invoice_info", tool.element);
         
-        var uniswapRouter, WETH;
+        var uniswapRouter;
         var amountOut = tool.recipient.amount;
         var tokenOut = tool.recipient.token;
+        var dpl = tool.recipient.tokendpl;
 
+        state.tokenToPayAddress = tokenToPayAddress;
         if (
             typeof tokenToPayAddress === 'undefined' ||
             typeof tokenToPayBalance === 'undefined'
@@ -159,7 +176,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
             return;
         }
         if (tokenOut.toLowerCase() == tokenToPayAddress.toLowerCase()) {
-            state.needToPayAmount = amountOut;
+            state.needToPayAmount = ethers.utils.parseUnits(amountOut.toString, dpl);
             //state.needToPayPath = [tokenOut, tokenOut];
             state.needToPayPath = [tokenOut];
             $info.html(
@@ -172,20 +189,24 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
             uniswapRouter = contract;
             return contract.WETH();
         }).then(function (weth_) {
-            WETH = weth_;
+            
             //console.log("amountOut", amountOut);
+            state.wrappedToken = weth_;
+    
             return uniswapRouter.getAmountsIn(
-                ethers.utils.parseUnits(amountOut.toString()), 
+                ethers.utils.parseUnits(amountOut.toString(), tool.recipient.tokendpl), 
                 [
-                    Q.Assets.Web3.constants.zeroAddress == tokenToPayAddress ? WETH : tokenToPayAddress, 
+                    Q.Assets.Web3.constants.zeroAddress == tokenToPayAddress ? state.wrappedToken : tokenToPayAddress, 
                     tokenOut
                 ]
             );
         }).then(function (amount) {
             
             state.needToPayAmount = amount[0];
-            //state.needToPayPath = [tokenOut, tokenToPayAddress];
-            state.needToPayPath = [tokenToPayAddress, tokenOut];
+            state.needToPayPath = [
+                tokenToPayAddress, 
+                tokenOut
+            ];
             $info.html(
                 //'Need to pay "'+ ethers.utils.formatUnits(amount[0], 18) + '" tokens'
                 //'Need to pay "'+ tool._parseAmount(amount[0]) + '" tokens'
@@ -237,6 +258,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
         $toolElement.addClass("Q_working");
 
         Q.Template.render("Assets/web3/invoice", {
+            payTitle: state.payTitle,
             recipient: tool.recipient,
             //minimizedWallet: Q.Assets.NFT.Web3.minimizeAddress(owner, 20, 3)
             minimizedWallet: (tool.recipient.wallet).substr(0, 20 - 3 - 3) + "..." + (tool.recipient.wallet).substr(-3, 3)
@@ -250,6 +272,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
 
             var uniswapRouter;
             var uniswapRouterFactory;
+            var recipientToken;
             
             // replace invoice token address to the tokenname
             Q.Users.Web3.getContract(
@@ -259,9 +282,18 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                     chainId: tool.recipient.chainId
                 }
             ).then(function (contract) {
-                return contract.name();
-            }).then(function (name){
-                Q.replace($(".Assets_web3_invoice_token", tool.element)[0], name);
+                var p = [];
+                p.push(contract.decimals());
+                p.push(contract.name());
+                return Promise.allSettled(p);
+            }).then(function (_ref) {
+//                var dpl = _ref[0].value;
+//                var name = _ref[1].value;
+                tool.recipient.tokendpl = _ref[0].value;
+                var $token = $(".Assets_web3_invoice_token", tool.element);
+                if ($token.length != 0) {
+                    Q.replace($token[0], _ref[1].value);
+                }
             }).catch(function(err){
                 if (err) {
                     console.warn(err);
@@ -396,8 +428,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                                 var erc20Contract;
                                 var uniswapRouter;
 
-                                var fixedNeedToPayAmount = ethers.utils.parseUnits(parseInt(state.needToPayAmount).toString(), 'wei');
-                                
+                                var fixedNeedToPayAmount = state.needToPayAmount;
                                 // add 5%
                                 fixedNeedToPayAmount = fixedNeedToPayAmount.add(fixedNeedToPayAmount.mul(5).div(100));
 
@@ -420,7 +451,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
 
                                     var p = [];
                                     var way = 0;
-
+ 
                                     if (state.needToPayPath[0] == Q.Assets.Web3.constants.zeroAddress) {
                                         // send eth to uniswap
                                         way = 1;
@@ -482,9 +513,13 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                                 }).then(function (way) {    
                                     $('.step0 .bi-asterisk', element).addClass('animate');
                                     if (way == 1) {
-                             
+                                        // state.wrappedToken
+                                        // first address are zero  this means that swap must be from native coins
+                                        // so replaces it on wrapped
+                                        fixedNeedToPayPath[0] = state.wrappedToken;
+
                                         return uniswapRouter.swapETHForExactTokens(
-                                            ethers.utils.parseUnits(tool.recipient.amount.toString()), // uint amountOut,
+                                            ethers.utils.parseUnits(tool.recipient.amount.toString(),tool.recipient.tokendpl), // uint amountOut,
                                             fixedNeedToPayPath,// address[] calldata path,
                                             tool.recipient.wallet,// address to,
                                             tool.state.swapDeadlineTs, //'2524611661', // uint deadline (GMT): Saturday, January 1, 2050 1:01:01 AM
@@ -504,7 +539,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                                     if (way == 2) {
                                         return erc20Contract.transfer(
                                             tool.recipient.wallet, 
-                                            ethers.utils.parseUnits(tool.recipient.amount.toString())
+                                            ethers.utils.parseUnits(tool.recipient.amount.toString(),tool.recipient.tokendpl)
                                         ).then(function (tx) {
                                             return tx.wait();
                                         }).then(function (receipt) {
@@ -518,7 +553,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                                     }
                                     if (way == 3) {
                                         return uniswapRouter.swapTokensForExactTokens(
-                                            ethers.utils.parseUnits(tool.recipient.amount.toString()), // uint amountOut,
+                                            ethers.utils.parseUnits(tool.recipient.amount.toString(),tool.recipient.tokendpl), // uint amountOut,
                                             fixedNeedToPayAmount, // uint amountInMax,
                                             fixedNeedToPayPath,// address[] calldata path,
                                             tool.recipient.wallet,// address to,
@@ -551,7 +586,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                                             });
                                         }).then(function () {	
                                             return uniswapRouter.swapTokensForExactTokens(
-                                                ethers.utils.parseUnits(tool.recipient.amount.toString()), // uint amountOut,
+                                                ethers.utils.parseUnits(tool.recipient.amount.toString(),tool.recipient.tokendpl), // uint amountOut,
                                                 fixedNeedToPayAmount, // uint amountInMax,
                                                 fixedNeedToPayPath,// address[] calldata path,
                                                 tool.recipient.wallet,// address to,
@@ -568,7 +603,12 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
                                             });
                                         })
                                     }
-
+                                }).then(function () { 
+                                    Q.replace($(".Assets_web3_invoice_interface_title", element)[0], "Successfull");
+                                    Q.replace($(".Assets_web3_invoice_interface_steps", element)[0], tool.state.successfullMsg);
+                                    return new Promise((resolve, reject) => {
+                                        setTimeout(resolve, 5000); // 5 sec
+                                    });
                                 }).catch(function (err) {
 
                                     Q.Notices.add({
@@ -603,16 +643,26 @@ Q.Template.set("Assets/web3/invoice",
     
     <div class="form-group row">
         <div class="col-sm-12">
+            {{#if payTitle}}
+                {{payTitle}}
+            {{else}}
             Pay {{recipient.amount}} <span class="Assets_web3_invoice_token">{{recipient.token}}</span>  to {{minimizedWallet}}
+            {{/if}}
         </div>
     </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <div class="Assets_web3_invoice_select"></div>
+        </div>
+    </div>
+    <!--
     <div class="form-group row">
         <label class="col-sm-5 col-form-label">{{form.fields.labels.funds_to_pay}}</label>
         <div class="col-sm-7">
             <div class="Assets_web3_invoice_select"></div>
         </div>
     </div>
-
+    -->
     <div class="form-group row">
         <div class="col-sm-12 Assets_web3_invoice_info"></div>
     </div>

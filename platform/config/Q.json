@@ -53,9 +53,6 @@
 				"include": []
 			},
 			"statusBarOverlapped": false,
-			"static": {
-				"dir": "{{web}}"
-			},
 			"contentSecurityPolicy": {
 				"script": [
 					"'unsafe-eval'",
@@ -75,6 +72,28 @@
 				],
 				"styleHashes": false,
 				"worker": ["'self'"]
+			}
+		},
+		"static": {
+			"dir": "{{web}}",
+			"redirect": {
+				"": ".html",
+				"landing": ".landing.html",
+				"authenticated": false
+			},
+			"generate": {
+				".html": {
+					"session": "sessionId_static",
+					"routes": {}
+				},
+				".landing.html": {
+					"session": "",
+					"routes": {}
+				},
+				".authenticated.html": {
+					"session": "sessionId_authenticated_static",
+					"routes": {}
+				}
 			}
 		},
 		"analytics": {
@@ -290,7 +309,7 @@
 			"dontRandomize": false
 		},
 		"urls": {
-			"skip": ["Q/urls", "Q/uploads"]
+			"ignore": ["Q/urls", "Q/uploads"]
 		},
 		"composer": {
 			"autoload": "*"

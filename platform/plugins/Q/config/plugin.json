@@ -12,7 +12,7 @@
 				"action": "urls"
 			}
 		},
-		"Audio": {
+		"audio": {
 			"speak": {
 				"mute": false
 			}
