@@ -1056,6 +1056,31 @@ class Q_Uri
 		}
 		return array($url, $fileSHA1);
 	}
+
+	/**
+	 * @param {string} $route
+	 * @param {string|array} $generate
+	 *  An associative array of "uriFieldName" => ["values", "here"]
+	 *  to get a cartesian product of all combinations.
+	 *  Can be a string naming a function, or "Class::method"
+	 *  that returns the array of combinations, instead.
+	 *  Typically URI fields include at least "module" and "action"
+	 * @return {array} Array of URLs as keys, and the combination as values
+	 */
+	static function urlsFromCombinations($route, $generate)
+	{
+		if (is_string($generate)) {
+			$combinations = call_user_func(explode('::', $generate));
+		} else if (is_array($generate)) {
+			$combinations = Q_Utils::cartesianProduct($generate);
+		}
+		$result = array();
+		foreach ($combinations as $fields) {
+			$url = Q_Uri::url($fields, $route);
+			$result[$url] = array($fields, $route);
+		}
+		return $result;
+	}
 	
 	/**
 	 * @method fromArray

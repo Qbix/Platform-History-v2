@@ -67,17 +67,18 @@ if (isset($options['help'])) {
 $out = !empty($options['out'])
 	? $options['out']
 	: Q_Uri::interpolateUrl(Q_Config::get(
-		'Q', 'web', 'static', 'dir', APP_WEB_DIR
+		'Q', 'static', 'dir', APP_WEB_DIR
 	), array('web' => APP_WEB_DIR));
 $baseUrl = !empty($options['baseUrl']) ? $options['baseUrl'] : Q_Request::baseUrl(true, true);
 
+echo "Generating files into $out" . PHP_EOL . PHP_EOL;
 $config = Q_Config::expect('Q', 'static', 'generate');
 foreach ($config as $suffix => $info) {
 	if (empty($info['routes'])) {
 		continue;
 	}
 	$headers = array();
-	if (!empty($info['session'])) {
+	if (isset($info['session'])) {
 		if (!isset($info['cookies'])) {
 			$info['cookies'] = array();
 		}
@@ -92,39 +93,41 @@ foreach ($config as $suffix => $info) {
 	if (!empty($info['headers'])) {
 		$headers = array_merge($headers, $info['headers']);
 	}
+	$paramsArray = array();
+	$results = array();
 	foreach ($info['routes'] as $route => $value) {
-		if (is_string($value)) {
-			$combinations = call_user_func(explode('::', $value));
-		} else if (is_array($value)) {
-			$combinations = Q_Utils::cartesianProduct($value);
-		}
-		$paramsArray = array();
-		$c = count($combinations);
-		echo "Requesting $c URLs for suffix $suffix and route $route" . PHP_EOL;
-		foreach ($combinations as $fields) {
-			$url = Q_Uri::url($fields, $route);
-			$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
-			$paramsArray[$url] = array('GET', $url, null, null, array(), $headers);
-			// $body = Q_Utils::get($urlToFetch, null, array(), $headers);
-			echo "-> $url" . PHP_EOL;
-		}
-		$bodies = Q_Utils::requestMulti($paramsArray);
-		foreach ($bodies as $url => $body) {
-			$filename = $out . DS . Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
-			$dirname = dirname($filename);
-			if (!file_exists($dirname)) {
-				@mkdir($dirname, 0755, true);
-				if (!is_dir($dirname)) {
-					echo "Couldn't create directory $dirname" . PHP_EOL;
-					continue;
-				}
+		$results = array_merge($results, Q_Uri::urlsFromCombinations($route, $value));
+	}
+	$c = count($results);
+	echo "Requesting $c URLs for suffix $suffix" . PHP_EOL;
+	$baseUrlLength = strlen($baseUrl);
+	foreach ($results as $url => $info) {
+		$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
+		$paramsArray[$url] = array('GET', $url, null, null, array(), $headers);
+		// $body = Q_Utils::get($urlToFetch, null, array(), $headers);
+		$route = $info[1];
+		$urlTail = substr($url, $baseUrlLength);
+		echo "$route -> $urlTail" . PHP_EOL;
+	}
+	$bodies = Q_Utils::requestMulti($paramsArray);
+	echo PHP_EOL;
+	foreach ($bodies as $url => $body) {
+		$normalized = Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
+		$filename = $out . DS . $normalized;
+		$dirname = dirname($filename);
+		if (!file_exists($dirname)) {
+			@mkdir($dirname, 0755, true);
+			if (!is_dir($dirname)) {
+				echo "Couldn't create directory $dirname" . PHP_EOL;
+				continue;
 			}
-			$res = file_put_contents($filename, $body);
-			if ($res) {
-				echo "Generated $filename" . PHP_EOL;
-			} else {
-				echo "Couldn't write $filename" . PHP_EOL;
-			}
+		}
+		$res = file_put_contents($filename, $body);
+		if ($res) {
+			echo "Generated $normalized" . PHP_EOL;
+		} else {
+			echo "Couldn't write $normalized" . PHP_EOL;
 		}
 	}
+	echo PHP_EOL;
 }

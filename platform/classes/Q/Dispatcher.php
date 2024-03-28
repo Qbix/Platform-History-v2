@@ -153,6 +153,40 @@ class Q_Dispatcher
 			$request_uri = Q_Request::uri();
 			self::$uri = clone($request_uri);
 		}
+		$route = self::$uri->route();
+
+		$sessionId = Q_Session::requestedId();
+		if (!Q_Request::isAjax()) {
+			$redirectKey = '';
+			if (empty($sessionId)) {
+				$redirectKey = 'landing';
+			} else if ($prefix = Q_Config::get(
+				'Q', 'session', 'id', 'prefixes', 'authenticated', null
+			) and Q::startsWith($sessionId, $prefix)) {
+				$redirectKey = 'authenticated';
+			}
+			if ($redirectSuffix = Q_Config::get(
+				'Q', 'static', 'redirect', $redirectKey, null
+			) and $generate = Q_Config::get(
+				'Q', 'static', 'generate', $redirectSuffix, 'routes', $route, null
+			)) {
+				$found = true;
+				foreach (self::$uri->toArray() as $k => $v) {
+					if (!isset($generate[$k]) or !in_array($v, $generate[$k])) {
+						if (!$k) {
+							continue; // this is only used to define extra conditions for routes
+						}
+						$found = false;
+						break;
+					}
+				}
+				if ($found) {
+					$redirectUrl = Q_Request::url() . $redirectSuffix;
+					header("Location: $redirectUrl");
+					return true;
+				}
+			}
+		}
 
 		Q_Request::handleInput();
 		
