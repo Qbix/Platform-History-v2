@@ -1309,7 +1309,7 @@ class Q_Response
 				} catch (Exception $e) {}
 				$src_json = json_encode($src, JSON_UNESCAPED_SLASHES);
 				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);\n\n";
-				$currentScriptEndCode = "window.Q && Q.currentScript && (Q.currentScript.src = null);\n\n";
+				$currentScriptEndCode = "\n\nwindow.Q && Q.currentScript && (Q.currentScript.src = null);";
 				$scripts_for_slots[$slot][$src] = ''
 					. $currentScriptCode
 			 		. $ob->getClean()

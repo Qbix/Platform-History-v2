@@ -7126,9 +7126,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 		return false;
 	}
 	var keyPath = (typeof params === 'string' ? params : params.keyPath);
-	var lskey = 'Q_IndexedDB_version';
-	var version = localStorage.getItem(lskey) || undefined;
-	var open = indexedDB.open(dbName, version);
+	var open = indexedDB.open(dbName);
 	var _triedAddingObjectStore = false;
 	open.onupgradeneeded = function() {
 		var db = this.result;
@@ -7149,10 +7147,10 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 	};
 	open.onsuccess = function() {
 		var db = this.result;
+		version = db.version;
 		if (!db.objectStoreNames.contains(storeName)) {
 			// need to upgrade version and add this store
 			++version;
-			localStorage.setItem(lskey, version);
 			db.close();
 			var o = indexedDB.open(dbName, version);
 			Q.take(open, ['onupgradeneeded', 'onerror', 'onsuccess'], o);
@@ -7366,6 +7364,7 @@ Q.init = function _Q_init(options) {
 	Q.info.baseUrl = Q.info.baseUrl || location.href.split('/').slice(0, -1).join('/');
 	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
+	_startCachingWithServiceWorker();
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
@@ -8628,14 +8627,14 @@ Q.url = function _Q_url(what, fields, options) {
 	} else if (!what3.isUrl()) {
 		info = Q.getObject(what3, Q.updateUrls.urls, '/');
 	}
-	if (info) {
+	if (info ) {
 		if (Q.info.urls && Q.info.urls.caching && info.t) {
 			parts = what3.split('?');
 			if (parts.length > 1) {
-				parts[1] = parts[1].queryField('Q.ct', info.t);
+				parts[1] = parts[1].queryField('Q.cb', info.t);
 				what3 = parts[0] + '?' + parts[1];	
 			} else {
-				what3 = parts[0] + '?Q.ct=' + info.t;
+				what3 = parts[0] + '?Q.cb=' + info.t;
 			}
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
@@ -10125,7 +10124,8 @@ Q.findStylesheet = function (href) {
  * @class
  */
 Q.ServiceWorker = {
-	start: function(cookieJarId, callback) {
+	start: function(callback, options) {
+		options = options || {};
 		if (!'serviceWorker' in navigator) {
 			Q.handle(callback, null, [false]);
 			Q.ServiceWorker.onActive.handle(false);
@@ -10136,9 +10136,11 @@ Q.ServiceWorker = {
 		navigator.serviceWorker.register(src)
 		.then(function (registration) {
 			log("Q.ServiceWorker.register", registration);
-			registration.addEventListener("updatefound", () => {
-				Q.handle(Q.ServiceWorker.onUpdateFound, Q.ServiceWorker, [registration]);
-			  });
+			if (options.update) {
+				registration.update();
+			}
+			registration.removeEventListener("updatefound", _onUpdateFound);
+			registration.addEventListener("updatefound", _onUpdateFound);
 			var worker;
 			if (registration.active) {
 				worker = registration.active;
@@ -10146,10 +10148,10 @@ Q.ServiceWorker = {
 				worker = registration.waiting;
 			} else if (registration.installing) {
 				worker = registration.installing;
-			} 
+			}
 			if (worker) {
-				Q.handle(callback);
-				Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [registration]);
+				Q.handle(callback, Q.ServiveWorker, [worker, registration]);
+				Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [worker, registration]);
 			}
 		}).catch(function (error) {
 			debugger;
@@ -10159,6 +10161,45 @@ Q.ServiceWorker = {
 }
 Q.ServiceWorker.onActive = new Q.Event();
 Q.ServiceWorker.onUpdateFound = new Q.Event();
+
+function _onUpdateFound(event) {
+	Q.handle(Q.ServiceWorker.onUpdateFound, Q.ServiceWorker, [event.target, event]);
+}
+
+function _startCachingWithServiceWorker() {
+	Q.ServiceWorker.start(function (worker, registration) {
+		var items = [];
+		var scripts = document.querySelectorAll("script[data-src]");
+		var styles = document.querySelectorAll("style[data-href]");
+		[scripts, styles].forEach(function (arr) {
+			arr.forEach(function (element) {
+				var content = element.innerText;
+				var pathPrefix = element.getAttribute('data-path-prefix');
+				if (pathPrefix) {
+					var prefixes = ['@import ', '@import "', "@import '", 'url(', 'url("', "url('"];
+					prefixes.forEach(function (prefix) {
+						content = content.replace(prefix + pathPrefix, prefix);
+					});
+				}
+				items.push({
+					url: element.getAttribute('data-src') || element.getAttribute('data-href'),
+					content: content,
+					headers: {
+						'Content-Type': element.getAttribute('type')
+					}
+				});
+			});
+		});
+		if (items.length) {
+			registration.active.postMessage({
+				type: 'Q.Cache.put',
+				items: items
+			})
+		}
+	}, {
+		update: true
+	})
+}
 
 /**
  * Gets, sets or a deletes a cookie

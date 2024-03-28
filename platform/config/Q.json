@@ -180,7 +180,7 @@
 				}
 			},
 			"prettyPrintData": true,
-			"preload": null /* can be "inline", "header" or null */
+			"preload": "inline" /* can be "inline", "header" or null */
 		},
 		"stylesheets": {
 			"responseExtras": {

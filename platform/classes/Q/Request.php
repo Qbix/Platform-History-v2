@@ -286,7 +286,12 @@ class Q_Request
 	static function isServiceWorker()
 	{
 		$url = Q_Request::url();
-		return ($url === Q_Request::baseUrl() . '/Q-ServiceWorker');
+		return ($url === self::serviceWorkerURL());
+	}
+
+	static function serviceWorkerURL()
+	{
+		return Q_Request::baseUrl() . '/Q-ServiceWorker';
 	}
 	
 	/**
