@@ -129,6 +129,9 @@
     height: 40px;
 }
 
+.Streams_access_tool_dialog_container .Q_dialog_content {
+    color: #000;
+}
 body:has(.Streams_access_tool_dialog_container) .Streams_userChooser_results {
     background: white !important;
 }
