@@ -10150,7 +10150,7 @@ Q.ServiceWorker = {
 				worker = registration.installing;
 			}
 			if (worker) {
-				Q.handle(callback, Q.ServiveWorker, [worker, registration]);
+				Q.handle(callback, Q.ServiceWorker, [worker, registration]);
 				Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [worker, registration]);
 			}
 		}).catch(function (error) {
@@ -10191,7 +10191,7 @@ function _startCachingWithServiceWorker() {
 			});
 		});
 		if (items.length) {
-			registration.active.postMessage({
+			worker.postMessage({
 				type: 'Q.Cache.put',
 				items: items
 			})
