@@ -680,49 +680,50 @@
 	);
 
 	Q.Template.set('Streams/audio/preview/view',
-		'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
-		+ '<div class="Streams_preview_audio_player"></div>'
-		+ '<div class="Streams_preview_contents">'
-		+ '<h2 class="Streams_preview_title">{{{inplace}}}</h2>'
-		+ '<div class="Streams_preview_audio_duration"></div>'
-		+ '</div></div>'
+`<div class="Streams_preview_container Streams_preview_view Q_clearfix">
+			<div class="Streams_preview_audio_player"></div>
+			<div class="Streams_preview_contents">
+				<h2 class="Streams_preview_title">{{{inplace}}}</h2>
+				<div class="Streams_preview_audio_duration"></div>
+			</div>
+		</div>`
 	);
 
 	Q.Template.set('Streams/audio/composer',
-		'<div class="Streams_audio_composer" data-composer="{{isComposer}}"><form>'
-		+ '  <div class="Q_tabbing_tabs">'
-		+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
-		+ '  	<div data-name="record" class="Q_tabbing_tab">{{text.record}}</div>'
-		+ '  	<div data-name="upload" class="Q_tabbing_tab">{{text.upload}}</div>'
-		+ '  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>'
-		+ '  </div>'
-		+ '  <div class="Q_tabbing_container">'
-		+ '	 	<div class="Q_tabbing_item" data-content="edit">'
-		+ '			<input name="title" value="{{title}}" placeholder="{{text.title}}">'
-		+ '			<textarea name="content" placeholder="{{text.description}}">{{content}}</textarea>'
-		+ '			<div class="Streams_audio_composer_preview"></div>'
-		+ '			<div class="Streams_audio_composer_clip"></div>'
-		+ '  	</div>'
-		+ '	 	<div class="Q_tabbing_item" data-content="record">'
-		+ '    		<div class="Streams_audio_pie"></div>'
-		+ '  	</div>'
-		+ '  	<div class="Q_tabbing_item" data-content="upload">'
-		+ '	   		<input type="file" accept="audio/*" class="Streams_audio_file" />'
-		+ '			<div class="Streams_audio_composer_upload_limit">{{uploadLimit}}</div>'
-		+ '			<div class="Streams_audio_composer_preview"></div>'
-		+ '			<div class="Streams_audio_composer_clip"></div>'
-		+ '		</div>'
-		+ '  	<div class="Q_tabbing_item" data-content="link">'
-		+ '	   		<label>'
-		+ '				<input name="url" placeholder="{{text.setUrl}}" type="url">'
-		+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
-		+ '			</label>'
-		+ '			<div class="Streams_audio_composer_preview"></div>'
-		+ '			<div class="Streams_audio_composer_clip"></div>'
-		+ '		</div>'
-		+ '  </div>'
-		+ '  <div class="Streams_audio_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
-		+ '  <div class="Streams_audio_encoding">{{text.encoding}}</div>'
-		+ '</form></div>'
+`<div class="Streams_audio_composer" data-composer="{{isComposer}}"><form>
+		  <div class="Q_tabbing_tabs">
+		  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>
+		  	<div data-name="record" class="Q_tabbing_tab">{{text.record}}</div>
+		  	<div data-name="upload" class="Q_tabbing_tab">{{text.upload}}</div>
+		  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>
+		  </div>
+		  <div class="Q_tabbing_container">
+			 	<div class="Q_tabbing_item" data-content="edit">
+					<input name="title" value="{{title}}" placeholder="{{text.title}}">
+					<textarea name="content" placeholder="{{text.description}}">{{content}}</textarea>
+					<div class="Streams_audio_composer_preview"></div>
+					<div class="Streams_audio_composer_clip"></div>
+		  	</div>
+			 	<div class="Q_tabbing_item" data-content="record">
+		    		<div class="Streams_audio_pie"></div>
+		  	</div>
+		  	<div class="Q_tabbing_item" data-content="upload">
+			   		<input type="file" accept="audio/*" class="Streams_audio_file" />
+					<div class="Streams_audio_composer_upload_limit">{{uploadLimit}}</div>
+					<div class="Streams_audio_composer_preview"></div>
+					<div class="Streams_audio_composer_clip"></div>
+				</div>
+		  	<div class="Q_tabbing_item" data-content="link">
+			   		<label>
+						<input name="url" placeholder="{{text.setUrl}}" type="url">
+						<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>
+					</label>
+					<div class="Streams_audio_composer_preview"></div>
+					<div class="Streams_audio_composer_clip"></div>
+				</div>
+		  </div>
+		  <div class="Streams_audio_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>
+		  <div class="Streams_audio_encoding">{{text.encoding}}</div>
+		</form></div>`
 	);
 })(Q, Q.jQuery, window);
