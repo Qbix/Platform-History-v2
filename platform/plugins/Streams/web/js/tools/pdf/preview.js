@@ -344,7 +344,7 @@
 			// setting clip start position handler
 			var _onStart = function (setNewPosition, toolPreview) {
 				if (setNewPosition) {
-					var position = toolPreview.state.currentPosition;
+					var position = toolPreview.state.currentTopPosition;
 
 					toolPreview.state.clipStart = position;
 					this.setPosition(position, position + '%', "start");
@@ -358,7 +358,7 @@
 			var _onEnd = function (setNewPosition, toolPreview) {
 				if (setNewPosition) {
 					var contentHeight = ($(toolPreview.element).height()/toolPreview.state.stuffHeight * 100).toPrecision(3);
-					var position = (parseFloat(toolPreview.state.currentPosition) + parseFloat(contentHeight)).toPrecision(3);
+					var position = (parseFloat(toolPreview.state.currentTopPosition) + parseFloat(contentHeight)).toPrecision(3);
 
 					toolPreview.state.clipEnd = position;
 					this.setPosition(position, position + '%', "end");

@@ -10,9 +10,11 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {string} [options.url] Source to get pdf from. Can be remote url or "blob:" for local files
+ *  @param {float} [options.currentTopPosition] Current top scroll position in percents
+ *  @param {float} [options.currentPosition] Current left scroll position in percents
  *  @param {string} [options.clipStart] Clip start position in percents
  *  @param {string} [options.clipEnd] Clip end position in percents
- *  @param {Float} [options.scale=0.5] Page scale. More
+ *  @param {float} [options.scale=0.5] Page scale. More
  *  @param {Q.Event} [options.onSuccess] Call when save or upload action successfully ended.
  *  @param {Q.Event} [options.onFinish] Call when save or upload action ended.
  *  @param {Q.Event} [options.onError] Call when error occur.
