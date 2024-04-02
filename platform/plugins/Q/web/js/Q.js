@@ -3435,6 +3435,14 @@ Evp.onStop = function () {
    return this._onStop || (this._onStop = new Q.Event());
 };
 
+Evp.toJSON = function () {
+	var e = Q.copy(this);
+	// remove potentially circular references:
+	delete e.lastArgs;
+	delete e.lastContext;
+	return e;
+};
+
 /**
  * Make an event factory
  * @static
@@ -10169,7 +10177,7 @@ function _onUpdateFound(event) {
 
 function _startCachingWithServiceWorker() {
 	if (!Q.ServiceWorker.isSupported) {
-		return;
+		return false;
 	}
 	Q.ServiceWorker.start(function (worker, registration) {
 		var items = [];
