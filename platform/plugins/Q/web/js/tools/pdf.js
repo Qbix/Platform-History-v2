@@ -19,6 +19,7 @@
  *  @param {Q.Event} [options.onFinish] Call when save or upload action ended.
  *  @param {Q.Event} [options.onError] Call when error occur.
  *  @param {Q.Event} [options.onScroll] Call when pdf scrolled.
+ *  @param {Q.Event} [options.onSlide] Call on slide click.
  *  @param {Q.Event} [options.onRefresh] Call when pdf rendered.
  *  @param {Q.Event} [options.onEnded] Call when pdf scrolled to the end.
  *
@@ -55,6 +56,7 @@ Q.Tool.define("Q/pdf", function (options) {
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	onScroll: new Q.Event(),
+	onSlide: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
 	onRefresh: new Q.Event(function (numPages, element) {
 		// remove preloader
@@ -115,13 +117,16 @@ Q.Tool.define("Q/pdf", function (options) {
 			return setTimeout(tool.implement.bind(tool), 500);
 		}
 
-		// listen scroll event of preview element
-		$toolElement.on("scroll", function () {
+		var _scrollHandler = function () {
 			state.currentTopPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
 			state.currentLeftPosition = ($toolElement.scrollLeft()/state.stuffWidth * 100).toPrecision(3);
-			Q.handle(state.onScroll, tool, [state.currentTopPosition, state.currentLeftPosition]);
+			Q.handle(this, tool, [state.currentTopPosition, state.currentLeftPosition]);
 			tool.checkClip();
-		});
+		};
+		// listen scroll event of preview element
+		$toolElement.on("scroll", _scrollHandler.bind(state.onScroll));
+		// listen slide click event of preview element
+		$toolElement.on(Q.Pointer.end, _scrollHandler.bind(state.onSlide));
 
 		var loadingTask = pdfjsLib.getDocument(state.url);
 
