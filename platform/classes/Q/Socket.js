@@ -22,7 +22,7 @@ function Socket (server, options) {
 	var url = new URL(
 		(options && options.baseUrl)
 		|| Q.Config.get(['Q', 'web', 'appRootUrl']
-	);
+	));
 	this.io = io.listen(server, options || {
 		cors: {
 			origin: url.origin,
