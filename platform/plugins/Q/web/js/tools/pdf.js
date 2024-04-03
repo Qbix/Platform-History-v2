@@ -117,16 +117,18 @@ Q.Tool.define("Q/pdf", function (options) {
 			return setTimeout(tool.implement.bind(tool), 500);
 		}
 
-		var _scrollHandler = function () {
+		// listen scroll event of preview element
+		$toolElement.on("scroll", function () {
 			state.currentTopPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
 			state.currentLeftPosition = ($toolElement.scrollLeft()/state.stuffWidth * 100).toPrecision(3);
-			Q.handle(this, tool, [state.currentTopPosition, state.currentLeftPosition]);
+			Q.handle(state.onScroll, tool, [state.currentTopPosition, state.currentLeftPosition]);
 			tool.checkClip();
-		};
-		// listen scroll event of preview element
-		$toolElement.on("scroll", _scrollHandler.bind(state.onScroll));
+		});
 		// listen slide click event of preview element
-		$toolElement.on(Q.Pointer.end, _scrollHandler.bind(state.onSlide));
+		$toolElement.on(Q.Pointer.click, "canvas", function () {
+			var slideIndex = Array.prototype.indexOf.call(this.parentNode.children, this);
+			Q.handle(state.onSlide, tool, [slideIndex]);
+		});
 
 		var loadingTask = pdfjsLib.getDocument(state.url);
 
