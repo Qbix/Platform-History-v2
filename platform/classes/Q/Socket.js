@@ -19,7 +19,13 @@ var log = console.log.register('Q.Socket');
  */
 function Socket (server, options) {
 	var io = require('socket.io');
-	this.io = io.listen(server, options || {});
+	var baseUrl = (options && options.baseUrl) || Q.Config.get(['Q', 'web', 'appRootUrl']);
+	this.io = io.listen(server, options || {
+		cors: {
+			origin: baseUrl.origin,
+			methods: ["GET", "POST"]
+		}
+	});
 }
 
 var _listening = false;
