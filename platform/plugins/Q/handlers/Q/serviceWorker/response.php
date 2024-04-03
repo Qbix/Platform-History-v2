@@ -28,7 +28,7 @@ var Q = {
 		// if request is not for same origin, then just send it
 		var url = new URL(event.request.url);
 		if (url.origin !== self.location.origin) {
-			return event.respondWith(fetch(event.request));
+			return; // let the browser do its usual fetch
 		}
 		if (url.toString() === Q.info.serviceWorkerUrl) {
 			return event.respondWith(new Response(

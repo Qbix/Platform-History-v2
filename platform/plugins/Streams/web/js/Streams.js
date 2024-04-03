@@ -2138,6 +2138,18 @@ var _debouncedRefresh = Q.debounce(Stream.refresh, Stream.refresh.ms);
 
 var Sp = Stream.prototype;
 
+Sp.toJSON = function () {
+	var s = {};
+	for (var k in this) {
+		if (this[k] instanceof Q.Event
+		|| typeof this[k] === 'function') {
+			continue;
+		}
+		s[k] = this[k];
+	}
+	return s;
+};
+
 Sp.retainingKeys = function () {
 	return Streams.retainingKeys(this.fields.publisherId, this.fields.streamName);
 };

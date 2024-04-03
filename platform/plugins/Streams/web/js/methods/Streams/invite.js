@@ -521,9 +521,10 @@ Q.exports(function() {
                         if (Q.isEmpty(r)) {
                             return;
                         }
-                        for (var f in r) {
-                            fields[f] = r[f];
-                        }
+                        Q.take(r, [
+                            'appUrl', 'data', 'identifier', 
+                            'sendBy', 'token'
+                        ], fields);
                         if (r.sendBy) {
                             _sendBy(r, text);
                         } else {

@@ -3435,6 +3435,14 @@ Evp.onStop = function () {
    return this._onStop || (this._onStop = new Q.Event());
 };
 
+Evp.toJSON = function () {
+	var e = Q.copy(this);
+	// remove potentially circular references:
+	delete e.lastArgs;
+	delete e.lastContext;
+	return e;
+};
+
 /**
  * Make an event factory
  * @static
@@ -10124,6 +10132,7 @@ Q.findStylesheet = function (href) {
  * @class
  */
 Q.ServiceWorker = {
+	isSupported: !!navigator.serviceWorker,
 	start: function(callback, options) {
 		options = options || {};
 		if (!'serviceWorker' in navigator) {
@@ -10150,7 +10159,7 @@ Q.ServiceWorker = {
 				worker = registration.installing;
 			}
 			if (worker) {
-				Q.handle(callback, Q.ServiveWorker, [worker, registration]);
+				Q.handle(callback, Q.ServiceWorker, [worker, registration]);
 				Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [worker, registration]);
 			}
 		}).catch(function (error) {
@@ -10167,6 +10176,9 @@ function _onUpdateFound(event) {
 }
 
 function _startCachingWithServiceWorker() {
+	if (!Q.ServiceWorker.isSupported) {
+		return false;
+	}
 	Q.ServiceWorker.start(function (worker, registration) {
 		var items = [];
 		var scripts = document.querySelectorAll("script[data-src]");
@@ -10191,7 +10203,7 @@ function _startCachingWithServiceWorker() {
 			});
 		});
 		if (items.length) {
-			registration.active.postMessage({
+			worker.postMessage({
 				type: 'Q.Cache.put',
 				items: items
 			})
