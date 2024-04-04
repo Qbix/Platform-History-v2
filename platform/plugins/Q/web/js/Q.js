@@ -12179,17 +12179,18 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 		}
 		if (!qs.connected && qs.socket) {
-			if (!qs.socket.connecting) {
-				qs.socket.connecting = true;
-				qs.socket.connect(); // connect it again
-				qs.on('connect', _noLongerConnecting);
-				qs.on('connect_error', _noLongerConnecting);
-				qs.on('disconnect', _noLongerConnecting);
+			var qss = qs.socket;
+			if (!qss.connecting) {
+				qss.connecting = true;
+				qss.connect(); // connect it again
+				qss.on('connect', _noLongerConnecting);
+				qss.on('connect_error', _noLongerConnecting);
+				_Q_saveScrollPositions.on('disconnect', _noLongerConnecting);
 				function _noLongerConnecting () {
-					qs.socket.connecting = false;
-					qs.off('connect', _noLongerConnecting);
-					qs.off('connect_error', _noLongerConnecting);
-					qs.off('disconnect', _noLongerConnecting);
+					qss.socket.connecting = false;
+					qss.off('connect', _noLongerConnecting);
+					qss.off('connect_error', _noLongerConnecting);
+					qss.off('disconnect', _noLongerConnecting);
 				}
 			}
 		}
