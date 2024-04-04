@@ -12187,7 +12187,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 				qss.on('connect_error', _noLongerConnecting);
 				qss.on('disconnect', _noLongerConnecting);
 				function _noLongerConnecting () {
-					qss.socket.connecting = false;
+					qss.connecting = false;
 					qss.off('connect', _noLongerConnecting);
 					qss.off('connect_error', _noLongerConnecting);
 					qss.off('disconnect', _noLongerConnecting);
