@@ -12165,6 +12165,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 			// remember actual socket - for disconnecting
 			var socket = qs.socket;
+			_connecting(socket);
 			
 			Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
 			_ioOn(socket, 'connect', _connected);
@@ -12179,19 +12180,22 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			});
 		}
 		if (!qs.connected && qs.socket) {
-			var qss = qs.socket;
-			if (!qss.connecting) {
-				qss.connecting = true;
-				qss.connect(); // connect it again
-				qss.on('connect', _noLongerConnecting);
-				qss.on('connect_error', _noLongerConnecting);
-				qss.on('disconnect', _noLongerConnecting);
-				function _noLongerConnecting () {
-					qss.connecting = false;
-					qss.off('connect', _noLongerConnecting);
-					qss.off('connect_error', _noLongerConnecting);
-					qss.off('disconnect', _noLongerConnecting);
-				}
+			var socket = qs.socket;
+			if (!socket.connecting) {
+				socket.connect(); // connect it again
+				_connecting(socket);
+			}
+		}
+		function _connecting(socket) {
+			socket.connecting = true;
+			socket.on('connect', _noLongerConnecting);
+			socket.on('connect_error', _noLongerConnecting);
+			socket.on('disconnect', _noLongerConnecting);
+			function _noLongerConnecting () {
+				socket.connecting = false;
+				socket.off('connect', _noLongerConnecting);
+				socket.off('connect_error', _noLongerConnecting);
+				socket.off('disconnect', _noLongerConnecting);
 			}
 		}
 
