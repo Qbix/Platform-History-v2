@@ -12185,7 +12185,7 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 				qss.connect(); // connect it again
 				qss.on('connect', _noLongerConnecting);
 				qss.on('connect_error', _noLongerConnecting);
-				_Q_saveScrollPositions.on('disconnect', _noLongerConnecting);
+				qss.on('disconnect', _noLongerConnecting);
 				function _noLongerConnecting () {
 					qss.socket.connecting = false;
 					qss.off('connect', _noLongerConnecting);
