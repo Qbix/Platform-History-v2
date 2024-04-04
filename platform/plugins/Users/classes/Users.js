@@ -393,6 +393,9 @@ Users.Socket = {
 	 */
 	listen: function (options) {
 		var socket = Q.Socket.listen(options);
+		if (!socket) {
+			console.warn("Users.listen: socket missing");
+		}
 		socket.io.of('/Users').on('connection', function(client) {
 			Q.log("Socket.IO client connected " + client.id);
 			if (client.alreadyListening) {

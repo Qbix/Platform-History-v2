@@ -2886,7 +2886,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
 	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
-	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
+	 * @param {boolean} [$options.posted] If true, the user has posted a message in the stream
 	 * @param {array} [$options.extra] Any extra information to tree-merge for the participants
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join

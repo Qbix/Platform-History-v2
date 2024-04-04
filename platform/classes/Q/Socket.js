@@ -5,7 +5,7 @@
 var Q = require('../Q');
 var events = require('events');
 var util = require('util');
-var url = require("url");
+var urlModule = require("url");
 
 var log = console.log.register('Q.Socket');
 
@@ -19,7 +19,7 @@ var log = console.log.register('Q.Socket');
  */
 function Socket (server, options) {
 	var io = require('socket.io');
-	var url = new URL(
+	var url = new urlModule.URL(
 		(options && options.baseUrl)
 		|| Q.Config.get(['Q', 'web', 'appRootUrl']
 	));
