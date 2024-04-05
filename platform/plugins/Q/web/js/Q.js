@@ -8859,6 +8859,10 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			what2["Q.nonce"] = Q.nonce;
 		}
 	}
+	var formFactor = location.search.queryField("Q.formFactor");
+	if (formFactor) {
+		what2["Q.formFactor"] = formFactor; // propagate it
+	}
 	return what2;
 };
 
