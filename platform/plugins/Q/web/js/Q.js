@@ -334,7 +334,7 @@ Sp.interpolate = function _String_prototype_interpolate(fields) {
 Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 	var result = this;
 	for (var k in pairs) {
-		result = result.replace(new RegExp(k, 'g'), pairs[k]);
+		result = result.split(k).join(pairs[k]);
 	}
 	return result;
 };
@@ -10199,7 +10199,7 @@ function _startCachingWithServiceWorker() {
 				if (pathPrefix) {
 					var prefixes = ['@import ', '@import "', "@import '", 'url(', 'url("', "url('"];
 					prefixes.forEach(function (prefix) {
-						content = content.replace(prefix + pathPrefix, prefix);
+						content = content.split(prefix + pathPrefix).join(prefix);
 					});
 				}
 				items.push({
