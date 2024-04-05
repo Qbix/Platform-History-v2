@@ -745,7 +745,7 @@ class Q
 				$classNameWithNamespaces = implode('\\', $parts);
 				if ($classNameWithUnderscores != $classNameWithNamespaces
 				&& $classNameWithUnderscores === ucfirst($classNameWithUnderscores)
-				&& class_exists($classNameWithUnderscores)
+				&& class_exists($classNameWithUnderscores, false)
 				) {
 					if (in_array(reset($parts), Q::plugins())) {
 						try {
