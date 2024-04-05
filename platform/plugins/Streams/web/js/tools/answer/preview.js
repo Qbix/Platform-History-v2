@@ -83,6 +83,17 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 				$participants.html(modFields[field] || "");
 			}, tool);
 
+			var $input = tool.$('input');
+			var $button = tool.$('button');
+			var $form = tool.$('form');
+			$button.addClass('Q_disabled');
+			$input.on('input', function () {
+				$button.removeClass('Q_disabled');
+			});
+			$form.on('submit', function () {
+				$button.addClass('Q_disabled');
+			});
+
 			Q.handle(tool.state.onRefresh, tool);
 		});
 	},
