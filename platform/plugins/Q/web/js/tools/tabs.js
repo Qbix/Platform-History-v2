@@ -435,7 +435,7 @@
 
 				var tools = Q.Tool.byName('Q/columns');
 				for (var toolId in tools) {
-					if (tool[toolId].max > 0) {
+					if (tools[toolId].max > 0) {
 						return; // don't set theme color since columns already did it
 					}
 				}
