@@ -1226,10 +1226,10 @@ Q.invoke.handlers.unshift(function (options, methods) {
 	}
 });
 
-var currentColor;
+var initialColor;
 function _updateThemeColor(fromIndex, toIndex, duration) {
 	Q.addScript('{{Q}}/js/Color.js', function () {
-		currentColor = Q.Color.getWindowTheme();
+		initialColor = initialColor || Q.Color.getWindowTheme();
 		if (fromIndex < 0 || !$('html').hasClass('Q_columns_animationFX')) {
 			return;
 		}
@@ -1237,12 +1237,12 @@ function _updateThemeColor(fromIndex, toIndex, duration) {
 		var shades = [0, 0.36, 0.42, 0.47, 0.5];
 		fromIndex = Math.min(shades.length-1, fromIndex);
 		toIndex = Math.max(0, Math.min(shades.length-1, toIndex));
-		var fromColor = Q.Color.between(currentColor, black, shades[fromIndex]);
-		var toColor = Q.Color.between(currentColor, black, shades[toIndex]);
+		var fromColor = Q.Color.between(initialColor, black, shades[fromIndex]);
+		var toColor = Q.Color.between(initialColor, black, shades[toIndex]);
 		Q.Animation.play(function (x, y) {
 			Q.Color.setWindowTheme('#' + Q.Color.between(fromColor, toColor, y));
 			if (y === 1) {
-				currentColor = Q.Color.getWindowTheme();
+				initialColor = Q.Color.getWindowTheme();
 			}
 		}, duration);
 	});
