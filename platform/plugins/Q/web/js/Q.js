@@ -8794,6 +8794,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			: (options.idPrefixes && options.idPrefixes.join(',')))
 		: '';
 	var timestamp = Date.now();
+	var formFactor = location.search.queryField("Q.formFactor");
 	var ajax = options.iframe ? 'iframe' : 'json';
 	if (typeof what == 'string') {
 		var p = what.split('#');
@@ -8831,6 +8832,9 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			what2 += encodeURI('&Q.nonce=') + encodeURIComponent(Q.nonce);
 		}
 		what2 = (p[1] ? what2 + '#' + p[1] : what2);
+		if (formFactor) {
+			what2 += '&=' + formFactor; // propagate it
+		}
 	} else {
 		// assume it's an object
 		var what2 = {};
@@ -8858,10 +8862,9 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 		if ('nonce' in Q) {
 			what2["Q.nonce"] = Q.nonce;
 		}
-	}
-	var formFactor = location.search.queryField("Q.formFactor");
-	if (formFactor) {
-		what2["Q.formFactor"] = formFactor; // propagate it
+		if (formFactor) {
+			what2["Q.formFactor"] = formFactor; // propagate it
+		}
 	}
 	return what2;
 };
