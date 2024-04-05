@@ -1241,9 +1241,6 @@ function _updateThemeColor(fromIndex, toIndex, duration) {
 		var toColor = Q.Color.between(initialColor, black, shades[toIndex]);
 		Q.Animation.play(function (x, y) {
 			Q.Color.setWindowTheme('#' + Q.Color.between(fromColor, toColor, y));
-			if (y === 1) {
-				initialColor = Q.Color.getWindowTheme();
-			}
 		}, duration);
 	});
 }

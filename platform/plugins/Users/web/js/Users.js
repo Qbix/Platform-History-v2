@@ -283,7 +283,7 @@
 					optionalEvents: ["message"],
 					metadata: {
 						name: Q.info.app,
-						description: 'Demo Client as Wallet/Peer',
+						description: 'Web3 Client',
 						url: Q.info.baseUrl,
 						icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
 					},
