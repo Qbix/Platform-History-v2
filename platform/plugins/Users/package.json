@@ -17,7 +17,8 @@
 		"nodemailer-smtp-transport": "2.7.x",
 		"twilio": "0.4.x",
 		"web-push": "^3.2.2",
-		"wns": "^0.5.3"
+		"wns": "^0.5.3",
+		"@walletconnect/ethereum-provider": "^2.12.0"
 	},
 	"repository": {
 		"type": "git",

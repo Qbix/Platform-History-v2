@@ -246,7 +246,7 @@
 		var scriptsToLoad = [
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
-			'{{Users}}/js/web3/ethereumProvider.2.10.0.min.js' //'https://unpkg.com/@walletconnect/ethereum-provider'
+			'{{Users}}/js/web3/ethereumProvider.2.12.0.min.js' //'https://unpkg.com/@walletconnect/ethereum-provider'
 		];
 
 		Q.addScript(scriptsToLoad, function () {
