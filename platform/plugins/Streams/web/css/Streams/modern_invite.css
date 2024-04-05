@@ -364,9 +364,6 @@ telegram
 
 @media (prefers-color-scheme: dark) {
 	.Streams_invite_option {
-		border-color: black;
-	}
-	.Streams_invite_option svg {
-		fill: black;
+		border-color: white;
 	}
 }

@@ -429,6 +429,17 @@
 
 				Q.handle(state.onCurrent, tool, [tab, state.tabName]);
 
+				if (!Q.info.isMobile) {
+					return; // don't set theme color since it's not on mobile
+				}
+
+				var tools = Q.Tool.byName('Q/columns');
+				for (var toolId in tools) {
+					if (tool[toolId].max > 0) {
+						return; // don't set theme color since columns already did it
+					}
+				}
+
 				var color = Q.getObject(['windowThemeColors', state.tabName], state);
 				Q.addScript('{{Q}}/js/Color.js', function () {
 					// NOTE: if someone else changes color in the meantime, we still remember this one:
