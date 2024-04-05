@@ -8833,7 +8833,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 		}
 		what2 = (p[1] ? what2 + '#' + p[1] : what2);
 		if (formFactor) {
-			what2 += '&=' + formFactor; // propagate it
+			what2 += '&Q.formFactor=' + formFactor; // propagate it
 		}
 	} else {
 		// assume it's an object
