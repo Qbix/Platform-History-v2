@@ -8794,7 +8794,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			: (options.idPrefixes && options.idPrefixes.join(',')))
 		: '';
 	var timestamp = Date.now();
-	var formFactor = location.search.queryField("Q.formFactor");
+	var formFactor = Q.info.forceFormFactor;
 	var ajax = options.iframe ? 'iframe' : 'json';
 	if (typeof what == 'string') {
 		var p = what.split('#');
@@ -13002,6 +13002,7 @@ var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 Q.info = {
 	useTouchEvents: useTouchEvents,
 	hasNoMouse: hasNoMouse,
+	forceFormFactor: location.search.queryField("Q.formFactor"),
 	isTouchscreen: isTouchscreen,
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
