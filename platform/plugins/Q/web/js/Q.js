@@ -8718,7 +8718,10 @@ Q.interpolateUrl = function (url, additional) {
  * @returns {Array} interpolated values
  */
 Q.interpolateArray = function (start, end, fraction) {
-	fraction = parseFloat(fraction) || 0.5;
+	fraction = parseFloat(fraction);
+	if (fraction === undefined) {
+		fraction = 0.5;
+	}
 	var result = [];
 	for (var i=0; i<start.length; ++i) {
 		result.push(start[i] + fraction * (end[i] - start[i]));
