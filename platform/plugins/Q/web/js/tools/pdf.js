@@ -10,13 +10,16 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {string} [options.url] Source to get pdf from. Can be remote url or "blob:" for local files
+ *  @param {float} [options.currentTopPosition] Current top scroll position in percents
+ *  @param {float} [options.currentPosition] Current left scroll position in percents
  *  @param {string} [options.clipStart] Clip start position in percents
  *  @param {string} [options.clipEnd] Clip end position in percents
- *  @param {Float} [options.scale=0.5] Page scale. More
+ *  @param {float} [options.scale=0.5] Page scale. More
  *  @param {Q.Event} [options.onSuccess] Call when save or upload action successfully ended.
  *  @param {Q.Event} [options.onFinish] Call when save or upload action ended.
  *  @param {Q.Event} [options.onError] Call when error occur.
  *  @param {Q.Event} [options.onScroll] Call when pdf scrolled.
+ *  @param {Q.Event} [options.onSlide] Call on slide click.
  *  @param {Q.Event} [options.onRefresh] Call when pdf rendered.
  *  @param {Q.Event} [options.onEnded] Call when pdf scrolled to the end.
  *
@@ -53,6 +56,7 @@ Q.Tool.define("Q/pdf", function (options) {
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	onScroll: new Q.Event(),
+	onSlide: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
 	onRefresh: new Q.Event(function (numPages, element) {
 		// remove preloader
@@ -119,6 +123,11 @@ Q.Tool.define("Q/pdf", function (options) {
 			state.currentLeftPosition = ($toolElement.scrollLeft()/state.stuffWidth * 100).toPrecision(3);
 			Q.handle(state.onScroll, tool, [state.currentTopPosition, state.currentLeftPosition]);
 			tool.checkClip();
+		});
+		// listen slide click event of preview element
+		$toolElement.on(Q.Pointer.click, "canvas", function () {
+			var slideIndex = Array.prototype.indexOf.call(this.parentNode.children, this);
+			Q.handle(state.onSlide, tool, [slideIndex]);
 		});
 
 		var loadingTask = pdfjsLib.getDocument(state.url);

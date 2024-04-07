@@ -292,6 +292,8 @@ body.Q_preventScroll {
 }
 .Q_fullscreen_dialog
 {
+	display: flex;
+	flex-direction: column;
 	overflow: visible;
 	position: relative;
 	z-index: 9000; /* must be at least higher than dashboard_slot z-index */

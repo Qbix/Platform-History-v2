@@ -344,7 +344,6 @@ Q.Tool.define('Streams/chat', function(options) {
 							.val(data.params[0]); // restore any draft
 						}
 					}
-					Q.handle(state.onRefresh, tool);
 				});
 
 				Q.addScript("{{Q}}/js/contextual.js", function () {
@@ -890,16 +889,14 @@ Q.Tool.define('Streams/chat', function(options) {
 		var isTextarea = (state.inputType === 'textarea');
 		var sel1 = '.Streams_chat_composer textarea';
 		var sel2 = '.Streams_chat_composer input[type=text]';
-		var $input = tool.$(isTextarea ? sel1: sel2);
+		var $input = tool.$input = tool.$(isTextarea ? sel1: sel2);
 		$input.plugin('Q/placeholders', null, function () {
 			if (isTextarea) {
 				this.plugin('Q/autogrow', {
 					maxWidth: $te.width()
 				});
 			}
-			if (!Q.info.isTouchscreen) {
-				this.plugin('Q/clickfocus');
-			}
+			Q.handle(state.onRefresh, tool);
 		}).on('keypress change input focus paste blur Q_refresh', Q.debounce(function(event) {
 			var $this = $(this);
 			var $form = $this.closest('form');
@@ -935,15 +932,9 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.handle(_submit, this, [$(this), key]);
 				return false;
 			}
-		});
-
+		})
 		// when virtual keyboard appear, trying to scroll body to input element position
-		$input.on('focus', function () {
-			tool.scrollToComposer();
-			setTimeout(function () {
-				tool.scrollToComposer();
-			}, 500);
-		});
+		.on('focus', tool.scrollToComposer.bind(tool));
 
 		// submit button handler
 		tool.$(".Streams_chat_composer .Streams_chat_submit").on(Q.Pointer.fastclick, function(){
@@ -1187,7 +1178,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
-		_doScrollToComposer(false);
+		setTimeout(_doScrollToComposer, 100);
 		function _doScrollToComposer (recursive) {
 			if (stopScrollingToComposer
 			|| !$(tool.element).is(':visible')) {
@@ -1221,7 +1212,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			s.removeClass('Q_forceDisplayBlock');
 			var c = $composer[0];
 			if (c) {
-				var m = c.scrollIntoViewIfNeeded ||  c.scrollIntoView;
+				var m = c.scrollIntoViewIfNeeded || c.scrollIntoView;
 				if (recursive) {
 					m.call(c, {
 						behavior: "instant",
@@ -1292,7 +1283,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				.append($indicator);
 		});
 		if (!Q.info.isTouchscreen && state.hadFocus) {
-			$(this.state.$inputElement).plugin('Q/clickfocus');
+			$(state.$inputElement).plugin('Q/clickfocus');
 		}
 		state.hadFocus = false;
 	},
