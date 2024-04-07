@@ -11,7 +11,7 @@ var Users = Q.Users;
 /**
  * Tool that provide a way to produce new community instance
  * @param {Object} [options]
- *   @param {Object} options.chains list of chains in which toll will trying to create community
+ *   @param {Array} options.chains list of chains in which tool will try to create community
  *   @param {String} options.defaultChain default chain in hexstring (will be choosen in select field)
  *   @param {String} options.communityId communityId
  *   @param {String} options.showSelectChainId force show user select with chainId, even if it predefined
@@ -33,7 +33,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 },
 
 {
-	chains: null, // filled on \Users\web3\community\tool.php
+	chains: [], // filled on \Users\web3\community\tool.php
     
 	//defaultChain: null,
 	communityId: null,
@@ -55,9 +55,16 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 		var tool = this;
 		var state = this.state;
 		var $toolElement = $(tool.element);
+
+        var chains = [];
+        Q.each(chains, function (i, chain) {
+            if (tool.getFactoryAddress(selectedChainId)) {
+                chains.push(chain);
+            }
+        });
 		
         Q.Template.render('Users/web3/community/list', {
-		    chains: state.chains,
+		    chains: chains,
             
 		    //defaultChain: state.defaultChain,
 		    //contractParams: state.contractParams
