@@ -609,7 +609,7 @@ abstract class Db
 			if (!isset($driver_options['exec'])) {
 				$driver_options['exec'] = 'set names utf8mb4';
 			}
-			if (empty($driver_options['exec'])) {
+			if (!empty($driver_options['exec'])) {
 				self::$pdo_array[$key]->exec($driver_options['exec']);
 			}
 		} catch (Exception $e) {
