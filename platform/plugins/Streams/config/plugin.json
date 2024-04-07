@@ -490,7 +490,8 @@
 					"title": "Untitled PDF doc"
 				},
 				"ephemerals": {
-					"Streams/scroll": {}
+					"Streams/scroll": {},
+					"Streams/slide": {}
 				},
 				"updateTitle": true
 			},
