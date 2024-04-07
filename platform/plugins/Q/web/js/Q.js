@@ -12767,10 +12767,11 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		}
 		var results = {};
 		Q.each(pluginNames, function _jQuery_plugin_loaded(i, pluginName) {
+			var parts = pluginName.split('/');
 			var pn = Q.normalize.memoized(pluginName);
 			results[pn] = pluginName;
 			if ($.fn[pn]) return;
-			var src = ($.fn.plugin[pn] || 'Q/plugins/jQuery/'+pn+'.js');
+			var src = ($.fn.plugin[pn] || 'Q/plugins/' + parts[0] + '/js/fn'+parts[1]+'.js');
 			if (typeof src === 'string') {
 				srcs.push(src);
 			}

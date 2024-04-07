@@ -894,6 +894,11 @@ html body .Q_columns_containsExpanded {
 .Q_statusBarOverlapped #status_background { display: block !important; }
 .Q_notCordova #status_background { display: none; }
 
+input[type=file] {
+	zoom: 1.5;
+	line-height: 40px;
+}
+
 input[type=text],
 input[type=password] {
     -webkit-appearance: none;

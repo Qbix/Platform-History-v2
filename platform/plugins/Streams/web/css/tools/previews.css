@@ -382,7 +382,8 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 }
 .Streams_dialog_answer_composer form select,
 .Streams_dialog_answer_composer form select option {
-	font-size: 110%;
+	font-size: 80%;
+	font-weight: bold;
 }
 .Streams_dialog_answer_composer .Q_dialog_content {
 	white-space: nowrap;
@@ -390,6 +391,10 @@ html.Streams_stream .Streams_question_preview_tool .Streams_preview_title {
 }
 .Streams_dialog_answer_composer .Q_dialog_content * {
 	vertical-align: middle;
+}
+.Streams_dialog_answer_composer form {
+	display: flex;
+	gap: 5px;
 }
 /* </Streams_question_preview> */
 
