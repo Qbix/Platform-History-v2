@@ -158,7 +158,7 @@ Q.exports(function() {
                         });
                     break;
                 case "text":
-                    var content = Q.getObject(['invite', 'sms', 'content'], text)
+                    var content = Q.getObject(['invite', 'mobile', 'content'], text)
                         .interpolate({
                             url: rsd.url,
                             title: rss.fields.title
