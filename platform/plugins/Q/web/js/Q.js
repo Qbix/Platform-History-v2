@@ -6141,9 +6141,7 @@ Q.Links = {
 		var urlParams = [];
 		options = options || {};
 		if (!to) { //share URL with some users to select in telegram
-			if (options.url) {
-				urlParams.push('url=' + options.url);
-			}
+			urlParams.push('url=' + options.url || '');
 			if (text) {
 				urlParams.push('text=' + encodeURIComponent(text));
 			}
