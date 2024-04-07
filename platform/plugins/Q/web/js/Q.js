@@ -6151,7 +6151,7 @@ Q.Links = {
 			if (text) {
 				urlParams.push('text=' + encodeURIComponent(text));
 			}
-			return 'tg:' + command + '?' + urlParams.join('&');
+			return 'tg://' + command + '?' + urlParams.join('&');
 		}
 		urlParams.push('to=' + to);
 		if (text) {
