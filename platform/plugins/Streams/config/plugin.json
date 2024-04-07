@@ -90,7 +90,7 @@
 				"maxStretch": 2
 			},
 			"Streams/invite/groupPhoto": {
-				"sizes": ["1000x", "x1000"],
+				"sizes": ["x1000"],
 				"defaultSize": "x1000",
 				"maxStretch": 3
 			},
