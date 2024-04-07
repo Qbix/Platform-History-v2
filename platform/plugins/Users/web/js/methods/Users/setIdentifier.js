@@ -130,7 +130,7 @@ Q.exports(function (Users, priv, _doCancel, _handleXid, _doAuthenticate) {
 				return false;
 			});
 		} else {
-			$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
+			$button = $('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
 			.html(Q.text.Users.setIdentifier.sendMessage);
 			step1_form.submit(function (event) {
 				var h = $identifierInput.outerHeight() - 5;
