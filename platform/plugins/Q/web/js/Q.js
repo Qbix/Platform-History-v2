@@ -6138,18 +6138,17 @@ Q.Links = {
 	 * @return {String}
 	 */
 	telegram: function (to, text, options) {
+		var urlParams = [];
+		options = options || {};
 		if (!to) { //share URL with some users to select in telegram
-			var link = 'tg://msg_url';
-			if (options && options.url) {
-				link += 'url=' + options.url + '&';
+			if (options.url) {
+				urlParams.push('url=' + options.url);
 			}
 			if (text) {
-				link += '&text=' + encodeURIComponent(text);
+				urlParams.push('text=' + encodeURIComponent(text));
 			}
-			return link;
+			return 'tg://msg_url?' + urlParams.join('&');
 		}
-		options = options || {};
-		var urlParams = [];
 		urlParams.push('to=' + to);
 		if (text) {
 			urlParams.push('text=' + encodeURIComponent(text));
