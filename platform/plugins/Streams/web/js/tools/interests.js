@@ -86,6 +86,9 @@ Q.Tool.define("Streams/interests", function (options) {
 					count += Object.keys(interests[""]).length;
 				}
 				Q.each(interests, function (subcategory, list) {
+					if (subcategory === "") {
+						return;
+					}
 					var h3 = "<h3 class='Streams_interests_subcategory'>"+subcategory+"</h3>";
 					content += h3 + _listInterests(category, list);
 					count += Object.keys(list).length;
