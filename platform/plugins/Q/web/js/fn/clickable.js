@@ -403,12 +403,12 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 				if (overElement) {
 					setTimeout(function () {
 						Q.Pointer.cancelClick();
-					}, 10); // give it a chance to handle clicks
+					}, 400); // give it a chance to handle clicks
 					state.animation = Q.Animation.play(function(x, y) {
 						scale(factor + y * (o.release.size-factor));
 						$this.css('opacity', o.press.opacity + y * (o.release.opacity-o.press.opacity));
 					}, o.release.duration, o.release.ease);
-					var key = state.animation.onComplete.set(function () {
+					state.animation.onComplete.set(function () {
 						state.animation = Q.Animation.play(function(x, y) {
 							scale(o.release.size + y * (1-o.release.size));
 							$this.css('opacity', 1 + y * (1 - o.release.opacity));
