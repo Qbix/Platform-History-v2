@@ -180,7 +180,7 @@ Q.exports(function() {
                     window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
                     break;
                 case "whatsapp":
-                    var content = Q.getObject(['invite', 'sms', 'content'], text)
+                    var content = Q.getObject(['invite', 'mobile', 'content'], text)
                         .interpolate({
                             url: rsd.url,
                             title: rss.fields.title
@@ -191,7 +191,7 @@ Q.exports(function() {
                     window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
                     break;
                 case "telegram":
-                    var content = Q.getObject(['invite', 'sms', 'content'], text)
+                    var content = Q.getObject(['invite', 'mobile', 'content'], text)
                         .interpolate({
                             url: rsd.url,
                             title: rss.fields.title
