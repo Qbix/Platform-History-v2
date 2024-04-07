@@ -6141,11 +6141,17 @@ Q.Links = {
 		var urlParams = [];
 		options = options || {};
 		if (!to) { //share URL with some users to select in telegram
-			urlParams.push('url=' + (options.url || ''));
+			var command = 'msg';
+			if (options.url) {
+				// NOTE: special characters won't work in text,
+				// better to keep options.url blank and place URL in text
+				urlParams.unshift('url=' + (options.url || ''));
+				command = 'msg_url';
+			}
 			if (text) {
 				urlParams.push('text=' + encodeURIComponent(text));
 			}
-			return 'tg://msg_url?' + urlParams.join('&');
+			return 'tg:' + command + '?' + urlParams.join('&');
 		}
 		urlParams.push('to=' + to);
 		if (text) {
