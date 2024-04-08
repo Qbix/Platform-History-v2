@@ -312,6 +312,8 @@ class Q_Dispatcher
 					Q::event('Q/validate', self::$routed);
 				}
 
+				self::cookies();
+
 				// We might want to reroute the request
 				$eventName = 'Q/reroute';
 				self::startSessionBeforeEvent($eventName);
@@ -463,6 +465,26 @@ class Q_Dispatcher
 			'function_name' => 'Dispatcher::forward()'
 		));
 	}
+
+	/**
+	 * Set some standard cookies for the client
+	 * @method cookies
+	 * @static
+	 */
+	static function cookies()
+	{
+		// Set cookies from GET parameters, if they were set
+		if (!empty($_GET['Q_ct'])) {
+			Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
+		}
+		if (!empty($_GET['Q_cordova'])) {
+			Q_Response::setCookie('Q_cordova', $_GET['Q_cordova']);
+		}
+		// Set cookie from latest update timestamp, if it was set
+		if ($Q_ut = Q::ifset(Q_Uri::$urls, '@timestamp', null)) {
+			Q_Response::setCookie('Q_ut', $Q_ut);
+		}
+	}
 	
 	/**
 	 * Returns a response to the client.
@@ -484,17 +506,6 @@ class Q_Dispatcher
 			$ob = new Q_OutputBuffer($handler);
 		}
 		
-		// Set cookies from GET parameters, if they were set
-		if (!empty($_GET['Q_ct'])) {
-			Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
-		}
-		if (!empty($_GET['Q_cordova'])) {
-			Q_Response::setCookie('Q_cordova', $_GET['Q_cordova']);
-		}
-		// Set cookie from latest update timestamp, if it was set
-		if ($Q_ut = Q::ifset(Q_Uri::$urls, '@timestamp', null)) {
-			Q_Response::setCookie('Q_ut', $Q_ut);
-		}
 		Q_Response::sendCookieHeaders();
 
 		// Generate and render a response
