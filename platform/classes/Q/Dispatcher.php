@@ -312,7 +312,9 @@ class Q_Dispatcher
 					Q::event('Q/validate', self::$routed);
 				}
 
-				self::cookies();
+				if ($try === 0) {
+					self::cookies();
+				}
 
 				// We might want to reroute the request
 				$eventName = 'Q/reroute';
