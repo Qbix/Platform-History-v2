@@ -496,7 +496,7 @@ function _continue(tool, callback) {
 
 Q.Template.set('Streams/participants/invite',
 	'<div class="Streams_participants_invite Streams_inviteTrigger">' +
-	'	<img src="{{{src}}}" alt="{{alt}}">' +
+	'	<img class="Streams_invite_icon" src="{{{src}}}" alt="{{alt}}">' +
 	'	<div class="Streams_invite_label">{{{title}}}</div>' +
 	'</div>'
 );

@@ -89,8 +89,8 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			$this[0].preventSelections(true);
 		}
 		var rect = $this[0].getBoundingClientRect();
-		var csw = Math.ceil(rect.width);
-		var csh = Math.ceil(rect.height);
+		var csw = Math.ceil($this[0].offsetWidth || rect.width);
+		var csh = Math.ceil($this[0].offsetHeight || rect.height);
 		// $this.css('height', $this.height()+'px');
 		var $container = $('<span class="Q_clickable_container" />').css({
 			'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,

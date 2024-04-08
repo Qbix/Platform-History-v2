@@ -1,11 +1,13 @@
 .Streams_access_tool .Q_tabs_tabs {
 	padding: 0;
     background-color: #f8f8f8;
+    display: flex;
 }
 .Streams_access_tool .Q_tabs_tabs li.Q_tabs_tab {
+    flex-grow: 1;
 	width: auto;
     height: auto;
-    padding: 5px 10px;
+    padding: 10px 10px 20px 10px;
     margin: 0;
     background-color: none;
 }
