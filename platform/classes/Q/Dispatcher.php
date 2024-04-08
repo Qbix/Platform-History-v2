@@ -488,11 +488,12 @@ class Q_Dispatcher
 		if (!empty($_GET['Q_ct'])) {
 			Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
 		}
-		if (!empty($_GET['Q_ut'])) {
-			Q_Response::setCookie('Q_ut', $_GET['Q_ut']);
-		}
 		if (!empty($_GET['Q_cordova'])) {
 			Q_Response::setCookie('Q_cordova', $_GET['Q_cordova']);
+		}
+		// Set cookie from latest update timestamp, if it was set
+		if ($Q_ut = Q::ifset(Q_Uri::$urls, '@timestamp', null)) {
+			Q_Response::setCookie('Q_ut', $Q_ut);
 		}
 		Q_Response::sendCookieHeaders();
 

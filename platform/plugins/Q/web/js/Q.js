@@ -9558,7 +9558,8 @@ Q.formPost.counter = 0;
  */
 Q.updateUrls = function(callback) {
 	var timestamp, earliest, url, json, ut = Q.cookie('Q_ut');
-	if (!ut) {
+	var lut = localStorage.getItem(Q.updateUrls.timestampKey);
+	if (ut && !lut) {
 		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
 			Q.updateUrls.urls = result;
 			json = JSON.stringify(Q.updateUrls.urls);
@@ -9572,7 +9573,7 @@ Q.updateUrls = function(callback) {
 			}
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000, skipNonce: true});
-	} else if (ut !== localStorage.getItem(Q.updateUrls.timestampKey)) {
+	} else if (ut && ut !== lut) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
 			if (err) {
@@ -9603,7 +9604,7 @@ Q.updateUrls = function(callback) {
 			}
 		}, { extend: false, cacheBust: 1000, skipNonce: true });
 	} else {
-		Q.handle(callback, null, [{}, timestamp]);
+		Q.handle(callback, null, [{}, null]);
 	}
 };
 
