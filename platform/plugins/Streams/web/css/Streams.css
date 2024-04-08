@@ -206,7 +206,6 @@
 
 .Streams_participants_tool .Streams_participants_invite {
 	cursor: pointer;
-	width: 45px;
 	animation: Q_wiggle 5s ease-in-out alternate 2;
 }
 
