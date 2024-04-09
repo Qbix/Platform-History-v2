@@ -2087,8 +2087,17 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			function (ordinals) {
 				Q.Streams.get(publisherId, streamName, function (err) {
 					if (!callbackCalled) {
-						Q.handle(callback, this, [err, ordinals]);
 						callbackCalled = true;
+						Q.handle(callback, this, [err, ordinals]);
+						if (!err) {
+							var ps = Streams.key(publisherId, streamName);
+							if (priv._retainedStreams[ps]) {
+								// trigger onFieldChanged and onAttribute
+								var changed = (o.changed) || {};
+								Stream.update(priv._retainedStreams[ps], this.fields, changed || {});
+								priv._retainedStreams[ps] = this;
+							}
+						}
 					}
 				});
 			}, options);
