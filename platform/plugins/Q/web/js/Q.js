@@ -9623,6 +9623,7 @@ Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.urlsKey) || "{}
  *  Optional. A hash of options, including options for Q.url() and these:
  * @param {String} [options.type='text/javascript'] Type attribute of script tag
  * @param {Boolean} [options.duplicate] if true, adds script even if one with that src was already loaded
+ * @param {Boolean} [options.querystringMatters] if true, then different querystring is considered as different, even if duplicate option is false
  * @param {Boolean} [options.skipIntegrity] if true, skips adding "integrity" attribute even if one can be calculated
  * @param {Boolean} [options.onError] optional function that may be called in newer browsers if the script fails to load. Its this object is the script tag.
  * @param {Boolean} [options.ignoreLoadingErrors] If true, ignores any errors in loading scripts.
@@ -9735,7 +9736,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	var src2 = src.split('?')[0];
 	
 	if (!o.duplicate) {
-		if (Q.addScript.loaded[src2]) {
+		if (!o.querystringMatters || Q.addScript.loaded[src2]) {
 			_onload();
 			return o.returnAll ? null : false;
 		}

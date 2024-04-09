@@ -4231,7 +4231,9 @@ var Interests = Streams.Interests = {
 			communityId: communityId,
 			skipStreams: skipStreams
 		});
-		Q.addScript(src, callback);
+		Q.addScript(src, callback, {
+			querystringMatters: true
+		});
 	},
 	/**
 	 * Get the url of a category icon
