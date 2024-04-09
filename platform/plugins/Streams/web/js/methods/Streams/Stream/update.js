@@ -10,8 +10,8 @@ Q.exports(function(priv){
         // events about updated fields
         for (k in fields) {
             if (onlyChangedFields
-                && fields[k] === stream.fields[k]
-                && !Q.has(onlyChangedFields, k)) {
+            && fields[k] === stream.fields[k]
+            && !Q.has(onlyChangedFields, k)) {
                 continue;
             }
             Q.handle(
@@ -49,7 +49,7 @@ Q.exports(function(priv){
             );
         }
         if (('attributes' in fields)
-            && (!onlyChangedFields || fields.attributes != stream.fields.attributes)) {
+        && (!onlyChangedFields || fields.attributes != stream.fields.attributes)) {
             var attributes = JSON.parse(fields.attributes || "{}");
             var obj;
             updated = {};

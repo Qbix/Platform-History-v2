@@ -91,13 +91,13 @@ Q.Tool.define("Places/user/location", function (options) {
 				_showMap.apply(this, params.info);
 			});
 	
-			Streams.Stream.onFieldChanged(publisherId, streamName, "")
+			Streams.Stream.onAttribute(publisherId, streamName, "")
 			.set(_update, tool);
 
-			function _update () {
-				var meters = parseFloat(this.getAttribute('meters')) || null;
-				var latitude = parseFloat(this.getAttribute('latitude')) || null;
-				var longitude = parseFloat(this.getAttribute('longitude')) || null;
+			function _update (attributes, updated, cleared, onlyChangedFields) {
+				var meters = parseFloat(updated.meters && this.getAttribute('meters')) || null;
+				var latitude = parseFloat(updated.latitude && this.getAttribute('latitude')) || null;
+				var longitude = parseFloat(updated.longitude && this.getAttribute('longitude')) || null;
 				if (meters) {
 					tool.$('.Places_user_location_meters').val(meters);
 				};
