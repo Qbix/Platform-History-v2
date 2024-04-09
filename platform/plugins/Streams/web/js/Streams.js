@@ -2081,7 +2081,8 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	var o = options || {};
 	if (o.messages) {
 		// If the stream was retained, fetch latest messages,
-		// and replay their being "posted" to trigger the right events
+		// and replay their being "posted" to trigger the right events.
+		// NOTE: In this case, the onRefresh events are not triggered.
 		var result = Message.wait(publisherId, streamName, -1,
 			function (ordinals) {
 				Q.Streams.get(publisherId, streamName, function (err) {
@@ -2105,9 +2106,9 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		return result;
 	}
 
-	// We sent a request to get the latest messages.
-	// But we will also force-get the stream, to trigger any handlers
-	// set for the stream's onRefresh event
+	// If we didn't send request to get the latest messages,
+	// then force-get the stream, to trigger any handlers
+	// set for the stream's onRefresh event.
 	Streams.get.force(publisherId, streamName, function (err, stream) {
 		if (!err) {
 			var ps = Streams.key(publisherId, streamName);

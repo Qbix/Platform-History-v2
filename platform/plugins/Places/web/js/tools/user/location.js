@@ -92,7 +92,7 @@ Q.Tool.define("Places/user/location", function (options) {
 			});
 	
 			Streams.Stream
-			.onRefresh(publisherId, streamName)
+			.onFieldChanged(publisherId, streamName, "")
 			.set(function () {
 				var meters = parseFloat(this.getAttribute('meters')) || null;
 				var latitude = parseFloat(this.getAttribute('latitude')) || null;
@@ -302,7 +302,7 @@ Q.Tool.define("Places/user/location", function (options) {
 						Q.handle(callback, tool, [latitude, longitude, meters]);
 					}
 				}, { 
-					messages: 1,
+					messages: true,
 					evenIfNotRetained: true
 				});
 			}, {
