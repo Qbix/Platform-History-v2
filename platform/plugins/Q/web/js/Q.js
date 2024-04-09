@@ -9736,7 +9736,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	var src2 = src.split('?')[0];
 	
 	if (!o.duplicate) {
-		if (!o.querystringMatters || Q.addScript.loaded[src2]) {
+		if (!o.querystringMatters && Q.addScript.loaded[src2]) {
 			_onload();
 			return o.returnAll ? null : false;
 		}
