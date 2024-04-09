@@ -7,6 +7,7 @@
 	text-align: center;
 	pointer-events: none;
 	overflow: hidden;
+	display: none;
 }
 .Q_badge img {
 	width: 100%;
@@ -15,6 +16,9 @@
 .Q_badge_parent_overlapped {
 	overflow: clip !important;
 	overflow-clip-margin: 25px;
+}
+.Q_badge_positioned {
+	display: block;
 }
 
 /* since Safari doesn't support the above, at least apply it to dashboard */

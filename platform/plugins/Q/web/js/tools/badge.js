@@ -265,7 +265,7 @@
 				if (!$this.parent().hasClass("Q_badge_tool")) {
 					$this.remove();
 				}
-			});
+			}).addClass('Q_badge_positioned');
 		},
 		Q: {
 			beforeRemove: function () {
