@@ -8624,7 +8624,9 @@ Q.url = function _Q_url(what, fields, options) {
 	var what3, tail, info, cb;
 	if (fields) {
 		for (var k in fields) {
-			parts[1] = (parts[1] || "").queryField(k, fields[k]);
+			if (fields[k] !== undefined) {
+				parts[1] = (parts[1] || "").queryField(k, fields[k]);
+			}
 		}
 		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
