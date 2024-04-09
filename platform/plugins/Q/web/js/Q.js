@@ -9752,7 +9752,10 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		for (i=0; i<scripts.length; ++i) {
 			script = scripts[i];
 			var s = script.getAttribute('src');
-			if (!s || s.split('?')[0] !== src2) {
+			if (!s || (o.querystringMatters
+				? s !== src
+				: s.split('?')[0] !== src2
+			)) {
 				continue;
 			}
 			// move the element to the right container if necessary
