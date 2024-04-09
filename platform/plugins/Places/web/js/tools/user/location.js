@@ -91,10 +91,10 @@ Q.Tool.define("Places/user/location", function (options) {
 				_showMap.apply(this, params.info);
 			});
 	
-			Streams.Stream
-			.onRefresh(publisherId, streamName)
-			.or(Streams.Stream.onFieldChanged(publisherId, streamName, ""), tool)
-			.set(function () {
+			Streams.Stream.onFieldChanged(publisherId, streamName, "")
+			.set(_update, tool);
+
+			function _update () {
 				var meters = parseFloat(this.getAttribute('meters')) || null;
 				var latitude = parseFloat(this.getAttribute('latitude')) || null;
 				var longitude = parseFloat(this.getAttribute('longitude')) || null;
@@ -103,7 +103,7 @@ Q.Tool.define("Places/user/location", function (options) {
 				};
 				pipe.fill('info')(latitude, longitude, meters, state.onSet.handle);
 				state.stream = this; // in case it was missing before
-			}, tool);
+			}
 	
 			Streams.retainWith(tool)
 			.get(publisherId, streamName, function (err) {
@@ -175,7 +175,10 @@ Q.Tool.define("Places/user/location", function (options) {
 				}, state.map.delay);
 		
 				if (stream && Q.getter.usingCached) {
-					stream.refresh();
+					stream.refresh(function () {
+						Streams.Stream.onRefresh(publisherId, streamName)
+						.set(_update, tool);
+					});
 				}
 			});
 	
