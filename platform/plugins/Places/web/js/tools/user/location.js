@@ -95,9 +95,9 @@ Q.Tool.define("Places/user/location", function (options) {
 			.set(_update, tool);
 
 			function _update (attributes, updated, cleared, onlyChangedFields) {
-				var meters = parseFloat(updated.meters && this.getAttribute('meters')) || null;
-				var latitude = parseFloat(updated.latitude && this.getAttribute('latitude')) || null;
-				var longitude = parseFloat(updated.longitude && this.getAttribute('longitude')) || null;
+				var meters = parseFloat((updated && updated.meters) || this.getAttribute('meters')) || null;
+				var latitude = parseFloat((updated && updated.latitude) || this.getAttribute('latitude')) || null;
+				var longitude = parseFloat((updated && updated.longitude) || this.getAttribute('longitude')) || null;
 				if (meters) {
 					tool.$('.Places_user_location_meters').val(meters);
 				};
